@@ -286,3 +286,30 @@ Official JAC source: https://global.jac-skill.or.jp/indonesia/examination/docume
 ---
 
 *End of _MAP.md — Last updated 2026-04-27 by Crispy*
+
+---
+
+## 10. v90 Design Overhaul Changelog
+
+### Design System: Cold Slate → Warm Amber (matching nugget-nihongo.pages.dev)
+
+| Token | v87 (old) | v90 (new) | Purpose |
+|-------|-----------|-----------|---------|
+| Background | `#0f172a` (cold slate) | `#0D0B08` (warm dark) | Main bg |
+| Primary text | `#e2e8f0` (cool gray) | `#FEF3C7` (warm cream) | Body text |
+| Bright text | `#f1f5f9` | `#FFFBEB` | Headlines |
+| Muted text | `#94a3b8` | `rgba(254,243,199,0.56)` | Secondary |
+| Accent gradient | `#f6d365 → #fda085` | `#92400E → #B45309 → #F59E0B` | Brand amber |
+| Info color | `#93c5fd` (blue) | `#FBBF24` (gold) | Highlights |
+| Borders | `rgba(255,255,255,0.09)` | `rgba(245,158,11,0.10)` | Warm tint |
+| Surfaces | `rgba(255,255,255,0.0X)` | `rgba(245,158,11,0.0X)` | Warm tint |
+
+### UX Additions
+- **Onboarding flow** — 4-step welcome screen for first-time users
+- **DM Sans font** — Matching main site typography
+- **Warm amber borders** — All borders have amber tint instead of cold white
+- **Brand gradient buttons** — CTA buttons use `#92400E → #F59E0B`
+
+### Files
+- `src/App-v90.jsx` — Complete working artifact (7,462 lines)
+- `legacy/ssw_flashcards_v87.jsx` — Previous version for comparison
