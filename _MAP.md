@@ -1,8 +1,8 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-27 by Crispy (Phase 1 Foundation complete)
-> **Status:** Phase 1 DONE — data normalized, IDs sequential, furi 100%, answer indexing unified
-> **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, 1.34 MB, WORKING)
+> **Last updated:** 2026-04-27 by Crispy (Phase 2 Architecture complete)
+> **Status:** Phase 1 ✅ Phase 2 ✅ — fully modular, builds with Vite, all modes rewritten
+> **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, 1.34 MB)
 
 ---
 
@@ -48,58 +48,69 @@ appear in ALL tracks automatically.
 
 ```
 Nugget-Nihongo-SSW-Konstruksi/
-├── _MAP.md                    ← YOU ARE HERE (read this first!)
-├── README.md                  ← Public-facing readme
+├── _MAP.md                    ← YOU ARE HERE
+├── README.md                  ← Public readme
+├── index.html                 ← Vite entry point (loads src/main.jsx)
+├── package.json               ← npm deps: react, react-dom, vite
+├── vite.config.js             ← Vite config (base: /Nugget-Nihongo-SSW-Konstruksi/)
 ├── docs/
-│   └── PROPOSAL.md            ← Full refactor proposal (7 pillars, roadmap)
+│   ├── PROPOSAL.md            ← Full refactor proposal (7 pillars)
+│   └── id-mapping-v87-to-v90.json ← Old→new card ID mapping (1438 entries)
+├── scripts/
+│   └── phase1_normalize.py    ← Data normalization script (run once, done)
 ├── legacy/
-│   └── ssw_flashcards_v87.jsx ← Original working monolith (7,390 lines)
+│   └── ssw_flashcards_v87.jsx ← Original monolith (7,390 lines, reference only)
 │
-├── src/
-│   ├── App.jsx                ← Root component (nav, routing, category filter)
-│   │
-│   ├── data/                  ← ALL content data (cards, questions, metadata)
-│   │   ├── index.js           ← Barrel export + derived constants
-│   │   ├── cards.js           ← CARDS array (1,438 flashcards, 1,601 lines)
-│   │   ├── jac-official.js    ← JAC_OFFICIAL array (~95 exam questions)
-│   │   ├── wayground-sets.js  ← WAYGROUND_SETS (~598 quiz questions in 12 sets)
-│   │   ├── angka-kunci.js     ← ANGKA_KUNCI (~45 key numbers)
-│   │   ├── danger-pairs.js    ← DANGER_PAIRS (~40 confusing term pairs)
-│   │   └── categories.js      ← CATEGORIES, SOURCE_META, getCatInfo, etc.
-│   │
-│   ├── modes/                 ← One file per app mode/screen
-│   │   ├── FlashcardMode.jsx  ← Swipeable flashcards + known/unknown marking
-│   │   ├── QuizMode.jsx       ← Auto-generated quiz from cards
-│   │   ├── JACMode.jsx        ← Official JAC exam questions
-│   │   ├── AngkaMode.jsx      ← Key numbers reference + quiz
-│   │   ├── DangerMode.jsx     ← Confusing term pairs drill
-│   │   ├── SimulasiMode.jsx   ← Full exam simulation with timer
-│   │   ├── StatsMode.jsx      ← Progress statistics
-│   │   ├── SearchMode.jsx     ← Full-text card search
-│   │   ├── SprintMode.jsx     ← Speed-round drill
-│   │   ├── FocusMode.jsx      ← Weakness-focused study
-│   │   ├── GlossaryMode.jsx   ← Sorted glossary of all terms
-│   │   ├── SumberMode.jsx     ← Browse cards by PDF source
-│   │   └── WaygroundMode.jsx  ← Wayground technical quiz sets
-│   │
-│   ├── components/            ← Shared display components
-│   │   └── JpDisplay.jsx      ← JpFront + DescBlock (Japanese text renderers)
-│   │
-│   ├── hooks/                 ← Custom React hooks
-│   │   ├── index.js           ← Barrel export
-│   │   ├── usePersistedState.js  ← window.storage persistence
-│   │   ├── useQuizKeyboard.js    ← Keyboard shortcuts for quiz modes
-│   │   └── useStreak.js          ← Answer streak tracking
-│   │
-│   ├── utils/                 ← Pure utility functions
-│   │   ├── index.js           ← Barrel export
-│   │   ├── shuffle.js         ← Fisher-Yates shuffle
-│   │   ├── jp-helpers.js      ← stripFuri, extractReadings, jpFontSize, hasJapanese
-│   │   ├── wrong-tracker.js   ← getWrongCount, makeWrongEntry, storage helpers
-│   │   └── quiz-generator.js  ← generateQuiz (distractor selection by difficulty)
-│   │
-│   └── styles/
-│       └── theme.js           ← Design tokens (T), shared style presets (S), getGrade()
+└── src/                       ← 37 source files, 5778 lines total
+    ├── main.jsx               ← React root (5 lines)
+    ├── App.jsx                ← Root component: onboarding, nav, routing (268 lines)
+    │
+    ├── data/                  ← All content data (3533 lines)
+    │   ├── index.js           ← Barrel export + derived constants
+    │   ├── cards.js           ← CARDS[1438] — all flashcards (1599 lines)
+    │   ├── jac-official.js    ← JAC_OFFICIAL[~95] — exam questions (975 lines)
+    │   ├── wayground-sets.js  ← WAYGROUND_SETS[12] — ~597 quiz questions (819 lines)
+    │   ├── angka-kunci.js     ← ANGKA_KUNCI[~45] — key numbers
+    │   ├── danger-pairs.js    ← DANGER_PAIRS[~20] — confusing term pairs
+    │   └── categories.js      ← CATEGORIES, SOURCE_META, getCatInfo, etc.
+    │
+    ├── modes/                 ← One file per mode (1167 lines total)
+    │   ├── FlashcardMode.jsx  ← Swipeable cards + known/unknown (140 lines)
+    │   ├── QuizMode.jsx       ← Auto-generated quiz, 3 difficulty levels (86 lines)
+    │   ├── JACMode.jsx        ← Official JAC exam questions (107 lines)
+    │   ├── WaygroundMode.jsx  ← Technical quiz sets from sensei (109 lines)
+    │   ├── AngkaMode.jsx      ← Key numbers quiz (62 lines)
+    │   ├── DangerMode.jsx     ← Confusing term pairs drill (79 lines)
+    │   ├── SimulasiMode.jsx   ← Full exam simulation + timer (75 lines)
+    │   ├── SprintMode.jsx     ← Speed drill 60s (123 lines)
+    │   ├── FocusMode.jsx      ← Weakness drill (66 lines)
+    │   ├── StatsMode.jsx      ← Progress statistics (100 lines)
+    │   ├── SearchMode.jsx     ← Full-text search (64 lines)
+    │   ├── GlossaryMode.jsx   ← Sorted glossary (78 lines)
+    │   └── SumberMode.jsx     ← Browse by source (78 lines)
+    │
+    ├── components/            ← Shared UI components (431 lines)
+    │   ├── QuizShell.jsx      ← Unified quiz flow wrapper (211 lines) ★
+    │   ├── ResultScreen.jsx   ← Unified result/review screen (90 lines)
+    │   ├── OptionButton.jsx   ← Quiz option with badge + feedback (69 lines)
+    │   ├── ProgressBar.jsx    ← Reusable progress bar (10 lines)
+    │   └── JpDisplay.jsx      ← JpFront + DescBlock renderers (51 lines)
+    │
+    ├── hooks/                 ← Custom React hooks (119 lines)
+    │   ├── index.js           ← Barrel export
+    │   ├── usePersistedState.js ← window.storage persistence
+    │   ├── useQuizKeyboard.js ← Keyboard shortcuts (1/2/3/4, Enter)
+    │   └── useStreak.js       ← Answer streak tracking
+    │
+    ├── utils/                 ← Pure functions (190 lines)
+    │   ├── index.js           ← Barrel export
+    │   ├── shuffle.js         ← Fisher-Yates shuffle
+    │   ├── jp-helpers.js      ← stripFuri, extractReadings, jpFontSize
+    │   ├── wrong-tracker.js   ← Wrong-answer storage helpers
+    │   └── quiz-generator.js  ← Quiz question generator (3 difficulties)
+    │
+    └── styles/
+        └── theme.js           ← Design tokens: T (colors/spacing) + getGrade (65 lines)
 ```
 
 ---
@@ -213,40 +224,44 @@ Both sources now use **0-based indexing**. This was unified in Phase 1 (JAC was 
 
 ## 6. Architecture Decisions & Trade-offs
 
-### Current State (post-refactor)
-- **Files extracted but NOT yet wired:** The mode files still reference functions/constants from the monolith via `import`. They are syntactically extracted but not yet tested as a working multi-file app.
-- **The legacy monolith (`legacy/ssw_flashcards_v87.jsx`) is the last-known-working version.** Do NOT delete it until the refactored version is fully working.
-- **Shared hooks (`usePersistedState`, `useQuizKeyboard`, `useStreak`) are created but NOT yet integrated into mode components.** Mode components still use inline implementations of the same patterns. Integration should happen mode-by-mode.
-- **Theme tokens (`T`, `S`) are defined but NOT yet applied.** All 767 inline styles still exist in mode files. Migration should be gradual.
+### Current State (Phase 2 complete)
+- **All 37 source files are wired and build successfully** with Vite (452ms build)
+- **Build output:** `dist/index.html` + `dist/assets/index-*.js` (1.3MB, 439KB gzipped)
+- **Shared components integrated:** QuizShell wraps 6 quiz modes (Quiz, JAC, Wayground, Angka, Danger, Simulasi)
+- **Shared hooks integrated:** usePersistedState, useQuizKeyboard, useStreak used across modes
+- **Design tokens:** T (theme) object used consistently — warm amber palette (#0D0B08 bg, #F59E0B accent)
+- **Onboarding:** 4-step welcome flow for first-time users
+- **No code file exceeds 268 lines** (largest: App.jsx at 268L, data files are larger but pure data)
 
 ### Deployment Strategy
-The app can be deployed as:
-1. **Claude.ai artifact:** Concatenate all files back into single JSX → render in Claude chat
-2. **GitHub Pages static site:** Bundle with esbuild/vite → single HTML with inline JS
-3. **Cloudflare Pages:** Auto-deploy from GitHub push (Nugget has CF connected)
-
-Currently there is NO bundler configured. The monolith in `legacy/` works as-is.
+- **GitHub Pages (recommended):** `npm run build` → deploy `dist/` folder
+  - Set GitHub Pages source to "GitHub Actions" or deploy `dist/` manually
+  - `vite.config.js` has `base: '/Nugget-Nihongo-SSW-Konstruksi/'` for GH Pages path
+- **Local dev:** `npm run dev` → http://localhost:5173
+- **Preview build:** `npm run preview` → serves `dist/` locally
 
 ---
 
 ## 7. Known Issues & TODO
 
 ### 🔴 HIGH Priority
-- [ ] **Wire up multi-file imports** — files are extracted but not bundled/tested together
+- [x] ~~**Wire up multi-file imports**~~ ✅ Phase 2 (Vite, builds in 452ms)
 - [x] ~~**Unify answer indexing** — JAC (1-based) → all 0-based~~ ✅ Phase 1
-- [x] ~~**Add furi field to all 730 cards** missing it~~ ✅ Phase 1 (romaji→hiragana auto-converted)
-- [ ] **Add bundler** (esbuild or vite) to produce deployable output
+- [x] ~~**Add furi field to all 730 cards** missing it~~ ✅ Phase 1
+- [x] ~~**Add bundler** (esbuild or vite)~~ ✅ Phase 2 (Vite + React plugin)
 
 ### 🟡 MEDIUM Priority
-- [ ] **Replace inline styles** with theme tokens (T/S from theme.js) — 767 instances
-- [ ] **Integrate shared hooks** into mode components (replace duplicated patterns)
-- [ ] **Build `<QuizShell>` wrapper** — unify quiz UX across all modes
-- [ ] **Build `<ResultScreen>` component** — unify result screens
-- [x] ~~**Fix romaji typo** in card id:1202 (`supeeसाaa` → `supeesaa`)~~ ✅ Phase 1
-- [x] ~~**Remove duplicate Wayground questions** (wt1 Q4 ≈ Q5)~~ ✅ Phase 1 (Q5 removed, Q4 kept with merged explanation)
-- [x] ~~**Normalize source names** to canonical format~~ ✅ Phase 1 (16 canonical names)
+- [x] ~~**Replace inline styles** with theme tokens~~ ✅ Phase 2 (T object, 0 inline hex colors)
+- [x] ~~**Integrate shared hooks** into mode components~~ ✅ Phase 2 (usePersistedState, useQuizKeyboard, useStreak)
+- [x] ~~**Build `<QuizShell>` wrapper**~~ ✅ Phase 2 (211 lines, wraps 6 quiz modes)
+- [x] ~~**Build `<ResultScreen>` component**~~ ✅ Phase 2 (90 lines, unified results)
+- [x] ~~**Fix romaji typo** (`supeeसाaa` → `supeesaa`)~~ ✅ Phase 1
+- [x] ~~**Remove duplicate Wayground questions** (wt1 Q4 ≈ Q5)~~ ✅ Phase 1
+- [x] ~~**Normalize source names**~~ ✅ Phase 1 (16 canonical names)
 
-### 🟢 LOW Priority
+### 🟢 LOW Priority (Phase 3+)
+- [ ] **3-track navigation** (土木 / 建築 / ライフライン) — track picker + auto-filter
+- [ ] Add breadcrumb navigation in nested modes
 - [ ] Add onboarding flow for new users
 - [ ] Add breadcrumb navigation
 - [ ] Implement spaced repetition (SM-2 or Leitner)

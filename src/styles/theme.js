@@ -1,166 +1,65 @@
-// ─── SSW Flashcards: Design Tokens ──────────────────────────────────────────
-// Single source of truth for all colors, spacing, radii, fonts, and presets.
-// Import this instead of hardcoding hex values in components.
+// ─── SSW Konstruksi: Design Tokens (Warm Amber Theme) ────────────────────────
+// Matches nugget-nihongo.pages.dev brand colors
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const T = {
-  // ── Core Palette ──
-  bg:         "#0f172a",       // Main background
-  bgCard:     "rgba(255,255,255,0.06)",
-  bgHover:    "rgba(255,255,255,0.08)",
-  bgSubtle:   "rgba(255,255,255,0.04)",
-  bgOverlay:  "rgba(0,0,0,0.22)",
+  // ── Core ──
+  bg:       "#0D0B08",
+  surface:  "rgba(245,158,11,0.06)",
+  surfaceHover: "rgba(245,158,11,0.10)",
+  overlay:  "rgba(0,0,0,0.40)",
 
   // ── Text ──
-  text:       "#e2e8f0",       // Primary text
-  textMuted:  "#94a3b8",       // Secondary text
-  textDim:    "#64748b",       // Tertiary text
-  textDark:   "#475569",       // Quaternary / disabled text
-  textSlate:  "#334155",       // Very dim
+  text:      "#FEF3C7",
+  textBright:"#FFFBEB",
+  textMuted: "rgba(254,243,199,0.56)",
+  textDim:   "rgba(254,243,199,0.32)",
+  textFaint: "rgba(254,243,199,0.18)",
 
-  // ── Borders ──
-  border:     "rgba(255,255,255,0.09)",
-  borderLight:"rgba(255,255,255,0.12)",
-  borderHover:"rgba(255,255,255,0.15)",
+  // ── Border ──
+  border:      "rgba(245,158,11,0.10)",
+  borderLight: "rgba(245,158,11,0.15)",
+  borderHover: "rgba(245,158,11,0.25)",
 
-  // ── Semantic: Correct / Wrong ──
+  // ── Brand ──
+  amber:    "#F59E0B",
+  amberDark:"#92400E",
+  amberMid: "#B45309",
+  gold:     "#FBBF24",
+  accent:   "linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B)",
+
+  // ── Semantic ──
   correct:       "#4ade80",
-  correctBg:     "rgba(74,222,128,0.1)",
-  correctBorder: "rgba(74,222,128,0.35)",
-  correctGlow:   "rgba(74,222,128,0.2)",
-
+  correctBg:     "rgba(74,222,128,0.12)",
+  correctBorder: "rgba(74,222,128,0.40)",
   wrong:         "#f87171",
-  wrongBg:       "rgba(248,113,113,0.1)",
-  wrongBorder:   "rgba(248,113,113,0.35)",
-  wrongGlow:     "rgba(248,113,113,0.2)",
+  wrongBg:       "rgba(248,113,113,0.12)",
+  wrongBorder:   "rgba(248,113,113,0.40)",
 
-  // ── Accent ──
-  accent:     "linear-gradient(135deg, #f6d365, #fda085)",
-  accentText: "#1a1a2e",
-  blue:       "#93c5fd",
-  blueBg:     "rgba(147,197,253,0.15)",
-  blueBorder: "rgba(147,197,253,0.4)",
-  gold:       "#fbbf24",
+  // ── Track Colors ──
+  trackDoboku:   "#D97706",
+  trackKenchiku: "#0EA5E9",
+  trackLifeline: "#10B981",
 
-  // ── Grade Colors (result screen) ──
-  grade: {
-    S: { emoji: "🏆", col: "#fbbf24", min: 90 },
-    A: { emoji: "✨", col: "#4ade80", min: 70 },
-    B: { emoji: "📚", col: "#60a5fa", min: 50 },
-    C: { emoji: "💪", col: "#f87171", min: 0 },
-  },
+  // ── Spacing ──
+  sp: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48],
 
-  // ── Spacing (px) ──
-  sp: { xs: 4, sm: 8, md: 14, lg: 20, xl: 28 },
+  // ── Radius ──
+  r: { sm: 8, md: 12, lg: 16, xl: 20, pill: 99 },
 
-  // ── Border Radius (px) ──
-  rad: { sm: 8, md: 14, lg: 20, xl: 22, pill: 99 },
+  // ── Font ──
+  font: "'DM Sans','Noto Sans JP',system-ui,sans-serif",
+  fontJP: "'Noto Sans JP','DM Sans',sans-serif",
 
-  // ── Fonts ──
-  fontJP:    "'Noto Sans JP', sans-serif",
-  fontJPAlt: "'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif",
-  fontMono:  "monospace",
-
-  // ── Max Width ──
-  maxW: 560,
+  // ── Layout ──
+  maxW: 480,
 };
 
-// ─── Grade Calculator ────────────────────────────────────────────────────────
-export function getGrade(accuracy) {
-  if (accuracy >= T.grade.S.min) return T.grade.S;
-  if (accuracy >= T.grade.A.min) return T.grade.A;
-  if (accuracy >= T.grade.B.min) return T.grade.B;
-  return T.grade.C;
-}
-
-// ─── Shared Style Presets ────────────────────────────────────────────────────
-export const S = {
-  // Generic button base
-  btn: {
-    fontFamily: "inherit",
-    cursor: "pointer",
-    border: "none",
-    transition: "all 0.15s",
-  },
-
-  // Quiz option button (unselected)
-  optionBtn: {
-    padding: "13px 14px",
-    fontSize: 13,
-    borderRadius: T.rad.md,
-    background: "rgba(255,255,255,0.07)",
-    border: `1px solid ${T.borderLight}`,
-    color: T.text,
-    cursor: "pointer",
-    textAlign: "left",
-    lineHeight: 1.5,
-    display: "flex",
-    gap: 10,
-    alignItems: "flex-start",
-    fontFamily: T.fontJP,
-    transition: "all 0.15s",
-  },
-
-  // Option badge (circle with number)
-  optionBadge: {
-    width: 26,
-    height: 26,
-    borderRadius: "50%",
-    flexShrink: 0,
-    background: "rgba(255,255,255,0.05)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: 11,
-    fontWeight: 700,
-    border: `1px solid ${T.border}`,
-    marginTop: 1,
-  },
-
-  // Progress bar container
-  progressBar: {
-    height: 4,
-    background: "rgba(255,255,255,0.06)",
-    borderRadius: T.rad.pill,
-    overflow: "hidden",
-  },
-
-  // Primary CTA button (gradient)
-  ctaBtn: {
-    fontFamily: "inherit",
-    width: "100%",
-    padding: "13px",
-    fontSize: 14,
-    fontWeight: 700,
-    borderRadius: T.rad.md,
-    background: T.accent,
-    border: "none",
-    color: T.accentText,
-    cursor: "pointer",
-  },
-
-  // Card container
-  card: {
-    borderRadius: T.rad.xl,
-    background: T.bgCard,
-    border: `1px solid ${T.border}`,
-    padding: `${T.sp.xl}px ${T.sp.lg}px`,
-  },
-
-  // Section label (small caps)
-  sectionLabel: {
-    fontSize: 10,
-    fontWeight: 700,
-    letterSpacing: 1.5,
-    color: T.textDim,
-    textTransform: "uppercase",
-    marginBottom: T.sp.sm,
-  },
-
-  // Container with max width
-  container: {
-    padding: "0 16px 24px",
-    maxWidth: T.maxW,
-    margin: "0 auto",
-  },
-};
+// ─── Grade System ──
+export const GRADES = [
+  { key: "S", emoji: "🏆", color: "#FBBF24", label: "Luar Biasa!", min: 90 },
+  { key: "A", emoji: "✨", color: "#4ade80", label: "Bagus Sekali!", min: 70 },
+  { key: "B", emoji: "📚", color: "#60a5fa", label: "Terus Belajar!", min: 50 },
+  { key: "C", emoji: "💪", color: "#f87171", label: "Jangan Menyerah!", min: 0 },
+];
+export const getGrade = (pct) => GRADES.find(g => pct >= g.min) || GRADES[3];

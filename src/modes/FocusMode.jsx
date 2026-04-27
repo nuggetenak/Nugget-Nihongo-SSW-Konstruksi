@@ -1,136 +1,66 @@
-// ─── FocusMode ──────────────────────────────────────────────────────────────
-// Weakness-focused study mode — finds your weakest categories and drills them.
-// ─────────────────────────────────────────────────────────────────────────────
-
-import { useState, useEffect } from "react";
-import { getWrongCount, loadFromStorage, STORAGE_KEYS } from "../utils/wrong-tracker.js";
+import { useState, useMemo } from "react";
+import { T } from "../styles/theme.js";
 import { CARDS } from "../data/cards.js";
-import { JAC_OFFICIAL } from "../data/jac-official.js";
 import { CATEGORIES, getCatInfo, VOCAB_SOURCES } from "../data/categories.js";
+import { getWrongCount } from "../utils/wrong-tracker.js";
 import SprintMode from "./SprintMode.jsx";
 
-function FocusMode() {
-  const [data, setData] = useState(null);
-  const [expandedId, setExpandedId] = useState(null);
-  const [sprintCards, setSprintCards] = useState(null);
+export default function FocusMode({ known, unknown, quizWrong = {}, onExit }) {
+  const [activeCat, setActiveCat] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      let known = new Set(), unknown = new Set(), jacWrong = {}, quizWrong = {};
-      try { const r = await window.storage.get("ssw-progress"); if (r) { const p = JSON.parse(r.value); known = new Set(p.known || []); unknown = new Set(p.unknown || []); } } catch {}
-      try { const r = await window.storage.get("ssw-wrong-counts"); if (r) jacWrong = JSON.parse(r.value); } catch {}
-      try { const r = await window.storage.get("ssw-quiz-wrong"); if (r) quizWrong = JSON.parse(r.value); } catch {}
-      setData({ known, unknown, jacWrong, quizWrong });
-    })();
-  }, []);
+  // Find weakest categories
+  const catStats = useMemo(() => {
+    return CATEGORIES
+      .filter(c => c.key !== "all" && c.key !== "bintang")
+      .map(cat => {
+        const catCards = CARDS.filter(c => c.category === cat.key && !VOCAB_SOURCES.includes(c.source));
+        const knownN = catCards.filter(c => known.has(c.id)).length;
+        const wrongN = catCards.filter(c => getWrongCount(quizWrong[c.id]) > 0).length;
+        const score = catCards.length > 0 ? Math.round((knownN / catCards.length) * 100) : 100;
+        return { ...cat, total: catCards.length, known: knownN, wrong: wrongN, score, cards: catCards };
+      })
+      .filter(c => c.total > 0)
+      .sort((a, b) => a.score - b.score);
+  }, [known, quizWrong]);
 
-  if (!data) return <div style={{ textAlign: "center", padding: 40, opacity: 0.4, fontSize: 13 }}>Memuat data fokus…</div>;
-  if (sprintCards) return <SprintMode key="fokus-sprint" cards={sprintCards} onBack={() => setSprintCards(null)} />;
-
-  // Map JAC wrong → card via related_card_id
-  const jacCardWrong = {};
-  JAC_OFFICIAL.forEach(q => {
-    if (q.related_card_id && data.jacWrong[q.id]) {
-      jacCardWrong[q.related_card_id] = (jacCardWrong[q.related_card_id] || 0) + getWrongCount(data.jacWrong[q.id]);
-    }
-  });
-
-  // Score: belum hafal +3, quiz wrong ×2, JAC wrong ×1
-  const scored = CARDS.map(card => {
-    const flashScore = data.unknown.has(card.id) ? 3 : 0;
-    const quizCnt    = getWrongCount(data.quizWrong[card.id]);
-    const quizTime   = getWrongTime(data.quizWrong[card.id]);
-    const jacCnt     = jacCardWrong[card.id] || 0;
-    const total      = flashScore + quizCnt * 2 + jacCnt;
-    return { card, total, flashScore, quizCnt, jacCnt, quizTime };
-  }).filter(x => x.total > 0).sort((a, b) => b.total - a.total).slice(0, 30);
-
-  const nowFokus = Date.now();
-  const sevenDaysFokus = 7 * 24 * 60 * 60 * 1000;
-  const recentCount = scored.filter(x => x.quizTime && (nowFokus - x.quizTime) < sevenDaysFokus).length;
+  if (activeCat) {
+    const cat = catStats.find(c => c.key === activeCat);
+    if (!cat) return null;
+    return <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} />;
+  }
 
   return (
-    <div style={{ padding: "0 16px 32px", maxWidth: 560, margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 12, opacity: 0.5 }}>
-          {scored.length > 0 ? `${scored.length} kartu butuh perhatian` : "Semua kartu aman 🎉"}
-        </div>
-        {recentCount > 0 && (
-          <div style={{ fontSize: 11, background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.3)", borderRadius: 8, padding: "3px 9px", color: "#fc8181" }}>
-            🔴 {recentCount}× salah ≤7 hari
-          </div>
-        )}
-      </div>
+    <div style={{ padding: "24px 16px", maxWidth: T.maxW, margin: "0 auto" }}>
+      <button onClick={onExit} style={{ fontFamily: "inherit", fontSize: 12, color: T.textMuted, background: "none", border: "none", cursor: "pointer", marginBottom: 16 }}>← Kembali</button>
+      <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>🎯 Mode Fokus</h2>
+      <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 20 }}>Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.</p>
 
-      {scored.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "48px 0", opacity: 0.35, fontSize: 13 }}>
-          Belum ada data kelemahan.<br />
-          <span style={{ fontSize: 11, display: "block", marginTop: 6, lineHeight: 1.7 }}>
-            Kerjakan Kartu, Kuis, atau JAC dulu<br />agar sistem bisa mendeteksi pola salah.
-          </span>
-        </div>
-      ) : (
-        <>
-          <button onClick={() => setSprintCards(scored.map(x => x.card))} style={{ fontFamily: "inherit",
-            width: "100%", padding: "13px", fontSize: 13, fontWeight: 700, borderRadius: 14,
-            background: "linear-gradient(135deg, #e53e3e, #c05621)", border: "none",
-            color: "#fff", cursor: "pointer", marginBottom: 16,
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {catStats.map(c => (
+          <button key={c.key} onClick={() => setActiveCat(c.key)} style={{
+            fontFamily: "inherit", padding: "14px 16px", borderRadius: T.r.md, cursor: "pointer",
+            background: T.surface, border: `1px solid ${T.border}`, color: T.text,
+            textAlign: "left",
           }}>
-            ⚡ Sprint semua kartu lemah ({scored.length})
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+              <span style={{ fontSize: 14 }}>{c.emoji} {c.label}</span>
+              <span style={{
+                fontSize: 12, fontWeight: 700,
+                color: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong,
+              }}>{c.score}%</span>
+            </div>
+            <div style={{ height: 3, background: T.surface, borderRadius: T.r.pill, overflow: "hidden" }}>
+              <div style={{
+                height: "100%", width: `${c.score}%`, borderRadius: T.r.pill,
+                background: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong,
+              }} />
+            </div>
+            <div style={{ fontSize: 11, color: T.textDim, marginTop: 4 }}>
+              {c.known}/{c.total} hafal {c.wrong > 0 && `· ${c.wrong} sering salah`}
+            </div>
           </button>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {scored.map(({ card, total, flashScore, quizCnt, jacCnt, quizTime }, rank) => {
-              const info = getCatInfo(card.category);
-              const isRecent = quizTime && (nowFokus - quizTime) < sevenDaysFokus;
-              const isOpen = expandedId === card.id;
-              return (
-                <div key={card.id}>
-                  <div
-                    onClick={() => setExpandedId(isOpen ? null : card.id)}
-                    style={{
-                      background: isOpen ? `${info.color}22` : "rgba(255,255,255,0.05)",
-                      border: `1px solid ${isRecent ? "rgba(239,68,68,0.4)" : isOpen ? info.color : "rgba(255,255,255,0.1)"}`,
-                      borderRadius: isOpen ? "14px 14px 0 0" : 14,
-                      padding: "11px 14px", cursor: "pointer",
-                      display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10,
-                    }}
-                  >
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 10, opacity: 0.35, marginBottom: 3 }}>#{rank + 1} · {info.emoji} {info.label}</div>
-                      <div style={{ fontSize: 15, fontFamily: "'Noto Sans JP',sans-serif", fontWeight: 700, lineHeight: 1.3, marginBottom: 3 }}>{stripFuri(card.jp)}</div>
-                      <div style={{ fontSize: 12, color: "#90cdf4", marginBottom: 6 }}>{card.id_text}</div>
-                      <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-                        {flashScore > 0 && <span style={{ fontSize: 10, background: "rgba(239,68,68,0.2)", border: "1px solid rgba(239,68,68,0.3)", borderRadius: 6, padding: "2px 7px", color: "#fc8181" }}>🃏 Belum hafal</span>}
-                        {quizCnt > 0 && <span style={{ fontSize: 10, background: "rgba(246,211,101,0.12)", border: "1px solid rgba(246,211,101,0.25)", borderRadius: 6, padding: "2px 7px", color: "#fbd38d" }}>📝 ✗{quizCnt}×</span>}
-                        {jacCnt > 0 && <span style={{ fontSize: 10, background: "rgba(102,126,234,0.12)", border: "1px solid rgba(102,126,234,0.25)", borderRadius: 6, padding: "2px 7px", color: "#c3dafe" }}>📋 ✗{jacCnt}×</span>}
-                        {isRecent && <span style={{ fontSize: 10, background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)", borderRadius: 6, padding: "2px 7px", color: "#fc8181" }}>🔴 ≤7hr</span>}
-                      </div>
-                    </div>
-                    <div style={{ textAlign: "right", flexShrink: 0 }}>
-                      <div style={{ fontSize: 20, fontWeight: 700, color: total >= 7 ? "#fc8181" : total >= 4 ? "#f6ad55" : "#fbd38d", lineHeight: 1 }}>{total}</div>
-                      <div style={{ fontSize: 9, opacity: 0.35, marginTop: 2 }}>skor</div>
-                      <div style={{ fontSize: 11, opacity: 0.4, marginTop: 4 }}>{isOpen ? "▲" : "▼"}</div>
-                    </div>
-                  </div>
-                  {isOpen && (
-                    <div style={{ background: `${info.color}11`, border: `1px solid ${info.color}`, borderTop: `1px solid ${info.color}44`, borderRadius: "0 0 14px 14px", padding: "12px 14px" }}>
-                      <div style={{ fontSize: 12, opacity: 0.55, marginBottom: 4 }}>{card.romaji}</div>
-                      <div style={{ fontSize: 12, lineHeight: 1.7, opacity: 0.85 }}>{card.desc}</div>
-                      <button onClick={(e) => { e.stopPropagation(); setSprintCards([card]); }} style={{ fontFamily: "inherit", marginTop: 10, padding: "6px 14px", fontSize: 11, borderRadius: 8, background: "linear-gradient(135deg, #e53e3e, #c05621)", border: "none", color: "#fff", cursor: "pointer", fontWeight: 700 }}>
-                        ⚡ Sprint kartu ini
-                      </button>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
-
-
-export default FocusMode;
