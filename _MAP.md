@@ -10,9 +10,37 @@
 
 A React-based study tool for the **JAC SSW (Specified Skilled Worker) Construction exam** in Japan. Interface is in **Indonesian** (Bahasa Indonesia), content is **Japanese↔Indonesian bilingual**. It helps Indonesian construction workers study for the SSW visa exam covering safety, law, construction techniques, tools, and vocabulary.
 
-The app runs as a **Claude.ai artifact** (single JSX file rendered in-browser) and also as a **static GitHub Pages site** (HTML wrapper around the same JSX).
+### Branding
 
-**Live v87:** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
+- **Parent brand:** Nugget Nihongo
+- **Product name:** SSW Konstruksi
+- **Subtitle (JP):** 土木 · 建築 · ライフライン設備
+- **Subtitle (ID):** Teknik Sipil · Bangunan · Lifeline & Peralatan
+- **In-app header:** SSW Konstruksi · by Nugget Nihongo
+
+### 3 Study Tracks (jalur belajar)
+
+The JAC exam has 3 specialization tracks. Users pick their track on first launch;
+all content (cards, quizzes, simulation) auto-filters to that track.
+
+| Track | JP | ID | Icon | Categories |
+|-------|----|----|------|-----------|
+| Teknik Sipil | 土木 | Jalan, jembatan, terowongan, bendungan | 🏗️ | jenis_kerja (civil subset), alat_umum (civil subset) |
+| Bangunan | 建築 | Gedung, bekisting, tulangan, finishing | 🏢 | jenis_kerja (building subset), alat_umum (building subset) |
+| Lifeline & Peralatan | ライフライン・設備 | Listrik, pipa, HVAC, pemadam, telekom | ⚡ | listrik, pipa, telekomunikasi, isolasi, pemadam |
+| **Umum (共通)** | 共通 | Wajib semua jalur | 📋 | salam, hukum, keselamatan, karier |
+
+**Implementation note:** Current 12 categories need a `track` mapping field added.
+Some categories (jenis_kerja, alat_umum) contain cards from multiple tracks — these
+will need per-card track tagging or sub-categorization. The 共通 (common) categories
+appear in ALL tracks automatically.
+
+### Deployment & Target
+
+- **Deploy:** GitHub Pages (static site, simple)
+- **Target users:** Junior SSW candidates, Japanese level N5-N4 (beginners)
+- **Progress persistence:** Users export/import JSON to save progress across devices
+- **Live v87 (previous):** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
 
 ---
 
