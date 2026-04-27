@@ -1,8 +1,8 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-27 by Crispy (Phase 2 Architecture complete)
-> **Status:** Phase 1 ✅ Phase 2 ✅ — fully modular, builds with Vite, all modes rewritten
-> **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, 1.34 MB)
+> **Last updated:** 2026-04-28 by Crispy (Phase 3 UX Polish complete)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ — production-ready, deploy to GitHub Pages
+> **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
 
@@ -224,14 +224,16 @@ Both sources now use **0-based indexing**. This was unified in Phase 1 (JAC was 
 
 ## 6. Architecture Decisions & Trade-offs
 
-### Current State (Phase 2 complete)
-- **All 37 source files are wired and build successfully** with Vite (452ms build)
-- **Build output:** `dist/index.html` + `dist/assets/index-*.js` (1.3MB, 439KB gzipped)
-- **Shared components integrated:** QuizShell wraps 6 quiz modes (Quiz, JAC, Wayground, Angka, Danger, Simulasi)
-- **Shared hooks integrated:** usePersistedState, useQuizKeyboard, useStreak used across modes
-- **Design tokens:** T (theme) object used consistently — warm amber palette (#0D0B08 bg, #F59E0B accent)
-- **Onboarding:** 4-step welcome flow for first-time users
-- **No code file exceeds 268 lines** (largest: App.jsx at 268L, data files are larger but pure data)
+### Current State (Phase 3 complete)
+- **40 source files, 6055 lines total** — builds in ~500ms with Vite
+- **Build output:** `dist/index.html` + `dist/assets/index-*.js` (1.38MB, 441KB gzipped)
+- **UX flow:** Onboarding (4 steps) → Track Picker (3 tracks) → Dashboard → Bottom Nav
+- **Bottom navigation:** 4 tabs — 🏠 Beranda, 📚 Belajar, ✍️ Ujian, ⋯ Lainnya
+- **Dashboard:** Progress ring, smart suggestion, stats row, quick actions
+- **Track system:** Track selection persisted, shown in header badge
+- **Design:** "Warm Industrial Japanese" — amber accent, dark bg, CSS animations
+- **QuizShell:** wraps 6 quiz modes with unified UX
+- **No code file exceeds 264 lines**
 
 ### Deployment Strategy
 - **GitHub Pages (recommended):** `npm run build` → deploy `dist/` folder
