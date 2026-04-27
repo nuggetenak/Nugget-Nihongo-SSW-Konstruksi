@@ -151,16 +151,16 @@ function SumberMode({ onBrowse }) {
   const srcList = Object.entries(SOURCE_META).filter(([src]) => CARDS.some(c => c.source === src));
 
   const GROUPS = [
-    { label: "📚 Buku Teks",   keys: ["text1l","text2","text3","text4","text5l","text6l","text7l"] },
-    { label: "📋 Soal Latihan",keys: ["tt_sample","tt_sample2","st_sample_l","st_sample2_l"] },
-    { label: "📖 Kosakata",    keys: ["lifeline4","vocab_jac","vocab_core","vocab_exam","vocab_teori"] },
+    { label: "📚 Buku Teks",   keys: ["jac-ch1","jac-ch2","jac-ch3","jac-ch4","jac-ch5","jac-ch6","jac-ch7"] },
+    { label: "📋 Soal Latihan",keys: ["jac-gakka1","jac-gakka2","jac-jitsugi1","jac-jitsugi2"] },
+    { label: "📖 Kosakata",    keys: ["vocab-lifeline","vocab-jac","vocab-core","vocab-exam","vocab-teori"] },
   ];
 
   const ACCENT = {
-    text1l:"#f97316",text2:"#22d3ee",text3:"#34d399",text4:"#a78bfa",
-    text5l:"#fbbf24",text6l:"#f472b6",text7l:"#818cf8",
-    tt_sample:"#ef4444",tt_sample2:"#ef4444",st_sample_l:"#10b981",st_sample2_l:"#10b981",
-    lifeline4:"#60a5fa",vocab_jac:"#818cf8",vocab_core:"#94a3b8",vocab_exam:"#a78bfa",vocab_teori:"#f87171",
+    "jac-ch1":"#f97316","jac-ch2":"#22d3ee","jac-ch3":"#34d399","jac-ch4":"#a78bfa",
+    "jac-ch5":"#fbbf24","jac-ch6":"#f472b6","jac-ch7":"#818cf8",
+    "jac-gakka1":"#ef4444","jac-gakka2":"#ef4444","jac-jitsugi1":"#10b981","jac-jitsugi2":"#10b981",
+    "vocab-lifeline":"#60a5fa","vocab-jac":"#818cf8","vocab-core":"#94a3b8","vocab-exam":"#a78bfa","vocab-teori":"#f87171",
   };
 
   return (

@@ -37,18 +37,18 @@ export const SOURCE_META = {
   vocab_teori: { label: "Vocab Teori — Kosakata 学科 (hukum & safety)", emoji: "📋", color: "#dc2626" },
 };
 
-export const VOCAB_SOURCES = ["lifeline4", "vocab_jac", "vocab_core", "vocab_exam", "vocab_teori"];
+export const VOCAB_SOURCES = ["vocab-lifeline", "vocab-jac", "vocab-core", "vocab-exam", "vocab-teori"];
 
 // Source grouping for SumberMode
 export const SOURCE_GROUPS = [
-  { label: "PDF Utama JAC", keys: ["text1l","text2","text3","text4","text5l","text6l","text7l"] },
-  { label: "Soal Contoh", keys: ["tt_sample","tt_sample2","st_sample_l","st_sample2_l"] },
-  { label: "Kosakata", keys: ["lifeline4","vocab_jac","vocab_core","vocab_exam","vocab_teori"] },
+  { label: "PDF Utama JAC", keys: ["jac-ch1","jac-ch2","jac-ch3","jac-ch4","jac-ch5","jac-ch6","jac-ch7"] },
+  { label: "Soal Contoh", keys: ["jac-gakka1","jac-gakka2","jac-jitsugi1","jac-jitsugi2"] },
+  { label: "Kosakata", keys: ["vocab-lifeline","vocab-jac","vocab-core","vocab-exam","vocab-teori"] },
 ];
 
 export const SOURCE_ACCENT = {
-  text1l: "#ed8936", text2: "#38b2ac", text3: "#667eea", text4: "#ed64a6",
-  text5l: "#ecc94b", text6l: "#9f7aea", text7l: "#48bb78",
-  tt_sample: "#fc8181", tt_sample2: "#fc8181", st_sample_l: "#68d391", st_sample2_l: "#68d391",
-  lifeline4: "#63b3ed", vocab_jac: "#93c5fd", vocab_core: "#cbd5e0", vocab_exam: "#b794f4", vocab_teori: "#f56565",
+  "jac-ch1": "#ed8936", "jac-ch2": "#38b2ac", "jac-ch3": "#667eea", "jac-ch4": "#ed64a6",
+  "jac-ch5": "#ecc94b", "jac-ch6": "#9f7aea", "jac-ch7": "#48bb78",
+  "jac-gakka1": "#fc8181", "jac-gakka2": "#fc8181", "jac-jitsugi1": "#68d391", "jac-jitsugi2": "#68d391",
+  "vocab-lifeline": "#63b3ed", "vocab-jac": "#93c5fd", "vocab-core": "#cbd5e0", "vocab-exam": "#b794f4", "vocab-teori": "#f56565",
 };

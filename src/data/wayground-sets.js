@@ -6,15 +6,15 @@ export const WAYGROUND_SETS = [
 
   // ── SOAL TEORI (6 sets) — from JAC-aligned CSV ──────────────────────────
   {
-    id: "wt1", title: "Teori Set 1 · 20qs", subtitle: "安全管理 KY・5S・指差呼称",
+    id: "wt1", title: "Teori Set 1 · 19qs", subtitle: "安全管理 KY・5S・指差呼称",
     emoji: "🎯", color: "#f97316", grad: "linear-gradient(135deg,#9a3412,#ea580c)",
-    source: "CSV Teori v2 / JAC Official",
+    source: "wayground-teori",
     questions: [
     { id: 1, q: "KY活動《かつどう》の4ステップで最初《さいしょ》に行う《おこなう》ことは？", hint: "Langkah pertama dari 4 langkah KY adalah?", opts: ["対策《たいさく》を決め《きめ》る", "危険《きけん》を予測《よそく》する", "目標《もくひょう》宣言《せんげん》"], opts_id: ["Menentukan tindakan", "Memprediksi bahaya", "Deklarasi tujuan"], ans: 1, exp: "4 langkah KY: ①現状把握 (identifikasi bahaya) → ②本質追及 (analisis bahaya utama) → ③対策樹立 (buat countermeasure) → ④目標設定 (tetapkan target). Langkah PERTAMA adalah mengidentifikasi bahaya yang ada = 'bahaya apa yang mengintai kita?'" },
     { id: 2, q: "KY活動《かつどう》の4ステップのうち、2番目《ばんめ》のステップは？", hint: "Langkah ke-2 dalam 4 langkah KY adalah?", opts: ["危険《きけん》を指摘《してき》する", "目標《もくひょう》を宣言《せんげん》する", "危険《きけん》を予測《よそく》する"], opts_id: ["Menunjukkan bahaya", "Deklarasi tujuan", "Memprediksi bahaya"], ans: 0, exp: "4 langkah KY: Step 1=identifikasi bahaya, Step 2=tentukan bahaya UTAMA/pokok (本質の危険), Step 3=buat countermeasure, Step 4=komitmen target. Langkah KE-2 adalah menentukan bahaya paling kritis dari semua yang ditemukan." },
     { id: 3, q: "KY活動《かつどう》の4ステップで最後《さいご》のステップは？", hint: "Langkah ke-4 dalam KY adalah?", opts: ["危険《きけん》を予測《よそく》する", "目標《もくひょう》宣言《せんげん》", "対策《たいさく》を決め《きめ》て実行《じっこう》する"], opts_id: ["Memprediksi bahaya", "Deklarasi tujuan", "Menentukan & melaksanakan tindakan"], ans: 1, exp: "4 langkah KY: Step 1=現状把握 (identifikasi bahaya), Step 2=本質追及 (analisis bahaya utama), Step 3=対策樹立 (buat countermeasure), Step 4=目標設定 (tetapkan target). Langkah TERAKHIR adalah 【目標宣言】 = deklarasi target keselamatan dan Touch & Call bersama. Ini adalah momen komitmen kolektif: semua anggota tim menyatakan target nol kecelakaan sambil menunjuk dan menyebut bersama." },
-    { id: 4, q: "建設《けんせつ》現場《げんば》の危険《きけん》予知《よち》訓練《くんれん》の実施《じっし》頻度《ひんど》は？", hint: "Frekuensi pelatihan KY di lokasi konstruksi adalah?", opts: ["毎朝《まいあさ》の朝礼《ちょうれい》時《とき》", "年《ねん》1回《かい》", "1ヶ月《かげつ》に1回《かい》"], opts_id: ["Setiap apel pagi", "1x setahun", "1x sebulan"], ans: 0, exp: "Setiap pagi di chōrei (modul JAC Bab 1.5)." },
-    { id: 5, q: "建設現場《けんせつげんば》の「危険予知《きけんよち》訓練《くんれん》」の実施《じっし》頻度《ひんど》は？", hint: "Frekuensi pelaksanaan pelatihan prediksi bahaya di lokasi konstruksi adalah?", opts: ["毎朝《まいあさ》の朝礼《ちょうれい》時《とき》", "1ヶ月《かげつ》に1回《かい》", "年《ねん》1回《かい》"], opts_id: ["Setiap apel pagi", "1x sebulan", "1x setahun"], ans: 0, exp: "KY (Kiken Yochi = prediksi bahaya) dilakukan SETIAP PAGI di apel pagi (朝礼), bukan mingguan atau bulanan. Ini adalah rutinitas harian yang tidak bisa dilewati. Frekuensi harian memastikan kesadaran bahaya selalu terjaga." },
+    { id: 4, q: "建設《けんせつ》現場《げんば》の危険《きけん》予知《よち》訓練《くんれん》の実施《じっし》頻度《ひんど》は？", hint: "Frekuensi pelatihan KY di lokasi konstruksi adalah?", opts: ["毎朝《まいあさ》の朝礼《ちょうれい》時《とき》", "年《ねん》1回《かい》", "1ヶ月《かげつ》に1回《かい》"], opts_id: ["Setiap apel pagi", "1x setahun", "1x sebulan"], ans: 0, exp: "KY (Kiken Yochi = prediksi bahaya) dilakukan SETIAP PAGI di apel pagi (朝礼), bukan mingguan atau bulanan. Ini adalah rutinitas harian yang tidak bisa dilewati. Frekuensi harian memastikan kesadaran bahaya selalu terjaga. (modul JAC Bab 1.5)" },
+    // Q5 removed: was near-duplicate of Q4 (same topic: KY training frequency). Q4 kept with merged explanation.
     { id: 6, q: "危険予知《きけんよち》活動《かつどう》（KY活動）の最終《さいしゅう》目的《もくてき》は？", hint: "Tujuan akhir kegiatan KY adalah?", opts: ["休憩《きゅうけい》", "記録《きろく》を取る《とる》", "事故《じこ》ゼロの実現《じつげん》"], opts_id: ["Istirahat", "Mencatat", "Mewujudkan nol kecelakaan"], ans: 2, exp: "Tujuan akhir KY bukan hanya mengenal bahaya, tapi mewujudkan ZERO ACCIDENT (ゼロ災害). Setiap pagi, melalui KY, pekerja membangun kesadaran bahaya sehingga bisa bertindak sebelum insiden terjadi. KY = pencegahan aktif." },
     { id: 7, q: "朝礼《ちょうれい》後の《のちの》安全教育《あんぜんきょういく》で必ず《かならず》伝え《つたえ》るべきことは？", hint: "Hal wajib disampaikan di pendidikan keselamatan setelah apel pagi adalah?", opts: ["給料《きゅうりょう》の話《はなし》", "休憩時間《きゅうけいじかん》", "当日《とうじつ》の危険《きけん》箇所《かしょ》と対策《たいさく》"], opts_id: ["Pembahasan gaji", "Waktu istirahat", "Area bahaya hari ini dan tindakannya"], ans: 2, exp: "Di apel pagi/safety briefing, hal yang WAJIB disampaikan: ①Bahaya spesifik hari ini, ②Countermeasure yang harus dilakukan, ③Siapa bertanggung jawab apa. Tanpa info bahaya + solusi konkret, safety briefing tidak bermakna." },
     { id: 8, q: "建設現場《けんせつげんば》の朝礼《ちょうれい》後に《のちに》「今日《きょう》の作業内容《さぎょうないよう》と危険《きけん》箇所《かしょ》」を伝え《つたえ》る活動《かつどう》として正しい《ただしい》ものはどれか。", hint: "Kegiatan yang benar untuk menyampaikan 'isi pekerjaan dan bahaya hari ini' setelah apel pagi di site konstruks", opts: ["5S活動《かつどう》", "KY（危険予知《きけんよち》）活動《かつどう》", "産業廃棄物《さんぎょうはいきぶつ》処理《しょり》"], opts_id: ["Kegiatan 5S", "Kegiatan KY (prediksi bahaya)", "Pengelolaan limbah industri"], ans: 1, exp: "KY (危険予知/Kiken Yochi = prediksi bahaya) dilakukan setelah apel pagi, langsung di area kerja. Tim kecil (5-10 orang) mendiskusikan: ①Bahaya apa yang ada hari ini?, ②Apa yang paling berbahaya?, ③Bagaimana cara mencegahnya?, ④Target zero accident hari ini (Touch and Call). KY adalah rutinitas WAJIB sebelum bekerja, bukan pilihan — ini yang membedakan site yang aman dari yang tidak." },
@@ -35,7 +35,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt2", title: "Teori Set 2 · 20qs", subtitle: "三大災害・PPE・LOTO・酸素欠乏",
     emoji: "⚠️", color: "#ef4444", grad: "linear-gradient(135deg,#7f1d1d,#dc2626)",
-    source: "CSV Teori v2 / JAC Official",
+    source: "wayground-teori",
     questions: [
     { id: 1, q: "建設業界《けんせつぎょうかい》の三大災害《さんだいさいがい》で最も《もっとも》多い《おおい》事故《じこ》の種類《しゅるい》はどれか。", hint: "Jenis kecelakaan yang paling banyak terjadi di antara tiga besar kecelakaan industri konstruksi adalah?", opts: ["感電《かんでん》による死亡《しぼう》", "建設機械《けんせつきかい》による事故《じこ》", "墜落《ついらく》・転落《てんらく》による事故《じこ》"], opts_id: ["Kematian akibat sengatan listrik", "Kecelakaan akibat mesin konstruksi", "Kecelakaan akibat jatuh dari ketinggian"], ans: 2, exp: "Di industri konstruksi Jepang, 墜落・転落 (jatuh dari ketinggian) adalah penyebab TERBANYAK kecelakaan fatal. Inilah mengapa full harness, guardrail, dan safety net sangat ditekankan. Tiga besar: ①墜落・転落 (paling banyak), ②建設機械災害, ③崩壊・倒壊. Total kecelakaan konstruksi mencakup ~30% dari seluruh kecelakaan kerja fatal di Jepang — tertinggi di antara semua industri." },
     { id: 2, q: "建設《けんせつ》現場《げんば》で「マンホール内《ない》の酸素濃度《さんそのうど》」が低い《ひくい》場合《ばあい》に注意《ちゅうい》すべき危険《きけん》はどれか。", hint: "Bahaya yang harus diwaspadai ketika kadar oksigen di dalam manhole rendah adalah?", opts: ["火災《かさい》の危険《きけん》", "騒音《そうおん》による聴覚《ちょうかく》障害《しょうがい》", "酸素欠乏症《さんそけつぼうしょう》による意識《いしき》消失《しょうしつ》"], opts_id: ["Bahaya kebakaran", "Gangguan pendengaran akibat kebisingan", "Kehilangan kesadaran akibat kekurangan oksigen"], ans: 2, exp: "Kadar oksigen (酸素濃度) normal = 21%. Di bawah 18% = bahaya (酸素欠乏/sanso ketsubō). Di bawah 16% = berbahaya akut (pusing, jantung berdebar). Di bawah 6% = fatal dalam menit (kehilangan kesadaran). Gejala muncul SANGAT CEPAT tanpa peringatan. WAJIB: ukur O₂ dulu sebelum masuk, ventilasi paksa minimum 20 menit, standby orang di luar dengan tali penyelamat, dan pakai SCBA jika diperlukan masuk darurat." },
@@ -63,7 +63,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt3", title: "Teori Set 3 · 20qs", subtitle: "労働基準法・雇用・36協定",
     emoji: "⚖️", color: "#eab308", grad: "linear-gradient(135deg,#713f12,#ca8a04)",
-    source: "CSV Teori v2 / JAC Official",
+    source: "wayground-teori",
     questions: [
     { id: 1, q: "労働基準法《ろうどうきじゅんほう》で、1週間《しゅうかん》の法定労働時間《ほうていろうどうじかん》は何時間《なんじかん》か。", hint: "Menurut UU Standar Ketenagakerjaan, berapa jam waktu kerja resmi per minggu?", opts: ["48 時間《じかん》", "40 時間《じかん》", "36 時間《じかん》"], opts_id: ["48 jam", "40 jam", "36 jam"], ans: 1, exp: "Menurut UU Standar Ketenagakerjaan (Labor Standards Act), waktu kerja resmi adalah 40 jam/minggu (8 jam/hari × 5 hari). Jika melebihi ini, disebut lembur (時間外労働) dan wajib dibayar tarif lebih tinggi. Ini adalah hak dasar semua pekerja di Jepang." },
     { id: 2, q: "法定労働時間《ほうていろうどうじかん》では、働く時間《じかん》は 1 日何時間《なんじかん》までか。", hint: "Menurut waktu kerja resmi, berapa jam maksimal kerja per hari?", opts: ["8 時間《じかん》", "10 時間《じかん》", "6 時間《じかん》"], opts_id: ["8 jam", "10 jam", "6 jam"], ans: 0, exp: "Maksimal waktu kerja adalah 8 jam/hari dan 40 jam/minggu. Ini disebut 法定労働時間 (waktu kerja menurut undang-undang). Jika ada perjanjian 36 (36協定) dengan serikat pekerja, lembur diperbolehkan dengan batas tertentu." },
@@ -91,7 +91,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt4", title: "Teori Set 4 · 20qs", subtitle: "建設業法・環境法・水道法・消防法",
     emoji: "📜", color: "#22c55e", grad: "linear-gradient(135deg,#14532d,#16a34a)",
-    source: "CSV Teori v2 / JAC Official",
+    source: "wayground-teori",
     questions: [
     { id: 1, q: "建設《けんせつ》業《ぎょう》を営む《いとなむ》者《もの》の資質《ししつ》の向上《こうじょう》、建設工事《けんせつこうじ》の適正《てきせい》な施工《せこう》を確保《かくほ》することを目的《もくてき》とした法律《ほうりつ》はどれか。", hint: "Undang-undang yang bertujuan meningkatkan kualitas pelaku usaha konstruksi dan memastikan pelaksanaan konstruk", opts: ["労働基準法《ろうどうきじゅんほう》", "労働《ろうどう》安全衛生《あんぜんえいせい》法《ほう》", "建設《けんせつ》業法《ぎょうほう》"], opts_id: ["Labor Standards Act", "Industrial Safety & Health Act", "Construction Business Act"], ans: 2, exp: "建設業法 (Construction Business Act) bertujuan: ①Meningkatkan kualitas pelaku usaha konstruksi, ②Memastikan pelaksanaan konstruksi yang tepat, ③Mendorong perkembangan industri konstruksi yang sehat. Labor Standards Act = mengatur jam kerja & upah. Building Standards Act = standar teknis bangunan minimum. Industrial Safety & Health Act = keselamatan pekerja di tempat kerja." },
     { id: 2, q: "建設《けんせつ》業法《ぎょうほう》の主な《おもな》目的《もくてき》はどれか。", hint: "Tujuan utama Construction Business Act (建設業法) adalah?", opts: ["建設工事《けんせつこうじ》の費用《ひよう》を決め《きめ》ること", "建設《けんせつ》業《ぎょう》を営む《いとなむ》者《もの》の資質《ししつ》の向上《こうじょう》と工事《こうじ》の適正《てきせい》施工《せこう》の確保《かくほ》", "建設《けんせつ》作業員《さぎょういん》の給与《きゅうよ》を定め《さだめ》ること"], opts_id: ["Menentukan biaya konstruksi", "Meningkatkan kualitas pelaku usaha dan memastikan konstruksi dilaksanakan dengan benar", "Menetapkan gaji pekerja konstruksi"], ans: 1, exp: "建設業法 (Kensetsu-gyō Hō / Construction Business Act) tujuan utamanya: ①Meningkatkan kualitas pelaku usaha konstruksi (資質の向上), ②Memastikan pelaksanaan konstruksi yang tepat (適正施工), ③Melindungi kepentingan pemberi proyek (発注者保護), ④Mendorong perkembangan industri konstruksi yang sehat. Ketiga tujuan utama ini membedakannya dari Labor Standards Act (hak pekerja) atau Building Standards Act (standar fisik bangunan)." },
@@ -118,7 +118,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt5", title: "Teori Set 5 · 20qs", subtitle: "施工管理・構造・役割・CCUS",
     emoji: "🏗️", color: "#818cf8", grad: "linear-gradient(135deg,#312e81,#4f46e5)",
-    source: "CSV Teori v2 / JAC Official",
+    source: "wayground-teori",
     questions: [
     { id: 1, q: "元請負業者《もとうけおいぎょうしゃ》の説明《せつめい》として正しい《ただしい》ものはどれか。", hint: "Penjelasan yang benar tentang kontraktor utama (元請負業者) adalah?", opts: ["発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》", "元請負業者《もとうけおいぎょうしゃ》から仕事《しごと》を受ける《うける》業者《ぎょうしゃ》", "工事《こうじ》の設計《せっけい》のみを担当《たんとう》する業者《ぎょうしゃ》"], opts_id: ["Perusahaan yang menerima proyek langsung dari pemberi proyek", "Perusahaan yang menerima pekerjaan dari kontraktor utama", "Perusahaan yang hanya menangani desain konstruksi"], ans: 0, exp: "元請負業者 (moto ukeoi gyōsha / kontraktor utama) = perusahaan yang menerima kontrak proyek langsung dari pemberi proyek (発注者). Mereka kemudian mendelegasikan pekerjaan ke subkontraktor. Alur: Pemberi proyek → Kontraktor utama → Subkontraktor. Sebagai pekerja SSW, Anda bekerja di bawah subkontraktor, yang menerima perintah dari kontraktor utama." },
     { id: 2, q: "建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》」の説明《せつめい》として正しい《ただしい》ものはどれか。", hint: "Penjelasan yang benar tentang subkontraktor (下請負業者) dalam konstruksi adalah?", opts: ["発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》", "主に《おもに》設計図《せっけいず》を作成《さくせい》する業者《ぎょうしゃ》", "元請《もとうけ》から専門《せんもん》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》"], opts_id: ["Perusahaan yang menerima proyek langsung dari pemberi proyek", "Perusahaan yang terutama membuat gambar desain", "Perusahaan yang menerima pekerjaan spesialis dari kontraktor utama"], ans: 2, exp: "下請負業者 (shita ukeoi gyōsha / subkontraktor) = menerima pekerjaan spesialis dari kontraktor utama (元請). Mereka punya keahlian khusus: pipa, listrik, insulasi, AC, dll. Sebagai pekerja SSW Anda biasanya bekerja di bawah subkontraktor. Rantai: Pemberi proyek → 元請 (motouke) → 下請 (shita-uke) → Anda sebagai pekerja SSW di lapangan." },
@@ -145,7 +145,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt6", title: "Teori Set 6 · 20qs", subtitle: "総合ファイナル 頻出問題",
     emoji: "🏆", color: "#ec4899", grad: "linear-gradient(135deg,#831843,#db2777)",
-    source: "CSV Teori v2 / JAC Official",
+    source: "wayground-teori",
     questions: [
     { id: 1, q: "KY活動《かつどう》の4ステップで最初《さいしょ》に行う《おこなう》ことは？", hint: "Langkah pertama dari 4 langkah KY adalah?", opts: ["対策《たいさく》を決め《きめ》る", "危険《きけん》を予測《よそく》する", "目標《もくひょう》宣言《せんげん》"], opts_id: ["Menentukan tindakan", "Memprediksi bahaya", "Deklarasi tujuan"], ans: 1, exp: "4 langkah KY: ①現状把握 (identifikasi bahaya) → ②本質追及 (analisis bahaya utama) → ③対策樹立 (buat countermeasure) → ④目標設定 (tetapkan target). Langkah PERTAMA adalah mengidentifikasi bahaya yang ada = 'bahaya apa yang mengintai kita?'" },
     { id: 2, q: "労働基準法《ろうどうきじゅんほう》で、1週間《しゅうかん》の法定労働時間《ほうていろうどうじかん》は何時間《なんじかん》か。", hint: "Menurut UU Standar Ketenagakerjaan, berapa jam waktu kerja resmi per minggu?", opts: ["48 時間《じかん》", "40 時間《じかん》", "36 時間《じかん》"], opts_id: ["48 jam", "40 jam", "36 jam"], ans: 1, exp: "Menurut UU Standar Ketenagakerjaan (Labor Standards Act), waktu kerja resmi adalah 40 jam/minggu (8 jam/hari × 5 hari). Jika melebihi ini, disebut lembur (時間外労働) dan wajib dibayar tarif lebih tinggi. Ini adalah hak dasar semua pekerja di Jepang." },
@@ -173,7 +173,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt7", title: "Teori Set 7 · 20qs", subtitle: "現場安全・リスク・コミュニケーション",
     emoji: "🗣️", color: "#22d3ee", grad: "linear-gradient(135deg,#164e63,#0891b2)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "産業安全衛生法《さんぎょうあんぜんえいせいほう》で、危険予知《きけんよち》活動《かつどう》（KY活動《かつどう》）の主な《おもな》目的《もくてき》は何か《なにか》。", hint: "Menurut UU Keselamatan dan Kesehatan Kerja, tujuan utama KY adalah?", opts: ["休憩《きゅうけい》を取る《とる》", "危険《きけん》を予測《よそく》し、対策《たいさく》を立て《たて》る", "作業《さぎょう》を速く《はやく》終わ《おわ》らせる"], opts_id: ["Beristirahat", "Memprediksi bahaya dan menyusun tindakan", "Menyelesaikan kerja cepat"], ans: 1, exp: "KY (Kiken Yochi = 危険予知) bertujuan memprediksi bahaya SEBELUM kerja dimulai. Ini sejalan dengan tujuan Industrial Safety & Health Act yaitu mencegah kecelakaan dan penyakit kerja. KY bukan investigasi kecelakaan yang sudah terjadi." },
     { id: 2, q: "工程表《こうていひょう》として最も《もっとも》よく使わ《つかわ》れる「バーチャート」の特徴《とくちょう》はどれか。", hint: "Karakteristik jadwal konstruksi yang paling sering digunakan 'bar chart' (バーチャート) adalah?", opts: ["作業《さぎょう》の依存関係《いぞんかんけい》が一目《いちもく》でわかる", "縦軸《たてじく》に作業《さぎょう》名《めい》、横軸《よこじく》に時間《じかん》を示す《しめす》", "円《えん》グラフで進捗《しんちょく》を表示す《ひょうじす》る"], opts_id: ["Ketergantungan antar pekerjaan terlihat sekilas", "Sumbu vertikal = nama pekerjaan, sumbu horizontal = waktu", "Menampilkan progres dalam grafik lingkaran"], ans: 1, exp: "Bar chart (バーチャート = Gantt chart) = jadwal konstruksi paling umum: sumbu Y (vertikal) = nama pekerjaan, sumbu X (horizontal) = waktu. Setiap pekerjaan = batang horizontal. Mudah dibaca semua orang termasuk pekerja lapangan. Kelemahannya: tidak menunjukkan ketergantungan antar pekerjaan (dependencies) — untuk itu digunakan Network Diagram (CPM/PERT)." },
@@ -200,7 +200,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt8", title: "Teori Set 8 · 20qs", subtitle: "施工技術・資格・建設材料",
     emoji: "🏛️", color: "#a3e635", grad: "linear-gradient(135deg,#1a2e05,#4d7c0f)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "建設《けんせつ》現場《げんば》の「墜落《ついらく》防止《ぼうし》ネット」の設置基準《せっちきじゅん》高さ《たかさ》は？", hint: "Standar ketinggian pemasangan safety net pencegahan jatuh adalah?", opts: ["5m以上《いじょう》", "作業《さぎょう》面《めん》から下方《かほう》2m以内《いない》", "地面《じめん》から2m"], opts_id: ["5m ke atas", "Maksimal 2m di bawah permukaan kerja", "2m dari tanah"], ans: 1, exp: "Maksimal 2m di bawah level kerja (modul JAC)." },
     { id: 2, q: "建設工事《けんせつこうじ》で「防火《ぼうか》区画《くかく》貫通《かんつう》部《ぶ》処理《しょり》」が必要《ひつよう》な理由《りゆう》はどれか。", hint: "Mengapa 'penanganan titik tembus kompartemen tahan api' (防火区画貫通部処理) diperlukan dalam konstruksi?", opts: ["断熱性能《だんねつせいのう》を高め《たかめ》るため", "水《みず》漏れ《もれ》を防ぐ《ふせぐ》ため", "配管《はいかん》・ケーブルが防火《ぼうか》区画《くかく》を貫通《かんつう》する部分《ぶぶん》から火炎《かえん》・煙《けむり》が広が《ひろが》るのを防ぐ《ふせぐ》ため"], opts_id: ["Untuk meningkatkan performa insulasi termal", "Untuk mencegah kebocoran air", "Mencegah api dan asap menyebar melalui titik tembus pipa/kabel di kompartemen tahan api"], ans: 2, exp: "Pipa, duct, dan kabel yang menembus dinding atau lantai kompartemen tahan api (防火区画) harus ditutup dengan bahan tahan api (耐火充填材/fire-stop material) seperti putty tahan api atau mineral wool. Jika tidak ditutup, celah tersebut menjadi jalur api dan asap menyebar ke kompartemen lain — menghancurkan fungsi fire compartment yang sudah didesain untuk membatasi kebakaran." },
@@ -227,7 +227,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt9", title: "Teori Set 9 · 20qs", subtitle: "職場ルール・5S詳細・労働環境",
     emoji: "🏢", color: "#e879f9", grad: "linear-gradient(135deg,#4a044e,#a21caf)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "建設工事《けんせつこうじ》の「安全衛生《あんぜんえいせい》計画《けいかく》」を作成《さくせい》する義務《ぎむ》があるのはどれか。", hint: "Siapa yang berkewajiban membuat 'rencana keselamatan & kesehatan' (安全衛生計画) untuk konstruksi?", opts: ["下請《したうけ》業者《ぎょうしゃ》", "設計事務所《せっけいじむしょ》", "元請《もとうけ》業者《ぎょうしゃ》（施工《せこう》管理者《かんりしゃ》）"], opts_id: ["Subkontraktor", "Kantor desainer", "Kontraktor utama (manajer konstruksi)"], ans: 2, exp: "Rencana K3 (安全衛生計画) wajib dibuat oleh kontraktor utama (元請業者) sebagai penanggungjawab seluruh site. Rencana ini mencakup: identifikasi bahaya per jenis pekerjaan, jadwal inspeksi, rencana pendidikan K3, prosedur darurat, dan rencana patroli keselamatan. Subkontraktor mengikuti rencana yang dibuat oleh kontraktor utama dan membuat rencana turunan yang lebih spesifik untuk pekerjaan mereka masing-masing." },
     { id: 2, q: "作業環境《さぎょうかんきょう》の照度《しょうど》測定《そくてい》の基準値《きじゅんち》は？", hint: "Nilai standar pengukuran iluminasi lingkungan kerja adalah?", opts: ["100ルクス固定《こてい》", "作業内容《さぎょうないよう》により300～750ルクス", "任意《にんい》"], opts_id: ["100 lux tetap", "300–750 lux tergantung jenis kerja", "Bebas"], ans: 1, exp: "Iluminasi (pencahayaan) wajib disesuaikan dengan jenis pekerjaan: ①Pekerjaan halus (gambar teknik, assembly presisi) ≥300 lux, ②Pekerjaan umum ≥150 lux, ③Lorong/tangga ≥50 lux. Pencahayaan kurang = risiko kecelakaan dan kualitas kerja turun." },
@@ -254,7 +254,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wt10", title: "Teori Set 10 · 20qs", subtitle: "総合テスト II 応用問題",
     emoji: "📊", color: "#fbbf24", grad: "linear-gradient(135deg,#451a03,#b45309)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "建設業法《けんせつぎょうほう》で、元請負業者《もとうけおいぎょうしゃ》が下請《したうけ》負業者《したうけおいぎょうしゃ》に支払《しはらい》う代金《だいきん》の支払期限《きげん》は？", hint: "Batas waktu pembayaran tagihan oleh kontraktor utama kepada subkontraktor menurut UU Konstruksi adalah?", opts: ["工事《こうじ》完了《かんりょう》後1年以内《いない》", "支払《しはらい》わない", "工事《こうじ》完了《かんりょう》後50日以内《いない》"], opts_id: ["Maksimal 1 tahun setelah selesai", "Tidak dibayar", "Maksimal 50 hari setelah selesai"], ans: 2, exp: "Kontraktor utama WAJIB membayar tagihan subkontraktor dalam 50 hari setelah menerima hasil pekerjaan. Ini mencegah keterlambatan pembayaran yang membebani subkontraktor kecil. Jika lewat 50 hari, ada kewajiban tambahan bunga keterlambatan." },
     { id: 2, q: "建設工事《けんせつこうじ》の「リスクアセスメント」で「リスクの大きさ」はどのように決まるか。", hint: "Bagaimana 'besarnya risiko' dalam risk assessment konstruksi ditentukan?", opts: ["作業《さぎょう》の難しさのみで決まる", "危険《きけん》の発生確率だけで決まる", "被害の重大《じゅうだい》性と発生確率を組み合わせて決まる"], opts_id: ["Ditentukan hanya dari kesulitan pekerjaan", "Ditentukan hanya dari probabilitas terjadinya bahaya", "Ditentukan dari kombinasi tingkat keparahan dan probabilitas terjadinya"], ans: 2, exp: "Dalam risk assessment: Risiko (リスク) = Tingkat Keparahan (重篤性/jūtokusei) × Probabilitas Terjadinya (発生確率/hassei kakuritsu). Contoh: tertimpa benda jatuh 10kg dari 5m = keparahan TINGGI × probabilitas SEDANG → risiko TINGGI. Kedua faktor harus dipertimbangkan bersama untuk menentukan prioritas countermeasure: risiko sangat tinggi = prioritas tertinggi untuk dieliminasi atau dikendalikan." },
@@ -286,7 +286,7 @@ export const WAYGROUND_SETS = [
     emoji: "🔧",
     color: "#60a5fa",
     grad: "linear-gradient(135deg,#1d4ed8,#0369a1)",
-    source: "Wayground / Quizizz",
+    source: "wayground-quizizz",
     questions: [
     { id: 1, q: "地下《ちか》（ちか）に配管《はいかん》（はいかん）を埋設《まいせつ》（まいせつ）する際（さい）、凍結（とうけつ）防止《ぼうし》（ぼうし）のための施工方法《ほうほう》（せこうほうほう）はどれですか？", hint: "Saat memasang pipa bawah tanah, metode konstruksi untuk mencegah pembekuan adalah...", opts: ["配管《はいかん》（はいかん）を浅（あさ）く埋（う）める", "保温材《ほおんざい》（ほおんざい）と電熱線（でんねつせん）を併用（へいよう）する", "配管《はいかん》（はいかん）を裸（はだか）のまま埋（う）める"], opts_id: ["Kubur pipa dangkal-dangkal saja", "Pakai insulasi + kawat pemanas bersamaan", "Kubur pipa tanpa pelindung apapun"], ans: 1, exp: "保温材（insulasi）+ 電熱線（kawat pemanas）dipakai bersamaan untuk mencegah pipa bawah tanah membeku." },
     { id: 2, q: "冷媒《れいばい》管（れいばいかん）の真空《しんくう》引（しんくうびき）きを不十分《じゅうぶん》（ふじゅうぶん）に行（おこな）った場合《ばあい》（ばあい）、何（なに）が起（お）こりますか？", hint: "Jika pemvakuman pipa refrigeran dilakukan tidak sempurna, apa yang terjadi?", opts: ["冷媒《れいばい》（れいばい）の流量（りゅうりょう）が増（ふ）える", "内部《ないぶ》（ないぶ）に水分《すいぶん》（すいぶん）が残（のこ）り故障《こしょう》（こしょう）する", "温度《おんど》（おんど）が一定（いってい）になる"], opts_id: ["Debit refrigeran meningkat", "Kelembapan tersisa di dalam → menyebabkan kerusakan", "Suhu menjadi konstan / stabil"], ans: 1, exp: "Pemvakuman tidak tuntas → kelembapan tersisa di dalam pipa → menyebabkan kerusakan sistem (内部故障)." },
@@ -312,7 +312,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg2: Lifeline 設備 15qs (from Wayground "life line 15qs") ──
   {
-    id: "wg2", title: "Praktik Set 2 · 20qs", subtitle: "配管・断熱・配線 実技問題", emoji: "🔌", color: "#818cf8", grad: "linear-gradient(135deg,#3730a3,#6d28d9)", source: "Wayground / Quizizz",
+    id: "wg2", title: "Praktik Set 2 · 20qs", subtitle: "配管・断熱・配線 実技問題", emoji: "🔌", color: "#818cf8", grad: "linear-gradient(135deg,#3730a3,#6d28d9)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "高温《こうおん》（こうおん）配管《はいかん》（はいかん）に断熱《だんねつ》材《だんねつざい》（だんねつざい）を施工《せこう》（せこう）する主（おも）な目的《もくてき》（もくてき）は何（なん）ですか？", hint: "Tujuan utama memasang insulasi termal pada pipa suhu tinggi adalah...", opts: ["作業員《さぎょういん》（さぎょういん）の安全《あんぜん》（あんぜん）確保《かくほ》（かくほ）", "流量（りゅうりょう）の増加（ぞうか）", "配管《はいかん》（はいかん）の色（いろ）維持《いじ》（いじ）"], opts_id: ["Menjamin keselamatan pekerja dari panas", "Meningkatkan debit aliran", "Menjaga warna pipa tetap sama"], ans: 0, exp: "Pipa suhu tinggi bisa menyebabkan luka bakar → insulasi 断熱材 melindungi 作業員の安全." },
     { id: 2, q: "屋外《おくがい》（おくがい）配線《はいせん》（はいせん）で雨水（あまみず）が侵入（しんにゅう）しやすい部分《ぶぶん》（ぶぶん）はどこですか？", hint: "Bagian mana pada kabel outdoor yang mudah dimasuki air hujan?", opts: ["配線《はいせん》（はいせん）の曲（ま）がり部分《ぶぶん》（ぶぶん）", "接続《せつぞく》（せつぞく）部（ぶん）", "絶縁《ぜつえん》（ぜつえん）部分《ぶぶん》（ぶぶん）"], opts_id: ["Bagian belokan kabel", "Bagian sambungan", "Bagian isolasi"], ans: 0, exp: "Air hujan masuk di belokan（曲がり部分）karena penutup bisa retak di area tekukan." },
@@ -339,7 +339,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg3: Lifeline 設備 10qs (from Wayground "life line 10qs") ──
   {
-    id: "wg3", title: "Praktik Set 3 · 20qs", subtitle: "保温・配管・電気 応用問題", emoji: "⚡", color: "#f472b6", grad: "linear-gradient(135deg,#9d174d,#be185d)", source: "Wayground / Quizizz",
+    id: "wg3", title: "Praktik Set 3 · 20qs", subtitle: "保温・配管・電気 応用問題", emoji: "⚡", color: "#f472b6", grad: "linear-gradient(135deg,#9d174d,#be185d)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）に保温材《ほおんざい》（ほおんざい）を取（と）り付（つ）けた後（あと）、外装（がいそう）に小（ちい）さな穴（あな）が空（あ）いている場合《ばあい》（ばあい）、正（ただ）しい対応《たいおう》（たいおう）はどれですか？", hint: "Jika ada lubang kecil pada jacketing setelah insulasi?", opts: ["外装（がいそう）を全（ぜん）て交換《こうかん》（こうかん）する", "穴（あな）をテープで補修（ほしゅう）する", "放置《ほうち》（ほうち）して次（つぎ）の作業《さぎょう》（さぎょう）に進（すす）む"], opts_id: ["Ganti seluruh jacketing", "Tambal dengan selotip", "Biarkan, lanjut kerja"], ans: 0, exp: "Lubang kecil pun → air masuk & rusak insulasi → 外装を全て交換する." },
     { id: 2, q: "地下《ちか》（ちか）に埋設《まいせつ》（まいせつ）された給水《きゅうすい》管（きゅうすいかん）が凍（こお）る原因《げんいん》（げんいん）として正（ただ）しいのはどれですか？", hint: "Penyebab pipa air bawah tanah membeku?", opts: ["浅（あさ）く埋（う）められている", "断熱材《だんねつざい》（だんねつざい）が厚（あつ）すぎる", "バルブが新（あたら）しい"], opts_id: ["Ditanam terlalu dangkal", "Insulasi terlalu tebal", "Katup masih baru"], ans: 0, exp: "Terlalu dangkal（浅く埋められている）→ terpapar suhu dingin → membeku." },
@@ -366,7 +366,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg4: ライフライン第6章 15qs (from Wayground SSW_Konstruksi_5) ──
   {
-    id: "wg4", title: "Praktik Set 4 · 20qs", subtitle: "配管・保温・電気 施工問題", emoji: "🛠️", color: "#34d399", grad: "linear-gradient(135deg,#065f46,#047857)", source: "Wayground / Quizizz",
+    id: "wg4", title: "Praktik Set 4 · 20qs", subtitle: "配管・保温・電気 施工問題", emoji: "🛠️", color: "#34d399", grad: "linear-gradient(135deg,#065f46,#047857)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）を壁（かべ）に固定《こてい》（こてい）するための部品（ぶひん）は何（なん）ですか？", hint: "Komponen untuk fiksasi pipa ke dinding?", opts: ["サドル", "バルブ", "ガスケット"], opts_id: ["Saddle (penyangga)", "Valve / katup", "Gasket"], ans: 0, exp: "サドル（saddle）= bracket pelana untuk mengikat pipa ke dinding." },
     { id: 2, q: "電線《でんせん》（でんせん）を絶縁《ぜつえん》（ぜつえん）するために使（つか）うものは何（なん）ですか？", hint: "Bahan untuk mengisolasi kabel listrik?", opts: ["絶縁《ぜつえん》テープ", "保温材《ほおんざい》（ほおんざい）", "シーリング材（ざい）"], opts_id: ["Selotip isolasi listrik", "Material insulasi panas", "Material sealant"], ans: 0, exp: "絶縁テープ（selotip isolasi）= membungkus sambungan kabel agar tidak korsleting." },
@@ -393,7 +393,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg5: ライフライン第6章 22qs (from Wayground SSW_Konstruksi_6) ──
   {
-    id: "wg5", title: "Praktik Set 5 · 20qs", subtitle: "溶接・フレア・保冷 施工問題", emoji: "🔩", color: "#fbbf24", grad: "linear-gradient(135deg,#92400e,#b45309)", source: "Wayground / Quizizz",
+    id: "wg5", title: "Praktik Set 5 · 20qs", subtitle: "溶接・フレア・保冷 施工問題", emoji: "🔩", color: "#fbbf24", grad: "linear-gradient(135deg,#92400e,#b45309)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）を溶接《ようせつ》（ようせつ）する前（まえ）に最（もっと）も重要（じゅうよう）な確認《かくにん》（かくにん）はどれですか？", hint: "Pemeriksaan paling penting sebelum mengelas pipa?", opts: ["接合《せつごう》部（せつごうぶ）の清掃《せいそう》（せいそう）", "配管《はいかん》（はいかん）の色（いろ）", "配管《はいかん》（はいかん）の材質（ざいしつ）"], opts_id: ["Bersihkan bagian sambungan", "Warna pipa", "Jenis material pipa"], ans: 0, exp: "Sebelum las → 接合部の清掃（bersihkan sambungan）agar las sempurna." },
     { id: 2, q: "保温材《ほおんざい》（ほおんざい）の継目（つぎめ）をずらして施工《せこう》（せこう）する理由《りゆう》（りゆう）は何（なん）ですか？", hint: "Alasan menggeser posisi sambungan insulasi?", opts: ["熱（ねつ）漏（も）れを防（ふせ）ぐ", "見栄（みば）えを良（よ）くする", "施工《せこう》時間《じかん》（せこうじかん）を短縮《たんしゅく》（たんしゅく）する"], opts_id: ["Mencegah kebocoran panas", "Memperbaiki penampilan", "Mempersingkat waktu"], ans: 0, exp: "Sambungan sejajar → celah langsung → panas bocor. Digeser → 熱漏れを防ぐ." },
@@ -419,7 +419,7 @@ export const WAYGROUND_SETS = [
     ]
   },
   {
-    id: "wg10", title: "Praktik Set 6 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "Wayground / Quizizz",
+    id: "wg10", title: "Praktik Set 6 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "天井《てんじょう》裏（てんじょううら）に電線《でんせん》（でんせん）を通（とお）すときは、＿＿が必要《ひつよう》（ひつよう）です。", hint: "Untuk memasang kabel di atas langit-langit, diperlukan...", opts: ["カッター", "脚立《きゃたつ》（きゃたつ）", "ハンマー"], opts_id: ["Cutter", "Tangga lipat", "Palu"], ans: 1, exp: "脚立（tangga lipat）diperlukan untuk menjangkau langit-langit." },
     { id: 2, q: "安全《あんぜん》（あんぜん）のために、＿＿を配線《はいせん》（はいせん）の先端（せんたん）に取（と）り付（つ）けます。", hint: "Untuk keselamatan, pasang __ di ujung kabel.", opts: ["絶縁《ぜつえん》キャップ（ぜつえんキャップ）", "照明《しょうめい》器具《きぐ》（しょうめいきぐ）", "防音《ぼうおん》材（ぼうおんざい）"], opts_id: ["Insulation cap", "Lampu", "Material kedap suara"], ans: 0, exp: "絶縁キャップ = tutup isolasi, dipasang di ujung kabel untuk keselamatan." },
@@ -447,7 +447,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wp1", title: "Praktik Set 7 · 20qs", subtitle: "保温継手・工具・安全基準 実技",
     emoji: "🔩", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "保温工事《ほおんこうじ》で「シーラント」の役割《やくわり》は？", hint: "Peran sealant pada pekerjaan insulasi adalah?", opts: ["継手部《つぎてぶ》の気密性《きみつせい》を確保《かくほ》する", "接着剤《せっちゃくざい》の代わり《かわり》", "見た目《みため》を良く《よく》する"], opts_id: ["Menjamin kedap udara sambungan", "Pengganti lem", "Mempercantik"], ans: 0, exp: "Sealant (シーラント) dalam pekerjaan insulasi: bahan elastis yang diaplikasikan pada sambungan/celah insulasi untuk mencegah kebocoran udara dan uap air. Penting agar insulasi bekerja efektif — udara/uap yang masuk akan kondensasi dan merusak insulasi dari dalam." },
     { id: 2, q: "冷媒配管《れいばいはいかん》の「インサート継手《いんさーとつぎて》」の特徴《とくちょう》は？", hint: "Ciri insert joint pada pipa refrigerant adalah?", opts: ["挿入《そうにゅう》して圧着《あっちゃく》", "溶接《ようせつ》不要《ふよう》", "ねじ式《しき》"], opts_id: ["Dimasukkan lalu dikrim", "Tanpa las", "Ulir"], ans: 0, exp: "Compression fitting tanpa solder (modul praktik)." },
@@ -474,7 +474,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wp2", title: "Praktik Set 8 · 20qs", subtitle: "安全装備・圧力試験・施工基準 実技",
     emoji: "🛡️", color: "#4ade80", grad: "linear-gradient(135deg,#052e16,#15803d)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "フルハーネス使用時《しようじ》のフックは？", hint: "Hook pada full-harness harus?", opts: ["キー付き《きーつき》ロッキング", "使わ《つかわ》ない", "固定式《こていしき》"], opts_id: ["Keylock type", "Tidak pakai", "Tipe tetap"], ans: 0, exp: "Hook pada full harness harus dilengkapi keylock (double locking mechanism). Ini mencegah hook terbuka secara tidak sengaja karena guncangan atau getaran. Hook biasa (single gate) mudah terbuka sendiri. Keylock = twist+push untuk membuka = jauh lebih aman." },
     { id: 2, q: "配管《はいかん》の「エアー試験《しけん》」の使用《しよう》圧力《あつりょく》基準《きじゅん》は？", hint: "Standar tekanan untuk air test (pneumatic test) pada pipa adalah?", opts: ["作業《さぎょう》圧《あつ》の1.1倍《ばい》以下《いか》", "作業《さぎょう》圧《あつ》の0.5倍《ばい》", "常圧《じょうあつ》"], opts_id: ["Maksimal 1.1× tekanan kerja", "0.5× tekanan kerja", "Tekanan normal"], ans: 0, exp: "Pneumatic test (air test/エアー試験) untuk sistem gas menggunakan nitrogen (bukan udara biasa) pada tekanan 1.5× working pressure selama minimum 15 menit. Tidak menggunakan udara biasa karena ada risiko detonasi. Bandingkan dengan water pressure test (hydrostatic) yang lebih aman." },
@@ -501,7 +501,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wp3", title: "Praktik Set 9 · 20qs", subtitle: "冷媒配管・保温材・断熱材 実技",
     emoji: "🌡️", color: "#fb923c", grad: "linear-gradient(135deg,#431407,#c2410c)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "冷媒《れいばい》配管《はいかん》の「サイトグラス」の役割《やくわり》は？", hint: "Peran sight glass pada pipa refrigerant adalah?", opts: ["圧力《あつりょく》を測る《はかる》", "漏れ《もれ》確認《かくにん》", "冷媒《れいばい》の流れ《ながれ》と水分《すいぶん》を確認《かくにん》"], opts_id: ["Mengukur tekanan", "Cek kebocoran", "Mengecek aliran refrigerant & kelembaban"], ans: 2, exp: "Sight glass (サイトグラス) pada sistem refrigerant: kaca kecil transparan di jalur liquid line. Fungsi: ①Melihat aliran refrigerant (gelembung = kurang), ②Indikator kelembaban (hijau=kering, kuning=basah). Jika ada gelembung = refrigerant kurang atau ada masalah." },
     { id: 2, q: "冷媒《れいばい》配管《はいかん》の「オイルトラップ」の設置位置《せっちいち》は？", hint: "Posisi pemasangan oil trap pada pipa refrigerant adalah?", opts: ["垂直《すいちょく》上昇《じょうしょう》部《ぶ》", "水平《すいへい》配管《はいかん》の最低《さいてい》部《ぶ》", "天井《てんじょう》"], opts_id: ["Bagian naik vertikal", "Titik terendah pada pipa horizontal", "Langit-langit"], ans: 1, exp: "Di titik rendah untuk kumpulkan oli (modul JAC praktik)." },
@@ -528,7 +528,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wp4", title: "Praktik Set 10 · 20qs", subtitle: "溶接・フランジ・配管加工 実技",
     emoji: "⚙️", color: "#c084fc", grad: "linear-gradient(135deg,#2e1065,#7c3aed)",
-    source: "CSV v2 / JAC Official",
+    source: "wayground-jac",
     questions: [
     { id: 1, q: "硬質《こうしつ》ウレタンフォームの主な《おもな》用途《ようと》は？", hint: "Kegunaan utama rigid polyurethane foam adalah?", opts: ["耐火材《たいかざい》", "断熱材《だんねつざい》（吹付《ふきつけ》け）", "塗料《とりょう》"], opts_id: ["Bahan tahan api", "Insulasi semprot", "Cat"], ans: 1, exp: "Rigid polyurethane foam (硬質ポリウレタンフォーム/硬質ウレタンフォーム) = foam insulasi yang disemprotkan dan mengeras. Digunakan sebagai spray foam insulation untuk menutup celah, insulasi duct bentuk tidak beraturan, atau insulasi dinding cold storage. Nilai R yang sangat baik." },
     { id: 2, q: "配管《はいかん》の「フランジ面《めん》合わ《あわ》せ」の基準《きじゅん》は？", hint: "Standar alignment muka flange adalah?", opts: ["0.5mm以内《いない》の平行《へいこう》", "2mm以内《いない》", "1mm以内《いない》"], opts_id: ["Paralel maksimal 0.5mm", "Maksimal 2mm", "Maksimal 1mm"], ans: 0, exp: "Standar alignment muka flange: maksimal 0.5mm untuk sistem bertekanan tinggi. Alignment yang buruk menyebabkan gasket tidak merata = bocor di tekanan tinggi. Gunakan flange alignment tool atau laser untuk memastikan sebelum pengebolan akhir." },
@@ -553,7 +553,7 @@ export const WAYGROUND_SETS = [
     ]
   },
   {
-    id: "wg6", title: "Vocab Set 1 · 50qs", subtitle: "Kosakata peralatan & pipa 設備", emoji: "📖", color: "#60a5fa", grad: "linear-gradient(135deg,#1e40af,#0369a1)", source: "Wayground / Quizizz",
+    id: "wg6", title: "Vocab Set 1 · 50qs", subtitle: "Kosakata peralatan & pipa 設備", emoji: "📖", color: "#60a5fa", grad: "linear-gradient(135deg,#1e40af,#0369a1)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "Apa arti dari \"pipa air panas\"?", hint: "温=panas/hangat, 水=air, 管=pipa — fokus pada suhu air", opts: ["温水管（おんすいかん）", "給水《きゅうすい》管（きゅうすいかん）", "排水《はいすい》管（はいすいかん）"], opts_id: ["Pipa air panas", "Pipa suplai air", "Pipa pembuangan"], ans: 0, exp: "温水管（おんすいかん）= pipa air panas." },
     { id: 2, q: "Apa arti dari \"katup pengaman\"?", hint: "安=aman, 全=penuh, 弁=katup — melepas tekanan, bukan menutup aliran", opts: ["安全弁《あんぜんべん》（あんぜんべん）", "止水栓（しすいせん）", "開閉弁（かいへいべん）"], opts_id: ["Katup pengaman (safety valve)", "Keran penutup air", "Katup buka-tutup"], ans: 0, exp: "安全弁 = katup pengaman yang melepas tekanan berlebih." },
@@ -610,7 +610,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg7: 第6章 Vocab 50qs ──
   {
-    id: "wg7", title: "Vocab Set 2 · 25qs", subtitle: "Kosakata konstruksi ライフライン", emoji: "📝", color: "#a78bfa", grad: "linear-gradient(135deg,#4c1d95,#6d28d9)", source: "Wayground / Quizizz",
+    id: "wg7", title: "Vocab Set 2 · 25qs", subtitle: "Kosakata konstruksi ライフライン", emoji: "📝", color: "#a78bfa", grad: "linear-gradient(135deg,#4c1d95,#6d28d9)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "Apa bahasa Jepang untuk \"Menyambungkan pipa ke fitting\"?", hint: "継手に管を挿入?", opts: ["継手《つぎて》に管を挿入《そうにゅう》（つぎてにかんをそうにゅう）", "管と継手《つぎて》の固定《こてい》（かんとつぎてのこてい）", "管の据付（かんのすえつけ）"], opts_id: ["Masukkan pipa ke fitting", "Fiksasi pipa dan fitting", "Pemasangan pipa"], ans: 0, exp: "継手に管を挿入 = memasukkan pipa ke fitting/sambungan." },
     { id: 2, q: "Apa bahasa Jepang untuk \"Pekerjaan listrik\"?", hint: "電気設備工事?", opts: ["電気設備《でんきせつび》工事《こうじ》（でんきせつびこうじ）", "電気《でんき》通信工事《こうじ》（でんきつうしんこうじ）", "無電柱化工事《こうじ》（むでんちゅうかこうじ）"], opts_id: ["Pekerjaan instalasi listrik", "Pekerjaan telekomunikasi", "Pekerjaan hapus tiang listrik"], ans: 0, exp: "電気設備工事 = pekerjaan pemasangan instalasi listrik." },
@@ -642,7 +642,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg8: 第6章 Vocab 50qs (2) ──
   {
-    id: "wg8", title: "Vocab Set 3 · 25qs", subtitle: "Kosakata lanjutan ライフライン", emoji: "📋", color: "#f59e0b", grad: "linear-gradient(135deg,#78350f,#b45309)", source: "Wayground / Quizizz",
+    id: "wg8", title: "Vocab Set 3 · 25qs", subtitle: "Kosakata lanjutan ライフライン", emoji: "📋", color: "#f59e0b", grad: "linear-gradient(135deg,#78350f,#b45309)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "Apa bahasa Jepangnya \"Bagian dalam plafon\"?", hint: "天井内?", opts: ["天井《てんじょう》内（てんじょうない）", "屋外《おくがい》露出部分《ぶぶん》（おくがいろしゅつぶぶん）", "屋内露出部分《ぶぶん》（おくないろしゅつぶぶん）"], opts_id: ["Dalam plafon", "Terbuka outdoor", "Terbuka indoor"], ans: 0, exp: "天井内 = ruang di atas plafon tempat pipa dan kabel dipasang." },
     { id: 2, q: "Apa bahasa Jepangnya \"Garasi\"?", hint: "車庫?", opts: ["車庫（しゃこ）", "倉庫（そうこ）", "機械室（きかいしつ）"], opts_id: ["Garasi", "Gudang", "Ruang mesin"], ans: 0, exp: "車庫 = garasi / tempat parkir kendaraan." },
@@ -674,7 +674,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg9: ライフライン 6 (2) 50qs (vocab: 配管・溶接・電気・管路) ──
   {
-    id: "wg9", title: "Vocab Set 4 · 50qs", subtitle: "ライフライン 6 (2) 配管・溶接・電気", emoji: "📘", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)", source: "Wayground / Quizizz",
+    id: "wg9", title: "Vocab Set 4 · 50qs", subtitle: "ライフライン 6 (2) 配管・溶接・電気", emoji: "📘", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "Apa bahasa Jepangnya \"Lokasi konstruksi\"?", hint: "建設現場?", opts: ["建設現場《けんせつげんば》（けんせつげんば）", "建設工事《けんせつこうじ》（けんせつこうじ）", "施工《せこう》（せこう）"], opts_id: ["Lokasi konstruksi", "Pekerjaan konstruksi", "Pelaksanaan konstruksi"], ans: 0, exp: "建設現場 = lokasi konstruksi / construction site." },
     { id: 2, q: "Apa bahasa Jepangnya \"Kualitas\"?", hint: "品質?", opts: ["品質《ひんしつ》（ひんしつ）", "工程《こうてい》（こうてい）", "安全《あんぜん》（あんぜん）"], opts_id: ["Kualitas", "Proses", "Keselamatan"], ans: 0, exp: "品質 = kualitas / quality." },
@@ -731,7 +731,7 @@ export const WAYGROUND_SETS = [
   // ── wg10: ライフライン第5章20QS (4) 20qs (fill-in-blank: 電気設備工事) ──
   // ── wg11: ライフライン言葉第5章 50qs (vocab: 電気・配管 設備用語) ──
   {
-    id: "wg11", title: "Vocab Set 5 · 50qs", subtitle: "ライフライン言葉第5章 設備用語", emoji: "📗", color: "#4ade80", grad: "linear-gradient(135deg,#14532d,#15803d)", source: "Wayground / Quizizz",
+    id: "wg11", title: "Vocab Set 5 · 50qs", subtitle: "ライフライン言葉第5章 設備用語", emoji: "📗", color: "#4ade80", grad: "linear-gradient(135deg,#14532d,#15803d)", source: "wayground-quizizz",
     questions: [
     { id: 1, q: "Apa bahasa Jepangnya \"Peralatan pendingin udara (AC)\"?", hint: "空気調和設備?", opts: ["冷暖房機器《きき》（れいだんぼうきき）", "空気《くうき》調和設備《せつび》（くうきちょうわせつび）", "換気《かんき》扇（かんきせん）"], opts_id: ["Peralatan pemanas/pendingin", "Peralatan AC", "Kipas ventilasi"], ans: 1, exp: "空気調和設備 = peralatan pendingin udara / AC equipment." },
     { id: 2, q: "Apa bahasa Jepangnya \"Baut anchor\"?", hint: "アンカーボルト?", opts: ["アンカーボルト", "吊りボルト（つりボルト）", "ねじゲージ"], opts_id: ["Anchor bolt", "Hanging bolt", "Pengukur ulir"], ans: 0, exp: "アンカーボルト = baut anchor / baut penahan ke beton." },
@@ -790,7 +790,7 @@ export const WAYGROUND_SETS = [
   {
     id: "wg12", title: "Vocab Teori Set 1 · 22qs", subtitle: "学科キーワード 法規・安全・施工管理",
     emoji: "📋", color: "#dc2626", grad: "linear-gradient(135deg,#7f1d1d,#b91c1c)",
-    source: "vocab_teori v84",
+    source: "wayground-vocab",
     questions: [
     { id: 1, q: "建設業《けんせつぎょう》を営む《いとなむ》には何《なに》が必要《ひつよう》か？", hint: "UU 建設業法 — wajib punya ini sebelum terima proyek", opts: ["許可《きょか》", "届出《とどけで》", "申請書《しんせいしょ》"], opts_id: ["Izin usaha", "Pemberitahuan/notifikasi", "Surat permohonan"], ans: 0, exp: "建設業法により、建設工事を請け負うには国土交通大臣または都道府県知事の【許可】が必要。許可なしで受注 = 違法。ただし500万円未満（建築一式は1500万円未満）は軽微な工事として許可不要。" },
     { id: 2, q: "発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》を何と《なんと》いうか？", hint: "発注者 → ○○ → 下請け", opts: ["元請け《もとうけ》", "下請け《したうけ》", "専門業者《せんもんぎょうしゃ》"], opts_id: ["Kontraktor utama", "Sub-kontraktor", "Kontraktor spesialis"], ans: 0, exp: "元請け = pihak yang menerima proyek LANGSUNG dari pemilik proyek (発注者). 元請けが下請けを管理し、全体の責任を負う。元請けが下請けに依頼する契約も請負契約。" },

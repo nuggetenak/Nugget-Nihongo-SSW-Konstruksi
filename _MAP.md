@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-27 by Crispy (Claude agent)
-> **Status:** Architecture refactored from v87 monolith → modular multi-file
+> **Last updated:** 2026-04-27 by Crispy (Phase 1 Foundation complete)
+> **Status:** Phase 1 DONE — data normalized, IDs sequential, furi 100%, answer indexing unified
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, 1.34 MB, WORKING)
 
 ---
@@ -82,10 +82,10 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 ```js
 {
-  id: 42,                        // Unique numeric ID (non-sequential, has gaps)
+  id: 42,                        // Unique numeric ID — SEQUENTIAL 1-1438, no gaps
   category: "listrik",           // Category key (see CATEGORIES)
-  source: "text5l",              // Source PDF/CSV identifier
-  furi: "せっちぼう",              // Hiragana reading (ONLY on ~708 vocab cards, missing on ~730)
+  source: "jac-ch5",             // Canonical source key (see list below)
+  furi: "せっちぼう",              // Hiragana reading — ALL 1438 cards have this field
   jp: "接地棒",                   // Japanese text (kanji, may contain inline furigana)
   romaji: "secchibou",           // Romanization
   id_text: "Batang pentanahan",  // Indonesian translation (short)
@@ -95,7 +95,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 **12 categories:** salam, hukum, jenis_kerja, listrik, telekomunikasi, pipa, isolasi, pemadam, keselamatan, karier, alat_umum, (+ virtual: bintang)
 
-**17 sources:** text1l, text2, text3, text4, text5l, text6l, text7l, tt_sample, tt_sample2, st_sample_l, st_sample2_l, lifeline4, vocab_jac, vocab_core, vocab_exam, vocab_teori
+**16 canonical sources:** jac-ch1, jac-ch2, jac-ch3, jac-ch4, jac-ch5, jac-ch6, jac-ch7, jac-gakka1, jac-gakka2, jac-jitsugi1, jac-jitsugi2, vocab-lifeline, vocab-jac, vocab-core, vocab-exam, vocab-teori
 
 ### 3.2 JAC_OFFICIAL (exam questions)
 
@@ -108,11 +108,11 @@ Nugget-Nihongo-SSW-Konstruksi/
   hiragana: "さぎょう...",        // Full hiragana reading (separate field!)
   id_text: "Pertemuan harian...", // Question in Indonesian
   options: ["朝礼（...）", ...],  // Array of option strings (mixed JP+ID)
-  answer: 1,                     // ⚠ 1-BASED INDEX (1 = first option)
+  answer: 0,                     // 0-BASED INDEX — UNIFIED with Wayground (Phase 1)
   hasPhoto: false,               // Whether original has a photo
   photoDesc: null,               // Text description of photo if hasPhoto
   explanation: "朝礼 = ...",     // Indonesian explanation
-  related_card_id: 4             // Links to CARDS[].id
+  related_card_id: 1             // Links to CARDS[].id (renumbered in Phase 1)
 }
 ```
 
@@ -139,14 +139,14 @@ Nugget-Nihongo-SSW-Konstruksi/
 }
 ```
 
-### ⚠ CRITICAL: Answer Index Mismatch
+### ✅ Answer Indexing — UNIFIED (Phase 1)
 
-| Data Source   | Index Base | `answer: 1` means |
-|---------------|-----------|-------------------|
-| JAC_OFFICIAL  | 1-based   | First option      |
-| WAYGROUND_SETS| 0-based   | **Second** option |
+| Data Source    | Index Base | `answer: 0` means |
+|----------------|-----------|-------------------|
+| JAC_OFFICIAL   | 0-based   | First option      |
+| WAYGROUND_SETS | 0-based   | First option      |
 
-**This is the #1 source of bugs.** Any agent editing questions MUST check which schema they're in.
+Both sources now use **0-based indexing**. This was unified in Phase 1 (JAC was previously 1-based).
 
 ---
 
@@ -205,8 +205,8 @@ Currently there is NO bundler configured. The monolith in `legacy/` works as-is.
 
 ### 🔴 HIGH Priority
 - [ ] **Wire up multi-file imports** — files are extracted but not bundled/tested together
-- [ ] **Unify answer indexing** — JAC (1-based) vs Wayground (0-based)
-- [ ] **Add furi field to all 730 cards** missing it (text/st/tt sources)
+- [x] ~~**Unify answer indexing** — JAC (1-based) → all 0-based~~ ✅ Phase 1
+- [x] ~~**Add furi field to all 730 cards** missing it~~ ✅ Phase 1 (romaji→hiragana auto-converted)
 - [ ] **Add bundler** (esbuild or vite) to produce deployable output
 
 ### 🟡 MEDIUM Priority
@@ -214,9 +214,9 @@ Currently there is NO bundler configured. The monolith in `legacy/` works as-is.
 - [ ] **Integrate shared hooks** into mode components (replace duplicated patterns)
 - [ ] **Build `<QuizShell>` wrapper** — unify quiz UX across all modes
 - [ ] **Build `<ResultScreen>` component** — unify result screens
-- [ ] **Fix romaji typo** in card id:1202 (`supeeसाaa` → `supeesaa`)
-- [ ] **Remove duplicate Wayground questions** (wt1 Q4 ≈ Q5)
-- [ ] **Normalize source names** to canonical format
+- [x] ~~**Fix romaji typo** in card id:1202 (`supeeसाaa` → `supeesaa`)~~ ✅ Phase 1
+- [x] ~~**Remove duplicate Wayground questions** (wt1 Q4 ≈ Q5)~~ ✅ Phase 1 (Q5 removed, Q4 kept with merged explanation)
+- [x] ~~**Normalize source names** to canonical format~~ ✅ Phase 1 (16 canonical names)
 
 ### 🟢 LOW Priority
 - [ ] Add onboarding flow for new users
@@ -260,26 +260,26 @@ Currently there is NO bundler configured. The monolith in `legacy/` works as-is.
 
 ## 9. Content Sources Traceability
 
-| Source Key | Origin | Notes |
-|-----------|--------|-------|
-| text1l | JAC PDF Ch.1 — 挨拶・安全管理 | Greetings, morning assembly, KY, 5S |
-| text2 | JAC PDF Ch.2 — 法規 | Laws: labor, safety, construction, recycling |
-| text3 | JAC PDF Ch.3 — 工事の種類 | Work types: lifeline, equipment, building |
-| text4 | JAC PDF Ch.4 — 施工管理 | Construction management, surveying, formwork |
-| text5l | JAC PDF Ch.5 — 工具・機械 | Tools, equipment, measuring instruments |
-| text6l | JAC PDF Ch.6 — 配管・保温保冷 | Piping, insulation, HVAC |
-| text7l | JAC PDF Ch.7 — キャリア | Career, qualifications, CCUS |
-| tt_sample | JAC sample exam — 学科 Set 1 | 25 theory questions with photos |
-| tt_sample2 | JAC sample exam — 学科 Set 2 | 36 theory questions |
-| st_sample_l | JAC sample exam — 実技 Set 1 | 22 practical questions |
-| st_sample2_l | JAC sample exam — 実技 Set 2 | 12 practical questions |
-| lifeline4 | Wayground CSV — vocab from sensei | 260 lifeline/equipment vocab cards |
-| vocab_jac | Agent-generated from JAC questions | 103 vocab cards from exam content |
-| vocab_core | Agent-generated core terms | 22 core construction vocab |
-| vocab_exam | Agent-generated exam vocab | 249 exam-focused vocab cards |
-| vocab_teori | Agent-generated theory vocab | 54 law/safety management vocab |
-| CSV v2 / JAC Official | Wayground CSV teori sets | Used in WAYGROUND_SETS (wt1-wt10) |
-| Wayground / Quizizz | Wayground quiz platform | Used in WAYGROUND_SETS (wp1-wp3, wg*) |
+| Source Key | Old Key | Origin | Notes |
+|-----------|---------|--------|-------|
+| jac-ch1 | text1l | JAC PDF Ch.1 — 挨拶・安全管理 | Greetings, morning assembly, KY, 5S |
+| jac-ch2 | text2 | JAC PDF Ch.2 — 法規 | Laws: labor, safety, construction, recycling |
+| jac-ch3 | text3 | JAC PDF Ch.3 — 工事の種類 | Work types: lifeline, equipment, building |
+| jac-ch4 | text4 | JAC PDF Ch.4 — 施工管理 | Construction management, surveying, formwork |
+| jac-ch5 | text5l | JAC PDF Ch.5 — 工具・機械 | Tools, equipment, measuring instruments |
+| jac-ch6 | text6l | JAC PDF Ch.6 — 配管・保温保冷 | Piping, insulation, HVAC |
+| jac-ch7 | text7l | JAC PDF Ch.7 — キャリア | Career, qualifications, CCUS |
+| jac-gakka1 | tt_sample | JAC sample exam — 学科 Set 1 | 25 theory questions with photos |
+| jac-gakka2 | tt_sample2 | JAC sample exam — 学科 Set 2 | 36 theory questions |
+| jac-jitsugi1 | st_sample_l | JAC sample exam — 実技 Set 1 | 22 practical questions |
+| jac-jitsugi2 | st_sample2_l | JAC sample exam — 実技 Set 2 | 12 practical questions |
+| vocab-lifeline | lifeline4 | Wayground CSV — vocab from sensei | 260 lifeline/equipment vocab cards |
+| vocab-jac | vocab_jac | Agent-generated from JAC questions | 103 vocab cards from exam content |
+| vocab-core | vocab_core | Agent-generated core terms | 22 core construction vocab |
+| vocab-exam | vocab_exam | Agent-generated exam vocab | 249 exam-focused vocab cards |
+| vocab-teori | vocab_teori | Agent-generated theory vocab | 54 law/safety management vocab |
+
+Old→new ID mapping: `docs/id-mapping-v87-to-v90.json` (1438 entries)
 
 Official JAC source: https://global.jac-skill.or.jp/indonesia/examination/documents.php
 
