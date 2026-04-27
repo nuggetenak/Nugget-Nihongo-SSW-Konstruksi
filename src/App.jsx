@@ -1,11 +1,11 @@
 // ─── SSW Konstruksi · by Nugget Nihongo ─────────────────────────────────────
-// v2.1 — Phase 3: Full UX overhaul + 3-track navigation
+// v2.2 — Crunchy QA: track filtering, SOURCE_META fix, export/import
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useCallback } from "react";
 import { T } from "./styles/theme.js";
 import { CARDS } from "./data/cards.js";
-import { CATEGORIES, getCatInfo, VOCAB_SOURCES } from "./data/categories.js";
+import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from "./data/categories.js";
 import { usePersistedState } from "./hooks/usePersistedState.js";
 
 // Components
@@ -27,6 +27,7 @@ import SprintMode from "./modes/SprintMode.jsx";
 import FocusMode from "./modes/FocusMode.jsx";
 import GlossaryMode from "./modes/GlossaryMode.jsx";
 import SumberMode from "./modes/SumberMode.jsx";
+import ExportMode from "./modes/ExportMode.jsx";
 
 // ─── Onboarding ──────────────────────────────────────────────────────────────
 function Onboarding({ onComplete }) {
@@ -78,12 +79,12 @@ const LAINNYA_MODES = [
   { key: "glosari", icon: "📖", label: "Glosari",   desc: "Kamus terurut" },
   { key: "sumber",  icon: "📂", label: "Sumber",    desc: "Per PDF sumber" },
   { key: "stats",   icon: "📊", label: "Statistik", desc: "Progress & kelemahan" },
+  { key: "ekspor",  icon: "💾", label: "Ekspor",    desc: "Simpan & pulihkan progress" },
 ];
 
 function ModeGrid({ modes, onSelect, title }) {
   return (
     <div style={{ padding: "0 16px 24px", maxWidth: T.maxW, margin: "0 auto" }}>
-      {/* Header */}
       <div style={{ padding: "16px 0 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ fontSize: 17, fontWeight: 800 }}>
           <span style={{ background: T.accent, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{title}</span>
@@ -153,10 +154,22 @@ export default function App() {
     });
   };
 
-  // ── Filtered Cards ──
+  // ── Track-aware Category & Card Filtering ──
+  // Categories valid for the current track (for pills + card filtering)
+  const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
+
+  // Visible category pills: only show cats in the current track
+  const visibleCats = CATEGORIES.filter(c =>
+    c.key !== "bintang" && (c.key === "all" || !trackCatKeys || trackCatKeys.has(c.key))
+  );
+
+  // Filtered cards: must be in track categories AND match activeCats pill
   const filteredCards = CARDS.filter(c => {
     const isVocab = VOCAB_SOURCES.includes(c.source);
     if (vocabMode !== isVocab) return false;
+    // Track filter: only include cards whose category belongs to the current track
+    if (trackCatKeys && !trackCatKeys.has(c.category)) return false;
+    // Category pill filter
     if (activeCats.has("all")) return true;
     return activeCats.has(c.category);
   });
@@ -165,6 +178,12 @@ export default function App() {
   const goMode = (m) => { setMode(m); window.scrollTo({ top: 0, behavior: "instant" }); };
   const exitMode = () => { setMode(null); window.scrollTo({ top: 0, behavior: "instant" }); };
   const goTab = (t) => { setTab(t); setMode(null); window.scrollTo({ top: 0, behavior: "instant" }); };
+
+  // ─ When track changes, reset activeCats so no stale cross-track selection persists ─
+  const handleTrackSelect = (t) => {
+    setTrack(t);
+    setActiveCats(new Set(["all"]));
+  };
 
   // ═══ FLOW: Onboarding → Track → App ═══
 
@@ -175,7 +194,7 @@ export default function App() {
 
   // 2. Track Picker
   if (!track) {
-    return <TrackPicker onSelect={(t) => setTrack(t)} />;
+    return <TrackPicker onSelect={handleTrackSelect} />;
   }
 
   // 3. Active Mode (full screen, no bottom nav)
@@ -194,6 +213,7 @@ export default function App() {
       fokus:    <FocusMode known={knownSet} unknown={unknownSet} quizWrong={quizWrong} onExit={exitMode} />,
       glosari:  <GlossaryMode onExit={exitMode} />,
       sumber:   <SumberMode onExit={exitMode} />,
+      ekspor:   <ExportMode onExit={exitMode} />,
     };
     return modeMap[mode] || null;
   }
@@ -222,9 +242,9 @@ export default function App() {
               </button>
             ))}
           </div>
-          {/* Category pills */}
+          {/* Category pills — only show categories valid for current track */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 6 }}>
-            {CATEGORIES.filter(c => c.key !== "bintang").map(c => {
+            {visibleCats.map(c => {
               const active = activeCats.has(c.key);
               return (
                 <button key={c.key} onClick={() => toggleCat(c.key)} style={{
@@ -233,12 +253,12 @@ export default function App() {
                   border: `1px solid ${active ? "rgba(251,191,36,0.30)" : T.border}`,
                   color: active ? T.gold : T.textFaint,
                   transition: "all 0.15s",
-                }}>{c.emoji}</button>
+                }}>{c.emoji} {c.label}</button>
               );
             })}
           </div>
           <div style={{ fontSize: 11, color: T.textDim, marginBottom: 8 }}>
-            {filteredCards.length} kartu dipilih
+            {filteredCards.length} kartu · jalur {T.track[track]?.label}
           </div>
         </div>
       )}
@@ -249,6 +269,7 @@ export default function App() {
           known={knownSet}
           unknown={unknownSet}
           track={track}
+          filteredCount={filteredCards.length}
           onNavigate={goMode}
           onChangeTrack={() => setTrack(null)}
         />
