@@ -1,6 +1,6 @@
 {
   "name": "nugget-nihongo-ssw-konstruksi",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "private": true,
   "description": "Aplikasi belajar ujian SSW Konstruksi Jepang — flashcard, kuis, simulasi, SRS",
   "type": "module",
@@ -15,7 +15,10 @@
     "lint:fix": "eslint src --fix",
     "format": "prettier --write src --ignore-path .prettierignore",
     "format:check": "prettier --check src --ignore-path .prettierignore",
-    "validate": "npm run lint && npm run test && npm run build"
+    "validate": "npm run lint && npm run test && npm run build",
+    "audit:baseline": "npm run build",
+    "audit:integrity": "node scripts/audit-integrity.mjs",
+    "audit:full": "npm run audit:integrity && npm run build"
   },
   "dependencies": {
     "react": "^19.1.0",
