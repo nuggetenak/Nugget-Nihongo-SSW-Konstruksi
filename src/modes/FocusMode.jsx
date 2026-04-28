@@ -41,15 +41,7 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
     <div style={{ padding: '24px 16px', maxWidth: T.maxW, margin: '0 auto' }}>
       <button
         onClick={onExit}
-        style={{
-          fontFamily: 'inherit',
-          fontSize: 12,
-          color: T.textMuted,
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          marginBottom: 16,
-        }}
+        style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16 }}
       >
         ← Kembali
       </button>
@@ -57,6 +49,19 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
       <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 20 }}>
         Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.
       </p>
+
+      {catStats.length === 0 && (
+        <div style={{ padding: '40px 0', textAlign: 'center', animation: 'fadeIn 0.3s ease' }}>
+          <div style={{ fontSize: 44, marginBottom: 12 }}>✨</div>
+          <div style={{ fontSize: 15, fontWeight: 800, marginBottom: 8 }}>Belum ada kartu lemah</div>
+          <div style={{ fontSize: 13, color: T.textMuted, lineHeight: 1.6, marginBottom: 20 }}>
+            Lanjutkan kuis dulu, lalu kembali ke sini untuk latihan intensif.
+          </div>
+          <button onClick={() => onExit()} style={{ fontFamily: 'inherit', padding: '11px 24px', fontSize: 13, fontWeight: 700, borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer' }}>
+            Mulai Kuis →
+          </button>
+        </div>
+      )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {catStats.map((c) => (

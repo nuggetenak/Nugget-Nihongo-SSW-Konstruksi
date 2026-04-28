@@ -1,6 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { applyTheme } from './styles/theme.js';
+import { ToastProvider } from './components/Toast.jsx';
+import { ConfirmProvider } from './components/ConfirmDialog.jsx';
 import App from './App.jsx';
 
 // Apply theme immediately — prevents flash of wrong theme before React hydrates
@@ -13,4 +15,10 @@ const savedDark = (() => {
 })();
 applyTheme(savedDark);
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(
+  <ToastProvider>
+    <ConfirmProvider>
+      <App />
+    </ConfirmProvider>
+  </ToastProvider>
+);

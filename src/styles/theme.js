@@ -147,6 +147,12 @@ if (typeof document !== 'undefined') {
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
     @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
     @keyframes scaleIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
+    @keyframes flipIn { from{transform:rotateY(90deg);opacity:0} to{transform:rotateY(0deg);opacity:1} }
+    @keyframes toastIn { from{opacity:0;transform:translateY(20px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes toastOut { from{opacity:1;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(20px) scale(0.95)} }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
     html { transition: background-color 0.2s ease; }
     body { background:var(--ssw-bg); color:var(--ssw-text); margin:0; }
     *::-webkit-scrollbar { width:4px; }

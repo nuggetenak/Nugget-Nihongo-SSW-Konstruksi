@@ -11,6 +11,7 @@ import { getCatInfo } from '../data/categories.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import ProgressBar from '../components/ProgressBar.jsx';
+import { useToast } from '../components/Toast.jsx';
 
 export default function FlashcardMode({ cards, known, unknown, onMark, onExit, srs, starred = new Set(), onToggleStar = () => {} }) {
   // ── Core state ──
@@ -18,6 +19,7 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
+  const toast = useToast();
 
   // ── Search + filter ──
   const [search, setSearch] = useState('');
@@ -110,6 +112,7 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   // ── Mark actions ────────────────────────────────────────────────────────
   const markCard = useCallback((type) => {
     if (!card) return;
+    const prevType = known.has(card.id) ? 'known' : unknown.has(card.id) ? 'unknown' : null;
     if (srs?.ready) {
       const rating = type === 'known' ? 3 : 1;
       const result = srs.review(card.id, rating);
@@ -117,8 +120,14 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
     } else {
       onMark?.(card.id, type);
     }
+    const label = type === 'known' ? 'Kartu ditandai hafal ✓' : 'Kartu ditandai belum ✗';
+    toast.show(label, {
+      undo: prevType
+        ? () => onMark?.(card.id, prevType)
+        : undefined,
+    });
     setTimeout(() => go(1), 300);
-  }, [card, srs, onMark, go]);
+  }, [card, srs, onMark, go, toast, known, unknown]);
 
   const handleRate = useCallback((rating) => {
     if (!card) return;
@@ -143,11 +152,12 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
       setOrder(rebuildOrder(sortMode));
       setIdx(0);
       setFlipped(false);
+      toast.show('Progres direset');
     } else {
       setConfirmReset(true);
       confirmTimer.current = setTimeout(() => setConfirmReset(false), 3000);
     }
-  }, [confirmReset, onMark, rebuildOrder, sortMode]);
+  }, [confirmReset, onMark, rebuildOrder, sortMode, toast]);
 
   // ── Keyboard ────────────────────────────────────────────────────────────
   useEffect(() => {
