@@ -518,5 +518,48 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 - Phase 9: Beginner UX
 - Phase 10: QA + release
 
-### Next session: start from Phase 4
-Read `docs/UX-OVERHAUL-PROPOSAL.md` Phase 4 spec before starting.
+### UX Overhaul progress
+| UX Phase | Status | Summary |
+|----------|--------|---------|
+| 1 — Smart Text (JpFront + DescBlock) | ✅ | v87 smart layouts + DescBlock parser |
+| 2 — FlashcardMode restore | ✅ | Search, star, stats row, tools row, FSRS binary+longpress |
+| 3 — QuizMode restore | ✅ | Count selector, lemah mode, anti-repeat, settings, after-answer reveal |
+| 4 — JAC + Wayground + Simulasi | ✅ | See §14 below |
+| 5 — DangerMode + AngkaMode | ⬜ | Next |
+| 6 — Filter popup + Star + App UX | ⬜ | |
+| 7 — Dashboard overhaul | ⬜ | |
+| 8 — Visual polish + empty states | ⬜ | |
+| 9 — Beginner UX | ⬜ | |
+| 10 — QA + release | ⬜ | |
+
+### Next session: start from UX Phase 5
+Files: `src/modes/DangerMode.jsx`, `src/modes/AngkaMode.jsx`
+Read `docs/UX-OVERHAUL-PROPOSAL.md` Phase 5 spec before starting.
+
+---
+
+## 14. UX Overhaul Phase 4 Changelog (2026-04-28)
+
+### QuizShell
+- Added `onFinish({ correct, total, maxStreak })` callback prop (fires via useEffect on 'finished')
+
+### JACMode
+- **Lemah mode**: filter + sort by wrong-count from `ssw-wrong-counts`; empty state if none
+- **Score tracking**: `ssw-jac-scores` localStorage — `{setKey: {score,total,pct,date}}`
+- **Last score badge**: color-coded pct shown on each set card (green ≥70, amber ≥50, red <50)
+- **Auto-delay setting**: 1s / 1.5s / 2s / Manual — passed to QuizShell as `autoNextDelay`
+
+### WaygroundMode
+- **Score + maxStreak tracking**: `ssw-wg-scores` — `{setId: {score,total,pct,maxStreak,date}}`
+- **Last score badge**: pct + 🔥maxStreak shown on each set card
+- **Color stripe**: left-border accent per set, grouped section headers with divider lines
+
+### SimulasiMode (fully standalone — no QuizShell)
+- **Pre-start screen**: instructions + 3 preset cards (emoji + label + sub)
+- **BIG countdown timer**: 24px bold in header box, pulses red when <60s
+- **Auto-advance**: 1.5s after answering; also manual "Lanjut →" button
+- **Auto-finish**: timer hits 0 → phase = 'result'
+- **Options shuffled**: shuffle per question, origIdx tracked for correct-answer check
+- **LULUS / BELUM LULUS result**: 65% threshold, progress bar, large bold verdict
+- **Wrong answer review**: JP + ID + ✗ user answer + ✓ correct + explanation
+
