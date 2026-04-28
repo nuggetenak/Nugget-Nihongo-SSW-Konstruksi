@@ -48,7 +48,7 @@ export default function ReviewMode({ srs, onExit }) {
   const handleRate = useCallback(async (rating) => {
     if (!flipped || currentId == null) return;
 
-    const result = await srs.review(currentId, rating);
+    const result = srs.review(currentId, rating);
     setLast({ rating, interval: result.interval });
     if (result.isKnown) setSessionCorrect(n => n + 1);
 
