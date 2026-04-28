@@ -1,59 +1,53 @@
-// ─── Wrong-Answer Tracking Utilities ─────────────────────────────────────────
-// Backward-compatible: handles both old format (plain number) and new format ({count, lastWrong})
+// ─── wrong-tracker.js ─────────────────────────────────────────────────────────
+// Storage: pure localStorage (GitHub Pages standalone deployment).
+// No window.storage, no Claude dependency.
+// ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Get wrong-answer count from a stored value.
- * Handles both legacy (number) and current ({count, lastWrong}) formats.
- */
+// ── Wrong-answer value helpers ─────────────────────────────────────────────
+// Backward-compatible: handles old format (plain number) and current ({count, lastWrong})
+
 export function getWrongCount(val) {
   if (!val) return 0;
-  return typeof val === "number" ? val : (val.count || 0);
+  return typeof val === 'number' ? val : (val.count || 0);
 }
 
-/**
- * Get timestamp of last wrong answer.
- */
 export function getWrongTime(val) {
-  if (!val || typeof val === "number") return null;
+  if (!val || typeof val === 'number') return null;
   return val.lastWrong || null;
 }
 
-/**
- * Create a new wrong-answer entry, incrementing count.
- */
 export function makeWrongEntry(existing, now = Date.now()) {
   return { count: getWrongCount(existing) + 1, lastWrong: now };
 }
 
-// ─── Storage Key Constants ───────────────────────────────────────────────────
+// ── Storage key constants ──────────────────────────────────────────────────
 export const STORAGE_KEYS = {
-  QUIZ_WRONG:  "ssw-quiz-wrong",
-  JAC_WRONG:   "ssw-wrong-counts",
-  WG_WRONG:    (setId) => `ssw-wg-wrong-${setId}`,
-  KNOWN:       "ssw-known",
-  UNKNOWN:     "ssw-unknown",
-  STARRED:     "ssw-starred",
+  QUIZ_WRONG: 'ssw-quiz-wrong',
+  JAC_WRONG:  'ssw-wrong-counts',
+  WG_WRONG:   (setId) => `ssw-wg-wrong-${setId}`,
+  KNOWN:      'ssw-known',
+  UNKNOWN:    'ssw-unknown',
+  STARRED:    'ssw-starred',
 };
 
-// ─── Storage Helpers ─────────────────────────────────────────────────────────
+// ── Storage helpers (synchronous localStorage) ─────────────────────────────
+// Async signatures kept for API compatibility with usePersistedState.
+// In practice these resolve immediately — no loading flash.
 
-/**
- * Load a JSON value from persistent storage.
- * Returns defaultVal if key doesn't exist or parse fails.
- */
-export async function loadFromStorage(key, defaultVal = null) {
+export function loadFromStorage(key, defaultVal = null) {
   try {
-    const result = await window.storage.get(key);
-    if (result) return JSON.parse(result.value);
+    const raw = localStorage.getItem(key);
+    if (raw !== null) return JSON.parse(raw);
   } catch {}
   return defaultVal;
 }
 
-/**
- * Save a JSON value to persistent storage.
- */
-export async function saveToStorage(key, value) {
+export function saveToStorage(key, value) {
   try {
-    await window.storage.set(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
   } catch {}
+}
+
+export function removeFromStorage(key) {
+  try { localStorage.removeItem(key); } catch {}
 }
