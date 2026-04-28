@@ -1,5 +1,47 @@
 # Changelog
 
+## [3.1.0] - 2026-04-29
+
+### Phase 12 — Vocab DB Build
+
+#### New Files
+- `src/data/csv-sets.js` — **300 soal SSW Konstruksi Setsubi** dari CSV agent Claude:
+  - 12 sets: `ct01–ct06` (Teori, 30qs each) + `cp01–cp06` (Praktik, 20qs each)
+  - Format: 4-choice (A/B/C/D), full bilingual JP↔ID, rich pedagogical explanations
+  - Imported into WaygroundMode under "CSV Teori" dan "CSV Praktik" groups
+
+#### Updated Files
+- `src/data/wayground-sets.js` — Complete **wg7** (46qs) dan **wg8** (45qs):
+  - wg7: Extracted from PDF 07_SSW_ch6_50qs_vocab.pdf (ライフライン第6章 vocab)
+  - wg8: Extracted from PDF 08_SSW_ch6_49qs_vocab2.pdf (続き, deduplicated)
+  - Both: full furigana《》notation, bilingual opts_id, explanations
+- `src/data/index.js` — Added `export { CSV_SETS }` barrel export
+- `src/modes/WaygroundMode.jsx`:
+  - Imports both `WAYGROUND_SETS` and `CSV_SETS` → merged as `ALL_SETS`
+  - Added groups: "CSV Teori" (ct prefix) dan "CSV Praktik" (cp prefix)
+  - Added "Segera Hadir / Coming Soon" section for Doboku (土木) dan Kenchiku (建築) tracks
+  - Title updated: "Soal Teknis · Lifeline" with total soal count
+
+#### Data Summary
+| Source | Sets | Questions |
+|--------|------|-----------|
+| Wayground (wt) | 10 | 199 |
+| Wayground Praktik (wp) | 4 | 80 |
+| Wayground Vocab (wg) | 12 | ~380 |
+| CSV Teori (ct01-06) | 6 | 180 |
+| CSV Praktik (cp01-06) | 6 | 120 |
+| **Total** | **38** | **~959** |
+
+#### Source PDFs Status
+| PDF | Title | Status | Notes |
+|-----|-------|--------|-------|
+| 01-06 | Lifeline 15/10/50/20/15/22qs | ✅ Curated | In wg1-wg6 sets (existing) |
+| 07 | ライフライン第6章 50QS | ✅ Complete | wg7: 46qs (4 cross-dedup removed) |
+| 08 | ライフライン第6章 50QS(2) | ✅ Complete | wg8: 45qs (4 cross-dedup removed) |
+| 09 | ライフライン6(2) | ✅ Existing | wg9: 50qs (previously extracted) |
+| 10 | ライフライン第5章 fill-in | ✅ Existing | wg10: 20qs (previously extracted) |
+| 11 | ライフライン言葉第5章 | ✅ Existing | wg11: 50qs (previously extracted) |
+| 12 | DUPLICATE of PDF 10 | ⏭️ Skipped | As per handoff instructions |
 ## [3.0.1] - 2026-04-28
 
 ### Phase 11 — GlossaryMode A-Z Navigation
