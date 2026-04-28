@@ -525,16 +525,15 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 | 2 — FlashcardMode restore | ✅ | Search, star, stats row, tools row, FSRS binary+longpress |
 | 3 — QuizMode restore | ✅ | Count selector, lemah mode, anti-repeat, settings, after-answer reveal |
 | 4 — JAC + Wayground + Simulasi | ✅ | See §14 below |
-| 5 — DangerMode + AngkaMode | ⬜ | Next |
+| 5 — DangerMode + AngkaMode | ✅ | Browse panel + standalone quiz + after-answer reveal |
 | 6 — Filter popup + Star + App UX | ⬜ | |
 | 7 — Dashboard overhaul | ⬜ | |
 | 8 — Visual polish + empty states | ⬜ | |
 | 9 — Beginner UX | ⬜ | |
 | 10 — QA + release | ⬜ | |
 
-### Next session: start from UX Phase 5
-Files: `src/modes/DangerMode.jsx`, `src/modes/AngkaMode.jsx`
-Read `docs/UX-OVERHAUL-PROPOSAL.md` Phase 5 spec before starting.
+### Next session: start from UX Phase 6
+Files: `src/App.jsx`, `src/components/Dashboard.jsx`, new `src/components/FilterPopup.jsx`
 
 ---
 

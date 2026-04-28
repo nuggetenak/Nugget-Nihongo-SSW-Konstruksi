@@ -5,7 +5,7 @@
 import { useState, useCallback, useMemo, useEffect, lazy, Suspense } from 'react';
 import { T, applyTheme } from './styles/theme.js';
 import { CARDS } from './data/cards.js';
-import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from './data/categories.js';
+import { getCatsForTrack, VOCAB_SOURCES } from './data/categories.js';
 import { usePersistedState } from './hooks/usePersistedState.js';
 import { useSRS } from './hooks/useSRS.js';
 
@@ -13,6 +13,7 @@ import { useSRS } from './hooks/useSRS.js';
 import TrackPicker from './components/TrackPicker.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import Dashboard from './components/Dashboard.jsx';
+import FilterPopup from './components/FilterPopup.jsx';
 
 // Modes
 const FlashcardMode = lazy(() => import('./modes/FlashcardMode.jsx'));
@@ -306,9 +307,10 @@ export default function App() {
   });
   const [track, setTrack] = usePersistedState('ssw-track', null);
   const [tab, setTab] = useState('home');
-  const [mode, setMode] = useState(null);
+  const [mode, setMode] = usePersistedState('ssw-last-mode', null);
   const [vocabMode, setVocabMode] = useState(false);
   const [activeCats, setActiveCats] = useState(new Set(['all']));
+  const [filterOpen, setFilterOpen] = useState(false);
 
   // ── Known/Unknown ──
   const [known, setKnown] = usePersistedState('ssw-known', []);
@@ -360,15 +362,14 @@ export default function App() {
   // ── Track-aware filtering ──
   const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
 
-  const visibleCats = CATEGORIES.filter(
-    (c) => c.key !== 'bintang' && (c.key === 'all' || !trackCatKeys || trackCatKeys.has(c.key))
-  );
+  // (filteredCards built below — toggleCat handled via FilterPopup onApply)
 
   const filteredCards = CARDS.filter((c) => {
     const isVocab = VOCAB_SOURCES.includes(c.source);
     if (vocabMode !== isVocab) return false;
     if (trackCatKeys && !trackCatKeys.has(c.category)) return false;
     if (activeCats.has('all')) return true;
+    if (activeCats.has('bintang')) return starredSet.has(c.id);
     return activeCats.has(c.category);
   });
 
@@ -383,18 +384,6 @@ export default function App() {
   );
   const srs = useSRS(trackCardIds);
 
-  // ── Category toggle ──
-  const toggleCat = (key) => {
-    setActiveCats((prev) => {
-      if (key === 'all') return new Set(['all']);
-      const next = new Set(prev);
-      next.delete('all');
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next.size === 0 ? new Set(['all']) : next;
-    });
-  };
-
   // ── Navigation ──
   const goMode = (m) => {
     setMode(m);
@@ -406,7 +395,7 @@ export default function App() {
   };
   const goTab = (t) => {
     setTab(t);
-    setMode(null);
+    if (t !== 'home') setMode(null); // only clear mode when leaving home context
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -478,74 +467,53 @@ export default function App() {
       {tab === 'belajar' && (
         <div style={{ padding: '12px 16px 0', maxWidth: T.maxW, margin: '0 auto' }}>
           <div style={{ padding: '16px 0 10px' }}>
-            <span
-              style={{
-                fontSize: 17,
-                fontWeight: 800,
-                background: T.accent,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <span style={{ fontSize: 17, fontWeight: 800, background: T.accent, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Belajar
             </span>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              gap: 0,
-              marginBottom: 10,
-              borderRadius: T.r.md,
-              overflow: 'hidden',
-              border: `1px solid ${T.border}`,
-            }}
-          >
-            {[false, true].map((v) => (
-              <button
-                key={String(v)}
-                onClick={() => setVocabMode(v)}
-                style={{
-                  flex: 1,
-                  padding: '7px',
-                  fontSize: 11,
-                  fontWeight: 600,
-                  fontFamily: 'inherit',
-                  border: 'none',
-                  cursor: 'pointer',
-                  background: vocabMode === v ? 'rgba(245,158,11,0.12)' : T.surface,
-                  color: vocabMode === v ? T.gold : T.textDim,
-                }}
-              >
-                {v ? '📝 Kosakata' : '💡 Konsep'}
-              </button>
-            ))}
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 6 }}>
-            {visibleCats.map((c) => {
-              const active = activeCats.has(c.key);
+
+          {/* Materi toggle — prominent with counts */}
+          <div style={{ display: 'flex', gap: 0, marginBottom: 10, borderRadius: T.r.md, overflow: 'hidden', border: `1px solid ${T.border}` }}>
+            {[
+              { v: false, label: '💡 Konsep' },
+              { v: true,  label: '📝 Kosakata' },
+            ].map(({ v, label }) => {
+              const cnt = CARDS.filter((c) => {
+                const isVocab = VOCAB_SOURCES.includes(c.source);
+                if (isVocab !== v) return false;
+                if (trackCatKeys && !trackCatKeys.has(c.category)) return false;
+                return true;
+              }).length;
               return (
                 <button
-                  key={c.key}
-                  onClick={() => toggleCat(c.key)}
-                  style={{
-                    fontFamily: 'inherit',
-                    fontSize: 10,
-                    padding: '3px 8px',
-                    borderRadius: T.r.pill,
-                    cursor: 'pointer',
-                    background: active ? 'rgba(251,191,36,0.12)' : 'transparent',
-                    border: `1px solid ${active ? 'rgba(251,191,36,0.30)' : T.border}`,
-                    color: active ? T.gold : T.textFaint,
-                    transition: 'all 0.15s',
-                  }}
+                  key={String(v)}
+                  onClick={() => { setVocabMode(v); setActiveCats(new Set(['all'])); }}
+                  style={{ flex: 1, padding: '10px', fontSize: 12, fontWeight: vocabMode === v ? 700 : 500, fontFamily: 'inherit', border: 'none', cursor: 'pointer', background: vocabMode === v ? 'rgba(245,158,11,0.12)' : T.surface, color: vocabMode === v ? T.gold : T.textDim, lineHeight: 1.3 }}
                 >
-                  {c.emoji} {c.label}
+                  <div>{label}</div>
+                  <div style={{ fontSize: 10, opacity: 0.65, marginTop: 1 }}>{cnt} kartu</div>
                 </button>
               );
             })}
           </div>
-          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 8 }}>
-            {filteredCards.length} kartu · jalur {T.track[track]?.label}
+
+          {/* Filter popup trigger */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+            <button
+              onClick={() => setFilterOpen(true)}
+              style={{ fontFamily: 'inherit', fontSize: 12, fontWeight: 600, padding: '7px 14px', borderRadius: T.r.pill, cursor: 'pointer', background: activeCats.has('all') ? T.surface : 'rgba(245,158,11,0.10)', border: `1px solid ${activeCats.has('all') ? T.border : T.amber}`, color: activeCats.has('all') ? T.textMuted : T.amber, display: 'flex', alignItems: 'center', gap: 6 }}
+            >
+              <span>⚙ Filter</span>
+              {!activeCats.has('all') && (
+                <span style={{ background: T.amber, color: T.bg, borderRadius: T.r.pill, fontSize: 9, fontWeight: 800, padding: '1px 6px' }}>
+                  {activeCats.size}
+                </span>
+              )}
+              <span style={{ opacity: 0.5 }}>▼</span>
+            </button>
+            <div style={{ fontSize: 11, color: T.textDim }}>
+              {filteredCards.length} kartu
+            </div>
           </div>
         </div>
       )}
@@ -569,6 +537,16 @@ export default function App() {
       {tab === 'lainnya' && <ModeGrid modes={LAINNYA_MODES} onSelect={goMode} title="Lainnya" />}
 
       <BottomNav active={tab} onChange={goTab} />
+
+      <FilterPopup
+        isOpen={filterOpen}
+        onClose={() => setFilterOpen(false)}
+        track={track}
+        vocabMode={vocabMode}
+        activeCats={activeCats}
+        onApply={(newCats) => setActiveCats(newCats)}
+        starredCount={starredSet.size}
+      />
     </div>
   );
 }
