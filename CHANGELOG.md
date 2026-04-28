@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.3.3] - 2026-04-28
+
+### Fixed
+- Bump `CACHE_VERSION` pada `public/sw.js` ke `ssw-v2026-04-28` agar service worker melakukan invalidasi cache lama setelah deploy baru (mencegah pengguna tetap terjebak di bundle lama).
+
 ## [2.3.2] - 2026-04-28
 
 ### Added
