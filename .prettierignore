@@ -1,0 +1,7 @@
+dist/
+node_modules/
+legacy/
+public/sw.js
+src/data/cards.js
+src/data/jac-official.js
+src/data/wayground-sets.js

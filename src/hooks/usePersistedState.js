@@ -10,13 +10,16 @@ export function usePersistedState(key, defaultVal) {
   // Initialize directly from localStorage — synchronous, no useEffect needed
   const [value, setValue] = useState(() => loadFromStorage(key, defaultVal));
 
-  const setPersistedValue = useCallback((updater) => {
-    setValue(prev => {
-      const next = typeof updater === 'function' ? updater(prev) : updater;
-      saveToStorage(key, next);
-      return next;
-    });
-  }, [key]);
+  const setPersistedValue = useCallback(
+    (updater) => {
+      setValue((prev) => {
+        const next = typeof updater === 'function' ? updater(prev) : updater;
+        saveToStorage(key, next);
+        return next;
+      });
+    },
+    [key]
+  );
 
   // Return [value, setter] — drop the `ready` flag, it's always ready now
   return [value, setPersistedValue];

@@ -23,21 +23,23 @@ export function useSRS(trackCardIds = []) {
   initStore();
 
   // Keep ref current
-  useEffect(() => { idsRef.current = trackCardIds; }, [trackCardIds]);
+  useEffect(() => {
+    idsRef.current = trackCardIds;
+  }, [trackCardIds]);
 
   // Derived values — recomputed on every render (cheap, all in-memory)
   const dueCount = getDueCardIds(trackCardIds).length;
-  const stats    = getSRSStats(trackCardIds);
+  const stats = getSRSStats(trackCardIds);
 
   // Record a review — updates store + triggers re-render for dueCount/stats
   const review = useCallback((cardId, rating) => {
     const result = recordReview(cardId, rating);
-    forceRender(n => n + 1);
+    forceRender((n) => n + 1);
     return result;
   }, []);
 
-  const getDue     = useCallback(() => getDueCardIds(idsRef.current), []);
-  const getInfo    = useCallback((id) => getCardSRSInfo(id), []);
+  const getDue = useCallback(() => getDueCardIds(idsRef.current), []);
+  const getInfo = useCallback((id) => getCardSRSInfo(id), []);
   const previewFor = useCallback((id) => previewIntervals(id), []);
 
   return {

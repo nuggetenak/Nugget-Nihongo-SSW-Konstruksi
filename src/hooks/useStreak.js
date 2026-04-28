@@ -1,5 +1,5 @@
 // ─── useStreak — Track consecutive correct answers ──────────────────────────
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 /**
  * React hook for tracking correct-answer streaks.
@@ -11,14 +11,14 @@ import { useState, useCallback } from "react";
  *   // On answer: recordAnswer(isCorrect);
  */
 export function useStreak() {
-  const [streak, setStreak]       = useState(0);
+  const [streak, setStreak] = useState(0);
   const [maxStreak, setMaxStreak] = useState(0);
 
   const recordAnswer = useCallback((isCorrect) => {
     if (isCorrect) {
-      setStreak(s => {
+      setStreak((s) => {
         const next = s + 1;
-        setMaxStreak(m => Math.max(m, next));
+        setMaxStreak((m) => Math.max(m, next));
         return next;
       });
     } else {

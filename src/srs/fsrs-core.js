@@ -17,17 +17,45 @@ export { Rating, State };
 
 export const FSRS_RATINGS = {
   AGAIN: Rating.Again, // 1
-  HARD:  Rating.Hard,  // 2
-  GOOD:  Rating.Good,  // 3
-  EASY:  Rating.Easy,  // 4
+  HARD: Rating.Hard, // 2
+  GOOD: Rating.Good, // 3
+  EASY: Rating.Easy, // 4
 };
 
 // UI metadata for each rating button
 export const RATING_META = {
-  [Rating.Again]: { id: 'Lagi',  en: 'Again', emoji: '🔴', color: '#f87171', bg: 'rgba(248,113,113,0.10)', border: 'rgba(248,113,113,0.35)' },
-  [Rating.Hard]:  { id: 'Susah', en: 'Hard',  emoji: '🟠', color: '#fb923c', bg: 'rgba(251,146,60,0.10)',  border: 'rgba(251,146,60,0.35)'  },
-  [Rating.Good]:  { id: 'Oke',   en: 'Good',  emoji: '🟢', color: '#4ade80', bg: 'rgba(74,222,128,0.10)', border: 'rgba(74,222,128,0.35)'  },
-  [Rating.Easy]:  { id: 'Mudah', en: 'Easy',  emoji: '💎', color: '#60a5fa', bg: 'rgba(96,165,250,0.10)', border: 'rgba(96,165,250,0.35)'  },
+  [Rating.Again]: {
+    id: 'Lagi',
+    en: 'Again',
+    emoji: '🔴',
+    color: '#f87171',
+    bg: 'rgba(248,113,113,0.10)',
+    border: 'rgba(248,113,113,0.35)',
+  },
+  [Rating.Hard]: {
+    id: 'Susah',
+    en: 'Hard',
+    emoji: '🟠',
+    color: '#fb923c',
+    bg: 'rgba(251,146,60,0.10)',
+    border: 'rgba(251,146,60,0.35)',
+  },
+  [Rating.Good]: {
+    id: 'Oke',
+    en: 'Good',
+    emoji: '🟢',
+    color: '#4ade80',
+    bg: 'rgba(74,222,128,0.10)',
+    border: 'rgba(74,222,128,0.35)',
+  },
+  [Rating.Easy]: {
+    id: 'Mudah',
+    en: 'Easy',
+    emoji: '💎',
+    color: '#60a5fa',
+    bg: 'rgba(96,165,250,0.10)',
+    border: 'rgba(96,165,250,0.35)',
+  },
 };
 
 // ── Indonesian Learner Calibration ─────────────────────────────────────────
@@ -36,17 +64,17 @@ export const RATING_META = {
 // Replace kanji_difficulty_boost / kanji_stability_factor when
 // Blueprint Study 2 calibration data (§8.11.2) becomes available.
 export const INDONESIAN_CALIBRATION = {
-  kanji_difficulty_boost:  0,    // additive to FSRS difficulty [future]
-  kanji_stability_factor:  1.0,  // multiplier on initial stability [future]
-  matsunaga_multiplier:    2.3,  // reference constant (do not change)
-  calibrated:              false, // flip to true when Study 2 data arrives
+  kanji_difficulty_boost: 0, // additive to FSRS difficulty [future]
+  kanji_stability_factor: 1.0, // multiplier on initial stability [future]
+  matsunaga_multiplier: 2.3, // reference constant (do not change)
+  calibrated: false, // flip to true when Study 2 data arrives
 };
 
 // ── Default FSRS settings ──────────────────────────────────────────────────
 const DEFAULT_CONFIG = {
-  request_retention: 0.90, // target recall probability
-  maximum_interval:  365,  // days
-  enable_fuzz:       false, // deterministic intervals (easier to test)
+  request_retention: 0.9, // target recall probability
+  maximum_interval: 365, // days
+  enable_fuzz: false, // deterministic intervals (easier to test)
 };
 
 // ── FSRS instance (lazy-initialized, singleton per config) ─────────────────
@@ -76,22 +104,22 @@ export function getFSRSConfig() {
 
 function serializeCard(tsCard) {
   return {
-    due:            toISO(tsCard.due),
-    stability:      tsCard.stability,
-    difficulty:     tsCard.difficulty,
-    elapsed_days:   tsCard.elapsed_days,
+    due: toISO(tsCard.due),
+    stability: tsCard.stability,
+    difficulty: tsCard.difficulty,
+    elapsed_days: tsCard.elapsed_days,
     scheduled_days: tsCard.scheduled_days,
-    reps:           tsCard.reps,
-    lapses:         tsCard.lapses,
-    state:          tsCard.state,
-    last_review:    tsCard.last_review ? toISO(tsCard.last_review) : null,
+    reps: tsCard.reps,
+    lapses: tsCard.lapses,
+    state: tsCard.state,
+    last_review: tsCard.last_review ? toISO(tsCard.last_review) : null,
   };
 }
 
 function deserializeCard(plain) {
   return {
     ...plain,
-    due:         new Date(plain.due),
+    due: new Date(plain.due),
     last_review: plain.last_review ? new Date(plain.last_review) : undefined,
   };
 }
@@ -121,9 +149,9 @@ export function scheduleReview(serializedCard, rating, now = new Date()) {
   }
 
   return {
-    card:     serializeCard(result.card),
+    card: serializeCard(result.card),
     interval: result.card.scheduled_days,
-    state:    result.card.state,
+    state: result.card.state,
   };
 }
 
@@ -147,24 +175,24 @@ export function isDue(serializedCard, now = new Date()) {
 // Returns { label, color, level } where level ∈ 'new'|'strong'|'fading'|'weak'|'critical'
 export function getStrength(serializedCard, now = new Date()) {
   if (!serializedCard || serializedCard.state === State.New) {
-    return { label: 'Baru',        color: '#94a3b8', level: 'new'      };
+    return { label: 'Baru', color: '#94a3b8', level: 'new' };
   }
   const R = getRetrievability(serializedCard, now);
-  if (R >= 0.90) return { label: 'Kuat',        color: '#4ade80', level: 'strong'   };
-  if (R >= 0.70) return { label: 'Mulai Pudar', color: '#facc15', level: 'fading'   };
-  if (R >= 0.50) return { label: 'Lemah',       color: '#fb923c', level: 'weak'     };
-  return           { label: 'Hampir Lupa', color: '#f87171', level: 'critical' };
+  if (R >= 0.9) return { label: 'Kuat', color: '#4ade80', level: 'strong' };
+  if (R >= 0.7) return { label: 'Mulai Pudar', color: '#facc15', level: 'fading' };
+  if (R >= 0.5) return { label: 'Lemah', color: '#fb923c', level: 'weak' };
+  return { label: 'Hampir Lupa', color: '#f87171', level: 'critical' };
 }
 
 // ── State label (human-readable) ──────────────────────────────────────────
 export function getStateLabel(serializedCard) {
   if (!serializedCard || serializedCard.state === State.New) return 'Baru';
   const { state, stability = 0 } = serializedCard;
-  if (state === State.Learning)   return 'Dipelajari';
+  if (state === State.Learning) return 'Dipelajari';
   if (state === State.Relearning) return 'Diulang';
   // State.Review (2)
   if (stability >= 21) return 'Matang';
-  if (stability >= 7)  return 'Berkembang';
+  if (stability >= 7) return 'Berkembang';
   return 'Muda';
 }
 

@@ -11,12 +11,13 @@
 const SRS_PREFIX = 'ssw-srs-';
 
 // ── Key helpers ────────────────────────────────────────────────────────────
-export const cardKey     = (cardId) => `${SRS_PREFIX}${cardId}`;
-export const parseCardId = (key)    => key.startsWith(SRS_PREFIX) ? key.slice(SRS_PREFIX.length) : null;
+export const cardKey = (cardId) => `${SRS_PREFIX}${cardId}`;
+export const parseCardId = (key) =>
+  key.startsWith(SRS_PREFIX) ? key.slice(SRS_PREFIX.length) : null;
 
 // ── In-memory cache ────────────────────────────────────────────────────────
 // { [cardId: string]: { card: SerializedCard, history: ReviewLog[], reviewed_at: ISO|null } }
-let _cache       = {};
+let _cache = {};
 let _initialized = false;
 
 // ── Init ───────────────────────────────────────────────────────────────────
@@ -26,12 +27,12 @@ export function initStore() {
   if (_initialized) return _cache;
 
   try {
-    const keys = Object.keys(localStorage).filter(k => k.startsWith(SRS_PREFIX));
+    const keys = Object.keys(localStorage).filter((k) => k.startsWith(SRS_PREFIX));
     _cache = {};
     for (const key of keys) {
       try {
         const raw = localStorage.getItem(key);
-        const id  = parseCardId(key);
+        const id = parseCardId(key);
         if (raw && id) _cache[id] = JSON.parse(raw);
       } catch {}
     }
@@ -44,10 +45,10 @@ export function initStore() {
 }
 
 // ── Read ───────────────────────────────────────────────────────────────────
-export const getCard      = (cardId) => _cache[String(cardId)] ?? null;
-export const hasCard      = (cardId) => String(cardId) in _cache;
-export const getAllCards   = ()       => ({ ..._cache });
-export const getCardCount = ()       => Object.keys(_cache).length;
+export const getCard = (cardId) => _cache[String(cardId)] ?? null;
+export const hasCard = (cardId) => String(cardId) in _cache;
+export const getAllCards = () => ({ ..._cache });
+export const getCardCount = () => Object.keys(_cache).length;
 
 // ── Write-through ──────────────────────────────────────────────────────────
 // Updates cache synchronously, persists to localStorage synchronously.
@@ -63,8 +64,8 @@ export function saveCard(cardId, entry) {
 export function exportSRSSnapshot() {
   return {
     _srs_version: 1,
-    exported_at:  new Date().toISOString(),
-    cards:        { ..._cache },
+    exported_at: new Date().toISOString(),
+    cards: { ..._cache },
   };
 }
 
@@ -82,7 +83,7 @@ export function importSRSSnapshot(snapshot) {
 
 // ── Reset ─────────────────────────────────────────────────────────────────
 export function resetStore() {
-  const keys = Object.keys(localStorage).filter(k => k.startsWith(SRS_PREFIX));
-  keys.forEach(k => localStorage.removeItem(k));
+  const keys = Object.keys(localStorage).filter((k) => k.startsWith(SRS_PREFIX));
+  keys.forEach((k) => localStorage.removeItem(k));
   _cache = {};
 }

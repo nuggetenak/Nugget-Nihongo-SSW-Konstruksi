@@ -8,7 +8,7 @@
 
 export function getWrongCount(val) {
   if (!val) return 0;
-  return typeof val === 'number' ? val : (val.count || 0);
+  return typeof val === 'number' ? val : val.count || 0;
 }
 
 export function getWrongTime(val) {
@@ -23,11 +23,11 @@ export function makeWrongEntry(existing, now = Date.now()) {
 // ── Storage key constants ──────────────────────────────────────────────────
 export const STORAGE_KEYS = {
   QUIZ_WRONG: 'ssw-quiz-wrong',
-  JAC_WRONG:  'ssw-wrong-counts',
-  WG_WRONG:   (setId) => `ssw-wg-wrong-${setId}`,
-  KNOWN:      'ssw-known',
-  UNKNOWN:    'ssw-unknown',
-  STARRED:    'ssw-starred',
+  JAC_WRONG: 'ssw-wrong-counts',
+  WG_WRONG: (setId) => `ssw-wg-wrong-${setId}`,
+  KNOWN: 'ssw-known',
+  UNKNOWN: 'ssw-unknown',
+  STARRED: 'ssw-starred',
 };
 
 // ── Storage helpers (synchronous localStorage) ─────────────────────────────
@@ -49,5 +49,7 @@ export function saveToStorage(key, value) {
 }
 
 export function removeFromStorage(key) {
-  try { localStorage.removeItem(key); } catch {}
+  try {
+    localStorage.removeItem(key);
+  } catch {}
 }
