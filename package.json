@@ -1,8 +1,8 @@
 {
   "name": "nugget-nihongo-ssw-konstruksi",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "private": true,
-  "description": "Aplikasi belajar ujian SSW Konstruksi Jepang — flashcard, kuis, simulasi",
+  "description": "Aplikasi belajar ujian SSW Konstruksi Jepang — flashcard, kuis, simulasi, SRS",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "ts-fsrs": "^5.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.5.2",
