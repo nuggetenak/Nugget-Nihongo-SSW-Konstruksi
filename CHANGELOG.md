@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.1] - 2026-04-28
+
+### Phase 11 — GlossaryMode A-Z Navigation
+- Sticky horizontal nav strip dengan semua huruf hiragana yang tersedia di dataset
+- Auto-scroll nav pill ke posisi aktif saat user scroll halaman (via IntersectionObserver)
+- Jump-to-section: tap huruf di nav strip → scroll smooth ke section dengan offset correction untuk sticky header
+- Section headers sekarang punya count badge (jumlah istilah per huruf)
+- Expanded card sekarang menampilkan source tag (canonical key)
+- Category emoji indicator per kartu (tampil di row utama, tidak hanya saat expand)
+- Count badge di filter category pills (hanya saat pill tersebut active)
+- Reset expanded + active letter saat ganti category filter
+
+
 ## [3.0.0] - 2026-04-28
 
 ### Phase 1 — Smart Text Components
