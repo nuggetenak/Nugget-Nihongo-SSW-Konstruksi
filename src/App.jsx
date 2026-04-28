@@ -2,7 +2,7 @@
 // v2.3 — SRS integration (FSRS engine, ReviewMode, 4-button flashcard rating)
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, lazy, Suspense } from 'react';
 import { T } from './styles/theme.js';
 import { CARDS } from './data/cards.js';
 import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from './data/categories.js';
@@ -15,21 +15,21 @@ import BottomNav from './components/BottomNav.jsx';
 import Dashboard from './components/Dashboard.jsx';
 
 // Modes
-import FlashcardMode from './modes/FlashcardMode.jsx';
-import QuizMode from './modes/QuizMode.jsx';
-import JACMode from './modes/JACMode.jsx';
-import WaygroundMode from './modes/WaygroundMode.jsx';
-import AngkaMode from './modes/AngkaMode.jsx';
-import DangerMode from './modes/DangerMode.jsx';
-import SimulasiMode from './modes/SimulasiMode.jsx';
-import StatsMode from './modes/StatsMode.jsx';
-import SearchMode from './modes/SearchMode.jsx';
-import SprintMode from './modes/SprintMode.jsx';
-import FocusMode from './modes/FocusMode.jsx';
-import GlossaryMode from './modes/GlossaryMode.jsx';
-import SumberMode from './modes/SumberMode.jsx';
-import ExportMode from './modes/ExportMode.jsx';
-import ReviewMode from './modes/ReviewMode.jsx';
+const FlashcardMode = lazy(() => import('./modes/FlashcardMode.jsx'));
+const QuizMode = lazy(() => import('./modes/QuizMode.jsx'));
+const JACMode = lazy(() => import('./modes/JACMode.jsx'));
+const WaygroundMode = lazy(() => import('./modes/WaygroundMode.jsx'));
+const AngkaMode = lazy(() => import('./modes/AngkaMode.jsx'));
+const DangerMode = lazy(() => import('./modes/DangerMode.jsx'));
+const SimulasiMode = lazy(() => import('./modes/SimulasiMode.jsx'));
+const StatsMode = lazy(() => import('./modes/StatsMode.jsx'));
+const SearchMode = lazy(() => import('./modes/SearchMode.jsx'));
+const SprintMode = lazy(() => import('./modes/SprintMode.jsx'));
+const FocusMode = lazy(() => import('./modes/FocusMode.jsx'));
+const GlossaryMode = lazy(() => import('./modes/GlossaryMode.jsx'));
+const SumberMode = lazy(() => import('./modes/SumberMode.jsx'));
+const ExportMode = lazy(() => import('./modes/ExportMode.jsx'));
+const ReviewMode = lazy(() => import('./modes/ReviewMode.jsx'));
 
 // ─── Onboarding ──────────────────────────────────────────────────────────────
 function Onboarding({ onComplete }) {
@@ -84,6 +84,14 @@ const LAINNYA_MODES = [
   { key: 'stats',   icon: '📊', label: 'Statistik', desc: 'Progress & kelemahan' },
   { key: 'ekspor',  icon: '💾', label: 'Ekspor',    desc: 'Simpan & pulihkan progress' },
 ];
+
+function ModeLoadingFallback() {
+  return (
+    <div style={{ minHeight: '50dvh', display: 'grid', placeItems: 'center', color: T.textDim, fontSize: 13 }}>
+      Memuat mode…
+    </div>
+  );
+}
 
 function ModeGrid({ modes, onSelect, title, badges = {} }) {
   return (
@@ -235,7 +243,11 @@ export default function App() {
       sumber:    <SumberMode onExit={exitMode} />,
       ekspor:    <ExportMode onExit={exitMode} />,
     };
-    return modeMap[mode] || null;
+    return (
+      <Suspense fallback={<ModeLoadingFallback />}>
+        {modeMap[mode] || null}
+      </Suspense>
+    );
   }
 
   const belajarBadges = { ulasan: srs.dueCount };
