@@ -27,6 +27,38 @@
 - Configurable auto-next: 1s / 1.5s / 2s / Manual
 - QuizShell: `autoNextDelay` prop, manual mode skips auto-advance
 
+### Phase 4 — JACMode + WaygroundMode + SimulasiMode
+- JACMode: lemah filter, score tracking per set (`ssw-jac-scores`), last-score badge, auto-delay setting
+- WaygroundMode: score + maxStreak per set (`ssw-wg-scores`), badge on picker cards, color stripe
+- SimulasiMode: standalone (no QuizShell) — big timer, LULUS/BELUM LULUS (65%), wrong review
+- QuizShell: `onFinish({ correct, total, maxStreak })` callback prop
+
+### Phase 5 — DangerMode + AngkaMode
+- DangerMode: browse panel accordion (correct vs traps), quiz with after-answer pair comparison
+- AngkaMode: grouped browse panel (5 topic groups), quiz with wrong review, "Wajib hafal" banner
+
+### Phase 6 — FilterPopup + App UX
+- FilterPopup.jsx: 3-col grid bottom sheet, Bintang cell, "Terapkan" CTA
+- Last-mode persistence: `ssw-last-mode` (app resumes on reload)
+- Materi toggle: card counts per segment
+
+### Phase 7 — Dashboard Overhaul
+- Stats bar (4 colored boxes), Quick Start CTA (smart logic), Mode tiles with time estimates
+- Streak + daily count + daily goal bar, Recently studied (5 cards), SRS breakdown
+- Content stats footer, Quick links row
+
+### Phase 8 — Visual Polish + Empty States + Accessibility
+- Toast.jsx (useToast), ConfirmDialog.jsx (useConfirm), EmptyState.jsx
+- Empty states: ReviewMode, SearchMode, FocusMode
+- FlashcardMode: toast on mark (with Undo) + reset
+- `prefers-reduced-motion` media query — all animations disabled
+
+### Phase 9 — Beginner UX
+- FlashcardMode first-time tutorial overlay (dismissed once, stored)
+- InfoTooltip ⓘ: SRS and JAC explanations on Dashboard
+- Starter pack section for users with 0 known cards
+- Milestone toasts (once each): 10 cards hafal, first quiz ≥70%, 7-day streak
+
 ### Kept from v2.x
 - FSRS spaced repetition engine (unchanged)
 - Light/dark theme with CSS vars (unchanged)

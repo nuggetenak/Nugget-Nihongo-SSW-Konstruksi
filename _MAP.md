@@ -529,11 +529,15 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 | 6 — Filter popup + Star + App UX | ✅ | FilterPopup, last-mode persist, materi toggle with counts |
 | 7 — Dashboard overhaul | ✅ | Stats bar, Quick Start CTA, mode tiles+times, streak, daily, recently studied |
 | 8 — Visual polish + empty states | ✅ | Toast/Confirm providers, empty states Review/Focus/Search, reduced-motion |
-| 9 — Beginner UX | ⬜ | Next |
-| 10 — QA + release | ⬜ | |
+| 9 — Beginner UX | ✅ | Tutorial overlay, ⓘ tooltips, starter pack, milestone toasts |
+| 10 — QA + release | ✅ | 111/111 tests, lint clean, build clean, CHANGELOG + _MAP updated |
 
-### Next session: start from UX Phase 9
-File: `src/modes/FlashcardMode.jsx` (tutorial tooltips), `src/App.jsx` (milestone toasts)
+### ✅ UX Overhaul v3.0 COMPLETE — all 10 phases shipped
+
+**Next steps (optional):**
+- Phase 11: GlossaryMode A-Z nav (missing from proposal)
+- SRS ReviewMode: flip-animation card (3D rotateY)
+- Vocab DB (N1–N5 from Soumatome) — see userMemories for spec
 
 ---
 
