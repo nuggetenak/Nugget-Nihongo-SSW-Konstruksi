@@ -477,3 +477,19 @@ Added `ModeLoadingFallback` component (centered spinner text).
 ---
 
 *End of _MAP.md — Last updated 2026-04-28 by Crunchy + Codex (Phase 5.2)*
+
+---
+
+## 11. UX/UI Overhaul Proposal (v3.0 roadmap)
+
+**Document:** `docs/UX-OVERHAUL-PROPOSAL.md` (v1, 2026-04-28, by Crispy/Opus 4.7)
+
+Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular architecture. 8 phases (A→H), ~23 sessions of work for Sonnet to execute. Read the proposal IN FULL before starting any phase.
+
+**Quick links inside proposal:**
+- Gap analysis (current vs v90)
+- Design principles (P1-P8)
+- Component library spec (10 primitives)
+- Screen-by-screen specs (Dashboard, Flashcard, Quiz, etc)
+- Phase plan with acceptance criteria
+- Open questions for Nugget (Q1-Q10)
