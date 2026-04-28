@@ -3,12 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0D0B08" />
-  <meta name="description" content="Aplikasi belajar ujian SSW Konstruksi Jepang — flashcard, kuis, simulasi ujian" />
+
+  <!-- PWA / Theme -->
+  <meta name="theme-color" content="#F59E0B" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SSW Konstruksi" />
+
+  <!-- SEO / Social -->
+  <meta name="description" content="Aplikasi belajar ujian SSW Konstruksi Jepang — flashcard, kuis, simulasi ujian, dan SRS cerdas untuk tenaga kerja Indonesia." />
+  <meta name="application-name" content="SSW Konstruksi" />
+  <meta property="og:title" content="SSW Konstruksi · Nugget Nihongo" />
+  <meta property="og:description" content="Belajar ujian SSW Konstruksi Jepang — 1.438 kartu flashcard, soal JAC, dan sistem ulang cerdas (SRS)." />
+  <meta property="og:type" content="website" />
+
   <title>SSW Konstruksi · Nugget Nihongo</title>
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/Nugget-Nihongo-SSW-Konstruksi/manifest.webmanifest" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/Nugget-Nihongo-SSW-Konstruksi/icons/icon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/Nugget-Nihongo-SSW-Konstruksi/icons/icon-192x192.png" sizes="192x192" />
+
+  <!-- Apple touch icons -->
+  <link rel="apple-touch-icon" href="/Nugget-Nihongo-SSW-Konstruksi/icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/Nugget-Nihongo-SSW-Konstruksi/icons/icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/Nugget-Nihongo-SSW-Konstruksi/icons/icon-180x180.png" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-text-size-adjust: 100%; }
@@ -18,9 +47,39 @@
       color: #FEF3C7;
       min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
+      /* Prevent bounce/overscroll showing white bg on iOS */
+      overscroll-behavior: none;
     }
     #root { min-height: 100dvh; }
+
+    /* Splash screen flicker prevention */
+    #root:empty::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100dvh;
+      background: #0D0B08;
+    }
   </style>
+
+  <!-- Service Worker registration — inline to register before any JS loads -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker
+          .register('/Nugget-Nihongo-SSW-Konstruksi/sw.js', {
+            scope: '/Nugget-Nihongo-SSW-Konstruksi/'
+          })
+          .then(function (reg) {
+            // Check for SW updates every time the page loads
+            reg.update();
+          })
+          .catch(function (err) {
+            console.warn('[SW] Registration failed:', err);
+          });
+      });
+    }
+  </script>
 </head>
 <body>
   <div id="root"></div>
