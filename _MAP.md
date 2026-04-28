@@ -1,360 +1,361 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Crispy (Phase 3 UX Polish complete)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ — production-ready, deploy to GitHub Pages
+> **Last updated:** 2026-04-28 by Crunchy (QA — Phase 4 complete)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ — production-ready, deploy to GitHub Pages
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
 
 ## 1. What This App Is
 
-A React-based study tool for the **JAC SSW (Specified Skilled Worker) Construction exam** in Japan. Interface is in **Indonesian** (Bahasa Indonesia), content is **Japanese↔Indonesian bilingual**. It helps Indonesian construction workers study for the SSW visa exam covering safety, law, construction techniques, tools, and vocabulary.
+A React-based study tool for the **JAC SSW (Specified Skilled Worker) Construction exam** in Japan. Interface is in **Indonesian (Bahasa Indonesia)**, content is **Japanese↔Indonesian bilingual**. Targets Indonesian construction workers studying for the SSW visa exam.
+
+### Deployment
+- **Target:** GitHub Pages — static standalone PWA, **no Claude/Anthropic dependency whatsoever**
+- **Storage:** Pure `localStorage` — no `window.storage`, no Supabase, no external auth
+- **Progress persistence:** Export/import JSON (cross-device)
+- **Live v87 (previous):** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
+- **Build:** `npm install && npm run build` → deploy `dist/`
 
 ### Branding
-
 - **Parent brand:** Nugget Nihongo
 - **Product name:** SSW Konstruksi
 - **Subtitle (JP):** 土木 · 建築 · ライフライン設備
-- **Subtitle (ID):** Teknik Sipil · Bangunan · Lifeline & Peralatan
 - **In-app header:** SSW Konstruksi · by Nugget Nihongo
 
-### 3 Study Tracks (jalur belajar)
-
-The JAC exam has 3 specialization tracks. Users pick their track on first launch;
-all content (cards, quizzes, simulation) auto-filters to that track.
-
+### 3 Study Tracks
 | Track | JP | ID | Icon | Categories |
 |-------|----|----|------|-----------|
-| Teknik Sipil | 土木 | Jalan, jembatan, terowongan, bendungan | 🏗️ | jenis_kerja (civil subset), alat_umum (civil subset) |
-| Bangunan | 建築 | Gedung, bekisting, tulangan, finishing | 🏢 | jenis_kerja (building subset), alat_umum (building subset) |
-| Lifeline & Peralatan | ライフライン・設備 | Listrik, pipa, HVAC, pemadam, telekom | ⚡ | listrik, pipa, telekomunikasi, isolasi, pemadam |
-| **Umum (共通)** | 共通 | Wajib semua jalur | 📋 | salam, hukum, keselamatan, karier |
+| Teknik Sipil | 土木 | Jalan, jembatan, terowongan | 🏗️ | jenis_kerja, alat_umum + common |
+| Bangunan | 建築 | Gedung, bekisting, tulangan | 🏢 | jenis_kerja, alat_umum + common |
+| Lifeline & Peralatan | ライフライン・設備 | Listrik, pipa, HVAC | ⚡ | listrik, pipa, telekomunikasi, isolasi, pemadam + common |
+| **Common (共通)** | 共通 | Wajib semua jalur | 📋 | salam, hukum, keselamatan, karier |
 
-**Implementation note:** Current 12 categories need a `track` mapping field added.
-Some categories (jenis_kerja, alat_umum) contain cards from multiple tracks — these
-will need per-card track tagging or sub-categorization. The 共通 (common) categories
-appear in ALL tracks automatically.
-
-### Deployment & Target
-
-- **Deploy:** GitHub Pages (static site, simple)
-- **Target users:** Junior SSW candidates, Japanese level N5-N4 (beginners)
-- **Progress persistence:** Users export/import JSON to save progress across devices
-- **Live v87 (previous):** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
+Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field; `getCatsForTrack(track)` returns valid category keys; `filteredCards` in App.jsx filters by track before applying pill selection.
 
 ---
 
-## 2. Directory Structure
+## 2. Phase History
+
+| Phase | Agent | Status | Summary |
+|-------|-------|--------|---------|
+| Phase 1 | Crispy | ✅ | Data normalization: 1438 cards, unified 0-based answer indexing, furi field filled |
+| Phase 2 | Crispy | ✅ | Vite architecture, modular 37-file structure, shared components/hooks |
+| Phase 3 | Crispy | ✅ | UX Polish: onboarding, track picker, dashboard, bottom nav, design system |
+| Phase 4 | Crunchy (QA) | ✅ | Bug fixes + SRS engine + storage layer overhaul (see §10) |
+
+---
+
+## 3. Directory Structure
 
 ```
 Nugget-Nihongo-SSW-Konstruksi/
-├── _MAP.md                    ← YOU ARE HERE
-├── README.md                  ← Public readme
-├── index.html                 ← Vite entry point (loads src/main.jsx)
-├── package.json               ← npm deps: react, react-dom, vite
-├── vite.config.js             ← Vite config (base: /Nugget-Nihongo-SSW-Konstruksi/)
+├── _MAP.md                         ← YOU ARE HERE
+├── README.md
+├── index.html                      ← Vite entry point
+├── package.json                    ← deps: react, react-dom, vite, ts-fsrs
+├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/
 ├── docs/
-│   ├── PROPOSAL.md            ← Full refactor proposal (7 pillars)
-│   └── id-mapping-v87-to-v90.json ← Old→new card ID mapping (1438 entries)
+│   ├── PROPOSAL.md
+│   └── id-mapping-v87-to-v90.json
 ├── scripts/
-│   └── phase1_normalize.py    ← Data normalization script (run once, done)
+│   └── phase1_normalize.py
 ├── legacy/
-│   └── ssw_flashcards_v87.jsx ← Original monolith (7,390 lines, reference only)
+│   └── ssw_flashcards_v87.jsx      ← reference only
 │
-└── src/                       ← 37 source files, 5778 lines total
-    ├── main.jsx               ← React root (5 lines)
-    ├── App.jsx                ← Root component: onboarding, nav, routing (268 lines)
+└── src/
+    ├── main.jsx
+    ├── App.jsx                     ← v2.3: track filter, useSRS, ReviewMode wired
     │
-    ├── data/                  ← All content data (3533 lines)
-    │   ├── index.js           ← Barrel export + derived constants
-    │   ├── cards.js           ← CARDS[1438] — all flashcards (1599 lines)
-    │   ├── jac-official.js    ← JAC_OFFICIAL[~95] — exam questions (975 lines)
-    │   ├── wayground-sets.js  ← WAYGROUND_SETS[12] — ~597 quiz questions (819 lines)
-    │   ├── angka-kunci.js     ← ANGKA_KUNCI[~45] — key numbers
-    │   ├── danger-pairs.js    ← DANGER_PAIRS[~20] — confusing term pairs
-    │   └── categories.js      ← CATEGORIES, SOURCE_META, getCatInfo, etc.
+    ├── data/
+    │   ├── index.js                ← barrel + derived constants
+    │   ├── cards.js                ← CARDS[1438]
+    │   ├── jac-official.js         ← JAC_OFFICIAL[~95]
+    │   ├── wayground-sets.js       ← WAYGROUND_SETS[12]
+    │   ├── angka-kunci.js
+    │   ├── danger-pairs.js
+    │   └── categories.js           ← CATEGORIES (with tracks[]), SOURCE_META (canonical keys), getCatsForTrack()
     │
-    ├── modes/                 ← One file per mode (1167 lines total)
-    │   ├── FlashcardMode.jsx  ← Swipeable cards + known/unknown (140 lines)
-    │   ├── QuizMode.jsx       ← Auto-generated quiz, 3 difficulty levels (86 lines)
-    │   ├── JACMode.jsx        ← Official JAC exam questions (107 lines)
-    │   ├── WaygroundMode.jsx  ← Technical quiz sets from sensei (109 lines)
-    │   ├── AngkaMode.jsx      ← Key numbers quiz (62 lines)
-    │   ├── DangerMode.jsx     ← Confusing term pairs drill (79 lines)
-    │   ├── SimulasiMode.jsx   ← Full exam simulation + timer (75 lines)
-    │   ├── SprintMode.jsx     ← Speed drill 60s (123 lines)
-    │   ├── FocusMode.jsx      ← Weakness drill (66 lines)
-    │   ├── StatsMode.jsx      ← Progress statistics (100 lines)
-    │   ├── SearchMode.jsx     ← Full-text search (64 lines)
-    │   ├── GlossaryMode.jsx   ← Sorted glossary (78 lines)
-    │   └── SumberMode.jsx     ← Browse by source (78 lines)
+    ├── srs/                        ← ★ NEW — SRS engine (Phase 4)
+    │   ├── index.js                ← barrel export
+    │   ├── fsrs-core.js            ← Layer 1: pure FSRS math, ts-fsrs wrapper, Indonesian calibration
+    │   ├── fsrs-store.js           ← Layer 2: localStorage cache (load-once → write-through)
+    │   └── fsrs-scheduler.js       ← Layer 3: business logic (due queue, stats, review recording)
     │
-    ├── components/            ← Shared UI components (431 lines)
-    │   ├── QuizShell.jsx      ← Unified quiz flow wrapper (211 lines) ★
-    │   ├── ResultScreen.jsx   ← Unified result/review screen (90 lines)
-    │   ├── OptionButton.jsx   ← Quiz option with badge + feedback (69 lines)
-    │   ├── ProgressBar.jsx    ← Reusable progress bar (10 lines)
-    │   └── JpDisplay.jsx      ← JpFront + DescBlock renderers (51 lines)
+    ├── modes/
+    │   ├── FlashcardMode.jsx       ← updated: 4-button FSRS rating after flip
+    │   ├── ReviewMode.jsx          ← ★ NEW: dedicated SRS due queue mode
+    │   ├── ExportMode.jsx          ← updated: SRS snapshot included, pure localStorage
+    │   ├── QuizMode.jsx
+    │   ├── JACMode.jsx
+    │   ├── WaygroundMode.jsx
+    │   ├── AngkaMode.jsx
+    │   ├── DangerMode.jsx
+    │   ├── SimulasiMode.jsx
+    │   ├── SprintMode.jsx
+    │   ├── FocusMode.jsx
+    │   ├── StatsMode.jsx
+    │   ├── SearchMode.jsx
+    │   ├── GlossaryMode.jsx
+    │   └── SumberMode.jsx
     │
-    ├── hooks/                 ← Custom React hooks (119 lines)
-    │   ├── index.js           ← Barrel export
-    │   ├── usePersistedState.js ← window.storage persistence
-    │   ├── useQuizKeyboard.js ← Keyboard shortcuts (1/2/3/4, Enter)
-    │   └── useStreak.js       ← Answer streak tracking
+    ├── components/
+    │   ├── Dashboard.jsx           ← updated: SRS due count CTA, strength badges
+    │   ├── TrackPicker.jsx
+    │   ├── BottomNav.jsx
+    │   ├── QuizShell.jsx
+    │   ├── ResultScreen.jsx
+    │   ├── OptionButton.jsx
+    │   ├── ProgressBar.jsx
+    │   └── JpDisplay.jsx
     │
-    ├── utils/                 ← Pure functions (190 lines)
-    │   ├── index.js           ← Barrel export
-    │   ├── shuffle.js         ← Fisher-Yates shuffle
-    │   ├── jp-helpers.js      ← stripFuri, extractReadings, jpFontSize
-    │   ├── wrong-tracker.js   ← Wrong-answer storage helpers
-    │   └── quiz-generator.js  ← Quiz question generator (3 difficulties)
+    ├── hooks/
+    │   ├── index.js                ← barrel (includes useSRS)
+    │   ├── usePersistedState.js    ← updated: sync localStorage init, no async flash
+    │   ├── useSRS.js               ← ★ NEW: React hook for SRS engine
+    │   ├── useQuizKeyboard.js
+    │   └── useStreak.js
+    │
+    ├── utils/
+    │   ├── index.js
+    │   ├── wrong-tracker.js        ← updated: pure localStorage, no window.storage
+    │   ├── shuffle.js
+    │   ├── jp-helpers.js
+    │   └── quiz-generator.js
     │
     └── styles/
-        └── theme.js           ← Design tokens: T (colors/spacing) + getGrade (65 lines)
+        └── theme.js                ← T tokens + T.track[key]
 ```
 
 ---
 
-## 3. Data Schemas
+## 4. Data Schemas
 
-### 3.1 CARDS (flashcards)
-
+### 4.1 CARDS
 ```js
 {
-  id: 42,                        // Unique numeric ID — SEQUENTIAL 1-1438, no gaps
-  category: "listrik",           // Category key (see CATEGORIES)
-  source: "jac-ch5",             // Canonical source key (see list below)
-  furi: "せっちぼう",              // Hiragana reading — ALL 1438 cards have this field
-  jp: "接地棒",                   // Japanese text (kanji, may contain inline furigana)
-  romaji: "secchibou",           // Romanization
-  id_text: "Batang pentanahan",  // Indonesian translation (short)
-  desc: "Batang yang didorong..."// Indonesian explanation (long)
+  id: 42,                    // numeric, sequential 1–1438, no gaps
+  category: "listrik",       // see CATEGORIES
+  source: "jac-ch5",         // canonical key (see SOURCE_META)
+  furi: "せっちぼう",
+  jp: "接地棒",
+  romaji: "secchibou",
+  id_text: "Batang pentanahan",
+  desc: "Batang yang didorong..."
 }
 ```
 
-**12 categories:** salam, hukum, jenis_kerja, listrik, telekomunikasi, pipa, isolasi, pemadam, keselamatan, karier, alat_umum, (+ virtual: bintang)
+**12 categories:** salam, hukum, jenis_kerja, listrik, telekomunikasi, pipa, isolasi, pemadam, keselamatan, karier, alat_umum, bintang
 
-**16 canonical sources:** jac-ch1, jac-ch2, jac-ch3, jac-ch4, jac-ch5, jac-ch6, jac-ch7, jac-gakka1, jac-gakka2, jac-jitsugi1, jac-jitsugi2, vocab-lifeline, vocab-jac, vocab-core, vocab-exam, vocab-teori
+**Track assignment per category:**
+- Common (all tracks): salam, hukum, keselamatan, karier
+- doboku + kenchiku: jenis_kerja, alat_umum
+- lifeline only: listrik, telekomunikasi, pipa, isolasi, pemadam
 
-### 3.2 JAC_OFFICIAL (exam questions)
+### 4.2 JAC_OFFICIAL & WAYGROUND_SETS
+See previous _MAP.md sections — schemas unchanged. Answer indexing unified to **0-based** in Phase 1.
 
+### 4.3 SRS Card Entry (localStorage: `ssw-srs-{cardId}`)
 ```js
 {
-  id: "tt1_q01",                 // String ID: {set}_{question}
-  set: "tt1",                    // Set key: tt1, tt2, st1, st2
-  setLabel: "学科 Set 1",        // Human-readable set name
-  jp: "作業開始前に...",           // Question in Japanese
-  hiragana: "さぎょう...",        // Full hiragana reading (separate field!)
-  id_text: "Pertemuan harian...", // Question in Indonesian
-  options: ["朝礼（...）", ...],  // Array of option strings (mixed JP+ID)
-  answer: 0,                     // 0-BASED INDEX — UNIFIED with Wayground (Phase 1)
-  hasPhoto: false,               // Whether original has a photo
-  photoDesc: null,               // Text description of photo if hasPhoto
-  explanation: "朝礼 = ...",     // Indonesian explanation
-  related_card_id: 1             // Links to CARDS[].id (renumbered in Phase 1)
+  card: {
+    due: "2026-05-01T00:00:00.000Z",  // ISO string
+    stability: 4.2,                    // FSRS stability (days)
+    difficulty: 5.0,                   // FSRS difficulty 1–10
+    elapsed_days: 0,
+    scheduled_days: 4,
+    reps: 3,
+    lapses: 0,
+    state: 2,                          // 0=New 1=Learning 2=Review 3=Relearning
+    last_review: "2026-04-28T..."
+  },
+  history: [                           // last 20 reviews
+    { date: "2026-04-28T...", rating: 3 }
+  ],
+  reviewed_at: "2026-04-28T..."
 }
 ```
 
-### 3.3 WAYGROUND_SETS (quiz sets)
+---
 
-```js
-{
-  id: "wt1",                     // Set ID
-  title: "Teori Set 1 · 20qs",  // Display title
-  subtitle: "安全管理...",        // Subtitle
-  emoji: "🎯",                   // Icon
-  color: "#f97316",              // Theme color
-  grad: "linear-gradient(...)",  // Gradient CSS
-  source: "CSV Teori v2 / JAC Official",
-  questions: [{
-    id: 1,                       // Numeric, per-set (not globally unique)
-    q: "KY活動《かつどう》...",   // Question (furigana uses 《》 format)
-    hint: "Langkah pertama...",  // Indonesian hint
-    opts: ["対策を決める", ...],   // Japanese options
-    opts_id: ["Menentukan...", ...], // Indonesian options (parallel array)
-    ans: 1,                      // ⚠ 0-BASED INDEX (0 = first option)
-    exp: "4 langkah KY: ...",    // Indonesian explanation
-  }]
-}
+## 5. SRS Architecture (Phase 4)
+
+### Layer model
+```
+fsrs-core.js       — Pure math. ts-fsrs wrapper. RATING_META. Indonesian calibration stub.
+                     Zero app dependencies. Copy to main project as-is.
+fsrs-store.js      — localStorage adapter. Load-once init → in-memory cache → write-through.
+                     Synchronous. Key prefix: ssw-srs-{cardId}.
+fsrs-scheduler.js  — Business logic. recordReview(), getDueCardIds(), getSRSStats(),
+                     previewIntervals(). All synchronous.
+useSRS.js          — React hook. Calls initStore() synchronously. Exposes reactive
+                     dueCount + stats via forceRender after each review.
 ```
 
-### ✅ Answer Indexing — UNIFIED (Phase 1)
+### FSRS Rating buttons
+| Button | Rating | Meaning | Maps to known/unknown |
+|--------|--------|---------|----------------------|
+| 🔴 Lagi  | 1 (Again) | Completely forgot | → unknown |
+| 🟠 Susah | 2 (Hard)  | Recalled with difficulty | → known |
+| 🟢 Oke   | 3 (Good)  | Recalled correctly | → known |
+| 💎 Mudah | 4 (Easy)  | Recalled perfectly | → known |
 
-| Data Source    | Index Base | `answer: 0` means |
-|----------------|-----------|-------------------|
-| JAC_OFFICIAL   | 0-based   | First option      |
-| WAYGROUND_SETS | 0-based   | First option      |
+### FlashcardMode UX flow
+1. Card shows front (JP text)
+2. User taps → back revealed (ID translation + desc)
+3. 4 FSRS rating buttons appear with interval preview hints
+4. On rating → SRS recorded + known/unknown updated + auto-advance
 
-Both sources now use **0-based indexing**. This was unified in Phase 1 (JAC was previously 1-based).
-
----
-
-## 4. Mode Components Reference
-
-| Mode | File | Purpose | Has Storage | Has Keyboard |
-|------|------|---------|-------------|-------------|
-| FlashcardMode | FlashcardMode.jsx | Swipeable card viewer | known/unknown (App-level) | ← → Space |
-| QuizMode | QuizMode.jsx | Auto-generated quiz | ssw-quiz-wrong | 1/2/3 Enter |
-| JACMode | JACMode.jsx | Official JAC questions | ssw-wrong-counts | Enter/Space |
-| AngkaMode | AngkaMode.jsx | Key numbers | — | 1/2/3/4 Enter |
-| DangerMode | DangerMode.jsx | Confusing pairs drill | — | 1/2/3 Enter |
-| SimulasiMode | SimulasiMode.jsx | Exam simulation | — | Enter |
-| StatsMode | StatsMode.jsx | Progress stats | reads all keys | — |
-| SearchMode | SearchMode.jsx | Full-text search | — | — |
-| SprintMode | SprintMode.jsx | Speed drill | — | — |
-| FocusMode | FocusMode.jsx | Weakness drill | reads all keys | — |
-| GlossaryMode | GlossaryMode.jsx | Sorted glossary | — | — |
-| SumberMode | SumberMode.jsx | Browse by source | — | — |
-| WaygroundMode | WaygroundMode.jsx | Technical quiz sets | ssw-wg-wrong-{id} | Enter/Space |
+### ReviewMode
+- Shows only cards due today (from `getDueCardIds()`)
+- Sorted by urgency (lowest retrievability R first)
+- Must flip before rating buttons activate
+- Keyboard: Space/Enter = flip; 1/2/3/4 = rate
+- Completion screen shows session stats
 
 ---
 
-## 5. Persistent Storage Keys
+## 6. Storage Architecture
 
-| Key | Owner | Format | Content |
-|-----|-------|--------|---------|
-| `ssw-quiz-wrong` | QuizMode | `{cardId: {count, lastWrong}}` | Wrong counts from auto-generated quizzes |
-| `ssw-wrong-counts` | JACMode | `{qId: {count, lastWrong}}` | Wrong counts from JAC official questions |
-| `ssw-wg-wrong-{setId}` | WaygroundMode | `{qIdx: {count, lastWrong}}` | Wrong counts per Wayground set |
-| `ssw-known` | App (via FlashcardMode) | `[cardId, ...]` | Cards marked "known" |
-| `ssw-unknown` | App (via FlashcardMode) | `[cardId, ...]` | Cards marked "unknown" |
-| `ssw-starred` | App | `[cardId, ...]` | Starred/bookmarked cards |
+**All storage is pure `localStorage`. No window.storage. No external services.**
 
----
+| localStorage key | Owner | Format | Content |
+|-----------------|-------|--------|---------|
+| `ssw-known` | App | `[cardId, ...]` | Cards marked known |
+| `ssw-unknown` | App | `[cardId, ...]` | Cards marked unknown |
+| `ssw-starred` | App | `[cardId, ...]` | Starred cards |
+| `ssw-track` | App | `"doboku"` \| `"kenchiku"` \| `"lifeline"` | Selected track |
+| `ssw-quiz-wrong` | QuizMode | `{cardId: {count, lastWrong}}` | Wrong counts |
+| `ssw-wrong-counts` | JACMode | `{qId: {count, lastWrong}}` | JAC wrong counts |
+| `ssw-wg-wrong-{setId}` | WaygroundMode | `{qIdx: {count, lastWrong}}` | Wayground wrong |
+| `ssw-srs-{cardId}` | fsrs-store | SRS card entry (see §4.3) | FSRS card data |
+| `ssw-onboarded` | App | `"1"` | Onboarding complete flag |
 
-## 6. Architecture Decisions & Trade-offs
-
-### Current State (Phase 3 complete)
-- **40 source files, 6055 lines total** — builds in ~500ms with Vite
-- **Build output:** `dist/index.html` + `dist/assets/index-*.js` (1.38MB, 441KB gzipped)
-- **UX flow:** Onboarding (4 steps) → Track Picker (3 tracks) → Dashboard → Bottom Nav
-- **Bottom navigation:** 4 tabs — 🏠 Beranda, 📚 Belajar, ✍️ Ujian, ⋯ Lainnya
-- **Dashboard:** Progress ring, smart suggestion, stats row, quick actions
-- **Track system:** Track selection persisted, shown in header badge
-- **Design:** "Warm Industrial Japanese" — amber accent, dark bg, CSS animations
-- **QuizShell:** wraps 6 quiz modes with unified UX
-- **No code file exceeds 264 lines**
-
-### Deployment Strategy
-- **GitHub Pages (recommended):** `npm run build` → deploy `dist/` folder
-  - Set GitHub Pages source to "GitHub Actions" or deploy `dist/` manually
-  - `vite.config.js` has `base: '/Nugget-Nihongo-SSW-Konstruksi/'` for GH Pages path
-- **Local dev:** `npm run dev` → http://localhost:5173
-- **Preview build:** `npm run preview` → serves `dist/` locally
+**usePersistedState** initializes synchronously from localStorage — no loading flash, no async effect.
 
 ---
 
-## 7. Known Issues & TODO
+## 7. Mode Index
 
-### 🔴 HIGH Priority
-- [x] ~~**Wire up multi-file imports**~~ ✅ Phase 2 (Vite, builds in 452ms)
-- [x] ~~**Unify answer indexing** — JAC (1-based) → all 0-based~~ ✅ Phase 1
-- [x] ~~**Add furi field to all 730 cards** missing it~~ ✅ Phase 1
-- [x] ~~**Add bundler** (esbuild or vite)~~ ✅ Phase 2 (Vite + React plugin)
+| Mode key | File | Entry point | Notes |
+|----------|------|-------------|-------|
+| `ulasan` | ReviewMode.jsx | Belajar tab | ★ NEW — SRS due queue |
+| `kartu` | FlashcardMode.jsx | Belajar tab | Updated: 4-button FSRS |
+| `kuis` | QuizMode.jsx | Belajar tab | |
+| `sprint` | SprintMode.jsx | Belajar tab | |
+| `fokus` | FocusMode.jsx | Belajar tab | |
+| `jac` | JACMode.jsx | Ujian tab | |
+| `wayground` | WaygroundMode.jsx | Ujian tab | |
+| `simulasi` | SimulasiMode.jsx | Ujian tab | |
+| `angka` | AngkaMode.jsx | Ujian tab | |
+| `jebak` | DangerMode.jsx | Ujian tab | |
+| `cari` | SearchMode.jsx | Lainnya tab | |
+| `glosari` | GlossaryMode.jsx | Lainnya tab | |
+| `sumber` | SumberMode.jsx | Lainnya tab | SOURCE_META now uses canonical keys |
+| `stats` | StatsMode.jsx | Lainnya tab | |
+| `ekspor` | ExportMode.jsx | Lainnya tab | Updated: includes SRS snapshot |
 
-### 🟡 MEDIUM Priority
-- [x] ~~**Replace inline styles** with theme tokens~~ ✅ Phase 2 (T object, 0 inline hex colors)
-- [x] ~~**Integrate shared hooks** into mode components~~ ✅ Phase 2 (usePersistedState, useQuizKeyboard, useStreak)
-- [x] ~~**Build `<QuizShell>` wrapper**~~ ✅ Phase 2 (211 lines, wraps 6 quiz modes)
-- [x] ~~**Build `<ResultScreen>` component**~~ ✅ Phase 2 (90 lines, unified results)
-- [x] ~~**Fix romaji typo** (`supeeसाaa` → `supeesaa`)~~ ✅ Phase 1
-- [x] ~~**Remove duplicate Wayground questions** (wt1 Q4 ≈ Q5)~~ ✅ Phase 1
-- [x] ~~**Normalize source names**~~ ✅ Phase 1 (16 canonical names)
+---
 
-### 🟢 LOW Priority (Phase 3+)
-- [ ] **3-track navigation** (土木 / 建築 / ライフライン) — track picker + auto-filter
-- [ ] Add breadcrumb navigation in nested modes
-- [ ] Add onboarding flow for new users
-- [ ] Add breadcrumb navigation
-- [ ] Implement spaced repetition (SM-2 or Leitner)
-- [ ] Add study plan mode (4-week guided plan)
+## 8. Known Issues & TODO
+
+### ✅ Resolved (Phase 4 / Crunchy QA)
+- [x] `SOURCE_META` used old source keys → `SumberMode` rendered blank list
+- [x] Track filtering was cosmetic only → cards not actually filtered by track
+- [x] `CATEGORIES` had no `tracks[]` field
+- [x] All storage used `window.storage` (Claude-only) → broken on GitHub Pages
+- [x] `usePersistedState` had async flash of default value before storage loaded
+- [x] No SRS system — only binary known/unknown
+- [x] Export/import didn't include SRS data
+
+### 🟡 Open / Future
+- [ ] Per-card track tagging for jenis_kerja + alat_umum (currently category-level only)
 - [ ] PWA manifest + service worker
-- [ ] Export/import progress JSON
-- [ ] Add card images for tool recognition questions
+- [ ] Breadcrumb navigation in nested modes
+- [ ] Study plan mode (4-week guided)
+- [ ] SRS difficulty calibration for Indonesian learners (needs 10K+ review events — see `INDONESIAN_CALIBRATION` in fsrs-core.js)
+- [ ] Card images for tool recognition questions
 
 ---
 
-## 8. Agent Instructions
+## 9. Agent Instructions
 
 ### When Starting a New Session
 1. Read this `_MAP.md` first
-2. Check `docs/PROPOSAL.md` for the full refactor plan
-3. Ask Nugget which phase/task to work on
-4. Test changes against `legacy/ssw_flashcards_v87.jsx` to ensure no regressions
+2. Check `docs/PROPOSAL.md` for full context
+3. **Do not use `window.storage`** — this app is GitHub Pages only, pure localStorage
+4. Test storage with: `localStorage.getItem('ssw-known')` in browser devtools
 
 ### Code Conventions
-- **Language:** Indonesian for UI text and user-facing strings
-- **Comments:** English for code comments
-- **Git identity:** `Crispy <crispy@nugget.local>`
-- **Commit style:** Descriptive, prefixed (e.g., `refactor: extract QuizMode to separate file`)
-- **Data edits:** Always note the source (PDF page, CSV row, agent-generated)
+- **Language:** Indonesian for UI text; English for code comments
+- **Git identity:** use your agent name (e.g., `Crispy`, `Crunchy`, `Golden`)
+- **Commit style:** `type(scope): description`
+- **Storage:** always `localStorage` — never `window.storage`, never Supabase
+- **SRS:** import from `../srs/index.js` or direct layer file; never call ts-fsrs directly from components
+
+### SRS Extension Points
+- Custom FSRS parameters → `configureFSRS()` in `fsrs-core.js`
+- Indonesian calibration → `INDONESIAN_CALIBRATION` stub in `fsrs-core.js`
+- Add new storage keys → add to `STORAGE_KEYS` in `wrong-tracker.js` and document in §6
 
 ### Working with Data Files
-- `src/data/cards.js` is 1,601 lines — don't re-read the whole thing unless needed
-- When adding cards, use the next available ID after the current max
-- When adding questions, check the answer index convention for that data file
-- Cross-reference `related_card_id` when adding JAC questions
-
-### Nugget's Workflow
-- Uploads ZIP → states task → receives new ZIP → deploys via GitHub drag-and-drop
-- Communicates casually in Indonesian with English/Japanese code-switching
-- Uses expressions like "GAS," "BOOM," "MANTAB" to signal enthusiasm
-- Target: make this tool usable by junior SSW candidates
+- `src/data/cards.js` is 1,600+ lines — don't re-read unless necessary
+- When adding cards: use next ID after current max
+- `getCatsForTrack(track)` → returns category keys for a given track key
 
 ---
 
-## 9. Content Sources Traceability
+## 10. Phase 4 Changelog (Crunchy QA — 2026-04-28)
 
-| Source Key | Old Key | Origin | Notes |
-|-----------|---------|--------|-------|
-| jac-ch1 | text1l | JAC PDF Ch.1 — 挨拶・安全管理 | Greetings, morning assembly, KY, 5S |
-| jac-ch2 | text2 | JAC PDF Ch.2 — 法規 | Laws: labor, safety, construction, recycling |
-| jac-ch3 | text3 | JAC PDF Ch.3 — 工事の種類 | Work types: lifeline, equipment, building |
-| jac-ch4 | text4 | JAC PDF Ch.4 — 施工管理 | Construction management, surveying, formwork |
-| jac-ch5 | text5l | JAC PDF Ch.5 — 工具・機械 | Tools, equipment, measuring instruments |
-| jac-ch6 | text6l | JAC PDF Ch.6 — 配管・保温保冷 | Piping, insulation, HVAC |
-| jac-ch7 | text7l | JAC PDF Ch.7 — キャリア | Career, qualifications, CCUS |
-| jac-gakka1 | tt_sample | JAC sample exam — 学科 Set 1 | 25 theory questions with photos |
-| jac-gakka2 | tt_sample2 | JAC sample exam — 学科 Set 2 | 36 theory questions |
-| jac-jitsugi1 | st_sample_l | JAC sample exam — 実技 Set 1 | 22 practical questions |
-| jac-jitsugi2 | st_sample2_l | JAC sample exam — 実技 Set 2 | 12 practical questions |
-| vocab-lifeline | lifeline4 | Wayground CSV — vocab from sensei | 260 lifeline/equipment vocab cards |
-| vocab-jac | vocab_jac | Agent-generated from JAC questions | 103 vocab cards from exam content |
-| vocab-core | vocab_core | Agent-generated core terms | 22 core construction vocab |
-| vocab-exam | vocab_exam | Agent-generated exam vocab | 249 exam-focused vocab cards |
-| vocab-teori | vocab_teori | Agent-generated theory vocab | 54 law/safety management vocab |
+### Fix 1 — `src/data/categories.js`
+- `SOURCE_META` remapped from old keys (`text1l`, `tt_sample`, `lifeline4`) to canonical keys (`jac-ch1`, `jac-gakka1`, `vocab-lifeline`, etc.)
+- Added `tracks[]` field to every `CATEGORIES` entry
+- Added `getCatsForTrack(track)` helper
 
-Old→new ID mapping: `docs/id-mapping-v87-to-v90.json` (1438 entries)
+### Fix 2 — `src/App.jsx`
+- `filteredCards` now filters by track category set first, then by active pill selection
+- Category pills only show categories valid for the current track
+- Added `useSRS(trackCardIds)` hook
+- Added `ReviewMode` to modeMap
+- Added `ulasan` to BELAJAR_MODES with live due count badge
+- `ModeGrid` accepts `badges` prop for numeric badge on any mode tile
 
-Official JAC source: https://global.jac-skill.or.jp/indonesia/examination/documents.php
+### Fix 3 — `src/modes/ExportMode.jsx`
+- Export/import progress JSON (known/unknown, wrong counts, track, SRS data)
+- Added to Lainnya tab
+
+### Phase 4 — SRS Engine (`src/srs/`)
+- `fsrs-core.js` — pure FSRS math layer (ts-fsrs v5 wrapper, `RATING_META`, Indonesian calibration stub)
+- `fsrs-store.js` — localStorage adapter, in-memory cache, write-through
+- `fsrs-scheduler.js` — due queue, stats, review recording, interval preview
+- `src/hooks/useSRS.js` — React hook, synchronous init, reactive dueCount
+
+### Phase 4 — Storage Overhaul
+- `wrong-tracker.js` — pure localStorage, synchronous
+- `usePersistedState.js` — synchronous init, no async flash, no `ready` flag
+- `fsrs-store.js` — pure localStorage, no window.storage
+- `ExportMode.jsx` — pure localStorage, removed `__ls__` hack
+- **Eliminated all `window.storage` references** across entire codebase
+
+### New Files
+- `src/srs/fsrs-core.js`
+- `src/srs/fsrs-store.js`
+- `src/srs/fsrs-scheduler.js`
+- `src/srs/index.js`
+- `src/hooks/useSRS.js`
+- `src/modes/ReviewMode.jsx`
+
+### Updated Files
+- `src/data/categories.js`
+- `src/utils/wrong-tracker.js`
+- `src/hooks/usePersistedState.js`
+- `src/hooks/index.js`
+- `src/App.jsx`
+- `src/modes/FlashcardMode.jsx`
+- `src/modes/ExportMode.jsx`
+- `src/components/Dashboard.jsx`
+- `package.json` (added `ts-fsrs: ^5.0.0`)
 
 ---
 
-*End of _MAP.md — Last updated 2026-04-27 by Crispy*
-
----
-
-## 10. v90 Design Overhaul Changelog
-
-### Design System: Cold Slate → Warm Amber (matching nugget-nihongo.pages.dev)
-
-| Token | v87 (old) | v90 (new) | Purpose |
-|-------|-----------|-----------|---------|
-| Background | `#0f172a` (cold slate) | `#0D0B08` (warm dark) | Main bg |
-| Primary text | `#e2e8f0` (cool gray) | `#FEF3C7` (warm cream) | Body text |
-| Bright text | `#f1f5f9` | `#FFFBEB` | Headlines |
-| Muted text | `#94a3b8` | `rgba(254,243,199,0.56)` | Secondary |
-| Accent gradient | `#f6d365 → #fda085` | `#92400E → #B45309 → #F59E0B` | Brand amber |
-| Info color | `#93c5fd` (blue) | `#FBBF24` (gold) | Highlights |
-| Borders | `rgba(255,255,255,0.09)` | `rgba(245,158,11,0.10)` | Warm tint |
-| Surfaces | `rgba(255,255,255,0.0X)` | `rgba(245,158,11,0.0X)` | Warm tint |
-
-### UX Additions
-- **Onboarding flow** — 4-step welcome screen for first-time users
-- **DM Sans font** — Matching main site typography
-- **Warm amber borders** — All borders have amber tint instead of cold white
-- **Brand gradient buttons** — CTA buttons use `#92400E → #F59E0B`
-
-### Files
-- `src/App-v90.jsx` — Complete working artifact (7,462 lines)
-- `legacy/ssw_flashcards_v87.jsx` — Previous version for comparison
+*End of _MAP.md — Last updated 2026-04-28 by Crunchy (QA)*
