@@ -4,7 +4,7 @@ import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
-import { CATEGORIES, VOCAB_SOURCES } from '../data/categories.js';
+import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from '../data/categories.js';
 
 describe('CARDS data integrity', () => {
   it('has at least 1400 cards', () => expect(CARDS.length).toBeGreaterThanOrEqual(1400));
@@ -157,5 +157,52 @@ describe('CATEGORIES', () => {
   it('VOCAB_SOURCES use canonical names', () => {
     const OLD = ['lifeline4', 'vocab_jac', 'vocab_core', 'vocab_exam', 'vocab_teori'];
     VOCAB_SOURCES.forEach((s) => expect(OLD).not.toContain(s));
+  });
+});
+
+describe('getCatsForTrack', () => {
+  const TRACKS = ['doboku', 'kenchiku', 'lifeline'];
+
+  it('returns non-empty array for every valid track', () => {
+    TRACKS.forEach((t) => {
+      const cats = getCatsForTrack(t);
+      expect(cats.length, `${t} returned 0 cats`).toBeGreaterThan(0);
+    });
+  });
+
+  it('never includes "all" or "bintang" in results', () => {
+    TRACKS.forEach((t) => {
+      const cats = getCatsForTrack(t);
+      expect(cats).not.toContain('all');
+      expect(cats).not.toContain('bintang');
+    });
+  });
+
+  it('all returned keys exist in CATEGORIES', () => {
+    const validKeys = new Set(CATEGORIES.map((c) => c.key));
+    TRACKS.forEach((t) => {
+      getCatsForTrack(t).forEach((key) => {
+        expect(validKeys.has(key), `unknown key "${key}" for track ${t}`).toBe(true);
+      });
+    });
+  });
+
+  it('each track actually filters cards (cards.category ∈ getCatsForTrack result)', () => {
+    TRACKS.forEach((t) => {
+      const cats = new Set(getCatsForTrack(t));
+      const trackCards = CARDS.filter((c) => cats.has(c.category));
+      expect(trackCards.length, `no cards for track ${t}`).toBeGreaterThan(0);
+    });
+  });
+
+  it('returns empty array for unknown track', () => {
+    expect(getCatsForTrack('nonexistent')).toEqual([]);
+  });
+
+  it('tracks have category overlap (common categories appear in multiple tracks)', () => {
+    const doboku = new Set(getCatsForTrack('doboku'));
+    const kenchiku = new Set(getCatsForTrack('kenchiku'));
+    const overlap = [...doboku].filter((k) => kenchiku.has(k));
+    expect(overlap.length).toBeGreaterThan(0); // common cats like keselamatan
   });
 });

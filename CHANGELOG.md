@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.3.6] - 2026-04-28
+
+### Fixed
+- **favicon 404** — icon-32x32.png tidak ada; diganti favicon.ico + favicon.png.
+- **FOUC dark-flash light mode** — body/root:empty::before background diganti ke #FFFDF5.
+- **color-scheme meta salah** — "dark" → "light dark".
+- **manifest background_color** — #0D0B08 → #FFFDF5 (light default splash).
+
+### Added
+- 6 tests baru: getCatsForTrack coverage (data.test.js). Total: 111 tests.
+
 ## [2.3.5] - 2026-04-28
 
 ### Fixed

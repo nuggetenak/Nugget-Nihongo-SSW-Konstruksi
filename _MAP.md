@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Claude (bugfix pass — v2.3.5)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ — production-ready, deployed to GitHub Pages
+> **Last updated:** 2026-04-28 by Claude (bugfix pass — v2.3.6)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ — production-ready, deployed to GitHub Pages
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
@@ -47,6 +47,7 @@ Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field
 | Phase 5.1 | Crunchy (QA) | ✅ | Icons replaced with Gemini-generated artwork; README full rewrite |
 | Phase 5.2 | Codex (Audit) | ✅ | Audit: build PASS, lazy-load all 15 modes, CHANGELOG, audit report |
 | Phase 5.3 | Claude (Bugfix) | ✅ | Bugfix pass: BottomNav dark bg, ReviewMode interval labels, async cleanup, initStore render fix, SearchMode boxSizing. Tests: 72→105. v2.3.4→v2.3.5 |
+| Phase 5.4 | Claude (Bugfix) | ✅ | HTML/PWA fixes: favicon 404, FOUC dark-flash, color-scheme meta, manifest splash color. getCatsForTrack tests. Tests: 105→111. v2.3.6 |
 
 ---
 
