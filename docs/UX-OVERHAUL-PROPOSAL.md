@@ -1,1296 +1,587 @@
-# 🎨 UX/UI Overhaul Proposal — SSW Konstruksi
+# 🎨 UX/UI Overhaul Proposal — SSW Konstruksi v3.0
 
-> **Author:** Crispy (Claude Opus 4.7)
-> **Date:** 2026-04-28
-> **Status:** Proposal — awaiting execution by next agent (Sonnet)
-> **Reference:** v90 monolith (`legacy/ssw_flashcards_v87.jsx` + screenshots) + current modular app
-> **Target audience:** Indonesian construction workers (N5–N4), beginner Japanese, preparing for SSW Konstruksi exam
-
----
-
-## 📋 Table of Contents
-
-1. [TL;DR](#tldr)
-2. [Context & Goals](#context--goals)
-3. [Gap Analysis: Current vs v90](#gap-analysis)
-4. [Design Principles](#design-principles)
-5. [Visual System](#visual-system)
-6. [Information Architecture](#information-architecture)
-7. [Component Library Spec](#component-library)
-8. [Screen Specs](#screen-specs)
-9. [Interaction & Microinteractions](#interactions)
-10. [Beginner UX Features](#beginner-ux)
-11. [Implementation Phases](#phases)
-12. [Acceptance Criteria](#acceptance)
-13. [Open Questions for Nugget](#open-questions)
+> **Author:** Crispy (Claude Opus 4.6)
+> **Date:** 2026-04-28 (rev.2 — post-codebase audit)
+> **Status:** Proposal — execution guide for next agent (Sonnet)
+> **Reference:** v87 monolith (`legacy/ssw_flashcards_v87.jsx`, 7389 lines) + v90 screenshots + current modular app
 
 ---
 
-## TL;DR
+## 🚨 Root Problem
 
-The current modular app has **superior architecture** (15 modes, SRS engine, PWA, CI/CD, 72 tests) but **inferior UX** compared to the v90 monolith. The v90 has richer flashcard interactions, better visual hierarchy, integrated stats, and a category grid filter that beginners can grok instantly.
+The modular rewrite (Phase 1–5) migrated the **architecture** (15 separate mode files, Vite bundler, SRS engine, CI/CD, PWA) but **dropped 50–70% of per-mode features** from the v87/v90 monolith. The current app has better bones but worse UX.
 
-This proposal outlines a **7-phase overhaul** that brings the v90's UX richness into the current modular structure — without sacrificing the architecture wins. The goal is a beginner-friendly study app that feels delightful, encourages daily use, and respects construction workers' study time (often 15–30 min per session, on mobile, often tired).
+### Evidence: Line-count comparison
 
-**Estimated effort:** 18–25 sessions of focused work across all phases. Each phase ends in a deployable state.
+| Mode | v87 lines | Current lines | % retained | Verdict |
+|------|-----------|--------------|------------|---------|
+| FlashcardMode | 247 | 409 | 165%* | *Bigger but MISSING 12 features (see below)* |
+| QuizMode | 317 | 140 | 44% | Gutted — delegated to generic QuizShell |
+| JACMode | 1183 | 160 | 14% | Severely gutted |
+| WaygroundMode | 450 | 179 | 40% | Missing result screen, score, restart |
+| SimulasiMode | 384 | 125 | 33% | Missing timer, result, score |
+| DangerMode | 216 | 114 | 53% | Halved |
+| AngkaMode | 233 | 97 | 42% | Halved |
+| StatsMode | 143 | 207 | 145%* | *Enhanced (has SRS stats)* |
+| GlossaryMode | 200 | 128 | 64% | Missing A-Z nav |
+| SprintMode | 124 | 248 | 200%* | *Properly migrated + enhanced* |
+| FocusMode | 124 | 123 | 99% | OK |
+| SumberMode | 209 | 144 | 69% | Simplified |
+| ExportMode | 93 | 308 | 331%* | *Enhanced (JSON import/export)* |
+| SearchMode | 90 | 116 | 129%* | *Slightly enhanced* |
+| **JpFront** | 75 | 54 | 72% | Missing 4 smart layouts |
+| **DescBlock** | 97 | 15 | 15% | Severely gutted |
+| **App (main)** | 680+ | 560 | ~80% | Missing starred, filter popup, last-mode |
 
-**Theme work already done:** Light/dark CSS-var system shipped in v2.4. All future work uses `T.*` tokens that auto-adapt.
-
----
-
-## Context & Goals
-
-### Who is the user?
-
-- **Primary:** Indonesian construction workers, age 22–35, currently in Indonesia, planning to work in Japan via SSW (Tokutei Ginou) program
-- **Japanese level:** N5–N4 (knows hiragana/katakana, ~500–1500 vocab, basic grammar)
-- **Device:** Mobile-only, often older Android phones, sometimes slow networks
-- **Study context:** 15–30 min sessions, often tired after work, on commute, or before bed
-- **Goal:** Pass JAC SSW Konstruksi exam (Setsubi/Doboku/Kenchiku tracks)
-
-### What we optimize for
-
-| Priority | Metric | Why |
-|----------|--------|-----|
-| 1 | **Time-to-first-card** (seconds from app open to studying) | Tired users won't navigate menus |
-| 2 | **Cards reviewed per session** | Spaced repetition compounds with consistency |
-| 3 | **Return rate** (DAU/MAU) | Construction exam needs months of prep |
-| 4 | **Mode discoverability** | 15 modes is many; beginners must find the right one |
-| 5 | **Error recovery** | Misclicks should be easy to undo |
-
-### What we de-prioritize
-
-- ❌ Power-user features (keyboard shortcuts, batch operations) — already exist, just not surfaced
-- ❌ Customization sliders (themes, fonts, layouts) — beginners want defaults
-- ❌ Social features (leaderboards, sharing) — adds anxiety for slower learners
-- ❌ Gamification overload (XP, levels, achievements) — dignified > playful for adult workers
+**\*Bigger ≠ better** — FlashcardMode grew because it added FSRS 4-button rating but lost 12 other features.
 
 ---
 
-## Gap Analysis
+## 📋 Exact Missing Features (verified by code diff)
 
-### 🟢 What current modular app has (that v90 lacks)
+### FlashcardMode — 12 missing features
 
-| Feature | Status |
-|---------|--------|
-| FSRS spaced repetition engine | ✅ ts-fsrs v5, ReviewMode, 4-button rating |
-| Track selection (土木/建築/ライフライン) | ✅ TrackPicker + per-track filtering |
-| PWA (install, offline, icons) | ✅ Phase 5 complete |
-| Modular architecture (15 mode files) | ✅ Easy to maintain |
-| Light/dark theme | ✅ Phase 5.3 (just shipped) |
-| Tests + CI/CD | ✅ 72 tests, GitHub Actions |
-| ExportMode (cross-device sync) | ✅ JSON export/import |
+| # | Feature | v87 has | Current has | Impact |
+|---|---------|---------|-------------|--------|
+| 1 | **Search bar** (JP/romaji/ID filter) | ✅ `search` state + input | ❌ | High — can't find specific cards |
+| 2 | **Star/favorite** (⭐ per card) | ✅ `starred` Set + `toggleStar()` | ❌ | High — can't bookmark hard cards |
+| 3 | **Tools row** (Prioritas/Urut/Reset/Review❌) | ✅ 4-button row | ❌ | High — can't control card order |
+| 4 | **Stats row** (Total/Hafal/Belum/Sisa boxes) | ✅ 4 colored stat boxes | ❌ | Medium — progress not visible in-mode |
+| 5 | **Category pill on card** (top-left badge) | ✅ `catInfo.emoji + label` | ❌ Only shows after flip | High — no context before flipping |
+| 6 | **Card # indicator** (#N corner) | ✅ Position number | ❌ | Low |
+| 7 | **Smart DescBlock** (①②③ lists, 【brackets】, footnotes) | ✅ 97-line parser | ❌ Only line-split | High — descriptions render flat/ugly |
+| 8 | **Smart JpFront** (vs, ・, ：, → layouts) | ✅ 75-line component | ❌ Only plain text | High — compound terms unreadable |
+| 9 | **Reset confirm dialog** (2-tap safety) | ✅ `confirmReset` + 3s timeout | ❌ | Medium — accidental resets |
+| 10 | **"Review Belum" filter** (show only ❌ cards) | ✅ `unknownCards` filter button | ❌ | High — can't review mistakes |
+| 11 | **Status border** (green/red/neutral by known state) | ✅ Dynamic `statusBorder` | ❌ Has SRS border instead | Medium |
+| 12 | **Flip gradient** (bg changes to category color) | ✅ `catInfo.color` gradient on flip | ❌ Static surface bg | Medium — less visual feedback |
 
-### 🔴 What v90 has (that current modular lacks or does worse)
+**Current HAS but v87 doesn't:** FSRS 4-button rating ✅, SRS strength badge ✅, swipe gestures ✅, interval preview ✅
 
-#### Home / Dashboard
-| v90 element | Current state | Priority |
-|-------------|---------------|----------|
-| Big bilingual title (`インフラ・設備 フラッシュカード`) | Small "SSW Konstruksi" in header | 🟡 Medium |
-| Materi toggle (Konsep / Vocab) — large segmented control | Hidden inside `vocabMode` state, no UI | 🔴 High |
-| Mode Belajar grid (2×2, large tiles with desc) | ModeGrid exists but no descriptions, smaller | 🔴 High |
-| Stats bar (Total / Hafal / Belum / Sisa, 4 colored boxes) | Exists in Dashboard but separate visual | 🟡 Medium |
-| Search bar prominently placed on home | Only in SearchMode (separate screen) | 🟡 Medium |
-| Filter pill ("すべて 750 kartu" + Filter button) | Pills row, no popup | 🔴 High |
-| Card count + progress bar | Only in modes, not on home | 🟢 Low |
+### QuizMode — 9 missing features
 
-#### FlashcardMode
-| v90 element | Current state | Priority |
-|-------------|---------------|----------|
-| Category pill on card (e.g. `🔔 挨拶・安全`) | Not shown on card | 🔴 High |
-| Card # indicator (`#4` corner) | Shown elsewhere | 🟡 Medium |
-| Flip with bg gradient change (dark → amber) | Plain flip | 🔴 High |
-| `← Prev / 👁️ Lihat / Next →` central nav row | Different pattern | 🔴 High |
-| `✗ Belum hafal / ✓ Sudah hafal` mark buttons | Different (FSRS 4-button overlays it) | 🟠 High but tricky |
-| Bottom tools row (Prioritas / Urut / Reset / ✗0) | Not present | 🔴 High |
-| "Lihat penjelasan" button on back | DescBlock exists but inline | 🟡 Medium |
-| Hint text ("ketuk = balik · geser = next") | Not present | 🟢 Low |
+| # | Feature | v87 has | Current has |
+|---|---------|---------|-------------|
+| 1 | **Quiz count selector** (10/20/30/All) | ✅ Button row | ❌ Hardcoded `Math.min(15, cards.length)` |
+| 2 | **Lemah mode** (focus on wrong-history cards) | ✅ `lemahMode` + `lemahCards` | ❌ |
+| 3 | **Streak display** (current + max) | ✅ In-quiz UI | ❌ QuizShell has it but not surfaced well |
+| 4 | **Anti-repeat** (`seenPoolRef` across restarts) | ✅ Prevents same card twice | ❌ |
+| 5 | **Settings panel** (in-quiz toggle) | ✅ `showSettings` gear icon | ❌ Settings only on pre-start screen |
+| 6 | **Auto-next configurable** (1s/1.5s/2s) | ✅ | ❌ Hardcoded 2s in QuizShell |
+| 7 | **JpFront smart rendering** on question card | ✅ | ❌ Plain text |
+| 8 | **After-answer reveal** (all options show JP+romaji+ID) | ✅ | ❌ Only color change |
+| 9 | **Wrong answer review** (end screen with details) | ✅ | ⚠️ QuizShell has basic ResultScreen |
 
-#### QuizMode
-| v90 element | Current state | Priority |
-|-------------|---------------|----------|
-| Settings gear top-right | Exists | ✅ |
-| Top counter `✓0 ✗0` + progress | Exists similar | ✅ |
-| Question card with category pill | Question card exists, no category pill | 🟡 Medium |
-| Numbered option buttons (1, 2, 3, 4 in circles) | Different style | 🟡 Medium |
-| **After-answer reveal: ALL options show JP+romaji+ID** | Only correct/wrong color | 🔴 High |
-| Question card reveals romaji + ID translation after answer | Not done | 🔴 High |
-| Hint footer ("1/2/3 pilih · Enter lanjut") | Not present | 🟢 Low |
+### JACMode — 5 missing features
 
-#### Filter / Categories
-| v90 element | Current state | Priority |
-|-------------|---------------|----------|
-| Category grid popup (3×4 with emoji + JP + count) | Pills row only | 🔴 High |
-| "Filter ▲" toggle button | Not present | 🔴 High |
-| Category counts visible | Not shown | 🟡 Medium |
-| Star button (favorites filter) | Hidden in `bintang` category | 🟡 Medium |
+| # | Feature | v87 has | Current has |
+|---|---------|---------|-------------|
+| 1 | **Chapter detail view** (browse questions per chapter) | ✅ Full navigation | ❌ Just set picker → quiz |
+| 2 | **Score tracking per chapter** | ✅ | ❌ |
+| 3 | **showHira toggle** (furigana on/off for questions AND options) | ✅ Applies to options too | ⚠️ Partial — `showFuri` exists |
+| 4 | **Result review** (wrong answers with explanations) | ✅ | ⚠️ Via QuizShell |
+| 5 | **Auto-advance delay** | ✅ Configurable | ❌ Hardcoded |
 
-### 🆕 New UX needs (neither v90 nor current has)
+### WaygroundMode — 4 missing features
 
-These are **beginner-UX gaps** that neither version addresses well:
+| # | Feature | v87 has | Current has |
+|---|---------|---------|-------------|
+| 1 | **WaygroundQuizMode** (dedicated quiz UI) | ✅ Separate component | ❌ Uses generic QuizShell |
+| 2 | **WaygroundResult** (score + maxStreak + review) | ✅ 73-line component | ❌ Generic ResultScreen |
+| 3 | **Score + maxStreak** tracking per set | ✅ | ❌ |
+| 4 | **Restart with same set** | ✅ | ❌ |
 
-1. **No "What should I do today?" intelligence** — beginners stare at 15 modes and freeze
-2. **No daily goal / streak motivation** beyond raw stats
-3. **No celebration on milestones** (first 10 cards, first quiz pass, 7-day streak)
-4. **No tutorial overlay** for first-time users in each mode
-5. **No empty state messaging** (e.g. ReviewMode when no cards due)
-6. **No "Recently studied"** section to resume
-7. **No estimated time** per mode ("Quiz takes ~5 min")
-8. **No JLPT/SSW context** for cards (which exam this card belongs to)
+### SimulasiMode — 5 missing features
+
+| # | Feature | v87 has | Current has |
+|---|---------|---------|-------------|
+| 1 | **Countdown timer** (visual display) | ✅ `timeLeft` + `countdown` | ❌ Timer prop exists but no UI |
+| 2 | **Time-up auto-finish** | ✅ | ❌ |
+| 3 | **Score tracking** | ✅ | ❌ |
+| 4 | **Result screen** (pass/fail + score) | ✅ | ❌ |
+| 5 | **Wrong answer review** | ✅ | ❌ |
+
+### JpFront / JpDisplay — 4 missing layouts
+
+| # | Pattern | v87 renders as | Current renders as |
+|---|---------|----------------|-------------------|
+| 1 | `A vs B` | Stacked with VS divider | Plain text "A vs B" |
+| 2 | `A・B・C` | Stacked with HR dividers | Plain text "A・B・C" |
+| 3 | `Title：Subtitle` | Title + divider + subtitle | Plain text |
+| 4 | `A → B → C` | Stacked with ↓ arrows | Plain text |
+
+### DescBlock — 3 missing render modes
+
+| # | Pattern | v87 renders as | Current renders as |
+|---|---------|----------------|-------------------|
+| 1 | `①②③` numbered items | Parsed into styled list with orange numbers | Plain text with line breaks |
+| 2 | `【keyword】` brackets | Parsed into labeled segments with colored badges | Plain text |
+| 3 | `(Sumber: ...)` footnotes | Extracted as faint italic footer | Inline text |
+
+### App-level — 3 missing features
+
+| # | Feature | v87 has | Current has |
+|---|---------|---------|-------------|
+| 1 | **Starred cards system** (localStorage persist) | ✅ `starred` Set + auto-save | ❌ |
+| 2 | **Category filter popup** (3-col grid, emoji, count, "Terapkan" button) | ✅ `filterOpen` + grid | ❌ Only pills row |
+| 3 | **Last-mode persistence** (resume on reload) | ✅ `ssw-last-mode` | ❌ Always starts at home |
 
 ---
 
-## Design Principles
+## ✅ Current App Advantages (keep these)
 
-These principles override aesthetic preferences. When in conflict, principle wins.
+These are things the current modular app has that v87/v90 does NOT:
 
-### P1. Mobile-first, thumb-zone friendly
-- Primary actions in **bottom 60%** of screen (thumb reach)
-- Tap targets minimum **44×44px** (WCAG 2.1 AA)
-- Critical destructive actions require confirmation OR are easily undoable
-- Avoid hover-only states (touch has no hover)
+1. **FSRS spaced repetition** (ts-fsrs v5, ReviewMode, 4-button rating, interval preview)
+2. **Track system** (土木/建築/ライフライン with per-track filtering)
+3. **Light/dark theme** (CSS vars, toggle, no flash)
+4. **PWA** (offline, installable, service worker)
+5. **CI/CD** (GitHub Actions: lint → test → build → deploy)
+6. **72 unit tests**
+7. **Modular architecture** (15 separate mode files, shared hooks/utils)
+8. **Code splitting** (React.lazy per mode, manual chunks in Vite)
+9. **ExportMode** (JSON import/export with diff dialog)
+10. **SRS strength badges** (on cards, in dashboard)
 
-### P2. Indonesian-first, Japanese always visible
-- Body text always in Indonesian
-- JP terms always show kanji + romaji together (no romaji-hidden mode)
-- Keep "buatan Nugget" tone — warm, encouraging, not corporate
+**These MUST NOT be broken or removed during the overhaul.**
 
-### P3. Show progress relentlessly
-- Every screen has at least one progress indicator
-- Empty states show "you'll see X here when..." not just blank
-- Completion percentages computed in real-time, not on next load
+---
+
+## 🎯 Design Principles
+
+### P1. Mobile-first, thumb-zone
+Primary actions in bottom 60% of screen. Tap targets ≥ 44×44px.
+
+### P2. Indonesian-first, JP always visible
+Body text Indonesian. JP terms always show kanji + romaji.
+
+### P3. Show progress everywhere
+Every screen has at least one progress indicator.
 
 ### P4. One primary action per screen
-- Each screen has a clear "what should I do" — visually dominant
-- Secondary actions are smaller, lower contrast
-- Tertiary actions hidden behind menu / long-press
+Clear "what should I do" — visually dominant.
 
 ### P5. Forgive misclicks
-- Marking a card "Sudah hafal" is undoable (toast with Undo button, 5s)
-- Quiz answers can be reviewed at end
-- Reset/clear actions require explicit confirmation
-- Back button never destroys progress
+Reset/clear require confirm. Mark actions have undo.
 
 ### P6. Calm, not noisy
-- One animation playing at a time (no competing motion)
-- Sound effects optional, default OFF
-- Reduce decorative elements that don't aid comprehension
-- High contrast, but not harsh — warm grays, not pure black/white
+One animation at a time. High contrast but warm.
 
 ### P7. Beginner-first defaults
-- New users see **Konsep mode** first (easier than Vocab)
-- Quiz starts at 5 questions, not 20
-- SRS rating defaults to "Oke" (button is largest)
-- Filter defaults to "All" not previous selection
+Konsep first, quiz starts at 10, SRS defaults to "Oke".
 
 ### P8. Respect data + battery
-- No autoplay videos/sounds
-- Lazy-load mode chunks (already done)
-- Cache aggressively (already done via SW)
-- Keep bundle small — don't add libraries casually
+No autoplay. Lazy-load. Cache aggressively.
 
 ---
 
-## Visual System
+## 🛠 Implementation Phases
 
-### Colors (already shipped — see `src/styles/theme.js`)
+### Phase 1 — Smart Text Components (1 session)
 
-**Light theme** (default): cream `#FFFDF5`, warm dark text, amber accents
-**Dark theme** (toggle): warm dark `#0D0B08`, cream text, same amber accents
+**Goal:** Restore JpFront and DescBlock to v87 feature parity.
 
-**Key brand colors (both themes):**
-- `T.amber` `#F59E0B` — primary CTA
-- `T.amberDark` `#92400E` — gradient start
-- `T.amberMid` `#B45309` — gradient mid
-- `T.gold` `#FBBF24` — highlights, due-card alerts
-- `T.correct` `#16a34a` — success
-- `T.wrong` `#dc2626` — error
-
-**Track colors** (light theme adjusted):
-- 土木 Doboku: `#D97706` (warm orange)
-- 建築 Kenchiku: `#0284C7` (sky blue)
-- ライフライン Lifeline: `#059669` (emerald)
-
-### Typography Scale
-
-Add to `theme.js` as `T.type`:
-
-```js
-type: {
-  // Display (hero titles, big JP)
-  display: { size: 32, weight: 800, line: 1.15, letter: -0.02 },
-  // Heading levels
-  h1: { size: 24, weight: 800, line: 1.2 },
-  h2: { size: 19, weight: 700, line: 1.25 },
-  h3: { size: 16, weight: 700, line: 1.3 },
-  // Body
-  bodyLg: { size: 15, weight: 500, line: 1.5 },
-  body:   { size: 14, weight: 400, line: 1.5 },
-  bodySm: { size: 13, weight: 400, line: 1.45 },
-  // UI labels
-  label: { size: 12, weight: 600, line: 1.3, upper: true, letter: 0.06 },
-  caption: { size: 11, weight: 500, line: 1.3 },
-  micro: { size: 10, weight: 600, line: 1.2 },
-  // JP-specific
-  jpHero: { size: 44, weight: 700, line: 1.3 },  // flashcard front
-  jpLg:   { size: 28, weight: 600, line: 1.4 },  // quiz question
-  jpMd:   { size: 19, weight: 500, line: 1.45 },
-  jpSm:   { size: 15, weight: 500, line: 1.5 },
-}
-```
-
-**Adaptive JP sizing** (already exists as `jpFontSize()` in v87) — keep, extend with the table above.
-
-### Spacing Scale
-
-Already defined as `T.sp = [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64]`. Use indices, not raw px:
-- `T.sp[2]` for tight (8px)
-- `T.sp[4]` for default (16px)
-- `T.sp[6]` for section gap (24px)
-- `T.sp[8]` for screen edge (40px)
-
-### Radius
-
-Already defined: `T.r = { xs:6, sm:8, md:12, lg:16, xl:20, xxl:24, pill:99 }`
-
-**Consistency rules:**
-- Buttons: `T.r.lg` (16) for primary, `T.r.md` (12) for secondary
-- Cards: `T.r.xl` (20) for primary cards, `T.r.lg` (16) for nested
-- Pills/badges: `T.r.pill`
-- Input fields: `T.r.md`
-- Modal: `T.r.xxl` (24)
-
-### Shadow
-
-Already defined as CSS vars. Usage rules:
-- `T.shadow.sm` — inputs, small cards
-- `T.shadow.md` — elevated cards, popovers
-- `T.shadow.lg` — modals
-- `T.shadow.glow` — primary CTA, due-card alerts (amber glow)
-- `T.shadow.glowStrong` — celebrations, milestones
-
-### Animation tokens
-
-Add to `theme.js`:
-
-```js
-motion: {
-  fast: '0.12s ease-out',     // hover, press
-  base: '0.2s ease-out',      // default transitions
-  slow: '0.35s ease-in-out',  // page transitions
-  spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',  // delightful bounce
-  flip: '0.5s cubic-bezier(0.4, 0.0, 0.2, 1)',  // card flip
-}
-```
-
-**Reduce motion** support: respect `prefers-reduced-motion: reduce` — disable flip animations, fades become instant.
-
----
-
-## Information Architecture
-
-### Decision: Bottom Nav vs Top Tabs
-
-**v90 uses top tabs** (`Belajar | Ujian | Referensi | Progres`).
-**Current uses bottom nav** (`Home | Belajar | Ujian | Lainnya`).
-
-**Recommendation: KEEP bottom nav** but improve its design.
-
-**Rationale:**
-- Bottom nav is thumb-friendly on tall phones (better than top tabs for one-handed use)
-- iOS/Material Design conventions — users expect it
-- Top tabs work in v90 because the page scrolls under them (not anchored), but that fights with content scroll
-- Bottom nav is fixed, always-accessible
-
-**Caveat:** Rename `Lainnya` → `Lainnya` (keep) but redesign as a sheet/grid with better discovery, not just a list of leftover modes.
-
-### Tab Content Reorganization
-
-| Tab | Icon | Modes |
-|-----|------|-------|
-| **Beranda** (home) | 🏠 | Dashboard (NEW: with Materi toggle, Quick Start, Recent, Stats) |
-| **Belajar** | 📚 | ulasan (Ulang SRS) ★ FIRST, kartu, kuis, sprint, fokus |
-| **Ujian** | 📝 | jac, wayground, simulasi, angka, jebak |
-| **Lainnya** | ⋯ | cari, glosari, sumber, stats, ekspor + theme toggle, about |
-
-### Mode Priority (within each tab)
-
-**Belajar tab order** — change to put SRS first:
-1. **Ulasan** (SRS due cards) — has badge with due count
-2. **Kartu** (flashcards)
-3. **Kuis** (auto quiz)
-4. **Sprint** (timed drill)
-5. **Fokus Lemah** (weakest cards)
-
-**Ujian tab order:**
-1. **JAC Official** — most authoritative
-2. **Simulasi** — full mock exam
-3. **Wayground** — sensei materials
-4. **Angka Kunci** — must-memorize numbers
-5. **Soal Jebak** — confusable pairs
-
----
-
-## Component Library
-
-These are atomic primitives. Build them, then compose. Each goes in `src/components/ui/`.
-
-### `<Card>` — primary container
-```jsx
-<Card variant="default | elevated | outlined | ghost" 
-      padding="sm | md | lg"
-      onClick={...}>
-  {children}
-</Card>
-```
-- `default`: surface bg, no border
-- `elevated`: surface bg + shadow.md
-- `outlined`: transparent + border
-- `ghost`: surface bg only on hover/active
-
-### `<Button>` — replace inline buttons
-```jsx
-<Button 
-  variant="primary | secondary | ghost | danger"
-  size="sm | md | lg"
-  icon="🃏"
-  loading={false}
-  fullWidth>
-  Mulai Belajar
-</Button>
-```
-- `primary`: amber gradient bg, white text
-- `secondary`: surface bg, border, text color
-- `ghost`: transparent, text color only
-- `danger`: red bg, white text
-
-### `<Pill>` — small categorical labels
-```jsx
-<Pill color="amber | track | semantic" icon="🏗️">
-  土木
-</Pill>
-```
-
-### `<StatBox>` — stat with label
-```jsx
-<StatBox value="750" label="Total" color="text" />
-<StatBox value="42" label="Hafal" color="correct" />
-<StatBox value="708" label="Sisa" color="amber" />
-```
-
-### `<IconButton>` — square icon-only
-```jsx
-<IconButton icon="🌙" onClick={toggle} ariaLabel="Theme" />
-```
-
-### `<SectionHeader>` — for grouped content
-```jsx
-<SectionHeader 
-  label="MATERI"  // Caps-locked uppercase 
-  action={<Button size="sm">Lihat semua</Button>}
-/>
-```
-
-### `<ProgressBar>` — already exists, extend
-```jsx
-<ProgressBar 
-  value={42} max={750} 
-  variant="amber | track | semantic"
-  showLabel  // shows "42 / 750 (5%)"
-  height={6}
-/>
-```
-
-### `<Badge>` — count indicator
-```jsx
-<Badge count={5} max={99} variant="alert | info | track" />
-```
-
-### `<EmptyState>` — for empty mode/list
-```jsx
-<EmptyState
-  icon="🎉"
-  title="Semua kartu sudah terulang!"
-  desc="Datang lagi besok untuk ulasan baru."
-  action={<Button>Pelajari kartu baru</Button>}
-/>
-```
-
-### `<Toast>` — non-blocking notification
-```jsx
-toast.show({ 
-  message: 'Kartu ditandai hafal',
-  action: { label: 'Undo', onClick: () => undo() },
-  duration: 5000 
-})
-```
-
-### `<ConfirmDialog>` — destructive action confirmation
-```jsx
-<ConfirmDialog
-  title="Reset semua progres?"
-  desc="Tindakan ini tidak bisa dibatalkan."
-  confirmLabel="Ya, reset"
-  cancelLabel="Batal"
-  variant="danger"
-/>
-```
-
-### Migration plan for primitives
-- **Phase A.3** — build all 10 primitives + Storybook-style demo page (private route)
-- **Phase B onwards** — migrate one mode at a time to use primitives instead of inline styles
-- Inline styles still allowed for one-off layouts; primitives for reusable patterns
-
----
-
-## Screen Specs
-
-### 🏠 Beranda (Home) — `Dashboard.jsx`
-
-**Goal:** answer "what should I do right now?" in <2 seconds.
-
-**Layout (top to bottom):**
-
-```
-┌─────────────────────────────────────┐
-│ [Header]                            │
-│ SSW Konstruksi · インフラ・設備       │
-│ by Nugget Nihongo                   │
-│                          [🌙] [🏗️]  │  ← theme + track pills
-├─────────────────────────────────────┤
-│ [Quick Start Card]    ← LARGE       │
-│ 🔁  5 kartu siap diulang            │
-│     Lanjut ulasan SRS               │
-│                                     │
-│  [Mulai →]                          │
-├─────────────────────────────────────┤
-│ MATERI                              │
-│ ┌──────────┬──────────┐             │
-│ │ Konsep   │ Vocab    │             │
-│ │ 750 kartu│ 688 kartu│             │
-│ └──────────┴──────────┘             │  ← segmented toggle
-├─────────────────────────────────────┤
-│ MODE BELAJAR                        │
-│ ┌──────────┬──────────┐             │
-│ │ 🃏 Kartu │ ❓ Kuis  │             │
-│ │ Belajar  │ Tes diri │             │
-│ ├──────────┼──────────┤             │
-│ │ ⚡ Sprint│ 🎯 Fokus │             │
-│ │ Cepat    │ Lemah    │             │
-│ └──────────┴──────────┘             │
-├─────────────────────────────────────┤
-│ STATS HARI INI                      │
-│ ┌───┬───┬───┬───┐                   │
-│ │750│ 42│ 18│690│                   │
-│ │Tot│Haf│Blm│Sis│                   │
-│ └───┴───┴───┴───┘                   │
-│ [progress bar 42/750]               │
-├─────────────────────────────────────┤
-│ TERAKHIR DIPELAJARI                 │
-│ • 朝礼 (chorei) — Apel pagi         │
-│ • 安全帯 (anzentai) — Sabuk pengaman │
-│ • ...                               │
-│ [Lihat semua →]                     │
-├─────────────────────────────────────┤
-│ STREAK                              │
-│ 🔥 7 hari · belajar tiap hari!      │
-└─────────────────────────────────────┘
-```
-
-**Key changes from current Dashboard:**
-
-1. **Quick Start Card** (NEW) — replaces the existing "suggestion" tile at top, but bigger, gradient bg, prominent CTA
-2. **Materi toggle** (NEW) — segmented control, persists `vocabMode` state visibly
-3. **Mode Belajar grid** (REDESIGN) — 2×2 with description, larger tiles, like v90
-4. **Stats hari ini** (KEEP, REDESIGN) — 4 numbered boxes inline like v90
-5. **Terakhir dipelajari** (NEW) — last 5 cards user marked, tap to jump
-6. **Streak** (NEW) — already tracked via `useStreak`, just surface it
-
-**State logic for Quick Start:**
-
-```js
-function getQuickStart({dueCount, knownN, total, vocabMode, isFirstTime}) {
-  if (isFirstTime) return { mode: 'kartu', label: 'Mulai dengan Kartu pertama', icon: '👋', desc: 'Tour singkat' };
-  if (dueCount > 0) return { mode: 'ulasan', label: `${dueCount} kartu siap diulang`, icon: '🔁', desc: 'SRS jatuh tempo' };
-  if (knownN < 10) return { mode: 'kartu', label: 'Lanjutkan kartu', icon: '🃏', desc: 'Bangun pondasi' };
-  if (knownN / total < 0.3) return { mode: 'kartu', label: 'Lanjutkan kartu', icon: '🃏', desc: `${knownN} sudah hafal` };
-  if (knownN / total < 0.6) return { mode: 'kuis', label: 'Coba kuis', icon: '❓', desc: 'Uji ingatanmu' };
-  if (knownN / total < 0.85) return { mode: 'jac', label: 'Soal JAC official', icon: '📋', desc: 'Latihan soal asli' };
-  return { mode: 'simulasi', label: 'Simulasi ujian penuh', icon: '🎯', desc: 'Kamu hampir siap!' };
-}
-```
-
----
-
-### 🃏 FlashcardMode — major redesign
-
-**Layout:**
-
-```
-┌─────────────────────────────────────┐
-│ ← [back]    Kartu       [⋯ menu]   │  ← header
-│ 1 / 750               42% hafal     │  ← progress
-│ ▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░       │
-├─────────────────────────────────────┤
-│                                     │
-│  ┌───────────────────────────────┐  │
-│  │ 🔔 挨拶・安全          #4    │  │  ← category pill + card #
-│  │                               │  │
-│  │                               │  │
-│  │           朝 礼              │  │  ← jpHero
-│  │                               │  │
-│  │           chorei              │  │  ← romaji muted
-│  │                               │  │
-│  │   ketuk = balik · geser →    │  │  ← hint, faint
-│  │                               │  │
-│  └───────────────────────────────┘  │
-│                                     │
-├─────────────────────────────────────┤
-│ ┌──────┐ ┌──────────────┐ ┌──────┐ │
-│ │← Prev│ │ 👁️  Lihat    │ │Next →│ │  ← nav row
-│ └──────┘ └──────────────┘ └──────┘ │
-│                                     │
-│ ┌────────────────┬────────────────┐ │
-│ │ ✗ Belum hafal │ ✓ Sudah hafal │ │  ← mark row
-│ └────────────────┴────────────────┘ │
-│                                     │
-├─────────────────────────────────────┤
-│ ┌─────┬─────┬─────┬─────┐          │
-│ │🎯   │ ⏯  │ 🔄  │ ⭐  │          │  ← tools row
-│ │Prio │Urut │Reset│ ✗ 0 │          │
-│ └─────┴─────┴─────┴─────┘          │
-└─────────────────────────────────────┘
-```
-
-**Back of card (after flip):**
-
-```
-┌───────────────────────────────┐
-│ 🔔 挨拶・安全          #4    │
-│                               │
-│         chorei                │  ← romaji small
-│         Apel pagi             │  ← ID translation big
-│                               │
-│  [📖 Lihat penjelasan]        │  ← reveals desc
-│                               │
-└───────────────────────────────┘
-       ▲ amber gradient bg ▲
-```
-
-**Key behaviors:**
-
-1. **Card has gradient background** that intensifies on flip (front: surface, back: amber gradient)
-2. **Tap card OR press Lihat = flip**
-3. **Swipe left = next, swipe right = prev** (also Prev/Next buttons)
-4. **Mark buttons (✓/✗) work even without flipping** — but flipped state preferred
-5. **Tools row:**
-   - **Prioritas** — opens modal: pick category to focus
-   - **Urut** — toggles sort: shuffle / original / hardest first
-   - **Reset** — confirms, clears progress for current filter
-   - **⭐ ✗N** — toggles starred filter (shows only starred); badge shows count
-6. **Long-press card** → quick action menu (mark + star + report issue)
-7. **Hint text** appears for first 3 cards only (`localStorage.flashHintShown`), then fades
-8. **#4 indicator** = card position within current filter (not global ID)
-
-**FSRS integration:**
-- Mark "✓ Sudah hafal" → ratings = 3 (Good)
-- Mark "✗ Belum hafal" → rating = 1 (Again)
-- For power users: long-press ✓ → choose Susah(2) / Oke(3) / Mudah(4)
-- Compatibility: existing 4-button rating UI removed in favor of binary; advanced behind long-press
-
----
-
-### ❓ QuizMode — answer reveal redesign
-
-**Question state:**
-
-```
-┌─────────────────────────────────────┐
-│ ← back      Kuis       [⚙]         │
-│ 1/10              ✓ 0  ✗ 0          │
-│ ▓░░░░░░░░░░░░░░░░░░░░░░░░░         │
-├─────────────────────────────────────┤
-│  ┌───────────────────────────────┐  │
-│  │ 🔨 共通工具                  │  │
-│  │                               │  │
-│  │   ほうき + ちりとり          │  │  ← jpLg
-│  │   + ブロアー                  │  │
-│  └───────────────────────────────┘  │
-│                                     │
-│ ┌─┬─────────────────────────────┐   │
-│ │1│ Gerobak sorong satu roda    │   │
-│ ├─┼─────────────────────────────┤   │
-│ │2│ Lantai                      │   │
-│ ├─┼─────────────────────────────┤   │
-│ │3│ Sapu / Pengki / Blower      │   │
-│ ├─┼─────────────────────────────┤   │
-│ │4│ Hidran LUAR vs DALAM        │   │
-│ └─┴─────────────────────────────┘   │
-│                                     │
-│ 1/2/3/4 pilih · Enter lanjut       │
-└─────────────────────────────────────┘
-```
-
-**After-answer state (CRITICAL — current app misses this):**
-
-```
-┌─────────────────────────────────────┐
-│ 1/10              ✓ 0  ✗ 1          │
-├─────────────────────────────────────┤
-│  ┌───────────────────────────────┐  │
-│  │ 🔨 共通工具                  │  │
-│  │                               │  │
-│  │  ほうき + ちりとり + ブロアー │  │
-│  │  ─────────────────            │  │
-│  │  houki + chiritori + buroaa  │  │  ← romaji revealed
-│  │  🇮🇩 Sapu / Pengki / Blower   │  │  ← ID revealed
-│  └───────────────────────────────┘  │
-│                                     │
-│ ┌─┬───────────────────────────┐ ✗  │  ← user's wrong pick (red bg)
-│ │1│ Gerobak sorong satu roda  │    │
-│ │ │ 一輪車                     │    │  ← + JP
-│ │ │ ichirinsha                │    │  ← + romaji
-│ ├─┼───────────────────────────┤    │
-│ │2│ Lantai                    │    │  ← dim
-│ │ │ 床 yuka                    │    │
-│ ├─┼───────────────────────────┤ ✓  │  ← correct (green bg)
-│ │3│ Sapu / Pengki / Blower    │    │
-│ │ │ ほうき+ちりとり+ブロアー   │    │
-│ │ │ houki+chiritori+buroaa    │    │
-│ ├─┼───────────────────────────┤    │
-│ │4│ Hidran LUAR vs DALAM      │    │
-│ │ │ ...                       │    │
-│ └─┴───────────────────────────┘    │
-│                                     │
-│ [Lanjut →]                          │
-└─────────────────────────────────────┘
-```
-
-**Why this matters:** Beginners learn from seeing the correct answer + their wrong choice + all distractors with full context. Current app just colors the right/wrong cell.
-
-**Implementation:**
-- Already have `card.jp` `card.romaji` `card.id_text` for the question
-- For each option, need to know which card it represents → store `optionCardIds[]` alongside `options[]`
-- After answer: render each option as `<OptionRevealed>` with full info
-
----
-
-### 📋 JACMode — minor polish
-
-**Current is good. Add:**
-- Category pill on question card (which JAC chapter)
-- After-answer: same reveal pattern as QuizMode (show JP+romaji+ID for question)
-- Footer: "Soal #N · Sumber: Bab X JAC PDF"
-
----
-
-### 🎮 WaygroundMode — set selector polish
-
-**Current shows 12 sets in a list. Improvement:**
-- Card grid (2 cols) per set
-- Each card shows: set name + question count + last score (if attempted)
-- Empty state if no sets selected: "Pilih set di atas untuk mulai"
-
----
-
-### 🎯 SimulasiMode — make it feel like a real exam
-
-**Add:**
-- Pre-exam screen: "Simulasi Ujian — 30 menit, 30 soal" + [Mulai]
-- Timer countdown visible always
-- Cannot exit without confirm dialog
-- Result screen: pass/fail badge, breakdown by category, weak categories
-
----
-
-### 🔁 ReviewMode (SRS) — already strong, polish only
-
-**Add:**
-- Empty state when 0 due: "🎉 Semua kartu sudah terulang. Datang lagi besok!" + suggestion to learn new
-- Completion screen: show next due time ("Berikutnya: 2 jam lagi · 5 kartu")
-- Long-press rating button → preview interval ("Lagi: 1 menit, Susah: 6 jam, Oke: 1 hari, Mudah: 4 hari")
-
----
-
-### ⚡ SprintMode — timer drama
-
-**Add:**
-- Pre-sprint: countdown 3-2-1-GO
-- Timer in big circle, color shifts: green → amber → red as time depletes
-- Completion: lap-style results showing answers per second
-
----
-
-### 📊 StatsMode — visual upgrade
-
-**Add:**
-- Donut chart: known / unknown / untouched
-- Streak calendar (last 30 days, fire icon on study days)
-- Per-category breakdown bars
-- Most-missed cards list (top 10)
-
----
-
-### 🔍 SearchMode — make it instant
-
-**Add:**
-- Search-as-you-type (debounce 200ms)
-- Highlight matched text in results
-- Recent searches (last 5, localStorage)
-- Empty state: "Coba cari 'denki' atau '電気'"
-
----
-
-### 📖 GlossaryMode — add A-Z jump
-
-**Add:**
-- A-Z jump bar on right edge (like iOS contacts)
-- Group headers: あ / か / さ / た / な / は / ま / や / ら / わ
-- Show stats inline per term (✓ if known)
-
----
-
-### 📚 SumberMode — already good, polish
-
-**Add:**
-- Grouped by source category (JAC chapters, Wayground sets, Vocab packs)
-- Card count per source
-- Tap → filter cards mode by that source
-
----
-
-### 💾 ExportMode — clearer messaging
-
-**Add:**
-- Visual: file icon + "Unduh progres-mu"
-- Show what's included: ✓ Hafal/Belum, ✓ SRS, ✓ Streak
-- Import: drag-drop area + file picker
-- After import: confirmation dialog showing diff (e.g. "+5 hafal, +2 SRS cards")
-
----
-
-### 🎲 DangerMode (Soal Jebak) — tighten
-
-**Add:**
-- Pre-mode: explain "kartu yang mirip / mudah tertukar"
-- After answer: side-by-side comparison of the confused pair
-- Visual diff highlighting the differentiating kanji/character
-
----
-
-### 🔢 AngkaMode — flashcard-style is fine
-
-**Add:**
-- Group by category (waktu / dosis / panjang / dll)
-- Review pattern same as flashcard
-- "Wajib hafal sebelum ujian" badge
-
----
-
-## Interactions
-
-### Card flip (FlashcardMode)
-
-```css
-.card { transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-.card.flipped { transform: rotateY(180deg); }
-.front, .back { backface-visibility: hidden; position: absolute; inset: 0; }
-.back { transform: rotateY(180deg); }
-```
-
-**Reduced motion fallback:** crossfade instead of rotate.
-
-### Swipe gestures
-
-Use **`useSwipe()`** custom hook (build new):
-```js
-useSwipe(elemRef, {
-  onSwipeLeft: () => goNext(),
-  onSwipeRight: () => goPrev(),
-  threshold: 50, // px
-})
-```
-
-**Don't break vertical scroll** — only respond if horizontal delta > vertical delta.
-
-### Long-press
-
-Use **`useLongPress()`** hook (build new):
-```js
-useLongPress(elemRef, {
-  onLongPress: () => openMenu(),
-  duration: 500, // ms
-})
-```
-
-### Toast system
-
-Build a `<ToastProvider>` at root, expose `toast.show()` via context.
-- Auto-dismiss after `duration` (default 3s)
-- Optional action button (Undo)
-- Stack limit: 3 toasts max
-- Position: bottom-center, above bottom nav
-
-### ConfirmDialog
-
-Build `<ConfirmDialog>` with portal.
-- Modal backdrop dimmer
-- Tap backdrop = cancel (treated as Batal)
-- Esc/back button = cancel
-- Slide-up animation from bottom on mobile
-
-### Page transitions
-
-Mode → Mode: crossfade 200ms. Avoid slide animations (feels janky on slower phones).
-
-### Haptic feedback (optional, behind setting)
-
-```js
-const haptic = (type) => {
-  if (!navigator.vibrate) return;
-  const patterns = { light: 10, medium: 20, heavy: [40, 30, 40] };
-  navigator.vibrate(patterns[type] || 10);
-}
-```
-
-Use cases:
-- Card flip: light
-- Mark hafal: medium
-- Quiz wrong answer: heavy
-- Streak milestone: heavy
-
-Default: OFF (battery). Toggle in Settings.
-
----
-
-## Beginner UX
-
-### F1. Smart "next action" engine
-
-Already specced in Dashboard `getQuickStart()`. Logic-only, no new infra.
-
-### F2. Daily goal system
-
-**State:** `localStorage.ssw-daily-goal = 20` (cards reviewed today)
-
-**Logic:**
-- Reset count at midnight (compare last-reset date)
-- Show donut on Dashboard: `15 / 20 hari ini`
-- On hit: trigger celebration (confetti + toast "🎉 Goal harian tercapai!")
-- Settings allow change (5 / 10 / 20 / 50 / custom)
-
-### F3. Streak system
-
-Already implemented in `useStreak.js`. Just **surface it on Dashboard**:
-- "🔥 7 hari berturut-turut"
-- Yesterday studied? → counter ticks up at next session
-- Missed yesterday? → counter resets to 1
-- Show calendar of last 30 days (filled days = study)
-
-### F4. Tutorial overlays (first-time)
-
-Each mode shows a one-time tooltip overlay on first visit:
-
-```jsx
-<FirstTimeTooltip
-  storageKey="ssw-tutorial-flashcard"
-  steps={[
-    { target: '.card', text: 'Ketuk kartu untuk lihat artinya' },
-    { target: '.nav-buttons', text: 'Geser kiri-kanan atau pakai tombol' },
-    { target: '.mark-buttons', text: 'Tandai sesuai kemampuanmu' },
-  ]}
-/>
-```
-
-### F5. Help tooltips (info icons)
-
-Small ⓘ next to obscure terms:
-- "SRS" → tooltip: "Spaced Repetition — sistem ulasan yang muncul saat kamu mau lupa"
-- "FSRS" → tooltip: "Algoritma SRS modern, lebih akurat dari Anki klasik"
-- "JAC" → tooltip: "Japan Construction Cooperative — penyelenggara ujian SSW"
-
-### F6. Empty states
-
-Every list/mode has a designed empty state. Pattern:
-- Big icon (60px)
-- Title (h2)
-- Description (body)
-- Primary CTA
-
-**Example for ReviewMode (no due cards):**
-```
-🎉
-Semua kartu sudah terulang!
-Datang lagi besok untuk ulasan baru.
-[Pelajari kartu baru →]
-```
-
-**Example for SearchMode (no query):**
-```
-🔍
-Cari kosakata
-Coba ketik 'denki' atau '電気'
-```
-
-**Example for FocusMode (not enough wrong answers):**
-```
-✨
-Belum ada kartu lemah
-Lanjutkan kuis dulu — setelah beberapa jawaban salah, mode ini bantu fokus ke kelemahanmu.
-[Mulai kuis →]
-```
-
-### F7. Time estimates per mode
-
-Show "~5 min" / "~10 min" / "~30 min" badge on each mode tile so beginners can pick based on available time.
-
-### F8. Recommended starter pack
-
-For brand-new users (knownN === 0), show a "Paket Awalan" section:
-- 20 most-frequent salutation cards
-- 10 essential safety terms
-- 5 common tools
-- "Mulai dari sini →" CTA → loads filtered FlashcardMode
-
----
-
-## Implementation Phases
-
-Each phase ends in a deployable, testable state. PR per phase. Tests + lint must pass.
-
-### Phase A — Design System Foundation (3 sessions)
-
-**Goal:** primitives + tokens locked, no UX changes yet.
+**Files to edit:**
+- `src/components/JpDisplay.jsx`
 
 **Tasks:**
-- A.1 Extend `theme.js` with `T.type` + `T.motion` tokens
-- A.2 Create `src/components/ui/` directory
-- A.3 Build primitives: `<Card>`, `<Button>`, `<Pill>`, `<StatBox>`, `<IconButton>`, `<SectionHeader>`, `<Badge>`, `<EmptyState>`
-- A.4 Build hooks: `useSwipe`, `useLongPress`, `useToast`, `useConfirm`
-- A.5 Build providers: `<ToastProvider>`, `<ConfirmProvider>`
-- A.6 Create internal demo route `/playground` (only in dev) showing all primitives
-- A.7 Update `_MAP.md` with new structure
+1. **JpFront** — port v87's smart layout logic:
+   - `A vs B` → stacked with VS divider
+   - `A・B・C` → stacked with HR dividers
+   - `Title：Subtitle` → title + divider + subtitle
+   - `A → B → C` → stacked with ↓ arrows
+   - Plain text → current behavior (keep)
+   - Use `T.*` tokens for colors instead of v87's hardcoded hex
+2. **DescBlock** — port v87's smart parsing:
+   - ①②③ circled-number list → styled numbered list
+   - 【keyword】 brackets → labeled segments with amber badges
+   - (Sumber: ...) footnotes → extracted as faint italic footer
+   - Plain text → current behavior (keep)
+   - Use `T.*` tokens
 
 **Acceptance:**
-- All primitives have JSDoc + propTypes
-- All primitives respect light/dark theme
-- Demo page renders without errors
-- 0 lint warnings, all tests pass
-- No regressions in existing screens
+- A card with `朝礼 vs 夕礼` renders stacked
+- A card with `ほうき・ちりとり・ブロアー` renders stacked with dividers
+- A card desc with `①安全 ②注意 ③危険` renders as colored numbered list
+- A card desc with `【屋内消火栓】...【屋外消火栓】...` renders with labeled badges
+- No existing tests broken
+- Both light and dark themes render correctly
 
 ---
 
-### Phase B — Dashboard Overhaul (3 sessions)
+### Phase 2 — FlashcardMode Feature Restore (2 sessions)
 
-**Goal:** new home screen as specced.
+**Goal:** Restore 12 missing features from v87 while keeping FSRS.
+
+**File to edit:**
+- `src/modes/FlashcardMode.jsx`
+- `src/App.jsx` (for starred state)
 
 **Tasks:**
-- B.1 Replace `Dashboard.jsx` content with new layout
-- B.2 Add Materi toggle (segmented control) wired to `vocabMode` state
-- B.3 Build Quick Start Card with `getQuickStart()` logic
-- B.4 Mode Belajar 2×2 grid with descriptions
-- B.5 Stats bar (4 colored boxes) using new `<StatBox>`
-- B.6 "Terakhir dipelajari" section (track last 5 marked cards in localStorage `ssw-recent`)
-- B.7 Surface streak from `useStreak`
-- B.8 Update `App.jsx` to pass `vocabMode` toggle to Dashboard
+1. **Search bar** — add `search` state + input field above card. Filter `displayCards` by JP/romaji/ID.
+2. **Star system** — add `starred` Set to App.jsx state, persist to localStorage `ssw-starred`. Pass to FlashcardMode. Add ⭐/☆ toggle button next to search.
+3. **Category pill on card** — show `cat.emoji + cat.label` badge at card top-left (not just after flip).
+4. **Card # indicator** — show `#N` at card bottom-right.
+5. **Stats row** — add 4 colored stat boxes below search (Total / Hafal / Belum / Sisa) like v90 screenshot.
+6. **Tools row** — add 4-button row below mark area:
+   - **Prioritas** → sets order to unknown → untouched → known (current default — just button for explicit toggle)
+   - **Urut** → toggles between shuffle / original order
+   - **Reset** → 2-tap confirm (first tap: "Yakin?", 3s timeout). Clears known/unknown for current filter.
+   - **Review ❌ N** → filters to only `unknown` cards. Badge shows count.
+7. **Flip gradient** — when flipped, card bg changes to `catInfo.color` gradient (like v87 line 132).
+8. **Status border** — card border: green if known, red if unknown, neutral if untouched.
+9. **DescBlock integration** — use new smart DescBlock on card back.
+10. **JpFront integration** — use new smart JpFront on card front.
+11. **Reset confirm** — `confirmReset` state with 3s auto-cancel.
+12. **"Review Belum" filter** — when active, `displayCards = cards.filter(c => unknown.has(c.id))`.
+
+**Keep existing:** FSRS 4-button rating, swipe gestures, SRS badge, keyboard shortcuts.
+
+**FSRS + Binary mark coexistence:**
+- `✓ Sudah hafal` → FSRS rating 3 (Good)
+- `✗ Belum hafal` → FSRS rating 1 (Again)
+- Long-press ✓ → shows full 4-button FSRS rating
+- This replaces the current always-visible 4-button grid (which is intimidating for beginners)
 
 **Acceptance:**
-- All Dashboard sections render correctly in light + dark
-- Quick Start logic tested for 6+ scenarios (new user, no due, low%, mid%, high%, all done)
-- Tap Materi switches `vocabMode` → cards filter updates
-- Mode Belajar tiles tap → enter correct mode
-- Stats numbers match `CARDS.length` and known/unknown sets
+- Search filters cards by JP/romaji/ID in real-time
+- Star persists across sessions (localStorage)
+- Tools row all functional
+- Reset requires 2 taps
+- Card front shows JpFront smart layout
+- Card back shows DescBlock smart rendering
+- Flip changes card bg to category gradient
 
 ---
 
-### Phase C — FlashcardMode Overhaul (4 sessions)
+### Phase 3 — QuizMode Feature Restore (2 sessions)
 
-**Goal:** v90-style card with prev/next + tools.
+**Files to edit:**
+- `src/modes/QuizMode.jsx`
+- `src/components/QuizShell.jsx`
+- `src/components/OptionButton.jsx`
 
 **Tasks:**
-- C.1 Card layout with category pill + #N indicator + jpHero centered
-- C.2 Flip animation with bg gradient (surface → amber gradient on flip)
-- C.3 Nav row: ← Prev / 👁️ Lihat / Next →
-- C.4 Mark row: ✗ Belum hafal / ✓ Sudah hafal
-- C.5 Tools row: Prioritas / Urut / Reset / ⭐ ✗N
-- C.6 Implement `useSwipe` for left/right navigation
-- C.7 First-time hint overlay ("ketuk = balik · geser = next")
-- C.8 Long-press card → action menu
-- C.9 Reset confirm dialog
-- C.10 Move FSRS rating to long-press of mark buttons
-- C.11 DescBlock revealed via "Lihat penjelasan" button on back
+1. **Quiz count selector** — button row: 10 / 20 / 30 / All. Default 10.
+2. **Lemah mode toggle** — `lemahMode` switch. Shows `⚠ Fokus Lemah (N)` when wrong-history cards exist.
+3. **Anti-repeat** — `seenPoolRef` tracks card IDs across quiz restarts within session. Only repeats when pool exhausted.
+4. **Settings panel** — ⚙ gear icon top-right opens inline settings (difficulty, auto-next delay, lemah mode).
+5. **Auto-next configurable** — add delay picker (1s / 1.5s / 2s / manual) in settings.
+6. **JpFront on question card** — use smart JpFront component.
+7. **After-answer full reveal** — when answered:
+   - Question card: reveal romaji + ID translation (divider line + text)
+   - Each option: show JP + romaji below ID text (requires storing `optionCardId` per option)
+   - Correct option: green border + ✓
+   - Wrong picked: red border + ✗
+   - Other options: dim
+8. **Streak display** — show 🔥N streak counter in header during quiz.
+9. **Result screen enhancement** — wrong answers show: question JP + romaji + ID + user's wrong pick + correct answer.
 
 **Acceptance:**
-- Swipe left/right works smoothly, doesn't trigger on vertical scroll
-- Card flip works with reduced-motion fallback
-- All tools functional + persisted
-- Mark button → updates known/unknown + advances to next
-- FSRS rating still recorded (binary mapping: hafal=3, belum=1)
+- Quiz count buttons work (10/20/30/All)
+- Lemah mode filters to previously-wrong cards
+- After answering, all 4 options show JP + romaji context
+- Question card reveals full translation after answer
+- Settings gear opens inline panel
+- Anti-repeat prevents same card in consecutive quizzes
 
 ---
 
-### Phase D — QuizMode Reveal Redesign (3 sessions)
+### Phase 4 — JACMode + WaygroundMode + SimulasiMode Restore (2 sessions)
 
-**Goal:** v90-style answer reveal with full context.
+**Files to edit:**
+- `src/modes/JACMode.jsx`
+- `src/modes/WaygroundMode.jsx`
+- `src/modes/SimulasiMode.jsx`
 
-**Tasks:**
-- D.1 Track `optionCardIds[]` alongside `options[]` in quiz-generator
-- D.2 Build `<OptionRevealed>` component (number + ID + JP + romaji + correct/wrong state)
-- D.3 Update QuizShell to render OptionRevealed after answer
-- D.4 Question card: reveal romaji + ID translation after answer (with divider line)
-- D.5 Add category pill on question card
-- D.6 Settings panel polish (auto-next delay, show romaji always, etc)
-- D.7 Apply same pattern to JACMode + WaygroundMode
+**Tasks (JACMode):**
+1. Add score tracking per set (persisted `ssw-jac-scores`)
+2. showHira toggle applies to options too (not just question)
+3. Enhance result review to show wrong answers with explanation
+4. Add auto-advance delay option
+
+**Tasks (WaygroundMode):**
+1. Restore score + maxStreak tracking per set
+2. Add dedicated result screen (score / maxStreak / restart / review wrong)
+3. "Restart with same set" button
+4. Show last score on set picker cards
+
+**Tasks (SimulasiMode):**
+1. Implement real countdown timer UI (big visible clock)
+2. Auto-finish when time runs out
+3. Score tracking + pass/fail threshold (60% = lulus)
+4. Result screen: "LULUS ✓" / "BELUM LULUS ✗" + score + breakdown
+5. Wrong answer review
+6. Add pre-exam screen with instructions
 
 **Acceptance:**
-- All 4 options show full info after answer
-- Question card reveals romaji + ID after answer
-- Wrong/correct visual states clear (red/green bg + ✗/✓ icon)
-- Pattern consistent across QuizMode, JACMode, WaygroundMode
+- JAC shows score history per set on picker
+- Wayground shows maxStreak + restart option
+- Simulasi timer counts down visually, auto-finishes, shows pass/fail
 
 ---
 
-### Phase E — Other Modes Polish (3 sessions)
+### Phase 5 — DangerMode + AngkaMode Polish (1 session)
 
-**Goal:** apply primitives + empty states + minor improvements to remaining modes.
+**Files to edit:**
+- `src/modes/DangerMode.jsx`
+- `src/modes/AngkaMode.jsx`
 
-**Tasks:**
-- E.1 ReviewMode: empty state, completion screen, interval preview on long-press
-- E.2 SprintMode: 3-2-1 countdown, timer color shift
-- E.3 SimulasiMode: pre-exam screen, exit confirm, result breakdown
-- E.4 FocusMode: empty state for new users
-- E.5 StatsMode: donut chart (CSS-only, no chart lib), streak calendar
-- E.6 SearchMode: instant search, recent searches, highlight match
-- E.7 GlossaryMode: A-Z jump bar, group headers
-- E.8 SumberMode: grouped by category
-- E.9 ExportMode: visual file icon, drag-drop area, import diff
-- E.10 DangerMode: side-by-side comparison
-- E.11 AngkaMode: category grouping
+**Tasks (DangerMode):**
+1. After answer: show side-by-side comparison of confused pair
+2. Highlight differentiating kanji/character
+3. "Explain the difference" section after reveal
+
+**Tasks (AngkaMode):**
+1. Group by category (waktu / dosis / panjang / etc)
+2. Add flashcard-style browse mode (not just quiz)
+3. "Wajib hafal sebelum ujian" badge
 
 **Acceptance:**
-- All modes use new primitives where applicable
-- All modes have empty states
-- All modes show progress consistently
-- No regressions in existing functionality
+- DangerMode shows pair comparison after answer
+- AngkaMode lets user browse by category, not just quiz
 
 ---
 
-### Phase F — Navigation & Discovery (2 sessions)
+### Phase 6 — Category Filter Popup + Star System + App UX (2 sessions)
 
-**Goal:** filter accessibility + better mode discovery.
+**Files to edit:**
+- `src/App.jsx`
+- `src/components/Dashboard.jsx`
+- New file: `src/components/FilterPopup.jsx`
 
 **Tasks:**
-- F.1 Build category grid filter popup (3-col grid with emoji + count)
-- F.2 Replace pill row with "Filter ▲" toggle that opens grid
-- F.3 Star filter button (favorites)
-- F.4 BottomNav: replace emoji icons with SVG (better consistency, scalable)
-- F.5 BottomNav: Beranda/Belajar/Ujian/Lainnya labels + better tap states
-- F.6 Mode tile redesign with time estimate + description
+1. **Category filter popup** — replace pills row with "Filter ▼" button that opens a 3-column grid:
+   - Each cell: emoji + JP label + count
+   - "すべて" row at top with total
+   - ★ Bintang cell (starred cards)
+   - "✓ Terapkan N kategori (M kartu)" button at bottom
+   - Matches v90 screenshot exactly
+2. **Starred cards system** — `starred` Set in App.jsx, persisted to localStorage:
+   - Auto-save on change
+   - Load on mount
+   - Pass `starred` + `toggleStar` to FlashcardMode
+   - Show "Bintang" in filter grid with starred count
+3. **Last-mode persistence** — save `ssw-last-mode` to localStorage:
+   - On reload, restore last active mode (not just home)
+   - Optional: controlled by setting
+4. **Materi toggle** (Konsep/Vocab) — make the current `vocabMode` toggle more prominent:
+   - Large segmented control on Dashboard (like v90 screenshot)
+   - Show card count per segment
 
 **Acceptance:**
-- Filter popup opens/closes smoothly
-- Category grid shows correct counts per filter
-- Star filter shows only starred cards
-- BottomNav tap target ≥ 44px each
-- Active tab clearly indicated
+- Filter popup opens/closes with animation
+- Grid shows correct counts per category × track
+- Star button on FlashcardMode persists across sessions
+- Starred cards appear in Bintang filter category
+- App remembers last mode on reload
 
 ---
 
-### Phase G — Beginner UX Features (3 sessions)
+### Phase 7 — Dashboard Overhaul (2 sessions)
 
-**Goal:** smart defaults + tutorials + delight.
+**File to edit:**
+- `src/components/Dashboard.jsx`
 
 **Tasks:**
-- G.1 Daily goal system (donut on Dashboard, settings to change goal)
-- G.2 Tutorial overlays (`<FirstTimeTooltip>`) for FlashcardMode, QuizMode, ReviewMode
-- G.3 Help tooltips (ⓘ icons) on SRS, FSRS, JAC, Wayground
-- G.4 Recommended starter pack for new users (filtered FlashcardMode)
-- G.5 Recently studied tracking + display
-- G.6 Time estimates on mode tiles
-- G.7 Celebration animations (confetti on milestones)
-- G.8 Onboarding refresh (more interactive, 4 steps with examples)
+1. **Quick Start card** — large CTA card at top:
+   - Smart logic: show SRS due → flashcard → quiz → JAC → simulasi based on progress
+   - Gradient bg, big icon, prominent button
+2. **Materi toggle** — segmented control (Konsep 750 | Vocab 688)
+3. **Mode Belajar grid** — 2×2 tiles with icon + title + description + time estimate
+4. **Stats bar** — 4 colored boxes inline (Total / Hafal / Belum / Sisa) matching v90
+5. **Recently studied** — last 5 cards marked, stored in `ssw-recent` localStorage
+6. **Streak display** — 🔥 N hari from useStreak hook
+7. **Daily progress bar** — track cards reviewed today (`ssw-daily-count` + reset at midnight)
 
 **Acceptance:**
-- Daily goal donut visible on Dashboard
-- Tutorials appear once per mode, dismissable, never again
-- Help tooltips accessible via tap
-- Starter pack visible only when knownN === 0
-- Confetti on: first 10 cards, first quiz pass (≥70%), 7-day streak, daily goal hit
+- Quick Start shows different CTA based on user state
+- Stats bar shows accurate live numbers
+- Recently studied updates after FlashcardMode mark
+- Streak shows correctly (resets if missed a day)
 
 ---
 
-### Phase H — QA, Performance & Polish (2 sessions)
+### Phase 8 — Visual Polish + Animations + Empty States (2 sessions)
 
-**Goal:** final pass before public release.
+**Files to edit:** all mode files + components
 
 **Tasks:**
-- H.1 Cross-device testing (small Android, large Android, iOS Safari, desktop)
-- H.2 Lighthouse audit: PWA, Performance, Accessibility, SEO
-- H.3 Reduce-motion + screen-reader pass
-- H.4 Bundle size review (target: < 800KB gzip total)
-- H.5 Update CHANGELOG, README, _MAP.md to v3.0
-- H.6 Public Twitter/post announcement (optional, Nugget's choice)
+1. **Empty states** for every mode — designed with icon + title + desc + CTA:
+   - ReviewMode 0 due: "🎉 Semua kartu sudah terulang! Datang lagi besok."
+   - FocusMode no weak cards: "✨ Belum ada kartu lemah. Lanjutkan kuis dulu."
+   - SearchMode no query: "🔍 Cari kosakata. Coba 'denki' atau '電気'"
+   - Each empty state has a primary CTA to the next logical action
+2. **Flip animation** — CSS 3D `rotateY(180deg)` with `backface-visibility: hidden`
+3. **Page transition** — crossfade 200ms on mode enter/exit
+4. **Reduced motion** — respect `prefers-reduced-motion: reduce`
+5. **Toast system** — `useToast` hook + `<ToastProvider>` at root:
+   - "Kartu ditandai hafal" with Undo button (5s)
+   - "Progres direset" confirmation
+   - Stack max 2, bottom-center, above nav
+6. **Confirm dialog** — `useConfirm` hook + `<ConfirmDialog>`:
+   - Used by Reset, Clear, Delete actions
+   - Slide-up from bottom, tap backdrop = cancel
+7. **Time estimates** on mode tiles:
+   - Kartu: ~10 mnt
+   - Kuis: ~5 mnt
+   - Sprint: ~3 mnt
+   - JAC: ~15 mnt
+   - Simulasi: ~30 mnt
 
 **Acceptance:**
-- Lighthouse: PWA 100, Performance ≥ 85, Accessibility ≥ 90
+- Every mode has a designed empty state (not blank screen)
+- Card flip is smooth 3D rotation
+- Toast appears on mark actions with working Undo
+- Confirm dialog on all destructive actions
+- Reduced-motion users see crossfade instead of rotation
+
+---
+
+### Phase 9 — Beginner UX Features (1 session)
+
+**Tasks:**
+1. **First-time tooltip** in FlashcardMode:
+   - "Ketuk kartu untuk balik"
+   - "Geser kiri-kanan untuk navigasi"
+   - "Tandai sesuai pemahamanmu"
+   - Shows once, dismissed on tap, stored `ssw-tutorial-flashcard`
+2. **Help tooltips** (ⓘ icons):
+   - "SRS" → "Sistem ulasan cerdas — muncul saat kamu hampir lupa"
+   - "JAC" → "Japan Agricultural Cooperative — penyelenggara ujian SSW"
+3. **Recommended starter pack** (new users with knownN === 0):
+   - "Paket Awalan" section on Dashboard
+   - Pre-filtered to 20 easiest salutation + safety cards
+   - "Mulai dari sini →" CTA
+4. **Milestone celebrations**:
+   - First 10 cards marked: toast "🎉 10 kartu pertama!"
+   - First quiz ≥70%: toast "✨ Quiz pertama lulus!"
+   - 7-day streak: toast "🔥 Seminggu berturut-turut!"
+
+**Acceptance:**
+- Tutorial shows once per mode, never again
+- Help tooltips accessible and correct
+- Starter pack visible only for brand-new users
+- Milestones fire at correct thresholds
+
+---
+
+### Phase 10 — QA + Performance + Release (1 session)
+
+**Tasks:**
+1. Cross-device testing (small Android, large Android, iOS Safari)
+2. Lighthouse: PWA 100, Performance ≥ 85, Accessibility ≥ 90
+3. Bundle size review (< 800KB gzip initial)
+4. All tests pass + new tests for restored features
+5. CHANGELOG + README + _MAP.md updated to v3.0.0
+6. Clean up `legacy/` folder (optional, Nugget's call)
+
+**Acceptance:**
 - Works on Android Chrome 90+, iOS Safari 14+
-- Bundle: < 800KB gzip initial, < 2MB total
-- All known bugs filed/fixed/wontfix-tagged
-- Version bumped to 3.0.0
+- All 72+ tests pass
+- Lint clean, format clean
+- Build succeeds
 
 ---
 
-## Acceptance
+## 📊 Session Estimates
 
-### Per-phase quality gate
-
-Every phase ends with:
-- ✅ All primitives/components have light + dark theme tested
-- ✅ All tests pass (`npm test`)
-- ✅ Lint clean (`npm run lint`)
-- ✅ Format clean (`npm run format:check`)
-- ✅ Build succeeds (`npm run build`)
-- ✅ Manual smoke test: open app, run through changed flows
-- ✅ `_MAP.md` updated with phase notes
-- ✅ `CHANGELOG.md` entry added
-
-### Final UX acceptance (post-Phase H)
-
-A new beginner user must be able to:
-1. **Open app → start studying within 10 seconds** (no menus, no tutorials blocking)
-2. **Find their preferred study mode within 3 taps** (from any screen)
-3. **Understand their progress instantly** (visible on home, no math required)
-4. **Recover from misclicks easily** (Undo toast on every destructive action)
-5. **Complete a 5-minute session with ≥10 cards reviewed**
-6. **Return tomorrow and see exactly where to continue** (Quick Start Card)
+| Phase | Focus | Sessions |
+|-------|-------|----------|
+| 1 | Smart Text (JpFront + DescBlock) | 1 |
+| 2 | FlashcardMode restore | 2 |
+| 3 | QuizMode restore | 2 |
+| 4 | JAC + Wayground + Simulasi restore | 2 |
+| 5 | DangerMode + AngkaMode | 1 |
+| 6 | Filter popup + Star + App UX | 2 |
+| 7 | Dashboard overhaul | 2 |
+| 8 | Visual polish + empty states | 2 |
+| 9 | Beginner UX | 1 |
+| 10 | QA + release | 1 |
+| **TOTAL** | | **16** |
 
 ---
 
-## Open Questions
+## 📝 Notes for Sonnet (executing agent)
 
-These need Nugget's decision before/during execution. **Sonnet should ASK before assuming.**
+### Before starting
 
-### Q1. Bottom nav vs top tabs?
-**Recommendation:** Keep bottom nav (P1: thumb zone).
-**Alternative:** Hybrid — top tabs for content categories (Belajar/Ujian/...), bottom nav for global actions (Home/Search/Settings).
-**Decision needed before Phase F.**
+1. Read this ENTIRE document
+2. Read `_MAP.md` for architecture context
+3. Read `src/styles/theme.js` — all colors use `T.*` tokens
+4. Read `legacy/ssw_flashcards_v87.jsx` — this is your feature reference
 
-### Q2. Track picker — first-run only, or accessible always?
-**Current:** Set once, change via Dashboard pill.
-**Alternative:** Allow toggle freely without progress reset.
-**Recommendation:** Keep current behavior, but add "Lihat semua kartu" override for power users.
+### Rules
 
-### Q3. Onboarding — keep or remove?
-**Current:** 4-step welcome before track picker.
-**Alternative:** Skip onboarding for returning users (already does); make first-time tour optional.
-**Recommendation:** Reduce to 1 screen with single "Mulai" CTA + inline help on first FlashcardMode visit (Phase G.2).
+1. **One phase = one commit.** Each phase ends deployable.
+2. **Don't break existing tests.** Add new tests for restored features.
+3. **Use `T.*` tokens** for ALL colors/spacing. Never hardcode hex.
+4. **Keep Indonesian copy warm:** "Mulai" not "Memulai", "Hafal" not "Mengingat".
+5. **Don't add libraries** without asking Nugget first.
+6. **Don't touch** `legacy/`, `docs/`, `scripts/`, `srs/` unless explicitly needed.
+7. **Port v87 LOGIC, not v87 STYLE.** Use current theme system, not v87's hardcoded dark theme.
+8. **Phase order matters.** Phase 1 (JpFront + DescBlock) is used by Phase 2-5. Don't skip.
+9. **Test on mobile.** Nugget tests on Android phone between iterations.
+10. **Update `_MAP.md`** at end of each phase.
 
-### Q4. Daily goal default value?
-**Recommendation:** 20 cards/day (matches typical SRS load + leaves room for new study).
-**Decision needed in Phase G.1.**
+### File reference
 
-### Q5. Sound effects?
-**Current:** None.
-**Recommendation:** None for v3.0. Add behind setting in v3.1 if requested.
+```
+src/
+├── styles/theme.js          ← Color tokens, DO NOT hardcode colors
+├── App.jsx                  ← Main app, state, routing
+├── main.jsx                 ← Entry point
+├── components/
+│   ├── Dashboard.jsx        ← Home screen
+│   ├── JpDisplay.jsx        ← JpFront + DescBlock (PHASE 1)
+│   ├── QuizShell.jsx        ← Shared quiz engine
+│   ├── OptionButton.jsx     ← Quiz option
+│   ├── ResultScreen.jsx     ← Quiz result
+│   ├── ProgressBar.jsx      ← Progress bar
+│   ├── BottomNav.jsx        ← Bottom navigation
+│   └── TrackPicker.jsx      ← Track selection
+├── modes/                   ← All 15 mode components
+├── hooks/                   ← Custom hooks
+├── utils/                   ← Shared utilities
+├── data/                    ← Card data, categories
+├── srs/                     ← FSRS engine (don't touch)
+└── tests/                   ← Unit tests
+legacy/
+└── ssw_flashcards_v87.jsx   ← FEATURE REFERENCE (read-only)
+```
 
-### Q6. Branding — keep "by Nugget Nihongo" subtitle?
-**Recommendation:** Yes. Personal, warm, differentiator.
+### v87 line ranges for reference
 
-### Q7. Color of "✓ Sudah hafal" — green or amber?
-**Recommendation:** Green (`T.correct`) for clarity. Don't overload amber.
-
-### Q8. Should FlashcardMode show FSRS interval previews?
-**Recommendation:** Hidden by default. Surface via long-press of mark buttons (Phase C.10).
-
-### Q9. Konsep vs Vocab — explain the difference somewhere?
-**Current:** No explanation, users discover by tapping.
-**Recommendation:** Tooltip on Materi toggle: "Konsep = istilah dengan penjelasan · Vocab = kosakata + arti"
-
-### Q10. After import, should we merge or replace?
-**Recommendation:** Merge by default. Show diff dialog. Allow "replace" via advanced option.
-
----
-
-## Out of Scope (for v3.0)
-
-These are explicitly NOT in this proposal — file as future work:
-
-- ❌ Backend / cloud sync (stay localStorage)
-- ❌ User accounts / login
-- ❌ Multiplayer / social
-- ❌ AI tutor / chat
-- ❌ Audio pronunciation (no TTS budget)
-- ❌ Image cards (no image budget for tools)
-- ❌ Custom card creation by user
-- ❌ Localization (stays Indonesian only)
-- ❌ Tablet/desktop optimized layouts (mobile-first only)
-- ❌ Native iOS/Android apps (PWA only)
-
----
-
-## Notes for Sonnet (executing agent)
-
-1. **Read this WHOLE file before starting.** Don't skim, don't rely on summary.
-2. **Read `_MAP.md` after.** It shows current architecture and constraints.
-3. **Ask Nugget about Open Questions Q1, Q3, Q4 before Phase F/G** — those affect design decisions.
-4. **Phase order matters.** Phase A primitives are dependencies for B/C/D. Don't reorder.
-5. **One phase = one PR**. Don't bundle phases.
-6. **Update `_MAP.md` at end of each phase** with what changed.
-7. **Don't touch `legacy/`, `docs/`, `scripts/`** unless instructed.
-8. **Don't add libraries casually.** If you think you need one, ask first.
-9. **Preserve all existing tests.** Add new tests for new primitives.
-10. **Keep Indonesian copy warm and casual** — Nugget's voice. No corporate-speak.
-
-**Default tone for new copy:**
-- "Mulai" not "Memulai"
-- "Yuk" not "Mari"
-- "Hafal" not "Mengingat"
-- "Belum hafal" not "Tidak ingat"
-- Avoid English unless it's a technical term (SRS, FSRS, PWA)
-
-**File reference cheat sheet:**
-- Theme: `src/styles/theme.js`
-- App root: `src/App.jsx`
-- Dashboard: `src/components/Dashboard.jsx`
-- Modes: `src/modes/*.jsx`
-- Hooks: `src/hooks/*.js`
-- Data: `src/data/*.js`
-- Tests: `src/tests/*.test.js`
-- Skills: `_MAP.md`, `docs/AUDIT-2026-04-28.md`, `docs/AUDIT-2026-04-28-PASS2.md`
-- This proposal: `docs/UX-OVERHAUL-PROPOSAL.md`
+```
+FlashcardMode:  lines 2647–2893
+QuizMode:       lines 2894–3210
+JACMode:        lines 3211–4393
+AngkaMode:      lines 4444–4676
+DangerMode:     lines 4677–4892
+SimulasiMode:   lines 4893–5276
+ExportMode:     lines 5277–5369
+StatsMode:      lines 5370–5512
+SearchMode:     lines 5513–5602
+SprintMode:     lines 5603–5726
+FocusMode:      lines 5727–5850
+GlossaryMode:   lines 5851–6050
+SumberMode:     lines 6051–6259
+WaygroundMode:  lines 6260–6709
+JpFront:        lines 6727–6802
+DescBlock:      lines 6803–6900
+Main App:       lines 6900–7389
+```
 
 ---
 
-## Appendix A: Reference Screenshots
+## ❓ Open Questions (ask Nugget before executing)
 
-The v90 reference screenshots (sent by Nugget on 2026-04-28) showed:
-1. Home screen with Materi toggle + Mode Belajar 2×2 + Stats bar + Search
-2. FlashcardMode front: kanji + romaji + hint + nav buttons + mark buttons + tools
-3. FlashcardMode back: amber gradient bg + romaji + ID translation + "Lihat penjelasan"
-4. QuizMode question: category pill + JP question + 4 numbered options + hint
-5. QuizMode answered: question reveals romaji+ID, options show full JP+romaji+ID with correct/wrong colors
-6. Filter popup: 3×4 category grid with emoji + JP + count
-
-All screenshots are dark theme. Light theme equivalents must be designed per Phase A spec.
+1. **FSRS rating: keep 4-button or switch to binary ✓/✗ (with long-press for 4-button)?** Recommendation: binary default, long-press for advanced.
+2. **Filter popup or filter pills?** Recommendation: popup (matches v90).
+3. **Daily goal default?** Recommendation: 20 cards/day.
+4. **Sound effects?** Recommendation: none for v3.0.
+5. **Should star system sync to SRS engine?** Recommendation: no, keep separate.
 
 ---
 
-## Appendix B: Estimated Sessions
-
-| Phase | Sessions | Cumulative |
-|-------|----------|------------|
-| A. Design System Foundation | 3 | 3 |
-| B. Dashboard Overhaul | 3 | 6 |
-| C. FlashcardMode Overhaul | 4 | 10 |
-| D. QuizMode Reveal | 3 | 13 |
-| E. Other Modes Polish | 3 | 16 |
-| F. Navigation & Discovery | 2 | 18 |
-| G. Beginner UX Features | 3 | 21 |
-| H. QA & Polish | 2 | 23 |
-| **TOTAL** | **23** | |
-
-Each "session" ≈ 1–2 hours of focused execution by Sonnet.
-
----
-
-*End of UX Overhaul Proposal · v1 · 2026-04-28 · Crispy*
+*End of UX Overhaul Proposal · v2 · 2026-04-28 · Crispy*
