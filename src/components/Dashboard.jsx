@@ -5,7 +5,16 @@ import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import ProgressBar from './ProgressBar.jsx';
 
-export default function Dashboard({ known, unknown, track, onNavigate, onChangeTrack, srs, isDark, onToggleTheme }) {
+export default function Dashboard({
+  known,
+  unknown,
+  track,
+  onNavigate,
+  onChangeTrack,
+  srs,
+  isDark,
+  onToggleTheme,
+}) {
   const total = CARDS.length;
   const knownN = known.size;
   const unknownN = unknown.size;

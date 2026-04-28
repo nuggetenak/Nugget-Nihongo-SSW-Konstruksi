@@ -4,6 +4,8 @@
 
 ### Fixed
 - Bump `CACHE_VERSION` pada `public/sw.js` ke `ssw-v2026-04-28` agar service worker melakukan invalidasi cache lama setelah deploy baru (mencegah pengguna tetap terjebak di bundle lama).
+- Format ulang 3 file (`Dashboard.jsx`, `main.jsx`, `styles/theme.js`) dengan Prettier untuk konsistensi kode; format-check sekarang clean 100%.
+- Bump `package.json` version ke 2.3.3 untuk sinkronisasi dengan CHANGELOG.
 
 ## [2.3.2] - 2026-04-28
 
