@@ -5,12 +5,17 @@ import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
+import { CSV_SETS } from '../data/csv-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
+
+const ALL_SETS = [...WAYGROUND_SETS, ...CSV_SETS];
 
 const GROUPS = [
   { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt' },
   { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp' },
   { label: 'Kosakata', icon: '📖', color: '#60a5fa', prefix: 'wg' },
+  { label: 'CSV Teori', icon: '📚', color: '#f59e0b', prefix: 'ct' },
+  { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp' },
 ];
 
 export default function WaygroundMode({ onExit }) {
@@ -19,7 +24,7 @@ export default function WaygroundMode({ onExit }) {
   const [showHint, setShowHint] = useState(true);
   const [wgScores, setWgScores] = usePersistedState('ssw-wg-scores', {});
 
-  const set = WAYGROUND_SETS.find((s) => s.id === activeSet);
+  const set = ALL_SETS.find((s) => s.id === activeSet);
 
   const questions = useMemo(() => {
     if (!set) return [];
@@ -70,7 +75,7 @@ export default function WaygroundMode({ onExit }) {
       <QuizShell
         questions={questions}
         onExit={() => setActiveSet(null)}
-        title={`Wayground · ${set?.title || ''}`}
+        title={`${set?.title || ''}`}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
         showHint={showHint}
@@ -80,11 +85,11 @@ export default function WaygroundMode({ onExit }) {
   }
 
   // ─── Set Picker ───────────────────────────────────────────────────────────
-  const totalSoal = WAYGROUND_SETS.reduce((n, s) => n + s.questions.length, 0);
+  const totalSoal = ALL_SETS.reduce((n, s) => n + s.questions.length, 0);
 
   const groups = GROUPS.map((g) => ({
     ...g,
-    sets: WAYGROUND_SETS.filter((s) => s.id.startsWith(g.prefix)),
+    sets: ALL_SETS.filter((s) => s.id.startsWith(g.prefix)),
   })).filter((g) => g.sets.length > 0);
 
   return (
@@ -103,9 +108,9 @@ export default function WaygroundMode({ onExit }) {
       >
         ← Kembali
       </button>
-      <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Wayground · Soal Teknis</h2>
+      <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Soal Teknis · Lifeline</h2>
       <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 12 }}>
-        {totalSoal} soal dalam {WAYGROUND_SETS.length} set
+        {totalSoal} soal dalam {ALL_SETS.length} set · ライフライン・設備
       </p>
 
       {/* Toggles */}
@@ -251,6 +256,61 @@ export default function WaygroundMode({ onExit }) {
           </div>
         </div>
       ))}
+
+      {/* Coming Soon: Sipil & Bangunan */}
+      <div style={{ marginTop: 8, marginBottom: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+          <span style={{ fontSize: 13 }}>🚧</span>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: T.textDim,
+              letterSpacing: 1.8,
+              textTransform: 'uppercase',
+            }}
+          >
+            Segera Hadir
+          </span>
+          <div style={{ flex: 1, height: 1, background: `${T.border}` }} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {[
+            { emoji: '⛏️', label: 'Doboku · Sipil (土木)', sub: '土木施工 — Belum tersedia' },
+            { emoji: '🏗️', label: 'Kenchiku · Bangunan (建築)', sub: '建築施工 — Belum tersedia' },
+          ].map((item) => (
+            <div
+              key={item.label}
+              style={{
+                padding: '12px 14px 12px 18px',
+                borderRadius: T.r.md,
+                background: T.surface,
+                border: `1px dashed ${T.border}`,
+                opacity: 0.5,
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: T.border }} />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: T.textMuted }}>
+                  {item.emoji} {item.label}
+                </span>
+                <span style={{
+                  fontSize: 9, fontWeight: 800, color: T.textDim,
+                  background: T.surface, border: `1px solid ${T.border}`,
+                  borderRadius: T.r.pill, padding: '2px 8px', letterSpacing: 1,
+                }}>
+                  COMING SOON
+                </span>
+              </div>
+              <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
+                {item.sub}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
