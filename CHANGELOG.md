@@ -1,5 +1,40 @@
 # Changelog
 
+## [3.0.0] - 2026-04-28
+
+### Phase 1 — Smart Text Components
+- `JpFront`: smart compound-term layouts — `vs` (stacked+VS), `・` (stacked+HR), `：` (title/subtitle), `→` (chain) — ported from v87 with T.* theming
+- `DescBlock`: smart description parsing — `①②③` circled lists, `【keyword】` labeled segments, `(Sumber:...)` footnote extraction
+
+### Phase 2 — FlashcardMode Feature Restore (12 features)
+- Search bar: real-time filter by JP / romaji / ID
+- Star system: ⭐/☆ per card, persisted to localStorage `ssw-starred`
+- Stats row: Total / Hafal / Belum / Sisa colored boxes
+- Category pill on card front (top-left badge)
+- Card # indicator (#N corner)
+- Tools row: Prioritas/Acak/Urut toggle, Review ❌ Belum filter, Reset (2-tap confirm), ⭐ Bintang filter
+- Flip gradient: card bg → category color gradient on flip
+- Status border: green/red/neutral by known state
+- Smart JpFront + DescBlock on card front/back
+- Binary mark buttons (✓/✗) with FSRS 4-button behind long-press
+- Improved empty states (search, reviewBelum, empty filter)
+
+### Phase 3 — QuizMode Feature Restore
+- Quiz count selector: 10 / 20 / 30 / Semua
+- Lemah mode: focus on previously-wrong cards (sorted by wrong count)
+- Anti-repeat: seenPool prevents same card twice per session
+- Settings panel: ⚙ gear toggles difficulty, lemah mode, auto-next delay
+- Configurable auto-next: 1s / 1.5s / 2s / Manual
+- QuizShell: `autoNextDelay` prop, manual mode skips auto-advance
+
+### Kept from v2.x
+- FSRS spaced repetition engine (unchanged)
+- Light/dark theme with CSS vars (unchanged)
+- Track system (unchanged)
+- PWA + CI/CD (unchanged)
+- 111 tests — all pass
+
+
 ## [2.3.6] - 2026-04-28
 
 ### Fixed

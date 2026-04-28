@@ -313,6 +313,16 @@ export default function App() {
   // ── Known/Unknown ──
   const [known, setKnown] = usePersistedState('ssw-known', []);
   const [unknown, setUnknown] = usePersistedState('ssw-unknown', []);
+  const [starredArr, setStarredArr] = usePersistedState('ssw-starred', []);
+  const starredSet = new Set(Array.isArray(starredArr) ? starredArr : []);
+  const toggleStar = useCallback((id) => {
+    if (!id) return;
+    setStarredArr((prev) => {
+      const s = new Set(Array.isArray(prev) ? prev : []);
+      if (s.has(id)) s.delete(id); else s.add(id);
+      return [...s];
+    });
+  }, [setStarredArr]);
   const knownSet = new Set(Array.isArray(known) ? known : []);
   const unknownSet = new Set(Array.isArray(unknown) ? unknown : []);
 
@@ -435,6 +445,8 @@ export default function App() {
           onMark={handleMark}
           onExit={exitMode}
           srs={srs}
+          starred={starredSet}
+          onToggleStar={toggleStar}
         />
       ),
       kuis: <QuizMode cards={filteredCards} allCards={CARDS} onExit={exitMode} />,

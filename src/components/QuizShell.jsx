@@ -15,6 +15,7 @@ export default function QuizShell({
   showHint = false,
   renderExtra,
   accentColor = T.amber,
+  autoNextDelay = 2000,
 }) {
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -80,9 +81,10 @@ export default function QuizShell({
   // Auto-next
   useEffect(() => {
     if (selected === null || phase !== 'playing') return;
-    const t = setTimeout(handleNext, 2000);
+    if (autoNextDelay === 0) return; // manual mode
+    const t = setTimeout(handleNext, autoNextDelay);
     return () => clearTimeout(t);
-  }, [selected, phase, handleNext]);
+  }, [selected, phase, handleNext, autoNextDelay]);
 
   const handleRestart = () => {
     setQIdx(0);

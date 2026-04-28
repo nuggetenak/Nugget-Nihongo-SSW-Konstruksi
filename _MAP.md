@@ -493,3 +493,30 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 - Screen-by-screen specs (Dashboard, Flashcard, Quiz, etc)
 - Phase plan with acceptance criteria
 - Open questions for Nugget (Q1-Q10)
+
+---
+
+## 12. v3.0 Phase 1–3 Execution Log (2026-04-28)
+
+**Executed by:** Crispy (Claude Sonnet 4.6)
+**Status:** Phases 1–3 complete and pushed to `main`.
+
+### What changed
+- `src/components/JpDisplay.jsx` — Smart JpFront (4 layouts) + DescBlock (3 render modes)
+- `src/modes/FlashcardMode.jsx` — Full v87 feature restore: search, star, tools row, stats, flip gradient, smart text
+- `src/modes/QuizMode.jsx` — Quiz count, lemah mode, anti-repeat, settings, configurable auto-next
+- `src/components/QuizShell.jsx` — `autoNextDelay` prop, manual mode support
+- `src/App.jsx` — `starredArr`, `starredSet`, `toggleStar`; passed to FlashcardMode
+- `src/styles/theme.js` — light/dark CSS vars (from Phase 5.3, not changed here)
+
+### Remaining phases
+- Phase 4: JACMode + WaygroundMode + SimulasiMode restore
+- Phase 5: DangerMode + AngkaMode polish
+- Phase 6: Category filter popup + star system on filter
+- Phase 7: Dashboard overhaul
+- Phase 8: Empty states + animations
+- Phase 9: Beginner UX
+- Phase 10: QA + release
+
+### Next session: start from Phase 4
+Read `docs/UX-OVERHAUL-PROPOSAL.md` Phase 4 spec before starting.
