@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Crunchy (QA — Phase 5 complete)
+> **Last updated:** 2026-04-28 by Crunchy (QA — Phase 5.1 complete)
 > **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ — production-ready, deploy to GitHub Pages
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
@@ -44,6 +44,7 @@ Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field
 | Phase 3 | Crispy | ✅ | UX Polish: onboarding, track picker, dashboard, bottom nav, design system |
 | Phase 4 | Crunchy (QA) | ✅ | Bug fixes + SRS engine + storage layer overhaul (see §10) |
 | Phase 5 | Crunchy (QA) | ✅ | PWA: manifest, service worker, 10 icons, apple meta, offline support |
+| Phase 5.1 | Crunchy (QA) | ✅ | Icons replaced with Gemini-generated artwork; README full rewrite |
 
 ---
 
@@ -59,8 +60,9 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── public/                         ← ★ NEW (Phase 5)
 │   ├── manifest.webmanifest            ← PWA manifest
 │   ├── sw.js                           ← Service worker (cache-first + offline)
-│   ├── favicon.png
-│   └── icons/                          ← 10 PNG icons (72–512, apple-touch)
+│   ├── favicon.ico                     ← multi-size (16/32/48)
+│   ├── favicon.png                     ← 32px fallback
+│   └── icons/                          ← Gemini artwork, 72–512px + apple-touch                          ← 10 PNG icons (72–512, apple-touch)
 ├── docs/
 │   ├── PROPOSAL.md
 │   └── id-mapping-v87-to-v90.json
@@ -286,6 +288,18 @@ useSRS.js          — React hook. Calls initStore() synchronously. Exposes reac
 
 ## 9. Agent Instructions
 
+### ⚠️ Crispy / Integrator Sync Notes (Phase 4–5)
+These changes affect integration — Crispy must be aware:
+
+- **`package.json`** has new dep: `ts-fsrs: ^5.0.0` → run `npm install` before building
+- **`src/srs/`** is a new directory — 4 files, do not delete
+- **`usePersistedState`** return signature changed: now returns `[value, setter]` (2-tuple, no `ready` flag) — if any code destructures 3 values, fix it
+- **`wrong-tracker.js`** functions are now synchronous — remove any `await loadFromStorage(...)` / `await saveToStorage(...)` in existing code
+- **`window.storage`** is completely removed — never use it, never add it back
+- **`Dashboard`** now accepts a `srs` prop — pass `srs` from `useSRS()` hook
+- **Mode `ulasan`** → `ReviewMode` — requires `srs` prop
+- **`public/`** is now populated — do not clear or gitignore it
+
 ### When Starting a New Session
 1. Read this `_MAP.md` first
 2. Check `docs/PROPOSAL.md` for full context
@@ -388,4 +402,25 @@ This forces old SW to delete stale caches so users always get fresh assets.
 
 ---
 
-*End of _MAP.md — Last updated 2026-04-28 by Crunchy (QA — Phase 5)*
+
+## 12. Phase 5.1 Changelog (Crunchy QA — 2026-04-28)
+
+### Icon Replacement
+All placeholder icons replaced with Gemini-generated artwork:
+- **Design:** Hard hat (ヘルメット) with amber body, brown stripe, scaffold-style "N" badge
+- **Processed:** watermark removed, cropped, resized to all required sizes
+- **Files:** `icon-72` through `icon-512`, `apple-touch-icon.png`, `favicon.png`, `favicon.ico` (multi-size 16/32/48)
+
+### README.md — Full Rewrite
+Previous README was v87-era (outdated). Now reflects:
+- Current feature set (SRS, 15 modes, 3 tracks, PWA)
+- Install instructions (Add to Home Screen)
+- SRS rating table
+- Export/import workflow
+- Deployment instructions (including cache versioning reminder)
+- Updated credit section (Crispy + Crunchy)
+
+
+---
+
+*End of _MAP.md — Last updated 2026-04-28 by Crunchy (QA — Phase 5.1)*
