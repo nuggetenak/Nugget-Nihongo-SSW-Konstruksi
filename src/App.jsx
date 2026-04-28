@@ -12,7 +12,7 @@ import { useSRS } from './hooks/useSRS.js';
 // Components
 import TrackPicker from './components/TrackPicker.jsx';
 import BottomNav from './components/BottomNav.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import Dashboard, { recordStudyDay, incrementDailyCount, pushRecentCard } from './components/Dashboard.jsx';
 import FilterPopup from './components/FilterPopup.jsx';
 
 // Modes
@@ -330,6 +330,11 @@ export default function App() {
 
   const handleMark = useCallback(
     (id, type) => {
+      // Track study activity for dashboard
+      recordStudyDay();
+      incrementDailyCount();
+      if (id) pushRecentCard(id);
+
       if (type === 'known') {
         setKnown((k) => {
           const s = new Set(k);
