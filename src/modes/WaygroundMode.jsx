@@ -7,26 +7,33 @@ import { stripFuri } from '../utils/jp-helpers.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 
+const GROUPS = [
+  { label: 'Teori',   icon: '📋', color: '#f97316', prefix: 'wt' },
+  { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp' },
+  { label: 'Kosakata', icon: '📖', color: '#60a5fa', prefix: 'wg' },
+];
+
 export default function WaygroundMode({ onExit }) {
   const [activeSet, setActiveSet] = useState(null);
-  const [showFuri, setShowFuri] = useState(true);
-  const [showHint, setShowHint] = useState(true);
+  const [showFuri, setShowFuri]   = useState(true);
+  const [showHint, setShowHint]   = useState(true);
+  const [wgScores, setWgScores]   = usePersistedState('ssw-wg-scores', {});
 
   const set = WAYGROUND_SETS.find((s) => s.id === activeSet);
 
   const questions = useMemo(() => {
     if (!set) return [];
     return shuffle(set.questions).map((q) => ({
-      question: showFuri ? q.q : stripFuri(q.q),
+      question:    showFuri ? q.q : stripFuri(q.q),
       questionSub: null,
-      hint: showHint ? q.hint : null,
-      options: q.opts.map((opt, i) => ({
+      hint:        showHint ? q.hint : null,
+      options:     q.opts.map((opt, i) => ({
         text: showFuri ? opt : stripFuri(opt),
-        sub: q.opts_id?.[i] || null,
+        sub:  q.opts_id?.[i] || null,
       })),
-      correctIdx: q.ans,
+      correctIdx:  q.ans,
       explanation: q.exp,
-      _qId: `${set.id}-${q.id}`,
+      _qId:        `${set.id}-${q.id}`,
     }));
   }, [set, showFuri, showHint]);
 
@@ -36,7 +43,7 @@ export default function WaygroundMode({ onExit }) {
   );
 
   const handleAnswer = useCallback(
-    (qIdx, selIdx, isCorrect) => {
+    (qIdx, _selIdx, isCorrect) => {
       if (!isCorrect && set) {
         const qId = questions[qIdx]?._qId;
         if (qId) setWrongCounts((w) => ({ ...w, [qId]: makeWrongEntry(w[qId]) }));
@@ -45,135 +52,119 @@ export default function WaygroundMode({ onExit }) {
     [questions, set, setWrongCounts]
   );
 
-  // ─── Set Picker ───
-  if (!activeSet) {
-    const groups = [
-      { label: 'Teori', sets: WAYGROUND_SETS.filter((s) => s.id.startsWith('wt')) },
-      { label: 'Praktik', sets: WAYGROUND_SETS.filter((s) => s.id.startsWith('wp')) },
-      { label: 'Kosakata', sets: WAYGROUND_SETS.filter((s) => s.id.startsWith('wg')) },
-    ].filter((g) => g.sets.length > 0);
+  const handleFinish = useCallback(
+    ({ correct, total, maxStreak }) => {
+      if (!activeSet) return;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+      setWgScores((s) => ({
+        ...s,
+        [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() },
+      }));
+    },
+    [activeSet, setWgScores]
+  );
 
+  // ─── Quiz ─────────────────────────────────────────────────────────────────
+  if (activeSet) {
     return (
-      <div style={{ padding: '24px 16px', maxWidth: T.maxW, margin: '0 auto' }}>
-        <button
-          onClick={onExit}
-          style={{
-            fontFamily: 'inherit',
-            fontSize: 12,
-            color: T.textMuted,
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            marginBottom: 16,
-          }}
-        >
-          ← Kembali
-        </button>
-        <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Wayground · Soal Teknis</h2>
-        <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 12 }}>
-          {WAYGROUND_SETS.reduce((n, s) => n + s.questions.length, 0)} soal dalam{' '}
-          {WAYGROUND_SETS.length} set
-        </p>
+      <QuizShell
+        questions={questions}
+        onExit={() => setActiveSet(null)}
+        title={`Wayground · ${set?.title || ''}`}
+        onAnswer={handleAnswer}
+        onFinish={handleFinish}
+        showHint={showHint}
+        accentColor={set?.color || T.amber}
+      />
+    );
+  }
 
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-          <button
-            onClick={() => setShowFuri((f) => !f)}
-            style={{
-              fontFamily: 'inherit',
-              fontSize: 11,
-              padding: '6px 12px',
-              borderRadius: T.r.pill,
-              cursor: 'pointer',
-              background: showFuri ? 'rgba(251,191,36,0.15)' : T.surface,
-              border: `1px solid ${showFuri ? 'rgba(251,191,36,0.4)' : T.border}`,
-              color: showFuri ? T.gold : T.textMuted,
-            }}
-          >
-            ふり {showFuri ? 'ON' : 'OFF'}
-          </button>
-          <button
-            onClick={() => setShowHint((f) => !f)}
-            style={{
-              fontFamily: 'inherit',
-              fontSize: 11,
-              padding: '6px 12px',
-              borderRadius: T.r.pill,
-              cursor: 'pointer',
-              background: showHint ? 'rgba(251,191,36,0.15)' : T.surface,
-              border: `1px solid ${showHint ? 'rgba(251,191,36,0.4)' : T.border}`,
-              color: showHint ? T.gold : T.textMuted,
-            }}
-          >
-            💡 {showHint ? 'ON' : 'OFF'}
-          </button>
-        </div>
+  // ─── Set Picker ───────────────────────────────────────────────────────────
+  const totalSoal = WAYGROUND_SETS.reduce((n, s) => n + s.questions.length, 0);
 
-        {groups.map((g) => (
-          <div key={g.label} style={{ marginBottom: 20 }}>
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: 1.5,
-                color: T.textDim,
-                textTransform: 'uppercase',
-                marginBottom: 8,
-              }}
-            >
+  const groups = GROUPS.map((g) => ({
+    ...g,
+    sets: WAYGROUND_SETS.filter((s) => s.id.startsWith(g.prefix)),
+  })).filter((g) => g.sets.length > 0);
+
+  return (
+    <div style={{ padding: '24px 16px', maxWidth: T.maxW, margin: '0 auto' }}>
+      <button
+        onClick={onExit}
+        style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16 }}
+      >
+        ← Kembali
+      </button>
+      <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Wayground · Soal Teknis</h2>
+      <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 12 }}>
+        {totalSoal} soal dalam {WAYGROUND_SETS.length} set
+      </p>
+
+      {/* Toggles */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
+        {[
+          { label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
+          { label: `💡 ${showHint ? 'ON' : 'OFF'}`,   active: showHint, onClick: () => setShowHint((f) => !f) },
+        ].map((btn) => (
+          <button
+            key={btn.label}
+            onClick={btn.onClick}
+            style={{ fontFamily: 'inherit', fontSize: 11, padding: '6px 12px', borderRadius: T.r.pill, cursor: 'pointer', background: btn.active ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${btn.active ? 'rgba(251,191,36,0.4)' : T.border}`, color: btn.active ? T.gold : T.textMuted }}
+          >
+            {btn.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Grouped set list */}
+      {groups.map((g) => (
+        <div key={g.label} style={{ marginBottom: 20 }}>
+          {/* Section header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+            <span style={{ fontSize: 13 }}>{g.icon}</span>
+            <span style={{ fontSize: 10, fontWeight: 800, color: g.color, letterSpacing: 1.8, textTransform: 'uppercase' }}>
               {g.label}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {g.sets.map((s) => (
+            </span>
+            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
+            <span style={{ fontSize: 10, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, borderRadius: T.r.pill, padding: '2px 8px', fontWeight: 700 }}>
+              {g.sets.length} set
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {g.sets.map((s) => {
+              const saved = wgScores[s.id];
+              return (
                 <button
                   key={s.id}
                   onClick={() => setActiveSet(s.id)}
-                  style={{
-                    fontFamily: 'inherit',
-                    padding: '14px 16px',
-                    borderRadius: T.r.md,
-                    cursor: 'pointer',
-                    background: T.surface,
-                    border: `1px solid ${T.border}`,
-                    color: T.text,
-                    textAlign: 'left',
-                  }}
+                  style={{ fontFamily: 'inherit', padding: '12px 14px 12px 18px', borderRadius: T.r.md, cursor: 'pointer', background: T.surface, border: `1px solid ${T.border}`, color: T.text, textAlign: 'left', position: 'relative', overflow: 'hidden' }}
                 >
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <span>
-                      {s.emoji} {s.title}
-                    </span>
-                    <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                  {/* Color stripe */}
+                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      {saved && (
+                        <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>
+                          {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
+                        </span>
+                      )}
+                      <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                    </div>
                   </div>
                   {s.subtitle && (
-                    <div
-                      style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
-                    >
+                    <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
                       {s.subtitle}
                     </div>
                   )}
                 </button>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <QuizShell
-      questions={questions}
-      onExit={() => setActiveSet(null)}
-      title={`Wayground · ${set?.title || ''}`}
-      onAnswer={handleAnswer}
-      showHint={showHint}
-      accentColor={set?.color || T.amber}
-    />
+        </div>
+      ))}
+    </div>
   );
 }

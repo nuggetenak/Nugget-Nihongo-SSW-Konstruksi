@@ -11,6 +11,7 @@ export default function QuizShell({
   onExit,
   title = 'Kuis',
   onAnswer,
+  onFinish,
   timer = 0,
   showHint = false,
   renderExtra,
@@ -94,6 +95,14 @@ export default function QuizShell({
     setTimeLeft(timer);
     resetStreak();
   };
+
+  // Fire onFinish once when quiz completes
+  useEffect(() => {
+    if (phase === 'finished') {
+      const correct = results.filter((r) => r.isCorrect).length;
+      onFinish?.({ correct, total: results.length, maxStreak });
+    }
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === 'finished') {
     const correct = results.filter((r) => r.isCorrect).length;
