@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.5] - 2026-04-28
+
+### Fixed
+- **`useSRS`: `initStore()` dipanggil setiap render** — dipindah ke initializer `useState(() => { initStore(); return 0; })` sehingga hanya dipanggil sekali saat mount.
+- **`SearchMode`: input `width: 100%` tanpa `boxSizing: border-box`** — menyebabkan horizontal overflow di layar sempit. Fixed.
+
+### Added
+- **`src/tests/scheduler.test.js`** — 24 test baru: `fmtInterval` (5 kasus edge), `recordReview` (7 kasus), `getDueCardIds` (4 kasus), `getSRSStats` (3 kasus), `previewIntervals` (4 kasus), store write-through (1 kasus). Sebelumnya `fsrs-scheduler.js` 0% coverage dari test suite.
+- **`src/tests/quiz.test.js`** — 9 test baru: `generateQuiz` (easy/medium/hard, correctness, dedup, edge cases). Sebelumnya `quiz-generator.js` 0% coverage.
+
+### Changed
+- Test suite naik dari **72 → 105 tests** (5 test files).
+- `_MAP.md` Phase 5.3 entry diperbarui dengan info test suite baru.
+
 ## [2.3.4] - 2026-04-28
 
 ### Fixed

@@ -50,6 +50,7 @@ export default function SearchMode({ onExit }) {
           border: `1px solid ${T.borderLight}`,
           color: T.text,
           outline: 'none',
+          boxSizing: 'border-box',
           marginBottom: 16,
         }}
       />

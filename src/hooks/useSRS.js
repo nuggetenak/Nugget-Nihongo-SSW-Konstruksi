@@ -15,12 +15,12 @@ import {
 import { RATING_META } from '../srs/fsrs-core.js';
 
 export function useSRS(trackCardIds = []) {
-  // initStore() is synchronous — runs immediately, no async needed
-  const [, forceRender] = useState(0);
+  // initStore() once — in the useState initializer (runs only on first render)
+  const [, forceRender] = useState(() => {
+    initStore();
+    return 0;
+  });
   const idsRef = useRef(trackCardIds);
-
-  // Initialize store once (idempotent)
-  initStore();
 
   // Keep ref current
   useEffect(() => {
