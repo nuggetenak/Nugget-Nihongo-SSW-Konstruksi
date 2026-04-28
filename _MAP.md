@@ -527,13 +527,13 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 | 4 — JAC + Wayground + Simulasi | ✅ | See §14 below |
 | 5 — DangerMode + AngkaMode | ✅ | Browse panel + standalone quiz + after-answer reveal |
 | 6 — Filter popup + Star + App UX | ✅ | FilterPopup, last-mode persist, materi toggle with counts |
-| 7 — Dashboard overhaul | ⬜ | Next |
-| 8 — Visual polish + empty states | ⬜ | |
-| 9 — Beginner UX | ⬜ | |
+| 7 — Dashboard overhaul | ✅ | Stats bar, Quick Start CTA, mode tiles+times, streak, daily, recently studied |
+| 8 — Visual polish + empty states | ✅ | Toast/Confirm providers, empty states Review/Focus/Search, reduced-motion |
+| 9 — Beginner UX | ⬜ | Next |
 | 10 — QA + release | ⬜ | |
 
-### Next session: start from UX Phase 7
-File: `src/components/Dashboard.jsx`
+### Next session: start from UX Phase 9
+File: `src/modes/FlashcardMode.jsx` (tutorial tooltips), `src/App.jsx` (milestone toasts)
 
 ---
 
