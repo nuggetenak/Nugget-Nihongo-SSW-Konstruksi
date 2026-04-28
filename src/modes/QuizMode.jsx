@@ -14,7 +14,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import QuizShell from '../components/QuizShell.jsx';
 
-export default function QuizMode({ cards, allCards, onExit }) {
+export default function QuizMode({ cards, allCards, onExit, onFinish }) {
   const [difficulty, setDifficulty] = useState('medium');
   const [quizCount, setQuizCount] = useState(10);
   const [lemahMode, setLemahMode] = useState(false);
@@ -166,6 +166,7 @@ export default function QuizMode({ cards, allCards, onExit }) {
       onExit={() => { setStarted(false); _seenPool.clear(); }}
       title="Kuis"
       onAnswer={handleAnswer}
+      onFinish={onFinish}
       accentColor={T.gold}
       autoNextDelay={autoNextDelay}
     />

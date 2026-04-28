@@ -3,13 +3,37 @@
 // Recently studied, SRS breakdown
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import { loadFromStorage } from '../utils/wrong-tracker.js';
 import ProgressBar from './ProgressBar.jsx';
+
+// ── Inline help tooltip ──────────────────────────────────────────────────────
+function InfoTooltip({ label, body }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <span style={{ position: 'relative', display: 'inline-block' }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        style={{ fontFamily: 'inherit', fontSize: 11, width: 18, height: 18, borderRadius: '50%', border: `1px solid ${T.border}`, background: T.surface, color: T.textDim, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0, verticalAlign: 'middle', marginLeft: 4 }}
+      >
+        ⓘ
+      </button>
+      {open && (
+        <>
+          <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 100 }} />
+          <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 101, background: T.text, color: T.bg, borderRadius: T.r.md, padding: '10px 14px', width: 220, fontSize: 12, lineHeight: 1.6, boxShadow: T.shadow.lg, animation: 'fadeIn 0.15s ease' }}>
+            <div style={{ fontWeight: 700, marginBottom: 4 }}>{label}</div>
+            {body}
+          </div>
+        </>
+      )}
+    </span>
+  );
+}
 
 // ── Time estimate labels ─────────────────────────────────────────────────────
 const MODE_META = {
@@ -210,6 +234,21 @@ export default function Dashboard({
         )}
       </div>
 
+      {/* ── Starter Pack — new users only ── */}
+      {knownN === 0 && (
+        <div style={{ padding: '14px 16px', borderRadius: T.r.lg, background: 'rgba(5,150,105,0.08)', border: `1.5px solid rgba(5,150,105,0.30)`, marginBottom: 14, animation: 'slideUp 0.3s ease both' }}>
+          <div style={{ fontSize: 11, fontWeight: 800, color: '#059669', letterSpacing: 1, marginBottom: 6 }}>🎒 PAKET AWALAN</div>
+          <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>Baru mulai? Mulai dari sini</div>
+          <div style={{ fontSize: 12, color: T.textMuted, marginBottom: 10, lineHeight: 1.5 }}>20 istilah dasar — salam, safety, dan peralatan umum — yang paling sering muncul di ujian.</div>
+          <button
+            onClick={() => onNavigate('kartu')}
+            style={{ fontFamily: 'inherit', padding: '10px 20px', fontSize: 13, fontWeight: 700, borderRadius: T.r.md, background: '#059669', border: 'none', color: '#fff', cursor: 'pointer' }}
+          >
+            Mulai dari sini →
+          </button>
+        </div>
+      )}
+
       {/* ── Quick Start CTA ── */}
       <button
         onClick={() => onNavigate(qs.mode)}
@@ -276,8 +315,8 @@ export default function Dashboard({
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
         {UJIAN_TILES.map((key) => {
           const m = MODE_META[key];
-          // Show JAC best score if available
-          const subExtra = key === 'jac' && bestJacScore > 0 ? ` · Skor terbaik: ${bestJacScore}%` : '';
+          const isJAC = key === 'jac';
+          const subExtra = isJAC && bestJacScore > 0 ? ` · Skor terbaik: ${bestJacScore}%` : '';
           return (
             <button
               key={key}
@@ -286,7 +325,10 @@ export default function Dashboard({
             >
               <span style={{ fontSize: 20, flexShrink: 0 }}>{m.icon}</span>
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 13, fontWeight: 700 }}>{m.label}</div>
+                <div style={{ fontSize: 13, fontWeight: 700 }}>
+                  {m.label}
+                  {isJAC && <InfoTooltip label="JAC" body="Japan Agricultural Cooperative — penyelenggara ujian SSW Konstruksi. Soal ini berasal dari contoh ujian resmi mereka." />}
+                </div>
                 <div style={{ fontSize: 11, color: T.textDim }}>{m.desc}{subExtra}</div>
               </div>
               {m.time && <span style={{ fontSize: 10, color: T.textFaint, flexShrink: 0 }}>{m.time}</span>}
@@ -299,7 +341,10 @@ export default function Dashboard({
       {/* ── SRS breakdown (if data) ── */}
       {srsStats && srsStats.total > 0 && (
         <div style={{ marginBottom: 14 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, color: T.textDim, textTransform: 'uppercase', marginBottom: 8 }}>SRS Breakdown</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, color: T.textDim, textTransform: 'uppercase', marginBottom: 8, display: 'flex', alignItems: 'center' }}>
+            SRS Breakdown
+            <InfoTooltip label="SRS (Spaced Repetition)" body="Sistem ulasan cerdas — kartu muncul lagi saat kamu hampir lupa. Makin sering benar, makin jarang muncul." />
+          </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {[
               { n: srsStats.mature,   label: 'Matang',  color: T.correct },

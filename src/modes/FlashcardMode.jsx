@@ -21,6 +21,15 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   const [showDesc, setShowDesc] = useState(false);
   const toast = useToast();
 
+  // ── Tutorial overlay (first-time only) ──────────────────────────────────
+  const [showTutorial, setShowTutorial] = useState(() => {
+    try { return !localStorage.getItem('ssw-tutorial-flashcard'); } catch { return false; }
+  });
+  const dismissTutorial = () => {
+    try { localStorage.setItem('ssw-tutorial-flashcard', '1'); } catch {}
+    setShowTutorial(false);
+  };
+
   // ── Search + filter ──
   const [search, setSearch] = useState('');
 
@@ -493,7 +502,7 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
           <span>🔄</span>
           <span>{confirmReset ? 'Yakin?' : 'Reset'}</span>
         </button>
-        {/* Star filter — show starred only */}
+        {/* ── Star filter — show starred only */}
         <button
           onClick={() => { setSearch(search === '__starred__' ? '' : '__starred__'); setIdx(0); }}
           style={{ fontFamily: 'inherit', padding: '8px 4px', borderRadius: T.r.md, border: `1px solid ${search === '__starred__' ? T.gold + '80' : T.border}`, background: search === '__starred__' ? 'rgba(251,191,36,0.12)' : T.surface, color: search === '__starred__' ? T.gold : T.textMuted, cursor: 'pointer', fontSize: 11, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
@@ -502,6 +511,35 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
           <span>{starred.size > 0 ? `${starred.size}` : 'Bintang'}</span>
         </button>
       </div>
+
+      {/* ── First-time tutorial overlay ── */}
+      {showTutorial && (
+        <div
+          onClick={dismissTutorial}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 250, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', animation: 'fadeIn 0.2s ease' }}
+        >
+          <div style={{ background: 'var(--ssw-bg)', borderRadius: T.r.xl, padding: '28px 24px', maxWidth: 320, width: '100%', textAlign: 'center' }}>
+            <div style={{ fontSize: 36, marginBottom: 12 }}>🃏</div>
+            <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 16 }}>Cara Pakai Kartu</div>
+            {[
+              { icon: '👆', text: 'Ketuk kartu untuk balik' },
+              { icon: '👈👉', text: 'Geser kiri-kanan untuk navigasi' },
+              { icon: '✅', text: 'Tandai sesuai pemahamanmu' },
+              { icon: '⭐', text: 'Bintang untuk kartu penting' },
+            ].map((tip) => (
+              <div key={tip.icon} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '9px 0', borderBottom: `1px solid ${T.border}`, textAlign: 'left' }}>
+                <span style={{ fontSize: 20, width: 32, textAlign: 'center', flexShrink: 0 }}>{tip.icon}</span>
+                <span style={{ fontSize: 13, color: T.textMuted }}>{tip.text}</span>
+              </div>
+            ))}
+            <button
+              style={{ marginTop: 20, width: '100%', padding: '12px', fontSize: 14, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer' }}
+            >
+              Mulai Belajar →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

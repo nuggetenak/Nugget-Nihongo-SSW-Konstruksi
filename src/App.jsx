@@ -8,6 +8,7 @@ import { CARDS } from './data/cards.js';
 import { getCatsForTrack, VOCAB_SOURCES } from './data/categories.js';
 import { usePersistedState } from './hooks/usePersistedState.js';
 import { useSRS } from './hooks/useSRS.js';
+import { useToast } from './components/Toast.jsx';
 
 // Components
 import TrackPicker from './components/TrackPicker.jsx';
@@ -297,6 +298,21 @@ export default function App() {
 
   const toggleTheme = useCallback(() => setIsDark((d) => !d), []);
 
+  // ── Toast ──
+  const toast = useToast();
+
+  // ── 7-day streak milestone ──
+  useEffect(() => {
+    try {
+      const streak = JSON.parse(localStorage.getItem('ssw-study-streak') || '{}');
+      const celebrated = localStorage.getItem('ssw-milestone-streak7');
+      if (streak.days >= 7 && !celebrated) {
+        localStorage.setItem('ssw-milestone-streak7', '1');
+        setTimeout(() => toast.show('🔥 Seminggu berturut-turut belajar! Keren!'), 1000);
+      }
+    } catch {}
+  }, [toast]);
+
   // ── State ──
   const [onboarded, setOnboarded] = useState(() => {
     try {
@@ -339,6 +355,10 @@ export default function App() {
         setKnown((k) => {
           const s = new Set(k);
           s.add(id);
+          // Milestone: first 10 cards
+          if (s.size === 10) {
+            setTimeout(() => toast.show('🎉 10 kartu pertama hafal! Mantap!'), 400);
+          }
           return [...s];
         });
         setUnknown((u) => {
@@ -359,7 +379,7 @@ export default function App() {
         });
       }
     },
-    [setKnown, setUnknown]
+    [setKnown, setUnknown, toast]
   );
 
   const [quizWrong] = usePersistedState('ssw-quiz-wrong', {});
@@ -443,7 +463,16 @@ export default function App() {
           onToggleStar={toggleStar}
         />
       ),
-      kuis: <QuizMode cards={filteredCards} allCards={CARDS} onExit={exitMode} />,
+      kuis: <QuizMode cards={filteredCards} allCards={CARDS} onExit={exitMode} onFinish={({ correct, total }) => {
+        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+        try {
+          const celebrated = localStorage.getItem('ssw-milestone-quiz70');
+          if (pct >= 70 && !celebrated) {
+            localStorage.setItem('ssw-milestone-quiz70', '1');
+            setTimeout(() => toast.show('✨ Kuis pertama ≥70%! Hasil luar biasa!'), 800);
+          }
+        } catch {}
+      }} />,
       jac: <JACMode onExit={exitMode} />,
       wayground: <WaygroundMode onExit={exitMode} />,
       angka: <AngkaMode onExit={exitMode} />,
