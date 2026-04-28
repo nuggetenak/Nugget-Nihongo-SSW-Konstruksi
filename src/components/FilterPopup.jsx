@@ -46,14 +46,7 @@ export default function FilterPopup({
   );
 }
 
-function FilterPopupInner({
-  onClose,
-  track,
-  vocabMode,
-  activeCats,
-  onApply,
-  starredCount,
-}) {
+function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, starredCount }) {
   const [pendingCats, setPendingCats] = useState(new Set(activeCats));
   const counts = buildCounts(track, vocabMode);
 
@@ -82,8 +75,8 @@ function FilterPopupInner({
   const pendingCount = pendingCats.has('all')
     ? counts.all
     : pendingCats.has('bintang')
-    ? starredCount
-    : [...pendingCats].reduce((sum, k) => sum + (counts[k] || 0), 0);
+      ? starredCount
+      : [...pendingCats].reduce((sum, k) => sum + (counts[k] || 0), 0);
 
   const pendingCatCount = pendingCats.has('all') ? 0 : pendingCats.size;
 
@@ -97,19 +90,68 @@ function FilterPopupInner({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 200, animation: 'fadeIn 0.15s ease' }}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.5)',
+          zIndex: 200,
+          animation: 'fadeIn 0.15s ease',
+        }}
       />
       {/* Sheet */}
       <div
-        style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: T.maxW, zIndex: 201, background: 'var(--ssw-bg)', borderRadius: `${T.r.xl}px ${T.r.xl}px 0 0`, boxShadow: T.shadow.lg, animation: 'slideUp 0.25s ease', maxHeight: '80dvh', display: 'flex', flexDirection: 'column' }}
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '100%',
+          maxWidth: T.maxW,
+          zIndex: 201,
+          background: 'var(--ssw-bg)',
+          borderRadius: `${T.r.xl}px ${T.r.xl}px 0 0`,
+          boxShadow: T.shadow.lg,
+          animation: 'slideUp 0.25s ease',
+          maxHeight: '80dvh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
       >
         {/* Handle */}
-        <div style={{ width: 36, height: 4, background: 'var(--ssw-border)', borderRadius: 99, margin: '12px auto 0' }} />
+        <div
+          style={{
+            width: 36,
+            height: 4,
+            background: 'var(--ssw-border)',
+            borderRadius: 99,
+            margin: '12px auto 0',
+          }}
+        />
 
         {/* Title */}
-        <div style={{ padding: '12px 20px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div
+          style={{
+            padding: '12px 20px 8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <span style={{ fontSize: 15, fontWeight: 800 }}>Filter Kategori</span>
-          <button onClick={onClose} style={{ fontFamily: 'inherit', fontSize: 13, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', padding: '4px 8px' }}>✕</button>
+          <button
+            onClick={onClose}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 13,
+              color: T.textMuted,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '4px 8px',
+            }}
+          >
+            ✕
+          </button>
         </div>
 
         {/* Scrollable grid */}
@@ -117,22 +159,54 @@ function FilterPopupInner({
           {/* "All" row */}
           <button
             onClick={() => togglePending('all')}
-            style={{ fontFamily: 'inherit', width: '100%', padding: '12px 14px', borderRadius: T.r.md, background: pendingAll ? 'rgba(245,158,11,0.12)' : T.surface, border: `1.5px solid ${pendingAll ? T.amber : T.border}`, color: pendingAll ? T.amber : T.text, textAlign: 'left', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, fontWeight: pendingAll ? 700 : 400 }}
+            style={{
+              fontFamily: 'inherit',
+              width: '100%',
+              padding: '12px 14px',
+              borderRadius: T.r.md,
+              background: pendingAll ? 'rgba(245,158,11,0.12)' : T.surface,
+              border: `1.5px solid ${pendingAll ? T.amber : T.border}`,
+              color: pendingAll ? T.amber : T.text,
+              textAlign: 'left',
+              cursor: 'pointer',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 8,
+              fontWeight: pendingAll ? 700 : 400,
+            }}
           >
             <span>📚 すべて</span>
             <span style={{ fontSize: 12, opacity: 0.65 }}>{counts.all}</span>
           </button>
 
           {/* 3-col grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6, marginBottom: 8 }}>
+          <div
+            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6, marginBottom: 8 }}
+          >
             {/* Bintang (starred) */}
             {starredCount > 0 && (
               <button
                 onClick={() => togglePending('bintang')}
-                style={{ fontFamily: 'inherit', padding: '10px 8px', borderRadius: T.r.md, background: pendingCats.has('bintang') ? 'rgba(251,191,36,0.15)' : T.surface, border: `1.5px solid ${pendingCats.has('bintang') ? T.gold : T.border}`, color: T.text, textAlign: 'center', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}
+                style={{
+                  fontFamily: 'inherit',
+                  padding: '10px 8px',
+                  borderRadius: T.r.md,
+                  background: pendingCats.has('bintang') ? 'rgba(251,191,36,0.15)' : T.surface,
+                  border: `1.5px solid ${pendingCats.has('bintang') ? T.gold : T.border}`,
+                  color: T.text,
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 4,
+                }}
               >
                 <span style={{ fontSize: 18 }}>⭐</span>
-                <span style={{ fontSize: 9, fontWeight: 700, color: T.textMuted, lineHeight: 1.2 }}>Bintang</span>
+                <span style={{ fontSize: 9, fontWeight: 700, color: T.textMuted, lineHeight: 1.2 }}>
+                  Bintang
+                </span>
                 <span style={{ fontSize: 10, fontWeight: 700, color: T.gold }}>{starredCount}</span>
               </button>
             )}
@@ -147,11 +221,43 @@ function FilterPopupInner({
                   <button
                     key={cat.key}
                     onClick={() => togglePending(cat.key)}
-                    style={{ fontFamily: 'inherit', padding: '10px 8px', borderRadius: T.r.md, background: active ? `${cat.color}18` : T.surface, border: `1.5px solid ${active ? cat.color + '60' : T.border}`, color: T.text, textAlign: 'center', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, opacity: cnt === 0 ? 0.4 : 1 }}
+                    style={{
+                      fontFamily: 'inherit',
+                      padding: '10px 8px',
+                      borderRadius: T.r.md,
+                      background: active ? `${cat.color}18` : T.surface,
+                      border: `1.5px solid ${active ? cat.color + '60' : T.border}`,
+                      color: T.text,
+                      textAlign: 'center',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 4,
+                      opacity: cnt === 0 ? 0.4 : 1,
+                    }}
                   >
                     <span style={{ fontSize: 18 }}>{cat.emoji}</span>
-                    <span style={{ fontSize: 9, fontWeight: 600, color: T.textDim, lineHeight: 1.2, fontFamily: T.fontJP }}>{cat.label}</span>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: active ? cat.color : T.textDim }}>{cnt}</span>
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 600,
+                        color: T.textDim,
+                        lineHeight: 1.2,
+                        fontFamily: T.fontJP,
+                      }}
+                    >
+                      {cat.label}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: active ? cat.color : T.textDim,
+                      }}
+                    >
+                      {cnt}
+                    </span>
                   </button>
                 );
               })}
@@ -162,7 +268,19 @@ function FilterPopupInner({
         <div style={{ padding: '12px 16px 28px', borderTop: `1px solid ${T.border}` }}>
           <button
             onClick={handleApply}
-            style={{ width: '100%', padding: '13px', fontSize: 14, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer', boxShadow: T.shadow.glow }}
+            style={{
+              width: '100%',
+              padding: '13px',
+              fontSize: 14,
+              fontWeight: 700,
+              fontFamily: 'inherit',
+              borderRadius: T.r.md,
+              background: T.accent,
+              border: 'none',
+              color: T.textBright,
+              cursor: 'pointer',
+              boxShadow: T.shadow.glow,
+            }}
           >
             {pendingCatCount > 0
               ? `✓ Terapkan ${pendingCatCount} kategori (${pendingCount} kartu)`

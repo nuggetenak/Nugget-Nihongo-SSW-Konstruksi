@@ -33,26 +33,83 @@ export function ConfirmProvider({ children }) {
           {/* Backdrop */}
           <div
             onClick={() => answer(false)}
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 400, animation: 'fadeIn 0.15s ease' }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0,0,0,0.5)',
+              zIndex: 400,
+              animation: 'fadeIn 0.15s ease',
+            }}
           />
           {/* Sheet */}
           <div
-            style={{ position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: T.maxW, zIndex: 401, background: 'var(--ssw-bg)', borderRadius: `${T.r.xl}px ${T.r.xl}px 0 0`, padding: '24px 20px 36px', boxShadow: T.shadow.lg, animation: 'slideUp 0.25s ease' }}
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '100%',
+              maxWidth: T.maxW,
+              zIndex: 401,
+              background: 'var(--ssw-bg)',
+              borderRadius: `${T.r.xl}px ${T.r.xl}px 0 0`,
+              padding: '24px 20px 36px',
+              boxShadow: T.shadow.lg,
+              animation: 'slideUp 0.25s ease',
+            }}
           >
-            <div style={{ width: 36, height: 4, background: 'var(--ssw-border)', borderRadius: 99, margin: '0 auto 20px' }} />
-            <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 20, textAlign: 'center', color: T.text }}>
+            <div
+              style={{
+                width: 36,
+                height: 4,
+                background: 'var(--ssw-border)',
+                borderRadius: 99,
+                margin: '0 auto 20px',
+              }}
+            />
+            <div
+              style={{
+                fontSize: 15,
+                fontWeight: 700,
+                marginBottom: 20,
+                textAlign: 'center',
+                color: T.text,
+              }}
+            >
               {state.message}
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button
                 onClick={() => answer(false)}
-                style={{ flex: 1, padding: '13px', fontSize: 14, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, color: T.textMuted, cursor: 'pointer' }}
+                style={{
+                  flex: 1,
+                  padding: '13px',
+                  fontSize: 14,
+                  fontWeight: 700,
+                  fontFamily: 'inherit',
+                  borderRadius: T.r.md,
+                  background: T.surface,
+                  border: `1px solid ${T.border}`,
+                  color: T.textMuted,
+                  cursor: 'pointer',
+                }}
               >
                 {state.cancelLabel}
               </button>
               <button
                 onClick={() => answer(true)}
-                style={{ flex: 1, padding: '13px', fontSize: 14, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.wrong, border: 'none', color: '#fff', cursor: 'pointer' }}
+                style={{
+                  flex: 1,
+                  padding: '13px',
+                  fontSize: 14,
+                  fontWeight: 700,
+                  fontFamily: 'inherit',
+                  borderRadius: T.r.md,
+                  background: T.wrong,
+                  border: 'none',
+                  color: '#fff',
+                  cursor: 'pointer',
+                }}
               >
                 {state.confirmLabel}
               </button>

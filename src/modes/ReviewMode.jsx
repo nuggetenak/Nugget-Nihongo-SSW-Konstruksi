@@ -105,14 +105,45 @@ export default function ReviewMode({ srs, onExit }) {
     if (total === 0) {
       return (
         <div style={{ padding: '0 16px', maxWidth: T.maxW, margin: '0 auto' }}>
-          <button onClick={onExit} style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0 0' }}>← Kembali</button>
-          <div style={{ padding: '48px 24px', textAlign: 'center', animation: 'scaleIn 0.3s ease' }}>
+          <button
+            onClick={onExit}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 12,
+              color: T.textMuted,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '20px 0 0',
+            }}
+          >
+            ← Kembali
+          </button>
+          <div
+            style={{ padding: '48px 24px', textAlign: 'center', animation: 'scaleIn 0.3s ease' }}
+          >
             <div style={{ fontSize: 52, marginBottom: 14 }}>🎉</div>
-            <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>Semua kartu sudah terulang!</div>
+            <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>
+              Semua kartu sudah terulang!
+            </div>
             <div style={{ fontSize: 13, color: T.textMuted, lineHeight: 1.6, marginBottom: 24 }}>
               Tidak ada yang jatuh tempo hari ini. Datang lagi besok untuk sesi ulasan berikutnya.
             </div>
-            <button onClick={onExit} style={{ fontFamily: 'inherit', padding: '12px 24px', fontSize: 13, fontWeight: 700, borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer', boxShadow: T.shadow.glow }}>
+            <button
+              onClick={onExit}
+              style={{
+                fontFamily: 'inherit',
+                padding: '12px 24px',
+                fontSize: 13,
+                fontWeight: 700,
+                borderRadius: T.r.md,
+                background: T.accent,
+                border: 'none',
+                color: T.textBright,
+                cursor: 'pointer',
+                boxShadow: T.shadow.glow,
+              }}
+            >
               Kembali ke Dashboard
             </button>
           </div>

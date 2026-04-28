@@ -19,12 +19,15 @@ export function ToastProvider({ children }) {
     setToasts((ts) => ts.filter((t) => t.id !== id));
   }, []);
 
-  const show = useCallback((message, { undo, duration = 3500 } = {}) => {
-    const id = ++nextId.current;
-    setToasts((ts) => [...ts.slice(-1), { id, message, undo }]); // max 2
-    setTimeout(() => dismiss(id), duration);
-    return id;
-  }, [dismiss]);
+  const show = useCallback(
+    (message, { undo, duration = 3500 } = {}) => {
+      const id = ++nextId.current;
+      setToasts((ts) => [...ts.slice(-1), { id, message, undo }]); // max 2
+      setTimeout(() => dismiss(id), duration);
+      return id;
+    },
+    [dismiss]
+  );
 
   return (
     <ToastCtx.Provider value={{ show, dismiss }}>
@@ -66,15 +69,38 @@ export function ToastProvider({ children }) {
             <span style={{ flex: 1 }}>{t.message}</span>
             {t.undo && (
               <button
-                onClick={() => { t.undo(); dismiss(t.id); }}
-                style={{ fontFamily: 'inherit', fontSize: 12, fontWeight: 800, background: 'none', border: 'none', color: T.gold, cursor: 'pointer', padding: '0 4px', flexShrink: 0 }}
+                onClick={() => {
+                  t.undo();
+                  dismiss(t.id);
+                }}
+                style={{
+                  fontFamily: 'inherit',
+                  fontSize: 12,
+                  fontWeight: 800,
+                  background: 'none',
+                  border: 'none',
+                  color: T.gold,
+                  cursor: 'pointer',
+                  padding: '0 4px',
+                  flexShrink: 0,
+                }}
               >
                 Batalkan
               </button>
             )}
             <button
               onClick={() => dismiss(t.id)}
-              style={{ fontFamily: 'inherit', fontSize: 12, background: 'none', border: 'none', color: 'inherit', opacity: 0.5, cursor: 'pointer', padding: '0 2px', flexShrink: 0 }}
+              style={{
+                fontFamily: 'inherit',
+                fontSize: 12,
+                background: 'none',
+                border: 'none',
+                color: 'inherit',
+                opacity: 0.5,
+                cursor: 'pointer',
+                padding: '0 2px',
+                flexShrink: 0,
+              }}
             >
               ✕
             </button>

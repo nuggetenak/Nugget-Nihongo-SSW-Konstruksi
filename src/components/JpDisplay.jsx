@@ -38,14 +38,28 @@ export function JpFront({ jp = '', furi, romaji }) {
   // ── A vs B (handles "Avs B", "A vs B", "AvS B") ──────────────────────────
   const VS_RE = /\s*vs\s*/i;
   if (VS_RE.test(clean)) {
-    const parts = clean.split(VS_RE).map((p) => p.trim()).filter(Boolean);
+    const parts = clean
+      .split(VS_RE)
+      .map((p) => p.trim())
+      .filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
         {parts.map((p, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+          <div
+            key={i}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}
+          >
             {i > 0 && (
-              <div style={{ fontSize: Math.round(fs * 0.5), color: T.amberMid, fontWeight: 900, letterSpacing: 4, opacity: 0.85 }}>
+              <div
+                style={{
+                  fontSize: Math.round(fs * 0.5),
+                  color: T.amberMid,
+                  fontWeight: 900,
+                  letterSpacing: 4,
+                  opacity: 0.85,
+                }}
+              >
                 VS
               </div>
             )}
@@ -59,13 +73,19 @@ export function JpFront({ jp = '', furi, romaji }) {
 
   // ── A・B・C (中点 separator) ──────────────────────────────────────────────
   if (clean.includes('・') && !clean.includes('：')) {
-    const parts = clean.split('・').map((p) => p.trim()).filter(Boolean);
+    const parts = clean
+      .split('・')
+      .map((p) => p.trim())
+      .filter(Boolean);
     if (parts.length >= 2) {
       const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
       return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
           {parts.map((p, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+            <div
+              key={i}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+            >
               {i > 0 && <div style={HR} />}
               <span style={{ ...IS, fontSize: fs }}>{p}</span>
             </div>
@@ -93,13 +113,21 @@ export function JpFront({ jp = '', furi, romaji }) {
 
   // ── A → B → C (sequence / flow) ──────────────────────────────────────────
   if (clean.includes('→')) {
-    const parts = clean.split('→').map((p) => p.trim()).filter(Boolean);
+    const parts = clean
+      .split('→')
+      .map((p) => p.trim())
+      .filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
         {parts.map((p, i) => (
-          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-            {i > 0 && <span style={{ fontSize: 12, color: T.gold, opacity: 0.65, lineHeight: 1 }}>↓</span>}
+          <div
+            key={i}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+          >
+            {i > 0 && (
+              <span style={{ fontSize: 12, color: T.gold, opacity: 0.65, lineHeight: 1 }}>↓</span>
+            )}
             <span style={{ ...IS, fontSize: fs }}>{p}</span>
           </div>
         ))}
@@ -156,7 +184,9 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
   const src = srcMatch ? srcMatch[0].trim() : null;
 
   const footnote = src ? (
-    <div style={{ marginTop: 5, fontSize: 10, opacity: 0.38, fontStyle: 'italic', color: T.textDim }}>
+    <div
+      style={{ marginTop: 5, fontSize: 10, opacity: 0.38, fontStyle: 'italic', color: T.textDim }}
+    >
       {src}
     </div>
   ) : null;
@@ -192,7 +222,10 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
       <div style={blockStyle}>
         {intro.trim() && <div style={{ marginBottom: 6, opacity: 0.85 }}>{intro.trim()}</div>}
         {items.map((item, i) => (
-          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 6, alignItems: 'flex-start' }}>
+          <div
+            key={i}
+            style={{ display: 'flex', gap: 8, marginBottom: 6, alignItems: 'flex-start' }}
+          >
             <span
               style={{
                 color: T.amberMid,
@@ -251,7 +284,10 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
       <div style={blockStyle}>
         {intro.trim() && <div style={{ marginBottom: 6, opacity: 0.85 }}>{intro.trim()}</div>}
         {items.map((item, i) => (
-          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 5, alignItems: 'flex-start' }}>
+          <div
+            key={i}
+            style={{ display: 'flex', gap: 8, marginBottom: 5, alignItems: 'flex-start' }}
+          >
             <span
               style={{
                 color: T.amberMid,

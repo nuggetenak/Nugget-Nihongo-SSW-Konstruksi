@@ -8,32 +8,32 @@ import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 
 const GROUPS = [
-  { label: 'Teori',   icon: '📋', color: '#f97316', prefix: 'wt' },
+  { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt' },
   { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp' },
   { label: 'Kosakata', icon: '📖', color: '#60a5fa', prefix: 'wg' },
 ];
 
 export default function WaygroundMode({ onExit }) {
   const [activeSet, setActiveSet] = useState(null);
-  const [showFuri, setShowFuri]   = useState(true);
-  const [showHint, setShowHint]   = useState(true);
-  const [wgScores, setWgScores]   = usePersistedState('ssw-wg-scores', {});
+  const [showFuri, setShowFuri] = useState(true);
+  const [showHint, setShowHint] = useState(true);
+  const [wgScores, setWgScores] = usePersistedState('ssw-wg-scores', {});
 
   const set = WAYGROUND_SETS.find((s) => s.id === activeSet);
 
   const questions = useMemo(() => {
     if (!set) return [];
     return shuffle(set.questions).map((q) => ({
-      question:    showFuri ? q.q : stripFuri(q.q),
+      question: showFuri ? q.q : stripFuri(q.q),
       questionSub: null,
-      hint:        showHint ? q.hint : null,
-      options:     q.opts.map((opt, i) => ({
+      hint: showHint ? q.hint : null,
+      options: q.opts.map((opt, i) => ({
         text: showFuri ? opt : stripFuri(opt),
-        sub:  q.opts_id?.[i] || null,
+        sub: q.opts_id?.[i] || null,
       })),
-      correctIdx:  q.ans,
+      correctIdx: q.ans,
       explanation: q.exp,
-      _qId:        `${set.id}-${q.id}`,
+      _qId: `${set.id}-${q.id}`,
     }));
   }, [set, showFuri, showHint]);
 
@@ -91,7 +91,15 @@ export default function WaygroundMode({ onExit }) {
     <div style={{ padding: '24px 16px', maxWidth: T.maxW, margin: '0 auto' }}>
       <button
         onClick={onExit}
-        style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16 }}
+        style={{
+          fontFamily: 'inherit',
+          fontSize: 12,
+          color: T.textMuted,
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          marginBottom: 16,
+        }}
       >
         ← Kembali
       </button>
@@ -103,13 +111,30 @@ export default function WaygroundMode({ onExit }) {
       {/* Toggles */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
         {[
-          { label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
-          { label: `💡 ${showHint ? 'ON' : 'OFF'}`,   active: showHint, onClick: () => setShowHint((f) => !f) },
+          {
+            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
+            active: showFuri,
+            onClick: () => setShowFuri((f) => !f),
+          },
+          {
+            label: `💡 ${showHint ? 'ON' : 'OFF'}`,
+            active: showHint,
+            onClick: () => setShowHint((f) => !f),
+          },
         ].map((btn) => (
           <button
             key={btn.label}
             onClick={btn.onClick}
-            style={{ fontFamily: 'inherit', fontSize: 11, padding: '6px 12px', borderRadius: T.r.pill, cursor: 'pointer', background: btn.active ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${btn.active ? 'rgba(251,191,36,0.4)' : T.border}`, color: btn.active ? T.gold : T.textMuted }}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 11,
+              padding: '6px 12px',
+              borderRadius: T.r.pill,
+              cursor: 'pointer',
+              background: btn.active ? 'rgba(251,191,36,0.15)' : T.surface,
+              border: `1px solid ${btn.active ? 'rgba(251,191,36,0.4)' : T.border}`,
+              color: btn.active ? T.gold : T.textMuted,
+            }}
           >
             {btn.label}
           </button>
@@ -122,11 +147,35 @@ export default function WaygroundMode({ onExit }) {
           {/* Section header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <span style={{ fontSize: 13 }}>{g.icon}</span>
-            <span style={{ fontSize: 10, fontWeight: 800, color: g.color, letterSpacing: 1.8, textTransform: 'uppercase' }}>
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 800,
+                color: g.color,
+                letterSpacing: 1.8,
+                textTransform: 'uppercase',
+              }}
+            >
               {g.label}
             </span>
-            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
-            <span style={{ fontSize: 10, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, borderRadius: T.r.pill, padding: '2px 8px', fontWeight: 700 }}>
+            <div
+              style={{
+                flex: 1,
+                height: 1,
+                background: `linear-gradient(90deg,${g.color}30,transparent)`,
+              }}
+            />
+            <span
+              style={{
+                fontSize: 10,
+                color: T.textDim,
+                background: T.surface,
+                border: `1px solid ${T.border}`,
+                borderRadius: T.r.pill,
+                padding: '2px 8px',
+                fontWeight: 700,
+              }}
+            >
               {g.sets.length} set
             </span>
           </div>
@@ -138,16 +187,51 @@ export default function WaygroundMode({ onExit }) {
                 <button
                   key={s.id}
                   onClick={() => setActiveSet(s.id)}
-                  style={{ fontFamily: 'inherit', padding: '12px 14px 12px 18px', borderRadius: T.r.md, cursor: 'pointer', background: T.surface, border: `1px solid ${T.border}`, color: T.text, textAlign: 'left', position: 'relative', overflow: 'hidden' }}
+                  style={{
+                    fontFamily: 'inherit',
+                    padding: '12px 14px 12px 18px',
+                    borderRadius: T.r.md,
+                    cursor: 'pointer',
+                    background: T.surface,
+                    border: `1px solid ${T.border}`,
+                    color: T.text,
+                    textAlign: 'left',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
                 >
                   {/* Color stripe */}
-                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 4,
+                      background: s.color || g.color,
+                    }}
+                  />
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span style={{ fontSize: 13, fontWeight: 700 }}>
+                      {s.emoji} {s.title}
+                    </span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {saved && (
-                        <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            color:
+                              saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
+                          }}
+                        >
                           {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
                         </span>
                       )}
@@ -155,7 +239,9 @@ export default function WaygroundMode({ onExit }) {
                     </div>
                   </div>
                   {s.subtitle && (
-                    <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
+                    <div
+                      style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
+                    >
                       {s.subtitle}
                     </div>
                   )}

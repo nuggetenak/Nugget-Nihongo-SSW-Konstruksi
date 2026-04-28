@@ -66,7 +66,10 @@ export default function SearchMode({ onExit }) {
         <div style={{ padding: '40px 0', textAlign: 'center', animation: 'fadeIn 0.3s ease' }}>
           <div style={{ fontSize: 40, marginBottom: 12 }}>🔍</div>
           <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>Cari kosakata</div>
-          <div style={{ fontSize: 12, color: T.textMuted }}>Coba ketik <strong>denki</strong> atau <strong>電気</strong> atau <strong>listrik</strong></div>
+          <div style={{ fontSize: 12, color: T.textMuted }}>
+            Coba ketik <strong>denki</strong> atau <strong>電気</strong> atau{' '}
+            <strong>listrik</strong>
+          </div>
         </div>
       )}
 

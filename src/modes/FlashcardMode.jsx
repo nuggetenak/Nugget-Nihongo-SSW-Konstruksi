@@ -13,7 +13,16 @@ import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import ProgressBar from '../components/ProgressBar.jsx';
 import { useToast } from '../components/Toast.jsx';
 
-export default function FlashcardMode({ cards, known, unknown, onMark, onExit, srs, starred = new Set(), onToggleStar = () => {} }) {
+export default function FlashcardMode({
+  cards,
+  known,
+  unknown,
+  onMark,
+  onExit,
+  srs,
+  starred = new Set(),
+  onToggleStar = () => {},
+}) {
   // ── Core state ──
   const [order, setOrder] = useState([]);
   const [idx, setIdx] = useState(0);
@@ -23,10 +32,16 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
 
   // ── Tutorial overlay (first-time only) ──────────────────────────────────
   const [showTutorial, setShowTutorial] = useState(() => {
-    try { return !localStorage.getItem('ssw-tutorial-flashcard'); } catch { return false; }
+    try {
+      return !localStorage.getItem('ssw-tutorial-flashcard');
+    } catch {
+      return false;
+    }
   });
   const dismissTutorial = () => {
-    try { localStorage.setItem('ssw-tutorial-flashcard', '1'); } catch {}
+    try {
+      localStorage.setItem('ssw-tutorial-flashcard', '1');
+    } catch {}
     setShowTutorial(false);
   };
 
@@ -50,24 +65,25 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   const [swipeDir, setSwipeDir] = useState(0);
 
   // ── Build card order ─────────────────────────────────────────────────────
-  const rebuildOrder = useCallback((mode) => {
-    const base = reviewBelum
-      ? cards.filter((c) => unknown.has(c.id))
-      : cards;
-    let ordered;
-    if (mode === 'original') {
-      ordered = base;
-    } else if (mode === 'shuffle') {
-      ordered = shuffle([...base]);
-    } else {
-      // priority: unknown → untouched → known
-      const u = base.filter((c) => unknown.has(c.id));
-      const t = base.filter((c) => !known.has(c.id) && !unknown.has(c.id));
-      const k = base.filter((c) => known.has(c.id));
-      ordered = [...shuffle(u), ...shuffle(t), ...shuffle(k)];
-    }
-    return ordered;
-  }, [cards, known, unknown, reviewBelum]);
+  const rebuildOrder = useCallback(
+    (mode) => {
+      const base = reviewBelum ? cards.filter((c) => unknown.has(c.id)) : cards;
+      let ordered;
+      if (mode === 'original') {
+        ordered = base;
+      } else if (mode === 'shuffle') {
+        ordered = shuffle([...base]);
+      } else {
+        // priority: unknown → untouched → known
+        const u = base.filter((c) => unknown.has(c.id));
+        const t = base.filter((c) => !known.has(c.id) && !unknown.has(c.id));
+        const k = base.filter((c) => known.has(c.id));
+        ordered = [...shuffle(u), ...shuffle(t), ...shuffle(k)];
+      }
+      return ordered;
+    },
+    [cards, known, unknown, reviewBelum]
+  );
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -80,18 +96,19 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   }, [cards, known, unknown, rebuildOrder, sortMode, reviewBelum]);
 
   // ── Derived data ────────────────────────────────────────────────────────
-  const displayCards = search === '__starred__'
-    ? order.filter((c) => starred.has(c.id))
-    : search.trim()
-      ? order.filter((c) => {
-          const q = search.toLowerCase();
-          return (
-            (c.jp || '').toLowerCase().includes(q) ||
-            (c.romaji || '').toLowerCase().includes(q) ||
-            (c.id_text || '').toLowerCase().includes(q)
-          );
-        })
-      : order;
+  const displayCards =
+    search === '__starred__'
+      ? order.filter((c) => starred.has(c.id))
+      : search.trim()
+        ? order.filter((c) => {
+            const q = search.toLowerCase();
+            return (
+              (c.jp || '').toLowerCase().includes(q) ||
+              (c.romaji || '').toLowerCase().includes(q) ||
+              (c.id_text || '').toLowerCase().includes(q)
+            );
+          })
+        : order;
 
   const card = displayCards[Math.min(idx, Math.max(0, displayCards.length - 1))];
   const cat = card ? getCatInfo(card.category) : null;
@@ -105,52 +122,59 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   const srsPreviews = srs?.ready && card ? srs.previewFor(card.id) : {};
 
   // ── Navigation ─────────────────────────────────────────────────────────
-  const go = useCallback((dir) => {
-    setSwipeDir(dir);
-    setTimeout(() => {
-      setIdx((i) => Math.max(0, Math.min(displayCards.length - 1, i + dir)));
-      setFlipped(false);
-      setShowDesc(false);
-      setSwipeDir(0);
-      setRated(false);
-      setShowFSRS(false);
-      setLastRating(null);
-    }, 120);
-  }, [displayCards.length]);
+  const go = useCallback(
+    (dir) => {
+      setSwipeDir(dir);
+      setTimeout(() => {
+        setIdx((i) => Math.max(0, Math.min(displayCards.length - 1, i + dir)));
+        setFlipped(false);
+        setShowDesc(false);
+        setSwipeDir(0);
+        setRated(false);
+        setShowFSRS(false);
+        setLastRating(null);
+      }, 120);
+    },
+    [displayCards.length]
+  );
 
   // ── Mark actions ────────────────────────────────────────────────────────
-  const markCard = useCallback((type) => {
-    if (!card) return;
-    const prevType = known.has(card.id) ? 'known' : unknown.has(card.id) ? 'unknown' : null;
-    if (srs?.ready) {
-      const rating = type === 'known' ? 3 : 1;
-      const result = srs.review(card.id, rating);
-      onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
-    } else {
-      onMark?.(card.id, type);
-    }
-    const label = type === 'known' ? 'Kartu ditandai hafal ✓' : 'Kartu ditandai belum ✗';
-    toast.show(label, {
-      undo: prevType
-        ? () => onMark?.(card.id, prevType)
-        : undefined,
-    });
-    setTimeout(() => go(1), 300);
-  }, [card, srs, onMark, go, toast, known, unknown]);
+  const markCard = useCallback(
+    (type) => {
+      if (!card) return;
+      const prevType = known.has(card.id) ? 'known' : unknown.has(card.id) ? 'unknown' : null;
+      if (srs?.ready) {
+        const rating = type === 'known' ? 3 : 1;
+        const result = srs.review(card.id, rating);
+        onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
+      } else {
+        onMark?.(card.id, type);
+      }
+      const label = type === 'known' ? 'Kartu ditandai hafal ✓' : 'Kartu ditandai belum ✗';
+      toast.show(label, {
+        undo: prevType ? () => onMark?.(card.id, prevType) : undefined,
+      });
+      setTimeout(() => go(1), 300);
+    },
+    [card, srs, onMark, go, toast, known, unknown]
+  );
 
-  const handleRate = useCallback((rating) => {
-    if (!card) return;
-    if (srs?.ready) {
-      const result = srs.review(card.id, rating);
-      onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
-    } else {
-      onMark?.(card.id, rating >= 2 ? 'known' : 'unknown');
-    }
-    setLastRating(rating);
-    setRated(true);
-    setShowFSRS(false);
-    setTimeout(() => go(1), 500);
-  }, [card, srs, onMark, go]);
+  const handleRate = useCallback(
+    (rating) => {
+      if (!card) return;
+      if (srs?.ready) {
+        const result = srs.review(card.id, rating);
+        onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
+      } else {
+        onMark?.(card.id, rating >= 2 ? 'known' : 'unknown');
+      }
+      setLastRating(rating);
+      setRated(true);
+      setShowFSRS(false);
+      setTimeout(() => go(1), 500);
+    },
+    [card, srs, onMark, go]
+  );
 
   // ── Reset ───────────────────────────────────────────────────────────────
   const handleReset = useCallback(() => {
@@ -171,9 +195,19 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   // ── Keyboard ────────────────────────────────────────────────────────────
   useEffect(() => {
     const h = (e) => {
-      if (e.key === 'ArrowLeft') { go(-1); return; }
-      if (e.key === 'ArrowRight') { go(1); return; }
-      if (e.key === ' ') { e.preventDefault(); setFlipped((f) => !f); return; }
+      if (e.key === 'ArrowLeft') {
+        go(-1);
+        return;
+      }
+      if (e.key === 'ArrowRight') {
+        go(1);
+        return;
+      }
+      if (e.key === ' ') {
+        e.preventDefault();
+        setFlipped((f) => !f);
+        return;
+      }
       if (flipped && !rated && showFSRS) {
         if (e.key === '1') handleRate(1);
         if (e.key === '2') handleRate(2);
@@ -189,19 +223,59 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   if (!card || displayCards.length === 0) {
     const isEmpty = cards.length === 0;
     return (
-      <div style={{ padding: '40px 20px', textAlign: 'center', maxWidth: T.maxW, margin: '0 auto' }}>
-        <button onClick={onExit} style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 24 }}>
+      <div
+        style={{ padding: '40px 20px', textAlign: 'center', maxWidth: T.maxW, margin: '0 auto' }}
+      >
+        <button
+          onClick={onExit}
+          style={{
+            fontFamily: 'inherit',
+            fontSize: 12,
+            color: T.textMuted,
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            marginBottom: 24,
+          }}
+        >
           ← Kembali
         </button>
-        <div style={{ fontSize: 40, marginBottom: 12 }}>{isEmpty ? '📭' : search ? '🔍' : reviewBelum ? '🎉' : '📭'}</div>
+        <div style={{ fontSize: 40, marginBottom: 12 }}>
+          {isEmpty ? '📭' : search ? '🔍' : reviewBelum ? '🎉' : '📭'}
+        </div>
         <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8, color: T.text }}>
-          {isEmpty ? 'Tidak ada kartu' : search ? `Tidak ada hasil untuk "${search}"` : reviewBelum ? 'Tidak ada kartu belum hafal!' : 'Tidak ada kartu di filter ini.'}
+          {isEmpty
+            ? 'Tidak ada kartu'
+            : search
+              ? `Tidak ada hasil untuk "${search}"`
+              : reviewBelum
+                ? 'Tidak ada kartu belum hafal!'
+                : 'Tidak ada kartu di filter ini.'}
         </div>
         <div style={{ fontSize: 13, color: T.textMuted, marginBottom: 20 }}>
-          {reviewBelum ? 'Semua kartu sudah kamu tandai hafal. 🎊' : search ? 'Coba kata lain atau hapus pencarian.' : 'Ubah filter untuk melihat kartu lain.'}
+          {reviewBelum
+            ? 'Semua kartu sudah kamu tandai hafal. 🎊'
+            : search
+              ? 'Coba kata lain atau hapus pencarian.'
+              : 'Ubah filter untuk melihat kartu lain.'}
         </div>
         {(search || reviewBelum) && (
-          <button onClick={() => { setSearch(''); setReviewBelum(false); }} style={{ fontFamily: 'inherit', padding: '10px 20px', borderRadius: T.r.pill, background: T.surface, border: `1px solid ${T.border}`, color: T.text, cursor: 'pointer', fontSize: 13 }}>
+          <button
+            onClick={() => {
+              setSearch('');
+              setReviewBelum(false);
+            }}
+            style={{
+              fontFamily: 'inherit',
+              padding: '10px 20px',
+              borderRadius: T.r.pill,
+              background: T.surface,
+              border: `1px solid ${T.border}`,
+              color: T.text,
+              cursor: 'pointer',
+              fontSize: 13,
+            }}
+          >
             Reset filter
           </button>
         )}
@@ -217,23 +291,53 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   const borderColor = isKnown ? T.correctBorder : isUnknown ? T.wrongBorder : T.border;
 
   // Card bg: flipped = category gradient, front = surface
-  const cardBg = flipped
-    ? `linear-gradient(135deg, ${cat.color}cc, ${cat.color}77)`
-    : T.surface;
+  const cardBg = flipped ? `linear-gradient(135deg, ${cat.color}cc, ${cat.color}77)` : T.surface;
   const cardBorder = flipped ? `1.5px solid ${cat.color}99` : `1.5px solid ${borderColor}`;
   const cardShadow = flipped ? `0 8px 32px ${cat.color}33` : T.shadow.md;
 
   return (
-    <div style={{ padding: '12px 16px 120px', maxWidth: T.maxW, margin: '0 auto', animation: 'fadeIn 0.2s ease' }}>
-
+    <div
+      style={{
+        padding: '12px 16px 120px',
+        maxWidth: T.maxW,
+        margin: '0 auto',
+        animation: 'fadeIn 0.2s ease',
+      }}
+    >
       {/* ── Header ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-        <button onClick={onExit} style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer', padding: '6px 0' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 6,
+        }}
+      >
+        <button
+          onClick={onExit}
+          style={{
+            fontFamily: 'inherit',
+            fontSize: 12,
+            color: T.textMuted,
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: '6px 0',
+          }}
+        >
           ← Kartu
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12 }}>
           {srsInfo && (
-            <span style={{ fontSize: 10, padding: '1px 6px', borderRadius: T.r.pill, background: `${srsInfo.strength.color}15`, color: srsInfo.strength.color }}>
+            <span
+              style={{
+                fontSize: 10,
+                padding: '1px 6px',
+                borderRadius: T.r.pill,
+                background: `${srsInfo.strength.color}15`,
+                color: srsInfo.strength.color,
+              }}
+            >
               {srsInfo.strength.label}
             </span>
           )}
@@ -246,15 +350,41 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
       <ProgressBar current={knownInView} total={displayCards.length} color={T.correct} />
 
       {/* ── Stats row ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 6, marginTop: 10, marginBottom: 10 }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr 1fr',
+          gap: 6,
+          marginTop: 10,
+          marginBottom: 10,
+        }}
+      >
         {[
           { label: 'Total', val: displayCards.length, color: T.text, bg: T.surface },
           { label: 'Hafal', val: knownInView, color: T.correct, bg: T.correctBg },
           { label: 'Belum', val: unknownInView, color: T.wrong, bg: T.wrongBg },
           { label: 'Sisa', val: sisa, color: T.gold, bg: 'rgba(251,191,36,0.08)' },
         ].map((s) => (
-          <div key={s.label} style={{ padding: '8px 4px', borderRadius: T.r.md, background: s.bg, border: `1px solid ${s.color}22`, textAlign: 'center' }}>
-            <div style={{ fontSize: 15, fontWeight: 800, color: s.color, fontVariantNumeric: 'tabular-nums' }}>{s.val}</div>
+          <div
+            key={s.label}
+            style={{
+              padding: '8px 4px',
+              borderRadius: T.r.md,
+              background: s.bg,
+              border: `1px solid ${s.color}22`,
+              textAlign: 'center',
+            }}
+          >
+            <div
+              style={{
+                fontSize: 15,
+                fontWeight: 800,
+                color: s.color,
+                fontVariantNumeric: 'tabular-nums',
+              }}
+            >
+              {s.val}
+            </div>
             <div style={{ fontSize: 10, color: T.textDim, marginTop: 1 }}>{s.label}</div>
           </div>
         ))}
@@ -265,7 +395,10 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
         <div style={{ flex: 1, position: 'relative' }}>
           <input
             value={search}
-            onChange={(e) => { setSearch(e.target.value); setIdx(0); }}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setIdx(0);
+            }}
             placeholder="🔍 Cari JP / romaji / ID..."
             style={{
               width: '100%',
@@ -303,7 +436,9 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
 
       {/* ── Card ── */}
       <div
-        onClick={() => { if (!flipped) setFlipped(true); }}
+        onClick={() => {
+          if (!flipped) setFlipped(true);
+        }}
         onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
         onTouchEnd={(e) => {
           if (touchX === null) return;
@@ -323,29 +458,50 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
           flexDirection: 'column',
           justifyContent: 'center',
           transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
-          transform: swipeDir !== 0 ? `translateX(${swipeDir * 30}px) rotate(${swipeDir * 2}deg)` : 'none',
+          transform:
+            swipeDir !== 0 ? `translateX(${swipeDir * 30}px) rotate(${swipeDir * 2}deg)` : 'none',
           opacity: swipeDir !== 0 ? 0.6 : 1,
           boxShadow: cardShadow,
         }}
       >
         {/* Category pill + card # */}
-        <div style={{ position: 'absolute', top: 12, left: 14, display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: 12,
+            left: 14,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}
+        >
           {cat && (
-            <span style={{
-              background: `${cat.color}bb`,
-              color: '#fff',
-              padding: '3px 10px',
-              borderRadius: T.r.pill,
-              fontSize: 10,
-              fontFamily: T.fontJP,
-              letterSpacing: 0.3,
-              fontWeight: 600,
-            }}>
+            <span
+              style={{
+                background: `${cat.color}bb`,
+                color: '#fff',
+                padding: '3px 10px',
+                borderRadius: T.r.pill,
+                fontSize: 10,
+                fontFamily: T.fontJP,
+                letterSpacing: 0.3,
+                fontWeight: 600,
+              }}
+            >
               {cat.emoji} {cat.label}
             </span>
           )}
         </div>
-        <div style={{ position: 'absolute', top: 14, right: 14, fontSize: 10, color: flipped ? 'rgba(255,255,255,0.45)' : T.textFaint, fontVariantNumeric: 'tabular-nums' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: 14,
+            right: 14,
+            fontSize: 10,
+            color: flipped ? 'rgba(255,255,255,0.45)' : T.textFaint,
+            fontVariantNumeric: 'tabular-nums',
+          }}
+        >
           #{idx + 1}
         </div>
 
@@ -356,14 +512,32 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
 
         {/* Back */}
         {flipped && (
-          <div style={{ animation: 'fadeIn 0.18s ease', borderTop: `1px solid rgba(255,255,255,0.2)`, paddingTop: 14, marginTop: 14 }}>
-            <div style={{ fontSize: 17, fontWeight: 700, marginBottom: 10, textAlign: 'center', color: flipped ? '#fff' : T.textBright }}>
+          <div
+            style={{
+              animation: 'fadeIn 0.18s ease',
+              borderTop: `1px solid rgba(255,255,255,0.2)`,
+              paddingTop: 14,
+              marginTop: 14,
+            }}
+          >
+            <div
+              style={{
+                fontSize: 17,
+                fontWeight: 700,
+                marginBottom: 10,
+                textAlign: 'center',
+                color: flipped ? '#fff' : T.textBright,
+              }}
+            >
               {card.id_text}
             </div>
             {!showDesc && card.desc && (
               <div style={{ textAlign: 'center' }}>
                 <button
-                  onClick={(e) => { e.stopPropagation(); setShowDesc(true); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowDesc(true);
+                  }}
                   style={{
                     fontFamily: 'inherit',
                     fontSize: 12,
@@ -389,7 +563,18 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
 
         {/* Hint */}
         {!flipped && (
-          <div style={{ position: 'absolute', bottom: 12, left: 0, right: 0, textAlign: 'center', fontSize: 10, color: flipped ? 'rgba(255,255,255,0.3)' : T.textFaint, letterSpacing: 0.5 }}>
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 12,
+              left: 0,
+              right: 0,
+              textAlign: 'center',
+              fontSize: 10,
+              color: flipped ? 'rgba(255,255,255,0.3)' : T.textFaint,
+              letterSpacing: 0.5,
+            }}
+          >
             ketuk untuk balik · geser untuk navigasi
           </div>
         )}
@@ -400,20 +585,54 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
         <button
           onClick={() => go(-1)}
           disabled={idx === 0}
-          style={{ fontFamily: 'inherit', padding: '11px 8px', borderRadius: T.r.md, border: `1px solid ${T.border}`, background: T.surface, color: idx === 0 ? T.textFaint : T.text, cursor: idx === 0 ? 'default' : 'pointer', fontSize: 13, fontWeight: 600 }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '11px 8px',
+            borderRadius: T.r.md,
+            border: `1px solid ${T.border}`,
+            background: T.surface,
+            color: idx === 0 ? T.textFaint : T.text,
+            cursor: idx === 0 ? 'default' : 'pointer',
+            fontSize: 13,
+            fontWeight: 600,
+          }}
         >
           ← Prev
         </button>
         <button
-          onClick={() => { setFlipped((f) => !f); setShowDesc(false); }}
-          style={{ fontFamily: 'inherit', padding: '11px 8px', borderRadius: T.r.md, border: 'none', background: T.accent, color: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 700, boxShadow: T.shadow.glow }}
+          onClick={() => {
+            setFlipped((f) => !f);
+            setShowDesc(false);
+          }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '11px 8px',
+            borderRadius: T.r.md,
+            border: 'none',
+            background: T.accent,
+            color: '#fff',
+            cursor: 'pointer',
+            fontSize: 13,
+            fontWeight: 700,
+            boxShadow: T.shadow.glow,
+          }}
         >
           {flipped ? '🔄 Balik' : '👁️ Lihat'}
         </button>
         <button
           onClick={() => go(1)}
           disabled={idx >= displayCards.length - 1}
-          style={{ fontFamily: 'inherit', padding: '11px 8px', borderRadius: T.r.md, border: `1px solid ${T.border}`, background: T.surface, color: idx >= displayCards.length - 1 ? T.textFaint : T.text, cursor: idx >= displayCards.length - 1 ? 'default' : 'pointer', fontSize: 13, fontWeight: 600 }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '11px 8px',
+            borderRadius: T.r.md,
+            border: `1px solid ${T.border}`,
+            background: T.surface,
+            color: idx >= displayCards.length - 1 ? T.textFaint : T.text,
+            cursor: idx >= displayCards.length - 1 ? 'default' : 'pointer',
+            fontSize: 13,
+            fontWeight: 600,
+          }}
         >
           Next →
         </button>
@@ -423,21 +642,61 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
         <button
           onClick={() => markCard('unknown')}
-          onMouseDown={() => { longPressTimer.current = setTimeout(() => { setShowFSRS(true); setFlipped(true); }, 600); }}
+          onMouseDown={() => {
+            longPressTimer.current = setTimeout(() => {
+              setShowFSRS(true);
+              setFlipped(true);
+            }, 600);
+          }}
           onMouseUp={() => clearTimeout(longPressTimer.current)}
-          onTouchStart={() => { longPressTimer.current = setTimeout(() => { setShowFSRS(true); setFlipped(true); }, 600); }}
+          onTouchStart={() => {
+            longPressTimer.current = setTimeout(() => {
+              setShowFSRS(true);
+              setFlipped(true);
+            }, 600);
+          }}
           onTouchEnd={() => clearTimeout(longPressTimer.current)}
-          style={{ fontFamily: 'inherit', padding: '13px', borderRadius: T.r.md, border: `1.5px solid ${T.wrongBorder}`, background: T.wrongBg, color: T.wrong, cursor: 'pointer', fontSize: 14, fontWeight: 700 }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '13px',
+            borderRadius: T.r.md,
+            border: `1.5px solid ${T.wrongBorder}`,
+            background: T.wrongBg,
+            color: T.wrong,
+            cursor: 'pointer',
+            fontSize: 14,
+            fontWeight: 700,
+          }}
         >
           ✗ Belum hafal
         </button>
         <button
           onClick={() => markCard('known')}
-          onMouseDown={() => { longPressTimer.current = setTimeout(() => { setShowFSRS(true); setFlipped(true); }, 600); }}
+          onMouseDown={() => {
+            longPressTimer.current = setTimeout(() => {
+              setShowFSRS(true);
+              setFlipped(true);
+            }, 600);
+          }}
           onMouseUp={() => clearTimeout(longPressTimer.current)}
-          onTouchStart={() => { longPressTimer.current = setTimeout(() => { setShowFSRS(true); setFlipped(true); }, 600); }}
+          onTouchStart={() => {
+            longPressTimer.current = setTimeout(() => {
+              setShowFSRS(true);
+              setFlipped(true);
+            }, 600);
+          }}
           onTouchEnd={() => clearTimeout(longPressTimer.current)}
-          style={{ fontFamily: 'inherit', padding: '13px', borderRadius: T.r.md, border: `1.5px solid ${T.correctBorder}`, background: T.correctBg, color: T.correct, cursor: 'pointer', fontSize: 14, fontWeight: 700 }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '13px',
+            borderRadius: T.r.md,
+            border: `1.5px solid ${T.correctBorder}`,
+            background: T.correctBg,
+            color: T.correct,
+            cursor: 'pointer',
+            fontSize: 14,
+            fontWeight: 700,
+          }}
         >
           ✓ Sudah hafal
         </button>
@@ -451,7 +710,9 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
       {/* ── FSRS 4-button (shown on long-press) ── */}
       {showFSRS && flipped && !rated && (
         <div style={{ marginTop: 10, animation: 'slideUp 0.2s ease' }}>
-          <div style={{ fontSize: 11, color: T.textDim, textAlign: 'center', marginBottom: 6 }}>Rating detail FSRS</div>
+          <div style={{ fontSize: 11, color: T.textDim, textAlign: 'center', marginBottom: 6 }}>
+            Rating detail FSRS
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 6 }}>
             {[1, 2, 3, 4].map((r) => {
               const m = RATING_META[r];
@@ -460,13 +721,31 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
                 <button
                   key={r}
                   onClick={() => handleRate(r)}
-                  style={{ fontFamily: 'inherit', padding: '10px 4px', borderRadius: T.r.md, cursor: 'pointer', background: m.bg, border: `1.5px solid ${m.border}`, color: m.color, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+                  style={{
+                    fontFamily: 'inherit',
+                    padding: '10px 4px',
+                    borderRadius: T.r.md,
+                    cursor: 'pointer',
+                    background: m.bg,
+                    border: `1.5px solid ${m.border}`,
+                    color: m.color,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: 2,
+                  }}
                 >
                   <span style={{ fontSize: 14 }}>{m.emoji}</span>
                   <span style={{ fontSize: 11, fontWeight: 700 }}>{m.id}</span>
                   {days != null && (
                     <span style={{ fontSize: 9, opacity: 0.65 }}>
-                      {days < 1 ? '<1h' : days < 7 ? `${days}h` : days < 30 ? `${Math.round(days / 7)}mgg` : `${Math.round(days / 30)}bln`}
+                      {days < 1
+                        ? '<1h'
+                        : days < 7
+                          ? `${days}h`
+                          : days < 30
+                            ? `${Math.round(days / 7)}mgg`
+                            : `${Math.round(days / 30)}bln`}
                     </span>
                   )}
                 </button>
@@ -477,19 +756,56 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
       )}
 
       {/* ── Tools row ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 6, marginTop: 10 }}>
+      <div
+        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 6, marginTop: 10 }}
+      >
         {/* Urut */}
         <button
-          onClick={() => setSortMode((m) => m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority')}
-          style={{ fontFamily: 'inherit', padding: '8px 4px', borderRadius: T.r.md, border: `1px solid ${T.border}`, background: sortMode !== 'priority' ? T.surfaceActive : T.surface, color: sortMode !== 'priority' ? T.amber : T.textMuted, cursor: 'pointer', fontSize: 11, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+          onClick={() =>
+            setSortMode((m) =>
+              m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority'
+            )
+          }
+          style={{
+            fontFamily: 'inherit',
+            padding: '8px 4px',
+            borderRadius: T.r.md,
+            border: `1px solid ${T.border}`,
+            background: sortMode !== 'priority' ? T.surfaceActive : T.surface,
+            color: sortMode !== 'priority' ? T.amber : T.textMuted,
+            cursor: 'pointer',
+            fontSize: 11,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+          }}
         >
           <span>{sortMode === 'original' ? '⏮' : sortMode === 'shuffle' ? '🔀' : '🎯'}</span>
-          <span>{sortMode === 'original' ? 'Urut' : sortMode === 'shuffle' ? 'Acak' : 'Prioritas'}</span>
+          <span>
+            {sortMode === 'original' ? 'Urut' : sortMode === 'shuffle' ? 'Acak' : 'Prioritas'}
+          </span>
         </button>
         {/* Review Belum */}
         <button
-          onClick={() => { setReviewBelum((r) => !r); setIdx(0); }}
-          style={{ fontFamily: 'inherit', padding: '8px 4px', borderRadius: T.r.md, border: `1px solid ${reviewBelum ? T.wrongBorder : T.border}`, background: reviewBelum ? T.wrongBg : T.surface, color: reviewBelum ? T.wrong : T.textMuted, cursor: 'pointer', fontSize: 11, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+          onClick={() => {
+            setReviewBelum((r) => !r);
+            setIdx(0);
+          }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '8px 4px',
+            borderRadius: T.r.md,
+            border: `1px solid ${reviewBelum ? T.wrongBorder : T.border}`,
+            background: reviewBelum ? T.wrongBg : T.surface,
+            color: reviewBelum ? T.wrong : T.textMuted,
+            cursor: 'pointer',
+            fontSize: 11,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+          }}
         >
           <span>❌</span>
           <span>{unknownInView > 0 ? `${unknownInView} Belum` : 'Belum'}</span>
@@ -497,15 +813,44 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
         {/* Reset */}
         <button
           onClick={handleReset}
-          style={{ fontFamily: 'inherit', padding: '8px 4px', borderRadius: T.r.md, border: `1px solid ${confirmReset ? T.wrongBorder : T.border}`, background: confirmReset ? T.wrongBg : T.surface, color: confirmReset ? T.wrong : T.textMuted, cursor: 'pointer', fontSize: 11, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '8px 4px',
+            borderRadius: T.r.md,
+            border: `1px solid ${confirmReset ? T.wrongBorder : T.border}`,
+            background: confirmReset ? T.wrongBg : T.surface,
+            color: confirmReset ? T.wrong : T.textMuted,
+            cursor: 'pointer',
+            fontSize: 11,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+          }}
         >
           <span>🔄</span>
           <span>{confirmReset ? 'Yakin?' : 'Reset'}</span>
         </button>
         {/* ── Star filter — show starred only */}
         <button
-          onClick={() => { setSearch(search === '__starred__' ? '' : '__starred__'); setIdx(0); }}
-          style={{ fontFamily: 'inherit', padding: '8px 4px', borderRadius: T.r.md, border: `1px solid ${search === '__starred__' ? T.gold + '80' : T.border}`, background: search === '__starred__' ? 'rgba(251,191,36,0.12)' : T.surface, color: search === '__starred__' ? T.gold : T.textMuted, cursor: 'pointer', fontSize: 11, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}
+          onClick={() => {
+            setSearch(search === '__starred__' ? '' : '__starred__');
+            setIdx(0);
+          }}
+          style={{
+            fontFamily: 'inherit',
+            padding: '8px 4px',
+            borderRadius: T.r.md,
+            border: `1px solid ${search === '__starred__' ? T.gold + '80' : T.border}`,
+            background: search === '__starred__' ? 'rgba(251,191,36,0.12)' : T.surface,
+            color: search === '__starred__' ? T.gold : T.textMuted,
+            cursor: 'pointer',
+            fontSize: 11,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 2,
+          }}
         >
           <span>⭐</span>
           <span>{starred.size > 0 ? `${starred.size}` : 'Bintang'}</span>
@@ -516,9 +861,29 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
       {showTutorial && (
         <div
           onClick={dismissTutorial}
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 250, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', animation: 'fadeIn 0.2s ease' }}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.75)',
+            zIndex: 250,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '24px',
+            animation: 'fadeIn 0.2s ease',
+          }}
         >
-          <div style={{ background: 'var(--ssw-bg)', borderRadius: T.r.xl, padding: '28px 24px', maxWidth: 320, width: '100%', textAlign: 'center' }}>
+          <div
+            style={{
+              background: 'var(--ssw-bg)',
+              borderRadius: T.r.xl,
+              padding: '28px 24px',
+              maxWidth: 320,
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
             <div style={{ fontSize: 36, marginBottom: 12 }}>🃏</div>
             <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 16 }}>Cara Pakai Kartu</div>
             {[
@@ -527,13 +892,37 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
               { icon: '✅', text: 'Tandai sesuai pemahamanmu' },
               { icon: '⭐', text: 'Bintang untuk kartu penting' },
             ].map((tip) => (
-              <div key={tip.icon} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '9px 0', borderBottom: `1px solid ${T.border}`, textAlign: 'left' }}>
-                <span style={{ fontSize: 20, width: 32, textAlign: 'center', flexShrink: 0 }}>{tip.icon}</span>
+              <div
+                key={tip.icon}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: '9px 0',
+                  borderBottom: `1px solid ${T.border}`,
+                  textAlign: 'left',
+                }}
+              >
+                <span style={{ fontSize: 20, width: 32, textAlign: 'center', flexShrink: 0 }}>
+                  {tip.icon}
+                </span>
                 <span style={{ fontSize: 13, color: T.textMuted }}>{tip.text}</span>
               </div>
             ))}
             <button
-              style={{ marginTop: 20, width: '100%', padding: '12px', fontSize: 14, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer' }}
+              style={{
+                marginTop: 20,
+                width: '100%',
+                padding: '12px',
+                fontSize: 14,
+                fontWeight: 700,
+                fontFamily: 'inherit',
+                borderRadius: T.r.md,
+                background: T.accent,
+                border: 'none',
+                color: T.textBright,
+                cursor: 'pointer',
+              }}
             >
               Mulai Belajar →
             </button>

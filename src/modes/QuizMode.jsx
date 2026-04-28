@@ -24,8 +24,8 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
   const [seed, setSeed] = useState(0);
   const [quizWrong, setQuizWrong] = usePersistedState('ssw-quiz-wrong', {});
 
-
-  const lemahCards = cards.filter((c) => getWrongCount(quizWrong[c.id]) > 0)
+  const lemahCards = cards
+    .filter((c) => getWrongCount(quizWrong[c.id]) > 0)
     .sort((a, b) => getWrongCount(quizWrong[b.id]) - getWrongCount(quizWrong[a.id]));
 
   const activeCards = lemahMode && lemahCards.length > 0 ? lemahCards : cards;
@@ -64,14 +64,20 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
     }));
   }, [started, activeCards, allCards, difficulty, quizCount, quizWrong, seed]); // eslint-disable-line
 
-  const handleAnswer = useCallback((qIdx, selIdx, isCorrect) => {
-    if (!isCorrect) {
-      const cardId = questions[qIdx]?._cardId;
-      if (cardId) setQuizWrong((w) => ({ ...w, [cardId]: makeWrongEntry(w[cardId]) }));
-    }
-  }, [questions, setQuizWrong]);
+  const handleAnswer = useCallback(
+    (qIdx, selIdx, isCorrect) => {
+      if (!isCorrect) {
+        const cardId = questions[qIdx]?._cardId;
+        if (cardId) setQuizWrong((w) => ({ ...w, [cardId]: makeWrongEntry(w[cardId]) }));
+      }
+    },
+    [questions, setQuizWrong]
+  );
 
-  const startQuiz = () => { setSeed((s) => s + 1); setStarted(true); };
+  const startQuiz = () => {
+    setSeed((s) => s + 1);
+    setStarted(true);
+  };
 
   // ─── Pre-start screen ───
   if (!started) {
@@ -81,32 +87,100 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
       { key: 'hard', label: 'Sulit', desc: 'Jawaban mirip', color: T.wrong },
     ];
     const COUNTS = [10, 20, 30, activeCards.length];
-    const DELAYS = [{ v: 1000, l: '1 dtk' }, { v: 1500, l: '1.5 dtk' }, { v: 2000, l: '2 dtk' }, { v: 0, l: 'Manual' }];
+    const DELAYS = [
+      { v: 1000, l: '1 dtk' },
+      { v: 1500, l: '1.5 dtk' },
+      { v: 2000, l: '2 dtk' },
+      { v: 0, l: 'Manual' },
+    ];
 
     return (
-      <div style={{ padding: '24px 16px', maxWidth: T.maxW, margin: '0 auto', animation: 'fadeIn 0.2s ease' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <button onClick={onExit} style={{ fontFamily: 'inherit', fontSize: 12, color: T.textMuted, background: 'none', border: 'none', cursor: 'pointer' }}>
+      <div
+        style={{
+          padding: '24px 16px',
+          maxWidth: T.maxW,
+          margin: '0 auto',
+          animation: 'fadeIn 0.2s ease',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 16,
+          }}
+        >
+          <button
+            onClick={onExit}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 12,
+              color: T.textMuted,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
             ← Kembali
           </button>
-          <button onClick={() => setShowSettings((s) => !s)} style={{ fontFamily: 'inherit', fontSize: 12, padding: '5px 12px', borderRadius: T.r.pill, border: `1px solid ${showSettings ? T.borderActive : T.border}`, background: showSettings ? T.surfaceActive : T.surface, color: showSettings ? T.amber : T.textMuted, cursor: 'pointer' }}>
+          <button
+            onClick={() => setShowSettings((s) => !s)}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 12,
+              padding: '5px 12px',
+              borderRadius: T.r.pill,
+              border: `1px solid ${showSettings ? T.borderActive : T.border}`,
+              background: showSettings ? T.surfaceActive : T.surface,
+              color: showSettings ? T.amber : T.textMuted,
+              cursor: 'pointer',
+            }}
+          >
             ⚙ {showSettings ? 'Tutup' : 'Pengaturan'}
           </button>
         </div>
 
-        <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 4, color: T.text }}>Kuis Flashcard</h2>
+        <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 4, color: T.text }}>
+          Kuis Flashcard
+        </h2>
         <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 20 }}>
           {activeCards.length} kartu tersedia {lemahMode ? '(mode lemah)' : ''}
         </p>
 
         {/* Jumlah soal */}
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: T.textDim, textTransform: 'uppercase', marginBottom: 8 }}>Jumlah Soal</div>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: 1.5,
+            color: T.textDim,
+            textTransform: 'uppercase',
+            marginBottom: 8,
+          }}
+        >
+          Jumlah Soal
+        </div>
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
           {COUNTS.map((n, i) => {
             const label = i === COUNTS.length - 1 ? 'Semua' : String(n);
             const on = quizCount === n;
             return (
-              <button key={n} onClick={() => setQuizCount(n)} style={{ fontFamily: 'inherit', padding: '7px 16px', fontSize: 13, borderRadius: T.r.pill, cursor: 'pointer', fontWeight: on ? 700 : 400, background: on ? T.surfaceActive : T.surface, border: `1px solid ${on ? T.borderActive : T.border}`, color: on ? T.amber : T.textMuted }}>
+              <button
+                key={n}
+                onClick={() => setQuizCount(n)}
+                style={{
+                  fontFamily: 'inherit',
+                  padding: '7px 16px',
+                  fontSize: 13,
+                  borderRadius: T.r.pill,
+                  cursor: 'pointer',
+                  fontWeight: on ? 700 : 400,
+                  background: on ? T.surfaceActive : T.surface,
+                  border: `1px solid ${on ? T.borderActive : T.border}`,
+                  color: on ? T.amber : T.textMuted,
+                }}
+              >
                 {label}
               </button>
             );
@@ -114,10 +188,37 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
         </div>
 
         {/* Kesulitan */}
-        <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: T.textDim, textTransform: 'uppercase', marginBottom: 8 }}>Tingkat Kesulitan</div>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: 1.5,
+            color: T.textDim,
+            textTransform: 'uppercase',
+            marginBottom: 8,
+          }}
+        >
+          Tingkat Kesulitan
+        </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
           {DIFF.map((d) => (
-            <button key={d.key} onClick={() => setDifficulty(d.key)} style={{ fontFamily: 'inherit', padding: '12px 14px', borderRadius: T.r.md, cursor: 'pointer', background: difficulty === d.key ? `${d.color}18` : T.surface, border: `1px solid ${difficulty === d.key ? `${d.color}55` : T.border}`, color: difficulty === d.key ? d.color : T.text, textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <button
+              key={d.key}
+              onClick={() => setDifficulty(d.key)}
+              style={{
+                fontFamily: 'inherit',
+                padding: '12px 14px',
+                borderRadius: T.r.md,
+                cursor: 'pointer',
+                background: difficulty === d.key ? `${d.color}18` : T.surface,
+                border: `1px solid ${difficulty === d.key ? `${d.color}55` : T.border}`,
+                color: difficulty === d.key ? d.color : T.text,
+                textAlign: 'left',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
               <span style={{ fontWeight: 600 }}>{d.label}</span>
               <span style={{ fontSize: 11, color: T.textDim }}>{d.desc}</span>
             </button>
@@ -126,25 +227,71 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
 
         {/* Extra settings */}
         {showSettings && (
-          <div style={{ padding: '14px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, marginBottom: 20, animation: 'fadeIn 0.15s ease' }}>
+          <div
+            style={{
+              padding: '14px',
+              borderRadius: T.r.md,
+              background: T.surface,
+              border: `1px solid ${T.border}`,
+              marginBottom: 20,
+              animation: 'fadeIn 0.15s ease',
+            }}
+          >
             {/* Mode lemah */}
             {lemahCards.length > 0 && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: 12,
+                }}
+              >
                 <div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: T.text }}>Mode Lemah</div>
-                  <div style={{ fontSize: 11, color: T.textDim }}>Fokus ke {lemahCards.length} kartu yang sering salah</div>
+                  <div style={{ fontSize: 11, color: T.textDim }}>
+                    Fokus ke {lemahCards.length} kartu yang sering salah
+                  </div>
                 </div>
-                <button onClick={() => setLemahMode((l) => !l)} style={{ fontFamily: 'inherit', padding: '6px 14px', borderRadius: T.r.pill, border: `1px solid ${lemahMode ? T.wrongBorder : T.border}`, background: lemahMode ? T.wrongBg : T.surface, color: lemahMode ? T.wrong : T.textMuted, cursor: 'pointer', fontWeight: 700, fontSize: 12 }}>
+                <button
+                  onClick={() => setLemahMode((l) => !l)}
+                  style={{
+                    fontFamily: 'inherit',
+                    padding: '6px 14px',
+                    borderRadius: T.r.pill,
+                    border: `1px solid ${lemahMode ? T.wrongBorder : T.border}`,
+                    background: lemahMode ? T.wrongBg : T.surface,
+                    color: lemahMode ? T.wrong : T.textMuted,
+                    cursor: 'pointer',
+                    fontWeight: 700,
+                    fontSize: 12,
+                  }}
+                >
                   {lemahMode ? '⚠ ON' : 'OFF'}
                 </button>
               </div>
             )}
             {/* Auto-next delay */}
             <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: T.text, marginBottom: 8 }}>Lanjut otomatis</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: T.text, marginBottom: 8 }}>
+                Lanjut otomatis
+              </div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {DELAYS.map((d) => (
-                  <button key={d.v} onClick={() => setAutoNextDelay(d.v)} style={{ fontFamily: 'inherit', padding: '5px 12px', fontSize: 12, borderRadius: T.r.pill, cursor: 'pointer', background: autoNextDelay === d.v ? T.surfaceActive : T.surface, border: `1px solid ${autoNextDelay === d.v ? T.borderActive : T.border}`, color: autoNextDelay === d.v ? T.amber : T.textMuted }}>
+                  <button
+                    key={d.v}
+                    onClick={() => setAutoNextDelay(d.v)}
+                    style={{
+                      fontFamily: 'inherit',
+                      padding: '5px 12px',
+                      fontSize: 12,
+                      borderRadius: T.r.pill,
+                      cursor: 'pointer',
+                      background: autoNextDelay === d.v ? T.surfaceActive : T.surface,
+                      border: `1px solid ${autoNextDelay === d.v ? T.borderActive : T.border}`,
+                      color: autoNextDelay === d.v ? T.amber : T.textMuted,
+                    }}
+                  >
                     {d.l}
                   </button>
                 ))}
@@ -153,7 +300,22 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
           </div>
         )}
 
-        <button onClick={startQuiz} style={{ width: '100%', padding: '15px', fontSize: 15, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer', boxShadow: T.shadow.glow }}>
+        <button
+          onClick={startQuiz}
+          style={{
+            width: '100%',
+            padding: '15px',
+            fontSize: 15,
+            fontWeight: 700,
+            fontFamily: 'inherit',
+            borderRadius: T.r.md,
+            background: T.accent,
+            border: 'none',
+            color: T.textBright,
+            cursor: 'pointer',
+            boxShadow: T.shadow.glow,
+          }}
+        >
           Mulai Kuis 🚀
         </button>
       </div>
@@ -163,7 +325,10 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
   return (
     <QuizShell
       questions={questions}
-      onExit={() => { setStarted(false); _seenPool.clear(); }}
+      onExit={() => {
+        setStarted(false);
+        _seenPool.clear();
+      }}
       title="Kuis"
       onAnswer={handleAnswer}
       onFinish={onFinish}

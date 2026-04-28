@@ -13,7 +13,11 @@ import { useToast } from './components/Toast.jsx';
 // Components
 import TrackPicker from './components/TrackPicker.jsx';
 import BottomNav from './components/BottomNav.jsx';
-import Dashboard, { recordStudyDay, incrementDailyCount, pushRecentCard } from './components/Dashboard.jsx';
+import Dashboard, {
+  recordStudyDay,
+  incrementDailyCount,
+  pushRecentCard,
+} from './components/Dashboard.jsx';
 import FilterPopup from './components/FilterPopup.jsx';
 
 // Modes
@@ -333,14 +337,18 @@ export default function App() {
   const [unknown, setUnknown] = usePersistedState('ssw-unknown', []);
   const [starredArr, setStarredArr] = usePersistedState('ssw-starred', []);
   const starredSet = new Set(Array.isArray(starredArr) ? starredArr : []);
-  const toggleStar = useCallback((id) => {
-    if (!id) return;
-    setStarredArr((prev) => {
-      const s = new Set(Array.isArray(prev) ? prev : []);
-      if (s.has(id)) s.delete(id); else s.add(id);
-      return [...s];
-    });
-  }, [setStarredArr]);
+  const toggleStar = useCallback(
+    (id) => {
+      if (!id) return;
+      setStarredArr((prev) => {
+        const s = new Set(Array.isArray(prev) ? prev : []);
+        if (s.has(id)) s.delete(id);
+        else s.add(id);
+        return [...s];
+      });
+    },
+    [setStarredArr]
+  );
   const knownSet = new Set(Array.isArray(known) ? known : []);
   const unknownSet = new Set(Array.isArray(unknown) ? unknown : []);
 
@@ -420,7 +428,7 @@ export default function App() {
   };
   const goTab = (t) => {
     setTab(t);
-    if (t !== 'home') setMode(null); // only clear mode when leaving home context
+    setMode(null); // always clear active mode when switching tabs
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -463,16 +471,23 @@ export default function App() {
           onToggleStar={toggleStar}
         />
       ),
-      kuis: <QuizMode cards={filteredCards} allCards={CARDS} onExit={exitMode} onFinish={({ correct, total }) => {
-        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-        try {
-          const celebrated = localStorage.getItem('ssw-milestone-quiz70');
-          if (pct >= 70 && !celebrated) {
-            localStorage.setItem('ssw-milestone-quiz70', '1');
-            setTimeout(() => toast.show('✨ Kuis pertama ≥70%! Hasil luar biasa!'), 800);
-          }
-        } catch {}
-      }} />,
+      kuis: (
+        <QuizMode
+          cards={filteredCards}
+          allCards={CARDS}
+          onExit={exitMode}
+          onFinish={({ correct, total }) => {
+            const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+            try {
+              const celebrated = localStorage.getItem('ssw-milestone-quiz70');
+              if (pct >= 70 && !celebrated) {
+                localStorage.setItem('ssw-milestone-quiz70', '1');
+                setTimeout(() => toast.show('✨ Kuis pertama ≥70%! Hasil luar biasa!'), 800);
+              }
+            } catch {}
+          }}
+        />
+      ),
       jac: <JACMode onExit={exitMode} />,
       wayground: <WaygroundMode onExit={exitMode} />,
       angka: <AngkaMode onExit={exitMode} />,
@@ -501,16 +516,33 @@ export default function App() {
       {tab === 'belajar' && (
         <div style={{ padding: '12px 16px 0', maxWidth: T.maxW, margin: '0 auto' }}>
           <div style={{ padding: '16px 0 10px' }}>
-            <span style={{ fontSize: 17, fontWeight: 800, background: T.accent, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <span
+              style={{
+                fontSize: 17,
+                fontWeight: 800,
+                background: T.accent,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               Belajar
             </span>
           </div>
 
           {/* Materi toggle — prominent with counts */}
-          <div style={{ display: 'flex', gap: 0, marginBottom: 10, borderRadius: T.r.md, overflow: 'hidden', border: `1px solid ${T.border}` }}>
+          <div
+            style={{
+              display: 'flex',
+              gap: 0,
+              marginBottom: 10,
+              borderRadius: T.r.md,
+              overflow: 'hidden',
+              border: `1px solid ${T.border}`,
+            }}
+          >
             {[
               { v: false, label: '💡 Konsep' },
-              { v: true,  label: '📝 Kosakata' },
+              { v: true, label: '📝 Kosakata' },
             ].map(({ v, label }) => {
               const cnt = CARDS.filter((c) => {
                 const isVocab = VOCAB_SOURCES.includes(c.source);
@@ -521,8 +553,22 @@ export default function App() {
               return (
                 <button
                   key={String(v)}
-                  onClick={() => { setVocabMode(v); setActiveCats(new Set(['all'])); }}
-                  style={{ flex: 1, padding: '10px', fontSize: 12, fontWeight: vocabMode === v ? 700 : 500, fontFamily: 'inherit', border: 'none', cursor: 'pointer', background: vocabMode === v ? 'rgba(245,158,11,0.12)' : T.surface, color: vocabMode === v ? T.gold : T.textDim, lineHeight: 1.3 }}
+                  onClick={() => {
+                    setVocabMode(v);
+                    setActiveCats(new Set(['all']));
+                  }}
+                  style={{
+                    flex: 1,
+                    padding: '10px',
+                    fontSize: 12,
+                    fontWeight: vocabMode === v ? 700 : 500,
+                    fontFamily: 'inherit',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: vocabMode === v ? 'rgba(245,158,11,0.12)' : T.surface,
+                    color: vocabMode === v ? T.gold : T.textDim,
+                    lineHeight: 1.3,
+                  }}
                 >
                   <div>{label}</div>
                   <div style={{ fontSize: 10, opacity: 0.65, marginTop: 1 }}>{cnt} kartu</div>
@@ -532,22 +578,49 @@ export default function App() {
           </div>
 
           {/* Filter popup trigger */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 8,
+            }}
+          >
             <button
               onClick={() => setFilterOpen(true)}
-              style={{ fontFamily: 'inherit', fontSize: 12, fontWeight: 600, padding: '7px 14px', borderRadius: T.r.pill, cursor: 'pointer', background: activeCats.has('all') ? T.surface : 'rgba(245,158,11,0.10)', border: `1px solid ${activeCats.has('all') ? T.border : T.amber}`, color: activeCats.has('all') ? T.textMuted : T.amber, display: 'flex', alignItems: 'center', gap: 6 }}
+              style={{
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 600,
+                padding: '7px 14px',
+                borderRadius: T.r.pill,
+                cursor: 'pointer',
+                background: activeCats.has('all') ? T.surface : 'rgba(245,158,11,0.10)',
+                border: `1px solid ${activeCats.has('all') ? T.border : T.amber}`,
+                color: activeCats.has('all') ? T.textMuted : T.amber,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
             >
               <span>⚙ Filter</span>
               {!activeCats.has('all') && (
-                <span style={{ background: T.amber, color: T.bg, borderRadius: T.r.pill, fontSize: 9, fontWeight: 800, padding: '1px 6px' }}>
+                <span
+                  style={{
+                    background: T.amber,
+                    color: T.bg,
+                    borderRadius: T.r.pill,
+                    fontSize: 9,
+                    fontWeight: 800,
+                    padding: '1px 6px',
+                  }}
+                >
                   {activeCats.size}
                 </span>
               )}
               <span style={{ opacity: 0.5 }}>▼</span>
             </button>
-            <div style={{ fontSize: 11, color: T.textDim }}>
-              {filteredCards.length} kartu
-            </div>
+            <div style={{ fontSize: 11, color: T.textDim }}>{filteredCards.length} kartu</div>
           </div>
         </div>
       )}
