@@ -1,53 +1,21 @@
-// ─── src/srs/index.js ─────────────────────────────────────────────────────────
-// SRS module barrel — import from here in components/hooks.
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ─── src/srs/index.js — SRS module barrel ─────────────────────────────────────
 export {
-  // Constants
-  FSRS_RATINGS,
-  RATING_META,
-  INDONESIAN_CALIBRATION,
-  // Configuration
-  configureFSRS,
-  getFSRSConfig,
-  // Card creation
-  createCard,
-  // Math
-  scheduleReview,
-  getRetrievability,
-  isDue,
-  getStrength,
-  getStateLabel,
-  ratingToKnown,
-  // Enums
-  Rating,
-  State,
+  FSRS_RATINGS, RATING_META, INDONESIAN_CALIBRATION,
+  configureFSRS, getFSRSConfig,
+  createCard, scheduleReview,
+  getRetrievability, isDue, getStrength, getStateLabel, ratingToKnown,
+  Rating, State,
 } from './fsrs-core.js';
 
 export {
-  // Store lifecycle
-  initStore,
-  resetStore,
-  // Read
-  getCard,
-  hasCard,
-  getAllCards,
-  getCardCount,
-  // Write
+  initStore, resetStore,
+  getCard, hasCard, getAllCards, getCardCount,
   saveCard,
-  // Import/export
-  exportSRSSnapshot,
-  importSRSSnapshot,
-  getStorageBackend,
+  exportSRSSnapshot, importSRSSnapshot,
 } from './fsrs-store.js';
 
 export {
-  // Core actions
   recordReview,
-  // Queries
-  getDueCardIds,
-  getCardSRSInfo,
-  getSRSStats,
-  previewIntervals,
-  fmtInterval,
+  getDueCardIds, getCardSRSInfo, getSRSStats,
+  previewIntervals, fmtInterval,
 } from './fsrs-scheduler.js';
