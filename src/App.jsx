@@ -2,8 +2,8 @@
 // v2.3 — SRS integration (FSRS engine, ReviewMode, 4-button flashcard rating)
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useCallback, useMemo, lazy, Suspense } from 'react';
-import { T } from './styles/theme.js';
+import { useState, useCallback, useMemo, useEffect, lazy, Suspense } from 'react';
+import { T, applyTheme } from './styles/theme.js';
 import { CARDS } from './data/cards.js';
 import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from './data/categories.js';
 import { usePersistedState } from './hooks/usePersistedState.js';
@@ -272,6 +272,30 @@ function ModeGrid({ modes, onSelect, title, badges = {} }) {
 
 // ─── Main App ────────────────────────────────────────────────────────────────
 export default function App() {
+  // ── Theme ──
+  const [isDark, setIsDark] = useState(() => {
+    try {
+      return localStorage.getItem('ssw-theme') === 'dark';
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    applyTheme(isDark);
+    try {
+      localStorage.setItem('ssw-theme', isDark ? 'dark' : 'light');
+    } catch (_e) {}
+  }, [isDark]);
+
+  // Apply on first mount (before any toggle)
+  useEffect(() => {
+    applyTheme(isDark);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const toggleTheme = useCallback(() => setIsDark((d) => !d), []);
+
   // ── State ──
   const [onboarded, setOnboarded] = useState(() => {
     try {
@@ -522,6 +546,8 @@ export default function App() {
           onNavigate={goMode}
           onChangeTrack={() => setTrack(null)}
           srs={srs}
+          isDark={isDark}
+          onToggleTheme={toggleTheme}
         />
       )}
       {tab === 'belajar' && (

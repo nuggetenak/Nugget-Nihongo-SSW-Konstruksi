@@ -5,7 +5,7 @@ import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import ProgressBar from './ProgressBar.jsx';
 
-export default function Dashboard({ known, unknown, track, onNavigate, onChangeTrack, srs }) {
+export default function Dashboard({ known, unknown, track, onNavigate, onChangeTrack, srs, isDark, onToggleTheme }) {
   const total = CARDS.length;
   const knownN = known.size;
   const unknownN = unknown.size;
@@ -102,6 +102,28 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
           }}
         >
           {trackInfo.icon} {trackInfo.jp}
+        </button>
+        <button
+          onClick={onToggleTheme}
+          title={isDark ? 'Switch to Light' : 'Switch to Dark'}
+          style={{
+            fontFamily: 'inherit',
+            fontSize: 16,
+            width: 34,
+            height: 34,
+            borderRadius: T.r.pill,
+            cursor: 'pointer',
+            background: T.surface,
+            border: `1px solid ${T.borderLight}`,
+            color: T.text,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            transition: 'background 0.15s',
+          }}
+        >
+          {isDark ? '☀️' : '🌙'}
         </button>
       </div>
 
