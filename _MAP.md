@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Claude (Phase 11 — GlossaryMode A-Z nav)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ — production-ready, deployed to GitHub Pages · v3.0.1
+> **Last updated:** 2026-04-29 by Claude (Phase 12 — VocabDB: CSV + Wayground sets)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ Phase 12 ✅ — production-ready, deployed to GitHub Pages · v3.1.0
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
@@ -48,6 +48,7 @@ Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field
 | Phase 5.2 | Codex (Audit) | ✅ | Audit: build PASS, lazy-load all 15 modes, CHANGELOG, audit report |
 | Phase 5.3 | Claude (Bugfix) | ✅ | Bugfix pass: BottomNav dark bg, ReviewMode interval labels, async cleanup, initStore render fix, SearchMode boxSizing. Tests: 72→105. v2.3.4→v2.3.5 |
 | Phase 5.4 | Claude (Bugfix) | ✅ | HTML/PWA fixes: favicon 404, FOUC dark-flash, color-scheme meta, manifest splash color. getCatsForTrack tests. Tests: 105→111. v2.3.6 |
+| Phase 12 | Claude (VocabDB) | ✅ | Vocab DB Build: csv-sets.js (300qs, 12 sets), wayground wg7/wg8 completed (46+45qs), Coming Soon badges for Sipil & Bangunan |
 
 ---
 
