@@ -10,7 +10,7 @@ import QuizShell from "../components/QuizShell.jsx";
 export default function QuizMode({ cards, allCards, onExit }) {
   const [difficulty, setDifficulty] = useState("medium");
   const [started, setStarted] = useState(false);
-  const [quizWrong, setQuizWrong, ready] = usePersistedState("ssw-quiz-wrong", {});
+  const [quizWrong, setQuizWrong] = usePersistedState("ssw-quiz-wrong", {});
   const [seed, setSeed] = useState(0); // force re-generate
 
   const count = Math.min(cards.length, 15);
