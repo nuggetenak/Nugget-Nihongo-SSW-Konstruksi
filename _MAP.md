@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Crunchy/Codex (QA — Phase 5.2 complete)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ — production-ready, deploy to GitHub Pages
+> **Last updated:** 2026-04-28 by Claude (bugfix pass — v2.3.4)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ — production-ready, deployed to GitHub Pages
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
@@ -46,6 +46,7 @@ Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field
 | Phase 5 | Crunchy (QA) | ✅ | PWA: manifest, service worker, 10 icons, apple meta, offline support |
 | Phase 5.1 | Crunchy (QA) | ✅ | Icons replaced with Gemini-generated artwork; README full rewrite |
 | Phase 5.2 | Codex (Audit) | ✅ | Audit: build PASS, lazy-load all 15 modes, CHANGELOG, audit report |
+| Phase 5.3 | Claude (Bugfix) | ✅ | Bugfix pass: BottomNav dark bg, ReviewMode interval labels, async cleanup. v2.3.3→v2.3.4 |
 
 ---
 
@@ -66,7 +67,9 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── favicon.png                     ← 32px fallback
 │   └── icons/                          ← Gemini artwork, 72–512px + apple-touch                          ← 10 PNG icons (72–512, apple-touch)
 ├── docs/
-│   ├── AUDIT-2026-04-28.md        ← Codex formal audit report
+│   ├── AUDIT-2026-04-28.md        ← Codex audit pass 1
+│   ├── AUDIT-2026-04-28-PASS2.md  ← Codex audit pass 2 (integrity + chunking)
+│   ├── AUDIT-2026-04-28-PASS3.md  ← Claude audit pass 3 (debug-to-deploy)
 │   ├── PROPOSAL.md
 │   └── id-mapping-v87-to-v90.json
 ├── scripts/
@@ -76,7 +79,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │
 └── src/
     ├── main.jsx
-    ├── App.jsx                     ← v2.3.1: + React.lazy() for all 15 modes (Codex)
+    ├── App.jsx                     ← v2.3.1: + React.lazy() for all 15 modes (Codex); v2.3.2: manualChunks perf
     │
     ├── data/
     │   ├── index.js                ← barrel + derived constants

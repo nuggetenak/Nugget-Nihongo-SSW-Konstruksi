@@ -8,7 +8,7 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo } from '../data/categories.js';
 import { stripFuri, jpFontSize } from '../utils/jp-helpers.js';
-// fmtInterval import removed (unused)
+import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 
@@ -46,7 +46,7 @@ export default function ReviewMode({ srs, onExit }) {
 
   // Handle a rating button press
   const handleRate = useCallback(
-    async (rating) => {
+    (rating) => {
       if (!flipped || currentId == null) return;
 
       const result = srs.review(currentId, rating);
@@ -353,15 +353,7 @@ export default function ReviewMode({ srs, onExit }) {
                   <span style={{ fontSize: 14 }}>{m.emoji}</span>
                   <span style={{ fontSize: 12, fontWeight: 700 }}>{m.id}</span>
                   {days != null && (
-                    <span style={{ fontSize: 9, opacity: 0.7 }}>
-                      {days < 1
-                        ? '<1h'
-                        : days < 7
-                          ? `${days}h`
-                          : days < 30
-                            ? `${Math.round(days / 7)}mgg`
-                            : `${Math.round(days / 30)}bln`}
-                    </span>
+                    <span style={{ fontSize: 9, opacity: 0.7 }}>{fmtInterval(days)}</span>
                   )}
                   <span style={{ fontSize: 9, opacity: 0.45 }}>{rating}</span>
                 </button>

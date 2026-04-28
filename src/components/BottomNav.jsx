@@ -16,7 +16,7 @@ export default function BottomNav({ active, onChange }) {
         left: 0,
         right: 0,
         height: T.navH,
-        background: 'rgba(13,11,8,0.92)',
+        background: 'var(--ssw-navBg)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         borderTop: `1px solid ${T.border}`,

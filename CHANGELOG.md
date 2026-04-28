@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3.4] - 2026-04-28
+
+### Fixed
+- **BottomNav hardcoded dark background** — `rgba(13,11,8,0.92)` diganti `var(--ssw-navBg)`. Nav sekarang ikut theme light/dark dengan benar.
+- **ReviewMode interval labels salah unit** — inline formatter menggunakan suffix `h` (ambigu: jam atau hari?) diganti pakai `fmtInterval()` dari `fsrs-scheduler.js` yang konsisten memakai `j` (hari), `mgg` (minggu), `bln` (bulan), `th` (tahun).
+- **`handleRate` di ReviewMode tidak perlu `async`** — keyword dihapus; tidak ada `await` di dalam fungsi tersebut.
+
+### Changed
+- `_MAP.md` diperbarui: Phase 5.3, docs listing PASS2+PASS3, version info.
+
 ## [2.3.3] - 2026-04-28
 
 ### Fixed
