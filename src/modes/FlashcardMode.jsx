@@ -41,13 +41,13 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
   }, [order.length]);
 
   // Handle FSRS rating
-  const handleRate = useCallback(async (rating) => {
+  const handleRate = useCallback((rating) => {
     if (!card) return;
     const meta = RATING_META[rating];
 
     // Update SRS engine
     if (srs?.ready) {
-      const result = await srs.review(card.id, rating);
+      const result = srs.review(card.id, rating);
       onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
     } else {
       // Fallback: use binary mapping if SRS not ready
