@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Claude (bugfix pass — v2.3.6)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ — production-ready, deployed to GitHub Pages
+> **Last updated:** 2026-04-28 by Claude (Phase 11 — GlossaryMode A-Z nav)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ — production-ready, deployed to GitHub Pages · v3.0.1
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
@@ -566,3 +566,34 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 - **LULUS / BELUM LULUS result**: 65% threshold, progress bar, large bold verdict
 - **Wrong answer review**: JP + ID + ✗ user answer + ✓ correct + explanation
 
+
+
+---
+
+## 15. Phase 11 Changelog (Claude — 2026-04-28)
+
+### GlossaryMode A-Z Navigation (`src/modes/GlossaryMode.jsx`)
+
+**Sticky nav strip**
+- Horizontal scrollable bar with all hiragana first-chars present in current dataset
+- Sticks to top (z-index 20) — `position: sticky; top: 0`
+- Auto-scrolls to keep active pill centered on scroll
+
+**Jump-to-section**
+- Section divs use `data-letter` + `sectionRefs`
+- Tap pill → `window.scrollTo()` with 52px offset for sticky strip height
+
+**Active letter tracking**
+- IntersectionObserver on each section (`threshold: 0.05, rootMargin: -10%/-75%`)
+- Topmost visible section sets `activeLetter`
+- Active pill: amber bg + gold text + border
+
+**UI improvements**
+- Section headers: large gold hiragana + count badge
+- Category filter pills: show count inline when active
+- Expanded card: furi (amber) + romaji (italic) + desc + source tag
+- Category emoji in collapsed row
+- `fadeIn` animation on expand
+- Filter change resets expanded + activeLetter
+
+**Version:** v3.0.1
