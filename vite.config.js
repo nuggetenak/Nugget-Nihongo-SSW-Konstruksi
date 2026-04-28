@@ -7,5 +7,13 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('/src/data/cards.js')) return 'cards-data';
+          if (id.includes('/node_modules/')) return 'vendor';
+        },
+      },
+    },
   },
 });

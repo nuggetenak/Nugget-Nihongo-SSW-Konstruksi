@@ -135,6 +135,21 @@ npm run build
 
 ---
 
+## 🧾 Audit & Administratif
+
+- Audit komprehensif terbaru: [`docs/AUDIT-2026-04-28.md`](./docs/AUDIT-2026-04-28.md)
+- Audit pass 2 (agresif): [`docs/AUDIT-2026-04-28-PASS2.md`](./docs/AUDIT-2026-04-28-PASS2.md)
+- Riwayat perubahan: [`CHANGELOG.md`](./CHANGELOG.md)
+- Jalankan baseline audit lokal:
+
+```bash
+npm run audit:baseline
+npm run audit:integrity
+npm run audit:full
+```
+
+---
+
 ## 📜 Versi Sebelumnya
 
 - **v87 (live):** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
