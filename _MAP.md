@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-28 by Crunchy (QA — Phase 5.1 complete)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ — production-ready, deploy to GitHub Pages
+> **Last updated:** 2026-04-28 by Crunchy/Codex (QA — Phase 5.2 complete)
+> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ — production-ready, deploy to GitHub Pages
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
 ---
@@ -45,6 +45,7 @@ Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field
 | Phase 4 | Crunchy (QA) | ✅ | Bug fixes + SRS engine + storage layer overhaul (see §10) |
 | Phase 5 | Crunchy (QA) | ✅ | PWA: manifest, service worker, 10 icons, apple meta, offline support |
 | Phase 5.1 | Crunchy (QA) | ✅ | Icons replaced with Gemini-generated artwork; README full rewrite |
+| Phase 5.2 | Codex (Audit) | ✅ | Audit: build PASS, lazy-load all 15 modes, CHANGELOG, audit report |
 
 ---
 
@@ -53,6 +54,7 @@ Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field
 ```
 Nugget-Nihongo-SSW-Konstruksi/
 ├── _MAP.md                         ← YOU ARE HERE
+├── CHANGELOG.md                    ← Versioned changelog (start: v2.3.1)
 ├── README.md
 ├── index.html                      ← Vite entry point
 ├── package.json                    ← deps: react, react-dom, vite, ts-fsrs
@@ -64,6 +66,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── favicon.png                     ← 32px fallback
 │   └── icons/                          ← Gemini artwork, 72–512px + apple-touch                          ← 10 PNG icons (72–512, apple-touch)
 ├── docs/
+│   ├── AUDIT-2026-04-28.md        ← Codex formal audit report
 │   ├── PROPOSAL.md
 │   └── id-mapping-v87-to-v90.json
 ├── scripts/
@@ -73,7 +76,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │
 └── src/
     ├── main.jsx
-    ├── App.jsx                     ← v2.3: track filter, useSRS, ReviewMode wired
+    ├── App.jsx                     ← v2.3.1: + React.lazy() for all 15 modes (Codex)
     │
     ├── data/
     │   ├── index.js                ← barrel + derived constants
@@ -281,12 +284,22 @@ useSRS.js          — React hook. Calls initStore() synchronously. Exposes reac
 - [x] PWA manifest + service worker ✅ Phase 5
 - [ ] Breadcrumb navigation in nested modes
 - [ ] Study plan mode (4-week guided)
+- [ ] Data splitting: dynamic import cards.js per track (Codex rec — reduce initial bundle)
+- [ ] ESLint + Prettier + CI checks (Codex rec)
+- [ ] Smoke tests UI minimal — Playwright/Vitest (Codex rec)
 - [ ] SRS difficulty calibration for Indonesian learners (needs 10K+ review events — see `INDONESIAN_CALIBRATION` in fsrs-core.js)
 - [ ] Card images for tool recognition questions
 
 ---
 
 ## 9. Agent Instructions
+
+### ⚠️ Codex Audit Notes (Phase 5.2)
+- All 15 modes are now `React.lazy()` — wrapped in `<Suspense fallback={<ModeLoadingFallback/>}>` in App.jsx
+- Do NOT revert to static imports — lazy loading is intentional for bundle size
+- `modeMap` still constructs JSX for all modes per render — this is safe (lazy chunks only download when rendered)
+- `npm run audit:baseline` = `npm run build` — use for quick build health check
+- Formal audit report: `docs/AUDIT-2026-04-28.md`
 
 ### ⚠️ Crispy / Integrator Sync Notes (Phase 4–5)
 These changes affect integration — Crispy must be aware:
@@ -423,4 +436,40 @@ Previous README was v87-era (outdated). Now reflects:
 
 ---
 
-*End of _MAP.md — Last updated 2026-04-28 by Crunchy (QA — Phase 5.1)*
+
+## 13. Phase 5.2 Changelog (Codex Audit — 2026-04-28)
+
+### Audit Results
+- **Build:** PASS (no compile errors)
+- **Bundle:** ~1.4MB single chunk before fix — HIGH risk on low-end devices
+- **Source hygiene:** GOOD — no TODO/FIXME/console.log found
+- **Docs:** GAP — no formal audit trail or changelog (now fixed)
+
+### Changes Applied by Codex
+
+**`src/App.jsx`** — All 15 mode imports converted to `React.lazy()`:
+```js
+// Before
+import FlashcardMode from './modes/FlashcardMode.jsx';
+// After
+const FlashcardMode = lazy(() => import('./modes/FlashcardMode.jsx'));
+```
+Mode render wrapped in `<Suspense fallback={<ModeLoadingFallback/>}>`.
+Added `ModeLoadingFallback` component (centered spinner text).
+
+**`package.json`** — version bumped to `2.3.1`; added `audit:baseline` script.
+
+**`CHANGELOG.md`** — New file, versioned changelog starting at v2.3.1.
+
+**`docs/AUDIT-2026-04-28.md`** — Formal audit report (build, perf, hygiene, remediation).
+
+### Codex Backlog Recommendations (not yet implemented)
+1. Dynamic import `cards.js` per track — further reduce initial payload
+2. ESLint + Prettier + CI pipeline
+3. Smoke tests (Playwright or Vitest)
+4. JSON data splitting/compression
+
+
+---
+
+*End of _MAP.md — Last updated 2026-04-28 by Crunchy + Codex (Phase 5.2)*
