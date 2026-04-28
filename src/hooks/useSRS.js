@@ -1,22 +1,6 @@
 // ─── useSRS.js ────────────────────────────────────────────────────────────────
-// React hook — wraps the SRS engine for use in components.
-//
-// Responsibilities:
-//   - Initializes the store once on mount (async, non-blocking)
-//   - Exposes reactive dueCount so Dashboard/BottomNav can show badges
-//   - Provides review(), getDue(), getInfo() as stable callbacks
-//   - Keeps the engine and React state in sync after each review
-//
-// Usage:
-//   const srs = useSRS(filteredCardIds);
-//   srs.ready          → boolean — false during init
-//   srs.dueCount       → number
-//   srs.stats          → { total, new, learning, young, mature, due }
-//   srs.review(id, r)  → async, records review, returns { entry, interval, isKnown }
-//   srs.getDue()       → number[] — due card IDs (current track)
-//   srs.getInfo(id)    → { seen, status, strength, R, nextDue, reps, lapses, history }
-//   srs.previewFor(id) → { 1: days, 2: days, 3: days, 4: days }
-//   srs.RATING_META    → rating button metadata
+// React hook — bridges the SRS engine to the component tree.
+// localStorage is synchronous, so init is instant — no loading state needed.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useEffect, useCallback, useRef } from 'react';
@@ -31,60 +15,33 @@ import {
 import { RATING_META } from '../srs/fsrs-core.js';
 
 export function useSRS(trackCardIds = []) {
-  const [ready, setReady]       = useState(false);
-  const [dueCount, setDueCount] = useState(0);
-  const [stats, setStats]       = useState(null);
-
-  // Keep a ref so callbacks always use the latest track without re-creating
+  // initStore() is synchronous — runs immediately, no async needed
+  const [, forceRender] = useState(0);
   const idsRef = useRef(trackCardIds);
+
+  // Initialize store once (idempotent)
+  initStore();
+
+  // Keep ref current
   useEffect(() => { idsRef.current = trackCardIds; }, [trackCardIds]);
 
-  // ── Init store on mount ─────────────────────────────────────────────────
-  useEffect(() => {
-    initStore().then(() => {
-      setReady(true);
-      refreshCounts(trackCardIds);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Derived values — recomputed on every render (cheap, all in-memory)
+  const dueCount = getDueCardIds(trackCardIds).length;
+  const stats    = getSRSStats(trackCardIds);
+
+  // Record a review — updates store + triggers re-render for dueCount/stats
+  const review = useCallback((cardId, rating) => {
+    const result = recordReview(cardId, rating);
+    forceRender(n => n + 1);
+    return result;
   }, []);
 
-  // ── Recompute counts whenever track changes (after ready) ───────────────
-  useEffect(() => {
-    if (ready) refreshCounts(trackCardIds);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, trackCardIds.length]);
-
-  // ── Internal: refresh reactive counts ──────────────────────────────────
-  function refreshCounts(ids) {
-    const due = getDueCardIds(ids);
-    setDueCount(due.length);
-    setStats(getSRSStats(ids));
-  }
-
-  // ── review() — record a rating, refresh state ──────────────────────────
-  const review = useCallback(async (cardId, rating) => {
-    const result = await recordReview(cardId, rating);
-    refreshCounts(idsRef.current);
-    return result; // { entry, interval, isKnown }
-  }, []);
-
-  // ── getDue() — current due queue ───────────────────────────────────────
-  const getDue = useCallback(() => {
-    return getDueCardIds(idsRef.current);
-  }, []);
-
-  // ── getInfo() — per-card SRS snapshot ─────────────────────────────────
-  const getInfo = useCallback((cardId) => {
-    return getCardSRSInfo(cardId);
-  }, []);
-
-  // ── previewFor() — interval preview per rating (for button hints) ──────
-  const previewFor = useCallback((cardId) => {
-    return previewIntervals(cardId);
-  }, []);
+  const getDue     = useCallback(() => getDueCardIds(idsRef.current), []);
+  const getInfo    = useCallback((id) => getCardSRSInfo(id), []);
+  const previewFor = useCallback((id) => previewIntervals(id), []);
 
   return {
-    ready,
+    ready: true, // always ready — localStorage is synchronous
     dueCount,
     stats,
     review,
