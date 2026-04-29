@@ -36,6 +36,7 @@ const GlossaryMode = lazy(() => import('./modes/GlossaryMode.jsx'));
 const SumberMode = lazy(() => import('./modes/SumberMode.jsx'));
 const ExportMode = lazy(() => import('./modes/ExportMode.jsx'));
 const ReviewMode = lazy(() => import('./modes/ReviewMode.jsx'));
+const VocabMode = lazy(() => import('./modes/VocabMode.jsx'));
 
 // ─── Onboarding ──────────────────────────────────────────────────────────────
 function Onboarding({ onComplete }) {
@@ -173,7 +174,8 @@ const BELAJAR_MODES = [
 ];
 const UJIAN_MODES = [
   { key: 'jac', icon: '📋', label: 'JAC Official', desc: 'Soal contoh ujian resmi' },
-  { key: 'wayground', icon: '🎓', label: 'Wayground', desc: '598 soal teknis' },
+  { key: 'wayground', icon: '🎓', label: 'Soal Teknis', desc: '579 soal teori & praktik' },
+  { key: 'vocab', icon: '📖', label: 'Kosakata', desc: '380 soal vocab JP↔ID' },
   { key: 'simulasi', icon: '🎯', label: 'Simulasi', desc: 'Ujian + timer' },
   { key: 'angka', icon: '🔢', label: 'Angka Kunci', desc: 'Angka wajib hafal' },
   { key: 'jebak', icon: '⚠️', label: 'Soal Jebak', desc: 'Istilah mirip' },
@@ -490,6 +492,7 @@ export default function App() {
       ),
       jac: <JACMode onExit={exitMode} />,
       wayground: <WaygroundMode onExit={exitMode} />,
+      vocab: <VocabMode onExit={exitMode} />,
       angka: <AngkaMode onExit={exitMode} />,
       jebak: <DangerMode onExit={exitMode} />,
       simulasi: <SimulasiMode onExit={exitMode} />,
