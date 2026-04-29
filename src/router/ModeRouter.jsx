@@ -6,7 +6,7 @@
 import { Component, Suspense } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
-import { VOCAB_SOURCES, getCatsForTrack } from '../data/categories.js';
+import { getCatsForTrack } from '../data/categories.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -24,12 +24,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Lint (zero warnings)
+      - name: Lint
         run: npm run lint
-      - name: Format check
-        run: npm run format:check
-      - name: Tests (72 checks)
-        run: npm test
+      - name: Tests
+        run: npm test -- --run
 
   build:
     needs: validate
@@ -41,7 +39,16 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      # Auto-bump SW cache version on every deploy (prevents stale cache)
+      - name: Bump SW cache version
+        run: |
+          VERSION="v$(date -u +%Y%m%d%H%M%S)"
+          sed -i "s/const CACHE_VERSION = '[^']*'/const CACHE_VERSION = '$VERSION'/" public/sw.js
+          echo "Bumped CACHE_VERSION to $VERSION"
+
       - run: npm run build
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -1,3 +1,35 @@
+## [3.3.0] - 2026-04-29
+
+### Phase 4 — Flashcard Overhaul
+- **3D card flip animation**: CSS `preserve-3d` + `backface-visibility: hidden`
+  - Front and back as separate DOM faces (no conditional show/hide)
+  - 400ms `cubic-bezier(0.4,0,0.2,1)` transition
+- **FSRS 4-button always visible** after flip — no more long-press required
+  - Removed binary ✅/❌ buttons entirely — FSRS rating IS the mark
+  - Shows interval preview under each button (e.g. "<1m", "3h", "1h", "4h")
+  - Keyboard shortcuts: 1=Lagi · 2=Susah · 3=Oke · 4=Mudah
+- **Swipe tilt feedback**: card tilts ±4deg + shifts ±24px during swipe gesture
+- **"Tap untuk balik" hint**: shows for first 3 lifetime flips, then fades permanently
+  - Stored in `prefs.flashcardHintCount` via storage engine
+- **Back face redesign**: category gradient bg, JP smaller, ID translation large + bold
+- Removed: long-press detection, separate binary mark row, "Tahan tombol" hint
+- Kept: search, star, tools row (sort/review-belum/reset/bintang filter), keyboard nav
+
+### Phase 5 — Quiz Shell Polish
+- **ResultScreen two-path emotional design** (Blueprint B6):
+  - ≥70%: celebrate path — trophy 🏆, green bg, "Bagus Sekali!" 
+  - <50%: encourage path — 💪, gentle red tint, weakness tip + "Latih X salah" CTA
+  - Score 50–70%: neutral path with grade emoji
+  - Wrong-answer shake animation (rsShake) for low scores
+- **Explanation animation**: `slideUp 0.25s ease` (was `fadeIn`)
+- **Lint**: 0 warnings, 0 errors across all new files
+
+### Phase 9 — CI/CD (partial)
+- `.github/workflows/ci.yml`: lint + test + build on every push/PR
+- `.github/workflows/deploy.yml`: updated with auto-bump `CACHE_VERSION` in `sw.js`
+  - Format: `v{timestamp}` (e.g. `v20260429101500`) on every deploy
+  - Prevents stale service worker cache after deploys
+
 ## [3.2.0] - 2026-04-29
 
 ### Phase 2 — Navigation Restructure (3-tab layout)

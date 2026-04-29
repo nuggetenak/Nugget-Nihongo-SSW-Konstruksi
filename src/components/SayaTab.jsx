@@ -69,7 +69,7 @@ function Section({ title, children }) {
 
 export default function SayaTab() {
   const { track, setTrack, isDark, toggleTheme, toast, goMode } = useApp();
-  const { known, unknown, starred, streakData, dailyCount, milestoneStreak7 } = useProgress();
+  const { known, unknown, streakData } = useProgress();
   const srs = useSRSContext();
 
   const total = CARDS.length;

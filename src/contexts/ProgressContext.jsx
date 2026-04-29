@@ -60,7 +60,7 @@ export function ProgressProvider({ children }) {
 
       // Milestone checks
       const milestoneStreak7 = prev.milestoneStreak7 || newDays >= 7;
-      const newKnownSize = knownSet.size;
+      const _newKnownSize = knownSet.size; // reserved for milestone toast
       // milestone toast triggered via return value check in component
 
       return {

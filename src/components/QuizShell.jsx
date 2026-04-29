@@ -260,7 +260,8 @@ export default function QuizShell({
             fontSize: 12,
             lineHeight: 1.65,
             color: T.textMuted,
-            animation: 'fadeIn 0.2s ease',
+            animation: 'slideUp 0.25s ease',
+            overflow: 'hidden',
           }}
         >
           💡 {q.explanation}
