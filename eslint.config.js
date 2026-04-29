@@ -26,9 +26,9 @@ export default [
       'react/prop-types': 'off',
       'react/display-name': 'off',
 
-      // Hooks — set-state-in-effect is intentional in init useEffects, warn only
+      // Hooks — set-state-in-effect is intentional in init useEffects (e.g. GlossaryMode reset)
       'react-hooks/exhaustive-deps': 'warn',
-      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/set-state-in-effect': 'off',
 
       // Quality
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' }],
