@@ -1,13 +1,12 @@
 import { T } from '../styles/theme.js';
 
 const TABS = [
-  { key: 'home', icon: '🏠', iconActive: '🏠', label: 'Beranda' },
-  { key: 'belajar', icon: '📚', iconActive: '📚', label: 'Belajar' },
-  { key: 'ujian', icon: '✍️', iconActive: '✍️', label: 'Ujian' },
-  { key: 'lainnya', icon: '⋯', iconActive: '⋯', label: 'Lainnya' },
+  { key: 'home',   icon: '🏠', label: 'Beranda' },
+  { key: 'belajar',icon: '📖', label: 'Belajar'  },
+  { key: 'saya',   icon: '👤', label: 'Saya'     },
 ];
 
-export default function BottomNav({ active, onChange }) {
+export default function BottomNav({ active, onChange, dueBadge = 0 }) {
   return (
     <nav
       style={{
@@ -17,8 +16,8 @@ export default function BottomNav({ active, onChange }) {
         right: 0,
         height: T.navH,
         background: 'var(--ssw-navBg)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         borderTop: `1px solid ${T.border}`,
         display: 'flex',
         alignItems: 'center',
@@ -30,10 +29,13 @@ export default function BottomNav({ active, onChange }) {
       <div style={{ display: 'flex', width: '100%', maxWidth: T.maxW }}>
         {TABS.map((tab) => {
           const isActive = active === tab.key;
+          const badge = tab.key === 'belajar' && dueBadge > 0 ? dueBadge : 0;
           return (
             <button
               key={tab.key}
               onClick={() => onChange(tab.key)}
+              aria-label={tab.label}
+              aria-current={isActive ? 'page' : undefined}
               style={{
                 flex: 1,
                 display: 'flex',
@@ -53,23 +55,46 @@ export default function BottomNav({ active, onChange }) {
                 position: 'relative',
               }}
             >
+              {/* Active pill indicator */}
               {isActive && (
                 <div
                   style={{
                     position: 'absolute',
-                    top: -1,
+                    top: 0,
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: 20,
-                    height: 2,
-                    borderRadius: T.r.pill,
+                    width: 32,
+                    height: 3,
+                    borderRadius: '0 0 4px 4px',
                     background: T.amber,
+                    transition: 'width 0.2s ease',
                   }}
                 />
               )}
-              <span style={{ fontSize: 18, lineHeight: 1 }}>
-                {isActive ? tab.iconActive : tab.icon}
-              </span>
+              {/* Badge */}
+              {badge > 0 && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 4,
+                    right: '22%',
+                    fontSize: 9,
+                    fontWeight: 800,
+                    minWidth: 14,
+                    height: 14,
+                    borderRadius: 7,
+                    background: T.amber,
+                    color: T.bg,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 3px',
+                  }}
+                >
+                  {badge > 99 ? '99+' : badge}
+                </span>
+              )}
+              <span style={{ fontSize: 20, lineHeight: 1 }}>{tab.icon}</span>
               <span>{tab.label}</span>
             </button>
           );

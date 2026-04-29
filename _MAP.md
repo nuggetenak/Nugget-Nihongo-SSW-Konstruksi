@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-04-29 by Opus
-> **Version:** v3.1.0 — production-ready, deployed to GitHub Pages
+> **Last updated:** 2026-04-29 by Sonnet
+> **Version:** v3.2.0 — Phase 1+2+3 complete
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v3.md` ← **READ THIS FIRST**
 
 ---
@@ -177,9 +177,11 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 | Source lines | 19,646 | — |
 | Inline styles | 822 | 0 (CSS Modules) |
 | localStorage key patterns | 20+ | 3 documents |
-| App.jsx | 668 lines | ~150 lines |
-| ErrorBoundary count | 0 | All 18 modes wrapped |
-| Tests | 111 | ~170+ |
+| App.jsx | 668 → **72 lines** ✅ | ~150 lines |
+| BottomNav | 4 tabs | **3 tabs** ✅ |
+| Dashboard | 819 → **265 lines** ✅ | Redesigned |
+| ErrorBoundary count | 0 → **all 18 modes** ✅ | All 18 modes wrapped |
+| Tests | 111 → **150 passing** ✅ | ~170+ |
 | CI/CD | none | GitHub Actions auto-deploy |
 
 ---

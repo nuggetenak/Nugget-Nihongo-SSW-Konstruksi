@@ -1,3 +1,38 @@
+## [3.2.0] - 2026-04-29
+
+### Phase 2 — Navigation Restructure (3-tab layout)
+- **BottomNav**: 4 tabs → 3 tabs (🏠 Beranda / 📖 Belajar / 👤 Saya)
+  - Active pill indicator (pill shape top, not just line)
+  - Due badge on Belajar tab shows SRS due count
+  - Larger touch targets (3 tabs vs 4 = 33% bigger per tab)
+- **BelajarTab** (`src/components/BelajarTab.jsx`): new component
+  - All study modes in one scrollable page, grouped by intent
+  - 4 sections: 📝 Pelajari (Kartu, Glosari, Cari) · 🧪 Latihan · 📋 Ujian · 🔁 Ulasan
+  - Replaces 3 separate tabs (Belajar / Ujian / Lainnya)
+- **SayaTab** (`src/components/SayaTab.jsx`): new personal hub
+  - Progress ring + streak + SRS breakdown
+  - Settings: track picker, theme toggle
+  - Data: Export (JSON download) · Import · Reset (3-step countdown confirmation)
+  - Links: Sumber Materi → opens SumberMode
+  - Consolidates Stats, Export, Sumber from old Lainnya tab
+
+### Phase 3 — Dashboard Redesign
+- **ProgressRing** (`src/components/ProgressRing.jsx`): new SVG circular progress
+  - Replaces 4-box stats bar AND linear progress bar
+  - Animated stroke-dashoffset fill (0.8s ease)
+  - Shows percentage + count inline in ring center
+- **Dashboard** redesigned (819 → 265 lines):
+  - Removed: 4-box stats bar, linear progress bar, SRS breakdown pills, content stats footer, quick links row, starter pack section
+  - Added: streak hero card (visible when ≥2 days streak)
+  - Added: circular progress ring card with inline stats
+  - Added: smart primary CTA (SRS if due, else smart suggestion by progress level)
+  - Added: 2×2 quick action grid (Kartu, Kuis, Sprint, JAC)
+  - Added: compact recent cards list (3 max, JP + translation)
+- **App.jsx**: 131 → 72 lines
+  - Removed vocabMode/activeCats/filterOpen state (filter was in Belajar tab header)
+  - Removed old ModeGrid + BELAJAR_MODES/UJIAN_MODES/LAINNYA_MODES usage from App
+  - Clean 3-tab rendering: home=Dashboard · belajar=BelajarTab · saya=SayaTab
+
 # Changelog
 
 ## [3.1.0] - 2026-04-29

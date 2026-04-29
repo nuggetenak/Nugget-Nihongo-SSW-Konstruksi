@@ -33,7 +33,7 @@ export const MODE_SECTIONS = {
   pelajari: {
     title: '📝 Pelajari',
     subtitle: 'Materi baru',
-    modes: ['kartu', 'glosari'],
+    modes: ['kartu', 'glosari', 'cari'],
   },
   latihan: {
     title: '🧪 Latihan',
