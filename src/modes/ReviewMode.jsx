@@ -28,7 +28,7 @@ export default function ReviewMode({ srs, onExit }) {
   useEffect(() => {
     if (!srs.ready) return;
     const ids = srs.getDue();
-    setQueue(ids); // eslint-disable-line react-hooks/set-state-in-effect
+    setQueue(ids);  
     setIdx(0);
     setDone(ids.length === 0);
   }, [srs.ready]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -39,7 +39,7 @@ export default function ReviewMode({ srs, onExit }) {
   // Update interval preview whenever card changes
   useEffect(() => {
     if (currentId == null) return;
-    setIntervals(srs.previewFor(currentId)); // eslint-disable-line react-hooks/set-state-in-effect
+    setIntervals(srs.previewFor(currentId));  
     setFlipped(false);
     setLast(null);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
