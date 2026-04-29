@@ -86,7 +86,7 @@ export default function FlashcardMode({
   );
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setOrder(rebuildOrder(sortMode));
     setIdx(0);
     setFlipped(false);
