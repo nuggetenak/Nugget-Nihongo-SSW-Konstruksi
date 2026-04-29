@@ -18,6 +18,7 @@ export default defineConfig({
           'data-cards': ['./src/data/cards.js'],
           'data-jac': ['./src/data/jac-official.js'],
           'data-wayground': ['./src/data/wayground-sets.js'],
+          'data-csv': ['./src/data/csv-sets.js'],
           // SRS layer — shared across ReviewMode + FlashcardMode
           'srs-engine': [
             './src/srs/fsrs-core.js',
