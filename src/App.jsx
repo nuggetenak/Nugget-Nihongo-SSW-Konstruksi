@@ -37,6 +37,8 @@ const SumberMode = lazy(() => import('./modes/SumberMode.jsx'));
 const ExportMode = lazy(() => import('./modes/ExportMode.jsx'));
 const ReviewMode = lazy(() => import('./modes/ReviewMode.jsx'));
 const VocabMode = lazy(() => import('./modes/VocabMode.jsx'));
+const SipilMode = lazy(() => import('./modes/SipilMode.jsx'));
+const BangunanMode = lazy(() => import('./modes/BangunanMode.jsx'));
 
 // ─── Onboarding ──────────────────────────────────────────────────────────────
 function Onboarding({ onComplete }) {
@@ -179,6 +181,8 @@ const UJIAN_MODES = [
   { key: 'simulasi', icon: '🎯', label: 'Simulasi', desc: 'Ujian + timer' },
   { key: 'angka', icon: '🔢', label: 'Angka Kunci', desc: 'Angka wajib hafal' },
   { key: 'jebak', icon: '⚠️', label: 'Soal Jebak', desc: 'Istilah mirip' },
+  { key: 'sipil', icon: '⛏️', label: 'Sipil · 土木', desc: 'Segera hadir' },
+  { key: 'bangunan', icon: '🏗️', label: 'Bangunan · 建築', desc: 'Segera hadir' },
 ];
 const LAINNYA_MODES = [
   { key: 'cari', icon: '🔍', label: 'Cari', desc: 'Pencarian cepat' },
@@ -493,6 +497,8 @@ export default function App() {
       jac: <JACMode onExit={exitMode} />,
       wayground: <WaygroundMode onExit={exitMode} />,
       vocab: <VocabMode onExit={exitMode} />,
+      sipil: <SipilMode onExit={exitMode} />,
+      bangunan: <BangunanMode onExit={exitMode} />,
       angka: <AngkaMode onExit={exitMode} />,
       jebak: <DangerMode onExit={exitMode} />,
       simulasi: <SimulasiMode onExit={exitMode} />,
