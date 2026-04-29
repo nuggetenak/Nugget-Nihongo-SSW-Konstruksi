@@ -8,12 +8,12 @@ import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import { CSV_SETS } from '../data/csv-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 
-const ALL_SETS = [...WAYGROUND_SETS, ...CSV_SETS];
+// Only teori/praktik sets (no wg vocab — those live in VocabMode)
+const TEORI_PRAKTIK = [...WAYGROUND_SETS.filter((s) => !s.id.startsWith('wg')), ...CSV_SETS];
 
 const GROUPS = [
   { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt' },
   { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp' },
-  { label: 'Kosakata', icon: '📖', color: '#60a5fa', prefix: 'wg' },
   { label: 'CSV Teori', icon: '📚', color: '#f59e0b', prefix: 'ct' },
   { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp' },
 ];
@@ -24,7 +24,7 @@ export default function WaygroundMode({ onExit }) {
   const [showHint, setShowHint] = useState(true);
   const [wgScores, setWgScores] = usePersistedState('ssw-wg-scores', {});
 
-  const set = ALL_SETS.find((s) => s.id === activeSet);
+  const set = TEORI_PRAKTIK.find((s) => s.id === activeSet);
 
   const questions = useMemo(() => {
     if (!set) return [];
@@ -75,7 +75,7 @@ export default function WaygroundMode({ onExit }) {
       <QuizShell
         questions={questions}
         onExit={() => setActiveSet(null)}
-        title={`${set?.title || ''}`}
+        title={set?.title || ''}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
         showHint={showHint}
@@ -85,11 +85,11 @@ export default function WaygroundMode({ onExit }) {
   }
 
   // ─── Set Picker ───────────────────────────────────────────────────────────
-  const totalSoal = ALL_SETS.reduce((n, s) => n + s.questions.length, 0);
+  const totalSoal = TEORI_PRAKTIK.reduce((n, s) => n + s.questions.length, 0);
 
   const groups = GROUPS.map((g) => ({
     ...g,
-    sets: ALL_SETS.filter((s) => s.id.startsWith(g.prefix)),
+    sets: TEORI_PRAKTIK.filter((s) => s.id.startsWith(g.prefix)),
   })).filter((g) => g.sets.length > 0);
 
   return (
@@ -110,22 +110,14 @@ export default function WaygroundMode({ onExit }) {
       </button>
       <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>Soal Teknis · Lifeline</h2>
       <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 12 }}>
-        {totalSoal} soal dalam {ALL_SETS.length} set · ライフライン・設備
+        {totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori & Praktik
       </p>
 
       {/* Toggles */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
         {[
-          {
-            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
-            active: showFuri,
-            onClick: () => setShowFuri((f) => !f),
-          },
-          {
-            label: `💡 ${showHint ? 'ON' : 'OFF'}`,
-            active: showHint,
-            onClick: () => setShowHint((f) => !f),
-          },
+          { label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
+          { label: `💡 ${showHint ? 'ON' : 'OFF'}`, active: showHint, onClick: () => setShowHint((f) => !f) },
         ].map((btn) => (
           <button
             key={btn.label}
@@ -149,38 +141,13 @@ export default function WaygroundMode({ onExit }) {
       {/* Grouped set list */}
       {groups.map((g) => (
         <div key={g.label} style={{ marginBottom: 20 }}>
-          {/* Section header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <span style={{ fontSize: 13 }}>{g.icon}</span>
-            <span
-              style={{
-                fontSize: 10,
-                fontWeight: 800,
-                color: g.color,
-                letterSpacing: 1.8,
-                textTransform: 'uppercase',
-              }}
-            >
+            <span style={{ fontSize: 10, fontWeight: 800, color: g.color, letterSpacing: 1.8, textTransform: 'uppercase' }}>
               {g.label}
             </span>
-            <div
-              style={{
-                flex: 1,
-                height: 1,
-                background: `linear-gradient(90deg,${g.color}30,transparent)`,
-              }}
-            />
-            <span
-              style={{
-                fontSize: 10,
-                color: T.textDim,
-                background: T.surface,
-                border: `1px solid ${T.border}`,
-                borderRadius: T.r.pill,
-                padding: '2px 8px',
-                fontWeight: 700,
-              }}
-            >
+            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
+            <span style={{ fontSize: 10, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, borderRadius: T.r.pill, padding: '2px 8px', fontWeight: 700 }}>
               {g.sets.length} set
             </span>
           </div>
@@ -205,38 +172,14 @@ export default function WaygroundMode({ onExit }) {
                     overflow: 'hidden',
                   }}
                 >
-                  {/* Color stripe */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      bottom: 0,
-                      width: 4,
-                      background: s.color || g.color,
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
+                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: 13, fontWeight: 700 }}>
                       {s.emoji} {s.title}
                     </span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {saved && (
-                        <span
-                          style={{
-                            fontSize: 11,
-                            fontWeight: 700,
-                            color:
-                              saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
-                          }}
-                        >
+                        <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>
                           {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
                         </span>
                       )}
@@ -244,9 +187,7 @@ export default function WaygroundMode({ onExit }) {
                     </div>
                   </div>
                   {s.subtitle && (
-                    <div
-                      style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
-                    >
+                    <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
                       {s.subtitle}
                     </div>
                   )}
@@ -261,18 +202,10 @@ export default function WaygroundMode({ onExit }) {
       <div style={{ marginTop: 8, marginBottom: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
           <span style={{ fontSize: 13 }}>🚧</span>
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 800,
-              color: T.textDim,
-              letterSpacing: 1.8,
-              textTransform: 'uppercase',
-            }}
-          >
+          <span style={{ fontSize: 10, fontWeight: 800, color: T.textDim, letterSpacing: 1.8, textTransform: 'uppercase' }}>
             Segera Hadir
           </span>
-          <div style={{ flex: 1, height: 1, background: `${T.border}` }} />
+          <div style={{ flex: 1, height: 1, background: T.border }} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {[
@@ -293,20 +226,12 @@ export default function WaygroundMode({ onExit }) {
             >
               <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: T.border }} />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: T.textMuted }}>
-                  {item.emoji} {item.label}
-                </span>
-                <span style={{
-                  fontSize: 9, fontWeight: 800, color: T.textDim,
-                  background: T.surface, border: `1px solid ${T.border}`,
-                  borderRadius: T.r.pill, padding: '2px 8px', letterSpacing: 1,
-                }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: T.textMuted }}>{item.emoji} {item.label}</span>
+                <span style={{ fontSize: 9, fontWeight: 800, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, borderRadius: T.r.pill, padding: '2px 8px', letterSpacing: 1 }}>
                   COMING SOON
                 </span>
               </div>
-              <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
-                {item.sub}
-              </div>
+              <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>{item.sub}</div>
             </div>
           ))}
         </div>
