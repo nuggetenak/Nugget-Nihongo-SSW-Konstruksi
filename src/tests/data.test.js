@@ -38,9 +38,20 @@ describe('CARDS data integrity', () => {
 
   it('all sources canonical (no old text1l/lifeline4/vocab_jac)', () => {
     const OLD = [
-      'text1l', 'text2', 'text3', 'text4', 'text5l', 'text6l', 'text7l',
-      'lifeline4', 'vocab_jac', 'vocab_core', 'vocab_exam', 'vocab_teori',
-      'tt_sample', 'st_sample_l',
+      'text1l',
+      'text2',
+      'text3',
+      'text4',
+      'text5l',
+      'text6l',
+      'text7l',
+      'lifeline4',
+      'vocab_jac',
+      'vocab_core',
+      'vocab_exam',
+      'vocab_teori',
+      'tt_sample',
+      'st_sample_l',
     ];
     expect(CARDS.filter((c) => OLD.includes(c.source)).map((c) => c.id)).toHaveLength(0);
   });
