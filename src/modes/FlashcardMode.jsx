@@ -86,7 +86,6 @@ export default function FlashcardMode({
   );
 
   useEffect(() => {
-     
     setOrder(rebuildOrder(sortMode));
     setIdx(0);
     setFlipped(false);
