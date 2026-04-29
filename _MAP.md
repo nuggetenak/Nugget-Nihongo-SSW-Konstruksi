@@ -1,638 +1,187 @@
-# 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
+# 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-04-29 by Opus (Master Blueprint v3 — arch + UX redesign)
-> **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ Phase 12 ✅ — production-ready, deployed to GitHub Pages · v3.1.0
-> **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
+> **Last updated:** 2026-04-29 by Opus
+> **Version:** v3.1.0 — production-ready, deployed to GitHub Pages
+> **Blueprint:** `docs/MASTER-BLUEPRINT-v3.md` ← **READ THIS FIRST**
 
 ---
 
 ## 1. What This App Is
 
-A React-based study tool for the **JAC SSW (Specified Skilled Worker) Construction exam** in Japan. Interface is in **Indonesian (Bahasa Indonesia)**, content is **Japanese↔Indonesian bilingual**. Targets Indonesian construction workers studying for the SSW visa exam.
+A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface in **Indonesian**, content **Japanese↔Indonesian bilingual**. Targets Indonesian construction workers studying for the SSW visa exam.
 
-### Deployment
-- **Target:** GitHub Pages — static standalone PWA, **no Claude/Anthropic dependency whatsoever**
-- **Storage:** Pure `localStorage` — no `window.storage`, no Supabase, no external auth
-- **Progress persistence:** Export/import JSON (cross-device)
-- **Live v87 (previous):** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
-- **Build:** `npm install && npm run build` → deploy `dist/`
+**Deployment:** GitHub Pages — static standalone PWA. `npm install && npm run build` → deploy `dist/`.
+**Storage:** Pure `localStorage` — **never** `window.storage`, never Supabase, never external auth.
+**Deps:** react 19, react-dom, ts-fsrs v5, Vite 6.
 
 ### Branding
-- **Parent brand:** Nugget Nihongo
-- **Product name:** SSW Konstruksi
-- **Subtitle (JP):** 土木 · 建築 · ライフライン設備
-- **In-app header:** SSW Konstruksi · by Nugget Nihongo
+- **Parent:** Nugget Nihongo · **Product:** SSW Konstruksi
+- **Subtitle:** 土木 · 建築 · ライフライン設備
 
 ### 3 Study Tracks
-| Track | JP | ID | Icon | Categories |
-|-------|----|----|------|-----------|
-| Teknik Sipil | 土木 | Jalan, jembatan, terowongan | 🏗️ | jenis_kerja, alat_umum + common |
-| Bangunan | 建築 | Gedung, bekisting, tulangan | 🏢 | jenis_kerja, alat_umum + common |
-| Lifeline & Peralatan | ライフライン・設備 | Listrik, pipa, HVAC | ⚡ | listrik, pipa, telekomunikasi, isolasi, pemadam + common |
-| **Common (共通)** | 共通 | Wajib semua jalur | 📋 | salam, hukum, keselamatan, karier |
-
-Track filtering is **fully implemented** — `CATEGORIES` has a `tracks[]` field; `getCatsForTrack(track)` returns valid category keys; `filteredCards` in App.jsx filters by track before applying pill selection.
+| Track | JP | Categories |
+|-------|----|-----------|
+| Teknik Sipil 🏗️ | 土木 | jenis_kerja, alat_umum + common |
+| Bangunan 🏢 | 建築 | jenis_kerja, alat_umum + common |
+| Lifeline ⚡ | ライフライン・設備 | listrik, pipa, telekomunikasi, isolasi, pemadam + common |
+| **Common** 📋 | 共通 | salam, hukum, keselamatan, karier (all tracks) |
 
 ---
 
-## 2. Phase History
-
-| Phase | Agent | Status | Summary |
-|-------|-------|--------|---------|
-| Phase 1 | Crispy | ✅ | Data normalization: 1438 cards, unified 0-based answer indexing, furi field filled |
-| Phase 2 | Crispy | ✅ | Vite architecture, modular 37-file structure, shared components/hooks |
-| Phase 3 | Crispy | ✅ | UX Polish: onboarding, track picker, dashboard, bottom nav, design system |
-| Phase 4 | Crunchy (QA) | ✅ | Bug fixes + SRS engine + storage layer overhaul (see §10) |
-| Phase 5 | Crunchy (QA) | ✅ | PWA: manifest, service worker, 10 icons, apple meta, offline support |
-| Phase 5.1 | Crunchy (QA) | ✅ | Icons replaced with Gemini-generated artwork; README full rewrite |
-| Phase 5.2 | Codex (Audit) | ✅ | Audit: build PASS, lazy-load all 15 modes, CHANGELOG, audit report |
-| Phase 5.3 | Claude (Bugfix) | ✅ | Bugfix pass: BottomNav dark bg, ReviewMode interval labels, async cleanup, initStore render fix, SearchMode boxSizing. Tests: 72→105. v2.3.4→v2.3.5 |
-| Phase 5.4 | Claude (Bugfix) | ✅ | HTML/PWA fixes: favicon 404, FOUC dark-flash, color-scheme meta, manifest splash color. getCatsForTrack tests. Tests: 105→111. v2.3.6 |
-| Phase 12 | Claude (VocabDB) | ✅ | Vocab DB Build: csv-sets.js (300qs, 12 sets), wayground wg7/wg8 completed (46+45qs), Coming Soon badges for Sipil & Bangunan |
-
----
-
-## 3. Directory Structure
+## 2. Directory Structure
 
 ```
 Nugget-Nihongo-SSW-Konstruksi/
-├── _MAP.md                         ← YOU ARE HERE
-├── CHANGELOG.md                    ← Versioned changelog (start: v2.3.1)
+├── _MAP.md                      ← YOU ARE HERE
+├── CHANGELOG.md
 ├── README.md
-├── index.html                      ← Vite entry point
-├── package.json                    ← deps: react, react-dom, vite, ts-fsrs
-├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/
-├── public/                         ← ★ NEW (Phase 5)
-│   ├── manifest.webmanifest            ← PWA manifest
-│   ├── sw.js                           ← Service worker (cache-first + offline)
-│   ├── favicon.ico                     ← multi-size (16/32/48)
-│   ├── favicon.png                     ← 32px fallback
-│   └── icons/                          ← Gemini artwork, 72–512px + apple-touch                          ← 10 PNG icons (72–512, apple-touch)
+├── index.html                   ← Vite entry
+├── package.json                 ← react, react-dom, vite, ts-fsrs
+├── vite.config.js               ← base: /Nugget-Nihongo-SSW-Konstruksi/
+├── public/
+│   ├── manifest.webmanifest     ← PWA manifest
+│   ├── sw.js                    ← Service worker (bump CACHE_VERSION on deploy!)
+│   ├── favicon.ico / .png
+│   └── icons/                   ← 72–512px PNGs + apple-touch
 ├── docs/
-│   ├── AUDIT-2026-04-28.md        ← Codex audit pass 1
-│   ├── AUDIT-2026-04-28-PASS2.md  ← Codex audit pass 2 (integrity + chunking)
-│   ├── AUDIT-2026-04-28-PASS3.md  ← Claude audit pass 3 (debug-to-deploy)
-│   ├── PROPOSAL.md
-│   └── id-mapping-v87-to-v90.json
+│   ├── MASTER-BLUEPRINT-v3.md   ← ★ ACTIVE — architecture + UI/UX redesign plan
+│   └── archive/                 ← Old proposals, audits, mappings (reference only)
 ├── scripts/
-│   └── phase1_normalize.py
+│   └── phase1_normalize.py      ← historical
 ├── legacy/
-│   └── ssw_flashcards_v87.jsx      ← reference only
+│   └── ssw_flashcards_v87.jsx   ← reference only
 │
 └── src/
     ├── main.jsx
-    ├── App.jsx                     ← v2.3.1: + React.lazy() for all 15 modes (Codex); v2.3.2: manualChunks perf
-    │
+    ├── App.jsx                  ← 668 lines (to be decomposed per Blueprint Phase 1)
     ├── data/
-    │   ├── index.js                ← barrel + derived constants
-    │   ├── cards.js                ← CARDS[1438]
-    │   ├── jac-official.js         ← JAC_OFFICIAL[~95]
-    │   ├── wayground-sets.js       ← WAYGROUND_SETS[12]
+    │   ├── index.js             ← barrel (to be removed per Blueprint §A4)
+    │   ├── cards.js             ← CARDS[1438]
+    │   ├── jac-official.js      ← JAC_OFFICIAL[~95 questions]
+    │   ├── wayground-sets.js    ← WAYGROUND_SETS[12 sets]
+    │   ├── csv-sets.js          ← CSV_SETS[12 sets, 300 questions]
     │   ├── angka-kunci.js
     │   ├── danger-pairs.js
-    │   └── categories.js           ← CATEGORIES (with tracks[]), SOURCE_META (canonical keys), getCatsForTrack()
-    │
-    ├── srs/                        ← ★ NEW — SRS engine (Phase 4)
-    │   ├── index.js                ← barrel export
-    │   ├── fsrs-core.js            ← Layer 1: pure FSRS math, ts-fsrs wrapper, Indonesian calibration
-    │   ├── fsrs-store.js           ← Layer 2: localStorage cache (load-once → write-through)
-    │   └── fsrs-scheduler.js       ← Layer 3: business logic (due queue, stats, review recording)
-    │
-    ├── modes/
-    │   ├── FlashcardMode.jsx       ← updated: 4-button FSRS rating after flip
-    │   ├── ReviewMode.jsx          ← ★ NEW: dedicated SRS due queue mode
-    │   ├── ExportMode.jsx          ← updated: SRS snapshot included, pure localStorage
-    │   ├── QuizMode.jsx
-    │   ├── JACMode.jsx
-    │   ├── WaygroundMode.jsx
-    │   ├── AngkaMode.jsx
-    │   ├── DangerMode.jsx
-    │   ├── SimulasiMode.jsx
-    │   ├── SprintMode.jsx
-    │   ├── FocusMode.jsx
-    │   ├── StatsMode.jsx
-    │   ├── SearchMode.jsx
-    │   ├── GlossaryMode.jsx
-    │   └── SumberMode.jsx
-    │
-    ├── components/
-    │   ├── Dashboard.jsx           ← updated: SRS due count CTA, strength badges
-    │   ├── TrackPicker.jsx
-    │   ├── BottomNav.jsx
-    │   ├── QuizShell.jsx
-    │   ├── ResultScreen.jsx
-    │   ├── OptionButton.jsx
-    │   ├── ProgressBar.jsx
-    │   └── JpDisplay.jsx
-    │
-    ├── hooks/
-    │   ├── index.js                ← barrel (includes useSRS)
-    │   ├── usePersistedState.js    ← updated: sync localStorage init, no async flash
-    │   ├── useSRS.js               ← ★ NEW: React hook for SRS engine
-    │   ├── useQuizKeyboard.js
-    │   └── useStreak.js
-    │
-    ├── utils/
+    │   └── categories.js        ← CATEGORIES, SOURCE_META, getCatsForTrack()
+    ├── srs/
     │   ├── index.js
-    │   ├── wrong-tracker.js        ← updated: pure localStorage, no window.storage
-    │   ├── shuffle.js
-    │   ├── jp-helpers.js
+    │   ├── fsrs-core.js         ← Pure FSRS math (ts-fsrs wrapper)
+    │   ├── fsrs-store.js        ← localStorage cache (to be replaced per Blueprint §A1)
+    │   └── fsrs-scheduler.js    ← Due queue, stats, review recording
+    ├── modes/                   ← 18 modes, all React.lazy()
+    │   ├── FlashcardMode.jsx    ├── ReviewMode.jsx
+    │   ├── QuizMode.jsx         ├── JACMode.jsx
+    │   ├── WaygroundMode.jsx    ├── VocabMode.jsx
+    │   ├── SimulasiMode.jsx     ├── AngkaMode.jsx
+    │   ├── DangerMode.jsx       ├── SprintMode.jsx
+    │   ├── FocusMode.jsx        ├── StatsMode.jsx
+    │   ├── SearchMode.jsx       ├── GlossaryMode.jsx
+    │   ├── SumberMode.jsx       ├── ExportMode.jsx
+    │   ├── SipilMode.jsx        └── BangunanMode.jsx
+    ├── components/
+    │   ├── Dashboard.jsx        ├── TrackPicker.jsx
+    │   ├── BottomNav.jsx        ├── QuizShell.jsx
+    │   ├── ResultScreen.jsx     ├── OptionButton.jsx
+    │   ├── ProgressBar.jsx      ├── JpDisplay.jsx
+    │   ├── FilterPopup.jsx      ├── EmptyState.jsx
+    │   ├── ConfirmDialog.jsx    └── Toast.jsx
+    ├── hooks/
+    │   ├── index.js             ├── usePersistedState.js
+    │   ├── useSRS.js            ├── useQuizKeyboard.js
+    │   └── useStreak.js
+    ├── utils/
+    │   ├── index.js             ├── wrong-tracker.js
+    │   ├── shuffle.js           ├── jp-helpers.js
     │   └── quiz-generator.js
-    │
     └── styles/
-        └── theme.js                ← T tokens + T.track[key]
+        └── theme.js             ← T tokens, CSS vars, light/dark themes
 ```
 
 ---
 
-## 4. Data Schemas
+## 3. Data Schemas
 
-### 4.1 CARDS
+### CARDS
 ```js
-{
-  id: 42,                    // numeric, sequential 1–1438, no gaps
-  category: "listrik",       // see CATEGORIES
-  source: "jac-ch5",         // canonical key (see SOURCE_META)
-  furi: "せっちぼう",
-  jp: "接地棒",
-  romaji: "secchibou",
-  id_text: "Batang pentanahan",
-  desc: "Batang yang didorong..."
-}
+{ id: 42, category: "listrik", source: "jac-ch5", furi: "せっちぼう",
+  jp: "接地棒", romaji: "secchibou", id_text: "Batang pentanahan", desc: "..." }
 ```
+12 categories: salam, hukum, jenis_kerja, listrik, telekomunikasi, pipa, isolasi, pemadam, keselamatan, karier, alat_umum, bintang. IDs sequential 1–1438.
 
-**12 categories:** salam, hukum, jenis_kerja, listrik, telekomunikasi, pipa, isolasi, pemadam, keselamatan, karier, alat_umum, bintang
+### Question Sets (JAC, Wayground, CSV)
+All use **0-based answer indexing**. See individual data files for schema details.
 
-**Track assignment per category:**
-- Common (all tracks): salam, hukum, keselamatan, karier
-- doboku + kenchiku: jenis_kerja, alat_umum
-- lifeline only: listrik, telekomunikasi, pipa, isolasi, pemadam
-
-### 4.2 JAC_OFFICIAL & WAYGROUND_SETS
-See previous _MAP.md sections — schemas unchanged. Answer indexing unified to **0-based** in Phase 1.
-
-### 4.3 SRS Card Entry (localStorage: `ssw-srs-{cardId}`)
+### SRS Card Entry (`ssw-srs-{cardId}`)
 ```js
-{
-  card: {
-    due: "2026-05-01T00:00:00.000Z",  // ISO string
-    stability: 4.2,                    // FSRS stability (days)
-    difficulty: 5.0,                   // FSRS difficulty 1–10
-    elapsed_days: 0,
-    scheduled_days: 4,
-    reps: 3,
-    lapses: 0,
-    state: 2,                          // 0=New 1=Learning 2=Review 3=Relearning
-    last_review: "2026-04-28T..."
-  },
-  history: [                           // last 20 reviews
-    { date: "2026-04-28T...", rating: 3 }
-  ],
-  reviewed_at: "2026-04-28T..."
-}
+{ card: { due, stability, difficulty, state, reps, lapses, ... },
+  history: [{ date, rating }], reviewed_at: "ISO" }
+```
+FSRS ratings: 1=Again, 2=Hard, 3=Good, 4=Easy.
+
+---
+
+## 4. Storage Keys (Current — to be consolidated per Blueprint §A1)
+
+| Key Pattern | Content |
+|-------------|---------|
+| `ssw-known`, `ssw-unknown`, `ssw-starred` | Card ID arrays |
+| `ssw-track`, `ssw-theme`, `ssw-onboarded` | Single values |
+| `ssw-quiz-wrong`, `ssw-wrong-counts` | Wrong-count maps |
+| `ssw-wg-wrong-{id}`, `ssw-vocab-wrong-{id}` | Per-set wrong counts |
+| `ssw-jac-scores`, `ssw-wg-scores`, `ssw-vocab-scores` | Score maps |
+| `ssw-srs-{cardId}` | **1 key per card** (1438+ keys — to be unified) |
+| `ssw-study-streak`, `ssw-daily-count`, `ssw-recent` | Dashboard data |
+| `ssw-last-mode`, `ssw-tutorial-flashcard` | UI state |
+
+---
+
+## 5. SRS Architecture
+
+```
+fsrs-core.js       — Pure math. ts-fsrs wrapper. Zero app dependencies.
+fsrs-store.js      — localStorage adapter. Load-once → in-memory cache → write-through.
+fsrs-scheduler.js  — recordReview(), getDueCardIds(), getSRSStats(), previewIntervals().
+useSRS.js          — React hook. Synchronous init. Exposes dueCount + stats.
 ```
 
----
-
-## 5. SRS Architecture (Phase 4)
-
-### Layer model
-```
-fsrs-core.js       — Pure math. ts-fsrs wrapper. RATING_META. Indonesian calibration stub.
-                     Zero app dependencies. Copy to main project as-is.
-fsrs-store.js      — localStorage adapter. Load-once init → in-memory cache → write-through.
-                     Synchronous. Key prefix: ssw-srs-{cardId}.
-fsrs-scheduler.js  — Business logic. recordReview(), getDueCardIds(), getSRSStats(),
-                     previewIntervals(). All synchronous.
-useSRS.js          — React hook. Calls initStore() synchronously. Exposes reactive
-                     dueCount + stats via forceRender after each review.
-```
-
-### FSRS Rating buttons
-| Button | Rating | Meaning | Maps to known/unknown |
-|--------|--------|---------|----------------------|
-| 🔴 Lagi  | 1 (Again) | Completely forgot | → unknown |
-| 🟠 Susah | 2 (Hard)  | Recalled with difficulty | → known |
-| 🟢 Oke   | 3 (Good)  | Recalled correctly | → known |
-| 💎 Mudah | 4 (Easy)  | Recalled perfectly | → known |
-
-### FlashcardMode UX flow
-1. Card shows front (JP text)
-2. User taps → back revealed (ID translation + desc)
-3. 4 FSRS rating buttons appear with interval preview hints
-4. On rating → SRS recorded + known/unknown updated + auto-advance
-
-### ReviewMode
-- Shows only cards due today (from `getDueCardIds()`)
-- Sorted by urgency (lowest retrievability R first)
-- Must flip before rating buttons activate
-- Keyboard: Space/Enter = flip; 1/2/3/4 = rate
-- Completion screen shows session stats
+FSRS buttons: 🔴 Lagi (Again) · 🟠 Susah (Hard) · 🟢 Oke (Good) · 💎 Mudah (Easy)
 
 ---
 
-## 6. Storage Architecture
+## 6. Agent Instructions
 
-**All storage is pure `localStorage`. No window.storage. No external services.**
-
-| localStorage key | Owner | Format | Content |
-|-----------------|-------|--------|---------|
-| `ssw-known` | App | `[cardId, ...]` | Cards marked known |
-| `ssw-unknown` | App | `[cardId, ...]` | Cards marked unknown |
-| `ssw-starred` | App | `[cardId, ...]` | Starred cards |
-| `ssw-track` | App | `"doboku"` \| `"kenchiku"` \| `"lifeline"` | Selected track |
-| `ssw-quiz-wrong` | QuizMode | `{cardId: {count, lastWrong}}` | Wrong counts |
-| `ssw-wrong-counts` | JACMode | `{qId: {count, lastWrong}}` | JAC wrong counts |
-| `ssw-wg-wrong-{setId}` | WaygroundMode | `{qIdx: {count, lastWrong}}` | Wayground wrong |
-| `ssw-srs-{cardId}` | fsrs-store | SRS card entry (see §4.3) | FSRS card data |
-| `ssw-onboarded` | App | `"1"` | Onboarding complete flag |
-
-**usePersistedState** initializes synchronously from localStorage — no loading flash, no async effect.
-
----
-
-## 7. Mode Index
-
-| Mode key | File | Entry point | Notes |
-|----------|------|-------------|-------|
-| `ulasan` | ReviewMode.jsx | Belajar tab | ★ NEW — SRS due queue |
-| `kartu` | FlashcardMode.jsx | Belajar tab | Updated: 4-button FSRS |
-| `kuis` | QuizMode.jsx | Belajar tab | |
-| `sprint` | SprintMode.jsx | Belajar tab | |
-| `fokus` | FocusMode.jsx | Belajar tab | |
-| `jac` | JACMode.jsx | Ujian tab | |
-| `wayground` | WaygroundMode.jsx | Ujian tab | |
-| `simulasi` | SimulasiMode.jsx | Ujian tab | |
-| `angka` | AngkaMode.jsx | Ujian tab | |
-| `jebak` | DangerMode.jsx | Ujian tab | |
-| `cari` | SearchMode.jsx | Lainnya tab | |
-| `glosari` | GlossaryMode.jsx | Lainnya tab | |
-| `sumber` | SumberMode.jsx | Lainnya tab | SOURCE_META now uses canonical keys |
-| `stats` | StatsMode.jsx | Lainnya tab | |
-| `ekspor` | ExportMode.jsx | Lainnya tab | Updated: includes SRS snapshot |
-
----
-
-## 8. Known Issues & TODO
-
-### ✅ Resolved (Phase 4 / Crunchy QA)
-- [x] `SOURCE_META` used old source keys → `SumberMode` rendered blank list
-- [x] Track filtering was cosmetic only → cards not actually filtered by track
-- [x] `CATEGORIES` had no `tracks[]` field
-- [x] All storage used `window.storage` (Claude-only) → broken on GitHub Pages
-- [x] `usePersistedState` had async flash of default value before storage loaded
-- [x] No SRS system — only binary known/unknown
-- [x] Export/import didn't include SRS data
-
-### 🟡 Open / Future
-- [ ] Per-card track tagging for jenis_kerja + alat_umum (currently category-level only)
-- [x] PWA manifest + service worker ✅ Phase 5
-- [ ] Breadcrumb navigation in nested modes
-- [ ] Study plan mode (4-week guided)
-- [ ] Data splitting: dynamic import cards.js per track (Codex rec — reduce initial bundle)
-- [ ] ESLint + Prettier + CI checks (Codex rec)
-- [ ] Smoke tests UI minimal — Playwright/Vitest (Codex rec)
-- [ ] SRS difficulty calibration for Indonesian learners (needs 10K+ review events — see `INDONESIAN_CALIBRATION` in fsrs-core.js)
-- [ ] Card images for tool recognition questions
-
----
-
-## 9. Agent Instructions
-
-### ⚠️ Codex Audit Notes (Phase 5.2)
-- All 15 modes are now `React.lazy()` — wrapped in `<Suspense fallback={<ModeLoadingFallback/>}>` in App.jsx
-- Do NOT revert to static imports — lazy loading is intentional for bundle size
-- `modeMap` still constructs JSX for all modes per render — this is safe (lazy chunks only download when rendered)
-- `npm run audit:baseline` = `npm run build` — use for quick build health check
-- Formal audit report: `docs/AUDIT-2026-04-28.md`
-
-### ⚠️ Crispy / Integrator Sync Notes (Phase 4–5)
-These changes affect integration — Crispy must be aware:
-
-- **`package.json`** has new dep: `ts-fsrs: ^5.0.0` → run `npm install` before building
-- **`src/srs/`** is a new directory — 4 files, do not delete
-- **`usePersistedState`** return signature changed: now returns `[value, setter]` (2-tuple, no `ready` flag) — if any code destructures 3 values, fix it
-- **`wrong-tracker.js`** functions are now synchronous — remove any `await loadFromStorage(...)` / `await saveToStorage(...)` in existing code
-- **`window.storage`** is completely removed — never use it, never add it back
-- **`Dashboard`** now accepts a `srs` prop — pass `srs` from `useSRS()` hook
-- **Mode `ulasan`** → `ReviewMode` — requires `srs` prop
-- **`public/`** is now populated — do not clear or gitignore it
-
-### When Starting a New Session
-1. Read this `_MAP.md` first
-2. Read `docs/MASTER-BLUEPRINT-v3.md` for the full architecture + UX redesign plan
-3. Check `docs/REFACTOR-PROPOSAL-v2.md` for architecture detail
-4. **Do not use `window.storage`** — this app is GitHub Pages only, pure localStorage
-5. Test storage with: `localStorage.getItem('ssw-known')` in browser devtools
+### ⚠️ Before Starting Any Work
+1. **Read `docs/MASTER-BLUEPRINT-v3.md`** — the active architecture + UX redesign plan
+2. Read this `_MAP.md` for current state reference
+3. **Never use `window.storage`** — pure localStorage only
+4. **Never revert `React.lazy()`** — all 18 modes must stay lazy-loaded
+5. Run `npm install && npm run build` to verify build health before and after changes
+6. Run `npm test` — all 111 tests must pass
 
 ### Code Conventions
-- **Language:** Indonesian for UI text; English for code comments
-- **Git identity:** use your agent name (e.g., `Crispy`, `Crunchy`, `Golden`)
-- **Commit style:** `type(scope): description`
-- **Storage:** always `localStorage` — never `window.storage`, never Supabase
-- **SRS:** import from `../srs/index.js` or direct layer file; never call ts-fsrs directly from components
+- **UI language:** Indonesian · **Code comments:** English
+- **Git identity:** Use your agent name (e.g., `Crispy`, `Sonnet`, `Opus`)
+- **Commits:** `type(scope): description` (e.g., `feat(storage): add 3-document engine`)
+- **SRS imports:** From `../srs/index.js` or direct layer file — never call ts-fsrs directly
+- **Storage:** Always `localStorage` — never `window.storage`, never Supabase
 
-### SRS Extension Points
-- Custom FSRS parameters → `configureFSRS()` in `fsrs-core.js`
-- Indonesian calibration → `INDONESIAN_CALIBRATION` stub in `fsrs-core.js`
-- Add new storage keys → add to `STORAGE_KEYS` in `wrong-tracker.js` and document in §6
-
-### Working with Data Files
-- `src/data/cards.js` is 1,600+ lines — don't re-read unless necessary
-- When adding cards: use next ID after current max
-- `getCatsForTrack(track)` → returns category keys for a given track key
+### SW Cache Versioning
+Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates this via CI/CD.
 
 ---
 
-## 10. Phase 4 Changelog (Crunchy QA — 2026-04-28)
+## 7. Current Metrics
 
-### Fix 1 — `src/data/categories.js`
-- `SOURCE_META` remapped from old keys (`text1l`, `tt_sample`, `lifeline4`) to canonical keys (`jac-ch1`, `jac-gakka1`, `vocab-lifeline`, etc.)
-- Added `tracks[]` field to every `CATEGORIES` entry
-- Added `getCatsForTrack(track)` helper
-
-### Fix 2 — `src/App.jsx`
-- `filteredCards` now filters by track category set first, then by active pill selection
-- Category pills only show categories valid for the current track
-- Added `useSRS(trackCardIds)` hook
-- Added `ReviewMode` to modeMap
-- Added `ulasan` to BELAJAR_MODES with live due count badge
-- `ModeGrid` accepts `badges` prop for numeric badge on any mode tile
-
-### Fix 3 — `src/modes/ExportMode.jsx`
-- Export/import progress JSON (known/unknown, wrong counts, track, SRS data)
-- Added to Lainnya tab
-
-### Phase 4 — SRS Engine (`src/srs/`)
-- `fsrs-core.js` — pure FSRS math layer (ts-fsrs v5 wrapper, `RATING_META`, Indonesian calibration stub)
-- `fsrs-store.js` — localStorage adapter, in-memory cache, write-through
-- `fsrs-scheduler.js` — due queue, stats, review recording, interval preview
-- `src/hooks/useSRS.js` — React hook, synchronous init, reactive dueCount
-
-### Phase 4 — Storage Overhaul
-- `wrong-tracker.js` — pure localStorage, synchronous
-- `usePersistedState.js` — synchronous init, no async flash, no `ready` flag
-- `fsrs-store.js` — pure localStorage, no window.storage
-- `ExportMode.jsx` — pure localStorage, removed `__ls__` hack
-- **Eliminated all `window.storage` references** across entire codebase
-
-### New Files
-- `src/srs/fsrs-core.js`
-- `src/srs/fsrs-store.js`
-- `src/srs/fsrs-scheduler.js`
-- `src/srs/index.js`
-- `src/hooks/useSRS.js`
-- `src/modes/ReviewMode.jsx`
-
-### Updated Files
-- `src/data/categories.js`
-- `src/utils/wrong-tracker.js`
-- `src/hooks/usePersistedState.js`
-- `src/hooks/index.js`
-- `src/App.jsx`
-- `src/modes/FlashcardMode.jsx`
-- `src/modes/ExportMode.jsx`
-- `src/components/Dashboard.jsx`
-- `package.json` (added `ts-fsrs: ^5.0.0`)
+| Metric | Value | Blueprint Target |
+|--------|-------|-----------------|
+| Source lines | 19,646 | — |
+| Inline styles | 822 | 0 (CSS Modules) |
+| localStorage key patterns | 20+ | 3 documents |
+| App.jsx | 668 lines | ~150 lines |
+| ErrorBoundary count | 0 | All 18 modes wrapped |
+| Tests | 111 | ~170+ |
+| CI/CD | none | GitHub Actions auto-deploy |
 
 ---
 
-
-
-## 11. Phase 5 Changelog (Crunchy QA — 2026-04-28)
-
-### PWA Files Added
-
-**`public/manifest.webmanifest`** — `display: standalone`, full icon set 72–512px with `maskable` purpose, 2 shortcuts (Kartu + Ulasan SRS), correct GH Pages `start_url`/`scope`.
-
-**`public/sw.js`** — Cache-First for static assets + Google Fonts; Network-First for HTML navigation; offline fallback serves cached `index.html`; `skipWaiting()` + `clients.claim()` for immediate activation.
-
-**`index.html`** — manifest link, apple-mobile-web-app meta, og tags, `color-scheme: dark`, `overscroll-behavior: none`, inline SW registration + `reg.update()` on every load.
-
-**`public/icons/`** — 10 PNG icons: 72, 96, 128, 144, 152, 180, 192, 384, 512px + apple-touch-icon. Hard hat design, amber on dark.
-
-### ⚠️ Cache Versioning for Deployments
-Bump `CACHE_VERSION` in `public/sw.js` on every deploy:
-```js
-const CACHE_VERSION = 'ssw-v2'; // increment each deploy
-```
-This forces old SW to delete stale caches so users always get fresh assets.
-
-
----
-
-
-## 12. Phase 5.1 Changelog (Crunchy QA — 2026-04-28)
-
-### Icon Replacement
-All placeholder icons replaced with Gemini-generated artwork:
-- **Design:** Hard hat (ヘルメット) with amber body, brown stripe, scaffold-style "N" badge
-- **Processed:** watermark removed, cropped, resized to all required sizes
-- **Files:** `icon-72` through `icon-512`, `apple-touch-icon.png`, `favicon.png`, `favicon.ico` (multi-size 16/32/48)
-
-### README.md — Full Rewrite
-Previous README was v87-era (outdated). Now reflects:
-- Current feature set (SRS, 15 modes, 3 tracks, PWA)
-- Install instructions (Add to Home Screen)
-- SRS rating table
-- Export/import workflow
-- Deployment instructions (including cache versioning reminder)
-- Updated credit section (Crispy + Crunchy)
-
-
----
-
-
-## 13. Phase 5.2 Changelog (Codex Audit — 2026-04-28)
-
-### Audit Results
-- **Build:** PASS (no compile errors)
-- **Bundle:** ~1.4MB single chunk before fix — HIGH risk on low-end devices
-- **Source hygiene:** GOOD — no TODO/FIXME/console.log found
-- **Docs:** GAP — no formal audit trail or changelog (now fixed)
-
-### Changes Applied by Codex
-
-**`src/App.jsx`** — All 15 mode imports converted to `React.lazy()`:
-```js
-// Before
-import FlashcardMode from './modes/FlashcardMode.jsx';
-// After
-const FlashcardMode = lazy(() => import('./modes/FlashcardMode.jsx'));
-```
-Mode render wrapped in `<Suspense fallback={<ModeLoadingFallback/>}>`.
-Added `ModeLoadingFallback` component (centered spinner text).
-
-**`package.json`** — version bumped to `2.3.1`; added `audit:baseline` script.
-
-**`CHANGELOG.md`** — New file, versioned changelog starting at v2.3.1.
-
-**`docs/AUDIT-2026-04-28.md`** — Formal audit report (build, perf, hygiene, remediation).
-
-### Codex Backlog Recommendations (not yet implemented)
-1. Dynamic import `cards.js` per track — further reduce initial payload
-2. ESLint + Prettier + CI pipeline
-3. Smoke tests (Playwright or Vitest)
-4. JSON data splitting/compression
-
-
----
-
-*End of _MAP.md — Last updated 2026-04-28 by Crunchy + Codex (Phase 5.2)*
-
----
-
-## 11. UX/UI Overhaul Proposal (v3.0 roadmap)
-
-**Document:** `docs/UX-OVERHAUL-PROPOSAL.md` (v1, 2026-04-28, by Crispy/Opus 4.7)
-
-Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular architecture. 8 phases (A→H), ~23 sessions of work for Sonnet to execute. Read the proposal IN FULL before starting any phase.
-
-**Quick links inside proposal:**
-- Gap analysis (current vs v90)
-- Design principles (P1-P8)
-- Component library spec (10 primitives)
-- Screen-by-screen specs (Dashboard, Flashcard, Quiz, etc)
-- Phase plan with acceptance criteria
-- Open questions for Nugget (Q1-Q10)
-
----
-
-## 12. v3.0 Phase 1–3 Execution Log (2026-04-28)
-
-**Executed by:** Crispy (Claude Sonnet 4.6)
-**Status:** Phases 1–3 complete and pushed to `main`.
-
-### What changed
-- `src/components/JpDisplay.jsx` — Smart JpFront (4 layouts) + DescBlock (3 render modes)
-- `src/modes/FlashcardMode.jsx` — Full v87 feature restore: search, star, tools row, stats, flip gradient, smart text
-- `src/modes/QuizMode.jsx` — Quiz count, lemah mode, anti-repeat, settings, configurable auto-next
-- `src/components/QuizShell.jsx` — `autoNextDelay` prop, manual mode support
-- `src/App.jsx` — `starredArr`, `starredSet`, `toggleStar`; passed to FlashcardMode
-- `src/styles/theme.js` — light/dark CSS vars (from Phase 5.3, not changed here)
-
-### Remaining phases
-- Phase 4: JACMode + WaygroundMode + SimulasiMode restore
-- Phase 5: DangerMode + AngkaMode polish
-- Phase 6: Category filter popup + star system on filter
-- Phase 7: Dashboard overhaul
-- Phase 8: Empty states + animations
-- Phase 9: Beginner UX
-- Phase 10: QA + release
-
-### UX Overhaul progress
-| UX Phase | Status | Summary |
-|----------|--------|---------|
-| 1 — Smart Text (JpFront + DescBlock) | ✅ | v87 smart layouts + DescBlock parser |
-| 2 — FlashcardMode restore | ✅ | Search, star, stats row, tools row, FSRS binary+longpress |
-| 3 — QuizMode restore | ✅ | Count selector, lemah mode, anti-repeat, settings, after-answer reveal |
-| 4 — JAC + Wayground + Simulasi | ✅ | See §14 below |
-| 5 — DangerMode + AngkaMode | ✅ | Browse panel + standalone quiz + after-answer reveal |
-| 6 — Filter popup + Star + App UX | ✅ | FilterPopup, last-mode persist, materi toggle with counts |
-| 7 — Dashboard overhaul | ✅ | Stats bar, Quick Start CTA, mode tiles+times, streak, daily, recently studied |
-| 8 — Visual polish + empty states | ✅ | Toast/Confirm providers, empty states Review/Focus/Search, reduced-motion |
-| 9 — Beginner UX | ✅ | Tutorial overlay, ⓘ tooltips, starter pack, milestone toasts |
-| 10 — QA + release | ✅ | 111/111 tests, lint clean, build clean, CHANGELOG + _MAP updated |
-
-### ✅ UX Overhaul v3.0 COMPLETE — all 10 phases shipped
-
-**Next steps (optional):**
-- Phase 11: GlossaryMode A-Z nav (missing from proposal)
-- SRS ReviewMode: flip-animation card (3D rotateY)
-- Vocab DB (N1–N5 from Soumatome) — see userMemories for spec
-
----
-
-## 14. UX Overhaul Phase 4 Changelog (2026-04-28)
-
-### QuizShell
-- Added `onFinish({ correct, total, maxStreak })` callback prop (fires via useEffect on 'finished')
-
-### JACMode
-- **Lemah mode**: filter + sort by wrong-count from `ssw-wrong-counts`; empty state if none
-- **Score tracking**: `ssw-jac-scores` localStorage — `{setKey: {score,total,pct,date}}`
-- **Last score badge**: color-coded pct shown on each set card (green ≥70, amber ≥50, red <50)
-- **Auto-delay setting**: 1s / 1.5s / 2s / Manual — passed to QuizShell as `autoNextDelay`
-
-### WaygroundMode
-- **Score + maxStreak tracking**: `ssw-wg-scores` — `{setId: {score,total,pct,maxStreak,date}}`
-- **Last score badge**: pct + 🔥maxStreak shown on each set card
-- **Color stripe**: left-border accent per set, grouped section headers with divider lines
-
-### SimulasiMode (fully standalone — no QuizShell)
-- **Pre-start screen**: instructions + 3 preset cards (emoji + label + sub)
-- **BIG countdown timer**: 24px bold in header box, pulses red when <60s
-- **Auto-advance**: 1.5s after answering; also manual "Lanjut →" button
-- **Auto-finish**: timer hits 0 → phase = 'result'
-- **Options shuffled**: shuffle per question, origIdx tracked for correct-answer check
-- **LULUS / BELUM LULUS result**: 65% threshold, progress bar, large bold verdict
-- **Wrong answer review**: JP + ID + ✗ user answer + ✓ correct + explanation
-
-
-
----
-
-## 15. Phase 11 Changelog (Claude — 2026-04-28)
-
-### GlossaryMode A-Z Navigation (`src/modes/GlossaryMode.jsx`)
-
-**Sticky nav strip**
-- Horizontal scrollable bar with all hiragana first-chars present in current dataset
-- Sticks to top (z-index 20) — `position: sticky; top: 0`
-- Auto-scrolls to keep active pill centered on scroll
-
-**Jump-to-section**
-- Section divs use `data-letter` + `sectionRefs`
-- Tap pill → `window.scrollTo()` with 52px offset for sticky strip height
-
-**Active letter tracking**
-- IntersectionObserver on each section (`threshold: 0.05, rootMargin: -10%/-75%`)
-- Topmost visible section sets `activeLetter`
-- Active pill: amber bg + gold text + border
-
-**UI improvements**
-- Section headers: large gold hiragana + count badge
-- Category filter pills: show count inline when active
-- Expanded card: furi (amber) + romaji (italic) + desc + source tag
-- Category emoji in collapsed row
-- `fadeIn` animation on expand
-- Filter change resets expanded + activeLetter
-
-**Version:** v3.0.1
-
----
-
-## 16. Master Blueprint v3 — Architecture + UI/UX Redesign (2026-04-29)
-
-**Document:** `docs/MASTER-BLUEPRINT-v3.md` (by Opus 4.6)
-**Companion:** `docs/REFACTOR-PROPOSAL-v2.md` (architecture detail)
-
-**⚠️ READ BOTH DOCUMENTS IN FULL BEFORE STARTING ANY PHASE.**
-
-Comprehensive blueprint covering:
-
-### Part I — Architecture Refactor (7 pillars)
-1. **Storage Engine** — 3-document model replacing 20+ fragmented localStorage keys (including 1438 SRS per-card keys). Auto-migration from v1→v2. Cold start ~300ms → <20ms.
-2. **App.jsx Decomposition** — 668 lines → ~150 lines via Context (ProgressContext, SRSContext, AppContext) + ModeRouter + single `modes.js` registry.
-3. **CSS Modules** — 822 inline styles → 0. Zero-runtime CSS Modules with existing CSS variables.
-4. **Data Splitting** — Remove barrel re-export anti-pattern. Lazy-load cards per track. csv-sets.js (3998 lines) only loads when VocabMode opens.
-5. **Error Boundaries** — Wrapping all 18 lazy-loaded modes. Currently zero error handling.
-6. **CI/CD** — GitHub Actions auto-deploy + auto SW cache versioning.
-7. **Testing** — Storage, component, and hook tests (currently only data/utils tested).
-
-### Part II — UI/UX Redesign (12 sections, B1–B12)
-- **B1: Navigation** — 4 tabs → 3 tabs (Beranda, Belajar, Saya). Modes grouped by intent.
-- **B2: Onboarding** — Interactive (mini flashcard demo + goal setting) instead of static slides.
-- **B3: Dashboard** — Circular progress ring, streak hero, "one screen one action" principle.
-- **B4: Flashcard** — 3D flip animation, FSRS always visible (not long-press), swipe feedback, merge binary known/unknown into FSRS rating.
-- **B5: Quiz Shell** — Mode-specific accent colors, all options show JP+ID after answer, explanation slide-up.
-- **B6: Result Screen** — Two emotional paths (celebrate vs encourage). Score history mini-chart. Weakness analysis with direct links.
-- **B7: Micro-interactions** — Full animation spec table (14 interactions, all with prefers-reduced-motion).
-- **B8: Typography** — 10-step font scale from 9px–32px.
-- **B9: Colors** — Semantic color tokens (success/error/warning/info/srs/grade).
-- **B10: Loading & Empty** — Skeleton shimmer, 5 contextual empty states.
-- **B11: Settings** — Saya tab with preferences, data export, reset with 3-second safety countdown.
-- **B12: Accessibility** — aria-labels, focus management, color contrast, 44px touch targets.
-
-### Execution: 10 phases, ~13-16 sessions
-All decisions are final. No need to ask Nugget unless blocking issue.
+*For historical changelogs (Phases 1–15), see `docs/archive/` and `CHANGELOG.md`.*
