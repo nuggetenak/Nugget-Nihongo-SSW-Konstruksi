@@ -17,13 +17,13 @@ export default function SprintMode({ cards, onExit }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
-    setOrder(shuffle(cards)); // eslint-disable-line react-hooks/set-state-in-effect
+    setOrder(shuffle(cards));  
   }, [cards]);
 
   useEffect(() => {
     if (phase !== 'playing') return;
     if (timeLeft <= 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+       
       setPhase('done');
       return;
     }
