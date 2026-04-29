@@ -120,8 +120,16 @@ export default function VocabMode({ onExit }) {
       {/* Toggles */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
         {[
-          { label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
-          { label: `💡 ${showHint ? 'ON' : 'OFF'}`, active: showHint, onClick: () => setShowHint((f) => !f) },
+          {
+            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
+            active: showFuri,
+            onClick: () => setShowFuri((f) => !f),
+          },
+          {
+            label: `💡 ${showHint ? 'ON' : 'OFF'}`,
+            active: showHint,
+            onClick: () => setShowHint((f) => !f),
+          },
         ].map((btn) => (
           <button
             key={btn.label}
@@ -174,11 +182,35 @@ export default function VocabMode({ onExit }) {
       <div style={{ marginBottom: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
           <span style={{ fontSize: 13 }}>📖</span>
-          <span style={{ fontSize: 10, fontWeight: 800, color: '#60a5fa', letterSpacing: 1.8, textTransform: 'uppercase' }}>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: '#60a5fa',
+              letterSpacing: 1.8,
+              textTransform: 'uppercase',
+            }}
+          >
             Per Set
           </span>
-          <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg,rgba(96,165,250,0.3),transparent)' }} />
-          <span style={{ fontSize: 10, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, borderRadius: T.r.pill, padding: '2px 8px', fontWeight: 700 }}>
+          <div
+            style={{
+              flex: 1,
+              height: 1,
+              background: 'linear-gradient(90deg,rgba(96,165,250,0.3),transparent)',
+            }}
+          />
+          <span
+            style={{
+              fontSize: 10,
+              color: T.textDim,
+              background: T.surface,
+              border: `1px solid ${T.border}`,
+              borderRadius: T.r.pill,
+              padding: '2px 8px',
+              fontWeight: 700,
+            }}
+          >
             {VOCAB_SETS.length} set
           </span>
         </div>
@@ -203,14 +235,31 @@ export default function VocabMode({ onExit }) {
                   overflow: 'hidden',
                 }}
               >
-                <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || '#60a5fa' }} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: 4,
+                    background: s.color || '#60a5fa',
+                  }}
+                />
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
                   <span style={{ fontSize: 13, fontWeight: 700 }}>
                     {s.emoji} {s.title}
                   </span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {saved && (
-                      <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
+                        }}
+                      >
                         {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
                       </span>
                     )}
@@ -218,7 +267,9 @@ export default function VocabMode({ onExit }) {
                   </div>
                 </div>
                 {s.subtitle && (
-                  <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
+                  <div
+                    style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
+                  >
                     {s.subtitle}
                   </div>
                 )}
