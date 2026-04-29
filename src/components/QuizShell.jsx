@@ -32,7 +32,7 @@ export default function QuizShell({
   useEffect(() => {
     if (timer <= 0 || phase !== 'playing') return;
     if (timeLeft <= 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+       
       setPhase('finished');
       return;
     }
