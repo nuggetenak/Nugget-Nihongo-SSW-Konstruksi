@@ -1,0 +1,46 @@
+/* ProgressRing.module.css */
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.track {
+  fill: none;
+  stroke: var(--ssw-border);
+}
+
+.progress {
+  fill: none;
+  stroke: var(--ssw-amber);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+.center {
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.pct {
+  font-weight: var(--fw-heavy);
+  line-height: 1;
+  color: var(--ssw-text);
+}
+
+.sub {
+  color: var(--ssw-textDim);
+  margin-top: 4px;
+  line-height: 1.2;
+}

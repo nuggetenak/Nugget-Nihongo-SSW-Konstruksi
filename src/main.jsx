@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/global.css';
 import { createRoot } from 'react-dom/client';
 import { init as storageInit, get as storageGet } from './storage/engine.js';
 import { applyTheme } from './styles/theme.js';

@@ -1,0 +1,252 @@
+/* Dashboard.module.css */
+
+.container {
+  padding: 0 16px 28px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── Header ── */
+.header {
+  padding: 16px 0 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {}
+
+.brandName {
+  font-size: var(--fs-title);
+  font-weight: var(--fw-heavy);
+  background: var(--accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brandSub {
+  font-size: var(--fs-nano);
+  color: var(--ssw-textDim);
+  margin-top: 1px;
+}
+
+.headerRight {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.trackPill {
+  font-family: inherit;
+  font-size: var(--fs-small);
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  /* color/bg/border set inline — track-specific */
+}
+
+.themeBtn {
+  font-family: inherit;
+  font-size: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-borderLight);
+  color: var(--ssw-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Streak hero ── */
+.streakHero {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--r-lg);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  margin-bottom: 14px;
+  animation: slideUp 0.3s ease;
+}
+
+.streakEmoji {
+  font-size: 28px;
+}
+
+.streakDays {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-heavy);
+  color: var(--ssw-amber);
+}
+
+.streakSub {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-top: 2px;
+}
+
+/* ── Progress ring card ── */
+.ringCard {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 16px;
+  border-radius: var(--r-lg);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  margin-bottom: 14px;
+}
+
+.ringInfo {
+  flex: 1;
+}
+
+.ringKnown {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-heavy);
+  color: var(--ssw-text);
+  margin-bottom: 6px;
+}
+
+.ringDetail {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+  margin-bottom: 4px;
+}
+
+.ringStreak {
+  font-size: var(--fs-caption);
+  color: var(--ssw-amber);
+  font-weight: var(--fw-bold);
+}
+
+.ringDaily {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+}
+
+/* ── Primary CTA ── */
+.cta {
+  width: 100%;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  font-family: inherit;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  background: var(--accent);
+  border: none;
+  color: var(--ssw-textBright);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--ssw-shadowGlowStrong);
+}
+
+.ctaIcon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.ctaBody {
+  flex: 1;
+}
+
+.ctaLabel {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-heavy);
+  line-height: 1.2;
+}
+
+.ctaDesc {
+  font-size: var(--fs-caption);
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+.ctaArrow {
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+/* ── Quick action grid ── */
+.quickGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.quickTile {
+  font-family: inherit;
+  padding: 16px 14px;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-text);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.15s;
+}
+
+.quickTile:active {
+  background: var(--ssw-surfaceActive);
+}
+
+.quickIcon {
+  font-size: 20px;
+}
+
+.quickLabel {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+}
+
+/* ── Recent cards ── */
+.recentHeader {
+  font-size: var(--fs-nano);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--ssw-textDim);
+  margin-bottom: 10px;
+}
+
+.recentList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.recentCard {
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recentJp {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-text);
+}
+
+.recentId {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+}

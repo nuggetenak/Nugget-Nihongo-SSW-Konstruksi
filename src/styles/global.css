@@ -1,0 +1,111 @@
+/* ─── global.css ────────────────────────────────────────────────────────────────
+   Static design tokens (not theme-dependent) + base resets + animations.
+   Imported once in main.jsx.
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+/* ── Static tokens ── */
+:root {
+  /* Border radii */
+  --r-xs:   6px;
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-xl:   20px;
+  --r-xxl:  24px;
+  --r-pill: 99px;
+
+  /* Nav height */
+  --nav-h:  56px;
+
+  /* Typography scale (Blueprint B8) */
+  --fs-hero:       32px;
+  --fs-jp-primary: 28px;
+  --fs-jp-back:    20px;
+  --fs-title:      17px;
+  --fs-subtitle:   15px;
+  --fs-body:       13px;
+  --fs-caption:    12px;
+  --fs-small:      11px;
+  --fs-micro:      10px;
+  --fs-nano:        9px;
+
+  /* Line heights */
+  --lh-tight:   1.2;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.75;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+  --fw-heavy:   800;
+
+  /* Max content width */
+  --max-w: 480px;
+
+  /* Accent gradient (static — amber tones) */
+  --accent: linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B);
+}
+
+/* ── Base reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--ssw-bg);
+  color: var(--ssw-text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* ── Shared animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(0.3); }
+  50%  { transform: scale(1.1); }
+  70%  { transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ssw-scrollbar); border-radius: var(--r-pill); }
+
+/* ── Focus visible ── */
+:focus-visible {
+  outline: 2px solid var(--ssw-amber);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
