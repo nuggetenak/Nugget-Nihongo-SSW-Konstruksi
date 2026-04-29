@@ -14,8 +14,7 @@ export default function GlossaryMode({ onExit }) {
 
   // ── Sorted + grouped data ────────────────────────────────────────────────
   const sorted = useMemo(() => {
-    const items =
-      filterCat === 'all' ? CARDS : CARDS.filter((c) => c.category === filterCat);
+    const items = filterCat === 'all' ? CARDS : CARDS.filter((c) => c.category === filterCat);
     return [...items].sort((a, b) => {
       const aKey = (a.furi || a.romaji || '').toLowerCase();
       const bKey = (b.furi || b.romaji || '').toLowerCase();
@@ -93,13 +92,14 @@ export default function GlossaryMode({ onExit }) {
   // ── Category metadata lookup ─────────────────────────────────────────────
   const catMap = useMemo(() => {
     const m = {};
-    CATEGORIES.forEach((c) => { m[c.key] = c; });
+    CATEGORIES.forEach((c) => {
+      m[c.key] = c;
+    });
     return m;
   }, []);
 
   return (
     <div style={{ paddingBottom: 88 }}>
-
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <div style={{ padding: '16px 16px 10px', maxWidth: T.maxW, margin: '0 auto' }}>
         <button
@@ -139,13 +139,15 @@ export default function GlossaryMode({ onExit }) {
 
         {/* Category filter pills */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-          {[{ key: 'all', label: 'Semua', emoji: '📋' },
+          {[
+            { key: 'all', label: 'Semua', emoji: '📋' },
             ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang'),
           ].map((c) => {
             const active = filterCat === c.key;
-            const count = c.key === 'all'
-              ? CARDS.length
-              : CARDS.filter((card) => card.category === c.key).length;
+            const count =
+              c.key === 'all'
+                ? CARDS.length
+                : CARDS.filter((card) => card.category === c.key).length;
             return (
               <button
                 key={c.key}
@@ -166,9 +168,7 @@ export default function GlossaryMode({ onExit }) {
                 }}
               >
                 <span>{c.emoji}</span>
-                {active && (
-                  <span style={{ opacity: 0.7 }}>{count}</span>
-                )}
+                {active && <span style={{ opacity: 0.7 }}>{count}</span>}
               </button>
             );
           })}
@@ -209,12 +209,8 @@ export default function GlossaryMode({ onExit }) {
                 height: 28,
                 borderRadius: T.r.sm,
                 cursor: 'pointer',
-                border: isActive
-                  ? `1px solid rgba(251,191,36,0.45)`
-                  : '1px solid transparent',
-                background: isActive
-                  ? 'rgba(251,191,36,0.18)'
-                  : 'transparent',
+                border: isActive ? `1px solid rgba(251,191,36,0.45)` : '1px solid transparent',
+                background: isActive ? 'rgba(251,191,36,0.18)' : 'transparent',
                 color: isActive ? T.gold : T.textDim,
                 transition: 'all 0.15s',
                 display: 'flex',
@@ -234,7 +230,9 @@ export default function GlossaryMode({ onExit }) {
           <div
             key={letter}
             data-letter={letter}
-            ref={(el) => { sectionRefs.current[letter] = el; }}
+            ref={(el) => {
+              sectionRefs.current[letter] = el;
+            }}
           >
             {/* Section header */}
             <div
