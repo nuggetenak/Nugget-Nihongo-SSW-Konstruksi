@@ -32,7 +32,6 @@ export default function QuizShell({
   useEffect(() => {
     if (timer <= 0 || phase !== 'playing') return;
     if (timeLeft <= 0) {
-       
       setPhase('finished');
       return;
     }
