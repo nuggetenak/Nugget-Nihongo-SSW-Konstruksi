@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
 > **Last updated:** 2026-04-29 by Sonnet
-> **Version:** v3.2.0 — Phase 1+2+3 complete
+> **Version:** v3.4.0 — Phase 1+2+3+4+5+6(partial)+9(partial) complete
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v3.md` ← **READ THIS FIRST**
 
 ---
@@ -174,15 +174,19 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 
 | Metric | Value | Blueprint Target |
 |--------|-------|-----------------|
-| Source lines | 19,646 | — |
-| Inline styles | 822 | 0 (CSS Modules) |
-| localStorage key patterns | 20+ | 3 documents |
+| Source lines | ~20,136 | — |
+| Inline styles | 822 → **~700** (Phase 6 partial) | 0 (CSS Modules) |
+| CSS Module files | 0 → **8** ✅ | ~30 |
+| localStorage key patterns | 20+ → **3 documents** ✅ | 3 documents |
 | App.jsx | 668 → **72 lines** ✅ | ~150 lines |
-| BottomNav | 4 tabs | **3 tabs** ✅ |
+| BottomNav | 4 tabs → **3 tabs** ✅ | 3 tabs |
 | Dashboard | 819 → **265 lines** ✅ | Redesigned |
 | ErrorBoundary count | 0 → **all 18 modes** ✅ | All 18 modes wrapped |
 | Tests | 111 → **150 passing** ✅ | ~170+ |
-| CI/CD | none | GitHub Actions auto-deploy |
+| CI/CD | none → **GitHub Actions** ✅ | GitHub Actions auto-deploy |
+| 3D card flip | none → **✅** | Phase 4 |
+| FSRS always visible | long-press → **✅** | Phase 4 |
+| ResultScreen 2-path | none → **✅** | Phase 5 |
 
 ---
 
