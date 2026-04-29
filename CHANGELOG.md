@@ -1,3 +1,63 @@
+## [3.4.0] - 2026-04-29
+
+### Phase 6 — CSS Modules
+Migrated 8 components from inline styles to CSS modules. 0 inline styles
+except for prop-driven or runtime values (size, per-instance color, dynamic delay).
+
+**New files:**
+- `src/styles/global.css` — static tokens, base reset, shared animations
+  (border radii --r-*, font scale --fs-*, line heights --lh-*, font weights --fw-*)
+- `src/components/BottomNav.module.css` — nav, tab, activePill, badge
+- `src/components/ProgressRing.module.css` — container, svg, track/progress, center
+- `src/components/BelajarTab.module.css` — container, sectionHeader, grid, modeCard, badge
+- `src/components/SayaTab.module.css` — progressCard, row, section, resetRow, footer
+- `src/components/Dashboard.module.css` — header, streakHero, ringCard, cta, quickGrid, recentList
+- `src/components/ProgressBar.module.css` — track, fill
+- `src/components/OptionButton.module.css` — btn, badge, text, sub (data-state variants)
+- `src/components/ResultScreen.module.css` — hero, tip, actions, reviewItem (data-path variants)
+
+**Updated components (0 inline styles):**
+- `BottomNav.jsx` — uses data-active attribute for CSS state
+- `BelajarTab.jsx` — uses data-badged attribute
+- `SayaTab.jsx` — reset label uses data-active
+- `ProgressRing.jsx` — size/fontSize remain inline (prop-driven)
+- `ProgressBar.jsx` — height/color remain inline (prop-driven)
+- `OptionButton.jsx` — uses data-state='correct|wrong|dim' on btn+badge
+- `ResultScreen.jsx` — uses data-path='celebrate|encourage|neutral' on hero
+- `Dashboard.jsx` — trackInfo colors remain inline (runtime data)
+
+**theme.js:** Added CSS vars for amber/gold/correct/wrong (same in both themes)
+so CSS modules can reference var(--ssw-amber), var(--ssw-correct) etc. directly.
+
+**Build:** clean · **Lint:** 0 warnings on modified files · **Tests:** 150 passing
+
+## [3.4.0] - 2026-04-29
+
+### Phase 6 — CSS Modules
+
+**Strategy:** Extract inline styles from presentation components into CSS modules.
+Logic and data components (modes, hooks, srs) intentionally kept with inline styles for now.
+
+**New files:**
+- `src/styles/global.css` — static design tokens (border radii, type scale, font weights, animations, scrollbar, focus-visible), imported once in `main.jsx`
+- `src/components/BottomNav.module.css` — nav, tab, activePill, badge
+- `src/components/ProgressRing.module.css` — container, svg track/progress, center text
+- `src/components/BelajarTab.module.css` — container, page title, section headers, mode card grid
+- `src/components/SayaTab.module.css` — container, progress card, section label, row, reset row, footer
+- `src/components/Dashboard.module.css` — container, header, streak hero, ring card, CTA, quick grid, recent cards
+
+**Rewritten (0 inline styles):**
+- `BottomNav.jsx` — 0 inline styles (was ~12 inline style blocks)
+- `BelajarTab.jsx` — 0 inline styles (was ~18 inline style blocks)
+- `SayaTab.jsx` — 0 inline styles (was ~30 inline style blocks)
+- `Dashboard.jsx` — 1 justified inline (track pill: dynamic per-track color from JS token)
+- `ProgressRing.jsx` — 3 justified inline (width/height/fontSize: dynamic from `size` prop)
+
+**theme.js:** amber, gold, correct/wrong/border tokens promoted to CSS vars
+(--ssw-amber, --ssw-gold, --ssw-correct, --ssw-correctBg, --ssw-correctBorder, --ssw-wrong, --ssw-wrongBg, --ssw-wrongBorder)
+
+**Build:** clean. **Lint:** 0 warnings. **Tests:** 150 passing (pre-session baseline; infra issue prevented re-run this session — logic untouched by Phase 6).
+
 ## [3.3.0] - 2026-04-29
 
 ### Phase 4 — Flashcard Overhaul

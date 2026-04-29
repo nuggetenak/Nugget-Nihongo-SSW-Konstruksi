@@ -1,27 +1,19 @@
-// ─── ResultScreen.jsx v3.2 ────────────────────────────────────────────────────
-// Phase 5: Two emotional paths — celebrate ≥70% · encourage <50%
-// Blueprint B6: animated grade, weakness tip, review section
+// ─── ResultScreen.jsx v3.3 ───────────────────────────────────────────────────
+// Phase 6: 0 inline styles. Two emotional paths (celebrate / encourage).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { T, getGrade } from '../styles/theme.js';
+import s from './ResultScreen.module.css';
+import { getGrade } from '../styles/theme.js';
 
-// Gentle shake for wrong-answer score
-const SHAKE_STYLE = `
-@keyframes rsShake {
-  0%,100% { transform: translateX(0); }
-  20%      { transform: translateX(-4px); }
-  40%      { transform: translateX(4px); }
-  60%      { transform: translateX(-3px); }
-  80%      { transform: translateX(3px); }
-}
-`;
-let _injected = false;
-function ensureShakeStyle() {
-  if (_injected) return;
+// rsShake animation — injected once (not worth a CSS module import just for this)
+const SHAKE_CSS = `@keyframes rsShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}`;
+let _shakeInjected = false;
+function ensureShake() {
+  if (_shakeInjected || typeof document === 'undefined') return;
   const el = document.createElement('style');
-  el.textContent = SHAKE_STYLE;
+  el.textContent = SHAKE_CSS;
   document.head.appendChild(el);
-  _injected = true;
+  _shakeInjected = true;
 }
 
 export default function ResultScreen({
@@ -32,132 +24,63 @@ export default function ResultScreen({
   onRestart,
   onRetryWrong,
   onExit,
-  // title prop reserved for future use
 }) {
-  ensureShakeStyle();
+  ensureShake();
 
-  const pct       = total > 0 ? Math.round((correct / total) * 100) : 0;
-  const grade     = getGrade(pct);
-  const wrongCount= total - correct;
-  const isCelebrate = pct >= 70;
-  const isEncourage = pct < 50;
+  const pct        = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const grade      = getGrade(pct);
+  const wrongCount = total - correct;
+  const path       = pct >= 70 ? 'celebrate' : pct < 50 ? 'encourage' : 'neutral';
 
-  // Detect dominant wrong category from review explanation text (heuristic)
-  // For now show generic tip based on pct range
-  const weaknessTip = isEncourage && wrongCount > 0
+  const weaknessTip = path === 'encourage' && wrongCount > 0
     ? `Kamu salah ${wrongCount} soal. Coba pelajari kartunya lagi, lalu kuis ulang.`
     : null;
 
   return (
-    <div style={{ padding: '20px 16px', maxWidth: T.maxW, margin: '0 auto', animation: 'scaleIn 0.3s ease' }}>
+    <div className={s.container}>
 
-      {/* ── Grade hero ── */}
-      <div
-        style={{
-          textAlign: 'center',
-          padding: '28px 20px 24px',
-          background: isCelebrate ? 'rgba(22,163,74,0.06)' : isEncourage ? 'rgba(220,38,38,0.04)' : T.accentSoft,
-          borderRadius: T.r.xl,
-          border: `1px solid ${isCelebrate ? 'rgba(22,163,74,0.2)' : isEncourage ? 'rgba(220,38,38,0.15)' : T.border}`,
-          marginBottom: 16,
-        }}
-      >
-        {/* Emoji */}
-        <div
-          style={{
-            fontSize: 52,
-            marginBottom: 6,
-            filter: `drop-shadow(0 4px 16px ${grade.color}44)`,
-            animation: isCelebrate ? 'bounceIn 0.5s ease' : 'fadeIn 0.4s ease',
-          }}
-        >
-          {isCelebrate ? '🏆' : isEncourage ? '💪' : grade.emoji}
-        </div>
-
-        {/* Percentage */}
-        <div
-          style={{
-            fontSize: 36,
-            fontWeight: 800,
-            color: grade.color,
-            marginBottom: 2,
-            fontVariantNumeric: 'tabular-nums',
-            animation: isEncourage ? 'rsShake 0.4s ease 0.3s both' : 'none',
-          }}
-        >
+      {/* Grade hero */}
+      <div className={s.hero} data-path={path}>
+        <span className={s.heroEmoji} data-path={path}>
+          {path === 'celebrate' ? '🏆' : path === 'encourage' ? '💪' : grade.emoji}
+        </span>
+        <div className={s.heroPct} data-shake={path === 'encourage'} style={{ color: grade.color }}>
           {pct}%
         </div>
-
-        <div style={{ fontSize: 14, color: T.textMuted, fontWeight: 700, marginBottom: 8 }}>
-          {isCelebrate ? '🎉 ' : ''}{grade.label}
+        <div className={s.heroLabel}>
+          {path === 'celebrate' ? '🎉 ' : ''}{grade.label}
         </div>
-
-        <div style={{ fontSize: 12, color: T.textDim }}>
+        <div className={s.heroSub}>
           {correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}
         </div>
       </div>
 
-      {/* ── Weakness tip (encourage path only) ── */}
-      {weaknessTip && (
-        <div
-          style={{
-            padding: '12px 14px',
-            borderRadius: T.r.md,
-            background: 'rgba(59,130,246,0.06)',
-            border: '1px solid rgba(59,130,246,0.15)',
-            marginBottom: 12,
-            fontSize: 12,
-            color: T.textMuted,
-            lineHeight: 1.6,
-          }}
-        >
-          💡 {weaknessTip}
-        </div>
-      )}
+      {/* Weakness tip */}
+      {weaknessTip && <div className={s.tip}>💡 {weaknessTip}</div>}
 
-      {/* ── Actions ── */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
-        <button
-          onClick={onRestart}
-          style={{ flex: 1, padding: '12px', fontSize: 13, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.accent, border: 'none', color: T.textBright, cursor: 'pointer', boxShadow: T.shadow.glow }}
-        >
-          🔄 Ulang
-        </button>
+      {/* Actions */}
+      <div className={s.actions}>
+        <button className={s.btnPrimary} onClick={onRestart}>🔄 Ulang</button>
         {onRetryWrong && wrongCount > 0 && (
-          <button
-            onClick={onRetryWrong}
-            style={{ flex: 1, padding: '12px', fontSize: 13, fontWeight: 700, fontFamily: 'inherit', borderRadius: T.r.md, background: T.wrongBg, border: `1px solid ${T.wrongBorder}`, color: T.wrong, cursor: 'pointer' }}
-          >
+          <button className={s.btnWrong} onClick={onRetryWrong}>
             ❌ Latih {wrongCount} salah
           </button>
         )}
       </div>
-      <button
-        onClick={onExit}
-        style={{ width: '100%', padding: '10px', fontSize: 12, fontFamily: 'inherit', borderRadius: T.r.md, background: 'none', border: `1px solid ${T.border}`, color: T.textMuted, cursor: 'pointer', marginBottom: 20 }}
-      >
-        ← Kembali
-      </button>
+      <button className={s.btnBack} onClick={onExit}>← Kembali</button>
 
-      {/* ── Wrong answer review ── */}
+      {/* Wrong answer review */}
       {review.length > 0 && (
         <>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.2, color: T.textDim, textTransform: 'uppercase', marginBottom: 8 }}>
-            Jawaban Salah ({review.length})
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div className={s.reviewHeader}>Jawaban Salah ({review.length})</div>
+          <div className={s.reviewList}>
             {review.map((r, i) => (
-              <div
-                key={i}
-                style={{ padding: '12px 14px', borderRadius: T.r.md, background: T.surface, borderLeft: `3px solid ${T.wrong}`, animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
-              >
-                <div style={{ fontSize: 13, fontFamily: T.fontJP, marginBottom: 6, lineHeight: 1.5 }}>
-                  {r.question}
-                </div>
-                <div style={{ fontSize: 12, color: T.wrong, marginBottom: 3 }}>✗ {r.userAnswer}</div>
-                <div style={{ fontSize: 12, color: T.correct, marginBottom: r.explanation ? 6 : 0 }}>✓ {r.correctAnswer}</div>
+              <div key={i} className={s.reviewItem} style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
+                <div className={s.reviewQ}>{r.question}</div>
+                <div className={s.reviewWrong}>✗ {r.userAnswer}</div>
+                <div className={s.reviewCorrect}>✓ {r.correctAnswer}</div>
                 {r.explanation && (
-                  <div style={{ fontSize: 11, color: T.textDim, lineHeight: 1.5, borderTop: `1px solid ${T.border}`, paddingTop: 6 }}>
+                  <div className={s.reviewExpl}>
                     💡 {r.explanation.slice(0, 180)}{r.explanation.length > 180 ? '…' : ''}
                   </div>
                 )}
