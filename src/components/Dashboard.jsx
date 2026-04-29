@@ -84,74 +84,48 @@ const MODE_META = {
   stats: { icon: '📊', label: 'Statistik', desc: 'Progress & kelemahan', time: null },
 };
 
-// ── Daily streak helper ──────────────────────────────────────────────────────
-function getStudyStreak() {
-  try {
-    const raw = localStorage.getItem('ssw-study-streak');
-    if (!raw) return { days: 0, lastDate: null };
-    return JSON.parse(raw);
-  } catch {
-    return { days: 0, lastDate: null };
-  }
-}
+// ── Daily streak / count / recent — backed by storage engine ─────────────────
+import { get as storageGet, set as storageSet } from '../storage/engine.js';
 
 function getTodayStr() {
   return new Date().toISOString().slice(0, 10);
 }
 
-// Called by App.jsx when a card is marked — we update streak + daily count
-export function recordStudyDay() {
-  const today = getTodayStr();
-  try {
-    const streak = getStudyStreak();
-    if (streak.lastDate === today) return; // already recorded today
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yStr = yesterday.toISOString().slice(0, 10);
-    const newDays = streak.lastDate === yStr ? streak.days + 1 : 1;
-    localStorage.setItem('ssw-study-streak', JSON.stringify({ days: newDays, lastDate: today }));
-  } catch {}
+function getStudyStreak() {
+  return storageGet('progress')?.streakData ?? { days: 0, lastDate: null };
 }
 
-// ── Daily card count ──────────────────────────────────────────────────────────
 function getDailyCount() {
-  try {
-    const raw = localStorage.getItem('ssw-daily-count');
-    if (!raw) return 0;
-    const { count, date } = JSON.parse(raw);
-    return date === getTodayStr() ? count : 0;
-  } catch {
-    return 0;
-  }
+  const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' };
+  return dc.date === getTodayStr() ? dc.count : 0;
+}
+
+function getRecentCards() {
+  return (storageGet('progress')?.recentCards ?? []).slice(0, 5);
+}
+
+export function recordStudyDay() {
+  const today = getTodayStr();
+  const streak = getStudyStreak();
+  if (streak.lastDate === today) return;
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yStr = yesterday.toISOString().slice(0, 10);
+  const newDays = streak.lastDate === yStr ? (streak.days ?? 0) + 1 : 1;
+  storageSet('progress', (prev) => ({ ...prev, streakData: { days: newDays, lastDate: today } }));
 }
 
 export function incrementDailyCount() {
-  try {
-    const today = getTodayStr();
-    const raw = localStorage.getItem('ssw-daily-count');
-    const prev = raw ? JSON.parse(raw) : { count: 0, date: today };
-    const count = prev.date === today ? prev.count + 1 : 1;
-    localStorage.setItem('ssw-daily-count', JSON.stringify({ count, date: today }));
-  } catch {}
-}
-
-// ── Recently studied ─────────────────────────────────────────────────────────
-function getRecentCards() {
-  try {
-    const raw = localStorage.getItem('ssw-recent');
-    if (!raw) return [];
-    return JSON.parse(raw).slice(0, 5);
-  } catch {
-    return [];
-  }
+  const today = getTodayStr();
+  const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' };
+  const count = dc.date === today ? dc.count + 1 : 1;
+  storageSet('progress', (prev) => ({ ...prev, dailyCount: { count, date: today } }));
 }
 
 export function pushRecentCard(cardId) {
-  try {
-    const prev = getRecentCards();
-    const next = [cardId, ...prev.filter((id) => id !== cardId)].slice(0, 5);
-    localStorage.setItem('ssw-recent', JSON.stringify(next));
-  } catch {}
+  const prev = getRecentCards();
+  const next = [cardId, ...prev.filter((id) => id !== cardId)].slice(0, 5);
+  storageSet('progress', (p) => ({ ...p, recentCards: next }));
 }
 
 // ── Main Dashboard ───────────────────────────────────────────────────────────

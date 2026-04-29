@@ -1,89 +1,57 @@
-// ─── fsrs-store.js ────────────────────────────────────────────────────────────
-// Layer 2: FSRS card storage — pure localStorage (GitHub Pages standalone).
-// No window.storage, no Claude dependency.
+// ─── srs/fsrs-store.js ────────────────────────────────────────────────────────
+// Layer 2: FSRS card storage — backed by storage engine (v2: ssw-srs-data).
+// API unchanged so scheduler + hooks don't need updates.
 //
-// Pattern: load-once-on-init → in-memory cache → write-through on review.
-// Reviews are instant (synchronous cache hit); persistence is synchronous too.
-//
-// Key format: `ssw-srs-{cardId}` where cardId is the numeric SSW card ID.
+// Pattern: storage engine is the source of truth (already in-memory).
+// All reads/writes go through engine.getSRSCard / engine.setSRSCard.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SRS_PREFIX = 'ssw-srs-';
-
-// ── Key helpers ────────────────────────────────────────────────────────────
-export const cardKey = (cardId) => `${SRS_PREFIX}${cardId}`;
-export const parseCardId = (key) =>
-  key.startsWith(SRS_PREFIX) ? key.slice(SRS_PREFIX.length) : null;
-
-// ── In-memory cache ────────────────────────────────────────────────────────
-// { [cardId: string]: { card: SerializedCard, history: ReviewLog[], reviewed_at: ISO|null } }
-let _cache = {};
-let _initialized = false;
+import {
+  init as engineInit,
+  getSRSCard,
+  setSRSCard as engineSetCard,
+  getAllSRSCards,
+  getSRSCardCount,
+  _reset_for_test,
+} from '../storage/engine.js';
 
 // ── Init ───────────────────────────────────────────────────────────────────
-// Load all ssw-srs-* keys from localStorage into cache. Synchronous.
-// Safe to call multiple times — no-ops after first call.
+// Called by useSRS on first render. Delegates to storage engine.
 export function initStore() {
-  if (_initialized) return _cache;
-
-  try {
-    const keys = Object.keys(localStorage).filter((k) => k.startsWith(SRS_PREFIX));
-    _cache = {};
-    for (const key of keys) {
-      try {
-        const raw = localStorage.getItem(key);
-        const id = parseCardId(key);
-        if (raw && id) _cache[id] = JSON.parse(raw);
-      } catch {}
-    }
-  } catch {
-    _cache = {};
-  }
-
-  _initialized = true;
-  return _cache;
+  engineInit();
 }
 
 // ── Read ───────────────────────────────────────────────────────────────────
-export const getCard = (cardId) => _cache[String(cardId)] ?? null;
-export const hasCard = (cardId) => String(cardId) in _cache;
-export const getAllCards = () => ({ ..._cache });
-export const getCardCount = () => Object.keys(_cache).length;
+export const getCard = (cardId) => getSRSCard(cardId);
+export const hasCard = (cardId) => getSRSCard(cardId) !== null;
+export const getAllCards = () => getAllSRSCards();
+export const getCardCount = () => getSRSCardCount();
 
-// ── Write-through ──────────────────────────────────────────────────────────
-// Updates cache synchronously, persists to localStorage synchronously.
+// ── Write ─────────────────────────────────────────────────────────────────
 export function saveCard(cardId, entry) {
-  const id = String(cardId);
-  _cache[id] = entry;
-  try {
-    localStorage.setItem(cardKey(id), JSON.stringify(entry));
-  } catch {}
+  engineSetCard(cardId, entry);
 }
 
-// ── Export snapshot (for ExportMode) ──────────────────────────────────────
+// ── Export / Import (for ExportMode) ──────────────────────────────────────
 export function exportSRSSnapshot() {
   return {
     _srs_version: 1,
     exported_at: new Date().toISOString(),
-    cards: { ..._cache },
+    cards: getAllSRSCards(),
   };
 }
 
-// ── Import snapshot (for ExportMode) ──────────────────────────────────────
 export function importSRSSnapshot(snapshot) {
   if (!snapshot?.cards || typeof snapshot.cards !== 'object') {
     throw new Error('Invalid SRS snapshot — missing cards field');
   }
-  _cache = {};
   for (const [id, entry] of Object.entries(snapshot.cards)) {
-    saveCard(id, entry);
+    engineSetCard(id, entry);
   }
   return Object.keys(snapshot.cards).length;
 }
 
-// ── Reset ─────────────────────────────────────────────────────────────────
+// ── Reset (used by tests) ─────────────────────────────────────────────────
 export function resetStore() {
-  const keys = Object.keys(localStorage).filter((k) => k.startsWith(SRS_PREFIX));
-  keys.forEach((k) => localStorage.removeItem(k));
-  _cache = {};
+  _reset_for_test();
 }
