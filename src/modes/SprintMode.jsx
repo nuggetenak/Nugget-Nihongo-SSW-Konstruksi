@@ -17,13 +17,12 @@ export default function SprintMode({ cards, onExit }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
-    setOrder(shuffle(cards));  
+    setOrder(shuffle(cards));
   }, [cards]);
 
   useEffect(() => {
     if (phase !== 'playing') return;
     if (timeLeft <= 0) {
-       
       setPhase('done');
       return;
     }
