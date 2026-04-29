@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Flashcard App · Agent Orientation
 
-> **Last updated:** 2026-04-29 by Claude (Phase 12 — VocabDB: CSV + Wayground sets)
+> **Last updated:** 2026-04-29 by Opus (Master Blueprint v3 — arch + UX redesign)
 > **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅ Phase 5 ✅ Phase 5.2 ✅ Phase 5.3 ✅ Phase 5.4 ✅ Phase 12 ✅ — production-ready, deployed to GitHub Pages · v3.1.0
 > **Original:** `legacy/ssw_flashcards_v87.jsx` (7,390 lines, reference only)
 
@@ -320,9 +320,10 @@ These changes affect integration — Crispy must be aware:
 
 ### When Starting a New Session
 1. Read this `_MAP.md` first
-2. Check `docs/PROPOSAL.md` for full context
-3. **Do not use `window.storage`** — this app is GitHub Pages only, pure localStorage
-4. Test storage with: `localStorage.getItem('ssw-known')` in browser devtools
+2. Read `docs/MASTER-BLUEPRINT-v3.md` for the full architecture + UX redesign plan
+3. Check `docs/REFACTOR-PROPOSAL-v2.md` for architecture detail
+4. **Do not use `window.storage`** — this app is GitHub Pages only, pure localStorage
+5. Test storage with: `localStorage.getItem('ssw-known')` in browser devtools
 
 ### Code Conventions
 - **Language:** Indonesian for UI text; English for code comments
@@ -598,3 +599,40 @@ Comprehensive blueprint for v3.0 — bringing v90's UX richness into the modular
 - Filter change resets expanded + activeLetter
 
 **Version:** v3.0.1
+
+---
+
+## 16. Master Blueprint v3 — Architecture + UI/UX Redesign (2026-04-29)
+
+**Document:** `docs/MASTER-BLUEPRINT-v3.md` (by Opus 4.6)
+**Companion:** `docs/REFACTOR-PROPOSAL-v2.md` (architecture detail)
+
+**⚠️ READ BOTH DOCUMENTS IN FULL BEFORE STARTING ANY PHASE.**
+
+Comprehensive blueprint covering:
+
+### Part I — Architecture Refactor (7 pillars)
+1. **Storage Engine** — 3-document model replacing 20+ fragmented localStorage keys (including 1438 SRS per-card keys). Auto-migration from v1→v2. Cold start ~300ms → <20ms.
+2. **App.jsx Decomposition** — 668 lines → ~150 lines via Context (ProgressContext, SRSContext, AppContext) + ModeRouter + single `modes.js` registry.
+3. **CSS Modules** — 822 inline styles → 0. Zero-runtime CSS Modules with existing CSS variables.
+4. **Data Splitting** — Remove barrel re-export anti-pattern. Lazy-load cards per track. csv-sets.js (3998 lines) only loads when VocabMode opens.
+5. **Error Boundaries** — Wrapping all 18 lazy-loaded modes. Currently zero error handling.
+6. **CI/CD** — GitHub Actions auto-deploy + auto SW cache versioning.
+7. **Testing** — Storage, component, and hook tests (currently only data/utils tested).
+
+### Part II — UI/UX Redesign (12 sections, B1–B12)
+- **B1: Navigation** — 4 tabs → 3 tabs (Beranda, Belajar, Saya). Modes grouped by intent.
+- **B2: Onboarding** — Interactive (mini flashcard demo + goal setting) instead of static slides.
+- **B3: Dashboard** — Circular progress ring, streak hero, "one screen one action" principle.
+- **B4: Flashcard** — 3D flip animation, FSRS always visible (not long-press), swipe feedback, merge binary known/unknown into FSRS rating.
+- **B5: Quiz Shell** — Mode-specific accent colors, all options show JP+ID after answer, explanation slide-up.
+- **B6: Result Screen** — Two emotional paths (celebrate vs encourage). Score history mini-chart. Weakness analysis with direct links.
+- **B7: Micro-interactions** — Full animation spec table (14 interactions, all with prefers-reduced-motion).
+- **B8: Typography** — 10-step font scale from 9px–32px.
+- **B9: Colors** — Semantic color tokens (success/error/warning/info/srs/grade).
+- **B10: Loading & Empty** — Skeleton shimmer, 5 contextual empty states.
+- **B11: Settings** — Saya tab with preferences, data export, reset with 3-second safety countdown.
+- **B12: Accessibility** — aria-labels, focus management, color contrast, 44px touch targets.
+
+### Execution: 10 phases, ~13-16 sessions
+All decisions are final. No need to ask Nugget unless blocking issue.
