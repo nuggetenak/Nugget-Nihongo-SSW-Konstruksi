@@ -1,0 +1,46 @@
+/* ─── EmptyState.module.css ────────────────────────────────────────────────── */
+
+.wrap {
+  padding: 48px 24px;
+  text-align: center;
+  max-width: var(--max-w, 480px);
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+.title {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-black);
+  margin-bottom: 6px;
+  color: var(--ssw-text);
+}
+
+.desc {
+  font-size: var(--fs-body);
+  color: var(--ssw-textMuted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: 20px;
+}
+
+.descNoBtn {
+  margin-bottom: 0;
+}
+
+.cta {
+  font-family: inherit;
+  padding: 11px 24px;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  border-radius: var(--r-md);
+  background: var(--ssw-amber);
+  border: none;
+  color: var(--ssw-textBright);
+  cursor: pointer;
+  box-shadow: var(--ssw-shadowGlow);
+}

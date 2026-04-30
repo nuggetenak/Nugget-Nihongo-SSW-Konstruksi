@@ -1,0 +1,125 @@
+/* ─── TrackPicker.module.css ───────────────────────────────────────────────── */
+
+.wrap {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  font-size: var(--fs-body);
+  color: var(--ssw-textDim);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.headline {
+  font-size: 20px;
+  font-weight: var(--fw-black);
+  background: var(--ssw-amber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* track card — bg/border/shadow set inline (per-track color + active state, justified) */
+.card {
+  font-family: inherit;
+  padding: 18px 16px;
+  border-radius: var(--r-xl);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardInner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* icon bg set inline (per-track color, justified) */
+.iconWrap {
+  font-size: 28px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-lg);
+  flex-shrink: 0;
+}
+
+.cardMeta {
+  flex: 1;
+}
+
+.cardLabel {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+  margin-bottom: 2px;
+  color: var(--ssw-text);
+}
+
+.cardJp {
+  font-size: var(--fs-caption);
+  margin-bottom: 3px;
+}
+
+.cardDesc {
+  font-size: var(--fs-small);
+  line-height: var(--lh-tight);
+}
+
+.checkmark {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.info {
+  font-size: var(--fs-small);
+  color: var(--ssw-textFaint);
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: var(--lh-normal);
+}
+
+.cta {
+  width: 100%;
+  padding: 14px;
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+  font-family: inherit;
+  border-radius: var(--r-md);
+  border: none;
+  transition: all 0.25s;
+}
+
+.cta[data-ready='true'] {
+  cursor: pointer;
+  background: var(--ssw-amber);
+  color: var(--ssw-textBright);
+  box-shadow: var(--ssw-shadowGlowStrong);
+}
+
+.cta[data-ready='false'] {
+  cursor: default;
+  background: var(--ssw-surface);
+  color: var(--ssw-textDim);
+  box-shadow: none;
+}

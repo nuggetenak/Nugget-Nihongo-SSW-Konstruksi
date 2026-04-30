@@ -4,11 +4,11 @@ import { CARDS } from '../data/cards.js';
 import { CATEGORIES, VOCAB_SOURCES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import SprintMode from './SprintMode.jsx';
+import S from './modes.module.css';
 
 export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
   const [activeCat, setActiveCat] = useState(null);
 
-  // Find weakest categories
   const catStats = useMemo(() => {
     return CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')
       .map((cat) => {
@@ -18,14 +18,7 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
         const knownN = catCards.filter((c) => known.has(c.id)).length;
         const wrongN = catCards.filter((c) => getWrongCount(quizWrong[c.id]) > 0).length;
         const score = catCards.length > 0 ? Math.round((knownN / catCards.length) * 100) : 100;
-        return {
-          ...cat,
-          total: catCards.length,
-          known: knownN,
-          wrong: wrongN,
-          score,
-          cards: catCards,
-        };
+        return { ...cat, total: catCards.length, known: knownN, wrong: wrongN, score, cards: catCards };
       })
       .filter((c) => c.total > 0)
       .sort((a, b) => a.score - b.score);
@@ -38,104 +31,38 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
   }
 
   return (
-    <div style={{ padding: '24px 16px', maxWidth: T.maxW, margin: '0 auto' }}>
-      <button
-        onClick={onExit}
-        style={{
-          fontFamily: 'inherit',
-          fontSize: 12,
-          color: T.textMuted,
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          marginBottom: 16,
-        }}
-      >
-        ← Kembali
-      </button>
-      <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>🎯 Mode Fokus</h2>
-      <p style={{ fontSize: 13, color: T.textMuted, marginBottom: 20 }}>
-        Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.
-      </p>
+    <div className={S.page}>
+      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <h2 className={S.pageTitle}>🎯 Mode Fokus</h2>
+      <p className={S.pageSub}>Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.</p>
 
       {catStats.length === 0 && (
-        <div style={{ padding: '40px 0', textAlign: 'center', animation: 'fadeIn 0.3s ease' }}>
-          <div style={{ fontSize: 44, marginBottom: 12 }}>✨</div>
-          <div style={{ fontSize: 15, fontWeight: 800, marginBottom: 8 }}>
-            Belum ada kartu lemah
-          </div>
-          <div style={{ fontSize: 13, color: T.textMuted, lineHeight: 1.6, marginBottom: 20 }}>
+        <div className={S.emptyInMode}>
+          <div className={S.emptyIcon}>✨</div>
+          <div className={S.emptyTitle}>Belum ada kartu lemah</div>
+          <div className={S.emptyDesc}>
             Lanjutkan kuis dulu, lalu kembali ke sini untuk latihan intensif.
           </div>
-          <button
-            onClick={() => onExit()}
-            style={{
-              fontFamily: 'inherit',
-              padding: '11px 24px',
-              fontSize: 13,
-              fontWeight: 700,
-              borderRadius: T.r.md,
-              background: T.accent,
-              border: 'none',
-              color: T.textBright,
-              cursor: 'pointer',
-            }}
-          >
+          <button className={S.btnPrimary} style={{ width: 'auto', padding: '11px 24px' }} onClick={onExit}>
             Mulai Kuis →
           </button>
         </div>
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className={S.list}>
         {catStats.map((c) => (
-          <button
-            key={c.key}
-            onClick={() => setActiveCat(c.key)}
-            style={{
-              fontFamily: 'inherit',
-              padding: '14px 16px',
-              borderRadius: T.r.md,
-              cursor: 'pointer',
-              background: T.surface,
-              border: `1px solid ${T.border}`,
-              color: T.text,
-              textAlign: 'left',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: 6,
-              }}
-            >
-              <span style={{ fontSize: 14 }}>
-                {c.emoji} {c.label}
-              </span>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong,
-                }}
-              >
+          <button key={c.key} className={S.btnItem} onClick={() => setActiveCat(c.key)}>
+            <div className={S.rowSpreadMb}>
+              <span style={{ fontSize: 14 }}>{c.emoji} {c.label}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong }}>
                 {c.score}%
               </span>
             </div>
-            <div
-              style={{
-                height: 3,
-                background: T.surface,
-                borderRadius: T.r.pill,
-                overflow: 'hidden',
-              }}
-            >
+            <div className={S.miniBarWrap}>
               <div
+                className={S.miniBarFill}
                 style={{
-                  height: '100%',
                   width: `${c.score}%`,
-                  borderRadius: T.r.pill,
                   background: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong,
                 }}
               />

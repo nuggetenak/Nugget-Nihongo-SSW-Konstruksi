@@ -1,13 +1,11 @@
 // ─── FilterPopup.jsx ──────────────────────────────────────────────────────────
-// Full-screen category filter overlay — 3-col grid with counts
-// ─────────────────────────────────────────────────────────────────────────────
-
+// Note: per-category color on .cell bg/border/count — justified inline.
 import { useState } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from '../data/categories.js';
+import S from './FilterPopup.module.css';
 
-// Build card count per category for a given track + vocabMode
 function buildCounts(track, vocabMode) {
   const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
   const counts = {};
@@ -17,21 +15,11 @@ function buildCounts(track, vocabMode) {
     if (trackCatKeys && !trackCatKeys.has(c.category)) return;
     counts[c.category] = (counts[c.category] || 0) + 1;
   });
-  // total = sum of all matched
   counts.all = Object.values(counts).reduce((a, b) => a + b, 0);
   return counts;
 }
 
-export default function FilterPopup({
-  isOpen,
-  onClose,
-  track,
-  vocabMode,
-  activeCats,
-  onApply,
-  starredCount = 0,
-}) {
-  // Use a key so the inner component remounts fresh each time popup opens
+export default function FilterPopup({ isOpen, onClose, track, vocabMode, activeCats, onApply, starredCount = 0 }) {
   if (!isOpen) return null;
   return (
     <FilterPopupInner
@@ -49,10 +37,8 @@ export default function FilterPopup({
 function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, starredCount }) {
   const [pendingCats, setPendingCats] = useState(new Set(activeCats));
   const counts = buildCounts(track, vocabMode);
-
   const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
 
-  // Visible categories for this track (excl. 'all' — we show it separately)
   const visibleCats = CATEGORIES.filter(
     (c) => c.key !== 'all' && (c.key === 'bintang' || !trackCatKeys || trackCatKeys.has(c.key))
   );
@@ -71,7 +57,6 @@ function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, star
     });
   };
 
-  // Count how many cards the pending selection matches
   const pendingCount = pendingCats.has('all')
     ? counts.all
     : pendingCats.has('bintang')
@@ -80,208 +65,70 @@ function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, star
 
   const pendingCatCount = pendingCats.has('all') ? 0 : pendingCats.size;
 
-  const handleApply = () => {
-    onApply(pendingCats);
-    onClose();
-  };
+  const handleApply = () => { onApply(pendingCats); onClose(); };
 
   return (
     <>
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'rgba(0,0,0,0.5)',
-          zIndex: 200,
-          animation: 'fadeIn 0.15s ease',
-        }}
-      />
-      {/* Sheet */}
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '100%',
-          maxWidth: T.maxW,
-          zIndex: 201,
-          background: 'var(--ssw-bg)',
-          borderRadius: `${T.r.xl}px ${T.r.xl}px 0 0`,
-          boxShadow: T.shadow.lg,
-          animation: 'slideUp 0.25s ease',
-          maxHeight: '80dvh',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        {/* Handle */}
-        <div
-          style={{
-            width: 36,
-            height: 4,
-            background: 'var(--ssw-border)',
-            borderRadius: 99,
-            margin: '12px auto 0',
-          }}
-        />
-
-        {/* Title */}
-        <div
-          style={{
-            padding: '12px 20px 8px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <span style={{ fontSize: 15, fontWeight: 800 }}>Filter Kategori</span>
-          <button
-            onClick={onClose}
-            style={{
-              fontFamily: 'inherit',
-              fontSize: 13,
-              color: T.textMuted,
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: '4px 8px',
-            }}
-          >
-            ✕
-          </button>
+      <div className={S.backdrop} onClick={onClose} />
+      <div className={S.sheet}>
+        <div className={S.handle} />
+        <div className={S.titleRow}>
+          <span className={S.titleText}>Filter Kategori</span>
+          <button className={S.btnClose} onClick={onClose}>✕</button>
         </div>
 
-        {/* Scrollable grid */}
-        <div style={{ overflowY: 'auto', padding: '0 16px 8px', flex: 1 }}>
-          {/* "All" row */}
+        <div className={S.scroll}>
+          {/* All row */}
           <button
+            className={S.allRow}
+            data-active={String(pendingAll)}
             onClick={() => togglePending('all')}
-            style={{
-              fontFamily: 'inherit',
-              width: '100%',
-              padding: '12px 14px',
-              borderRadius: T.r.md,
-              background: pendingAll ? 'rgba(245,158,11,0.12)' : T.surface,
-              border: `1.5px solid ${pendingAll ? T.amber : T.border}`,
-              color: pendingAll ? T.amber : T.text,
-              textAlign: 'left',
-              cursor: 'pointer',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: 8,
-              fontWeight: pendingAll ? 700 : 400,
-            }}
           >
             <span>📚 すべて</span>
-            <span style={{ fontSize: 12, opacity: 0.65 }}>{counts.all}</span>
+            <span className={S.allCount}>{counts.all}</span>
           </button>
 
           {/* 3-col grid */}
-          <div
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6, marginBottom: 8 }}
-          >
-            {/* Bintang (starred) */}
+          <div className={S.grid}>
             {starredCount > 0 && (
               <button
+                className={S.cell}
                 onClick={() => togglePending('bintang')}
                 style={{
-                  fontFamily: 'inherit',
-                  padding: '10px 8px',
-                  borderRadius: T.r.md,
                   background: pendingCats.has('bintang') ? 'rgba(251,191,36,0.15)' : T.surface,
                   border: `1.5px solid ${pendingCats.has('bintang') ? T.gold : T.border}`,
-                  color: T.text,
-                  textAlign: 'center',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 4,
                 }}
               >
-                <span style={{ fontSize: 18 }}>⭐</span>
-                <span style={{ fontSize: 9, fontWeight: 700, color: T.textMuted, lineHeight: 1.2 }}>
-                  Bintang
-                </span>
-                <span style={{ fontSize: 10, fontWeight: 700, color: T.gold }}>{starredCount}</span>
+                <span className={S.cellEmoji}>⭐</span>
+                <span className={S.cellLabel}>Bintang</span>
+                <span className={S.cellCount} style={{ color: T.gold }}>{starredCount}</span>
               </button>
             )}
-
-            {/* Category cells */}
-            {visibleCats
-              .filter((c) => c.key !== 'bintang')
-              .map((cat) => {
-                const active = pendingCats.has(cat.key);
-                const cnt = counts[cat.key] || 0;
-                return (
-                  <button
-                    key={cat.key}
-                    onClick={() => togglePending(cat.key)}
-                    style={{
-                      fontFamily: 'inherit',
-                      padding: '10px 8px',
-                      borderRadius: T.r.md,
-                      background: active ? `${cat.color}18` : T.surface,
-                      border: `1.5px solid ${active ? cat.color + '60' : T.border}`,
-                      color: T.text,
-                      textAlign: 'center',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      gap: 4,
-                      opacity: cnt === 0 ? 0.4 : 1,
-                    }}
-                  >
-                    <span style={{ fontSize: 18 }}>{cat.emoji}</span>
-                    <span
-                      style={{
-                        fontSize: 9,
-                        fontWeight: 600,
-                        color: T.textDim,
-                        lineHeight: 1.2,
-                        fontFamily: T.fontJP,
-                      }}
-                    >
-                      {cat.label}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        color: active ? cat.color : T.textDim,
-                      }}
-                    >
-                      {cnt}
-                    </span>
-                  </button>
-                );
-              })}
+            {visibleCats.filter((c) => c.key !== 'bintang').map((cat) => {
+              const active = pendingCats.has(cat.key);
+              const cnt = counts[cat.key] || 0;
+              return (
+                <button
+                  key={cat.key}
+                  className={S.cell}
+                  onClick={() => togglePending(cat.key)}
+                  style={{
+                    background: active ? `${cat.color}18` : T.surface,
+                    border: `1.5px solid ${active ? cat.color + '60' : T.border}`,
+                    opacity: cnt === 0 ? 0.4 : 1,
+                  }}
+                >
+                  <span className={S.cellEmoji}>{cat.emoji}</span>
+                  <span className={S.cellLabel} style={{ fontFamily: T.fontJP }}>{cat.label}</span>
+                  <span className={S.cellCount} style={{ color: active ? cat.color : T.textDim }}>{cnt}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Apply button */}
-        <div style={{ padding: '12px 16px 28px', borderTop: `1px solid ${T.border}` }}>
-          <button
-            onClick={handleApply}
-            style={{
-              width: '100%',
-              padding: '13px',
-              fontSize: 14,
-              fontWeight: 700,
-              fontFamily: 'inherit',
-              borderRadius: T.r.md,
-              background: T.accent,
-              border: 'none',
-              color: T.textBright,
-              cursor: 'pointer',
-              boxShadow: T.shadow.glow,
-            }}
-          >
+        <div className={S.footer}>
+          <button className={S.applyBtn} onClick={handleApply}>
             {pendingCatCount > 0
               ? `✓ Terapkan ${pendingCatCount} kategori (${pendingCount} kartu)`
               : `✓ Terapkan semua (${pendingCount} kartu)`}

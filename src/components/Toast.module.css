@@ -1,0 +1,58 @@
+/* ─── Toast.module.css ─────────────────────────────────────────────────────── */
+
+.stack {
+  position: fixed;
+  /* bottom offset set inline: T.navH + 12 — prop-driven, justified */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: calc(var(--max-w, 480px) - 32px);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  background: var(--ssw-text);
+  color: var(--ssw-bg);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+  box-shadow: var(--ssw-shadowLg);
+  animation: toastIn 0.25s ease;
+  pointer-events: auto;
+}
+
+.msg {
+  flex: 1;
+}
+
+.btnUndo {
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-black);
+  background: none;
+  border: none;
+  color: var(--ssw-gold);
+  cursor: pointer;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.btnClose {
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 0 2px;
+  flex-shrink: 0;
+}

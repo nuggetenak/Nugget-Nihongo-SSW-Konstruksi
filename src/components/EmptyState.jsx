@@ -1,59 +1,16 @@
 // ─── EmptyState.jsx ───────────────────────────────────────────────────────────
-// Reusable empty / zero-state component with CTA button
-// ─────────────────────────────────────────────────────────────────────────────
-
-import { T } from '../styles/theme.js';
+import S from './EmptyState.module.css';
 
 export default function EmptyState({ icon = '📭', title, desc, ctaLabel, onCta, style = {} }) {
   return (
-    <div
-      style={{
-        padding: '48px 24px',
-        textAlign: 'center',
-        maxWidth: T.maxW,
-        margin: '0 auto',
-        animation: 'fadeIn 0.3s ease',
-        ...style,
-      }}
-    >
-      <div
-        style={{
-          fontSize: 48,
-          marginBottom: 14,
-          filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.15))',
-        }}
-      >
-        {icon}
-      </div>
-      <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 6, color: T.text }}>{title}</div>
+    <div className={S.wrap} style={style}>
+      <div className={S.icon}>{icon}</div>
+      <div className={S.title}>{title}</div>
       {desc && (
-        <div
-          style={{
-            fontSize: 13,
-            color: T.textMuted,
-            lineHeight: 1.6,
-            marginBottom: onCta ? 20 : 0,
-          }}
-        >
-          {desc}
-        </div>
+        <div className={`${S.desc}${onCta ? '' : ' ' + S.descNoBtn}`}>{desc}</div>
       )}
       {onCta && (
-        <button
-          onClick={onCta}
-          style={{
-            fontFamily: 'inherit',
-            padding: '11px 24px',
-            fontSize: 13,
-            fontWeight: 700,
-            borderRadius: T.r.md,
-            background: T.accent,
-            border: 'none',
-            color: T.textBright,
-            cursor: 'pointer',
-            boxShadow: T.shadow.glow,
-          }}
-        >
+        <button className={S.cta} onClick={onCta}>
           {ctaLabel}
         </button>
       )}

@@ -1,13 +1,8 @@
 // ─── Toast.jsx ────────────────────────────────────────────────────────────────
-// Lightweight toast provider. Max 2 toasts, stacked bottom-center, above nav.
-// Usage:
-//   import { useToast } from './Toast.jsx';
-//   const toast = useToast();
-//   toast.show('Hafal! ✓', { undo: () => ... });
-// ─────────────────────────────────────────────────────────────────────────────
-
+// Note: stack bottom offset is prop-driven (T.navH + 12) — kept inline.
 import { createContext, useContext, useState, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
+import S from './Toast.module.css';
 
 const ToastCtx = createContext(null);
 
@@ -22,7 +17,7 @@ export function ToastProvider({ children }) {
   const show = useCallback(
     (message, { undo, duration = 3500 } = {}) => {
       const id = ++nextId.current;
-      setToasts((ts) => [...ts.slice(-1), { id, message, undo }]); // max 2
+      setToasts((ts) => [...ts.slice(-1), { id, message, undo }]);
       setTimeout(() => dismiss(id), duration);
       return id;
     },
@@ -32,78 +27,19 @@ export function ToastProvider({ children }) {
   return (
     <ToastCtx.Provider value={{ show, dismiss }}>
       {children}
-      {/* Toast stack — fixed above BottomNav */}
-      <div
-        style={{
-          position: 'fixed',
-          bottom: T.navH + 12,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 'calc(100% - 32px)',
-          maxWidth: T.maxW - 32,
-          zIndex: 300,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 6,
-          pointerEvents: 'none',
-        }}
-      >
+      <div className={S.stack} style={{ bottom: T.navH + 12 }}>
         {toasts.map((t) => (
-          <div
-            key={t.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              padding: '11px 14px',
-              borderRadius: T.r.md,
-              background: T.text,
-              color: T.bg,
-              fontSize: 13,
-              fontWeight: 600,
-              boxShadow: T.shadow.lg,
-              animation: 'toastIn 0.25s ease',
-              pointerEvents: 'auto',
-            }}
-          >
-            <span style={{ flex: 1 }}>{t.message}</span>
+          <div key={t.id} className={S.toast}>
+            <span className={S.msg}>{t.message}</span>
             {t.undo && (
               <button
-                onClick={() => {
-                  t.undo();
-                  dismiss(t.id);
-                }}
-                style={{
-                  fontFamily: 'inherit',
-                  fontSize: 12,
-                  fontWeight: 800,
-                  background: 'none',
-                  border: 'none',
-                  color: T.gold,
-                  cursor: 'pointer',
-                  padding: '0 4px',
-                  flexShrink: 0,
-                }}
+                className={S.btnUndo}
+                onClick={() => { t.undo(); dismiss(t.id); }}
               >
                 Batalkan
               </button>
             )}
-            <button
-              onClick={() => dismiss(t.id)}
-              style={{
-                fontFamily: 'inherit',
-                fontSize: 12,
-                background: 'none',
-                border: 'none',
-                color: 'inherit',
-                opacity: 0.5,
-                cursor: 'pointer',
-                padding: '0 2px',
-                flexShrink: 0,
-              }}
-            >
-              ✕
-            </button>
+            <button className={S.btnClose} onClick={() => dismiss(t.id)}>✕</button>
           </div>
         ))}
       </div>

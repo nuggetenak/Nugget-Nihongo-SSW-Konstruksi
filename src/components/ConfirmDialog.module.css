@@ -1,0 +1,71 @@
+/* ─── ConfirmDialog.module.css ─────────────────────────────────────────────── */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 400;
+  animation: fadeIn 0.15s ease;
+}
+
+.sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-w, 480px);
+  z-index: 401;
+  background: var(--ssw-bg);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  padding: 24px 20px 36px;
+  box-shadow: var(--ssw-shadowLg);
+  animation: slideUp 0.25s ease;
+}
+
+.handle {
+  width: 36px;
+  height: 4px;
+  background: var(--ssw-border);
+  border-radius: var(--r-pill);
+  margin: 0 auto 20px;
+}
+
+.message {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--ssw-text);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btnCancel {
+  flex: 1;
+  padding: 13px;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  font-family: inherit;
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-textMuted);
+  cursor: pointer;
+}
+
+.btnConfirm {
+  flex: 1;
+  padding: 13px;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  font-family: inherit;
+  border-radius: var(--r-md);
+  background: var(--ssw-wrong);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}

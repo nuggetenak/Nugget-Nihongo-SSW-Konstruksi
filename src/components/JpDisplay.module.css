@@ -1,0 +1,126 @@
+/* ─── JpDisplay.module.css ─────────────────────────────────────────────────── */
+
+/* ── JpFront shared ── */
+.jpWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.jpWrapTight {
+  gap: 2px;
+}
+
+.jpSpan {
+  line-height: var(--lh-tight);
+  text-align: center;
+  word-break: break-word;
+  font-weight: var(--fw-bold);
+  color: var(--ssw-textBright);
+  /* font-family & font-size set inline — prop-driven (jpFontSize()), justified */
+}
+
+.hr {
+  width: 44px;
+  height: 1px;
+  background: var(--ssw-borderLight);
+  margin: 4px auto;
+}
+
+.hrHover {
+  background: var(--ssw-borderHover);
+}
+
+.vsLabel {
+  /* font-size set inline — derived from jp font size (justified) */
+  color: var(--ssw-amber);
+  font-weight: var(--fw-black);
+  letter-spacing: 4px;
+  opacity: 0.85;
+}
+
+.arrowDown {
+  font-size: var(--fs-caption);
+  color: var(--ssw-gold);
+  opacity: 0.65;
+  line-height: 1;
+}
+
+.readingRow {
+  margin-top: 6px;
+  text-align: center;
+}
+
+.furi {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  margin-bottom: 2px;
+}
+
+.romaji {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  font-style: italic;
+}
+
+/* ── DescBlock ── */
+.descBlock {
+  font-size: var(--fs-caption);
+  line-height: var(--lh-relaxed);
+  text-align: left;
+  color: var(--ssw-textMuted);
+}
+
+.intro {
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.listRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  align-items: flex-start;
+}
+
+.listRowTight {
+  margin-bottom: 5px;
+}
+
+.labelChip {
+  color: var(--ssw-amber);
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: var(--lh-relaxed);
+  background: rgba(180, 83, 9, 0.10);
+  border: 1px solid rgba(180, 83, 9, 0.25);
+  border-radius: 5px;
+  padding: 0px 5px;
+  font-size: var(--fs-small);
+}
+
+.numLabel {
+  color: var(--ssw-amber);
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+  min-width: 16px;
+  line-height: var(--lh-relaxed);
+}
+
+.body {
+  opacity: 0.92;
+}
+
+.plainPara {
+  margin: 0;
+}
+
+.footnote {
+  margin-top: 5px;
+  font-size: var(--fs-micro);
+  opacity: 0.38;
+  font-style: italic;
+  color: var(--ssw-textDim);
+}
