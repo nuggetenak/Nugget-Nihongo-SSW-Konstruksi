@@ -64,10 +64,25 @@ export function AppProvider({ children }) {
     setPref('track', t);
   }, [setPref]);
 
-  // ── Onboarded ──
-  const completeOnboarding = useCallback(() => {
-    setPref('onboarded', true);
+  // ── Daily Goal ──
+  const setDailyGoal = useCallback((g) => {
+    setPref('dailyGoal', g);
   }, [setPref]);
+
+  // ── Onboarded ──
+  // Accepts optional { track, dailyGoal } from new interactive onboarding.
+  const completeOnboarding = useCallback((payload) => {
+    setPrefsState((prev) => {
+      const next = {
+        ...prev,
+        onboarded: true,
+        ...(payload?.track     && { track: payload.track }),
+        ...(payload?.dailyGoal && { dailyGoal: payload.dailyGoal }),
+      };
+      storageSet('prefs', next);
+      return next;
+    });
+  }, []);
 
   const ctx = {
     // Prefs
@@ -77,6 +92,8 @@ export function AppProvider({ children }) {
     toggleTheme,
     onboarded: prefs.onboarded,
     completeOnboarding,
+    dailyGoal: prefs.dailyGoal ?? 20,
+    setDailyGoal,
     // Navigation
     tab, setTab,
     mode, goMode, exitMode, goTab,

@@ -1,3 +1,18 @@
+## [3.5.1] - 2026-05-01
+
+### Phase 7 — Onboarding Redesign
+
+**Strategy:** Replace static 4-slide onboarding with interactive 4-step flow. Track picker merged into onboarding. Daily goal setter added.
+
+**Changes:**
+- `src/components/Onboarding.jsx` — new component (replaces inline in App.jsx). 4 steps: Welcome → Track Picker (merged) → Mini Flashcard Demo (3D flip, 安全帯) → Daily Goal Setter (10/20/30/50 kartu/hari)
+- `src/components/Onboarding.module.css` — full CSS module with animation spec
+- `src/App.jsx` — remove inline Onboarding + TrackPicker imports; use new `Onboarding`; edge-case track=null handled
+- `src/contexts/AppContext.jsx` — `completeOnboarding` now accepts `{ track, dailyGoal }` payload; `setDailyGoal` exposed in context; `dailyGoal` surfaced
+- `src/storage/schema.js` — `dailyGoal: 20` already in defaults (no change)
+
+**Result:** New users experience interactive onboarding: tap to flip real flashcard (3D CSS animation), pick track, set daily goal. Old 4-slide flow removed. Build ✓ · 150 tests pass ✓
+
 ## [3.4.0] - 2026-04-29
 
 ### Phase 6 — CSS Modules (partial — presentation components)
