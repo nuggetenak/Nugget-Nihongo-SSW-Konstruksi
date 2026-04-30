@@ -1,8 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    // Bundle visualizer — generates stats.html on build (only in non-CI)
+    mode !== 'test' && visualizer({
+      filename: 'dist/stats.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+      title: 'SSW Konstruksi — Bundle Analysis',
+    }),
+  ].filter(Boolean),
   base: '/Nugget-Nihongo-SSW-Konstruksi/',
   build: {
     outDir: 'dist',
@@ -29,4 +40,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

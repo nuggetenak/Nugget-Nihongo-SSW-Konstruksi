@@ -10,7 +10,15 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['src/utils/**', 'src/srs/**', 'src/hooks/**'],
+      include: [
+        'src/utils/**',
+        'src/srs/**',
+        'src/hooks/**',
+        'src/storage/**',
+        'src/components/Dashboard.jsx',
+        'src/components/QuizShell.jsx',
+        'src/components/ResultScreen.jsx',
+      ],
       exclude: ['src/tests/**', 'src/data/**'],
     },
   },
