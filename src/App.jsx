@@ -22,7 +22,7 @@ export default function App() {
   const srs = useSRSContext();
 
   // Active mode takes full screen
-  if (mode) return <ModeRouter />;
+  if (mode) return <main id="main-content"><ModeRouter /></main>;
 
   // First-run: interactive onboarding handles Welcome + Track + Demo + Goal.
   if (!onboarded) return <Onboarding onComplete={completeOnboarding} />;
@@ -33,12 +33,12 @@ export default function App() {
   const belajarBadges = { ulasan: srs.dueCount };
 
   return (
-    <div style={{ paddingBottom: T.navH + 16 }}>
+    <main id="main-content" style={{ paddingBottom: T.navH + 16 }}>
       {tab === 'home'    && <Dashboard known={known} unknown={unknown} track={track} onNavigate={goMode} onChangeTrack={() => setTrack(null)} srs={srs} isDark={isDark} onToggleTheme={toggleTheme} />}
       {tab === 'belajar' && <BelajarTab onSelect={goMode} badges={belajarBadges} />}
       {tab === 'saya'    && <SayaTab />}
 
       <BottomNav active={tab} onChange={goTab} dueBadge={srs.dueCount} />
-    </div>
+    </main>
   );
 }

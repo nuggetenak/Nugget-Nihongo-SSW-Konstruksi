@@ -53,6 +53,24 @@
     }
     #root { min-height: 100dvh; }
 
+    /* Skip nav link — visually hidden until focused */
+    .skip-nav {
+      position: absolute;
+      top: -100px;
+      left: 8px;
+      z-index: 9999;
+      background: #F59E0B;
+      color: #0C0A09;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: top 0.1s ease;
+    }
+    .skip-nav:focus {
+      top: 8px;
+    }
     /* Splash screen flicker prevention */
     #root:empty::before {
       content: '';
@@ -83,7 +101,9 @@
   </script>
 </head>
 <body>
-  <div id="root"></div>
+  <!-- Skip navigation for keyboard users -->
+  <a href="#main-content" class="skip-nav">Langsung ke konten</a>
+  <div id="root" role="application" aria-label="SSW Konstruksi"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

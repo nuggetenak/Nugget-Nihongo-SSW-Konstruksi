@@ -1,3 +1,28 @@
+## [3.5.2] - 2026-05-01
+
+### Phase 8 — Empty States + Loading + Accessibility
+
+**Skeleton component:**
+- `src/components/Skeleton.jsx` — new reusable shimmer skeleton with sub-variants: `Skeleton` (base), `Skeleton.Card` (flashcard front), `Skeleton.QuizOption`, `Skeleton.Stat`, `Skeleton.Row`
+- `src/components/Skeleton.module.css` — shimmer keyframe animation via CSS gradient sweep
+
+**Empty states:**
+- `src/components/EmptyState.jsx` — added 5 named presets: `EmptyState.NoReviews`, `EmptyState.NoWrong`, `EmptyState.SearchEmpty`, `EmptyState.NoStarred`, `EmptyState.NoProgress`; added `role="status"` + `aria-live="polite"` to base component
+
+**Accessibility:**
+- `src/components/Toast.jsx` — added `role="status"` + `aria-live="polite"` + `aria-atomic="false"` to toast stack; aria-labels on Batalkan + close buttons
+- `src/router/ModeRouter.jsx` — replaced plain text loader with `Skeleton.Card`; `ModeLoader` now has `role="status"` + `aria-label`; ErrorBoundary gets `role="alert"`; `FocusSentinel` component moves focus to `#mode-heading` on mode entry (80ms delay for Suspense)
+- `index.html` — skip nav link (`.skip-nav`) reveals on :focus; `#root` gets `role="application"` + `aria-label`; `<main id="main-content">` landmark in App.jsx
+- `src/App.jsx` — wrapped render output in `<main id="main-content">` for skip nav target
+
+**Color contrast (Blueprint B12):**
+- `src/styles/theme.js` — bumped `--ssw-textDim` light: 0.36→0.52, dark: 0.30→0.50; `--ssw-textMuted` light: 0.58→0.72, dark: 0.55→0.72; `--ssw-textFaint` light: 0.18→0.32, dark: 0.16→0.30 — all text now ≥4.5:1 against bg
+
+**ReviewMode loading:**
+- `src/modes/ReviewMode.jsx` — `queue === null` state now renders `Skeleton.Card` instead of dim text
+
+Build ✓ · 150 tests ✓
+
 ## [3.5.1] - 2026-05-01
 
 ### Phase 7 — Onboarding Redesign

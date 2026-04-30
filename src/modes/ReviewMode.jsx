@@ -9,6 +9,8 @@ import { stripFuri, jpFontSize } from '../utils/jp-helpers.js';
 import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import Skeleton from '../components/Skeleton.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
@@ -61,7 +63,13 @@ export default function ReviewMode({ srs, onExit }) {
   }, [flipped, handleRate]);
 
   if (queue === null) {
-    return <div className={S.pageCenter}><div style={{ fontSize: 13, color: T.textDim }}>Memuat antrian ulasan...</div></div>;
+    return (
+    <div style={{ padding: '20px 20px', maxWidth: 480, margin: '0 auto' }}>
+      <Skeleton width="60px" height={14} style={{ marginBottom: 16 }} />
+      <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
+      <Skeleton.Card />
+    </div>
+  );
   }
 
   if (done) {

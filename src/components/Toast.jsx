@@ -27,7 +27,14 @@ export function ToastProvider({ children }) {
   return (
     <ToastCtx.Provider value={{ show, dismiss }}>
       {children}
-      <div className={S.stack} style={{ bottom: T.navH + 12 }}>
+      {/* role="status" + aria-live="polite" — screen readers announce each toast */}
+      <div
+        className={S.stack}
+        style={{ bottom: T.navH + 12 }}
+        role="status"
+        aria-live="polite"
+        aria-atomic="false"
+      >
         {toasts.map((t) => (
           <div key={t.id} className={S.toast}>
             <span className={S.msg}>{t.message}</span>
@@ -35,11 +42,18 @@ export function ToastProvider({ children }) {
               <button
                 className={S.btnUndo}
                 onClick={() => { t.undo(); dismiss(t.id); }}
+                aria-label="Batalkan aksi terakhir"
               >
                 Batalkan
               </button>
             )}
-            <button className={S.btnClose} onClick={() => dismiss(t.id)}>✕</button>
+            <button
+              className={S.btnClose}
+              onClick={() => dismiss(t.id)}
+              aria-label="Tutup notifikasi"
+            >
+              ✕
+            </button>
           </div>
         ))}
       </div>

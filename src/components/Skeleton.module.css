@@ -1,0 +1,70 @@
+/* ─── Skeleton.module.css ────────────────────────────────────────────────── */
+
+/* Base shimmer block — used by all skeletons */
+.shimmer {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--ssw-surface)      25%,
+    var(--ssw-surfaceHover) 50%,
+    var(--ssw-surface)      75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { background-position:  200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* Flashcard front skeleton */
+.card {
+  width: 100%;
+  border-radius: 16px;
+  border: 1.5px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 200px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Quiz option skeleton */
+.quizOption {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Dashboard stat skeleton */
+.stat {
+  padding: 10px 8px;
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+/* List row skeleton */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  animation: fadeIn 0.3s ease;
+}

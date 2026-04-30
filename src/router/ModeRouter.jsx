@@ -1,9 +1,10 @@
 // ─── router/ModeRouter.jsx ────────────────────────────────────────────────────
 // Renders the active mode wrapped in Suspense + ErrorBoundary.
 // Reads mode from AppContext, passes correct props to each mode.
+// Phase 8: focus management — moves focus to #mode-heading on mount.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Component, Suspense } from 'react';
+import { Component, Suspense, useEffect, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { getCatsForTrack } from '../data/categories.js';
@@ -11,20 +12,23 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import { MODE_COMPONENTS } from './modes.js';
+import Skeleton from '../components/Skeleton.jsx';
 
-// ── Loading fallback ───────────────────────────────────────────────────────
+// ── Loading fallback — skeleton, not spinner ───────────────────────────────
 function ModeLoader() {
   return (
     <div
-      style={{
-        minHeight: '50dvh',
-        display: 'grid',
-        placeItems: 'center',
-        color: T.textDim,
-        fontSize: 13,
-      }}
+      style={{ padding: '20px 20px', maxWidth: 480, margin: '0 auto' }}
+      role="status"
+      aria-label="Memuat mode..."
+      aria-live="polite"
     >
-      Memuat mode…
+      <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'center' }}>
+        <Skeleton width="80px" height={16} />
+        <Skeleton width="60px" height={16} style={{ marginLeft: 'auto' }} />
+      </div>
+      <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
+      <Skeleton.Card />
     </div>
   );
 }
@@ -44,6 +48,7 @@ class ErrorBoundary extends Component {
     if (this.state.error) {
       return (
         <div
+          role="alert"
           style={{
             minHeight: '60dvh',
             display: 'flex',
@@ -55,7 +60,7 @@ class ErrorBoundary extends Component {
             gap: 12,
           }}
         >
-          <div style={{ fontSize: 40 }}>⚠️</div>
+          <div style={{ fontSize: 40 }} aria-hidden="true">⚠️</div>
           <div style={{ fontSize: 15, fontWeight: 700, color: T.text }}>
             Mode ini mengalami error
           </div>
@@ -64,6 +69,7 @@ class ErrorBoundary extends Component {
           </div>
           <button
             onClick={this.props.onExit}
+            aria-label="Kembali ke menu utama"
             style={{
               marginTop: 8,
               fontFamily: 'inherit',
@@ -83,6 +89,40 @@ class ErrorBoundary extends Component {
     }
     return this.props.children;
   }
+}
+
+// ── Focus trap helper — moves focus to the skip target on mode entry ────────
+function FocusSentinel() {
+  const ref = useRef(null);
+  useEffect(() => {
+    // Small delay: let Suspense resolve before moving focus
+    const t = setTimeout(() => {
+      if (ref.current) {
+        ref.current.focus({ preventScroll: false });
+      }
+    }, 80);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    // Invisible focus target — picked up by screen readers as region start
+    <div
+      ref={ref}
+      id="mode-heading"
+      tabIndex={-1}
+      aria-live="polite"
+      style={{
+        position: 'absolute',
+        width: 1,
+        height: 1,
+        overflow: 'hidden',
+        clip: 'rect(0 0 0 0)',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      Mode aktif
+    </div>
+  );
 }
 
 // ── ModeRouter ────────────────────────────────────────────────────────────
@@ -131,6 +171,7 @@ export default function ModeRouter() {
 
   return (
     <ErrorBoundary onExit={exitMode}>
+      <FocusSentinel />
       <Suspense fallback={<ModeLoader />}>
         <ModeComponent {...props} />
       </Suspense>
