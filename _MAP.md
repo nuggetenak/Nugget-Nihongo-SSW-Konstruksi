@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-04-29 by Sonnet
-> **Version:** v3.5.2 — Phase 1–8(complete)+9(partial) complete
+> **Last updated:** 2026-05-01 by Sonnet
+> **Version:** v3.6.0 — Phase 1–10 complete ✅ RELEASED
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v3.md` ← **READ THIS FIRST**
 
 ---
@@ -182,8 +182,9 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 | BottomNav | 4 tabs → **3 tabs** ✅ | 3 tabs |
 | Dashboard | 819 → **265 lines** ✅ | Redesigned |
 | ErrorBoundary count | 0 → **all 18 modes** ✅ | All 18 modes wrapped |
-| Tests | 111 → **150 passing** ✅ | ~170+ |
+| Tests | 111 → **209 passing** ✅ | ~170+ |
 | CI/CD | none → **GitHub Actions** ✅ | GitHub Actions auto-deploy |
+| Bundle visualizer | none → **dist/stats.html** ✅ | Bundle visualizer |
 | 3D card flip | none → **✅** | Phase 4 |
 | FSRS always visible | long-press → **✅** | Phase 4 |
 | ResultScreen 2-path | none → **✅** | Phase 5 |

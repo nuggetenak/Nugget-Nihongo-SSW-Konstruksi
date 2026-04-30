@@ -10,7 +10,6 @@ import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Skeleton from '../components/Skeleton.jsx';
-import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));

@@ -1,3 +1,40 @@
+## [3.6.0] - 2026-05-01
+
+### Phase 10 — QA + Release
+
+**Lint fixes (0 errors, 0 warnings):**
+- `FlashcardMode.jsx`: suppress false-positive `react-hooks/refs` on `starred.size` (Set prop, not a ref)
+- `Onboarding.jsx`: rename unused `stepIdx` → `_stepIdx`
+- `ReviewMode.jsx`: remove unused `EmptyState` import
+- `VocabMode.jsx`: fix `let qs` → `const qs`
+
+**Final audit:**
+- 209 tests passing (all 9 test files green)
+- `audit:integrity`: 1438 cards, 0 issues, 0 warnings
+- Build: 106 modules, clean
+- `dist/stats.html` bundle visualizer generated
+
+---
+
+## [3.5.3] - 2026-05-01
+
+### Phase 9 — CI/CD + DX
+
+**Component tests (+59 new tests, 150 → 209):**
+- `ResultScreen` — 18 tests: celebrate/encourage/neutral paths, edge cases, actions
+- `QuizShell` — 21 tests: rendering, answer selection, multi-Q flow, finish flow
+- `Dashboard` — 20 tests: header, progress ring, smart CTA, quick modes, track variants
+
+**Bundle visualizer:**
+- Install `rollup-plugin-visualizer`
+- `vite.config.js` → functional form (mode-aware), visualizer outputs `dist/stats.html` with gzip+brotli sizes
+
+**DX:**
+- `vitest.config.js`: expand coverage to include `storage/**` + 3 core components
+- Install missing `@testing-library/dom` peer dep
+
+---
+
 ## [3.5.2] - 2026-05-01
 
 ### Phase 8 — Empty States + Loading + Accessibility

@@ -423,6 +423,7 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
 
       {/* Tools row */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 6, marginTop: 8 }}>
+        {/* eslint-disable react-hooks/refs */}
         {[
           { emoji: sortMode === 'original' ? '⏮' : sortMode === 'shuffle' ? '🔀' : '🎯', label: sortMode === 'original' ? 'Urut' : sortMode === 'shuffle' ? 'Acak' : 'Prioritas', active: sortMode !== 'priority', onClick: () => setSortMode((m) => m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority') },
           { emoji: '❌', label: unknownInView > 0 ? `${unknownInView}` : 'Belum', active: reviewBelum, border: T.wrongBorder, bg: T.wrongBg, color: T.wrong, onClick: () => { setReviewBelum((r) => !r); setIdx(0); } },

@@ -28,7 +28,7 @@ export default function VocabMode({ onExit }) {
 
   const questions = useMemo(() => {
     if (!activeSet) return [];
-    let qs = activeSet === MIX_ALL_ID
+    const qs = activeSet === MIX_ALL_ID
       ? shuffle(VOCAB_SETS.flatMap((s) => s.questions.map((q) => ({ ...q, _set: s.id }))))
       : shuffle(setDef?.questions ?? []);
     return qs.map((q) => ({

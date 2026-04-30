@@ -272,7 +272,7 @@ export default function Onboarding({ onComplete }) {
   const [track, setTrack] = useState(null);
 
   const STEP_ORDER = ['welcome', 'track', 'demo', 'goal'];
-  const stepIdx = STEP_ORDER.indexOf(step);
+  const _stepIdx = STEP_ORDER.indexOf(step); // kept for future progress indicator
 
   function handleTrackNext(t) {
     setTrack(t);
