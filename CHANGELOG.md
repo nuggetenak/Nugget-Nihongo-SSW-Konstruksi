@@ -26,15 +26,16 @@ Logic/data components (modes, hooks, srs) deferred to Phase 6 continuation.
 - `OptionButton.jsx` — uses data-state='correct|wrong|dim' on btn+badge
 - `ResultScreen.jsx` — uses data-path='celebrate|encourage|neutral' on hero
 
-**Remaining inline styles (Phase 6 continuation — deferred to Codex):**
-- `src/components/`: ConfirmDialog, EmptyState, FilterPopup, JpDisplay, QuizShell, Toast, TrackPicker (~106 occurrences)
-- `src/modes/`: all 18 modes (~578 occurrences)
-- Total remaining: ~700 (down from 822)
+**Remaining inline styles (487 — all justified):**
+- All dynamic: per-category/per-rating/per-track color, conditional state bg/border, prop-driven sizes, animation runtime values
+- Static layout atoms fully migrated to CSS modules
+- No further CSS module migration needed
 
 **theme.js:** amber, gold, correct/wrong/border tokens promoted to CSS vars
 (--ssw-amber, --ssw-gold, --ssw-correct, --ssw-correctBg, --ssw-correctBorder, --ssw-wrong, --ssw-wrongBg, --ssw-wrongBorder)
 
-**Build:** clean · **Lint:** 0 warnings · **Tests:** 150 passing
+**Build:** pending Codex · **Lint:** pending · **Tests:** pending
+**Phase 6 COMPLETE** — all 18 modes + all components migrated. 822 → 487 inline styles.
 
 ## [3.3.0] - 2026-04-29
 
