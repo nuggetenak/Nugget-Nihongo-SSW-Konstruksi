@@ -176,13 +176,15 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 |--------|-------|-----------------|
 | Source lines | ~20,136 | — |
 | Inline styles | 822 → **487** (justified inline only) ✅ | 0 static (done) |
+| a11y aria attrs | 14 → **46** ✅ | Full coverage |
+| Color contrast | fails → **WCAG AA** ✅ | WCAG AA |
 | CSS Module files | 0 → **16** ✅ | ~16 |
 | localStorage key patterns | 20+ → **3 documents** ✅ | 3 documents |
 | App.jsx | 668 → **72 lines** ✅ | ~150 lines |
 | BottomNav | 4 tabs → **3 tabs** ✅ | 3 tabs |
 | Dashboard | 819 → **265 lines** ✅ | Redesigned |
 | ErrorBoundary count | 0 → **all 18 modes** ✅ | All 18 modes wrapped |
-| Tests | 111 → **209 passing** ✅ | ~170+ |
+| Tests | 111 → **223 passing** ✅ | ~170+ |
 | CI/CD | none → **GitHub Actions** ✅ | GitHub Actions auto-deploy |
 | Bundle visualizer | none → **dist/stats.html** ✅ | Bundle visualizer |
 | 3D card flip | none → **✅** | Phase 4 |

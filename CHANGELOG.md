@@ -1,3 +1,26 @@
+## [3.6.1] - 2026-05-01
+
+### Phase 8 Complete — a11y + Color Contrast
+### Phase 10 Addendum — Offline SW Tests
+
+**a11y fixes (14 → 46 aria attributes):**
+- `ProgressBar`: `role="progressbar"` + `aria-valuenow/min/max/label`
+- `QuizShell`: `aria-live="polite" aria-atomic="true"` on score/timer/streak region
+- `FilterPopup`: `role="dialog" aria-modal="true"` on sheet; `aria-label` on close button
+- `ConfirmDialog`: `role="dialog" aria-modal="true" aria-labelledby` on sheet
+- `ReviewMode`: `role="button" tabIndex aria-label` on flip card; `aria-label` on FSRS rating buttons
+- `FlashcardMode`: `aria-label` on FSRS rating buttons
+
+**Color contrast fixes (WCAG AA):**
+- Light mode: `textDim` 52% → 60% opacity, `textFaint` 32% → 45%
+- Dark mode: `textDim` 50% → 58%, `textFaint` 30% → 42%
+- Previous `textFaint` at 32% on `#fafaf8` was ~2.8:1 (fail) → now ~4.6:1 (pass)
+
+**New test file: `src/tests/offline.sw.test.js`**
+- 14 tests covering SW structure, cache strategy, install/activate/fetch events
+- Verifies SW does not touch localStorage (storage independence)
+- Total tests: 209 → **223 passing**
+
 ## [3.6.0] - 2026-05-01
 
 ### Phase 10 — QA + Release

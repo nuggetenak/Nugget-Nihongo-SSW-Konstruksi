@@ -70,11 +70,11 @@ function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, star
   return (
     <>
       <div className={S.backdrop} onClick={onClose} />
-      <div className={S.sheet}>
+      <div className={S.sheet} role="dialog" aria-modal="true" aria-label="Filter Kategori">
         <div className={S.handle} />
         <div className={S.titleRow}>
           <span className={S.titleText}>Filter Kategori</span>
-          <button className={S.btnClose} onClick={onClose}>✕</button>
+          <button className={S.btnClose} onClick={onClose} aria-label="Tutup filter">✕</button>
         </div>
 
         <div className={S.scroll}>

@@ -390,6 +390,7 @@ export default function FlashcardMode({ cards, known, unknown, onMark, onExit, s
                 <button
                   key={r}
                   onClick={() => handleRate(r)}
+                  aria-label={`Nilai ${m.id}${interval != null ? ` — ulang dalam ${fmtInterval(interval)}` : ""}`}
                   style={{
                     fontFamily: 'inherit', padding: '12px 4px', borderRadius: T.r.md, cursor: 'pointer',
                     background: m.bg, border: `1.5px solid ${m.border}`, color: m.color,

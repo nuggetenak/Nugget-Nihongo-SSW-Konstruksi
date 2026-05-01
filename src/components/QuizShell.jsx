@@ -111,17 +111,18 @@ export default function QuizShell({
     <div className={S.wrap}>
       <div className={S.header}>
         <button className={S.btnBack} onClick={onExit}>← {title}</button>
-        <div className={S.meta}>
+        <div className={S.meta} aria-live="polite" aria-atomic="true">
           {fmtTime && (
             <span
               className={S.timer}
               style={{ color: timeLeft < 60 ? T.wrong : T.textMuted }}
+              aria-label={timeLeft < 60 ? `Peringatan: sisa waktu ${fmtTime}` : `Waktu ${fmtTime}`}
             >
               ⏱ {fmtTime}
             </span>
           )}
-          <span className={S.score}>{correct}/{qIdx + (selected !== null ? 1 : 0)}</span>
-          {streak > 1 && <span className={S.streak}>🔥{streak}</span>}
+          <span className={S.score} aria-label={`Skor ${correct} benar dari ${qIdx + (selected !== null ? 1 : 0)} soal`}>{correct}/{qIdx + (selected !== null ? 1 : 0)}</span>
+          {streak > 1 && <span className={S.streak} aria-label={`Streak ${streak}`}>🔥{streak}</span>}
         </div>
       </div>
 

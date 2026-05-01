@@ -138,6 +138,10 @@ export default function ReviewMode({ srs, onExit }) {
       {/* Card - border color is conditional on flip state, justified inline */}
       <div
         onClick={() => !flipped && setFlipped(true)}
+        role="button"
+        tabIndex={flipped ? -1 : 0}
+        onKeyDown={(e) => { if (!flipped && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); setFlipped(true); } }}
+        aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? currentCard.jp : ""}`}
         style={{ marginTop: 10, padding: flipped ? '22px 18px' : '36px 20px', background: T.surface, borderRadius: T.r.xxl, border: `1.5px solid ${flipped ? T.borderActive : T.border}`, minHeight: 220, cursor: flipped ? 'default' : 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'center', transition: 'all 0.2s cubic-bezier(0.4,0,0.2,1)' }}
       >
         <div style={{ textAlign: 'center', marginBottom: flipped ? 16 : 0 }}>
@@ -170,7 +174,7 @@ export default function ReviewMode({ srs, onExit }) {
               const m = RATING_META[rating];
               const days = intervals[rating];
               return (
-                <button key={rating} onClick={() => handleRate(rating)} style={{ fontFamily: 'inherit', padding: '10px 4px', borderRadius: T.r.md, cursor: 'pointer', background: m.bg, border: `1.5px solid ${m.border}`, color: m.color, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, transition: 'all 0.15s' }}>
+                <button key={rating} onClick={() => handleRate(rating)} aria-label={`Nilai ${m.id}`} style={{ fontFamily: 'inherit', padding: '10px 4px', borderRadius: T.r.md, cursor: 'pointer', background: m.bg, border: `1.5px solid ${m.border}`, color: m.color, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, transition: 'all 0.15s' }}>
                   <span style={{ fontSize: 14 }}>{m.emoji}</span>
                   <span style={{ fontSize: 12, fontWeight: 700 }}>{m.id}</span>
                   {days != null && <span style={{ fontSize: 9, opacity: 0.7 }}>{fmtInterval(days)}</span>}
