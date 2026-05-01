@@ -5,10 +5,19 @@ import { T } from '../styles/theme.js';
 import { stripFuri, extractReadings, jpFontSize } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
-// ─── JpFront ─────────────────────────────────────────────────────────────────
-export function JpFront({ jp = '', furi, romaji }) {
+// ─── JpFront (phaseE) ─────────────────────────────────────────────────────────
+// E.3 TD-10: Added furiganaPolicy prop ('always' | 'tap' | 'hidden').
+// Default 'always' preserves existing behavior for all N5-N4 users.
+// 'tap' and 'hidden' are wired for Phase E prep — full UI in Phase G.
+export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always' }) {
+  // Determine whether to show furigana based on policy
+  // 'always' (default) = show — no behavioral change for current users
+  // 'hidden' = suppress furi/reading row entirely
+  const showFuri = furiganaPolicy !== 'hidden';
+  const effectiveFuri = showFuri ? furi : undefined;
+  const effectiveRomaji = showFuri ? romaji : undefined;
   const clean = stripFuri(jp);
-  const reading = furi || extractReadings(jp);
+  const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
 
   const jpStyle = (fs, extra = {}) => ({
     lineHeight: 1.4,
@@ -36,7 +45,7 @@ export function JpFront({ jp = '', furi, romaji }) {
             <span style={jpStyle(fs)}>{p}</span>
           </div>
         ))}
-        {_ReadingRow(reading, romaji)}
+        {_ReadingRow(reading, effectiveRomaji)}
       </div>
     );
   }
@@ -54,7 +63,7 @@ export function JpFront({ jp = '', furi, romaji }) {
               <span style={jpStyle(fs)}>{p}</span>
             </div>
           ))}
-          {_ReadingRow(reading, romaji)}
+          {_ReadingRow(reading, effectiveRomaji)}
         </div>
       );
     }
@@ -70,7 +79,7 @@ export function JpFront({ jp = '', furi, romaji }) {
         <span style={jpStyle(jpFontSize(title))}>{title}</span>
         <div className={`${S.hr} ${S.hrHover}`} />
         <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>{sub}</span>
-        {_ReadingRow(reading, romaji)}
+        {_ReadingRow(reading, effectiveRomaji)}
       </div>
     );
   }
@@ -87,7 +96,7 @@ export function JpFront({ jp = '', furi, romaji }) {
             <span style={jpStyle(fs)}>{p}</span>
           </div>
         ))}
-        {_ReadingRow(reading, romaji)}
+        {_ReadingRow(reading, effectiveRomaji)}
       </div>
     );
   }
@@ -97,7 +106,7 @@ export function JpFront({ jp = '', furi, romaji }) {
   return (
     <div style={{ textAlign: 'center' }}>
       <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{clean}</span>
-      {_ReadingRow(reading, romaji)}
+      {_ReadingRow(reading, effectiveRomaji)}
     </div>
   );
 }

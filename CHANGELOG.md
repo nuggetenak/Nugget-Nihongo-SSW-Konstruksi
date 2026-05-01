@@ -1,3 +1,39 @@
+## [3.9.0] - 2026-05-02
+
+### Phase D + E Complete — Export Hardening + FlashcardMode Decomposition (Agent Sonnet)
+
+**Phase D — Export/Import Hardening**
+
+- `storage/engine.js` — Added `validateSnapshot(snapshot)`: validates structure before import, returns `{ ok, reason, summary }`
+- `storage/engine.js` — Added `importAllSafe(snapshot)`: validates first, snapshots current state, applies import, auto-rollbacks on error
+- `modes/ExportMode.jsx` — Full rewrite with 2-step import flow:
+  1. File loaded → validated → diff preview shown (before vs incoming data)
+  2. User confirms → `importAllSafe()` applied with rollback safety
+  - Summary widget now shows sessions count + schema version
+  - Error messages mention that old data is safe if import fails
+
+**Phase E — FlashcardMode Decomposition**
+
+- `modes/FlashcardMode.jsx` (447 lines) → shim re-export only
+- New `src/modes/FlashcardMode/` directory:
+  - `index.jsx` (~120 lines) — orchestrator; all state management
+  - `FlipCard.jsx` — 3D front/back card, swipe tilt, hint overlay
+  - `RatingRow.jsx` — FSRS 4-button rating row with interval preview
+  - `ToolStrip.jsx` — Sort / belum / reset / star-filter tools + keyboard hint
+  - `FilterBar.jsx` — Search input + star toggle button
+  - `flashcard.module.css` — 3D flip CSS (TD-05: moved from JS injection)
+- **TD-05**: `FLIP_STYLE` constant + `ensureStyle()` function removed entirely
+  - CSS now lives in `flashcard.module.css` with `:global()` class selectors
+  - No more `document.createElement('style')` at render time
+- **TD-10**: `JpDisplay.jsx` `JpFront()` accepts `furiganaPolicy` prop
+  - Values: `'always'` (default, no change) | `'hidden'` (suppress furigana)
+  - Default `'always'` — zero behavioral change for all current users
+  - Prep for Phase G settings UI
+
+**Tests: 273 → 295 (+22 new)**
+- `export-import.test.js` (+13): validateSnapshot (8 cases), importAllSafe (4 cases)
+- `flashcard-decomp.test.jsx` (+9): file existence, shim structure, CSS content, TD-05 & TD-10 verification
+
 ## [3.8.0] - 2026-05-02
 
 ### Phase B + C Complete — Content Sipil/Bangunan + Daily Mission (Agent Sonnet)

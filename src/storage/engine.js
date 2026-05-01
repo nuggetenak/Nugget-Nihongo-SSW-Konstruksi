@@ -174,3 +174,40 @@ export function _reset_for_test() {
   _cache = { progress: null, srs: null, prefs: null };
   _initialized = false;
 }
+
+// ── D.1 Snapshot validation ──────────────────────────────────────────────────
+// Phase D: Validate a snapshot before importing. Returns { ok, reason, summary }.
+export function validateSnapshot(snapshot) {
+  if (!snapshot || typeof snapshot !== 'object') return { ok: false, reason: 'not_object' };
+  if (!snapshot.progress || !snapshot.srs || !snapshot.prefs) return { ok: false, reason: 'missing_docs' };
+  if (!Array.isArray(snapshot.progress.known)) return { ok: false, reason: 'invalid_known' };
+  if (typeof snapshot.srs.cards !== 'object') return { ok: false, reason: 'invalid_srs' };
+  return {
+    ok: true,
+    summary: {
+      known:    snapshot.progress.known.length,
+      unknown:  (snapshot.progress.unknown ?? []).length,
+      srsCards: Object.keys(snapshot.srs.cards).length,
+      sessions: (snapshot.progress.sessions ?? []).length,
+      version:  snapshot._storage_version ?? snapshot.progress._v ?? 'unknown',
+    },
+  };
+}
+
+// ── D.2 Safe import with rollback ────────────────────────────────────────────
+// Phase D: Imports snapshot, rolls back to prior state if importAll throws.
+export function importAllSafe(snapshot) {
+  const validation = validateSnapshot(snapshot);
+  if (!validation.ok) throw new Error(`Snapshot tidak valid: ${validation.reason}`);
+
+  // Snapshot current state for rollback
+  const backup = exportAll();
+  try {
+    importAll(snapshot);
+  } catch (err) {
+    // Rollback on failure
+    try { importAll(backup); } catch {}
+    throw err;
+  }
+  return validation.summary;
+}

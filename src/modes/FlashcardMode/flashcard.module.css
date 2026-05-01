@@ -1,0 +1,176 @@
+/* ─── flashcard.module.css (phaseE) ──────────────────────────────────────────
+   Phase E TD-05: 3D flip CSS moved from JS injection (ensureStyle) to module.
+   All classes use :global() to keep BEM-style class names that the JSX
+   references directly (fc-scene, fc-card, fc-face, fc-face--back).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* 3D scene container */
+:global(.fc-scene) {
+  perspective: 1200px;
+}
+
+/* Flip card — animates transform */
+:global(.fc-card) {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+:global(.fc-card.is-flipped) {
+  transform: rotateY(180deg);
+}
+
+/* Both faces hide their back */
+:global(.fc-face) {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Back face rotated to face away initially */
+:global(.fc-face--back) {
+  transform: rotateY(180deg);
+}
+
+/* Hint fade animation (used on 3rd flip hint) */
+@keyframes :global(fcHintFade) {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* ── FlipCard subcomponent ─────────────────────────────────────────────────── */
+.scene {
+  margin-bottom: 12px;
+}
+
+/* ── RatingRow subcomponent ────────────────────────────────────────────────── */
+.ratingWrap {
+  animation: slideUp 0.25s ease;
+}
+
+.ratingLabel {
+  font-size: 11px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.ratingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.ratingBtn {
+  font-family: inherit;
+  padding: 12px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: transform 0.1s ease;
+}
+
+.ratingEmoji {
+  font-size: 16px;
+}
+
+.ratingId {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ratingInterval {
+  font-size: 9px;
+  opacity: 0.65;
+}
+
+.ratedConfirm {
+  text-align: center;
+  padding: 16px 0;
+  font-size: 13px;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── ToolStrip subcomponent ────────────────────────────────────────────────── */
+.toolGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.toolBtn {
+  font-family: inherit;
+  padding: 8px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── FilterBar subcomponent ────────────────────────────────────────────────── */
+.filterBar {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.filterInput {
+  flex: 1;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.filterStarBtn {
+  font-family: inherit;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Nav row ───────────────────────────────────────────────────────────────── */
+.navRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.navBtn {
+  font-family: inherit;
+  padding: 11px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.navFlip {
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ── Keyboard hint ─────────────────────────────────────────────────────────── */
+.kbHint {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 6px;
+}
