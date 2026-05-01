@@ -1,6 +1,7 @@
-// ─── router/modes.js ──────────────────────────────────────────────────────────
-// Single registry for all 18 modes. Eliminates duplication between
-// App.jsx and Dashboard.jsx. Consumed by ModeRouter + navigation components.
+// ─── router/modes.js (phaseA) ─────────────────────────────────────────────────
+// Single registry for all 18 modes.
+// A.9 TD-08: Removed legacy nav arrays (BELAJAR_MODES, UJIAN_MODES, LAINNYA_MODES).
+//     These were never imported — navigation uses MODE_SECTIONS instead.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { lazy } from 'react';
@@ -28,7 +29,6 @@ export const MODE_COMPONENTS = {
 };
 
 // ── Navigation sections ────────────────────────────────────────────────────
-// Used by BottomNav (Belajar tab) and Dashboard quick-action tiles.
 export const MODE_SECTIONS = {
   pelajari: {
     title: '📝 Pelajari',
@@ -76,13 +76,3 @@ export const MODE_META = {
 
 // ── Dashboard quick tiles (4 most-used, top row) ─────────────────────────
 export const DASHBOARD_QUICK_MODES = ['kartu', 'kuis', 'sprint', 'jac'];
-
-// ── Legacy nav arrays (keep for backward compat during refactor) ──────────
-export const BELAJAR_MODES = ['ulasan', 'kartu', 'kuis', 'sprint', 'fokus']
-  .map((k) => ({ key: k, ...MODE_META[k] }));
-
-export const UJIAN_MODES = ['jac', 'wayground', 'vocab', 'simulasi', 'angka', 'jebak', 'sipil', 'bangunan']
-  .map((k) => ({ key: k, ...MODE_META[k] }));
-
-export const LAINNYA_MODES = ['cari', 'glosari', 'sumber', 'stats', 'ekspor']
-  .map((k) => ({ key: k, ...MODE_META[k] }));

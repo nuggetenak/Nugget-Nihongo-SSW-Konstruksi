@@ -1,4 +1,73 @@
+## [3.7.0] - 2026-05-02
+
+### Phase A Complete — Bug Fixes + Storage v3 + Debt Cleanup (Agent Sonnet)
+
+**A.1 — BUG-02 Fix: `_seenPool` module-scope → `useRef`**
+- `QuizMode.jsx`: Moved `const _seenPool = new Set()` from module scope into `useRef(new Set())` inside component
+- Prevents stale seen-card memory across separate QuizMode sessions (module-scope Set survives HMR and route transitions)
+- All `_seenPool.current` references updated throughout component
+
+**A.2 — BUG-01 + TD-02 Fix: Remove dead Dashboard exports**
+- `Dashboard.jsx`: Removed `export function recordStudyDay()`, `export function incrementDailyCount()`, `export function pushRecentCard()` — never imported by anything
+- Streak and daily-count logic correctly lives in `ProgressContext.jsx`'s `handleMark()`
+- Removed import of `storageSet` from Dashboard (no longer needed after dead-code removal)
+
+**A.3 — BUG-03 Fix: Wire milestone toasts**
+- `ProgressContext.jsx`: Added `toastQueue` state + `clearToast()` callback
+- Milestone streak7 and quiz70 now enqueue toast messages via `setTimeout(() => setToastQueue(...), 0)` pattern (avoids setState-within-setState)
+- `App.jsx`: Added `useEffect` to consume `toastQueue` and fire `toast.show()` on each queued item
+
+**A.4 — BUG-04 Fix: Anxiety-reduction toast on 5+ wrong streak**
+- `useAnswerStreak.js` (new, see A.5): Extended to track `wrongStreak` + `maxWrongStreak`
+- `QuizShell.jsx`: On quiz finish, if `maxWrongStreak >= 5`, fires: *"Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪"*
+- Evidence: Young (1991) — normalizing errors reduces FLCA; Zhang (2019) r = −.33
+
+**A.5 — TD-04: Rename `useStreak` → `useAnswerStreak`**
+- `src/hooks/useStreak.js` → `src/hooks/useAnswerStreak.js`
+- Export renamed: `useStreak` → `useAnswerStreak`
+- `hooks/index.js`: Exports both `useAnswerStreak` (primary) and `useStreak` (alias for backward compat)
+- `QuizShell.jsx`: Import updated to `useAnswerStreak`
+
+**A.6 — Storage schema v2 → v3**
+- `storage/schema.js`: `STORAGE_VERSION` bumped 2 → 3
+- New `progress` fields: `sipilScores`, `bangunanScores` (Phase B), `sessions`, `dailyMission` (Phase C)
+- New `prefs` fields: `examDate`, `audioEnabled` (Phase F), `studyAnchor` (Phase C), `furiganaPolicy` (Phase E)
+- `storage/migrations.js`: Added `hasV2Data()` and `migrate_v2_to_v3()`
+- `storage/engine.js`: `init()` now handles v2→v3 migration; v1 data chains through v2→v3; fresh install writes v3 defaults
+
+**A.7 — TD-03: Fix wrong-tracker v1 key references**
+- `utils/wrong-tracker.js`: Removed exported `STORAGE_KEYS` object (contained v1 key strings like `'ssw-quiz-wrong'` that no longer exist as standalone keys in v2/v3)
+- Value helpers (`getWrongCount`, `makeWrongEntry`, etc.) unchanged — still backward-compatible
+
+**A.8 — TD-01: Fix ExportMode format compatibility**
+- `modes/ExportMode.jsx`: Replaced custom `collectProgressData()`/`restoreProgressData()` (scraped individual localStorage keys) with `exportAll()`/`importAll()` from storage engine
+- Export filename now includes schema version: `ssw-progress-v3-YYYY-MM-DD.json`
+- Summary widget shows schema version instead of raw key count
+
+**A.9 — TD-08: Remove legacy nav arrays**
+- `router/modes.js`: Removed `BELAJAR_MODES`, `UJIAN_MODES`, `LAINNYA_MODES` exports
+- Navigation uses `MODE_SECTIONS` throughout; legacy arrays were never imported
+
+**A.10 — Growth mindset language in ResultScreen (C-13)**
+- `components/ResultScreen.jsx`: Encourage path (< 50%) changes:
+  - Emoji: `💪` → `🌱`
+  - Label: replaced with *"Belum. Tapi kamu sudah tahu apa yang perlu dipelajari."*
+- Evidence: Dweck (2006) — "not yet" framing preserves intrinsic motivation
+
+**Tests: 223 → 242 (+19 new)**
+- `quiz.seenpool.test.jsx` (+3): Verifies `_seenPool` not at module scope; `useRef` pattern present
+- `storage.migration-v3.test.js` (+5): Fresh install v3, v2→v3 migration, DEFAULTS shape
+- `milestone.toast.test.jsx` (+3): Toast queue init, clearToast callable
+- `anxiety.toast.test.jsx` (+3): `maxWrongStreak` logic, threshold checks
+- `wrongtracker.test.js` (+5): `STORAGE_KEYS` removed, value helpers correct
+- `components.resultscreen.test.jsx`: Updated 3 tests for A.10 (🌱 emoji, "Belum" label, tip selector)
+
+**AppContext**: Added safe default context value so `useApp()` degrades gracefully in unit tests that don't wrap with `AppProvider`
+
+---
+
 ## [3.6.1-docs] - 2026-05-01
+
 
 ### Blueprint Evolution & Documentation Hygiene (Crunchy QA)
 

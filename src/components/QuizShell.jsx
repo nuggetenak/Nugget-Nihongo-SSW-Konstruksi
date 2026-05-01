@@ -1,9 +1,13 @@
-// ─── QuizShell.jsx ────────────────────────────────────────────────────────────
+// ─── QuizShell.jsx (phaseA) ───────────────────────────────────────────────────
+// A.4 BUG-04: Anxiety-reduction toast fires when maxWrongStreak >= 5.
+//     Evidence: Young (1991) — normalizing errors reduces language anxiety.
+// A.5: Updated import from useStreak → useAnswerStreak.
 // Note: timer color (red when <60s) kept inline — conditional/prop-driven.
 import { useState, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
-import { useStreak } from '../hooks/useStreak.js';
+import { useAnswerStreak } from '../hooks/useAnswerStreak.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
@@ -26,7 +30,8 @@ export default function QuizShell({
   const [results, setResults] = useState([]);
   const [phase, setPhase] = useState('playing');
   const [timeLeft, setTimeLeft] = useState(timer);
-  const { streak, maxStreak, recordAnswer, reset: resetStreak } = useStreak();
+  const { streak, maxStreak, _wrongStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
+  const { toast } = useApp();
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
@@ -82,7 +87,16 @@ export default function QuizShell({
   useEffect(() => {
     if (phase === 'finished') {
       const correct = results.filter((r) => r.isCorrect).length;
-      onFinish?.({ correct, total: results.length, maxStreak });
+      onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak });
+
+      // A.4 BUG-04: Anxiety-reduction toast — fires when ≥5 consecutive wrong answers.
+      // Normalizes struggle as expected for new material (Young 1991, Zhang 2019).
+      if (maxWrongStreak >= 5) {
+        toast.show(
+          'Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪',
+          { duration: 4000 }
+        );
+      }
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 

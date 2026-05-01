@@ -1,5 +1,6 @@
-// ─── ResultScreen.jsx v3.3 ───────────────────────────────────────────────────
-// Phase 6: 0 inline styles. Two emotional paths (celebrate / encourage).
+// ─── ResultScreen.jsx v3.4 (phaseA) ──────────────────────────────────────────
+// A.10 C-13: Growth mindset language for low scores (Dweck 2006 "not yet" framing).
+//     Evidence: "not yet" framing preserves motivation vs generic encouragement.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import s from './ResultScreen.module.css';
@@ -42,13 +43,17 @@ export default function ResultScreen({
       {/* Grade hero */}
       <div className={s.hero} data-path={path}>
         <span className={s.heroEmoji} data-path={path}>
-          {path === 'celebrate' ? '🏆' : path === 'encourage' ? '💪' : grade.emoji}
+          {path === 'celebrate' ? '🏆' : path === 'encourage' ? '🌱' : grade.emoji}
         </span>
         <div className={s.heroPct} data-shake={path === 'encourage'} style={{ color: grade.color }}>
           {pct}%
         </div>
         <div className={s.heroLabel}>
-          {path === 'celebrate' ? '🎉 ' : ''}{grade.label}
+          {path === 'celebrate'
+            ? '🎉 ' + grade.label
+            : path === 'encourage'
+              ? 'Belum. Tapi kamu sudah tahu apa yang perlu dipelajari.'
+              : grade.label}
         </div>
         <div className={s.heroSub}>
           {correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}

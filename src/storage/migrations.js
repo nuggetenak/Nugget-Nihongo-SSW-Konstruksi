@@ -141,3 +141,39 @@ export function cleanup_v1_keys() {
     }
   } catch {}
 }
+
+// ── v2 → v3 migration ────────────────────────────────────────────────────────
+// A.6: Adds new fields introduced in schema v3 with safe defaults.
+// Existing data is fully preserved; only new keys are added.
+
+export function hasV2Data() {
+  try {
+    const raw = localStorage.getItem('ssw-progress');
+    const parsed = raw ? JSON.parse(raw) : null;
+    return parsed?._v === 2;
+  } catch { return false; }
+}
+
+export function migrate_v2_to_v3() {
+  const progress = safeGet('ssw-progress', {});
+  const srs = safeGet('ssw-srs-data', { _v: 2, cards: {} });
+  const prefs = safeGet('ssw-prefs', {});
+
+  // Bump version and add new progress fields
+  progress._v = 3;
+  progress.sipilScores    = progress.sipilScores    ?? {};
+  progress.bangunanScores = progress.bangunanScores ?? {};
+  progress.sessions       = progress.sessions       ?? [];
+  progress.dailyMission   = progress.dailyMission   ?? null;
+
+  srs._v = 3;
+
+  // Bump version and add new prefs fields
+  prefs._v = 3;
+  prefs.examDate       = prefs.examDate       ?? null;
+  prefs.audioEnabled   = prefs.audioEnabled   ?? true;
+  prefs.studyAnchor    = prefs.studyAnchor    ?? null;
+  prefs.furiganaPolicy = prefs.furiganaPolicy ?? 'always';
+
+  return { progress, srs, prefs };
+}

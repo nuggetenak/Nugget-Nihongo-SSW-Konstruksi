@@ -1,43 +1,24 @@
-// ─── ExportMode.jsx ───────────────────────────────────────────────────────────
+// ─── ExportMode.jsx (phaseA) ──────────────────────────────────────────────────
+// A.8 TD-01: Rewired to use storage engine exportAll()/importAll() instead of
+//     the old v1-format collectProgressData() / restoreProgressData().
+//     Old format scraped individual localStorage keys; v3 uses 3 documents.
+// ─────────────────────────────────────────────────────────────────────────────
 import { useState, useRef } from 'react';
 import { T } from '../styles/theme.js';
-import { exportSRSSnapshot, importSRSSnapshot } from '../srs/fsrs-store.js';
+import { exportAll, importAll } from '../storage/engine.js';
 import S from './modes.module.css';
-
-const EXPORT_VERSION = 2;
-const SSW_PREFIX = 'ssw-';
-const SRS_PREFIX = 'ssw-srs-';
-
-function collectProgressData() {
-  const data = {};
-  try {
-    for (const key of Object.keys(localStorage)) {
-      if (key.startsWith(SSW_PREFIX) && !key.startsWith(SRS_PREFIX)) {
-        data[key] = localStorage.getItem(key);
-      }
-    }
-  } catch {}
-  return data;
-}
-
-function restoreProgressData(data) {
-  let count = 0;
-  for (const [key, value] of Object.entries(data)) {
-    const realKey = key.startsWith('__ls__') ? key.replace('__ls__', '') : key;
-    try { localStorage.setItem(realKey, value); count++; } catch {}
-  }
-  return count;
-}
 
 function readSummary() {
   try {
-    const progress = collectProgressData();
-    const known = progress['ssw-known'] ? JSON.parse(progress['ssw-known']).length : 0;
-    const unknown = progress['ssw-unknown'] ? JSON.parse(progress['ssw-unknown']).length : 0;
-    const srs = exportSRSSnapshot();
-    return { known, unknown, srsCount: Object.keys(srs.cards).length, keyCount: Object.keys(progress).length };
+    const data = exportAll();
+    return {
+      known:    (data.progress?.known    ?? []).length,
+      unknown:  (data.progress?.unknown  ?? []).length,
+      srsCount: Object.keys(data.srs?.cards ?? {}).length,
+      version:  data._storage_version ?? data.progress?._v ?? '?',
+    };
   } catch {
-    return { known: 0, unknown: 0, srsCount: 0, keyCount: 0 };
+    return { known: 0, unknown: 0, srsCount: 0, version: '?' };
   }
 }
 
@@ -50,20 +31,15 @@ export default function ExportMode({ onExit }) {
   const handleExport = () => {
     setStatus(null);
     try {
-      const progressData = collectProgressData();
-      const srsSnapshot = exportSRSSnapshot();
-      const bundle = {
-        _meta: { version: EXPORT_VERSION, exported_at: new Date().toISOString(), app: 'SSW Konstruksi by Nugget Nihongo' },
-        progress: progressData,
-        srs: srsSnapshot,
-      };
-      const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/json' });
+      const data = exportAll();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = `ssw-progress-${new Date().toISOString().slice(0, 10)}.json`;
+      a.href = url;
+      a.download = `ssw-progress-v${data._storage_version}-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      setStatus({ type: 'ok', msg: `✅ Berhasil! ${Object.keys(progressData).length} kunci progress + ${Object.keys(srsSnapshot.cards).length} kartu SRS disimpan.` });
+      setStatus({ type: 'ok', msg: `✅ Berhasil! ${summary.known} hafal + ${summary.srsCount} kartu SRS disimpan.` });
     } catch (e) { setStatus({ type: 'err', msg: `❌ Gagal: ${e.message}` }); }
   };
 
@@ -72,23 +48,24 @@ export default function ExportMode({ onExit }) {
     if (!file) return;
     setImport(true); setStatus(null);
     try {
-      const bundle = JSON.parse(await file.text());
-      const progressData = bundle.progress ?? bundle.data;
-      if (!progressData || typeof progressData !== 'object') throw new Error('Format file tidak valid.');
-      const progressCount = restoreProgressData(progressData);
-      let srsCount = 0;
-      if (bundle.srs?.cards) srsCount = importSRSSnapshot(bundle.srs);
-      setStatus({ type: 'ok', msg: `✅ Berhasil! ${progressCount} kunci + ${srsCount} kartu SRS dipulihkan. Reload untuk melihat perubahan.` });
+      const snapshot = JSON.parse(await file.text());
+      // Support both new engine format and legacy bundle format
+      const normalized = snapshot.progress && snapshot.srs && snapshot.prefs
+        ? snapshot
+        : null;
+      if (!normalized) throw new Error('Format file tidak valid. Gunakan file ekspor terbaru.');
+      importAll(normalized);
       setSummary(readSummary());
+      setStatus({ type: 'ok', msg: `✅ Berhasil dipulihkan! Muat ulang halaman untuk melihat perubahan.` });
     } catch (e) { setStatus({ type: 'err', msg: `❌ Gagal: ${e.message}` }); }
     finally { setImport(false); if (fileRef.current) fileRef.current.value = ''; }
   };
 
   const summaryItems = [
-    { n: summary.known, label: 'Hafal', icon: '✅' },
-    { n: summary.unknown, label: 'Belum', icon: '❌' },
-    { n: summary.srsCount, label: 'Kartu SRS', icon: '🔁' },
-    { n: summary.keyCount, label: 'Kunci', icon: '🗂️' },
+    { n: summary.known,    label: 'Hafal',    icon: '✅' },
+    { n: summary.unknown,  label: 'Belum',    icon: '❌' },
+    { n: summary.srsCount, label: 'Kartu SRS',icon: '🔁' },
+    { n: `v${summary.version}`, label: 'Versi',icon: '💾' },
   ];
 
   return (

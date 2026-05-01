@@ -1,11 +1,14 @@
-// ─── storage/engine.js ────────────────────────────────────────────────────────
+// ─── storage/engine.js (phaseA) ───────────────────────────────────────────────
 // 3-document localStorage engine. Cold start: ~300ms → <20ms.
-// Auto-migrates from v1 (20+ keys) to v2 (3 documents) on first run.
+// A.6: Auto-migrates v1→v3 and v2→v3 in addition to v1→v2.
 // Synchronous — no async, no Supabase, no window.storage.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
-import { hasV1Data, migrate_v1_to_v2, cleanup_v1_keys } from './migrations.js';
+import {
+  hasV1Data, migrate_v1_to_v2, cleanup_v1_keys,
+  migrate_v2_to_v3,
+} from './migrations.js';
 
 // ── In-memory cache ────────────────────────────────────────────────────────
 let _cache = { progress: null, srs: null, prefs: null };
@@ -36,21 +39,37 @@ function freshDefaults() {
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
-// Called once on app start. Detects v1 data → migrates → deletes old keys.
+// Called once on app start. Detects v1/v2 data → migrates → caches.
 export function init() {
   if (_initialized) return;
 
   const progressRaw = readDoc(DOCS.progress);
-  const isV2 = progressRaw?._v === STORAGE_VERSION;
+  const version = progressRaw?._v ?? 0;
 
-  if (isV2) {
-    // Load existing v2 docs
+  if (version === STORAGE_VERSION) {
+    // Current v3 — load directly
     _cache.progress = progressRaw;
     _cache.srs = readDoc(DOCS.srs) ?? { _v: STORAGE_VERSION, cards: {} };
     _cache.prefs = readDoc(DOCS.prefs) ?? { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
+
+  } else if (version === 2) {
+    // v2 → v3 migration
+    const migrated = migrate_v2_to_v3();
+    _cache.progress = migrated.progress;
+    _cache.srs = migrated.srs;
+    _cache.prefs = migrated.prefs;
+    writeDoc(DOCS.progress, _cache.progress);
+    writeDoc(DOCS.srs, _cache.srs);
+    writeDoc(DOCS.prefs, _cache.prefs);
+
   } else if (hasV1Data()) {
-    // Auto-migrate v1 → v2
-    const migrated = migrate_v1_to_v2();
+    // v1 → v2 → v3 chain migration
+    const v2 = migrate_v1_to_v2();
+    // Write intermediate v2 docs so migrate_v2_to_v3 can read them
+    writeDoc(DOCS.progress, v2.progress);
+    writeDoc(DOCS.srs, v2.srs);
+    writeDoc(DOCS.prefs, v2.prefs);
+    const migrated = migrate_v2_to_v3();
     _cache.progress = migrated.progress;
     _cache.srs = migrated.srs;
     _cache.prefs = migrated.prefs;
@@ -58,8 +77,9 @@ export function init() {
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
     cleanup_v1_keys();
+
   } else {
-    // Fresh install
+    // Fresh install — write v3 defaults
     const d = freshDefaults();
     _cache.progress = d.progress;
     _cache.srs = d.srs;

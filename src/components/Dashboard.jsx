@@ -1,41 +1,23 @@
-// ─── Dashboard.jsx v3.3 ───────────────────────────────────────────────────────
-// Blueprint B3 + Phase 6: 0 inline styles (CSS module).
+// ─── Dashboard.jsx v3.4 (phaseA) ──────────────────────────────────────────────
+// A.2: Fixed BUG-01 + TD-02 — removed dead exported utility functions
+//      (recordStudyDay, incrementDailyCount, pushRecentCard).
+//      These were never imported anywhere; streak/daily-count logic lives in
+//      ProgressContext.jsx's handleMark(). today() helper retained for local use.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useMemo } from 'react';
 import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
-import { get as storageGet, set as storageSet } from '../storage/engine.js';
+import { get as storageGet } from '../storage/engine.js';
 import ProgressRing from './ProgressRing.jsx';
 
-// ── Storage utilities ─────────────────────────────────────────────────────────
+// ── Storage utilities (local, not exported) ───────────────────────────────
 const today = () => new Date().toISOString().slice(0, 10);
 
 const getStreak    = () => storageGet('progress')?.streakData     ?? { days: 0, lastDate: null };
 const getDailyCount= () => { const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' }; return dc.date === today() ? dc.count : 0; };
 const getRecent    = () => (storageGet('progress')?.recentCards   ?? []).slice(0, 5);
-
-export function recordStudyDay() {
-  const t = today();
-  const streak = getStreak();
-  if (streak.lastDate === t) return;
-  const yest = new Date(); yest.setDate(yest.getDate() - 1);
-  const y = yest.toISOString().slice(0, 10);
-  const days = streak.lastDate === y ? (streak.days ?? 0) + 1 : 1;
-  storageSet('progress', (p) => ({ ...p, streakData: { days, lastDate: t } }));
-}
-export function incrementDailyCount() {
-  const t = today();
-  const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' };
-  const count = dc.date === t ? dc.count + 1 : 1;
-  storageSet('progress', (p) => ({ ...p, dailyCount: { count, date: t } }));
-}
-export function pushRecentCard(cardId) {
-  const prev = getRecent();
-  const next = [cardId, ...prev.filter((id) => id !== cardId)].slice(0, 5);
-  storageSet('progress', (p) => ({ ...p, recentCards: next }));
-}
 
 // ── Smart CTA logic ───────────────────────────────────────────────────────────
 function getQuickStart(knownN, pct, dueCount) {

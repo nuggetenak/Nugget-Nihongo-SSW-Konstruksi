@@ -1,6 +1,10 @@
-// ─── wrong-tracker.js ─────────────────────────────────────────────────────────
-// Storage: pure localStorage (GitHub Pages standalone deployment).
-// No window.storage, no Claude dependency.
+// ─── wrong-tracker.js (phaseA) ────────────────────────────────────────────────
+// Storage: pure localStorage via storage engine (3-document v3 schema).
+// A.7 TD-03: Removed all v1 direct-localStorage key constants (STORAGE_KEYS).
+//     The old STORAGE_KEYS exported v1 paths like 'ssw-quiz-wrong' — these
+//     no longer exist as standalone keys in v2/v3. All reads go through engine.
+//     loadFromStorage/saveToStorage/removeFromStorage kept for any callers
+//     that still use raw keys for non-migrated paths.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Wrong-answer value helpers ─────────────────────────────────────────────
@@ -20,19 +24,9 @@ export function makeWrongEntry(existing, now = Date.now()) {
   return { count: getWrongCount(existing) + 1, lastWrong: now };
 }
 
-// ── Storage key constants ──────────────────────────────────────────────────
-export const STORAGE_KEYS = {
-  QUIZ_WRONG: 'ssw-quiz-wrong',
-  JAC_WRONG: 'ssw-wrong-counts',
-  WG_WRONG: (setId) => `ssw-wg-wrong-${setId}`,
-  KNOWN: 'ssw-known',
-  UNKNOWN: 'ssw-unknown',
-  STARRED: 'ssw-starred',
-};
-
 // ── Storage helpers (synchronous localStorage) ─────────────────────────────
-// Async signatures kept for API compatibility with usePersistedState.
-// In practice these resolve immediately — no loading flash.
+// These operate on raw keys — used only for paths not covered by the engine
+// (e.g. legacy compatibility shims). Prefer engine.get/set for progress data.
 
 export function loadFromStorage(key, defaultVal = null) {
   try {

@@ -8,7 +8,8 @@ import { get, set as storageSet } from '../storage/engine.js';
 import { applyTheme } from '../styles/theme.js';
 import { useToast } from '../components/Toast.jsx';
 
-const AppCtx = createContext(null);
+const _noopToast = { show: () => {}, hide: () => {} };
+const AppCtx = createContext({ toast: _noopToast });
 
 export function AppProvider({ children }) {
   const toast = useToast();
@@ -106,6 +107,6 @@ export function AppProvider({ children }) {
 
 export function useApp() {
   const ctx = useContext(AppCtx);
-  if (!ctx) throw new Error('useApp must be used within AppProvider');
+  if (!ctx) return { toast: _noopToast };
   return ctx;
 }

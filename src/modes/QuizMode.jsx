@@ -1,6 +1,7 @@
-// ─── QuizMode.jsx v3.0 ────────────────────────────────────────────────────────
-import { useState, useMemo, useCallback } from 'react';
-const _seenPool = new Set();
+// ─── QuizMode.jsx v3.1 (phaseA) ───────────────────────────────────────────────
+// A.1: Fixed BUG-02 — _seenPool moved from module scope into useRef.
+//      Module-scope Set persisted across mode entries; useRef resets correctly.
+import { useState, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
@@ -17,8 +18,11 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
   const [autoNextDelay, setAutoNextDelay] = useState(2000);
   const [showSettings, setShowSettings] = useState(false);
   const [started, setStarted] = useState(false);
-  const [seed, setSeed] = useState(0);
   const [quizWrong, setQuizWrong] = usePersistedState('ssw-quiz-wrong', {});
+
+  // A.1 FIX: seenPool as useRef — resets when component unmounts/remounts,
+  // preventing stale seen-card memory across separate mode sessions.
+  const seenPool = useRef(new Set());
 
   const lemahCards = cards
     .filter((c) => getWrongCount(quizWrong[c.id]) > 0)
@@ -26,23 +30,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
 
   const activeCards = lemahMode && lemahCards.length > 0 ? lemahCards : cards;
 
-  const questions = useMemo(() => {
-    if (!started) return [];
-    const unseen = activeCards.filter((c) => !_seenPool.has(c.id));
-    let pool;
-    if (unseen.length >= quizCount) { pool = shuffle(unseen).slice(0, quizCount); }
-    else { _seenPool.clear(); pool = shuffle(activeCards).slice(0, quizCount); }
-    pool.forEach((c) => _seenPool.add(c.id));
-    const raw = generateQuiz(pool, allCards, difficulty, quizWrong);
-    return raw.map((q) => ({
-      question: stripFuri(q.card.jp),
-      questionSub: q.card.romaji || null,
-      options: q.options.map((o) => ({ text: o.text, sub: null })),
-      correctIdx: q.options.findIndex((o) => o.correct),
-      explanation: q.card.desc,
-      _cardId: q.card.id,
-    }));
-  }, [started, activeCards, allCards, difficulty, quizCount, quizWrong, seed]); // eslint-disable-line
+  const [questions, setQuestions] = useState([]);
 
   const handleAnswer = useCallback(
     (qIdx, _selIdx, isCorrect) => {
@@ -54,7 +42,25 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
     [questions, setQuizWrong]
   );
 
-  const startQuiz = () => { setSeed((s) => s + 1); setStarted(true); };
+  const startQuiz = () => {
+    // Compute questions here (not in useMemo) to avoid ref-in-render lint error
+    const unseen = activeCards.filter((c) => !seenPool.current.has(c.id));
+    let pool;
+    if (unseen.length >= quizCount) { pool = shuffle(unseen).slice(0, quizCount); }
+    else { seenPool.current.clear(); pool = shuffle(activeCards).slice(0, quizCount); }
+    pool.forEach((c) => seenPool.current.add(c.id));
+    const raw = generateQuiz(pool, allCards, difficulty, quizWrong);
+    const qs = raw.map((q) => ({
+      question: stripFuri(q.card.jp),
+      questionSub: q.card.romaji || null,
+      options: q.options.map((o) => ({ text: o.text, sub: null })),
+      correctIdx: q.options.findIndex((o) => o.correct),
+      explanation: q.card.desc,
+      _cardId: q.card.id,
+    }));
+    setQuestions(qs);
+    setStarted(true);
+  };
 
   if (!started) {
     const DIFF = [
@@ -150,7 +156,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
   return (
     <QuizShell
       questions={questions}
-      onExit={() => { setStarted(false); _seenPool.clear(); }}
+      onExit={() => { setStarted(false); seenPool.current.clear(); }}
       title="Kuis"
       onAnswer={handleAnswer}
       onFinish={onFinish}

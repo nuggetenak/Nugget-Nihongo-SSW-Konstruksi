@@ -1,5 +1,9 @@
 // ─── tests/components.resultscreen.test.jsx ──────────────────────────────────
 // Component tests for ResultScreen — two emotional paths, grade display, actions.
+// phaseA: Updated 3 tests for A.10 growth-mindset changes:
+//   - encourage emoji: 💪 → 🌱
+//   - encourage label: "Jangan Menyerah" → "Belum. Tapi kamu sudah tahu..."
+//   - weakness tip: use more specific selector to avoid multi-match
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { describe, it, expect, vi } from 'vitest';
@@ -30,7 +34,6 @@ describe('ResultScreen', () => {
 
     it('shows correct score label', () => {
       render(<ResultScreen {...defaultProps} correct={17} total={20} />);
-      // Should show something like "17/20"
       expect(screen.getByText(/17\/20/)).toBeTruthy();
     });
 
@@ -55,9 +58,10 @@ describe('ResultScreen', () => {
   });
 
   describe('encourage path (<50%)', () => {
-    it('renders 💪 emoji for encourage path', () => {
+    // A.10: emoji changed from 💪 to 🌱 (growth mindset — Dweck 2006)
+    it('renders 🌱 emoji for encourage path', () => {
       render(<ResultScreen {...defaultProps} correct={3} total={20} />);
-      expect(screen.getByText('💪')).toBeTruthy();
+      expect(screen.getByText('🌱')).toBeTruthy();
     });
 
     it('shows 15% for 3/20', () => {
@@ -65,15 +69,17 @@ describe('ResultScreen', () => {
       expect(screen.getByText('15%')).toBeTruthy();
     });
 
-    it('shows Jangan Menyerah message on encourage path', () => {
+    // A.10: label changed from "Jangan Menyerah" to "not yet" framing
+    it('shows growth-mindset "Belum" message on encourage path', () => {
       render(<ResultScreen {...defaultProps} correct={3} total={20} />);
-      expect(screen.getByText(/Jangan Menyerah/i)).toBeTruthy();
+      expect(screen.getByText(/Belum\. Tapi kamu sudah tahu/i)).toBeTruthy();
     });
 
     it('shows weakness tip when wrong count > 0', () => {
       render(<ResultScreen {...defaultProps} correct={3} total={20} />);
-      // Tips section should appear — weaknessTip includes the word "pelajari"
-      expect(screen.getByText(/pelajari/i)).toBeTruthy();
+      // weaknessTip: "Kamu salah X soal. Coba pelajari kartunya lagi..."
+      // Use /Coba pelajari/ to avoid matching heroLabel which also contains "pelajari"
+      expect(screen.getByText(/Coba pelajari kartunya/i)).toBeTruthy();
     });
   });
 
@@ -83,10 +89,10 @@ describe('ResultScreen', () => {
       expect(screen.getByText('60%')).toBeTruthy();
     });
 
-    it('does not show 🏆 or 💪 on neutral path', () => {
+    it('does not show 🏆 or 🌱 on neutral path', () => {
       render(<ResultScreen {...defaultProps} correct={12} total={20} />);
       expect(screen.queryByText('🏆')).toBeNull();
-      expect(screen.queryByText('💪')).toBeNull();
+      expect(screen.queryByText('🌱')).toBeNull();
     });
   });
 
@@ -129,7 +135,6 @@ describe('ResultScreen', () => {
           onRetryWrong={onRetryWrong}
         />
       );
-      // Button text contains "salah" and number
       const retryBtn = screen.getAllByText(/salah/i)[0];
       fireEvent.click(retryBtn);
       expect(onRetryWrong).toHaveBeenCalledOnce();
@@ -139,7 +144,6 @@ describe('ResultScreen', () => {
   describe('maxStreak display', () => {
     it('shows streak count when maxStreak > 0', () => {
       render(<ResultScreen {...defaultProps} correct={17} total={20} maxStreak={8} />);
-      // streak shows in "17/20 benar · 🔥 8 streak" text
       expect(screen.getByText(/8 streak/)).toBeTruthy();
     });
   });

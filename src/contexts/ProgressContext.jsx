@@ -1,6 +1,9 @@
-// ─── contexts/ProgressContext.jsx ─────────────────────────────────────────────
+// ─── contexts/ProgressContext.jsx (phaseA) ────────────────────────────────────
 // All user progress: known/unknown/starred, quiz scores, streak, daily count.
 // Backed by ssw-progress document in storage engine.
+//
+// A.3 FIX BUG-03: Added toastQueue / clearToast for milestone toasts.
+//     Milestone flags trigger queued toasts consumed by App.jsx useEffect.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { createContext, useContext, useState, useCallback } from 'react';
@@ -13,6 +16,8 @@ const today = () => new Date().toISOString().slice(0, 10);
 
 export function ProgressProvider({ children }) {
   const [prog, setProgState] = useState(() => get('progress'));
+  // A.3: Queue of milestone toast messages to be consumed by App.jsx
+  const [toastQueue, setToastQueue] = useState([]);
 
   const setProg = useCallback((updater) => {
     setProgState((prev) => {
@@ -24,7 +29,6 @@ export function ProgressProvider({ children }) {
 
   // ── Known / Unknown ───────────────────────────────────────────────────
   const handleMark = useCallback((id, type) => {
-    // Record study activity
     const dateStr = today();
     setProg((prev) => {
       const knownSet = new Set(Array.isArray(prev.known) ? prev.known : []);
@@ -58,10 +62,15 @@ export function ProgressProvider({ children }) {
         ? [id, ...(prev.recentCards ?? []).filter((x) => x !== id)].slice(0, 20)
         : prev.recentCards ?? [];
 
-      // Milestone checks
+      // Milestone: streak7 — queue toast when first achieved
       const milestoneStreak7 = prev.milestoneStreak7 || newDays >= 7;
-      const _newKnownSize = knownSet.size; // reserved for milestone toast
-      // milestone toast triggered via return value check in component
+      if (!prev.milestoneStreak7 && milestoneStreak7) {
+        // Queue outside setState (setTimeout avoids calling setState within setState)
+        setTimeout(() => setToastQueue((q) => [
+          ...q,
+          { msg: '🔥 7 hari berturut-turut! Konsistensi = kunci sukses.', duration: 4000 },
+        ]), 0);
+      }
 
       return {
         ...prev,
@@ -105,8 +114,22 @@ export function ProgressProvider({ children }) {
 
   // ── Milestone setters ─────────────────────────────────────────────────
   const setMilestoneQuiz70 = useCallback(() => {
-    setProg((prev) => ({ ...prev, milestoneQuiz70: true }));
+    setProg((prev) => {
+      // A.3: Queue toast on first achievement only
+      if (!prev.milestoneQuiz70) {
+        setTimeout(() => setToastQueue((q) => [
+          ...q,
+          { msg: '🎉 Luar biasa! Nilai kuis ≥70% untuk pertama kali!', duration: 4000 },
+        ]), 0);
+      }
+      return { ...prev, milestoneQuiz70: true };
+    });
   }, [setProg]);
+
+  // A.3: Remove first toast from queue (called by App.jsx after displaying)
+  const clearToast = useCallback((idx) => {
+    setToastQueue((q) => q.filter((_, i) => i !== idx));
+  }, []);
 
   // ── Derived sets (memoized inline, cheap) ────────────────────────────
   const knownArr = Array.isArray(prog.known) ? prog.known : [];
@@ -136,6 +159,9 @@ export function ProgressProvider({ children }) {
     // Milestones
     milestoneStreak7: prog.milestoneStreak7 ?? false,
     milestoneQuiz70: prog.milestoneQuiz70 ?? false,
+    // A.3: Toast queue
+    toastQueue,
+    clearToast,
     // Actions
     handleMark,
     toggleStar,
