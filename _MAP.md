@@ -1,8 +1,8 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-01 by Sonnet (post Codex PR merge)
-> **Version:** v3.6.0 — Phase 1–10 complete ✅ RELEASED
-> **Blueprint:** `docs/MASTER-BLUEPRINT-v3.md` ← **READ THIS FIRST**
+> **Last updated:** 2026-05-01 by Crunchy (hygiene pass — blueprint v5, archive cleanup)
+> **Version:** v3.6.1 — Phase 1–10 complete ✅ RELEASED
+> **Blueprint:** `docs/MASTER-BLUEPRINT-v5.md` ← **READ THIS FIRST** (v5 = corpus-deepened, supersedes v3/v4/v4-POLISHED)
 
 ---
 
@@ -194,3 +194,4 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 ---
 
 *For historical changelogs and audit reports, see `docs/archive/` and `CHANGELOG.md`.*
+
