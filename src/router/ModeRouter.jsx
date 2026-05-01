@@ -4,15 +4,17 @@
 // Phase 8: focus management — moves focus to #mode-heading on mount.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Component, Suspense, useEffect, useRef } from 'react';
+import { Component, Suspense, useEffect, useRef, useState } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { getCatsForTrack } from '../data/categories.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
+import { getMission, completeMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import { MODE_COMPONENTS } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
+import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 
 // ── Loading fallback — skeleton, not spinner ───────────────────────────────
 function ModeLoader() {
@@ -130,15 +132,24 @@ export default function ModeRouter() {
   const { mode, exitMode, track } = useApp();
   const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession } = useProgress();
   const srs = useSRSContext();
+  const [showMissionOverlay, setShowMissionOverlay] = useState(false);
 
   if (!mode) return null;
 
   const ModeComponent = MODE_COMPONENTS[mode];
   if (!ModeComponent) return null;
 
-  // Phase C: Wrap onFinish to also record session
+  // Phase C: Wrap onFinish to also record session + check mission completion
   const makeFinishHandler = (mode, extra) => ({ correct, total, maxStreak, maxWrongStreak }) => {
     recordSession({ mode, correct, total });
+
+    // C.3: Check if this mode matches the daily mission
+    const mission = getMission();
+    if (mission && mission.mode === mode && !isMissionDoneToday()) {
+      completeMission();
+      setShowMissionOverlay(true);
+    }
+
     extra?.({ correct, total, maxStreak, maxWrongStreak });
   };
 
@@ -182,6 +193,9 @@ export default function ModeRouter() {
       <Suspense fallback={<ModeLoader />}>
         <ModeComponent {...props} />
       </Suspense>
+      {showMissionOverlay && (
+        <MissionCompleteOverlay onDone={() => setShowMissionOverlay(false)} />
+      )}
     </ErrorBoundary>
   );
 }

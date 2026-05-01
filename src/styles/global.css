@@ -109,3 +109,9 @@ body {
   outline-offset: 2px;
   border-radius: var(--r-sm);
 }
+
+/* ── Mission Complete Overlay (C.3) ── */
+@keyframes missionFadeOut {
+  0%, 60% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
