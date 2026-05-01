@@ -1,69 +1,99 @@
-// BangunanMode.jsx — Scaffold for 建築 (Bangunan / Building Construction) track
-import { T } from '../styles/theme.js';
+// ─── BangunanMode.jsx (phaseB) ────────────────────────────────────────────────
+// Phase B: Replaced "Segera Hadir" stub with functional quiz mode.
+// Uses BANGUNAN_SETS data, saves scores to bangunanScores in storage v3.
+// ─────────────────────────────────────────────────────────────────────────────
+import { useState } from 'react';
+import { BANGUNAN_SETS } from '../data/bangunan-sets.js';
+import { get, set as storageSet } from '../storage/engine.js';
+import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
+import { T } from '../styles/theme.js';
 
-const INDIGO = '#818cf8';
-
-const PLANNED_CONTENT = [
-  { icon: '🪵', label: 'Pekerjaan Kayu', jp: '木工事', desc: 'Struktur, bekisting kayu, finishing' },
-  { icon: '🧱', label: 'Pasangan & Plester', jp: '左官工事', desc: 'Bata, mortar, acian, keramik' },
-  { icon: '🔩', label: 'Struktur Baja', jp: '鉄骨工事', desc: 'Kolom baja, balok, sambungan' },
-  { icon: '🏗️', label: 'Beton & Bekisting', jp: '型枠・コンクリート工事', desc: 'Cor beton, curing, pengujian slump' },
-  { icon: '🎨', label: 'Finishing', jp: '仕上げ工事', desc: 'Cat, wallpaper, lantai, plafon' },
-  { icon: '🪟', label: 'Pintu & Jendela', jp: '建具工事', desc: 'Kusen aluminium, kaca, hardware' },
-];
+// Normalize question set format to QuizShell format
+function normalizeQuestions(set) {
+  return set.questions.map((q) => ({
+    question: q.q,
+    options: q.opts.map((opt, j) => ({
+      text: opt,
+      sub: q.opts_id?.[j] ?? null,
+    })),
+    correctIdx: q.ans,
+    explanation: q.exp,
+    hint: q.hint ?? null,
+    _cat: q.cat,
+  }));
+}
 
 export default function BangunanMode({ onExit }) {
+  const [selectedSet, setSelectedSet] = useState(null);
+  const scores = get('progress')?.bangunanScores ?? {};
+
+  const handleFinish = ({ correct, total }) => {
+    if (!selectedSet) return;
+    storageSet('progress', (p) => ({
+      ...p,
+      bangunanScores: {
+        ...(p.bangunanScores ?? {}),
+        [selectedSet.id]: { correct, total, date: new Date().toISOString() },
+      },
+    }));
+  };
+
+  if (selectedSet) {
+    return (
+      <QuizShell
+        questions={normalizeQuestions(selectedSet)}
+        onExit={() => setSelectedSet(null)}
+        onFinish={handleFinish}
+        title={`Bangunan — ${selectedSet.title}`}
+        accentColor="#3b82f6"
+        showHint
+        autoNextDelay={2000}
+      />
+    );
+  }
+
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <h2 className={S.pageTitle}>🏗️ Bangunan · 建築</h2>
+      <p className={S.pageSub}>Soal SSW Konstruksi jalur 建築</p>
 
-      <div style={{ marginBottom: 24 }}>
-        <div className={S.row} style={{ gap: 12, marginBottom: 8 }}>
-          <span style={{ fontSize: 32 }}>🏗️</span>
-          <div>
-            <h2 className={S.pageTitle} style={{ fontSize: 20 }}>Bangunan · 建築</h2>
-            <div style={{ fontSize: 12, color: T.textMuted, fontFamily: T.fontJP }}>建築施工管理 — Kenchiku Sekō Kanri</div>
-          </div>
-        </div>
-        <div style={{ padding: '14px 16px', borderRadius: T.r.md, background: 'linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.06))', border: '1px solid rgba(99,102,241,0.2)', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 22 }}>🚧</span>
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: INDIGO }}>Segera Hadir</div>
-            <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>Soal SSW Konstruksi jalur 建築 sedang disiapkan. Upload PDF sumber ke sesi berikutnya untuk mulai build.</div>
-          </div>
-        </div>
-      </div>
-
-      <div style={{ marginBottom: 24 }}>
-        <div className={S.rowSpread} style={{ fontSize: 11, color: T.textDim, marginBottom: 6 }}>
-          <span>Progress konten</span>
-          <span style={{ fontWeight: 700, color: INDIGO }}>0 / ~300 soal</span>
-        </div>
-        <div style={{ height: 6, borderRadius: T.r.pill, background: T.surface, border: `1px solid ${T.border}`, overflow: 'hidden' }}>
-          <div style={{ width: '0%', height: '100%', background: 'linear-gradient(90deg,#6366f1,#8b5cf6)', borderRadius: T.r.pill }} />
-        </div>
-      </div>
-
-      <div className={S.sectionLabel}>Materi Yang Akan Datang</div>
       <div className={S.list}>
-        {PLANNED_CONTENT.map((item) => (
-          <div key={item.label} className={S.row} style={{ padding: '12px 14px 12px 16px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, opacity: 0.6, gap: 12 }}>
-            <span style={{ fontSize: 20, flexShrink: 0 }}>{item.icon}</span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>
-                {item.label}
-                <span style={{ fontSize: 11, fontWeight: 400, color: T.textDim, marginLeft: 6, fontFamily: T.fontJP }}>{item.jp}</span>
+        {BANGUNAN_SETS.map((set) => {
+          const score = scores[set.id];
+          const pct = score ? Math.round((score.correct / score.total) * 100) : null;
+          return (
+            <button
+              key={set.id}
+              className={S.btnItem}
+              onClick={() => setSelectedSet(set)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: T.surface, border: `1px solid ${T.border}`,
+                textAlign: 'left',
+              }}
+            >
+              <span style={{ fontSize: 24, flexShrink: 0 }}>{set.emoji}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, fontFamily: T.fontJP }}>{set.title}</div>
+                <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>
+                  {set.subtitle} · {set.questions.length} soal
+                </div>
+                {score && (
+                  <div style={{ fontSize: 10, color: pct >= 70 ? T.correct : T.wrong, marginTop: 2, fontWeight: 700 }}>
+                    Terakhir: {score.correct}/{score.total} ({pct}%)
+                  </div>
+                )}
               </div>
-              <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>{item.desc}</div>
-            </div>
-            <span style={{ fontSize: 9, fontWeight: 700, color: T.textDim, background: T.border, borderRadius: T.r.pill, padding: '2px 7px', flexShrink: 0 }}>SOON</span>
-          </div>
-        ))}
+              <span style={{ fontSize: 18, color: T.textDim, flexShrink: 0 }}>→</span>
+            </button>
+          );
+        })}
       </div>
 
-      <div style={{ marginTop: 20, padding: '12px 14px', borderRadius: T.r.md, background: T.surface, border: `1px dashed ${T.border}`, fontSize: 11, color: T.textDim, lineHeight: 1.6 }}>
-        📄 <strong>Untuk developer:</strong> tambahkan soal di <code>src/data/bangunan-sets.js</code> dengan schema yang sama seperti <code>csv-sets.js</code>, lalu import di mode ini.
+      <div style={{ marginTop: 16, fontSize: 11, color: T.textDim, textAlign: 'center', lineHeight: 1.6 }}>
+        {BANGUNAN_SETS.reduce((n, s) => n + s.questions.length, 0)} soal · {BANGUNAN_SETS.length} set
       </div>
     </div>
   );

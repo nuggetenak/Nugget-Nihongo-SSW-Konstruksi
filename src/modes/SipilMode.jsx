@@ -1,67 +1,99 @@
-// SipilMode.jsx — Scaffold for 土木 (Sipil / Civil Engineering) track
-import { T } from '../styles/theme.js';
+// ─── SipilMode.jsx (phaseB) ───────────────────────────────────────────────────
+// Phase B: Replaced "Segera Hadir" stub with functional quiz mode.
+// Uses SIPIL_SETS data, saves scores to sipilScores in storage v3.
+// ─────────────────────────────────────────────────────────────────────────────
+import { useState } from 'react';
+import { SIPIL_SETS } from '../data/sipil-sets.js';
+import { get, set as storageSet } from '../storage/engine.js';
+import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
+import { T } from '../styles/theme.js';
 
-const PLANNED_CONTENT = [
-  { icon: '🏗️', label: 'Pekerjaan Tanah', jp: '土工事', desc: 'Galian, timbunan, kompaksi' },
-  { icon: '🛣️', label: 'Pekerjaan Jalan', jp: '道路工事', desc: 'Aspal, beton, drainase jalan' },
-  { icon: '🌉', label: 'Jembatan', jp: '橋梁工事', desc: 'Struktur beton, baja, fondasi' },
-  { icon: '🚇', label: 'Terowongan', jp: 'トンネル工事', desc: 'Metode NATM, shield, cut-cover' },
-  { icon: '🌊', label: 'Pekerjaan Air', jp: '河川工事', desc: 'Tanggul, bendungan, saluran irigasi' },
-  { icon: '⚙️', label: 'Alat Berat', jp: '建設機械', desc: 'Excavator, bulldozer, crane' },
-];
+// Normalize question set format to QuizShell format
+function normalizeQuestions(set) {
+  return set.questions.map((q) => ({
+    question: q.q,
+    options: q.opts.map((opt, j) => ({
+      text: opt,
+      sub: q.opts_id?.[j] ?? null,
+    })),
+    correctIdx: q.ans,
+    explanation: q.exp,
+    hint: q.hint ?? null,
+    _cat: q.cat,
+  }));
+}
 
 export default function SipilMode({ onExit }) {
+  const [selectedSet, setSelectedSet] = useState(null);
+  const scores = get('progress')?.sipilScores ?? {};
+
+  const handleFinish = ({ correct, total }) => {
+    if (!selectedSet) return;
+    storageSet('progress', (p) => ({
+      ...p,
+      sipilScores: {
+        ...(p.sipilScores ?? {}),
+        [selectedSet.id]: { correct, total, date: new Date().toISOString() },
+      },
+    }));
+  };
+
+  if (selectedSet) {
+    return (
+      <QuizShell
+        questions={normalizeQuestions(selectedSet)}
+        onExit={() => setSelectedSet(null)}
+        onFinish={handleFinish}
+        title={`Sipil — ${selectedSet.title}`}
+        accentColor={T.amber}
+        showHint
+        autoNextDelay={2000}
+      />
+    );
+  }
+
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <h2 className={S.pageTitle}>⛏️ Sipil · 土木</h2>
+      <p className={S.pageSub}>Soal SSW Konstruksi jalur 土木</p>
 
-      <div style={{ marginBottom: 24 }}>
-        <div className={S.row} style={{ gap: 12, marginBottom: 8 }}>
-          <span style={{ fontSize: 32 }}>⛏️</span>
-          <div>
-            <h2 className={S.pageTitle} style={{ fontSize: 20 }}>Sipil · 土木</h2>
-            <div style={{ fontSize: 12, color: T.textMuted, fontFamily: T.fontJP }}>土木施工管理 — Doboku Sekō Kanri</div>
-          </div>
-        </div>
-        <div style={{ padding: '14px 16px', borderRadius: T.r.md, background: 'linear-gradient(135deg,rgba(245,158,11,0.08),rgba(234,88,12,0.06))', border: '1px solid rgba(245,158,11,0.2)', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 22 }}>🚧</span>
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: T.amber }}>Segera Hadir</div>
-            <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>Soal SSW Konstruksi jalur 土木 sedang disiapkan. Upload PDF sumber ke sesi berikutnya untuk mulai build.</div>
-          </div>
-        </div>
-      </div>
-
-      <div style={{ marginBottom: 24 }}>
-        <div className={S.rowSpread} style={{ fontSize: 11, color: T.textDim, marginBottom: 6 }}>
-          <span>Progress konten</span>
-          <span style={{ fontWeight: 700, color: T.amber }}>0 / ~300 soal</span>
-        </div>
-        <div style={{ height: 6, borderRadius: T.r.pill, background: T.surface, border: `1px solid ${T.border}`, overflow: 'hidden' }}>
-          <div style={{ width: '0%', height: '100%', background: T.accent, borderRadius: T.r.pill }} />
-        </div>
-      </div>
-
-      <div className={S.sectionLabel}>Materi Yang Akan Datang</div>
       <div className={S.list}>
-        {PLANNED_CONTENT.map((item) => (
-          <div key={item.label} className={S.row} style={{ padding: '12px 14px 12px 16px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, opacity: 0.6, gap: 12 }}>
-            <span style={{ fontSize: 20, flexShrink: 0 }}>{item.icon}</span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>
-                {item.label}
-                <span style={{ fontSize: 11, fontWeight: 400, color: T.textDim, marginLeft: 6, fontFamily: T.fontJP }}>{item.jp}</span>
+        {SIPIL_SETS.map((set) => {
+          const score = scores[set.id];
+          const pct = score ? Math.round((score.correct / score.total) * 100) : null;
+          return (
+            <button
+              key={set.id}
+              className={S.btnItem}
+              onClick={() => setSelectedSet(set)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: T.surface, border: `1px solid ${T.border}`,
+                textAlign: 'left',
+              }}
+            >
+              <span style={{ fontSize: 24, flexShrink: 0 }}>{set.emoji}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, fontFamily: T.fontJP }}>{set.title}</div>
+                <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>
+                  {set.subtitle} · {set.questions.length} soal
+                </div>
+                {score && (
+                  <div style={{ fontSize: 10, color: pct >= 70 ? T.correct : T.wrong, marginTop: 2, fontWeight: 700 }}>
+                    Terakhir: {score.correct}/{score.total} ({pct}%)
+                  </div>
+                )}
               </div>
-              <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>{item.desc}</div>
-            </div>
-            <span style={{ fontSize: 9, fontWeight: 700, color: T.textDim, background: T.border, borderRadius: T.r.pill, padding: '2px 7px', flexShrink: 0 }}>SOON</span>
-          </div>
-        ))}
+              <span style={{ fontSize: 18, color: T.textDim, flexShrink: 0 }}>→</span>
+            </button>
+          );
+        })}
       </div>
 
-      <div style={{ marginTop: 20, padding: '12px 14px', borderRadius: T.r.md, background: T.surface, border: `1px dashed ${T.border}`, fontSize: 11, color: T.textDim, lineHeight: 1.6 }}>
-        📄 <strong>Untuk developer:</strong> tambahkan soal di <code>src/data/sipil-sets.js</code> dengan schema yang sama seperti <code>csv-sets.js</code>, lalu import di mode ini.
+      <div style={{ marginTop: 16, fontSize: 11, color: T.textDim, textAlign: 'center', lineHeight: 1.6 }}>
+        {SIPIL_SETS.reduce((n, s) => n + s.questions.length, 0)} soal · {SIPIL_SETS.length} set
       </div>
     </div>
   );

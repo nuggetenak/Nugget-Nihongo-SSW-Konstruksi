@@ -95,6 +95,8 @@ export function AppProvider({ children }) {
     completeOnboarding,
     dailyGoal: prefs.dailyGoal ?? 20,
     setDailyGoal,
+    setPref,
+    prefs,
     // Navigation
     tab, setTab,
     mode, goMode, exitMode, goTab,

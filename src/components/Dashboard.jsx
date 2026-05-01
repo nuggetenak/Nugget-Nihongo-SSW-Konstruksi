@@ -6,6 +6,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useMemo } from 'react';
+import { generateDailyMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
@@ -51,6 +52,14 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
   const recentCards = useMemo(() => recentIds.map((id) => CARDS.find((c) => c.id === id)).filter(Boolean).slice(0, 3), [recentIds]);
 
   const qs = getQuickStart(knownN, pct, dueCount);
+
+  // Phase C: Daily mission
+  const mission = useMemo(() => {
+    try { return generateDailyMission(); } catch { return null; }
+  }, []);
+  const missionDone = useMemo(() => {
+    try { return isMissionDoneToday(); } catch { return false; }
+  }, []);
 
   return (
     <div className={s.container}>
@@ -116,6 +125,32 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
         </div>
         <span className={s.ctaArrow}>→</span>
       </button>
+
+      {/* Phase C: Daily Mission card */}
+      {mission && !missionDone && (
+        <button
+          className={s.cta}
+          onClick={() => onNavigate(mission.mode)}
+          style={{ marginTop: 0, background: 'transparent', border: `1px dashed ${T.borderActive}` }}
+          aria-label={`Misi hari ini: ${mission.label}`}
+        >
+          <span className={s.ctaIcon}>{mission.icon}</span>
+          <div className={s.ctaBody}>
+            <div className={s.ctaLabel} style={{ fontSize: 11, color: T.textDim, fontWeight: 600 }}>MISI HARI INI</div>
+            <div className={s.ctaDesc} style={{ color: T.text, fontWeight: 700 }}>{mission.label}</div>
+          </div>
+          <span className={s.ctaArrow} style={{ color: T.amber }}>→</span>
+        </button>
+      )}
+      {missionDone && (
+        <div className={s.cta} style={{ opacity: 0.6, cursor: 'default', pointerEvents: 'none' }}>
+          <span className={s.ctaIcon}>✅</span>
+          <div className={s.ctaBody}>
+            <div className={s.ctaLabel} style={{ fontSize: 11 }}>MISI HARI INI</div>
+            <div className={s.ctaDesc}>Selesai! Kembali besok 🌙</div>
+          </div>
+        </div>
+      )}
 
       {/* Quick action grid */}
       <div className={s.quickGrid}>

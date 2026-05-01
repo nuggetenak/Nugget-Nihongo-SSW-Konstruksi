@@ -128,13 +128,19 @@ function FocusSentinel() {
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
   const { mode, exitMode, track } = useApp();
-  const { known, unknown, starred, quizWrong, toggleStar, handleMark } = useProgress();
+  const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession } = useProgress();
   const srs = useSRSContext();
 
   if (!mode) return null;
 
   const ModeComponent = MODE_COMPONENTS[mode];
   if (!ModeComponent) return null;
+
+  // Phase C: Wrap onFinish to also record session
+  const makeFinishHandler = (mode, extra) => ({ correct, total, maxStreak, maxWrongStreak }) => {
+    recordSession({ mode, correct, total });
+    extra?.({ correct, total, maxStreak, maxWrongStreak });
+  };
 
   // Build filtered cards for modes that need them
   const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
@@ -161,6 +167,7 @@ export default function ModeRouter() {
       cards: filteredCards,
       allCards: CARDS,
       onExit: exitMode,
+      onFinish: makeFinishHandler('kuis'),
     },
     sprint:   { cards: filteredCards, onExit: exitMode },
     fokus:    { known, unknown, quizWrong, onExit: exitMode },

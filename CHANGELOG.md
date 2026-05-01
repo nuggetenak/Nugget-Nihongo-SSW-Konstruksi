@@ -1,3 +1,33 @@
+## [3.8.0] - 2026-05-02
+
+### Phase B + C Complete — Content Sipil/Bangunan + Daily Mission (Agent Sonnet)
+
+**Phase B — Content: Sipil & Bangunan**
+
+- `src/data/sipil-sets.js` — 45 soal (3 set × 15): 土工事, K3 Sipil, Hukum & SSW
+- `src/data/bangunan-sets.js` — 45 soal (3 set × 15): Bekisting/Beton, K3 Bangunan, Alat & Prosedur
+- `SipilMode.jsx` — Replaced "Segera Hadir" stub dengan quiz fungsional, saves ke `sipilScores`
+- `BangunanMode.jsx` — Replaced "Segera Hadir" stub dengan quiz fungsional, saves ke `bangunanScores`
+- `data/index.js` — Tambah barrel export `SIPIL_SETS`, `BANGUNAN_SETS`
+- `router/modes.js` — Update MODE_META: hilangkan "Segera hadir", tampilkan jumlah soal
+
+**Phase C — Daily Mission + Session Analytics**
+
+- `utils/daily-mission.js` (NEW) — `generateDailyMission()`, `completeMission()`, `getMission()`, `isMissionDoneToday()`
+  - Priority: SRS due → strand underrepresented (Four Strands, Nation 2007)
+  - Cached per-day via `progress.dailyMission`
+- `contexts/ProgressContext.jsx` — Tambah `recordSession()` (cap 90), expose `sessions` array
+- `router/ModeRouter.jsx` — `makeFinishHandler()` wrap `onFinish` semua mode → auto-record session
+- `components/Dashboard.jsx` — Misi Hari Ini card di atas Quick Grid; ✅ badge kalau sudah selesai
+- `contexts/AppContext.jsx` — Expose `setPref` + `prefs` di ctx object
+- `components/SayaTab.jsx` — Target harian editable via prompt
+
+**Tests: 258 → 273 (+15 new)**
+- `sipil-data.test.js` (+8): Schema validation semua soal
+- `bangunan-data.test.js` (+8): Schema + cross-validation no ID overlap
+- `daily-mission.test.js` (+10): Generate, cache, complete, strand logic
+- `session-tracking.test.js` (+5): recordSession, cap 90, multi-mode
+
 ## [3.7.0] - 2026-05-02
 
 ### Phase A Complete — Bug Fixes + Storage v3 + Debt Cleanup (Agent Sonnet)

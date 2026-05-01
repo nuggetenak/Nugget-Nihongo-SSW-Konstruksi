@@ -3,6 +3,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export { CARDS } from './cards.js';
+export { SIPIL_SETS } from './sipil-sets.js';
+export { BANGUNAN_SETS } from './bangunan-sets.js';
 export { JAC_OFFICIAL } from './jac-official.js';
 export { WAYGROUND_SETS } from './wayground-sets.js';
 export { CSV_SETS } from './csv-sets.js';

@@ -44,7 +44,7 @@ function Section({ title, children }) {
 }
 
 export default function SayaTab() {
-  const { track, setTrack, isDark, toggleTheme, toast, goMode } = useApp();
+  const { track, setTrack, isDark, toggleTheme, toast, goMode, dailyGoal, setDailyGoal } = useApp();
   const { known, unknown, streakData } = useProgress();
   const srs = useSRSContext();
 
@@ -143,6 +143,7 @@ export default function SayaTab() {
       <Section title="Pengaturan">
         <Row label="Jalur Belajar" value={TRACK_LABELS[track] ?? track} sub="Tap untuk ganti" onClick={() => setTrack(null)} />
         <Row label="Tema"          value={isDark ? '🌙 Gelap' : '☀️ Terang'} onClick={toggleTheme} />
+        <Row label="Target Harian" value={dailyGoal ? `${dailyGoal} kartu` : '20 kartu'} sub="Tap untuk ubah" onClick={() => { const g = prompt('Target kartu per hari:', dailyGoal ?? 20); const n = parseInt(g, 10); if (n > 0 && n <= 200) setDailyGoal(n); }} />
       </Section>
 
       <Section title="Data">

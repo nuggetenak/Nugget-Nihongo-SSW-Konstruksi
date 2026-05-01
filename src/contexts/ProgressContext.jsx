@@ -131,6 +131,17 @@ export function ProgressProvider({ children }) {
     setToastQueue((q) => q.filter((_, i) => i !== idx));
   }, []);
 
+  // ── Session tracking (Phase C) ───────────────────────────────────────────
+  const recordSession = useCallback(({ mode, correct, total, durationMs }) => {
+    setProg((prev) => {
+      const sessions = [
+        ...(prev.sessions ?? []),
+        { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
+      ].slice(-90); // keep last 90 sessions
+      return { ...prev, sessions };
+    });
+  }, [setProg]);
+
   // ── Derived sets (memoized inline, cheap) ────────────────────────────
   const knownArr = Array.isArray(prog.known) ? prog.known : [];
   const unknownArr = Array.isArray(prog.unknown) ? prog.unknown : [];
@@ -159,9 +170,14 @@ export function ProgressProvider({ children }) {
     // Milestones
     milestoneStreak7: prog.milestoneStreak7 ?? false,
     milestoneQuiz70: prog.milestoneQuiz70 ?? false,
-    // A.3: Toast queue
+
+
+  // A.3: Toast queue
     toastQueue,
     clearToast,
+    // Phase C: Session data
+    sessions: prog.sessions ?? [],
+    recordSession,
     // Actions
     handleMark,
     toggleStar,
