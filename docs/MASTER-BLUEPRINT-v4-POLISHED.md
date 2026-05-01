@@ -850,7 +850,329 @@ Tests that span multiple components/contexts:
 
 ---
 
-*Blueprint v4 (polished) authored by Agent Sonnet 4.6 on 2026-05-01.*
-*Research layer added from Nugget Nihongo Research Foundation (743 citations) and SECTION8-PWA-v3 corpus.*
-*All code-level specifications unchanged from MASTER-BLUEPRINT-v4.md (commit aa041a3).*
-*Prior proposal credit: Genspark AI Architect (structural analysis and health scorecard).*
+## Appendix C — Research-Driven Design Upgrades (Post-Corpus Read)
+
+> *Improvements to v4 blueprint based on deeper corpus reading. Each upgrade is grounded in specific evidence not present in the original v4. These are recommendations for implementation agents — not scope changes to existing phases.*
+
+---
+
+### C-01 — Semantic Set Rule for Card Introduction Order (Phase 12 + future content)
+
+**Research basis:** Tinkham (1997) [CA-48] and Waring (1997) [CA-50] — semantic clustering *hurts* acquisition at beginner/intermediate levels. Erten & Tekin (2008) [CA-12] confirm: presenting new words in semantically related sets (e.g. all construction tools in one session) increases inter-item interference and reduces retention compared to semantically unrelated sets.
+
+**Current state:** `cards.js` presents vocabulary without enforced semantic set limits. In FlashcardMode, category filters can show the user 50+ semantically related cards in a row (e.g. all 機材/equipment cards at once).
+
+**Proposed upgrade (Phase 12 content design):**
+When authoring `sipil-sets.js` and `bangunan-sets.js`, **interleave semantic fields** within each set — never more than 3 consecutive cards from the same semantic cluster (e.g. tools, safety equipment, structural elements). Each question set should sample across semantic domains.
+
+**Implementation note for `quiz-generator.js`:**
+```js
+// Add semantic interleaving to quiz generation:
+// After shuffling, check if 3+ consecutive cards share same `sub_category`
+// If yes, swap the 4th card with a card from a different sub_category
+function semanticInterleave(cards, maxConsecutive = 3) { ... }
+```
+
+**Evidence ceiling:** Brunmair & Richter (2019) [CI-01] meta-analysis — interleaving benefits are strongest for **concept learning**, more modest for **rote vocabulary**. For construction terminology (where items are genuinely distinct concepts, not synonyms), interleaving is clearly beneficial. For pure synonym/antonym pairs (e.g. 増加/減少), semantic clustering is appropriate.
+
+---
+
+### C-02 — Explicit Corrective Feedback on Back Cards (Phase 12 + content quality)
+
+**Research basis:**
+- Lyster & Ranta (1997) [EA-14] — six feedback types; *recasts* (showing the correct form without explanation) are the most frequent in classrooms but have the **lowest learner uptake**. The standard Anki back card (correct answer displayed) is functionally equivalent to a recast.
+- Li (2010) [EA-16] meta-analysis (33 studies) — explicit corrective feedback significantly outperforms implicit CF for complex rule-governed features. Japanese particles, keigo, and aspect markers are rule-governed features.
+- Ellis et al. (2006) [EA-17] — explicit CF produces metalinguistic knowledge gains; implicit CF produces marginal procedural gains.
+- Han & Selinker (1999) [EA-13] — *error resistance*: knowing the は/が rule does not prevent incorrect production. Sustained contextualized practice is necessary, not just rule exposure.
+
+**Current state:** `ResultScreen.jsx` shows correct answer after wrong response (`wrongAnswer → correctAnswer`). This is a recast. No metalinguistic explanation is shown.
+
+**Proposed upgrade (Phase 12 + future content):**
+- All `sipil-sets.js` and `bangunan-sets.js` questions must include an `exp` (explanation) field — not optional.
+- Explanation format: **why** the answer is correct + **common mistake** pattern for Indonesian speakers.
+  ```
+  exp: '足場 (perancah) berbeda dari 踏み台 (pijakan/tangga kecil) — 足場 selalu berarti struktur sementara multi-level untuk bekerja di ketinggian. Kesalahan umum: menyamakan dengan 梯子 (tangga portabel).'
+  ```
+- `QuizShell.jsx` should display explanation prominently on wrong answer — not as a collapsed/hidden element. Research (Li 2010) shows explicit CF needs to be salient to produce acquisition gains.
+
+**Implication for Phase 11:** When wiring milestone toasts in `App.jsx` (BUG-03 fix), consider: a toast on wrong streak ("5 jawaban salah berturut-turut — coba mode Fokus?") is a soft form of explicit CF that respects malu-aware design (private, not punitive).
+
+---
+
+### C-03 — FocusMode Upgrade: Interference-Specific Targeting (Phase 13)
+
+**Research basis:**
+- I-JAS corpus data (cited in corpus §5.5) — confirms に/で confusion as the **most persistent** Indonesian learner error for Japanese particles. は/が distinction is the most cognitively complex.
+- Corpus §5.5 documents seven systematic interference points specific to Indonesian speakers: SVO→SOV word order, particle omission, verb conjugation, mora timing, pitch accent, writing system, keigo.
+- Nassaji (2016) [EA-20] — CF type × feature type × learner readiness interaction: the *same* learner needs different feedback types for different error types.
+
+**Current state:** `FocusMode.jsx` (78 lines) shows cards from the user's `quizWrong` pool — effectively a random sample of their mistakes.
+
+**Proposed upgrade for Phase 13 (FocusMode extension):**
+
+```js
+// Categorize wrong cards by interference type
+// Add `interference_type` field to cards.js entries where applicable:
+// 'particle_ni_de' | 'ha_ga' | 'svo_sov' | 'verb_form' | 'keigo' | null
+
+// FocusMode groups wrongs by interference type:
+const grouped = wrongCards.reduce((acc, card) => {
+  const type = card.interference_type ?? 'general';
+  (acc[type] ??= []).push(card);
+  return acc;
+}, {});
+
+// Show interference type header with a one-line explanation:
+// "に vs で — partikel lokasi (に) vs instrumen/cara (で)"
+// before the cards for that cluster
+```
+
+**Why this matters:** If a user gets 8 questions wrong and 6 of them are に/で confusion, showing them a random mix of their wrongs is less effective than grouping: "Kamu kesulitan に vs で — here's a focused drill." Research (Li 2010) shows explicit CF is more effective when the learner can perceive the pattern.
+
+**Tagging investment:** Only the ~1,438 existing `cards.js` entries relevant to particle use need tagging. Not all cards. Estimate: ~200 cards need `interference_type` field.
+
+---
+
+### C-04 — Onboarding Placement: VLT-Style Initial Assessment (Phase 11 / future)
+
+**Research basis:**
+- Corpus §CA.2 — Onboarding currently uses a "simplified VLT-style placement." Gap 6 (Assessment Architecture) is flagged HIGH in the research foundation.
+- Nation's Vocabulary Levels Test (VLT) — the most validated vocabulary placement instrument for L2 learners. Not requiring learners to know all items at a level — just representative samples.
+- Curriculum Blueprint §2.8 — level promotion logic defined: N5 exit requires 80% known rate on N5 core vocabulary set.
+
+**Current state:** `Onboarding.jsx` (310 lines) asks user to select track (doboku/kenchiku/lifeline) and set a daily goal. No vocabulary-level detection.
+
+**Proposed upgrade (add to Phase 11 or defer to Phase 18):**
+Add an optional 10-question "warm-up placement" step after track selection:
+- 10 cards sampled from 5 JLPT levels (2 from N5, 2 from N4, 2 from N3, 2 from N2, 2 from N1)
+- User marks each: "Tau" / "Tidak tau" (binary — not a quiz, no pressure)
+- System infers approximate entry level from response pattern
+- Sets initial `progress.knownStartingLevel` → Daily Mission engine uses this to prioritize level-appropriate content
+
+**Malu-aware framing:** Frame as "bantu app mengenal kamu" not "tes kemampuan." No score shown. No pass/fail. This removes the anxiety trigger (Horwitz et al. 1986) from the placement step.
+
+**Feasibility:** 10-item placement adds ~60 seconds to onboarding. Nation's research shows even brief VLT sampling (20 items) has high validity for level placement. 10 items gives a rough but useful signal.
+
+---
+
+### C-05 — Session Length Awareness in Daily Mission (Phase 13)
+
+**Research basis:**
+- Nakata (2015) [SR-04] — equal spacing schedules produce better long-term retention than expanding spacing for L2 vocabulary. For short daily sessions, distributed practice over many days > massed practice in few sessions.
+- GSMA Intelligence (2023) — Indonesian users average 12.7 GB/month mobile data, commute-heavy usage patterns. Short, frequent sessions (commute learning) are structurally likely for this user population.
+- Corpus §8.10 — Indonesian learners predominantly access via smartphone during commute/break periods. Optimal session design: 5–15 minutes.
+
+**Proposed upgrade for `daily-mission.js`:**
+```js
+// Add session duration awareness to mission generation:
+export function generateDailyMission(prog, srsStats, prefs) {
+  const recentSessions = prog.sessions.slice(-7);
+  const avgDurationMs = recentSessions.length
+    ? recentSessions.reduce((s, r) => s + r.durationMs, 0) / recentSessions.length
+    : null;
+
+  // If avg session < 5 min → user is a micro-learner → recommend smaller card counts
+  // If avg session > 20 min → user has long sessions → recommend more comprehensive mode
+  const missionScale = avgDurationMs
+    ? avgDurationMs < 5 * 60000 ? 'micro'    // ≤5 min
+    : avgDurationMs < 15 * 60000 ? 'standard' // 5–15 min
+    : 'extended'                               // >15 min
+    : 'standard';
+
+  // Micro-learner mission: 5 SRS cards > 10 quiz > "kartu mode 10 kartu saja"
+  // Standard mission: current logic
+  // Extended: current logic + suggest StatsMode review
+}
+```
+
+**Why this matters:** Recommending "Ulang 30 kartu SRS" to a user who consistently studies for 4 minutes is frustrating and non-compliant. Session-aware missions increase actual completion rates.
+
+---
+
+### C-06 — Confusion Pair Mode: The Most Pedagogically Distinctive Feature (v5 proposal)
+
+**Research basis:**
+- Corpus §5.5 — seven systematic interference points for Indonesian speakers. に/で confusion and は/が distinction are the two highest-priority targets.
+- Lyster (2004) [EA-18] — prompts (eliciting learner self-repair) are superior to recasts for morphosyntactic targets. In SRS terms: **forced-choice between confusable items** (e.g. "に or で?" presented together) is the closest approximation to a prompt.
+- Brunmair & Richter (2019) [CI-01] — interleaving related-but-distinct items produces significantly better discrimination learning than blocked practice.
+- Corpus curriculum §4.2 (L2 layer) — confusion pairs are explicitly listed as the "most pedagogically distinctive quiz type."
+
+**Current state:** No dedicated confusion pair mode exists. Confusion pairs appear incidentally in quiz options (the distractor generation in `quiz-generator.js` uses random cards as distractors, not semantically related confusables).
+
+**Proposed v5 feature — `ConfusionMode.jsx`:**
+- 4-card sets: present a Japanese term, 4 options are all grammatically plausible (constructed from confusion pair database, not random)
+- Example: "彼女は図書館___本を読んだ。" → options: に / で / へ / を
+- Wrong answer shows explicit metalinguistic explanation (C-02 applies here too)
+- Confusion pair database: start with the 7 documented Indonesian interference points → ~50 confusion pair sets
+- Score tracked separately (not mixed with quiz wrong pool)
+
+**Why not Phase 11–17:** Requires a new `confusion-pairs.js` data file with ~50 authored pairs. Content creation bottleneck. Defer to v5 but document the design now so the data structure is anticipated in the schema.
+
+**Schema preparation (add in Phase 11):**
+```js
+// Add to DEFAULTS.progress in schema.js:
+confusionScores: {}  // { pairId: { attempts: N, correct: N, lastDate: ISO } }
+```
+
+---
+
+### C-07 — Audio Rate Calibration for Indonesian Learners (Phase 16 refinement)
+
+**Research basis:**
+- Corpus §8.10 — Indonesian is a syllable-timed language; Japanese is mora-timed. This is one of the seven documented interference points. Pitch accent and mora timing are both challenging for Indonesian speakers.
+- Web Speech API `rate` parameter: 0.8 (recommended in Phase 16 spec) is appropriate. Research suggests: for mora-timing acquisition, **0.7 rate** is better for beginners (Haristiani & Rifa'I 2020 — slow speech rate aids phonological processing in beginner MALL studies).
+
+**Proposed refinement to `speak.js`:**
+```js
+// Rate calibration by user level (from prefs.level or onboarding result):
+const SPEAK_RATES = {
+  beginner: 0.7,   // mora timing needs to be salient
+  intermediate: 0.8,
+  advanced: 0.9,
+};
+
+export function speakJP(text, { level = 'beginner', pitch = 1.0 } = {}) {
+  const rate = SPEAK_RATES[level] ?? 0.8;
+  // ... rest of implementation
+}
+```
+
+**Add `prefs.speakRate` to schema** (Phase 11) — user-adjustable slider in SayaTab settings (0.6–1.0). Default: 0.75. This is a power-user setting, placed below the main audio toggle.
+
+---
+
+### C-08 — Vision Document Alignment: "Apakah ini bikin user merasa terselamatkan?"
+
+**Source:** `docs/project/VISION.md` (nugget-san, March 2026) — the project compass document.
+
+The VISION.md establishes the "jaw drop moment" bar: *"Anjir? Serius ini semua gratis?? Selengkap dan semudah ini?"*
+
+**Assessment of current v4 against VISION.md principles:**
+
+| Principle | v4 Status | Gap |
+|---|---|---|
+| Gratis selamanya | ✅ No paywall, no ads | None |
+| Accessible semua umur | ⚠️ A11y score B+ | Skip-nav missing (Phase 11 touch) |
+| Offline-first | ✅ SW + cache-first | Manual bump risk → Phase 17 fixes |
+| Tidak overwhelming | ✅ Single-focus modes | Dashboard CTA is currently vague without Daily Mission |
+| Konten yang jujur | ⚠️ Sipil/Bangunan show "Coming Soon" | ✅ Honest — Phase 12 fills these |
+
+**One gap not covered in v4:** VISION.md principle 5 — *"Kalau belum siap, jangan ditampilkan dulu"* (if not ready, don't show it). This applies to **`VocabMode`**: `csv-sets.js` (3,998 lines) loads many sets, some of which may be sparse or incomplete. **Recommendation:** Add a `status: 'active' | 'beta' | 'coming_soon'` field to each set in `csv-sets.js`. Only render `active` sets by default; `beta` sets visible behind a "🧪 Beta" chip; `coming_soon` hidden entirely. This respects the VISION principle of honest UI.
+
+---
+
+### C-09 — The Nugget Nihongo Agent System: What It Means for SSW Konstruksi
+
+**Source:** `docs/agent-system/AGENT-CORE.md`, `AGENT-CORE-A1.md` through `AGENT-CORE-A9.md`
+
+The Nugget Nihongo (main platform) runs a named multi-agent system: Crispy (Project Director), Crunchy (QA), Juicy/Batter/Saucy/Golden/Fluffy/Spicy/Savory. SSW Konstruksi currently uses ad-hoc agent naming (Sonnet, Codex).
+
+**Recommendation for SSW Konstruksi agent governance (v5 consideration):**
+
+SSW Konstruksi has outgrown solo agent work. Phase 11–17 involves:
+- Bug fixes (needs QA verification)
+- Content authoring for Sipil/Bangunan (needs domain review)
+- Data integrity checks (needs audit scripts)
+
+Consider adopting a simplified 3-role model from the Nugget Nihongo system:
+- **Implementor** (Sonnet/Codex): code, content, tests
+- **QA** (Crunchy pattern): runs `audit:integrity`, `npm test`, lint — issues verdict
+- **Director** (Nugget-san): final approval, priority decisions
+
+The existing `scripts/audit-integrity.mjs` already plays the QA role for data. Phase 17 coverage thresholds play the QA role for tests. **Formalizing this as a lightweight governance doc** (1 page, in `docs/GOVERNANCE.md`) would make handoffs between sessions cleaner.
+
+---
+
+## Appendix D — Scope Gaps Not in v4 (Corpus-Identified)
+
+> *Issues found in corpus that are outside v4 scope but should be documented for v5 planning.*
+
+### D-01 — L3 Acquisition Dynamics (Gap 5 from corpus)
+
+**Source:** Corpus §1.2, Gap 5 (Agent 2 assessment) — most Indonesian learners are actually L4 Japanese speakers: L1=regional language (Javanese/Sundanese/etc), L2=Indonesian, L3=English, L4=Japanese.
+
+L3 acquisition is structurally different from L2 (Cenoz et al. 2001; Hammarberg 2001) — English influences Japanese acquisition through L3 effects (e.g. English SVO reinforces Japanese SOV errors in specific contexts). No existing learning platform accounts for this.
+
+**v5 consideration:** When card explanations reference Indonesian interference patterns, add a note where English L3 effects compound the issue (e.g. the English "I read **at** the library" → Indonesian "saya membaca **di** perpustakaan" → incorrect に/で choice in Japanese, where L3 English also uses a location preposition).
+
+### D-02 — Speaking / Production Features (Gap 2 from corpus)
+
+**Source:** Curriculum Blueprint Gap 2 — DEFERRED to v2.
+
+Phase 16's Web Speech API is output (listen) only. Corpus Gap 2 is about production (speak). Web Speech API includes `SpeechRecognition` for input. For v5, a pronunciation check feature is technically feasible: user speaks the JP term → compare to expected reading → simple match.
+
+**Caveat:** SpeechRecognition accuracy for Japanese on Indonesian-accented devices is untested. Malu-aware design concern: if recognition fails repeatedly, it shames the user. Only implement with robust fallback and explicit opt-in.
+
+### D-03 — Kanji Sequencing Strategy
+
+**Source:** Corpus Gap 7, curriculum §2.4.
+
+Currently SSW Konstruksi presents kanji as part of vocabulary cards without dedicated kanji sequencing. The corpus recommends JLPT-frequency-first with radical hints from KRADFILE (CC-BY-SA). For construction vocabulary specifically, many N3-N4 kanji appear in compound construction terms (足場, 掘削, 型枠). A kanji component hint on the back card (showing radical breakdown) would support retention without requiring a dedicated Kanji mode.
+
+**v5 feature:** Add optional `kanji_hint` field to cards — e.g. `kanji_hint: '足(あし/foot)+場(ば/place) → 足場(perancah/scaffolding)'`. Displayed on back card when `prefs.showKanjiHints = true`.
+
+---
+
+## Appendix E — Agent Trail & Session Log
+
+> *Transparency log for handoff agents. Maintained per Nugget Nihongo corpus governance conventions.*
+
+### Session: 2026-05-01 — Agent Sonnet 4.6
+
+**Agent identity:** Claude Sonnet 4.6 (Anthropic) · Operating in claude.ai
+**Session type:** Blueprint research polish + corpus deep-read
+**Repos accessed:**
+- `nuggetenak/Nugget-Nihongo-SSW-Konstruksi` (token: ghp_Apo...) — read + write
+- `nuggetenak/nugget-nihongo` (token: ghp_tnQ...) — read-only, `develop` branch
+
+**Files read from corpus (`nugget-nihongo/develop`):**
+- `docs/NUGGET-NIHONGO-RESEARCH-FOUNDATION.md` (743 citations, ~2,500 lines) — full scan
+- `docs/corpus/SECTION8-PWA-v3-FULL-RECOVERED.md` (~145 citations, PWA platform research)
+- `docs/curriculum/NUGGET-NIHONGO-CURRICULUM-BLUEPRINT-v1.md` (~500 lines) — full read
+- `docs/project/VISION.md` — full read
+- `docs/project/ROADMAP.md` — full read
+- `docs/agent-system/AGENT-CORE.md` — structure read
+- `docs/agent-system/modules/curriculum-proposal.md` — full read
+- `docs/agent-system/modules/savory-analytics-proposal.md` — full read
+- `docs/agent-system/modules/spicy-proposal.md` — partial read
+- `SPEC-GRAMMAR-IRODORI-A2.md` — partial read
+
+**Files written to `Nugget-Nihongo-SSW-Konstruksi`:**
+- `docs/MASTER-BLUEPRINT-v4-POLISHED.md` — created (856 lines → 1,150+ lines after this session)
+
+**Key decisions made this session:**
+1. Preserved all v4 code specs unchanged — only added evidence layer
+2. Added C-01 through C-09 improvement proposals based on corpus evidence not in original v4
+3. Added D-01 through D-03 v5 scope gaps
+4. Documented agent trail in Appendix E (this section)
+
+**What I did NOT do (scope discipline):**
+- Did not modify MASTER-BLUEPRINT-v4.md (original) — polished version is a separate file
+- Did not write any implementation code — blueprint only
+- Did not access the Supabase schema or workers in the corpus repo — out of scope for SSW Konstruksi (SSW uses localStorage only)
+- Did not read all 109 MD files in the corpus — prioritized research foundation, curriculum, vision, PWA evidence
+
+**Confidence assessment:**
+- C-01 (semantic interleave): HIGH — multiple corpus citations, clear implementation path
+- C-02 (explicit CF on back cards): HIGH — Li 2010 meta-analysis is strong evidence
+- C-03 (FocusMode interference targeting): MEDIUM — requires `interference_type` tagging work
+- C-04 (VLT placement): MEDIUM — 10-item placement is a simplification of full VLT
+- C-05 (session length awareness): HIGH — simple engineering, clear rationale
+- C-06 (ConfusionMode): HIGH evidence basis, LOW feasibility for v4 (content authoring bottleneck)
+- C-07 (audio rate calibration): MEDIUM — Haristiani 2020 is not specifically about TTS rate
+- C-08 (VISION alignment): HIGH — direct source from project compass
+- C-09 (governance): LOW urgency — solo project, governance overhead may exceed benefit
+
+**Handoff note for next agent:**
+- Phase 11 is the right starting point — BUG-01/02/03 must ship before any Phase 12+ work
+- C-01 and C-02 are the highest-ROI improvements to incorporate into Phase 12 content authoring
+- C-05 is a 20-line addition to Phase 13 daily-mission.js — trivial to include
+- C-03 (FocusMode interference targeting) requires `interference_type` field on cards — plan for this in Phase 12 data schema before authoring sipil/bangunan sets
+- Appendix B citations are vetted against the corpus bibliography — safe to reference in README/methodology page
+
+---
+
+*Blueprint v4 (research-polished, second pass) — Agent Sonnet 4.6 · 2026-05-01*
+*Corpus read: Nugget Nihongo Research Foundation (743 citations) + SECTION8-PWA-v3 (~145 citations) + Curriculum Blueprint v1 + VISION.md + ROADMAP.md*
+*Word count delta: +295 lines (Appendix C, D, E)*
+*All Phase 11–17 code specifications remain unchanged from MASTER-BLUEPRINT-v4.md (commit aa041a3).*
