@@ -25,6 +25,7 @@ export default function FlipCard({
   onTouchStart,
   onTouchMove,
   onTouchEnd,
+  audioEnabled = true,
 }) {
   const cardTiltDeg = swipeDelta * 4;
   const cardShiftPx = swipeDelta * 24;
@@ -68,7 +69,7 @@ export default function FlipCard({
           <div style={{ position: 'absolute', top: 14, right: 14, fontSize: 10, color: T.textFaint, fontVariantNumeric: 'tabular-nums' }}>#{safeIdx + 1}</div>
 
           <div style={{ textAlign: 'center' }}>
-            <JpFront jp={card.jp} furi={card.furi} romaji={card.romaji} />
+            <JpFront jp={card.jp} furi={card.furi} romaji={card.romaji} audioEnabled={audioEnabled} />
           </div>
 
           {srsInfo && (

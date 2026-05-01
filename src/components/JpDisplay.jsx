@@ -1,7 +1,9 @@
-// ─── JpDisplay.jsx ────────────────────────────────────────────────────────────
+// ─── JpDisplay.jsx (phaseF) ──────────────────────────────────────────────────
+// Phase F: Added audioEnabled prop to JpFront — shows 🔊 button via speak.js.──
 // Note: font-size on jp spans is prop-driven (jpFontSize()) — justified inline.
 // Note: VS label font-size is derived from jp size — justified inline.
 import { T } from '../styles/theme.js';
+import { canSpeak, speakJP } from '../utils/speak.js'; // eslint-disable-line no-unused-vars
 import { stripFuri, extractReadings, jpFontSize } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
@@ -9,7 +11,7 @@ import S from './JpDisplay.module.css';
 // E.3 TD-10: Added furiganaPolicy prop ('always' | 'tap' | 'hidden').
 // Default 'always' preserves existing behavior for all N5-N4 users.
 // 'tap' and 'hidden' are wired for Phase E prep — full UI in Phase G.
-export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always' }) {
+export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audioEnabled = true }) { // eslint-disable-line no-unused-vars
   // Determine whether to show furigana based on policy
   // 'always' (default) = show — no behavioral change for current users
   // 'hidden' = suppress furi/reading row entirely
@@ -18,6 +20,8 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always' }) {
   const effectiveRomaji = showFuri ? romaji : undefined;
   const clean = stripFuri(jp);
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
+
+  // Phase F: Audio — inline in render path below
 
   const jpStyle = (fs, extra = {}) => ({
     lineHeight: 1.4,

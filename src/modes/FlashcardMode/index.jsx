@@ -52,9 +52,11 @@ export default function FlashcardMode({
   const [confirmReset, setConfirmReset] = useState(false);
   const confirmTimer                     = useRef(null);
 
-  // E.3 TD-10: furiganaPolicy from prefs (default 'always')
+  // E.3 TD-10: furiganaPolicy — read for Phase G settings UI
   // eslint-disable-next-line no-unused-vars
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
+  // Phase F: audioEnabled from prefs
+  const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   const rebuildOrder = useCallback((mode) => {
     const base = reviewBelum ? cards.filter((c) => unknown.has(c.id)) : cards;
@@ -214,6 +216,7 @@ export default function FlashcardMode({
         card={card}
         cat={cat}
         flipped={flipped}
+        audioEnabled={audioEnabled}
         showDesc={showDesc}
         onFlip={flip}
         onShowDesc={() => setShowDesc(true)}

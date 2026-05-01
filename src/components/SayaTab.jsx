@@ -44,7 +44,7 @@ function Section({ title, children }) {
 }
 
 export default function SayaTab() {
-  const { track, setTrack, isDark, toggleTheme, toast, goMode, dailyGoal, setDailyGoal } = useApp();
+  const { track, setTrack, isDark, toggleTheme, toast, goMode, dailyGoal, setDailyGoal, setPref, prefs } = useApp();
   const { known, unknown, streakData } = useProgress();
   const srs = useSRSContext();
 
@@ -144,6 +144,25 @@ export default function SayaTab() {
         <Row label="Jalur Belajar" value={TRACK_LABELS[track] ?? track} sub="Tap untuk ganti" onClick={() => setTrack(null)} />
         <Row label="Tema"          value={isDark ? '🌙 Gelap' : '☀️ Terang'} onClick={toggleTheme} />
         <Row label="Target Harian" value={dailyGoal ? `${dailyGoal} kartu` : '20 kartu'} sub="Tap untuk ubah" onClick={() => { const g = prompt('Target kartu per hari:', dailyGoal ?? 20); const n = parseInt(g, 10); if (n > 0 && n <= 200) setDailyGoal(n); }} />
+        <Row
+          label="📅 Tanggal Ujian"
+          value={prefs?.examDate ? new Date(prefs.examDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Belum diatur'}
+          sub={prefs?.examDate ? 'Tap untuk ubah atau hapus' : 'Set untuk lihat countdown di Beranda'}
+          onClick={() => {
+            const d = prompt('Tanggal ujian (YYYY-MM-DD, kosongkan untuk hapus):', prefs?.examDate ?? '');
+            if (d === null) return; // cancelled
+            const trimmed = d.trim();
+            if (trimmed === '') { setPref('examDate', null); return; }
+            if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) { setPref('examDate', trimmed); }
+            else toast.show('Format tanggal tidak valid. Gunakan YYYY-MM-DD');
+          }}
+        />
+        <Row
+          label="🔊 Audio Bahasa Jepang"
+          value={prefs?.audioEnabled !== false ? '✅ Aktif' : '⬜ Mati'}
+          sub="Web Speech API — tombol 🔊 di kartu"
+          onClick={() => setPref('audioEnabled', !(prefs?.audioEnabled !== false))}
+        />
       </Section>
 
       <Section title="Data">
@@ -161,7 +180,7 @@ export default function SayaTab() {
       </Section>
 
       <div className={s.footer}>
-        SSW Konstruksi v3.3.0<br />
+        SSW Konstruksi v4.0.0<br />
         by Nugget Nihongo<br />
         土木 · 建築 · ライフライン設備
       </div>

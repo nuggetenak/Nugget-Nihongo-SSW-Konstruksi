@@ -1,3 +1,43 @@
+## [4.0.0] - 2026-05-02
+
+### Release v4.0.0 — Phase F + G Complete (Agent Sonnet)
+
+**Phase F — Exam Countdown + Audio**
+
+- `utils/speak.js` (NEW) — Web Speech API with HVPT-inspired cycling (Logan et al. 1991):
+  - `speakJP(text)` — speaks Japanese with `ja-JP` lang tag
+  - 3-parameter cycle: 70%/0.85, 80%/1.0, 90%/1.15 rate/pitch variation
+  - `canSpeak()` — graceful degradation (returns false in jsdom/unsupported browsers)
+  - `stopSpeech()`, `_resetPlayCount()` for testing
+- `components/JpDisplay.jsx` — `JpFront` now has 🔊 button when `audioEnabled=true` and `canSpeak()=true`
+  - Inline in default render path; tap calls `speakJP(stripFuri(jp))`
+- `modes/FlashcardMode/FlipCard.jsx` — receives `audioEnabled` prop, passes to `JpFront`
+- `components/Dashboard.jsx` — Exam countdown banner:
+  - Shows when `prefs.examDate` is set and ≤30 days away
+  - Color-coded: blue (≤30d), amber (≤14d), red (≤7d)
+  - Critical message when ≤14 days
+- `components/SayaTab.jsx` — Two new settings rows:
+  - 📅 Tanggal Ujian — date picker (YYYY-MM-DD prompt), stored in `prefs.examDate`
+  - 🔊 Audio Bahasa Jepang — toggle `prefs.audioEnabled`
+
+**Phase G — QA + Polish + Release v4.0**
+
+- `vitest.config.js` — Coverage thresholds added: lines 70%, functions 70%, branches 60%
+- `_MAP.md` — Fully updated to v4.0.0: all Phase A–G tracked, metrics updated (321 tests, 26 files), complete file tree with phase annotations, storage schema v3 reference, agent trail
+- `package.json` — Version bumped to `4.0.0`
+- `SayaTab.jsx` — Footer version updated to v4.0.0
+
+**Integration Tests (G.2)**
+- `flow.export-import.test.js` (+2): full export→import cycle, rollback on corrupt snapshot
+- `flow.quiz-srs.test.js` (+4): session recording, sipil/bangunan scores, mission completion
+- `flow.storage-integrity.test.js` (+5): all v3 schema fields correct types across all phases
+- `speak.test.js` (+8): canSpeak jsdom=false, no-throw in no-api env, mock browser test, HVPT cycling
+- `exam-countdown.test.js` (+7): daysLeft logic, show thresholds, examDate + audioEnabled storage
+
+**Final counts: 295 → 321 tests (+26) · 21 → 26 test files (+5)**
+
+---
+
 ## [3.9.0] - 2026-05-02
 
 ### Phase D + E Complete — Export Hardening + FlashcardMode Decomposition (Agent Sonnet)

@@ -53,6 +53,14 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
 
   const qs = getQuickStart(knownN, pct, dueCount);
 
+  // Phase F: Exam countdown
+  const examDate = storageGet('prefs')?.examDate ?? null;
+
+  const daysLeft = examDate
+    ? Math.ceil((new Date(examDate) - new Date()) / 86400000)
+    : null;
+  const showCountdown = daysLeft !== null && daysLeft > 0 && daysLeft <= 30;
+
   // Phase C: Daily mission
   const mission = useMemo(() => {
     try { return generateDailyMission(); } catch { return null; }
@@ -96,6 +104,27 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
             <div className={s.streakDays}>{streak.days} hari berturut-turut!</div>
             <div className={s.streakSub}>
               {dailyCount > 0 ? `+${dailyCount} kartu hari ini` : 'Jaga streakmu — belajar hari ini!'}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Phase F: Exam countdown — shown when ≤30 days away */}
+      {showCountdown && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 10,
+          padding: '12px 16px', marginBottom: 12,
+          borderRadius: 12,
+          background: daysLeft <= 7 ? 'rgba(239,68,68,0.08)' : daysLeft <= 14 ? 'rgba(245,158,11,0.08)' : 'rgba(59,130,246,0.08)',
+          border: `1px solid ${daysLeft <= 7 ? 'rgba(239,68,68,0.3)' : daysLeft <= 14 ? 'rgba(245,158,11,0.3)' : 'rgba(59,130,246,0.3)'}`,
+        }}>
+          <span style={{ fontSize: 22 }}>🎯</span>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 800, color: daysLeft <= 7 ? '#ef4444' : daysLeft <= 14 ? T.gold : '#3b82f6' }}>
+              {daysLeft} hari lagi menuju ujian
+            </div>
+            <div style={{ fontSize: 11, color: T.textDim }}>
+              {daysLeft <= 14 ? 'Masa kritis — prioritaskan Ulasan SRS!' : 'Jaga konsistensi belajar harian.'}
             </div>
           </div>
         </div>
