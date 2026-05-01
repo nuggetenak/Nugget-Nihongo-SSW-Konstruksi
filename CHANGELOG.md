@@ -1,3 +1,27 @@
+## [3.6.1-docs] - 2026-05-01
+
+### Blueprint Evolution & Documentation Hygiene (Crunchy QA)
+
+**Blueprint v5 (corpus-deepened):**
+- `docs/MASTER-BLUEPRINT-v5.md` — second corpus read pass against `nugget-nihongo/corpus/v17-pass15`
+- New evidence layers added: §15 LSP framework (VS cluster), §17 Andragogy (AL cluster), §13 FLCA/ID cluster, §12 Output Hypothesis (OT cluster), §10 gamification meta-analytics (GF/GE), §9 DDM furigana policy
+- New proposals: C-10 (type-answer production), C-11 (SSW relevance signal), C-12 (habit trigger), C-13 (growth mindset language), C-14 (signaling)
+- New: Appendix F — LSP Content Authoring Standard (per-question checklist for Phase 12)
+- New: Appendix G — Andragogy Design Checklist (per-card and per-mode)
+- New bug: BUG-02.5 (anxiety-reduction toast on 5 wrong streak — Young 1991)
+- New constraints: EC-01 LSP filter, EC-02 andragogy card standard, EC-03 metalinguistic feedback, EC-04 no production regression
+
+**Archive cleanup:**
+- Moved `docs/MASTER-BLUEPRINT-v3.md` → `docs/archive/`
+- Moved `docs/MASTER-BLUEPRINT-v4.md` → `docs/archive/`
+- Moved `docs/MASTER-BLUEPRINT-v4-POLISHED.md` → `docs/archive/`
+- `docs/` root now contains only the active blueprint: `MASTER-BLUEPRINT-v5.md`
+
+**_MAP.md update:**
+- Blueprint pointer: v3 → v5
+- Version: v3.6.0 → v3.6.1
+- Last updated: Crunchy (hygiene pass)
+
 ## [3.6.1] - 2026-05-01
 
 ### Phase 8 Complete — a11y + Color Contrast
@@ -421,3 +445,4 @@ Logic/data components (modes, hooks, srs) deferred to Phase 6 continuation.
 
 ### Changed
 - README diperbarui dengan referensi audit
+
