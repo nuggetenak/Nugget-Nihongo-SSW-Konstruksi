@@ -838,6 +838,24 @@ This is a zero-risk string change. No architecture impact.
 
 ### B.1 — Create `src/data/sipil-sets.js`
 
+**Content source:** Official JAC PDFs from `https://global.jac-skill.or.jp/indonesia/examination/documents.php`. The seed data in `docs/seeds/sipil-sets-seed.js` is a placeholder — **rebuild from these JAC PDFs before shipping:**
+
+| PDF | Content | Priority |
+|-----|---------|----------|
+| `ctextd.pdf` | Compressed textbook Sipil (JP) | ★★★ — primary term/concept source |
+| `ctextd_id.pdf` | Compressed textbook Sipil (Indonesian) | ★★★ — translations + context |
+| `st_sample_d.pdf` | Sample praktek questions Sipil | ★★★ — exact exam format reference |
+| `st_sample2_d.pdf` | Sample praktek questions Sipil 2 | ★★★ |
+| `tt_sample.pdf` | Sample teori questions (shared) | ★★ — safety/general section |
+| `text5d–7d.pdf` | Full praktek chapters | ★★ — deep content + photos for B.7 |
+
+**JAC exam format notes** (observed from sample PDFs):
+- Every question has full furigana in parentheses: `掘削（くっさく）`
+- Many questions are photo-based: "写真の工具は何か" → needs `img` field (see B.7)
+- Questions tend to be direct and simple: "Xとは何か", "Xの目的は？"
+- Answer options are short (1-2 words, not full sentences)
+- Mix of 4-choice and 3-choice questions (adjust `opts` array accordingly)
+
 **Schema:** Identical to `csv-sets.js`. See `docs/seeds/sipil-sets-seed.js` for starter content.
 
 ```js
@@ -887,7 +905,7 @@ export const SIPIL_SETS = [
 
 ### B.2 — Create `src/data/bangunan-sets.js`
 
-Same schema as sipil-sets.js. See `docs/seeds/bangunan-sets-seed.js` for starter content.
+Same schema as sipil-sets.js. **Rebuild from JAC PDFs** (`ctextk.pdf`, `ctextk_id.pdf`, `st_sample_k.pdf`, `st_sample2_k.pdf`, `text5k–7k.pdf`). See `docs/seeds/bangunan-sets-seed.js` for starter content.
 
 ```js
 export const BANGUNAN_SETS = [
@@ -1043,6 +1061,206 @@ bangunan: { icon: '🏗️', label: 'Bangunan · 建築', desc: `${BANGUNAN_SETS
 
 ---
 
+### B.7 — Image Support for 写真 (Photo-Based) Questions
+
+**Why this matters:** The real JAC exam heavily uses photo-based questions — "写真の建設機械は何か" (what machine is in this photo?), "写真の工具は何か" (what tool is this?). An app without images cannot prepare users for this question type. This is a **critical exam-readiness gap**.
+
+**Image source:** Extract from official JAC PDF textbooks (`ctextd.pdf`, `ctextk.pdf`, `text5d.pdf`–`text7d.pdf`, `text5k.pdf`–`text7k.pdf`). These contain photos of tools, machines, and construction scenarios used in the actual exam. Supplement with creative-commons or self-made photos where JAC images are insufficient.
+
+#### B.7.1 — Image directory structure
+
+```
+public/
+  images/
+    sipil/
+      backhoe.webp
+      roller.webp
+      transit.webp
+      ken-scoop.webp
+      ...
+    bangunan/
+      banzen-cutter.webp
+      sumitsubo.webp
+      vibrator.webp
+      ...
+    common/
+      full-harness.webp
+      safety-helmet.webp
+      ...
+```
+
+**Image specs:**
+- Format: WebP (best size/quality ratio, supported on all target browsers)
+- Max dimensions: 600×400px (adequate for mobile quiz display)
+- Max file size: 80KB per image (target ~30-50KB)
+- Naming: kebab-case matching the tool/machine Japanese name romanized
+
+**Bundle size budget:** ~50 images × ~50KB = ~2.5MB. GitHub Pages limit is ~1GB; repo is currently ~6.6MB. PWA service worker caches everything — images will work offline.
+
+#### B.7.2 — Question schema extension
+
+Add optional `img` field to question objects:
+
+```js
+// In sipil-sets.js / bangunan-sets.js:
+{
+  q: '写真の建設機械の名前は何か？',
+  img: 'sipil/backhoe.webp',    // ← NEW: path relative to /images/
+  opts: ['バックホウ', 'ブルドーザ', 'クレーン', 'ローラー'],
+  opts_id: ['Backhoe/Excavator', 'Bulldozer', 'Crane', 'Roller'],
+  ans: 0,
+  exp: 'バックホウ (backhoe/excavator) — alat gali utama di proyek sipil...',
+  cat: 'alat_umum',
+  desc: '...',
+}
+```
+
+Questions WITHOUT `img` work exactly as before — no breaking change.
+
+#### B.7.3 — QuizShell image rendering
+
+**File:** `src/components/QuizShell.jsx`
+
+The `renderExtra` prop already exists for injecting extra content per question. Use it in SipilMode/BangunanMode:
+
+```jsx
+// In SipilMode.jsx / BangunanMode.jsx, when calling QuizShell:
+<QuizShell
+  questions={questions}
+  onExit={() => setSelectedSet(null)}
+  onFinish={handleFinish}
+  title={`Sipil — ${selectedSet.title}`}
+  showHint
+  renderExtra={(q) => q.img ? (
+    <div style={{
+      margin: '12px 0',
+      borderRadius: 8,
+      overflow: 'hidden',
+      border: `1px solid ${T.border}`,
+    }}>
+      <img
+        src={`${import.meta.env.BASE_URL}images/${q.img}`}
+        alt="Foto soal"
+        loading="lazy"
+        style={{
+          width: '100%',
+          maxHeight: 240,
+          objectFit: 'contain',
+          background: T.surface,
+          display: 'block',
+        }}
+      />
+    </div>
+  ) : null}
+/>
+```
+
+`import.meta.env.BASE_URL` resolves to `/Nugget-Nihongo-SSW-Konstruksi/` on GitHub Pages — ensures correct path.
+
+**Alternative (cleaner):** Create a reusable `QuestionImage.jsx` component:
+
+```jsx
+// src/components/QuestionImage.jsx
+import { T } from '../styles/theme.js';
+
+export default function QuestionImage({ src }) {
+  if (!src) return null;
+  const basePath = import.meta.env.BASE_URL;
+  return (
+    <div style={{
+      margin: '12px 0',
+      borderRadius: 8,
+      overflow: 'hidden',
+      border: `1px solid ${T.border}`,
+      background: T.surface,
+    }}>
+      <img
+        src={`${basePath}images/${src}`}
+        alt="Foto soal"
+        loading="lazy"
+        style={{
+          width: '100%',
+          maxHeight: 240,
+          objectFit: 'contain',
+          display: 'block',
+        }}
+        onError={(e) => { e.target.style.display = 'none'; }}
+      />
+    </div>
+  );
+}
+```
+
+Then in QuizShell or SipilMode: `renderExtra={(q) => <QuestionImage src={q.img} />}`
+
+#### B.7.4 — Service worker cache update
+
+**File:** `public/sw.js`
+
+Add image directory to precache or runtime cache:
+
+```js
+// In sw.js, add to PRECACHE_URLS or use runtime caching:
+// Option A (precache — guarantees offline, but increases install time):
+const IMAGE_URLS = [
+  '/images/sipil/backhoe.webp',
+  '/images/sipil/roller.webp',
+  // ... enumerate all images
+];
+
+// Option B (runtime cache-first — better UX, lazy loads):
+// In fetch handler, for /images/* requests, use cache-first strategy:
+if (event.request.url.includes('/images/')) {
+  event.respondWith(
+    caches.match(event.request).then(cached =>
+      cached || fetch(event.request).then(response => {
+        const clone = response.clone();
+        caches.open(CACHE_VERSION).then(cache => cache.put(event.request, clone));
+        return response;
+      })
+    )
+  );
+}
+```
+
+**Recommended: Option B** (runtime cache-first). Users don't need all 50 images on first install — only the ones they actually open get cached. Subsequent offline access works because they're cached after first view.
+
+#### B.7.5 — Image extraction workflow (for content author)
+
+```
+1. Download JAC PDFs:
+   - ctextd.pdf (sipil compressed textbook)
+   - ctextk.pdf (bangunan compressed textbook)
+   - text5d–7d.pdf (sipil praktek chapters)
+   - text5k–7k.pdf (bangunan praktek chapters)
+
+2. Extract images from PDFs:
+   $ pdfimages -j ctextd.pdf sipil-raw/    # extracts all embedded images
+   $ pdfimages -j ctextk.pdf bangunan-raw/
+
+3. Select relevant images (tools, machines, scenarios)
+
+4. Convert to WebP and resize:
+   $ for f in *.jpg; do
+       cwebp -q 80 -resize 600 0 "$f" -o "${f%.jpg}.webp"
+     done
+
+5. Rename to descriptive kebab-case names
+
+6. Place in public/images/sipil/ or public/images/bangunan/
+
+7. Reference in question data: img: 'sipil/filename.webp'
+```
+
+#### B.7.6 — Fallback for missing images
+
+`QuestionImage.jsx` has `onError` handler that hides the `<img>` on load failure. This means:
+- Questions with `img` field but missing file → gracefully degrade to text-only
+- Questions without `img` field → no change
+- Offline + image not yet cached → text-only, no broken image icon
+
+---
+
 ### B.TESTS — Phase B Test Summary
 
 | Test File | Tests | Description |
@@ -1051,13 +1269,18 @@ bangunan: { icon: '🏗️', label: 'Bangunan · 建築', desc: `${BANGUNAN_SETS
 | `bangunan-data.test.js` | 8 | Same as above |
 | `sipil-mode.test.jsx` | 5 | Renders set list, opens quiz, saves score |
 | `bangunan-mode.test.jsx` | 4 | Renders set list, opens quiz |
-| **Total new** | **~25** | |
+| `question-image.test.jsx` | 3 | Renders image when src provided, hides on error, null when no src |
+| **Total new** | **~28** | |
 
 ### B.DONE — Phase B Completion Checklist
 
 ```
 □ sipil-sets.js created with ≥45 questions (3+ sets)
 □ bangunan-sets.js created with ≥45 questions (3+ sets)
+□ Questions rebuilt from official JAC PDF content (not generic knowledge)
+□ Photo-based questions (写真) included with img field + images in public/images/
+□ QuestionImage.jsx component created with fallback on error
+□ SW caches images with cache-first strategy
 □ SipilMode is a functional quiz (not a stub)
 □ BangunanMode is a functional quiz (not a stub)
 □ Scores persist to sipilScores/bangunanScores
@@ -1065,7 +1288,7 @@ bangunan: { icon: '🏗️', label: 'Bangunan · 建築', desc: `${BANGUNAN_SETS
 □ MODE_META updated (no more "Segera hadir")
 □ npm test — all pass
 □ npm run build — clean
-□ Commit: feat(phaseB): sipil & bangunan content + quiz modes
+□ Commit: feat(phaseB): sipil & bangunan content + quiz modes + image support
 ```
 
 ---
@@ -1681,6 +1904,19 @@ Either keep it (low impact) or remove it and update all imports to use direct pa
 ### Per-Question Checklist
 
 ```
+□ F0 — JAC SOURCE TRACEABILITY
+   Is this question derived from or inspired by official JAC textbook content?
+   □ From ctextd/ctextk (compressed textbook) — cite chapter
+   □ From st_sample (sample exam) — cite question number
+   □ Original question based on JAC terminology — cite relevant term
+   If none → question may not reflect actual exam content. Reconsider.
+
+□ F0.5 — JAC FORMAT COMPLIANCE
+   □ Question text (q) includes furigana for kanji: 掘削（くっさく）
+   □ If photo-based → img field points to a valid image in public/images/
+   □ Options are concise (1-4 words, matching JAC style)
+   □ 3 or 4 options (JAC uses both — match the source question)
+
 □ F1 — TSA JUSTIFICATION
    "In what on-site scenario would a supervisor use/expect this term?"
    If answer = "only in a textbook" → REJECT or move to general vocab.
