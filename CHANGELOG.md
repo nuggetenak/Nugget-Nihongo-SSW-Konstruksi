@@ -377,3 +377,24 @@ Logic/data components (modes, hooks, srs) deferred to Phase 6 continuation.
 ### Notes
 - Build tetap lolos.
 - Warning bundle size perlu tindak lanjut tambahan pada pemisahan data besar.
+
+---
+
+## [2.3.2] - 2026-04-28 (Codex audit)
+
+### Added
+- Audit pass 2: `scripts/audit-integrity.mjs` untuk validasi data (schema, ID, category, source, grouping)
+- Script npm: `audit:integrity` dan `audit:full`
+
+### Changed
+- `vite.config.js`: `manualChunks` untuk memisahkan `cards-data` dan `vendor`
+- `src/App.jsx`: lazy-load mode-level via `React.lazy` + `Suspense`
+
+## [2.3.1] - 2026-04-28 (Codex audit)
+
+### Added
+- Dokumen audit: `docs/AUDIT-2026-04-28.md`
+- Script `audit:baseline`
+
+### Changed
+- README diperbarui dengan referensi audit
