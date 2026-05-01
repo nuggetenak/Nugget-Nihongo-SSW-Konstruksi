@@ -1,8 +1,8 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-01 by Crunchy (hygiene pass — blueprint v5, archive cleanup)
+> **Last updated:** 2026-05-01 by Crunchy (blueprint v6, seed data, archive cleanup)
 > **Version:** v3.6.1 — Phase 1–10 complete ✅ RELEASED
-> **Blueprint:** `docs/MASTER-BLUEPRINT-v5.md` ← **READ THIS FIRST** (v5 = corpus-deepened, supersedes v3/v4/v4-POLISHED)
+> **Blueprint:** `docs/MASTER-BLUEPRINT-v6.md` ← **READ THIS FIRST** (v6 = agent-executable, self-contained, supersedes ALL prior)
 
 ---
 
@@ -44,8 +44,9 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── favicon.ico / .png
 │   └── icons/                   ← 72–512px PNGs + apple-touch
 ├── docs/
-│   ├── MASTER-BLUEPRINT-v3.md   ← ★ ACTIVE — architecture + UI/UX redesign plan
-│   └── archive/                 ← Old proposals, audits, Codex audit reports (reference only)
+│   ├── MASTER-BLUEPRINT-v6.md   ← ★ ACTIVE — agent-executable blueprint (Phases A–G)
+│   ├── seeds/                   ← Starter content for Phase B (sipil + bangunan)
+│   └── archive/                 ← Old proposals, audits, v3/v4/v5 blueprints (reference only)
 ├── scripts/
 │   └── phase1_normalize.py      ← historical
 ├── legacy/
@@ -120,18 +121,15 @@ FSRS ratings: 1=Again, 2=Hard, 3=Good, 4=Easy.
 
 ---
 
-## 4. Storage Keys (Current — to be consolidated per Blueprint §A1)
+## 4. Storage Documents (v2 — will migrate to v3 in Phase A)
 
-| Key Pattern | Content |
+| Document Key | Content |
 |-------------|---------|
-| `ssw-known`, `ssw-unknown`, `ssw-starred` | Card ID arrays |
-| `ssw-track`, `ssw-theme`, `ssw-onboarded` | Single values |
-| `ssw-quiz-wrong`, `ssw-wrong-counts` | Wrong-count maps |
-| `ssw-wg-wrong-{id}`, `ssw-vocab-wrong-{id}` | Per-set wrong counts |
-| `ssw-jac-scores`, `ssw-wg-scores`, `ssw-vocab-scores` | Score maps |
-| `ssw-srs-{cardId}` | **1 key per card** (1438+ keys — to be unified) |
-| `ssw-study-streak`, `ssw-daily-count`, `ssw-recent` | Dashboard data |
-| `ssw-last-mode`, `ssw-tutorial-flashcard` | UI state |
+| `ssw-progress` | known/unknown/starred, scores, streak, daily count, recent cards |
+| `ssw-srs-data` | All FSRS card states (unified from 1438+ separate keys) |
+| `ssw-prefs` | track, theme, onboarded, lastMode, dailyGoal |
+
+Schema version: `STORAGE_VERSION = 2`. Phase A migrates to v3 (adds sessions, dailyMission, examDate, etc.).
 
 ---
 
@@ -151,7 +149,7 @@ FSRS buttons: 🔴 Lagi (Again) · 🟠 Susah (Hard) · 🟢 Oke (Good) · 💎 
 ## 6. Agent Instructions
 
 ### ⚠️ Before Starting Any Work
-1. **Read `docs/MASTER-BLUEPRINT-v3.md`** — the active architecture + UX redesign plan
+1. **Read `docs/MASTER-BLUEPRINT-v6.md`** — the active blueprint (self-contained, all code specs inline)
 2. Read this `_MAP.md` for current state reference
 3. **Never use `window.storage`** — pure localStorage only
 4. **Never revert `React.lazy()`** — all 18 modes must stay lazy-loaded
@@ -184,7 +182,7 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 | BottomNav | 4 tabs → **3 tabs** ✅ | 3 tabs |
 | Dashboard | 819 → **265 lines** ✅ | Redesigned |
 | ErrorBoundary count | 0 → **all 18 modes** ✅ | All 18 modes wrapped |
-| Tests | 111 → **223 passing** ✅ | ~170+ |
+| Tests | 111 → **223 passing** ✅ | ~350+ (after Phase A–G) |
 | CI/CD | none → **GitHub Actions** ✅ | GitHub Actions auto-deploy |
 | Bundle visualizer | none → **dist/stats.html** ✅ | Bundle visualizer |
 | 3D card flip | none → **✅** | Phase 4 |
