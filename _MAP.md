@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-01 by Sonnet
+> **Last updated:** 2026-05-01 by Sonnet (post Codex PR merge)
 > **Version:** v3.6.0 — Phase 1–10 complete ✅ RELEASED
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v3.md` ← **READ THIS FIRST**
 
@@ -45,7 +45,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   └── icons/                   ← 72–512px PNGs + apple-touch
 ├── docs/
 │   ├── MASTER-BLUEPRINT-v3.md   ← ★ ACTIVE — architecture + UI/UX redesign plan
-│   └── archive/                 ← Old proposals, audits, mappings (reference only)
+│   └── archive/                 ← Old proposals, audits, Codex audit reports (reference only)
 ├── scripts/
 │   └── phase1_normalize.py      ← historical
 ├── legacy/
@@ -53,7 +53,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │
 └── src/
     ├── main.jsx
-    ├── App.jsx                  ← 668 lines (to be decomposed per Blueprint Phase 1)
+    ├── App.jsx                  ← 44 lines (decomposed per Blueprint Phase 2)
     ├── data/
     │   ├── index.js             ← barrel (to be removed per Blueprint §A4)
     │   ├── cards.js             ← CARDS[1438]
@@ -191,4 +191,4 @@ Bump `CACHE_VERSION` in `public/sw.js` on every deploy. Blueprint §A6 automates
 
 ---
 
-*For historical changelogs (Phases 1–15), see `docs/archive/` and `CHANGELOG.md`.*
+*For historical changelogs and audit reports, see `docs/archive/` and `CHANGELOG.md`.*
