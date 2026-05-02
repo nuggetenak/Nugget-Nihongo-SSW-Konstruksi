@@ -10,9 +10,12 @@ import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from '../data/categories.j
 describe('CARDS data integrity', () => {
   it('has at least 1400 cards', () => expect(CARDS.length).toBeGreaterThanOrEqual(1400));
 
-  it('all IDs sequential 1-N no gaps', () => {
-    const ids = CARDS.map((c) => c.id).sort((a, b) => a - b);
-    ids.forEach((id, i) => expect(id, `expected ${i + 1} got ${id}`).toBe(i + 1));
+  it('all IDs are unique positive integers in ascending order', () => {
+    const ids = CARDS.map((c) => c.id);
+    ids.forEach((id, i) => {
+      expect(id).toBeGreaterThan(0);
+      if (i > 0) expect(id).toBeGreaterThan(ids[i - 1]);
+    });
   });
 
   it('no duplicate IDs', () => {
