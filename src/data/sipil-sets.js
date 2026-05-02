@@ -30,7 +30,7 @@ export const SIPIL_SETS = [
         opts_id: ['Ada tidaknya utilitas bawah tanah', 'Prakiraan cuaca', 'Usia pekerja', 'Menu makan siang'],
         ans: 0,
         exp: 'Sebelum menggali, WAJIB cek utilitas bawah tanah (gas, listrik, air) untuk mencegah kecelakaan fatal. Kesalahan umum: memilih "prakiraan cuaca" — cuaca penting tapi bukan prioritas keselamatan utama.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Pengecekan utilitas bawah tanah sebelum galian. Sebagai pekerja SSW: ini prosedur K3 wajib sebelum excavator mulai — pelanggaran bisa berakibat ledakan pipa gas. Atasan akan tanya: 地下埋設物の確認はしましたか？'
       },
       {
@@ -39,7 +39,7 @@ export const SIPIL_SETS = [
         opts_id: ['Roller/gilas', 'Crane', 'Truk molen', 'Truk pompa'],
         ans: 0,
         exp: 'Roller (ローラー) digunakan untuk memadatkan (転圧) tanah timbunan (盛土). Crane untuk angkat, molen untuk beton, pompa untuk cor.',
-        cat: 'alat_umum',
+        cat: 'sekou',
         desc: 'Roller untuk pemadatan tanah. Sebagai pekerja SSW sipil: kamu akan sering lihat vibration roller di proyek jalan — tanah yang tidak dipadatkan = jalan ambles. Mandor bilang: ローラーで転圧してください。'
       },
       {
@@ -48,7 +48,7 @@ export const SIPIL_SETS = [
         opts_id: ['Lereng galian/timbunan', 'Dinding bangunan', 'Permukaan aspal jalan', 'Lantai jembatan'],
         ans: 0,
         exp: '法面 (のりめん) = lereng yang terbentuk akibat galian (切土) atau timbunan (盛土). Bukan dinding bangunan (壁) atau permukaan jalan (舗装面).',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Lereng galian/timbunan di proyek sipil. Sebagai pekerja SSW: lereng yang tidak stabil = longsor. Kamu wajib lapor kalau lihat retakan di 法面. Atasan: 法面の状態を確認してください。'
       },
       {
@@ -57,7 +57,7 @@ export const SIPIL_SETS = [
         opts_id: ['Menopang dinding terhadap tekanan tanah', 'Menggali tanah', 'Mengalirkan air', 'Mengaduk beton'],
         ans: 0,
         exp: '切梁 (きりばり/strut) berfungsi menopang dinding penahan tanah (土留め壁) terhadap tekanan lateral tanah. Ini bukan alat gali atau pompa air.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Strut penopang dinding penahan tanah. Sebagai pekerja SSW: kalau strut dipasang tidak benar, dinding bisa runtuh masuk ke galian — ini kecelakaan mematikan. Mandor: 切梁の取り付けを確認しろ。'
       },
       {
@@ -66,7 +66,7 @@ export const SIPIL_SETS = [
         opts_id: ['Dikaitkan di tali induk atau jangkar', 'Dililit di lengan', 'Dipakai di kepala', 'Dipasang di kaki'],
         ans: 0,
         exp: 'Safety harness (安全帯) dikaitkan ke lifeline (親綱) atau anchor point. Bukan dipakai di lengan (itu gelang), kepala (itu helm), atau kaki (itu sepatu).',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Safety harness untuk kerja di ketinggian. Sebagai pekerja SSW: WAJIB dipakai di atas 2 meter — tanpa harness = dilarang naik. Atasan: 安全帯をつけましたか？'
       },
       {
@@ -75,7 +75,7 @@ export const SIPIL_SETS = [
         opts_id: ['Mengelola air tanah dan air hujan', 'Membangun gedung', 'Mengaspal jalan', 'Merakit besi tulangan'],
         ans: 0,
         exp: '排水工事 = pekerjaan drainase untuk mengelola air tanah dan hujan. Ini berbeda dari konstruksi gedung, pengaspalan, atau pekerjaan besi.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Pekerjaan drainase sipil. Sebagai pekerja SSW: air yang menggenang di galian = bahaya longsor dan korsleting. Kamu akan bantu pasang pipa drainase dan pompa. Mandor: 排水ポンプを動かしてください。'
       },
       {
@@ -84,7 +84,7 @@ export const SIPIL_SETS = [
         opts_id: ['Mengukur sudut', 'Mengukur berat', 'Mengukur suhu', 'Mengukur suara'],
         ans: 0,
         exp: 'Transit/theodolite (トランシット) digunakan untuk mengukur sudut horizontal dan vertikal dalam survei. Bukan alat ukur berat (timbangan), suhu (termometer), atau suara (desibel meter).',
-        cat: 'alat_umum',
+        cat: 'sekou',
         desc: 'Transit untuk survei/pengukuran. Sebagai pekerja SSW: kamu mungkin diminta pegang staf/prism saat surveyor ukur — posisi yang salah = titik bangunan geser. Atasan: トランシットの位置を動かすな。'
       },
       {
@@ -93,7 +93,7 @@ export const SIPIL_SETS = [
         opts_id: ['Mengeraskan tanah lunak', 'Memberi warna tanah', 'Mempermudah penggalian', 'Mencegah rumput liar'],
         ans: 0,
         exp: 'Bahan pengikat semen (セメント系固化材) dicampur ke tanah lunak untuk mengeraskannya (地盤改良). Bukan untuk pewarnaan atau pengendalian gulma.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Perbaikan tanah dengan semen. Sebagai pekerja SSW: di proyek tanah lunak, kamu akan bantu campurkan stabilizer ke tanah sebelum fondasi dipasang. Mandor: 固化材の量を確認してください。'
       },
       {
@@ -102,7 +102,7 @@ export const SIPIL_SETS = [
         opts_id: ['Kegiatan Prediksi Bahaya', 'Kegiatan Jadwal Istirahat', 'Kegiatan Keamanan Alat', 'Kegiatan Evakuasi Darurat'],
         ans: 0,
         exp: 'KY = 危険予知 (Kiken Yochi = Prediksi Bahaya). KY活動 dilakukan setiap pagi sebelum kerja dimulai untuk identifikasi potensi bahaya hari itu.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Kegiatan identifikasi bahaya harian. Sebagai pekerja SSW: setiap pagi kamu ikut KY meeting — wajib bisa menyebut risiko kerja hari itu dalam bahasa Jepang sederhana. Mandor: 今日のKYを始めます。'
       },
       {
@@ -111,7 +111,7 @@ export const SIPIL_SETS = [
         opts_id: ['Suhu terlalu rendah = tidak bisa dipadatkan', 'Karena warnanya berubah', 'Karena baunya keluar', 'Karena mesin rusak'],
         ans: 0,
         exp: 'Aspal harus dijaga suhunya saat penghamparan — terlalu dingin = tidak bisa dipadatkan dengan roller, hasilnya permukaan jelek dan mudah rusak.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Kontrol suhu aspal saat pengaspalan. Sebagai pekerja SSW: kamu akan bantu cek suhu aspal di finisher — di bawah standar harus lapor segera. Mandor: アスファルトの温度は何度ですか？'
       },
       {
@@ -120,7 +120,7 @@ export const SIPIL_SETS = [
         opts_id: ['Pekerjaan penggalian', 'Kerja di ketinggian', 'Pengecoran beton', 'Pengelasan'],
         ans: 0,
         exp: 'Backhoe/excavator (バックホウ/ユンボ) digunakan utamanya untuk menggali (掘削). Bukan untuk kerja tinggi (aerial), cor beton (打設), atau las (溶接).',
-        cat: 'alat_umum',
+        cat: 'sekou',
         desc: 'Excavator untuk penggalian. Sebagai pekerja SSW: jangan pernah berdiri di radius putar (旋回範囲) backhoe — zona mematikan. Operator: バックホウの旋回範囲に入るな！'
       },
       {
@@ -129,7 +129,7 @@ export const SIPIL_SETS = [
         opts_id: ['Pengalaman hampir celaka (near miss)', 'Nama alat keselamatan baru', 'Jenis laporan kerja', 'Tanda waktu istirahat'],
         ans: 0,
         exp: 'ヒヤリハット (hiyari-hatto) = near miss / kejadian nyaris celaka. Wajib dilaporkan agar kecelakaan dicegah. Bukan nama alat atau jenis laporan biasa.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Pelaporan insiden nyaris celaka. Sebagai pekerja SSW: kalau kamu hampir kejatuhan benda atau hampir tersandung, WAJIB lapor ヒヤリハット — ini mencegah kecelakaan berikutnya. Mandor: ヒヤリハットがあったら必ず報告してください。'
       },
       {
@@ -138,7 +138,7 @@ export const SIPIL_SETS = [
         opts_id: ['Pekerjaan persiapan mengangkat beban dengan crane', 'Pekerjaan mengecat dinding', 'Pekerjaan menggali tanah', 'Pekerjaan membengkokkan besi'],
         ans: 0,
         exp: '玉掛け (たまかけ) = rigging/slinging — pekerjaan memasang sling/tali ke beban sebelum diangkat crane. Butuh sertifikat khusus. Bukan mengecat, menggali, atau membengkokkan besi.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Pekerjaan rigging crane. Sebagai pekerja SSW: kamu perlu sertifikat 玉掛け技能講習 untuk boleh pasang sling. Tanpa sertifikat = dilarang menyentuh beban crane. Mandor: 玉掛けの資格を持っていますか？'
       },
       {
@@ -147,7 +147,7 @@ export const SIPIL_SETS = [
         opts_id: ['2 meter ke atas', '5 meter ke atas', '10 meter ke atas', '1 meter ke atas'],
         ans: 0,
         exp: 'Menurut UU K3 Jepang (労働安全衛生規則), kerja di ketinggian (高所作業) didefinisikan sebagai 2 meter ke atas. Kesalahan umum: mengira 5 atau 10 meter.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Definisi kerja di ketinggian. Sebagai pekerja SSW: di atas 2 meter = WAJIB harness + helm. Banyak pekerja Indonesia mengira 5 meter — itu standar Indonesia, bukan Jepang. Mandor: 2メートル以上は安全帯必須です。'
       },
       {
@@ -156,7 +156,7 @@ export const SIPIL_SETS = [
         opts_id: ['Tipe full harness', 'Hanya sabuk pinggang', 'Hanya sepatu safety', 'Hanya helm'],
         ans: 0,
         exp: 'Regulasi baru Jepang (2019) mewajibkan full harness (フルハーネス型) untuk kerja di ketinggian ≥6.75m (konstruksi baja/besi). Sabuk pinggang saja tidak lagi cukup.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Standar baru alat anti jatuh. Sebagai pekerja SSW: full harness = wajib. Kalau proyek hanya sediakan sabuk pinggang, kamu berhak minta full harness. Atasan: フルハーネスを着用してください。'
       },
     ],
@@ -177,7 +177,7 @@ export const SIPIL_SETS = [
         opts_id: ['Subgrade→Base→Surface', 'Surface→Base→Subgrade', 'Base→Surface→Subgrade', 'Subgrade→Surface→Base'],
         ans: 0,
         exp: 'Urutan yang benar: 路盤 (subgrade/pondasi bawah) → 基層 (base course/lapisan dasar) → 表層 (surface/lapisan permukaan). Ini prinsip dasar — dari bawah ke atas.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Urutan pengaspalan. Sebagai pekerja SSW: kalau urutan salah, jalan cepat rusak. Setiap lapisan harus dipadatkan dulu sebelum lapisan berikutnya. Mandor: まず路盤の転圧をしてください。'
       },
       {
@@ -186,7 +186,7 @@ export const SIPIL_SETS = [
         opts_id: ['Aspal retak', 'Warna aspal berubah', 'Volume lalu lintas bertambah', 'Durasi proyek memendek'],
         ans: 0,
         exp: 'Pemadatan pondasi yang kurang = permukaan aspal retak dan turun (settlement). Warna aspal tidak terkait pemadatan, dan volume lalu lintas/durasi proyek bukan akibat pemadatan.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Dampak pemadatan pondasi yang buruk. Sebagai pekerja SSW: kamu akan diminta cek kepadatan dengan alat density test — hasilnya harus ≥95%. Mandor: 締め固め度は95%以上にしてください。'
       },
       {
@@ -195,7 +195,7 @@ export const SIPIL_SETS = [
         opts_id: ['Mengumpulkan dan mengalirkan air hujan jalan', 'Menghentikan kendaraan', 'Melindungi pejalan kaki', 'Memperindah jalan'],
         ans: 0,
         exp: '側溝 (saluran tepi jalan) = drainase yang mengumpulkan air hujan dari permukaan jalan. Bukan pembatas kendaraan (guardrail), bukan trotoar (歩道), bukan elemen dekoratif.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Saluran drainase tepi jalan. Sebagai pekerja SSW: kamu akan bantu pasang precast U-ditch atau gali saluran manual. Mandor: 側溝の勾配を確認してください。'
       },
       {
@@ -204,7 +204,7 @@ export const SIPIL_SETS = [
         opts_id: ['Beton butuh curing lebih lama', 'Aspal butuh curing lebih lama', 'Keduanya sama', 'Keduanya tidak perlu curing'],
         ans: 0,
         exp: 'Perkerasan beton (コンクリート舗装) butuh curing 7–28 hari sebelum bisa dilalui kendaraan. Aspal bisa digunakan setelah dingin (beberapa jam). Ini perbedaan operasional terbesar.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Perbandingan beton vs aspal. Sebagai pekerja SSW: di proyek beton, kamu akan bantu proses curing — jaga kelembaban permukaan. Mandor: コンクリートの養生シートを敷いてください。'
       },
       {
@@ -213,7 +213,7 @@ export const SIPIL_SETS = [
         opts_id: ['Konfirmasi keselamatan & sharing rencana kerja', 'Pesan makan siang', 'Perhitungan gaji', 'Penjualan alat'],
         ans: 0,
         exp: '朝礼 (chorei/morning assembly) = briefing pagi untuk cek keselamatan, bagi tugas, dan konfirmasi bahaya hari itu. Ini prosedur standar di semua proyek konstruksi Jepang.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Briefing pagi di proyek. Sebagai pekerja SSW: kamu WAJIB hadir di 朝礼 setiap pagi — absen = pelanggaran serius. Kadang kamu diminta baca item KY. Atasan: 朝礼に集合してください。'
       },
       {
@@ -222,7 +222,7 @@ export const SIPIL_SETS = [
         opts_id: ['Drainase lewat pipa yang ditanam', 'Pipa drainase di udara', 'Langsung buang ke sungai', 'Menguapkan air'],
         ans: 0,
         exp: '暗渠排水 = drainase bawah tanah (tertutup), menggunakan pipa perforated yang ditanam di dalam tanah. Lawan kata: 明渠 (saluran terbuka).',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Sistem drainase bawah tanah. Sebagai pekerja SSW: kamu akan bantu gali parit, pasang geotextile, dan letakkan pipa drainase. Mandor: 暗渠管の勾配を取ってください。'
       },
       {
@@ -231,7 +231,7 @@ export const SIPIL_SETS = [
         opts_id: ['Melindungi beton dll pada kondisi yang tepat', 'Istirahat', 'Membersihkan', 'Membongkar'],
         ans: 0,
         exp: '養生 (ようじょう) dalam konstruksi = curing/perlindungan material (terutama beton) agar mengeras dengan benar. Bukan istirahat (休憩), bersih-bersih (掃除), atau bongkar (撤去).',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Proses curing/perlindungan. Sebagai pekerja SSW: kamu akan sering dengar kata ini — 養生シート (curing sheet), 養生期間 (masa curing). Mandor: 養生シートで覆ってください。'
       },
       {
@@ -240,7 +240,7 @@ export const SIPIL_SETS = [
         opts_id: ['Lalu lintas bergantian satu arah', 'Menutup semua jalur', 'Hanya pejalan kaki', 'Hanya kendaraan besar'],
         ans: 0,
         exp: '片側交互通行 = one-way alternating traffic — satu jalur ditutup untuk pekerjaan, kendaraan bergantian lewat jalur satunya. Ini pengaturan lalin paling umum di proyek jalan.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Pengaturan lalu lintas kerja jalan. Sebagai pekerja SSW: kamu mungkin ditugaskan sebagai flagman (交通誘導員) — harus hafal aba-aba tangan. Mandor: 片側交互通行の誘導をお願いします。'
       },
       {
@@ -249,7 +249,7 @@ export const SIPIL_SETS = [
         opts_id: ['Benang untuk cek level/garis lurus', 'Pipa untuk membawa air', 'Tali pancing', 'Kabel listrik'],
         ans: 0,
         exp: '水糸 = benang referensi yang ditarik kencang untuk mengecek kelurusan dan level horizontal. Alat dasar survei yang murah tapi krusial.',
-        cat: 'alat_umum',
+        cat: 'sekou',
         desc: 'Benang level/referensi. Sebagai pekerja SSW: ini alat yang paling sering kamu gunakan — pasang dari titik A ke B untuk panduan galian atau pasangan. Mandor: 水糸を張ってくれ。'
       },
       {
@@ -258,7 +258,7 @@ export const SIPIL_SETS = [
         opts_id: ['Setelah beton mencapai kekuatan yang ditentukan', 'Segera setelah cor', 'Pagi esok hari', 'Setelah 1 jam'],
         ans: 0,
         exp: 'Bekisting (型枠) baru boleh dibongkar setelah beton mencapai kekuatan minimum yang disyaratkan (biasanya 5 N/mm² untuk dinding). Membongkar terlalu cepat = beton runtuh.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Waktu bongkar bekisting. Sebagai pekerja SSW: jangan pernah bongkar bekisting tanpa izin mandor — harus ada hasil uji tekan. Mandor: 型枠は強度が出てから解体してください。'
       },
       {
@@ -267,7 +267,7 @@ export const SIPIL_SETS = [
         opts_id: ['Menunjukkan posisi & level referensi konstruksi', 'Menghitung jumlah pekerja', 'Menghitung anggaran', 'Merapikan alat'],
         ans: 0,
         exp: '丁張り (ちょうはり) = batter board — papan referensi yang menunjukkan posisi dan ketinggian untuk panduan penggalian/konstruksi.',
-        cat: 'alat_umum',
+        cat: 'sekou',
         desc: 'Papan referensi konstruksi. Sebagai pekerja SSW: surveyor pasang 丁張り → kamu gali sesuai level yang ditunjukkan. Jangan sentuh atau geser 丁張り yang sudah dipasang. Mandor: 丁張りに合わせて掘削してください。'
       },
       {
@@ -276,7 +276,7 @@ export const SIPIL_SETS = [
         opts_id: ['Oli, air, rem, alat keselamatan', 'Cuaca, suhu, kelembaban', 'Makanan pekerja', 'Ada tidaknya warga sekitar'],
         ans: 0,
         exp: 'Inspeksi harian alat berat (始業前点検) wajib cek: oli (油量), air radiator (水量), rem (ブレーキ), alat keselamatan (安全装置). Ini kewajiban operator sebelum mesin dinyalakan.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Inspeksi harian alat berat. Sebagai pekerja SSW: kalau kamu jadi operator, ini checklist pagi yang wajib. Catat hasilnya di form 始業前点検表. Mandor: 始業前点検は終わりましたか？'
       },
       {
@@ -285,7 +285,7 @@ export const SIPIL_SETS = [
         opts_id: ['Bila ada utilitas bawah tanah di dekatnya', 'Bila cuaca baik', 'Bila pekerja banyak', 'Bila tanah keras'],
         ans: 0,
         exp: 'Galian manual (手掘り) dilakukan saat ada utilitas bawah tanah (ガス管, 水道管) di dekat area galian — excavator bisa merusak pipa. Ini prosedur keselamatan.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Galian manual dekat utilitas. Sebagai pekerja SSW: kamu akan diminta gali manual 50cm di sekitar pipa/kabel yang terdeteksi. Lamban tapi wajib — excavator bisa potong pipa gas. Mandor: 埋設物の近くは手掘りでお願いします。'
       },
       {
@@ -294,7 +294,7 @@ export const SIPIL_SETS = [
         opts_id: ['Tali dagu dikencangkan', 'Dipakai longgar', 'Dipakai terbalik', 'Tali dagu tidak dikencangkan'],
         ans: 0,
         exp: 'Helm harus dipakai dengan tali dagu (あご紐) dikencangkan. Helm longgar atau terbalik = tidak melindungi saat benda jatuh.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Cara pakai helm yang benar. Sebagai pekerja SSW: helm longgar = ditegur mandor. Di Jepang sangat ketat soal ini — beda dengan kebiasaan di Indonesia. Mandor: あご紐をちゃんと締めてください。'
       },
       {
@@ -303,7 +303,7 @@ export const SIPIL_SETS = [
         opts_id: ['Penggalian untuk membuat fondasi bangunan', 'Memotong akar pohon', 'Memotong besi tulangan', 'Memotong pipa'],
         ans: 0,
         exp: '根切り (ねぎり) = penggalian untuk fondasi. Walaupun huruf kanji 根 (akar) dan 切 (potong), ini BUKAN memotong akar pohon — ini istilah teknis untuk excavation fondasi.',
-        cat: 'jenis_kerja',
+        cat: 'sekou',
         desc: 'Penggalian fondasi. Sebagai pekerja SSW: 根切り adalah langkah pertama dalam membangun fondasi — kedalaman dan lebarnya harus sesuai gambar. Mandor: 根切りの深さを確認してください。'
       },
     ],
@@ -324,7 +324,7 @@ export const SIPIL_SETS = [
         opts_id: ['Di bawah 18%', 'Di bawah 21%', 'Di bawah 15%', 'Di bawah 25%'],
         ans: 0,
         exp: 'Menurut peraturan K3 Jepang, tempat dengan kadar oksigen di bawah 18% = lingkungan defisiensi oksigen (酸素欠乏). Udara normal = 21%. Kesalahan umum: menjawab 21% (itu kadar normal).',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Standar kadar oksigen minimum. Sebagai pekerja SSW: di manhole, tangki, atau ruang tertutup, WAJIB ukur kadar O2 sebelum masuk. Di bawah 18% = DILARANG masuk tanpa alat bantu napas. Mandor: 酸素濃度を測定してください。'
       },
       {
@@ -333,7 +333,7 @@ export const SIPIL_SETS = [
         opts_id: ['Memastikan keselamatan & kesehatan pekerja', 'Memaksimalkan keuntungan', 'Menambah lembur', 'Mempersingkat jadwal'],
         ans: 0,
         exp: '労働安全衛生法 (UU K3 Jepang) mewajibkan pemberi kerja menjamin keselamatan dan kesehatan pekerja. Ini bukan soal profit atau jadwal.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Kewajiban pemberi kerja menurut UU K3. Sebagai pekerja SSW: kamu punya HAK atas lingkungan kerja yang aman — kalau ada kondisi bahaya, kamu berhak menolak bekerja. Ini dilindungi hukum.'
       },
       {
@@ -342,7 +342,7 @@ export const SIPIL_SETS = [
         opts_id: ['Proyek dengan kontraktor utama & sub-kontraktor', 'Semua proyek', 'Hanya proyek besar', 'Hanya proyek pemerintah'],
         ans: 0,
         exp: 'Petugas K3 (安全衛生責任者) wajib ditunjuk saat proyek melibatkan kontraktor utama (元請) dan subkontraktor (下請) bekerja bersama — untuk koordinasi keselamatan antar perusahaan.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Penunjukan petugas K3. Sebagai pekerja SSW di subkontraktor: kamu melapor ke 安全衛生責任者 perusahaan submu, bukan langsung ke kontraktor utama. Tahu siapa namanya.'
       },
       {
@@ -351,7 +351,7 @@ export const SIPIL_SETS = [
         opts_id: ['Pemasangan shoring bekisting', 'Kebersihan', 'Pengangkutan material', 'Pekerjaan kantor'],
         ans: 0,
         exp: 'Pekerjaan berisiko tinggi seperti pemasangan shoring bekisting (型枠支保工) wajib ada 作業主任者 (supervisor kerja bersertifikat). Kebersihan dan pengangkutan biasa tidak memerlukan.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Kewajiban supervisor bersertifikat. Sebagai pekerja SSW: pastikan ada 作業主任者 sebelum mulai kerja berisiko — kalau tidak ada, jangan mulai. Ini hakmu.'
       },
       {
@@ -360,7 +360,7 @@ export const SIPIL_SETS = [
         opts_id: ['Masker anti gas & ventilasi', 'Hanya sarung tangan kain', 'Hanya sepatu safety', 'Hanya helm'],
         ans: 0,
         exp: 'Pelarut organik (有機溶剤) = beracun. WAJIB pakai masker anti gas (防毒マスク) DAN pastikan ventilasi (換気). Sarung tangan kain saja tidak cukup melindungi dari uap kimia.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Perlindungan dari pelarut organik. Sebagai pekerja SSW: cat, thinner, lem — semua mengandung 有機溶剤. Tanpa masker yang benar = keracunan. Mandor: 防毒マスクをつけてから作業してください。'
       },
       {
@@ -369,7 +369,7 @@ export const SIPIL_SETS = [
         opts_id: ['Survei awal, pelaporan, & pencegahan serbuk', 'Boleh bongkar biasa', 'Cukup siram air', 'Cukup buka jendela'],
         ans: 0,
         exp: 'Asbes (石綿/アスベスト) = karsinogenik. Pembongkaran material ber-asbes WAJIB: (1) survei awal, (2) melapor ke pemerintah, (3) tindakan pencegahan penyebaran serat. Bukan pekerjaan biasa.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Prosedur pembongkaran material ber-asbes. Sebagai pekerja SSW: JANGAN pernah potong atau bor material yang dicurigai asbes tanpa izin — serat asbes menyebabkan kanker paru-paru.'
       },
       {
@@ -378,7 +378,7 @@ export const SIPIL_SETS = [
         opts_id: ['Grounding/arde terpasang dengan benar', 'Warnanya bagus', 'Masih baru', 'Harganya mahal'],
         ans: 0,
         exp: 'Untuk mencegah kesetrum (感電), pastikan alat listrik terhubung grounding/arde (アース/接地) dengan benar. Warna, usia, atau harga alat tidak relevan dengan keselamatan listrik.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Pencegahan kesetrum. Sebagai pekerja SSW: sebelum pakai bor, gerinda, dll — cek kabel arde. Kalau kabel terkelupas = LAPOR, jangan pakai. Mandor: アースの接続を確認してください。'
       },
       {
@@ -387,7 +387,7 @@ export const SIPIL_SETS = [
         opts_id: ['Saat pertama kali masuk proyek', 'Sebulan sekali', 'Setahun sekali', 'Saat proyek selesai'],
         ans: 0,
         exp: '新規入場者教育 = orientasi keselamatan untuk pekerja yang PERTAMA KALI masuk proyek tersebut. Bukan bulanan atau tahunan.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Orientasi keselamatan pekerja baru di proyek. Sebagai pekerja SSW: setiap pindah ke proyek baru, kamu WAJIB ikut orientasi ini — biasanya 1-2 jam. Isi: aturan proyek, titik bahaya, jalur evakuasi.'
       },
       {
@@ -396,7 +396,7 @@ export const SIPIL_SETS = [
         opts_id: ['Pada prinsipnya tidak ada pengecualian', 'Saat cuaca baik', 'Saat pekerjaan mudah', 'Saat pengalaman sudah lama'],
         ans: 0,
         exp: 'Pada prinsipnya TIDAK ADA pengecualian untuk penggunaan harness di ketinggian ≥2m. Cuaca baik, pekerjaan mudah, atau pengalaman lama bukan alasan untuk tidak pakai.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Tidak ada pengecualian harness. Sebagai pekerja SSW: kalau mandor bilang "tidak perlu harness karena kerjanya cepat" — itu SALAH. Kamu berhak menolak naik tanpa harness.'
       },
       {
@@ -405,7 +405,7 @@ export const SIPIL_SETS = [
         opts_id: ['Sertifikat supervisor pemasangan scaffolding', 'Tidak perlu sertifikat', 'SIM', 'Izin dokter'],
         ans: 0,
         exp: 'Pemasangan scaffolding ≥5m WAJIB ada supervisor bersertifikat (足場の組立て等作業主任者). Bukan pekerjaan yang boleh dilakukan tanpa pengawasan.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Sertifikasi scaffolding. Sebagai pekerja SSW: kamu boleh MEMBANTU pasang scaffolding di bawah pengawasan 作業主任者, tapi tidak boleh memimpin pemasangan tanpa sertifikat.'
       },
       {
@@ -414,7 +414,7 @@ export const SIPIL_SETS = [
         opts_id: ['Pusing, keringat banyak, kram otot', 'Hanya sakit kepala', 'Hanya mimisan', 'Hanya mata gatal'],
         ans: 0,
         exp: 'Gejala awal heat stroke (熱中症): pusing (めまい), keringat berlebihan (大量の汗), kram otot (筋肉のけいれん). Kalau dibiarkan → pingsan → bisa meninggal.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Mengenali gejala heat stroke. Sebagai pekerja SSW: musim panas Jepang sangat panas + lembab. Wajib minum air tiap 30 menit. Mandor: 水分補給をこまめにしてください。'
       },
       {
@@ -423,7 +423,7 @@ export const SIPIL_SETS = [
         opts_id: ['Semua pekerja (termasuk WNA)', 'Hanya orang Jepang', 'Hanya karyawan tetap', 'Hanya manajer'],
         ans: 0,
         exp: 'Asuransi kecelakaan kerja (労災保険) berlaku untuk SEMUA pekerja termasuk pekerja asing (外国人). Ini hak kamu sebagai pekerja SSW.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Hak asuransi kecelakaan kerja. Sebagai pekerja SSW: kalau kamu cedera di tempat kerja, perusahaan WAJIB menanggung biaya pengobatan lewat 労災保険. Ini hakmu — jangan takut melapor.'
       },
       {
@@ -432,7 +432,7 @@ export const SIPIL_SETS = [
         opts_id: ['Meningkatkan ketelitian pengecekan & mencegah kesalahan', 'Untuk ditunjukkan ke atasan', 'Untuk mengulur waktu', 'Untuk olahraga'],
         ans: 0,
         exp: '指差し呼称 (pointing and calling) = metode konfirmasi keselamatan dengan menunjuk + menyebut item yang dicek dengan suara keras. Terbukti mengurangi kesalahan hingga 85%.',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Metode pointing & calling. Sebagai pekerja SSW: ini kebiasaan Jepang yang mungkin terasa aneh awalnya — tapi sangat efektif. Contoh: tunjuk switch → "スイッチ OFF、ヨシ！"'
       },
       {
@@ -441,7 +441,7 @@ export const SIPIL_SETS = [
         opts_id: ['Mencegah kecelakaan & meningkatkan efisiensi', 'Hanya supaya terlihat rapi', 'Supaya lulus inspeksi', 'Untuk difoto'],
         ans: 0,
         exp: '整理・整頓 (5S — seiri, seiton) di proyek konstruksi = bukan soal estetika, tapi pencegahan kecelakaan (tersandung material) dan efisiensi (cepat cari alat).',
-        cat: 'keselamatan',
+        cat: 'anzen',
         desc: 'Budaya rapi/tertib di proyek Jepang. Sebagai pekerja SSW: setelah selesai kerja, WAJIB rapikan area kerja — alat dikembalikan, sampah dibuang, material ditata. Mandor: 今日の片付けをお願いします。'
       },
       {
@@ -450,7 +450,7 @@ export const SIPIL_SETS = [
         opts_id: ['Total 5 tahun', 'Total 3 tahun', 'Total 10 tahun', 'Tanpa batas'],
         ans: 0,
         exp: 'SSW 1号 (特定技能1号) di bidang konstruksi = masa tinggal maksimum total 5 tahun (通算5年). Setelah itu bisa upgrade ke SSW 2号 yang tidak ada batas waktu.',
-        cat: 'hukum',
+        cat: 'hourei',
         desc: 'Masa berlaku visa SSW 1. Sebagai pekerja SSW: kamu punya 5 tahun — manfaatkan untuk belajar bahasa & skill agar bisa naik ke SSW 2号 (tanpa batas waktu tinggal).'
       },
     ],
