@@ -73,3 +73,7 @@ export const SOURCE_ACCENT = {
   'vocab-lifeline': '#63b3ed', 'vocab-jac': '#93c5fd', 'vocab-core': '#cbd5e0',
   'vocab-exam': '#b794f4', 'vocab-teori': '#f56565',
 };
+
+// Supplementary source metadata (added during provenance audit)
+SOURCE_META['vocab-supplementary'] = { label: 'Vocab Supplementary — Kosakata pelengkap (bukan dari textbook JAC)', emoji: '📝', color: '#6b7280' };
+SOURCE_META['vocab-general'] = { label: 'Vocab General — Kata umum konstruksi', emoji: '📎', color: '#9ca3af' };
