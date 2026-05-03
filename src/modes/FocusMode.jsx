@@ -6,7 +6,7 @@ import { getWrongCount } from '../utils/wrong-tracker.js';
 import SprintMode from './SprintMode.jsx';
 import S from './modes.module.css';
 
-export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
+export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onSessionEnd }) {
   const [activeCat, setActiveCat] = useState(null);
 
   const catStats = useMemo(() => {
@@ -27,7 +27,7 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit }) {
   if (activeCat) {
     const cat = catStats.find((c) => c.key === activeCat);
     if (!cat) return null;
-    return <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} />;
+    return <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} onSessionEnd={onSessionEnd} />;
   }
 
   return (

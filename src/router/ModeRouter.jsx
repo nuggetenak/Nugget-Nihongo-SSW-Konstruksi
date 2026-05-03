@@ -130,7 +130,7 @@ function FocusSentinel() {
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
   const { mode, exitMode, track } = useApp();
-  const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession } = useProgress();
+  const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession, streakData } = useProgress();
   const srs = useSRSContext();
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
 
@@ -192,8 +192,11 @@ export default function ModeRouter() {
       onFinish: makeFinishHandler('kuis'),
     },
     sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint') },
-    fokus:    { known, unknown, quizWrong, onExit: exitMode },
-    stats:    { known, unknown, quizWrong, onExit: exitMode },
+    fokus:    { known, unknown, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
+    stats:    { known, unknown, quizWrong, srs, streakData, onExit: exitMode },
+    angka:    { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
+    jebak:    { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },
+    cari:     { onExit: exitMode, track },
     jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac') },
     wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground') },
     vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab') },

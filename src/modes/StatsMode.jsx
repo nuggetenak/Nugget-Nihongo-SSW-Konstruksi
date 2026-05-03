@@ -5,12 +5,13 @@ import { getWrongCount } from '../utils/wrong-tracker.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
-export default function StatsMode({ known, unknown, quizWrong = {}, onExit }) {
+export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakData, onExit }) {
   const total = CARDS.length;
   const knownN = known.size;
   const unknownN = unknown.size;
   const untouched = total - knownN - unknownN;
   const pct = Math.round((knownN / total) * 100);
+  const streak = streakData?.days ?? 0;
 
   const catStats = CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')
     .map((cat) => {
@@ -26,6 +27,11 @@ export default function StatsMode({ known, unknown, quizWrong = {}, onExit }) {
     .filter((e) => e.count > 0)
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
+
+  const mature   = srs?.stats?.mature   ?? null;
+  const young    = srs?.stats?.young    ?? null;
+  const newCards = srs?.stats?.new      ?? null;
+  const dueCount = srs?.dueCount        ?? 0;
 
   return (
     <div className={S.page}>
@@ -43,6 +49,44 @@ export default function StatsMode({ known, unknown, quizWrong = {}, onExit }) {
           <span style={{ color: T.textDim }}>⬜ {untouched} belum dicek</span>
         </div>
       </div>
+
+      {/* Streak + SRS mini cards */}
+      {(streak > 0 || mature !== null) && (
+        <div style={{ display: 'grid', gridTemplateColumns: streak > 0 && mature !== null ? '1fr 1fr 1fr 1fr' : '1fr 1fr 1fr', gap: 8, marginBottom: 20 }}>
+          {streak > 0 && (
+            <div style={{ padding: '10px 6px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, textAlign: 'center' }}>
+              <div style={{ fontSize: 14 }}>🔥</div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: T.gold }}>{streak}</div>
+              <div style={{ fontSize: 10, color: T.textDim }}>hari streak</div>
+            </div>
+          )}
+          {mature !== null && (
+            <>
+              <div style={{ padding: '10px 6px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, textAlign: 'center' }}>
+                <div style={{ fontSize: 14 }}>🌟</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: T.correct }}>{mature}</div>
+                <div style={{ fontSize: 10, color: T.textDim }}>Matang</div>
+              </div>
+              <div style={{ padding: '10px 6px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, textAlign: 'center' }}>
+                <div style={{ fontSize: 14 }}>📗</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: T.gold }}>{young}</div>
+                <div style={{ fontSize: 10, color: T.textDim }}>Berkemb.</div>
+              </div>
+              <div style={{ padding: '10px 6px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, textAlign: 'center' }}>
+                <div style={{ fontSize: 14 }}>📘</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: '#60a5fa' }}>{newCards}</div>
+                <div style={{ fontSize: 10, color: T.textDim }}>Baru SRS</div>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+      {dueCount > 0 && (
+        <div style={{ padding: '10px 14px', borderRadius: T.r.md, background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.3)', marginBottom: 20, fontSize: 12, color: T.gold, fontWeight: 600 }}>
+          🔁 {dueCount} kartu SRS jatuh tempo hari ini — siap diulang!
+        </div>
+      )}
+
 
       <div className={S.sectionLabel}>Per Kategori</div>
       <div className={S.list} style={{ gap: 6, marginBottom: 20 }}>
