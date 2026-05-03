@@ -1,0 +1,712 @@
+[
+  {
+    "id": 38,
+    "category": "setsubi_kougu",
+    "source": "jac-jitsugi2",
+    "furi": "かしつきじょしつき",
+    "jp": "加湿器 vs 除湿器",
+    "romaji": "kashitsuki vs joshitsuki",
+    "id_text": "Pelembap udara vs Penyerap kelembapan",
+    "desc": "加湿器 = MENAMBAH kelembapan ke udara kering. 除湿器 = MENGURANGI kelembapan. 冷却コイル = koil pendingin."
+  },
+  {
+    "id": 39,
+    "category": "setsubi_kougu",
+    "source": "jac-jitsugi2",
+    "furi": "ちくろこうじ",
+    "jp": "築炉工事（耐火物）",
+    "romaji": "chikuro kouji (taikabumotsu)",
+    "id_text": "Pekerjaan konstruksi tungku — bahan tahan api",
+    "desc": "Melapisi bagian dalam tungku/kiln yang suhu tinggi dengan BAHAN TAHAN API (耐火物). Perekat bata = 耐熱断熱煉瓦用モルタル. BUKAN 保温材/断熱材 biasa."
+  },
+  {
+    "id": 40,
+    "category": "haikan",
+    "source": "jac-jitsugi2",
+    "furi": "まるだくとさしこみつぎてこうほう",
+    "jp": "丸ダクト",
+    "romaji": "maru dakuto → sashikomi tsugite kouhou",
+    "id_text": "Saluran udara bulat → sambungan selip/insert",
+    "desc": "丸ダクト (round duct): pakai 差し込み継手工法 (insert joint). 角ダクト (square duct): pakai 共板フランジ工法 (flange)."
+  },
+  {
+    "id": 50,
+    "category": "sekou",
+    "source": "jac-jitsugi1",
+    "furi": "せこうかんりしょていのひんしつ",
+    "jp": "施工管理",
+    "romaji": "sekou kanri — shotei no hinshitsu",
+    "id_text": "Manajemen konstruksi — kualitas yang ditentukan",
+    "desc": "所定の品質。施工管理とは、施工計画に基づいて、施工者が、所定の【品質】の工事目的物を完成させるために必要な管理のことである。Kata kunci: 品質 (kualitas), bukan 環境 (lingkungan)."
+  },
+  {
+    "id": 61,
+    "category": "denki",
+    "source": "jac-jitsugi1",
+    "furi": "ぶれえかあ",
+    "jp": "ブレーカー（NFB）",
+    "romaji": "bureekaa (NFB)",
+    "id_text": "Pemutus arus listrik (breaker)",
+    "desc": "Otomatis menghentikan pasokan listrik saat arus berlebih mengalir di sirkuit. NFB = No-Fuse Breaker."
+  },
+  {
+    "id": 65,
+    "category": "denki",
+    "source": "jac-jitsugi1",
+    "furi": "たんらく",
+    "jp": "短絡（たんらく）",
+    "romaji": "tanraku",
+    "id_text": "Hubungan arus pendek (short circuit)",
+    "desc": "2 kabel atau lebih bersentuhan TANPA melalui beban. Berbeda dari 漏電 (arus bocor) dan 感電 (sengatan listrik). Bisa menyebabkan kebakaran."
+  },
+  {
+    "id": 66,
+    "category": "denki",
+    "source": "jac-jitsugi1",
+    "furi": "でんこうないふ",
+    "jp": "電工ナイフ",
+    "romaji": "denkou naifu",
+    "id_text": "Pisau listrik (electrician's knife)",
+    "desc": "Pisau untuk mengupas isolasi kabel. Bilah melengkung, ujung TUMPUL (mencegah merusak konduktor). Sering diuji lewat FOTO."
+  },
+  {
+    "id": 67,
+    "category": "tsushin",
+    "source": "jac-jitsugi2",
+    "furi": "ひかりあいばあ",
+    "jp": "光ファイバー",
+    "romaji": "hikari faibaa",
+    "id_text": "Serat optik",
+    "desc": "Serat tipis & ringan, kapasitas transmisi besar, rugi-rugi kecil (損失が小さい), non-induktif. Kelemahan: rentan goresan & tekukan."
+  },
+  {
+    "id": 71,
+    "category": "tsushin",
+    "source": "jac-jitsugi2",
+    "furi": "ゆうちゃくせつぞくき",
+    "jp": "融着接続機",
+    "romaji": "yuuchaku setsuzoku ki",
+    "id_text": "Alat penyambung fusi serat optik",
+    "desc": "Mesin yang MELELEHKAN dan menyambungkan ujung 2 kabel serat optik."
+  },
+  {
+    "id": 73,
+    "category": "tsushin",
+    "source": "jac-jitsugi2",
+    "furi": "おおちあちめどまいんれえとめて",
+    "jp": "OTDR",
+    "romaji": "OTDR (optical time domain reflectometer)",
+    "id_text": "Alat uji pulsa optik",
+    "desc": "Mengukur panjang jalur serat optik dan mendeteksi titik abnormal (rugi-rugi sambungan, pantulan)."
+  },
+  {
+    "id": 76,
+    "category": "tsushin",
+    "source": "jac-jitsugi2",
+    "furi": "ゆうちゃく vs こねくた vs めかにかるすぷらいす",
+    "jp": "融着 vs コネクタ vs メカニカル",
+    "romaji": "yuuchaku / konekuta / mekanikaru supuraisusu",
+    "id_text": "3 metode penyambungan serat optik",
+    "desc": "①融着接続: MELELEHKAN ujung serat → permanen, rugi terkecil. ②コネクタ接続: konektor, bisa lepas-pasang. ③メカニカルスプライス: mekanis, lebih cepat dari fusion."
+  },
+  {
+    "id": 77,
+    "category": "tsushin",
+    "source": "jac-jitsugi2",
+    "furi": "かんろ",
+    "jp": "管路（かんろ）",
+    "romaji": "kanro",
+    "id_text": "Sistem jalur kabel bawah tanah",
+    "desc": "Menghubungkan manhole, handhole, とう道 (terowongan), dan 引上柱 (tiang pengangkat). Kedalaman di jalan raya >0.8m."
+  },
+  {
+    "id": 79,
+    "category": "tsushin",
+    "source": "jac-jitsugi2",
+    "furi": "てぼりあなほりけんちゅうしゃたんしんぼう",
+    "jp": "手掘り・穴掘建柱車・探針棒（埋設物確認）",
+    "romaji": "tebori / anahori kenchuusha / tanshinbou",
+    "id_text": "Gali manual + kendaraan tiang + probe rod",
+    "desc": "Sebelum menggali lubang untuk tiang listrik → gunakan 手掘り (gali manual) DAN 探針棒 (batang probe) untuk konfirmasi benda terpendam. 穴掘建柱車 = kendaraan khusus penggali & pendiri tiang."
+  },
+  {
+    "id": 88,
+    "category": "haikan",
+    "source": "jac-jitsugi1",
+    "furi": "ぱいぷかったあ",
+    "jp": "パイプカッター",
+    "romaji": "paipu kattaa",
+    "id_text": "Pemotong pipa",
+    "desc": "Alat untuk memotong pipa baja, kuningan, tembaga. Roda pemotong menjepit dan memotong melingkar. Sering diuji lewat FOTO."
+  },
+  {
+    "id": 95,
+    "category": "haikan",
+    "source": "jac-jitsugi2",
+    "furi": "ぽりえちれんかんえせつごう",
+    "jp": "ポリエチレン管（EF接合）",
+    "romaji": "pori echiren kan (EF setsugou)",
+    "id_text": "Pipa polietilen — sambungan EF (Electro Fusion)",
+    "desc": "Digunakan untuk pipa suplai air bersih dan pipa gas. Sambungan khas: EF接合 (Electro Fusion = fusi listrik). Berbeda dari SGP yang pakai ねじ接合."
+  },
+  {
+    "id": 96,
+    "category": "haikan",
+    "source": "jac-jitsugi1",
+    "furi": "ねじせつごうあからあ",
+    "jp": "SGP ねじ接合",
+    "romaji": "SGP neji setsugou → 15A kara 100A",
+    "id_text": "Pipa SGP — sambungan ulir untuk 15A～100A",
+    "desc": "Metode penyambungan utama SGP = ねじ接合 (sambungan ulir), digunakan untuk ukuran 15A～100A. Di atas 100A → sambungan flensa/las."
+  },
+  {
+    "id": 102,
+    "category": "hoon",
+    "source": "jac-jitsugi2",
+    "furi": "ぐらすううるろっくううる",
+    "jp": "グラスウール vs ロックウール",
+    "romaji": "gurasu uuru vs rokku uuru",
+    "id_text": "Wol kaca (dari kaca) vs wol batu (dari basalt)",
+    "desc": "perbedaan kunci。グラスウール: dari KACA dilebur jadi serat. ロックウール: dari BASALT/batu vulkanik, tahan api lebih baik. Ujian tanya: 'kaca dilelehkan jadi serat' → グラスウール."
+  },
+  {
+    "id": 103,
+    "category": "hoon",
+    "source": "jac-jitsugi2",
+    "furi": "らっきんぐかばあ",
+    "jp": "ラッキングカバー",
+    "romaji": "rakkingu kabaa",
+    "id_text": "Penutup luar isolasi pipa (lagging cover)",
+    "desc": "Penutup finishing pada isolasi pipa yang TEREKSPOS DI LUAR RUANGAN (屋外露出). Melapisi 保温筒 dari cuaca. Untuk dalam ruangan tidak wajib."
+  },
+  {
+    "id": 107,
+    "category": "shoubou",
+    "source": "jac-jitsugi1",
+    "furi": "おくがいしょうかいせんせつび",
+    "jp": "屋外消火栓設備",
+    "romaji": "okugai shoukaisen setsubi",
+    "id_text": "Hidran kebakaran LUAR ruangan",
+    "desc": "Dipasang di LUAR gedung. Untuk pemadaman awal & mencegah api menyebar ke bangunan berdekatan (jangkauan lantai 1-2). Sering diuji lewat FOTO."
+  },
+  {
+    "id": 110,
+    "category": "shoubou",
+    "source": "jac-jitsugi1",
+    "furi": "おくがいおくないしょうかいせん",
+    "jp": "屋外消火栓 vs 屋内消火栓",
+    "romaji": "okugai vs okunai shoukaisen",
+    "id_text": "Hidran LUAR vs DALAM — perbedaan kunci",
+    "desc": "perbedaan kunci。屋外: di luar gedung, mencegah menyebar, lantai 1-2. 屋内: di dalam gedung, dioperasikan penghuni, No.1/No.1易/No.2. Ujian tampilkan FOTO → bedakan keduanya."
+  },
+  {
+    "id": 112,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ふるはあねすがたついらくせいしようきぐう",
+    "jp": "フルハーネス型墜落制止用器具",
+    "romaji": "furu haanesugata tsuiraku seishi you kiguu",
+    "id_text": "Peralatan penahan jatuh jenis full harness",
+    "desc": "Wajib digunakan saat bekerja di ketinggian. Full harness lebih aman dari harness dada saja."
+  },
+  {
+    "id": 119,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "あんかあぽいんと",
+    "jp": "アンカーポイント",
+    "romaji": "ankaa pointo",
+    "id_text": "Titik angkur (anchor point)",
+    "desc": "Titik pengait pada struktur untuk mengaitkan peralatan penahan jatuh saat bekerja di ketinggian."
+  },
+  {
+    "id": 120,
+    "category": "anzen",
+    "source": "jac-jitsugi1",
+    "furi": "さんそけつぼう",
+    "jp": "酸素欠乏（さんそけつぼう）",
+    "romaji": "sanso ketsubou",
+    "id_text": "Kekurangan oksigen — bahaya di MANHOLE",
+    "desc": "Bahaya di ruang tertutup → MANHOLE. Perlu cek kadar oksigen sebelum masuk. Kerja di atas tiang/atap gedung TIDAK termasuk risiko ini."
+  },
+  {
+    "id": 121,
+    "category": "anzen",
+    "source": "jac-jitsugi1",
+    "furi": "どどめ",
+    "jp": "土留め（どどめ）≥ 1.5m",
+    "romaji": "dodome",
+    "id_text": "Penahan tanah — WAJIB jika galian ≥ 1.5m",
+    "desc": "Mencegah longsor tanah (土砂崩れ) pada pekerjaan galian. WAJIB jika kedalaman ≥1.5m. Berbeda dari 換気 (ventilasi) dan 排水 (drainase)."
+  },
+  {
+    "id": 122,
+    "category": "anzen",
+    "source": "jac-jitsugi2",
+    "furi": "しんきにゅうじょうしゃきょういくしんにゅうしゃあんぜんえいせいきょういく",
+    "jp": "新規入場者教育 vs 新入者安全衛生教育",
+    "romaji": "shinki nyuujousha kyouiku vs shinnyuusha anzen eisei kyouiku",
+    "id_text": "K3 pekerja baru lokasi vs K3 rekrutan baru",
+    "desc": "①新規入場者教育 = untuk PENDATANG BARU ke LOKASI KERJA. ②新入者安全衛生教育 = untuk PEKERJA BARU yang baru DIREKRUT perusahaan. Keduanya wajib."
+  },
+  {
+    "id": 123,
+    "category": "anzen",
+    "source": "jac-jitsugi1",
+    "furi": "さんだいさいがい",
+    "jp": "三大災害（さんだいさいがい）",
+    "romaji": "sandai saigai",
+    "id_text": "Tiga bencana besar konstruksi",
+    "desc": "①墜落・転落 (TERBANYAK) ②建設機械・クレーン災害 ③崩壊・倒壊. Menyumbang 40–70% kematian."
+  },
+  {
+    "id": 125,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ばっくほうのあんぜん",
+    "jp": "バックホウ（油圧ショベル）の安全",
+    "romaji": "bakkuhou no anzen",
+    "id_text": "Keselamatan backhoe / excavator",
+    "desc": "Bahaya: ①激突 — tertabrak bucket ②はさまれ — terjepit bucket. Saat naik/turun ke truk: risiko terbalik. Wajib ada 誘導員 (pemandu)."
+  },
+  {
+    "id": 128,
+    "category": "anzen",
+    "source": "jac-jitsugi2",
+    "furi": "ひろうぼうしてきせつなすいみんとしょくじ",
+    "jp": "疲労防止",
+    "romaji": "hirou boushi — tekisetsu na suimin to shokuji",
+    "id_text": "Pencegahan kelelahan — tidur & makan yang cukup",
+    "desc": "疲労がたまると事故につながるので、【適切な睡眠と食事をとること】を心がける。Kelelahan menyebabkan kecelakaan → perhatikan tidur & makan yang cukup."
+  },
+  {
+    "id": 134,
+    "category": "career",
+    "source": "jac-gakka1",
+    "furi": "ごえす",
+    "jp": "5S（整理・整頓・清掃・清潔・しつけ）",
+    "romaji": "go esu",
+    "id_text": "5S: Pilah / Tata / Bersih / Higienis / Disiplin",
+    "desc": "Seiri=Pilah, Seiton=Tata, Seisou=Bersih, Seiketsu=Higienis, Shitsuke=DISIPLIN (item ke-5, sering ditanyakan)."
+  },
+  {
+    "id": 135,
+    "category": "career",
+    "source": "jac-gakka1",
+    "furi": "ぱわあはらすめんと",
+    "jp": "パワー・ハラスメント（パワハラ）",
+    "romaji": "pawaa harasumento",
+    "id_text": "Pelecehan kekuasaan (Power Harassment)",
+    "desc": "Memanfaatkan keunggulan posisi untuk memberi tekanan melebihi batas wajar. Berbeda dari セクハラ."
+  },
+  {
+    "id": 136,
+    "category": "career",
+    "source": "jac-gakka2",
+    "furi": "しかくのしゅるい",
+    "jp": "資格の種類：電気工事士・工事担任者・消防設備士",
+    "romaji": "shikaku no shurui",
+    "id_text": "Kualifikasi: listrik / telekomunikasi / pemadam",
+    "desc": "①電気工事士 = LISTRIK. ②工事担任者 = TELEKOMUNIKASI. ③消防設備士 = PEMADAM KEBAKARAN."
+  },
+  {
+    "id": 138,
+    "category": "sekou",
+    "source": "jac-jitsugi1",
+    "furi": "すいじゅんき",
+    "jp": "水準器（レベル）",
+    "romaji": "suijunki (reberu)",
+    "id_text": "Waterpas / Level (instrumen survei)",
+    "desc": "Alat survei dengan teleskop untuk mengukur ketinggian/elevasi. Dipasang di atas tripod. Sering diuji lewat FOTO."
+  },
+  {
+    "id": 145,
+    "category": "sekou",
+    "source": "jac-jitsugi1",
+    "furi": "すみつぼ",
+    "jp": "墨つぼ（すみつぼ）",
+    "romaji": "sumi tsubo",
+    "id_text": "Wadah tinta / chalk line reel",
+    "desc": "Membuat garis lurus panjang dengan menarik benang bercelup tinta. Berbeda dari: 墨さし (kuas pendek), チョーク, レーザー墨出し器. Sering diuji lewat FOTO."
+  },
+  {
+    "id": 149,
+    "category": "sekou",
+    "source": "jac-jitsugi2",
+    "furi": "だいしゃ",
+    "jp": "台車（だいしゃ）",
+    "romaji": "daisha",
+    "id_text": "Kereta dorong datar (platform cart)",
+    "desc": "Platform datar berkaki roda untuk mengangkut material dan peralatan berat di lokasi konstruksi. Di proyek: berbeda dari 一輪車 (satu roda), そり (sledge), ころ (roller)."
+  },
+  {
+    "id": 387,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "きゃたつてんばんきんしまたぎきんし",
+    "jp": "脚立（きゃたつ）",
+    "romaji": "kyatatsu — tenban kinshi / matagi kinshi",
+    "id_text": "Tangga A — DILARANG berdiri/duduk di papan atas",
+    "desc": "天板禁止・またぎ禁止。Tangga lipat bentuk A. Tiga larangan: ①Dilarang DUDUK di papan atas (天板). ②Dilarang BERDIRI di papan atas. ③Dilarang bekerja sambil MENUNGGANGI (またぎ乗り) dua sisi."
+  },
+  {
+    "id": 593,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "てんとう",
+    "jp": "転倒（てんとう）",
+    "romaji": "tentou",
+    "id_text": "Tersandung / Kehilangan keseimbangan di lantai",
+    "desc": "Jenis kecelakaan kerja: benda menghalangi → tersandung, atau kehilangan keseimbangan → jatuh di permukaan yang sama. Berbeda dari 墜落・転落 (jatuh dari ketinggian)."
+  },
+  {
+    "id": 594,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ひらいらっか",
+    "jp": "飛来・落下（ひらい・らっか）",
+    "romaji": "hirai rakka",
+    "id_text": "Benda melayang / jatuh menimpa pekerja dari atas",
+    "desc": "Jenis kecelakaan: material terlepas dari crane atau benda jatuh dari ketinggian menimpa pekerja. Penyebab: 玉掛け tidak sempurna, beban crane bergoyang."
+  },
+  {
+    "id": 595,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "げきとつされはさまれまきこまれ",
+    "jp": "激突され（げきとつされ）/ はさまれ・巻き込まれ",
+    "romaji": "gekitotsu sare / hasamare makikomare",
+    "id_text": "Tertabrak alat berat / Terjepit atau terseret",
+    "desc": "激突され = tertabrak keras kendaraan berat atau bucket crane saat berputar (旋回中). はさまれ・巻き込まれ = terjepit antara mesin/material, atau terseret ke dalam bagian mesin. Keduanya banyak dalam 建設機械・クレーン災害."
+  },
+  {
+    "id": 596,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ゆうがいぶつせっしょく / おぼれる / かさい",
+    "jp": "有害物接触 / おぼれ / 火災",
+    "romaji": "yuugaibutsu sesshoku / oboreru / kasai",
+    "id_text": "Kontak bahan berbahaya / Tenggelam / Kebakaran",
+    "desc": "有害物との接触: zat kimia menyentuh kulit → gangguan kesehatan. おぼれ: jatuh ke saluran air saat 下水道工事 → tenggelam. 火災: kebakaran di lokasi konstruksi → terjebak asap/api. Ketiganya kecelakaan fatal."
+  },
+  {
+    "id": 597,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "たまがけ",
+    "jp": "玉掛け（たまがけ）",
+    "romaji": "tamagake",
+    "id_text": "Pengikatan beban crane (rigging/slinging)",
+    "desc": "Teknik mengikat material ke kait crane dengan wire rope atau sling sebelum diangkat. 玉掛けが不十分 → beban terlepas saat diangkat → 飛来・落下 fatal. Operator wajib punya sertifikat (技能講習 atau 特別教育)."
+  },
+  {
+    "id": 598,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "どどめくっさくふかさいじょうでげんそくひつよう",
+    "jp": "土留め（どどめ）",
+    "romaji": "dodome — kussaku fukasa 1.5m ijou de gensoku hitsuyou",
+    "id_text": "Penahan tanah — wajib jika galian kedalaman ≥1.5m",
+    "desc": "Saat menggali parit untuk pipa (掘削工事), tanah bisa longsor menimbun pekerja. Jika kedalaman ≥1.5m: wajib gunakan 土留め, umumnya dengan 鋼矢板 (steel sheet pile). Mandor:「1."
+  },
+  {
+    "id": 599,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "こうやいた",
+    "jp": "鋼矢板（こうやいた）",
+    "romaji": "kou yaita",
+    "id_text": "Sheet pile baja — material penahan tanah galian",
+    "desc": "土留めの代表材料。Lembaran baja yang dipancang vertikal di sisi galian untuk mencegah longsor tanah (崩壊). Metode utama 土留め pada galian dalam (≥1.5m) seperti pekerjaan pipa bawah tanah (管布設工事)."
+  },
+  {
+    "id": 600,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ほあんせつびゆどういん",
+    "jp": "保安設備・誘導員（ほあんせつび・ゆうどういん）",
+    "romaji": "hoan setsubi / yudouin",
+    "id_text": "Pengaman & pemandu lalu lintas — wajib kerja di",
+    "desc": "Saat bekerja di jalan umum (公道上): wajib pasang 囲い, 柵, ガード untuk cegah kendaraan masuk. Wajib tempatkan 誘導員 (traffic guide). Pekerja dilarang bekerja di luar 作業範囲 yang ditentukan."
+  },
+  {
+    "id": 601,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "きいろっくほうしきろおぷ",
+    "jp": "キーロック方式ロープ（移動用ロープの安全機構）",
+    "romaji": "kii rokku houshiki roopu",
+    "id_text": "Key-lock rope — tali lama tak bisa dilepas",
+    "desc": "Sistem keselamatan フルハーネス: melepas tali paling sering terjadi saat pindah titik. キーロック方式 = tali lama TIDAK BISA dilepas sebelum tali baru terpasang di titik berikutnya → mencegah jeda tanpa pengaman."
+  },
+  {
+    "id": 602,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "あんぜんせこうさいくるのすてっぷ",
+    "jp": "安全施工サイクルの8ステップ",
+    "romaji": "anzen sekou saikuru no 8 suteppu",
+    "id_text": "8 langkah siklus keselamatan harian konstruksi",
+    "desc": "①Apel pagi ②Safety meeting (KY, orientasi baru) ③Cek mesin & alat sebelum mulai ④Pengawasan saat bekerja ⑤Ronda keselamatan ⑥Koordinasi jadwal besok ⑦Bersih-bersih ⑧Cek kebakaran & bahaya saat tutup."
+  },
+  {
+    "id": 603,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "しんにゅうしゃあんぜんえいせいきょういくのはちこうもく",
+    "jp": "新入者安全衛生教育の8項目",
+    "romaji": "shinnyuusha anzen eisei kyouiku 8 koumoku",
+    "id_text": "8 materi K3 wajib untuk rekrutan baru perusahaan",
+    "desc": "①Bahaya mesin & bahan ②APD & alat keselamatan ③Prosedur kerja ④Cek awal sebelum bekerja ⑤Penyakit akibat kerja ⑥Kebersihan & kerapian ⑦Tindakan darurat & evakuasi ⑧Materi K3 lainnya."
+  },
+  {
+    "id": 604,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "しんきにゅうじょうしゃきょういくしぼうのはんぶんがにゅうじょうしゅうかんいないじっしぷん",
+    "jp": "新規入場者教育",
+    "romaji": "shinki nyuujousha kyouiku: shibou no hanbun ga nyuujou 1 shuukan inai / jisshi 30 pun",
+    "id_text": "Orientasi pekerja baru lokasi: 50% meninggal",
+    "desc": "死亡の半数が入場1週間以内。Kematian di lokasi konstruksi: separuhnya terjadi dalam 1 minggu pertama → maka 新規入場者教育 diwajibkan. Dilaksanakan oleh 職長 hari pertama masuk, durasi ±30 menit."
+  },
+  {
+    "id": 605,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ふるはあねすぎむたかさ",
+    "jp": "フルハーネス義務高さ",
+    "romaji": "furu haanesugata gimu takasa",
+    "id_text": "Wajib full harness: >6.75m umum / >5m konstruksi",
+    "desc": "2022年1月施行: ketinggian >6.75m → semua sektor wajib full harness. Konstruksi lebih ketat: >5m sudah wajib karena risiko tinggi. Di proyek: pakai meskipun merasa tidak perlu."
+  },
+  {
+    "id": 606,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ほごめがね",
+    "jp": "保護メガネ（ほごめがね）",
+    "romaji": "hogo megane",
+    "id_text": "Kacamata pelindung dari debu, percikan, dan sinar",
+    "desc": "Melindungi mata dari: debu logam/kayu (粉じん), percikan api las (火花), panas & asap, sinar laser/UV (有害光線). Di proyek: pilih jenis sesuai bahaya pekerjaan."
+  },
+  {
+    "id": 607,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ほごますくじんぱい",
+    "jp": "保護マスク・じん肺（ほごますく・じんぱい）",
+    "romaji": "hogo masuku / jinpai",
+    "id_text": "Masker debu — cegah penyakit paru-paru (jinpai)",
+    "desc": "じん肺 = kerusakan paru akibat debu logam/batu jangka panjang saat las busur atau potong batu. Masker tersedia: 使い捨て式 dan フィルタ取換え式. Di proyek: wajib dipakai."
+  },
+  {
+    "id": 608,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "てぶくろきんしかいてんするはものしようじ",
+    "jp": "手袋（軍手）禁止",
+    "romaji": "tebukuro (gunto) kinshi — kaiten suru hamono shiyouji",
+    "id_text": "DILARANG sarung tangan saat alat potong berputar",
+    "desc": "丸のこ, ボール盤, パイプねじ切機 dan alat berputar lain → sarung tangan (軍手) bisa tersangkut mata pisau → kecelakaan serius. Sarung tangan BOLEH untuk las, kimia, potong manual."
+  },
+  {
+    "id": 609,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "しいるどめんつきへるめっと / あんぜんぐつ",
+    "jp": "シールド面付きヘルメット / 安全靴",
+    "romaji": "shiirudo mentsuki herumetto / anzen gutsu",
+    "id_text": "Helm pelindung wajah (untuk las) / Sepatu safety",
+    "desc": "シールド面付きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — melindungi dari percikan api dan UV. 安全靴 = sepatu pelindung keras, perlengkapan dasar wajib semua lokasi."
+  },
+  {
+    "id": 610,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "あつさしすうまなつびもうしょび",
+    "jp": "WBGT（暑さ指数）・真夏日・猛暑日",
+    "romaji": "WBGT (atsusa shisuu) / manatsubi / moushobi",
+    "id_text": "WBGT / Hari panas 30℃+ / Hari terik 35℃+",
+    "desc": "WBGT = indeks risiko 熱中症 dari 気象庁. 真夏日 = >30℃, 猛暑日 = >35℃. Di proyek: pasang kipas besar, jaring pelindung, mist, sediakan tempat istirahat ber-AC. Pada 猛暑日 bisa ubah jam kerja."
+  },
+  {
+    "id": 611,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ねちゅうしょうのしょうじょう",
+    "jp": "熱中症の症状（ねっちゅうしょうのしょうじょう）",
+    "romaji": "netchuushou no shoujou",
+    "id_text": "Gejala heatstroke — dari pusing hingga fatal",
+    "desc": "Bertahap: ①pusing/pingsan ②nyeri & kram otot ③keringat berlebih ④sakit kepala, mual, muntah ⑤gangguan kesadaran & kejang ⑥suhu tinggi → meninggal."
+  },
+  {
+    "id": 612,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "みどりじゅうじ / あんぜんえいせいき / きゅうきゅうばこ",
+    "jp": "緑十字 / 安全衛生旗 / 救急箱",
+    "romaji": "midori juuji / anzen eisei ki / kyuukyuu bako",
+    "id_text": "Palang Hijau / Bendera K3 / Kotak P3K",
+    "desc": "緑十字 (palang hijau di latar putih) = simbol K3, dipasang di helm dan 救急箱. 安全衛生旗 = gabungan 緑十字 (安全) + 白十字 (衛生), dikibarkan di lokasi. Di proyek: 救急箱 wajib tersedia berisi obat & alat P3K."
+  },
+  {
+    "id": 613,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ひゅうまんえらあしゅるい",
+    "jp": "ヒューマンエラー（12種類の概要）",
+    "romaji": "hyuuman eraa 12 shurui",
+    "id_text": "Human Error — 12 jenis penyebab kecelakaan manusia",
+    "desc": "Kesalahan manusia yang menyebabkan kecelakaan, penurunan kualitas, dan keterlambatan. 12 jenis: ①認知ミス ②不注意 ③意識低下 ④経験不足 ⑤慣れ手抜き ⑥集団欠陥 ⑦近道行動 ⑧連絡不足 ⑨場面本能 ⑩パニック ⑪心身低下 ⑫疲労."
+  },
+  {
+    "id": 614,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "はにんちみすふちゅういちゅういていか",
+    "jp": "ヒューマンエラー①〜③：認知ミス・不注意・注意低下",
+    "romaji": "HA: ninchi misu / fuchuui / chuui teika",
+    "id_text": "HA 1–3: salah tangkap / kurang waspada / otomatis",
+    "desc": "①認知ミス = asumsi salah → salah baca instruksi. ②不注意 = terlalu fokus 1 hal → tidak waspada → jatuh ke lubang. ③注意低下 = pekerjaan monoton → bergerak tanpa berpikir (無意識の動作) → lalai tanpa sadar."
+  },
+  {
+    "id": 615,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "はけいけんぶそくなれによるてぬき",
+    "jp": "ヒューマンエラー④〜⑤：経験不足・慣れによる手抜き",
+    "romaji": "HA: keiken busoku / nare ni yoru tenuki",
+    "id_text": "HA 4–5: kurang pengalaman / terbiasa → potong",
+    "desc": "④経験・知識不足 = tidak tahu cara benar gunakan alat, tidak bisa prediksi bahaya; KY活動 membantu belajar dari senior. ⑤慣れによる手抜き = makin terbiasa → skip prosedur. Kecelakaan sering saat hati mulai 緩む (lengah)."
+  },
+  {
+    "id": 616,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ひゅうまんえらあろくからはち",
+    "jp": "ヒューマンエラー⑥〜⑧",
+    "romaji": "HA 6 kara 8",
+    "id_text": "HA 6–8: tekanan kelompok / shortcut / salah",
+    "desc": "⑥集団欠陥 = deadline menciptakan tekanan ambil jalan tidak aman — keselamatan tetap prioritas. ⑦近道行動 = demi efisiensi → skip langkah prosedur. ⑧連絡不足 = instruksi tidak jelas → pekerja bertindak salah."
+  },
+  {
+    "id": 617,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ひゅうまんえらあきゅうからじゅうに",
+    "jp": "ヒューマンエラー⑨〜⑫",
+    "romaji": "HA 9 kara 12",
+    "id_text": "HA 9–12: refleks bahaya / panik / fisik menurun /",
+    "desc": "⑨場面本能 = refleks selamatkan diri → melempar alat → mengenai orang. ⑩パニック = terkejut → tindakan tidak aman. ⑪心身低下 = penuaan → fisik & penglihatan menurun tanpa disadari. ⑫疲労 = lelah → konsentrasi turun."
+  },
+  {
+    "id": 740,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "さんだいさいがいついらくてんらくけんせつきかいくれええんほうかいとうかい",
+    "jp": "三大災害（さんだいさいがい）",
+    "romaji": "sandai saigai — tsuiraku tenraku / kensetsu kikai kureeen / houkai toukai",
+    "id_text": "3 Bencana Besar Konstruksi — 40–70% kecelakaan",
+    "desc": "①墜落・転落 (terbanyak, saat kerja di ketinggian) ②建設機械・クレーン災害 (激突され, はさまれ) ③崩壊・倒壊災害. Ketiganya menyumbang 4–7割 kematian di konstruksi. Di luar itu: kecelakaan lalu lintas."
+  },
+  {
+    "id": 741,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "がいこくじんろうどうしゃのしぼうさいがいけんせつぎょうがもっともおおい",
+    "jp": "外国人労働者の死亡災害",
+    "romaji": "gaikokujin roudousha no shibou saigai — kensetsu gyou ga mottomo ooi",
+    "id_text": "Kecelakaan fatal TKA — sektor konstruksi terbanyak",
+    "desc": "厚生労働省データ（令和2・3年度）: 外国人労働者の死亡災害発生件数は建設業が最も多い（製造業・その他より多い）。事故の型別では墜落・転落が最多、続いて交通事故（道路）。建設業で働く外国人は特にこのリスクに注意が必要。"
+  },
+  {
+    "id": 742,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "ほうかいとうかいさいがいのけんせつとくゆうれいかせつでんちゅうせきさいでんちゅう",
+    "jp": "崩壊・倒壊災害の建設特有例",
+    "romaji": "houkai toukai saigai no kensetsu tokuyuu rei — kasetsu denchuu / sekisai denchuu",
+    "id_text": "Tiang sementara roboh / tiang di truk rubuh →",
+    "desc": "Contoh 崩壊・倒壊 pada pekerjaan listrik: ①仮設電柱 patah & rubuh ②tiang listrik di atas truk ambruk menimpa pekerja. Pada galian air: tanah longsor menimbun (≥1.5m → wajib 土留め)."
+  },
+  {
+    "id": 743,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "きかいせっちこうじのしぼうじこおおがたきかいのてんとうによるしたじき",
+    "jp": "機械設置工事の死亡事故",
+    "romaji": "kikai secchi kouji no shibou jiko — oogata kikai no tentou ni yoru shitajiki",
+    "id_text": "Pasang mesin besar — mesin terbalik, pekerja",
+    "desc": "Karakteristik kecelakaan fatal 機械設置工事: mesin besar terbalik (転倒) menimpa pekerja. Saat menangani beban berat, tindakan pencegahan terbalik (転倒防止措置) wajib dilakukan."
+  },
+  {
+    "id": 744,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "じょうげすいどうこうじのしゅるいのじこりすく",
+    "jp": "上下水道工事の3種類の事故リスク",
+    "romaji": "jougesuidou kouji no 3 shurui no jiko risuku",
+    "id_text": "3 risiko saluran air: longsor, tersandung, backhoe",
+    "desc": "①Tanah longsor di galian → tertimbun (≥1.5m: wajib 鋼矢板). ②Tersandung kabel atau amblas di tepi galian → jatuh. ③Backhoe berputar menabrak atau mundur → tertabrak (wajib ada 誘導員 khusus)."
+  },
+  {
+    "id": 745,
+    "category": "anzen",
+    "source": "jac-ch7",
+    "furi": "しんきにゅうじょうしゃきょういくのはちこうもく",
+    "jp": "新規入場者教育の8項目",
+    "romaji": "shinki nyuujousha kyouiku no 8 koumoku",
+    "id_text": "8 materi wajib orientasi pekerja baru di lapangan",
+    "desc": "[1]混在作業場所の状況 [2]危険有害箇所と立入禁止区域 [3]混在作業場所での作業相互の連絡・調整 [4]災害発生時の避難の方法 [5]指揮命令系統 [6]担当する作業内容と労働災害防止対策 [7]安全衛生に関する規程 [8]基本方針・目標など。死亡の半数近くが入場1週間以内に発生するため義務化。実施時間: 30分程度。"
+  },
+  {
+    "id": 746,
+    "category": "career",
+    "source": "jac-gakka1",
+    "furi": "せんもんこうじぎょうしゃかんのちいむわあく",
+    "jp": "専門工事業者間のチームワーク",
+    "romaji": "senmon kouji gyousha kan no chiimu waaku",
+    "id_text": "Kerja tim antar kontraktor spesialis",
+    "desc": "Untuk memajukan konstruksi dengan lancar, kerja tim (チームワーク) antar kontraktor spesialis sangat penting. Masing-masing sub-kontraktor bekerja sesuai jadwal dan berkoordinasi ketat."
+  },
+  {
+    "id": 747,
+    "category": "kenchiku_kutai",
+    "source": "jac-gakka1",
+    "furi": "てっこつこうじ",
+    "jp": "鉄骨工事（てっこつこうじ）",
+    "romaji": "tekkotsu kouji",
+    "id_text": "Pekerjaan struktur baja (steel frame)",
+    "desc": "Membangun rangka bangunan menggunakan baja: kolom (柱), balok (梁), dan elemen diagonal. Struktur baja: ブレース, ラーメン構造, トラス. Berbeda dari 鉄筋工事 (tulangan beton)."
+  },
+  {
+    "id": 748,
+    "category": "kenchiku_kutai",
+    "source": "jac-gakka1",
+    "furi": "こんくりいとだせつこうじ",
+    "jp": "コンクリート打設工事（コンクリートだせつこうじ）",
+    "romaji": "konkuriito dasetsu kouji",
+    "id_text": "Pekerjaan pengecoran beton",
+    "desc": "Menuangkan beton cair (生コン) ke dalam bekisting (型枠). Alur: muat → pompa → tuang → padatkan (バイブレータ) → finishing. Tim 3 peran: 筒先, 振動機操作, 補助. Mandor:「バイブレータでしっかり締め固めて」(padatkan beton pakai vibrator)."
+  },
+  {
+    "id": 749,
+    "category": "kenchiku_shiage",
+    "source": "jac-gakka2",
+    "furi": "くたい",
+    "jp": "躯体（くたい）",
+    "romaji": "kutai",
+    "id_text": "Struktur utama bangunan",
+    "desc": "Bagian struktural bangunan: 基礎 (pondasi) + 柱 (kolom) + 梁 (balok) + 壁面 (dinding) + 床 (lantai). = tulang/kerangka utama. BUKAN: 内装仕上げ (finishing dalam), 建具 (kusen pintu/jendela), 屋根 (atap)."
+  },
+  {
+    "id": 750,
+    "category": "doboku_doko",
+    "source": "jac-gakka2",
+    "furi": "しきならしさぎょう",
+    "jp": "敷き均し作業（しきならしさぎょう）",
+    "romaji": "shiki narashi sagyou",
+    "id_text": "Pekerjaan penghamparan dan perataan material",
+    "desc": "Menyebarkan dan meratakan material (aspal, agregat, tanah) secara merata menggunakan mesin paver/finisher. Di proyek: berbeda dari 盛り土 (menumpuk tanah) dan 積み込み (memuat)."
+  }
+]

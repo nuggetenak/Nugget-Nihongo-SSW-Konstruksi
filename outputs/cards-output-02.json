@@ -1,0 +1,1312 @@
+[
+  {
+    "id": 28,
+    "category": "setsubi_kougu",
+    "source": "jac-ch3",
+    "furi": "らいふらいんこうじ",
+    "jp": "ライフライン工事",
+    "romaji": "raifu rain kouji",
+    "id_text": "Pekerjaan lifeline",
+    "desc": "Pekerjaan utilitas vital: listrik, gas kota, suplai air, drainase, dan telekomunikasi. Mandor:「ライフラインの工事中は近隣への影響に注意して」(perhatikan dampak ke sekitar saat pengerjaan utilitas)."
+  },
+  {
+    "id": 29,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "せつびこうじ",
+    "jp": "設備工事",
+    "romaji": "setsubi kouji",
+    "id_text": "Pekerjaan peralatan",
+    "desc": "Meliputi peralatan AC, peralatan kebersihan suplai air & drainase, pekerjaan menjaga suhu, dan peralatan pemadam kebakaran."
+  },
+  {
+    "id": 30,
+    "category": "denki",
+    "source": "jac-ch3",
+    "furi": "でんきこうじ",
+    "jp": "電気工事",
+    "romaji": "denki kouji",
+    "id_text": "Pekerjaan listrik",
+    "desc": "Listrik dari pembangkit → gardu → tiang/bawah tanah → gedung. 'Sengatan listrik' adalah kecelakaan khas pekerjaan ini."
+  },
+  {
+    "id": 31,
+    "category": "haikan",
+    "source": "jac-ch3",
+    "furi": "としがすこうじ",
+    "jp": "都市ガス工事",
+    "romaji": "toshi gasu kouji",
+    "id_text": "Pekerjaan gas kota",
+    "desc": "Aliran gas kota: LNG → tangki → pipa bawah tanah → distribusi ke pabrik/rumah. Mandor:「ガス管の近くは火気厳禁です」(dilarang keras ada api di dekat pipa gas)."
+  },
+  {
+    "id": 32,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "きゅうはいすいこうじ",
+    "jp": "給排水工事",
+    "romaji": "kyuu haisui kouji",
+    "id_text": "Pekerjaan suplai air dan drainase",
+    "desc": "Suplai: air sungai → pemurnian → reservoir → pipa. Drainase: limbah gedung → pipa → instalasi pengolahan."
+  },
+  {
+    "id": 33,
+    "category": "tsushin",
+    "source": "jac-ch3",
+    "furi": "つうしんこうじ",
+    "jp": "通信工事",
+    "romaji": "tsuushin kouji",
+    "id_text": "Pekerjaan telekomunikasi",
+    "desc": "Pembangunan jaringan telepon & internet menggunakan kabel logam atau serat optik. Mandor:「通信ケーブルは傷つけないよう注意して」(hati-hati jangan sampai kabel komunikasi rusak)."
+  },
+  {
+    "id": 34,
+    "category": "setsubi_kougu",
+    "source": "jac-ch3",
+    "furi": "くうちょうせつびこうじ",
+    "jp": "空調設備工事",
+    "romaji": "kuuchou setsubi kouji",
+    "id_text": "Pekerjaan AC & pendingin udara",
+    "desc": "Pemasangan sistem pengatur suhu, kelembapan, dan pemurnian udara dalam ruangan. Mandor:「空調設備の試運転前に配管の確認をして」(periksa pipa sebelum uji coba sistem AC)."
+  },
+  {
+    "id": 35,
+    "category": "shoubou",
+    "source": "jac-ch3",
+    "furi": "しょうぼうせつびこうじ",
+    "jp": "消防設備工事",
+    "romaji": "shoubou setsubi kouji",
+    "id_text": "Pekerjaan peralatan pemadam kebakaran",
+    "desc": "Pemasangan sistem proteksi kebakaran: alarm, sprinkler, dan pompa pemadam. Mandor:「消防設備は定期点検が義務です」(inspeksi berkala sistem pemadam adalah kewajiban)."
+  },
+  {
+    "id": 36,
+    "category": "hoon",
+    "source": "jac-ch3",
+    "furi": "ほおんほれいこうじ",
+    "jp": "保温保冷工事",
+    "romaji": "hoon horei kouji",
+    "id_text": "Pekerjaan isolasi termal panas & dingin",
+    "desc": "Memasang bahan isolasi termal pada saluran & pipa. 保温 (panas): mengurangi kehilangan panas & mencegah luka bakar dari pipa panas. 保冷 (dingin): mencegah kondensasi & kehilangan suhu dingin."
+  },
+  {
+    "id": 37,
+    "category": "haikan",
+    "source": "jac-ch3",
+    "furi": "きゅうはいすいえいせいせつびこうじ",
+    "jp": "給排水衛生設備工事",
+    "romaji": "kyuu haisui eisei setsubi kouji",
+    "id_text": "Pekerjaan sanitasi suplai air & drainase",
+    "desc": "Memasang peralatan untuk menjaga kebersihan lingkungan tempat tinggal menggunakan air dan air panas."
+  },
+  {
+    "id": 42,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "こんばあじょん",
+    "jp": "コンバージョン",
+    "romaji": "konbaajon",
+    "id_text": "Konversi bangunan",
+    "desc": "Memanfaatkan struktur bangunan yang sudah ada untuk diubah ke fungsi baru. Contoh: kantor → apartemen."
+  },
+  {
+    "id": 43,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "あとせこうあんかあ",
+    "jp": "あと施工アンカー",
+    "romaji": "ato sekou ankaa",
+    "id_text": "Angkur pasca-cor",
+    "desc": "Angkur yang dipasang pada beton yang sudah mengeras. Ada 2 jenis: 金属系 (metal) dan 接着系 (adhesive/resin)."
+  },
+  {
+    "id": 44,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "けいりょうてっこつじゅりょうてっこつ",
+    "jp": "軽量鉄骨（LGS） vs 重量鉄骨",
+    "romaji": "keiryou tekkotsu vs juryou tekkotsu",
+    "id_text": "Baja ringan (LGS <6mm) vs baja berat (≥6mm)",
+    "desc": "Baja ringan (軽量鉄骨/LGS): tebal <6mm — untuk rangka dinding/plafon. Baja berat (重量鉄骨): ≥6mm — struktur utama gedung."
+  },
+  {
+    "id": 45,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "ぶれすらあめんとらす",
+    "jp": "鉄骨構造の種類（ブレース・ラーメン・トラス）",
+    "romaji": "buresu / raamen / torasu",
+    "id_text": "Struktur baja: brace / ramen / truss",
+    "desc": "①ブレース: diagonal brace. ②ラーメン: rigid joint kolom-balok → tahan gempa. ③トラス: susunan segitiga → atap/jembatan."
+  },
+  {
+    "id": 46,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "たてにげすいへいつまげ",
+    "jp": "建て逃げ方式 vs 水平積み上げ方式",
+    "romaji": "tate nige vs suihei tsumage",
+    "id_text": "Pemasangan baja: mobile crane vs tower crane",
+    "desc": "①建て逃げ: mobile crane, dari belakang ke depan. ②水平積み上げ: tower crane, lantai per lantai → gedung pencakar langit."
+  },
+  {
+    "id": 48,
+    "category": "doboku_hoso",
+    "source": "jac-ch3",
+    "furi": "ろしょうろばんひょうそう",
+    "jp": "路床・路盤・表層（舗装工事の層構造）",
+    "romaji": "roshou / roban / hyousou",
+    "id_text": "Lapisan jalan: subgrade / base / surface",
+    "desc": "Dari bawah: ①路床 (subgrade, digali ±1m) ②路盤 (batu pecah, dipadatkan roller) ③表層 (aspal atas, tahan air)."
+  },
+  {
+    "id": 64,
+    "category": "denki",
+    "source": "jac-ch3",
+    "furi": "はいでんばん",
+    "jp": "配電盤",
+    "romaji": "haiden ban",
+    "id_text": "Panel distribusi listrik",
+    "desc": "Perangkat untuk mencabangkan catu daya dan memasok listrik ke setiap perangkat. Ada papan mandiri dan papan dinding."
+  },
+  {
+    "id": 98,
+    "category": "hoon",
+    "source": "jac-ch3",
+    "furi": "ぐらすううるだんねつざい",
+    "jp": "グラスウール断熱材",
+    "romaji": "gurasu uuru dannetsu zai",
+    "id_text": "Bahan isolasi wol kaca",
+    "desc": "KACA dilebur → serat tipis. Fleksibel, tahan panas, tidak mudah terbakar. Tersedia bentuk tabung, sabuk, & pelat."
+  },
+  {
+    "id": 99,
+    "category": "hoon",
+    "source": "jac-ch3",
+    "furi": "ろっくううるだんねつざい",
+    "jp": "ロックウール断熱材",
+    "romaji": "rokku uuru dannetsu zai",
+    "id_text": "Bahan isolasi wol batu",
+    "desc": "Basalt/andesit dilebur → serat. Ketahanan api LEBIH BAIK dari wol kaca. Juga digunakan sebagai pengisi tahan api."
+  },
+  {
+    "id": 127,
+    "category": "anzen",
+    "source": "jac-ch3",
+    "furi": "どらいわあくゑるぽいんとこうほう",
+    "jp": "ドライワーク（ウェルポイント工法）",
+    "romaji": "dorai waaku (weru pointo kouhou)",
+    "id_text": "Pekerjaan kering — metode wellpoint (max 10m)",
+    "desc": "Pipa pompa ditancapkan ke tanah, air dipompa keluar dengan pompa vakum. Kedalaman max ≈10m. Lebih dalam → ディープウェル."
+  },
+  {
+    "id": 178,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "ちすいりすい",
+    "jp": "治水（ちすい）vs 利水（りすい）",
+    "romaji": "chisui vs risui",
+    "id_text": "Pengendalian banjir vs Pemanfaatan air",
+    "desc": "Dua tujuan utama bendungan (ダム). Chisui = menampung air saat hujan lebat agar sungai tidak meluap. Risui = menyediakan air stabil untuk pertanian, industri, dan PLTA."
+  },
+  {
+    "id": 179,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "ななとむこうほう",
+    "jp": "NATM（ナトム）工法",
+    "romaji": "NATM natomu kouhou",
+    "id_text": "Metode penggalian terowongan gunung",
+    "desc": "Metode terowongan gunung: bor/ledak batuan, semprotkan beton (吹付け), pasang penopang baja dan rock bolt. Mandor:「吹付け準備して」(siapkan beton semprot)."
+  },
+  {
+    "id": 180,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "しいるどとんねるせぐめんと",
+    "jp": "シールドトンネル・セグメント",
+    "romaji": "shiirudo tonneru segumento",
+    "id_text": "Terowongan shield / segmen beton/baja",
+    "desc": "Shield machine menggali dari 立坑, lalu segmen beton/baja dipasang di belakang mesin sebagai dinding. Cocok untuk tanah lunak. Mandor:「セグメント組み立てて」(rakit segmennya)."
+  },
+  {
+    "id": 181,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "すいしんとんねる",
+    "jp": "推進トンネル（すいしんトンネル）",
+    "romaji": "suishin tonneru",
+    "id_text": "Terowongan jack-push / pipe jacking",
+    "desc": "Pipa prefabrikasi (コンクリート管・ダクタイル管・鋼管) didorong masuk ke tanah oleh jack dari shaft peluncur. Digunakan untuk infrastruktur perkotaan seperti saluran air, gas, listrik, dan komunikasi."
+  },
+  {
+    "id": 182,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "きょうりょうこうじかぶこうじょうぶこう",
+    "jp": "橋梁工事（下部工・上部工）",
+    "romaji": "kyouryou kouji kabukou vs joubukou",
+    "id_text": "Pekerjaan jembatan: struktur bawah & atas",
+    "desc": "下部工=pondasi penopang jembatan. 上部工=badan jembatan untuk kendaraan/pejalan kaki. Mandor:「下部工の検査入ります」(inspeksi struktur bawah)."
+  },
+  {
+    "id": 183,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "かいようどぼくこうじ",
+    "jp": "海洋土木工事（かいようどぼく）",
+    "romaji": "kaiyou doboku kouji",
+    "id_text": "Pekerjaan sipil laut / offshore civil work",
+    "desc": "Pembangunan pelabuhan, bandara, terowongan bawah laut, jembatan laut, dan turbin angin di laut. Menggunakan kapal kerja (作業船) untuk mengeruk atau mengangkat material, serta penyelam (潜水士)."
+  },
+  {
+    "id": 184,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "しゅんせつこうじ",
+    "jp": "浚渫工事（しゅんせつ）",
+    "romaji": "shunsetsu kouji",
+    "id_text": "Pengerukan dasar laut/sungai",
+    "desc": "Mengangkat lumpur dan pasir dari dasar laut atau sungai menggunakan kapal keruk (浚渫船) agar kapal dapat berlayar dengan aman di jalur pelayaran dan sandar di pelabuhan."
+  },
+  {
+    "id": 185,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "けえそん",
+    "jp": "ケーソン（防波堤工事）",
+    "romaji": "keeson",
+    "id_text": "Caisson / kotak beton untuk pemecah gelombang",
+    "desc": "Kotak beton besar yang diletakkan di atas hamparan batu di dasar laut, lalu diisi pasir/kerikil untuk menstabilkan. Digunakan dalam pembuatan pemecah gelombang (防波堤)."
+  },
+  {
+    "id": 186,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "けんちくぶつのこうぞうしゅるい",
+    "jp": "建築物の構造種類（RC・S・SRC・木造・CB造）",
+    "romaji": "kenchikubutsu no kouzou shurui",
+    "id_text": "Jenis struktur: RC, S, SRC, kayu, blok beton",
+    "desc": "RC造=tulangan+beton, S造=baja, SRC造=baja+RC (terkuat), 木造=kayu, CB造=blok beton. Mandor:「ここはS造だから溶接確認して」(ini S造, cek las)."
+  },
+  {
+    "id": 187,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "ぼおりんぐちょうさしじそう",
+    "jp": "ボーリング調査・支持層（しじそう）",
+    "romaji": "booringu chousa shijisou",
+    "id_text": "Penyelidikan tanah / lapisan pendukung pondasi",
+    "desc": "Pengeboran tanah (ボーリング) untuk menemukan lapisan keras (支持層) tempat ujung tiang harus mencapai. Juga deteksi rintangan bawah tanah. Mandor:「支持層まで何mか確認して」(cek kedalaman lapisan keras)."
+  },
+  {
+    "id": 188,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "やまどめこうじしほこう",
+    "jp": "山留め工事（やまどめ）・支保工（しほこう）",
+    "romaji": "yamadome kouji shihokou",
+    "id_text": "Pekerjaan penahan tanah / shoring",
+    "desc": "Dinding sementara di dalam tanah untuk cegah longsor saat penggalian, diperkuat strutting (支保工). Mandor:「山留めの切梁確認して」(cek strut penahan tanah)."
+  },
+  {
+    "id": 189,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "くいこうじばしょうちくいきせいくい",
+    "jp": "杭工事",
+    "romaji": "kui kouji basho uchi kui vs kisei kui",
+    "id_text": "Pekerjaan tiang: cast-in-place vs precast",
+    "desc": "場所打ち杭=lubang digali, rangka tulangan dipasang, beton dicor di tempat. 既成杭=tiang pabrik (beton/baja/kayu) dipancang. Mandor:「既成杭の搬入確認して」(cek tiang pabrik masuk)."
+  },
+  {
+    "id": 190,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "たいしんせいしんめんしん",
+    "jp": "耐震・制振・免振（たいしん・せいしん・めんしん）",
+    "romaji": "taishin seishin menshin",
+    "id_text": "Tahan gempa / kontrol getaran / isolasi gempa",
+    "desc": "耐震 = kolom/balok dibuat kokoh untuk menahan guncangan. 制振 = damper dipasang di bangunan untuk menyerap energi getaran. 免振 = isolator + damper di fondasi agar energi gempa tidak tersalur ke bangunan."
+  },
+  {
+    "id": 191,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "ねぎり",
+    "jp": "根切り（ねぎり）",
+    "romaji": "negiri",
+    "id_text": "Galian pondasi bangunan",
+    "desc": "Penggalian tanah di lokasi pondasi bangunan agar struktur bawah tanah bisa dibangun. Berbeda dari galian umum — 根切り spesifik untuk menanam fondasi gedung."
+  },
+  {
+    "id": 192,
+    "category": "anzen",
+    "source": "jac-ch3",
+    "furi": "はっぱ",
+    "jp": "発破（はっぱ）",
+    "romaji": "happa",
+    "id_text": "Peledakan / blasting",
+    "desc": "Peledakan batu menggunakan bahan peledak (火薬類) dalam pekerjaan tambang, terowongan, atau galian batu. Untuk mengerjakan peledakan, wajib memiliki lisensi 発破技士."
+  },
+  {
+    "id": 193,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "もりどきりど",
+    "jp": "盛り土（もりど）vs 切り土（きりど）",
+    "romaji": "morido vs kirido",
+    "id_text": "Penimbunan vs penggalian untuk meratakan lahan",
+    "desc": "盛り土 = tanah ditimbun pada lahan miring atau tidak rata agar menjadi datar. 切り土 = tanah dipotong/digali agar permukaan menjadi rata. Keduanya adalah bagian dari pekerjaan tanah (土工作業)."
+  },
+  {
+    "id": 194,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "うめもどしさぎょう",
+    "jp": "埋め戻し作業（うめもどし）",
+    "romaji": "umemodoshi sagyou",
+    "id_text": "Pekerjaan pengurugan kembali",
+    "desc": "Setelah pekerjaan bawah tanah atau fondasi selesai, ruang kosong di sekitar struktur ditimbun kembali dengan tanah. Ini adalah tahap akhir dari pekerjaan galian."
+  },
+  {
+    "id": 195,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "さくせいこうじしゅるい",
+    "jp": "さく井工事の4種類（水源・観測・温泉・地熱）",
+    "romaji": "sakusei kouji 4 shurui",
+    "id_text": "4 jenis pekerjaan pengeboran sumur",
+    "desc": "①水源井=air tanah. ②観測井=pantau penurunan tanah. ③温泉井=500〜1000m, bahaya gas. ④地熱井=±2000m, bahaya uap+panas. Mandor:「掘削深度の記録つけて」(catat kedalaman bor)."
+  },
+  {
+    "id": 196,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "ぢいぷうえる",
+    "jp": "ディープウェル（深井戸排水）",
+    "romaji": "diipu ueru",
+    "id_text": "Deep well dewatering / drainase sumur dalam",
+    "desc": "Metode pemompaan air tanah untuk galian di kedalaman >10m. Berbeda dari wellpoint (id:151) yang hanya efektif hingga ~10m. Untuk air tanah sangat dalam, ディープウェル adalah solusinya."
+  },
+  {
+    "id": 197,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "とびこうじのしゅるい",
+    "jp": "とび工事の種類",
+    "romaji": "tobi kouji no shurui",
+    "id_text": "Jenis pekerjaan tobi / rigger-scaffolder",
+    "desc": "足場とび=perancah, 鉄骨とび=rangka baja, 橋梁とび=jembatan, 重量とび=mesin berat, 送電とび=menara listrik, 町場とび=rumah. Mandor:「足場の点検してくれ」(cek perancah)."
+  },
+  {
+    "id": 198,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "てっきんつぎてこうじしゅるい",
+    "jp": "鉄筋継手工事の4種類（てっきんつぎて）",
+    "romaji": "tekkin tsugite kouji 4 shurui",
+    "id_text": "4 metode penyambungan tulangan baja",
+    "desc": "①ガス圧接 = dipanaskan + ditekan (paling umum). ②溶接継手 = arc welding untuk diameter besar. ③機械式継手 = penyambung berulir (coupler). ④重ね接手 = ditumpuk lalu disatukan dengan beton (untuk tulangan tipis)."
+  },
+  {
+    "id": 199,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "ようせつぶんるいゆうせつあっせつろうせつ",
+    "jp": "溶接の3分類（融接・圧接・ろう接）",
+    "romaji": "yousetsu 3 bunrui: yuusetsu assetsu rousetsu",
+    "id_text": "3 kategori pengelasan: fusion / pressure / brazing",
+    "desc": "融接=material dilelehkan (arc/gas/laser). 圧接=dipanaskan+ditekan tanpa cair, contoh: ガス圧接 tulangan. ろう接=logam penghubung bersuhu leleh rendah sebagai lem. Mandor:「融接箇所の検査します」(inspeksi las lebur)."
+  },
+  {
+    "id": 200,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "かたわくこうじしほこう",
+    "jp": "型枠工事・支保工（かたわく・しほこう）",
+    "romaji": "katawaku kouji shihokou",
+    "id_text": "Pekerjaan bekisting dan penopangnya",
+    "desc": "Cetakan kayu (型枠) melingkupi tulangan, beton dicor, diperkuat pipa baja luar (支保工). Setelah mengeras, dibongkar dan dipakai ulang. Mandor:「型枠の締め付け確認して」(cek pengencangan bekisting)."
+  },
+  {
+    "id": 201,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "れぢみくすどこんくりいとなまこんあっそう",
+    "jp": "レディミクスドコンクリート（生コン）",
+    "romaji": "redimikusudo konkuriito namakon assou",
+    "id_text": "Ready-mix concrete dan pemompaan beton",
+    "desc": "Beton berkualitas dari pabrik (生コン) dikirim truk molen (トラックアジテータ), lalu dipompa ke bekisting. Mandor:「生コン到着したら圧送開始して」(beton datang, mulai pompa)."
+  },
+  {
+    "id": 202,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "ばいぶれえたこんくりいとしめかため",
+    "jp": "バイブレータ（コンクリート締固め）",
+    "romaji": "baibureeta konkuriito shimekatame",
+    "id_text": "Vibrator untuk pemadatan beton",
+    "desc": "Alat getar dimasukkan ke beton segar untuk hilangkan gelembung (気泡) dan pastikan beton isi sudut bekisting (締固め). Mandor:「バイブレータちゃんと入れて、気泡抜いて」(masukkan vibrator, keluarkan gelembung)."
+  },
+  {
+    "id": 203,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "さかんこうじかべつちしっくいもるたる",
+    "jp": "左官工事（さかん）",
+    "romaji": "sakan kouji kabetsuchi shikkui morutaru",
+    "id_text": "Pekerjaan plesteran tradisional Jepang",
+    "desc": "Gunakan kote (roskam) untuk oleskan 壁土, 漆喰 (kapur), atau モルタル ke dinding/lantai. Berbeda dari painting (塗装). Mandor:「左官さん、仕上げはいつですか」(kapan finishing plester)."
+  },
+  {
+    "id": 204,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "ぼうすいこうじしゅるい",
+    "jp": "防水工事の5種類",
+    "romaji": "bousui kouji 5 shurui",
+    "id_text": "5 jenis pekerjaan waterproofing",
+    "desc": "①ウレタン=cairan, cocok area rumit. ②FRP=serat kaca+resin. ③シート=lembaran karet. ④アスファルト=tempel lembaran aspal. ⑤シーリング=sealant isi celah. Mandor:「プライマー塗ってから施工して」(oleskan primer dulu)."
+  },
+  {
+    "id": 205,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "みやだいく",
+    "jp": "宮大工（みやだいく）",
+    "romaji": "miyadaiku",
+    "id_text": "Tukang kayu kuil & shrine tradisional",
+    "desc": "Spesialis bangun/renovasi kuil (お寺) dan shrine (神社). Butuh ilmu jenis kayu dan sambungan kayu agar tahan ratusan tahun. Mandor:「仕口の加工、寸法確認して」(cek ukuran sambungan kayu)."
+  },
+  {
+    "id": 206,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "あまじまい",
+    "jp": "雨仕舞（あまじまい）",
+    "romaji": "amajimai",
+    "id_text": "Penanganan air hujan / rain detailing",
+    "desc": "Pengetahuan dan teknik konstruksi untuk mencegah air hujan masuk ke dalam bangunan melalui atap dan sambungan material. Merupakan kompetensi wajib dalam pekerjaan atap (屋根工事) dan panel baja (建築板金工事)."
+  },
+  {
+    "id": 207,
+    "category": "denki",
+    "source": "jac-ch3",
+    "furi": "がいせんこうじないせんこうじ",
+    "jp": "外線工事 vs 内線工事（がいせん・ないせん）",
+    "romaji": "gaisen kouji vs naisen kouji",
+    "id_text": "Instalasi listrik luar gedung vs dalam gedung",
+    "desc": "外線=hubungkan tiang/kabel ke gedung. 内線=listrik dalam gedung: grounding, panel, AC. Gedung besar butuh 電気工事士一種. Mandor:「内線の配線図もってきて」(bawa gambar kabel dalam gedung)."
+  },
+  {
+    "id": 208,
+    "category": "anzen",
+    "source": "jac-ch3",
+    "furi": "たまがけいじょうわぎのうこうしゅう",
+    "jp": "玉掛け（たまがけ）",
+    "romaji": "tamagake 1t ijou wa ginou koushuu",
+    "id_text": "Rigging (ikat beban crane): ≥1t wajib teknik",
+    "desc": "玉掛け=ikat beban ke kait crane. ≥1t wajib 技能講習. <1t cukup 特別教育. Kesalahan rigging bisa menyebabkan beban jatuh fatal. Mandor:「玉掛け資格ある人でやって」(kerjakan oleh pemegang sertifikat)."
+  },
+  {
+    "id": 209,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "しかくしゅるいこっかめんきょぎのうこうしゅうとくべつきょういく",
+    "jp": "資格の3種類：国家免許・技能講習・特別教育",
+    "romaji": "shikaku 3 shurui: kokka menkyo ginou koushuu tokubetsu kyouiku",
+    "id_text": "3 tingkat kualifikasi K3 konstruksi Jepang",
+    "desc": "①国家免許=lisensi negara (クレーン運転士 dll). ②技能講習修了証=lulus pelatihan terdaftar. ③特別教育=pelatihan khusus sebelum tugas berbahaya. Mandor:「この作業、技能講習持ってる人ですか」(punya sertifikat teknik?)."
+  },
+  {
+    "id": 210,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "はっぱぎしめんきょ",
+    "jp": "発破技士免許（はっぱぎし）",
+    "romaji": "happa gishi menkyo",
+    "id_text": "Lisensi juru peledak / blaster license",
+    "desc": "Untuk peledakan (発破) di konstruksi/tambang, wajib lisensi negara 発破技士. Tugas: bor, pasang bahan peledak, sambung kawat, nyalakan, tangani gagal ledak. Mandor:「発破技士いますか」(ada juru peledak?)."
+  },
+  {
+    "id": 211,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "かいたいこうじあべすとたいさく",
+    "jp": "解体工事（かいたい）",
+    "romaji": "kaitai kouji asbesuto taisaku",
+    "id_text": "Pekerjaan pembongkaran bangunan + penanganan asbes",
+    "desc": "アスベスト対策。Sebelum bongkar, survei asbes (石綿) wajib. Jika ada, dibongkar prosedur khusus. Limbah (解体ガラ) dipilah: beton, besi, berbahaya. Mandor:「石綿調査の結果出ましたか」(hasil survei asbes keluar?)."
+  },
+  {
+    "id": 212,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "とそうこうじほうほうはけろおらあえあすぷれえ",
+    "jp": "塗装工事の3方法（はけ・ローラー・エアスプレー）",
+    "romaji": "tosou kouji 3 houhou: hake rooraa easupuree",
+    "id_text": "3 metode cat: kuas / roller / semprotan",
+    "desc": "①はけ塗り=kuas, cocok bentuk apapun, hasil rapi. ②ローラー=efisien area luas. ③エアスプレー=cat dikabut kompresor, untuk area luas/sulit. Mandor:「外壁はローラーで仕上げて」(dinding luar pakai roller)."
+  },
+  {
+    "id": 213,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "ぞおえんこうじしゅるい",
+    "jp": "造園工事の5種類",
+    "romaji": "zooen kouji 5 shurui",
+    "id_text": "5 jenis pekerjaan taman/lansekap",
+    "desc": "①植栽=tanam pohon. ②屋上緑化=hijau atap/dinding gedung. ③広場=lapangan. ④公園設備=gazebo, air mancur. ⑤緑地育成=perbaikan tanah+penyangga pohon. Mandor:「植栽の配置図確認して」(cek layout tanam pohon)."
+  },
+  {
+    "id": 214,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "けいてんこうじぼおどはりくろすはり",
+    "jp": "軽天工事（けいてん）・LGS",
+    "romaji": "keiten kouji LGS boodo hari kurosu hari",
+    "id_text": "Pekerjaan rangka LGS + papan gypsum + wallpaper",
+    "desc": "LGS (Light Gauge Steel/スタッド) untuk rangka dinding/plafon (軽天工事). Di atasnya papan gypsum (ボード貼り), sambungan dirapikan pate, lalu wallpaper (クロス貼り). Mandor:「LGSのピッチ確認して」(cek jarak rangka LGS)."
+  },
+  {
+    "id": 215,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "かばあこうほうさしかいしゅう",
+    "jp": "カバー工法（サッシ改修）",
+    "romaji": "kabaa kouhou sashi kaishuu",
+    "id_text": "Renovasi kusen tanpa bongkar rangka lama",
+    "desc": "カバー工法=pasang rangka baru DI ATAS rangka lama tanpa bongkar, lalu pasang sash baru. Hemat vs ganti total. Mandor:「カバー工法で行きましょう」(pakai metode cover saja)."
+  },
+  {
+    "id": 216,
+    "category": "anzen",
+    "source": "jac-ch3",
+    "furi": "たいるはりこうじらっかりすくたしょくしゅれんけい",
+    "jp": "タイル張り工事",
+    "romaji": "tairu hari kouji rakka risuku ta-shokushu renkei",
+    "id_text": "Pekerjaan ubin: risiko jatuh & koordinasi lintas",
+    "desc": "Ubin jatuh dari ketinggian berpotensi fatal. Koordinasi pipa (配管) dan listrik wajib sebelum tempel ubin. Mandor:「配管確認してから貼って」(cek pipa dulu baru tempel ubin)."
+  },
+  {
+    "id": 217,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "いしこうじだいりいしみかげいしぎいし",
+    "jp": "石工事",
+    "romaji": "ishi kouji dairiishi mikageishi giishi",
+    "id_text": "Pekerjaan batu: marmer, granit, batu artifisial",
+    "desc": "大理石=marmer, 御影石=granit, 擬石=batu tiruan dipasang ke bangunan (estetika, bukan struktur). Batu yang retak saat proses tidak bisa dipakai. Mandor:「大理石、割れないよう慎重に」(hati-hati jangan sampai marmer retak)."
+  },
+  {
+    "id": 218,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "かいさくとんねる",
+    "jp": "開削トンネル（かいさくトンネル）",
+    "romaji": "kaisaku tonneru",
+    "id_text": "Cut-and-cover tunnel / terowongan gali-tutup",
+    "desc": "Tanah digali dari permukaan, terowongan dibangun dalam galian, lalu ditimbun kembali. Berbeda dari shield yang menggali horizontal. Mandor:「土留め支保工の点検して」(cek dinding penahan tanah)."
+  },
+  {
+    "id": 219,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "のりめんこうじもるたるふきつけしょくせいこうほう",
+    "jp": "法面工事（のりめん）",
+    "romaji": "norimenkouji morutaru fukitsuke shokusei kouhou",
+    "id_text": "Perkuatan lereng: semprotan mortar & revegetasi",
+    "desc": "①モルタル吹付け=mortar disemprot ke lereng untuk stabilisasi. ②植生工法=mat benih+pupuk ditempel agar tanaman tumbuh menahan tanah. Mandor:「吹付けの厚さ確認して」(cek ketebalan semprotan mortar)."
+  },
+  {
+    "id": 220,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "かせんかいがんこうぞうぶつぼうはていぼうちょうていごがんていぼうすいろ",
+    "jp": "河川・海岸の構造物",
+    "romaji": "kasen kaigan kouzoubutsu: bouhatei bouchoutei gogan teibou suiro",
+    "id_text": "Struktur sungai & pantai: tanggul, turap, saluran",
+    "desc": "防波堤=pecah gelombang pelabuhan. 防潮堤=tahan tsunami. 護岸=turap tepi sungai. 堤防=tanggul banjir. 水路=saluran irigasi/drainase. Mandor:「護岸の法面点検して」(cek lereng turap)."
+  },
+  {
+    "id": 221,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "てつどうこうじたしょくしゅしゅうやくこうじ",
+    "jp": "鉄道工事（てつどう）",
+    "romaji": "tetsudou kouji ta-shokushu shuuyaku kouji",
+    "id_text": "Pekerjaan rel: gabungan semua keahlian konstruksi",
+    "desc": "多職種集約工事。Pekerjaan kereta mencakup hampir SEMUA jenis konstruksi: 土木+電気設備+建築+spesialis. Ini yang membuat kereta jadi proyek paling kompleks. Mandor:「各職種の工程調整してくれ」(koordinasi jadwal semua profesi)."
+  },
+  {
+    "id": 222,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "じょうげすいどうこうじじょうすいじょうげすいしょりじょう",
+    "jp": "上下水道工事",
+    "romaji": "jouge suidou kouji jousui jou gesui shori jou",
+    "id_text": "Instalasi air bersih & kotor: treatment plant",
+    "desc": "上水道: sungai→浄水場→pipa→rumah. 下水道: air kotor→下水処理場→sungai/laut. Termasuk pekerjaan lahan dan instalasi pipa. Mandor:「管の勾配ちゃんと確認して」(cek kemiringan pipa)."
+  },
+  {
+    "id": 223,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "さいがいふっきゅうこうじ",
+    "jp": "災害復旧工事（さいがいふっきゅう）",
+    "romaji": "saigai fukkyuu kouji",
+    "id_text": "Pekerjaan pemulihan bencana",
+    "desc": "Jepang rutin mengalami kerusakan akibat topan, hujan, gempa. 災害復旧=perbaiki fasilitas sipil (sungai, jalan, pelabuhan) yang rusak dengan cepat. Mandor:「早急に復旧工事に取り掛かれ」(segera mulai perbaikan)."
+  },
+  {
+    "id": 224,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "くれえんいどうしきくれえんしかくしきい",
+    "jp": "クレーン・移動式クレーン資格",
+    "romaji": "kureen idoushiki kureen shikaku shikii 5t 1t",
+    "id_text": "Lisensi crane: batas 5t dan 1t",
+    "desc": "クレーン: ≥5t→免許, 1〜5t→技能講習. 移動式: ≥5t→免許. 玉掛け: ≥1t→技能講習, <1t→特別教育. Angka kunci: 5t (免許) dan 1t (玉掛け). Mandor:「何トン吊りですか、資格確認して」(berapa ton angkat, cek lisensi)."
+  },
+  {
+    "id": 225,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "こうしょさぎょうしゃしかくきょうかい",
+    "jp": "高所作業車の資格境界",
+    "romaji": "kousho sagyousha shikaku kyoukai 10m",
+    "id_text": "Kendaraan ketinggian: ≥10m teknik, <10m khusus",
+    "desc": "作業床 ≥10m → 技能講習修了者. 作業床 <10m → 特別教育修了者. Angka kunci: 10m. Mandor:「高所作業車、10m以上なら技能講習ね」(≥10m butuh teknik)."
+  },
+  {
+    "id": 226,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "しゃりょうけいけんせつきかいしかくきょうかい",
+    "jp": "車両系建設機械の資格境界",
+    "romaji": "sharyoukei kensetsu kikai shikaku kyoukai 3t",
+    "id_text": "Alat berat: ≥3t teknik, <3t pendidikan khusus",
+    "desc": "Buldoser, backhoe, dll: 機体重量 ≥3t → 技能講習. <3t → 特別教育. Angka kunci: 3t. Berlaku mesin gali, angkut, bongkar. Mandor:「機体重量3t以上は技能講習持ってる人で」(≥3t harus bersertifikat)."
+  },
+  {
+    "id": 227,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "がすようせつさぎょうしゅにんしゃめんきょああくようせつさぎょうしゃとくべつきょういく",
+    "jp": "ガス溶接・アーク溶接の資格",
+    "romaji": "gasu yousetsu sagyou shuninsha menkyo vs aaku yousetsu sagyousha tokubetsu kyouiku",
+    "id_text": "Las gas: lisensi / Las arc: pendidikan khusus",
+    "desc": "ガス溶接作業主任者=免許(negara). ガス溶接作業者=技能講習. アーク溶接作業者=特別教育. Hierarki: 主任者>作業者. Mandor:「ガス溶接の主任者は免許持ってますよね」(pengawas las gas punya lisensi?)."
+  },
+  {
+    "id": 228,
+    "category": "haikan",
+    "source": "jac-ch3",
+    "furi": "れいとうくうきちょうわききこうじだいひょうきき",
+    "jp": "冷凍空気調和機器工事の代表機器",
+    "romaji": "reitou kuuki chouwa kiki kouji daihyou kiki",
+    "id_text": "Mesin utama dalam pekerjaan AC/refrigerasi",
+    "desc": "Termasuk: エアコン (rumah+komersial), 冷凍庫, パッケージ型/セパレート型空調, 業務用冷凍冷蔵庫, ショーケース, 輸送用冷凍ユニット. Pekerja perlu skill配管 (銅管加工) karena pekerjaan ini mencakup juga instalasi refrigerant piping."
+  },
+  {
+    "id": 229,
+    "category": "shoubou",
+    "source": "jac-ch3",
+    "furi": "しょうぼうせつびぶんるいしょうかけいほうひなん",
+    "jp": "消防設備の3分類（消火・警報・避難）",
+    "romaji": "shoubou setsubi 3 bunrui: shouka keihou hinan",
+    "id_text": "3 kategori peralatan pemadam kebakaran wajib UU",
+    "desc": "①消火設備=sprinkler, hidran. ②警報設備=detektor asap, alarm. ③避難設備=perosotan, tangga evakuasi. Ketiganya wajib dipasang dan dirawat per 消防法. Mandor:「消防設備の点検記録見せて」(tunjukkan catatan inspeksi pemadam)."
+  },
+  {
+    "id": 230,
+    "category": "setsubi_kougu",
+    "source": "jac-ch3",
+    "furi": "かくしゅろのしゅるいちくろこうじしょうさい",
+    "jp": "各種炉の種類（築炉工事詳細）",
+    "romaji": "kakushu ro no shurui chikuro kouji shousai",
+    "id_text": "Jenis-jenis tungku dalam pekerjaan chikuro",
+    "desc": "焼却炉=incinerator. キューポラ=lebur besi. 焼鈍炉=ratakan logam. 脱臭炉=hilang bau gas. アルミ溶解炉=lebur alumunium. バイオマスボイラー=bakar kayu. 電気炉=induksi. Mandor:「炉の内壁点検して」(cek dinding tungku)."
+  },
+  {
+    "id": 231,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "きかいどこうこうじだいひょうきかいぶるどおざあゆあつしょべるほいいるろおだあ",
+    "jp": "機械土工事の代表機械",
+    "romaji": "kikai dokou kouji daihyou kikai: burudoozaa yuatsu shoberu hoiiruroodaa",
+    "id_text": "Alat berat tanah: buldoser, excavator, loader",
+    "desc": "ブルドーザ=dorong tanah. 油圧ショベル=gali+muat ke dump truck. ホイールローダ=muat material. クラムシェル=gali bawah air. Mandor:「ショベルで掘って、すぐローダに積んで」(gali lalu muat)."
+  },
+  {
+    "id": 232,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "うめたてこうじがんぺきこうじ",
+    "jp": "埋立工事 vs 岸壁工事（うめたて・がんぺき）",
+    "romaji": "umetate kouji vs ganpeki kouji",
+    "id_text": "Reklamasi laut vs Konstruksi dermaga kapal",
+    "desc": "埋立=tanah pengerukan ditimbun ke laut untuk lahan baru (bandara, industri). 岸壁=dermaga kapal pakai sheet pile baja (鋼矢板) dan tiang. Mandor:「鋼矢板の打設確認して」(cek sheet pile)."
+  },
+  {
+    "id": 233,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "けんちくきじゅんほうたいしんきじゅんしんどきょうきょう",
+    "jp": "建築基準法の耐震基準",
+    "romaji": "kenchiku kijunhou taishin kijun: shindo 5kyou / 6kyou-7",
+    "id_text": "Standar tahan gempa UU Bangunan: 5kuat & 6kuat-7",
+    "desc": "震度5強→機能保持(tetap berfungsi). 震度6強〜7→倒壊しない(tidak runtuh). Angka kunci: 5強 dan 6強〜7. Mandor:「耐震補強の設計確認して」(cek desain penguatan tahan gempa)."
+  },
+  {
+    "id": 234,
+    "category": "doboku_hoso",
+    "source": "jac-ch3",
+    "furi": "ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ",
+    "jp": "舗装の4層",
+    "romaji": "housou 4sou: roshou roban kisou hyousou asufuruto finisshaa",
+    "id_text": "4 lapisan jalan: subgrade/base/binder/wearing",
+    "desc": "①路床=dasar terbawah. ②路盤=batu pecah dipadatkan. ③基層=aspal pertama (アスファルトフィニッシャー). ④表層=aspal atas, tahan air. Mandor:「路盤の締固め確認してから基層打って」(cek kepadatan base dulu)."
+  },
+  {
+    "id": 235,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "くいのざいりょうしゅるいきくいこうくいこんくりいとくい",
+    "jp": "杭の材料3種",
+    "romaji": "kui no zairyou 3 shurui: ki-kui kou-kui konkuriito-kui",
+    "id_text": "3 material tiang pondasi: kayu / baja / beton",
+    "desc": "木杭=kayu (tanah lunak). 鋼杭=baja (kuat, dalam). コンクリート杭=paling umum: 場所打ち atau 既成 (pabrik). Pilih per kondisi tanah, kedalaman支持層, kebisingan. Mandor:「支持層まで何mか報告して」(laporkan kedalaman keras)."
+  },
+  {
+    "id": 236,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "こんくりいとあっそうこうじやくちいむわあく",
+    "jp": "コンクリート圧送工事の3役チームワーク",
+    "romaji": "konkuriito assou kouji 3yaku chiimuwaaku",
+    "id_text": "3 peran tim pengecoran: pompa/selang/pemadatan",
+    "desc": "①操作オペレータ=operasikan pompa. ②筒先作業員=arahkan ujung selang ke bekisting. ③土工作業員=operasikan バイブレータ (締固め). Harus sinkron karena 生コン mulai mengeras. Mandor:「3人ちゃんと連携してくれ」(3 orang harus sinkron)."
+  },
+  {
+    "id": 237,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "さかんしあげとぎだしあらいだし",
+    "jp": "左官仕上げ",
+    "romaji": "sakan shiage: togidashi vs araidashi",
+    "id_text": "Finishing plester: poles batu vs cuci permukaan",
+    "desc": "研ぎ出し=permukaan dipoles hingga rata mengkilap. 洗い出し=batu hias (種石) dicampur semen, ditempel, dicuci sikat agar batu menonjol. Butuh teknik tinggi. Mandor:「洗い出し仕上げ、丁寧にやって」(cuci permukaan teliti)."
+  },
+  {
+    "id": 238,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "ざいらいじくぐみこうほうもくぞうじゅうたく",
+    "jp": "在来軸組工法（ざいらいじくぐみ）",
+    "romaji": "zairaijikugumi kouhou — mokuzou juutaku",
+    "id_text": "Rangka kayu tradisional Jepang — metode dominan",
+    "desc": "Metode kayu paling umum di Jepang: kolom (柱) dan balok (梁) dirakit sebagai rangka struktural. 工務店 tangani semua: desain, kayu, konstruksi. Mandor:「柱と梁の接合部確認して」(cek sambungan kolom-balok)."
+  },
+  {
+    "id": 239,
+    "category": "setsubi_kougu",
+    "source": "jac-ch3",
+    "furi": "だくとしゅるいはいえんくうちょうはいき",
+    "jp": "ダクトの3種類",
+    "romaji": "dakuto 3 shurui: haien kuuchou haiki",
+    "id_text": "3 jenis duct: asap kebakaran/AC/pembuangan",
+    "desc": "排煙ダクト=buang asap kebakaran. 空調ダクト=distribusi udara AC. 排気ダクト=buang panas/bau mesin/toilet. Dibuat dari lembaran logam (建築板金工事). Mandor:「排煙ダクトの気密テストして」(tes kedap duct asap)."
+  },
+  {
+    "id": 240,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "たてぐのざいりょうしゅるいしゃったあじどうどあ",
+    "jp": "建具の材料種類 + シャッター・自動ドア",
+    "romaji": "tategu no zairyou shurui + shattaa jidou doa",
+    "id_text": "Material kusen/pintu + shutter & pintu otomatis",
+    "desc": "建具=semua pemasangan di bukaan (pintu, jendela, fusuma, shoji). Material: 木製・アルミ・樹脂・鋼・ステンレス. Termasuk シャッター dan 自動ドア取付工事. Mandor:「建具の建て付け調整して」(sesuaikan pasang kusen/pintu)."
+  },
+  {
+    "id": 241,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "でんきこうじしいっしゅにしゅおおがたしせついっしゅ",
+    "jp": "電気工事士（一種・二種）",
+    "romaji": "denki koujishi isshu vs nishu: oogata shisetsu → isshu",
+    "id_text": "Lisensi teknisi listrik: kelas 1 vs kelas 2",
+    "desc": "二種=rumah/kecil (600V以下). 一種=gedung besar, pabrik, tegangan tinggi — wajib. Kerja tanpa lisensi = pelanggaran hukum. Mandor:「高圧工事は一種持ちでやって」(tegangan tinggi harus kelas 1)."
+  },
+  {
+    "id": 242,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "こうじたんにんしゃでんきつうしんしゅにんぎじゅつしゃ",
+    "jp": "工事担任者・電気通信主任技術者",
+    "romaji": "kouji tanninsha denki tsuushin shunin gijutsusha",
+    "id_text": "Lisensi telekomunikasi: penanggung jawab & teknis",
+    "desc": "Kesalahan instalasi telekomunikasi bisa sebabkan gangguan jaringan masif. ①工事担任者 dan ②電気通信主任技術者 adalah lisensi wajib — bukan sekadar 特別教育. Mandor:「工事担任者の資格証確認させて」(lihat sertifikat penanggung jawab)."
+  },
+  {
+    "id": 243,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "ごんどらそうさとくべつきょういくこうそうびるがいへきさぎょう",
+    "jp": "ゴンドラ操作",
+    "romaji": "gondora sousa → tokubetsu kyouiku: kousou biru gaiheki sagyou",
+    "id_text": "Gondola gedung tinggi → wajib pendidikan khusus",
+    "desc": "特別教育（高層ビルの外壁作業）。ゴンドラ=platform gantung untuk dinding luar gedung tinggi. Wajib 特別教育. Berbeda dari 高所作業車 yang berjalan di darat. Mandor:「ゴンドラ作業、特別教育受けてる人ですか」(sudah pelatihan khusus?)."
+  },
+  {
+    "id": 244,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "さんそけつぼうきけんさぎょうしゅにんしゃぎのうこうしゅうまんほおるちかどう",
+    "jp": "酸素欠乏危険作業主任者",
+    "romaji": "sanso ketsubou kiken sagyou shuninsha: ginou koushuu — manhooru chikadou",
+    "id_text": "Pengawas kerja O₂ rendah → wajib pelatihan teknik",
+    "desc": "技能講習（マンホール・地下道）。Manhole/tunnel = risiko 酸素欠乏症 dan 硫化水素中毒. Pengawas (作業主任者) wajib 技能講習. Pekerja biasa wajib 特別教育. Mandor:「地下道に入る前、酸欠の確認して」(cek kadar oksigen sebelum masuk)."
+  },
+  {
+    "id": 245,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "いしわたあすべすととりあつかいさぎょうしゃとくべつきょういく",
+    "jp": "石綿（アスベスト）取り扱い作業者",
+    "romaji": "ishiwata asubesuto toriatsukai sagyousha → tokubetsu kyouiku",
+    "id_text": "Pekerja asbes saat bongkar bangunan → khusus wajib",
+    "desc": "Bangunan lama mengandung 石綿 (asbes) dibongkar sangat hati-hati. Pekerja wajib 特別教育修了者 (石綿則第27条). Berbeda dari 石綿作業主任者 yang perlu 技能講習. Mandor:「石綿は飛散しないよう防護してくれ」(lindungi agar asbes tidak beterbangan)."
+  },
+  {
+    "id": 246,
+    "category": "hourei",
+    "source": "jac-ch3",
+    "furi": "ゆうきようざいさぎょうしゅにんしゃぎのうこうしゅうしつないたんく",
+    "jp": "有機溶剤作業主任者",
+    "romaji": "yuuki youzai sagyou shuninsha → ginou koushuu: shitsunai tanku",
+    "id_text": "Pengawas pelarut organik → wajib pelatihan teknik",
+    "desc": "技能講習（室内タンク等）。Bekerja dengan 有機溶剤 di ruang dalam/tangki bisa sebabkan keracunan. Pengawas wajib 技能講習. Berlaku kadar pelarut >5%. Mandor:「有機溶剤使う前に換気して」(ventilasi dulu)."
+  },
+  {
+    "id": 247,
+    "category": "doboku_haisui",
+    "source": "jac-ch3",
+    "furi": "おんせんせいちねつせいふかさときけんせい",
+    "jp": "温泉井 vs 地熱井",
+    "romaji": "onsensei vs chinetsusei: fukasa to kikensei 500-1000m / 2000m",
+    "id_text": "Sumur panas vs panas bumi: kedalaman & bahaya",
+    "desc": "温泉井=500〜1000m, bahaya: gas alam keluar saat bor → perlu izin. 地熱井=±2000m (terdalam), bahaya: 熱水・蒸気・有害物質 → keahlian tertinggi. Mandor:「掘削中はガス検知器つけといて」(pasang detektor gas selama pengeboran)."
+  },
+  {
+    "id": 248,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "ふきつけうれたんせこうまえけんさっいたせこうちゅうかくにんかんかく",
+    "jp": "吹付けウレタン",
+    "romaji": "fukitsuke uretan: sekou mae kensa 450mm ita · sekou chuu kakunin 4-5m kankaku",
+    "id_text": "QC uretan semprot: uji papan + ukur ketebalan",
+    "desc": "Sebelum施工: semprotkan ke papan 450mm×450mm, cek kepadatan busa. Selama施工: tiap 4〜5m ukur ketebalan. Permukaan beton wajib bersih. Mandor:「施工前確認板、見せて」(tunjukkan papan uji)."
+  },
+  {
+    "id": 249,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "こんくりいとぶろっくぞうぞうてっきんもるたるほきょう",
+    "jp": "コンクリートブロック造（CB造）",
+    "romaji": "konkuriito burokku zou (CB-zou): tekkin + morutaru hokyou",
+    "id_text": "Blok beton: tulangan di rongga + mortar penguat",
+    "desc": "Blok beton berlubang disusun. Rongga diisi tulangan baja lalu dicor mortar, lebih kokoh dari bata. Untuk pagar, tembok penahan, bangunan kecil. Mandor:「ブロックの通り確認して」(cek kesejajaran blok)."
+  },
+  {
+    "id": 470,
+    "category": "anzen",
+    "source": "jac-ch3",
+    "furi": "こうしょさぎょうしゃばすけっとたかさめえとるいじょう",
+    "jp": "高所作業車（バスケット高さ 2m以上）",
+    "romaji": "kousho sagyousha (basuketto takasa 2 meetoru ijou)",
+    "id_text": "Aerial work platform (AWP): keranjang kerja ≥2m",
+    "desc": "Kendaraan dengan keranjang (バスケット) ke ≥2m via boom/scissor. ≥10m butuh 技能講習, <10m cukup 特別教育. Mandor:「高所作業車の点検記録見せて」(tunjukkan catatan inspeksi)."
+  },
+  {
+    "id": 488,
+    "category": "haikan",
+    "source": "jac-ch3",
+    "furi": "えいせいきぐせつび",
+    "jp": "衛生器具設備（えいせいきぐせつび）",
+    "romaji": "eisei kigu setsubi",
+    "id_text": "Sanitary fixtures: toilet, wastafel, sink, bak",
+    "desc": "Peralatan yang keluarkan/tampung/buang air. Meliputi: 蛇口(keran), 大便器(toilet), 小便器(urinoir), 洗面器(wastafel), 風呂(bak mandi), 流し(sink). Mandor:「衛生器具の取付完了しましたか」(pemasangan fixtures selesai?)."
+  },
+  {
+    "id": 489,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "といし",
+    "jp": "砥石（といし）",
+    "romaji": "toishi",
+    "id_text": "Batu asah untuk pahat, ketam, dan alat tajam",
+    "desc": "Batu untuk mengasah logam atau batu (切削・磨く). Balok kecil (直方体) digunakan untuk mengasah のみ (pahat) atau かんな (ketam kayu) agar tetap tajam. Mandor:「のみの刃、砥石で研いどいて」(asah mata pahat pakai batu asah)."
+  },
+  {
+    "id": 628,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "けんせつこうじのさんだいぶんるい",
+    "jp": "建設工事の3大分類",
+    "romaji": "kensetsu kouji no sandai bunrui",
+    "id_text": "3 kategori besar pekerjaan konstruksi",
+    "desc": "①土木=alam: dam, jalan, terowongan, jembatan. ②建築=gedung: rumah, RS, sekolah. ③ライフライン・設備=infrastruktur: listrik, gas, air, AC, pemadam. Mandor:「土木か建築か、まず確認して」(konfirmasi jenis pekerjaan)."
+  },
+  {
+    "id": 629,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "だむこうじちすいりすい",
+    "jp": "ダム工事の目的：治水 vs 利水",
+    "romaji": "damu kouji: chisui vs risui",
+    "id_text": "Tujuan bendungan: tahan banjir vs manfaatkan air",
+    "desc": "治水=tahan banjir: tampung air saat hujan besar, atur debit. 利水=manfaatkan air stabil untuk pertanian, industri, 水力発電. Jepang punya 3000+ bendungan. Mandor:「洪水吐きゲートの点検して」(cek pintu spillway bendungan)."
+  },
+  {
+    "id": 631,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "なこうほうさんがくとんねるさんようそ",
+    "jp": "NATM工法（山岳トンネル）",
+    "romaji": "NATM kouhou sangaku tonneru san youso",
+    "id_text": "Metode NATM terowongan gunung — 3 elemen penyangga",
+    "desc": "NATM: gali gunung dengan peledakan/mesin. 3 penyangga: ①吹付けコンクリート=semprot beton ②鋼製支保工=rangka baja ③ロックボルト=baut pengikat batu. Mandor:「吹付け後にボルト打って」(pasang baut setelah semprot beton)."
+  },
+  {
+    "id": 632,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "しいるどとんねるこうほうたてこうせぐめんと",
+    "jp": "シールドトンネル工法（立坑・セグメント）",
+    "romaji": "shiirudo tonneru kouhou tatekou segumento",
+    "id_text": "Terowongan shield: tanah lunak & bawah bangunan",
+    "desc": "Prosedur: ①Bangun 立坑(poros vertikal) ②Shield menggali ③Pasang セグメント(panel beton/besi) di belakang mesin. Mandor:「セグメント組み立て確認して」(cek pemasangan segmen)."
+  },
+  {
+    "id": 633,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "きょうりょうこうじしゅるいとかぶこうじょうぶこう",
+    "jp": "橋梁工事：種類と下部工・上部工",
+    "romaji": "kyouryou kouji shurui to kabukou joubukou",
+    "id_text": "Pekerjaan jembatan: 6 jenis + 2 tahapan utama",
+    "desc": "Jenis: 桁橋・トラス・アーチ・ラーメン・斜張橋・吊橋. 下部工=fondasi penopang → 上部工=badan jembatan. Metode: ベント, ケーブルエレクション, 送り出し, フローティングクレーン. Mandor:「下部工の出来形検査入ります」(inspeksi fondasi jembatan)."
+  },
+  {
+    "id": 634,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "かいよどぼくこうじのとくちょとしゅよしせつ",
+    "jp": "海洋土木工事の特徴と主要施設",
+    "romaji": "kaiyo doboku kouji no tokucho to shuyo shisetsu",
+    "id_text": "Pekerjaan sipil laut: fasilitas & alat kerja utama",
+    "desc": "Bangun di laut/sungai: pelabuhan, bandara laut, jembatan laut, terowongan bawah laut. Alat: ①作業船=kapal kerja ②潜水士=penyelam ③alat ukur batimetri. Mandor:「作業船の位置確認してから開始して」(cek posisi kapal kerja)."
+  },
+  {
+    "id": 635,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "けんちくぶつのこうぞうごしゅるい",
+    "jp": "建築物の構造5種類",
+    "romaji": "kenchikubutsu no kouzou goshurui",
+    "id_text": "5 jenis struktur bangunan dan karakteristiknya",
+    "desc": "RC造=tulangan+beton. S造=baja, untuk pabrik/komersial. SRC造=baja+RC, gedung tinggi. 木造=kayu, rumah biasa. CB造=blok beton+tulangan+mortar. Mandor:「ここはRC造、型枠と鉄筋の確認して」(cek bekisting dan tulangan RC)."
+  },
+  {
+    "id": 636,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "けんちくこうじのながれだいきぼびる",
+    "jp": "建築工事の流れ（大規模ビル・マンション）",
+    "romaji": "kenchiku kouji no nagare daikibo biru",
+    "id_text": "Urutan tahapan konstruksi gedung besar",
+    "desc": "①準備: pagar+borlog ②山留め: dinding cegah longsor ③杭: pancang ke支持層 ④土工: gali+残土 ⑤地下躯体: tulangan+cor ⑥地上躯体: baja+crane ⑦仕上げ: finishing. Mandor:「次は山留め確認からだ」(cek dinding penahan dulu)."
+  },
+  {
+    "id": 637,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "たいしんせいしんめんしんのさんしゅるい",
+    "jp": "耐震・制振・免振の3種類（地震対策）",
+    "romaji": "taishin seishin menshin no sanshurui",
+    "id_text": "3 metode proteksi gempa: tahan/redam/isolasi",
+    "desc": "①耐震=perkuat kolom & balok. ②制振=pasang ダンパー kurangi goyangan. ③免振=pasang アイソレータ di fondasi, isolasi energi gempa. 震度5強=berfungsi, 6強〜7=tidak runtuh. Mandor:「免振装置の点検記録見せて」(tunjukkan catatan isolator)."
+  },
+  {
+    "id": 638,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "どこうじのさぎょうろくしゅるい",
+    "jp": "土工事の作業6種類",
+    "romaji": "do kouji no sagyou rokushurui",
+    "id_text": "6 jenis pekerjaan tanah",
+    "desc": "①掘削=gali tanah/batu (発破). ②積込み・運搬=muat残土. ③盛り土/切り土=tambah/potong tanah. ④埋め戻し=isi kembali. ⑤締固め=padatkan. ⑥法面=stabilisasi lereng. Mandor:「残土の運搬、記録つけて」(catat pengangkutan残土)."
+  },
+  {
+    "id": 639,
+    "category": "haikan",
+    "source": "jac-ch3",
+    "furi": "ゑるぽいんとこうほうちかすいはいすいさいだいじゅめえとる",
+    "jp": "ウェルポイント工法（地下水排水・最大10m）",
+    "romaji": "weru pointo kouhou chikasui haisui saidai ju meetoru",
+    "id_text": "Well point: dewatering maks 10m untuk kerja kering",
+    "desc": "Tancapkan banyak 揚水管 ke tanah, pompa vakum sedot air tanah via 集水管. Max efektif: 10m. Lebih dari 10m pakai ディープウェル. Juga menstabilkan 軟弱地盤. Mandor:「ウェルポイントの水位確認して」(cek ketinggian muka air sumur)."
+  },
+  {
+    "id": 640,
+    "category": "doboku_hoso",
+    "source": "jac-ch3",
+    "furi": "ほそうこうじのよんそうこうぞうきそうをわすれずに",
+    "jp": "舗装工事の4層構造",
+    "romaji": "hosou kouji no yonsoukouzou (kisou wo wasurezu ni)",
+    "id_text": "4 lapisan jalan beraspal — jangan lupa lapisan 3",
+    "desc": "①路床=dasar terbawah, digali±1m. ②路盤=batu pecah dipadatkan. ③基層=aspal pertama (アスファルトフィニッシャー). ④表層=aspal atas, tahan air. 基層 jangan terlupa! Mandor:「路盤後に基層打って」(base dulu lalu aspal ke-3)."
+  },
+  {
+    "id": 641,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "とびこうじのろくしゅるい",
+    "jp": "とび工事の6種類",
+    "romaji": "tobi kouji no rokushurui",
+    "id_text": "6 jenis pekerjaan tobi (ahli kerja ketinggian)",
+    "desc": "Pekerjaan tali baja di ketinggian. 6 jenis: 足場とび(perancah), 鉄骨とび(rangka baja), 橋梁とび(jembatan), 重量とび(mesin berat), 送電とび(menara listrik), 町場とび(rumah). Mandor:「足場の壁つなぎ確認して」(cek pengikat perancah)."
+  },
+  {
+    "id": 642,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "てっきんひつぎてのよんしゅるい",
+    "jp": "鉄筋継手の4種類",
+    "romaji": "tekkinhitsugite no yonshurui",
+    "id_text": "4 jenis sambungan besi tulangan",
+    "desc": "4 sambungan tulangan: ①ガス圧接=panas+tekan (paling umum). ②溶接=las busur. ③機械式=besi berulir+coupler. ④重ね=tumpuk besi tipis, disatukan beton. Mandor:「ガス圧接の外観確認して」(cek visual sambungan)."
+  },
+  {
+    "id": 643,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "ようせつのさんだいぶんるいゆうせつあっせつろうせつ",
+    "jp": "溶接の3大分類：融接・圧接・ろう接",
+    "romaji": "yousetsu no sandai bunrui: yuusetsu assetsu rousetsu",
+    "id_text": "3 kategori las: lelehkan / tekan / brazing",
+    "desc": "①融接=lelehkan material (arc/gas/laser) — paling umum. ②圧接=panas+tekan tanpa cair sempurna (ガス圧接tulangan). ③ろう接=logam penghubung suhu rendah sebagai lem. Mandor:「融接箇所の検査します」(inspeksi hasil las leleh)."
+  },
+  {
+    "id": 644,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "かたわくこうじとしほこうかたわくだいく",
+    "jp": "型枠工事と支保工（かたわく大工）",
+    "romaji": "katawaku kouji to shihokou katawakudaiku",
+    "id_text": "Pekerjaan bekisting & perancah penopang beton cor",
+    "desc": "Cetakan kayu dibuat 型枠大工. Beton cair masuk: tekanan besar → perkuat 支保工 (pipa besi luar). Baca 加工図 dulu. Setelah mengeras, cetakan dibongkar, dipakai ulang. Mandor:「支保工の本数、図面通り確認して」(cek jumlah strut)."
+  },
+  {
+    "id": 645,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "こんくりいとあっそうこうじとさんしゃちいむわあく",
+    "jp": "コンクリート圧送工事と3者チームワーク",
+    "romaji": "konkuriito assou kouji to sansha chiimuwaaku",
+    "id_text": "Pengecoran beton dengan pompa: 3 peran sinkron",
+    "desc": "生コン dari pabrik → truk アジテータ → コンクリートポンプ車. 3 peran sinkron: ①オペレータ(pompa) ②筒先(selang) ③土工(締固めvibrator). Beton mengeras cepat, wajib koordinasi. Mandor:「3人連携、タイムロスなしで」(3 orang sinkron, tanpa tunda)."
+  },
+  {
+    "id": 646,
+    "category": "setsubi_kougu",
+    "source": "jac-ch3",
+    "furi": "とそうこうじのさんこうほう",
+    "jp": "塗装工事の3工法",
+    "romaji": "tosou kouji no san kouhou",
+    "id_text": "3 metode pengecatan: kuas / roller / semprot udara",
+    "desc": "①はけ塗り=kuas, hasil paling rapi. ②ローラー=efisien untuk dinding luar. ③エアスプレー=cat dikabut kompresor, area luas/sulit. Pilih 塗料 sesuai jenis permukaan (素地). Mandor:「外壁はローラーで仕上げて」(dinding luar pakai roller)."
+  },
+  {
+    "id": 647,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "さかんこうじととくしゅしあげとぎだしあらいだししっくい",
+    "jp": "左官工事（研ぎ出し・洗い出し・漆喰）",
+    "romaji": "sakan kouji to tokushu shiage togidashi araidashi shikkui",
+    "id_text": "Pekerjaan plester dinding + 2 teknik finishing",
+    "desc": "左官工事=oles 壁土/モルタル/漆喰 pakai こて. ①研ぎ出し=asah permukaan batu hingga mengkilap. ②洗い出し=種石+semen, sikat permukaan agar batu menonjol. Mandor:「漆喰の養生期間守ってください」(patuhi waktu pengeringan漆喰)."
+  },
+  {
+    "id": 648,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "ふきつけうれたんだんねつこうじにせいぶん",
+    "jp": "吹付けウレタン断熱工事",
+    "romaji": "fukitsuke uretan dannetsu kouji niseibun",
+    "id_text": "Insulasi semprot uretan keras: 2 komponen + QC",
+    "desc": "Semprot 硬質ウレタンフォーム ke bangunan. Bahan: ①ポリオール成分 + ②ポリイソシアネート. QC: sebelum=uji papan 450mm正方形, cek密度. Selama=cek ketebalan tiap 4〜5m. Mandor:「施工前確認板、見せてください」(tunjukkan papan uji dulu)."
+  },
+  {
+    "id": 649,
+    "category": "doboku_doko",
+    "source": "jac-ch3",
+    "furi": "かいよどぼくのよんこうじしゅんせつうめたてがんぺきぼおはていけえそん",
+    "jp": "海洋土木の4工事",
+    "romaji": "kaiyo doboku no yon kouji: shunsetsu umetate ganpeki boohatei keeson",
+    "id_text": "4 pekerjaan sipil laut: keruk/reklamasi/dermaga",
+    "desc": "①浚渫=keruk dasar laut/sungai dengan 浚渫船. ②埋立=timbun tanah→lahan baru. ③岸壁=dermaga: sheet pile+tiang. ④防波堤=pemecah gelombang: batu+ケーソン(kotak beton). Mandor:「ケーソンの据付位置確認して」(cek posisi caisson)."
+  },
+  {
+    "id": 650,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "ないそうしあげこうじぼおどくろすゆかかあてん",
+    "jp": "内装仕上げ工事（LGS・ボード・クロス・床）",
+    "romaji": "naisou shiage kouji LGS boodo kurosu yuka kaaten",
+    "id_text": "Finishing interior: LGS hingga wallpaper & lantai",
+    "desc": "①LGS/軽天=rangka baja ringan. ②ボード=papan gypsum+pate. ③クロス=wallpaper. ④塗装仕上げ=cat pengganti wallpaper. ⑤床仕上げ=ubin/karpet. ⑥カーテン工事=pasang tirai. Mandor:「LGSのピッチ、設計通りか確認して」(cek jarak LGS sesuai desain)."
+  },
+  {
+    "id": 651,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "さっしこうじとかばあこうほうきんぞくたてぐ",
+    "jp": "サッシ工事とカバー工法（金属建具の取付け）",
+    "romaji": "sasshi kouji to kabaa kouhou kinzoku tategu",
+    "id_text": "Pekerjaan sash logam + renovasi kusen metode cover",
+    "desc": "サッシ工事=pasang kusen logam: jendela aluminium, pintu, kasa nyamuk. Renovasi: カバー工法=pasang kusen baru DI ATAS lama tanpa bongkar → hemat biaya & waktu. Mandor:「カバー工法で対応します」(tangani dengan metode cover)."
+  },
+  {
+    "id": 652,
+    "category": "sekou",
+    "source": "jac-ch3",
+    "furi": "かいたいこうじかいたいがらあすべすとたいさく",
+    "jp": "解体工事（解体ガラ・アスベスト対策）",
+    "romaji": "kaitai kouji kaitai gara asubesuto taisaku",
+    "id_text": "Pekerjaan bongkar: limbah & prosedur asbes",
+    "desc": "アスベスト対策。Bongkar bangunan tua, survei asbes wajib dulu. 解体ガラ dipilah (beton, besi, berbahaya) per 建設リサイクル法. Mandor:「石綿飛散防止処置してから始めて」(pasang pelindung asbes sebelum mulai)."
+  },
+  {
+    "id": 653,
+    "category": "career",
+    "source": "jac-ch3",
+    "furi": "けんせつこうじのしかくさんしゅるい",
+    "jp": "建設工事の資格3種類",
+    "romaji": "kensetsu kouji no shikaku sanshurui",
+    "id_text": "3 tingkat kualifikasi konstruksi berdasarkan UU K3",
+    "desc": "①国家免許=lisensi negara tertinggi. ②技能講習修了証=lulus pelatihan terdaftar. ③特別教育=K3 sebelum tugas berbahaya. 作業主任者=pengawas wajib dipilih dari pemegang 技能講習. Mandor:「この作業の主任者はだれですか」(siapa pengawas?)."
+  },
+  {
+    "id": 654,
+    "category": "career",
+    "source": "jac-ch3",
+    "furi": "くれえんいどうしきくれえんたまかけのしかくきじゅんかじゅうべつ",
+    "jp": "クレーン・移動式クレーン・玉掛け資格",
+    "romaji": "kureen idoushiki kureen tamakake no shikaku kijun kajuubetsu",
+    "id_text": "Kualifikasi crane & rigging berdasarkan kapasitas",
+    "desc": "クレーン: ≥5t免許, 1〜5t技能講習, <1t特別教育. 移動式: ≥5t免許. 玉掛け: ≥1t技能講習, <1t特別教育. Batas kunci: 5t (免許) dan 1t (玉掛け). Mandor:「何トンの荷物か確認して資格チェックして」(cek beban dan lisensi)."
+  },
+  {
+    "id": 655,
+    "category": "career",
+    "source": "jac-ch3",
+    "furi": "しゃりょけいけんせつきかいこうしょさぎょうしゃおおとっくりふとのしかく",
+    "jp": "車両系・高所作業車・フォークリフト資格",
+    "romaji": "sharyokei kensetsu kikai kousho sagyousha footokku rifuto no shikaku",
+    "id_text": "Kualifikasi alat berat: berat / tinggi / angkat",
+    "desc": "車両系: ≥3t技能講習, <3t特別教育. 高所作業車: ≥10m技能講習, <10m特別教育. フォーク: ≥1t技能講習, <1t特別教育. Mandor:「機体重量確認してから乗せて」(cek berat mesin sebelum operasikan)."
+  },
+  {
+    "id": 656,
+    "category": "career",
+    "source": "jac-ch3",
+    "furi": "ようせつさんっけつはっぱあしばのしかくくぶん",
+    "jp": "溶接・酸欠・発破・足場の資格区分",
+    "romaji": "yousetsu sankketsu happa ashiba no shikaku kubun",
+    "id_text": "Kualifikasi las/O₂ rendah/peledakan/scaffolding",
+    "desc": "ガス溶接者=技能講習. ガス溶接主任者=免許. アーク溶接者=特別教育. 酸欠主任者=技能講習. 発破技士=免許(tertinggi). 足場主任者(≥5m)=技能講習. 石綿作業者=特別教育. Mandor:「作業前に資格証確認してから始めて」(cek sertifikat sebelum mulai)."
+  },
+  {
+    "id": 657,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch3",
+    "furi": "けんちくだいくこうじのしゅるいまちぞうさくみや",
+    "jp": "建築大工工事の種類（町大工・造作大工・宮大工）",
+    "romaji": "kenchiku daiku kouji no shurui machi zousaku miya",
+    "id_text": "Jenis tukang kayu: rumah / finishing / kuil",
+    "desc": "①町大工=tukang kayu rumah tinggal biasa (paling umum). ②造作大工=pasang pintu, 障子, ふすま, interior. ③宮大工=kuil/shrine, teknik sambungan kayu tertinggi. Mandor:「造作大工さん、建具の取付お願いします」(pasang pintu/kusen)."
+  },
+  {
+    "id": 658,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "やねこうじかわらぶきあまじまいごしゅるい",
+    "jp": "屋根工事：瓦ぶきと雨仕舞い + 5種の屋根工事",
+    "romaji": "yane kouji kawarabuki amajimai goshurui",
+    "id_text": "Pekerjaan atap: genteng, drainase hujan, 5 jenis",
+    "desc": "瓦=genteng tanah liat dibakar. 雨仕舞い=sistem alirkan air hujan, wajib dikuasai. 5 jenis: ふき替え, 重ねぶき, 漆喰補修, 雨どい交換, 屋根塗装. Mandor:「雨仕舞いの施工確認して、漏れないように」(cek sistem drainase, jangan bocor)."
+  },
+  {
+    "id": 659,
+    "category": "setsubi_kougu",
+    "source": "jac-ch3",
+    "furi": "けんちくばんきんこうじのだくとさんしゅるいはいえんくうちょうはいき",
+    "jp": "建築板金工事のダクト3種（排煙・空調・排気）",
+    "romaji": "kenchiku bankin kouji no dakuto sanshurui haien kuuchou haiki",
+    "id_text": "Pekerjaan plat logam: 3 jenis saluran udara (duct)",
+    "desc": "建築板金工事=proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙=asap kebakaran. ②空調=distribusi AC. ③排気=buang panas/bau. Termasuk atap logam, 外壁. Mandor:「ダクトの気密テスト完了しましたか」(tes kedap duct selesai?)."
+  },
+  {
+    "id": 660,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "いしこうじいしくだいりせきみかげいしぎいせき",
+    "jp": "石工事（石工・大理石・御影石・擬石）",
+    "romaji": "ishi kouji ishiku dairiseki mikageishi giiseki",
+    "id_text": "Pekerjaan batu: pasang batu alam/buatan",
+    "desc": "大理石(marmer), 御影石(granit), 擬石(tiruan) dipasang untuk estetika bukan struktur. Batu mahal → tidak boleh gagal. 乱形石 butuh pengalaman panjang. Mandor:「大理石、慎重に加工して」(proses marmer hati-hati)."
+  },
+  {
+    "id": 711,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "どうろこうじ",
+    "jp": "道路工事",
+    "romaji": "douro kouji",
+    "id_text": "Pekerjaan jalan",
+    "desc": "Membuat/memperbaiki jalan. Meliputi: aspal, rambu (標識), lampu lalu lintas, trotoar, marka, lanskap. Lebih banyak perbaikan jalan lama. Mandor:「舗装の厚さ、規定通りか確認して」(cek ketebalan aspal sesuai spec)."
+  },
+  {
+    "id": 713,
+    "category": "kenchiku_shiage",
+    "source": "jac-ch3",
+    "furi": "ひょうそうこうじ",
+    "jp": "表装工事（ひょうそうこうじ）",
+    "romaji": "hyousou kouji",
+    "id_text": "Pekerjaan pelapis permukaan interior",
+    "desc": "Bagian 内装仕上げ工事, TIDAK termasuk LGS. Jenis: ①壁仕上げ (wallpaper/クロス). ②天井仕上げ (langit-langit, sulit). ③床仕上げ (ubin/karpet/tatami). ④塗装仕上げ. ⑤カーテン工事. Mandor:「クロス張りの前にパテ処理して」(dempul dulu sebelum wallpaper)."
+  },
+  {
+    "id": 714,
+    "category": "haikan",
+    "source": "jac-ch3",
+    "furi": "はいかんこうじがいよう",
+    "jp": "配管工事（はいかんこうじ）の概要",
+    "romaji": "haikan kouji gaiyou",
+    "id_text": "Gambaran umum pekerjaan pipa",
+    "desc": "Alirkan air/minyak/gas/uap via pipa logam. Meliputi: 給水, 排水, 消火, AC 冷媒管. 3 kemampuan dasar: ①切断 ②接合 ③組み立て. Mandor:「圧力テスト後、隠ぺいしてください」(tes tekanan dulu baru tutup pipa)."
+  },
+  {
+    "id": 715,
+    "category": "doboku_hoso",
+    "source": "jac-ch3",
+    "furi": "どぼくこうじとくちょ",
+    "jp": "土木工事（どぼくこうじ）の特徴",
+    "romaji": "doboku kouji tokucho",
+    "id_text": "Karakteristik pekerjaan sipil",
+    "desc": "土木工事=berhadapan dengan alam (laut, sungai, gunung). Jenis: ダム, 河川, 道路, トンネル, 橋梁, 鉄道, 上下水道, 災害復旧. Berbeda dari 建築工事. Mandor:「河川工事の安全確認からだ」(mulai dari cek keselamatan kerja sungai)."
+  }
+]

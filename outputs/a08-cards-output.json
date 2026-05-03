@@ -1,0 +1,1522 @@
+[
+  {
+    "id": 751,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "はいかん",
+    "jp": "配管",
+    "romaji": "haikan",
+    "id_text": "Perpipaan / pipa",
+    "desc": "Sistem pipa untuk mengalirkan fluida (air, gas, refrigeran, dll)."
+  },
+  {
+    "id": 752,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "まいせつ",
+    "jp": "埋設",
+    "romaji": "maisetsu",
+    "id_text": "Instalasi bawah tanah",
+    "desc": "Pemasangan pipa/kabel di bawah permukaan tanah. Di proyek: wajib catat posisi di gambar teknik. Mandor:「埋設管の位置を図面に記録して」(catat posisi pipa di gambar)."
+  },
+  {
+    "id": 753,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ちか",
+    "jp": "地下",
+    "romaji": "chika",
+    "id_text": "Bawah tanah",
+    "desc": "Area di bawah permukaan tanah. 地下配管 = pipa bawah tanah. Di proyek: pastikan kedalaman sesuai standar. Mandor:「地下配管の深さを確認して」(cek kedalaman pipa bawah tanah)."
+  },
+  {
+    "id": 757,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "かんたん",
+    "jp": "管端",
+    "romaji": "kantan",
+    "id_text": "Ujung pipa",
+    "desc": "Bagian ujung pipa/selang. シーリング材を充填する = isi sealant di ujung pipa."
+  },
+  {
+    "id": 758,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "がすはいかん",
+    "jp": "ガス配管",
+    "romaji": "gasu haikan",
+    "id_text": "Perpipaan gas",
+    "desc": "Sistem pipa untuk mengalirkan gas kota. Wajib uji kebocoran setelah sambungan."
+  },
+  {
+    "id": 759,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "せつぞく",
+    "jp": "接続",
+    "romaji": "setsuzoku",
+    "id_text": "Penyambungan / koneksi",
+    "desc": "Menghubungkan dua bagian pipa atau kabel. Di proyek: setiap sambungan harus dicek kebocorannya. Mandor:「接続部の漏れを確認して」(cek kebocoran di titik sambungan)."
+  },
+  {
+    "id": 760,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "せつぞくぶ",
+    "jp": "接続部",
+    "romaji": "setsuzoku bu",
+    "id_text": "Bagian sambungan",
+    "desc": "Titik di mana dua pipa atau komponen bertemu. Di proyek: titik sambungan paling rentan bocor. Mandor:「接続部をしっかり締め付けて」(kencangkan bagian sambungan)."
+  },
+  {
+    "id": 763,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "かんかく",
+    "jp": "間隔",
+    "romaji": "kankaku",
+    "id_text": "Jarak / interval",
+    "desc": "Jarak antar saddle penyangga pipa. Jika terlalu jauh → lendutan (たわみ)."
+  },
+  {
+    "id": 767,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "ほおんざい",
+    "jp": "保温材",
+    "romaji": "hoonzai",
+    "id_text": "Material insulasi panas",
+    "desc": "Bahan yang membungkus pipa panas agar panas tidak hilang ke lingkungan."
+  },
+  {
+    "id": 768,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "だんねつざい",
+    "jp": "断熱材",
+    "romaji": "dannetsu zai",
+    "id_text": "Material insulasi termal",
+    "desc": "Bahan pencegah perpindahan panas. Dipakai pada pipa panas & dingin."
+  },
+  {
+    "id": 770,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "しーりんぐざい",
+    "jp": "シーリング材",
+    "romaji": "sheeringu zai",
+    "id_text": "Bahan sealant / penyegel",
+    "desc": "Material yang digunakan untuk menutup celah dan mencegah masuknya air/udara."
+  },
+  {
+    "id": 771,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "ぜつえんてーぷ",
+    "jp": "絶縁テープ",
+    "romaji": "zetsunen teepu",
+    "id_text": "Selotip insulasi listrik",
+    "desc": "Pita perekat untuk mengisolasi kabel listrik. Berbeda fungsi dari sealant."
+  },
+  {
+    "id": 773,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "たいこうせい",
+    "jp": "耐候性",
+    "romaji": "taikousei",
+    "id_text": "Ketahanan cuaca",
+    "desc": "Kemampuan material bertahan terhadap sinar UV, hujan, dan perubahan suhu di luar ruangan."
+  },
+  {
+    "id": 774,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "あつさ",
+    "jp": "厚さ",
+    "romaji": "atsusa",
+    "id_text": "Ketebalan",
+    "desc": "Tebal material insulasi. Jika 断熱材 terlalu tipis → 結露 (kondensasi) sering terjadi."
+  },
+  {
+    "id": 776,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "けつろ",
+    "jp": "結露",
+    "romaji": "ketsuro",
+    "id_text": "Kondensasi / embun",
+    "desc": "Air mengembun pada permukaan pipa dingin karena suhu lebih rendah dari titik embun udara."
+  },
+  {
+    "id": 778,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "すいぶん",
+    "jp": "水分",
+    "romaji": "suibun",
+    "id_text": "Kandungan air / kelembapan",
+    "desc": "Jika 真空引き tidak tuntas → 水分が残る → pipa refrigeran rusak dari dalam. Di proyek: wajib vakum hingga tuntas. Mandor:「真空引きをしっかりやって」(lakukan pemvakuman dengan tuntas)."
+  },
+  {
+    "id": 779,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "こしょう",
+    "jp": "故障",
+    "romaji": "koshou",
+    "id_text": "Kerusakan / gangguan",
+    "desc": "Kegagalan fungsi peralatan. Refrigeran yang lembab → 内部故障. Di proyek: pemvakuman yang tidak sempurna menyebabkan kerusakan. Mandor:「故障を防ぐために真空引きを確実に」(vakum tuntas untuk mencegah kerusakan)."
+  },
+  {
+    "id": 780,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "もれ",
+    "jp": "漏れ",
+    "romaji": "more",
+    "id_text": "Kebocoran",
+    "desc": "Cairan atau gas yang keluar dari tempat yang seharusnya tertutup."
+  },
+  {
+    "id": 783,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "ふちゃく",
+    "jp": "付着",
+    "romaji": "fuchaku",
+    "id_text": "Menempel / melekat",
+    "desc": "油が付着する = minyak menempel. Pada 冷媒管接続部 → シール性が低下する. Di proyek: bersihkan bagian sambungan sebelum memasang. Mandor:「接続部の油を拭き取ってから取り付けて」(bersihkan minyak dulu)."
+  },
+  {
+    "id": 784,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "しんにゅう",
+    "jp": "侵入",
+    "romaji": "shinnyuu",
+    "id_text": "Masuk / infiltrasi",
+    "desc": "水が侵入する = air masuk ke dalam. Di proyek: ujung konduit wajib ditutup dengan sealant. Mandor:「管端にシーリング材を充填して水の侵入を防いで」(isi sealant di ujung konduit)."
+  },
+  {
+    "id": 785,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "たわみはっせい",
+    "jp": "たわみ発生",
+    "romaji": "tawami hassei",
+    "id_text": "Timbulnya lendutan",
+    "desc": "Ketika jarak saddle terlalu lebar, pipa melengkung ke bawah."
+  },
+  {
+    "id": 788,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "すきま",
+    "jp": "隙間",
+    "romaji": "sukima",
+    "id_text": "Celah / gap",
+    "desc": "Celah pada material insulasi tempat panas bisa bocor keluar → ヒートロス."
+  },
+  {
+    "id": 792,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "あんぜんかくにん",
+    "jp": "安全確認",
+    "romaji": "anzen kakunin",
+    "id_text": "Pemeriksaan keamanan",
+    "desc": "Langkah verifikasi bahwa kondisi sudah aman sebelum/sesudah pekerjaan."
+  },
+  {
+    "id": 793,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "かくにん",
+    "jp": "確認",
+    "romaji": "kakunin",
+    "id_text": "Konfirmasi / pengecekan",
+    "desc": "Memastikan suatu hal sudah benar. 施工前に確認する = periksa sebelum mulai konstruksi."
+  },
+  {
+    "id": 795,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "ぼうし",
+    "jp": "防止",
+    "romaji": "boushi",
+    "id_text": "Pencegahan",
+    "desc": "凍結防止、感電防止、結露防止 — istilah pencegahan sering muncul di soal ujian."
+  },
+  {
+    "id": 796,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "こうしょさぎょう",
+    "jp": "高所作業",
+    "romaji": "kousho sagyou",
+    "id_text": "Pekerjaan di ketinggian",
+    "desc": "Pekerjaan di atas 2m dari lantai/tanah. Bahaya utama: 落下 (jatuh) dan 感電 (kesetrum)."
+  },
+  {
+    "id": 797,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "らっか",
+    "jp": "落下",
+    "romaji": "rakka",
+    "id_text": "Jatuh",
+    "desc": "Bahaya utama pekerjaan di ketinggian. Wajib pakai harness & jaring pengaman."
+  },
+  {
+    "id": 798,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "そうおん",
+    "jp": "騒音",
+    "romaji": "souon",
+    "id_text": "Kebisingan",
+    "desc": "Bahaya yang juga perlu diperhatikan, tapi bukan bahaya utama di 高所溶接作業."
+  },
+  {
+    "id": 799,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "きけん",
+    "jp": "危険",
+    "romaji": "kiken",
+    "id_text": "Bahaya",
+    "desc": "危険予知活動 (KY活動) = kegiatan identifikasi bahaya sebelum bekerja."
+  },
+  {
+    "id": 800,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "あーす",
+    "jp": "アース",
+    "romaji": "aasu",
+    "id_text": "Grounding / pentanahan",
+    "desc": "Menghubungkan peralatan listrik ke tanah. Tujuan utama: 感電防止 (mencegah sengatan listrik)."
+  },
+  {
+    "id": 801,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "しょち",
+    "jp": "処置",
+    "romaji": "shochi",
+    "id_text": "Tindakan penanganan",
+    "desc": "Langkah yang diambil untuk mengatasi/mencegah masalah. 水侵入を防ぐための処置."
+  },
+  {
+    "id": 805,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ほおん",
+    "jp": "保温",
+    "romaji": "hoon",
+    "id_text": "Retensi panas / insulasi panas",
+    "desc": "Menjaga suhu pipa/peralatan panas agar tidak dingin. 保温 ≠ 断熱 (断熱 lebih umum)."
+  },
+  {
+    "id": 806,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ようせつ",
+    "jp": "溶接",
+    "romaji": "yousetsu",
+    "id_text": "Pengelasan",
+    "desc": "Menyambung logam dengan panas tinggi. Setelah selesai → wajib 漏れ検査."
+  },
+  {
+    "id": 808,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "じゅうてん",
+    "jp": "充填",
+    "romaji": "juuten",
+    "id_text": "Pengisian / penyumbatan",
+    "desc": "管端にシーリング材を充填する = isi sealant di ujung pipa konduit. Di proyek: mencegah air masuk ke dalam konduit. Mandor:「管端にシーリング材を充填して」(isi sealant di ujung pipa)."
+  },
+  {
+    "id": 809,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "はっせい",
+    "jp": "発生",
+    "romaji": "hassei",
+    "id_text": "Timbul / terjadi",
+    "desc": "錆が発生した = karat timbul. 異音が発生する = suara abnormal terjadi. Di proyek: karat di dalam pipa harus dibersihkan sebelum konstruksi. Mandor:「錆が発生したら施工前に洗浄して」(cuci dulu jika ada karat)."
+  },
+  {
+    "id": 810,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "せんじょう",
+    "jp": "洗浄",
+    "romaji": "senjou",
+    "id_text": "Pembersihan",
+    "desc": "配管内面に錆が発生した場合 → 施工前に洗浄と防錆処理が必要. Di proyek: karat dalam pipa harus dibereskan sebelum mulai. Mandor:「施工前に配管内を洗浄して防錆処理をして」(cuci dan anti-karat sebelum pasang)."
+  },
+  {
+    "id": 813,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ぼうすいかばー",
+    "jp": "防水カバー",
+    "romaji": "bousui kabaa",
+    "id_text": "Penutup anti-air",
+    "desc": "Penutup tahan air untuk melindungi insulasi pipa di luar ruangan dari hujan."
+  },
+  {
+    "id": 815,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "でんきせつび",
+    "jp": "電気設備",
+    "romaji": "denki setsubi",
+    "id_text": "Peralatan listrik",
+    "desc": "Sistem & peralatan yang berhubungan dengan listrik. アース取付が義務."
+  },
+  {
+    "id": 816,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "でんどうこうぐ",
+    "jp": "電動工具",
+    "romaji": "dendou kougu",
+    "id_text": "Alat listrik (power tool)",
+    "desc": "Alat kerja yang ditenagai listrik. Jika kabel panas saat dipakai → segera 使用中止."
+  },
+  {
+    "id": 817,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "でんげん",
+    "jp": "電源",
+    "romaji": "dengen",
+    "id_text": "Sumber daya / power supply",
+    "desc": "Sumber listrik untuk peralatan. 電源を強くする = memperkuat daya (bukan solusi jika kabel panas)."
+  },
+  {
+    "id": 819,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "ふくすう",
+    "jp": "複数",
+    "romaji": "fukusuu",
+    "id_text": "Beberapa / jamak",
+    "desc": "複数の電線を束ねて配管に通す場合 = saat memasukkan beberapa kabel dalam satu konduit."
+  },
+  {
+    "id": 821,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ふじゅうぶん",
+    "jp": "不十分",
+    "romaji": "fujuubun",
+    "id_text": "Tidak mencukupi / kurang",
+    "desc": "真空引きを不十分に行った場合 = jika pemvakuman dilakukan secara tidak mencukupi."
+  },
+  {
+    "id": 822,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ふそく",
+    "jp": "不足",
+    "romaji": "fusoku",
+    "id_text": "Kekurangan / kurang",
+    "desc": "勾配不足が原因で起こる問題 = masalah yang terjadi akibat kemiringan pipa kurang."
+  },
+  {
+    "id": 823,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "あんてい",
+    "jp": "安定",
+    "romaji": "antei",
+    "id_text": "Stabil",
+    "desc": "圧力試験の結果が安定しない場合の原因 = penyebab hasil uji tekanan tidak stabil."
+  },
+  {
+    "id": 824,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "げんいん",
+    "jp": "原因",
+    "romaji": "gen'in",
+    "id_text": "Penyebab",
+    "desc": "Faktor yang menyebabkan masalah. 圧力不安定の原因 = 漏れの有無 (ada tidaknya kebocoran)."
+  },
+  {
+    "id": 827,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ないめん",
+    "jp": "内面",
+    "romaji": "naimen",
+    "id_text": "Permukaan dalam",
+    "desc": "配管の内面に錆が発生した場合 = ketika karat muncul di permukaan dalam pipa."
+  },
+  {
+    "id": 828,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ないぶ",
+    "jp": "内部",
+    "romaji": "naibu",
+    "id_text": "Bagian dalam / interior",
+    "desc": "内部に水分が残り故障する = kelembapan tersisa di bagian dalam → menyebabkan kerusakan."
+  },
+  {
+    "id": 829,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ずめん",
+    "jp": "図面",
+    "romaji": "zumen",
+    "id_text": "Gambar teknik / denah",
+    "desc": "埋設配管の位置を将来確認するために、施工時に図面に記録する. Di proyek: gambar teknik adalah acuan utama. Mandor:「埋設配管の位置を必ず図面に記録して」(catat posisi pipa terpendam di gambar)."
+  },
+  {
+    "id": 831,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "おんど",
+    "jp": "温度",
+    "romaji": "ondo",
+    "id_text": "Suhu / temperatur",
+    "desc": "Besaran fisik panas suatu benda. Muncul sebagai pengecoh: '温度が一定になる', '温度の変化'."
+  },
+  {
+    "id": 832,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "うむ",
+    "jp": "有無",
+    "romaji": "umu",
+    "id_text": "Ada tidaknya / keberadaan",
+    "desc": "漏れの有無を確認する = periksa ada tidaknya kebocoran. Penyebab hasil uji tekanan tidak stabil."
+  },
+  {
+    "id": 833,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "ざいりょう",
+    "jp": "材料",
+    "romaji": "zairyou",
+    "id_text": "Material / bahan",
+    "desc": "Bahan yang digunakan dalam konstruksi. 材料の色 sering muncul sebagai pengecoh di soal ujian."
+  },
+  {
+    "id": 834,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "こーど",
+    "jp": "コード",
+    "romaji": "koodo",
+    "id_text": "Kabel / kord (power tool)",
+    "desc": "Kabel listrik pada 電動工具. コードが熱くなる = kabel terasa panas → tanda bahaya → 使用中止."
+  },
+  {
+    "id": 836,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "じゅうりょう",
+    "jp": "重量",
+    "romaji": "juuryou",
+    "id_text": "Berat / massa",
+    "desc": "Beban fisik suatu objek. Sering muncul sebagai pilihan pengecoh: '重量が増える' (berat bertambah)."
+  },
+  {
+    "id": 838,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "ていか",
+    "jp": "低下",
+    "romaji": "teika",
+    "id_text": "Penurunan / penurun fungsi",
+    "desc": "シール性が低下する = kemampuan sealing menurun. Terjadi bila 冷媒管接続部 terkena 油."
+  },
+  {
+    "id": 839,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "いち",
+    "jp": "位置",
+    "romaji": "ichi",
+    "id_text": "Posisi / lokasi",
+    "desc": "埋設配管の位置を図面に記録する = catat posisi pipa terpendam di gambar teknik agar bisa dilacak kelak."
+  },
+  {
+    "id": 840,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "はそん",
+    "jp": "破損",
+    "romaji": "hason",
+    "id_text": "Kerusakan / pecah",
+    "desc": "圧力計の破損 = manometer rusak. Muncul sebagai pengecoh penyebab 異音 saat katup dibuka."
+  },
+  {
+    "id": 843,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "でんせん",
+    "jp": "電線",
+    "romaji": "densen",
+    "id_text": "Kabel listrik / kawat",
+    "desc": "Kawat penghantar listrik. Berbeda dari 電線管（konduit pelindung）. 電線を複数束ねて通す = memasukkan banyak kabel sekaligus → panas terperangkap."
+  },
+  {
+    "id": 844,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "おくがい",
+    "jp": "屋外",
+    "romaji": "okugai",
+    "id_text": "Luar ruangan / outdoor",
+    "desc": "Di luar gedung. 屋外配線 = kabel luar ruangan（rentan UV）. 屋外で配管保温を行う場合 = saat insulasi pipa di luar ruangan → wajib tambah 防水カバー."
+  },
+  {
+    "id": 845,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "しゅるい",
+    "jp": "種類",
+    "romaji": "shurui",
+    "id_text": "Jenis / tipe",
+    "desc": "冷媒の種類 = jenis refrigeran. Muncul sebagai pengecoh di Q4. Penyebab 結露 多発 bukan jenis refrigeran, melainkan ketipisan 断熱材."
+  },
+  {
+    "id": 846,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "もくてき",
+    "jp": "目的",
+    "romaji": "mokuteki",
+    "id_text": "Tujuan / maksud",
+    "desc": "アースを取る主な目的 = tujuan utama pemasangan grounding. Jawaban: 感電防止 (mencegah sengatan listrik)."
+  },
+  {
+    "id": 847,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "じょうしょう",
+    "jp": "上昇",
+    "romaji": "joushou",
+    "id_text": "Kenaikan / peningkatan",
+    "desc": "温度上昇防止 = mencegah kenaikan suhu. Muncul sebagai pengecoh di Q13 (tujuan アース). Tujuan アース bukan mencegah 温度上昇, melainkan 感電防止."
+  },
+  {
+    "id": 848,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "そくてい",
+    "jp": "測定",
+    "romaji": "sokutei",
+    "id_text": "Pengukuran / pengujian",
+    "desc": "騒音測定 = pengukuran kebisingan. Muncul sebagai pengecoh di Q8 (安全確認 gas). Jawaban benar Q8 adalah ガス漏れ試験, bukan 騒音測定."
+  },
+  {
+    "id": 849,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "けっか",
+    "jp": "結果",
+    "romaji": "kekka",
+    "id_text": "Hasil / hasil akhir",
+    "desc": "圧力試験の結果が安定しない場合 = jika hasil uji tekanan tidak stabil → kemungkinan ada 漏れ (kebocoran)."
+  },
+  {
+    "id": 850,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "へんか",
+    "jp": "変化",
+    "romaji": "henka",
+    "id_text": "Perubahan",
+    "desc": "温度の変化 = perubahan suhu（pengecoh Q6）. 色の変化 = perubahan warna（pengecoh Q19）. Kedua-duanya bukan penyebab utama dalam soal terkait."
+  },
+  {
+    "id": 851,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ながれ",
+    "jp": "流れ",
+    "romaji": "nagare",
+    "id_text": "Aliran (fluida)",
+    "desc": "流れが悪くなる = aliran memburuk. Terjadi akibat 勾配不足（kemiringan pipa tidak cukup）→ fluida tidak mengalir lancar → bisa menggenang."
+  },
+  {
+    "id": 852,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "もんだい",
+    "jp": "問題",
+    "romaji": "mondai",
+    "id_text": "Masalah / persoalan",
+    "desc": "勾配不足が原因で起こる問題 = masalah yang timbul akibat kemiringan pipa kurang. Kunci: 流れが悪くなる (aliran memburuk)."
+  },
+  {
+    "id": 856,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "いってい",
+    "jp": "一定",
+    "romaji": "ittei",
+    "id_text": "Tetap / konstan",
+    "desc": "温度が一定になる = suhu menjadi konstan. Pengecoh Q2 — bukan efek dari 真空引き yang tidak tuntas. Efek nyatanya: 水分が残り故障する."
+  },
+  {
+    "id": 857,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "とりつけ",
+    "jp": "取り付け",
+    "romaji": "toritsuke",
+    "id_text": "Pemasangan / instalasi",
+    "desc": "防水カバー取り付け = pemasangan penutup anti-air. Jawaban benar Q12 — pekerjaan tambahan saat insulasi pipa di luar ruangan."
+  },
+  {
+    "id": 858,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "こうかん",
+    "jp": "交換",
+    "romaji": "koukan",
+    "id_text": "Penggantian / tukar",
+    "desc": "圧力計交換 = mengganti manometer. Pengecoh Q12 — bukan pekerjaan tambahan yang dibutuhkan saat insulasi pipa luar ruangan."
+  },
+  {
+    "id": 859,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "とそう",
+    "jp": "塗装",
+    "romaji": "tosou",
+    "id_text": "Pengecatan / pelapisan",
+    "desc": "色塗装 = pengecatan warna. Pengecoh Q12 — bukan tindakan tambahan standar untuk insulasi pipa di luar ruangan."
+  },
+  {
+    "id": 863,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ながさ",
+    "jp": "長さ",
+    "romaji": "nagasa",
+    "id_text": "Panjang / panjangnya",
+    "desc": "長さをそろえる = menyamakan panjang kabel. Pengecoh Q18 — saat memasukkan banyak kabel dalam konduit, yang penting bukan panjang tapi agar 熱がこもらない (panas tidak terperangkap)."
+  },
+  {
+    "id": 865,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "あさい",
+    "jp": "浅い",
+    "romaji": "asai",
+    "id_text": "Dangkal",
+    "desc": "配管を浅く埋める = kubur pipa dangkal-dangkal. Pengecoh Q1 — pipa bawah tanah yang dangkal justru lebih rentan membeku. Harus pakai 保温材＋電熱線."
+  },
+  {
+    "id": 867,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "ちゅうい",
+    "jp": "注意",
+    "romaji": "chuui",
+    "id_text": "Perhatian / kewaspadaan",
+    "desc": "特に注意するべき危険 = bahaya yang perlu diwaspadai khususnya. Muncul di Q5 (高所溶接). 注意する = memperhatikan / waspada."
+  },
+  {
+    "id": 870,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ひやす",
+    "jp": "冷やす",
+    "romaji": "hiyasu",
+    "id_text": "Mendinginkan / mengompres",
+    "desc": "コードを水で冷やす = dinginkan kabel dengan air. Pengecoh Q9 — JANGAN lakukan ini! Kabel panas → segera 使用を中止する. Air bisa menyebabkan korsleting."
+  },
+  {
+    "id": 871,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "つよい",
+    "jp": "強い",
+    "romaji": "tsuyoi",
+    "id_text": "Kuat / keras",
+    "desc": "電源を強くする = perkuat/naikkan daya listrik. Pengecoh Q9 — JANGAN dilakukan saat kabel panas. Justru memperburuk kondisi → kebakaran. Solusi: 使用中止."
+  },
+  {
+    "id": 873,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ひろい",
+    "jp": "広い",
+    "romaji": "hiroi",
+    "id_text": "Lebar / luas",
+    "desc": "サドル間隔が広すぎる = jarak saddle terlalu lebar. Konteks Q17 — penyebab たわみが発生する (lendutan terjadi). Interval saddle harus sesuai spesifikasi pipa."
+  },
+  {
+    "id": 876,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ばあい",
+    "jp": "場合",
+    "romaji": "baai",
+    "id_text": "Dalam kasus / apabila",
+    "desc": "〜の場合（ばあい）= dalam kasus〜 / apabila〜. Muncul di hampir semua soal sebagai frasa syarat: 結露が多発する場合、コードが熱くなる場合, dll."
+  },
+  {
+    "id": 877,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "まく",
+    "jp": "巻く",
+    "romaji": "maku",
+    "id_text": "Membelit / melilit",
+    "desc": "絶縁テープで巻く = balut dengan selotip insulasi. Pengecoh Q3 — selotip insulasi (絶縁テープ) bukan untuk waterproofing. Yang benar: シーリング材を充填する."
+  },
+  {
+    "id": 878,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ふとい",
+    "jp": "太い",
+    "romaji": "futoi",
+    "id_text": "Tebal / gemuk (kabel)",
+    "desc": "電線を太くする = ganti kabel lebih tebal. Pengecoh Q3 — ketebalan kabel tidak mencegah air masuk ke konduit. Yang benar: 管端にシーリング材を充填する."
+  },
+  {
+    "id": 879,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "おおう",
+    "jp": "覆う",
+    "romaji": "oou",
+    "id_text": "Menutup / menyelimuti",
+    "desc": "黒色テープで覆う = tutup dengan selotip hitam. Pengecoh Q7. 耐候性カバーで覆う = tutup dengan pelindung tahan cuaca → metode benar pencegahan UV."
+  },
+  {
+    "id": 881,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "きる",
+    "jp": "切る",
+    "romaji": "kiru",
+    "id_text": "Memotong",
+    "desc": "電線を短く切る = potong kabel lebih pendek. Pengecoh Q7. Juga terkait 使用を中止する (hentikan, bukan potong) pada Q9."
+  },
+  {
+    "id": 882,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "よぶ",
+    "jp": "呼ぶ",
+    "romaji": "yobu",
+    "id_text": "Menyebut / memanggil",
+    "desc": "何と呼びますか = disebut apa? Pola pertanyaan nama/istilah. Muncul di Q10: 断熱材の隙間から熱が漏れる現象は何と呼びますか → ヒートロス."
+  },
+  {
+    "id": 883,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "おもな",
+    "jp": "主な",
+    "romaji": "omona",
+    "id_text": "Utama / terutama",
+    "desc": "主な目的（おもなもくてき）= tujuan utama. Muncul di Q13: アースを取る主な目的は何ですか → 感電防止. 主に = terutama, 主な = yang utama."
+  },
+  {
+    "id": 886,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ぬる",
+    "jp": "塗る",
+    "romaji": "nuru",
+    "id_text": "Mengecat / melapisi",
+    "desc": "色を塗る = mengecat dengan warna. Pengecoh Q15 — mengecat pipa bukan cara untuk menandai posisi pipa bawah tanah. Yang benar: 図面に記録する."
+  },
+  {
+    "id": 887,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "つける",
+    "jp": "付ける",
+    "romaji": "tsukeru",
+    "id_text": "Memasang / menempelkan",
+    "desc": "圧力計を付ける = pasang manometer. Pengecoh Q15 — memasang manometer bukan cara untuk menandai posisi pipa bawah tanah. Yang benar: 図面に記録する."
+  },
+  {
+    "id": 889,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "とおす",
+    "jp": "通す",
+    "romaji": "toosu",
+    "id_text": "Melewatkan / meneruskan",
+    "desc": "配管に通す = melewatkan melalui konduit/pipa. Konteks Q18: 電線を配管に通す場合の注意点 = hal yang diperhatikan saat kabel dimasukkan ke konduit."
+  },
+  {
+    "id": 890,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ひらく",
+    "jp": "開く",
+    "romaji": "hiraku",
+    "id_text": "Membuka",
+    "desc": "バルブを開いた直後 = segera setelah katup dibuka. Konteks Q19: membuka katup terlalu cepat → 流量が急変 → 異音が発生する. バルブはゆっくり開くべき."
+  },
+  {
+    "id": 891,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "せこうまえ",
+    "jp": "施工前",
+    "romaji": "sekou mae",
+    "id_text": "Sebelum konstruksi",
+    "desc": "施工前に何を行いますか = apa yang dilakukan sebelum konstruksi? Konteks Q11: jika pipa berkarat → 施工前に洗浄と防錆処理を行う. 施工前 = sebelum mulai pengerjaan konstruksi."
+  },
+  {
+    "id": 892,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ちゅういてん",
+    "jp": "注意点",
+    "romaji": "chuuiten",
+    "id_text": "Poin perhatian / hal yang perlu diperhatikan",
+    "desc": "注意点は何ですか = apa yang perlu diperhatikan? Konteks Q18: 電線を複数束ねて配管に通す場合の注意点 → 熱がこもらないようにする. Beda dari 注意（ちゅうい）= peringatan umum."
+  },
+  {
+    "id": 893,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "かならず",
+    "jp": "必ず",
+    "romaji": "kanarazu",
+    "id_text": "Wajib / pasti / selalu",
+    "desc": "必ず行うべき = yang wajib dilakukan. Kata kunci soal prosedur wajib. Muncul di Q8 (ガス配管接続→ガス漏れ試験必ず) dan Q16 (溶接作業後→漏れ検査必ず). 必ず = tidak boleh dilewati."
+  },
+  {
+    "id": 894,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "まず",
+    "jp": "まず",
+    "romaji": "mazu",
+    "id_text": "Pertama-tama / langkah pertama",
+    "desc": "まず行うべきことは何ですか = apa yang pertama harus dilakukan? Muncul di Q4 (まず確認すべき点 → 断熱材の厚さ) dan Q9 (まず行うべきこと → 使用を中止する). まず = urutan prioritas utama."
+  },
+  {
+    "id": 895,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "とくに",
+    "jp": "特に",
+    "romaji": "tokuni",
+    "id_text": "Khususnya / terutama",
+    "desc": "特に注意するべき危険は何ですか = bahaya apa yang khususnya perlu diwaspadai? Muncul di Q5 (高所溶接 → 特に注意 = 落下). 特に = kata penekanan untuk hal paling penting/prioritas."
+  },
+  {
+    "id": 896,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "うめる",
+    "jp": "埋める",
+    "romaji": "umeru",
+    "id_text": "Mengubur / menanam (pipa)",
+    "desc": "配管を埋める = mengubur pipa (di bawah tanah). Muncul sebagai opsi Q1: 浅く埋める (kubur dangkal — pengecoh), 裸のまま埋める (kubur tanpa pelindung — pengecoh). Yang benar: 保温材＋電熱線を併用して埋める."
+  },
+  {
+    "id": 897,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ふせぐ",
+    "jp": "防ぐ",
+    "romaji": "fusegu",
+    "id_text": "Mencegah / melindungi dari",
+    "desc": "〜を防ぐ = mencegah〜. Muncul di Q3: 電線管に水が侵入するのを防ぐための処置, dan Q7: 紫外線劣化を防ぐ方法. 防止（ぼうし）= pencegahan (kata benda); 防ぐ = mencegah (kata kerja)."
+  },
+  {
+    "id": 898,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "おこなう",
+    "jp": "行う",
+    "romaji": "okonau",
+    "id_text": "Melakukan / melaksanakan",
+    "desc": "〜を行う = melaksanakan〜. Kata kerja paling sering di soal ujian. 施工を行う = melaksanakan konstruksi, 検査を行う = melakukan inspeksi, 処置を行う = mengambil tindakan. Formal version of する."
+  },
+  {
+    "id": 899,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "かんがえられる",
+    "jp": "考えられる",
+    "romaji": "kangaerareru",
+    "id_text": "Yang dapat diperkirakan / kemungkinan",
+    "desc": "考えられる原因 = penyebab yang mungkin / dapat diperkirakan. Muncul di Q6: 圧力試験の結果が安定しない場合、考えられる原因はどれですか → 漏れの有無. Bentuk potensial pasif dari 考える（かんがえる）."
+  },
+  {
+    "id": 900,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "しようちゅう",
+    "jp": "使用中",
+    "romaji": "shiyouchuu",
+    "id_text": "Saat digunakan / sedang digunakan",
+    "desc": "使用中（しようちゅう）= sedang dipakai / dalam penggunaan. Konteks Q9: 電動工具使用中にコードが熱くなる場合 = saat power tool sedang digunakan dan kabelnya panas. 〜中 = sedang berlangsung."
+  },
+  {
+    "id": 901,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "べき",
+    "jp": "べき",
+    "romaji": "beki",
+    "id_text": "Seharusnya / harus dilakukan",
+    "desc": "動詞 + べき = seharusnya melakukan〜 / wajib〜. Muncul di banyak soal: 必ず行うべき検査, まず行うべきこと, 注意するべき危険. 〜すべき = 〜するべき (harus/seharusnya). Kata kunci soal prosedur wajib."
+  },
+  {
+    "id": 902,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "おこる",
+    "jp": "起こる",
+    "romaji": "okoru",
+    "id_text": "Terjadi / timbul",
+    "desc": "Kata kerja PALING SERING di soal — muncul di Q2,Q14,Q17,Q19,Q20 sebagai '何が起こりますか'. 起こる = terjadi (intransitif); 起こす = menyebabkan (transitif). Hafal polanya: 〜すると何が起こりますか = jika〜, apa yang terjadi?"
+  },
+  {
+    "id": 903,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "のこる",
+    "jp": "残る",
+    "romaji": "nokoru",
+    "id_text": "Tersisa / tertinggal",
+    "desc": "水分が残り故障する = kelembapan tersisa → menyebabkan kerusakan. Konteks Q2: pemvakuman tidak tuntas → 水分が残る (kelembapan tertinggal di dalam pipa refrigeran). 残る = tersisa; 残す = menyisakan (transitif)."
+  },
+  {
+    "id": 904,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "しけん",
+    "jp": "試験",
+    "romaji": "shiken",
+    "id_text": "Uji / pengujian (tekanan/teknis)",
+    "desc": "圧力試験（Q6）= uji tekanan. ガス漏れ試験（Q8）= uji kebocoran gas. 試験 = pengujian terhadap batas/standar teknis. Berbeda dari 検査（けんさ）= inspeksi kondisi visual/kebocoran pasca-konstruksi."
+  },
+  {
+    "id": 905,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "けんさ",
+    "jp": "検査",
+    "romaji": "kensa",
+    "id_text": "Inspeksi / pemeriksaan",
+    "desc": "漏れ検査（Q16）= inspeksi kebocoran — WAJIB setelah pengelasan. 色検査 & 音検査 = pengecoh Q16. 検査 = pemeriksaan kondisi pasca-pekerjaan. Berbeda dari 試験（しけん）= pengujian teknis terhadap standar/tekanan."
+  },
+  {
+    "id": 906,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "さぎょう",
+    "jp": "作業",
+    "romaji": "sagyou",
+    "id_text": "Pekerjaan / operasi kerja",
+    "desc": "高所作業（Q5）= pekerjaan di ketinggian. 溶接作業後（Q16）= setelah pekerjaan pengelasan. 作業中 = sedang bekerja. 作業員（さぎょういん）= pekerja/operator. Lebih spesifik dari 工事（pekerjaan konstruksi besar）."
+  },
+  {
+    "id": 907,
+    "category": "career",
+    "source": "vocab-lifeline",
+    "furi": "ほうほう",
+    "jp": "方法",
+    "romaji": "houhou",
+    "id_text": "Cara / metode",
+    "desc": "施工方法（Q1）= metode konstruksi. 防ぐ方法（Q7）= cara mencegah. 〜のための方法/〜する方法 = cara untuk〜. Sering menjadi kata kunci pertanyaan 'bagaimana caranya'. Beda dari 施工方法（metode khusus konstruksi）."
+  },
+  {
+    "id": 908,
+    "category": "hoon",
+    "source": "vocab-lifeline",
+    "furi": "こうじ",
+    "jp": "工事",
+    "romaji": "kouji",
+    "id_text": "Pekerjaan konstruksi",
+    "desc": "保冷工事（Q4）= pekerjaan insulasi dingin. 工事 = pekerjaan konstruksi secara umum (berskala proyek). Lebih besar dari 作業（さぎょう）= operasi kerja harian. 工事中 = sedang dalam konstruksi."
+  },
+  {
+    "id": 909,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "あんぜん",
+    "jp": "安全",
+    "romaji": "anzen",
+    "id_text": "Aman / keselamatan",
+    "desc": "安全確認（Q8）= pemeriksaan keamanan. 安全管理 = manajemen K3. 安全第一 = safety first. 安全 = kondisi aman/safety. Kata dasar yang sering kombinasi: 安全確認、安全管理、安全帯（ハーネス）."
+  },
+  {
+    "id": 910,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "せこう",
+    "jp": "施工",
+    "romaji": "sekou",
+    "id_text": "Pelaksanaan konstruksi",
+    "desc": "Kata dasar dari: 施工方法（cara konstruksi）, 施工前（sebelum konstruksi）, 施工時（saat konstruksi）, 追加施工（konstruksi tambahan）, 施工後（setelah konstruksi）. 施工する = melaksanakan konstruksi."
+  },
+  {
+    "id": 911,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "とる",
+    "jp": "取る",
+    "romaji": "toru",
+    "id_text": "Mengambil / memasang / mendapatkan",
+    "desc": "アースを取る（Q13）= memasang grounding. 取り付け（とりつけ）= pemasangan（Q12）. 取る banyak makna kontekstual: mengambil, memasang, mendapatkan. Perhatikan bentuk: 取り付ける = memasang (lebih spesifik)."
+  },
+  {
+    "id": 1007,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "きゅうとうかん",
+    "jp": "給湯管",
+    "romaji": "kyuutou kan",
+    "id_text": "Pipa air panas (suplai)",
+    "desc": "Pipa yang menyalurkan air panas ke keran, shower, dll. Berbeda dari 温水管 (lebih umum)."
+  },
+  {
+    "id": 1010,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "きゃたつ",
+    "jp": "脚立",
+    "romaji": "kyatatsu",
+    "id_text": "Tangga lipat (stepladder)",
+    "desc": "Tangga yang bisa berdiri sendiri, dilipat saat tidak digunakan. Untuk pekerjaan di ketinggian sedang."
+  },
+  {
+    "id": 1012,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ぱいぷれんち",
+    "jp": "パイプレンチ",
+    "romaji": "paipu renchi",
+    "id_text": "Kunci pipa (pipe wrench)",
+    "desc": "Kunci khusus bergigi untuk memutar dan mengencangkan pipa besi/baja."
+  },
+  {
+    "id": 1013,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "もんきーれんち",
+    "jp": "モンキーレンチ",
+    "romaji": "monkii renchi",
+    "id_text": "Kunci inggris (adjustable wrench)",
+    "desc": "Kunci yang bisa disesuaikan bukaannya untuk berbagai ukuran baut dan mur."
+  },
+  {
+    "id": 1017,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ほーす",
+    "jp": "ホース",
+    "romaji": "hoosu",
+    "id_text": "Selang (hose)",
+    "desc": "Pipa fleksibel untuk mengalirkan air atau fluida. Terbuat dari karet atau PVC."
+  },
+  {
+    "id": 1020,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "ちちゅうけーぶる",
+    "jp": "地中ケーブル",
+    "romaji": "chichuu keeburu",
+    "id_text": "Kabel bawah tanah",
+    "desc": "Kabel listrik yang ditanam di bawah tanah, biasanya dalam konduit pelindung."
+  },
+  {
+    "id": 1021,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "ちじょうけーぶる",
+    "jp": "地上ケーブル",
+    "romaji": "chijou keeburu",
+    "id_text": "Kabel di atas tanah",
+    "desc": "Kabel listrik yang dipasang di permukaan tanah atau di atas permukaan."
+  },
+  {
+    "id": 1022,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "かくうけーぶる",
+    "jp": "架空ケーブル",
+    "romaji": "kakuu keeburu",
+    "id_text": "Kabel udara / overhead cable",
+    "desc": "Kabel listrik yang dibentangkan di atas tiang (電柱). Paling umum di jalanan Jepang."
+  },
+  {
+    "id": 1024,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "てんじょうない",
+    "jp": "天井内",
+    "romaji": "tenjou nai",
+    "id_text": "Bagian dalam plafon / ceiling space",
+    "desc": "Ruang tersembunyi di atas plafon tempat pipa, kabel, dan duct dipasang."
+  },
+  {
+    "id": 1026,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "おくがいろしゅつぶぶん",
+    "jp": "屋外露出部分",
+    "romaji": "okugai roshutsu bubun",
+    "id_text": "Bagian terbuka di luar ruangan",
+    "desc": "Area di mana pipa/kabel terekspos langsung ke cuaca luar. Perlu perlindungan anti-UV dan anti-air."
+  },
+  {
+    "id": 1027,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "おくないろしゅつぶぶん",
+    "jp": "屋内露出部分",
+    "romaji": "okunai roshutsu bubun",
+    "id_text": "Bagian terbuka di dalam ruangan",
+    "desc": "Area di mana pipa/kabel terlihat langsung di dalam ruangan (tidak tersembunyi di plafon/dinding)."
+  },
+  {
+    "id": 1028,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "かつざいのとふ",
+    "jp": "滑剤の塗布",
+    "romaji": "katsuzai no tofu",
+    "id_text": "Pengolesan pelumas",
+    "desc": "Melumasi bagian sambungan pipa agar mudah dimasukkan. Langkah penting dalam pemasangan pipa ductile."
+  },
+  {
+    "id": 1030,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ごむわのせっと",
+    "jp": "ゴム輪のセット",
+    "romaji": "gomu wa no setto",
+    "id_text": "Pemasangan cincin karet",
+    "desc": "Memasang o-ring/gasket karet pada alur pipa sebelum penyambungan. Fungsi: mencegah kebocoran."
+  },
+  {
+    "id": 1031,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ごむわのいち",
+    "jp": "ゴム輪の位置",
+    "romaji": "gomu wa no ichi",
+    "id_text": "Posisi cincin karet",
+    "desc": "Memastikan cincin karet berada pada posisi yang benar di alur pipa. Posisi salah = kebocoran."
+  },
+  {
+    "id": 1032,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "ゆうちゃくじゅんび",
+    "jp": "融着準備",
+    "romaji": "yuuchaku junbi",
+    "id_text": "Persiapan fusi (EF welding)",
+    "desc": "Langkah-langkah persiapan sebelum proses electrofusion welding pada pipa polietilen."
+  },
+  {
+    "id": 1034,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "いーえふそけっと",
+    "jp": "EFソケット",
+    "romaji": "EF soketto",
+    "id_text": "Soket EF (electrofusion socket)",
+    "desc": "Fitting elektrofusi yang memiliki kawat pemanas internal. Digunakan untuk menyambung pipa polietilen."
+  },
+  {
+    "id": 1035,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "こんとろーら",
+    "jp": "コントローラ",
+    "romaji": "kontroora",
+    "id_text": "Pengontrol (controller)",
+    "desc": "Alat pengontrol yang mengatur proses fusi, suhu, atau operasi mesin."
+  },
+  {
+    "id": 1036,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "いんじけーた",
+    "jp": "インジケータ",
+    "romaji": "injikeeta",
+    "id_text": "Indikator",
+    "desc": "Alat penunjuk status atau kondisi. Contoh: indikator tekanan, suhu, atau daya."
+  },
+  {
+    "id": 1038,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ばんきんのかこう",
+    "jp": "板金の加工",
+    "romaji": "bankin no kakou",
+    "id_text": "Pengolahan pelat logam",
+    "desc": "Proses memotong, menekuk, dan membentuk lembaran logam untuk ducting atau cladding."
+  },
+  {
+    "id": 1039,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "けがき",
+    "jp": "ケガキ",
+    "romaji": "kegaki",
+    "id_text": "Kegaki (marking layout lines)",
+    "desc": "Teknik menggaris pada permukaan logam untuk panduan pemotongan/penekukan. Alat: スクライバー."
+  },
+  {
+    "id": 1041,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "だくとのせつぞくほうほう",
+    "jp": "ダクト接続方法",
+    "romaji": "dakuto no setsuzoku houhou",
+    "id_text": "Metode sambungan duct/saluran",
+    "desc": "Cara-cara menyambung saluran udara (ducting). Termasuk metode flange dan metode tanpa flange."
+  },
+  {
+    "id": 1042,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "あんぐるふらんじ",
+    "jp": "アングルフランジ",
+    "romaji": "anguru furanji",
+    "id_text": "Flensa bersudut (angle flange)",
+    "desc": "Tipe flange dari besi siku yang dipasang di tepi duct untuk penyambungan dengan baut."
+  },
+  {
+    "id": 1043,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "わっしゃー",
+    "jp": "ワッシャー",
+    "romaji": "wasshaa",
+    "id_text": "Ring / washer",
+    "desc": "Cincin logam tipis yang dipasang di bawah mur/baut untuk mendistribusikan tekanan."
+  },
+  {
+    "id": 1044,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "なっと",
+    "jp": "ナット",
+    "romaji": "natto",
+    "id_text": "Mur (nut)",
+    "desc": "Komponen baut berkepala segi enam dengan ulir dalam. Dipasangkan dengan ボルト."
+  },
+  {
+    "id": 1045,
+    "category": "doboku_doko",
+    "source": "vocab-lifeline",
+    "furi": "くっさく",
+    "jp": "掘削",
+    "romaji": "kussaku",
+    "id_text": "Penggalian / excavation",
+    "desc": "Proses menggali tanah untuk pemasangan pipa atau kabel bawah tanah."
+  },
+  {
+    "id": 1046,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "かんのまいせつこうじ",
+    "jp": "管の埋設工事",
+    "romaji": "kan no maisetsu kouji",
+    "id_text": "Pekerjaan menanam pipa",
+    "desc": "Pekerjaan membenamkan pipa ke dalam tanah, termasuk penggalian, pemasangan, dan penimbunan kembali."
+  },
+  {
+    "id": 1047,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "こうあつ・ていあつ",
+    "jp": "高圧・低圧",
+    "romaji": "kouatsu / teiatsu",
+    "id_text": "Tegangan tinggi dan rendah",
+    "desc": "Klasifikasi tegangan listrik. 高圧: di atas 600V. 低圧: 600V ke bawah. Penting untuk keselamatan."
+  },
+  {
+    "id": 1048,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "かばー",
+    "jp": "カバー",
+    "romaji": "kabaa",
+    "id_text": "Cover / penutup",
+    "desc": "Penutup pelindung untuk pipa, kabel, atau peralatan. Contoh: cable cover, duct cover."
+  },
+  {
+    "id": 1051,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "そうこ",
+    "jp": "倉庫",
+    "romaji": "souko",
+    "id_text": "Gudang",
+    "desc": "Tempat menyimpan barang/material. Perlu ventilasi dan penerangan yang memadai."
+  },
+  {
+    "id": 1052,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "きかいしつ",
+    "jp": "機械室",
+    "romaji": "kikai shitsu",
+    "id_text": "Ruang mesin / mechanical room",
+    "desc": "Ruang khusus tempat mesin-mesin besar (boiler, chiller, pompa) dipasang."
+  },
+  {
+    "id": 1053,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "きゃっぷ",
+    "jp": "キャップ",
+    "romaji": "kyappu",
+    "id_text": "Cap / penutup ujung pipa",
+    "desc": "Tutup yang dipasang di ujung pipa untuk menutup aliran. Di proyek: dipasang saat pengujian tekanan. Mandor:「テスト前にキャップを取り付けて」(pasang cap sebelum uji tekanan)."
+  },
+  {
+    "id": 1054,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "こっく",
+    "jp": "コック",
+    "romaji": "kokku",
+    "id_text": "Keran kecil / cock valve",
+    "desc": "Katup kecil untuk mengatur aliran, lebih kecil dari バルブ. Di proyek: buka perlahan untuk hindari water hammer. Mandor:「コックはゆっくり開いて」(buka keran perlahan-lahan)."
+  },
+  {
+    "id": 1055,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "ばりとり",
+    "jp": "バリ取り",
+    "romaji": "bari tori",
+    "id_text": "Deburring / hilangkan gerinda",
+    "desc": "Proses menghilangkan sisa potongan tajam (gerinda) pada logam setelah dipotong."
+  },
+  {
+    "id": 1056,
+    "category": "sekou",
+    "source": "vocab-lifeline",
+    "furi": "めんをとる",
+    "jp": "面を取る",
+    "romaji": "men wo toru",
+    "id_text": "Chamfering / buat chamfer",
+    "desc": "Proses menghaluskan tepi tajam pipa/logam dengan sudut 45° menggunakan cutter atau reamer. Di proyek: dilakukan setelah pemotongan pipa. Mandor:「切断後は必ず面取りをして」(chamfer setelah memotong)."
+  },
+  {
+    "id": 1057,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "しんえんしゅうせい",
+    "jp": "真円修正",
+    "romaji": "shin'en shuusei",
+    "id_text": "Koreksi kebulatan pipa",
+    "desc": "Proses mengembalikan bentuk pipa yang oval/penyok menjadi bulat sempurna."
+  },
+  {
+    "id": 1058,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "かんかこう",
+    "jp": "管加工",
+    "romaji": "kan kakou",
+    "id_text": "Pengolahan/pemrosesan pipa",
+    "desc": "Semua proses pengerjaan pipa: potong, tekuk, chamfer, deburring, dll."
+  },
+  {
+    "id": 1063,
+    "category": "anzen",
+    "source": "vocab-lifeline",
+    "furi": "てんけん",
+    "jp": "点検",
+    "romaji": "tenken",
+    "id_text": "Pengecekan rutin / routine inspection",
+    "desc": "Pemeriksaan rutin berkala pada peralatan dan instalasi. Di proyek: wajib dilakukan sebelum mulai bekerja. Mandor:「作業前に点検を忘れないで」(jangan lupa cek rutin sebelum kerja)."
+  },
+  {
+    "id": 1072,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "ほごテープ",
+    "jp": "保護テープ",
+    "romaji": "hogo teepu",
+    "id_text": "Pita pelindung (protective tape)",
+    "desc": "Pita untuk melindungi kabel/pipa dari gesekan atau kerusakan fisik. Berbeda dari 絶縁テープ."
+  },
+  {
+    "id": 1073,
+    "category": "denki",
+    "source": "vocab-lifeline",
+    "furi": "けっそくバンド",
+    "jp": "結束バンド",
+    "romaji": "kessoku bando",
+    "id_text": "Cable tie / pengikat kabel",
+    "desc": "Tali plastik untuk mengikat dan merapikan kumpulan kabel listrik."
+  },
+  {
+    "id": 1081,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "はいすいポンプ",
+    "jp": "排水ポンプ",
+    "romaji": "haisui ponpu",
+    "id_text": "Pompa air limbah (drainage pump)",
+    "desc": "Pompa untuk mengalirkan air limbah/kotor dari gedung ke saluran pembuangan."
+  },
+  {
+    "id": 1082,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "れいきゃくポンプ",
+    "jp": "冷却ポンプ",
+    "romaji": "reikyaku ponpu",
+    "id_text": "Pompa pendingin (cooling pump)",
+    "desc": "Pompa untuk mengalirkan air pendingin di sistem AC sentral atau chiller. Di proyek: perlu dicek putaran dan tekanannya. Mandor:「冷却ポンプの圧力を確認して」(cek tekanan pompa pendingin)."
+  },
+  {
+    "id": 1086,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "きゅうすいたんく",
+    "jp": "給水タンク",
+    "romaji": "kyuusui tanku",
+    "id_text": "Tangki air bersih (water supply tank)",
+    "desc": "Tangki penampung air bersih di gedung, biasanya di atap atau ruang bawah tanah."
+  },
+  {
+    "id": 1095,
+    "category": "tsushin",
+    "source": "vocab-lifeline",
+    "furi": "ひかりケーブルちちゅうはいせん",
+    "jp": "光ケーブル地中配線",
+    "romaji": "hikari keepuru chichuu haisen",
+    "id_text": "Pengabelan kabel optik bawah tanah",
+    "desc": "Pemasangan kabel serat optik di dalam tanah melalui 管路 atau 共同溝."
+  },
+  {
+    "id": 1096,
+    "category": "haikan",
+    "source": "vocab-lifeline",
+    "furi": "かしつき",
+    "jp": "加湿器",
+    "romaji": "kashitsuki",
+    "id_text": "Humidifier / pelembab udara",
+    "desc": "Alat untuk menambah kelembaban udara ruangan. Bagian dari sistem HVAC."
+  }
+]

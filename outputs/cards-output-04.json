@@ -1,0 +1,1002 @@
+[
+  {
+    "id": 51,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "けんでんき",
+    "jp": "検電器",
+    "romaji": "kendenki",
+    "id_text": "Detektor tegangan",
+    "desc": "Alat untuk memeriksa apakah ada muatan listrik atau tidak. Ada untuk tegangan rendah dan tegangan tinggi."
+  },
+  {
+    "id": 52,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "けんそうき",
+    "jp": "検相器",
+    "romaji": "kensou ki",
+    "id_text": "Detektor fase",
+    "desc": "Alat cek urutan fase sistem 3-fase — menentukan arah rotasi motor. Mandor:「モーター接続前に検相器で確認して」(cek urutan fase sebelum sambung motor)."
+  },
+  {
+    "id": 53,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "てすたあばにょうけい",
+    "jp": "テスター / 万用計",
+    "romaji": "tesutaa / banyou kei",
+    "id_text": "Tester / Multimeter",
+    "desc": "Alat ukur voltase, arus, dan resistansi pada rangkaian listrik. Mandor:「テスターで断線していないか確認して」(cek putus-tidaknya rangkaian dengan tester)."
+  },
+  {
+    "id": 54,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "くらんぷめえたあ",
+    "jp": "クランプメーター",
+    "romaji": "kuranpu meetaa",
+    "id_text": "Clamp meter",
+    "desc": "Alat ukur arus listrik cukup dengan menjepit kabel tanpa memutus rangkaian. Mandor:「クランプメーターで負荷電流を測って」(ukur arus beban dengan clamp meter)."
+  },
+  {
+    "id": 55,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "でんせんかん",
+    "jp": "電線管",
+    "romaji": "densenkan",
+    "id_text": "Conduit (pelindung kabel)",
+    "desc": "Pipa dari logam atau resin sintetis yang menampung kabel listrik di dalamnya. Ada pipa E, C, G, PF, CD, dll."
+  },
+  {
+    "id": 56,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "ふれきしぶるかん",
+    "jp": "フレキシブル管",
+    "romaji": "furekishiburu kan",
+    "id_text": "Conduit fleksibel",
+    "desc": "Conduit fleksibel yang bisa ditekuk bebas — jenis logam dan resin (PF/CD). Mandor:「機器の接続部にはフレキを使って」(pakai flexible conduit di bagian koneksi alat)."
+  },
+  {
+    "id": 57,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "ぷるぼっくす",
+    "jp": "プルボックス",
+    "romaji": "puru bokkusu",
+    "id_text": "Pull box",
+    "desc": "Kotak junction untuk menghubungkan dan mencabangkan kabel — jenis logam dan resin. Mandor:「プルボックスのサイズを図面で確認して」(cek ukuran pull box di gambar kerja)."
+  },
+  {
+    "id": 58,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "けえぷるらっく",
+    "jp": "ケーブルラック",
+    "romaji": "keepuru rakku",
+    "id_text": "Rak kabel",
+    "desc": "Rak berbentuk tangga untuk mengelola berbagai jenis kabel sekaligus. Kait kabel digunakan jika jumlah kabel sedikit."
+  },
+  {
+    "id": 59,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "っけえぷる",
+    "jp": "VVFケーブル",
+    "romaji": "VVF keepuru",
+    "id_text": "Kabel VVF",
+    "desc": "Kabel listrik berisolasi vinil berbentuk datar untuk instalasi rumah/gedung. Mandor:「VVFは露出配線に使わないで」(jangan pakai VVF untuk kabel tampak permukaan)."
+  },
+  {
+    "id": 62,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "せっちぼう",
+    "jp": "接地棒",
+    "romaji": "secchibou",
+    "id_text": "Batang pentanahan (grounding rod)",
+    "desc": "Batang baja berlapis yang ditancapkan ke tanah untuk sistem pentanahan (grounding). Mandor:「接地棒は規定の深さまで打ち込んで」(tancapkan batang grounding sampai kedalaman yang ditentukan)."
+  },
+  {
+    "id": 63,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "はんどほおる",
+    "jp": "ハンドホール",
+    "romaji": "hando hooru",
+    "id_text": "Handhole",
+    "desc": "Kotak akses untuk kabel listrik dan komunikasi bawah tanah — lebih kecil dari manhole. Mandor:「ハンドホールの蓋はしっかり閉めて」(tutup rapat penutup handhole setelah selesai)."
+  },
+  {
+    "id": 68,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "ひかりあいばあけえぷる",
+    "jp": "光ファイバーケーブル",
+    "romaji": "hikari faibaa keepuru",
+    "id_text": "Kabel serat optik",
+    "desc": "Kabel serat optik yang dibundel — tersedia mulai 20 hingga 400 inti. Mandor:「光ファイバーは曲げ半径に注意して」(perhatikan radius tekukan kabel fiber optik)."
+  },
+  {
+    "id": 69,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "どじくけえぷる",
+    "jp": "同軸ケーブル",
+    "romaji": "dojiku keepuru",
+    "id_text": "Kabel koaksial",
+    "desc": "Kabel dengan konduktor di tengah, dilindungi isolator & konduktor luar. Digunakan untuk kabel antena TV."
+  },
+  {
+    "id": 70,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "うけえぷる",
+    "jp": "UTPケーブル",
+    "romaji": "UTP keepuru",
+    "id_text": "Kabel UTP twisted pair",
+    "desc": "Kabel 2 konduktor yang dipilin berpasangan. Lebih murah & lembut dari koaksial. Digunakan untuk telepon atau jaringan."
+  },
+  {
+    "id": 72,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "ひかりこねくた",
+    "jp": "光コネクタ",
+    "romaji": "hikari konekuta",
+    "id_text": "Konektor optik",
+    "desc": "Bagian untuk menyambungkan kabel serat optik. Dapat dimasukkan & dilepas dengan tangan. Jenis: SC, FC, LC, MU."
+  },
+  {
+    "id": 74,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "るうたあ",
+    "jp": "ルーター",
+    "romaji": "ruutaa",
+    "id_text": "Router",
+    "desc": "Perangkat jaringan yang menghubungkan dan memisahkan beberapa jaringan berbeda. Mandor:「ルーターの設置場所を監督に確認して」(konfirmasi lokasi pemasangan router ke supervisor)."
+  },
+  {
+    "id": 75,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "すいちんぐはぶ",
+    "jp": "スイッチングハブ",
+    "romaji": "suitchingu habu",
+    "id_text": "Switching hub",
+    "desc": "Perangkat relai jaringan yang memeriksa alamat dan mengirimkan data hanya ke perangkat yang diperlukan."
+  },
+  {
+    "id": 78,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "あいいばあかったあ",
+    "jp": "ファイバーカッター（光ファイバー用）",
+    "romaji": "faiibaa kattaa",
+    "id_text": "Pemotong serat optik (presisi)",
+    "desc": "Memotong serat optik secara presisi, tegak lurus sempurna agar fusion bersih. Berbeda dari ファイバーカッター untuk kain/plastik."
+  },
+  {
+    "id": 80,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "ひかりぱわあめえたあ",
+    "jp": "光パワーメーター",
+    "romaji": "hikari pawaa meetaa",
+    "id_text": "Pengukur daya optik (optical power meter)",
+    "desc": "Mengukur kekuatan sinyal cahaya (daya) pada kabel serat optik. Berbeda dari OTDR yang mengukur panjang jalur & titik abnormal."
+  },
+  {
+    "id": 82,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "たんそこうこうかん",
+    "jp": "炭素鋼鋼管（SGP）",
+    "romaji": "tanso kou koukan (SGP)",
+    "id_text": "Pipa baja karbon (SGP)",
+    "desc": "Pipa baja untuk uap, air, minyak, gas, dan udara. Ada tabung putih (berlapis) dan tabung hitam (tanpa lapisan). Sambungan ulir untuk 15A–100A."
+  },
+  {
+    "id": 83,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "こうしつえんかびにるかんう",
+    "jp": "硬質塩化ビニル管（VP/VU）",
+    "romaji": "koushitsu enka biniru kan (VP/VU)",
+    "id_text": "Pipa PVC keras (VP/VU)",
+    "desc": "Pipa PVC abu-abu: VP=tebal, VU=tipis. Ringan dan halus tapi rentan benturan dan panas. Mandor:「VPとVUを間違えないように確認して」(pastikan tidak keliru antara VP dan VU)."
+  },
+  {
+    "id": 84,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "たいしょうげっきせいえんびかん",
+    "jp": "耐衝撃性塩ビ管（HIVP）",
+    "romaji": "taishougekkisei en bi kan (HIVP)",
+    "id_text": "Pipa HIVP (PVC tahan benturan)",
+    "desc": "Pipa PVC berwarna biru tua yang tahan benturan eksternal. Digunakan di tempat benturan besar dan daerah dingin."
+  },
+  {
+    "id": 85,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "だくたいるちゅうてつかん",
+    "jp": "ダクタイル鋳鉄管",
+    "romaji": "dakutairu chuutetsu kan",
+    "id_text": "Pipa besi cor ulet",
+    "desc": "Grafit berbentuk bola (球状黒鉛) → kekuatan & ketangguhan lebih tinggi dari besi cor biasa. Relatif berat. Aliran utama sejak 1955."
+  },
+  {
+    "id": 86,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "どうかん",
+    "jp": "銅管",
+    "romaji": "doukan",
+    "id_text": "Pipa tembaga",
+    "desc": "Pipa tembaga tanpa sambungan, digunakan untuk jalur refrigeran AC indoor-outdoor. Mandor:「銅管は傷つけないよう丁寧に扱って」(tangani pipa tembaga dengan hati-hati agar tidak lecet)."
+  },
+  {
+    "id": 89,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "ぱいぷれんち",
+    "jp": "パイプレンチ（ピレン）",
+    "romaji": "paipu renchi (piren)",
+    "id_text": "Kunci pipa (piren)",
+    "desc": "Tang pipa untuk mencengkeram dan memutar pipa bulat saat penyambungan. Mandor:「パイプレンチは正しい方向に使って」(gunakan pipe wrench ke arah yang benar)."
+  },
+  {
+    "id": 92,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "すりいぶ",
+    "jp": "スリーブ",
+    "romaji": "suriibu",
+    "id_text": "Selongsong (sleeve)",
+    "desc": "Tabung silinder dipasang pada dinding/lantai/balok untuk melewatkan pipa. Dibenamkan sebelum cor beton."
+  },
+  {
+    "id": 93,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "えるぼ",
+    "jp": "エルボ",
+    "romaji": "erubo",
+    "id_text": "Siku (elbow)",
+    "desc": "Sambungan pipa yang mengubah arah aliran 45° atau 90°. Mandor:「エルボの向きを図面で確認してから取り付けて」(cek arah elbow di gambar sebelum pasang)."
+  },
+  {
+    "id": 94,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "ちいず",
+    "jp": "チーズ（チー）",
+    "romaji": "chiizu (chii)",
+    "id_text": "Tee",
+    "desc": "Sambungan pipa tiga arah untuk membuat cabang aliran. Mandor:「チーズのサイズは配管径に合わせて」(sesuaikan ukuran tee dengan diameter pipa)."
+  },
+  {
+    "id": 97,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "ぱいぷまんりき",
+    "jp": "パイプ万力（ぱいぷまんりき）",
+    "romaji": "paipu manriki",
+    "id_text": "Ragum pipa (pipe vise)",
+    "desc": "Alat penjepit/penahan pipa agar tidak bergerak saat dikerjakan (disambung, dipotong, dibuat ulir). Berbeda dari パイプレンチ yang untuk memutar/menyambung pipa."
+  },
+  {
+    "id": 100,
+    "category": "hoon",
+    "source": "jac-ch5",
+    "furi": "はっぽうすちろるだんねつざい",
+    "jp": "発泡スチロール断熱材 / ポリスチレンフォーム",
+    "romaji": "happou suchiroru dannetsu zai",
+    "id_text": "Bahan isolasi busa polistiren",
+    "desc": "Insulasi polistirena — tidak tahan suhu ≥70°C, umum dipakai untuk pipa air dan drainase. Mandor:「高温配管には発泡スチロールは使えません」(insulasi styrofoam tidak boleh untuk pipa suhu tinggi)."
+  },
+  {
+    "id": 104,
+    "category": "hoon",
+    "source": "jac-ch5",
+    "furi": "けいさんかるしうむほおんざい",
+    "jp": "けい酸カルシウム保温材",
+    "romaji": "keisan karushiumu hoon zai",
+    "id_text": "Bahan isolasi kalsium silikat",
+    "desc": "Bahan isolasi termal berbasis kalsium silikat. Digunakan untuk pipa/peralatan suhu tinggi. Bukan untuk pipa air biasa. Muncul sebagai opsi pengecoh di soal グラスウール vs ロックウール."
+  },
+  {
+    "id": 106,
+    "category": "shoubou",
+    "source": "jac-ch5",
+    "furi": "すぷりんくらあせつび",
+    "jp": "スプリンクラー設備",
+    "romaji": "supurinkuraa setsubi",
+    "id_text": "Peralatan sprinkler",
+    "desc": "Alat yang dipasang pada pipa pemadam dan memercikkan air otomatis dari plafon jika terjadi kebakaran."
+  },
+  {
+    "id": 109,
+    "category": "shoubou",
+    "source": "jac-ch5",
+    "furi": "ふんまつしょうかせつび",
+    "jp": "粉末消火設備",
+    "romaji": "funmatsu shouka setsubi",
+    "id_text": "Peralatan pemadam api bubuk",
+    "desc": "Menggunakan bahan pemadam bubuk. Cocok untuk kebakaran minyak dan kebakaran peralatan listrik berenergi."
+  },
+  {
+    "id": 139,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "とらんしっと",
+    "jp": "トランシット",
+    "romaji": "toranshitto",
+    "id_text": "Theodolit / Transit",
+    "desc": "Alat ukur sudut vertikal dan horizontal — saat ini umumnya versi digital. Mandor:「トランシットで通りと直角を確認して」(cek kelurusan dan sudut siku dengan transit)."
+  },
+  {
+    "id": 140,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "とおたるすてえしょん",
+    "jp": "トータルステーション",
+    "romaji": "tootaru suteeshon",
+    "id_text": "Total station",
+    "desc": "Gabungan alat ukur jarak dan sudut elektronik dalam satu perangkat. Mandor:「トータルステーションで座標を確認して」(konfirmasi koordinat dengan total station)."
+  },
+  {
+    "id": 141,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "すみだし",
+    "jp": "墨出し（すみだし）",
+    "romaji": "sumi dashi",
+    "id_text": "Penandaan tinta / marking",
+    "desc": "Penandaan posisi dan ketinggian struktur di lokasi konstruksi. Pekerjaan terpenting yang butuh akurasi tinggi."
+  },
+  {
+    "id": 142,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "こんべっくす",
+    "jp": "コンベックス",
+    "romaji": "konbekkusu",
+    "id_text": "Meteran pita (convex rule)",
+    "desc": "Meteran pita logam tipis — nama resmi 'convex rule', di lapangan dipanggil 'konbe'. Mandor:「コンベックスで寸法を二度確認して」(ukur dimensi dua kali dengan meteran)."
+  },
+  {
+    "id": 143,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "ふりこさげふり",
+    "jp": "振り子・下げ振り",
+    "romaji": "furiko / sage furi",
+    "id_text": "Bandul lot (plumb bob)",
+    "desc": "Pemberat berujung kerucut untuk memeriksa tegak lurusnya tiang. Prinsip: benang dari atas, cek jarak ke permukaan."
+  },
+  {
+    "id": 144,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "さんだあ",
+    "jp": "サンダー",
+    "romaji": "sandaa",
+    "id_text": "Sander (alat poles)",
+    "desc": "Alat listrik untuk ampelas permukaan datar — jenis getar, sabuk, dan putar. Mandor:「サンダーかける前に養生してください」(lakukan pelindungan area sebelum mengampelas)."
+  },
+  {
+    "id": 150,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "いちりんしゃ",
+    "jp": "一輪車（いちりんしゃ）",
+    "romaji": "ichirinsha",
+    "id_text": "Gerobak sorong satu roda (wheelbarrow)",
+    "desc": "Alat angkut dengan satu roda di depan dan dua gagang di belakang. Digunakan untuk mengangkut tanah, pasir, campuran beton di lokasi konstruksi. Berbeda dari 台車 (platform datar 4 roda)."
+  },
+  {
+    "id": 331,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "ろおどろおらあたいやろおらあしんどうろおらあ",
+    "jp": "ロードローラ・タイヤローラ・振動ローラ",
+    "romaji": "roodo rooraa / taiya rooraa / shindou rooraa",
+    "id_text": "Mesin pemadat: road roller / tire roller",
+    "desc": "ロードローラ = rol besi (untuk subgrade/subbase jalan); タイヤローラ = rol karet (tanah biasa, aspal); 振動ローラ = rol besi bergetar (efek kuat meski ukuran kecil)."
+  },
+  {
+    "id": 332,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "ほいいるろおだあ",
+    "jp": "ホイールローダ",
+    "romaji": "hoiiru roodaa",
+    "id_text": "Wheel loader (tire dozer / tire shovel)",
+    "desc": "Mesin pemuat material (tanah, batu) ke truk menggunakan bucket besar di depan, bergerak dengan roda ban. Berbeda dari バックホウ yang menggali ke belakang."
+  },
+  {
+    "id": 333,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "たわあくれいんますとくらいんぐふろおあくらいみんぐ",
+    "jp": "タワークレーン",
+    "romaji": "tawaa kurein (masuto kuraingu vs furooa kuraimingu)",
+    "id_text": "Tower crane — 2 jenis naik ketinggian",
+    "desc": "マストクライング: kepala crane memanjat tiang (mast) yang diperpanjang. フロアークライミング: seluruh crane memanjat bangunan dari lantai ke lantai. Digunakan untuk gedung bertingkat tinggi."
+  },
+  {
+    "id": 334,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "べんだあ",
+    "jp": "ベンダー",
+    "romaji": "bendaa",
+    "id_text": "Alat pembengkok pipa metal (conduit bender)",
+    "desc": "Digunakan untuk membengkokkan pipa logam (金属管) sesuai sudut yang diperlukan dalam pekerjaan instalasi listrik."
+  },
+  {
+    "id": 335,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "しいぢいかんぴいえふかん",
+    "jp": "CD管 vs PF管",
+    "romaji": "shii dii kan vs pii efu kan",
+    "id_text": "CD (Combined Duct) vs PF (Plastic Flexible",
+    "desc": "CD管 = 非難燃性 (tidak tahan nyala api), khusus ditanam dalam beton (埋設用), berwarna oranye. PF管 = 難燃性 (tahan nyala api), untuk instalasi umum, tidak boleh ditanam dalam beton."
+  },
+  {
+    "id": 336,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "しいかんうすこうでんせんかんじいかんあつこうでんせんかん",
+    "jp": "C管（薄鋼電線管）vs G管（厚鋼電線管）",
+    "romaji": "shii kan (usu kou densenkan) vs jii kan (atsu kou densenkan)",
+    "id_text": "C = pipa baja tipis (ada ulir) vs G = pipa baja",
+    "desc": "C管 (薄鋼): lebih tipis, kuat terhadap benturan, untuk instalasi dalam ruangan. G管 (厚鋼): tebal, permukaan galvanis sehingga tahan cuaca (耐候性あり)."
+  },
+  {
+    "id": 337,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "ぼいどかん",
+    "jp": "ボイド管",
+    "romaji": "boido kan",
+    "id_text": "Pipa kertas (void tube)",
+    "desc": "Pipa berbahan kertas yang ditanam sebelum pengecoran beton untuk membentuk lubang tembus di lantai, balok, atau dinding. Dilepas setelah beton mengeras."
+  },
+  {
+    "id": 338,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "あうとれっとぼっくす",
+    "jp": "アウトレットボックス",
+    "romaji": "autoretto bokkusu",
+    "id_text": "Outlet box — kotak percabangan kabel",
+    "desc": "Kotak yang digunakan untuk percabangan (分岐) dan penyambungan (接続) kabel dalam instalasi listrik. Berbeda dari プルボックス yang digunakan untuk menarik/menyambung kabel antar konduit panjang."
+  },
+  {
+    "id": 339,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "あっちゃくぺんちたんしようあかりんぐすりいぶようき",
+    "jp": "圧着ペンチ（端子用=赤・リングスリーブ用=黄）",
+    "romaji": "acchaku penchi (tanshi you = aka / ringu suriibu you = ki)",
+    "id_text": "Tang krimping — pegangan MERAH untuk terminal",
+    "desc": "Ada 2 jenis: pegangan merah = untuk圧着端子 (crimp terminal); pegangan kuning = untuk リングスリーブ (ring sleeve, menyambung beberapa kabel). Warna pegangan TIDAK boleh tertukar."
+  },
+  {
+    "id": 340,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "りんぐすりいぶ",
+    "jp": "リングスリーブ",
+    "romaji": "ringu suriibu",
+    "id_text": "Ring sleeve — komponen penyambung beberapa kabel",
+    "desc": "Komponen berbentuk cincin yang digunakan untuk menyambung beberapa kabel sekaligus. Kabel dimasukkan ke lubang cincin lalu dikrimping dengan 圧着ペンチ (pegangan kuning)."
+  },
+  {
+    "id": 341,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "よびせん",
+    "jp": "呼び線（よびせん）",
+    "romaji": "yobisen",
+    "id_text": "Kabel panduan (guide wire) untuk menarik kabel",
+    "desc": "Kawat yang dimasukkan terlebih dahulu ke dalam pipa konduit. Kabel utama disambungkan ke ujung kawat panduan ini, kemudian ditarik melewati pipa."
+  },
+  {
+    "id": 342,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "れえすゑえ",
+    "jp": "レースウェイ",
+    "romaji": "reesuwee",
+    "id_text": "Raceway — rel distribusi listrik untuk memasang",
+    "desc": "Komponen penggantung lampu yang juga memiliki fungsi penyalur daya listrik (給電機能). Digantung dari baut gantung, digunakan di tempat tanpa plafon seperti gudang."
+  },
+  {
+    "id": 343,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "つりぼるとぜんねじぼると",
+    "jp": "吊りボルト（全ねじボルト）",
+    "romaji": "tsuri boruto (zen neji boruto)",
+    "id_text": "Baut gantung (full-thread bolt)",
+    "desc": "Baut panjang berulir penuh tanpa kepala, dipasang pada insert yang tertanam di beton lantai. Digunakan untuk menggantung konduit, kabel rack, dan raceway."
+  },
+  {
+    "id": 344,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "わいやあすとりっぱ",
+    "jp": "ワイヤーストリッパー",
+    "romaji": "waiyaa sutorippa",
+    "id_text": "Wire stripper — alat pengupas isolasi kabel",
+    "desc": "Alat untuk mengupas lapisan isolasi (被覆) kabel listrik tanpa merusak kawat di dalamnya. Sering dilengkapi ストリップゲージ untuk mengukur panjang kupasan."
+  },
+  {
+    "id": 345,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "しいぶいけえぷるいいえむいいいいえふ",
+    "jp": "CVケーブル vs EM-EEF",
+    "romaji": "shii bui keepuru vs ii emu ii ii efu",
+    "id_text": "CV (cross-linked polyethylene) vs EM-EEF",
+    "desc": "EM-EEF = VVFケーブル dengan selubung polyethylene, tahan nyala lebih baik dari VVF biasa. CVケーブル = menggunakan 架橋ポリエチレン (cross-linked PE) sebagai isolator, ketahanan nyala LEBIH TINGGI dari EM-EEF."
+  },
+  {
+    "id": 346,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "しいちいぶいしいちいいどうようでんせん",
+    "jp": "CT / VCT（移動用電線）",
+    "romaji": "shii tii / bui shii tii (idou you densen)",
+    "id_text": "CT (karet) / VCT (vinyl)",
+    "desc": "CT = selubung karet, tahan abrasi dan benturan, untuk kabel bergerak. VCT = selubung vinyl, tahan nyala api, lentur, dan tahan air — juga untuk kabel bergerak."
+  },
+  {
+    "id": 347,
+    "category": "denki",
+    "source": "jac-ch5",
+    "furi": "さあまるりれえ",
+    "jp": "サーマルリレー",
+    "romaji": "saamaru riree",
+    "id_text": "Thermal relay — pemutus sirkuit berdasarkan suhu",
+    "desc": "Jenis relay yang memutus rangkaian listrik ketika suhu naik melampaui batas. Digunakan untuk melindungi motor listrik dari panas berlebih akibat beban lebih."
+  },
+  {
+    "id": 348,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "くろおじゃあ",
+    "jp": "クロージャ",
+    "romaji": "kuroojaa",
+    "id_text": "Closure — kotak sambungan kabel aerial di tiang",
+    "desc": "Kotak yang dipasang di tiang listrik untuk menyambung/mencabang inti kabel telekomunikasi aerial (架空配線). Melindungi sambungan dari cuaca. Warna: 光ファイバー closure = abu-abu, kabel metal = hitam."
+  },
+  {
+    "id": 349,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "つりせんめっせんじゃあわいやあ",
+    "jp": "つり線（メッセンジャーワイヤー）",
+    "romaji": "tsurisen (messenjaa waiyaa)",
+    "id_text": "Suspension wire / messenger wire",
+    "desc": "Kawat baja yang dipasang di atas kabel telekomunikasi aerial agar kabel tidak menahan beban tarikannya sendiri. Juga disebut メッセンジャーワイヤー."
+  },
+  {
+    "id": 350,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "ちょうせんきかくせんき",
+    "jp": "張線器（ちょうせんき）+ 掴線器（かくせんき）",
+    "romaji": "chousenki + kakusenki",
+    "id_text": "Penegang kawat + penjepit kawat",
+    "desc": "掴線器 = alat menjepit kawat gantung (つり線). 張線器 = dikombinasikan dengan 掴線器, menarik tuas untuk memberi tegangan pada kawat gantung agar tidak kendur."
+  },
+  {
+    "id": 351,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "せいりゅうきちくでんち",
+    "jp": "整流器 vs 蓄電池",
+    "romaji": "seiryuuki vs chikudenchi",
+    "id_text": "Rectifier (AC→DC) vs Baterai penyimpan energi",
+    "desc": "整流器 = mengubah arus bolak-balik (交流) menjadi arus searah (直流). 蓄電池 = menyimpan energi listrik dengan cara mengisi daya (充電). Keduanya digunakan dalam sistem telekomunikasi."
+  },
+  {
+    "id": 352,
+    "category": "tsushin",
+    "source": "jac-ch5",
+    "furi": "らんてすたあ",
+    "jp": "LANテスター",
+    "romaji": "ran tesutaa",
+    "id_text": "LAN tester — alat uji kabel LAN (8 kawat",
+    "desc": "Alat untuk memeriksa 8 kawat di dalam kabel LAN apakah ada yang putus (断線) atau bersilang (交差). Dipasang di kedua ujung konektor modular kabel."
+  },
+  {
+    "id": 353,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "はいかんだくと",
+    "jp": "配管（はいかん）vs ダクト",
+    "romaji": "haikan vs dakuto",
+    "id_text": "Pipa untuk air/gas vs Saluran udara",
+    "desc": "配管 = pipa untuk mengalirkan air atau gas. ダクト = saluran untuk mengalirkan udara. ダクト dibagi menjadi 角ダクト (kotak) dan 丸ダクト / スパイラルダクト (bundar)."
+  },
+  {
+    "id": 354,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "ひゅうぶかったあぱいぷかったあ",
+    "jp": "チューブカッター vs パイプカッター",
+    "romaji": "chyuubu kattaa vs paipu kattaa",
+    "id_text": "Tube cutter (pipa tipis) vs Pipe cutter (pipa",
+    "desc": "チューブカッター = untuk memotong pipa tipis dari besi, baja, kuningan, tembaga, aluminium. パイプカッター = untuk pipa yang LEBIH TEBAL (baja, kuningan, tembaga, besi tempa, timbal)."
+  },
+  {
+    "id": 355,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "ふれありんぐうつうる",
+    "jp": "フレアリングツール",
+    "romaji": "furearinguu tsuuru",
+    "id_text": "Flaring tool — alat melebar ujung pipa lunak",
+    "desc": "Alat untuk melebarkan (フレア加工) ujung pipa lunak seperti pipa tembaga agar dapat disambungkan. Digunakan dalam instalasi pendingin udara (AC)."
+  },
+  {
+    "id": 356,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "えきすぱんだあ",
+    "jp": "エキスパンダー（拡管器）",
+    "romaji": "ekisupandaa (kakukankii)",
+    "id_text": "Expander / — alat memperlebar ujung pipa tembaga",
+    "desc": "Alat untuk memperlebar (拡管) ujung pipa tembaga sehingga pipa lain dapat dimasukkan ke dalamnya untuk disambungkan. Berbeda dari フレアリングツール yang membuat flare berbentuk kerucut."
+  },
+  {
+    "id": 357,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "すいあつしけんきいてすとぽんぷ",
+    "jp": "水圧試験器（テストポンプ）",
+    "romaji": "suiatsu shikenkii (tesuto ponpu)",
+    "id_text": "Hydraulic pressure tester (test pump)",
+    "desc": "Alat ukur yang digunakan saat uji tekanan air (水圧試験) pada pipa air bersih (給水管) dan pipa air panas (給湯管) untuk memastikan tidak ada kebocoran."
+  },
+  {
+    "id": 358,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "たいねつせいこうしつえんかびにるかんかん",
+    "jp": "耐熱性硬質塩化ビニル管（HT管・HTVP管）",
+    "romaji": "tainetsusei koushitsu enka biniru kan (HT kan)",
+    "id_text": "Pipa PVC tahan panas (HT pipe)",
+    "desc": "Pipa PVC keras yang ditingkatkan ketahanan panasnya. Berwarna merah kecoklatan (赤茶色). Digunakan untuk pipa pendingin-pemanas, kolam air panas. Berbeda dari VP/VU (abu-abu) dan HIVP (biru tua)."
+  },
+  {
+    "id": 360,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "がすこっくまったんちゅうかん",
+    "jp": "ガスコック（末端 vs 中間）",
+    "romaji": "gasu kokku (mattan vs chuukan)",
+    "id_text": "Kran gas: (ujung/terminal) vs (tengah/inline)",
+    "desc": "末端ガスコック = digunakan di ujung pipa saat menyambung ke kompor/water heater. 中間ガスコック = dipasang di tengah jalur pipa sebagai katup pengatur atau pemutus aliran gas."
+  },
+  {
+    "id": 361,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "がすもれけいほうき",
+    "jp": "ガス漏れ警報器",
+    "romaji": "gasu more keihouki",
+    "id_text": "Detektor kebocoran gas",
+    "desc": "Alat yang mendeteksi kebocoran gas dan mengeluarkan alarm untuk memberitahu bahaya. Dipasang di dapur atau ruangan bergas."
+  },
+  {
+    "id": 362,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "べんだんぱあ",
+    "jp": "弁（バルブ）vs ダンパー",
+    "romaji": "ben (barubu) vs danpaa",
+    "id_text": "Katup/valve (pipa air) vs Damper (saluran udara)",
+    "desc": "弁（バルブ）= alat untuk menghentikan atau mengatur aliran CAIRAN/GAS di dalam pipa. ダンパー = alat untuk menghentikan atau mengatur aliran UDARA di dalam duct."
+  },
+  {
+    "id": 363,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "とらっぷ",
+    "jp": "トラップ（排水管）",
+    "romaji": "torappu (haisuikan)",
+    "id_text": "Perangkap bau (trap) pada pipa drainase",
+    "desc": "Bagian pada pipa drainase yang selalu berisi air untuk mencegah bau busuk (臭気) dan serangga kecil dari saluran pembuangan masuk ke dalam ruangan."
+  },
+  {
+    "id": 364,
+    "category": "haikan",
+    "source": "jac-ch5",
+    "furi": "えいせいせつびきゅうはいすいえいせいせつびのろくぶにゃ",
+    "jp": "衛生設備（給排水衛生設備の6分野）",
+    "romaji": "eisei setsubi (kyuu haisui eisei setsubi no roku bunya)",
+    "id_text": "Sanitasi / plumbing — 6 bidang: air bersih",
+    "desc": "給排水衛生設備 mencakup 6 bidang: 給水・排水・衛生器具・給湯・ガス・消火設備. Mandor:「どの設備工事か図面で確認してから始めて」(cek di gambar kerja bidang instalasi mana sebelum mulai)."
+  },
+  {
+    "id": 365,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "れいきゃくこいるおんすいこいる",
+    "jp": "冷却コイル vs 温水コイル",
+    "romaji": "reikyaku koiru vs onsui koiru",
+    "id_text": "Koil pendingin vs koil pemanas",
+    "desc": "冷却コイル = tabung berisi air dingin, dilewati udara untuk mendinginkan → digunakan saat 冷房 (AC pendingin). 温水コイル = tabung berisi air panas, memanaskan udara → digunakan saat 暖房 (pemanas)."
+  },
+  {
+    "id": 366,
+    "category": "shoubou",
+    "source": "jac-ch5",
+    "furi": "みずふんむしょうかせつび",
+    "jp": "水噴霧消火設備",
+    "romaji": "mizu funmu shouka setsubi",
+    "id_text": "Sistem pemadam kabut air",
+    "desc": "Menyemprotkan kabut air halus untuk memadamkan kebakaran. Digunakan di jalan, area parkir, dan tempat penyimpanan bahan mudah terbakar (指定可燃物)."
+  },
+  {
+    "id": 367,
+    "category": "shoubou",
+    "source": "jac-ch5",
+    "furi": "あわしょうかせつび",
+    "jp": "泡消火設備",
+    "romaji": "awa shouka setsubi",
+    "id_text": "Sistem pemadam busa — untuk kebakaran minyak",
+    "desc": "Digunakan untuk kebakaran minyak/oil yang tidak cocok dipadamkan dengan air. Bekerja dengan 2 cara: busa menutup permukaan api (窒息効果) + air dalam busa mendinginkan (冷却効果)."
+  },
+  {
+    "id": 368,
+    "category": "shoubou",
+    "source": "jac-ch5",
+    "furi": "ふかあっせいがすしょうかせつび",
+    "jp": "不活性ガス消火設備",
+    "romaji": "fukaassei gasu shouka setsubi",
+    "id_text": "Sistem pemadam gas inert",
+    "desc": "Menggunakan gas inert untuk mengurangi konsentrasi oksigen di udara (希釈) dan efek pendinginan (冷却). Tidak merusak peralatan, cocok untuk ruang server dan arsip."
+  },
+  {
+    "id": 369,
+    "category": "shoubou",
+    "source": "jac-ch5",
+    "furi": "はろげんかぶつしょうかせつび",
+    "jp": "ハロゲン化物消火設備",
+    "romaji": "harogen kabutsu shouka setsubi",
+    "id_text": "Sistem pemadam halogen",
+    "desc": "Menggunakan senyawa halogen (fluor, klor, brom) yang menghambat reaksi pembakaran. Efektif untuk kebakaran minyak, peralatan listrik aktif, komputer, perpustakaan, dan koleksi seni berharga."
+  },
+  {
+    "id": 370,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "どりるどらいばあいんぱくとどらいばあ",
+    "jp": "ドリルドライバー vs インパクトドライバー",
+    "romaji": "doriru doraibaa vs inpakuto doraibaa",
+    "id_text": "Drill driver vs Impact driver",
+    "desc": "ドリルドライバー: dapat mengatur kecepatan putar dan torsi, untuk memasang sekrup dan bor. インパクトドライバー: punya mekanisme pukul (ハンマー) sehingga torsi lebih besar, kecepatan & torsi tetap."
+  },
+  {
+    "id": 371,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "ぢすくぐらいんだあこうそくがたていそくがた",
+    "jp": "ディスクグラインダー（高速型 vs 低速型）",
+    "romaji": "disuku guraindaa (kousoku gata vs teisoku gata)",
+    "id_text": "Angle grinder: disc kecepatan tinggi untuk",
+    "desc": "Mengganti disc sesuai kebutuhan: memotong pipa metal/beton → disc putaran TINGGI (高速トルク型). Mengamplas / menghaluskan permukaan → disc putaran RENDAH (低速トルク型)."
+  },
+  {
+    "id": 372,
+    "category": "anzen",
+    "source": "jac-ch5",
+    "furi": "まるのこきっくばっく",
+    "jp": "丸のこ",
+    "romaji": "maruno ko — kikku bakku",
+    "id_text": "Gergaji sirkel — bahaya kickback (gerakan mundur",
+    "desc": "Gergaji sirkel berputar tinggi — bahaya キックバック: alat bisa mental balik tiba-tiba. Di proyek: cek safety cover sebelum pakai. Mandor:「カバーを確認してから使え」(cek pelindung dulu)."
+  },
+  {
+    "id": 373,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "こうそくせつだんきちっぷそおせつだんき",
+    "jp": "高速切断機 vs チップソー切断機",
+    "romaji": "kousoku setsudan ki vs chippu soo setsudan ki",
+    "id_text": "High-speed cutter (mata gerinda) vs chip saw",
+    "desc": "チップソー切断機: menggunakan mata gergaji bundar (丸のこ刃), mata cepat aus. 高速切断機: menggunakan batu gerinda (砥石), mata jauh lebih tahan lama. Keduanya untuk memotong pipa metal, besi tulang, baja ringan."
+  },
+  {
+    "id": 374,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "けんすこっぷかくすこっぷてこきんし",
+    "jp": "剣スコップ vs 角スコップ（てこ禁止）",
+    "romaji": "ken sukoppu vs kaku sukoppu (teko kinshi)",
+    "id_text": "Sekop runcing (menggali) vs Sekop rata (mengeruk)",
+    "desc": "剣スコップ: runcing, kaki bisa menginjak → gali tanah keras. 角スコップ: rata, tidak ada tempat injak → keruk tanah/aspal lunak. KEDUANYA dilarang sebagai tuas (てこ禁止)."
+  },
+  {
+    "id": 375,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "らんまばいぶろこんぱくたぷれえとこんぱくた",
+    "jp": "ランマ vs バイブロコンパクタ vs プレートコ",
+    "romaji": "ranma vs baiburo konpakuta vs pureeto konpakuta",
+    "id_text": "Rammer (tumbuk kuat) vs Vibratory compactor",
+    "desc": "ランマ: tumbuk kuat → pemadat dalam. バイブロコンパクタ: getaran, jangkauan luas. プレートコンパクタ: plat besar → ratakan permukaan. Mandor:「ランマで締め固めて」(pampat pakai rammer)."
+  },
+  {
+    "id": 376,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "れえざあすみだしきあかれえざあみどりれえざあ",
+    "jp": "レーザー墨出し器（赤レーザー vs 緑レーザー）",
+    "romaji": "reezaa sumidashi ki (aka reezaa vs midori reezaa)",
+    "id_text": "Laser level — garis acuan konstruksi: hijau lebih",
+    "desc": "Alat laser → garis acuan horizontal/vertikal di dinding, plafon, lantai. Laser HIJAU (緑) lebih jelas di tempat terang vs MERAH. Mandor:「緑レーザーで墨出しして」(tarik garis pakai laser hijau)."
+  },
+  {
+    "id": 377,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "すいへいき",
+    "jp": "水平器（すいへいき）",
+    "romaji": "suiheiki",
+    "id_text": "Waterpass / spirit level",
+    "desc": "Alat genggam untuk memeriksa apakah permukaan horizontal atau vertikal dengan melihat gelembung udara di tabung (気泡管). BERBEDA dari 水準器/レベル yang merupakan alat survei besar untuk menentukan elevasi."
+  },
+  {
+    "id": 378,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "さしがねうらめんおもてめんのばい",
+    "jp": "さしがね（裏面 = 表面の√2 ≈ 1.414倍）",
+    "romaji": "sashigane (ura men = omote men no √2 ≒ 1.414 bai)",
+    "id_text": "Penggaris siku baja — sisi belakang = 1.414× sisi",
+    "desc": "Alat pengukur sudut siku-siku dari logam. Sisi depan (表面): skala meter biasa. Sisi belakang (裏面): skala 1.414× lebih besar dari depan, berguna menghitung diagonal papan kayu (teorema Pythagoras √2)."
+  },
+  {
+    "id": 380,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "たがねはつりさぎょう",
+    "jp": "たがね（ハツリ作業）",
+    "romaji": "tagane (hatsuri sagyou)",
+    "id_text": "Pahat (chisel) — digunakan untuk (memecah beton",
+    "desc": "Batang berbentuk pahat yang dipukul dengan palu. Fungsi: ①memotong logam tipis ②ハツリ作業 (memecah/melubangi beton atau mengeruk mortar lama). Jenisnya: 平たがね, コンクリートたがね, 目切りたがね."
+  },
+  {
+    "id": 381,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "ばあるてこのげんり",
+    "jp": "バール（てこの原理）",
+    "romaji": "baaru (teko no genri)",
+    "id_text": "Linggis / crowbar — memanfaatkan prinsip tuas",
+    "desc": "Alat logam berbentuk L yang digunakan sebagai pengungkit. Ujung L punya alur untuk mencabut paku (釘抜き). Dapat mengangkat benda berat, mencungkil, membongkar bekisting. バール besar disebut 大バール."
+  },
+  {
+    "id": 382,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "へえんぶろっくればあほいすと",
+    "jp": "チェーンブロック vs レバーホイスト",
+    "romaji": "cheen burokku vs rebaa hoisuto",
+    "id_text": "Chain block (untuk mengangkat berat) vs lever",
+    "desc": "チェーンブロック: dipasang di kaki tiga (三脚) untuk mengangkat beban berat naik-turun. レバーホイスト: prinsip sama tapi lebih KECIL, digunakan untuk mengencangkan muatan (contoh: mengamankan backhoe di atas truk)."
+  },
+  {
+    "id": 383,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "わいやあろおぷたまかけようだいつけよう",
+    "jp": "ワイヤーロープ（玉掛け用・台付け用）",
+    "romaji": "waiyaa roopu (tamakake you / daitsuke you)",
+    "id_text": "Wire rope — untuk (slinging beban ke crane) dan",
+    "desc": "Tali baja dengan kekuatan tarik tinggi, tahan benturan, dan fleksibel. 両端加工済み = 玉掛け用 (mengaitkan beban ke crane/hook). 台付け用 = untuk mengikat/mengamankan muatan di atas kendaraan."
+  },
+  {
+    "id": 384,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "しゃっくる",
+    "jp": "シャックル",
+    "romaji": "shakkuru",
+    "id_text": "Shackle — penghubung wire rope",
+    "desc": "Alat penghubung berbentuk U berulir yang digunakan dalam operasi pengangkatan (玉掛け) untuk menyambungkan wire rope atau rantai dengan beban."
+  },
+  {
+    "id": 385,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "じゃっきねじしきはぐるましきゆあつしき",
+    "jp": "ジャッキ（ネジ式・歯車式・油圧式）",
+    "romaji": "jakki (neji shiki / haguruma shiki / yuatsu shiki)",
+    "id_text": "Jack — mengangkat beban berat dengan tenaga",
+    "desc": "Alat untuk mengangkat benda sangat berat dengan tenaga minimal. Ada 3 prinsip: ①ネジ式 (ulir) ②歯車式 (roda gigi) ③油圧式 (hidrolik). キリンジャッキ = tipe khusus ulir untuk mengangkat secara vertikal."
+  },
+  {
+    "id": 386,
+    "category": "anzen",
+    "source": "jac-ch5",
+    "furi": "はしごかくどやくどほじょうしゃひっす",
+    "jp": "はしご（角度 約75度・補助者必須）",
+    "romaji": "hashigo (kakudo yaku 75 do / hojousha hissu)",
+    "id_text": "Tangga sandar — sudut ±75°",
+    "desc": "Tangga sandar harus diletakkan pada sudut sekitar 75°. Sudut terlalu tegak → bahaya jatuh ke belakang. Sudut terlalu landai → tangga bisa patah. Selalu bekerja bersama asisten yang memegang tangga."
+  },
+  {
+    "id": 388,
+    "category": "anzen",
+    "source": "jac-ch5",
+    "furi": "ろおりんぐたわあいどうしきあしば",
+    "jp": "ローリングタワー（移動式足場）",
+    "romaji": "rooringu tawaa (idoushiki ashiba)",
+    "id_text": "Rolling tower (scaffolding beroda)",
+    "desc": "Perancah bertingkat beroda (kastor di 4 sudut) untuk pekerjaan di ketinggian. Dapat dipindahkan. Memiliki standar keselamatan berdasarkan 労働安全衛生法. Berbeda dari 高所作業車 yang menggunakan kendaraan."
+  },
+  {
+    "id": 389,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "もんきいれんちうわあごにちからをかけてまわす",
+    "jp": "モンキーレンチ（上あごに力をかけて回す）",
+    "romaji": "monkii renchi (uwa ago ni chikara wo kakete mawasu)",
+    "id_text": "Kunci inggris — putar ke arah RAHANG ATAS (upper",
+    "desc": "Kunci adjustable sesuai ukuran baut/mur. PENTING: gaya ke RAHANG ATAS (上あご) yang menyatu grip. Jika terbalik → rusak/cedera. Mandor:「上あごに力をかけて回せ」(putar tekan rahang atas)."
+  },
+  {
+    "id": 390,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "ようじょうようぽりしいと",
+    "jp": "養生用ポリシート",
+    "romaji": "youjou you pori shiito",
+    "id_text": "Polythene sheet untuk curing/proteksi",
+    "desc": "Lembaran film polyethylene tipis. Fungsi: ①mencegah kelembapan dari tanah saat pengecoran beton ②proteksi saat pengecatan ③melindungi dari hujan dan debu."
+  },
+  {
+    "id": 391,
+    "category": "anzen",
+    "source": "jac-ch5",
+    "furi": "すいちょくようじょうねっとすいへいようじょうねっと",
+    "jp": "垂直養生ネット vs 水平養生ネット",
+    "romaji": "suichoku youjou netto vs suihei youjou netto",
+    "id_text": "Jaring pengaman tegak (cegah material jatuh dari",
+    "desc": "垂直養生ネット = dipasang tegak di tepi perancah untuk mencegah material/benda terbang dari perancah. 水平養生ネット = dipasang horizontal untuk mencegah orang atau material jatuh dari tempat tinggi."
+  },
+  {
+    "id": 392,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "とろばことろぶね",
+    "jp": "トロ箱（トロ舟）",
+    "romaji": "toro bako (toro bune)",
+    "id_text": "Bak mortar (tro box/trough)",
+    "desc": "Bak kokoh berbentuk persegi panjang untuk mencampur dan mengaduk semen, mortar, atau beton. Juga disebut トロ舟 atau 舟. Material di dalamnya diaduk dengan alat pengaduk atau sekop."
+  },
+  {
+    "id": 393,
+    "category": "sekou",
+    "source": "jac-ch5",
+    "furi": "くぎうちきこんぷれっしゃあしよう",
+    "jp": "釘打ち機（コンプレッサー使用）",
+    "romaji": "kugiuchi ki (konpuresshaa shiyou)",
+    "id_text": "Nail gun (menggunakan compressor",
+    "desc": "Alat untuk memukul paku menggunakan tekanan udara dari kompresor (コンプレッサー). Jauh lebih cepat dari memukul paku manual dengan palu. Kompresor = mesin yang memampatkan udara."
+  }
+]

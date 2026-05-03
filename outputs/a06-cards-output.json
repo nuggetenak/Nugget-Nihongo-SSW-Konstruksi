@@ -1,0 +1,1052 @@
+[
+  {
+    "id": 41,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "じゅちゅういっぴんせいさん",
+    "jp": "受注一品生産",
+    "romaji": "juchuu ippin seisan",
+    "id_text": "Produksi pesanan satu-per-satu",
+    "desc": "Karakteristik khas konstruksi: setiap proyek dibuat sesuai permintaan klien dari awal, berbeda dari produksi pabrik."
+  },
+  {
+    "id": 87,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "しいるてえぷ",
+    "jp": "シールテープ",
+    "romaji": "shiiru teepu",
+    "id_text": "Sealant tape",
+    "desc": "Pita untuk mencegah kebocoran pada sambungan ulir pipa. Digulung searah jarum jam, menyisakan 1 ulir, ~6-7 gulungan."
+  },
+  {
+    "id": 90,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ねじきりき",
+    "jp": "ねじ切り機",
+    "romaji": "nejikiri ki",
+    "id_text": "Mesin ulir pipa (threading machine)",
+    "desc": "Mesin untuk membuat ulir pada pipa baja. JANGAN pakai sarung tangan saat threading!"
+  },
+  {
+    "id": 101,
+    "category": "hoon",
+    "source": "jac-ch6",
+    "furi": "れいばいかんひふくどうかん",
+    "jp": "冷媒管（被覆銅管）",
+    "romaji": "reibaikan (hifuku doukan)",
+    "id_text": "Pipa refrigeran (pipa tembaga berlapis)",
+    "desc": "Pipa yang membawa refrigeran antara unit indoor & outdoor AC. Ditutupi bahan isolasi termal tahan api."
+  },
+  {
+    "id": 116,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "きゅうしいぢいえすいい",
+    "jp": "QCDSE",
+    "romaji": "kyuu shii dii esu ii",
+    "id_text": "5 Manajemen QCDSE",
+    "desc": "Q=Kualitas, C=Biaya (Cost), D=Jadwal/Waktu (Delivery), S=Keselamatan (Safety), E=Lingkungan (Environment)."
+  },
+  {
+    "id": 118,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "ごえむ",
+    "jp": "5M",
+    "romaji": "go emu",
+    "id_text": "5M (metode pelaksanaan)",
+    "desc": "Men (Manusia), Materials (Material), Methods (Metode), Machinery (Mesin), Money (Uang)."
+  },
+  {
+    "id": 124,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "しぎょうまえてんけん",
+    "jp": "始業前点検（しぎょうまえてんけん）",
+    "romaji": "shigyou mae tenken",
+    "id_text": "Pemeriksaan sebelum mulai kerja",
+    "desc": "WAJIB sebelum bekerja: ①Mesin ②Alat/perkakas ③Prosedur kerja. Banyak kecelakaan terjadi saat menangani alat/mesin."
+  },
+  {
+    "id": 359,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "すいどうようこうしつえんかびにるらいにんぐこうかん",
+    "jp": "水道用硬質塩化ビニルライニング鋼管",
+    "romaji": "suidou you koushitsu enka biniru rainingu kouukan (VLP)",
+    "id_text": "Pipa baja berlapis PVC untuk air bersih (VLP)",
+    "desc": "Pipa baja dilapisi PVC keras di dalamnya untuk mencegah korosi. Tahan karat (耐腐食性) dan bahan kimia. Di proyek: digunakan untuk jalur air bersih."
+  },
+  {
+    "id": 414,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "はいかんようたんそこうこうかん（SGP / がすかん）",
+    "jp": "配管用炭素鋼鋼管（SGP / ガス管）",
+    "romaji": "haikan you tanso kou kouukan (SGP)",
+    "id_text": "SGP: putih (galvanis) vs hitam (tanpa lapisan)",
+    "desc": "Pipa baja karbon (SGP / Steel Gas Pipe) untuk uap, air, minyak, gas, udara. 白管 = berlapis seng/galvanis, tahan korosi. 黒管 = tanpa pelapisan. Di proyek: juga disebut ガス管."
+  },
+  {
+    "id": 492,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "とちのせいやく",
+    "jp": "土地の制約（とちのせいやく）",
+    "romaji": "tochi no seiyaku",
+    "id_text": "Karakteristik konstruksi: terikat pada lahan",
+    "desc": "Setiap proyek melekat pada lahan unik sehingga kondisi identik tidak pernah berulang; berbeda dari produksi pabrik. Di proyek: perencanaan harus menyesuaikan kondisi lahan spesifik."
+  },
+  {
+    "id": 493,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "しぜんじょうけんによるえいきょう",
+    "jp": "自然条件による影響",
+    "romaji": "shizen jouken ni yoru eikyou",
+    "id_text": "Karakteristik konstruksi: dipengaruhi kondisi alam",
+    "desc": "Pekerjaan konstruksi umumnya di luar ruangan sehingga terpengaruh topografi, musim, dan cuaca — faktor yang tidak sepenuhnya bisa dikendalikan. Di proyek: jadwal menyesuaikan cuaca."
+  },
+  {
+    "id": 494,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "しゃかいてきせいやく",
+    "jp": "社会的制約（しゃかいてきせいやく）",
+    "romaji": "shakai teki seiyaku",
+    "id_text": "Karakteristik konstruksi: terikat regulasi sosial",
+    "desc": "Karena produksi di lokasi asli (現地生産), wajib memenuhi peraturan keselamatan dan lingkungan; hukum dan lingkungan sosial berbeda tiap lokasi. Di proyek: izin dan aturan warga sekitar."
+  },
+  {
+    "id": 495,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "せこうけいかく",
+    "jp": "施工計画（せこうけいかく）",
+    "romaji": "sekou keikaku",
+    "id_text": "Rencana pelaksanaan konstruksi",
+    "desc": "Rencana berdasarkan dokumen desain untuk mengerjakan konstruksi: kualitas baik, biaya minimal, tepat waktu, nol kecelakaan, dan ramah lingkungan."
+  },
+  {
+    "id": 496,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "せこうようりょうしょ",
+    "jp": "施工要領書（せこうようりょうしょ）",
+    "romaji": "sekou youryou sho",
+    "id_text": "Dokumen prosedur pelaksanaan pekerjaan harian",
+    "desc": "Memuat detail teknis pelaksanaan pekerjaan: konfirmasi gambar, kondisi lapangan, urutan kerja, penempatan tenaga, serta persiapan alat dan material. Wajib dipahami sebelum memulai pekerjaan hari itu."
+  },
+  {
+    "id": 497,
+    "category": "career",
+    "source": "jac-ch6",
+    "furi": "きゃりああっぷかあど・さぎょうめんきょ",
+    "jp": "キャリアアップカード・作業免許",
+    "romaji": "kyaria appu kaado / sagyou menkyo no keitai",
+    "id_text": "Kartu CCAS & izin kerja — wajib dibawa saat",
+    "desc": "Item konfirmasi sebelum施工: wajib memastikan pekerja membawa kartu CCAS (キャリアアップカード) dan semua lisensi/sertifikat yang diperlukan hari itu. Di proyek: dicek di morning briefing."
+  },
+  {
+    "id": 498,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "ひんしつかんり",
+    "jp": "品質管理（ひんしつかんり）",
+    "romaji": "hinshitsu kanri",
+    "id_text": "Manajemen kualitas — Q dalam QCDSE",
+    "desc": "QCDSE の Q。Manajemen untuk memenuhi kualitas yang diminta pemberi kerja; mencakup inspeksi kualitas, uji material, uji konstruksi, serta kontrol dimensi dan bentuk sesuai rencana kualitas."
+  },
+  {
+    "id": 499,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "よさんのかんり",
+    "jp": "予算の管理（よさんのかんり）",
+    "romaji": "yosan no kanri",
+    "id_text": "Manajemen biaya — C dalam QCDSE",
+    "desc": "QCDSE の C。Mengelola dana yang tersedia di lapangan (biaya material, tenaga kerja, biaya lapangan) agar tidak melampaui anggaran proyek yang ditetapkan."
+  },
+  {
+    "id": 500,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "こうていかんり",
+    "jp": "工程管理（こうていかんり）",
+    "romaji": "koutei kanri",
+    "id_text": "Manajemen jadwal — D dalam QCDSE",
+    "desc": "QCDSE の D。Koordinasi dengan kontraktor utama dan kontraktor lain agar pekerjaan selesai dalam batas waktu kontrak (工期内) tanpa keterlambatan."
+  },
+  {
+    "id": 501,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "あんぜんかんり",
+    "jp": "安全管理（あんぜんかんり）",
+    "romaji": "anzen kanri",
+    "id_text": "Manajemen keselamatan — S dalam QCDSE",
+    "desc": "QCDSE の S。Mencakup pencegahan jatuh, benda jatuh, dan penyakit akibat kerja; dilaksanakan melalui KY training harian, patroli, rapat keselamatan 5S, dan target nol kecelakaan (無事故・無災害)."
+  },
+  {
+    "id": 502,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "かんきょうほぜんかんり",
+    "jp": "環境保全管理（かんきょうほぜんかんり）",
+    "romaji": "kankyou hozen kanri",
+    "id_text": "Manajemen pelestarian lingkungan — E dalam QCDSE",
+    "desc": "QCDSE の E。Meminimalkan dampak kebisingan, getaran, dan pencemaran air akibat konstruksi; wajib mematuhi standar yang ditetapkan undang-undang dan peraturan daerah."
+  },
+  {
+    "id": 503,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "れえざあしょうしゃき",
+    "jp": "レーザー照射器",
+    "romaji": "reezaa shousha ki",
+    "id_text": "Alat laser untuk sumidashi — penanda posisi dan",
+    "desc": "Memancarkan cahaya laser menggantikan 墨つぼ konvensional; memudahkan pengecekan sudut siku (直角) dan kerataan horizontal (水平) dengan cepat dan akurat. Mandor:「レーザーで墨を出して」(tandai posisi pakai laser)."
+  },
+  {
+    "id": 504,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "きじゅんすみ・おやすみ",
+    "jp": "基準墨・親墨（きじゅんすみ）",
+    "romaji": "kijun sumi / oya sumi",
+    "id_text": "3 jenis sumidashi: acuan / komponen / posisi",
+    "desc": "①基準墨・親墨 = posisi, ketinggian (GL/FL), dan通り芯 sebagai acuan utama. ②部材加工用墨付け = marking dimensi komponen. ③取付け位置出し = posisi pemasangan perangkat. Mandor:「基準墨を出してから始めて」(buat acuan garis dulu)."
+  },
+  {
+    "id": 505,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "Aこしょう vs Bこしょう",
+    "jp": "A呼称 vs B呼称",
+    "romaji": "A koshou vs B koshou",
+    "id_text": "Diameter nominal pipa: A (mm) vs B (inci)",
+    "desc": "A呼称 menyatakan diameter nominal pipa dalam mm; B呼称 dalam inci. Contoh: 25A = 1B. Di proyek: ねじ接合 digunakan untuk ukuran 15A–100A. Mandor:「25Aの配管を持ってきて」(ambil pipa ukuran 25A)."
+  },
+  {
+    "id": 506,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "ばんどそおかんせつだんき",
+    "jp": "バンドソー管切断機",
+    "romaji": "bandosoo kan setsudan ki",
+    "id_text": "Mesin band saw pemotong pipa — hasil tegak lurus",
+    "desc": "Digunakan memotong pipa baja secara tegak lurus. Penyimpangan ≥1,0 mm berupa 斜め切れ (miring) atau 段切れ (bertangga) menjadi penyebab kebocoran air."
+  },
+  {
+    "id": 507,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ななめぎれ・だんぎれ",
+    "jp": "斜め切れ・段切れ ≥1.0mm",
+    "romaji": "naname gire / dan gire",
+    "id_text": "Cacat potong pipa ≥1,0 mm → kebocoran air",
+    "desc": "斜め切れ = potongan miring; 段切れ = potongan bertangga. Keduanya menyebabkan kebocoran jika penyimpangan ≥1,0 mm. Di proyek: standar potongan 90° terhadap sumbu pipa."
+  },
+  {
+    "id": 508,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "ぐんてでのねじかこうぜったいきんし",
+    "jp": "軍手でのねじ加工は絶対禁止",
+    "romaji": "gunte de no neji kakou zettai kinshi",
+    "id_text": "Sarung tangan kain saat mengulir pipa: DILARANG",
+    "desc": "Menggunakan 軍手 (sarung tangan kain) saat mengoperasikan mesin ulir sangat berbahaya — tangan bisa tersangkut dan tergulung mesin. Larangan mutlak (絶対にしてはいけない)."
+  },
+  {
+    "id": 509,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "しいるてえぷのまきかた",
+    "jp": "シールテープの巻き方",
+    "romaji": "shiiru teepu no makikata",
+    "id_text": "Cara lilit seal tape: searah jarum jam, 6–7x,",
+    "desc": "時計回り6〜7巻き・1山残す。Gulung searah putaran pemasangan; mulai dari 1 ulir dari ujung, gulung 6–7 kali. Jika tape sampai ujung, potongan masuk pipa jadi penyumbat."
+  },
+  {
+    "id": 510,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ねじこみのこつ",
+    "jp": "ねじ込みのコツ",
+    "romaji": "nejikomi no kotsu",
+    "id_text": "Kunci pasang ulir: sisakan 2–2,5 ulir pakai wrench",
+    "desc": "2山〜2山半残す。Setelah dikencangkan tangan semaksimal mungkin, gunakan パイプレンチ dan hentikan saat masih tersisa 2–2,5 ulir (山). Mengencangkan berlebihan merusak ulir."
+  },
+  {
+    "id": 511,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "さびのあるねじはぜったいしようきんし",
+    "jp": "錆のあるねじは絶対使用禁止",
+    "romaji": "sabi no aru neji wa zettai ni shiyou kinshi",
+    "id_text": "Ulir pipa berkarat: dilarang keras digunakan",
+    "desc": "Pipa atau fitting yang ulirnya berkarat (錆) tidak boleh digunakan dalam kondisi apapun; karat membuat sambungan tidak rapat dan bocor. Di proyek: periksa kondisi ulir sebelum pemasangan."
+  },
+  {
+    "id": 512,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "ねじげえじけんさたいみんぐぱたあん",
+    "jp": "ねじゲージ",
+    "romaji": "neji geeji — kensa taimingu 5 pataan",
+    "id_text": "Thread gauge — 5 momen wajib inspeksi ulir pipa",
+    "desc": "検査タイミング5パターン。Wajib periksa: ①3 uliran pertama, ②setiap ukuran pipa berubah, ③per ~50 uliran (untuk 25A), ④saat lot/merek pipa berubah, ⑤saat チェーザ (mata potong) diganti."
+  },
+  {
+    "id": 513,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "へえざ",
+    "jp": "チェーザ（ねじ切り盤の切削工具）",
+    "romaji": "cheeza",
+    "id_text": "Chaser — mata potong pada mesin pengulir pipa",
+    "desc": "Komponen pada ねじ切り機 yang memotong ulir pada pipa; kondisinya mempengaruhi akurasi ulir. Setiap penggantian チェーザ wajib dilakukan pemeriksaan dengan ねじゲージ."
+  },
+  {
+    "id": 514,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "えきじょうしいるざい",
+    "jp": "液状シール剤（えきじょうシールざい）",
+    "romaji": "ekijou shiiru zai",
+    "id_text": "Sealant cair untuk sambungan ulir — perhatian K3",
+    "desc": "使用上の注意。Dioleskan merata ke ulir; jika terkena mata segera cuci air banyak dan ke dokter, jika terkena kulit cuci dengan sabun. Aduk rata sebelum digunakan. Simpan di tempat sejuk berventilasi."
+  },
+  {
+    "id": 515,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "がすようせつせつごうほう",
+    "jp": "ガス溶接接合法（ガスようせつせつごうほう）",
+    "romaji": "gasu yousetsu setsugouhou",
+    "id_text": "Las gas — untuk pipa diameter kecil",
+    "desc": "Tiga jenis: oksigen-asetilen (paling umum), oksigen-hidrogen, dan udara-asetilen. Banyak digunakan untuk pipa diameter kecil (小口径管)."
+  },
+  {
+    "id": 516,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ひふくああくようせつせつごうほう",
+    "jp": "被覆アーク溶接接合法（SMAW）",
+    "romaji": "hifuku aaku yousetsu setsugouhou",
+    "id_text": "Las busur tertutup (SMAW) — untuk pipa besar ≥100A",
+    "desc": "Elektroda berlapis fluks; fluks terbakar membentuk gas pelindung mencegah oksidasi logam cair. Di proyek: banyak digunakan untuk pipa ≥100A bersama atau sebagai alternatif las gas."
+  },
+  {
+    "id": 517,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "かいさきかこうがたがたれがたいがた",
+    "jp": "開先加工（かいさきかこう）",
+    "romaji": "kaisaki kakou — V gata / Y gata / re gata / I gata",
+    "id_text": "Beveling ujung pipa sebelum pengelasan — 4 jenis",
+    "desc": "V型・Y型・レ型・I型。Pengerjaan ujung pipa setelah pemotongan untuk meningkatkan penetrasi las; tanpa 開先 terjadi penetrasi kurang (溶け込み不足). Empat jenis: V型、Y型、レ型、I型 (I型 disebut juga ドン付け開先)."
+  },
+  {
+    "id": 518,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "かりつけようせつ",
+    "jp": "仮付け溶接（かりつけようせつ）",
+    "romaji": "karitsuke yousetsu",
+    "id_text": "Tack welding — las ikat sebelum las penuh",
+    "desc": "Las pendek sebelum pengelasan utama (本溶接) untuk menstabilkan posisi dan mencegah distorsi atau pergeseran pada area bevel (開先部)."
+  },
+  {
+    "id": 519,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "めかにかるせつごうほうほう",
+    "jp": "メカニカル接合方法（メカニカルせつごうほうほう）",
+    "romaji": "mekanikaru setsugouhouhou",
+    "id_text": "Sambungan mekanis — tanpa las maupun ulir",
+    "desc": "Penyambungan menggunakan komponen mekanis: ハウジング管継手、MD継手、カップリング継手、NO-HUB継手. Disebut juga 機械的接合法."
+  },
+  {
+    "id": 520,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "のみこみのまあきんぐ",
+    "jp": "飲み込みのマーキング",
+    "romaji": "nomikomi no maakingu",
+    "id_text": "Marking kedalaman insersi pipa PVC ke fitting",
+    "desc": "Tanda di sisi pipa sepanjang kedalaman masuk ke fitting; jika tidak sampai tanda, panjang instalasi tidak sesuai dan bisa bocor. Di proyek: marking sebelum oleskan lem."
+  },
+  {
+    "id": 521,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "せっちゃくざいえんびかんよう",
+    "jp": "接着剤（塩ビ管用）の塗布手順（せっちゃくざい）",
+    "romaji": "secchakuzai — enbi kan you",
+    "id_text": "Adhesif pipa PVC: urutan aplikasi yang benar",
+    "desc": "Oleskan dari sisi fitting dulu (bukan pipa), lalu pipa; dorong sekaligus penuh tenaga dan tahan ±10 detik tanpa melepaskan tekanan. Adhesif yang meluber segera dilap bersih sebelum mengeras."
+  },
+  {
+    "id": 522,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "らいにんぐこうかんのがすようだんぜったいきんし",
+    "jp": "ライニング鋼管のガス溶断絶対禁止",
+    "romaji": "rainingu koukan no gasu youdan zettai kinshi",
+    "id_text": "DILARANG: potong pipa lining dengan oxy-acetylene",
+    "desc": "Pemotongan ライニング鋼管 dengan ガス溶断 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak lapisan lining. Di proyek: gunakan band saw atau metal saw. Mandor:「ライニング管はバンドソーで切って」(potong pakai band saw)."
+  },
+  {
+    "id": 523,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "まくれ（ばり）とらいにんぐかんようりいま",
+    "jp": "まくれ（バリ）とライニング管用リーマ",
+    "romaji": "makure (bari) to rainingu kan you riima",
+    "id_text": "Burr pipa lining — buang pakai reamer khusus",
+    "desc": "Burr setelah pemotongan wajib dihilangkan dengan ライニング管用リーマ atau スクレーパ; jangan pakai reamer mesin ulir biasa karena merusak lapisan lining. Mandor:「ライニング管用リーマでバリを取って」(buang burr pakai reamer khusus)."
+  },
+  {
+    "id": 524,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "かんたんぼうしょくつぎて",
+    "jp": "管端防食継手（かんたんぼうしょくつぎて）",
+    "romaji": "kantan boushoku tsugite",
+    "id_text": "Sambungan anti-korosi ujung pipa lining",
+    "desc": "Melindungi ujung potongan ライニング鋼管 dari korosi; sebelum dipasang, ujung pipa di-chamfer (面取り) sebesar 1/2–2/3 dari ketebalan lapisan塩ビ (塩ビ管肉厚)."
+  },
+  {
+    "id": 525,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "どうかんのせつだんにかのこぐらいんだあきんし",
+    "jp": "銅管の切断に金ノコ・グラインダー禁止",
+    "romaji": "doukan no setsudan ni kanoko / guraindaa shiyou kinshi",
+    "id_text": "DILARANG: potong pipa tembaga pakai gergaji",
+    "desc": "Memotong pipa tembaga (銅管) dengan 金ノコ atau グラインダー menghasilkan serbuk logam yang tertinggal di dalam pipa refrigeran. Di proyek: gunakan パイプカッター."
+  },
+  {
+    "id": 526,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ばりとりはどうかんをしたむきに",
+    "jp": "バリ取りは銅管を下向きに",
+    "romaji": "bari tori wa doukan wo shita muki ni",
+    "id_text": "Buang burr pipa tembaga: ujung pipa menghadap",
+    "desc": "Saat menghilangkan burr dari ujung pipa tembaga dengan reamer/scraper, pipa wajib diarahkan ke bawah agar serbuk tidak masuk ke dalam pipa refrigeran."
+  },
+  {
+    "id": 527,
+    "category": "setsubi_kougu",
+    "source": "jac-ch6",
+    "furi": "さいじんぐつうる（れいばいかんようしねんしゅうせい）",
+    "jp": "サイジングツール（冷媒管用真円修正）",
+    "romaji": "saijingu tsuuru",
+    "id_text": "Sizing tool — koreksi kebulatan ujung pipa tembaga",
+    "desc": "Setelah バリ取り, ujung pipa tembaga wajib dikoreksi kebulatan (真円修正) sebelum flaring. Di proyek: pipa tidak bulat → flaring miring atau fitting tidak masuk."
+  },
+  {
+    "id": 528,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "さいしょうまげはんけいれいばいようひふくどうかん",
+    "jp": "最小曲げ半径（さいしょうまげはんけい）",
+    "romaji": "saishou mage hankei — reibai you hifuku doukan",
+    "id_text": "Radius tekukan minimum pipa tembaga refrigeran",
+    "desc": "冷媒用被覆銅管。手曲げ: dia. 6,35–12,7 mm → min 6× dia. luar; ≥15,88 mm → min 10× dia. luar. ベンダー曲げ: min 4× dia. luar. Di bawah batas ini → pipa penyok (扁平) atau retak (座屈)."
+  },
+  {
+    "id": 529,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ふれあせつごう",
+    "jp": "フレア接合（フレアせつごう）",
+    "romaji": "furea setsugou",
+    "id_text": "Sambungan flare pipa refrigeran tembaga",
+    "desc": "Ujung pipa tembaga dikembangkan menjadi bentuk terompet (フレア加工), lalu dikencangkan dengan フレアナット sehingga bagian flare tertekan dan berfungsi sebagai seal kedap refrigeran."
+  },
+  {
+    "id": 530,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ろうせつごう",
+    "jp": "ろう接合（ろうせつごう）",
+    "romaji": "rou setsugou",
+    "id_text": "Sambungan brazing pipa refrigeran tembaga",
+    "desc": "ろう材 dilelehkan ke celah sambungan tembaga; penting: bebas oksida/kotoran dan suhu brazing tepat. Setelah selesai dinginkan dengan kain basah, periksa ada tidaknya ピンホール atau ろう回り不良."
+  },
+  {
+    "id": 531,
+    "category": "hoon",
+    "source": "jac-ch6",
+    "furi": "ほおんざいのしゅうしゅく（さいだいにぱあせんと）",
+    "jp": "保温材の収縮（最大2%）",
+    "romaji": "hoon zai no shuushuku (saidai 2%)",
+    "id_text": "Penyusutan insulasi termal: maks 2% searah panjang",
+    "desc": "Insulasi menyusut hingga 2% searah panjang (≈8 cm per 4 m); celah akibat penyusutan menimbulkan kondensasi yang berpotensi jadi kecelakaan."
+  },
+  {
+    "id": 532,
+    "category": "hoon",
+    "source": "jac-ch6",
+    "furi": "ほおんざいのけいじょういたじょうおびじょうつつじょう",
+    "jp": "保温材の形状",
+    "romaji": "hoon zai no keijou: itajou / obijou / tsutsujou",
+    "id_text": "Bentuk insulasi: lembaran / pita / selongsong",
+    "desc": "板状・帯状・筒状（ほおんざいのけいじょう）。板状(保温板) dan 帯状(保温帯) = untuk duct; 筒状(保温筒) = untuk pipa. Material utama: GW (glass wool), RW (rock wool), PS (polystyrene foam)."
+  },
+  {
+    "id": 533,
+    "category": "hoon",
+    "source": "jac-ch6",
+    "furi": "ALGC / ALK",
+    "jp": "ALGC（アルミガラスクロス）/ ALK",
+    "romaji": "ALGC / ALK",
+    "id_text": "Penutup insulasi berbasis aluminium: ALGC dan ALK",
+    "desc": "Laminasi aluminium untuk membungkus insulasi di ruang tersembunyi atau garasi. ALGC = aluminium + glass cloth; ALK = aluminium + kraft paper; keduanya berfungsi sebagai penahan uap."
+  },
+  {
+    "id": 534,
+    "category": "hoon",
+    "source": "jac-ch6",
+    "furi": "きっこうかなあみ",
+    "jp": "亀甲金網（きっこうかなあみ）",
+    "romaji": "kikkou kanaami",
+    "id_text": "Jaring kawat hexagonal — pengikat insulasi pipa",
+    "desc": "Jaring kawat berbentuk sarang lebah untuk mengikat dan menguatkan insulasi pipa di ruang mesin, garasi, atau gudang. Di proyek: gunakan 塩ビ亀甲金網 (berlapis PVC) untuk mencegah karat."
+  },
+  {
+    "id": 535,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "GXがただくたいるちゅうてつかん",
+    "jp": "GX形ダクタイル鋳鉄管",
+    "romaji": "GX gata dakutairu chuutetsu kan",
+    "id_text": "Pipa ductile iron GX — tahan gempa besar",
+    "desc": "Jenis ダクタイル鋳鉄管 paling umum di Jepang; sambungannya memiliki fungsi伸縮 (tegang-susut) dan anti-lepas (離脱防止) sehingga tahan pergeseran tanah saat gempa. Mandor:「GX形を使って接合して」(sambung pakai pipa GX型)."
+  },
+  {
+    "id": 536,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ろっくりんぐ / ろっくりんぐほるだあ",
+    "jp": "ロックリング / ロックリングホルダ",
+    "romaji": "rokku ringu / rokku ringu horudaa",
+    "id_text": "Lock ring & holder — anti-lepas pipa GX ductile",
+    "desc": "Saat pipa memanjang maksimum, tonjolan dalam pipa tertahan lock ring sehingga tidak bisa terlepas. Di proyek: wajib dicek posisinya visual dan tangan sebelum pemasangan."
+  },
+  {
+    "id": 537,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "かつざい",
+    "jp": "滑剤（かつざい）",
+    "romaji": "katsuzai",
+    "id_text": "Pelumas khusus pemasangan pipa ductile iron GX",
+    "desc": "Dioleskan pada bagian dalam taper ゴム輪 dan permukaan luar ujung pipa dari garis putih ke ujungnya; jangan dioleskan ke dalam 受口 sebelum ゴム輪 dipasang."
+  },
+  {
+    "id": 538,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "EFせつごう（えれくとろふゅうじょん）",
+    "jp": "EF接合（エレクトロフュージョン）",
+    "romaji": "EF setsugou",
+    "id_text": "Sambungan electrofusion (EF) pipa polietilen",
+    "desc": "Kawat pemanas tertanam dalam fitting EF; setelah pipa dimasukkan dan diklem, controller dialirkan arus untuk melelehkan dan menyatukan resin."
+  },
+  {
+    "id": 539,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "EFせつごうのななめせつだんきょようげんど",
+    "jp": "EF接合の斜め切断許容限度",
+    "romaji": "EF setsugou no naname setsudan kyoyou gendo",
+    "id_text": "Toleransi kemiringan potong pipa EF joint: ≤5 mm",
+    "desc": "Saat memotong pipa polietilen untuk EF接合, toleransi kemiringan potongan adalah 5 mm ke semua arah, tidak peduli ukuran pipa. Di proyek: gunakan alat potong mekanis."
+  },
+  {
+    "id": 540,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "こうそくといしたいぷのせつだんこうぐ",
+    "jp": "高速砥石タイプの切断工具",
+    "romaji": "kousoku toishi taipu no setsudan kougu",
+    "id_text": "DILARANG: pakai grinder potong pipa polietilen",
+    "desc": "Panas dari grinder dapat mendistorsi permukaan potongan pipa polietilen yang dipakai untuk EF接合. Di proyek: gunakan alat potong mekanis atau hand saw."
+  },
+  {
+    "id": 541,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "ちかまいせつぶつひょうじしいとのいろこおど",
+    "jp": "地下埋設物表示シートの色コード",
+    "romaji": "chika maisetsumono hyouji shiito iro koodo",
+    "id_text": "Kode warna lembar penanda utilitas bawah tanah",
+    "desc": "Dipasang antara utilitas dan permukaan tanah sebagai peringatan saat penggalian. Kode warna: 通信=赤, 高低圧電力=橙, 水道=青, 下水道=茶, ガス=緑. Mandor:「掘削前に埋設物表示シートを確認して」(cek lembar penanda sebelum gali)."
+  },
+  {
+    "id": 542,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく",
+    "jp": "既存埋設管周辺50cm以内は人力掘削",
+    "romaji": "kison maisetsukan shuuhen 50cm inai wa jinriki kussaku",
+    "id_text": "Radius 50 cm dari utilitas bawah tanah: wajib",
+    "desc": "Dalam radius 50 cm dari utilitas yang sudah ada wajib beralih ke penggalian manual (人力). Kecelakaan oleh backhoe menyumbang lebih dari separuh insiden pemutusan utilitas."
+  },
+  {
+    "id": 543,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "さんそけつぼうきけんさぎょうしゅにんしゃ",
+    "jp": "酸素欠乏危険作業主任者",
+    "romaji": "sanso ketsubou kiken sagyou shuninsha",
+    "id_text": "Kepala kerja area rendah oksigen — wajib masuk",
+    "desc": "Yang boleh masuk manhole hanya pemegang 第一/二種酸素欠乏危険作業主任者技能講習 atau lulusan pendidikan khusus. Di proyek: O₂ harus ≥18%, H₂S ≤10 ppm setelah ventilasi. Mandor:「酸素濃度を計測してから入って」(ukur kadar oksigen dulu)."
+  },
+  {
+    "id": 544,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "りゅうかすいそのうど",
+    "jp": "硫化水素濃度（りゅうかすいそのうど）",
+    "romaji": "ryuuka suiso noudo",
+    "id_text": "Batas konsentrasi H₂S di manhole: ≤10 ppm",
+    "desc": "Sebelum masuk manhole: O₂ harus ≥18% DAN H₂S ≤10 ppm. Jika ventilasi tidak memungkinkan, wajib pakai 呼吸用保護具. Wajib pakai 墜落制止用器具 meski ketinggian ≤2 m."
+  },
+  {
+    "id": 545,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "けがきはりでばいだ",
+    "jp": "ケガキ針 / デバイダ（けがきばり / デバイダ）",
+    "romaji": "kegaki hari / debaida",
+    "id_text": "Jarum garis / jangka — alat marking plat logam",
+    "desc": "ケガキ針 = jarum untuk menggambar garis tanda pada plat logam (digunakan bersama penggaris logam); デバイダ = jangka untuk menandai jarak atau radius yang sama. Lakukan marking satu kali semaksimal mungkin."
+  },
+  {
+    "id": 546,
+    "category": "sekou",
+    "source": "jac-ch6",
+    "furi": "かなとこじょうばん",
+    "jp": "金床（アンビル）/ 定盤（じょうばん）",
+    "romaji": "kanatoko (anbiru) / jouban",
+    "id_text": "Anvil / surface plate — landasan tekuk plat baja",
+    "desc": "Landasan baja keras untuk membengkokkan plat logam; sudut pinggir 定盤 digunakan sebagai tumpuan saat memukul plat dengan 影たがね + ハンマー untuk membentuk sudut yang diperlukan secara bertahap."
+  },
+  {
+    "id": 548,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ともいたふらんじこうほう",
+    "jp": "共板フランジ工法",
+    "romaji": "tomoita furanji kouhou",
+    "id_text": "Shared-plate flange duct kotak, non-saluran asap",
+    "desc": "Flange dibuat dari bagian duct itu sendiri yang dilipat; empat sudut dikunci dengan klip khusus. Di proyek: lebih mudah dan cepat dari アングルフランジ工法; banyak dipakai untuk duct non-排煙."
+  },
+  {
+    "id": 550,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "まるだくとのふらんじこうほう",
+    "jp": "丸ダクトのフランジ工法",
+    "romaji": "maru dakuto furanji kouhou",
+    "id_text": "Duct bulat: 75–100 mm plate flange, ≥200 mm angle",
+    "desc": "Sambungan duct spiral: diameter 75–100 mm → 板状プレートフランジ; diameter ≥200 mm → アングルフランジ. Di proyek: pilih sesuai diameter duct yang disambung. Mandor:「径に合わせてフランジを選んで」(pilih flange sesuai diameter)."
+  },
+  {
+    "id": 551,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "PAS（こうあつきちゅうかいへいき）",
+    "jp": "PAS（高圧気中開閉器）",
+    "romaji": "PAS (pole air switch)",
+    "id_text": "PAS — sakelar udara tegangan tinggi di tiang",
+    "desc": "Dipasang di tiang listrik (架空配線); listrik 6600V melewati PAS sebelum masuk ke キュービクル gedung. Di proyek: untuk bekerja aman PAS harus dibuka (開放) terlebih dahulu."
+  },
+  {
+    "id": 552,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "きゅうびくる",
+    "jp": "キュービクル",
+    "romaji": "kyuubikuru",
+    "id_text": "Kubikl — panel penerima dan penurun tegangan 6600V",
+    "desc": "Mengubah tegangan 6600V menjadi 100V/200V; berisi 遮断器 (circuit breaker) dan 断路器 (disconnecting switch). Dipasang di dalam, bawah tanah, atau atap gedung. Wajib停電 saat dikerjakan."
+  },
+  {
+    "id": 553,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "かっせん",
+    "jp": "活線（かっせん）",
+    "romaji": "kassen",
+    "id_text": "Live line — jalur listrik masih bertegangan aktif",
+    "desc": "Kondisi kabel masih dialiri arus; bekerja pada sisi活線 (一次側) dapat menyebabkan sengatan atau loncatan busur (放電). Di proyek: semua pekerjaan wajib setelah停電 dikonfirmasi."
+  },
+  {
+    "id": 554,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "ちらく",
+    "jp": "地絡（ちらく）",
+    "romaji": "chiraku",
+    "id_text": "Ground fault — arus bocor ke bumi",
+    "desc": "Arus mengalir ke tanah yang seharusnya terisolasi; terjadi misalnya karena polaritas grounding (アース) terpasang terbalik. Berbeda dari 短絡 (id:103) yang terjadi antar kabel bertegangan aktif."
+  },
+  {
+    "id": 555,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "ろうでんとろうでんしゃだんき",
+    "jp": "漏電（ろうでん）と漏電遮断機（ろうでんしゃだんき）",
+    "romaji": "rouden to rouden shadanki",
+    "id_text": "Arus bocor dan pemutus arus bocor (ELCB)",
+    "desc": "漏電 = arus mengalir ke jalur yang tidak seharusnya; menyebabkan sengatan dan kebakaran. 漏電遮断機 / 漏電警報器 otomatis memutus atau alarm saat terjadi漏電. Perlu waspada khusus saat renovasi."
+  },
+  {
+    "id": 556,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "あっちゃくふりょうはつねつはっか",
+    "jp": "圧着不良",
+    "romaji": "acchaku furyou → hatsunetsu / hakka",
+    "id_text": "Crimping buruk → panas berlebih → kebakaran",
+    "desc": "発熱・発火（あっちゃくふりょう）。圧着不良 menyebabkan 発熱・発火 (panas berlebih/kebakaran). Wajib crimp tepat di tengah sleeve (スリーブの真ん中) dan gunakan terminal yang sesuai ukuran kabel (許容電流にも注意)."
+  },
+  {
+    "id": 557,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "かくうせんのせつだんじこ",
+    "jp": "架空線の切断事故",
+    "romaji": "kakuusen no setsudan jiko",
+    "id_text": "Kecelakaan pemotongan kabel overhead oleh alat",
+    "desc": "Terjadi saat boom alat berat, dump truck terangkat, atau saat loading/unloading tidak memperhatikan kabel overhead. Di proyek: pasang ケーブルカバー pada kabel di atas area kerja."
+  },
+  {
+    "id": 558,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "どうろしようきょかしょう",
+    "jp": "道路使用許可証",
+    "romaji": "douro shiyou kyoka shou",
+    "id_text": "Surat izin penggunaan jalan — wajib dibawa",
+    "desc": "作業責任者 wajib membawa surat ini; kondisi izin (jam kerja, syarat) harus dipatuhi. Wajib menempatkan 交通整理員, memasang fasilitas keselamatan, dan memastikan pejalan kaki bisa lewat."
+  },
+  {
+    "id": 559,
+    "category": "anzen",
+    "source": "jac-ch6",
+    "furi": "かくうせつびのちじょうこう",
+    "jp": "架空設備の地上高",
+    "romaji": "kakuu setsubi no chijou kou",
+    "id_text": "Ketinggian kabel overhead di atas jalan raya: min",
+    "desc": "Untuk keselamatan lalu lintas, tinggi minimum kabel dan perangkat telekomunikasi di tiang di atas jalan raya adalah 5 m dari permukaan jalan. Di proyek: pastikan sebelum instalasi tiang."
+  },
+  {
+    "id": 560,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "しいしいぼっくす",
+    "jp": "C・C・BOX（シーシーボックス）",
+    "romaji": "shii shii bokkusu",
+    "id_text": "CC-Box — saluran kabel berbentuk U di bawah jalan",
+    "desc": "Struktur beton bentuk U ditanam di bawah jalan untuk menampung kabel komunikasi, listrik, dan perangkat manajemen jalan; ditutup dengan penutup (ふた)."
+  },
+  {
+    "id": 561,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "どかぶり",
+    "jp": "土被り（どかぶり）",
+    "romaji": "dokaburi",
+    "id_text": "Kedalaman tutup tanah di atas saluran kabel bawah",
+    "desc": "Jarak permukaan jalan ke bagian atas saluran (管路); berdasarkan 道路法施行令: di 車道 min 0,8 m, di 歩道 min 0,6 m. Di proyek: wajib dipenuhi saat pemasangan saluran."
+  },
+  {
+    "id": 562,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "かんろとまいせつぶつのりかくきょり",
+    "jp": "管路と埋設物の離隔距離",
+    "romaji": "kanro to maisetsumono no rikaku kyori",
+    "id_text": "Jarak aman saluran telekomunikasi dari utilitas",
+    "desc": "Paralel horizontal: kereta api=1,0 m↑, listrik=0,3 m↑, listrik tegangan sangat tinggi=0,6 m↑, air/gas/lain=0,3 m. Vertikal silang: kereta api=1,5 m↑, listrik/air/gas=0,15 m."
+  },
+  {
+    "id": 563,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "まんどれるつうかしけん",
+    "jp": "マンドレル通過試験",
+    "romaji": "mandoreru tsuuka shiken",
+    "id_text": "Uji mandrel — verifikasi koneksi saluran bawah",
+    "desc": "Setelah pemasangan saluran: batang mandrel dimasukkan untuk memastikan saluran terhubung sempurna. Saluran >150 m → No.4 (Ø600 mm); jika tidak bisa lewat → pakai No.3."
+  },
+  {
+    "id": 564,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "きみつしけん（かんろふせつご）",
+    "jp": "気密試験（管路布設後）",
+    "romaji": "kimitsu shiken (kanro fusetsu go)",
+    "id_text": "Uji kerapatan saluran: 49 kPa, 3 menit, ≤1,96 kPa",
+    "desc": "Setelah pemasangan saluran: tekanan dinaikkan ke 49 kPa, dibiarkan 3 menit; penurunan tekanan harus ≤1,96 kPa untuk lulus. Di proyek: dicatat dalam lembar inspeksi."
+  },
+  {
+    "id": 565,
+    "category": "setsubi_kougu",
+    "source": "jac-ch6",
+    "furi": "たいかれんが / たいかだんねつれんが",
+    "jp": "耐火煉瓦 / 耐火断熱煉瓦",
+    "romaji": "taika renga / taika dannetsu renga",
+    "id_text": "Bata tahan api / bata insulasi tahan api",
+    "desc": "Dua jenis bata untuk築炉工事; perekatnya adalah mortar khusus tahan panas (耐熱断熱煉瓦用モルタル), bukan mortar biasa. Di proyek: digunakan untuk membangun tungku industri."
+  },
+  {
+    "id": 566,
+    "category": "setsubi_kougu",
+    "source": "jac-ch6",
+    "furi": "ねっこうせいもるたる vs きこうせいもるたる",
+    "jp": "熱硬性モルタル vs 気硬性モルタル",
+    "romaji": "nekkousei morutaru vs kikousei morutaru",
+    "id_text": "Mortar tahan api: mengeras panas vs mengeras udara",
+    "desc": "熱硬性モルタル = mengeras saat dipanaskan suhu tinggi; 気硬性モルタル = mengeras pada suhu ruangan di udara biasa. Keduanya perekat bata tahan api dalam築炉工事. Mandor:「熱硬性モルタルを使って積んで」(pakai mortar tahan panas)."
+  },
+  {
+    "id": 567,
+    "category": "setsubi_kougu",
+    "source": "jac-ch6",
+    "furi": "れんがずみのろくげんそく",
+    "jp": "煉瓦積みの6原則",
+    "romaji": "renga zumi no roku gensoku",
+    "id_text": "6 aturan mutlak penyusunan bata tahan api",
+    "desc": "①Material benar. ②Dimensi tepat. ③Mortar merata. ④Pasangan selang-seling wajib. ⑤Bata ≤1/4 panjang tidak digunakan. ⑥Selalu horizontal & vertikal. Di proyek: langkah ④ sering dilupakan."
+  },
+  {
+    "id": 568,
+    "category": "shoubou",
+    "source": "jac-ch6",
+    "furi": "こすいそうち",
+    "jp": "呼水装置（こすいそうち）",
+    "romaji": "kosui souchi",
+    "id_text": "Priming device — isi awal pompa pemadam kebakaran",
+    "desc": "Memastikan pompa pemadam terisi air sebelum beroperasi; wajib dipasang jika sumber air (水源) lebih rendah dari pompa. Tanpa ini pompa berputar kosong dan gagal memompa."
+  },
+  {
+    "id": 569,
+    "category": "shoubou",
+    "source": "jac-ch6",
+    "furi": "すいおんじょうしょうぼうしようにがしはいかん",
+    "jp": "水温上昇防止用逃がし配管",
+    "romaji": "suion joushou boshi you nigashi haikan",
+    "id_text": "Pipa bypass pompa pemadam — cegah overheat",
+    "desc": "Mencegah pompa overheat saat berputar tanpa memompa air (sisi keluar tertutup); tanpa pipa ini pompa berhenti karena kepanasan dan tidak bisa memadamkan api."
+  },
+  {
+    "id": 570,
+    "category": "shoubou",
+    "source": "jac-ch6",
+    "furi": "せいのうしけんそうちしょうぼうぽんぷ",
+    "jp": "性能試験装置（せいのうしけんそうち）",
+    "romaji": "seinou shiken souchi — shoubou ponpu",
+    "id_text": "Alat uji performa pompa pemadam kebakaran",
+    "desc": "消防ポンプ。Dipasang untuk memverifikasi bahwa pompa bekerja sesuai kapasitas yang ditetapkan (定められた通りの能力). Satu dari tiga perangkat khusus pompa pemadam (bersama呼水装置 dan逃がし配管)."
+  },
+  {
+    "id": 571,
+    "category": "shoubou",
+    "source": "jac-ch6",
+    "furi": "ないめんらいにんぐこうかんのしようきんし",
+    "jp": "内面ライニング鋼管の使用禁止",
+    "romaji": "naimen rainingu koukan no shiyou kinshi",
+    "id_text": "Pipa baja berlapis dalam DILARANG untuk pipa",
+    "desc": "Jika pipa pemadam tanpa air terkena panas api, lapisan lining meleleh dan mengeras sehingga air tidak bisa mengalir. Oleh karena itu pipa berlapis dalam dilarang digunakan untuk sistem pemadam."
+  },
+  {
+    "id": 630,
+    "category": "doboku_doko",
+    "source": "jac-ch6",
+    "furi": "とんねるのよんしゅるいこうほうでぶんるい",
+    "jp": "トンネルの4種類（工法で分類）",
+    "romaji": "tonneru no yonshurui kouhou de bunrui",
+    "id_text": "4 jenis terowongan berdasarkan metode konstruksi",
+    "desc": "①山岳トンネル = NATM di batu keras gunung. ②開削トンネル = gali dari permukaan → bangun → timbun. ③シールドトンネル = mesin shield + segmen panel, tanah lunak. ④推進トンネル = pipa ditekan masuk tanah via dongkrak dari立坑."
+  },
+  {
+    "id": 723,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ほおんこうじのばしょべつしあげしゅるい",
+    "jp": "保温工事の場所別仕上げ（4種類）",
+    "romaji": "hoon kouji no basho betsu shiage (4 shurui)",
+    "id_text": "Finishing insulasi pipa sesuai lokasi — 4 jenis",
+    "desc": "①天井内・隠蔽部: ALGC/ALK で包み固定（仕上材なし）。②屋内露出: 合成樹脂カバーまたはラッキング仕上材。③機械室・車庫・倉庫: ALGC/ALK + 鉄線 or 塩ビ亀甲金網。④屋外露出: ラッキングカバー（薄鉄板を板金加工）で覆う。湿気が多い屋外はポリエチレンフィルムで防湿も必要。"
+  },
+  {
+    "id": 724,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "だくとのほおんほれいこうじ",
+    "jp": "ダクトの保温保冷工事",
+    "romaji": "dakuto no hoon horei kouji",
+    "id_text": "Insulasi termal duct — tanpa insulasi → kondensasi",
+    "desc": "Melilit insulasi pada duct meningkatkan efisiensi HVAC dan hemat energi. Tanpa insulasi, kondensasi terbentuk dan menyebabkan korosi serta jamur. Di proyek: dikencangkan pakai 鋲 atau tape ALGC."
+  },
+  {
+    "id": 725,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "さしこみつぎてこうほう（まるだくと）",
+    "jp": "差し込み継手工法（丸ダクト）",
+    "romaji": "sashikomi tsugite kouhou",
+    "id_text": "Insert joint duct bulat — jangan pasang sekrup di",
+    "desc": "丸ダクト disambung dengan ニップル → kencangkan 2–3 baut → balut duct tape. PENTING: jangan pasang sekrup di bagian bawah duct agar tidak bocor jika ada air di dalam."
+  },
+  {
+    "id": 726,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "がすようせつのさんしゅるい",
+    "jp": "ガス溶接の3種類",
+    "romaji": "gasu yousetsu no 3 shurui",
+    "id_text": "3 jenis las gas — paling umum: oksi-asetilen",
+    "desc": "①酸素アセチレン溶接 (paling umum) ②酸素水素溶接 ③空気アセチレン溶接. Banyak digunakan untuk pipa kecil (小口径管) dan dipakai bersama las busur tertutup. Mandor:「ガス溶接で小口径管を接合して」(las pipa kecil pakai las gas)."
+  },
+  {
+    "id": 727,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "こうしつえんかびにるかん（せっちゃくざいせつごう）",
+    "jp": "硬質塩化ビニル管（接着剤接合）",
+    "romaji": "koushitsu enka biniru kan (secchakuzai setsugou)",
+    "id_text": "Pipa PVC keras — tahan 10 detik setelah",
+    "desc": "継手挿入後10秒押さえ。Urutan: oleskan lem → masukkan sekaligus dengan tenaga → tahan 10 detik tanpa melepas tekanan → lap lem berlebih. Jika tidak ditahan, pipa terdorong keluar dan bocor."
+  },
+  {
+    "id": 728,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "こうしつえんかびにるかんのめんとり",
+    "jp": "硬質塩化ビニル管の面取り",
+    "romaji": "koushitsu enka biniru kan no mentori",
+    "id_text": "Chamfering pipa PVC — pipa air bersih: bevel luar",
+    "desc": "Setelah dipotong, bevel dalam dan luar agar pipa mudah masuk ke fitting. Untuk pipa air bersih/panas, chamfer luar harus lebih kuat karena lebih sulit masuk."
+  },
+  {
+    "id": 729,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ねじこみはいかん（つうすいはようじょうご）",
+    "jp": "ねじ込み配管（通水は養生後）",
+    "romaji": "nejikomi haikan (tsuusui wa youjou go)",
+    "id_text": "Pipa ulir — aliri air hanya setelah curing time",
+    "desc": "Setelah シール剤 dan ねじ込み selesai, aliran air (通水) hanya boleh dilakukan setelah waktu curing yang cukup. Jika terlalu cepat, seal belum mengeras dan menyebabkan kebocoran."
+  },
+  {
+    "id": 730,
+    "category": "denki",
+    "source": "jac-ch6",
+    "furi": "きゅうびくる（ろくせんろっぴゃっぼるとへんかん）",
+    "jp": "キュービクル（6600V変換）",
+    "romaji": "kyuubikuru (6600V henkan)",
+    "id_text": "Cubicle — trafo 6600V menjadi 100V/200V",
+    "desc": "Listrik 6600V dari PLN masuk via PAS lalu ke キュービクル yang mengubah menjadi 100V/200V. Berisi 遮断器 dan 断路器. Di proyek: wajib dalam kondisi停電 saat dikerjakan."
+  },
+  {
+    "id": 731,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "EFせつごう（いんじけえたあかくにん）",
+    "jp": "EF接合（インジケーター確認）",
+    "romaji": "EF setsugou (injikeetaa kakunin)",
+    "id_text": "EF joint — selesai jika indikator menonjol kiri &",
+    "desc": "Konfirmasi keberhasilan EF接合: indikator EF socket harus menonjol (隆起) di kiri dan kanan. Setelah dingin, lepas klem dan catat di check sheet. Di proyek: langkah pemeriksaan wajib."
+  },
+  {
+    "id": 732,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "えせつごうばあこおどりいだあでゆうちゃくでえたよみこみ",
+    "jp": "EF接合",
+    "romaji": "EF setugou — baakoodo riidaa de yuuchaku deeta yomikomi",
+    "id_text": "EF joint — scan barcode untuk input data fusioning",
+    "desc": "EF接合の融着準備手順: ①コントローラーの電源プラグをコンセントに差し込む ②スイッチを入れる ③継手の端子に出力ケーブルを接続 ④コントローラーに付属のバーコードリーダーで融着データを読み込ませる → その後スタートボタンを押して通電開始。"
+  },
+  {
+    "id": 733,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "まんどれるつうかしけん",
+    "jp": "マンドレル通過試験",
+    "romaji": "mandoreru tsuuka shiken",
+    "id_text": "Mandrel test: >150m No.4, ≤150m gagal → No.3",
+    "desc": "Saluran >150 m: wajib lewati mandrel No.4 (Ø600 mm). Saluran ≤150 m yang tidak bisa dilalui No.4: gunakan No.3. Tujuan: memastikan saluran terhubung sempurna setelah pemasangan."
+  },
+  {
+    "id": 734,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "GXがただくたいるちゅうてつかんのまがりはいかん",
+    "jp": "GX形ダクタイル鋳鉄管の曲げ配管",
+    "romaji": "GX gata dakutairu chuutetsu kan no magari haikan",
+    "id_text": "Ductile iron GX — tekuk max 2°, dibagi ke",
+    "desc": "Setelah disambung, tiap pipa bisa ditekuk maksimal 2°. Di proyek: jangan tekuk di satu sambungan saja — bagi ke beberapa pipa untuk capai sudut yang diinginkan."
+  },
+  {
+    "id": 735,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "くろおじゃあのいろわけ",
+    "jp": "クロージャの色分け",
+    "romaji": "kuuroojaa no iro wake",
+    "id_text": "Closure: abu-abu untuk serat optik, hitam untuk",
+    "desc": "Closure = kotak sambungan/percabangan kabel di tiang listrik. Warna: abu-abu untuk serat optik (光ファイバー), hitam untuk kabel metal. Di proyek: pastikan tipe yang benar sebelum pemasangan."
+  },
+  {
+    "id": 736,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "でんせんきょうどうこう",
+    "jp": "電線共同溝",
+    "romaji": "densen kyoudoukou",
+    "id_text": "Common utility duct — estetika kota & kemudahan",
+    "desc": "Fasilitas untuk memindahkan kabel tiang listrik ke bawah tanah. Tujuan: ①estetika kota ②kelancaran lalu lintas. Di proyek: wajib survei dan hati-hati terhadap utilitas yang sudah ada di bawah."
+  },
+  {
+    "id": 737,
+    "category": "tsushin",
+    "source": "jac-ch6",
+    "furi": "でんちゅうをたてるてじゅんすてっぷ",
+    "jp": "電柱を建てる手順（5ステップ）",
+    "romaji": "denchuu wo tateru tejun (5 suteppu)",
+    "id_text": "5 langkah mendirikan tiang listrik",
+    "desc": "①電柱を建てる位置を確認 ②手掘りや探針棒（たんしんぼう）を使って埋設物（まいせつぶつ）を確認 ③手掘りと穴掘建柱車（あなほりけんちゅうしゃ）によって掘削 ④電柱を建てる ⑤埋め戻しをする。手順②で探針棒を使う点が試験で問われやすい。"
+  },
+  {
+    "id": 738,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "べんだあまげかこう（さいしょうまげはんけい）",
+    "jp": "ベンダー曲げ加工（最小曲げ半径）",
+    "romaji": "bendaa mage kakou",
+    "id_text": "Bender bending — radius min 4x diameter luar pipa",
+    "desc": "Membengkokkan pipa tembaga refrigeran pakai bender: radius minimum = 4x diameter luar pipa (lebih kecil dari tekuk tangan). Di proyek: pilih bender sesuai tebal pipa agar tidak berkerut."
+  },
+  {
+    "id": 739,
+    "category": "haikan",
+    "source": "jac-ch6",
+    "furi": "ろうづけごのかくにん",
+    "jp": "ろう付け後の確認",
+    "romaji": "rou duke go no kakunin",
+    "id_text": "Setelah brazing — dinginkan kain basah, cek",
+    "desc": "Setelah brazing pipa refrigeran: ①dinginkan dengan kain basah ②periksa pinhole dan ろう回り不良 (brazing tidak merata) secara visual. Di proyek: suhu brazing dan kebersihan permukaan wajib dipastikan."
+  }
+]

@@ -1,0 +1,2462 @@
+[
+  {
+    "id": 754,
+    "category": "haikan",
+    "source": "vocab-general",
+    "furi": "とうけつ",
+    "jp": "凍結",
+    "romaji": "touketsu",
+    "id_text": "Pembekuan",
+    "desc": "Air/fluida dalam pipa membeku di cuaca dingin → pipa bisa pecah."
+  },
+  {
+    "id": 766,
+    "category": "haikan",
+    "source": "vocab-general",
+    "furi": "りゅうりょう",
+    "jp": "流量",
+    "romaji": "ryuuryou",
+    "id_text": "Laju aliran / debit",
+    "desc": "Jumlah fluida yang mengalir per satuan waktu. Satuan: m³/h, L/min."
+  },
+  {
+    "id": 772,
+    "category": "hoon",
+    "source": "vocab-general",
+    "furi": "あぶら",
+    "jp": "油",
+    "romaji": "abura",
+    "id_text": "Minyak / oli",
+    "desc": "Jika menempel pada sambungan 冷媒管 → シール性が低下 (kemampuan seal menurun)."
+  },
+  {
+    "id": 777,
+    "category": "anzen",
+    "source": "vocab-general",
+    "furi": "たはつ",
+    "jp": "多発",
+    "romaji": "tahatsu",
+    "id_text": "Sering terjadi / berulang",
+    "desc": "Kejadian yang terjadi berulang-ulang. 結露が多発 = kondensasi sering terjadi."
+  },
+  {
+    "id": 781,
+    "category": "anzen",
+    "source": "vocab-general",
+    "furi": "さび",
+    "jp": "錆",
+    "romaji": "sabi",
+    "id_text": "Karat",
+    "desc": "Oksidasi pada permukaan logam. Pipa berkarat → wajib 洗浄 & 防錆処理 sebelum konstruksi."
+  },
+  {
+    "id": 782,
+    "category": "anzen",
+    "source": "vocab-general",
+    "furi": "れっか",
+    "jp": "劣化",
+    "romaji": "rekka",
+    "id_text": "Degradasi / kemunduran",
+    "desc": "Material melemah seiring waktu. Sinar UV menyebabkan 劣化 pada kabel di luar ruangan."
+  },
+  {
+    "id": 786,
+    "category": "anzen",
+    "source": "vocab-general",
+    "furi": "いおん",
+    "jp": "異音",
+    "romaji": "ion",
+    "id_text": "Suara abnormal",
+    "desc": "Suara tidak normal pada sistem pipa/mesin. Membuka katup terlalu cepat → aliran mendadak → 異音."
+  },
+  {
+    "id": 794,
+    "category": "haikan",
+    "source": "vocab-general",
+    "furi": "きろく",
+    "jp": "記録",
+    "romaji": "kiroku",
+    "id_text": "Pencatatan / dokumentasi",
+    "desc": "埋設配管の位置を図面に記録する = catat lokasi pipa bawah tanah di gambar teknik."
+  },
+  {
+    "id": 812,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "へいよう",
+    "jp": "併用",
+    "romaji": "heiyou",
+    "id_text": "Penggunaan bersamaan",
+    "desc": "Menggunakan dua hal sekaligus. 保温材と電熱線を併用する = pakai insulasi + kawat pemanas bersamaan."
+  },
+  {
+    "id": 825,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "きゅうへん",
+    "jp": "急変",
+    "romaji": "kyuuhen",
+    "id_text": "Perubahan mendadak",
+    "desc": "バルブを開いた直後に流量が急変する → 異音発生の原因. Di proyek: buka katup perlahan agar aliran tidak tiba-tiba berubah. Mandor:「バルブはゆっくり開いて」(buka katup perlahan-lahan)."
+  },
+  {
+    "id": 826,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "ちょくご",
+    "jp": "直後",
+    "romaji": "chokugo",
+    "id_text": "Segera setelah",
+    "desc": "バルブを開いた直後 = segera setelah katup dibuka. 直後 = langsung setelah."
+  },
+  {
+    "id": 835,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "げんしょう",
+    "jp": "現象",
+    "romaji": "genshou",
+    "id_text": "Fenomena / gejala",
+    "desc": "Kejadian atau gejala fisik. 断熱材の隙間から熱が漏れる現象 = fenomena panas bocor dari celah insulasi."
+  },
+  {
+    "id": 854,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "いろ",
+    "jp": "色",
+    "romaji": "iro",
+    "id_text": "Warna",
+    "desc": "Pengecoh paling sering di soal — muncul 6x: バルブの色(Q4)、材料の色(Q6)、色を塗る(Q15)、色検査(Q16)、色をそろえる(Q18)、色が変わる(Q20). Warna tidak pernah jadi jawaban benar."
+  },
+  {
+    "id": 861,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "おと",
+    "jp": "音",
+    "romaji": "oto",
+    "id_text": "Suara / bunyi",
+    "desc": "音検査 = inspeksi suara. Pengecoh Q16 — inspeksi wajib setelah pengelasan bukan 音検査 melainkan 漏れ検査 (inspeksi kebocoran)."
+  },
+  {
+    "id": 866,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "はだか",
+    "jp": "裸",
+    "romaji": "hadaka",
+    "id_text": "Tanpa pelindung / telanjang",
+    "desc": "裸のまま埋める = kubur pipa tanpa pelindung apapun. Pengecoh Q1 — cara terburuk untuk pipa bawah tanah di cuaca dingin. Wajib pakai 保温材＋電熱線."
+  },
+  {
+    "id": 868,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "こくしょく",
+    "jp": "黒色",
+    "romaji": "kokushoku",
+    "id_text": "Warna hitam",
+    "desc": "黒色テープで覆う = tutup dengan selotip hitam. Pengecoh Q7 — selotip hitam bukan pelindung UV yang tepat. Yang benar: 耐候性カバーを使用する."
+  },
+  {
+    "id": 869,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "けいさん",
+    "jp": "計算",
+    "romaji": "keisan",
+    "id_text": "Perhitungan / kalkulasi",
+    "desc": "流量計算 = menghitung debit aliran. Pengecoh Q8 — sebelum mengoperasikan pipa gas bukan saatnya hitung debit, yang wajib adalah ガス漏れ試験 dulu."
+  },
+  {
+    "id": 872,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "しょうらい",
+    "jp": "将来",
+    "romaji": "shourai",
+    "id_text": "Masa depan / kelak",
+    "desc": "将来確認するために = agar bisa diketahui di masa depan. Konteks Q15: posisi pipa bawah tanah dicatat di 図面 agar bisa dilacak kelak."
+  },
+  {
+    "id": 875,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "さい",
+    "jp": "際",
+    "romaji": "sai",
+    "id_text": "Pada saat / ketika",
+    "desc": "〜する際（さい）= pada saat melakukan〜. 配管を埋設する際 = pada saat pemasangan pipa. Mirip 時（とき）tapi lebih formal. Sering muncul di teks soal."
+  },
+  {
+    "id": 912,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "せいり",
+    "jp": "整理",
+    "romaji": "seiri",
+    "id_text": "Pilah / sortir",
+    "desc": "整理 = menyortir/memilah barang. S pertama dari 5S. Di proyek: barang tidak perlu disingkirkan dari area kerja. Mandor:「いらないものは整理して」(pilah dan singkirkan yang tidak perlu)."
+  },
+  {
+    "id": 913,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "せいとん",
+    "jp": "整頓",
+    "romaji": "seiton",
+    "id_text": "Tata / rapikan",
+    "desc": "例: 工具を決めた場所に整頓する。→ Taruh alat di tempat yang sudah ditentukan."
+  },
+  {
+    "id": 914,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "せいそう",
+    "jp": "清掃",
+    "romaji": "seisou",
+    "id_text": "Bersihkan / sapu",
+    "desc": "例: 毎日作業後に清掃する。→ Bersihkan area kerja setelah selesai setiap hari."
+  },
+  {
+    "id": 915,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "せいけつ",
+    "jp": "清潔",
+    "romaji": "seiketsu",
+    "id_text": "Jaga kebersihan / higienis",
+    "desc": "例: 作業員詰め所を清潔に保つ。→ Jaga ruang pekerja tetap bersih dan sehat."
+  },
+  {
+    "id": 916,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "しつけ",
+    "jp": "しつけ",
+    "romaji": "shitsuke",
+    "id_text": "Disiplin / kebiasaan baik",
+    "desc": "例: 5Sの5つ目はしつけ。→ Elemen ke-5 dari 5S = disiplin menjaga aturan."
+  },
+  {
+    "id": 917,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ちーむわーく",
+    "jp": "チームワーク",
+    "romaji": "chiimu waaku",
+    "id_text": "Kerja tim",
+    "desc": "例: 専門業者間のチームワークが大切。→ Kunci lancarnya konstruksi multi-kontraktor."
+  },
+  {
+    "id": 918,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ゆういせい",
+    "jp": "優位性",
+    "romaji": "yuuisei",
+    "id_text": "Keunggulan / superioritas posisi",
+    "desc": "例: 職場の優位性を利用したいじめ＝パワハラ。→ Memanfaatkan jabatan untuk menekan orang lain."
+  },
+  {
+    "id": 919,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "くつう",
+    "jp": "苦痛",
+    "romaji": "kutsuu",
+    "id_text": "Penderitaan / tekanan",
+    "desc": "例: 精神的な苦痛を与える行為はパワハラ。→ Tindakan yang menyebabkan penderitaan mental = pelecehan."
+  },
+  {
+    "id": 920,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ろうどうしゃ",
+    "jp": "労働者",
+    "romaji": "roudousha",
+    "id_text": "Pekerja / tenaga kerja",
+    "desc": "例: 労働者の安全を守る法律＝労働安全衛生法。→ UU yang melindungi keselamatan pekerja."
+  },
+  {
+    "id": 921,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "じぎょうぬし",
+    "jp": "事業主",
+    "romaji": "jigyounushi",
+    "id_text": "Pemberi kerja / majikan",
+    "desc": "例: 労災保険の保険料は事業主が払う。→ Premi asuransi kecelakaan kerja ditanggung majikan."
+  },
+  {
+    "id": 922,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ししつ",
+    "jp": "資質",
+    "romaji": "shishitsu",
+    "id_text": "Kualitas / kompetensi / mutu SDM",
+    "desc": "例: 建設業法の目的は業者の資質の向上。→ Tujuan UU Konstruksi = tingkatkan mutu pelaku usaha."
+  },
+  {
+    "id": 923,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "はいざい",
+    "jp": "廃材",
+    "romaji": "haizai",
+    "id_text": "Material limbah / sisa bongkaran",
+    "desc": "例: 廃材の適切な処理は建設リサイクル法で定める。→ Penanganan limbah material diatur UU Daur Ulang Konstruksi."
+  },
+  {
+    "id": 924,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "さいていげん",
+    "jp": "最低限",
+    "romaji": "saiteigen",
+    "id_text": "Minimum / batas paling rendah",
+    "desc": "例: 建築基準法は最低限のルールを定める。→ UU Standar Bangunan menetapkan aturan minimum."
+  },
+  {
+    "id": 925,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "けいげん",
+    "jp": "軽減",
+    "romaji": "keigen",
+    "id_text": "Pengurangan / mitigasi",
+    "desc": "例: 消防法は火災の被害を軽減する目的。→ UU Pemadam bertujuan memitigasi kerugian kebakaran."
+  },
+  {
+    "id": 926,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "あんか",
+    "jp": "安価",
+    "romaji": "anka",
+    "id_text": "Murah / terjangkau",
+    "desc": "例: 水道法は安価な水の供給を目指す。→ UU Air Bersih bertujuan menyediakan air dengan harga terjangkau."
+  },
+  {
+    "id": 927,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ぎのうこうしゅう",
+    "jp": "技能講習",
+    "romaji": "ginou koushu",
+    "id_text": "Pelatihan wajib sebelum operasikan mesin berat",
+    "desc": "例: 車両系建設機械3t以上は技能講習が必要。→ Alat berat ≥3t wajib ikut pelatihan keterampilan."
+  },
+  {
+    "id": 928,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "とくべつきょういく",
+    "jp": "特別教育",
+    "romaji": "tokubetsu kyouiku",
+    "id_text": "Pendidikan khusus (wajib K3)",
+    "desc": "例: アーク溶接は特別教育が必要。→ Las busur wajib ikut pendidikan khusus K3."
+  },
+  {
+    "id": 929,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "めんきょ",
+    "jp": "免許",
+    "romaji": "menkyo",
+    "id_text": "Lisensi / SIM / izin resmi negara",
+    "desc": "免許 = lisensi resmi dari negara. Las gas, crane, dan listrik memerlukan lisensi. Di proyek: pekerja tanpa lisensi tidak boleh mengoperasikan alat. Mandor:「免許を持っているか確認して」(pastikan punya lisensi)."
+  },
+  {
+    "id": 930,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "じゅんびこうじ",
+    "jp": "準備工事",
+    "romaji": "junbi kouji",
+    "id_text": "Pekerjaan persiapan",
+    "desc": "例: 着工前に準備工事を行う。→ Sebelum mulai konstruksi, lakukan pekerjaan persiapan terlebih dahulu."
+  },
+  {
+    "id": 931,
+    "category": "doboku_doko",
+    "source": "vocab-jac",
+    "furi": "やりかた",
+    "jp": "遣り方",
+    "romaji": "yarikata",
+    "id_text": "Batter board / rangka referensi",
+    "desc": "例: 遣り方で建物の位置・水平を確認する。→ Batter board dipakai untuk menentukan posisi & level bangunan."
+  },
+  {
+    "id": 932,
+    "category": "doboku_doko",
+    "source": "vocab-jac",
+    "furi": "ねきり",
+    "jp": "根切り",
+    "romaji": "nekiri",
+    "id_text": "Penggalian fondasi",
+    "desc": "例: 基礎のために根切りを行う。→ Gali tanah untuk pemasangan fondasi bangunan."
+  },
+  {
+    "id": 933,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "うめもどし",
+    "jp": "埋戻し",
+    "romaji": "umemodoshi",
+    "id_text": "Urugan kembali / backfill",
+    "desc": "例: 配管設置後に埋戻しを行う。→ Setelah pipa terpasang, uruk kembali tanah di atasnya."
+  },
+  {
+    "id": 934,
+    "category": "kenchiku_kutai",
+    "source": "vocab-jac",
+    "furi": "やまどめ",
+    "jp": "山留め",
+    "romaji": "yamadome",
+    "id_text": "Penahan tanah / earth retaining",
+    "desc": "例: 深い掘削では山留めが必要。→ Untuk galian dalam, wajib pasang sistem penahan tanah."
+  },
+  {
+    "id": 935,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "しゅんこう",
+    "jp": "竣工",
+    "romaji": "shunkou",
+    "id_text": "Selesai konstruksi / serah terima",
+    "desc": "例: 竣工検査に合格したら引き渡し。→ Setelah lulus inspeksi akhir, bangunan diserahkan ke pemilik."
+  },
+  {
+    "id": 936,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "ちゃっこう",
+    "jp": "着工",
+    "romaji": "chakkou",
+    "id_text": "Mulai konstruksi / groundbreaking",
+    "desc": "例: 着工から竣工まで18ヶ月かかった。→ Dari mulai konstruksi sampai selesai butuh 18 bulan."
+  },
+  {
+    "id": 937,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "こうき",
+    "jp": "工期",
+    "romaji": "kouki",
+    "id_text": "Periode konstruksi / durasi proyek",
+    "desc": "例: 工期を守るには工程管理が重要。→ Untuk tepat waktu, manajemen jadwal konstruksi itu krusial."
+  },
+  {
+    "id": 938,
+    "category": "doboku_doko",
+    "source": "vocab-jac",
+    "furi": "しめがため",
+    "jp": "締固め",
+    "romaji": "shime gatame",
+    "id_text": "Pemadatan tanah / compaction",
+    "desc": "例: 盛り土は転圧機で締固める。→ Tanah urukan dipadatkan menggunakan mesin pemadat."
+  },
+  {
+    "id": 939,
+    "category": "doboku_doko",
+    "source": "vocab-jac",
+    "furi": "だんきり",
+    "jp": "段切り",
+    "romaji": "dankiri",
+    "id_text": "Pemotongan bertangga di lereng",
+    "desc": "例: 急な斜面に盛り土するとき段切りを行う。→ Saat mengurug lereng curam, potong bertangga agar tidak longsor."
+  },
+  {
+    "id": 940,
+    "category": "doboku_hoso",
+    "source": "vocab-jac",
+    "furi": "ろしょう",
+    "jp": "路床",
+    "romaji": "roshou",
+    "id_text": "Subgrade / lapisan tanah dasar jalan",
+    "desc": "例: 路床の上に路盤材を敷く。→ Di atas subgrade, hampar material lapis pondasi jalan."
+  },
+  {
+    "id": 941,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "おしど",
+    "jp": "押土",
+    "romaji": "oshido",
+    "id_text": "Mendorong tanah (bulldozer)",
+    "desc": "例: ブルドーザで土砂を押土する。→ Bulldozer dipakai untuk mendorong timbunan tanah."
+  },
+  {
+    "id": 942,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "うんぱん",
+    "jp": "運搬",
+    "romaji": "unpan",
+    "id_text": "Pengangkutan / transport material",
+    "desc": "例: ダンプカーで土砂を運搬する。→ Truk dump dipakai untuk mengangkut tanah galian."
+  },
+  {
+    "id": 943,
+    "category": "doboku_hoso",
+    "source": "vocab-jac",
+    "furi": "しきならし",
+    "jp": "敷き均し",
+    "romaji": "shiki narashi",
+    "id_text": "Penghamparan & perataan",
+    "desc": "例: アスファルトをフィニッシャーで敷き均す。→ Aspal dihampar dan diratakan menggunakan mesin finisher."
+  },
+  {
+    "id": 944,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "くったい",
+    "jp": "躯体",
+    "romaji": "kutai",
+    "id_text": "Struktur utama bangunan",
+    "desc": "例: 躯体＝基礎・柱・梁・壁・床。→ Kutai = pondasi + kolom + balok + dinding + lantai."
+  },
+  {
+    "id": 945,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "ないそう",
+    "jp": "内装",
+    "romaji": "naisou",
+    "id_text": "Finishing interior",
+    "desc": "例: 躯体工事の後に内装仕上げを行う。→ Setelah struktur selesai, baru pekerjaan finishing interior."
+  },
+  {
+    "id": 946,
+    "category": "kenchiku_kutai",
+    "source": "vocab-jac",
+    "furi": "かたわく",
+    "jp": "型枠",
+    "romaji": "katawaku",
+    "id_text": "Bekisting / formwork",
+    "desc": "例: 型枠にコンクリートを打設する。→ Tuang beton ke dalam bekisting untuk membentuk struktur."
+  },
+  {
+    "id": 947,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "しほこう",
+    "jp": "支保工",
+    "romaji": "shihokou",
+    "id_text": "Perancah penyangga / shoring",
+    "desc": "例: 型枠を鉄パイプで支保工する。→ Perkuat bekisting menggunakan perancah dari pipa baja."
+  },
+  {
+    "id": 948,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "ようじょう",
+    "jp": "養生",
+    "romaji": "youjou",
+    "id_text": "Perawatan beton / curing",
+    "desc": "例: コンクリート打設後は養生が必要。→ Setelah pengecoran, beton perlu dirawat agar mengeras sempurna."
+  },
+  {
+    "id": 949,
+    "category": "kenchiku_kutai",
+    "source": "vocab-jac",
+    "furi": "てっきん",
+    "jp": "鉄筋",
+    "romaji": "tekkin",
+    "id_text": "Tulangan baja / rebar",
+    "desc": "例: 鉄筋はコンクリートの引張力を補う。→ Tulangan baja menambah kekuatan tarik pada beton."
+  },
+  {
+    "id": 950,
+    "category": "kenchiku_kutai",
+    "source": "vocab-jac",
+    "furi": "くぎじまい",
+    "jp": "釘仕舞",
+    "romaji": "kugi jimai",
+    "id_text": "Mencabut paku (daur ulang bekisting)",
+    "desc": "例: 型枠解体後に釘仕舞をして再利用する。→ Setelah bekisting dibongkar, cabut paku agar bisa dipakai ulang."
+  },
+  {
+    "id": 951,
+    "category": "kenchiku_kutai",
+    "source": "vocab-jac",
+    "furi": "てんよう",
+    "jp": "転用",
+    "romaji": "tenyou",
+    "id_text": "Penggunaan ulang / reuse bekisting",
+    "desc": "例: 型枠の転用回数を記録する。→ Catat berapa kali bekisting sudah dipakai ulang."
+  },
+  {
+    "id": 952,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "つぼ",
+    "jp": "坪",
+    "romaji": "tsubo",
+    "id_text": "Tsubo — satuan luas (≈3.3 m²)",
+    "desc": "例: 1坪＝約3.3m²。→ Satuan luas tradisional Jepang, masih dipakai di properti."
+  },
+  {
+    "id": 953,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "しゃく",
+    "jp": "尺",
+    "romaji": "shaku",
+    "id_text": "Shaku — satuan panjang (≈30.3 cm)",
+    "desc": "Satuan panjang tradisional Jepang. 1尺 ≈ 30.3 cm. 10寸＝1尺, 10尺＝1丈. Di proyek: sering muncul di gambar tua. Mandor:「1尺は約30センチと覚えて」(ingat 1 shaku ≈ 30 cm)."
+  },
+  {
+    "id": 954,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "すん",
+    "jp": "寸",
+    "romaji": "sun",
+    "id_text": "Sun — satuan panjang (≈3.03 cm)",
+    "desc": "例: 1寸＝約3.03cm＝1尺の1/10。→ Sering muncul di gambar teknik bangunan tradisional Jepang."
+  },
+  {
+    "id": 955,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "いっけん",
+    "jp": "一間",
+    "romaji": "ikken",
+    "id_text": "1 Ken — satuan panjang (≈1.818 m)",
+    "desc": "例: 柱の間隔は一間（約1.82m）が基本。→ Jarak antar kolom standar bangunan Jepang = 1 ken."
+  },
+  {
+    "id": 956,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "かんろ",
+    "jp": "管路",
+    "romaji": "kanro",
+    "id_text": "Jalur pipa / conduit path",
+    "desc": "例: マンホール間を結ぶのが管路。→ Jalur pipa yang menghubungkan antar manhole."
+  },
+  {
+    "id": 957,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "まいせつぶつ",
+    "jp": "埋設物",
+    "romaji": "maisetsu butsu",
+    "id_text": "Utilitas bawah tanah / buried utilities",
+    "desc": "例: 穴を掘る前に埋設物を確認する。→ Sebelum menggali, periksa dulu ada tidaknya pipa/kabel bawah tanah."
+  },
+  {
+    "id": 958,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "たてこう",
+    "jp": "立坑",
+    "romaji": "tatekou",
+    "id_text": "Shaft vertikal / sumur akses",
+    "desc": "例: 推進工事の発進立坑をジャッキで掘る。→ Shaft vertikal dipakai sebagai titik start konstruksi jacking."
+  },
+  {
+    "id": 959,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "きょうどうこう",
+    "jp": "共同溝",
+    "romaji": "kyoudoukou",
+    "id_text": "Saluran utilitas bersama",
+    "desc": "例: 電気・ガス・水道を共同溝にまとめる。→ Listrik, gas, air bersih dikumpulkan dalam 1 saluran bawah tanah."
+  },
+  {
+    "id": 961,
+    "category": "haikan",
+    "source": "vocab-general",
+    "furi": "ぼうせい",
+    "jp": "防錆",
+    "romaji": "bousei",
+    "id_text": "Anti-karat / rust prevention",
+    "desc": "例: 配管施工前に洗浄と防錆処理を行う。→ Sebelum pasang pipa berkarat, bersihkan dan beri lapisan anti-karat."
+  },
+  {
+    "id": 962,
+    "category": "denki",
+    "source": "vocab-jac",
+    "furi": "ぜつえん",
+    "jp": "絶縁",
+    "romaji": "zetsuen",
+    "id_text": "Insulasi listrik",
+    "desc": "例: 電気が他の部分に流れないよう絶縁する。→ Cegah arus mengalir ke bagian lain dengan insulasi."
+  },
+  {
+    "id": 963,
+    "category": "denki",
+    "source": "vocab-jac",
+    "furi": "せっち",
+    "jp": "接地",
+    "romaji": "secchi",
+    "id_text": "Pentanahan / grounding",
+    "desc": "例: 感電防止のため電気設備にアース(接地)を取る。→ Pasang grounding di peralatan listrik untuk cegah sengatan."
+  },
+  {
+    "id": 964,
+    "category": "denki",
+    "source": "vocab-jac",
+    "furi": "ろうでん",
+    "jp": "漏電",
+    "romaji": "rouden",
+    "id_text": "Kebocoran listrik",
+    "desc": "例: 漏電は感電・火災の原因になる。→ Kebocoran listrik bisa menyebabkan sengatan dan kebakaran."
+  },
+  {
+    "id": 965,
+    "category": "denki",
+    "source": "vocab-jac",
+    "furi": "たんらく",
+    "jp": "短絡",
+    "romaji": "tanraku",
+    "id_text": "Korsleting / short circuit",
+    "desc": "例: 2本以上の電線が負荷なしに接触すると短絡。→ Dua kabel bersentuhan tanpa beban = korsleting."
+  },
+  {
+    "id": 966,
+    "category": "anzen",
+    "source": "vocab-jac",
+    "furi": "ついらく",
+    "jp": "墜落",
+    "romaji": "tsuiraku",
+    "id_text": "Jatuh dari ketinggian (orang)",
+    "desc": "例: 建設業の三大災害の1位は墜落・転落。→ Jatuh dari ketinggian = penyebab kecelakaan terbesar di konstruksi."
+  },
+  {
+    "id": 967,
+    "category": "anzen",
+    "source": "vocab-jac",
+    "furi": "さんそけつぼう",
+    "jp": "酸素欠乏",
+    "romaji": "sanso ketsubou",
+    "id_text": "Kekurangan oksigen",
+    "desc": "例: マンホール内は酸素欠乏に注意が必要。→ Di dalam manhole, waspadai kondisi kekurangan oksigen."
+  },
+  {
+    "id": 968,
+    "category": "anzen",
+    "source": "vocab-jac",
+    "furi": "どどめ",
+    "jp": "土留め",
+    "romaji": "dodo me",
+    "id_text": "Penahan tanah / soil retaining",
+    "desc": "例: 掘削深さ1.5m以上では土留めが必要。→ Galian lebih dari 1.5m wajib pasang penahan tanah."
+  },
+  {
+    "id": 969,
+    "category": "anzen",
+    "source": "vocab-jac",
+    "furi": "かんき",
+    "jp": "換気",
+    "romaji": "kanki",
+    "id_text": "Ventilasi / sirkulasi udara",
+    "desc": "例: マンホール作業前に換気を行う。→ Sebelum masuk manhole, pastikan ada ventilasi yang cukup."
+  },
+  {
+    "id": 970,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "せこうかんり",
+    "jp": "施工管理",
+    "romaji": "sekou kanri",
+    "id_text": "Manajemen pelaksanaan konstruksi",
+    "desc": "例: 施工管理＝品質・工程・原価・安全・環境の管理。→ Construction management = kelola kualitas, jadwal, biaya, K3, lingkungan."
+  },
+  {
+    "id": 971,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "ひんしつ",
+    "jp": "品質",
+    "romaji": "hinshitsu",
+    "id_text": "Kualitas / mutu",
+    "desc": "例: 施工管理の4大管理のひとつが品質管理。→ Salah satu dari 4 manajemen konstruksi = quality control."
+  },
+  {
+    "id": 972,
+    "category": "sekou",
+    "source": "vocab-jac",
+    "furi": "こうてい",
+    "jp": "工程",
+    "romaji": "koutei",
+    "id_text": "Jadwal / tahapan proses",
+    "desc": "例: 工程表で工事の進捗を管理する。→ Gunakan bagan jadwal untuk pantau kemajuan konstruksi."
+  },
+  {
+    "id": 973,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "ごあんぜんに",
+    "jp": "ご安全に",
+    "romaji": "go anzen ni",
+    "id_text": "Semoga selamat / stay safe",
+    "desc": "例: 工事現場での挨拶は「ご安全に」。→ Sapaan khas di lokasi konstruksi = semoga selamat bekerja."
+  },
+  {
+    "id": 975,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "あぶない",
+    "jp": "危ない",
+    "romaji": "abunai",
+    "id_text": "Bahaya! / Awas!",
+    "desc": "例: まわりの人が「危ない！」と叫んだらすぐ反応。→ Jika orang sekitar berteriak 'bahaya!', segera bereaksi."
+  },
+  {
+    "id": 976,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "しようしょ",
+    "jp": "仕様書",
+    "romaji": "shiyousho",
+    "id_text": "Dokumen spesifikasi teknis",
+    "desc": "例: 施工は仕様書に従って行う。→ Pelaksanaan konstruksi harus sesuai spesifikasi teknis."
+  },
+  {
+    "id": 977,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "けんちく",
+    "jp": "建築",
+    "romaji": "kenchiku",
+    "id_text": "Bangunan / konstruksi gedung",
+    "desc": "例: 建築工事＝住宅・ビルなどの建物を作る工事。→ Pekerjaan membangun rumah, gedung, dll."
+  },
+  {
+    "id": 978,
+    "category": "doboku_hoso",
+    "source": "vocab-core",
+    "furi": "どぼく",
+    "jp": "土木",
+    "romaji": "doboku",
+    "id_text": "Teknik sipil / infrastruktur",
+    "desc": "例: 土木工事＝道路・ダム・橋など。→ Pekerjaan jalan, bendungan, jembatan, dll."
+  },
+  {
+    "id": 979,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "かいたい",
+    "jp": "解体",
+    "romaji": "kaitai",
+    "id_text": "Pembongkaran / demolition",
+    "desc": "例: 解体工事ではアスベストに注意する。→ Dalam pekerjaan bongkar, waspadai material asbes."
+  },
+  {
+    "id": 980,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "きそ",
+    "jp": "基礎",
+    "romaji": "kiso",
+    "id_text": "Fondasi / pondasi",
+    "desc": "例: 建物の基礎は躯体の一部。→ Fondasi adalah bagian dari struktur utama bangunan."
+  },
+  {
+    "id": 981,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "はしら",
+    "jp": "柱",
+    "romaji": "hashira",
+    "id_text": "Kolom / pilar",
+    "desc": "Kolom vertikal menopang beban bangunan. 柱は建物の垂直荷重を支える. Di proyek: kolom baja dipasang tegak lurus, dicek dengan plumb bob. Mandor:「柱が垂直か確認して」(cek apakah kolom tegak lurus)."
+  },
+  {
+    "id": 982,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "はり",
+    "jp": "梁",
+    "romaji": "hari",
+    "id_text": "Balok struktural",
+    "desc": "例: 梁は柱と柱をつなぐ水平部材。→ Balok = elemen horizontal yang menghubungkan kolom ke kolom."
+  },
+  {
+    "id": 983,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "ゆか",
+    "jp": "床",
+    "romaji": "yuka",
+    "id_text": "Lantai",
+    "desc": "例: 地墨は床など水平面に直接つける墨。→ Garis lantai (jizumi) ditarik langsung di permukaan horizontal."
+  },
+  {
+    "id": 984,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "すみだし",
+    "jp": "墨出し",
+    "romaji": "sumidashi",
+    "id_text": "Penarikan garis referensi / layout marking",
+    "desc": "例: 壁の位置を墨出しで確認する。→ Posisi dinding ditentukan dengan menarik garis referensi."
+  },
+  {
+    "id": 985,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "にげずみ",
+    "jp": "逃げ墨",
+    "romaji": "nigezumi",
+    "id_text": "Garis referensi offset",
+    "desc": "例: 仕上げ面から500mm逃げた位置に逃げ墨を引く。→ Garis offset dari permukaan finishing, biasanya 500mm."
+  },
+  {
+    "id": 986,
+    "category": "sekou",
+    "source": "vocab-core",
+    "furi": "じずみ",
+    "jp": "地墨",
+    "romaji": "jizumi",
+    "id_text": "Garis lantai / floor marking",
+    "desc": "例: 床に直接つける墨を地墨という。→ Garis yang ditarik langsung di lantai = garis lantai."
+  },
+  {
+    "id": 987,
+    "category": "doboku_doko",
+    "source": "vocab-core",
+    "furi": "みずもり",
+    "jp": "水盛り",
+    "romaji": "mizumori",
+    "id_text": "Penentuan level air / water leveling",
+    "desc": "例: 水盛りで水平基準を出す。→ Tentukan level horizontal menggunakan metode air."
+  },
+  {
+    "id": 988,
+    "category": "haikan",
+    "source": "vocab-core",
+    "furi": "せつごう",
+    "jp": "接合",
+    "romaji": "setsugou",
+    "id_text": "Penyambungan / joint",
+    "desc": "例: 鉄管はねじ接合、ポリエチレン管はEF接合。→ Pipa baja = sambungan ulir; pipa PE = sambungan EF."
+  },
+  {
+    "id": 989,
+    "category": "denki",
+    "source": "vocab-core",
+    "furi": "でんちゅう",
+    "jp": "電柱",
+    "romaji": "denchuu",
+    "id_text": "Tiang listrik / utility pole",
+    "desc": "例: 電柱を建てる前に埋設物を確認する。→ Sebelum pasang tiang listrik, cek utilitas bawah tanah."
+  },
+  {
+    "id": 990,
+    "category": "denki",
+    "source": "vocab-core",
+    "furi": "まんほーる",
+    "jp": "マンホール",
+    "romaji": "manhoooru",
+    "id_text": "Manhole",
+    "desc": "例: マンホール内は酸素欠乏と有害ガスに注意。→ Di dalam manhole, waspadai kekurangan oksigen dan gas berbahaya."
+  },
+  {
+    "id": 993,
+    "category": "anzen",
+    "source": "vocab-core",
+    "furi": "さいがい",
+    "jp": "災害",
+    "romaji": "saigai",
+    "id_text": "Kecelakaan / bencana kerja",
+    "desc": "例: 建設業の三大災害＝墜落・機械・温度接触。→ 3 kecelakaan terbesar di konstruksi = jatuh, mesin, suhu ekstrem."
+  },
+  {
+    "id": 994,
+    "category": "anzen",
+    "source": "vocab-core",
+    "furi": "きけんよちかつどう",
+    "jp": "危険予知活動",
+    "romaji": "kiken yochi katsudou",
+    "id_text": "Kegiatan prediksi bahaya / KY",
+    "desc": "例: 作業前にKYで危険を予測し対策を立てる。→ Sebelum kerja, prediksi bahaya (KY) dan tentukan tindakan pencegahan."
+  },
+  {
+    "id": 995,
+    "category": "career",
+    "source": "vocab-core",
+    "furi": "げんばかんとく",
+    "jp": "現場監督",
+    "romaji": "genba kantoku",
+    "id_text": "Pengawas lapangan / site supervisor",
+    "desc": "例: 現場監督は品質・安全・工程を管理する。→ Site supervisor mengelola kualitas, K3, dan jadwal di lapangan."
+  },
+  {
+    "id": 1011,
+    "category": "sekou",
+    "source": "vocab-general",
+    "furi": "はしご",
+    "jp": "梯子",
+    "romaji": "hashigo",
+    "id_text": "Tangga (ladder)",
+    "desc": "Tangga panjang yang disandarkan ke dinding. Untuk akses ke tempat tinggi."
+  },
+  {
+    "id": 1025,
+    "category": "setsubi_kougu",
+    "source": "vocab-general",
+    "furi": "しゃこ",
+    "jp": "車庫",
+    "romaji": "shako",
+    "id_text": "Garasi",
+    "desc": "Tempat parkir kendaraan dalam bangunan. Perlu ventilasi khusus (換気) karena gas buang."
+  },
+  {
+    "id": 1050,
+    "category": "haikan",
+    "source": "vocab-general",
+    "furi": "ふうかん",
+    "jp": "風管",
+    "romaji": "fuu kan",
+    "id_text": "Duct / saluran udara",
+    "desc": "Saluran untuk mengalirkan udara dalam sistem HVAC. Terbuat dari logam atau fiberglass."
+  },
+  {
+    "id": 1074,
+    "category": "denki",
+    "source": "vocab-general",
+    "furi": "しせん",
+    "jp": "支線",
+    "romaji": "shisen",
+    "id_text": "Jalur percabangan (branch line)",
+    "desc": "Kabel cabang yang menyalurkan listrik dari 幹線 ke peralatan individual."
+  },
+  {
+    "id": 1085,
+    "category": "haikan",
+    "source": "vocab-general",
+    "furi": "なまりかん",
+    "jp": "鉛管",
+    "romaji": "namari kan",
+    "id_text": "Pipa timah (lead pipe)",
+    "desc": "Pipa dari timah, dulu dipakai untuk suplai air. Sekarang jarang dipakai karena bahaya kesehatan."
+  },
+  {
+    "id": 1097,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "すぷりんくらーへっど",
+    "jp": "スプリンクラーヘッド",
+    "romaji": "supurinkuraa heddo",
+    "id_text": "Kepala sprinkler pemadam api",
+    "desc": "例: スプリンクラーヘッドは火災時に熱で溶栓が溶けて自動放水する。→ Kepala sprinkler meleleh saat suhu tinggi dan memancarkan air secara otomatis. Ada dua jenis: 開放型 (terbuka) dan 閉鎖型 (tertutup)."
+  },
+  {
+    "id": 1098,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "かいほうがたすぷりんくらー",
+    "jp": "開放型スプリンクラー",
+    "romaji": "kaihou gata supurinkuraa",
+    "id_text": "Sprinkler jenis terbuka (open)",
+    "desc": "例: 開放型スプリンクラーは舞台や劇場など広い空間に使われる。→ Sprinkler terbuka digunakan di panggung atau ruang besar; semua kepala menyembur serentak saat katup utama dibuka."
+  },
+  {
+    "id": 1099,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "へいさがたすぷりんくらー",
+    "jp": "閉鎖型スプリンクラー",
+    "romaji": "heisa gata supurinkuraa",
+    "id_text": "Sprinkler jenis tertutup (closed)",
+    "desc": "例: 閉鎖型スプリンクラーは感熱部が溶けた箇所だけ放水する。→ Sprinkler tertutup hanya menyembur di kepala yang terkena panas; paling umum digunakan di gedung bertingkat."
+  },
+  {
+    "id": 1106,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "ひなんはしご",
+    "jp": "避難はしご",
+    "romaji": "hinan hashigo",
+    "id_text": "Tangga evakuasi darurat",
+    "desc": "例: 避難はしごは窓に取り付けて外壁を伝って降りる避難器具だ。→ Tangga evakuasi dipasang di jendela untuk turun menyusuri dinding luar gedung saat lift tidak bisa digunakan."
+  },
+  {
+    "id": 1109,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "ぼうかだんぱー",
+    "jp": "防火ダンパー",
+    "romaji": "bouka danpaa",
+    "id_text": "Fire damper (katup pemadam di ducting)",
+    "desc": "例: 防火ダンパーはダクトが防火区画を貫通する部分に設置する。→ Dipasang di titik duct yang menembus dinding tahan api; menutup otomatis saat sensor meleleh akibat panas untuk mencegah api merambat lewat ducting."
+  },
+  {
+    "id": 1112,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "しょうかぽんぷ",
+    "jp": "消火ポンプ",
+    "romaji": "shouka ponpu",
+    "id_text": "Pompa pemadam kebakaran",
+    "desc": "例: 消火ポンプは加圧送水装置として屋内消火栓やスプリンクラーに水を供給する。→ Pompa pemadam menyuplai air bertekanan ke sistem hidran dan sprinkler; dilengkapi 性能試験装置 untuk pengujian berkala."
+  },
+  {
+    "id": 1115,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "はっしんき",
+    "jp": "発信機",
+    "romaji": "hasshin ki",
+    "id_text": "Tombol alarm kebakaran manual",
+    "desc": "例: 発信機は人が火災を発見した際に手動で押して警報を鳴らす装置だ。→ Manual call point; ditekan oleh orang yang melihat api untuk mengaktifkan alarm; biasanya berwarna merah dan dipasang di koridor tiap lantai."
+  },
+  {
+    "id": 1116,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "じゅしんき",
+    "jp": "受信機",
+    "romaji": "jushin ki",
+    "id_text": "Panel penerima alarm kebakaran",
+    "desc": "例: 受信機は感知器や発信機からの信号を受けて警報を表示・発報する中枢装置だ。→ Panel utama sistem alarm kebakaran yang menampilkan lokasi kebakaran dan mengaktifkan bel; biasanya di ruang penjaga gedung."
+  },
+  {
+    "id": 1119,
+    "category": "shoubou",
+    "source": "vocab-exam",
+    "furi": "しょうぼうようすい",
+    "jp": "消防用水",
+    "romaji": "shoubouyousui",
+    "id_text": "Cadangan air untuk pemadam kebakaran",
+    "desc": "例: 消防用水は敷地内に一定量の水を貯留しておく消防設備の一種だ。→ Tangki atau kolam cadangan air yang wajib tersedia di lokasi tertentu; digunakan sebagai sumber air alternatif saat pasokan PDAM tidak cukup."
+  },
+  {
+    "id": 1122,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "ろっくうーる",
+    "jp": "ロックウール",
+    "romaji": "rokku uuru",
+    "id_text": "Rock wool / wol batu",
+    "desc": "例: ロックウールはグラスウールより耐熱温度が高く、約600℃まで使用できる。→ Rock wool tahan panas lebih tinggi dari glass wool, bisa digunakan hingga ±600°C. Terbuat dari basalt/batu terak, lebih berat tapi lebih tahan api."
+  },
+  {
+    "id": 1125,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "こうしつうれたんふぉーむ",
+    "jp": "硬質ウレタンフォーム",
+    "romaji": "koushitsu uretan foomu",
+    "id_text": "Rigid urethane foam (board/panel)",
+    "desc": "例: 硬質ウレタンフォームボードは熱伝導率が非常に低く、薄くても高い断熱性能を発揮する。→ Papan busa uretan keras memiliki nilai λ sangat rendah (~0.022 W/mK), efisien untuk ruang sempit. Beda dengan吹付けウレタン yang disemprotkan di tempat."
+  },
+  {
+    "id": 1127,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "ぱーらいとほおんざい",
+    "jp": "パーライト保温材",
+    "romaji": "paaraito hoon zai",
+    "id_text": "Perlite insulation material",
+    "desc": "例: パーライト保温材は膨張させた真珠岩を原料とし、高温配管や機器の保温に使われる。→ Insulasi perlit terbuat dari obsidian/batu vulkanik yang dipanaskan hingga mengembang."
+  },
+  {
+    "id": 1128,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "がいそうざい",
+    "jp": "外装材",
+    "romaji": "gaisou zai",
+    "id_text": "Jacketing material / material pelapis luar",
+    "desc": "例: 保温材の外装材には、アルミ・亜鉛鉄板・ステンレスなどが使われる。→ Material penutup luar lapisan insulasi pipa/duct untuk melindungi dari cuaca dan benturan fisik."
+  },
+  {
+    "id": 1129,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "あるみがいそう",
+    "jp": "アルミ外装",
+    "romaji": "arumi gaisou",
+    "id_text": "Aluminum jacketing (outer cladding)",
+    "desc": "例: 屋外露出配管の保温仕上げには、軽量で耐候性のあるアルミ外装が多く採用される。→ Jacketing aluminium ringan dan tahan karat, umum dipakai pada pipa outdoor."
+  },
+  {
+    "id": 1133,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "ほおんとう",
+    "jp": "保温筒",
+    "romaji": "hoontou",
+    "id_text": "Pre-formed pipe insulation section",
+    "desc": "例: 保温筒は配管の外径に合わせて半円形に成形された保温材で、2枚合わせて取り付ける。→ Insulasi pipa berbentuk silinder yang sudah dicetak setengah lingkaran, dipasang memeluk pipa."
+  },
+  {
+    "id": 1134,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "ほおんたい",
+    "jp": "保温帯",
+    "romaji": "hoontai",
+    "id_text": "Insulation band / blanket strip",
+    "desc": "例: バルブやフランジなど複雑な形状の箇所には保温筒の代わりに保温帯を巻き付けて施工する。→ Strip insulasi fleksibel (blanket) yang dililitkan pada bagian pipa tidak beraturan seperti valve, fitting, dan flensa yang tidak bisa memakai 保温筒"
+  },
+  {
+    "id": 1146,
+    "category": "hoon",
+    "source": "vocab-exam",
+    "furi": "ほれいこうじ",
+    "jp": "保冷工事",
+    "romaji": "horei kouji",
+    "id_text": "Cold insulation work / refrigeration insulation",
+    "desc": "例: 保冷工事では、外部からの熱侵入を防ぐとともに、結露による腐食も防止しなければならない。→ Pekerjaan insulasi khusus untuk pipa/peralatan bersuhu rendah (pipa chiller, AC, freezer)."
+  },
+  {
+    "id": 1147,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "ぶんでんばん",
+    "jp": "分電盤",
+    "romaji": "bunden ban",
+    "id_text": "Panel distribusi / breaker box",
+    "desc": "例: 分電盤には主幹ブレーカーと複数の分岐ブレーカーが設置されている。→ Panel distribusi berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit."
+  },
+  {
+    "id": 1153,
+    "category": "denki",
+    "source": "vocab-general",
+    "furi": "かんせん",
+    "jp": "幹線",
+    "romaji": "kansen",
+    "id_text": "Kabel feeder utama",
+    "desc": "例: 幹線は引込口から主分電盤までを結ぶ主電力供給ラインである。→ Feeder utama adalah jalur suplai daya primer yang menghubungkan titik masukan hingga panel utama."
+  },
+  {
+    "id": 1155,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "たんそう",
+    "jp": "単相",
+    "romaji": "tansou",
+    "id_text": "Fase tunggal / single phase",
+    "desc": "例: 家庭用電源は単相2線式（100V）または単相3線式（100V/200V）が標準である。→ Listrik rumah tangga umumnya menggunakan single phase 2 kawat (100V) atau 3 kawat (100V/200V)."
+  },
+  {
+    "id": 1156,
+    "category": "denki",
+    "source": "vocab-general",
+    "furi": "さんそう",
+    "jp": "三相",
+    "romaji": "sansou",
+    "id_text": "Tiga fase / three phase",
+    "desc": "例: 大型モーターや工場設備には三相3線式200Vまたは400Vが使用される。→ Motor besar dan peralatan industri menggunakan listrik tiga fase 200V atau 400V."
+  },
+  {
+    "id": 1157,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "きょようでんりゅう",
+    "jp": "許容電流",
+    "romaji": "kyoyou denryuu",
+    "id_text": "Ampasitas / arus maksimum yang diizinkan",
+    "desc": "例: 電線の許容電流を超えると絶縁被覆が過熱し、火災の原因となる。→ Jika arus melebihi ampasitas kabel, isolasi akan kepanasan dan dapat menyebabkan kebakaran."
+  },
+  {
+    "id": 1159,
+    "category": "denki",
+    "source": "vocab-general",
+    "furi": "がいし",
+    "jp": "碍子",
+    "romaji": "gaishi",
+    "id_text": "Insulator listrik (porselen/keramik)",
+    "desc": "例: 碍子は電線を構造物に固定しながら電気的に絶縁するための部品である。→ Insulator berfungsi menjaga kabel tetap pada posisinya sekaligus memisahkannya secara elektrik dari struktur."
+  },
+  {
+    "id": 1162,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "ていあつ",
+    "jp": "低圧",
+    "romaji": "teiatsu",
+    "id_text": "Tegangan rendah (AC ≤600V / DC ≤750V)",
+    "desc": "例: 電気設備技術基準では交流600V以下・直流750V以下を低圧と定義している。→ Standar teknis instalasi listrik mendefinisikan tegangan rendah sebagai AC ≤600V atau DC ≤750V."
+  },
+  {
+    "id": 1163,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "こうあつ",
+    "jp": "高圧",
+    "romaji": "kouatsu",
+    "id_text": "Tegangan tinggi (AC 600V–7000V)",
+    "desc": "例: 交流600Vを超え7000V以下の電圧を高圧といい、工場やビルの受電設備に使われる。→ Tegangan AC di atas 600V hingga 7000V disebut tegangan tinggi, digunakan di panel penerimaan pabrik dan gedung."
+  },
+  {
+    "id": 1166,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "せいぎょけーぶる",
+    "jp": "制御ケーブル",
+    "romaji": "seigyo keeburu",
+    "id_text": "Kabel kontrol / sinyal",
+    "desc": "例: 制御ケーブルは動力ケーブルと分離して配線し、電磁ノイズによる誤作動を防ぐ。→ Kabel kontrol harus dipisah dari kabel daya untuk mencegah gangguan sinyal akibat interferensi elektromagnetik."
+  },
+  {
+    "id": 1171,
+    "category": "denki",
+    "source": "vocab-exam",
+    "furi": "でんきこうじし",
+    "jp": "電気工事士",
+    "romaji": "denki kouji shi",
+    "id_text": "Teknisi listrik berlisensi — tingkat 1 dan 2",
+    "desc": "例: 第二種電気工事士は一般用電気工作物（交流600V以下）の電気工事を行える国家資格である。→ Lisensi teknisi listrik tingkat 2 memungkinkan pengerjaan instalasi listrik tegangan rendah (AC ≤600V)."
+  },
+  {
+    "id": 1178,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "フランジせつごう",
+    "jp": "フランジ接合",
+    "romaji": "furangi setsugou",
+    "id_text": "Sambungan flange / flange joint",
+    "desc": "例: フランジ接合はボルト・ナットで締め付け、ガスケットで気密を保つ。→ Sambungan flange diikat baut-mur dan disekat gasket; mudah dibongkar pasang untuk perawatan."
+  },
+  {
+    "id": 1179,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "ソケットせつごう",
+    "jp": "ソケット接合",
+    "romaji": "soketto setsugou",
+    "id_text": "Sambungan soket / socket joint",
+    "desc": "例: 塩ビ管のソケット接合では、接着剤を均一に塗布してから素早く挿入する。→ Pada sambungan soket pipa PVC, oleskan lem merata lalu masukkan pipa dengan cepat sebelum lem mengering."
+  },
+  {
+    "id": 1180,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "グルーブドせつごう",
+    "jp": "グルーブド接合",
+    "romaji": "guruubudo setsugou",
+    "id_text": "Sambungan grooved / Victaulic joint",
+    "desc": "例: グルーブド接合はパイプ端に溝を加工し、カップリングとガスケットで接合するため、工期が短い。→ Sambungan grooved menggunakan alur di ujung pipa dan coupling; pengerjaan lebih cepat dibanding las."
+  },
+  {
+    "id": 1189,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "よびけい",
+    "jp": "呼び径",
+    "romaji": "yobi kei",
+    "id_text": "Nominal diameter / ukuran nominal pipa",
+    "desc": "例: 呼び径25Aの鋼管は外径34mm、実際の内径は25mmより若干異なる。→ Pipa baja 25A berarti ukuran nominal 25 mm; diameter sebenarnya sedikit berbeda tergantung standar A atau B."
+  },
+  {
+    "id": 1190,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "きみつしけん",
+    "jp": "気密試験",
+    "romaji": "kimitsu shiken",
+    "id_text": "Air tightness test / uji kebocoran udara",
+    "desc": "例: ガス配管の気密試験では、設定圧力で所定時間保持し、圧力降下がないか確認する。→ Pada pipa gas, lakukan uji tekanan udara pada tekanan yang ditentukan dan pantau apakah ada penurunan tekanan."
+  },
+  {
+    "id": 1191,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "きゅうすいかん",
+    "jp": "給水管",
+    "romaji": "kyuusui kan",
+    "id_text": "Pipa suplai air bersih",
+    "desc": "例: 給水管は水道本管から分岐し、各器具へ水を供給する。→ Pipa suplai air bersih bercabang dari jaringan utama PDAM dan mendistribusikan air ke setiap fixture bangunan."
+  },
+  {
+    "id": 1192,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "はいすいかん",
+    "jp": "排水管",
+    "romaji": "haisui kan",
+    "id_text": "Pipa drainase / buangan air limbah",
+    "desc": "例: 排水管は適切な勾配（一般的に1/100）を確保して詰まりを防ぐ。→ Pipa drainase harus dipasang dengan kemiringan memadai (umumnya 1/100) agar aliran lancar dan tidak mampet."
+  },
+  {
+    "id": 1193,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "ニップル",
+    "jp": "ニップル",
+    "romaji": "nippuru",
+    "id_text": "Nipple / sambungan pendek berulir dua sisi",
+    "desc": "例: ニップルは両端に雄ねじが切ってあり、ソケットや機器との短距離接続に使う。→ Nipple memiliki ulir jantan di kedua ujungnya; dipakai untuk menyambung dua fitting yang berdekatan."
+  },
+  {
+    "id": 1201,
+    "category": "tsushin",
+    "source": "vocab-exam",
+    "furi": "えすしーこねくた",
+    "jp": "SCコネクタ",
+    "romaji": "esu shii konekuta",
+    "id_text": "Konektor fiber optik tipe SC (push-pull)",
+    "desc": "例: SCコネクタはプッシュプル式でワンタッチ着脱でき、ONU接続によく使われる。→ Konektor SC bertipe push-pull, mudah dipasang dan dilepas, sering dipakai pada sambungan ONU."
+  },
+  {
+    "id": 1202,
+    "category": "tsushin",
+    "source": "vocab-exam",
+    "furi": "えるしーこねくた",
+    "jp": "LCコネクタ",
+    "romaji": "eru shii konekuta",
+    "id_text": "Konektor fiber optik tipe LC, lebih kecil dari SC",
+    "desc": "例: LCコネクタはSCより小型で高密度実装が可能なため、データセンターのスイッチに多用される。→ LC lebih kecil dari SC dan memungkinkan kepadatan tinggi, banyak dipakai di switch data center."
+  },
+  {
+    "id": 1209,
+    "category": "tsushin",
+    "source": "vocab-exam",
+    "furi": "つうしんらっく",
+    "jp": "通信ラック",
+    "romaji": "tsuushin rakku",
+    "id_text": "Rak perangkat telekomunikasi standar 19 inci",
+    "desc": "例: 通信ラックは19インチ規格が主流で、スイッチ・パッチパネル・サーバーを搭載できる。→ Rak telekomunikasi umumnya berstandar 19 inci, mampu menampung switch, patch panel, dan server."
+  },
+  {
+    "id": 1210,
+    "category": "tsushin",
+    "source": "vocab-exam",
+    "furi": "つうしんきゃびねっと",
+    "jp": "通信キャビネット",
+    "romaji": "tsuushin kyabinetto",
+    "id_text": "Kabinet tertutup untuk perangkat telekomunikasi",
+    "desc": "例: 屋外設置の通信キャビネットは防水・防塵（IP55以上）構造が必要だ。→ Kabinet telekomunikasi untuk pemasangan luar ruangan harus memiliki konstruksi tahan air dan debu (IP55 ke atas)."
+  },
+  {
+    "id": 1213,
+    "category": "tsushin",
+    "source": "vocab-exam",
+    "furi": "ほあんき",
+    "jp": "保安器",
+    "romaji": "hoaan ki",
+    "id_text": "Pelindung jalur masuk telepon (arrester/protector)",
+    "desc": "例: 保安器は雷サージや過電流から屋内の通信機器を保護するために引き込み口に設置される。→ Hoaan-ki dipasang di titik masuk kabel untuk melindungi peralatan komunikasi dalam gedung dari lonjakan petir dan arus lebih."
+  },
+  {
+    "id": 1215,
+    "category": "tsushin",
+    "source": "vocab-general",
+    "furi": "せいたん",
+    "jp": "成端",
+    "romaji": "seitan",
+    "id_text": "Terminasi ujung kabel (pengakhiran ujung kabel)",
+    "desc": "例: 光ケーブルの成端作業では、コネクタ取り付けと端面研磨を丁寧に行う必要がある。→ Dalam pekerjaan terminasi kabel fiber, pemasangan konektor dan pemolesan permukaan ujung serat harus dilakukan dengan teliti."
+  },
+  {
+    "id": 1223,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "たんかんあしば",
+    "jp": "単管足場",
+    "romaji": "tankan ashiba",
+    "id_text": "Scaffolding pipa tunggal",
+    "desc": "例: 単管足場は鋼管とクランプを組み合わせて組み立てる足場です。→ Scaffolding pipa tunggal dirakit dari pipa baja yang disambung dengan klem. Fleksibel untuk berbagai bentuk bangunan."
+  },
+  {
+    "id": 1224,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "くさびきんけつしきあしば",
+    "jp": "くさび緊結式足場",
+    "romaji": "kusabi kinketsushiki ashiba",
+    "id_text": "Scaffolding sistem baji / wedge-lock",
+    "desc": "例: くさび緊結式足場は、ハンマー一本で組み立て・解体ができる足場です。→ Scaffolding sistem baji dapat dipasang dan dibongkar hanya dengan satu palu. Lebih cepat dari scaffolding pipa tunggal."
+  },
+  {
+    "id": 1225,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "あんぜんねっと",
+    "jp": "安全ネット",
+    "romaji": "anzen netto",
+    "id_text": "Jaring pengaman (safety net)",
+    "desc": "例: 高所作業では、安全ネットを設置して作業員の墜落を防ぎます。→ Saat kerja di ketinggian, safety net dipasang untuk mencegah pekerja jatuh. Wajib dipasang di bawah area kerja yang berisiko."
+  },
+  {
+    "id": 1226,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "てすり",
+    "jp": "手すり",
+    "romaji": "tesuri",
+    "id_text": "Pegangan tangan / guardrail",
+    "desc": "例: 作業床の端には、高さ85cm以上の手すりを設けなければなりません。→ Di tepi platform kerja, guardrail setinggi minimal 85 cm wajib dipasang. Berfungsi mencegah pekerja jatuh dari tepi."
+  },
+  {
+    "id": 1228,
+    "category": "anzen",
+    "source": "vocab-general",
+    "furi": "はばき",
+    "jp": "巾木",
+    "romaji": "habaki",
+    "id_text": "Toe board / papan pengaman bawah",
+    "desc": "例: 巾木を足場の端に設置することで、工具や資材の落下を防げます。→ Toe board dipasang di bagian bawah tepi scaffolding untuk mencegah alat dan material jatuh ke bawah. Tinggi minimal 10 cm."
+  },
+  {
+    "id": 1231,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "りゅうかすいそ",
+    "jp": "硫化水素",
+    "romaji": "ryuuka suiso",
+    "id_text": "Hidrogen sulfida (H₂S)",
+    "desc": "例: 硫化水素は腐卵臭のある無色の有毒ガスで、下水道や地下工事で発生しやすいです。→ Hidrogen sulfida adalah gas beracun tak berwarna berbau telur busuk, mudah muncul di pekerjaan saluran dan bawah tanah. Batas aman: di bawah 10 ppm."
+  },
+  {
+    "id": 1233,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "そうきますく",
+    "jp": "送気マスク",
+    "romaji": "souki masuku",
+    "id_text": "Respirator suplai udara / airline mask",
+    "desc": "例: 酸素欠乏や有毒ガスが発生する環境では、送気マスクを着用して作業します。→ Di lingkungan kekurangan oksigen atau bergas beracun, gunakan respirator suplai udara."
+  },
+  {
+    "id": 1235,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "さぎょうしゅにんしゃ",
+    "jp": "作業主任者",
+    "romaji": "sagyou shuninsha",
+    "id_text": "Pengawas kerja (mandated supervisor)",
+    "desc": "例: 足場組立や酸欠危険作業など、特定の危険作業には作業主任者の選任が法律で義務付けられています。→ Untuk pekerjaan berbahaya tertentu seperti pemasangan scaffolding atau ruang oksigen rendah, penunjukan pengawas kerja bersertifikat diwajibkan oleh"
+  },
+  {
+    "id": 1238,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "あんぜんぱとろーる",
+    "jp": "安全パトロール",
+    "romaji": "anzen patorooru",
+    "id_text": "Patroli inspeksi keselamatan",
+    "desc": "例: 安全パトロールでは、ヘルメット未着用や足場の異常など危険箇所を点検します。→ Dalam patroli keselamatan, dicek hal-hal seperti helm tidak dipakai atau scaffolding tidak normal. Dilakukan oleh pengawas atau tim K3 secara berkala."
+  },
+  {
+    "id": 1240,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "ついらくせいしようきぐ",
+    "jp": "墜落制止用器具",
+    "romaji": "tsuiraku seishi youkigu",
+    "id_text": "Alat pencegah jatuh / harness",
+    "desc": "例: 高さ2m以上の作業では、墜落制止用器具（フルハーネス型）の使用が義務化されています。→ Penggunaan alat pencegah jatuh tipe full-harness diwajibkan saat bekerja di ketinggian 2 meter atau lebih. Regulasi diperketat sejak 2019."
+  },
+  {
+    "id": 1241,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "ひらいらっか",
+    "jp": "飛来・落下",
+    "romaji": "hirai rakka",
+    "id_text": "Bahaya benda terbang / jatuh dari atas",
+    "desc": "例: 飛来・落下による事故を防ぐため、上部作業中は下の立入を禁止します。→ Untuk mencegah kecelakaan akibat benda terbang atau jatuh, masuk ke area bawah pekerjaan atas dilarang. Helm dan safety shoes wajib di seluruh area konstruksi."
+  },
+  {
+    "id": 1242,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "ねっちゅうしょう",
+    "jp": "熱中症",
+    "romaji": "netchuu shou",
+    "id_text": "Heat stroke / serangan panas",
+    "desc": "例: 夏の屋外作業では、こまめな水分・塩分補給で熱中症を予防します。→ Saat kerja luar ruangan di musim panas, minum air dan suplemen garam secara rutin mencegah heat stroke."
+  },
+  {
+    "id": 1243,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "ふんじん",
+    "jp": "粉じん",
+    "romaji": "funjin",
+    "id_text": "Debu / partikel berbahaya (dust)",
+    "desc": "例: 粉じんが多い現場では、防じんマスクを着用して作業します。→ Di lokasi dengan debu tinggi, gunakan masker anti-debu saat bekerja. Paparan debu jangka panjang dapat menyebabkan pneumokoniosis (penyakit paru akibat debu)."
+  },
+  {
+    "id": 1244,
+    "category": "anzen",
+    "source": "vocab-exam",
+    "furi": "りすくあせすめんと",
+    "jp": "リスクアセスメント",
+    "romaji": "risuku asesuménto",
+    "id_text": "Penilaian risiko (risk assessment)",
+    "desc": "例: 作業前にリスクアセスメントを行い、危険を特定・評価・対策して記録します。→ Sebelum kerja, lakukan penilaian risiko: identifikasi bahaya, evaluasi tingkat risiko, tetapkan tindakan pencegahan, dan dokumentasikan."
+  },
+  {
+    "id": 1250,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "しーとぱいる",
+    "jp": "シートパイル",
+    "romaji": "shiito pairu",
+    "id_text": "Sheet pile / turap baja",
+    "desc": "例: シートパイルを連続して打ち込み、土砂の崩壊を防ぐ。→ Sheet pile dipancang berurutan untuk mencegah longsornya tanah. Sama dengan 鋼矢板; istilah katakana lebih umum di lapangan."
+  },
+  {
+    "id": 1252,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "あすふぁるとぼうすい",
+    "jp": "アスファルト防水",
+    "romaji": "asufuruto bousui",
+    "id_text": "Waterproofing aspal",
+    "desc": "例: 屋上の防水にはアスファルト防水が多く使われる。→ Waterproofing aspal banyak digunakan pada atap beton. Metode ini melapis permukaan dengan lembaran aspal yang dipanaskan atau dilekatkan (トーチ工法)."
+  },
+  {
+    "id": 1253,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "しーとぼうすい",
+    "jp": "シート防水",
+    "romaji": "shiito bousui",
+    "id_text": "Waterproofing lembaran (sheet)",
+    "desc": "例: シート防水は合成ゴムや塩化ビニルのシートを貼り付ける工法である。→ Sheet waterproofing menggunakan lembaran karet sintetis atau PVC yang ditempelkan ke permukaan. Lebih cepat pasang dibanding aspal."
+  },
+  {
+    "id": 1262,
+    "category": "kenchiku_kutai",
+    "source": "vocab-exam",
+    "furi": "すらんぷしけん",
+    "jp": "スランプ試験",
+    "romaji": "suranpu shiken",
+    "id_text": "Uji slump (kekentalan beton segar)",
+    "desc": "例: 生コンの品質確認のためにスランプ試験を現場で実施する。→ Slump test dilakukan di lapangan untuk mengecek konsistensi (kekentalan) beton segar sebelum pengecoran. Nilai slump yang lebih tinggi berarti beton lebih encer."
+  },
+  {
+    "id": 1268,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "くいうちき",
+    "jp": "杭打ち機",
+    "romaji": "kui uchi ki",
+    "id_text": "Mesin pemancang tiang",
+    "desc": "例: 杭打ち機（パイルドライバー）で鋼管杭を所定深さまで打ち込む。→ Mesin pemancang (pile driver) digunakan untuk memancang tiang ke dalam tanah hingga kedalaman yang ditentukan."
+  },
+  {
+    "id": 1272,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "せっこうボード",
+    "jp": "石膏ボード",
+    "romaji": "sekkoo boodo",
+    "id_text": "Papan gipsum / gypsum board",
+    "desc": "例: 石膏ボードは内壁や天井の仕上げに広く使われる。→ Papan gipsum banyak dipakai untuk finishing dinding dalam dan plafon. Material ringan, mudah dipotong, dan memiliki sifat tahan api (準不燃). Disebut juga プラスターボード."
+  },
+  {
+    "id": 1275,
+    "category": "setsubi_kougu",
+    "source": "vocab-exam",
+    "furi": "システムてんじょう",
+    "jp": "システム天井",
+    "romaji": "shisutemu tenjoo",
+    "id_text": "Plafon sistem / suspended ceiling modular",
+    "desc": "例: オフィスビルのシステム天井は照明・空調・防災設備を一体で収める。→ Plafon sistem pada gedung perkantoran mengintegrasikan pencahayaan, AC, dan peralatan kebakaran dalam satu modul yang dapat dibongkar-pasang untuk perawatan."
+  },
+  {
+    "id": 1278,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "カーテンウォール",
+    "jp": "カーテンウォール",
+    "romaji": "kaaten wōru",
+    "id_text": "Dinding tirai / curtain wall",
+    "desc": "例: 高層ビルのカーテンウォールは建物の荷重を負担しない外壁で、アルミや金属パネルで構成される。→ Curtain wall pada gedung tinggi adalah dinding luar non-struktural yang tidak menanggung beban, biasanya terbuat dari aluminium atau panel logam."
+  },
+  {
+    "id": 1279,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "サイディング",
+    "jp": "サイディング",
+    "romaji": "saijingu",
+    "id_text": "Siding / pelapis dinding eksterior",
+    "desc": "例: 窯業系サイディングは戸建て住宅の外壁仕上げとして広く使われている。→ Siding berbahan keramik (窯業系) adalah penutup dinding luar yang paling umum untuk rumah tinggal di Jepang. Tersedia juga jenis metal dan kayu."
+  },
+  {
+    "id": 1281,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "プライマー",
+    "jp": "プライマー",
+    "romaji": "puraimaa",
+    "id_text": "Primer / lapisan dasar perekat",
+    "desc": "例: シーリング材を充填する前に、目地面にプライマーを塗布して接着力を高める。→ Primer dioleskan ke permukaan celah sebelum aplikasi sealant untuk meningkatkan daya rekat. Tanpa primer, sealant dapat mudah terlepas dari substrat."
+  },
+  {
+    "id": 1283,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "ぼうすいシート",
+    "jp": "防水シート",
+    "romaji": "bousui shiito",
+    "id_text": "Membran / lembaran waterproof",
+    "desc": "例: 屋根の仕上げ材の下に防水シートを敷いて雨水の浸入を防ぐ。→ Membran waterproof dipasang di bawah penutup atap untuk mencegah rembesan air hujan masuk ke struktur bangunan. Termasuk jenis アスファルトルーフィング."
+  },
+  {
+    "id": 1285,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "めじ",
+    "jp": "目地",
+    "romaji": "meji",
+    "id_text": "Nat / celah sambungan antar tile",
+    "desc": "例: タイル貼り完了後、目地材（セメント系）を充填して目地を仕上げる。→ Setelah pemasangan tile selesai, material nat (umumnya berbasis semen) diisikan untuk mengisi celah antar tile. Lebar目地 biasanya 3〜10mm tergantung jenis tile."
+  },
+  {
+    "id": 1286,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "モルタル",
+    "jp": "モルタル",
+    "romaji": "morutaru",
+    "id_text": "Mortar / adukan semen dan pasir",
+    "desc": "例: 外壁タイルの下地にモルタルを塗り付け、平滑に均してからタイルを張る。→ Mortar dioleskan sebagai dasar sebelum tile dipasang, kemudian diratakan. Komposisi umum: semen : pasir = 1 : 3 (volumetrik)."
+  },
+  {
+    "id": 1292,
+    "category": "kenchiku_shiage",
+    "source": "vocab-exam",
+    "furi": "スタッド",
+    "jp": "スタッド",
+    "romaji": "sutaddo",
+    "id_text": "Stud / tiang vertikal baja ringan LGS",
+    "desc": "例: LGS工事でスタッドをランナーに差し込んで間仕切り壁の骨組みを組む。→ Stud adalah profil baja ringan berbentuk C yang dimasukkan secara vertikal ke dalam runner untuk membentuk rangka dinding partisi."
+  },
+  {
+    "id": 1298,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "いんぱくとどらいばー",
+    "jp": "インパクトドライバー",
+    "romaji": "inpakuto doraibaa",
+    "id_text": "Impact driver / bor sekrup bertenaga",
+    "desc": "例: インパクトドライバーはビスやボルトを素早く締め付ける電動工具だ。→ Impact driver adalah alat listrik untuk mengencangkan baut dan sekrup dengan cepat. Berbeda dari drill driver biasa karena memberikan pukulan rotasi."
+  },
+  {
+    "id": 1299,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "ういんち",
+    "jp": "ウインチ",
+    "romaji": "uinchi",
+    "id_text": "Winch / derek penarik bermotor",
+    "desc": "例: ウインチで重い資材を引き上げる作業では、ロープの点検が欠かせない。→ Saat menarik material berat dengan winch, pemeriksaan tali/rantai dan kapasitas beban wajib dilakukan sebelum operasi."
+  },
+  {
+    "id": 1302,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "ゆあつじゃっき",
+    "jp": "油圧ジャッキ",
+    "romaji": "yuatsu jakki",
+    "id_text": "Dongkrak hidrolik / hydraulic jack",
+    "desc": "例: 油圧ジャッキで重量物を持ち上げて位置を調整する。→ Dongkrak hidrolik digunakan untuk mengangkat beban berat atau menyesuaikan posisi material konstruksi. Pastikan landasan stabil sebelum mengoperasikan."
+  },
+  {
+    "id": 1312,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "でんどうどりる",
+    "jp": "電動ドリル",
+    "romaji": "dendou doriru",
+    "id_text": "Bor listrik / electric drill",
+    "desc": "例: 電動ドリルは木材・金属・コンクリートへの穴あけに使う汎用工具だ。→ Bor listrik adalah alat serbaguna untuk mengebor kayu, logam, dan beton."
+  },
+  {
+    "id": 1317,
+    "category": "sekou",
+    "source": "vocab-exam",
+    "furi": "ぼーるばん",
+    "jp": "ボール盤",
+    "romaji": "booruban",
+    "id_text": "Mesin bor duduk / drill press",
+    "desc": "例: ボール盤は精密な穴あけ作業に使う据え置き型の電動ドリルだ。→ Drill press adalah mesin bor stasioner yang digunakan untuk pengeboran presisi di bengkel atau area persiapan material. Lebih akurat dari electric drill genggam."
+  },
+  {
+    "id": 1321,
+    "category": "haikan",
+    "source": "vocab-exam",
+    "furi": "しんくうぽんぷ",
+    "jp": "真空ポンプ",
+    "romaji": "shinkuu ponpu",
+    "id_text": "Pompa vakum / vacuum pump",
+    "desc": "例: 真空ポンプは冷媒配管の施工後、真空引きして水分・空気を除去するために使う。→ Pompa vakum digunakan setelah pemasangan pipa refrigerant (冷媒管) untuk mengosongkan udara dan kelembaban melalui proses vakumisasi (真空引き)"
+  },
+  {
+    "id": 1323,
+    "category": "career",
+    "source": "vocab-exam",
+    "furi": "ケーワイシート",
+    "jp": "KYシート",
+    "romaji": "ke wai shi to",
+    "id_text": "Lembar prediksi bahaya (KY)",
+    "desc": "例: 朝礼でKYシートを記入し、今日の危険ポイントを共有した。→ Saat apel pagi, lembar KY diisi dan titik bahaya hari itu dibagikan ke semua pekerja. Berbeda dengan KYボード — シート adalah formulir tertulis per sesi."
+  },
+  {
+    "id": 1324,
+    "category": "career",
+    "source": "vocab-exam",
+    "furi": "しんきにゅうじょうしゃカード",
+    "jp": "新規入場者カード",
+    "romaji": "shinki nyuujoushya ka do",
+    "id_text": "Kartu pendataan pekerja baru",
+    "desc": "例: 新規入場者カードには、氏名・緊急連絡先・保有資格などを記入する。→ Kartu pekerja baru diisi dengan nama, kontak darurat, dan sertifikasi yang dimiliki. Wajib diserahkan sebelum pertama kali masuk lokasi."
+  },
+  {
+    "id": 1334,
+    "category": "career",
+    "source": "vocab-exam",
+    "furi": "せっけいとしょ",
+    "jp": "設計図書",
+    "romaji": "sekkei tosho",
+    "id_text": "Dokumen desain (gambar + spesifikasi)",
+    "desc": "例: 設計図書には、設計図・仕様書・現場説明書などが含まれる。→ Dokumen desain mencakup gambar kerja, spesifikasi teknis, dan penjelasan lapangan. Menjadi dasar kontrak dan pelaksanaan."
+  },
+  {
+    "id": 1340,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "けんしゅう",
+    "jp": "検収",
+    "romaji": "kenshuu",
+    "id_text": "Inspeksi & penerimaan material resmi",
+    "desc": "例: 検収では、材料の品質・数量・規格が仕様書と一致するか確認する。→ Dalam inspeksi penerimaan, kualitas, jumlah, dan spesifikasi material dikonfirmasi sesuai dokumen. Setelah 検収 dinyatakan lulus, material sah digunakan."
+  },
+  {
+    "id": 1341,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "ぜせい",
+    "jp": "是正",
+    "romaji": "zesei",
+    "id_text": "Tindakan koreksi / perbaikan ketidaksesuaian",
+    "desc": "例: 検査で不適合が見つかり、是正処置を施工者に指示した。→ Ketidaksesuaian ditemukan saat inspeksi, dan tindakan koreksi diperintahkan ke kontraktor. Dalam sistem ISO 9001, 是正処置は根本原因の除去を含む."
+  },
+  {
+    "id": 1343,
+    "category": "career",
+    "source": "vocab-exam",
+    "furi": "せこうたいせいだいちょう",
+    "jp": "施工体制台帳",
+    "romaji": "sekou taisei daichou",
+    "id_text": "Buku besar struktur pelaksana proyek",
+    "desc": "例: 施工体制台帳には、元請け・下請け・専門業者の情報を記載する。→ Buku besar ini memuat informasi kontraktor utama, sub-kontraktor, dan spesialis. Wajib dibuat pada proyek dengan nilai tertentu ke atas."
+  },
+  {
+    "id": 1346,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "きょか",
+    "jp": "許可",
+    "romaji": "kyoka",
+    "id_text": "Izin / lisensi usaha konstruksi",
+    "desc": "例: 建設業を営むには知事または大臣の許可が必要だ。→ Menjalankan usaha konstruksi wajib mendapat izin dari gubernur atau menteri. 許可なしで工事受注 = 違法（いほう）."
+  },
+  {
+    "id": 1347,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "うけおいけいやく",
+    "jp": "請負契約",
+    "romaji": "ukeoi keiyaku",
+    "id_text": "Kontrak borongan / construction contract",
+    "desc": "例: 建設工事は発注者と元請けの請負契約に基づいて行われる。→ Pekerjaan konstruksi dilakukan berdasarkan kontrak borongan antara pemilik proyek dan kontraktor utama."
+  },
+  {
+    "id": 1348,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "もとうけ",
+    "jp": "元請け",
+    "romaji": "motouke",
+    "id_text": "Kontraktor utama / prime contractor",
+    "desc": "例: 元請けは発注者から直接工事を受注し、下請け全体を管理する。→ Pihak yang menerima proyek langsung dari pemilik; bertanggung jawab atas seluruh sub-kontraktor."
+  },
+  {
+    "id": 1349,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "したうけ",
+    "jp": "下請け",
+    "romaji": "shitauke",
+    "id_text": "Sub-kontraktor / sub-contractor",
+    "desc": "例: 元請けから工事の一部を受注するのが下請け業者だ。→ Pihak yang menerima sebagian pekerjaan dari kontraktor utama. 二次下請け・三次下請けと連鎖する場合もある."
+  },
+  {
+    "id": 1350,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "ろうどうきじゅんかんとくしょ",
+    "jp": "労働基準監督署",
+    "romaji": "roudou kijun kantoku sho",
+    "id_text": "Kantor Inspeksi Standar Ketenagakerjaan",
+    "desc": "例: 労働災害が起きたら、労働基準監督署に速やかに報告する義務がある。→ Jika terjadi kecelakaan kerja, wajib segera melapor ke Kantor Inspeksi. 報告を怠ると労災かくし（犯罪）になる."
+  },
+  {
+    "id": 1351,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "ゆうきゅうきゅうか",
+    "jp": "有給休暇",
+    "romaji": "yuukyuu kyuuka",
+    "id_text": "Cuti berbayar / paid leave",
+    "desc": "例: 6ヶ月継続勤務かつ出勤率80%以上で、10日の有給休暇が付与される。→ Setelah bekerja 6 bulan dengan tingkat kehadiran ≥80%, berhak atas 10 hari cuti berbayar. Hak ini diatur dalam 労働基準法."
+  },
+  {
+    "id": 1352,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "わりましちんぎん",
+    "jp": "割増賃金",
+    "romaji": "warimashi chingin",
+    "id_text": "Upah premi / overtime premium pay",
+    "desc": "例: 時間外労働の割増賃金は、通常の25%増し以上と法律で定められている。→ Upah lembur minimal 1.25× gaji normal sesuai UU Standar Ketenagakerjaan. Lembur >60jam/bulan = 1.5×."
+  },
+  {
+    "id": 1353,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "ばっそく",
+    "jp": "罰則",
+    "romaji": "bassoku",
+    "id_text": "Sanksi / hukuman pidana pelanggaran UU",
+    "desc": "例: 建設業法違反には罰則があり、業許可の取消しや罰金が科せられる。→ Pelanggaran UU Konstruksi dikenai sanksi berupa pencabutan izin usaha atau denda. 罰則を知ることは法令遵守の基本."
+  },
+  {
+    "id": 1356,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "さんだいさいがい",
+    "jp": "三大災害",
+    "romaji": "sandai saigai",
+    "id_text": "Tiga besar kecelakaan konstruksi",
+    "desc": "例: 建設業の三大災害は①墜落・転落②建設機械③崩壊・倒壊だ。→ ①Jatuh dari ketinggian (墜落・転落) = terbanyak, ②Kecelakaan mesin konstruksi, ③Runtuh/kolaps. 安全教育では必ず覚える基礎知識."
+  },
+  {
+    "id": 1357,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "あんぜんたい",
+    "jp": "安全帯",
+    "romaji": "anzentai",
+    "id_text": "Sabuk/harness keselamatan (generic term)",
+    "desc": "例: 高所作業では安全帯（ハーネス型）の着用が義務付けられている。→ Pekerjaan ketinggian wajib memakai safety harness. 2022年以降、フルハーネス型が原則。胴ベルト型は限られた条件のみ."
+  },
+  {
+    "id": 1358,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "ふるはーねすがた",
+    "jp": "フルハーネス型",
+    "romaji": "furu haanesugata",
+    "id_text": "Full-body harness — standar keselamatan ketinggian",
+    "desc": "例: 高さ6.75m以上（建設業は5m以上）ではフルハーネス型安全帯が義務。→ Di ketinggian ≥5m (konstruksi), wajib pakai full harness (bukan sabuk biasa). Mengurangi risiko cedera dalam saat jatuh."
+  },
+  {
+    "id": 1359,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "たちいりきんし",
+    "jp": "立入禁止",
+    "romaji": "tachiiri kinshi",
+    "id_text": "Dilarang masuk / no-entry zone",
+    "desc": "例: 重機の旋回範囲内は立入禁止区域として必ずロープで囲う。→ Area ayunan alat berat wajib dipasang tali dan tanda 'Dilarang Masuk'. 看板や標識の設置義務あり."
+  },
+  {
+    "id": 1360,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "ほごぐ",
+    "jp": "保護具",
+    "romaji": "hogogu",
+    "id_text": "APD / alat pelindung diri (general term)",
+    "desc": "例: 建設現場ではヘルメット・安全靴・安全帯が基本的な保護具だ。→ Helm, sepatu safety, dan harness adalah APD dasar di site konstruksi. 作業内容に応じた適切な保護具の選定が重要."
+  },
+  {
+    "id": 1361,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "かんでん",
+    "jp": "感電",
+    "romaji": "kanden",
+    "id_text": "Sengatan listrik / electric shock",
+    "desc": "例: 電気工事では感電事故を防ぐため、必ず電源を切ってから作業する。→ Dalam pekerjaan listrik, selalu matikan sumber daya sebelum bekerja untuk mencegah sengatan. 感電は最悪の場合死亡事故になる."
+  },
+  {
+    "id": 1364,
+    "category": "sekou",
+    "source": "vocab-teori",
+    "furi": "せこうけいかく",
+    "jp": "施工計画",
+    "romaji": "sekou keikaku",
+    "id_text": "Rencana pelaksanaan konstruksi",
+    "desc": "例: 施工計画は工事着工前に作成し、工程・品質・安全の方針を定める。→ Dibuat sebelum pekerjaan dimulai, menetapkan kebijakan jadwal, kualitas, dan keselamatan."
+  },
+  {
+    "id": 1368,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "はっちゅうしゃ",
+    "jp": "発注者",
+    "romaji": "hacchuusha",
+    "id_text": "Pemilik proyek / project owner / client",
+    "desc": "例: 発注者は工事の内容・期間・金額を決め、元請けと請負契約を結ぶ。→ Pihak yang memesan proyek, menentukan isi/durasi/anggaran, dan menandatangani kontrak borongan."
+  },
+  {
+    "id": 1370,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "れいばい",
+    "jp": "冷媒",
+    "romaji": "reibai",
+    "id_text": "Refrigeran / zat pendingin AC (HFC dll)",
+    "desc": "例: エアコンの冷媒管には冷媒が封入されており、接続時には漏れ試験が必須だ。→ Pipa refrigeran AC berisi zat pendingin; sambungan wajib diuji kebocoran setelah pemasangan. 冷媒管の接続後は必ず漏れ確認."
+  },
+  {
+    "id": 1371,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "こうばい",
+    "jp": "勾配",
+    "romaji": "koubai",
+    "id_text": "Kemiringan pipa drainase agar aliran lancar",
+    "desc": "例: 排水管は水が自然に流れるよう、必ず適切な勾配をつけて配管する。→ Pipa drainase harus dipasang dengan kemiringan yang cukup agar air mengalir secara gravitasi. 勾配不足 → 水が溜まり、流れが悪くなる."
+  },
+  {
+    "id": 1372,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "すいあつしけん",
+    "jp": "水圧試験",
+    "romaji": "suiatsu shiken",
+    "id_text": "Uji tekanan hidraulik / hydraulic pressure test",
+    "desc": "例: 配管工事完了後、接続部の漏れを確認するために水圧試験を実施する。→ Setelah pipa selesai dipasang, uji tekanan air dilakukan untuk memastikan tidak ada kebocoran. 試験圧力は仕様書の規定値で行う."
+  },
+  {
+    "id": 1374,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "さどる",
+    "jp": "サドル",
+    "romaji": "sadoru",
+    "id_text": "Saddle / braket penopang pipa di dinding/plafon",
+    "desc": "例: サドルは配管を壁・天井・床に固定するための支持金具だ。→ Braket pelana untuk menempelkan pipa ke dinding, plafon, atau lantai. サドル間隔が広すぎると配管がたわむ（lendut）."
+  },
+  {
+    "id": 1375,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "つぎて",
+    "jp": "継手",
+    "romaji": "tsugite",
+    "id_text": "Fitting / komponen sambungan antar pipa",
+    "desc": "例: 継手には、エルボ（曲がり）・チーズ（T字）・ソケット（直線）などがある。→ Berbagai jenis fitting: elbow (belok), tee (T), socket (lurus). 材料・用途・接合方法によって選定が変わる."
+  },
+  {
+    "id": 1376,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "ふらんじ",
+    "jp": "フランジ",
+    "romaji": "furanji",
+    "id_text": "Flensa / sambungan pipa dengan baut (mudah dibuka)",
+    "desc": "例: バルブや機器との接続にはフランジ接合が使われ、メンテナンスが容易だ。→ Sambungan flensa menggunakan baut sehingga mudah dibuka untuk perawatan. 溶接・ねじに比べて着脱が簡単."
+  },
+  {
+    "id": 1377,
+    "category": "haikan",
+    "source": "vocab-teori",
+    "furi": "ばるぶ",
+    "jp": "バルブ",
+    "romaji": "barubu",
+    "id_text": "Katup / valve (mengatur aliran dalam pipa)",
+    "desc": "例: バルブは流体の開閉・流量調節に使う。ゲート・ボール・グローブ・逆止めなど種類が多い。→ Mengatur buka/tutup aliran. Jenis: gate valve (全開/全閉), ball valve (cepat), globe (kontrol aliran), check valve (searah)."
+  },
+  {
+    "id": 1378,
+    "category": "denki",
+    "source": "vocab-teori",
+    "furi": "はいせん",
+    "jp": "配線",
+    "romaji": "haisen",
+    "id_text": "Pengkabelan / wiring (instalasi kabel listrik)",
+    "desc": "例: 配線工事では、電線の太さ・種類・配線ルートを図面通りに施工する。→ Instalasi kabel listrik sesuai gambar: ukuran kabel, jenis, dan rute harus tepat. 誤配線 → 漏電・感電・火災のリスク."
+  },
+  {
+    "id": 1379,
+    "category": "denki",
+    "source": "vocab-teori",
+    "furi": "ぶんき",
+    "jp": "分岐",
+    "romaji": "bunki",
+    "id_text": "Percabangan / branch (listrik atau pipa)",
+    "desc": "例: 幹線から各フロアへの分岐は、分電盤を介して行われる。→ Dari feeder utama, percabangan ke tiap lantai melalui panel distribusi. 電気でも配管でも: 幹線から分岐して各末端へ."
+  },
+  {
+    "id": 1380,
+    "category": "denki",
+    "source": "vocab-teori",
+    "furi": "でんねつせん",
+    "jp": "電熱線",
+    "romaji": "dennetsusen",
+    "id_text": "Kabel pemanas elektrik anti-beku pipa luar",
+    "desc": "例: 寒冷地の屋外配管には、凍結防止のために電熱線を巻き付けて保温する。→ Di daerah dingin, kawat pemanas dililitkan pada pipa luar ruangan untuk mencegah pembekuan. 保温材と組み合わせて使用することが多い."
+  },
+  {
+    "id": 1381,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "おはようございます",
+    "jp": "おはようございます",
+    "romaji": "ohayou gozaimasu",
+    "id_text": "Selamat pagi (formal)",
+    "desc": "例: 現場に到着したら「おはようございます」と挨拶する。→ Saat tiba di site, ucapkan selamat pagi kepada semua orang. ⚠️ Di konstruksi, sering dipakai sepanjang hari bukan hanya pagi hari."
+  },
+  {
+    "id": 1383,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "ありがとうございます",
+    "jp": "ありがとうございます",
+    "romaji": "arigatou gozaimasu",
+    "id_text": "Terima kasih (formal)",
+    "desc": "例: 仕事を手伝ってもらったら「ありがとうございます」。→ Ucapkan setelah dibantu atau menerima sesuatu. Versi kasual ke sesama pekerja: ありがとう (tanpa ございます)."
+  },
+  {
+    "id": 1390,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "おさきにしつれいします",
+    "jp": "お先に失礼します",
+    "romaji": "osaki ni shitsurei shimasu",
+    "id_text": "Pamit pulang duluan sebelum orang lain selesai",
+    "desc": "例: 仕事が終わって先に帰るとき「お先に失礼します」と言う。→ Ucapkan saat pulang/pergi sebelum rekan kerja lain. Wajib di budaya kerja Jepang — tidak bilang ini dianggap tidak sopan."
+  },
+  {
+    "id": 1392,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "りょうかいしました",
+    "jp": "了解しました",
+    "romaji": "ryoukai shimashita",
+    "id_text": "Siap / roger / mengerti dan akan dilaksanakan",
+    "desc": "例: 作業指示を受けて「了解しました、すぐ取りかかります」。→ Lebih aktif dari わかりました — menyiratkan kesiapan untuk bertindak. Di lapangan sering dipersingkat menjadi 了解（りょうかい）. ⚠️ Ke atasan: 承知しました (shouchiشimashita) lebih formal."
+  },
+  {
+    "id": 1396,
+    "category": "gaiyou",
+    "source": "vocab-jac",
+    "furi": "かくにんします",
+    "jp": "確認します",
+    "romaji": "kakunin shimasu",
+    "id_text": "Saya akan memastikan / mengecek",
+    "desc": "例: 指示の内容が不明なとき「確認してから報告します」。→ Ungkapkan saat perlu memverifikasi sesuatu sebelum menjawab. 確認 = konfirmasi/verifikasi. Jangan asal bilang OK kalau belum yakin — bilang 確認します!"
+  },
+  {
+    "id": 1399,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ほうこく",
+    "jp": "報告",
+    "romaji": "houkoku",
+    "id_text": "Laporan kepada atasan",
+    "desc": "例: 作業が完了したら上司に「○○が終わりました」と報告する。→ Setelah menyelesaikan tugas, langsung laporkan ke atasan. ほうれんそうの「ほう」。問題が起きたときも迷わず報告すること。報告なしは信頼を失う。"
+  },
+  {
+    "id": 1400,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "れんらく",
+    "jp": "連絡",
+    "romaji": "renraku",
+    "id_text": "Komunikasi / pemberitahuan antar tim",
+    "desc": "例: 材料が足りなくなったら現場監督に連絡する。→ Jika material habis, segera hubungi supervisor. ほうれんそうの「れん」。こまめな連絡が現場の混乱を防ぐ。情報は抱え込まず共有する。"
+  },
+  {
+    "id": 1401,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "そうだん",
+    "jp": "相談",
+    "romaji": "soudan",
+    "id_text": "Konsultasi / diskusi dengan atasan/senior",
+    "desc": "例: やり方が分からないときは一人で悩まず先輩に相談する。→ Kalau tidak tahu caranya, konsultasikan dengan senior — jangan coba-coba sendiri. ほうれんそうの「そう」。迷ったら必ず相談。"
+  },
+  {
+    "id": 1402,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ほうれんそう",
+    "jp": "ほう・れん・そう",
+    "romaji": "hourenso",
+    "id_text": "Lapor–Hubungi–Konsultasi: 3 pilar komunikasi kerja",
+    "desc": "例: 建設現場では「ほう・れん・そう」が基本中の基本。ほう=報告、れん=連絡、そう=相談。→ Konsep fundamental komunikasi di tempat kerja Jepang. Tanpa ほうれんそう, koordinasi lapangan gagal. JAC テキストで必出。"
+  },
+  {
+    "id": 1403,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "しじ",
+    "jp": "指示",
+    "romaji": "shiji",
+    "id_text": "Instruksi / perintah kerja dari atasan",
+    "desc": "例: 監督から指示を受けたら、内容をメモして「わかりました」と返事する。→ Saat menerima instruksi, catat isinya dan respons dengan jelas. 指示に従って作業する = bekerja sesuai arahan. 指示なしで勝手に動かない。"
+  },
+  {
+    "id": 1404,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "けいご",
+    "jp": "敬語",
+    "romaji": "keigo",
+    "id_text": "Bahasa hormat Jepang (kepada atasan/klien)",
+    "desc": "例: 上司や発注者には敬語を使う。「食べる」→「いただく」、「言う」→「おっしゃる」。→ Bahasa hormat digunakan kepada atasan, senior, dan klien. Keigo dasar: ～ます/～ます form = sudah cukup di lapangan."
+  },
+  {
+    "id": 1406,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "ちこく",
+    "jp": "遅刻",
+    "romaji": "chikoku",
+    "id_text": "Terlambat / keterlambatan masuk kerja",
+    "desc": "例: 遅刻しそうなときは、必ず事前に上司に連絡する。無断遅刻は厳禁。→ Jika akan terlambat, WAJIB hubungi atasan lebih dulu. Terlambat tanpa kabar (無断遅刻) = pelanggaran serius. 朝礼の時間に間に合うよう余裕を持って出勤する。"
+  },
+  {
+    "id": 1407,
+    "category": "career",
+    "source": "vocab-general",
+    "furi": "けっきん",
+    "jp": "欠勤",
+    "romaji": "kekkin",
+    "id_text": "Tidak masuk kerja / absen",
+    "desc": "例: 体調不良で欠勤する場合は、始業時間前に会社へ電話連絡する。→ Kalau sakit dan tidak bisa masuk, telepon perusahaan SEBELUM jam kerja dimulai. 無断欠勤 = 最悪の場合、解雇の原因になる。欠勤の際は診断書が必要な場合もある。"
+  },
+  {
+    "id": 1408,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "とどけで",
+    "jp": "届け出",
+    "romaji": "todokede",
+    "id_text": "Notifikasi / pelaporan resmi (izin/cuti/absen)",
+    "desc": "例: 遅刻・欠勤・早退の場合は届け出（とどけで）が必要。→ Terlambat, absen, atau pulang lebih awal semua memerlukan pemberitahuan resmi. 事前の届け出 = izin sebelumnya. 事後報告より事前届けが原則。"
+  },
+  {
+    "id": 1412,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "きゅうけい",
+    "jp": "休憩",
+    "romaji": "kyuukei",
+    "id_text": "Istirahat / break kerja (hak berdasarkan UU)",
+    "desc": "例: 労働基準法で6時間超は45分、8時間超は60分の休憩が義務づけられている。→ UU mewajibkan istirahat: kerja >6 jam = 45 menit, >8 jam = 60 menit. 休憩時間は賃金が発生しない。Tetapi tidak bisa dipotong oleh perusahaan."
+  },
+  {
+    "id": 1413,
+    "category": "career",
+    "source": "vocab-jac",
+    "furi": "ざんぎょう",
+    "jp": "残業",
+    "romaji": "zangyou",
+    "id_text": "Lembur / kerja lebih dari jam normal",
+    "desc": "例: 残業は36協定の範囲内で行い、残業代（割増賃金）が支払われる。→ Lembur dilakukan dalam batas 36 perjanjian dan dibayar upah premi. 36協定なしの残業 = 違法。残業時間の上限: 原則45時間/月。"
+  },
+  {
+    "id": 1416,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "とくていぎのう",
+    "jp": "特定技能",
+    "romaji": "tokutei ginou",
+    "id_text": "SSW / Specified Skilled Worker — izin kerja Jepang",
+    "desc": "例: 特定技能は2019年創設の在留資格で、人手不足の14分野（建設・製造・介護など）で就労できる。→ Status tinggal baru 2019 untuk bekerja di 14 bidang kekurangan tenaga kerja. 特定技能1号: max 5年, 家族帯同不可 / 2号: 更新可能, 家族帯同可。"
+  },
+  {
+    "id": 1417,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "ざいりゅうかーど",
+    "jp": "在留カード",
+    "romaji": "zairyuu kaado",
+    "id_text": "Kartu izin tinggal / residence card",
+    "desc": "例: 在留カードは常に携帯義務。警察・入管に求められたら提示する。住所変更後14日以内に届け出が必要。→ Wajib dibawa setiap saat. Jika diminta polisi/imigrasi, wajib tunjukkan. Masa berlaku tertera di kartu — jangan sampai kedaluwarsa."
+  },
+  {
+    "id": 1418,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "ざいりゅうしかく",
+    "jp": "在留資格",
+    "romaji": "zairyuu shikaku",
+    "id_text": "Status tinggal / jenis izin untuk tinggal & kerja",
+    "desc": "例: 在留資格の種類によって、働ける仕事の範囲が決まる。資格外の仕事をすると不法就労になる。→ Jenis status tinggal menentukan pekerjaan yang boleh dilakukan. 特定技能・技能実習・留学など種類が多い。"
+  },
+  {
+    "id": 1419,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "ざいりゅうきかん",
+    "jp": "在留期間",
+    "romaji": "zairyuu kikan",
+    "id_text": "Masa berlaku izin tinggal",
+    "desc": "例: 特定技能1号の在留期間は最長5年。期限が切れる前に更新の手続きが必要。→ Max 5 tahun untuk SSW 1. Wajib proses perpanjangan sebelum kedaluwarsa. 在留期間を過ぎると不法滞在（オーバーステイ）となり強制退去の対象。"
+  },
+  {
+    "id": 1420,
+    "category": "hourei",
+    "source": "vocab-general",
+    "furi": "しゅうろう",
+    "jp": "就労",
+    "romaji": "shuurou",
+    "id_text": "Bekerja / kegiatan kerja berdasarkan izin tinggal",
+    "desc": "例: 在留資格の範囲外での就労は「不法就労」として処罰される。雇用主も罰則の対象。→ Kerja di luar izin tinggal = kerja ilegal, bisa dipenjara/dideportasi. Majikan juga kena sanksi. 特定技能では指定分野のみ就労可。"
+  },
+  {
+    "id": 1421,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "こうしん",
+    "jp": "更新",
+    "romaji": "koushin",
+    "id_text": "Perpanjangan (visa / izin tinggal / kontrak)",
+    "desc": "例: 在留期間の更新は期限の3ヶ月前から申請できる。忘れずに早めに手続きをする。→ Perpanjangan masa tinggal bisa diajukan mulai 3 bulan sebelum kedaluwarsa. 契約の更新, 免許の更新にも使う同じ単語。"
+  },
+  {
+    "id": 1422,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "しゃかいほけん",
+    "jp": "社会保険",
+    "romaji": "shakai hoken",
+    "id_text": "Asuransi sosial — umbrella semua asuransi wajib",
+    "desc": "例: 社会保険とは健康保険・厚生年金・雇用保険などの総称で、一定規模の会社では加入義務がある。→ Istilah umum untuk semua asuransi wajib. 保険料は会社と従業員が折半。外国人も加入対象で、一定条件で給付を受けられる。"
+  },
+  {
+    "id": 1423,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "けんこうほけん",
+    "jp": "健康保険",
+    "romaji": "kenkou hoken",
+    "id_text": "Asuransi kesehatan — 30% tanggungan sendiri",
+    "desc": "例: 健康保険に加入すると、病院の医療費が原則3割負担になる。→ Dengan asuransi kesehatan, biaya medis jadi 30% tanggungan sendiri (70% ditanggung). 保険証（ほけんしょう）が交付され、病院で提示する。"
+  },
+  {
+    "id": 1425,
+    "category": "hourei",
+    "source": "vocab-teori",
+    "furi": "こようほけん",
+    "jp": "雇用保険",
+    "romaji": "koyou hoken",
+    "id_text": "Asuransi ketenagakerjaan (tunjangan pengangguran)",
+    "desc": "例: 雇用保険に加入していれば、失業時に失業給付（失業手当）が支給される。→ Jika kehilangan pekerjaan, dapat tunjangan pengangguran dari asuransi ini. 保険料は会社と従業員の両方が負担。育児・介護休業給付もここから。"
+  },
+  {
+    "id": 1427,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "へるめっと",
+    "jp": "ヘルメット",
+    "romaji": "herumetto",
+    "id_text": "Helm keselamatan / hard hat",
+    "desc": "例: 建設現場ではヘルメット（保護帽）の着用が義務。あご紐を必ず締める。→ Helm WAJIB di semua site konstruksi — tidak hanya di area kerja aktif. Melindungi kepala dari benda jatuh. JIS T8131規格品を使用。約2年で定期交換。"
+  },
+  {
+    "id": 1428,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "あんぜんぐつ",
+    "jp": "安全靴",
+    "romaji": "anzengutsu",
+    "id_text": "Sepatu safety / steel-toe boots",
+    "desc": "例: 安全靴は先芯（つまさき保護）入りで、重量物が落下しても足先を守る。→ Sepatu safety punya pelindung baja di ujung kaki. JIS T8101規格品を選ぶ。現場では必ず着用。スニーカーや普通の靴は不可。"
+  },
+  {
+    "id": 1430,
+    "category": "anzen",
+    "source": "vocab-general",
+    "furi": "みみせん",
+    "jp": "耳栓",
+    "romaji": "mimisen",
+    "id_text": "Penyumbat telinga / earplugs",
+    "desc": "例: 85dB以上の騒音環境（グラインダー・チッパー使用時）では耳栓または耳覆いを着用する義務がある。→ Lingkungan >85 dB wajib pakai pelindung telinga. Paparan bising berkepanjangan → 騒音性難聴 (tuli akibat kebisingan) yang tidak bisa sembuh."
+  },
+  {
+    "id": 1431,
+    "category": "anzen",
+    "source": "vocab-teori",
+    "furi": "ほごめがね",
+    "jp": "保護めがね",
+    "romaji": "hogo megane",
+    "id_text": "Kacamata pelindung / safety goggles",
+    "desc": "例: 金属を切断・研磨するとき、飛散する破片から目を守るため保護めがねを着用する。→ Wajib pakai saat menggerinda/memotong logam atau beton. コンタクトレンズ使用者は特に注意 — 粒子が目の中に入ると取り出せない。"
+  },
+  {
+    "id": 1433,
+    "category": "career",
+    "source": "vocab-teori",
+    "furi": "けんせつきゃりああっぷしすてむ",
+    "jp": "CCUS（建設キャリアアップシステム）",
+    "romaji": "kensetsu kyaria appu shisutemu",
+    "id_text": "CCUS — kartu IC rekam riwayat karier konstruksi",
+    "desc": "例: CCUSカードを現場で毎日打刻すると、就業実績・資格・経験がデジタル管理される。→ Swipe kartu CCUS tiap hari merekam riwayat kerja secara digital. 外国人SSW労働者も登録が推奨（義務化進行中）。レベル評価で処遇改善につながる。"
+  },
+  {
+    "id": 1434,
+    "category": "career",
+    "source": "vocab-teori",
+    "furi": "ぎのうれべる",
+    "jp": "技能レベル",
+    "romaji": "ginou reberu",
+    "id_text": "Level keahlian CCUS — level 1 (magang) s.d. 4",
+    "desc": "例: CCUSでは技能レベルが4段階で評価：レベル1=見習い → レベル4=職長・班長クラス。→ Level makin tinggi, upah yang wajar makin tinggi dan kesempatan kerja makin luas. SSWは経験を積みながらレベルアップを目指す。"
+  },
+  {
+    "id": 1435,
+    "category": "setsubi_kougu",
+    "source": "vocab-jac",
+    "furi": "しつがいき",
+    "jp": "室外機",
+    "romaji": "shitsugaiki",
+    "id_text": "Unit luar AC / outdoor unit (kompresor+kondenser)",
+    "desc": "例: 室外機は建物の外に設置し、冷媒を圧縮して熱を外に放出する。室外機と室内機は冷媒管で接続する。→ Unit luar berisi kompresor dan kondenser. 設置場所は通気性確保が必須 — 囲ったり日光が強すぎると効率低下。"
+  },
+  {
+    "id": 1436,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "しつないき",
+    "jp": "室内機",
+    "romaji": "shitsunaiki",
+    "id_text": "Unit dalam AC / indoor unit (evaporator & fan)",
+    "desc": "例: 室内機は壁や天井に取り付け、蒸発器で冷媒が蒸発するときの吸熱作用で室内を冷やす。→ Unit dalam dipasang di dinding/plafon, mendinginkan ruangan melalui evaporasi refrigeran. ドレン配管で結露水を外部に排水する。"
+  },
+  {
+    "id": 1437,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "ふれあかこう",
+    "jp": "フレア加工",
+    "romaji": "furea kakou",
+    "id_text": "Flare processing — kembangkan ujung pipa tembaga",
+    "desc": "例: 冷媒管の接続はフレア加工で行い、フレアツールで銅管の端を拡張してからフレアナットで締め付ける。→ Ujung pipa tembaga dikembangkan dengan flare tool sebelum disambung. フレア不完全 → 冷媒漏れの原因。正確な加工が品質を左右する重要工程。"
+  },
+  {
+    "id": 1438,
+    "category": "haikan",
+    "source": "vocab-jac",
+    "furi": "どれんはいかん",
+    "jp": "ドレン配管",
+    "romaji": "doren haikan",
+    "id_text": "Pipa drain AC — alirkan air kondensasi unit dalam",
+    "desc": "例: 室内機で発生した結露水（ドレン水）はドレン配管を通じて屋外または排水管へ排水する。→ Air kondensasi dari unit dalam dialirkan ke luar lewat pipa drain. 勾配不足 → 水が逆流・水漏れ。ドレン配管は必ず下り勾配（1/100以上）で施工。"
+  }
+]

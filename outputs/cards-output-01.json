@@ -1,0 +1,952 @@
+[
+  {
+    "id": 1,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "ちょれい",
+    "jp": "朝礼",
+    "romaji": "chorei",
+    "id_text": "Apel pagi",
+    "desc": "Pertemuan wajib setiap pagi sebelum kerja. Ada 2 jenis: apel umum dan apel per jenis pekerjaan. Mandor:「朝礼には絶対遅れるな」(jangan pernah telat apel pagi)."
+  },
+  {
+    "id": 2,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "きけんよちかつどうかつどう",
+    "jp": "危険予知活動（KY活動）",
+    "romaji": "kiken yochi katsudou (KY katsudou)",
+    "id_text": "Kegiatan Prediksi Bahaya (KY)",
+    "desc": "Kegiatan identifikasi bahaya sebelum mulai bekerja, dilakukan saat apel per jenis pekerjaan. Mandor:「KY表はちゃんと書けよ」(isi formulir KY dengan benar)."
+  },
+  {
+    "id": 3,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "らじおたいそう",
+    "jp": "ラジオ体操",
+    "romaji": "rajio taiso",
+    "id_text": "Senam radio",
+    "desc": "Senam pemanasan saat apel pagi untuk mencegah cedera. Wajib diikuti semua pekerja sebelum kerja dimulai. Mandor:「体操しっかりやれ、怪我の予防になる」(senam sungguh-sungguh, cegah cedera)."
+  },
+  {
+    "id": 4,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "ゆびさしこしょう",
+    "jp": "指差し呼称",
+    "romaji": "yubisashi koshou",
+    "id_text": "Tunjuk dan panggil",
+    "desc": "Metode konfirmasi keselamatan dengan menunjuk dan menyebut keras. Wajib digunakan setiap cek kondisi kerja. Mandor:「確認は必ず指差し呼称でやれよ」(konfirmasi wajib pakai tunjuk dan ucapkan)."
+  },
+  {
+    "id": 6,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうどうきじゅんほう",
+    "jp": "労働基準法",
+    "romaji": "roudou kijunhou",
+    "id_text": "UU Standar Ketenagakerjaan",
+    "desc": "UU standar kerja minimum: max 8 jam/hari & 40 jam/minggu. Lembur di atas batas wajib dibayar 割増賃金. Mandor:「8時間超えたら記録してくれ」(catat kalau lebih 8 jam, ada upah tambahan)."
+  },
+  {
+    "id": 7,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうどうあんぜんえいせいほう",
+    "jp": "労働安全衛生法",
+    "romaji": "roudou anzen eisei hou",
+    "id_text": "UU Keselamatan dan Kesehatan Kerja",
+    "desc": "UU yang menjamin keselamatan dan kesehatan pekerja. Di lapangan: dasar aturan APD dan pendidikan K3. Mandor:「ヘルメットと安全帯は必ず着けてくれよ」(wajib pakai helm dan sabuk pengaman)."
+  },
+  {
+    "id": 8,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "さいていちんぎんほう",
+    "jp": "最低賃金法",
+    "romaji": "saitei chingin hou",
+    "id_text": "UU Upah Minimum",
+    "desc": "UU batas terendah upah yang boleh diberikan, ditetapkan per prefektur. Besaran berbeda tiap daerah. Mandor:「最低賃金以上は必ず払うよ」(pasti bayar di atas upah minimum daerah)."
+  },
+  {
+    "id": 9,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんせつぎょうほう",
+    "jp": "建設業法",
+    "romaji": "kensetsu gyou hou",
+    "id_text": "UU Industri Konstruksi",
+    "desc": "UU yang mengatur izin usaha, kontrak, dan tanggung jawab konstruksi. Perusahaan wajib punya izin per jenis pekerjaan. Mandor:「うちはちゃんと許可を持ってるから安心して」(punya izin resmi, tenang saja)."
+  },
+  {
+    "id": 10,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんちくきじゅんほう",
+    "jp": "建築基準法",
+    "romaji": "kenchiku kijun hou",
+    "id_text": "UU Standar Bangunan",
+    "desc": "UU standar minimum untuk membangun dan menggunakan bangunan. Semua pekerjaan wajib memenuhi standar ini. Mandor:「図面通りに施工しないと検査に通らないぞ」(tidak sesuai gambar, tidak lolos inspeksi)."
+  },
+  {
+    "id": 11,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "しょうぼうほう",
+    "jp": "消防法",
+    "romaji": "shoubou hou",
+    "id_text": "UU Pemadam Kebakaran",
+    "desc": "UU yang mengatur alat pemadam, sprinkler, dan alarm kebakaran. Di lapangan: posisi APAR wajib diketahui. Mandor:「消火器の場所は必ず覚えておけよ」(wajib hafal posisi APAR di lapangan)."
+  },
+  {
+    "id": 12,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "すいどうほう",
+    "jp": "水道法",
+    "romaji": "suidou hou",
+    "id_text": "UU Air Bersih",
+    "desc": "UU yang mengatur usaha dan instalasi pasokan air bersih. Hanya insinyur berlisensi yang boleh mengerjakannya. Mandor:「水道工事は有資格者しかできないぞ」(hanya yang bersertifikat boleh kerja)."
+  },
+  {
+    "id": 13,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "でんきじぎょうほう",
+    "jp": "電気事業法",
+    "romaji": "denki jigyou hou",
+    "id_text": "UU Usaha Kelistrikan",
+    "desc": "UU standar konstruksi dan pemeliharaan fasilitas ketenagalistrikan. Dasar keamanan semua instalasi listrik. Mandor:「電気設備は専門業者に任せろ、触るな」(instalasi listrik serahkan ke ahlinya)."
+  },
+  {
+    "id": 14,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "でんきつうしんじぎょうほう",
+    "jp": "電気通信事業法",
+    "romaji": "denki tsuushin jigyou hou",
+    "id_text": "UU Usaha Telekomunikasi",
+    "desc": "UU yang mengatur pemasangan jaringan dan peralatan telekomunikasi. Wajib dikerjakan insinyur berkualifikasi. Mandor:「通信配線は有資格者しか触れないぞ」(hanya yang bersertifikat boleh pegang)."
+  },
+  {
+    "id": 15,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "さぶろくきょうてい",
+    "jp": "36協定",
+    "romaji": "saburoku kyoutei",
+    "id_text": "Perjanjian 36 (perjanjian lembur)",
+    "desc": "Perjanjian berdasar Pasal 36 UU Ketenagakerjaan yang membolehkan lembur. Tanpa ini, perusahaan tidak boleh minta lembur. Mandor:「36協定の範囲内で残業を頼むよ」(lembur sesuai batas perjanjian 36)."
+  },
+  {
+    "id": 16,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうさいほけん",
+    "jp": "労災保険",
+    "romaji": "rousai hoken",
+    "id_text": "Asuransi kecelakaan kerja",
+    "desc": "Asuransi negara untuk pekerja yang terluka, sakit, atau meninggal akibat kerja. Premi 100% ditanggung pemberi kerja. Mandor:「怪我したらすぐ報告してくれ」(cedera langsung lapor, ada asuransi kerja)."
+  },
+  {
+    "id": 17,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "まにえすと",
+    "jp": "マニフェスト",
+    "romaji": "manifesuto",
+    "id_text": "Manifest (lembar kontrol limbah konstruksi)",
+    "desc": "Dokumen wajib yang membuktikan limbah industri dibuang dengan benar. Kontraktor utama wajib membuatnya. Mandor:「産廃はマニフェスト書いてから出してくれよ」(tulis manifest dulu sebelum keluarkan limbah)."
+  },
+  {
+    "id": 18,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんせつりさいくるほう",
+    "jp": "建設リサイクル法",
+    "romaji": "kensetsu risaikuru hou",
+    "id_text": "UU Daur Ulang Konstruksi",
+    "desc": "UU yang mewajibkan pemilahan dan daur ulang limbah konstruksi. Sampah di lokasi wajib disimpan sesuai jenis (分別). Mandor:「ゴミは必ず分別してから置いとけよ」(sampah wajib dipilah sesuai jenis)."
+  },
+  {
+    "id": 19,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "こようほけんほう",
+    "jp": "雇用保険法",
+    "romaji": "koyou hoken hou",
+    "id_text": "UU Asuransi Ketenagakerjaan",
+    "desc": "UU yang mengatur tunjangan pengangguran bagi yang kehilangan pekerjaan. Premi ditanggung bersama pemberi kerja dan pekerja. Mandor:「雇用保険は失業した時のためだよ」(potongan asuransi itu persiapan kalau PHK)."
+  },
+  {
+    "id": 20,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "がすじぎょうほう",
+    "jp": "ガス事業法",
+    "romaji": "gasu jigyou hou",
+    "id_text": "UU Usaha Gas",
+    "desc": "UU yang mengatur usaha gas kota (都市ガス), berbeda dari gas LPG. Pekerjaan gas kota hanya oleh kontraktor berlisensi khusus. Mandor:「都市ガス工事は専門業者に任せろ」(serahkan ke kontraktor berlisensi khusus)."
+  },
+  {
+    "id": 21,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "げすいどうほう",
+    "jp": "下水道法",
+    "romaji": "gesuidou hou",
+    "id_text": "UU Saluran Air Limbah",
+    "desc": "UU yang mengatur sistem saluran pembuangan air limbah kota. Instalasi gedung wajib terhubung ke sistem pembuangan resmi. Mandor:「排水は直接側溝に流すな、下水へ」(air limbah jangan ke parit, ke saluran resmi)."
+  },
+  {
+    "id": 22,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "はいきぶものしょりほう",
+    "jp": "廃棄物処理法",
+    "romaji": "haikibumono shori hou",
+    "id_text": "UU Pengelolaan Limbah",
+    "desc": "UU yang mengatur pengelolaan dan pembuangan limbah industri. Manifest wajib dibuat kontraktor utama sebelum limbah diangkut. Mandor:「産廃は許可業者しか運べないぞ」(limbah industri hanya oleh yang berizin)."
+  },
+  {
+    "id": 23,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうさいかくし",
+    "jp": "労災かくし",
+    "romaji": "rousai kakushi",
+    "id_text": "Penyembunyian kecelakaan kerja — KEJAHATAN",
+    "desc": "Menyembunyikan kecelakaan kerja dari kantor inspeksi adalah kejahatan. Setiap kecelakaan wajib segera dilaporkan. Mandor:「労災を隠すのは犯罪だ、必ず報告しろよ」(menyembunyikan kecelakaan adalah kejahatan)."
+  },
+  {
+    "id": 24,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "でんきこうじぎょうほう",
+    "jp": "電気工事業法",
+    "romaji": "denki kouji gyou hou",
+    "id_text": "UU Pekerjaan Listrik (≠ UU Kelistrikan)",
+    "desc": "UU yang mengatur kontraktor pekerjaan listrik, berbeda dari 電気事業法. Kontraktor listrik wajib terdaftar terpisah. Mandor:「電気工事業の登録なしには工事できないぞ」(tanpa registrasi, tidak boleh kerja)."
+  },
+  {
+    "id": 25,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんせつぎょうほうのにじゅうきゅうぎょうしゅ",
+    "jp": "建設業法の29業種",
+    "romaji": "kensetsu gyou hou no nijuukyuu gyoushu",
+    "id_text": "29 jenis usaha yang perlu izin konstruksi",
+    "desc": "29 jenis usaha konstruksi yang memerlukan izin sesuai 建設業法. Termasuk listrik, pipa, insulasi termal, telekomunikasi, dll. Mandor:「業種ごとに許可を取らないといけないんだ」(izin harus diambil per jenis pekerjaan)."
+  },
+  {
+    "id": 26,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "あすべすと",
+    "jp": "アスベスト（石綿）",
+    "romaji": "asubesuto (ishiwata)",
+    "id_text": "Asbes — DILARANG",
+    "desc": "Mineral serat berbahaya yang dilarang karena menyebabkan kanker paru. Bangunan lama yang dicurigai asbes wajib disurvei sebelum dibongkar. Mandor:「アスベストが疑われる建物は素手で触るな」(jangan pegang tangan kosong)."
+  },
+  {
+    "id": 27,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "たいきおせんぼうしほう",
+    "jp": "大気汚染防止法",
+    "romaji": "taiki osen boushi hou",
+    "id_text": "UU Pencegahan Polusi Udara",
+    "desc": "UU pencegahan polusi udara. Bongkar gedung berisi asbes wajib lapor ke gubernur prefektur 14 hari sebelumnya. Mandor:「アスベスト解体は14日前に知事への届出が必要だ」(lapor gubernur 14 hari sebelum mulai)."
+  },
+  {
+    "id": 105,
+    "category": "shoubou",
+    "source": "jac-ch2",
+    "furi": "しょうかいき",
+    "jp": "消火器",
+    "romaji": "shoukaiki",
+    "id_text": "Alat pemadam api (APAR)",
+    "desc": "Perangkat portabel untuk memadamkan api di tahap awal kebakaran. Dipasang di setiap lokasi konstruksi sesuai 消防法. Mandor:「消火器の場所と使い方を必ず覚えておけよ」(wajib tahu posisi dan cara pakai APAR)."
+  },
+  {
+    "id": 111,
+    "category": "anzen",
+    "source": "jac-ch2",
+    "furi": "あんぜんだいいち",
+    "jp": "安全第一",
+    "romaji": "anzen daiichi",
+    "id_text": "Keselamatan Utama (Safety First)",
+    "desc": "Prinsip dasar di lokasi konstruksi Jepang: keselamatan di atas segalanya. Papan \"Safety First\" dipasang di setiap lokasi. Mandor:「急いでても安全を後回しにするな」(meski buru-buru, jangan kesampingkan keselamatan)."
+  },
+  {
+    "id": 114,
+    "category": "anzen",
+    "source": "jac-ch2",
+    "furi": "ついらくてんらく",
+    "jp": "墜落・転落",
+    "romaji": "tsuiraku / tenraku",
+    "id_text": "Jatuh dari ketinggian / Terjatuh bergulir",
+    "desc": "Jatuh dari ketinggian adalah penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total. Mandor:「高所作業では絶対にフルハーネスをつけてくれよ」(di ketinggian wajib pakai full harness)."
+  },
+  {
+    "id": 129,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "けんせつきゃりああっぷしすてむ",
+    "jp": "建設キャリアアップシステム（CCUS）",
+    "romaji": "kensetsu kyaria appu shisutemu",
+    "id_text": "Sistem Kenaikan Karier Konstruksi",
+    "desc": "Sistem rekam karier pekerja konstruksi, 4 level (putih→biru→perak→emas). Level 2 butuh ≥645 hari kerja tercatat. Mandor:「CCUSカードは毎日タッチするのを忘れるな」(jangan lupa tap kartu CCUS setiap hari)."
+  },
+  {
+    "id": 130,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "もとうり",
+    "jp": "元請（ゼネコン）",
+    "romaji": "motouri (zenekon)",
+    "id_text": "Kontraktor umum (general contractor)",
+    "desc": "Perusahaan yang menerima kontrak dari klien dan mengatur seluruh pekerjaan. Bertanggung jawab atas semua sub-kontraktor. Mandor:「ゼネコンからの指示は最優先で動けよ」(instruksi general contractor adalah prioritas)."
+  },
+  {
+    "id": 131,
+    "category": "career",
+    "source": "jac-ch2",
+    "furi": "したうけせんもんこうじぎょうしゃ",
+    "jp": "下請（専門工事業者）",
+    "romaji": "shitauke (senmon kouji gyousha)",
+    "id_text": "Kontraktor khusus / sub-kontraktor",
+    "desc": "Kontraktor spesialis yang menerima subkontrak dari kontraktor utama. Bekerja sesuai instruksi 職長. Mandor:「職長の指示に従って確実に作業してくれよ」(ikuti instruksi mandor dan kerjakan dengan tepat)."
+  },
+  {
+    "id": 137,
+    "category": "career",
+    "source": "jac-ch2",
+    "furi": "せくしゃるはらすめんと",
+    "jp": "セクシャル・ハラスメント（セクハラ）",
+    "romaji": "sekusharu harasumento",
+    "id_text": "Pelecehan seksual (Sexual Harassment)",
+    "desc": "Tindakan atau ucapan seksual yang tidak diinginkan di tempat kerja. Berbeda dari パワハラ, keduanya dilarang keras. Mandor:「セクハラは厳しく対処する、相談してくれ」(pelecehan ditangani keras, konsultasikan masalah)."
+  },
+  {
+    "id": 151,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "わりましちんぎんりつ",
+    "jp": "割増賃金率",
+    "romaji": "warimashi chingin ritsu",
+    "id_text": "Lembur: biasa +25% / libur +35% / malam +25%",
+    "desc": "Tiga tingkat upah tambahan wajib sesuai UU. Batas lembur: 45 jam/bulan, 360 jam/tahun (berlaku April 2024). Mandor:「残業代は法律通りに払うから記録してくれ」(upah lembur dibayar sesuai UU, catat jam)."
+  },
+  {
+    "id": 152,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "つうきんさいがいぎょうむさいがい",
+    "jp": "通勤災害 vs 業務災害",
+    "romaji": "tsuukin saigai vs gyoumu saigai",
+    "id_text": "Kecelakaan perjalanan vs kecelakaan tempat kerja",
+    "desc": "通勤災害: kecelakaan saat perjalanan rumah↔kerja via rute wajar. 業務災害: akibat pekerjaan itu sendiri. Keduanya ditanggung 労災保険. Mandor:「通勤中の事故もすぐ報告してくれよ」(kecelakaan di perjalanan pun lapor)."
+  },
+  {
+    "id": 153,
+    "category": "career",
+    "source": "jac-ch2",
+    "furi": "ぎのうけんてい／ぎのうし",
+    "jp": "技能検定 / 技能士",
+    "romaji": "ginou kentei / ginoushi",
+    "id_text": "Uji keterampilan / Teknisi berlisensi negara",
+    "desc": "Ujian sertifikasi nasional; lulus → dapat 合格証書 dan boleh menyebut diri 技能士. Ada 32 jenis di konstruksi, 5 tingkat. Mandor:「2級取ったら手当もつくし、CCUSも上がるぞ」(lulus level 2, ada tunjangan dan CCUS naik)."
+  },
+  {
+    "id": 154,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "とくていぎのうがいこくじんのこようほけん",
+    "jp": "特定技能外国人の雇用保険（失業給付）",
+    "romaji": "tokutei ginou gaikokujin no koyou hoken",
+    "id_text": "SSW asing bisa dapat tunjangan pengangguran",
+    "desc": "SSW yang kehilangan pekerjaan tidak wajib langsung pulang, bisa dapat tunjangan 雇用保険. Boleh tinggal selama aktif mencari kerja. Mandor:「仕事なくなってもすぐ帰国しなくていいぞ」(tidak harus langsung pulang)."
+  },
+  {
+    "id": 155,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "こようほけんのしきゅうようけん",
+    "jp": "雇用保険の支給要件（12ヶ月以上）",
+    "romaji": "koyou hoken no shikyuu youken",
+    "id_text": "Syarat tunjangan: ≥12 bln dalam 2 tahun terakhir",
+    "desc": "Syarat: menganggur dan mau bekerja, plus ≥12 bulan masa asuransi dalam 2 tahun terakhir. Tunjangan 45–80% upah, 90–360 hari. Mandor:「12ヶ月以上入ってれば給付もらえるよ」(masuk ≥12 bulan, bisa dapat tunjangan)."
+  },
+  {
+    "id": 156,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "すとれすへっく",
+    "jp": "ストレスチェック（50人以上の事業場）",
+    "romaji": "sutoresu chekku",
+    "id_text": "Cek stres — WAJIB perusahaan ≥50 orang, 1x/tahun",
+    "desc": "Perusahaan ≥50 karyawan wajib lakukan cek beban psikologis tiap tahun oleh dokter/perawat. Diatur 労働安全衛生法. Mandor:「ストレスチェックは必ず受けてくれよ」(wajib ikut stress check dari perusahaan)."
+  },
+  {
+    "id": 157,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "どろおんとうろくぎむ",
+    "jp": "ドローン登録義務（≥100g）",
+    "romaji": "doroon touroku gimu",
+    "id_text": "Drone ≥100g WAJIB didaftarkan ke pemerintah",
+    "desc": "Drone berat ≥100g wajib didaftarkan sebagai pesawat tak berawak. Sering dipakai untuk survei (測量) di konstruksi. Mandor:「現場でドローン使う前に登録を確認しろよ」(pakai drone di lapangan, pastikan sudah terdaftar)."
+  },
+  {
+    "id": 158,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "こうくうしょうがいとう",
+    "jp": "航空障害灯（≥60m）",
+    "romaji": "koukuu shougai tou",
+    "id_text": "Lampu hambatan penerbangan: wajib pada objek ≥60m",
+    "desc": "Bangunan, crane, atau struktur setinggi ≥60m wajib dipasangi lampu hambatan penerbangan, termasuk crane sementara. Mandor:「60メートル以上のクレーンには航空障害灯が必要だぞ」(crane ≥60m wajib pasang lampu hambatan)."
+  },
+  {
+    "id": 159,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ちんぎんしはらいのごげんそく",
+    "jp": "賃金支払いの5原則",
+    "romaji": "chingin shiharai no go gensoku",
+    "id_text": "5 prinsip pembayaran upah (Labor Standards Act)",
+    "desc": "Lima prinsip pembayaran upah: ①tunai ②langsung ③penuh ④min. 1x/bulan ⑤tanggal tetap. Di lapangan: semua 5 harus terpenuhi. Mandor:「給料は毎月決まった日に全額渡すのが法律だよ」(gaji penuh tiap bulan, tanggal tetap)."
+  },
+  {
+    "id": 160,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "きゅうけいじかんのきてい",
+    "jp": "休憩時間の規定（6時間・8時間）",
+    "romaji": "kyuukei jikan no kitei",
+    "id_text": "Aturan istirahat: >6jam→45 mnt; >8jam→1 jam",
+    "desc": "Istirahat wajib di tengah jam kerja, diberikan serentak. Kerja >6 jam → 45 menit, >8 jam → 1 jam. Mandor:「8時間超えたら1時間休憩を取らせるぞ」(kerja lebih 8 jam, ambil 1 jam istirahat)."
+  },
+  {
+    "id": 161,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "かいこよこくさんじゅうにちまえ",
+    "jp": "解雇予告（かいこよこく）",
+    "romaji": "kaiko yokoku",
+    "id_text": "PHK wajib diumumkan 30 hari sebelumnya",
+    "desc": "Pemberi kerja wajib memberitahu 30 hari sebelum memecat; jika tidak, bayar ganti 30 hari upah. Mandor:「辞めてもらう時は30日前に必ず言うよ」(kalau harus berhenti, saya beritahu 30 hari sebelumnya)."
+  },
+  {
+    "id": 162,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "そうおんきせいほうていそうおんがたけんせつきかい",
+    "jp": "騒音規制法・低騒音型機械",
+    "romaji": "souon kisei hou / tei souon gata kensetsu kikai",
+    "id_text": "UU Kebisingan: wajib pilih mesin rendah bising",
+    "desc": "UU yang mengatur tingkat kebisingan dari konstruksi. Wajib pilih mesin 低騒音型 dan atur jadwal/zona bising. Mandor:「この現場では低騒音型の機械を選ぶように」(di lokasi ini pilih mesin rendah kebisingan)."
+  },
+  {
+    "id": 163,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "でんぱほうめんきょうがひつようなとらんしいばあ",
+    "jp": "電波法",
+    "romaji": "denpa hou",
+    "id_text": "UU Gelombang Radio: transceiver butuh izin",
+    "desc": "UU yang mengatur penggunaan gelombang radio. Transceiver tanpa izin atau impor tak disetujui Jepang adalah ilegal. Mandor:「そのトランシーバー、免許あるか確認したか？」(transceiver itu sudah ada izinnya, sudah dicek?)."
+  },
+  {
+    "id": 164,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうさいほけんのよんきゅうふ",
+    "jp": "労災保険の4給付（療養・休業・遺族・介護）",
+    "romaji": "rousai hoken no yon kyuufu",
+    "id_text": "4 jenis tunjangan asuransi kecelakaan kerja",
+    "desc": "4 tunjangan 労災: biaya pengobatan penuh, ganti upah, ahli waris jika meninggal, dan perawatan jika cacat. Semua dijamin negara. Mandor:「怪我したら労災で全部面倒みてもらえるよ」(cedera, semua ditanggung asuransi kerja)."
+  },
+  {
+    "id": 165,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうさいほけんとくべつかにゅうせいど",
+    "jp": "労災保険の特別加入制度（一人親方・中小企業主）",
+    "romaji": "rousai hoken tokubetsu kanyuu seido",
+    "id_text": "Jalur khusus asuransi kerja: kontraktor mandiri",
+    "desc": "労災保険 biasanya hanya untuk karyawan, tapi kontraktor mandiri (一人親方) boleh masuk lewat 特別加入制度. Mandor:「一人親方でも特別加入で労災に入れるぞ」(kontraktor mandiri pun bisa masuk asuransi kerja)."
+  },
+  {
+    "id": 166,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんせつろうどうしゃこようかいぜんほう",
+    "jp": "建設労働者雇用改善法",
+    "romaji": "kensetsu roudousha koyou kaizen hou",
+    "id_text": "UU Peningkatan Ketenagakerjaan Konstruksi",
+    "desc": "UU yang mendorong perbaikan kondisi kerja konstruksi. Rencana ke-10 (2021–2025) menargetkan CCUS dan batas lembur. Mandor:「CCUSカードは毎日忘れずタッチしてくれよ」(jangan lupa tap kartu CCUS setiap hari)."
+  },
+  {
+    "id": 167,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ちゅうしゃじょうほう",
+    "jp": "駐車場法（ちゅうしゃじょうほう）",
+    "romaji": "chuushajou hou",
+    "id_text": "UU Perparkiran: lapor sebelum bangun/ubah parkir",
+    "desc": "UU yang mengatur pembangunan fasilitas parkir di perkotaan. Membangun atau memodifikasi parkir wajib lapor ke pemda sebelum mulai. Mandor:「駐車場工事は着工前に届出が要るぞ」(wajib lapor ke pemda)."
+  },
+  {
+    "id": 168,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "すいしつおだくぼうしほう",
+    "jp": "水質汚濁防止法",
+    "romaji": "suishitsu odaku boushi hou",
+    "id_text": "UU Pencemaran Air: air beton wajib dinetralkan",
+    "desc": "UU yang mengatur kualitas air buangan. Air yang kontak beton sangat basa, wajib dinetralkan dengan CO₂ sebelum dibuang ke saluran. Mandor:「コンクリートの排水は中和してから流してくれよ」(air beton wajib dinetralkan dulu)."
+  },
+  {
+    "id": 169,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ばいしょうよていのきんし",
+    "jp": "賠償予定の禁止（ばいしょうよていのきんし）",
+    "romaji": "baishou yotei no kinshi",
+    "id_text": "Dilarang tetapkan denda/ganti rugi di muka",
+    "desc": "Pemberi kerja dilarang mencantumkan klausul denda pemutusan di muka. Pekerja boleh menolak kontrak yang memuat ini. Mandor:「契約に罰金条項は違法だよ、サインするな」(klausul denda melanggar UU, jangan tanda tangan)."
+  },
+  {
+    "id": 170,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "きかいきんとうのげんそくきょうせいろうどうのきんし",
+    "jp": "機会均等の原則 / 強制労働の禁止",
+    "romaji": "kikai kintou no gensoku / kyousei roudou no kinshi",
+    "id_text": "Non-diskriminasi kebangsaan + dilarang kerja paksa",
+    "desc": "Dilarang membeda-bedakan upah berdasarkan kebangsaan/kepercayaan/status sosial, dan dilarang kerja paksa. Mandor:「国籍が違っても同じ条件で働いてもらうぞ」(beda kebangsaan pun kondisi kerja sama)."
+  },
+  {
+    "id": 171,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "かいこせいげんしょうびょうりょうようちゅうわかいこきんし",
+    "jp": "解雇制限",
+    "romaji": "kaiko seigen — shoubyou ryouyouchuu wa kaiko kinshi",
+    "id_text": "Dilarang pecat saat sakit/cedera kerja + 30 hari",
+    "desc": "Pekerja yang sakit/cedera karena kerja tidak boleh dipecat selama pengobatan + 30 hari setelahnya. Berlaku otomatis sesuai UU. Mandor:「仕事中の怪我で休んでる間は解雇できないから安心しろ」(cedera kerja, tidak bisa dipecat)."
+  },
+  {
+    "id": 172,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうどうじょうけんのめいじろくこうもん",
+    "jp": "労働条件の明示",
+    "romaji": "roudou jouken no meiji — roku koumon",
+    "id_text": "6 hal wajib diberitahu pemberi kerja saat rekrut",
+    "desc": "6 hal wajib diberitahu tertulis: durasi kontrak, lokasi/jenis kerja, jam kerja, upah, libur, ketentuan resign/PHK. Mandor:「契約の時に条件は書面でもらってくれよ」(saat kontrak, minta kondisi kerja secara tertulis)."
+  },
+  {
+    "id": 173,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ちいきべつさいていちんぎん",
+    "jp": "地域別最低賃金（ちいきべつさいていちんぎん）",
+    "romaji": "chiiki betsu saitei chingin",
+    "id_text": "Upah minimum berbeda per prefektur",
+    "desc": "Upah minimum ditetapkan per prefektur sesuai biaya hidup daerah. Berlaku untuk semua pekerja tanpa memandang jenis kontrak. Mandor:「最低賃金は毎年変わるから確認してくれよ」(upah minimum berubah tiap tahun, cek selalu)."
+  },
+  {
+    "id": 174,
+    "category": "career",
+    "source": "jac-ch2",
+    "furi": "にんていくんれん",
+    "jp": "認定訓練（にんていくんれん）",
+    "romaji": "nintei kunren",
+    "id_text": "Pelatihan vokasi yang diakui gubernur prefektur",
+    "desc": "Pelatihan vokasi oleh pihak swasta yang diakui resmi gubernur prefektur; berbeda dari pelatihan pemerintah langsung. Mandor:「この研修は知事認定だから証書がもらえるぞ」(pelatihan diakui gubernur, dapat sertifikat)."
+  },
+  {
+    "id": 175,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ほうていきゅうじつまいしゅうすくなくともいっかい",
+    "jp": "法定休日",
+    "romaji": "houtei kyuujitsu — maishuu sukunakutomo ikkai",
+    "id_text": "Hari libur wajib: minimal 1 hari per minggu",
+    "desc": "Hari libur yang ditetapkan UU: minimal 1 hari per minggu wajib diberikan. Bekerja di hari ini → upah +35% (休日出勤). Mandor:「週に1日は必ず休んでくれよ、法律で決まってるから」(minimal 1 hari libur per minggu, aturan UU)."
+  },
+  {
+    "id": 176,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ゆうきゅうきゅうかのかいとりきんし",
+    "jp": "有給休暇の買い取り禁止",
+    "romaji": "yuukyuu kyuuka no kaitori kinshi",
+    "id_text": "Dilarang tukarkan cuti berbayar dengan uang",
+    "desc": "Pemberi kerja tidak boleh mengkonversi cuti berbayar menjadi uang tambahan. Cuti harus digunakan sebagai waktu istirahat. Mandor:「有給はお金に変えられないから、ちゃんと休んで使ってくれ」(cuti tidak bisa ditukar uang)."
+  },
+  {
+    "id": 177,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんこうしんだんていきねんいっかいとやといいれじ",
+    "jp": "健康診断",
+    "romaji": "kenkou shindan — teiki nen ikkai to yatoiire ji",
+    "id_text": "Cek kesehatan: 1x/tahun + saat rekrut baru",
+    "desc": "Perusahaan wajib selenggarakan pemeriksaan kesehatan 1x/tahun dan saat rekrut baru. Biaya ditanggung perusahaan. Mandor:「年1回の健康診断は会社が出すから必ず受けてくれよ」(medical check-up setahun sekali, wajib ikut)."
+  },
+  {
+    "id": 547,
+    "category": "haikan",
+    "source": "jac-ch2",
+    "furi": "あんぐるふらんじこうほう",
+    "jp": "アングルフランジ工法（アングルフランジこうほう）",
+    "romaji": "anguru furanji kouhou",
+    "id_text": "Angle flange — sambungan duct kotak kuat",
+    "desc": "Sambungan duct kotak menggunakan flange sudut; kekuatan dan kerapatan tinggi, digunakan untuk 排煙ダクト. Mandor:「排煙ダクトはアングルフランジで接続してくれよ」(duct asap sambung pakai angle flange dengan benar)."
+  },
+  {
+    "id": 549,
+    "category": "haikan",
+    "source": "jac-ch2",
+    "furi": "すらいどおんふらんじこうほう",
+    "jp": "スライドオンフランジ工法",
+    "romaji": "suraido on furanji kouhou",
+    "id_text": "Slide-on flange — kekuatan antara 2 metode lain",
+    "desc": "Flange siap pakai dimasukkan ke duct, dilas titik, dikencangkan baut + penjepit ラッツ di 4 sudut. Kekuatan antara 共板 dan アングル. Mandor:「四隅のラッツを忘れるな、気密性が落ちるぞ」(jangan lupa ラッツ di 4 sudut)."
+  },
+  {
+    "id": 572,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "せこうたいせい",
+    "jp": "施工体制（せこうたいせい）",
+    "romaji": "sekou taisei",
+    "id_text": "Struktur manajemen pelaksanaan konstruksi",
+    "desc": "Hierarki konstruksi: 発注者→監理者→ゼネコン→専門工事業者→職長→作業員. Proyek besar dipimpin ゼネコン, proyek kecil oleh 工務店. Mandor:「ゼネコンの現場監督の指示に従ってくれよ」(ikuti instruksi site supervisor dari GC)."
+  },
+  {
+    "id": 573,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "はっちゅうしゃ",
+    "jp": "発注者（はっちゅうしゃ）",
+    "romaji": "hacchuusha",
+    "id_text": "Pihak pemberi order konstruksi (klien)",
+    "desc": "Pihak yang memesan pekerjaan konstruksi (klien/owner). Bisa berupa kementerian, pemda, perusahaan swasta, atau perorangan. Mandor:「発注者の要求に応えるのが私たちの仕事だ」(memenuhi kebutuhan klien adalah pekerjaan kita)."
+  },
+  {
+    "id": 574,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "かんりしゃ",
+    "jp": "監理者（かんりしゃ）",
+    "romaji": "kanrisha",
+    "id_text": "Pengawas konstruksi — memeriksa kesesuaian gambar",
+    "desc": "Teknisi yang memastikan pekerjaan sesuai gambar/blueprint. Posisi terpisah dari 設計者 maupun 現場監督. Mandor:「監理者から指摘があったらすぐ俺に報告してくれ」(ada koreksi dari pengawas, langsung lapor ke saya)."
+  },
+  {
+    "id": 575,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "せっけいしゃ",
+    "jp": "設計者（せっけいしゃ）",
+    "romaji": "sekkeisha",
+    "id_text": "Perancang / Desainer — membuat dokumen desain",
+    "desc": "Teknisi yang membuat dokumen desain untuk mewujudkan permintaan klien. Semua pekerjaan wajib sesuai 設計図書. Mandor:「図面に疑問があったら勝手に変えるな、確認が必要だ」(pertanyaan soal gambar, jangan ubah sendiri)."
+  },
+  {
+    "id": 576,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "ぜんこん",
+    "jp": "ゼネコン（工事全体をまとめる会社）",
+    "romaji": "zenkon",
+    "id_text": "General Contractor — perusahaan pemimpin proyek",
+    "desc": "Singkatan General Contractor; mengelola semua 専門工事業者 sebagai 元請け di proyek besar. Mandor:「ゼネコンからの指示は最優先で対応してくれよ」(instruksi dari general contractor diutamakan)."
+  },
+  {
+    "id": 577,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "げんばかんとく",
+    "jp": "現場監督（げんばかんとく）",
+    "romaji": "genba kantoku",
+    "id_text": "Pengawas lapangan (site supervisor)",
+    "desc": "Teknisi yang mengawasi pekerjaan di lokasi konstruksi. Berkoordinasi dengan 職長 yang meneruskan instruksi ke 技能者. Mandor:「今日の指示は朝のミーティングでもらうぞ」(instruksi hari ini dari site supervisor setiap pagi)."
+  },
+  {
+    "id": 578,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "せんもんこうじぎょうしゃ",
+    "jp": "専門工事業者（せんもんこうじぎょうしゃ）",
+    "romaji": "senmon kouji gyousha",
+    "id_text": "Kontraktor spesialis per jenis pekerjaan",
+    "desc": "Kontraktor spesialis yang menerima subkontrak dari ゼネコン. Contoh: 鉄筋工事, 型枠工事, とび工事. Mandor:「うちは配管専門だ、他の工事に口を出すな」(kita spesialis pipa, jangan ikut campur pekerjaan lain)."
+  },
+  {
+    "id": 579,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "しょくちょう",
+    "jp": "職長（しょくちょう）",
+    "romaji": "shokuchou",
+    "id_text": "Mandor / Foreman — pemimpin langsung pekerja",
+    "desc": "Pemimpin langsung pekerja; menerima instruksi dari 現場監督 dan meneruskan ke 技能者. CCUS Lv3=シルバー setara 職長. Mandor:「作業中に疑問があれば、まず俺に聞けよ」(ada pertanyaan saat kerja, tanya ke saya dulu)."
+  },
+  {
+    "id": 580,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "ぎのうしゃ",
+    "jp": "技能者（ぎのうしゃ）",
+    "romaji": "ginousha",
+    "id_text": "Pekerja terampil / Skilled worker",
+    "desc": "Pekerja yang memiliki keahlian teknis di bidang konstruksi. CCUS Lv1=初級, Lv2=一人前, Lv3=職長級, Lv4=マネジメント. Mandor:「CCUSのレベルを上げたいなら資格を取れよ」(mau naik level CCUS, ambil sertifikat adalah cara terbaik)."
+  },
+  {
+    "id": 581,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "せしゅ",
+    "jp": "施主（せしゅ）",
+    "romaji": "seshu",
+    "id_text": "Pemilik bangunan / klien pada proyek kecil",
+    "desc": "Pihak yang memesan bangunan untuk dibangun; istilah khas proyek kecil seperti rumah tinggal. Di proyek besar disebut 発注者. Mandor:「施主さんの要望を最優先に作業してくれよ」(utamakan keinginan pemilik rumah)."
+  },
+  {
+    "id": 582,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "こうむてん",
+    "jp": "工務店（こうむてん）",
+    "romaji": "koumuten",
+    "id_text": "Kontraktor lokal kecil untuk proyek rumah tinggal",
+    "desc": "Kontraktor kecil untuk proyek rumah tinggal, bertindak sebagai 元請け dari 施主. Mengelola berbagai 専門工事業者. Mandor:「近隣への挨拶も大事な仕事だ、忘れるな」(menyapa tetangga sekitar juga bagian dari pekerjaan kita)."
+  },
+  {
+    "id": 583,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "もとうけ",
+    "jp": "元請け（もとうけ）",
+    "romaji": "motouke",
+    "id_text": "Kontraktor utama (prime contractor)",
+    "desc": "Pihak yang menerima kontrak langsung dari klien lalu memberi subkontrak ke spesialis. Proyek besar=ゼネコン, proyek kecil=工務店. Mandor:「元請けから指示が来たら最優先で動けよ」(instruksi dari kontraktor utama, gerak cepat)."
+  },
+  {
+    "id": 584,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "CCUSひょうかのさんきじゅん",
+    "jp": "CCUS評価の3基準",
+    "romaji": "CCUS hyouka no 3 kijun",
+    "id_text": "3 kriteria CCUS: pengalaman/sertifikat/manajerial",
+    "desc": "Tiga kriteria evaluasi CCUS: ①hari kerja tercatat ②lisensi/sertifikat ③kemampuan manajerial. Level 2 butuh ≥645 hari. Mandor:「経験と資格を積んでCCUSレベルを上げろよ」(akumulasikan pengalaman dan sertifikat)."
+  },
+  {
+    "id": 585,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "しんきにゅうじょうしゃ",
+    "jp": "新規入場者（しんきにゅうじょうしゃ）",
+    "romaji": "shinki nyuujousha",
+    "id_text": "Pekerja baru yang pertama masuk lokasi konstruksi",
+    "desc": "Pekerja yang baru pertama kali masuk lokasi konstruksi tertentu. Saat 全体朝礼 wajib sebut nama dan perusahaan dengan suara keras. Mandor:「名前と会社を大声で言えよ」(ucapkan nama dan perusahaan dengan keras di apel)."
+  },
+  {
+    "id": 586,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "あんぜんしょうわたちあんどこおる",
+    "jp": "安全唱和・タッチアンドコール（あんぜんしょうわ）",
+    "romaji": "anzen shouwa / tatchi ando kooru",
+    "id_text": "Seruan keselamatan bersama + Touch-and-Call",
+    "desc": "Seruan keselamatan dan tumpuk tangan bersama di apel per jenis pekerjaan. Semua anggota menunjuk dan berseru untuk bangun kesatuan. Mandor:「全員で指差しして、ゼロ災で行こう、ヨシ！と言えよ」(semua tunjuk dan berseru bersama)."
+  },
+  {
+    "id": 587,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "ぜろさいでいこうよし",
+    "jp": "ゼロ災で行こう、ヨシ！！",
+    "romaji": "zero sai de ikou, yoshi!!",
+    "id_text": "\"Zero kecelakaan, maju! Oke!!\" — slogan apel K3",
+    "desc": "Slogan 安全唱和 yang diucapkan sambil 指さし saat apel per jenis pekerjaan. Diakhiri seruan keras ヨシ!! untuk membangun kesatuan tim. Mandor:「全員で声を合わせて、ゼロ災で行こう、ヨシ！！」(serentak berseru bersama)."
+  },
+  {
+    "id": 588,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "かつどうすてっぷ",
+    "jp": "KY活動の4ステップ",
+    "romaji": "KY katsudou 4 suteppu",
+    "id_text": "4 langkah KY: bahaya → solusi → target → serukan",
+    "desc": "4 langkah KY活動: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target ④指差呼称 bersama \"○○○、ヨシ！\". Mandor:「KY活動は4ステップちゃんとやってくれよ」(lakukan KY活動 lengkap 4 langkah)."
+  },
+  {
+    "id": 589,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "ぼおどきけんよちかつどうひょう",
+    "jp": "KYボード（危険予知活動表）",
+    "romaji": "KY boodo / kiken yochi katsudou hyou",
+    "id_text": "Formulir KY — lembar kegiatan prediksi bahaya",
+    "desc": "Formulir yang diisi saat KY活動: kolom titik bahaya dan solusi tim. Semua anggota 指差呼称 ke papan ini sambil berseru \"○○○、ヨシ！\". Mandor:「KYボードはちゃんと記入してから貼り出せよ」(isi KY board dengan benar sebelum dipasang)."
+  },
+  {
+    "id": 590,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "ぜんたいちょれいのこうもく",
+    "jp": "全体朝礼の6項目",
+    "romaji": "zentai chorei no 6 koumoku",
+    "id_text": "6 agenda apel pagi umum",
+    "desc": "Apel umum dengan 6 agenda: sapaan, senam radio, konfirmasi kerja, KY, cek keselamatan berpasangan, lalu \"ご安全に!\". Dipimpin 現場監督. Mandor:「全体朝礼は全員参加が基本だぞ」(apel pagi wajib dihadiri semua)."
+  },
+  {
+    "id": 591,
+    "category": "gaiyou",
+    "source": "jac-ch1",
+    "furi": "あんぜんかくにんこうもく",
+    "jp": "安全確認の8項目",
+    "romaji": "anzen kakunin 8 koumoku",
+    "id_text": "8 item cek keselamatan berpasangan di akhir apel",
+    "desc": "Di akhir 全体朝礼, 2人1組 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali helm/seragam+nama. Mandor:「二人一組で確認し合うのが決まりだぞ」(konfirmasi berpasangan adalah aturannya)."
+  },
+  {
+    "id": 592,
+    "category": "career",
+    "source": "jac-ch1",
+    "furi": "いったいかん",
+    "jp": "一体感（いったいかん）",
+    "romaji": "ittaikan",
+    "id_text": "Rasa kesatuan tim di lokasi konstruksi",
+    "desc": "Rasa kesatuan yang terbentuk dari pekerja berbagai bidang yang bekerja sama. Dibangun melalui sapaan, apel, dan seruan keselamatan. Mandor:「現場はチームワークが大事だ、他の職種にも挨拶しろよ」(sapa juga pekerja bidang lain)."
+  },
+  {
+    "id": 618,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ぱわあはらすめんとぼうしほうろうどうしさくそうごうすいしんほう",
+    "jp": "パワハラ防止法",
+    "romaji": "pawaa harasumento boushi hou (roudou shisaku sougou suishin hou)",
+    "id_text": "UU Anti-Harassment: kewajiban buat kebijakan",
+    "desc": "UU yang mewajibkan perusahaan buat kebijakan anti-パワハラ dan sediakan loket konsultasi. Berbeda dari sekedar definisi パワハラ. Mandor:「困ったら相談窓口を使えよ、会社が対処する」(kalau ada masalah, gunakan loket konsultasi)."
+  },
+  {
+    "id": 619,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ねんじゆうきゅうきゅうかのふよてえぶる",
+    "jp": "年次有給休暇の付与テーブル",
+    "romaji": "nenji yuukyuu kyuuka no fuyo teeburu",
+    "id_text": "Tabel cuti: syarat 6 bln kerja + hadir ≥80%",
+    "desc": "Syarat: kerja ≥6 bulan + hadir ≥80%. Tabel: 0.5th→10hr, 1.5th→11hr ... ≥6.5th→20hr (maks). Diatur 労働基準法. Mandor:「6ヶ月経ったら有給が10日使えるぞ」(setelah 6 bulan, bisa pakai 10 hari cuti berbayar)."
+  },
+  {
+    "id": 620,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "あんぜんえいせいきょういくのとりがあやといいれじさぎょうないようへんこうじ",
+    "jp": "安全衛生教育の2トリガー",
+    "romaji": "anzen eisei kyouiku no 2 torigaa: yatoiire ji / sagyou naiyou henkou ji",
+    "id_text": "2 wajib K3: saat rekrut + ganti isi pekerjaan",
+    "desc": "Pendidikan K3 wajib dua kali: ①saat rekrut baru ②saat isi pekerjaan berubah. Pekerjaan khusus butuh pelatihan tambahan. Mandor:「作業内容が変わったらK3教育をするぞ」(isi pekerjaan berubah, wajib pendidikan K3 dulu)."
+  },
+  {
+    "id": 621,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ろうどうしゃのせきむろうどうあんぜんえいせいほう",
+    "jp": "労働者の責務（ろうどうしゃのせきむ）",
+    "romaji": "roudousha no sekimu — roudou anzen eisei hou",
+    "id_text": "Kewajiban PEKERJA menurut UU K3",
+    "desc": "UU K3 tidak hanya mengatur pengusaha — pekerja juga wajib mematuhi aturan K3. Mengabaikan APD pun bisa dipersalahkan. Mandor:「安全ルールを守るのは労働者の義務でもあるんだ」(mematuhi K3 adalah kewajiban pekerja juga)."
+  },
+  {
+    "id": 622,
+    "category": "anzen",
+    "source": "jac-ch2",
+    "furi": "あんぜんきあんぜんえいせいき",
+    "jp": "安全旗 vs 安全衛生旗",
+    "romaji": "anzen ki vs anzen eisei ki",
+    "id_text": "Bendera Keselamatan vs Bendera K3 — beda tujuan",
+    "desc": "安全旗: simbol 安全週間, dikibarkan hanya selama periode tersebut. 安全衛生旗: simbol K3 terpadu, dikibarkan permanen di lokasi. Mandor:「安全衛生旗は常に掲げておくものだよ」(安全衛生旗 harus selalu berkibar di lokasi kerja)."
+  },
+  {
+    "id": 623,
+    "category": "anzen",
+    "source": "jac-ch2",
+    "furi": "ろうさいしぼうげにんらんきんぐいれいわねんどけんせつぎょう",
+    "jp": "労災死亡原因ランキング5位（令和3年度・建設業）",
+    "romaji": "rousai shibou genin rankingu 5i — reiwa 3 nendo kensetsu gyou",
+    "id_text": "Top 5 penyebab kematian konstruksi 2021 + angka",
+    "desc": "令和3年度 288 kematian konstruksi: ①墜落転落=110件 ②崩壊倒壊=31件 ③はさまれ=27件 ④交通事故=25件 ⑤激突され=19件. Dasar kewajiban フルハーネス. Mandor:「墜落が一番多い、高所は絶対フルハーネスを使えよ」(di ketinggian wajib full harness)."
+  },
+  {
+    "id": 624,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんせつぎょうほうのいつつのもくてき",
+    "jp": "建設業法の5つの目的",
+    "romaji": "kensetsu gyou hou no itsutsu no mokuteki",
+    "id_text": "5 tujuan UU Industri Konstruksi",
+    "desc": "5 tujuan 建設業法: ①kualitas usaha ②kontrak layak ③pelaksanaan tepat ④perlindungan pemesan ⑤pengembangan industri. Mandor:「建設業法は俺たちを守るためにある」(UU Konstruksi ada untuk melindungi kita)."
+  },
+  {
+    "id": 625,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "けんちくきじゅんほうたんたいきていしゅうだんきてい",
+    "jp": "建築基準法：単体 vs 集団規定",
+    "romaji": "kenchiku kijun hou: tantai kitei vs shuudan kitei",
+    "id_text": "UU Bangunan: peraturan individu vs kawasan kota",
+    "desc": "単体規定: standar bangunan itu sendiri (keselamatan, tahan gempa, dll). 集団規定: standar kawasan perkotaan (KDB, KLB, tinggi). Mandor:「建ぺい率と容積率は図面で確認してくれよ」(KDB dan KLB wajib dicek di gambar)."
+  },
+  {
+    "id": 626,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "はいきぶものしょりほうさんぎょうはいきぶものしゅうりょううんぱんきょかもとうけしたうけせきにんぶんたん",
+    "jp": "廃棄物処理法：産廃と責任分担",
+    "romaji": "haikibumono shori hou: sangyou haikibumono shuuryou unpan kyoka + motouke shitauke sekinin buntan",
+    "id_text": "UU Limbah: izin angkut + tanggung jawab kontraktor",
+    "desc": "Pengangkutan limbah industri butuh izin resmi. Kontraktor utama wajib buat manifest; sub-kontraktor bertanggung jawab penyimpanan. Mandor:「産廃は許可業者しか運べない、分別して保管して」(simpan sesuai jenis)."
+  },
+  {
+    "id": 627,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "げすいどうほうきんしはいすいのりゆうこうじげんばのはいすいしゅるい",
+    "jp": "下水道法：禁止排水の6理由 + 工事現場の排水種類",
+    "romaji": "gesuidou hou: kinshi haisui no 6 riyuu + kouji genba no haisui shurui",
+    "id_text": "UU Saluran Pembuangan: 6 larangan buang",
+    "desc": "6 alasan larangan buang ke saluran: merusak pipa, gas beracun, sumbat pipa, bahaya pekerja, ganggu pengolahan, sulit olah lumpur. Air beton wajib dinetralkan. Mandor:「コンクリートの排水は中和処理してから流してくれよ」."
+  },
+  {
+    "id": 710,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "しょくぎょうのうりょくかいはつそくしんほう",
+    "jp": "職業能力開発促進法（技能検定）",
+    "romaji": "shokugyou nouryoku kaihatsu sokushin hou",
+    "id_text": "UU Pengembangan Kemampuan Kerja",
+    "desc": "UU yang meningkatkan kemampuan kerja melalui pelatihan dan sertifikasi. Lulus 技能検定 → dapat 合格証書 dan boleh sebut diri 技能士. Mandor:「技能士の資格を取れば手当もつくし、CCUSも上がるぞ」(sertifikat, ada tunjangan dan CCUS naik)."
+  },
+  {
+    "id": 712,
+    "category": "hourei",
+    "source": "jac-ch2",
+    "furi": "ほうていろうどうじかん",
+    "jp": "法定労働時間（週40時間・1日8時間）",
+    "romaji": "houtei roudou jikan",
+    "id_text": "Jam kerja legal",
+    "desc": "Jam kerja legal: max 8 jam/hari & 40 jam/minggu. Lembur butuh 36協定 dan dibayar upah tambahan: biasa +25%, libur +35%, malam +25%. Mandor:「8時間超えたら必ず記録してくれよ」(catat kalau lebih 8 jam)."
+  }
+]

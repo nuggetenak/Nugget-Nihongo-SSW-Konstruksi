@@ -1,0 +1,1402 @@
+[
+  {
+    "id": 47,
+    "category": "doboku_hoso",
+    "source": "jac-ch4",
+    "furi": "てんあつ",
+    "jp": "転圧（てんあつ）",
+    "romaji": "ten'atsu",
+    "id_text": "Pemadatan dengan roller",
+    "desc": "Proses memadatkan tanah/aspal menggunakan roller. Digunakan dalam pekerjaan perkerasan jalan (舗装工事)."
+  },
+  {
+    "id": 49,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "やりかたみずぬきみずもり",
+    "jp": "遣り方（やりかた）・水貫・水盛り",
+    "romaji": "yarikata / mizunuki / mizumori",
+    "id_text": "Setting out bangunan — tiang & papan referensi",
+    "desc": "遣り方: rangka sementara tiang kayu + papan horizontal (水貫) untuk menentukan posisi & ketinggian bangunan. Di sipil disebut '丁張り'."
+  },
+  {
+    "id": 60,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "あっちゃくたんし",
+    "jp": "圧着端子",
+    "romaji": "acchaku tanshi",
+    "id_text": "Terminal crimping",
+    "desc": "Terminal untuk menghubungkan kabel listrik ke peralatan. Dikencangkan dengan memberikan tekanan (crimping)."
+  },
+  {
+    "id": 81,
+    "category": "tsushin",
+    "source": "jac-ch4",
+    "furi": "きょうどうこう",
+    "jp": "共同溝（きょうどうこう）",
+    "romaji": "kyoudoukou",
+    "id_text": "Terowongan utilitas bersama (common utility duct)",
+    "desc": "Saluran bawah tanah besar yang menampung BERBAGAI jenis kabel/pipa utilitas sekaligus (listrik, komunikasi, dll). Berbeda dari 管路 (kanro) yang menghubungkan manhole satu ke lainnya."
+  },
+  {
+    "id": 126,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "すぼり",
+    "jp": "素掘り（すぼり）",
+    "romaji": "subori",
+    "id_text": "Penggalian tanpa penahan (open cut)",
+    "desc": "Penggalian TANPA 土留め, diperbolehkan HANYA jika tanah benar-benar stabil. Berbeda dari galian ≥1.5m yang WAJIB pakai 土留め."
+  },
+  {
+    "id": 146,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ろくずみにげすみじずみ",
+    "jp": "墨出し用語：陸墨・逃げ墨・地墨",
+    "romaji": "rokuzumi / nigesumi / jizumi",
+    "id_text": "Tinta horizontal / tinta geser / tinta lantai",
+    "desc": "①陸墨: garis referensi HORIZONTAL (ketinggian). ②逃げ墨: garis yang dipindah dari posisi asli karena terhalang. ③地墨: garis ditandai langsung di LANTAI."
+  },
+  {
+    "id": 147,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "べんちまーく",
+    "jp": "ベンチマーク（BM）・GL・FL",
+    "romaji": "BM / GL / FL",
+    "id_text": "BM = benchmark / GL = ground / FL = floor",
+    "desc": "BM: titik referensi ketinggian di lokasi. GL: ketinggian permukaan tanah. FL: ketinggian lantai jadi (1FL, 2FL, ...)."
+  },
+  {
+    "id": 148,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "とおりしんかべしんはしらしん",
+    "jp": "通り芯（とおりしん）・壁芯・柱芯",
+    "romaji": "toori shin / kabe shin / hashira shin",
+    "id_text": "Garis sumbu tengah — dinding dan kolom",
+    "desc": "通り芯: center line. 壁芯: center line dinding. 柱芯: center line kolom. Acuan penandaan posisi di lokasi."
+  },
+  {
+    "id": 250,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "たてずみしあげずみ",
+    "jp": "立て墨（たてずみ）・仕上げ墨（しあげずみ）",
+    "romaji": "tate zumi / shiage zumi",
+    "id_text": "Garis referensi vertikal / Garis dimensi finishing",
+    "desc": "立て墨=garis vertikal di dinding/kolom. 仕上げ墨=referensi dimensi finishing dari sumbu/permukaan struktural. Mandor:「立て墨と仕上げ墨の位置を確認して」."
+  },
+  {
+    "id": 251,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "おやずみ",
+    "jp": "親墨（おやずみ）",
+    "romaji": "oya zumi",
+    "id_text": "Garis induk / garis referensi utama",
+    "desc": "Garis referensi utama seperti 通り芯 (sumbu kolom/dinding) dan 陸墨 (horizontal) yang menjadi DASAR untuk pekerjaan墨出し di tahap berikutnya. Disebut 'induk' karena semua garis lain diturunkan dari sini."
+  },
+  {
+    "id": 252,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "かねをふるすみつけ",
+    "jp": "矩を振る（かねをふる）・墨付け（すみつけ）",
+    "romaji": "kane wo furu / sumitsuke",
+    "id_text": "Buat sudut 90° / penandaan kayu untuk dipotong",
+    "desc": "矩を振る=membuat garis sudut 90° di tahap 墨出し. 墨付け=memberi tanda pengerjaan pada kayu struktural. Mandor:「矩と墨付けを正確にやれ」."
+  },
+  {
+    "id": 253,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "きじゅんずみ",
+    "jp": "基準墨（きじゅんずみ）",
+    "romaji": "kijun zumi",
+    "id_text": "Garis referensi dasar bangunan",
+    "desc": "Garis lurus horizontal/vertikal yang menjadi standar utama saat mendirikan bangunan. Dari garis ini, 通り芯 (sumbu kolom/dinding) diturunkan. Dibuat menggunakan墨つぼ tradisional atau laser墨出し器."
+  },
+  {
+    "id": 254,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "じなわばりみずいと",
+    "jp": "地縄張り（じなわばり）・水糸（みずいと）",
+    "romaji": "jinawabari / mizuito",
+    "id_text": "Penandaan pondasi di tanah / benang referensi",
+    "desc": "地縄張り=menandai posisi pondasi di tanah dengan tali. 水糸=benang horizontal direntangkan antar papan 水貫 sebagai referensi sumbu bangunan. Mandor:「地縄と水糸を確認してから掘れ」."
+  },
+  {
+    "id": 255,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "たかさきごう",
+    "jp": "FH・SL・CH（高さ記号）",
+    "romaji": "FH / SL / CH",
+    "id_text": "FH = tinggi tanah / SL = slab / CH = plafon",
+    "desc": "FH=Formation Height (tinggi tanah rencana). SL=Slab Level (tinggi permukaan slab). CH=Ceiling Height (jarak FL ke plafon). Melengkapi GL/FL/BM. Mandor:「FHとSLとCHを図面で確認して」."
+  },
+  {
+    "id": 256,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "もりどだんぎり",
+    "jp": "盛り土（もりど）・段切り（だんきり）",
+    "romaji": "morido / dangiri",
+    "id_text": "Timbunan tanah / Pemotongan tangga pada lereng",
+    "desc": "盛り土 = menimbun tanah untuk meratakan lahan yang tidak rata atau miring. 段切り = memotong lahan miring secara bertingkat seperti tangga sebelum menimbun, agar timbunan tidak longsor."
+  },
+  {
+    "id": 257,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "ねきりよぼりすきとりとこづけ",
+    "jp": "根切り・余堀り・鋤取り・床付け",
+    "romaji": "nekiri / yobori / sukitori / tokoduke",
+    "id_text": "Galian pondasi, galian lebih, perataan, dasar",
+    "desc": "根切り=gali hingga kedalaman pondasi. 余堀り=galian lebih untuk ruang kerja. 鋤取り=ratakan dasar. 床付け=finishing dasar secara presisi. Mandor:「床付けは丁寧にやれよ」."
+  },
+  {
+    "id": 258,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "うめもどしつきがためみずしめ",
+    "jp": "埋め戻し・突き固め・水締め",
+    "romaji": "umemodoshi / tsukigatame / mizushime",
+    "id_text": "Urugan balik / pemadatan manual / dengan air",
+    "desc": "埋め戻し=isi kembali tanah setelah pekerjaan bawah tanah. 突き固め=padatkan dengan ランマ. 水締め=tuang air sambil memadatkan. Mandor:「しっかり締め固めてくれ」."
+  },
+  {
+    "id": 259,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ようへきやいたこうやいた",
+    "jp": "擁壁・矢板・鋼矢板",
+    "romaji": "youheki / yaita / kou yaita",
+    "id_text": "Dinding penahan tanah / papan turap / turap baja",
+    "desc": "擁壁=dinding penahan tanah. 矢板=papan penahan tanah. 鋼矢板=turap baja ujung alur sehingga bisa saling mengunci. Mandor:「鋼矢板の継ぎ目を確認して」."
+  },
+  {
+    "id": 260,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "のりめんじやまやまがくるやまどめ",
+    "jp": "法面・地山・山がくる・山留め",
+    "romaji": "norimen / jiyama / yama ga kuru / yamadome",
+    "id_text": "Lereng galian / tanah alami / longsor / penahan",
+    "desc": "法面=permukaan miring galian. 地山=tanah kondisi alami. 山がくる=lereng LONGSOR — BAHAYA! 山留め=menahan tanah agar tidak runtuh. Mandor:「山留めが変形したらすぐ報告して」."
+  },
+  {
+    "id": 261,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "かまばみずかえまんぼう",
+    "jp": "釜場・水替え・万棒",
+    "romaji": "kamaba / mizukae / manbou",
+    "id_text": "Lubang pompa / pemompaan galian / hitungan masuk",
+    "desc": "釜場=lubang di dasar galian tempat pompa dipasang. 水替え=pompa air yang menggenang. 万棒=hitung jumlah truk/orang yang masuk lokasi. Mandor:「釜場のポンプを動かしておけよ」."
+  },
+  {
+    "id": 262,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "じぎょうべたきそふうちんぐくいきそ",
+    "jp": "地業・ベタ基礎・フーチング・杭基礎",
+    "romaji": "jigyou / beta kiso / fuuchingu / kui kiso",
+    "id_text": "Pekerjaan pondasi / 3 jenis pondasi utama",
+    "desc": "地業=pekerjaan di bawah slab pondasi. ベタ基礎=cor beton seluruh dasar. フーチング=hanya di titik beban. 杭基礎=pondasi tiang di tanah lunak. Mandor:「転圧後に捨てコンを打てよ」."
+  },
+  {
+    "id": 263,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "すらぶ",
+    "jp": "スラブ（構造スラブ・基礎スラブ・フラットスラブ）",
+    "romaji": "surabu",
+    "id_text": "Slab (pelat lantai/pondasi/tanpa balok)",
+    "desc": "スラブ = pelat datar pada bangunan (lantai, pondasi, dll). 構造スラブ = slab yang menopang bangunan. 基礎スラブ = slab di bagian pondasi. フラットスラブ = slab tanpa balok (梁なし)."
+  },
+  {
+    "id": 264,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "きそめんしん",
+    "jp": "基礎免振（きそめんしん）",
+    "romaji": "kiso menshin",
+    "id_text": "Isolasi seismik pada pondasi",
+    "desc": "Sistem yang menyerap gaya horizontal gempa sehingga getaran berkurang sebelum masuk bangunan. Dipasang antara tanah dan pondasi. Mandor:「免振の点検は専門業者に任せてくれよ」."
+  },
+  {
+    "id": 265,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "あしばのしゅるいわくぐみたんかんくさびきんけつしき",
+    "jp": "足場の種類：枠組み・単管・くさび",
+    "romaji": "ashiba no shurui: wakugumi / tankan / kusabi kinketsu shiki",
+    "id_text": "Jenis perancah: rangka / pipa tunggal / pasak",
+    "desc": "枠組み=rangka prefabrikasi. 単管=pipa tunggal, fleksibel. くさび緊結式=dikunci pasak, kuat dan cepat. Mandor:「足場の種類は作業内容に合わせて選んでくれ」."
+  },
+  {
+    "id": 266,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "さぎょうゆかかりがこい",
+    "jp": "作業床（さぎょうゆか）・仮囲い（かりがこい）",
+    "romaji": "sagyouyuka / karigakoi",
+    "id_text": "Lantai kerja (perancah) / Pagar sementara lokasi",
+    "desc": "作業床=lantai perancah dari papan tempat pekerja berdiri. 仮囲い=pagar sementara lokasi dari jalan/lahan tetangga. Mandor:「作業床の隙間と仮囲いの固定を確認しろよ」."
+  },
+  {
+    "id": 267,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "はいきんかんかくあき",
+    "jp": "配筋・間隔（かんかく）・あき",
+    "romaji": "haikin / kankaku / aki",
+    "id_text": "Pemasangan tulangan / jarak as-as / jarak bersih",
+    "desc": "配筋=mengatur dan merakit besi tulangan. 間隔=jarak center-to-center. あき=jarak BERSIH antar tulangan. Wajib dipenuhi sesuai standar. Mandor:「あきと間隔を図面通りに確認して」."
+  },
+  {
+    "id": 268,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "かぶりあつさ",
+    "jp": "かぶり厚さ",
+    "romaji": "kaburi atsusa",
+    "id_text": "Selimut beton (jarak tulangan ke permukaan beton)",
+    "desc": "Jarak antara permukaan LUAR besi tulangan ke permukaan beton yang menutupinya. Harus cukup tebal untuk melindungi tulangan dari korosi dan api. Termasuk hal yang selalu dicek dalam inspeksi kualitas."
+  },
+  {
+    "id": 269,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "すてこんくりいとすてこん",
+    "jp": "捨てコンクリート（すてコン）",
+    "romaji": "sute konkuriito (sute kon)",
+    "id_text": "Beton lantai kerja (beton lean/blinding)",
+    "desc": "Beton tipis 5–10 cm dicor di atas 地業 sebelum tulangan dan bekisting dipasang. Membuat referensi ketinggian akurat dan permukaan rata. Mandor:「捨てコンの墨出しをしっかりやってくれ」."
+  },
+  {
+    "id": 270,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "けっそくはっかあ",
+    "jp": "結束（けっそく）・ハッカー",
+    "romaji": "kessoku / hakkaa",
+    "id_text": "Pengikatan tulangan / Alat pengikat kawat besi",
+    "desc": "結束=mengikat persilangan tulangan dengan kawat 結束線 menggunakan ハッカー. Cara ikat: たすき掛け atau 片だすき. Mandor:「ハッカーの使い方を覚えてくれよ」."
+  },
+  {
+    "id": 271,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "うちかさねうちつぎこおるどじょいんと",
+    "jp": "打ち重ね vs 打ち継ぎ",
+    "romaji": "uchi kasane vs uchitsugi / koorudo jointo",
+    "id_text": "Pengecoran di atas beton belum/sudah keras",
+    "desc": "打ち重ね=cor di atas beton BELUM keras; batas 150mnt (<25°C) atau 120mnt (≥25°C). Terlambat→コールドジョイント. 打ち継ぎ=cor di atas SUDAH keras. Mandor:「時間を守って打ち重ねろ」."
+  },
+  {
+    "id": 272,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "ぱんくかたわくほうかい",
+    "jp": "パンク（型枠崩壊）",
+    "romaji": "panku (kata waku houkai)",
+    "id_text": "Pecahnya bekisting akibat tekanan beton",
+    "desc": "Bekisting pecah saat pengecoran karena 支保工 tidak kuat sehingga beton mengalir keluar. Berbahaya dan menyebabkan pemborosan besar. Mandor:「パンクしたらすぐ作業を止めて報告しろよ」."
+  },
+  {
+    "id": 273,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "おさまりとりあい",
+    "jp": "納まり（おさまり）・取合い（とりあい）",
+    "romaji": "osamari / toriai",
+    "id_text": "Kerapian pemasangan / pertemuan dua elemen berbeda",
+    "desc": "納まり=keserasian tata letak elemen. 取合い=pertemuan dua elemen berbeda. Keduanya sering digunakan bersamaan. Mandor:「取合いの納まりが悪いから直してくれ」."
+  },
+  {
+    "id": 274,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "つらいちふろくめちがい",
+    "jp": "面一・不陸・目違い",
+    "romaji": "tsura ichi / furoku / mechigai",
+    "id_text": "Rata sejajar / tidak rata / tepi tak sejajar",
+    "desc": "面一(つらいち)=dua permukaan dalam satu bidang rata. 不陸=permukaan bergelombang. 目違い=sambungan tile/papan yang tidak sejajar. Mandor:「面一になってるか確認してくれよ」."
+  },
+  {
+    "id": 275,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "だめてなおしてもどりだんどり",
+    "jp": "駄目・手直し・手戻り・段取り",
+    "romaji": "dame / tenaoshi / temodori / dandori",
+    "id_text": "Pekerjaan sisa / koreksi / ulang / urutan kerja",
+    "desc": "駄目=pekerjaan terlewat saat hampir finishing. 手直し=koreksi sebagian. 手戻り=mengulang pekerjaan (buang waktu). 段取り=rencanakan urutan kerja. Mandor:「段取りして手戻りを減らせよ」."
+  },
+  {
+    "id": 276,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "たっぱうわばしたば",
+    "jp": "建端（たっぱ）・上端・下端",
+    "romaji": "tappa / uwaba / shitaba",
+    "id_text": "Tinggi elemen / ujung atas / ujung bawah elemen",
+    "desc": "建端(たっぱ)=tinggi elemen. 上端=tepi atas elemen. 下端=tepi bawah elemen. Digunakan saat memberi instruksi pemasangan di lapangan. Mandor:「上端と下端の位置を確認してから取り付けて」."
+  },
+  {
+    "id": 277,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "いっけんいっしゃくいっすんひとつぼ",
+    "jp": "一間・一尺・一寸・一坪",
+    "romaji": "ikken / isshaku / issun / hitotsubo",
+    "id_text": "1 ken≈1.8m / 1 shaku≈30cm / 1 tsubo≈3.3m²",
+    "desc": "Satuan lama yang masih dipakai: 1間≈1.818m, 1尺≈30.3cm, 1寸≈3.03cm. 1坪=1間×1間≈3.3m². Muncul dalam gambar tradisional. Mandor:「この部屋は3坪くらいだ」."
+  },
+  {
+    "id": 278,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ぴっち",
+    "jp": "ピッチ（割り付けの間隔）",
+    "romaji": "picchi",
+    "id_text": "Jarak pemasangan berulang / pitch antar elemen",
+    "desc": "Jarak antara elemen yang dipasang berulang: tulangan, baut, atau tile. Lebih umum dari 間隔. Contoh: ピッチ200mm. Mandor:「ピッチ200ミリで正確に並べてくれ」."
+  },
+  {
+    "id": 279,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "ぞうぞうぞうもくぞう",
+    "jp": "RC造・S造・SRC造・木造",
+    "romaji": "RC zou / S zou / SRC zou / moku zou",
+    "id_text": "RC / S / SRC / kayu — 4 jenis struktur bangunan",
+    "desc": "RC造=beton bertulang. S造=baja. SRC造=baja+beton bertulang. 木造=kayu. Wajib dikenali untuk identifikasi pekerjaan SSW. Mandor:「この現場はRC造だから配筋が重要だ」."
+  },
+  {
+    "id": 280,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ぜつえんろうでんせっちああす",
+    "jp": "絶縁・漏電・接地・アース",
+    "romaji": "zetsuen / rouden / secchi / aasu",
+    "id_text": "Isolasi listrik / kebocoran arus / grounding",
+    "desc": "絶縁=cegah arus bocor. 漏電=arus bocor — bahaya! 接地(アース)=hubungkan ke tanah untuk cegah感電. Mandor:「アースが取れているか確認してくれよ」."
+  },
+  {
+    "id": 281,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "かくうはいせんまいせつはいせん",
+    "jp": "架空配線 vs 埋設配線",
+    "romaji": "kakuu haisen vs maisetsu haisen",
+    "id_text": "Kabel via tiang listrik vs ditanam di tanah",
+    "desc": "架空配線=kabel via tiang listrik ke gedung. 埋設=kabel ditanam di tanah; 3 cara: 管路式, 直接埋設式, とう道. Mandor:「埋設方式だから掘削に注意して」."
+  },
+  {
+    "id": 282,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "いんぺいはいかんろしゅつはいかん",
+    "jp": "隠ぺい配管 vs 露出配管",
+    "romaji": "inpei haikan vs roshutsu haikan",
+    "id_text": "Pipa tersembunyi di dinding/plafon vs terlihat",
+    "desc": "隠ぺい配管=pipa di dalam dinding, plafon, atau lantai. 露出配管=pipa tampak di permukaan. Pilihan tergantung estetika dan perawatan. Mandor:「この部屋は露出配管でいいから天井へ」."
+  },
+  {
+    "id": 283,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ていあつこうあつとくべつこうあつ",
+    "jp": "低圧・高圧・特別高圧（電圧の区分）",
+    "romaji": "teiatsu / kouatsu / tokubetsu kouatsu",
+    "id_text": "3 kelas tegangan listrik Jepang — batas DC & AC",
+    "desc": "低圧: DC≤750V, AC≤600V. 高圧: DC/AC 750V–7000V. 特別高圧: >7000V. Menentukan syarat kualifikasi pekerja listrik. Mandor:「高圧部分には絶対に触れるな」."
+  },
+  {
+    "id": 284,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ちょくりゅうこうりゅう",
+    "jp": "直流（DC）vs 交流（AC）",
+    "romaji": "chokuryuu (DC) vs kouryuu (AC)",
+    "id_text": "Arus searah vs Arus bolak-balik",
+    "desc": "直流(DC)=arus yang besar dan arahnya tidak berubah. 交流(AC)=arus yang berubah secara periodik. Listrik rumah tangga Jepang AC 100V. Mandor:「直流と交流を間違えないようにして」."
+  },
+  {
+    "id": 285,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "えむぢいえふ",
+    "jp": "MDF（通信分配盤）",
+    "romaji": "emudiiefu",
+    "id_text": "Panel distribusi utama telekomunikasi gedung",
+    "desc": "Papan distribusi yang mengelola saluran komunikasi dari luar gedung ke dalam. Semua jalur masuk ke MDF dulu sebelum didistribusikan. Mandor:「MDFの配線は図面通りにやってくれ」."
+  },
+  {
+    "id": 286,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "あいぢばあぱいぢこんるし",
+    "jp": "Φ（ファイ / パイ）",
+    "romaji": "fai (dibaca 'pai' di konstruksi)",
+    "id_text": "Simbol diameter — dibaca PAI di konstruksi Jepang",
+    "desc": "Φ=simbol diameter. Secara matematik dibaca ファイ(fai), namun di konstruksi Jepang dibaca パイ(pai). Contoh: Φ50パイプ=pipa diameter 50mm. Mandor:「このパイプ、パイ50だから間違えるな」."
+  },
+  {
+    "id": 287,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "つうでんあたるかしめるとぶおちる",
+    "jp": "通電・あたる・かしめる・飛ぶ/落ちる",
+    "romaji": "tsuuden / ataru / kashimeru / tobu/ochiru",
+    "id_text": "Ada arus / cek alat / crimp kabel / breaker trip",
+    "desc": "通電=arus aktif. あたる=cek dengan alat ukur. かしめる=crimp ujung kabel ke terminal. 飛ぶ/落ちる=breaker trip. Mandor:「ブレーカーが飛んだら原因確認してから復旧して」."
+  },
+  {
+    "id": 288,
+    "category": "setsubi_kougu",
+    "source": "jac-ch4",
+    "furi": "くうちょうかんきはいえん",
+    "jp": "空調・換気・排煙",
+    "romaji": "kuuchou / kanki / haien",
+    "id_text": "AC/ventilasi udara / sirkulasi / pembuangan asap",
+    "desc": "空調=mengatur suhu, kelembapan, dan kualitas udara. 換気=ganti udara kotor dengan segar. 排煙=keluarkan asap saat kebakaran — K3 wajib. Mandor:「排煙ダクトは図面通りにしてくれ」."
+  },
+  {
+    "id": 289,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "おすいざつはいすい",
+    "jp": "汚水（おすい）・雑排水（ざつはいすい）",
+    "romaji": "osui / zatsuhaisui",
+    "id_text": "Air limbah toilet / air limbah non-toilet",
+    "desc": "汚水=air buangan dari WC/toilet. 雑排水=air buangan dari kamar mandi, wastafel, dan dapur. Disalurkan terpisah sebelum diolah. Mandor:「汚水管と雑排水管を間違えないで接続してくれ」."
+  },
+  {
+    "id": 290,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "ろうえいしけんすいあつしけんまんすいしけん",
+    "jp": "漏洩試験（ろうえいしけん）：水圧試験・満水試験",
+    "romaji": "rouei shiken: suiatsu shiken / mansui shiken",
+    "id_text": "Uji kebocoran: uji tekanan air / uji penuh air",
+    "desc": "漏洩試験=uji kebocoran setelah pipa terpasang. 水圧試験=pipa suplai diberi tekanan. 満水試験=pipa drainase diisi penuh. Mandor:「試験前に全バルブを閉めてから加圧してくれ」."
+  },
+  {
+    "id": 291,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "らいにんぐぎゃくかんこうばい",
+    "jp": "ライニング・逆流・勾配",
+    "romaji": "rainingu / gyakukan / koubai",
+    "id_text": "Pelapisan pipa / aliran balik / kemiringan pipa",
+    "desc": "ライニング=melapisi permukaan dalam pipa pelindung. 逆流=cairan mengalir berlawanan arah. 勾配=kemiringan pipa agar air mengalir. Mandor:「勾配を確認してから配管固定してくれよ」."
+  },
+  {
+    "id": 292,
+    "category": "career",
+    "source": "jac-ch4",
+    "furi": "ほうれんそうほうこくれんらくそうだん",
+    "jp": "ほうれんそう（報告・連絡・相談）",
+    "romaji": "houren sou (houkoku / renraku / soudan)",
+    "id_text": "Laporan / Komunikasi / Konsultasi — 3 pilar kerja",
+    "desc": "ほうれんそう=報告 (lapor ke atasan), 連絡 (sampaikan info/jadwal), 相談 (konsultasikan masalah). Sampaikan singkat dan jelas. Mandor:「問題があったらすぐ相談してくれよ」."
+  },
+  {
+    "id": 293,
+    "category": "career",
+    "source": "jac-ch4",
+    "furi": "さぎょういんつめしょのるうる",
+    "jp": "作業員詰め所（さぎょういんつめしょ）のルール",
+    "romaji": "sagyouin tsumesho no ruuru",
+    "id_text": "Aturan di ruang pekerja/ganti lokasi konstruksi",
+    "desc": "作業員詰め所=ruang ganti/istirahat pekerja. Aturan: merokok di tempat khusus, ポイ捨て禁止, helm di tempat ditentukan, barang di loker, cuci tangan, cek 掲示板. Mandor:「詰め所のルールを守ってくれよ」."
+  },
+  {
+    "id": 294,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "みつけみえがかりみえかくれ",
+    "jp": "見付け・見え掛かり・見え隠れ",
+    "romaji": "mitsuke / miegakari / miekakure",
+    "id_text": "Tampak penuh / tampak sebagian / tampak bila gerak",
+    "desc": "見付け=permukaan yang sepenuhnya terlihat dari depan. 見え掛かり=tampak dari celah/sudut miring. 見え隠れ=tampak hanya saat sesuatu digeser. Mandor:「見付け部分は特に丁寧に仕上げてくれ」."
+  },
+  {
+    "id": 295,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "そりむくりろく",
+    "jp": "反り vs 起り・陸",
+    "romaji": "sori vs mukuri / roku",
+    "id_text": "Melengkung cekung / cembung / horizontal sempurna",
+    "desc": "反り(そり)=melengkung CEKUNG. 起り(むくり)=melengkung CEMBUNG. 陸(ろく)=horizontal sempurna; 陸屋根=atap datar. Mandor:「この面が反っているから直してくれよ」."
+  },
+  {
+    "id": 296,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ころびにげ",
+    "jp": "転び（ころび）・逃げ（にげ）",
+    "romaji": "korobi / nige",
+    "id_text": "Elemen miring dari vertikal / toleransi dimensi",
+    "desc": "転び=kolom/dinding yang seharusnya tegak namun miring. 拝む=bangunan yang miring. 逃げ=toleransi dimensi yang SENGAJA diambil untuk menyerap kesalahan. Mandor:「柱が転んでいるから修正してくれ」."
+  },
+  {
+    "id": 297,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "みきるみきりざえなじみ",
+    "jp": "見切る・見切り材・馴染み",
+    "romaji": "mikiru / mikirizable / najimi",
+    "id_text": "Selesaikan sambungan / penutup / kerapatan",
+    "desc": "見切る=selesaikan sambungan dua pekerjaan finishing. 見切り材=material penutup sambungan. 馴染み=kerapatan sambungan. Mandor:「見切り材の馴染みが悪いから直してくれ」."
+  },
+  {
+    "id": 298,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "べたふかし",
+    "jp": "ベタ・ふかし（ふかす）",
+    "romaji": "beta / fukashi (fukasu)",
+    "id_text": "Menutup seluruh permukaan / penebalan finishing",
+    "desc": "ベタ=menutupi seluruh permukaan tanpa celah (contoh: ベタ塗り). ふかし=finishing dibuat lebih tebal/maju dari desain awal. Mandor:「ここはふかして仕上げをそろえてくれ」."
+  },
+  {
+    "id": 299,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "とおりをみる",
+    "jp": "通り（とおり）を見る",
+    "romaji": "toori wo miru",
+    "id_text": "Mengecek kelurusan elemen",
+    "desc": "通り=kondisi lurus. 通りが悪い=bengkok. 通りを見る=memeriksa kelurusan dengan alat. Dipakai saat QC besi, dinding, kolom. Mandor:「柱の通りを見てくれよ、少し曲がってるぞ」."
+  },
+  {
+    "id": 300,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ひろいだし",
+    "jp": "拾い出し（ひろいだし）",
+    "romaji": "hiroi dashi",
+    "id_text": "Perhitungan kebutuhan material dari gambar",
+    "desc": "Proses membaca gambar kerja untuk menghitung jumlah material dan tenaga kerja. Mirip quantity take-off. Mandor:「拾い出しをしてから材料を発注してくれよ」."
+  },
+  {
+    "id": 301,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ばしょううちうつだせつする",
+    "jp": "場所打ち（ばしょうち）・打つ／打設する（だせつ）",
+    "romaji": "bashouuchi / utsu / dasetsu suru",
+    "id_text": "Pengecoran di lokasi / istilah menuang beton",
+    "desc": "場所打ち=beton yang dicor langsung di lokasi, bukan precast. 打つ/打設する=terminologi untuk menuang beton ke dalam bekisting. Mandor:「打設前に型枠を確認して」."
+  },
+  {
+    "id": 302,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "のろあんこ",
+    "jp": "ノロ・アンコ",
+    "romaji": "noro / anko",
+    "id_text": "Adukan semen encer / penyumbat sementara bekisting",
+    "desc": "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting. アンコ=pengisi di bekisting untuk membentuk cekungan. Mandor:「ノロが漏れないよう型枠を締めてくれ」."
+  },
+  {
+    "id": 303,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "てにょうくぎじまい",
+    "jp": "転用（てんよう）・釘仕舞",
+    "romaji": "tenyou / kugijimai",
+    "id_text": "Pemakaian ulang bekisting / pencabutan paku bekas",
+    "desc": "転用=memakai kembali bekisting di lokasi berbeda untuk hemat biaya. 釘仕舞=mencabut semua paku dari bekisting bekas agar bisa dipakai ulang. Mandor:「転用するなら釘仕舞をちゃんとやってくれ」."
+  },
+  {
+    "id": 304,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "はいごうねりまぜたんぴんぐ",
+    "jp": "配合・練り混ぜ・タンピング",
+    "romaji": "haigou / nerimaze / tanpingu",
+    "id_text": "Rasio campuran beton / pengadukan / pemadatan slab",
+    "desc": "配合=perbandingan semen, pasir, kerikil, air. 練り混ぜ=mencampur hingga merata. タンピング=ketuk permukaan slab agar padat. Mandor:「配合は設計通りにして、タンピングも忘れずに」."
+  },
+  {
+    "id": 305,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "あそびたてかみ",
+    "jp": "あそび・建込み（たてこみ）",
+    "romaji": "asobi / tatekami",
+    "id_text": "Kelonggaran sambungan / mendirikan bekisting tegak",
+    "desc": "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang. 建込み=mendirikan bekisting sesuai garis 墨出し dan dikunci pada posisi. Mandor:「建込みは墨に合わせてあそびを確認してくれ」."
+  },
+  {
+    "id": 306,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "はいせんりかくかんつう",
+    "jp": "配線・離隔・貫通",
+    "romaji": "haisen / rikaku / kantsuu",
+    "id_text": "Penarikan kabel / jarak pisah / melubangi dinding",
+    "desc": "配線=memasang dan merentangkan kabel. 離隔=jarak pemisahan wajib antar kabel berbeda jenis. 貫通=lubangi dinding/lantai untuk jalur kabel. Mandor:「離隔距離を守って配線してくれよ」."
+  },
+  {
+    "id": 307,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "つうせんはいかんするすらぶはいかんしこむ",
+    "jp": "通線・配管する・スラブ配管・仕込む",
+    "romaji": "tsuusen / haikan suru / surabu haikan / shikomu",
+    "id_text": "Tarik kabel / konduit / konduit slab / persiapan",
+    "desc": "通線=tarik kabel ke dalam konduit. 配管する=pasang konduit. スラブ配管=konduit ditanam dalam slab. 仕込む=persiapkan pekerjaan agar lancar. Mandor:「スラブ配管は打設前に仕込んでおいてくれ」."
+  },
+  {
+    "id": 308,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ひらいしんひらいき",
+    "jp": "避雷針 vs 避雷器",
+    "romaji": "hiraishin vs hiraiki",
+    "id_text": "Penangkal petir bangunan vs arrester alat",
+    "desc": "避雷針=perangkat di atap yang menangkap petir, alirkan arus ke tanah — lindungi BANGUNAN. 避雷器=lindungi PERALATAN dari lonjakan tegangan. Mandor:「避雷針と避雷器は違うから図面で確認してくれ」."
+  },
+  {
+    "id": 309,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ひふくいちじがわにじがわ",
+    "jp": "被覆・一次側・二次側",
+    "romaji": "hifuku / ichijigawa / nijigawa",
+    "id_text": "Selubung kabel / sisi masuk / sisi keluar listrik",
+    "desc": "被覆=lapisan vinil/isolasi yang membungkus kawat inti. 一次側=sisi INPUT listrik. 二次側=sisi OUTPUT. Penting saat menghubungkan panel. Mandor:「一次側と二次側を間違えないよう接続してくれ」."
+  },
+  {
+    "id": 310,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "まししめまあきんぐ",
+    "jp": "増し締め（ましじめ）・マーキング",
+    "romaji": "mashi shime / maakingu",
+    "id_text": "Pengencangan ulang baut / penandaan setelah itu",
+    "desc": "増し締め=kencangkan kembali baut/sekrup yang longgar secara berkala. マーキング=beri tanda pada baut setelah dikencangkan agar terlihat jika bergeser. Mandor:「増し締め後には必ずマーキングしてくれよ」."
+  },
+  {
+    "id": 311,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ふるせるふせる",
+    "jp": "振る・競る・伏せる",
+    "romaji": "furu / seru / fuseru",
+    "id_text": "Reroute pipa / hampir tabrakan / ujung slab",
+    "desc": "振る=ubah jalur pipa/kabel menghindari hambatan. 競る=dua elemen hampir bersentuhan. 伏せる=buat titik exit pipa konduit dari permukaan slab. Mandor:「競っているところを振って回避してくれ」."
+  },
+  {
+    "id": 312,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "えいせいせつびしにみず",
+    "jp": "衛生設備・死水",
+    "romaji": "eisei setsubi / shini mizu",
+    "id_text": "Peralatan sanitasi / air stagnan dalam pipa",
+    "desc": "衛生設備=peralatan kebersihan pakai air: toilet, kamar mandi (BUKAN dapur). 死水=air diam lama dalam pipa/tangki — bisa terkontaminasi. Mandor:「定期的に水を流して死水対策をしてくれ」."
+  },
+  {
+    "id": 313,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ばりばりとり",
+    "jp": "バリ・バリ取り",
+    "romaji": "bari / bari tori",
+    "id_text": "Gerinda sisa pemotongan / proses membuangnya",
+    "desc": "バリ=tonjolan sisa material di tepi produk logam/plastik akibat pemotongan. バリ取り=membersihkan バリ agar permukaan rata dan aman. Mandor:「パイプを切ったらバリ取りをして怪我防止しろ」."
+  },
+  {
+    "id": 314,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "ぶんきしんしゅくじゃばら",
+    "jp": "分岐・伸縮・蛇腹",
+    "romaji": "bunki / shinshuku / jabara",
+    "id_text": "Percabangan pipa / memuai-menyusut / fleksibel",
+    "desc": "分岐=satu pipa terbagi dua. 伸縮=material memanjang/memendek akibat suhu. 蛇腹=konektor akordeon untuk menyerap 伸縮. Mandor:「長い配管には蛇腹を入れて伸縮に対応してくれ」."
+  },
+  {
+    "id": 315,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "しんさきはいかんようご",
+    "jp": "芯（しん）・先（さき）（配管用語）",
+    "romaji": "shin / saki (haikan yougo)",
+    "id_text": "Garis sumbu pipa/duct / Ujung/end pipa",
+    "desc": "芯=garis tengah (center line) pipa atau duct — referensi pengukuran. 先=ujung/end dari pipa. Keduanya khas di konteks pekerjaan pipa. Mandor:「芯から先の長さを正確に測ってくれ」."
+  },
+  {
+    "id": 316,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "ふくそうのちゅうい",
+    "jp": "服装の注意（ふくそうのちゅうい）4項目",
+    "romaji": "fukusou no chuui",
+    "id_text": "4 pantangan pakaian di lokasi konstruksi",
+    "desc": "4 larangan: ①半袖・短パン禁止 ②上着前開け禁止 (tersangkut) ③袖まくり禁止 (lengan ke pergelangan) ④ポケット手禁止 (tak bisa menahan saat jatuh). Mandor:「服装を整えて入場してくれ」."
+  },
+  {
+    "id": 317,
+    "category": "career",
+    "source": "jac-ch4",
+    "furi": "あとかたづけしょうかかくにん",
+    "jp": "後片付け・消火確認",
+    "romaji": "atokataduke / shouka kakunin",
+    "id_text": "Beres-beres setelah kerja / konfirmasi api padam",
+    "desc": "Setelah kerja selesai WAJIB beres-beres dengan mindset mempersiapkan段取り untuk esok. Jika pakai api, pastikan padam sebelum pulang. Mandor:「帰る前に火の元を必ず確認してくれよ」."
+  },
+  {
+    "id": 318,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "すてざいりょう",
+    "jp": "捨て（すて）材料（ざいりょう）",
+    "romaji": "sute zairyou",
+    "id_text": "Material sacrificial untuk kelancaran konstruksi",
+    "desc": "捨て=material non-struktural untuk memudahkan 施工. Contoh: 捨てコン, 捨て板, 捨て石. Mandor:「捨てコンを打ってから墨出しをするんだよ」."
+  },
+  {
+    "id": 319,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "くいまさらいだんばね",
+    "jp": "杭間さらい・段跳ね",
+    "romaji": "kui ma sarai / dan bane",
+    "id_text": "Penggalian di antara tiang / angkat tanah bertahap",
+    "desc": "杭間さらい=saat 床付け, ratakan tanah di antara tiang pondasi. 段跳ね=galian dalam, tanah diangkat bertahap ke atas melalui undakan. Mandor:「杭間さらいは基礎工事に影響するからちゃんとやれ」."
+  },
+  {
+    "id": 320,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "やまずな",
+    "jp": "山砂（やまずな）",
+    "romaji": "yama zuna",
+    "id_text": "Pasir gunung/daratan (berbeda dari pasir sungai)",
+    "desc": "Pasir dari daratan (bukan sungai). Daya serap air (保水性) lebih tinggi dari pasir sungai. Digunakan sebagai material urugan balik. Mandor:「山砂は保水性が高いから水締めをしっかりやってくれよ」."
+  },
+  {
+    "id": 321,
+    "category": "doboku_haisui",
+    "source": "jac-ch4",
+    "furi": "きせいくいこうほうばしょううちこんくりいとくいこうほう",
+    "jp": "既成杭工法 vs 場所打ちコン杭工法",
+    "romaji": "kisei kui kouhou vs bashouuchi konkuriito kui kouhou",
+    "id_text": "Tiang prefabrikasi vs tiang beton cor di tempat",
+    "desc": "既成杭=tiang dibuat di pabrik lalu dipancang. 場所打ち杭=lubang dibor di lokasi lalu dicor. Pilihan tergantung kondisi tanah dan beban. Mandor:「杭工法は地質調査の結果で決めるんだ」."
+  },
+  {
+    "id": 322,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "こんくりいとぶろっくぞう",
+    "jp": "コンクリートブロック造（ぞう）",
+    "romaji": "konkuriito burokku zou",
+    "id_text": "Struktur bata/blok beton yang ditumpuk",
+    "desc": "Jenis struktur menggunakan blok beton yang ditumpuk. Dipakai untuk pagar, dinding pembatas, dan bangunan kecil. Berbeda dari RC造 yang dicor monolit. Mandor:「ブロック積みは目地を一直線にそろえてくれよ」."
+  },
+  {
+    "id": 323,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "おうすんぽう",
+    "jp": "追う（おう）・寸法（すんぽう）",
+    "romaji": "ou / sunpou",
+    "id_text": "Mengukur berurutan dari referensi / ukuran/dimensi",
+    "desc": "追う=mengukur posisi berurutan dari titik referensi. 寸法=ukuran atau dimensi panjang. Keduanya istilah dasar pengukuran di lapangan. Mandor:「基準から追って寸法を確認してくれよ」."
+  },
+  {
+    "id": 324,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "せつぞくけっせん",
+    "jp": "接続（せつぞく）・結線（けっせん）",
+    "romaji": "setsuzoku / kessen",
+    "id_text": "Menghubungkan / menyambung kabel komunikasi",
+    "desc": "接続=istilah umum menghubungkan dua hal. 結線=khusus untuk kabel komunikasi (通信線). 接続 untuk semua sambungan, 結線 lebih spesifik. Mandor:「通信線の結線は図面通りに正確にやってくれ」."
+  },
+  {
+    "id": 325,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "ばいぶれえたあうちこみ",
+    "jp": "バイブレーター・打ち込み（うちこみ）",
+    "romaji": "baibureetaa / uchikomi",
+    "id_text": "Vibrator beton / menuang & memadatkan beton",
+    "desc": "打ち込み=menuang beton ke bekisting dan memadatkannya. バイブレーター=alat yang dimasukkan ke beton cair untuk menggetarkan dan hilangkan rongga udara. Mandor:「バイブレーターを入れながら打ち込んでくれ」."
+  },
+  {
+    "id": 326,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "つらかねおがむ",
+    "jp": "面（つら）・矩（かね）・拝む（おがむ）",
+    "romaji": "tsura / kane / ogamu",
+    "id_text": "Permukaan elemen / sudut siku / elemen yang miring",
+    "desc": "面(つら)=permukaan elemen bangunan. 矩(かね)=sudut siku-siku 90°. 拝む=elemen yang seharusnya tegak namun miring. Mandor:「柱が拝んでいるから、矩を確認してくれよ」."
+  },
+  {
+    "id": 327,
+    "category": "career",
+    "source": "jac-ch4",
+    "furi": "のかくていぎせいりせいとんせいそうせいけつしつけ",
+    "jp": "5Sの各定義：整理・整頓・清掃・清潔・しつけ",
+    "romaji": "5S no kaku teigi: seiri / seiton / seisou / seiketsu / shitsuke",
+    "id_text": "5 definisi individual kegiatan 5S",
+    "desc": "5S: ①整理=pilah perlu vs tidak. ②整頓=letakkan di tempat ditentukan. ③清掃=bersih setelah kerja. ④清潔=pertahankan bersih. ⑤しつけ=aturan agar ①–④ dilaksanakan semua orang. Mandor:「5Sを毎日全員でやってくれ」."
+  },
+  {
+    "id": 328,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "おさきにしつれいします",
+    "jp": "お先に失礼します（おさきにしつれいします）",
+    "romaji": "osaki ni shitsurei shimasu",
+    "id_text": "Permisi, saya pulang lebih dulu",
+    "desc": "Diucapkan saat KAMU pulang lebih dulu dari rekan yang masih bekerja. Respons rekan: お疲れさまでした. Jangan ke atasan tanpa kalimat sopan. Mandor:「先に失礼します」→「お疲れさまでした！」."
+  },
+  {
+    "id": 329,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "あつちゃくぺんちりんぐすりいぶ",
+    "jp": "圧着（あっちゃく）ペンチ・リングスリーブ",
+    "romaji": "atsuchaku penchi / ringu suriibu",
+    "id_text": "Tang crimping / Selongsong sambungan kawat listrik",
+    "desc": "圧着ペンチ=tang khusus menekan terminal ke ujung kabel. リングスリーブ=selongsong logam cincin untuk menyambung kawat, lalu di-crimp. Mandor:「リングスリーブをきちんとかしめてくれよ」."
+  },
+  {
+    "id": 330,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "ぽいすてきんしがむをかみながらのさぎょうきんし",
+    "jp": "ポイ捨て禁止・ガムを噛みながらの作業禁止",
+    "romaji": "poi sute kinshi / gamu wo kaminagara no sagyou kinshi",
+    "id_text": "Dilarang buang sampah sembarangan / permen karet",
+    "desc": "ポイ捨て=buang sampah sembarangan — DILARANG. ガム禁止: ①risiko ポイ捨て ②jika benda jatuh mendadak bisa menggigit lidah. Mandor:「ガムを噛みながら作業するのは禁止だからな」."
+  },
+  {
+    "id": 379,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "みずいと",
+    "jp": "水糸（みずいと）",
+    "romaji": "mizuito",
+    "id_text": "Tali referensi — tidak mulur, untuk lurus & rata",
+    "desc": "Tali dari bahan tidak mudah mulur, direntangkan saat membangun pondasi atau pasang bata/blok untuk memastikan garis lurus dan ketinggian sama. Mandor:「水糸はピンと張ってから作業してくれ」."
+  },
+  {
+    "id": 480,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "りいどたんし",
+    "jp": "リード端子（りーどたんし）",
+    "romaji": "riido tanshi",
+    "id_text": "Lead terminal — sambungan grounding rod dan kabel",
+    "desc": "Komponen yang menghubungkan 接地棒 (grounding rod) dengan 接地線 (kabel grounding). Junction point antara rod di tanah dan kabel ke panel. Mandor:「リード端子の圧着がしっかりできているか確認して」."
+  },
+  {
+    "id": 661,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "おはようございます",
+    "jp": "おはようございます（朝のあいさつの基本）",
+    "romaji": "ohayou gozaimasu",
+    "id_text": "Selamat pagi — salam dasar di pagi hari",
+    "desc": "Ucapkan kepada orang yang PERTAMA KALI ditemui di pagi hari. Fungsi ganda: ①memberi kesan baik kepada lawan bicara ②membuat lawan bicara bersemangat. Tidak perlu kenal — tetap ucapkan dengan semangat."
+  },
+  {
+    "id": 662,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "ごあんぜんに",
+    "jp": "ご安全に（建設現場専用のあいさつ）",
+    "romaji": "go anzen ni",
+    "id_text": "Semoga selamat — salam khas lokasi konstruksi",
+    "desc": "Ungkapan harapan agar selamat dan tidak kecelakaan. Digunakan saat akhir 朝礼 dan saat berpapasan dengan pekerja tugas berbahaya. Mandor:「では、今日もご安全に！」(semoga hari ini selamat semua!)."
+  },
+  {
+    "id": 663,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "おつかれさまです",
+    "jp": "おつかれさまです（感謝・労い",
+    "romaji": "otsukaresama desu",
+    "id_text": "Kerja keras ya — ungkapan penghargaan kerja keras",
+    "desc": "Ungkapan terima kasih dan penghargaan atas kerja keras. Bisa dipakai di mana saja. Yang sudah selesai: おつかれさまでした!. Mandor:「今日は大変だったね、おつかれさまでした！」."
+  },
+  {
+    "id": 664,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "ごくろさまおつかれさまちがい",
+    "jp": "ご苦労さま vs おつかれさまです",
+    "romaji": "gokurosama vs otsukaresama — chigai",
+    "id_text": "Gokurosama ke atasan tidak sopan — pakai otsukare",
+    "desc": "ご苦労さま=kurang sopan untuk atasan. おつかれさまです=lebih sopan, bisa ke siapa saja. Jika atasan bilang ご苦労さま, jawab ありがとうございます！. Mandor:「上司にはおつかれさまですって言ってくれよ」."
+  },
+  {
+    "id": 665,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "しつれいしますみっつのばめん",
+    "jp": "失礼します（3つの場面での使い方）",
+    "romaji": "shitsurei shimasu — mittsu no bamen",
+    "id_text": "Permisi / maaf mengganggu — 3 situasi penggunaan",
+    "desc": "3 situasi: ①masuk ruangan ②menyela percakapan untuk hal mendesak ③pulang lebih dulu: お先に失礼します → dijawab お疲れさまでした. Mandor:「部屋に入る前に失礼しますって言ってくれよ」."
+  },
+  {
+    "id": 666,
+    "category": "gaiyou",
+    "source": "jac-ch4",
+    "furi": "あぶないよけろ",
+    "jp": "危ない！よけろっ！（緊急の呼びかけ）",
+    "romaji": "abunai! yokero!",
+    "id_text": "Awas! Minggir! — seruan darurat saat bahaya datang",
+    "desc": "Saat seseorang tidak menyadari bahaya, orang sekitar berteriak 危ない！. Untuk benda jatuh: 危ない！よけろっ！. Dengar → LANGSUNG bereaksi tanpa pikir panjang. Mandor:「危ない！と言われたら迷わず動けよ！」."
+  },
+  {
+    "id": 667,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "すみだしきじゅんずみとおりしん",
+    "jp": "墨出し・基準墨・通り芯",
+    "romaji": "sumidashi / kijunzumi / toorishin",
+    "id_text": "3 istilah dasar penandaan garis konstruksi",
+    "desc": "墨出し=menarik garis referensi konstruksi. 基準墨=garis lurus referensi utama bangunan. 通り芯=garis yang melewati titik tengah komponen. Mandor:「基準墨を正確に引いてから通り芯を出してくれ」."
+  },
+  {
+    "id": 668,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "にげずみろくずみたてずみじずみしあがずみ",
+    "jp": "逃げ墨・陸墨・立て墨・地墨・仕上げ墨（5種類の墨）",
+    "romaji": "nigezumi / rokuzumi / tatezumi / jizumi / shiagazumi",
+    "id_text": "5 jenis garis tinta konstruksi berdasarkan fungsi",
+    "desc": "逃げ墨=garis paralel dari referensi jika ada halangan. 陸墨=referensi ketinggian horizontal. 立て墨=garis vertikal. 地墨=garis di lantai. 仕上げ墨=garis dimensi finishing. Mandor:「逃げ墨は何センチか必ずメモして」."
+  },
+  {
+    "id": 669,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "かべしいんはしらしいんおやずみかねをふるすみつけ",
+    "jp": "壁芯・柱芯・親墨・矩を振る・墨付け",
+    "romaji": "kabeshiin / hashirashiin / oyazumi / kane wo furu / sumitsuke",
+    "id_text": "5 istilah sumidashi — garis tengah & referensi",
+    "desc": "壁芯=garis tengah dinding. 柱芯=garis tengah kolom. 親墨=referensi untuk 墨出し berikutnya. 矩を振る=tarik garis sudut 90°. 墨付け=tanda pengerjaan pada kayu. Mandor:「壁芯と柱芯がずれていないか確認してくれ」."
+  },
+  {
+    "id": 670,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "やりかたみずぬきみずもりじなわはりみずいと",
+    "jp": "遣り方・水貫・水盛り・地縄張り・水糸",
+    "romaji": "yarikata / mizunuki / mizumori / jinawahari / mizuito",
+    "id_text": "5 istilah yarkata — pagar referensi pra-konstruksi",
+    "desc": "遣り方=pagar sementara pasak+papan untuk posisi & ketinggian bangunan. 水貫=papan horizontal. 水盛り=tentukan referensi horizontal. 地縄張り=tandai pondasi. 水糸=benang referensi. Mandor:「遣り方を絶対に動かすな」."
+  },
+  {
+    "id": 671,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "べんま",
+    "jp": "BM・GL・FH・FL・SL・CH（高さ基準6語）",
+    "romaji": "benchmark / GL / FH / FL / SL / CH",
+    "id_text": "6 istilah referensi ketinggian — tanah ke plafon",
+    "desc": "BM=titik referensi ketinggian proyek. GL=tinggi tanah. FH=tinggi tanah rencana. FL=tinggi lantai jadi. SL=tinggi permukaan slab. CH=tinggi lantai ke plafon. Mandor:「全部の高さはBMからの+/-で確認してくれ」."
+  },
+  {
+    "id": 672,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "もりとだんぎりしめかためてんあつうめもどしつきがため",
+    "jp": "盛り土・段切り・締固め・転圧・埋戻し・突固め",
+    "romaji": "morito / dangiri / shimekatame / ten'atsu / umemodoshi / tsukigatame",
+    "id_text": "6 istilah operasi tanah dasar",
+    "desc": "盛り土=timbunan. 段切り=gali bertangga di lereng. 締固め=padatkan tanah. 転圧=padatkan dengan alat berat. 埋め戻し=isi kembali setelah pekerjaan bawah tanah. 突き固め=padatkan dengan ランマ. Mandor:「埋め戻しは締固めをしっかりやれよ」."
+  },
+  {
+    "id": 673,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "ろばんろしょうひょうそう",
+    "jp": "路盤・路床・表層（舗装土工事3語）",
+    "romaji": "roban / roshou / hyousou (doukouji)",
+    "id_text": "3 lapisan perkerasan jalan — atas ke tanah dasar",
+    "desc": "表層=lapisan paling atas perkerasan aspal. 路盤=lapisan di atas 路床 menyebarkan beban. 路床=lapisan tanah dasar penopang perkerasan sekitar 1m dari permukaan. Mandor:「路盤の厚みを設計通りに確保してくれよ」."
+  },
+  {
+    "id": 674,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "じなわはりねぎりねいれながさすぼり",
+    "jp": "地縄はり・根切り・根入れ長さ・素掘り",
+    "romaji": "jinawahari / negiri / neirenagasa / subori",
+    "id_text": "4 istilah pra/pasca penggalian pondasi",
+    "desc": "地縄はり=tandai batas pondasi di tanah. 根切り=gali dengan alat berat hingga dasar pondasi. 根入れ長さ=kedalaman pondasi ke ujung. 素掘り=galian tanpa 土留め jika tanah kokoh. Mandor:「根入れ長さが設計値に達しているか確認して」."
+  },
+  {
+    "id": 675,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "どどめようへきやいたこうやいたやまどめ",
+    "jp": "土留め・擁壁・矢板・鋼矢板・山留め（崩壊防止5語）",
+    "romaji": "dodome / youheki / yaita / kou yaita / yamadome",
+    "id_text": "5 istilah penahan tanah & pencegah longsor galian",
+    "desc": "土留め=menahan tanah agar tidak longsor. 擁壁=土留め berbentuk dinding. 矢板=papan penahan tanah. 鋼矢板=矢板 baja saling menyambung. 山留め=menahan tanah dengan 矢板. Mandor:「山留めの変形があれば報告して」."
+  },
+  {
+    "id": 676,
+    "category": "doboku_haisui",
+    "source": "jac-ch4",
+    "furi": "ばしょうちうつ",
+    "jp": "場所打ち・打つ（打設）",
+    "romaji": "bashouchi / utsu (dasetsu)",
+    "id_text": "2 istilah pengecoran beton di lokasi kerja",
+    "desc": "場所打ち/現場打ち=mengecor beton langsung di lokasi, bukan precast. 打つ/打設する=terminologi untuk menuang beton ke dalam cetakan. Mandor:「コンクリートを打設する前に型枠を必ず確認して」."
+  },
+  {
+    "id": 677,
+    "category": "doboku_doko",
+    "source": "jac-ch4",
+    "furi": "よぼりすきとりとこずけくいまさらいだんばね",
+    "jp": "余堀り・鋤取り・床付け・杭間さらい・段跳ね",
+    "romaji": "yobori / sukitori / tokozuke / kuimasarai / danbane",
+    "id_text": "5 istilah presisi penggalian & dasar pondasi",
+    "desc": "余堀り=galian lebih untuk ruang kerja. 鋤取り=ratakan dasar galian. 床付け=finishing dasar secara presisi. 杭間さらい=bersihkan tanah di antara tiang. 段跳ね=angkat tanah bertahap ke atas. Mandor:「床付けは慎重にやれよ」."
+  },
+  {
+    "id": 678,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "じやまのりめんやまがくる",
+    "jp": "地山・法面・山がくる（自然地盤と崩壊危険）",
+    "romaji": "jiyama / norimen / yama ga kuru",
+    "id_text": "3 istilah tanah alami & bahaya lereng galian",
+    "desc": "地山=tanah dalam kondisi alami. 法面(のり)=permukaan miring pada galian. 山がくる=turap atau lereng RUNTUH/LONGSOR — sering jadi kecelakaan serius. Mandor:「法面が崩れそうなら作業を止めて報告してくれ」."
+  },
+  {
+    "id": 679,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "みずかえかまばやまずなみずしめまんぼう",
+    "jp": "水替え・釜場・山砂・水締め・万棒（排水・管理5語）",
+    "romaji": "mizukae / kamaba / yamazuna / mizushime / manbou",
+    "id_text": "5 istilah drainase & manajemen material lokasi",
+    "desc": "水替え=pompa air di dasar galian. 釜場=lubang untuk pompa penguras. 山砂=pasir daratan, serap air tinggi. 水締め=padatkan timbunan sambil siram air. 万棒=hitung truk/orang masuk. Mandor:「釜場のポンプを定期的に確認してくれよ」."
+  },
+  {
+    "id": 680,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "じぎょうきそちょくせつきそべたきそふうちんぐ",
+    "jp": "地業・基礎・直接基礎（ベタ基礎・フーチング）",
+    "romaji": "jigyou / kiso / chokusetsu kiso (beta kiso / fuuchingu)",
+    "id_text": "Pekerjaan tanah dasar & pondasi langsung",
+    "desc": "地業=lapisan di bawah slab pondasi (pasir/kerikil/捨てコン/tiang). 基礎=meneruskan beban ke tanah. ベタ基礎=cor seluruh dasar. フーチング=hanya di titik beban. Mandor:「転圧後に捨てコンを打てよ」."
+  },
+  {
+    "id": 681,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "くいきそすらぶくいじぎょうきそめんしん",
+    "jp": "杭基礎・スラブ・杭地業・基礎免振",
+    "romaji": "kui kiso / surabu / kui jigyou / kiso menshin",
+    "id_text": "4 istilah pondasi tiang, slab & isolasi gempa",
+    "desc": "杭基礎=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan. 杭地業=pekerjaan tiang pondasi. 基礎免振=sistem serap gaya gempa antara tanah dan pondasi. Mandor:「杭の打設記録を毎本記録してくれよ」."
+  },
+  {
+    "id": 682,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "あしばのしゅるいさぎょうゆかかりがこい",
+    "jp": "足場の種類・作業床・仮囲い（仮設工事3語）",
+    "romaji": "ashiba no shurui / sagyouyuka / karigakoi",
+    "id_text": "Jenis perancah, lantai kerja & pagar sementara",
+    "desc": "足場=lantai sementara untuk kerja di ketinggian (枠組み/単管/くさび). 作業床=lantai perancah dari 布板. 仮囲い=pembatas sementara lokasi ke jalan/lahan tetangga. Mandor:「作業床の点検を毎日してくれよ」."
+  },
+  {
+    "id": 683,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "はいきんひろいだしあそびあきかんかく",
+    "jp": "配筋・拾い出し・あそび・あき・間隔（鉄筋基本5語）",
+    "romaji": "haikin / hiroidashi / asobi / aki / kankaku",
+    "id_text": "5 istilah dasar pemasangan & perhitungan besi",
+    "desc": "配筋=tempatkan dan rakit besi tulangan. 拾い出し=hitung kebutuhan material dari gambar. あそび=toleransi. あき=jarak bersih antar tulangan. 間隔=jarak center-to-center. Mandor:「あきと間隔は設計図通りかチェックして」."
+  },
+  {
+    "id": 684,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "すてっこんけっそくかぶりあつさ",
+    "jp": "捨てコン・結束（ハッカー）・かぶり厚さ",
+    "romaji": "sutekkon / kessoku (hakkaa) / kaburi atsusa",
+    "id_text": "3 istilah presisi konstruksi beton bertulang",
+    "desc": "捨てコン=cor beton tipis 5–10cm sebagai referensi ketinggian. 結束=ikat persilangan tulangan dengan 結束線 pakai ハッカー. かぶり厚さ=jarak tulangan ke permukaan beton. Mandor:「かぶり厚さが設計値を満たしているか確認してくれ」."
+  },
+  {
+    "id": 685,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "たてこみのろあんこてんようぱんくくぎじまい",
+    "jp": "建込み・ノロ・アンコ・転用・パンク・釘仕舞",
+    "romaji": "tatekomi / noro / anko / ten'you / panku / kugijimai",
+    "id_text": "6 istilah pekerjaan bekisting",
+    "desc": "建込み=dirikan bekisting. ノロ=bocoran beton dari sambungan. アンコ=pengisi agar beton tidak masuk ke alur. 転用=pakai ulang bekisting. パンク=bekisting jebol. 釘仕舞=cabut paku bekas. Mandor:「パンクしないよう支保工をしっかりしてくれよ」."
+  },
+  {
+    "id": 686,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "うちこみうちかさねひゃくごじゅうぷんひゃくにじゅうぷんおじょいんうちつぎ",
+    "jp": "打ち込み・打ち重ね・コールドジョイント・打ち継ぎ",
+    "romaji": "uchikomi / uchikasane (hyakugojuupun/hyakunijuupun) / cold joint / uchitsugi",
+    "id_text": "Pengecoran berlapis — batas waktu & sambungan",
+    "desc": "打ち込み=tuang beton ke bekisting. 打ち重ね=cor di atas beton BELUM keras (<25°C→150mnt, ≥25°C→120mnt). Terlambat→コールドジョイント. 打ち継ぎ=cor di atas SUDAH keras. Mandor:「時間オーバーでコールドジョイントにするなよ」."
+  },
+  {
+    "id": 687,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "しめかためたんぴんぐねりまぜはいごう",
+    "jp": "締固め・タンピング・練り混ぜ・配合",
+    "romaji": "shimekatame / tanpingu / nerimaze / haigou (konkuriito)",
+    "id_text": "4 istilah kualitas pengecoran beton",
+    "desc": "締固め=gunakan バイブレータ untuk getar beton, hilangkan rongga. タンピング=pukul permukaan slab agar padat. 練り混ぜ=campur semen dan agregat merata. 配合=perbandingan bahan beton. Mandor:「バイブレーターを入れながら締め固めてくれよ」."
+  },
+  {
+    "id": 688,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "おさまりとりあいあみつけみえがかりみえがくれ",
+    "jp": "納まり・取合い・見付け・見え掛かり・見え隠れ",
+    "romaji": "osamari / toriaia / mitsuke / miegakari / miegakure",
+    "id_text": "5 istilah kondisi finishing & keselarasan komponen",
+    "desc": "納まり=keseimbangan penempatan komponen. 取合い=pertemuan 2+ komponen. 見付け=permukaan tampak penuh dari depan. 見え掛かり=tampak dari celah. 見え隠れ=tampak saat digerakkan. Mandor:「取合いの納まりが悪いから図面と照合してくれ」."
+  },
+  {
+    "id": 689,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "とおりつらつらいちそりむくりろくふろく",
+    "jp": "通り・面一・反り・起り・陸・不陸",
+    "romaji": "toori / tsura / tsuraichi / sori / mukuri / roku / furoku",
+    "id_text": "6 istilah kelurusan, kerataan & kelengkungan",
+    "desc": "通り=kondisi lurus. 面一=dua permukaan rata sejajar. 反り=melengkung cekung. 起り=melengkung cembung. 陸=horizontal sempurna. 不陸=permukaan bergelombang. Mandor:「不陸があったらサンダーで修正してくれよ」."
+  },
+  {
+    "id": 690,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "めちがいおがむかねころびにげみきる",
+    "jp": "目違い・拝む・転び・逃げ・見切る",
+    "romaji": "mechigai / ogamu / kane / korobi / nige / mikiru",
+    "id_text": "5 istilah cacat konstruksi & penanganan sambungan",
+    "desc": "目違い=sambungan tidak rata. 拝む=elemen miring. 転び=kolom miring dari vertikal. 逃げ=toleransi dimensi yang sengaja diambil. 見切る=selesaikan sambungan dengan 見切り材. Mandor:「目違いと転びがないか最終確認してくれよ」."
+  },
+  {
+    "id": 691,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "なじみすてべたふかしてもどりだんどりてなおしだめ",
+    "jp": "駄目・手直し・手戻り・段取り・馴染み",
+    "romaji": "najimi / sute / beta / fukashi / temodori / dandori / tenaoshi / dame",
+    "id_text": "5 istilah kondisi pemasangan & proses kerja",
+    "desc": "駄目=bagian terlewat saat hampir selesai. 手直し=koreksi pekerjaan. 手戻り=pengerjaan ulang. 段取り=rencanakan urutan kerja. 馴染み=sambungan menempel sempurna. Mandor:「駄目直しはリストを作って確実に終わらせてくれ」."
+  },
+  {
+    "id": 692,
+    "category": "sekou",
+    "source": "jac-ch4",
+    "furi": "ぴっちおうすんぽういっけんいっしゃくいっすんひとつぼ",
+    "jp": "ピッチ・追う・寸法・一間・一尺・一寸・一坪",
+    "romaji": "picchi / ou / sunpou / ikken / isshaku / issun / hitotsubo",
+    "id_text": "7 istilah ukuran termasuk satuan tradisional",
+    "desc": "ピッチ=jarak antar elemen berulang. 追う=ukur dari titik referensi. 寸法=dimensi panjang. 1間≈1.8m, 1尺≈30.3cm, 1寸≈3.03cm. 1坪=1間×1間≈3.3m². Mandor:「ピッチ300ミリで追って墨を出してくれよ」."
+  },
+  {
+    "id": 693,
+    "category": "kenchiku_kutai",
+    "source": "jac-ch4",
+    "furi": "ぞうぞうぞうもくぞうぞう",
+    "jp": "RC造・S造・SRC造・木造・CB造",
+    "romaji": "RC-zou / S-zou / SRC-zou / moku-zou / CB-zou",
+    "id_text": "5 singkatan struktur bangunan — definisi akronim",
+    "desc": "RC造=鉄筋コンクリート. S造=鉄骨. SRC造=鉄骨鉄筋コンクリート. 木造=kayu. CB造=blok beton ditumpuk. Mandor:「この現場はSRC造だから、鉄骨と配筋の両方が重要だ」."
+  },
+  {
+    "id": 694,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "せつぞくはいせんりかくぜつえんかんつうかんろ",
+    "jp": "接続・配線・離隔・絶縁・貫通・管路",
+    "romaji": "setsuzoku / haisen / rikaku / zetsuen / kantsuu / kanro",
+    "id_text": "6 istilah dasar listrik & telekomunikasi",
+    "desc": "接続=hubungkan (komunikasi: 結線). 配線=pasang kabel. 離隔=jarak pisah wajib. 絶縁=cegah arus bocor. 貫通=lubangi dinding/lantai. 管路=pipa untuk kabel. Mandor:「離隔距離を守って配線ルートを決めてくれよ」."
+  },
+  {
+    "id": 695,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "まいせつさんしきかくうはいせん",
+    "jp": "埋設（3方式）・架空配線",
+    "romaji": "maisetsu sanshiki / kakuu haisen",
+    "id_text": "3 cara tanam kabel di tanah + kabel via tiang",
+    "desc": "埋設3方式: ①管路式=kubur pipa lalu masukkan kabel ②直接埋設式=kabel langsung tanam ③とう道=terowongan khusus. 架空配線=kabel via tiang listrik. Mandor:「管路式埋設は保護管の深さを守ってくれ」."
+  },
+  {
+    "id": 696,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "はいかんするつうせんすらぶはいかんいんぺいろしゅつふせる",
+    "jp": "配管する・通線・スラブ配管・隠ぺい・露出・伏せる",
+    "romaji": "haikan suru / tsuusen / surabu haikan / MDF / inpei / roshutsu / fuseru",
+    "id_text": "6 istilah pemasangan pipa kabel & manajemen jalur",
+    "desc": "配管する=pasang konduit. 通線=masukkan kabel ke konduit. スラブ配管=konduit di slab. 隠ぺい=pipa di dalam dinding. 露出=pipa tampak. 伏せる=buat exit pipa dari slab. Mandor:「スラブ配管は打設前に仕込み完了させてくれ」."
+  },
+  {
+    "id": 697,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "かんでんろうでんせっちひらいしんひらいき",
+    "jp": "感電・漏電・接地（アース）・避雷針・避雷器",
+    "romaji": "kanden / rouden / secchi (aasu) / hiraishin / hiraiki",
+    "id_text": "5 istilah keselamatan listrik — bahaya & proteksi",
+    "desc": "感電=arus mengalir melalui tubuh. 漏電=listrik bocor. 接地/アース=hubungkan ke tanah cegah感電. 避雷針=lindungi bangunan dari petir. 避雷器=lindungi peralatan. Mandor:「アースが正しく施工されているか確認してくれよ」."
+  },
+  {
+    "id": 698,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "たんらくていあつこうあつとくべつこうあつあっちゃくちょくりゅうこうりゅう",
+    "jp": "短絡・低圧・高圧・特別高圧・圧着・直流・交流",
+    "romaji": "tanraku / teiatsu / kouatsu / tokubetsu kouatsu / acchaku / chokuryuu / kouryuu",
+    "id_text": "7 istilah tegangan listrik & metode penyambungan",
+    "desc": "短絡/ショート=hubung singkat. 低圧: DC≤750V/AC≤600V. 高圧: 750V–7000V. 特別高圧: >7000V. 圧着=sambung dengan tekanan. 直流=arus tetap. 交流=arus periodik. Mandor:「圧着端子のサイズを確認してからかしめてくれよ」."
+  },
+  {
+    "id": 699,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "てんめつひふくいちじがわにじがわまししめまあきんぐつうでん",
+    "jp": "点滅・被覆・一次側・増し締め・マーキング・通電",
+    "romaji": "tenmetsu / hifuku / ichijigawa/nijigawa / mashishime / maakingu / tsuuden",
+    "id_text": "6 istilah operasi & pemeliharaan pekerjaan listrik",
+    "desc": "点滅=nyala-mati bergantian. 被覆=isolasi vinil di kabel. 一次側/二次側=sisi masuk/keluar listrik. 増し締め=kencangkan baut kendur. マーキング=tanda setelah増し締め. 通電=listrik mengalir. Mandor:「増し締め後はマーキングしてくれよ」."
+  },
+  {
+    "id": 700,
+    "category": "denki",
+    "source": "jac-ch4",
+    "furi": "あたるかしめるしこむふるせるとぶおちるぱい",
+    "jp": "あたる・かしめる・仕込む・振る・競る・Φ",
+    "romaji": "ataru / kashimeru / shikomu / furu / seru / tobu/ochiru / pai",
+    "id_text": "6 istilah slang khas pekerjaan listrik lapangan",
+    "desc": "あたる=cek dengan alat ukur. かしめる=crimp kabel. 仕込む=persiapkan pekerjaan. 振る=reroute pipa/kabel. 競る=dua benda hampir berbenturan. Φ(ぱい)=diameter. Mandor:「配管が競っていたら早めに振って対処してくれよ」."
+  },
+  {
+    "id": 701,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "くうちょうおんどしつどかんきはいえんえいせい",
+    "jp": "空調・温度・湿度・換気・排煙・衛生（設備基本6語）",
+    "romaji": "kuuchou / ondo / shitsudo / kanki / haien / eisei",
+    "id_text": "4 istilah dasar pekerjaan mekanikal & sanitasi",
+    "desc": "空調=mengatur suhu & kelembaban. 換気=ganti udara kotor dengan segar. 排煙=keluarkan asap saat kebakaran — K3 wajib. 衛生設備=toilet, kamar mandi (bukan dapur). Mandor:「換気量が設計通りか確認してくれよ」."
+  },
+  {
+    "id": 702,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "しにみずばりぎゃくりゅうぶんきしんしゅくじゃばららいにんぐ",
+    "jp": "死水・バリ・逆流・分岐・伸縮・蛇腹・ライニング",
+    "romaji": "shinimizu / bari / gyakuryuu / bunki / shinshuku / jabara / rainingu",
+    "id_text": "7 istilah kondisi & material pipa/saluran",
+    "desc": "死水=air diam lama dalam pipa. バリ=sisa material di tepi produk. 逆流=aliran berlawanan. 分岐=pipa terbagi. 伸縮=memuai-menyusut. 蛇腹=konektor fleksibel. ライニング=lapisan dalam pipa. Mandor:「定期的に流して死水を防いでくれよ」."
+  },
+  {
+    "id": 703,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "ろうえいしけんすいあつしけんまんすいしけんこうばいおすいざつはいすい",
+    "jp": "漏洩試験・水圧試験・満水試験・勾配・汚水・雑排水",
+    "romaji": "rouei shiken / suiatsu shiken / mansui shiken / koubai / osui / zatsu haisui",
+    "id_text": "6 istilah uji kebocoran & sistem drainase",
+    "desc": "漏洩試験=uji kebocoran (水圧/満水試験). 水圧試験=pipa suplai diberi tekanan. 満水試験=isi drainase penuh. 勾配=kemiringan. 汚水=air limbah toilet. 雑排水=air limbah dapur/kamar mandi. Mandor:「試験前に全バルブを確認してくれよ」."
+  },
+  {
+    "id": 704,
+    "category": "haikan",
+    "source": "jac-ch4",
+    "furi": "しんさきつらせつびようご",
+    "jp": "芯・先・面（設備工事の3短語）",
+    "romaji": "shin / saki / tsura (setsubi yougo)",
+    "id_text": "3 istilah pendek bermakna teknis pekerjaan setsubi",
+    "desc": "芯(しん)=garis tengah pipa/duct. 先(さき)=ujung pipa. 面(つら)=permukaan flange. Kata pendek namun bermakna teknis spesifik di pekerjaan設備. Mandor:「芯から先までの寸法を正確に出してくれよ」."
+  },
+  {
+    "id": 705,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "ごえすかつどうせいりせいとんせいそうせいけつしつけ",
+    "jp": "5S活動（整理・整頓・清掃・清潔・しつけ）",
+    "romaji": "go-esu katsudou — seiri / seiton / seisou / seiketsu / shitsuke",
+    "id_text": "Program 5S — 5 kebiasaan lingkungan kerja aman",
+    "desc": "5S: ①整理=pisahkan perlu & tidak. ②整頓=tempatkan ditentukan. ③清掃=bersih setelah kerja. ④清潔=pertahankan bersih. ⑤しつけ=aturan agar ①–④ dilaksanakan disiplin. Mandor:「5Sを毎日全員でやってくれ」."
+  },
+  {
+    "id": 706,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "さぎょういんつめしょのろくるうる",
+    "jp": "作業員詰め所の6ルール",
+    "romaji": "sagyouin tsumesho no roku ruuru",
+    "id_text": "6 aturan ruang istirahat pekerja lokasi konstruksi",
+    "desc": "詰め所=ruang ganti & istirahat pekerja. Aturan: merokok di tempat khusus, ポイ捨て禁止, helm di tempat ditentukan, barang di loker, cuci tangan, cek 掲示板. Mandor:「詰め所のルールを全員守ってくれよ」."
+  },
+  {
+    "id": 707,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "ふくそうのよんきんしじこうけんせつげんば",
+    "jp": "服装の4禁止事項（建設現場）",
+    "romaji": "fukusou no yon kinshi jikou (kensetsu genba)",
+    "id_text": "4 larangan pakaian di lokasi konstruksi",
+    "desc": "4 larangan: ①半袖・短パン禁止 ②上着前開け禁止 (tersangkut) ③袖まくり禁止 (lengan ke pergelangan) ④ポケット手禁止 (tak bisa menahan saat jatuh). Mandor:「服装を整えて入場してくれよ」."
+  },
+  {
+    "id": 708,
+    "category": "career",
+    "source": "jac-ch4",
+    "furi": "ほうれんそうほおこくれんらくそうだん",
+    "jp": "ほうれんそう（報告・連絡・相談）",
+    "romaji": "hourensou — hookoku / renraku / soudan",
+    "id_text": "Hourensou — 3 pilar komunikasi efektif di kerja",
+    "desc": "ほうれんそう=報告 (lapor ke atasan), 連絡 (sampaikan info/jadwal), 相談 (konsultasikan masalah). Sampaikan singkat dan jelas. Mandor:「何かあったらすぐほうれんそうしてくれよ」."
+  },
+  {
+    "id": 709,
+    "category": "anzen",
+    "source": "jac-ch4",
+    "furi": "あとかたずけさぎょうしゅうりょうごのぎむ",
+    "jp": "後片付け（作業終了後の義務・火の確認）",
+    "romaji": "atokatazuke — sagyou shuuryougo no gimu",
+    "id_text": "Aturan beres-beres wajib setelah selesai bekerja",
+    "desc": "Setelah selesai bekerja WAJIB後片付け. Lakukan seolah段取り untuk esok hari. Jika menggunakan api, pastikan benar-benar padam sebelum pulang. Mandor:「帰る前に火の元を確認したか？確かめてくれよ」."
+  }
+]
