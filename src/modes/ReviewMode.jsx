@@ -8,6 +8,7 @@ import { getCatInfo } from '../data/categories.js';
 import { stripFuri, jpFontSize } from '../utils/jp-helpers.js';
 import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
+import { get as storageGet } from '../storage/engine.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Skeleton from '../components/Skeleton.jsx';
 import S from './modes.module.css';

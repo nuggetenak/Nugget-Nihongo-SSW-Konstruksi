@@ -163,6 +163,25 @@ export default function SayaTab() {
           sub="Web Speech API — tombol 🔊 di kartu"
           onClick={() => setPref('audioEnabled', !(prefs?.audioEnabled !== false))}
         />
+        <Row
+          label="ふ Furigana di Kartu"
+          value={
+            prefs?.furiganaPolicy === 'hidden' ? '⬜ Tersembunyi' :
+            prefs?.furiganaPolicy === 'tap'    ? '👆 Tap untuk lihat' :
+                                                  '✅ Selalu tampil'
+          }
+          sub={
+            prefs?.furiganaPolicy === 'hidden' ? 'Hanya kanji — level lanjut' :
+            prefs?.furiganaPolicy === 'tap'    ? 'Tap kartu untuk tampilkan furigana' :
+                                                  'Furigana selalu terlihat (default)'
+          }
+          onClick={() => {
+            const cur = prefs?.furiganaPolicy ?? 'always';
+            const next = cur === 'always' ? 'hidden' : cur === 'hidden' ? 'always' : 'always';
+            setPref('furiganaPolicy', next);
+            toast.show(next === 'always' ? '✅ Furigana selalu tampil' : next === 'hidden' ? '⬜ Furigana disembunyikan' : '👆 Furigana tap-to-reveal');
+          }}
+        />
       </Section>
 
       <Section title="Data">
@@ -176,7 +195,11 @@ export default function SayaTab() {
 
       <Section title="Info">
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
-        <Row label="ℹ️ Tentang Aplikasi" sub="SSW Konstruksi · by Nugget Nihongo" />
+        <Row
+          label="ℹ️ Tentang Aplikasi"
+          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v4.0.0`}
+          onClick={() => toast.show(`SSW Konstruksi v4.0.0 · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`)}
+        />
       </Section>
 
       <div className={s.footer}>

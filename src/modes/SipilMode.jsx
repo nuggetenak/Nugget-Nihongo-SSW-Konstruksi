@@ -24,7 +24,7 @@ function normalizeQuestions(set) {
   }));
 }
 
-export default function SipilMode({ onExit }) {
+export default function SipilMode({ onExit, onSessionEnd }) {
   const [selectedSet, setSelectedSet] = useState(null);
   const scores = get('progress')?.sipilScores ?? {};
 
@@ -37,6 +37,7 @@ export default function SipilMode({ onExit }) {
         [selectedSet.id]: { correct, total, date: new Date().toISOString() },
       },
     }));
+    onSessionEnd?.({ correct, total });
   };
 
   if (selectedSet) {

@@ -140,17 +140,28 @@ export default function ModeRouter() {
   if (!ModeComponent) return null;
 
   // Phase C: Wrap onFinish to also record session + check mission completion
-  const makeFinishHandler = (mode, extra) => ({ correct, total, maxStreak, maxWrongStreak }) => {
-    recordSession({ mode, correct, total });
+  const makeFinishHandler = (modeName, extra) => ({ correct = 0, total = 0, maxStreak = 0, maxWrongStreak = 0 } = {}) => {
+    recordSession({ mode: modeName, correct, total });
 
     // C.3: Check if this mode matches the daily mission
     const mission = getMission();
-    if (mission && mission.mode === mode && !isMissionDoneToday()) {
+    if (mission && mission.mode === modeName && !isMissionDoneToday()) {
       completeMission();
       setShowMissionOverlay(true);
     }
 
     extra?.({ correct, total, maxStreak, maxWrongStreak });
+  };
+
+  // sessionEnd: lightweight version for modes that manage their own score state.
+  // Passed as onSessionEnd prop — modes call it from their existing handleFinish.
+  const makeSessionEnd = (modeName) => ({ correct = 0, total = 0 } = {}) => {
+    recordSession({ mode: modeName, correct, total });
+    const mission = getMission();
+    if (mission && mission.mode === modeName && !isMissionDoneToday()) {
+      completeMission();
+      setShowMissionOverlay(true);
+    }
   };
 
   // Build filtered cards for modes that need them
@@ -180,9 +191,16 @@ export default function ModeRouter() {
       onExit: exitMode,
       onFinish: makeFinishHandler('kuis'),
     },
-    sprint:   { cards: filteredCards, onExit: exitMode },
+    sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint') },
     fokus:    { known, unknown, quizWrong, onExit: exitMode },
     stats:    { known, unknown, quizWrong, onExit: exitMode },
+    jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac') },
+    wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground') },
+    vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab') },
+    simulasi: { onExit: exitMode, onSessionEnd: makeSessionEnd('simulasi') },
+    sipil:    { onExit: exitMode, onSessionEnd: makeSessionEnd('sipil') },
+    bangunan: { onExit: exitMode, onSessionEnd: makeSessionEnd('bangunan') },
+    glosari:  { onExit: exitMode, track },
   };
 
   const props = modeProps[mode] ?? { onExit: exitMode };

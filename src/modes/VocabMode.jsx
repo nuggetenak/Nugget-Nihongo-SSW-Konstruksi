@@ -18,7 +18,7 @@ const MIX_ALL = {
   color: '#a78bfa',
 };
 
-export default function VocabMode({ onExit }) {
+export default function VocabMode({ onExit, onSessionEnd }) {
   const [activeSet, setActiveSet] = useState(null);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
@@ -56,7 +56,8 @@ export default function VocabMode({ onExit }) {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     setScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
-  }, [activeSet, setScores]);
+    onSessionEnd?.({ correct, total });
+  }, [activeSet, setScores, onSessionEnd]);
 
   if (activeSet) {
     return (
