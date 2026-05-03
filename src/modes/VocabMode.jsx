@@ -3,7 +3,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
@@ -32,9 +32,9 @@ export default function VocabMode({ onExit }) {
       ? shuffle(VOCAB_SETS.flatMap((s) => s.questions.map((q) => ({ ...q, _set: s.id }))))
       : shuffle(setDef?.questions ?? []);
     return qs.map((q) => ({
-      question: showFuri ? q.q : stripFuri(q.q),
+      question: showFuri ? standardizeFuri(q.q) : stripFuri(q.q),
       hint: showHint ? q.hint : null,
-      options: q.opts.map((opt, i) => ({ text: showFuri ? opt : stripFuri(opt), sub: q.opts_id?.[i] || null })),
+      options: q.opts.map((opt, i) => ({ text: showFuri ? standardizeFuri(opt) : stripFuri(opt), sub: q.opts_id?.[i] || null })),
       correctIdx: q.ans,
       explanation: q.exp,
       _qId: `${activeSet}-${q.id}`,

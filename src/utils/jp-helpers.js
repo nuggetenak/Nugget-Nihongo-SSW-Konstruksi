@@ -45,6 +45,20 @@ export function extractReadings(text = '') {
 }
 
 /**
+ * Normalize furigana for display when showFuri=true.
+ * Converts both 《reading》 and duplicate 《reading》（reading） to （reading）.
+ * Semantic 《reading》（different content） = keeps both but converts 《》 to （）.
+ * Result: clean single-format text using only （reading） notation.
+ */
+export function standardizeFuri(text = '') {
+  // Step 1: same duplicate 《xyz》（xyz） → （xyz）
+  let t = text.replace(/《([^》]+)》（\1）/g, '（$1）');
+  // Step 2: remaining standalone 《reading》 → （reading）
+  t = t.replace(/《([^》]+)》/g, '（$1）');
+  return t;
+}
+
+/**
  * Detect if string contains Japanese characters (hiragana/katakana/kanji).
  */
 export function hasJapanese(s = '') {
