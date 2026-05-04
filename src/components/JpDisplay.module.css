@@ -47,6 +47,12 @@
   line-height: 1;
 }
 
+.ruby rt {
+  font-size: 0.52em;
+  color: var(--ssw-amber);
+  font-weight: var(--fw-semibold);
+}
+
 .readingRow {
   margin-top: 6px;
   text-align: center;

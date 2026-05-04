@@ -20,6 +20,7 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
   const effectiveRomaji = showFuri ? romaji : undefined;
   const clean = stripFuri(jp);
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
+  const ruby = showFuri ? parseRubyFragments(jp) : [];
 
   // Phase F: Audio — inline in render path below
 
@@ -46,7 +47,7 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
             {i > 0 && (
               <div className={S.vsLabel} style={{ fontSize: Math.round(fs * 0.5) }}>VS</div>
             )}
-            <span style={jpStyle(fs)}>{p}</span>
+            <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
         {_ReadingRow(reading, effectiveRomaji)}
@@ -64,7 +65,7 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
           {parts.map((p, i) => (
             <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
               {i > 0 && <div className={S.hr} />}
-              <span style={jpStyle(fs)}>{p}</span>
+              <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
             </div>
           ))}
           {_ReadingRow(reading, effectiveRomaji)}
@@ -80,9 +81,9 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
     const sub = clean.slice(colonIdx + 1).trim();
     return (
       <div className={S.jpWrap}>
-        <span style={jpStyle(jpFontSize(title))}>{title}</span>
+        <span style={jpStyle(jpFontSize(title))}>{renderJPWithRuby(title, ruby)}</span>
         <div className={`${S.hr} ${S.hrHover}`} />
-        <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>{sub}</span>
+        <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>{renderJPWithRuby(sub, ruby)}</span>
         {_ReadingRow(reading, effectiveRomaji)}
       </div>
     );
@@ -97,7 +98,7 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
         {parts.map((p, i) => (
           <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
             {i > 0 && <span className={S.arrowDown}>↓</span>}
-            <span style={jpStyle(fs)}>{p}</span>
+            <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
         {_ReadingRow(reading, effectiveRomaji)}
@@ -109,10 +110,42 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
   const fs = jpFontSize(clean);
   return (
     <div style={{ textAlign: 'center' }}>
-      <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{clean}</span>
+      <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{renderJPWithRuby(clean, ruby)}</span>
       {_ReadingRow(reading, effectiveRomaji)}
     </div>
   );
+}
+
+function parseRubyFragments(jp = '') {
+  const frags = [];
+  const re = /([一-龯々〆ヵヶ]+)《([^》]+)》/g;
+  let m;
+  while ((m = re.exec(jp)) !== null) {
+    frags.push({ base: m[1], reading: m[2] });
+  }
+  return frags;
+}
+
+function renderJPWithRuby(text, rubyFragments) {
+  if (!text || !rubyFragments?.length) return text;
+  const nodes = [];
+  let rest = text;
+  let key = 0;
+  for (const frag of rubyFragments) {
+    const idx = rest.indexOf(frag.base);
+    if (idx < 0) continue;
+    if (idx > 0) nodes.push(rest.slice(0, idx));
+    nodes.push(
+      <ruby key={`rb-${key++}`} className={S.ruby}>
+        {frag.base}
+        <rt>{frag.reading}</rt>
+      </ruby>,
+    );
+    rest = rest.slice(idx + frag.base.length);
+  }
+  if (!nodes.length) return text;
+  if (rest) nodes.push(rest);
+  return nodes;
 }
 
 function _ReadingRow(reading, romaji) {
