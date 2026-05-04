@@ -36,7 +36,7 @@
 }
 
 .brandName {
-  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.3px;
@@ -132,7 +132,7 @@
 }
 
 .streakDays {
-  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-subtitle);
   font-weight: 800;
   color: var(--ssw-amber);
@@ -174,7 +174,7 @@
 }
 
 .ringKnown {
-  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-title);
   font-weight: 800;
   color: var(--ssw-textBright);
@@ -317,7 +317,7 @@
 
 /* ── Recent cards ── */
 .recentHeader {
-  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-nano);
   font-weight: 800;
   letter-spacing: 1.2px;

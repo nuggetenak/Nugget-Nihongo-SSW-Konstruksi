@@ -144,7 +144,7 @@ export const T = {
   sp: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64],
   r: { xs: 6, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, pill: 99 },
   font: "'DM Sans','Noto Sans JP',system-ui,sans-serif",
-  fontDisplay: "'Syne','DM Sans',system-ui,sans-serif",
+  
   fontJP: "'Noto Sans JP','DM Sans',sans-serif",
   maxW: 480,
   navH: 64,

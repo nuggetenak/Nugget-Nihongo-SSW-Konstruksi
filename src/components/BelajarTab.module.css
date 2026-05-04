@@ -1,127 +1,187 @@
-/* BelajarTab.module.css — v2.0 UI Upgrade */
+/* BelajarTab.module.css v3.0 — Featured-first overhaul */
 
 .container {
-  padding: 0 16px 24px;
+  padding: 0 16px 28px;
   max-width: var(--max-w);
   margin: 0 auto;
   animation: fadeIn 0.25s ease;
 }
 
+/* ── Page title — clean, no gradient, no Syne ── */
 .pageTitle {
   padding: 18px 0 6px;
-  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.3px;
-  background: var(--accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ssw-textBright);
+  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
-/* Section header */
+/* ── Section wrapper ── */
+.section {
+  margin-bottom: 6px;
+}
+
+/* ── Section header — dot + label + divider ── */
 .sectionHeader {
-  padding: 20px 0 12px;
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 0 12px;
 }
 
-.sectionTitle {
-  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
-  font-size: var(--fs-caption);
+.sectionDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sectionLabel {
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: 1.4px;
   color: var(--ssw-textDim);
   white-space: nowrap;
 }
 
-.sectionSub {
-  font-size: var(--fs-small);
-  color: var(--ssw-textFaint);
-  white-space: nowrap;
-  display: none;
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: var(--ssw-border);
 }
 
-/* Mode grid */
-.grid {
-  display: grid;
-  gap: 8px;
-}
-
-.gridSingle { grid-template-columns: 1fr; }
-.gridDouble { grid-template-columns: 1fr 1fr; }
-
-/* Mode card */
-.modeCard {
-  padding: 14px 14px 14px 17px;
-  border-radius: var(--r-lg);
-  cursor: pointer;
+/* ── Featured card (horizontal, full-width) ── */
+.featuredCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 14px;
+  border-radius: var(--r-xl);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
-  color: var(--ssw-text);
-  text-align: left;
-  position: relative;
-  transition: background 0.15s, border-color 0.15s, transform 0.15s;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  cursor: pointer;
   font-family: 'DM Sans', system-ui, sans-serif;
-  overflow: hidden;
+  text-align: left;
+  margin-bottom: 8px;
+  transition: background 0.15s, transform 0.14s;
+  position: relative;
 }
 
-/* Left amber accent bar */
-.modeCard::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, rgba(245,158,11,0.6), rgba(180,83,9,0.4));
-  border-radius: 3px 0 0 3px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.modeCard:active {
+.featuredCard:active {
   background: var(--ssw-surfaceActive);
+  transform: scale(0.98);
   border-color: var(--ssw-borderHover);
-  transform: scale(0.97);
 }
 
-.modeCard:active::before {
-  opacity: 1;
+.featuredIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
 }
 
-.modeCard[data-badged='true'] {
-  border-color: var(--ssw-borderLight);
+.featuredBody {
+  flex: 1;
+  min-width: 0;
 }
 
-.modeCard[data-badged='true']::before {
-  opacity: 1;
-  background: linear-gradient(180deg, #F59E0B, #B45309);
-}
-
-.cardIcon {
-  font-size: 20px;
-  line-height: 1;
-  display: block;
-}
-
-.cardLabel {
-  font-size: var(--fs-body);
+.featuredLabel {
+  font-size: var(--fs-subtitle);
   font-weight: 700;
-  letter-spacing: -0.1px;
-  margin-bottom: 1px;
+  color: var(--ssw-textBright);
+  letter-spacing: -0.2px;
+  margin-bottom: 3px;
 }
 
-.cardDesc {
+.featuredDesc {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
   line-height: 1.3;
 }
 
-/* Badge on card */
+.featuredArrow {
+  font-size: 22px;
+  font-weight: 800;
+  flex-shrink: 0;
+  opacity: 0.75;
+  line-height: 1;
+}
+
+.featuredBadge {
+  font-size: var(--fs-nano);
+  font-weight: 800;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--r-pill);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+/* ── Compact 2-col grid ── */
+.compactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.compactCard {
+  padding: 13px 12px 14px;
+  border-radius: var(--r-lg);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  cursor: pointer;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: background 0.15s, transform 0.14s;
+  position: relative;
+  min-height: 90px;
+}
+
+.compactCard:active {
+  background: var(--ssw-surfaceActive);
+  transform: scale(0.96);
+  border-color: var(--ssw-borderHover);
+}
+
+.compactIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.compactLabel {
+  font-size: var(--fs-body);
+  font-weight: 700;
+  color: var(--ssw-textBright);
+  letter-spacing: -0.1px;
+}
+
+.compactDesc {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  line-height: 1.3;
+}
+
+/* ── Badges ── */
 .cardBadge {
   position: absolute;
   top: 8px;
@@ -132,10 +192,8 @@
   height: 17px;
   padding: 0 4px;
   border-radius: var(--r-pill);
-  background: var(--ssw-amber);
-  color: var(--ssw-bg);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid var(--ssw-bg);
 }
