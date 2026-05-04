@@ -9,6 +9,7 @@ describe('JpFront ruby furigana rendering', () => {
     const rt = container.querySelector('rt');
 
     expect(ruby).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Toggle furigana' })).toBeNull();
     expect(ruby?.textContent).toContain('鉄筋');
     expect(rt?.textContent).toBe('てっきん');
     expect(screen.getByText('コンクリート')).toBeTruthy();

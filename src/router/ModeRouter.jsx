@@ -190,7 +190,7 @@ export default function ModeRouter() {
       starred,
       onToggleStar: toggleStar,
     },
-    ulasan: { srs, onExit: exitMode },
+    ulasan: { srs, onExit: exitMode, onSessionEnd: makeSessionEnd('ulasan') },
     kuis:   {
       cards: filteredCards,
       allCards: CARDS,

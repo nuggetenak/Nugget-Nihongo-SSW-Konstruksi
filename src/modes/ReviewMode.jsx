@@ -16,7 +16,7 @@ import S from './modes.module.css';
 
 const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 
-export default function ReviewMode({ srs, onExit }) {
+export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -39,6 +39,12 @@ export default function ReviewMode({ srs, onExit }) {
     setIntervals(srs.previewFor(currentId)); setFlipped(false); setLast(null);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Fire onSessionEnd once when all cards reviewed
+  useEffect(() => {
+    if (!done || !queue) return;
+    onSessionEnd?.({ correct: sessionCorrect, total: queue.length });
+  }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap
   useEffect(() => {
     const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
@@ -54,7 +60,9 @@ export default function ReviewMode({ srs, onExit }) {
     if (result.isKnown) setSessionCorrect((n) => n + 1);
     setTimeout(() => {
       const nextIdx = idx + 1;
-      if (nextIdx >= queue.length) setDone(true);
+      if (nextIdx >= queue.length) {
+        setDone(true);
+      }
       else setIdx(nextIdx);
     }, 600);
   }, [flipped, currentId, idx, queue, srs]);

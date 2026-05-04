@@ -24,16 +24,26 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
   const effectiveRomaji = showFuri ? romaji : null;
   const clean = stripFuri(jp);
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
-  const ruby = useMemo(() => (showFuri ? parseRubyFragments(jp) : []), [jp, showFuri]);
-  const hasRubyInText = useMemo(() => parseRubyFragments(jp).length > 0, [jp]);
+  const parsedRuby = useMemo(() => parseRubyFragments(jp), [jp]);
+  const ruby = showFuri ? parsedRuby : [];
+  const hasRubyInText = parsedRuby.length > 0;
   const showReadingRow = !!(reading || effectiveRomaji) && !hasRubyInText;
   const hintLabel = isTapMode ? (showFuri ? '👆 Ketuk untuk sembunyikan furigana' : '👆 Ketuk untuk tampilkan furigana') : null;
-  const wrapInteractive = (content) => (
-    <button type="button" className={S.tapSurface} onClick={() => isTapMode && setTapReveal((v) => !v)} aria-label={isTapMode ? 'Toggle furigana' : undefined}>
-      {content}
-      {hintLabel && <div className={S.tapHint}>{hintLabel}</div>}
-    </button>
-  );
+  const wrapInteractive = (content) => {
+    if (!isTapMode) return content;
+    return (
+      <button
+        type="button"
+        className={S.tapSurface}
+        onClick={() => setTapReveal((v) => !v)}
+        aria-label="Toggle furigana"
+        aria-pressed={showFuri}
+      >
+        {content}
+        {hintLabel && <div className={S.tapHint}>{hintLabel}</div>}
+      </button>
+    );
+  };
 
   // Phase F: Audio — inline in render path below
 

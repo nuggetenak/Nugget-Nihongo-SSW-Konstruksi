@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-04 by Agent Sonnet (feat/audit-improvements — B1-B4+M1-M3, C1-C6)
-> **Version:** v4.0.1 — audit-improvements branch active
+> **Last updated:** 2026-05-04 by Agent Sonnet (post-Codex cleanup — JpDisplay fix, ReviewMode session wiring)
+> **Version:** v4.0.2 — all Phases A–G complete; 361 tests
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v6.md` ← **READ THIS FIRST** (v6 = agent-executable, self-contained, supersedes ALL prior)
 
 ---
@@ -127,7 +127,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   └── index.js
     ├── styles/
     │   └── theme.js
-    └── tests/                    ← 25 test files, 325 tests (Phase G)
+    └── tests/                    ← 32 test files, 361 tests (Phase G + audit)
 ```
 
 ---
@@ -212,3 +212,6 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-02 | Sonnet 4.6 | Phase F+G: exam countdown, audio, QA, release v4.0.0 |
 | 2026-05-03 | Sonnet 4.6 | feat/audit-improvements B1-B4+M1-M3: furigana chain, session recording all modes, sprint PB, glossary track-aware |
 | 2026-05-04 | Sonnet 4.6 | feat/audit-improvements C1-C6: ReviewMode audio, track-aware search, fokus/angka/jebak session wiring, StatsMode SRS+streak |
+| 2026-05-04 | Codex (Sonnet) | feat/audit-improvements D1-D10: SayaTab inline edit, QuizMode furigana, SprintMode audio, StatsMode 7-day bars, MissionOverlay D8, SearchMode star, QuizShell audio D10 |
+| 2026-05-04 | Codex (Sonnet) | fix(JpDisplay): native ruby rendering + tap-to-reveal furigana (PR #6) |
+| 2026-05-04 | Sonnet 4.6 | post-Codex cleanup: fix wrapInteractive button wrapping, ReviewMode onSessionEnd, stale branch cleanup |
