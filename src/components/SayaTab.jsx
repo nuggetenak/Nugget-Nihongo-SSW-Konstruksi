@@ -206,7 +206,7 @@ export default function SayaTab() {
           }
           onClick={() => {
             const cur = prefs?.furiganaPolicy ?? 'always';
-            const next = cur === 'always' ? 'hidden' : cur === 'hidden' ? 'always' : 'always';
+            const next = cur === 'always' ? 'tap' : cur === 'tap' ? 'hidden' : 'always';
             setPref('furiganaPolicy', next);
             toast.show(next === 'always' ? '✅ Furigana selalu tampil' : next === 'hidden' ? '⬜ Furigana disembunyikan' : '👆 Furigana tap-to-reveal');
           }}

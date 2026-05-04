@@ -53,10 +53,10 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, audioEnabl
     const raw = generateQuiz(pool, allCards, difficulty, quizWrong);
     const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
     const qs = raw.map((q) => ({
-      question: furiganaPolicy === 'hidden' ? stripFuri(q.card.jp) : q.card.jp,
-      questionSub: furiganaPolicy === 'hidden'
-        ? (q.card.romaji || null)
-        : (q.card.furi || q.card.romaji || null),
+      question: stripFuri(q.card.jp),
+      questionSub: furiganaPolicy !== 'hidden'
+        ? (q.card.furi || q.card.romaji || null)
+        : (q.card.romaji || null),
       options: q.options.map((o) => ({ text: o.text, sub: null })),
       correctIdx: q.options.findIndex((o) => o.correct),
       explanation: q.card.desc,
