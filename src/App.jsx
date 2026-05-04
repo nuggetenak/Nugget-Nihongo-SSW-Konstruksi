@@ -45,7 +45,7 @@ export default function App() {
   const belajarBadges = { ulasan: srs.dueCount };
 
   return (
-    <main id="main-content" style={{ paddingBottom: T.navH + 16 }}>
+    <main id="main-content" style={{ paddingBottom: T.navH + 36 }}>
       {tab === 'home'    && <Dashboard known={known} unknown={unknown} track={track} onNavigate={goMode} onChangeTrack={() => setTrack(null)} srs={srs} isDark={isDark} onToggleTheme={toggleTheme} />}
       {tab === 'belajar' && <BelajarTab onSelect={goMode} badges={belajarBadges} />}
       {tab === 'saya'    && <SayaTab />}

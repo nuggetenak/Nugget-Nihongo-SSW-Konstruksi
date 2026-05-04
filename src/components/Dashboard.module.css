@@ -1,39 +1,57 @@
-/* ─── Dashboard.module.css v4.0 ──────────────────────────────────────────────── */
+/* ─── Dashboard.module.css v5.0 — UI/UX Upgrade ──────────────────────────────── */
 
 .container {
   padding: 0 16px 32px;
   max-width: var(--max-w);
   margin: 0 auto;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.32s ease;
 }
 
 /* ─── Header ─────────────────────────────────────────────────────────────────── */
 .header {
-  padding: 18px 0 16px;
+  padding: 20px 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
+  overflow: visible;
 }
 
-/* Blueprint grid texture */
+/* Subtle dot-grid texture */
 .header::before {
   content: '';
   position: absolute;
-  top: 0; left: -16px; right: -16px; height: 100%;
+  top: 0; left: -16px; right: -16px; bottom: 0;
   background-image:
-    linear-gradient(rgba(180,83,9,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(180,83,9,0.045) 1px, transparent 1px);
-  background-size: 20px 20px;
+    radial-gradient(circle, rgba(180,83,9,0.10) 1px, transparent 1px);
+  background-size: 18px 18px;
   pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Large decorative kanji backdrop */
+.header::after {
+  content: '建';
+  position: absolute;
+  right: 80px;
+  top: -4px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 80px;
+  font-weight: 900;
+  color: var(--ssw-amber);
+  opacity: 0.055;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
 }
 
 .brand { position: relative; z-index: 1; }
 
 .brandName {
-  font-size: 20px;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.5px;
   background: var(--accent);
   -webkit-background-clip: text;
   background-clip: text;
@@ -45,12 +63,13 @@
   font-size: var(--fs-nano);
   color: var(--ssw-textDim);
   margin-top: 3px;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
 
 .headerRight {
   display: flex;
-  gap: 6px;
+  gap: 7px;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -60,19 +79,20 @@
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-small);
   font-weight: 700;
-  padding: 5px 11px;
+  padding: 6px 12px;
   border-radius: var(--r-pill);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
-  transition: opacity 0.15s, transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
-.trackPill:active { transform: scale(0.95); opacity: 0.8; }
+.trackPill:active { transform: scale(0.93); opacity: 0.85; }
 
 .themeBtn {
   font-size: 15px;
-  width: 34px; height: 34px;
+  width: 36px; height: 36px;
   border-radius: var(--r-pill);
   cursor: pointer;
   background: var(--ssw-surface);
@@ -80,36 +100,59 @@
   color: var(--ssw-text);
   display: flex; align-items: center; justify-content: center;
   transition: background 0.15s, transform 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
-.themeBtn:active { transform: scale(0.9); }
+.themeBtn:active { transform: scale(0.88); }
 
 /* ─── Streak hero ───────────────────────────────────────────────────────────── */
 .streakHero {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 13px 16px 13px 20px;
-  border-radius: var(--r-lg);
-  background: rgba(245,158,11,0.06);
-  border: 1px solid rgba(245,158,11,0.22);
+  gap: 14px;
+  padding: 14px 18px 14px 20px;
+  border-radius: var(--r-xl);
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.24);
   margin-bottom: 12px;
   animation: slideDown 0.35s ease;
   position: relative;
   overflow: hidden;
 }
+/* Left accent bar */
 .streakHero::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, #FBBF24, #B45309);
-  border-radius: 3px 0 0 3px;
+  left: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, #FBBF24 0%, #B45309 100%);
+  border-radius: 4px 0 0 4px;
 }
-.streakEmoji { font-size: 26px; flex-shrink: 0; }
+/* Glow orb */
+.streakHero::after {
+  content: '';
+  position: absolute;
+  right: -20px; top: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.streakEmoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  animation: floatUp 3s ease-in-out infinite;
+}
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+
 .streakDays {
+  font-family: 'Syne', 'DM Sans', sans-serif;
   font-size: var(--fs-subtitle);
   font-weight: 800;
   color: var(--ssw-amber);
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
 }
 .streakSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
 
@@ -117,47 +160,44 @@
 .countdownCard {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px 12px 20px;
-  border-radius: var(--r-lg);
+  gap: 13px;
+  padding: 13px 18px 13px 20px;
+  border-radius: var(--r-xl);
   margin-bottom: 12px;
   position: relative;
   overflow: hidden;
   animation: slideDown 0.3s ease;
 }
 
-/* tier-based colors via CSS custom properties */
 .countdownCard[data-tier='info'] {
-  background: rgba(59,130,246,0.08);
-  border: 1px solid rgba(59,130,246,0.25);
+  background: rgba(59,130,246,0.07);
+  border: 1px solid rgba(59,130,246,0.22);
 }
 .countdownCard[data-tier='warning'] {
-  background: rgba(245,158,11,0.08);
-  border: 1px solid rgba(245,158,11,0.28);
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.26);
 }
 .countdownCard[data-tier='critical'] {
-  background: rgba(239,68,68,0.08);
-  border: 1px solid rgba(239,68,68,0.28);
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.25);
 }
 .countdownCard[data-tier='today'] {
-  background: rgba(239,68,68,0.12);
-  border: 1px solid rgba(239,68,68,0.45);
+  background: rgba(239,68,68,0.10);
+  border: 1px solid rgba(239,68,68,0.40);
 }
 
-/* Left accent bar */
 .countdownCard::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0; width: 3px;
-  border-radius: 3px 0 0 3px;
+  left: 0; top: 0; bottom: 0; width: 4px;
+  border-radius: 4px 0 0 4px;
 }
 .countdownCard[data-tier='info']::before     { background: #3B82F6; }
 .countdownCard[data-tier='warning']::before  { background: #F59E0B; }
 .countdownCard[data-tier='critical']::before { background: #EF4444; }
 .countdownCard[data-tier='today']::before    { background: #EF4444; }
 
-.countdownIcon { font-size: 20px; flex-shrink: 0; }
-
+.countdownIcon { font-size: 22px; flex-shrink: 0; }
 .countdownDays {
   font-size: var(--fs-body);
   font-weight: 800;
@@ -167,53 +207,70 @@
 .countdownDays[data-tier='warning']  { color: var(--ssw-amber); }
 .countdownDays[data-tier='critical'] { color: #EF4444; }
 .countdownDays[data-tier='today']    { color: #EF4444; }
-
-.countdownSub {
-  font-size: var(--fs-small);
-  color: var(--ssw-textDim);
-  margin-top: 2px;
-}
+.countdownSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
 
 /* ─── Progress ring card ────────────────────────────────────────────────────── */
 .ringCard {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 18px;
+  padding: 20px 20px;
   border-radius: var(--r-xl);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   margin-bottom: 12px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
+/* Top-left glow */
+.ringCard::before {
+  content: '';
+  position: absolute;
+  left: -10px; top: -10px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* Bottom-right accent */
 .ringCard::after {
   content: '';
   position: absolute;
-  right: -16px; bottom: -16px;
-  width: 80px; height: 80px;
+  right: -20px; bottom: -20px;
+  width: 90px; height: 90px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
-.ringInfo { flex: 1; }
+
+.ringInfo { flex: 1; z-index: 1; }
+
 .ringKnown {
-  font-size: var(--fs-title);
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-size: 22px;
   font-weight: 800;
   color: var(--ssw-textBright);
-  margin-bottom: 4px;
-  letter-spacing: -0.3px;
+  margin-bottom: 3px;
+  letter-spacing: -0.4px;
+  line-height: 1;
 }
 .ringDetail {
-  font-size: var(--fs-caption);
+  font-size: var(--fs-small);
   color: var(--ssw-textDim);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .ringPct {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: var(--fs-small);
-  font-weight: 700;
-  color: var(--ssw-amber);
-  margin-bottom: 3px;
+  font-weight: 800;
+  color: var(--ssw-bg);
+  background: var(--ssw-amber);
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  margin-bottom: 4px;
 }
 .ringStreak {
   display: inline-block;
@@ -227,14 +284,14 @@
 .ringDaily {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 /* ─── Primary CTA ───────────────────────────────────────────────────────────── */
 .cta {
   width: 100%;
-  padding: 17px 20px;
-  margin-bottom: 8px;
+  padding: 18px 20px;
+  margin-bottom: 10px;
   font-family: 'DM Sans', system-ui, sans-serif;
   border-radius: var(--r-xl);
   cursor: pointer;
@@ -245,31 +302,59 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: 0 4px 24px rgba(180,83,9,0.28), 0 1px 4px rgba(180,83,9,0.18);
+  box-shadow:
+    0 6px 28px rgba(180,83,9,0.32),
+    0 2px 8px rgba(180,83,9,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.12);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
   position: relative;
   overflow: hidden;
 }
-.cta::after {
+/* Shine overlay */
+.cta::before {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+/* Shimmer sweep */
+.cta::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,255,255,0.12) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: ctaShimmer 3.5s ease infinite;
   pointer-events: none;
 }
 .cta:active {
-  transform: scale(0.985) translateY(1px);
-  box-shadow: 0 2px 12px rgba(180,83,9,0.22);
+  transform: scale(0.982) translateY(1px);
+  box-shadow: 0 3px 14px rgba(180,83,9,0.25);
 }
-.ctaIcon { font-size: 26px; flex-shrink: 0; }
-.ctaBody { flex: 1; }
+.ctaIcon { font-size: 28px; flex-shrink: 0; position: relative; z-index: 1; }
+.ctaBody { flex: 1; position: relative; z-index: 1; }
 .ctaLabel {
+  font-family: 'Syne', 'DM Sans', sans-serif;
   font-size: var(--fs-subtitle);
   font-weight: 800;
   letter-spacing: -0.2px;
   line-height: 1.2;
 }
-.ctaDesc { font-size: var(--fs-caption); opacity: 0.72; margin-top: 2px; }
-.ctaArrow { font-size: 20px; opacity: 0.65; font-weight: 800; }
+.ctaDesc { font-size: var(--fs-caption); opacity: 0.75; margin-top: 3px; }
+.ctaArrow {
+  font-size: 22px;
+  opacity: 0.7;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+.cta:hover .ctaArrow { transform: translateX(2px); }
 
 /* ─── Daily Mission card ─────────────────────────────────────────────────────── */
 .missionCard {
@@ -277,7 +362,7 @@
   padding: 14px 16px;
   margin-bottom: 12px;
   font-family: 'DM Sans', system-ui, sans-serif;
-  border-radius: var(--r-lg);
+  border-radius: var(--r-xl);
   cursor: pointer;
   background: transparent;
   border: 1.5px dashed var(--ssw-borderActive);
@@ -285,50 +370,62 @@
   text-align: left;
   display: flex;
   align-items: center;
-  gap: 12px;
-  transition: background 0.15s, transform 0.15s;
+  gap: 13px;
+  transition: background 0.15s, transform 0.15s, border-color 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.missionCard::after {
+  content: '';
+  position: absolute;
+  right: -10px; top: -10px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+  pointer-events: none;
 }
 .missionCard:active {
   background: var(--ssw-surfaceActive);
   transform: scale(0.98);
+  border-color: var(--ssw-amber);
 }
 .missionDone {
   width: 100%;
   padding: 14px 16px;
   margin-bottom: 12px;
-  border-radius: var(--r-lg);
+  border-radius: var(--r-xl);
   background: transparent;
   border: 1px solid var(--ssw-border);
   color: var(--ssw-text);
   display: flex;
   align-items: center;
-  gap: 12px;
-  opacity: 0.55;
+  gap: 13px;
+  opacity: 0.50;
 }
-.missionIcon { font-size: 22px; flex-shrink: 0; }
+.missionIcon { font-size: 24px; flex-shrink: 0; }
 .missionBody { flex: 1; }
 .missionEyebrow {
   font-size: var(--fs-nano);
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   color: var(--ssw-amber);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 .missionLabel { font-size: var(--fs-body); font-weight: 700; }
-.missionArrow { font-size: 18px; color: var(--ssw-amber); opacity: 0.8; }
+.missionArrow { font-size: 18px; color: var(--ssw-amber); opacity: 0.85; }
 
 /* ─── Quick grid ─────────────────────────────────────────────────────────────── */
 .quickGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
-  margin-bottom: 22px;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .quickTile {
   font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 12px 6px 11px;
-  border-radius: var(--r-lg);
+  padding: 14px 4px 12px;
+  border-radius: var(--r-xl);
   cursor: pointer;
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
@@ -337,27 +434,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  transition: background 0.15s, transform 0.14s;
+  gap: 7px;
+  transition: background 0.15s, transform 0.14s, border-color 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.quickTile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(245,158,11,0.04) 0%, transparent 60%);
+  pointer-events: none;
 }
 .quickTile:active {
   background: var(--ssw-surfaceActive);
   border-color: var(--ssw-borderHover);
-  transform: scale(0.93);
+  transform: scale(0.91);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
 }
-.quickIcon { font-size: 20px; }
+
+.quickIcon { font-size: 22px; }
 .quickLabel {
   font-size: var(--fs-nano);
   font-weight: 700;
   color: var(--ssw-textDim);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 
 /* ─── Recent cards ───────────────────────────────────────────────────────────── */
 .recentHeader {
   font-size: var(--fs-nano);
   font-weight: 800;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
   color: var(--ssw-textDim);
   margin-bottom: 10px;
@@ -372,17 +480,20 @@
   background: var(--ssw-border);
 }
 
-.recentList { display: flex; flex-direction: column; gap: 4px; }
+.recentList { display: flex; flex-direction: column; gap: 5px; }
 
 .recentCard {
-  padding: 10px 14px;
-  border-radius: var(--r-md);
+  padding: 11px 14px;
+  border-radius: var(--r-lg);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   display: flex;
   align-items: center;
   gap: 12px;
+  transition: background 0.15s;
 }
+.recentCard:last-child { border-color: transparent; background: transparent; }
+
 .recentJp {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: var(--fs-subtitle);

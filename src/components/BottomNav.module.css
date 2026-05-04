@@ -1,27 +1,32 @@
-/* BottomNav.module.css — v2.0: pill active state, SVG icons */
+/* BottomNav.module.css — v3.0: floating island pill */
 
 .nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: calc(var(--max-w) - 32px);
+  height: 62px;
   background: var(--ssw-navBg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid var(--ssw-border);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--ssw-borderLight);
+  border-radius: var(--r-xxl);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  padding: 0 8px;
 }
 
 .inner {
   display: flex;
   width: 100%;
-  max-width: var(--max-w);
-  padding: 0 8px;
   gap: 4px;
 }
 
@@ -40,14 +45,14 @@
   border: none;
   cursor: pointer;
   color: var(--ssw-textFaint);
-  transition: color 0.2s;
+  transition: color 0.2s ease;
   position: relative;
   border-radius: var(--r-lg);
   -webkit-tap-highlight-color: transparent;
 }
 
 .tab:active {
-  transform: scale(0.92);
+  transform: scale(0.90);
   transition: transform 0.1s ease, color 0.2s;
 }
 
@@ -56,20 +61,35 @@
   font-weight: 700;
 }
 
-/* SVG icon wrapper — pill background on active */
+/* SVG icon wrapper */
 .iconWrap {
   position: relative;
-  width: 44px;
-  height: 28px;
+  width: 42px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .tab[data-active='true'] .iconWrap {
-  background: rgba(245, 158, 11, 0.14);
+  background: rgba(245, 158, 11, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Active indicator dot */
+.tab[data-active='true']::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ssw-amber);
+  animation: navDotPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .tabLabel {
@@ -80,12 +100,12 @@
 /* Badge */
 .badge {
   position: absolute;
-  top: -2px;
-  right: 2px;
+  top: -3px;
+  right: 0px;
   font-size: 9px;
   font-weight: 800;
-  min-width: 15px;
-  height: 15px;
+  min-width: 16px;
+  height: 16px;
   border-radius: 99px;
   background: var(--ssw-amber);
   color: var(--ssw-bg);
@@ -94,5 +114,6 @@
   justify-content: center;
   padding: 0 3px;
   z-index: 1;
-  border: 1.5px solid var(--ssw-bg);
+  border: 1.5px solid var(--ssw-navBg);
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
