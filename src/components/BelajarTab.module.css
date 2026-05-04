@@ -136,6 +136,19 @@
   margin-bottom: 2px;
 }
 
+/* Lone last card fills full row */
+.compactGrid > *:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* When spanning full row: go horizontal */
+.compactCard:last-child:nth-child(odd) {
+  flex-direction: row;
+  align-items: center;
+  min-height: 0;
+  gap: 12px;
+}
+
 .compactCard {
   padding: 13px 12px 14px;
   border-radius: var(--r-lg);

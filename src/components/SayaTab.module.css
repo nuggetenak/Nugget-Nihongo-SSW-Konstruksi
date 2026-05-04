@@ -138,7 +138,7 @@
 /* ── Inline edit ── */
 .inlineEdit {
   padding: 12px 14px 14px;
-  background: var(--ssw-surface);
+  background: var(--ssw-bgAlt);
   border-radius: var(--r-lg);
   border: 1px solid var(--ssw-borderActive);
   margin: 4px 0 8px;

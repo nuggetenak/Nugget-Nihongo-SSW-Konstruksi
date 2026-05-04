@@ -6,19 +6,21 @@
 import s from './BelajarTab.module.css';
 import { MODE_META, MODE_SECTIONS } from '../router/modes.js';
 
-// ── Per-section color identity ────────────────────────────────────────────────
+// ── Unified amber palette for all sections ────────────────────────────────────
 const SECTION_META = {
-  pelajari: { color: '#F59E0B', bg: 'rgba(245,158,11,0.11)', border: 'rgba(245,158,11,0.20)' },
-  latihan:  { color: '#3B82F6', bg: 'rgba(59,130,246,0.11)', border: 'rgba(59,130,246,0.20)' },
-  ujian:    { color: '#EF4444', bg: 'rgba(239,68,68,0.11)',   border: 'rgba(239,68,68,0.20)'  },
-  ulasan:   { color: '#8B5CF6', bg: 'rgba(139,92,246,0.11)', border: 'rgba(139,92,246,0.20)' },
-  alat:     { color: '#71717A', bg: 'rgba(113,113,122,0.11)', border: 'rgba(113,113,122,0.20)' },
+  pelajari: { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  latihan:  { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  ujian:    { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  ulasan:   { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  alat:     { color: 'var(--ssw-textDim)', bg: 'rgba(245,158,11,0.05)', border: 'rgba(245,158,11,0.10)' },
 };
 
 function SectionHeader({ sectionKey, title }) {
   const sm = SECTION_META[sectionKey] || SECTION_META.alat;
-  // Strip emoji prefix from title
-  const clean = title.replace(/^[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\s]+/u, '').trim();
+  // Strip emoji, variation selectors, and leading spaces
+  const clean = title
+    .replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\uFE0F\uFE0E\u200D\s]+/gu, ' ')
+    .trim();
   return (
     <div className={s.sectionHeader}>
       <span className={s.sectionDot} style={{ background: sm.color }} />
