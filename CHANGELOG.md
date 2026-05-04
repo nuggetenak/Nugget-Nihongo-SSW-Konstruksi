@@ -1,4 +1,24 @@
-## [4.0.1] - 2026-05-04
+## [4.0.2] - 2026-05-04
+
+### feat/audit-improvements — D1–D10 (Agent Sonnet 4.6)
+
+- `components/SayaTab.jsx` — D1: Replace `prompt()` for Target Harian + Tanggal Ujian with inline input UI (mobile-safe, no dialog blocks)
+- `components/SayaTab.module.css` — D1: Add `.inlineEdit`, `.inlineInput`, `.inlineSave`, `.inlineDelete`, `.inlineCancel` styles
+- `modes/QuizMode.jsx` — D2: Respect `furiganaPolicy` pref in `startQuiz()` — question uses raw jp+furi when 'always', strips when 'hidden'
+- `modes/SprintMode.jsx` — D3: Wire `furiganaPolicy` + `audioEnabled` from storage into `JpFront` props
+- `router/modes.js` — D4: Add `alat` section (`stats`, `ekspor`, `sumber`) to `MODE_SECTIONS` — modes now reachable from BelajarTab grid
+- `modes/ReviewMode.jsx` — D5: Auto-speak on card advance via `useEffect([currentId])` with 300ms delay; manual 🔊 kept for replay
+- `utils/daily-mission.js` — D6: Add `angka` + `jebak` to `MISSION_TYPES` pool (were wired but excluded from daily selection)
+- `modes/StatsMode.jsx` — D7: Accept `sessions` prop; render 7-day CSS activity bars colored by dominant mode
+- `router/ModeRouter.jsx` — D7: Destructure + pass `sessions` from ProgressContext to stats mode props
+- `components/MissionCompleteOverlay.jsx` — D8: Tap-to-dismiss, shows mission icon+label+score, auto-dismiss 1.5s→3s
+- `router/ModeRouter.jsx` — D8: Track `missionResult` state, pass `result` prop to overlay, clear on close
+- `modes/SearchMode.jsx` — D9: Accept `starred`+`toggleStar` props; ⭐/☆ button on each result card
+- `router/ModeRouter.jsx` — D9: Pass `starred`+`toggleStar` to `cari` mode
+- `components/QuizShell.jsx` — D10: Add optional `audioEnabled` prop + 🔊 button in counter row (opt-in, default false)
+- `modes/QuizMode.jsx` + `JACMode.jsx` + `VocabMode.jsx` — D10: Accept + pass `audioEnabled` to QuizShell
+- `router/ModeRouter.jsx` — D10: Read `audioEnabled` from prefs, pass to `kuis`, `jac`, `vocab` $
+ ## [4.0.1] - 2026-05-04
 
 ### feat/audit-improvements — C1–C6 (Agent Sonnet 4.6)
 
@@ -649,4 +669,3 @@ Logic/data components (modes, hooks, srs) deferred to Phase 6 continuation.
 
 ### Changed
 - README diperbarui dengan referensi audit
-

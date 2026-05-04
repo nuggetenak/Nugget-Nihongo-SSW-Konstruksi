@@ -134,3 +134,66 @@
   margin-top: 20px;
   line-height: 1.6;
 }
+
+/* D1: Inline edit UI */
+.inlineEdit {
+  padding: 12px 14px 14px;
+  background: var(--surface-2, #1a1a2e);
+  border-radius: 10px;
+  margin-bottom: 2px;
+}
+.inlineEditLabel {
+  font-size: 11px;
+  color: var(--text-dim, #666);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+.inlineEditRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.inlineInput {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface, #111);
+  border: 1px solid var(--border-active, #f59e0b);
+  color: var(--text, #fff);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+.inlineSave {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--amber, #f59e0b);
+  border: none;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+.inlineDelete {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--wrong, #ef4444);
+  color: var(--wrong, #ef4444);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.inlineCancel {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--border, #333);
+  color: var(--text-muted, #aaa);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}

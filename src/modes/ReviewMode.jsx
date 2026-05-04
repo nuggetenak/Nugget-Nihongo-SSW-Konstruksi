@@ -39,6 +39,14 @@ export default function ReviewMode({ srs, onExit }) {
     setIntervals(srs.previewFor(currentId)); setFlipped(false); setLast(null);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap
+  useEffect(() => {
+    const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
+    if (!audioEnabled || !currentCard || !canSpeak()) return;
+    const t = setTimeout(() => speakJP(stripFuri(currentCard.jp)), 300);
+    return () => clearTimeout(t);
+  }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleRate = useCallback((rating) => {
     if (!flipped || currentId == null) return;
     const result = srs.review(currentId, rating);

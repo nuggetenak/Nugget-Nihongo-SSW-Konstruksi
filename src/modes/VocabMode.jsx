@@ -18,7 +18,7 @@ const MIX_ALL = {
   color: '#a78bfa',
 };
 
-export default function VocabMode({ onExit, onSessionEnd }) {
+export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }) {
   const [activeSet, setActiveSet] = useState(null);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
@@ -69,6 +69,7 @@ export default function VocabMode({ onExit, onSessionEnd }) {
         onFinish={handleFinish}
         showHint={showHint}
         accentColor={setDef?.color || T.amber}
+        audioEnabled={audioEnabled}
       />
     );
   }

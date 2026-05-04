@@ -5,7 +5,7 @@ import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import S from './modes.module.css';
 
-export default function SearchMode({ onExit, track }) {
+export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
   const [showAllTracks, setShowAllTracks] = useState(false);
 
@@ -82,9 +82,20 @@ export default function SearchMode({ onExit, track }) {
                 <div style={{ fontFamily: T.fontJP, fontSize: 15, fontWeight: 600 }}>
                   {stripFuri(c.jp)}
                 </div>
-                <span className={S.pill} style={{ background: `${cat.color}22`, color: cat.color, fontSize: 9, whiteSpace: 'nowrap' }}>
-                  {cat.emoji}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  {toggleStar && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleStar(c.id); }}
+                      aria-label={starred?.has(c.id) ? 'Hapus bintang' : 'Beri bintang'}
+                      style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, padding: '0 2px', lineHeight: 1 }}
+                    >
+                      {starred?.has(c.id) ? '⭐' : '☆'}
+                    </button>
+                  )}
+                  <span className={S.pill} style={{ background: `${cat.color}22`, color: cat.color, fontSize: 9, whiteSpace: 'nowrap' }}>
+                    {cat.emoji}
+                  </span>
+                </div>
               </div>
               {c.furi && <div style={{ fontSize: 11, color: T.textDim, fontFamily: T.fontJP }}>{c.furi}</div>}
               <div style={{ fontSize: 13, color: T.gold, marginTop: 4 }}>{c.id_text}</div>

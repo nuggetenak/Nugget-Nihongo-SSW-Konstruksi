@@ -12,6 +12,7 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import { getMission, completeMission, isMissionDoneToday } from '../utils/daily-mission.js';
+import { get as storageGet } from '../storage/engine.js';
 import { MODE_COMPONENTS } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
 import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
@@ -130,9 +131,10 @@ function FocusSentinel() {
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
   const { mode, exitMode, track } = useApp();
-  const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession, streakData } = useProgress();
+  const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession, streakData, sessions } = useProgress();
   const srs = useSRSContext();
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
+  const [missionResult, setMissionResult] = useState(null);
 
   if (!mode) return null;
 
@@ -147,6 +149,7 @@ export default function ModeRouter() {
     const mission = getMission();
     if (mission && mission.mode === modeName && !isMissionDoneToday()) {
       completeMission();
+      setMissionResult({ label: mission.label, icon: mission.icon, correct, total });
       setShowMissionOverlay(true);
     }
 
@@ -160,6 +163,7 @@ export default function ModeRouter() {
     const mission = getMission();
     if (mission && mission.mode === modeName && !isMissionDoneToday()) {
       completeMission();
+      setMissionResult({ label: mission.label, icon: mission.icon, correct, total });
       setShowMissionOverlay(true);
     }
   };
@@ -171,6 +175,8 @@ export default function ModeRouter() {
     if (trackCatKeys && !trackCatKeys.has(c.category)) return false;
     return true;
   });
+
+  const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   // Prop map — each mode gets exactly what it needs
   const modeProps = {
@@ -190,16 +196,17 @@ export default function ModeRouter() {
       allCards: CARDS,
       onExit: exitMode,
       onFinish: makeFinishHandler('kuis'),
+      audioEnabled,
     },
     sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint') },
     fokus:    { known, unknown, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
-    stats:    { known, unknown, quizWrong, srs, streakData, onExit: exitMode },
+    stats:    { known, unknown, quizWrong, srs, streakData, sessions, onExit: exitMode },
     angka:    { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
     jebak:    { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },
-    cari:     { onExit: exitMode, track },
-    jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac') },
+    cari:     { onExit: exitMode, track, starred, toggleStar },
+    jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac'), audioEnabled },
     wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground') },
-    vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab') },
+    vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab'), audioEnabled },
     simulasi: { onExit: exitMode, onSessionEnd: makeSessionEnd('simulasi') },
     sipil:    { onExit: exitMode, onSessionEnd: makeSessionEnd('sipil') },
     bangunan: { onExit: exitMode, onSessionEnd: makeSessionEnd('bangunan') },
@@ -215,7 +222,7 @@ export default function ModeRouter() {
         <ModeComponent {...props} />
       </Suspense>
       {showMissionOverlay && (
-        <MissionCompleteOverlay onDone={() => setShowMissionOverlay(false)} />
+        <MissionCompleteOverlay result={missionResult} onDone={() => { setShowMissionOverlay(false); setMissionResult(null); }} />
       )}
     </ErrorBoundary>
   );

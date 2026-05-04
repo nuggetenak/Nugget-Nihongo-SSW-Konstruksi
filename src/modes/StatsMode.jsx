@@ -5,7 +5,7 @@ import { getWrongCount } from '../utils/wrong-tracker.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
-export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakData, onExit }) {
+export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakData, sessions = [], onExit }) {
   const total = CARDS.length;
   const knownN = known.size;
   const unknownN = unknown.size;
@@ -87,6 +87,39 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
         </div>
       )}
 
+
+      <div className={S.sectionLabel}>7 Hari Terakhir</div>
+      {(() => {
+        const MODE_COLORS = { ulasan: '#22c55e', kuis: '#f59e0b', kartu: '#60a5fa', sprint: '#a78bfa', fokus: '#f472b6', jac: '#fb923c', angka: '#34d399', jebak: '#f87171' };
+        const days = Array.from({ length: 7 }, (_, i) => {
+          const d = new Date(); d.setDate(d.getDate() - (6 - i));
+          return d.toISOString().slice(0, 10);
+        });
+        const byDate = {};
+        sessions.forEach((sess) => { const date = sess.date?.slice(0, 10); if (date && byDate[date] === undefined) byDate[date] = []; byDate[date]?.push(sess); });
+        const counts = days.map((d) => (byDate[d] ?? []).length);
+        const maxC = Math.max(...counts, 1);
+        return (
+          <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', height: 60, marginBottom: 20, padding: '0 4px' }}>
+            {days.map((d, i) => {
+              const dayS = byDate[d] ?? [];
+              const count = dayS.length;
+              const h = count === 0 ? 4 : Math.max(12, Math.round((count / maxC) * 52));
+              const dominant = dayS.reduce((acc, s) => { acc[s.mode] = (acc[s.mode] ?? 0) + 1; return acc; }, {});
+              const topMode = Object.entries(dominant).sort((a, b) => b[1] - a[1])[0]?.[0];
+              const color = topMode ? (MODE_COLORS[topMode] ?? T.amber) : T.border;
+              const label = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'][new Date(d + 'T00:00:00').getDay()];
+              return (
+                <div key={d} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <div style={{ fontSize: 9, color: T.textDim }}>{count > 0 ? count : ''}</div>
+                  <div style={{ width: '100%', height: h, borderRadius: 4, background: count === 0 ? T.surface : color, border: `1px solid ${count === 0 ? T.border : color}`, opacity: count === 0 ? 0.4 : 1, transition: 'height 0.3s ease' }} title={`${d}: ${count} sesi`} />
+                  <div style={{ fontSize: 9, color: T.textDim, fontWeight: new Date(d + 'T00:00:00').toDateString() === new Date().toDateString() ? 700 : 400 }}>{label}</div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })()}
 
       <div className={S.sectionLabel}>Per Kategori</div>
       <div className={S.list} style={{ gap: 6, marginBottom: 20 }}>

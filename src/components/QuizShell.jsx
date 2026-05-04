@@ -8,6 +8,8 @@ import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
 import { useAnswerStreak } from '../hooks/useAnswerStreak.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { speakJP, canSpeak } from '../utils/speak.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
@@ -24,6 +26,7 @@ export default function QuizShell({
   renderExtra,
   accentColor = T.amber,
   autoNextDelay = 2000,
+  audioEnabled = false,
 }) {
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -146,8 +149,15 @@ export default function QuizShell({
         color={accentColor}
       />
 
-      <div className={S.counter}>
-        {qIdx + 1} / {questions.length}
+      <div className={S.counter} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span>{qIdx + 1} / {questions.length}</span>
+        {audioEnabled && canSpeak() && (
+          <button
+            onClick={() => speakJP(stripFuri(q.question))}
+            aria-label="Putar audio"
+            style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, color: T.textMuted, padding: '2px 4px', lineHeight: 1 }}
+          >🔊</button>
+        )}
       </div>
 
       <div className={S.questionCard}>

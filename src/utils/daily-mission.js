@@ -14,6 +14,8 @@ const MISSION_TYPES = [
   { mode: 'sprint',   label: 'Sprint 60 Detik',   icon: '⚡', priority: 2, strand: 'output'   },
   { mode: 'jac',      label: 'Latihan JAC',       icon: '📋', priority: 2, strand: 'language' },
   { mode: 'fokus',    label: 'Fokus Kelemahan',   icon: '🎯', priority: 4, strand: 'language' },
+  { mode: 'angka',    label: 'Angka Kunci',        icon: '🔢', priority: 3, strand: 'language' },
+  { mode: 'jebak',    label: 'Soal Jebak',         icon: '⚠️', priority: 3, strand: 'language' },
 ];
 
 export function generateDailyMission() {
