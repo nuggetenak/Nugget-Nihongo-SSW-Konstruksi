@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { JpFront } from '../components/JpDisplay.jsx';
 
 describe('JpFront ruby furigana rendering', () => {
@@ -18,5 +18,20 @@ describe('JpFront ruby furigana rendering', () => {
     const { container } = render(<JpFront jp="鉄筋《てっきん》" furiganaPolicy="hidden" />);
     expect(container.querySelector('ruby')).toBeNull();
     expect(screen.getByText('鉄筋')).toBeTruthy();
+  });
+
+  it('tap policy reveals and hides furigana interactively', () => {
+    const { container } = render(<JpFront jp="鉄筋《てっきん》コンクリート" furiganaPolicy="tap" />);
+    const toggle = screen.getByRole('button', { name: 'Toggle furigana' });
+
+    expect(container.querySelector('ruby')).toBeNull();
+    expect(screen.getByText('👆 Ketuk untuk tampilkan furigana')).toBeTruthy();
+
+    fireEvent.click(toggle);
+    expect(container.querySelector('ruby')).toBeTruthy();
+    expect(screen.getByText('👆 Ketuk untuk sembunyikan furigana')).toBeTruthy();
+
+    fireEvent.click(toggle);
+    expect(container.querySelector('ruby')).toBeNull();
   });
 });

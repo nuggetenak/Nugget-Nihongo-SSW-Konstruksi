@@ -3,6 +3,7 @@
 // Note: font-size on jp spans is prop-driven (jpFontSize()) — justified inline.
 // Note: VS label font-size is derived from jp size — justified inline.
 import { T } from '../styles/theme.js';
+import { useMemo, useState } from 'react';
 import { canSpeak, speakJP } from '../utils/speak.js'; // eslint-disable-line no-unused-vars
 import { stripFuri, extractReadings, jpFontSize } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
@@ -12,15 +13,27 @@ import S from './JpDisplay.module.css';
 // Default 'always' preserves existing behavior for all N5-N4 users.
 // 'tap' and 'hidden' are wired for Phase E prep — full UI in Phase G.
 export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audioEnabled = true }) { // eslint-disable-line no-unused-vars
-  // Determine whether to show furigana based on policy
-  // 'always' (default) = show — no behavioral change for current users
-  // 'hidden' = suppress furi/reading row entirely
-  const showFuri = furiganaPolicy !== 'hidden';
-  const effectiveFuri = showFuri ? furi : undefined;
-  const effectiveRomaji = showFuri ? romaji : undefined;
+  const [tapReveal, setTapReveal] = useState(false);
+  // policy:
+  // always: always show readings/ruby
+  // tap: hide until user taps text area
+  // hidden: never show readings/ruby
+  const isTapMode = furiganaPolicy === 'tap';
+  const showFuri = furiganaPolicy === 'always' || (isTapMode && tapReveal);
+  const effectiveFuri = showFuri ? furi : null;
+  const effectiveRomaji = showFuri ? romaji : null;
   const clean = stripFuri(jp);
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
-  const ruby = showFuri ? parseRubyFragments(jp) : [];
+  const ruby = useMemo(() => (showFuri ? parseRubyFragments(jp) : []), [jp, showFuri]);
+  const hasRubyInText = useMemo(() => parseRubyFragments(jp).length > 0, [jp]);
+  const showReadingRow = !!(reading || effectiveRomaji) && !hasRubyInText;
+  const hintLabel = isTapMode ? (showFuri ? '👆 Ketuk untuk sembunyikan furigana' : '👆 Ketuk untuk tampilkan furigana') : null;
+  const wrapInteractive = (content) => (
+    <button type="button" className={S.tapSurface} onClick={() => isTapMode && setTapReveal((v) => !v)} aria-label={isTapMode ? 'Toggle furigana' : undefined}>
+      {content}
+      {hintLabel && <div className={S.tapHint}>{hintLabel}</div>}
+    </button>
+  );
 
   // Phase F: Audio — inline in render path below
 
@@ -40,8 +53,7 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
   if (VS_RE.test(clean)) {
     const parts = clean.split(VS_RE).map((p) => p.trim()).filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-    return (
-      <div className={S.jpWrap}>
+    return wrapInteractive(<div className={S.jpWrap}>
         {parts.map((p, i) => (
           <div key={i} className={S.jpWrap}>
             {i > 0 && (
@@ -50,9 +62,8 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
             <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
-        {_ReadingRow(reading, effectiveRomaji)}
-      </div>
-    );
+        {_ReadingRow(reading, effectiveRomaji, showReadingRow)}
+      </div>);
   }
 
   // ── A・B・C ───────────────────────────────────────────────────────────────
@@ -60,17 +71,15 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
     const parts = clean.split('・').map((p) => p.trim()).filter(Boolean);
     if (parts.length >= 2) {
       const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-      return (
-        <div className={`${S.jpWrap} ${S.jpWrapTight}`}>
+      return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
           {parts.map((p, i) => (
             <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
               {i > 0 && <div className={S.hr} />}
               <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
             </div>
           ))}
-          {_ReadingRow(reading, effectiveRomaji)}
-        </div>
-      );
+          {_ReadingRow(reading, effectiveRomaji, showReadingRow)}
+        </div>);
     }
   }
 
@@ -79,41 +88,35 @@ export function JpFront({ jp = '', furi, romaji, furiganaPolicy = 'always', audi
     const colonIdx = clean.indexOf('：');
     const title = clean.slice(0, colonIdx).trim();
     const sub = clean.slice(colonIdx + 1).trim();
-    return (
-      <div className={S.jpWrap}>
+    return wrapInteractive(<div className={S.jpWrap}>
         <span style={jpStyle(jpFontSize(title))}>{renderJPWithRuby(title, ruby)}</span>
         <div className={`${S.hr} ${S.hrHover}`} />
         <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>{renderJPWithRuby(sub, ruby)}</span>
-        {_ReadingRow(reading, effectiveRomaji)}
-      </div>
-    );
+        {_ReadingRow(reading, effectiveRomaji, showReadingRow)}
+      </div>);
   }
 
   // ── A → B → C ────────────────────────────────────────────────────────────
   if (clean.includes('→')) {
     const parts = clean.split('→').map((p) => p.trim()).filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-    return (
-      <div className={`${S.jpWrap} ${S.jpWrapTight}`}>
+    return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
         {parts.map((p, i) => (
           <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
             {i > 0 && <span className={S.arrowDown}>↓</span>}
             <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
-        {_ReadingRow(reading, effectiveRomaji)}
-      </div>
-    );
+        {_ReadingRow(reading, effectiveRomaji, showReadingRow)}
+      </div>);
   }
 
   // ── Plain ─────────────────────────────────────────────────────────────────
   const fs = jpFontSize(clean);
-  return (
-    <div style={{ textAlign: 'center' }}>
+  return wrapInteractive(<div style={{ textAlign: 'center' }}>
       <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{renderJPWithRuby(clean, ruby)}</span>
-      {_ReadingRow(reading, effectiveRomaji)}
-    </div>
-  );
+      {_ReadingRow(reading, effectiveRomaji, showReadingRow)}
+    </div>);
 }
 
 function parseRubyFragments(jp = '') {
@@ -148,8 +151,8 @@ function renderJPWithRuby(text, rubyFragments) {
   return nodes;
 }
 
-function _ReadingRow(reading, romaji) {
-  if (!reading && !romaji) return null;
+function _ReadingRow(reading, romaji, show = true) {
+  if (!show || (!reading && !romaji)) return null;
   return (
     <div className={S.readingRow}>
       {reading && <div className={S.furi} style={{ fontFamily: T.fontJP }}>{reading}</div>}
