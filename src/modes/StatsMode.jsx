@@ -101,7 +101,7 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
         const maxC = Math.max(...counts, 1);
         return (
           <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', height: 60, marginBottom: 20, padding: '0 4px' }}>
-            {days.map((d, i) => {
+            {days.map((d) => {
               const dayS = byDate[d] ?? [];
               const count = dayS.length;
               const h = count === 0 ? 4 : Math.max(12, Math.round((count / maxC) * 52));

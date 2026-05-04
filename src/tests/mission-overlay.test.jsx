@@ -16,7 +16,7 @@ describe('C.3 MissionCompleteOverlay', () => {
   it('renders celebration text', () => {
     render(<MissionCompleteOverlay />);
     expect(screen.getByText('Misi Selesai!')).toBeTruthy();
-    expect(screen.getByText('Kembali besok untuk misi baru')).toBeTruthy();
+    expect(screen.getByText('Ketuk untuk tutup')).toBeTruthy();
   });
 
   it('has correct aria attributes', () => {
@@ -26,13 +26,13 @@ describe('C.3 MissionCompleteOverlay', () => {
     expect(el.getAttribute('aria-live')).toBe('assertive');
   });
 
-  it('calls onDone after 1.5 seconds', () => {
+  it('calls onDone after 3 seconds', () => {
     const onDone = vi.fn();
     render(<MissionCompleteOverlay onDone={onDone} />);
 
     expect(onDone).not.toHaveBeenCalled();
 
-    act(() => { vi.advanceTimersByTime(1500); });
+    act(() => { vi.advanceTimersByTime(3000); });
 
     expect(onDone).toHaveBeenCalledTimes(1);
   });
@@ -41,7 +41,7 @@ describe('C.3 MissionCompleteOverlay', () => {
     const { container } = render(<MissionCompleteOverlay onDone={() => {}} />);
     expect(container.querySelector('[role="status"]')).toBeTruthy();
 
-    act(() => { vi.advanceTimersByTime(1500); });
+    act(() => { vi.advanceTimersByTime(3000); });
 
     expect(container.querySelector('[role="status"]')).toBeNull();
   });
