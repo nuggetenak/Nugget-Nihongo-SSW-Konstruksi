@@ -8,6 +8,8 @@ import { getCatInfo } from '../data/categories.js';
 import { stripFuri, jpFontSize } from '../utils/jp-helpers.js';
 import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
+import { get as storageGet } from '../storage/engine.js';
+import { speakJP, canSpeak } from '../utils/speak.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Skeleton from '../components/Skeleton.jsx';
 import S from './modes.module.css';
@@ -35,6 +37,14 @@ export default function ReviewMode({ srs, onExit }) {
   useEffect(() => {
     if (currentId == null) return;
     setIntervals(srs.previewFor(currentId)); setFlipped(false); setLast(null);
+  }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap
+  useEffect(() => {
+    const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
+    if (!audioEnabled || !currentCard || !canSpeak()) return;
+    const t = setTimeout(() => speakJP(stripFuri(currentCard.jp)), 300);
+    return () => clearTimeout(t);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRate = useCallback((rating) => {
@@ -120,12 +130,22 @@ export default function ReviewMode({ srs, onExit }) {
   const clean = stripFuri(currentCard.jp);
   const fs = jpFontSize(clean);
   const info = srs.getInfo(currentId);
+  const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
 
   return (
     <div className={S.pageScroll} style={{ padding: '12px 16px 32px' }}>
       <div className={S.rowSpread} style={{ marginBottom: 8 }}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>← Keluar</button>
-        <div style={{ fontSize: 12, color: T.textFaint }}>{idx + 1} / {queue.length}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {audioEnabled && (
+            <button
+              onClick={() => speakJP(clean)}
+              aria-label="Putar audio"
+              style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, color: T.textMuted, padding: '2px 4px' }}
+            >🔊</button>
+          )}
+          <div style={{ fontSize: 12, color: T.textFaint }}>{idx + 1} / {queue.length}</div>
+        </div>
       </div>
       <ProgressBar current={idx} total={queue.length} color={T.amber} />
 

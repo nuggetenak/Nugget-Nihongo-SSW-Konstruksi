@@ -24,7 +24,7 @@ function normalizeQuestions(set) {
   }));
 }
 
-export default function BangunanMode({ onExit }) {
+export default function BangunanMode({ onExit, onSessionEnd }) {
   const [selectedSet, setSelectedSet] = useState(null);
   const scores = get('progress')?.bangunanScores ?? {};
 
@@ -37,6 +37,7 @@ export default function BangunanMode({ onExit }) {
         [selectedSet.id]: { correct, total, date: new Date().toISOString() },
       },
     }));
+    onSessionEnd?.({ correct, total });
   };
 
   if (selectedSet) {

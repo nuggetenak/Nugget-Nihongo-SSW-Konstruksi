@@ -18,7 +18,7 @@ const SETS = [
 const SET_COUNT = { all: JAC_OFFICIAL.length, tt1: JAC_OFFICIAL.filter((q) => q.set === 'tt1').length, tt2: JAC_OFFICIAL.filter((q) => q.set === 'tt2').length, st1: JAC_OFFICIAL.filter((q) => q.set === 'st1').length, st2: JAC_OFFICIAL.filter((q) => q.set === 'st2').length };
 const DELAYS = [{ ms: 1000, label: '1s' }, { ms: 1500, label: '1.5s' }, { ms: 2000, label: '2s' }, { ms: 0, label: 'Manual' }];
 
-export default function JACMode({ onExit }) {
+export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) {
   const [setKey, setSetKey] = useState(null);
   const [wrongCounts, setWrongCounts] = usePersistedState('ssw-wrong-counts', {});
   const [jacScores, setJacScores] = usePersistedState('ssw-jac-scores', {});
@@ -47,7 +47,8 @@ export default function JACMode({ onExit }) {
     if (!setKey) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     setJacScores((s) => ({ ...s, [setKey]: { score: correct, total, pct, date: Date.now() } }));
-  }, [setKey, setJacScores]);
+    onSessionEnd?.({ correct, total });
+  }, [setKey, setJacScores, onSessionEnd]);
 
   if (setKey === 'lemah' && filtered.length === 0) {
     return (
@@ -61,7 +62,7 @@ export default function JACMode({ onExit }) {
   }
 
   if (setKey !== null) {
-    return <QuizShell questions={questions} onExit={() => setSetKey(null)} title="JAC Official" onAnswer={handleAnswer} onFinish={handleFinish} showHint={true} accentColor="#ef4444" autoNextDelay={autoDelay} />;
+    return <QuizShell questions={questions} onExit={() => setSetKey(null)} title="JAC Official" onAnswer={handleAnswer} onFinish={handleFinish} showHint={true} accentColor="#ef4444" autoNextDelay={autoDelay} audioEnabled={audioEnabled} />;
   }
 
   const pillStyle = (active) => ({ fontFamily: 'inherit', fontSize: 11, padding: '6px 12px', borderRadius: T.r.pill, cursor: 'pointer', background: active ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`, color: active ? T.gold : T.textMuted });

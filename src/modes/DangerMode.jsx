@@ -1,6 +1,6 @@
 // ─── DangerMode.jsx ───────────────────────────────────────────────────────────
 // Note: option bg/border/color is dynamic per answer state — justified inline.
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
@@ -15,9 +15,9 @@ function buildItems() {
   });
 }
 
-export default function DangerMode({ onExit }) {
+export default function DangerMode({ onExit, onSessionEnd }) {
   const [view, setView] = useState('panel');
-  return view === 'panel' ? <PanelView onExit={onExit} onStartQuiz={() => setView('quiz')} /> : <QuizView onBack={() => setView('panel')} />;
+  return view === 'panel' ? <PanelView onExit={onExit} onStartQuiz={() => setView('quiz')} /> : <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
 }
 
 function PanelView({ onExit, onStartQuiz }) {
@@ -66,10 +66,11 @@ function PanelView({ onExit, onStartQuiz }) {
   );
 }
 
-function QuizView({ onBack }) {
+function QuizView({ onBack, onSessionEnd }) {
   const [items, setItems] = useState(() => buildItems());
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
+  const sessionFired = useRef(false);
   const [results, setResults] = useState([]);
   const [streak, setStreak] = useState(0);
   const [maxStreak, setMaxStreak] = useState(0);
@@ -105,7 +106,14 @@ function QuizView({ onBack }) {
     return () => window.removeEventListener('keydown', h);
   }, [selected, phase, isLast, handleSelect]);
 
-  const restart = () => { setItems(buildItems()); setQIdx(0); setSelected(null); setResults([]); setStreak(0); setMaxStreak(0); setPhase('playing'); };
+  const restart = () => { setItems(buildItems()); setQIdx(0); setSelected(null); setResults([]); setStreak(0); setMaxStreak(0); setPhase('playing'); sessionFired.current = false; };
+
+  useEffect(() => {
+    if (phase !== 'result' || sessionFired.current) return;
+    sessionFired.current = true;
+    const correct = results.filter((r) => r.isCorrect).length;
+    onSessionEnd?.({ correct, total: results.length });
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === 'result') {
     const correct = results.filter((r) => r.isCorrect).length;

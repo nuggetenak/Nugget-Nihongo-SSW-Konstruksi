@@ -52,8 +52,7 @@ export default function FlashcardMode({
   const [confirmReset, setConfirmReset] = useState(false);
   const confirmTimer                     = useRef(null);
 
-  // E.3 TD-10: furiganaPolicy — read for Phase G settings UI
-  // eslint-disable-next-line no-unused-vars
+  // E.3 TD-10 / Phase G: furiganaPolicy — now wired to FlipCard → JpFront
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
   // Phase F: audioEnabled from prefs
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
@@ -217,6 +216,7 @@ export default function FlashcardMode({
         cat={cat}
         flipped={flipped}
         audioEnabled={audioEnabled}
+        furiganaPolicy={furiganaPolicy}
         showDesc={showDesc}
         onFlip={flip}
         onShowDesc={() => setShowDesc(true)}

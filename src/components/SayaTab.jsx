@@ -56,6 +56,12 @@ export default function SayaTab() {
   const young    = srs.stats?.young  ?? 0;
   const newCards = srs.stats?.new    ?? 0;
 
+  // D1: Inline edit states — replace prompt() for mobile Android
+  const [editingGoal, setEditingGoal] = useState(false);
+  const [goalDraft, setGoalDraft] = useState('');
+  const [editingExam, setEditingExam] = useState(false);
+  const [examDraft, setExamDraft] = useState('');
+
   // Reset state machine: idle → confirm → countdown → ready
   const [resetStep, setResetStep] = useState(0);
   const [countdown, setCountdown] = useState(3);
@@ -143,25 +149,67 @@ export default function SayaTab() {
       <Section title="Pengaturan">
         <Row label="Jalur Belajar" value={TRACK_LABELS[track] ?? track} sub="Tap untuk ganti" onClick={() => setTrack(null)} />
         <Row label="Tema"          value={isDark ? '🌙 Gelap' : '☀️ Terang'} onClick={toggleTheme} />
-        <Row label="Target Harian" value={dailyGoal ? `${dailyGoal} kartu` : '20 kartu'} sub="Tap untuk ubah" onClick={() => { const g = prompt('Target kartu per hari:', dailyGoal ?? 20); const n = parseInt(g, 10); if (n > 0 && n <= 200) setDailyGoal(n); }} />
-        <Row
-          label="📅 Tanggal Ujian"
-          value={prefs?.examDate ? new Date(prefs.examDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Belum diatur'}
-          sub={prefs?.examDate ? 'Tap untuk ubah atau hapus' : 'Set untuk lihat countdown di Beranda'}
-          onClick={() => {
-            const d = prompt('Tanggal ujian (YYYY-MM-DD, kosongkan untuk hapus):', prefs?.examDate ?? '');
-            if (d === null) return; // cancelled
-            const trimmed = d.trim();
-            if (trimmed === '') { setPref('examDate', null); return; }
-            if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) { setPref('examDate', trimmed); }
-            else toast.show('Format tanggal tidak valid. Gunakan YYYY-MM-DD');
-          }}
-        />
+        {editingGoal ? (
+          <div className={s.inlineEdit}>
+            <div className={s.inlineEditLabel}>Target kartu per hari (1–200)</div>
+            <div className={s.inlineEditRow}>
+              <input type="number" min="1" max="200" value={goalDraft} onChange={(e) => setGoalDraft(e.target.value)} className={s.inlineInput} autoFocus
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') { const n = parseInt(goalDraft, 10); if (n > 0 && n <= 200) { setDailyGoal(n); toast.show(`✅ Target: ${n} kartu/hari`); } setEditingGoal(false); }
+                  if (e.key === 'Escape') setEditingGoal(false);
+                }}
+              />
+              <button className={s.inlineSave} onClick={() => { const n = parseInt(goalDraft, 10); if (n > 0 && n <= 200) { setDailyGoal(n); toast.show(`✅ Target: ${n} kartu/hari`); } setEditingGoal(false); }}>Simpan</button>
+              <button className={s.inlineCancel} onClick={() => setEditingGoal(false)}>Batal</button>
+            </div>
+          </div>
+        ) : (
+          <Row label="Target Harian" value={dailyGoal ? `${dailyGoal} kartu` : '20 kartu'} sub="Tap untuk ubah" onClick={() => { setGoalDraft(String(dailyGoal ?? 20)); setEditingGoal(true); }} />
+        )}
+        {editingExam ? (
+          <div className={s.inlineEdit}>
+            <div className={s.inlineEditLabel}>Tanggal ujian</div>
+            <div className={s.inlineEditRow}>
+              <input type="date" value={examDraft} onChange={(e) => setExamDraft(e.target.value)} className={s.inlineInput} autoFocus
+                onKeyDown={(e) => { if (e.key === 'Escape') setEditingExam(false); }}
+              />
+              <button className={s.inlineSave} onClick={() => { if (examDraft) { setPref('examDate', examDraft); toast.show('📅 Tanggal ujian disimpan'); } setEditingExam(false); }}>Simpan</button>
+              {prefs?.examDate && <button className={s.inlineDelete} onClick={() => { setPref('examDate', null); setEditingExam(false); toast.show('📅 Tanggal ujian dihapus'); }}>Hapus</button>}
+              <button className={s.inlineCancel} onClick={() => setEditingExam(false)}>Batal</button>
+            </div>
+          </div>
+        ) : (
+          <Row
+            label="📅 Tanggal Ujian"
+            value={prefs?.examDate ? new Date(prefs.examDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Belum diatur'}
+            sub={prefs?.examDate ? 'Tap untuk ubah atau hapus' : 'Set untuk lihat countdown di Beranda'}
+            onClick={() => { setExamDraft(prefs?.examDate ?? ''); setEditingExam(true); }}
+          />
+        )}
         <Row
           label="🔊 Audio Bahasa Jepang"
           value={prefs?.audioEnabled !== false ? '✅ Aktif' : '⬜ Mati'}
           sub="Web Speech API — tombol 🔊 di kartu"
           onClick={() => setPref('audioEnabled', !(prefs?.audioEnabled !== false))}
+        />
+        <Row
+          label="ふ Furigana di Kartu"
+          value={
+            prefs?.furiganaPolicy === 'hidden' ? '⬜ Tersembunyi' :
+            prefs?.furiganaPolicy === 'tap'    ? '👆 Tap untuk lihat' :
+                                                  '✅ Selalu tampil'
+          }
+          sub={
+            prefs?.furiganaPolicy === 'hidden' ? 'Hanya kanji — level lanjut' :
+            prefs?.furiganaPolicy === 'tap'    ? 'Tap kartu untuk tampilkan furigana' :
+                                                  'Furigana selalu terlihat (default)'
+          }
+          onClick={() => {
+            const cur = prefs?.furiganaPolicy ?? 'always';
+            const next = cur === 'always' ? 'tap' : cur === 'tap' ? 'hidden' : 'always';
+            setPref('furiganaPolicy', next);
+            toast.show(next === 'always' ? '✅ Furigana selalu tampil' : next === 'hidden' ? '⬜ Furigana disembunyikan' : '👆 Furigana tap-to-reveal');
+          }}
         />
       </Section>
 
@@ -176,11 +224,15 @@ export default function SayaTab() {
 
       <Section title="Info">
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
-        <Row label="ℹ️ Tentang Aplikasi" sub="SSW Konstruksi · by Nugget Nihongo" />
+        <Row
+          label="ℹ️ Tentang Aplikasi"
+          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v4.0.2`}
+          onClick={() => toast.show(`SSW Konstruksi v4.0.2 · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`)}
+        />
       </Section>
 
       <div className={s.footer}>
-        SSW Konstruksi v4.0.0<br />
+        SSW Konstruksi v4.0.2<br />
         by Nugget Nihongo<br />
         土木 · 建築 · ライフライン設備
       </div>

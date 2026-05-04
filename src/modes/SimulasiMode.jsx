@@ -22,7 +22,7 @@ const PRESETS = [
 const INSTRUCTIONS = ['📋 Pilih satu jawaban yang paling tepat', '⏱ Timer berjalan — jangan sampai habis', '🚫 Soal otomatis lanjut setelah kamu jawab', `✅ ${PASS_PCT}% ke atas = LULUS`];
 function fmtTime(sec) { const m = Math.floor(sec / 60); const s = sec % 60; return `${m}:${String(s).padStart(2, '0')}`; }
 
-export default function SimulasiMode({ onExit }) {
+export default function SimulasiMode({ onExit, onSessionEnd }) {
   const [phase, setPhase] = useState('start');
   const [preset, setPreset] = useState('quick');
   const [seed, setSeed] = useState(0);
@@ -58,6 +58,14 @@ export default function SimulasiMode({ onExit }) {
     const t = setTimeout(() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }, 1500);
     return () => clearTimeout(t);
   }, [selected, phase, isLast]);
+
+  // Fire onSessionEnd when we transition to result phase
+  useEffect(() => {
+    if (phase === 'result' && results.length > 0) {
+      const correct = results.filter((r) => r.isCorrect).length;
+      onSessionEnd?.({ correct, total: results.length });
+    }
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleStart = useCallback(() => { setSeed((s) => s + 1); setQIdx(0); setSelected(null); setResults([]); setTimeLeft(config.time); setPhase('playing'); }, [config.time]);
 

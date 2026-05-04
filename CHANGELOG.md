@@ -1,3 +1,52 @@
+## [4.0.2] - 2026-05-04
+
+### feat/audit-improvements — D1–D10 (Agent Sonnet 4.6)
+
+- `components/SayaTab.jsx` — D1: Replace `prompt()` for Target Harian + Tanggal Ujian with inline input UI (mobile-safe, no dialog blocks)
+- `components/SayaTab.module.css` — D1: Add `.inlineEdit`, `.inlineInput`, `.inlineSave`, `.inlineDelete`, `.inlineCancel` styles
+- `modes/QuizMode.jsx` — D2: Respect `furiganaPolicy` pref in `startQuiz()` — question uses raw jp+furi when 'always', strips when 'hidden'
+- `modes/SprintMode.jsx` — D3: Wire `furiganaPolicy` + `audioEnabled` from storage into `JpFront` props
+- `router/modes.js` — D4: Add `alat` section (`stats`, `ekspor`, `sumber`) to `MODE_SECTIONS` — modes now reachable from BelajarTab grid
+- `modes/ReviewMode.jsx` — D5: Auto-speak on card advance via `useEffect([currentId])` with 300ms delay; manual 🔊 kept for replay
+- `utils/daily-mission.js` — D6: Add `angka` + `jebak` to `MISSION_TYPES` pool (were wired but excluded from daily selection)
+- `modes/StatsMode.jsx` — D7: Accept `sessions` prop; render 7-day CSS activity bars colored by dominant mode
+- `router/ModeRouter.jsx` — D7: Destructure + pass `sessions` from ProgressContext to stats mode props
+- `components/MissionCompleteOverlay.jsx` — D8: Tap-to-dismiss, shows mission icon+label+score, auto-dismiss 1.5s→3s
+- `router/ModeRouter.jsx` — D8: Track `missionResult` state, pass `result` prop to overlay, clear on close
+- `modes/SearchMode.jsx` — D9: Accept `starred`+`toggleStar` props; ⭐/☆ button on each result card
+- `router/ModeRouter.jsx` — D9: Pass `starred`+`toggleStar` to `cari` mode
+- `components/QuizShell.jsx` — D10: Add optional `audioEnabled` prop + 🔊 button in counter row (opt-in, default false)
+- `modes/QuizMode.jsx` + `JACMode.jsx` + `VocabMode.jsx` — D10: Accept + pass `audioEnabled` to QuizShell
+- `router/ModeRouter.jsx` — D10: Read `audioEnabled` from prefs, pass to `kuis`, `jac`, `vocab` $
+ ## [4.0.1] - 2026-05-04
+
+### feat/audit-improvements — C1–C6 (Agent Sonnet 4.6)
+
+- `modes/ReviewMode.jsx` — C1: implement 🔊 audio button using `speakJP` + `canSpeak` (B4 was dead import only). Button shown in card header when `audioEnabled=true`; taps `speakJP(clean)`.
+- `modes/SearchMode.jsx` — C2: track-aware filtering. Accepts `track` prop. Default pool = jalur aktif via `getCatsForTrack`. Toggle pill 🗂 Jalurku / 🗂 Semua jalur. Search meta shows pool size.
+- `modes/FocusMode.jsx` — C3: accepts + forwards `onSessionEnd` to inner SprintMode. Sprint sessions inside FocusMode now recorded.
+- `modes/AngkaMode.jsx` — C4: QuizView fires `onSessionEnd` via `useEffect` on `phase=result`. `sessionFired` ref prevents double-fire. `restart()` resets ref.
+- `modes/DangerMode.jsx` — C4: same pattern as AngkaMode.
+- `router/ModeRouter.jsx` — C5: fill modeProps gaps — `fokus`/`angka`/`jebak` get `onSessionEnd`; `cari` gets `track`; `stats` gets `srs`+`streakData`. Destructures `streakData` from `useProgress`.
+- `modes/StatsMode.jsx` — C6: SRS breakdown grid (🌟 Matang / 📗 Berkemb. / 📘 Baru) + 🔥 streak card + due-count banner.
+
+**Build:** ✅ clean · lint: 0 errors 0 warnings · commit `77a0b93`
+
+---
+
+### feat/audit-improvements — B1–B4 + M1–M3 (Agent Sonnet 4.6, 2026-05-03)
+
+- `modes/FlashcardMode/index.jsx` + `FlipCard.jsx` + `JpDisplay.jsx` — B1: `furiganaPolicy` prop chain fixed end-to-end (was silently dropped via `no-unused-vars`).
+- `components/SayaTab.jsx` — B2+M1: furigana policy toggle row added to Pengaturan. Tap cycles `always → hidden → always`.
+- `router/ModeRouter.jsx` — B3: `makeSessionEnd()` helper; all 7 quiz modes (SprintMode, JACMode, WaygroundMode, VocabMode, SimulasiMode, SipilMode, BangunanMode) now fire `recordSession` + mission check via `onSessionEnd`.
+- `modes/ReviewMode.jsx` — B4: `storageGet` import added (audio groundwork — completed in C1).
+- `modes/SprintMode.jsx` — M2: personal best tracking (`prefs.sprintBest`). 🏆 shown on ready + result screens. `sessionEndFired` ref prevents double-fire.
+- `modes/GlossaryMode.jsx` — M3: track-aware category pills. Toggle 🗂 Jalurku / 🗂 Semua jalur.
+
+**Build:** ✅ clean · commit `a68bf82`
+
+---
+
 ## [4.0.0] - 2026-05-02
 
 ### Release v4.0.0 — Phase F + G Complete (Agent Sonnet)
@@ -620,4 +669,3 @@ Logic/data components (modes, hooks, srs) deferred to Phase 6 continuation.
 
 ### Changed
 - README diperbarui dengan referensi audit
-

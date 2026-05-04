@@ -1,22 +1,38 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
-import { CATEGORIES } from '../data/categories.js';
+import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import S from './modes.module.css';
 
-export default function GlossaryMode({ onExit }) {
+export default function GlossaryMode({ onExit, track }) {
   const [filterCat, setFilterCat] = useState('all');
+  const [showAllTracks, setShowAllTracks] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
   const navRef = useRef(null);
   const sectionRefs = useRef({});
   const observerRef = useRef(null);
 
+  // Track-aware: only show cats for active track unless showAllTracks
+  const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
+  const visibleCats = useMemo(() => {
+    const base = CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang');
+    if (!trackCatKeys || showAllTracks) return base;
+    return base.filter((c) => trackCatKeys.has(c.key));
+  }, [trackCatKeys, showAllTracks]);
+
   const sorted = useMemo(() => {
-    const items = filterCat === 'all' ? CARDS : CARDS.filter((c) => c.category === filterCat);
+    let items;
+    if (filterCat === 'all') {
+      items = trackCatKeys && !showAllTracks
+        ? CARDS.filter((c) => trackCatKeys.has(c.category))
+        : CARDS;
+    } else {
+      items = CARDS.filter((c) => c.category === filterCat);
+    }
     return [...items].sort((a, b) => (a.furi || a.romaji || '').toLowerCase().localeCompare((b.furi || b.romaji || '').toLowerCase(), 'ja'));
-  }, [filterCat]);
+  }, [filterCat, trackCatKeys, showAllTracks]);
 
   const groups = useMemo(() => {
     const map = {};
@@ -64,11 +80,21 @@ export default function GlossaryMode({ onExit }) {
             {sorted.length} istilah
           </span>
         </div>
-        <p style={{ fontSize: 11, color: T.textDim, margin: '0 0 12px' }}>{groups.length} huruf · diurutkan あいうえお</p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-          {[{ key: 'all', label: 'Semua', emoji: '📋' }, ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')].map((c) => {
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+          <p style={{ fontSize: 11, color: T.textDim, margin: 0 }}>{groups.length} huruf · diurutkan あいうえお</p>
+          {trackCatKeys && (
+            <button
+              onClick={() => { setShowAllTracks((v) => !v); setFilterCat('all'); }}
+              style={{ fontFamily: 'inherit', fontSize: 10, padding: '3px 10px', borderRadius: T.r.pill, cursor: 'pointer', background: showAllTracks ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${showAllTracks ? 'rgba(251,191,36,0.35)' : T.border}`, color: showAllTracks ? T.gold : T.textDim }}
+            >
+              {showAllTracks ? '🗂 Semua jalur' : '🗂 Jalurku'}
+            </button>
+          )}
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginBottom: 4 }}>
+          {[{ key: 'all', label: 'Semua', emoji: '📋' }, ...visibleCats].map((c) => {
             const active = filterCat === c.key;
-            const count = c.key === 'all' ? CARDS.length : CARDS.filter((card) => card.category === c.key).length;
+            const count = c.key === 'all' ? sorted.length : CARDS.filter((card) => card.category === c.key).length;
             return (
               <button key={c.key} onClick={() => setFilterCat(c.key)} style={{ fontFamily: 'inherit', fontSize: 10, padding: '3px 10px', borderRadius: T.r.pill, cursor: 'pointer', background: active ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${active ? 'rgba(251,191,36,0.35)' : T.border}`, color: active ? T.gold : T.textMuted, transition: 'all 0.12s', display: 'flex', alignItems: 'center', gap: 4 }}>
                 <span>{c.emoji}</span>

@@ -2,24 +2,42 @@ import { useState, useMemo } from 'react';
 import { T } from '../styles/theme.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
-import { getCatInfo } from '../data/categories.js';
+import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import S from './modes.module.css';
 
-export default function SearchMode({ onExit }) {
+export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
+  const [showAllTracks, setShowAllTracks] = useState(false);
+
+  const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
+
+  const pool = useMemo(() => {
+    if (!trackCatKeys || showAllTracks) return CARDS;
+    return CARDS.filter((c) => trackCatKeys.has(c.category));
+  }, [trackCatKeys, showAllTracks]);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (q.length < 2) return [];
-    return CARDS.filter((c) => {
+    return pool.filter((c) => {
       const haystack = `${c.jp} ${c.furi || ''} ${c.romaji || ''} ${c.id_text} ${c.desc}`.toLowerCase();
       return haystack.includes(q);
     }).slice(0, 30);
-  }, [query]);
+  }, [query, pool]);
 
   return (
     <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
-      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <div className={S.rowSpread} style={{ marginBottom: 12 }}>
+        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>← Kembali</button>
+        {trackCatKeys && (
+          <button
+            onClick={() => setShowAllTracks((v) => !v)}
+            style={{ fontFamily: 'inherit', fontSize: 11, padding: '5px 10px', borderRadius: 99, background: showAllTracks ? T.surface : T.surfaceActive, border: `1px solid ${showAllTracks ? T.border : T.borderActive}`, color: showAllTracks ? T.textMuted : T.amber, cursor: 'pointer', fontWeight: 600 }}
+          >
+            {showAllTracks ? '🗂 Semua jalur' : '🗂 Jalurku'}
+          </button>
+        )}
+      </div>
 
       <input
         type="text"
@@ -33,7 +51,7 @@ export default function SearchMode({ onExit }) {
 
       {query.length >= 2 && (
         <div className={S.searchMeta}>
-          {results.length} hasil {results.length >= 30 && '(maks 30)'}
+          {results.length} hasil {results.length >= 30 && '(maks 30)'} · dari {pool.length} kartu
         </div>
       )}
 
@@ -64,9 +82,20 @@ export default function SearchMode({ onExit }) {
                 <div style={{ fontFamily: T.fontJP, fontSize: 15, fontWeight: 600 }}>
                   {stripFuri(c.jp)}
                 </div>
-                <span className={S.pill} style={{ background: `${cat.color}22`, color: cat.color, fontSize: 9, whiteSpace: 'nowrap' }}>
-                  {cat.emoji}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  {toggleStar && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleStar(c.id); }}
+                      aria-label={starred?.has(c.id) ? 'Hapus bintang' : 'Beri bintang'}
+                      style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, padding: '0 2px', lineHeight: 1 }}
+                    >
+                      {starred?.has(c.id) ? '⭐' : '☆'}
+                    </button>
+                  )}
+                  <span className={S.pill} style={{ background: `${cat.color}22`, color: cat.color, fontSize: 9, whiteSpace: 'nowrap' }}>
+                    {cat.emoji}
+                  </span>
+                </div>
               </div>
               {c.furi && <div style={{ fontSize: 11, color: T.textDim, fontFamily: T.fontJP }}>{c.furi}</div>}
               <div style={{ fontSize: 13, color: T.gold, marginTop: 4 }}>{c.id_text}</div>

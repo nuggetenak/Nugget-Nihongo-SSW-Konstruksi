@@ -50,6 +50,11 @@ export const MODE_SECTIONS = {
     subtitle: 'Kartu jatuh tempo',
     modes: ['ulasan'],
   },
+  alat: {
+    title: '🛠️ Alat',
+    subtitle: 'Progress & data',
+    modes: ['stats', 'ekspor', 'sumber'],
+  },
 };
 
 // ── Mode metadata (icon, label, desc) ────────────────────────────────────

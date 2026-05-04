@@ -8,10 +8,11 @@ import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { get as storageGet } from '../storage/engine.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
-export default function QuizMode({ cards, allCards, onExit, onFinish }) {
+export default function QuizMode({ cards, allCards, onExit, onFinish, audioEnabled = false }) {
   const [difficulty, setDifficulty] = useState('medium');
   const [quizCount, setQuizCount] = useState(10);
   const [lemahMode, setLemahMode] = useState(false);
@@ -50,9 +51,12 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
     else { seenPool.current.clear(); pool = shuffle(activeCards).slice(0, quizCount); }
     pool.forEach((c) => seenPool.current.add(c.id));
     const raw = generateQuiz(pool, allCards, difficulty, quizWrong);
+    const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
     const qs = raw.map((q) => ({
       question: stripFuri(q.card.jp),
-      questionSub: q.card.romaji || null,
+      questionSub: furiganaPolicy !== 'hidden'
+        ? (q.card.furi || q.card.romaji || null)
+        : (q.card.romaji || null),
       options: q.options.map((o) => ({ text: o.text, sub: null })),
       correctIdx: q.options.findIndex((o) => o.correct),
       explanation: q.card.desc,
@@ -162,6 +166,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish }) {
       onFinish={onFinish}
       accentColor={T.gold}
       autoNextDelay={autoNextDelay}
+      audioEnabled={audioEnabled}
     />
   );
 }

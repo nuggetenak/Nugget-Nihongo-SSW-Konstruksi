@@ -17,7 +17,7 @@ const GROUPS = [
   { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp' },
 ];
 
-export default function WaygroundMode({ onExit }) {
+export default function WaygroundMode({ onExit, onSessionEnd }) {
   const [activeSet, setActiveSet] = useState(null);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
@@ -45,7 +45,8 @@ export default function WaygroundMode({ onExit }) {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     setWgScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
-  }, [activeSet, setWgScores]);
+    onSessionEnd?.({ correct, total });
+  }, [activeSet, setWgScores, onSessionEnd]);
 
   if (activeSet) {
     return <QuizShell questions={questions} onExit={() => setActiveSet(null)} title={set?.title || ''} onAnswer={handleAnswer} onFinish={handleFinish} showHint={showHint} accentColor={set?.color || T.amber} />;
