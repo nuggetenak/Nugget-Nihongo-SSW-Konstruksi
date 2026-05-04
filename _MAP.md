@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-02 by Agent Sonnet (Phase A–G complete, v4.0.0)
-> **Version:** v4.0.0 — Phase A–G complete ✅ RELEASED
+> **Last updated:** 2026-05-04 by Agent Sonnet (feat/audit-improvements — B1-B4+M1-M3, C1-C6)
+> **Version:** v4.0.1 — audit-improvements branch active
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v6.md` ← **READ THIS FIRST** (v6 = agent-executable, self-contained, supersedes ALL prior)
 
 ---
@@ -210,3 +210,5 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-02 | Sonnet 4.6 | Phase B+C: sipil/bangunan content, daily mission, sessions |
 | 2026-05-02 | Sonnet 4.6 | Phase D+E: export hardening, FlashcardMode decomposition |
 | 2026-05-02 | Sonnet 4.6 | Phase F+G: exam countdown, audio, QA, release v4.0.0 |
+| 2026-05-03 | Sonnet 4.6 | feat/audit-improvements B1-B4+M1-M3: furigana chain, session recording all modes, sprint PB, glossary track-aware |
+| 2026-05-04 | Sonnet 4.6 | feat/audit-improvements C1-C6: ReviewMode audio, track-aware search, fokus/angka/jebak session wiring, StatsMode SRS+streak |
