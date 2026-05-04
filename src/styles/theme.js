@@ -144,9 +144,10 @@ export const T = {
   sp: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64],
   r: { xs: 6, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, pill: 99 },
   font: "'DM Sans','Noto Sans JP',system-ui,sans-serif",
+  fontDisplay: "'Syne','DM Sans',system-ui,sans-serif",
   fontJP: "'Noto Sans JP','DM Sans',sans-serif",
   maxW: 480,
-  navH: 56,
+  navH: 64,
 };
 
 export const GRADES = [
@@ -161,25 +162,37 @@ if (typeof document !== 'undefined') {
   const style = document.createElement('style');
   style.textContent = `
     @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeInFast { from{opacity:0} to{opacity:1} }
     @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes slideDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+    @keyframes ping { 0%{transform:scale(1);opacity:1} 75%,100%{transform:scale(2);opacity:0} }
     @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
     @keyframes scaleIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
+    @keyframes scaleUp { from{transform:scale(0.96) translateY(4px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
     @keyframes flipIn { from{transform:rotateY(90deg);opacity:0} to{transform:rotateY(0deg);opacity:1} }
     @keyframes toastIn { from{opacity:0;transform:translateY(20px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
     @keyframes toastOut { from{opacity:1;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(20px) scale(0.95)} }
+    @keyframes ripple { 0%{transform:scale(0);opacity:0.4} 100%{transform:scale(4);opacity:0} }
+    @keyframes glowPulse { 0%,100%{box-shadow:0 0 20px rgba(245,158,11,0.2)} 50%{box-shadow:0 0 40px rgba(245,158,11,0.45)} }
+    @keyframes staggerIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
-    html { transition: background-color 0.2s ease; }
+    html { transition: background-color 0.25s ease; }
     body { background:var(--ssw-bg); color:var(--ssw-text); margin:0; }
-    *::-webkit-scrollbar { width:4px; }
+    *::-webkit-scrollbar { width:3px; }
     *::-webkit-scrollbar-track { background:transparent; }
     *::-webkit-scrollbar-thumb { background:var(--ssw-scrollbar); border-radius:99px; }
     button { -webkit-tap-highlight-color:transparent; }
     input { -webkit-tap-highlight-color:transparent; }
     [data-theme='light'] ::placeholder { color:rgba(28,25,23,0.35); }
     [data-theme='dark'] ::placeholder { color:rgba(254,243,199,0.30); }
+    .ssw-stagger > *:nth-child(1) { animation: staggerIn 0.35s ease both; }
+    .ssw-stagger > *:nth-child(2) { animation: staggerIn 0.35s 0.05s ease both; }
+    .ssw-stagger > *:nth-child(3) { animation: staggerIn 0.35s 0.10s ease both; }
+    .ssw-stagger > *:nth-child(4) { animation: staggerIn 0.35s 0.15s ease both; }
+    .ssw-stagger > *:nth-child(5) { animation: staggerIn 0.35s 0.20s ease both; }
   `;
   document.head.appendChild(style);
 }

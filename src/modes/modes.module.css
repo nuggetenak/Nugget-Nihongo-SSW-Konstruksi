@@ -33,23 +33,34 @@
 
 /* ── Back button ── */
 .btnBack {
-  font-family: inherit;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-caption);
+  font-weight: 600;
   color: var(--ssw-textMuted);
   background: none;
   border: none;
   cursor: pointer;
   margin-bottom: 16px;
-  padding: 6px 0;
-  display: block;
+  padding: 7px 10px 7px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.btnBack:active {
+  color: var(--ssw-amber);
 }
 
 /* ── Page titles ── */
 .pageTitle {
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
   font-size: 18px;
-  font-weight: var(--fw-black);
+  font-weight: 800;
   margin-bottom: 4px;
   margin-top: 0;
+  letter-spacing: -0.3px;
 }
 
 .pageSub {

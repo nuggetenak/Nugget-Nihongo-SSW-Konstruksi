@@ -1,7 +1,7 @@
-/* Dashboard.module.css */
+/* Dashboard.module.css — v2.0 UI Upgrade */
 
 .container {
-  padding: 0 16px 28px;
+  padding: 0 16px 32px;
   max-width: var(--max-w);
   margin: 0 auto;
   animation: fadeIn 0.3s ease;
@@ -9,50 +9,81 @@
 
 /* ── Header ── */
 .header {
-  padding: 16px 0 14px;
+  padding: 18px 0 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
 }
 
-.brand {}
+/* Blueprint grid strip behind header */
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -16px; right: -16px;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(180,83,9,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180,83,9,0.045) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.brand {
+  position: relative;
+  z-index: 1;
+}
 
 .brandName {
-  font-size: var(--fs-title);
-  font-weight: var(--fw-heavy);
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   background: var(--accent);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.1;
 }
 
 .brandSub {
   font-size: var(--fs-nano);
   color: var(--ssw-textDim);
-  margin-top: 1px;
+  margin-top: 3px;
+  letter-spacing: 0.4px;
 }
 
 .headerRight {
   display: flex;
   gap: 6px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .trackPill {
-  font-family: inherit;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-small);
-  padding: 5px 10px;
+  font-weight: 700;
+  padding: 5px 11px;
   border-radius: var(--r-pill);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
-  /* color/bg/border set inline — track-specific */
+  transition: opacity 0.15s, transform 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.trackPill:active {
+  transform: scale(0.95);
+  opacity: 0.8;
 }
 
 .themeBtn {
   font-family: inherit;
-  font-size: 16px;
+  font-size: 15px;
   width: 34px;
   height: 34px;
   border-radius: var(--r-pill);
@@ -64,29 +95,48 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.themeBtn:active {
+  transform: scale(0.9);
 }
 
 /* ── Streak hero ── */
 .streakHero {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
+  gap: 12px;
+  padding: 13px 16px 13px 20px;
   border-radius: var(--r-lg);
-  background: rgba(245, 158, 11, 0.08);
-  border: 1px solid rgba(245, 158, 11, 0.25);
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.22);
   margin-bottom: 14px;
-  animation: slideUp 0.3s ease;
+  animation: slideDown 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.streakHero::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #FBBF24, #B45309);
+  border-radius: 3px 0 0 3px;
 }
 
 .streakEmoji {
-  font-size: 28px;
+  font-size: 26px;
+  flex-shrink: 0;
 }
 
 .streakDays {
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-subtitle);
-  font-weight: var(--fw-heavy);
+  font-weight: 800;
   color: var(--ssw-amber);
+  letter-spacing: -0.2px;
 }
 
 .streakSub {
@@ -100,11 +150,23 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 16px;
-  border-radius: var(--r-lg);
+  padding: 20px 18px;
+  border-radius: var(--r-xl);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ringCard::after {
+  content: '';
+  position: absolute;
+  right: -16px; bottom: -16px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .ringInfo {
@@ -112,45 +174,69 @@
 }
 
 .ringKnown {
-  font-size: var(--fs-subtitle);
-  font-weight: var(--fw-heavy);
-  color: var(--ssw-text);
-  margin-bottom: 6px;
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-size: var(--fs-title);
+  font-weight: 800;
+  color: var(--ssw-textBright);
+  margin-bottom: 5px;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
 }
 
 .ringDetail {
   font-size: var(--fs-caption);
   color: var(--ssw-textDim);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .ringStreak {
-  font-size: var(--fs-caption);
+  display: inline-block;
+  font-size: var(--fs-small);
+  font-weight: 700;
   color: var(--ssw-amber);
-  font-weight: var(--fw-bold);
+  background: rgba(245, 158, 11, 0.10);
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
 }
 
 .ringDaily {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
+  margin-top: 3px;
 }
 
 /* ── Primary CTA ── */
 .cta {
   width: 100%;
   padding: 18px 20px;
-  margin-bottom: 14px;
-  font-family: inherit;
-  border-radius: var(--r-lg);
+  margin-bottom: 12px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-xl);
   cursor: pointer;
   background: var(--accent);
   border: none;
-  color: var(--ssw-textBright);
+  color: #FFF8E7;
   text-align: left;
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: var(--ssw-shadowGlowStrong);
+  box-shadow: 0 4px 24px rgba(180,83,9,0.28), 0 1px 4px rgba(180,83,9,0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta:active {
+  transform: scale(0.985) translateY(1px);
+  box-shadow: 0 2px 12px rgba(180,83,9,0.22);
 }
 
 .ctaIcon {
@@ -164,32 +250,34 @@
 
 .ctaLabel {
   font-size: var(--fs-subtitle);
-  font-weight: var(--fw-heavy);
+  font-weight: 800;
   line-height: 1.2;
+  letter-spacing: -0.2px;
 }
 
 .ctaDesc {
   font-size: var(--fs-caption);
-  opacity: 0.75;
-  margin-top: 2px;
+  opacity: 0.72;
+  margin-top: 3px;
 }
 
 .ctaArrow {
-  font-size: 18px;
-  opacity: 0.6;
+  font-size: 20px;
+  opacity: 0.65;
+  font-weight: 800;
 }
 
 /* ── Quick action grid ── */
 .quickGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 22px;
 }
 
 .quickTile {
-  font-family: inherit;
-  padding: 16px 14px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  padding: 15px 14px;
   border-radius: var(--r-lg);
   cursor: pointer;
   background: var(--ssw-surface);
@@ -199,54 +287,83 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
 }
 
 .quickTile:active {
   background: var(--ssw-surfaceActive);
+  border-color: var(--ssw-borderHover);
+  transform: scale(0.96);
 }
 
 .quickIcon {
-  font-size: 20px;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.12);
+  flex-shrink: 0;
 }
 
 .quickLabel {
   font-size: var(--fs-body);
-  font-weight: var(--fw-bold);
+  font-weight: 700;
+  letter-spacing: -0.1px;
 }
 
 /* ── Recent cards ── */
 .recentHeader {
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-nano);
-  font-weight: var(--fw-bold);
-  letter-spacing: 0.8px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--ssw-textDim);
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recentHeader::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ssw-border);
 }
 
 .recentList {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 4px;
 }
 
 .recentCard {
-  padding: 10px 12px;
+  padding: 10px 14px;
   border-radius: var(--r-md);
   background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .recentJp {
+  font-family: 'Noto Sans JP', sans-serif;
   font-size: var(--fs-subtitle);
-  font-weight: var(--fw-bold);
-  color: var(--ssw-text);
+  font-weight: 700;
+  color: var(--ssw-textBright);
 }
 
 .recentId {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

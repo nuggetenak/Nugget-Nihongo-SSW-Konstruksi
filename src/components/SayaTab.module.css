@@ -8,9 +8,11 @@
 }
 
 .pageTitle {
-  padding: 16px 0 4px;
-  font-size: var(--fs-title);
-  font-weight: var(--fw-heavy);
+  padding: 18px 0 6px;
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   background: var(--accent);
   -webkit-background-clip: text;
   background-clip: text;
@@ -21,8 +23,8 @@
 .progressCard {
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
-  border-radius: var(--r-lg);
-  padding: 20px 16px;
+  border-radius: var(--r-xl);
+  padding: 20px 18px;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -54,12 +56,23 @@
 
 /* Section label */
 .sectionLabel {
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-nano);
-  font-weight: var(--fw-bold);
-  letter-spacing: 0.8px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
   color: var(--ssw-textDim);
-  padding: 18px 0 4px;
+  padding: 18px 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ssw-border);
 }
 
 /* Row */

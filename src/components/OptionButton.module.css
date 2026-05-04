@@ -1,23 +1,29 @@
-/* OptionButton.module.css */
+/* OptionButton.module.css — v2.0 */
 
 .btn {
   width: 100%;
   padding: 13px 14px;
   font-size: var(--fs-body);
   line-height: var(--lh-relaxed);
-  font-family: inherit;
-  border-radius: var(--r-md);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-lg);
   text-align: left;
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
   /* default */
   background: var(--ssw-surface);
   border: 1.5px solid var(--ssw-borderLight);
   color: var(--ssw-text);
+}
+
+.btn:not(:disabled):active {
+  transform: scale(0.99);
 }
 
 .btn:disabled { cursor: default; }
@@ -36,22 +42,31 @@
 }
 
 .btn[data-state='dim'] {
-  opacity: 0.4;
+  opacity: 0.38;
+}
+
+/* Shine on correct */
+.btn[data-state='correct']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(22,163,74,0.06) 50%, transparent 100%);
+  pointer-events: none;
 }
 
 /* Badge circle */
 .badge {
-  width: 26px;
-  height: 26px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--fs-small);
-  font-weight: var(--fw-heavy);
+  font-weight: 800;
   margin-top: 1px;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
 
   /* default */
   background: rgba(245, 158, 11, 0.06);

@@ -1,14 +1,14 @@
-/* BottomNav.module.css */
+/* BottomNav.module.css — v2.0: pill active state, SVG icons */
 
 .nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--nav-h);
+  height: 64px;
   background: var(--ssw-navBg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid var(--ssw-border);
   display: flex;
   align-items: center;
@@ -21,6 +21,8 @@
   display: flex;
   width: 100%;
   max-width: var(--max-w);
+  padding: 0 8px;
+  gap: 4px;
 }
 
 .tab {
@@ -29,58 +31,68 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: 6px 0;
-  font-family: inherit;
-  font-size: var(--fs-micro);
-  font-weight: var(--fw-medium);
+  gap: 3px;
+  padding: 6px 4px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--ssw-textDim);
-  transition: color 0.15s;
+  color: var(--ssw-textFaint);
+  transition: color 0.2s;
   position: relative;
+  border-radius: var(--r-lg);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tab:active {
   transform: scale(0.92);
-  transition: transform 0.08s ease, color 0.15s;
+  transition: transform 0.1s ease, color 0.2s;
 }
 
 .tab[data-active='true'] {
-  font-weight: var(--fw-bold);
   color: var(--ssw-amber);
+  font-weight: 700;
 }
 
-.tabIcon {
-  font-size: 20px;
+/* SVG icon wrapper — pill background on active */
+.iconWrap {
+  position: relative;
+  width: 44px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.tab[data-active='true'] .iconWrap {
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.tabLabel {
   line-height: 1;
+  letter-spacing: 0.1px;
 }
 
-.activePill {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 3px;
-  border-radius: 0 0 var(--r-sm) var(--r-sm);
-  background: var(--ssw-amber);
-}
-
+/* Badge */
 .badge {
   position: absolute;
-  top: 4px;
-  right: 22%;
-  font-size: var(--fs-nano);
-  font-weight: var(--fw-heavy);
-  min-width: 14px;
-  height: 14px;
-  border-radius: 7px;
+  top: -2px;
+  right: 2px;
+  font-size: 9px;
+  font-weight: 800;
+  min-width: 15px;
+  height: 15px;
+  border-radius: 99px;
   background: var(--ssw-amber);
   color: var(--ssw-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 3px;
+  z-index: 1;
+  border: 1.5px solid var(--ssw-bg);
 }

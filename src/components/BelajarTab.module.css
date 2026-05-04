@@ -1,4 +1,4 @@
-/* BelajarTab.module.css */
+/* BelajarTab.module.css — v2.0 UI Upgrade */
 
 .container {
   padding: 0 16px 24px;
@@ -8,9 +8,11 @@
 }
 
 .pageTitle {
-  padding: 16px 0 4px;
-  font-size: var(--fs-title);
-  font-weight: var(--fw-heavy);
+  padding: 18px 0 6px;
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   background: var(--accent);
   -webkit-background-clip: text;
   background-clip: text;
@@ -19,25 +21,33 @@
 
 /* Section header */
 .sectionHeader {
-  padding: 20px 0 10px;
+  padding: 20px 0 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 .sectionTitle {
-  font-size: var(--fs-body);
-  font-weight: var(--fw-heavy);
-  color: var(--ssw-text);
+  font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
+  font-size: var(--fs-caption);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ssw-textDim);
+  white-space: nowrap;
 }
 
 .sectionSub {
   font-size: var(--fs-small);
-  color: var(--ssw-textDim);
-  margin-top: 1px;
+  color: var(--ssw-textFaint);
+  white-space: nowrap;
+  display: none;
 }
 
 /* Mode grid */
 .grid {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .gridSingle { grid-template-columns: 1fr; }
@@ -45,7 +55,7 @@
 
 /* Mode card */
 .modeCard {
-  padding: 16px 14px;
+  padding: 14px 14px 14px 17px;
   border-radius: var(--r-lg);
   cursor: pointer;
   background: var(--ssw-surface);
@@ -53,31 +63,56 @@
   color: var(--ssw-text);
   text-align: left;
   position: relative;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-family: inherit;
+  gap: 7px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* Left amber accent bar */
+.modeCard::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, rgba(245,158,11,0.6), rgba(180,83,9,0.4));
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .modeCard:active {
   background: var(--ssw-surfaceActive);
-  transform: scale(0.98);
+  border-color: var(--ssw-borderHover);
+  transform: scale(0.97);
+}
+
+.modeCard:active::before {
+  opacity: 1;
 }
 
 .modeCard[data-badged='true'] {
   border-color: var(--ssw-borderLight);
 }
 
+.modeCard[data-badged='true']::before {
+  opacity: 1;
+  background: linear-gradient(180deg, #F59E0B, #B45309);
+}
+
 .cardIcon {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
+  display: block;
 }
 
 .cardLabel {
   font-size: var(--fs-body);
-  font-weight: var(--fw-bold);
-  margin-bottom: 2px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  margin-bottom: 1px;
 }
 
 .cardDesc {
@@ -92,9 +127,9 @@
   top: 8px;
   right: 8px;
   font-size: var(--fs-nano);
-  font-weight: var(--fw-heavy);
-  min-width: 16px;
-  height: 16px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
   padding: 0 4px;
   border-radius: var(--r-pill);
   background: var(--ssw-amber);
@@ -102,4 +137,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1.5px solid var(--ssw-bg);
 }
