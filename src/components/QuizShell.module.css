@@ -1,12 +1,13 @@
-/* ─── QuizShell.module.css ─────────────────────────────────────────────────── */
+/* ─── QuizShell.module.css v2.0 — premium quiz feel ──────────────────────────── */
 
 .wrap {
-  padding: 12px 16px 24px;
+  padding: 12px 16px 32px;
   max-width: var(--max-w, 480px);
   margin: 0 auto;
   animation: fadeIn 0.2s ease;
 }
 
+/* ── Header row ── */
 .header {
   display: flex;
   justify-content: space-between;
@@ -15,15 +16,27 @@
 }
 
 .btnBack {
-  font-family: inherit;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-caption);
+  font-weight: 600;
   color: var(--ssw-textMuted);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px 0;
+  padding: 6px 8px 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: color 0.15s;
+  letter-spacing: 0.2px;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+.btnBack:active { color: var(--ssw-amber); }
 
+/* ── Meta strip (timer · score · streak) ── */
 .meta {
   font-size: var(--fs-caption);
   color: var(--ssw-textDim);
@@ -32,93 +45,141 @@
   gap: 8px;
 }
 
-/* color set inline for timer (red when < 60s — conditional, justified) */
 .timer {
-  font-weight: var(--fw-bold);
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
-.score {
-  font-variant-numeric: tabular-nums;
-}
+/* Timer danger state — triggered via data-danger attr in JSX */
+.timer[data-danger='true'] { color: var(--ssw-wrong); }
 
-.streak {
-  font-size: var(--fs-small);
-  font-weight: var(--fw-bold);
-  color: var(--ssw-amber);
+.score { font-variant-numeric: tabular-nums; font-weight: 600; }
+.streak { font-size: var(--fs-small); font-weight: 800; color: var(--ssw-amber); }
+
+/* ── Question counter + audio row ── */
+.counterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 14px;
 }
 
 .counter {
   font-size: var(--fs-small);
   color: var(--ssw-textFaint);
-  margin-top: 8px;
-  margin-bottom: 14px;
   font-variant-numeric: tabular-nums;
 }
 
-.questionCard {
-  padding: 18px 16px;
+.btnAudio {
+  font-family: inherit;
   background: var(--ssw-surface);
-  border-radius: var(--r-lg);
   border: 1px solid var(--ssw-border);
-  margin-bottom: 14px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ssw-textMuted);
+  padding: 4px 10px;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.btnAudio:active {
+  background: var(--ssw-surfaceActive);
+  border-color: var(--ssw-borderHover);
+}
+
+/* ── Question card ── */
+.questionCard {
+  padding: 20px 18px 18px;
+  background: var(--ssw-surface);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--ssw-border);
+  margin-bottom: 10px;
   animation: fadeIn 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle amber glow in top-left corner */
+.questionCard::before {
+  content: '';
+  position: absolute;
+  top: -12px; left: -12px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .questionText {
   font-size: var(--fs-subtitle);
-  line-height: var(--lh-relaxed);
-  font-weight: var(--fw-medium);
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--ssw-textBright);
 }
 
 .questionSub {
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
-  margin-top: 6px;
+  margin-top: 8px;
   line-height: var(--lh-normal);
 }
 
 .hint {
   font-size: var(--fs-small);
   color: var(--ssw-gold);
-  margin-top: 8px;
-  padding: 6px 10px;
-  background: rgba(251, 191, 36, 0.06);
-  border-radius: var(--r-sm);
+  margin-top: 10px;
+  padding: 7px 11px;
+  background: rgba(251,191,36,0.07);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(251,191,36,0.14);
   line-height: var(--lh-tight);
 }
 
+/* ── Options list ── */
 .options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
+/* ── Explanation card ── */
 .explanation {
-  margin-top: 12px;
-  padding: 12px 14px;
-  border-radius: var(--r-md);
-  background: rgba(251, 191, 36, 0.05);
-  border: 1px solid rgba(251, 191, 36, 0.12);
+  margin-top: 10px;
+  padding: 13px 15px;
+  border-radius: var(--r-lg);
+  background: rgba(251,191,36,0.05);
+  border: 1px solid rgba(251,191,36,0.14);
   font-size: var(--fs-caption);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--ssw-textMuted);
   animation: slideUp 0.25s ease;
-  overflow: hidden;
 }
 
+/* ── Next button ── */
 .btnNext {
   width: 100%;
-  margin-top: 12px;
-  padding: 13px;
+  margin-top: 10px;
+  padding: 14px;
   font-size: var(--fs-body);
-  font-weight: var(--fw-bold);
-  font-family: inherit;
-  border-radius: var(--r-md);
+  font-weight: 800;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-lg);
   border: none;
   background: var(--ssw-amber);
-  color: var(--ssw-textBright);
+  color: #1a0a00;
   cursor: pointer;
   box-shadow: var(--ssw-shadowGlow);
   animation: fadeIn 0.15s ease;
+  letter-spacing: -0.1px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btnNext:active {
+  transform: scale(0.98) translateY(1px);
+  box-shadow: none;
 }

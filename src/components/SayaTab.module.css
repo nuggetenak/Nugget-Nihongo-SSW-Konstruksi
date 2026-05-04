@@ -1,25 +1,22 @@
-/* SayaTab.module.css */
+/* ─── SayaTab.module.css v2.0 ────────────────────────────────────────────────── */
 
 .container {
-  padding: 0 16px 32px;
+  padding: 0 16px 40px;
   max-width: var(--max-w);
   margin: 0 auto;
   animation: fadeIn 0.25s ease;
 }
 
+/* ── Page title ── */
 .pageTitle {
-  padding: 18px 0 6px;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-size: 20px;
+  padding: 18px 0 8px;
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.3px;
-  background: var(--accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+  color: var(--ssw-textBright);
 }
 
-/* Progress card */
+/* ── Progress card ── */
 .progressCard {
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
@@ -28,46 +25,50 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  margin-top: 8px;
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
 }
-
-.progressInfo {
-  flex: 1;
+.progressCard::after {
+  content: '';
+  position: absolute;
+  right: -16px; bottom: -16px;
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 70%);
+  pointer-events: none;
 }
-
+.progressInfo { flex: 1; }
 .progressKnown {
-  font-size: var(--fs-body);
-  font-weight: var(--fw-bold);
-  color: var(--ssw-text);
-  margin-bottom: 6px;
-}
-
-.progressDetail {
-  font-size: var(--fs-caption);
-  color: var(--ssw-textDim);
+  font-size: var(--fs-title);
+  font-weight: 800;
+  color: var(--ssw-textBright);
   margin-bottom: 4px;
+  letter-spacing: -0.3px;
 }
-
+.progressDetail { font-size: var(--fs-caption); color: var(--ssw-textDim); margin-bottom: 4px; }
 .progressStreak {
-  font-size: var(--fs-caption);
+  font-size: var(--fs-small);
+  font-weight: 700;
   color: var(--ssw-amber);
-  font-weight: var(--fw-bold);
+  display: inline-block;
+  background: rgba(245,158,11,0.10);
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
 }
 
-/* Section label */
+/* ── Section heading ── */
 .sectionLabel {
-  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-nano);
   font-weight: 800;
-  letter-spacing: 1.1px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--ssw-textDim);
-  padding: 18px 0 6px;
+  padding: 20px 0 8px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .sectionLabel::after {
   content: '';
   flex: 1;
@@ -75,89 +76,76 @@
   background: var(--ssw-border);
 }
 
-/* Row */
+/* ── Row ── */
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 13px 0;
   border-bottom: 1px solid var(--ssw-border);
+  transition: opacity 0.15s;
 }
-
 .row[data-clickable='true'] {
   cursor: pointer;
 }
-
+.row[data-clickable='true']:active {
+  opacity: 0.6;
+}
 .rowLabel {
   font-size: var(--fs-body);
-  font-weight: var(--fw-semi);
+  font-weight: 600;
   color: var(--ssw-text);
 }
-
-.rowLabel[data-danger='true'] {
-  color: var(--ssw-wrong);
-}
-
+.rowLabel[data-danger='true'] { color: var(--ssw-wrong); }
 .rowSub {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
   margin-top: 2px;
+  line-height: 1.4;
 }
-
 .rowValue {
-  font-size: var(--fs-body);
+  font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  text-align: right;
+  max-width: 45%;
+  flex-shrink: 0;
 }
-
 .rowChevron {
   color: var(--ssw-textFaint);
+  font-size: 16px;
+  line-height: 1;
 }
 
-/* Reset row */
+/* ── Reset row ── */
 .resetRow {
   padding: 13px 0;
   cursor: pointer;
+  transition: opacity 0.15s;
 }
-
+.resetRow:active { opacity: 0.7; }
 .resetLabel {
   font-size: var(--fs-body);
-  font-weight: var(--fw-semi);
+  font-weight: 600;
   color: var(--ssw-textDim);
   transition: color 0.2s;
 }
+.resetLabel[data-active='true'] { color: var(--ssw-wrong); }
+.resetSub { font-size: var(--fs-small); color: var(--ssw-textFaint); margin-top: 2px; }
 
-.resetLabel[data-active='true'] {
-  color: var(--ssw-wrong);
-}
-
-.resetSub {
-  font-size: var(--fs-small);
-  color: var(--ssw-textFaint);
-  margin-top: 2px;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  font-size: var(--fs-nano);
-  color: var(--ssw-textFaint);
-  margin-top: 20px;
-  line-height: 1.6;
-}
-
-/* D1: Inline edit UI */
+/* ── Inline edit ── */
 .inlineEdit {
   padding: 12px 14px 14px;
-  background: var(--surface-2, #1a1a2e);
-  border-radius: 10px;
-  margin-bottom: 2px;
+  background: var(--ssw-surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--ssw-borderActive);
+  margin: 4px 0 8px;
 }
 .inlineEditLabel {
-  font-size: 11px;
-  color: var(--text-dim, #666);
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
   margin-bottom: 8px;
   letter-spacing: 0.3px;
 }
@@ -170,43 +158,53 @@
 .inlineInput {
   flex: 1;
   min-width: 0;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: var(--surface, #111);
-  border: 1px solid var(--border-active, #f59e0b);
-  color: var(--text, #fff);
-  font-size: 14px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  background: var(--ssw-bg);
+  border: 1px solid var(--ssw-borderActive);
+  color: var(--ssw-text);
+  font-size: var(--fs-body);
   font-family: inherit;
   outline: none;
 }
 .inlineSave {
-  padding: 8px 14px;
-  border-radius: 8px;
-  background: var(--amber, #f59e0b);
+  padding: 9px 16px;
+  border-radius: var(--r-md);
+  background: var(--ssw-amber);
   border: none;
-  color: #000;
-  font-size: 13px;
-  font-weight: 700;
+  color: #1a0a00;
+  font-size: var(--fs-caption);
+  font-weight: 800;
   font-family: inherit;
   cursor: pointer;
 }
 .inlineDelete {
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
   background: transparent;
-  border: 1px solid var(--wrong, #ef4444);
-  color: var(--wrong, #ef4444);
-  font-size: 13px;
+  border: 1px solid var(--ssw-wrong);
+  color: var(--ssw-wrong);
+  font-size: var(--fs-caption);
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
 }
 .inlineCancel {
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
   background: transparent;
-  border: 1px solid var(--border, #333);
-  color: var(--text-muted, #aaa);
-  font-size: 13px;
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-textMuted);
+  font-size: var(--fs-caption);
   font-family: inherit;
   cursor: pointer;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  font-size: var(--fs-nano);
+  color: var(--ssw-textFaint);
+  margin-top: 24px;
+  line-height: 1.7;
 }

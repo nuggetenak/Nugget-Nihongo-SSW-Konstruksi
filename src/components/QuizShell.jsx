@@ -132,7 +132,7 @@ export default function QuizShell({
           {fmtTime && (
             <span
               className={S.timer}
-              style={{ color: timeLeft < 60 ? T.wrong : T.textMuted }}
+              data-danger={timeLeft < 60}
               aria-label={timeLeft < 60 ? `Peringatan: sisa waktu ${fmtTime}` : `Waktu ${fmtTime}`}
             >
               ⏱ {fmtTime}
@@ -149,14 +149,14 @@ export default function QuizShell({
         color={accentColor}
       />
 
-      <div className={S.counter} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span>{qIdx + 1} / {questions.length}</span>
+      <div className={S.counterRow}>
+        <span className={S.counter}>{qIdx + 1} / {questions.length}</span>
         {audioEnabled && canSpeak() && (
           <button
+            className={S.btnAudio}
             onClick={() => speakJP(stripFuri(q.question))}
             aria-label="Putar audio"
-            style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, color: T.textMuted, padding: '2px 4px', lineHeight: 1 }}
-          >🔊</button>
+          >🔊 Dengar</button>
         )}
       </div>
 

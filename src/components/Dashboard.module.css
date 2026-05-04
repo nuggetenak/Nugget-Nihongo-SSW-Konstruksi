@@ -1,4 +1,4 @@
-/* Dashboard.module.css — v2.0 UI Upgrade */
+/* ─── Dashboard.module.css v4.0 ──────────────────────────────────────────────── */
 
 .container {
   padding: 0 16px 32px;
@@ -7,7 +7,7 @@
   animation: fadeIn 0.3s ease;
 }
 
-/* ── Header ── */
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
 .header {
   padding: 18px 0 16px;
   display: flex;
@@ -16,30 +16,24 @@
   position: relative;
 }
 
-/* Blueprint grid strip behind header */
+/* Blueprint grid texture */
 .header::before {
   content: '';
   position: absolute;
-  top: 0; left: -16px; right: -16px;
-  height: 100%;
+  top: 0; left: -16px; right: -16px; height: 100%;
   background-image:
     linear-gradient(rgba(180,83,9,0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(180,83,9,0.045) 1px, transparent 1px);
   background-size: 20px 20px;
   pointer-events: none;
-  z-index: 0;
 }
 
-.brand {
-  position: relative;
-  z-index: 1;
-}
+.brand { position: relative; z-index: 1; }
 
 .brandName {
-  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   background: var(--accent);
   -webkit-background-clip: text;
   background-clip: text;
@@ -73,79 +67,114 @@
   align-items: center;
   gap: 4px;
   transition: opacity 0.15s, transform 0.15s;
-  letter-spacing: 0.2px;
 }
-
-.trackPill:active {
-  transform: scale(0.95);
-  opacity: 0.8;
-}
+.trackPill:active { transform: scale(0.95); opacity: 0.8; }
 
 .themeBtn {
-  font-family: inherit;
   font-size: 15px;
-  width: 34px;
-  height: 34px;
+  width: 34px; height: 34px;
   border-radius: var(--r-pill);
   cursor: pointer;
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-borderLight);
   color: var(--ssw-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
   transition: background 0.15s, transform 0.15s;
 }
+.themeBtn:active { transform: scale(0.9); }
 
-.themeBtn:active {
-  transform: scale(0.9);
-}
-
-/* ── Streak hero ── */
+/* ─── Streak hero ───────────────────────────────────────────────────────────── */
 .streakHero {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 13px 16px 13px 20px;
   border-radius: var(--r-lg);
-  background: rgba(245, 158, 11, 0.06);
-  border: 1px solid rgba(245, 158, 11, 0.22);
-  margin-bottom: 14px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.22);
+  margin-bottom: 12px;
   animation: slideDown 0.35s ease;
   position: relative;
   overflow: hidden;
 }
-
 .streakHero::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
+  left: 0; top: 0; bottom: 0; width: 3px;
   background: linear-gradient(180deg, #FBBF24, #B45309);
   border-radius: 3px 0 0 3px;
 }
-
-.streakEmoji {
-  font-size: 26px;
-  flex-shrink: 0;
-}
-
+.streakEmoji { font-size: 26px; flex-shrink: 0; }
 .streakDays {
-  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-subtitle);
   font-weight: 800;
   color: var(--ssw-amber);
   letter-spacing: -0.2px;
 }
+.streakSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
 
-.streakSub {
+/* ─── Exam Countdown ────────────────────────────────────────────────────────── */
+.countdownCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 12px 20px;
+  border-radius: var(--r-lg);
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+}
+
+/* tier-based colors via CSS custom properties */
+.countdownCard[data-tier='info'] {
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.25);
+}
+.countdownCard[data-tier='warning'] {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.28);
+}
+.countdownCard[data-tier='critical'] {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.28);
+}
+.countdownCard[data-tier='today'] {
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.45);
+}
+
+/* Left accent bar */
+.countdownCard::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0; width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+.countdownCard[data-tier='info']::before     { background: #3B82F6; }
+.countdownCard[data-tier='warning']::before  { background: #F59E0B; }
+.countdownCard[data-tier='critical']::before { background: #EF4444; }
+.countdownCard[data-tier='today']::before    { background: #EF4444; }
+
+.countdownIcon { font-size: 20px; flex-shrink: 0; }
+
+.countdownDays {
+  font-size: var(--fs-body);
+  font-weight: 800;
+  letter-spacing: -0.1px;
+}
+.countdownDays[data-tier='info']     { color: #3B82F6; }
+.countdownDays[data-tier='warning']  { color: var(--ssw-amber); }
+.countdownDays[data-tier='critical'] { color: #EF4444; }
+.countdownDays[data-tier='today']    { color: #EF4444; }
+
+.countdownSub {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
   margin-top: 2px;
 }
 
-/* ── Progress ring card ── */
+/* ─── Progress ring card ────────────────────────────────────────────────────── */
 .ringCard {
   display: flex;
   align-items: center;
@@ -154,11 +183,10 @@
   border-radius: var(--r-xl);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   position: relative;
   overflow: hidden;
 }
-
 .ringCard::after {
   content: '';
   position: absolute;
@@ -168,48 +196,45 @@
   background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
   pointer-events: none;
 }
-
-.ringInfo {
-  flex: 1;
-}
-
+.ringInfo { flex: 1; }
 .ringKnown {
-  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-title);
   font-weight: 800;
   color: var(--ssw-textBright);
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   letter-spacing: -0.3px;
-  line-height: 1.1;
 }
-
 .ringDetail {
   font-size: var(--fs-caption);
   color: var(--ssw-textDim);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
-
+.ringPct {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ssw-amber);
+  margin-bottom: 3px;
+}
 .ringStreak {
   display: inline-block;
   font-size: var(--fs-small);
   font-weight: 700;
   color: var(--ssw-amber);
-  background: rgba(245, 158, 11, 0.10);
+  background: rgba(245,158,11,0.10);
   padding: 2px 8px;
   border-radius: var(--r-pill);
 }
-
 .ringDaily {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
-/* ── Primary CTA ── */
+/* ─── Primary CTA ───────────────────────────────────────────────────────────── */
 .cta {
   width: 100%;
-  padding: 18px 20px;
-  margin-bottom: 12px;
+  padding: 17px 20px;
+  margin-bottom: 8px;
   font-family: 'DM Sans', system-ui, sans-serif;
   border-radius: var(--r-xl);
   cursor: pointer;
@@ -225,99 +250,111 @@
   position: relative;
   overflow: hidden;
 }
-
 .cta::after {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 60%);
   pointer-events: none;
 }
-
 .cta:active {
   transform: scale(0.985) translateY(1px);
   box-shadow: 0 2px 12px rgba(180,83,9,0.22);
 }
-
-.ctaIcon {
-  font-size: 28px;
-  flex-shrink: 0;
-}
-
-.ctaBody {
-  flex: 1;
-}
-
+.ctaIcon { font-size: 26px; flex-shrink: 0; }
+.ctaBody { flex: 1; }
 .ctaLabel {
   font-size: var(--fs-subtitle);
   font-weight: 800;
-  line-height: 1.2;
   letter-spacing: -0.2px;
+  line-height: 1.2;
 }
+.ctaDesc { font-size: var(--fs-caption); opacity: 0.72; margin-top: 2px; }
+.ctaArrow { font-size: 20px; opacity: 0.65; font-weight: 800; }
 
-.ctaDesc {
-  font-size: var(--fs-caption);
-  opacity: 0.72;
-  margin-top: 3px;
+/* ─── Daily Mission card ─────────────────────────────────────────────────────── */
+.missionCard {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  background: transparent;
+  border: 1.5px dashed var(--ssw-borderActive);
+  color: var(--ssw-text);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.15s, transform 0.15s;
 }
-
-.ctaArrow {
-  font-size: 20px;
-  opacity: 0.65;
+.missionCard:active {
+  background: var(--ssw-surfaceActive);
+  transform: scale(0.98);
+}
+.missionDone {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: var(--r-lg);
+  background: transparent;
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.55;
+}
+.missionIcon { font-size: 22px; flex-shrink: 0; }
+.missionBody { flex: 1; }
+.missionEyebrow {
+  font-size: var(--fs-nano);
   font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--ssw-amber);
+  margin-bottom: 2px;
 }
+.missionLabel { font-size: var(--fs-body); font-weight: 700; }
+.missionArrow { font-size: 18px; color: var(--ssw-amber); opacity: 0.8; }
 
-/* ── Quick action grid ── */
+/* ─── Quick grid ─────────────────────────────────────────────────────────────── */
 .quickGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
   margin-bottom: 22px;
 }
 
 .quickTile {
   font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 15px 14px;
+  padding: 12px 6px 11px;
   border-radius: var(--r-lg);
   cursor: pointer;
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   color: var(--ssw-text);
-  text-align: left;
+  text-align: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  gap: 6px;
+  transition: background 0.15s, transform 0.14s;
 }
-
 .quickTile:active {
   background: var(--ssw-surfaceActive);
   border-color: var(--ssw-borderHover);
-  transform: scale(0.96);
+  transform: scale(0.93);
 }
-
-.quickIcon {
-  font-size: 18px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--r-md);
-  background: rgba(245,158,11,0.08);
-  border: 1px solid rgba(245,158,11,0.12);
-  flex-shrink: 0;
-}
-
+.quickIcon { font-size: 20px; }
 .quickLabel {
-  font-size: var(--fs-body);
+  font-size: var(--fs-nano);
   font-weight: 700;
-  letter-spacing: -0.1px;
+  color: var(--ssw-textDim);
+  letter-spacing: 0.2px;
 }
 
-/* ── Recent cards ── */
+/* ─── Recent cards ───────────────────────────────────────────────────────────── */
 .recentHeader {
-  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-nano);
   font-weight: 800;
   letter-spacing: 1.2px;
@@ -328,7 +365,6 @@
   align-items: center;
   gap: 8px;
 }
-
 .recentHeader::after {
   content: '';
   flex: 1;
@@ -336,11 +372,7 @@
   background: var(--ssw-border);
 }
 
-.recentList {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+.recentList { display: flex; flex-direction: column; gap: 4px; }
 
 .recentCard {
   padding: 10px 14px;
@@ -351,14 +383,13 @@
   align-items: center;
   gap: 12px;
 }
-
 .recentJp {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: var(--fs-subtitle);
   font-weight: 700;
   color: var(--ssw-textBright);
+  flex-shrink: 0;
 }
-
 .recentId {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);

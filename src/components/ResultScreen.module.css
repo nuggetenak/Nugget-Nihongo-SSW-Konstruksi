@@ -1,7 +1,7 @@
-/* ResultScreen.module.css */
+/* ─── ResultScreen.module.css v2.0 ───────────────────────────────────────────── */
 
 .container {
-  padding: 20px 16px;
+  padding: 20px 16px 40px;
   max-width: var(--max-w);
   margin: 0 auto;
   animation: scaleIn 0.3s ease;
@@ -10,68 +10,103 @@
 /* ── Grade hero ── */
 .hero {
   text-align: center;
-  padding: 28px 20px 24px;
+  padding: 32px 20px 26px;
   border-radius: var(--r-xl);
   border: 1px solid var(--ssw-border);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative circles */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -24px; left: -24px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .hero[data-path='celebrate'] {
-  background: rgba(22, 163, 74, 0.06);
-  border-color: rgba(22, 163, 74, 0.2);
+  background: rgba(22,163,74,0.06);
+  border-color: rgba(22,163,74,0.22);
+}
+.hero[data-path='celebrate']::before,
+.hero[data-path='celebrate']::after {
+  background: radial-gradient(circle, rgba(22,163,74,0.2), transparent);
 }
 
 .hero[data-path='encourage'] {
-  background: rgba(220, 38, 38, 0.04);
-  border-color: rgba(220, 38, 38, 0.15);
+  background: rgba(220,38,38,0.04);
+  border-color: rgba(220,38,38,0.15);
+}
+.hero[data-path='encourage']::before,
+.hero[data-path='encourage']::after {
+  background: radial-gradient(circle, rgba(220,38,38,0.15), transparent);
 }
 
 .hero[data-path='neutral'] {
   background: var(--ssw-accentSoft);
 }
-
-.heroEmoji {
-  font-size: 52px;
-  margin-bottom: 6px;
-  display: block;
+.hero[data-path='neutral']::before,
+.hero[data-path='neutral']::after {
+  background: radial-gradient(circle, rgba(245,158,11,0.15), transparent);
 }
 
+.heroEmoji {
+  font-size: 56px;
+  margin-bottom: 10px;
+  display: block;
+  line-height: 1;
+}
 .heroEmoji[data-path='celebrate'] { animation: bounceIn 0.5s ease; }
 .heroEmoji[data-path='encourage'] { animation: fadeIn 0.4s ease; }
 
 .heroPct {
-  font-size: 36px;
-  font-weight: var(--fw-heavy);
-  margin-bottom: 2px;
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 4px;
   font-variant-numeric: tabular-nums;
+  letter-spacing: -1px;
+  line-height: 1;
 }
-
-.heroPct[data-shake='true'] {
-  animation: rsShake 0.4s ease 0.3s both;
-}
+.heroPct[data-shake='true'] { animation: rsShake 0.4s ease 0.3s both; }
 
 .heroLabel {
-  font-size: var(--fs-subtitle);
+  font-size: var(--fs-body);
   color: var(--ssw-textMuted);
-  font-weight: var(--fw-bold);
+  font-weight: 700;
   margin-bottom: 8px;
+  line-height: 1.4;
 }
 
 .heroSub {
   font-size: var(--fs-caption);
   color: var(--ssw-textDim);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Weakness tip ── */
 .tip {
-  padding: 12px 14px;
-  border-radius: var(--r-md);
-  background: rgba(59, 130, 246, 0.06);
-  border: 1px solid rgba(59, 130, 246, 0.15);
+  padding: 13px 15px;
+  border-radius: var(--r-lg);
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.16);
   margin-bottom: 12px;
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
-  line-height: var(--lh-relaxed);
+  line-height: 1.65;
 }
 
 /* ── Actions ── */
@@ -83,52 +118,72 @@
 
 .btnPrimary {
   flex: 1;
-  padding: 12px;
+  padding: 14px 12px;
   font-size: var(--fs-body);
-  font-weight: var(--fw-bold);
-  font-family: inherit;
-  border-radius: var(--r-md);
+  font-weight: 800;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-lg);
   background: var(--accent);
   border: none;
-  color: var(--ssw-textBright);
+  color: #FFF8E7;
   cursor: pointer;
-  box-shadow: var(--ssw-shadowGlow);
+  box-shadow: 0 3px 16px rgba(180,83,9,0.25);
+  letter-spacing: -0.1px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btnPrimary:active {
+  transform: scale(0.97);
+  box-shadow: none;
 }
 
 .btnWrong {
   flex: 1;
-  padding: 12px;
+  padding: 14px 12px;
   font-size: var(--fs-body);
-  font-weight: var(--fw-bold);
-  font-family: inherit;
-  border-radius: var(--r-md);
+  font-weight: 700;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-lg);
   background: var(--ssw-wrongBg);
   border: 1px solid var(--ssw-wrongBorder);
   color: var(--ssw-wrong);
   cursor: pointer;
+  transition: transform 0.15s;
 }
+.btnWrong:active { transform: scale(0.97); }
 
 .btnBack {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: var(--fs-caption);
-  font-family: inherit;
-  border-radius: var(--r-md);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  border-radius: var(--r-lg);
   background: none;
   border: 1px solid var(--ssw-border);
   color: var(--ssw-textMuted);
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  transition: background 0.15s;
 }
+.btnBack:active { background: var(--ssw-surfaceActive); }
 
 /* ── Review section ── */
 .reviewHeader {
   font-size: var(--fs-nano);
-  font-weight: var(--fw-bold);
+  font-weight: 800;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--ssw-textDim);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reviewHeader::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ssw-border);
 }
 
 .reviewList {
@@ -138,16 +193,18 @@
 }
 
 .reviewItem {
-  padding: 12px 14px;
-  border-radius: var(--r-md);
+  padding: 13px 14px;
+  border-radius: var(--r-lg);
   background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
   border-left: 3px solid var(--ssw-wrong);
 }
 
 .reviewQ {
   font-size: var(--fs-body);
   line-height: var(--lh-normal);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  color: var(--ssw-textBright);
 }
 
 .reviewWrong {
@@ -159,6 +216,7 @@
 .reviewCorrect {
   font-size: var(--fs-caption);
   color: var(--ssw-correct);
+  font-weight: 600;
 }
 
 .reviewExpl {
@@ -166,6 +224,6 @@
   color: var(--ssw-textDim);
   line-height: var(--lh-relaxed);
   border-top: 1px solid var(--ssw-border);
-  padding-top: 6px;
-  margin-top: 6px;
+  padding-top: 8px;
+  margin-top: 8px;
 }

@@ -5,7 +5,7 @@
 
 import s from './ProgressBar.module.css';
 
-export default function ProgressBar({ current, total, color, height = 4, label }) {
+export default function ProgressBar({ current, total, color, height = 5, label }) {
   const pct = total > 0 ? Math.min((current / total) * 100, 100) : 0;
   return (
     <div
