@@ -12,6 +12,22 @@
   gap: 2px;
 }
 
+.tapSurface {
+  border: 0;
+  padding: 0;
+  width: 100%;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+}
+
+.tapHint {
+  margin-top: 6px;
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  opacity: 0.85;
+}
+
 .jpSpan {
   line-height: var(--lh-tight);
   text-align: center;
@@ -45,6 +61,12 @@
   color: var(--ssw-gold);
   opacity: 0.65;
   line-height: 1;
+}
+
+.ruby rt {
+  font-size: 0.52em;
+  color: var(--ssw-amber);
+  font-weight: var(--fw-semibold);
 }
 
 .readingRow {
