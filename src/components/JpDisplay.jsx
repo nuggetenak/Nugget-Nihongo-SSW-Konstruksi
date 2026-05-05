@@ -202,11 +202,11 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
     }
     return (
       <div className={S.descBlock}>
-        {intro.trim() && <div className={S.intro}>{intro.trim()}</div>}
+        {intro.trim() && <div className={S.intro}>{renderJPWithRuby(intro.trim(), parseRubyFragments(intro.trim()))}</div>}
         {items.map((item, i) => (
           <div key={i} className={S.listRow}>
             <span className={S.labelChip}>【{item.label}】</span>
-            <span className={S.body}>{item.body}</span>
+            <span className={S.body}>{renderJPWithRuby(item.body, parseRubyFragments(item.body))}</span>
           </div>
         ))}
         {footnote}
@@ -237,11 +237,11 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
     if (cur) items.push(cur);
     return (
       <div className={S.descBlock}>
-        {intro.trim() && <div className={S.intro}>{intro.trim()}</div>}
+        {intro.trim() && <div className={S.intro}>{renderJPWithRuby(intro.trim(), parseRubyFragments(intro.trim()))}</div>}
         {items.map((item, i) => (
           <div key={i} className={`${S.listRow} ${S.listRowTight}`}>
             <span className={S.numLabel}>{item.num}</span>
-            <span className={S.body}>{item.body.trim()}</span>
+            <span className={S.body}>{renderJPWithRuby(item.body.trim(), parseRubyFragments(item.body.trim()))}</span>
           </div>
         ))}
         {footnote}
@@ -255,7 +255,7 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
     <div className={S.descBlock}>
       {lines.map((line, i) => (
         <p key={i} className={S.plainPara} style={{ marginBottom: i < lines.length - 1 ? 5 : 0, opacity: 0.92 }}>
-          {line}
+          {renderJPWithRuby(line, parseRubyFragments(line))}
         </p>
       ))}
       {footnote}
