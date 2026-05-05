@@ -3,7 +3,7 @@
 // Dynamic values (border color, gradient from cat.color) remain inline.
 // ─────────────────────────────────────────────────────────────────────────────
 import { T } from '../../styles/theme.js';
-import { JpFront, DescBlock } from '../../components/JpDisplay.jsx';
+import { JpFront, DescBlock, parseRubyFragments, renderJPWithRuby } from '../../components/JpDisplay.jsx';
 import FC from './flashcard.module.css';
 import S from './FlipCard.module.css';
 
@@ -131,6 +131,14 @@ export default function FlipCard({
                   <DescBlock desc={card.desc} />
                 </div>
               )}
+            </div>
+          )}
+          {card.quote && (
+            <div className={S.quoteBlock}>
+              <span className={S.quoteLabel}>{renderJPWithRuby('現場《げんば》より', parseRubyFragments('現場《げんば》より'))}</span>
+              <div className={S.quoteText}>
+                「{renderJPWithRuby(card.quote, parseRubyFragments(card.quote))}」
+              </div>
             </div>
           )}
         </div>

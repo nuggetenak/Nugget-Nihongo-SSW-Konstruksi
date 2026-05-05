@@ -128,7 +128,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
     </div>);
 }
 
-function parseRubyFragments(jp = '') {
+export function parseRubyFragments(jp = '') {
   const frags = [];
   const re = /([一-龯々〆ヵヶ]+)《([^》]+)》/g;
   let m;
@@ -138,7 +138,7 @@ function parseRubyFragments(jp = '') {
   return frags;
 }
 
-function renderJPWithRuby(text, rubyFragments) {
+export function renderJPWithRuby(text, rubyFragments) {
   if (!text || !rubyFragments?.length) return text;
   const nodes = [];
   let rest = text;

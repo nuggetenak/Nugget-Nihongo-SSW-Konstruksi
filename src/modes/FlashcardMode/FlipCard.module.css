@@ -213,3 +213,30 @@
   line-height: 1.65;
   text-align: center;
 }
+
+/* ── Quote block (mandor quote) ── */
+.quoteBlock {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 10px;
+  margin-top: 10px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.quoteLabel {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.quoteText {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.7;
+}
