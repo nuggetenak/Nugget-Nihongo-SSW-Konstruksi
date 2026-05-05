@@ -19,7 +19,7 @@ function SectionHeader({ sectionKey, title }) {
   const sm = SECTION_META[sectionKey] || SECTION_META.alat;
   // Strip emoji, variation selectors, and leading spaces
   const clean = title
-    .replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\uFE0F\uFE0E\u200D\s]+/gu, ' ')
+    .replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\uFE0F\uFE0E\u200D\s]+/gu, ' ') // eslint-disable-line no-misleading-character-class
     .trim();
   return (
     <div className={s.sectionHeader}>
