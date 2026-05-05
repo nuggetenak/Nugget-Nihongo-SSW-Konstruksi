@@ -68,7 +68,7 @@ export default function FlipCard({
             <JpFront
               jp={card.jp}
               furi={card.furi}
-              romaji={card.romaji}
+              
               audioEnabled={audioEnabled}
               furiganaPolicy={furiganaPolicy}
             />
@@ -113,7 +113,7 @@ export default function FlipCard({
 
           <div className={S.backBody}>
             <div className={S.backJp}>{card.jp}</div>
-            <div className={S.backFuri}>{card.furi} · {card.romaji}</div>
+            <div className={S.backFuri}>{card.furi}</div>
             <div className={S.backId}>{card.id_text}</div>
           </div>
 

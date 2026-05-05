@@ -12,7 +12,7 @@ import { CARDS } from '../data/cards.js';
  * @param {Array} allCards     - Full card pool for distractor selection
  * @param {string} difficulty  - "easy" | "medium" | "hard"
  * @param {Object} quizWrong   - Wrong-answer history {cardId: {count, lastWrong}}
- * @returns {Array} Array of { card, options: [{text, jp, romaji, correct}] }
+ * @returns {Array} Array of { card, options: [{text, jp, correct}] }
  */
 export function generateQuiz(targetCards, allCards, difficulty = 'medium', quizWrong = {}) {
   return shuffle(targetCards).map((card) => {
@@ -41,8 +41,8 @@ export function generateQuiz(targetCards, allCards, difficulty = 'medium', quizW
     }
 
     const options = shuffle([
-      { text: card.id_text, jp: card.jp, romaji: card.romaji, correct: true },
-      ...distractors.map((c) => ({ text: c.id_text, jp: c.jp, romaji: c.romaji, correct: false })),
+      { text: card.id_text, jp: card.jp, correct: true },
+      ...distractors.map((c) => ({ text: c.id_text, jp: c.jp, correct: false })),
     ]);
 
     return { card, options };

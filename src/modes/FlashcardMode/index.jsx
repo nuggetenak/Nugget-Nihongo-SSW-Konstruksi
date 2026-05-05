@@ -78,7 +78,7 @@ export default function FlashcardMode({
       ? order.filter((c) => {
           const q = search.toLowerCase();
           return (c.jp     || '').toLowerCase().includes(q) ||
-                 (c.romaji || '').toLowerCase().includes(q) ||
+                 
                  (c.id_text|| '').toLowerCase().includes(q);
         })
       : order;

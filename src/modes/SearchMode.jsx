@@ -20,7 +20,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
     const q = query.trim().toLowerCase();
     if (q.length < 2) return [];
     return pool.filter((c) => {
-      const haystack = `${c.jp} ${c.furi || ''} ${c.romaji || ''} ${c.id_text} ${c.desc}`.toLowerCase();
+      const haystack = `${c.jp} ${c.furi || ''} ${c.id_text} ${c.desc}`.toLowerCase();
       return haystack.includes(q);
     }).slice(0, 30);
   }, [query, pool]);
@@ -43,7 +43,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Cari kartu... (JP, romaji, atau Indonesia)"
+        placeholder="Cari kartu... (JP, furigana, atau Indonesia)"
         autoFocus
         className={S.searchInput}
         style={{ width: '100%', marginBottom: 16 }}
@@ -69,7 +69,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         <div className={S.emptyInMode}>
           <div className={S.emptyIcon}>😕</div>
           <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>Tidak ditemukan</div>
-          <div style={{ fontSize: 12, color: T.textMuted }}>Coba kata lain atau romaji</div>
+          <div style={{ fontSize: 12, color: T.textMuted }}>Coba kata lain atau furigana</div>
         </div>
       )}
 

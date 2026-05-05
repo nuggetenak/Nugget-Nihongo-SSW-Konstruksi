@@ -11,7 +11,6 @@ import S from './Onboarding.module.css';
 const DEMO_CARD = {
   jp: '安全帯',
   furi: 'あんぜんたい',
-  romaji: 'anzentai',
   id_text: 'Tali Pengaman',
   desc: 'APD wajib saat bekerja di ketinggian ≥2m. Dikaitkan ke titik jangkar yang lebih tinggi dari pinggang.',
 };
@@ -176,7 +175,6 @@ function StepDemo({ onNext }) {
             <span className={S.demoCat}>⛑ keselamatan</span>
             <span className={S.demoJp}>{DEMO_CARD.jp}</span>
             <span className={S.demoFuri}>{DEMO_CARD.furi}</span>
-            <span className={S.demoRomaji}>{DEMO_CARD.romaji}</span>
             {!flipped && (
               <span className={S.demoHint}>👆 Tap untuk balik</span>
             )}

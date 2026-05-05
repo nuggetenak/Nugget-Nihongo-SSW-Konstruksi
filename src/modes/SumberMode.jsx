@@ -27,7 +27,7 @@ export default function SumberMode({ onExit }) {
               </div>
               {expanded === c.id && (
                 <div style={{ marginTop: 6, fontSize: 11, color: T.textMuted, lineHeight: 1.5 }}>
-                  {c.furi && <div style={{ color: T.textDim, fontFamily: T.fontJP }}>{c.furi} · {c.romaji}</div>}
+                  {c.furi && <div style={{ color: T.textDim, fontFamily: T.fontJP }}>{c.furi}</div>}
                   <div style={{ marginTop: 4 }}>{c.desc}</div>
                 </div>
               )}

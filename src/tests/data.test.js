@@ -24,7 +24,7 @@ describe('CARDS data integrity', () => {
   });
 
   it('every card has required non-empty fields', () => {
-    const REQ = ['id', 'category', 'source', 'jp', 'romaji', 'id_text', 'desc'];
+    const REQ = ['id', 'category', 'source', 'type', 'jp', 'id_text', 'desc'];
     const bad = CARDS.filter((c) => REQ.some((f) => !c[f] && c[f] !== 0));
     expect(bad.map((c) => c.id)).toHaveLength(0);
   });
@@ -59,9 +59,16 @@ describe('CARDS data integrity', () => {
     expect(CARDS.filter((c) => OLD.includes(c.source)).map((c) => c.id)).toHaveLength(0);
   });
 
-  it('no Devanagari in romaji (Phase 1 typo fix)', () => {
+  it('no card has romaji field (CS-02)', () => {
     expect(
-      CARDS.filter((c) => c.romaji && /[\u0900-\u097F]/.test(c.romaji)).map((c) => c.id)
+      CARDS.filter((c) => 'romaji' in c).map((c) => c.id)
+    ).toHaveLength(0);
+  });
+
+  it('every card has type field (CS-02)', () => {
+    const VALID_TYPES = ['vocab', 'konsep', 'hukum'];
+    expect(
+      CARDS.filter((c) => !VALID_TYPES.includes(c.type)).map((c) => c.id)
     ).toHaveLength(0);
   });
 });

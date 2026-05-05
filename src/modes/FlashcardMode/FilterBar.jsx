@@ -10,7 +10,7 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
       <input
         value={search}
         onChange={(e) => onSearch(e.target.value)}
-        placeholder="🔍 Cari JP / romaji / ID..."
+        placeholder="🔍 Cari JP / ID..."
         className={FC.filterInput}
         style={{
           background: T.surface,

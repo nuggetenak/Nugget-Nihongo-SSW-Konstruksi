@@ -175,7 +175,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
         <div style={{ textAlign: 'center', marginBottom: flipped ? 16 : 0 }}>
           <div style={{ fontSize: fs, fontWeight: 700, fontFamily: T.fontJP, lineHeight: 1.4 }}>{clean}</div>
           {currentCard.furi && <div style={{ fontSize: 12, color: T.textMuted, fontFamily: T.fontJP, marginTop: 4 }}>{currentCard.furi}</div>}
-          <div style={{ fontSize: 11, color: T.textDim, fontStyle: 'italic', marginTop: 2 }}>{currentCard.romaji}</div>
         </div>
         {flipped && (
           <div style={{ animation: 'fadeIn 0.15s ease', borderTop: `1px solid ${T.border}`, paddingTop: 14 }}>

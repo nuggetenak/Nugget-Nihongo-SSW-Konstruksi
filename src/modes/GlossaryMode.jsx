@@ -31,12 +31,12 @@ export default function GlossaryMode({ onExit, track }) {
     } else {
       items = CARDS.filter((c) => c.category === filterCat);
     }
-    return [...items].sort((a, b) => (a.furi || a.romaji || '').toLowerCase().localeCompare((b.furi || b.romaji || '').toLowerCase(), 'ja'));
+    return [...items].sort((a, b) => (a.furi || '').toLowerCase().localeCompare((b.furi || '').toLowerCase(), 'ja'));
   }, [filterCat, trackCatKeys, showAllTracks]);
 
   const groups = useMemo(() => {
     const map = {};
-    sorted.forEach((c) => { const key = (c.furi || c.romaji || '?')[0]; if (!map[key]) map[key] = []; map[key].push(c); });
+    sorted.forEach((c) => { const key = (c.furi || '?')[0]; if (!map[key]) map[key] = []; map[key].push(c); });
     return Object.entries(map);
   }, [sorted]);
 
@@ -138,12 +138,9 @@ export default function GlossaryMode({ onExit, track }) {
                   </div>
                   {isOpen && (
                     <div style={{ marginTop: 8, paddingTop: 8, borderTop: `1px solid ${T.border}`, animation: 'fadeIn 0.15s ease' }}>
-                      {(c.furi || c.romaji) && (
+                      {c.furi && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                          {c.furi && <span style={{ fontFamily: T.fontJP, fontSize: 12, color: T.amber, fontWeight: 600 }}>{c.furi}</span>}
-                          {c.furi && c.romaji && <span style={{ fontSize: 10, color: T.textFaint }}>·</span>}
-                          {c.romaji && <span style={{ fontSize: 11, color: T.textDim, fontStyle: 'italic' }}>{c.romaji}</span>}
-                        </div>
+                          {c.furi && <span style={{ fontFamily: T.fontJP, fontSize: 12, color: T.amber, fontWeight: 600 }}>{c.furi}</span>}</div>
                       )}
                       <p style={{ fontSize: 12, color: T.textMuted, lineHeight: 1.6, margin: 0 }}>{c.desc}</p>
                       {c.source && (

@@ -55,8 +55,8 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, audioEnabl
     const qs = raw.map((q) => ({
       question: stripFuri(q.card.jp),
       questionSub: furiganaPolicy !== 'hidden'
-        ? (q.card.furi || q.card.romaji || null)
-        : (q.card.romaji || null),
+        ? (q.card.furi || null)
+        : null,
       options: q.options.map((o) => ({ text: o.text, sub: null })),
       correctIdx: q.options.findIndex((o) => o.correct),
       explanation: q.card.desc,

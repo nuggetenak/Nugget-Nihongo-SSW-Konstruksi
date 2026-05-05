@@ -107,7 +107,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
       </div>
       <ProgressBar current={DURATION - timeLeft} total={DURATION} color={timeLeft <= 10 ? T.wrong : T.amber} />
       <div className={S.cardLg} style={{ marginTop: 20, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <JpFront jp={card.jp} furi={card.furi} romaji={card.romaji}
+        <JpFront jp={card.jp} furi={card.furi}
           furiganaPolicy={furiganaPolicy} audioEnabled={audioEnabled} />
         {showAnswer && <div style={{ textAlign: 'center', marginTop: 12, fontSize: 14, color: T.gold, fontWeight: 600 }}>{card.id_text}</div>}
       </div>
