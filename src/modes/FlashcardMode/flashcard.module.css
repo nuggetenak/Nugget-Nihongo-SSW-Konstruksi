@@ -1,19 +1,18 @@
-/* ─── flashcard.module.css (phaseE) ──────────────────────────────────────────
-   Phase E TD-05: 3D flip CSS moved from JS injection (ensureStyle) to module.
-   All classes use :global() to keep BEM-style class names that the JSX
-   references directly (fc-scene, fc-card, fc-face, fc-face--back).
+/* ─── flashcard.module.css v3.0 — UI Upgrade Round 2 ─────────────────────────
+   Phase E TD-05: 3D flip CSS in module.
+   v3.0: Premium RatingRow, ToolStrip, NavRow redesign.
    ─────────────────────────────────────────────────────────────────────────── */
 
 /* 3D scene container */
 :global(.fc-scene) {
-  perspective: 1200px;
+  perspective: 1400px;
 }
 
 /* Flip card — animates transform */
 :global(.fc-card) {
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.45s cubic-bezier(0.34, 0.8, 0.64, 1);
   will-change: transform;
 }
 
@@ -32,16 +31,10 @@
   transform: rotateY(180deg);
 }
 
-/* Hint fade animation (used on 3rd flip hint) */
+/* Hint fade animation */
 @keyframes :global(fcHintFade) {
-  0%,
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    pointer-events: none;
-  }
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
 }
 
 /* ── FlipCard subcomponent ─────────────────────────────────────────────────── */
@@ -51,52 +44,80 @@
 
 /* ── RatingRow subcomponent ────────────────────────────────────────────────── */
 .ratingWrap {
-  animation: slideUp 0.25s ease;
+  animation: slideUp 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
 .ratingLabel {
   font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  color: var(--ssw-textDim);
 }
 
 .ratingGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 8px;
+  gap: 7px;
 }
 
 .ratingBtn {
-  font-family: inherit;
-  padding: 12px 4px;
-  border-radius: 8px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  padding: 13px 4px 11px;
+  border-radius: var(--r-lg);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  transition: transform 0.1s ease;
+  gap: 4px;
+  transition: transform 0.13s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top shine on rating buttons */
+.ratingBtn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+
+.ratingBtn:active {
+  transform: scale(0.90) translateY(2px);
+  box-shadow: none !important;
 }
 
 .ratingEmoji {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1;
 }
 
 .ratingId {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1px;
+  line-height: 1;
 }
 
 .ratingInterval {
   font-size: 9px;
-  opacity: 0.65;
+  opacity: 0.70;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .ratedConfirm {
   text-align: center;
   padding: 16px 0;
   font-size: 13px;
+  font-weight: 600;
   animation: fadeIn 0.2s ease;
+  color: var(--ssw-textDim);
 }
 
 /* ── ToolStrip subcomponent ────────────────────────────────────────────────── */
@@ -108,16 +129,20 @@
 }
 
 .toolBtn {
-  font-family: inherit;
+  font-family: 'DM Sans', system-ui, sans-serif;
   padding: 8px 4px;
-  border-radius: 8px;
+  border-radius: var(--r-md);
   cursor: pointer;
   font-size: 11px;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
+  transition: transform 0.12s ease, opacity 0.15s;
+  letter-spacing: 0.1px;
 }
+.toolBtn:active { transform: scale(0.90); }
 
 /* ── FilterBar subcomponent ────────────────────────────────────────────────── */
 .filterBar {
@@ -129,17 +154,22 @@
 
 .filterInput {
   flex: 1;
-  font-family: inherit;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 13px;
   padding: 9px 12px;
-  border-radius: 8px;
+  border-radius: var(--r-lg);
   outline: none;
+  background: var(--ssw-inputBg);
+  border: 1.5px solid var(--ssw-border);
+  color: var(--ssw-text);
+  transition: border-color 0.15s;
 }
+.filterInput:focus { border-color: var(--ssw-borderActive); }
 
 .filterStarBtn {
   font-family: inherit;
   padding: 9px 12px;
-  border-radius: 8px;
+  border-radius: var(--r-lg);
   cursor: pointer;
   font-size: 14px;
   flex-shrink: 0;
@@ -154,23 +184,42 @@
 }
 
 .navBtn {
-  font-family: inherit;
-  padding: 11px 8px;
-  border-radius: 8px;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  padding: 12px 8px;
+  border-radius: var(--r-lg);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-textMuted);
+  transition: background 0.15s, transform 0.12s;
 }
+.navBtn:active { transform: scale(0.95); }
 
 .navFlip {
-  border: none;
-  font-weight: 700;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  padding: 12px 8px;
+  border-radius: var(--r-lg);
+  font-size: 13px;
+  font-weight: 800;
   cursor: pointer;
+  background: var(--accent);
+  border: none;
+  color: #FFF8E7;
+  box-shadow: 0 3px 12px rgba(180,83,9,0.25);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.navFlip:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(180,83,9,0.15);
 }
 
 /* ── Keyboard hint ─────────────────────────────────────────────────────────── */
 .kbHint {
   text-align: center;
   font-size: 10px;
-  margin-top: 6px;
+  margin-top: 7px;
+  color: var(--ssw-textFaint);
+  letter-spacing: 0.3px;
 }

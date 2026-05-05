@@ -1,0 +1,215 @@
+/* ─── FlipCard.module.css v2.0 — UI Upgrade Round 2 ─────────────────────────── */
+
+/* ── Front face ── */
+.front {
+  padding: 36px 18px 52px;
+  background: var(--ssw-surface);
+  border-radius: var(--r-xxl);
+  box-shadow: var(--ssw-shadowMd);
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot grid texture on front */
+.front::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(245,158,11,0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Top highlight line */
+.front::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.30), transparent);
+  pointer-events: none;
+}
+
+/* ── Back face ── */
+.back {
+  padding: 18px 18px 16px;
+  border-radius: var(--r-xxl);
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  overflow: hidden;
+}
+
+/* Back face shimmer sweep */
+.back::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Category badge (both faces) ── */
+.catBadge {
+  position: absolute;
+  top: 12px; left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.catBadgeFront {
+  composes: catBadge;
+}
+
+.catBadgeBack {
+  composes: catBadge;
+  background: rgba(255,255,255,0.20) !important;
+  color: #fff !important;
+}
+
+/* ── Card number ── */
+.cardNum {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 10px;
+  color: var(--ssw-textFaint);
+  font-variant-numeric: tabular-nums;
+  z-index: 2;
+}
+
+.cardNumBack {
+  composes: cardNum;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── Front content wrapper ── */
+.frontContent {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── SRS info strip (front bottom) ── */
+.srsInfo {
+  position: absolute;
+  bottom: 10px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--ssw-textFaint);
+  z-index: 2;
+}
+
+/* ── Flip hint ── */
+.flipHint {
+  position: absolute;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--ssw-textFaint);
+  letter-spacing: 0.4px;
+  z-index: 2;
+}
+
+/* ── Back header row ── */
+.backHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Back content ── */
+.backBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.backJp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.backFuri {
+  font-size: 12px;
+  text-align: center;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 14px;
+}
+
+.backId {
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ── Desc section (back) ── */
+.backDescArea {
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 12px;
+  margin-top: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.backDescBtn {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 12px;
+  padding: 7px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  transition: background 0.15s, transform 0.12s;
+  letter-spacing: 0.2px;
+  backdrop-filter: blur(4px);
+}
+.backDescBtn:active {
+  background: rgba(255,255,255,0.22);
+  transform: scale(0.96);
+}
+
+.backDescText {
+  animation: fadeIn 0.15s ease;
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}

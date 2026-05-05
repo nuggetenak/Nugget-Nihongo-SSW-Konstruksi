@@ -1,4 +1,225 @@
-/* ─── SayaTab.module.css v2.0 ────────────────────────────────────────────────── */
+/* ─── SayaTab.module.css v3.0 — UI Upgrade Round 2 ──────────────────────────── */
+
+.container {
+  padding: 0 16px 40px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  animation: fadeIn 0.25s ease;
+}
+
+/* ── Page title ── */
+.pageTitle {
+  padding: 20px 0 8px;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--ssw-textBright);
+  line-height: 1;
+}
+
+/* ── Progress card ── */
+.progressCard {
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-borderLight);
+  border-radius: var(--r-xxl);
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+/* Top gradient line */
+.progressCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.30), transparent);
+  pointer-events: none;
+}
+/* Glow orb */
+.progressCard::after {
+  content: '';
+  position: absolute;
+  right: -20px; bottom: -20px;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.progressInfo { flex: 1; z-index: 1; }
+.progressKnown {
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-size: var(--fs-title);
+  font-weight: 800;
+  color: var(--ssw-textBright);
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.progressDetail { font-size: var(--fs-caption); color: var(--ssw-textDim); margin-bottom: 6px; }
+.progressStreak {
+  font-size: var(--fs-small);
+  font-weight: 800;
+  color: var(--ssw-amber);
+  display: inline-block;
+  background: rgba(245,158,11,0.10);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(245,158,11,0.18);
+}
+
+/* ── Section heading ── */
+.sectionLabel {
+  font-size: var(--fs-nano);
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--ssw-textDim);
+  padding: 20px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sectionLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ssw-border);
+}
+
+/* ── Row ── */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--ssw-border);
+  transition: opacity 0.15s;
+}
+.row[data-clickable='true'] { cursor: pointer; }
+.row[data-clickable='true']:active { opacity: 0.6; }
+.rowLabel {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--ssw-text);
+}
+.rowLabel[data-danger='true'] { color: var(--ssw-wrong); }
+.rowSub {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.rowValue {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-align: right;
+  max-width: 45%;
+  flex-shrink: 0;
+}
+.rowChevron {
+  color: var(--ssw-textFaint);
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ── Reset row ── */
+.resetRow {
+  padding: 13px 0;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.resetRow:active { opacity: 0.7; }
+.resetLabel {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--ssw-textDim);
+  transition: color 0.2s;
+}
+.resetLabel[data-active='true'] { color: var(--ssw-wrong); }
+.resetSub { font-size: var(--fs-small); color: var(--ssw-textFaint); margin-top: 2px; }
+
+/* ── Inline edit ── */
+.inlineEdit {
+  padding: 12px 14px 14px;
+  background: var(--ssw-bgAlt);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--ssw-borderActive);
+  margin: 4px 0 8px;
+}
+.inlineEditLabel {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+.inlineEditRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.inlineInput {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  background: var(--ssw-bg);
+  border: 1px solid var(--ssw-borderActive);
+  color: var(--ssw-text);
+  font-size: var(--fs-body);
+  font-family: inherit;
+  outline: none;
+}
+.inlineSave {
+  padding: 9px 16px;
+  border-radius: var(--r-md);
+  background: var(--ssw-amber);
+  border: none;
+  color: #1a0a00;
+  font-size: var(--fs-caption);
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+}
+.inlineDelete {
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px solid var(--ssw-wrong);
+  color: var(--ssw-wrong);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+.inlineCancel {
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-textMuted);
+  font-size: var(--fs-caption);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  font-size: var(--fs-nano);
+  color: var(--ssw-textFaint);
+  margin-top: 24px;
+  line-height: 1.7;
+}
 
 .container {
   padding: 0 16px 40px;

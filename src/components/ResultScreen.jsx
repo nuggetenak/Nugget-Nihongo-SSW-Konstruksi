@@ -42,6 +42,7 @@ export default function ResultScreen({
 
       {/* Grade hero */}
       <div className={s.hero} data-path={path}>
+        {path === 'celebrate' && <div className={s.stars} aria-hidden="true" />}
         <span className={s.heroEmoji} data-path={path}>
           {path === 'celebrate' ? '🏆' : path === 'encourage' ? '🌱' : grade.emoji}
         </span>

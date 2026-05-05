@@ -1,4 +1,4 @@
-/* ProgressRing.module.css */
+/* ProgressRing.module.css v2.0 — UI Upgrade Round 2 */
 
 .container {
   position: relative;
@@ -13,18 +13,20 @@
   top: 0;
   left: 0;
   transform: rotate(-90deg);
+  filter: drop-shadow(0 0 6px rgba(245,158,11,0.25));
 }
 
 .track {
   fill: none;
   stroke: var(--ssw-border);
+  stroke-opacity: 0.6;
 }
 
 .progress {
   fill: none;
-  stroke: var(--ssw-amber);
+  stroke: url(#ringGradient);
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.8s ease-in-out;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .center {
@@ -34,13 +36,16 @@
 }
 
 .pct {
-  font-weight: var(--fw-heavy);
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-weight: 900;
   line-height: 1;
-  color: var(--ssw-text);
+  color: var(--ssw-textBright);
+  letter-spacing: -1px;
 }
 
 .sub {
   color: var(--ssw-textDim);
   margin-top: 4px;
   line-height: 1.2;
+  font-size: 11px;
 }

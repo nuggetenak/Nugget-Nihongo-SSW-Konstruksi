@@ -27,6 +27,12 @@ export default function ProgressRing({
         height={size}
         aria-hidden="true"
       >
+        <defs>
+          <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#B45309" />
+          </linearGradient>
+        </defs>
         <circle
           className={s.track}
           cx={size / 2}
