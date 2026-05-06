@@ -1,21 +1,160 @@
-// cards-kenchiku-vocab.js — auto-generated source file
-// DO NOT edit cards.js directly — edit this file instead.
-// Re-merge with: node scripts/merge-cards.mjs
-// Cards in this file: 13
-// _origIndex: used by merge-cards.mjs to restore original order — do not remove
-
+// cards-kenchiku-vocab.js — re-annotated CS-05 (F)
+// Cards: 13
 export const CARDS_KENCHIKU_VOCAB = [
-  { id: 934, category: "kenchiku_kutai", source: "vocab-jac", type: "vocab", furi: "やまどめ", jp: "山留め", id_text: "Penahan tanah / earth retaining", desc: "例: 深い掘削では山留めが必要。→ Untuk galian dalam, wajib pasang sistem penahan tanah.", _origIndex: 918 },
-  { id: 946, category: "kenchiku_kutai", source: "vocab-jac", type: "vocab", furi: "かたわく", jp: "型枠", id_text: "Bekisting / formwork", desc: "例: 型枠にコンクリートを打設する。→ Tuang beton ke dalam bekisting untuk membentuk struktur.", _origIndex: 930 },
-  { id: 949, category: "kenchiku_kutai", source: "vocab-jac", type: "vocab", furi: "てっきん", jp: "鉄筋", id_text: "Tulangan baja / rebar", desc: "例: 鉄筋はコンクリートの引張力を補う。→ Tulangan baja menambah kekuatan tarik pada beton.", _origIndex: 933 },
-  { id: 950, category: "kenchiku_kutai", source: "vocab-jac", type: "vocab", furi: "くぎじまい", jp: "釘仕舞", id_text: "Mencabut paku (daur ulang bekisting)", desc: "例: 型枠解体後に釘仕舞をして再利用する。→ Setelah bekisting dibongkar, cabut paku agar bisa dipakai ulang.", _origIndex: 934 },
-  { id: 951, category: "kenchiku_kutai", source: "vocab-jac", type: "vocab", furi: "てんよう", jp: "転用", id_text: "Penggunaan ulang / reuse bekisting", desc: "例: 型枠の転用回数を記録する。→ Catat berapa kali bekisting sudah dipakai ulang.", _origIndex: 935 },
-  { id: 1252, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "あすふぁるとぼうすい", jp: "アスファルト防水", id_text: "Waterproofing aspal", desc: "例: 屋上の防水にはアスファルト防水が多く使われる。→ Waterproofing aspal banyak digunakan pada atap beton. Metode ini melapis permukaan dengan lembaran aspal yang dipanaskan atau dilekatkan (トーチ工法).", _origIndex: 1230 },
-  { id: 1253, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "しーとぼうすい", jp: "シート防水", id_text: "Waterproofing lembaran (sheet)", desc: "例: シート防水は合成ゴムや塩化ビニルのシートを貼り付ける工法である。→ Sheet waterproofing menggunakan lembaran karet sintetis atau PVC yang ditempelkan ke permukaan. Lebih cepat pasang dibanding aspal.", _origIndex: 1231 },
-  { id: 1262, category: "kenchiku_kutai", source: "vocab-exam", type: "vocab", furi: "すらんぷしけん", jp: "スランプ試験", id_text: "Uji slump (kekentalan beton segar)", desc: "例: 生コンの品質確認のためにスランプ試験を現場で実施する。→ Slump test dilakukan di lapangan untuk mengecek konsistensi (kekentalan) beton segar sebelum pengecoran. Nilai slump yang lebih tinggi berarti beton lebih encer.", _origIndex: 1240 },
-  { id: 1272, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "せっこうボード", jp: "石膏ボード", id_text: "Papan gipsum / gypsum board", desc: "例: 石膏ボードは内壁や天井の仕上げに広く使われる。→ Papan gipsum banyak dipakai untuk finishing dinding dalam dan plafon. Material ringan, mudah dipotong, dan memiliki sifat tahan api (準不燃). Disebut juga プラスターボード.", _origIndex: 1250 },
-  { id: 1283, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "ぼうすいシート", jp: "防水シート", id_text: "Membran / lembaran waterproof", desc: "例: 屋根の仕上げ材の下に防水シートを敷いて雨水の浸入を防ぐ。→ Membran waterproof dipasang di bawah penutup atap untuk mencegah rembesan air hujan masuk ke struktur bangunan. Termasuk jenis アスファルトルーフィング.", _origIndex: 1261 },
-  { id: 1285, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "めじ", jp: "目地", id_text: "Nat / celah sambungan antar tile", desc: "例: タイル貼り完了後、目地材（セメント系）を充填して目地を仕上げる。→ Setelah pemasangan tile selesai, material nat (umumnya berbasis semen) diisikan untuk mengisi celah antar tile. Lebar目地 biasanya 3〜10mm tergantung jenis tile.", _origIndex: 1263 },
-  { id: 1286, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "モルタル", jp: "モルタル", id_text: "Mortar / adukan semen dan pasir", desc: "例: 外壁タイルの下地にモルタルを塗り付け、平滑に均してからタイルを張る。→ Mortar dioleskan sebagai dasar sebelum tile dipasang, kemudian diratakan. Komposisi umum: semen : pasir = 1 : 3 (volumetrik).", _origIndex: 1264 },
-  { id: 1292, category: "kenchiku_shiage", source: "vocab-exam", type: "vocab", furi: "スタッド", jp: "スタッド", id_text: "Stud / tiang vertikal baja ringan LGS", desc: "例: LGS工事でスタッドをランナーに差し込んで間仕切り壁の骨組みを組む。→ Stud adalah profil baja ringan berbentuk C yang dimasukkan secara vertikal ke dalam runner untuk membentuk rangka dinding partisi.", _origIndex: 1270 }
+  {
+  id: 934,
+  category: "kenchiku_kutai",
+  source: "vocab-jac",
+  furi: "やまどめ",
+  jp: "山留め",
+  type: "vocab",
+  id_text: "Penahan tanah",
+  desc: "Sistem penahan tanah untuk galian dalam agar tidak longsor.",
+  usage: "山留め《やまどめ》を設置《せっち》する（memasang sistem penahan tanah）",
+  _origIndex: 918
+  },
+  {
+  id: 946,
+  category: "kenchiku_kutai",
+  source: "vocab-jac",
+  furi: "かたわく",
+  jp: "型枠",
+  type: "vocab",
+  id_text: "Bekisting / formwork",
+  desc: "Cetakan sementara untuk membentuk beton cor sesuai desain struktur.",
+  usage: "型枠《かたわく》を組《く》む（memasang bekisting）",
+  _origIndex: 930
+  },
+  {
+  id: 949,
+  category: "kenchiku_kutai",
+  source: "vocab-jac",
+  furi: "てっきん",
+  jp: "鉄筋",
+  type: "vocab",
+  id_text: "Tulangan baja / rebar",
+  desc: "Batang baja yang dipasang dalam beton untuk menambah kekuatan tarik.",
+  usage: "鉄筋《てっきん》を組《く》む（merakit tulangan）",
+  _origIndex: 933
+  },
+  {
+  id: 950,
+  category: "kenchiku_kutai",
+  source: "vocab-jac",
+  furi: "くぎじまい",
+  jp: "釘仕舞",
+  type: "vocab",
+  id_text: "Pencabutan paku bekisting",
+  desc: "Mencabut paku dari bekisting bekas agar bisa dipakai ulang.",
+  usage: "釘仕舞《くぎじまい》をする（mencabut paku bekisting）",
+  _origIndex: 934
+  },
+  {
+  id: 951,
+  category: "kenchiku_kutai",
+  source: "vocab-jac",
+  furi: "てんよう",
+  jp: "転用",
+  type: "vocab",
+  id_text: "Pemakaian ulang bekisting",
+  desc: "Pemakaian bekisting kembali untuk pengecoran berikutnya.",
+  usage: "型枠《かたわく》を転用《てんよう》する（memakai ulang bekisting）",
+  _origIndex: 935
+  },
+  {
+  id: 1252,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "あすふぁるとぼうすい",
+  jp: "アスファルト防水",
+  type: "vocab",
+  id_text: "Waterproofing aspal",
+  desc: "Sistem waterproofing menggunakan lembaran aspal untuk atap beton.",
+  usage: "アスファルト防水《ぼうすい》を施工《せこう》する（mengerjakan waterproofing aspal）",
+  _origIndex: 1230
+  },
+  {
+  id: 1253,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "しーとぼうすい",
+  jp: "シート防水",
+  type: "vocab",
+  id_text: "Waterproofing lembaran",
+  desc: "Lapisan kedap air dari lembaran karet sintetis atau PVC.",
+  usage: "シート防水《ぼうすい》を施工《せこう》する（mengerjakan sheet waterproofing）",
+  _origIndex: 1231
+  },
+  {
+  id: 1262,
+  category: "kenchiku_kutai",
+  source: "vocab-exam",
+  furi: "すらんぷしけん",
+  jp: "スランプ試験",
+  type: "vocab",
+  id_text: "Uji slump beton",
+  desc: "Tes lapangan untuk mengecek konsistensi beton segar sebelum cor.",
+  usage: "スランプ試験《しけん》を実施《じっし》する（melakukan slump test）",
+  _origIndex: 1240
+  },
+  {
+  id: 1272,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "せっこうボード",
+  jp: "石膏ボード",
+  type: "vocab",
+  id_text: "Papan gipsum",
+  desc: "Papan gipsum untuk finishing dinding dalam dan plafon; ringan, tahan api.",
+  usage: "石膏《せっこう》ボードを張《は》る（memasang papan gipsum）",
+  _origIndex: 1250
+  },
+  {
+  id: 1283,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "ぼうすいシート",
+  jp: "防水シート",
+  type: "vocab",
+  id_text: "Membran waterproof",
+  desc: "Lembaran waterproof di bawah penutup atap, mencegah rembesan air hujan masuk.",
+  usage: "防水《ぼうすい》シートを敷《し》く（menggelar membran waterproof）",
+  _origIndex: 1261
+  },
+  {
+  id: 1285,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "めじ",
+  jp: "目地",
+  type: "vocab",
+  id_text: "Nat sambungan tile",
+  desc: "Celah antara tile yang diisi material nat semen setelah pemasangan.",
+  usage: "目地《めじ》を詰《つ》める（mengisi nat）",
+  _origIndex: 1263
+  },
+  {
+  id: 1286,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "モルタル",
+  jp: "モルタル",
+  type: "vocab",
+  id_text: "Mortar semen-pasir",
+  desc: "Campuran semen dan pasir sebagai dasar (leveling) sebelum tile dipasang.",
+  usage: "モルタルを塗《ぬ》る（mengoleskan mortar）",
+  _origIndex: 1264
+  },
+  {
+  id: 1292,
+  category: "kenchiku_shiage",
+  source: "vocab-exam",
+  furi: "スタッド",
+  jp: "スタッド",
+  type: "vocab",
+  id_text: "Stud baja ringan (LGS)",
+  desc: "Profil baja C yang dipasang vertikal ke runner sebagai rangka dinding partisi.",
+  usage: "スタッドを建《た》て込《こ》む（memasang stud）",
+  _origIndex: 1270
+  }
 ];
