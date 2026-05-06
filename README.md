@@ -1,170 +1,95 @@
-# 🪖 SSW Konstruksi · by Nugget Nihongo
+# Agent Task Files — SSW Konstruksi Frontend & Content Upgrade
 
-> **Aplikasi belajar Ujian SSW Konstruksi Jepang** — flashcard, kuis, simulasi ujian, dan sistem ulang cerdas (SRS) dalam Bahasa Indonesia.
+## How to Use
+Each file is a complete prompt for a free Claude Sonnet session.
+1. Open a new Claude.ai chat
+2. Paste the contents of the task file
+3. Add the required source files (marked with [paste X here])
+4. Run the task, get the output
+5. Apply output to repo, commit, push
 
-[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-222?logo=github)](https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/)
-[![PWA](https://img.shields.io/badge/PWA-Installable-F59E0B?logo=pwa)](https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/)
-
----
-
-## 📱 Install Aplikasi
-
-Buka di browser → ketuk **"Tambahkan ke Layar Utama"** (iOS/Android) atau ikon install di desktop.
-App berjalan offline setelah pertama kali dibuka.
-
----
-
-## 📊 Konten
-
-| Tipe | Jumlah |
-|------|--------|
-| Kartu Flashcard | 1.438 |
-| Soal JAC Official | ~95 |
-| Soal Wayground/Sensei | ~598 (12 set) |
-| Angka Kunci | ~45 |
-| Pasangan Jebak | ~40 |
-| Kategori | 12 |
-| Jalur Belajar | 3 (土木 / 建築 / ライフライン) |
+## Free Account Constraints
+- Paste source code directly into the chat
+- For large files (> 500 lines), split into multiple sessions
+- The agent cannot run code — it writes scripts, you run them locally
+- Each session is independent — no memory between sessions
 
 ---
 
-## 🎯 Jalur Belajar (Track)
+## CONTENT STANDARDIZATION (CS) — Phase 1 Foundation
 
-Pilih jalur sesuai bidang spesialisasimu — konten otomatis terfilter:
+| Task | File | What Agent Does | You Run |
+|---|---|---|---|
+| CS-01 | AGENT-TASK-CS-01.md | Writes split-cards.mjs + merge-cards.mjs | `node scripts/split-cards.mjs` |
+| CS-02 | AGENT-TASK-CS-02.md | Writes migrate-cs02.mjs (romaji remove + type add) | `node scripts/migrate-cs02.mjs` |
+| CS-03 | AGENT-TASK-CS-03.md | Updates JpDisplay.jsx DescBlock | Apply file directly |
+| CS-04 | AGENT-TASK-CS-04.md | Updates FlipCard.jsx + FlipCard.module.css | Apply files directly |
 
-| Jalur | Bidang |
-|-------|--------|
-| 🏗️ **Teknik Sipil** (土木) | Jalan, jembatan, terowongan, bendungan |
-| 🏢 **Bangunan** (建築) | Gedung, bekisting, tulangan, finishing |
-| ⚡ **Lifeline & Peralatan** (ライフライン) | Listrik, pipa, HVAC, pemadam, telekomunikasi |
+## CONTENT RE-ANNOTATION (CS-05) — Phase 2, 8 batches
 
-Materi **keselamatan, hukum, KY, 5S, karier** otomatis muncul di semua jalur.
+| Task | File | Cards | Source file to paste |
+|---|---|---|---|
+| CS-05-A | AGENT-TASK-CS-05-TEMPLATE.md | 211 | cards-common-vocab.js |
+| CS-05-B | AGENT-TASK-CS-05-TEMPLATE.md | 120 | cards-lifeline-vocab.js |
+| CS-05-C | AGENT-TASK-CS-05-TEMPLATE.md | ~80 | cards-common.js (hukum only, filter by type) |
+| CS-05-D | AGENT-TASK-CS-05-TEMPLATE.md | ~200 | cards-common.js (konsep, first half) |
+| CS-05-E | AGENT-TASK-CS-05-TEMPLATE.md | ~200 | cards-common.js (konsep, second half) |
+| CS-05-F | AGENT-TASK-CS-05-TEMPLATE.md | ~200 | cards-lifeline.js (first half) |
+| CS-05-G | AGENT-TASK-CS-05-TEMPLATE.md | ~226 | cards-lifeline.js (second half) |
+| CS-05-H | AGENT-TASK-CS-05-TEMPLATE.md | 148 | cards-kenchiku.js + cards-doboku.js |
 
----
-
-## 🎮 Mode Belajar
-
-### Tab Belajar
-| Mode | Keterangan |
-|------|-----------|
-| 🔁 **Ulasan SRS** | Kartu yang jatuh tempo hari ini — diurutkan dari yang paling terlupakan |
-| 🃏 **Kartu** | Flashcard dengan 4-tombol FSRS rating setelah flip |
-| ❓ **Kuis** | Kuis pilihan ganda otomatis, 3 tingkat kesulitan |
-| ⚡ **Sprint** | Drill kecepatan 60 detik |
-| 🎯 **Fokus** | Latihan otomatis per kategori terlemah |
-
-### Tab Ujian
-| Mode | Keterangan |
-|------|-----------|
-| 📋 **JAC Official** | ~95 soal resmi dari contoh ujian JAC |
-| 🎓 **Wayground** | 598 soal teknis dari sensei (12 set) |
-| 🎯 **Simulasi** | Simulasi ujian penuh dengan timer |
-| 🔢 **Angka Kunci** | Angka-angka wajib hafal |
-| ⚠️ **Soal Jebak** | Pasangan istilah yang sering tertukar |
-
-### Tab Lainnya
-| Mode | Keterangan |
-|------|-----------|
-| 🔍 **Cari** | Pencarian cepat JP/romaji/Indonesia |
-| 📖 **Glosari** | Kamus lengkap terurut |
-| 📂 **Sumber** | Jelajahi kartu per PDF sumber |
-| 📊 **Statistik** | Progress, kelemahan, kartu sering salah |
-| 💾 **Ekspor** | Backup & pulihkan progress ke file JSON |
+⚠️ For CS-05: After CS-01 runs, you'll have the 8 source files. Use TEMPLATE.md as the prompt — paste it + the relevant source file content.
 
 ---
 
-## 🧠 Sistem SRS (Spaced Repetition)
+## FRONTEND (FE) — Phase 3
 
-Menggunakan algoritma **FSRS (Free Spaced Repetition Scheduler)** — lebih akurat dari SM-2/Anki klasik.
-
-Setelah flip kartu, nilai pemahamanmu:
-
-| Tombol | Rating | Jadwal Ulang |
-|--------|--------|-------------|
-| 🔴 Lagi  | 1 | Hari ini lagi |
-| 🟠 Susah | 2 | Lebih pendek |
-| 🟢 Oke   | 3 | Interval normal |
-| 💎 Mudah | 4 | Interval lebih panjang |
-
-Progress tersimpan di `localStorage` browser. Gunakan **Ekspor** untuk backup/pindah perangkat.
-
----
-
-## 💾 Progress & Offline
-
-- **Tersimpan di:** `localStorage` browser (tidak perlu akun)
-- **Backup:** Tab Lainnya → 💾 Ekspor → download file JSON
-- **Pindah perangkat:** Ekspor di perangkat lama → Impor di perangkat baru
-- **Offline:** Setelah pertama kali dibuka, app bisa dipakai tanpa internet (Service Worker)
+| Task | File | What Agent Does |
+|---|---|---|
+| FE-01-A | AGENT-TASK-FE-01-A.md | CSS module: DangerMode + AngkaMode |
+| FE-01-B | AGENT-TASK-FE-01-B.md | CSS module: SimulasiMode + StatsMode |
+| FE-01-C | AGENT-TASK-FE-01-C.md | CSS module: ReviewMode + GlossaryMode |
+| FE-02 | AGENT-TASK-FE-02.md | prefers-reduced-motion in 7 CSS files |
+| FE-03 | AGENT-TASK-FE-03.md | Design tokens: spacing, shadow, z-index, transitions |
+| FE-04-AB | AGENT-TASK-FE-04-AB.md | A11y: aria labels + keyboard nav |
+| FE-04-CD | AGENT-TASK-FE-04-CD.md | A11y: focus trap + focus management |
+| FE-05 | AGENT-TASK-FE-05.md | ErrorBoundary + OfflineBanner + debounce + toast |
+| FE-06 | AGENT-TASK-FE-06.md | Component render tests (install @testing-library first) |
+| FE-07-08-09 | AGENT-TASK-FE-07-08-09.md | DX + PWA + UX Polish (haptic, scroll, transitions) |
 
 ---
 
-## 🏗️ Arsitektur
+## Order of Execution
 
 ```
-src/
-├── App.jsx              # Root: onboarding → track picker → main UI
-├── data/                # Konten (cards, JAC, Wayground, categories)
-├── srs/                 # SRS engine (fsrs-core, fsrs-store, fsrs-scheduler)
-├── modes/               # 15 mode components
-├── components/          # Shared UI (Dashboard, TrackPicker, BottomNav, ...)
-├── hooks/               # usePersistedState, useSRS, useQuizKeyboard, useStreak
-├── utils/               # shuffle, jp-helpers, wrong-tracker, quiz-generator
-└── styles/              # Design tokens (theme.js)
+Week 1 — Foundation:
+  CS-01 → CS-02 → CS-03 → CS-04   (in order, each depends on previous)
 
-public/
-├── manifest.webmanifest # PWA manifest
-├── sw.js                # Service worker
-├── favicon.ico / .png   # Favicon
-└── icons/               # PWA icons 72–512px
+Week 2 — Re-annotation:
+  CS-05-A, CS-05-B                 (vocab first — fastest to validate)
+  CS-05-C                          (hukum — most critical for exam prep)
+  CS-05-D through CS-05-H          (can run in parallel)
+
+Week 3 — Frontend:
+  FE-01-A, FE-01-B, FE-01-C       (can run in parallel)
+  FE-02                            (independent)
+  FE-03                            (independent)
+  FE-04-AB, FE-04-CD              (in order)
+  FE-05                            (independent)
+
+Week 4 — Polish:
+  FE-06                            (after FE-05 done)
+  FE-07-08-09                      (independent)
 ```
 
-Lihat [`_MAP.md`](./_MAP.md) untuk orientasi lengkap bagi agen/developer.
+## Validation Before Committing Agent Output
 
----
+For CS tasks:
+- Run `npm run build` — must complete with 0 errors
+- Run `npm test -- --run` — 360 tests must pass
+- Spot-check 5–10 cards per batch manually
 
-## 🚀 Deploy
-
-```bash
-npm install
-npm run build
-# → deploy isi dist/ ke GitHub Pages
-```
-
-> ⚠️ Setelah deploy baru, bump `CACHE_VERSION` di `public/sw.js` agar pengguna mendapat versi terbaru.
-
----
-
-## 🧾 Audit & Administratif
-
-- Audit komprehensif terbaru: [`docs/AUDIT-2026-04-28.md`](./docs/AUDIT-2026-04-28.md)
-- Audit pass 2 (agresif): [`docs/AUDIT-2026-04-28-PASS2.md`](./docs/AUDIT-2026-04-28-PASS2.md)
-- Riwayat perubahan: [`CHANGELOG.md`](./CHANGELOG.md)
-- Jalankan baseline audit lokal:
-
-```bash
-npm run audit:baseline
-npm run audit:integrity
-npm run audit:full
-```
-
----
-
-## 📜 Versi Sebelumnya
-
-- **v87 (live):** https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/
-- **v87 (source):** `legacy/ssw_flashcards_v87.jsx` (7.390 baris, referensi saja)
-
----
-
-## 📝 Sumber Konten
-
-Konten berasal dari PDF resmi [JAC](https://global.jac-skill.or.jp/indonesia/examination/documents.php), materi Wayground dari sensei, dan kosakata yang di-generate oleh Claude.
-
----
-
-## 🤝 Credit
-
-Dibuat oleh **Nugget** dengan bantuan tim agen Claude:
-- **Crispy** (Agent 1 / Integrator) — arsitektur, data normalization, UX
-- **Crunchy** (Agent 6 / QA) — bug fixes, SRS engine, PWA, storage overhaul
+For FE tasks:
+- Run `npm run lint` — 0 errors, 0 warnings
+- Run `npm run build` — 0 errors
+- Run `npm test -- --run` — all tests pass

@@ -40,6 +40,9 @@ export default function FlipCard({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      aria-label={flipped ? `Kartu balik: ${card.id_text}` : `Kartu depan: ${card.jp}`}
+      aria-live="polite"
+      aria-atomic="true"
     >
       <div
         className={`fc-card${flipped ? ' is-flipped' : ''}`}

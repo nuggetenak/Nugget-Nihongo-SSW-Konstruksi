@@ -205,6 +205,15 @@
   box-shadow: 0 2px 8px rgba(245,158,11,0.20);
 }
 
+/* ── Keyboard hint ── */
+.kbHint {
+  text-align: center;
+  font-size: 10px;
+  color: var(--ssw-textFaint);
+  margin-top: 8px;
+  letter-spacing: 0.3px;
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .wrap,

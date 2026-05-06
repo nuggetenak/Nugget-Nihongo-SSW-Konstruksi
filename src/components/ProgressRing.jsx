@@ -25,7 +25,8 @@ export default function ProgressRing({
         className={s.svg}
         width={size}
         height={size}
-        aria-hidden="true"
+        role="img"
+        aria-label={`Progress: ${Math.round(pct)}% — ${current} dari ${total} kartu hafal`}
       >
         <defs>
           <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">

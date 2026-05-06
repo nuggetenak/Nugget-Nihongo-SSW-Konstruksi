@@ -44,7 +44,7 @@ export default function BottomNav({ active, onChange, dueBadge = 0 }) {
               className={s.tab}
               data-active={isActive}
               onClick={() => onChange(tab.key)}
-              aria-label={tab.label}
+              aria-label={`${tab.label}${badge > 0 ? `, ${badge} notifikasi` : ''}`}
               aria-current={isActive ? 'page' : undefined}
             >
               <span className={s.iconWrap}>

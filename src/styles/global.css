@@ -44,6 +44,34 @@
 
   /* Accent gradient (static — amber tones) */
   --accent: linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B);
+
+  /* ── Spacing scale ── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+
+  /* ── Shadow scale ── */
+  --shadow-xs:    0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm:    0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg:    0 8px 32px rgba(0,0,0,0.12);
+  --shadow-amber: 0 4px 20px rgba(245,158,11,0.28);
+
+  /* ── Z-index scale ── */
+  --z-base:    1;
+  --z-sticky:  10;
+  --z-nav:     100;
+  --z-overlay: 200;
+  --z-toast:   300;
+
+  /* ── Transition presets ── */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast:  120ms;
+  --t-base:  200ms;
+  --t-slow:  350ms;
 }
 
 /* ── Base reset ── */
@@ -160,6 +188,56 @@ body {
   70%  { transform: scale(1.3) translateX(-50%); }
   100% { transform: scale(1) translateX(-50%); opacity: 1; }
 }
+
+/* ── Accessibility utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * ── Token audit — hardcoded values that should use new tokens (FE-03) ──────
+ * These are flagged for a future cleanup pass (do NOT auto-replace):
+ *
+ * BottomNav.module.css:
+ *   z-index: 100                        → var(--z-nav)
+ *   z-index: 20  (GlossaryMode azNav)   → var(--z-sticky) (closest match: 10, or add --z-sticky-2)
+ *   transition: all 0.2s ease           → var(--t-base) var(--ease-smooth)
+ *   transition: background 0.2s ease    → var(--t-base) var(--ease-smooth)
+ *   transition: transform 0.12s         → var(--t-fast) var(--ease-smooth)
+ *   animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) → var(--ease-spring)
+ *
+ * Dashboard.module.css:
+ *   0 8px 32px rgba(0,0,0,0.12)         → var(--shadow-lg)
+ *   0 2px 8px rgba(0,0,0,0.08)          → var(--shadow-sm)
+ *   0 4px 20px rgba(245,158,11,0.28)    → var(--shadow-amber)  [approx, varies]
+ *   transition: opacity 0.15s, transform 0.15s → var(--t-fast)
+ *
+ * QuizShell.module.css:
+ *   0 4px 20px rgba(245,158,11,0.30)    → var(--shadow-amber)
+ *   transition: transform 0.15s         → var(--t-fast)
+ *   animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) → var(--ease-spring)
+ *
+ * ResultScreen.module.css:
+ *   0 4px 18px rgba(180,83,9,0.28)      → var(--shadow-amber) [amber-dark variant]
+ *   transition: transform 0.15s         → var(--t-fast)
+ *
+ * FlipCard.module.css / flashcard.module.css:
+ *   transition: transform 0.13s cubic-bezier(0.34, 1.56, 0.64, 1) → var(--t-fast) var(--ease-spring)
+ *   transition: transform 0.12s         → var(--t-fast)
+ *
+ * ModeRouter.jsx (inline):
+ *   padding: '20px 20px'                → var(--sp-5)
+ *   maxWidth: 480                       → var(--max-w)
+ *
+ * GlossaryMode.module.css:
+ *   z-index: 20                         → no exact match — consider --z-sticky-hi or reuse --z-sticky
+ */
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {

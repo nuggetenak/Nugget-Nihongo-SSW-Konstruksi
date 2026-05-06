@@ -126,6 +126,10 @@ export default function QuizShell({
 
   return (
     <div className={S.wrap}>
+      {/* Screen reader announcement */}
+      <div className="sr-only" aria-live="assertive" aria-atomic="true">
+        Soal {qIdx + 1} dari {questions.length}
+      </div>
       <div className={S.header}>
         <button className={S.btnBack} onClick={onExit}>← {title}</button>
         <div className={S.meta} aria-live="polite" aria-atomic="true">
@@ -179,6 +183,10 @@ export default function QuizShell({
             onSelect={handleSelect}
           />
         ))}
+      </div>
+
+      <div className={S.kbHint}>
+        Keyboard: 1–4 pilih · Space/→ lanjut · Esc kembali
       </div>
 
       {selected !== null && q.explanation && (

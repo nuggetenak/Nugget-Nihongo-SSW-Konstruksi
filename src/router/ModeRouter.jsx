@@ -136,6 +136,21 @@ export default function ModeRouter() {
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
   const [missionResult, setMissionResult] = useState(null);
 
+  // FE-04-D: Focus management on mode change
+  const prevMode = useRef(null);
+  useEffect(() => {
+    if (prevMode.current === mode) return;
+    prevMode.current = mode;
+    // Small delay: let the new mode render before moving focus
+    const t = setTimeout(() => {
+      const target = document.querySelector(
+        '[data-autofocus], main h1, main button:not([disabled])'
+      );
+      target?.focus({ preventScroll: true });
+    }, 100);
+    return () => clearTimeout(t);
+  }, [mode]);
+
   if (!mode) return null;
 
   const ModeComponent = MODE_COMPONENTS[mode];

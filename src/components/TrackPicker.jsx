@@ -1,7 +1,8 @@
 // ─── TrackPicker.jsx ──────────────────────────────────────────────────────────
 // Note: per-track gradient/color on card bg/border/shadow — justified inline.
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { T } from '../styles/theme.js';
+import { useFocusTrap } from '../hooks/useFocusTrap.js';
 import S from './TrackPicker.module.css';
 
 const TRACKS = [
@@ -36,9 +37,17 @@ const TRACKS = [
 
 export default function TrackPicker({ onSelect }) {
   const [selected, setSelected] = useState(null);
+  const ref = useRef(null);
+  useFocusTrap(ref, true);
 
   return (
-    <div className={S.wrap}>
+    <div
+      ref={ref}
+      className={S.wrap}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Pilih jalur belajar"
+    >
       <div className={S.header}>
         <div className={S.eyebrow}>Pilih Jalur Belajar</div>
         <div className={S.headline}>Bidang Apa Yang Kamu Pelajari?</div>
