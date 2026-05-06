@@ -1,0 +1,310 @@
+/* ─── DangerMode.module.css ──────────────────────────────────────────────────── */
+
+/* ── PanelView ── */
+.headerRow {
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.drillBtn {
+  width: auto;
+  padding: 9px 16px;
+  font-size: var(--fs-body);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pageSub {
+  margin-bottom: 0;
+}
+
+/* Accordion item button — closed state */
+.accordionBtn {
+  font-family: inherit;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-text);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--r-md);
+}
+
+.accordionBtn.open {
+  border-radius: var(--r-md) var(--r-md) 0 0;
+  background: rgba(220, 38, 38, 0.10);
+  border-color: rgba(220, 38, 38, 0.35);
+}
+
+.termJp {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-weight: 700;
+  font-size: var(--fs-subtitle);
+}
+
+.termFuri {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-left: 8px;
+}
+
+.chevron {
+  font-size: var(--fs-body);
+  color: var(--ssw-textDim);
+  flex-shrink: 0;
+}
+
+/* Accordion panel — expanded */
+.accordionPanel {
+  padding: 14px 16px;
+  background: rgba(220, 38, 38, 0.04);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-top: none;
+  border-radius: 0 0 var(--r-md) var(--r-md);
+  animation: fadeIn 0.15s ease;
+}
+
+.correctLabel {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--ssw-correct);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.correctBox {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--ssw-text);
+  padding: 8px 12px;
+  background: var(--ssw-correctBg);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--ssw-correctBorder);
+  margin-bottom: 10px;
+}
+
+.wrongLabel {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--ssw-wrong);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.wrongBox {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--ssw-textMuted);
+  padding: 8px 12px;
+  background: var(--ssw-wrongBg);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--ssw-wrongBorder);
+}
+
+.trapList {
+  gap: 4px;
+}
+
+/* ── QuizView ── */
+.quizPage {
+  padding: 12px 16px 24px;
+}
+
+.quizHeader {
+  margin-bottom: 10px;
+}
+
+.scoreBadge {
+  font-size: 12px;
+  color: var(--ssw-textDim);
+  font-variant-numeric: tabular-nums;
+}
+
+.streakBadge {
+  color: var(--ssw-gold);
+  font-weight: 700;
+}
+
+.questionCard {
+  margin-bottom: 14px;
+}
+
+.questionHint {
+  font-size: var(--fs-nano);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--ssw-wrong);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.questionTerm {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.questionFuri {
+  font-size: var(--fs-body);
+  color: var(--ssw-textDim);
+  margin-top: 6px;
+}
+
+/* Option button — state handled inline (dynamic per answer) */
+.optionLabel {
+  font-weight: 700;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.optionIcon {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Explanation card */
+.explanationCard {
+  margin-top: 14px;
+  animation: fadeIn 0.2s ease;
+}
+
+.explanationHeader {
+  margin-bottom: 10px;
+}
+
+.explanationCorrectLabel {
+  font-size: var(--fs-micro);
+  color: var(--ssw-correct);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.explanationCorrectBox {
+  font-size: var(--fs-caption);
+  line-height: 1.65;
+  color: var(--ssw-text);
+  padding: 8px 12px;
+  background: var(--ssw-correctBg);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--ssw-correctBorder);
+  margin-bottom: 8px;
+}
+
+.explanationWrongLabel {
+  font-size: var(--fs-micro);
+  color: var(--ssw-wrong);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.nextBtn {
+  margin-top: 12px;
+  animation: fadeIn 0.15s ease;
+  font-size: var(--fs-body);
+  padding: 13px;
+}
+
+/* ── ResultScreen ── */
+.resultPage {
+  padding: 20px 16px;
+  animation: scaleIn 0.3s ease;
+}
+
+.resultCard {
+  text-align: center;
+  padding: 28px 20px 24px;
+  background: var(--ssw-accentSoft, var(--ssw-surface));
+  border-radius: var(--r-xl);
+  border: 1px solid var(--ssw-border);
+  margin-bottom: 16px;
+}
+
+.resultEmoji {
+  font-size: 52px;
+  margin-bottom: 6px;
+}
+
+.resultPct {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 2px;
+  font-variant-numeric: tabular-nums;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+}
+
+.resultLabel {
+  font-size: var(--fs-body);
+  color: var(--ssw-textMuted);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.resultSub {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+}
+
+.resultActions {
+  margin-bottom: 16px;
+}
+
+.panelBtn {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--r-md);
+  font-weight: 700;
+}
+
+.ulangBtn {
+  font-size: var(--fs-body);
+  padding: 12px;
+}
+
+/* Review list */
+.reviewItem {
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border-left: 3px solid var(--ssw-wrong);
+  overflow: hidden;
+}
+
+.reviewItemHeader {
+  padding: 10px 14px;
+  background: var(--ssw-wrongBg);
+  border-bottom: 1px solid var(--ssw-wrongBorder);
+}
+
+.reviewItemHeaderJp {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.reviewItemHeaderFuri {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-left: 8px;
+}
+
+.reviewItemBody {
+  padding: 12px 14px;
+}
+
+.reviewWrongText {
+  font-size: var(--fs-caption);
+  color: var(--ssw-wrong);
+  margin-bottom: 6px;
+}
+
+.reviewCorrectText {
+  font-size: var(--fs-caption);
+  color: var(--ssw-correct);
+}

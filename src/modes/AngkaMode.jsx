@@ -9,6 +9,7 @@ import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
+import A from './AngkaMode.module.css';
 
 const ANGKA_COLOR = '#0284C7';
 
@@ -47,47 +48,62 @@ function PanelView({ onExit, onStartQuiz }) {
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
-      <div className={S.rowSpread} style={{ marginBottom: 20, alignItems: 'flex-start' }}>
+      <div className={`${S.rowSpread} ${A.headerRow}`}>
         <div>
           <h2 className={S.pageTitle}>🔢 Angka Kunci</h2>
-          <p className={S.pageSub} style={{ marginBottom: 0 }}>{ANGKA_KUNCI.length} angka WAJIB hafal sebelum ujian</p>
+          <p className={`${S.pageSub} ${A.pageSub}`}>{ANGKA_KUNCI.length} angka WAJIB hafal sebelum ujian</p>
         </div>
-        <button className={S.btnPrimary} style={{ width: 'auto', padding: '9px 16px', fontSize: 13, whiteSpace: 'nowrap', flexShrink: 0 }} onClick={onStartQuiz}>🧠 Kuis</button>
+        <button className={`${S.btnPrimary} ${A.kuisBtn}`} onClick={onStartQuiz}>🧠 Kuis</button>
       </div>
 
-      <div style={{ padding: '10px 14px', borderRadius: T.r.md, background: 'rgba(220,38,38,0.07)', border: '1px solid rgba(220,38,38,0.25)', marginBottom: 20, fontSize: 12, color: T.wrong, fontWeight: 600 }}>
+      <div className={A.warningBanner}>
         🚨 Wajib hafal sebelum ujian — sering muncul di soal Prometric SSW!
       </div>
 
       {groups.map((g, gi) => (
-        <div key={g.label} style={{ marginBottom: 20 }}>
-          <div className={S.row} style={{ marginBottom: 8 }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: g.color, flexShrink: 0 }} />
-            <span style={{ fontSize: 10, fontWeight: 800, color: g.color, letterSpacing: 1.5, textTransform: 'uppercase' }}>{g.label}</span>
-            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
-            <span style={{ fontSize: 10, color: T.textDim }}>{g.items.length}</span>
+        <div key={g.label} className={A.groupSection}>
+          <div className={`${S.row} ${A.groupHeader}`}>
+            <div className={A.groupDot} style={{ background: g.color }} />
+            <span className={A.groupLabel} style={{ color: g.color }}>{g.label}</span>
+            <div className={A.groupDivider} style={{ background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
+            <span className={A.groupCount}>{g.items.length}</span>
           </div>
-          <div className={S.list} style={{ gap: 6 }}>
+          <div className={`${S.list} ${A.groupItems}`}>
             {g.items.map((item, ii) => {
               const key = `${gi}-${ii}`;
               const isOpen = expanded === key;
               const relCard = item.kartu ? CARDS.find((c) => c.id === item.kartu) : null;
               return (
                 <div key={key}>
-                  <button onClick={() => setExpanded(isOpen ? null : key)} style={{ fontFamily: 'inherit', width: '100%', padding: '11px 14px', borderRadius: isOpen ? `${T.r.md}px ${T.r.md}px 0 0` : T.r.md, background: isOpen ? `${g.color}14` : T.surface, border: `1px solid ${isOpen ? `${g.color}40` : T.border}`, color: T.text, textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ fontSize: 14, fontWeight: 800, color: g.color, fontVariantNumeric: 'tabular-nums', flexShrink: 0, minWidth: 64 }}>{item.angka}</span>
-                    <span style={{ fontSize: 12, color: T.textMuted, flex: 1, lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{item.konteks}</span>
-                    <span style={{ color: T.textDim, fontSize: 11, flexShrink: 0 }}>{isOpen ? '▲' : '▼'}</span>
+                  <button
+                    onClick={() => setExpanded(isOpen ? null : key)}
+                    className={A.accordionBtn}
+                    style={{
+                      borderRadius: isOpen ? `${T.r.md}px ${T.r.md}px 0 0` : T.r.md,
+                      background: isOpen ? `${g.color}14` : T.surface,
+                      border: `1px solid ${isOpen ? `${g.color}40` : T.border}`,
+                    }}
+                  >
+                    <span className={A.angkaValue} style={{ color: g.color }}>{item.angka}</span>
+                    <span className={A.konteksText}>{item.konteks}</span>
+                    <span className={A.chevron}>{isOpen ? '▲' : '▼'}</span>
                   </button>
                   {isOpen && (
-                    <div style={{ padding: '14px 16px', background: `${g.color}08`, border: `1px solid ${g.color}30`, borderTop: 'none', borderRadius: `0 0 ${T.r.md}px ${T.r.md}px`, animation: 'fadeIn 0.15s ease' }}>
-                      <div style={{ fontSize: 22, fontWeight: 800, color: g.color, fontVariantNumeric: 'tabular-nums', marginBottom: 8 }}>{item.angka}</div>
-                      <div style={{ fontSize: 13, lineHeight: 1.7, color: T.text, marginBottom: relCard ? 12 : 0 }}>{item.konteks}</div>
+                    <div
+                      className={A.accordionPanel}
+                      style={{
+                        background: `${g.color}08`,
+                        border: `1px solid ${g.color}30`,
+                        borderRadius: `0 0 ${T.r.md}px ${T.r.md}px`,
+                      }}
+                    >
+                      <div className={A.angkaLarge} style={{ color: g.color }}>{item.angka}</div>
+                      <div className={A.konteksFull} style={{ marginBottom: relCard ? 0 : 0 }}>{item.konteks}</div>
                       {relCard && (
-                        <div style={{ padding: '10px 12px', background: T.surface, borderRadius: T.r.sm, border: `1px solid ${T.border}` }}>
-                          <div style={{ fontSize: 10, color: T.textDim, letterSpacing: 1.2, marginBottom: 6 }}>KARTU #{relCard.id}</div>
-                          <div style={{ fontFamily: T.fontJP, fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{relCard.jp}</div>
-                          <div style={{ fontSize: 12, color: T.textMuted }}>{relCard.id_text}</div>
+                        <div className={A.relatedCard}>
+                          <div className={A.relatedCardId}>KARTU #{relCard.id}</div>
+                          <div className={A.relatedCardJp}>{relCard.jp}</div>
+                          <div className={A.relatedCardId_text}>{relCard.id_text}</div>
                         </div>
                       )}
                     </div>
@@ -158,26 +174,26 @@ function QuizView({ onBack, onSessionEnd }) {
     const grade = getGrade(pct);
     const wrongList = results.filter((r) => !r.isCorrect);
     return (
-      <div className={S.page} style={{ padding: '20px 16px', animation: 'scaleIn 0.3s ease' }}>
-        <div style={{ textAlign: 'center', padding: '28px 20px 24px', background: T.accentSoft, borderRadius: T.r.xl, border: `1px solid ${T.border}`, marginBottom: 16 }}>
-          <div style={{ fontSize: 52, marginBottom: 6 }}>{grade.emoji}</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: grade.color, marginBottom: 2, fontVariantNumeric: 'tabular-nums' }}>{pct}%</div>
-          <div style={{ fontSize: 13, color: T.textMuted, fontWeight: 600, marginBottom: 8 }}>{grade.label}</div>
-          <div style={{ fontSize: 12, color: T.textDim }}>{correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}</div>
+      <div className={`${S.page} ${A.resultPage}`}>
+        <div className={A.resultCard}>
+          <div className={A.resultEmoji}>{grade.emoji}</div>
+          <div className={A.resultPct} style={{ color: grade.color }}>{pct}%</div>
+          <div className={A.resultLabel}>{grade.label}</div>
+          <div className={A.resultSub}>{correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}</div>
         </div>
-        <div className={S.row} style={{ marginBottom: 16 }}>
-          <button className={S.btnPrimary} style={{ fontSize: 13, padding: '12px' }} onClick={restart}>🔄 Ulang</button>
-          <button className={S.btnSecondary} style={{ flex: 1, padding: '12px', borderRadius: T.r.md, fontWeight: 700 }} onClick={onBack}>📋 Daftar</button>
+        <div className={`${S.row} ${A.resultActions}`}>
+          <button className={`${S.btnPrimary} ${A.ulangBtn}`} onClick={restart}>🔄 Ulang</button>
+          <button className={`${S.btnSecondary} ${A.daftarBtn}`} onClick={onBack}>📋 Daftar</button>
         </div>
         {wrongList.length > 0 && (
           <>
             <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
             <div className={S.list}>
               {wrongList.map((r, i) => (
-                <div key={i} style={{ padding: '12px 14px', borderRadius: T.r.md, background: T.surface, borderLeft: `3px solid ${T.wrong}`, animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
-                  <div style={{ fontSize: 12, color: T.textMuted, lineHeight: 1.5, marginBottom: 6 }}>{r.item.item.konteks}</div>
-                  <div style={{ fontSize: 12, color: T.wrong, marginBottom: 3 }}>✗ {r.item.opts[r.picked]?.text}</div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: T.correct }}>✓ {r.item.item.angka}</div>
+                <div key={i} className={A.reviewItem} style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
+                  <div className={A.reviewKonteks}>{r.item.item.konteks}</div>
+                  <div className={A.reviewWrong}>✗ {r.item.opts[r.picked]?.text}</div>
+                  <div className={A.reviewCorrect}>✓ {r.item.item.angka}</div>
                 </div>
               ))}
             </div>
@@ -191,20 +207,26 @@ function QuizView({ onBack, onSessionEnd }) {
   const { opts } = item;
 
   return (
-    <div className={S.pageScroll} style={{ padding: '12px 16px 24px' }}>
-      <div className={S.rowSpread} style={{ marginBottom: 10 }}>
+    <div className={`${S.pageScroll} ${A.quizPage}`}>
+      <div className={`${S.rowSpread} ${A.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>← Angka Kunci</button>
         <div className={S.row} style={{ fontSize: 12 }}>
-          <span style={{ color: T.textDim, fontVariantNumeric: 'tabular-nums' }}>{results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)}</span>
-          {streak > 1 && <span style={{ color: T.gold, fontWeight: 700 }}>🔥{streak}</span>}
+          <span className={A.scoreBadge}>{results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)}</span>
+          {streak > 1 && <span className={A.streakBadge}>🔥{streak}</span>}
         </div>
       </div>
       <ProgressBar current={qIdx + (selected !== null ? 1 : 0)} total={items.length} color={ANGKA_COLOR} />
       <div className={S.counter}>{qIdx + 1} / {items.length}</div>
 
-      <div style={{ padding: '20px 18px', background: `${ANGKA_COLOR}0E`, borderRadius: T.r.lg, border: `2px solid ${ANGKA_COLOR}35`, marginBottom: 14, animation: 'fadeIn 0.2s ease' }}>
-        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: ANGKA_COLOR, textTransform: 'uppercase', marginBottom: 10 }}>Angka berapa untuk…</div>
-        <div style={{ fontSize: 15, lineHeight: 1.7, fontFamily: T.fontJP, fontWeight: 600 }}>{item.item.konteks}</div>
+      <div
+        className={A.questionCard}
+        style={{
+          background: `${ANGKA_COLOR}0E`,
+          border: `2px solid ${ANGKA_COLOR}35`,
+        }}
+      >
+        <div className={A.questionHint} style={{ color: ANGKA_COLOR }}>Angka berapa untuk…</div>
+        <div className={A.questionKonteks}>{item.item.konteks}</div>
       </div>
 
       <div className={S.list}>
@@ -214,7 +236,28 @@ function QuizView({ onBack, onSessionEnd }) {
           const isCorrect = opt.isCorrect;
           const isWrongPick = isSelected && !isCorrect;
           return (
-            <button key={i} onClick={() => handleSelect(i)} disabled={selected !== null} style={{ fontFamily: 'inherit', padding: '12px 14px', borderRadius: T.r.md, background: !showResult ? T.surface : isCorrect ? T.correctBg : isWrongPick ? T.wrongBg : T.surface, border: `1.5px solid ${!showResult ? T.border : isCorrect ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`, color: !showResult ? T.text : isCorrect ? T.correct : isWrongPick ? T.wrong : T.textDim, textAlign: 'left', cursor: selected !== null ? 'default' : 'pointer', fontSize: 14, fontWeight: 700, fontVariantNumeric: 'tabular-nums', transition: 'all 0.15s', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <button
+              key={i}
+              onClick={() => handleSelect(i)}
+              disabled={selected !== null}
+              style={{
+                fontFamily: 'inherit',
+                padding: '12px 14px',
+                borderRadius: T.r.md,
+                background: !showResult ? T.surface : isCorrect ? T.correctBg : isWrongPick ? T.wrongBg : T.surface,
+                border: `1.5px solid ${!showResult ? T.border : isCorrect ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`,
+                color: !showResult ? T.text : isCorrect ? T.correct : isWrongPick ? T.wrong : T.textDim,
+                textAlign: 'left',
+                cursor: selected !== null ? 'default' : 'pointer',
+                fontSize: 14,
+                fontWeight: 700,
+                fontVariantNumeric: 'tabular-nums',
+                transition: 'all 0.15s',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
               <span>{opt.text}</span>
               {showResult && isCorrect && <span>✓</span>}
               {showResult && isWrongPick && <span>✗</span>}
@@ -224,7 +267,7 @@ function QuizView({ onBack, onSessionEnd }) {
       </div>
 
       {selected !== null && (
-        <button className={S.btnPrimary} style={{ marginTop: 12, animation: 'fadeIn 0.15s ease', fontSize: 13, padding: '13px' }} onClick={() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }}>
+        <button className={`${S.btnPrimary} ${A.nextBtn}`} onClick={() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }}>
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
       )}

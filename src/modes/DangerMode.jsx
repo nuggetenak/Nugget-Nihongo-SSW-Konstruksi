@@ -7,6 +7,7 @@ import { DANGER_PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
+import D from './DangerMode.module.css';
 
 function buildItems() {
   return shuffle(DANGER_PAIRS).map((pair) => {
@@ -25,35 +26,38 @@ function PanelView({ onExit, onStartQuiz }) {
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
-      <div className={S.rowSpread} style={{ marginBottom: 20, alignItems: 'flex-start' }}>
+      <div className={`${S.rowSpread} ${D.headerRow}`}>
         <div>
           <h2 className={S.pageTitle}>⚠️ Soal Jebak</h2>
-          <p className={S.pageSub} style={{ marginBottom: 0 }}>{DANGER_PAIRS.length} istilah yang sering salah di ujian</p>
+          <p className={`${S.pageSub} ${D.pageSub}`}>{DANGER_PAIRS.length} istilah yang sering salah di ujian</p>
         </div>
-        <button className={S.btnPrimary} style={{ width: 'auto', padding: '9px 16px', fontSize: 13, whiteSpace: 'nowrap', flexShrink: 0 }} onClick={onStartQuiz}>🧠 Drill</button>
+        <button className={`${S.btnPrimary} ${D.drillBtn}`} onClick={onStartQuiz}>🧠 Drill</button>
       </div>
       <div className={S.list}>
         {DANGER_PAIRS.map((pair, i) => {
           const isOpen = expanded === i;
           return (
             <div key={i}>
-              <button onClick={() => setExpanded(isOpen ? null : i)} style={{ fontFamily: 'inherit', width: '100%', padding: '12px 14px', borderRadius: isOpen ? `${T.r.md}px ${T.r.md}px 0 0` : T.r.md, background: isOpen ? 'rgba(220,38,38,0.10)' : T.surface, border: `1px solid ${isOpen ? 'rgba(220,38,38,0.35)' : T.border}`, color: T.text, textAlign: 'left', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
+              <button
+                onClick={() => setExpanded(isOpen ? null : i)}
+                className={`${D.accordionBtn}${isOpen ? ` ${D.open}` : ''}`}
+              >
                 <div>
-                  <span style={{ fontFamily: T.fontJP, fontWeight: 700, fontSize: 15 }}>{pair.term}</span>
-                  {pair.furi && <span style={{ fontSize: 11, color: T.textDim, marginLeft: 8 }}>{pair.furi}</span>}
+                  <span className={D.termJp}>{pair.term}</span>
+                  {pair.furi && <span className={D.termFuri}>{pair.furi}</span>}
                 </div>
-                <span style={{ fontSize: 13, color: T.textDim, flexShrink: 0 }}>{isOpen ? '▲' : '▼'}</span>
+                <span className={D.chevron}>{isOpen ? '▲' : '▼'}</span>
               </button>
               {isOpen && (
-                <div style={{ padding: '14px 16px', background: 'rgba(220,38,38,0.04)', border: '1px solid rgba(220,38,38,0.25)', borderTop: 'none', borderRadius: `0 0 ${T.r.md}px ${T.r.md}px`, animation: 'fadeIn 0.15s ease' }}>
+                <div className={D.accordionPanel}>
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, color: T.correct, textTransform: 'uppercase', marginBottom: 4 }}>✓ Jawaban Benar</div>
-                    <div style={{ fontSize: 13, lineHeight: 1.65, color: T.text, padding: '8px 12px', background: T.correctBg, borderRadius: T.r.sm, border: `1px solid ${T.correctBorder}` }}>{pair.correct}</div>
+                    <div className={D.correctLabel}>✓ Jawaban Benar</div>
+                    <div className={D.correctBox}>{pair.correct}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, color: T.wrong, textTransform: 'uppercase', marginBottom: 4 }}>✗ Jebakan Umum</div>
-                    <div className={S.list} style={{ gap: 4 }}>
-                      {pair.traps.map((trap, ti) => <div key={ti} style={{ fontSize: 13, lineHeight: 1.65, color: T.textMuted, padding: '8px 12px', background: T.wrongBg, borderRadius: T.r.sm, border: `1px solid ${T.wrongBorder}` }}>{trap}</div>)}
+                    <div className={D.wrongLabel}>✗ Jebakan Umum</div>
+                    <div className={`${S.list} ${D.trapList}`}>
+                      {pair.traps.map((trap, ti) => <div key={ti} className={D.wrongBox}>{trap}</div>)}
                     </div>
                   </div>
                 </div>
@@ -122,16 +126,16 @@ function QuizView({ onBack, onSessionEnd }) {
     const grade = getGrade(pct);
     const wrongList = results.filter((r) => !r.isCorrect);
     return (
-      <div className={S.page} style={{ padding: '20px 16px', animation: 'scaleIn 0.3s ease' }}>
-        <div style={{ textAlign: 'center', padding: '28px 20px 24px', background: T.accentSoft, borderRadius: T.r.xl, border: `1px solid ${T.border}`, marginBottom: 16 }}>
-          <div style={{ fontSize: 52, marginBottom: 6 }}>{grade.emoji}</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: grade.color, marginBottom: 2, fontVariantNumeric: 'tabular-nums' }}>{pct}%</div>
-          <div style={{ fontSize: 13, color: T.textMuted, fontWeight: 600, marginBottom: 8 }}>{grade.label}</div>
-          <div style={{ fontSize: 12, color: T.textDim }}>{correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}</div>
+      <div className={`${S.page} ${D.resultPage}`}>
+        <div className={D.resultCard}>
+          <div className={D.resultEmoji}>{grade.emoji}</div>
+          <div className={D.resultPct} style={{ color: grade.color }}>{pct}%</div>
+          <div className={D.resultLabel}>{grade.label}</div>
+          <div className={D.resultSub}>{correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}</div>
         </div>
-        <div className={S.row} style={{ marginBottom: 16 }}>
-          <button className={S.btnPrimary} style={{ fontSize: 13, padding: '12px' }} onClick={restart}>🔄 Ulang</button>
-          <button className={S.btnSecondary} style={{ flex: 1, padding: '12px', borderRadius: T.r.md, fontWeight: 700 }} onClick={onBack}>📋 Panel</button>
+        <div className={`${S.row} ${D.resultActions}`}>
+          <button className={`${S.btnPrimary} ${D.ulangBtn}`} onClick={restart}>🔄 Ulang</button>
+          <button className={`${S.btnSecondary} ${D.panelBtn}`} onClick={onBack}>📋 Panel</button>
         </div>
         {wrongList.length > 0 && (
           <>
@@ -141,14 +145,14 @@ function QuizView({ onBack, onSessionEnd }) {
                 const p = r.item.pair;
                 const pickedText = r.item.opts[r.picked]?.text;
                 return (
-                  <div key={i} style={{ borderRadius: T.r.md, background: T.surface, borderLeft: `3px solid ${T.wrong}`, overflow: 'hidden', animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
-                    <div style={{ padding: '10px 14px', background: T.wrongBg, borderBottom: `1px solid ${T.wrongBorder}` }}>
-                      <span style={{ fontFamily: T.fontJP, fontWeight: 700, fontSize: 14 }}>{p.term}</span>
-                      {p.furi && <span style={{ fontSize: 11, color: T.textDim, marginLeft: 8 }}>{p.furi}</span>}
+                  <div key={i} className={D.reviewItem} style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
+                    <div className={D.reviewItemHeader}>
+                      <span className={D.reviewItemHeaderJp}>{p.term}</span>
+                      {p.furi && <span className={D.reviewItemHeaderFuri}>{p.furi}</span>}
                     </div>
-                    <div style={{ padding: '12px 14px' }}>
-                      <div style={{ fontSize: 12, color: T.wrong, marginBottom: 6 }}>✗ {pickedText}</div>
-                      <div style={{ fontSize: 12, color: T.correct }}>✓ {p.correct}</div>
+                    <div className={D.reviewItemBody}>
+                      <div className={D.reviewWrongText}>✗ {pickedText}</div>
+                      <div className={D.reviewCorrectText}>✓ {p.correct}</div>
                     </div>
                   </div>
                 );
@@ -164,21 +168,21 @@ function QuizView({ onBack, onSessionEnd }) {
   const { pair, opts } = item;
 
   return (
-    <div className={S.pageScroll} style={{ padding: '12px 16px 24px' }}>
-      <div className={S.rowSpread} style={{ marginBottom: 10 }}>
+    <div className={`${S.pageScroll} ${D.quizPage}`}>
+      <div className={`${S.rowSpread} ${D.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>← Soal Jebak</button>
         <div className={S.row} style={{ fontSize: 12 }}>
-          <span style={{ color: T.textDim, fontVariantNumeric: 'tabular-nums' }}>{results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)}</span>
-          {streak > 1 && <span style={{ color: T.gold, fontWeight: 700 }}>🔥{streak}</span>}
+          <span className={D.scoreBadge}>{results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)}</span>
+          {streak > 1 && <span className={D.streakBadge}>🔥{streak}</span>}
         </div>
       </div>
       <ProgressBar current={qIdx + (selected !== null ? 1 : 0)} total={items.length} color={T.wrong} />
       <div className={S.counter}>{qIdx + 1} / {items.length}</div>
 
-      <div className={S.cardLg} style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: T.wrong, textTransform: 'uppercase', marginBottom: 10 }}>⚠️ Jangan tertukar! Pilih arti yang BENAR</div>
-        <div style={{ fontFamily: T.fontJP, fontSize: 22, fontWeight: 700, lineHeight: 1.4, marginBottom: pair.furi ? 6 : 0 }}>{pair.term}</div>
-        {pair.furi && <div style={{ fontSize: 13, color: T.textDim }}>{pair.furi}</div>}
+      <div className={`${S.cardLg} ${D.questionCard}`}>
+        <div className={D.questionHint}>⚠️ Jangan tertukar! Pilih arti yang BENAR</div>
+        <div className={D.questionTerm}>{pair.term}</div>
+        {pair.furi && <div className={D.questionFuri}>{pair.furi}</div>}
       </div>
 
       <div className={S.list}>
@@ -188,33 +192,53 @@ function QuizView({ onBack, onSessionEnd }) {
           const isCorrect = opt.isCorrect;
           const isWrongPick = isSelected && !isCorrect;
           return (
-            <button key={i} onClick={() => handleSelect(i)} disabled={selected !== null} style={{ fontFamily: 'inherit', padding: '12px 14px', borderRadius: T.r.md, background: !showResult ? T.surface : isCorrect ? T.correctBg : isWrongPick ? T.wrongBg : T.surface, border: `1.5px solid ${!showResult ? T.border : isCorrect ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`, color: !showResult ? T.text : isCorrect ? T.correct : isWrongPick ? T.wrong : T.textDim, textAlign: 'left', cursor: selected !== null ? 'default' : 'pointer', fontSize: 13, lineHeight: 1.5, transition: 'all 0.15s', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-              <span style={{ fontWeight: 700, flexShrink: 0, opacity: 0.5 }}>{i + 1})</span>
+            <button
+              key={i}
+              onClick={() => handleSelect(i)}
+              disabled={selected !== null}
+              style={{
+                fontFamily: 'inherit',
+                padding: '12px 14px',
+                borderRadius: T.r.md,
+                background: !showResult ? T.surface : isCorrect ? T.correctBg : isWrongPick ? T.wrongBg : T.surface,
+                border: `1.5px solid ${!showResult ? T.border : isCorrect ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`,
+                color: !showResult ? T.text : isCorrect ? T.correct : isWrongPick ? T.wrong : T.textDim,
+                textAlign: 'left',
+                cursor: selected !== null ? 'default' : 'pointer',
+                fontSize: 13,
+                lineHeight: 1.5,
+                transition: 'all 0.15s',
+                display: 'flex',
+                gap: 8,
+                alignItems: 'flex-start',
+              }}
+            >
+              <span className={D.optionLabel}>{i + 1})</span>
               <span>{opt.text}</span>
-              {showResult && isCorrect && <span style={{ marginLeft: 'auto', flexShrink: 0 }}>✓</span>}
-              {showResult && isWrongPick && <span style={{ marginLeft: 'auto', flexShrink: 0 }}>✗</span>}
+              {showResult && isCorrect && <span className={D.optionIcon}>✓</span>}
+              {showResult && isWrongPick && <span className={D.optionIcon}>✗</span>}
             </button>
           );
         })}
       </div>
 
       {selected !== null && (
-        <div className={S.card} style={{ marginTop: 14, animation: 'fadeIn 0.2s ease' }}>
-          <div className={S.sectionLabel} style={{ marginBottom: 10 }}>Penjelasan Perbedaan</div>
+        <div className={`${S.card} ${D.explanationCard}`}>
+          <div className={`${S.sectionLabel} ${D.explanationHeader}`}>Penjelasan Perbedaan</div>
           <div style={{ marginBottom: 8 }}>
-            <div style={{ fontSize: 10, color: T.correct, fontWeight: 700, marginBottom: 4 }}>✓ BENAR</div>
-            <div style={{ fontSize: 12, lineHeight: 1.65, color: T.text, padding: '8px 12px', background: T.correctBg, borderRadius: T.r.sm, border: `1px solid ${T.correctBorder}` }}>{pair.correct}</div>
+            <div className={D.explanationCorrectLabel}>✓ BENAR</div>
+            <div className={D.explanationCorrectBox}>{pair.correct}</div>
           </div>
           <div>
-            <div style={{ fontSize: 10, color: T.wrong, fontWeight: 700, marginBottom: 4 }}>✗ JEBAKAN</div>
-            <div className={S.list} style={{ gap: 4 }}>
-              {pair.traps.map((trap, ti) => <div key={ti} style={{ fontSize: 12, lineHeight: 1.65, color: T.textMuted, padding: '8px 12px', background: T.wrongBg, borderRadius: T.r.sm, border: `1px solid ${T.wrongBorder}` }}>{trap}</div>)}
+            <div className={D.explanationWrongLabel}>✗ JEBAKAN</div>
+            <div className={`${S.list} ${D.trapList}`}>
+              {pair.traps.map((trap, ti) => <div key={ti} className={D.wrongBox}>{trap}</div>)}
             </div>
           </div>
         </div>
       )}
       {selected !== null && (
-        <button className={S.btnPrimary} style={{ marginTop: 12, animation: 'fadeIn 0.15s ease', fontSize: 13, padding: '13px' }} onClick={() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }}>
+        <button className={`${S.btnPrimary} ${D.nextBtn}`} onClick={() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }}>
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
       )}
