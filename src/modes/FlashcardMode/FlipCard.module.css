@@ -240,3 +240,18 @@
   color: rgba(255,255,255,0.88);
   line-height: 1.7;
 }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .backDescText,
+  .backDescBtn,
+  .front,
+  .back {
+    animation: none;
+    transition: none;
+  }
+
+  :global(.fc-card) {
+    transition: none;
+  }
+}

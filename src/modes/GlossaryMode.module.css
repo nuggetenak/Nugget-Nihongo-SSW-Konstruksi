@@ -1,0 +1,232 @@
+/* ─── GlossaryMode.module.css ────────────────────────────────────────────────── */
+
+/* ── Outer container ── */
+.outerWrap {
+  padding-bottom: 88px;
+}
+
+/* ── Header area ── */
+.header {
+  padding: 16px 16px 10px;
+  max-width: var(--max-w, 480px);
+  margin: 0 auto;
+}
+
+.titleRow {
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.countPill {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.metaText {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin: 0;
+}
+
+/* trackToggle — active bg/border/color are dynamic, kept inline */
+.trackToggle {
+  font-family: inherit;
+  font-size: var(--fs-micro);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+
+/* filterBtn — active bg/border/color are dynamic, kept inline */
+.filterBtn {
+  font-family: inherit;
+  font-size: var(--fs-micro);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.12s;
+}
+
+/* ── Sticky A-Z nav ── */
+.azNav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  display: flex;
+  gap: 2px;
+  padding: 5px 12px;
+  background: var(--ssw-bg);
+  border-top: 1px solid var(--ssw-border);
+  border-bottom: 1px solid var(--ssw-border);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.azNav::-webkit-scrollbar { display: none; }
+
+/* azBtn — active bg/border/color/fontWeight are dynamic, kept inline */
+.azBtn {
+  flex-shrink: 0;
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-size: var(--fs-caption);
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+/* ── Content area ── */
+.contentWrap {
+  max-width: var(--max-w, 480px);
+  margin: 0 auto;
+  padding: 0 0 8px;
+}
+
+/* ── Letter section header ── */
+.letterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 5px;
+  border-bottom: 1px solid var(--ssw-borderLight);
+  margin-top: 2px;
+}
+
+.letterLabel {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-size: var(--fs-subtitle);
+  font-weight: 900;
+  color: var(--ssw-gold);
+  letter-spacing: 0.02em;
+}
+
+.letterCount {
+  font-size: var(--fs-nano);
+  color: var(--ssw-textFaint);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-pill);
+  padding: 1px 7px;
+}
+
+/* ── Term row ── */
+/* termRow bg is dynamic (isOpen ? T.surface : transparent), kept inline */
+.termRow {
+  padding: 9px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--ssw-border);
+  transition: background 0.12s;
+}
+
+.termMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.termLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.termCatEmoji {
+  font-size: var(--fs-small);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.termJp {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ssw-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.termId {
+  font-size: var(--fs-small);
+  color: var(--ssw-textMuted);
+  flex-shrink: 0;
+  text-align: right;
+  max-width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Expanded term detail ── */
+.termDetail {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ssw-border);
+  animation: fadeIn 0.15s ease;
+}
+
+.termFuriRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.termFuri {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  font-size: var(--fs-caption);
+  color: var(--ssw-amber);
+  font-weight: 600;
+}
+
+.termDesc {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.termSourceRow {
+  margin-top: 6px;
+}
+
+.termSourcePill {
+  font-size: var(--fs-nano);
+  color: var(--ssw-textFaint);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-pill);
+  padding: 1px 6px;
+}

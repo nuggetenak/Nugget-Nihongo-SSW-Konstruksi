@@ -1,0 +1,257 @@
+/* ─── SimulasiMode.module.css ────────────────────────────────────────────────── */
+
+/* ── Start screen ── */
+.startHero {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.startHeroEmoji {
+  font-size: 44px;
+  margin-bottom: 8px;
+}
+
+.startTitle {
+  font-size: 20px;
+}
+
+.instructionsCard {
+  margin-bottom: 20px;
+}
+
+.instructionLine {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  line-height: 1.9;
+}
+
+.presetList {
+  margin-bottom: 24px;
+}
+
+/* Preset item — active bg/border/color are dynamic (red theme), kept inline */
+.presetItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.presetEmoji {
+  font-size: 18px;
+}
+
+.presetLabel {
+  font-size: var(--fs-body);
+  font-weight: 700;
+}
+
+/* presetSub color is dynamic (conditional on active), kept inline */
+.presetSub {
+  font-size: var(--fs-small);
+  margin-top: 2px;
+}
+
+/* Start button — RED_BTN is intentionally a red gradient, kept as const in JSX */
+
+/* ── Quiz playing ── */
+.quizPage {
+  padding: 12px 16px 24px;
+}
+
+.quizHeader {
+  margin-bottom: 10px;
+}
+
+/* Timer box — bg/border/animation are dynamic (isUrgent), kept inline */
+.timerBox {
+  text-align: center;
+  border-radius: var(--r-md);
+  padding: 3px 12px;
+  min-width: 70px;
+}
+
+.timerLabel {
+  font-size: var(--fs-nano);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  /* color: dynamic (isUrgent ? T.wrong : T.textDim), kept inline */
+}
+
+.timerValue {
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  /* color: dynamic (isUrgent), kept inline */
+}
+
+.scoreMini {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.scoreCorrect {
+  color: var(--ssw-correct);
+  font-weight: 700;
+}
+
+.scoreWrong {
+  color: var(--ssw-wrong);
+}
+
+.questionCard {
+  margin-bottom: 14px;
+  animation: fadeIn 0.2s ease;
+}
+
+.questionJp {
+  font-size: var(--fs-subtitle);
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+.questionSub {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.photoHint {
+  font-size: var(--fs-small);
+  color: var(--ssw-gold);
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: rgba(251, 191, 36, 0.06);
+  border-radius: var(--r-sm);
+  line-height: 1.4;
+}
+
+.explanationBox {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.12);
+  font-size: var(--fs-caption);
+  line-height: 1.65;
+  color: var(--ssw-textMuted);
+  animation: fadeIn 0.2s ease;
+}
+
+.nextBtn {
+  margin-top: 12px;
+  animation: fadeIn 0.15s ease;
+  /* RED_BTN styles stay inline (red gradient — exam theme) */
+}
+
+/* ── Result screen ── */
+.resultPage {
+  padding: 20px 16px;
+  animation: scaleIn 0.3s ease;
+}
+
+/* lulus banner — bg/border/color are conditional on pass/fail, kept inline */
+.lulusBanner {
+  text-align: center;
+  padding: 28px 20px 24px;
+  border-radius: var(--r-xl);
+  margin-bottom: 16px;
+  animation: scaleIn 0.3s ease;
+}
+
+.lulusIcon {
+  font-size: 52px;
+  margin-bottom: 8px;
+}
+
+.lulusStatus {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  /* color: conditional on lulus, kept inline */
+}
+
+.lulusPct {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  /* color: conditional on lulus, kept inline */
+}
+
+.lulusSub {
+  font-size: var(--fs-body);
+  color: var(--ssw-textMuted);
+  margin-bottom: 16px;
+}
+
+/* Progress fill track */
+.progressTrack {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+/* Progress fill — width and gradient are dynamic (pct, lulus), kept inline */
+
+.resultActions {
+  margin-bottom: 16px;
+}
+
+.kembaliBtn {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--r-md);
+  font-weight: 700;
+}
+
+/* Review list */
+.reviewItem {
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border-left: 3px solid var(--ssw-wrong);
+}
+
+.reviewJp {
+  font-size: var(--fs-body);
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+.reviewIdText {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.reviewWrong {
+  font-size: var(--fs-caption);
+  color: var(--ssw-wrong);
+  margin-bottom: 3px;
+}
+
+.reviewCorrect {
+  font-size: var(--fs-caption);
+  color: var(--ssw-correct);
+}
+
+.reviewExpl {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-top: 6px;
+  line-height: 1.5;
+  border-top: 1px solid var(--ssw-border);
+  padding-top: 6px;
+}

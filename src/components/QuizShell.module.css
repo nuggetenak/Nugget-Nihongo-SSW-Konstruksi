@@ -204,3 +204,15 @@
   transform: scale(0.97) translateY(1px);
   box-shadow: 0 2px 8px rgba(245,158,11,0.20);
 }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .wrap,
+  .questionCard,
+  .explanation,
+  .btnNext,
+  .btnBack {
+    animation: none;
+    transition: none;
+  }
+}

@@ -509,3 +509,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .streakHero,
+  .streakEmoji,
+  .countdownCard,
+  .cta::after,
+  .cta,
+  .trackPill,
+  .themeBtn,
+  .quickTile,
+  .missionCard {
+    animation: none;
+    transition: none;
+  }
+}

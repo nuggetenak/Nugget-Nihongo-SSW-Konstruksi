@@ -223,3 +223,20 @@
   color: var(--ssw-textFaint);
   letter-spacing: 0.3px;
 }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .ratingWrap,
+  .ratedConfirm,
+  .ratingBtn,
+  .navFlip,
+  .navBtn,
+  .toolBtn {
+    animation: none;
+    transition: none;
+  }
+
+  :global(.fc-card) {
+    transition: none;
+  }
+}

@@ -1,0 +1,209 @@
+/* ─── ReviewMode.module.css ──────────────────────────────────────────────────── */
+
+/* ── Loading skeleton ── */
+.skeleton {
+  padding: 20px 20px;
+  max-width: var(--max-w, 480px);
+  margin: 0 auto;
+}
+
+/* ── Empty state (no cards due) ── */
+.emptyBack {
+  padding-top: 20px;
+}
+
+/* ── Session done screen ── */
+.doneScreen {
+  animation: fadeIn 0.3s ease;
+}
+
+.doneEmoji {
+  font-size: 52px;
+  margin-bottom: 12px;
+}
+
+.doneTitle {
+  font-size: 20px;
+}
+
+.doneSub {
+  font-size: 14px;
+  color: var(--ssw-textMuted);
+  margin-bottom: 20px;
+}
+
+.doneMiniGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.doneMiniCard {
+  padding: 10px 6px;
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  text-align: center;
+}
+
+.doneMiniIcon {
+  font-size: 14px;
+}
+
+/* doneMiniValue — color is dynamic per entry, kept inline */
+.doneMiniValue {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+}
+
+.doneMiniLabel {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+}
+
+/* ── Card quiz page ── */
+.quizPage {
+  padding: 12px 16px 32px;
+}
+
+.quizHeader {
+  margin-bottom: 8px;
+}
+
+.audioBtn {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--ssw-textMuted);
+  padding: 2px 4px;
+}
+
+.cardIdxLabel {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textFaint);
+}
+
+.strengthPill {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+/* Card wrapper — border-color conditional on flip, kept inline */
+.card {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardFront {
+  text-align: center;
+}
+
+.cardJp {
+  font-weight: 700;
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  line-height: 1.4;
+  /* font-size: dynamic (jpFontSize()), kept inline */
+}
+
+.cardFuri {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+  margin-top: 4px;
+}
+
+/* Flip reveal section */
+.flipReveal {
+  animation: fadeIn 0.15s ease;
+  border-top: 1px solid var(--ssw-border);
+  padding-top: 14px;
+  margin-top: 16px;
+}
+
+.flipIdText {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ssw-gold);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.flipDesc {
+  font-size: var(--fs-caption);
+  line-height: 1.7;
+  color: var(--ssw-textMuted);
+}
+
+.flipCatRow {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ── Pre-flip hint ── */
+.flipPrompt {
+  text-align: center;
+  margin-top: 16px;
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+}
+
+/* ── Rating row ── */
+.ratingWrap {
+  margin-top: 14px;
+}
+
+.ratingLabel {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.ratingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 6px;
+}
+
+/* ratingBtn — bg/border/color are per-RATING_META, kept inline */
+.ratingBtn {
+  font-family: inherit;
+  padding: 10px 4px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s;
+}
+
+.ratingEmoji {
+  font-size: 14px;
+}
+
+.ratingId {
+  font-size: var(--fs-caption);
+  font-weight: 700;
+}
+
+/* ratingInterval — width is dynamic, kept inline */
+.ratingInterval {
+  font-size: var(--fs-nano);
+  opacity: 0.7;
+}
+
+.ratingKey {
+  font-size: var(--fs-nano);
+  opacity: 0.45;
+}

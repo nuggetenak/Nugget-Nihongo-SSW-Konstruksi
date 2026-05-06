@@ -1,0 +1,167 @@
+/* ─── StatsMode.module.css ───────────────────────────────────────────────────── */
+
+/* ── Overview card ── */
+.overviewCard {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* pct number uses Syne font — color is T.gold, kept inline (dynamic T value) */
+.overviewPct {
+  font-size: 36px;
+  font-weight: 800;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+}
+
+.overviewSub {
+  font-size: var(--fs-body);
+  color: var(--ssw-textMuted);
+  margin-bottom: 12px;
+}
+
+.overviewKnown {
+  color: var(--ssw-correct);
+}
+
+.overviewUnknown {
+  color: var(--ssw-wrong);
+}
+
+.overviewUntouched {
+  color: var(--ssw-textDim);
+}
+
+/* ── Mini stat grid (streak + SRS) ── */
+.miniGrid {
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.miniCard {
+  padding: 10px 6px;
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  text-align: center;
+}
+
+.miniEmoji {
+  font-size: 14px;
+}
+
+/* miniValue — color is dynamic per card (T.gold / T.correct / '#60a5fa'), kept inline */
+.miniValue {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+}
+
+.miniLabel {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+}
+
+/* ── SRS due banner ── */
+.dueBanner {
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  background: rgba(251, 191, 36, 0.07);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  margin-bottom: 20px;
+  font-size: var(--fs-caption);
+  color: var(--ssw-gold);
+  font-weight: 600;
+}
+
+/* ── Activity chart ── */
+.chartWrap {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  height: 60px;
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.chartCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.chartCount {
+  font-size: var(--fs-nano);
+  color: var(--ssw-textDim);
+}
+
+/* chartBar — height, background, border, opacity are all dynamic, kept inline */
+
+.chartLabel {
+  font-size: var(--fs-nano);
+  color: var(--ssw-textDim);
+  /* font-weight: dynamic (today = 700, else 400), kept inline */
+}
+
+/* ── Per category ── */
+.catList {
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.catItem {
+  padding: 10px 12px;
+  background: var(--ssw-surface);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.catEmoji {
+  font-size: 14px;
+}
+
+.catBody {
+  flex: 1;
+}
+
+.catRow {
+  font-size: var(--fs-caption);
+  margin-bottom: 4px;
+}
+
+/* catPct — color is dynamic (≥70% correct, ≥40% gold, else wrong), kept inline */
+
+/* ── Weakest section ── */
+.weakBox {
+  padding: 12px 14px;
+  background: var(--ssw-wrongBg);
+  border-radius: var(--r-md);
+  border: 1px solid var(--ssw-wrongBorder);
+  margin-bottom: 20px;
+}
+
+.weakItem {
+  font-size: var(--fs-caption);
+  color: var(--ssw-wrong);
+  padding: 4px 0;
+}
+
+/* ── Sering salah ── */
+.wrongRow {
+  padding: 8px 12px;
+  background: var(--ssw-surface);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-caption);
+}
+
+.wrongJp {
+  font-family: var(--font-jp, 'Noto Serif JP', serif);
+}
+
+.wrongCount {
+  color: var(--ssw-wrong);
+  font-weight: 600;
+}

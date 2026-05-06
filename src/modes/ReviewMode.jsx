@@ -1,6 +1,9 @@
 // ─── ReviewMode.jsx ───────────────────────────────────────────────────────────
 // Note: card border-color on flip is conditional (T.borderActive vs T.border) — justified inline.
+// Note: card padding on flip is conditional — justified inline.
 // Note: rating button bg/border/color is per-rating grade from RATING_META — justified inline.
+// Note: strength pill bg/color use info.strength.color — justified inline.
+// Note: cat pill bg/color use cat.color — justified inline.
 import { useState, useEffect, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
@@ -13,6 +16,7 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Skeleton from '../components/Skeleton.jsx';
 import S from './modes.module.css';
+import R from './ReviewMode.module.css';
 
 const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 
@@ -39,7 +43,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     setIntervals(srs.previewFor(currentId)); setFlipped(false); setLast(null);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Fire onSessionEnd once when all cards reviewed
   useEffect(() => {
     if (!done || !queue) return;
     onSessionEnd?.({ correct: sessionCorrect, total: queue.length });
@@ -60,9 +63,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     if (result.isKnown) setSessionCorrect((n) => n + 1);
     setTimeout(() => {
       const nextIdx = idx + 1;
-      if (nextIdx >= queue.length) {
-        setDone(true);
-      }
+      if (nextIdx >= queue.length) setDone(true);
       else setIdx(nextIdx);
     }, 600);
   }, [flipped, currentId, idx, queue, srs]);
@@ -79,16 +80,18 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     return () => window.removeEventListener('keydown', h);
   }, [flipped, handleRate]);
 
+  // ─── LOADING ───────────────────────────────────────────────────────────────
   if (queue === null) {
     return (
-    <div style={{ padding: '20px 20px', maxWidth: 480, margin: '0 auto' }}>
-      <Skeleton width="60px" height={14} style={{ marginBottom: 16 }} />
-      <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
-      <Skeleton.Card />
-    </div>
-  );
+      <div className={R.skeleton}>
+        <Skeleton width="60px" height={14} style={{ marginBottom: 16 }} />
+        <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
+        <Skeleton.Card />
+      </div>
+    );
   }
 
+  // ─── DONE ──────────────────────────────────────────────────────────────────
   if (done) {
     const total = queue.length;
     const pct = total > 0 ? Math.round((sessionCorrect / total) * 100) : 100;
@@ -96,8 +99,8 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     if (total === 0) {
       return (
         <div className={S.page} style={{ paddingTop: 0 }}>
-          <button className={S.btnBack} style={{ paddingTop: 20 }} onClick={onExit}>← Kembali</button>
-          <div className={S.emptyInMode} style={{ padding: '48px 24px', animation: 'scaleIn 0.3s ease' }}>
+          <button className={`${S.btnBack} ${R.emptyBack}`} onClick={onExit}>← Kembali</button>
+          <div className={`${S.emptyInMode}`} style={{ padding: '48px 24px', animation: 'scaleIn 0.3s ease' }}>
             <div className={S.emptyIcon}>🎉</div>
             <div className={S.emptyTitle}>Semua kartu sudah terulang!</div>
             <div className={S.emptyDesc}>Tidak ada yang jatuh tempo hari ini. Datang lagi besok untuk sesi ulasan berikutnya.</div>
@@ -108,22 +111,20 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     }
 
     return (
-      <div className={S.pageCenter} style={{ animation: 'fadeIn 0.3s ease' }}>
-        <div style={{ fontSize: 52, marginBottom: 12 }}>{pct >= 70 ? '🏆' : '📚'}</div>
-        <h2 className={S.pageTitle} style={{ fontSize: 20 }}>Sesi selesai!</h2>
-        <div style={{ fontSize: 14, color: T.textMuted, marginBottom: 20 }}>
-          {sessionCorrect} dari {total} kartu dijawab dengan benar ({pct}%)
-        </div>
+      <div className={`${S.pageCenter} ${R.doneScreen}`}>
+        <div className={R.doneEmoji}>{pct >= 70 ? '🏆' : '📚'}</div>
+        <h2 className={`${S.pageTitle} ${R.doneTitle}`}>Sesi selesai!</h2>
+        <div className={R.doneSub}>{sessionCorrect} dari {total} kartu dijawab dengan benar ({pct}%)</div>
         {srs.stats && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 24 }}>
+          <div className={R.doneMiniGrid}>
             {[{ n: srs.stats.mature, label: 'Matang', icon: '🌟', color: T.correct },
               { n: srs.stats.young, label: 'Berkemb.', icon: '📗', color: T.gold },
               { n: srs.stats.learning, label: 'Belajar', icon: '📘', color: '#60a5fa' }
-            ].map((s, i) => (
-              <div key={i} style={{ padding: '10px 6px', borderRadius: T.r.md, background: T.surface, border: `1px solid ${T.border}`, textAlign: 'center' }}>
-                <div style={{ fontSize: 14 }}>{s.icon}</div>
-                <div style={{ fontSize: 18, fontWeight: 800, color: s.color }}>{s.n}</div>
-                <div style={{ fontSize: 10, color: T.textDim }}>{s.label}</div>
+            ].map((stat, i) => (
+              <div key={i} className={R.doneMiniCard}>
+                <div className={R.doneMiniIcon}>{stat.icon}</div>
+                <div className={R.doneMiniValue} style={{ color: stat.color }}>{stat.n}</div>
+                <div className={R.doneMiniLabel}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -133,6 +134,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     );
   }
 
+  // ─── PLAYING ───────────────────────────────────────────────────────────────
   if (!currentCard) return null;
   const cat = getCatInfo(currentCard.category);
   const clean = stripFuri(currentCard.jp);
@@ -141,46 +143,50 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
 
   return (
-    <div className={S.pageScroll} style={{ padding: '12px 16px 32px' }}>
-      <div className={S.rowSpread} style={{ marginBottom: 8 }}>
+    <div className={`${S.pageScroll} ${R.quizPage}`}>
+      <div className={`${S.rowSpread} ${R.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>← Keluar</button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {audioEnabled && (
-            <button
-              onClick={() => speakJP(clean)}
-              aria-label="Putar audio"
-              style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, color: T.textMuted, padding: '2px 4px' }}
-            >🔊</button>
+            <button onClick={() => speakJP(clean)} aria-label="Putar audio" className={R.audioBtn}>🔊</button>
           )}
-          <div style={{ fontSize: 12, color: T.textFaint }}>{idx + 1} / {queue.length}</div>
+          <div className={R.cardIdxLabel}>{idx + 1} / {queue.length}</div>
         </div>
       </div>
       <ProgressBar current={idx} total={queue.length} color={T.amber} />
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10, marginBottom: 2 }}>
+      <div className={R.strengthPill}>
         <span className={S.pill} style={{ fontSize: 10, background: `${info.strength.color}15`, color: info.strength.color, border: `1px solid ${info.strength.color}30` }}>
           {info.strength.label} · {Math.round(info.R * 100)}% ingat
         </span>
       </div>
 
-      {/* Card - border color is conditional on flip state, justified inline */}
+      {/* Card — border/padding conditional on flip state, justified inline */}
       <div
         onClick={() => !flipped && setFlipped(true)}
         role="button"
         tabIndex={flipped ? -1 : 0}
-        onKeyDown={(e) => { if (!flipped && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); setFlipped(true); } }}
-        aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? currentCard.jp : ""}`}
-        style={{ marginTop: 10, padding: flipped ? '22px 18px' : '36px 20px', background: T.surface, borderRadius: T.r.xxl, border: `1.5px solid ${flipped ? T.borderActive : T.border}`, minHeight: 220, cursor: flipped ? 'default' : 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'center', transition: 'all 0.2s cubic-bezier(0.4,0,0.2,1)' }}
+        onKeyDown={(e) => { if (!flipped && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); setFlipped(true); } }}
+        aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? currentCard.jp : ''}`}
+        className={R.card}
+        style={{
+          padding: flipped ? '22px 18px' : '36px 20px',
+          background: T.surface,
+          borderRadius: T.r.xxl,
+          border: `1.5px solid ${flipped ? T.borderActive : T.border}`,
+          minHeight: 220,
+          cursor: flipped ? 'default' : 'pointer',
+        }}
       >
-        <div style={{ textAlign: 'center', marginBottom: flipped ? 16 : 0 }}>
-          <div style={{ fontSize: fs, fontWeight: 700, fontFamily: T.fontJP, lineHeight: 1.4 }}>{clean}</div>
-          {currentCard.furi && <div style={{ fontSize: 12, color: T.textMuted, fontFamily: T.fontJP, marginTop: 4 }}>{currentCard.furi}</div>}
+        <div className={R.cardFront} style={{ marginBottom: flipped ? 16 : 0 }}>
+          <div className={R.cardJp} style={{ fontSize: fs }}>{clean}</div>
+          {currentCard.furi && <div className={R.cardFuri}>{currentCard.furi}</div>}
         </div>
         {flipped && (
-          <div style={{ animation: 'fadeIn 0.15s ease', borderTop: `1px solid ${T.border}`, paddingTop: 14 }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: T.gold, textAlign: 'center', marginBottom: 8 }}>{currentCard.id_text}</div>
-            <div style={{ fontSize: 12, lineHeight: 1.7, color: T.textMuted }}>{currentCard.desc}</div>
-            <div style={{ marginTop: 10, textAlign: 'center' }}>
+          <div className={R.flipReveal}>
+            <div className={R.flipIdText}>{currentCard.id_text}</div>
+            <div className={R.flipDesc}>{currentCard.desc}</div>
+            <div className={R.flipCatRow}>
               <span className={S.pill} style={{ fontSize: 10, background: `${cat.color}15`, color: cat.color, border: `1px solid ${cat.color}33` }}>
                 {cat.emoji} {cat.label}
               </span>
@@ -190,22 +196,26 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
       </div>
 
       {!flipped ? (
-        <div style={{ textAlign: 'center', marginTop: 16, fontSize: 12, color: T.textDim }}>
-          Ketuk kartu untuk lihat jawaban · Space/Enter
-        </div>
+        <div className={R.flipPrompt}>Ketuk kartu untuk lihat jawaban · Space/Enter</div>
       ) : (
-        <div style={{ marginTop: 14 }}>
-          <div style={{ fontSize: 10, color: T.textDim, textAlign: 'center', marginBottom: 8, letterSpacing: 0.5 }}>Seberapa mudah kamu ingat?</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 6 }}>
+        <div className={R.ratingWrap}>
+          <div className={R.ratingLabel}>Seberapa mudah kamu ingat?</div>
+          <div className={R.ratingGrid}>
             {[1, 2, 3, 4].map((rating) => {
               const m = RATING_META[rating];
               const days = intervals[rating];
               return (
-                <button key={rating} onClick={() => handleRate(rating)} aria-label={`Nilai ${m.id}`} style={{ fontFamily: 'inherit', padding: '10px 4px', borderRadius: T.r.md, cursor: 'pointer', background: m.bg, border: `1.5px solid ${m.border}`, color: m.color, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, transition: 'all 0.15s' }}>
-                  <span style={{ fontSize: 14 }}>{m.emoji}</span>
-                  <span style={{ fontSize: 12, fontWeight: 700 }}>{m.id}</span>
-                  {days != null && <span style={{ fontSize: 9, opacity: 0.7 }}>{fmtInterval(days)}</span>}
-                  <span style={{ fontSize: 9, opacity: 0.45 }}>{rating}</span>
+                <button
+                  key={rating}
+                  onClick={() => handleRate(rating)}
+                  aria-label={`Nilai ${m.id}`}
+                  className={R.ratingBtn}
+                  style={{ background: m.bg, border: `1.5px solid ${m.border}`, color: m.color }}
+                >
+                  <span className={R.ratingEmoji}>{m.emoji}</span>
+                  <span className={R.ratingId}>{m.id}</span>
+                  {days != null && <span className={R.ratingInterval}>{fmtInterval(days)}</span>}
+                  <span className={R.ratingKey}>{rating}</span>
                 </button>
               );
             })}
