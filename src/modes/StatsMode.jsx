@@ -9,6 +9,7 @@ import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ProgressRing from '../components/ProgressRing.jsx';
+import StudyHeatmap from '../components/StudyHeatmap.jsx';
 import S from './modes.module.css';
 import ST from './StatsMode.module.css';
 
@@ -143,6 +144,11 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
           🔁 {dueCount} kartu SRS jatuh tempo hari ini — siap diulang!
         </div>
       )}
+
+      <div className={S.sectionLabel}>📅 Kalender Belajar</div>
+      <div className={`${S.cardLg}`} style={{ overflowX: 'auto', paddingBottom: 8 }}>
+        <StudyHeatmap sessions={sessions} />
+      </div>
 
       <div className={S.sectionLabel}>7 Hari Terakhir</div>
       {(() => {

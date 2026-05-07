@@ -51,5 +51,6 @@ export const DEFAULTS = {
     audioEnabled: true,      // Phase F: Web Speech API toggle
     studyAnchor: null,       // Phase C: 'morning' | 'lunch' | 'evening'
     furiganaPolicy: 'always',// Phase E: 'always' | 'tap' | 'hidden'
+    flashcardHintCount: 0,   // BUG-10: reset on resetAll()
   },
 };

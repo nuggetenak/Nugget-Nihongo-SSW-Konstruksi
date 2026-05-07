@@ -42,8 +42,18 @@ export default function GlossaryMode({ onExit, track }) {
 
   const groups = useMemo(() => {
     const map = {};
-    sorted.forEach((c) => { const key = (c.furi || '?')[0]; if (!map[key]) map[key] = []; map[key].push(c); });
-    return Object.entries(map);
+    sorted.forEach((c) => {
+      const first = (c.furi || '?')[0];
+      // BUG-08: non-hiragana/katakana initials (romaji, kanji, etc.) → '#' bucket
+      const key = /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(first) ? first : '#';
+      if (!map[key]) map[key] = [];
+      map[key].push(c);
+    });
+    // Move '#' to end of nav
+    const entries = Object.entries(map);
+    const other = entries.filter(([k]) => k === '#');
+    const hira = entries.filter(([k]) => k !== '#');
+    return [...hira, ...other];
   }, [sorted]);
 
   const letters = useMemo(() => groups.map(([l]) => l), [groups]);

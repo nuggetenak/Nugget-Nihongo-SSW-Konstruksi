@@ -18,6 +18,7 @@ function readSummary() {
       srsCount: Object.keys(data.srs?.cards ?? {}).length,
       sessions: (data.progress?.sessions ?? []).length,
       version:  data._storage_version ?? data.progress?._v ?? '?',
+      exportedAt: data.exported_at ?? null,
     };
   } catch {
     return { known: 0, unknown: 0, starred: 0, srsCount: 0, sessions: 0, version: '?' };
@@ -55,8 +56,12 @@ export default function ExportMode({ onExit }) {
       const parsed   = JSON.parse(await file.text());
       const validation = validateSnapshot(parsed);
       if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
+      // BUG-11: detect if current data is newer than file (dual-device conflict)
+      const currentExportedAt = exportAll().exported_at ?? null;
+      const fileExportedAt = parsed.exported_at ?? null;
+      const hasConflict = currentExportedAt && fileExportedAt && new Date(currentExportedAt) > new Date(fileExportedAt);
       // Show diff summary for user to confirm
-      setPreviewData({ snapshot: parsed, incoming: validation.summary });
+      setPreviewData({ snapshot: parsed, incoming: validation.summary, hasConflict, fileDate: fileExportedAt, currentDate: currentExportedAt });
       setStatus({ type: 'preview', msg: null });
     } catch (e) {
       setStatus({ type: 'err', msg: `❌ File tidak valid: ${e.message}` });
@@ -120,6 +125,14 @@ export default function ExportMode({ onExit }) {
       {previewData ? (
         <div className={S.cardLg} style={{ marginBottom: 16, border: `1px solid ${T.gold}55`, background: `${T.gold}08` }}>
           <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 10 }}>📥 Pratinjau Data Import</div>
+          {/* BUG-11: conflict warning if current data is newer than file */}
+          {previewData.hasConflict && (
+            <div style={{ marginBottom: 10, padding: '10px 12px', borderRadius: T.r.md, background: T.wrongBg, border: `1px solid ${T.wrongBorder}`, fontSize: 12, color: T.wrong, lineHeight: 1.5 }}>
+              ⚠️ <strong>Potensi Konflik:</strong> Data di perangkat ini lebih baru dari file yang diimpor.<br />
+              <span style={{ color: T.textDim }}>File: {previewData.fileDate?.slice(0, 16).replace('T', ' ')} · Perangkat: {previewData.currentDate?.slice(0, 16).replace('T', ' ')}</span><br />
+              Melanjutkan akan <strong>menimpa data yang lebih baru</strong>.
+            </div>
+          )}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 12 }}>
             {[
               { label: 'Hafal',     cur: summary.known,    inc: previewData.incoming.known },

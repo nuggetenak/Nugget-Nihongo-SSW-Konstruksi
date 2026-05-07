@@ -35,27 +35,28 @@ describe('init — fresh install', () => {
 
   it('progress doc has _v = STORAGE_VERSION', () => {
     init();
-    const prog = JSON.parse(localStorage.getItem(DOCS.progress));
+    const prog = get('progress');
     expect(prog._v).toBe(STORAGE_VERSION);
   });
 
   it('srs doc starts with empty cards', () => {
     init();
-    const srs = JSON.parse(localStorage.getItem(DOCS.srs));
+    const srs = get('srs');
     expect(srs.cards).toEqual({});
   });
 
   it('prefs doc has default track = null', () => {
     init();
-    const prefs = JSON.parse(localStorage.getItem(DOCS.prefs));
+    const prefs = get('prefs');
     expect(prefs.track).toBeNull();
   });
 
   it('is idempotent — second init() is a no-op', () => {
     init();
-    localStorage.setItem(DOCS.prefs, JSON.stringify({ _v: STORAGE_VERSION, track: 'lifeline' }));
+    set('prefs', (p) => ({ ...p, track: 'lifeline' }));
+    _reset_for_test();
     init(); // should NOT overwrite
-    const prefs = JSON.parse(localStorage.getItem(DOCS.prefs));
+    const prefs = get('prefs');
     expect(prefs.track).toBe('lifeline');
   });
 });
@@ -108,9 +109,10 @@ describe('init — v1 migration', () => {
   it('writes v2 ssw-progress doc after migration', () => {
     localStorage.setItem('ssw-known', JSON.stringify([5]));
     init();
-    const raw = localStorage.getItem(DOCS.progress);
-    expect(raw).not.toBeNull();
-    expect(JSON.parse(raw)._v).toBe(STORAGE_VERSION);
+    // E4: data is now lz-compressed — read via engine get()
+    const prog = get('progress');
+    expect(prog).not.toBeNull();
+    expect(prog._v).toBe(STORAGE_VERSION);
   });
 });
 
@@ -139,8 +141,9 @@ describe('get and set', () => {
   it('set persists to localStorage', () => {
     init();
     set('prefs', { theme: 'dark' });
-    const raw = JSON.parse(localStorage.getItem(DOCS.prefs));
-    expect(raw.theme).toBe('dark');
+    // E4: data is lz-compressed — read via engine get()
+    const data = get('prefs');
+    expect(data.theme).toBe('dark');
   });
 });
 
@@ -162,7 +165,8 @@ describe('SRS card operations', () => {
   it('setSRSCard persists to ssw-srs-data doc', () => {
     init();
     setSRSCard(7, { card: {}, history: [], reviewed_at: null });
-    const doc = JSON.parse(localStorage.getItem(DOCS.srs));
+    // E4: lz-compressed — read via engine get()
+    const doc = get('srs');
     expect(doc.cards['7']).toBeDefined();
   });
 

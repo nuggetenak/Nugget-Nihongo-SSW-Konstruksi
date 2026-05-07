@@ -30,29 +30,33 @@ function buildPool() {
   const jacNorm = JAC_OFFICIAL.map((q) => ({
     jp: q.jp,
     id_text: q.id_text,
-    options: q.options,  // string[]
-    answer: q.answer,    // 0-based index into options
+    options: q.options,
+    answer: q.answer,
     explanation: q.explanation,
     hasPhoto: q.hasPhoto,
     photoDesc: q.photoDesc,
+    _source: 'jac',
+    _setLabel: q.setLabel || 'JAC',
   }));
 
   const wayNorm = WAYGROUND_SETS.flatMap((set) =>
     (set.questions || []).map((q) => ({
       jp: q.q,
       id_text: q.hint || null,
-      options: q.opts,    // string[]
-      answer: q.ans,      // 0-based index into opts
+      options: q.opts,
+      answer: q.ans,
       explanation: q.exp || null,
       hasPhoto: false,
       photoDesc: null,
+      _source: 'wayground',
+      _setLabel: set.title || 'Wayground',
     }))
   );
 
   return [...jacNorm, ...wayNorm];
 }
 
-export default function SimulasiMode({ onExit, onSessionEnd }) {
+export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const [phase, setPhase] = useState('start');
   const [preset, setPreset] = useState('quick');
   const [seed, setSeed] = useState(0);
@@ -71,7 +75,7 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
     const items = config.count > 0 ? pool.slice(0, config.count) : pool;
     return items.map((q) => {
       const shuffledOpts = shuffle(q.options.map((text, origIdx) => ({ text, origIdx })));
-      return { jp: q.jp, id_text: q.id_text, opts: shuffledOpts, correctIdx: shuffledOpts.findIndex((o) => o.origIdx === q.answer), explanation: q.explanation, hasPhoto: q.hasPhoto, photoDesc: q.photoDesc };
+      return { jp: q.jp, id_text: q.id_text, opts: shuffledOpts, correctIdx: shuffledOpts.findIndex((o) => o.origIdx === q.answer), explanation: q.explanation, hasPhoto: q.hasPhoto, photoDesc: q.photoDesc, _source: q._source, _setLabel: q._setLabel };
     });
   }, [phase, seed, config.count]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -110,7 +114,7 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
     if (selected !== null || phase !== 'playing' || paused || !q) return;
     setSelected(optArrayIdx);
     const isCorrect = optArrayIdx === q.correctIdx;
-    setResults((r) => [...r, { isCorrect, jp: q.jp, id_text: q.id_text, opts: q.opts, correctIdx: q.correctIdx, userIdx: optArrayIdx, explanation: q.explanation }]);
+    setResults((r) => [...r, { isCorrect, jp: q.jp, id_text: q.id_text, opts: q.opts, correctIdx: q.correctIdx, userIdx: optArrayIdx, explanation: q.explanation, _source: q._source, _setLabel: q._setLabel }]);
   }, [selected, phase, paused, q]);
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
@@ -181,8 +185,42 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
         </div>
         <div className={`${S.row} ${SM.resultActions}`}>
           <button style={{ ...RED_BTN, flex: 1, padding: '12px' }} onClick={handleStart}>🔄 Ulang</button>
+          {wrongList.length > 0 && onRetryWrong && (
+            <button style={{ ...RED_BTN, flex: 1, padding: '12px', background: 'linear-gradient(135deg,#1e3a5f,#2563eb)' }} onClick={() => onRetryWrong(wrongList.map((_, i) => i))}>
+              📚 Latih {wrongList.length} Salah
+            </button>
+          )}
           <button className={`${S.btnSecondary} ${SM.kembaliBtn}`} onClick={onExit}>← Kembali</button>
         </div>
+
+        {/* SIM4: Breakdown per source */}
+        {results.length > 0 && (() => {
+          const bySource = {};
+          results.forEach((r) => {
+            const key = r._setLabel || r._source || 'Lainnya';
+            if (!bySource[key]) bySource[key] = { correct: 0, total: 0 };
+            bySource[key].total++;
+            if (r.isCorrect) bySource[key].correct++;
+          });
+          const entries = Object.entries(bySource).sort((a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total);
+          return (
+            <>
+              <div className={S.sectionLabel}>Breakdown per Set</div>
+              <div className={S.list} style={{ gap: 6 }}>
+                {entries.map(([label, stat]) => {
+                  const pct = Math.round((stat.correct / stat.total) * 100);
+                  const color = pct >= 75 ? T.correct : pct >= 50 ? T.gold : T.wrong;
+                  return (
+                    <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: T.surface, borderRadius: T.r.md, border: `1px solid ${T.border}`, fontSize: 12 }}>
+                      <span style={{ color: T.textMuted, flex: 1 }}>{label}</span>
+                      <span style={{ color, fontWeight: 700, minWidth: 60, textAlign: 'right' }}>{pct}% ({stat.correct}/{stat.total})</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          );
+        })()}
         {wrongList.length > 0 && (
           <>
             <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>

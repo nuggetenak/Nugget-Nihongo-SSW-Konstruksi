@@ -2,7 +2,7 @@
 // "Saya" tab — personal hub. Phase 6: 0 inline styles.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import s from './SayaTab.module.css';
 import { CARDS } from '../data/cards.js';
 import { exportAll, importAll, resetAll } from '../storage/engine.js';
@@ -10,6 +10,8 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import ProgressRing from './ProgressRing.jsx';
+import { buildAchievementState, evaluateAchievements } from '../utils/achievements.js';
+import { getDailyChallenge, todayStr } from '../utils/daily-challenge.js';
 
 const TRACK_LABELS = {
   doboku:   '⛏ Teknik Sipil · 土木',
@@ -45,7 +47,7 @@ function Section({ title, children }) {
 
 export default function SayaTab() {
   const { track, setTrack, isDark, toggleTheme, toast, goMode, dailyGoal, setDailyGoal, setPref, prefs } = useApp();
-  const { known, unknown, streakData } = useProgress();
+  const { known, unknown, streakData, sessions, jacScores } = useProgress();
   const srs = useSRSContext();
 
   const total  = CARDS.length;
@@ -55,6 +57,22 @@ export default function SayaTab() {
   const mature   = srs.stats?.mature ?? 0;
   const young    = srs.stats?.young  ?? 0;
   const newCards = srs.stats?.new    ?? 0;
+
+  // F1: Achievements
+  const achievements = useMemo(() => {
+    const state = buildAchievementState({ known, streakData, sessions, srs, jacScores });
+    return evaluateAchievements(state);
+  }, [known, streakData, sessions, srs, jacScores]);
+  const unlockedCount = achievements.filter((a) => a.unlocked).length;
+
+  // F2: Daily Challenge
+  const today = todayStr();
+  const dailyChallengeQ = useMemo(() => getDailyChallenge(today), [today]);
+  const dcStorageKey = `ssw-dc-${today}`;
+  const [dcAnswered, setDcAnswered] = useState(() => {
+    try { return JSON.parse(sessionStorage.getItem(dcStorageKey)) ?? null; } catch { return null; }
+  });
+  const [dcSelected, setDcSelected] = useState(null);
 
   // D1: Inline edit states — replace prompt() for mobile Android
   const [editingGoal, setEditingGoal] = useState(false);
@@ -169,6 +187,58 @@ export default function SayaTab() {
           {streak > 0 && <div className={s.progressStreak}>🔥 {streak} hari berturut-turut</div>}
         </div>
       </div>
+
+      {/* F2: Daily Challenge */}
+      {dailyChallengeQ && (
+        <Section title={`🗓️ Soal Hari Ini · ${today}`}>
+          <div style={{ padding: '12px 14px', background: 'var(--ssw-surface)', borderRadius: 12, border: '1px solid var(--ssw-border)' }}>
+            {dcAnswered ? (
+              <div>
+                <div style={{ fontSize: 13, color: dcAnswered.correct ? 'var(--ssw-correct)' : 'var(--ssw-wrong)', fontWeight: 700, marginBottom: 6 }}>
+                  {dcAnswered.correct ? '✅ Benar!' : '❌ Salah'}
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--ssw-textMuted)', lineHeight: 1.5 }}>{dailyChallengeQ.jp}</div>
+                {dailyChallengeQ.explanation && (
+                  <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginTop: 6, lineHeight: 1.5 }}>💡 {dailyChallengeQ.explanation.slice(0, 120)}{dailyChallengeQ.explanation.length > 120 ? '…' : ''}</div>
+                )}
+              </div>
+            ) : (
+              <div>
+                <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 10, lineHeight: 1.5, color: 'var(--ssw-text)' }}>{dailyChallengeQ.jp}</div>
+                {dailyChallengeQ.id_text && <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginBottom: 10 }}>{dailyChallengeQ.id_text}</div>}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {dailyChallengeQ.options.map((opt, i) => (
+                    <button key={i} onClick={() => {
+                      const correct = i === dailyChallengeQ.answer;
+                      setDcSelected(i);
+                      setDcAnswered({ correct, selected: i });
+                      sessionStorage.setItem(dcStorageKey, JSON.stringify({ correct, selected: i }));
+                      toast.show(correct ? '✅ Benar! Hebat!' : '❌ Salah — coba lagi besok');
+                    }}
+                      disabled={dcSelected !== null}
+                      style={{ padding: '8px 12px', fontSize: 12, fontFamily: 'inherit', borderRadius: 8, cursor: dcSelected !== null ? 'default' : 'pointer', textAlign: 'left', border: `1px solid ${dcSelected !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correctBorder)' : i === dcSelected ? 'var(--ssw-wrongBorder)' : 'var(--ssw-border)') : 'var(--ssw-border)'}`, background: dcSelected !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correctBg)' : i === dcSelected ? 'var(--ssw-wrongBg)' : 'var(--ssw-surface)') : 'var(--ssw-surface)', color: dcSelected !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correct)' : i === dcSelected ? 'var(--ssw-wrong)' : 'var(--ssw-textDim)') : 'var(--ssw-text)' }}>
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </Section>
+      )}
+
+      {/* F1: Achievement Badges */}
+      <Section title={`🏅 Pencapaian (${unlockedCount}/${achievements.length})`}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, padding: '8px 0' }}>
+          {achievements.map((a) => (
+            <div key={a.id} title={`${a.label}: ${a.desc}`}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: '10px 4px', borderRadius: 10, border: `1px solid ${a.unlocked ? 'var(--ssw-borderLight)' : 'var(--ssw-border)'}`, background: a.unlocked ? 'var(--ssw-surfaceHover)' : 'var(--ssw-surface)', opacity: a.unlocked ? 1 : 0.35, cursor: 'default', textAlign: 'center' }}>
+              <div style={{ fontSize: 22, filter: a.unlocked ? 'none' : 'grayscale(1)' }}>{a.icon}</div>
+              <div style={{ fontSize: 9, color: a.unlocked ? 'var(--ssw-textMuted)' : 'var(--ssw-textFaint)', lineHeight: 1.3, fontWeight: a.unlocked ? 700 : 400 }}>{a.label}</div>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       <Section title="SRS">
         <Row label="Matang"             value={mature}   sub="Interval ≥ 21 hari" />

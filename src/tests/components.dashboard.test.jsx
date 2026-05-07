@@ -81,27 +81,28 @@ describe('Dashboard', () => {
 
   describe('smart CTA logic', () => {
     it('shows SRS review CTA when dueCount > 0', () => {
-      render(<Dashboard {...defaultProps} srs={{ dueCount: 5 }} />);
-      expect(screen.getByText(/5 kartu siap diulang/)).toBeTruthy();
+      render(<Dashboard {...defaultProps} srs={{ dueCount: 20, stats: { mature: 0 } }} />);
+      // A2: recommendMode returns 'Ulasan SRS' for dueCount >= 20
+      expect(screen.getByText(/Ulasan SRS/)).toBeTruthy();
     });
 
     it('navigates to ulasan when SRS CTA clicked', () => {
       const onNavigate = vi.fn();
-      render(<Dashboard {...defaultProps} srs={{ dueCount: 5 }} onNavigate={onNavigate} />);
-      fireEvent.click(screen.getByText(/5 kartu siap diulang/));
+      render(<Dashboard {...defaultProps} srs={{ dueCount: 20, stats: { mature: 0 } }} onNavigate={onNavigate} />);
+      fireEvent.click(screen.getByText(/Ulasan SRS/));
       expect(onNavigate).toHaveBeenCalledWith('ulasan');
     });
 
-    it('shows Mulai dari Kartu when known is empty and no SRS due', () => {
-      render(<Dashboard {...defaultProps} known={new Set()} srs={{ dueCount: 0 }} />);
-      expect(screen.getByText(/Mulai dari Kartu/)).toBeTruthy();
+    it('shows Mode Kartu when known is empty and no SRS due', () => {
+      render(<Dashboard {...defaultProps} known={new Set()} srs={{ dueCount: 0, stats: { mature: 0 } }} />);
+      // A2: streak=0 → recommend kartu
+      expect(screen.getByText(/Mode Kartu/)).toBeTruthy();
     });
 
-    it('navigates to kartu when Mulai CTA clicked', () => {
+    it('navigates to kartu when Mode Kartu CTA clicked', () => {
       const onNavigate = vi.fn();
-      render(<Dashboard {...defaultProps} known={new Set()} srs={{ dueCount: 0 }} onNavigate={onNavigate} />);
-      // Click the CTA button (contains the label)
-      fireEvent.click(screen.getByText(/Mulai dari Kartu/));
+      render(<Dashboard {...defaultProps} known={new Set()} srs={{ dueCount: 0, stats: { mature: 0 } }} onNavigate={onNavigate} />);
+      fireEvent.click(screen.getByText(/Mode Kartu/));
       expect(onNavigate).toHaveBeenCalledWith('kartu');
     });
   });

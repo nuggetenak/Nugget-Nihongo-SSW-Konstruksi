@@ -1,14 +1,32 @@
 // ─── storage/migrations.js ───────────────────────────────────────────────────
 // Reads old v1 scattered localStorage keys → packs into 3 v2 documents.
 // Called once on first run after upgrade. Zero user disruption.
+// E4: safeGetDoc now decompresses lz-string if needed (v2→v3 migration compat).
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { DEFAULTS, STORAGE_VERSION } from './schema.js';
+import LZString from 'lz-string';
 
+// Read plain JSON key (v1 keys are never compressed)
 function safeGet(key, fallback = null) {
   try {
     const raw = localStorage.getItem(key);
     if (raw === null) return fallback;
+    return JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
+}
+
+// Read a v2/v3 engine doc key — tries lz decompress first, falls back to plain JSON (E4)
+function safeGetDoc(key, fallback = null) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    try {
+      const decompressed = LZString.decompressFromUTF16(raw);
+      if (decompressed) return JSON.parse(decompressed);
+    } catch {}
     return JSON.parse(raw);
   } catch {
     return fallback;
@@ -148,16 +166,15 @@ export function cleanup_v1_keys() {
 
 export function hasV2Data() {
   try {
-    const raw = localStorage.getItem('ssw-progress');
-    const parsed = raw ? JSON.parse(raw) : null;
+    const parsed = safeGetDoc('ssw-progress', null);
     return parsed?._v === 2;
   } catch { return false; }
 }
 
 export function migrate_v2_to_v3() {
-  const progress = safeGet('ssw-progress', {});
-  const srs = safeGet('ssw-srs-data', { _v: 2, cards: {} });
-  const prefs = safeGet('ssw-prefs', {});
+  const progress = safeGetDoc('ssw-progress', {});
+  const srs = safeGetDoc('ssw-srs-data', { _v: 2, cards: {} });
+  const prefs = safeGetDoc('ssw-prefs', {});
 
   // Bump version and add new progress fields
   progress._v = 3;

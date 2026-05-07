@@ -6,19 +6,19 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import ProgressRing from './ProgressRing.jsx';
+import { recommendMode } from '../utils/recommend-mode.js';
 
 const today = () => new Date().toISOString().slice(0, 10);
 const getStreak     = () => storageGet('progress')?.streakData  ?? { days: 0, lastDate: null };
 const getDailyCount = () => { const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' }; return dc.date === today() ? dc.count : 0; };
 const getRecent     = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
 
-function getQuickStart(knownN, pct, dueCount) {
-  if (dueCount > 0) return { icon: '🔁', label: `${dueCount} kartu siap diulang`, desc: 'Ulasan SRS hari ini',    mode: 'ulasan'   };
-  if (knownN === 0) return { icon: '🃏', label: 'Mulai dari Kartu',             desc: 'Pelajari istilah dasar',  mode: 'kartu'    };
-  if (pct < 20)     return { icon: '🃏', label: 'Lanjutkan Kartu',              desc: `${knownN} sudah hafal!`,  mode: 'kartu'    };
-  if (pct < 50)     return { icon: '❓', label: 'Coba Kuis',                    desc: 'Uji pemahaman kamu',      mode: 'kuis'     };
-  if (pct < 70)     return { icon: '📋', label: 'Soal JAC Official',            desc: 'Latihan soal ujian asli', mode: 'jac'      };
-  return               { icon: '🎯', label: 'Simulasi Ujian',             desc: 'Kamu sudah siap! 💪',     mode: 'simulasi' };
+// A2: Smart recommendation — replaces simple getQuickStart heuristics
+function getQuickStart(knownN, pct, dueCount, srs, examDate) {
+  const sessions = storageGet('progress')?.sessions ?? [];
+  const streak   = storageGet('progress')?.streakData?.days ?? 0;
+  const rec = recommendMode({ srsState: srs, sessions, streak, examDate });
+  return { icon: rec.icon, label: rec.label, desc: rec.reason, mode: rec.mode };
 }
 
 // Urgency tier for countdown card
@@ -48,12 +48,12 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
   const dailyCount  = useMemo(() => getDailyCount(), []);
   const recentIds   = useMemo(() => getRecent(), []);
   const recentCards = useMemo(() => recentIds.map((id) => CARDS.find((c) => c.id === id)).filter(Boolean).slice(0, 3), [recentIds]);
-  const qs          = getQuickStart(knownN, pct, dueCount);
-
   const examDate   = storageGet('prefs')?.examDate ?? null;
   const daysLeft   = examDate ? Math.ceil((new Date(examDate) - new Date()) / 86400000) : null;
   const showCountdown = daysLeft !== null && daysLeft >= 0 && daysLeft <= 60;
   const tier       = showCountdown ? getCountdownTier(daysLeft) : null;
+
+  const qs          = getQuickStart(knownN, pct, dueCount, srs, examDate);
 
   const mission     = useMemo(() => { try { return generateDailyMission(); } catch { return null; } }, []);
   const missionDone = useMemo(() => { try { return isMissionDoneToday(); } catch { return false; } }, []);

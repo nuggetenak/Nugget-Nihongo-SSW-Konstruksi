@@ -49,9 +49,9 @@ export default function FlashcardMode({
   const [touchStart, setTouchStart] = useState(null);
   const [swipeDelta, setSwipeDelta] = useState(0);
 
-  // Filter/sort
-  const [search, setSearch]             = useState('');
-  const [sortMode, setSortMode]         = useState('priority');
+  // Filter/sort — BUG-05: persist across mode switches via sessionStorage
+  const [search, setSearch]             = useState(() => sessionStorage.getItem('ssw-fc-search') ?? '');
+  const [sortMode, setSortMode]         = useState(() => sessionStorage.getItem('ssw-fc-sort') ?? 'priority');
   const [reviewBelum, setReviewBelum]   = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const confirmTimer                     = useRef(null);
@@ -216,7 +216,7 @@ export default function FlashcardMode({
       {/* Filter bar */}
       <FilterBar
         search={search}
-        onSearch={(v) => { setSearch(v); setIdx(0); }}
+        onSearch={(v) => { setSearch(v); sessionStorage.setItem('ssw-fc-search', v); setIdx(0); }}
         isStarred={isStarred}
         onToggleStar={() => onToggleStar(card?.id)}
       />
@@ -299,7 +299,7 @@ export default function FlashcardMode({
       {/* Tool strip */}
       <ToolStrip
         sortMode={sortMode}
-        onCycleSort={() => setSortMode((m) => m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority')}
+        onCycleSort={() => setSortMode((m) => { const next = m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority'; sessionStorage.setItem('ssw-fc-sort', next); return next; })}
         reviewBelum={reviewBelum}
         onToggleBelum={() => { setReviewBelum((r) => !r); setIdx(0); }}
         unknownInView={unknownInView}

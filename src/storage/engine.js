@@ -1,7 +1,6 @@
-// ─── storage/engine.js (phaseA) ───────────────────────────────────────────────
-// 3-document localStorage engine. Cold start: ~300ms → <20ms.
-// A.6: Auto-migrates v1→v3 and v2→v3 in addition to v1→v2.
-// Synchronous — no async, no Supabase, no window.storage.
+// ─── storage/engine.js (phaseA + E4) ──────────────────────────────────────────
+// E4: lz-string compression — writeDoc compresses, readDoc decompresses transparently.
+//     Falls back to uncompressed JSON if decompression fails (backward compat).
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
@@ -9,6 +8,7 @@ import {
   hasV1Data, migrate_v1_to_v2, cleanup_v1_keys,
   migrate_v2_to_v3,
 } from './migrations.js';
+import LZString from 'lz-string';
 
 // ── In-memory cache ────────────────────────────────────────────────────────
 let _cache = { progress: null, srs: null, prefs: null };
@@ -18,7 +18,13 @@ let _initialized = false;
 function readDoc(docKey) {
   try {
     const raw = localStorage.getItem(docKey);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    // E4: try decompressing first; fall back to plain JSON (backward compat)
+    try {
+      const decompressed = LZString.decompressFromUTF16(raw);
+      if (decompressed) return JSON.parse(decompressed);
+    } catch {}
+    return JSON.parse(raw);
   } catch {
     return null;
   }
@@ -26,7 +32,9 @@ function readDoc(docKey) {
 
 function writeDoc(docKey, data) {
   try {
-    localStorage.setItem(docKey, JSON.stringify(data));
+    // E4: compress before writing
+    const compressed = LZString.compressToUTF16(JSON.stringify(data));
+    localStorage.setItem(docKey, compressed);
   } catch {}
 }
 
