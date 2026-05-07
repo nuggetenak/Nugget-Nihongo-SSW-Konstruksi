@@ -706,23 +706,23 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📋 Roadmap Implementasi yang Disarankan
 
-### 🔧 Pre-Phase — Housekeeping (WAJIB DULU)
-> Selesaikan ini sebelum mulai Phase 5.1 apapun.
+### 🔧 Pre-Phase — Housekeeping ✅ SELESAI (2026-05-07)
 
-1. **Merge PR #7** — furigana ruby tap-to-toggle (tests passing, tinggal approve + merge)
-2. **Reconstruct CHANGELOG** — cek `git log` sejak commit terakhir v4.0.2, tulis entries untuk v4.1.x dan v4.2.0
-3. **Fix SayaTab footer** — update hardcoded `"v4.0.2"` → `"v4.2.0"`
-4. **Trigger deploy + verifikasi** — pastikan GitHub Pages serve versi terbaru
-5. **Re-triage proposal ini** — coret item yang sudah ter-cover oleh perubahan v4.1.x–v4.2.0 yang belum terdokumentasi
+1. ✅ **Merge PR #7** — sudah di main (commit `6a329e7`) sebelum sesi ini
+2. ✅ **Reconstruct CHANGELOG** — v4.1.0 + v4.2.0 sudah ditulis (sesi sebelumnya)
+3. ✅ **Fix SayaTab footer** — `v4.0.2` → `v4.2.0` (commit `532db6a`)
+4. ✅ **Trigger deploy** — GitHub Actions auto-trigger dari push
+5. ✅ **Re-triage** — BUG-04 (PR #7) dan BUG-02 (CHANGELOG) confirmed resolved
 
-### Phase 5.1 — Critical Gaps (Sprint 1–2 minggu)
-1. **R1** ReviewMode Session Summary Screen
-2. **A1** Wrong-Card Bridge (universal flow dari semua quiz ke FlashcardMode filtered)
-3. **K1** FlashcardMode swipe gesture untuk rating
-4. **SIM1** SimulasiMode pause + auto-pause on minimize
-5. **F1** FocusMode "Kenapa kategori ini?" explainer
-6. **ST2** Exam Readiness Score di StatsMode
-7. **E1** "Versi baru tersedia" SW prompt
+### Phase 5.1 — Critical Gaps ✅ SELESAI (2026-05-07, commit `c59d54e`)
+1. ✅ **R1** ReviewMode rating distribution pada done screen
+2. ✅ **A1** Wrong-Card Bridge — semua quiz → FlashcardMode filtered (kuis/jac/wayground/simulasi)
+3. ✅ **K1** FlashcardMode swipe gesture: kiri=Lagi, kanan=Oke, atas=Mudah
+4. ⏳ **SIM1** SimulasiMode pause + auto-pause on minimize — *belum dikerjakan*
+5. ✅ **F1** FocusMode "Kenapa kategori ini?" explainer panel
+6. ⏳ **ST2** Exam Readiness Score di StatsMode — *belum dikerjakan*
+7. ✅ **E1** "Versi baru tersedia" SW update prompt
+8. ✅ **S5/BUG-07** SprintMode wrong-tracker (bonus — dikerjakan bersamaan)
 
 ### Phase 5.2 — Content Expansion (Paralel dengan 5.1)
 1. **C1** Upload + ekstrak Chapter 2–4 (text2l, text3l, text4l) — id 631+
@@ -750,13 +750,13 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 | ID | File | Deskripsi | Prioritas |
 |----|------|-----------|-----------|
-| BUG-01 | `SayaTab.jsx` + deploy pipeline | **Version display stuck v4.0.2** — hardcoded footer string tidak ter-update ke v4.2.0 | 🔴 |
-| BUG-02 | `CHANGELOG.md` | **Missing changelog entries** — v4.1.x dan v4.2.0 tidak terdokumentasi | 🔴 |
-| BUG-03 | GitHub Actions / deploy | **Deployed app stale** — GitHub Pages masih serve v4.0.2 meski main sudah v4.2.0 | 🔴 |
-| BUG-04 | PR #7 | **Furigana tap-to-toggle menggantung** — PR open sejak 4 Mei, tests passing, belum di-merge | 🔴 |
+| BUG-01 | `SayaTab.jsx` + deploy pipeline | ~~**Version display stuck v4.0.2**~~ ✅ FIXED commit `532db6a` | 🔴 |
+| BUG-02 | `CHANGELOG.md` | ~~**Missing changelog entries**~~ ✅ FIXED (sesi sebelumnya) | 🔴 |
+| BUG-03 | GitHub Actions / deploy | **Deployed app stale** — verifikasi setelah CI jalan | 🔴 |
+| BUG-04 | PR #7 | ~~**Furigana tap-to-toggle menggantung**~~ ✅ FIXED sudah di main commit `6a329e7` | 🔴 |
 | BUG-05 | `FlashcardMode/FilterBar.jsx` | Filter tidak persist antar mode switch | 🔴 |
 | BUG-06 | `SimulasiMode.jsx` | Soal tidak ter-randomisasi dari semua jalur | 🔴 |
-| BUG-07 | `SprintMode.jsx` | Jawaban salah tidak masuk wrong-tracker | 🔴 |
+| BUG-07 | `SprintMode.jsx` | ~~**Jawaban salah tidak masuk wrong-tracker**~~ ✅ FIXED commit `c59d54e` | 🔴 |
 | BUG-08 | `GlossaryMode.jsx` | A-Z nav tidak menjangkau kata berawalan kanji | 🟠 |
 | BUG-09 | `SearchMode.jsx` | Tidak bisa search by furigana reading | 🟠 |
 | BUG-10 | `FlashcardMode/index.jsx` | flashcardHintCount tidak di-reset saat resetAll() | 🟡 |

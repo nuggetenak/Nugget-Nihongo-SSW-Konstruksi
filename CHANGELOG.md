@@ -1,3 +1,48 @@
+## [4.3.0] - 2026-05-07
+
+### Phase 5.1 — Critical Gaps (Agent Sonnet 4.6, commits `532db6a` + `c59d54e`)
+
+**Fix — SayaTab version string (BUG-01)**
+- `SayaTab.jsx`: hardcoded `v4.0.2` → `v4.2.0` (3 occurrences: sub prop, toast, footer JSX)
+
+**R1 — ReviewMode Rating Distribution**
+- Done screen sekarang tampilkan grid 4-cell: Lagi / Susah / Oke / Mudah dengan count per rating
+- `ratingDist` state tracked selama sesi, direset tiap sesi baru
+
+**A1 — Wrong-Card Bridge (universal)**
+- `AppContext.goMode(key, params?)` extended — opsional params object (e.g. `{ filterIds: [...] }`)
+- `modeParams` exposed di context; `exitMode` clears it
+- `ModeRouter`: `kartu` mode receives `filterIds` dari `modeParams`
+- `FlashcardMode`: accepts `filterIds` prop — filters `baseCards`, shows red banner "Latihan kartu salah"
+- `QuizShell`: tracks `_cardId` per result; `onRetryWrong(ids)` prop navigates ke filtered kartu
+- `QuizMode`: forwards `onRetryWrong` prop ke QuizShell
+- Modes wired: `kuis`, `jac`, `wayground`, `simulasi`
+
+**K1 — FlashcardMode Swipe Gesture untuk Rating**
+- `touchStart` now `{x, y}` object untuk track dua axis
+- Saat flipped + belum rated: swipe kiri=Lagi(1), kanan=Oke(3), atas=Mudah(4); threshold 60px, dominant axis check
+- Swipe navigasi kartu tetap berfungsi saat belum flip
+- Hint "← Lagi · Oke → · ↑ Mudah" tampil di bawah kartu saat flipped
+
+**S5/BUG-07 — SprintMode Wrong-Tracker**
+- `handleDontKnow` sekarang nulis `makeWrongEntry` ke `prefs.quizWrong`
+- FocusMode dan mode lain yang baca `quizWrong` kini dapat data dari Sprint
+
+**F1 — FocusMode "Kenapa Kategori Ini?" Explainer**
+- Panel info ditampilkan sebelum sprint dimulai: nama kategori, akurasi %, stats hafal/salah
+- 3 tier pesan kontekstual: <40% / 40-70% / ≥70%
+
+**E1 — SW Update Prompt**
+- `index.html` SW registration: `updatefound` + `statechange` listener
+- Amber banner fixed di `bottom: 80px` dengan tombol "Perbarui" (reload untuk aktivasi SW baru)
+
+**Docs**
+- `docs/SSW_UPGRADE_PROPOSAL_v1.md`: Pre-Phase + Phase 5.1 ditandai ✅; Bug Registry diupdate
+
+**Tests**: 376/376 passing (tidak ada regresi)
+
+---
+
 ## [4.2.0] - 2026-05-07
 
 ### Test Fix + New Modes (Agent Sonnet 4.6, commit post-61e159e)
