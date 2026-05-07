@@ -3,11 +3,13 @@
 // Note: lulus banner bg/border/color conditional on pass/fail — justified inline.
 // Note: progress fill gradient conditional on pass/fail — justified inline.
 // Note: red gradient buttons (exam theme) — justified inline (not amber).
+// Note: pause overlay bg — justified inline (full-screen dim).
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
+import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import OptionButton from '../components/OptionButton.jsx';
 import S from './modes.module.css';
@@ -23,6 +25,33 @@ const PRESETS = [
 const INSTRUCTIONS = ['📋 Pilih satu jawaban yang paling tepat', '⏱ Timer berjalan — jangan sampai habis', '🚫 Soal otomatis lanjut setelah kamu jawab', `✅ ${PASS_PCT}% ke atas = LULUS`];
 function fmtTime(sec) { const m = Math.floor(sec / 60); const s = sec % 60; return `${m}:${String(s).padStart(2, '0')}`; }
 
+// Normalize JAC and Wayground questions to a common shape
+function buildPool() {
+  const jacNorm = JAC_OFFICIAL.map((q) => ({
+    jp: q.jp,
+    id_text: q.id_text,
+    options: q.options,  // string[]
+    answer: q.answer,    // 0-based index into options
+    explanation: q.explanation,
+    hasPhoto: q.hasPhoto,
+    photoDesc: q.photoDesc,
+  }));
+
+  const wayNorm = WAYGROUND_SETS.flatMap((set) =>
+    (set.questions || []).map((q) => ({
+      jp: q.q,
+      id_text: q.hint || null,
+      options: q.opts,    // string[]
+      answer: q.ans,      // 0-based index into opts
+      explanation: q.exp || null,
+      hasPhoto: false,
+      photoDesc: null,
+    }))
+  );
+
+  return [...jacNorm, ...wayNorm];
+}
+
 export default function SimulasiMode({ onExit, onSessionEnd }) {
   const [phase, setPhase] = useState('start');
   const [preset, setPreset] = useState('quick');
@@ -31,13 +60,14 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
   const [selected, setSelected] = useState(null);
   const [results, setResults] = useState([]);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
 
   const config = PRESETS.find((p) => p.key === preset) || PRESETS[0];
 
   const questions = useMemo(() => {
     if (phase !== 'playing') return [];
-    const pool = shuffle(JAC_OFFICIAL);
+    const pool = shuffle(buildPool());
     const items = config.count > 0 ? pool.slice(0, config.count) : pool;
     return items.map((q) => {
       const shuffledOpts = shuffle(q.options.map((text, origIdx) => ({ text, origIdx })));
@@ -48,11 +78,18 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
 
+  // Auto-pause on tab/app hide
   useEffect(() => {
-    if (phase !== 'playing') { clearInterval(timerRef.current); return; }
+    const handleVisibility = () => { if (document.hidden && phase === 'playing') setPaused(true); };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== 'playing' || paused) { clearInterval(timerRef.current); return; }
     timerRef.current = setInterval(() => { setTimeLeft((t) => { if (t <= 1) { clearInterval(timerRef.current); setPhase('result'); return 0; } return t - 1; }); }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [phase, seed]);
+  }, [phase, seed, paused]);
 
   useEffect(() => {
     if (selected === null || phase !== 'playing') return;
@@ -67,14 +104,14 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleStart = useCallback(() => { setSeed((s) => s + 1); setQIdx(0); setSelected(null); setResults([]); setTimeLeft(config.time); setPhase('playing'); }, [config.time]);
+  const handleStart = useCallback(() => { setSeed((s) => s + 1); setQIdx(0); setSelected(null); setResults([]); setTimeLeft(config.time); setPaused(false); setPhase('playing'); }, [config.time]);
 
   const handleSelect = useCallback((optArrayIdx) => {
-    if (selected !== null || phase !== 'playing' || !q) return;
+    if (selected !== null || phase !== 'playing' || paused || !q) return;
     setSelected(optArrayIdx);
     const isCorrect = optArrayIdx === q.correctIdx;
     setResults((r) => [...r, { isCorrect, jp: q.jp, id_text: q.id_text, opts: q.opts, correctIdx: q.correctIdx, userIdx: optArrayIdx, explanation: q.explanation }]);
-  }, [selected, phase, q]);
+  }, [selected, phase, paused, q]);
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
 
@@ -177,6 +214,14 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>✕ Keluar</button>
         <div className={S.row} style={{ gap: 10 }}>
+          {/* Pause button */}
+          <button
+            onClick={() => setPaused((p) => !p)}
+            style={{ ...RED_BTN, padding: '6px 12px', fontSize: 14, background: paused ? 'linear-gradient(135deg,#1e3a5f,#2563eb)' : 'linear-gradient(135deg,#7f1d1d,#dc2626)' }}
+            aria-label={paused ? 'Lanjutkan' : 'Jeda'}
+          >
+            {paused ? '▶' : '⏸'}
+          </button>
           <div
             className={SM.timerBox}
             style={{
@@ -215,6 +260,18 @@ export default function SimulasiMode({ onExit, onSessionEnd }) {
         <button style={{ ...RED_BTN, width: '100%', marginTop: 12, padding: '13px', animation: 'fadeIn 0.15s ease' }} onClick={() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }}>
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
+      )}
+
+      {/* Pause overlay */}
+      {paused && (
+        <div
+          onClick={() => setPaused(false)}
+          style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(0,0,0,0.72)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12, cursor: 'pointer' }}
+        >
+          <div style={{ fontSize: 48 }}>⏸</div>
+          <div style={{ color: '#fff', fontSize: 20, fontWeight: 700 }}>Dijeda</div>
+          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14 }}>Ketuk untuk lanjut</div>
+        </div>
       )}
     </div>
   );

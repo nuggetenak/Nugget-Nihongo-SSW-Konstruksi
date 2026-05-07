@@ -2,13 +2,40 @@
 // Note: miniValue colors are dynamic per card type (T.gold/T.correct/#60a5fa) — kept inline.
 // Note: catPct color is dynamic threshold-based (≥70/≥40) — kept inline.
 // Note: chartBar height/background/border/opacity are fully dynamic — kept inline.
+// Note: readinessRing stroke color is threshold-based (red/amber/green) — kept inline.
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import ProgressRing from '../components/ProgressRing.jsx';
 import S from './modes.module.css';
 import ST from './StatsMode.module.css';
+
+function calcReadiness({ srs, sessions = [], streakData }) {
+  const matureCards = srs?.stats?.mature ?? 0;
+  const totalCards = CARDS.length || 1;
+  const streak = streakData?.days ?? 0;
+
+  const quizSessions = sessions.filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode));
+  const avgQuizAccuracy = quizSessions.length > 0
+    ? quizSessions.reduce((acc, s) => acc + (s.total > 0 ? (s.correct / s.total) * 100 : 0), 0) / quizSessions.length
+    : 0;
+
+  const simSessions = sessions.filter((s) => s.mode === 'simulasi');
+  const bestSimScore = simSessions.length > 0
+    ? Math.max(...simSessions.map((s) => (s.total > 0 ? (s.correct / s.total) * 100 : 0)))
+    : 0;
+
+  const readiness = (
+    (matureCards / totalCards) * 40 +
+    (avgQuizAccuracy / 100) * 35 +
+    (Math.min(streak, 14) / 14) * 15 +
+    (bestSimScore > 65 ? bestSimScore / 100 : 0) * 10
+  ) * 100;
+
+  return Math.min(100, Math.round(readiness));
+}
 
 export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakData, sessions = [], onExit }) {
   const total = CARDS.length;
@@ -17,6 +44,10 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
   const untouched = total - knownN - unknownN;
   const pct = Math.round((knownN / total) * 100);
   const streak = streakData?.days ?? 0;
+
+  const readiness = calcReadiness({ srs, sessions, streakData });
+  const ringColor = readiness >= 75 ? T.correct : readiness >= 50 ? T.gold : T.wrong;
+  const readinessLabel = readiness >= 75 ? 'Siap Ujian! 🎉' : readiness >= 50 ? 'Hampir Siap' : 'Belum Siap';
 
   const catStats = CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')
     .map((cat) => {
@@ -42,6 +73,23 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
       <h2 className={S.pageTitle} style={{ marginBottom: 16 }}>📊 Statistik</h2>
+
+      {/* Exam Readiness Score */}
+      <div className={`${S.cardLg} ${ST.overviewCard}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, paddingBottom: 20 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1, color: T.textDim, textTransform: 'uppercase', marginBottom: 4 }}>Kesiapan Ujian</div>
+        {/* Render ProgressRing with dynamic color via CSS var override */}
+        <div style={{ '--ssw-ringColor': ringColor, position: 'relative' }}>
+          <svg width={140} height={140} style={{ position: 'absolute', top: 0, left: 0, transform: 'rotate(-90deg)', zIndex: 2 }}>
+            <circle cx={70} cy={70} r={60} fill="none" stroke={ringColor} strokeWidth={10} strokeLinecap="round"
+              strokeDasharray={2 * Math.PI * 60}
+              strokeDashoffset={2 * Math.PI * 60 * (1 - readiness / 100)}
+              style={{ transition: 'stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1), stroke 0.5s' }}
+            />
+          </svg>
+          <ProgressRing current={readiness} total={100} size={140} stroke={10} label={readinessLabel} />
+        </div>
+        <div style={{ fontSize: 13, color: ringColor, fontWeight: 700, marginTop: 2 }}>{readinessLabel}</div>
+      </div>
 
       {/* Overview */}
       <div className={`${S.cardLg} ${ST.overviewCard}`}>
