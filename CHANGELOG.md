@@ -1,3 +1,23 @@
+## [4.2.0] - 2026-05-07
+
+### Test Fix + New Modes (Agent Sonnet 4.6, commit post-61e159e)
+
+**Fix — CSS Module Mock in Test Files**
+- `BottomNav.test.jsx` and `Toast.test.jsx`: `vi.mock('*.module.css', () => ({}))` was missing a `default` export, causing all 15 tests to fail with "No default export" error
+- Fixed by returning `{ default: new Proxy({}, { get: (_, k) => k }) }` — all 376 tests now green
+
+**New Modes (from prior session commit 61e159e)**
+- `ProductionMode` (`produksi`): ID→JP active recall with text input; registered in latihan
+- `ConfusionMode` (`mirip`): 28 confusion pairs VLT-style (音/字/意); registered in latihan
+- Mode count: 18 → 20
+
+**Docs**
+- `_MAP.md`: ProductionMode + ConfusionMode added to directory structure; metrics updated (v4.2.0, 20 modes)
+- `docs/BLUEPRINT-CURRENT.md`: v4.2.0 section added; ProductionMode + ConfusionMode marked complete in open items
+- `package.json`: version bumped to 4.2.0
+
+---
+
 ## [4.1.0] - 2026-05-07
 
 ### FE Sprint — CSS Modules, A11y, Robustness, DX, PWA, UX Polish (Agent Sonnet 4.6)

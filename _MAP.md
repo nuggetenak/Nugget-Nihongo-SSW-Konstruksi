@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-07 by Agent Sonnet 4.6 (FE sprint + full repo hygiene)
-> **Version:** v4.1.0 — Phases A–G + CS-01–05 + FE-01–09 complete; 383+ tests
+> **Last updated:** 2026-05-07 by Agent Sonnet 4.6 (v4.2.0 — test fix + docs update)
+> **Version:** v4.2.0 — Phases A–G + CS-01–05 + FE-01–09 + test fix complete; 376+ tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
 
@@ -145,6 +145,8 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── StatsMode.jsx           ← CSS module (FE-01-B)
     │   ├── GlossaryMode.jsx        ← CSS module (FE-01-C); IntersectionObserver intact
     │   ├── SipilMode.jsx, BangunanMode.jsx
+    │   ├── ProductionMode.jsx      ← ID→JP active recall with text input (v4.2.0)
+    │   ├── ConfusionMode.jsx       ← 28 confusion pairs VLT-style (音/字/意) (v4.2.0)
     │   ├── SearchMode.jsx          ← useDebounce applied (FE-05-C); track-aware
     │   ├── ExportMode.jsx
     │   ├── SumberMode.jsx
@@ -180,10 +182,10 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.1.0** |
+| Version | **4.2.0** |
 | Tests | **383+** (34 files — ResultScreen.test.jsx deduped) |
 | Prod dependencies | **3** (react, react-dom, ts-fsrs) |
-| Modes | **18** (all React.lazy) |
+| Modes | **20** (all React.lazy) |
 | Flashcards | **1,438** |
 | Quiz questions | **~860** (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Storage schema | **v3** |
@@ -283,3 +285,4 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-07 | Sonnet 4.6 | FE-01–09: CSS modules, reduced motion, design tokens, a11y, error boundaries, offline banner, debounce, toast upgrade, 22 new tests, path alias, types, PWA install, SW update toast, haptics, scroll restore, View Transitions |
 | 2026-05-07 | Sonnet 4.6 | Hygiene pass 1: outputs/ untracked, stale branch deleted, barrel exports, gitignore, CI improved, version → 4.1.0, _MAP + CHANGELOG updated |
 | 2026-05-07 | Sonnet 4.6 | Hygiene pass 2: blueprint archived → BLUEPRINT-CURRENT.md; README rewritten; ARCHIVE-INDEX created; one-shot scripts → scripts/archive/; duplicate ResultScreen.test removed; CHANGELOG compacted 739→326 lines; eslint/prettier ignore scripts/archive/ |
+| 2026-05-07 | Sonnet 4.6 | v4.2.0: fixed BottomNav.test + Toast.test CSS module mock (vi.mock → default Proxy); bumped to 20 modes; docs updated (MAP, BLUEPRINT-CURRENT, CHANGELOG) |

@@ -1,7 +1,7 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.1.0)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.2.0)
 
 > **Status:** ALL PHASES COMPLETE ✅
-> **Version:** 4.1.0
+> **Version:** 4.2.0
 > **Last updated:** 2026-05-07
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -17,7 +17,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 |-----------|-------|
 | Flashcards | 1,438 (curated, type-annotated, ruby-rendered) |
 | Quiz questions | ~860 (JAC + Wayground + CSV + Sipil + Bangunan) |
-| Modes | 18 (all React.lazy) |
+| Modes | 20 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 383+ (35 files) |
 | Prod deps | 3 (react, react-dom, ts-fsrs) |
@@ -62,9 +62,17 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | FE-08 | PWA install prompt (SayaTab), SW_UPDATED toast (sw.js + App.jsx) |
 | FE-09 | haptic.js, scroll restoration, View Transitions API |
 
+### v4.2.0 — Test Fix + New Modes
+
+| Item | Deliverable |
+|------|-------------|
+| Fix | BottomNav.test.jsx + Toast.test.jsx: CSS module mock → `{ default: new Proxy({}, { get: (_, k) => k }) }` |
+| ProductionMode | ID→JP active recall with text input (`produksi`), registered in latihan |
+| ConfusionMode | 28 confusion pairs VLT-style (音/字/意) (`mirip`), registered in latihan |
+
 ---
 
-## Open Items / Known Gaps (Post v4.1.0)
+## Open Items / Known Gaps (Post v4.2.0)
 
 These are honest assessments — not blocking anything, but relevant for future work:
 
@@ -75,8 +83,8 @@ These are honest assessments — not blocking anything, but relevant for future 
 
 ### Technical / Token Audit
 - **FE-03 token audit**: 8+ locations in component CSS still use hardcoded values (z-index, shadow, transition values) instead of new CSS tokens. Flagged with comments in `global.css`. Low urgency — cosmetic consistency only.
-- **Production mode (ID→JP)**: Output Hypothesis demands active production practice. Currently all quiz modes are JP→ID recognition only. A dedicated ID→JP input mode would address this gap. Documented but not implemented.
-- **ConfusionMode / VLT placement test**: Documented in v5/v6 blueprints. Still not implemented.
+- ~~**Production mode (ID→JP)**~~: ✅ Implemented as ProductionMode (`produksi`) in v4.2.0.
+- ~~**ConfusionMode / VLT placement test**~~: ✅ Implemented as ConfusionMode (`mirip`) with 28 pairs in v4.2.0.
 
 ### Architecture
 - **Category mismatch**: `jenis_kerja` and `alat_umum` categories contain lifeline content even for sipil/bangunan track users. Re-categorization would require content review of ~485 cards.

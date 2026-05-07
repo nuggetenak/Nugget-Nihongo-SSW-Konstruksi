@@ -3,7 +3,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import BottomNav from '../components/BottomNav.jsx';
 
-vi.mock('../components/BottomNav.module.css', () => ({}));
+vi.mock('../components/BottomNav.module.css', () => ({
+  default: new Proxy({}, { get: (_, key) => key }),
+}));
 
 const TABS = ['home', 'belajar', 'saya'];
 
