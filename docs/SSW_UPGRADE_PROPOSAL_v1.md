@@ -1,0 +1,820 @@
+# 🪖 SSW Konstruksi — Audit & Upgrade Proposal
+**Versi Proposal:** v2 | **Tanggal Audit:** 2026-05-07 | **Auditor:** Claude Sonnet 4.6
+
+---
+
+## 🚨 VERSION DISCREPANCY — Analisis & Resolusi
+
+> Ditemukan dalam audit lanjutan. Harus diselesaikan **sebelum** pekerjaan upgrade apapun dimulai.
+
+### Situasi Saat Ini
+
+| Sumber | Versi | Status |
+|--------|-------|--------|
+| `package.json` (main branch) | **v4.2.0** | ✅ Source of truth |
+| App yang dideploy (GitHub Pages) | **v4.0.2** | ❌ Stale — belum terupdate |
+| `CHANGELOG.md` entry terakhir | **v4.0.2** | ❌ Missing v4.1.x + v4.2.0 |
+| `SayaTab.jsx` footer string | **v4.0.2** | ❌ Hardcoded, tidak ter-update |
+| PR #7 (furigana ruby tap-to-toggle) | branch `codex/debug-before-deploy-v3jue1` | ⏳ Open, belum di-merge ke main |
+
+### Root Cause
+
+Dua masalah terpisah yang muncul bersamaan:
+
+**Masalah 1 — "Ghost Version":** Agent terakhir bump `package.json` ke v4.2.0 di `main`, tapi **tidak** memperbarui:
+- `CHANGELOG.md` — tidak ada entry untuk v4.1.x dan v4.2.0, sehingga tidak diketahui apa yang berubah
+- `SayaTab.jsx` footer — masih hardcoded `"v4.0.2"` (pola yang sama dilakukan saat v4.0.0 di-release)
+- Deploy tidak terpicu atau pipeline belum jalan setelah bump versi terakhir
+
+**Masalah 2 — PR Menggantung:** PR #7 (furigana ruby parsing + tap policy + `aria-pressed`) sudah siap dengan test yang passing, tapi belum di-merge. Fitur ini relevan dengan proposal karena beberapa item proposal (terutama furigana UX) berasumsi feature ini sudah ada di main.
+
+### Tindakan Resolusi yang Diperlukan
+
+```
+Urutan wajib sebelum lanjut ke upgrade:
+
+1. [ ] Merge PR #7 ke main (setelah review — tests passing)
+2. [ ] Tulis CHANGELOG entries untuk v4.1.x dan v4.2.0
+       (lihat git log main sejak v4.0.2 untuk reconstruct changes)
+3. [ ] Update SayaTab.jsx footer: "v4.0.2" → "v4.2.0"
+4. [ ] Trigger deploy / verifikasi GitHub Actions ran
+5. [ ] Verifikasi app live menampilkan v4.2.0
+6. [ ] Bump CACHE_VERSION di sw.js agar SW invalidate
+```
+
+### Dampak ke Proposal Ini
+
+Beberapa temuan dalam proposal perlu direvisi setelah status sebenarnya v4.2.0 diketahui:
+
+- **Furigana policy items** (K4, Q3, dll.) — PR #7 menambahkan mode `tap` ke `furiganaPolicy` (always/tap/hidden). Jika PR di-merge, beberapa item ini sudah terselesaikan sebagian.
+- **CHANGELOG gap** — tidak diketahui persis apa yang berubah antara v4.0.2 → v4.2.0. Mungkin ada fixes atau fitur yang sudah ada tapi belum terdokumentasi.
+
+**Rekomendasi:** Setelah merge PR #7 dan reconstruct CHANGELOG, lakukan re-triage proposal ini untuk mencoret item yang sudah terselesaikan.
+
+---
+
+## 📋 Ringkasan Eksekutif
+
+App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (v4.2.0 di source, v4.0.2 di deployed) dengan 15 mode, 321+ test, FSRS engine, PWA, CI/CD, dan 1.438 kartu. Kualitas teknis sangat baik.
+
+**Hasil audit ini menemukan 6 kategori peningkatan:**
+- **A** — Alur Lintas Mode (cross-mode flow gaps)
+- **B** — Penguatan Mode Belajar yang ada
+- **C** — Konten & Data Pipeline
+- **D** — Mode Baru yang direkomendasikan
+- **E** — Teknis & Infrastruktur
+- **F** — Gamifikasi & Motivasi
+
+**Skala prioritas:** 🔴 Kritis · 🟠 Tinggi · 🟡 Sedang · 🟢 Nice-to-have
+
+---
+
+## 🔍 Analisis Per-Mode
+
+### 1. 🔁 Ulasan SRS (ReviewMode)
+
+**Kondisi saat ini:** Auto-speak on card advance (D5), 🔊 manual replay (C1), FSRS 4-button rating.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| R1 | Tidak ada **session summary screen** — mode berakhir tiba-tiba setelah kartu terakhir | Gap | 🔴 |
+| R2 | Tidak ada indikator "kenapa kartu ini muncul sekarang" — interval/due-reason tidak ditampilkan | UX | 🟠 |
+| R3 | Audio auto-speak pada card advance bisa mengganggu jika user belum siap — perlu opsi **"speak on flip"** bukan pada advance | Refinement | 🟡 |
+| R4 | Tidak ada shortcut untuk **"skip card"** tanpa menilai (berguna untuk kartu baru yang belum dipelajari konteksnya) | UX | 🟡 |
+| R5 | Queue tidak menampilkan **jumlah kartu tersisa** secara live di header | UX | 🟢 |
+
+**Rekomendasi R1 (kritis):** Tambahkan `ReviewSummaryScreen` setelah sesi selesai: kartu ditinjau, distribusi rating (Again/Hard/Ok/Easy), estimated next due count, CTA "Lanjut ke Kartu" atau "Kembali".
+
+---
+
+### 2. 🃏 Kartu (FlashcardMode)
+
+**Kondisi saat ini:** Decomposed ke 5 subcomponen, 3D flip, FSRS rating, search, star, furigana policy.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| K1 | **Swipe left/right untuk rating** belum diimplementasi — hanya tilt visual; users di Android mengharapkan swipe-to-rate | Gap | 🔴 |
+| K2 | Tidak ada mode **"Hanya Baca"** — kadang user hanya ingin membaca kartu tanpa menilai (review pasif) | Feature | 🟠 |
+| K3 | `FilterBar` menerima input tapi tidak persist filter antar-sesi (hilang saat ganti mode) | Bug | 🟠 |
+| K4 | **"Tap untuk balik"** hint disimpan di `prefs.flashcardHintCount` — tapi hint tidak muncul lagi setelah reset data; perlu reset saat `resetAll()` | Bug | 🟡 |
+| K5 | Tidak ada tombol **"Tambah ke SRS manual"** untuk kartu yang sudah `known` tapi user ingin direview ulang | Feature | 🟡 |
+| K6 | Category pill di front card tidak bisa di-tap untuk filter langsung (missed affordance) | UX | 🟢 |
+
+**Rekomendasi K1 (kritis):** Implementasi swipe gesture di `FlipCard.jsx` — swipe kiri = "Lagi" (1), swipe kanan = "Oke" (3), swipe atas = "Mudah" (4). Sudah ada `swipeTilt` infrastructure, tinggal wire ke rating callback.
+
+---
+
+### 3. ❓ Kuis (QuizMode)
+
+**Kondisi saat ini:** Furigana policy, seenPool fix (A1), 3 difficulty levels, lemah mode, auto-next.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| Q1 | Tidak ada **mode produksi** — semua kuis adalah recognition (pilih jawaban), bukan production (tulis/recall jawaban). Blueprint C-10 menyebut ini tapi belum diimplementasi | Gap | 🔴 |
+| Q2 | Setelah quiz selesai, tidak ada **"Pelajari yang Salah"** CTA yang membuka FlashcardMode terfilter ke kartu yang salah dalam sesi itu | Gap | 🔴 |
+| Q3 | Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret? | UX | 🟠 |
+| Q4 | Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya | UX | 🟡 |
+| Q5 | Tidak ada **"Quiz per Kategori"** — user hanya bisa filter lewat track, tidak bisa pilih "latih hanya K3" misalnya | Feature | 🟡 |
+| Q6 | Wrong-answer explanation (`DescBlock`) tidak selalu ada di semua kartu — perlu audit coverage | Data | 🟡 |
+
+**Rekomendasi Q2 (kritis):** Setelah `ResultScreen`, pass `wrongCardIds` ke parent. "Latih X salah" CTA yang sudah ada di ResultScreen harusnya navigate ke FlashcardMode dengan `filterIds={wrongCardIds}`. Saat ini CTA ada tapi navigasinya belum ter-wire ke filtered set.
+
+---
+
+### 4. ⚡ Sprint (SprintMode)
+
+**Kondisi saat ini:** Personal best (M2), session recording (B3), 60 detik, audio/furigana props.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| S1 | Sprint hanya 60 detik flat — tidak ada opsi durasi (30s/60s/90s/120s) | Feature | 🟠 |
+| S2 | Tidak ada **category lock** — semua kartu dari jalur aktif dicampur; tidak bisa sprint fokus satu topik | Feature | 🟠 |
+| S3 | Visual countdown tidak **eskalasi** — detik terakhir harusnya lebih dramatis (color change, pulse) | UX | 🟡 |
+| S4 | Personal best hanya tersimpan per-device dan tidak dibanding dengan session sebelumnya secara visual | UX | 🟡 |
+| S5 | Sprint tidak menambah kartu yang salah ke wrong-tracker — missed opportunity untuk feedback loop | Bug | 🟠 |
+
+**Rekomendasi S5 (bug):** Wire `useWrongTracker` ke Sprint answer handler. Tiap kartu yang salah dalam sprint harus `incrementWrong(cardId)` — saat ini sprint tidak menulis ke wrong-tracker sehingga FocusMode tidak bisa "belajar dari kesalahan sprint".
+
+---
+
+### 5. 🎯 Fokus (FocusMode)
+
+**Kondisi saat ini:** Session recording (C3), wrap inner SprintMode, auto-pilih kategori terlemah.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| F1 | UI tidak menampilkan **"Kenapa kategori ini?"** — user tidak tahu mengapa sistem memilih kategori X sebagai terlemah | UX | 🔴 |
+| F2 | Setelah satu sesi Sprint selesai, FocusMode tidak otomatis **pindah ke kategori terlemah berikutnya** | Gap | 🟠 |
+| F3 | Tidak ada visual progress "kamu sudah melatih N dari M kategori lemah hari ini" | UX | 🟡 |
+
+**Rekomendasi F1 (kritis):** Sebelum mulai drill, tampilkan panel: "Kategori terlemah kamu: **[Nama Kategori]** — Akurasi: XX% (N salah dari M soal terakhir)". Ini penting secara pedagogis — andragogi mensyaratkan learner memahami *mengapa* mereka belajar sesuatu.
+
+---
+
+### 6. 📋 JAC Official (JACMode)
+
+**Kondisi saat ini:** Score tracking per set, last-score badge, lemah filter, auto-delay.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| J1 | Kartu yang salah di JACMode **tidak masuk ke SRS queue** — user harus latih manual, tidak ada loop balik | Gap | 🔴 |
+| J2 | Tidak ada **"Simulasi chapter"** — user tidak bisa mensimulasikan ujian hanya dari bab tertentu | Feature | 🟠 |
+| J3 | Score badge di picker hanya tampilkan persentase terakhir, bukan **best score** | UX | 🟡 |
+| J4 | Soal JAC tidak punya tag chapter/bab — sulit tahu soal mana yang dari bab mana | Data | 🟠 |
+
+**Rekomendasi J1 (kritis):** Setelah JACMode selesai, tawarkan "Tambah X soal salah ke Ulasan SRS?" → jika iya, buat SRS card sementara dari soal JAC yang salah. Ini menutup loop antara exam prep dan vocabulary reinforcement.
+
+---
+
+### 7. 🎓 Wayground (WaygroundMode)
+
+**Kondisi saat ini:** Score + maxStreak per set, badges, CSV Teori + CSV Praktik terintegrasi.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| W1 | **CSV Teori vs CSV Praktik** tidak cukup jelas dibedakan secara visual di picker | UX | 🟠 |
+| W2 | Tidak ada **"review hanya salah"** per-set — user harus ulangi set penuh | Gap | 🟠 |
+| W3 | Set yang belum pernah dikerjakan tidak diberi badge/tag "Belum Dikerjakan" yang jelas | UX | 🟡 |
+| W4 | WaygroundMode tidak menampilkan **total score** lintas semua set — hanya per-set | UX | 🟡 |
+| W5 | Tidak ada urutan saran — set mana yang sebaiknya dikerjakan lebih dulu? | Feature | 🟡 |
+
+---
+
+### 8. 🎯 Simulasi (SimulasiMode)
+
+**Kondisi saat ini:** Big timer, LULUS/BELUM LULUS (65% threshold), wrong review, standalone tanpa QuizShell.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| SIM1 | Tidak ada **pause button** — sekali mulai, tidak bisa berhenti (tidak realistis untuk mobile UX) | Gap | 🔴 |
+| SIM2 | Kartu simulasi tidak **ter-randomisasi dari semua jalur** — harusnya mensimulasikan kondisi ujian sebenarnya | Bug | 🔴 |
+| SIM3 | Setelah simulasi, kartu salah tidak **dieksport ke SRS atau Fokus** | Gap | 🟠 |
+| SIM4 | Tidak ada **post-exam analysis** — breakdown per kategori (berapa % K3, berapa % hukum, dll.) | Feature | 🟠 |
+| SIM5 | Timer tidak menampilkan perkiraan **"N soal/menit yang dibutuhkan"** | UX | 🟡 |
+
+**Rekomendasi SIM1 + SIM2 (kritis):** Pause via `document.hidden` visibility API (jika user minimize app, pause otomatis). Untuk randomisasi: pastikan soal simulasi diambil dari semua jalur aktif user (saat ini kemungkinan hanya dari jalur default).
+
+---
+
+### 9. 🔢 Angka Kunci (AngkaMode)
+
+**Kondisi saat ini:** Session end recording (C4), quiz + browse panel, 5 topik grup.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| AK1 | Tidak ada **mnemonic/memory hook** per angka — angka seperti "450°C" atau "2m" mudah tertukar tanpa konteks hafalan | Content | 🟠 |
+| AK2 | Mode browse tidak menampilkan angka dalam **konteks kalimat soal** — hanya label + nilai | UX | 🟡 |
+| AK3 | Tidak ada **"tulis angkanya"** — quiz hanya recognition, padahal ujian JAC kadang minta recall angka spesifik | Feature | 🟡 |
+
+---
+
+### 10. ⚠️ Soal Jebak (DangerMode)
+
+**Kondisi saat ini:** Browse accordion, quiz dengan after-answer pair comparison, session end (C4).
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| D1 | Tidak ada **penjelasan linguistik** "kenapa keduanya sering tertukar" — hanya menampilkan pasangan, tidak mengajarkan perbedaannya | Content | 🟠 |
+| D2 | Pasangan jebak tidak dikategorikan by confusion type (bunyi mirip / kanji mirip / makna mirip) | Data | 🟡 |
+| D3 | Setelah quiz, pasangan yang salah tidak dimasukkan ke review pool khusus | Gap | 🟡 |
+
+---
+
+### 11. 🔍 Cari (SearchMode)
+
+**Kondisi saat ini:** Track-aware (C2), starring (D9), search meta shows pool size.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| SR1 | Tidak ada **search history** — user sering mencari kata yang sama berulang kali | Feature | 🟠 |
+| SR2 | Tidak bisa search by **furigana reading** — ketik "あんぜん" tidak menemukan kartu "安全" | Bug | 🟠 |
+| SR3 | Tidak ada **"Copy ke Clipboard"** untuk definisi/terjemahan | Feature | 🟢 |
+| SR4 | Hasil pencarian tidak menampilkan **akurasi user** untuk kartu itu (% benar/salah) | Feature | 🟡 |
+
+---
+
+### 12. 📖 Glosari (GlossaryMode)
+
+**Kondisi saat ini:** A-Z hiragana nav, IntersectionObserver sync, category filter dengan count badge.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| G1 | Tidak ada **audio per entry** — Glosari adalah tempat ideal untuk mendengarkan pronunciation | Gap | 🟠 |
+| G2 | Tidak ada **compact vs expanded** view toggle — saat ini semua selalu sedikit expanded | UX | 🟡 |
+| G3 | Tidak ada **"Export Pilihan sebagai Mini Deck"** — user pilih 20 kata dari glosari, export ke format yang bisa diimport ke Anki | Feature | 🟢 |
+| G4 | A-Z nav hanya hiragana — kata dengan awalan kanji/romaji tidak terjangkau | Bug | 🟡 |
+
+---
+
+### 13. 📂 Sumber (SumberMode)
+
+**Kondisi saat ini:** Browse kartu per sumber PDF.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| SB1 | Tidak ada **progress per sumber** — sudah hafal berapa % dari setiap PDF? | Feature | 🟠 |
+| SB2 | Tidak ada indikasi **sumber mana yang paling banyak kartu belum diketahui** | Feature | 🟠 |
+| SB3 | Tidak bisa langsung **"Sprint dari sumber ini"** atau "Kuis dari sumber ini" | Feature | 🟡 |
+
+---
+
+### 14. 📊 Statistik (StatsMode)
+
+**Kondisi saat ini:** 7-day CSS activity bars (D7), SRS breakdown grid (C6), streak card, due-count banner.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| ST1 | Tidak ada **heatmap kalender** (GitHub-style) untuk konsistensi belajar jangka panjang | Feature | 🟠 |
+| ST2 | Tidak ada **"Exam Readiness Score"** — prediksi persentase lulus berdasarkan maturitas SRS + akurasi quiz | Feature | 🔴 |
+| ST3 | Akurasi per kategori tidak divisualisasikan — hanya bar aktivitas per hari | Gap | 🟠 |
+| ST4 | Tidak ada perbandingan **"minggu ini vs minggu lalu"** | Feature | 🟡 |
+| ST5 | Kartu "sering salah" (wrong-tracker) tidak diekspos ke user secara jelas — tersimpan tapi tidak ditampilkan | Bug | 🟠 |
+
+**Rekomendasi ST2 (kritis):** Hitung `readinessScore` dari: (% kartu Mature × 0.4) + (avg quiz accuracy × 0.4) + (streak continuity × 0.2). Tampilkan sebagai gauge atau progress ring di atas StatsMode. Ini memberikan user satu angka untuk menjawab "sudah siap ujian belum?"
+
+---
+
+### 15. 💾 Ekspor (ExportMode)
+
+**Kondisi saat ini:** 2-step import dengan diff preview, validateSnapshot, importAllSafe dengan rollback.
+
+| # | Temuan | Tipe | Prioritas |
+|---|--------|------|-----------|
+| E1 | Tidak ada **cloud sync** opsi — harus export manual ke file, tidak bisa sync antar perangkat tanpa file transfer | Gap | 🟠 |
+| E2 | Export file tidak terenkripsi — meskipun tidak berisi data sensitif, bisa ditambahkan opsi password | Nice | 🟢 |
+| E3 | Tidak ada **"Incremental backup"** — hanya full snapshot, tidak bisa backup hanya delta SRS | Feature | 🟡 |
+| E4 | Import tidak mendeteksi **konflik ID** — jika dua perangkat dipakai bersamaan, data bisa tertimpa | Bug | 🟠 |
+
+---
+
+## 🚀 Proposal Peningkatan Utama
+
+### KATEGORI A — Alur Lintas Mode (Cross-Mode Flow)
+
+#### A1 🔴 "Pelajari Yang Salah" — Universal Wrong-Card Flow
+
+**Problem:** Setiap mode yang punya quiz result tidak menghubungkan kembali ke study mode. User tahu mereka salah, tapi tidak ada satu klik untuk drill langsung.
+
+**Solusi:** Buat `WrongSessionBridge` utility:
+```js
+// utils/wrong-session-bridge.js
+export function bridgeToFlashcard(wrongCardIds, navigate) {
+  // Store temp session filter
+  storageSet('ssw-session-filter', { ids: wrongCardIds, expires: Date.now() + 3600000 });
+  navigate('kartu'); // FlashcardMode reads session filter on mount
+}
+```
+Wire ke semua ResultScreen via `onStudyWrong` prop. **Berlaku untuk:** Kuis, JAC, Wayground, Simulasi, Sprint, Fokus.
+
+**Impact:** Menutup gap terbesar dalam learning loop. User tidak perlu manually cari kartu yang salah.
+
+---
+
+#### A2 🟠 Smart Mode Recommendation Engine
+
+**Problem:** Dashboard menampilkan grid mode yang sama setiap hari. User tidak tahu mode mana yang paling bermanfaat untuk kondisi mereka hari ini.
+
+**Solusi:** `utils/recommend-mode.js` — fungsi murni yang menerima `{ srsState, sessions, streak, daysUntilExam }` dan mengembalikan rekomendasi berprioritas:
+
+```
+Kondisi → Rekomendasi
+SRS due > 20 → "Mulai dengan Ulasan dulu"
+SRS due = 0, quiz accuracy < 60% → "Coba Sprint dulu, lalu Kuis"
+Exam dalam 7 hari → "Waktunya Simulasi!"
+Streak 0, baru buka → "Mulai dengan 10 Kartu saja"
+```
+
+Tampilkan sebagai card interaktif di Dashboard, bukan hanya teks static. Ganti CTA utama dengan rekomendasi dinamis.
+
+---
+
+#### A3 🟠 Inter-Mode Navigation Breadcrumb
+
+**Problem:** Tidak ada cara untuk kembali ke mode sebelumnya atau tahu "aku sedang ada di mana di dalam app".
+
+**Solusi:** `ModeRouter` tambahkan `modeHistory` stack (max 3). BottomNav tampilkan "← Kembali ke [Mode]" jika ada history. Terutama berguna ketika FocusMode → Sprint → selesai → user tidak tahu harus kemana.
+
+---
+
+### KATEGORI B — Penguatan Mode yang Ada
+
+#### B1 🔴 QuizMode: Type-Answer Production Mode (Blueprint C-10)
+
+**Problem:** Semua kuis adalah recognition (pilih dari 4 pilihan). Ujian JAC mengharuskan recall, bukan hanya recognition.
+
+**Solusi:** Toggle "Mode Produksi" di QuizShell:
+- Tampilkan soal JP, user ketik terjemahan Indonesia
+- Gunakan fuzzy matching (`utils/fuzzy-match.js`) — toleransi typo, sinonim, singkatan umum
+- Keyboard otomatis muncul di Android
+- Scoring: exact match = 3 poin, close match = 1 poin, salah = 0
+
+**Referensi Blueprint:** C-10 (type-answer production), Nation (2001) four strands — production output adalah satu dari empat strand yang belum terlayani.
+
+---
+
+#### B2 🟠 SprintMode: Category Lock + Escalating Difficulty
+
+**Solusi:**
+1. Tambahkan category picker sebelum sprint dimulai (opsional, default: semua)
+2. Durasi opsi: 30s / 60s (default) / 120s
+3. Visual escalation: 0-30s normal, 30-50s amber pulse, 50-60s red + haptic tiap detik
+4. Wire wrong-tracker — tiap salah dalam sprint harus tertulis ke wrong-tracker
+
+---
+
+#### B3 🔴 SimulasiMode: Pause + Post-Exam Analysis
+
+**Solusi:**
+1. Pause via `document.addEventListener('visibilitychange')` — auto-pause saat minimize, resume prompt saat kembali
+2. Hasil simulasi menampilkan breakdown per kategori (K3 XX%, Hukum XX%, Teknis XX%)
+3. CTA "Tambah ke SRS" untuk semua kartu yang salah
+4. Simpan simulasi history (tanggal, score, daysUntilExam) — tampilkan progress simulasi dari waktu ke waktu di StatsMode
+
+---
+
+#### B4 🟠 FocusMode: "Kenapa Kategori Ini?" Explainer
+
+**Solusi:** Sebelum drill dimulai, tampilkan panel 3 detik (dismissable):
+```
+🎯 Fokus: K3 Konstruksi
+Akurasi kamu: 43% (18 salah dari 42 soal terakhir)
+Terakhir dilatih: 3 hari lalu
+[Mulai Drill] [Pilih Kategori Lain]
+```
+
+Ini memenuhi prinsip andragogi (andragogy): learner dewasa perlu tahu *mengapa* sebelum *bagaimana*.
+
+---
+
+#### B5 🟠 ReviewMode: Session Summary Screen
+
+**Solusi:** Setelah queue habis, tampilkan:
+```
+✅ Sesi Ulasan Selesai
+Ditinjau: 24 kartu
+Lagi: 3 | Susah: 5 | Oke: 10 | Mudah: 6
+Kartu jatuh tempo berikutnya: 8 jam lagi
+[Lanjut Belajar] [Kembali ke Beranda]
+```
+
+---
+
+### KATEGORI C — Konten & Data
+
+#### C1 🔴 Ekspansi Kartu — Chapter 2–4 (text2l, text3l, text4l)
+
+**Status saat ini:** 1.438 kartu, chapter 1 complete. Chapter 2–4 belum diextract.
+
+**Action items:**
+1. Upload `text2l.pdf`, `text3l.pdf`, `text4l.pdf`
+2. Ekstrak vocabulary line-by-line ke CARDS array mulai id 631
+3. Assign `source: 'text2l'` / `text3l` / `text4l` untuk filtering di SumberMode
+4. Tag dengan kategori yang sesuai per bab
+
+**Priority:** Tertinggi untuk konten — lebih banyak kartu = SRS lebih komprehensif = persiapan ujian lebih baik.
+
+---
+
+#### C2 🟠 Sipil & Bangunan — Ekspansi Soal
+
+**Status saat ini:** Sipil 45 soal (3 set), Bangunan 45 soal (3 set). Target: 90+ masing-masing.
+
+**Action items:**
+1. Tambah 3 set baru per jalur (K3 lanjutan, Material, Prosedur lapangan)
+2. Verifikasi alignment dengan kisi-kisi JAC terbaru
+3. Tambahkan soal dari materi wg7–wg12 yang belum dimasukkan ke SipilMode/BangunanMode
+
+---
+
+#### C3 🟡 Audit Kelengkapan Explanation Field
+
+**Problem:** Tidak semua kartu memiliki `explanation` / `DescBlock` yang terisi — terutama kartu dari chapter awal yang di-generate sebelum standar konten ditetapkan.
+
+**Action:** Jalankan `audit:integrity` dengan pengecekan tambahan: kartu dengan `explanation: ''` atau `null` → generate list → batch-fill dengan Claude.
+
+---
+
+#### C4 🟠 Tag Bab/Chapter per Soal JAC
+
+**Problem:** 95 soal JAC tidak memiliki metadata bab — user tidak bisa tahu soal mana yang dari bab mana.
+
+**Solusi:** Tambahkan `chapter: 1-6` ke setiap soal JAC di `jac-questions.js`. Tampilkan di JACMode picker sebagai filter "Bab 1 / Bab 2 / Bab 3 / Semua".
+
+---
+
+### KATEGORI D — Mode Baru
+
+#### D1 🟠 Mode: Dengarkan (Listening Comprehension)
+
+**Konsep:** Audio-first mode — dengarkan Japanese, tap terjemahan yang benar.
+
+**Implementasi:**
+```
+1. Tampilkan UI: [▶] [opsi A] [opsi B] [opsi C] [opsi D]
+2. Auto-speak JP term via speakJP()
+3. User tap jawaban
+4. Wrong → auto-repeat audio + highlight benar
+5. Session end → wire ke onSessionEnd + wrong-tracker
+```
+
+**Kenapa penting:** Ujian lisan SSW mengharuskan pemahaman instruksi JP di lapangan. Pure listening mode melatih comprehension tanpa visual crutch. Memanfaatkan `speak.js` yang sudah ada (HVPT cycling).
+
+**File baru:** `src/modes/DengarMode.jsx` + entry di `modes.js` + `ModeRouter.jsx`
+
+---
+
+#### D2 🟠 Mode: Exam Countdown Dashboard
+
+**Konsep:** Ketika `prefs.examDate` set dan ≤14 hari, ganti Dashboard utama menjadi "Exam Countdown Mode" dengan rekomendasi harian adaptif.
+
+**Implementasi:**
+```
+🗓️ 7 Hari Menuju Ujian
+
+Hari ini fokus: [rekomendasi berdasarkan weakness]
+Kartu yang perlu direview: 34
+Simulasi terakhir: 67% (3 hari lalu)
+Target: simulasi ≥75% sebelum hari ujian
+
+[Ulasan SRS] [Simulasi Ujian] [Soal Jebak]
+```
+
+**Berbeda dari** countdown banner yang sudah ada (hanya tampilan) — ini adalah *mode belajar adaptif* yang berubah setiap hari berdasarkan proximity ke ujian.
+
+---
+
+#### D3 🟡 Mode: Buku Catatan (Personal Notes per Kartu)
+
+**Konsep:** User bisa tambahkan catatan pribadi ke setiap kartu — mnemonik, konteks dari pengalaman kerja, pengingat pribadi.
+
+**Implementasi:**
+- `notes: {}` object di storage — `{ [cardId]: "catatan user" }`
+- Di FlashcardMode back face, tampilkan catatan jika ada + edit button
+- Di GlossaryMode, tampilkan catatan saat expand
+- Diinclude dalam export/import JSON
+
+**Kenapa penting:** Constructivism (Vygotsky) — personal meaning-making lebih kuat dari definisi generik.
+
+---
+
+### KATEGORI E — Teknis & Infrastruktur
+
+#### E1 🔴 Otomatisasi Version Consistency
+
+**Problem:** Version string tersebar di 3 tempat berbeda (`package.json`, `SayaTab.jsx` footer, `CACHE_VERSION` di `sw.js`) dan harus di-update manual — itulah akar dari version discrepancy yang ditemukan.
+
+**Solusi:** Buat script `scripts/bump-version.mjs` yang jadi single source of truth:
+
+```js
+// scripts/bump-version.mjs
+import { readFileSync, writeFileSync } from 'fs';
+
+const pkg = JSON.parse(readFileSync('package.json'));
+const version = pkg.version;
+
+// Update sw.js CACHE_VERSION
+let sw = readFileSync('public/sw.js', 'utf8');
+sw = sw.replace(/CACHE_VERSION\s*=\s*['"][^'"]+['"]/, `CACHE_VERSION = 'ssw-v${version}'`);
+writeFileSync('public/sw.js', sw);
+
+// Update SayaTab.jsx version display
+let saya = readFileSync('src/components/SayaTab.jsx', 'utf8');
+saya = saya.replace(/v\d+\.\d+\.\d+(?=.*footer|.*versi)/gi, `v${version}`);
+writeFileSync('src/components/SayaTab.jsx', saya);
+
+console.log(`✅ Version synced to v${version}`);
+```
+
+Tambahkan ke `package.json` scripts: `"version:sync": "node scripts/bump-version.mjs"`. Panggil di CI sebelum build.
+
+#### E2 🔴 "Versi Baru Tersedia" In-App Prompt
+
+**Problem:** SW di-update di deploy baru, tapi user tidak tahu. Mereka terus pakai versi lama sampai hard refresh.
+
+**Solusi:**
+```js
+// public/sw.js — postMessage ke client ketika SW baru aktif
+self.addEventListener('activate', event => {
+  clients.matchAll().then(clients => {
+    clients.forEach(c => c.postMessage({ type: 'SW_UPDATED' }));
+  });
+});
+
+// App.jsx — listen dan tampilkan toast
+navigator.serviceWorker.addEventListener('message', e => {
+  if (e.data?.type === 'SW_UPDATED') {
+    toast.show('Versi baru tersedia — ketuk untuk refresh', { 
+      action: { label: 'Refresh', onClick: () => location.reload() },
+      duration: 0 // persistent
+    });
+  }
+});
+```
+
+---
+
+#### E3 🟠 Multi-Device Sync via GitHub Gist (No Backend)
+
+**Problem:** Export/import manual via file — tidak praktis di mobile.
+
+**Solusi (opsional, opt-in):** User masukkan GitHub Personal Access Token (PAT) → data di-sync ke private Gist. No backend diperlukan.
+
+```js
+// utils/gist-sync.js
+export async function pushToGist(token, data) {
+  const res = await fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: { Authorization: `token ${token}` },
+    body: JSON.stringify({
+      description: 'SSW Progress Backup',
+      public: false,
+      files: { 'progress.json': { content: JSON.stringify(data) } }
+    })
+  });
+  return res.json();
+}
+```
+
+Tampilkan di ExportMode sebagai opsi tambahan — user yang tidak mau tidak perlu pakai.
+
+---
+
+#### E4 🟡 LocalStorage Compression
+
+**Problem:** FSRS store bisa tumbuh besar seiring waktu — tiap kartu punya `{ due, stability, difficulty, elapsed, scheduled, reps, lapses, state, last_review }`.
+
+**Solusi:** Gunakan `lz-string` (1.5kb gzip) untuk compress value sebelum `localStorage.setItem`:
+
+```js
+import LZString from 'lz-string';
+
+export const storageSet = (key, value) => {
+  const str = JSON.stringify(value);
+  // Compress hanya jika value besar (> 1KB)
+  if (str.length > 1024) {
+    localStorage.setItem(key, LZString.compressToUTF16(str));
+    localStorage.setItem(key + '_compressed', 'true');
+  } else {
+    localStorage.setItem(key, str);
+  }
+};
+```
+
+---
+
+#### E5 🟠 StatsMode: Heatmap Kalender
+
+**Problem:** 7-day bar bagus tapi tidak menunjukkan konsistensi jangka panjang.
+
+**Solusi:** GitHub-style 52-week heatmap menggunakan SVG. Data dari `sessions` array (capped 90, sudah ada). Color: `--ssw-amber` opacity 10%→100% berdasarkan kartu dipelajari per hari.
+
+```jsx
+// components/StudyHeatmap.jsx
+// 52 kolom (minggu) × 7 baris (hari)
+// Setiap cell = satu hari, opacity berdasarkan count
+// Tooltip on hover: "3 Mei — 24 kartu dipelajari"
+```
+
+---
+
+#### E6 🟢 Search Furigana Support
+
+**Problem:** User tidak bisa cari "あんぜん" untuk menemukan "安全".
+
+**Solusi:** Tambahkan `reading` field ke setiap kartu (furigana reading plain text). Sudah ada furigana dalam format `《》` — parse ke plain text untuk search index.
+
+```js
+// utils/jp-helpers.js — tambahkan
+export function extractReading(jp) {
+  // "安全《あんぜん》帯" → "あんぜん"
+  return jp.replace(/[^《》]+(?=《)/g, '').replace(/[《》]/g, '').trim();
+}
+```
+
+---
+
+### KATEGORI F — Gamifikasi & Motivasi
+
+#### F1 🟠 Achievement Badge System
+
+**Problem:** Milestone toasts (sudah ada sejak Phase 9) adalah one-time notification yang hilang. Tidak ada **permanen** pencapaian yang bisa dilihat user.
+
+**Solusi:** `utils/achievements.js` + UI di SayaTab:
+
+```js
+const ACHIEVEMENTS = [
+  { id: 'first_100', label: 'Pondasi Kuat', desc: '100 kartu hafal', icon: '🏗️', check: s => s.known >= 100 },
+  { id: 'week_streak', label: 'Pekerja Keras', desc: '7 hari berturut-turut', icon: '🔥', check: s => s.streak >= 7 },
+  { id: 'perfect_sprint', label: 'Kilat', desc: 'Sprint tanpa salah', icon: '⚡', check: s => s.perfectSprint },
+  { id: 'lulus_simulasi', label: 'Siap Ujian', desc: 'Simulasi ≥75%', icon: '🎓', check: s => s.bestSim >= 75 },
+  { id: 'all_jac', label: 'JAC Master', desc: 'Semua set JAC ≥80%', icon: '📋', check: s => s.jacMastery },
+  { id: 'half_deck', label: 'Setengah Jalan', desc: '719+ kartu hafal', icon: '💪', check: s => s.known >= 719 },
+  { id: 'full_deck', label: 'Nugget Pro', desc: 'Semua 1438 kartu hafal', icon: '🏆', check: s => s.known >= 1438 },
+];
+```
+
+Tampilkan di SayaTab sebagai grid badge (grayscale jika belum unlock, warna jika sudah).
+
+---
+
+#### F2 🔴 Exam Readiness Score
+
+**Konsep:** Satu angka yang menjawab "sudah berapa persen siap ujian?"
+
+**Formula:**
+```
+readiness = (
+  (matureCards / totalCards) * 40 +        // SRS maturity weight
+  (avgQuizAccuracy / 100) * 35 +           // Quiz performance
+  (Math.min(streak, 14) / 14) * 15 +      // Consistency
+  (bestSimScore > 65 ? bestSimScore / 100 : 0) * 10  // Exam simulation
+) * 100
+```
+
+**Tampilan:**
+- Gauge lingkaran di atas StatsMode (warna: merah < 50, amber 50-74, hijau ≥ 75)
+- Label: "Belum Siap" / "Hampir" / "Siap Ujian! 🎉"
+- Sub-breakdown: SRS ▓▓▓░░ Kuis ▓▓▓▓░ Konsistensi ▓▓░░░ Simulasi ▓░░░░
+
+---
+
+#### F3 🟡 Daily Challenge — "Soal Hari Ini"
+
+**Konsep:** Satu soal JAC/Wayground pilihan per hari — ditampilkan di Dashboard, berlaku 24 jam.
+
+**Implementasi:**
+```js
+// utils/daily-challenge.js
+export function getDailyChallenge(allQuestions, today) {
+  const seed = parseInt(today.replace(/-/g, '')); // YYYYMMDD as seed
+  const idx = seed % allQuestions.length;
+  return allQuestions[idx];
+}
+```
+
+User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut soal harian". Simple, tapi membangun habit daily open.
+
+---
+
+#### F4 🟢 "Battle Past Self" — Sprint vs Rekaman
+
+**Konsep:** Sprint mode menampilkan "ghost" — jumlah yang personal best kamu capai detik demi detik — sehingga user "berlomba" dengan diri sendiri.
+
+**Implementasi:** Simpan `sprintBestTimeline: [{ t: 5, score: 2 }, { t: 10, score: 5 }, ...]` di prefs. Selama sprint berjalan, tampilkan score ghost vs score sekarang.
+
+---
+
+## 📋 Roadmap Implementasi yang Disarankan
+
+### 🔧 Pre-Phase — Housekeeping (WAJIB DULU)
+> Selesaikan ini sebelum mulai Phase 5.1 apapun.
+
+1. **Merge PR #7** — furigana ruby tap-to-toggle (tests passing, tinggal approve + merge)
+2. **Reconstruct CHANGELOG** — cek `git log` sejak commit terakhir v4.0.2, tulis entries untuk v4.1.x dan v4.2.0
+3. **Fix SayaTab footer** — update hardcoded `"v4.0.2"` → `"v4.2.0"`
+4. **Trigger deploy + verifikasi** — pastikan GitHub Pages serve versi terbaru
+5. **Re-triage proposal ini** — coret item yang sudah ter-cover oleh perubahan v4.1.x–v4.2.0 yang belum terdokumentasi
+
+### Phase 5.1 — Critical Gaps (Sprint 1–2 minggu)
+1. **R1** ReviewMode Session Summary Screen
+2. **A1** Wrong-Card Bridge (universal flow dari semua quiz ke FlashcardMode filtered)
+3. **K1** FlashcardMode swipe gesture untuk rating
+4. **SIM1** SimulasiMode pause + auto-pause on minimize
+5. **F1** FocusMode "Kenapa kategori ini?" explainer
+6. **ST2** Exam Readiness Score di StatsMode
+7. **E1** "Versi baru tersedia" SW prompt
+
+### Phase 5.2 — Content Expansion (Paralel dengan 5.1)
+1. **C1** Upload + ekstrak Chapter 2–4 (text2l, text3l, text4l) — id 631+
+2. **C4** Tag bab/chapter ke soal JAC
+3. **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
+
+### Phase 5.3 — Mode Enhancements (Sprint 3–4 minggu)
+1. **B1** QuizMode Type-Answer Production Mode
+2. **B2** SprintMode Category Lock + Escalating Timer
+3. **SIM3** SimulasiMode Post-Exam Analysis + SRS bridge
+4. **D1** Mode Dengarkan (Listening Comprehension)
+5. **F1** Achievement Badge System di SayaTab
+6. **F2** Daily Challenge "Soal Hari Ini"
+
+### Phase 5.4 — Polish & Infrastructure
+1. **ST1** StatsMode Heatmap Kalender (52 minggu)
+2. **A2** Smart Mode Recommendation Engine
+3. **E4** LocalStorage compression (lz-string)
+4. **D3** Mode Buku Catatan per Kartu
+5. **E2** GitHub Gist sync (opt-in)
+
+---
+
+## 🐛 Bug Registry
+
+| ID | File | Deskripsi | Prioritas |
+|----|------|-----------|-----------|
+| BUG-01 | `SayaTab.jsx` + deploy pipeline | **Version display stuck v4.0.2** — hardcoded footer string tidak ter-update ke v4.2.0 | 🔴 |
+| BUG-02 | `CHANGELOG.md` | **Missing changelog entries** — v4.1.x dan v4.2.0 tidak terdokumentasi | 🔴 |
+| BUG-03 | GitHub Actions / deploy | **Deployed app stale** — GitHub Pages masih serve v4.0.2 meski main sudah v4.2.0 | 🔴 |
+| BUG-04 | PR #7 | **Furigana tap-to-toggle menggantung** — PR open sejak 4 Mei, tests passing, belum di-merge | 🔴 |
+| BUG-05 | `FlashcardMode/FilterBar.jsx` | Filter tidak persist antar mode switch | 🔴 |
+| BUG-06 | `SimulasiMode.jsx` | Soal tidak ter-randomisasi dari semua jalur | 🔴 |
+| BUG-07 | `SprintMode.jsx` | Jawaban salah tidak masuk wrong-tracker | 🔴 |
+| BUG-08 | `GlossaryMode.jsx` | A-Z nav tidak menjangkau kata berawalan kanji | 🟠 |
+| BUG-09 | `SearchMode.jsx` | Tidak bisa search by furigana reading | 🟠 |
+| BUG-10 | `FlashcardMode/index.jsx` | flashcardHintCount tidak di-reset saat resetAll() | 🟡 |
+| BUG-11 | `ExportMode.jsx` | Import tidak deteksi konflik ID dual-device | 🟠 |
+
+---
+
+## 📊 Metrik Keberhasilan
+
+| Metrik | Saat Ini | Target (Phase 5.4) |
+|--------|----------|---------------------|
+| Total kartu | 1.438 | 2.000+ (Ch 2–4 added) |
+| Test coverage | ~321 test | 380+ |
+| Mode count | 15 | 17 (Dengarkan + Countdown) |
+| Bug terbuka | 4 known | 0 |
+| SRS modes with session tracking | 12/15 | 15/15 |
+| Modes with wrong-tracker | 7/15 | 12/15 |
+| Cross-mode flow coverage | 0% | 100% (semua quiz → wrong bridge) |
+
+---
+
+## 🏗️ Catatan Arsitektur
+
+### Sudah Baik — Pertahankan
+- FSRS engine adalah implementasi terbaik yang bisa ada untuk SRS — jangan ganti
+- CSS Modules migration sudah bersih — jangan balik ke inline styles
+- `storage/engine.js` dengan `validateSnapshot` + rollback adalah gold standard
+- CI/CD pipeline dengan auto CACHE_VERSION bump — pertahankan pola ini
+- Test-first approach — setiap feature baru harus ada test
+
+### Perlu Perhatian
+- `sessions` array capped 90 — pertimbangkan bumping ke 365 untuk heatmap kalender
+- `prefs` object makin besar — pertimbangkan split ke `prefs` (settings) + `userState` (computed)
+- Bundle size: `wayground-sets.js` + `csv-sets.js` + `cards.js` bisa dijadikan lazy-loaded via dynamic import
+
+### Debt yang Diketahui (dari CHANGELOG)
+- Blueprint C-10 (type-answer) — diakui tapi belum diimplementasi → **Phase 5.3 B1**
+- Sipil/Bangunan "Segera Hadir" untuk soal tambahan → **Phase 5.2 C2**
+- Source PDF status Ch 2–4 masih "pending" → **Phase 5.2 C1**
+
+---
+
+## 🎯 Prioritas Paling Tinggi untuk Segera Dikerjakan
+
+**Langkah 0 dulu (version housekeeping):**
+
+1. **Merge PR #7** — furigana tap-to-toggle, tests passing, tinggal merge
+2. **Fix SayaTab footer + CHANGELOG** — resolve ghost version v4.0.2 vs v4.2.0
+3. **Trigger deploy** — verifikasi GitHub Pages serve versi terbaru
+
+**Setelah housekeeping selesai, baru ini:**
+
+1. **C1 — Ekstrak Chapter 2–4** → paling berdampak untuk kesiapan ujian (konten > fitur)
+2. **A1 — Wrong-Card Bridge** → menutup learning loop terbesar yang ada
+3. **F2 — Exam Readiness Score** → motivasi tertinggi untuk user yang sedang persiapan ujian
+
+---
+
+*Proposal v2 — updated dengan version discrepancy analysis. Berdasarkan: README.md, CHANGELOG.md (v2.3.1 → v4.0.2), `package.json` main branch (v4.2.0), PR #7 (open furigana PR). Total: 71 temuan, 30 rekomendasi, 11 bug terdokumentasi (4 version discrepancy + 7 functional).*
+
+*— Claude Sonnet 4.6, 2026-05-07*
