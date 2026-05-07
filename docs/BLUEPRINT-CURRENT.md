@@ -113,7 +113,7 @@ These are honest assessments — not blocking anything, but relevant for future 
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
 ### Features Not Yet Implemented (from Proposal)
-- **B1** QuizMode Type-Answer Production Mode (Blueprint C-10) — *still pending*
+- ~~**B1** QuizMode Type-Answer Production Mode (Blueprint C-10)~~ ✅ v4.5.0 — `src/modes/QuizProduksiMode.jsx` (`kuisprod`)
 - ~~**D1** Mode Dengarkan~~ ✅ v4.4.0 — `src/modes/DengarMode.jsx`
 - ~~**D3** Mode Buku Catatan~~ ✅ v4.4.0 — `src/modes/CatatanMode.jsx`
 - **E2** GitHub Gist sync (opt-in, no backend) — *still pending*

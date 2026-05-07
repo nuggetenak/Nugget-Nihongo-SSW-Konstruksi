@@ -245,6 +245,7 @@ export default function ModeRouter() {
     mirip:    { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },
     dengar:   { cards: filteredCards, allCards: CARDS, onExit: exitMode, onSessionEnd: makeSessionEnd('dengar') },
     catatan:  { cards: filteredCards, onExit: exitMode },
+    kuisprod: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('kuisprod'), audioEnabled },
   };
 
   const props = modeProps[mode] ?? { onExit: exitMode };

@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.4.0 — Phase 5.5 complete)
-> **Version:** v4.4.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.5 complete; 376 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.5.0 — B1 QuizProduksiMode complete)
+> **Version:** v4.5.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.5 + B1 complete; 383 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -183,10 +183,10 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.4.0** |
-| Tests | **376** (34 files) |
+| Version | **4.5.0** |
+| Tests | **383** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
-| Modes | **22** (all React.lazy) |
+| Modes | **23** (all React.lazy) |
 | Flashcards | **1,438** |
 | Quiz questions | **~860** (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Storage schema | **v3** |
@@ -216,6 +216,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Phase 5.3 | Mode Enhancements: B2 SprintCategory, SIM3+SIM4 PostExam, F1 Achievements, F2 DailyChallenge | ✅ v4.3.1 |
 | Phase 5.4 | Polish & Infra: ST1 Heatmap, A2 SmartRecommend, E4 lz-compression | ✅ v4.3.1 |
 | Phase 5.5 | Unfinished items: D1 DengarMode, D3 CatatanMode, A3 Breadcrumb, sessions cap 180, lint fixes | ✅ v4.4.0 |
+| Phase 5.6 (B1) | Kuis Produksi: JP→ID type-answer mode (QuizProduksiMode), 7 tests | ✅ v4.5.0 |
 
 ---
 
@@ -303,3 +304,4 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-07 | Sonnet 4.6 | v4.3.0 Phase 5.1 complete: SIM1 (pause + auto-pause), BUG-06 (JAC+Wayground pool merge), ST2 (Exam Readiness gauge in StatsMode). 376/376 tests. |
 | 2026-05-08 | Sonnet 4.6 | v4.3.1 Phase 5.1–5.4: BUG-05/08/10/11 fixed; B2 SprintMode category+duration+escalation; SIM3+SIM4 post-exam analysis; F1 achievements (14 badges); F2 daily challenge; ST1 heatmap; A2 smart recommendation; E4 lz-string compression. 376/376 tests. |
 | 2026-05-08 | Sonnet 4.6 | v4.4.0 Phase 5.5: D1 DengarMode (listening comprehension); D3 CatatanMode (personal notes per card); A3 breadcrumb nav; sessions cap 90→180; lint fixes (StudyHeatmap, FlashcardMode). 376/376 tests. |
+| 2026-05-08 | Sonnet 4.6 | v4.5.0 B1: QuizProduksiMode — JP→ID type-answer production quiz, fuzzy match, wrong-tracker, audio. 383/383 tests. |

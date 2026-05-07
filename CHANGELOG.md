@@ -1,4 +1,23 @@
+## [4.5.0] - 2026-05-08
+
+### B1 — Kuis Produksi: JP→ID Type-Answer Mode (Agent Sonnet 4.6)
+
+**New mode: `src/modes/QuizProduksiMode.jsx`**
+- User sees Japanese term + furigana → types Indonesian translation (inverse of ProductionMode)
+- Fuzzy matching: case-insensitive, strips punctuation, accepts slash-separated synonyms in `id_text`
+- Wrong-answer tracking: writes to `ssw-quiz-produksi-wrong` via `wrong-tracker.js`
+- Optional audio: 🔊 button plays JP via Web Speech API when `audioEnabled`
+- Session summary: score %, wrong-card review list with correct answer revealed
+- Keyboard: Enter=submit, Esc=skip, Enter/Space(after reveal)=next
+- Registered as `kuisprod` in `latihan` section (modes.js + ModeRouter)
+- 7 tests in `src/tests/quiz-produksi.test.jsx`
+
+**Metrics:** 35 test files · **383 tests** · 23 modes · 1,438 cards
+
+---
+
 ## [4.4.0] - 2026-05-08
+
 
 ### Phase 5.5 — Unfinished Items from Proposal (Agent Sonnet 4.6)
 

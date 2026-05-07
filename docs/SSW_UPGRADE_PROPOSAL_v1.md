@@ -731,7 +731,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 3. ⏳ **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
 
 ### Phase 5.3 — Mode Enhancements ✅ SELESAI (2026-05-08, commit `d081434`)
-1. ⏳ **B1** QuizMode Type-Answer Production Mode — *belum dikerjakan*
+1. ✅ **B1** QuizMode Type-Answer Production Mode — `src/modes/QuizProduksiMode.jsx` (v4.5.0, JP→ID fuzzy match)
 2. ✅ **B2** SprintMode Category Lock + Escalating Timer (duration picker + category picker + color urgency)
 3. ✅ **SIM3** SimulasiMode Post-Exam: "Latih Salah" CTA → onRetryWrong bridge
 4. ✅ **SIM4** SimulasiMode Breakdown per set/source setelah result

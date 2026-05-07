@@ -30,6 +30,7 @@ export const MODE_COMPONENTS = {
   mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
   dengar: lazy(() => import('../modes/DengarMode.jsx')),
   catatan: lazy(() => import('../modes/CatatanMode.jsx')),
+  kuisprod: lazy(() => import('../modes/QuizProduksiMode.jsx')),
 };
 
 // ── Navigation sections ────────────────────────────────────────────────────
@@ -42,7 +43,7 @@ export const MODE_SECTIONS = {
   latihan: {
     title: '🧪 Latihan',
     subtitle: 'Asah kemampuan',
-    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'produksi', 'mirip', 'dengar'],
+    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'produksi', 'mirip', 'dengar', 'kuisprod'],
   },
   ujian: {
     title: '📋 Ujian',
@@ -85,6 +86,7 @@ export const MODE_META = {
   mirip:    { icon: '🔀', label: 'Kata Mirip',     desc: 'VLT: pasang istilah yang serupa' },
   dengar:   { icon: '🎧', label: 'Dengarkan',      desc: 'Dengar JP → pilih terjemahan' },
   catatan:  { icon: '📓', label: 'Buku Catatan',   desc: 'Catatan & mnemonik pribadi' },
+  kuisprod: { icon: '🔤', label: 'Kuis Produksi',  desc: 'JP → ketik terjemahan Indonesia' },
 };
 
 // ── Dashboard quick tiles (4 most-used, top row) ─────────────────────────
