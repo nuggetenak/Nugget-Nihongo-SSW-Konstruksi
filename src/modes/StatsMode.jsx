@@ -50,11 +50,33 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
   const ringColor = readiness >= 75 ? T.correct : readiness >= 50 ? T.gold : T.wrong;
   const readinessLabel = readiness >= 75 ? 'Siap Ujian! 🎉' : readiness >= 50 ? 'Hampir Siap' : 'Belum Siap';
 
+  // ST3: Build quiz accuracy per category from wrong-tracker data
+  // quizWrong { [cardId]: wrongEntry } — cards with wrong entries have known errors
+  // For each category, compute: totalAttempted (cards seen in quiz), wrongCount
+  const quizWrongByCard = Object.fromEntries(
+    Object.entries(quizWrong).map(([id, val]) => [Number(id), getWrongCount(val)])
+  );
+
   const catStats = CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')
     .map((cat) => {
       const catCards = CARDS.filter((c) => c.category === cat.key);
       const catKnown = catCards.filter((c) => known.has(c.id)).length;
-      return { ...cat, total: catCards.length, known: catKnown, pct: catCards.length > 0 ? Math.round((catKnown / catCards.length) * 100) : 0 };
+      // ST3: quiz accuracy — cards with wrong data in this category
+      const catWrongCount = catCards.reduce((sum, c) => sum + (quizWrongByCard[c.id] ?? 0), 0);
+      const catAttempted  = catCards.filter((c) => quizWrongByCard[c.id] !== undefined).length;
+      // quizAcc: if no data yet, null; otherwise approximate (known as correct proxy)
+      const quizAcc = catAttempted > 0
+        ? Math.max(0, Math.round(100 - (catWrongCount / Math.max(catAttempted, 1)) * 10))
+        : null;
+      return {
+        ...cat,
+        total: catCards.length,
+        known: catKnown,
+        pct: catCards.length > 0 ? Math.round((catKnown / catCards.length) * 100) : 0,
+        quizAcc,        // ST3: quiz accuracy estimate (null if no data)
+        catWrongCount,  // ST3: total wrong answers in this category
+        catAttempted,   // ST3: cards with quiz data in this category
+      };
     })
     .sort((a, b) => a.pct - b.pct);
 
@@ -195,9 +217,23 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
             <div className={ST.catBody}>
               <div className={`${S.rowSpread} ${ST.catRow}`}>
                 <span>{c.label}</span>
-                <span style={{ color: c.pct >= 70 ? T.correct : c.pct >= 40 ? T.gold : T.wrong }}>{c.pct}%</span>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  {/* ST3: quiz accuracy badge */}
+                  {c.quizAcc !== null && (
+                    <span style={{ fontSize: 10, fontWeight: 700, color: T.textFaint, background: T.surface, border: `1px solid ${T.border}`, borderRadius: 4, padding: '1px 5px' }}>
+                      🎯 {c.quizAcc}%
+                    </span>
+                  )}
+                  <span style={{ color: c.pct >= 70 ? T.correct : c.pct >= 40 ? T.gold : T.wrong }}>{c.pct}%</span>
+                </div>
               </div>
               <ProgressBar current={c.known} total={c.total} color={c.pct >= 70 ? T.correct : c.pct >= 40 ? T.gold : T.wrong} />
+              {/* ST3: wrong answer count if any */}
+              {c.catWrongCount > 0 && (
+                <div style={{ fontSize: 10, color: T.wrong, marginTop: 2 }}>
+                  {c.catWrongCount}× salah dalam kuis
+                </div>
+              )}
             </div>
           </div>
         ))}

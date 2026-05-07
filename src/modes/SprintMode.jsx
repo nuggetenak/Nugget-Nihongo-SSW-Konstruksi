@@ -20,8 +20,9 @@ const DURATIONS = [
 ];
 
 function getPersonalBest() { return storageGet('prefs')?.sprintBest ?? 0; }
-function savePersonalBest(score) {
-  storageSet('prefs', (p) => ({ ...p, sprintBest: Math.max(p?.sprintBest ?? 0, score) }));
+function getBestTimeline() { return storageGet('prefs')?.sprintBestTimeline ?? []; }
+function savePersonalBest(score, timeline) {
+  storageSet('prefs', (p) => ({ ...p, sprintBest: Math.max(p?.sprintBest ?? 0, score), sprintBestTimeline: timeline }));
 }
 
 export default function SprintMode({ cards, onExit, onSessionEnd }) {
@@ -38,6 +39,10 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
   const [selectedDuration, setSelectedDuration] = useState('60');
   const [selectedCat, setSelectedCat] = useState('all');
   const sessionEndFired = useRef(false);
+  // F4: ghost timeline — record { t: secondsElapsed, score: correctCount } every 5s
+  const [ghostTimeline] = useState(() => getBestTimeline());
+  const currentTimeline = useRef([]);
+  const [ghostScore, setGhostScore] = useState(0);
 
   // B2: available categories from the cards prop
   const availableCats = useMemo(() => {
@@ -61,15 +66,29 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
     sessionEndFired.current = true;
     onSessionEnd?.({ correct: c, total: c + w });
     const prev = getPersonalBest();
-    if (c > prev) { savePersonalBest(c); setPersonalBest(c); setNewBest(true); }
-  }, [onSessionEnd]);
+    const finalTimeline = [...currentTimeline.current, { t: DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60, score: c }];
+    if (c > prev) { savePersonalBest(c, finalTimeline); setPersonalBest(c); setNewBest(true); }
+  }, [onSessionEnd, selectedDuration]);
 
   useEffect(() => {
     if (phase !== 'playing') return;
     if (timeLeft <= 0) { setPhase('done'); fireSessionEnd(correct, wrong); return; }
+
+    // F4: record timeline point every 5 seconds (at t=5,10,15,...)
+    const duration = DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60;
+    const elapsed = duration - timeLeft;
+    if (elapsed > 0 && elapsed % 5 === 0) {
+      currentTimeline.current = [...currentTimeline.current, { t: elapsed, score: correct }];
+    }
+    // F4: update ghost score from saved best timeline
+    if (ghostTimeline.length > 0) {
+      const bestPoint = ghostTimeline.filter((p) => p.t <= elapsed).pop();
+      if (bestPoint) setGhostScore(bestPoint.score);
+    }
+
     const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
     return () => clearTimeout(t);
-  }, [timeLeft, phase, correct, wrong, fireSessionEnd]);
+  }, [timeLeft, phase, correct, wrong, fireSessionEnd, ghostTimeline, selectedDuration]);
 
   const card = order[idx];
   const next = () => { setShowAnswer(false); setIdx((i) => (i + 1) % order.length); };
@@ -90,8 +109,9 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
   const duration = DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60;
   const startSprint = () => {
     setPhase('playing'); setIdx(0); setCorrect(0); setWrong(0);
-    setTimeLeft(duration); setNewBest(false);
+    setTimeLeft(duration); setNewBest(false); setGhostScore(0);
     sessionEndFired.current = false;
+    currentTimeline.current = [];
     setOrder(shuffle(filteredCards));
   };
 
@@ -178,7 +198,14 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
     <div className={S.page} style={{ padding: '16px 16px 24px' }}>
       <div className={S.rowSpread} style={{ marginBottom: 10 }}>
         <span style={{ fontSize: 20, fontWeight: 800, color: timerColor, animation: isUrgent ? 'pulse 0.8s ease infinite' : 'none' }}>⏱ {timeLeft}s</span>
-        <span style={{ fontSize: 13, color: T.textMuted }}>✅ {correct} · ❌ {wrong}</span>
+        <div style={{ textAlign: 'right' }}>
+          <span style={{ fontSize: 13, color: T.textMuted }}>✅ {correct} · ❌ {wrong}</span>
+          {ghostTimeline.length > 0 && (
+            <div style={{ fontSize: 11, color: correct > ghostScore ? T.correct : T.textFaint, marginTop: 2 }}>
+              👻 {ghostScore} {correct > ghostScore ? '↑ unggul!' : correct === ghostScore ? '= sejajar' : `↓ -${ghostScore - correct}`}
+            </div>
+          )}
+        </div>
       </div>
       <ProgressBar current={duration - timeLeft} total={duration} color={barColor} />
       <div className={S.cardLg} style={{ marginTop: 20, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

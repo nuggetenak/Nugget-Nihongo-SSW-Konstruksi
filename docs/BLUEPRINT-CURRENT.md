@@ -116,7 +116,9 @@ These are honest assessments — not blocking anything, but relevant for future 
 - ~~**B1** QuizMode Type-Answer Production Mode (Blueprint C-10)~~ ✅ v4.5.0 — `src/modes/QuizProduksiMode.jsx` (`kuisprod`)
 - ~~**D1** Mode Dengarkan~~ ✅ v4.4.0 — `src/modes/DengarMode.jsx`
 - ~~**D3** Mode Buku Catatan~~ ✅ v4.4.0 — `src/modes/CatatanMode.jsx`
-- **E2** GitHub Gist sync (opt-in, no backend) — *still pending*
+- ~~**E2** GitHub Gist sync (opt-in, no backend)~~ ✅ v4.6.0 — `src/utils/gist-sync.js` + ExportMode Gist section
+- ~~**ST3** Akurasi per kategori~~ ✅ v4.6.0 — `🎯 N%` badge + wrong count in StatsMode catStats
+- ~~**F4** Battle Past Self Sprint ghost~~ ✅ v4.6.0 — `sprintBestTimeline` + live ghost score display
 - ~~**A3** Inter-Mode Navigation Breadcrumb~~ ✅ v4.4.0 — `modeHistory` + `goBack()` in AppContext
 
 ### Technical / Token Audit

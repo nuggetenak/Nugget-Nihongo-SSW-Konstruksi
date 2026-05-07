@@ -1,4 +1,32 @@
+## [4.6.0] - 2026-05-08
+
+### E2/E3 · F4 · ST3 (Agent Sonnet 4.6)
+
+**E2/E3 — GitHub Gist Sync (Multi-Device, Opt-In)**
+- New `src/utils/gist-sync.js`: `pushToGist`, `pullFromGist`, `findExistingGist`, token/ID persistence helpers
+- ExportMode: collapsible "Sinkronisasi Gist" section — PAT input, Gist ID display, Push/Pull/Simpan buttons
+- Auto-discovers existing Gist on first pull (no manual ID needed)
+- Token stored in localStorage only, sent exclusively to `api.github.com`
+- Error handling with inline status messages per operation
+
+**F4 — Sprint "Battle Past Self" Ghost Score**
+- `sprintBestTimeline: [{ t, score }]` recorded every 5 seconds during sprint, saved to `prefs` on new personal best
+- Ghost score displayed live during playing phase: `👻 N ↑ unggul!` / `= sejajar` / `↓ -N`
+- `getBestTimeline()` loaded on mount; resets each new session
+- `savePersonalBest(score, timeline)` replaces old signature
+
+**ST3 — Quiz Accuracy Per Category in StatsMode**
+- Per-category quiz accuracy badge `🎯 N%` shown next to hafal % in category list
+- Wrong answer count `N× salah dalam kuis` shown below progress bar when >0
+- Derived from existing `quizWrong` wrong-tracker — no new storage needed
+- Shows `null` (hidden) when no quiz data for that category yet
+
+**Metrics:** 35 test files · **383 tests** · 23 modes · 1,438 cards
+
+---
+
 ## [4.5.0] - 2026-05-08
+
 
 ### B1 — Kuis Produksi: JP→ID Type-Answer Mode (Agent Sonnet 4.6)
 

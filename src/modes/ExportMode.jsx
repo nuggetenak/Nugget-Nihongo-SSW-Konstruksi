@@ -6,6 +6,10 @@
 import { useState, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { exportAll, importAllSafe, validateSnapshot } from '../storage/engine.js';
+import {
+  saveToken, loadToken, saveGistId, loadGistId,
+  pushToGist, pullFromGist, findExistingGist,
+} from '../utils/gist-sync.js';
 import S from './modes.module.css';
 
 function readSummary() {
@@ -31,6 +35,13 @@ export default function ExportMode({ onExit }) {
   const [importing, setImport]      = useState(false);
   const [previewData, setPreviewData] = useState(null); // pending import data
   const fileRef = useRef(null);
+
+  // E2: Gist sync state
+  const [gistPat, setGistPat]       = useState(() => loadToken());
+  const [gistId, setGistId]         = useState(() => loadGistId());
+  const [gistStatus, setGistStatus] = useState(null);
+  const [gistBusy, setGistBusy]     = useState(false);
+  const [showGist, setShowGist]     = useState(false);
 
   const handleExport = () => {
     setStatus(null);
@@ -83,6 +94,55 @@ export default function ExportMode({ onExit }) {
       setStatus({ type: 'err', msg: `❌ Import gagal (progress lama tetap): ${e.message}` });
       setPreviewData(null);
     }
+  };
+
+  // E2: Gist handlers
+  const handleGistPush = async () => {
+    if (!gistPat.trim()) { setGistStatus({ type: 'err', msg: '❌ Masukkan GitHub Token terlebih dahulu.' }); return; }
+    setGistBusy(true); setGistStatus(null);
+    try {
+      const data = exportAll();
+      let targetId = gistId;
+      if (!targetId) {
+        const found = await findExistingGist(gistPat);
+        targetId = found?.id ?? '';
+      }
+      const result = await pushToGist(gistPat, data, targetId);
+      saveGistId(result.id);
+      setGistId(result.id);
+      setGistStatus({ type: 'ok', msg: `✅ Tersimpan ke Gist! (${result.id.slice(0, 8)}…)` });
+    } catch (e) {
+      setGistStatus({ type: 'err', msg: `❌ ${e.message}` });
+    } finally { setGistBusy(false); }
+  };
+
+  const handleGistPull = async () => {
+    if (!gistPat.trim()) { setGistStatus({ type: 'err', msg: '❌ Masukkan GitHub Token terlebih dahulu.' }); return; }
+    setGistBusy(true); setGistStatus(null);
+    try {
+      let targetId = gistId;
+      if (!targetId) {
+        const found = await findExistingGist(gistPat);
+        if (!found) throw new Error('Gist belum ditemukan. Push dulu dari perangkat lain.');
+        targetId = found.id;
+        saveGistId(found.id);
+        setGistId(found.id);
+      }
+      const snapshot = await pullFromGist(gistPat, targetId);
+      const validation = validateSnapshot(snapshot);
+      if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
+      importAllSafe(snapshot);
+      setSummary(readSummary());
+      setGistStatus({ type: 'ok', msg: '✅ Progress dipulihkan dari Gist! Muat ulang halaman.' });
+    } catch (e) {
+      setGistStatus({ type: 'err', msg: `❌ ${e.message}` });
+    } finally { setGistBusy(false); }
+  };
+
+  const savePatAndId = () => {
+    saveToken(gistPat.trim());
+    saveGistId(gistId.trim());
+    setGistStatus({ type: 'ok', msg: '✅ Token tersimpan.' });
   };
 
   const summaryItems = [
@@ -181,6 +241,66 @@ export default function ExportMode({ onExit }) {
       {status && status.type !== 'preview' && (
         <div style={{ padding: '12px 14px', borderRadius: T.r.md, fontSize: 13, lineHeight: 1.5, marginBottom: 16, background: status.type === 'ok' ? T.correctBg : T.wrongBg, border: `1px solid ${status.type === 'ok' ? T.correctBorder : T.wrongBorder}`, color: status.type === 'ok' ? T.correct : T.wrong }}>
           {status.msg}
+        </div>
+      )}
+
+      {/* E2: GitHub Gist Sync */}
+      <button
+        onClick={() => setShowGist((s) => !s)}
+        style={{ width: '100%', padding: '12px', marginBottom: 12, fontFamily: 'inherit', fontSize: 13, fontWeight: 700, borderRadius: T.r.md, border: `1px solid ${showGist ? T.borderActive : T.border}`, background: showGist ? T.surfaceActive : T.surface, color: showGist ? T.amber : T.textMuted, cursor: 'pointer', textAlign: 'left' }}
+      >
+        🔗 Sinkronisasi Gist (Multi-Perangkat) {showGist ? '▲' : '▼'}
+      </button>
+
+      {showGist && (
+        <div className={S.cardLg} style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 10, lineHeight: 1.6 }}>
+            Sync progress antar-perangkat tanpa backend — pakai GitHub Gist pribadi kamu (gratis).
+            Token disimpan di perangkat ini saja dan hanya dikirim ke <strong>api.github.com</strong>.
+          </div>
+
+          <div style={{ fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}>GitHub Personal Access Token (scope: gist)</div>
+          <input
+            type="password"
+            value={gistPat}
+            onChange={(e) => setGistPat(e.target.value)}
+            placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+            style={{ width: '100%', padding: '10px 12px', fontSize: 13, fontFamily: 'monospace', border: `1px solid ${T.border}`, borderRadius: T.r.md, background: T.surface, color: T.text, boxSizing: 'border-box', marginBottom: 8 }}
+          />
+
+          <div style={{ fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}>Gist ID (isi otomatis setelah push pertama)</div>
+          <input
+            type="text"
+            value={gistId}
+            onChange={(e) => setGistId(e.target.value)}
+            placeholder="(otomatis diisi)"
+            style={{ width: '100%', padding: '10px 12px', fontSize: 12, fontFamily: 'monospace', border: `1px solid ${T.border}`, borderRadius: T.r.md, background: T.surface, color: T.textMuted, boxSizing: 'border-box', marginBottom: 10 }}
+          />
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6, marginBottom: 8 }}>
+            <button onClick={savePatAndId} disabled={gistBusy}
+              style={{ padding: '9px 6px', fontFamily: 'inherit', fontSize: 11, fontWeight: 700, borderRadius: T.r.md, border: `1px solid ${T.border}`, background: T.surface, color: T.textMuted, cursor: 'pointer' }}>
+              💾 Simpan
+            </button>
+            <button onClick={handleGistPush} disabled={gistBusy || !gistPat.trim()}
+              style={{ padding: '9px 6px', fontFamily: 'inherit', fontSize: 11, fontWeight: 700, borderRadius: T.r.md, border: `1px solid ${T.correctBorder}`, background: T.correctBg, color: T.correct, cursor: 'pointer' }}>
+              {gistBusy ? '⏳' : '⬆ Push'}
+            </button>
+            <button onClick={handleGistPull} disabled={gistBusy || !gistPat.trim()}
+              style={{ padding: '9px 6px', fontFamily: 'inherit', fontSize: 11, fontWeight: 700, borderRadius: T.r.md, border: `1px solid ${T.borderActive}`, background: T.surfaceActive, color: T.amber, cursor: 'pointer' }}>
+              {gistBusy ? '⏳' : '⬇ Pull'}
+            </button>
+          </div>
+
+          {gistStatus && (
+            <div style={{ fontSize: 12, padding: '8px 10px', borderRadius: T.r.md, background: gistStatus.type === 'ok' ? T.correctBg : T.wrongBg, border: `1px solid ${gistStatus.type === 'ok' ? T.correctBorder : T.wrongBorder}`, color: gistStatus.type === 'ok' ? T.correct : T.wrong }}>
+              {gistStatus.msg}
+            </div>
+          )}
+
+          <div style={{ marginTop: 8, fontSize: 10, color: T.textFaint, lineHeight: 1.5 }}>
+            Cara buat token: github.com → Settings → Developer settings → Personal access tokens → New token → centang <strong>gist</strong>
+          </div>
         </div>
       )}
 

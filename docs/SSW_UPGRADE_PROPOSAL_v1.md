@@ -744,7 +744,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 2. ✅ **A2** Smart Mode Recommendation Engine — recommend-mode.js replaces getQuickStart
 3. ✅ **E4** LocalStorage compression (lz-string) — engine.js + migrations.js + storage tests
 4. ~~⏳ **D3** Mode Buku Catatan per Kartu~~ → moved to Phase 5.5
-5. ~~⏳ **E2** GitHub Gist sync (opt-in)~~ → deferred
+5. ~~⏳ **E2** GitHub Gist sync (opt-in)~~ ✅ v4.6.0 — `gist-sync.js` + ExportMode section
 
 ### Phase 5.5 — Unfinished Items ✅ SELESAI (2026-05-08)
 1. ✅ **D1** Mode Dengarkan (Listening Comprehension) — `src/modes/DengarMode.jsx`
