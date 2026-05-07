@@ -3,6 +3,7 @@ node_modules/
 legacy/
 outputs/
 coverage/
+scripts/archive/
 public/sw.js
 src/data/cards.js
 src/data/jac-official.js

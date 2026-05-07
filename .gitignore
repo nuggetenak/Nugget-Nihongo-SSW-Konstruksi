@@ -13,6 +13,8 @@ coverage/
 # These are one-shot artefacts; merged into src/data/source/ and no longer needed
 outputs/
 
+# scripts/archive/ is intentionally tracked — one-shot migration scripts kept for reference
+
 # Legacy code — kept for historical reference only, not part of build
 # Tracked intentionally; do not add to gitignore — archival value
 # legacy/

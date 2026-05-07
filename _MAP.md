@@ -53,9 +53,15 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── ci.yml                      ← lint + test (verbose) + build + build output check
 │   └── deploy.yml                  ← validate → merge-cards → bump SW → build → pages deploy
 ├── docs/
-│   ├── MASTER-BLUEPRINT-v6.md      ← ★ ACTIVE blueprint (Phases A–G)
-│   ├── seeds/                      ← sipil-sets-seed.js, bangunan-sets-seed.js
-│   └── archive/                    ← Old blueprints (reference only)
+│   ├── BLUEPRINT-CURRENT.md        ← active: post-completion status + open items
+│   ├── archive/ARCHIVE-INDEX.md    ← index of all 15 historical docs
+│   ├── archive/                    ← old blueprints v3–v6, proposals, audit docs (all executed)
+│   └── seeds/                      ← sipil/bangunan seed JS (superseded by src/data/)
+├── scripts/
+│   ├── merge-cards.mjs             ← ACTIVE: deploy.yml assembles cards.js from source/
+│   ├── audit-integrity.mjs         ← ACTIVE: npm run audit:integrity
+│   └── archive/                    ← one-shot CS-01–05 migration scripts (do not re-run)
+│       └── README.md
 ├── legacy/
 │   └── ssw_flashcards_v87.jsx      ← Historical reference; not part of build
 └── src/
@@ -175,7 +181,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Metric | Value |
 |--------|-------|
 | Version | **4.1.0** |
-| Tests | **383+** (35 files) |
+| Tests | **383+** (34 files — ResultScreen.test.jsx deduped) |
 | Prod dependencies | **3** (react, react-dom, ts-fsrs) |
 | Modes | **18** (all React.lazy) |
 | Flashcards | **1,438** |
@@ -275,4 +281,5 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-04 | Codex (Sonnet) | fix(JpDisplay): native ruby rendering + tap-to-reveal furigana |
 | 2026-05-04 | Sonnet 4.6 | post-Codex cleanup: wrapInteractive, ReviewMode session, stale branch cleanup |
 | 2026-05-07 | Sonnet 4.6 | FE-01–09: CSS modules, reduced motion, design tokens, a11y, error boundaries, offline banner, debounce, toast upgrade, 22 new tests, path alias, types, PWA install, SW update toast, haptics, scroll restore, View Transitions |
-| 2026-05-07 | Sonnet 4.6 | Repo hygiene: outputs/ untracked, stale branch deleted, barrel exports updated, gitignore/prettierignore expanded, CI improved, version → 4.1.0, _MAP.md + CHANGELOG updated |
+| 2026-05-07 | Sonnet 4.6 | Hygiene pass 1: outputs/ untracked, stale branch deleted, barrel exports, gitignore, CI improved, version → 4.1.0, _MAP + CHANGELOG updated |
+| 2026-05-07 | Sonnet 4.6 | Hygiene pass 2: blueprint archived → BLUEPRINT-CURRENT.md; README rewritten; ARCHIVE-INDEX created; one-shot scripts → scripts/archive/; duplicate ResultScreen.test removed; CHANGELOG compacted 739→326 lines; eslint/prettier ignore scripts/archive/ |
