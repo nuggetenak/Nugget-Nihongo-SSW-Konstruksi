@@ -1,8 +1,9 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-07 by Agent Sonnet 4.6 (v4.2.0 — test fix + docs update)
-> **Version:** v4.2.0 — Phases A–G + CS-01–05 + FE-01–09 + test fix complete; 376+ tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.3.1 — Phase 5.1–5.4 complete)
+> **Version:** v4.3.1 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.4 complete; 376 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
+> **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
 
 ---
@@ -38,7 +39,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.1.0 · react, react-dom, vite, ts-fsrs (3 prod deps)
+├── package.json                    ← v4.3.1 · react, react-dom, vite, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -211,6 +212,9 @@ Nugget-Nihongo-SSW-Konstruksi/
 | G | QA + Polish + Release | ✅ v4.0.0 |
 | CS-01–05 | Content Standardization (split, type, ruby, quote, re-annotation) | ✅ v4.0.x |
 | FE-01–09 | CSS Modules · A11y · Robustness · DX · PWA · UX | ✅ v4.1.0 |
+| Phase 5.1 | Critical Gaps: R1 ReviewSummary, A1 WrongBridge, K1 SwipeGesture, SIM1 Pause, BUG-06 Pool, ST2 Readiness, E1 SWUpdate, S5/BUG-07 Sprint wrong-tracker | ✅ v4.3.0 |
+| Phase 5.3 | Mode Enhancements: B2 SprintCategory, SIM3+SIM4 PostExam, F1 Achievements, F2 DailyChallenge | ✅ v4.3.1 |
+| Phase 5.4 | Polish & Infra: ST1 Heatmap, A2 SmartRecommend, E4 lz-compression | ✅ v4.3.1 |
 
 ---
 
@@ -266,6 +270,15 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/tests/Toast.test.jsx` | 8 tests incl. fake timers + type-aware aria-live |
 | `HUSKY-SETUP.md` | One-time pre-commit hook setup instructions |
 
+### New Files Since v4.3.0
+
+| File | Purpose |
+|------|---------| 
+| `src/utils/achievements.js` | 14 achievement badges — `buildAchievementState()` + `evaluateAchievements()` |
+| `src/utils/daily-challenge.js` | Deterministic date-seeded daily challenge question from JAC+Wayground pool |
+| `src/utils/recommend-mode.js` | Smart mode recommendation engine — replaces `getQuickStart` in Dashboard |
+| `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap (126 days, amber opacity scale) |
+
 ---
 
 ## 8. Agent Trail
@@ -286,3 +299,5 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-07 | Sonnet 4.6 | Hygiene pass 1: outputs/ untracked, stale branch deleted, barrel exports, gitignore, CI improved, version → 4.1.0, _MAP + CHANGELOG updated |
 | 2026-05-07 | Sonnet 4.6 | Hygiene pass 2: blueprint archived → BLUEPRINT-CURRENT.md; README rewritten; ARCHIVE-INDEX created; one-shot scripts → scripts/archive/; duplicate ResultScreen.test removed; CHANGELOG compacted 739→326 lines; eslint/prettier ignore scripts/archive/ |
 | 2026-05-07 | Sonnet 4.6 | v4.2.0: fixed BottomNav.test + Toast.test CSS module mock (vi.mock → default Proxy); bumped to 20 modes; docs updated (MAP, BLUEPRINT-CURRENT, CHANGELOG) |
+| 2026-05-07 | Sonnet 4.6 | v4.3.0 Phase 5.1 complete: SIM1 (pause + auto-pause), BUG-06 (JAC+Wayground pool merge), ST2 (Exam Readiness gauge in StatsMode). 376/376 tests. |
+| 2026-05-08 | Sonnet 4.6 | v4.3.1 Phase 5.1–5.4: BUG-05/08/10/11 fixed; B2 SprintMode category+duration+escalation; SIM3+SIM4 post-exam analysis; F1 achievements (14 badges); F2 daily challenge; ST1 heatmap; A2 smart recommendation; E4 lz-string compression. 376/376 tests. |

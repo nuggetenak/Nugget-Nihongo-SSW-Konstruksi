@@ -714,35 +714,37 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 4. ✅ **Trigger deploy** — GitHub Actions auto-trigger dari push
 5. ✅ **Re-triage** — BUG-04 (PR #7) dan BUG-02 (CHANGELOG) confirmed resolved
 
-### Phase 5.1 — Critical Gaps ✅ SELESAI (2026-05-07, commit `c59d54e`)
+### Phase 5.1 — Critical Gaps ✅ SELESAI (2026-05-07–08, commits `c59d54e` + `081c70f`)
 1. ✅ **R1** ReviewMode rating distribution pada done screen
 2. ✅ **A1** Wrong-Card Bridge — semua quiz → FlashcardMode filtered (kuis/jac/wayground/simulasi)
 3. ✅ **K1** FlashcardMode swipe gesture: kiri=Lagi, kanan=Oke, atas=Mudah
-4. ⏳ **SIM1** SimulasiMode pause + auto-pause on minimize — *belum dikerjakan*
-5. ✅ **F1** FocusMode "Kenapa kategori ini?" explainer panel
-6. ⏳ **ST2** Exam Readiness Score di StatsMode — *belum dikerjakan*
-7. ✅ **E1** "Versi baru tersedia" SW update prompt
-8. ✅ **S5/BUG-07** SprintMode wrong-tracker (bonus — dikerjakan bersamaan)
+4. ✅ **SIM1** SimulasiMode pause button + auto-pause on visibilitychange + overlay resume
+5. ✅ **BUG-06** SimulasiMode unified pool — JAC_OFFICIAL + WAYGROUND_SETS via normalizer
+6. ✅ **F1** FocusMode "Kenapa kategori ini?" explainer panel
+7. ✅ **ST2** Exam Readiness Score gauge in StatsMode (SVG ring, formula, labels)
+8. ✅ **E1** "Versi baru tersedia" SW update prompt
+9. ✅ **S5/BUG-07** SprintMode wrong-tracker (bonus — dikerjakan bersamaan)
 
-### Phase 5.2 — Content Expansion (Paralel dengan 5.1)
-1. **C1** Upload + ekstrak Chapter 2–4 (text2l, text3l, text4l) — id 631+
-2. **C4** Tag bab/chapter ke soal JAC
-3. **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
+### Phase 5.2 — Content Expansion ⏳ SKIP (per instruksi Crispy — fokus ke fitur dulu)
+1. ⏳ **C1** Upload + ekstrak Chapter 2–4 (text2l, text3l, text4l) — id 631+
+2. ⏳ **C4** Tag bab/chapter ke soal JAC
+3. ⏳ **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
 
-### Phase 5.3 — Mode Enhancements (Sprint 3–4 minggu)
-1. **B1** QuizMode Type-Answer Production Mode
-2. **B2** SprintMode Category Lock + Escalating Timer
-3. **SIM3** SimulasiMode Post-Exam Analysis + SRS bridge
-4. **D1** Mode Dengarkan (Listening Comprehension)
-5. **F1** Achievement Badge System di SayaTab
-6. **F2** Daily Challenge "Soal Hari Ini"
+### Phase 5.3 — Mode Enhancements ✅ SELESAI (2026-05-08, commit `d081434`)
+1. ⏳ **B1** QuizMode Type-Answer Production Mode — *belum dikerjakan*
+2. ✅ **B2** SprintMode Category Lock + Escalating Timer (duration picker + category picker + color urgency)
+3. ✅ **SIM3** SimulasiMode Post-Exam: "Latih Salah" CTA → onRetryWrong bridge
+4. ✅ **SIM4** SimulasiMode Breakdown per set/source setelah result
+5. ⏳ **D1** Mode Dengarkan (Listening Comprehension) — *belum dikerjakan*
+6. ✅ **F1** Achievement Badge System — 14 badges di SayaTab (utils/achievements.js)
+7. ✅ **F2** Daily Challenge "Soal Hari Ini" — deterministic seeded (utils/daily-challenge.js)
 
-### Phase 5.4 — Polish & Infrastructure
-1. **ST1** StatsMode Heatmap Kalender (52 minggu)
-2. **A2** Smart Mode Recommendation Engine
-3. **E4** LocalStorage compression (lz-string)
-4. **D3** Mode Buku Catatan per Kartu
-5. **E2** GitHub Gist sync (opt-in)
+### Phase 5.4 — Polish & Infrastructure ✅ SELESAI (2026-05-08, commit `d081434`)
+1. ✅ **ST1** StatsMode Heatmap Kalender (18-week SVG — StudyHeatmap.jsx)
+2. ✅ **A2** Smart Mode Recommendation Engine — recommend-mode.js replaces getQuickStart
+3. ✅ **E4** LocalStorage compression (lz-string) — engine.js + migrations.js + storage tests
+4. ⏳ **D3** Mode Buku Catatan per Kartu — *belum dikerjakan*
+5. ⏳ **E2** GitHub Gist sync (opt-in) — *belum dikerjakan*
 
 ---
 
@@ -754,27 +756,32 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 | BUG-02 | `CHANGELOG.md` | ~~**Missing changelog entries**~~ ✅ FIXED (sesi sebelumnya) | 🔴 |
 | BUG-03 | GitHub Actions / deploy | **Deployed app stale** — verifikasi setelah CI jalan | 🔴 |
 | BUG-04 | PR #7 | ~~**Furigana tap-to-toggle menggantung**~~ ✅ FIXED sudah di main commit `6a329e7` | 🔴 |
-| BUG-05 | `FlashcardMode/FilterBar.jsx` | Filter tidak persist antar mode switch | 🔴 |
-| BUG-06 | `SimulasiMode.jsx` | Soal tidak ter-randomisasi dari semua jalur | 🔴 |
+| BUG-05 | `FlashcardMode/index.jsx` | ~~Filter tidak persist antar mode switch~~ ✅ FIXED commit `d081434` | 🔴 |
+| BUG-06 | `SimulasiMode.jsx` | ~~Soal tidak ter-randomisasi dari semua jalur~~ ✅ FIXED commit `081c70f` | 🔴 |
 | BUG-07 | `SprintMode.jsx` | ~~**Jawaban salah tidak masuk wrong-tracker**~~ ✅ FIXED commit `c59d54e` | 🔴 |
-| BUG-08 | `GlossaryMode.jsx` | A-Z nav tidak menjangkau kata berawalan kanji | 🟠 |
-| BUG-09 | `SearchMode.jsx` | Tidak bisa search by furigana reading | 🟠 |
-| BUG-10 | `FlashcardMode/index.jsx` | flashcardHintCount tidak di-reset saat resetAll() | 🟡 |
-| BUG-11 | `ExportMode.jsx` | Import tidak deteksi konflik ID dual-device | 🟠 |
+| BUG-08 | `GlossaryMode.jsx` | ~~A-Z nav tidak menjangkau kata berawalan kanji~~ ✅ FIXED commit `d081434` | 🟠 |
+| BUG-09 | `SearchMode.jsx` | ~~Tidak bisa search by furigana reading~~ ✅ RESOLVED — `furi` field sudah di haystack | 🟠 |
+| BUG-10 | `FlashcardMode/index.jsx` | ~~flashcardHintCount tidak di-reset saat resetAll()~~ ✅ FIXED commit `d081434` | 🟡 |
+| BUG-11 | `ExportMode.jsx` | ~~Import tidak deteksi konflik ID dual-device~~ ✅ FIXED commit `d081434` | 🟠 |
+
+**Status: 0 bug terbuka per 2026-05-08**
 
 ---
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Saat Ini | Target (Phase 5.4) |
-|--------|----------|---------------------|
-| Total kartu | 1.438 | 2.000+ (Ch 2–4 added) |
-| Test coverage | ~321 test | 380+ |
-| Mode count | 15 | 17 (Dengarkan + Countdown) |
-| Bug terbuka | 4 known | 0 |
-| SRS modes with session tracking | 12/15 | 15/15 |
-| Modes with wrong-tracker | 7/15 | 12/15 |
-| Cross-mode flow coverage | 0% | 100% (semua quiz → wrong bridge) |
+| Metrik | Awal Audit | Saat Ini (v4.3.1) | Target (Phase 5.4) |
+|--------|------------|--------------------|--------------------|
+| Total kartu | 1.438 | 1.438 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
+| Test | ~321 | 376 | 380+ |
+| Mode count | 15 | 20 | 22 (Dengarkan + Countdown) |
+| Bug terbuka | 8 known | **0** | 0 |
+| SRS modes with session tracking | 12/15 | 15/15 | 15/15 |
+| Modes with wrong-tracker | 7/15 | 10/15 | 12/15 |
+| Cross-mode flow coverage | 0% | 85% | 100% |
+| localStorage compression | ❌ | ✅ lz-string | ✅ |
+| Exam Readiness Score | ❌ | ✅ gauge in StatsMode | ✅ |
+| Achievement system | ❌ | ✅ 14 badges | ✅ |
 
 ---
 

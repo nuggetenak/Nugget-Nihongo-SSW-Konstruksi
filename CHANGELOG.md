@@ -1,3 +1,70 @@
+## [4.3.1] - 2026-05-08
+
+### Phase 5.1 Completion + Phase 5.3 + Phase 5.4 (Agent Sonnet 4.6, commits `081c70f` + `d081434`)
+
+**SIM1 + BUG-06 — SimulasiMode Pause & Unified Question Pool**
+- Pause button in header; auto-pause on `visibilitychange` (tab/minimize); overlay tap to resume
+- `buildPool()` normalizer merges `JAC_OFFICIAL` + `WAYGROUND_SETS` into single shuffled pool
+- Source metadata (`_source`, `_setLabel`) propagated through to results
+
+**ST2 — Exam Readiness Score Gauge (StatsMode)**
+- SVG ring above overview card; color: red <50 / amber 50–74 / green ≥75
+- Formula: mature×40 + avgQuizAcc×35 + streak×15 + bestSim×10
+- Labels: Belum Siap / Hampir Siap / Siap Ujian!
+
+**BUG-05 — FlashcardMode Filter Persist**
+- `search` and `sortMode` state initialized from `sessionStorage` and written back on change
+- Keys: `ssw-fc-search`, `ssw-fc-sort` — session-scoped (cleared on tab close)
+
+**BUG-08 — GlossaryMode A-Z Nav Kanji/Romaji**
+- Non-hiragana/katakana `furi` initials bucketed to `#` at end of nav list
+- 13 cards with romaji-initial furi now accessible
+
+**BUG-10 — flashcardHintCount Reset on resetAll()**
+- `flashcardHintCount: 0` added to `DEFAULTS.prefs` in `schema.js`
+- `resetAll()` now correctly resets hint counter via `freshDefaults()`
+
+**BUG-11 — ExportMode Conflict Detection**
+- `exported_at` timestamp compared: device vs file
+- Warning banner shown if device data is newer than imported file
+
+**B2 — SprintMode Category Lock + Escalating Timer**
+- Duration picker: 30s / 60s / 2 menit before sprint
+- Category picker: filtered from available cards; default all
+- Visual urgency: normal → amber pulse (≤30s) → red pulse (≤10s)
+
+**SIM3 + SIM4 — Post-Exam Analysis + Breakdown**
+- "Latih N Salah" CTA wired to `onRetryWrong` prop (opens FlashcardMode filtered)
+- Breakdown per set/source card rendered after results (SIM4)
+
+**F1 — Achievement Badge System**
+- `src/utils/achievements.js`: 14 badges with `check(state)` predicates
+- `buildAchievementState()` + `evaluateAchievements()` pure functions
+- 4×N grid in SayaTab: grayscale until unlocked
+
+**F2 — Daily Challenge (Soal Hari Ini)**
+- `src/utils/daily-challenge.js`: deterministic date-seeded question from JAC+Wayground pool
+- Rendered in SayaTab with inline option buttons; answered state in sessionStorage
+
+**ST1 — StudyHeatmap (Kalender Belajar)**
+- `src/components/StudyHeatmap.jsx`: 18-week SVG heatmap (126 days)
+- Color: amber opacity 25–100% by session count; "Sedikit / Banyak" legend
+- Wired into StatsMode above 7-day bar chart
+
+**A2 — Smart Mode Recommendation Engine**
+- `src/utils/recommend-mode.js`: pure function, priority-rule based
+- Replaces `getQuickStart` in Dashboard — reads sessions + streak from storage
+- Rules: exam proximity, SRS due, streak, quiz accuracy, sim score
+
+**E4 — lz-string localStorage Compression**
+- `engine.js`: `writeDoc` compresses via `LZString.compressToUTF16`; `readDoc` decompresses with JSON fallback (backward compat)
+- `migrations.js`: `safeGetDoc` added — decompresses engine docs before v2→v3 migration
+- `storage.test.js`: 5 raw `JSON.parse(localStorage.getItem(...))` assertions replaced with `get()` calls
+
+**Tests:** 376/376 passing · Build clean (9.9s)
+
+---
+
 ## [4.3.0] - 2026-05-07
 
 ### Phase 5.1 — Critical Gaps (Agent Sonnet 4.6, commits `532db6a` + `c59d54e`)
