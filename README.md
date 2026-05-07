@@ -1,95 +1,149 @@
-# Agent Task Files — SSW Konstruksi Frontend & Content Upgrade
+# 🏗️ Nugget Nihongo — SSW Konstruksi
 
-## How to Use
-Each file is a complete prompt for a free Claude Sonnet session.
-1. Open a new Claude.ai chat
-2. Paste the contents of the task file
-3. Add the required source files (marked with [paste X here])
-4. Run the task, get the output
-5. Apply output to repo, commit, push
+**Aplikasi belajar ujian SSW Konstruksi Jepang untuk tenaga kerja Indonesia.**
 
-## Free Account Constraints
-- Paste source code directly into the chat
-- For large files (> 500 lines), split into multiple sessions
-- The agent cannot run code — it writes scripts, you run them locally
-- Each session is independent — no memory between sessions
+土木 · 建築 · ライフライン設備
+
+🔗 **[Buka Aplikasi](https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/)**
 
 ---
 
-## CONTENT STANDARDIZATION (CS) — Phase 1 Foundation
+## Apa Ini?
 
-| Task | File | What Agent Does | You Run |
-|---|---|---|---|
-| CS-01 | AGENT-TASK-CS-01.md | Writes split-cards.mjs + merge-cards.mjs | `node scripts/split-cards.mjs` |
-| CS-02 | AGENT-TASK-CS-02.md | Writes migrate-cs02.mjs (romaji remove + type add) | `node scripts/migrate-cs02.mjs` |
-| CS-03 | AGENT-TASK-CS-03.md | Updates JpDisplay.jsx DescBlock | Apply file directly |
-| CS-04 | AGENT-TASK-CS-04.md | Updates FlipCard.jsx + FlipCard.module.css | Apply files directly |
+PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定技能 / SSW) bidang konstruksi Jepang. Dirancang untuk TKI yang bersiap kerja di Jepang sebagai pekerja konstruksi.
 
-## CONTENT RE-ANNOTATION (CS-05) — Phase 2, 8 batches
+**Fitur utama:**
+- 🃏 **1,438 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
+- ❓ **~860 soal kuis** — format JAC, Wayground, CSV, Sipil, Bangunan
+- 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
+- ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
+- 🔢 **Angka Kunci** — angka wajib hafal sebelum ujian
+- 📊 **Statistik** per kategori + riwayat belajar 7 hari
+- 🌙 **Mode gelap/terang** + offline-first (PWA)
+- 🔊 **Audio bahasa Jepang** via Web Speech API
 
-| Task | File | Cards | Source file to paste |
-|---|---|---|---|
-| CS-05-A | AGENT-TASK-CS-05-TEMPLATE.md | 211 | cards-common-vocab.js |
-| CS-05-B | AGENT-TASK-CS-05-TEMPLATE.md | 120 | cards-lifeline-vocab.js |
-| CS-05-C | AGENT-TASK-CS-05-TEMPLATE.md | ~80 | cards-common.js (hukum only, filter by type) |
-| CS-05-D | AGENT-TASK-CS-05-TEMPLATE.md | ~200 | cards-common.js (konsep, first half) |
-| CS-05-E | AGENT-TASK-CS-05-TEMPLATE.md | ~200 | cards-common.js (konsep, second half) |
-| CS-05-F | AGENT-TASK-CS-05-TEMPLATE.md | ~200 | cards-lifeline.js (first half) |
-| CS-05-G | AGENT-TASK-CS-05-TEMPLATE.md | ~226 | cards-lifeline.js (second half) |
-| CS-05-H | AGENT-TASK-CS-05-TEMPLATE.md | 148 | cards-kenchiku.js + cards-doboku.js |
-
-⚠️ For CS-05: After CS-01 runs, you'll have the 8 source files. Use TEMPLATE.md as the prompt — paste it + the relevant source file content.
+**3 Jalur Studi:**
+| Jalur | 日本語 | Fokus |
+|-------|-------|-------|
+| Teknik Sipil | 土木 | Pekerjaan tanah, infrastruktur |
+| Bangunan | 建築 | Gedung, bekisting, beton |
+| Lifeline | ライフライン設備 | Listrik, pipa, AC, telekomunikasi |
 
 ---
 
-## FRONTEND (FE) — Phase 3
+## Install Aplikasi (PWA)
 
-| Task | File | What Agent Does |
-|---|---|---|
-| FE-01-A | AGENT-TASK-FE-01-A.md | CSS module: DangerMode + AngkaMode |
-| FE-01-B | AGENT-TASK-FE-01-B.md | CSS module: SimulasiMode + StatsMode |
-| FE-01-C | AGENT-TASK-FE-01-C.md | CSS module: ReviewMode + GlossaryMode |
-| FE-02 | AGENT-TASK-FE-02.md | prefers-reduced-motion in 7 CSS files |
-| FE-03 | AGENT-TASK-FE-03.md | Design tokens: spacing, shadow, z-index, transitions |
-| FE-04-AB | AGENT-TASK-FE-04-AB.md | A11y: aria labels + keyboard nav |
-| FE-04-CD | AGENT-TASK-FE-04-CD.md | A11y: focus trap + focus management |
-| FE-05 | AGENT-TASK-FE-05.md | ErrorBoundary + OfflineBanner + debounce + toast |
-| FE-06 | AGENT-TASK-FE-06.md | Component render tests (install @testing-library first) |
-| FE-07-08-09 | AGENT-TASK-FE-07-08-09.md | DX + PWA + UX Polish (haptic, scroll, transitions) |
+1. Buka di browser HP: `https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/`
+2. Tap **"Tambahkan ke Layar Utama"** (Android) atau **"Add to Home Screen"** (iOS)
+3. Buka dari ikon — bisa dipakai offline setelah pertama kali dibuka
 
 ---
 
-## Order of Execution
+## Development
 
-```
-Week 1 — Foundation:
-  CS-01 → CS-02 → CS-03 → CS-04   (in order, each depends on previous)
+### Prasyarat
+- Node.js 22+
+- npm
 
-Week 2 — Re-annotation:
-  CS-05-A, CS-05-B                 (vocab first — fastest to validate)
-  CS-05-C                          (hukum — most critical for exam prep)
-  CS-05-D through CS-05-H          (can run in parallel)
-
-Week 3 — Frontend:
-  FE-01-A, FE-01-B, FE-01-C       (can run in parallel)
-  FE-02                            (independent)
-  FE-03                            (independent)
-  FE-04-AB, FE-04-CD              (in order)
-  FE-05                            (independent)
-
-Week 4 — Polish:
-  FE-06                            (after FE-05 done)
-  FE-07-08-09                      (independent)
+### Setup
+```bash
+git clone https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi.git
+cd Nugget-Nihongo-SSW-Konstruksi
+npm install
+npm run dev        # dev server → http://localhost:5173/Nugget-Nihongo-SSW-Konstruksi/
 ```
 
-## Validation Before Committing Agent Output
+### Perintah
+```bash
+npm run dev           # Dev server dengan HMR
+npm run build         # Production build → dist/
+npm run preview       # Preview build lokal
+npm test              # Jalankan semua test (383+ test cases)
+npm run test:watch    # Test mode watch
+npm run lint          # ESLint (0 warnings required)
+npm run lint:fix      # Auto-fix ESLint
+npm run format        # Prettier format
+npm run validate      # lint + test + build
+npm run audit:integrity  # Audit integritas data kartu
+```
 
-For CS tasks:
-- Run `npm run build` — must complete with 0 errors
-- Run `npm test -- --run` — 360 tests must pass
-- Spot-check 5–10 cards per batch manually
+### Stack
+| Layer | Teknologi |
+|-------|-----------|
+| Framework | React 19 |
+| Build | Vite 6 + @vitejs/plugin-react |
+| SRS Engine | ts-fsrs 5.3 |
+| Storage | Pure localStorage (schema v3) |
+| Tests | Vitest 4 + @testing-library/react |
+| Styling | CSS Modules + CSS custom properties |
+| CI/CD | GitHub Actions → GitHub Pages |
+| PWA | Custom service worker + Web App Manifest |
 
-For FE tasks:
-- Run `npm run lint` — 0 errors, 0 warnings
-- Run `npm run build` — 0 errors
-- Run `npm test -- --run` — all tests pass
+**Prod dependencies: 3** (react, react-dom, ts-fsrs) — hard constraint.
+
+---
+
+## Struktur Proyek
+
+```
+src/
+├── App.jsx                  # Root, 3-tab layout
+├── contexts/                # AppContext, ProgressContext, SRSContext
+├── data/                    # Flashcard & quiz data (1,438 cards + ~860 questions)
+│   └── source/              # 8 source files (CS-01 split)
+├── srs/                     # FSRS engine (fsrs-core, fsrs-store, fsrs-scheduler)
+├── storage/                 # localStorage engine, schema v3, migrations
+├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
+├── components/              # Shared UI components
+├── modes/                   # 18 mode screens (all React.lazy)
+│   └── FlashcardMode/       # Decomposed flashcard mode
+├── router/                  # ModeRouter + modes registry
+├── utils/                   # haptic, speak, jp-helpers, shuffle, …
+├── styles/                  # global.css (design tokens), theme.js
+└── tests/                   # 35 test files, 383+ tests
+```
+
+Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
+
+---
+
+## Arsitektur Data (localStorage)
+
+3 dokumen localStorage terpisah:
+
+| Key | Isi |
+|-----|-----|
+| `ssw-progress` | known/unknown cards, quiz scores, streak, sessions, daily mission |
+| `ssw-srs-data` | FSRS card states (stability, difficulty, interval, due date) |
+| `ssw-prefs` | track, theme, furiganaPolicy, audioEnabled, examDate, goalHarian |
+
+Export/import tersedia di tab **Saya** → fitur backup & restore.
+
+---
+
+## CI/CD
+
+Setiap push ke `main` → GitHub Actions menjalankan:
+1. **Lint** (`npm run lint` — zero warnings)
+2. **Test** (`npm test -- --run`)
+3. **Build** (`npm run build`)
+4. **Deploy** ke GitHub Pages (otomatis, lewat `deploy.yml`)
+
+Service worker cache version di-bump otomatis di setiap deploy.
+
+---
+
+## Kontribusi
+
+1. Fork repo
+2. Buat branch: `git checkout -b feat/nama-fitur`
+3. Pastikan `npm run validate` lulus sebelum push
+4. Buat Pull Request ke `main`
+
+**Untuk setup pre-commit hook:** lihat `HUSKY-SETUP.md`
+
+---
+
+## Lisensi
+
+Pribadi / Private — Nugget Nihongo · 2026

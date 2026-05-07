@@ -1,8 +1,9 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-07 by Agent Sonnet 4.6 (FE sprint + repo hygiene)
-> **Version:** v4.1.0 — Phases A–G complete + FE-01–09; 383+ tests
-> **Blueprint:** `docs/MASTER-BLUEPRINT-v6.md` ← **READ THIS FIRST** (v6 = agent-executable, self-contained, supersedes ALL prior)
+> **Last updated:** 2026-05-07 by Agent Sonnet 4.6 (FE sprint + full repo hygiene)
+> **Version:** v4.1.0 — Phases A–G + CS-01–05 + FE-01–09 complete; 383+ tests
+> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
+> **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
 
 ---
 
@@ -200,6 +201,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | E | FlashcardMode Decomposition | ✅ v3.9.0 |
 | F | Exam Countdown + Audio | ✅ v4.0.0 |
 | G | QA + Polish + Release | ✅ v4.0.0 |
+| CS-01–05 | Content Standardization (split, type, ruby, quote, re-annotation) | ✅ v4.0.x |
 | FE-01–09 | CSS Modules · A11y · Robustness · DX · PWA · UX | ✅ v4.1.0 |
 
 ---
