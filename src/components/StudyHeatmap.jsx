@@ -1,6 +1,6 @@
 // ─── components/StudyHeatmap.jsx ─────────────────────────────────────────────
 // ST1: GitHub-style 52-week study heatmap using SVG.
-// Data from sessions array (capped 90, so ~3 months of real data shown).
+// Data from sessions array (capped 180, so ~6 months of real data shown).
 // ─────────────────────────────────────────────────────────────────────────────
 import { useMemo } from 'react';
 import { T } from '../styles/theme.js';
@@ -12,9 +12,8 @@ const DAYS = 7;
 const DAY_LABELS = ['Min', '', 'Sel', '', 'Kam', '', 'Sab'];
 
 export default function StudyHeatmap({ sessions = [] }) {
-  const today = new Date();
-
   const { cellData, maxCount } = useMemo(() => {
+    const today = new Date();
     // Build date → count map
     const byDate = {};
     sessions.forEach((sess) => {

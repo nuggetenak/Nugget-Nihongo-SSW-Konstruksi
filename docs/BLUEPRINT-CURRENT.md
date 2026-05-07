@@ -113,16 +113,16 @@ These are honest assessments — not blocking anything, but relevant for future 
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
 ### Features Not Yet Implemented (from Proposal)
-- **B1** QuizMode Type-Answer Production Mode (Blueprint C-10)
-- **D1** Mode Dengarkan — Listening Comprehension (audio-first quiz)
-- **D3** Mode Buku Catatan — Personal notes per card
-- **E2** GitHub Gist sync (opt-in, no backend)
-- **A3** Inter-Mode Navigation Breadcrumb
+- **B1** QuizMode Type-Answer Production Mode (Blueprint C-10) — *still pending*
+- ~~**D1** Mode Dengarkan~~ ✅ v4.4.0 — `src/modes/DengarMode.jsx`
+- ~~**D3** Mode Buku Catatan~~ ✅ v4.4.0 — `src/modes/CatatanMode.jsx`
+- **E2** GitHub Gist sync (opt-in, no backend) — *still pending*
+- ~~**A3** Inter-Mode Navigation Breadcrumb~~ ✅ v4.4.0 — `modeHistory` + `goBack()` in AppContext
 
 ### Technical / Token Audit
 - **FE-03 token audit**: 8+ locations in component CSS still use hardcoded values (z-index, shadow, transition values) instead of new CSS tokens. Flagged with comments in `global.css`. Low urgency — cosmetic consistency only.
 - **lz-string is now a prod dep**: With E4, `lz-string` is used at runtime. `package.json` constraint has shifted to 4 prod deps (react, react-dom, ts-fsrs, lz-string). Update constraint doc if needed.
-- **sessions cap at 90**: Heatmap uses 18 weeks (~126 days). Consider bumping sessions cap to 180 for meaningful heatmap coverage.
+- **sessions cap at 180**: Heatmap uses 18 weeks (~126 days). Cap bumped 90→180 in v4.4.0. ✅
 
 ### Architecture
 - **Category mismatch**: `jenis_kerja` and `alat_umum` categories contain lifeline content even for sipil/bangunan track users. Re-categorization would require content review of ~485 cards.

@@ -13,7 +13,7 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import { getMission, completeMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import { get as storageGet } from '../storage/engine.js';
-import { MODE_COMPONENTS } from './modes.js';
+import { MODE_COMPONENTS, MODE_META } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
 import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 
@@ -130,7 +130,7 @@ function FocusSentinel() {
 
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
-  const { mode, modeParams, exitMode, goMode, track } = useApp();
+  const { mode, modeParams, exitMode, goMode, track, modeHistory, goBack } = useApp();
   const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession, streakData, sessions } = useProgress();
   const srs = useSRSContext();
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
@@ -243,13 +243,39 @@ export default function ModeRouter() {
     glosari:  { onExit: exitMode, track },
     produksi: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('produksi'), audioEnabled },
     mirip:    { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },
+    dengar:   { cards: filteredCards, allCards: CARDS, onExit: exitMode, onSessionEnd: makeSessionEnd('dengar') },
+    catatan:  { cards: filteredCards, onExit: exitMode },
   };
 
   const props = modeProps[mode] ?? { onExit: exitMode };
 
+  // A3: breadcrumb — show "← Kembali ke [Mode]" if there's navigation history
+  const breadcrumbMode = modeHistory.length > 0 ? modeHistory[modeHistory.length - 1] : null;
+  const breadcrumbMeta = breadcrumbMode ? MODE_META[breadcrumbMode] : null;
+
   return (
     <ErrorBoundary onExit={exitMode}>
       <FocusSentinel />
+      {breadcrumbMeta && (
+        <div style={{
+          position: 'sticky', top: 0, zIndex: 'var(--z-banner, 30)',
+          background: 'var(--ssw-navBg)', borderBottom: '1px solid var(--ssw-border)',
+          padding: '6px 16px',
+        }}>
+          <button
+            onClick={goBack}
+            aria-label={`Kembali ke ${breadcrumbMeta.label}`}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              fontFamily: 'inherit', fontSize: 12, fontWeight: 600,
+              color: 'var(--ssw-amber)', display: 'inline-flex', alignItems: 'center', gap: 4,
+              padding: '4px 0',
+            }}
+          >
+            ← {breadcrumbMeta.icon} {breadcrumbMeta.label}
+          </button>
+        </div>
+      )}
       <Suspense fallback={<ModeLoader />}>
         <ModeComponent {...props} />
       </Suspense>

@@ -743,8 +743,15 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 1. ✅ **ST1** StatsMode Heatmap Kalender (18-week SVG — StudyHeatmap.jsx)
 2. ✅ **A2** Smart Mode Recommendation Engine — recommend-mode.js replaces getQuickStart
 3. ✅ **E4** LocalStorage compression (lz-string) — engine.js + migrations.js + storage tests
-4. ⏳ **D3** Mode Buku Catatan per Kartu — *belum dikerjakan*
-5. ⏳ **E2** GitHub Gist sync (opt-in) — *belum dikerjakan*
+4. ~~⏳ **D3** Mode Buku Catatan per Kartu~~ → moved to Phase 5.5
+5. ~~⏳ **E2** GitHub Gist sync (opt-in)~~ → deferred
+
+### Phase 5.5 — Unfinished Items ✅ SELESAI (2026-05-08)
+1. ✅ **D1** Mode Dengarkan (Listening Comprehension) — `src/modes/DengarMode.jsx`
+2. ✅ **D3** Mode Buku Catatan (Personal Notes) — `src/modes/CatatanMode.jsx`
+3. ✅ **A3** Inter-Mode Navigation Breadcrumb — `modeHistory` + `goBack()` in AppContext + sticky breadcrumb in ModeRouter
+4. ✅ Sessions cap 90→180 (heatmap coverage)
+5. ✅ Lint fixes: StudyHeatmap `today` in useMemo, FlashcardMode redundant dep
 
 ---
 

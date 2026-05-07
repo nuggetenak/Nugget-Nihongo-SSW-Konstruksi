@@ -41,25 +41,40 @@ export function AppProvider({ children }) {
   const [tab, setTab] = useState('home');
   const [mode, setMode] = useState(prefs.lastMode ?? null);
   const [modeParams, setModeParams] = useState(null);
+  const [modeHistory, setModeHistory] = useState([]); // A3: breadcrumb stack (max 3)
 
   // goMode(key) — navigate to mode
   // goMode(key, params) — navigate with extra params (e.g. { filterIds: [...] })
   const goMode = useCallback((m, params = null) => {
+    setModeHistory((h) => mode ? [...h.slice(-2), mode] : h); // push current before navigating
     setMode(m);
     setModeParams(params);
     setPref('lastMode', m);
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [setPref]);
+  }, [mode, setPref]);
 
   const exitMode = useCallback(() => {
+    setModeHistory([]);
     setMode(null);
     setModeParams(null);
     setPref('lastMode', null);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [setPref]);
 
+  // A3: go back one mode in history
+  const goBack = useCallback(() => {
+    if (modeHistory.length === 0) { exitMode(); return; }
+    const prev = modeHistory[modeHistory.length - 1];
+    setModeHistory((h) => h.slice(0, -1));
+    setMode(prev);
+    setModeParams(null);
+    setPref('lastMode', prev);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [modeHistory, exitMode, setPref]);
+
   const goTab = useCallback((t) => {
     setTab(t);
+    setModeHistory([]);
     setMode(null);
     setPref('lastMode', null);
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -105,6 +120,7 @@ export function AppProvider({ children }) {
     // Navigation
     tab, setTab,
     mode, modeParams, goMode, exitMode, goTab,
+    modeHistory, goBack, // A3: breadcrumb
     // Toast
     toast,
   };

@@ -48,15 +48,15 @@ describe('Phase C — Session Tracking', () => {
     expect(sessions[0].date).toBeTruthy();
   });
 
-  it('recordSession caps at 90 entries', () => {
+  it('recordSession caps at 180 entries', () => {
     const getCtx = renderProgress();
-    // Add 95 sessions
+    // Add 185 sessions
     act(() => {
-      for (let i = 0; i < 95; i++) {
+      for (let i = 0; i < 185; i++) {
         getCtx().recordSession({ mode: 'kartu', correct: i, total: 10, durationMs: 1000 });
       }
     });
-    expect(getCtx().sessions.length).toBe(90);
+    expect(getCtx().sessions.length).toBe(180);
   });
 
   it('recordSession accumulates multiple calls', () => {

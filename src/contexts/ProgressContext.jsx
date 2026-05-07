@@ -137,7 +137,7 @@ export function ProgressProvider({ children }) {
       const sessions = [
         ...(prev.sessions ?? []),
         { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
-      ].slice(-90); // keep last 90 sessions
+      ].slice(-180); // keep last 180 sessions (~6 months for heatmap)
       return { ...prev, sessions };
     });
   }, [setProg]);

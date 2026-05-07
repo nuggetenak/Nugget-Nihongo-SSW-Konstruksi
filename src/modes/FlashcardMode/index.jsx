@@ -69,7 +69,7 @@ export default function FlashcardMode({
     const t = base.filter((c) => !known.has(c.id) && !unknown.has(c.id));
     const k = base.filter((c) => known.has(c.id));
     return [...shuffle(u), ...shuffle(t), ...shuffle(k)];
-  }, [cards, known, unknown, reviewBelum]);
+  }, [baseCards, known, unknown, reviewBelum]);
 
   useEffect(() => {
     setOrder(rebuildOrder(sortMode));

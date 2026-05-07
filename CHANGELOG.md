@@ -1,3 +1,40 @@
+## [4.4.0] - 2026-05-08
+
+### Phase 5.5 — Unfinished Items from Proposal (Agent Sonnet 4.6)
+
+**D1 — Mode Dengarkan (Listening Comprehension)**
+- New `src/modes/DengarMode.jsx` — audio-first quiz mode
+- 🔊 button plays Japanese via Web Speech API; user picks Indonesian translation from 4 options
+- Auto-advances after 1.5s; reveals kanji + furigana after answer
+- Gracefully disabled if browser lacks Web Speech API
+- Registered in `latihan` section; wired in ModeRouter with `allCards` for distractors
+
+**D3 — Mode Buku Catatan (Personal Notes per Card)**
+- New `src/modes/CatatanMode.jsx` — personal notes & mnemonics per flashcard
+- Notes stored in `prefs.notes: { [cardId]: string }` (included in export/import)
+- Filter: Semua / Ada Catatan / Belum Ada; live search across cards + notes
+- Inline edit/save/delete per card; amber highlight for notes with content
+- Registered in `pelajari` section; `notes: {}` added to schema DEFAULTS
+
+**A3 — Inter-Mode Navigation Breadcrumb**
+- `AppContext`: `modeHistory` state (max 3) + `goBack()` — tracks mode navigation stack
+- `ModeRouter`: sticky breadcrumb bar `← 🏷️ [Mode Sebelumnya]` when history exists
+- `goMode()` now pushes current mode to history before navigating
+- `exitMode()` and `goTab()` clear history
+
+**Technical debt fixes**
+- Sessions cap bumped 90 → 180 for better heatmap coverage (~6 months)
+- `session-tracking.test.js`: updated cap assertion to 180
+- `StudyHeatmap.jsx`: moved `today` inside `useMemo` (fixes exhaustive-deps warning)
+- `FlashcardMode/index.jsx`: fixed redundant `cards` dep in `useCallback`
+- `schema.js`: `notes: {}` added to prefs DEFAULTS
+
+**Stats**
+- Modes: 20 → 22 (dengar + catatan)
+- Tests: 376/376 ✅ | Lint: clean ✅ | Build: clean ✅
+
+---
+
 ## [4.3.1] - 2026-05-08
 
 ### Phase 5.1 Completion + Phase 5.3 + Phase 5.4 (Agent Sonnet 4.6, commits `081c70f` + `d081434`)
