@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { makeWrongEntry } from '../utils/wrong-tracker.js';
+import { makeWrongEntry, getWrongCount, loadFromStorage } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
@@ -17,25 +17,41 @@ const GROUPS = [
   { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp' },
 ];
 
+// W2: load wrong count for a set from localStorage (picker-time, outside hook)
+function getSetWrongCount(setId) {
+  const stored = loadFromStorage(`ssw-wg-wrong-${setId}`, {});
+  return Object.values(stored).filter((v) => getWrongCount(v) > 0).length;
+}
+
 export default function WaygroundMode({ onExit, onSessionEnd }) {
   const [activeSet, setActiveSet] = useState(null);
+  // W2: 'lemah' mode — only wrong questions for the active set
+  const [lemahMode, setLemahMode] = useState(false);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
   const [wgScores, setWgScores] = usePersistedState('ssw-wg-scores', {});
 
   const set = TEORI_PRAKTIK.find((s) => s.id === activeSet);
 
+  const [wrongCounts, setWrongCounts] = usePersistedState(activeSet ? `ssw-wg-wrong-${activeSet}` : 'ssw-wg-temp', {});
+
   const questions = useMemo(() => {
     if (!set) return [];
-    return shuffle(set.questions).map((q) => ({
+    let pool = set.questions;
+    // W2: filter to wrong-only when in lemah mode
+    if (lemahMode) {
+      pool = pool.filter((q) => {
+        const qId = `${set.id}-${q.id}`;
+        return getWrongCount(wrongCounts[qId]) > 0;
+      });
+    }
+    return shuffle(pool).map((q) => ({
       question: showFuri ? standardizeFuri(q.q) : stripFuri(q.q),
       hint: showHint ? q.hint : null,
       options: q.opts.map((opt, i) => ({ text: showFuri ? standardizeFuri(opt) : stripFuri(opt), sub: q.opts_id?.[i] || null })),
       correctIdx: q.ans, explanation: q.exp, _qId: `${set.id}-${q.id}`,
     }));
-  }, [set, showFuri, showHint]);
-
-  const [_wrongCounts, setWrongCounts] = usePersistedState(activeSet ? `ssw-wg-wrong-${activeSet}` : 'ssw-wg-temp', {});
+  }, [set, showFuri, showHint, lemahMode, wrongCounts]);
 
   const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
     if (!isCorrect && set) { const qId = questions[qIdx]?._qId; if (qId) setWrongCounts((w) => ({ ...w, [qId]: makeWrongEntry(w[qId]) })); }
@@ -44,12 +60,19 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   const handleFinish = useCallback(({ correct, total, maxStreak }) => {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    setWgScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
+    // Only update score for full set runs, not lemah-mode runs
+    if (!lemahMode) setWgScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
     onSessionEnd?.({ correct, total });
-  }, [activeSet, setWgScores, onSessionEnd]);
+  }, [activeSet, lemahMode, setWgScores, onSessionEnd]);
+
+  const handleExit = useCallback(() => {
+    setActiveSet(null);
+    setLemahMode(false);
+  }, []);
 
   if (activeSet) {
-    return <QuizShell questions={questions} onExit={() => setActiveSet(null)} title={set?.title || ''} onAnswer={handleAnswer} onFinish={handleFinish} showHint={showHint} accentColor={set?.color || T.amber} />;
+    const title = lemahMode ? `⚠ ${set?.title || ''} · Salah` : (set?.title || '');
+    return <QuizShell questions={questions} onExit={handleExit} title={title} onAnswer={handleAnswer} onFinish={handleFinish} showHint={showHint} accentColor={set?.color || T.amber} />;
   }
 
   const totalSoal = TEORI_PRAKTIK.reduce((n, s) => n + s.questions.length, 0);
@@ -80,18 +103,30 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
           <div className={S.list}>
             {g.sets.map((s) => {
               const saved = wgScores[s.id];
+              const wrongCount = getSetWrongCount(s.id);
               return (
-                <button key={s.id} className={S.btnItem} onClick={() => setActiveSet(s.id)} style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
-                  <div className={S.rowSpread}>
-                    <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
-                    <div className={S.row} style={{ gap: 8 }}>
-                      {saved && <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>{saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}</span>}
-                      <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  <button className={S.btnItem} onClick={() => { setLemahMode(false); setActiveSet(s.id); }} style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden', borderBottomLeftRadius: wrongCount > 0 ? 0 : undefined, borderBottomRightRadius: wrongCount > 0 ? 0 : undefined }}>
+                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
+                    <div className={S.rowSpread}>
+                      <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
+                      <div className={S.row} style={{ gap: 8 }}>
+                        {saved && <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>{saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}</span>}
+                        <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                      </div>
                     </div>
-                  </div>
-                  {s.subtitle && <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>{s.subtitle}</div>}
-                </button>
+                    {s.subtitle && <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>{s.subtitle}</div>}
+                  </button>
+                  {/* W2: Ulang Salah sub-button — only shows if this set has wrong answers */}
+                  {wrongCount > 0 && (
+                    <button
+                      onClick={() => { setLemahMode(true); setActiveSet(s.id); }}
+                      style={{ fontFamily: 'inherit', fontSize: 11, padding: '6px 18px', textAlign: 'left', cursor: 'pointer', background: 'rgba(220,38,38,0.06)', border: `1px solid rgba(220,38,38,0.2)`, borderTop: 'none', borderBottomLeftRadius: T.r.md, borderBottomRightRadius: T.r.md, color: T.wrong, fontWeight: 600 }}
+                    >
+                      ⚠ Ulang {wrongCount} salah
+                    </button>
+                  )}
+                </div>
               );
             })}
           </div>
