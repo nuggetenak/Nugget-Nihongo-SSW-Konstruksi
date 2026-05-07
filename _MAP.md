@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-04 by Agent Sonnet (post-Codex cleanup — JpDisplay fix, ReviewMode session wiring)
-> **Version:** v4.0.2 — all Phases A–G complete; 361 tests
+> **Last updated:** 2026-05-07 by Agent Sonnet 4.6 (FE sprint + repo hygiene)
+> **Version:** v4.1.0 — Phases A–G complete + FE-01–09; 383+ tests
 > **Blueprint:** `docs/MASTER-BLUEPRINT-v6.md` ← **READ THIS FIRST** (v6 = agent-executable, self-contained, supersedes ALL prior)
 
 ---
@@ -20,7 +20,7 @@ A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface 
 
 ### 3 Study Tracks
 | Track | JP | Categories |
-|-------|----|-----------|
+|-------|----|-----------| 
 | Teknik Sipil 🏗️ | 土木 | jenis_kerja, alat_umum + common |
 | Bangunan 🏢 | 建築 | jenis_kerja, alat_umum + common |
 | Lifeline ⚡ | ライフライン・設備 | listrik, pipa, telekomunikasi, isolasi, pemadam + common |
@@ -32,36 +32,52 @@ A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface 
 
 ```
 Nugget-Nihongo-SSW-Konstruksi/
-├── _MAP.md                       ← YOU ARE HERE
+├── _MAP.md                         ← YOU ARE HERE
 ├── CHANGELOG.md
 ├── README.md
+├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                  ← react, react-dom, vite, ts-fsrs (3 prod deps)
-├── vite.config.js                ← base: /Nugget-Nihongo-SSW-Konstruksi/
-├── vitest.config.js              ← coverage thresholds: 70% lines/fn, 60% branches
+├── package.json                    ← v4.1.0 · react, react-dom, vite, ts-fsrs (3 prod deps)
+├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
+├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
+├── eslint.config.js
+├── .prettierrc / .prettierignore
+├── .gitignore                      ← outputs/, coverage/, stats.html, .env.* now excluded
+├── .npmrc
 ├── public/
-│   ├── manifest.webmanifest      ← PWA manifest
-│   ├── sw.js                     ← Service worker (auto-bumped by deploy.yml)
+│   ├── manifest.webmanifest        ← PWA manifest
+│   ├── sw.js                       ← SW: cache-first + SW_UPDATED postMessage on activate (FE-08-B)
 │   └── icons/
+├── .github/workflows/
+│   ├── ci.yml                      ← lint + test (verbose) + build + build output check
+│   └── deploy.yml                  ← validate → merge-cards → bump SW → build → pages deploy
 ├── docs/
-│   ├── MASTER-BLUEPRINT-v6.md    ← ★ ACTIVE blueprint (Phases A–G)
-│   ├── seeds/                    ← sipil-sets-seed.js, bangunan-sets-seed.js
-│   └── archive/                  ← Old blueprints (reference only)
+│   ├── MASTER-BLUEPRINT-v6.md      ← ★ ACTIVE blueprint (Phases A–G)
+│   ├── seeds/                      ← sipil-sets-seed.js, bangunan-sets-seed.js
+│   └── archive/                    ← Old blueprints (reference only)
+├── legacy/
+│   └── ssw_flashcards_v87.jsx      ← Historical reference; not part of build
 └── src/
+    ├── types.js                    ← FE-07-C: JSDoc typedefs (Card, SRSState, Tab, ToastItem…)
     ├── main.jsx
-    ├── App.jsx                   ← Root; milestone toast consumer (Phase A)
+    ├── App.jsx                     ← Root; per-tab ErrorBoundary; OfflineBanner; SW_UPDATED listener (FE-05-A/B, FE-08-B)
     ├── contexts/
-    │   ├── AppContext.jsx         ← track, theme, nav, toast, prefs, setPref
-    │   ├── ProgressContext.jsx    ← known/unknown/starred/streak/sessions/toastQueue
+    │   ├── AppContext.jsx           ← track, theme, nav, toast, prefs, setPref
+    │   ├── ProgressContext.jsx      ← known/unknown/starred/streak/sessions/toastQueue
     │   └── SRSContext.jsx
     ├── data/
-    │   ├── index.js              ← barrel re-export
-    │   ├── cards.js              ← CARDS[1438]
-    │   ├── jac-official.js       ← ~95 JAC questions
-    │   ├── wayground-sets.js     ← 12 sets, ~579 questions
-    │   ├── csv-sets.js           ← 12 sets, ~300 questions
-    │   ├── sipil-sets.js         ← 3 sets, 45 questions (Phase B)
-    │   ├── bangunan-sets.js      ← 3 sets, 45 questions (Phase B)
+    │   ├── index.js                ← barrel re-export
+    │   ├── cards.js                ← CARDS[1438] (assembled from source/ by merge-cards.mjs)
+    │   ├── source/                 ← 8 track source files (CS-01)
+    │   │   ├── cards-common.js, cards-common-vocab.js
+    │   │   ├── cards-doboku.js, cards-doboku-vocab.js
+    │   │   ├── cards-kenchiku.js, cards-kenchiku-vocab.js
+    │   │   └── cards-lifeline.js, cards-lifeline-vocab.js
+    │   ├── jac-official.js         ← ~95 JAC questions
+    │   ├── wayground-sets.js       ← 12 sets, ~579 questions
+    │   ├── csv-sets.js             ← 12 sets, ~300 questions
+    │   ├── sipil-sets.js           ← 3 sets, 45 questions
+    │   ├── bangunan-sets.js        ← 3 sets, 45 questions
     │   ├── angka-kunci.js
     │   ├── danger-pairs.js
     │   └── categories.js
@@ -69,65 +85,86 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── fsrs-core.js
     │   ├── fsrs-store.js
     │   ├── fsrs-scheduler.js
-    │   └── index.js
+    │   └── index.js                ← barrel
     ├── storage/
-    │   ├── schema.js             ← STORAGE_VERSION=3, DEFAULTS (Phase A)
-    │   ├── engine.js             ← 3-doc R/W, v2→v3 migration, validateSnapshot, importAllSafe (Phase D)
-    │   └── migrations.js         ← v1→v2, v2→v3
+    │   ├── schema.js               ← STORAGE_VERSION=3, DEFAULTS
+    │   ├── engine.js               ← 3-doc R/W, v2→v3 migration, validateSnapshot
+    │   ├── migrations.js
+    │   └── index.js                ← barrel
     ├── hooks/
-    │   ├── useAnswerStreak.js    ← renamed from useStreak (Phase A), tracks wrongStreak
+    │   ├── useAnswerStreak.js
+    │   ├── useDebounce.js          ← FE-05-C: 120ms input debounce
+    │   ├── useFocusTrap.js         ← FE-04-C: Tab/Shift+Tab cycle, focus restore on unmount
     │   ├── usePersistedState.js
     │   ├── useQuizKeyboard.js
     │   ├── useSRS.js
-    │   └── index.js
+    │   └── index.js                ← barrel (all 6 hooks exported)
     ├── components/
-    │   ├── Dashboard.jsx         ← Mission card + exam countdown (Phase C, F)
+    │   ├── Dashboard.jsx           ← Mission card + exam countdown (Phase C, F)
     │   ├── BelajarTab.jsx
-    │   ├── SayaTab.jsx           ← examDate + audioEnabled settings (Phase F)
-    │   ├── BottomNav.jsx
-    │   ├── QuizShell.jsx         ← anxiety toast on ≥5 wrong (Phase A)
-    │   ├── ResultScreen.jsx      ← growth mindset language (Phase A)
-    │   ├── JpDisplay.jsx         ← furiganaPolicy + 🔊 audio button (Phase E, F)
-    │   ├── OptionButton.jsx
-    │   ├── ProgressBar.jsx, ProgressRing.jsx
-    │   ├── FilterPopup.jsx, EmptyState.jsx
-    │   ├── ConfirmDialog.jsx, Toast.jsx
-    │   ├── TrackPicker.jsx, Onboarding.jsx, Skeleton.jsx
-    │   └── *.module.css
+    │   ├── SayaTab.jsx             ← examDate + audioEnabled + PWA install prompt (Phase F, FE-08-A)
+    │   ├── BottomNav.jsx           ← View Transitions API tab switch (FE-09-C); badge aria-label
+    │   ├── ErrorBoundary.jsx       ← FE-05-A: class EB + TabError + FlatCardFallback exports
+    │   ├── OfflineBanner.jsx       ← FE-05-B: fixed banner, online/offline listeners
+    │   ├── QuizShell.jsx           ← sr-only live region + kbHint (FE-04-A/B)
+    │   ├── ResultScreen.jsx
+    │   ├── JpDisplay.jsx           ← furiganaPolicy + 🔊 audio button (Phase E, F)
+    │   ├── OptionButton.jsx        ← haptic.correct/wrong on answer (FE-09-A)
+    │   ├── ProgressBar.jsx
+    │   ├── ProgressRing.jsx        ← role="img" + aria-label (FE-04-A)
+    │   ├── Toast.jsx               ← swipe-dismiss + type prop + aria-live per type (FE-05-D)
+    │   ├── TrackPicker.jsx         ← useFocusTrap + role="dialog" aria-modal (FE-04-C)
+    │   ├── FilterPopup.jsx, ConfirmDialog.jsx
+    │   ├── EmptyState.jsx, Skeleton.jsx
+    │   ├── Onboarding.jsx
+    │   ├── MissionCompleteOverlay.jsx
+    │   └── *.module.css            ← all have @media (prefers-reduced-motion) blocks (FE-02)
     ├── modes/
-    │   ├── FlashcardMode.jsx     ← re-export shim (Phase E)
-    │   ├── FlashcardMode/        ← decomposed (Phase E)
-    │   │   ├── index.jsx         ← orchestrator
-    │   │   ├── FlipCard.jsx
-    │   │   ├── RatingRow.jsx
+    │   ├── FlashcardMode.jsx       ← re-export shim → FlashcardMode/index.jsx
+    │   ├── FlashcardMode/          ← decomposed (Phase E)
+    │   │   ├── index.jsx           ← orchestrator; FlipCard in ErrorBoundary (FE-05-A)
+    │   │   ├── FlipCard.jsx        ← haptic.flip() on card tap (FE-09-A); aria-live
+    │   │   ├── RatingRow.jsx       ← haptic.tap() on rating (FE-09-A)
     │   │   ├── ToolStrip.jsx
     │   │   ├── FilterBar.jsx
-    │   │   └── flashcard.module.css  ← 3D flip CSS (TD-05)
-    │   ├── ReviewMode.jsx
-    │   ├── QuizMode.jsx          ← seenPool fixed to useRef (Phase A)
+    │   │   └── flashcard.module.css
+    │   ├── ReviewMode.jsx          ← FSRS due-card review
+    │   ├── QuizMode.jsx
     │   ├── SprintMode.jsx, FocusMode.jsx
     │   ├── JACMode.jsx, WaygroundMode.jsx, VocabMode.jsx
-    │   ├── SimulasiMode.jsx, AngkaMode.jsx, DangerMode.jsx
-    │   ├── SipilMode.jsx         ← functional quiz, sipilScores (Phase B)
-    │   ├── BangunanMode.jsx      ← functional quiz, bangunanScores (Phase B)
-    │   ├── SearchMode.jsx, GlossaryMode.jsx, SumberMode.jsx
-    │   ├── StatsMode.jsx
-    │   ├── ExportMode.jsx        ← validate+preview+rollback (Phase D)
-    │   └── modes.module.css
+    │   ├── SimulasiMode.jsx        ← CSS module (FE-01-B)
+    │   ├── AngkaMode.jsx           ← CSS module (FE-01-A)
+    │   ├── DangerMode.jsx          ← CSS module (FE-01-A)
+    │   ├── StatsMode.jsx           ← CSS module (FE-01-B)
+    │   ├── GlossaryMode.jsx        ← CSS module (FE-01-C); IntersectionObserver intact
+    │   ├── SipilMode.jsx, BangunanMode.jsx
+    │   ├── SearchMode.jsx          ← useDebounce applied (FE-05-C); track-aware
+    │   ├── ExportMode.jsx
+    │   ├── SumberMode.jsx
+    │   └── modes.module.css        ← shared mode styles
     ├── router/
-    │   ├── ModeRouter.jsx        ← makeFinishHandler → recordSession (Phase C)
-    │   └── modes.js              ← 18 modes, MODE_SECTIONS, no legacy arrays (Phase A)
+    │   ├── ModeRouter.jsx          ← focus mgmt + scroll restoration on mode change (FE-04-D, FE-09-B)
+    │   └── modes.js
     ├── utils/
-    │   ├── daily-mission.js      ← Four Strands + SRS priority (Phase C)
-    │   ├── speak.js              ← Web Speech API + HVPT cycling (Phase F)
+    │   ├── daily-mission.js
+    │   ├── haptic.js               ← FE-09-A: tap/correct/wrong/success/flip (Vibration API)
+    │   ├── speak.js                ← Web Speech API + HVPT cycling (Phase F)
     │   ├── jp-helpers.js
     │   ├── quiz-generator.js
     │   ├── shuffle.js
-    │   ├── wrong-tracker.js      ← v1 STORAGE_KEYS removed (Phase A)
-    │   └── index.js
+    │   ├── wrong-tracker.js
+    │   └── index.js                ← barrel (all utils + haptic + speak exported)
     ├── styles/
-    │   └── theme.js
-    └── tests/                    ← 32 test files, 361 tests (Phase G + audit)
+    │   └── global.css              ← design tokens (FE-03): spacing, shadow, z-index, transitions
+    │                               ← .sr-only utility (FE-04-A)
+    │                               ← View Transitions ::view-transition rules (FE-09-C)
+    │                               ← token audit comment block
+    └── tests/                      ← 35 test files, 383+ tests
+        ├── setup.js
+        ├── BottomNav.test.jsx      ← FE-06: 7 tests
+        ├── ResultScreen.test.jsx   ← FE-06: 7 tests
+        ├── Toast.test.jsx          ← FE-06: 8 tests
+        └── [32 existing test files]
 ```
 
 ---
@@ -136,8 +173,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.0.0** |
-| Tests | **~325 passing** (25 files) |
+| Version | **4.1.0** |
+| Tests | **383+** (35 files) |
 | Prod dependencies | **3** (react, react-dom, ts-fsrs) |
 | Modes | **18** (all React.lazy) |
 | Flashcards | **1,438** |
@@ -146,10 +183,13 @@ Nugget-Nihongo-SSW-Konstruksi/
 | localStorage docs | **3** (progress, srs, prefs) |
 | CI/CD | ✅ GitHub Actions (auto-deploy) |
 | SW auto-bump | ✅ deploy.yml |
+| CSS modules | ✅ all mode components migrated (FE-01) |
+| Reduced motion | ✅ 7 CSS files covered (FE-02) |
+| A11y | ✅ aria-live, focus trap, sr-only, View Transitions (FE-04, FE-09-C) |
 
 ---
 
-## 4. Phase History (A–G complete)
+## 4. Phase History
 
 | Phase | Name | Status |
 |-------|------|--------|
@@ -160,6 +200,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | E | FlashcardMode Decomposition | ✅ v3.9.0 |
 | F | Exam Countdown + Audio | ✅ v4.0.0 |
 | G | QA + Polish + Release | ✅ v4.0.0 |
+| FE-01–09 | CSS Modules · A11y · Robustness · DX · PWA · UX | ✅ v4.1.0 |
 
 ---
 
@@ -183,25 +224,41 @@ DOCS = { progress: 'ssw-progress', srs: 'ssw-srs-data', prefs: 'ssw-prefs' }
 
 progress: { _v:3, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             wgWrong{}, vocabWrong{}, jacScores{}, wgScores{}, vocabScores{},
-            sipilScores{}, bangunanScores{},           // Phase B
+            sipilScores{}, bangunanScores{},
             streakData{}, dailyCount{}, recentCards[],
             milestoneStreak7, milestoneQuiz70,
-            sessions[],                                // Phase C (cap 90)
-            dailyMission }                             // Phase C
+            sessions[],                               // cap 90
+            dailyMission }
 
 prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
             dailyGoal, flashcardHintCount,
-            examDate,                                  // Phase F
-            audioEnabled,                              // Phase F
-            studyAnchor,                               // Phase C
-            furiganaPolicy }                           // Phase E
+            examDate, audioEnabled, studyAnchor, furiganaPolicy }
 
 srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 ```
 
 ---
 
-## 7. Agent Trail
+## 7. New Files Since v4.0.2 (FE Sprint)
+
+| File | Purpose |
+|------|---------|
+| `src/types.js` | JSDoc typedefs for Card, SRSState, Tab, ToastItem, etc. |
+| `src/utils/haptic.js` | Vibration API patterns: tap/correct/wrong/success/flip |
+| `src/hooks/useDebounce.js` | 120ms debounce for search inputs |
+| `src/hooks/useFocusTrap.js` | Tab/Shift+Tab cycle + focus restore for dialogs |
+| `src/components/ErrorBoundary.jsx` | Class-based EB + TabError + FlatCardFallback |
+| `src/components/OfflineBanner.jsx` | Fixed offline status banner |
+| `src/components/OfflineBanner.module.css` | Banner styles with slideDown + reduced-motion |
+| `src/modes/*.module.css` (×6) | DangerMode, AngkaMode, SimulasiMode, StatsMode, ReviewMode, GlossaryMode |
+| `src/tests/BottomNav.test.jsx` | 7 render/aria tests |
+| `src/tests/ResultScreen.test.jsx` | 7 render/interaction tests |
+| `src/tests/Toast.test.jsx` | 8 tests incl. fake timers + type-aware aria-live |
+| `HUSKY-SETUP.md` | One-time pre-commit hook setup instructions |
+
+---
+
+## 8. Agent Trail
 
 | Date | Agent | Work |
 |------|-------|------|
@@ -210,8 +267,10 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-02 | Sonnet 4.6 | Phase B+C: sipil/bangunan content, daily mission, sessions |
 | 2026-05-02 | Sonnet 4.6 | Phase D+E: export hardening, FlashcardMode decomposition |
 | 2026-05-02 | Sonnet 4.6 | Phase F+G: exam countdown, audio, QA, release v4.0.0 |
-| 2026-05-03 | Sonnet 4.6 | feat/audit-improvements B1-B4+M1-M3: furigana chain, session recording all modes, sprint PB, glossary track-aware |
-| 2026-05-04 | Sonnet 4.6 | feat/audit-improvements C1-C6: ReviewMode audio, track-aware search, fokus/angka/jebak session wiring, StatsMode SRS+streak |
-| 2026-05-04 | Codex (Sonnet) | feat/audit-improvements D1-D10: SayaTab inline edit, QuizMode furigana, SprintMode audio, StatsMode 7-day bars, MissionOverlay D8, SearchMode star, QuizShell audio D10 |
-| 2026-05-04 | Codex (Sonnet) | fix(JpDisplay): native ruby rendering + tap-to-reveal furigana (PR #6) |
-| 2026-05-04 | Sonnet 4.6 | post-Codex cleanup: fix wrapInteractive button wrapping, ReviewMode onSessionEnd, stale branch cleanup |
+| 2026-05-03 | Sonnet 4.6 | B1–B4+M1–M3: furigana chain, session recording, sprint PB, glossary track-aware |
+| 2026-05-04 | Sonnet 4.6 | C1–C6: ReviewMode audio, track-aware search, StatsMode SRS+streak |
+| 2026-05-04 | Codex (Sonnet) | D1–D10: SayaTab inline edit, QuizMode furigana, MissionOverlay, SearchMode star |
+| 2026-05-04 | Codex (Sonnet) | fix(JpDisplay): native ruby rendering + tap-to-reveal furigana |
+| 2026-05-04 | Sonnet 4.6 | post-Codex cleanup: wrapInteractive, ReviewMode session, stale branch cleanup |
+| 2026-05-07 | Sonnet 4.6 | FE-01–09: CSS modules, reduced motion, design tokens, a11y, error boundaries, offline banner, debounce, toast upgrade, 22 new tests, path alias, types, PWA install, SW update toast, haptics, scroll restore, View Transitions |
+| 2026-05-07 | Sonnet 4.6 | Repo hygiene: outputs/ untracked, stale branch deleted, barrel exports updated, gitignore/prettierignore expanded, CI improved, version → 4.1.0, _MAP.md + CHANGELOG updated |

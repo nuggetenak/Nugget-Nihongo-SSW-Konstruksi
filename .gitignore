@@ -3,3 +3,16 @@ dist/
 .DS_Store
 *.log
 .env
+.env.*
+
+# Build artefacts
+stats.html
+coverage/
+
+# Agent output staging — JSON batches produced during card data work
+# These are one-shot artefacts; merged into src/data/source/ and no longer needed
+outputs/
+
+# Legacy code — kept for historical reference only, not part of build
+# Tracked intentionally; do not add to gitignore — archival value
+# legacy/

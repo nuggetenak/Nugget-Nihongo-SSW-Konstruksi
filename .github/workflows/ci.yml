@@ -11,14 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - run: npm ci
+
       - name: Lint (zero warnings)
         run: npm run lint
+
       - name: Tests
-        run: npm test -- --run
+        run: npm test -- --run --reporter=verbose
+
       - name: Build
         run: npm run build
+
+      - name: Check build output
+        run: |
+          echo "=== dist/ contents ===" && ls -lh dist/
+          echo "=== assets ===" && ls -lh dist/assets/ | head -20

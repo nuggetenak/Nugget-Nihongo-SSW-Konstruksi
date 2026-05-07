@@ -1,3 +1,71 @@
+## [4.1.0] - 2026-05-07
+
+### FE Sprint — CSS Modules, A11y, Robustness, DX, PWA, UX Polish (Agent Sonnet 4.6)
+
+**FE-01 — CSS Module Migration (all mode components)**
+- `DangerMode`, `AngkaMode`, `SimulasiMode`, `StatsMode`, `ReviewMode`, `GlossaryMode` — all inline styles extracted to `.module.css` counterparts
+- Dynamic/runtime styles (answer state colors, group colors, grade thresholds, animation delays) correctly kept inline with justification comments
+
+**FE-02 — Reduced Motion**
+- `@media (prefers-reduced-motion: reduce)` blocks added to 7 CSS files: `global.css`, `flashcard.module.css`, `Dashboard.module.css`, `ResultScreen.module.css`, `QuizShell.module.css`, `BottomNav.module.css`, `FlipCard.module.css`
+
+**FE-03 — Design Token Expansion (`global.css`)**
+- Spacing scale: `--sp-1` through `--sp-6` (4–24px)
+- Shadow scale: `--shadow-xs/sm/lg/amber`
+- Z-index scale: `--z-base/sticky/nav/overlay/toast`
+- Transition presets: `--ease-spring/smooth`, `--t-fast/base/slow`
+- `.sr-only` utility class
+- Token audit comment block flagging 8+ hardcoded values for future cleanup
+
+**FE-04 — Accessibility**
+- A: `ProgressRing` `role="img"` + descriptive `aria-label`; `BottomNav` badge count in `aria-label`; `FlipCard` `aria-live="polite"` + `aria-atomic` + state-aware label; `QuizShell` sr-only assertive live region
+- B: `QuizShell` keyboard hint UI + `.kbHint` CSS class
+- C: `useFocusTrap` hook created; applied to `TrackPicker` (`role="dialog" aria-modal="true"`)
+- D: `ModeRouter` focus management on mode change (100ms delay, `[data-autofocus]` target)
+
+**FE-05 — Component Robustness**
+- A: `ErrorBoundary.jsx` (class-based) with `TabError` + `FlatCardFallback`; per-tab boundaries in `App.jsx`; `FlipCard` wrapped for old WebView 3D CSS failures
+- B: `OfflineBanner.jsx` + CSS — fixed banner, `navigator.onLine` + event listeners, `slideDown` animation
+- C: `useDebounce.js` (120ms default); applied to `SearchMode`
+- D: `Toast` upgraded — swipe-left dismiss (60px threshold), `type` prop (`default/success/error/warning`), `data-type` CSS color variants, type-aware `aria-live`
+
+**FE-06 — Component Render Tests (22 new test cases)**
+- `BottomNav.test.jsx`: 7 tests — tab render, data-active, onChange, badge count, aria-current
+- `ResultScreen.test.jsx`: 7 tests — celebrate/encourage/neutral data-path, onRestart, onExit, score text
+- `Toast.test.jsx`: 8 tests — render, auto-dismiss (fake timers), undo, dismiss, stack, role=status, aria-live per type
+
+**FE-07 — DX Improvements**
+- A: `vite.config.js` + `vitest.config.js` — `@` path alias → `src/`
+- B: `HUSKY-SETUP.md` — one-time pre-commit hook setup instructions
+- C: `src/types.js` — JSDoc typedefs: `Card`, `Category`, `SRSState`, `Tab`, `ToastItem`, `StreakData`, `UserPrefs`
+
+**FE-08 — PWA Hardening**
+- A: `SayaTab` PWA install prompt — `beforeinstallprompt` capture, install card UI with amber accent
+- B: `sw.js` activate → `postMessage({type:'SW_UPDATED'})` to all clients; `App.jsx` SW message listener → update toast with reload action
+
+**FE-09 — UX Polish**
+- A: `haptic.js` — `tap/correct/wrong/success/flip` via Vibration API; applied to `OptionButton`, `FlipCard`, `RatingRow`
+- B: Scroll restoration in `ModeRouter` — `scrollCache` Map saves/restores `window.scrollY` per mode
+- C: View Transitions API in `BottomNav` — `document.startViewTransition` wrapper (progressive enhancement); `::view-transition-old/new` 150ms CSS in `global.css`
+
+**Build:** ✅ clean · lint: 0 errors 0 warnings · commits `f8150e6`→`5ca29f1`
+
+---
+
+### Repo Hygiene — 2026-05-07
+
+- `outputs/` removed from git tracking (10 agent JSON artefacts — already merged into `src/data/source/`); added to `.gitignore`
+- Stale remote branch `feat/ui-ux-upgrade` deleted
+- `src/hooks/index.js` — `useDebounce` + `useFocusTrap` added to barrel export
+- `src/utils/index.js` — `haptic` + `speak.js` exports added to barrel
+- `.gitignore` — added `outputs/`, `coverage/`, `stats.html`, `.env.*`
+- `.prettierignore` — added `outputs/`, `coverage/`
+- `vitest.config.js` — `resolve.alias @→src` added (mirrors `vite.config.js`); `@vitejs/plugin-react` import path fixed
+- `.github/workflows/ci.yml` — verbose test reporter, build output check step
+- `_MAP.md` — updated to v4.1.0: all FE tasks, new files, metrics, agent trail entry
+
+---
+
 ## [4.0.2] - 2026-05-04
 
 ### feat/audit-improvements — D1–D10 (Agent Sonnet 4.6)

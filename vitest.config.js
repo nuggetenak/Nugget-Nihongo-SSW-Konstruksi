@@ -1,11 +1,16 @@
 // ─── vitest.config.js (phaseG) ────────────────────────────────────────────────
 // G.1: Added coverage thresholds (70% lines/functions, 60% branches).
+// FE-07-A: resolve alias '@' → src/ mirrors vite.config.js.
 // ─────────────────────────────────────────────────────────────────────────────
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: { '@': resolve(__dirname, 'src') },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
