@@ -1,7 +1,7 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.3.1)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.6.0)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.3.1
+> **Version:** 4.6.0
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -17,10 +17,10 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 |-----------|-------|
 | Flashcards | 1,438 (curated, type-annotated, ruby-rendered) |
 | Quiz questions | ~860 (JAC + Wayground + CSV + Sipil + Bangunan) |
-| Modes | 20 (all React.lazy) |
+| Modes | 23 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage model) |
-| Tests | 383+ (35 files) |
-| Prod deps | 3 (react, react-dom, ts-fsrs) |
+| Tests | 383 (35 files) |
+| Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
 
 ---
 
@@ -100,9 +100,33 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | A2 | Smart Mode Recommendation — `utils/recommend-mode.js` replaces `getQuickStart` |
 | E4 | lz-string compression on all localStorage writes; backward-compat read fallback |
 
+### v4.4.0 — Phase 5.5 Unfinished Items
+
+| Item | Deliverable |
+|------|-------------|
+| D1 | DengarMode — audio-first listening comprehension quiz (`dengar` in `latihan`) |
+| D3 | CatatanMode — personal notes/mnemonics per card, `prefs.notes`, filterable (`catatan` in `pelajari`) |
+| A3 | Inter-mode breadcrumb nav — `modeHistory` + `goBack()` in AppContext; sticky `ModeRouter` bar |
+| Infra | Sessions cap 90 → 180; StudyHeatmap `today` in useMemo; FlashcardMode dep fix; `schema.js` notes DEFAULTS |
+
+### v4.5.0 — Phase 5.6 (B1) Kuis Produksi
+
+| Item | Deliverable |
+|------|-------------|
+| B1 | `QuizProduksiMode.jsx` — JP→ID type-answer with fuzzy match, wrong-tracker, audio, session summary |
+| Tests | `quiz-produksi.test.jsx` — 7 tests; total 383/383 ✅ |
+
+### v4.6.0 — E2/F4/ST3
+
+| Item | Deliverable |
+|------|-------------|
+| E2 | GitHub Gist sync (opt-in) — `utils/gist-sync.js`; PAT input + Push/Pull in ExportMode |
+| F4 | Sprint "Battle Past Self" ghost score — `sprintBestTimeline` in prefs, live ghost display |
+| ST3 | Quiz accuracy per category in StatsMode — `🎯 N%` badge + wrong count from `quizWrong` |
+
 ---
 
-## Open Items / Known Gaps (Post v4.3.1)
+## Open Items / Known Gaps (Post v4.6.0)
 
 These are honest assessments — not blocking anything, but relevant for future work:
 
@@ -112,19 +136,9 @@ These are honest assessments — not blocking anything, but relevant for future 
 - **Photo-based (写真) questions**: QuestionImage component exists and SW cache handles images, but actual images from JAC PDFs have not been extracted and added. B.7 infrastructure is in place, content is not.
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
-### Features Not Yet Implemented (from Proposal)
-- ~~**B1** QuizMode Type-Answer Production Mode (Blueprint C-10)~~ ✅ v4.5.0 — `src/modes/QuizProduksiMode.jsx` (`kuisprod`)
-- ~~**D1** Mode Dengarkan~~ ✅ v4.4.0 — `src/modes/DengarMode.jsx`
-- ~~**D3** Mode Buku Catatan~~ ✅ v4.4.0 — `src/modes/CatatanMode.jsx`
-- ~~**E2** GitHub Gist sync (opt-in, no backend)~~ ✅ v4.6.0 — `src/utils/gist-sync.js` + ExportMode Gist section
-- ~~**ST3** Akurasi per kategori~~ ✅ v4.6.0 — `🎯 N%` badge + wrong count in StatsMode catStats
-- ~~**F4** Battle Past Self Sprint ghost~~ ✅ v4.6.0 — `sprintBestTimeline` + live ghost score display
-- ~~**A3** Inter-Mode Navigation Breadcrumb~~ ✅ v4.4.0 — `modeHistory` + `goBack()` in AppContext
-
-### Technical / Token Audit
-- **FE-03 token audit**: 8+ locations in component CSS still use hardcoded values (z-index, shadow, transition values) instead of new CSS tokens. Flagged with comments in `global.css`. Low urgency — cosmetic consistency only.
-- **lz-string is now a prod dep**: With E4, `lz-string` is used at runtime. `package.json` constraint has shifted to 4 prod deps (react, react-dom, ts-fsrs, lz-string). Update constraint doc if needed.
+### Technical
 - **sessions cap at 180**: Heatmap uses 18 weeks (~126 days). Cap bumped 90→180 in v4.4.0. ✅
+- **lz-string prod dep**: `package.json` now has 4 prod deps (react, react-dom, ts-fsrs, lz-string). Hard constraint updated to 4. ✅
 
 ### Architecture
 - **Category mismatch**: `jenis_kerja` and `alat_umum` categories contain lifeline content even for sipil/bangunan track users. Re-categorization would require content review of ~485 cards.
@@ -135,7 +149,7 @@ These are honest assessments — not blocking anything, but relevant for future 
 
 1. **Pure localStorage** — no Supabase, no external auth, no window.storage
 2. **Max 4 prod deps** — react, react-dom, ts-fsrs, lz-string
-3. **All 20 modes stay React.lazy()**
+3. **All 23 modes stay React.lazy()**
 4. **UI language: Indonesian** — code comments: English
 5. **Zero network required** — full offline PWA
 6. **`npm test` green** before every commit
@@ -154,13 +168,15 @@ progress: { _v:3, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             sipilScores{}, bangunanScores{},
             streakData{}, dailyCount{}, recentCards[],
             milestoneStreak7, milestoneQuiz70,
-            sessions[],                    // cap 90 — consider bumping to 180 for heatmap
+            sessions[],                    // cap 180 (bumped v4.4.0 for heatmap coverage)
             dailyMission }
 
 prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
             dailyGoal,
             flashcardHintCount,            // BUG-10 fixed: now in DEFAULTS, resets on resetAll()
-            examDate, audioEnabled, studyAnchor, furiganaPolicy }
+            examDate, audioEnabled, studyAnchor, furiganaPolicy,
+            notes: {},                     // D3: personal notes per cardId (v4.4.0)
+            sprintBestTimeline: [] }       // F4: ghost score timeline for Sprint (v4.6.0)
 
 srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 

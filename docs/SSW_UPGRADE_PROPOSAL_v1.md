@@ -753,6 +753,11 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 4. ✅ Sessions cap 90→180 (heatmap coverage)
 5. ✅ Lint fixes: StudyHeatmap `today` in useMemo, FlashcardMode redundant dep
 
+### Phase 5.6 — E2/F4/ST3 ✅ SELESAI (2026-05-08, v4.6.0)
+1. ✅ **E2** GitHub Gist sync (opt-in) — `src/utils/gist-sync.js` + collapsible section in ExportMode
+2. ✅ **F4** Sprint "Battle Past Self" ghost score — `sprintBestTimeline` in prefs, live `👻 N` display
+3. ✅ **ST3** Quiz accuracy per category in StatsMode — `🎯 N%` badge + `N× salah dalam kuis` from `quizWrong`
+
 ---
 
 ## 🐛 Bug Registry
@@ -777,15 +782,15 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Awal Audit | Saat Ini (v4.3.1) | Target (Phase 5.4) |
+| Metrik | Awal Audit | Saat Ini (v4.6.0) | Target (Phase 5.4) |
 |--------|------------|--------------------|--------------------|
 | Total kartu | 1.438 | 1.438 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
-| Test | ~321 | 376 | 380+ |
-| Mode count | 15 | 20 | 22 (Dengarkan + Countdown) |
-| Bug terbuka | 8 known | **0** | 0 |
-| SRS modes with session tracking | 12/15 | 15/15 | 15/15 |
+| Test | ~321 | **383** | 380+ ✅ |
+| Mode count | 15 | **23** | 22 ✅ |
+| Bug terbuka | 8 known | **0** | 0 ✅ |
+| SRS modes with session tracking | 12/15 | 15/15 | 15/15 ✅ |
 | Modes with wrong-tracker | 7/15 | 10/15 | 12/15 |
-| Cross-mode flow coverage | 0% | 85% | 100% |
+| Cross-mode flow coverage | 0% | 100% | 100% ✅ |
 | localStorage compression | ❌ | ✅ lz-string | ✅ |
 | Exam Readiness Score | ❌ | ✅ gauge in StatsMode | ✅ |
 | Achievement system | ❌ | ✅ 14 badges | ✅ |
