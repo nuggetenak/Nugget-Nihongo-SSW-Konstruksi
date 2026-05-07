@@ -1,6 +1,8 @@
 // ─── App.jsx (phaseA) ─────────────────────────────────────────────────────────
 // Root. 3-tab layout: Beranda / Belajar / Saya.
 // A.3 BUG-03: Consumes toastQueue from ProgressContext to fire milestone toasts.
+// FE-05-A: Granular ErrorBoundaries per tab + OfflineBanner.
+// FE-08-B: SW_UPDATED message listener → update toast.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useEffect } from 'react';
@@ -9,6 +11,8 @@ import { useApp } from './contexts/AppContext.jsx';
 import { useProgress } from './contexts/ProgressContext.jsx';
 import { useSRSContext } from './contexts/SRSContext.jsx';
 
+import ErrorBoundary, { TabError } from './components/ErrorBoundary.jsx';
+import OfflineBanner from './components/OfflineBanner.jsx';
 import Onboarding from './components/Onboarding.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import Dashboard from './components/Dashboard.jsx';
@@ -23,8 +27,6 @@ export default function App() {
   const srs = useSRSContext();
 
   // A.3: Consume queued milestone toasts from ProgressContext.
-  // Using a queue (not direct setState) because toasts must fire after render,
-  // not inside setProg's setState callback.
   useEffect(() => {
     if (toastQueue.length > 0) {
       const t = toastQueue[0];
@@ -32,6 +34,22 @@ export default function App() {
       clearToast(0);
     }
   }, [toastQueue, toast, clearToast]);
+
+  // FE-08-B: Listen for SW_UPDATED message and offer reload.
+  useEffect(() => {
+    if (!('serviceWorker' in navigator)) return;
+    const handler = (e) => {
+      if (e.data?.type === 'SW_UPDATED') {
+        toast.show('🔄 Update tersedia', {
+          undo: () => window.location.reload(),
+          duration: 10000,
+          type: 'default',
+        });
+      }
+    };
+    navigator.serviceWorker.addEventListener('message', handler);
+    return () => navigator.serviceWorker.removeEventListener('message', handler);
+  }, [toast]);
 
   // Active mode takes full screen
   if (mode) return <main id="main-content"><ModeRouter /></main>;
@@ -46,9 +64,23 @@ export default function App() {
 
   return (
     <main id="main-content" style={{ paddingBottom: T.navH + 36 }}>
-      {tab === 'home'    && <Dashboard known={known} unknown={unknown} track={track} onNavigate={goMode} onChangeTrack={() => setTrack(null)} srs={srs} isDark={isDark} onToggleTheme={toggleTheme} />}
-      {tab === 'belajar' && <BelajarTab onSelect={goMode} badges={belajarBadges} />}
-      {tab === 'saya'    && <SayaTab />}
+      <OfflineBanner />
+
+      {tab === 'home' && (
+        <ErrorBoundary fallback={<TabError tab="Beranda" />}>
+          <Dashboard known={known} unknown={unknown} track={track} onNavigate={goMode} onChangeTrack={() => setTrack(null)} srs={srs} isDark={isDark} onToggleTheme={toggleTheme} />
+        </ErrorBoundary>
+      )}
+      {tab === 'belajar' && (
+        <ErrorBoundary fallback={<TabError tab="Belajar" />}>
+          <BelajarTab onSelect={goMode} badges={belajarBadges} />
+        </ErrorBoundary>
+      )}
+      {tab === 'saya' && (
+        <ErrorBoundary fallback={<TabError tab="Saya" />}>
+          <SayaTab />
+        </ErrorBoundary>
+      )}
 
       <BottomNav active={tab} onChange={goTab} dueBadge={srs.dueCount} />
     </main>

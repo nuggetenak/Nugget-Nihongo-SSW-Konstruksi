@@ -32,6 +32,14 @@ const TABS = [
 ];
 
 export default function BottomNav({ active, onChange, dueBadge = 0 }) {
+  // FE-09-C: View Transitions API — crossfade between tabs (progressive enhancement)
+  const handleTabChange = (newTab) => {
+    if (document.startViewTransition) {
+      document.startViewTransition(() => onChange(newTab));
+    } else {
+      onChange(newTab);
+    }
+  };
   return (
     <nav className={s.nav} role="navigation" aria-label="Navigasi utama">
       <div className={s.inner}>
@@ -43,7 +51,7 @@ export default function BottomNav({ active, onChange, dueBadge = 0 }) {
               key={tab.key}
               className={s.tab}
               data-active={isActive}
-              onClick={() => onChange(tab.key)}
+              onClick={() => handleTabChange(tab.key)}
               aria-label={`${tab.label}${badge > 0 ? `, ${badge} notifikasi` : ''}`}
               aria-current={isActive ? 'page' : undefined}
             >

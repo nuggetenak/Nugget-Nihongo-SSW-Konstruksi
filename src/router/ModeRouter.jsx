@@ -137,11 +137,24 @@ export default function ModeRouter() {
   const [missionResult, setMissionResult] = useState(null);
 
   // FE-04-D: Focus management on mode change
+  // FE-09-B: Scroll restoration on mode change
   const prevMode = useRef(null);
+  const scrollCache = useRef(new Map());
+
   useEffect(() => {
     if (prevMode.current === mode) return;
+
+    // Save scroll position of the mode we're leaving
+    if (prevMode.current !== null) {
+      scrollCache.current.set(prevMode.current, window.scrollY);
+    }
     prevMode.current = mode;
-    // Small delay: let the new mode render before moving focus
+
+    // Restore scroll for the mode we're entering (default 0)
+    const saved = scrollCache.current.get(mode) ?? 0;
+    window.scrollTo(0, saved);
+
+    // Focus first interactive element after render
     const t = setTimeout(() => {
       const target = document.querySelector(
         '[data-autofocus], main h1, main button:not([disabled])'

@@ -1,7 +1,9 @@
 // ─── FlashcardMode/FlipCard.jsx v2.0 — CSS Module upgrade ────────────────────
 // Converted from full inline-styles to CSS module classes.
 // Dynamic values (border color, gradient from cat.color) remain inline.
+// FE-09-A: haptic.flip() on card tap.
 // ─────────────────────────────────────────────────────────────────────────────
+import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';
 import { JpFront, DescBlock, parseRubyFragments, renderJPWithRuby } from '../../components/JpDisplay.jsx';
 import FC from './flashcard.module.css';
@@ -54,7 +56,7 @@ export default function FlipCard({
         {/* ── FRONT ─────────────────────────────────────────────────────── */}
         <div
           className={`fc-face ${S.front}`}
-          onClick={onFlip}
+          onClick={() => { haptic.flip(); onFlip(); }}
           style={{ border: `1.5px solid ${borderColor}` }}
         >
           {cat && (

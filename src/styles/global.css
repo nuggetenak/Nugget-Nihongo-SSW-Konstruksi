@@ -189,6 +189,12 @@ body {
   100% { transform: scale(1) translateX(-50%); opacity: 1; }
 }
 
+/* ── View Transitions API — crossfade between tabs (FE-09-C) ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 150ms;
+}
+
 /* ── Accessibility utility ── */
 .sr-only {
   position: absolute;

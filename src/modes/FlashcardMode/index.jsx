@@ -13,6 +13,7 @@ import { getCatInfo } from '../../data/categories.js';
 import { useToast } from '../../components/Toast.jsx';
 import { get as storageGet, set as storageSet } from '../../storage/engine.js';
 import ProgressBar from '../../components/ProgressBar.jsx';
+import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.jsx';
 import S from '../modes.module.css';
 
 import FlipCard   from './FlipCard.jsx';
@@ -210,35 +211,37 @@ export default function FlashcardMode({
         onToggleStar={() => onToggleStar(card?.id)}
       />
 
-      {/* 3D Flip Card */}
-      <FlipCard
-        card={card}
-        cat={cat}
-        flipped={flipped}
-        audioEnabled={audioEnabled}
-        furiganaPolicy={furiganaPolicy}
-        showDesc={showDesc}
-        onFlip={flip}
-        onShowDesc={() => setShowDesc(true)}
-        safeIdx={safeIdx}
-        totalCount={displayCards.length}
-        srsInfo={srsInfo}
-        hintCount={hintCount}
-        showHint={showHint}
-        borderColor={borderColor}
-        swipeDelta={swipeDelta}
-        onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-        onTouchMove={(e) => {
-          if (touchStart === null) return;
-          const delta = (e.touches[0].clientX - touchStart) / 120;
-          setSwipeDelta(Math.max(-1, Math.min(1, delta)));
-        }}
-        onTouchEnd={(e) => {
-          const diff = touchStart !== null ? e.changedTouches[0].clientX - touchStart : 0;
-          setSwipeDelta(0); setTouchStart(null);
-          if (Math.abs(diff) > 60) go(diff > 0 ? -1 : 1);
-        }}
-      />
+      {/* 3D Flip Card — wrapped in ErrorBoundary for old WebView fallback */}
+      <ErrorBoundary fallback={<FlatCardFallback card={card} />}>
+        <FlipCard
+          card={card}
+          cat={cat}
+          flipped={flipped}
+          audioEnabled={audioEnabled}
+          furiganaPolicy={furiganaPolicy}
+          showDesc={showDesc}
+          onFlip={flip}
+          onShowDesc={() => setShowDesc(true)}
+          safeIdx={safeIdx}
+          totalCount={displayCards.length}
+          srsInfo={srsInfo}
+          hintCount={hintCount}
+          showHint={showHint}
+          borderColor={borderColor}
+          swipeDelta={swipeDelta}
+          onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+          onTouchMove={(e) => {
+            if (touchStart === null) return;
+            const delta = (e.touches[0].clientX - touchStart) / 120;
+            setSwipeDelta(Math.max(-1, Math.min(1, delta)));
+          }}
+          onTouchEnd={(e) => {
+            const diff = touchStart !== null ? e.changedTouches[0].clientX - touchStart : 0;
+            setSwipeDelta(0); setTouchStart(null);
+            if (Math.abs(diff) > 60) go(diff > 0 ? -1 : 1);
+          }}
+        />
+      </ErrorBoundary>
 
       {/* FSRS rating row */}
       <RatingRow

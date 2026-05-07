@@ -3,10 +3,12 @@ import { T } from '../styles/theme.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
+import { useDebounce } from '../hooks/useDebounce.js';
 import S from './modes.module.css';
 
 export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 120);
   const [showAllTracks, setShowAllTracks] = useState(false);
 
   const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
@@ -17,13 +19,13 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
   }, [trackCatKeys, showAllTracks]);
 
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = debouncedQuery.trim().toLowerCase();
     if (q.length < 2) return [];
     return pool.filter((c) => {
       const haystack = `${c.jp} ${c.furi || ''} ${c.id_text} ${c.desc}`.toLowerCase();
       return haystack.includes(q);
     }).slice(0, 30);
-  }, [query, pool]);
+  }, [debouncedQuery, pool]);
 
   return (
     <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
@@ -49,13 +51,13 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         style={{ width: '100%', marginBottom: 16 }}
       />
 
-      {query.length >= 2 && (
+      {debouncedQuery.length >= 2 && (
         <div className={S.searchMeta}>
           {results.length} hasil {results.length >= 30 && '(maks 30)'} · dari {pool.length} kartu
         </div>
       )}
 
-      {query.length < 2 && (
+      {debouncedQuery.length < 2 && (
         <div className={S.emptyInMode}>
           <div className={S.emptyIcon}>🔍</div>
           <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>Cari kosakata</div>
@@ -65,7 +67,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         </div>
       )}
 
-      {query.length >= 2 && results.length === 0 && (
+      {debouncedQuery.length >= 2 && results.length === 0 && (
         <div className={S.emptyInMode}>
           <div className={S.emptyIcon}>😕</div>
           <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>Tidak ditemukan</div>

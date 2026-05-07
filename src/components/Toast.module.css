@@ -58,3 +58,18 @@
   padding: 0 2px;
   flex-shrink: 0;
 }
+
+/* ── Type variants ── */
+.toast[data-type='success'] {
+  background: #14532d;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+.toast[data-type='error'] {
+  background: #450a0a;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.toast[data-type='warning'] {
+  background: #451a03;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+

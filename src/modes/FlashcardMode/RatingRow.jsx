@@ -1,6 +1,8 @@
 // ─── FlashcardMode/RatingRow.jsx (phaseE) ────────────────────────────────────
 // FSRS 4-button rating row — shown after card is flipped.
+// FE-09-A: haptic.tap() on rating button tap.
 // ─────────────────────────────────────────────────────────────────────────────
+import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';
 import { RATING_META } from '../../srs/fsrs-core.js';
 import FC from './flashcard.module.css';
@@ -36,7 +38,7 @@ export default function RatingRow({ flipped, rated, srsPreviews, onRate }) {
             <button
               key={r}
               className={FC.ratingBtn}
-              onClick={() => onRate(r)}
+              onClick={() => { haptic.tap(); onRate(r); }}
               aria-label={`Nilai ${m.id}${interval != null ? ` — ulang dalam ${fmtInterval(interval)}` : ''}`}
               style={{ background: m.bg, border: `1.5px solid ${m.border}`, color: m.color }}
             >

@@ -421,6 +421,39 @@
   cursor: pointer;
 }
 
+
+/* ── PWA Install Card (FE-08-A) ── */
+.installCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--ssw-surface);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--r-xl);
+  cursor: pointer;
+  font-family: inherit;
+  margin: 12px 0 4px;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.10);
+  transition: opacity 0.15s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.installCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.4), transparent);
+}
+.installCard:active { opacity: 0.75; transform: scale(0.99); }
+.installIcon { font-size: 22px; flex-shrink: 0; }
+.installBody { flex: 1; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.installLabel { font-size: var(--fs-body); font-weight: 800; color: var(--ssw-amber); line-height: 1.2; }
+.installSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
+.installArrow { font-size: 22px; color: var(--ssw-amber); flex-shrink: 0; opacity: 0.7; }
+
 /* ── Footer ── */
 .footer {
   text-align: center;

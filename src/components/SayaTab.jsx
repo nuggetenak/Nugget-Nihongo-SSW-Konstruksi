@@ -2,7 +2,7 @@
 // "Saya" tab — personal hub. Phase 6: 0 inline styles.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import s from './SayaTab.module.css';
 import { CARDS } from '../data/cards.js';
 import { exportAll, importAll, resetAll } from '../storage/engine.js';
@@ -61,6 +61,25 @@ export default function SayaTab() {
   const [goalDraft, setGoalDraft] = useState('');
   const [editingExam, setEditingExam] = useState(false);
   const [examDraft, setExamDraft] = useState('');
+
+  // FE-08-A: PWA install prompt
+  const [installPrompt, setInstallPrompt] = useState(null);
+  const [installed, setInstalled] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => { e.preventDefault(); setInstallPrompt(e); };
+    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('appinstalled', () => setInstalled(true));
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstall = useCallback(async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    if (outcome === 'accepted') setInstalled(true);
+    setInstallPrompt(null);
+  }, [installPrompt]);
 
   // Reset state machine: idle → confirm → countdown → ready
   const [resetStep, setResetStep] = useState(0);
@@ -128,6 +147,18 @@ export default function SayaTab() {
   return (
     <div className={s.container}>
       <div className={s.pageTitle}>Saya</div>
+
+      {/* FE-08-A: PWA install prompt */}
+      {installPrompt && !installed && (
+        <button className={s.installCard} onClick={handleInstall}>
+          <span className={s.installIcon}>📲</span>
+          <span className={s.installBody}>
+            <span className={s.installLabel}>Install App</span>
+            <span className={s.installSub}>Akses lebih cepat, bisa offline</span>
+          </span>
+          <span className={s.installArrow}>›</span>
+        </button>
+      )}
 
       {/* Progress card */}
       <div className={s.progressCard}>

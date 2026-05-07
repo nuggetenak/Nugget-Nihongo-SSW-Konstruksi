@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { resolve } from 'path';
 
 export default defineConfig(({ mode }) => ({
   plugins: [
@@ -14,6 +15,9 @@ export default defineConfig(({ mode }) => ({
       title: 'SSW Konstruksi — Bundle Analysis',
     }),
   ].filter(Boolean),
+  resolve: {
+    alias: { '@': resolve(__dirname, 'src') },
+  },
   base: '/Nugget-Nihongo-SSW-Konstruksi/',
   build: {
     outDir: 'dist',

@@ -40,6 +40,12 @@ self.addEventListener('activate', (event) => {
           .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim()) // take control immediately
+      .then(() => {
+        // FE-08-B: Notify all open windows that a new SW has activated.
+        return self.clients.matchAll({ type: 'window' }).then((all) =>
+          all.forEach((client) => client.postMessage({ type: 'SW_UPDATED' }))
+        );
+      })
   );
 });
 
