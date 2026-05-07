@@ -16,10 +16,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: var(--z-nav);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.08),
+    var(--shadow-lg),
+    var(--shadow-sm),
     inset 0 1px 0 rgba(255,255,255,0.06);
   padding: 0 8px;
 }
@@ -45,7 +45,7 @@
   border: none;
   cursor: pointer;
   color: var(--ssw-textFaint);
-  transition: color 0.2s ease;
+  transition: color var(--t-base) var(--ease-smooth);
   position: relative;
   border-radius: var(--r-lg);
   -webkit-tap-highlight-color: transparent;
@@ -53,7 +53,7 @@
 
 .tab:active {
   transform: scale(0.90);
-  transition: transform 0.1s ease, color 0.2s;
+  transition: transform var(--t-fast) var(--ease-smooth), color var(--t-base);
 }
 
 .tab[data-active='true'] {
@@ -70,7 +70,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background var(--t-base) var(--ease-smooth), transform var(--t-base) var(--ease-smooth);
 }
 
 .tab[data-active='true'] .iconWrap {
@@ -89,7 +89,7 @@
   height: 4px;
   border-radius: 50%;
   background: var(--ssw-amber);
-  animation: navDotPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: navDotPop var(--t-slow) var(--ease-spring) both;
 }
 
 .tabLabel {
@@ -115,7 +115,7 @@
   padding: 0 3px;
   z-index: 1;
   border: 1.5px solid var(--ssw-navBg);
-  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: popIn var(--t-slow) var(--ease-spring) both;
 }
 
 /* ── Reduced motion ── */

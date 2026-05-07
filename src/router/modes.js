@@ -26,6 +26,8 @@ export const MODE_COMPONENTS = {
   ulasan: lazy(() => import('../modes/ReviewMode.jsx')),
   sipil: lazy(() => import('../modes/SipilMode.jsx')),
   bangunan: lazy(() => import('../modes/BangunanMode.jsx')),
+  produksi: lazy(() => import('../modes/ProductionMode.jsx')),
+  mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
 };
 
 // ── Navigation sections ────────────────────────────────────────────────────
@@ -38,7 +40,7 @@ export const MODE_SECTIONS = {
   latihan: {
     title: '🧪 Latihan',
     subtitle: 'Asah kemampuan',
-    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak'],
+    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'produksi', 'mirip'],
   },
   ujian: {
     title: '📋 Ujian',
@@ -77,6 +79,8 @@ export const MODE_META = {
   sumber:   { icon: '📂', label: 'Sumber',        desc: 'Per PDF sumber' },
   stats:    { icon: '📊', label: 'Statistik',     desc: 'Progress & kelemahan' },
   ekspor:   { icon: '💾', label: 'Ekspor',        desc: 'Simpan & pulihkan progress' },
+  produksi: { icon: '✍️', label: 'Produksi',       desc: 'ID→JP: ketik jawaban Jepang' },
+  mirip:    { icon: '🔀', label: 'Kata Mirip',     desc: 'VLT: pasang istilah yang serupa' },
 };
 
 // ── Dashboard quick tiles (4 most-used, top row) ─────────────────────────

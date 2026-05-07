@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  transition: color 0.15s;
+  transition: color var(--t-fast);
   letter-spacing: 0.2px;
   max-width: 55%;
   overflow: hidden;
@@ -82,7 +82,7 @@
   color: var(--ssw-textMuted);
   padding: 4px 10px;
   line-height: 1;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background var(--t-fast), border-color var(--t-fast);
   display: flex;
   align-items: center;
   gap: 4px;
@@ -186,10 +186,10 @@
   background: var(--ssw-amber);
   color: #1a0a00;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(245,158,11,0.30), var(--ssw-shadowGlow);
+  box-shadow: var(--shadow-amber), var(--ssw-shadowGlow);
   animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   letter-spacing: -0.1px;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
   position: relative;
   overflow: hidden;
 }

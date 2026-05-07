@@ -49,6 +49,7 @@ export default class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     // Could send to error tracking here
+    // eslint-disable-next-line no-console
     console.error('[ErrorBoundary]', error, info?.componentStack);
   }
 

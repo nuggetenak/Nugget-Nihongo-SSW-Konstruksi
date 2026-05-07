@@ -206,44 +206,7 @@ body {
   border: 0;
 }
 
-/*
- * ── Token audit — hardcoded values that should use new tokens (FE-03) ──────
- * These are flagged for a future cleanup pass (do NOT auto-replace):
- *
- * BottomNav.module.css:
- *   z-index: 100                        → var(--z-nav)
- *   z-index: 20  (GlossaryMode azNav)   → var(--z-sticky) (closest match: 10, or add --z-sticky-2)
- *   transition: all 0.2s ease           → var(--t-base) var(--ease-smooth)
- *   transition: background 0.2s ease    → var(--t-base) var(--ease-smooth)
- *   transition: transform 0.12s         → var(--t-fast) var(--ease-smooth)
- *   animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) → var(--ease-spring)
- *
- * Dashboard.module.css:
- *   0 8px 32px rgba(0,0,0,0.12)         → var(--shadow-lg)
- *   0 2px 8px rgba(0,0,0,0.08)          → var(--shadow-sm)
- *   0 4px 20px rgba(245,158,11,0.28)    → var(--shadow-amber)  [approx, varies]
- *   transition: opacity 0.15s, transform 0.15s → var(--t-fast)
- *
- * QuizShell.module.css:
- *   0 4px 20px rgba(245,158,11,0.30)    → var(--shadow-amber)
- *   transition: transform 0.15s         → var(--t-fast)
- *   animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) → var(--ease-spring)
- *
- * ResultScreen.module.css:
- *   0 4px 18px rgba(180,83,9,0.28)      → var(--shadow-amber) [amber-dark variant]
- *   transition: transform 0.15s         → var(--t-fast)
- *
- * FlipCard.module.css / flashcard.module.css:
- *   transition: transform 0.13s cubic-bezier(0.34, 1.56, 0.64, 1) → var(--t-fast) var(--ease-spring)
- *   transition: transform 0.12s         → var(--t-fast)
- *
- * ModeRouter.jsx (inline):
- *   padding: '20px 20px'                → var(--sp-5)
- *   maxWidth: 480                       → var(--max-w)
- *
- * GlossaryMode.module.css:
- *   z-index: 20                         → no exact match — consider --z-sticky-hi or reuse --z-sticky
- */
+/* FE-03 token audit: all items resolved — see CHANGELOG */
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {

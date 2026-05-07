@@ -12,7 +12,7 @@
 :global(.fc-card) {
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(0.34, 0.8, 0.64, 1);
+  transition: transform var(--t-slow) var(--ease-spring);
   will-change: transform;
 }
 
@@ -71,7 +71,7 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  transition: transform 0.13s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s;
+  transition: transform var(--t-fast) var(--ease-spring), box-shadow var(--t-fast);
   position: relative;
   overflow: hidden;
 }
@@ -139,7 +139,7 @@
   flex-direction: column;
   align-items: center;
   gap: 3px;
-  transition: transform 0.12s ease, opacity 0.15s;
+  transition: transform var(--t-fast) var(--ease-smooth), opacity var(--t-fast);
   letter-spacing: 0.1px;
 }
 .toolBtn:active { transform: scale(0.90); }
@@ -162,7 +162,7 @@
   background: var(--ssw-inputBg);
   border: 1.5px solid var(--ssw-border);
   color: var(--ssw-text);
-  transition: border-color 0.15s;
+  transition: border-color var(--t-fast);
 }
 .filterInput:focus { border-color: var(--ssw-borderActive); }
 
@@ -193,7 +193,7 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   color: var(--ssw-textMuted);
-  transition: background 0.15s, transform 0.12s;
+  transition: background var(--t-fast), transform var(--t-fast);
 }
 .navBtn:active { transform: scale(0.95); }
 
@@ -207,8 +207,8 @@
   background: var(--accent);
   border: none;
   color: #FFF8E7;
-  box-shadow: 0 3px 12px rgba(180,83,9,0.25);
-  transition: transform 0.12s, box-shadow 0.12s;
+  box-shadow: var(--shadow-amber);
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
 }
 .navFlip:active {
   transform: scale(0.95);

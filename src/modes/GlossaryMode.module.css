@@ -70,14 +70,14 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  transition: all 0.12s;
+  transition: all var(--t-fast);
 }
 
 /* ── Sticky A-Z nav ── */
 .azNav {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: var(--z-sticky); /* --z-sticky=10 is closest token; use +1 override if needed */
   overflow-x: auto;
   display: flex;
   gap: 2px;
@@ -102,7 +102,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s;
+  transition: all var(--t-base);
 }
 
 /* ── Content area ── */
@@ -145,7 +145,7 @@
   padding: 9px 16px;
   cursor: pointer;
   border-bottom: 1px solid var(--ssw-border);
-  transition: background 0.12s;
+  transition: background var(--t-fast);
 }
 
 .termMain {

@@ -159,9 +159,9 @@
   border: none;
   color: #FFF8E7;
   cursor: pointer;
-  box-shadow: 0 4px 18px rgba(180,83,9,0.28);
+  box-shadow: var(--shadow-amber);
   letter-spacing: -0.1px;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform var(--t-fast), box-shadow var(--t-fast);
   position: relative;
   overflow: hidden;
 }
@@ -207,7 +207,7 @@
   cursor: pointer;
   margin-bottom: 24px;
   font-weight: 600;
-  transition: background 0.15s;
+  transition: background var(--t-fast);
 }
 .btnBack:active { background: var(--ssw-surfaceActive); }
 
@@ -242,7 +242,7 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-left: 3px solid var(--ssw-wrong);
-  transition: background 0.15s;
+  transition: background var(--t-fast);
 }
 
 .reviewQ {

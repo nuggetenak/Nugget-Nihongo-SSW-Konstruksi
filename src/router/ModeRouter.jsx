@@ -21,7 +21,7 @@ import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 function ModeLoader() {
   return (
     <div
-      style={{ padding: '20px 20px', maxWidth: 480, margin: '0 auto' }}
+      style={{ padding: 'var(--sp-5)', maxWidth: 'var(--max-w)', margin: '0 auto' }}
       role="status"
       aria-label="Memuat mode..."
       aria-live="polite"
@@ -239,6 +239,8 @@ export default function ModeRouter() {
     sipil:    { onExit: exitMode, onSessionEnd: makeSessionEnd('sipil') },
     bangunan: { onExit: exitMode, onSessionEnd: makeSessionEnd('bangunan') },
     glosari:  { onExit: exitMode, track },
+    produksi: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('produksi'), audioEnabled },
+    mirip:    { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },
   };
 
   const props = modeProps[mode] ?? { onExit: exitMode };
