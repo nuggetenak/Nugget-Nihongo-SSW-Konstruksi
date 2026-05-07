@@ -130,7 +130,7 @@ function FocusSentinel() {
 
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
-  const { mode, exitMode, track } = useApp();
+  const { mode, modeParams, exitMode, goMode, track } = useApp();
   const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession, streakData, sessions } = useProgress();
   const srs = useSRSContext();
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
@@ -217,6 +217,7 @@ export default function ModeRouter() {
       srs,
       starred,
       onToggleStar: toggleStar,
+      filterIds: modeParams?.filterIds ?? null,
     },
     ulasan: { srs, onExit: exitMode, onSessionEnd: makeSessionEnd('ulasan') },
     kuis:   {
@@ -224,6 +225,7 @@ export default function ModeRouter() {
       allCards: CARDS,
       onExit: exitMode,
       onFinish: makeFinishHandler('kuis'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
     sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint') },
@@ -232,10 +234,10 @@ export default function ModeRouter() {
     angka:    { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
     jebak:    { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },
     cari:     { onExit: exitMode, track, starred, toggleStar },
-    jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac'), audioEnabled },
-    wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground') },
+    jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }), audioEnabled },
+    wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }) },
     vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab'), audioEnabled },
-    simulasi: { onExit: exitMode, onSessionEnd: makeSessionEnd('simulasi') },
+    simulasi: { onExit: exitMode, onSessionEnd: makeSessionEnd('simulasi'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }) },
     sipil:    { onExit: exitMode, onSessionEnd: makeSessionEnd('sipil') },
     bangunan: { onExit: exitMode, onSessionEnd: makeSessionEnd('bangunan') },
     glosari:  { onExit: exitMode, track },

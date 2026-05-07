@@ -27,7 +27,28 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onS
   if (activeCat) {
     const cat = catStats.find((c) => c.key === activeCat);
     if (!cat) return null;
-    return <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} onSessionEnd={onSessionEnd} />;
+
+    // F1: Show "kenapa kategori ini?" before drill
+    return (
+      <div className={S.page}>
+        <button className={S.btnBack} onClick={() => setActiveCat(null)}>← Fokus</button>
+        <div style={{ background: 'var(--ssw-surface)', border: '1px solid var(--ssw-border)', borderRadius: 16, padding: '20px 18px', marginBottom: 16 }}>
+          <div style={{ fontSize: 13, color: 'var(--ssw-textDim)', marginBottom: 6 }}>🎯 Latihan fokus untuk:</div>
+          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>{cat.emoji} {cat.label}</div>
+          <div style={{ fontSize: 13, color: cat.score >= 70 ? T.correct : cat.score >= 40 ? T.gold : T.wrong, fontWeight: 700, marginBottom: 8 }}>
+            Akurasi: {cat.score}% · {cat.known}/{cat.total} hafal{cat.wrong > 0 ? ` · ${cat.wrong} sering salah` : ''}
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--ssw-textDim)', lineHeight: 1.5 }}>
+            {cat.score < 40
+              ? 'Kategori ini paling lemah — banyak kartu yang belum hafal. Sprint fokus akan memperkuat ingatan cepat.'
+              : cat.score < 70
+              ? 'Sudah mulai hafal tapi belum stabil. Latihan ini akan memperkuat yang masih ragu-ragu.'
+              : 'Sudah cukup baik! Sprint ini untuk mempertahankan dan mempercepat recall.'}
+          </div>
+        </div>
+        <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} onSessionEnd={onSessionEnd} />
+      </div>
+    );
   }
 
   return (

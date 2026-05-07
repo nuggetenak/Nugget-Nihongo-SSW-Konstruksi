@@ -28,6 +28,8 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const [_lastResult, setLast] = useState(null);
   const [intervals, setIntervals] = useState({});
   const [sessionCorrect, setSessionCorrect] = useState(0);
+  // R1: Rating distribution tracking
+  const [ratingDist, setRatingDist] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
 
   useEffect(() => {
     if (!srs.ready) return;
@@ -60,6 +62,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     if (!flipped || currentId == null) return;
     const result = srs.review(currentId, rating);
     setLast({ rating, interval: result.interval });
+    setRatingDist((d) => ({ ...d, [rating]: d[rating] + 1 }));
     if (result.isKnown) setSessionCorrect((n) => n + 1);
     setTimeout(() => {
       const nextIdx = idx + 1;
@@ -127,6 +130,26 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
                 <div className={R.doneMiniLabel}>{stat.label}</div>
               </div>
             ))}
+          </div>
+        )}
+        {/* R1: Rating distribution */}
+        {total > 0 && (
+          <div style={{ width: '100%', maxWidth: 280, margin: '12px auto 0' }}>
+            <div style={{ fontSize: 11, color: T.textDim, marginBottom: 6, textAlign: 'center', letterSpacing: 0.4 }}>DISTRIBUSI RATING</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+              {[
+                { r: 1, label: 'Lagi', emoji: '🔴', color: '#f87171' },
+                { r: 2, label: 'Susah', emoji: '🟠', color: '#fb923c' },
+                { r: 3, label: 'Oke', emoji: '🟢', color: T.correct },
+                { r: 4, label: 'Mudah', emoji: '🔵', color: '#60a5fa' },
+              ].map(({ r, label, emoji, color }) => (
+                <div key={r} style={{ textAlign: 'center', background: `${color}12`, border: `1px solid ${color}30`, borderRadius: 8, padding: '8px 4px' }}>
+                  <div style={{ fontSize: 14 }}>{emoji}</div>
+                  <div style={{ fontSize: 16, fontWeight: 800, color }}>{ratingDist[r]}</div>
+                  <div style={{ fontSize: 10, color: T.textDim }}>{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
         <button className={S.btnPrimary} onClick={onExit}>← Kembali</button>

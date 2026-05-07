@@ -24,7 +24,10 @@ import FilterBar  from './FilterBar.jsx';
 export default function FlashcardMode({
   cards, known, unknown, onMark, onExit, srs,
   starred = new Set(), onToggleStar = () => {},
+  filterIds = null,
 }) {
+  // A1: If filterIds provided (wrong-card bridge), scope cards to that set
+  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
   const [order, setOrder]           = useState([]);
   const [idx, setIdx]               = useState(0);
   const [flipped, setFlipped]       = useState(false);
@@ -42,7 +45,7 @@ export default function FlashcardMode({
     storageSet('prefs', (p) => ({ ...p, flashcardHintCount: next }));
   }, [hintCount]);
 
-  // Swipe tilt
+  // Swipe tilt — touchStart is {x, y} or null
   const [touchStart, setTouchStart] = useState(null);
   const [swipeDelta, setSwipeDelta] = useState(0);
 
@@ -59,7 +62,7 @@ export default function FlashcardMode({
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   const rebuildOrder = useCallback((mode) => {
-    const base = reviewBelum ? cards.filter((c) => unknown.has(c.id)) : cards;
+    const base = reviewBelum ? baseCards.filter((c) => unknown.has(c.id)) : baseCards;
     if (mode === 'original') return base;
     if (mode === 'shuffle')  return shuffle([...base]);
     const u = base.filter((c) => unknown.has(c.id));
@@ -71,7 +74,7 @@ export default function FlashcardMode({
   useEffect(() => {
     setOrder(rebuildOrder(sortMode));
     setIdx(0); setFlipped(false); setShowDesc(false); setRated(false);
-  }, [cards, known, unknown, rebuildOrder, sortMode, reviewBelum]);
+  }, [baseCards, known, unknown, rebuildOrder, sortMode, reviewBelum]);
 
   const displayCards = search === '__starred__'
     ? order.filter((c) => starred.has(c.id))
@@ -174,6 +177,13 @@ export default function FlashcardMode({
   return (
     <div className={S.fcWrapper}>
 
+      {/* A1: Wrong-card bridge banner */}
+      {filterIds && (
+        <div style={{ background: 'rgba(248,113,113,0.10)', border: '1px solid rgba(248,113,113,0.3)', borderRadius: 8, padding: '8px 12px', marginBottom: 8, fontSize: 12, color: '#f87171', textAlign: 'center' }}>
+          ❌ Latihan kartu salah · {baseCards.length} kartu
+        </div>
+      )}
+
       {/* Header */}
       <div className={S.modeHeader} style={{ marginBottom: 6 }}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>← Kartu</button>
@@ -229,16 +239,28 @@ export default function FlashcardMode({
           showHint={showHint}
           borderColor={borderColor}
           swipeDelta={swipeDelta}
-          onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+          onTouchStart={(e) => {
+            setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+          }}
           onTouchMove={(e) => {
             if (touchStart === null) return;
-            const delta = (e.touches[0].clientX - touchStart) / 120;
-            setSwipeDelta(Math.max(-1, Math.min(1, delta)));
+            const dx = (e.touches[0].clientX - touchStart.x) / 120;
+            setSwipeDelta(Math.max(-1, Math.min(1, dx)));
           }}
           onTouchEnd={(e) => {
-            const diff = touchStart !== null ? e.changedTouches[0].clientX - touchStart : 0;
+            if (touchStart === null) { setSwipeDelta(0); return; }
+            const dx = e.changedTouches[0].clientX - touchStart.x;
+            const dy = e.changedTouches[0].clientY - touchStart.y;
             setSwipeDelta(0); setTouchStart(null);
-            if (Math.abs(diff) > 60) go(diff > 0 ? -1 : 1);
+            // K1: If flipped and not yet rated — swipe to rate
+            if (flipped && !rated) {
+              if (dy < -60 && Math.abs(dy) > Math.abs(dx)) { handleRate(4); return; } // swipe up = Easy
+              if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+                handleRate(dx < 0 ? 1 : 3); return; // left=Again, right=Good
+              }
+            }
+            // Not flipped or small swipe — navigate cards
+            if (!flipped && Math.abs(dx) > 60) go(dx > 0 ? -1 : 1);
           }}
         />
       </ErrorBoundary>
@@ -250,6 +272,13 @@ export default function FlashcardMode({
         srsPreviews={srsPreviews}
         onRate={handleRate}
       />
+
+      {/* K1: Swipe hint — shown when flipped and not yet rated */}
+      {flipped && !rated && (
+        <div style={{ textAlign: 'center', fontSize: 11, color: T.textFaint, marginTop: 4, letterSpacing: 0.3 }}>
+          ← Lagi · Oke → · ↑ Mudah
+        </div>
+      )}
 
       {/* Nav row */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginTop: 10 }}>

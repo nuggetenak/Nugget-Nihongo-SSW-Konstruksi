@@ -21,6 +21,7 @@ export default function QuizShell({
   title = 'Kuis',
   onAnswer,
   onFinish,
+  onRetryWrong,
   timer = 0,
   showHint = false,
   renderExtra,
@@ -57,6 +58,7 @@ export default function QuizShell({
         ...r,
         {
           isCorrect,
+          _cardId: q._cardId ?? null,
           question: q.question,
           userAnswer: q.options[idx]?.text || '',
           correctAnswer: q.options[q.correctIdx]?.text || '',
@@ -105,6 +107,7 @@ export default function QuizShell({
 
   if (phase === 'finished') {
     const correct = results.filter((r) => r.isCorrect).length;
+    const wrongCardIds = results.filter((r) => !r.isCorrect && r._cardId).map((r) => r._cardId);
     return (
       <ResultScreen
         correct={correct}
@@ -112,7 +115,13 @@ export default function QuizShell({
         maxStreak={maxStreak}
         review={results.filter((r) => !r.isCorrect)}
         onRestart={handleRestart}
-        onRetryWrong={handleRestart}
+        onRetryWrong={
+          wrongCardIds.length > 0 && onRetryWrong
+            ? () => onRetryWrong(wrongCardIds)
+            : wrongCardIds.length > 0
+            ? handleRestart
+            : undefined
+        }
         onExit={onExit}
       />
     );

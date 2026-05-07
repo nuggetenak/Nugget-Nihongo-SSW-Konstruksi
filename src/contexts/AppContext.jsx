@@ -40,15 +40,20 @@ export function AppProvider({ children }) {
   // ── Navigation ──
   const [tab, setTab] = useState('home');
   const [mode, setMode] = useState(prefs.lastMode ?? null);
+  const [modeParams, setModeParams] = useState(null);
 
-  const goMode = useCallback((m) => {
+  // goMode(key) — navigate to mode
+  // goMode(key, params) — navigate with extra params (e.g. { filterIds: [...] })
+  const goMode = useCallback((m, params = null) => {
     setMode(m);
+    setModeParams(params);
     setPref('lastMode', m);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [setPref]);
 
   const exitMode = useCallback(() => {
     setMode(null);
+    setModeParams(null);
     setPref('lastMode', null);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [setPref]);
@@ -99,7 +104,7 @@ export function AppProvider({ children }) {
     prefs,
     // Navigation
     tab, setTab,
-    mode, goMode, exitMode, goTab,
+    mode, modeParams, goMode, exitMode, goTab,
     // Toast
     toast,
   };

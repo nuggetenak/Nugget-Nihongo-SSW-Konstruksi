@@ -7,6 +7,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
+import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
@@ -49,7 +50,19 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
   const card = order[idx];
   const next = () => { setShowAnswer(false); setIdx((i) => (i + 1) % order.length); };
   const handleKnow = () => { setCorrect((c) => c + 1); next(); };
-  const handleDontKnow = () => { setWrong((w) => w + 1); setShowAnswer(true); setTimeout(next, 1200); };
+  const handleDontKnow = () => {
+    setWrong((w) => w + 1);
+    // S5: Record wrong answer to quiz wrong-tracker so FocusMode can pick it up
+    const cardId = order[idx]?.id;
+    if (cardId) {
+      storageSet('prefs', (p) => {
+        const qw = { ...(p?.quizWrong ?? {}) };
+        qw[cardId] = makeWrongEntry(qw[cardId]);
+        return { ...p, quizWrong: qw };
+      });
+    }
+    setShowAnswer(true); setTimeout(next, 1200);
+  };
   const startSprint = () => {
     setPhase('playing'); setIdx(0); setCorrect(0); setWrong(0);
     setTimeLeft(DURATION); setNewBest(false);

@@ -12,7 +12,7 @@ import { get as storageGet } from '../storage/engine.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
-export default function QuizMode({ cards, allCards, onExit, onFinish, audioEnabled = false }) {
+export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWrong, audioEnabled = false }) {
   const [difficulty, setDifficulty] = useState('medium');
   const [quizCount, setQuizCount] = useState(10);
   const [lemahMode, setLemahMode] = useState(false);
@@ -164,6 +164,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, audioEnabl
       title="Kuis"
       onAnswer={handleAnswer}
       onFinish={onFinish}
+      onRetryWrong={onRetryWrong}
       accentColor={T.gold}
       autoNextDelay={autoNextDelay}
       audioEnabled={audioEnabled}
