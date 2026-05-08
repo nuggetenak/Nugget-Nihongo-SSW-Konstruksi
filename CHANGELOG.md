@@ -1,3 +1,16 @@
+## [4.19.2] - 2026-05-09
+
+### fix: track field bugs + SimulasiMode CSV gap (Agent Sonnet 4.6)
+
+**Bug fixes — track field data:**
+- `wayground-sets.js`: wt1–wt10 (Teori sets) were tagged `track:"lifeline"` — should be `track:"common"`. Fixed. Teori sets now visible to doboku/kenchiku track users in WaygroundMode.
+- `csv-sets.js`: All 12 CSV sets (ct01–ct06, cp01–cp06) had no `track` field → invisible to `getQuizSetsForTrack()` and WaygroundMode. Added: ct* `track:'common'`, cp* `track:'lifeline'`.
+
+**Bug fix — SimulasiMode exam pool:**
+- `SimulasiMode.jsx` was importing `WAYGROUND_SETS` directly, missing all 300 CSV questions. Changed to `QUIZ_SETS` from `quiz-sets.js`. Exam pool now includes JAC (95q) + Wayground (579q) + CSV (300q) = ~974 questions total.
+
+---
+
 ## [4.19.1] - 2026-05-09
 
 ### chore: C1 closure + hygiene pass (Agent Sonnet 4.6)
