@@ -7,7 +7,7 @@ export const WAYGROUND_SETS = [
   // ── SOAL TEORI (6 sets) — from JAC-aligned CSV ──────────────────────────
   {
     id: "wt1", title: "Teori Set 1 · 19qs", subtitle: "安全管理 KY・5S・指差呼称",
-    track: "lifeline",
+    track: "common",
     emoji: "🎯", color: "#f97316", grad: "linear-gradient(135deg,#9a3412,#ea580c)",
     source: "wayground-teori",
     questions: [
@@ -35,7 +35,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt2", title: "Teori Set 2 · 20qs", subtitle: "三大災害・PPE・LOTO・酸素欠乏",
-    track: "lifeline",
+    track: "common",
     emoji: "⚠️", color: "#ef4444", grad: "linear-gradient(135deg,#7f1d1d,#dc2626)",
     source: "wayground-teori",
     questions: [
@@ -64,7 +64,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt3", title: "Teori Set 3 · 20qs", subtitle: "労働基準法・雇用・36協定",
-    track: "lifeline",
+    track: "common",
     emoji: "⚖️", color: "#eab308", grad: "linear-gradient(135deg,#713f12,#ca8a04)",
     source: "wayground-teori",
     questions: [
@@ -93,7 +93,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt4", title: "Teori Set 4 · 20qs", subtitle: "建設業法・環境法・水道法・消防法",
-    track: "lifeline",
+    track: "common",
     emoji: "📜", color: "#22c55e", grad: "linear-gradient(135deg,#14532d,#16a34a)",
     source: "wayground-teori",
     questions: [
@@ -121,7 +121,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt5", title: "Teori Set 5 · 20qs", subtitle: "施工管理・構造・役割・CCUS",
-    track: "lifeline",
+    track: "common",
     emoji: "🏗️", color: "#818cf8", grad: "linear-gradient(135deg,#312e81,#4f46e5)",
     source: "wayground-teori",
     questions: [
@@ -149,7 +149,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt6", title: "Teori Set 6 · 20qs", subtitle: "総合ファイナル 頻出問題",
-    track: "lifeline",
+    track: "common",
     emoji: "🏆", color: "#ec4899", grad: "linear-gradient(135deg,#831843,#db2777)",
     source: "wayground-teori",
     questions: [
@@ -178,7 +178,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt7", title: "Teori Set 7 · 20qs", subtitle: "現場安全・リスク・コミュニケーション",
-    track: "lifeline",
+    track: "common",
     emoji: "🗣️", color: "#22d3ee", grad: "linear-gradient(135deg,#164e63,#0891b2)",
     source: "wayground-jac",
     questions: [
@@ -206,7 +206,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt8", title: "Teori Set 8 · 20qs", subtitle: "施工技術・資格・建設材料",
-    track: "lifeline",
+    track: "common",
     emoji: "🏛️", color: "#a3e635", grad: "linear-gradient(135deg,#1a2e05,#4d7c0f)",
     source: "wayground-jac",
     questions: [
@@ -234,7 +234,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt9", title: "Teori Set 9 · 20qs", subtitle: "職場ルール・5S詳細・労働環境",
-    track: "lifeline",
+    track: "common",
     emoji: "🏢", color: "#e879f9", grad: "linear-gradient(135deg,#4a044e,#a21caf)",
     source: "wayground-jac",
     questions: [
@@ -262,7 +262,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt10", title: "Teori Set 10 · 20qs", subtitle: "総合テスト II 応用問題",
-    track: "lifeline",
+    track: "common",
     emoji: "📊", color: "#fbbf24", grad: "linear-gradient(135deg,#451a03,#b45309)",
     source: "wayground-jac",
     questions: [
