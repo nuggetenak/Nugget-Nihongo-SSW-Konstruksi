@@ -1,8 +1,8 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.17.0)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.18.0)
 
-> **Status:** ALL PHASES COMPLETE ✅ (C1 text3l+pass2 done; C2 deferred)
-> **Version:** 4.17.0
-> **Last updated:** 2026-05-08 (C1 pass2: +15 common cards from text1l/text2/text3)
+> **Status:** ALL PHASES COMPLETE ✅ (C1 done; doboku/kenchiku migrated to common; C2 deferred)
+> **Version:** 4.18.0
+> **Last updated:** 2026-05-08 (refactor: doboku+kenchiku 157 cards → common; structure correct)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**
@@ -15,13 +15,13 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 | Dimension | Value |
 |-----------|-------|
-| Flashcards | 1,443 (curated, type-annotated, ruby-rendered) |
+| Flashcards | 1,443 (all in common+lifeline; doboku/kenchiku source files empty pending Ch.5+) |
 | Quiz questions | ~860 (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Modes | 23 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 387 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.17.0** |
+| Version | **4.18.0** |
 
 ---
 

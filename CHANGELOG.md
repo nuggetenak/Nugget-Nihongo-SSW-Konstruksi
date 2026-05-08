@@ -1,3 +1,20 @@
+## [4.18.0] - 2026-05-08
+
+### refactor: migrate doboku + kenchiku cards to common (Agent Sonnet 4.6)
+
+**Structure correction** — Ch.1–4 content belongs in common (shared by all tracks).
+
+- `cards-doboku.js` (58 kartu) → `cards-common.js` — category remapped: doboku_doko/hoso/haisui → sekou
+- `cards-kenchiku.js` (77 kartu) → `cards-common.js` — category remapped: kenchiku_kutai/shiage → sekou
+- `cards-doboku-vocab.js` (9 kartu) → `cards-common-vocab.js`
+- `cards-kenchiku-vocab.js` (13 kartu) → `cards-common-vocab.js`
+- Source files doboku/kenchiku now empty `[]` (preserved for future Ch.5+ track-specific content)
+- IDs reassigned 1472–1628; _origIndex 1443–1599
+- Total cards unchanged: 1443 | common: 496→646, common-vocab: 211→233
+- 387/387 tests pass
+
+---
+
 ## [4.17.0] - 2026-05-08
 
 ### feat(C1-pass2): text1l + text2 + text3 — 15 new cards pass 2 (Agent Sonnet 4.6)
