@@ -9,7 +9,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
-import { WAYGROUND_SETS } from '../data/wayground-sets.js';
+import { QUIZ_SETS } from '../data/quiz-sets.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import OptionButton from '../components/OptionButton.jsx';
 import S from './modes.module.css';
@@ -25,7 +25,7 @@ const PRESETS = [
 const INSTRUCTIONS = ['📋 Pilih satu jawaban yang paling tepat', '⏱ Timer berjalan — jangan sampai habis', '🚫 Soal otomatis lanjut setelah kamu jawab', `✅ ${PASS_PCT}% ke atas = LULUS`];
 function fmtTime(sec) { const m = Math.floor(sec / 60); const s = sec % 60; return `${m}:${String(s).padStart(2, '0')}`; }
 
-// Normalize JAC and Wayground questions to a common shape
+// Normalize JAC and Wayground+CSV questions to a common shape
 function buildPool() {
   const jacNorm = JAC_OFFICIAL.map((q) => ({
     jp: q.jp,
@@ -39,7 +39,7 @@ function buildPool() {
     _setLabel: q.setLabel || 'JAC',
   }));
 
-  const wayNorm = WAYGROUND_SETS.flatMap((set) =>
+  const wayNorm = QUIZ_SETS.flatMap((set) =>
     (set.questions || []).map((q) => ({
       jp: q.q,
       id_text: q.hint || null,
@@ -48,7 +48,7 @@ function buildPool() {
       explanation: q.exp || null,
       hasPhoto: false,
       photoDesc: null,
-      _source: 'wayground',
+      _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
       _setLabel: set.title || 'Wayground',
     }))
   );
