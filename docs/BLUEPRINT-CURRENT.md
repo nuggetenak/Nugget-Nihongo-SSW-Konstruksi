@@ -1,8 +1,8 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.13.0)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.14.0)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.13.0
-> **Last updated:** 2026-05-08 (hygiene audit pass — docs sync)
+> **Version:** 4.14.0
+> **Last updated:** 2026-05-08 (hygiene audit pass — docs sync v4.14.0)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**
@@ -21,7 +21,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 387 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.13.0** |
+| Version | **4.14.0** |
 
 ---
 
@@ -183,6 +183,15 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | AK3 | AngkaMode: `TypeQuizView` — ⌨️ Ketik mode, type-answer production quiz, fuzzy match |
 | G2 | GlossaryMode: compact/expanded toggle (≡ Kompak = click-to-expand; ⊞ Lebar = always-show-all) |
 | K5 | FlashcardMode: "＋ Tambah ke Ulasan SRS" button for known cards not yet in SRS queue |
+
+### v4.14.0 — J4+J2 JAC Topic Tags
+
+| Item | Deliverable |
+|------|-------------|
+| J4 | `jac-official.js`: `topic` field on all 95 questions (8 topics: listrik/pipa/telekomunikasi/pemadam/isolasi/keselamatan/hukum/umum) |
+| J2 | `JACMode.jsx`: topic filter chip row + "Simulasi per Topik" CTA; filtered set count per topic |
+
+---
 
 ### v4.13.0 — G3 Export Mini Deck
 

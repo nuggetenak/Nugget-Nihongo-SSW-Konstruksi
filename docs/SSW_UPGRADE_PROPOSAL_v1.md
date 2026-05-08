@@ -117,14 +117,14 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 6. 📋 JAC Official (JACMode)
 
-**Kondisi saat ini:** Score tracking per set, last-score badge + best score (J3 v4.8.0), lemah filter, auto-delay, Wrong-Card Bridge (A1 v4.3.0).
+**Kondisi saat ini:** Score tracking per set, last-score badge + best score (J3 v4.8.0), lemah filter, auto-delay, Wrong-Card Bridge (A1 v4.3.0), topic tags on all 95 questions + topic filter + "Simulasi per Topik" (J4+J2 v4.14.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | J1 | ~~Kartu yang salah di JACMode **tidak masuk ke SRS queue**~~ ✅ FIXED v4.10.0 — "🧠 Tambah ke Ulasan SRS" pada ResultScreen, queues `related_card_id` via `recordReview(id, 1)` | Gap | 🔴 |
-| J2 | Tidak ada **"Simulasi chapter"** — user tidak bisa mensimulasikan ujian hanya dari bab tertentu | Feature | 🟠 |
+| J2 | ~~Tidak ada **"Simulasi chapter"** — user tidak bisa mensimulasikan ujian hanya dari bab tertentu~~ ✅ FIXED v4.14.0 — "Simulasi per Topik" CTA + topic filter chip row in JACMode | Feature | 🟠 |
 | J3 | ~~Score badge di picker hanya tampilkan persentase terakhir, bukan **best score**~~ ✅ FIXED v4.8.0 | UX | 🟡 |
-| J4 | Soal JAC tidak punya tag chapter/bab — sulit tahu soal mana yang dari bab mana | Data | 🟠 |
+| J4 | ~~Soal JAC tidak punya tag chapter/bab — sulit tahu soal mana yang dari bab mana~~ ✅ FIXED v4.14.0 — `topic` field on all 95 questions (8 topics: listrik/pipa/telekomunikasi/pemadam/isolasi/keselamatan/hukum/umum) | Data | 🟠 |
 
 **Rekomendasi J1 (kritis):** Setelah JACMode selesai, tawarkan "Tambah X soal salah ke Ulasan SRS?" → jika iya, buat SRS card sementara dari soal JAC yang salah. Ini menutup loop antara exam prep dan vocabulary reinforcement.
 
@@ -191,7 +191,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | SR1 | ~~Tidak ada **search history**~~ ✅ FIXED v4.8.0 — user sering mencari kata yang sama berulang kali | Feature | 🟠 |
-| SR2 | Tidak bisa search by **furigana reading** — ketik "あんぜん" tidak menemukan kartu "安全" | Bug | 🟠 |
+| SR2 | ~~Tidak bisa search by **furigana reading** — ketik "あんぜん" tidak menemukan kartu "安全"~~ ✅ CONFIRMED resolved — `furi` field already in search haystack | Bug | 🟠 |
 | SR3 | ~~Tidak ada **"Copy ke Clipboard"**~~ ✅ FIXED v4.8.2 — tombol ⎘ per hasil pencarian, salin JP+furigana+terjemahan | Feature | 🟢 |
 | SR4 | ~~Hasil pencarian tidak menampilkan **akurasi user** untuk kartu itu~~ ✅ FIXED v4.9.0 — badge `✓ Hafal` + `⚠ Nx salah` per kartu | Feature | 🟡 |
 
@@ -398,11 +398,11 @@ Kartu jatuh tempo berikutnya: 8 jam lagi
 
 ---
 
-#### C4 🟠 Tag Bab/Chapter per Soal JAC
+#### C4 🟠 Tag Bab/Chapter per Soal JAC ✅ FIXED v4.14.0 (sebagai topic tags)
 
 **Problem:** 95 soal JAC tidak memiliki metadata bab — user tidak bisa tahu soal mana yang dari bab mana.
 
-**Solusi:** Tambahkan `chapter: 1-6` ke setiap soal JAC di `jac-questions.js`. Tampilkan di JACMode picker sebagai filter "Bab 1 / Bab 2 / Bab 3 / Semua".
+**Solusi:** ~~Tambahkan `chapter: 1-6` ke setiap soal JAC di `jac-questions.js`.~~ Diimplementasi sebagai `topic` field (8 topik: listrik/pipa/telekomunikasi/pemadam/isolasi/keselamatan/hukum/umum) — lebih granular dan relevan dibanding chapter number. Filter topik + "Simulasi per Topik" tersedia di JACMode.
 
 ---
 
@@ -691,7 +691,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ### Phase 5.2 — Content Expansion ⏳ SKIP (per instruksi Crispy — fokus ke fitur dulu)
 1. ⏳ **C1** Upload + ekstrak Chapter 2–4 (text2l, text3l, text4l) — id 631+
-2. ⏳ **C4** Tag bab/chapter ke soal JAC
+2. ✅ **C4** Tag topik ke soal JAC — v4.14.0 (`topic` field, 8 topik; filter + Simulasi per Topik di JACMode)
 3. ⏳ **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
 
 ### Phase 5.3 — Mode Enhancements ✅ SELESAI (2026-05-08, commit `d081434`)
@@ -740,6 +740,10 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 1. ✅ **SR3** SearchMode: copy-to-clipboard ⎘ per result
 2. ✅ **SIM5** SimulasiMode: pace hint `N soal/mnt` live di bawah timer
 
+### Phase 5.9 — J4+J2 JAC Topic Tags ✅ SELESAI (2026-05-08, v4.14.0)
+1. ✅ **J4** `jac-official.js`: `topic` field on all 95 questions (8 topics: listrik/pipa/telekomunikasi/pemadam/isolasi/keselamatan/hukum/umum)
+2. ✅ **J2** `JACMode.jsx`: topic filter chip row + "Simulasi per Topik" CTA button; filtered count per topic
+
 ---
 
 ## 🐛 Bug Registry
@@ -764,7 +768,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Awal Audit | Saat Ini (v4.13.0) | Target (Phase 5.4) |
+| Metrik | Awal Audit | Saat Ini (v4.14.0) | Target (Phase 5.4) |
 |--------|------------|--------------------|--------------------|
 | Total kartu | 1.438 | 1.410 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
 | Test | ~321 | **387** | 380+ ✅ |
@@ -815,6 +819,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v8): Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.13.0): J2, J4 — butuh akses PDF/data konten. SR2 confirmed resolved (furi in haystack). E2 confirmed resolved (v4.6.0).*
+*Proposal v3 — hygiene pass 2026-05-08 (v9): J2+J4+SR2 di-strikethrough (v4.14.0); Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.14.0): table item E2 (export encryption — 🟢 Nice-to-have); Phase 5.2 content (C1/C2) deferred.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

@@ -1,3 +1,19 @@
+## [4.14.0] - 2026-05-08
+
+### J4+J2 — JAC Topic Tags + Simulasi per Topik (Agent Sonnet 4.6)
+
+**J4 — Topic field on all 95 JAC questions**
+- `topic` field added to all 95 questions in `jac-official.js`
+- 8 topics: listrik / pipa / telekomunikasi / pemadam / isolasi / keselamatan / hukum / umum
+
+**J2 — JACMode topic filter + Simulasi per Topik**
+- Topic filter chip row in JACMode picker
+- "Simulasi per Topik" CTA button — runs simulation filtered to selected topic
+- Set list shows filtered count per topic when filter active
+- 387/387 tests, lint clean, build clean
+
+---
+
 ## [4.13.0] - 2026-05-08
 
 ### G3 — GlossaryMode Export Mini Deck (Agent Sonnet 4.6)

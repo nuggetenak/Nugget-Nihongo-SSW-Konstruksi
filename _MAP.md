@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (hygiene audit pass — docs sync)
-> **Version:** v4.13.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items batches; 387 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (hygiene audit pass — docs sync v4.14.0)
+> **Version:** v4.14.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items batches + J4/J2; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -39,7 +39,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.13.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.14.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -190,7 +190,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.13.0** |
+| Version | **4.14.0** |
 | Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -266,7 +266,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ---
 
-## 7. Notable New Files (v4.0.2 → v4.13.0)
+## 7. Notable New Files (v4.0.2 → v4.14.0)
 
 | File | Purpose |
 |------|---------|
@@ -331,4 +331,5 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.11.0: StatsMode catList wrapper fix (BUG from v4.9.0); D2 DangerMode confusionType + filter chips + wrong-tracker; AK1 AngkaMode mnemonic field (all 28) + TypeQuizView; G2 GlossaryMode compact/expanded toggle; K5 FlashcardMode add-to-SRS button. |
 | 2026-05-08 | Sonnet 4.6 | v4.12.0: Q3 difficulty detail; F2 FocusMode auto-advance; F3 session progress counter; D1 danger-pairs explanation field (all 20); G4 glossary non-kana nav keys; W5 suggested next set; AK2 soal field (all 28); E3 SRS delta backup; K6 category pill tap-to-filter. |
 | 2026-05-08 | Sonnet 4.6 | v4.13.0: G3 GlossaryMode export mini deck — ☑ select mode, Anki TSV download (JP+furi+terjemahan+desc+tags). |
-| 2026-05-08 | Sonnet 4.6 | Hygiene audit pass: audit-integrity romaji false-positives fixed (2820→0 issues); SayaTab/sw.js version strings synced; achievements card thresholds corrected (1438→1410); CHANGELOG v4.13.0 entry added; 1,438→1,410 across all active docs. |
+| 2026-05-08 | Sonnet 4.6 | v4.14.0 J4+J2: topic field on all 95 JAC questions (8 topics); JACMode topic filter chip row + "Simulasi per Topik" CTA. |
+| 2026-05-08 | Sonnet 4.6 | Hygiene audit pass: CHANGELOG v4.14.0 entry added; _MAP/BLUEPRINT-CURRENT/PROPOSAL synced to v4.14.0; J2+J4+SR2 strikethrough in proposal. |
