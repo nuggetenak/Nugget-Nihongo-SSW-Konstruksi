@@ -46,7 +46,10 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const handleFinish = useCallback(({ correct, total }) => {
     if (!setKey) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    setJacScores((s) => ({ ...s, [setKey]: { score: correct, total, pct, date: Date.now() } }));
+    setJacScores((s) => {
+      const prev = s[setKey];
+      return { ...s, [setKey]: { score: correct, total, pct, date: Date.now(), bestPct: Math.max(pct, prev?.bestPct ?? 0) } };
+    });
     onSessionEnd?.({ correct, total });
   }, [setKey, setJacScores, onSessionEnd]);
 
@@ -98,6 +101,9 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
               <span>{s.icon} {s.label}</span>
               <div className={S.row} style={{ gap: 8 }}>
                 {saved && <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>{saved.pct}%</span>}
+                {saved && saved.bestPct != null && saved.bestPct !== saved.pct && (
+                  <span style={{ fontSize: 10, color: T.textMuted }}>best {saved.bestPct}%</span>
+                )}
                 <span style={{ fontSize: 12, color: T.textDim }}>{SET_COUNT[s.key]} soal</span>
               </div>
             </button>

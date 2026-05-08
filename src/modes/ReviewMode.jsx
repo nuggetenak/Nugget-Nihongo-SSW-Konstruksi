@@ -182,6 +182,12 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
         <span className={S.pill} style={{ fontSize: 10, background: `${info.strength.color}15`, color: info.strength.color, border: `1px solid ${info.strength.color}30` }}>
           {info.strength.label} · {Math.round(info.R * 100)}% ingat
         </span>
+        {/* R2: Due reason — interval + reps */}
+        {info.seen && (
+          <span className={S.pill} style={{ fontSize: 10, background: T.surface, color: T.textMuted, border: `1px solid ${T.border}` }}>
+            {info.reps > 0 ? `${info.reps}× ulasan` : 'Baru'}{info.reps > 0 ? ` · interval ${fmtInterval(intervals[3])}` : ''}
+          </span>
+        )}
       </div>
 
       {/* Card — border/padding conditional on flip state, justified inline */}

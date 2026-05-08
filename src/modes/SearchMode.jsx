@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
@@ -6,12 +6,41 @@ import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import S from './modes.module.css';
 
+const HISTORY_KEY = 'ssw-search-history';
+const MAX_HISTORY = 5;
+
+function getHistory() {
+  try { return JSON.parse(sessionStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; }
+}
+function saveHistory(term) {
+  if (!term || term.length < 2) return;
+  const prev = getHistory().filter((h) => h !== term);
+  sessionStorage.setItem(HISTORY_KEY, JSON.stringify([term, ...prev].slice(0, MAX_HISTORY)));
+}
+
 export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebounce(query, 120);
   const [showAllTracks, setShowAllTracks] = useState(false);
+  const [history, setHistory] = useState(() => getHistory());
 
   const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
+
+  const handleQueryChange = useCallback((val) => {
+    setQuery(val);
+  }, []);
+
+  const handleQueryBlur = useCallback(() => {
+    const q = query.trim();
+    if (q.length >= 2) {
+      saveHistory(q);
+      setHistory(getHistory());
+    }
+  }, [query]);
+
+  const applyHistory = useCallback((term) => {
+    setQuery(term);
+  }, []);
 
   const pool = useMemo(() => {
     if (!trackCatKeys || showAllTracks) return CARDS;
@@ -44,12 +73,31 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => handleQueryChange(e.target.value)}
+        onBlur={handleQueryBlur}
         placeholder="Cari kartu... (JP, furigana, atau Indonesia)"
         autoFocus
         className={S.searchInput}
         style={{ width: '100%', marginBottom: 16 }}
       />
+
+      {/* SR1: Search history — show when input empty */}
+      {debouncedQuery.length < 2 && history.length > 0 && (
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: T.textMuted, letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 6 }}>Pencarian terakhir</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {history.map((h) => (
+              <button
+                key={h}
+                onClick={() => applyHistory(h)}
+                style={{ fontFamily: 'inherit', fontSize: 12, padding: '4px 10px', borderRadius: 99, background: T.surface, border: `1px solid ${T.border}`, color: T.textDim, cursor: 'pointer' }}
+              >
+                🕐 {h}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {debouncedQuery.length >= 2 && (
         <div className={S.searchMeta}>

@@ -109,7 +109,10 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
                   <button className={S.btnItem} onClick={() => { setLemahMode(false); setActiveSet(s.id); }} style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden', borderBottomLeftRadius: wrongCount > 0 ? 0 : undefined, borderBottomRightRadius: wrongCount > 0 ? 0 : undefined }}>
                     <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
                     <div className={S.rowSpread}>
-                      <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
+                        {!saved && <span style={{ fontSize: 9, fontWeight: 700, background: `${T.amber}15`, color: T.amber, border: `1px solid ${T.amber}30`, borderRadius: 99, padding: '1px 6px' }}>Baru</span>}
+                      </div>
                       <div className={S.row} style={{ gap: 8 }}>
                         {saved && <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>{saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}</span>}
                         <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>

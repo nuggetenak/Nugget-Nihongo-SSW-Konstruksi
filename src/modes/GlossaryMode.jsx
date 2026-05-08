@@ -9,6 +9,8 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { speakJP, canSpeak } from '../utils/speak.js';
+import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
@@ -18,6 +20,7 @@ export default function GlossaryMode({ onExit, track }) {
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
   const navRef = useRef(null);
+  const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
   const sectionRefs = useRef({});
   const observerRef = useRef(null);
 
@@ -187,6 +190,23 @@ export default function GlossaryMode({ onExit, track }) {
                       {c.furi && (
                         <div className={G.termFuriRow}>
                           <span className={G.termFuri}>{c.furi}</span>
+                          {/* G1: Audio per entry */}
+                          {audioEnabled && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); speakJP(stripFuri(c.jp)); }}
+                              aria-label="Putar audio"
+                              style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: '0 4px', lineHeight: 1, color: T.textMuted }}
+                            >🔊</button>
+                          )}
+                        </div>
+                      )}
+                      {!c.furi && audioEnabled && (
+                        <div className={G.termFuriRow}>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); speakJP(stripFuri(c.jp)); }}
+                            aria-label="Putar audio"
+                            style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: '0 4px', lineHeight: 1, color: T.textMuted }}
+                          >🔊</button>
                         </div>
                       )}
                       <p className={G.termDesc}>{c.desc}</p>

@@ -1,3 +1,34 @@
+## [4.8.0] - 2026-05-08
+
+### Phase 5.8 — UX Polish (Agent Sonnet 4.6)
+
+**SR1 — SearchMode: Riwayat Pencarian**
+- 5 pencarian terakhir disimpan di `sessionStorage` (per-sesi, tidak persisten)
+- Ditampilkan sebagai chip bertap di bawah input saat query kosong
+- Riwayat diperbarui saat `onBlur` input dengan query ≥2 karakter
+
+**G1 — GlossaryMode: Audio per Entry**
+- Tombol 🔊 muncul di area expanded tiap entri (jika `audioEnabled` aktif)
+- Memanfaatkan `speakJP` + `canSpeak()` dari `speak.js` yang sudah ada
+
+**SB1/SB2 — SumberMode: Progress per Sumber + Indikator Terlemah**
+- Progress bar mini (hafal/total) per sumber di picker utama
+- Badge "Terlemah" pada sumber dengan persentase hafalan terendah
+- Progress dihitung dari `progress.known` vs kartu per sumber
+
+**W3 — WaygroundMode: Badge "Baru" untuk Set Belum Dikerjakan**
+- Label amber "Baru" muncul di set yang belum pernah dikerjakan (tidak ada `wgScores` untuk set itu)
+
+**R2 — ReviewMode: Chip Alasan Due**
+- Chip kedua di bawah strength pill: `N× ulasan · interval Xj` (atau "Baru" untuk kartu pertama kali)
+- Memanfaatkan `info.reps` dan `intervals[3]` (next Easy interval sebagai referensi)
+
+**J3 — JACMode: Best Score**
+- `bestPct` tersimpan berdampingan dengan `pct` terakhir di `jacScores`
+- Di picker, jika `bestPct !== pct`, tampilkan `best N%` di samping skor terakhir
+
+---
+
 ## [4.7.0] - 2026-05-08
 
 ### W2 (Agent Sonnet 4.6)

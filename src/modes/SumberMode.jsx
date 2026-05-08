@@ -3,11 +3,15 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from '../data/categories.js';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
 export default function SumberMode({ onExit }) {
   const [activeSrc, setActiveSrc] = useState(null);
   const [expanded, setExpanded] = useState(null);
+
+  // SB1/SB2: progress per source from storage
+  const known = new Set(storageGet('progress')?.known ?? []);
 
   if (activeSrc) {
     const srcCards = CARDS.filter((c) => c.source === activeSrc);
@@ -38,6 +42,20 @@ export default function SumberMode({ onExit }) {
     );
   }
 
+  // Compute per-source stats for picker
+  const srcStats = {};
+  let minPct = 101, weakestKey = null;
+  for (const g of SOURCE_GROUPS) {
+    for (const key of g.keys) {
+      const cards = CARDS.filter((c) => c.source === key);
+      if (!cards.length) continue;
+      const knownCount = cards.filter((c) => known.has(c.id)).length;
+      const pct = Math.round((knownCount / cards.length) * 100);
+      srcStats[key] = { total: cards.length, knownCount, pct };
+      if (pct < minPct) { minPct = pct; weakestKey = key; }
+    }
+  }
+
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
@@ -50,14 +68,26 @@ export default function SumberMode({ onExit }) {
             {g.keys.map((key) => {
               const meta = SOURCE_META[key];
               if (!meta) return null;
-              const count = CARDS.filter((c) => c.source === key).length;
               const color = SOURCE_ACCENT[key] || T.gold;
+              const stat = srcStats[key];
+              const isWeakest = key === weakestKey;
               return (
-                <button key={key} className={S.btnItem} onClick={() => setActiveSrc(key)} style={{ borderLeft: `3px solid ${color}` }}>
-                  <div className={S.rowSpread}>
-                    <span>{meta.emoji} {meta.label}</span>
-                    <span style={{ fontSize: 12, color: T.textDim }}>{count}</span>
+                <button key={key} className={S.btnItem} onClick={() => setActiveSrc(key)} style={{ borderLeft: `3px solid ${color}`, paddingBottom: stat ? 10 : undefined }}>
+                  <div className={S.rowSpread} style={{ marginBottom: stat ? 6 : 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span>{meta.emoji} {meta.label}</span>
+                      {isWeakest && <span style={{ fontSize: 9, fontWeight: 700, background: 'rgba(220,38,38,0.1)', color: T.wrong, border: `1px solid rgba(220,38,38,0.25)`, borderRadius: 99, padding: '1px 6px' }}>Terlemah</span>}
+                    </div>
+                    <span style={{ fontSize: 12, color: T.textDim }}>{stat?.total ?? 0} kartu</span>
                   </div>
+                  {stat && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{ flex: 1, height: 4, background: T.border, borderRadius: 99, overflow: 'hidden' }}>
+                        <div style={{ width: `${stat.pct}%`, height: '100%', background: stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong, borderRadius: 99, transition: 'width 0.4s ease' }} />
+                      </div>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong, minWidth: 32, textAlign: 'right' }}>{stat.pct}%</span>
+                    </div>
+                  )}
                 </button>
               );
             })}

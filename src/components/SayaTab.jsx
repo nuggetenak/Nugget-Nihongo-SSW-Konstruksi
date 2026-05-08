@@ -327,13 +327,13 @@ export default function SayaTab() {
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
         <Row
           label="ℹ️ Tentang Aplikasi"
-          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v4.7.0`}
-          onClick={() => toast.show(`SSW Konstruksi v4.7.0 · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`)}
+          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v4.8.0`}
+          onClick={() => toast.show(`SSW Konstruksi v4.8.0 · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`)}
         />
       </Section>
 
       <div className={s.footer}>
-        SSW Konstruksi v4.7.0<br />
+        SSW Konstruksi v4.8.0<br />
         by Nugget Nihongo<br />
         土木 · 建築 · ライフライン設備
       </div>

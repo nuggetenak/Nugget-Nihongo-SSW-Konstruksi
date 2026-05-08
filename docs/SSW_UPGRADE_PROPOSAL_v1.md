@@ -78,7 +78,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | R1 | Tidak ada **session summary screen** — mode berakhir tiba-tiba setelah kartu terakhir | Gap | 🔴 |
-| R2 | Tidak ada indikator "kenapa kartu ini muncul sekarang" — interval/due-reason tidak ditampilkan | UX | 🟠 |
+| R2 | ~~Tidak ada indikator "kenapa kartu ini muncul sekarang"~~ ✅ FIXED v4.8.0 — interval/due-reason tidak ditampilkan | UX | 🟠 |
 | R3 | Audio auto-speak pada card advance bisa mengganggu jika user belum siap — perlu opsi **"speak on flip"** bukan pada advance | Refinement | 🟡 |
 | R4 | Tidak ada shortcut untuk **"skip card"** tanpa menilai (berguna untuk kartu baru yang belum dipelajari konteksnya) | UX | 🟡 |
 | R5 | Queue tidak menampilkan **jumlah kartu tersisa** secara live di header | UX | 🟢 |
@@ -159,7 +159,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | J1 | Kartu yang salah di JACMode **tidak masuk ke SRS queue** — user harus latih manual, tidak ada loop balik | Gap | 🔴 |
 | J2 | Tidak ada **"Simulasi chapter"** — user tidak bisa mensimulasikan ujian hanya dari bab tertentu | Feature | 🟠 |
-| J3 | Score badge di picker hanya tampilkan persentase terakhir, bukan **best score** | UX | 🟡 |
+| J3 | ~~Score badge di picker hanya tampilkan persentase terakhir, bukan **best score**~~ ✅ FIXED v4.8.0 | UX | 🟡 |
 | J4 | Soal JAC tidak punya tag chapter/bab — sulit tahu soal mana yang dari bab mana | Data | 🟠 |
 
 **Rekomendasi J1 (kritis):** Setelah JACMode selesai, tawarkan "Tambah X soal salah ke Ulasan SRS?" → jika iya, buat SRS card sementara dari soal JAC yang salah. Ini menutup loop antara exam prep dan vocabulary reinforcement.
@@ -174,7 +174,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | W1 | **CSV Teori vs CSV Praktik** tidak cukup jelas dibedakan secara visual di picker | UX | 🟠 |
 | W2 | ~~Tidak ada **"review hanya salah"** per-set~~ ✅ FIXED v4.7.0 — `lemahMode` sub-button per set row | Gap | 🟠 |
-| W3 | Set yang belum pernah dikerjakan tidak diberi badge/tag "Belum Dikerjakan" yang jelas | UX | 🟡 |
+| W3 | ~~Set yang belum pernah dikerjakan tidak diberi badge/tag "Belum Dikerjakan" yang jelas~~ ✅ FIXED v4.8.0 | UX | 🟡 |
 | W4 | WaygroundMode tidak menampilkan **total score** lintas semua set — hanya per-set | UX | 🟡 |
 | W5 | Tidak ada urutan saran — set mana yang sebaiknya dikerjakan lebih dulu? | Feature | 🟡 |
 
@@ -226,7 +226,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| SR1 | Tidak ada **search history** — user sering mencari kata yang sama berulang kali | Feature | 🟠 |
+| SR1 | ~~Tidak ada **search history**~~ ✅ FIXED v4.8.0 — user sering mencari kata yang sama berulang kali | Feature | 🟠 |
 | SR2 | Tidak bisa search by **furigana reading** — ketik "あんぜん" tidak menemukan kartu "安全" | Bug | 🟠 |
 | SR3 | Tidak ada **"Copy ke Clipboard"** untuk definisi/terjemahan | Feature | 🟢 |
 | SR4 | Hasil pencarian tidak menampilkan **akurasi user** untuk kartu itu (% benar/salah) | Feature | 🟡 |
@@ -239,7 +239,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| G1 | Tidak ada **audio per entry** — Glosari adalah tempat ideal untuk mendengarkan pronunciation | Gap | 🟠 |
+| G1 | ~~Tidak ada **audio per entry**~~ ✅ FIXED v4.8.0 — Glosari adalah tempat ideal untuk mendengarkan pronunciation | Gap | 🟠 |
 | G2 | Tidak ada **compact vs expanded** view toggle — saat ini semua selalu sedikit expanded | UX | 🟡 |
 | G3 | Tidak ada **"Export Pilihan sebagai Mini Deck"** — user pilih 20 kata dari glosari, export ke format yang bisa diimport ke Anki | Feature | 🟢 |
 | G4 | A-Z nav hanya hiragana — kata dengan awalan kanji/romaji tidak terjangkau | Bug | 🟡 |
@@ -252,8 +252,8 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| SB1 | Tidak ada **progress per sumber** — sudah hafal berapa % dari setiap PDF? | Feature | 🟠 |
-| SB2 | Tidak ada indikasi **sumber mana yang paling banyak kartu belum diketahui** | Feature | 🟠 |
+| SB1 | ~~Tidak ada **progress per sumber**~~ ✅ FIXED v4.8.0 — sudah hafal berapa % dari setiap PDF? | Feature | 🟠 |
+| SB2 | ~~Tidak ada indikasi **sumber mana yang paling banyak kartu belum diketahui**~~ ✅ FIXED v4.8.0 | Feature | 🟠 |
 | SB3 | Tidak bisa langsung **"Sprint dari sumber ini"** atau "Kuis dari sumber ini" | Feature | 🟡 |
 
 ---
