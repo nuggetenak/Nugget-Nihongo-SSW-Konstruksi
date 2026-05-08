@@ -1,3 +1,24 @@
+## [4.19.1] - 2026-05-09
+
+### chore: C1 closure + hygiene pass (Agent Sonnet 4.6)
+
+**C1 text4 audit — content complete:**
+- Scanned text4.pdf (JAC Ch.4 — construction site greetings, layout terms, earthwork, foundation, concrete, building structure, electrical, lifeline, 5S, ほうれんそう)
+- Result: 100% of Ch.4 terminology pre-exists in card DB — no new cards needed
+- C1 fully closed: text3l +18 (v4.16.0) + pass2 +15 (v4.17.0) + text4 audit (0 new)
+
+**categories.js fix (SumberMode coverage gap):**
+- Moved supplementary SOURCE_META entries (`text3l`, `vocab-supplementary`, `vocab-general`) from mutation-style to inline in main object
+- Added "Sumber Tambahan" group to SOURCE_GROUPS → SumberMode now shows all 3 supplementary sources (text3l: 25 cards, vocab-supplementary: 271 cards, vocab-general: 44 cards)
+- Added SOURCE_ACCENT entries for `text3l`, `vocab-supplementary`, `vocab-general`
+
+**Docs:**
+- `BLUEPRINT-CURRENT.md` — status updated: NO OPEN ITEMS
+- `_MAP.md` — log entry added
+- `docs/archive/ARCHIVE-INDEX.md` — stale text4l reference removed
+
+---
+
 ## [4.19.0] - 2026-05-08
 
 ### refactor: full data layer restructure — track fields + JAC split + quiz-sets merge (Agent Sonnet 4.6)
