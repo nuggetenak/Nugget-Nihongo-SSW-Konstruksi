@@ -245,12 +245,14 @@ progress: { _v:3, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             sipilScores{}, bangunanScores{},
             streakData{}, dailyCount{}, recentCards[],
             milestoneStreak7, milestoneQuiz70,
-            sessions[],                               // cap 90
+            sessions[],                               // cap 180 (bumped v4.4.0)
             dailyMission }
 
 prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
             dailyGoal, flashcardHintCount,
-            examDate, audioEnabled, studyAnchor, furiganaPolicy }
+            examDate, audioEnabled, studyAnchor, furiganaPolicy,
+            notes: {},                     // D3: personal notes per cardId (v4.4.0)
+            sprintBestTimeline: [] }       // F4: ghost score timeline for Sprint (v4.6.0)
 
 srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 ```

@@ -18,7 +18,7 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
 - 🔢 **Angka Kunci** — angka wajib hafal sebelum ujian
-- 📊 **Statistik** per kategori + riwayat belajar 7 hari
+- 📊 **Statistik** per kategori + heatmap aktivitas 18 minggu + Exam Readiness Score
 - 🌙 **Mode gelap/terang** + offline-first (PWA)
 - 🔊 **Audio bahasa Jepang** via Web Speech API
 
@@ -115,7 +115,7 @@ Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
 |-----|-----|
 | `ssw-progress` | known/unknown cards, quiz scores, streak, sessions, daily mission |
 | `ssw-srs-data` | FSRS card states (stability, difficulty, interval, due date) |
-| `ssw-prefs` | track, theme, furiganaPolicy, audioEnabled, examDate, goalHarian |
+| `ssw-prefs` | track, theme, furiganaPolicy, audioEnabled, examDate, goalHarian, notes (catatan per kartu), sprintBestTimeline |
 
 Export/import tersedia di tab **Saya** → fitur backup & restore.
 

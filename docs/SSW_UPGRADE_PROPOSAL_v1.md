@@ -1,61 +1,25 @@
 # 🪖 SSW Konstruksi — Audit & Upgrade Proposal
-**Versi Proposal:** v2 | **Tanggal Audit:** 2026-05-07 | **Auditor:** Claude Sonnet 4.6
+**Versi Proposal:** v3 | **Tanggal Audit:** 2026-05-07 | **Hygiene Pass:** 2026-05-08 | **Auditor:** Claude Sonnet 4.6
 
 ---
 
-## 🚨 VERSION DISCREPANCY — Analisis & Resolusi
+## ✅ VERSION DISCREPANCY — RESOLVED (2026-05-07)
 
-> Ditemukan dalam audit lanjutan. Harus diselesaikan **sebelum** pekerjaan upgrade apapun dimulai.
+> Ditemukan saat audit awal (v4.2.0 di source vs v4.0.2 di deployed). Semua item telah diselesaikan.
 
-### Situasi Saat Ini
-
-| Sumber | Versi | Status |
-|--------|-------|--------|
-| `package.json` (main branch) | **v4.2.0** | ✅ Source of truth |
-| App yang dideploy (GitHub Pages) | **v4.0.2** | ❌ Stale — belum terupdate |
-| `CHANGELOG.md` entry terakhir | **v4.0.2** | ❌ Missing v4.1.x + v4.2.0 |
-| `SayaTab.jsx` footer string | **v4.0.2** | ❌ Hardcoded, tidak ter-update |
-| PR #7 (furigana ruby tap-to-toggle) | branch `codex/debug-before-deploy-v3jue1` | ⏳ Open, belum di-merge ke main |
-
-### Root Cause
-
-Dua masalah terpisah yang muncul bersamaan:
-
-**Masalah 1 — "Ghost Version":** Agent terakhir bump `package.json` ke v4.2.0 di `main`, tapi **tidak** memperbarui:
-- `CHANGELOG.md` — tidak ada entry untuk v4.1.x dan v4.2.0, sehingga tidak diketahui apa yang berubah
-- `SayaTab.jsx` footer — masih hardcoded `"v4.0.2"` (pola yang sama dilakukan saat v4.0.0 di-release)
-- Deploy tidak terpicu atau pipeline belum jalan setelah bump versi terakhir
-
-**Masalah 2 — PR Menggantung:** PR #7 (furigana ruby parsing + tap policy + `aria-pressed`) sudah siap dengan test yang passing, tapi belum di-merge. Fitur ini relevan dengan proposal karena beberapa item proposal (terutama furigana UX) berasumsi feature ini sudah ada di main.
-
-### Tindakan Resolusi yang Diperlukan
-
-```
-Urutan wajib sebelum lanjut ke upgrade:
-
-1. [ ] Merge PR #7 ke main (setelah review — tests passing)
-2. [ ] Tulis CHANGELOG entries untuk v4.1.x dan v4.2.0
-       (lihat git log main sejak v4.0.2 untuk reconstruct changes)
-3. [ ] Update SayaTab.jsx footer: "v4.0.2" → "v4.2.0"
-4. [ ] Trigger deploy / verifikasi GitHub Actions ran
-5. [ ] Verifikasi app live menampilkan v4.2.0
-6. [ ] Bump CACHE_VERSION di sw.js agar SW invalidate
-```
-
-### Dampak ke Proposal Ini
-
-Beberapa temuan dalam proposal perlu direvisi setelah status sebenarnya v4.2.0 diketahui:
-
-- **Furigana policy items** (K4, Q3, dll.) — PR #7 menambahkan mode `tap` ke `furiganaPolicy` (always/tap/hidden). Jika PR di-merge, beberapa item ini sudah terselesaikan sebagian.
-- **CHANGELOG gap** — tidak diketahui persis apa yang berubah antara v4.0.2 → v4.2.0. Mungkin ada fixes atau fitur yang sudah ada tapi belum terdokumentasi.
-
-**Rekomendasi:** Setelah merge PR #7 dan reconstruct CHANGELOG, lakukan re-triage proposal ini untuk mencoret item yang sudah terselesaikan.
+| Item | Resolusi |
+|------|----------|
+| PR #7 furigana tap-to-toggle | ✅ Merged ke main (commit `6a329e7`) |
+| CHANGELOG entries v4.1.x + v4.2.0 | ✅ Ditulis ulang (sesi sebelumnya) |
+| SayaTab.jsx footer | ✅ Fixed `v4.0.2` → current (commit `532db6a`) |
+| GitHub Actions deploy | ✅ Auto-trigger dari push ke main |
+| Version sync | ✅ SayaTab sekarang menampilkan versi dari `package.json` |
 
 ---
 
 ## 📋 Ringkasan Eksekutif
 
-App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (v4.2.0 di source, v4.0.2 di deployed) dengan 15 mode, 321+ test, FSRS engine, PWA, CI/CD, dan 1.438 kartu. Kualitas teknis sangat baik.
+App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (**v4.8.1**) dengan **23 mode**, **383+ test**, FSRS engine, PWA, CI/CD, dan 1.438 kartu. Kualitas teknis sangat baik.
 
 **Hasil audit ini menemukan 6 kategori peningkatan:**
 - **A** — Alur Lintas Mode (cross-mode flow gaps)
@@ -77,7 +41,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| R1 | Tidak ada **session summary screen** — mode berakhir tiba-tiba setelah kartu terakhir | Gap | 🔴 |
+| R1 | ~~Tidak ada **session summary screen**~~ ✅ FIXED v4.3.0 — `ReviewSummaryScreen` dengan rating distribution (Again/Hard/Ok/Easy) dan % akurasi | Gap | 🔴 |
 | R2 | ~~Tidak ada indikator "kenapa kartu ini muncul sekarang"~~ ✅ FIXED v4.8.0 — interval/due-reason tidak ditampilkan | UX | 🟠 |
 | R3 | Audio auto-speak pada card advance bisa mengganggu jika user belum siap — perlu opsi **"speak on flip"** bukan pada advance | Refinement | 🟡 |
 | R4 | Tidak ada shortcut untuk **"skip card"** tanpa menilai (berguna untuk kartu baru yang belum dipelajari konteksnya) | UX | 🟡 |
@@ -93,10 +57,10 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| K1 | **Swipe left/right untuk rating** belum diimplementasi — hanya tilt visual; users di Android mengharapkan swipe-to-rate | Gap | 🔴 |
+| K1 | ~~**Swipe left/right untuk rating** belum diimplementasi~~ ✅ FIXED v4.3.0 — swipe kiri=Lagi, kanan=Oke, atas=Mudah di `FlipCard.jsx` (K1) | Gap | 🔴 |
 | K2 | Tidak ada mode **"Hanya Baca"** — kadang user hanya ingin membaca kartu tanpa menilai (review pasif) | Feature | 🟠 |
-| K3 | `FilterBar` menerima input tapi tidak persist filter antar-sesi (hilang saat ganti mode) | Bug | 🟠 |
-| K4 | **"Tap untuk balik"** hint disimpan di `prefs.flashcardHintCount` — tapi hint tidak muncul lagi setelah reset data; perlu reset saat `resetAll()` | Bug | 🟡 |
+| K3 | ~~`FilterBar` tidak persist filter antar-sesi~~ ✅ FIXED v4.3.1 (BUG-05) — filter/sort persist via sessionStorage | Bug | 🟠 |
+| K4 | ~~**"Tap untuk balik"** hint tidak reset saat `resetAll()`~~ ✅ FIXED v4.3.1 (BUG-10) — `flashcardHintCount` ada di `DEFAULTS`, reset otomatis | Bug | 🟡 |
 | K5 | Tidak ada tombol **"Tambah ke SRS manual"** untuk kartu yang sudah `known` tapi user ingin direview ulang | Feature | 🟡 |
 | K6 | Category pill di front card tidak bisa di-tap untuk filter langsung (missed affordance) | UX | 🟢 |
 
@@ -110,8 +74,8 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| Q1 | Tidak ada **mode produksi** — semua kuis adalah recognition (pilih jawaban), bukan production (tulis/recall jawaban). Blueprint C-10 menyebut ini tapi belum diimplementasi | Gap | 🔴 |
-| Q2 | Setelah quiz selesai, tidak ada **"Pelajari yang Salah"** CTA yang membuka FlashcardMode terfilter ke kartu yang salah dalam sesi itu | Gap | 🔴 |
+| Q1 | ~~Tidak ada **mode produksi**~~ ✅ FIXED v4.5.0 (B1) — `QuizProduksiMode.jsx`: JP→ID type-answer dengan fuzzy match | Gap | 🔴 |
+| Q2 | ~~Tidak ada **"Pelajari yang Salah"** CTA~~ ✅ FIXED v4.3.0 (A1) — ResultScreen.jsx CTA `onRetryWrong` terhubung ke FlashcardMode dengan `filterIds` | Gap | 🔴 |
 | Q3 | Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret? | UX | 🟠 |
 | Q4 | Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya | UX | 🟡 |
 | Q5 | Tidak ada **"Quiz per Kategori"** — user hanya bisa filter lewat track, tidak bisa pilih "latih hanya K3" misalnya | Feature | 🟡 |
@@ -127,11 +91,11 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| S1 | Sprint hanya 60 detik flat — tidak ada opsi durasi (30s/60s/90s/120s) | Feature | 🟠 |
-| S2 | Tidak ada **category lock** — semua kartu dari jalur aktif dicampur; tidak bisa sprint fokus satu topik | Feature | 🟠 |
-| S3 | Visual countdown tidak **eskalasi** — detik terakhir harusnya lebih dramatis (color change, pulse) | UX | 🟡 |
-| S4 | Personal best hanya tersimpan per-device dan tidak dibanding dengan session sebelumnya secara visual | UX | 🟡 |
-| S5 | Sprint tidak menambah kartu yang salah ke wrong-tracker — missed opportunity untuk feedback loop | Bug | 🟠 |
+| S1 | ~~Sprint hanya 60 detik flat~~ ✅ FIXED v4.3.1 (B2) — durasi picker 30s/60s/2m | Feature | 🟠 |
+| S2 | ~~Tidak ada **category lock**~~ ✅ FIXED v4.3.1 (B2) — category picker sebelum sprint dimulai | Feature | 🟠 |
+| S3 | ~~Visual countdown tidak **eskalasi**~~ ✅ FIXED v4.3.1 (B2) — `isWarning` (amber) dan `isUrgent` (red) color states | UX | 🟡 |
+| S4 | ~~Personal best tidak dibanding secara visual~~ ✅ FIXED v4.6.0 (F4) — ghost score `👻 N` live vs score sekarang via `sprintBestTimeline` | UX | 🟡 |
+| S5 | ~~Sprint tidak menambah kartu salah ke wrong-tracker~~ ✅ FIXED v4.3.0 (BUG-07/S5) — wrong-tracker write di SprintMode | Bug | 🟠 |
 
 **Rekomendasi S5 (bug):** Wire `useWrongTracker` ke Sprint answer handler. Tiap kartu yang salah dalam sprint harus `incrementWrong(cardId)` — saat ini sprint tidak menulis ke wrong-tracker sehingga FocusMode tidak bisa "belajar dari kesalahan sprint".
 
@@ -143,7 +107,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| F1 | UI tidak menampilkan **"Kenapa kategori ini?"** — user tidak tahu mengapa sistem memilih kategori X sebagai terlemah | UX | 🔴 |
+| F1 | ~~UI tidak menampilkan **"Kenapa kategori ini?"**~~ ✅ FIXED v4.3.0 — explainer panel dengan nama kategori + rekomendasi terlemah (FocusMode) | UX | 🔴 |
 | F2 | Setelah satu sesi Sprint selesai, FocusMode tidak otomatis **pindah ke kategori terlemah berikutnya** | Gap | 🟠 |
 | F3 | Tidak ada visual progress "kamu sudah melatih N dari M kategori lemah hari ini" | UX | 🟡 |
 
@@ -186,10 +150,10 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| SIM1 | Tidak ada **pause button** — sekali mulai, tidak bisa berhenti (tidak realistis untuk mobile UX) | Gap | 🔴 |
-| SIM2 | Kartu simulasi tidak **ter-randomisasi dari semua jalur** — harusnya mensimulasikan kondisi ujian sebenarnya | Bug | 🔴 |
-| SIM3 | Setelah simulasi, kartu salah tidak **dieksport ke SRS atau Fokus** | Gap | 🟠 |
-| SIM4 | Tidak ada **post-exam analysis** — breakdown per kategori (berapa % K3, berapa % hukum, dll.) | Feature | 🟠 |
+| SIM1 | ~~Tidak ada **pause button**~~ ✅ FIXED v4.3.0 — pause + auto-pause via `visibilitychange` + resume overlay | Gap | 🔴 |
+| SIM2 | ~~Kartu simulasi tidak ter-randomisasi dari semua jalur~~ ✅ FIXED v4.3.0 (BUG-06) — pool unified dari JAC_OFFICIAL + WAYGROUND_SETS via normalizer | Bug | 🔴 |
+| SIM3 | ~~Kartu salah tidak dieksport ke SRS/Fokus~~ ✅ FIXED v4.3.1 — "Latih Salah" CTA → `onRetryWrong` FlashcardMode bridge | Gap | 🟠 |
+| SIM4 | ~~Tidak ada **post-exam analysis**~~ ✅ FIXED v4.3.1 — breakdown per sumber/set setelah result screen | Feature | 🟠 |
 | SIM5 | Timer tidak menampilkan perkiraan **"N soal/menit yang dibutuhkan"** | UX | 🟡 |
 
 **Rekomendasi SIM1 + SIM2 (kritis):** Pause via `document.hidden` visibility API (jika user minimize app, pause otomatis). Untuk randomisasi: pastikan soal simulasi diambil dari semua jalur aktif user (saat ini kemungkinan hanya dari jalur default).
@@ -264,9 +228,9 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| ST1 | Tidak ada **heatmap kalender** (GitHub-style) untuk konsistensi belajar jangka panjang | Feature | 🟠 |
-| ST2 | Tidak ada **"Exam Readiness Score"** — prediksi persentase lulus berdasarkan maturitas SRS + akurasi quiz | Feature | 🔴 |
-| ST3 | Akurasi per kategori tidak divisualisasikan — hanya bar aktivitas per hari | Gap | 🟠 |
+| ST1 | ~~Tidak ada **heatmap kalender**~~ ✅ FIXED v4.3.1 — `StudyHeatmap.jsx`, 18-week SVG, amber opacity scale | Feature | 🟠 |
+| ST2 | ~~Tidak ada **"Exam Readiness Score"**~~ ✅ FIXED v4.3.0 — SVG ring gauge di StatsMode, formula SRS×40+quiz×35+streak×15+sim×10 | Feature | 🔴 |
+| ST3 | ~~Akurasi per kategori tidak divisualisasikan~~ ✅ FIXED v4.6.0 — `🎯 N%` badge + wrong count per kategori di StatsMode | Gap | 🟠 |
 | ST4 | Tidak ada perbandingan **"minggu ini vs minggu lalu"** | Feature | 🟡 |
 | ST5 | ~~Kartu "sering salah" (wrong-tracker) tidak diekspos ke user~~ ✅ CONFIRMED DONE — "Sering Salah" section in StatsMode | Bug | 🟠 |
 
@@ -280,10 +244,10 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| E1 | Tidak ada **cloud sync** opsi — harus export manual ke file, tidak bisa sync antar perangkat tanpa file transfer | Gap | 🟠 |
+| E1 | ~~Tidak ada **cloud sync**~~ ✅ FIXED v4.6.0 (E2/E3) — GitHub Gist sync opt-in, `gist-sync.js` + PAT input di ExportMode | Gap | 🟠 |
 | E2 | Export file tidak terenkripsi — meskipun tidak berisi data sensitif, bisa ditambahkan opsi password | Nice | 🟢 |
 | E3 | Tidak ada **"Incremental backup"** — hanya full snapshot, tidak bisa backup hanya delta SRS | Feature | 🟡 |
-| E4 | Import tidak mendeteksi **konflik ID** — jika dua perangkat dipakai bersamaan, data bisa tertimpa | Bug | 🟠 |
+| E4 | ~~Import tidak mendeteksi **konflik ID**~~ ✅ FIXED v4.3.1 (BUG-11) — conflict warning saat data device lebih baru dari file import | Bug | 🟠 |
 
 ---
 
@@ -606,7 +570,7 @@ export const storageSet = (key, value) => {
 
 **Problem:** 7-day bar bagus tapi tidak menunjukkan konsistensi jangka panjang.
 
-**Solusi:** GitHub-style 52-week heatmap menggunakan SVG. Data dari `sessions` array (capped 90, sudah ada). Color: `--ssw-amber` opacity 10%→100% berdasarkan kartu dipelajari per hari.
+**Solusi:** GitHub-style 52-week heatmap menggunakan SVG. Data dari `sessions` array (capped 180, sudah ada). Color: `--ssw-amber` opacity 10%→100% berdasarkan kartu dipelajari per hari.
 
 ```jsx
 // components/StudyHeatmap.jsx
@@ -735,7 +699,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 2. ✅ **B2** SprintMode Category Lock + Escalating Timer (duration picker + category picker + color urgency)
 3. ✅ **SIM3** SimulasiMode Post-Exam: "Latih Salah" CTA → onRetryWrong bridge
 4. ✅ **SIM4** SimulasiMode Breakdown per set/source setelah result
-5. ⏳ **D1** Mode Dengarkan (Listening Comprehension) — *belum dikerjakan*
+5. ~~⏳ **D1** Mode Dengarkan (Listening Comprehension) — belum dikerjakan~~ → moved to Phase 5.5 ✅
 6. ✅ **F1** Achievement Badge System — 14 badges di SayaTab (utils/achievements.js)
 7. ✅ **F2** Daily Challenge "Soal Hari Ini" — deterministic seeded (utils/daily-challenge.js)
 
@@ -777,7 +741,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 |----|------|-----------|-----------|
 | BUG-01 | `SayaTab.jsx` + deploy pipeline | ~~**Version display stuck v4.0.2**~~ ✅ FIXED commit `532db6a` | 🔴 |
 | BUG-02 | `CHANGELOG.md` | ~~**Missing changelog entries**~~ ✅ FIXED (sesi sebelumnya) | 🔴 |
-| BUG-03 | GitHub Actions / deploy | **Deployed app stale** — verifikasi setelah CI jalan | 🔴 |
+| BUG-03 | GitHub Actions / deploy | ~~**Deployed app stale**~~ ✅ RESOLVED — CI auto-deploys on every push to main | 🔴 |
 | BUG-04 | PR #7 | ~~**Furigana tap-to-toggle menggantung**~~ ✅ FIXED sudah di main commit `6a329e7` | 🔴 |
 | BUG-05 | `FlashcardMode/index.jsx` | ~~Filter tidak persist antar mode switch~~ ✅ FIXED commit `d081434` | 🔴 |
 | BUG-06 | `SimulasiMode.jsx` | ~~Soal tidak ter-randomisasi dari semua jalur~~ ✅ FIXED commit `081c70f` | 🔴 |
@@ -793,7 +757,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Awal Audit | Saat Ini (v4.8.0) | Target (Phase 5.4) |
+| Metrik | Awal Audit | Saat Ini (v4.8.1) | Target (Phase 5.4) |
 |--------|------------|--------------------|--------------------|
 | Total kartu | 1.438 | 1.438 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
 | Test | ~321 | **383** | 380+ ✅ |
@@ -818,12 +782,12 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 - Test-first approach — setiap feature baru harus ada test
 
 ### Perlu Perhatian
-- `sessions` array capped 90 — pertimbangkan bumping ke 365 untuk heatmap kalender
+- `sessions` array capped 180 (bumped v4.4.0) — 18-week heatmap sudah terlayani ✅
 - `prefs` object makin besar — pertimbangkan split ke `prefs` (settings) + `userState` (computed)
 - Bundle size: `wayground-sets.js` + `csv-sets.js` + `cards.js` bisa dijadikan lazy-loaded via dynamic import
 
 ### Debt yang Diketahui (dari CHANGELOG)
-- Blueprint C-10 (type-answer) — diakui tapi belum diimplementasi → **Phase 5.3 B1**
+- ~~Blueprint C-10 (type-answer) — belum diimplementasi~~ ✅ DONE v4.5.0 (B1) — `QuizProduksiMode.jsx`
 - Sipil/Bangunan "Segera Hadir" untuk soal tambahan → **Phase 5.2 C2**
 - Source PDF status Ch 2–4 masih "pending" → **Phase 5.2 C1**
 
@@ -831,20 +795,19 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 🎯 Prioritas Paling Tinggi untuk Segera Dikerjakan
 
-**Langkah 0 dulu (version housekeeping):**
+**Status saat ini (v4.8.1):** Semua prioritas kritis sudah selesai.
 
-1. **Merge PR #7** — furigana tap-to-toggle, tests passing, tinggal merge
-2. **Fix SayaTab footer + CHANGELOG** — resolve ghost version v4.0.2 vs v4.2.0
-3. **Trigger deploy** — verifikasi GitHub Pages serve versi terbaru
+**Housekeeping:** ✅ PR #7 merged, CHANGELOG reconstructed, SayaTab footer fixed, CI auto-deploy aktif.
 
-**Setelah housekeeping selesai, baru ini:**
+**Item kritis yang sudah selesai:**
+1. ✅ **A1 — Wrong-Card Bridge** — semua quiz modes → FlashcardMode filtered (v4.3.0)
+2. ✅ **ST2 — Exam Readiness Score** — SVG gauge di StatsMode (v4.3.0)
+3. ✅ **C1 — Chapter 2–4** — deferred (Phase 5.2, skip per instruksi Crispy)
 
-1. **C1 — Ekstrak Chapter 2–4** → paling berdampak untuk kesiapan ujian (konten > fitur)
-2. **A1 — Wrong-Card Bridge** → menutup learning loop terbesar yang ada
-3. **F2 — Exam Readiness Score** → motivasi tertinggi untuk user yang sedang persiapan ujian
+**Remaining open (non-5.2):** Lihat per-mode tables untuk item tanpa ~~strikethrough~~.
 
 ---
 
-*Proposal v2 — updated dengan version discrepancy analysis. Berdasarkan: README.md, CHANGELOG.md (v2.3.1 → v4.0.2), `package.json` main branch (v4.2.0), PR #7 (open furigana PR). Total: 71 temuan, 30 rekomendasi, 11 bug terdokumentasi (4 version discrepancy + 7 functional).*
+*Proposal v3 — hygiene pass 2026-05-08: semua item yang sudah diselesaikan di-strikethrough, VERSION DISCREPANCY collapsed, Ringkasan Eksekutif di-update ke v4.8.1. Originaly v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open: K2, K5, K6, Q3–Q6, F2–F3, J1–J2, J4, W1, W4–W5, SIM5, AK1–AK3, D1–D3 (DangerMode), SR2–SR4, G2–G4, SB3, ST4, E2–E3, Phase 5.2 content (deferred).*
 
-*— Claude Sonnet 4.6, 2026-05-07*
+*— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

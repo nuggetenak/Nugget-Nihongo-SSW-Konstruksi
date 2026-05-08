@@ -1,7 +1,7 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.8.0)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.8.0
+> **Version:** 4.8.1
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -21,7 +21,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 383 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.8.0** |
+| Version | **4.8.1** |
 
 ---
 
@@ -141,6 +141,12 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | W3 | WaygroundMode: "Baru" amber badge on sets never attempted (no `wgScores` entry) |
 | R2 | ReviewMode: due-reason chip showing `N× ulasan · interval Xj` next to strength pill |
 | J3 | JACMode: `bestPct` stored alongside `pct`; best score shown in picker when differs |
+
+### v4.8.1 — DengarMode Wrong-Tracker
+
+| Item | Deliverable |
+|------|-------------|
+| D1-WT | `DengarMode.jsx` wrong-tracker — wrong answers written to shared `quizWrong` pool; modes with wrong-tracker: 10→11/15 |
 
 ---
 
