@@ -5686,5 +5686,188 @@ export const CARDS_COMMON = [
   id_text: "Penyumbat telinga /",
   desc: "Wajib pakai pelindung telinga di lingkungan kebisingan >85 dB (gerinda,",
   _origIndex: 1402
+  },
+
+// ─── text1l + text2 + text3l pass 2 — 2026-05-08 ──────────────────────────
+// IDs 1457–1471
+  {
+  id: 1457,
+  category: "career",
+  source: "jac-ch1",
+  furi: "CCUSのよんれべるとじょうけん",
+  jp: "CCUSの4レベルと条件",
+  type: "konsep",
+  id_text: "4 level CCUS dan syaratnya",
+  desc: "Lv.1 白(ホワイト)=初級技能者・見習い。\nLv.2 青(ブルー)=中堅・一人前 ← 登録後645日(3年)以上。\nLv.3 銀(シルバー)=職長として現場に従事できる技能者。\nLv.4 金(ゴールド)=高度マネジメント能力(登録基幹技能者など)。",
+  quote: "「レベル2にはまず645日《にち》の就業実績《しゅうぎょうじっせき》が必要《ひつよう》だぞ」",
+  _origIndex: 1428
+  },
+  {
+  id: 1458,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "どろーんのとびきんしごルール",
+  jp: "ドローンの飛行禁止5ルール",
+  type: "hukum",
+  id_text: "5 larangan penerbangan drone",
+  desc: "航空法で定める飛行禁止ルール（禁止区域問わず適用）:\n①飲酒時《いんしゅじ》の飛行禁止\n②夜間《やかん》の飛行禁止\n③目視外《もくしがい》飛行の禁止\n④人・建物から安全距離を保つ\n⑤危険物輸送・物件投下禁止",
+  quote: "「夜間《やかん》と目視外《もくしがい》はドローン絶対《ぜったい》ダメだ」",
+  _origIndex: 1429
+  },
+  {
+  id: 1459,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "けんせつぎょうほうのせつびかんれんぎょうしゅ",
+  jp: "建設業法の許可業種（設備関係）",
+  type: "hukum",
+  id_text: "Izin usaha sektor utilitas",
+  desc: "29業種のうち設備関係の主要業種:\n①電気工事業\n②管工事業\n③熱絶縁工事業《ねつぜつえんこうじぎょう》←ライフライン核心\n④電気通信工事業\n⑤消防施設工事業\n⑥水道施設工事業",
+  quote: "「熱絶縁《ねつぜつえん》には熱絶縁工事業《ねつぜつえんこうじぎょう》の許可《きょか》が必要だぞ」",
+  _origIndex: 1430
+  },
+  {
+  id: 1460,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "けんせつろうどうしゃこようかいぜんほうじゅうてんしさく",
+  jp: "建設労働者雇用改善法の重点施策",
+  type: "konsep",
+  id_text: "Kebijakan utama perbaikan tenaga kerja",
+  desc: "第10次計画(2021–2025)の主な施策:\n①CCUS等による担い手確保・育成\n②2024年度から残業上限規制（月45h・年360h）建設業に適用\n③高所作業:原則フルハーネス型使用\n④外国人労働者（技能実習/特定技能）の適正受入れ",
+  quote: "「2024年《ねん》4月《がつ》から残業《ざんぎょう》上限《じょうげん》が建設業《けんせつぎょう》にも適用《てきよう》だぞ」",
+  _origIndex: 1431
+  },
+  {
+  id: 1461,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "とくていぎのうがいこくじんしつぎょうじのざいりゅう",
+  jp: "特定技能外国人・失業時の在留ルール",
+  type: "hukum",
+  id_text: "Aturan tinggal TK asing saat menganggur",
+  desc: "失業しても即帰国義務なし—就職活動中は在留期間内在留可能。\nただし3ヶ月以上、正当な理由なく「特定技能」活動をしない場合→在留資格取消の可能性。\n雇用保険の基本手当:離職前6ヶ月の日額45〜80%・90〜360日分。",
+  quote: "「仕事《しごと》を辞《や》めてもすぐ帰国しなくていい—でも3ヶ月以内《いない》に次《つぎ》を探《さが》せよ」",
+  _origIndex: 1432
+  },
+  {
+  id: 1462,
+  category: "sekou",
+  source: "text3l",
+  furi: "あしばのくみたてとうさぎょうしゅにんしゃ",
+  jp: "足場の組立て等作業主任者・作業者",
+  type: "konsep",
+  id_text: "Mandor & pekerja pemasangan perancah",
+  desc: "作業主任者: つり足場・張出し足場、または高さ5m以上の構造の足場→技能講習修了。\n全作業者: 足場の組立て・解体・変更の業務→特別教育修了。",
+  quote: "「高さ5m以上《いじょう》の足場《あしば》には主任者《しゅにんしゃ》が必要《ひつよう》だ」",
+  _origIndex: 1433
+  },
+  {
+  id: 1463,
+  category: "sekou",
+  source: "text3l",
+  furi: "じやまくっさくどどめしほこうさぎょうしゅにんしゃ",
+  jp: "地山の掘削及び土止め支保工作業主任者",
+  type: "konsep",
+  id_text: "Mandor galian tanah & penopang dinding",
+  desc: "掘削面《くっさくめん》の高さ2m以上→技能講習修了が必要。\n対象作業: 地山の掘削、土止め支保工の切りばり・腹おこしの取付け・取りはずし。",
+  quote: "「2m以上《いじょう》掘《ほ》るなら地山掘削主任者《くっさくしゅにんしゃ》が必要《ひつよう》だ」",
+  _origIndex: 1434
+  },
+  {
+  id: 1464,
+  category: "sekou",
+  source: "text3l",
+  furi: "ろーぷこうしょさぎょうとくべつきょういく",
+  jp: "ロープ高所作業（特別教育）",
+  type: "konsep",
+  id_text: "Pekerjaan tali di ketinggian",
+  desc: "高さ2m以上で作業床を設けることが困難な場所で、昇降器具を用いて身体を保持しながら行う業務→特別教育修了が必要。",
+  quote: "「作業床《さぎょうゆか》が作れない高所《こうしょ》はロープ特別教育《とくべつきょういく》だ」",
+  _origIndex: 1435
+  },
+  {
+  id: 1465,
+  category: "sekou",
+  source: "text3l",
+  furi: "かたわくしほこうずいどうくっさくさぎょうしゅにんしゃ",
+  jp: "型わく支保工・ずい道等掘削作業主任者",
+  type: "konsep",
+  id_text: "Mandor bekisting & terowongan",
+  desc: "型わく支保工の組立て・解体→技能講習修了(型わく主任者)。\nずい道等の掘削・ロックボルト取付け・吹付けコンクリート→技能講習修了(掘削主任者)。\nずい道内作業者→特別教育修了。",
+  quote: "「トンネル内《ない》作業者《さぎょうしゃ》には特別教育《とくべつきょういく》が必要《ひつよう》だぞ」",
+  _origIndex: 1436
+  },
+  {
+  id: 1466,
+  category: "sekou",
+  source: "text3l",
+  furi: "とびしょくのろくしゅるい",
+  jp: "とび職の6種類",
+  type: "vocab",
+  id_text: "6 jenis tukang tobi",
+  desc: "①足場《あしば》とび=塗装などの足場組立て\n②鉄骨とび=高層ビル鉄骨組上げ\n③橋梁《きょうりょう》とび=橋・ダム・鉄塔・高速の鉄骨\n④重量とび=重機の据付(数百トン)\n⑤送電《そうでん》とび=鉄塔の送電線・高所電気工事\n⑥町場《まちば》とび=住宅・マンションの足場",
+  quote: "「送電《そうでん》とびは高所《こうしょ》での電気工事《でんきこうじ》も担当《たんとう》するぞ」",
+  _origIndex: 1437
+  },
+  {
+  id: 1467,
+  category: "sekou",
+  source: "text3l",
+  furi: "てっこつこうぞうのさんしゅるいとにこうほう",
+  jp: "鉄骨構造の3種類と2工法",
+  type: "konsep",
+  id_text: "3 tipe & 2 metode konstruksi baja",
+  desc: "構造の3種類:\n①ブレース構造=柱と柱の間に筋交いを入れて補強\n②ラーメン構造=柱・梁を剛接合—耐震性優れ開放的\n③トラス構造=三角形基本—屋根・ドーム・橋梁\n工法: 建て逃げ(移動クレーン・奥から手前) / 水平積上げ(タワークレーン・1階ずつ・高層用)",
+  quote: "「ここはラーメン構造《こうぞう》だから剛接合《ごうせつごう》の確認《かくにん》して」",
+  _origIndex: 1438
+  },
+  {
+  id: 1468,
+  category: "sekou",
+  source: "text3l",
+  furi: "しゃりょうけいけんせつきかいとさんトンきょうかい",
+  jp: "車両系建設機械と3t境界",
+  type: "konsep",
+  id_text: "Alat berat kelas kendaraan & batas 3 ton",
+  desc: "整地・運搬・積込み・掘削用:\n機体重量3t以上→技能講習修了\n3t未満→特別教育修了\n締固め用(ローラー)→特別教育修了\n高所作業車: 作業床10m以上→技能講習; 10m未満→特別教育",
+  quote: "「3t以上《いじょう》の重機《じゅうき》は技能講習《ぎのうこうしゅう》修了者《しゅうりょうしゃ》しか運転《うんてん》できないぞ」",
+  _origIndex: 1439
+  },
+  {
+  id: 1469,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "さんぱいほかんとまにふぇすとぎむ",
+  jp: "産業廃棄物の保管とマニフェスト義務",
+  type: "hukum",
+  id_text: "Penyimpanan limbah & manifest",
+  desc: "元請け業者: マニフェスト(建設系廃棄物管理票)作成・最終処分まで確認が義務。\n下請け業者: 工事現場での産業廃棄物の「保管」に廃棄物処理法が適用される。\n廃棄物は現場で決められた分類に従い保管。",
+  quote: "「マニフェストなしで廃棄物《はいきぶつ》を出《だ》すのは違法《いほう》だ」",
+  _origIndex: 1440
+  },
+  {
+  id: 1470,
+  category: "anzen",
+  source: "jac-ch2",
+  furi: "ねっちゅうしょうよぼうのさんたいさく",
+  jp: "熱中症予防の3対策",
+  type: "konsep",
+  id_text: "3 pencegahan heat stroke",
+  desc: "夏の熱中症予防措置(労働安全衛生法):\n①日陰《ひかげ》の確保\n②水・塩飴《しおあめ》の配備\n③救急対応の準備\n※熱中症は命に関わる労働災害につながる。",
+  quote: "「水《みず》と塩飴《しおあめ》を持《も》って作業《さぎょう》してくれよ」",
+  _origIndex: 1441
+  },
+  {
+  id: 1471,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "こうくうしょうがいとうとどろーんすうち",
+  jp: "航空障害灯とドローン規制の数値",
+  type: "hukum",
+  id_text: "Lampu rintangan & angka regulasi drone",
+  desc: "航空障害灯: 地表・水面から60m以上の物件に設置義務。\nドローン登録義務: 重量100g以上。\n飛行禁止区域: 空港周辺・高さ150m以上・人口集中地区など。",
+  quote: "「クレーンが60m以上《いじょう》になるから航空障害灯《こうくうしょうがいとう》の設置《せっち》を確認《かくにん》して」",
+  _origIndex: 1442
   }
 ];

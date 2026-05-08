@@ -690,7 +690,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 9. ✅ **S5/BUG-07** SprintMode wrong-tracker (bonus — dikerjakan bersamaan)
 
 ### Phase 5.2 — Content Expansion ⏳ SKIP (per instruksi Crispy — fokus ke fitur dulu)
-1. ✅ **C1** text3l done v4.16.0 (18 kartu 1439–1456); text2l audit only; text4l masih pending
+1. ✅ **C1** text3l v4.16.0 (18 kartu 1439–1456) + pass2 v4.17.0 (15 kartu 1457–1471); text4l masih pending
 2. ✅ **C4** Tag topik ke soal JAC — v4.14.0 (`topic` field, 8 topik; filter + Simulasi per Topik di JACMode)
 3. ⏳ **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
 
@@ -819,6 +819,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v9): J2+J4+SR2 di-strikethrough (v4.14.0); Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.16.0): table item E2 (export encryption — 🟢 Nice-to-have); C1 text3l ✅ DONE; text4l + C2 (sipil/bangunan expansion) deferred.*
+*Proposal v3 — hygiene pass 2026-05-08 (v9): J2+J4+SR2 di-strikethrough (v4.14.0); Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.17.0): table item E2 (export encryption — 🟢 Nice-to-have); C1 ✅ DONE (33 kartu); text4l + C2 (sipil/bangunan expansion) deferred.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

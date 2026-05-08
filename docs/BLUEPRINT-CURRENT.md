@@ -1,8 +1,8 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.16.0)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.17.0)
 
-> **Status:** ALL PHASES COMPLETE ✅ (C1 text3l done; C2 deferred)
-> **Version:** 4.16.0
-> **Last updated:** 2026-05-08 (C1 text3.pdf 18 cards + v4.15.x admin catch-up)
+> **Status:** ALL PHASES COMPLETE ✅ (C1 text3l+pass2 done; C2 deferred)
+> **Version:** 4.17.0
+> **Last updated:** 2026-05-08 (C1 pass2: +15 common cards from text1l/text2/text3)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**
@@ -15,13 +15,13 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 | Dimension | Value |
 |-----------|-------|
-| Flashcards | 1,428 (curated, type-annotated, ruby-rendered) |
+| Flashcards | 1,443 (curated, type-annotated, ruby-rendered) |
 | Quiz questions | ~860 (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Modes | 23 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 387 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.16.0** |
+| Version | **4.17.0** |
 
 ---
 
@@ -224,7 +224,7 @@ These are honest assessments — not blocking anything, but relevant for future 
 
 ### Content Gaps (Phase 5.2 — Deferred)
 - **Sipil/Bangunan track content is thin**: 45 questions each, written from general knowledge. JAC official PDFs for sipil (text5d–7d) and bangunan (text5k–7k) were not fully processed. The 1,410 flashcards are ~80% lifeline content — sipil and bangunan tracks show near-identical card pools.
-- **Chapter 2 & 4 flashcards partial**: text2l (audit only, no new cards), text3l done (18 new cards 1439–1456), text4l not yet extracted.
+- **Chapter 2 & 4 flashcards partial**: text1l/text2 pass2 done (+15 common cards 1457–1471), text3l done (+18 lifeline cards 1439–1456), text4l not yet extracted.
 - **Photo-based (写真) questions**: QuestionImage component exists and SW cache handles images, but actual images from JAC PDFs have not been extracted. Infrastructure is in place; content is not.
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
@@ -238,7 +238,7 @@ These are honest assessments — not blocking anything, but relevant for future 
 
 ### Remaining Open Items
 - **E2** (export encryption) — 🟢 Nice-to-have; no blocker.
-- **Phase 5.2** C1 ✅ (text3l 18 cards); C2 (sipil/bangunan expansion) deferred.
+- **Phase 5.2** C1 ✅ (text3l 18 cards + pass2 15 cards = 33 new); C2 (sipil/bangunan expansion) deferred.
 
 ---
 
