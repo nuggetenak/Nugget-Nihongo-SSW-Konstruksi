@@ -39,7 +39,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.8.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.8.2 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -148,9 +148,12 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── SipilMode.jsx, BangunanMode.jsx
     │   ├── ProductionMode.jsx      ← ID→JP active recall with text input (v4.2.0)
     │   ├── ConfusionMode.jsx       ← 28 confusion pairs VLT-style (音/字/意) (v4.2.0)
-    │   ├── SearchMode.jsx          ← useDebounce applied (FE-05-C); track-aware
-    │   ├── ExportMode.jsx
-    │   ├── SumberMode.jsx
+    │   ├── SearchMode.jsx          ← useDebounce applied (FE-05-C); track-aware; SR1 history + SR3 copy (v4.8.x)
+    │   ├── DengarMode.jsx          ← audio-first listening quiz; wrong-tracker write (v4.4.0, D1-WT v4.8.1)
+    │   ├── CatatanMode.jsx         ← personal notes/mnemonics per card (v4.4.0)
+    │   ├── QuizProduksiMode.jsx    ← JP→ID type-answer production quiz, fuzzy match (v4.5.0)
+    │   ├── ExportMode.jsx          ← Gist sync section (v4.6.0)
+    │   ├── SumberMode.jsx          ← progress bar + Terlemah badge (v4.8.0)
     │   └── modes.module.css        ← shared mode styles
     ├── router/
     │   ├── ModeRouter.jsx          ← focus mgmt + scroll restoration on mode change (FE-04-D, FE-09-B)
@@ -163,6 +166,10 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── quiz-generator.js
     │   ├── shuffle.js
     │   ├── wrong-tracker.js
+    │   ├── achievements.js         ← 14 achievement badges (v4.3.1)
+    │   ├── daily-challenge.js      ← date-seeded daily challenge question (v4.3.1)
+    │   ├── recommend-mode.js       ← smart mode recommendation engine (v4.3.1)
+    │   ├── gist-sync.js            ← GitHub Gist sync helper (v4.6.0)
     │   └── index.js                ← barrel (all utils + haptic + speak exported)
     ├── styles/
     │   └── global.css              ← design tokens (FE-03): spacing, shadow, z-index, transitions
@@ -259,7 +266,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ---
 
-## 7. New Files Since v4.0.2 (FE Sprint → v4.8.0)
+## 7. New Files Since v4.0.2 (FE Sprint → v4.8.2)
 
 | File | Purpose |
 |------|---------|

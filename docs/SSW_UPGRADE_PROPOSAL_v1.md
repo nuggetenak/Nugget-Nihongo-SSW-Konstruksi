@@ -19,7 +19,7 @@
 
 ## 📋 Ringkasan Eksekutif
 
-App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (**v4.8.1**) dengan **23 mode**, **383+ test**, FSRS engine, PWA, CI/CD, dan 1.438 kartu. Kualitas teknis sangat baik.
+App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (**v4.8.2**) dengan **23 mode**, **383+ test**, FSRS engine, PWA, CI/CD, dan 1.438 kartu. Kualitas teknis sangat baik.
 
 **Hasil audit ini menemukan 6 kategori peningkatan:**
 - **A** — Alur Lintas Mode (cross-mode flow gaps)
@@ -764,7 +764,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 | Mode count | 15 | **23** | 22 ✅ |
 | Bug terbuka | 8 known | **0** | 0 ✅ |
 | SRS modes with session tracking | 12/15 | 15/15 | 15/15 ✅ |
-| Modes with wrong-tracker | 7/15 | 11/15 | 12/15 |
+| Modes with wrong-tracker | 7/15 | **7/23** (writers) | — |
 | Cross-mode flow coverage | 0% | 100% | 100% ✅ |
 | localStorage compression | ❌ | ✅ lz-string | ✅ |
 | Exam Readiness Score | ❌ | ✅ gauge in StatsMode | ✅ |
@@ -795,7 +795,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 🎯 Prioritas Paling Tinggi untuk Segera Dikerjakan
 
-**Status saat ini (v4.8.1):** Semua prioritas kritis sudah selesai.
+**Status saat ini (v4.8.2):** Semua prioritas kritis sudah selesai.
 
 **Housekeeping:** ✅ PR #7 merged, CHANGELOG reconstructed, SayaTab footer fixed, CI auto-deploy aktif.
 
@@ -808,6 +808,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08: semua item yang sudah diselesaikan di-strikethrough, VERSION DISCREPANCY collapsed, Ringkasan Eksekutif di-update ke v4.8.1. Originaly v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open: K2, K5, K6, Q3–Q6, F2–F3, J1–J2, J4, W1, W4–W5, SIM5, AK1–AK3, D1–D3 (DangerMode), SR2–SR4, G2–G4, SB3, ST4, E2–E3, Phase 5.2 content (deferred).*
+*Proposal v3 — hygiene pass 2026-05-08 (v2): semua item yang sudah diselesaikan di-strikethrough, VERSION DISCREPANCY collapsed, Ringkasan Eksekutif di-update ke v4.8.2. Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open: K2, K5, K6, Q3–Q6, F2–F3, J1–J2, J4, W1, W4–W5, AK1–AK3, D1–D3 (DangerMode), SR2, SR4, G2–G4, SB3, ST4, E3, Phase 5.2 content (deferred).*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

@@ -1,5 +1,5 @@
 // ─── router/modes.js (phaseA) ─────────────────────────────────────────────────
-// Single registry for all 18 modes.
+// Single registry for all 23 modes.
 // A.9 TD-08: Removed legacy nav arrays (BELAJAR_MODES, UJIAN_MODES, LAINNYA_MODES).
 //     These were never imported — navigation uses MODE_SECTIONS instead.
 // ─────────────────────────────────────────────────────────────────────────────
