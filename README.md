@@ -14,7 +14,7 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 
 **Fitur utama:**
 - 🃏 **1,443 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
-- ❓ **~974 soal kuis** — format JAC (95), Wayground (579), CSV (300), Sipil, Bangunan
+- ❓ **~974 soal kuis** — JAC 95 · Wayground 579 · CSV 300 · Sipil/Bangunan 90
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
 - 🔢 **Angka Kunci** — angka wajib hafal sebelum ujian
@@ -58,7 +58,7 @@ npm run dev        # dev server → http://localhost:5173/Nugget-Nihongo-SSW-Kon
 npm run dev           # Dev server dengan HMR
 npm run build         # Production build → dist/
 npm run preview       # Preview build lokal
-npm test              # Jalankan semua test (387 test cases, v4.19.2)
+npm test              # Jalankan semua test (411 test cases)
 npm run test:watch    # Test mode watch
 npm run lint          # ESLint (0 warnings required)
 npm run lint:fix      # Auto-fix ESLint
