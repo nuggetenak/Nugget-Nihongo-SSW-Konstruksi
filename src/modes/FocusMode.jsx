@@ -29,14 +29,11 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onS
   // F2: after sprint, mark trained and auto-suggest next weakest
   const handleSprintEnd = (sessionData) => {
     if (onSessionEnd) onSessionEnd(sessionData);
-    setTrainedKeys((prev) => new Set([...prev, activeCat]));
-    // Auto-advance to next weakest untrained category
-    const nextCat = catStats.find((c) => c.key !== activeCat && !trainedKeys.has(c.key));
-    if (nextCat) {
-      setActiveCat(nextCat.key);
-    } else {
-      setActiveCat(null);
-    }
+    // Compute next BEFORE updating state (avoid stale closure)
+    const alreadyTrained = new Set([...trainedKeys, activeCat]);
+    const nextCat = catStats.find((c) => !alreadyTrained.has(c.key));
+    setTrainedKeys(alreadyTrained);
+    setActiveCat(nextCat ? nextCat.key : null);
   };
 
   if (activeCat) {

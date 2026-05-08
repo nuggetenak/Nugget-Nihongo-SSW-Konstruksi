@@ -228,6 +228,18 @@ describe('ANGKA_KUNCI', () => {
       expect(a.konteks, `entry ${i} missing konteks`).toBeTruthy();
     });
   });
+
+  it('every entry has mnemonic (AK1)', () => {
+    ANGKA_KUNCI.forEach((a, i) => {
+      expect(a.mnemonic, `entry ${i} missing mnemonic`).toBeTruthy();
+    });
+  });
+
+  it('every entry has soal context sentence (AK2)', () => {
+    ANGKA_KUNCI.forEach((a, i) => {
+      expect(a.soal, `entry ${i} missing soal`).toBeTruthy();
+    });
+  });
 });
 
 describe('DANGER_PAIRS', () => {
@@ -238,6 +250,20 @@ describe('DANGER_PAIRS', () => {
       expect(d.term, `entry ${i} missing term`).toBeTruthy();
       expect(d.correct, `entry ${i} missing correct`).toBeTruthy();
       expect(Array.isArray(d.traps), `entry ${i} traps not array`).toBe(true);
+    });
+  });
+
+  it('every entry has confusionType (D2)', () => {
+    const VALID_TYPES = ['makna', 'kata', 'angka', 'prosedur'];
+    DANGER_PAIRS.forEach((d, i) => {
+      expect(VALID_TYPES, `entry ${i} invalid confusionType: ${d.confusionType}`).toContain(d.confusionType);
+    });
+  });
+
+  it('every entry has explanation field (D1)', () => {
+    DANGER_PAIRS.forEach((d, i) => {
+      expect(d.explanation, `entry ${i} missing explanation`).toBeTruthy();
+      expect(d.explanation.length, `entry ${i} explanation too short`).toBeGreaterThan(20);
     });
   });
 });

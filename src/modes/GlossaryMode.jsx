@@ -48,12 +48,9 @@ export default function GlossaryMode({ onExit, track }) {
     const map = {};
     sorted.forEach((c) => {
       const first = (c.furi || '?')[0];
-      // G4: non-hiragana/katakana → use actual first char as key (kanji, romaji, etc.)
-      // This allows navigation to specific kanji/romaji groups instead of one big '#' bucket
-      const isKana = /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(first);
-      const key = isKana ? first : first;
-      if (!map[key]) map[key] = [];
-      map[key].push(c);
+      // G4: use actual first char as key for all entries — allows kanji/romaji nav keys
+      if (!map[first]) map[first] = [];
+      map[first].push(c);
     });
     // Sort: hiragana/katakana first (by unicode order), then others alphabetically
     const entries = Object.entries(map);
