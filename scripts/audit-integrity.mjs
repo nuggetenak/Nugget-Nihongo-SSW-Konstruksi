@@ -4,7 +4,7 @@ import { CATEGORIES, SOURCE_META, SOURCE_GROUPS, VOCAB_SOURCES } from '../src/da
 const issues = [];
 const warnings = [];
 
-const requiredCardFields = ['id', 'category', 'source', 'furi', 'jp', 'romaji', 'id_text', 'desc'];
+const requiredCardFields = ['id', 'category', 'source', 'furi', 'jp', 'id_text', 'desc'];
 
 const catKeys = new Set(CATEGORIES.map((c) => c.key));
 const sourceKeys = new Set(Object.keys(SOURCE_META));
@@ -27,7 +27,7 @@ for (const [index, c] of CARDS.entries()) {
   if (!catKeys.has(c.category)) issues.push(`Card id ${c.id} has unknown category: ${c.category}`);
   if (!sourceKeys.has(c.source)) issues.push(`Card id ${c.id} has unknown source: ${c.source}`);
 
-  for (const key of ['furi', 'jp', 'romaji', 'id_text', 'desc']) {
+  for (const key of ['furi', 'jp', 'id_text', 'desc']) {
     if (typeof c[key] !== 'string' || c[key].trim().length === 0) {
       issues.push(`Card id ${c.id} has empty/non-string field: ${key}`);
     }

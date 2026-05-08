@@ -176,7 +176,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │                               ← .sr-only utility (FE-04-A)
     │                               ← View Transitions ::view-transition rules (FE-09-C)
     │                               ← token audit comment block
-    └── tests/                      ← 35 test files, 383+ tests
+    └── tests/                      ← 35 test files, 387 tests
         ├── setup.js
         ├── BottomNav.test.jsx      ← FE-06: 7 tests
         ├── ResultScreen.test.jsx   ← FE-06: 7 tests

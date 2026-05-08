@@ -79,7 +79,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | Q3 | ~~Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret?~~ ✅ FIXED v4.12.0 — detail text shown inline on selection | UX | 🟠 |
 | Q4 | ~~Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya~~ ✅ FIXED v4.9.0 — disimpan ke `prefs.quizQuestionCount` | UX | 🟡 |
 | Q5 | ~~Tidak ada **"Quiz per Kategori"**~~ ✅ FIXED v4.10.0 — category picker di ⚙ Pengaturan QuizMode | Feature | 🟡 |
-| Q6 | Wrong-answer explanation (`DescBlock`) tidak selalu ada di semua kartu — perlu audit coverage | Data | 🟡 |
+| Q6 | ~~Wrong-answer explanation (`DescBlock`) tidak selalu ada di semua kartu — perlu audit coverage~~ ✅ CONFIRMED v4.13.0 audit — all 1410 cards have non-empty `desc` field | Data | 🟡 |
 
 **Rekomendasi Q2 (kritis):** Setelah `ResultScreen`, pass `wrongCardIds` ke parent. "Latih X salah" CTA yang sudah ada di ResultScreen harusnya navigate ke FlashcardMode dengan `filterIds={wrongCardIds}`. Saat ini CTA ada tapi navigasinya belum ter-wire ke filtered set.
 
@@ -815,6 +815,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v7): G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.13.0): Q6, J2, J4 — butuh akses PDF/data konten. SR2 confirmed resolved (furi in haystack). E2 confirmed resolved (v4.6.0).*
+*Proposal v3 — hygiene pass 2026-05-08 (v8): Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.13.0): J2, J4 — butuh akses PDF/data konten. SR2 confirmed resolved (furi in haystack). E2 confirmed resolved (v4.6.0).*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

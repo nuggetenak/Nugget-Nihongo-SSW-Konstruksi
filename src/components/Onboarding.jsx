@@ -252,7 +252,7 @@ function StepGoal({ onComplete }) {
 
       <div className={S.goalNote}>
         Dengan {goal} kartu/hari, kamu bisa selesaikan semua 1.438 materi dalam{' '}
-        <strong>~{Math.ceil(1438 / goal)} hari</strong>. Bisa ganti kapan saja di menu Saya.
+        <strong>~{Math.ceil(1410 / goal)} hari</strong>. Bisa ganti kapan saja di menu Saya.
       </div>
 
       <button className={S.ctaPrimary} onClick={() => onComplete(goal)}>

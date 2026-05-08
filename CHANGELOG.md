@@ -1,3 +1,18 @@
+## [4.13.0] - 2026-05-08
+
+### G3 — GlossaryMode Export Mini Deck (Agent Sonnet 4.6)
+
+**G3 — GlossaryMode select mode + Anki TSV export**
+- ☑ Pilih toggle button in GlossaryMode header activates select mode
+- Tap any entry to select/deselect; selected entries show checkmark overlay
+- "Semua" button quick-selects all currently visible (filtered) entries
+- Footer bar shows selected count + "⬇ Ekspor Anki" button
+- Downloads TSV file (Anki-importable): `JP[furi]\tterjemahan + desc\ttags`
+- Tags include category key and source key per card
+- Works with existing category filter — export subset from any category
+
+---
+
 ## [4.12.0] - 2026-05-08
 
 ### Open Items Batch — Q3, F2/F3, D1, G4, W5, AK2, E3, K6 (Agent Sonnet 4.6)

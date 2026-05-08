@@ -15,13 +15,13 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 | Dimension | Value |
 |-----------|-------|
-| Flashcards | 1,438 (curated, type-annotated, ruby-rendered) |
+| Flashcards | 1,410 (curated, type-annotated, ruby-rendered) |
 | Quiz questions | ~860 (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Modes | 23 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 387 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.12.0** |
+| Version | **4.13.0** |
 
 ---
 
@@ -195,7 +195,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 These are honest assessments — not blocking anything, but relevant for future work:
 
 ### Content Gaps (Phase 5.2 — Deferred)
-- **Sipil/Bangunan track content is thin**: 45 questions each, written from general knowledge. JAC official PDFs for sipil (text5d–7d) and bangunan (text5k–7k) were not fully processed. The 1,438 flashcards are ~80% lifeline content — sipil and bangunan tracks show near-identical card pools.
+- **Sipil/Bangunan track content is thin**: 45 questions each, written from general knowledge. JAC official PDFs for sipil (text5d–7d) and bangunan (text5k–7k) were not fully processed. The 1,410 flashcards are ~80% lifeline content — sipil and bangunan tracks show near-identical card pools.
 - **Chapter 2–4 flashcards missing**: text2l, text3l, text4l not yet extracted. Merge-cards pipeline is ready — content needs to be authored and added starting at id 631.
 - **Photo-based (写真) questions**: QuestionImage component exists and SW cache handles images, but actual images from JAC PDFs have not been extracted and added. B.7 infrastructure is in place, content is not.
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.

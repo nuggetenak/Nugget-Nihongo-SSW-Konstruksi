@@ -6,8 +6,8 @@
 export const ACHIEVEMENTS = [
   { id: 'first_10',       icon: '🌱', label: 'Langkah Pertama',  desc: '10 kartu hafal',                  check: (s) => s.known >= 10 },
   { id: 'first_100',      icon: '🏗️', label: 'Pondasi Kuat',     desc: '100 kartu hafal',                 check: (s) => s.known >= 100 },
-  { id: 'half_deck',      icon: '💪', label: 'Setengah Jalan',   desc: '719+ kartu hafal',                check: (s) => s.known >= 719 },
-  { id: 'full_deck',      icon: '🏆', label: 'Nugget Pro',       desc: 'Semua 1438 kartu hafal',          check: (s) => s.known >= 1438 },
+  { id: 'half_deck',      icon: '💪', label: 'Setengah Jalan',   desc: '705+ kartu hafal',                check: (s) => s.known >= 705 },
+  { id: 'full_deck',      icon: '🏆', label: 'Nugget Pro',       desc: 'Semua 1410 kartu hafal',          check: (s) => s.known >= 1410 },
   { id: 'week_streak',    icon: '🔥', label: 'Pekerja Keras',    desc: '7 hari berturut-turut',           check: (s) => s.streak >= 7 },
   { id: 'month_streak',   icon: '🌟', label: 'Konsisten',        desc: '30 hari berturut-turut',          check: (s) => s.streak >= 30 },
   { id: 'perfect_sprint', icon: '⚡', label: 'Kilat',            desc: 'Sprint tanpa salah (≥10 kartu)',  check: (s) => s.perfectSprint },
