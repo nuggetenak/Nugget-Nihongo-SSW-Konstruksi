@@ -94,7 +94,9 @@ export function ProgressProvider({ children }) {
     });
   }, [setProg]);
 
-  // ── Quiz wrong tracking ───────────────────────────────────────────────
+  // ── Quiz wrong tracking (legacy in-doc counter) ──────────────────────
+  // Note: modes now use wrong-tracker.js + ssw-quiz-wrong (out-of-docs).
+  // recordWrong writes to progress.quizWrong for FocusMode/QuizMode/SearchMode.
   const recordWrong = useCallback((cardId) => {
     setProg((prev) => {
       const qw = { ...(prev.quizWrong ?? {}) };
@@ -170,9 +172,7 @@ export function ProgressProvider({ children }) {
     // Milestones
     milestoneStreak7: prog.milestoneStreak7 ?? false,
     milestoneQuiz70: prog.milestoneQuiz70 ?? false,
-
-
-  // A.3: Toast queue
+    // A.3: Toast queue
     toastQueue,
     clearToast,
     // Phase C: Session data
