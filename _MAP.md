@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (text4 audit: all Ch.4 terms pre-exist in cards — C1 fully closed; NO OPEN ITEMS)
-> **Version:** v4.19.0 — full data layer restructure: track fields, JAC split, quiz-sets merge, doboku/kenchiku→common; 387 tests
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (v4.19.1: C1 closed; categories.js SOURCE_GROUPS/ACCENT fix; NO OPEN ITEMS)
+> **Version:** v4.19.1 — C1 text4 closure + categories.js hygiene (SOURCE_GROUPS + SOURCE_ACCENT for supplementary sources)
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/archive/SSW_UPGRADE_PROPOSAL_v1.md` ← **ARCHIVED** — all 71 items resolved by v4.14.0; E2 & C2 dismissed
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -197,7 +197,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.19.0** |
+| Version | **4.19.1** |
 | Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
