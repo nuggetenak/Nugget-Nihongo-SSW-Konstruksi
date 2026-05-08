@@ -1,6 +1,6 @@
 // ─── Utils Barrel Export ─────────────────────────────────────────────────────
 export { shuffle } from './shuffle.js';
-export { stripFuri, extractReadings, hasJapanese, jpFontSize } from './jp-helpers.js';
+export { stripFuri, extractReadings, standardizeFuri, hasJapanese, jpFontSize } from './jp-helpers.js';
 export {
   getWrongCount,
   getWrongTime,
