@@ -1,5 +1,5 @@
 # 🪖 SSW Konstruksi — Audit & Upgrade Proposal
-**Versi Proposal:** v3 | **Tanggal Audit:** 2026-05-07 | **Hygiene Pass:** 2026-05-08 (×2) | **Auditor:** Claude Sonnet 4.6
+**Versi Proposal:** v3 | **Tanggal Audit:** 2026-05-07 | **Hygiene Pass:** 2026-05-08 (×3) | **Auditor:** Claude Sonnet 4.6
 
 ---
 
@@ -58,7 +58,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | K1 | ~~**Swipe left/right untuk rating** belum diimplementasi~~ ✅ FIXED v4.3.0 — swipe kiri=Lagi, kanan=Oke, atas=Mudah di `FlipCard.jsx` (K1) | Gap | 🔴 |
-| K2 | Tidak ada mode **"Hanya Baca"** — kadang user hanya ingin membaca kartu tanpa menilai (review pasif) | Feature | 🟠 |
+| K2 | ~~Tidak ada mode **"Hanya Baca"** — review pasif~~ ✅ FIXED v4.10.0 — ToolStrip toggle 👁 Baca / 📝 Rating, hides RatingRow | Feature | 🟠 |
 | K3 | ~~`FilterBar` tidak persist filter antar-sesi~~ ✅ FIXED v4.3.1 (BUG-05) — filter/sort persist via sessionStorage | Bug | 🟠 |
 | K4 | ~~**"Tap untuk balik"** hint tidak reset saat `resetAll()`~~ ✅ FIXED v4.3.1 (BUG-10) — `flashcardHintCount` ada di `DEFAULTS`, reset otomatis | Bug | 🟡 |
 | K5 | Tidak ada tombol **"Tambah ke SRS manual"** untuk kartu yang sudah `known` tapi user ingin direview ulang | Feature | 🟡 |
@@ -78,7 +78,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | Q2 | ~~Tidak ada **"Pelajari yang Salah"** CTA~~ ✅ FIXED v4.3.0 (A1) — ResultScreen.jsx CTA `onRetryWrong` terhubung ke FlashcardMode dengan `filterIds` | Gap | 🔴 |
 | Q3 | Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret? | UX | 🟠 |
 | Q4 | ~~Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya~~ ✅ FIXED v4.9.0 — disimpan ke `prefs.quizQuestionCount` | UX | 🟡 |
-| Q5 | Tidak ada **"Quiz per Kategori"** — user hanya bisa filter lewat track, tidak bisa pilih "latih hanya K3" misalnya | Feature | 🟡 |
+| Q5 | ~~Tidak ada **"Quiz per Kategori"**~~ ✅ FIXED v4.10.0 — category picker di ⚙ Pengaturan QuizMode | Feature | 🟡 |
 | Q6 | Wrong-answer explanation (`DescBlock`) tidak selalu ada di semua kartu — perlu audit coverage | Data | 🟡 |
 
 **Rekomendasi Q2 (kritis):** Setelah `ResultScreen`, pass `wrongCardIds` ke parent. "Latih X salah" CTA yang sudah ada di ResultScreen harusnya navigate ke FlashcardMode dengan `filterIds={wrongCardIds}`. Saat ini CTA ada tapi navigasinya belum ter-wire ke filtered set.
@@ -121,7 +121,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| J1 | Kartu yang salah di JACMode **tidak masuk ke SRS queue** — user harus latih manual, tidak ada loop balik | Gap | 🔴 |
+| J1 | ~~Kartu yang salah di JACMode **tidak masuk ke SRS queue**~~ ✅ FIXED v4.10.0 — "🧠 Tambah ke Ulasan SRS" pada ResultScreen, queues `related_card_id` via `recordReview(id, 1)` | Gap | 🔴 |
 | J2 | Tidak ada **"Simulasi chapter"** — user tidak bisa mensimulasikan ujian hanya dari bab tertentu | Feature | 🟠 |
 | J3 | ~~Score badge di picker hanya tampilkan persentase terakhir, bukan **best score**~~ ✅ FIXED v4.8.0 | UX | 🟡 |
 | J4 | Soal JAC tidak punya tag chapter/bab — sulit tahu soal mana yang dari bab mana | Data | 🟠 |
@@ -218,7 +218,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | SB1 | ~~Tidak ada **progress per sumber**~~ ✅ FIXED v4.8.0 — sudah hafal berapa % dari setiap PDF? | Feature | 🟠 |
 | SB2 | ~~Tidak ada indikasi **sumber mana yang paling banyak kartu belum diketahui**~~ ✅ FIXED v4.8.0 | Feature | 🟠 |
-| SB3 | Tidak bisa langsung **"Sprint dari sumber ini"** atau "Kuis dari sumber ini" | Feature | 🟡 |
+| SB3 | ~~Tidak bisa langsung **"Sprint dari sumber ini"** atau "Kuis dari sumber ini"**~~ ✅ FIXED v4.10.0 — 🃏 Kartu / ⚡ Sprint / ❓ Kuis buttons per source | Feature | 🟡 |
 
 ---
 
@@ -815,6 +815,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v3): items R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open: K2, K5, K6, Q3, Q5, Q6, F2–F3, J1–J2, J4, W5, AK1–AK3, D1–D3 (DangerMode), G2–G4, SB3, E3.*
+*Proposal v3 — hygiene pass 2026-05-08 (v4): items R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.10.0): K5, K6, Q3, Q6, F2–F3, J2, J4, W5, AK1–AK3, D1–D3 (DangerMode), G2–G4, E3.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*
