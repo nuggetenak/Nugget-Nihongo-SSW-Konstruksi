@@ -18,7 +18,7 @@ export const DEFAULTS = {
     known: [],
     unknown: [],
     starred: [],
-    quizWrong: {},      // { [cardId]: count }
+    quizWrong: {},      // { [cardId]: wrongEntry } — {count, lastWrong} (backward-compat: plain int also accepted)
     wrongCounts: {},    // ssw-wrong-counts
     wgWrong: {},        // { [setId]: wrongObj }
     vocabWrong: {},     // { [setId]: wrongObj }
@@ -47,13 +47,14 @@ export const DEFAULTS = {
     tutorialFlashcard: false,
     lastMode: null,
     dailyGoal: 20,
-    examDate: null,          // Phase F: ISO date string for exam countdown
-    audioEnabled: true,      // Phase F: Web Speech API toggle
-    studyAnchor: null,       // Phase C: 'morning' | 'lunch' | 'evening'
-    furiganaPolicy: 'always',// Phase E: 'always' | 'tap' | 'hidden'
-    flashcardHintCount: 0,   // BUG-10: reset on resetAll()
-    notes: {},               // D3: personal notes per card { [cardId]: string }
-    speakOnFlip: false,      // R3: speak on flip instead of card advance
-    quizQuestionCount: 10,   // Q4: persist quiz question count
+    examDate: null,           // Phase F: ISO date string for exam countdown
+    audioEnabled: true,       // Phase F: Web Speech API toggle
+    studyAnchor: null,        // Phase C: 'morning' | 'lunch' | 'evening'
+    furiganaPolicy: 'always', // Phase E: 'always' | 'tap' | 'hidden'
+    flashcardHintCount: 0,    // BUG-10: reset on resetAll()
+    notes: {},                // D3: personal notes per card { [cardId]: string }
+    speakOnFlip: false,       // R3: speak on flip instead of card advance
+    quizQuestionCount: 10,    // Q4: persist quiz question count
+    // sprintBest / sprintBestTimeline: F4 — set dynamically by SprintMode, not in DEFAULTS
   },
 };
