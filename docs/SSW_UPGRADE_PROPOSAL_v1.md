@@ -365,7 +365,7 @@ Kartu jatuh tempo berikutnya: 8 jam lagi
 
 ### KATEGORI C — Konten & Data
 
-#### C1 🔴 Ekspansi Kartu — Chapter 2–4 (text2l, text3l, text4l)
+#### ~~C1~~ ✅ Ekspansi Kartu — text3l DONE v4.16.0 (text4l masih pending)
 
 **Status saat ini:** 1.438 kartu, chapter 1 complete. Chapter 2–4 belum diextract.
 
@@ -690,7 +690,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 9. ✅ **S5/BUG-07** SprintMode wrong-tracker (bonus — dikerjakan bersamaan)
 
 ### Phase 5.2 — Content Expansion ⏳ SKIP (per instruksi Crispy — fokus ke fitur dulu)
-1. ⏳ **C1** Upload + ekstrak Chapter 2–4 (text2l, text3l, text4l) — id 631+
+1. ✅ **C1** text3l done v4.16.0 (18 kartu 1439–1456); text2l audit only; text4l masih pending
 2. ✅ **C4** Tag topik ke soal JAC — v4.14.0 (`topic` field, 8 topik; filter + Simulasi per Topik di JACMode)
 3. ⏳ **C2** Ekspansi soal Sipil + Bangunan (45 → 90+ masing-masing)
 
@@ -800,7 +800,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 ### Debt yang Diketahui (dari CHANGELOG)
 - ~~Blueprint C-10 (type-answer) — belum diimplementasi~~ ✅ DONE v4.5.0 (B1) — `QuizProduksiMode.jsx`
 - Sipil/Bangunan "Segera Hadir" untuk soal tambahan → **Phase 5.2 C2**
-- Source PDF status Ch 2–4 masih "pending" → **Phase 5.2 C1**
+- Source PDF: text3l ✅ done (v4.16.0); text4l masih pending → **Phase 5.2 C1 partial**
 
 ---
 
@@ -813,12 +813,12 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 **Item kritis yang sudah selesai:**
 1. ✅ **A1 — Wrong-Card Bridge** — semua quiz modes → FlashcardMode filtered (v4.3.0)
 2. ✅ **ST2 — Exam Readiness Score** — SVG gauge di StatsMode (v4.3.0)
-3. ✅ **C1 — Chapter 2–4** — deferred (Phase 5.2, skip per instruksi Crispy)
+3. ✅ **C1 — text3l** — DONE v4.16.0 (18 kartu); text4l masih pending
 
 **Remaining open (non-5.2):** Lihat per-mode tables untuk item tanpa ~~strikethrough~~.
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v9): J2+J4+SR2 di-strikethrough (v4.14.0); Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.14.0): table item E2 (export encryption — 🟢 Nice-to-have); Phase 5.2 content (C1/C2) deferred.*
+*Proposal v3 — hygiene pass 2026-05-08 (v9): J2+J4+SR2 di-strikethrough (v4.14.0); Q6 confirmed resolved (all 1410 cards have desc); G3 di-strikethrough (v4.13.0); Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.16.0): table item E2 (export encryption — 🟢 Nice-to-have); C1 text3l ✅ DONE; text4l + C2 (sipil/bangunan expansion) deferred.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

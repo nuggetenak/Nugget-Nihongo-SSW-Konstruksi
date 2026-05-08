@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (hygiene audit pass — docs sync v4.14.0)
-> **Version:** v4.14.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items batches + J4/J2; 387 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (C1 text3.pdf — 18 new lifeline cards; v4.15.0–4.16.0 admin catch-up)
+> **Version:** v4.16.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items + J4/J2 + C1(text3l); 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -190,11 +190,11 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.14.0** |
+| Version | **4.16.0** |
 | Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
-| Flashcards | **1,410** |
+| Flashcards | **1,428** |
 | Quiz questions | **~860** (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Storage schema | **v3** |
 | localStorage docs | **3** (progress, srs, prefs) |
@@ -333,3 +333,5 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.13.0: G3 GlossaryMode export mini deck — ☑ select mode, Anki TSV download (JP+furi+terjemahan+desc+tags). |
 | 2026-05-08 | Sonnet 4.6 | v4.14.0 J4+J2: topic field on all 95 JAC questions (8 topics); JACMode topic filter chip row + "Simulasi per Topik" CTA. |
 | 2026-05-08 | Sonnet 4.6 | Hygiene audit pass: CHANGELOG v4.14.0 entry added; _MAP/BLUEPRINT-CURRENT/PROPOSAL synced to v4.14.0; J2+J4+SR2 strikethrough in proposal. |
+| 2026-05-08 | Sonnet 4.6 | v4.15.0 text2.pdf audit: 17 fixes jac-ch2 (furi/desc); v4.15.1: 6 furi fixes jac-ch1 (CCUS/KY). Admin docs deferred. |
+| 2026-05-08 | Sonnet 4.6 | v4.16.0 C1: text3.pdf — 18 new lifeline cards (1439–1456, source text3l); text3l SOURCE_META; admin catch-up v4.15.x. |

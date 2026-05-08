@@ -1,3 +1,23 @@
+## [4.16.0] - 2026-05-08
+
+### feat(C1): text3.pdf — 18 new cards ライフライン track (Agent Sonnet 4.6)
+
+**C1 phase complete** — Chapter 3 (建設工事の種類と業務) extracted from text3.pdf.
+
+New cards 1439–1456 (`source: text3l`) in `cards-lifeline.js`:
+- 1439 建設工事の3区分 | 1440 吹付けウレタン断熱工事 | 1441 ウレタン断熱QC
+- 1442 防露工事 | 1443 保温保冷安全機能 | 1444 推進トンネル工事
+- 1445 推進管の種類 | 1446 配管工事の基本技能 | 1447 受水槽
+- 1448 通気設備 | 1449 ウレタン防水 | 1450 FRP防水 | 1451 シーリング防水
+- 1452 さく井工事4種 | 1453 通信土木 | 1454 上水道の流れ
+- 1455 下水道の流れ | 1456 消防法による設置義務
+- `text3l` added to `SOURCE_META` in `categories.js`
+- Total: 1410 → 1428 cards | Lifeline: 426 → 444
+- Admin catch-up: v4.15.0+4.15.1 admin docs not previously updated
+- 387/387 tests pass
+
+---
+
 ## [4.15.1] - 2026-05-08
 
 ### fix(jac-ch1): furi audit — 6 fixes (Agent Sonnet 4.6)
