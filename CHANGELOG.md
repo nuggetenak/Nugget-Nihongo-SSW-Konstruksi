@@ -1,3 +1,49 @@
+## [4.11.0] - 2026-05-08
+
+### Open Items Batch — StatsMode fix, DangerMode D2/D3, AngkaMode AK1/AK3, GlossaryMode G2, FlashcardMode K5 (Agent Sonnet 4.6)
+
+**BUG-FIX — StatsMode: Missing catList wrapper div (pre-existing from v4.9.0 ST4)**
+- `<div className={S.list, ST.catList}>` wrapper accidentally removed by ST4 insertion
+- Caused parse error at line 273 (`{weakest.length > 0}`) — build broken since v4.9.0
+- Restored wrapper around `{catStats.map(...)}` block
+
+**DangerMode D2 — Confusion Type Filter**
+- Added `confusionType` field to all 19 danger pairs: `makna` / `kata` / `angka` / `prosedur`
+- Panel now shows filter chip row (Semua / Makna Mirip / Istilah Mirip / Angka-Warna / Prosedur-Aturan)
+- Drill button count reflects filtered set; filter resets expanded state
+- Color-coded badges shown on each term row in accordion
+
+**DangerMode D3 — Wrong-Tracker Write**
+- Wrong answers in Drill quiz now write to shared `ssw-quiz-wrong` pool
+- Key format: `danger-{term}` — compatible with StatsMode "Sering Salah" section
+- DangerMode is now mode #12/23 with wrong-tracker support
+
+**AngkaMode AK1 — Mnemonic / Memory Hook per Angka**
+- Added `mnemonic` field to all 28 entries in `angka-kunci.js`
+- Memory hooks explain the logic behind each number (e.g. "8 jam = 1 hari kerja; 5 hari × 8 = 40")
+- Displayed in accordion detail panel under 💡 icon
+
+**AngkaMode AK3 — Type-Answer Quiz (⌨️ Ketik)**
+- New `TypeQuizView` component: user types the angka/value for each konteks prompt
+- Fuzzy match: normalizes punctuation, spaces, case; partial first-number match allowed
+- Shows mnemonic hint on wrong answer
+- Panel header now has two buttons: 🧠 Pilihan (recognition) + ⌨️ Ketik (production)
+
+**GlossaryMode G2 — Compact / Expanded View Toggle**
+- New toggle button in header: ≡ Kompak ↔ ⊞ Lebar
+- Kompak (default): click individual row to expand
+- Lebar: all entries always show furigana + desc + source pill
+
+**FlashcardMode K5 — Tambah ke SRS Manual**
+- Known cards not yet in SRS queue now show "＋ Tambah ke Ulasan SRS" button
+- Calls `srs.review(card.id, 1)` to enqueue with Again rating (due immediately)
+- Known cards already in SRS show "✓ Sudah di SRS" indicator instead
+
+**JACMode — Lint fix**
+- `srsAdded` state prefixed `_srsAdded` (written but never read)
+
+---
+
 ## [4.10.0] - 2026-05-08
 
 ### Open Items Batch — J1/K2/SB3/Q5 (Agent Sonnet 4.6)

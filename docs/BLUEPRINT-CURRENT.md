@@ -1,7 +1,7 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.8.2)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.8.2
+> **Version:** 4.11.0
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -21,7 +21,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 383 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.8.2** |
+| Version | **4.11.0** |
 
 ---
 
@@ -155,6 +155,18 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | SR3 | `SearchMode.jsx` — copy-to-clipboard button (⎘) per result card; copies JP+furigana+terjemahan; visual ✓ feedback 1.5s |
 | SIM5 | `SimulasiMode.jsx` — live `N soal/mnt` pace hint below timer; turns red on `isUrgent` |
 
+
+### v4.11.0 — Open Items Batch (StatsMode fix, D2/D3, AK1/AK3, G2, K5)
+
+| Item | Deliverable |
+|------|-------------|
+| BUG-FIX | StatsMode: restored missing `<div className={S.list, ST.catList}>` wrapper (parse error since v4.9.0 ST4) |
+| D2 | DangerMode: `confusionType` field on all 19 danger pairs; filter chip row in panel (makna/kata/angka/prosedur) |
+| D3 | DangerMode: wrong-tracker write to shared `ssw-quiz-wrong` on wrong drill answers |
+| AK1 | AngkaMode: `mnemonic` field on all 28 `angka-kunci` entries; displayed in accordion + on wrong answer |
+| AK3 | AngkaMode: `TypeQuizView` — ⌨️ Ketik mode, type-answer production quiz, fuzzy match |
+| G2 | GlossaryMode: compact/expanded toggle (≡ Kompak = click-to-expand; ⊞ Lebar = always-show-all) |
+| K5 | FlashcardMode: "＋ Tambah ke Ulasan SRS" button for known cards not yet in SRS queue |
 
 ---
 

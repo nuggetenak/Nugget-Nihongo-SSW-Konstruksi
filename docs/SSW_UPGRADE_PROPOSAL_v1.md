@@ -61,7 +61,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | K2 | ~~Tidak ada mode **"Hanya Baca"** — review pasif~~ ✅ FIXED v4.10.0 — ToolStrip toggle 👁 Baca / 📝 Rating, hides RatingRow | Feature | 🟠 |
 | K3 | ~~`FilterBar` tidak persist filter antar-sesi~~ ✅ FIXED v4.3.1 (BUG-05) — filter/sort persist via sessionStorage | Bug | 🟠 |
 | K4 | ~~**"Tap untuk balik"** hint tidak reset saat `resetAll()`~~ ✅ FIXED v4.3.1 (BUG-10) — `flashcardHintCount` ada di `DEFAULTS`, reset otomatis | Bug | 🟡 |
-| K5 | Tidak ada tombol **"Tambah ke SRS manual"** untuk kartu yang sudah `known` tapi user ingin direview ulang | Feature | 🟡 |
+| K5 | ~~Tidak ada tombol **"Tambah ke SRS manual"**~~ ✅ FIXED v4.11.0 — "＋ Tambah ke Ulasan SRS" button for known cards not in SRS queue | Feature | 🟡 |
 | K6 | Category pill di front card tidak bisa di-tap untuk filter langsung (missed affordance) | UX | 🟢 |
 
 **Rekomendasi K1 (kritis):** Implementasi swipe gesture di `FlipCard.jsx` — swipe kiri = "Lagi" (1), swipe kanan = "Oke" (3), swipe atas = "Mudah" (4). Sudah ada `swipeTilt` infrastructure, tinggal wire ke rating callback.
@@ -166,9 +166,9 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| AK1 | Tidak ada **mnemonic/memory hook** per angka — angka seperti "450°C" atau "2m" mudah tertukar tanpa konteks hafalan | Content | 🟠 |
+| AK1 | ~~Tidak ada **mnemonic/memory hook** per angka~~ ✅ FIXED v4.11.0 — `mnemonic` field di semua 28 entri, ditampilkan di panel + pada jawaban salah | Content | 🟠 |
 | AK2 | Mode browse tidak menampilkan angka dalam **konteks kalimat soal** — hanya label + nilai | UX | 🟡 |
-| AK3 | Tidak ada **"tulis angkanya"** — quiz hanya recognition, padahal ujian JAC kadang minta recall angka spesifik | Feature | 🟡 |
+| AK3 | ~~Tidak ada **"tulis angkanya"**~~ ✅ FIXED v4.11.0 — `TypeQuizView`: ⌨️ Ketik mode, fuzzy match, mnemonic hint on wrong | Feature | 🟡 |
 
 ---
 
@@ -179,8 +179,8 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | D1 | Tidak ada **penjelasan linguistik** "kenapa keduanya sering tertukar" — hanya menampilkan pasangan, tidak mengajarkan perbedaannya | Content | 🟠 |
-| D2 | Pasangan jebak tidak dikategorikan by confusion type (bunyi mirip / kanji mirip / makna mirip) | Data | 🟡 |
-| D3 | Setelah quiz, pasangan yang salah tidak dimasukkan ke review pool khusus | Gap | 🟡 |
+| D2 | ~~Pasangan jebak tidak dikategorikan by confusion type~~ ✅ FIXED v4.11.0 — `confusionType` field: makna/kata/angka/prosedur; filter chips in panel | Data | 🟡 |
+| D3 | ~~Setelah quiz, pasangan yang salah tidak dimasukkan ke review pool khusus~~ ✅ FIXED v4.11.0 — wrong answers write to shared `ssw-quiz-wrong` | Gap | 🟡 |
 
 ---
 
@@ -204,7 +204,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | G1 | ~~Tidak ada **audio per entry**~~ ✅ FIXED v4.8.0 — Glosari adalah tempat ideal untuk mendengarkan pronunciation | Gap | 🟠 |
-| G2 | Tidak ada **compact vs expanded** view toggle — saat ini semua selalu sedikit expanded | UX | 🟡 |
+| G2 | ~~Tidak ada **compact vs expanded** view toggle~~ ✅ FIXED v4.11.0 — ≡ Kompak / ⊞ Lebar toggle di header | UX | 🟡 |
 | G3 | Tidak ada **"Export Pilihan sebagai Mini Deck"** — user pilih 20 kata dari glosari, export ke format yang bisa diimport ke Anki | Feature | 🟢 |
 | G4 | A-Z nav hanya hiragana — kata dengan awalan kanji/romaji tidak terjangkau | Bug | 🟡 |
 
@@ -815,6 +815,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v4): items R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.10.0): K5, K6, Q3, Q6, F2–F3, J2, J4, W5, AK1–AK3, D1–D3 (DangerMode), G2–G4, E3.*
+*Proposal v3 — hygiene pass 2026-05-08 (v5): D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.11.0): K6, Q3, Q6, F2–F3, J2, J4, W5, AK2, D1 (DangerMode content), G3–G4, E3.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*
