@@ -1,28 +1,35 @@
 // ─── DangerMode.jsx ───────────────────────────────────────────────────────────
 // Note: option bg/border/color is dynamic per answer state — justified inline.
+// D2: confusionType filter in panel. D3: wrong-tracker write on wrong answers.
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
+import { usePersistedState } from '../hooks/usePersistedState.js';
+import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 import D from './DangerMode.module.css';
 
-function buildItems() {
-  return shuffle(DANGER_PAIRS).map((pair) => {
-    const allOpts = shuffle([{ text: pair.correct, isCorrect: true }, ...pair.traps.map((t) => ({ text: t, isCorrect: false }))]);
-    return { pair, opts: allOpts, correctIdx: allOpts.findIndex((o) => o.isCorrect) };
-  });
-}
+const CONFUSION_LABELS = {
+  makna: { label: 'Makna Mirip', color: '#7C3AED' },
+  kata: { label: 'Istilah Mirip', color: '#0284C7' },
+  angka: { label: 'Angka/Warna', color: '#D97706' },
+  prosedur: { label: 'Prosedur/Aturan', color: '#059669' },
+};
 
 export default function DangerMode({ onExit, onSessionEnd }) {
   const [view, setView] = useState('panel');
-  return view === 'panel' ? <PanelView onExit={onExit} onStartQuiz={() => setView('quiz')} /> : <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
+  const [filterType, setFilterType] = useState('all');
+  return view === 'panel'
+    ? <PanelView onExit={onExit} onStartQuiz={() => setView('quiz')} filterType={filterType} setFilterType={setFilterType} />
+    : <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} filterType={filterType} />;
 }
 
-function PanelView({ onExit, onStartQuiz }) {
+function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
   const [expanded, setExpanded] = useState(null);
+  const filtered = filterType === 'all' ? DANGER_PAIRS : DANGER_PAIRS.filter((p) => p.confusionType === filterType);
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
@@ -31,19 +38,37 @@ function PanelView({ onExit, onStartQuiz }) {
           <h2 className={S.pageTitle}>⚠️ Soal Jebak</h2>
           <p className={`${S.pageSub} ${D.pageSub}`}>{DANGER_PAIRS.length} istilah yang sering salah di ujian</p>
         </div>
-        <button className={`${S.btnPrimary} ${D.drillBtn}`} onClick={onStartQuiz}>🧠 Drill</button>
+        <button className={`${S.btnPrimary} ${D.drillBtn}`} onClick={onStartQuiz}>🧠 Drill ({filtered.length})</button>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+        {[['all', 'Semua', '#6B7280'], ...Object.entries(CONFUSION_LABELS).map(([k, v]) => [k, v.label, v.color])].map(([key, label, color]) => {
+          const count = key === 'all' ? DANGER_PAIRS.length : DANGER_PAIRS.filter((p) => p.confusionType === key).length;
+          const active = filterType === key;
+          return (
+            <button key={key} onClick={() => { setFilterType(key); setExpanded(null); }}
+              style={{ fontFamily: 'inherit', padding: '4px 10px', borderRadius: 99, fontSize: 11, cursor: 'pointer',
+                background: active ? color : 'transparent', color: active ? '#fff' : color,
+                border: `1.5px solid ${color}`, fontWeight: active ? 700 : 400 }}>
+              {label} {count}
+            </button>
+          );
+        })}
       </div>
       <div className={S.list}>
-        {DANGER_PAIRS.map((pair, i) => {
+        {filtered.map((pair, i) => {
           const isOpen = expanded === i;
+          const cl = CONFUSION_LABELS[pair.confusionType];
           return (
             <div key={i}>
               <button
                 onClick={() => setExpanded(isOpen ? null : i)}
                 className={`${D.accordionBtn}${isOpen ? ` ${D.open}` : ''}`}
               >
-                <div>
-                  <span className={D.termJp}>{pair.term}</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span className={D.termJp}>{pair.term}</span>
+                    {cl && <span style={{ fontSize: 10, padding: '1px 6px', borderRadius: 99, background: cl.color + '22', color: cl.color, fontWeight: 600 }}>{cl.label}</span>}
+                  </div>
                   {pair.furi && <span className={D.termFuri}>{pair.furi}</span>}
                 </div>
                 <span className={D.chevron}>{isOpen ? '▲' : '▼'}</span>
@@ -70,8 +95,16 @@ function PanelView({ onExit, onStartQuiz }) {
   );
 }
 
-function QuizView({ onBack, onSessionEnd }) {
-  const [items, setItems] = useState(() => buildItems());
+function QuizView({ onBack, onSessionEnd, filterType }) {
+  const [, setDangerWrong] = usePersistedState('ssw-quiz-wrong', {});
+  const buildFilteredItems = () => {
+    const pool = filterType === 'all' ? DANGER_PAIRS : DANGER_PAIRS.filter((p) => p.confusionType === filterType);
+    return shuffle(pool).map((pair) => {
+      const allOpts = shuffle([{ text: pair.correct, isCorrect: true }, ...pair.traps.map((t) => ({ text: t, isCorrect: false }))]);
+      return { pair, opts: allOpts, correctIdx: allOpts.findIndex((o) => o.isCorrect) };
+    });
+  };
+  const [items, setItems] = useState(() => buildFilteredItems());
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
   const sessionFired = useRef(false);
@@ -87,10 +120,14 @@ function QuizView({ onBack, onSessionEnd }) {
     if (selected !== null || phase !== 'playing') return;
     setSelected(idx);
     const isCorrect = idx === item.correctIdx;
+    if (!isCorrect) {
+      const key = `danger-${item.pair.term}`;
+      setDangerWrong((w) => ({ ...w, [key]: makeWrongEntry(w[key]) }));
+    }
     const ns = isCorrect ? streak + 1 : 0;
     setStreak(ns); setMaxStreak((m) => Math.max(m, ns));
     setResults((r) => [...r, { isCorrect, picked: idx, item }]);
-  }, [selected, phase, item, streak]);
+  }, [selected, phase, item, streak, setDangerWrong]);
 
   useEffect(() => {
     if (selected === null || phase !== 'playing') return;
@@ -110,7 +147,7 @@ function QuizView({ onBack, onSessionEnd }) {
     return () => window.removeEventListener('keydown', h);
   }, [selected, phase, isLast, handleSelect]);
 
-  const restart = () => { setItems(buildItems()); setQIdx(0); setSelected(null); setResults([]); setStreak(0); setMaxStreak(0); setPhase('playing'); sessionFired.current = false; };
+  const restart = () => { setItems(buildFilteredItems()); setQIdx(0); setSelected(null); setResults([]); setStreak(0); setMaxStreak(0); setPhase('playing'); sessionFired.current = false; };
 
   useEffect(() => {
     if (phase !== 'result' || sessionFired.current) return;

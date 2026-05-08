@@ -242,7 +242,8 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
           </div>
         );
       })()}
-        {catStats.map((c) => (
+      <div className={`${S.list} ${ST.catList}`}>
+      {catStats.map((c) => (
           <div key={c.key} className={ST.catItem}>
             <span className={ST.catEmoji}>{c.emoji}</span>
             <div className={ST.catBody}>

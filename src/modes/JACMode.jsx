@@ -30,7 +30,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const [autoDelay, setAutoDelay] = useState(2000);
   // J1: track wrong question IDs during session for SRS add-to-queue
   const [wrongQIds, setWrongQIds] = useState([]);
-  const [srsAdded, setSrsAdded] = useState(0);
+  const [_srsAdded, setSrsAdded] = useState(0);
 
   const lemahCount = JAC_OFFICIAL.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).length;
 
