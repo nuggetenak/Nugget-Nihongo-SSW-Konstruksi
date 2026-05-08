@@ -44,10 +44,10 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Task | Deliverable |
 |------|-------------|
 | CS-01 | cards.js split into 8 source files in src/data/source/ |
-| CS-02 | romaji field removed, type field added to all 1,438 cards |
+| CS-02 | romaji field removed, type field added to all 1,410 cards |
 | CS-03 | DescBlock native ruby rendering via parseRubyFragments |
 | CS-04 | FlipCard quote field rendering on back face |
-| CS-05 | Full re-annotation pass: 1,438 cards with desc/id_text/context quality pass |
+| CS-05 | Full re-annotation pass: 1,410 cards with desc/id_text/context quality pass |
 
 ### FE Series (v4.0.x → v4.1.0) — Frontend Polish
 
@@ -93,7 +93,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | BUG-10 | `flashcardHintCount` in schema DEFAULTS → resets on `resetAll()` |
 | BUG-11 | ExportMode conflict warning when device data is newer than import file |
 | B2 | SprintMode: duration picker (30s/60s/2m) + category lock + escalating urgency |
-| SIM3 | SimulasiMode: \"Latih Salah\" CTA → `onRetryWrong` FlashcardMode bridge |
+| SIM3 | SimulasiMode: "Latih Salah" CTA → `onRetryWrong` FlashcardMode bridge |
 | SIM4 | SimulasiMode: post-exam breakdown per source/set |
 | F1 | Achievement badge system — 14 badges, `utils/achievements.js`, grid in SayaTab |
 | F2 | Daily Challenge — date-seeded question in SayaTab, `utils/daily-challenge.js` |
@@ -115,9 +115,9 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Item | Deliverable |
 |------|-------------|
 | B1 | `QuizProduksiMode.jsx` — JP→ID type-answer with fuzzy match, wrong-tracker, audio, session summary |
-| Tests | `quiz-produksi.test.jsx` — 7 tests; total 383/383 ✅ |
+| Tests | `quiz-produksi.test.jsx` — 7 tests added (total 387) |
 
-### v4.6.0 — E2/F4/ST3
+### v4.6.0 — Gist Sync + Sprint Ghost + StatsMode Accuracy
 
 | Item | Deliverable |
 |------|-------------|
@@ -146,7 +146,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 | Item | Deliverable |
 |------|-------------|
-| D1-WT | `DengarMode.jsx` wrong-tracker — wrong answers written to shared `quizWrong` pool; 7 modes now write to `quizWrong` (QuizMode, JACMode, WaygroundMode, SprintMode, VocabMode, QuizProduksiMode, DengarMode) |
+| D1-WT | `DengarMode.jsx` wrong-tracker — wrong answers written to shared `quizWrong` pool; 7 modes write to `quizWrong` at this point: QuizMode, JACMode, WaygroundMode, SprintMode, VocabMode, QuizProduksiMode, DengarMode (DangerMode added as 8th in v4.11.0 D3) |
 
 ### v4.8.2 — SR3 + SIM5
 
@@ -155,6 +155,39 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | SR3 | `SearchMode.jsx` — copy-to-clipboard button (⎘) per result card; copies JP+furigana+terjemahan; visual ✓ feedback 1.5s |
 | SIM5 | `SimulasiMode.jsx` — live `N soal/mnt` pace hint below timer; turns red on `isUrgent` |
 
+### v4.9.0 — Open Items Batch (R3/R4/R5/W1/W4/Q4/SR4/ST4)
+
+| Item | Deliverable |
+|------|-------------|
+| R3 | ReviewMode: `speakOnFlip` pref — audio plays on card flip instead of card advance; toggle in SayaTab; default off |
+| R4 | ReviewMode: "Lewati" button + keyboard `S` — skip card without SRS rating |
+| R5 | ReviewMode: live remaining count `N / total · N lagi` in header |
+| W1 | WaygroundMode: group description below each group header (Teori / Praktik / CSV Teori / CSV Praktik) |
+| W4 | WaygroundMode: total score summary card above picker — total benar/salah + % across all attempted sets |
+| Q4 | QuizMode: persist question count selection to `prefs.quizQuestionCount`; restored on next session |
+| SR4 | SearchMode: accuracy badges per result — `✓ Hafal` (green) and `⚠ N× salah` (red) |
+| ST4 | StatsMode: week comparison grid — Minggu Lalu / Perubahan / Minggu Ini |
+
+### v4.10.0 — Open Items Batch (J1/K2/SB3/Q5)
+
+| Item | Deliverable |
+|------|-------------|
+| J1 | JACMode: "🧠 Tambah ke Ulasan SRS" on ResultScreen — queues `related_card_id` flashcards via `recordReview(id, 1)`; toast confirms count |
+| K2 | FlashcardMode: ToolStrip "👁 Baca / 📝 Rating" toggle — read-only mode hides RatingRow and swipe hint |
+| SB3 | SumberMode: 🃏 Kartu / ⚡ Sprint / ❓ Kuis action buttons per source — navigates to mode scoped to that source's card IDs |
+| Q5 | QuizMode: category filter picker in ⚙ Pengaturan — scopes question pool to selected category |
+
+### v4.11.0 — Open Items Batch (StatsMode fix, D2/D3, AK1/AK3, G2, K5)
+
+| Item | Deliverable |
+|------|-------------|
+| BUG-FIX | StatsMode: restored missing `<div className={S.list, ST.catList}>` wrapper (parse error since v4.9.0 ST4) |
+| D2 | DangerMode: `confusionType` field on all 19 danger pairs; filter chip row in panel (makna/kata/angka/prosedur) |
+| D3 | DangerMode: wrong-tracker write to shared `ssw-quiz-wrong` on wrong drill answers — 8th mode writing to quizWrong pool |
+| AK1 | AngkaMode: `mnemonic` field on all 28 `angka-kunci` entries; displayed in accordion + on wrong answer |
+| AK3 | AngkaMode: `TypeQuizView` — ⌨️ Ketik mode, type-answer production quiz, fuzzy match |
+| G2 | GlossaryMode: compact/expanded toggle (≡ Kompak = click-to-expand; ⊞ Lebar = always-show-all) |
+| K5 | FlashcardMode: "＋ Tambah ke Ulasan SRS" button for known cards not yet in SRS queue |
 
 ### v4.12.0 — Open Items Batch (Q3/F2/F3/D1/G4/W5/AK2/E3/K6)
 
@@ -170,19 +203,11 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | E3 | ExportMode: "Ekspor Delta SRS Saja" button — SRS+known+starred only, smaller file |
 | K6 | FlashcardMode: category pill tap-to-filter (`__cat:KEY__`); FilterBar shows cat chip with clear button |
 
----
-
-### v4.11.0 — Open Items Batch (StatsMode fix, D2/D3, AK1/AK3, G2, K5)
+### v4.13.0 — G3 Export Mini Deck
 
 | Item | Deliverable |
 |------|-------------|
-| BUG-FIX | StatsMode: restored missing `<div className={S.list, ST.catList}>` wrapper (parse error since v4.9.0 ST4) |
-| D2 | DangerMode: `confusionType` field on all 19 danger pairs; filter chip row in panel (makna/kata/angka/prosedur) |
-| D3 | DangerMode: wrong-tracker write to shared `ssw-quiz-wrong` on wrong drill answers |
-| AK1 | AngkaMode: `mnemonic` field on all 28 `angka-kunci` entries; displayed in accordion + on wrong answer |
-| AK3 | AngkaMode: `TypeQuizView` — ⌨️ Ketik mode, type-answer production quiz, fuzzy match |
-| G2 | GlossaryMode: compact/expanded toggle (≡ Kompak = click-to-expand; ⊞ Lebar = always-show-all) |
-| K5 | FlashcardMode: "＋ Tambah ke Ulasan SRS" button for known cards not yet in SRS queue |
+| G3 | `GlossaryMode.jsx` — select mode (☑ Pilih toggle), tap-to-select cards, "Semua" quick-select, footer "⬇ Ekspor Anki" downloads TSV file (Anki-importable: JP[furi]\tterjemahan+desc\ttags) |
 
 ### v4.14.0 — J4+J2 JAC Topic Tags
 
@@ -193,28 +218,27 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 ---
 
-### v4.13.0 — G3 Export Mini Deck
+## Known Gaps & Deferred Work
 
-| Item | Deliverable |
-|------|-------------|
-| G3 | `GlossaryMode.jsx` — select mode (☑ Pilih toggle), tap-to-select cards, "Semua" quick-select, footer "⬇ Ekspor Anki" downloads TSV file (Anki-importable: JP[furi]\tterjemahan+desc\ttags) |
-
----
-
-These are honest assessments — not blocking anything, but relevant for future work:
+These are honest assessments — not blocking anything, but relevant for future work.
 
 ### Content Gaps (Phase 5.2 — Deferred)
 - **Sipil/Bangunan track content is thin**: 45 questions each, written from general knowledge. JAC official PDFs for sipil (text5d–7d) and bangunan (text5k–7k) were not fully processed. The 1,410 flashcards are ~80% lifeline content — sipil and bangunan tracks show near-identical card pools.
-- **Chapter 2–4 flashcards missing**: text2l, text3l, text4l not yet extracted. Merge-cards pipeline is ready — content needs to be authored and added starting at id 631.
-- **Photo-based (写真) questions**: QuestionImage component exists and SW cache handles images, but actual images from JAC PDFs have not been extracted and added. B.7 infrastructure is in place, content is not.
+- **Chapter 2–4 flashcards missing**: text2l, text3l, text4l not yet extracted. Merge-cards pipeline is ready — content needs to be authored starting at id 631.
+- **Photo-based (写真) questions**: QuestionImage component exists and SW cache handles images, but actual images from JAC PDFs have not been extracted. Infrastructure is in place; content is not.
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
 ### Technical
-- **Out-of-DOCS localStorage keys**: Several modes use `usePersistedState` with keys outside the 3-doc engine (e.g. `ssw-jac-scores`, `ssw-wg-scores`, `ssw-vocab-scores`, `ssw-quiz-wrong`, `ssw-wrong-counts`, `ssw-fc-search`, `ssw-fc-sort`, `ssw-gist-pat`, `ssw-gist-id`, dynamic `ssw-wg-wrong-{setId}`, `ssw-vocab-wrong-{setId}`). These bypass lz-string compression and `validateSnapshot`. Known — not blocking, but relevant if adding export coverage.
-- **sessionStorage keys**: `ssw-search-history` (SR1, SearchMode) lives in sessionStorage (per-tab, not persisted). Expected behaviour.
+- **Out-of-DOCS localStorage keys**: Several modes use `usePersistedState` with keys outside the 3-doc engine (see Storage Schema below). These bypass lz-string compression and `validateSnapshot`. Known — not blocking, but relevant if adding export coverage.
+- **sessionStorage keys**: `ssw-search-history` (SR1) and `ssw-fc-search`/`ssw-fc-sort` (BUG-05) live in sessionStorage — per-tab, not persisted. Expected behaviour.
+- **sprintBest/sprintBestTimeline**: Stored directly on prefs doc via `storageSet` but not in schema DEFAULTS — set dynamically by SprintMode on first PB.
 
 ### Architecture
 - **Category mismatch**: `jenis_kerja` and `alat_umum` categories contain lifeline content even for sipil/bangunan track users. Re-categorization would require content review of ~485 cards.
+
+### Remaining Open Items
+- **E2** (export encryption) — 🟢 Nice-to-have; no blocker.
+- **Phase 5.2** (C1/C2) — content expansion deferred per original instruction.
 
 ---
 
@@ -249,8 +273,10 @@ prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
             flashcardHintCount,            // BUG-10 fixed: now in DEFAULTS, resets on resetAll()
             examDate, audioEnabled, studyAnchor, furiganaPolicy,
             notes: {},                     // D3: personal notes per cardId (v4.4.0)
-            sprintBest: 0,                 // F4: personal best sprint score (v4.6.0)
-            sprintBestTimeline: [] }       // F4: ghost score timeline for Sprint (v4.6.0)
+            speakOnFlip: false,            // R3: speak on card flip instead of advance (v4.9.0)
+            quizQuestionCount: 10,         // Q4: persist quiz count selection (v4.9.0)
+            sprintBest: 0,                 // F4: personal best sprint score — dynamic, not in DEFAULTS
+            sprintBestTimeline: [] }       // F4: ghost score timeline — dynamic, not in DEFAULTS
 
 srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
@@ -261,7 +287,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 // ssw-jac-scores           { [setKey]: { score, total, pct, date, bestPct } }
 // ssw-wg-scores            { [setId]: { correct, total, date, maxStreak } }
 // ssw-vocab-scores         { [setId]: { correct, total, date } }
-// ssw-quiz-wrong           { [cardId]: wrongEntry }  ← shared quizWrong write pool
+// ssw-quiz-wrong           { [cardId]: wrongEntry }  ← shared pool (8 modes write)
 // ssw-wrong-counts         { [cardId]: count }
 // ssw-quiz-produksi-wrong  { [cardId]: wrongEntry }
 // ssw-wg-wrong-{setId}     { [cardId]: wrongEntry }  ← per-set Wayground wrong
