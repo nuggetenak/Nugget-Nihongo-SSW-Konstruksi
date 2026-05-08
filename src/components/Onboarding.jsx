@@ -61,7 +61,7 @@ function StepWelcome({ onNext }) {
       <h1 className={S.heroTitle}>Selamat Datang!</h1>
       <div className={S.heroSub}>SSW Konstruksi · by Nugget Nihongo</div>
       <p className={S.heroDesc}>
-        Aplikasi belajar untuk ujian SSW Konstruksi Jepang. 1.438 flashcard,
+        Aplikasi belajar untuk ujian SSW Konstruksi Jepang. 1.443 flashcard,
         kuis, dan simulasi ujian — semua dalam Bahasa Indonesia.
       </p>
       <div className={S.badges}>
@@ -251,7 +251,7 @@ function StepGoal({ onComplete }) {
       </div>
 
       <div className={S.goalNote}>
-        Dengan {goal} kartu/hari, kamu bisa selesaikan semua 1.438 materi dalam{' '}
+        Dengan {goal} kartu/hari, kamu bisa selesaikan semua 1.443 materi dalam{' '}
         <strong>~{Math.ceil(1410 / goal)} hari</strong>. Bisa ganti kapan saja di menu Saya.
       </div>
 
