@@ -62,7 +62,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | K3 | ~~`FilterBar` tidak persist filter antar-sesi~~ ✅ FIXED v4.3.1 (BUG-05) — filter/sort persist via sessionStorage | Bug | 🟠 |
 | K4 | ~~**"Tap untuk balik"** hint tidak reset saat `resetAll()`~~ ✅ FIXED v4.3.1 (BUG-10) — `flashcardHintCount` ada di `DEFAULTS`, reset otomatis | Bug | 🟡 |
 | K5 | ~~Tidak ada tombol **"Tambah ke SRS manual"**~~ ✅ FIXED v4.11.0 — "＋ Tambah ke Ulasan SRS" button for known cards not in SRS queue | Feature | 🟡 |
-| K6 | Category pill di front card tidak bisa di-tap untuk filter langsung (missed affordance) | UX | 🟢 |
+| K6 | ~~Category pill di front card tidak bisa di-tap untuk filter langsung (missed affordance)~~ ✅ FIXED v4.12.0 — tap category badge → filter deck to that category | UX | 🟢 |
 
 **Rekomendasi K1 (kritis):** Implementasi swipe gesture di `FlipCard.jsx` — swipe kiri = "Lagi" (1), swipe kanan = "Oke" (3), swipe atas = "Mudah" (4). Sudah ada `swipeTilt` infrastructure, tinggal wire ke rating callback.
 
@@ -76,7 +76,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | Q1 | ~~Tidak ada **mode produksi**~~ ✅ FIXED v4.5.0 (B1) — `QuizProduksiMode.jsx`: JP→ID type-answer dengan fuzzy match | Gap | 🔴 |
 | Q2 | ~~Tidak ada **"Pelajari yang Salah"** CTA~~ ✅ FIXED v4.3.0 (A1) — ResultScreen.jsx CTA `onRetryWrong` terhubung ke FlashcardMode dengan `filterIds` | Gap | 🔴 |
-| Q3 | Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret? | UX | 🟠 |
+| Q3 | ~~Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret?~~ ✅ FIXED v4.12.0 — detail text shown inline on selection | UX | 🟠 |
 | Q4 | ~~Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya~~ ✅ FIXED v4.9.0 — disimpan ke `prefs.quizQuestionCount` | UX | 🟡 |
 | Q5 | ~~Tidak ada **"Quiz per Kategori"**~~ ✅ FIXED v4.10.0 — category picker di ⚙ Pengaturan QuizMode | Feature | 🟡 |
 | Q6 | Wrong-answer explanation (`DescBlock`) tidak selalu ada di semua kartu — perlu audit coverage | Data | 🟡 |
@@ -108,8 +108,8 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | F1 | ~~UI tidak menampilkan **"Kenapa kategori ini?"**~~ ✅ FIXED v4.3.0 — explainer panel dengan nama kategori + rekomendasi terlemah (FocusMode) | UX | 🔴 |
-| F2 | Setelah satu sesi Sprint selesai, FocusMode tidak otomatis **pindah ke kategori terlemah berikutnya** | Gap | 🟠 |
-| F3 | Tidak ada visual progress "kamu sudah melatih N dari M kategori lemah hari ini" | UX | 🟡 |
+| F2 | ~~Setelah satu sesi Sprint selesai, FocusMode tidak otomatis **pindah ke kategori terlemah berikutnya**~~ ✅ FIXED v4.12.0 — auto-advance + session progress counter | Gap | 🟠 |
+| F3 | ~~Tidak ada visual progress "kamu sudah melatih N dari M kategori lemah hari ini"~~ ✅ FIXED v4.12.0 — banner + ✓ badges on trained categories | UX | 🟡 |
 
 **Rekomendasi F1 (kritis):** Sebelum mulai drill, tampilkan panel: "Kategori terlemah kamu: **[Nama Kategori]** — Akurasi: XX% (N salah dari M soal terakhir)". Ini penting secara pedagogis — andragogi mensyaratkan learner memahami *mengapa* mereka belajar sesuatu.
 
@@ -140,7 +140,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | W2 | ~~Tidak ada **"review hanya salah"** per-set~~ ✅ FIXED v4.7.0 — `lemahMode` sub-button per set row | Gap | 🟠 |
 | W3 | ~~Set yang belum pernah dikerjakan tidak diberi badge/tag "Belum Dikerjakan" yang jelas~~ ✅ FIXED v4.8.0 | UX | 🟡 |
 | W4 | ~~WaygroundMode tidak menampilkan **total score** lintas semua set~~ ✅ FIXED v4.9.0 — summary card total benar/salah + % di atas picker | UX | 🟡 |
-| W5 | Tidak ada urutan saran — set mana yang sebaiknya dikerjakan lebih dulu? | Feature | 🟡 |
+| W5 | ~~Tidak ada urutan saran — set mana yang sebaiknya dikerjakan lebih dulu?~~ ✅ FIXED v4.12.0 — "Disarankan Berikutnya" card in picker | Feature | 🟡 |
 
 ---
 
@@ -167,7 +167,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | AK1 | ~~Tidak ada **mnemonic/memory hook** per angka~~ ✅ FIXED v4.11.0 — `mnemonic` field di semua 28 entri, ditampilkan di panel + pada jawaban salah | Content | 🟠 |
-| AK2 | Mode browse tidak menampilkan angka dalam **konteks kalimat soal** — hanya label + nilai | UX | 🟡 |
+| AK2 | ~~Mode browse tidak menampilkan angka dalam **konteks kalimat soal** — hanya label + nilai~~ ✅ FIXED v4.12.0 — `soal` field (sample exam question) on all 28 entries | UX | 🟡 |
 | AK3 | ~~Tidak ada **"tulis angkanya"**~~ ✅ FIXED v4.11.0 — `TypeQuizView`: ⌨️ Ketik mode, fuzzy match, mnemonic hint on wrong | Feature | 🟡 |
 
 ---
@@ -178,7 +178,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| D1 | Tidak ada **penjelasan linguistik** "kenapa keduanya sering tertukar" — hanya menampilkan pasangan, tidak mengajarkan perbedaannya | Content | 🟠 |
+| D1 | ~~Tidak ada **penjelasan linguistik** "kenapa keduanya sering tertukar" — hanya menampilkan pasangan, tidak mengajarkan perbedaannya~~ ✅ FIXED v4.12.0 — `explanation` field on all 20 pairs | Content | 🟠 |
 | D2 | ~~Pasangan jebak tidak dikategorikan by confusion type~~ ✅ FIXED v4.11.0 — `confusionType` field: makna/kata/angka/prosedur; filter chips in panel | Data | 🟡 |
 | D3 | ~~Setelah quiz, pasangan yang salah tidak dimasukkan ke review pool khusus~~ ✅ FIXED v4.11.0 — wrong answers write to shared `ssw-quiz-wrong` | Gap | 🟡 |
 
@@ -206,7 +206,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | G1 | ~~Tidak ada **audio per entry**~~ ✅ FIXED v4.8.0 — Glosari adalah tempat ideal untuk mendengarkan pronunciation | Gap | 🟠 |
 | G2 | ~~Tidak ada **compact vs expanded** view toggle~~ ✅ FIXED v4.11.0 — ≡ Kompak / ⊞ Lebar toggle di header | UX | 🟡 |
 | G3 | Tidak ada **"Export Pilihan sebagai Mini Deck"** — user pilih 20 kata dari glosari, export ke format yang bisa diimport ke Anki | Feature | 🟢 |
-| G4 | A-Z nav hanya hiragana — kata dengan awalan kanji/romaji tidak terjangkau | Bug | 🟡 |
+| G4 | ~~A-Z nav hanya hiragana — kata dengan awalan kanji/romaji tidak terjangkau~~ ✅ FIXED v4.12.0 — non-kana initials each get own nav key | Bug | 🟡 |
 
 ---
 
@@ -246,7 +246,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | E1 | ~~Tidak ada **cloud sync**~~ ✅ FIXED v4.6.0 (E2/E3) — GitHub Gist sync opt-in, `gist-sync.js` + PAT input di ExportMode | Gap | 🟠 |
 | E2 | Export file tidak terenkripsi — meskipun tidak berisi data sensitif, bisa ditambahkan opsi password | Nice | 🟢 |
-| E3 | Tidak ada **"Incremental backup"** — hanya full snapshot, tidak bisa backup hanya delta SRS | Feature | 🟡 |
+| E3 | ~~Tidak ada **"Incremental backup"** — hanya full snapshot, tidak bisa backup hanya delta SRS~~ ✅ FIXED v4.12.0 — "Ekspor Delta SRS Saja" button in ExportMode | Feature | 🟡 |
 | E4 | ~~Import tidak mendeteksi **konflik ID**~~ ✅ FIXED v4.3.1 (BUG-11) — conflict warning saat data device lebih baru dari file import | Bug | 🟠 |
 
 ---
@@ -815,6 +815,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v5): D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.11.0): K6, Q3, Q6, F2–F3, J2, J4, W5, AK2, D1 (DangerMode content), G3–G4, E3.*
+*Proposal v3 — hygiene pass 2026-05-08 (v6): Q3/F2/F3/D1/G4/W5/AK2/E3/K6 di-strikethrough (v4.12.0); D2/D3/AK1/AK3/G2/K5 di-strikethrough (v4.11.0); R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0); J1/K2/Q5/SB3 di-strikethrough (v4.10.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open (v4.12.0): Q6, J2, J4, G3 — semua butuh akses PDF/data konten.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*

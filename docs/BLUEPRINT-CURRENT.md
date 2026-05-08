@@ -1,7 +1,7 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.8.2)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.11.0
+> **Version:** 4.12.0
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -21,7 +21,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 383 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.11.0** |
+| Version | **4.12.0** |
 
 ---
 
@@ -155,6 +155,22 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | SR3 | `SearchMode.jsx` — copy-to-clipboard button (⎘) per result card; copies JP+furigana+terjemahan; visual ✓ feedback 1.5s |
 | SIM5 | `SimulasiMode.jsx` — live `N soal/mnt` pace hint below timer; turns red on `isUrgent` |
 
+
+### v4.12.0 — Open Items Batch (Q3/F2/F3/D1/G4/W5/AK2/E3/K6)
+
+| Item | Deliverable |
+|------|-------------|
+| Q3 | QuizMode: difficulty detail text shown inline on selection |
+| F2 | FocusMode: auto-advance to next weakest category after sprint ends |
+| F3 | FocusMode: session progress counter — N/M categories trained, ✓ badge per button |
+| D1 | `danger-pairs.js`: `explanation` field on all 20 pairs (linguistic "why confused"); shown in accordion + quiz |
+| G4 | GlossaryMode: kanji/romaji initials each get own nav key; sorted alphabetically after kana |
+| W5 | WaygroundMode: "Disarankan Berikutnya" card — untouched first, then lowest score |
+| AK2 | `angka-kunci.js`: `soal` field (sample JAC-style question) on all 28 entries; shown in accordion |
+| E3 | ExportMode: "Ekspor Delta SRS Saja" button — SRS+known+starred only, smaller file |
+| K6 | FlashcardMode: category pill tap-to-filter (`__cat:KEY__`); FilterBar shows cat chip with clear button |
+
+---
 
 ### v4.11.0 — Open Items Batch (StatsMode fix, D2/D3, AK1/AK3, G2, K5)
 

@@ -1,3 +1,45 @@
+## [4.12.0] - 2026-05-08
+
+### Open Items Batch — Q3, F2/F3, D1, G4, W5, AK2, E3, K6 (Agent Sonnet 4.6)
+
+**Q3 — QuizMode difficulty detail text**
+- Selected difficulty now shows concrete explanation inline (e.g. "Semua pilihan dari kategori sama — mendekati kesulitan ujian asli JAC")
+
+**F2 — FocusMode auto-advance to next weakest category**
+- After sprint ends, FocusMode automatically navigates to the next weakest untrained category
+- If all categories trained, returns to picker
+
+**F3 — FocusMode session progress counter**
+- Progress banner: "N dari M kategori dilatih sesi ini" with next category suggestion
+- ✓ badge on trained category buttons in picker
+
+**D1 — DangerMode linguistic explanation field**
+- `explanation` field added to all 20 danger pairs explaining *why* they are confused
+- Displayed in accordion browse panel and after-answer card in quiz mode
+
+**G4 — GlossaryMode non-kana nav keys**
+- Kanji and romaji initials each get their own nav key instead of collapsing into `#`
+- Non-kana keys sorted alphabetically and appended after hiragana/katakana
+
+**W5 — WaygroundMode suggested next set**
+- "Disarankan Berikutnya" card above set picker: untouched sets first, then lowest score
+- Tappable — navigates directly to that set
+
+**AK2 — AngkaMode sample exam question context**
+- `soal` field added to all 28 angka-kunci entries (sample JAC-style question)
+- Displayed in accordion browse panel below konteks label
+
+**E3 — ExportMode incremental SRS delta backup**
+- New "Ekspor Delta SRS Saja" button — exports only SRS cards + known + starred
+- Smaller file size; suitable for frequent daily backups
+
+**K6 — FlashcardMode category pill tap-to-filter**
+- Tapping category badge on FlipCard front face filters deck to that category (`__cat:KEY__` token)
+- FilterBar shows active category chip with "✕ Hapus filter" button instead of text input
+- sessionStorage persists the cat filter across mode switches (BUG-05 pattern)
+
+---
+
 ## [4.11.0] - 2026-05-08
 
 ### Open Items Batch — StatsMode fix, DangerMode D2/D3, AngkaMode AK1/AK3, GlossaryMode G2, FlashcardMode K5 (Agent Sonnet 4.6)
