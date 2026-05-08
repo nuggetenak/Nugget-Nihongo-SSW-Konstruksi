@@ -5,9 +5,9 @@ export {
   getWrongCount,
   getWrongTime,
   makeWrongEntry,
-  STORAGE_KEYS,
   loadFromStorage,
   saveToStorage,
+  removeFromStorage,
 } from './wrong-tracker.js';
 export { generateQuiz } from './quiz-generator.js';
 // FE-09-A: vibration haptic patterns
