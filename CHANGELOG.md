@@ -1,3 +1,17 @@
+## [4.19.5] - 2026-05-09
+
+### fix: stale counts + daily-challenge CSV pool + vite chunk (Agent Sonnet 4.6)
+
+**Bug fixes:**
+- `Onboarding.jsx`: card count `1.438` → `1.443` (2 occurrences — welcome copy + goal-days calculation).
+- `index.html`: OG meta description `1.438 kartu flashcard` → `1.443`.
+- `daily-challenge.js`: used `WAYGROUND_SETS` directly (same missing-CSV bug as SimulasiMode). Changed to `QUIZ_SETS` — daily question pool now includes all 300 CSV questions.
+
+**Build:**
+- `vite.config.js`: `manualChunks` updated — `data-jac` chunk now includes `jac-teori.js` + `jac-lifeline.js`; `data-wayground` chunk includes `quiz-sets.js`.
+
+---
+
 ## [4.19.4] - 2026-05-09
 
 ### fix: SearchMode wrongCount bug + barrel/schema hygiene (Agent Sonnet 4.6)
