@@ -1,10 +1,9 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (v4.19.5: Onboarding+index.html 1438→1443; daily-challenge QUIZ_SETS; vite chunks)
-> **Version:** v4.19.5 — stale 1438→1443 counts; daily-challenge CSV pool; vite chunks
-> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
-> **Upgrade Proposal:** `docs/archive/SSW_UPGRADE_PROPOSAL_v1.md` ← **ARCHIVED** — all 71 items resolved by v4.14.0; E2 & C2 dismissed
-> **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (hygiene passes complete — v4.19.5 final)
+> **Version:** v4.19.5 — all phases done, all hygiene passes done
+> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, known gaps)
+> **Archive index:** `docs/archive/ARCHIVE-INDEX.md`
 
 ---
 
@@ -14,7 +13,7 @@ A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface 
 
 **Deployment:** GitHub Pages — static standalone PWA. `npm install && npm run build` → deploy `dist/`.
 **Storage:** Pure `localStorage` — **never** `window.storage`, never Supabase, never external auth.
-**Deps:** react 19, react-dom, ts-fsrs v5, Vite 6. **Max 4 prod deps — hard constraint.**
+**Deps:** react 19, react-dom, ts-fsrs v5, lz-string. **Max 4 prod deps — hard constraint.**
 
 ### Branding
 - **Parent:** Nugget Nihongo · **Product:** SSW Konstruksi
@@ -193,6 +192,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 ---
 
+---
+
 ## 3. Current Metrics
 
 | Metric | Value |
@@ -213,39 +214,21 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 ---
 
-## 4. Phase History
+## 4. Phase History (Summary)
 
-| Phase | Name | Status |
-|-------|------|--------|
-| A | Bug Fixes + Storage v3 + Debt Cleanup | ✅ v3.7.0 |
-| B | Content: Sipil & Bangunan | ✅ v3.8.0 |
-| C | Daily Mission + Session Analytics | ✅ v3.8.0 |
-| D | Export/Import Hardening | ✅ v3.9.0 |
-| E | FlashcardMode Decomposition | ✅ v3.9.0 |
-| F | Exam Countdown + Audio | ✅ v4.0.0 |
-| G | QA + Polish + Release | ✅ v4.0.0 |
-| CS-01–05 | Content Standardization (split, type, ruby, quote, re-annotation) | ✅ v4.0.x |
-| FE-01–09 | CSS Modules · A11y · Robustness · DX · PWA · UX | ✅ v4.1.0 |
-| Phase 5.1 | Critical Gaps: R1 ReviewSummary, A1 WrongBridge, K1 SwipeGesture, SIM1 Pause, BUG-06 Pool, ST2 Readiness, E1 SWUpdate, S5/BUG-07 Sprint wrong-tracker | ✅ v4.3.0 |
-| Phase 5.3 | Mode Enhancements: B2 SprintCategory, SIM3+SIM4 PostExam, F1 Achievements, F2 DailyChallenge | ✅ v4.3.1 |
-| Phase 5.4 | Polish & Infra: ST1 Heatmap, A2 SmartRecommend, E4 lz-compression | ✅ v4.3.1 |
-| Phase 5.5 | Unfinished items: D1 DengarMode, D3 CatatanMode, A3 Breadcrumb, sessions cap 180, lint fixes | ✅ v4.4.0 |
-| Phase 5.6 (B1) | Kuis Produksi: JP→ID type-answer mode (QuizProduksiMode), 7 tests | ✅ v4.5.0 |
-| Phase 5.7 (W2) | WaygroundMode per-set Ulang Salah mode | ✅ v4.7.0 |
-| Phase 5.8 | UX Polish: SR1 search history, G1 glossary audio, SB1/SB2 sumber progress, W3 Baru badge, R2 due reason, J3 best score | ✅ v4.8.0 |
-| v4.8.1 | DengarMode wrong-tracker (D1-WT) — writes to shared quizWrong pool | ✅ v4.8.1 |
-| v4.8.2 | SR3 copy-to-clipboard in SearchMode; SIM5 pace hint in SimulasiMode | ✅ v4.8.2 |
-| Phase 5.9 | R3 speakOnFlip, R4 skip card, R5 remaining count, W1 group desc, W4 total score, Q4 quiz count persist, SR4 accuracy badges, ST4 week comparison | ✅ v4.9.0 |
-| v4.10.0 | J1 JACMode→SRS; K2 FlashcardMode read-only toggle; SB3 SumberMode per-source actions; Q5 QuizMode category filter | ✅ v4.10.0 |
-| v4.11.0 | StatsMode catList fix; D2 DangerMode confusionType+filter; D3 wrong-tracker; AK1 AngkaMode mnemonic+TypeQuiz; G2 GlossaryMode compact toggle; K5 add-to-SRS | ✅ v4.11.0 |
-| v4.12.0 | Q3 difficulty detail; F2/F3 FocusMode auto-advance+progress; D1 danger explanation; G4 glossary nav keys; W5 suggested next; AK2 soal field; E3 SRS delta; K6 category pill filter | ✅ v4.12.0 |
-| v4.13.0 | G3 GlossaryMode export mini deck — select mode + Anki TSV download | ✅ v4.13.0 |
-| v4.14.0 | J4 topic field on all 95 JAC questions (8 topics); J2 JACMode topic filter + Simulasi per Topik | ✅ v4.14.0 |
-| v4.15.x | JAC content audit: 17 furi/desc fixes jac-ch2; 6 furi fixes jac-ch1 (KY acronym) | ✅ v4.15.1 |
-| v4.16.0 | C1 text3.pdf: 18 new lifeline cards 1439–1456 (text3l source) | ✅ v4.16.0 |
-| v4.17.0 | C1-pass2: 15 new common cards 1457–1471 from text1l/text2/text3 | ✅ v4.17.0 |
-| v4.18.0 | refactor: 157 doboku+kenchiku cards → common; source files emptied for Ch.5+ | ✅ v4.18.0 |
-| v4.19.0 | refactor: JAC split (jac-teori/jac-lifeline/stubs); quiz-sets.js merged; track fields on danger-pairs + angka-kunci; components filter by track | ✅ v4.19.0 |
+All phases complete. See `docs/BLUEPRINT-CURRENT.md` for full deliverable table.
+
+| Version(s) | What Shipped |
+|-----------|-------------|
+| v3.7–4.0.0 | Core app: phases A–G (storage v3, content, daily mission, export, audio, QA) |
+| v4.0.x | CS-01–05: content standardization (split, type, ruby, re-annotation) |
+| v4.1.0 | FE-01–09: CSS modules, a11y, PWA, haptics, design tokens |
+| v4.2–4.9 | 23 modes, Phase 5.1–5.8 feature batches, lz-string compression |
+| v4.10–4.14 | Feature polish: JACMode SRS bridge, GlossaryMode Anki export, JAC topic tags |
+| v4.15–4.17 | Content: JAC audit (23 fixes), C1 text3 +18 cards, C1 pass2 +15 cards |
+| v4.18 | Refactor: 157 doboku/kenchiku cards → common |
+| v4.19.0 | Data layer: JAC split, quiz-sets merge, track fields on all datasets |
+| v4.19.1–4.19.5 | Hygiene: SOURCE_GROUPS fix, track field bugs, CSV pool, SearchMode fix, stale counts |
 
 ---
 
@@ -286,85 +269,62 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ---
 
-## 7. Notable New Files (v4.0.2 → v4.14.0)
+---
 
+## 7. Notable Files Added Since v4.0.0
+
+### Data (v4.0.x → v4.19.0)
 | File | Purpose |
 |------|---------|
-| `src/types.js` | JSDoc typedefs for Card, SRSState, Tab, ToastItem, etc. |
-| `src/utils/haptic.js` | Vibration API patterns: tap/correct/wrong/success/flip |
+| `src/data/source/` (8 files) | CS-01 split: cards-common.js + vocab, cards-lifeline.js + vocab, stubs for doboku/kenchiku |
+| `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
+| `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
+| `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
+| `src/data/sipil-sets.js` / `bangunan-sets.js` | 3 sets × 45qs each for Sipil/Bangunan tracks |
+| `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
+| `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
+| `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
+| `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE, ...]` |
+| `src/data/quiz-sets.js` | Merged QUIZ_SETS = WAYGROUND_SETS + CSV_SETS; getQuizSetsForTrack() helper (v4.19.0) |
+| `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. text3l/vocab-supplementary/vocab-general), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
+
+### Source/Utils (v4.0.x → v4.19.0)
+| File | Purpose |
+|------|---------|
+| `src/types.js` | JSDoc typedefs (Card, SRSState, Tab, ToastItem) |
+| `src/utils/haptic.js` | Vibration API: tap/correct/wrong/success/flip |
+| `src/utils/achievements.js` | 14 achievement badges |
+| `src/utils/daily-challenge.js` | Date-seeded daily challenge from JAC+QUIZ_SETS pool |
+| `src/utils/recommend-mode.js` | Smart mode recommendation engine |
+| `src/utils/gist-sync.js` | GitHub Gist sync helper |
 | `src/hooks/useDebounce.js` | 120ms debounce for search inputs |
-| `src/hooks/useFocusTrap.js` | Tab/Shift+Tab cycle + focus restore for dialogs |
+| `src/hooks/useFocusTrap.js` | Tab/Shift+Tab cycle + focus restore |
 | `src/components/ErrorBoundary.jsx` | Class-based EB + TabError + FlatCardFallback |
 | `src/components/OfflineBanner.jsx` | Fixed offline status banner |
-| `src/components/OfflineBanner.module.css` | Banner styles with slideDown + reduced-motion |
-| `src/modes/*.module.css` (×6) | DangerMode, AngkaMode, SimulasiMode, StatsMode, ReviewMode, GlossaryMode |
-| `src/tests/BottomNav.test.jsx` | 7 render/aria tests |
-| `src/tests/ResultScreen.test.jsx` | 7 render/interaction tests |
-| `src/tests/Toast.test.jsx` | 8 tests incl. fake timers + type-aware aria-live |
-| `HUSKY-SETUP.md` | One-time pre-commit hook setup instructions |
+| `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap |
 
-### New Files Since v4.3.0
-
+### Modes (v4.2.0 → v4.5.0)
 | File | Purpose |
 |------|---------|
-| `src/utils/achievements.js` | 14 achievement badges — `buildAchievementState()` + `evaluateAchievements()` |
-| `src/utils/daily-challenge.js` | Deterministic date-seeded daily challenge question from JAC+Wayground pool |
-| `src/utils/recommend-mode.js` | Smart mode recommendation engine — replaces `getQuickStart` in Dashboard |
-| `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap (126 days, amber opacity scale) |
-| `src/modes/DengarMode.jsx` | Audio-first listening comprehension quiz (v4.4.0) |
-| `src/modes/CatatanMode.jsx` | Personal notes/mnemonics per card, filterable (v4.4.0) |
-| `src/modes/QuizProduksiMode.jsx` | JP→ID type-answer production quiz with fuzzy match (v4.5.0) |
-| `src/utils/gist-sync.js` | GitHub Gist sync helper — push/pull/find for multi-device backup (v4.6.0) |
-| `src/tests/quiz-produksi.test.jsx` | 7 tests for QuizProduksiMode (v4.5.0) |
-
-### New Files Since v4.14.0
-
-| File | Purpose |
-|------|---------|
-| `src/data/jac-teori.js` | 65 学科 questions split from jac-official (v4.19.0) |
-| `src/data/jac-lifeline.js` | 30 Lifeline 実技 questions split from jac-official (v4.19.0) |
-| `src/data/jac-doboku.js` | Empty stub for sipil 実技 (v4.19.0) |
-| `src/data/jac-kenchiku.js` | Empty stub for bangunan 実技 (v4.19.0) |
-| `src/data/quiz-sets.js` | Merged WAYGROUND_SETS + CSV_SETS with `getQuizSetsForTrack()` (v4.19.0) |
-
-> **Current counts:** ANGKA_KUNCI = 29 (common: 22, lifeline: 7); DANGER_PAIRS = 20 (common: 12, lifeline: 8)
+| `src/modes/ProductionMode.jsx` | ID→JP active recall (text input) |
+| `src/modes/ConfusionMode.jsx` | 28 confusion pairs VLT-style |
+| `src/modes/DengarMode.jsx` | Audio-first listening comprehension quiz |
+| `src/modes/CatatanMode.jsx` | Personal notes/mnemonics per card |
+| `src/modes/QuizProduksiMode.jsx` | JP→ID type-answer production quiz, fuzzy match |
 
 ---
 
-| Date | Agent | Work |
-|------|-------|------|
-| 2026-05-01 | Opus 4.6 (Crunchy) | Blueprint v6 — full codebase audit, self-contained spec |
-| 2026-05-02 | Sonnet 4.6 | Phase A: bug fixes, storage v3, debt cleanup |
-| 2026-05-02 | Sonnet 4.6 | Phase B+C: sipil/bangunan content, daily mission, sessions |
-| 2026-05-02 | Sonnet 4.6 | Phase D+E: export hardening, FlashcardMode decomposition |
-| 2026-05-02 | Sonnet 4.6 | Phase F+G: exam countdown, audio, QA, release v4.0.0 |
-| 2026-05-03 | Sonnet 4.6 | B1–B4+M1–M3: furigana chain, session recording, sprint PB, glossary track-aware |
-| 2026-05-04 | Sonnet 4.6 | C1–C6: ReviewMode audio, track-aware search, StatsMode SRS+streak |
-| 2026-05-04 | Codex (Sonnet) | D1–D10: SayaTab inline edit, QuizMode furigana, MissionOverlay, SearchMode star |
-| 2026-05-04 | Codex (Sonnet) | fix(JpDisplay): native ruby rendering + tap-to-reveal furigana |
-| 2026-05-04 | Sonnet 4.6 | post-Codex cleanup: wrapInteractive, ReviewMode session, stale branch cleanup |
-| 2026-05-07 | Sonnet 4.6 | FE-01–09: CSS modules, reduced motion, design tokens, a11y, error boundaries, offline banner, debounce, toast upgrade, 22 new tests, path alias, types, PWA install, SW update toast, haptics, scroll restore, View Transitions |
-| 2026-05-07 | Sonnet 4.6 | Hygiene pass 1: outputs/ untracked, stale branch deleted, barrel exports, gitignore, CI improved, version → 4.1.0, _MAP + CHANGELOG updated |
-| 2026-05-07 | Sonnet 4.6 | Hygiene pass 2: blueprint archived → BLUEPRINT-CURRENT.md; README rewritten; ARCHIVE-INDEX created; one-shot scripts → scripts/archive/; duplicate ResultScreen.test removed; CHANGELOG compacted 739→326 lines; eslint/prettier ignore scripts/archive/ |
-| 2026-05-07 | Sonnet 4.6 | v4.2.0: fixed BottomNav.test + Toast.test CSS module mock (vi.mock → default Proxy); bumped to 20 modes; docs updated (MAP, BLUEPRINT-CURRENT, CHANGELOG) |
-| 2026-05-07 | Sonnet 4.6 | v4.3.0 Phase 5.1 complete: SIM1 (pause + auto-pause), BUG-06 (JAC+Wayground pool merge), ST2 (Exam Readiness gauge in StatsMode). 376/376 tests. |
-| 2026-05-08 | Sonnet 4.6 | v4.3.1 Phase 5.1–5.4: BUG-05/08/10/11 fixed; B2 SprintMode category+duration+escalation; SIM3+SIM4 post-exam analysis; F1 achievements (14 badges); F2 daily challenge; ST1 heatmap; A2 smart recommendation; E4 lz-string compression. 376/376 tests. |
-| 2026-05-08 | Sonnet 4.6 | v4.4.0 Phase 5.5: D1 DengarMode (listening comprehension); D3 CatatanMode (personal notes per card); A3 breadcrumb nav; sessions cap 90→180; lint fixes (StudyHeatmap, FlashcardMode). 376/376 tests. |
-| 2026-05-08 | Sonnet 4.6 | v4.5.0 B1: QuizProduksiMode — JP→ID type-answer production quiz, fuzzy match, wrong-tracker, audio. 383/383 tests. |
-| 2026-05-08 | Sonnet 4.6 | v4.6.0 E2/F4/ST3: Gist sync (ExportMode), Sprint ghost score (F4 Battle Past Self), quiz accuracy per category in StatsMode. 383/383 tests. |
-| 2026-05-08 | Sonnet 4.6 | v4.7.0 W2: WaygroundMode per-set "Ulang Salah" sub-button + lemahMode filter. ST5 confirmed already complete. |
-| 2026-05-08 | Sonnet 4.6 | v4.8.0 Phase 5.8: SR1 search history (sessionStorage), G1 glossary audio, SB1/SB2 sumber progress bar + terlemah badge, W3 "Baru" badge for untouched sets, R2 ReviewMode due-reason chip, J3 JACMode best score. |
-| 2026-05-08 | Sonnet 4.6 | v4.8.1: DengarMode wrong-tracker (D1-WT) — wrong answers now written to shared quizWrong pool. Modes with wrong-tracker: 10→11/15. |
-| 2026-05-08 | Sonnet 4.6 | v4.8.2: SR3 copy-to-clipboard in SearchMode (⎘ button per result); SIM5 pace hint in SimulasiMode (soal/mnt below timer). |
-| 2026-05-08 | Sonnet 4.6 | v4.9.0 open items: R3 speakOnFlip, R4 skip card, R5 remaining count, W1 group desc, W4 total score, Q4 quiz count persist, SR4 search accuracy badges, ST4 week comparison. |
-| 2026-05-08 | Sonnet 4.6 | v4.10.0: J1 JACMode→SRS (wrong answers queue related flashcards); K2 FlashcardMode read-only toggle; SB3 SumberMode Kartu/Sprint/Kuis per-source actions + filterIds to sprint/kuis; Q5 QuizMode category filter. |
-| 2026-05-08 | Sonnet 4.6 | v4.11.0: StatsMode catList wrapper fix (BUG from v4.9.0); D2 DangerMode confusionType + filter chips + wrong-tracker; AK1 AngkaMode mnemonic field (all 28) + TypeQuizView; G2 GlossaryMode compact/expanded toggle; K5 FlashcardMode add-to-SRS button. |
-| 2026-05-08 | Sonnet 4.6 | v4.12.0: Q3 difficulty detail; F2 FocusMode auto-advance; F3 session progress counter; D1 danger-pairs explanation field (all 20); G4 glossary non-kana nav keys; W5 suggested next set; AK2 soal field (all 28); E3 SRS delta backup; K6 category pill tap-to-filter. |
-| 2026-05-08 | Sonnet 4.6 | v4.13.0: G3 GlossaryMode export mini deck — ☑ select mode, Anki TSV download (JP+furi+terjemahan+desc+tags). |
-| 2026-05-08 | Sonnet 4.6 | v4.14.0 J4+J2: topic field on all 95 JAC questions (8 topics); JACMode topic filter chip row + "Simulasi per Topik" CTA. |
-| 2026-05-08 | Sonnet 4.6 | Hygiene audit pass: CHANGELOG v4.14.0 entry added; _MAP/BLUEPRINT-CURRENT/PROPOSAL synced to v4.14.0; J2+J4+SR2 strikethrough in proposal. |
-| 2026-05-08 | Sonnet 4.6 | v4.15.0 text2.pdf audit: 17 fixes jac-ch2 (furi/desc); v4.15.1: 6 furi fixes jac-ch1 (CCUS/KY). Admin docs deferred. |
-| 2026-05-08 | Sonnet 4.6 | v4.16.0 C1: text3.pdf — 18 new lifeline cards (1439–1456, source text3l); text3l SOURCE_META; admin catch-up v4.15.x. |
-| 2026-05-08 | Sonnet 4.6 | v4.17.0 C1-pass2: 15 new common cards (1457–1471) from text1l/text2/text3 — CCUS levels, drone rules, 建設業法設備業種, 労働者改善法, 特定技能失業ルール, 資格区分6種, とび職, 鉄骨構造, 車両系3t. |
-| 2026-05-08 | Sonnet 4.6 | v4.18.0 refactor: doboku(58)+kenchiku(77)+doboku-vocab(9)+kenchiku-vocab(13)=157 cards migrated to common; source files emptied for future Ch.5+ use. |
-| 2026-05-08 | Sonnet 4.6 | v4.19.0 refactor: JAC split (jac-teori/jac-lifeline/stubs); quiz-sets.js merged; track field on all question sets, danger-pairs, angka-kunci; components filter by track. |
+## 8. Agent Session Log
+
+| Date | Version | Work |
+|------|---------|------|
+| 2026-05-01 | — | Opus 4.6 (Crunchy): Blueprint v6 — full codebase audit |
+| 2026-05-02 | v4.0.0 | Sonnet 4.6: Phases A–G (storage v3, content, daily mission, export, audio, QA) |
+| 2026-05-03–04 | v4.0.2 | Sonnet 4.6 + Codex: furigana chain, ruby rendering, ReviewMode, post-Codex cleanup |
+| 2026-05-07 | v4.1.0–4.2.0 | Sonnet 4.6: FE-01–09 frontend polish, hygiene passes, ProductionMode + ConfusionMode |
+| 2026-05-07 | v4.3.0 | Sonnet 4.6: Phase 5.1 (SIM1, BUG-06, ST2) |
+| 2026-05-08 | v4.3.1–4.9.0 | Sonnet 4.6: Phases 5.3–5.8 — achievements, heatmap, lz-string, DengarMode, CatatanMode, Gist sync, Sprint ghost, 23 modes total |
+| 2026-05-08 | v4.10.0–4.14.0 | Sonnet 4.6: Feature batches — JACMode SRS bridge, SumberMode actions, GlossaryMode Anki export, JAC topic tags |
+| 2026-05-08 | v4.15.x–4.17.0 | Sonnet 4.6: JAC content audit (23 fixes), C1 text3 +18 cards, C1 pass2 +15 cards |
+| 2026-05-08 | v4.18.0–4.19.0 | Sonnet 4.6: Refactors — doboku/kenchiku→common; JAC split; quiz-sets merge; track fields |
+| 2026-05-09 | v4.19.1–4.19.5 | Sonnet 4.6: 5 hygiene passes — C1 closure; SOURCE_GROUPS fix; track bugs (wt1-10, csv-sets); SimulasiMode+daily-challenge CSV pool; +24 tests; SearchMode wrongCount fix; barrel clean; stale counts |
