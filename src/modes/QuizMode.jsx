@@ -14,7 +14,7 @@ import S from './modes.module.css';
 
 export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWrong, audioEnabled = false }) {
   const [difficulty, setDifficulty] = useState('medium');
-  const [quizCount, setQuizCount] = useState(10);
+  const [quizCount, setQuizCount] = useState(() => storageGet('prefs')?.quizQuestionCount ?? 10);
   const [lemahMode, setLemahMode] = useState(false);
   const [autoNextDelay, setAutoNextDelay] = useState(2000);
   const [showSettings, setShowSettings] = useState(false);
@@ -103,7 +103,14 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
           {COUNTS.map((n, i) => {
             const label = i === COUNTS.length - 1 ? 'Semua' : String(n);
             return (
-              <button key={n} onClick={() => setQuizCount(n)} style={pillStyle(quizCount === n)}>{label}</button>
+              <button key={n} onClick={() => {
+                setQuizCount(n);
+                // Q4: Persist count choice — import set at module top already has storageGet
+                import('../storage/engine.js').then(({ set: storageSet }) => {
+                  const prefs = storageGet('prefs') ?? {};
+                  storageSet('prefs', { ...prefs, quizQuestionCount: n });
+                });
+              }} style={pillStyle(quizCount === n)}>{label}</button>
             );
           })}
         </div>

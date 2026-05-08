@@ -51,12 +51,32 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap
+  // R3: If speakOnFlip is true, speak on flip instead of advance
   useEffect(() => {
-    const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
-    if (!audioEnabled || !currentCard || !canSpeak()) return;
+    const prefs = storageGet('prefs') ?? {};
+    const audioEnabled = prefs.audioEnabled !== false;
+    const speakOnFlip = prefs.speakOnFlip === true;
+    if (!audioEnabled || !currentCard || !canSpeak() || speakOnFlip) return;
     const t = setTimeout(() => speakJP(stripFuri(currentCard.jp)), 300);
     return () => clearTimeout(t);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // R3: Speak on flip
+  useEffect(() => {
+    const prefs = storageGet('prefs') ?? {};
+    const audioEnabled = prefs.audioEnabled !== false;
+    const speakOnFlip = prefs.speakOnFlip === true;
+    if (!audioEnabled || !flipped || !currentCard || !canSpeak() || !speakOnFlip) return;
+    speakJP(stripFuri(currentCard.jp));
+  }, [flipped]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // R4: Skip card without rating — advance to next without SRS review
+  const handleSkip = useCallback(() => {
+    if (!queue) return;
+    const nextIdx = idx + 1;
+    if (nextIdx >= queue.length) setDone(true);
+    else { setIdx(nextIdx); setFlipped(false); }
+  }, [idx, queue]);
 
   const handleRate = useCallback((rating) => {
     if (!flipped || currentId == null) return;
@@ -78,10 +98,11 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
       if (e.key === '2') handleRate(2);
       if (e.key === '3') handleRate(3);
       if (e.key === '4') handleRate(4);
+      if (e.key === 's' || e.key === 'S') handleSkip();
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [flipped, handleRate]);
+  }, [flipped, handleRate, handleSkip]);
 
   // ─── LOADING ───────────────────────────────────────────────────────────────
   if (queue === null) {
@@ -164,6 +185,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const fs = jpFontSize(clean);
   const info = srs.getInfo(currentId);
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
+  const remaining = queue.length - idx - 1;
 
   return (
     <div className={`${S.pageScroll} ${R.quizPage}`}>
@@ -173,7 +195,15 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
           {audioEnabled && (
             <button onClick={() => speakJP(clean)} aria-label="Putar audio" className={R.audioBtn}>🔊</button>
           )}
-          <div className={R.cardIdxLabel}>{idx + 1} / {queue.length}</div>
+          {/* R4: Skip without rating */}
+          <button
+            onClick={handleSkip}
+            aria-label="Lewati kartu ini (S)"
+            title="Lewati (S)"
+            style={{ fontSize: 11, color: 'var(--c-text-dim)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 6px' }}
+          >Lewati</button>
+          {/* R5: Remaining count */}
+          <div className={R.cardIdxLabel}>{idx + 1} / {queue.length}{remaining > 0 ? ` · ${remaining} lagi` : ''}</div>
         </div>
       </div>
       <ProgressBar current={idx} total={queue.length} color={T.amber} />

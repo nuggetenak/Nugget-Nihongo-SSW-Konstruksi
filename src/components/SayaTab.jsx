@@ -293,6 +293,18 @@ export default function SayaTab() {
           sub="Web Speech API — tombol 🔊 di kartu"
           onClick={() => setPref('audioEnabled', !(prefs?.audioEnabled !== false))}
         />
+        {prefs?.audioEnabled !== false && (
+          <Row
+            label="🔊 Kapan Bicara (Ulasan)"
+            value={prefs?.speakOnFlip === true ? '👆 Saat balik kartu' : '➡️ Saat kartu berikutnya'}
+            sub={prefs?.speakOnFlip === true ? 'Audio diputar saat kartu dibalik' : 'Audio diputar saat pindah ke kartu baru'}
+            onClick={() => {
+              const next = !(prefs?.speakOnFlip === true);
+              setPref('speakOnFlip', next);
+              toast.show(next ? '👆 Audio saat balik kartu' : '➡️ Audio saat kartu berikutnya');
+            }}
+          />
+        )}
         <Row
           label="ふ Furigana di Kartu"
           value={

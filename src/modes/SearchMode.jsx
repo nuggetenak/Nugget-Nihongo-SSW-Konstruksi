@@ -4,6 +4,7 @@ import { stripFuri } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
+import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
 const HISTORY_KEY = 'ssw-search-history';
@@ -24,6 +25,9 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const debouncedQuery = useDebounce(query, 120);
   const [showAllTracks, setShowAllTracks] = useState(false);
   const [history, setHistory] = useState(() => getHistory());
+
+  // SR4: User accuracy data — load once on mount (static snapshot is fine for search)
+  const progressData = useMemo(() => storageGet('progress') ?? {}, []);
 
   const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
 
@@ -137,6 +141,9 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
       <div className={S.list}>
         {results.map((c) => {
           const cat = getCatInfo(c.category);
+          // SR4: User accuracy for this card
+          const wrongCount = progressData?.quizWrong?.[c.id] ?? 0;
+          const isKnown = (progressData?.known ?? []).includes(c.id);
           return (
             <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
               <div className={S.rowSpread} style={{ alignItems: 'flex-start' }}>
@@ -173,6 +180,15 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                   {c.desc.slice(0, 100)}{c.desc.length > 100 ? '…' : ''}
                 </div>
               )}
+              {/* SR4: User accuracy badge */}
+              <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
+                {isKnown && (
+                  <span className={S.pill} style={{ fontSize: 9, background: 'rgba(34,197,94,0.1)', color: T.correct, border: '1px solid rgba(34,197,94,0.25)' }}>✓ Hafal</span>
+                )}
+                {wrongCount > 0 && (
+                  <span className={S.pill} style={{ fontSize: 9, background: 'rgba(220,38,38,0.08)', color: T.wrong, border: '1px solid rgba(220,38,38,0.2)' }}>⚠ {wrongCount}× salah</span>
+                )}
+              </div>
             </div>
           );
         })}

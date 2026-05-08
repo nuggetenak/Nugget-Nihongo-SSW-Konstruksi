@@ -53,5 +53,7 @@ export const DEFAULTS = {
     furiganaPolicy: 'always',// Phase E: 'always' | 'tap' | 'hidden'
     flashcardHintCount: 0,   // BUG-10: reset on resetAll()
     notes: {},               // D3: personal notes per card { [cardId]: string }
+    speakOnFlip: false,      // R3: speak on flip instead of card advance
+    quizQuestionCount: 10,   // Q4: persist quiz question count
   },
 };

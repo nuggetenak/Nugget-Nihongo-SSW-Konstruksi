@@ -210,7 +210,38 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
       })()}
 
       <div className={S.sectionLabel}>Per Kategori</div>
-      <div className={`${S.list} ${ST.catList}`}>
+      {/* ST4: This week vs last week */}
+      {(() => {
+        const now = new Date();
+        const startOfWeek = (d) => { const s = new Date(d); s.setDate(s.getDate() - s.getDay()); s.setHours(0,0,0,0); return s; };
+        const thisWeekStart = startOfWeek(now).getTime();
+        const lastWeekStart = thisWeekStart - 7 * 86400000;
+        const thisWeek = sessions.filter((s) => { const t = new Date(s.date).getTime(); return t >= thisWeekStart; });
+        const lastWeek = sessions.filter((s) => { const t = new Date(s.date).getTime(); return t >= lastWeekStart && t < thisWeekStart; });
+        if (thisWeek.length === 0 && lastWeek.length === 0) return null;
+        const diff = thisWeek.length - lastWeek.length;
+        const diffColor = diff > 0 ? T.correct : diff < 0 ? T.wrong : T.textMuted;
+        const diffLabel = diff > 0 ? `+${diff}` : String(diff);
+        return (
+          <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 10, padding: '10px 14px', marginBottom: 16, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, textAlign: 'center' }}>
+            <div>
+              <div style={{ fontSize: 10, color: T.textDim, fontWeight: 700 }}>MINGGU LALU</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: T.textMuted }}>{lastWeek.length}</div>
+              <div style={{ fontSize: 9, color: T.textDim }}>sesi</div>
+            </div>
+            <div style={{ borderLeft: `1px solid ${T.border}`, borderRight: `1px solid ${T.border}` }}>
+              <div style={{ fontSize: 10, color: T.textDim, fontWeight: 700 }}>PERUBAHAN</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: diffColor }}>{diff === 0 ? '=' : diffLabel}</div>
+              <div style={{ fontSize: 9, color: T.textDim }}>sesi</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: T.textDim, fontWeight: 700 }}>MINGGU INI</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: T.amber }}>{thisWeek.length}</div>
+              <div style={{ fontSize: 9, color: T.textDim }}>sesi</div>
+            </div>
+          </div>
+        );
+      })()}
         {catStats.map((c) => (
           <div key={c.key} className={ST.catItem}>
             <span className={ST.catEmoji}>{c.emoji}</span>

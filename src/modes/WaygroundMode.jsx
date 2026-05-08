@@ -11,10 +11,10 @@ import S from './modes.module.css';
 
 const TEORI_PRAKTIK = [...WAYGROUND_SETS.filter((s) => !s.id.startsWith('wg')), ...CSV_SETS];
 const GROUPS = [
-  { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt' },
-  { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp' },
-  { label: 'CSV Teori', icon: '📚', color: '#f59e0b', prefix: 'ct' },
-  { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp' },
+  { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt', desc: 'Pengetahuan & konsep teknis' },
+  { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp', desc: 'Prosedur & aplikasi lapangan' },
+  { label: 'CSV Teori', icon: '📚', color: '#f59e0b', prefix: 'ct', desc: 'Materi teori tambahan (CSV)' },
+  { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp', desc: 'Latihan praktik tambahan (CSV)' },
 ];
 
 // W2: load wrong count for a set from localStorage (picker-time, outside hook)
@@ -86,6 +86,24 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
       <h2 className={S.pageTitle}>Soal Teknis · Lifeline</h2>
       <p className={S.pageSub}>{totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik</p>
 
+      {/* W4: Total score across all sets */}
+      {(() => {
+        const scored = TEORI_PRAKTIK.filter((s) => wgScores[s.id]);
+        if (scored.length === 0) return null;
+        const totalCorrect = scored.reduce((a, s) => a + (wgScores[s.id]?.score ?? 0), 0);
+        const totalQ = scored.reduce((a, s) => a + (wgScores[s.id]?.total ?? 0), 0);
+        const overallPct = totalQ > 0 ? Math.round((totalCorrect / totalQ) * 100) : 0;
+        return (
+          <div style={{ background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.2)', borderRadius: 10, padding: '10px 14px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{ fontSize: 11, color: 'var(--c-text-dim)', fontWeight: 700 }}>TOTAL SEMUA SET</div>
+              <div style={{ fontSize: 11, color: 'var(--c-text-muted)', marginTop: 2 }}>{scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ} benar</div>
+            </div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: overallPct >= 70 ? 'var(--c-correct)' : overallPct >= 50 ? 'var(--c-amber)' : 'var(--c-wrong)' }}>{overallPct}%</div>
+          </div>
+        );
+      })()}
+
       <div className={S.row} style={{ marginBottom: 20 }}>
         {[{ label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
           { label: `💡 ${showHint ? 'ON' : 'OFF'}`, active: showHint, onClick: () => setShowHint((f) => !f) }
@@ -97,8 +115,9 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
           <div className={S.row} style={{ marginBottom: 8 }}>
             <span style={{ fontSize: 13 }}>{g.icon}</span>
             <span style={{ fontSize: 10, fontWeight: 800, color: g.color, letterSpacing: 1.8, textTransform: 'uppercase' }}>{g.label}</span>
+            {g.desc && <span style={{ fontSize: 10, color: 'var(--c-text-dim)' }}>— {g.desc}</span>}
             <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
-            <span className={S.pill} style={{ fontSize: 10, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, fontWeight: 700 }}>{g.sets.length} set</span>
+            <span className={S.pill} style={{ fontSize: 10, color: 'var(--c-text-dim)', background: 'var(--c-surface)', border: `1px solid var(--c-border)`, fontWeight: 700 }}>{g.sets.length} set</span>
           </div>
           <div className={S.list}>
             {g.sets.map((s) => {
