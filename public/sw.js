@@ -7,7 +7,7 @@
 // Cache versioning: bump CACHE_VERSION on every deploy to force SW update.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = 'ssw-v4.14.0';
+const CACHE_VERSION = 'ssw-v4.15.0';
 const CACHE_STATIC    = `${CACHE_VERSION}-static`;
 const CACHE_FONTS     = `${CACHE_VERSION}-fonts`;
 const ALL_CACHES      = [CACHE_STATIC, CACHE_FONTS];

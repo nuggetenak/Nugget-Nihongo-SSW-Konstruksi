@@ -1,3 +1,31 @@
+## [4.15.0] - 2026-05-08
+
+### Content Audit — jac-ch1 fix + jac-ch2 text2.pdf audit (Agent Sonnet 4.6)
+
+**fix(jac-ch1)** *(undocumented from previous session — commit 5c2ea70)*
+- Corrected furi errors: ID 1 (ちょれい→ちょうれい), ID 2 (duplicate かつどう), ID 130, ID 576, ID 586, ID 588–592
+- Stripped hiragana readings from jp field (IDs 572–592): readings belong in furi only
+- Fixed truncated id_text: IDs 578, 580
+
+**fix(jac-ch2)** — text2.pdf audit: 17 fixes across 14 cards
+- **id:151** desc restored: lembur rates (+25%/+35%/+25%) + cap 45 jam/bulan, 360 jam/tahun (April 2024)
+- **id:153** desc restored: 32 jenis sertifikasi konstruksi; level 特級・1〜3級・基礎級 added
+- **id:154** desc restored: visa 在留資格 context added
+- **id:155** desc restored: 基本手当 45〜80% upah harian, 90〜360 hari
+- **id:156** furi fixed: すとれすへっく → すとれすちぇっく (ストレスチェック)
+- **id:160** desc restored: "Kerja >8 jam → 1 jam" (was truncated at "1")
+- **id:163** furi fixed: description text removed from furi field → でんぱほう
+- **id:164** desc restored: 4 tunjangan 療養・休業・遺族・介護 with full context
+- **id:621** furi fixed: extra text removed → ろうどうしゃのせきむ; desc: removed erroneous furigana on "UU"
+- **id:623** desc fixed: 転《ころ》び落→転落《てんらく》; full top-5 ranking added (110/31/27/25/19件)
+- **id:624** desc restored: 5th purpose "perkembangan industri yang sehat" added
+- **id:625** desc restored: 建ぺい率・容積率 context added
+- **id:626** furi fixed: description-length string → はいきぶつしょりほう; desc restored with 元請/sub責任
+- **id:627** furi fixed: description-length string → げすいどうほう; desc restored with 6 reasons + concrete neutralization note
+- 387/387 tests pass
+
+---
+
 ## [4.14.0] - 2026-05-08
 
 ### J4+J2 — JAC Topic Tags + Simulasi per Topik (Agent Sonnet 4.6)
