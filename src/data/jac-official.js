@@ -6,6 +6,7 @@ export const JAC_OFFICIAL = [
   // ── SET 1: st_sample_l.pdf ─────────────────────────────────────────────
   {
     id: "st1_q01", set: "st1", setLabel: "実技 Set 1",
+    topic: "listrik",
     jp: "過大電流が流れた時に、自動的に電気の供給を止める安全装置を、何というか。",
     hiragana: "かだい でんりゅう が ながれた とき に、 じどうてき に でんき の きょうきゅう を とめる あんぜん そうち を、 なんと いうか。",
     id_text: "Ketika arus berlebih mengalir, alat keselamatan yang secara otomatis menghentikan pasokan listrik disebut apa?",
@@ -16,6 +17,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q02", set: "st1", setLabel: "実技 Set 1",
+    topic: "listrik",
     jp: "写真の道具の名前はどれか。",
     hiragana: "しゃしん の どうぐ の なまえ は どれか。",
     id_text: "Apa nama alat dalam foto?",
@@ -27,6 +29,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q03", set: "st1", setLabel: "実技 Set 1",
+    topic: "pipa",
     jp: "写真の道具の名前はどれか。",
     hiragana: "しゃしん の どうぐ の なまえ は どれか。",
     id_text: "Apa nama alat dalam foto?",
@@ -38,6 +41,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q04", set: "st1", setLabel: "実技 Set 1",
+    topic: "pemadam",
     jp: "写真の設備の名前はどれか。",
     hiragana: "しゃしん の せつび の なまえ は どれか。",
     id_text: "Apa nama peralatan dalam foto?",
@@ -49,6 +53,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q05", set: "st1", setLabel: "実技 Set 1",
+    topic: "umum",
     jp: "写真の道具の名前はどれか。",
     hiragana: "しゃしん の どうぐ の なまえ は どれか。",
     id_text: "Apa nama alat dalam foto?",
@@ -60,6 +65,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q06", set: "st1", setLabel: "実技 Set 1",
+    topic: "umum",
     jp: "写真の道具の名前はどれか。",
     hiragana: "しゃしん の どうぐ の なまえ は どれか。",
     id_text: "Apa nama alat dalam foto?",
@@ -71,6 +77,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q07", set: "st1", setLabel: "実技 Set 1",
+    topic: "umum",
     jp: "施工管理とは、施工計画に基づいて、施工者が、所定の（　）の工事目的物を完成させるために必要な管理のことである。",
     hiragana: "いかの ぶんしょうの （ ）に はいる ことばを えらびなさい。せこう かんり とは、 せこう けいかく に もとづいて、 せこうしゃが、 しょてい の （ ）の こうじ もくてきぶつ を かんせい させる ために ひつよう な かんり の ことで ある。",
     id_text: "Manajemen konstruksi adalah manajemen yang diperlukan untuk menyelesaikan objek pekerjaan dengan ( ) yang telah ditentukan berdasarkan rencana konstruksi.",
@@ -81,6 +88,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q08", set: "st1", setLabel: "実技 Set 1",
+    topic: "pipa",
     jp: "配管用炭素鋼鋼管の代表的な接合方法である、ねじ接合方法は、主に（　）に採用されている。",
     hiragana: "いかの ぶんしょうの （ ）に はいる ことばを えらびなさい。はいかんよう たんそこう こうかんの だいひょう てきな せつごう ほうほう である ねじ せつごう ほうほう は、おもに（ ）に さいよう されている。",
     id_text: "Metode sambungan ulir (ねじ接合) pada pipa baja karbon untuk pemipaan (SGP) terutama digunakan pada ( ).",
@@ -91,6 +99,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q09", set: "st1", setLabel: "実技 Set 1",
+    topic: "listrik",
     jp: "2本以上の電線が、負荷を通さないで接触してしまうことを、何というか。",
     hiragana: "2ほん いじょう の でんせん が、 ふか を とおさない で せっしょく して しまう こと を、 なんと いうか。",
     id_text: "Kondisi di mana 2 kabel atau lebih bersentuhan TANPA melalui beban (load) disebut apa?",
@@ -101,6 +110,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q10", set: "st1", setLabel: "実技 Set 1",
+    topic: "telekomunikasi",
     jp: "青い矢印が指し示す設備の名前はどれか。",
     hiragana: "あおい やじるし が さし しめす せつび の なまえ は どれか。",
     id_text: "Apa nama peralatan yang ditunjukkan oleh panah biru? [Diagram jaringan telekomunikasi: gedung komunikasi → tiang → kabel bawah tanah → rumah]",
@@ -112,6 +122,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q11", set: "st1", setLabel: "実技 Set 1",
+    topic: "isolasi",
     jp: "築炉とは、電気炉など、高温になる内側を、（　）で構築する工事のことである。",
     hiragana: "いかの ぶんしょうの （ ）に はいる ことばを えらびなさい。ちくろ とは、でんき ろ など、こうおん になる うちがわを、（ ）で こうちく する こうじ の こと である。",
     id_text: "築炉 adalah pekerjaan membangun bagian dalam yang menjadi suhu tinggi (seperti tungku listrik) menggunakan ( ).",
@@ -122,6 +133,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q12", set: "st1", setLabel: "実技 Set 1",
+    topic: "keselamatan",
     jp: "建設業における三大災害のなかで、最も多いのは、どれか。",
     hiragana: "けんせつぎょう における さん だいさいがい の なか で、 もっとも おおい の は、 どれか。",
     id_text: "Di antara tiga bencana besar konstruksi (三大災害), mana yang paling banyak terjadi?",
@@ -132,6 +144,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q13", set: "st1", setLabel: "実技 Set 1",
+    topic: "listrik",
     jp: "人の体の中を電気が通って、強いショックを受けることを、何というか。",
     hiragana: "ひと の からだ の なか を でんき が かよって、 つよい しょっく を うける こと を、 なんと いうか。",
     id_text: "Kondisi di mana listrik mengalir melalui tubuh manusia dan menerima kejutan kuat disebut apa?",
@@ -142,6 +155,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q14", set: "st1", setLabel: "実技 Set 1",
+    topic: "keselamatan",
     jp: "酸素欠乏に注意するべき作業は、どれか。",
     hiragana: "さんそ けつぼう に ちゅうい するべき さぎょう は、 どれか。",
     id_text: "Pekerjaan apa yang perlu memperhatikan kekurangan oksigen (酸素欠乏)?",
@@ -152,6 +166,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st1_q15", set: "st1", setLabel: "実技 Set 1",
+    topic: "keselamatan",
     jp: "掘削の深さが1.5ｍ以上になる場合、土砂崩れを防ぐため行うことは、どれか。",
     hiragana: "くっさく の ふかさ が 1.5ｍ いじょう に なる ばあい、 どしゃくずれ を ふせぐ ため おこなう こと は、 どれか。",
     id_text: "Jika kedalaman galian mencapai 1.5m atau lebih, apa yang dilakukan untuk mencegah longsor tanah?",
@@ -164,6 +179,7 @@ export const JAC_OFFICIAL = [
   // ── SET 2: st_sample2_l.pdf ────────────────────────────────────────────
   {
     id: "st2_q01", set: "st2", setLabel: "実技 Set 2",
+    topic: "telekomunikasi",
     jp: "光ファイバーの特徴を選べ。",
     hiragana: "ひかりふぁいばー の とくちょう を えらべ。",
     id_text: "Pilih ciri-ciri serat optik.",
@@ -174,6 +190,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q02", set: "st2", setLabel: "実技 Set 2",
+    topic: "telekomunikasi",
     jp: "光ファイバー芯線の線路長や、接続による損失、反射などの異常箇所を測定することができる装置を何というか。",
     hiragana: "ひかりふぁいばー しんせん の せんろちょう や、 せつぞく による そんしつ、 はんしゃ など の いじょう かしょ を そくてい する こと が できる そうち を なんと いうか。",
     id_text: "Alat yang dapat mengukur panjang jalur serat optik, kerugian akibat sambungan, dan mendeteksi titik abnormal seperti pantulan disebut apa?",
@@ -184,6 +201,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q03", set: "st2", setLabel: "実技 Set 2",
+    topic: "telekomunikasi",
     jp: "光ファイバーの先端部を溶かして、接続する方法を何というか。",
     hiragana: "ひかりふぁいばー の せんたんぶ を とかして、 せつぞく する ほうほう を なんと いうか。",
     id_text: "Metode penyambungan serat optik dengan cara MELELEHKAN ujung serat disebut apa?",
@@ -194,6 +212,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q04", set: "st2", setLabel: "実技 Set 2",
+    topic: "isolasi",
     jp: "主に冷凍空気調和機器工事で使う乾いた空気に水分を加える機器は、次のどれか。",
     hiragana: "おも に れいとう くうき ちょうわ きき こうじ で つかう かわいた くうき に すいぶん を くわえる きき は、 つぎ の どれか。",
     id_text: "Alat yang digunakan terutama dalam pekerjaan mesin pendingin AC, yang MENAMBAHKAN kelembapan ke udara kering, adalah yang mana?",
@@ -204,6 +223,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q05", set: "st2", setLabel: "実技 Set 2",
+    topic: "isolasi",
     jp: "主に保温保冷工事で使うガラスを溶かし、繊維状にした保温材は、次のどれか。",
     hiragana: "おも に ほおんほれいこうじ で つかう がらす を とかし、 せんいじょう に した ほおんざい は、 つぎ の どれか。",
     id_text: "Bahan isolasi yang digunakan terutama dalam pekerjaan isolasi termal, dibuat dengan MELELEHKAN KACA menjadi bentuk serat, adalah yang mana?",
@@ -214,6 +234,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q06", set: "st2", setLabel: "実技 Set 2",
+    topic: "umum",
     jp: "写真の道具の名前は、次のどれか。",
     hiragana: "しゃしん の どうぐ の なまえ は、 つぎ の どれか。",
     id_text: "Apa nama alat dalam foto?",
@@ -225,6 +246,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q07", set: "st2", setLabel: "実技 Set 2",
+    topic: "isolasi",
     jp: "配管の保温保冷の屋外露出箇所では、保温筒を（　）で覆い仕上げます。",
     hiragana: "いか の ぶんしょう の （ ） に はいる ことば を えらびなさい。はいかん の ほおんほれい の おくがい ろしゅつ かしょ では、 ほおん とう を （ ） で おおい しあげます。",
     id_text: "Pada bagian pipa isolasi yang terekspos di LUAR RUANGAN, tabung insulasi (保温筒) ditutup menggunakan ( ).",
@@ -235,6 +257,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q08", set: "st2", setLabel: "実技 Set 2",
+    topic: "pipa",
     jp: "上水道やガス配管で使うポリエチレン管の接合は、次のどれか。",
     hiragana: "じょうすいどう や がすはいかん で つかう ぽりえちれんかん の せつごう は、 つぎ の どれか。",
     id_text: "Sambungan pipa polietilen yang digunakan untuk pipa air bersih dan pipa gas adalah yang mana?",
@@ -245,6 +268,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q09", set: "st2", setLabel: "実技 Set 2",
+    topic: "umum",
     jp: "建築板金の丸ダクトの接続方法は、次のどれか。",
     hiragana: "けんちくばんきん の まるだくと の せつぞくほうほう は、 つぎ の どれか。",
     id_text: "Metode sambungan saluran udara bulat (丸ダクト) dalam pekerjaan pelat bangunan adalah yang mana?",
@@ -255,6 +279,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q10", set: "st2", setLabel: "実技 Set 2",
+    topic: "telekomunikasi",
     jp: "電柱を建てる穴を掘る前に、（　）や探針棒をつかって埋設物を確認します。",
     hiragana: "いか の ぶんしょう の （ ） に はいる ことば を えらびなさい。でんちゅう を たてる あな を ほる まえ に、 （ ） や たんしん ぼう を つかって まいせつぶつ を かくにん します。",
     id_text: "Sebelum menggali lubang untuk mendirikan tiang listrik, ( ) dan batang probe (探針棒) digunakan untuk mengkonfirmasi benda terpendam (埋設物).",
@@ -265,6 +290,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q11", set: "st2", setLabel: "実技 Set 2",
+    topic: "telekomunikasi",
     jp: "マンホール、ハンドホール、とう道、引上柱の間を結ぶ設備を何というか。",
     hiragana: "まんほーる、 はんど ほーる、 とうどう、 ひきあげちゅう の あいだ を むすぶ せつび を なんと いうか。",
     id_text: "Peralatan yang menghubungkan antara manhole, handhole, terowongan (とう道), dan tiang pengangkat (引上柱) disebut apa?",
@@ -275,6 +301,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q12", set: "st2", setLabel: "実技 Set 2",
+    topic: "telekomunikasi",
     jp: "管路の土被りは、車道では何メートルを超えなければならないか。",
     hiragana: "かんろ の どかぶり は、 しゃどう で は なんめーとる を こえなければ ならないか。",
     id_text: "Kedalaman tanah (土被り) jalur kabel (管路) di jalan raya harus melebihi berapa meter?",
@@ -285,6 +312,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q13", set: "st2", setLabel: "実技 Set 2",
+    topic: "isolasi",
     jp: "築炉工事での耐火煉瓦の接着に使うものは、次のどれか。",
     hiragana: "ちくろこうじ での たいかれんが の せっちゃく に つかう もの は、 つぎ の どれか。",
     id_text: "Bahan yang digunakan untuk merekatkan bata tahan api dalam pekerjaan築炉 adalah yang mana?",
@@ -295,6 +323,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q14", set: "st2", setLabel: "実技 Set 2",
+    topic: "keselamatan",
     jp: "事業者が新しく労働者を雇い入れた時に行う安全教育を何というか。",
     hiragana: "じぎょうしゃ が あたらしく ろうどうしゃ を やといいれた とき に おこなう あんぜん きょういく を なんと いうか。",
     id_text: "Pendidikan keselamatan yang dilakukan ketika pengusaha MEREKRUT PEKERJA BARU disebut apa?",
@@ -305,6 +334,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "st2_q15", set: "st2", setLabel: "実技 Set 2",
+    topic: "keselamatan",
     jp: "疲労がたまると事故につながるので、（　）を心がける。",
     hiragana: "いか の ぶんしょう の （ ） に はいる ことば を えらびなさい。ひろう が たまると じこ に つながるので、 （ ） を こころがける。",
     id_text: "Karena kelelahan yang menumpuk bisa menyebabkan kecelakaan, yang perlu diperhatikan adalah ( ).",
@@ -317,6 +347,7 @@ export const JAC_OFFICIAL = [
   // ── SET tt1: tt_sample.pdf — 学科 Set 1 (29 soal) ─────────────────────────
   {
     id: "tt1_q01", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "流れよく工事を進めるには、専門工事業者間の（　）が大切である。",
     hiragana: "ながれよく こうじ を すすめる には、 せんもん こうじ ぎょうしゃ かん の （ ） が たいせつ である。",
     id_text: "Untuk memajukan pekerjaan dengan lancar, ( ) antar kontraktor spesialis sangat penting.",
@@ -327,6 +358,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q02", set: "tt1", setLabel: "学科 Set 1",
+    topic: "keselamatan",
     jp: "一般的には、朝礼の最後に、２人１組となって、声を出しながら、（　）を行う。",
     hiragana: "いっぱんてき には、 ちょうれい の さいご に、 ふたりひとくみ と なって、 こえ を だしながら、 （ ） を おこなう。",
     id_text: "Pada umumnya, di akhir apel pagi, berpasangan dua orang, sambil bersuara, melakukan ( ).",
@@ -337,6 +369,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q03", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "職場内での優位性を利用して、業務の適正な範囲を超えて、精神・肉体に苦痛を与える、または職場環境を悪化させる行為は、何と呼ばれるか。",
     hiragana: "しょくばない で の ゆういせい を りよう して、 ぎょうむ の てきせい な はんい を こえて、 せいしん・にくたい に くつう を あたえる、 または しょくば かんきょう を あっか させる こうい は、 なに と よばれる か。",
     id_text: "Tindakan yang menggunakan superioritas di tempat kerja untuk menyebabkan penderitaan fisik/mental melebihi batas wajar disebut apa?",
@@ -347,6 +380,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q04", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "法定労働時間では、働く時間は1日何時間までか。",
     hiragana: "ほうてい ろうどう じかん で は、 はたらく じかん は 1 にち なんじかん まで か。",
     id_text: "Berdasarkan jam kerja yang ditetapkan undang-undang, batas jam kerja per hari adalah berapa jam?",
@@ -357,6 +391,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q05", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "建築基準法では、安全で安心な生活を送れるようにするため、建物の建築や利用についての（　）ルールを定めています。",
     hiragana: "けんちく きじゅんほう で は、 あんぜん で あんしん な せいかつ を おくれる よう に する ため、 たてもの の けんちく や りよう について の （ ） るーる を さだめて います。",
     id_text: "UU Standar Bangunan menetapkan aturan ( ) untuk konstruksi dan penggunaan bangunan demi kehidupan yang aman.",
@@ -367,6 +402,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q06", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "消防法の目的には、火災または地震等の災害による被害を（　）することがあります。",
     hiragana: "しょうぼうほう の もくてき には、 かさい または じしん とう の さいがい による ひがい を （ ） する ことが あります。",
     id_text: "Salah satu tujuan UU Pemadam Kebakaran adalah ( ) kerugian akibat kebakaran atau bencana seperti gempa.",
@@ -377,6 +413,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q07", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "水道法が目指すものはどれか。",
     hiragana: "すいどうほうが めざすものは どれか。",
     id_text: "Apa yang menjadi tujuan UU Air Bersih (水道法)?",
@@ -387,6 +424,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q08", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "電気設備の工事や保安について定めている法律は何か。",
     hiragana: "でんき せつび の こうじ や ほあん について さだめて いる ほうりつ は なに か。",
     id_text: "UU apa yang mengatur konstruksi dan keamanan fasilitas kelistrikan?",
@@ -397,6 +435,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q09", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "建築工事はどれか。",
     hiragana: "けんちくこうじは どれか。",
     id_text: "Yang mana yang termasuk pekerjaan bangunan (建築工事)?",
@@ -407,6 +446,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q10", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "写真の装置は、次のうちどれか。",
     hiragana: "しゃしんの そうちは、 つぎのうち どれか。",
     id_text: "Perangkat dalam foto adalah yang mana?",
@@ -418,6 +458,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q11", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "電気・ガス・水道・電話・インターネットなどに関わる工事を何というか。",
     hiragana: "でんき・がす・すいどう・でんわ・いんたーねっと など に かかわる こうじ を なに と いう か。",
     id_text: "Pekerjaan yang berkaitan dengan listrik, gas, air, telepon, internet disebut apa?",
@@ -428,6 +469,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q12", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "地面を掘って、井戸を作る工事を（　）と言います。",
     hiragana: "じめん を ほって、 いど を つくる こうじ を （ ） と いいます。",
     id_text: "Pekerjaan menggali tanah untuk membuat sumur disebut ( ).",
@@ -438,6 +480,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q13", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "既成杭工法とは、次のうちどれか。",
     hiragana: "きせいくいこうほう とは、 つぎ の うち どれか。",
     id_text: "Metode tiang pancang precast (既成杭工法) adalah yang mana?",
@@ -448,6 +491,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q14", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "柱や梁などの建物の骨組みを、鉄骨を使って組み立てる工事を、何というか。",
     hiragana: "はしら や はり など の たてもの の ほねぐみ を、 てっこつ を つかって くみたてる こうじ を、 なんと いうか。",
     id_text: "Pekerjaan memasang rangka bangunan (kolom, balok, dll) menggunakan baja struktural disebut apa?",
@@ -458,6 +502,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q15", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "鉄筋の周りにコンクリートを流しこむための枠を作る工事は次のうちどれか。",
     hiragana: "てっきんの まわりに こんくりーとを ながしこむための わくを つくる こうじは つぎのうちどれか。",
     id_text: "Pekerjaan membuat cetakan/bekisting untuk mengecor beton di sekitar tulangan adalah yang mana?",
@@ -468,6 +513,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q16", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "写真はどのような工事を行っているか。",
     hiragana: "しゃしんは どのような こうじを おこなっているか。",
     id_text: "Foto menunjukkan pekerjaan apa yang sedang dilakukan?",
@@ -479,6 +525,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q17", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "電気工事を行うために必要な資格を選びなさい。",
     hiragana: "でんき こうじ を おこなう ため に ひつよう な しかく を えらびなさい。",
     id_text: "Pilih kualifikasi yang diperlukan untuk melakukan pekerjaan listrik.",
@@ -489,6 +536,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q18", set: "tt1", setLabel: "学科 Set 1",
+    topic: "pemadam",
     jp: "消防設備工事で設置される設備を選びなさい。",
     hiragana: "しょうぼう せつび こうじ で せっち される せつび を えらびなさい。",
     id_text: "Pilih peralatan yang dipasang dalam pekerjaan peralatan pemadam kebakaran.",
@@ -499,6 +547,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q19", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "建物や建造物を（　）作業を解体工事という。",
     hiragana: "たてもの や けんぞうぶつ を（ ）さぎょう を かいたい こうじ と いう。",
     id_text: "Pekerjaan yang ( ) bangunan atau konstruksi disebut pekerjaan pembongkaran (解体工事).",
@@ -509,6 +558,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q20", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "建設工事には、（　）が必要な作業がある。",
     hiragana: "けんせつこうじには （ ）が ひつようなさぎょうがある。",
     id_text: "Dalam pekerjaan konstruksi, ada pekerjaan yang memerlukan ( ).",
@@ -519,6 +569,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q21", set: "tt1", setLabel: "学科 Set 1",
+    topic: "hukum",
     jp: "特別教育は、社外で受講する方法と、（　）で実施する方法がある。",
     hiragana: "とくべつきょういくは、しゃがいで じゅこうする ほうほうと、（ ）で じっしする ほうほうが ある。",
     id_text: "Pelatihan khusus (特別教育) bisa dilaksanakan secara eksternal dan secara ( ).",
@@ -529,6 +580,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q22", set: "tt1", setLabel: "学科 Set 1",
+    topic: "keselamatan",
     jp: "事故やケガが無く、無事に１日の作業が進められることを願う気持ちを表すために、（　）というあいさつが使われる。",
     hiragana: "じこ や けが が なく、 ぶじ に １にち の さぎょう が すすめられる こと を ねがう きもち を あらわす ため に、（ ） という あいさつ が つかわれる。",
     id_text: "Sapaan yang digunakan untuk mengungkapkan harapan agar pekerjaan sehari berjalan tanpa kecelakaan adalah ( ).",
@@ -539,6 +591,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q23", set: "tt1", setLabel: "学科 Set 1",
+    topic: "keselamatan",
     jp: "（　）という言葉は、建設現場だけではなく、事務所や休憩場所などですれ違ったときにも使える。",
     hiragana: "（ ） という ことば は、 けんせつげんば だけ ではなく、 じむしょ や きゅうけいばしょ など で すれちがった とき にも つかえる。",
     id_text: "Kata ( ) bisa digunakan tidak hanya di lokasi konstruksi, tapi juga saat berpapasan di kantor atau ruang istirahat.",
@@ -549,6 +602,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q24", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "床など水平面に直接付ける墨を何というか。",
     hiragana: "ゆか など すいへいめん に ちょくせつ つける すみ を なんと いうか。",
     id_text: "Garis tinta yang dibuat langsung di permukaan horizontal seperti lantai disebut apa?",
@@ -559,6 +613,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q25", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "斜面や平坦でない土地、低い土地に土砂を盛り上げて、平らな地表を作ることを何というか。",
     hiragana: "しゃめん や へいたん でない とち、 ひくい とち に どしゃ を もりあげて、 たいら な ちひょう を つくる こと を なんと いうか。",
     id_text: "Menimbun tanah/pasir di lereng atau tanah rendah untuk membuat permukaan yang rata disebut apa?",
@@ -569,6 +624,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q26", set: "tt1", setLabel: "学科 Set 1",
+    topic: "umum",
     jp: "鉄筋とこれを覆うコンクリート表面までの距離のことを何というか。",
     hiragana: "てっきんと これをおおう こんくりーと ひょうめんまでの きょりのことを なんと いうか。",
     id_text: "Jarak antara tulangan baja dengan permukaan beton yang menutupinya disebut apa?",
@@ -579,6 +635,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q27", set: "tt1", setLabel: "学科 Set 1",
+    topic: "listrik",
     jp: "ライフライン・設備工事で使われる用語で、部屋の温度、湿度などを調整するという意味の言葉はどれか。",
     hiragana: "らいふらいん・せつびこうじ で つかわれる ようご で、へや の おんど、しつど など を ちょうせいする という いみ の ことば は どれか。",
     id_text: "Istilah dalam pekerjaan lifeline/instalasi yang berarti mengatur suhu dan kelembapan ruangan adalah?",
@@ -589,6 +646,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q28", set: "tt1", setLabel: "学科 Set 1",
+    topic: "keselamatan",
     jp: "安全で過ごしやすく働きやすい環境を作るための5Sは、整理・整頓・清掃・清潔ともう一つは何か。",
     hiragana: "あんぜん で すごしやすく はたらきやすい かんきょう を つくる ため の 5S は、せいり・せいとん・せいそう・せいけつ と もうひとつは なにか。",
     id_text: "5S untuk menciptakan lingkungan kerja yang aman adalah 整理・整頓・清掃・清潔 dan satu lagi adalah?",
@@ -599,6 +657,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt1_q29", set: "tt1", setLabel: "学科 Set 1",
+    topic: "keselamatan",
     jp: "作業員詰め所のルールとして、正しいものは、次のうちどれか。",
     hiragana: "さぎょういんつめしょ の るーる として、 ただしい もの は、 つぎ の うち どれか。",
     id_text: "Manakah yang merupakan aturan yang benar untuk ruang istirahat pekerja?",
@@ -611,6 +670,7 @@ export const JAC_OFFICIAL = [
   // ── SET tt2: tt_sample2.pdf — 学科 Set 2 (36 soal) ────────────────────────
   {
     id: "tt2_q01", set: "tt2", setLabel: "学科 Set 2",
+    topic: "keselamatan",
     jp: "作業開始前に毎日行われる、すべての作業員が集まるミーティングを何というか。",
     hiragana: "さぎょう かいし まえ に まいにち おこなわれる、 すべて の さぎょう いん が あつまる みーてぃんぐ を なん と いう か。",
     id_text: "Pertemuan harian sebelum mulai kerja yang dihadiri semua pekerja disebut apa?",
@@ -621,6 +681,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q02", set: "tt2", setLabel: "学科 Set 2",
+    topic: "keselamatan",
     jp: "写真は何の活動を行っているところか。",
     hiragana: "しゃしん は なん の かつどう を おこなっている ところ か。",
     id_text: "Foto menunjukkan kegiatan apa yang sedang dilakukan?",
@@ -632,6 +693,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q03", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "労災保険の保険料を支払うのは誰か。",
     hiragana: "ろうさい ほけん の ほけんりょう を しはらう の は だれか。",
     id_text: "Siapa yang membayar premi asuransi kecelakaan kerja (労災保険)?",
@@ -642,6 +704,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q04", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "職場における労働者の安全と健康を確保することを目的とした法律は何か。",
     hiragana: "しょくば に おける ろうどうしゃ の あんぜん と けんこう を かくほ する こと を もくてき と した ほうりつ は なにか。",
     id_text: "UU apa yang bertujuan memastikan keselamatan dan kesehatan pekerja di tempat kerja?",
@@ -652,6 +715,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q05", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "建設業法の目的はどれか。",
     hiragana: "けんせつぎょうほう の もくてき は どれか。",
     id_text: "Apa tujuan dari UU Industri Konstruksi (建設業法)?",
@@ -662,6 +726,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q06", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "建設リサイクル法とは、（　）の適切な処理や再資源化を促すための法律です。",
     hiragana: "けんせつ りさいくるほう とは、（ ） の てきせつ な しょり や さいしげんか を うながす ため の ほうりつ です。",
     id_text: "UU Daur Ulang Konstruksi adalah UU yang mendorong pengelolaan & daur ulang ( ) secara tepat.",
@@ -672,6 +737,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q07", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "ガス事業法は、導管によりガスを供給する（　）ガス事業に関して、保安の確保や、ガスの使用者の保護を目的とした法律です。",
     hiragana: "がすじぎょうほう は、 どうかん に より がす を きょうきゅう する （ ）がすじぎょう に かんして、 ほあん の かくほ や、 がす の しよう しゃ の ほご を もくてき と した ほうりつ です。",
     id_text: "UU Usaha Gas mengatur usaha gas ( ) yang memasok gas melalui pipa, bertujuan memastikan keamanan & melindungi pengguna gas.",
@@ -682,6 +748,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q08", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "電気通信工事を実施したり、監督するのに必要な資格は何か。",
     hiragana: "でんき つうしん こうじ を じっし したり、 かんとく する の に ひつよう な しかく は なにか。",
     id_text: "Kualifikasi apa yang diperlukan untuk melaksanakan atau mengawasi pekerjaan telekomunikasi?",
@@ -692,6 +759,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q09", set: "tt2", setLabel: "学科 Set 2",
+    topic: "listrik",
     jp: "電気は扱い方を間違えると、（　）につながる。",
     hiragana: "でんき は あつかいかた を まちがえると、 （ ） に つながる。",
     id_text: "Jika listrik ditangani dengan salah, akan menyebabkan ( ).",
@@ -702,6 +770,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q10", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "ダムの目的は、次のどれか。",
     hiragana: "だむ の もくてき は、 つぎ の どれか。",
     id_text: "Apa tujuan pembangunan bendungan (ダム)?",
@@ -712,6 +781,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q11", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "トンネルは、（　）、道路、水路、およびその他のインフラ設備の建設に使用されます。",
     hiragana: "とんねる は、 （ ）、 どうろ、 すいろ、 および そのた の いんふらせつび の けんせつ に しよう されます。",
     id_text: "Terowongan digunakan untuk pembangunan ( ), jalan raya, saluran air, dan infrastruktur lainnya.",
@@ -722,6 +792,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q12", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "掘削工事によって土の壁が崩れないようにすることを（　）という。",
     hiragana: "くっさくこうじ に よって つち の かべ が くずれない よう に する こと を （ ） と いう。",
     id_text: "Tindakan mencegah dinding tanah runtuh akibat pekerjaan penggalian disebut ( ).",
@@ -732,6 +803,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q13", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "基礎、柱、梁、壁面、床などで構成される建物の構造部分を（　）と言う。",
     hiragana: "きそ、 はしら、 はり、 へきめん、 ゆか など で こうせい される たてもの の こうぞう ぶぶん を （ ） と いう。",
     id_text: "Bagian struktural bangunan yang terdiri dari fondasi, kolom, balok, dinding, lantai dsb disebut ( ).",
@@ -742,6 +814,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q14", set: "tt2", setLabel: "学科 Set 2",
+    topic: "pipa",
     jp: "都市ガス工事で行う工事はどれか。",
     hiragana: "とし がす こうじ で おこなう こうじ は どれか。",
     id_text: "Pekerjaan apa yang dilakukan dalam 都市ガス工事 (pekerjaan gas kota)?",
@@ -752,6 +825,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q15", set: "tt2", setLabel: "学科 Set 2",
+    topic: "pipa",
     jp: "建物内で使用された水を集める施設を作る工事を何というか。",
     hiragana: "たてものない で しよう された みず を あつめる しせつ を つくる こうじ を なんと いうか。",
     id_text: "Pekerjaan membangun fasilitas yang mengumpulkan air yang sudah digunakan di dalam gedung disebut apa?",
@@ -762,6 +836,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q16", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "推進トンネル工事では、あらかじめ工場で製作した管を掘進機に連結し、発進立坑に設置した（　）で地中に押し込む。",
     hiragana: "すいしん とんねる こうじ では、 あらかじめ こうじょう で せいさく した かん を くっしんき に れんけつ し、 はっしん たてこう に せっち した （ ） で ちちゅう に おしこむ。",
     id_text: "Dalam pipe jacking tunnel, pipa yang dibuat di pabrik dihubungkan ke mesin bor dan didorong ke dalam tanah menggunakan ( ) yang dipasang di shaft awal.",
@@ -772,6 +847,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q17", set: "tt2", setLabel: "学科 Set 2",
+    topic: "hukum",
     jp: "機械の運転・操作には、定められた（　）や特別教育を修了しなければならない。",
     hiragana: "きかい の うんてん・そうさ には、 さだめられた （ ） や とくべつ きょういく を しゅうりょう しなければ ならない。",
     id_text: "Untuk mengoperasikan mesin, harus menyelesaikan ( ) yang ditetapkan dan pelatihan khusus.",
@@ -782,6 +858,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q18", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "この写真は、どんな作業を行っているところか。",
     hiragana: "この しゃしん は、 どんな さぎょう を おこなっている ところ か。",
     id_text: "Foto ini menunjukkan pekerjaan apa yang sedang dilakukan?",
@@ -793,6 +870,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q19", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "ブルドーザなどの機械を使って、土砂を押して運ぶことを（　）という。",
     hiragana: "ぶるどーざ など の きかい を つかって、 どしゃ を おして はこぶ こと を （ ） と いう。",
     id_text: "Mendorong dan memindahkan tanah/pasir menggunakan mesin seperti bulldozer disebut ( ).",
@@ -803,6 +881,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q20", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "屋根工事に含まれる工事はどれか。",
     hiragana: "やねこうじ に ふくまれる こうじ は どれか。",
     id_text: "Mana yang termasuk dalam pekerjaan atap (屋根工事)?",
@@ -813,6 +892,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q21", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "型枠を鉄製のパイプで補強することを（　）という。",
     hiragana: "かたわく を てつせい の ぱいぷ で ほきょう することを （ ） と いう。",
     id_text: "Memperkuat bekisting dengan pipa besi disebut ( ).",
@@ -823,6 +903,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q22", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "写真の鉄筋継手は何という工法か。",
     hiragana: "しゃしん の てっきん つぎて は なんという こうほう か。",
     id_text: "Metode sambungan tulangan dalam foto disebut apa?",
@@ -834,6 +915,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q23", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "（　）は、鉄筋と鉄筋のつなぐ部分を加熱して、軸方向に圧力をかけて接合する工法である。",
     hiragana: "（ ）は、 てっきん と てっきん の つなぐ ぶぶん を かねつ して、 じくほうこう に あつりょく を かけて せつごう する こうほう である。",
     id_text: "( ) adalah metode menyambung tulangan dengan memanaskan bagian sambungan lalu memberikan tekanan pada arah aksial.",
@@ -844,6 +926,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q24", set: "tt2", setLabel: "学科 Set 2",
+    topic: "listrik",
     jp: "電気工事は、外線工事と（　）の大きく２つに分かれます。",
     hiragana: "でんき こうじ は、 がいせん こうじ と （ ） の おおきく ２ つ に わかれます。",
     id_text: "Pekerjaan listrik secara garis besar dibagi menjadi pekerjaan luar (外線工事) dan ( ).",
@@ -854,6 +937,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q25", set: "tt2", setLabel: "学科 Set 2",
+    topic: "telekomunikasi",
     jp: "電気通信には、ケーブルを用いた有線方式と、電波を用いた（　）がある。",
     hiragana: "でんき つうしん に は、 けーぶる を もちいた ゆうせん ほうしき と、 でんぱ を もちいた （ ） が ある。",
     id_text: "Telekomunikasi terbagi atas sistem berkabel (有線方式) dan ( ) yang menggunakan gelombang radio.",
@@ -864,6 +948,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q26", set: "tt2", setLabel: "学科 Set 2",
+    topic: "pipa",
     jp: "衛生器具設備工事で、設置する設備を選べ。",
     hiragana: "えいせい きぐ せつび こうじ で、 せっち する せつび を えらべ。",
     id_text: "Pilih peralatan yang dipasang dalam pekerjaan instalasi sanitasi (衛生器具設備工事).",
@@ -874,6 +959,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q27", set: "tt2", setLabel: "学科 Set 2",
+    topic: "pemadam",
     jp: "煙や熱を自動的に感知する装置や、非常ベル、非常放送などの設備を何というか。",
     hiragana: "けむり や ねつ を じどうてき に かんち する そうち や、 ひじょう べる、 ひじょう ほうそう など の せつび を なんと いうか。",
     id_text: "Perangkat yang secara otomatis mendeteksi asap/panas, bel darurat, dan siaran darurat disebut apa?",
@@ -884,6 +970,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q28", set: "tt2", setLabel: "学科 Set 2",
+    topic: "keselamatan",
     jp: "まわりにいる人が（　）と叫んだときは、自分に危険が迫っている可能性があるため、すぐに反応すること。",
     hiragana: "まわり に いる ひと が （ ） と さけんだ とき は、 じぶん に きけん が せまって いる かのうせい が ある ため、 すぐ に はんのう する こと。",
     id_text: "Saat orang di sekitar berteriak ( ), ada kemungkinan bahaya sedang mengancam dirimu, jadi segera bereaksi.",
@@ -894,6 +981,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q29", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "土木工事では、「丁張り」ともいう建物を建てるための基準線、建物の位置、直角、水平が分かるように作る「仮の囲い」は、次のどれか。",
     hiragana: "どぼくこうじ では、「ちょうはり」 ともいう たてもの を たてるため の きじゅんせん、 たてもの の いち、 ちょっかく、 すいへい が わかるよう に つくる 「かりのかこい」 は、 つぎのどれか。",
     id_text: "Di konstruksi sipil, 'pagar sementara' yang disebut juga '丁張り' untuk menentukan garis referensi, posisi, sudut siku, dan ketinggian bangunan adalah?",
@@ -904,6 +992,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q30", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "急な斜面に盛り土をするとき、盛り土が滑り落ちないようにするために、階段状に地盤を削ることは、次のどれか。",
     hiragana: "きゅうな しゃめん に もりど を するとき、 もりど が すべりおちないように するために、 かいだんじょう に じばん を けずることは、 つぎのどれか。",
     id_text: "Saat melakukan urugan di lereng terjal, apa yang dilakukan untuk mencegah urugan meluncur, yaitu memotong tanah dasar secara bertangga?",
@@ -914,6 +1003,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q31", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "日本で古くから使われている面積の単位は何か。",
     hiragana: "にほん で ふるく から つかわれている めんせき の たんい は なにか。",
     id_text: "Satuan luas yang sudah lama digunakan di Jepang adalah apa?",
@@ -924,6 +1014,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q32", set: "tt2", setLabel: "学科 Set 2",
+    topic: "umum",
     jp: "型枠の再利用のために型枠から釘を抜き取ることを何というか。",
     hiragana: "かたわく の さいりよう の ために かたわく から くぎ を ぬきとる こと を なんというか。",
     id_text: "Mencabut paku dari bekisting agar bisa digunakan kembali disebut apa?",
@@ -934,6 +1025,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q33", set: "tt2", setLabel: "学科 Set 2",
+    topic: "listrik",
     jp: "電気工事で、電気が流れる部分から、他の部分に電流が流れないようにすることは、次のどれか。",
     hiragana: "でんきこうじ で、 でんき が ながれる ぶぶん から、 た の ぶぶん に でんりゅう が ながれない よう に すること は、 つぎのどれか。",
     id_text: "Dalam pekerjaan listrik, tindakan mencegah arus mengalir dari bagian berlistrik ke bagian lain adalah?",
@@ -944,6 +1036,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q34", set: "tt2", setLabel: "学科 Set 2",
+    topic: "listrik",
     jp: "電気工事で、電気機器や回路と大地を電気的に接続することは、次のどれか。",
     hiragana: "でんきこうじ で、 でんききき や かいろ と だいち を でんきてき に せつぞく する こと は、 つぎのどれか。",
     id_text: "Dalam pekerjaan listrik, menghubungkan perangkat listrik atau rangkaian dengan tanah (bumi) secara elektrikal adalah?",
@@ -954,6 +1047,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q35", set: "tt2", setLabel: "学科 Set 2",
+    topic: "keselamatan",
     jp: "（　）とは、必要なものを決められた場所に置くことである。",
     hiragana: "（ ） とは、 ひつよう な もの を きめられた ばしょ に おく こと で ある。",
     id_text: "( ) adalah meletakkan barang yang diperlukan di tempat yang sudah ditentukan.",
@@ -964,6 +1058,7 @@ export const JAC_OFFICIAL = [
   },
   {
     id: "tt2_q36", set: "tt2", setLabel: "学科 Set 2",
+    topic: "keselamatan",
     jp: "服装に関する注意のうち、正しいものはどれか。",
     hiragana: "ふくそう に かんする ちゅうい の うち、 ただしい もの は どれか。",
     id_text: "Mana yang merupakan perhatian yang benar mengenai pakaian kerja?",
