@@ -20,6 +20,10 @@ export default function GlossaryMode({ onExit, track }) {
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
   const [compactView, setCompactView] = useState(true); // G2: true=click-to-expand; false=always-show-all
+  // G3: select mode for mini deck export
+  const [selectMode, setSelectMode] = useState(false);
+  const [selected, setSelected] = useState(new Set());
+  const [exportDone, setExportDone] = useState(false);
   const navRef = useRef(null);
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
   const sectionRefs = useRef({});
@@ -88,6 +92,52 @@ export default function GlossaryMode({ onExit, track }) {
     if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 52, behavior: 'smooth' }); setActiveLetter(letter); }
   }
 
+  // G3: toggle select mode
+  function toggleSelectMode() {
+    setSelectMode((v) => { if (v) setSelected(new Set()); return !v; });
+    setExportDone(false);
+  }
+
+  // G3: toggle card selection
+  function toggleCard(id, e) {
+    e.stopPropagation();
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  }
+
+  // G3: export selected cards as Anki TSV
+  function exportMiniDeck() {
+    const cards = sorted.filter((c) => selected.has(c.id));
+    if (cards.length === 0) return;
+    // Anki TSV: front\tback\ttags
+    const rows = cards.map((c) => {
+      const front = `${stripFuri(c.jp)}${c.furi ? `[${c.furi}]` : ''}`;
+      const back = `${c.id_text}${c.desc ? `<br>${c.desc}` : ''}`;
+      const tags = `ssw-konstruksi ${c.category}`;
+      return `${front}\t${back}\t${tags}`;
+    });
+    const content = rows.join('\n');
+    const blob = new Blob([content], { type: 'text/plain; charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ssw-mini-deck-${cards.length}kartu.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setExportDone(true);
+    setTimeout(() => setExportDone(false), 2500);
+  }
+
+  // G3: select all visible
+  function selectAll() {
+    setSelected(new Set(sorted.map((c) => c.id)));
+  }
+
   const catMap = useMemo(() => { const m = {}; CATEGORIES.forEach((c) => { m[c.key] = c; }); return m; }, []);
 
   return (
@@ -107,6 +157,14 @@ export default function GlossaryMode({ onExit, track }) {
                 border: `1px solid ${compactView ? T.border : 'rgba(251,191,36,0.35)'}`,
                 color: compactView ? T.textMuted : T.gold }}>
               {compactView ? '≡ Kompak' : '⊞ Lebar'}
+            </button>
+            {/* G3: select mode toggle */}
+            <button onClick={toggleSelectMode}
+              style={{ fontFamily: 'inherit', fontSize: 11, padding: '2px 8px', borderRadius: 99, cursor: 'pointer',
+                background: selectMode ? 'rgba(99,102,241,0.15)' : T.surface,
+                border: `1px solid ${selectMode ? 'rgba(99,102,241,0.45)' : T.border}`,
+                color: selectMode ? '#818cf8' : T.textMuted }}>
+              {selectMode ? `✕ Batal (${selected.size})` : '☑ Pilih'}
             </button>
           </div>
           {trackCatKeys && (
@@ -180,21 +238,28 @@ export default function GlossaryMode({ onExit, track }) {
             {items.map((c) => {
               const isOpen = !compactView || expanded === c.id;
               const catInfo = catMap[c.category];
+              const isSelected = selectMode && selected.has(c.id);
               return (
                 <div
                   key={c.id}
-                  onClick={() => setExpanded(isOpen ? null : c.id)}
+                  onClick={selectMode ? (e) => toggleCard(c.id, e) : () => setExpanded(isOpen ? null : c.id)}
                   className={G.termRow}
-                  style={{ background: isOpen ? T.surface : 'transparent' }}
+                  style={{ background: isSelected ? 'rgba(99,102,241,0.12)' : isOpen ? T.surface : 'transparent',
+                    borderLeft: isSelected ? '2px solid #818cf8' : '2px solid transparent' }}
                 >
                   <div className={G.termMain}>
                     <div className={G.termLeft}>
+                      {selectMode && (
+                        <span style={{ fontSize: 16, lineHeight: 1, marginRight: 4, color: isSelected ? '#818cf8' : T.border }}>
+                          {isSelected ? '☑' : '☐'}
+                        </span>
+                      )}
                       {catInfo && <span className={G.termCatEmoji}>{catInfo.emoji}</span>}
                       <span className={G.termJp}>{stripFuri(c.jp)}</span>
                     </div>
                     <span className={G.termId}>{c.id_text}</span>
                   </div>
-                  {isOpen && (
+                  {!selectMode && isOpen && (
                     <div className={G.termDetail}>
                       {c.furi && (
                         <div className={G.termFuriRow}>
@@ -232,6 +297,34 @@ export default function GlossaryMode({ onExit, track }) {
           </div>
         ))}
       </div>
+
+      {/* G3: Export mini deck footer */}
+      {selectMode && (
+        <div style={{
+          position: 'fixed', bottom: 56, left: 0, right: 0, zIndex: 40,
+          background: T.bg, borderTop: `1px solid ${T.border}`,
+          padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8,
+        }}>
+          <button onClick={selectAll}
+            style={{ fontFamily: 'inherit', fontSize: 12, padding: '6px 12px', borderRadius: 8, cursor: 'pointer',
+              background: T.surface, border: `1px solid ${T.border}`, color: T.textMuted, flexShrink: 0 }}>
+            Semua ({sorted.length})
+          </button>
+          <div style={{ flex: 1, fontSize: 12, color: T.textMuted }}>
+            {selected.size > 0 ? `${selected.size} kartu dipilih` : 'Tap kartu untuk pilih'}
+          </div>
+          <button
+            onClick={exportMiniDeck}
+            disabled={selected.size === 0}
+            style={{ fontFamily: 'inherit', fontSize: 12, padding: '6px 14px', borderRadius: 8, cursor: selected.size === 0 ? 'not-allowed' : 'pointer',
+              background: exportDone ? 'rgba(34,197,94,0.15)' : selected.size > 0 ? 'rgba(99,102,241,0.15)' : T.surface,
+              border: `1px solid ${exportDone ? 'rgba(34,197,94,0.45)' : selected.size > 0 ? 'rgba(99,102,241,0.45)' : T.border}`,
+              color: exportDone ? '#4ade80' : selected.size > 0 ? '#818cf8' : T.border,
+              fontWeight: 600, flexShrink: 0 }}>
+            {exportDone ? '✓ Diunduh' : '⬇ Ekspor Anki'}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
