@@ -28,6 +28,7 @@ export default function FlipCard({
   onTouchStart,
   onTouchMove,
   onTouchEnd,
+  onCatFilter,
   audioEnabled = true,
   furiganaPolicy = 'always',
 }) {
@@ -62,7 +63,9 @@ export default function FlipCard({
           {cat && (
             <span
               className={S.catBadgeFront}
-              style={{ background: `${catColor}22`, color: catColor }}
+              style={{ background: `${catColor}22`, color: catColor, cursor: onCatFilter ? 'pointer' : 'default' }}
+              onClick={onCatFilter ? (e) => { e.stopPropagation(); onCatFilter(cat.key); } : undefined}
+              title={onCatFilter ? `Filter: ${cat.label}` : undefined}
             >
               {cat.emoji} {cat.label}
             </span>

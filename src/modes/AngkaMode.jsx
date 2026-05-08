@@ -105,6 +105,11 @@ function PanelView({ onExit, onStartQuiz }) {  // onStartQuiz(mode)
                     >
                       <div className={A.angkaLarge} style={{ color: g.color }}>{item.angka}</div>
                       <div className={A.konteksFull}>{item.konteks}</div>
+                      {item.soal && (
+                        <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', background: 'rgba(0,0,0,0.12)', borderRadius: 6, padding: '7px 10px', marginTop: 6, lineHeight: 1.6, borderLeft: `3px solid ${g.color}50` }}>
+                          <span style={{ fontWeight: 700, color: g.color }}>問 </span>{item.soal}
+                        </div>
+                      )}
                       {item.mnemonic && (
                         <div style={{ fontSize: 11, color: '#9CA3AF', background: 'rgba(0,0,0,0.15)', borderRadius: 6, padding: '6px 8px', marginTop: 6, lineHeight: 1.5 }}>
                           💡 {item.mnemonic}

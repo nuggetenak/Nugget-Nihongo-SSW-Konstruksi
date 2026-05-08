@@ -80,7 +80,9 @@ export default function FlashcardMode({
 
   const displayCards = search === '__starred__'
     ? order.filter((c) => starred.has(c.id))
-    : search.trim()
+    : search.startsWith('__cat:')
+      ? order.filter((c) => c.category === search.slice(6))
+      : search.trim()
       ? order.filter((c) => {
           const q = search.toLowerCase();
           return (c.jp     || '').toLowerCase().includes(q) ||
@@ -241,6 +243,7 @@ export default function FlashcardMode({
           showHint={showHint}
           borderColor={borderColor}
           swipeDelta={swipeDelta}
+          onCatFilter={(key) => { setSearch(`__cat:${key}`); sessionStorage.setItem('ssw-fc-search', `__cat:${key}`); setIdx(0); }}
           onTouchStart={(e) => {
             setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
           }}

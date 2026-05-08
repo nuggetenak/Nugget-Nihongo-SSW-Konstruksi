@@ -180,6 +180,36 @@ export default function ExportMode({ onExit }) {
       <button className={S.btnPrimary} style={{ marginBottom: 10 }} onClick={handleExport}>
         📤 Ekspor Progress ke File
       </button>
+      <button
+        onClick={() => {
+          try {
+            const full = exportAll();
+            const delta = {
+              _type: 'ssw-srs-delta',
+              _storage_version: full._storage_version,
+              exported_at: new Date().toISOString(),
+              srs: full.srs,
+              // Also include known/starred for SRS context
+              known: full.progress?.known ?? [],
+              starred: full.progress?.starred ?? [],
+            };
+            const blob = new Blob([JSON.stringify(delta, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ssw-srs-delta-${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            setStatus({ type: 'ok', msg: `✅ Delta SRS disimpan: ${summary.srsCount} kartu SRS.` });
+          } catch (e) { setStatus({ type: 'err', msg: `❌ Gagal: ${e.message}` }); }
+        }}
+        style={{ fontFamily: 'inherit', width: '100%', padding: '12px 0', borderRadius: T.r.lg, border: `1px solid ${T.border}`, background: T.surface, color: T.textMuted, cursor: 'pointer', fontSize: 14, fontWeight: 600, marginBottom: 10 }}
+      >
+        🧠 Ekspor Delta SRS Saja
+      </button>
+      <p style={{ fontSize: 11, color: T.textDim, marginBottom: 16, lineHeight: 1.5 }}>
+        Delta SRS = hanya data ulasan (kartu hafal + jadwal SRS) tanpa statistik kuis. Lebih kecil, berguna untuk backup rutin harian.
+      </p>
 
       {/* Import — show preview panel when file is loaded */}
       {previewData ? (

@@ -86,6 +86,37 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
       <h2 className={S.pageTitle}>Soal Teknis · Lifeline</h2>
       <p className={S.pageSub}>{totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik</p>
 
+      {/* W5: Suggested order — show recommended next set */}
+      {(() => {
+        // Untouched sets first, then sets with lowest score
+        const untouched = TEORI_PRAKTIK.filter((s) => !wgScores[s.id]);
+        const touched = TEORI_PRAKTIK.filter((s) => wgScores[s.id]).sort((a, b) => {
+          const pa = wgScores[a.id]?.pct ?? 100;
+          const pb = wgScores[b.id]?.pct ?? 100;
+          return pa - pb;
+        });
+        const suggested = untouched[0] || touched[0];
+        if (!suggested) return null;
+        const isUntouched = !wgScores[suggested.id];
+        const savedPct = wgScores[suggested.id]?.pct;
+        return (
+          <button
+            onClick={() => { setLemahMode(false); setActiveSet(suggested.id); }}
+            style={{ width: '100%', textAlign: 'left', fontFamily: 'inherit', cursor: 'pointer', background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.25)', borderRadius: 12, padding: '10px 14px', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}
+          >
+            <span style={{ fontSize: 20 }}>⭐</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--ssw-amber)', marginBottom: 2 }}>DISARANKAN BERIKUTNYA</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ssw-text)' }}>{suggested.emoji || '📄'} {suggested.title}</div>
+              <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginTop: 1 }}>
+                {isUntouched ? 'Belum pernah dikerjakan' : `Skor terakhir: ${savedPct}% — perlu diperbaiki`}
+              </div>
+            </div>
+            <span style={{ fontSize: 12, color: 'var(--ssw-textDim)' }}>→</span>
+          </button>
+        );
+      })()}
+
       {/* W4: Total score across all sets */}
       {(() => {
         const scored = TEORI_PRAKTIK.filter((s) => wgScores[s.id]);

@@ -48,16 +48,18 @@ export default function GlossaryMode({ onExit, track }) {
     const map = {};
     sorted.forEach((c) => {
       const first = (c.furi || '?')[0];
-      // BUG-08: non-hiragana/katakana initials (romaji, kanji, etc.) → '#' bucket
-      const key = /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(first) ? first : '#';
+      // G4: non-hiragana/katakana → use actual first char as key (kanji, romaji, etc.)
+      // This allows navigation to specific kanji/romaji groups instead of one big '#' bucket
+      const isKana = /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(first);
+      const key = isKana ? first : first;
       if (!map[key]) map[key] = [];
       map[key].push(c);
     });
-    // Move '#' to end of nav
+    // Sort: hiragana/katakana first (by unicode order), then others alphabetically
     const entries = Object.entries(map);
-    const other = entries.filter(([k]) => k === '#');
-    const hira = entries.filter(([k]) => k !== '#');
-    return [...hira, ...other];
+    const kana = entries.filter(([k]) => /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(k));
+    const other = entries.filter(([k]) => !/^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(k)).sort(([a], [b]) => a.localeCompare(b));
+    return [...kana, ...other];
   }, [sorted]);
 
   const letters = useMemo(() => groups.map(([l]) => l), [groups]);

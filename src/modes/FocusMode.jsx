@@ -8,6 +8,8 @@ import S from './modes.module.css';
 
 export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onSessionEnd }) {
   const [activeCat, setActiveCat] = useState(null);
+  // F3: track which categories trained this session
+  const [trainedKeys, setTrainedKeys] = useState(new Set());
 
   const catStats = useMemo(() => {
     return CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')
@@ -23,6 +25,19 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onS
       .filter((c) => c.total > 0)
       .sort((a, b) => a.score - b.score);
   }, [known, quizWrong]);
+
+  // F2: after sprint, mark trained and auto-suggest next weakest
+  const handleSprintEnd = (sessionData) => {
+    if (onSessionEnd) onSessionEnd(sessionData);
+    setTrainedKeys((prev) => new Set([...prev, activeCat]));
+    // Auto-advance to next weakest untrained category
+    const nextCat = catStats.find((c) => c.key !== activeCat && !trainedKeys.has(c.key));
+    if (nextCat) {
+      setActiveCat(nextCat.key);
+    } else {
+      setActiveCat(null);
+    }
+  };
 
   if (activeCat) {
     const cat = catStats.find((c) => c.key === activeCat);
@@ -46,7 +61,7 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onS
               : 'Sudah cukup baik! Sprint ini untuk mempertahankan dan mempercepat recall.'}
           </div>
         </div>
-        <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} onSessionEnd={onSessionEnd} />
+        <SprintMode cards={cat.cards} onExit={() => setActiveCat(null)} onSessionEnd={handleSprintEnd} />
       </div>
     );
   }
@@ -56,6 +71,23 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onS
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
       <h2 className={S.pageTitle}>🎯 Mode Fokus</h2>
       <p className={S.pageSub}>Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.</p>
+
+      {/* F3: Session progress counter */}
+      {trainedKeys.size > 0 && (
+        <div style={{ background: 'var(--ssw-surface)', border: '1px solid var(--ssw-border)', borderRadius: 12, padding: '10px 14px', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontSize: 18 }}>💪</span>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: T.correct }}>
+              {trainedKeys.size} dari {catStats.length} kategori dilatih sesi ini
+            </div>
+            <div style={{ fontSize: 11, color: 'var(--ssw-textDim)' }}>
+              {catStats.filter((c) => !trainedKeys.has(c.key)).length > 0
+                ? `Berikutnya: ${catStats.find((c) => !trainedKeys.has(c.key))?.emoji} ${catStats.find((c) => !trainedKeys.has(c.key))?.label}`
+                : 'Semua kategori sudah dilatih! 🎉'}
+            </div>
+          </div>
+        </div>
+      )}
 
       {catStats.length === 0 && (
         <div className={S.emptyInMode}>
@@ -76,6 +108,7 @@ export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onS
             <div className={S.rowSpreadMb}>
               <span style={{ fontSize: 14 }}>{c.emoji} {c.label}</span>
               <span style={{ fontSize: 12, fontWeight: 700, color: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong }}>
+                {trainedKeys.has(c.key) && <span style={{ color: T.correct, marginRight: 4 }}>✓</span>}
                 {c.score}%
               </span>
             </div>

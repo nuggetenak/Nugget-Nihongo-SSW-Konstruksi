@@ -80,9 +80,9 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
 
   if (!started) {
     const DIFF = [
-      { key: 'easy', label: 'Mudah', desc: 'Jawaban beda kategori', color: T.correct },
-      { key: 'medium', label: 'Sedang', desc: 'Campuran', color: T.gold },
-      { key: 'hard', label: 'Sulit', desc: 'Jawaban mirip', color: T.wrong },
+      { key: 'easy', label: 'Mudah', desc: 'Jawaban beda kategori', detail: 'Pilihan jawaban dari kategori berbeda — mudah disingkirkan. Cocok untuk belajar kosakata baru.', color: T.correct },
+      { key: 'medium', label: 'Sedang', desc: 'Campuran', detail: 'Campuran jawaban satu dan beda kategori. Perlu teliti membaca pilihan.', color: T.gold },
+      { key: 'hard', label: 'Sulit', desc: 'Jawaban mirip', detail: 'Semua pilihan dari kategori sama — mirip bunyi/makna. Mendekati kesulitan ujian asli JAC.', color: T.wrong },
     ];
     const DELAYS = [{ v: 1000, l: '1 dtk' }, { v: 1500, l: '1.5 dtk' }, { v: 2000, l: '2 dtk' }, { v: 0, l: 'Manual' }];
 
@@ -138,6 +138,9 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
               <span style={{ fontWeight: 600 }}>{d.label}</span>
               <span style={{ fontSize: 11, color: T.textDim }}>{d.desc}</span>
             </button>
+            {difficulty === d.key && (
+              <div style={{ fontSize: 11, color: d.color, padding: '4px 12px 8px', lineHeight: 1.5 }}>{d.detail}</div>
+            )}
           ))}
         </div>
 

@@ -85,6 +85,12 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                       {pair.traps.map((trap, ti) => <div key={ti} className={D.wrongBox}>{trap}</div>)}
                     </div>
                   </div>
+                  {pair.explanation && (
+                    <div style={{ marginTop: 10, padding: '10px 12px', background: 'var(--ssw-surfaceActive)', borderRadius: 10, borderLeft: '3px solid var(--ssw-amber)' }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--ssw-amber)', marginBottom: 4 }}>💡 Kenapa sering tertukar?</div>
+                      <div style={{ fontSize: 12, color: 'var(--ssw-text)', lineHeight: 1.6 }}>{pair.explanation}</div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -272,6 +278,12 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
               {pair.traps.map((trap, ti) => <div key={ti} className={D.wrongBox}>{trap}</div>)}
             </div>
           </div>
+          {pair.explanation && (
+            <div style={{ marginTop: 10, padding: '10px 12px', background: 'var(--ssw-surfaceActive)', borderRadius: 10, borderLeft: '3px solid var(--ssw-amber)' }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--ssw-amber)', marginBottom: 4 }}>💡 Kenapa sering tertukar?</div>
+              <div style={{ fontSize: 12, color: 'var(--ssw-text)', lineHeight: 1.6 }}>{pair.explanation}</div>
+            </div>
+          )}
         </div>
       )}
       {selected !== null && (
