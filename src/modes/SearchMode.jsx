@@ -5,6 +5,7 @@ import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import { get as storageGet } from '../storage/engine.js';
+import { getWrongCount } from '../utils/wrong-tracker.js';
 import S from './modes.module.css';
 
 const HISTORY_KEY = 'ssw-search-history';
@@ -142,7 +143,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         {results.map((c) => {
           const cat = getCatInfo(c.category);
           // SR4: User accuracy for this card
-          const wrongCount = progressData?.quizWrong?.[c.id] ?? 0;
+          const wrongCount = getWrongCount(progressData?.quizWrong?.[c.id]);
           const isKnown = (progressData?.known ?? []).includes(c.id);
           return (
             <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
