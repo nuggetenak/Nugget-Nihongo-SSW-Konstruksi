@@ -17,6 +17,8 @@ export default function ToolStrip({
   onToggleStarFilter,
   flipped,
   rated,
+  readOnly,
+  onToggleReadOnly,
 }) {
   const tools = [
     {
@@ -45,6 +47,13 @@ export default function ToolStrip({
       active: starFilterActive,
       border: `${T.gold}80`, bg: 'rgba(251,191,36,0.12)', color: T.gold,
       onClick: onToggleStarFilter,
+    },
+    {
+      emoji: readOnly ? '👁' : '📝',
+      label: readOnly ? 'Baca' : 'Rating',
+      active: readOnly,
+      border: 'rgba(99,102,241,0.4)', bg: 'rgba(99,102,241,0.1)', color: '#818cf8',
+      onClick: onToggleReadOnly,
     },
   ];
 

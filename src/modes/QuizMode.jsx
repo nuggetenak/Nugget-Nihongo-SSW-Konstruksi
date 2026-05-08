@@ -1,7 +1,7 @@
 // ─── QuizMode.jsx v3.1 (phaseA) ───────────────────────────────────────────────
 // A.1: Fixed BUG-02 — _seenPool moved from module scope into useRef.
 //      Module-scope Set persisted across mode entries; useRef resets correctly.
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useMemo } from 'react';
 import { T } from '../styles/theme.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
@@ -9,10 +9,11 @@ import { usePersistedState } from '../hooks/usePersistedState.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
+import { CATEGORIES } from '../data/categories.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
-export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWrong, audioEnabled = false }) {
+export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWrong, audioEnabled = false, filterIds = null }) {
   const [difficulty, setDifficulty] = useState('medium');
   const [quizCount, setQuizCount] = useState(() => storageGet('prefs')?.quizQuestionCount ?? 10);
   const [lemahMode, setLemahMode] = useState(false);
@@ -25,11 +26,22 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
   // preventing stale seen-card memory across separate mode sessions.
   const seenPool = useRef(new Set());
 
-  const lemahCards = cards
+  // SB3: scope cards if filterIds provided (launched from SumberMode)
+  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+
+  const lemahCards = baseCards
     .filter((c) => getWrongCount(quizWrong[c.id]) > 0)
     .sort((a, b) => getWrongCount(quizWrong[b.id]) - getWrongCount(quizWrong[a.id]));
 
-  const activeCards = lemahMode && lemahCards.length > 0 ? lemahCards : cards;
+  const activeCards = lemahMode && lemahCards.length > 0 ? lemahCards : baseCards;
+
+  // Q5: category filter
+  const [selectedCat, setSelectedCat] = useState('all');
+  const availableCats = useMemo(() => {
+    const catKeys = new Set(baseCards.map((c) => c.category));
+    return ['all', ...[...catKeys]];
+  }, [baseCards]);
+  const catFilteredCards = selectedCat === 'all' ? activeCards : activeCards.filter((c) => c.category === selectedCat);
 
   const [questions, setQuestions] = useState([]);
 
@@ -45,10 +57,10 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
 
   const startQuiz = () => {
     // Compute questions here (not in useMemo) to avoid ref-in-render lint error
-    const unseen = activeCards.filter((c) => !seenPool.current.has(c.id));
+    const unseen = catFilteredCards.filter((c) => !seenPool.current.has(c.id));
     let pool;
     if (unseen.length >= quizCount) { pool = shuffle(unseen).slice(0, quizCount); }
-    else { seenPool.current.clear(); pool = shuffle(activeCards).slice(0, quizCount); }
+    else { seenPool.current.clear(); pool = shuffle(catFilteredCards).slice(0, quizCount); }
     pool.forEach((c) => seenPool.current.add(c.id));
     const raw = generateQuiz(pool, allCards, difficulty, quizWrong);
     const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
@@ -72,7 +84,6 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
       { key: 'medium', label: 'Sedang', desc: 'Campuran', color: T.gold },
       { key: 'hard', label: 'Sulit', desc: 'Jawaban mirip', color: T.wrong },
     ];
-    const COUNTS = [10, 20, 30, activeCards.length];
     const DELAYS = [{ v: 1000, l: '1 dtk' }, { v: 1500, l: '1.5 dtk' }, { v: 2000, l: '2 dtk' }, { v: 0, l: 'Manual' }];
 
     const pillStyle = (on) => ({
@@ -96,12 +107,12 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
         </div>
 
         <h2 className={S.pageTitle} style={{ fontSize: 20 }}>Kuis Flashcard</h2>
-        <p className={S.pageSub}>{activeCards.length} kartu tersedia {lemahMode ? '(mode lemah)' : ''}</p>
+        <p className={S.pageSub}>{catFilteredCards.length} kartu tersedia {lemahMode ? '(mode lemah)' : ''}{selectedCat !== 'all' ? ` · ${selectedCat}` : ''}</p>
 
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
-          {COUNTS.map((n, i) => {
-            const label = i === COUNTS.length - 1 ? 'Semua' : String(n);
+          {[10, 20, 30, catFilteredCards.length].map((n, i) => {
+            const label = i === 3 ? 'Semua' : String(n);
             return (
               <button key={n} onClick={() => {
                 setQuizCount(n);
@@ -154,6 +165,22 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
                 ))}
               </div>
             </div>
+            {/* Q5: Category filter */}
+            {availableCats.length > 1 && (
+              <div style={{ marginTop: 12 }}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: T.text, marginBottom: 8 }}>Filter Kategori</div>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {availableCats.map((key) => {
+                    const meta = key === 'all' ? { label: 'Semua', emoji: '📚' } : (CATEGORIES.find((c) => c.key === key) || { label: key, emoji: '📁' });
+                    return (
+                      <button key={key} onClick={() => setSelectedCat(key)} style={{ ...pillStyle(selectedCat === key), fontSize: 11 }}>
+                        {meta.emoji} {meta.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

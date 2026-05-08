@@ -227,8 +227,9 @@ export default function ModeRouter() {
       onFinish: makeFinishHandler('kuis'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
+      filterIds: modeParams?.filterIds ?? null,
     },
-    sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint') },
+    sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint'), filterIds: modeParams?.filterIds ?? null },
     fokus:    { known, unknown, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
     stats:    { known, unknown, quizWrong, srs, streakData, sessions, onExit: exitMode },
     angka:    { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
@@ -246,6 +247,7 @@ export default function ModeRouter() {
     dengar:   { cards: filteredCards, allCards: CARDS, onExit: exitMode, onSessionEnd: makeSessionEnd('dengar') },
     catatan:  { cards: filteredCards, onExit: exitMode },
     kuisprod: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('kuisprod'), audioEnabled },
+    sumber:   { onExit: exitMode, onNavigate: goMode },
   };
 
   const props = modeProps[mode] ?? { onExit: exitMode };

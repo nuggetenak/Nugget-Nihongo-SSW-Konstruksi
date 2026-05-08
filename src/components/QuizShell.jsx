@@ -22,6 +22,7 @@ export default function QuizShell({
   onAnswer,
   onFinish,
   onRetryWrong,
+  onAddToSRS,
   timer = 0,
   showHint = false,
   renderExtra,
@@ -122,6 +123,8 @@ export default function QuizShell({
             ? handleRestart
             : undefined
         }
+        onAddToSRS={onAddToSRS}
+        srsWrongCount={results.filter((r) => !r.isCorrect).length}
         onExit={onExit}
       />
     );

@@ -24,6 +24,8 @@ export default function ResultScreen({
   review = [],
   onRestart,
   onRetryWrong,
+  onAddToSRS,
+  srsWrongCount,
   onExit,
 }) {
   ensureShake();
@@ -70,6 +72,11 @@ export default function ResultScreen({
         {onRetryWrong && wrongCount > 0 && (
           <button className={s.btnWrong} onClick={onRetryWrong}>
             ❌ Latih {wrongCount} salah
+          </button>
+        )}
+        {onAddToSRS && (srsWrongCount ?? wrongCount) > 0 && (
+          <button className={s.btnWrong} style={{ background: 'rgba(99,102,241,0.12)', borderColor: 'rgba(99,102,241,0.35)', color: '#818cf8' }} onClick={onAddToSRS}>
+            🧠 Tambah ke Ulasan SRS
           </button>
         )}
       </div>

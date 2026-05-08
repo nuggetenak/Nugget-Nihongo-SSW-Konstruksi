@@ -25,7 +25,7 @@ function savePersonalBest(score, timeline) {
   storageSet('prefs', (p) => ({ ...p, sprintBest: Math.max(p?.sprintBest ?? 0, score), sprintBestTimeline: timeline }));
 }
 
-export default function SprintMode({ cards, onExit, onSessionEnd }) {
+export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = null }) {
   const [phase, setPhase] = useState('ready');
   const [order, setOrder] = useState([]);
   const [idx, setIdx] = useState(0);
@@ -45,19 +45,21 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
   const [ghostScore, setGhostScore] = useState(0);
 
   // B2: available categories from the cards prop
+  // SB3: if filterIds set (launched from SumberMode), scope to those cards
+  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
   const availableCats = useMemo(() => {
-    const catKeys = new Set(cards.map((c) => c.category));
+    const catKeys = new Set(baseCards.map((c) => c.category));
     return [
       { key: 'all', label: 'Semua Kategori', emoji: '📚' },
       ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key))
         .map((c) => ({ key: c.key, label: c.label, emoji: c.emoji })),
     ];
-  }, [cards]);
+  }, [baseCards]);
 
   const filteredCards = useMemo(() => {
-    if (selectedCat === 'all') return cards;
-    return cards.filter((c) => c.category === selectedCat);
-  }, [cards, selectedCat]);
+    if (selectedCat === 'all') return baseCards;
+    return baseCards.filter((c) => c.category === selectedCat);
+  }, [baseCards, selectedCat]);
 
   useEffect(() => { setOrder(shuffle(filteredCards)); }, [filteredCards]);
 
@@ -149,7 +151,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd }) {
                   <span>{c.emoji}</span>
                   <span style={{ fontSize: 13 }}>{c.label}</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: T.textDim }}>
-                    {c.key === 'all' ? `${cards.length} kartu` : `${cards.filter((cd) => cd.category === c.key).length} kartu`}
+                    {c.key === 'all' ? `${baseCards.length} kartu` : `${baseCards.filter((cd) => cd.category === c.key).length} kartu`}
                   </span>
                 </button>
               ))}

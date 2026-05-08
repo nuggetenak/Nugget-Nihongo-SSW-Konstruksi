@@ -1,3 +1,34 @@
+## [4.10.0] - 2026-05-08
+
+### Open Items Batch — J1/K2/SB3/Q5 (Agent Sonnet 4.6)
+
+**J1 — JACMode: Tambah ke SRS**
+- Wrong JAC question answers now offer "🧠 Tambah ke Ulasan SRS" on ResultScreen
+- Adds `related_card_id` flashcards to SRS queue via `recordReview(id, 1)` (Again = due immediately)
+- Toast confirms how many cards were queued; button disabled after adding
+- `onAddToSRS` prop chain: JACMode → QuizShell → ResultScreen
+
+**K2 — FlashcardMode: Mode Hanya Baca**
+- New ToolStrip button "👁 Baca / 📝 Rating" toggles read-only mode
+- When active: RatingRow hidden, swipe hint hidden — browse cards without FSRS rating
+
+**SB3 — SumberMode: Kartu / Sprint / Kuis per Sumber**
+- Source detail view now shows 🃏 Kartu / ⚡ Sprint / ❓ Kuis action buttons
+- Navigates to respective mode scoped to that source's card IDs
+- `onNavigate` prop injected from ModeRouter; `filterIds` now passed to sprint + kuis modeProps
+- SprintMode + QuizMode respect `filterIds` to scope baseCards pool
+
+**Q5 — QuizMode: Filter per Kategori**
+- Category picker added inside ⚙ Pengaturan panel
+- Filters question pool to selected category; count display updates live
+- Works with lemahMode (intersection of both filters)
+
+**ResultScreen: onAddToSRS prop**
+- New `onAddToSRS` prop + `srsWrongCount` prop for external SRS add CTA
+- Indigo-styled button renders only when both prop and wrongCount > 0
+
+---
+
 ## [4.9.0] - 2026-05-08
 
 ### Open Items Batch (Agent Sonnet 4.6)

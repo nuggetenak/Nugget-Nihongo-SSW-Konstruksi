@@ -6,7 +6,7 @@ import { stripFuri } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
-export default function SumberMode({ onExit }) {
+export default function SumberMode({ onExit, onNavigate }) {
   const [activeSrc, setActiveSrc] = useState(null);
   const [expanded, setExpanded] = useState(null);
 
@@ -15,6 +15,7 @@ export default function SumberMode({ onExit }) {
 
   if (activeSrc) {
     const srcCards = CARDS.filter((c) => c.source === activeSrc);
+    const srcIds = srcCards.map((c) => c.id);
     const meta = SOURCE_META[activeSrc] || { label: activeSrc, emoji: '📄' };
     const color = SOURCE_ACCENT[activeSrc] || T.gold;
     return (
@@ -22,6 +23,23 @@ export default function SumberMode({ onExit }) {
         <button className={S.btnBack} onClick={() => setActiveSrc(null)}>← Sumber</button>
         <h2 className={S.pageTitle} style={{ fontSize: 16 }}>{meta.emoji} {meta.label}</h2>
         <p className={S.pageSub} style={{ fontSize: 12 }}>{srcCards.length} kartu</p>
+        {/* SB3: quick-launch actions per source */}
+        {onNavigate && (
+          <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
+            <button
+              onClick={() => onNavigate('kartu', { filterIds: srcIds })}
+              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
+            >🃏 Kartu</button>
+            <button
+              onClick={() => onNavigate('sprint', { filterIds: srcIds })}
+              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
+            >⚡ Sprint</button>
+            <button
+              onClick={() => onNavigate('kuis', { filterIds: srcIds })}
+              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
+            >❓ Kuis</button>
+          </div>
+        )}
         <div className={S.list} style={{ gap: 6 }}>
           {srcCards.map((c) => (
             <div key={c.id} onClick={() => setExpanded(expanded === c.id ? null : c.id)} style={{ padding: '10px 12px', borderRadius: T.r.md, cursor: 'pointer', background: T.surface, borderLeft: `3px solid ${color}` }}>

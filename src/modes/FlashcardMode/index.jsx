@@ -55,6 +55,8 @@ export default function FlashcardMode({
   const [reviewBelum, setReviewBelum]   = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const confirmTimer                     = useRef(null);
+  // K2: read-only mode — browse without FSRS rating
+  const [readOnly, setReadOnly]         = useState(false);
 
   // E.3 TD-10 / Phase G: furiganaPolicy — now wired to FlipCard → JpFront
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
@@ -265,16 +267,18 @@ export default function FlashcardMode({
         />
       </ErrorBoundary>
 
-      {/* FSRS rating row */}
-      <RatingRow
-        flipped={flipped}
-        rated={rated}
-        srsPreviews={srsPreviews}
-        onRate={handleRate}
-      />
+      {/* FSRS rating row — hidden in K2 read-only mode */}
+      {!readOnly && (
+        <RatingRow
+          flipped={flipped}
+          rated={rated}
+          srsPreviews={srsPreviews}
+          onRate={handleRate}
+        />
+      )}
 
       {/* K1: Swipe hint — shown when flipped and not yet rated */}
-      {flipped && !rated && (
+      {!readOnly && flipped && !rated && (
         <div style={{ textAlign: 'center', fontSize: 11, color: T.textFaint, marginTop: 4, letterSpacing: 0.3 }}>
           ← Lagi · Oke → · ↑ Mudah
         </div>
@@ -310,6 +314,8 @@ export default function FlashcardMode({
         onToggleStarFilter={() => { setSearch(search === '__starred__' ? '' : '__starred__'); setIdx(0); }}
         flipped={flipped}
         rated={rated}
+        readOnly={readOnly}
+        onToggleReadOnly={() => setReadOnly((r) => !r)}
       />
 
     </div>

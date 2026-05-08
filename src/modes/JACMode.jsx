@@ -5,6 +5,8 @@ import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
+import { recordReview } from '../srs/fsrs-scheduler.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
@@ -19,12 +21,16 @@ const SET_COUNT = { all: JAC_OFFICIAL.length, tt1: JAC_OFFICIAL.filter((q) => q.
 const DELAYS = [{ ms: 1000, label: '1s' }, { ms: 1500, label: '1.5s' }, { ms: 2000, label: '2s' }, { ms: 0, label: 'Manual' }];
 
 export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) {
+  const { toast } = useApp();
   const [setKey, setSetKey] = useState(null);
   const [wrongCounts, setWrongCounts] = usePersistedState('ssw-wrong-counts', {});
   const [jacScores, setJacScores] = usePersistedState('ssw-jac-scores', {});
   const [showFuri, setShowFuri] = useState(true);
   const [showID, setShowID] = useState(true);
   const [autoDelay, setAutoDelay] = useState(2000);
+  // J1: track wrong question IDs during session for SRS add-to-queue
+  const [wrongQIds, setWrongQIds] = useState([]);
+  const [srsAdded, setSrsAdded] = useState(0);
 
   const lemahCount = JAC_OFFICIAL.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).length;
 
@@ -40,8 +46,13 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   }), [filtered, showFuri, showID]);
 
   const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
-    if (!isCorrect) { const qId = filtered[qIdx]?.id; if (qId) setWrongCounts((w) => ({ ...w, [qId]: makeWrongEntry(w[qId]) })); }
-  }, [filtered, setWrongCounts]);
+    if (!isCorrect) {
+      const q = filtered[qIdx];
+      if (q?.id) setWrongCounts((w) => ({ ...w, [q.id]: makeWrongEntry(w[q.id]) }));
+      // J1: collect wrong question IDs for SRS add
+      if (q?.id && !wrongQIds.includes(q.id)) setWrongQIds((prev) => [...prev, q.id]);
+    }
+  }, [filtered, setWrongCounts, wrongQIds]);
 
   const handleFinish = useCallback(({ correct, total }) => {
     if (!setKey) return;
@@ -52,6 +63,18 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
     });
     onSessionEnd?.({ correct, total });
   }, [setKey, setJacScores, onSessionEnd]);
+
+  // J1: Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now)
+  const handleAddToSRS = useCallback(() => {
+    const relatedIds = wrongQIds
+      .map((qId) => JAC_OFFICIAL.find((q) => q.id === qId)?.related_card_id)
+      .filter(Boolean);
+    const unique = [...new Set(relatedIds)];
+    unique.forEach((cardId) => recordReview(cardId, 1));
+    setSrsAdded(unique.length);
+    setWrongQIds([]);
+    toast.show(`✅ ${unique.length} kartu ditambahkan ke Ulasan SRS`, { duration: 3000 });
+  }, [wrongQIds, toast]);
 
   if (setKey === 'lemah' && filtered.length === 0) {
     return (
@@ -65,7 +88,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   }
 
   if (setKey !== null) {
-    return <QuizShell questions={questions} onExit={() => setSetKey(null)} title="JAC Official" onAnswer={handleAnswer} onFinish={handleFinish} showHint={true} accentColor="#ef4444" autoNextDelay={autoDelay} audioEnabled={audioEnabled} />;
+    return <QuizShell questions={questions} onExit={() => { setSetKey(null); setWrongQIds([]); setSrsAdded(0); }} title="JAC Official" onAnswer={handleAnswer} onFinish={handleFinish} onAddToSRS={wrongQIds.length > 0 ? handleAddToSRS : undefined} showHint={true} accentColor="#ef4444" autoNextDelay={autoDelay} audioEnabled={audioEnabled} />;
   }
 
   const pillStyle = (active) => ({ fontFamily: 'inherit', fontSize: 11, padding: '6px 12px', borderRadius: T.r.pill, cursor: 'pointer', background: active ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`, color: active ? T.gold : T.textMuted });
