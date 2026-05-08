@@ -1,3 +1,13 @@
+## [4.8.1] - 2026-05-08
+
+### D1-WT — DengarMode Wrong-Tracker (Agent Sonnet 4.6)
+
+- DengarMode wrong answers now written to shared `quizWrong` pool (same key as QuizMode/JACMode/etc.)
+- Enables FocusMode "terlemah" recommendations to include DengarMode mistakes
+- Modes with wrong-tracker: 10 → 11/15
+
+---
+
 ## [4.8.0] - 2026-05-08
 
 ### Phase 5.8 — UX Polish (Agent Sonnet 4.6)

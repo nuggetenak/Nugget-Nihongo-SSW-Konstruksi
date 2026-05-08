@@ -800,7 +800,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 | Mode count | 15 | **23** | 22 ✅ |
 | Bug terbuka | 8 known | **0** | 0 ✅ |
 | SRS modes with session tracking | 12/15 | 15/15 | 15/15 ✅ |
-| Modes with wrong-tracker | 7/15 | 10/15 | 12/15 |
+| Modes with wrong-tracker | 7/15 | 11/15 | 12/15 |
 | Cross-mode flow coverage | 0% | 100% | 100% ✅ |
 | localStorage compression | ❌ | ✅ lz-string | ✅ |
 | Exam Readiness Score | ❌ | ✅ gauge in StatsMode | ✅ |
