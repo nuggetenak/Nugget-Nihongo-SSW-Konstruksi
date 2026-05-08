@@ -1,3 +1,17 @@
+## [4.15.1] - 2026-05-08
+
+### fix(jac-ch1): furi audit — 6 fixes (Agent Sonnet 4.6)
+
+- **id:584** furi: `CCUSひょうかのさんきじゅん` → `ひょうかのさんきじゅん` (drop Latin acronym from furi)
+- **id:586** furi: `あんぜんしょうわ` → `あんぜんしょうわ・たっちあんどこーる` (incomplete)
+- **id:588** furi: `けいわいかつどう` → `きけんよちかつどうのよんすてっぷ` (KY≠けいわい; missing の4ステップ)
+- **id:589** furi: `けいわいぼーど` → `きけんよちぼーど` (KY≠けいわい)
+- **id:590** furi: `ぜんたいちょうれい` → `ぜんたいちょうれいのろっこうもく` (incomplete)
+- **id:591** furi: `あんぜんかくにん` → `あんぜんかくにんのはちこうもく` (incomplete)
+- 387/387 tests pass
+
+---
+
 ## [4.15.0] - 2026-05-08
 
 ### Content Audit — jac-ch1 fix + jac-ch2 text2.pdf audit (Agent Sonnet 4.6)
