@@ -1,8 +1,8 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.8.2)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.13.0)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
 > **Version:** 4.13.0
-> **Last updated:** 2026-05-08
+> **Last updated:** 2026-05-08 (hygiene audit pass — docs sync)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**

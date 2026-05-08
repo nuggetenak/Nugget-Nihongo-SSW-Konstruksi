@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.13.0 — G3 export mini deck)
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (hygiene audit pass — docs sync)
 > **Version:** v4.13.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items batches; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
@@ -39,7 +39,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.8.2 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.13.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -75,7 +75,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   └── SRSContext.jsx
     ├── data/
     │   ├── index.js                ← barrel re-export
-    │   ├── cards.js                ← CARDS[1438] (assembled from source/ by merge-cards.mjs)
+    │   ├── cards.js                ← CARDS[1410] (assembled from source/ by merge-cards.mjs)
     │   ├── source/                 ← 8 track source files (CS-01)
     │   │   ├── cards-common.js, cards-common-vocab.js
     │   │   ├── cards-doboku.js, cards-doboku-vocab.js
@@ -194,7 +194,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
-| Flashcards | **1,438** |
+| Flashcards | **1,410** |
 | Quiz questions | **~860** (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Storage schema | **v3** |
 | localStorage docs | **3** (progress, srs, prefs) |
@@ -266,7 +266,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ---
 
-## 7. New Files Since v4.0.2 (FE Sprint → v4.8.2)
+## 7. Notable New Files (v4.0.2 → v4.13.0)
 
 | File | Purpose |
 |------|---------|
@@ -325,8 +325,10 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.7.0 W2: WaygroundMode per-set "Ulang Salah" sub-button + lemahMode filter. ST5 confirmed already complete. |
 | 2026-05-08 | Sonnet 4.6 | v4.8.0 Phase 5.8: SR1 search history (sessionStorage), G1 glossary audio, SB1/SB2 sumber progress bar + terlemah badge, W3 "Baru" badge for untouched sets, R2 ReviewMode due-reason chip, J3 JACMode best score. |
 | 2026-05-08 | Sonnet 4.6 | v4.8.1: DengarMode wrong-tracker (D1-WT) — wrong answers now written to shared quizWrong pool. Modes with wrong-tracker: 10→11/15. |
-| 2026-05-08 | Sonnet 4.6 | v4.10.0: J1 JACMode→SRS (wrong answers queue related flashcards); K2 FlashcardMode read-only toggle; SB3 SumberMode Kartu/Sprint/Kuis per-source actions + filterIds to sprint/kuis; Q5 QuizMode category filter. |
-| 2026-05-08 | Sonnet 4.6 | v4.9.0 open items: R3 speakOnFlip, R4 skip card, R5 remaining count, W1 group desc, W4 total score, Q4 quiz count persist, SR4 search accuracy badges, ST4 week comparison. |
 | 2026-05-08 | Sonnet 4.6 | v4.8.2: SR3 copy-to-clipboard in SearchMode (⎘ button per result); SIM5 pace hint in SimulasiMode (soal/mnt below timer). |
+| 2026-05-08 | Sonnet 4.6 | v4.9.0 open items: R3 speakOnFlip, R4 skip card, R5 remaining count, W1 group desc, W4 total score, Q4 quiz count persist, SR4 search accuracy badges, ST4 week comparison. |
+| 2026-05-08 | Sonnet 4.6 | v4.10.0: J1 JACMode→SRS (wrong answers queue related flashcards); K2 FlashcardMode read-only toggle; SB3 SumberMode Kartu/Sprint/Kuis per-source actions + filterIds to sprint/kuis; Q5 QuizMode category filter. |
+| 2026-05-08 | Sonnet 4.6 | v4.11.0: StatsMode catList wrapper fix (BUG from v4.9.0); D2 DangerMode confusionType + filter chips + wrong-tracker; AK1 AngkaMode mnemonic field (all 28) + TypeQuizView; G2 GlossaryMode compact/expanded toggle; K5 FlashcardMode add-to-SRS button. |
 | 2026-05-08 | Sonnet 4.6 | v4.12.0: Q3 difficulty detail; F2 FocusMode auto-advance; F3 session progress counter; D1 danger-pairs explanation field (all 20); G4 glossary non-kana nav keys; W5 suggested next set; AK2 soal field (all 28); E3 SRS delta backup; K6 category pill tap-to-filter. |
 | 2026-05-08 | Sonnet 4.6 | v4.13.0: G3 GlossaryMode export mini deck — ☑ select mode, Anki TSV download (JP+furi+terjemahan+desc+tags). |
+| 2026-05-08 | Sonnet 4.6 | Hygiene audit pass: audit-integrity romaji false-positives fixed (2820→0 issues); SayaTab/sw.js version strings synced; achievements card thresholds corrected (1438→1410); CHANGELOG v4.13.0 entry added; 1,438→1,410 across all active docs. |

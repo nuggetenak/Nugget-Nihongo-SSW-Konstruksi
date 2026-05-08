@@ -261,7 +261,7 @@
 - Derived from existing `quizWrong` wrong-tracker — no new storage needed
 - Shows `null` (hidden) when no quiz data for that category yet
 
-**Metrics:** 35 test files · **383 tests** · 23 modes · 1,438 cards
+**Metrics:** 35 test files · **387 tests** · 23 modes · 1,410 cards
 
 ---
 
@@ -280,7 +280,7 @@
 - Registered as `kuisprod` in `latihan` section (modes.js + ModeRouter)
 - 7 tests in `src/tests/quiz-produksi.test.jsx`
 
-**Metrics:** 35 test files · **383 tests** · 23 modes · 1,438 cards
+**Metrics:** 35 test files · **387 tests** · 23 modes · 1,410 cards
 
 ---
 

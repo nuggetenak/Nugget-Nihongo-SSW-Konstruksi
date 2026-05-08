@@ -19,7 +19,7 @@
 
 ## 📋 Ringkasan Eksekutif
 
-App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (**v4.8.2**) dengan **23 mode**, **383+ test**, FSRS engine, PWA, CI/CD, dan 1.438 kartu. Kualitas teknis sangat baik.
+App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi-komponen yang matang (**v4.13.0**) dengan **23 mode**, **387 test**, FSRS engine, PWA, CI/CD, dan 1.410 kartu. Kualitas teknis sangat baik.
 
 **Hasil audit ini menemukan 6 kategori peningkatan:**
 - **A** — Alur Lintas Mode (cross-mode flow gaps)
@@ -613,7 +613,7 @@ const ACHIEVEMENTS = [
   { id: 'lulus_simulasi', label: 'Siap Ujian', desc: 'Simulasi ≥75%', icon: '🎓', check: s => s.bestSim >= 75 },
   { id: 'all_jac', label: 'JAC Master', desc: 'Semua set JAC ≥80%', icon: '📋', check: s => s.jacMastery },
   { id: 'half_deck', label: 'Setengah Jalan', desc: '719+ kartu hafal', icon: '💪', check: s => s.known >= 719 },
-  { id: 'full_deck', label: 'Nugget Pro', desc: 'Semua 1438 kartu hafal', icon: '🏆', check: s => s.known >= 1438 },
+  { id: 'full_deck', label: 'Nugget Pro', desc: 'Semua 1410 kartu hafal', icon: '🏆', check: s => s.known >= 1410 },
 ];
 ```
 
@@ -764,10 +764,10 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Awal Audit | Saat Ini (v4.8.2) | Target (Phase 5.4) |
+| Metrik | Awal Audit | Saat Ini (v4.13.0) | Target (Phase 5.4) |
 |--------|------------|--------------------|--------------------|
-| Total kartu | 1.438 | 1.438 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
-| Test | ~321 | **383** | 380+ ✅ |
+| Total kartu | 1.438 | 1.410 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
+| Test | ~321 | **387** | 380+ ✅ |
 | Mode count | 15 | **23** | 22 ✅ |
 | Bug terbuka | 8 known | **0** | 0 ✅ |
 | SRS modes with session tracking | 12/15 | 15/15 | 15/15 ✅ |
@@ -802,7 +802,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 🎯 Prioritas Paling Tinggi untuk Segera Dikerjakan
 
-**Status saat ini (v4.8.2):** Semua prioritas kritis sudah selesai.
+**Status saat ini (v4.13.0):** Semua prioritas kritis sudah selesai.
 
 **Housekeeping:** ✅ PR #7 merged, CHANGELOG reconstructed, SayaTab footer fixed, CI auto-deploy aktif.
 

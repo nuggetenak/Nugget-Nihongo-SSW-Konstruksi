@@ -13,7 +13,7 @@
 PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定技能 / SSW) bidang konstruksi Jepang. Dirancang untuk TKI yang bersiap kerja di Jepang sebagai pekerja konstruksi.
 
 **Fitur utama:**
-- 🃏 **1,438 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
+- 🃏 **1,410 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
 - ❓ **~860 soal kuis** — format JAC, Wayground, CSV, Sipil, Bangunan
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
@@ -58,7 +58,7 @@ npm run dev        # dev server → http://localhost:5173/Nugget-Nihongo-SSW-Kon
 npm run dev           # Dev server dengan HMR
 npm run build         # Production build → dist/
 npm run preview       # Preview build lokal
-npm test              # Jalankan semua test (383+ test cases)
+npm test              # Jalankan semua test (387 test cases)
 npm run test:watch    # Test mode watch
 npm run lint          # ESLint (0 warnings required)
 npm run lint:fix      # Auto-fix ESLint
@@ -89,7 +89,7 @@ npm run audit:integrity  # Audit integritas data kartu
 src/
 ├── App.jsx                  # Root, 3-tab layout
 ├── contexts/                # AppContext, ProgressContext, SRSContext
-├── data/                    # Flashcard & quiz data (1,438 cards + ~860 questions)
+├── data/                    # Flashcard & quiz data (1,410 cards + ~860 questions)
 │   └── source/              # 8 source files (CS-01 split)
 ├── srs/                     # FSRS engine (fsrs-core, fsrs-store, fsrs-scheduler)
 ├── storage/                 # localStorage engine, schema v3, migrations
@@ -100,7 +100,7 @@ src/
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 35 test files, 383+ tests
+└── tests/                   # 35 test files, 387 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.

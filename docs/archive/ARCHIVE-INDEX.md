@@ -16,7 +16,7 @@
 | `MASTER-BLUEPRINT-v4.md` | Blueprint | v4: Sonnet-verified revision of v3. | v4-POLISHED |
 | `MASTER-BLUEPRINT-v3.md` | Blueprint | v3: first full architecture rewrite (Opus). | v4 |
 | `CONTENT-BLUEPRINT.md` | Content Proposal | Crunchy's audit of the content layer: track mismatch, lifeline dominance, JAC PDF gap. Status: reviewed and partially actioned (CS-01–05 executed; sipil/bangunan track gap documented in BLUEPRINT-CURRENT.md). | `docs/BLUEPRINT-CURRENT.md` §Open Items |
-| `CONTENT-VERIFICATION-REPORT.md` | Audit Report | Automated term-matching of 1,438 cards against JAC textbook markdown. Results: 63% verified, 15% synthesized, 19% supplementary, 3% general. Source tags corrected. | Baked into cards.js |
+| `CONTENT-VERIFICATION-REPORT.md` | Audit Report | Automated term-matching of 1,438 cards (pre-dedup) against JAC textbook markdown. Results: 63% verified, 15% synthesized, 19% supplementary, 3% general. Source tags corrected. | Baked into cards.js |
 | `PROPOSAL.md` | Proposal | Early architecture proposal (pre-v3). | v3 |
 | `REFACTOR-PROPOSAL-v2.md` | Proposal | Opus deep audit + refactor proposal (v2). Led to v3 blueprint. | v3 |
 | `UX-OVERHAUL-PROPOSAL.md` | Proposal | UX overhaul proposal (pre-v3). | v3 |
@@ -38,4 +38,4 @@
 
 ---
 
-*Last updated: 2026-05-08 by Agent Sonnet 4.6 (deep hygiene pass)*
+*Last updated: 2026-05-08 by Agent Sonnet 4.6 (hygiene audit pass — docs sync)*
