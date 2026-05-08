@@ -39,4 +39,4 @@
 
 ---
 
-*Last updated: 2026-05-09 by Agent Sonnet 4.6 (text4 audit complete — C1 closed; all open items resolved)*
+*Last updated: 2026-05-09 by Agent Sonnet 4.6 (text4 audit complete — C1 closed; v4.19.1–4.19.5 hygiene passes complete; all open items resolved; app at v4.19.5 final)*
