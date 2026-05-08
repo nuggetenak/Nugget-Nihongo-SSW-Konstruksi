@@ -129,18 +129,19 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
         <div className={S.sectionLabel}>Tingkat Kesulitan</div>
         <div className={S.list} style={{ marginBottom: 20 }}>
           {DIFF.map((d) => (
-            <button
-              key={d.key}
-              className={S.btnItem}
-              onClick={() => setDifficulty(d.key)}
-              style={{ background: difficulty === d.key ? `${d.color}18` : T.surface, border: `1px solid ${difficulty === d.key ? `${d.color}55` : T.border}`, color: difficulty === d.key ? d.color : T.text, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-            >
-              <span style={{ fontWeight: 600 }}>{d.label}</span>
-              <span style={{ fontSize: 11, color: T.textDim }}>{d.desc}</span>
-            </button>
-            {difficulty === d.key && (
-              <div style={{ fontSize: 11, color: d.color, padding: '4px 12px 8px', lineHeight: 1.5 }}>{d.detail}</div>
-            )}
+            <div key={d.key}>
+              <button
+                className={S.btnItem}
+                onClick={() => setDifficulty(d.key)}
+                style={{ background: difficulty === d.key ? `${d.color}18` : T.surface, border: `1px solid ${difficulty === d.key ? `${d.color}55` : T.border}`, color: difficulty === d.key ? d.color : T.text, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <span style={{ fontWeight: 600 }}>{d.label}</span>
+                <span style={{ fontSize: 11, color: T.textDim }}>{d.desc}</span>
+              </button>
+              {difficulty === d.key && (
+                <div style={{ fontSize: 11, color: d.color, padding: '4px 12px 8px', lineHeight: 1.5 }}>{d.detail}</div>
+              )}
+            </div>
           ))}
         </div>
 
