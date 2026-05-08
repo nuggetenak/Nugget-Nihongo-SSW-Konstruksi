@@ -11,6 +11,7 @@ export const CSV_SETS = [
     color: '#fb923c',
     grad: 'linear-gradient(135deg,#9a3412,#fb923c)',
     source: 'csv-praktik',
+    track: 'lifeline',
     questions: [
       {
         id: 1,
@@ -262,6 +263,7 @@ export const CSV_SETS = [
     color: '#f97316',
     grad: 'linear-gradient(135deg,#9a3412,#f97316)',
     source: 'csv-teori',
+    track: 'common',
     questions: [
       {
         id: 1,
@@ -713,6 +715,7 @@ export const CSV_SETS = [
     color: '#f87171',
     grad: 'linear-gradient(135deg,#991b1b,#f87171)',
     source: 'csv-praktik',
+    track: 'lifeline',
     questions: [
       {
         id: 1,
@@ -934,6 +937,7 @@ export const CSV_SETS = [
     color: '#ef4444',
     grad: 'linear-gradient(135deg,#991b1b,#ef4444)',
     source: 'csv-teori',
+    track: 'common',
     questions: [
       {
         id: 1,
@@ -1350,6 +1354,7 @@ export const CSV_SETS = [
     color: '#fde047',
     grad: 'linear-gradient(135deg,#854d0e,#fde047)',
     source: 'csv-praktik',
+    track: 'lifeline',
     questions: [
       {
         id: 1,
@@ -1576,6 +1581,7 @@ export const CSV_SETS = [
     color: '#eab308',
     grad: 'linear-gradient(135deg,#854d0e,#eab308)',
     source: 'csv-teori',
+    track: 'common',
     questions: [
       {
         id: 1,
@@ -2002,6 +2008,7 @@ export const CSV_SETS = [
     color: '#4ade80',
     grad: 'linear-gradient(135deg,#14532d,#4ade80)',
     source: 'csv-praktik',
+    track: 'lifeline',
     questions: [
       {
         id: 1,
@@ -2218,6 +2225,7 @@ export const CSV_SETS = [
     color: '#22c55e',
     grad: 'linear-gradient(135deg,#14532d,#22c55e)',
     source: 'csv-teori',
+    track: 'common',
     questions: [
       {
         id: 1,
@@ -2644,6 +2652,7 @@ export const CSV_SETS = [
     color: '#60a5fa',
     grad: 'linear-gradient(135deg,#1e3a5f,#60a5fa)',
     source: 'csv-praktik',
+    track: 'lifeline',
     questions: [
       {
         id: 1,
@@ -2895,6 +2904,7 @@ export const CSV_SETS = [
     color: '#3b82f6',
     grad: 'linear-gradient(135deg,#1e3a5f,#3b82f6)',
     source: 'csv-teori',
+    track: 'common',
     questions: [
       {
         id: 1,
@@ -3316,6 +3326,7 @@ export const CSV_SETS = [
     color: '#c084fc',
     grad: 'linear-gradient(135deg,#581c87,#c084fc)',
     source: 'csv-praktik',
+    track: 'lifeline',
     questions: [
       {
         id: 1,
@@ -3557,6 +3568,7 @@ export const CSV_SETS = [
     color: '#a855f7',
     grad: 'linear-gradient(135deg,#581c87,#a855f7)',
     source: 'csv-teori',
+    track: 'common',
     questions: [
       {
         id: 1,
