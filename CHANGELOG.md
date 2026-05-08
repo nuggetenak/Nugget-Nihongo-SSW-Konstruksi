@@ -1,3 +1,21 @@
+## [4.19.3] - 2026-05-09
+
+### test + docs: data integrity tests + blueprint sync (Agent Sonnet 4.6)
+
+**Tests added to `data.test.js` (+24 tests → 411 total):**
+- `JAC_TEORI / JAC_LIFELINE split` (8 tests): count, track fields, set keys, topic field presence
+- `WAYGROUND_SETS track fields` (4 tests): wt*=common, wg*=lifeline, wp*=lifeline, all sets have track
+- `CSV_SETS track fields` (3 tests): ct*=common, cp*=lifeline, all sets have track
+- `QUIZ_SETS + getQuizSetsForTrack` (6 tests): total 38 sets, unique IDs, track present, per-track filter
+- `SOURCE_GROUPS coverage` (3 tests): all keys in SOURCE_META, Sumber Tambahan group, text3l/vocab-supplementary/vocab-general
+
+**docs/BLUEPRINT-CURRENT.md synced to v4.19.2:**
+- Version: 4.19.0 → 4.19.2
+- Quiz questions: ~860 → ~974
+- Tests: 387 → 411
+
+---
+
 ## [4.19.2] - 2026-05-09
 
 ### fix: track field bugs + SimulasiMode CSV gap (Agent Sonnet 4.6)
