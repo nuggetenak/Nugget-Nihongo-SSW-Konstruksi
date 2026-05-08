@@ -1,7 +1,7 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.8.2)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.12.0
+> **Version:** 4.13.0
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -184,9 +184,13 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | G2 | GlossaryMode: compact/expanded toggle (≡ Kompak = click-to-expand; ⊞ Lebar = always-show-all) |
 | K5 | FlashcardMode: "＋ Tambah ke Ulasan SRS" button for known cards not yet in SRS queue |
 
----
+### v4.13.0 — G3 Export Mini Deck
 
-## Open Items / Known Gaps (Post v4.8.2)
+| Item | Deliverable |
+|------|-------------|
+| G3 | `GlossaryMode.jsx` — select mode (☑ Pilih toggle), tap-to-select cards, "Semua" quick-select, footer "⬇ Ekspor Anki" downloads TSV file (Anki-importable: JP[furi]\tterjemahan+desc\ttags) |
+
+---
 
 These are honest assessments — not blocking anything, but relevant for future work:
 

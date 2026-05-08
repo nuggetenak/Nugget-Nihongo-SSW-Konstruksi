@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.12.0 — Q3/F2/F3/D1/G4/W5/AK2/E3/K6 open items batch)
-> **Version:** v4.12.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items batches; 383 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.13.0 — G3 export mini deck)
+> **Version:** v4.13.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items batches; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -190,7 +190,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.12.0** |
+| Version | **4.13.0** |
 | Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -329,4 +329,4 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.9.0 open items: R3 speakOnFlip, R4 skip card, R5 remaining count, W1 group desc, W4 total score, Q4 quiz count persist, SR4 search accuracy badges, ST4 week comparison. |
 | 2026-05-08 | Sonnet 4.6 | v4.8.2: SR3 copy-to-clipboard in SearchMode (⎘ button per result); SIM5 pace hint in SimulasiMode (soal/mnt below timer). |
 | 2026-05-08 | Sonnet 4.6 | v4.12.0: Q3 difficulty detail; F2 FocusMode auto-advance; F3 session progress counter; D1 danger-pairs explanation field (all 20); G4 glossary non-kana nav keys; W5 suggested next set; AK2 soal field (all 28); E3 SRS delta backup; K6 category pill tap-to-filter. |
-| 2026-05-08 | Sonnet 4.6 | v4.11.0: StatsMode pre-existing parse error fixed (missing catList div); D2 DangerMode confusionType filter + D3 wrong-tracker; AK1 angka mnemonic + AK3 type-answer quiz; G2 glossary compact/expanded toggle; K5 FlashcardMode manual SRS enqueue for known cards. |
+| 2026-05-08 | Sonnet 4.6 | v4.13.0: G3 GlossaryMode export mini deck — ☑ select mode, Anki TSV download (JP+furi+terjemahan+desc+tags). |
