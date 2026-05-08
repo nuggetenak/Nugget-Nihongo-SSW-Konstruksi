@@ -31,8 +31,8 @@ export default defineConfig(({ mode }) => ({
           'vendor-fsrs': ['ts-fsrs'],
           // Heavy data files — loaded in parallel with main chunk
           'data-cards': ['./src/data/cards.js'],
-          'data-jac': ['./src/data/jac-official.js'],
-          'data-wayground': ['./src/data/wayground-sets.js'],
+          'data-jac': ['./src/data/jac-official.js', './src/data/jac-teori.js', './src/data/jac-lifeline.js'],
+          'data-wayground': ['./src/data/wayground-sets.js', './src/data/quiz-sets.js'],
           'data-csv': ['./src/data/csv-sets.js'],
           // SRS layer — shared across ReviewMode + FlashcardMode
           'srs-engine': [
