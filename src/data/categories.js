@@ -38,6 +38,7 @@ export const getCatsForModule = (prefix) =>
   CATEGORIES.filter((c) => c.module?.startsWith(prefix)).map((c) => c.key);
 
 export const SOURCE_META = {
+  // ── PDF Utama JAC (Chapter 1–7) ──────────────────────────────────────────
   'jac-ch1': { label: 'JAC Ch.1 — Keselamatan & Salam', emoji: '🙏', color: '#c05621' },
   'jac-ch2': { label: 'JAC Ch.2 — Hukum & Regulasi', emoji: '⚖️', color: '#285e61' },
   'jac-ch3': { label: 'JAC Ch.3 — Jenis Pekerjaan', emoji: '🏗️', color: '#1a365d' },
@@ -45,15 +46,21 @@ export const SOURCE_META = {
   'jac-ch5': { label: 'JAC Ch.5 — Alat & Mesin', emoji: '🔌', color: '#744210' },
   'jac-ch6': { label: 'JAC Ch.6 — Pipa & Isolasi', emoji: '🌡️', color: '#702459' },
   'jac-ch7': { label: 'JAC Ch.7 — Karier & Mesin', emoji: '👷', color: '#553c9a' },
+  // ── Soal Contoh ───────────────────────────────────────────────────────────
   'jac-gakka1': { label: 'Soal Contoh 学科 Set 1', emoji: '📋', color: '#742a2a' },
   'jac-gakka2': { label: 'Soal Contoh 学科 Set 2', emoji: '📋', color: '#742a2a' },
   'jac-jitsugi1': { label: 'Soal Contoh 実技 Set 1', emoji: '🔧', color: '#22543d' },
   'jac-jitsugi2': { label: 'Soal Contoh 実技 Set 2', emoji: '🔧', color: '#22543d' },
+  // ── Kosakata (vocab source files) ─────────────────────────────────────────
   'vocab-lifeline': { label: 'Vocab — Kosakata 設備実技', emoji: '📖', color: '#0369a1' },
   'vocab-jac': { label: 'Vocab JAC — Kosakata soal JAC', emoji: '📝', color: '#1d4ed8' },
   'vocab-core': { label: 'Vocab Core — Kosakata inti', emoji: '🏛️', color: '#2d3748' },
   'vocab-exam': { label: 'Vocab Exam — 250 kosakata ujian', emoji: '🎯', color: '#7c3aed' },
   'vocab-teori': { label: 'Vocab Teori — Kosakata 学科', emoji: '📋', color: '#dc2626' },
+  // ── Sumber Tambahan (supplementary — provenance audit) ────────────────────
+  'text3l': { label: 'Teks Ch.3 — Jenis & Prosedur Pekerjaan Konstruksi', emoji: '🏗️', color: '#1a365d' },
+  'vocab-supplementary': { label: 'Vocab Supplementary — Kosakata pelengkap', emoji: '📝', color: '#6b7280' },
+  'vocab-general': { label: 'Vocab General — Kata umum konstruksi', emoji: '📎', color: '#9ca3af' },
 };
 
 export const VOCAB_SOURCES = ['vocab-lifeline','vocab-jac','vocab-core','vocab-exam','vocab-teori'];
@@ -62,6 +69,7 @@ export const SOURCE_GROUPS = [
   { label: 'PDF Utama JAC', keys: ['jac-ch1','jac-ch2','jac-ch3','jac-ch4','jac-ch5','jac-ch6','jac-ch7'] },
   { label: 'Soal Contoh', keys: ['jac-gakka1','jac-gakka2','jac-jitsugi1','jac-jitsugi2'] },
   { label: 'Kosakata', keys: ['vocab-lifeline','vocab-jac','vocab-core','vocab-exam','vocab-teori'] },
+  { label: 'Sumber Tambahan', keys: ['text3l','vocab-supplementary','vocab-general'] },
 ];
 
 export const SOURCE_ACCENT = {
@@ -72,9 +80,7 @@ export const SOURCE_ACCENT = {
   'jac-jitsugi1': '#68d391', 'jac-jitsugi2': '#68d391',
   'vocab-lifeline': '#63b3ed', 'vocab-jac': '#93c5fd', 'vocab-core': '#cbd5e0',
   'vocab-exam': '#b794f4', 'vocab-teori': '#f56565',
+  'text3l': '#667eea',
+  'vocab-supplementary': '#9ca3af',
+  'vocab-general': '#d1d5db',
 };
-
-// Supplementary source metadata (added during provenance audit)
-SOURCE_META['text3l'] = { label: 'Teks Ch.3 — Jenis & Prosedur Pekerjaan Konstruksi', emoji: '🏗️', color: '#1a365d' };
-SOURCE_META['vocab-supplementary'] = { label: 'Vocab Supplementary — Kosakata pelengkap (bukan dari textbook JAC)', emoji: '📝', color: '#6b7280' };
-SOURCE_META['vocab-general'] = { label: 'Vocab General — Kata umum konstruksi', emoji: '📎', color: '#9ca3af' };
