@@ -191,7 +191,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Metric | Value |
 |--------|-------|
 | Version | **4.12.0** |
-| Tests | **383** (35 files) |
+| Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,438** |

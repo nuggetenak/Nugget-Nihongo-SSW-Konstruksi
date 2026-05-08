@@ -19,7 +19,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Quiz questions | ~860 (JAC + Wayground + CSV + Sipil + Bangunan) |
 | Modes | 23 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage model) |
-| Tests | 383 (35 files) |
+| Tests | 387 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
 | Version | **4.12.0** |
 
