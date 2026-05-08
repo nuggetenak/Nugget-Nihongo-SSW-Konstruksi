@@ -4,12 +4,12 @@ import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount, loadFromStorage } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
-import { WAYGROUND_SETS } from '../data/wayground-sets.js';
-import { CSV_SETS } from '../data/csv-sets.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
-const TEORI_PRAKTIK = [...WAYGROUND_SETS.filter((s) => !s.id.startsWith('wg')), ...CSV_SETS];
+// TEORI_PRAKTIK now computed inside component using track (see below)
 const GROUPS = [
   { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt', desc: 'Pengetahuan & konsep teknis' },
   { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp', desc: 'Prosedur & aplikasi lapangan' },
@@ -24,6 +24,10 @@ function getSetWrongCount(setId) {
 }
 
 export default function WaygroundMode({ onExit, onSessionEnd }) {
+  const { track } = useApp();
+  const TEORI_PRAKTIK = QUIZ_SETS.filter(
+    (s) => !s.id.startsWith('wg') && (s.track === 'common' || s.track === track)
+  );
   const [activeSet, setActiveSet] = useState(null);
   // W2: 'lemah' mode — only wrong questions for the active set
   const [lemahMode, setLemahMode] = useState(false);

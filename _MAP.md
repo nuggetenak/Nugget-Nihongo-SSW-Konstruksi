@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (refactor: doboku+kenchiku 157 cards migrated to common; v4.18.0)
-> **Version:** v4.18.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8 + open items + J4/J2 + C1 + doboku/kenchiku→common; 387 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.19.0: full data layer restructure — track fields, JAC split, quiz-sets merge)
+> **Version:** v4.19.0 — full data layer restructure: track fields, JAC split, quiz-sets merge, doboku/kenchiku→common; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -190,7 +190,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.18.0** |
+| Version | **4.19.0** |
 | Tests | **387** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -337,3 +337,4 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.16.0 C1: text3.pdf — 18 new lifeline cards (1439–1456, source text3l); text3l SOURCE_META; admin catch-up v4.15.x. |
 | 2026-05-08 | Sonnet 4.6 | v4.17.0 C1-pass2: 15 new common cards (1457–1471) from text1l/text2/text3 — CCUS levels, drone rules, 建設業法設備業種, 労働者改善法, 特定技能失業ルール, 資格区分6種, とび職, 鉄骨構造, 車両系3t. |
 | 2026-05-08 | Sonnet 4.6 | v4.18.0 refactor: doboku(58)+kenchiku(77)+doboku-vocab(9)+kenchiku-vocab(13)=157 cards migrated to common; source files emptied for future Ch.5+ use. |
+| 2026-05-08 | Sonnet 4.6 | v4.19.0 refactor: JAC split (jac-teori/jac-lifeline/stubs); quiz-sets.js merged; track field on all question sets, danger-pairs, angka-kunci; components filter by track. |

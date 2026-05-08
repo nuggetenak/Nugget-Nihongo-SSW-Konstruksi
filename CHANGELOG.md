@@ -1,3 +1,37 @@
+## [4.19.0] - 2026-05-08
+
+### refactor: full data layer restructure — track fields + JAC split + quiz-sets merge (Agent Sonnet 4.6)
+
+**Structure overhaul** — semua data file kini punya `track` field; JAC split by type; wayground+csv merged.
+
+**JAC Official split:**
+- `jac-teori.js` — 学科 tt1+tt2, 65qs, `track:'common'` (sama untuk semua 3 track)
+- `jac-lifeline.js` — 実技 st1+st2 Lifeline, 30qs, `track:'lifeline'`
+- `jac-doboku.js` / `jac-kenchiku.js` — empty stubs, siap diisi dari PDF
+- `jac-official.js` → backward-compat shim (`[...JAC_TEORI, ...JAC_LIFELINE, ...]`)
+
+**Question sets merged:**
+- `quiz-sets.js` — single source of truth = WAYGROUND_SETS + CSV_SETS
+- `getQuizSetsForTrack(track)` helper function
+- wayground wt1–wt10 → `track:'common'`; wg*/wp* → `track:'lifeline'`
+- CSV sets → `track:'lifeline'`
+
+**Study aids — track field added:**
+- `danger-pairs.js` — common: 12 pairs, lifeline: 8 pairs (per-pair track field)
+- `angka-kunci.js` — common: 22 entries, lifeline: 7 entries (per-entry track field)
+
+**Components updated — filter by current track:**
+- WaygroundMode: imports QUIZ_SETS, filters `track === 'common' || track === currentTrack`
+- VocabMode: wg* sets filtered by track
+- DangerMode: PAIRS = DANGER_PAIRS filtered by track
+- AngkaMode: ANGKA = ANGKA_KUNCI filtered by track
+
+**index.js barrel** — exports JAC_TEORI, JAC_LIFELINE, JAC_DOBOKU, JAC_KENCHIKU, QUIZ_SETS, getQuizSetsForTrack
+
+- 387/387 tests pass
+
+---
+
 ## [4.18.0] - 2026-05-08
 
 ### refactor: migrate doboku + kenchiku cards to common (Agent Sonnet 4.6)

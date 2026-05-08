@@ -7,6 +7,7 @@ export const WAYGROUND_SETS = [
   // ── SOAL TEORI (6 sets) — from JAC-aligned CSV ──────────────────────────
   {
     id: "wt1", title: "Teori Set 1 · 19qs", subtitle: "安全管理 KY・5S・指差呼称",
+    track: "lifeline",
     emoji: "🎯", color: "#f97316", grad: "linear-gradient(135deg,#9a3412,#ea580c)",
     source: "wayground-teori",
     questions: [
@@ -34,6 +35,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt2", title: "Teori Set 2 · 20qs", subtitle: "三大災害・PPE・LOTO・酸素欠乏",
+    track: "lifeline",
     emoji: "⚠️", color: "#ef4444", grad: "linear-gradient(135deg,#7f1d1d,#dc2626)",
     source: "wayground-teori",
     questions: [
@@ -62,6 +64,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt3", title: "Teori Set 3 · 20qs", subtitle: "労働基準法・雇用・36協定",
+    track: "lifeline",
     emoji: "⚖️", color: "#eab308", grad: "linear-gradient(135deg,#713f12,#ca8a04)",
     source: "wayground-teori",
     questions: [
@@ -90,6 +93,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt4", title: "Teori Set 4 · 20qs", subtitle: "建設業法・環境法・水道法・消防法",
+    track: "lifeline",
     emoji: "📜", color: "#22c55e", grad: "linear-gradient(135deg,#14532d,#16a34a)",
     source: "wayground-teori",
     questions: [
@@ -117,6 +121,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt5", title: "Teori Set 5 · 20qs", subtitle: "施工管理・構造・役割・CCUS",
+    track: "lifeline",
     emoji: "🏗️", color: "#818cf8", grad: "linear-gradient(135deg,#312e81,#4f46e5)",
     source: "wayground-teori",
     questions: [
@@ -144,6 +149,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt6", title: "Teori Set 6 · 20qs", subtitle: "総合ファイナル 頻出問題",
+    track: "lifeline",
     emoji: "🏆", color: "#ec4899", grad: "linear-gradient(135deg,#831843,#db2777)",
     source: "wayground-teori",
     questions: [
@@ -172,6 +178,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt7", title: "Teori Set 7 · 20qs", subtitle: "現場安全・リスク・コミュニケーション",
+    track: "lifeline",
     emoji: "🗣️", color: "#22d3ee", grad: "linear-gradient(135deg,#164e63,#0891b2)",
     source: "wayground-jac",
     questions: [
@@ -199,6 +206,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt8", title: "Teori Set 8 · 20qs", subtitle: "施工技術・資格・建設材料",
+    track: "lifeline",
     emoji: "🏛️", color: "#a3e635", grad: "linear-gradient(135deg,#1a2e05,#4d7c0f)",
     source: "wayground-jac",
     questions: [
@@ -226,6 +234,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt9", title: "Teori Set 9 · 20qs", subtitle: "職場ルール・5S詳細・労働環境",
+    track: "lifeline",
     emoji: "🏢", color: "#e879f9", grad: "linear-gradient(135deg,#4a044e,#a21caf)",
     source: "wayground-jac",
     questions: [
@@ -253,6 +262,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wt10", title: "Teori Set 10 · 20qs", subtitle: "総合テスト II 応用問題",
+    track: "lifeline",
     emoji: "📊", color: "#fbbf24", grad: "linear-gradient(135deg,#451a03,#b45309)",
     source: "wayground-jac",
     questions: [
@@ -281,6 +291,7 @@ export const WAYGROUND_SETS = [
     // ── SOAL TEKNIS & VOCAB (existing) ──────────────────────────────────────
   {
     id: "wg1",
+    track: "lifeline",
     title: "Praktik Set 1 · 20qs",
     subtitle: "配管・保温・電気設備 実技問題",
     emoji: "🔧",
@@ -313,6 +324,7 @@ export const WAYGROUND_SETS = [
   // ── wg2: Lifeline 設備 15qs (from Wayground "life line 15qs") ──
   {
     id: "wg2", title: "Praktik Set 2 · 20qs", subtitle: "配管・断熱・配線 実技問題", emoji: "🔌", color: "#818cf8", grad: "linear-gradient(135deg,#3730a3,#6d28d9)", source: "wayground-quizizz",
+    track: "lifeline",
     questions: [
     { id: 1, q: "高温《こうおん》（こうおん）配管《はいかん》（はいかん）に断熱《だんねつ》材《だんねつざい》（だんねつざい）を施工《せこう》（せこう）する主（おも）な目的《もくてき》（もくてき）は何（なん）ですか？", hint: "Tujuan utama memasang insulasi termal pada pipa suhu tinggi adalah...", opts: ["作業員《さぎょういん》（さぎょういん）の安全《あんぜん》（あんぜん）確保《かくほ》（かくほ）", "流量（りゅうりょう）の増加（ぞうか）", "配管《はいかん》（はいかん）の色（いろ）維持《いじ》（いじ）"], opts_id: ["Menjamin keselamatan pekerja dari panas", "Meningkatkan debit aliran", "Menjaga warna pipa tetap sama"], ans: 0, exp: "Pipa suhu tinggi bisa menyebabkan luka bakar → insulasi 断熱材 melindungi 作業員の安全." },
     { id: 2, q: "屋外《おくがい》（おくがい）配線《はいせん》（はいせん）で雨水（あまみず）が侵入（しんにゅう）しやすい部分《ぶぶん》（ぶぶん）はどこですか？", hint: "Bagian mana pada kabel outdoor yang mudah dimasuki air hujan?", opts: ["配線《はいせん》（はいせん）の曲（ま）がり部分《ぶぶん》（ぶぶん）", "接続《せつぞく》（せつぞく）部（ぶん）", "絶縁《ぜつえん》（ぜつえん）部分《ぶぶん》（ぶぶん）"], opts_id: ["Bagian belokan kabel", "Bagian sambungan", "Bagian isolasi"], ans: 0, exp: "Air hujan masuk di belokan（曲がり部分）karena penutup bisa retak di area tekukan." },
@@ -340,6 +352,7 @@ export const WAYGROUND_SETS = [
   // ── wg3: Lifeline 設備 10qs (from Wayground "life line 10qs") ──
   {
     id: "wg3", title: "Praktik Set 3 · 20qs", subtitle: "保温・配管・電気 応用問題", emoji: "⚡", color: "#f472b6", grad: "linear-gradient(135deg,#9d174d,#be185d)", source: "wayground-quizizz",
+    track: "lifeline",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）に保温材《ほおんざい》（ほおんざい）を取（と）り付（つ）けた後（あと）、外装（がいそう）に小（ちい）さな穴（あな）が空（あ）いている場合《ばあい》（ばあい）、正（ただ）しい対応《たいおう》（たいおう）はどれですか？", hint: "Jika ada lubang kecil pada jacketing setelah insulasi?", opts: ["外装（がいそう）を全（ぜん）て交換《こうかん》（こうかん）する", "穴（あな）をテープで補修（ほしゅう）する", "放置《ほうち》（ほうち）して次（つぎ）の作業《さぎょう》（さぎょう）に進（すす）む"], opts_id: ["Ganti seluruh jacketing", "Tambal dengan selotip", "Biarkan, lanjut kerja"], ans: 0, exp: "Lubang kecil pun → air masuk & rusak insulasi → 外装を全て交換する." },
     { id: 2, q: "地下《ちか》（ちか）に埋設《まいせつ》（まいせつ）された給水《きゅうすい》管（きゅうすいかん）が凍（こお）る原因《げんいん》（げんいん）として正（ただ）しいのはどれですか？", hint: "Penyebab pipa air bawah tanah membeku?", opts: ["浅（あさ）く埋（う）められている", "断熱材《だんねつざい》（だんねつざい）が厚（あつ）すぎる", "バルブが新（あたら）しい"], opts_id: ["Ditanam terlalu dangkal", "Insulasi terlalu tebal", "Katup masih baru"], ans: 0, exp: "Terlalu dangkal（浅く埋められている）→ terpapar suhu dingin → membeku." },
@@ -367,6 +380,7 @@ export const WAYGROUND_SETS = [
   // ── wg4: ライフライン第6章 15qs (from Wayground SSW_Konstruksi_5) ──
   {
     id: "wg4", title: "Praktik Set 4 · 20qs", subtitle: "配管・保温・電気 施工問題", emoji: "🛠️", color: "#34d399", grad: "linear-gradient(135deg,#065f46,#047857)", source: "wayground-quizizz",
+    track: "lifeline",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）を壁（かべ）に固定《こてい》（こてい）するための部品（ぶひん）は何（なん）ですか？", hint: "Komponen untuk fiksasi pipa ke dinding?", opts: ["サドル", "バルブ", "ガスケット"], opts_id: ["Saddle (penyangga)", "Valve / katup", "Gasket"], ans: 0, exp: "サドル（saddle）= bracket pelana untuk mengikat pipa ke dinding." },
     { id: 2, q: "電線《でんせん》（でんせん）を絶縁《ぜつえん》（ぜつえん）するために使（つか）うものは何（なん）ですか？", hint: "Bahan untuk mengisolasi kabel listrik?", opts: ["絶縁《ぜつえん》テープ", "保温材《ほおんざい》（ほおんざい）", "シーリング材（ざい）"], opts_id: ["Selotip isolasi listrik", "Material insulasi panas", "Material sealant"], ans: 0, exp: "絶縁テープ（selotip isolasi）= membungkus sambungan kabel agar tidak korsleting." },
@@ -394,6 +408,7 @@ export const WAYGROUND_SETS = [
   // ── wg5: ライフライン第6章 22qs (from Wayground SSW_Konstruksi_6) ──
   {
     id: "wg5", title: "Praktik Set 5 · 20qs", subtitle: "溶接・フレア・保冷 施工問題", emoji: "🔩", color: "#fbbf24", grad: "linear-gradient(135deg,#92400e,#b45309)", source: "wayground-quizizz",
+    track: "lifeline",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）を溶接《ようせつ》（ようせつ）する前（まえ）に最（もっと）も重要（じゅうよう）な確認《かくにん》（かくにん）はどれですか？", hint: "Pemeriksaan paling penting sebelum mengelas pipa?", opts: ["接合《せつごう》部（せつごうぶ）の清掃《せいそう》（せいそう）", "配管《はいかん》（はいかん）の色（いろ）", "配管《はいかん》（はいかん）の材質（ざいしつ）"], opts_id: ["Bersihkan bagian sambungan", "Warna pipa", "Jenis material pipa"], ans: 0, exp: "Sebelum las → 接合部の清掃（bersihkan sambungan）agar las sempurna." },
     { id: 2, q: "保温材《ほおんざい》（ほおんざい）の継目（つぎめ）をずらして施工《せこう》（せこう）する理由《りゆう》（りゆう）は何（なん）ですか？", hint: "Alasan menggeser posisi sambungan insulasi?", opts: ["熱（ねつ）漏（も）れを防（ふせ）ぐ", "見栄（みば）えを良（よ）くする", "施工《せこう》時間《じかん》（せこうじかん）を短縮《たんしゅく》（たんしゅく）する"], opts_id: ["Mencegah kebocoran panas", "Memperbaiki penampilan", "Mempersingkat waktu"], ans: 0, exp: "Sambungan sejajar → celah langsung → panas bocor. Digeser → 熱漏れを防ぐ." },
@@ -420,6 +435,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wg10", title: "Praktik Set 6 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "wayground-quizizz",
+    track: "lifeline",
     questions: [
     { id: 1, q: "天井《てんじょう》裏（てんじょううら）に電線《でんせん》（でんせん）を通（とお）すときは、＿＿が必要《ひつよう》（ひつよう）です。", hint: "Untuk memasang kabel di atas langit-langit, diperlukan...", opts: ["カッター", "脚立《きゃたつ》（きゃたつ）", "ハンマー"], opts_id: ["Cutter", "Tangga lipat", "Palu"], ans: 1, exp: "脚立（tangga lipat）diperlukan untuk menjangkau langit-langit." },
     { id: 2, q: "安全《あんぜん》（あんぜん）のために、＿＿を配線《はいせん》（はいせん）の先端（せんたん）に取（と）り付（つ）けます。", hint: "Untuk keselamatan, pasang __ di ujung kabel.", opts: ["絶縁《ぜつえん》キャップ（ぜつえんキャップ）", "照明《しょうめい》器具《きぐ》（しょうめいきぐ）", "防音《ぼうおん》材（ぼうおんざい）"], opts_id: ["Insulation cap", "Lampu", "Material kedap suara"], ans: 0, exp: "絶縁キャップ = tutup isolasi, dipasang di ujung kabel untuk keselamatan." },
@@ -446,6 +462,7 @@ export const WAYGROUND_SETS = [
   // ── wg6: Lifeline Vocab 50qs ──
   {
     id: "wp1", title: "Praktik Set 7 · 20qs", subtitle: "保温継手・工具・安全基準 実技",
+    track: "lifeline",
     emoji: "🔩", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)",
     source: "wayground-jac",
     questions: [
@@ -473,6 +490,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wp2", title: "Praktik Set 8 · 20qs", subtitle: "安全装備・圧力試験・施工基準 実技",
+    track: "lifeline",
     emoji: "🛡️", color: "#4ade80", grad: "linear-gradient(135deg,#052e16,#15803d)",
     source: "wayground-jac",
     questions: [
@@ -500,6 +518,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wp3", title: "Praktik Set 9 · 20qs", subtitle: "冷媒配管・保温材・断熱材 実技",
+    track: "lifeline",
     emoji: "🌡️", color: "#fb923c", grad: "linear-gradient(135deg,#431407,#c2410c)",
     source: "wayground-jac",
     questions: [
@@ -527,6 +546,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wp4", title: "Praktik Set 10 · 20qs", subtitle: "溶接・フランジ・配管加工 実技",
+    track: "lifeline",
     emoji: "⚙️", color: "#c084fc", grad: "linear-gradient(135deg,#2e1065,#7c3aed)",
     source: "wayground-jac",
     questions: [
@@ -554,6 +574,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wg6", title: "Vocab Set 1 · 50qs", subtitle: "Kosakata peralatan & pipa 設備", emoji: "📖", color: "#60a5fa", grad: "linear-gradient(135deg,#1e40af,#0369a1)", source: "wayground-quizizz",
+    track: "lifeline",
     questions: [
     { id: 1, q: "Apa arti dari \"pipa air panas\"?", hint: "温=panas/hangat, 水=air, 管=pipa — fokus pada suhu air", opts: ["温水管（おんすいかん）", "給水《きゅうすい》管（きゅうすいかん）", "排水《はいすい》管（はいすいかん）"], opts_id: ["Pipa air panas", "Pipa suplai air", "Pipa pembuangan"], ans: 0, exp: "温水管（おんすいかん）= pipa air panas." },
     { id: 2, q: "Apa arti dari \"katup pengaman\"?", hint: "安=aman, 全=penuh, 弁=katup — melepas tekanan, bukan menutup aliran", opts: ["安全弁《あんぜんべん》（あんぜんべん）", "止水栓（しすいせん）", "開閉弁（かいへいべん）"], opts_id: ["Katup pengaman (safety valve)", "Keran penutup air", "Katup buka-tutup"], ans: 0, exp: "安全弁 = katup pengaman yang melepas tekanan berlebih." },
@@ -611,6 +632,7 @@ export const WAYGROUND_SETS = [
   // ── wg7: 第6章 Vocab 46qs (from PDF 07) ──
   {
     id: "wg7", title: "Vocab Set 7 · 46qs", subtitle: "Kosakata ライフライン第6章 (1)",
+    track: "lifeline",
     emoji: "📖", color: "#a78bfa", grad: "linear-gradient(135deg,#4c1d95,#6d28d9)",
     source: "wayground-pdf7",
     questions: [
@@ -665,6 +687,7 @@ export const WAYGROUND_SETS = [
   // ── wg8: 第6章 Vocab 45qs (from PDF 08) ──
   {
     id: "wg8", title: "Vocab Set 8 · 45qs", subtitle: "Kosakata ライフライン第6章 (2)",
+    track: "lifeline",
     emoji: "📖", color: "#818cf8", grad: "linear-gradient(135deg,#312e81,#4338ca)",
     source: "wayground-pdf8",
     questions: [
@@ -718,6 +741,7 @@ export const WAYGROUND_SETS = [
   // ── wg9: ライフライン 6 (2) 47qs (from PDF 09 OCR) ──
   {
     id: "wg9", title: "Vocab Set 9 · 47qs", subtitle: "Kosakata ライフライン 6 (2)",
+    track: "lifeline",
     emoji: "📚", color: "#34d399", grad: "linear-gradient(135deg,#064e3b,#059669)",
     source: "wayground-pdf9",
     questions: [
@@ -773,6 +797,7 @@ export const WAYGROUND_SETS = [
   // ── wg11: ライフライン言葉第5章 50qs (from PDF 11 OCR) ──
   {
     id: "wg11", title: "Vocab Set 11 · 50qs", subtitle: "Kosakata ライフライン言葉第5章",
+    track: "lifeline",
     emoji: "🔧", color: "#f472b6", grad: "linear-gradient(135deg,#831843,#db2777)",
     source: "wayground-pdf11",
     questions: [
@@ -830,6 +855,7 @@ export const WAYGROUND_SETS = [
   },
   {
     id: "wg12", title: "Vocab Teori Set 1 · 22qs", subtitle: "学科キーワード 法規・安全・施工管理",
+    track: "lifeline",
     emoji: "📋", color: "#dc2626", grad: "linear-gradient(135deg,#7f1d1d,#b91c1c)",
     source: "wayground-vocab",
     questions: [

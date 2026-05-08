@@ -5,6 +5,7 @@
 export const DANGER_PAIRS = [
   {
     term: '短絡',
+    track: 'common',
     furi: 'たんらく',
     confusionType: 'makna',
     correct: '2 kabel+ bersentuhan TANPA melalui beban → bisa kebakaran',
@@ -13,6 +14,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '労災保険',
+    track: 'common',
     furi: 'ろうさいほけん',
     confusionType: 'makna',
     correct: 'Premi SELURUHNYA ditanggung pengusaha (kecelakaan kerja)',
@@ -21,6 +23,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '雇用保険',
+    track: 'common',
     furi: 'こようほけん',
     confusionType: 'makna',
     correct: 'Premi BERSAMA pengusaha & pekerja — tunjangan pengangguran',
@@ -29,6 +32,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'ご苦労様',
+    track: 'common',
     furi: 'ごくろうさま',
     confusionType: 'kata',
     correct: 'HANYA boleh ke bawahan — JANGAN ke atasan',
@@ -37,6 +41,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'グラスウール',
+    track: 'lifeline',
     furi: null,
     confusionType: 'kata',
     correct: 'Dari KACA (ガラス) yang dilelehkan menjadi serat',
@@ -45,6 +50,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '新規入場者教育',
+    track: 'common',
     furi: 'しんきにゅうじょうしゃきょういく',
     confusionType: 'kata',
     correct: 'Untuk PENDATANG BARU ke LOKASI KERJA (bukan rekrutan baru perusahaan)',
@@ -56,6 +62,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'OTDR',
+    track: 'lifeline',
     furi: null,
     confusionType: 'makna',
     correct: 'Mengukur PANJANG JALUR & titik abnormal serat optik',
@@ -67,6 +74,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'ラッキングカバー',
+    track: 'lifeline',
     furi: null,
     confusionType: 'prosedur',
     correct: 'HANYA untuk pipa terekspos di LUAR RUANGAN (屋外露出)',
@@ -75,6 +83,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '電気事業法',
+    track: 'common',
     furi: 'でんきじぎょうほう',
     confusionType: 'kata',
     correct: 'UU mengatur PERUSAHAAN PENYEDIA LISTRIK (utility company)',
@@ -86,6 +95,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '土留め ≥ 1.5m',
+    track: 'common',
     furi: 'どどめ',
     confusionType: 'angka',
     correct: 'Wajib dipasang jika kedalaman galian ≥ 1.5m',
@@ -94,6 +104,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '既成杭工法',
+    track: 'common',
     furi: 'きせいくいこうほう',
     confusionType: 'makna',
     correct: 'Tiang dibuat di PABRIK, kemudian dipancang ke lapangan',
@@ -105,6 +116,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'さく井工事',
+    track: 'common',
     furi: 'さくせいこうじ',
     confusionType: 'makna',
     correct: 'Pekerjaan PENGEBORAN SUMUR air — bukan galian biasa',
@@ -113,6 +125,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '押土',
+    track: 'common',
     furi: 'おしど',
     confusionType: 'kata',
     correct: 'Mendorong tanah dengan BULLDOZER (ブルドーザ)',
@@ -121,6 +134,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'CD管 vs PF管',
+    track: 'lifeline',
     furi: 'CDかん vs PFかん',
     confusionType: 'prosedur',
     correct:
@@ -133,6 +147,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: 'ライニング管の切断',
+    track: 'lifeline',
     furi: 'ライニングかんのせつだん',
     confusionType: 'prosedur',
     correct: 'Harus pakai バンドソー atau 金属ノコギリ — DILARANG ガス溶断',
@@ -141,6 +156,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '銅管（冷媒管）の切断',
+    track: 'lifeline',
     furi: 'どうかん（れいばいかん）のせつだん',
     confusionType: 'prosedur',
     correct: 'Harus pakai パイプカッター saja — DILARANG 金ノコ/グラインダー',
@@ -149,6 +165,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '免振 vs 制振 vs 耐震',
+    track: 'common',
     furi: 'めんしん vs せいしん vs たいしん',
     confusionType: 'kata',
     correct: '免振 = isolator di fondasi; 制振 = damper dalam bangunan; 耐震 = struktur diperkuat',
@@ -160,6 +177,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '治水 vs 利水',
+    track: 'common',
     furi: 'ちすい vs りすい',
     confusionType: 'kata',
     correct: '治水 = cegah/kendalikan banjir; 利水 = manfaatkan air (irigasi/PLTA)',
@@ -171,6 +189,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '圧着ペンチ 赤 vs 黄',
+    track: 'lifeline',
     furi: 'あっちゃくペンチ あか vs き',
     confusionType: 'angka',
     correct: '赤 (merah) = untuk 圧着端子; 黄 (kuning) = untuk リングスリーブ',
@@ -182,6 +201,7 @@ export const DANGER_PAIRS = [
   },
   {
     term: '軍手 + ねじ切り機',
+    track: 'lifeline',
     furi: 'ぐんて + ねじきりき',
     confusionType: 'prosedur',
     correct: 'DILARANG KERAS memakai sarung tangan kain (軍手) saat pakai mesin ulir',

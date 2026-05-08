@@ -4,11 +4,12 @@ import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
-const VOCAB_SETS = WAYGROUND_SETS.filter((s) => s.id.startsWith('wg'));
+// VOCAB_SETS computed inside component — see track filter below
 const MIX_ALL_ID = '__vocab_mix__';
 const MIX_ALL = {
   id: MIX_ALL_ID,
@@ -19,6 +20,10 @@ const MIX_ALL = {
 };
 
 export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }) {
+  const { track } = useApp();
+  const VOCAB_SETS = WAYGROUND_SETS.filter(
+    (s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)
+  );
   const [activeSet, setActiveSet] = useState(null);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);

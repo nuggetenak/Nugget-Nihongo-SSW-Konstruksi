@@ -4,6 +4,7 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
@@ -25,18 +26,20 @@ const GROUP_ORDER = ['Waktu & Ketenagakerjaan', 'Teknis Konstruksi', 'Keselamata
 const GROUP_COLOR = { 'Waktu & Ketenagakerjaan': '#0284C7', 'Teknis Konstruksi': '#D97706', 'Keselamatan & Asuransi': '#059669', 'Ujian & Regulasi': '#7C3AED', 'Lainnya': '#6B7280' };
 function buildGroups() {
   const map = {};
-  ANGKA_KUNCI.forEach((item) => { const g = getGroup(item); if (!map[g]) map[g] = []; map[g].push(item); });
+  ANGKA.forEach((item) => { const g = getGroup(item); if (!map[g]) map[g] = []; map[g].push(item); });
   return GROUP_ORDER.filter((g) => map[g]).map((g) => ({ label: g, color: GROUP_COLOR[g], items: map[g] }));
 }
 function buildQuizItems() {
-  return shuffle(ANGKA_KUNCI).map((item) => {
-    const distractors = shuffle(ANGKA_KUNCI.filter((x) => x !== item)).slice(0, 3);
+  return shuffle(ANGKA).map((item) => {
+    const distractors = shuffle(ANGKA.filter((x) => x !== item)).slice(0, 3);
     const opts = shuffle([{ text: item.angka, isCorrect: true }, ...distractors.map((d) => ({ text: d.angka, isCorrect: false }))]);
     return { item, opts, correctIdx: opts.findIndex((o) => o.isCorrect) };
   });
 }
 
 export default function AngkaMode({ onExit, onSessionEnd }) {
+  const { track } = useApp();
+  const ANGKA = ANGKA.filter((a) => !a.track || a.track === 'common' || a.track === track);
   const [view, setView] = useState('panel');
   const [quizMode, setQuizMode] = useState('pilihan'); // 'pilihan' or 'ketik'
   if (view === 'panel') return <PanelView onExit={onExit} onStartQuiz={(mode) => { setQuizMode(mode); setView('quiz'); }} />;
@@ -54,7 +57,7 @@ function PanelView({ onExit, onStartQuiz }) {  // onStartQuiz(mode)
       <div className={`${S.rowSpread} ${A.headerRow}`}>
         <div>
           <h2 className={S.pageTitle}>🔢 Angka Kunci</h2>
-          <p className={`${S.pageSub} ${A.pageSub}`}>{ANGKA_KUNCI.length} angka WAJIB hafal sebelum ujian</p>
+          <p className={`${S.pageSub} ${A.pageSub}`}>{ANGKA.length} angka WAJIB hafal sebelum ujian</p>
         </div>
         <div style={{ display: 'flex', gap: 6 }}>
           <button className={`${S.btnPrimary} ${A.kuisBtn}`} onClick={() => onStartQuiz('pilihan')}>🧠 Pilihan</button>
@@ -293,7 +296,7 @@ function QuizView({ onBack, onSessionEnd }) {
 
 // AK3: Type-answer quiz — user types the number/value for each konteks
 function TypeQuizView({ onBack, onSessionEnd }) {
-  const [items] = useState(() => shuffle([...ANGKA_KUNCI]));
+  const [items] = useState(() => shuffle([...ANGKA]));
   const [qIdx, setQIdx] = useState(0);
   const [input, setInput] = useState('');
   const [checked, setChecked] = useState(false);

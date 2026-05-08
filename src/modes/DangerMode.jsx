@@ -4,6 +4,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
@@ -20,6 +21,8 @@ const CONFUSION_LABELS = {
 };
 
 export default function DangerMode({ onExit, onSessionEnd }) {
+  const { track } = useApp();
+  const PAIRS = PAIRS.filter((p) => !p.track || p.track === 'common' || p.track === track);
   const [view, setView] = useState('panel');
   const [filterType, setFilterType] = useState('all');
   return view === 'panel'
@@ -29,20 +32,20 @@ export default function DangerMode({ onExit, onSessionEnd }) {
 
 function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
   const [expanded, setExpanded] = useState(null);
-  const filtered = filterType === 'all' ? DANGER_PAIRS : DANGER_PAIRS.filter((p) => p.confusionType === filterType);
+  const filtered = filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
   return (
     <div className={S.page}>
       <button className={S.btnBack} onClick={onExit}>← Kembali</button>
       <div className={`${S.rowSpread} ${D.headerRow}`}>
         <div>
           <h2 className={S.pageTitle}>⚠️ Soal Jebak</h2>
-          <p className={`${S.pageSub} ${D.pageSub}`}>{DANGER_PAIRS.length} istilah yang sering salah di ujian</p>
+          <p className={`${S.pageSub} ${D.pageSub}`}>{PAIRS.length} istilah yang sering salah di ujian</p>
         </div>
         <button className={`${S.btnPrimary} ${D.drillBtn}`} onClick={onStartQuiz}>🧠 Drill ({filtered.length})</button>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
         {[['all', 'Semua', '#6B7280'], ...Object.entries(CONFUSION_LABELS).map(([k, v]) => [k, v.label, v.color])].map(([key, label, color]) => {
-          const count = key === 'all' ? DANGER_PAIRS.length : DANGER_PAIRS.filter((p) => p.confusionType === key).length;
+          const count = key === 'all' ? PAIRS.length : PAIRS.filter((p) => p.confusionType === key).length;
           const active = filterType === key;
           return (
             <button key={key} onClick={() => { setFilterType(key); setExpanded(null); }}
@@ -104,7 +107,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
 function QuizView({ onBack, onSessionEnd, filterType }) {
   const [, setDangerWrong] = usePersistedState('ssw-quiz-wrong', {});
   const buildFilteredItems = () => {
-    const pool = filterType === 'all' ? DANGER_PAIRS : DANGER_PAIRS.filter((p) => p.confusionType === filterType);
+    const pool = filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
     return shuffle(pool).map((pair) => {
       const allOpts = shuffle([{ text: pair.correct, isCorrect: true }, ...pair.traps.map((t) => ({ text: t, isCorrect: false }))]);
       return { pair, opts: allOpts, correctIdx: allOpts.findIndex((o) => o.isCorrect) };
