@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.19.0: full data layer restructure — track fields, JAC split, quiz-sets merge)
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (hygiene pass: phase history extended to v4.19.0; angka-kunci 28→29; confusion-pairs.js + StudyHeatmap added to tree; danger-pairs D2 count fixed)
 > **Version:** v4.19.0 — full data layer restructure: track fields, JAC split, quiz-sets merge, doboku/kenchiku→common; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/archive/SSW_UPGRADE_PROPOSAL_v1.md` ← **ARCHIVED** — all 71 items resolved by v4.14.0; E2 & C2 dismissed
@@ -91,7 +91,8 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── csv-sets.js             ← legacy source (still imported by quiz-sets.js)
     │   ├── sipil-sets.js           ← 3 sets, 45 questions
     │   ├── bangunan-sets.js        ← 3 sets, 45 questions
-    │   ├── angka-kunci.js          ← 28 entries with track, mnemonic, soal fields
+    │   ├── angka-kunci.js          ← 29 entries with track, mnemonic, soal fields
+    │   ├── confusion-pairs.js      ← 28 confusion pairs for ConfusionMode (音/字/意 types)
     │   ├── danger-pairs.js         ← 20 pairs with track, confusionType, explanation fields
     │   └── categories.js
     ├── srs/
@@ -131,6 +132,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── EmptyState.jsx, Skeleton.jsx
     │   ├── Onboarding.jsx
     │   ├── MissionCompleteOverlay.jsx
+    │   ├── StudyHeatmap.jsx        ← 18-week SVG activity heatmap (ST1, v4.3.1)
     │   └── *.module.css            ← all have @media (prefers-reduced-motion) blocks (FE-02)
     ├── modes/
     │   ├── FlashcardMode.jsx       ← re-export shim → FlashcardMode/index.jsx
@@ -231,6 +233,19 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Phase 5.6 (B1) | Kuis Produksi: JP→ID type-answer mode (QuizProduksiMode), 7 tests | ✅ v4.5.0 |
 | Phase 5.7 (W2) | WaygroundMode per-set Ulang Salah mode | ✅ v4.7.0 |
 | Phase 5.8 | UX Polish: SR1 search history, G1 glossary audio, SB1/SB2 sumber progress, W3 Baru badge, R2 due reason, J3 best score | ✅ v4.8.0 |
+| v4.8.1 | DengarMode wrong-tracker (D1-WT) — writes to shared quizWrong pool | ✅ v4.8.1 |
+| v4.8.2 | SR3 copy-to-clipboard in SearchMode; SIM5 pace hint in SimulasiMode | ✅ v4.8.2 |
+| Phase 5.9 | R3 speakOnFlip, R4 skip card, R5 remaining count, W1 group desc, W4 total score, Q4 quiz count persist, SR4 accuracy badges, ST4 week comparison | ✅ v4.9.0 |
+| v4.10.0 | J1 JACMode→SRS; K2 FlashcardMode read-only toggle; SB3 SumberMode per-source actions; Q5 QuizMode category filter | ✅ v4.10.0 |
+| v4.11.0 | StatsMode catList fix; D2 DangerMode confusionType+filter; D3 wrong-tracker; AK1 AngkaMode mnemonic+TypeQuiz; G2 GlossaryMode compact toggle; K5 add-to-SRS | ✅ v4.11.0 |
+| v4.12.0 | Q3 difficulty detail; F2/F3 FocusMode auto-advance+progress; D1 danger explanation; G4 glossary nav keys; W5 suggested next; AK2 soal field; E3 SRS delta; K6 category pill filter | ✅ v4.12.0 |
+| v4.13.0 | G3 GlossaryMode export mini deck — select mode + Anki TSV download | ✅ v4.13.0 |
+| v4.14.0 | J4 topic field on all 95 JAC questions (8 topics); J2 JACMode topic filter + Simulasi per Topik | ✅ v4.14.0 |
+| v4.15.x | JAC content audit: 17 furi/desc fixes jac-ch2; 6 furi fixes jac-ch1 (KY acronym) | ✅ v4.15.1 |
+| v4.16.0 | C1 text3.pdf: 18 new lifeline cards 1439–1456 (text3l source) | ✅ v4.16.0 |
+| v4.17.0 | C1-pass2: 15 new common cards 1457–1471 from text1l/text2/text3 | ✅ v4.17.0 |
+| v4.18.0 | refactor: 157 doboku+kenchiku cards → common; source files emptied for Ch.5+ | ✅ v4.18.0 |
+| v4.19.0 | refactor: JAC split (jac-teori/jac-lifeline/stubs); quiz-sets.js merged; track fields on danger-pairs + angka-kunci; components filter by track | ✅ v4.19.0 |
 
 ---
 
@@ -311,6 +326,8 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/data/jac-doboku.js` | Empty stub for sipil 実技 (v4.19.0) |
 | `src/data/jac-kenchiku.js` | Empty stub for bangunan 実技 (v4.19.0) |
 | `src/data/quiz-sets.js` | Merged WAYGROUND_SETS + CSV_SETS with `getQuizSetsForTrack()` (v4.19.0) |
+
+> **Current counts:** ANGKA_KUNCI = 29 (common: 22, lifeline: 7); DANGER_PAIRS = 20 (common: 12, lifeline: 8)
 
 ---
 

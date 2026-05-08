@@ -2,7 +2,7 @@
 
 > **Status:** ALL PHASES COMPLETE ✅ (C1 done; C2 & E2 dismissed; text4l is sole remaining content gap)
 > **Version:** 4.19.0
-> **Last updated:** 2026-05-09 (docs hygiene: C2 & E2 dismissed; proposal archived)
+> **Last updated:** 2026-05-09 (hygiene pass: D2 19→20 danger pairs; AK1/AK2 28→29 angka-kunci; C2 & E2 dismissed; proposal archived)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**
@@ -182,9 +182,9 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Item | Deliverable |
 |------|-------------|
 | BUG-FIX | StatsMode: restored missing `<div className={S.list, ST.catList}>` wrapper (parse error since v4.9.0 ST4) |
-| D2 | DangerMode: `confusionType` field on all 19 danger pairs; filter chip row in panel (makna/kata/angka/prosedur) |
+| D2 | DangerMode: `confusionType` field on all 20 danger pairs; filter chip row in panel (makna/kata/angka/prosedur) |
 | D3 | DangerMode: wrong-tracker write to shared `ssw-quiz-wrong` on wrong drill answers — 8th mode writing to quizWrong pool |
-| AK1 | AngkaMode: `mnemonic` field on all 28 `angka-kunci` entries; displayed in accordion + on wrong answer |
+| AK1 | AngkaMode: `mnemonic` field on all 29 `angka-kunci` entries; displayed in accordion + on wrong answer |
 | AK3 | AngkaMode: `TypeQuizView` — ⌨️ Ketik mode, type-answer production quiz, fuzzy match |
 | G2 | GlossaryMode: compact/expanded toggle (≡ Kompak = click-to-expand; ⊞ Lebar = always-show-all) |
 | K5 | FlashcardMode: "＋ Tambah ke Ulasan SRS" button for known cards not yet in SRS queue |
@@ -199,7 +199,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | D1 | `danger-pairs.js`: `explanation` field on all 20 pairs (linguistic "why confused"); shown in accordion + quiz |
 | G4 | GlossaryMode: kanji/romaji initials each get own nav key; sorted alphabetically after kana |
 | W5 | WaygroundMode: "Disarankan Berikutnya" card — untouched first, then lowest score |
-| AK2 | `angka-kunci.js`: `soal` field (sample JAC-style question) on all 28 entries; shown in accordion |
+| AK2 | `angka-kunci.js`: `soal` field (sample JAC-style question) on all 29 entries; shown in accordion |
 | E3 | ExportMode: "Ekspor Delta SRS Saja" button — SRS+known+starred only, smaller file |
 | K6 | FlashcardMode: category pill tap-to-filter (`__cat:KEY__`); FilterBar shows cat chip with clear button |
 
