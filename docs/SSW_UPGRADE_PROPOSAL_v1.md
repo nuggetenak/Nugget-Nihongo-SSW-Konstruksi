@@ -173,7 +173,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
 | W1 | **CSV Teori vs CSV Praktik** tidak cukup jelas dibedakan secara visual di picker | UX | 🟠 |
-| W2 | Tidak ada **"review hanya salah"** per-set — user harus ulangi set penuh | Gap | 🟠 |
+| W2 | ~~Tidak ada **"review hanya salah"** per-set~~ ✅ FIXED v4.7.0 — `lemahMode` sub-button per set row | Gap | 🟠 |
 | W3 | Set yang belum pernah dikerjakan tidak diberi badge/tag "Belum Dikerjakan" yang jelas | UX | 🟡 |
 | W4 | WaygroundMode tidak menampilkan **total score** lintas semua set — hanya per-set | UX | 🟡 |
 | W5 | Tidak ada urutan saran — set mana yang sebaiknya dikerjakan lebih dulu? | Feature | 🟡 |
@@ -268,7 +268,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | ST2 | Tidak ada **"Exam Readiness Score"** — prediksi persentase lulus berdasarkan maturitas SRS + akurasi quiz | Feature | 🔴 |
 | ST3 | Akurasi per kategori tidak divisualisasikan — hanya bar aktivitas per hari | Gap | 🟠 |
 | ST4 | Tidak ada perbandingan **"minggu ini vs minggu lalu"** | Feature | 🟡 |
-| ST5 | Kartu "sering salah" (wrong-tracker) tidak diekspos ke user secara jelas — tersimpan tapi tidak ditampilkan | Bug | 🟠 |
+| ST5 | ~~Kartu "sering salah" (wrong-tracker) tidak diekspos ke user~~ ✅ CONFIRMED DONE — "Sering Salah" section in StatsMode | Bug | 🟠 |
 
 **Rekomendasi ST2 (kritis):** Hitung `readinessScore` dari: (% kartu Mature × 0.4) + (avg quiz accuracy × 0.4) + (streak continuity × 0.2). Tampilkan sebagai gauge atau progress ring di atas StatsMode. Ini memberikan user satu angka untuk menjawab "sudah siap ujian belum?"
 
@@ -752,6 +752,9 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 3. ✅ **A3** Inter-Mode Navigation Breadcrumb — `modeHistory` + `goBack()` in AppContext + sticky breadcrumb in ModeRouter
 4. ✅ Sessions cap 90→180 (heatmap coverage)
 5. ✅ Lint fixes: StudyHeatmap `today` in useMemo, FlashcardMode redundant dep
+
+### Phase 5.7 — W2 ✅ SELESAI (2026-05-08, commit `36543ab` + `v4.7.0`)
+1. ✅ **W2** WaygroundMode per-set "Ulang Salah" — `lemahMode` filter + sub-button per set row
 
 ### Phase 5.6 — E2/F4/ST3 ✅ SELESAI (2026-05-08, v4.6.0)
 1. ✅ **E2** GitHub Gist sync (opt-in) — `src/utils/gist-sync.js` + collapsible section in ExportMode

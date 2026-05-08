@@ -1,7 +1,7 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.6.0)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.7.0)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.6.0
+> **Version:** 4.7.0
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -21,6 +21,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 383 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
+| Version | **4.7.0** |
 
 ---
 
@@ -115,6 +116,14 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 |------|-------------|
 | B1 | `QuizProduksiMode.jsx` — JP→ID type-answer with fuzzy match, wrong-tracker, audio, session summary |
 | Tests | `quiz-produksi.test.jsx` — 7 tests; total 383/383 ✅ |
+
+### v4.7.0 — Phase 5.7 (W2)
+
+| Item | Deliverable |
+|------|-------------|
+| W2 | WaygroundMode per-set "Ulang Salah" — `getSetWrongCount()` helper, `lemahMode` state, sub-button per set row, score isolation for lemah runs |
+
+---
 
 ### v4.6.0 — E2/F4/ST3
 

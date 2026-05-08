@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.6.0 — E2/F4/ST3 complete)
-> **Version:** v4.6.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.6 complete; 383 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.7.0 — W2 complete)
+> **Version:** v4.7.0 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.6 + W2 complete; 383 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -183,7 +183,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.6.0** |
+| Version | **4.7.0** |
 | Tests | **383** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -217,6 +217,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Phase 5.4 | Polish & Infra: ST1 Heatmap, A2 SmartRecommend, E4 lz-compression | ✅ v4.3.1 |
 | Phase 5.5 | Unfinished items: D1 DengarMode, D3 CatatanMode, A3 Breadcrumb, sessions cap 180, lint fixes | ✅ v4.4.0 |
 | Phase 5.6 (B1) | Kuis Produksi: JP→ID type-answer mode (QuizProduksiMode), 7 tests | ✅ v4.5.0 |
+| Phase 5.7 (W2) | WaygroundMode per-set Ulang Salah mode | ✅ v4.7.0 |
 
 ---
 
@@ -306,3 +307,4 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.4.0 Phase 5.5: D1 DengarMode (listening comprehension); D3 CatatanMode (personal notes per card); A3 breadcrumb nav; sessions cap 90→180; lint fixes (StudyHeatmap, FlashcardMode). 376/376 tests. |
 | 2026-05-08 | Sonnet 4.6 | v4.5.0 B1: QuizProduksiMode — JP→ID type-answer production quiz, fuzzy match, wrong-tracker, audio. 383/383 tests. |
 | 2026-05-08 | Sonnet 4.6 | v4.6.0 E2/F4/ST3: Gist sync (ExportMode), Sprint ghost score (F4 Battle Past Self), quiz accuracy per category in StatsMode. 383/383 tests. |
+| 2026-05-08 | Sonnet 4.6 | v4.7.0 W2: WaygroundMode per-set "Ulang Salah" sub-button + lemahMode filter. ST5 confirmed already complete. |

@@ -1,3 +1,22 @@
+## [4.7.0] - 2026-05-08
+
+### W2 (Agent Sonnet 4.6)
+
+**W2 — Per-Set "Ulang Salah" Mode in WaygroundMode**
+- `getSetWrongCount(setId)` helper reads per-set wrong counts at picker render time via `loadFromStorage`
+- `lemahMode` state: when true, filters question pool to wrong-only for the active set before shuffling
+- Each set row in the picker now shows an `⚠ Ulang N salah` sub-button when that set has stored wrong answers
+- Sub-button is visually attached to its set row (no top border, red tint, rounded only at bottom)
+- Lemah-mode runs show `⚠ [title] · Salah` in QuizShell header
+- Lemah-mode scores do not overwrite the set's official score in `wgScores`
+- `handleExit` resets `lemahMode` on back navigation so picker is always clean
+- Import updated: `makeWrongEntry, getWrongCount, loadFromStorage` from `wrong-tracker.js`
+
+**Administrative**
+- ST5 confirmed complete (StatsMode already shows "Sering Salah" top-10 wrong cards from `quizWrong`)
+
+---
+
 ## [4.6.0] - 2026-05-08
 
 ### E2/E3 · F4 · ST3 (Agent Sonnet 4.6)
