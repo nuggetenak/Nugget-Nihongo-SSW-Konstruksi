@@ -1,3 +1,18 @@
+## [4.19.4] - 2026-05-09
+
+### fix: SearchMode wrongCount bug + barrel/schema hygiene (Agent Sonnet 4.6)
+
+**Bug fixes:**
+- `SearchMode.jsx`: `wrongCount` was reading raw `quizWrong[id]` value — displays `[object Object]× salah` when the entry is a wrongEntry object. Fixed by wrapping with `getWrongCount()`. Added import.
+- `utils/index.js`: stale `STORAGE_KEYS` re-export removed (STORAGE_KEYS was deleted in v3 migration A.7 TD-03); `removeFromStorage` was exported from wrong-tracker.js but missing from barrel — added.
+- `utils/index.js`: `standardizeFuri` was exported from jp-helpers.js but missing from barrel — added.
+
+**Code quality:**
+- `storage/schema.js`: `quizWrong` comment corrected from `{ [cardId]: count }` to `{ [cardId]: wrongEntry }` (backward-compat: plain int also accepted); prefs DEFAULTS comment alignment fixed; `sprintBest/sprintBestTimeline` note added.
+- `contexts/ProgressContext.jsx`: indentation bug in ctx object fixed (misaligned comment); `recordWrong` clarifying comment added (legacy in-doc counter; out-of-docs tracking via wrong-tracker.js + ssw-quiz-wrong is the primary path).
+
+---
+
 ## [4.19.3] - 2026-05-09
 
 ### test + docs: data integrity tests + blueprint sync (Agent Sonnet 4.6)
