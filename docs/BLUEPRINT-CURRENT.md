@@ -1,8 +1,8 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.19.0)
 
-> **Status:** ALL PHASES COMPLETE ✅ (C1 done; C2 & E2 dismissed; text4l is sole remaining content gap)
+> **Status:** ALL PHASES COMPLETE ✅ — NO OPEN ITEMS (C1 fully done: text4 audit confirmed all content pre-exists; C2 & E2 dismissed)
 > **Version:** 4.19.0
-> **Last updated:** 2026-05-09 (hygiene pass: D2 19→20 danger pairs; AK1/AK2 28→29 angka-kunci; C2 & E2 dismissed; proposal archived)
+> **Last updated:** 2026-05-09 (text4 audit: all 100% pre-existing — no new cards; C1 fully closed)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**
@@ -263,7 +263,7 @@ These are honest assessments — not blocking anything, but relevant for future 
 
 ### Content Gaps (Phase 5.2 — Deferred)
 - **Sipil/Bangunan track content is thin**: 45 questions each, written from general knowledge. JAC official PDFs for sipil (text5d–7d) and bangunan (text5k–7k) were not fully processed. The 1,410 flashcards are ~80% lifeline content — sipil and bangunan tracks show near-identical card pools.
-- **Chapter 2 & 4 flashcards partial**: text1l/text2 pass2 done (+15 common cards 1457–1471), text3l done (+18 lifeline cards 1439–1456), text4l not yet extracted.
+- **Chapter 2 & 4 flashcards**: text1l/text2 pass2 done (+15 common cards 1457–1471), text3l done (+18 lifeline cards 1439–1456), text4 audit done — all Ch.4 terminology pre-exists in cards (100% coverage confirmed 2026-05-09).
 - **Photo-based (写真) questions**: QuestionImage component exists and SW cache handles images, but actual images from JAC PDFs have not been extracted. Infrastructure is in place; content is not.
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
@@ -277,7 +277,7 @@ These are honest assessments — not blocking anything, but relevant for future 
 
 ### Remaining Open Items
 - **E2** (export encryption) — ~~🟢 Nice-to-have~~ **DISMISSED** — not worth complexity; no sensitive data in export.
-- **C1** text4l — only remaining content gap; all other C1 work done (text3l +18, pass2 +15).
+- **C1** ✅ FULLY COMPLETE — text4 audit (2026-05-09): all Ch.4 terms pre-exist; no new cards added. text3l +18, pass2 +15 already committed.
 - **C2** (sipil/bangunan expansion) — **DISMISSED** — 45 questions per track is sufficient for current learner scope; expansion deferred indefinitely.
 
 ---
@@ -346,3 +346,4 @@ See `docs/archive/ARCHIVE-INDEX.md` for a summary of what's there and why.
 
 The last active blueprint was `MASTER-BLUEPRINT-v6.md` (Opus 4.6 / Crunchy, 2026-05-01).
 It has been moved to `docs/archive/` — all its phases are now complete.
+
