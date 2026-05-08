@@ -1,5 +1,5 @@
 # 🪖 SSW Konstruksi — Audit & Upgrade Proposal
-**Versi Proposal:** v3 | **Tanggal Audit:** 2026-05-07 | **Hygiene Pass:** 2026-05-08 | **Auditor:** Claude Sonnet 4.6
+**Versi Proposal:** v3 | **Tanggal Audit:** 2026-05-07 | **Hygiene Pass:** 2026-05-08 (×2) | **Auditor:** Claude Sonnet 4.6
 
 ---
 
@@ -37,7 +37,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 1. 🔁 Ulasan SRS (ReviewMode)
 
-**Kondisi saat ini:** Auto-speak on card advance (D5), 🔊 manual replay (C1), FSRS 4-button rating.
+**Kondisi saat ini:** Auto-speak on card advance (D5), 🔊 manual replay (C1), FSRS 4-button rating, `ReviewSummaryScreen` setelah sesi selesai (R1 v4.3.0), due-reason chip (R2 v4.8.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -53,7 +53,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 2. 🃏 Kartu (FlashcardMode)
 
-**Kondisi saat ini:** Decomposed ke 5 subcomponen, 3D flip, FSRS rating, search, star, furigana policy.
+**Kondisi saat ini:** Decomposed ke 5 subcomponen, 3D flip, FSRS rating, search, star, furigana policy, swipe gestures kiri/kanan/atas (K1 v4.3.0), filter persist (BUG-05 v4.3.1), breadcrumb nav (A3 v4.4.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -70,7 +70,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 3. ❓ Kuis (QuizMode)
 
-**Kondisi saat ini:** Furigana policy, seenPool fix (A1), 3 difficulty levels, lemah mode, auto-next.
+**Kondisi saat ini:** Furigana policy, seenPool fix (A1), 3 difficulty levels, lemah mode, auto-next, Wrong-Card Bridge ke FlashcardMode (A1 v4.3.0). Mode produksi terpisah: `QuizProduksiMode.jsx` (B1 v4.5.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -87,7 +87,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 4. ⚡ Sprint (SprintMode)
 
-**Kondisi saat ini:** Personal best (M2), session recording (B3), 60 detik, audio/furigana props.
+**Kondisi saat ini:** Duration picker 30s/60s/2m (B2), category lock (B2), escalating urgency (B2), ghost score live (F4 v4.6.0), personal best (`sprintBest` + `sprintBestTimeline` in prefs), wrong-tracker write (BUG-07 v4.3.0), session recording.
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -103,7 +103,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 5. 🎯 Fokus (FocusMode)
 
-**Kondisi saat ini:** Session recording (C3), wrap inner SprintMode, auto-pilih kategori terlemah.
+**Kondisi saat ini:** Session recording, wraps SprintMode, auto-pilih kategori terlemah, explainer panel "Kenapa kategori ini?" (F1 v4.3.0), breadcrumb nav (A3 v4.4.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -117,7 +117,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 6. 📋 JAC Official (JACMode)
 
-**Kondisi saat ini:** Score tracking per set, last-score badge, lemah filter, auto-delay.
+**Kondisi saat ini:** Score tracking per set, last-score badge + best score (J3 v4.8.0), lemah filter, auto-delay, Wrong-Card Bridge (A1 v4.3.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -132,7 +132,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 7. 🎓 Wayground (WaygroundMode)
 
-**Kondisi saat ini:** Score + maxStreak per set, badges, CSV Teori + CSV Praktik terintegrasi.
+**Kondisi saat ini:** Score + maxStreak per set, badges, CSV Teori + CSV Praktik terintegrasi, per-set "Ulang Salah" sub-button (W2 v4.7.0), badge "Baru" untuk set belum dikerjakan (W3 v4.8.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -146,7 +146,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 8. 🎯 Simulasi (SimulasiMode)
 
-**Kondisi saat ini:** Big timer, LULUS/BELUM LULUS (65% threshold), wrong review, standalone tanpa QuizShell.
+**Kondisi saat ini:** Big timer dengan pace hint `N soal/mnt` (SIM5 v4.8.2), LULUS/BELUM LULUS (65% threshold), pause + auto-pause (SIM1 v4.3.0), unified pool JAC+Wayground (BUG-06 v4.3.0), post-exam breakdown (SIM4 v4.3.1), Wrong-Card Bridge (SIM3 v4.3.1).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -186,7 +186,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 11. 🔍 Cari (SearchMode)
 
-**Kondisi saat ini:** Track-aware (C2), starring (D9), search meta shows pool size.
+**Kondisi saat ini:** Track-aware, starring, search meta shows pool size, riwayat 5 pencarian terakhir (SR1 v4.8.0), copy-to-clipboard ⎘ per result (SR3 v4.8.2), useDebounce 120ms.
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -199,7 +199,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 12. 📖 Glosari (GlossaryMode)
 
-**Kondisi saat ini:** A-Z hiragana nav, IntersectionObserver sync, category filter dengan count badge.
+**Kondisi saat ini:** A-Z hiragana nav + `#` bucket untuk non-hiragana (BUG-08 v4.3.1), IntersectionObserver sync, category filter dengan count badge, tombol 🔊 audio per entry (G1 v4.8.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -212,7 +212,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 13. 📂 Sumber (SumberMode)
 
-**Kondisi saat ini:** Browse kartu per sumber PDF.
+**Kondisi saat ini:** Browse kartu per sumber PDF, progress bar hafalan per sumber + badge "Terlemah" (SB1/SB2 v4.8.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -224,7 +224,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 14. 📊 Statistik (StatsMode)
 
-**Kondisi saat ini:** 7-day CSS activity bars (D7), SRS breakdown grid (C6), streak card, due-count banner.
+**Kondisi saat ini:** 18-week SVG heatmap (ST1 v4.3.1), Exam Readiness Score gauge (ST2 v4.3.0), SRS breakdown grid, quiz accuracy per kategori (ST3 v4.6.0), streak card, "Sering Salah" top-10, due-count banner.
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -240,7 +240,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 ### 15. 💾 Ekspor (ExportMode)
 
-**Kondisi saat ini:** 2-step import dengan diff preview, validateSnapshot, importAllSafe dengan rollback.
+**Kondisi saat ini:** 2-step import dengan diff preview, validateSnapshot, importAllSafe dengan rollback, konflik warning (BUG-11 v4.3.1), GitHub Gist sync opt-in (E2 v4.6.0).
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
@@ -717,6 +717,11 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 4. ✅ Sessions cap 90→180 (heatmap coverage)
 5. ✅ Lint fixes: StudyHeatmap `today` in useMemo, FlashcardMode redundant dep
 
+### Phase 5.6 — E2/F4/ST3 ✅ SELESAI (2026-05-08, v4.6.0)
+1. ✅ **E2** GitHub Gist sync (opt-in) — `src/utils/gist-sync.js` + collapsible section in ExportMode
+2. ✅ **F4** Sprint "Battle Past Self" ghost score — `sprintBestTimeline` in prefs, live `👻 N` display
+3. ✅ **ST3** Quiz accuracy per category in StatsMode — `🎯 N%` badge + `N× salah dalam kuis` from `quizWrong`
+
 ### Phase 5.7 — W2 ✅ SELESAI (2026-05-08, commit `36543ab` + `v4.7.0`)
 1. ✅ **W2** WaygroundMode per-set "Ulang Salah" — `lemahMode` filter + sub-button per set row
 
@@ -728,10 +733,12 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 5. ✅ **R2** ReviewMode: chip due-reason (reps count + interval) di bawah strength pill
 6. ✅ **J3** JACMode: `bestPct` tersimpan + ditampilkan di picker
 
-### Phase 5.6 — E2/F4/ST3 ✅ SELESAI (2026-05-08, v4.6.0)
-1. ✅ **E2** GitHub Gist sync (opt-in) — `src/utils/gist-sync.js` + collapsible section in ExportMode
-2. ✅ **F4** Sprint "Battle Past Self" ghost score — `sprintBestTimeline` in prefs, live `👻 N` display
-3. ✅ **ST3** Quiz accuracy per category in StatsMode — `🎯 N%` badge + `N× salah dalam kuis` from `quizWrong`
+### Phase 5.8.1 — DengarMode Wrong-Tracker ✅ SELESAI (2026-05-08, v4.8.1)
+1. ✅ **D1-WT** DengarMode wrong-tracker — wrong answers ditulis ke shared `quizWrong` pool
+
+### Phase 5.8.2 — SR3 + SIM5 ✅ SELESAI (2026-05-08, v4.8.2)
+1. ✅ **SR3** SearchMode: copy-to-clipboard ⎘ per result
+2. ✅ **SIM5** SimulasiMode: pace hint `N soal/mnt` live di bawah timer
 
 ---
 

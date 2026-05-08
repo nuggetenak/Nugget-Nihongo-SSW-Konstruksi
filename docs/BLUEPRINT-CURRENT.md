@@ -33,7 +33,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 |-------|------|-----------------|
 | A | Bug Fixes + Storage v3 | seenPool→useRef, milestone toasts, anxiety toast, storage v3 migration, growth mindset strings |
 | B | Content: Sipil & Bangunan | sipil-sets.js (3 sets, 45q), bangunan-sets.js (3 sets, 45q), functional quiz modes, QuestionImage component |
-| C | Daily Mission + Session Analytics | daily-mission.js (Four Strands engine), MissionCompleteOverlay, session tracking (cap 90), habit anchor, StatsMode weekly chart |
+| C | Daily Mission + Session Analytics | daily-mission.js (Four Strands engine), MissionCompleteOverlay, session tracking (initial cap 90, bumped 180 in v4.4.0), habit anchor, StatsMode weekly chart |
 | D | Export/Import Hardening | validateSnapshot, importAllSafe with rollback, SayaTab diff UI |
 | E | FlashcardMode Decomposition | FlashcardMode/ sub-directory, FLIP_STYLE → CSS, furiganaPolicy prop chain |
 | F | Exam Countdown + Audio | SayaTab date picker, Dashboard countdown banner, speak.js (Web Speech + HVPT cycling), 🔊 buttons |
@@ -146,7 +146,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 | Item | Deliverable |
 |------|-------------|
-| D1-WT | `DengarMode.jsx` wrong-tracker — wrong answers written to shared `quizWrong` pool; modes with wrong-tracker: 10→11/15 |
+| D1-WT | `DengarMode.jsx` wrong-tracker — wrong answers written to shared `quizWrong` pool; 7 modes now write to `quizWrong` (QuizMode, JACMode, WaygroundMode, SprintMode, VocabMode, QuizProduksiMode, DengarMode) |
 
 ### v4.8.2 — SR3 + SIM5
 
@@ -158,7 +158,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 ---
 
-## Open Items / Known Gaps (Post v4.8.0)
+## Open Items / Known Gaps (Post v4.8.2)
 
 These are honest assessments — not blocking anything, but relevant for future work:
 
@@ -169,8 +169,8 @@ These are honest assessments — not blocking anything, but relevant for future 
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
 ### Technical
-- **sessions cap at 180**: Heatmap uses 18 weeks (~126 days). Cap bumped 90→180 in v4.4.0. ✅
-- **lz-string prod dep**: `package.json` now has 4 prod deps (react, react-dom, ts-fsrs, lz-string). Hard constraint updated to 4. ✅
+- **Out-of-DOCS localStorage keys**: Several modes use `usePersistedState` with keys outside the 3-doc engine (e.g. `ssw-jac-scores`, `ssw-wg-scores`, `ssw-vocab-scores`, `ssw-quiz-wrong`, `ssw-wrong-counts`, `ssw-fc-search`, `ssw-fc-sort`, `ssw-gist-pat`, `ssw-gist-id`, dynamic `ssw-wg-wrong-{setId}`, `ssw-vocab-wrong-{setId}`). These bypass lz-string compression and `validateSnapshot`. Known — not blocking, but relevant if adding export coverage.
+- **sessionStorage keys**: `ssw-search-history` (SR1, SearchMode) lives in sessionStorage (per-tab, not persisted). Expected behaviour.
 
 ### Architecture
 - **Category mismatch**: `jenis_kerja` and `alat_umum` categories contain lifeline content even for sipil/bangunan track users. Re-categorization would require content review of ~485 cards.
@@ -208,12 +208,26 @@ prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
             flashcardHintCount,            // BUG-10 fixed: now in DEFAULTS, resets on resetAll()
             examDate, audioEnabled, studyAnchor, furiganaPolicy,
             notes: {},                     // D3: personal notes per cardId (v4.4.0)
+            sprintBest: 0,                 // F4: personal best sprint score (v4.6.0)
             sprintBestTimeline: [] }       // F4: ghost score timeline for Sprint (v4.6.0)
 
 srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
-// E4: All docs are lz-string compressed in localStorage.
+// E4: All DOCS are lz-string compressed in localStorage.
 // readDoc() decompresses; falls back to plain JSON for old data (backward compat).
+
+// ⚠️ Out-of-DOCS keys (usePersistedState — bypass engine/compression/export):
+// ssw-jac-scores           { [setKey]: { score, total, pct, date, bestPct } }
+// ssw-wg-scores            { [setId]: { correct, total, date, maxStreak } }
+// ssw-vocab-scores         { [setId]: { correct, total, date } }
+// ssw-quiz-wrong           { [cardId]: wrongEntry }  ← shared quizWrong write pool
+// ssw-wrong-counts         { [cardId]: count }
+// ssw-quiz-produksi-wrong  { [cardId]: wrongEntry }
+// ssw-wg-wrong-{setId}     { [cardId]: wrongEntry }  ← per-set Wayground wrong
+// ssw-vocab-wrong-{setId}  { [cardId]: wrongEntry }
+// ssw-fc-search / ssw-fc-sort  string (sessionStorage — FlashcardMode filter persist)
+// ssw-gist-pat / ssw-gist-id   string (GitHub Gist credentials)
+// ssw-search-history           string[] (sessionStorage — per tab, not persisted)
 ```
 
 ---
