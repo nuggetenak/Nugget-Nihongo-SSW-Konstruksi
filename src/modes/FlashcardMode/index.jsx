@@ -300,6 +300,21 @@ export default function FlashcardMode({
         >Next →</button>
       </div>
 
+      {/* K5: Manual SRS enqueue for known cards not yet in SRS */}
+      {isKnown && srs?.ready && !srsInfo && (
+        <button
+          onClick={() => { srs.review(card.id, 1); }}
+          style={{ fontFamily: 'inherit', width: '100%', padding: '8px 12px', marginTop: 4, borderRadius: 8,
+            background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)',
+            color: '#22c55e', fontSize: 12, cursor: 'pointer' }}
+        >＋ Tambah ke Ulasan SRS</button>
+      )}
+      {isKnown && srs?.ready && srsInfo && (
+        <div style={{ textAlign: 'center', fontSize: 11, color: '#22c55e', marginTop: 4, opacity: 0.7 }}>
+          ✓ Sudah di SRS
+        </div>
+      )}
+
       {/* Tool strip */}
       <ToolStrip
         sortMode={sortMode}

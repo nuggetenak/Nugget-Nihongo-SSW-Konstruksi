@@ -38,10 +38,13 @@ function buildQuizItems() {
 
 export default function AngkaMode({ onExit, onSessionEnd }) {
   const [view, setView] = useState('panel');
-  return view === 'panel' ? <PanelView onExit={onExit} onStartQuiz={() => setView('quiz')} /> : <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
+  const [quizMode, setQuizMode] = useState('pilihan'); // 'pilihan' or 'ketik'
+  if (view === 'panel') return <PanelView onExit={onExit} onStartQuiz={(mode) => { setQuizMode(mode); setView('quiz'); }} />;
+  if (quizMode === 'ketik') return <TypeQuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
+  return <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
 }
 
-function PanelView({ onExit, onStartQuiz }) {
+function PanelView({ onExit, onStartQuiz }) {  // onStartQuiz(mode)
   const [expanded, setExpanded] = useState(null);
   const groups = useMemo(() => buildGroups(), []);
 
@@ -53,7 +56,10 @@ function PanelView({ onExit, onStartQuiz }) {
           <h2 className={S.pageTitle}>🔢 Angka Kunci</h2>
           <p className={`${S.pageSub} ${A.pageSub}`}>{ANGKA_KUNCI.length} angka WAJIB hafal sebelum ujian</p>
         </div>
-        <button className={`${S.btnPrimary} ${A.kuisBtn}`} onClick={onStartQuiz}>🧠 Kuis</button>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <button className={`${S.btnPrimary} ${A.kuisBtn}`} onClick={() => onStartQuiz('pilihan')}>🧠 Pilihan</button>
+          <button className={S.btnSecondary} style={{ padding: '8px 12px', fontSize: 12 }} onClick={() => onStartQuiz('ketik')}>⌨️ Ketik</button>
+        </div>
       </div>
 
       <div className={A.warningBanner}>
@@ -98,7 +104,12 @@ function PanelView({ onExit, onStartQuiz }) {
                       }}
                     >
                       <div className={A.angkaLarge} style={{ color: g.color }}>{item.angka}</div>
-                      <div className={A.konteksFull} style={{ marginBottom: relCard ? 0 : 0 }}>{item.konteks}</div>
+                      <div className={A.konteksFull}>{item.konteks}</div>
+                      {item.mnemonic && (
+                        <div style={{ fontSize: 11, color: '#9CA3AF', background: 'rgba(0,0,0,0.15)', borderRadius: 6, padding: '6px 8px', marginTop: 6, lineHeight: 1.5 }}>
+                          💡 {item.mnemonic}
+                        </div>
+                      )}
                       {relCard && (
                         <div className={A.relatedCard}>
                           <div className={A.relatedCardId}>KARTU #{relCard.id}</div>
@@ -271,6 +282,143 @@ function QuizView({ onBack, onSessionEnd }) {
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
       )}
+    </div>
+  );
+}
+
+// AK3: Type-answer quiz — user types the number/value for each konteks
+function TypeQuizView({ onBack, onSessionEnd }) {
+  const [items] = useState(() => shuffle([...ANGKA_KUNCI]));
+  const [qIdx, setQIdx] = useState(0);
+  const [input, setInput] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [results, setResults] = useState([]);
+  const [phase, setPhase] = useState('playing');
+  const sessionFired = useRef(false);
+  const inputRef = useRef(null);
+
+  const item = items[qIdx];
+  const isLast = qIdx === items.length - 1;
+
+  // Fuzzy check: normalize spaces, case, ignore punctuation
+  function checkAnswer(userInput, correct) {
+    const norm = (s) => s.toLowerCase().replace(/[~〜～≥≤<>≈×,、。・]/g, '').replace(/\s+/g, '').trim();
+    const u = norm(userInput);
+    const c = norm(correct);
+    if (u === c) return true;
+    // Allow partial match if user typed the core number (e.g. "8" matches "8 jam/hari, 40 jam/minggu" if 8 is first token)
+    const firstNum = c.match(/\d+/)?.[0];
+    if (firstNum && u === firstNum && firstNum.length >= 2) return true;
+    return false;
+  }
+
+  const handleCheck = () => {
+    if (!input.trim() || checked) return;
+    const correct = checkAnswer(input, item.angka);
+    setIsCorrect(correct);
+    setChecked(true);
+    setResults((r) => [...r, { correct, item, userInput: input }]);
+  };
+
+  const handleNext = () => {
+    if (isLast) { setPhase('result'); return; }
+    setQIdx((i) => i + 1);
+    setInput('');
+    setChecked(false);
+    setIsCorrect(false);
+    setTimeout(() => inputRef.current?.focus(), 50);
+  };
+
+  useEffect(() => {
+    if (phase !== 'result' || sessionFired.current) return;
+    sessionFired.current = true;
+    const correct = results.filter((r) => r.correct).length;
+    onSessionEnd?.({ correct, total: results.length });
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const h = (e) => {
+      if (e.key === 'Enter') { if (!checked) handleCheck(); else handleNext(); }
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [checked, input]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (phase === 'result') {
+    const correct = results.filter((r) => r.correct).length;
+    const pct = Math.round((correct / results.length) * 100);
+    const grade = getGrade(pct);
+    return (
+      <div className={`${S.page} ${A.resultPage}`}>
+        <div className={A.resultCard}>
+          <div className={A.resultEmoji}>{grade.emoji}</div>
+          <div className={A.resultPct} style={{ color: grade.color }}>{pct}%</div>
+          <div className={A.resultLabel}>{grade.label}</div>
+          <div className={A.resultSub}>{correct}/{results.length} benar</div>
+        </div>
+        <div className={`${S.row} ${A.resultActions}`}>
+          <button className={`${S.btnPrimary} ${A.ulangBtn}`} onClick={onBack}>🔄 Kembali</button>
+        </div>
+        <div className={S.sectionLabel}>Review</div>
+        <div className={S.list} style={{ gap: 8 }}>
+          {results.filter((r) => !r.correct).map((r, i) => (
+            <div key={i} style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 8, padding: '8px 12px' }}>
+              <div style={{ fontSize: 11, color: '#9CA3AF', marginBottom: 2 }}>{r.item.konteks}</div>
+              <div style={{ fontSize: 12, color: '#F87171' }}>✗ Kamu: {r.userInput}</div>
+              <div style={{ fontSize: 13, color: '#4ADE80', fontWeight: 700 }}>✓ Benar: {r.item.angka}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`${S.pageScroll} ${A.quizPage}`}>
+      <div className={`${S.rowSpread} ${A.quizHeader}`}>
+        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>← Angka Kunci</button>
+        <span className={A.scoreBadge}>{results.filter((r) => r.correct).length}/{qIdx + (checked ? 1 : 0)}</span>
+      </div>
+      <ProgressBar current={qIdx + (checked ? 1 : 0)} total={items.length} color={ANGKA_COLOR} />
+      <div className={S.counter}>{qIdx + 1} / {items.length}</div>
+
+      <div className={`${S.cardLg} ${A.questionCard}`}>
+        <div className={A.questionHint}>⌨️ Ketik angka/nilai yang tepat</div>
+        <div className={A.questionTerm}>{item.konteks}</div>
+      </div>
+
+      <input
+        ref={inputRef}
+        autoFocus
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        disabled={checked}
+        placeholder="Ketik jawaban..."
+        style={{
+          fontFamily: 'inherit', fontSize: 16, padding: '12px 14px', borderRadius: 8,
+          background: checked ? (isCorrect ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)') : 'var(--color-surface)',
+          border: `1.5px solid ${checked ? (isCorrect ? '#22c55e' : '#ef4444') : 'var(--color-border)'}`,
+          color: 'var(--color-text)', width: '100%', boxSizing: 'border-box', marginBottom: 8,
+          outline: 'none',
+        }}
+      />
+
+      {checked && (
+        <div style={{ padding: '10px 14px', borderRadius: 8, marginBottom: 8,
+          background: isCorrect ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
+          border: `1px solid ${isCorrect ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}` }}>
+          <div style={{ fontWeight: 700, color: isCorrect ? '#22c55e' : '#ef4444', marginBottom: 4 }}>
+            {isCorrect ? '✓ Benar!' : `✗ Jawaban: ${item.angka}`}
+          </div>
+          {item.mnemonic && <div style={{ fontSize: 11, color: '#9CA3AF', lineHeight: 1.5 }}>💡 {item.mnemonic}</div>}
+        </div>
+      )}
+
+      {!checked
+        ? <button className={`${S.btnPrimary} ${A.nextBtn}`} onClick={handleCheck} disabled={!input.trim()}>Cek ↵</button>
+        : <button className={`${S.btnPrimary} ${A.nextBtn}`} onClick={handleNext}>{isLast ? 'Lihat Hasil →' : 'Lanjut →'}</button>
+      }
     </div>
   );
 }

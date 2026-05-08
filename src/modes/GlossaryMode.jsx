@@ -19,6 +19,7 @@ export default function GlossaryMode({ onExit, track }) {
   const [showAllTracks, setShowAllTracks] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
+  const [compactView, setCompactView] = useState(true); // G2: true=click-to-expand; false=always-show-all
   const navRef = useRef(null);
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
   const sectionRefs = useRef({});
@@ -99,7 +100,16 @@ export default function GlossaryMode({ onExit, track }) {
           <span className={`${S.pill} ${G.countPill}`}>{sorted.length} istilah</span>
         </div>
         <div className={G.metaRow}>
-          <p className={G.metaText}>{groups.length} huruf · diurutkan あいうえお</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <p className={G.metaText}>{groups.length} huruf · diurutkan あいうえお</p>
+            <button onClick={() => setCompactView((v) => !v)}
+              style={{ fontFamily: 'inherit', fontSize: 11, padding: '2px 8px', borderRadius: 99, cursor: 'pointer',
+                background: compactView ? T.surface : 'rgba(251,191,36,0.15)',
+                border: `1px solid ${compactView ? T.border : 'rgba(251,191,36,0.35)'}`,
+                color: compactView ? T.textMuted : T.gold }}>
+              {compactView ? '≡ Kompak' : '⊞ Lebar'}
+            </button>
+          </div>
           {trackCatKeys && (
             <button
               onClick={() => { setShowAllTracks((v) => !v); setFilterCat('all'); }}
@@ -169,7 +179,7 @@ export default function GlossaryMode({ onExit, track }) {
               <span className={G.letterCount}>{items.length}</span>
             </div>
             {items.map((c) => {
-              const isOpen = expanded === c.id;
+              const isOpen = !compactView || expanded === c.id;
               const catInfo = catMap[c.category];
               return (
                 <div
