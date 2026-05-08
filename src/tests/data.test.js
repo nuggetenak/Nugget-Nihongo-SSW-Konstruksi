@@ -1,11 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { CARDS } from '../data/cards.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
+import { JAC_TEORI, JAC_LIFELINE } from '../data/index.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import { CSV_SETS } from '../data/csv-sets.js';
+import { QUIZ_SETS, getQuizSetsForTrack } from '../data/quiz-sets.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
-import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from '../data/categories.js';
+import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES, SOURCE_GROUPS, SOURCE_META } from '../data/categories.js';
 
 describe('CARDS data integrity', () => {
   it('has at least 1400 cards', () => expect(CARDS.length).toBeGreaterThanOrEqual(1400));
@@ -331,5 +333,141 @@ describe('getCatsForTrack', () => {
     const kenchiku = new Set(getCatsForTrack('kenchiku'));
     const overlap = [...doboku].filter((k) => kenchiku.has(k));
     expect(overlap.length).toBeGreaterThan(0);
+  });
+});
+
+describe('JAC_TEORI / JAC_LIFELINE split', () => {
+  it('JAC_TEORI has 65 questions', () => expect(JAC_TEORI.length).toBe(65));
+  it('JAC_LIFELINE has 30 questions', () => expect(JAC_LIFELINE.length).toBe(30));
+
+  it('JAC_OFFICIAL = JAC_TEORI + JAC_LIFELINE combined', () => {
+    expect(JAC_OFFICIAL.length).toBe(JAC_TEORI.length + JAC_LIFELINE.length);
+  });
+
+  it('all JAC_TEORI questions have track:common', () => {
+    expect(JAC_TEORI.every((q) => q.track === 'common')).toBe(true);
+  });
+
+  it('all JAC_LIFELINE questions have track:lifeline', () => {
+    expect(JAC_LIFELINE.every((q) => q.track === 'lifeline')).toBe(true);
+  });
+
+  it('all JAC_TEORI questions are set tt1 or tt2', () => {
+    const VALID = new Set(['tt1', 'tt2']);
+    expect(JAC_TEORI.every((q) => VALID.has(q.set))).toBe(true);
+  });
+
+  it('all JAC_LIFELINE questions are set st1 or st2', () => {
+    const VALID = new Set(['st1', 'st2']);
+    expect(JAC_LIFELINE.every((q) => VALID.has(q.set))).toBe(true);
+  });
+
+  it('every question has a topic field (J4)', () => {
+    const allQ = [...JAC_TEORI, ...JAC_LIFELINE];
+    expect(allQ.every((q) => typeof q.topic === 'string' && q.topic.length > 0)).toBe(true);
+  });
+});
+
+describe('WAYGROUND_SETS track fields (v4.19.2)', () => {
+  it('wt1-wt10 have track:common', () => {
+    const teori = WAYGROUND_SETS.filter((s) => s.id.startsWith('wt'));
+    expect(teori.length).toBe(10);
+    expect(teori.every((s) => s.track === 'common')).toBe(true);
+  });
+
+  it('wg* sets have track:lifeline', () => {
+    const vocab = WAYGROUND_SETS.filter((s) => s.id.startsWith('wg'));
+    expect(vocab.length).toBeGreaterThan(0);
+    expect(vocab.every((s) => s.track === 'lifeline')).toBe(true);
+  });
+
+  it('wp* sets have track:lifeline', () => {
+    const praktik = WAYGROUND_SETS.filter((s) => s.id.startsWith('wp'));
+    expect(praktik.length).toBeGreaterThan(0);
+    expect(praktik.every((s) => s.track === 'lifeline')).toBe(true);
+  });
+
+  it('every set has a track field', () => {
+    expect(WAYGROUND_SETS.every((s) => typeof s.track === 'string')).toBe(true);
+  });
+});
+
+describe('CSV_SETS track fields (v4.19.2)', () => {
+  it('ct* sets have track:common', () => {
+    const teori = CSV_SETS.filter((s) => s.id.startsWith('ct'));
+    expect(teori.length).toBe(6);
+    expect(teori.every((s) => s.track === 'common')).toBe(true);
+  });
+
+  it('cp* sets have track:lifeline', () => {
+    const praktik = CSV_SETS.filter((s) => s.id.startsWith('cp'));
+    expect(praktik.length).toBe(6);
+    expect(praktik.every((s) => s.track === 'lifeline')).toBe(true);
+  });
+
+  it('every set has a track field', () => {
+    expect(CSV_SETS.every((s) => typeof s.track === 'string')).toBe(true);
+  });
+});
+
+describe('QUIZ_SETS + getQuizSetsForTrack (v4.19.0+)', () => {
+  it('QUIZ_SETS has all 38 sets (26 wayground + 12 csv)', () => {
+    expect(QUIZ_SETS.length).toBe(38);
+  });
+
+  it('all set IDs are unique', () => {
+    const ids = QUIZ_SETS.map((s) => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('every set in QUIZ_SETS has a track field', () => {
+    const missing = QUIZ_SETS.filter((s) => !s.track);
+    expect(missing.map((s) => s.id)).toHaveLength(0);
+  });
+
+  it('getQuizSetsForTrack(lifeline) includes lifeline + common sets', () => {
+    const sets = getQuizSetsForTrack('lifeline');
+    const ids = sets.map((s) => s.id);
+    expect(ids).toContain('wt1');   // common teori
+    expect(ids).toContain('wg1');   // lifeline vocab
+    expect(ids).toContain('ct01');  // csv common teori
+    expect(ids).toContain('cp01');  // csv lifeline praktik
+  });
+
+  it('getQuizSetsForTrack(doboku) includes common sets only', () => {
+    const sets = getQuizSetsForTrack('doboku');
+    expect(sets.every((s) => s.track === 'common')).toBe(true);
+    // wt sets should be visible (track:common)
+    expect(sets.some((s) => s.id.startsWith('wt'))).toBe(true);
+  });
+
+  it('getQuizSetsForTrack(kenchiku) returns common sets', () => {
+    const sets = getQuizSetsForTrack('kenchiku');
+    expect(sets.length).toBeGreaterThan(0);
+    expect(sets.every((s) => s.track === 'common')).toBe(true);
+  });
+});
+
+describe('SOURCE_GROUPS coverage', () => {
+  it('all SOURCE_GROUPS keys exist in SOURCE_META', () => {
+    const metaKeys = new Set(Object.keys(SOURCE_META));
+    SOURCE_GROUPS.forEach((g) => {
+      g.keys.forEach((k) => {
+        expect(metaKeys.has(k), `SOURCE_GROUPS key "${k}" missing from SOURCE_META`).toBe(true);
+      });
+    });
+  });
+
+  it('SOURCE_GROUPS includes Sumber Tambahan group', () => {
+    const labels = SOURCE_GROUPS.map((g) => g.label);
+    expect(labels).toContain('Sumber Tambahan');
+  });
+
+  it('Sumber Tambahan includes text3l, vocab-supplementary, vocab-general', () => {
+    const tambahan = SOURCE_GROUPS.find((g) => g.label === 'Sumber Tambahan');
+    expect(tambahan).toBeDefined();
+    expect(tambahan.keys).toContain('text3l');
+    expect(tambahan.keys).toContain('vocab-supplementary');
+    expect(tambahan.keys).toContain('vocab-general');
   });
 });
