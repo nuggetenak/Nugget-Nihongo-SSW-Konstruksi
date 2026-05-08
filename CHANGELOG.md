@@ -1,3 +1,35 @@
+## [4.9.0] - 2026-05-08
+
+### Open Items Batch (Agent Sonnet 4.6)
+
+**R3 — ReviewMode: Speak on Flip**
+- Opsi baru di SayaTab: audio diputar saat kartu dibalik (vs saat kartu berikutnya muncul)
+- Dikontrol via pref `speakOnFlip` — default off (perilaku lama tetap)
+
+**R4 — ReviewMode: Skip Kartu**
+- Tombol "Lewati" di header + shortcut keyboard `S` — lanjut ke kartu berikutnya tanpa memberikan rating SRS
+- Berguna untuk kartu baru yang belum dipelajari konteksnya
+
+**R5 — ReviewMode: Sisa Kartu**
+- Header sekarang menampilkan `idx+1 / total · N lagi` — user tahu berapa kartu yang tersisa
+
+**W1 — WaygroundMode: Deskripsi Grup**
+- Setiap grup (Teori/Praktik/CSV Teori/CSV Praktik) kini memiliki deskripsi singkat di bawah nama grup
+
+**W4 — WaygroundMode: Total Score Lintas Set**
+- Card ringkasan di atas picker: total benar/salah + persentase dari semua set yang sudah dikerjakan
+
+**Q4 — QuizMode: Persist Jumlah Soal**
+- Pilihan jumlah soal (10/20/30/Semua) disimpan ke `prefs.quizQuestionCount` — persist antar-sesi
+
+**SR4 — SearchMode: Akurasi User per Kartu**
+- Badge `✓ Hafal` (hijau) dan `⚠ Nx salah` (merah) ditampilkan di setiap hasil pencarian
+
+**ST4 — StatsMode: Minggu Ini vs Minggu Lalu**
+- Grid 3 kolom: Minggu Lalu / Perubahan / Minggu Ini — perbandingan jumlah sesi belajar
+
+---
+
 ## [4.8.2] - 2026-05-08
 
 ### SR3 + SIM5 (Agent Sonnet 4.6)

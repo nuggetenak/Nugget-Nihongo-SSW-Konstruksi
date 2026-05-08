@@ -43,9 +43,9 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | R1 | ~~Tidak ada **session summary screen**~~ ✅ FIXED v4.3.0 — `ReviewSummaryScreen` dengan rating distribution (Again/Hard/Ok/Easy) dan % akurasi | Gap | 🔴 |
 | R2 | ~~Tidak ada indikator "kenapa kartu ini muncul sekarang"~~ ✅ FIXED v4.8.0 — interval/due-reason tidak ditampilkan | UX | 🟠 |
-| R3 | Audio auto-speak pada card advance bisa mengganggu jika user belum siap — perlu opsi **"speak on flip"** bukan pada advance | Refinement | 🟡 |
-| R4 | Tidak ada shortcut untuk **"skip card"** tanpa menilai (berguna untuk kartu baru yang belum dipelajari konteksnya) | UX | 🟡 |
-| R5 | Queue tidak menampilkan **jumlah kartu tersisa** secara live di header | UX | 🟢 |
+| R3 | ~~Audio auto-speak pada card advance bisa mengganggu — perlu opsi **"speak on flip"**~~ ✅ FIXED v4.9.0 — `speakOnFlip` pref + toggle di SayaTab | Refinement | 🟡 |
+| R4 | ~~Tidak ada shortcut untuk **"skip card"** tanpa menilai~~ ✅ FIXED v4.9.0 — tombol "Lewati" + keyboard `S` | UX | 🟡 |
+| R5 | ~~Queue tidak menampilkan **jumlah kartu tersisa** secara live di header~~ ✅ FIXED v4.9.0 — `N / total · N lagi` di header | UX | 🟢 |
 
 **Rekomendasi R1 (kritis):** Tambahkan `ReviewSummaryScreen` setelah sesi selesai: kartu ditinjau, distribusi rating (Again/Hard/Ok/Easy), estimated next due count, CTA "Lanjut ke Kartu" atau "Kembali".
 
@@ -77,7 +77,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | Q1 | ~~Tidak ada **mode produksi**~~ ✅ FIXED v4.5.0 (B1) — `QuizProduksiMode.jsx`: JP→ID type-answer dengan fuzzy match | Gap | 🔴 |
 | Q2 | ~~Tidak ada **"Pelajari yang Salah"** CTA~~ ✅ FIXED v4.3.0 (A1) — ResultScreen.jsx CTA `onRetryWrong` terhubung ke FlashcardMode dengan `filterIds` | Gap | 🔴 |
 | Q3 | Difficulty level tidak dijelaskan kepada user sebelum mulai — apa bedanya "mudah" vs "sulit" secara konkret? | UX | 🟠 |
-| Q4 | Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya | UX | 🟡 |
+| Q4 | ~~Opsi jumlah soal (10/20/30/Semua) tidak persist ke sesi berikutnya~~ ✅ FIXED v4.9.0 — disimpan ke `prefs.quizQuestionCount` | UX | 🟡 |
 | Q5 | Tidak ada **"Quiz per Kategori"** — user hanya bisa filter lewat track, tidak bisa pilih "latih hanya K3" misalnya | Feature | 🟡 |
 | Q6 | Wrong-answer explanation (`DescBlock`) tidak selalu ada di semua kartu — perlu audit coverage | Data | 🟡 |
 
@@ -136,10 +136,10 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 
 | # | Temuan | Tipe | Prioritas |
 |---|--------|------|-----------|
-| W1 | **CSV Teori vs CSV Praktik** tidak cukup jelas dibedakan secara visual di picker | UX | 🟠 |
+| W1 | ~~**CSV Teori vs CSV Praktik** tidak cukup jelas dibedakan secara visual di picker~~ ✅ FIXED v4.9.0 — deskripsi grup di setiap header | UX | 🟠 |
 | W2 | ~~Tidak ada **"review hanya salah"** per-set~~ ✅ FIXED v4.7.0 — `lemahMode` sub-button per set row | Gap | 🟠 |
 | W3 | ~~Set yang belum pernah dikerjakan tidak diberi badge/tag "Belum Dikerjakan" yang jelas~~ ✅ FIXED v4.8.0 | UX | 🟡 |
-| W4 | WaygroundMode tidak menampilkan **total score** lintas semua set — hanya per-set | UX | 🟡 |
+| W4 | ~~WaygroundMode tidak menampilkan **total score** lintas semua set~~ ✅ FIXED v4.9.0 — summary card total benar/salah + % di atas picker | UX | 🟡 |
 | W5 | Tidak ada urutan saran — set mana yang sebaiknya dikerjakan lebih dulu? | Feature | 🟡 |
 
 ---
@@ -193,7 +193,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | SR1 | ~~Tidak ada **search history**~~ ✅ FIXED v4.8.0 — user sering mencari kata yang sama berulang kali | Feature | 🟠 |
 | SR2 | Tidak bisa search by **furigana reading** — ketik "あんぜん" tidak menemukan kartu "安全" | Bug | 🟠 |
 | SR3 | ~~Tidak ada **"Copy ke Clipboard"**~~ ✅ FIXED v4.8.2 — tombol ⎘ per hasil pencarian, salin JP+furigana+terjemahan | Feature | 🟢 |
-| SR4 | Hasil pencarian tidak menampilkan **akurasi user** untuk kartu itu (% benar/salah) | Feature | 🟡 |
+| SR4 | ~~Hasil pencarian tidak menampilkan **akurasi user** untuk kartu itu~~ ✅ FIXED v4.9.0 — badge `✓ Hafal` + `⚠ Nx salah` per kartu | Feature | 🟡 |
 
 ---
 
@@ -231,7 +231,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | ST1 | ~~Tidak ada **heatmap kalender**~~ ✅ FIXED v4.3.1 — `StudyHeatmap.jsx`, 18-week SVG, amber opacity scale | Feature | 🟠 |
 | ST2 | ~~Tidak ada **"Exam Readiness Score"**~~ ✅ FIXED v4.3.0 — SVG ring gauge di StatsMode, formula SRS×40+quiz×35+streak×15+sim×10 | Feature | 🔴 |
 | ST3 | ~~Akurasi per kategori tidak divisualisasikan~~ ✅ FIXED v4.6.0 — `🎯 N%` badge + wrong count per kategori di StatsMode | Gap | 🟠 |
-| ST4 | Tidak ada perbandingan **"minggu ini vs minggu lalu"** | Feature | 🟡 |
+| ST4 | ~~Tidak ada perbandingan **"minggu ini vs minggu lalu"**~~ ✅ FIXED v4.9.0 — grid 3 kolom di StatsMode | Feature | 🟡 |
 | ST5 | ~~Kartu "sering salah" (wrong-tracker) tidak diekspos ke user~~ ✅ CONFIRMED DONE — "Sering Salah" section in StatsMode | Bug | 🟠 |
 
 **Rekomendasi ST2 (kritis):** Hitung `readinessScore` dari: (% kartu Mature × 0.4) + (avg quiz accuracy × 0.4) + (streak continuity × 0.2). Tampilkan sebagai gauge atau progress ring di atas StatsMode. Ini memberikan user satu angka untuk menjawab "sudah siap ujian belum?"
@@ -815,6 +815,6 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ---
 
-*Proposal v3 — hygiene pass 2026-05-08 (v2): semua item yang sudah diselesaikan di-strikethrough, VERSION DISCREPANCY collapsed, Ringkasan Eksekutif di-update ke v4.8.2. Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open: K2, K5, K6, Q3–Q6, F2–F3, J1–J2, J4, W1, W4–W5, AK1–AK3, D1–D3 (DangerMode), SR2, SR4, G2–G4, SB3, ST4, E3, Phase 5.2 content (deferred).*
+*Proposal v3 — hygiene pass 2026-05-08 (v3): items R3/R4/R5/W1/W4/Q4/SR4/ST4 di-strikethrough (v4.9.0). Originally v2: 71 temuan, 30 rekomendasi, 11 bug (4 versi + 7 fungsional). Remaining open: K2, K5, K6, Q3, Q5, Q6, F2–F3, J1–J2, J4, W5, AK1–AK3, D1–D3 (DangerMode), G2–G4, SB3, E3.*
 
 *— Claude Sonnet 4.6, 2026-05-07 | Hygiene pass: Agent Sonnet 4.6, 2026-05-08*
