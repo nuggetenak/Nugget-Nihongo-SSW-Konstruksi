@@ -3,7 +3,7 @@
 > **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.19.0: full data layer restructure — track fields, JAC split, quiz-sets merge)
 > **Version:** v4.19.0 — full data layer restructure: track fields, JAC split, quiz-sets merge, doboku/kenchiku→common; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
-> **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
+> **Upgrade Proposal:** `docs/archive/SSW_UPGRADE_PROPOSAL_v1.md` ← **ARCHIVED** — all 71 items resolved by v4.14.0; E2 & C2 dismissed
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
 
 ---
@@ -39,7 +39,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.14.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.19.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -75,19 +75,24 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   └── SRSContext.jsx
     ├── data/
     │   ├── index.js                ← barrel re-export
-    │   ├── cards.js                ← CARDS[1410] (assembled from source/ by merge-cards.mjs)
+    │   ├── cards.js                ← CARDS[1443] (assembled from source/ by merge-cards.mjs)
     │   ├── source/                 ← 8 track source files (CS-01)
-    │   │   ├── cards-common.js, cards-common-vocab.js
-    │   │   ├── cards-doboku.js, cards-doboku-vocab.js
-    │   │   ├── cards-kenchiku.js, cards-kenchiku-vocab.js
-    │   │   └── cards-lifeline.js, cards-lifeline-vocab.js
-    │   ├── jac-official.js         ← ~95 JAC questions
-    │   ├── wayground-sets.js       ← 12 sets, ~579 questions
-    │   ├── csv-sets.js             ← 12 sets, ~300 questions
+    │   │   ├── cards-common.js, cards-common-vocab.js     ← 646 + 233 cards (includes migrated doboku/kenchiku)
+    │   │   ├── cards-doboku.js, cards-doboku-vocab.js     ← empty [] (pending Ch.5+ sipil content)
+    │   │   ├── cards-kenchiku.js, cards-kenchiku-vocab.js ← empty [] (pending Ch.5+ bangunan content)
+    │   │   └── cards-lifeline.js, cards-lifeline-vocab.js ← 444 lifeline cards (text1l–text3l)
+    │   ├── jac-teori.js            ← 65 学科 questions (tt1+tt2), track:'common'
+    │   ├── jac-lifeline.js         ← 30 実技 questions (st1+st2), track:'lifeline'
+    │   ├── jac-doboku.js           ← empty stub (pending sipil 実技 PDF)
+    │   ├── jac-kenchiku.js         ← empty stub (pending bangunan 実技 PDF)
+    │   ├── jac-official.js         ← backward-compat shim ([...JAC_TEORI, ...JAC_LIFELINE, ...])
+    │   ├── quiz-sets.js            ← merged WAYGROUND_SETS + CSV_SETS; getQuizSetsForTrack() helper
+    │   ├── wayground-sets.js       ← legacy source (still imported by quiz-sets.js)
+    │   ├── csv-sets.js             ← legacy source (still imported by quiz-sets.js)
     │   ├── sipil-sets.js           ← 3 sets, 45 questions
     │   ├── bangunan-sets.js        ← 3 sets, 45 questions
-    │   ├── angka-kunci.js
-    │   ├── danger-pairs.js
+    │   ├── angka-kunci.js          ← 28 entries with track, mnemonic, soal fields
+    │   ├── danger-pairs.js         ← 20 pairs with track, confusionType, explanation fields
     │   └── categories.js
     ├── srs/
     │   ├── fsrs-core.js
@@ -297,9 +302,17 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/utils/gist-sync.js` | GitHub Gist sync helper — push/pull/find for multi-device backup (v4.6.0) |
 | `src/tests/quiz-produksi.test.jsx` | 7 tests for QuizProduksiMode (v4.5.0) |
 
----
+### New Files Since v4.14.0
 
-## 8. Agent Trail
+| File | Purpose |
+|------|---------|
+| `src/data/jac-teori.js` | 65 学科 questions split from jac-official (v4.19.0) |
+| `src/data/jac-lifeline.js` | 30 Lifeline 実技 questions split from jac-official (v4.19.0) |
+| `src/data/jac-doboku.js` | Empty stub for sipil 実技 (v4.19.0) |
+| `src/data/jac-kenchiku.js` | Empty stub for bangunan 実技 (v4.19.0) |
+| `src/data/quiz-sets.js` | Merged WAYGROUND_SETS + CSV_SETS with `getQuizSetsForTrack()` (v4.19.0) |
+
+---
 
 | Date | Agent | Work |
 |------|-------|------|

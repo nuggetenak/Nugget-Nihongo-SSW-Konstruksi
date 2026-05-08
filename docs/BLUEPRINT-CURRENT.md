@@ -216,6 +216,45 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | J4 | `jac-official.js`: `topic` field on all 95 questions (8 topics: listrik/pipa/telekomunikasi/pemadam/isolasi/keselamatan/hukum/umum) |
 | J2 | `JACMode.jsx`: topic filter chip row + "Simulasi per Topik" CTA; filtered set count per topic |
 
+### v4.15.0 + v4.15.1 — JAC Content Audit (furi/desc fixes)
+
+| Item | Deliverable |
+|------|-------------|
+| jac-ch2 | 17 fixes across 14 cards: desc restored, furi corrected (IDs 151–627) |
+| jac-ch1 | 6 furi fixes (IDs 584–591): KY acronym corrections, incomplete furi chains |
+
+### v4.16.0 — C1 text3.pdf (18 new Lifeline cards)
+
+| Item | Deliverable |
+|------|-------------|
+| C1 | 18 new cards 1439–1456 (`source: text3l`) in `cards-lifeline.js`; `text3l` added to `SOURCE_META` in `categories.js` |
+| Cards | 建設工事の3区分, ウレタン断熱, 防露工事, 配管工事, 受水槽, 通気設備, FRP防水, さく井, 通信土木, 上水道/下水道の流れ, 消防法設置義務 |
+
+### v4.17.0 — C1-pass2 (15 new common cards)
+
+| Item | Deliverable |
+|------|-------------|
+| C1-pass2 | 15 new cards 1457–1471 in `cards-common.js`; sourced from text1l/text2/text3 second pass |
+| Cards | CCUSの4レベル, ドローン飛行禁止5ルール, 建設業法許可業種6種, 雇用改善法重点施策, 特定技能失業ルール, 足場作業主任者, 掘削作業主任者, とび職6種, 鉄骨構造3種, 車両系3t境界 |
+
+### v4.18.0 — refactor: doboku+kenchiku → common
+
+| Item | Deliverable |
+|------|-------------|
+| Migrate | 58 doboku + 77 kenchiku + 9 doboku-vocab + 13 kenchiku-vocab (157 cards total) → `cards-common.js`/`cards-common-vocab.js` |
+| Category | `doboku_doko/hoso/haisui` and `kenchiku_kutai/shiage` remapped → `sekou` |
+| Source files | `cards-doboku.js`, `cards-kenchiku.js`, etc. now empty `[]` (preserved for future Ch.5+ content) |
+| Cards | IDs reassigned 1472–1628; total unchanged at 1443 |
+
+### v4.19.0 — refactor: JAC split + quiz-sets merge + track fields
+
+| Item | Deliverable |
+|------|-------------|
+| JAC split | `jac-official.js` → `jac-teori.js` (65q, common) + `jac-lifeline.js` (30q, lifeline) + stubs (`jac-doboku.js`, `jac-kenchiku.js`); `jac-official.js` kept as backward-compat shim |
+| quiz-sets merge | `quiz-sets.js` = WAYGROUND_SETS + CSV_SETS; `getQuizSetsForTrack(track)` helper |
+| Track fields | `danger-pairs.js` (common:12/lifeline:8), `angka-kunci.js` (common:22/lifeline:7) per-entry track |
+| Components | WaygroundMode, VocabMode, DangerMode, AngkaMode filter by current track |
+
 ---
 
 ## Known Gaps & Deferred Work

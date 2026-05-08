@@ -13,7 +13,7 @@
 PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定技能 / SSW) bidang konstruksi Jepang. Dirancang untuk TKI yang bersiap kerja di Jepang sebagai pekerja konstruksi.
 
 **Fitur utama:**
-- 🃏 **1,410 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
+- 🃏 **1,443 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
 - ❓ **~860 soal kuis** — format JAC, Wayground, CSV, Sipil, Bangunan
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
@@ -89,7 +89,7 @@ npm run audit:integrity  # Audit integritas data kartu
 src/
 ├── App.jsx                  # Root, 3-tab layout
 ├── contexts/                # AppContext, ProgressContext, SRSContext
-├── data/                    # Flashcard & quiz data (1,410 cards + ~860 questions)
+├── data/                    # Flashcard & quiz data (1,443 cards + ~860 questions)
 │   └── source/              # 8 source files (CS-01 split)
 ├── srs/                     # FSRS engine (fsrs-core, fsrs-store, fsrs-scheduler)
 ├── storage/                 # localStorage engine, schema v3, migrations
