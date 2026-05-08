@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (hygiene pass: phase history extended to v4.19.0; angka-kunci 28→29; confusion-pairs.js + StudyHeatmap added to tree; danger-pairs D2 count fixed)
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (text4 audit: all Ch.4 terms pre-exist in cards — C1 fully closed; NO OPEN ITEMS)
 > **Version:** v4.19.0 — full data layer restructure: track fields, JAC split, quiz-sets merge, doboku/kenchiku→common; 387 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/archive/SSW_UPGRADE_PROPOSAL_v1.md` ← **ARCHIVED** — all 71 items resolved by v4.14.0; E2 & C2 dismissed
