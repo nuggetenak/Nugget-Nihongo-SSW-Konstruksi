@@ -756,6 +756,14 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 ### Phase 5.7 — W2 ✅ SELESAI (2026-05-08, commit `36543ab` + `v4.7.0`)
 1. ✅ **W2** WaygroundMode per-set "Ulang Salah" — `lemahMode` filter + sub-button per set row
 
+### Phase 5.8 — UX Polish ✅ SELESAI (2026-05-08, v4.8.0)
+1. ✅ **SR1** SearchMode: riwayat pencarian 5 term terakhir (sessionStorage, chip UI)
+2. ✅ **G1** GlossaryMode: tombol 🔊 per entry di area expanded
+3. ✅ **SB1/SB2** SumberMode: progress bar hafalan + badge "Terlemah" per sumber
+4. ✅ **W3** WaygroundMode: badge "Baru" untuk set belum pernah dikerjakan
+5. ✅ **R2** ReviewMode: chip due-reason (reps count + interval) di bawah strength pill
+6. ✅ **J3** JACMode: `bestPct` tersimpan + ditampilkan di picker
+
 ### Phase 5.6 — E2/F4/ST3 ✅ SELESAI (2026-05-08, v4.6.0)
 1. ✅ **E2** GitHub Gist sync (opt-in) — `src/utils/gist-sync.js` + collapsible section in ExportMode
 2. ✅ **F4** Sprint "Battle Past Self" ghost score — `sprintBestTimeline` in prefs, live `👻 N` display
@@ -785,7 +793,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Awal Audit | Saat Ini (v4.6.0) | Target (Phase 5.4) |
+| Metrik | Awal Audit | Saat Ini (v4.8.0) | Target (Phase 5.4) |
 |--------|------------|--------------------|--------------------|
 | Total kartu | 1.438 | 1.438 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
 | Test | ~321 | **383** | 380+ ✅ |

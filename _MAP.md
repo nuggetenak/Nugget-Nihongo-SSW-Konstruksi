@@ -14,7 +14,7 @@ A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface 
 
 **Deployment:** GitHub Pages — static standalone PWA. `npm install && npm run build` → deploy `dist/`.
 **Storage:** Pure `localStorage` — **never** `window.storage`, never Supabase, never external auth.
-**Deps:** react 19, react-dom, ts-fsrs v5, Vite 6. **Max 3 prod deps — hard constraint.**
+**Deps:** react 19, react-dom, ts-fsrs v5, Vite 6. **Max 4 prod deps — hard constraint.**
 
 ### Branding
 - **Parent:** Nugget Nihongo · **Product:** SSW Konstruksi
@@ -39,7 +39,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.3.1 · react, react-dom, vite, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.8.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -225,8 +225,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 ## 5. Key Design Rules (Hard Constraints)
 
 1. **Pure localStorage** — Never `window.storage`, Supabase, external auth
-2. **Max 3 prod deps** — react, react-dom, ts-fsrs
-3. **All 18 modes stay React.lazy()** — no reverting lazy-loading
+2. **Max 4 prod deps** — react, react-dom, ts-fsrs, lz-string
+3. **All 23 modes stay React.lazy()** — no reverting lazy-loading
 4. **UI language: Indonesian** — Code comments: English
 5. **Zero network required** — Full offline PWA
 6. **Tests must pass** — `npm test` green before every commit
@@ -257,7 +257,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ---
 
-## 7. New Files Since v4.0.2 (FE Sprint)
+## 7. New Files Since v4.0.2 (FE Sprint → v4.8.0)
 
 | File | Purpose |
 |------|---------|
@@ -277,11 +277,16 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 ### New Files Since v4.3.0
 
 | File | Purpose |
-|------|---------| 
+|------|---------|
 | `src/utils/achievements.js` | 14 achievement badges — `buildAchievementState()` + `evaluateAchievements()` |
 | `src/utils/daily-challenge.js` | Deterministic date-seeded daily challenge question from JAC+Wayground pool |
 | `src/utils/recommend-mode.js` | Smart mode recommendation engine — replaces `getQuickStart` in Dashboard |
 | `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap (126 days, amber opacity scale) |
+| `src/modes/DengarMode.jsx` | Audio-first listening comprehension quiz (v4.4.0) |
+| `src/modes/CatatanMode.jsx` | Personal notes/mnemonics per card, filterable (v4.4.0) |
+| `src/modes/QuizProduksiMode.jsx` | JP→ID type-answer production quiz with fuzzy match (v4.5.0) |
+| `src/utils/gist-sync.js` | GitHub Gist sync helper — push/pull/find for multi-device backup (v4.6.0) |
+| `src/tests/quiz-produksi.test.jsx` | 7 tests for QuizProduksiMode (v4.5.0) |
 
 ---
 

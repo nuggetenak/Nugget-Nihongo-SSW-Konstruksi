@@ -79,7 +79,7 @@ npm run audit:integrity  # Audit integritas data kartu
 | CI/CD | GitHub Actions → GitHub Pages |
 | PWA | Custom service worker + Web App Manifest |
 
-**Prod dependencies: 3** (react, react-dom, ts-fsrs) — hard constraint.
+**Prod dependencies: 4** (react, react-dom, ts-fsrs, lz-string) — hard constraint.
 
 ---
 
@@ -95,7 +95,7 @@ src/
 ├── storage/                 # localStorage engine, schema v3, migrations
 ├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
 ├── components/              # Shared UI components
-├── modes/                   # 18 mode screens (all React.lazy)
+├── modes/                   # 23 mode screens (all React.lazy)
 │   └── FlashcardMode/       # Decomposed flashcard mode
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …

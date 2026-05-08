@@ -38,4 +38,4 @@
 
 ---
 
-*Last updated: 2026-05-07 by Agent Sonnet 4.6 (repo hygiene pass)*
+*Last updated: 2026-05-08 by Agent Sonnet 4.6 (deep hygiene pass)*
