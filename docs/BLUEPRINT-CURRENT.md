@@ -1,8 +1,8 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.19.0)
 
-> **Status:** ALL PHASES COMPLETE ✅ (C1 done; doboku/kenchiku migrated to common; C2 deferred)
+> **Status:** ALL PHASES COMPLETE ✅ (C1 done; C2 & E2 dismissed; text4l is sole remaining content gap)
 > **Version:** 4.19.0
-> **Last updated:** 2026-05-08 (v4.19.0: full data layer restructure — track fields, JAC split, quiz-sets merge)
+> **Last updated:** 2026-05-09 (docs hygiene: C2 & E2 dismissed; proposal archived)
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
 **→ For a new agent: start with `_MAP.md` in the repo root.**
@@ -237,8 +237,9 @@ These are honest assessments — not blocking anything, but relevant for future 
 - **Category mismatch**: `jenis_kerja` and `alat_umum` categories contain lifeline content even for sipil/bangunan track users. Re-categorization would require content review of ~485 cards.
 
 ### Remaining Open Items
-- **E2** (export encryption) — 🟢 Nice-to-have; no blocker.
-- **Phase 5.2** C1 ✅ (text3l 18 cards + pass2 15 cards = 33 new); C2 (sipil/bangunan expansion) deferred.
+- **E2** (export encryption) — ~~🟢 Nice-to-have~~ **DISMISSED** — not worth complexity; no sensitive data in export.
+- **C1** text4l — only remaining content gap; all other C1 work done (text3l +18, pass2 +15).
+- **C2** (sipil/bangunan expansion) — **DISMISSED** — 45 questions per track is sufficient for current learner scope; expansion deferred indefinitely.
 
 ---
 

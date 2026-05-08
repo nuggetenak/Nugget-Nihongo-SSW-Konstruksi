@@ -10,6 +10,7 @@
 
 | File | Type | Summary | Superseded by |
 |------|------|---------|---------------|
+| `SSW_UPGRADE_PROPOSAL_v1.md` | Audit/Proposal | Full audit of all 15 modes (v3 of doc, hygiene passes ×3). 71 findings, 11 bugs — all resolved by v4.14.0. E2 & C2 formally dismissed 2026-05-09. text4l remains only open content gap. | `docs/BLUEPRINT-CURRENT.md` |
 | `MASTER-BLUEPRINT-v6.md` | Blueprint | Agent-executable spec for Phases A–G (Opus 4.6 / Crunchy, 2026-05-01). **All phases complete.** | `docs/BLUEPRINT-CURRENT.md` |
 | `MASTER-BLUEPRINT-v5.md` | Blueprint | v5: research-enriched spec with §0 evidence layers. Incorporated into v6. | v6 |
 | `MASTER-BLUEPRINT-v4-POLISHED.md` | Blueprint | v4 polished: Phases 11–17 detail (renamed A–G in v6). | v6 |
@@ -38,4 +39,4 @@
 
 ---
 
-*Last updated: 2026-05-08 by Agent Sonnet 4.6 (hygiene audit pass — docs sync)*
+*Last updated: 2026-05-09 by Agent Sonnet 4.6 (SSW_UPGRADE_PROPOSAL_v1 archived; E2 & C2 dismissed)*
