@@ -154,7 +154,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 | SIM2 | ~~Kartu simulasi tidak ter-randomisasi dari semua jalur~~ ✅ FIXED v4.3.0 (BUG-06) — pool unified dari JAC_OFFICIAL + WAYGROUND_SETS via normalizer | Bug | 🔴 |
 | SIM3 | ~~Kartu salah tidak dieksport ke SRS/Fokus~~ ✅ FIXED v4.3.1 — "Latih Salah" CTA → `onRetryWrong` FlashcardMode bridge | Gap | 🟠 |
 | SIM4 | ~~Tidak ada **post-exam analysis**~~ ✅ FIXED v4.3.1 — breakdown per sumber/set setelah result screen | Feature | 🟠 |
-| SIM5 | Timer tidak menampilkan perkiraan **"N soal/menit yang dibutuhkan"** | UX | 🟡 |
+| SIM5 | ~~Timer tidak menampilkan **"N soal/menit yang dibutuhkan"**~~ ✅ FIXED v4.8.2 — `N soal/mnt` live di bawah timer | UX | 🟡 |
 
 **Rekomendasi SIM1 + SIM2 (kritis):** Pause via `document.hidden` visibility API (jika user minimize app, pause otomatis). Untuk randomisasi: pastikan soal simulasi diambil dari semua jalur aktif user (saat ini kemungkinan hanya dari jalur default).
 
@@ -192,7 +192,7 @@ App telah tumbuh dari single-file JSX 7.390 baris (v87) menjadi arsitektur multi
 |---|--------|------|-----------|
 | SR1 | ~~Tidak ada **search history**~~ ✅ FIXED v4.8.0 — user sering mencari kata yang sama berulang kali | Feature | 🟠 |
 | SR2 | Tidak bisa search by **furigana reading** — ketik "あんぜん" tidak menemukan kartu "安全" | Bug | 🟠 |
-| SR3 | Tidak ada **"Copy ke Clipboard"** untuk definisi/terjemahan | Feature | 🟢 |
+| SR3 | ~~Tidak ada **"Copy ke Clipboard"**~~ ✅ FIXED v4.8.2 — tombol ⎘ per hasil pencarian, salin JP+furigana+terjemahan | Feature | 🟢 |
 | SR4 | Hasil pencarian tidak menampilkan **akurasi user** untuk kartu itu (% benar/salah) | Feature | 🟡 |
 
 ---
@@ -757,7 +757,7 @@ User yang menjawab benar mendapat toast khusus + streak counter "N hari berturut
 
 ## 📊 Metrik Keberhasilan
 
-| Metrik | Awal Audit | Saat Ini (v4.8.1) | Target (Phase 5.4) |
+| Metrik | Awal Audit | Saat Ini (v4.8.2) | Target (Phase 5.4) |
 |--------|------------|--------------------|--------------------|
 | Total kartu | 1.438 | 1.438 | 2.000+ (Ch 2–4 — Phase 5.2 pending) |
 | Test | ~321 | **383** | 380+ ✅ |

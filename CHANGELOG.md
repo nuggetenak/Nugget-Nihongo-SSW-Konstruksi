@@ -1,3 +1,17 @@
+## [4.8.2] - 2026-05-08
+
+### SR3 + SIM5 (Agent Sonnet 4.6)
+
+**SR3 — SearchMode: Copy to Clipboard**
+- Tombol ⎘ pada setiap hasil pencarian — salin `JP (furigana) — terjemahan` ke clipboard
+- Feedback visual: ikon ⎘ → ✓ selama 1.5 detik setelah berhasil disalin
+
+**SIM5 — SimulasiMode: Pace Hint**
+- `N soal/mnt` ditampilkan di bawah timer — kalkulasi live: soal tersisa ÷ menit tersisa
+- Berubah warna merah saat `isUrgent` (≤60 detik)
+
+---
+
 ## [4.8.1] - 2026-05-08
 
 ### D1-WT — DengarMode Wrong-Tracker (Agent Sonnet 4.6)

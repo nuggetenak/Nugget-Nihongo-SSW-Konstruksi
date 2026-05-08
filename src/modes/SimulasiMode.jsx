@@ -270,6 +270,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           >
             <div className={SM.timerLabel} style={{ color: isUrgent ? T.wrong : T.textDim }}>WAKTU</div>
             <div className={SM.timerValue} style={{ color: isUrgent ? T.wrong : T.text }}>{fmtTime(timeLeft)}</div>
+            {/* SIM5: pace hint — soal/menit needed to finish on time */}
+            {timeLeft > 0 && (() => {
+              const remaining = questions.length - qIdx - (selected !== null ? 1 : 0);
+              const minsLeft = timeLeft / 60;
+              const needed = minsLeft > 0 ? (remaining / minsLeft).toFixed(1) : '—';
+              return (
+                <div style={{ fontSize: 9, color: isUrgent ? T.wrong : T.textFaint, marginTop: 2, letterSpacing: 0.2 }}>
+                  {needed} soal/mnt
+                </div>
+              );
+            })()}
           </div>
           <div className={SM.scoreMini}>
             <div className={SM.scoreCorrect}>✓ {results.filter((r) => r.isCorrect).length}</div>

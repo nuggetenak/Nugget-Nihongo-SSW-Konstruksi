@@ -20,11 +20,22 @@ function saveHistory(term) {
 
 export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
+  const [copiedId, setCopiedId] = useState(null); // SR3: copy feedback per card
   const debouncedQuery = useDebounce(query, 120);
   const [showAllTracks, setShowAllTracks] = useState(false);
   const [history, setHistory] = useState(() => getHistory());
 
   const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
+
+  // SR3: Copy card text to clipboard
+  const handleCopy = useCallback((c, e) => {
+    e.stopPropagation();
+    const text = `${stripFuri(c.jp)}${c.furi ? ` (${c.furi})` : ''} — ${c.id_text}`;
+    navigator.clipboard?.writeText(text).then(() => {
+      setCopiedId(c.id);
+      setTimeout(() => setCopiedId(null), 1500);
+    }).catch(() => {});
+  }, []);
 
   const handleQueryChange = useCallback((val) => {
     setQuery(val);
@@ -142,6 +153,14 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                       {starred?.has(c.id) ? '⭐' : '☆'}
                     </button>
                   )}
+                  {/* SR3: Copy to clipboard */}
+                  <button
+                    onClick={(e) => handleCopy(c, e)}
+                    aria-label="Salin ke clipboard"
+                    style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 13, padding: '0 2px', lineHeight: 1, color: copiedId === c.id ? T.correct : T.textMuted }}
+                  >
+                    {copiedId === c.id ? '✓' : '⎘'}
+                  </button>
                   <span className={S.pill} style={{ background: `${cat.color}22`, color: cat.color, fontSize: 9, whiteSpace: 'nowrap' }}>
                     {cat.emoji}
                   </span>

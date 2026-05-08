@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.8.1 — DengarMode wrong-tracker)
-> **Version:** v4.8.1 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8; wrong-tracker; 383 tests
+> **Last updated:** 2026-05-08 by Agent Sonnet 4.6 (v4.8.2 — SR3 copy clipboard, SIM5 pace hint)
+> **Version:** v4.8.2 — Phases A–G + CS-01–05 + FE-01–09 + Phase 5.1–5.8; 383 tests
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (post-completion: open items, constraints, schema)
 > **Upgrade Proposal:** `docs/SSW_UPGRADE_PROPOSAL_v1.md` ← task tracker with ✅/⏳ status per item
 > **Old blueprint:** `docs/archive/MASTER-BLUEPRINT-v6.md` (all phases executed — archived 2026-05-07)
@@ -183,7 +183,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.8.1** |
+| Version | **4.8.2** |
 | Tests | **383** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -318,3 +318,4 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | Sonnet 4.6 | v4.7.0 W2: WaygroundMode per-set "Ulang Salah" sub-button + lemahMode filter. ST5 confirmed already complete. |
 | 2026-05-08 | Sonnet 4.6 | v4.8.0 Phase 5.8: SR1 search history (sessionStorage), G1 glossary audio, SB1/SB2 sumber progress bar + terlemah badge, W3 "Baru" badge for untouched sets, R2 ReviewMode due-reason chip, J3 JACMode best score. |
 | 2026-05-08 | Sonnet 4.6 | v4.8.1: DengarMode wrong-tracker (D1-WT) — wrong answers now written to shared quizWrong pool. Modes with wrong-tracker: 10→11/15. |
+| 2026-05-08 | Sonnet 4.6 | v4.8.2: SR3 copy-to-clipboard in SearchMode (⎘ button per result); SIM5 pace hint in SimulasiMode (soal/mnt below timer). |

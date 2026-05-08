@@ -1,7 +1,7 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.8.0)
 
 > **Status:** ALL PHASES COMPLETE ✅ (Phase 5.2 content expansion deferred)
-> **Version:** 4.8.1
+> **Version:** 4.8.2
 > **Last updated:** 2026-05-08
 > **Supersedes:** MASTER-BLUEPRINT-v6.md (archived — all phases A–G executed)
 
@@ -21,7 +21,7 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage model) |
 | Tests | 383 (35 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.8.1** |
+| Version | **4.8.2** |
 
 ---
 
@@ -147,6 +147,14 @@ A React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Item | Deliverable |
 |------|-------------|
 | D1-WT | `DengarMode.jsx` wrong-tracker — wrong answers written to shared `quizWrong` pool; modes with wrong-tracker: 10→11/15 |
+
+### v4.8.2 — SR3 + SIM5
+
+| Item | Deliverable |
+|------|-------------|
+| SR3 | `SearchMode.jsx` — copy-to-clipboard button (⎘) per result card; copies JP+furigana+terjemahan; visual ✓ feedback 1.5s |
+| SIM5 | `SimulasiMode.jsx` — live `N soal/mnt` pace hint below timer; turns red on `isUrgent` |
+
 
 ---
 
