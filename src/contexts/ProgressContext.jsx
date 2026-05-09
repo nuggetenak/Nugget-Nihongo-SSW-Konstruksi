@@ -8,11 +8,9 @@
 
 import { createContext, useContext, useState, useCallback } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
+import { todayStr, prevDayStr } from '../utils/date.js';
 
 const ProgressCtx = createContext(null);
-
-// ── Utility: today's date string ─────────────────────────────────────────
-const today = () => new Date().toISOString().slice(0, 10);
 
 export function ProgressProvider({ children }) {
   const [prog, setProgState] = useState(() => get('progress'));
@@ -29,7 +27,7 @@ export function ProgressProvider({ children }) {
 
   // ── Known / Unknown ───────────────────────────────────────────────────
   const handleMark = useCallback((id, type) => {
-    const dateStr = today();
+    const dateStr = todayStr();
     setProg((prev) => {
       const knownSet = new Set(Array.isArray(prev.known) ? prev.known : []);
       const unknownSet = new Set(Array.isArray(prev.unknown) ? prev.unknown : []);
@@ -46,7 +44,7 @@ export function ProgressProvider({ children }) {
       const streak = prev.streakData ?? {};
       const newDays = streak.lastDate === dateStr
         ? (streak.days ?? 0)
-        : streak.lastDate === getPrevDate()
+        : streak.lastDate === prevDayStr()
           ? (streak.days ?? 0) + 1
           : 1;
       const streakData = { days: newDays, lastDate: dateStr };
@@ -195,9 +193,3 @@ export function useProgress() {
   return ctx;
 }
 
-// Helper: yesterday's date string
-function getPrevDate() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().slice(0, 10);
-}
