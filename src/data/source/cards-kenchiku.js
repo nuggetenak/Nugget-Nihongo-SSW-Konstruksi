@@ -1,4 +1,4 @@
-// cards-kenchiku.js — re-annotated CS-05 (E)
-// Cards: 0 — content migrated to cards-common.js (v4.18.0)
+// cards-kenchiku.js — stub for future Bangunan (建築) source cards.
+// Cards: 0 — empty stub; kenchiku content lives in cards-common.js
 // Stub preserved for future Ch.5+ content (doboku / kenchiku track)
 export const CARDS_KENCHIKU = [];

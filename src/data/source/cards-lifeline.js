@@ -1,5 +1,5 @@
 // cards-lifeline.js — lifeline track source cards.
-// Cards: 564
+// Cards: 564  (text1l–text3l + vocab-lifeline merged)
 export const CARDS_LIFELINE = [
   {
   id: 28,

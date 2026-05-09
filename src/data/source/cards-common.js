@@ -1,5 +1,5 @@
-// cards-common.js — re-annotated CS-05 (A1–A10)
-// Cards: 496
+// cards-common.js — common track source cards (includes doboku/kenchiku vocab).
+// Cards: 879
 export const CARDS_COMMON = [
   {
   id: 1,
