@@ -59,11 +59,11 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
     }
   }, [questions, activeSet, setWrongCounts]);
 
-  const handleFinish = useCallback(({ correct, total, maxStreak }) => {
+  const handleFinish = useCallback(({ correct, total, maxStreak, durationMs = 0 }) => {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     setScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
-    onSessionEnd?.({ correct, total });
+    onSessionEnd?.({ correct, total, durationMs });
   }, [activeSet, setScores, onSessionEnd]);
 
   if (activeSet) {

@@ -28,7 +28,7 @@ export default function BangunanMode({ onExit, onSessionEnd }) {
   const [selectedSet, setSelectedSet] = useState(null);
   const scores = get('progress')?.bangunanScores ?? {};
 
-  const handleFinish = ({ correct, total }) => {
+  const handleFinish = ({ correct, total, durationMs = 0 }) => {
     if (!selectedSet) return;
     storageSet('progress', (p) => ({
       ...p,
@@ -37,7 +37,7 @@ export default function BangunanMode({ onExit, onSessionEnd }) {
         [selectedSet.id]: { correct, total, date: new Date().toISOString() },
       },
     }));
-    onSessionEnd?.({ correct, total });
+    onSessionEnd?.({ correct, total, durationMs });
   };
 
   if (selectedSet) {

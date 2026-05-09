@@ -68,14 +68,14 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
     }
   }, [filtered, setWrongCounts, wrongQIds]);
 
-  const handleFinish = useCallback(({ correct, total }) => {
+  const handleFinish = useCallback(({ correct, total, durationMs = 0 }) => {
     if (!setKey) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     setJacScores((s) => {
       const prev = s[setKey];
       return { ...s, [setKey]: { score: correct, total, pct, date: Date.now(), bestPct: Math.max(pct, prev?.bestPct ?? 0) } };
     });
-    onSessionEnd?.({ correct, total });
+    onSessionEnd?.({ correct, total, durationMs });
   }, [setKey, setJacScores, onSessionEnd]);
 
   // J1: Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now)

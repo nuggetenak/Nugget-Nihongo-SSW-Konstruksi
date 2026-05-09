@@ -61,12 +61,12 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
     if (!isCorrect && set) { const qId = questions[qIdx]?._qId; if (qId) setWrongCounts((w) => ({ ...w, [qId]: makeWrongEntry(w[qId]) })); }
   }, [questions, set, setWrongCounts]);
 
-  const handleFinish = useCallback(({ correct, total, maxStreak }) => {
+  const handleFinish = useCallback(({ correct, total, maxStreak, durationMs = 0 }) => {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     // Only update score for full set runs, not lemah-mode runs
     if (!lemahMode) setWgScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
-    onSessionEnd?.({ correct, total });
+    onSessionEnd?.({ correct, total, durationMs });
   }, [activeSet, lemahMode, setWgScores, onSessionEnd]);
 
   const handleExit = useCallback(() => {
