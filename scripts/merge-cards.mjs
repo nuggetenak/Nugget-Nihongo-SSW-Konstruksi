@@ -13,14 +13,10 @@ const SOURCE = path.join(ROOT, 'src', 'data', 'source');
 const OUTPUT = path.join(ROOT, 'src', 'data', 'cards.js');
 
 const SOURCES = [
-  { file: 'cards-common.js',         name: 'CARDS_COMMON' },
-  { file: 'cards-common-vocab.js',   name: 'CARDS_COMMON_VOCAB' },
-  { file: 'cards-lifeline.js',       name: 'CARDS_LIFELINE' },
-  { file: 'cards-lifeline-vocab.js', name: 'CARDS_LIFELINE_VOCAB' },
-  { file: 'cards-kenchiku.js',       name: 'CARDS_KENCHIKU' },
-  { file: 'cards-kenchiku-vocab.js', name: 'CARDS_KENCHIKU_VOCAB' },
-  { file: 'cards-doboku.js',         name: 'CARDS_DOBOKU' },
-  { file: 'cards-doboku-vocab.js',   name: 'CARDS_DOBOKU_VOCAB' },
+  { file: 'cards-common.js',    name: 'CARDS_COMMON' },    // common + vocab merged
+  { file: 'cards-lifeline.js', name: 'CARDS_LIFELINE' },  // lifeline + vocab merged
+  { file: 'cards-kenchiku.js', name: 'CARDS_KENCHIKU' },  // stub — 0 cards
+  { file: 'cards-doboku.js',   name: 'CARDS_DOBOKU' },    // stub — 0 cards
 ];
 
 // Verify all source files exist
