@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.14: REF-11 JpDisplay memoization)
-> **Version:** v4.20.14
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.15: ENG-11 useTrackedCards hook)
+> **Version:** v4.20.15
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -200,8 +200,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.20.14** |
-| Tests | **432** (38 files) |
+| Version | **4.20.15** |
+| Tests | **439** (39 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,443** |
@@ -320,6 +320,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.20.15 | Sonnet 4.6: ENG-11 useTrackedCards hook; 6 new tests (439 total, 39 files) |
 | 2026-05-09 | v4.20.14 | Sonnet 4.6: REF-11 parseDescStructure; DescBlock useMemo; JpFront jpBranch useMemo |
 | 2026-05-09 | v4.20.13 | Sonnet 4.6: REF-10 AppContext+ProgressContext+SRSContext useMemo; ENG-13 marker; 432 tests |
 | 2026-05-09 | v4.20.12 | Sonnet 4.6: ENG-12 storage-quota.js; engine.js writeDoc quota handling; App.jsx handler registration |

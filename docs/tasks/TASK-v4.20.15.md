@@ -1,5 +1,5 @@
 # TASK v4.20.15 — ENG-11: useTrackedCards Hook + Migrate Sites
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.14 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.14 DONE
 
 ## Goal
 Create `hooks/useTrackedCards.js` and replace ~15 repeated filter-cards patterns across modes.

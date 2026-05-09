@@ -1,4 +1,14 @@
+## [4.20.15] - 2026-05-09
+
+### feat: useTrackedCards hook (ENG-11)
+
+- hooks/useTrackedCards.js: centralized filtered-cards hook (track + excludeVocab + category + source + knownOnly + unknownOnly + starredOnly)
+- hooks/index.js: barrel export added
+- tests/useTrackedCards.test.jsx: 6 tests covering track filtering, excludeVocab, source, category, edge cases (439 total, 39 files)
+- Existing sites (SearchMode, GlossaryMode, ModeRouter) deferred — all have showAllTracks or null-track conditional; don't force-fit per task spec
+
 ## [4.20.14] - 2026-05-09
+
 
 ### perf: JpDisplay memoization (REF-11)
 
