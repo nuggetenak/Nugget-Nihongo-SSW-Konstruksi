@@ -7,8 +7,8 @@ import QuizProduksiMode from '../modes/QuizProduksiMode.jsx';
 vi.mock('../styles/theme.js', () => ({ T: new Proxy({}, { get: (_, k) => k }) }));
 vi.mock('../utils/speak.js', () => ({ speakJP: vi.fn(), canSpeak: () => false }));
 vi.mock('../utils/haptic.js', () => ({ haptic: { correct: vi.fn(), wrong: vi.fn(), tap: vi.fn() } }));
-vi.mock('../hooks/usePersistedState.js', () => ({
-  usePersistedState: (_, def) => [def, vi.fn()],
+vi.mock('../contexts/ProgressContext.jsx', () => ({
+  useProgress: () => ({ recordWrong: vi.fn() }),
 }));
 vi.mock('../components/ProgressBar.jsx', () => ({ default: () => <div data-testid="progress-bar" /> }));
 vi.mock('./modes.module.css', () => ({ default: new Proxy({}, { get: (_, k) => k }) }));
