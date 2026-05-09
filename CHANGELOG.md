@@ -1,3 +1,13 @@
+## [4.20.2] - 2026-05-09
+
+### feat + fix: constants extraction (ENG-2)
+
+- ENG-2: New src/utils/constants.js (TOTAL_CARDS, SCORED_QUIZ_MODES, SRS_MATURE_DAYS, SESSIONS_CAP, etc.)
+- N15: ProgressContext — SESSIONS_CAP constant (was hardcoded 180)
+- N19: fsrs-scheduler — SRS_MATURE_DAYS constant (was hardcoded 21)
+- B5 (P1): StatsMode calcReadiness — spurious ×100 removed; readiness now 0–100 correctly
+- B1 (P1): achievements half_deck/full_deck thresholds updated to HALF_DECK_THRESHOLD/TOTAL_CARDS
+
 ## [4.20.1] - 2026-05-09
 
 ### fix + feat: UTC date bugs (REF-6 + ENG-8)

@@ -1,5 +1,5 @@
 # TASK v4.20.2 — ENG-2: Constants + N15, N19, B5, B1
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.1 DONE
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.1 DONE
 
 ---
 
