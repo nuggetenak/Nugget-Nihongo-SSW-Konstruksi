@@ -34,7 +34,7 @@ export default function QuizShell({
   const [results, setResults] = useState([]);
   const [phase, setPhase] = useState('playing');
   const [timeLeft, setTimeLeft] = useState(timer);
-  const { streak, maxStreak, _wrongStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
+  const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
   const { toast } = useApp();
   const { getDurationMs } = useSessionTimer();
 

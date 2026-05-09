@@ -1,6 +1,5 @@
 // ─── tests/context-memo.test.jsx ─────────────────────────────────────────────
-// REF-10 / ENG-13: Verify context value memoization prevents unnecessary
-// consumer re-renders when provider re-renders with unchanged state.
+// Verifies context value memoization prevents unnecessary consumer re-renders.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, act } from '@testing-library/react';

@@ -1,9 +1,8 @@
 // ─── tests/anxiety.toast.test.jsx ────────────────────────────────────────────
-// A.4: Anxiety-reduction toast — fires when maxWrongStreak >= 5.
-// Evidence: Young (1991) normalizing errors reduces language anxiety.
+// Tests for anxiety-reduction toast (maxWrongStreak >= 5) and streak logic.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import QuizShell from '../components/QuizShell.jsx';
 
 const makeQuestion = (id, correctIdx = 0) => ({
@@ -19,10 +18,8 @@ const makeQuestion = (id, correctIdx = 0) => ({
   explanation: '解説テキスト',
 });
 
-// Make 6 questions where correct is index 0 but we'll select index 1 (wrong)
-const questions6 = Array.from({ length: 6 }, (_, i) => makeQuestion(i + 1, 0));
 
-describe('A.4 BUG-04 — Anxiety-reduction toast', () => {
+describe('anxiety-reduction toast', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

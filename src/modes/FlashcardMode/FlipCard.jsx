@@ -17,9 +17,6 @@ export default function FlipCard({
   onFlip,
   onShowDesc,
   safeIdx,
-  // totalCount kept for future "X/Y" display
-  // eslint-disable-next-line no-unused-vars
-  totalCount,
   srsInfo,
   hintCount,
   showHint,

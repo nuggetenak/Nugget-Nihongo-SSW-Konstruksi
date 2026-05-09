@@ -7,7 +7,7 @@ vi.mock('../components/BottomNav.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => key }),
 }));
 
-const TABS = ['home', 'belajar', 'saya'];
+const _TABS = ['home', 'belajar', 'saya'];
 
 describe('BottomNav', () => {
   it('renders 3 tabs (Beranda, Belajar, Saya)', () => {

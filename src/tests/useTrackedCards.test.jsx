@@ -1,5 +1,5 @@
 // ─── tests/useTrackedCards.test.jsx ──────────────────────────────────────────
-// ENG-11: useTrackedCards hook tests
+// useTrackedCards hook tests.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';

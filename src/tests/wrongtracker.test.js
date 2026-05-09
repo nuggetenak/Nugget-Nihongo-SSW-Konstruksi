@@ -1,6 +1,5 @@
 // ─── tests/wrongtracker.test.js ──────────────────────────────────────────────
-// A.7 TD-03: Verify wrong-tracker no longer exports v1 STORAGE_KEYS,
-//     and that value helpers work correctly.
+// Tests for wrong-tracker value helpers and backward compat.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
 import {
@@ -9,17 +8,16 @@ import {
   makeWrongEntry,
   loadFromStorage,
   saveToStorage,
-  removeFromStorage,
 } from '../utils/wrong-tracker.js';
 // A.7: STORAGE_KEYS was removed — this import should fail (undefined)
 import * as wrongTracker from '../utils/wrong-tracker.js';
 
-describe('A.7 TD-03 — wrong-tracker v3 compatibility', () => {
-  it('STORAGE_KEYS is no longer exported (v1 key constants removed)', () => {
+describe('wrong-tracker — value helpers + backward compat', () => {
+  it('STORAGE_KEYS is no longer exported', () => {
     expect(wrongTracker.STORAGE_KEYS).toBeUndefined();
   });
 
-  it('getWrongCount handles number format (old v1 format)', () => {
+  it('getWrongCount handles legacy number format', () => {
     expect(getWrongCount(3)).toBe(3);
     expect(getWrongCount(0)).toBe(0);
     expect(getWrongCount(null)).toBe(0);

@@ -7,7 +7,6 @@ import {
   fmtInterval,
 } from '../srs/fsrs-scheduler.js';
 import { resetStore, getCard, getCardCount } from '../srs/fsrs-store.js';
-import { createCard } from '../srs/fsrs-core.js';
 
 // Reset store between tests — clears in-memory cache + localStorage stub
 beforeEach(() => {

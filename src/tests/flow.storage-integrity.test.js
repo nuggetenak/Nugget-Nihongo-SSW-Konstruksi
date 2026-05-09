@@ -12,7 +12,7 @@ beforeEach(() => {
   init();
 });
 
-describe('G.2 Storage integrity — complete v3 schema', () => {
+describe('storage integrity — complete v3 schema', () => {
   it('all required progress fields present and correct types', () => {
     const p = get('progress');
     expect(p._v).toBe(STORAGE_VERSION);

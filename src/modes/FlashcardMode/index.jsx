@@ -57,8 +57,6 @@ export default function FlashcardMode({
 
   // furiganaPolicy — wired to FlipCard → JpFront.
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
-  // audioEnabled from prefs.
-  const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   const rebuildOrder = useCallback((mode) => {
     const base = reviewBelum ? baseCards.filter((c) => unknown.has(c.id)) : baseCards;
@@ -228,13 +226,11 @@ export default function FlashcardMode({
           card={card}
           cat={cat}
           flipped={flipped}
-          audioEnabled={audioEnabled}
           furiganaPolicy={furiganaPolicy}
           showDesc={showDesc}
           onFlip={flip}
           onShowDesc={() => setShowDesc(true)}
           safeIdx={safeIdx}
-          totalCount={displayCards.length}
           srsInfo={srsInfo}
           hintCount={hintCount}
           showHint={showHint}
