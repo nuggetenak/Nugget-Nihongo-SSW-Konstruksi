@@ -1,3 +1,12 @@
+## [4.20.4] - 2026-05-09
+
+### feat + fix: MODE_META color/strand (ENG-3, F3, B2, REF-4)
+
+- ENG-3: All 23 MODE_META entries now have `color` (hex) and `strand` fields
+- F3: StatsMode — removed local MODE_COLORS object; uses MODE_META[mode].color
+- B2: daily-mission.js — added produksi, kuisprod, mirip, dengar to MISSION_TYPES
+- REF-4: MISSION_TYPES strands now derive from MODE_META (permanent single source)
+
 ## [4.20.3] - 2026-05-09
 
 ### feat + fix: session-analytics.js (ENG-1, ENG-7, B3, N2, N4)

@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (v4.20.3: ENG-1 session-analytics.js, B3 StatsMode calcReadiness, N2 recommend-mode, N4 achievements)
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.4: ENG-3 MODE_META color+strand, F3 StatsMode, B2+REF-4 daily-mission)
 > **Version:** v4.20.3
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
@@ -200,7 +200,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.20.3** |
+| Version | **4.20.4** |
 | Tests | **429** (37 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |

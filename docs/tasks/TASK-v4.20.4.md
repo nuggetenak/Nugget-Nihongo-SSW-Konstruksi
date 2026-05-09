@@ -1,5 +1,5 @@
 # TASK v4.20.4 — ENG-3: MODE_META augmentation + B2, F3, REF-4
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.3 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.3 DONE
 
 ## Goal
 Add `color` and `strand` fields to all 23 MODE_META entries in `modes.js`. Eliminates the local `MODE_COLORS` object in StatsMode (F3) and makes MISSION_TYPES strand permanent (REF-4).
