@@ -6,13 +6,17 @@
 //     Milestone flags trigger queued toasts consumed by App.jsx useEffect.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { todayStr, prevDayStr } from '../utils/date.js';
 import { SESSIONS_CAP } from '../utils/constants.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 
 const ProgressCtx = createContext(null);
+
+// Module-level stable defaults — prevent empty object/array recreation each render
+const EMPTY_OBJ = Object.freeze({});
+const EMPTY_ARR = Object.freeze([]);
 
 export function ProgressProvider({ children }) {
   const [prog, setProgState] = useState(() => get('progress'));
@@ -144,47 +148,46 @@ export function ProgressProvider({ children }) {
     });
   }, [setProg]);
 
-  // ── Derived sets (memoized inline, cheap) ────────────────────────────
-  const knownArr = Array.isArray(prog.known) ? prog.known : [];
-  const unknownArr = Array.isArray(prog.unknown) ? prog.unknown : [];
-  const starredArr = Array.isArray(prog.starred) ? prog.starred : [];
-
-  const knownSet = new Set(knownArr);
-  const unknownSet = new Set(unknownArr);
-  const starredSet = new Set(starredArr);
-
-  const ctx = {
-    // Raw arrays (for components that need array form)
-    known: knownSet,
-    unknown: unknownSet,
-    starred: starredSet,
-    // Scores
-    quizWrong: prog.quizWrong ?? {},
-    jacScores: prog.jacScores ?? {},
-    wgScores: prog.wgScores ?? {},
-    vocabScores: prog.vocabScores ?? {},
-    wgWrong: prog.wgWrong ?? {},
-    vocabWrong: prog.vocabWrong ?? {},
-    // Progress
-    streakData: prog.streakData ?? {},
-    dailyCount: prog.dailyCount ?? { count: 0, date: '' },
-    recentCards: prog.recentCards ?? [],
-    // Milestones
-    milestoneStreak7: prog.milestoneStreak7 ?? false,
-    milestoneQuiz70: prog.milestoneQuiz70 ?? false,
-    // A.3: Toast queue
-    toastQueue,
-    clearToast,
-    // Phase C: Session data
-    sessions: prog.sessions ?? [],
-    recordSession,
-    // Actions
-    handleMark,
-    toggleStar,
-    recordWrong,
-    saveScore,
-    setMilestoneQuiz70,
-  };
+  const ctx = useMemo(() => {
+    const knownArr = Array.isArray(prog.known) ? prog.known : [];
+    const unknownArr = Array.isArray(prog.unknown) ? prog.unknown : [];
+    const starredArr = Array.isArray(prog.starred) ? prog.starred : [];
+    return {
+      // Raw sets (for components that need set form)
+      known: new Set(knownArr),
+      unknown: new Set(unknownArr),
+      starred: new Set(starredArr),
+      // Scores
+      quizWrong: prog.quizWrong ?? EMPTY_OBJ,
+      jacScores: prog.jacScores ?? EMPTY_OBJ,
+      wgScores: prog.wgScores ?? EMPTY_OBJ,
+      vocabScores: prog.vocabScores ?? EMPTY_OBJ,
+      wgWrong: prog.wgWrong ?? EMPTY_OBJ,
+      vocabWrong: prog.vocabWrong ?? EMPTY_OBJ,
+      // Progress
+      streakData: prog.streakData ?? EMPTY_OBJ,
+      dailyCount: prog.dailyCount ?? { count: 0, date: '' },
+      recentCards: prog.recentCards ?? EMPTY_ARR,
+      // Milestones
+      milestoneStreak7: prog.milestoneStreak7 ?? false,
+      milestoneQuiz70: prog.milestoneQuiz70 ?? false,
+      // A.3: Toast queue
+      toastQueue,
+      clearToast,
+      // Phase C: Session data
+      sessions: prog.sessions ?? EMPTY_ARR,
+      recordSession,
+      // Actions
+      handleMark,
+      toggleStar,
+      recordWrong,
+      saveScore,
+      setMilestoneQuiz70,
+    };
+  }, [
+    prog, toastQueue, clearToast,
+    recordSession, handleMark, toggleStar, recordWrong, saveScore, setMilestoneQuiz70,
+  ]);
 
   return <ProgressCtx.Provider value={ctx}>{children}</ProgressCtx.Provider>;
 }
