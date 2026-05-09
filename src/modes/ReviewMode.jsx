@@ -26,7 +26,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [done, setDone] = useState(false);
-  const [_lastResult, setLast] = useState(null);
   const [intervals, setIntervals] = useState({});
   const [sessionCorrect, setSessionCorrect] = useState(0);
   // R1: Rating distribution tracking
@@ -44,7 +43,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
 
   useEffect(() => {
     if (currentId == null) return;
-    setIntervals(srs.previewFor(currentId)); setFlipped(false); setLast(null);
+    setIntervals(srs.previewFor(currentId)); setFlipped(false);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -83,7 +82,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const handleRate = useCallback((rating) => {
     if (!flipped || currentId == null) return;
     const result = srs.review(currentId, rating);
-    setLast({ rating, interval: result.interval });
     setRatingDist((d) => ({ ...d, [rating]: d[rating] + 1 }));
     if (result.isKnown) setSessionCorrect((n) => n + 1);
     setTimeout(() => {
