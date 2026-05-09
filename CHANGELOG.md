@@ -1,3 +1,15 @@
+## [4.20.6] - 2026-05-09
+
+### fix: wrong-answer + score writes via storage engine (N3, N7, N16, REF-3, N20, REF-3b, N11, R3)
+
+- N3: ProductionMode — recordWrong called on wrong answer and skip
+- N7: JACMode — wrongCounts now via storage engine (get/set), not raw usePersistedState key
+- N16: QuizProduksiMode — wrong answers via ProgressContext.recordWrong, removed raw usePersistedState
+- REF-3: VocabMode — vocabWrong writes via storage engine; WaygroundMode — wgWrong writes via engine
+- N20+REF-3b: JACMode, WaygroundMode, VocabMode — score writes via ProgressContext.saveScore (not raw usePersistedState)
+- N11: schema.js — sprintBests: {} added to DEFAULTS.prefs
+- R3: FocusMode — dead _unknown prop removed; ModeRouter — unknown removed from fokus props
+
 ## [4.20.5] - 2026-05-09
 
 ### feat + fix: useSessionTimer, durationMs, recordWrong, N14, B4 (OVERHAUL-2, N6, N21, N22, N14, B4)

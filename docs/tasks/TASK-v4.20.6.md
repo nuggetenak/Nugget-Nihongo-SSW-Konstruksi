@@ -1,5 +1,5 @@
 # TASK v4.20.6 — N3, N7, N16, REF-3, N20, REF-3b, N11, R3
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.5 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.5 DONE
 
 ## Goal: Wrong-answer + score writes via storage engine (A1/A2 interim fixes)
 

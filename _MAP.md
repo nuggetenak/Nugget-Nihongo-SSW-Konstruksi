@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.5: OVERHAUL-2 useSessionTimer, N6/N21 durationMs, N22 recordWrong, N14 daily-challenge hoist, B4 rotation)
-> **Version:** v4.20.5
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.6: N3/N7/N16/REF-3/N20/REF-3b/N11/R3 wrong+score via engine)
+> **Version:** v4.20.6
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -200,7 +200,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.20.4** |
+| Version | **4.20.6** |
 | Tests | **429** (37 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -320,6 +320,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.20.6 | Sonnet 4.6: N3 ProductionMode recordWrong; N7 JACMode wrongCounts engine; N16 QuizProduksi recordWrong; REF-3 VocabMode/WaygroundMode wrong via engine; N20+REF-3b saveScore all 3 modes; N11 sprintBests DEFAULTS; R3 FocusMode _unknown removed |
 | 2026-05-01 | — | Opus 4.6 (Crunchy): Blueprint v6 — full codebase audit |
 | 2026-05-02 | v4.0.0 | Sonnet 4.6: Phases A–G (storage v3, content, daily mission, export, audio, QA) |
 | 2026-05-03–04 | v4.0.2 | Sonnet 4.6 + Codex: furigana chain, ruby rendering, ReviewMode, post-Codex cleanup |
