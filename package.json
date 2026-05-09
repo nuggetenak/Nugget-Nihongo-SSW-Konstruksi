@@ -2,7 +2,7 @@
   "name": "nugget-nihongo-ssw-konstruksi",
   "version": "4.20.8",
   "private": true,
-  "description": "Aplikasi belajar ujian SSW Konstruksi Jepang — flashcard, kuis, simulasi, SRS",
+  "description": "Aplikasi belajar ujian SSW Konstruksi Jepang \u2014 flashcard, kuis, simulasi, SRS",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,7 +18,8 @@
     "validate": "npm run lint && npm run test && npm run build",
     "audit:baseline": "npm run build",
     "audit:integrity": "node scripts/audit-integrity.mjs",
-    "audit:full": "npm run audit:integrity && npm run build"
+    "audit:full": "npm run audit:integrity && npm run build",
+    "prebuild": "node scripts/merge-cards.mjs && node scripts/validate-data.mjs"
   },
   "dependencies": {
     "lz-string": "^1.5.0",
