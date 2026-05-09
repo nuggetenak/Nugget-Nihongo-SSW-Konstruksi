@@ -58,7 +58,6 @@ export function getStrandCounts(sessions, modeMeta, days = 7) {
  */
 export function calcReadiness({ srs, sessions, streakData }) {
   const avgAcc = getAvgAccuracy(sessions);
-  const bestSim = getBestSimScore(sessions);
   const streak = streakData?.current ?? 0;
 
   // SRS component (0–40): ratio of mature+review cards
