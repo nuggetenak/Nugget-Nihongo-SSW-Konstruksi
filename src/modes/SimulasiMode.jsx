@@ -8,7 +8,7 @@ import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
-import { JAC_OFFICIAL } from '../data/jac-official.js';
+import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';

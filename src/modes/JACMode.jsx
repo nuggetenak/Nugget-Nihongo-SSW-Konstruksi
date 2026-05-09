@@ -4,7 +4,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
-import { JAC_OFFICIAL } from '../data/jac-official.js';
+import { JAC_OFFICIAL } from '../data/index.js';
 import { recordReview } from '../srs/fsrs-scheduler.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
