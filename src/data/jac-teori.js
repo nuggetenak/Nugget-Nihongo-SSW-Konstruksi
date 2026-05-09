@@ -187,7 +187,7 @@ export const JAC_TEORI = [
     "hasPhoto": true,
     "photoDesc": "📸 FOTO: Perangkat berbentuk silinder/bantalan karet tebal di bawah struktur bangunan — ini adalah 免振装置 (seismic isolator), sistem isolasi gempa yang memisahkan bangunan dari gerakan tanah.",
     "explanation": "免振装置 = seismic isolator — bantalan karet + baja berlapis di fondasi bangunan untuk meredam getaran gempa. Berbeda dari 制振 (damper) dan 耐震 (tahan gempa kaku).",
-    "related_card_id": 190,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -226,7 +226,7 @@ export const JAC_TEORI = [
     "answer": 2,
     "hasPhoto": false,
     "explanation": "さく井工事 = pengeboran sumur air secara vertikal. Bukan 掘削 (galian umum) atau 穴掘 (galian biasa). Kata kunci: 'menggali SUMUR' (井戸).",
-    "related_card_id": 195,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -246,7 +246,7 @@ export const JAC_TEORI = [
     "answer": 0,
     "hasPhoto": false,
     "explanation": "既成杭 = precast pile: dibuat di pabrik → dibawa ke lapangan → dipancang. Lawannya: 場所打ち杭 = beton cor di tempat (opsi 4). Pasangan jebakan klasik!",
-    "related_card_id": 321,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -266,7 +266,7 @@ export const JAC_TEORI = [
     "answer": 3,
     "hasPhoto": false,
     "explanation": "鉄骨工事 = pekerjaan struktur baja (kolom+balok baja). 鉄筋工事 = pekerjaan tulangan beton. Jangan tukar: 骨 (kerangka/baja) vs 筋 (tulangan/rebar).",
-    "related_card_id": 747,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -286,7 +286,7 @@ export const JAC_TEORI = [
     "answer": 2,
     "hasPhoto": false,
     "explanation": "型枠工事 = membuat cetakan (formwork/bekisting) agar beton mengeras dalam bentuk yang diinginkan. 鉄筋工事 = pasang tulangan baja saja.",
-    "related_card_id": 200,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -307,7 +307,7 @@ export const JAC_TEORI = [
     "hasPhoto": true,
     "photoDesc": "📸 FOTO: Beberapa pekerja berhelm merah & putih di atap bangunan mendatar, menggunakan selang besar & alat perata — ini adalah コンクリート打設工事 (pengecoran beton). Terlihat beton segar dituang & diratakan.",
     "explanation": "コンクリート打設工事 = pengecoran beton. Ciri: selang pompa beton, alat pemadat (vibrator), permukaan datar yang sedang diisi beton.",
-    "related_card_id": 748,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -483,7 +483,7 @@ export const JAC_TEORI = [
     "answer": 1,
     "hasPhoto": false,
     "explanation": "盛り土 = menambah/menumpuk tanah untuk meratakan permukaan. 根切り = menggali untuk fondasi. 埋戻し = menutup kembali galian setelah selesai.",
-    "related_card_id": 193,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -503,7 +503,7 @@ export const JAC_TEORI = [
     "answer": 2,
     "hasPhoto": false,
     "explanation": "かぶり厚さ = selimut beton (concrete cover) — jarak dari tulangan ke permukaan beton. Fungsi: melindungi tulangan dari korosi & api.",
-    "related_card_id": 268,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -726,7 +726,7 @@ export const JAC_TEORI = [
     "answer": 0,
     "hasPhoto": false,
     "explanation": "Listrik yang ditangani salah → kebakaran (火災) & sengatan listrik (感電). Bukan kebocoran gas. Kartu #81 (感電).",
-    "related_card_id": 115,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -746,7 +746,7 @@ export const JAC_TEORI = [
     "answer": 0,
     "hasPhoto": false,
     "explanation": "Tujuan utama bendungan = 治水 (pengendalian banjir, penyediaan air). 治山 = reboisasi/konservasi gunung. Jangan tukar keduanya.",
-    "related_card_id": 629,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -766,7 +766,7 @@ export const JAC_TEORI = [
     "answer": 1,
     "hasPhoto": false,
     "explanation": "Terowongan digunakan untuk 鉄道 (kereta api), jalan raya, saluran air. Bukan jalur laut/udara — itu di atas permukaan.",
-    "related_card_id": 630,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -806,7 +806,7 @@ export const JAC_TEORI = [
     "answer": 3,
     "hasPhoto": false,
     "explanation": "躯体 (くたい) = struktur utama bangunan: fondasi + kolom + balok + dinding + lantai. 仕上げ = finishing, 建具 = kusen, 屋根 = atap.",
-    "related_card_id": 749,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -846,7 +846,7 @@ export const JAC_TEORI = [
     "answer": 2,
     "hasPhoto": false,
     "explanation": "下水道工事 = membangun sistem pengumpulan air LIMBAH (bekas pakai). 上水道 = air BERSIH. Air yang sudah dipakai → 下水道. Kartu #25.",
-    "related_card_id": 32,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -865,7 +865,7 @@ export const JAC_TEORI = [
     "answer": 0,
     "hasPhoto": false,
     "explanation": "推進トンネル工事 (pipe jacking) = pipa didorong dengan JACKS hidrolik (ジャッキ). Bukan crane (digunakan angkat, bukan dorong horizontal).",
-    "related_card_id": 181,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -904,7 +904,7 @@ export const JAC_TEORI = [
     "hasPhoto": true,
     "photoDesc": "📸 FOTO: Mesin paver aspal besar (asphalt finisher) berwarna hijau sedang bergerak di atas permukaan jalan, menghamparkan material aspal secara merata — ini adalah 敷き均し作業.",
     "explanation": "敷き均し作業 = penghamparan material (aspal dll) secara merata menggunakan mesin finisher. Berbeda dari 盛り土 (timbunan tanah) atau 積み込み (pemuatan).",
-    "related_card_id": 750,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -942,7 +942,7 @@ export const JAC_TEORI = [
     "answer": 1,
     "hasPhoto": false,
     "explanation": "漆喰補修工事 (perbaikan plester/mortar) = masuk 屋根工事 karena atap tradisional Jepang menggunakan plester. Tirai = interior. Semprot uretan = biasanya isolasi dinding/lantai.",
-    "related_card_id": 658,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -961,7 +961,7 @@ export const JAC_TEORI = [
     "answer": 2,
     "hasPhoto": false,
     "explanation": "支保工 = sistem perancah/shoring dengan pipa besi untuk menopang bekisting saat pengecoran. 打設 = menuang beton. 保温 = isolasi panas.",
-    "related_card_id": 200,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -981,7 +981,7 @@ export const JAC_TEORI = [
     "hasPhoto": true,
     "photoDesc": "📸 FOTO: Batang baja berulir (rebar) dengan coupling sleeve logam di tengah — ini adalah 機械式継手 (mechanical coupler/sambungan mekanis), tulangan disambung lewat selongsong berulir.",
     "explanation": "機械式継手 = coupler berulir menghubungkan 2 rebar. Ciri visual: ada selongsong/sleeve di tengah sambungan. 重ね継手 = tumpang, 溶接継手 = las.",
-    "related_card_id": 198,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -1000,7 +1000,7 @@ export const JAC_TEORI = [
     "answer": 1,
     "hasPhoto": false,
     "explanation": "ガス圧接継手 = pemanasan gas + tekanan aksial → sambungan permanen tanpa logam pengisi. 溶接継手 = las (ada logam pengisi). Kata kunci: 'dipanaskan + tekanan aksial'.",
-    "related_card_id": 198,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -1115,7 +1115,7 @@ export const JAC_TEORI = [
     "answer": 1,
     "hasPhoto": false,
     "explanation": "遣り方 = rangka tiang kayu + papan (水貫) untuk menentukan posisi & ketinggian. Di sipil disebut 丁張り. 水盛り = hanya untuk cek kerataan. Kartu #152.",
-    "related_card_id": 49,
+    "related_card_id": null,
     "track": "common"
   },
   {
@@ -1134,7 +1134,7 @@ export const JAC_TEORI = [
     "answer": 2,
     "hasPhoto": false,
     "explanation": "段切り = memotong lereng secara BERTANGGA (seperti tangga) sebelum menambah urugan → mencegah urugan meluncur. 締固め = memadatkan tanah (berbeda tahap).",
-    "related_card_id": 256,
+    "related_card_id": null,
     "track": "common"
   },
   {
