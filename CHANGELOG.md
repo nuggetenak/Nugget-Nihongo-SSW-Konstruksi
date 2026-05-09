@@ -1,3 +1,13 @@
+## [4.20.13] - 2026-05-09
+
+### perf: context memoization (REF-10 + ENG-13)
+
+- AppContext: ctx wrapped in useMemo — stable reference across unrelated re-renders
+- ProgressContext: ctx wrapped in useMemo with EMPTY_OBJ/ARR stable defaults
+- SRSContext: stableSrs via useMemo([srs.dueCount, srs.review, ...]) — rebuilds only after review()
+- hooks/useStableContextValue.js: ENG-13 marker file (useMemo inline per ESLint constraint)
+- tests/context-memo.test.jsx: 3 memoization tests added (432 total, 38 files)
+
 ## [4.20.12] - 2026-05-09
 
 ### fix + feat: storage quota detection (STORAGE-1 + ENG-12)

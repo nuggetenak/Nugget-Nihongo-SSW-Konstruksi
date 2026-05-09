@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.12: ENG-12 storage quota)
-> **Version:** v4.20.12
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.13: REF-10 context memoization)
+> **Version:** v4.20.13
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -200,8 +200,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.20.12** |
-| Tests | **429** (37 files) |
+| Version | **4.20.13** |
+| Tests | **432** (38 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,443** |
@@ -320,6 +320,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.20.13 | Sonnet 4.6: REF-10 AppContext+ProgressContext+SRSContext useMemo; ENG-13 marker; 432 tests |
 | 2026-05-09 | v4.20.12 | Sonnet 4.6: ENG-12 storage-quota.js; engine.js writeDoc quota handling; App.jsx handler registration |
 | 2026-05-09 | v4.20.11 | Sonnet 4.6: N24 VocabMode QUIZ_SETS; N25 JACMode+SimulasiMode barrel import |
 | 2026-05-09 | v4.20.10 | Sonnet 4.6: DB-1 photo banner in QuizShell; DB-6 empty track categories → placeholder; DB-7 intentional null kartu annotated; DB-8 covered by ENG-9 |
