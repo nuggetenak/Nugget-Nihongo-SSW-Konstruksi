@@ -7,8 +7,9 @@ import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import ProgressRing from './ProgressRing.jsx';
 import { recommendMode } from '../utils/recommend-mode.js';
+import { todayStr } from '../utils/date.js';
 
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => todayStr();
 const getStreak     = () => storageGet('progress')?.streakData  ?? { days: 0, lastDate: null };
 const getDailyCount = () => { const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' }; return dc.date === today() ? dc.count : 0; };
 const getRecent     = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
