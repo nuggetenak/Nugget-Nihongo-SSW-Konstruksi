@@ -24,12 +24,14 @@ function buildAllQuestions() {
   return [...jac, ...way];
 }
 
+const ALL_QUESTIONS = buildAllQuestions(); // N14: called once on import
+
 /**
  * Returns the daily challenge question for a given ISO date string (YYYY-MM-DD).
  * Deterministic — same date always returns same question.
  */
 export function getDailyChallenge(dateStr) {
-  const all = buildAllQuestions();
+  const all = ALL_QUESTIONS;
   if (!all.length) return null;
   const seed = parseInt(dateStr.replace(/-/g, ''), 10); // YYYYMMDD as integer
   const idx = seed % all.length;
