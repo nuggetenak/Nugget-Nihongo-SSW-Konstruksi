@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { makeWrongEntry, getWrongCount, loadFromStorage } from '../utils/wrong-tracker.js';
+import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -18,10 +18,13 @@ const GROUPS = [
   { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp', desc: 'Latihan praktik tambahan (CSV)' },
 ];
 
-// W2: load wrong count for a set from localStorage (picker-time, outside hook)
+// W2: load wrong count for a set from engine (progress.wgWrong keyed as `${setId}-${q.id}`)
 function getSetWrongCount(setId) {
-  const stored = loadFromStorage(`ssw-wg-wrong-${setId}`, {});
-  return Object.values(stored).filter((v) => getWrongCount(v) > 0).length;
+  const wgWrong = get('progress')?.wgWrong ?? {};
+  const prefix = `${setId}-`;
+  return Object.entries(wgWrong)
+    .filter(([k]) => k.startsWith(prefix))
+    .filter(([, v]) => getWrongCount(v) > 0).length;
 }
 
 export default function WaygroundMode({ onExit, onSessionEnd }) {
