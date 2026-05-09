@@ -9,3 +9,4 @@ export { useDebounce } from './useDebounce.js';
 export { useFocusTrap } from './useFocusTrap.js';
 
 export { useSessionTimer } from './useSessionTimer.js';
+export { useDailyChallenge } from './useDailyChallenge.js';
