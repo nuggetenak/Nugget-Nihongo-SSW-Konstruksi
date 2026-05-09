@@ -10,6 +10,9 @@
 
 | File | Type | Summary | Superseded by |
 |------|------|---------|---------------|
+| `UPGRADE-PROPOSAL-v4.20.md` | Proposal | v4.20 upgrade proposal (pass 14) — all 19 items fully implemented through v4.21.1. | Implemented |
+| `tasks/TASK-MASTER.md` | Task plan | Master task list for v4.20.0–v4.21.1 (19 tasks). All DONE. | Implemented |
+| `tasks/TASK-v4.20.0 … TASK-v4.21.1` | Task files | 19 individual task files — each self-contained, executed in order. | Implemented |
 | `SSW_UPGRADE_PROPOSAL_v1.md` | Audit/Proposal | Full audit of all 15 modes (v3 of doc, hygiene passes ×3). 71 findings, 11 bugs — all resolved by v4.14.0. E2 & C2 dismissed 2026-05-09. text4 audit 2026-05-09: all Ch.4 terms pre-exist — C1 fully closed. **NO OPEN ITEMS.** | `docs/BLUEPRINT-CURRENT.md` |
 | `MASTER-BLUEPRINT-v6.md` | Blueprint | Agent-executable spec for Phases A–G (Opus 4.6 / Crunchy, 2026-05-01). **All phases complete.** | `docs/BLUEPRINT-CURRENT.md` |
 | `MASTER-BLUEPRINT-v5.md` | Blueprint | v5: research-enriched spec with §0 evidence layers. Incorporated into v6. | v6 |
@@ -30,13 +33,10 @@
 
 ---
 
-## Seeds (docs/seeds/)
+## Seeds (deleted)
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `sipil-sets-seed.js` | Starter content for sipil-sets.js (Phase B) | **Superseded** — real sipil-sets.js is in src/data/ |
-| `bangunan-sets-seed.js` | Starter content for bangunan-sets.js (Phase B) | **Superseded** — real bangunan-sets.js is in src/data/ |
+`docs/seeds/sipil-sets-seed.js` and `bangunan-sets-seed.js` were deleted in hygiene pass 3 (2026-05-09). The actual sipil/bangunan quiz sets are now inlined in `src/data/quiz-sets.js` (REF-9, v4.21.0). The seed files referenced `sipil-sets.js`/`bangunan-sets.js` which are also deleted.
 
 ---
 
-*Last updated: 2026-05-09 by Agent Sonnet 4.6 (text4 audit complete — C1 closed; v4.19.1–4.19.5 hygiene passes complete; all open items resolved; app at v4.19.5 final)*
+*Last updated: 2026-05-09 — hygiene pass 3: archived tasks/, UPGRADE-PROPOSAL-v4.20.md; deleted seeds/*

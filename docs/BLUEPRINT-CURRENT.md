@@ -56,7 +56,7 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 ## v4.20–v4.21 — COMPLETE ✅
 
-All 19 task files executed. See `docs/tasks/TASK-MASTER.md` for full status.
+All 19 task files executed. See `docs/archive/tasks/TASK-MASTER.md` for full record.
 
 | Batch | Versions | Status |
 |-------|----------|--------|

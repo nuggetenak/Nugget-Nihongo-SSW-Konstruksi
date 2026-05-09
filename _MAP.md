@@ -1,11 +1,9 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.21.1: OVERHAUL-1 retire usePersistedState + ENG-4 WaygroundMode + ENG-6 ExportMode)
-> **Version:** v4.21.1
-> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
-> **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
-> **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
-> **Archive index:** `docs/archive/ARCHIVE-INDEX.md`
+> **Last updated:** 2026-05-09 — hygiene pass 3 (archive + clean slate at v4.21.1)
+> **Version:** v4.21.1 · **Status:** STABLE ✅ — no queued tasks
+> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
+> **Archive:** `docs/archive/ARCHIVE-INDEX.md` ← all historical docs
 
 ---
 
@@ -38,158 +36,63 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── _MAP.md                         ← YOU ARE HERE
 ├── CHANGELOG.md
 ├── README.md
-├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
+├── HUSKY-SETUP.md                  ← one-time pre-commit hook setup (run locally, not CI)
 ├── index.html
 ├── package.json                    ← v4.21.1 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
-├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
-├── eslint.config.js
-├── .prettierrc / .prettierignore
-├── .gitignore                      ← outputs/, coverage/, stats.html, .env.* now excluded
-├── .npmrc
+├── vitest.config.js                ← coverage thresholds 70%/60%
+├── eslint.config.js / .prettierrc
 ├── public/
 │   ├── manifest.webmanifest        ← PWA manifest
-│   ├── sw.js                       ← SW: cache-first + SW_UPDATED postMessage on activate (FE-08-B)
+│   ├── sw.js                       ← cache-first SW; SW_UPDATED postMessage on activate
 │   └── icons/
 ├── .github/workflows/
-│   ├── ci.yml                      ← lint + test (verbose) + build + build output check
-│   └── deploy.yml                  ← validate → merge-cards → bump SW → build → pages deploy
+│   ├── ci.yml                      ← lint + test (verbose) + build + output check
+│   └── deploy.yml                  ← validate → merge-cards → bump SW cache → build → pages
 ├── docs/
-│   ├── BLUEPRINT-CURRENT.md        ← active: post-completion status + open items
-│   ├── archive/ARCHIVE-INDEX.md    ← index of all 15 historical docs
-│   ├── archive/                    ← old blueprints v3–v6, proposals, audit docs (all executed)
-│   └── seeds/                      ← sipil/bangunan seed JS (superseded by src/data/)
+│   ├── BLUEPRINT-CURRENT.md        ← ACTIVE: constraints, schema, known gaps, phase history
+│   └── archive/                    ← all historical docs, proposals, task files (all executed)
+│       ├── ARCHIVE-INDEX.md        ← index of everything archived
+│       └── tasks/                  ← TASK-v4.20.0 … TASK-v4.21.1 (all DONE)
 ├── scripts/
-│   ├── merge-cards.mjs             ← ACTIVE: deploy.yml assembles cards.js from source/
-│   ├── audit-integrity.mjs         ← ACTIVE: npm run audit:integrity
+│   ├── merge-cards.mjs             ← ACTIVE: assembles cards.js from source/ (runs in deploy)
+│   ├── validate-data.mjs           ← ACTIVE: prebuild data validation
+│   ├── audit-integrity.mjs         ← npm run audit:integrity
+│   ├── audit-related-ids.mjs       ← one-shot audit tool (ENG-10)
 │   └── archive/                    ← one-shot CS-01–05 migration scripts (do not re-run)
-│       └── README.md
 ├── legacy/
-│   └── ssw_flashcards_v87.jsx      ← Historical reference; not part of build
+│   └── ssw_flashcards_v87.jsx      ← historical reference; not part of build
 └── src/
-    ├── types.js                    ← FE-07-C: JSDoc typedefs (Card, SRSState, Tab, ToastItem…)
-    ├── main.jsx
-    ├── App.jsx                     ← Root; per-tab ErrorBoundary; OfflineBanner; SW_UPDATED listener (FE-05-A/B, FE-08-B)
-    ├── contexts/
-    │   ├── AppContext.jsx           ← track, theme, nav, toast, prefs, setPref
-    │   ├── ProgressContext.jsx      ← known/unknown/starred/streak/sessions/toastQueue
-    │   └── SRSContext.jsx
+    ├── App.jsx / main.jsx
+    ├── types.js                    ← JSDoc typedefs (Card, SRSState, Tab, ToastItem)
+    ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
     ├── data/
-    │   ├── index.js                ← barrel re-export
-    │   ├── cards.js                ← CARDS[1443] (assembled from source/ by merge-cards.mjs)
-    │   ├── source/                 ← 8 track source files (CS-01)
-    │   │   ├── cards-common.js, cards-common-vocab.js     ← 646 + 233 cards (includes migrated doboku/kenchiku)
-    │   │   ├── cards-doboku.js, cards-doboku-vocab.js     ← empty [] (pending Ch.5+ sipil content)
-    │   │   ├── cards-kenchiku.js, cards-kenchiku-vocab.js ← empty [] (pending Ch.5+ bangunan content)
-    │   │   └── cards-lifeline.js, cards-lifeline-vocab.js ← 444 lifeline cards (text1l–text3l)
-    │   ├── jac-teori.js            ← 65 学科 questions (tt1+tt2), track:'common'
-    │   ├── jac-lifeline.js         ← 30 実技 questions (st1+st2), track:'lifeline'
-    │   ├── jac-doboku.js           ← empty stub (pending sipil 実技 PDF)
-    │   ├── jac-kenchiku.js         ← empty stub (pending bangunan 実技 PDF)
-    │   ├── jac-official.js         ← backward-compat shim ([...JAC_TEORI, ...JAC_LIFELINE, ...])
-    │   ├── quiz-sets.js            ← merged WAYGROUND_SETS + CSV_SETS; getQuizSetsForTrack() helper
-    │   ├── wayground-sets.js       ← legacy source (still imported by quiz-sets.js)
-    │   ├── csv-sets.js             ← legacy source (still imported by quiz-sets.js)
-    │   ├── sipil-sets.js           ← 3 sets, 45 questions
-    │   ├── bangunan-sets.js        ← 3 sets, 45 questions
-    │   ├── angka-kunci.js          ← 29 entries with track, mnemonic, soal fields
-    │   ├── confusion-pairs.js      ← 28 confusion pairs for ConfusionMode (音/字/意 types)
-    │   ├── danger-pairs.js         ← 20 pairs with track, confusionType, explanation fields
-    │   └── categories.js
-    ├── srs/
-    │   ├── fsrs-core.js
-    │   ├── fsrs-store.js
-    │   ├── fsrs-scheduler.js
+    │   ├── cards.js                ← CARDS[1443] (assembled by merge-cards.mjs)
+    │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
+    │   │                              cards-doboku/kenchiku (empty stubs)
+    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + sipil + bangunan
+    │   ├── jac-teori.js / jac-lifeline.js / jac-official.js
+    │   ├── jac-doboku.js / jac-kenchiku.js   ← empty stubs (future 実技 content)
+    │   ├── wayground-sets.js / csv-sets.js    ← source sets (imported by quiz-sets.js)
+    │   ├── angka-kunci.js          ← 29 entries
+    │   ├── confusion-pairs.js      ← 28 pairs
+    │   ├── danger-pairs.js         ← 20 pairs
+    │   ├── categories.js           ← CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT
     │   └── index.js                ← barrel
-    ├── storage/
-    │   ├── schema.js               ← STORAGE_VERSION=3, DEFAULTS
-    │   ├── engine.js               ← 3-doc R/W, v2→v3 migration, validateSnapshot
-    │   ├── migrations.js
-    │   └── index.js                ← barrel
-    ├── hooks/
-    │   ├── useAnswerStreak.js
-    │   ├── useDebounce.js          ← FE-05-C: 120ms input debounce
-    │   ├── useFocusTrap.js         ← FE-04-C: Tab/Shift+Tab cycle, focus restore on unmount
-    │   ├── usePersistedState.js
-    │   ├── useQuizKeyboard.js
-    │   ├── useSRS.js
-    │   └── index.js                ← barrel (all 6 hooks exported)
-    ├── components/
-    │   ├── Dashboard.jsx           ← Mission card + exam countdown (Phase C, F)
-    │   ├── BelajarTab.jsx
-    │   ├── SayaTab.jsx             ← examDate + audioEnabled + PWA install prompt (Phase F, FE-08-A)
-    │   ├── BottomNav.jsx           ← View Transitions API tab switch (FE-09-C); badge aria-label
-    │   ├── ErrorBoundary.jsx       ← FE-05-A: class EB + TabError + FlatCardFallback exports
-    │   ├── OfflineBanner.jsx       ← FE-05-B: fixed banner, online/offline listeners
-    │   ├── QuizShell.jsx           ← sr-only live region + kbHint (FE-04-A/B)
-    │   ├── ResultScreen.jsx
-    │   ├── JpDisplay.jsx           ← furiganaPolicy + 🔊 audio button (Phase E, F)
-    │   ├── OptionButton.jsx        ← haptic.correct/wrong on answer (FE-09-A)
-    │   ├── ProgressBar.jsx
-    │   ├── ProgressRing.jsx        ← role="img" + aria-label (FE-04-A)
-    │   ├── Toast.jsx               ← swipe-dismiss + type prop + aria-live per type (FE-05-D)
-    │   ├── TrackPicker.jsx         ← useFocusTrap + role="dialog" aria-modal (FE-04-C)
-    │   ├── FilterPopup.jsx, ConfirmDialog.jsx
-    │   ├── EmptyState.jsx, Skeleton.jsx
-    │   ├── Onboarding.jsx
-    │   ├── MissionCompleteOverlay.jsx
-    │   ├── StudyHeatmap.jsx        ← 18-week SVG activity heatmap (ST1, v4.3.1)
-    │   └── *.module.css            ← all have @media (prefers-reduced-motion) blocks (FE-02)
-    ├── modes/
-    │   ├── FlashcardMode.jsx       ← re-export shim → FlashcardMode/index.jsx
-    │   ├── FlashcardMode/          ← decomposed (Phase E)
-    │   │   ├── index.jsx           ← orchestrator; FlipCard in ErrorBoundary (FE-05-A)
-    │   │   ├── FlipCard.jsx        ← haptic.flip() on card tap (FE-09-A); aria-live
-    │   │   ├── RatingRow.jsx       ← haptic.tap() on rating (FE-09-A)
-    │   │   ├── ToolStrip.jsx
-    │   │   ├── FilterBar.jsx
-    │   │   └── flashcard.module.css
-    │   ├── ReviewMode.jsx          ← FSRS due-card review
-    │   ├── QuizMode.jsx
-    │   ├── SprintMode.jsx, FocusMode.jsx
-    │   ├── JACMode.jsx, WaygroundMode.jsx, VocabMode.jsx
-    │   ├── SimulasiMode.jsx        ← CSS module (FE-01-B)
-    │   ├── AngkaMode.jsx           ← CSS module (FE-01-A)
-    │   ├── DangerMode.jsx          ← CSS module (FE-01-A)
-    │   ├── StatsMode.jsx           ← CSS module (FE-01-B)
-    │   ├── GlossaryMode.jsx        ← CSS module (FE-01-C); IntersectionObserver intact
-    │   ├── SipilMode.jsx, BangunanMode.jsx
-    │   ├── ProductionMode.jsx      ← ID→JP active recall with text input (v4.2.0)
-    │   ├── ConfusionMode.jsx       ← 28 confusion pairs VLT-style (音/字/意) (v4.2.0)
-    │   ├── SearchMode.jsx          ← useDebounce applied (FE-05-C); track-aware; SR1 history + SR3 copy (v4.8.x)
-    │   ├── DengarMode.jsx          ← audio-first listening quiz; wrong-tracker write (v4.4.0, D1-WT v4.8.1)
-    │   ├── CatatanMode.jsx         ← personal notes/mnemonics per card (v4.4.0)
-    │   ├── QuizProduksiMode.jsx    ← JP→ID type-answer production quiz, fuzzy match (v4.5.0)
-    │   ├── ExportMode.jsx          ← Gist sync section (v4.6.0)
-    │   ├── SumberMode.jsx          ← progress bar + Terlemah badge (v4.8.0)
-    │   └── modes.module.css        ← shared mode styles
-    ├── router/
-    │   ├── ModeRouter.jsx          ← focus mgmt + scroll restoration on mode change (FE-04-D, FE-09-B)
-    │   └── modes.js
-    ├── utils/
-    │   ├── daily-mission.js
-    │   ├── haptic.js               ← FE-09-A: tap/correct/wrong/success/flip (Vibration API)
-    │   ├── speak.js                ← Web Speech API + HVPT cycling (Phase F)
-    │   ├── jp-helpers.js
-    │   ├── quiz-generator.js
-    │   ├── shuffle.js
-    │   ├── wrong-tracker.js
-    │   ├── achievements.js         ← 14 achievement badges (v4.3.1)
-    │   ├── daily-challenge.js      ← date-seeded daily challenge question (v4.3.1)
-    │   ├── recommend-mode.js       ← smart mode recommendation engine (v4.3.1)
-    │   ├── gist-sync.js            ← GitHub Gist sync helper (v4.6.0)
-    │   └── index.js                ← barrel (all utils + haptic + speak exported)
-    ├── styles/
-    │   └── global.css              ← design tokens (FE-03): spacing, shadow, z-index, transitions
-    │                               ← .sr-only utility (FE-04-A)
-    │                               ← View Transitions ::view-transition rules (FE-09-C)
-    │                               ← token audit comment block
-    └── tests/                      ← 35 test files, 387 tests
-        ├── setup.js
-        ├── BottomNav.test.jsx      ← FE-06: 7 tests
-        ├── ResultScreen.test.jsx   ← FE-06: 7 tests
-        ├── Toast.test.jsx          ← FE-06: 8 tests
-        └── [32 existing test files]
+    ├── srs/                        ← FSRS engine: fsrs-core, fsrs-store, fsrs-scheduler
+    ├── storage/                    ← engine.js (3-doc R/W), schema.js (v3), migrations.js
+    ├── hooks/                      ← useAnswerStreak, useDailyChallenge, useDebounce,
+    │                                  useFocusTrap, useQuizKeyboard, useSRS, useSessionTimer,
+    │                                  useStableContextValue, useTrackedCards + index.js barrel
+    ├── components/                 ← Dashboard, BelajarTab, SayaTab, BottomNav, QuizShell,
+    │                                  JpDisplay, Toast, ErrorBoundary, Onboarding, …
+    ├── modes/                      ← 23 modes (all React.lazy); FlashcardMode/ decomposed
+    ├── router/                     ← ModeRouter + modes.js registry
+    ├── utils/                      ← daily-mission, haptic, speak, jp-helpers, quiz-generator,
+    │                                  shuffle, wrong-tracker, achievements, daily-challenge,
+    │                                  recommend-mode, gist-sync, session-analytics, storage-quota
+    ├── styles/                     ← global.css (design tokens + sr-only + View Transitions)
+    └── tests/                      ← 41 test files, 457 tests
 ```
 
 ---

@@ -58,7 +58,7 @@ npm run dev        # dev server → http://localhost:5173/Nugget-Nihongo-SSW-Kon
 npm run dev           # Dev server dengan HMR
 npm run build         # Production build → dist/
 npm run preview       # Preview build lokal
-npm test              # Jalankan semua test (411 test cases)
+npm test              # Jalankan semua test (457 tests, 41 files)
 npm run test:watch    # Test mode watch
 npm run lint          # ESLint (0 warnings required)
 npm run lint:fix      # Auto-fix ESLint
@@ -90,7 +90,7 @@ src/
 ├── App.jsx                  # Root, 3-tab layout
 ├── contexts/                # AppContext, ProgressContext, SRSContext
 ├── data/                    # Flashcard & quiz data (1,443 cards + ~860 questions)
-│   └── source/              # 8 source files (CS-01 split)
+│   └── source/              # 4 source files (cards-common 879, cards-lifeline 564, doboku/kenchiku stubs)
 ├── srs/                     # FSRS engine (fsrs-core, fsrs-store, fsrs-scheduler)
 ├── storage/                 # localStorage engine, schema v3, migrations
 ├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
@@ -100,7 +100,7 @@ src/
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 35 test files, 387 tests
+└── tests/                   # 41 test files, 457 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
