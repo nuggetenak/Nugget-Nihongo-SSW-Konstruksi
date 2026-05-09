@@ -40,7 +40,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← FE-07-B: one-time pre-commit setup (user runs, not CI)
 ├── index.html
-├── package.json                    ← v4.19.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.21.1 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60% · alias @→src (matches vite)
 ├── eslint.config.js
@@ -200,8 +200,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.21.0** |
-| Tests | **448** (40 files) |
+| Version | **4.21.1** |
+| Tests | **457** (41 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,443** |
@@ -231,6 +231,9 @@ All phases complete. See `docs/BLUEPRINT-CURRENT.md` for full deliverable table.
 | v4.18 | Refactor: 157 doboku/kenchiku cards → common |
 | v4.19.0 | Data layer: JAC split, quiz-sets merge, track fields on all datasets |
 | v4.19.1–4.19.5 | Hygiene: SOURCE_GROUPS fix, track field bugs, CSV pool, SearchMode fix, stale counts |
+| v4.20.0–4.20.15 | P0 bugs, refactors, engines (session-analytics, OVERHAUL-2), storage quota, context memo, useTrackedCards |
+| v4.21.0 | REF-8/REF-9: vocab merge (8→4 source files), absorb sipil/bangunan sets; C1-C9 data-integrity tests |
+| v4.21.1 | OVERHAUL-1: retire usePersistedState; ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary |
 
 ---
 
@@ -275,7 +278,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ## 7. Notable Files Added Since v4.0.0
 
-### Data (v4.0.x → v4.19.0)
+### Data (v4.0.x → v4.21.1)
 | File | Purpose |
 |------|---------|
 | `src/data/source/` (8 files) | CS-01 split: cards-common.js + vocab, cards-lifeline.js + vocab, stubs for doboku/kenchiku |
@@ -290,7 +293,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/data/quiz-sets.js` | Merged QUIZ_SETS = WAYGROUND_SETS + CSV_SETS; getQuizSetsForTrack() helper (v4.19.0) |
 | `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. text3l/vocab-supplementary/vocab-general), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
 
-### Source/Utils (v4.0.x → v4.19.0)
+### Source/Utils (v4.0.x → v4.21.1)
 | File | Purpose |
 |------|---------|
 | `src/types.js` | JSDoc typedefs (Card, SRSState, Tab, ToastItem) |
@@ -320,7 +323,6 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
-| 2026-05-09 | v4.21.1 | Sonnet 4.6: OVERHAUL-1 retire usePersistedState (3 sites → useProgress); ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary; 457 tests (41 files) |
 | 2026-05-09 | v4.21.1 | Sonnet 4.6: OVERHAUL-1 retire usePersistedState (3 sites → useProgress); ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary; 457 tests (41 files) |
 | 2026-05-09 | v4.21.0 | Sonnet 4.6: REF-8 merge vocab sources (8→4); REF-9 absorb sipil/bangunan into quiz-sets.js; C1-C9 integrity tests (448 tests, 40 files) |
 | 2026-05-09 | v4.20.15 | Sonnet 4.6: ENG-11 useTrackedCards hook; 6 new tests (439 total, 39 files) |

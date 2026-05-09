@@ -1,7 +1,7 @@
 # 🎯 TASK-MASTER.md — v4.20 Implementation Plan
-**Base:** v4.19.5 | **Proposal:** UPGRADE-PROPOSAL-v4.20.md (pass 14)
+**Base:** v4.19.5 | **Completed through:** v4.21.1 ✅ ALL DONE | **Proposal:** UPGRADE-PROPOSAL-v4.20.md (pass 14)
 
-> **For new agents:** Read `_MAP.md` first (repo orientation), then this file. Pick the lowest unclaimed version. Each task file is self-contained — no need to read the full proposal.
+> **Status: All 19 tasks COMPLETE.** No pending work in this queue.
 
 ---
 

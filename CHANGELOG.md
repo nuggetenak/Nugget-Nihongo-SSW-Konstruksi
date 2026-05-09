@@ -214,18 +214,6 @@
 
 ---
 
-## [v4.20.x] - QUEUED — 2026-05-09
-
-### plan: v4.20.0–v4.21.1 implementation queued (Proposal pass 14)
-
-19 task files in `docs/tasks/`. Pick up `TASK-MASTER.md` to begin.
-
-**Pass 14 new items:** PERF-1 context memoization (REF-10+ENG-13), PERF-2 JpDisplay parse memo (REF-11), STORAGE-1 quota detection (ENG-12), ENG-11 useTrackedCards, N24 VocabMode QUIZ_SETS, N25 barrel imports.
-
-**Earlier queued items:** X1/X2 (P0), B1–B5 (P1), DB-1–8, N1–N23, REF-1–9, ENG-1–10, Tests C1-C7.
-
----
-
 ## [4.19.5] - 2026-05-09
 
 ### fix: stale counts + daily-challenge CSV pool + vite chunk (Agent Sonnet 4.6)

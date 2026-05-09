@@ -1,9 +1,9 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.19.5 → v4.21.x)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.21.1)
 
-> **Status:** v4.19.5 STABLE ✅ — v4.20.x IMPLEMENTATION QUEUED
-> **Version:** 4.19.5
-> **Last updated:** 2026-05-09 (proposal pass 14 approved; task files in docs/tasks/; v4.20.0–v4.21.1 queued)
-> **For new agents:** Read `_MAP.md` → `docs/tasks/TASK-MASTER.md` → pick lowest READY task.
+> **Status:** v4.21.1 STABLE ✅ — all v4.20.x–v4.21.1 tasks COMPLETE
+> **Version:** 4.21.1
+> **Last updated:** 2026-05-09 (hygiene pass — all queued tasks executed; 457 tests passing)
+> **For new agents:** Read `_MAP.md` first. All TASK-v4.20.x / TASK-v4.21.x files are DONE.
 
 ---
 
@@ -17,7 +17,7 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Quiz questions | ~974 (JAC 95 + Wayground 579 + CSV 300) |
 | Modes | 23 (all React.lazy) |
 | Storage schema | v3 (3-doc localStorage, lz-string compressed) |
-| Tests | 411 (35 files) |
+| Tests | 457 (41 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
 | Version | **4.19.5** |
 
@@ -53,21 +53,19 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 
 ---
 
-## v4.20 Implementation Queue
+## v4.20–v4.21 — COMPLETE ✅
 
-Work is queued in `docs/tasks/`. 19 task files cover v4.20.0 → v4.21.1.
+All 19 task files executed. See `docs/tasks/TASK-MASTER.md` for full status.
 
-| Batch | Versions | Focus |
-|-------|----------|-------|
-| Quick fixes | v4.20.0–v4.20.2 | P0 bugs, date util, constants |
-| Engines | v4.20.3–v4.20.5 | session-analytics, MODE_META, OVERHAUL-2 |
-| Features | v4.20.6–v4.20.8 | open items batch |
-| Data layer | v4.20.9–v4.20.11 | DB bugs, ENG-9/10, N24/N25 |
-| Resilience | v4.20.12 | storage quota detection |
-| Performance | v4.20.13–v4.20.15 | context memo, JpDisplay memo, useTrackedCards |
-| Structural | v4.21.0–v4.21.1 | vocab merge, sipil/bangunan absorption, OVERHAUL-1 |
-
-Full spec: `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14)
+| Batch | Versions | Status |
+|-------|----------|--------|
+| Quick fixes | v4.20.0–v4.20.2 | ✅ DONE |
+| Engines | v4.20.3–v4.20.5 | ✅ DONE |
+| Features | v4.20.6–v4.20.8 | ✅ DONE |
+| Data layer | v4.20.9–v4.20.11 | ✅ DONE |
+| Resilience | v4.20.12 | ✅ DONE |
+| Performance | v4.20.13–v4.20.15 | ✅ DONE |
+| Structural | v4.21.0–v4.21.1 | ✅ DONE |
 
 
 ## Known Gaps & Deferred Work
