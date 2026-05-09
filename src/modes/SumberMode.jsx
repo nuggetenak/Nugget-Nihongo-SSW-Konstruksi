@@ -38,6 +38,14 @@ export default function SumberMode({ onExit, onNavigate }) {
               onClick={() => onNavigate('kuis', { filterIds: srcIds })}
               style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
             >❓ Kuis</button>
+            <button
+              onClick={() => onNavigate('produksi', { filterIds: srcIds })}
+              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
+            >✍️ Produksi</button>
+            <button
+              onClick={() => onNavigate('kuisprod', { filterIds: srcIds })}
+              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
+            >🔤 Kuis Prod</button>
           </div>
         )}
         <div className={S.list} style={{ gap: 6 }}>
