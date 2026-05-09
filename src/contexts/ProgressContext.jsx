@@ -98,9 +98,8 @@ export function ProgressProvider({ children }) {
     });
   }, [setProg]);
 
-  // ── Quiz wrong tracking (legacy in-doc counter) ──────────────────────
-  // Note: modes now use wrong-tracker.js + ssw-quiz-wrong (out-of-docs).
-  // recordWrong writes to progress.quizWrong for FocusMode/QuizMode/SearchMode.
+  // ── Quiz wrong tracking ───────────────────────────────────────────────
+  // recordWrong writes to progress.quizWrong (in-engine, lz-string compressed, exportable).
   const recordWrong = useCallback((cardId) => {
     setProg((prev) => {
       const qw = { ...(prev.quizWrong ?? {}) };

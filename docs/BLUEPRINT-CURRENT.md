@@ -19,7 +19,7 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage, lz-string compressed) |
 | Tests | 457 (41 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.19.5** |
+| Version | **4.21.1** |
 
 ---
 
@@ -48,8 +48,9 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | v4.19.3 | Tests | +24 data tests (JAC split, track fields, QUIZ_SETS, SOURCE_GROUPS) |
 | v4.19.4 | Bug fixes | SearchMode wrongCount→getWrongCount; utils/index barrel clean |
 | v4.19.5 | Hygiene | Onboarding/index.html 1438→1443; daily-challenge QUIZ_SETS; vite chunks |
-
----
+| v4.20.0–4.20.15 | Engines + Features + Data | session-analytics, OVERHAUL-2, DB fixes, ENG-9/10/11/12/13, storage quota, context memo, useTrackedCards |
+| v4.21.0 | Structural | REF-8/REF-9: merge vocab sources (8→4); absorb sipil/bangunan sets; C1-C9 data-integrity tests |
+| v4.21.1 | OVERHAUL-1 | Retire usePersistedState; ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary |
 
 ---
 
@@ -79,8 +80,8 @@ These are honest assessments — not blocking anything, but relevant for future 
 - **desc field accuracy**: Term existence verified (63% JAC-traceable), but Indonesian explanation correctness was not audited. Human review recommended.
 
 ### Technical
-- **Out-of-DOCS localStorage keys**: Several modes use `usePersistedState` with keys outside the 3-doc engine (see Storage Schema below). These bypass lz-string compression and `validateSnapshot`. Known — not blocking, but relevant if adding export coverage.
 - **sessionStorage keys**: `ssw-search-history` (SR1) and `ssw-fc-search`/`ssw-fc-sort` (BUG-05) live in sessionStorage — per-tab, not persisted. Expected behaviour.
+- **Gist credentials**: `ssw-gist-pat` / `ssw-gist-id` stored as plain localStorage strings (not in engine). Intentional — sensitive, excluded from export.
 - **sprintBest/sprintBestTimeline**: Stored directly on prefs doc via `storageSet` but not in schema DEFAULTS — set dynamically by SprintMode on first PB.
 
 ### Architecture
@@ -134,17 +135,13 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 // E4: All DOCS are lz-string compressed in localStorage.
 // readDoc() decompresses; falls back to plain JSON for old data (backward compat).
 
-// ⚠️ Out-of-DOCS keys (usePersistedState — bypass engine/compression/export):
-// ssw-jac-scores           { [setKey]: { score, total, pct, date, bestPct } }
-// ssw-wg-scores            { [setId]: { correct, total, date, maxStreak } }
-// ssw-vocab-scores         { [setId]: { correct, total, date } }
-// ssw-quiz-wrong           { [cardId]: wrongEntry }  ← shared pool (8 modes write)
-// ssw-wrong-counts         { [cardId]: count }
-// ssw-quiz-produksi-wrong  { [cardId]: wrongEntry }
-// ssw-wg-wrong-{setId}     { [cardId]: wrongEntry }  ← per-set Wayground wrong
-// ssw-vocab-wrong-{setId}  { [cardId]: wrongEntry }
+// ✅ All wrong-tracking and scores now flow through engine (lz-string compressed, exportable).
+// Legacy keys (ssw-quiz-wrong, ssw-wrong-counts, ssw-jac/wg/vocab-scores,
+//   ssw-wg-wrong-{id}, ssw-vocab-wrong-{id}) are one-time migration reads → deleted post-migrate.
+//
+// ⚠️ Truly out-of-engine keys (intentional — not in progress/prefs/srs docs):
 // ssw-fc-search / ssw-fc-sort  string (sessionStorage — FlashcardMode filter persist)
-// ssw-gist-pat / ssw-gist-id   string (GitHub Gist credentials)
+// ssw-gist-pat / ssw-gist-id   string (GitHub Gist credentials — sensitive, excluded from export)
 // ssw-search-history           string[] (sessionStorage — per tab, not persisted)
 ```
 

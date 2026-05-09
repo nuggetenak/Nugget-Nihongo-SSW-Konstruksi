@@ -1,10 +1,11 @@
-// ─── wrong-tracker.js (phaseA) ────────────────────────────────────────────────
+// ─── wrong-tracker.js ─────────────────────────────────────────────────────────
 // Storage: pure localStorage via storage engine (3-document v3 schema).
-// A.7 TD-03: Removed all v1 direct-localStorage key constants (STORAGE_KEYS).
-//     The old STORAGE_KEYS exported v1 paths like 'ssw-quiz-wrong' — these
-//     no longer exist as standalone keys in v2/v3. All reads go through engine.
-//     loadFromStorage/saveToStorage/removeFromStorage kept for any callers
-//     that still use raw keys for non-migrated paths.
+// All wrong-tracking and scores now flow through the engine (progress doc).
+// Legacy ssw-quiz-wrong / ssw-wg-wrong-* / ssw-vocab-wrong-* keys are
+// migration read-only (one-time migrate then deleted).
+//
+// loadFromStorage/saveToStorage/removeFromStorage: low-level helpers used in
+// migrations and tests. Production code uses engine.get/set instead.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Wrong-answer value helpers ─────────────────────────────────────────────
@@ -25,8 +26,8 @@ export function makeWrongEntry(existing, now = Date.now()) {
 }
 
 // ── Storage helpers (synchronous localStorage) ─────────────────────────────
-// These operate on raw keys — used only for paths not covered by the engine
-// (e.g. legacy compatibility shims). Prefer engine.get/set for progress data.
+// Low-level raw key access. Used in migrations.js and test utilities.
+// Production modes use engine.get / engine.set for all progress/prefs/srs data.
 
 export function loadFromStorage(key, defaultVal = null) {
   try {

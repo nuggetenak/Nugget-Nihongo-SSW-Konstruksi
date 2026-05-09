@@ -274,23 +274,20 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 ---
 
----
-
 ## 7. Notable Files Added Since v4.0.0
 
 ### Data (v4.0.x → v4.21.1)
 | File | Purpose |
 |------|---------|
-| `src/data/source/` (8 files) | CS-01 split: cards-common.js + vocab, cards-lifeline.js + vocab, stubs for doboku/kenchiku |
+| `src/data/source/` (4 files) | CS-01 split: cards-common.js (879 cards), cards-lifeline.js (564 cards), stubs for doboku/kenchiku; vocab files merged in (REF-8 v4.21.0) |
 | `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
 | `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
 | `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
-| `src/data/sipil-sets.js` / `bangunan-sets.js` | 3 sets × 45qs each for Sipil/Bangunan tracks |
+| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + CSV_SETS + SIPIL_SETS + BANGUNAN_SETS (44 sets total); getQuizSetsForTrack() helper; sipil/bangunan sets inlined here (REF-9 v4.21.0) |
 | `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
 | `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
 | `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
 | `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE, ...]` |
-| `src/data/quiz-sets.js` | Merged QUIZ_SETS = WAYGROUND_SETS + CSV_SETS; getQuizSetsForTrack() helper (v4.19.0) |
 | `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. text3l/vocab-supplementary/vocab-general), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
 
 ### Source/Utils (v4.0.x → v4.21.1)
@@ -304,6 +301,11 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/utils/gist-sync.js` | GitHub Gist sync helper |
 | `src/hooks/useDebounce.js` | 120ms debounce for search inputs |
 | `src/hooks/useFocusTrap.js` | Tab/Shift+Tab cycle + focus restore |
+| `src/hooks/useTrackedCards.js` | Memoized card filtering by track + prefs (ENG-11 v4.20.15) |
+| `src/hooks/useSessionTimer.js` | Session timing for session-analytics |
+| `src/hooks/useStableContextValue.js` | useMemo wrapper for context stability (REF-10 v4.20.13) |
+| `src/utils/session-analytics.js` | Session duration/accuracy analytics (ENG-1 v4.20.3) |
+| `src/utils/storage-quota.js` | QuotaExceededError detection + user notification (ENG-12 v4.20.12) |
 | `src/components/ErrorBoundary.jsx` | Class-based EB + TabError + FlatCardFallback |
 | `src/components/OfflineBanner.jsx` | Fixed offline status banner |
 | `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap |
