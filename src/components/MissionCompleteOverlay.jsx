@@ -1,5 +1,5 @@
 // ─── components/MissionCompleteOverlay.jsx ────────────────────────────────────
-// D8: Tap-to-dismiss, shows mission label + score, auto-dismiss bumped to 3s.
+// Tap-to-dismiss overlay. Shows mission label + score, auto-dismiss after 3s.
 // Evidence: Clear (2018) — reward must be salient and interactive.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useEffect, useState } from 'react';

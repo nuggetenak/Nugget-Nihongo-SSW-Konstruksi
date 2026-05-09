@@ -19,7 +19,7 @@ export default function GlossaryMode({ onExit, track }) {
   const [showAllTracks, setShowAllTracks] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
-  const [compactView, setCompactView] = useState(true); // G2: true=click-to-expand; false=always-show-all
+  const [compactView, setCompactView] = useState(true); // true=click-to-expand; false=always-show-all
   // Select mode for mini deck export.
   const [selectMode, setSelectMode] = useState(false);
   const [selected, setSelected] = useState(new Set());
@@ -52,7 +52,7 @@ export default function GlossaryMode({ onExit, track }) {
     const map = {};
     sorted.forEach((c) => {
       const first = (c.furi || '?')[0];
-      // G4: use actual first char as key for all entries — allows kanji/romaji nav keys
+      // Use actual first char as key — allows kanji/romaji nav keys.
       if (!map[first]) map[first] = [];
       map[first].push(c);
     });

@@ -1,5 +1,5 @@
 // ─── gist-sync.js ─────────────────────────────────────────────────────────────
-// E2/E3: Optional multi-device sync via GitHub Gist (no backend required).
+// Optional multi-device sync via GitHub Gist (no backend required).
 // User provides a GitHub Personal Access Token (PAT) with gist scope.
 // All operations are opt-in — token stored in localStorage only, never sent
 // anywhere except api.github.com with the user's own credentials.

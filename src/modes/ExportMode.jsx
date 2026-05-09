@@ -39,7 +39,7 @@ export default function ExportMode({ onExit }) {
   const [previewData, setPreviewData] = useState(null); // pending import data
   const fileRef = useRef(null);
 
-  // E2: Gist sync state
+  // Gist sync state.
   const [gistPat, setGistPat]       = useState(() => loadToken());
   const [gistId, setGistId]         = useState(() => loadGistId());
   const [gistStatus, setGistStatus] = useState(null);
@@ -100,7 +100,7 @@ export default function ExportMode({ onExit }) {
     }
   };
 
-  // E2: Gist handlers
+  // Gist handlers.
   const handleGistPush = async () => {
     if (!gistPat.trim()) { setGistStatus({ type: 'err', msg: '❌ Masukkan GitHub Token terlebih dahulu.' }); return; }
     setGistBusy(true); setGistStatus(null);
@@ -281,7 +281,7 @@ export default function ExportMode({ onExit }) {
         </div>
       )}
 
-      {/* E2: GitHub Gist Sync */}
+      {/* GitHub Gist Sync */}
       <button
         onClick={() => setShowGist((s) => !s)}
         style={{ width: '100%', padding: '12px', marginBottom: 12, fontFamily: 'inherit', fontSize: 13, fontWeight: 700, borderRadius: T.r.md, border: `1px solid ${showGist ? T.borderActive : T.border}`, background: showGist ? T.surfaceActive : T.surface, color: showGist ? T.amber : T.textMuted, cursor: 'pointer', textAlign: 'left' }}

@@ -23,7 +23,7 @@ export default function FlashcardMode({
   starred = new Set(), onToggleStar = () => {},
   filterIds = null,
 }) {
-  // A1: If filterIds provided (wrong-card bridge), scope cards to that set
+  // If filterIds provided (wrong-card bridge), scope cards to that set.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
   const [order, setOrder]           = useState([]);
   const [idx, setIdx]               = useState(0);
@@ -178,7 +178,7 @@ export default function FlashcardMode({
   return (
     <div className={S.fcWrapper}>
 
-      {/* A1: Wrong-card bridge banner */}
+      {/* Wrong-card bridge banner */}
       {filterIds && (
         <div style={{ background: 'rgba(248,113,113,0.10)', border: '1px solid rgba(248,113,113,0.3)', borderRadius: 8, padding: '8px 12px', marginBottom: 8, fontSize: 12, color: '#f87171', textAlign: 'center' }}>
           ❌ Latihan kartu salah · {baseCards.length} kartu
@@ -254,7 +254,7 @@ export default function FlashcardMode({
             const dx = e.changedTouches[0].clientX - touchStart.x;
             const dy = e.changedTouches[0].clientY - touchStart.y;
             setSwipeDelta(0); setTouchStart(null);
-            // K1: If flipped and not yet rated — swipe to rate
+            // If flipped and not yet rated — swipe to rate.
             if (flipped && !rated) {
               if (dy < -60 && Math.abs(dy) > Math.abs(dx)) { handleRate(4); return; } // swipe up = Easy
               if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
@@ -277,7 +277,7 @@ export default function FlashcardMode({
         />
       )}
 
-      {/* K1: Swipe hint — shown when flipped and not yet rated */}
+      {/* Swipe hint — shown when flipped and not yet rated */}
       {!readOnly && flipped && !rated && (
         <div style={{ textAlign: 'center', fontSize: 11, color: T.textFaint, marginTop: 4, letterSpacing: 0.3 }}>
           ← Lagi · Oke → · ↑ Mudah
@@ -300,7 +300,7 @@ export default function FlashcardMode({
         >Next →</button>
       </div>
 
-      {/* K5: Manual SRS enqueue for known cards not yet in SRS */}
+      {/* Manual SRS enqueue for known cards not yet in SRS */}
       {isKnown && srs?.ready && !srsInfo && (
         <button
           onClick={() => { srs.review(card.id, 1); }}

@@ -1,10 +1,11 @@
 // ─── QuizShell.jsx ───────────────────────────────────────────────────────────
 // Fires anxiety-reduction toast when maxWrongStreak >= 5 (Young 1991).
 // Note: timer color (red when <60s) kept inline — conditional/prop-driven.
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
 import { useAnswerStreak } from '../hooks/useAnswerStreak.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { stripFuri } from '../utils/jp-helpers.js';
@@ -35,7 +36,7 @@ export default function QuizShell({
   const [timeLeft, setTimeLeft] = useState(timer);
   const { streak, maxStreak, _wrongStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
   const { toast } = useApp();
-  const startTimeRef = useRef(Date.now());
+  const { getDurationMs } = useSessionTimer();
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
@@ -93,7 +94,7 @@ export default function QuizShell({
     if (phase === 'finished') {
       const correct = results.filter((r) => r.isCorrect).length;
       onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak,
-        durationMs: Date.now() - startTimeRef.current });
+        durationMs: getDurationMs() });
 
       // Anxiety-reduction toast — fires when >=5 consecutive wrong answers.
       // Normalizes struggle as expected for new material (Young 1991, Zhang 2019).

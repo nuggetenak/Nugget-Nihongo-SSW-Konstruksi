@@ -24,7 +24,7 @@ function buildAllQuestions() {
   return [...jac, ...way];
 }
 
-const ALL_QUESTIONS = buildAllQuestions(); // N14: called once on import
+const ALL_QUESTIONS = buildAllQuestions(); // called once on import
 
 /**
  * Returns the daily challenge question for a given ISO date string (YYYY-MM-DD).

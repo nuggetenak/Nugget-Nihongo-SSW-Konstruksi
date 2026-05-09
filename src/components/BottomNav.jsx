@@ -1,4 +1,4 @@
-// ─── BottomNav.jsx v2.0 — SVG icons, pill active state ────────────────────────
+// ─── BottomNav.jsx ──────────────────────────────────────────────────────────
 import s from './BottomNav.module.css';
 
 // Inline SVG icons — clean, scalable, no emoji jank
@@ -72,4 +72,3 @@ export default function BottomNav({ active, onChange, dueBadge = 0 }) {
   );
 }
 
-export { TABS };

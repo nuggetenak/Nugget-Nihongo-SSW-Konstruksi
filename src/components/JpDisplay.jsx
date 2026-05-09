@@ -3,13 +3,12 @@
 // Note: VS label font-size is derived from jp size — justified inline.
 import { T } from '../styles/theme.js';
 import { useMemo, useState } from 'react';
-import { canSpeak, speakJP } from '../utils/speak.js'; // eslint-disable-line no-unused-vars
 import { stripFuri, extractReadings, jpFontSize, parseDescStructure } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
 // ─── JpFront ──────────────────────────────────────────────────────────────────
 // furiganaPolicy: 'always' | 'tap' | 'hidden'
-export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled = true }) { // eslint-disable-line no-unused-vars
+export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
   const [tapReveal, setTapReveal] = useState(false);
   // policy:
   // always: always show readings/ruby

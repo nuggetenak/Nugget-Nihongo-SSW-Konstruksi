@@ -251,7 +251,7 @@ export default function ModeRouter() {
 
   const props = modeProps[mode] ?? { onExit: exitMode };
 
-  // A3: breadcrumb — show "← Kembali ke [Mode]" if there's navigation history
+  // Breadcrumb — show "← Kembali ke [Mode]" if there's navigation history.
   const breadcrumbMode = modeHistory.length > 0 ? modeHistory[modeHistory.length - 1] : null;
   const breadcrumbMeta = breadcrumbMode ? MODE_META[breadcrumbMode] : null;
 

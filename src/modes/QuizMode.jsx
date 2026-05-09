@@ -33,7 +33,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
 
   const activeCards = lemahMode && lemahCards.length > 0 ? lemahCards : baseCards;
 
-  // Q5: category filter
+  // Category filter.
   const [selectedCat, setSelectedCat] = useState('all');
   const availableCats = useMemo(() => {
     const catKeys = new Set(baseCards.map((c) => c.category));
@@ -167,7 +167,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
                 ))}
               </div>
             </div>
-            {/* Q5: Category filter */}
+            {/* Category filter */}
             {availableCats.length > 1 && (
               <div style={{ marginTop: 12 }}>
                 <div style={{ fontSize: 13, fontWeight: 600, color: T.text, marginBottom: 8 }}>Filter Kategori</div>

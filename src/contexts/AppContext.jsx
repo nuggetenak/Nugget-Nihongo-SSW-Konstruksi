@@ -41,7 +41,7 @@ export function AppProvider({ children }) {
   const [tab, setTab] = useState('home');
   const [mode, setMode] = useState(prefs.lastMode ?? null);
   const [modeParams, setModeParams] = useState(null);
-  const [modeHistory, setModeHistory] = useState([]); // A3: breadcrumb stack (max 3)
+  const [modeHistory, setModeHistory] = useState([]); // breadcrumb stack (max 3)
 
   // goMode(key) — navigate to mode
   // goMode(key, params) — navigate with extra params (e.g. { filterIds: [...] })
@@ -61,7 +61,7 @@ export function AppProvider({ children }) {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [setPref]);
 
-  // A3: go back one mode in history
+  // Go back one mode in history.
   const goBack = useCallback(() => {
     if (modeHistory.length === 0) { exitMode(); return; }
     const prev = modeHistory[modeHistory.length - 1];
@@ -120,7 +120,7 @@ export function AppProvider({ children }) {
     // Navigation
     tab, setTab,
     mode, modeParams, goMode, exitMode, goTab,
-    modeHistory, goBack, // A3: breadcrumb
+    modeHistory, goBack,
     // Toast
     toast,
   }), [

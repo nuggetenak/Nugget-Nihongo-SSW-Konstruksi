@@ -51,7 +51,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     onSessionEnd?.({ correct: sessionCorrect, total: queue.length, durationMs: getDurationMs() });
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap
+  // Auto-speak on card advance — HVPT: passive exposure more effective than manual tap.
   // If speakOnFlip is true, speak on flip instead of advance.
   useEffect(() => {
     const prefs = storageGet('prefs') ?? {};
@@ -71,7 +71,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     speakJP(stripFuri(currentCard.jp));
   }, [flipped]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // R4: Skip card without rating — advance to next without SRS review
+  // Skip card without rating — advance to next without SRS review.
   const handleSkip = useCallback(() => {
     if (!queue) return;
     const nextIdx = idx + 1;
@@ -195,14 +195,14 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
           {audioEnabled && (
             <button onClick={() => speakJP(clean)} aria-label="Putar audio" className={R.audioBtn}>🔊</button>
           )}
-          {/* R4: Skip without rating */}
+          {/* Skip without rating */}
           <button
             onClick={handleSkip}
             aria-label="Lewati kartu ini (S)"
             title="Lewati (S)"
             style={{ fontSize: 11, color: 'var(--c-text-dim)', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 6px' }}
           >Lewati</button>
-          {/* R5: Remaining count */}
+          {/* Remaining count */}
           <div className={R.cardIdxLabel}>{idx + 1} / {queue.length}{remaining > 0 ? ` · ${remaining} lagi` : ''}</div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-// ─── FlashcardMode/FlipCard.jsx v2.0 — CSS Module upgrade ────────────────────
+// ─── FlashcardMode/FlipCard.jsx ─────────────────────────────────────────────
 // Converted from full inline-styles to CSS module classes.
 // Dynamic values (border color, gradient from cat.color) remain inline.
 // haptic.flip() on card tap.
@@ -29,7 +29,6 @@ export default function FlipCard({
   onTouchMove,
   onTouchEnd,
   onCatFilter,
-  audioEnabled = true,
   furiganaPolicy = 'always',
 }) {
   const cardTiltDeg = swipeDelta * 4;
@@ -77,7 +76,6 @@ export default function FlipCard({
               jp={card.jp}
               furi={card.furi}
               
-              audioEnabled={audioEnabled}
               furiganaPolicy={furiganaPolicy}
             />
           </div>

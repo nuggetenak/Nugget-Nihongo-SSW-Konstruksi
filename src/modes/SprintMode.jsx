@@ -1,7 +1,6 @@
 // ─── SprintMode.jsx ─────────────────────────────────────────────────────────
 // Personal best tracking via prefs.sprintBests (per duration).
 // onSessionEnd prop fires when sprint ends → ModeRouter records session + mission.
-// B2: Category lock + duration picker + escalating visual urgency
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { T } from '../styles/theme.js';
@@ -40,7 +39,6 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const [timeLeft, setTimeLeft] = useState(60);
   const [showAnswer, setShowAnswer] = useState(false);
   const [newBest, setNewBest] = useState(false);
-  // B2: setup options
   const [selectedDuration, setSelectedDuration] = useState('60');
   const [selectedCat, setSelectedCat] = useState('all');
   const sessionEndFired = useRef(false);
@@ -51,7 +49,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const [ghostScore, setGhostScore] = useState(0);
   const [personalBest, setPersonalBest] = useState(() => getDurationBests('60').score);
 
-  // B2: available categories from the cards prop
+  // Available categories from the cards prop.
   // Scope to filterIds if launched from SumberMode.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
   const availableCats = useMemo(() => {
@@ -105,7 +103,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const handleKnow = () => { setCorrect((c) => c + 1); next(); };
   const handleDontKnow = () => {
     setWrong((w) => w + 1);
-    // S5: Record wrong answer to quiz wrong-tracker
+    // Record wrong answer to quiz wrong-tracker.
     const cardId = order[idx]?.id;
     if (cardId) {
       storageSet('progress', (p) => {
@@ -137,7 +135,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           {pb > 0 && <div style={{ fontSize: 12, color: T.gold, fontWeight: 700, marginBottom: 8 }}>🏆 Rekor: {pb} benar</div>}
         </div>
 
-        {/* B2: Duration picker */}
+        {/* Duration picker */}
         <div className={S.sectionLabel}>Durasi</div>
         <div className={S.row} style={{ gap: 8, marginBottom: 16 }}>
           {DURATIONS.map((d) => (
@@ -153,7 +151,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           ))}
         </div>
 
-        {/* B2: Category picker */}
+        {/* Category picker */}
         {availableCats.length > 1 && (
           <>
             <div className={S.sectionLabel}>Kategori</div>
@@ -201,9 +199,8 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   if (!card) return null;
 
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
-  const audioEnabled   = storageGet('prefs')?.audioEnabled !== false;
 
-  // B2: escalating visual urgency
+  // Escalating visual urgency as time runs out.
   const isWarning  = timeLeft <= 30 && timeLeft > 10;
   const isUrgent   = timeLeft <= 10;
   const timerColor = isUrgent ? T.wrong : isWarning ? T.amber : T.gold;
@@ -225,7 +222,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
       <ProgressBar current={duration - timeLeft} total={duration} color={barColor} />
       <div className={S.cardLg} style={{ marginTop: 20, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <JpFront jp={card.jp} furi={card.furi}
-          furiganaPolicy={furiganaPolicy} audioEnabled={audioEnabled} />
+          furiganaPolicy={furiganaPolicy} />
         {showAnswer && <div style={{ textAlign: 'center', marginTop: 12, fontSize: 14, color: T.gold, fontWeight: 600 }}>{card.id_text}</div>}
       </div>
       {!showAnswer && (

@@ -2,9 +2,6 @@
 export {
   FSRS_RATINGS,
   RATING_META,
-  INDONESIAN_CALIBRATION,
-  configureFSRS,
-  getFSRSConfig,
   createCard,
   scheduleReview,
   getRetrievability,

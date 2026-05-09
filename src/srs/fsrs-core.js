@@ -5,9 +5,7 @@
 // Research basis:
 //   Ye et al. (2022) — FSRS memory model (KDD proceedings)
 //   Matsunaga (1999) — non-kanji L1 learners need 2.3× exposures for kanji
-//   Blueprint §8.11.2 — Study 2: FSRS difficulty prior calibration
 //
-// Portable: can be copied to main Nugget Nihongo project unchanged.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { fsrs, createEmptyCard, Rating, State } from 'ts-fsrs';
@@ -61,8 +59,7 @@ export const RATING_META = {
 // ── Indonesian Learner Calibration ─────────────────────────────────────────
 // Matsunaga (1999): non-kanji L1 learners (~BI, BM) need ~2.3× more exposures
 // for kanji vocabulary retention. Currently using FSRS defaults.
-// Replace kanji_difficulty_boost / kanji_stability_factor when
-// Blueprint Study 2 calibration data (§8.11.2) becomes available.
+// Unused until Indonesian-learner calibration study data is available.
 export const INDONESIAN_CALIBRATION = {
   kanji_difficulty_boost: 0, // additive to FSRS difficulty [future]
   kanji_stability_factor: 1.0, // multiplier on initial stability [future]

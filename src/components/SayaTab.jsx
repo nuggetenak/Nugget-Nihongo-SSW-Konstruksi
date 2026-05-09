@@ -70,7 +70,7 @@ export default function SayaTab() {
   const today = todayStr();
   const { question: dailyChallengeQ, answered: dcAnswered, submit: submitChallenge } = useDailyChallenge();
 
-  // D1: Inline edit states — replace prompt() for mobile Android
+  // Inline edit states — replaces prompt() for mobile Android compatibility.
   const [editingGoal, setEditingGoal] = useState(false);
   const [goalDraft, setGoalDraft] = useState('');
   const [editingExam, setEditingExam] = useState(false);

@@ -1,5 +1,5 @@
 // ─── DengarMode.jsx ───────────────────────────────────────────────────────────
-// D1: Audio-first listening comprehension mode.
+// Audio-first listening comprehension mode.
 // Shows 🔊 button → user hears Japanese → picks Indonesian translation.
 // Trains ear-to-meaning pathway (no visual kanji crutch).
 // ─────────────────────────────────────────────────────────────────────────────

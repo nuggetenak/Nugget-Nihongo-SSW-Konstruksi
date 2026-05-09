@@ -10,4 +10,4 @@ export {
   SCORED_QUIZ_MODES, SRS_MATURE_DAYS, SESSIONS_CAP,
 } from './constants.js';
 export { getAvgAccuracy, getBestSimScore, hasPerfectSprint, getStrandCounts, calcReadiness } from './session-analytics.js';
-export { setQuotaHandler, isQuotaError, notifyQuotaExceeded, estimateStorageUsage } from './storage-quota.js';
+export { setQuotaHandler, isQuotaError, notifyQuotaExceeded } from './storage-quota.js';

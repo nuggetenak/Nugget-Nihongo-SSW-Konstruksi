@@ -1,4 +1,4 @@
-// ─── BelajarTab.jsx v3.0 — Full Overhaul ──────────────────────────────────────
+// ─── BelajarTab.jsx ─────────────────────────────────────────────────────────
 // Featured-first layout: first mode in each section = large horizontal card,
 // remaining modes = compact 2-col grid. Color-coded per section.
 // ─────────────────────────────────────────────────────────────────────────────

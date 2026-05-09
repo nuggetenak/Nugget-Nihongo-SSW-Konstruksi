@@ -195,7 +195,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           <button className={`${S.btnSecondary} ${SM.kembaliBtn}`} onClick={onExit}>← Kembali</button>
         </div>
 
-        {/* SIM4: Breakdown per source */}
+        {/* Breakdown per source */}
         {results.length > 0 && (() => {
           const bySource = {};
           results.forEach((r) => {
@@ -272,7 +272,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           >
             <div className={SM.timerLabel} style={{ color: isUrgent ? T.wrong : T.textDim }}>WAKTU</div>
             <div className={SM.timerValue} style={{ color: isUrgent ? T.wrong : T.text }}>{fmtTime(timeLeft)}</div>
-            {/* SIM5: pace hint — soal/menit needed to finish on time */}
+            {/* Pace hint — soal/menit needed to finish on time */}
             {timeLeft > 0 && (() => {
               const remaining = questions.length - qIdx - (selected !== null ? 1 : 0);
               const minsLeft = timeLeft / 60;

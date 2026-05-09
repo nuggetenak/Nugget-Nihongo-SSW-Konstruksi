@@ -293,7 +293,7 @@ function QuizView({ onBack, onSessionEnd }) {
   );
 }
 
-// AK3: Type-answer quiz — user types the number/value for each konteks
+// Type-answer quiz — user types the number/value for each konteks.
 function TypeQuizView({ onBack, onSessionEnd }) {
   const [items] = useState(() => shuffle([...ANGKA]));
   const [qIdx, setQIdx] = useState(0);

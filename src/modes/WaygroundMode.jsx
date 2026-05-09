@@ -18,7 +18,7 @@ const GROUPS = [
   { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp', desc: 'Latihan praktik tambahan (CSV)' },
 ];
 
-// W2: load wrong count for a set from engine (progress.wgWrong keyed as `${setId}-${q.id}`)
+// Load wrong count for a set from engine (progress.wgWrong keyed as `${setId}-${q.id}`).
 function getSetWrongCount(setId) {
   const wgWrong = get('progress')?.wgWrong ?? {};
   const prefix = `${setId}-`;
@@ -33,7 +33,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
     (s) => !s.id.startsWith('wg') && (s.track === 'common' || s.track === track)
   );
   const [activeSet, setActiveSet] = useState(null);
-  // W2: 'lemah' mode — only wrong questions for the active set
+  // 'Lemah' mode — only wrong questions for the active set.
   const [lemahMode, setLemahMode] = useState(false);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
@@ -46,7 +46,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   const questions = useMemo(() => {
     if (!set) return [];
     let pool = set.questions;
-    // W2: filter to wrong-only when in lemah mode
+    // Filter to wrong-only when in lemah mode.
     if (lemahMode) {
       pool = pool.filter((q) => {
         const qId = `${set.id}-${q.id}`;
