@@ -1,3 +1,12 @@
+## [4.20.10] - 2026-05-09
+
+### fix: DB-1, DB-6, DB-7, DB-8
+
+- DB-1: JACMode + QuizShell — photo banner for hasPhoto questions (yellow chip with photoDesc)
+- DB-6: categories.js — 5 empty track categories marked placeholder:true + note (doboku_doko/hoso/haisui, kenchiku_kutai/shiage)
+- DB-7: angka-kunci.js — intentional kartu:null exam meta entries annotated with comment
+- DB-8: covered by ENG-9 validate-data.mjs duplicate ID check (v4.20.9)
+
 ## [4.20.9] - 2026-05-09
 
 ### fix + feat: data integrity layer

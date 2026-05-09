@@ -1,5 +1,5 @@
 # TASK v4.20.10 — DB-1, DB-6, DB-7, DB-8
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.9 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.9 DONE
 
 ## Items
 - **DB-1** (P1) — 12 JAC questions with `hasPhoto: true` but no image assets
