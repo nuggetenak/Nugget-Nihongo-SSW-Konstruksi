@@ -36,7 +36,5 @@ export function getDailyChallenge(dateStr) {
   return all[idx];
 }
 
-/** Returns today's date as YYYY-MM-DD string */
-export function todayStr() {
-  return new Date().toISOString().slice(0, 10);
-}
+/** Returns today's date as YYYY-MM-DD string (local timezone, backward-compat re-export). */
+export { todayStr } from './date.js';

@@ -5,6 +5,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { get, set as storageSet } from '../storage/engine.js';
 import { getDueCardIds } from '../srs/fsrs-scheduler.js';
+import { todayStr } from './date.js';
 
 // Four Strands mapping (Nation 2007)
 const MISSION_TYPES = [
@@ -19,7 +20,7 @@ const MISSION_TYPES = [
 ];
 
 export function generateDailyMission() {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = todayStr();
   const progress = get('progress');
   const existing = progress?.dailyMission;
 
