@@ -1,7 +1,6 @@
 // ─── storage/migrations.js ───────────────────────────────────────────────────
-// Reads old v1 scattered localStorage keys → packs into 3 v2 documents.
-// Called once on first run after upgrade. Zero user disruption.
-// E4: safeGetDoc now decompresses lz-string if needed (v2→v3 migration compat).
+// v1 → v2 → v3 migration chain. Runs once on first open after upgrade.
+// safeGetDoc handles both plain JSON (v1/v2) and lz-string compressed (v3).
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { DEFAULTS, STORAGE_VERSION } from './schema.js';
@@ -161,7 +160,7 @@ export function cleanup_v1_keys() {
 }
 
 // ── v2 → v3 migration ────────────────────────────────────────────────────────
-// A.6: Adds new fields introduced in schema v3 with safe defaults.
+// Adds new fields introduced in schema v3 with safe defaults.
 // Existing data is fully preserved; only new keys are added.
 
 export function hasV2Data() {

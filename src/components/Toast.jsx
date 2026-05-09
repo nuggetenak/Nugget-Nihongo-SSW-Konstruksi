@@ -1,6 +1,6 @@
 // ─── Toast.jsx ────────────────────────────────────────────────────────────────
 // Note: stack bottom offset is prop-driven (T.navH + 12) — kept inline.
-// FE-05-D: Added swipe-left dismiss, type prop (default|success|error|warning),
+// Swipe-left dismiss, type prop (default|success|error|warning),
 //          and type-aware aria-live (assertive for errors, polite for others).
 import { createContext, useContext, useState, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';

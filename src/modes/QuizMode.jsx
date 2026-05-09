@@ -1,6 +1,5 @@
-// ─── QuizMode.jsx v3.1 (phaseA) ───────────────────────────────────────────────
-// A.1: Fixed BUG-02 — _seenPool moved from module scope into useRef.
-//      Module-scope Set persisted across mode entries; useRef resets correctly.
+// ─── QuizMode.jsx ────────────────────────────────────────────────────────────
+// seenPool is a useRef — resets on unmount, preventing cross-session repetition.
 import { useState, useCallback, useRef, useMemo } from 'react';
 import { T } from '../styles/theme.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
@@ -22,7 +21,6 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
   const [started, setStarted] = useState(false);
   const { quizWrong, recordWrong } = useProgress();
 
-  // A.1 FIX: seenPool as useRef — resets when component unmounts/remounts,
   // preventing stale seen-card memory across separate mode sessions.
   const seenPool = useRef(new Set());
 
@@ -116,7 +114,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
             return (
               <button key={n} onClick={() => {
                 setQuizCount(n);
-                // Q4: Persist count choice — import set at module top already has storageGet
+                // Persist count choice.
                 import('../storage/engine.js').then(({ set: storageSet }) => {
                   const prefs = storageGet('prefs') ?? {};
                   storageSet('prefs', { ...prefs, quizQuestionCount: n });

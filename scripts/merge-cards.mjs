@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // scripts/merge-cards.mjs
-// Merges all 8 source files in src/data/source/ into src/data/cards.js
+// Merges all 4 source files in src/data/source/ into src/data/cards.js
 // Run before build: node scripts/merge-cards.mjs
 // Also called by GitHub Actions deploy.yml before `npm run build`
 

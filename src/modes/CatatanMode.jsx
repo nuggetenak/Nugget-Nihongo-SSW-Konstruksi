@@ -1,5 +1,5 @@
 // ─── CatatanMode.jsx ──────────────────────────────────────────────────────────
-// D3: Personal notes per card — user adds mnemonics, context, reminders.
+// Personal notes per card — user adds mnemonics, context, reminders.
 // Notes stored in localStorage (prefs doc: notes: { [cardId]: string }).
 // Constructivism: personal meaning-making is stronger than generic definitions.
 // ─────────────────────────────────────────────────────────────────────────────

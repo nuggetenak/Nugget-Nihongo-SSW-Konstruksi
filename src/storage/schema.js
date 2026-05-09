@@ -1,7 +1,6 @@
-// ─── storage/schema.js (phaseA) ───────────────────────────────────────────────
-// A.6: Upgraded from v2 → v3 schema.
-// New fields: sipilScores, bangunanScores (Phase B), sessions, dailyMission (Phase C),
-//             examDate, audioEnabled, studyAnchor (Phase F), furiganaPolicy (Phase E).
+// ─── storage/schema.js ───────────────────────────────────────────────────────
+// Storage v3 schema — 3-document localStorage model.
+// All user data lives in progress, srs, or prefs docs (lz-string compressed).
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const STORAGE_VERSION = 3;
@@ -19,21 +18,21 @@ export const DEFAULTS = {
     unknown: [],
     starred: [],
     quizWrong: {},      // { [cardId]: wrongEntry } — {count, lastWrong} (backward-compat: plain int also accepted)
-    wrongCounts: {},    // ssw-wrong-counts
+    wrongCounts: {},    // { [cardId]: count } — wrong answer tally per card
     wgWrong: {},        // { [setId]: wrongObj }
     vocabWrong: {},     // { [setId]: wrongObj }
     jacScores: {},      // { [setId]: { correct, total, date } }
     wgScores: {},
     vocabScores: {},
-    sipilScores: {},    // Phase B: { [setId]: { correct, total, date } }
-    bangunanScores: {}, // Phase B: { [setId]: { correct, total, date } }
+    sipilScores: {},    // { [setId]: { correct, total, date } }
+    bangunanScores: {}, // { [setId]: { correct, total, date } }
     streakData: {},     // { days, lastDate }
     dailyCount: { count: 0, date: '' },
     recentCards: [],    // array of cardIds (max 20)
     milestoneStreak7: false,
     milestoneQuiz70: false,
-    sessions: [],       // Phase C: [{ mode, correct, total, date, durationMs }]
-    dailyMission: null, // Phase C: { date, mode, label, icon, completedAt }
+    sessions: [],       // [{ mode, correct, total, date, durationMs }]
+    dailyMission: null, // { date, mode, label, icon, completedAt }
   },
   srs: {
     _v: STORAGE_VERSION,
@@ -47,16 +46,15 @@ export const DEFAULTS = {
     tutorialFlashcard: false,
     lastMode: null,
     dailyGoal: 20,
-    examDate: null,           // Phase F: ISO date string for exam countdown
-    audioEnabled: true,       // Phase F: Web Speech API toggle
-    studyAnchor: null,        // Phase C: 'morning' | 'lunch' | 'evening'
-    furiganaPolicy: 'always', // Phase E: 'always' | 'tap' | 'hidden'
-    flashcardHintCount: 0,    // BUG-10: reset on resetAll()
-    notes: {},                // D3: personal notes per card { [cardId]: string }
-    speakOnFlip: false,       // R3: speak on flip instead of card advance
-    quizQuestionCount: 10,    // Q4: persist quiz question count
-    sprintBests: {},          // N10: scoped best scores { [durationKey]: { score, timeline } }
-    // sprintBest / sprintBestTimeline: F4 — set dynamically by SprintMode, not in DEFAULTS
-    dailyChallengeLog: {},    // ENG-5: { [YYYY-MM-DD]: { selected: number, correct: boolean } }
+    examDate: null,           // ISO date string for exam countdown
+    audioEnabled: true,       // Web Speech API toggle
+    studyAnchor: null,        // 'morning' | 'lunch' | 'evening'
+    furiganaPolicy: 'always', // 'always' | 'tap' | 'hidden'
+    flashcardHintCount: 0,    // resets on resetAll()
+    notes: {},                // personal notes per card { [cardId]: string }
+    speakOnFlip: false,       // speak on card flip instead of advance
+    quizQuestionCount: 10,    // persist quiz question count
+    sprintBests: {},          // per-duration personal bests { [durationKey]: { score, timeline } }
+    dailyChallengeLog: {},    // { [YYYY-MM-DD]: { selected: number, correct: boolean } }
   },
 };

@@ -1,4 +1,4 @@
-// ─── utils/speak.js (phaseF) ──────────────────────────────────────────────────
+// ─── utils/speak.js ─────────────────────────────────────────────────────────
 // Web Speech API wrapper for Japanese audio output.
 // HVPT-inspired: cycles through 3 parameter sets (Logan et al. 1991) — varied
 // rate/pitch helps perceptual learning of phoneme boundaries.

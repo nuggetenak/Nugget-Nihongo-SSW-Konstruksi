@@ -1,6 +1,6 @@
 // ─── DangerMode.jsx ───────────────────────────────────────────────────────────
 // Note: option bg/border/color is dynamic per answer state — justified inline.
-// D2: confusionType filter in panel. D3: wrong-tracker write on wrong answers.
+// confusionType filter in panel; wrong-tracker write on wrong answers.
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';

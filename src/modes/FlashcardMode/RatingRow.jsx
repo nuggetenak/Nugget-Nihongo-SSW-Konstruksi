@@ -1,6 +1,6 @@
-// ─── FlashcardMode/RatingRow.jsx (phaseE) ────────────────────────────────────
+// ─── FlashcardMode/RatingRow.jsx ────────────────────────────────────────────
 // FSRS 4-button rating row — shown after card is flipped.
-// FE-09-A: haptic.tap() on rating button tap.
+// haptic.tap() on rating button tap.
 // ─────────────────────────────────────────────────────────────────────────────
 import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';

@@ -22,7 +22,7 @@ export function SRSProvider({ children }) {
 
   const srs = useSRS(trackCardIds);
 
-  // REF-10c: Memoize context value — only rebuilds when dueCount changes (i.e. after review()).
+  // Memoize context value — only rebuilds when dueCount changes.
   // Callbacks (review, getDue, getInfo, previewFor) are stable useCallback refs.
   const stableSrs = useMemo(
     () => srs,

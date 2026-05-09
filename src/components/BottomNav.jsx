@@ -32,7 +32,7 @@ const TABS = [
 ];
 
 export default function BottomNav({ active, onChange, dueBadge = 0 }) {
-  // FE-09-C: View Transitions API — crossfade between tabs (progressive enhancement)
+  // View Transitions API — crossfade between tabs (progressive enhancement).
   const handleTabChange = (newTab) => {
     if (document.startViewTransition) {
       document.startViewTransition(() => onChange(newTab));

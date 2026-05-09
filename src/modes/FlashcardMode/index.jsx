@@ -1,10 +1,7 @@
-// ─── FlashcardMode/index.jsx (phaseE) ────────────────────────────────────────
+// ─── FlashcardMode/index.jsx ─────────────────────────────────────────────────
 // Orchestrator — all state lives here, sub-components are presentational.
-// Phase E changes:
-//   - Split from single 447-line file into 5 sub-components
-//   - E.2 TD-05: 3D flip CSS moved from JS injection to flashcard.module.css
-//   - E.3 TD-10: furiganaPolicy prop wired to JpDisplay (default: 'always')
-// Zero behavioral change — all existing functionality preserved.
+// Decomposed from a single file into 5 sub-components; zero behavioral change.
+// furiganaPolicy prop wired to JpDisplay (default: 'always').
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../../styles/theme.js';
@@ -49,7 +46,7 @@ export default function FlashcardMode({
   const [touchStart, setTouchStart] = useState(null);
   const [swipeDelta, setSwipeDelta] = useState(0);
 
-  // Filter/sort — BUG-05: persist across mode switches via sessionStorage
+  // Filter/sort — persists across mode switches via sessionStorage.
   const [search, setSearch]             = useState(() => sessionStorage.getItem('ssw-fc-search') ?? '');
   const [sortMode, setSortMode]         = useState(() => sessionStorage.getItem('ssw-fc-sort') ?? 'priority');
   const [reviewBelum, setReviewBelum]   = useState(false);
@@ -58,9 +55,9 @@ export default function FlashcardMode({
   // K2: read-only mode — browse without FSRS rating
   const [readOnly, setReadOnly]         = useState(false);
 
-  // E.3 TD-10 / Phase G: furiganaPolicy — now wired to FlipCard → JpFront
+  // furiganaPolicy — wired to FlipCard → JpFront.
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
-  // Phase F: audioEnabled from prefs
+  // audioEnabled from prefs.
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   const rebuildOrder = useCallback((mode) => {

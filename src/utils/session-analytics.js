@@ -1,6 +1,5 @@
 // src/utils/session-analytics.js
-// ENG-1: Shared session analytics — single source of truth for session math.
-// Fixes B3 (StatsMode), N2 (recommend-mode), N4 (achievements) at one location.
+// Shared session analytics — single source of truth for session math.
 
 import { SCORED_QUIZ_MODES } from './constants.js';
 
@@ -38,7 +37,7 @@ export function hasPerfectSprint(sessions, minCards = 10) {
 
 /**
  * Count sessions per strand in the last N days.
- * Requires MODE_META to have a 'strand' field (ENG-3).
+ * Requires MODE_META to have a 'strand' field.
  * @returns {{ [strand]: number }}
  */
 export function getStrandCounts(sessions, modeMeta, days = 7) {

@@ -1,4 +1,4 @@
-// ─── FlashcardMode/ToolStrip.jsx (phaseE) ────────────────────────────────────
+// ─── FlashcardMode/ToolStrip.jsx ────────────────────────────────────────────
 // Sort / filter-belum / reset / star filter tool strip.
 // ─────────────────────────────────────────────────────────────────────────────
 import { T } from '../../styles/theme.js';

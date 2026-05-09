@@ -80,7 +80,7 @@ export function jpFontSize(text = '') {
 }
 
 /**
- * REF-11: Parse a desc string into a structured object for memoized rendering.
+ * Parse a desc string into a structured object for memoized rendering.
  * @returns {{ branch: 'brackets'|'circled'|'plain', intro: string, items: Array, lines: string[], src: string|null }|null}
  */
 export function parseDescStructure(desc = '', maxLines = 0) {

@@ -52,7 +52,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap
-  // R3: If speakOnFlip is true, speak on flip instead of advance
+  // If speakOnFlip is true, speak on flip instead of advance.
   useEffect(() => {
     const prefs = storageGet('prefs') ?? {};
     const audioEnabled = prefs.audioEnabled !== false;
@@ -62,7 +62,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     return () => clearTimeout(t);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // R3: Speak on flip
+  // Speak on flip.
   useEffect(() => {
     const prefs = storageGet('prefs') ?? {};
     const audioEnabled = prefs.audioEnabled !== false;

@@ -1,6 +1,6 @@
 // ─── OptionButton.jsx ────────────────────────────────────────────────────────
 // Quiz option button. Phase 6: 0 inline styles.
-// FE-09-A: haptic.correct() / haptic.wrong() on answer reveal.
+// Plays haptic feedback on answer reveal.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { haptic } from '../utils/haptic.js';

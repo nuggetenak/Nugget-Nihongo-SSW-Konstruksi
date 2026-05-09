@@ -1,5 +1,5 @@
 // ─── BangunanMode.jsx (phaseB) ────────────────────────────────────────────────
-// Phase B: Replaced "Segera Hadir" stub with functional quiz mode.
+// Quiz mode for Bangunan (建築) track.
 // Uses BANGUNAN_SETS data, saves scores to bangunanScores in storage v3.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState } from 'react';

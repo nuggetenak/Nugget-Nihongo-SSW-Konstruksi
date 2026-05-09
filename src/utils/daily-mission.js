@@ -8,7 +8,7 @@ import { getDueCardIds } from '../srs/fsrs-scheduler.js';
 import { todayStr } from './date.js';
 import { MODE_META } from '../router/modes.js';
 
-// Four Strands mapping (Nation 2007) — strand derives from MODE_META (REF-4)
+// Four Strands mapping (Nation 2007) — strand derives from MODE_META.
 const MISSION_TYPES = [
   { mode: 'ulasan',   label: 'Ulasan SRS',       icon: '🔁', priority: 5 },
   { mode: 'kartu',    label: 'Pelajari Kartu',    icon: '🃏', priority: 3 },

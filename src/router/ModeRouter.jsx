@@ -1,7 +1,7 @@
 // ─── router/ModeRouter.jsx ────────────────────────────────────────────────────
 // Renders the active mode wrapped in Suspense + ErrorBoundary.
 // Reads mode from AppContext, passes correct props to each mode.
-// Phase 8: focus management — moves focus to #mode-heading on mount.
+// Focus management — moves focus to #mode-heading on mount.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { Component, Suspense, useEffect, useRef, useState } from 'react';
@@ -136,8 +136,7 @@ export default function ModeRouter() {
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
   const [missionResult, setMissionResult] = useState(null);
 
-  // FE-04-D: Focus management on mode change
-  // FE-09-B: Scroll restoration on mode change
+  // Focus management + scroll restoration on mode change.
   const prevMode = useRef(null);
   const scrollCache = useRef(new Map());
 
@@ -169,7 +168,7 @@ export default function ModeRouter() {
   const ModeComponent = MODE_COMPONENTS[mode];
   if (!ModeComponent) return null;
 
-  // Phase C: Wrap onFinish to also record session + check mission completion
+  // Wrap onFinish to also record session + check mission completion.
   const makeFinishHandler = (modeName, extra) => ({ correct = 0, total = 0, durationMs = 0, maxStreak = 0, maxWrongStreak = 0 } = {}) => {
     recordSession({ mode: modeName, correct, total, durationMs });
 

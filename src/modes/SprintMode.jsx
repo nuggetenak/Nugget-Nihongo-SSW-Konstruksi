@@ -1,6 +1,6 @@
 // ─── SprintMode.jsx (phaseH + B2) ────────────────────────────────────────────
-// H.1: Personal best tracking (prefs.sprintBest)
-// H.1: onSessionEnd prop — fires when sprint ends → ModeRouter session+mission
+// Personal best tracking via prefs.sprintBests (per duration).
+// onSessionEnd prop fires when sprint ends → ModeRouter records session + mission.
 // B2: Category lock + duration picker + escalating visual urgency
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
@@ -45,7 +45,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const [selectedCat, setSelectedCat] = useState('all');
   const sessionEndFired = useRef(false);
   const { getDurationMs } = useSessionTimer();
-  // N10: ghost timeline scoped by selectedDuration key
+  // Ghost timeline scoped by selectedDuration key.
   const [ghostTimeline, setGhostTimeline] = useState(() => getDurationBests('60').timeline);
   const currentTimeline = useRef([]);
   const [ghostScore, setGhostScore] = useState(0);

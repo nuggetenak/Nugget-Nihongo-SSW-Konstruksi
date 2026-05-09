@@ -1,9 +1,7 @@
-// ─── App.jsx (phaseA) ─────────────────────────────────────────────────────────
+// ─── App.jsx ────────────────────────────────────────────────────────────────
 // Root. 3-tab layout: Beranda / Belajar / Saya.
-// A.3 BUG-03: Consumes toastQueue from ProgressContext to fire milestone toasts.
-// FE-05-A: Granular ErrorBoundaries per tab + OfflineBanner.
-// FE-08-B: SW_UPDATED message listener → update toast.
 // ─────────────────────────────────────────────────────────────────────────────
+
 
 import { useEffect } from 'react';
 import { T } from './styles/theme.js';
@@ -27,7 +25,7 @@ export default function App() {
   const { known, unknown, toastQueue, clearToast } = useProgress();
   const srs = useSRSContext();
 
-  // A.3: Consume queued milestone toasts from ProgressContext.
+  // Consume queued milestone toasts from ProgressContext.
   useEffect(() => {
     if (toastQueue.length > 0) {
       const t = toastQueue[0];
@@ -36,7 +34,7 @@ export default function App() {
     }
   }, [toastQueue, toast, clearToast]);
 
-  // FE-08-B: Listen for SW_UPDATED message and offer reload.
+  // Listen for SW_UPDATED message from service worker and offer reload.
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return;
     const handler = (e) => {
@@ -52,7 +50,7 @@ export default function App() {
     return () => navigator.serviceWorker.removeEventListener('message', handler);
   }, [toast]);
 
-  // ENG-12: Register quota error handler — shows toast if localStorage write fails.
+  // Register quota error handler — shows toast if localStorage write fails.
   useEffect(() => {
     setQuotaHandler(() => {
       toast.show('💾 Penyimpanan penuh. Backup data di menu Pengaturan sebelum data hilang.', { duration: 8000, type: 'error' });

@@ -1,6 +1,5 @@
-// ─── ResultScreen.jsx v3.4 (phaseA) ──────────────────────────────────────────
-// A.10 C-13: Growth mindset language for low scores (Dweck 2006 "not yet" framing).
-//     Evidence: "not yet" framing preserves motivation vs generic encouragement.
+// ─── ResultScreen.jsx ────────────────────────────────────────────────────────
+// Low-score messages use "not yet" framing (Dweck 2006) to preserve motivation.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import s from './ResultScreen.module.css';

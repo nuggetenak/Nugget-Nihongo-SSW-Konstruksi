@@ -1,4 +1,4 @@
-// ─── FlashcardMode/FilterBar.jsx (phaseE) ────────────────────────────────────
+// ─── FlashcardMode/FilterBar.jsx ────────────────────────────────────────────
 // Search input + star filter button.
 // ─────────────────────────────────────────────────────────────────────────────
 import { T } from '../../styles/theme.js';

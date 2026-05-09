@@ -17,6 +17,3 @@ export const SRS_MATURE_DAYS = 21;
 
 /** Max sessions stored in progress.sessions. */
 export const SESSIONS_CAP = 180;
-
-/** localStorage key for daily challenge log (legacy — use storage engine). */
-export const DAILY_CHALLENGE_KEY = 'ssw-daily-challenge';

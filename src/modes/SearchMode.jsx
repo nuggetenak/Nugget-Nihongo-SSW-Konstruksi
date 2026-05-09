@@ -22,7 +22,7 @@ function saveHistory(term) {
 
 export default function SearchMode({ onExit, track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
-  const [copiedId, setCopiedId] = useState(null); // SR3: copy feedback per card
+  const [copiedId, setCopiedId] = useState(null); // copy feedback per card
   const debouncedQuery = useDebounce(query, 120);
   const [showAllTracks, setShowAllTracks] = useState(false);
   const [history, setHistory] = useState(() => getHistory());
@@ -32,7 +32,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
 
   const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
 
-  // SR3: Copy card text to clipboard
+  // Copy card text to clipboard.
   const handleCopy = useCallback((c, e) => {
     e.stopPropagation();
     const text = `${stripFuri(c.jp)}${c.furi ? ` (${c.furi})` : ''} — ${c.id_text}`;
@@ -161,7 +161,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                       {starred?.has(c.id) ? '⭐' : '☆'}
                     </button>
                   )}
-                  {/* SR3: Copy to clipboard */}
+                  {/* Copy to clipboard */}
                   <button
                     onClick={(e) => handleCopy(c, e)}
                     aria-label="Salin ke clipboard"

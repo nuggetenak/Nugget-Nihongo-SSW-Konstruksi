@@ -1,6 +1,5 @@
 // src/hooks/useTrackedCards.js
-// ENG-11: Centralized filtered-cards hook.
-// Replaces ~15 sites that repeat getCatsForTrack(track) + CARDS.filter().
+// Centralized filtered-cards hook — eliminates repeated filter logic across modes.
 import { useMemo } from 'react';
 import { CARDS } from '../data/cards.js';
 import { getCatsForTrack, VOCAB_SOURCES } from '../data/categories.js';

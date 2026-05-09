@@ -76,7 +76,7 @@ export default function SayaTab() {
   const [editingExam, setEditingExam] = useState(false);
   const [examDraft, setExamDraft] = useState('');
 
-  // FE-08-A: PWA install prompt
+  // PWA install prompt
   const [installPrompt, setInstallPrompt] = useState(null);
   const [installed, setInstalled] = useState(false);
 
@@ -162,7 +162,7 @@ export default function SayaTab() {
     <div className={s.container}>
       <div className={s.pageTitle}>Saya</div>
 
-      {/* FE-08-A: PWA install prompt */}
+      {/* PWA install prompt */}
       {installPrompt && !installed && (
         <button className={s.installCard} onClick={handleInstall}>
           <span className={s.installIcon}>📲</span>

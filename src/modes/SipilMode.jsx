@@ -1,5 +1,5 @@
 // ─── SipilMode.jsx (phaseB) ───────────────────────────────────────────────────
-// Phase B: Replaced "Segera Hadir" stub with functional quiz mode.
+// Quiz mode for Teknik Sipil (土木) track.
 // Uses SIPIL_SETS data, saves scores to sipilScores in storage v3.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState } from 'react';

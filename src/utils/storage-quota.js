@@ -1,5 +1,5 @@
 // src/utils/storage-quota.js
-// ENG-12: Quota detection + recovery registration.
+// Quota detection + recovery registration.
 // Wire up via App.jsx: setQuotaHandler(() => showToast('...'))
 
 let _handler = null;

@@ -1,7 +1,6 @@
-// ─── ExportMode.jsx (phaseD) ──────────────────────────────────────────────────
-// Phase D: Import hardening — validateSnapshot before applying, rollback on error.
-//          Shows data summary before export and diff preview before import.
-//          Phase A already rewired to engine exportAll()/importAll().
+// ─── ExportMode.jsx ──────────────────────────────────────────────────────────
+// validateSnapshot before applying import; rollback on error.
+// Shows data summary before export and diff preview before import.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useRef } from 'react';
 import { T } from '../styles/theme.js';
@@ -71,7 +70,7 @@ export default function ExportMode({ onExit }) {
       const parsed   = JSON.parse(await file.text());
       const validation = validateSnapshot(parsed);
       if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
-      // BUG-11: detect if current data is newer than file (dual-device conflict)
+      // Detect if current data is newer than file (dual-device conflict).
       const currentExportedAt = exportAll().exported_at ?? null;
       const fileExportedAt = parsed.exported_at ?? null;
       const hasConflict = currentExportedAt && fileExportedAt && new Date(currentExportedAt) > new Date(fileExportedAt);
@@ -223,7 +222,7 @@ export default function ExportMode({ onExit }) {
       {previewData ? (
         <div className={S.cardLg} style={{ marginBottom: 16, border: `1px solid ${T.gold}55`, background: `${T.gold}08` }}>
           <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 10 }}>📥 Pratinjau Data Import</div>
-          {/* BUG-11: conflict warning if current data is newer than file */}
+          {/* Conflict warning if current data is newer than file. */}
           {previewData.hasConflict && (
             <div style={{ marginBottom: 10, padding: '10px 12px', borderRadius: T.r.md, background: T.wrongBg, border: `1px solid ${T.wrongBorder}`, fontSize: 12, color: T.wrong, lineHeight: 1.5 }}>
               ⚠️ <strong>Potensi Konflik:</strong> Data di perangkat ini lebih baru dari file yang diimpor.<br />
@@ -348,7 +347,7 @@ export default function ExportMode({ onExit }) {
           <li>Kartu hafal / belum hafal / berbintang</li>
           <li>Data SRS per kartu (jadwal ulang, stability, history)</li>
           <li>Riwayat jawaban salah dari kuis</li>
-          <li>Riwayat sesi belajar (Phase C)</li>
+          <li>Riwayat sesi belajar</li>
           <li>Jalur belajar &amp; preferensi (土木 / 建築 / ライフライン)</li>
         </ul>
         <div style={{ marginTop: 10, fontSize: 11, color: T.textDim, lineHeight: 1.6 }}>

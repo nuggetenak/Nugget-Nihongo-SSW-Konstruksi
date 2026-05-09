@@ -1,13 +1,12 @@
 // src/hooks/useDailyChallenge.js
-// ENG-5: Daily challenge state + persistence.
-// Replaces 8 lines of sessionStorage in SayaTab.jsx.
+// Daily challenge state + persistence via storage engine.
 import { useState, useCallback } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { getDailyChallenge } from '../utils/daily-challenge.js';
 import { todayStr } from '../utils/date.js';
 
 export function useDailyChallenge() {
-  const today = todayStr(); // local date (REF-6)
+  const today = todayStr(); // local timezone date
   const question = getDailyChallenge(today);
 
   const [answered, setAnswered] = useState(() => {

@@ -77,7 +77,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
     const isCorrect = optIdx === currentQ.correctIdx;
     haptic[isCorrect ? 'correct' : 'wrong']();
     setResults((r) => [...r, { card: currentQ.card, isCorrect }]);
-    // D1-WT: record wrong answer in shared wrong-tracker pool
+    // Record wrong answer in shared wrong-tracker pool.
     if (!isCorrect) {
       const cardId = currentQ.card.id;
       if (cardId) recordWrong(cardId);

@@ -1,5 +1,5 @@
 // src/utils/date.js
-// REF-6: Shared date utilities — all return local timezone dates (not UTC).
+// Shared date utilities — all return local timezone dates (not UTC).
 // 'sv' locale produces YYYY-MM-DD in local tz — no library needed.
 
 /** Today's date as YYYY-MM-DD in local timezone. */

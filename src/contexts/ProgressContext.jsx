@@ -1,9 +1,7 @@
-// ─── contexts/ProgressContext.jsx (phaseA) ────────────────────────────────────
+// ─── contexts/ProgressContext.jsx ────────────────────────────────────────────
 // All user progress: known/unknown/starred, quiz scores, streak, daily count.
 // Backed by ssw-progress document in storage engine.
-//
-// A.3 FIX BUG-03: Added toastQueue / clearToast for milestone toasts.
-//     Milestone flags trigger queued toasts consumed by App.jsx useEffect.
+// Milestone flags queue toasts consumed by App.jsx.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { createContext, useContext, useState, useCallback, useMemo } from 'react';
@@ -20,7 +18,7 @@ const EMPTY_ARR = Object.freeze([]);
 
 export function ProgressProvider({ children }) {
   const [prog, setProgState] = useState(() => get('progress'));
-  // A.3: Queue of milestone toast messages to be consumed by App.jsx
+  // Queue of milestone toast messages consumed by App.jsx.
   const [toastQueue, setToastQueue] = useState([]);
 
   const setProg = useCallback((updater) => {
@@ -120,7 +118,7 @@ export function ProgressProvider({ children }) {
   // ── Milestone setters ─────────────────────────────────────────────────
   const setMilestoneQuiz70 = useCallback(() => {
     setProg((prev) => {
-      // A.3: Queue toast on first achievement only
+      // Queue toast on first achievement only.
       if (!prev.milestoneQuiz70) {
         setTimeout(() => setToastQueue((q) => [
           ...q,
@@ -131,12 +129,12 @@ export function ProgressProvider({ children }) {
     });
   }, [setProg]);
 
-  // A.3: Remove first toast from queue (called by App.jsx after displaying)
+  // Remove first toast from queue (called by App.jsx after displaying).
   const clearToast = useCallback((idx) => {
     setToastQueue((q) => q.filter((_, i) => i !== idx));
   }, []);
 
-  // ── Session tracking (Phase C) ───────────────────────────────────────────
+  // ── Session tracking ────────────────────────────────────────────────────
   const recordSession = useCallback(({ mode, correct, total, durationMs }) => {
     setProg((prev) => {
       const sessions = [
@@ -170,10 +168,8 @@ export function ProgressProvider({ children }) {
       // Milestones
       milestoneStreak7: prog.milestoneStreak7 ?? false,
       milestoneQuiz70: prog.milestoneQuiz70 ?? false,
-      // A.3: Toast queue
       toastQueue,
       clearToast,
-      // Phase C: Session data
       sessions: prog.sessions ?? EMPTY_ARR,
       recordSession,
       // Actions

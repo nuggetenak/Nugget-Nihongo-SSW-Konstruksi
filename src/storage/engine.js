@@ -1,6 +1,6 @@
-// ─── storage/engine.js (phaseA + E4) ──────────────────────────────────────────
-// E4: lz-string compression — writeDoc compresses, readDoc decompresses transparently.
-//     Falls back to uncompressed JSON if decompression fails (backward compat).
+// ─── storage/engine.js ───────────────────────────────────────────────────────
+// 3-document localStorage engine with lz-string compression.
+// readDoc decompresses transparently; falls back to plain JSON (backward compat).
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
@@ -20,7 +20,7 @@ function readDoc(docKey) {
   try {
     const raw = localStorage.getItem(docKey);
     if (!raw) return null;
-    // E4: try decompressing first; fall back to plain JSON (backward compat)
+    // Try lz-string decompression; fall back to plain JSON for old data.
     try {
       const decompressed = LZString.decompressFromUTF16(raw);
       if (decompressed) return JSON.parse(decompressed);
@@ -33,7 +33,7 @@ function readDoc(docKey) {
 
 function writeDoc(docKey, data) {
   try {
-    // E4: compress before writing
+    // Compress before writing.
     const compressed = LZString.compressToUTF16(JSON.stringify(data));
     localStorage.setItem(docKey, compressed);
     return { ok: true };
@@ -193,8 +193,8 @@ export function _reset_for_test() {
   _initialized = false;
 }
 
-// ── D.1 Snapshot validation ──────────────────────────────────────────────────
-// Phase D: Validate a snapshot before importing. Returns { ok, reason, summary }.
+// ── Snapshot validation ──────────────────────────────────────────────────────
+// Validate a snapshot before importing. Returns { ok, reason, summary }.
 export function validateSnapshot(snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return { ok: false, reason: 'not_object' };
   if (!snapshot.progress || !snapshot.srs || !snapshot.prefs) return { ok: false, reason: 'missing_docs' };
@@ -213,8 +213,8 @@ export function validateSnapshot(snapshot) {
   };
 }
 
-// ── D.2 Safe import with rollback ────────────────────────────────────────────
-// Phase D: Imports snapshot, rolls back to prior state if importAll throws.
+// ── Safe import with rollback ────────────────────────────────────────────────
+// Imports snapshot, rolls back to prior state if importAll throws.
 export function importAllSafe(snapshot) {
   const validation = validateSnapshot(snapshot);
   if (!validation.ok) throw new Error(`Snapshot tidak valid: ${validation.reason}`);

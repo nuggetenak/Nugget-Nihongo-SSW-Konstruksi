@@ -1,5 +1,4 @@
-// ─── JpDisplay.jsx (phaseF) ──────────────────────────────────────────────────
-// Phase F: Added audioEnabled prop to JpFront — shows 🔊 button via speak.js.──
+// ─── JpDisplay.jsx ───────────────────────────────────────────────────────────
 // Note: font-size on jp spans is prop-driven (jpFontSize()) — justified inline.
 // Note: VS label font-size is derived from jp size — justified inline.
 import { T } from '../styles/theme.js';
@@ -8,10 +7,8 @@ import { canSpeak, speakJP } from '../utils/speak.js'; // eslint-disable-line no
 import { stripFuri, extractReadings, jpFontSize, parseDescStructure } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
-// ─── JpFront (phaseE) ─────────────────────────────────────────────────────────
-// E.3 TD-10: Added furiganaPolicy prop ('always' | 'tap' | 'hidden').
-// Default 'always' preserves existing behavior for all N5-N4 users.
-// 'tap' and 'hidden' are wired for Phase E prep — full UI in Phase G.
+// ─── JpFront ──────────────────────────────────────────────────────────────────
+// furiganaPolicy: 'always' | 'tap' | 'hidden'
 export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled = true }) { // eslint-disable-line no-unused-vars
   const [tapReveal, setTapReveal] = useState(false);
   // policy:
@@ -25,7 +22,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
   const parsedRuby = useMemo(() => parseRubyFragments(jp), [jp]);
 
-  // REF-11: memoize branch detection — avoids re-running string checks on every render
+  // Memoize branch detection — avoids re-running string checks on every render.
   const jpBranch = useMemo(() => {
     const c = stripFuri(jp);
     if (/\s*vs\s*/i.test(c)) return 'vs';
@@ -54,7 +51,6 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
     );
   };
 
-  // Phase F: Audio — inline in render path below
 
   const jpStyle = (fs, extra = {}) => ({
     lineHeight: 1.4,

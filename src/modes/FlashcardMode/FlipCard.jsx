@@ -1,7 +1,7 @@
 // ─── FlashcardMode/FlipCard.jsx v2.0 — CSS Module upgrade ────────────────────
 // Converted from full inline-styles to CSS module classes.
 // Dynamic values (border color, gradient from cat.color) remain inline.
-// FE-09-A: haptic.flip() on card tap.
+// haptic.flip() on card tap.
 // ─────────────────────────────────────────────────────────────────────────────
 import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';

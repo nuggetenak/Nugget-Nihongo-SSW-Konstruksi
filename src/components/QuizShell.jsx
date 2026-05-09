@@ -1,7 +1,5 @@
-// ─── QuizShell.jsx (phaseA) ───────────────────────────────────────────────────
-// A.4 BUG-04: Anxiety-reduction toast fires when maxWrongStreak >= 5.
-//     Evidence: Young (1991) — normalizing errors reduces language anxiety.
-// A.5: Updated import from useStreak → useAnswerStreak.
+// ─── QuizShell.jsx ───────────────────────────────────────────────────────────
+// Fires anxiety-reduction toast when maxWrongStreak >= 5 (Young 1991).
 // Note: timer color (red when <60s) kept inline — conditional/prop-driven.
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { T } from '../styles/theme.js';
@@ -97,7 +95,7 @@ export default function QuizShell({
       onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak,
         durationMs: Date.now() - startTimeRef.current });
 
-      // A.4 BUG-04: Anxiety-reduction toast — fires when ≥5 consecutive wrong answers.
+      // Anxiety-reduction toast — fires when >=5 consecutive wrong answers.
       // Normalizes struggle as expected for new material (Young 1991, Zhang 2019).
       if (maxWrongStreak >= 5) {
         toast.show(

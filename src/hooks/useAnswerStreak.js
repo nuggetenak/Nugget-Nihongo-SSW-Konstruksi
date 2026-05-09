@@ -1,7 +1,6 @@
-// ─── useAnswerStreak.js (phaseA) ──────────────────────────────────────────────
-// A.5 TD-04: Renamed from useStreak → useAnswerStreak (clearer intent).
-// A.4 BUG-04: Extended with wrongStreak / maxWrongStreak tracking for
-//     anxiety-reduction toast (≥5 consecutive wrong → supportive message).
+// ─── useAnswerStreak.js ─────────────────────────────────────────────────────
+// Tracks correct- and wrong-answer streaks within a quiz session.
+// Fires anxiety-reduction toast when >=5 consecutive wrong answers.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useCallback } from 'react';
 
