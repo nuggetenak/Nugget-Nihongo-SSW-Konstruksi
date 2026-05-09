@@ -57,7 +57,7 @@ describe('Phase C — Daily Mission', () => {
   it('when SRS due count = 0 and no sessions, mode is not ulasan by force', () => {
     // With no due cards the engine picks by strand balance — just verify it returns a valid mode
     const m = generateDailyMission();
-    const validModes = ['ulasan', 'kartu', 'kuis', 'sprint', 'jac', 'fokus'];
+    const validModes = ['ulasan', 'kartu', 'kuis', 'sprint', 'jac', 'fokus', 'angka', 'jebak', 'produksi', 'kuisprod', 'mirip', 'dengar'];
     expect(validModes).toContain(m.mode);
   });
 

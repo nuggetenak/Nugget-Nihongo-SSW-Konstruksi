@@ -6,18 +6,23 @@
 import { get, set as storageSet } from '../storage/engine.js';
 import { getDueCardIds } from '../srs/fsrs-scheduler.js';
 import { todayStr } from './date.js';
+import { MODE_META } from '../router/modes.js';
 
-// Four Strands mapping (Nation 2007)
+// Four Strands mapping (Nation 2007) — strand derives from MODE_META (REF-4)
 const MISSION_TYPES = [
-  { mode: 'ulasan',   label: 'Ulasan SRS',       icon: '🔁', priority: 5, strand: 'fluency'  },
-  { mode: 'kartu',    label: 'Pelajari Kartu',    icon: '🃏', priority: 3, strand: 'input'    },
-  { mode: 'kuis',     label: 'Kuis 10 Soal',      icon: '❓', priority: 3, strand: 'language' },
-  { mode: 'sprint',   label: 'Sprint 60 Detik',   icon: '⚡', priority: 2, strand: 'output'   },
-  { mode: 'jac',      label: 'Latihan JAC',       icon: '📋', priority: 2, strand: 'language' },
-  { mode: 'fokus',    label: 'Fokus Kelemahan',   icon: '🎯', priority: 4, strand: 'language' },
-  { mode: 'angka',    label: 'Angka Kunci',        icon: '🔢', priority: 3, strand: 'language' },
-  { mode: 'jebak',    label: 'Soal Jebak',         icon: '⚠️', priority: 3, strand: 'language' },
-];
+  { mode: 'ulasan',   label: 'Ulasan SRS',       icon: '🔁', priority: 5 },
+  { mode: 'kartu',    label: 'Pelajari Kartu',    icon: '🃏', priority: 3 },
+  { mode: 'kuis',     label: 'Kuis 10 Soal',      icon: '❓', priority: 3 },
+  { mode: 'sprint',   label: 'Sprint 60 Detik',   icon: '⚡', priority: 2 },
+  { mode: 'jac',      label: 'Latihan JAC',       icon: '📋', priority: 2 },
+  { mode: 'fokus',    label: 'Fokus Kelemahan',   icon: '🎯', priority: 4 },
+  { mode: 'angka',    label: 'Angka Kunci',        icon: '🔢', priority: 3 },
+  { mode: 'jebak',    label: 'Soal Jebak',         icon: '⚠️', priority: 3 },
+  { mode: 'produksi', label: 'Latihan Produksi',  icon: '✍️', priority: 3 },
+  { mode: 'kuisprod', label: 'Kuis Produksi',      icon: '🔤', priority: 2 },
+  { mode: 'mirip',    label: 'Kata Mirip',         icon: '🔀', priority: 2 },
+  { mode: 'dengar',   label: 'Dengarkan',          icon: '🎧', priority: 2 },
+].map((m) => ({ ...m, strand: MODE_META[m.mode]?.strand ?? null }));
 
 export function generateDailyMission() {
   const today = todayStr();
