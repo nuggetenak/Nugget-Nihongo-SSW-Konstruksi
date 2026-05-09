@@ -2,11 +2,12 @@ import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { recordReview } from '../srs/fsrs-scheduler.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
@@ -32,9 +33,9 @@ const DELAYS = [{ ms: 1000, label: '1s' }, { ms: 1500, label: '1.5s' }, { ms: 20
 
 export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) {
   const { toast } = useApp();
+  const { saveScore, jacScores } = useProgress();
   const [setKey, setSetKey] = useState(null);
-  const [wrongCounts, setWrongCounts] = usePersistedState('ssw-wrong-counts', {});
-  const [jacScores, setJacScores] = usePersistedState('ssw-jac-scores', {});
+  const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wrongCounts ?? {});
   const [showFuri, setShowFuri] = useState(true);
   const [showID, setShowID] = useState(true);
   const [autoDelay, setAutoDelay] = useState(2000);
@@ -62,7 +63,13 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
     if (!isCorrect) {
       const q = filtered[qIdx];
-      if (q?.id) setWrongCounts((w) => ({ ...w, [q.id]: makeWrongEntry(w[q.id]) }));
+      if (q?.id) {
+        setWrongCounts((prev) => {
+          const updated = { ...prev, [q.id]: makeWrongEntry(prev[q.id]) };
+          storageSet('progress', (p) => ({ ...p, wrongCounts: updated }));
+          return updated;
+        });
+      }
       // J1: collect wrong question IDs for SRS add
       if (q?.id && !wrongQIds.includes(q.id)) setWrongQIds((prev) => [...prev, q.id]);
     }
@@ -71,12 +78,10 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const handleFinish = useCallback(({ correct, total, durationMs = 0 }) => {
     if (!setKey) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    setJacScores((s) => {
-      const prev = s[setKey];
-      return { ...s, [setKey]: { score: correct, total, pct, date: Date.now(), bestPct: Math.max(pct, prev?.bestPct ?? 0) } };
-    });
+    const prev = jacScores[setKey];
+    saveScore('jac', setKey, { score: correct, total, pct, date: Date.now(), bestPct: Math.max(pct, prev?.bestPct ?? 0) });
     onSessionEnd?.({ correct, total, durationMs });
-  }, [setKey, setJacScores, onSessionEnd]);
+  }, [setKey, saveScore, jacScores, onSessionEnd]);
 
   // J1: Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now)
   const handleAddToSRS = useCallback(() => {

@@ -80,7 +80,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
 
     setResults((r) => [...r, { card, input: input.trim(), correct }]);
     setPhase('revealed');
-  }, [phase, card, input, audioEnabled]);
+  }, [phase, card, input, audioEnabled, recordWrong]);
 
   const handleNext = useCallback(() => {
     if (isLast) {
@@ -105,7 +105,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
     recordWrong(card.id);
     setResults((r) => [...r, { card, input: '', correct: false, skipped: true }]);
     setPhase('revealed');
-  }, [phase, card]);
+  }, [phase, card, recordWrong]);
 
   useEffect(() => {
     const handler = (e) => {
