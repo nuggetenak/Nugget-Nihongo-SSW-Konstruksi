@@ -1,5 +1,5 @@
 # TASK v4.20.9 — DB-2, DB-3, DB-4, DB-5, ENG-9, ENG-10
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.8 DONE (or can be parallel)
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.8 DONE (or can be parallel)
 
 ## Goal
 Fix 4 data file bugs, add pre-build data validator, add audit script.

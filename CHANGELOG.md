@@ -1,3 +1,14 @@
+## [4.20.9] - 2026-05-09
+
+### fix + feat: data integrity layer
+
+- DB-2: JACMode filterIds guard — filter undefined/null related_card_id refs (typeof === number)
+- DB-3: sipil-sets + bangunan-sets SEED DATA headers removed
+- DB-4: empty source file headers updated (Cards: 0 + migration note)
+- DB-5: wayground-sets.js header — 12 set → 26 sets / 659 questions
+- ENG-9: scripts/validate-data.mjs — pre-build data integrity checker (prebuild hook); patched 3 broken ANGKA_KUNCI kartu refs
+- ENG-10: scripts/audit-related-ids.mjs — one-shot cross-ref script; patched 22 broken related_card_id refs → null
+
 ## [4.20.8] - 2026-05-09
 
 ### fix/feat: F1 F2 F4 R1 R2 N10
