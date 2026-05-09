@@ -3,6 +3,7 @@
 // Checks are run against a snapshot of user state.
 // ─────────────────────────────────────────────────────────────────────────────
 import { HALF_DECK_THRESHOLD, TOTAL_CARDS } from './constants.js';
+import { getAvgAccuracy } from './session-analytics.js';
 
 export const ACHIEVEMENTS = [
   { id: 'first_10',       icon: '🌱', label: 'Langkah Pertama',  desc: '10 kartu hafal',                  check: (s) => s.known >= 10 },
@@ -45,11 +46,8 @@ export function buildAchievementState({ known, streakData, sessions = [], srs, j
   const jacMastery = jacEntries.length >= 4 &&
     jacEntries.every((s) => s.total > 0 && (s.correct / s.total) * 100 >= 80);
 
-  // Average quiz accuracy from quiz/jac/wayground sessions
-  const quizSess = sessions.filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode) && s.total > 0);
-  const avgQuizAcc = quizSess.length > 0
-    ? Math.round(quizSess.reduce((acc, s) => acc + (s.correct / s.total) * 100, 0) / quizSess.length)
-    : 0;
+  // Average quiz accuracy across all scored quiz modes — N4 fix
+  const avgQuizAcc = getAvgAccuracy(sessions) ?? 0;
 
   return { known: knownN, streak, matureSRS, totalSessions, bestSimScore, perfectSprint, jacMastery, avgQuizAcc };
 }
