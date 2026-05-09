@@ -15,13 +15,13 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '保温工事で「シーラント」の役割は？',
+        q: '保温《ほおん》工事《こうじ》で「シーラント」の役割《やくわり》は？',
         hint: 'Peran sealant pada pekerjaan insulasi adalah?',
         opts: [
-          '継手部の気密性を確保する',
-          '接着剤の代わり',
-          '見た目を良くする',
-          '断熱材を固定する',
+          '継手部《つぎてぶ》の気密性《きみつせい》を確保《かくほ》する',
+          '接着剤《せっちゃくざい》の代わり',
+          '見た目《め》を良くする',
+          '断熱材《だんねつざい》を固定《こてい》する',
         ],
         opts_id: [
           'Menjamin kedap udara sambungan',
@@ -34,7 +34,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '冷媒配管の「インサート継手」の特徴は？',
+        q: '冷媒《れいばい》配管《はいかん》の「インサート継手《つぎて》」の特徴《とくちょう》は？',
         hint: 'Ciri insert joint pada pipa refrigerant adalah?',
         opts: ['挿入して圧着', '溶接不要', 'ねじ式', 'フランジ式'],
         opts_id: ['Dimasukkan lalu dikrim', 'Tanpa las', 'Ulir', 'Flange'],
@@ -57,7 +57,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '防火ダンパーが作動する温度の基準値は何度か《一般空調用》。',
+        q: '防火《ぼうか》ダンパーが作動《さどう》する温度《おんど》の基準値《きじゅんち》は何度か《一般空調《いっぱんくうちょう》用》。',
         hint: 'Suhu aktivasi fire damper untuk AC umum?',
         opts: ['300℃', '72℃', '30℃', '150℃'],
         opts_id: ['300°C', '72°C', '30°C', '150°C'],
@@ -66,7 +66,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '配管支持具の間隔は管径によりどう決めるか。',
+        q: '配管《はいかん》支持具《しじぐ》の間隔《かんかく》は管径《かんけい》によりどう決《き》めるか。',
         hint: 'Jarak hanger pipa ditentukan berdasarkan?',
         opts: ['5m固定', '毎10m固定', '管径により1〜3m間隔', '任意'],
         opts_id: ['5m tetap', 'Setiap 10m tetap', '1-3m tergantung diameter', 'Bebas'],
@@ -75,7 +75,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: 'ポリエチレン管の接合方法として正しいものは？',
+        q: 'ポリエチレン管《かん》の接合《せつごう》方法《ほうほう》として正《ただ》しいものは？',
         hint: 'Metode sambungan pipa polietilen yang benar adalah?',
         opts: ['EF接合', 'ろう付け', 'フレアー', 'ガス溶接'],
         opts_id: ['Electrofusion joint', 'Brazing', 'Flare', 'Gas welding'],
@@ -84,7 +84,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '作業終了後の「工具点検」で確認すべきことは？',
+        q: '作業《さぎょう》終了後《しゅうりょうご》の「工具点検《こうぐてんけん》」で確認《かくにん》すべきことは？',
         hint: 'Hal yang harus dicek saat inspeksi alat setelah kerja selesai adalah?',
         opts: ['重量', '破損・欠損・清掃', '数量のみ', '色だけ'],
         opts_id: ['Berat', 'Kerusakan, kehilangan, & kebersihan', 'Hanya jumlah', 'Hanya warna'],
@@ -93,7 +93,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '真空引き後の「ブレイクテスト」の目的は？',
+        q: '真空引《しんくうびき》き後の「ブレイクテスト」の目的《もくてき》は？',
         hint: 'Tujuan break test setelah vacuum adalah?',
         opts: ['色を確認', '漏れを増やす', '圧力を上げる', '真空保持時間を確認'],
         opts_id: [
@@ -107,7 +107,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '配管の水圧試験の目的は？',
+        q: '配管《はいかん》の水圧試験《すいあつしけん》の目的《もくてき》は？',
         hint: 'Tujuan water pressure test pada pipa adalah?',
         opts: ['色を確認する', '漏れを確認する', '強度を測る', '長さを測る'],
         opts_id: ['Mengecek warna', 'Mengecek kebocoran', 'Mengukur kekuatan', 'Mengukur panjang'],
@@ -119,10 +119,10 @@ export const CSV_SETS = [
         q: '電気設備の接地《アース》の主な目的は？',
         hint: 'Tujuan utama grounding (earthing) instalasi listrik?',
         opts: [
-          '感電事故と機器の故障を防ぐ',
-          '電気代を節約する',
-          'ノイズを増やす',
-          '照明を明るくする',
+          '感電事故《かんでんじこ》と機器《きき》の故障《こしょう》を防ぐ',
+          '電気代《でんきだい》を節約《せつやく》する',
+          'ノイズを増《ふ》やす',
+          '照明《しょうめい》を明るくする',
         ],
         opts_id: [
           'Mencegah sengatan listrik dan kerusakan alat',
@@ -135,7 +135,7 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '足場組立時の「水平器」の使用目的は？',
+        q: '足場《あしば》組立《くみたて》時の「水平器《すいへいき》」の使用目的《しようもくてき》は？',
         hint: 'Tujuan penggunaan level saat merakit scaffold adalah?',
         opts: ['角度を測る', '垂直を測る', '水平を確保する', '長さを測る'],
         opts_id: ['Mengukur sudut', 'Mengukur vertikal', 'Menjamin horizontal', 'Mengukur panjang'],
@@ -144,7 +144,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '足場使用時の「点検簿」の記入義務者は？',
+        q: '足場《あしば》使用《しよう》時の「点検簿《てんけんぼ》」の記入義務者《きにゅうぎむしゃ》は？',
         hint: 'Penanggung jawab pengisian buku inspeksi scaffold adalah?',
         opts: ['監督員のみ', '足場組立責任者', '下請けのみ', '作業員全員'],
         opts_id: [
@@ -158,7 +158,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '衛生器具設備工事で設置する設備は？',
+        q: '衛生器具《えいせいきぐ》設備《せつび》工事《こうじ》で設置《せっち》する設備《せつび》は？',
         hint: 'Peralatan yang dipasang dalam pekerjaan instalasi sanitary fixture adalah?',
         opts: ['ボイラー', '変電設備', '洗面器・便器', '冷却塔'],
         opts_id: ['Boiler', 'Substation', 'Wash basin & toilet', 'Cooling tower'],
@@ -167,7 +167,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '過大電流が流れた時に、自動的に電気の供給を止める安全装置を何というか。',
+        q: '過大《かだい》電流《でんりゅう》が流《なが》れた時に、自動的《じどうてき》に電気《でんき》の供給《きょうきゅう》を止《と》める安全装置《あんぜんそうち》を何というか。',
         hint: 'Alat keselamatan yang otomatis memutus suplai listrik saat arus berlebih disebut apa?',
         opts: ['検電器', '過電流遮断器', 'テスター', 'クランプメーター'],
         opts_id: ['Voltage detector', 'Overcurrent breaker', 'Tester', 'Clamp meter'],
@@ -176,7 +176,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '冷媒配管の「リークテスト」方法の一つは？',
+        q: '冷媒《れいばい》配管《はいかん》の「リークテスト」方法《ほうほう》の一つは？',
         hint: 'Salah satu metode leak test pipa refrigerant adalah?',
         opts: ['石鹸水または電子検知器', '真空テスト', '圧力テストのみ', '目視だけ'],
         opts_id: [
@@ -190,7 +190,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '冷媒配管の「フィルタードライヤー」の取り付け方向は？',
+        q: '冷媒《れいばい》配管《はいかん》の「フィルタードライヤー」の取《と》り付《つ》け方向《ほうこう》は？',
         hint: 'Arah pemasangan filter dryer pada pipa refrigerant adalah?',
         opts: ['矢印の方向に従う', '逆向き', '任意', '水平'],
         opts_id: ['Ikuti arah panah', 'Terbalik', 'Bebas', 'Horizontal'],
@@ -202,10 +202,10 @@ export const CSV_SETS = [
         q: '水準器《レベル》の精度確認で行う一般的な方法は？',
         hint: 'Metode umum memeriksa akurasi waterpas?',
         opts: [
-          '匂いを確認する',
-          '使用前に平らな面で180度回転させて確認する',
-          '水に入れる',
-          '色を見る',
+          '匂《にお》いを確認《かくにん》する',
+          '使用前《しようまえ》に平らな面で180度《ど》回転《かいてん》させて確認《かくにん》する',
+          '水《みず》に入れる',
+          '色《いろ》を見る',
         ],
         opts_id: [
           'Cek baunya',
@@ -218,7 +218,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '冷媒配管の「真空引き」作業の目的は？',
+        q: '冷媒《れいばい》配管《はいかん》の「真空引《しんくうびき》き」作業《さぎょう》の目的《もくてき》は？',
         hint: 'Tujuan vacuum drawing pada pipa refrigerant adalah?',
         opts: ['水分と空気を除去する', '色を確認', '漏れを増やす', '圧力を上げる'],
         opts_id: [
@@ -241,7 +241,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '配管の「ティー継手」の用途は？',
+        q: '配管《はいかん》の「ティー継手《つぎて》」の用途《ようと》は？',
         hint: 'Kegunaan tee joint pada pipa adalah?',
         opts: ['管を塞ぐ', '直径を変える', '管を曲げる', '管を直角に分岐させる'],
         opts_id: [
@@ -267,7 +267,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '建設工事で「化学物質」を使用する際に必ず確認すべき文書はどれか。',
+        q: '建設工事《けんせつこうじ》で「化学物質《かがくぶっしつ》」を使用《しよう》する際に必ず確認《かくにん》すべき文書《ぶんしょ》はどれか。',
         hint: "Dokumen yang WAJIB diperiksa saat menggunakan 'bahan kimia' di pekerjaan konstruksi adalah?",
         opts: ['作業工程表', '施工体制台帳', '安全データシート《SDS/MSDS》', '工事請負契約書'],
         opts_id: [
@@ -281,7 +281,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '建設現場の安全管理体制で、元方事業者が行うべきことは？',
+        q: '建設現場《けんせつげんば》の安全管理体制《あんぜんかんりたいせい》で、元方事業者《もとかたじぎょうしゃ》が行うべきことは？',
         hint: 'Hal yang harus dilakukan kontraktor utama dalam sistem manajemen keselamatan lokasi konstruksi adalah?',
         opts: ['統一した安全ルールの策定', '下請けの監督のみ', 'なし', '任意'],
         opts_id: [
@@ -295,7 +295,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: 'KY活動の4ステップのうち、2番目のステップは？',
+        q: 'KY活動《かつどう》の4ステップのうち、2番目《ばんめ》のステップは？',
         hint: 'Langkah ke-2 dalam 4 langkah KY adalah?',
         opts: ['危険を指摘する', '目標を宣言する', '危険を予測する', '対策を決める'],
         opts_id: [
@@ -309,7 +309,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '5S活動の「可視化」の目的は？',
+        q: '5S活動《かつどう》の「可視化《かしか》」の目的《もくてき》は？',
         hint: 'Tujuan visualisasi dalam 5S adalah?',
         opts: ['記録を取る', '物を隠す', '掃除を減らす', '異常をすぐに発見できるようにする'],
         opts_id: [
@@ -323,7 +323,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: 'KY活動の4ステップで最初に行うことは？',
+        q: 'KY活動《かつどう》の4ステップで最初《さいしょ》に行うことは？',
         hint: 'Langkah pertama dari 4 langkah KY adalah?',
         opts: ['対策を決める', '危険を予測する', '目標宣言', '危険を指摘する'],
         opts_id: [
@@ -340,10 +340,10 @@ export const CSV_SETS = [
         q: '産業安全衛生法で、危険予知活動《KY活動》の主な目的は何か。',
         hint: 'Menurut UU Keselamatan dan Kesehatan Kerja, tujuan utama KY adalah?',
         opts: [
-          '休憩を取る',
-          '危険を予測し、対策を立てる',
-          '作業を速く終わらせる',
-          '工具を片付ける',
+          '休憩《きゅうけい》を取る',
+          '危険《きけん》を予測《よそく》し、対策《たいさく》を立てる',
+          '作業《さぎょう》を速く終わらせる',
+          '工具《こうぐ》を片付《かたづ》ける',
         ],
         opts_id: [
           'Beristirahat',
@@ -356,7 +356,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '朝礼後の安全教育で必ず伝えるべきことは？',
+        q: '朝礼後《ちょうれいご》の安全教育《あんぜんきょういく》で必ず伝えるべきことは？',
         hint: 'Hal wajib disampaikan di pendidikan keselamatan setelah apel pagi adalah?',
         opts: ['給料の話', '今日の作業予定のみ', '休憩時間', '当日の危険箇所と対策'],
         opts_id: [
@@ -370,7 +370,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '建設現場での「竣工」とはどういう意味か。',
+        q: '建設現場《けんせつげんば》での「竣工《しゅんこう》」とはどういう意味《いみ》か。',
         hint: "Apa arti '竣工' (shunko) di site konstruksi?",
         opts: ['工事の開始', '工事の中断', '工事の完了', '工事の変更'],
         opts_id: [
@@ -384,7 +384,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '特別管理産業廃棄物のうち、石綿含有廃棄物の処理で必要な資格は？',
+        q: '特別管理産業廃棄物《とくべつかんりさんぎょうはいきぶつ》のうち、石綿含有廃棄物《いしわたがんゆうはいきぶつ》の処理《しょり》で必要《ひつよう》な資格《しかく》は？',
         hint: 'Kualifikasi yang diperlukan untuk pengolahan limbah khusus mengandung asbes adalah?',
         opts: ['石綿取扱い特別教育修了者', '普通の廃棄物処理業', 'なし', '任意'],
         opts_id: [
@@ -398,7 +398,7 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '作業中の熱中症防止対策は？',
+        q: '作業中《さぎょうちゅう》の熱中症防止対策《ねっちゅうしょうぼうしたいさく》は？',
         hint: 'Pencegahan heat stroke saat kerja adalah?',
         opts: ['水分補給と塩分', '重労働のみ', '休憩なし', '無視'],
         opts_id: ['Minum air & garam', 'Hanya kerja berat', 'Tanpa istirahat', 'Diabaikan'],
@@ -416,7 +416,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '建設現場の「安全衛生委員会」の役割は？',
+        q: '建設現場《けんせつげんば》の「安全衛生委員会《あんぜんえいせいいいんかい》」の役割《やくわり》は？',
         hint: 'Peran komite keselamatan & kesehatan di lokasi konstruksi adalah?',
         opts: ['給与を決める', '休憩を管理', '作業を監督する', '危険要因の調査と改善提案'],
         opts_id: [
@@ -430,13 +430,13 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '水道法の目的として正しいものはどれか。',
+        q: '水道法《すいどうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
         hint: 'Tujuan yang benar dari Water Supply Act (水道法) adalah?',
         opts: [
-          '清潔で安全な飲料水を安定的に供給すること',
-          '建設工事の費用を削減すること',
-          '下水を処理して河川を守ること',
-          '電力を安定供給すること',
+          '清潔《せいけつ》で安全《あんぜん》な飲料水《いんりょうすい》を安定的《あんていてき》に供給《きょうきゅう》すること',
+          '建設工事《けんせつこうじ》の費用《ひよう》を削減《さくげん》すること',
+          '下水《げすい》を処理《しょり》して河川《かせん》を守ること',
+          '電力《でんりょく》を安定供給《あんていきょうきゅう》すること',
         ],
         opts_id: [
           'Menyediakan air minum yang bersih, aman, dan stabil',
@@ -458,13 +458,13 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '工程表として最もよく使われる「バーチャート」の特徴はどれか。',
+        q: '工程表《こうていひょう》として最もよく使われる「バーチャート」の特徴《とくちょう》はどれか。',
         hint: "Karakteristik jadwal konstruksi yang paling sering digunakan 'bar chart' (バーチャート) adalah?",
         opts: [
-          '作業の依存関係が一目でわかる',
-          '縦軸に作業名、横軸に時間を示す',
-          '円グラフで進捗を表示する',
-          '工事費の推移を線グラフで示す',
+          '作業《さぎょう》の依存関係《いぞんかんけい》が一目《ひとめ》でわかる',
+          '縦軸《たてじく》に作業名《さぎょうめい》、横軸《よこじく》に時間《じかん》を示す',
+          '円《えん》グラフで進捗《しんちょく》を表示《ひょうじ》する',
+          '工事費《こうじひ》の推移《すいい》を線《せん》グラフで示す',
         ],
         opts_id: [
           'Ketergantungan antar pekerjaan terlihat sekilas',
@@ -480,10 +480,10 @@ export const CSV_SETS = [
         q: '建設キャリアアップシステム《CCUS》の目的として正しいものはどれか。',
         hint: 'Tujuan yang benar dari Construction Career Up System (CCUS) adalah?',
         opts: [
-          '建設コストを削減する',
-          '外国人労働者の数を制限する',
-          '技能者の就業履歴と資格を見える化する',
-          '工事の工期を短縮する',
+          '建設《けんせつ》コストを削減《さくげん》する',
+          '外国人労働者《がいこくじんろうどうしゃ》の数《かず》を制限《せいげん》する',
+          '技能者《ぎのうしゃ》の就業履歴《しゅうぎょうりれき》と資格《しかく》を見える化《か》する',
+          '工事《こうじ》の工期《こうき》を短縮《たんしゅく》する',
         ],
         opts_id: [
           'Mengurangi biaya konstruksi',
@@ -496,13 +496,13 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '建設現場における「仮設工事」の例として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》における「仮設工事《かせつこうじ》」の例として正《ただ》しいものはどれか。',
         hint: "Contoh yang benar dari 'pekerjaan sementara' (仮設工事) di site konstruksi adalah?",
         opts: [
-          '建物の基礎コンクリート工事',
-          '建物の外壁タイル工事',
-          '施工中に使用する足場の設置',
-          '建物の屋根工事',
+          '建物《たてもの》の基礎《きそ》コンクリート工事《こうじ》',
+          '建物《たてもの》の外壁《がいへき》タイル工事《こうじ》',
+          '施工中《せこうちゅう》に使用《しよう》する足場《あしば》の設置《せっち》',
+          '建物《たてもの》の屋根《やね》工事《こうじ》',
         ],
         opts_id: [
           'Pekerjaan beton fondasi bangunan',
@@ -515,12 +515,12 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '建設現場における「労災保険」の保険料を支払う義務があるのはだれか。',
+        q: '建設現場《けんせつげんば》における「労災保険《ろうさいほけん》」の保険料《ほけんりょう》を支払う義務《ぎむ》があるのはだれか。',
         hint: 'Siapa yang berkewajiban membayar premi asuransi kecelakaan kerja (労災保険) di site konstruksi?',
         opts: [
-          '労働者が全額負担する',
-          '労働者と使用者が半分ずつ負担する',
-          '政府が全額負担する',
+          '労働者《ろうどうしゃ》が全額《ぜんがく》負担《ふたん》する',
+          '労働者《ろうどうしゃ》と使用者《しようしゃ》が半分《はんぶん》ずつ負担《ふたん》する',
+          '政府《せいふ》が全額《ぜんがく》負担《ふたん》する',
           '事業主《使用者》が全額負担する',
         ],
         opts_id: [
@@ -548,7 +548,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '人間の誤り防止で「ダブルチェック」の意味は？',
+        q: '人間《にんげん》の誤《あやま》り防止《ぼうし》で「ダブルチェック」の意味《いみ》は？',
         hint: 'Arti double-check untuk pencegahan human error adalah?',
         opts: ['一人で確認', '記録不要', '二人以上で確認', '目視だけ'],
         opts_id: [
@@ -571,13 +571,13 @@ export const CSV_SETS = [
       },
       {
         id: 22,
-        q: '建設現場で「作業員名簿」に記載すべき事項として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》で「作業員名簿《さぎょういんめいぼ》」に記載《きさい》すべき事項《じこう》として正《ただ》しいものはどれか。',
         hint: "Hal yang benar untuk dicantumkan dalam 'daftar pekerja' (作業員名簿) di site konstruksi adalah?",
         opts: [
-          '作業員の家族構成のみ',
-          '作業員の趣味と特技のみ',
-          '氏名・生年月日・所属会社・保有資格など',
-          '作業員の銀行口座情報のみ',
+          '作業員《さぎょういん》の家族構成《かぞくこうせい》のみ',
+          '作業員《さぎょういん》の趣味《しゅみ》と特技《とくぎ》のみ',
+          '氏名《しめい》・生年月日《せいねんがっぴ》・所属会社《しょぞくかいしゃ》・保有資格《ほゆうしかく》など',
+          '作業員《さぎょういん》の銀行口座情報《ぎんこうこうざじょうほう》のみ',
         ],
         opts_id: [
           'Hanya susunan keluarga pekerja',
@@ -590,7 +590,7 @@ export const CSV_SETS = [
       },
       {
         id: 23,
-        q: '安全衛生委員会の設置義務がある事業場の規模は？',
+        q: '安全衛生委員会《あんぜんえいせいいいんかい》の設置義務《せっちぎむ》がある事業場《じぎょうじょう》の規模《きぼ》は？',
         hint: 'Skala perusahaan yang wajib membentuk komite keselamatan & kesehatan adalah?',
         opts: ['10人以上', 'なし', '50人以上', '任意'],
         opts_id: ['10 orang atau lebih', 'Tidak ada', '50 orang atau lebih', 'Sukarela'],
@@ -599,7 +599,7 @@ export const CSV_SETS = [
       },
       {
         id: 24,
-        q: '技能検定に合格した人は、何と名乗ることができるか。',
+        q: '技能検定《ぎのうけんてい》に合格《ごうかく》した人は、何と名乗《なの》ることができるか。',
         hint: 'Orang yang lulus uji keterampilan dapat menyebut dirinya apa?',
         opts: ['弁護士', '技能士', '司法書士', '技術士'],
         opts_id: ['Lawyer', 'Skill technician', 'Judicial scrivener', 'Engineer'],
@@ -608,13 +608,13 @@ export const CSV_SETS = [
       },
       {
         id: 25,
-        q: '建設業界の三大災害で最も多い事故の種類はどれか。',
+        q: '建設業界《けんせつぎょうかい》の三大災害《さんだいさいがい》で最も多い事故《じこ》の種類《しゅるい》はどれか。',
         hint: 'Jenis kecelakaan yang paling banyak terjadi di antara tiga besar kecelakaan industri konstruksi adalah?',
         opts: [
-          '感電による死亡',
-          '建設機械による事故',
-          '墜落・転落による事故',
-          '崩壊・倒壊による事故',
+          '感電《かんでん》による死亡《しぼう》',
+          '建設機械《けんせつきかい》による事故《じこ》',
+          '墜落《ついらく》・転落《てんらく》による事故《じこ》',
+          '崩壊《ほうかい》・倒壊《とうかい》による事故《じこ》',
         ],
         opts_id: [
           'Kematian akibat sengatan listrik',
@@ -627,13 +627,13 @@ export const CSV_SETS = [
       },
       {
         id: 26,
-        q: '建設工事の「下請負業者」の説明として正しいものはどれか。',
-        hint: 'Penjelasan yang benar tentang subkontraktor (下請負業者) dalam konstruksi adalah?',
+        q: '建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》《したうけおいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
+        hint: 'Penjelasan yang benar tentang subkontraktor (下請負業者《したうけおいぎょうしゃ》) dalam konstruksi adalah?',
         opts: [
-          '発注者から直接工事を受注する業者',
-          '主に設計図を作成する業者',
-          '元請から専門工事を受注する業者',
-          '工事現場の安全管理のみを担当する業者',
+          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
+          '主に設計図《せっけいず》を作成《さくせい》する業者《ぎょうしゃ》',
+          '元請《もとうけ》から専門工事《せんもんこうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
+          '工事現場《こうじげんば》の安全管理《あんぜんかんり》のみを担当《たんとう》する業者《ぎょうしゃ》',
         ],
         opts_id: [
           'Perusahaan yang menerima proyek langsung dari pemberi proyek',
@@ -642,11 +642,11 @@ export const CSV_SETS = [
           'Perusahaan yang hanya menangani keselamatan site',
         ],
         ans: 2,
-        exp: '下請負業者 (shita ukeoi gyōsha / subkontraktor) = menerima pekerjaan spesialis dari kontraktor utama (元請). Mereka punya keahlian khusus: pipa, listrik, insulasi, AC, dll. Sebagai pekerja SSW Anda biasanya bekerja di bawah subkontraktor. Rantai: Pemberi proyek → 元請 (motouke) → 下請 (shitauke) → pekerja.',
+        exp: '下請負業者《したうけおいぎょうしゃ》 (shita ukeoi gyōsha / subkontraktor) = menerima pekerjaan spesialis dari kontraktor utama (元請). Mereka punya keahlian khusus: pipa, listrik, insulasi, AC, dll. Sebagai pekerja SSW Anda biasanya bekerja di bawah subkontraktor. Rantai: Pemberi proyek → 元請 (motouke) → 下請 (shitauke) → pekerja.',
       },
       {
         id: 27,
-        q: '建設現場の朝礼後に「今日の作業内容と危険箇所」を伝える活動として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》の朝礼後《ちょうれいご》に「今日《きょう》の作業内容《さぎょうないよう》と危険箇所《きけんかしょ》」を伝える活動《かつどう》として正《ただ》しいものはどれか。',
         hint: "Kegiatan yang benar untuk menyampaikan 'isi pekerjaan dan bahaya hari ini' setelah apel pagi di site konstruksi adalah?",
         opts: ['5S活動', 'KY《危険予知》活動', '産業廃棄物処理', '施工体制台帳の記入'],
         opts_id: [
@@ -660,7 +660,7 @@ export const CSV_SETS = [
       },
       {
         id: 28,
-        q: '作業中の「指差呼称」実施の目的は？',
+        q: '作業中《さぎょうちゅう》の「指差呼称《ゆびさしこしょう》」実施《じっし》の目的《もくてき》は？',
         hint: 'Tujuan melaksanakan pointing & calling saat kerja adalah?',
         opts: ['休憩を促す', '挨拶をする', '時間を節約する', '確認作業の正確性を高める'],
         opts_id: [
@@ -674,13 +674,13 @@ export const CSV_SETS = [
       },
       {
         id: 29,
-        q: '建設工事で「防火区画」を設ける目的として正しいものはどれか。',
+        q: '建設工事《けんせつこうじ》で「防火区画《ぼうかくかく》」を設ける目的《もくてき》として正《ただ》しいものはどれか。',
         hint: "Tujuan yang benar dari pemasangan 'kompartemen tahan api' (防火区画) dalam konstruksi adalah?",
         opts: [
-          '建物の断熱性を高めるため',
-          '建物の防音性能を高めるため',
-          '建物内での火災や煙の拡大を防ぐため',
-          '建物の構造強度を高めるため',
+          '建物《たてもの》の断熱性《だんねつせい》を高めるため',
+          '建物《たてもの》の防音性能《ぼうおんせいのう》を高めるため',
+          '建物内《たてものない》での火災《かさい》や煙《けむり》の拡大《かくだい》を防ぐため',
+          '建物《たてもの》の構造強度《こうぞうきょうど》を高めるため',
         ],
         opts_id: [
           'Meningkatkan sifat insulasi termal bangunan',
@@ -693,7 +693,7 @@ export const CSV_SETS = [
       },
       {
         id: 30,
-        q: '建設現場で「スプリンクラー設備工事」で設置するものはどれか。',
+        q: '建設現場《けんせつげんば》で「スプリンクラー設備工事《せつびこうじ》」で設置《せっち》するものはどれか。',
         hint: "Apa yang dipasang dalam 'pekerjaan instalasi sprinkler' (スプリンクラー設備工事)?",
         opts: ['空調設備', '自動火災報知設備', '消火のための水を自動散水する設備', '給排水設備'],
         opts_id: [
@@ -719,7 +719,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: 'フルハーネス使用時のフックは？',
+        q: 'フルハーネス使用《しよう》時のフックは？',
         hint: 'Hook pada full-harness harus?',
         opts: ['キー付きロッキング', '使わない', '固定式', 'どちらでも'],
         opts_id: ['Keylock type', 'Tidak pakai', 'Tipe tetap', 'Boleh keduanya'],
@@ -728,7 +728,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '配管の「エアー試験」の使用圧力基準は？',
+        q: '配管《はいかん》の「エアー試験《しけん》」の使用圧力基準《しようあつりょくきじゅん》は？',
         hint: 'Standar tekanan untuk air test (pneumatic test) pada pipa adalah?',
         opts: ['作業圧の1.1倍以下', '作業圧の0.5倍', '常圧', '真空'],
         opts_id: ['Maksimal 1.1× tekanan kerja', '0.5× tekanan kerja', 'Tekanan normal', 'Vakum'],
@@ -737,7 +737,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '脚立を使用するときの適切な開き角度は？',
+        q: '脚立《きゃたつ》を使用《しよう》するときの適切《てきせつ》な開き角度《かくど》は？',
         hint: 'Sudut buka yang tepat saat menggunakan tangga lipat (kyatatsu)?',
         opts: ['90度', '180度《完全に開く》', '75度程度《開き止め金具を確実に》', '30度'],
         opts_id: ['90°', '180° (terbuka penuh)', 'Sekitar 75° (spreader terkunci)', '30°'],
@@ -746,7 +746,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '足場解体時の「落下防止ネット」の設置位置は？',
+        q: '足場《あしば》解体時《かいたいじ》の「落下防止《らっかぼうし》ネット」の設置位置《せっちいち》は？',
         hint: 'Posisi pemasangan safety net saat pembongkaran scaffold adalah?',
         opts: ['任意', '足場上', '地面直上', '作業面から下方2m以内'],
         opts_id: [
@@ -760,7 +760,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: 'スプリンクラー配管の「ドレン弁」の設置位置は？',
+        q: 'スプリンクラー配管《はいかん》の「ドレン弁《べん》」の設置位置《せっちいち》は？',
         hint: 'Posisi pemasangan drain valve pada pipa sprinkler adalah?',
         opts: ['最低部《末端》', '中央', '天井最高部', '任意'],
         opts_id: ['Titik terendah (ujung)', 'Tengah', 'Titik tertinggi langit-langit', 'Bebas'],
@@ -778,7 +778,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '配管支持金具の「Uボルト」の締め付けトルクは？',
+        q: '配管支持金具《はいかんしじかなぐ》の「Uボルト」の締《し》め付《つ》けトルクは？',
         hint: 'Torsi pengencangan U-bolt untuk hanger pipa adalah?',
         opts: ['手で締める', 'メーカー指定値に従う', '最大値', '任意'],
         opts_id: ['Kencangkan manual', 'Ikuti nilai yang ditentukan pabrik', 'Maksimal', 'Bebas'],
@@ -787,7 +787,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '冷媒配管の絶縁作業で継手部の処理は？',
+        q: '冷媒《れいばい》配管《はいかん》の絶縁作業《ぜつえんさぎょう》で継手部《つぎてぶ》の処理《しょり》は？',
         hint: 'Cara menginsulasi sambungan pipa refrigerant adalah?',
         opts: ['テープで巻く', '放置する', '塗料を塗る', '溶接する'],
         opts_id: ['Dibungkus tape', 'Dibiarkan', 'Dicat', 'Dilas'],
@@ -796,7 +796,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: 'スプレーウレタンフォームの厚さ管理で使用する道具は？',
+        q: 'スプレーウレタンフォームの厚《あつ》さ管理《かんり》で使用《しよう》する道具《どうぐ》は？',
         hint: 'Alat untuk mengukur ketebalan spray polyurethane foam adalah?',
         opts: ['巻尺', '厚さ測定ピン', 'レベル', '角度計'],
         opts_id: ['Measuring tape', 'Thickness pin gauge', 'Level', 'Protractor'],
@@ -805,7 +805,7 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '銅管の「焼鈍」処理の目的は？',
+        q: '銅管《どうかん》の「焼鈍《しょうどん》」処理《しょり》の目的《もくてき》は？',
         hint: 'Tujuan annealing pipa tembaga adalah?',
         opts: ['錆びにくく', '切断しやすく', '硬くする', '柔らかくして曲げやすくする'],
         opts_id: [
@@ -819,7 +819,7 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '冷媒配管の施工で、銅管の接続に最も一般的な方法は？',
+        q: '冷媒《れいばい》配管《はいかん》の施工《せこう》で、銅管《どうかん》の接続《せつぞく》に最も一般的《いっぱんてき》な方法《ほうほう》は？',
         hint: 'Metode paling umum untuk menyambung pipa tembaga refrigeran?',
         opts: ['ガムテープ', '接着剤', 'ろう付け《ブレージング》', 'ネジ止め'],
         opts_id: ['Lakban', 'Lem', 'Brazing', 'Ulir skrup'],
@@ -828,7 +828,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '電気工具の接地確認で使用する機器は？',
+        q: '電気工具《でんきこうぐ》の接地確認《せっちかくにん》で使用《しよう》する機器《きき》は？',
         hint: 'Alat untuk verifikasi grounding pada power tool adalah?',
         opts: ['クランプメーター', '接地抵抗計', '電圧計', 'テスター'],
         opts_id: ['Clamp meter', 'Earth resistance tester', 'Voltmeter', 'Tester'],
@@ -837,7 +837,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '電気工具使用前の「絶縁抵抗測定」の目的は？',
+        q: '電気工具《でんきこうぐ》使用前《しようまえ》の「絶縁抵抗測定《ぜつえんていこうそくてい》」の目的《もくてき》は？',
         hint: 'Tujuan mengukur resistansi isolasi sebelum pakai alat listrik adalah?',
         opts: ['電圧を確認する', '消費電力を測る', '回転数を確認', '漏電防止'],
         opts_id: [
@@ -851,7 +851,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: 'フルハーネス使用時の「ランヤード」の長さ制限は？',
+        q: 'フルハーネス使用《しよう》時の「ランヤード」の長《なが》さ制限《せいげん》は？',
         hint: 'Batas panjang lanyard pada full-harness adalah?',
         opts: ['2 m以内《ショックアブソーバー含む》', '任意', '1 m以内', '2 m以上'],
         opts_id: ['Maksimal 2 m (termasuk absorber)', 'Bebas', 'Maksimal 1 m', '2 m ke atas'],
@@ -860,7 +860,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '配管の「エンドキャップ」の取り外し時に注意することは？',
+        q: '配管《はいかん》の「エンドキャップ」の取《と》り外《はず》し時に注意《ちゅうい》することは？',
         hint: 'Hal yang diperhatikan saat melepas end cap pipa adalah?',
         opts: ['放置', '内部の異物混入を防ぐ', '切断', '力を強くかける'],
         opts_id: ['Dibiarkan', 'Mencegah masuknya benda asing', 'Memotong', 'Memberi tenaga kuat'],
@@ -869,7 +869,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '配管のオーバーレイ溶接前に必要な処理は？',
+        q: '配管《はいかん》のオーバーレイ溶接前《ようせつまえ》に必要《ひつよう》な処理《しょり》は？',
         hint: 'Persiapan sebelum overlay welding pada pipa adalah?',
         opts: ['切断', '曲げ', '塗装', 'ベベル加工と清掃'],
         opts_id: ['Pemotongan', 'Pembengkokan', 'Pengecatan', 'Bevel + pembersihan'],
@@ -878,7 +878,7 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: 'ボイラーに設置が義務付けられている安全装置はどれか。',
+        q: 'ボイラーに設置《せっち》が義務付《ぎむづ》けられている安全装置《あんぜんそうち》はどれか。',
         hint: 'Alat pengaman yang wajib dipasang pada boiler?',
         opts: ['時計', '温度計のみ', '安全弁', '音楽プレーヤー'],
         opts_id: ['Jam', 'Hanya termometer', 'Safety valve (katup pengaman)', 'Pemutar musik'],
@@ -887,13 +887,13 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '空調設備で使用されるR410A冷媒の特徴は何か。',
+        q: '空調設備《くうちょうせつび》で使用《しよう》されるR410A冷媒《れいばい》の特徴《とくちょう》は何か。',
         hint: 'Apa karakteristik refrigeran R410A yang digunakan pada sistem AC?',
         opts: [
-          'オゾン層を破壊しない混合冷媒',
-          '毒性が強い',
-          'オゾン層を破壊する',
-          '可燃性が非常に高い',
+          'オゾン層《そう》を破壊《はかい》しない混合冷媒《こんごうれいばい》',
+          '毒性《どくせい》が強い',
+          'オゾン層《そう》を破壊《はかい》する',
+          '可燃性《かねんせい》が非常《ひじょう》に高い',
         ],
         opts_id: [
           'Refrigeran campuran yang tidak merusak ozon',
@@ -906,7 +906,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '保温材の厚さ公差の許容範囲は？',
+        q: '保温材《ほおんざい》の厚《あつ》さ公差《こうさ》の許容範囲《きょようはんい》は？',
         hint: 'Toleransi ketebalan insulasi adalah?',
         opts: ['±20mm', '±5mm以内', '±10mm', '任意'],
         opts_id: ['±20mm', 'Maksimal ±5mm', '±10mm', 'Bebas'],
@@ -915,7 +915,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '配管の「フランジボルト」の締め付け順序は？',
+        q: '配管《はいかん》の「フランジボルト」の締《し》め付《つ》け順序《じゅんじょ》は？',
         hint: 'Urutan pengencangan flange bolt adalah?',
         opts: ['一方から順に', 'ランダム', '対角順《クロス締め》', '時計回り'],
         opts_id: [
@@ -941,7 +941,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: 'KY活動の4ステップで最後のステップは？',
+        q: 'KY活動《かつどう》の4ステップで最後《さいご》のステップは？',
         hint: 'Langkah ke-4 dalam KY adalah?',
         opts: ['危険を予測する', '目標宣言', '対策を決めて実行する', '危険を指摘する'],
         opts_id: [
@@ -964,13 +964,13 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '建設業法で「一般建設業許可」が必要になる工事金額の基準として正しいものはどれか。',
+        q: '建設業法《けんせつぎょうほう》で「一般建設業許可《いっぱんけんせつぎょうきょか》」が必要《ひつよう》になる工事金額《こうじきんがく》の基準《きじゅん》として正《ただ》しいものはどれか。',
         hint: "Nilai konstruksi yang memerlukan 'izin konstruksi umum' (一般建設業許可) menurut Construction Business Act adalah?",
         opts: [
           '1件500万円以上《建築工事は1500万円以上》',
-          '1件100万円以上',
-          '1件1000万円以上',
-          '1件3000万円以上',
+          '1件《けん》100万円《まんえん》以上《いじょう》',
+          '1件《けん》1000万円《まんえん》以上《いじょう》',
+          '1件《けん》3000万円《まんえん》以上《いじょう》',
         ],
         opts_id: [
           '500 juta yen atau lebih per kontrak (konstruksi bangunan 1,5 milyar yen)',
@@ -983,7 +983,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '職場におけるストレスチェックの実施義務がある事業場の規模は？',
+        q: '職場《しょくば》におけるストレスチェックの実施義務《じっしぎむ》がある事業場《じぎょうじょう》の規模《きぼ》は？',
         hint: 'Skala perusahaan yang wajib melaksanakan stress check adalah?',
         opts: ['なし', '任意', '50人以上', '10人以上'],
         opts_id: ['Tidak ada', 'Sukarela', '50 orang atau lebih', '10 orang atau lebih'],
@@ -992,7 +992,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '5S活動の「整頓」とは何をする活動か。',
+        q: '5S活動《かつどう》の「整頓《せいとん》」とは何をする活動《かつどう》か。',
         hint: 'Apa yang dilakukan pada “Seiton” dalam 5S?',
         opts: ['ルールを守る', '必要な物を定位置に置く', '掃除をする', '不要な物を捨てる'],
         opts_id: [
@@ -1006,7 +1006,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '産業廃棄物のマニフェスト制度の目的は？',
+        q: '産業廃棄物《さんぎょうはいきぶつ》のマニフェスト制度《せいど》の目的《もくてき》は？',
         hint: 'Tujuan sistem manifest limbah industri adalah?',
         opts: ['コストを下げる', '廃棄物を増やす', '任意', '廃棄物の流れを把握する'],
         opts_id: ['Menurunkan biaya', 'Menambah limbah', 'Sukarela', 'Melacak alur limbah'],
@@ -1024,7 +1024,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '作業終了後の「火気使用確認」の目的は？',
+        q: '作業《さぎょう》終了後《しゅうりょうご》の「火気使用確認《かきしようかくにん》」の目的《もくてき》は？',
         hint: 'Tujuan konfirmasi penggunaan api setelah kerja selesai adalah?',
         opts: ['挨拶', '火災防止', '休憩確認', '工具の確認'],
         opts_id: ['Sapaan', 'Pencegahan kebakaran', 'Konfirmasi istirahat', 'Cek alat'],
@@ -1033,12 +1033,12 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '労働安全衛生法で「元方事業者」の責任として正しいものはどれか。',
+        q: '労働安全衛生法《ろうどうあんぜんえいせいほう》で「元方事業者《もとかたじぎょうしゃ》」の責任《せきにん》として正《ただ》しいものはどれか。',
         hint: "Tanggung jawab 'kontraktor utama' (元方事業者) berdasarkan Industrial Safety & Health Act adalah?",
         opts: [
-          '自社の労働者の安全のみを管理する',
-          '設計変更の承認を行う',
-          '労働者の給与計算をする',
+          '自社《じしゃ》の労働者《ろうどうしゃ》の安全《あんぜん》のみを管理《かんり》する',
+          '設計変更《せっけいへんこう》の承認《しょうにん》を行う',
+          '労働者《ろうどうしゃ》の給与計算《きゅうよけいさん》をする',
           '現場で働くすべての労働者《下請含む》の安全を管理する',
         ],
         opts_id: [
@@ -1052,7 +1052,7 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '労働基準法で、1週間の法定労働時間は何時間か。',
+        q: '労働基準法《ろうどうきじゅんほう》で、1週間《しゅうかん》の法定労働時間《ほうていろうどうじかん》は何時間《なんじかん》か。',
         hint: 'Menurut UU Standar Ketenagakerjaan, berapa jam waktu kerja resmi per minggu?',
         opts: ['48 時間', '40 時間', '36 時間', '44 時間'],
         opts_id: ['48 jam', '40 jam', '36 jam', '44 jam'],
@@ -1061,13 +1061,13 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '元請負業者の説明として正しいものはどれか。',
+        q: '元請負業者《もとうけおいぎょうしゃ》の説明《せつめい》として正《ただ》しいものはどれか。',
         hint: 'Penjelasan yang benar tentang kontraktor utama (元請負業者) adalah?',
         opts: [
-          '発注者から直接工事を受注する業者',
-          '元請負業者から仕事を受ける業者',
-          '工事の設計のみを担当する業者',
-          '工事現場の清掃を担当する業者',
+          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
+          '元請負業者《もとうけおいぎょうしゃ》から仕事を受ける業者《ぎょうしゃ》',
+          '工事《こうじ》の設計《せっけい》のみを担当《たんとう》する業者《ぎょうしゃ》',
+          '工事現場《こうじげんば》の清掃《せいそう》を担当《たんとう》する業者《ぎょうしゃ》',
         ],
         opts_id: [
           'Perusahaan yang menerima proyek langsung dari pemberi proyek',
@@ -1080,7 +1080,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: 'リスクアセスメントの実施手順で、最初に行うべきことは？',
+        q: 'リスクアセスメントの実施手順《じっしてじゅん》で、最初《さいしょ》に行うべきことは？',
         hint: 'Langkah pertama dalam pelaksanaan risk assessment adalah?',
         opts: ['記録を取る', '対策を決める', '危険源を特定する', '訓練を実施'],
         opts_id: [
@@ -1094,13 +1094,13 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '建設工事で使われる「仕様書」の役割として正しいものはどれか。',
+        q: '建設工事《けんせつこうじ》で使われる「仕様書《しようしょ》」の役割《やくわり》として正《ただ》しいものはどれか。',
         hint: "Peran yang benar dari 'spesifikasi teknis' (仕様書/shiyōsho) dalam konstruksi adalah?",
         opts: [
-          '工事の費用を明細に示す',
-          '作業員の名前を記録する',
-          '使用する材料・工法・品質基準を定める',
-          '工事の工程表を作成する',
+          '工事《こうじ》の費用《ひよう》を明細《めいさい》に示す',
+          '作業員《さぎょういん》の名前《なまえ》を記録《きろく》する',
+          '使用《しよう》する材料《ざいりょう》・工法《こうほう》・品質基準《ひんしつきじゅん》を定める',
+          '工事《こうじ》の工程表《こうていひょう》を作成《さくせい》する',
         ],
         opts_id: [
           'Merinci biaya konstruksi',
@@ -1113,7 +1113,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '建設現場で「作業主任者」が必要な作業はどれか。',
+        q: '建設現場《けんせつげんば》で「作業主任者《さぎょうしゅにんしゃ》」が必要《ひつよう》な作業《さぎょう》はどれか。',
         hint: "Pekerjaan yang memerlukan 'kepala pekerjaan bersertifikat' (作業主任者) di site konstruksi adalah?",
         opts: ['現場の清掃', '資材の運搬', '足場の組立て', '書類の作成'],
         opts_id: [
@@ -1127,7 +1127,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '産業廃棄物処理法で、建設現場の廃棄物処理責任者は？',
+        q: '産業廃棄物処理法《さんぎょうはいきぶつしょりほう》で、建設現場《けんせつげんば》の廃棄物処理責任者《はいきぶつしょりせきにんしゃ》は？',
         hint: 'Penanggung jawab pengelolaan limbah industri di lokasi konstruksi menurut UU adalah?',
         opts: ['作業員全員', '元請負業者', '下請けのみ', '監督員'],
         opts_id: ['Semua pekerja', 'Kontraktor utama', 'Hanya subkontraktor', 'Pengawas'],
@@ -1136,7 +1136,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: 'マン��ール内の酸素濃度が18%未満の場合の対策は？',
+        q: 'マンホール内《ない》の酸素濃度《さんそのうど》が18%未満《みまん》の場合《ばあい》の対策《たいさく》は？',
         hint: 'Tindakan jika kadar oksigen di manhole <18% adalah?',
         opts: ['直ちに入る', '換気を行う', '無視する', '火を使う'],
         opts_id: ['Langsung masuk', 'Ventilasi', 'Diabaikan', 'Pakai api'],
@@ -1145,13 +1145,13 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '建設現場で使用する「レーザー墨出し器」の主な用途はどれか。',
+        q: '建設現場《けんせつげんば》で使用《しよう》する「レーザー墨出《すみだ》し器《き》」の主な用途《ようと》はどれか。',
         hint: "Kegunaan utama 'laser level' (レーザー墨出し器) yang digunakan di site konstruksi adalah?",
         opts: [
-          '配管を切断する',
-          '溶接をする',
-          '正確な水平・垂直基準線を照射する',
-          '材料の重さを測る',
+          '配管《はいかん》を切断《せつだん》する',
+          '溶接《ようせつ》をする',
+          '正確《せいかく》な水平《すいへい》・垂直基準線《すいちょくきじゅんせん》を照射《しょうしゃ》する',
+          '材料《ざいりょう》の重《おも》さを測る',
         ],
         opts_id: [
           'Memotong pipa',
@@ -1164,7 +1164,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '墜落防止ネットの設置基準は？',
+        q: '墜落防止《ついらくぼうし》ネットの設置基準《せっちきじゅん》は？',
         hint: 'Standar pemasangan safety net pencegahan jatuh adalah?',
         opts: ['5m以上', '地面から2m', '任意', '作業面から下方2m以内'],
         opts_id: ['5m ke atas', '2m dari tanah', 'Bebas', 'Maksimal 2m di bawah permukaan kerja'],
@@ -1173,7 +1173,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '5Sの「躾」とは何を意味するか？',
+        q: '5Sの「躾《しつけ》」とは何を意味《いみ》するか？',
         hint: 'Apa arti “Shituke” dalam 5S?',
         opts: ['ルールを守る習慣', '整理', '整頓', '掃除'],
         opts_id: ['Kebiasaan mematuhi aturan', 'Mengatur', 'Merapikan', 'Membersihkan'],
@@ -1182,13 +1182,13 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '建設工事に使う「平面図」とはどのような図面か。',
+        q: '建設工事《けんせつこうじ》に使う「平面図《へいめんず》」とはどのような図面《ずめん》か。',
         hint: "Apa itu 'denah' (平面図/heimen-zu) dalam konstruksi?",
         opts: [
-          '建物を横から見た図',
-          '建物を上から見た水平断面図',
-          '建物の基礎を示した図',
-          '配管の圧力を示した図',
+          '建物《たてもの》を横から見た図《ず》',
+          '建物《たてもの》を上から見た水平断面図《すいへいだんめんず》',
+          '建物《たてもの》の基礎《きそ》を示した図《ず》',
+          '配管《はいかん》の圧力《あつりょく》を示した図《ず》',
         ],
         opts_id: [
           'Gambar bangunan dilihat dari samping',
@@ -1201,7 +1201,7 @@ export const CSV_SETS = [
       },
       {
         id: 21,
-        q: '5S活動の「安全」との関係は？',
+        q: '5S活動《かつどう》の「安全《あんぜん》」との関係《かんけい》は？',
         hint: 'Hubungan 5S dengan keselamatan adalah?',
         opts: ['整理整頓で事故を防ぐ', '躾だけ', '無関係', '清掃のみ'],
         opts_id: [
@@ -1229,13 +1229,13 @@ export const CSV_SETS = [
       },
       {
         id: 23,
-        q: '建設現場の「発注者」の役割として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》の「発注者《はっちゅうしゃ》」の役割《やくわり》として正《ただ》しいものはどれか。',
         hint: "Peran yang benar dari 'pemberi proyek' (発注者/hatchūsha) di konstruksi adalah?",
         opts: [
-          '工事を施工する',
-          '工事の設計をする',
-          '工事監理のみを行う',
-          '工事を依頼し費用を支払う',
+          '工事《こうじ》を施工《せこう》する',
+          '工事《こうじ》の設計《せっけい》をする',
+          '工事監理《こうじかんり》のみを行う',
+          '工事《こうじ》を依頼《いらい》し費用《ひよう》を支払う',
         ],
         opts_id: [
           'Melaksanakan pekerjaan konstruksi',
@@ -1248,7 +1248,7 @@ export const CSV_SETS = [
       },
       {
         id: 24,
-        q: '作業現場の「避難訓練」の実施義務は？',
+        q: '作業現場《さぎょうげんば》の「避難訓練《ひなんくんれん》」の実施義務《じっしぎむ》は？',
         hint: 'Kewajiban pelaksanaan latihan evakuasi di lokasi kerja adalah?',
         opts: ['月1回', '任意', '半年に1回以上', '年1回'],
         opts_id: ['1x sebulan', 'Bebas', 'Minimal 1x setiap 6 bulan', '1x setahun'],
@@ -1257,7 +1257,7 @@ export const CSV_SETS = [
       },
       {
         id: 25,
-        q: '緊急時の初動対応で最初に行うべきことは？',
+        q: '緊急時《きんきゅうじ》の初動対応《しょどうたいおう》で最初《さいしょ》に行うべきことは？',
         hint: 'Langkah pertama dalam respons awal darurat adalah?',
         opts: ['休憩', '危険箇所の確認と避難', '作業を続ける', '記録を取る'],
         opts_id: [
@@ -1271,12 +1271,12 @@ export const CSV_SETS = [
       },
       {
         id: 26,
-        q: '特定技能在留資格を取得するために必要な要件として正しいものはどれか。',
+        q: '特定技能《とくていぎのう》在留資格《ざいりゅうしかく》を取得《しゅとく》するために必要《ひつよう》な要件《ようけん》として正《ただ》しいものはどれか。',
         hint: 'Persyaratan yang benar untuk mendapatkan status tinggal Keterampilan Khusus (特定技能) adalah?',
         opts: [
           '日本語能力試験《JLPT》N1に合格していること',
-          '日本語試験と分野別技能評価試験に合格していること',
-          '日本の大学を卒業していること',
+          '日本語試験《にほんごしけん》と分野別技能評価試験《ぶんやべつぎのうひょうかしけん》に合格《ごうかく》していること',
+          '日本《にほん》の大学《だいがく》を卒業《そつぎょう》していること',
           '日本語能力試験《JLPT》N3に合格していること',
         ],
         opts_id: [
@@ -1290,9 +1290,9 @@ export const CSV_SETS = [
       },
       {
         id: 27,
-        q: '建設業で「施工体制台帳」を作成する義務があるのはどれか。',
+        q: '建設業《けんせつぎょう》で「施工体制台帳《せこうたいせいだいちょう》」を作成《さくせい》する義務《ぎむ》があるのはどれか。',
         hint: "Di industri konstruksi, siapa yang berkewajiban membuat 'buku catatan sistem pelaksanaan' (施工体制台帳)?",
-        opts: ['設計事務所', '下請負業者', '発注者', '特定建設業許可を持つ元請業者'],
+        opts: ['設計事務所《せっけいじむしょ》', '下請負業者《したうけおいぎょうしゃ》', '発注者', '特定建設業許可を持つ元請業者'],
         opts_id: [
           'Kantor arsitek',
           'Subkontraktor',
@@ -1313,12 +1313,12 @@ export const CSV_SETS = [
       },
       {
         id: 29,
-        q: '建設現場における「産業廃棄物」の処理責任者は誰か。',
+        q: '建設現場《けんせつげんば》における「産業廃棄物《さんぎょうはいきぶつ》」の処理責任者《しょりせきにんしゃ》は誰か。',
         hint: "Siapa penanggung jawab pengelolaan 'limbah industri' (産業廃棄物) di site konstruksi?",
         opts: [
-          '下請負業者',
+          '下請負業者《したうけおいぎょうしゃ》',
           '元請負業者《現場の施工管理責任者》',
-          '設計事務所',
+          '設計事務所《せっけいじむしょ》',
           '地方自治体《市区町村》',
         ],
         opts_id: [
@@ -1332,7 +1332,7 @@ export const CSV_SETS = [
       },
       {
         id: 30,
-        q: '労働安全衛生法で、元方事業者の責任は？',
+        q: '労働安全衛生法《ろうどうあんぜんえいせいほう》で、元方事業者《もとかたじぎょうしゃ》の責任《せきにん》は？',
         hint: 'Tanggung jawab kontraktor utama (moto kata) menurut UU Keselamatan adalah?',
         opts: ['なし', '下請けの監督のみ', '任意', '関係労働者の安全確保'],
         opts_id: [
@@ -1358,7 +1358,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '冷媒配管の「サイトグラス」の役割は？',
+        q: '冷媒《れいばい》配管《はいかん》の「サイトグラス」の役割《やくわり》は？',
         hint: 'Peran sight glass pada pipa refrigerant adalah?',
         opts: ['圧力を測る', '漏れ確認', '冷媒の流れと水分を確認', '温度を測る'],
         opts_id: [
@@ -1372,7 +1372,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '冷媒配管の「オイルトラップ」の設置位置は？',
+        q: '冷媒《れいばい》配管《はいかん》の「オイルトラップ」の設置位置《せっちいち》は？',
         hint: 'Posisi pemasangan oil trap pada pipa refrigerant adalah?',
         opts: ['垂直上昇部', '水平配管の最低部', '天井', '任意'],
         opts_id: [
@@ -1386,7 +1386,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '断熱材の外被材として屋外でよく使うものは？',
+        q: '断熱材《だんねつざい》の外被材《がいひざい》として屋外《おくがい》でよく使うものは？',
         hint: 'Bahan pelindung luar insulasi yang sering dipakai di luar ruangan adalah?',
         opts: ['布', '紙', '薄鋼板', 'アルミガラス布'],
         opts_id: ['Kain', 'Kertas', 'Lembaran baja tipis', 'ALGC'],
@@ -1395,7 +1395,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '保温・断熱工事で「ロックウール」の特徴は？',
+        q: '保温《ほおん》・断熱工事《だんねつこうじ》で「ロックウール」の特徴《とくちょう》は？',
         hint: 'Ciri rock wool untuk insulasi panas/dingin adalah?',
         opts: ['耐火性が高い', '軽量すぎる', '吸湿性が高い', '導電性が高い'],
         opts_id: ['Tahan api tinggi', 'Terlalu ringan', 'Mudah menyerap air', 'Konduktif listrik'],
@@ -1404,7 +1404,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '安全靴のJIS規格で、先端の耐衝撃性能を示すのはどの部分か。',
+        q: '安全靴《あんぜんぐつ》のJIS規格《きかく》で、先端《せんたん》の耐衝撃性能《たいしょうげきせいのう》を示すのはどの部分《ぶぶん》か。',
         hint: 'Pada standar JIS safety shoes, bagian mana yang menunjukkan ketahanan ujung terhadap benturan?',
         opts: ['先芯《鉄先・樹脂先》', '靴紐', '靴底', '靴の色'],
         opts_id: ['Toe cap (baja / komposit)', 'Tali sepatu', 'Sol sepatu', 'Warna sepatu'],
@@ -1413,7 +1413,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '足場の組立時に使用する主な安全器具は？',
+        q: '足場《あしば》の組立《くみたて》時に使用《しよう》する主な安全器具《あんぜんきぐ》は？',
         hint: 'Alat keselamatan utama saat merakit scaffold adalah?',
         opts: ['手袋', 'フルハーネス', 'ヘルメットのみ', '安全帯《墜落防止》'],
         opts_id: ['Sarung tangan', 'Full harness', 'Hanya helm', 'Safety belt (fall protection)'],
@@ -1422,7 +1422,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '三相200Vの動力配電で、主に使用される用途は？',
+        q: '三相《さんそう》200Vの動力配電《どうりょくはいでん》で、主に使用《しよう》される用途《ようと》は？',
         hint: 'Aplikasi utama distribusi daya 3-fase 200V?',
         opts: ['家庭用コンセント', '携帯電話の充電', 'LED照明のみ', 'モーター・ポンプ・空調機器'],
         opts_id: [
@@ -1436,7 +1436,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '配管工事で「ソケット継手」の特徴は？',
+        q: '配管工事《はいかんこうじ》で「ソケット継手《つぎて》」の特徴《とくちょう》は？',
         hint: 'Ciri socket joint pada perpipaan adalah?',
         opts: ['ねじ式のみ', 'フランジと同じ', '溶接が必要', '挿入して接着または溶着'],
         opts_id: ['Hanya ulir', 'Sama dengan flange', 'Perlu las', 'Dimasukkan lalu dilem/difusi'],
@@ -1445,7 +1445,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '断熱工事の「仕上げテープ」の選び方で重要なことは？',
+        q: '断熱工事《だんねつこうじ》の「仕上《しあ》げテープ」の選び方で重要《じゅうよう》なことは？',
         hint: 'Hal penting saat memilih finishing tape insulasi adalah?',
         opts: ['安価なもの', '耐候性・耐熱性を確認', '色を合わせる', '短いもの'],
         opts_id: ['Yang murah', 'Cek ketahanan cuaca & panas', 'Menyesuaikan warna', 'Yang pendek'],
@@ -1454,7 +1454,7 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '足場点検簿の記入タイミングは？',
+        q: '足場点検簿《あしばてんけんぼ》の記入《きにゅう》タイミングは？',
         hint: 'Waktu pengisian buku inspeksi scaffold adalah?',
         opts: ['毎朝使用前', '任意', '作業終了後', '月1回'],
         opts_id: ['Setiap pagi sebelum pakai', 'Bebas', 'Setelah kerja selesai', '1x sebulan'],
@@ -1463,7 +1463,7 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '銅管のろう付け作業で使用するフラックスは？',
+        q: '銅管《どうかん》のろう付《づ》け作業《さぎょう》で使用《しよう》するフラックスは？',
         hint: 'Flux yang digunakan untuk brazing pipa tembaga adalah?',
         opts: ['塩化物系フラックス', '酸性フラックス', '樹脂系フラックス', '不要'],
         opts_id: ['Chloride-based flux', 'Acid flux', 'Resin-based flux', 'Tidak perlu'],
@@ -1472,7 +1472,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: 'パイプの「スウェージング工具」の用途は？',
+        q: 'パイプの「スウェージング工具《こうぐ》」の用途《ようと》は？',
         hint: 'Kegunaan swaging tool pada pipa adalah?',
         opts: ['切断する', '管端を細く加工する', '管を拡大する', '曲げる'],
         opts_id: [
@@ -1486,7 +1486,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '断熱工事の「外被材」として屋外で推奨されるものは？',
+        q: '断熱工事《だんねつこうじ》の「外被材《がいひざい》」として屋外《おくがい》で推奨《すいしょう》されるものは？',
         hint: 'Bahan outer cover insulasi yang direkomendasikan untuk outdoor adalah?',
         opts: ['アルミシートまたは薄鋼板', '布', '紙テープ', '発泡スチロール'],
         opts_id: ['Aluminium sheet or thin steel sheet', 'Kain', 'Kertas tape', 'Styrofoam'],
@@ -1495,7 +1495,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '作業現場で使用する「レベル」の主な用途は？',
+        q: '作業現場《さぎょうげんば》で使用《しよう》する「レベル」の主な用途《ようと》は？',
         hint: 'Kegunaan utama level di lokasi kerja adalah?',
         opts: ['角度を測る', '水平を確認する', '長さを測る', '垂直を確認する'],
         opts_id: ['Mengukur sudut', 'Mengecek horizontal', 'Mengukur panjang', 'Mengecek vertikal'],
@@ -1504,16 +1504,16 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '保温工事で「ベーパーバリア」の役割は？',
+        q: '保温工事《ほおんこうじ》で「ベーパーバリア」の役割《やくわり》は？',
         hint: 'Peran vapor barrier pada pekerjaan insulasi adalah?',
-        opts: ['結露を防ぐ', '強度を上げる', '熱を逃がさない', '見た目を良くする'],
+        opts: ['結露を防ぐ', '強度を上げる', '熱を逃がさない', '見た目《め》を良くする'],
         opts_id: ['Mencegah kondensasi', 'Meningkatkan kekuatan', 'Menahan panas', 'Mempercantik'],
         ans: 0,
         exp: 'Vapor barrier (ベーパーバリア) = lapisan penghalang uap air. Dipasang di antara pipa dingin dan insulasi. Fungsi: mencegah uap air dari udara meresap masuk ke insulasi, yang akan menyebabkan kondensasi, jamur, dan penurunan efisiensi termal insulasi.',
       },
       {
         id: 16,
-        q: '地下埋設配管工事で既設管を傷つけないための方法は？',
+        q: '地下埋設配管工事《ちかまいせつはいかんこうじ》で既設管《きせつかん》を傷《きず》つけないための方法《ほうほう》は？',
         hint: 'Cara menghindari kerusakan pipa existing saat penggalian bawah tanah adalah?',
         opts: ['重機で一気に掘る', '爆破', '手掘り', '無視する'],
         opts_id: [
@@ -1541,7 +1541,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: 'パイプベンダーの用途は？',
+        q: 'パイプベンダーの用途《ようと》は？',
         hint: 'Kegunaan pipe bender adalah?',
         opts: ['切断する', '拡張する', 'ねじを切る', '管を曲げる'],
         opts_id: ['Memotong', 'Melebarkan', 'Memotong ulir', 'Membengkokkan pipa'],
@@ -1550,7 +1550,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '冷媒配管の圧力試験後に必要な作業は？',
+        q: '冷媒《れいばい》配管《はいかん》の圧力試験《あつりょくしけん》後に必要《ひつよう》な作業《さぎょう》は？',
         hint: 'Pekerjaan yang diperlukan setelah pressure test pipa refrigerant adalah?',
         opts: ['真空引き', '乾燥窒素パージ', '放置', '水抜きのみ'],
         opts_id: [
@@ -1564,7 +1564,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: 'フルハーネス型墜落防止器具はいつ使用必須か？',
+        q: 'フルハーネス型《がた》墜落防止器具《ついらくぼうしきぐ》はいつ使用必須《しようひっす》か？',
         hint: 'Kapan full-harness wajib digunakan?',
         opts: ['1m以上の高所', '5m以上の高所', '室内のみ', '地面作業'],
         opts_id: ['Ketinggian >1m', 'Ketinggian >5m', 'Hanya indoor', 'Kerja di tanah'],
@@ -1585,7 +1585,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '建設現場における「工期」とはどういう意味か。',
+        q: '建設現場《けんせつげんば》における「工期《こうき》」とはどういう意味《いみ》か。',
         hint: "Apa arti '工期' (kōki) di site konstruksi?",
         opts: ['工事の費用', '工事を行う期間', '工事の品質基準', '作業員の人数'],
         opts_id: [
@@ -1599,7 +1599,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '建設現場の危険予知訓練の実施頻度は？',
+        q: '建設現場《けんせつげんば》の危険予知訓練《きけんよちくんれん》の実施頻度《じっしひんど》は？',
         hint: 'Frekuensi pelatihan KY di lokasi konstruksi adalah?',
         opts: ['毎朝の朝礼時', '任意', '年1回', '1ヶ月に1回'],
         opts_id: ['Setiap apel pagi', 'Bebas', '1x setahun', '1x sebulan'],
@@ -1608,7 +1608,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '作業環境測定結果の労働者への周知義務は？',
+        q: '作業環境測定結果《さぎょうかんきょうそくていけっか》の労働者《ろうどうしゃ》への周知義務《しゅうちぎむ》は？',
         hint: 'Kewajiban mensosialisasikan hasil pengukuran lingkungan kerja kepada pekerja adalah?',
         opts: ['なし', '結果の掲示又は説明', '任意', '1年後'],
         opts_id: ['Tidak ada', 'Memasang atau menjelaskan hasil', 'Sukarela', 'Setelah 1 tahun'],
@@ -1617,7 +1617,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '建設現場の「墜落防止ネット」の設置基準高さは？',
+        q: '建設現場《けんせつげんば》の「墜落防止《ついらくぼうし》ネット」の設置基準《せっちきじゅん》高《たか》さは？',
         hint: 'Standar ketinggian pemasangan safety net pencegahan jatuh adalah?',
         opts: ['5m以上', '作業面から下方2m以内', '地面から2m', '任意'],
         opts_id: ['5m ke atas', 'Maksimal 2m di bawah permukaan kerja', '2m dari tanah', 'Bebas'],
@@ -1626,7 +1626,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '建設業を営む者の資質の向上、建設工事の適正な施工を確保することを目的とした法律はどれか。',
+        q: '建設業《けんせつぎょう》を営《いとな》む者の資質《ししつ》の向上《こうじょう》、建設工事《けんせつこうじ》の適正《てきせい》な施工《せこう》を確保《かくほ》することを目的《もくてき》とした法律《ほうりつ》はどれか。',
         hint: 'Undang-undang yang bertujuan meningkatkan kualitas pelaku usaha konstruksi dan memastikan pelaksanaan konstruksi yang layak adalah?',
         opts: ['労働基準法', '労働安全衛生法', '建設業法', '建築基準法'],
         opts_id: [
@@ -1640,13 +1640,13 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '日本の「雇用保険」について正しいものはどれか。',
+        q: '日本《にほん》の「雇用保険《こようほけん》」について正《ただ》しいものはどれか。',
         hint: "Pernyataan yang benar tentang 'asuransi ketenagakerjaan' (雇用保険) di Jepang adalah?",
         opts: [
-          '保険料は労働者のみが払う',
-          '解雇・倒産等で失業した場合に給付を受けられる',
-          'けがをした場合に医療費を補償する',
-          '老後の年金を積み立てる保険',
+          '保険料《ほけんりょう》は労働者《ろうどうしゃ》のみが払う',
+          '解雇《かいこ》・倒産《とうさん》等で失業《しつぎょう》した場合《ばあい》に給付《きゅうふ》を受けられる',
+          'けがをした場合《ばあい》に医療費《いりょうひ》を補償《ほしょう》する',
+          '老後《ろうご》の年金《ねんきん》を積《つ》み立《た》てる保険《ほけん》',
         ],
         opts_id: [
           'Premi hanya dibayar oleh pekerja',
@@ -1659,7 +1659,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '建設現場の安全管理計画書の作成義務者は？',
+        q: '建設現場《けんせつげんば》の安全管理計画書《あんぜんかんりけいかくしょ》の作成義務者《さくせいぎむしゃ》は？',
         hint: 'Penanggung jawab penyusunan rencana manajemen keselamatan lokasi konstruksi adalah?',
         opts: ['作業員', '下請けのみ', '任意', '元請負業者'],
         opts_id: ['Pekerja', 'Hanya subkontraktor', 'Sukarela', 'Kontraktor utama'],
@@ -1668,13 +1668,13 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '建設工事で「防火区画貫通部処理」が必要な理由はどれか。',
+        q: '建設工事《けんせつこうじ》で「防火区画貫通部処理《ぼうかくかくかんつうぶしょり》」が必要《ひつよう》な理由《りゆう》はどれか。',
         hint: "Mengapa 'penanganan titik tembus kompartemen tahan api' (防火区画貫通部処理) diperlukan dalam konstruksi?",
         opts: [
-          '断熱性能を高めるため',
-          '騒音を防ぐため',
-          '水漏れを防ぐため',
-          '配管・ケーブルが防火区画を貫通する部分から火炎・煙が広がるのを防ぐため',
+          '断熱性能《だんねつせいのう》を高めるため',
+          '騒音《そうおん》を防ぐため',
+          '水漏《みずも》れを防ぐため',
+          '配管《はいかん》・ケーブルが防火区画《ぼうかくかく》を貫通《かんつう》する部分《ぶぶん》から火炎《かえん》・煙《けむり》が広がるのを防ぐため',
         ],
         opts_id: [
           'Untuk meningkatkan performa insulasi termal',
@@ -1687,13 +1687,13 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '建設現場での「短絡」とはどういう現象か。',
+        q: '建設現場《けんせつげんば》での「短絡《たんらく》」とはどういう現象《げんしょう》か。',
         hint: "Apa itu fenomena 'hubungan singkat' (短絡/tanraku) di site konstruksi?",
         opts: [
-          '電気が地面に漏れる現象',
-          '2本以上の電線が負荷を通さず接触する現象',
-          '電気が切れる現象',
-          '電気が人体を流れる現象',
+          '電気《でんき》が地面《じめん》に漏れる現象《げんしょう》',
+          '2本《ほん》以上《いじょう》の電線《でんせん》が負荷《ふか》を通さず接触《せっしょく》する現象《げんしょう》',
+          '電気《でんき》が切れる現象《げんしょう》',
+          '電気《でんき》が人体《じんたい》を流れる現象《げんしょう》',
         ],
         opts_id: [
           'Fenomena listrik bocor ke tanah',
@@ -1706,13 +1706,13 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '建設工事における「さく井工事」とはどのような工事か。',
+        q: '建設工事《けんせつこうじ》における「さく井工事《いこうじ》」とはどのような工事《こうじ》か。',
         hint: "Apa itu 'pekerjaan penggalian sumur' (さく井工事) dalam konstruksi?",
         opts: [
-          '鉄骨の骨組みを組み立てる工事',
-          '水道管を地面に埋設する工事',
-          '地面を掘削して井戸を作る工事',
-          '建物の基礎を固める工事',
+          '鉄骨《てっこつ》の骨組み《ほねぐみ》を組《く》み立《た》てる工事《こうじ》',
+          '水道管《すいどうかん》を地面《じめん》に埋設《まいせつ》する工事《こうじ》',
+          '地面《じめん》を掘削《くっさく》して井戸《いど》を作る工事《こうじ》',
+          '建物《たてもの》の基礎《きそ》を固める工事《こうじ》',
         ],
         opts_id: [
           'Merakit rangka baja struktural',
@@ -1725,7 +1725,7 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '朝礼のKYで「右OK？左OK？…」と言うのは？',
+        q: '朝礼《ちょうれい》のKYで「右《みぎ》OK？左《ひだり》OK？…」と言うのは？',
         hint: 'Mengatakan “Kanan OK? Kiri OK? …” di KY apel pagi adalah?',
         opts: ['安全確認', '休憩確認', '作業確認', '危険確認'],
         opts_id: [
@@ -1739,7 +1739,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '作業中の「騒音防止」で使用するPPEは？',
+        q: '作業中《さぎょうちゅう》の「騒音防止《そうおんぼうし》」で使用《しよう》するPPEは？',
         hint: 'PPE untuk pencegahan kebisingan saat kerja adalah?',
         opts: ['手袋', 'ヘルメット', '耳栓またはイヤーマフ', '安全靴'],
         opts_id: ['Sarung tangan', 'Helm', 'Earplug atau earmuff', 'Safety shoes'],
@@ -1748,7 +1748,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: 'ライフライン・設備工事に該当するものはどれか。',
+        q: 'ライフライン・設備工事《せつびこうじ》に該当《がいとう》するものはどれか。',
         hint: 'Yang termasuk pekerjaan lifeline & instalasi adalah?',
         opts: ['マンションを建てる', '水道管を設置する', '橋を造る', 'ダムを建設する'],
         opts_id: [
@@ -1762,7 +1762,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '建設業法で「下請代金の支払期限」の規定として正しいものはどれか。',
+        q: '建設業法《けんせつぎょうほう》で「下請代金《したうけだいきん》の支払期限《しはらいきげん》」の規定《きてい》として正《ただ》しいものはどれか。',
         hint: "Ketentuan yang benar tentang 'batas waktu pembayaran tagihan subkontraktor' menurut Construction Business Act adalah?",
         opts: ['検収後30日以内', '検収後60日以内', '検収後50日以内', '検収後90日以内'],
         opts_id: [
@@ -1776,7 +1776,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '職場におけるコミュニケーションの重要性として正しいものは？',
+        q: '職場《しょくば》におけるコミュニケーションの重要性《じゅうようせい》として正《ただ》しいものは？',
         hint: 'Pentingnya komunikasi di tempat kerja yang benar adalah?',
         opts: ['時間を節約する', '任意', '誤解を防ぎ、安全を確保する', '記録を取る'],
         opts_id: [
@@ -1790,7 +1790,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '作業環境測定の実施義務がある有害物質は？',
+        q: '作業環境測定《さぎょうかんきょうそくてい》の実施義務《じっしぎむ》がある有害物質《ゆうがいぶっしつ》は？',
         hint: 'Zat berbahaya yang wajib diukur lingkungan kerjanya adalah?',
         opts: ['有機溶剤', '任意', '水', '一般の粉じん'],
         opts_id: ['Pelarut organik', 'Sukarela', 'Air', 'Debu biasa'],
@@ -1799,7 +1799,7 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '緊急時の通報先として正しいものは？',
+        q: '緊急時《きんきゅうじ》の通報先《つうほうさき》として正《ただ》しいものは？',
         hint: 'Tempat pelaporan darurat yang benar adalah?',
         opts: ['119番《消防・救急》', '任意', '作業員同士', '監督員のみ'],
         opts_id: ['Nomor 119 (pemadam & ambulans)', 'Sukarela', 'Antar pekerja', 'Hanya pengawas'],
@@ -1817,7 +1817,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '安全衛生教育の実施頻度として正しいものは？',
+        q: '安全衛生教育《あんぜんえいせいきょういく》の実施頻度《じっしひんど》として正《ただ》しいものは？',
         hint: 'Frekuensi pelaksanaan pendidikan keselamatan & kesehatan yang benar adalah?',
         opts: ['任意', '月1回', '年1回', '作業開始時及び変更時'],
         opts_id: ['Sukarela', '1x sebulan', '1x setahun', 'Saat mulai kerja dan saat perubahan'],
@@ -1826,13 +1826,13 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '建設現場で「ヒヤリ・ハット」とはどういう意味か。',
+        q: '建設現場《けんせつげんば》で「ヒヤリ・ハット」とはどういう意味《いみ》か。',
         hint: "Apa arti 'near miss' (ヒヤリ・ハット) di site konstruksi?",
         opts: [
-          '実際に起きた重大事故のこと',
-          'ヒヤリとしたりハッとしたりした「ヒヤリハット」体験',
-          '軽微なケガのこと',
-          '安全教育のプログラムの名前',
+          '実際《じっさい》に起きた重大事故《じゅうだいじこ》のこと',
+          'ヒヤリとしたりハッとしたりした「ヒヤリハット」体験《たいけん》',
+          '軽微《けいび》なケガのこと',
+          '安全教育《あんぜんきょういく》のプログラムの名前《なまえ》',
         ],
         opts_id: [
           'Kecelakaan serius yang benar-benar terjadi',
@@ -1845,7 +1845,7 @@ export const CSV_SETS = [
       },
       {
         id: 21,
-        q: '建設工事の流れとして正しい順番はどれか。',
+        q: '建設工事《けんせつこうじ》の流れとして正《ただ》しい順番《じゅんばん》はどれか。',
         hint: 'Urutan alur konstruksi yang benar adalah?',
         opts: ['施工→設計→発注', '発注→施工→設計', '設計→発注→施工', '発注→設計→施工'],
         opts_id: [
@@ -1859,7 +1859,7 @@ export const CSV_SETS = [
       },
       {
         id: 22,
-        q: '5S活動の最終目標は？',
+        q: '5S活動《かつどう》の最終目標《さいしゅうもくひょう》は？',
         hint: 'Tujuan akhir 5S adalah?',
         opts: ['安全で快適な職場環境の維持', '掃除だけ', '作業効率だけを上げる', '記録を取る'],
         opts_id: [
@@ -1873,13 +1873,13 @@ export const CSV_SETS = [
       },
       {
         id: 23,
-        q: 'ガス事業法の主な目的として正しいものはどれか。',
+        q: 'ガス事業法《じぎょうほう》の主な目的《もくてき》として正《ただ》しいものはどれか。',
         hint: 'Tujuan utama Gas Business Act (ガス事業法) yang benar adalah?',
         opts: [
-          'ガスの価格を決めること',
-          'ガス工事業者の数を増やすこと',
-          'ガスの安全供給と保安の確保',
-          'ガス管の材料基準を決めること',
+          'ガスの価格《かかく》を決めること',
+          'ガス工事業者《こうじぎょうしゃ》の数《かず》を増やすこと',
+          'ガスの安全供給《あんぜんきょうきゅう》と保安《ほあん》の確保《かくほ》',
+          'ガス管《かん》の材料基準《ざいりょうきじゅん》を決めること',
         ],
         opts_id: [
           'Menentukan harga gas',
@@ -1901,13 +1901,13 @@ export const CSV_SETS = [
       },
       {
         id: 25,
-        q: '建設工事で使う「設計図書」に含まれるものはどれか。',
+        q: '建設工事《けんせつこうじ》で使う「設計図書《せっけいとしょ》」に含まれるものはどれか。',
         hint: "Yang termasuk dalam 'dokumen desain' (設計図書) yang digunakan dalam konstruksi adalah?",
         opts: [
-          '施工体制台帳と安全管理計画',
-          '設計図面と仕様書',
-          '労働者名簿と賃金台帳',
-          '請求書と領収書',
+          '施工体制台帳《せこうたいせいだいちょう》と安全管理計画《あんぜんかんりけいかく》',
+          '設計図面《せっけいずめん》と仕様書《しようしょ》',
+          '労働者名簿《ろうどうしゃめいぼ》と賃金台帳《ちんぎんだいちょう》',
+          '請求書《せいきゅうしょ》と領収書《りょうしゅうしょ》',
         ],
         opts_id: [
           'Buku sistem pelaksanaan dan rencana keselamatan',
@@ -1923,9 +1923,9 @@ export const CSV_SETS = [
         q: '建設現場での「墜落制止用器具」《安全帯》のフックは、どの位置に取り付けるべきか。',
         hint: 'Di posisi mana seharusnya hook dari alat pencegah jatuh (安全帯) dipasang?',
         opts: [
-          '腰より低い位置',
-          '腰と同じ高さの位置',
-          'どこでも構わない',
+          '腰《こし》より低い位置《いち》',
+          '腰《こし》と同じ高さの位置《いち》',
+          'どこでも構《かま》わない',
           '腰より高い位置《頭上のアンカーポイント》',
         ],
         opts_id: [
@@ -1939,7 +1939,7 @@ export const CSV_SETS = [
       },
       {
         id: 27,
-        q: '5S活動の「可視化」の具体的な方法は？',
+        q: '5S活動《かつどう》の「可視化《かしか》」の具体的《ぐたいてき》な方法《ほうほう》は？',
         hint: 'Metode konkret “visualisasi” dalam 5S adalah?',
         opts: ['物を隠す', '記録を取る', '掃除だけ', 'ラベルや色分けで場所を明確にする'],
         opts_id: [
@@ -1953,7 +1953,7 @@ export const CSV_SETS = [
       },
       {
         id: 28,
-        q: '緊急時の避難経路の標識はどのような色が使われるか。',
+        q: '緊急時《きんきゅうじ》の避難経路《ひなんけいろ》の標識《ひょうしき》はどのような色《いろ》が使われるか。',
         hint: 'Warna tanda jalur evakuasi darurat adalah?',
         opts: ['赤', '黄', '緑', '青'],
         opts_id: ['Merah', 'Kuning', 'Hijau', 'Biru'],
@@ -1962,13 +1962,13 @@ export const CSV_SETS = [
       },
       {
         id: 29,
-        q: '建設現場で「フォークリフト」が荷物を運ぶ際の安全上の注意点として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》で「フォークリフト」が荷物《にもつ》を運ぶ際の安全上《あんぜんじょう》の注意点《ちゅういてん》として正《ただ》しいものはどれか。',
         hint: "Hal yang benar mengenai keselamatan saat 'forklift' mengangkut barang di site konstruksi adalah?",
         opts: [
-          'フォークは常に高く上げて走行する',
-          '荷物が見えれば歩行者との距離は気にしなくてよい',
-          'フォークリフトの操作に資格は必要ない',
-          '走行時はフォークを地面から15〜30cm上げ、後傾にして走行する',
+          'フォークは常《つね》に高《たか》く上《あ》げて走行《そうこう》する',
+          '荷物《にもつ》が見えれば歩行者《ほこうしゃ》との距離《きょり》は気にしなくてよい',
+          'フォークリフトの操作《そうさ》に資格《しかく》は必要《ひつよう》ない',
+          '走行時《そうこうじ》はフォークを地面《じめん》から15〜30cm上《あ》げ、後傾《こうけい》にして走行《そうこう》する',
         ],
         opts_id: [
           'Fork selalu dinaikkan tinggi saat bergerak',
@@ -1981,13 +1981,13 @@ export const CSV_SETS = [
       },
       {
         id: 30,
-        q: '建設現場で「衛生器具設備工事」とはどのような工事か。',
+        q: '建設現場《けんせつげんば》で「衛生器具設備工事《えいせいきぐせつびこうじ》」とはどのような工事《こうじ》か。',
         hint: "Apa itu 'pekerjaan instalasi sanitasi' (衛生器具設備工事) di site konstruksi?",
         opts: [
-          '消火器やスプリンクラーを取り付ける工事',
-          '空調設備を設置する工事',
-          'トイレ・洗面台などの衛生器具を設置する工事',
-          '電気コンセントや照明を設置する工事',
+          '消火器《しょうかき》やスプリンクラーを取《と》り付《つ》ける工事《こうじ》',
+          '空調設備《くうちょうせつび》を設置《せっち》する工事《こうじ》',
+          'トイレ・洗面台《せんめんだい》などの衛生器具《えいせいきぐ》を設置《せっち》する工事《こうじ》',
+          '電気《でんき》コンセントや照明《しょうめい》を設置《せっち》する工事《こうじ》',
         ],
         opts_id: [
           'Pemasangan alat pemadam kebakaran dan sprinkler',
@@ -2012,7 +2012,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '硬質ウレタンフォームの主な用途は？',
+        q: '硬質《こうしつ》ウレタンフォームの主な用途《ようと》は？',
         hint: 'Kegunaan utama rigid polyurethane foam adalah?',
         opts: ['耐火材', '断熱材《吹付け》', '塗料', '接着剤'],
         opts_id: ['Bahan tahan api', 'Insulasi semprot', 'Cat', 'Lem'],
@@ -2021,7 +2021,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '配管の「フランジ面合わせ」の基準は？',
+        q: '配管《はいかん》の「フランジ面合《めんあ》わせ」の基準《きじゅん》は？',
         hint: 'Standar alignment muka flange adalah?',
         opts: ['0.5mm以内の平行', '2mm以内', '任意', '1mm以内'],
         opts_id: ['Paralel maksimal 0.5mm', 'Maksimal 2mm', 'Bebas', 'Maksimal 1mm'],
@@ -2030,7 +2030,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: 'パイプの「ベベル加工」の目的は？',
+        q: 'パイプの「ベベル加工《かこう》」の目的《もくてき》は？',
         hint: 'Tujuan bevel processing pada pipa adalah?',
         opts: ['ねじを切る', '管を美しくする', '溶接時の溶け込みを良くする', '切断を速く'],
         opts_id: [
@@ -2044,7 +2044,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '銅管の「フレアー加工」工具の名前は？',
+        q: '銅管《どうかん》の「フレアー加工《かこう》」工具《こうぐ》の名前《なまえ》は？',
         hint: 'Nama alat untuk flare processing pipa tembaga adalah?',
         opts: ['フレアー工具', 'パイプレンチ', 'ねじ切機', 'パイプカッター'],
         opts_id: ['Flaring tool', 'Pipe wrench', 'Threading machine', 'Pipe cutter'],
@@ -2053,7 +2053,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: 'ヘルメットの点検は一般的にどのタイミングで行うべきか。',
+        q: 'ヘルメットの点検《てんけん》は一般的《いっぱんてき》にどのタイミングで行うべきか。',
         hint: 'Kapan sebaiknya helm keselamatan diperiksa?',
         opts: ['故障してから', '使用前・使用後に毎回', '点検不要', '年に1回だけ'],
         opts_id: [
@@ -2067,7 +2067,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '銅管冷媒配管の曲げ半径の目安は？',
+        q: '銅管《どうかん》冷媒配管《れいばいはいかん》の曲《ま》げ半径《はんけい》の目安《めやす》は？',
         hint: 'Radius minimum pembengkokan pipa tembaga refrigerant adalah?',
         opts: ['外径の4倍', '外径の1倍', '直線のみ', '任意'],
         opts_id: ['4x diameter luar', '1x diameter luar', 'Hanya lurus', 'Bebas'],
@@ -2076,7 +2076,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '足場板の点検で確認すべき不具合は？',
+        q: '足場板《あしばいた》の点検《てんけん》で確認《かくにん》すべき不具合《ふぐあい》は？',
         hint: 'Cacat yang harus dicek pada plank scaffold adalah?',
         opts: ['ひび割れ・腐食・変形', '軽い汚れ', '色褪せ', '長さの違い'],
         opts_id: ['Retak, korosi, atau deformasi', 'Kotoran ringan', 'Pudar warna', 'Beda panjang'],
@@ -2085,7 +2085,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '配管用炭素鋼鋼管のねじ接合方法は、主にどのサイズに採用されているか。',
+        q: '配管用炭素鋼鋼管《はいかんようたんそこうこうかん》のねじ接合方法《せつごうほうほう》は、主にどのサイズに採用《さいよう》されているか。',
         hint: 'Metode sambungan ulir untuk pipa baja karbon biasanya dipakai pada ukuran berapa?',
         opts: ['100A以上', '200A以上', '15A以下', '15A～100A'],
         opts_id: ['100A ke atas', '200A ke atas', 'Di bawah 15A', '15A sampai 100A'],
@@ -2094,7 +2094,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '銅管の「キャップillary」継手のろう付け長さの目安は？',
+        q: '銅管《どうかん》の「キャップillary」継手《つぎて》のろう付《づ》け長《なが》さの目安《めやす》は？',
         hint: 'Panjang brazing untuk capillary fitting pada pipa tembaga adalah?',
         opts: ['5mm', '管径の1.5倍程度', '10mm', '任意'],
         opts_id: ['5mm', 'Sekitar 1.5× diameter pipa', '10mm', 'Bebas'],
@@ -2103,7 +2103,7 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '断熱工事で「サポートピン」の設置間隔は？',
+        q: '断熱工事《だんねつこうじ》で「サポートピン」の設置間隔《せっちかんかく》は？',
         hint: 'Jarak pemasangan support pin pada insulasi adalah?',
         opts: ['毎1～1.5m', '毎10m', '5m固定', '任意'],
         opts_id: ['Setiap 1–1.5m', 'Setiap 10m', '5m tetap', 'Bebas'],
@@ -2121,7 +2121,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '給水管や給湯管の水圧試験を行う機器は？',
+        q: '給水管《きゅうすいかん》や給湯管《きゅうとうかん》の水圧試験《すいあつしけん》を行う機器《きき》は？',
         hint: 'Alat untuk water pressure test pada pipa air bersih/air panas adalah?',
         opts: ['電圧計', 'クランプメーター', '水圧試験ポンプ', 'テスター'],
         opts_id: ['Voltmeter', 'Clamp meter', 'Hydrostatic test pump', 'Tester'],
@@ -2130,7 +2130,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '配管の「水圧試験」時の安全距離は？',
+        q: '配管《はいかん》の「水圧試験《すいあつしけん》」時の安全距離《あんぜんきょり》は？',
         hint: 'Jarak aman saat water pressure test pada pipa adalah?',
         opts: ['任意', '試験圧の1.5倍以上で作業員を退避', '5m', '1m'],
         opts_id: ['Bebas', 'Evakuasi pekerja minimal 1.5× tekanan uji', '5m', '1m'],
@@ -2148,7 +2148,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '冷温水配管の気密試験で一般的に使用する圧力は？',
+        q: '冷温水配管《れいおんすいはいかん》の気密試験《きみつしけん》で一般的《いっぱんてき》に使用《しよう》する圧力《あつりょく》は？',
         hint: 'Tekanan yang umum digunakan untuk uji kebocoran pipa air dingin/panas?',
         opts: ['常用圧力と同じ', '常用圧力の0.5倍', '常用圧力の5倍', '常用圧力の1.5倍'],
         opts_id: [
@@ -2162,7 +2162,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '保温材の「気密テープ」の重なり幅の目安は？',
+        q: '保温材《ほおんざい》の「気密《きみつ》テープ」の重《かさ》なり幅《はば》の目安《めやす》は？',
         hint: 'Lebar tumpang tindih tape kedap udara insulasi adalah?',
         opts: ['10mm', '50mm以上', '5mm', '任意'],
         opts_id: ['10mm', 'Minimal 50mm', '5mm', 'Bebas'],
@@ -2185,7 +2185,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '保温工事で「エンボス加工アルミシート」の利点は？',
+        q: '保温工事《ほおんこうじ》で「エンボス加工《かこう》アルミシート」の利点《りてん》は？',
         hint: 'Keunggulan embossed aluminium sheet adalah?',
         opts: ['滑り止め効果と強度向上', '柔軟性がない', '軽量', '安価'],
         opts_id: ['Efek anti-slip & meningkatkan kekuatan', 'Tidak fleksibel', 'Ringan', 'Murah'],
@@ -2194,7 +2194,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '配管の「仮支持」の目的は？',
+        q: '配管《はいかん》の「仮支持《かりしじ》」の目的《もくてき》は？',
         hint: 'Tujuan temporary support pada pipa adalah?',
         opts: ['位置を保持し、応力を防ぐ', '切断', '最終固定', '曲げ'],
         opts_id: [
@@ -2208,7 +2208,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: 'スプリンクラーヘッドの標準取付間隔は、一般的に何メートル以下か。',
+        q: 'スプリンクラーヘッドの標準《ひょうじゅん》取付《とりつけ》間隔《かんかく》は、一般的《いっぱんてき》に何メートル以下《いか》か。',
         hint: 'Jarak standar antar sprinkler head umumnya maksimal berapa meter?',
         opts: ['5.0m 以下', '2.3m 以下', '1.7m 以下', '10.0m 以下'],
         opts_id: ['Maks 5.0m', 'Maks 2.3m', 'Maks 1.7m', 'Maks 10.0m'],
@@ -2229,13 +2229,13 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '建設現場で「感電」を防ぐための基本的な対策として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》で「感電《かんでん》」を防ぐための基本的《きほんてき》な対策《たいさく》として正《ただ》しいものはどれか。',
         hint: 'Tindakan dasar yang benar untuk mencegah sengatan listrik (感電/kanden) di site konstruksi adalah?',
         opts: [
-          '電動工具を濡れた手で使う',
-          '電動工具を使う前に絶縁抵抗を確認する',
-          '電気工事は誰でも行ってよい',
-          '濡れた場所でも電動工具を使ってよい',
+          '電動工具《でんどうこうぐ》を濡《ぬ》れた手で使う',
+          '電動工具《でんどうこうぐ》を使う前に絶縁抵抗《ぜつえんていこう》を確認《かくにん》する',
+          '電気工事《でんきこうじ》は誰でも行ってよい',
+          '濡《ぬ》れた場所《ばしょ》でも電動工具《でんどうこうぐ》を使ってよい',
         ],
         opts_id: [
           'Menggunakan alat listrik dengan tangan basah',
@@ -2248,7 +2248,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '産業廃棄物処理法で、マニフェストの保存期間は？',
+        q: '産業廃棄物処理法《さんぎょうはいきぶつしょりほう》で、マニフェストの保存期間《ほぞんきかん》は？',
         hint: 'Masa simpan manifest limbah industri menurut UU adalah?',
         opts: ['5 年', '任意', '10 年', '1 年'],
         opts_id: ['5 tahun', 'Sukarela', '10 tahun', '1 tahun'],
@@ -2257,7 +2257,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '土木工事に該当するものはどれか。',
+        q: '土木工事《どぼくこうじ》に該当《がいとう》するものはどれか。',
         hint: 'Yang termasuk pekerjaan sipil (土木工事) adalah?',
         opts: ['住宅を建てる', 'エアコンを設置する', '道路を造る', '消火器を設置する'],
         opts_id: [
@@ -2271,7 +2271,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '建設現場で「マンホール内の酸素濃度」が低い場合に注意すべき危険はどれか。',
+        q: '建設現場《けんせつげんば》で「マンホール内《ない》の酸素濃度《さんそのうど》」が低い場合《ばあい》に注意《ちゅうい》すべき危険《きけん》はどれか。',
         hint: 'Bahaya yang harus diwaspadai ketika kadar oksigen di dalam manhole rendah adalah?',
         opts: ['火災の危険', '騒音による聴覚障害', '酸素欠乏症による意識消失', '感電の危険'],
         opts_id: [
@@ -2285,13 +2285,13 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '建設工事で「工事現場の近隣への配慮」として正しいものはどれか。',
+        q: '建設工事《けんせつこうじ》で「工事現場《こうじげんば》の近隣《きんりん》への配慮《はいりょ》」として正《ただ》しいものはどれか。',
         hint: "Apa yang benar mengenai 'kepedulian terhadap lingkungan sekitar site konstruksi' dalam pekerjaan konstruksi?",
         opts: [
-          '工事中は近隣への配慮は不要である',
-          '騒音や振動は工事中であれば問題ない',
-          '粉塵は風が吹けば自然に解決する',
-          '事前説明・防音シート・散水など近隣への影響を最小限にする対策が必要',
+          '工事中《こうじちゅう》は近隣《きんりん》への配慮《はいりょ》は不要《ふよう》である',
+          '騒音《そうおん》や振動《しんどう》は工事中《こうじちゅう》であれば問題《もんだい》ない',
+          '粉塵《ふんじん》は風《かぜ》が吹けば自然《しぜん》に解決《かいけつ》する',
+          '事前説明《じぜんせつめい》・防音《ぼうおん》シート・散水《さんすい》など近隣《きんりん》への影響《えいきょう》を最小限《さいしょうげん》にする対策《たいさく》が必要《ひつよう》',
         ],
         opts_id: [
           'Selama konstruksi, kepedulian terhadap lingkungan sekitar tidak diperlukan',
@@ -2304,13 +2304,13 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '道路上で作業する場合の注意事項として、不適切なものは？',
+        q: '道路上《どうろじょう》で作業《さぎょう》する場合《ばあい》の注意事項《ちゅういじこう》として、不適切《ふてきせつ》なものは？',
         hint: 'Hal yang tidak tepat saat bekerja di jalan raya adalah?',
         opts: [
-          '作業区域を柵で囲む',
-          '交通誘導員を配置する',
-          '夜間作業時に照明を十分に確保しない',
-          '合図を確認する',
+          '作業区域《さぎょうくいき》を柵《さく》で囲む',
+          '交通誘導員《こうつうゆうどういん》を配置《はいち》する',
+          '夜間作業時《やかんさぎょうじ》に照明《しょうめい》を十分《じゅうぶん》に確保《かくほ》しない',
+          '合図《あいず》を確認《かくにん》する',
         ],
         opts_id: [
           'Mengelilingi area kerja dengan pagar',
@@ -2323,13 +2323,13 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '建設工事で「既成杭工法」の特徴として正しいものはどれか。',
+        q: '建設工事《けんせつこうじ》で「既成杭工法《きせいくいこうほう》」の特徴《とくちょう》として正《ただ》しいものはどれか。',
         hint: "Karakteristik yang benar dari 'metode tiang pancang pabrikasi' (既成杭工法) adalah?",
         opts: [
-          '現場でコンクリートを流し込んで杭を作る',
-          '工場で製作した杭を現場で打ち込む',
-          '既存の杭を再利用する',
-          '杭を使わず地盤を改良する',
+          '現場《げんば》でコンクリートを流《なが》し込んで杭《くい》を作る',
+          '工場《こうじょう》で製作《せいさく》した杭《くい》を現場《げんば》で打《う》ち込む',
+          '既存《きそん》の杭《くい》を再利用《さいりよう》する',
+          '杭《くい》を使わず地盤《じばん》を改良《かいりょう》する',
         ],
         opts_id: [
           'Membuat tiang dengan menuang beton di site',
@@ -2342,7 +2342,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '建設現場の産業廃棄物で石綿含有建材はどの分類か。',
+        q: '建設現場《けんせつげんば》の産業廃棄物《さんぎょうはいきぶつ》で石綿含有建材《いしわたがんゆうけんざい》はどの分類《ぶんるい》か。',
         hint: 'Bahan bangunan mengandung asbes termasuk limbah industri kategori apa?',
         opts: ['特別管理産業廃棄物', '一般産業廃棄物', '一般廃棄物', '放射性廃棄物'],
         opts_id: [
@@ -2365,13 +2365,13 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '作業開始前の「リスクアセスメント」の目的は？',
+        q: '作業開始前《さぎょうかいしまえ》の「リスクアセスメント」の目的《もくてき》は？',
         hint: 'Tujuan risk assessment sebelum mulai kerja adalah?',
         opts: [
-          '工具の数を数える',
-          '作業を記録する',
-          '潜在的な危険を事前に評価',
-          '休憩時間を決める',
+          '工具《こうぐ》の数《かず》を数える',
+          '作業《さぎょう》を記録《きろく》する',
+          '潜在的《せんざいてき》な危険《きけん》を事前《じぜん》に評価《ひょうか》',
+          '休憩時間《きゅうけいじかん》を決める',
         ],
         opts_id: [
           'Menghitung alat',
@@ -2384,9 +2384,9 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '建設工事の「安全衛生計画」を作成する義務があるのはどれか。',
+        q: '建設工事《けんせつこうじ》の「安全衛生計画《あんぜんえいせいけいかく》」を作成《さくせい》する義務《ぎむ》があるのはどれか。',
         hint: "Siapa yang berkewajiban membuat 'rencana keselamatan & kesehatan' (安全衛生計画) untuk konstruksi?",
-        opts: ['下請業者', '発注者', '設計事務所', '元請業者《施工管理者》'],
+        opts: ['下請業者', '発注者', '設計事務所《せっけいじむしょ》', '元請業者《施工管理者》'],
         opts_id: [
           'Subkontraktor',
           'Pemberi proyek',
@@ -2398,7 +2398,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '作業環境の照度測定の基準値は？',
+        q: '作業環境《さぎょうかんきょう》の照度測定《しょうどそくてい》の基準値《きじゅんち》は？',
         hint: 'Nilai standar pengukuran iluminasi lingkungan kerja adalah?',
         opts: ['なし', '100ルクス固定', '作業内容により300～750ルクス', '任意'],
         opts_id: ['Tidak ada', '100 lux tetap', '300–750 lux tergantung jenis kerja', 'Bebas'],
@@ -2407,7 +2407,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '有給休暇の取得率を向上させるために、事業主が講ずべき措置として正しいものは？',
+        q: '有給休暇《ゆうきゅうきゅうか》の取得率《しゅとくりつ》を向上《こうじょう》させるために、事業主《じぎょうぬし》が講ずべき措置《そち》として正《ただ》しいものは？',
         hint: 'Langkah yang benar bagi pengusaha untuk meningkatkan tingkat pengambilan cuti tahunan adalah?',
         opts: ['取得を禁止する', '取得日数を減らす', '計画的付与制度を導入する', '罰則を設ける'],
         opts_id: [
@@ -2421,7 +2421,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '作業開始前に毎日行われる、すべての作業員が集まるミーティングを何というか。',
+        q: '作業開始前《さぎょうかいしまえ》に毎日《まいにち》行われる、すべての作業員《さぎょういん》が集まるミーティングを何というか。',
         hint: 'Pertemuan pagi di mana semua pekerja berkumpul setiap hari sebelum mulai kerja disebut apa?',
         opts: ['5S活動', '安全教育', 'KY活動', '朝礼'],
         opts_id: ['Kegiatan 5S', 'Pendidikan keselamatan', 'Kegiatan KY', 'Apel pagi'],
@@ -2430,13 +2430,13 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '建設業法の主な目的はどれか。',
+        q: '建設業法《けんせつぎょうほう》の主な目的《もくてき》はどれか。',
         hint: 'Tujuan utama Construction Business Act (建設業法) adalah?',
         opts: [
-          '建設工事の費用を決めること',
-          '建設業を営む者の資質の向上と工事の適正施工の確保',
-          '建設作業員の給与を定めること',
-          '建設現場の安全基準のみを定めること',
+          '建設工事《けんせつこうじ》の費用《ひよう》を決めること',
+          '建設業《けんせつぎょう》を営《いとな》む者の資質《ししつ》の向上《こうじょう》と工事《こうじ》の適正施工《てきせいせこう》の確保《かくほ》',
+          '建設作業員《けんせつさぎょういん》の給与《きゅうよ》を定めること',
+          '建設現場《けんせつげんば》の安全基準《あんぜんきじゅん》のみを定めること',
         ],
         opts_id: [
           'Menentukan biaya konstruksi',
@@ -2449,7 +2449,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '建設現場で使用される「指差呼称」の正式名称は？',
+        q: '建設現場《けんせつげんば》で使用《しよう》される「指差呼称《ゆびさしこしょう》」の正式名称《せいしきめいしょう》は？',
         hint: 'Nama resmi pointing & calling yang digunakan di lokasi konstruksi adalah?',
         opts: ['朝礼', '指差確認', '安全確認', 'KY活動'],
         opts_id: ['Apel pagi', 'Pointing confirmation', 'Safety check', 'Kegiatan KY'],
@@ -2458,9 +2458,9 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '朝礼の「KY活動」の目標は？',
+        q: '朝礼《ちょうれい》の「KY活動《かつどう》」の目標《もくひょう》は？',
         hint: 'Tujuan kegiatan KY di apel pagi adalah?',
-        opts: ['挨拶だけ', '作業を早く終わらせる', '危険を予測し対策を立てる', '休憩を取る'],
+        opts: ['挨拶だけ', '作業を早く終わらせる', '危険を予測し対策を立てる', '休憩《きゅうけい》を取る'],
         opts_id: [
           'Hanya sapaan',
           'Menyelesaikan kerja cepat',
@@ -2472,7 +2472,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '建設業法で、下請負契約の締結時に明示すべき事項は？',
+        q: '建設業法《けんせつぎょうほう》で、下請負契約《したうけおいけいやく》の締結時《ていけつじ》に明示《めいじ》すべき事項《じこう》は？',
         hint: 'Hal yang wajib dicantumkan saat penandatanganan kontrak subkontraktor menurut UU Konstruksi adalah?',
         opts: ['口頭のみ', '作業内容・工期・代金', 'すべて任意', 'なし'],
         opts_id: ['Hanya lisan', 'Isi pekerjaan, jadwal, & harga', 'Semua sukarela', 'Tidak ada'],
@@ -2481,13 +2481,13 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '労働基準法で「最低賃金」について正しいものはどれか。',
+        q: '労働基準法《ろうどうきじゅんほう》で「最低賃金《さいていちんぎん》」について正《ただ》しいものはどれか。',
         hint: "Pernyataan yang benar tentang 'upah minimum' (最低賃金) menurut Labor Standards Act adalah?",
         opts: [
-          '全国一律で同じ金額が定められている',
-          '使用者と労働者が自由に決める',
-          '最低賃金より低い賃金での雇用契約は無効',
-          '外国人労働者には最低賃金は適用されない',
+          '全国一律《ぜんこくいちりつ》で同じ金額《きんがく》が定められている',
+          '使用者《しようしゃ》と労働者《ろうどうしゃ》が自由《じゆう》に決める',
+          '最低賃金《さいていちんぎん》より低い賃金《ちんぎん》での雇用契約《こようけいやく》は無効《むこう》',
+          '外国人労働者《がいこくじんろうどうしゃ》には最低賃金《さいていちんぎん》は適用《てきよう》されない',
         ],
         opts_id: [
           'Jumlahnya sama di seluruh Jepang',
@@ -2500,7 +2500,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '5S活動の「標準化」の次の段階は？',
+        q: '5S活動《かつどう》の「標準化《ひょうじゅんか》」の次の段階《だんかい》は？',
         hint: 'Tahap setelah standardisasi dalam 5S adalah?',
         opts: ['整理', '可視化', '維持《しつけ》', '清掃'],
         opts_id: ['Seiri', 'Visualisasi', 'Pemeliharaan (disiplin)', 'Seisou'],
@@ -2509,7 +2509,7 @@ export const CSV_SETS = [
       },
       {
         id: 21,
-        q: '5S活動の「清潔」の次の段階である「躾」の主な活動は？',
+        q: '5S活動《かつどう》の「清潔《せいけつ》」の次の段階《だんかい》である「躾《しつけ》」の主な活動《かつどう》は？',
         hint: 'Langkah utama “Shituke” setelah Seiketsu dalam 5S adalah?',
         opts: ['ルールを守る習慣を徹底する', '掃除をする', '不要物を捨てる', '定位置を決める'],
         opts_id: [
@@ -2523,7 +2523,7 @@ export const CSV_SETS = [
       },
       {
         id: 22,
-        q: '建設現場で「掘削深さ1.5m以上」の作業で、土砂崩れを防ぐために必要な措置はどれか。',
+        q: '建設現場《けんせつげんば》で「掘削《くっさく》深《ふか》さ1.5m以上《いじょう》」の作業《さぎょう》で、土砂崩《どしゃくず》れを防ぐために必要《ひつよう》な措置《そち》はどれか。',
         hint: 'Untuk penggalian sedalam 1.5m atau lebih di site konstruksi, tindakan apa yang diperlukan untuk mencegah longsoran tanah?',
         opts: ['換気を行う', '照明を設置する', '消火器を置く', '土留め《矢板など》を設置する'],
         opts_id: [
@@ -2537,7 +2537,7 @@ export const CSV_SETS = [
       },
       {
         id: 23,
-        q: '5S活動の「清潔」とは何を意味するか。',
+        q: '5S活動《かつどう》の「清潔《せいけつ》」とは何を意味《いみ》するか。',
         hint: 'Apa arti “Seiketsu” dalam 5S?',
         opts: ['躾ける', '清潔に保つ《衛生管理》', '整理する', '掃除をする'],
         opts_id: ['Mendisiplinkan', 'Menjaga kebersihan (higienis)', 'Mengatur', 'Membersihkan'],
@@ -2546,7 +2546,7 @@ export const CSV_SETS = [
       },
       {
         id: 24,
-        q: '職場におけるセクシャルハラスメント防止措置として正しいものは？',
+        q: '職場《しょくば》におけるセクシャルハラスメント防止措置《ぼうしそち》として正《ただ》しいものは？',
         hint: 'Langkah pencegahan sexual harassment di tempat kerja yang benar adalah?',
         opts: ['無視する', '相談窓口の設置と周知', '任意', '罰則のみ'],
         opts_id: [
@@ -2560,7 +2560,7 @@ export const CSV_SETS = [
       },
       {
         id: 25,
-        q: '作業終了後の安全確認で重要なことは？',
+        q: '作業《さぎょう》終了後《しゅうりょうご》の安全確認《あんぜんかくにん》で重要《じゅうよう》なことは？',
         hint: 'Hal penting saat konfirmasi keselamatan setelah kerja selesai adalah?',
         opts: ['両方', '火気確認', 'どちらでもない', '工具の片付け'],
         opts_id: ['Keduanya', 'Cek api', 'Tidak keduanya', 'Merapikan alat'],
@@ -2569,7 +2569,7 @@ export const CSV_SETS = [
       },
       {
         id: 26,
-        q: '朝礼で使用される「安全第一」の標語の意味は？',
+        q: '朝礼《ちょうれい》で使用《しよう》される「安全第一《あんぜんだいいち》」の標語《ひょうご》の意味《いみ》は？',
         hint: 'Arti slogan “Safety First” yang digunakan di apel pagi adalah?',
         opts: ['作業を優先', '利益を優先', '安全を最優先にする', '休憩を優先'],
         opts_id: [
@@ -2586,10 +2586,10 @@ export const CSV_SETS = [
         q: '建設現場の「ツールボックスミーティング《TBM》」とはどういうものか。',
         hint: "Apa itu 'Toolbox Meeting (TBM)' di site konstruksi?",
         opts: [
-          '工具の点検を行う会議',
-          '作業開始前に少人数で行う安全確認ミーティング',
-          '月1回行う安全委員会の会議',
-          '工具の購入を決める会議',
+          '工具《こうぐ》の点検《てんけん》を行う会議《かいぎ》',
+          '作業開始前《さぎょうかいしまえ》に少人数《しょうにんずう》で行う安全確認《あんぜんかくにん》ミーティング',
+          '月《つき》1回《かい》行う安全委員会《あんぜんいいんかい》の会議《かいぎ》',
+          '工具《こうぐ》の購入《こうにゅう》を決める会議《かいぎ》',
         ],
         opts_id: [
           'Rapat untuk memeriksa peralatan',
@@ -2602,7 +2602,7 @@ export const CSV_SETS = [
       },
       {
         id: 28,
-        q: '5S活動の「維持」のために必要なことは？',
+        q: '5S活動《かつどう》の「維持《いじ》」のために必要《ひつよう》なことは？',
         hint: 'Hal yang diperlukan untuk tahap pemeliharaan (iji) dalam 5S adalah?',
         opts: ['任意', '定期的な監査と改善', '1回だけ実施', '記録不要'],
         opts_id: [
@@ -2616,7 +2616,7 @@ export const CSV_SETS = [
       },
       {
         id: 29,
-        q: '職場における労働者の安全と健康を確保することを目的とした法律は何か。',
+        q: '職場《しょくば》における労働者《ろうどうしゃ》の安全《あんぜん》と健康《けんこう》を確保《かくほ》することを目的《もくてき》とした法律《ほうりつ》は何か。',
         hint: 'Undang-undang yang bertujuan menjamin keselamatan dan kesehatan pekerja di tempat kerja adalah?',
         opts: ['建築基準法', '労働安全衛生法', '労働基準法', '建設業法'],
         opts_id: [
@@ -2630,7 +2630,7 @@ export const CSV_SETS = [
       },
       {
         id: 30,
-        q: '足場解体時の安全確認で重要なことは？',
+        q: '足場《あしば》解体時《かいたいじ》の安全確認《あんぜんかくにん》で重要《じゅうよう》なことは？',
         hint: 'Hal penting saat konfirmasi keselamatan pembongkaran scaffold adalah?',
         opts: ['休憩', '写真撮影', '部材の落下防止と順序確認', '工具の数だけ確認'],
         opts_id: [
@@ -2656,7 +2656,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '配管切断後のバリ取りに使用する工具の名称は？',
+        q: '配管《はいかん》切断後《せつだんご》のバリ取りに使用《しよう》する工具《こうぐ》の名称《めいしょう》は？',
         hint: 'Nama alat untuk membersihkan burr setelah memotong pipa adalah?',
         opts: ['パイプリーマー', 'トルクレンチ', 'パイプレンチ', 'パイプカッター'],
         opts_id: ['Pipe reamer', 'Torque wrench', 'Pipe wrench', 'Pipe cutter'],
@@ -2665,7 +2665,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '保温材の「厚さ公差」の許容範囲は？',
+        q: '保温材《ほおんざい》の「厚《あつ》さ公差《こうさ》」の許容範囲《きょようはんい》は？',
         hint: 'Rentang toleransi ketebalan insulasi adalah?',
         opts: ['±5mm以内', '任意', '±10mm', '±20mm'],
         opts_id: ['Maksimal ±5mm', 'Bebas', '±10mm', '±20mm'],
@@ -2674,7 +2674,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '銅管冷媒配管の「曲げ工具」使用時の注意点は？',
+        q: '銅管《どうかん》冷媒配管《れいばいはいかん》の「曲《ま》げ工具《こうぐ》」使用時《しようじ》の注意点《ちゅういてん》は？',
         hint: 'Hal yang diperhatikan saat menggunakan pipe bender untuk pipa tembaga refrigerant adalah?',
         opts: ['最小曲げ半径を守る', '油を塗らない', '管を回転させる', '強く力を入れる'],
         opts_id: [
@@ -2688,7 +2688,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '電動工具の「漏電ブレーカー」の役割は？',
+        q: '電動工具《でんどうこうぐ》の「漏電《ろうでん》ブレーカー」の役割《やくわり》は？',
         hint: 'Peran earth leakage breaker pada power tool adalah?',
         opts: ['漏電を瞬時に検知・遮断', '回転を止める', '過電流を止める', '電圧を下げる'],
         opts_id: [
@@ -2702,7 +2702,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: 'フルハーネス使用時の「エネルギーアブソーバー」の交換基準は？',
+        q: 'フルハーネス使用《しよう》時の「エネルギーアブソーバー」の交換基準《こうかんきじゅん》は？',
         hint: 'Kriteria penggantian energy absorber pada full-harness adalah?',
         opts: ['1年使用', '色褪せ', '落下衝撃後または変形', '任意'],
         opts_id: [
@@ -2716,12 +2716,12 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '溶接作業で使用する保護メガネの主な目的は？',
+        q: '溶接作業《ようせつさぎょう》で使用《しよう》する保護《ほご》メガネの主な目的《もくてき》は？',
         hint: 'Tujuan utama kacamata pelindung saat pengelasan?',
         opts: [
           '強い光《アーク光》と飛散物から目を守る',
-          '視力を上げる',
-          '太陽光を見る',
+          '視力《しりょく》を上げる',
+          '太陽光《たいようこう》を見る',
           'ファッション',
         ],
         opts_id: [
@@ -2735,7 +2735,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '保温材の「表面温度測定」のタイミングは？',
+        q: '保温材《ほおんざい》の「表面温度測定《ひょうめんおんどそくてい》」のタイミングは？',
         hint: 'Waktu pengukuran suhu permukaan insulasi adalah?',
         opts: ['任意', '施工完了後', '施工前', '1週間後'],
         opts_id: ['Bebas', 'Setelah pemasangan selesai', 'Sebelum pemasangan', 'Setelah 1 minggu'],
@@ -2744,7 +2744,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: 'ダクトの接続部で気密性を保つために使用されるものはどれか。',
+        q: 'ダクトの接続部《せつぞくぶ》で気密性《きみつせい》を保《たも》つために使用《しよう》されるものはどれか。',
         hint: 'Apa yang digunakan untuk menjaga kerapatan udara pada sambungan ducting?',
         opts: ['紙', '木材', '砂', 'ガスケット'],
         opts_id: ['Kertas', 'Kayu', 'Pasir', 'Gasket'],
@@ -2753,7 +2753,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '配管工事で「フランジ」とは何？',
+        q: '配管工事《はいかんこうじ》で「フランジ」とは何？',
         hint: 'Apa itu flange dalam pekerjaan perpipaan?',
         opts: ['ソケット', '管の端に付けるリング状の継手', '分岐管', '曲がり管'],
         opts_id: ['Socket', 'Sambungan berbentuk cincin di ujung pipa', 'Tee', 'Elbow'],
@@ -2762,9 +2762,9 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: 'ヘルメットのあごひもを必ず締める理由は？',
+        q: 'ヘルメットのあごひもを必ず締《し》める理由《りゆう》は？',
         hint: 'Alasan mengikat tali dagu helm adalah?',
-        opts: ['墜落防止', '汗を吸うため', '見た目を良くするため', 'ヘルメットが飛ばないため'],
+        opts: ['墜落防止', '汗を吸うため', '見た目《め》を良くするため', 'ヘルメットが飛ばないため'],
         opts_id: [
           'Pencegahan jatuh',
           'Menyerap keringat',
@@ -2776,7 +2776,7 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: 'パイプのネジゲージの用途は？',
+        q: 'パイプのネジゲージの用途《ようと》は？',
         hint: 'Kegunaan thread gauge adalah?',
         opts: ['曲げ半径を測る', '管径を測る', 'ねじの規格を確認する', '厚さを測る'],
         opts_id: [
@@ -2790,7 +2790,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '断熱材の厚さ測定で使用する道具は？',
+        q: '断熱材《だんねつざい》の厚《あつ》さ測定《そくてい》で使用《しよう》する道具《どうぐ》は？',
         hint: 'Alat untuk mengukur ketebalan bahan insulasi adalah?',
         opts: ['水平器', '角度計', '厚さ計《ノギスまたは専用ゲージ》', '巻尺'],
         opts_id: [
@@ -2804,7 +2804,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '保温保冷の屋外露出箇所では、保温筒を何で覆い仕上げるか。',
+        q: '保温保冷《ほおんほれい》の屋外露出《おくがいろしゅつ》箇所《かしょ》では、保温筒《ほおんとう》を何で覆《おお》い仕上《しあ》げるか。',
         hint: 'Untuk bagian insulasi pipa yang terbuka di luar ruangan, lapisan luar insulation tube ditutup dengan apa?',
         opts: ['薄鋼板', '発泡スチロール', '布', '紙'],
         opts_id: ['Thin steel sheet', 'Styrofoam', 'Kain', 'Kertas'],
@@ -2813,7 +2813,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '断熱工事で「スチールバンド」の締め付け方法は？',
+        q: '断熱工事《だんねつこうじ》で「スチールバンド」の締《し》め付《つ》け方法《ほうほう》は？',
         hint: 'Cara pengencangan steel band pada insulasi adalah?',
         opts: ['任意', '手で締める', '緩く', '専用ツールで規定トルク'],
         opts_id: [
@@ -2827,7 +2827,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: 'フルハーネス型の「Dリング」の位置は？',
+        q: 'フルハーネス型《がた》の「Dリング」の位置《いち》は？',
         hint: 'Posisi D-ring pada full-harness adalah?',
         opts: ['腰のみ', '背中中央', '足首', '胸部と背中の2箇所'],
         opts_id: [
@@ -2841,7 +2841,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '保温材の厚さを測定する間隔は？',
+        q: '保温材《ほおんざい》の厚《あつ》さを測定《そくてい》する間隔《かんかく》は？',
         hint: 'Interval pengukuran ketebalan bahan insulasi adalah?',
         opts: ['毎4〜5m', '毎10m', '毎1m', '不要'],
         opts_id: ['Setiap 4-5m', 'Setiap 10m', 'Setiap 1m', 'Tidak perlu'],
@@ -2850,9 +2850,9 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '断熱材のジョイント部に使用する「セルフシーリングテープ」の役割は？',
+        q: '断熱材《だんねつざい》のジョイント部に使用《しよう》する「セルフシーリングテープ」の役割《やくわり》は？',
         hint: 'Peran self-sealing tape pada sambungan insulasi adalah?',
-        opts: ['気密性と防水性を確保', '厚さを増す', '見た目を良くする', '接着力を下げる'],
+        opts: ['気密性と防水性を確保', '厚さを増す', '見た目《め》を良くする', '接着力を下げる'],
         opts_id: [
           'Menjamin kedap udara & air',
           'Menambah tebal',
@@ -2864,7 +2864,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '耳栓とイヤーマフでは、どちらが一般的に減音量が大きいか。',
+        q: '耳栓《みみせん》とイヤーマフでは、どちらが一般的《いっぱんてき》に減音量《げんおんりょう》が大きいか。',
         hint: 'Antara earplug dan earmuff, mana yang umumnya lebih besar pengurangan kebisingannya?',
         opts: ['どちらも効果なし', '耳栓', '同じ', 'イヤーマフ'],
         opts_id: ['Tidak ada efek', 'Earplug', 'Sama', 'Earmuff'],
@@ -2873,7 +2873,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '断熱材の「外被材」として屋内用に適したものは？',
+        q: '断熱材《だんねつざい》の「外被材《がいひざい》」として屋内用《おくないよう》に適《てき》したものは？',
         hint: 'Bahan outer cover insulasi yang cocok untuk indoor adalah?',
         opts: ['アルミガラス布《ALGC》', 'ガルバリウム', '紙', '薄鋼板'],
         opts_id: ['Aluminium glass cloth', 'Galvalume', 'Kertas', 'Thin steel sheet'],
@@ -2882,7 +2882,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '足場の点検は、一般的にいつ実施するか。',
+        q: '足場《あしば》の点検《てんけん》は、一般的《いっぱんてき》にいつ実施《じっし》するか。',
         hint: 'Kapan pemeriksaan scaffolding umumnya dilakukan?',
         opts: ['1年に1回', '作業終了後のみ', '点検不要', '作業開始前・悪天候後・地震後'],
         opts_id: [
@@ -2908,13 +2908,13 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '建設工事における「型枠工事」とはどのような工事か。',
+        q: '建設工事《けんせつこうじ》における「型枠工事《かたわくこうじ》」とはどのような工事《こうじ》か。',
         hint: "Apa itu 'pekerjaan bekisting' (型枠工事) dalam konstruksi?",
         opts: [
-          '鉄筋を配置する工事',
-          '建物の窓を取り付ける工事',
-          'コンクリートを流すための型を作る工事',
-          '建物を防水する工事',
+          '鉄筋《てっきん》を配置《はいち》する工事《こうじ》',
+          '建物《たてもの》の窓《まど》を取《と》り付《つ》ける工事《こうじ》',
+          'コンクリートを流すための型《かた》を作る工事《こうじ》',
+          '建物《たてもの》を防水《ぼうすい》する工事《こうじ》',
         ],
         opts_id: [
           'Pekerjaan penempatan tulangan baja',
@@ -2927,7 +2927,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '足場組立責任者の資格として必要なものは？',
+        q: '足場《あしば》組立責任者《くみたてせきにんしゃ》の資格《しかく》として必要《ひつよう》なものは？',
         hint: 'Kualifikasi yang diperlukan untuk penanggung jawab perakitan scaffold adalah?',
         opts: ['普通作業員', '足場組立等技能講習修了者', 'ヘルメット', '任意'],
         opts_id: ['Pekerja biasa', 'Lulus pelatihan skill merakit scaffold', 'Helm', 'Bebas'],
@@ -2936,7 +2936,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '有給休暇の取得義務は、雇用から何年目以降か。',
+        q: '有給休暇《ゆうきゅうきゅうか》の取得義務《しゅとくぎむ》は、雇用《こよう》から何年目《なんねんめ》以降《いこう》か。',
         hint: 'Kewajiban mengambil cuti tahunan berlaku mulai tahun ke berapa?',
         opts: ['2 年目以降', '5 年目以降', '1 年目', '3 年目以降'],
         opts_id: [
@@ -2950,7 +2950,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '5Sの「清掃」とは何？',
+        q: '5Sの「清掃《せいそう》」とは何？',
         hint: 'Apa itu “Seisou” dalam 5S?',
         opts: ['整理する', '守る', '整頓する', '掃除する'],
         opts_id: ['Mengatur', 'Mematuhi', 'Merapikan', 'Membersihkan'],
@@ -2959,7 +2959,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '特別教育の対象となる作業として正しいものは？',
+        q: '特別教育《とくべつきょういく》の対象《たいしょう》となる作業《さぎょう》として正《ただ》しいものは？',
         hint: 'Pekerjaan yang menjadi target pendidikan khusus adalah?',
         opts: ['運搬', '高所作業車運転', '掃除', '一般配管作業'],
         opts_id: [
@@ -2973,7 +2973,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '建設現場の「危険予知訓練」の実施頻度は？',
+        q: '建設現場《けんせつげんば》の「危険予知訓練《きけんよちくんれん》」の実施頻度《じっしひんど》は？',
         hint: 'Frekuensi pelaksanaan pelatihan prediksi bahaya di lokasi konstruksi adalah?',
         opts: ['毎朝の朝礼時', '1ヶ月に1回', '年1回', '任意'],
         opts_id: ['Setiap apel pagi', '1x sebulan', '1x setahun', 'Bebas'],
@@ -2982,7 +2982,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '墜落防止対策として、事業主が講ずべき優先順位は？',
+        q: '墜落防止対策《ついらくぼうしたいさく》として、事業主《じぎょうぬし》が講ずべき優先順位《ゆうせんじゅんい》は？',
         hint: 'Prioritas utama pencegahan jatuh yang harus dilakukan pengusaha adalah?',
         opts: ['墜落防止設備の設置', 'ヘルメットのみ', '任意', '安全帯の着用'],
         opts_id: [
@@ -2996,13 +2996,13 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '建設現場の「防水工事」の目的として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》の「防水工事《ぼうすいこうじ》」の目的《もくてき》として正《ただ》しいものはどれか。',
         hint: "Tujuan yang benar dari 'pekerjaan waterproofing' (防水工事) di konstruksi adalah?",
         opts: [
-          '建物を美しく見せるため',
-          '建物内部への水の侵入を防ぐため',
-          '建物を断熱するため',
-          '建物の基礎を強化するため',
+          '建物《たてもの》を美しく見せるため',
+          '建物内部《たてものないぶ》への水《みず》の侵入《しんにゅう》を防ぐため',
+          '建物《たてもの》を断熱《だんねつ》するため',
+          '建物《たてもの》の基礎《きそ》を強化《きょうか》するため',
         ],
         opts_id: [
           'Agar bangunan terlihat indah',
@@ -3015,7 +3015,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '作業中の「熱中症予防」で塩分補給の理由は？',
+        q: '作業中《さぎょうちゅう》の「熱中症予防《ねっちゅうしょうよぼう》」で塩分補給《えんぶんほきゅう》の理由《りゆう》は？',
         hint: 'Alasan suplementasi garam saat pencegahan heat stroke adalah?',
         opts: ['体を冷やす', '食欲を増す', '汗で失われるナトリウムを補う', '水分だけ補給'],
         opts_id: [
@@ -3029,7 +3029,7 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '5S活動の「躾」の目的は？',
+        q: '5S活動《かつどう》の「躾《しつけ》」の目的《もくてき》は？',
         hint: 'Tujuan tahap disiplin (shituke) dalam 5S adalah?',
         opts: ['掃除を増やす', '記録を取る', '任意', 'ルールを守る習慣を定着させる'],
         opts_id: [
@@ -3043,7 +3043,7 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '建設現場の安全教育で、作業員に必ず伝えるべき内容は？',
+        q: '建設現場《けんせつげんば》の安全教育《あんぜんきょういく》で、作業員《さぎょういん》に必ず伝えるべき内容《ないよう》は？',
         hint: 'Isi yang wajib disampaikan dalam pendidikan keselamatan di lokasi konstruksi adalah?',
         opts: ['休憩時間', '作業予定のみ', '当日の危険箇所と対策', '今日の給料'],
         opts_id: [
@@ -3057,7 +3057,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '作業現場で「墜落防止柵」の高さ基準は？',
+        q: '作業現場《さぎょうげんば》で「墜落防止柵《ついらくぼうしさく》」の高《たか》さ基準《きじゅん》は？',
         hint: 'Standar tinggi pagar pencegahan jatuh di lokasi kerja adalah?',
         opts: ['50 cm', '80 cm', '任意', '90 cm以上'],
         opts_id: ['50 cm', '80 cm', 'Bebas', 'Minimal 90 cm'],
@@ -3066,7 +3066,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '作業開始前に必ず行う安全活動は？',
+        q: '作業開始前《さぎょうかいしまえ》に必ず行う安全活動《あんぜんかつどう》は？',
         hint: 'Kegiatan keselamatan wajib sebelum mulai kerja adalah?',
         opts: ['掃除', '昼食', 'KY活動', '休憩'],
         opts_id: ['Membersihkan', 'Makan siang', 'Kegiatan KY', 'Istirahat'],
@@ -3075,7 +3075,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '消防法で、建設現場に設置が義務付けられる消火設備は？',
+        q: '消防法《しょうぼうほう》で、建設現場《けんせつげんば》に設置《せっち》が義務付《ぎむづ》けられる消火設備《しょうかせつび》は？',
         hint: 'Peralatan pemadam kebakaran yang wajib dipasang di lokasi konstruksi menurut UU Pemadam Kebakaran adalah?',
         opts: ['スプリンクラー', '消火栓', '消火器', 'すべて任意'],
         opts_id: ['Sprinkler', 'Hydrant', 'Alat pemadam api', 'Semua sukarela'],
@@ -3084,7 +3084,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '建設現場の「安全衛生教育」の実施義務者は？',
+        q: '建設現場《けんせつげんば》の「安全衛生教育《あんぜんえいせいきょういく》」の実施義務者《じっしぎむしゃ》は？',
         hint: 'Penanggung jawab pelaksanaan pendidikan keselamatan & kesehatan di lokasi adalah?',
         opts: ['監督員のみ', '作業員自身', '下請け作業員', '元請負業者'],
         opts_id: ['Hanya pengawas', 'Pekerja sendiri', 'Subkontraktor pekerja', 'Kontraktor utama'],
@@ -3093,13 +3093,13 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '施工管理の4大管理として正しい組み合わせはどれか。',
+        q: '施工管理《せこうかんり》の4大管理《だいかんり》として正《ただ》しい組《く》み合《あわ》わせはどれか。',
         hint: 'Kombinasi yang benar dari 4 pilar manajemen konstruksi (施工管理) adalah?',
         opts: [
-          '設計・発注・施工・検査',
-          '品質・工程・安全・原価',
-          '材料・人員・機械・工事',
-          '計画・実施・評価・改善',
+          '設計《せっけい》・発注《はっちゅう》・施工《せこう》・検査《けんさ》',
+          '品質《ひんしつ》・工程《こうてい》・安全《あんぜん》・原価《げんか》',
+          '材料《ざいりょう》・人員《じんいん》・機械《きかい》・工事《こうじ》',
+          '計画《けいかく》・実施《じっし》・評価《ひょうか》・改善《かいぜん》',
         ],
         opts_id: [
           'Desain, pemesanan, konstruksi, inspeksi',
@@ -3112,7 +3112,7 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '法定労働時間では、働く時間は 1 日何時間までか。',
+        q: '法定労働時間《ほうていろうどうじかん》では、働く時間は 1 日何時間《なんじかん》までか。',
         hint: 'Menurut waktu kerja resmi, berapa jam maksimal kerja per hari?',
         opts: ['8 時間', '10 時間', '6 時間', '12 時間'],
         opts_id: ['8 jam', '10 jam', '6 jam', '12 jam'],
@@ -3121,7 +3121,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '人間の誤り防止対策として「ポカヨケ」とは何を指すか。',
+        q: '人間《にんげん》の誤《あやま》り防止対策《ぼうしたいさく》として「ポカヨケ」とは何を指《さ》すか。',
         hint: 'Apa yang dimaksud “poka-yoke” dalam pencegahan human error?',
         opts: ['記録を取る', '作業を速くする', '誤操作を物理的に防ぐ装置', '罰則'],
         opts_id: [
@@ -3135,7 +3135,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '建設現場で「安全第一」の旗を掲げる目的は？',
+        q: '建設現場《けんせつげんば》で「安全第一《あんぜんだいいち》」の旗《はた》を掲《かか》げる目的《もくてき》は？',
         hint: 'Tujuan memasang bendera “Safety First” di lokasi konstruksi adalah?',
         opts: ['区別', '安全意識を高める', '宣伝', '装飾'],
         opts_id: ['Pembeda', 'Tingkatkan kesadaran keselamatan', 'Promosi', 'Dekorasi'],
@@ -3144,7 +3144,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '建設現場の「非常用出口」の標識色は？',
+        q: '建設現場《けんせつげんば》の「非常用出口《ひじょうようでぐち》」の標識色《ひょうしきしょく》は？',
         hint: 'Warna tanda pintu keluar darurat di lokasi konstruksi adalah?',
         opts: ['赤', '黄', '緑', '青'],
         opts_id: ['Merah', 'Kuning', 'Hijau', 'Biru'],
@@ -3155,7 +3155,7 @@ export const CSV_SETS = [
         id: 21,
         q: '危険予知活動《KY活動》の最終目的は？',
         hint: 'Tujuan akhir kegiatan KY adalah?',
-        opts: ['休憩', '記録を取る', '事故ゼロの実現', '作業を速く終わらせる'],
+        opts: ['休憩', '記録を取る', '事故ゼロの実現', '作業《さぎょう》を速く終わらせる'],
         opts_id: [
           'Istirahat',
           'Mencatat',
@@ -3167,7 +3167,7 @@ export const CSV_SETS = [
       },
       {
         id: 22,
-        q: '特別教育の受講が必要な作業として正しいものは？',
+        q: '特別教育《とくべつきょういく》の受講《じゅこう》が必要《ひつよう》な作業《さぎょう》として正《ただ》しいものは？',
         hint: 'Pekerjaan yang mewajibkan pendidikan khusus (tokubetsu kyōiku) adalah?',
         opts: ['運搬作業', '足場組立作業', '掃除作業', '一般の配管作業'],
         opts_id: [
@@ -3181,13 +3181,13 @@ export const CSV_SETS = [
       },
       {
         id: 23,
-        q: '建設工事での「熱中症」の初期症状として正しいものはどれか。',
+        q: '建設工事《けんせつこうじ》での「熱中症《ねっちゅうしょう》」の初期症状《しょきしょうじょう》として正《ただ》しいものはどれか。',
         hint: "Gejala awal 'heat stroke' (熱中症) dalam pekerjaan konstruksi yang benar adalah?",
         opts: [
-          '急激な視力低下',
-          '皮膚が青くなる',
-          'めまい・立ちくらみ・大量の発汗',
-          '呼吸が速くなり胸が痛む',
+          '急激《きゅうげき》な視力低下《しりょくていか》',
+          '皮膚《ひふ》が青くなる',
+          'めまい・立《た》ちくらみ・大量《たいりょう》の発汗《はっかん》',
+          '呼吸《こきゅう》が速くなり胸《むね》が痛む',
         ],
         opts_id: [
           'Penurunan penglihatan mendadak',
@@ -3203,10 +3203,10 @@ export const CSV_SETS = [
         q: '建設現場で「ヒューマンエラー《人的ミス》」を防ぐための「ポカヨケ」の例として正しいものはどれか。',
         hint: "Contoh yang benar dari 'poka-yoke' (perangkat anti-kesalahan) untuk mencegah human error di site konstruksi adalah?",
         opts: [
-          '安全教育を増やす',
-          '作業手順書を作る',
-          '作業を慎重に行うよう注意する',
-          '逆に取り付けられない形状の部品を使用する',
+          '安全教育《あんぜんきょういく》を増やす',
+          '作業手順書《さぎょうてじゅんしょ》を作る',
+          '作業《さぎょう》を慎重《しんちょう》に行うよう注意《ちゅうい》する',
+          '逆《ぎゃく》に取《と》り付《つ》けられない形状《けいじょう》の部品《ぶひん》を使用《しよう》する',
         ],
         opts_id: [
           'Menambah pendidikan keselamatan',
@@ -3219,7 +3219,7 @@ export const CSV_SETS = [
       },
       {
         id: 25,
-        q: '建設業法で、元請負業者が下請負業者に支払う代金の支払期限は？',
+        q: '建設業法《けんせつぎょうほう》で、元請負業者《もとうけおいぎょうしゃ》が下請負業者《したうけおいぎょうしゃ》《したうけおいぎょうしゃ》に支払う代金《だいきん》の支払期限《しはらいきげん》は？',
         hint: 'Batas waktu pembayaran tagihan oleh kontraktor utama kepada subkontraktor menurut UU Konstruksi adalah?',
         opts: ['工事完了後1年以内', '支払わない', '工事完了後50日以内', '任意'],
         opts_id: [
@@ -3233,13 +3233,13 @@ export const CSV_SETS = [
       },
       {
         id: 26,
-        q: '建設工事の「リスクアセスメント」で「リスクの大きさ」はどのように決まるか。',
+        q: '建設工事《けんせつこうじ》の「リスクアセスメント」で「リスクの大きさ」はどのように決まるか。',
         hint: "Bagaimana 'besarnya risiko' dalam risk assessment konstruksi ditentukan?",
         opts: [
-          '作業の難しさのみで決まる',
-          '危険の発生確率だけで決まる',
-          '被害の重大性と発生確率を組み合わせて決まる',
-          '作業員の経験年数だけで決まる',
+          '作業《さぎょう》の難《むずか》しさのみで決まる',
+          '危険《きけん》の発生確率《はっせいかくりつ》だけで決まる',
+          '被害《ひがい》の重大性《じゅうだいせい》と発生確率《はっせいかくりつ》を組《く》み合《あわ》わせて決まる',
+          '作業員《さぎょういん》の経験年数《けいけんねんすう》だけで決まる',
         ],
         opts_id: [
           'Ditentukan hanya dari kesulitan pekerjaan',
@@ -3252,7 +3252,7 @@ export const CSV_SETS = [
       },
       {
         id: 27,
-        q: '5S活動で「3定」とは何を指すか。',
+        q: '5S活動《かつどう》で「3定《てい》」とは何を指《さ》すか。',
         hint: 'Apa yang dimaksud “3-tei” dalam 5S?',
         opts: ['整理・整頓・清掃', '安全のみ', '清潔・躾', '定位置・定量・定品'],
         opts_id: [
@@ -3266,13 +3266,13 @@ export const CSV_SETS = [
       },
       {
         id: 28,
-        q: '消防法の目的として正しいものはどれか。',
+        q: '消防法《しょうぼうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
         hint: 'Tujuan yang benar dari Fire Service Act (消防法) adalah?',
         opts: [
-          '消防署員の給与を定めること',
-          '火災や地震の被害を軽減し、安全を確保すること',
-          '建物の構造基準を定めること',
-          '火災保険の料率を定めること',
+          '消防署員《しょうぼうしょいん》の給与《きゅうよ》を定めること',
+          '火災《かさい》や地震《じしん》の被害《ひがい》を軽減《けいげん》し、安全《あんぜん》を確保《かくほ》すること',
+          '建物《たてもの》の構造基準《こうぞうきじゅん》を定めること',
+          '火災保険《かさいほけん》の料率《りょうりつ》を定めること',
         ],
         opts_id: [
           'Menetapkan gaji petugas pemadam kebakaran',
@@ -3285,7 +3285,7 @@ export const CSV_SETS = [
       },
       {
         id: 29,
-        q: '建設業法で、施工体制における「専門工事業者」の役割は？',
+        q: '建設業法《けんせつぎょうほう》で、施工体制《せこうたいせい》における「専門工事業者《せんもんこうじぎょうしゃ》」の役割《やくわり》は？',
         hint: 'Peran “kontraktor spesialis” dalam sistem pelaksanaan proyek menurut UU Konstruksi adalah?',
         opts: ['専門工事の施工', '一般工事業者の下請けのみ', '監督のみ', '設計のみ'],
         opts_id: [
@@ -3302,10 +3302,10 @@ export const CSV_SETS = [
         q: '建設現場で「安全通路《避難経路》」を確保する目的として正しいものはどれか。',
         hint: "Tujuan yang benar dari menjaga 'jalur keselamatan (jalur evakuasi)' di site konstruksi adalah?",
         opts: [
-          '作業効率を上げるため',
-          '材料の搬入をスムーズにするため',
-          '緊急時に全員が安全に避難できるため',
-          '現場をきれいに見せるため',
+          '作業効率《さぎょうこうりつ》を上げるため',
+          '材料《ざいりょう》の搬入《はんにゅう》をスムーズにするため',
+          '緊急時《きんきゅうじ》に全員《ぜんいん》が安全《あんぜん》に避難《ひなん》できるため',
+          '現場《げんば》をきれいに見せるため',
         ],
         opts_id: [
           'Meningkatkan efisiensi kerja',
@@ -3330,7 +3330,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '保温材の「接着剤」選定で重要なことは？',
+        q: '保温材《ほおんざい》の「接着剤《せっちゃくざい》」選定《せんてい》で重要《じゅうよう》なことは？',
         hint: 'Hal penting saat memilih lem untuk bahan insulasi adalah?',
         opts: ['安価なもの', '色を合わせる', '速乾性のみ', '耐熱性・耐寒性に適合'],
         opts_id: [
@@ -3344,7 +3344,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '配管の「圧力テスト」後の排水方法は？',
+        q: '配管《はいかん》の「圧力《あつりょく》テスト」後の排水方法《はいすいほうほう》は？',
         hint: 'Cara pembuangan air setelah pressure test pipa adalah?',
         opts: ['適切な排水口へ排出', 'そのまま放置', '蒸発させる', '再利用'],
         opts_id: [
@@ -3358,7 +3358,7 @@ export const CSV_SETS = [
       },
       {
         id: 3,
-        q: '作業中の「振動工具」使用時のPPEは？',
+        q: '作業中《さぎょうちゅう》の「振動工具《しんどうこうぐ》」使用《しよう》時のPPEは？',
         hint: 'PPE saat menggunakan alat getar adalah?',
         opts: ['耐振動手袋', 'ヘルメット', '安全メガネ', '耳栓'],
         opts_id: ['Anti-vibration gloves', 'Helm', 'Kacamata keselamatan', 'Earplug'],
@@ -3367,7 +3367,7 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '断熱工事の「最終検査」で確認する項目は？',
+        q: '断熱工事《だんねつこうじ》の「最終検査《さいしゅうけんさ》」で確認《かくにん》する項目《こうもく》は？',
         hint: 'Item yang dicek pada inspeksi akhir pekerjaan insulasi adalah?',
         opts: ['色', '厚さ・気密性・外観', '長さ', '任意'],
         opts_id: ['Warna', 'Ketebalan, kedap udara, & tampilan', 'Panjang', 'Bebas'],
@@ -3376,13 +3376,13 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: 'インパクトドライバーでボルト・ナットを締める時の注意点は？',
+        q: 'インパクトドライバーでボルト・ナットを締《し》める時の注意点《ちゅういてん》は？',
         hint: 'Yang perlu diperhatikan saat mengencangkan baut/mur dengan impact driver?',
         opts: [
-          'トルクは関係ない',
-          '規定トルクで締め、必要ならトルクレンチで最終確認',
-          'できるだけ長時間強く回す',
-          '手で回した方が良い',
+          'トルクは関係《かんけい》ない',
+          '規定《きてい》トルクで締《し》め、必要《ひつよう》ならトルクレンチで最終確認《さいしゅうかくにん》',
+          'できるだけ長時間《ちょうじかん》強く回す',
+          '手《て》で回した方が良い',
         ],
         opts_id: [
           'Torsi tidak penting',
@@ -3395,7 +3395,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: 'パイプカッターの主な用途は？',
+        q: 'パイプカッターの主な用途《ようと》は？',
         hint: 'Kegunaan utama pipe cutter adalah?',
         opts: ['拡張する', '曲げる', 'パイプを直角に切断する', 'ねじを切る'],
         opts_id: ['Melebarkan', 'Membengkokkan', 'Memotong pipa tegak lurus', 'Memotong ulir'],
@@ -3418,7 +3418,7 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '配管の水漏れ試験で使用する圧力は？',
+        q: '配管《はいかん》の水漏《みずも》れ試験《しけん》で使用《しよう》する圧力《あつりょく》は？',
         hint: 'Tekanan yang digunakan untuk water leak test pada pipa adalah?',
         opts: ['常圧', '作業圧の1.5倍以上', '真空', '0.1 MPaのみ'],
         opts_id: ['Tekanan normal', 'Minimal 1.5× tekanan kerja', 'Vakum', 'Hanya 0.1 MPa'],
@@ -3427,7 +3427,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: 'パイプの「エキスパンダー工具」の用途は？',
+        q: 'パイプの「エキスパンダー工具《こうぐ》」の用途《ようと》は？',
         hint: 'Kegunaan expander tool pada pipa adalah?',
         opts: ['管端を拡大して継手用にする', '切断する', '曲げる', '管を縮める'],
         opts_id: [
@@ -3453,10 +3453,10 @@ export const CSV_SETS = [
         q: '冷却塔《クーリングタワー》の主な機能は何か。',
         hint: 'Fungsi utama cooling tower?',
         opts: [
-          '空気を暖める',
-          '電気を発生させる',
-          '冷凍機の凝縮器から熱を大気に放出する',
-          '水を飲料水にする',
+          '空気《くうき》を暖める',
+          '電気《でんき》を発生《はっせい》させる',
+          '冷凍機《れいとうき》の凝縮器《ぎょうしゅくき》から熱《ねつ》を大気《たいき》に放出《ほうしゅつ》する',
+          '水《みず》を飲料水《いんりょうすい》にする',
         ],
         opts_id: [
           'Memanaskan udara',
@@ -3469,7 +3469,7 @@ export const CSV_SETS = [
       },
       {
         id: 12,
-        q: '防火区画工事で使用する主な材料は？',
+        q: '防火区画工事《ぼうかくかくこうじ》で使用《しよう》する主な材料《ざいりょう》は？',
         hint: 'Bahan utama untuk pekerjaan kompartemenisasi api adalah?',
         opts: ['ガラスウール', '耐火パネルまたは耐火塗料', 'プラスチック', '通常の断熱材'],
         opts_id: ['Glass wool', 'Fire-resistant panel or coating', 'Plastik', 'Insulasi biasa'],
@@ -3478,7 +3478,7 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: 'パイプの「内面検査鏡」の用途は？',
+        q: 'パイプの「内面検査鏡《ないめんけんさきょう》」の用途《ようと》は？',
         hint: 'Kegunaan inspection mirror untuk dalam pipa adalah?',
         opts: ['内部の腐食や異物を確認', '外径を測る', '曲げ半径', '厚さ'],
         opts_id: [
@@ -3492,7 +3492,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '作業中の「高所作業車」の安全装置確認項目は？',
+        q: '作業中《さぎょうちゅう》の「高所作業車《こうしょさぎょうしゃ》」の安全装置《あんぜんそうち》確認項目《かくにんこうもく》は？',
         hint: 'Item verifikasi safety device pada aerial work platform adalah?',
         opts: ['緊急停止スイッチ・アウトリガー', '色', '任意', '回転数'],
         opts_id: ['Emergency stop switch & outrigger', 'Warna', 'Bebas', 'Putaran'],
@@ -3501,7 +3501,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '地下作業で酸素濃度を測定する機器は？',
+        q: '地下作業《ちかさぎょう》で酸素濃度《さんそのうど》を測定《そくてい》する機器《きき》は？',
         hint: 'Alat untuk mengukur kadar oksigen di pekerjaan bawah tanah adalah?',
         opts: ['照度計', '騒音計', '温度計', '酸素濃度計'],
         opts_id: ['Lux meter', 'Noise meter', 'Thermometer', 'Oxygen meter'],
@@ -3510,7 +3510,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '作業中の「アークフラッシュ」対策として正しいPPEは？',
+        q: '作業中《さぎょうちゅう》の「アークフラッシュ」対策《たいさく》として正《ただ》しいPPEは？',
         hint: 'PPE yang benar untuk pencegahan arc flash adalah?',
         opts: ['普通の手袋', 'ヘルメットのみ', '耐アークフラッシュ衣服', '安全靴'],
         opts_id: ['Sarung tangan biasa', 'Hanya helm', 'Arc-rated clothing', 'Safety shoes'],
@@ -3519,7 +3519,7 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '配管工事で「トルクレンチ」の用途は？',
+        q: '配管工事《はいかんこうじ》で「トルクレンチ」の用途《ようと》は？',
         hint: 'Kegunaan torque wrench dalam perpipaan adalah?',
         opts: ['ねじを切る', '管を曲げる', 'ボルト・ナットを規定のトルクで締める', '管を切断する'],
         opts_id: [
@@ -3533,7 +3533,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '保温材の「アルミラミネートフィルム」の主な用途は？',
+        q: '保温材《ほおんざい》の「アルミラミネートフィルム」の主な用途《ようと》は？',
         hint: 'Kegunaan utama aluminium laminate film pada insulasi adalah?',
         opts: ['接着剤', '耐火材', '塗料', 'ベーパーバリア'],
         opts_id: ['Lem', 'Bahan tahan api', 'Cat', 'Vapor barrier'],
@@ -3542,7 +3542,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '作業員のPPE点検で「ヘルメット」の交換基準は？',
+        q: '作業員《さぎょういん》のPPE点検《てんけん》で「ヘルメット」の交換基準《こうかんきじゅん》は？',
         hint: 'Kriteria penggantian helm saat inspeksi PPE adalah?',
         opts: ['汚れただけ', 'ひび割れ・変形がある', '色が薄くなった', '1年使用'],
         opts_id: ['Hanya kotor', 'Ada retak atau deformasi', 'Warnanya pudar', 'Dipakai 1 tahun'],
@@ -3551,7 +3551,7 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '作業中の「粉じん対策」で使用するPPEは？',
+        q: '作業中《さぎょうちゅう》の「粉じん対策《たいさく》」で使用《しよう》するPPEは？',
         hint: 'PPE untuk pencegahan debu saat kerja adalah?',
         opts: ['防塵マスク《N95以上》', '耳栓', '安全靴', '手袋'],
         opts_id: ['Dust mask (N95 atau lebih)', 'Earplug', 'Safety shoes', 'Sarung tangan'],
@@ -3572,7 +3572,7 @@ export const CSV_SETS = [
     questions: [
       {
         id: 1,
-        q: '5S活動の「可視化」とは？',
+        q: '5S活動《かつどう》の「可視化《かしか》」とは？',
         hint: 'Apa itu “visualisasi” dalam 5S?',
         opts: ['物を隠す', '掃除だけ', '場所・ルールを標識や色で明確にする', '記録を取る'],
         opts_id: [
@@ -3586,7 +3586,7 @@ export const CSV_SETS = [
       },
       {
         id: 2,
-        q: '労働基準法で、年次有給休暇の最低付与日数は？',
+        q: '労働基準法《ろうどうきじゅんほう》で、年次有給休暇《ねんじゆうきゅうきゅうか》の最低付与日数《さいていふよにっすう》は？',
         hint: 'Jumlah minimal hari cuti tahunan yang diberikan menurut UU Standar Ketenagakerjaan adalah?',
         opts: ['任意', '15 日', '10 日', '5 日'],
         opts_id: ['Sukarela', '15 hari', '10 hari', '5 hari'],
@@ -3598,10 +3598,10 @@ export const CSV_SETS = [
         q: '以下の文章の《 》に入る言葉を選びなさい。建設工事の施工体制のうち、専門工事業者について述べているのは、次のうちどれか。',
         hint: 'Pilih yang benar mengenai peran kontraktor spesialis dalam sistem pelaksanaan proyek konstruksi.',
         opts: [
-          '建設業者に注文する',
-          '発注者の要求を実現するために設計図書を作成する',
-          '大規模な工事現場の全体を監督し、指揮をとる',
-          '専門工事の施工を行う',
+          '建設業者《けんせつぎょうしゃ》に注文《ちゅうもん》する',
+          '発注者《はっちゅうしゃ》の要求《ようきゅう》を実現《じつげん》するために設計図書《せっけいとしょ》を作成《さくせい》する',
+          '大規模《だいきぼ》な工事現場《こうじげんば》の全体《ぜんたい》を監督《かんとく》し、指揮《しき》をとる',
+          '専門工事《せんもんこうじ》の施工《せこう》を行う',
         ],
         opts_id: [
           'Memesan ke kontraktor konstruksi',
@@ -3614,13 +3614,13 @@ export const CSV_SETS = [
       },
       {
         id: 4,
-        q: '電気事業法の目的として正しいものはどれか。',
+        q: '電気事業法《でんきじぎょうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
         hint: 'Tujuan yang benar dari Electricity Business Act (電気事業法) adalah?',
         opts: [
-          '電気の安全な供給と電気設備の保安を確保すること',
-          '電気料金を決めること',
-          '電気製品の製造基準を定めること',
-          '電気工事業者の数を制限すること',
+          '電気《でんき》の安全《あんぜん》な供給《きょうきゅう》と電気設備《でんきせつび》の保安《ほあん》を確保《かくほ》すること',
+          '電気料金《でんきりょうきん》を決めること',
+          '電気製品《でんきせいひん》の製造基準《せいぞうきじゅん》を定めること',
+          '電気工事業者《でんきこうじぎょうしゃ》の数《かず》を制限《せいげん》すること',
         ],
         opts_id: [
           'Memastikan pasokan listrik yang aman dan keamanan peralatan listrik',
@@ -3633,7 +3633,7 @@ export const CSV_SETS = [
       },
       {
         id: 5,
-        q: '建築工事に該当するものはどれか。',
+        q: '建築工事《けんちくこうじ》に該当《がいとう》するものはどれか。',
         hint: 'Yang termasuk pekerjaan bangunan (建築工事) adalah?',
         opts: ['ダムを造る', '給水管を取り付ける', '道路を造る', '住宅を建てる'],
         opts_id: [
@@ -3647,7 +3647,7 @@ export const CSV_SETS = [
       },
       {
         id: 6,
-        q: '朝礼で「今日も一日ご安全に！」と言う目的は？',
+        q: '朝礼《ちょうれい》で「今日《きょう》も一日《いちにち》ご安全《あんぜん》に！」と言う目的《もくてき》は？',
         hint: 'Tujuan mengucapkan “Hari ini pun semoga selamat!” di apel pagi adalah?',
         opts: ['作業開始の合図', '安全意識を高める', '危険予知活動の終了', '休憩の合図'],
         opts_id: [
@@ -3661,7 +3661,7 @@ export const CSV_SETS = [
       },
       {
         id: 7,
-        q: '職場のパワーハラスメント防止措置として事業主が講ずべきことは？',
+        q: '職場《しょくば》のパワーハラスメント防止措置《ぼうしそち》として事業主《じぎょうぬし》が講ずべきことは？',
         hint: 'Langkah yang wajib dilakukan pengusaha untuk pencegahan power harassment adalah?',
         opts: ['無視する', '相談窓口の設置', '罰則のみ', '任意'],
         opts_id: ['Mengabaikan', 'Membentuk layanan konsultasi', 'Hanya sanksi', 'Sukarela'],
@@ -3670,13 +3670,13 @@ export const CSV_SETS = [
       },
       {
         id: 8,
-        q: '建設工事の「高所作業」で、「墜落防止ネット」は作業面のどの位置に設置するか。',
+        q: '建設工事《けんせつこうじ》の「高所作業《こうしょさぎょう》」で、「墜落防止《ついらくぼうし》ネット」は作業面《さぎょうめん》のどの位置《いち》に設置《せっち》するか。',
         hint: "Dalam pekerjaan ketinggian, di posisi mana 'safety net pencegahan jatuh' (墜落防止ネット) dipasang relatif terhadap permukaan kerja?",
         opts: [
-          '作業面の上方2m以内',
-          '作業面から5m下方',
-          '作業面の下方2m以内',
-          '作業面の下方10m以内',
+          '作業面《さぎょうめん》の上方《じょうほう》2m以内《いない》',
+          '作業面《さぎょうめん》から5m下方《かほう》',
+          '作業面《さぎょうめん》の下方《かほう》2m以内《いない》',
+          '作業面《さぎょうめん》の下方《かほう》10m以内《いない》',
         ],
         opts_id: [
           'Dalam 2m di atas permukaan kerja',
@@ -3689,7 +3689,7 @@ export const CSV_SETS = [
       },
       {
         id: 9,
-        q: '5S活動の最初の「整理」とは何をするか？',
+        q: '5S活動《かつどう》の最初《さいしょ》の「整理《せいり》」とは何をするか？',
         hint: 'Apa yang dilakukan pada langkah pertama 5S yaitu “Seiri”?',
         opts: ['掃除をする', 'ルールを守る', '物を整頓する', '必要な物と不要な物を分ける'],
         opts_id: [
@@ -3703,13 +3703,13 @@ export const CSV_SETS = [
       },
       {
         id: 10,
-        q: '建設工事における「鉄筋工事」とはどのような工事か。',
+        q: '建設工事《けんせつこうじ》における「鉄筋工事《てっきんこうじ》」とはどのような工事《こうじ》か。',
         hint: "Apa itu 'pekerjaan penulangan baja' (鉄筋工事) dalam konstruksi?",
         opts: [
-          '鉄骨の骨格を組み立てる工事',
-          'コンクリートを流し込む工事',
-          '鉄板で外壁を覆う工事',
-          'コンクリートの中に入れる鉄筋を配置・組み立てる工事',
+          '鉄骨《てっこつ》の骨格《こっかく》を組《く》み立《た》てる工事《こうじ》',
+          'コンクリートを流《なが》し込む工事《こうじ》',
+          '鉄板《てっぱん》で外壁《がいへき》を覆う工事《こうじ》',
+          'コンクリートの中に入れる鉄筋《てっきん》を配置《はいち》・組《く》み立《た》てる工事《こうじ》',
         ],
         opts_id: [
           'Merakit rangka baja struktural',
@@ -3722,12 +3722,12 @@ export const CSV_SETS = [
       },
       {
         id: 11,
-        q: '建設現場で「元請業者と下請業者が協力して安全管理を行う仕組み」を何というか。',
+        q: '建設現場《けんせつげんば》で「元請業者《もとうけぎょうしゃ》と下請業者《したうけぎょうしゃ》が協力《きょうりょく》して安全管理《あんぜんかんり》を行う仕組み」を何というか。',
         hint: 'Sistem di mana kontraktor utama dan subkontraktor bekerja sama dalam manajemen keselamatan di site disebut?',
         opts: [
-          '施工体制台帳制度',
-          '産業廃棄物処理制度',
-          '技能検定制度',
+          '施工体制台帳制度《せこうたいせいだいちょうせいど》',
+          '産業廃棄物処理制度《さんぎょうはいきぶつしょりせいど》',
+          '技能検定制度《ぎのうけんていせいど》',
           '統括安全衛生管理体制《混在作業における安全管理》',
         ],
         opts_id: [
@@ -3744,10 +3744,10 @@ export const CSV_SETS = [
         q: '36協定《さぶろく協定》について正しいものはどれか。',
         hint: 'Pernyataan yang benar tentang 36 Agreement (36協定) adalah?',
         opts: [
-          '36協定があれば残業時間の制限はない',
-          '36協定は労働者と使用者が結ぶ時間外労働に関する協定',
-          '36協定がなくても月100時間まで残業できる',
-          '36協定は会社が一方的に決める',
+          '36協定《きょうてい》があれば残業時間《ざんぎょうじかん》の制限《せいげん》はない',
+          '36協定《きょうてい》は労働者《ろうどうしゃ》と使用者《しようしゃ》が結ぶ時間外労働《じかんがいろうどう》に関する協定《きょうてい》',
+          '36協定《きょうてい》がなくても月《つき》100時間《じかん》まで残業《ざんぎょう》できる',
+          '36協定《きょうてい》は会社《かいしゃ》が一方的《いっぽうてき》に決める',
         ],
         opts_id: [
           'Dengan 36 Agreement, tidak ada batasan waktu lembur',
@@ -3760,13 +3760,13 @@ export const CSV_SETS = [
       },
       {
         id: 13,
-        q: '建設現場で「コンクリート打設」とはどういう作業か。',
+        q: '建設現場《けんせつげんば》で「コンクリート打設《うちせつ》」とはどういう作業《さぎょう》か。',
         hint: "Apa itu 'pengecoran beton' (コンクリート打設) di site konstruksi?",
         opts: [
-          '硬化したコンクリートを切断する',
-          '型枠の中に生コンクリートを流し込む',
-          'コンクリートの表面を塗装する',
-          'コンクリートの強度を試験する',
+          '硬化《こうか》したコンクリートを切断《せつだん》する',
+          '型枠《かたわく》の中に生《なま》コンクリートを流《なが》し込む',
+          'コンクリートの表面《ひょうめん》を塗装《とそう》する',
+          'コンクリートの強度《きょうど》を試験《しけん》する',
         ],
         opts_id: [
           'Memotong beton yang sudah mengeras',
@@ -3779,7 +3779,7 @@ export const CSV_SETS = [
       },
       {
         id: 14,
-        q: '朝礼後の「安全確認体操」の主な目的は？',
+        q: '朝礼後《ちょうれいご》の「安全確認体操《あんぜんかくにんたいそう》」の主な目的《もくてき》は？',
         hint: 'Tujuan utama senam konfirmasi keselamatan setelah apel pagi adalah?',
         opts: ['体を温めるだけ', '工具をチェック', '危険箇所の確認と柔軟性向上', '休憩する'],
         opts_id: [
@@ -3793,7 +3793,7 @@ export const CSV_SETS = [
       },
       {
         id: 15,
-        q: '建設現場の産業廃棄物で「特別管理産業廃棄物」に該当するものは？',
+        q: '建設現場《けんせつげんば》の産業廃棄物《さんぎょうはいきぶつ》で「特別管理産業廃棄物《とくべつかんりさんぎょうはいきぶつ》」に該当《がいとう》するものは？',
         hint: 'Yang termasuk “limbah industri berbahaya khusus” di lokasi konstruksi adalah?',
         opts: ['鉄くず', '通常の木くず', '一般のコンクリートガラ', '石綿含有建材'],
         opts_id: [
@@ -3807,7 +3807,7 @@ export const CSV_SETS = [
       },
       {
         id: 16,
-        q: '労働安全衛生法で、危険有害業務に就く労働者に対する特別教育の実施者は？',
+        q: '労働安全衛生法《ろうどうあんぜんえいせいほう》で、危険有害業務《きけんゆうがいぎょうむ》に就く労働者《ろうどうしゃ》に対する特別教育《とくべつきょういく》の実施者《じっしゃ》は？',
         hint: 'Penyelenggara pendidikan khusus untuk pekerjaan berbahaya menurut UU Keselamatan adalah?',
         opts: ['下請けのみ', '任意', '事業者', '作業員本人'],
         opts_id: ['Hanya subkontraktor', 'Sukarela', 'Pengusaha', 'Pekerja sendiri'],
@@ -3816,7 +3816,7 @@ export const CSV_SETS = [
       },
       {
         id: 17,
-        q: '労災保険の保険料を支払うのは誰か。',
+        q: '労災保険《ろうさいほけん》の保険料《ほけんりょう》を支払うのは誰か。',
         hint: 'Siapa yang membayar premi asuransi kecelakaan kerja (Rōsai)?',
         opts: ['作業員本人', '下請け業者', '元請負業者', '監督員'],
         opts_id: ['Pekerja sendiri', 'Subkontraktor', 'Kontraktor utama', 'Pengawas'],
@@ -3825,7 +3825,7 @@ export const CSV_SETS = [
       },
       {
         id: 18,
-        q: '建設業の許可更新の有効期間は？',
+        q: '建設業《けんせつぎょう》の許可更新《きょかこうしん》の有効期間《ゆうこうきかん》は？',
         hint: 'Masa berlaku perpanjangan izin usaha konstruksi adalah?',
         opts: ['5 年', '任意', '10 年', '1 年'],
         opts_id: ['5 tahun', 'Sukarela', '10 tahun', '1 tahun'],
@@ -3834,7 +3834,7 @@ export const CSV_SETS = [
       },
       {
         id: 19,
-        q: '職場内での優位性を利用して、業務の適正な範囲を超えて、精神・肉体に苦痛を与える、または職場環境を悪化させる行為は、何と呼ばれるか。',
+        q: '職場内《しょくばない》での優位性《ゆういせい》を利用《りよう》して、業務《ぎょうむ》の適正《てきせい》な範囲《はんい》を超《こ》えて、精神《せいしん》・肉体《にくたい》に苦痛《くつう》を与える、または職場環境《しょくばかんきょう》を悪化《あっか》させる行為《こうい》は、何と呼ばれるか。',
         hint: 'Perilaku memanfaatkan superioritas di tempat kerja melebihi batas tugas sehingga menyebabkan penderitaan mental/fisik atau memperburuk lingkungan kerja disebut apa?',
         opts: [
           'セクシャル・ハラスメント',
@@ -3853,13 +3853,13 @@ export const CSV_SETS = [
       },
       {
         id: 20,
-        q: '建築基準法の主な目的として正しいものはどれか。',
+        q: '建築基準法《けんちくきじゅんほう》の主な目的《もくてき》として正《ただ》しいものはどれか。',
         hint: 'Tujuan utama Building Standards Act (建築基準法) yang benar adalah?',
         opts: [
-          '建設業者の資質を高めること',
-          '建設工事の費用を管理すること',
-          '労働者の権利を保護すること',
-          '建物の安全・衛生・防火のための最低基準を定めること',
+          '建設業者《けんせつぎょうしゃ》の資質《ししつ》を高めること',
+          '建設工事《けんせつこうじ》の費用《ひよう》を管理《かんり》すること',
+          '労働者《ろうどうしゃ》の権利《けんり》を保護《ほご》すること',
+          '建物《たてもの》の安全《あんぜん》・衛生《えいせい》・防火《ぼうか》のための最低基準《さいていきじゅん》を定めること',
         ],
         opts_id: [
           'Meningkatkan kualitas pelaku usaha konstruksi',
@@ -3872,7 +3872,7 @@ export const CSV_SETS = [
       },
       {
         id: 21,
-        q: '労働安全衛生法で、事業主が実施しなければならない健康診断の種類は？',
+        q: '労働安全衛生法《ろうどうあんぜんえいせいほう》で、事業主《じぎょうぬし》が実施《じっし》しなければならない健康診断《けんこうしんだん》の種類《しゅるい》は？',
         hint: 'Jenis pemeriksaan kesehatan yang wajib dilakukan pengusaha menurut UU Keselamatan Kerja adalah?',
         opts: ['任意', '入社時のみ', '定期健康診断', '退職時のみ'],
         opts_id: [
@@ -3886,13 +3886,13 @@ export const CSV_SETS = [
       },
       {
         id: 22,
-        q: '建設工事で「鉄骨工事」とはどのような工事か。',
+        q: '建設工事《けんせつこうじ》で「鉄骨工事《てっこつこうじ》」とはどのような工事《こうじ》か。',
         hint: "Apa itu 'pekerjaan baja struktural' (鉄骨工事) dalam konstruksi?",
         opts: [
-          '鉄製の水道管を設置する工事',
-          'コンクリートに鉄筋を入れる工事',
-          '鉄板で屋根を葺く工事',
-          '柱や梁などの骨組みを鉄骨で組み立てる工事',
+          '鉄製《てつせい》の水道管《すいどうかん》を設置《せっち》する工事《こうじ》',
+          'コンクリートに鉄筋《てっきん》を入れる工事《こうじ》',
+          '鉄板《てっぱん》で屋根《やね》を葺く工事《こうじ》',
+          '柱《はしら》や梁《はり》などの骨組み《ほねぐみ》を鉄骨《てっこつ》で組《く》み立《た》てる工事《こうじ》',
         ],
         opts_id: [
           'Pemasangan pipa air dari besi',
@@ -3905,7 +3905,7 @@ export const CSV_SETS = [
       },
       {
         id: 23,
-        q: '安全衛生委員会の議長は誰が務めるか。',
+        q: '安全衛生委員会《あんぜんえいせいいいんかい》の議長《ぎちょう》は誰が務めるか。',
         hint: 'Siapa yang menjadi ketua komite keselamatan & kesehatan?',
         opts: ['事業主又は安全衛生責任者', '作業員代表', '下請け', '任意'],
         opts_id: [
@@ -3919,13 +3919,13 @@ export const CSV_SETS = [
       },
       {
         id: 24,
-        q: '熱中症対策として、正しいものは？',
+        q: '熱中症対策《ねっちゅうしょうたいさく》として、正《ただ》しいものは？',
         hint: 'Tindakan pencegahan heat stroke yang benar adalah?',
         opts: [
-          '作業中は気持ち悪くなっても我慢する',
-          '通気性の良い作業服を着る',
-          '作業の前後に水分や塩分を控える',
-          'エアコンのある休憩場所を利用しない',
+          '作業中《さぎょうちゅう》は気持《きも》ち悪くなっても我慢《がまん》する',
+          '通気性《つうきせい》の良い作業服《さぎょうふく》を着る',
+          '作業《さぎょう》の前後《ぜんご》に水分《すいぶん》や塩分《えんぶん》を控える',
+          'エアコンのある休憩場所《きゅうけいばしょ》を利用《りよう》しない',
         ],
         opts_id: [
           'Tetap bekerja meski tidak enak',
@@ -3938,7 +3938,7 @@ export const CSV_SETS = [
       },
       {
         id: 25,
-        q: '朝礼で使う「よろしくお願いします」の意味は？',
+        q: '朝礼《ちょうれい》で使う「よろしくお願《ねが》いします」の意味《いみ》は？',
         hint: 'Arti ucapan “Yoroshiku onegaishimasu” di apel pagi adalah?',
         opts: ['危険です', 'さようなら', '休憩します', '今日も一日よろしくお願いします'],
         opts_id: ['Bahaya', 'Selamat tinggal', 'Saya istirahat', 'Mohon kerjasamanya hari ini'],
@@ -3947,7 +3947,7 @@ export const CSV_SETS = [
       },
       {
         id: 26,
-        q: '技能実習生が日本で就労できる最大期間は？',
+        q: '技能実習生《ぎのうじっしゅうせい》が日本《にほん》で就労《しゅうろう》できる最大期間《さいだいきかん》は？',
         hint: 'Periode maksimal kerja praktik skill di Jepang adalah?',
         opts: ['5 年', '10 年', '3 年', '1 年'],
         opts_id: ['5 tahun', '10 tahun', '3 tahun', '1 tahun'],
@@ -3965,7 +3965,7 @@ export const CSV_SETS = [
       },
       {
         id: 28,
-        q: '労働安全衛生法で、機械の定期点検の実施者は？',
+        q: '労働安全衛生法《ろうどうあんぜんえいせいほう》で、機械《きかい》の定期点検《ていきてんけん》の実施者《じっしゃ》は？',
         hint: 'Penyelenggara pemeriksaan rutin mesin menurut UU Keselamatan adalah?',
         opts: ['任意', '事業者', '作業員', '下請け'],
         opts_id: ['Sukarela', 'Pengusaha', 'Pekerja', 'Subkontraktor'],
@@ -3974,7 +3974,7 @@ export const CSV_SETS = [
       },
       {
         id: 29,
-        q: '安全衛生教育の対象者として正しいものは？',
+        q: '安全衛生教育《あんぜんえいせいきょういく》の対象者《たいしょうしゃ》として正《ただ》しいものは？',
         hint: 'Sasaran pendidikan keselamatan & kesehatan yang benar adalah?',
         opts: ['管理職のみ', '下請けのみ', '新規入場者及び作業内容変更者', '任意'],
         opts_id: [
@@ -3991,10 +3991,10 @@ export const CSV_SETS = [
         q: '「指差呼称《ゆびさしこしょう》」の効果として正しいものはどれか。',
         hint: "Efek yang benar dari 'pointing and calling' (指差呼称) adalah?",
         opts: [
-          '作業スピードを速くする効果',
+          '作業《さぎょう》スピードを速くする効果《こうか》',
           '人間のエラー《ヒューマンエラー》を大幅に減少させる効果',
-          '体力を向上させる効果',
-          'コミュニケーションを難しくする効果',
+          '体力《たいりょく》を向上《こうじょう》させる効果《こうか》',
+          'コミュニケーションを難《むずか》しくする効果《こうか》',
         ],
         opts_id: [
           'Mempercepat kecepatan kerja',
