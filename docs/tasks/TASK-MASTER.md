@@ -21,7 +21,7 @@
 
 | Version | Task File | Status | Effort | Items |
 |---------|-----------|--------|--------|-------|
-| v4.20.0 | TASK-v4.20.0.md | **READY** | Low | X1, X2 — P0 critical bugs |
+| v4.20.0 | TASK-v4.20.0.md | **DONE** | Low | X1, X2 — P0 critical bugs |
 | v4.20.1 | TASK-v4.20.1.md | **READY** | Low | REF-6, N13, N9, N18, ENG-8 |
 | v4.20.2 | TASK-v4.20.2.md | **READY** | Low | ENG-2, N15, N19, B5, B1 |
 | v4.20.3 | TASK-v4.20.3.md | **READY** | Medium | ENG-1, ENG-7, B3, N2, N4 |

@@ -1,5 +1,5 @@
 # TASK v4.20.0 — X1, X2: P0 Critical Bugs
-**Status:** READY | **Effort:** Low | **Depends on:** nothing — start here
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** nothing — start here
 
 ---
 
