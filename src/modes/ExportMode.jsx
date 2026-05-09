@@ -16,12 +16,16 @@ function readSummary() {
   try {
     const data = exportAll();
     return {
-      known:    (data.progress?.known    ?? []).length,
-      unknown:  (data.progress?.unknown  ?? []).length,
-      starred:  (data.progress?.starred  ?? []).length,
-      srsCount: Object.keys(data.srs?.cards ?? {}).length,
-      sessions: (data.progress?.sessions ?? []).length,
-      version:  data._storage_version ?? data.progress?._v ?? '?',
+      known:      (data.progress?.known    ?? []).length,
+      unknown:    (data.progress?.unknown  ?? []).length,
+      starred:    (data.progress?.starred  ?? []).length,
+      srsCount:   Object.keys(data.srs?.cards ?? {}).length,
+      sessions:   (data.progress?.sessions ?? []).length,
+      quizWrong:  Object.keys(data.progress?.quizWrong ?? {}).length,
+      wgWrong:    Object.keys(data.progress?.wgWrong   ?? {}).length,
+      jacScores:  Object.keys(data.progress?.jacScores ?? {}).length,
+      wgScores:   Object.keys(data.progress?.wgScores  ?? {}).length,
+      version:    data._storage_version ?? data.progress?._v ?? '?',
       exportedAt: data.exported_at ?? null,
     };
   } catch {
@@ -148,10 +152,12 @@ export default function ExportMode({ onExit }) {
   };
 
   const summaryItems = [
-    { n: summary.known,    label: 'Hafal',     icon: '✅' },
-    { n: summary.unknown,  label: 'Belum',     icon: '❌' },
-    { n: summary.srsCount, label: 'Kartu SRS', icon: '🔁' },
-    { n: summary.sessions, label: 'Sesi',      icon: '📊' },
+    { n: summary.known,     label: 'Hafal',       icon: '✅' },
+    { n: summary.unknown,   label: 'Belum',       icon: '❌' },
+    { n: summary.srsCount,  label: 'Kartu SRS',   icon: '🔁' },
+    { n: summary.sessions,  label: 'Sesi',        icon: '📊' },
+    { n: summary.quizWrong, label: 'Salah Kuis',  icon: '⚠️' },
+    { n: summary.jacScores, label: 'Skor JAC',    icon: '🏆' },
   ];
 
   return (
