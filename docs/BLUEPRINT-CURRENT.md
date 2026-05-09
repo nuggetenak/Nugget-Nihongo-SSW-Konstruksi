@@ -1,8 +1,8 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.21.1)
 
-> **Status:** v4.21.1 STABLE ✅ — all v4.20.x–v4.21.1 tasks COMPLETE
-> **Version:** 4.21.1
-> **Last updated:** 2026-05-09 (hygiene pass — all queued tasks executed; 457 tests passing)
+> **Status:** v4.22.0 STABLE ✅
+> **Version:** 4.22.0
+> **Last updated:** 2026-05-09 (v4.22.0: card ID renumbering, storage v4)
 > **For new agents:** Read `_MAP.md` first. All TASK-v4.20.x / TASK-v4.21.x files are DONE.
 
 ---
@@ -19,7 +19,7 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | Storage schema | v3 (3-doc localStorage, lz-string compressed) |
 | Tests | 457 (41 files) |
 | Prod deps | 4 (react, react-dom, ts-fsrs, lz-string) |
-| Version | **4.21.1** |
+| Version | **4.22.0** |
 
 ---
 
@@ -51,6 +51,7 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | v4.20.0–4.20.15 | Engines + Features + Data | session-analytics, OVERHAUL-2, DB fixes, ENG-9/10/11/12/13, storage quota, context memo, useTrackedCards |
 | v4.21.0 | Structural | REF-8/REF-9: merge vocab sources (8→4); absorb sipil/bangunan sets; C1-C9 data-integrity tests |
 | v4.21.1 | OVERHAUL-1 | Retire usePersistedState; ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary |
+| v4.22.0 | Card ID renumber | 185 gaps removed; IDs contiguous 1–1443; storage schema v4 + remap migration |
 
 ---
 

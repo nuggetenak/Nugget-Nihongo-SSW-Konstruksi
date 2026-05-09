@@ -50,7 +50,7 @@ export const CARDS_COMMON = [
   _origIndex: 3
   },
   {
-  id: 6,
+  id: 5,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうどうきじゅんほう",
@@ -62,7 +62,7 @@ export const CARDS_COMMON = [
   _origIndex: 4
   },
   {
-  id: 7,
+  id: 6,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうどうあんぜんえいせいほう",
@@ -74,7 +74,7 @@ export const CARDS_COMMON = [
   _origIndex: 5
   },
   {
-  id: 8,
+  id: 7,
   category: "hourei",
   source: "jac-ch2",
   furi: "さいていちんぎんほう",
@@ -86,7 +86,7 @@ export const CARDS_COMMON = [
   _origIndex: 6
   },
   {
-  id: 9,
+  id: 8,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつぎょうほう",
@@ -98,7 +98,7 @@ export const CARDS_COMMON = [
   _origIndex: 7
   },
   {
-  id: 10,
+  id: 9,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんちくきじゅんほう",
@@ -110,7 +110,7 @@ export const CARDS_COMMON = [
   _origIndex: 8
   },
   {
-  id: 11,
+  id: 10,
   category: "hourei",
   source: "jac-ch2",
   furi: "しょうぼうほう",
@@ -122,7 +122,7 @@ export const CARDS_COMMON = [
   _origIndex: 9
   },
   {
-  id: 12,
+  id: 11,
   category: "hourei",
   source: "jac-ch2",
   furi: "すいどうほう",
@@ -134,7 +134,7 @@ export const CARDS_COMMON = [
   _origIndex: 10
   },
   {
-  id: 13,
+  id: 12,
   category: "hourei",
   source: "jac-ch2",
   furi: "でんきじぎょうほう",
@@ -146,7 +146,7 @@ export const CARDS_COMMON = [
   _origIndex: 11
   },
   {
-  id: 14,
+  id: 13,
   category: "hourei",
   source: "jac-ch2",
   furi: "でんきつうしんじぎょうほう",
@@ -158,7 +158,7 @@ export const CARDS_COMMON = [
   _origIndex: 12
   },
   {
-  id: 15,
+  id: 14,
   category: "hourei",
   source: "jac-ch2",
   furi: "さぶろくきょうてい",
@@ -170,7 +170,7 @@ export const CARDS_COMMON = [
   _origIndex: 13
   },
   {
-  id: 16,
+  id: 15,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうさいほけん",
@@ -182,7 +182,7 @@ export const CARDS_COMMON = [
   _origIndex: 14
   },
   {
-  id: 17,
+  id: 16,
   category: "hourei",
   source: "jac-ch2",
   furi: "まにえすと",
@@ -194,7 +194,7 @@ export const CARDS_COMMON = [
   _origIndex: 15
   },
   {
-  id: 18,
+  id: 17,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつりさいくるほう",
@@ -206,7 +206,7 @@ export const CARDS_COMMON = [
   _origIndex: 16
   },
   {
-  id: 19,
+  id: 18,
   category: "hourei",
   source: "jac-ch2",
   furi: "こようほけんほう",
@@ -218,7 +218,7 @@ export const CARDS_COMMON = [
   _origIndex: 17
   },
   {
-  id: 20,
+  id: 19,
   category: "hourei",
   source: "jac-ch2",
   furi: "がすじぎょうほう",
@@ -230,7 +230,7 @@ export const CARDS_COMMON = [
   _origIndex: 18
   },
   {
-  id: 21,
+  id: 20,
   category: "hourei",
   source: "jac-ch2",
   furi: "げすいどうほう",
@@ -242,7 +242,7 @@ export const CARDS_COMMON = [
   _origIndex: 19
   },
   {
-  id: 22,
+  id: 21,
   category: "hourei",
   source: "jac-ch2",
   furi: "はいきぶものしょりほう",
@@ -254,7 +254,7 @@ export const CARDS_COMMON = [
   _origIndex: 20
   },
   {
-  id: 23,
+  id: 22,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうさいかくし",
@@ -266,7 +266,7 @@ export const CARDS_COMMON = [
   _origIndex: 21
   },
   {
-  id: 24,
+  id: 23,
   category: "hourei",
   source: "jac-ch2",
   furi: "でんきこうじぎょうほう",
@@ -278,7 +278,7 @@ export const CARDS_COMMON = [
   _origIndex: 22
   },
   {
-  id: 25,
+  id: 24,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつぎょうほうのにじゅうきゅうぎょうしゅ",
@@ -290,7 +290,7 @@ export const CARDS_COMMON = [
   _origIndex: 23
   },
   {
-  id: 26,
+  id: 25,
   category: "hourei",
   source: "jac-ch2",
   furi: "あすべすと",
@@ -302,7 +302,7 @@ export const CARDS_COMMON = [
   _origIndex: 24
   },
   {
-  id: 27,
+  id: 26,
   category: "hourei",
   source: "jac-ch2",
   furi: "たいきおせんぼうしほう",
@@ -314,7 +314,7 @@ export const CARDS_COMMON = [
   _origIndex: 25
   },
   {
-  id: 29,
+  id: 28,
   category: "sekou",
   source: "jac-ch3",
   furi: "せつびこうじ",
@@ -325,7 +325,7 @@ export const CARDS_COMMON = [
   _origIndex: 27
   },
   {
-  id: 41,
+  id: 39,
   category: "sekou",
   source: "jac-ch6",
   furi: "じゅちゅういっぴんせいさん",
@@ -336,7 +336,7 @@ export const CARDS_COMMON = [
   _origIndex: 39
   },
   {
-  id: 50,
+  id: 40,
   category: "sekou",
   source: "jac-jitsugi1",
   furi: "せこうかんりしょていのひんしつ",
@@ -347,7 +347,7 @@ export const CARDS_COMMON = [
   _origIndex: 48
   },
   {
-  id: 111,
+  id: 99,
   category: "anzen",
   source: "jac-ch2",
   furi: "あんぜんだいいち",
@@ -359,7 +359,7 @@ export const CARDS_COMMON = [
   _origIndex: 107
   },
   {
-  id: 112,
+  id: 100,
   category: "anzen",
   source: "jac-ch7",
   furi: "ふるはあねすがたついらくせいしようきぐう",
@@ -370,7 +370,7 @@ export const CARDS_COMMON = [
   _origIndex: 108
   },
   {
-  id: 114,
+  id: 101,
   category: "anzen",
   source: "jac-ch2",
   furi: "ついらくてんらく",
@@ -382,7 +382,7 @@ export const CARDS_COMMON = [
   _origIndex: 109
   },
   {
-  id: 116,
+  id: 102,
   category: "anzen",
   source: "jac-ch6",
   furi: "きゅうしいぢいえすいい",
@@ -393,7 +393,7 @@ export const CARDS_COMMON = [
   _origIndex: 110
   },
   {
-  id: 118,
+  id: 103,
   category: "anzen",
   source: "jac-ch6",
   furi: "ごえむ",
@@ -404,7 +404,7 @@ export const CARDS_COMMON = [
   _origIndex: 111
   },
   {
-  id: 119,
+  id: 104,
   category: "anzen",
   source: "jac-ch7",
   furi: "あんかあぽいんと",
@@ -415,7 +415,7 @@ export const CARDS_COMMON = [
   _origIndex: 112
   },
   {
-  id: 120,
+  id: 105,
   category: "anzen",
   source: "jac-jitsugi1",
   furi: "さんそけつぼう",
@@ -426,7 +426,7 @@ export const CARDS_COMMON = [
   _origIndex: 113
   },
   {
-  id: 121,
+  id: 106,
   category: "anzen",
   source: "jac-jitsugi1",
   furi: "どどめ",
@@ -437,7 +437,7 @@ export const CARDS_COMMON = [
   _origIndex: 114
   },
   {
-  id: 122,
+  id: 107,
   category: "anzen",
   source: "jac-jitsugi2",
   furi: "しんきにゅうじょうしゃきょういくしんにゅうしゃあんぜんえいせいきょういく",
@@ -448,7 +448,7 @@ export const CARDS_COMMON = [
   _origIndex: 115
   },
   {
-  id: 123,
+  id: 108,
   category: "anzen",
   source: "jac-jitsugi1",
   furi: "さんだいさいがい",
@@ -459,7 +459,7 @@ export const CARDS_COMMON = [
   _origIndex: 116
   },
   {
-  id: 124,
+  id: 109,
   category: "anzen",
   source: "jac-ch6",
   furi: "しぎょうまえてんけん",
@@ -470,7 +470,7 @@ export const CARDS_COMMON = [
   _origIndex: 117
   },
   {
-  id: 125,
+  id: 110,
   category: "anzen",
   source: "jac-ch7",
   furi: "ばっくほうのあんぜん",
@@ -481,7 +481,7 @@ export const CARDS_COMMON = [
   _origIndex: 118
   },
   {
-  id: 126,
+  id: 111,
   category: "anzen",
   source: "jac-ch4",
   furi: "すぼり",
@@ -492,7 +492,7 @@ export const CARDS_COMMON = [
   _origIndex: 119
   },
   {
-  id: 127,
+  id: 112,
   category: "anzen",
   source: "jac-ch3",
   furi: "どらいわあくゑるぽいんとこうほう",
@@ -503,7 +503,7 @@ export const CARDS_COMMON = [
   _origIndex: 120
   },
   {
-  id: 128,
+  id: 113,
   category: "anzen",
   source: "jac-jitsugi2",
   furi: "ひろうぼうしてきせつなすいみんとしょくじ",
@@ -514,7 +514,7 @@ export const CARDS_COMMON = [
   _origIndex: 121
   },
   {
-  id: 129,
+  id: 114,
   category: "career",
   source: "jac-ch1",
   furi: "けんせつきゃりああっぷしすてむ",
@@ -526,7 +526,7 @@ export const CARDS_COMMON = [
   _origIndex: 122
   },
   {
-  id: 130,
+  id: 115,
   category: "career",
   source: "jac-ch1",
   furi: "もとうけ",
@@ -538,7 +538,7 @@ export const CARDS_COMMON = [
   _origIndex: 123
   },
   {
-  id: 131,
+  id: 116,
   category: "career",
   source: "jac-ch2",
   furi: "したうけせんもんこうじぎょうしゃ",
@@ -550,7 +550,7 @@ export const CARDS_COMMON = [
   _origIndex: 124
   },
   {
-  id: 134,
+  id: 117,
   category: "career",
   source: "jac-gakka1",
   furi: "ごえす",
@@ -561,7 +561,7 @@ export const CARDS_COMMON = [
   _origIndex: 125
   },
   {
-  id: 135,
+  id: 118,
   category: "career",
   source: "jac-gakka1",
   furi: "ぱわあはらすめんと",
@@ -572,7 +572,7 @@ export const CARDS_COMMON = [
   _origIndex: 126
   },
   {
-  id: 136,
+  id: 119,
   category: "career",
   source: "jac-gakka2",
   furi: "しかくのしゅるい",
@@ -583,7 +583,7 @@ export const CARDS_COMMON = [
   _origIndex: 127
   },
   {
-  id: 137,
+  id: 120,
   category: "career",
   source: "jac-ch2",
   furi: "せくしゃるはらすめんと",
@@ -595,7 +595,7 @@ export const CARDS_COMMON = [
   _origIndex: 128
   },
   {
-  id: 138,
+  id: 121,
   category: "sekou",
   source: "jac-jitsugi1",
   furi: "すいじゅんき",
@@ -606,7 +606,7 @@ export const CARDS_COMMON = [
   _origIndex: 129
   },
   {
-  id: 139,
+  id: 122,
   category: "sekou",
   source: "jac-ch5",
   furi: "とらんしっと",
@@ -618,7 +618,7 @@ export const CARDS_COMMON = [
   _origIndex: 130
   },
   {
-  id: 140,
+  id: 123,
   category: "sekou",
   source: "jac-ch5",
   furi: "とおたるすてえしょん",
@@ -630,7 +630,7 @@ export const CARDS_COMMON = [
   _origIndex: 131
   },
   {
-  id: 141,
+  id: 124,
   category: "sekou",
   source: "jac-ch5",
   furi: "すみだし",
@@ -641,7 +641,7 @@ export const CARDS_COMMON = [
   _origIndex: 132
   },
   {
-  id: 142,
+  id: 125,
   category: "sekou",
   source: "jac-ch5",
   furi: "こんべっくす",
@@ -653,7 +653,7 @@ export const CARDS_COMMON = [
   _origIndex: 133
   },
   {
-  id: 143,
+  id: 126,
   category: "sekou",
   source: "jac-ch5",
   furi: "ふりこさげふり",
@@ -664,7 +664,7 @@ export const CARDS_COMMON = [
   _origIndex: 134
   },
   {
-  id: 144,
+  id: 127,
   category: "sekou",
   source: "jac-ch5",
   furi: "さんだあ",
@@ -676,7 +676,7 @@ export const CARDS_COMMON = [
   _origIndex: 135
   },
   {
-  id: 145,
+  id: 128,
   category: "sekou",
   source: "jac-jitsugi1",
   furi: "すみつぼ",
@@ -687,7 +687,7 @@ export const CARDS_COMMON = [
   _origIndex: 136
   },
   {
-  id: 146,
+  id: 129,
   category: "sekou",
   source: "jac-ch4",
   furi: "ろくずみにげすみじずみ",
@@ -698,7 +698,7 @@ export const CARDS_COMMON = [
   _origIndex: 137
   },
   {
-  id: 147,
+  id: 130,
   category: "sekou",
   source: "jac-ch4",
   furi: "べんちまーく",
@@ -709,7 +709,7 @@ export const CARDS_COMMON = [
   _origIndex: 138
   },
   {
-  id: 148,
+  id: 131,
   category: "sekou",
   source: "jac-ch4",
   furi: "とおりしんかべしんはしらしん",
@@ -720,7 +720,7 @@ export const CARDS_COMMON = [
   _origIndex: 139
   },
   {
-  id: 149,
+  id: 132,
   category: "sekou",
   source: "jac-jitsugi2",
   furi: "だいしゃ",
@@ -731,7 +731,7 @@ export const CARDS_COMMON = [
   _origIndex: 140
   },
   {
-  id: 150,
+  id: 133,
   category: "sekou",
   source: "jac-ch5",
   furi: "いちりんしゃ",
@@ -742,7 +742,7 @@ export const CARDS_COMMON = [
   _origIndex: 141
   },
   {
-  id: 151,
+  id: 134,
   category: "hourei",
   source: "jac-ch2",
   furi: "わりましちんぎんりつ",
@@ -754,7 +754,7 @@ export const CARDS_COMMON = [
   _origIndex: 142
   },
   {
-  id: 152,
+  id: 135,
   category: "hourei",
   source: "jac-ch2",
   furi: "つうきんさいがいぎょうむさいがい",
@@ -766,7 +766,7 @@ export const CARDS_COMMON = [
   _origIndex: 143
   },
   {
-  id: 153,
+  id: 136,
   category: "career",
   source: "jac-ch2",
   furi: "ぎのうけんてい／ぎのうし",
@@ -778,7 +778,7 @@ export const CARDS_COMMON = [
   _origIndex: 144
   },
   {
-  id: 154,
+  id: 137,
   category: "hourei",
   source: "jac-ch2",
   furi: "とくていぎのうがいこくじんのこようほけん",
@@ -790,7 +790,7 @@ export const CARDS_COMMON = [
   _origIndex: 145
   },
   {
-  id: 155,
+  id: 138,
   category: "hourei",
   source: "jac-ch2",
   furi: "こようほけんのしきゅうようけん",
@@ -802,7 +802,7 @@ export const CARDS_COMMON = [
   _origIndex: 146
   },
   {
-  id: 156,
+  id: 139,
   category: "hourei",
   source: "jac-ch2",
   furi: "すとれすちぇっく",
@@ -814,7 +814,7 @@ export const CARDS_COMMON = [
   _origIndex: 147
   },
   {
-  id: 157,
+  id: 140,
   category: "hourei",
   source: "jac-ch2",
   furi: "どろおんとうろくぎむ",
@@ -826,7 +826,7 @@ export const CARDS_COMMON = [
   _origIndex: 148
   },
   {
-  id: 158,
+  id: 141,
   category: "hourei",
   source: "jac-ch2",
   furi: "こうくうしょうがいとう",
@@ -838,7 +838,7 @@ export const CARDS_COMMON = [
   _origIndex: 149
   },
   {
-  id: 159,
+  id: 142,
   category: "hourei",
   source: "jac-ch2",
   furi: "ちんぎんしはらいのごげんそく",
@@ -850,7 +850,7 @@ export const CARDS_COMMON = [
   _origIndex: 150
   },
   {
-  id: 160,
+  id: 143,
   category: "hourei",
   source: "jac-ch2",
   furi: "きゅうけいじかんのきてい",
@@ -862,7 +862,7 @@ export const CARDS_COMMON = [
   _origIndex: 151
   },
   {
-  id: 161,
+  id: 144,
   category: "hourei",
   source: "jac-ch2",
   furi: "かいこよこくさんじゅうにちまえ",
@@ -874,7 +874,7 @@ export const CARDS_COMMON = [
   _origIndex: 152
   },
   {
-  id: 162,
+  id: 145,
   category: "hourei",
   source: "jac-ch2",
   furi: "そうおんきせいほうていそうおんがたけんせつきかい",
@@ -886,7 +886,7 @@ export const CARDS_COMMON = [
   _origIndex: 153
   },
   {
-  id: 163,
+  id: 146,
   category: "hourei",
   source: "jac-ch2",
   furi: "でんぱほう",
@@ -898,7 +898,7 @@ export const CARDS_COMMON = [
   _origIndex: 154
   },
   {
-  id: 164,
+  id: 147,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうさいほけんのよんきゅうふ",
@@ -910,7 +910,7 @@ export const CARDS_COMMON = [
   _origIndex: 155
   },
   {
-  id: 165,
+  id: 148,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうさいほけんとくべつかにゅうせいど",
@@ -922,7 +922,7 @@ export const CARDS_COMMON = [
   _origIndex: 156
   },
   {
-  id: 166,
+  id: 149,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつろうどうしゃこようかいぜんほう",
@@ -934,7 +934,7 @@ export const CARDS_COMMON = [
   _origIndex: 157
   },
   {
-  id: 167,
+  id: 150,
   category: "hourei",
   source: "jac-ch2",
   furi: "ちゅうしゃじょうほう",
@@ -946,7 +946,7 @@ export const CARDS_COMMON = [
   _origIndex: 158
   },
   {
-  id: 168,
+  id: 151,
   category: "hourei",
   source: "jac-ch2",
   furi: "すいしつおだくぼうしほう",
@@ -958,7 +958,7 @@ export const CARDS_COMMON = [
   _origIndex: 159
   },
   {
-  id: 169,
+  id: 152,
   category: "hourei",
   source: "jac-ch2",
   furi: "ばいしょうよていのきんし",
@@ -970,7 +970,7 @@ export const CARDS_COMMON = [
   _origIndex: 160
   },
   {
-  id: 170,
+  id: 153,
   category: "hourei",
   source: "jac-ch2",
   furi: "きかいきんとうのげんそくきょうせいろうどうのきんし",
@@ -982,7 +982,7 @@ export const CARDS_COMMON = [
   _origIndex: 161
   },
   {
-  id: 171,
+  id: 154,
   category: "hourei",
   source: "jac-ch2",
   furi: "かいこせいげんしょうびょうりょうようちゅうわかいこきんし",
@@ -994,7 +994,7 @@ export const CARDS_COMMON = [
   _origIndex: 162
   },
   {
-  id: 172,
+  id: 155,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうどうじょうけんのめいじろくこうもん",
@@ -1006,7 +1006,7 @@ export const CARDS_COMMON = [
   _origIndex: 163
   },
   {
-  id: 173,
+  id: 156,
   category: "hourei",
   source: "jac-ch2",
   furi: "ちいきべつさいていちんぎん",
@@ -1018,7 +1018,7 @@ export const CARDS_COMMON = [
   _origIndex: 164
   },
   {
-  id: 174,
+  id: 157,
   category: "career",
   source: "jac-ch2",
   furi: "にんていくんれん",
@@ -1030,7 +1030,7 @@ export const CARDS_COMMON = [
   _origIndex: 165
   },
   {
-  id: 175,
+  id: 158,
   category: "hourei",
   source: "jac-ch2",
   furi: "ほうていきゅうじつまいしゅうすくなくともいっかい",
@@ -1042,7 +1042,7 @@ export const CARDS_COMMON = [
   _origIndex: 166
   },
   {
-  id: 176,
+  id: 159,
   category: "hourei",
   source: "jac-ch2",
   furi: "ゆうきゅうきゅうかのかいとりきんし",
@@ -1054,7 +1054,7 @@ export const CARDS_COMMON = [
   _origIndex: 167
   },
   {
-  id: 177,
+  id: 160,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんこうしんだんていきねんいっかいとやといいれじ",
@@ -1066,7 +1066,7 @@ export const CARDS_COMMON = [
   _origIndex: 168
   },
   {
-  id: 192,
+  id: 161,
   category: "anzen",
   source: "jac-ch3",
   furi: "はっぱ",
@@ -1077,7 +1077,7 @@ export const CARDS_COMMON = [
   _origIndex: 183
   },
   {
-  id: 199,
+  id: 162,
   category: "sekou",
   source: "jac-ch3",
   furi: "ようせつぶんるいゆうせつあっせつろうせつ",
@@ -1089,7 +1089,7 @@ export const CARDS_COMMON = [
   _origIndex: 190
   },
   {
-  id: 202,
+  id: 163,
   category: "sekou",
   source: "jac-ch3",
   furi: "ばいぶれえたこんくりいとしめかため",
@@ -1101,7 +1101,7 @@ export const CARDS_COMMON = [
   _origIndex: 193
   },
   {
-  id: 208,
+  id: 165,
   category: "anzen",
   source: "jac-ch3",
   furi: "たまがけいじょうわぎのうこうしゅう",
@@ -1113,7 +1113,7 @@ export const CARDS_COMMON = [
   _origIndex: 199
   },
   {
-  id: 209,
+  id: 166,
   category: "hourei",
   source: "jac-ch3",
   furi: "しかくしゅるいこっかめんきょぎのうこうしゅうとくべつきょういく",
@@ -1125,7 +1125,7 @@ export const CARDS_COMMON = [
   _origIndex: 200
   },
   {
-  id: 210,
+  id: 167,
   category: "hourei",
   source: "jac-ch3",
   furi: "はっぱぎしめんきょ",
@@ -1137,7 +1137,7 @@ export const CARDS_COMMON = [
   _origIndex: 201
   },
   {
-  id: 211,
+  id: 168,
   category: "sekou",
   source: "jac-ch3",
   furi: "かいたいこうじあべすとたいさく",
@@ -1149,7 +1149,7 @@ export const CARDS_COMMON = [
   _origIndex: 202
   },
   {
-  id: 216,
+  id: 169,
   category: "anzen",
   source: "jac-ch3",
   furi: "たいるはりこうじらっかりすくたしょくしゅれんけい",
@@ -1161,7 +1161,7 @@ export const CARDS_COMMON = [
   _origIndex: 207
   },
   {
-  id: 224,
+  id: 170,
   category: "hourei",
   source: "jac-ch3",
   furi: "くれえんいどうしきくれえんしかくしきい",
@@ -1173,7 +1173,7 @@ export const CARDS_COMMON = [
   _origIndex: 215
   },
   {
-  id: 225,
+  id: 171,
   category: "hourei",
   source: "jac-ch3",
   furi: "こうしょさぎょうしゃしかくきょうかい",
@@ -1185,7 +1185,7 @@ export const CARDS_COMMON = [
   _origIndex: 216
   },
   {
-  id: 226,
+  id: 172,
   category: "hourei",
   source: "jac-ch3",
   furi: "しゃりょうけいけんせつきかいしかくきょうかい",
@@ -1197,7 +1197,7 @@ export const CARDS_COMMON = [
   _origIndex: 217
   },
   {
-  id: 227,
+  id: 173,
   category: "hourei",
   source: "jac-ch3",
   furi: "がすようせつさぎょうしゅにんしゃめんきょああくようせつさぎょうしゃとくべつきょういく",
@@ -1209,7 +1209,7 @@ export const CARDS_COMMON = [
   _origIndex: 218
   },
   {
-  id: 231,
+  id: 177,
   category: "sekou",
   source: "jac-ch3",
   furi: "きかいどこうこうじだいひょうきかいぶるどおざあゆあつしょべるほいいるろおだあ",
@@ -1221,7 +1221,7 @@ export const CARDS_COMMON = [
   _origIndex: 222
   },
   {
-  id: 233,
+  id: 178,
   category: "hourei",
   source: "jac-ch3",
   furi: "けんちくきじゅんほうたいしんきじゅんしんどきょうきょう",
@@ -1233,7 +1233,7 @@ export const CARDS_COMMON = [
   _origIndex: 224
   },
   {
-  id: 241,
+  id: 180,
   category: "hourei",
   source: "jac-ch3",
   furi: "でんきこうじしいっしゅにしゅおおがたしせついっしゅ",
@@ -1245,7 +1245,7 @@ export const CARDS_COMMON = [
   _origIndex: 232
   },
   {
-  id: 242,
+  id: 181,
   category: "hourei",
   source: "jac-ch3",
   furi: "こうじたんにんしゃでんきつうしんしゅにんぎじゅつしゃ",
@@ -1257,7 +1257,7 @@ export const CARDS_COMMON = [
   _origIndex: 233
   },
   {
-  id: 243,
+  id: 182,
   category: "hourei",
   source: "jac-ch3",
   furi: "ごんどらそうさとくべつきょういくこうそうびるがいへきさぎょう",
@@ -1269,7 +1269,7 @@ export const CARDS_COMMON = [
   _origIndex: 234
   },
   {
-  id: 244,
+  id: 183,
   category: "hourei",
   source: "jac-ch3",
   furi: "さんそけつぼうきけんさぎょうしゅにんしゃぎのうこうしゅうまんほおるちかどう",
@@ -1281,7 +1281,7 @@ export const CARDS_COMMON = [
   _origIndex: 235
   },
   {
-  id: 245,
+  id: 184,
   category: "hourei",
   source: "jac-ch3",
   furi: "いしわたあすべすととりあつかいさぎょうしゃとくべつきょういく",
@@ -1293,7 +1293,7 @@ export const CARDS_COMMON = [
   _origIndex: 236
   },
   {
-  id: 246,
+  id: 185,
   category: "hourei",
   source: "jac-ch3",
   furi: "ゆうきようざいさぎょうしゅにんしゃぎのうこうしゅうしつないたんく",
@@ -1305,7 +1305,7 @@ export const CARDS_COMMON = [
   _origIndex: 237
   },
   {
-  id: 250,
+  id: 186,
   category: "sekou",
   source: "jac-ch4",
   furi: "たてずみしあげずみ",
@@ -1317,7 +1317,7 @@ export const CARDS_COMMON = [
   _origIndex: 241
   },
   {
-  id: 251,
+  id: 187,
   category: "sekou",
   source: "jac-ch4",
   furi: "おやずみ",
@@ -1328,7 +1328,7 @@ export const CARDS_COMMON = [
   _origIndex: 242
   },
   {
-  id: 252,
+  id: 188,
   category: "sekou",
   source: "jac-ch4",
   furi: "かねをふるすみつけ",
@@ -1340,7 +1340,7 @@ export const CARDS_COMMON = [
   _origIndex: 243
   },
   {
-  id: 253,
+  id: 189,
   category: "sekou",
   source: "jac-ch4",
   furi: "きじゅんずみ",
@@ -1351,7 +1351,7 @@ export const CARDS_COMMON = [
   _origIndex: 244
   },
   {
-  id: 255,
+  id: 190,
   category: "sekou",
   source: "jac-ch4",
   furi: "たかさきごう",
@@ -1363,7 +1363,7 @@ export const CARDS_COMMON = [
   _origIndex: 246
   },
   {
-  id: 259,
+  id: 191,
   category: "sekou",
   source: "jac-ch4",
   furi: "ようへきやいたこうやいた",
@@ -1375,7 +1375,7 @@ export const CARDS_COMMON = [
   _origIndex: 250
   },
   {
-  id: 261,
+  id: 192,
   category: "sekou",
   source: "jac-ch4",
   furi: "かまばみずかえまんぼう",
@@ -1387,7 +1387,7 @@ export const CARDS_COMMON = [
   _origIndex: 252
   },
   {
-  id: 262,
+  id: 193,
   category: "sekou",
   source: "jac-ch4",
   furi: "じぎょうべたきそふうちんぐくいきそ",
@@ -1399,7 +1399,7 @@ export const CARDS_COMMON = [
   _origIndex: 253
   },
   {
-  id: 263,
+  id: 194,
   category: "sekou",
   source: "jac-ch4",
   furi: "すらぶ",
@@ -1410,7 +1410,7 @@ export const CARDS_COMMON = [
   _origIndex: 254
   },
   {
-  id: 265,
+  id: 195,
   category: "anzen",
   source: "jac-ch4",
   furi: "あしばのしゅるいわくぐみたんかんくさびきんけつしき",
@@ -1422,7 +1422,7 @@ export const CARDS_COMMON = [
   _origIndex: 256
   },
   {
-  id: 266,
+  id: 196,
   category: "anzen",
   source: "jac-ch4",
   furi: "さぎょうゆかかりがこい",
@@ -1434,7 +1434,7 @@ export const CARDS_COMMON = [
   _origIndex: 257
   },
   {
-  id: 269,
+  id: 197,
   category: "sekou",
   source: "jac-ch4",
   furi: "すてこんくりいとすてこん",
@@ -1446,7 +1446,7 @@ export const CARDS_COMMON = [
   _origIndex: 260
   },
   {
-  id: 270,
+  id: 198,
   category: "sekou",
   source: "jac-ch4",
   furi: "けっそくはっかあ",
@@ -1458,7 +1458,7 @@ export const CARDS_COMMON = [
   _origIndex: 261
   },
   {
-  id: 271,
+  id: 199,
   category: "sekou",
   source: "jac-ch4",
   furi: "うちかさねうちつぎこおるどじょいんと",
@@ -1470,7 +1470,7 @@ export const CARDS_COMMON = [
   _origIndex: 262
   },
   {
-  id: 272,
+  id: 200,
   category: "anzen",
   source: "jac-ch4",
   furi: "ぱんくかたわくほうかい",
@@ -1482,7 +1482,7 @@ export const CARDS_COMMON = [
   _origIndex: 263
   },
   {
-  id: 273,
+  id: 201,
   category: "sekou",
   source: "jac-ch4",
   furi: "おさまりとりあい",
@@ -1494,7 +1494,7 @@ export const CARDS_COMMON = [
   _origIndex: 264
   },
   {
-  id: 274,
+  id: 202,
   category: "sekou",
   source: "jac-ch4",
   furi: "つらいちふろくめちがい",
@@ -1506,7 +1506,7 @@ export const CARDS_COMMON = [
   _origIndex: 265
   },
   {
-  id: 275,
+  id: 203,
   category: "sekou",
   source: "jac-ch4",
   furi: "だめてなおしてもどりだんどり",
@@ -1518,7 +1518,7 @@ export const CARDS_COMMON = [
   _origIndex: 266
   },
   {
-  id: 276,
+  id: 204,
   category: "sekou",
   source: "jac-ch4",
   furi: "たっぱうわばしたば",
@@ -1530,7 +1530,7 @@ export const CARDS_COMMON = [
   _origIndex: 267
   },
   {
-  id: 277,
+  id: 205,
   category: "sekou",
   source: "jac-ch4",
   furi: "いっけんいっしゃくいっすんひとつぼ",
@@ -1542,7 +1542,7 @@ export const CARDS_COMMON = [
   _origIndex: 268
   },
   {
-  id: 278,
+  id: 206,
   category: "sekou",
   source: "jac-ch4",
   furi: "ぴっち",
@@ -1554,7 +1554,7 @@ export const CARDS_COMMON = [
   _origIndex: 269
   },
   {
-  id: 292,
+  id: 219,
   category: "career",
   source: "jac-ch4",
   furi: "ほうれんそうほうこくれんらくそうだん",
@@ -1566,7 +1566,7 @@ export const CARDS_COMMON = [
   _origIndex: 283
   },
   {
-  id: 293,
+  id: 220,
   category: "career",
   source: "jac-ch4",
   furi: "さぎょういんつめしょのるうる",
@@ -1578,7 +1578,7 @@ export const CARDS_COMMON = [
   _origIndex: 284
   },
   {
-  id: 294,
+  id: 221,
   category: "sekou",
   source: "jac-ch4",
   furi: "みつけみえがかりみえかくれ",
@@ -1590,7 +1590,7 @@ export const CARDS_COMMON = [
   _origIndex: 285
   },
   {
-  id: 295,
+  id: 222,
   category: "sekou",
   source: "jac-ch4",
   furi: "そりむくりろく",
@@ -1602,7 +1602,7 @@ export const CARDS_COMMON = [
   _origIndex: 286
   },
   {
-  id: 296,
+  id: 223,
   category: "sekou",
   source: "jac-ch4",
   furi: "ころびにげ",
@@ -1614,7 +1614,7 @@ export const CARDS_COMMON = [
   _origIndex: 287
   },
   {
-  id: 297,
+  id: 224,
   category: "sekou",
   source: "jac-ch4",
   furi: "みきるみきりざえなじみ",
@@ -1626,7 +1626,7 @@ export const CARDS_COMMON = [
   _origIndex: 288
   },
   {
-  id: 298,
+  id: 225,
   category: "sekou",
   source: "jac-ch4",
   furi: "べたふかし",
@@ -1638,7 +1638,7 @@ export const CARDS_COMMON = [
   _origIndex: 289
   },
   {
-  id: 299,
+  id: 226,
   category: "sekou",
   source: "jac-ch4",
   furi: "とおりをみる",
@@ -1650,7 +1650,7 @@ export const CARDS_COMMON = [
   _origIndex: 290
   },
   {
-  id: 300,
+  id: 227,
   category: "sekou",
   source: "jac-ch4",
   furi: "ひろいだし",
@@ -1662,7 +1662,7 @@ export const CARDS_COMMON = [
   _origIndex: 291
   },
   {
-  id: 301,
+  id: 228,
   category: "sekou",
   source: "jac-ch4",
   furi: "ばしょううちうつだせつする",
@@ -1674,7 +1674,7 @@ export const CARDS_COMMON = [
   _origIndex: 292
   },
   {
-  id: 302,
+  id: 229,
   category: "sekou",
   source: "jac-ch4",
   furi: "のろあんこ",
@@ -1686,7 +1686,7 @@ export const CARDS_COMMON = [
   _origIndex: 293
   },
   {
-  id: 303,
+  id: 230,
   category: "sekou",
   source: "jac-ch4",
   furi: "てにょうくぎじまい",
@@ -1698,7 +1698,7 @@ export const CARDS_COMMON = [
   _origIndex: 294
   },
   {
-  id: 304,
+  id: 231,
   category: "sekou",
   source: "jac-ch4",
   furi: "はいごうねりまぜたんぴんぐ",
@@ -1710,7 +1710,7 @@ export const CARDS_COMMON = [
   _origIndex: 295
   },
   {
-  id: 313,
+  id: 239,
   category: "sekou",
   source: "jac-ch4",
   furi: "ばりばりとり",
@@ -1722,7 +1722,7 @@ export const CARDS_COMMON = [
   _origIndex: 304
   },
   {
-  id: 316,
+  id: 242,
   category: "anzen",
   source: "jac-ch4",
   furi: "ふくそうのちゅうい",
@@ -1734,7 +1734,7 @@ export const CARDS_COMMON = [
   _origIndex: 307
   },
   {
-  id: 317,
+  id: 243,
   category: "career",
   source: "jac-ch4",
   furi: "あとかたづけしょうかかくにん",
@@ -1746,7 +1746,7 @@ export const CARDS_COMMON = [
   _origIndex: 308
   },
   {
-  id: 318,
+  id: 244,
   category: "sekou",
   source: "jac-ch4",
   furi: "すてざいりょう",
@@ -1758,7 +1758,7 @@ export const CARDS_COMMON = [
   _origIndex: 309
   },
   {
-  id: 323,
+  id: 245,
   category: "sekou",
   source: "jac-ch4",
   furi: "おうすんぽう",
@@ -1770,7 +1770,7 @@ export const CARDS_COMMON = [
   _origIndex: 314
   },
   {
-  id: 326,
+  id: 248,
   category: "sekou",
   source: "jac-ch4",
   furi: "つらかねおがむ",
@@ -1782,7 +1782,7 @@ export const CARDS_COMMON = [
   _origIndex: 317
   },
   {
-  id: 327,
+  id: 249,
   category: "career",
   source: "jac-ch4",
   furi: "のかくていぎせいりせいとんせいそうせいけつしつけ",
@@ -1794,7 +1794,7 @@ export const CARDS_COMMON = [
   _origIndex: 318
   },
   {
-  id: 328,
+  id: 250,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "おさきにしつれいします",
@@ -1806,7 +1806,7 @@ export const CARDS_COMMON = [
   _origIndex: 319
   },
   {
-  id: 330,
+  id: 252,
   category: "anzen",
   source: "jac-ch4",
   furi: "ぽいすてきんしがむをかみながらのさぎょうきんし",
@@ -1818,7 +1818,7 @@ export const CARDS_COMMON = [
   _origIndex: 321
   },
   {
-  id: 331,
+  id: 253,
   category: "sekou",
   source: "jac-ch5",
   furi: "ろおどろおらあたいやろおらあしんどうろおらあ",
@@ -1829,7 +1829,7 @@ export const CARDS_COMMON = [
   _origIndex: 322
   },
   {
-  id: 332,
+  id: 254,
   category: "sekou",
   source: "jac-ch5",
   furi: "ほいいるろおだあ",
@@ -1840,7 +1840,7 @@ export const CARDS_COMMON = [
   _origIndex: 323
   },
   {
-  id: 333,
+  id: 255,
   category: "sekou",
   source: "jac-ch5",
   furi: "たわあくれいんますとくらいんぐふろおあくらいみんぐ",
@@ -1851,7 +1851,7 @@ export const CARDS_COMMON = [
   _origIndex: 324
   },
   {
-  id: 365,
+  id: 287,
   category: "sekou",
   source: "jac-ch5",
   furi: "れいきゃくこいるおんすいこいる",
@@ -1862,7 +1862,7 @@ export const CARDS_COMMON = [
   _origIndex: 356
   },
   {
-  id: 370,
+  id: 292,
   category: "sekou",
   source: "jac-ch5",
   furi: "どりるどらいばあいんぱくとどらいばあ",
@@ -1873,7 +1873,7 @@ export const CARDS_COMMON = [
   _origIndex: 361
   },
   {
-  id: 371,
+  id: 293,
   category: "sekou",
   source: "jac-ch5",
   furi: "ぢすくぐらいんだあこうそくがたていそくがた",
@@ -1884,7 +1884,7 @@ export const CARDS_COMMON = [
   _origIndex: 362
   },
   {
-  id: 372,
+  id: 294,
   category: "anzen",
   source: "jac-ch5",
   furi: "まるのこきっくばっく",
@@ -1896,7 +1896,7 @@ export const CARDS_COMMON = [
   _origIndex: 363
   },
   {
-  id: 373,
+  id: 295,
   category: "sekou",
   source: "jac-ch5",
   furi: "こうそくせつだんきちっぷそおせつだんき",
@@ -1907,7 +1907,7 @@ export const CARDS_COMMON = [
   _origIndex: 364
   },
   {
-  id: 374,
+  id: 296,
   category: "sekou",
   source: "jac-ch5",
   furi: "けんすこっぷかくすこっぷてこきんし",
@@ -1918,7 +1918,7 @@ export const CARDS_COMMON = [
   _origIndex: 365
   },
   {
-  id: 375,
+  id: 297,
   category: "sekou",
   source: "jac-ch5",
   furi: "らんまばいぶろこんぱくたぷれえとこんぱくた",
@@ -1930,7 +1930,7 @@ export const CARDS_COMMON = [
   _origIndex: 366
   },
   {
-  id: 376,
+  id: 298,
   category: "sekou",
   source: "jac-ch5",
   furi: "れえざあすみだしきあかれえざあみどりれえざあ",
@@ -1942,7 +1942,7 @@ export const CARDS_COMMON = [
   _origIndex: 367
   },
   {
-  id: 377,
+  id: 299,
   category: "sekou",
   source: "jac-ch5",
   furi: "すいへいき",
@@ -1953,7 +1953,7 @@ export const CARDS_COMMON = [
   _origIndex: 368
   },
   {
-  id: 378,
+  id: 300,
   category: "sekou",
   source: "jac-ch5",
   furi: "さしがねうらめんおもてめんのばい",
@@ -1964,7 +1964,7 @@ export const CARDS_COMMON = [
   _origIndex: 369
   },
   {
-  id: 379,
+  id: 301,
   category: "sekou",
   source: "jac-ch4",
   furi: "みずいと",
@@ -1976,7 +1976,7 @@ export const CARDS_COMMON = [
   _origIndex: 370
   },
   {
-  id: 380,
+  id: 302,
   category: "sekou",
   source: "jac-ch5",
   furi: "たがねはつりさぎょう",
@@ -1987,7 +1987,7 @@ export const CARDS_COMMON = [
   _origIndex: 371
   },
   {
-  id: 381,
+  id: 303,
   category: "sekou",
   source: "jac-ch5",
   furi: "ばあるてこのげんり",
@@ -1998,7 +1998,7 @@ export const CARDS_COMMON = [
   _origIndex: 372
   },
   {
-  id: 382,
+  id: 304,
   category: "sekou",
   source: "jac-ch5",
   furi: "へえんぶろっくればあほいすと",
@@ -2009,7 +2009,7 @@ export const CARDS_COMMON = [
   _origIndex: 373
   },
   {
-  id: 383,
+  id: 305,
   category: "sekou",
   source: "jac-ch5",
   furi: "わいやあろおぷたまかけようだいつけよう",
@@ -2020,7 +2020,7 @@ export const CARDS_COMMON = [
   _origIndex: 374
   },
   {
-  id: 384,
+  id: 306,
   category: "sekou",
   source: "jac-ch5",
   furi: "しゃっくる",
@@ -2031,7 +2031,7 @@ export const CARDS_COMMON = [
   _origIndex: 375
   },
   {
-  id: 385,
+  id: 307,
   category: "sekou",
   source: "jac-ch5",
   furi: "じゃっきねじしきはぐるましきゆあつしき",
@@ -2042,7 +2042,7 @@ export const CARDS_COMMON = [
   _origIndex: 376
   },
   {
-  id: 386,
+  id: 308,
   category: "anzen",
   source: "jac-ch5",
   furi: "はしごかくどやくどほじょうしゃひっす",
@@ -2053,7 +2053,7 @@ export const CARDS_COMMON = [
   _origIndex: 377
   },
   {
-  id: 387,
+  id: 309,
   category: "anzen",
   source: "jac-ch7",
   furi: "きゃたつてんばんきんしまたぎきんし",
@@ -2064,7 +2064,7 @@ export const CARDS_COMMON = [
   _origIndex: 378
   },
   {
-  id: 388,
+  id: 310,
   category: "anzen",
   source: "jac-ch5",
   furi: "ろおりんぐたわあいどうしきあしば",
@@ -2075,7 +2075,7 @@ export const CARDS_COMMON = [
   _origIndex: 379
   },
   {
-  id: 389,
+  id: 311,
   category: "sekou",
   source: "jac-ch5",
   furi: "もんきいれんちうわあごにちからをかけてまわす",
@@ -2087,7 +2087,7 @@ export const CARDS_COMMON = [
   _origIndex: 380
   },
   {
-  id: 390,
+  id: 312,
   category: "sekou",
   source: "jac-ch5",
   furi: "ようじょうようぽりしいと",
@@ -2098,7 +2098,7 @@ export const CARDS_COMMON = [
   _origIndex: 381
   },
   {
-  id: 391,
+  id: 313,
   category: "anzen",
   source: "jac-ch5",
   furi: "すいちょくようじょうねっとすいへいようじょうねっと",
@@ -2109,7 +2109,7 @@ export const CARDS_COMMON = [
   _origIndex: 382
   },
   {
-  id: 392,
+  id: 314,
   category: "sekou",
   source: "jac-ch5",
   furi: "とろばことろぶね",
@@ -2120,7 +2120,7 @@ export const CARDS_COMMON = [
   _origIndex: 383
   },
   {
-  id: 393,
+  id: 315,
   category: "sekou",
   source: "jac-ch5",
   furi: "くぎうちきこんぷれっしゃあしよう",
@@ -2131,7 +2131,7 @@ export const CARDS_COMMON = [
   _origIndex: 384
   },
   {
-  id: 394,
+  id: 316,
   category: "sekou",
   source: "jac-ch5",
   furi: "ふぉおくりふと",
@@ -2142,7 +2142,7 @@ export const CARDS_COMMON = [
   _origIndex: 385
   },
   {
-  id: 395,
+  id: 317,
   category: "sekou",
   source: "jac-ch5",
   furi: "おやづなきんちょうき",
@@ -2153,7 +2153,7 @@ export const CARDS_COMMON = [
   _origIndex: 386
   },
   {
-  id: 396,
+  id: 318,
   category: "sekou",
   source: "jac-ch5",
   furi: "ゆあつしょべる（ばっくほう）",
@@ -2165,7 +2165,7 @@ export const CARDS_COMMON = [
   _origIndex: 387
   },
   {
-  id: 397,
+  id: 319,
   category: "sekou",
   source: "jac-ch5",
   furi: "とらくたあしょべる",
@@ -2177,7 +2177,7 @@ export const CARDS_COMMON = [
   _origIndex: 388
   },
   {
-  id: 398,
+  id: 320,
   category: "sekou",
   source: "jac-ch5",
   furi: "とらっくくれいん vs くろおらくれいん",
@@ -2189,7 +2189,7 @@ export const CARDS_COMMON = [
   _origIndex: 389
   },
   {
-  id: 419,
+  id: 341,
   category: "sekou",
   source: "jac-ch5",
   furi: "れしぷろそお",
@@ -2200,7 +2200,7 @@ export const CARDS_COMMON = [
   _origIndex: 410
   },
   {
-  id: 420,
+  id: 342,
   category: "sekou",
   source: "jac-ch5",
   furi: "だぶるすこっぷ（ふかいあなほりよう）",
@@ -2212,7 +2212,7 @@ export const CARDS_COMMON = [
   _origIndex: 411
   },
   {
-  id: 421,
+  id: 343,
   category: "sekou",
   source: "jac-ch5",
   furi: "つるはし",
@@ -2224,7 +2224,7 @@ export const CARDS_COMMON = [
   _origIndex: 412
   },
   {
-  id: 423,
+  id: 344,
   category: "sekou",
   source: "jac-ch5",
   furi: "ちょおくらいん vs すみつぼ",
@@ -2235,7 +2235,7 @@ export const CARDS_COMMON = [
   _origIndex: 414
   },
   {
-  id: 424,
+  id: 345,
   category: "sekou",
   source: "jac-ch5",
   furi: "ぽんち（せんたあぽんち）",
@@ -2246,7 +2246,7 @@ export const CARDS_COMMON = [
   _origIndex: 415
   },
   {
-  id: 425,
+  id: 346,
   category: "sekou",
   source: "jac-ch5",
   furi: "とらんしっと / せおどらいと",
@@ -2257,7 +2257,7 @@ export const CARDS_COMMON = [
   _origIndex: 416
   },
   {
-  id: 426,
+  id: 347,
   category: "sekou",
   source: "jac-ch5",
   furi: "おおがね",
@@ -2268,7 +2268,7 @@ export const CARDS_COMMON = [
   _origIndex: 417
   },
   {
-  id: 427,
+  id: 348,
   category: "sekou",
   source: "jac-ch5",
   furi: "はんまあのしゅるい",
@@ -2279,7 +2279,7 @@ export const CARDS_COMMON = [
   _origIndex: 418
   },
   {
-  id: 428,
+  id: 349,
   category: "sekou",
   source: "jac-ch5",
   furi: "さんどぺえぱあ",
@@ -2290,7 +2290,7 @@ export const CARDS_COMMON = [
   _origIndex: 419
   },
   {
-  id: 429,
+  id: 350,
   category: "sekou",
   source: "jac-ch5",
   furi: "そけっとれんち / ぼっくすれんち / ろっかくれんち",
@@ -2301,7 +2301,7 @@ export const CARDS_COMMON = [
   _origIndex: 420
   },
   {
-  id: 430,
+  id: 351,
   category: "sekou",
   source: "jac-ch5",
   furi: "もるたるみきさ vs こんくりいとみきさ",
@@ -2312,7 +2312,7 @@ export const CARDS_COMMON = [
   _origIndex: 421
   },
   {
-  id: 431,
+  id: 352,
   category: "sekou",
   source: "jac-ch5",
   furi: "たあんぶっくる",
@@ -2323,7 +2323,7 @@ export const CARDS_COMMON = [
   _origIndex: 422
   },
   {
-  id: 432,
+  id: 353,
   category: "sekou",
   source: "jac-ch5",
   furi: "ちるほおいる（しゅどうしきういんち）",
@@ -2335,7 +2335,7 @@ export const CARDS_COMMON = [
   _origIndex: 423
   },
   {
-  id: 433,
+  id: 354,
   category: "sekou",
   source: "jac-ch5",
   furi: "きりんじゃっき",
@@ -2346,7 +2346,7 @@ export const CARDS_COMMON = [
   _origIndex: 424
   },
   {
-  id: 434,
+  id: 355,
   category: "sekou",
   source: "jac-ch5",
   furi: "ればあぶろっく",
@@ -2358,7 +2358,7 @@ export const CARDS_COMMON = [
   _origIndex: 425
   },
   {
-  id: 435,
+  id: 356,
   category: "anzen",
   source: "jac-ch5",
   furi: "かはんしきさぎょうだい（のびうま）",
@@ -2369,7 +2369,7 @@ export const CARDS_COMMON = [
   _origIndex: 426
   },
   {
-  id: 436,
+  id: 357,
   category: "sekou",
   source: "jac-ch5",
   furi: "ぶろああ（そうふうき）",
@@ -2380,7 +2380,7 @@ export const CARDS_COMMON = [
   _origIndex: 427
   },
   {
-  id: 437,
+  id: 358,
   category: "sekou",
   source: "jac-ch5",
   furi: "ふぁん（そうふうき vs はいふうき）",
@@ -2391,7 +2391,7 @@ export const CARDS_COMMON = [
   _origIndex: 428
   },
   {
-  id: 454,
+  id: 375,
   category: "sekou",
   source: "jac-ch5",
   furi: "れえき vs じょれん",
@@ -2402,7 +2402,7 @@ export const CARDS_COMMON = [
   _origIndex: 445
   },
   {
-  id: 455,
+  id: 376,
   category: "sekou",
   source: "jac-ch5",
   furi: "のこぎり",
@@ -2413,7 +2413,7 @@ export const CARDS_COMMON = [
   _origIndex: 446
   },
   {
-  id: 456,
+  id: 377,
   category: "sekou",
   source: "jac-ch5",
   furi: "くいきり（にっぱあ）vs ぺんち",
@@ -2424,7 +2424,7 @@ export const CARDS_COMMON = [
   _origIndex: 447
   },
   {
-  id: 457,
+  id: 378,
   category: "sekou",
   source: "jac-ch5",
   furi: "やすり + わいやあぶらし",
@@ -2435,7 +2435,7 @@ export const CARDS_COMMON = [
   _origIndex: 448
   },
   {
-  id: 458,
+  id: 379,
   category: "sekou",
   source: "jac-ch5",
   furi: "たっぴんぐねじ vs くぎのしゅるい",
@@ -2446,7 +2446,7 @@ export const CARDS_COMMON = [
   _origIndex: 449
   },
   {
-  id: 459,
+  id: 380,
   category: "sekou",
   source: "jac-ch5",
   furi: "ふるい",
@@ -2457,7 +2457,7 @@ export const CARDS_COMMON = [
   _origIndex: 450
   },
   {
-  id: 460,
+  id: 381,
   category: "sekou",
   source: "jac-ch5",
   furi: "うえす・ばけつ・ひしゃく",
@@ -2468,7 +2468,7 @@ export const CARDS_COMMON = [
   _origIndex: 451
   },
   {
-  id: 461,
+  id: 382,
   category: "sekou",
   source: "jac-ch5",
   furi: "ぶるうしいと vs べにや（ようじょうざいりょう）",
@@ -2479,7 +2479,7 @@ export const CARDS_COMMON = [
   _origIndex: 452
   },
   {
-  id: 462,
+  id: 383,
   category: "sekou",
   source: "jac-ch5",
   furi: "そり vs ころ（じゅうりょうぶつのいどう）",
@@ -2490,7 +2490,7 @@ export const CARDS_COMMON = [
   _origIndex: 453
   },
   {
-  id: 463,
+  id: 384,
   category: "sekou",
   source: "jac-ch5",
   furi: "ほうき + ちりとり + ぶろああ",
@@ -2501,7 +2501,7 @@ export const CARDS_COMMON = [
   _origIndex: 454
   },
   {
-  id: 464,
+  id: 385,
   category: "sekou",
   source: "jac-ch5",
   furi: "かはんしきさぎょうだい vs きゃたつ vs ろおりんぐたわあ",
@@ -2512,7 +2512,7 @@ export const CARDS_COMMON = [
   _origIndex: 455
   },
   {
-  id: 469,
+  id: 390,
   category: "sekou",
   source: "jac-ch5",
   furi: "しゅうじんき vs しゅうじんまるのこ",
@@ -2523,7 +2523,7 @@ export const CARDS_COMMON = [
   _origIndex: 460
   },
   {
-  id: 470,
+  id: 391,
   category: "anzen",
   source: "jac-ch3",
   furi: "こうしょさぎょうしゃばすけっとたかさめえとるいじょう",
@@ -2535,7 +2535,7 @@ export const CARDS_COMMON = [
   _origIndex: 461
   },
   {
-  id: 471,
+  id: 392,
   category: "sekou",
   source: "jac-ch5",
   furi: "でんどうぶろっくかったあ vs まるのこ",
@@ -2546,7 +2546,7 @@ export const CARDS_COMMON = [
   _origIndex: 462
   },
   {
-  id: 472,
+  id: 393,
   category: "sekou",
   source: "jac-ch5",
   furi: "さげふり",
@@ -2557,7 +2557,7 @@ export const CARDS_COMMON = [
   _origIndex: 463
   },
   {
-  id: 473,
+  id: 394,
   category: "sekou",
   source: "jac-ch5",
   furi: "だんぷとらっく",
@@ -2568,7 +2568,7 @@ export const CARDS_COMMON = [
   _origIndex: 464
   },
   {
-  id: 489,
+  id: 410,
   category: "sekou",
   source: "jac-ch3",
   furi: "といし",
@@ -2580,7 +2580,7 @@ export const CARDS_COMMON = [
   _origIndex: 480
   },
   {
-  id: 490,
+  id: 411,
   category: "sekou",
   source: "jac-ch5",
   furi: "どらいばあ（ぷらす・まいなす）",
@@ -2591,7 +2591,7 @@ export const CARDS_COMMON = [
   _origIndex: 481
   },
   {
-  id: 491,
+  id: 412,
   category: "sekou",
   source: "jac-ch5",
   furi: "ぼると・なっと・わっしゃあ",
@@ -2602,7 +2602,7 @@ export const CARDS_COMMON = [
   _origIndex: 482
   },
   {
-  id: 492,
+  id: 413,
   category: "sekou",
   source: "jac-ch6",
   furi: "とちのせいやく",
@@ -2613,7 +2613,7 @@ export const CARDS_COMMON = [
   _origIndex: 483
   },
   {
-  id: 493,
+  id: 414,
   category: "sekou",
   source: "jac-ch6",
   furi: "しぜんじょうけんによるえいきょう",
@@ -2624,7 +2624,7 @@ export const CARDS_COMMON = [
   _origIndex: 484
   },
   {
-  id: 494,
+  id: 415,
   category: "sekou",
   source: "jac-ch6",
   furi: "しゃかいてきせいやく",
@@ -2635,7 +2635,7 @@ export const CARDS_COMMON = [
   _origIndex: 485
   },
   {
-  id: 495,
+  id: 416,
   category: "sekou",
   source: "jac-ch6",
   furi: "せこうけいかく",
@@ -2646,7 +2646,7 @@ export const CARDS_COMMON = [
   _origIndex: 486
   },
   {
-  id: 496,
+  id: 417,
   category: "sekou",
   source: "jac-ch6",
   furi: "せこうようりょうしょ",
@@ -2657,7 +2657,7 @@ export const CARDS_COMMON = [
   _origIndex: 487
   },
   {
-  id: 497,
+  id: 418,
   category: "career",
   source: "jac-ch6",
   furi: "きゃりああっぷかあど・さぎょうめんきょ",
@@ -2668,7 +2668,7 @@ export const CARDS_COMMON = [
   _origIndex: 488
   },
   {
-  id: 498,
+  id: 419,
   category: "anzen",
   source: "jac-ch6",
   furi: "ひんしつかんり",
@@ -2679,7 +2679,7 @@ export const CARDS_COMMON = [
   _origIndex: 489
   },
   {
-  id: 499,
+  id: 420,
   category: "anzen",
   source: "jac-ch6",
   furi: "よさんのかんり",
@@ -2690,7 +2690,7 @@ export const CARDS_COMMON = [
   _origIndex: 490
   },
   {
-  id: 500,
+  id: 421,
   category: "anzen",
   source: "jac-ch6",
   furi: "こうていかんり",
@@ -2701,7 +2701,7 @@ export const CARDS_COMMON = [
   _origIndex: 491
   },
   {
-  id: 501,
+  id: 422,
   category: "anzen",
   source: "jac-ch6",
   furi: "あんぜんかんり",
@@ -2712,7 +2712,7 @@ export const CARDS_COMMON = [
   _origIndex: 492
   },
   {
-  id: 502,
+  id: 423,
   category: "anzen",
   source: "jac-ch6",
   furi: "かんきょうほぜんかんり",
@@ -2723,7 +2723,7 @@ export const CARDS_COMMON = [
   _origIndex: 493
   },
   {
-  id: 503,
+  id: 424,
   category: "sekou",
   source: "jac-ch6",
   furi: "れえざあしょうしゃき",
@@ -2735,7 +2735,7 @@ export const CARDS_COMMON = [
   _origIndex: 494
   },
   {
-  id: 504,
+  id: 425,
   category: "sekou",
   source: "jac-ch6",
   furi: "きじゅんすみ・おやすみ",
@@ -2747,7 +2747,7 @@ export const CARDS_COMMON = [
   _origIndex: 495
   },
   {
-  id: 506,
+  id: 427,
   category: "sekou",
   source: "jac-ch6",
   furi: "ばんどそおかんせつだんき",
@@ -2758,7 +2758,7 @@ export const CARDS_COMMON = [
   _origIndex: 497
   },
   {
-  id: 508,
+  id: 429,
   category: "anzen",
   source: "jac-ch6",
   furi: "ぐんてでのねじかこうぜったいきんし",
@@ -2769,7 +2769,7 @@ export const CARDS_COMMON = [
   _origIndex: 499
   },
   {
-  id: 512,
+  id: 433,
   category: "sekou",
   source: "jac-ch6",
   furi: "ねじげえじけんさたいみんぐぱたあん",
@@ -2780,7 +2780,7 @@ export const CARDS_COMMON = [
   _origIndex: 503
   },
   {
-  id: 513,
+  id: 434,
   category: "sekou",
   source: "jac-ch6",
   furi: "へえざ",
@@ -2791,7 +2791,7 @@ export const CARDS_COMMON = [
   _origIndex: 504
   },
   {
-  id: 522,
+  id: 443,
   category: "anzen",
   source: "jac-ch6",
   furi: "らいにんぐこうかんのがすようだんぜったいきんし",
@@ -2803,7 +2803,7 @@ export const CARDS_COMMON = [
   _origIndex: 513
   },
   {
-  id: 525,
+  id: 446,
   category: "anzen",
   source: "jac-ch6",
   furi: "どうかんのせつだんにかのこぐらいんだあきんし",
@@ -2814,7 +2814,7 @@ export const CARDS_COMMON = [
   _origIndex: 516
   },
   {
-  id: 540,
+  id: 461,
   category: "anzen",
   source: "jac-ch6",
   furi: "こうそくといしたいぷのせつだんこうぐ",
@@ -2825,7 +2825,7 @@ export const CARDS_COMMON = [
   _origIndex: 531
   },
   {
-  id: 541,
+  id: 462,
   category: "anzen",
   source: "jac-ch6",
   furi: "ちかまいせつぶつひょうじしいとのいろこおど",
@@ -2837,7 +2837,7 @@ export const CARDS_COMMON = [
   _origIndex: 532
   },
   {
-  id: 542,
+  id: 463,
   category: "anzen",
   source: "jac-ch6",
   furi: "きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく",
@@ -2848,7 +2848,7 @@ export const CARDS_COMMON = [
   _origIndex: 533
   },
   {
-  id: 543,
+  id: 464,
   category: "anzen",
   source: "jac-ch6",
   furi: "さんそけつぼうきけんさぎょうしゅにんしゃ",
@@ -2860,7 +2860,7 @@ export const CARDS_COMMON = [
   _origIndex: 534
   },
   {
-  id: 544,
+  id: 465,
   category: "anzen",
   source: "jac-ch6",
   furi: "りゅうかすいそのうど",
@@ -2871,7 +2871,7 @@ export const CARDS_COMMON = [
   _origIndex: 535
   },
   {
-  id: 545,
+  id: 466,
   category: "sekou",
   source: "jac-ch6",
   furi: "けがきはりでばいだ",
@@ -2882,7 +2882,7 @@ export const CARDS_COMMON = [
   _origIndex: 536
   },
   {
-  id: 546,
+  id: 467,
   category: "sekou",
   source: "jac-ch6",
   furi: "かなとこじょうばん",
@@ -2893,7 +2893,7 @@ export const CARDS_COMMON = [
   _origIndex: 537
   },
   {
-  id: 557,
+  id: 478,
   category: "anzen",
   source: "jac-ch6",
   furi: "かくうせんのせつだんじこ",
@@ -2904,7 +2904,7 @@ export const CARDS_COMMON = [
   _origIndex: 548
   },
   {
-  id: 558,
+  id: 479,
   category: "anzen",
   source: "jac-ch6",
   furi: "どうろしようきょかしょう",
@@ -2915,7 +2915,7 @@ export const CARDS_COMMON = [
   _origIndex: 549
   },
   {
-  id: 559,
+  id: 480,
   category: "anzen",
   source: "jac-ch6",
   furi: "かくうせつびのちじょうこう",
@@ -2926,7 +2926,7 @@ export const CARDS_COMMON = [
   _origIndex: 550
   },
   {
-  id: 572,
+  id: 493,
   category: "career",
   source: "jac-ch1",
   furi: "せこうたいせい",
@@ -2938,7 +2938,7 @@ export const CARDS_COMMON = [
   _origIndex: 563
   },
   {
-  id: 573,
+  id: 494,
   category: "career",
   source: "jac-ch1",
   furi: "はっちゅうしゃ",
@@ -2950,7 +2950,7 @@ export const CARDS_COMMON = [
   _origIndex: 564
   },
   {
-  id: 574,
+  id: 495,
   category: "career",
   source: "jac-ch1",
   furi: "かんりしゃ",
@@ -2962,7 +2962,7 @@ export const CARDS_COMMON = [
   _origIndex: 565
   },
   {
-  id: 575,
+  id: 496,
   category: "career",
   source: "jac-ch1",
   furi: "せっけいしゃ",
@@ -2974,7 +2974,7 @@ export const CARDS_COMMON = [
   _origIndex: 566
   },
   {
-  id: 576,
+  id: 497,
   category: "career",
   source: "jac-ch1",
   furi: "ぜねこん",
@@ -2986,7 +2986,7 @@ export const CARDS_COMMON = [
   _origIndex: 567
   },
   {
-  id: 577,
+  id: 498,
   category: "career",
   source: "jac-ch1",
   furi: "げんばかんとく",
@@ -2998,7 +2998,7 @@ export const CARDS_COMMON = [
   _origIndex: 568
   },
   {
-  id: 578,
+  id: 499,
   category: "career",
   source: "jac-ch1",
   furi: "せんもんこうじぎょうしゃ",
@@ -3010,7 +3010,7 @@ export const CARDS_COMMON = [
   _origIndex: 569
   },
   {
-  id: 579,
+  id: 500,
   category: "career",
   source: "jac-ch1",
   furi: "しょくちょう",
@@ -3022,7 +3022,7 @@ export const CARDS_COMMON = [
   _origIndex: 570
   },
   {
-  id: 580,
+  id: 501,
   category: "career",
   source: "jac-ch1",
   furi: "ぎのうしゃ",
@@ -3034,7 +3034,7 @@ export const CARDS_COMMON = [
   _origIndex: 571
   },
   {
-  id: 581,
+  id: 502,
   category: "career",
   source: "jac-ch1",
   furi: "せしゅ",
@@ -3046,7 +3046,7 @@ export const CARDS_COMMON = [
   _origIndex: 572
   },
   {
-  id: 582,
+  id: 503,
   category: "career",
   source: "jac-ch1",
   furi: "こうむてん",
@@ -3058,7 +3058,7 @@ export const CARDS_COMMON = [
   _origIndex: 573
   },
   {
-  id: 583,
+  id: 504,
   category: "career",
   source: "jac-ch1",
   furi: "もとうけ",
@@ -3070,7 +3070,7 @@ export const CARDS_COMMON = [
   _origIndex: 574
   },
   {
-  id: 584,
+  id: 505,
   category: "career",
   source: "jac-ch1",
   furi: "ひょうかのさんきじゅん",
@@ -3082,7 +3082,7 @@ export const CARDS_COMMON = [
   _origIndex: 575
   },
   {
-  id: 585,
+  id: 506,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "しんきにゅうじょうしゃ",
@@ -3094,7 +3094,7 @@ export const CARDS_COMMON = [
   _origIndex: 576
   },
   {
-  id: 586,
+  id: 507,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "あんぜんしょうわ・たっちあんどこーる",
@@ -3106,7 +3106,7 @@ export const CARDS_COMMON = [
   _origIndex: 577
   },
   {
-  id: 587,
+  id: 508,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "ぜろさいでいこうよし",
@@ -3118,7 +3118,7 @@ export const CARDS_COMMON = [
   _origIndex: 578
   },
   {
-  id: 588,
+  id: 509,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "きけんよちかつどうのよんすてっぷ",
@@ -3130,7 +3130,7 @@ export const CARDS_COMMON = [
   _origIndex: 579
   },
   {
-  id: 589,
+  id: 510,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "きけんよちぼーど",
@@ -3142,7 +3142,7 @@ export const CARDS_COMMON = [
   _origIndex: 580
   },
   {
-  id: 590,
+  id: 511,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "ぜんたいちょうれいのろっこうもく",
@@ -3154,7 +3154,7 @@ export const CARDS_COMMON = [
   _origIndex: 581
   },
   {
-  id: 591,
+  id: 512,
   category: "gaiyou",
   source: "jac-ch1",
   furi: "あんぜんかくにんのはちこうもく",
@@ -3166,7 +3166,7 @@ export const CARDS_COMMON = [
   _origIndex: 582
   },
   {
-  id: 592,
+  id: 513,
   category: "career",
   source: "jac-ch1",
   furi: "いったいかん",
@@ -3178,7 +3178,7 @@ export const CARDS_COMMON = [
   _origIndex: 583
   },
   {
-  id: 593,
+  id: 514,
   category: "anzen",
   source: "jac-ch7",
   furi: "てんとう",
@@ -3189,7 +3189,7 @@ export const CARDS_COMMON = [
   _origIndex: 584
   },
   {
-  id: 594,
+  id: 515,
   category: "anzen",
   source: "jac-ch7",
   furi: "ひらいらっか",
@@ -3200,7 +3200,7 @@ export const CARDS_COMMON = [
   _origIndex: 585
   },
   {
-  id: 595,
+  id: 516,
   category: "anzen",
   source: "jac-ch7",
   furi: "げきとつされはさまれまきこまれ",
@@ -3211,7 +3211,7 @@ export const CARDS_COMMON = [
   _origIndex: 586
   },
   {
-  id: 596,
+  id: 517,
   category: "anzen",
   source: "jac-ch7",
   furi: "ゆうがいぶつせっしょく / おぼれる / かさい",
@@ -3222,7 +3222,7 @@ export const CARDS_COMMON = [
   _origIndex: 587
   },
   {
-  id: 597,
+  id: 518,
   category: "anzen",
   source: "jac-ch7",
   furi: "たまがけ",
@@ -3233,7 +3233,7 @@ export const CARDS_COMMON = [
   _origIndex: 588
   },
   {
-  id: 598,
+  id: 519,
   category: "anzen",
   source: "jac-ch7",
   furi: "どどめくっさくふかさいじょうでげんそくひつよう",
@@ -3244,7 +3244,7 @@ export const CARDS_COMMON = [
   _origIndex: 589
   },
   {
-  id: 599,
+  id: 520,
   category: "anzen",
   source: "jac-ch7",
   furi: "こうやいた",
@@ -3255,7 +3255,7 @@ export const CARDS_COMMON = [
   _origIndex: 590
   },
   {
-  id: 600,
+  id: 521,
   category: "anzen",
   source: "jac-ch7",
   furi: "ほあんせつびゆどういん",
@@ -3266,7 +3266,7 @@ export const CARDS_COMMON = [
   _origIndex: 591
   },
   {
-  id: 601,
+  id: 522,
   category: "anzen",
   source: "jac-ch7",
   furi: "きいろっくほうしきろおぷ",
@@ -3277,7 +3277,7 @@ export const CARDS_COMMON = [
   _origIndex: 592
   },
   {
-  id: 602,
+  id: 523,
   category: "anzen",
   source: "jac-ch7",
   furi: "あんぜんせこうさいくるのすてっぷ",
@@ -3288,7 +3288,7 @@ export const CARDS_COMMON = [
   _origIndex: 593
   },
   {
-  id: 603,
+  id: 524,
   category: "anzen",
   source: "jac-ch7",
   furi: "しんにゅうしゃあんぜんえいせいきょういくのはちこうもく",
@@ -3299,7 +3299,7 @@ export const CARDS_COMMON = [
   _origIndex: 594
   },
   {
-  id: 604,
+  id: 525,
   category: "anzen",
   source: "jac-ch7",
   furi: "しんきにゅうじょうしゃきょういくしぼうのはんぶんがにゅうじょうしゅうかんいないじっしぷん",
@@ -3310,7 +3310,7 @@ export const CARDS_COMMON = [
   _origIndex: 595
   },
   {
-  id: 605,
+  id: 526,
   category: "anzen",
   source: "jac-ch7",
   furi: "ふるはあねすぎむたかさ",
@@ -3321,7 +3321,7 @@ export const CARDS_COMMON = [
   _origIndex: 596
   },
   {
-  id: 606,
+  id: 527,
   category: "anzen",
   source: "jac-ch7",
   furi: "ほごめがね",
@@ -3332,7 +3332,7 @@ export const CARDS_COMMON = [
   _origIndex: 597
   },
   {
-  id: 607,
+  id: 528,
   category: "anzen",
   source: "jac-ch7",
   furi: "ほごますくじんぱい",
@@ -3343,7 +3343,7 @@ export const CARDS_COMMON = [
   _origIndex: 598
   },
   {
-  id: 608,
+  id: 529,
   category: "anzen",
   source: "jac-ch7",
   furi: "てぶくろきんしかいてんするはものしようじ",
@@ -3354,7 +3354,7 @@ export const CARDS_COMMON = [
   _origIndex: 599
   },
   {
-  id: 609,
+  id: 530,
   category: "anzen",
   source: "jac-ch7",
   furi: "しいるどめんつきへるめっと / あんぜんぐつ",
@@ -3365,7 +3365,7 @@ export const CARDS_COMMON = [
   _origIndex: 600
   },
   {
-  id: 610,
+  id: 531,
   category: "anzen",
   source: "jac-ch7",
   furi: "あつさしすうまなつびもうしょび",
@@ -3376,7 +3376,7 @@ export const CARDS_COMMON = [
   _origIndex: 601
   },
   {
-  id: 611,
+  id: 532,
   category: "anzen",
   source: "jac-ch7",
   furi: "ねちゅうしょうのしょうじょう",
@@ -3387,7 +3387,7 @@ export const CARDS_COMMON = [
   _origIndex: 602
   },
   {
-  id: 612,
+  id: 533,
   category: "anzen",
   source: "jac-ch7",
   furi: "みどりじゅうじ / あんぜんえいせいき / きゅうきゅうばこ",
@@ -3398,7 +3398,7 @@ export const CARDS_COMMON = [
   _origIndex: 603
   },
   {
-  id: 613,
+  id: 534,
   category: "anzen",
   source: "jac-ch7",
   furi: "ひゅうまんえらあしゅるい",
@@ -3409,7 +3409,7 @@ export const CARDS_COMMON = [
   _origIndex: 604
   },
   {
-  id: 614,
+  id: 535,
   category: "anzen",
   source: "jac-ch7",
   furi: "はにんちみすふちゅういちゅういていか",
@@ -3420,7 +3420,7 @@ export const CARDS_COMMON = [
   _origIndex: 605
   },
   {
-  id: 615,
+  id: 536,
   category: "anzen",
   source: "jac-ch7",
   furi: "はけいけんぶそくなれによるてぬき",
@@ -3431,7 +3431,7 @@ export const CARDS_COMMON = [
   _origIndex: 606
   },
   {
-  id: 616,
+  id: 537,
   category: "anzen",
   source: "jac-ch7",
   furi: "ひゅうまんえらあろくからはち",
@@ -3442,7 +3442,7 @@ export const CARDS_COMMON = [
   _origIndex: 607
   },
   {
-  id: 617,
+  id: 538,
   category: "anzen",
   source: "jac-ch7",
   furi: "ひゅうまんえらあきゅうからじゅうに",
@@ -3453,7 +3453,7 @@ export const CARDS_COMMON = [
   _origIndex: 608
   },
   {
-  id: 618,
+  id: 539,
   category: "hourei",
   source: "jac-ch2",
   furi: "ぱわあはらすめんとぼうしほうろうどうしさくそうごうすいしんほう",
@@ -3465,7 +3465,7 @@ export const CARDS_COMMON = [
   _origIndex: 609
   },
   {
-  id: 619,
+  id: 540,
   category: "hourei",
   source: "jac-ch2",
   furi: "ねんじゆうきゅうきゅうかのふよてえぶる",
@@ -3477,7 +3477,7 @@ export const CARDS_COMMON = [
   _origIndex: 610
   },
   {
-  id: 620,
+  id: 541,
   category: "hourei",
   source: "jac-ch2",
   furi: "あんぜんえいせいきょういくのとりがあやといいれじさぎょうないようへんこうじ",
@@ -3489,7 +3489,7 @@ export const CARDS_COMMON = [
   _origIndex: 611
   },
   {
-  id: 621,
+  id: 542,
   category: "hourei",
   source: "jac-ch2",
   furi: "ろうどうしゃのせきむ",
@@ -3501,7 +3501,7 @@ export const CARDS_COMMON = [
   _origIndex: 612
   },
   {
-  id: 622,
+  id: 543,
   category: "anzen",
   source: "jac-ch2",
   furi: "あんぜんきあんぜんえいせいき",
@@ -3513,7 +3513,7 @@ export const CARDS_COMMON = [
   _origIndex: 613
   },
   {
-  id: 623,
+  id: 544,
   category: "anzen",
   source: "jac-ch2",
   furi: "ろうさいしぼうげにんらんきんぐいれいわねんどけんせつぎょう",
@@ -3525,7 +3525,7 @@ export const CARDS_COMMON = [
   _origIndex: 614
   },
   {
-  id: 624,
+  id: 545,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつぎょうほうのいつつのもくてき",
@@ -3537,7 +3537,7 @@ export const CARDS_COMMON = [
   _origIndex: 615
   },
   {
-  id: 625,
+  id: 546,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんちくきじゅんほうたんたいきていしゅうだんきてい",
@@ -3549,7 +3549,7 @@ export const CARDS_COMMON = [
   _origIndex: 616
   },
   {
-  id: 626,
+  id: 547,
   category: "hourei",
   source: "jac-ch2",
   furi: "はいきぶつしょりほう",
@@ -3561,7 +3561,7 @@ export const CARDS_COMMON = [
   _origIndex: 617
   },
   {
-  id: 627,
+  id: 548,
   category: "hourei",
   source: "jac-ch2",
   furi: "げすいどうほう",
@@ -3573,7 +3573,7 @@ export const CARDS_COMMON = [
   _origIndex: 618
   },
   {
-  id: 628,
+  id: 549,
   category: "sekou",
   source: "jac-ch3",
   furi: "けんせつこうじのさんだいぶんるい",
@@ -3585,7 +3585,7 @@ export const CARDS_COMMON = [
   _origIndex: 619
   },
   {
-  id: 643,
+  id: 551,
   category: "sekou",
   source: "jac-ch3",
   furi: "ようせつのさんだいぶんるいゆうせつあっせつろうせつ",
@@ -3597,7 +3597,7 @@ export const CARDS_COMMON = [
   _origIndex: 634
   },
   {
-  id: 652,
+  id: 553,
   category: "sekou",
   source: "jac-ch3",
   furi: "かいたいこうじかいたいがらあすべすとたいさく",
@@ -3609,7 +3609,7 @@ export const CARDS_COMMON = [
   _origIndex: 643
   },
   {
-  id: 653,
+  id: 554,
   category: "career",
   source: "jac-ch3",
   furi: "けんせつこうじのしかくさんしゅるい",
@@ -3621,7 +3621,7 @@ export const CARDS_COMMON = [
   _origIndex: 644
   },
   {
-  id: 654,
+  id: 555,
   category: "career",
   source: "jac-ch3",
   furi: "くれえんいどうしきくれえんたまかけのしかくきじゅんかじゅうべつ",
@@ -3633,7 +3633,7 @@ export const CARDS_COMMON = [
   _origIndex: 645
   },
   {
-  id: 655,
+  id: 556,
   category: "career",
   source: "jac-ch3",
   furi: "しゃりょけいけんせつきかいこうしょさぎょうしゃおおとっくりふとのしかく",
@@ -3645,7 +3645,7 @@ export const CARDS_COMMON = [
   _origIndex: 646
   },
   {
-  id: 656,
+  id: 557,
   category: "career",
   source: "jac-ch3",
   furi: "ようせつさんっけつはっぱあしばのしかくくぶん",
@@ -3657,7 +3657,7 @@ export const CARDS_COMMON = [
   _origIndex: 647
   },
   {
-  id: 661,
+  id: 559,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "おはようございます",
@@ -3668,7 +3668,7 @@ export const CARDS_COMMON = [
   _origIndex: 652
   },
   {
-  id: 662,
+  id: 560,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "ごあんぜんに",
@@ -3680,7 +3680,7 @@ export const CARDS_COMMON = [
   _origIndex: 653
   },
   {
-  id: 663,
+  id: 561,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "おつかれさまです",
@@ -3691,7 +3691,7 @@ export const CARDS_COMMON = [
   _origIndex: 654
   },
   {
-  id: 664,
+  id: 562,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "ごくろさまおつかれさまちがい",
@@ -3703,7 +3703,7 @@ export const CARDS_COMMON = [
   _origIndex: 655
   },
   {
-  id: 665,
+  id: 563,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "しつれいしますみっつのばめん",
@@ -3715,7 +3715,7 @@ export const CARDS_COMMON = [
   _origIndex: 656
   },
   {
-  id: 666,
+  id: 564,
   category: "gaiyou",
   source: "jac-ch4",
   furi: "あぶないよけろ",
@@ -3727,7 +3727,7 @@ export const CARDS_COMMON = [
   _origIndex: 657
   },
   {
-  id: 667,
+  id: 565,
   category: "sekou",
   source: "jac-ch4",
   furi: "すみだしきじゅんずみとおりしん",
@@ -3739,7 +3739,7 @@ export const CARDS_COMMON = [
   _origIndex: 658
   },
   {
-  id: 668,
+  id: 566,
   category: "sekou",
   source: "jac-ch4",
   furi: "にげずみろくずみたてずみじずみしあがずみ",
@@ -3751,7 +3751,7 @@ export const CARDS_COMMON = [
   _origIndex: 659
   },
   {
-  id: 671,
+  id: 567,
   category: "sekou",
   source: "jac-ch4",
   furi: "べんま",
@@ -3763,7 +3763,7 @@ export const CARDS_COMMON = [
   _origIndex: 662
   },
   {
-  id: 680,
+  id: 569,
   category: "sekou",
   source: "jac-ch4",
   furi: "じぎょうきそちょくせつきそべたきそふうちんぐ",
@@ -3775,7 +3775,7 @@ export const CARDS_COMMON = [
   _origIndex: 671
   },
   {
-  id: 682,
+  id: 570,
   category: "sekou",
   source: "jac-ch4",
   furi: "あしばのしゅるいさぎょうゆかかりがこい",
@@ -3787,7 +3787,7 @@ export const CARDS_COMMON = [
   _origIndex: 673
   },
   {
-  id: 686,
+  id: 571,
   category: "sekou",
   source: "jac-ch4",
   furi: "うちこみうちかさねひゃくごじゅうぷんひゃくにじゅうぷんおじょいんうちつぎ",
@@ -3799,7 +3799,7 @@ export const CARDS_COMMON = [
   _origIndex: 677
   },
   {
-  id: 687,
+  id: 572,
   category: "sekou",
   source: "jac-ch4",
   furi: "しめかためたんぴんぐねりまぜはいごう",
@@ -3811,7 +3811,7 @@ export const CARDS_COMMON = [
   _origIndex: 678
   },
   {
-  id: 688,
+  id: 573,
   category: "sekou",
   source: "jac-ch4",
   furi: "おさまりとりあいあみつけみえがかりみえがくれ",
@@ -3823,7 +3823,7 @@ export const CARDS_COMMON = [
   _origIndex: 679
   },
   {
-  id: 689,
+  id: 574,
   category: "sekou",
   source: "jac-ch4",
   furi: "とおりつらつらいちそりむくりろくふろく",
@@ -3835,7 +3835,7 @@ export const CARDS_COMMON = [
   _origIndex: 680
   },
   {
-  id: 690,
+  id: 575,
   category: "sekou",
   source: "jac-ch4",
   furi: "めちがいおがむかねころびにげみきる",
@@ -3847,7 +3847,7 @@ export const CARDS_COMMON = [
   _origIndex: 681
   },
   {
-  id: 691,
+  id: 576,
   category: "sekou",
   source: "jac-ch4",
   furi: "なじみすてべたふかしてもどりだんどりてなおしだめ",
@@ -3859,7 +3859,7 @@ export const CARDS_COMMON = [
   _origIndex: 682
   },
   {
-  id: 692,
+  id: 577,
   category: "sekou",
   source: "jac-ch4",
   furi: "ぴっちおうすんぽういっけんいっしゃくいっすんひとつぼ",
@@ -3871,7 +3871,7 @@ export const CARDS_COMMON = [
   _origIndex: 683
   },
   {
-  id: 705,
+  id: 589,
   category: "anzen",
   source: "jac-ch4",
   furi: "ごえすかつどうせいりせいとんせいそうせいけつしつけ",
@@ -3883,7 +3883,7 @@ export const CARDS_COMMON = [
   _origIndex: 696
   },
   {
-  id: 706,
+  id: 590,
   category: "anzen",
   source: "jac-ch4",
   furi: "さぎょういんつめしょのろくるうる",
@@ -3895,7 +3895,7 @@ export const CARDS_COMMON = [
   _origIndex: 697
   },
   {
-  id: 707,
+  id: 591,
   category: "anzen",
   source: "jac-ch4",
   furi: "ふくそうのよんきんしじこうけんせつげんば",
@@ -3907,7 +3907,7 @@ export const CARDS_COMMON = [
   _origIndex: 698
   },
   {
-  id: 708,
+  id: 592,
   category: "career",
   source: "jac-ch4",
   furi: "ほうれんそうほおこくれんらくそうだん",
@@ -3919,7 +3919,7 @@ export const CARDS_COMMON = [
   _origIndex: 699
   },
   {
-  id: 709,
+  id: 593,
   category: "anzen",
   source: "jac-ch4",
   furi: "あとかたずけさぎょうしゅうりょうごのぎむ",
@@ -3931,7 +3931,7 @@ export const CARDS_COMMON = [
   _origIndex: 700
   },
   {
-  id: 710,
+  id: 594,
   category: "hourei",
   source: "jac-ch2",
   furi: "しょくぎょうのうりょくかいはつそくしんほう",
@@ -3943,7 +3943,7 @@ export const CARDS_COMMON = [
   _origIndex: 701
   },
   {
-  id: 712,
+  id: 595,
   category: "hourei",
   source: "jac-ch2",
   furi: "ほうていろうどうじかん",
@@ -3955,7 +3955,7 @@ export const CARDS_COMMON = [
   _origIndex: 703
   },
   {
-  id: 717,
+  id: 598,
   category: "sekou",
   source: "jac-ch5",
   furi: "れべる（すいじゅんそくりょうき）/ れえざあれべる",
@@ -3966,7 +3966,7 @@ export const CARDS_COMMON = [
   _origIndex: 708
   },
   {
-  id: 718,
+  id: 599,
   category: "sekou",
   source: "jac-ch5",
   furi: "めじゃあ（まきじゃく）・じょうぎ",
@@ -3977,7 +3977,7 @@ export const CARDS_COMMON = [
   _origIndex: 709
   },
   {
-  id: 720,
+  id: 601,
   category: "sekou",
   source: "jac-ch5",
   furi: "はんどみきさ・かくはんき",
@@ -3988,7 +3988,7 @@ export const CARDS_COMMON = [
   _origIndex: 711
   },
   {
-  id: 721,
+  id: 602,
   category: "sekou",
   source: "jac-ch5",
   furi: "ぶらし（よごれおとし）・すぽんじ",
@@ -3999,7 +3999,7 @@ export const CARDS_COMMON = [
   _origIndex: 712
   },
   {
-  id: 740,
+  id: 621,
   category: "anzen",
   source: "jac-ch7",
   furi: "さんだいさいがいついらくてんらくけんせつきかいくれええんほうかいとうかい",
@@ -4010,7 +4010,7 @@ export const CARDS_COMMON = [
   _origIndex: 731
   },
   {
-  id: 741,
+  id: 622,
   category: "anzen",
   source: "jac-ch7",
   furi: "がいこくじんろうどうしゃのしぼうさいがいけんせつぎょうがもっともおおい",
@@ -4021,7 +4021,7 @@ export const CARDS_COMMON = [
   _origIndex: 732
   },
   {
-  id: 742,
+  id: 623,
   category: "anzen",
   source: "jac-ch7",
   furi: "ほうかいとうかいさいがいのけんせつとくゆうれいかせつでんちゅうせきさいでんちゅう",
@@ -4032,7 +4032,7 @@ export const CARDS_COMMON = [
   _origIndex: 733
   },
   {
-  id: 743,
+  id: 624,
   category: "anzen",
   source: "jac-ch7",
   furi: "きかいせっちこうじのしぼうじこおおがたきかいのてんとうによるしたじき",
@@ -4043,7 +4043,7 @@ export const CARDS_COMMON = [
   _origIndex: 734
   },
   {
-  id: 744,
+  id: 625,
   category: "anzen",
   source: "jac-ch7",
   furi: "じょうげすいどうこうじのしゅるいのじこりすく",
@@ -4054,7 +4054,7 @@ export const CARDS_COMMON = [
   _origIndex: 735
   },
   {
-  id: 745,
+  id: 626,
   category: "anzen",
   source: "jac-ch7",
   furi: "しんきにゅうじょうしゃきょういくのはちこうもく",
@@ -4065,7 +4065,7 @@ export const CARDS_COMMON = [
   _origIndex: 736
   },
   {
-  id: 746,
+  id: 627,
   category: "career",
   source: "jac-gakka1",
   furi: "せんもんこうじぎょうしゃかんのちいむわあく",
@@ -4076,7 +4076,7 @@ export const CARDS_COMMON = [
   _origIndex: 737
   },
   {
-  id: 775,
+  id: 647,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "とうけつぼうし",
@@ -4088,7 +4088,7 @@ export const CARDS_COMMON = [
   _origIndex: 761
   },
   {
-  id: 777,
+  id: 649,
   category: "anzen",
   source: "vocab-general",
   furi: "たはつ",
@@ -4099,7 +4099,7 @@ export const CARDS_COMMON = [
   _origIndex: 763
   },
   {
-  id: 781,
+  id: 653,
   category: "anzen",
   source: "vocab-general",
   furi: "さび",
@@ -4111,7 +4111,7 @@ export const CARDS_COMMON = [
   _origIndex: 767
   },
   {
-  id: 782,
+  id: 654,
   category: "anzen",
   source: "vocab-general",
   furi: "れっか",
@@ -4123,7 +4123,7 @@ export const CARDS_COMMON = [
   _origIndex: 768
   },
   {
-  id: 786,
+  id: 658,
   category: "anzen",
   source: "vocab-general",
   furi: "いおん",
@@ -4134,7 +4134,7 @@ export const CARDS_COMMON = [
   _origIndex: 772
   },
   {
-  id: 787,
+  id: 659,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ひーとろす",
@@ -4145,7 +4145,7 @@ export const CARDS_COMMON = [
   _origIndex: 773
   },
   {
-  id: 789,
+  id: 661,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "あつりょくしけん",
@@ -4157,7 +4157,7 @@ export const CARDS_COMMON = [
   _origIndex: 775
   },
   {
-  id: 790,
+  id: 662,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "がすもれしけん",
@@ -4169,7 +4169,7 @@ export const CARDS_COMMON = [
   _origIndex: 776
   },
   {
-  id: 791,
+  id: 663,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "もれけんさ",
@@ -4181,7 +4181,7 @@ export const CARDS_COMMON = [
   _origIndex: 777
   },
   {
-  id: 802,
+  id: 674,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "しようちゅうし",
@@ -4193,7 +4193,7 @@ export const CARDS_COMMON = [
   _origIndex: 788
   },
   {
-  id: 803,
+  id: 675,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "せこうほうほう",
@@ -4204,7 +4204,7 @@ export const CARDS_COMMON = [
   _origIndex: 789
   },
   {
-  id: 807,
+  id: 678,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ついかせこう",
@@ -4215,7 +4215,7 @@ export const CARDS_COMMON = [
   _origIndex: 792
   },
   {
-  id: 811,
+  id: 682,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ぼうせいしょり",
@@ -4227,7 +4227,7 @@ export const CARDS_COMMON = [
   _origIndex: 796
   },
   {
-  id: 812,
+  id: 683,
   category: "sekou",
   source: "vocab-general",
   furi: "へいよう",
@@ -4238,7 +4238,7 @@ export const CARDS_COMMON = [
   _origIndex: 797
   },
   {
-  id: 825,
+  id: 695,
   category: "career",
   source: "vocab-general",
   furi: "きゅうへん",
@@ -4249,7 +4249,7 @@ export const CARDS_COMMON = [
   _origIndex: 809
   },
   {
-  id: 826,
+  id: 696,
   category: "career",
   source: "vocab-general",
   furi: "ちょくご",
@@ -4260,7 +4260,7 @@ export const CARDS_COMMON = [
   _origIndex: 810
   },
   {
-  id: 830,
+  id: 700,
   category: "career",
   source: "vocab-supplementary",
   furi: "しーるせい",
@@ -4271,7 +4271,7 @@ export const CARDS_COMMON = [
   _origIndex: 814
   },
   {
-  id: 835,
+  id: 705,
   category: "career",
   source: "vocab-general",
   furi: "げんしょう",
@@ -4282,7 +4282,7 @@ export const CARDS_COMMON = [
   _origIndex: 819
   },
   {
-  id: 837,
+  id: 707,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "あつりょくけい",
@@ -4293,7 +4293,7 @@ export const CARDS_COMMON = [
   _origIndex: 821
   },
   {
-  id: 841,
+  id: 711,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ぶりっじ",
@@ -4304,7 +4304,7 @@ export const CARDS_COMMON = [
   _origIndex: 825
   },
   {
-  id: 842,
+  id: 712,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "さーまるぎゃっぷ",
@@ -4315,7 +4315,7 @@ export const CARDS_COMMON = [
   _origIndex: 826
   },
   {
-  id: 853,
+  id: 723,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ぺんきぬり",
@@ -4326,7 +4326,7 @@ export const CARDS_COMMON = [
   _origIndex: 837
   },
   {
-  id: 854,
+  id: 724,
   category: "career",
   source: "vocab-general",
   furi: "いろ",
@@ -4337,7 +4337,7 @@ export const CARDS_COMMON = [
   _origIndex: 838
   },
   {
-  id: 855,
+  id: 725,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ふえる",
@@ -4348,7 +4348,7 @@ export const CARDS_COMMON = [
   _origIndex: 839
   },
   {
-  id: 860,
+  id: 730,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "あがる",
@@ -4359,7 +4359,7 @@ export const CARDS_COMMON = [
   _origIndex: 844
   },
   {
-  id: 861,
+  id: 731,
   category: "career",
   source: "vocab-general",
   furi: "おと",
@@ -4370,7 +4370,7 @@ export const CARDS_COMMON = [
   _origIndex: 845
   },
   {
-  id: 862,
+  id: 732,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "へる",
@@ -4381,7 +4381,7 @@ export const CARDS_COMMON = [
   _origIndex: 846
   },
   {
-  id: 864,
+  id: 734,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "かわる",
@@ -4392,7 +4392,7 @@ export const CARDS_COMMON = [
   _origIndex: 848
   },
   {
-  id: 866,
+  id: 736,
   category: "career",
   source: "vocab-general",
   furi: "はだか",
@@ -4403,7 +4403,7 @@ export const CARDS_COMMON = [
   _origIndex: 850
   },
   {
-  id: 868,
+  id: 738,
   category: "career",
   source: "vocab-general",
   furi: "こくしょく",
@@ -4414,7 +4414,7 @@ export const CARDS_COMMON = [
   _origIndex: 852
   },
   {
-  id: 869,
+  id: 739,
   category: "career",
   source: "vocab-general",
   furi: "けいさん",
@@ -4425,7 +4425,7 @@ export const CARDS_COMMON = [
   _origIndex: 853
   },
   {
-  id: 872,
+  id: 742,
   category: "career",
   source: "vocab-general",
   furi: "しょうらい",
@@ -4436,7 +4436,7 @@ export const CARDS_COMMON = [
   _origIndex: 856
   },
   {
-  id: 874,
+  id: 744,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "そろえる",
@@ -4447,7 +4447,7 @@ export const CARDS_COMMON = [
   _origIndex: 858
   },
   {
-  id: 875,
+  id: 745,
   category: "career",
   source: "vocab-general",
   furi: "さい",
@@ -4458,7 +4458,7 @@ export const CARDS_COMMON = [
   _origIndex: 859
   },
   {
-  id: 880,
+  id: 750,
   category: "career",
   source: "vocab-supplementary",
   furi: "みじかい",
@@ -4469,7 +4469,7 @@ export const CARDS_COMMON = [
   _origIndex: 864
   },
   {
-  id: 884,
+  id: 754,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "せこうじ",
@@ -4480,7 +4480,7 @@ export const CARDS_COMMON = [
   _origIndex: 868
   },
   {
-  id: 885,
+  id: 755,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "さぎょうご",
@@ -4491,7 +4491,7 @@ export const CARDS_COMMON = [
   _origIndex: 869
   },
   {
-  id: 935,
+  id: 802,
   category: "sekou",
   source: "vocab-general",
   furi: "しゅんこう",
@@ -4503,7 +4503,7 @@ export const CARDS_COMMON = [
   _origIndex: 919
   },
   {
-  id: 936,
+  id: 803,
   category: "sekou",
   source: "vocab-general",
   furi: "ちゃっこう",
@@ -4515,7 +4515,7 @@ export const CARDS_COMMON = [
   _origIndex: 920
   },
   {
-  id: 952,
+  id: 811,
   category: "sekou",
   source: "vocab-general",
   furi: "つぼ",
@@ -4526,7 +4526,7 @@ export const CARDS_COMMON = [
   _origIndex: 936
   },
   {
-  id: 953,
+  id: 812,
   category: "sekou",
   source: "vocab-general",
   furi: "しゃく",
@@ -4537,7 +4537,7 @@ export const CARDS_COMMON = [
   _origIndex: 937
   },
   {
-  id: 954,
+  id: 813,
   category: "sekou",
   source: "vocab-general",
   furi: "すん",
@@ -4548,7 +4548,7 @@ export const CARDS_COMMON = [
   _origIndex: 938
   },
   {
-  id: 974,
+  id: 833,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "おつかれさまです",
@@ -4559,7 +4559,7 @@ export const CARDS_COMMON = [
   _origIndex: 958
   },
   {
-  id: 981,
+  id: 839,
   category: "sekou",
   source: "vocab-general",
   furi: "はしら",
@@ -4570,7 +4570,7 @@ export const CARDS_COMMON = [
   _origIndex: 965
   },
   {
-  id: 982,
+  id: 840,
   category: "sekou",
   source: "vocab-general",
   furi: "はり",
@@ -4581,7 +4581,7 @@ export const CARDS_COMMON = [
   _origIndex: 966
   },
   {
-  id: 983,
+  id: 841,
   category: "sekou",
   source: "vocab-general",
   furi: "ゆか",
@@ -4592,7 +4592,7 @@ export const CARDS_COMMON = [
   _origIndex: 967
   },
   {
-  id: 1006,
+  id: 858,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "すいへいき",
@@ -4604,7 +4604,7 @@ export const CARDS_COMMON = [
   _origIndex: 985
   },
   {
-  id: 1011,
+  id: 863,
   category: "sekou",
   source: "vocab-general",
   furi: "はしご",
@@ -4616,7 +4616,7 @@ export const CARDS_COMMON = [
   _origIndex: 990
   },
   {
-  id: 1088,
+  id: 939,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "モップ",
@@ -4628,7 +4628,7 @@ export const CARDS_COMMON = [
   _origIndex: 1067
   },
   {
-  id: 1089,
+  id: 940,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "たらい",
@@ -4640,7 +4640,7 @@ export const CARDS_COMMON = [
   _origIndex: 1068
   },
   {
-  id: 1090,
+  id: 941,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "はしごきゃたつ",
@@ -4652,7 +4652,7 @@ export const CARDS_COMMON = [
   _origIndex: 1069
   },
   {
-  id: 1091,
+  id: 942,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ゴムパッド",
@@ -4663,7 +4663,7 @@ export const CARDS_COMMON = [
   _origIndex: 1070
   },
   {
-  id: 1092,
+  id: 943,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "シートガスケット",
@@ -4674,7 +4674,7 @@ export const CARDS_COMMON = [
   _origIndex: 1071
   },
   {
-  id: 1093,
+  id: 944,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "かんしょうざい",
@@ -4685,7 +4685,7 @@ export const CARDS_COMMON = [
   _origIndex: 1072
   },
   {
-  id: 1094,
+  id: 945,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "だんさだい",
@@ -4696,7 +4696,7 @@ export const CARDS_COMMON = [
   _origIndex: 1073
   },
   {
-  id: 1222,
+  id: 1072,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "わくぐみあしば",
@@ -4708,7 +4708,7 @@ export const CARDS_COMMON = [
   _origIndex: 1200
   },
   {
-  id: 1227,
+  id: 1077,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "なかさん",
@@ -4719,7 +4719,7 @@ export const CARDS_COMMON = [
   _origIndex: 1205
   },
   {
-  id: 1228,
+  id: 1078,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "はばき",
@@ -4730,7 +4730,7 @@ export const CARDS_COMMON = [
   _origIndex: 1206
   },
   {
-  id: 1229,
+  id: 1079,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "しょうこうせつび",
@@ -4741,7 +4741,7 @@ export const CARDS_COMMON = [
   _origIndex: 1207
   },
   {
-  id: 1230,
+  id: 1080,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "さんそのうどけい",
@@ -4752,7 +4752,7 @@ export const CARDS_COMMON = [
   _origIndex: 1208
   },
   {
-  id: 1232,
+  id: 1082,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ゆうがいがすけんちき",
@@ -4763,7 +4763,7 @@ export const CARDS_COMMON = [
   _origIndex: 1210
   },
   {
-  id: 1234,
+  id: 1084,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ろっくあうとたぐあうと",
@@ -4774,7 +4774,7 @@ export const CARDS_COMMON = [
   _origIndex: 1212
   },
   {
-  id: 1236,
+  id: 1086,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "つーるぼっくすみーてぃんぐ",
@@ -4785,7 +4785,7 @@ export const CARDS_COMMON = [
   _origIndex: 1214
   },
   {
-  id: 1237,
+  id: 1087,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "あんぜんとうばん",
@@ -4796,7 +4796,7 @@ export const CARDS_COMMON = [
   _origIndex: 1215
   },
   {
-  id: 1239,
+  id: 1089,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "さぎょうてじゅんしょ",
@@ -4807,7 +4807,7 @@ export const CARDS_COMMON = [
   _origIndex: 1217
   },
   {
-  id: 1245,
+  id: 1095,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ひやりはっと",
@@ -4818,7 +4818,7 @@ export const CARDS_COMMON = [
   _origIndex: 1223
   },
   {
-  id: 1246,
+  id: 1096,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "きけんよちくんれん",
@@ -4829,7 +4829,7 @@ export const CARDS_COMMON = [
   _origIndex: 1224
   },
   {
-  id: 1248,
+  id: 1097,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ピーシーぐい",
@@ -4840,7 +4840,7 @@ export const CARDS_COMMON = [
   _origIndex: 1226
   },
   {
-  id: 1249,
+  id: 1098,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ピーエイチシーぐい",
@@ -4851,7 +4851,7 @@ export const CARDS_COMMON = [
   _origIndex: 1227
   },
   {
-  id: 1255,
+  id: 1100,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "しつじゅんようじょう",
@@ -4862,7 +4862,7 @@ export const CARDS_COMMON = [
   _origIndex: 1233
   },
   {
-  id: 1256,
+  id: 1101,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "じょうきようじょう",
@@ -4873,7 +4873,7 @@ export const CARDS_COMMON = [
   _origIndex: 1234
   },
   {
-  id: 1257,
+  id: 1102,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ひまくようじょう",
@@ -4884,7 +4884,7 @@ export const CARDS_COMMON = [
   _origIndex: 1235
   },
   {
-  id: 1259,
+  id: 1103,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "うちつぎめ",
@@ -4895,7 +4895,7 @@ export const CARDS_COMMON = [
   _origIndex: 1237
   },
   {
-  id: 1263,
+  id: 1104,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ぶりーでぃんぐ",
@@ -4906,7 +4906,7 @@ export const CARDS_COMMON = [
   _origIndex: 1241
   },
   {
-  id: 1265,
+  id: 1105,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "くらっく",
@@ -4917,7 +4917,7 @@ export const CARDS_COMMON = [
   _origIndex: 1243
   },
   {
-  id: 1277,
+  id: 1109,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ALCパネル",
@@ -4928,7 +4928,7 @@ export const CARDS_COMMON = [
   _origIndex: 1255
   },
   {
-  id: 1280,
+  id: 1112,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "コーキング",
@@ -4940,7 +4940,7 @@ export const CARDS_COMMON = [
   _origIndex: 1258
   },
   {
-  id: 1282,
+  id: 1114,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "バックアップざい",
@@ -4952,7 +4952,7 @@ export const CARDS_COMMON = [
   _origIndex: 1260
   },
   {
-  id: 1284,
+  id: 1115,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "みずきり",
@@ -4964,7 +4964,7 @@ export const CARDS_COMMON = [
   _origIndex: 1262
   },
   {
-  id: 1288,
+  id: 1116,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ビニルゆかシート",
@@ -4975,7 +4975,7 @@ export const CARDS_COMMON = [
   _origIndex: 1266
   },
   {
-  id: 1289,
+  id: 1117,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ちょうじゃくシート",
@@ -4986,7 +4986,7 @@ export const CARDS_COMMON = [
   _origIndex: 1267
   },
   {
-  id: 1297,
+  id: 1119,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "はんまーどりる",
@@ -4998,7 +4998,7 @@ export const CARDS_COMMON = [
   _origIndex: 1275
   },
   {
-  id: 1304,
+  id: 1126,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "とるくれんち",
@@ -5010,7 +5010,7 @@ export const CARDS_COMMON = [
   _origIndex: 1282
   },
   {
-  id: 1305,
+  id: 1127,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "しゃこまんりき",
@@ -5022,7 +5022,7 @@ export const CARDS_COMMON = [
   _origIndex: 1283
   },
   {
-  id: 1306,
+  id: 1128,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "たっぷ・だいす",
@@ -5033,7 +5033,7 @@ export const CARDS_COMMON = [
   _origIndex: 1284
   },
   {
-  id: 1307,
+  id: 1129,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "かなきりのこ",
@@ -5044,7 +5044,7 @@ export const CARDS_COMMON = [
   _origIndex: 1285
   },
   {
-  id: 1309,
+  id: 1131,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "がすばーなー",
@@ -5056,7 +5056,7 @@ export const CARDS_COMMON = [
   _origIndex: 1287
   },
   {
-  id: 1310,
+  id: 1132,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ぜつえんていこうけい",
@@ -5067,7 +5067,7 @@ export const CARDS_COMMON = [
   _origIndex: 1288
   },
   {
-  id: 1311,
+  id: 1133,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "せっちていこうけい",
@@ -5078,7 +5078,7 @@ export const CARDS_COMMON = [
   _origIndex: 1289
   },
   {
-  id: 1313,
+  id: 1135,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "えあこんぷれっさー",
@@ -5089,7 +5089,7 @@ export const CARDS_COMMON = [
   _origIndex: 1291
   },
   {
-  id: 1314,
+  id: 1136,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "こんくりーとかったー",
@@ -5100,7 +5100,7 @@ export const CARDS_COMMON = [
   _origIndex: 1292
   },
   {
-  id: 1315,
+  id: 1137,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ちっぱー",
@@ -5111,7 +5111,7 @@ export const CARDS_COMMON = [
   _origIndex: 1293
   },
   {
-  id: 1316,
+  id: 1138,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "じぐそー",
@@ -5122,7 +5122,7 @@ export const CARDS_COMMON = [
   _origIndex: 1294
   },
   {
-  id: 1319,
+  id: 1141,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "すこや",
@@ -5134,7 +5134,7 @@ export const CARDS_COMMON = [
   _origIndex: 1297
   },
   {
-  id: 1320,
+  id: 1142,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ぷらいやー",
@@ -5145,7 +5145,7 @@ export const CARDS_COMMON = [
   _origIndex: 1298
   },
   {
-  id: 1322,
+  id: 1144,
   category: "career",
   source: "vocab-supplementary",
   furi: "せこうけいかくしょ",
@@ -5156,7 +5156,7 @@ export const CARDS_COMMON = [
   _origIndex: 1300
   },
   {
-  id: 1325,
+  id: 1147,
   category: "career",
   source: "vocab-supplementary",
   furi: "グリーンファイル",
@@ -5167,7 +5167,7 @@ export const CARDS_COMMON = [
   _origIndex: 1303
   },
   {
-  id: 1327,
+  id: 1148,
   category: "career",
   source: "vocab-supplementary",
   furi: "バーチャート",
@@ -5178,7 +5178,7 @@ export const CARDS_COMMON = [
   _origIndex: 1304
   },
   {
-  id: 1328,
+  id: 1149,
   category: "career",
   source: "vocab-supplementary",
   furi: "ネットワークこうていひょう",
@@ -5190,7 +5190,7 @@ export const CARDS_COMMON = [
   _origIndex: 1305
   },
   {
-  id: 1329,
+  id: 1150,
   category: "career",
   source: "vocab-supplementary",
   furi: "できだか",
@@ -5202,7 +5202,7 @@ export const CARDS_COMMON = [
   _origIndex: 1306
   },
   {
-  id: 1330,
+  id: 1151,
   category: "career",
   source: "vocab-supplementary",
   furi: "ぶがかり",
@@ -5214,7 +5214,7 @@ export const CARDS_COMMON = [
   _origIndex: 1307
   },
   {
-  id: 1331,
+  id: 1152,
   category: "career",
   source: "vocab-supplementary",
   furi: "ちょくせつかせつ",
@@ -5225,7 +5225,7 @@ export const CARDS_COMMON = [
   _origIndex: 1308
   },
   {
-  id: 1332,
+  id: 1153,
   category: "career",
   source: "vocab-supplementary",
   furi: "きょうつうかせつ",
@@ -5236,7 +5236,7 @@ export const CARDS_COMMON = [
   _origIndex: 1309
   },
   {
-  id: 1333,
+  id: 1154,
   category: "career",
   source: "vocab-supplementary",
   furi: "げんかかんり",
@@ -5247,7 +5247,7 @@ export const CARDS_COMMON = [
   _origIndex: 1310
   },
   {
-  id: 1335,
+  id: 1156,
   category: "career",
   source: "vocab-supplementary",
   furi: "しゅんこうず",
@@ -5258,7 +5258,7 @@ export const CARDS_COMMON = [
   _origIndex: 1312
   },
   {
-  id: 1336,
+  id: 1157,
   category: "career",
   source: "vocab-supplementary",
   furi: "せこうず",
@@ -5269,7 +5269,7 @@ export const CARDS_COMMON = [
   _origIndex: 1313
   },
   {
-  id: 1337,
+  id: 1158,
   category: "career",
   source: "vocab-supplementary",
   furi: "うちあわせきろく",
@@ -5280,7 +5280,7 @@ export const CARDS_COMMON = [
   _origIndex: 1314
   },
   {
-  id: 1338,
+  id: 1159,
   category: "career",
   source: "vocab-supplementary",
   furi: "こうじにっぽう",
@@ -5291,7 +5291,7 @@ export const CARDS_COMMON = [
   _origIndex: 1315
   },
   {
-  id: 1339,
+  id: 1160,
   category: "career",
   source: "vocab-supplementary",
   furi: "ざいりょうはんにゅう",
@@ -5302,7 +5302,7 @@ export const CARDS_COMMON = [
   _origIndex: 1316
   },
   {
-  id: 1340,
+  id: 1161,
   category: "career",
   source: "vocab-general",
   furi: "けんしゅう",
@@ -5313,7 +5313,7 @@ export const CARDS_COMMON = [
   _origIndex: 1317
   },
   {
-  id: 1341,
+  id: 1162,
   category: "career",
   source: "vocab-general",
   furi: "ぜせい",
@@ -5324,7 +5324,7 @@ export const CARDS_COMMON = [
   _origIndex: 1318
   },
   {
-  id: 1342,
+  id: 1163,
   category: "career",
   source: "vocab-supplementary",
   furi: "ひきわたし",
@@ -5336,7 +5336,7 @@ export const CARDS_COMMON = [
   _origIndex: 1319
   },
   {
-  id: 1344,
+  id: 1165,
   category: "career",
   source: "vocab-supplementary",
   furi: "そうごうせこうけいかくしょ",
@@ -5347,7 +5347,7 @@ export const CARDS_COMMON = [
   _origIndex: 1321
   },
   {
-  id: 1345,
+  id: 1166,
   category: "career",
   source: "vocab-supplementary",
   furi: "ひんしつかんりけいかくしょ",
@@ -5358,7 +5358,7 @@ export const CARDS_COMMON = [
   _origIndex: 1322
   },
   {
-  id: 1354,
+  id: 1175,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "あんぜんかんりしゃ",
@@ -5369,7 +5369,7 @@ export const CARDS_COMMON = [
   _origIndex: 1331
   },
   {
-  id: 1365,
+  id: 1183,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "こうていひょう",
@@ -5380,7 +5380,7 @@ export const CARDS_COMMON = [
   _origIndex: 1339
   },
   {
-  id: 1369,
+  id: 1185,
   category: "hourei",
   source: "vocab-supplementary",
   furi: "せんもんぎょうしゃ",
@@ -5391,7 +5391,7 @@ export const CARDS_COMMON = [
   _origIndex: 1341
   },
   {
-  id: 1382,
+  id: 1198,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "よろしくおねがいします",
@@ -5402,7 +5402,7 @@ export const CARDS_COMMON = [
   _origIndex: 1354
   },
   {
-  id: 1384,
+  id: 1200,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "すみません",
@@ -5413,7 +5413,7 @@ export const CARDS_COMMON = [
   _origIndex: 1356
   },
   {
-  id: 1385,
+  id: 1201,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "わかりました",
@@ -5424,7 +5424,7 @@ export const CARDS_COMMON = [
   _origIndex: 1357
   },
   {
-  id: 1386,
+  id: 1202,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "わかりません",
@@ -5435,7 +5435,7 @@ export const CARDS_COMMON = [
   _origIndex: 1358
   },
   {
-  id: 1387,
+  id: 1203,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "もういちどいってください",
@@ -5446,7 +5446,7 @@ export const CARDS_COMMON = [
   _origIndex: 1359
   },
   {
-  id: 1388,
+  id: 1204,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "てつだってください",
@@ -5457,7 +5457,7 @@ export const CARDS_COMMON = [
   _origIndex: 1360
   },
   {
-  id: 1389,
+  id: 1205,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "ちょっとまってください",
@@ -5468,7 +5468,7 @@ export const CARDS_COMMON = [
   _origIndex: 1361
   },
   {
-  id: 1391,
+  id: 1207,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "おつかれさまでした",
@@ -5479,7 +5479,7 @@ export const CARDS_COMMON = [
   _origIndex: 1363
   },
   {
-  id: 1393,
+  id: 1209,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "おわりました",
@@ -5490,7 +5490,7 @@ export const CARDS_COMMON = [
   _origIndex: 1365
   },
   {
-  id: 1394,
+  id: 1210,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "きをつけて",
@@ -5501,7 +5501,7 @@ export const CARDS_COMMON = [
   _origIndex: 1366
   },
   {
-  id: 1395,
+  id: 1211,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "おねがいします",
@@ -5512,7 +5512,7 @@ export const CARDS_COMMON = [
   _origIndex: 1367
   },
   {
-  id: 1397,
+  id: 1213,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "いってきます／いってらっしゃい",
@@ -5523,7 +5523,7 @@ export const CARDS_COMMON = [
   _origIndex: 1369
   },
   {
-  id: 1398,
+  id: 1214,
   category: "gaiyou",
   source: "vocab-supplementary",
   furi: "おせわになっております",
@@ -5534,7 +5534,7 @@ export const CARDS_COMMON = [
   _origIndex: 1370
   },
   {
-  id: 1404,
+  id: 1220,
   category: "career",
   source: "vocab-general",
   furi: "けいご",
@@ -5545,7 +5545,7 @@ export const CARDS_COMMON = [
   _origIndex: 1376
   },
   {
-  id: 1405,
+  id: 1221,
   category: "career",
   source: "vocab-supplementary",
   furi: "みだしなみ",
@@ -5556,7 +5556,7 @@ export const CARDS_COMMON = [
   _origIndex: 1377
   },
   {
-  id: 1406,
+  id: 1222,
   category: "career",
   source: "vocab-general",
   furi: "ちこく",
@@ -5567,7 +5567,7 @@ export const CARDS_COMMON = [
   _origIndex: 1378
   },
   {
-  id: 1407,
+  id: 1223,
   category: "career",
   source: "vocab-general",
   furi: "けっきん",
@@ -5578,7 +5578,7 @@ export const CARDS_COMMON = [
   _origIndex: 1379
   },
   {
-  id: 1409,
+  id: 1225,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "たいちょうかんり",
@@ -5589,7 +5589,7 @@ export const CARDS_COMMON = [
   _origIndex: 1381
   },
   {
-  id: 1410,
+  id: 1226,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "たいちょうふりょう",
@@ -5600,7 +5600,7 @@ export const CARDS_COMMON = [
   _origIndex: 1382
   },
   {
-  id: 1411,
+  id: 1227,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "すいぶんほきゅう",
@@ -5611,7 +5611,7 @@ export const CARDS_COMMON = [
   _origIndex: 1383
   },
   {
-  id: 1414,
+  id: 1230,
   category: "career",
   source: "vocab-supplementary",
   furi: "じかんげんしゅ",
@@ -5622,7 +5622,7 @@ export const CARDS_COMMON = [
   _origIndex: 1386
   },
   {
-  id: 1415,
+  id: 1231,
   category: "career",
   source: "vocab-supplementary",
   furi: "きゅうよめいさい",
@@ -5633,7 +5633,7 @@ export const CARDS_COMMON = [
   _origIndex: 1387
   },
   {
-  id: 1420,
+  id: 1236,
   category: "hourei",
   source: "vocab-general",
   furi: "しゅうろう",
@@ -5644,7 +5644,7 @@ export const CARDS_COMMON = [
   _origIndex: 1392
   },
   {
-  id: 1424,
+  id: 1240,
   category: "hourei",
   source: "vocab-supplementary",
   furi: "こうせいねんきん",
@@ -5655,7 +5655,7 @@ export const CARDS_COMMON = [
   _origIndex: 1396
   },
   {
-  id: 1426,
+  id: 1242,
   category: "hourei",
   source: "vocab-supplementary",
   furi: "ほけんしょう",
@@ -5666,7 +5666,7 @@ export const CARDS_COMMON = [
   _origIndex: 1398
   },
   {
-  id: 1429,
+  id: 1245,
   category: "anzen",
   source: "vocab-supplementary",
   furi: "ぼうじんますく",
@@ -5677,7 +5677,7 @@ export const CARDS_COMMON = [
   _origIndex: 1401
   },
   {
-  id: 1430,
+  id: 1246,
   category: "anzen",
   source: "vocab-general",
   furi: "みみせん",
@@ -5691,7 +5691,7 @@ export const CARDS_COMMON = [
 // ─── text1l + text2 + text3l pass 2 — 2026-05-08 ──────────────────────────
 // IDs 1457–1471
   {
-  id: 1457,
+  id: 1272,
   category: "career",
   source: "jac-ch1",
   furi: "CCUSのよんれべるとじょうけん",
@@ -5703,7 +5703,7 @@ export const CARDS_COMMON = [
   _origIndex: 1428
   },
   {
-  id: 1458,
+  id: 1273,
   category: "hourei",
   source: "jac-ch2",
   furi: "どろーんのとびきんしごルール",
@@ -5715,7 +5715,7 @@ export const CARDS_COMMON = [
   _origIndex: 1429
   },
   {
-  id: 1459,
+  id: 1274,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつぎょうほうのせつびかんれんぎょうしゅ",
@@ -5727,7 +5727,7 @@ export const CARDS_COMMON = [
   _origIndex: 1430
   },
   {
-  id: 1460,
+  id: 1275,
   category: "hourei",
   source: "jac-ch2",
   furi: "けんせつろうどうしゃこようかいぜんほうじゅうてんしさく",
@@ -5739,7 +5739,7 @@ export const CARDS_COMMON = [
   _origIndex: 1431
   },
   {
-  id: 1461,
+  id: 1276,
   category: "hourei",
   source: "jac-ch2",
   furi: "とくていぎのうがいこくじんしつぎょうじのざいりゅう",
@@ -5751,7 +5751,7 @@ export const CARDS_COMMON = [
   _origIndex: 1432
   },
   {
-  id: 1462,
+  id: 1277,
   category: "sekou",
   source: "text3l",
   furi: "あしばのくみたてとうさぎょうしゅにんしゃ",
@@ -5763,7 +5763,7 @@ export const CARDS_COMMON = [
   _origIndex: 1433
   },
   {
-  id: 1463,
+  id: 1278,
   category: "sekou",
   source: "text3l",
   furi: "じやまくっさくどどめしほこうさぎょうしゅにんしゃ",
@@ -5775,7 +5775,7 @@ export const CARDS_COMMON = [
   _origIndex: 1434
   },
   {
-  id: 1464,
+  id: 1279,
   category: "sekou",
   source: "text3l",
   furi: "ろーぷこうしょさぎょうとくべつきょういく",
@@ -5787,7 +5787,7 @@ export const CARDS_COMMON = [
   _origIndex: 1435
   },
   {
-  id: 1465,
+  id: 1280,
   category: "sekou",
   source: "text3l",
   furi: "かたわくしほこうずいどうくっさくさぎょうしゅにんしゃ",
@@ -5799,7 +5799,7 @@ export const CARDS_COMMON = [
   _origIndex: 1436
   },
   {
-  id: 1466,
+  id: 1281,
   category: "sekou",
   source: "text3l",
   furi: "とびしょくのろくしゅるい",
@@ -5811,7 +5811,7 @@ export const CARDS_COMMON = [
   _origIndex: 1437
   },
   {
-  id: 1467,
+  id: 1282,
   category: "sekou",
   source: "text3l",
   furi: "てっこつこうぞうのさんしゅるいとにこうほう",
@@ -5823,7 +5823,7 @@ export const CARDS_COMMON = [
   _origIndex: 1438
   },
   {
-  id: 1468,
+  id: 1283,
   category: "sekou",
   source: "text3l",
   furi: "しゃりょうけいけんせつきかいとさんトンきょうかい",
@@ -5835,7 +5835,7 @@ export const CARDS_COMMON = [
   _origIndex: 1439
   },
   {
-  id: 1469,
+  id: 1284,
   category: "hourei",
   source: "jac-ch2",
   furi: "さんぱいほかんとまにふぇすとぎむ",
@@ -5847,7 +5847,7 @@ export const CARDS_COMMON = [
   _origIndex: 1440
   },
   {
-  id: 1470,
+  id: 1285,
   category: "anzen",
   source: "jac-ch2",
   furi: "ねっちゅうしょうよぼうのさんたいさく",
@@ -5859,7 +5859,7 @@ export const CARDS_COMMON = [
   _origIndex: 1441
   },
   {
-  id: 1471,
+  id: 1286,
   category: "hourei",
   source: "jac-ch2",
   furi: "こうくうしょうがいとうとどろーんすうち",
@@ -5874,7 +5874,7 @@ export const CARDS_COMMON = [
 
 // ─── migrated from cards-doboku.js ──────────────────────────────────────────────
 {
-  id: 1472,
+  id: 1287,
   category: "sekou",
   source: "jac-ch3",
   furi: "きゅうはいすいこうじ",
@@ -5886,7 +5886,7 @@ export const CARDS_COMMON = [
   _origIndex: 1443
   },
   {
-  id: 1473,
+  id: 1288,
   category: "sekou",
   source: "jac-ch4",
   furi: "てんあつ",
@@ -5898,7 +5898,7 @@ export const CARDS_COMMON = [
   _origIndex: 1444
   },
   {
-  id: 1474,
+  id: 1289,
   category: "sekou",
   source: "jac-ch3",
   furi: "ろしょうろばんひょうそう",
@@ -5910,7 +5910,7 @@ export const CARDS_COMMON = [
   _origIndex: 1445
   },
   {
-  id: 1475,
+  id: 1290,
   category: "sekou",
   source: "jac-ch4",
   furi: "やりかたみずぬきみずもり",
@@ -5922,7 +5922,7 @@ export const CARDS_COMMON = [
   _origIndex: 1446
   },
   {
-  id: 1476,
+  id: 1291,
   category: "sekou",
   source: "jac-ch3",
   furi: "ちすいりすい",
@@ -5934,7 +5934,7 @@ export const CARDS_COMMON = [
   _origIndex: 1447
   },
   {
-  id: 1477,
+  id: 1292,
   category: "sekou",
   source: "jac-ch3",
   furi: "ななとむこうほう",
@@ -5946,7 +5946,7 @@ export const CARDS_COMMON = [
   _origIndex: 1448
   },
   {
-  id: 1478,
+  id: 1293,
   category: "sekou",
   source: "jac-ch3",
   furi: "しいるどとんねるせぐめんと",
@@ -5958,7 +5958,7 @@ export const CARDS_COMMON = [
   _origIndex: 1449
   },
   {
-  id: 1479,
+  id: 1294,
   category: "sekou",
   source: "jac-ch3",
   furi: "きょうりょうこうじかぶこうじょうぶこう",
@@ -5970,7 +5970,7 @@ export const CARDS_COMMON = [
   _origIndex: 1450
   },
   {
-  id: 1480,
+  id: 1295,
   category: "sekou",
   source: "jac-ch3",
   furi: "かいようどぼくこうじ",
@@ -5982,7 +5982,7 @@ export const CARDS_COMMON = [
   _origIndex: 1451
   },
   {
-  id: 1481,
+  id: 1296,
   category: "sekou",
   source: "jac-ch3",
   furi: "しゅんせつこうじ",
@@ -5994,7 +5994,7 @@ export const CARDS_COMMON = [
   _origIndex: 1452
   },
   {
-  id: 1482,
+  id: 1297,
   category: "sekou",
   source: "jac-ch3",
   furi: "けえそん",
@@ -6006,7 +6006,7 @@ export const CARDS_COMMON = [
   _origIndex: 1453
   },
   {
-  id: 1483,
+  id: 1298,
   category: "sekou",
   source: "jac-ch3",
   furi: "ぼおりんぐちょうさしじそう",
@@ -6018,7 +6018,7 @@ export const CARDS_COMMON = [
   _origIndex: 1454
   },
   {
-  id: 1484,
+  id: 1299,
   category: "sekou",
   source: "jac-ch3",
   furi: "くいこうじばしょうちくいきせいくい",
@@ -6030,7 +6030,7 @@ export const CARDS_COMMON = [
   _origIndex: 1455
   },
   {
-  id: 1485,
+  id: 1300,
   category: "sekou",
   source: "jac-ch3",
   furi: "ねぎり",
@@ -6042,7 +6042,7 @@ export const CARDS_COMMON = [
   _origIndex: 1456
   },
   {
-  id: 1486,
+  id: 1301,
   category: "sekou",
   source: "jac-ch3",
   furi: "もりどきりど",
@@ -6054,7 +6054,7 @@ export const CARDS_COMMON = [
   _origIndex: 1457
   },
   {
-  id: 1487,
+  id: 1302,
   category: "sekou",
   source: "jac-ch3",
   furi: "うめもどしさぎょう",
@@ -6066,7 +6066,7 @@ export const CARDS_COMMON = [
   _origIndex: 1458
   },
   {
-  id: 1488,
+  id: 1303,
   category: "sekou",
   source: "jac-ch3",
   furi: "さくせいこうじしゅるい",
@@ -6078,7 +6078,7 @@ export const CARDS_COMMON = [
   _origIndex: 1459
   },
   {
-  id: 1489,
+  id: 1304,
   category: "sekou",
   source: "jac-ch3",
   furi: "ぢいぷうえる",
@@ -6090,7 +6090,7 @@ export const CARDS_COMMON = [
   _origIndex: 1460
   },
   {
-  id: 1490,
+  id: 1305,
   category: "sekou",
   source: "jac-ch3",
   furi: "とびこうじのしゅるい",
@@ -6102,7 +6102,7 @@ export const CARDS_COMMON = [
   _origIndex: 1461
   },
   {
-  id: 1491,
+  id: 1306,
   category: "sekou",
   source: "jac-ch3",
   furi: "かいさくとんねる",
@@ -6114,7 +6114,7 @@ export const CARDS_COMMON = [
   _origIndex: 1462
   },
   {
-  id: 1492,
+  id: 1307,
   category: "sekou",
   source: "jac-ch3",
   furi: "のりめんこうじもるたるふきつけしょくせいこうほう",
@@ -6126,7 +6126,7 @@ export const CARDS_COMMON = [
   _origIndex: 1463
   },
   {
-  id: 1493,
+  id: 1308,
   category: "sekou",
   source: "jac-ch3",
   furi: "かせんかいがんこうぞうぶつぼうはていぼうちょうていごがんていぼうすいろ",
@@ -6138,7 +6138,7 @@ export const CARDS_COMMON = [
   _origIndex: 1464
   },
   {
-  id: 1494,
+  id: 1309,
   category: "sekou",
   source: "jac-ch3",
   furi: "てつどうこうじたしょくしゅしゅうやくこうじ",
@@ -6150,7 +6150,7 @@ export const CARDS_COMMON = [
   _origIndex: 1465
   },
   {
-  id: 1495,
+  id: 1310,
   category: "sekou",
   source: "jac-ch3",
   furi: "じょうげすいどうこうじじょうすいじょうげすいしょりじょう",
@@ -6162,7 +6162,7 @@ export const CARDS_COMMON = [
   _origIndex: 1466
   },
   {
-  id: 1496,
+  id: 1311,
   category: "sekou",
   source: "jac-ch3",
   furi: "さいがいふっきゅうこうじ",
@@ -6174,7 +6174,7 @@ export const CARDS_COMMON = [
   _origIndex: 1467
   },
   {
-  id: 1497,
+  id: 1312,
   category: "sekou",
   source: "jac-ch3",
   furi: "うめたてこうじがんぺきこうじ",
@@ -6186,7 +6186,7 @@ export const CARDS_COMMON = [
   _origIndex: 1468
   },
   {
-  id: 1498,
+  id: 1313,
   category: "sekou",
   source: "jac-ch3",
   furi: "ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ",
@@ -6198,7 +6198,7 @@ export const CARDS_COMMON = [
   _origIndex: 1469
   },
   {
-  id: 1499,
+  id: 1314,
   category: "sekou",
   source: "jac-ch3",
   furi: "くいのざいりょうしゅるいきくいこうくいこんくりいとくい",
@@ -6210,7 +6210,7 @@ export const CARDS_COMMON = [
   _origIndex: 1470
   },
   {
-  id: 1500,
+  id: 1315,
   category: "sekou",
   source: "jac-ch3",
   furi: "おんせんせいちねつせいふかさときけんせい",
@@ -6222,7 +6222,7 @@ export const CARDS_COMMON = [
   _origIndex: 1471
   },
   {
-  id: 1501,
+  id: 1316,
   category: "sekou",
   source: "jac-ch4",
   furi: "じなわばりみずいと",
@@ -6234,7 +6234,7 @@ export const CARDS_COMMON = [
   _origIndex: 1472
   },
   {
-  id: 1502,
+  id: 1317,
   category: "sekou",
   source: "jac-ch4",
   furi: "もりどだんぎり",
@@ -6246,7 +6246,7 @@ export const CARDS_COMMON = [
   _origIndex: 1473
   },
   {
-  id: 1503,
+  id: 1318,
   category: "sekou",
   source: "jac-ch4",
   furi: "ねきりよぼりすきとりとこづけ",
@@ -6258,7 +6258,7 @@ export const CARDS_COMMON = [
   _origIndex: 1474
   },
   {
-  id: 1504,
+  id: 1319,
   category: "sekou",
   source: "jac-ch4",
   furi: "うめもどしつきがためみずしめ",
@@ -6270,7 +6270,7 @@ export const CARDS_COMMON = [
   _origIndex: 1475
   },
   {
-  id: 1505,
+  id: 1320,
   category: "sekou",
   source: "jac-ch4",
   furi: "くいまさらいだんばね",
@@ -6282,7 +6282,7 @@ export const CARDS_COMMON = [
   _origIndex: 1476
   },
   {
-  id: 1506,
+  id: 1321,
   category: "sekou",
   source: "jac-ch4",
   furi: "やまずな",
@@ -6294,7 +6294,7 @@ export const CARDS_COMMON = [
   _origIndex: 1477
   },
   {
-  id: 1507,
+  id: 1322,
   category: "sekou",
   source: "jac-ch4",
   furi: "きせいくいこうほうばしょううちこんくりいとくいこうほう",
@@ -6306,7 +6306,7 @@ export const CARDS_COMMON = [
   _origIndex: 1478
   },
   {
-  id: 1508,
+  id: 1323,
   category: "sekou",
   source: "jac-ch5",
   furi: "たんぱあ vs たこ（じゅうりょうつきかため）",
@@ -6318,7 +6318,7 @@ export const CARDS_COMMON = [
   _origIndex: 1479
   },
   {
-  id: 1509,
+  id: 1324,
   category: "sekou",
   source: "jac-ch3",
   furi: "だむこうじちすいりすい",
@@ -6330,7 +6330,7 @@ export const CARDS_COMMON = [
   _origIndex: 1480
   },
   {
-  id: 1510,
+  id: 1325,
   category: "sekou",
   source: "jac-ch6",
   furi: "とんねるのよんしゅるいこうほうでぶんるい",
@@ -6342,7 +6342,7 @@ export const CARDS_COMMON = [
   _origIndex: 1481
   },
   {
-  id: 1511,
+  id: 1326,
   category: "sekou",
   source: "jac-ch3",
   furi: "なこうほうさんがくとんねるさんようそ",
@@ -6354,7 +6354,7 @@ export const CARDS_COMMON = [
   _origIndex: 1482
   },
   {
-  id: 1512,
+  id: 1327,
   category: "sekou",
   source: "jac-ch3",
   furi: "しいるどとんねるこうほうたてこうせぐめんと",
@@ -6366,7 +6366,7 @@ export const CARDS_COMMON = [
   _origIndex: 1483
   },
   {
-  id: 1513,
+  id: 1328,
   category: "sekou",
   source: "jac-ch3",
   furi: "きょうりょうこうじしゅるいとかぶこうじょうぶこう",
@@ -6378,7 +6378,7 @@ export const CARDS_COMMON = [
   _origIndex: 1484
   },
   {
-  id: 1514,
+  id: 1329,
   category: "sekou",
   source: "jac-ch3",
   furi: "かいよどぼくこうじのとくちょとしゅよしせつ",
@@ -6390,7 +6390,7 @@ export const CARDS_COMMON = [
   _origIndex: 1485
   },
   {
-  id: 1515,
+  id: 1330,
   category: "sekou",
   source: "jac-ch3",
   furi: "どこうじのさぎょうろくしゅるい",
@@ -6402,7 +6402,7 @@ export const CARDS_COMMON = [
   _origIndex: 1486
   },
   {
-  id: 1516,
+  id: 1331,
   category: "sekou",
   source: "jac-ch3",
   furi: "ほそうこうじのよんそうこうぞうきそうをわすれずに",
@@ -6414,7 +6414,7 @@ export const CARDS_COMMON = [
   _origIndex: 1487
   },
   {
-  id: 1517,
+  id: 1332,
   category: "sekou",
   source: "jac-ch3",
   furi: "とびこうじのろくしゅるい",
@@ -6426,7 +6426,7 @@ export const CARDS_COMMON = [
   _origIndex: 1488
   },
   {
-  id: 1518,
+  id: 1333,
   category: "sekou",
   source: "jac-ch3",
   furi: "かいよどぼくのよんこうじしゅんせつうめたてがんぺきぼおはていけえそん",
@@ -6438,7 +6438,7 @@ export const CARDS_COMMON = [
   _origIndex: 1489
   },
   {
-  id: 1519,
+  id: 1334,
   category: "sekou",
   source: "jac-ch4",
   furi: "やりかたみずぬきみずもりじなわはりみずいと",
@@ -6450,7 +6450,7 @@ export const CARDS_COMMON = [
   _origIndex: 1490
   },
   {
-  id: 1520,
+  id: 1335,
   category: "sekou",
   source: "jac-ch4",
   furi: "もりとだんぎりしめかためてんあつうめもどしつきがため",
@@ -6462,7 +6462,7 @@ export const CARDS_COMMON = [
   _origIndex: 1491
   },
   {
-  id: 1521,
+  id: 1336,
   category: "sekou",
   source: "jac-ch4",
   furi: "ろばんろしょうひょうそう",
@@ -6474,7 +6474,7 @@ export const CARDS_COMMON = [
   _origIndex: 1492
   },
   {
-  id: 1522,
+  id: 1337,
   category: "sekou",
   source: "jac-ch4",
   furi: "じなわはりねぎりねいれながさすぼり",
@@ -6486,7 +6486,7 @@ export const CARDS_COMMON = [
   _origIndex: 1493
   },
   {
-  id: 1523,
+  id: 1338,
   category: "sekou",
   source: "jac-ch4",
   furi: "ばしょうちうつ",
@@ -6498,7 +6498,7 @@ export const CARDS_COMMON = [
   _origIndex: 1494
   },
   {
-  id: 1524,
+  id: 1339,
   category: "sekou",
   source: "jac-ch4",
   furi: "よぼりすきとりとこずけくいまさらいだんばね",
@@ -6510,7 +6510,7 @@ export const CARDS_COMMON = [
   _origIndex: 1495
   },
   {
-  id: 1525,
+  id: 1340,
   category: "sekou",
   source: "jac-ch3",
   furi: "どぼくこうじとくちょ",
@@ -6522,7 +6522,7 @@ export const CARDS_COMMON = [
   _origIndex: 1496
   },
   {
-  id: 1526,
+  id: 1341,
   category: "sekou",
   source: "jac-gakka2",
   furi: "しきならしさぎょう",
@@ -6534,7 +6534,7 @@ export const CARDS_COMMON = [
   _origIndex: 1497
   },
   {
-  id: 1527,
+  id: 1342,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "こうかんくい",
@@ -6546,7 +6546,7 @@ export const CARDS_COMMON = [
   _origIndex: 1498
   },
   {
-  id: 1528,
+  id: 1343,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "えきじょうか",
@@ -6557,7 +6557,7 @@ export const CARDS_COMMON = [
   _origIndex: 1499
   },
   {
-  id: 1529,
+  id: 1344,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "じたいりょく",
@@ -6571,7 +6571,7 @@ export const CARDS_COMMON = [
 
 // ─── migrated from cards-kenchiku.js ──────────────────────────────────────────────
 {
-  id: 1530,
+  id: 1345,
   category: "sekou",
   source: "jac-ch3",
   furi: "こんばあじょん",
@@ -6583,7 +6583,7 @@ export const CARDS_COMMON = [
   _origIndex: 1501
   },
   {
-  id: 1531,
+  id: 1346,
   category: "sekou",
   source: "jac-ch3",
   furi: "あとせこうあんかあ",
@@ -6595,7 +6595,7 @@ export const CARDS_COMMON = [
   _origIndex: 1502
   },
   {
-  id: 1532,
+  id: 1347,
   category: "sekou",
   source: "jac-ch3",
   furi: "けいりょうてっこつじゅりょうてっこつ",
@@ -6607,7 +6607,7 @@ export const CARDS_COMMON = [
   _origIndex: 1503
   },
   {
-  id: 1533,
+  id: 1348,
   category: "sekou",
   source: "jac-ch3",
   furi: "ぶれすらあめんとらす",
@@ -6619,7 +6619,7 @@ export const CARDS_COMMON = [
   _origIndex: 1504
   },
   {
-  id: 1534,
+  id: 1349,
   category: "sekou",
   source: "jac-ch3",
   furi: "たてにげすいへいつまげ",
@@ -6631,7 +6631,7 @@ export const CARDS_COMMON = [
   _origIndex: 1505
   },
   {
-  id: 1535,
+  id: 1350,
   category: "sekou",
   source: "jac-ch3",
   furi: "すいしんとんねる",
@@ -6643,7 +6643,7 @@ export const CARDS_COMMON = [
   _origIndex: 1506
   },
   {
-  id: 1536,
+  id: 1351,
   category: "sekou",
   source: "jac-ch3",
   furi: "けんちくぶつのこうぞうしゅるい",
@@ -6655,7 +6655,7 @@ export const CARDS_COMMON = [
   _origIndex: 1507
   },
   {
-  id: 1537,
+  id: 1352,
   category: "sekou",
   source: "jac-ch3",
   furi: "やまどめこうじしほこう",
@@ -6667,7 +6667,7 @@ export const CARDS_COMMON = [
   _origIndex: 1508
   },
   {
-  id: 1538,
+  id: 1353,
   category: "sekou",
   source: "jac-ch3",
   furi: "たいしんせいしんめんしん",
@@ -6679,7 +6679,7 @@ export const CARDS_COMMON = [
   _origIndex: 1509
   },
   {
-  id: 1539,
+  id: 1354,
   category: "sekou",
   source: "jac-ch3",
   furi: "てっきんつぎてこうじしゅるい",
@@ -6691,7 +6691,7 @@ export const CARDS_COMMON = [
   _origIndex: 1510
   },
   {
-  id: 1540,
+  id: 1355,
   category: "sekou",
   source: "jac-ch3",
   furi: "かたわくこうじしほこう",
@@ -6703,7 +6703,7 @@ export const CARDS_COMMON = [
   _origIndex: 1511
   },
   {
-  id: 1541,
+  id: 1356,
   category: "sekou",
   source: "jac-ch3",
   furi: "れぢみくすどこんくりいとなまこんあっそう",
@@ -6715,7 +6715,7 @@ export const CARDS_COMMON = [
   _origIndex: 1512
   },
   {
-  id: 1542,
+  id: 1357,
   category: "sekou",
   source: "jac-ch3",
   furi: "さかんこうじかべつちしっくいもるたる",
@@ -6727,7 +6727,7 @@ export const CARDS_COMMON = [
   _origIndex: 1513
   },
   {
-  id: 1543,
+  id: 1358,
   category: "sekou",
   source: "jac-ch3",
   furi: "ぼうすいこうじしゅるい",
@@ -6739,7 +6739,7 @@ export const CARDS_COMMON = [
   _origIndex: 1514
   },
   {
-  id: 1544,
+  id: 1359,
   category: "sekou",
   source: "jac-ch3",
   furi: "みやだいく",
@@ -6751,7 +6751,7 @@ export const CARDS_COMMON = [
   _origIndex: 1515
   },
   {
-  id: 1545,
+  id: 1360,
   category: "sekou",
   source: "jac-ch3",
   furi: "あまじまい",
@@ -6763,7 +6763,7 @@ export const CARDS_COMMON = [
   _origIndex: 1516
   },
   {
-  id: 1546,
+  id: 1361,
   category: "sekou",
   source: "jac-ch3",
   furi: "とそうこうじほうほうはけろおらあえあすぷれえ",
@@ -6775,7 +6775,7 @@ export const CARDS_COMMON = [
   _origIndex: 1517
   },
   {
-  id: 1547,
+  id: 1362,
   category: "sekou",
   source: "jac-ch3",
   furi: "ぞおえんこうじしゅるい",
@@ -6787,7 +6787,7 @@ export const CARDS_COMMON = [
   _origIndex: 1518
   },
   {
-  id: 1548,
+  id: 1363,
   category: "sekou",
   source: "jac-ch3",
   furi: "けいてんこうじぼおどはりくろすはり",
@@ -6799,7 +6799,7 @@ export const CARDS_COMMON = [
   _origIndex: 1519
   },
   {
-  id: 1549,
+  id: 1364,
   category: "sekou",
   source: "jac-ch3",
   furi: "かばあこうほうさしかいしゅう",
@@ -6811,7 +6811,7 @@ export const CARDS_COMMON = [
   _origIndex: 1520
   },
   {
-  id: 1550,
+  id: 1365,
   category: "sekou",
   source: "jac-ch3",
   furi: "いしこうじだいりいしみかげいしぎいし",
@@ -6823,7 +6823,7 @@ export const CARDS_COMMON = [
   _origIndex: 1521
   },
   {
-  id: 1551,
+  id: 1366,
   category: "sekou",
   source: "jac-ch3",
   furi: "こんくりいとあっそうこうじやくちいむわあく",
@@ -6835,7 +6835,7 @@ export const CARDS_COMMON = [
   _origIndex: 1522
   },
   {
-  id: 1552,
+  id: 1367,
   category: "sekou",
   source: "jac-ch3",
   furi: "さかんしあげとぎだしあらいだし",
@@ -6847,7 +6847,7 @@ export const CARDS_COMMON = [
   _origIndex: 1523
   },
   {
-  id: 1553,
+  id: 1368,
   category: "sekou",
   source: "jac-ch3",
   furi: "ざいらいじくぐみこうほうもくぞうじゅうたく",
@@ -6859,7 +6859,7 @@ export const CARDS_COMMON = [
   _origIndex: 1524
   },
   {
-  id: 1554,
+  id: 1369,
   category: "sekou",
   source: "jac-ch3",
   furi: "たてぐのざいりょうしゅるいしゃったあじどうどあ",
@@ -6871,7 +6871,7 @@ export const CARDS_COMMON = [
   _origIndex: 1525
   },
   {
-  id: 1555,
+  id: 1370,
   category: "sekou",
   source: "jac-ch3",
   furi: "ふきつけうれたんせこうまえけんさっいたせこうちゅうかくにんかんかく",
@@ -6883,7 +6883,7 @@ export const CARDS_COMMON = [
   _origIndex: 1526
   },
   {
-  id: 1556,
+  id: 1371,
   category: "sekou",
   source: "jac-ch3",
   furi: "こんくりいとぶろっくぞうぞうてっきんもるたるほきょう",
@@ -6895,7 +6895,7 @@ export const CARDS_COMMON = [
   _origIndex: 1527
   },
   {
-  id: 1557,
+  id: 1372,
   category: "sekou",
   source: "jac-ch4",
   furi: "のりめんじやまやまがくるやまどめ",
@@ -6907,7 +6907,7 @@ export const CARDS_COMMON = [
   _origIndex: 1528
   },
   {
-  id: 1558,
+  id: 1373,
   category: "sekou",
   source: "jac-ch4",
   furi: "きそめんしん",
@@ -6919,7 +6919,7 @@ export const CARDS_COMMON = [
   _origIndex: 1529
   },
   {
-  id: 1559,
+  id: 1374,
   category: "sekou",
   source: "jac-ch4",
   furi: "はいきんかんかくあき",
@@ -6931,7 +6931,7 @@ export const CARDS_COMMON = [
   _origIndex: 1530
   },
   {
-  id: 1560,
+  id: 1375,
   category: "sekou",
   source: "jac-ch4",
   furi: "かぶりあつさ",
@@ -6943,7 +6943,7 @@ export const CARDS_COMMON = [
   _origIndex: 1531
   },
   {
-  id: 1561,
+  id: 1376,
   category: "sekou",
   source: "jac-ch4",
   furi: "ぞうぞうぞうもくぞう",
@@ -6955,7 +6955,7 @@ export const CARDS_COMMON = [
   _origIndex: 1532
   },
   {
-  id: 1562,
+  id: 1377,
   category: "sekou",
   source: "jac-ch4",
   furi: "あそびたてかみ",
@@ -6967,7 +6967,7 @@ export const CARDS_COMMON = [
   _origIndex: 1533
   },
   {
-  id: 1563,
+  id: 1378,
   category: "sekou",
   source: "jac-ch4",
   furi: "こんくりいとぶろっくぞう",
@@ -6979,7 +6979,7 @@ export const CARDS_COMMON = [
   _origIndex: 1534
   },
   {
-  id: 1564,
+  id: 1379,
   category: "sekou",
   source: "jac-ch3",
   furi: "けんちくぶつのこうぞうごしゅるい",
@@ -6991,7 +6991,7 @@ export const CARDS_COMMON = [
   _origIndex: 1535
   },
   {
-  id: 1565,
+  id: 1380,
   category: "sekou",
   source: "jac-ch3",
   furi: "けんちくこうじのながれだいきぼびる",
@@ -7003,7 +7003,7 @@ export const CARDS_COMMON = [
   _origIndex: 1536
   },
   {
-  id: 1566,
+  id: 1381,
   category: "sekou",
   source: "jac-ch3",
   furi: "たいしんせいしんめんしんのさんしゅるい",
@@ -7015,7 +7015,7 @@ export const CARDS_COMMON = [
   _origIndex: 1537
   },
   {
-  id: 1567,
+  id: 1382,
   category: "sekou",
   source: "jac-ch3",
   furi: "てっきんひつぎてのよんしゅるい",
@@ -7027,7 +7027,7 @@ export const CARDS_COMMON = [
   _origIndex: 1538
   },
   {
-  id: 1568,
+  id: 1383,
   category: "sekou",
   source: "jac-ch3",
   furi: "かたわくこうじとしほこうかたわくだいく",
@@ -7039,7 +7039,7 @@ export const CARDS_COMMON = [
   _origIndex: 1539
   },
   {
-  id: 1569,
+  id: 1384,
   category: "sekou",
   source: "jac-ch3",
   furi: "こんくりいとあっそうこうじとさんしゃちいむわあく",
@@ -7051,7 +7051,7 @@ export const CARDS_COMMON = [
   _origIndex: 1540
   },
   {
-  id: 1570,
+  id: 1385,
   category: "sekou",
   source: "jac-ch3",
   furi: "さかんこうじととくしゅしあげとぎだしあらいだししっくい",
@@ -7063,7 +7063,7 @@ export const CARDS_COMMON = [
   _origIndex: 1541
   },
   {
-  id: 1571,
+  id: 1386,
   category: "sekou",
   source: "jac-ch3",
   furi: "ふきつけうれたんだんねつこうじにせいぶん",
@@ -7075,7 +7075,7 @@ export const CARDS_COMMON = [
   _origIndex: 1542
   },
   {
-  id: 1572,
+  id: 1387,
   category: "sekou",
   source: "jac-ch3",
   furi: "ないそうしあげこうじぼおどくろすゆかかあてん",
@@ -7087,7 +7087,7 @@ export const CARDS_COMMON = [
   _origIndex: 1543
   },
   {
-  id: 1573,
+  id: 1388,
   category: "sekou",
   source: "jac-ch3",
   furi: "さっしこうじとかばあこうほうきんぞくたてぐ",
@@ -7099,7 +7099,7 @@ export const CARDS_COMMON = [
   _origIndex: 1544
   },
   {
-  id: 1574,
+  id: 1389,
   category: "sekou",
   source: "jac-ch3",
   furi: "けんちくだいくこうじのしゅるいまちぞうさくみや",
@@ -7111,7 +7111,7 @@ export const CARDS_COMMON = [
   _origIndex: 1545
   },
   {
-  id: 1575,
+  id: 1390,
   category: "sekou",
   source: "jac-ch3",
   furi: "やねこうじかわらぶきあまじまいごしゅるい",
@@ -7123,7 +7123,7 @@ export const CARDS_COMMON = [
   _origIndex: 1546
   },
   {
-  id: 1576,
+  id: 1391,
   category: "sekou",
   source: "jac-ch3",
   furi: "いしこうじいしくだいりせきみかげいしぎいせき",
@@ -7135,7 +7135,7 @@ export const CARDS_COMMON = [
   _origIndex: 1547
   },
   {
-  id: 1577,
+  id: 1392,
   category: "sekou",
   source: "jac-ch4",
   furi: "かべしいんはしらしいんおやずみかねをふるすみつけ",
@@ -7147,7 +7147,7 @@ export const CARDS_COMMON = [
   _origIndex: 1548
   },
   {
-  id: 1578,
+  id: 1393,
   category: "sekou",
   source: "jac-ch4",
   furi: "どどめようへきやいたこうやいたやまどめ",
@@ -7159,7 +7159,7 @@ export const CARDS_COMMON = [
   _origIndex: 1549
   },
   {
-  id: 1579,
+  id: 1394,
   category: "sekou",
   source: "jac-ch4",
   furi: "じやまのりめんやまがくる",
@@ -7171,7 +7171,7 @@ export const CARDS_COMMON = [
   _origIndex: 1550
   },
   {
-  id: 1580,
+  id: 1395,
   category: "sekou",
   source: "jac-ch4",
   furi: "くいきそすらぶくいじぎょうきそめんしん",
@@ -7183,7 +7183,7 @@ export const CARDS_COMMON = [
   _origIndex: 1551
   },
   {
-  id: 1581,
+  id: 1396,
   category: "sekou",
   source: "jac-ch4",
   furi: "はいきんひろいだしあそびあきかんかく",
@@ -7195,7 +7195,7 @@ export const CARDS_COMMON = [
   _origIndex: 1552
   },
   {
-  id: 1582,
+  id: 1397,
   category: "sekou",
   source: "jac-ch4",
   furi: "すてっこんけっそくかぶりあつさ",
@@ -7207,7 +7207,7 @@ export const CARDS_COMMON = [
   _origIndex: 1553
   },
   {
-  id: 1583,
+  id: 1398,
   category: "sekou",
   source: "jac-ch4",
   furi: "たてこみのろあんこてんようぱんくくぎじまい",
@@ -7219,7 +7219,7 @@ export const CARDS_COMMON = [
   _origIndex: 1554
   },
   {
-  id: 1584,
+  id: 1399,
   category: "sekou",
   source: "jac-ch4",
   furi: "ぞうぞうぞうもくぞうぞう",
@@ -7231,7 +7231,7 @@ export const CARDS_COMMON = [
   _origIndex: 1555
   },
   {
-  id: 1585,
+  id: 1400,
   category: "sekou",
   source: "jac-ch3",
   furi: "どうろこうじ",
@@ -7243,7 +7243,7 @@ export const CARDS_COMMON = [
   _origIndex: 1556
   },
   {
-  id: 1586,
+  id: 1401,
   category: "sekou",
   source: "jac-ch3",
   furi: "ひょうそうこうじ",
@@ -7255,7 +7255,7 @@ export const CARDS_COMMON = [
   _origIndex: 1557
   },
   {
-  id: 1587,
+  id: 1402,
   category: "sekou",
   source: "jac-gakka1",
   furi: "てっこつこうじ",
@@ -7267,7 +7267,7 @@ export const CARDS_COMMON = [
   _origIndex: 1558
   },
   {
-  id: 1588,
+  id: 1403,
   category: "sekou",
   source: "jac-gakka1",
   furi: "こんくりいとだせつこうじ",
@@ -7279,7 +7279,7 @@ export const CARDS_COMMON = [
   _origIndex: 1559
   },
   {
-  id: 1589,
+  id: 1404,
   category: "sekou",
   source: "jac-gakka2",
   furi: "くたい",
@@ -7291,7 +7291,7 @@ export const CARDS_COMMON = [
   _origIndex: 1560
   },
   {
-  id: 1590,
+  id: 1405,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "あーすあんかー",
@@ -7303,7 +7303,7 @@ export const CARDS_COMMON = [
   _origIndex: 1561
   },
   {
-  id: 1591,
+  id: 1406,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "とまくぼうすい",
@@ -7315,7 +7315,7 @@ export const CARDS_COMMON = [
   _origIndex: 1562
   },
   {
-  id: 1592,
+  id: 1407,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "すぺーさー",
@@ -7327,7 +7327,7 @@ export const CARDS_COMMON = [
   _origIndex: 1563
   },
   {
-  id: 1593,
+  id: 1408,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "せぱれーたー",
@@ -7339,7 +7339,7 @@ export const CARDS_COMMON = [
   _origIndex: 1564
   },
   {
-  id: 1594,
+  id: 1409,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "かたわくりけいざい",
@@ -7351,7 +7351,7 @@ export const CARDS_COMMON = [
   _origIndex: 1565
   },
   {
-  id: 1595,
+  id: 1410,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "じゃんか",
@@ -7362,7 +7362,7 @@ export const CARDS_COMMON = [
   _origIndex: 1566
   },
   {
-  id: 1596,
+  id: 1411,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "てっきんたんさき",
@@ -7374,7 +7374,7 @@ export const CARDS_COMMON = [
   _origIndex: 1567
   },
   {
-  id: 1597,
+  id: 1412,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "べーすぷれーと",
@@ -7386,7 +7386,7 @@ export const CARDS_COMMON = [
   _origIndex: 1568
   },
   {
-  id: 1598,
+  id: 1413,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "あんかーぼると",
@@ -7398,7 +7398,7 @@ export const CARDS_COMMON = [
   _origIndex: 1569
   },
   {
-  id: 1599,
+  id: 1414,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "けいりょうてっこつしたじ",
@@ -7410,7 +7410,7 @@ export const CARDS_COMMON = [
   _origIndex: 1570
   },
   {
-  id: 1600,
+  id: 1415,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "てんじょうしたじ",
@@ -7422,7 +7422,7 @@ export const CARDS_COMMON = [
   _origIndex: 1571
   },
   {
-  id: 1601,
+  id: 1416,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ふきつけとそう",
@@ -7434,7 +7434,7 @@ export const CARDS_COMMON = [
   _origIndex: 1572
   },
   {
-  id: 1602,
+  id: 1417,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "したじしょり",
@@ -7446,7 +7446,7 @@ export const CARDS_COMMON = [
   _origIndex: 1573
   },
   {
-  id: 1603,
+  id: 1418,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "かべクロス",
@@ -7458,7 +7458,7 @@ export const CARDS_COMMON = [
   _origIndex: 1574
   },
   {
-  id: 1604,
+  id: 1419,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ランナー",
@@ -7470,7 +7470,7 @@ export const CARDS_COMMON = [
   _origIndex: 1575
   },
   {
-  id: 1605,
+  id: 1420,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "ふねんざいりょう",
@@ -7481,7 +7481,7 @@ export const CARDS_COMMON = [
   _origIndex: 1576
   },
   {
-  id: 1606,
+  id: 1421,
   category: "sekou",
   source: "vocab-supplementary",
   furi: "せっちゃくこうほう",
@@ -7494,7 +7494,7 @@ export const CARDS_COMMON = [
   },
 
   {
-  id: 776,
+  id: 648,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "けつろ",
@@ -7505,7 +7505,7 @@ export const CARDS_COMMON = [
   _origIndex: 762
   },
   {
-  id: 778,
+  id: 650,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "すいぶん",
@@ -7516,7 +7516,7 @@ export const CARDS_COMMON = [
   _origIndex: 764
   },
   {
-  id: 779,
+  id: 651,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "こしょう",
@@ -7527,7 +7527,7 @@ export const CARDS_COMMON = [
   _origIndex: 765
   },
   {
-  id: 780,
+  id: 652,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "もれ",
@@ -7538,7 +7538,7 @@ export const CARDS_COMMON = [
   _origIndex: 766
   },
   {
-  id: 783,
+  id: 655,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "ふちゃく",
@@ -7550,7 +7550,7 @@ export const CARDS_COMMON = [
   _origIndex: 769
   },
   {
-  id: 784,
+  id: 656,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "しんにゅう",
@@ -7562,7 +7562,7 @@ export const CARDS_COMMON = [
   _origIndex: 770
   },
   {
-  id: 785,
+  id: 657,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "たわみはっせい",
@@ -7573,7 +7573,7 @@ export const CARDS_COMMON = [
   _origIndex: 771
   },
   {
-  id: 788,
+  id: 660,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "すきま",
@@ -7584,7 +7584,7 @@ export const CARDS_COMMON = [
   _origIndex: 774
   },
   {
-  id: 792,
+  id: 664,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "あんぜんかくにん",
@@ -7595,7 +7595,7 @@ export const CARDS_COMMON = [
   _origIndex: 778
   },
   {
-  id: 793,
+  id: 665,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "かくにん",
@@ -7606,7 +7606,7 @@ export const CARDS_COMMON = [
   _origIndex: 779
   },
   {
-  id: 795,
+  id: 667,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "ぼうし",
@@ -7617,7 +7617,7 @@ export const CARDS_COMMON = [
   _origIndex: 781
   },
   {
-  id: 796,
+  id: 668,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "こうしょさぎょう",
@@ -7628,7 +7628,7 @@ export const CARDS_COMMON = [
   _origIndex: 782
   },
   {
-  id: 797,
+  id: 669,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "らっか",
@@ -7639,7 +7639,7 @@ export const CARDS_COMMON = [
   _origIndex: 783
   },
   {
-  id: 798,
+  id: 670,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "そうおん",
@@ -7650,7 +7650,7 @@ export const CARDS_COMMON = [
   _origIndex: 784
   },
   {
-  id: 799,
+  id: 671,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "きけん",
@@ -7661,7 +7661,7 @@ export const CARDS_COMMON = [
   _origIndex: 785
   },
   {
-  id: 800,
+  id: 672,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "あーす",
@@ -7673,7 +7673,7 @@ export const CARDS_COMMON = [
   _origIndex: 786
   },
   {
-  id: 801,
+  id: 673,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "しょち",
@@ -7684,7 +7684,7 @@ export const CARDS_COMMON = [
   _origIndex: 787
   },
   {
-  id: 805,
+  id: 676,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ほおん",
@@ -7695,7 +7695,7 @@ export const CARDS_COMMON = [
   _origIndex: 790
   },
   {
-  id: 806,
+  id: 677,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ようせつ",
@@ -7707,7 +7707,7 @@ export const CARDS_COMMON = [
   _origIndex: 791
   },
   {
-  id: 808,
+  id: 679,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "じゅうてん",
@@ -7719,7 +7719,7 @@ export const CARDS_COMMON = [
   _origIndex: 793
   },
   {
-  id: 809,
+  id: 680,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "はっせい",
@@ -7730,7 +7730,7 @@ export const CARDS_COMMON = [
   _origIndex: 794
   },
   {
-  id: 813,
+  id: 684,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ぼうすいかばー",
@@ -7741,7 +7741,7 @@ export const CARDS_COMMON = [
   _origIndex: 798
   },
   {
-  id: 821,
+  id: 691,
   category: "career",
   source: "vocab-lifeline",
   furi: "ふじゅうぶん",
@@ -7752,7 +7752,7 @@ export const CARDS_COMMON = [
   _origIndex: 805
   },
   {
-  id: 822,
+  id: 692,
   category: "career",
   source: "vocab-lifeline",
   furi: "ふそく",
@@ -7763,7 +7763,7 @@ export const CARDS_COMMON = [
   _origIndex: 806
   },
   {
-  id: 823,
+  id: 693,
   category: "career",
   source: "vocab-lifeline",
   furi: "あんてい",
@@ -7774,7 +7774,7 @@ export const CARDS_COMMON = [
   _origIndex: 807
   },
   {
-  id: 824,
+  id: 694,
   category: "career",
   source: "vocab-lifeline",
   furi: "げんいん",
@@ -7785,7 +7785,7 @@ export const CARDS_COMMON = [
   _origIndex: 808
   },
   {
-  id: 827,
+  id: 697,
   category: "career",
   source: "vocab-lifeline",
   furi: "ないめん",
@@ -7796,7 +7796,7 @@ export const CARDS_COMMON = [
   _origIndex: 811
   },
   {
-  id: 828,
+  id: 698,
   category: "career",
   source: "vocab-lifeline",
   furi: "ないぶ",
@@ -7807,7 +7807,7 @@ export const CARDS_COMMON = [
   _origIndex: 812
   },
   {
-  id: 829,
+  id: 699,
   category: "career",
   source: "vocab-lifeline",
   furi: "ずめん",
@@ -7819,7 +7819,7 @@ export const CARDS_COMMON = [
   _origIndex: 813
   },
   {
-  id: 831,
+  id: 701,
   category: "career",
   source: "vocab-lifeline",
   furi: "おんど",
@@ -7830,7 +7830,7 @@ export const CARDS_COMMON = [
   _origIndex: 815
   },
   {
-  id: 832,
+  id: 702,
   category: "career",
   source: "vocab-lifeline",
   furi: "うむ",
@@ -7841,7 +7841,7 @@ export const CARDS_COMMON = [
   _origIndex: 816
   },
   {
-  id: 836,
+  id: 706,
   category: "career",
   source: "vocab-lifeline",
   furi: "じゅうりょう",
@@ -7852,7 +7852,7 @@ export const CARDS_COMMON = [
   _origIndex: 820
   },
   {
-  id: 838,
+  id: 708,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "ていか",
@@ -7863,7 +7863,7 @@ export const CARDS_COMMON = [
   _origIndex: 822
   },
   {
-  id: 839,
+  id: 709,
   category: "career",
   source: "vocab-lifeline",
   furi: "いち",
@@ -7874,7 +7874,7 @@ export const CARDS_COMMON = [
   _origIndex: 823
   },
   {
-  id: 840,
+  id: 710,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "はそん",
@@ -7885,7 +7885,7 @@ export const CARDS_COMMON = [
   _origIndex: 824
   },
   {
-  id: 844,
+  id: 714,
   category: "career",
   source: "vocab-lifeline",
   furi: "おくがい",
@@ -7896,7 +7896,7 @@ export const CARDS_COMMON = [
   _origIndex: 828
   },
   {
-  id: 845,
+  id: 715,
   category: "career",
   source: "vocab-lifeline",
   furi: "しゅるい",
@@ -7907,7 +7907,7 @@ export const CARDS_COMMON = [
   _origIndex: 829
   },
   {
-  id: 846,
+  id: 716,
   category: "career",
   source: "vocab-lifeline",
   furi: "もくてき",
@@ -7918,7 +7918,7 @@ export const CARDS_COMMON = [
   _origIndex: 830
   },
   {
-  id: 847,
+  id: 717,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "じょうしょう",
@@ -7929,7 +7929,7 @@ export const CARDS_COMMON = [
   _origIndex: 831
   },
   {
-  id: 848,
+  id: 718,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "そくてい",
@@ -7940,7 +7940,7 @@ export const CARDS_COMMON = [
   _origIndex: 832
   },
   {
-  id: 849,
+  id: 719,
   category: "career",
   source: "vocab-lifeline",
   furi: "けっか",
@@ -7951,7 +7951,7 @@ export const CARDS_COMMON = [
   _origIndex: 833
   },
   {
-  id: 850,
+  id: 720,
   category: "career",
   source: "vocab-lifeline",
   furi: "へんか",
@@ -7962,7 +7962,7 @@ export const CARDS_COMMON = [
   _origIndex: 834
   },
   {
-  id: 852,
+  id: 722,
   category: "career",
   source: "vocab-lifeline",
   furi: "もんだい",
@@ -7973,7 +7973,7 @@ export const CARDS_COMMON = [
   _origIndex: 836
   },
   {
-  id: 856,
+  id: 726,
   category: "career",
   source: "vocab-lifeline",
   furi: "いってい",
@@ -7984,7 +7984,7 @@ export const CARDS_COMMON = [
   _origIndex: 840
   },
   {
-  id: 857,
+  id: 727,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "とりつけ",
@@ -7995,7 +7995,7 @@ export const CARDS_COMMON = [
   _origIndex: 841
   },
   {
-  id: 858,
+  id: 728,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "こうかん",
@@ -8006,7 +8006,7 @@ export const CARDS_COMMON = [
   _origIndex: 842
   },
   {
-  id: 859,
+  id: 729,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "とそう",
@@ -8017,7 +8017,7 @@ export const CARDS_COMMON = [
   _origIndex: 843
   },
   {
-  id: 863,
+  id: 733,
   category: "career",
   source: "vocab-lifeline",
   furi: "ながさ",
@@ -8028,7 +8028,7 @@ export const CARDS_COMMON = [
   _origIndex: 847
   },
   {
-  id: 865,
+  id: 735,
   category: "career",
   source: "vocab-lifeline",
   furi: "あさい",
@@ -8039,7 +8039,7 @@ export const CARDS_COMMON = [
   _origIndex: 849
   },
   {
-  id: 867,
+  id: 737,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "ちゅうい",
@@ -8050,7 +8050,7 @@ export const CARDS_COMMON = [
   _origIndex: 851
   },
   {
-  id: 870,
+  id: 740,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ひやす",
@@ -8061,7 +8061,7 @@ export const CARDS_COMMON = [
   _origIndex: 854
   },
   {
-  id: 871,
+  id: 741,
   category: "career",
   source: "vocab-lifeline",
   furi: "つよい",
@@ -8072,7 +8072,7 @@ export const CARDS_COMMON = [
   _origIndex: 855
   },
   {
-  id: 876,
+  id: 746,
   category: "career",
   source: "vocab-lifeline",
   furi: "ばあい",
@@ -8083,7 +8083,7 @@ export const CARDS_COMMON = [
   _origIndex: 860
   },
   {
-  id: 877,
+  id: 747,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "まく",
@@ -8094,7 +8094,7 @@ export const CARDS_COMMON = [
   _origIndex: 861
   },
   {
-  id: 878,
+  id: 748,
   category: "career",
   source: "vocab-lifeline",
   furi: "ふとい",
@@ -8105,7 +8105,7 @@ export const CARDS_COMMON = [
   _origIndex: 862
   },
   {
-  id: 879,
+  id: 749,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "おおう",
@@ -8116,7 +8116,7 @@ export const CARDS_COMMON = [
   _origIndex: 863
   },
   {
-  id: 881,
+  id: 751,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "きる",
@@ -8127,7 +8127,7 @@ export const CARDS_COMMON = [
   _origIndex: 865
   },
   {
-  id: 882,
+  id: 752,
   category: "career",
   source: "vocab-lifeline",
   furi: "よぶ",
@@ -8138,7 +8138,7 @@ export const CARDS_COMMON = [
   _origIndex: 866
   },
   {
-  id: 883,
+  id: 753,
   category: "career",
   source: "vocab-lifeline",
   furi: "おもな",
@@ -8149,7 +8149,7 @@ export const CARDS_COMMON = [
   _origIndex: 867
   },
   {
-  id: 886,
+  id: 756,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ぬる",
@@ -8160,7 +8160,7 @@ export const CARDS_COMMON = [
   _origIndex: 870
   },
   {
-  id: 887,
+  id: 757,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "つける",
@@ -8171,7 +8171,7 @@ export const CARDS_COMMON = [
   _origIndex: 871
   },
   {
-  id: 891,
+  id: 761,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "せこうまえ",
@@ -8182,7 +8182,7 @@ export const CARDS_COMMON = [
   _origIndex: 875
   },
   {
-  id: 892,
+  id: 762,
   category: "career",
   source: "vocab-lifeline",
   furi: "ちゅういてん",
@@ -8193,7 +8193,7 @@ export const CARDS_COMMON = [
   _origIndex: 876
   },
   {
-  id: 893,
+  id: 763,
   category: "career",
   source: "vocab-lifeline",
   furi: "かならず",
@@ -8204,7 +8204,7 @@ export const CARDS_COMMON = [
   _origIndex: 877
   },
   {
-  id: 894,
+  id: 764,
   category: "career",
   source: "vocab-lifeline",
   furi: "まず",
@@ -8215,7 +8215,7 @@ export const CARDS_COMMON = [
   _origIndex: 878
   },
   {
-  id: 895,
+  id: 765,
   category: "career",
   source: "vocab-lifeline",
   furi: "とくに",
@@ -8226,7 +8226,7 @@ export const CARDS_COMMON = [
   _origIndex: 879
   },
   {
-  id: 897,
+  id: 767,
   category: "career",
   source: "vocab-lifeline",
   furi: "ふせぐ",
@@ -8238,7 +8238,7 @@ export const CARDS_COMMON = [
   _origIndex: 881
   },
   {
-  id: 898,
+  id: 768,
   category: "career",
   source: "vocab-lifeline",
   furi: "おこなう",
@@ -8250,7 +8250,7 @@ export const CARDS_COMMON = [
   _origIndex: 882
   },
   {
-  id: 899,
+  id: 769,
   category: "career",
   source: "vocab-lifeline",
   furi: "かんがえられる",
@@ -8261,7 +8261,7 @@ export const CARDS_COMMON = [
   _origIndex: 883
   },
   {
-  id: 900,
+  id: 770,
   category: "career",
   source: "vocab-lifeline",
   furi: "しようちゅう",
@@ -8272,7 +8272,7 @@ export const CARDS_COMMON = [
   _origIndex: 884
   },
   {
-  id: 901,
+  id: 771,
   category: "career",
   source: "vocab-lifeline",
   furi: "べき",
@@ -8283,7 +8283,7 @@ export const CARDS_COMMON = [
   _origIndex: 885
   },
   {
-  id: 902,
+  id: 772,
   category: "career",
   source: "vocab-lifeline",
   furi: "おこる",
@@ -8295,7 +8295,7 @@ export const CARDS_COMMON = [
   _origIndex: 886
   },
   {
-  id: 903,
+  id: 773,
   category: "career",
   source: "vocab-lifeline",
   furi: "のこる",
@@ -8306,7 +8306,7 @@ export const CARDS_COMMON = [
   _origIndex: 887
   },
   {
-  id: 904,
+  id: 774,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "しけん",
@@ -8318,7 +8318,7 @@ export const CARDS_COMMON = [
   _origIndex: 888
   },
   {
-  id: 905,
+  id: 775,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "けんさ",
@@ -8330,7 +8330,7 @@ export const CARDS_COMMON = [
   _origIndex: 889
   },
   {
-  id: 906,
+  id: 776,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "さぎょう",
@@ -8342,7 +8342,7 @@ export const CARDS_COMMON = [
   _origIndex: 890
   },
   {
-  id: 907,
+  id: 777,
   category: "career",
   source: "vocab-lifeline",
   furi: "ほうほう",
@@ -8353,7 +8353,7 @@ export const CARDS_COMMON = [
   _origIndex: 891
   },
   {
-  id: 909,
+  id: 779,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "あんぜん",
@@ -8364,7 +8364,7 @@ export const CARDS_COMMON = [
   _origIndex: 893
   },
   {
-  id: 910,
+  id: 780,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "せこう",
@@ -8376,7 +8376,7 @@ export const CARDS_COMMON = [
   _origIndex: 894
   },
   {
-  id: 911,
+  id: 781,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "とる",
@@ -8387,7 +8387,7 @@ export const CARDS_COMMON = [
   _origIndex: 895
   },
   {
-  id: 912,
+  id: 782,
   category: "career",
   source: "vocab-jac",
   furi: "せいり",
@@ -8398,7 +8398,7 @@ export const CARDS_COMMON = [
   _origIndex: 896
   },
   {
-  id: 913,
+  id: 783,
   category: "career",
   source: "vocab-jac",
   furi: "せいとん",
@@ -8410,7 +8410,7 @@ export const CARDS_COMMON = [
   _origIndex: 897
   },
   {
-  id: 914,
+  id: 784,
   category: "career",
   source: "vocab-jac",
   furi: "せいそう",
@@ -8422,7 +8422,7 @@ export const CARDS_COMMON = [
   _origIndex: 898
   },
   {
-  id: 915,
+  id: 785,
   category: "career",
   source: "vocab-jac",
   furi: "せいけつ",
@@ -8433,7 +8433,7 @@ export const CARDS_COMMON = [
   _origIndex: 899
   },
   {
-  id: 916,
+  id: 786,
   category: "career",
   source: "vocab-jac",
   furi: "しつけ",
@@ -8444,7 +8444,7 @@ export const CARDS_COMMON = [
   _origIndex: 900
   },
   {
-  id: 917,
+  id: 787,
   category: "career",
   source: "vocab-jac",
   furi: "ちーむわーく",
@@ -8455,7 +8455,7 @@ export const CARDS_COMMON = [
   _origIndex: 901
   },
   {
-  id: 918,
+  id: 788,
   category: "career",
   source: "vocab-jac",
   furi: "ゆういせい",
@@ -8466,7 +8466,7 @@ export const CARDS_COMMON = [
   _origIndex: 902
   },
   {
-  id: 919,
+  id: 789,
   category: "career",
   source: "vocab-jac",
   furi: "くつう",
@@ -8477,7 +8477,7 @@ export const CARDS_COMMON = [
   _origIndex: 903
   },
   {
-  id: 920,
+  id: 790,
   category: "career",
   source: "vocab-jac",
   furi: "ろうどうしゃ",
@@ -8488,7 +8488,7 @@ export const CARDS_COMMON = [
   _origIndex: 904
   },
   {
-  id: 921,
+  id: 791,
   category: "career",
   source: "vocab-jac",
   furi: "じぎょうぬし",
@@ -8499,7 +8499,7 @@ export const CARDS_COMMON = [
   _origIndex: 905
   },
   {
-  id: 922,
+  id: 792,
   category: "career",
   source: "vocab-jac",
   furi: "ししつ",
@@ -8510,7 +8510,7 @@ export const CARDS_COMMON = [
   _origIndex: 906
   },
   {
-  id: 923,
+  id: 793,
   category: "career",
   source: "vocab-jac",
   furi: "はいざい",
@@ -8521,7 +8521,7 @@ export const CARDS_COMMON = [
   _origIndex: 907
   },
   {
-  id: 924,
+  id: 794,
   category: "career",
   source: "vocab-jac",
   furi: "さいていげん",
@@ -8532,7 +8532,7 @@ export const CARDS_COMMON = [
   _origIndex: 908
   },
   {
-  id: 925,
+  id: 795,
   category: "career",
   source: "vocab-jac",
   furi: "けいげん",
@@ -8543,7 +8543,7 @@ export const CARDS_COMMON = [
   _origIndex: 909
   },
   {
-  id: 926,
+  id: 796,
   category: "career",
   source: "vocab-jac",
   furi: "あんか",
@@ -8554,7 +8554,7 @@ export const CARDS_COMMON = [
   _origIndex: 910
   },
   {
-  id: 927,
+  id: 797,
   category: "career",
   source: "vocab-jac",
   furi: "ぎのうこうしゅう",
@@ -8565,7 +8565,7 @@ export const CARDS_COMMON = [
   _origIndex: 911
   },
   {
-  id: 928,
+  id: 798,
   category: "career",
   source: "vocab-jac",
   furi: "とくべつきょういく",
@@ -8576,7 +8576,7 @@ export const CARDS_COMMON = [
   _origIndex: 912
   },
   {
-  id: 929,
+  id: 799,
   category: "career",
   source: "vocab-jac",
   furi: "めんきょ",
@@ -8587,7 +8587,7 @@ export const CARDS_COMMON = [
   _origIndex: 913
   },
   {
-  id: 930,
+  id: 800,
   category: "sekou",
   source: "vocab-jac",
   furi: "じゅんびこうじ",
@@ -8598,7 +8598,7 @@ export const CARDS_COMMON = [
   _origIndex: 914
   },
   {
-  id: 937,
+  id: 804,
   category: "sekou",
   source: "vocab-jac",
   furi: "こうき",
@@ -8609,7 +8609,7 @@ export const CARDS_COMMON = [
   _origIndex: 921
   },
   {
-  id: 941,
+  id: 805,
   category: "sekou",
   source: "vocab-jac",
   furi: "おしど",
@@ -8621,7 +8621,7 @@ export const CARDS_COMMON = [
   _origIndex: 925
   },
   {
-  id: 942,
+  id: 806,
   category: "sekou",
   source: "vocab-jac",
   furi: "うんぱん",
@@ -8633,7 +8633,7 @@ export const CARDS_COMMON = [
   _origIndex: 926
   },
   {
-  id: 944,
+  id: 807,
   category: "sekou",
   source: "vocab-jac",
   furi: "くったい",
@@ -8644,7 +8644,7 @@ export const CARDS_COMMON = [
   _origIndex: 928
   },
   {
-  id: 945,
+  id: 808,
   category: "sekou",
   source: "vocab-jac",
   furi: "ないそう",
@@ -8655,7 +8655,7 @@ export const CARDS_COMMON = [
   _origIndex: 929
   },
   {
-  id: 948,
+  id: 810,
   category: "sekou",
   source: "vocab-jac",
   furi: "ようじょう",
@@ -8667,7 +8667,7 @@ export const CARDS_COMMON = [
   _origIndex: 932
   },
   {
-  id: 955,
+  id: 814,
   category: "sekou",
   source: "vocab-jac",
   furi: "いっけん",
@@ -8678,7 +8678,7 @@ export const CARDS_COMMON = [
   _origIndex: 939
   },
   {
-  id: 966,
+  id: 825,
   category: "anzen",
   source: "vocab-jac",
   furi: "ついらく",
@@ -8689,7 +8689,7 @@ export const CARDS_COMMON = [
   _origIndex: 950
   },
   {
-  id: 967,
+  id: 826,
   category: "anzen",
   source: "vocab-jac",
   furi: "さんそけつぼう",
@@ -8700,7 +8700,7 @@ export const CARDS_COMMON = [
   _origIndex: 951
   },
   {
-  id: 968,
+  id: 827,
   category: "anzen",
   source: "vocab-jac",
   furi: "どどめ",
@@ -8711,7 +8711,7 @@ export const CARDS_COMMON = [
   _origIndex: 952
   },
   {
-  id: 969,
+  id: 828,
   category: "anzen",
   source: "vocab-jac",
   furi: "かんき",
@@ -8723,7 +8723,7 @@ export const CARDS_COMMON = [
   _origIndex: 953
   },
   {
-  id: 970,
+  id: 829,
   category: "sekou",
   source: "vocab-jac",
   furi: "せこうかんり",
@@ -8734,7 +8734,7 @@ export const CARDS_COMMON = [
   _origIndex: 954
   },
   {
-  id: 971,
+  id: 830,
   category: "sekou",
   source: "vocab-jac",
   furi: "ひんしつ",
@@ -8745,7 +8745,7 @@ export const CARDS_COMMON = [
   _origIndex: 955
   },
   {
-  id: 972,
+  id: 831,
   category: "sekou",
   source: "vocab-jac",
   furi: "こうてい",
@@ -8756,7 +8756,7 @@ export const CARDS_COMMON = [
   _origIndex: 956
   },
   {
-  id: 973,
+  id: 832,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "ごあんぜんに",
@@ -8767,7 +8767,7 @@ export const CARDS_COMMON = [
   _origIndex: 957
   },
   {
-  id: 975,
+  id: 834,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "あぶない",
@@ -8778,7 +8778,7 @@ export const CARDS_COMMON = [
   _origIndex: 959
   },
   {
-  id: 976,
+  id: 835,
   category: "sekou",
   source: "vocab-core",
   furi: "しようしょ",
@@ -8789,7 +8789,7 @@ export const CARDS_COMMON = [
   _origIndex: 960
   },
   {
-  id: 977,
+  id: 836,
   category: "sekou",
   source: "vocab-core",
   furi: "けんちく",
@@ -8800,7 +8800,7 @@ export const CARDS_COMMON = [
   _origIndex: 961
   },
   {
-  id: 979,
+  id: 837,
   category: "sekou",
   source: "vocab-core",
   furi: "かいたい",
@@ -8811,7 +8811,7 @@ export const CARDS_COMMON = [
   _origIndex: 963
   },
   {
-  id: 980,
+  id: 838,
   category: "sekou",
   source: "vocab-core",
   furi: "きそ",
@@ -8822,7 +8822,7 @@ export const CARDS_COMMON = [
   _origIndex: 964
   },
   {
-  id: 984,
+  id: 842,
   category: "sekou",
   source: "vocab-core",
   furi: "すみだし",
@@ -8834,7 +8834,7 @@ export const CARDS_COMMON = [
   _origIndex: 968
   },
   {
-  id: 985,
+  id: 843,
   category: "sekou",
   source: "vocab-core",
   furi: "にげずみ",
@@ -8845,7 +8845,7 @@ export const CARDS_COMMON = [
   _origIndex: 969
   },
   {
-  id: 986,
+  id: 844,
   category: "sekou",
   source: "vocab-core",
   furi: "じずみ",
@@ -8856,7 +8856,7 @@ export const CARDS_COMMON = [
   _origIndex: 970
   },
   {
-  id: 993,
+  id: 848,
   category: "anzen",
   source: "vocab-core",
   furi: "さいがい",
@@ -8867,7 +8867,7 @@ export const CARDS_COMMON = [
   _origIndex: 975
   },
   {
-  id: 994,
+  id: 849,
   category: "anzen",
   source: "vocab-core",
   furi: "きけんよちかつどう",
@@ -8878,7 +8878,7 @@ export const CARDS_COMMON = [
   _origIndex: 976
   },
   {
-  id: 995,
+  id: 850,
   category: "career",
   source: "vocab-core",
   furi: "げんばかんとく",
@@ -8889,7 +8889,7 @@ export const CARDS_COMMON = [
   _origIndex: 977
   },
   {
-  id: 1010,
+  id: 862,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "きゃたつ",
@@ -8900,7 +8900,7 @@ export const CARDS_COMMON = [
   _origIndex: 989
   },
   {
-  id: 1013,
+  id: 865,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "もんきーれんち",
@@ -8911,7 +8911,7 @@ export const CARDS_COMMON = [
   _origIndex: 992
   },
   {
-  id: 1017,
+  id: 869,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ほーす",
@@ -8922,7 +8922,7 @@ export const CARDS_COMMON = [
   _origIndex: 996
   },
   {
-  id: 1024,
+  id: 876,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "てんじょうない",
@@ -8933,7 +8933,7 @@ export const CARDS_COMMON = [
   _origIndex: 1003
   },
   {
-  id: 1026,
+  id: 878,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "おくがいろしゅつぶぶん",
@@ -8944,7 +8944,7 @@ export const CARDS_COMMON = [
   _origIndex: 1005
   },
   {
-  id: 1027,
+  id: 879,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "おくないろしゅつぶぶん",
@@ -8955,7 +8955,7 @@ export const CARDS_COMMON = [
   _origIndex: 1006
   },
   {
-  id: 1038,
+  id: 890,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ばんきんのかこう",
@@ -8966,7 +8966,7 @@ export const CARDS_COMMON = [
   _origIndex: 1017
   },
   {
-  id: 1039,
+  id: 891,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "けがき",
@@ -8977,7 +8977,7 @@ export const CARDS_COMMON = [
   _origIndex: 1018
   },
   {
-  id: 1043,
+  id: 895,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "わっしゃー",
@@ -8988,7 +8988,7 @@ export const CARDS_COMMON = [
   _origIndex: 1022
   },
   {
-  id: 1044,
+  id: 896,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "なっと",
@@ -8999,7 +8999,7 @@ export const CARDS_COMMON = [
   _origIndex: 1023
   },
   {
-  id: 1046,
+  id: 897,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "かんのまいせつこうじ",
@@ -9010,7 +9010,7 @@ export const CARDS_COMMON = [
   _origIndex: 1025
   },
   {
-  id: 1048,
+  id: 899,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "かばー",
@@ -9021,7 +9021,7 @@ export const CARDS_COMMON = [
   _origIndex: 1027
   },
   {
-  id: 1051,
+  id: 902,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "そうこ",
@@ -9032,7 +9032,7 @@ export const CARDS_COMMON = [
   _origIndex: 1030
   },
   {
-  id: 1052,
+  id: 903,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "きかいしつ",
@@ -9043,7 +9043,7 @@ export const CARDS_COMMON = [
   _origIndex: 1031
   },
   {
-  id: 1055,
+  id: 906,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "ばりとり",
@@ -9054,7 +9054,7 @@ export const CARDS_COMMON = [
   _origIndex: 1034
   },
   {
-  id: 1056,
+  id: 907,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "めんをとる",
@@ -9066,7 +9066,7 @@ export const CARDS_COMMON = [
   _origIndex: 1035
   },
   {
-  id: 1063,
+  id: 914,
   category: "anzen",
   source: "vocab-lifeline",
   furi: "てんけん",
@@ -9078,7 +9078,7 @@ export const CARDS_COMMON = [
   _origIndex: 1042
   },
   {
-  id: 1223,
+  id: 1073,
   category: "anzen",
   source: "vocab-exam",
   furi: "たんかんあしば",
@@ -9090,7 +9090,7 @@ export const CARDS_COMMON = [
   _origIndex: 1201
   },
   {
-  id: 1224,
+  id: 1074,
   category: "anzen",
   source: "vocab-exam",
   furi: "くさびきんけつしきあしば",
@@ -9102,7 +9102,7 @@ export const CARDS_COMMON = [
   _origIndex: 1202
   },
   {
-  id: 1225,
+  id: 1075,
   category: "anzen",
   source: "vocab-exam",
   furi: "あんぜんねっと",
@@ -9114,7 +9114,7 @@ export const CARDS_COMMON = [
   _origIndex: 1203
   },
   {
-  id: 1226,
+  id: 1076,
   category: "anzen",
   source: "vocab-exam",
   furi: "てすり",
@@ -9126,7 +9126,7 @@ export const CARDS_COMMON = [
   _origIndex: 1204
   },
   {
-  id: 1231,
+  id: 1081,
   category: "anzen",
   source: "vocab-exam",
   furi: "りゅうかすいそ",
@@ -9137,7 +9137,7 @@ export const CARDS_COMMON = [
   _origIndex: 1209
   },
   {
-  id: 1233,
+  id: 1083,
   category: "anzen",
   source: "vocab-exam",
   furi: "そうきますく",
@@ -9149,7 +9149,7 @@ export const CARDS_COMMON = [
   _origIndex: 1211
   },
   {
-  id: 1235,
+  id: 1085,
   category: "anzen",
   source: "vocab-exam",
   furi: "さぎょうしゅにんしゃ",
@@ -9160,7 +9160,7 @@ export const CARDS_COMMON = [
   _origIndex: 1213
   },
   {
-  id: 1238,
+  id: 1088,
   category: "anzen",
   source: "vocab-exam",
   furi: "あんぜんぱとろーる",
@@ -9172,7 +9172,7 @@ export const CARDS_COMMON = [
   _origIndex: 1216
   },
   {
-  id: 1240,
+  id: 1090,
   category: "anzen",
   source: "vocab-exam",
   furi: "ついらくせいしようきぐ",
@@ -9184,7 +9184,7 @@ export const CARDS_COMMON = [
   _origIndex: 1218
   },
   {
-  id: 1241,
+  id: 1091,
   category: "anzen",
   source: "vocab-exam",
   furi: "ひらいらっか",
@@ -9195,7 +9195,7 @@ export const CARDS_COMMON = [
   _origIndex: 1219
   },
   {
-  id: 1242,
+  id: 1092,
   category: "anzen",
   source: "vocab-exam",
   furi: "ねっちゅうしょう",
@@ -9206,7 +9206,7 @@ export const CARDS_COMMON = [
   _origIndex: 1220
   },
   {
-  id: 1243,
+  id: 1093,
   category: "anzen",
   source: "vocab-exam",
   furi: "ふんじん",
@@ -9217,7 +9217,7 @@ export const CARDS_COMMON = [
   _origIndex: 1221
   },
   {
-  id: 1244,
+  id: 1094,
   category: "anzen",
   source: "vocab-exam",
   furi: "りすくあせすめんと",
@@ -9229,7 +9229,7 @@ export const CARDS_COMMON = [
   _origIndex: 1222
   },
   {
-  id: 1250,
+  id: 1099,
   category: "sekou",
   source: "vocab-exam",
   furi: "しーとぱいる",
@@ -9241,7 +9241,7 @@ export const CARDS_COMMON = [
   _origIndex: 1228
   },
   {
-  id: 1268,
+  id: 1106,
   category: "sekou",
   source: "vocab-exam",
   furi: "くいうちき",
@@ -9253,7 +9253,7 @@ export const CARDS_COMMON = [
   _origIndex: 1246
   },
   {
-  id: 1278,
+  id: 1110,
   category: "sekou",
   source: "vocab-exam",
   furi: "カーテンウォール",
@@ -9264,7 +9264,7 @@ export const CARDS_COMMON = [
   _origIndex: 1256
   },
   {
-  id: 1279,
+  id: 1111,
   category: "sekou",
   source: "vocab-exam",
   furi: "サイディング",
@@ -9276,7 +9276,7 @@ export const CARDS_COMMON = [
   _origIndex: 1257
   },
   {
-  id: 1281,
+  id: 1113,
   category: "sekou",
   source: "vocab-exam",
   furi: "プライマー",
@@ -9288,7 +9288,7 @@ export const CARDS_COMMON = [
   _origIndex: 1259
   },
   {
-  id: 1298,
+  id: 1120,
   category: "sekou",
   source: "vocab-exam",
   furi: "いんぱくとどらいばー",
@@ -9300,7 +9300,7 @@ export const CARDS_COMMON = [
   _origIndex: 1276
   },
   {
-  id: 1299,
+  id: 1121,
   category: "sekou",
   source: "vocab-exam",
   furi: "ういんち",
@@ -9312,7 +9312,7 @@ export const CARDS_COMMON = [
   _origIndex: 1277
   },
   {
-  id: 1302,
+  id: 1124,
   category: "sekou",
   source: "vocab-exam",
   furi: "ゆあつじゃっき",
@@ -9324,7 +9324,7 @@ export const CARDS_COMMON = [
   _origIndex: 1280
   },
   {
-  id: 1312,
+  id: 1134,
   category: "sekou",
   source: "vocab-exam",
   furi: "でんどうどりる",
@@ -9336,7 +9336,7 @@ export const CARDS_COMMON = [
   _origIndex: 1290
   },
   {
-  id: 1317,
+  id: 1139,
   category: "sekou",
   source: "vocab-exam",
   furi: "ぼーるばん",
@@ -9348,7 +9348,7 @@ export const CARDS_COMMON = [
   _origIndex: 1295
   },
   {
-  id: 1323,
+  id: 1145,
   category: "career",
   source: "vocab-exam",
   furi: "ケーワイシート",
@@ -9360,7 +9360,7 @@ export const CARDS_COMMON = [
   _origIndex: 1301
   },
   {
-  id: 1324,
+  id: 1146,
   category: "career",
   source: "vocab-exam",
   furi: "しんきにゅうじょうしゃカード",
@@ -9372,7 +9372,7 @@ export const CARDS_COMMON = [
   _origIndex: 1302
   },
   {
-  id: 1334,
+  id: 1155,
   category: "career",
   source: "vocab-exam",
   furi: "せっけいとしょ",
@@ -9383,7 +9383,7 @@ export const CARDS_COMMON = [
   _origIndex: 1311
   },
   {
-  id: 1343,
+  id: 1164,
   category: "career",
   source: "vocab-exam",
   furi: "せこうたいせいだいちょう",
@@ -9394,7 +9394,7 @@ export const CARDS_COMMON = [
   _origIndex: 1320
   },
   {
-  id: 1346,
+  id: 1167,
   category: "hourei",
   source: "vocab-teori",
   furi: "きょか",
@@ -9406,7 +9406,7 @@ export const CARDS_COMMON = [
   _origIndex: 1323
   },
   {
-  id: 1347,
+  id: 1168,
   category: "hourei",
   source: "vocab-teori",
   furi: "うけおいけいやく",
@@ -9418,7 +9418,7 @@ export const CARDS_COMMON = [
   _origIndex: 1324
   },
   {
-  id: 1348,
+  id: 1169,
   category: "hourei",
   source: "vocab-teori",
   furi: "もとうけ",
@@ -9430,7 +9430,7 @@ export const CARDS_COMMON = [
   _origIndex: 1325
   },
   {
-  id: 1349,
+  id: 1170,
   category: "hourei",
   source: "vocab-teori",
   furi: "したうけ",
@@ -9442,7 +9442,7 @@ export const CARDS_COMMON = [
   _origIndex: 1326
   },
   {
-  id: 1350,
+  id: 1171,
   category: "hourei",
   source: "vocab-teori",
   furi: "ろうどうきじゅんかんとくしょ",
@@ -9454,7 +9454,7 @@ export const CARDS_COMMON = [
   _origIndex: 1327
   },
   {
-  id: 1351,
+  id: 1172,
   category: "hourei",
   source: "vocab-teori",
   furi: "ゆうきゅうきゅうか",
@@ -9466,7 +9466,7 @@ export const CARDS_COMMON = [
   _origIndex: 1328
   },
   {
-  id: 1352,
+  id: 1173,
   category: "hourei",
   source: "vocab-teori",
   furi: "わりましちんぎん",
@@ -9478,7 +9478,7 @@ export const CARDS_COMMON = [
   _origIndex: 1329
   },
   {
-  id: 1353,
+  id: 1174,
   category: "hourei",
   source: "vocab-teori",
   furi: "ばっそく",
@@ -9490,7 +9490,7 @@ export const CARDS_COMMON = [
   _origIndex: 1330
   },
   {
-  id: 1356,
+  id: 1176,
   category: "anzen",
   source: "vocab-teori",
   furi: "さんだいさいがい",
@@ -9501,7 +9501,7 @@ export const CARDS_COMMON = [
   _origIndex: 1332
   },
   {
-  id: 1357,
+  id: 1177,
   category: "anzen",
   source: "vocab-teori",
   furi: "あんぜんたい",
@@ -9513,7 +9513,7 @@ export const CARDS_COMMON = [
   _origIndex: 1333
   },
   {
-  id: 1358,
+  id: 1178,
   category: "anzen",
   source: "vocab-teori",
   furi: "ふるはーねすがた",
@@ -9525,7 +9525,7 @@ export const CARDS_COMMON = [
   _origIndex: 1334
   },
   {
-  id: 1359,
+  id: 1179,
   category: "anzen",
   source: "vocab-teori",
   furi: "たちいりきんし",
@@ -9536,7 +9536,7 @@ export const CARDS_COMMON = [
   _origIndex: 1335
   },
   {
-  id: 1360,
+  id: 1180,
   category: "anzen",
   source: "vocab-teori",
   furi: "ほごぐ",
@@ -9548,7 +9548,7 @@ export const CARDS_COMMON = [
   _origIndex: 1336
   },
   {
-  id: 1361,
+  id: 1181,
   category: "anzen",
   source: "vocab-teori",
   furi: "かんでん",
@@ -9559,7 +9559,7 @@ export const CARDS_COMMON = [
   _origIndex: 1337
   },
   {
-  id: 1364,
+  id: 1182,
   category: "sekou",
   source: "vocab-teori",
   furi: "せこうけいかく",
@@ -9571,7 +9571,7 @@ export const CARDS_COMMON = [
   _origIndex: 1338
   },
   {
-  id: 1368,
+  id: 1184,
   category: "hourei",
   source: "vocab-teori",
   furi: "はっちゅうしゃ",
@@ -9583,7 +9583,7 @@ export const CARDS_COMMON = [
   _origIndex: 1340
   },
   {
-  id: 1381,
+  id: 1197,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "おはようございます",
@@ -9594,7 +9594,7 @@ export const CARDS_COMMON = [
   _origIndex: 1353
   },
   {
-  id: 1383,
+  id: 1199,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "ありがとうございます",
@@ -9605,7 +9605,7 @@ export const CARDS_COMMON = [
   _origIndex: 1355
   },
   {
-  id: 1390,
+  id: 1206,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "おさきにしつれいします",
@@ -9616,7 +9616,7 @@ export const CARDS_COMMON = [
   _origIndex: 1362
   },
   {
-  id: 1392,
+  id: 1208,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "りょうかいしました",
@@ -9627,7 +9627,7 @@ export const CARDS_COMMON = [
   _origIndex: 1364
   },
   {
-  id: 1396,
+  id: 1212,
   category: "gaiyou",
   source: "vocab-jac",
   furi: "かくにんします",
@@ -9638,7 +9638,7 @@ export const CARDS_COMMON = [
   _origIndex: 1368
   },
   {
-  id: 1399,
+  id: 1215,
   category: "career",
   source: "vocab-jac",
   furi: "ほうこく",
@@ -9650,7 +9650,7 @@ export const CARDS_COMMON = [
   _origIndex: 1371
   },
   {
-  id: 1400,
+  id: 1216,
   category: "career",
   source: "vocab-jac",
   furi: "れんらく",
@@ -9662,7 +9662,7 @@ export const CARDS_COMMON = [
   _origIndex: 1372
   },
   {
-  id: 1401,
+  id: 1217,
   category: "career",
   source: "vocab-jac",
   furi: "そうだん",
@@ -9674,7 +9674,7 @@ export const CARDS_COMMON = [
   _origIndex: 1373
   },
   {
-  id: 1402,
+  id: 1218,
   category: "career",
   source: "vocab-jac",
   furi: "ほうれんそう",
@@ -9685,7 +9685,7 @@ export const CARDS_COMMON = [
   _origIndex: 1374
   },
   {
-  id: 1403,
+  id: 1219,
   category: "career",
   source: "vocab-jac",
   furi: "しじ",
@@ -9697,7 +9697,7 @@ export const CARDS_COMMON = [
   _origIndex: 1375
   },
   {
-  id: 1408,
+  id: 1224,
   category: "career",
   source: "vocab-jac",
   furi: "とどけで",
@@ -9709,7 +9709,7 @@ export const CARDS_COMMON = [
   _origIndex: 1380
   },
   {
-  id: 1412,
+  id: 1228,
   category: "career",
   source: "vocab-jac",
   furi: "きゅうけい",
@@ -9721,7 +9721,7 @@ export const CARDS_COMMON = [
   _origIndex: 1384
   },
   {
-  id: 1413,
+  id: 1229,
   category: "career",
   source: "vocab-jac",
   furi: "ざんぎょう",
@@ -9733,7 +9733,7 @@ export const CARDS_COMMON = [
   _origIndex: 1385
   },
   {
-  id: 1416,
+  id: 1232,
   category: "hourei",
   source: "vocab-teori",
   furi: "とくていぎのう",
@@ -9745,7 +9745,7 @@ export const CARDS_COMMON = [
   _origIndex: 1388
   },
   {
-  id: 1417,
+  id: 1233,
   category: "hourei",
   source: "vocab-teori",
   furi: "ざいりゅうかーど",
@@ -9757,7 +9757,7 @@ export const CARDS_COMMON = [
   _origIndex: 1389
   },
   {
-  id: 1418,
+  id: 1234,
   category: "hourei",
   source: "vocab-teori",
   furi: "ざいりゅうしかく",
@@ -9769,7 +9769,7 @@ export const CARDS_COMMON = [
   _origIndex: 1390
   },
   {
-  id: 1419,
+  id: 1235,
   category: "hourei",
   source: "vocab-teori",
   furi: "ざいりゅうきかん",
@@ -9781,7 +9781,7 @@ export const CARDS_COMMON = [
   _origIndex: 1391
   },
   {
-  id: 1421,
+  id: 1237,
   category: "hourei",
   source: "vocab-teori",
   furi: "こうしん",
@@ -9793,7 +9793,7 @@ export const CARDS_COMMON = [
   _origIndex: 1393
   },
   {
-  id: 1422,
+  id: 1238,
   category: "hourei",
   source: "vocab-teori",
   furi: "しゃかいほけん",
@@ -9805,7 +9805,7 @@ export const CARDS_COMMON = [
   _origIndex: 1394
   },
   {
-  id: 1423,
+  id: 1239,
   category: "hourei",
   source: "vocab-teori",
   furi: "けんこうほけん",
@@ -9817,7 +9817,7 @@ export const CARDS_COMMON = [
   _origIndex: 1395
   },
   {
-  id: 1425,
+  id: 1241,
   category: "hourei",
   source: "vocab-teori",
   furi: "こようほけん",
@@ -9829,7 +9829,7 @@ export const CARDS_COMMON = [
   _origIndex: 1397
   },
   {
-  id: 1427,
+  id: 1243,
   category: "anzen",
   source: "vocab-teori",
   furi: "へるめっと",
@@ -9841,7 +9841,7 @@ export const CARDS_COMMON = [
   _origIndex: 1399
   },
   {
-  id: 1428,
+  id: 1244,
   category: "anzen",
   source: "vocab-teori",
   furi: "あんぜんぐつ",
@@ -9853,7 +9853,7 @@ export const CARDS_COMMON = [
   _origIndex: 1400
   },
   {
-  id: 1431,
+  id: 1247,
   category: "anzen",
   source: "vocab-teori",
   furi: "ほごめがね",
@@ -9865,7 +9865,7 @@ export const CARDS_COMMON = [
   _origIndex: 1403
   },
   {
-  id: 1433,
+  id: 1248,
   category: "career",
   source: "vocab-teori",
   furi: "けんせつきゃりああっぷしすてむ",
@@ -9877,7 +9877,7 @@ export const CARDS_COMMON = [
   _origIndex: 1404
   },
   {
-  id: 1434,
+  id: 1249,
   category: "career",
   source: "vocab-teori",
   furi: "ぎのうれべる",
@@ -9892,7 +9892,7 @@ export const CARDS_COMMON = [
 
 // ─── migrated from cards-doboku-vocab.js ──────────────────────────────────────────────
 {
-  id: 1607,
+  id: 1422,
   category: "sekou",
   source: "vocab-jac",
   furi: "やりかた",
@@ -9904,7 +9904,7 @@ export const CARDS_COMMON = [
   _origIndex: 1578
   },
   {
-  id: 1608,
+  id: 1423,
   category: "sekou",
   source: "vocab-jac",
   furi: "ねきり",
@@ -9916,7 +9916,7 @@ export const CARDS_COMMON = [
   _origIndex: 1579
   },
   {
-  id: 1609,
+  id: 1424,
   category: "sekou",
   source: "vocab-jac",
   furi: "しめがため",
@@ -9928,7 +9928,7 @@ export const CARDS_COMMON = [
   _origIndex: 1580
   },
   {
-  id: 1610,
+  id: 1425,
   category: "sekou",
   source: "vocab-jac",
   furi: "だんきり",
@@ -9940,7 +9940,7 @@ export const CARDS_COMMON = [
   _origIndex: 1581
   },
   {
-  id: 1611,
+  id: 1426,
   category: "sekou",
   source: "vocab-jac",
   furi: "ろしょう",
@@ -9952,7 +9952,7 @@ export const CARDS_COMMON = [
   _origIndex: 1582
   },
   {
-  id: 1612,
+  id: 1427,
   category: "sekou",
   source: "vocab-jac",
   furi: "しきならし",
@@ -9964,7 +9964,7 @@ export const CARDS_COMMON = [
   _origIndex: 1583
   },
   {
-  id: 1613,
+  id: 1428,
   category: "sekou",
   source: "vocab-core",
   furi: "どぼく",
@@ -9976,7 +9976,7 @@ export const CARDS_COMMON = [
   _origIndex: 1584
   },
   {
-  id: 1614,
+  id: 1429,
   category: "sekou",
   source: "vocab-core",
   furi: "みずもり",
@@ -9988,7 +9988,7 @@ export const CARDS_COMMON = [
   _origIndex: 1585
   },
   {
-  id: 1615,
+  id: 1430,
   category: "sekou",
   source: "vocab-lifeline",
   furi: "くっさく",
@@ -10003,7 +10003,7 @@ export const CARDS_COMMON = [
 
 // ─── migrated from cards-kenchiku-vocab.js ──────────────────────────────────────────────
 {
-  id: 1616,
+  id: 1431,
   category: "sekou",
   source: "vocab-jac",
   furi: "やまどめ",
@@ -10015,7 +10015,7 @@ export const CARDS_COMMON = [
   _origIndex: 1587
   },
   {
-  id: 1617,
+  id: 1432,
   category: "sekou",
   source: "vocab-jac",
   furi: "かたわく",
@@ -10027,7 +10027,7 @@ export const CARDS_COMMON = [
   _origIndex: 1588
   },
   {
-  id: 1618,
+  id: 1433,
   category: "sekou",
   source: "vocab-jac",
   furi: "てっきん",
@@ -10039,7 +10039,7 @@ export const CARDS_COMMON = [
   _origIndex: 1589
   },
   {
-  id: 1619,
+  id: 1434,
   category: "sekou",
   source: "vocab-jac",
   furi: "くぎじまい",
@@ -10051,7 +10051,7 @@ export const CARDS_COMMON = [
   _origIndex: 1590
   },
   {
-  id: 1620,
+  id: 1435,
   category: "sekou",
   source: "vocab-jac",
   furi: "てんよう",
@@ -10063,7 +10063,7 @@ export const CARDS_COMMON = [
   _origIndex: 1591
   },
   {
-  id: 1621,
+  id: 1436,
   category: "sekou",
   source: "vocab-exam",
   furi: "あすふぁるとぼうすい",
@@ -10075,7 +10075,7 @@ export const CARDS_COMMON = [
   _origIndex: 1592
   },
   {
-  id: 1622,
+  id: 1437,
   category: "sekou",
   source: "vocab-exam",
   furi: "しーとぼうすい",
@@ -10087,7 +10087,7 @@ export const CARDS_COMMON = [
   _origIndex: 1593
   },
   {
-  id: 1623,
+  id: 1438,
   category: "sekou",
   source: "vocab-exam",
   furi: "すらんぷしけん",
@@ -10099,7 +10099,7 @@ export const CARDS_COMMON = [
   _origIndex: 1594
   },
   {
-  id: 1624,
+  id: 1439,
   category: "sekou",
   source: "vocab-exam",
   furi: "せっこうボード",
@@ -10111,7 +10111,7 @@ export const CARDS_COMMON = [
   _origIndex: 1595
   },
   {
-  id: 1625,
+  id: 1440,
   category: "sekou",
   source: "vocab-exam",
   furi: "ぼうすいシート",
@@ -10123,7 +10123,7 @@ export const CARDS_COMMON = [
   _origIndex: 1596
   },
   {
-  id: 1626,
+  id: 1441,
   category: "sekou",
   source: "vocab-exam",
   furi: "めじ",
@@ -10135,7 +10135,7 @@ export const CARDS_COMMON = [
   _origIndex: 1597
   },
   {
-  id: 1627,
+  id: 1442,
   category: "sekou",
   source: "vocab-exam",
   furi: "モルタル",
@@ -10147,7 +10147,7 @@ export const CARDS_COMMON = [
   _origIndex: 1598
   },
   {
-  id: 1628,
+  id: 1443,
   category: "sekou",
   source: "vocab-exam",
   furi: "スタッド",

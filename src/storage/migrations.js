@@ -193,3 +193,62 @@ export function migrate_v2_to_v3() {
 
   return { progress, srs, prefs };
 }
+
+// ── v3 → v4 migration ────────────────────────────────────────────────────────
+// Card IDs were renumbered to be contiguous 1–1443 (185 gaps removed).
+// Remaps SRS card keys and progress arrays that reference old card IDs.
+
+import CARD_ID_MAP from './card-id-map-v4.js';
+
+export function hasV3Data() {
+  try {
+    const parsed = safeGetDoc('ssw-progress', null);
+    return parsed?._v === 3;
+  } catch { return false; }
+}
+
+export function migrate_v3_to_v4() {
+  const progress = safeGetDoc('ssw-progress', {});
+  const srs      = safeGetDoc('ssw-srs-data', { _v: 3, cards: {} });
+  const prefs    = safeGetDoc('ssw-prefs', {});
+
+  const remap = (id) => {
+    const n = CARD_ID_MAP[String(id)];
+    return n !== undefined ? n : null; // null = card no longer exists
+  };
+
+  // Remap arrays of card IDs
+  for (const field of ['known', 'unknown', 'starred', 'recentCards']) {
+    if (Array.isArray(progress[field])) {
+      progress[field] = progress[field].map(remap).filter(Boolean);
+    }
+  }
+
+  // Remap object keys (quizWrong, wrongCounts)
+  for (const field of ['quizWrong', 'wrongCounts']) {
+    if (progress[field] && typeof progress[field] === 'object') {
+      const remapped = {};
+      for (const [oldId, val] of Object.entries(progress[field])) {
+        const newId = remap(parseInt(oldId, 10));
+        if (newId !== null) remapped[newId] = val;
+      }
+      progress[field] = remapped;
+    }
+  }
+
+  // Remap SRS card keys
+  if (srs.cards && typeof srs.cards === 'object') {
+    const remappedSrs = {};
+    for (const [oldId, val] of Object.entries(srs.cards)) {
+      const newId = remap(parseInt(oldId, 10));
+      if (newId !== null) remappedSrs[newId] = val;
+    }
+    srs.cards = remappedSrs;
+  }
+
+  progress._v = 4;
+  srs._v = 4;
+  prefs._v = 4;
+
+  return { progress, srs, prefs };
+}

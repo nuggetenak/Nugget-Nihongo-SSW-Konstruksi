@@ -2,7 +2,7 @@
 // Cards: 564  (text1l–text3l + vocab-lifeline merged)
 export const CARDS_LIFELINE = [
   {
-  id: 28,
+  id: 27,
   category: "setsubi_kougu",
   source: "jac-ch3",
   furi: "らいふらいんこうじ",
@@ -14,7 +14,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 26
   },
   {
-  id: 30,
+  id: 29,
   category: "denki",
   source: "jac-ch3",
   furi: "でんきこうじ",
@@ -25,7 +25,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 28
   },
   {
-  id: 31,
+  id: 30,
   category: "haikan",
   source: "jac-ch3",
   furi: "としがすこうじ",
@@ -37,7 +37,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 29
   },
   {
-  id: 33,
+  id: 31,
   category: "tsushin",
   source: "jac-ch3",
   furi: "つうしんこうじ",
@@ -49,7 +49,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 31
   },
   {
-  id: 34,
+  id: 32,
   category: "setsubi_kougu",
   source: "jac-ch3",
   furi: "くうちょうせつびこうじ",
@@ -61,7 +61,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 32
   },
   {
-  id: 35,
+  id: 33,
   category: "shoubou",
   source: "jac-ch3",
   furi: "しょうぼうせつびこうじ",
@@ -73,7 +73,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 33
   },
   {
-  id: 36,
+  id: 34,
   category: "hoon",
   source: "jac-ch3",
   furi: "ほおんほれいこうじ",
@@ -84,7 +84,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 34
   },
   {
-  id: 37,
+  id: 35,
   category: "haikan",
   source: "jac-ch3",
   furi: "きゅうはいすいえいせいせつびこうじ",
@@ -95,7 +95,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 35
   },
   {
-  id: 38,
+  id: 36,
   category: "setsubi_kougu",
   source: "jac-jitsugi2",
   furi: "かしつきじょしつき",
@@ -106,7 +106,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 36
   },
   {
-  id: 39,
+  id: 37,
   category: "setsubi_kougu",
   source: "jac-jitsugi2",
   furi: "ちくろこうじ",
@@ -117,7 +117,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 37
   },
   {
-  id: 40,
+  id: 38,
   category: "setsubi_kougu",
   source: "jac-jitsugi2",
   furi: "まるだくとさしこみつぎてこうほう",
@@ -128,7 +128,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 38
   },
   {
-  id: 51,
+  id: 41,
   category: "denki",
   source: "jac-ch5",
   furi: "けんでんき",
@@ -139,7 +139,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 49
   },
   {
-  id: 52,
+  id: 42,
   category: "denki",
   source: "jac-ch5",
   furi: "けんそうき",
@@ -151,7 +151,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 50
   },
   {
-  id: 53,
+  id: 43,
   category: "denki",
   source: "jac-ch5",
   furi: "てすたあばにょうけい",
@@ -163,7 +163,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 51
   },
   {
-  id: 54,
+  id: 44,
   category: "denki",
   source: "jac-ch5",
   furi: "くらんぷめえたあ",
@@ -175,7 +175,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 52
   },
   {
-  id: 55,
+  id: 45,
   category: "denki",
   source: "jac-ch5",
   furi: "でんせんかん",
@@ -186,7 +186,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 53
   },
   {
-  id: 56,
+  id: 46,
   category: "denki",
   source: "jac-ch5",
   furi: "ふれきしぶるかん",
@@ -198,7 +198,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 54
   },
   {
-  id: 57,
+  id: 47,
   category: "denki",
   source: "jac-ch5",
   furi: "ぷるぼっくす",
@@ -210,7 +210,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 55
   },
   {
-  id: 58,
+  id: 48,
   category: "denki",
   source: "jac-ch5",
   furi: "けえぷるらっく",
@@ -221,7 +221,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 56
   },
   {
-  id: 59,
+  id: 49,
   category: "denki",
   source: "jac-ch5",
   furi: "っけえぷる",
@@ -233,7 +233,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 57
   },
   {
-  id: 60,
+  id: 50,
   category: "denki",
   source: "jac-ch4",
   furi: "あっちゃくたんし",
@@ -244,7 +244,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 58
   },
   {
-  id: 61,
+  id: 51,
   category: "denki",
   source: "jac-jitsugi1",
   furi: "ぶれえかあ",
@@ -255,7 +255,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 59
   },
   {
-  id: 62,
+  id: 52,
   category: "denki",
   source: "jac-ch5",
   furi: "せっちぼう",
@@ -267,7 +267,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 60
   },
   {
-  id: 63,
+  id: 53,
   category: "denki",
   source: "jac-ch5",
   furi: "はんどほおる",
@@ -279,7 +279,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 61
   },
   {
-  id: 64,
+  id: 54,
   category: "denki",
   source: "jac-ch3",
   furi: "はいでんばん",
@@ -290,7 +290,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 62
   },
   {
-  id: 65,
+  id: 55,
   category: "denki",
   source: "jac-jitsugi1",
   furi: "たんらく",
@@ -301,7 +301,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 63
   },
   {
-  id: 66,
+  id: 56,
   category: "denki",
   source: "jac-jitsugi1",
   furi: "でんこうないふ",
@@ -312,7 +312,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 64
   },
   {
-  id: 67,
+  id: 57,
   category: "tsushin",
   source: "jac-jitsugi2",
   furi: "ひかりあいばあ",
@@ -323,7 +323,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 65
   },
   {
-  id: 68,
+  id: 58,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ひかりあいばあけえぷる",
@@ -335,7 +335,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 66
   },
   {
-  id: 69,
+  id: 59,
   category: "tsushin",
   source: "jac-ch5",
   furi: "どじくけえぷる",
@@ -346,7 +346,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 67
   },
   {
-  id: 70,
+  id: 60,
   category: "tsushin",
   source: "jac-ch5",
   furi: "うけえぷる",
@@ -357,7 +357,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 68
   },
   {
-  id: 71,
+  id: 61,
   category: "tsushin",
   source: "jac-jitsugi2",
   furi: "ゆうちゃくせつぞくき",
@@ -368,7 +368,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 69
   },
   {
-  id: 72,
+  id: 62,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ひかりこねくた",
@@ -379,7 +379,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 70
   },
   {
-  id: 73,
+  id: 63,
   category: "tsushin",
   source: "jac-jitsugi2",
   furi: "おおちあちめどまいんれえとめて",
@@ -390,7 +390,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 71
   },
   {
-  id: 74,
+  id: 64,
   category: "tsushin",
   source: "jac-ch5",
   furi: "るうたあ",
@@ -402,7 +402,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 72
   },
   {
-  id: 75,
+  id: 65,
   category: "tsushin",
   source: "jac-ch5",
   furi: "すいちんぐはぶ",
@@ -413,7 +413,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 73
   },
   {
-  id: 76,
+  id: 66,
   category: "tsushin",
   source: "jac-jitsugi2",
   furi: "ゆうちゃく vs こねくた vs めかにかるすぷらいす",
@@ -424,7 +424,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 74
   },
   {
-  id: 77,
+  id: 67,
   category: "tsushin",
   source: "jac-jitsugi2",
   furi: "かんろ",
@@ -435,7 +435,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 75
   },
   {
-  id: 78,
+  id: 68,
   category: "tsushin",
   source: "jac-ch5",
   furi: "あいいばあかったあ",
@@ -446,7 +446,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 76
   },
   {
-  id: 79,
+  id: 69,
   category: "tsushin",
   source: "jac-jitsugi2",
   furi: "てぼりあなほりけんちゅうしゃたんしんぼう",
@@ -457,7 +457,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 77
   },
   {
-  id: 80,
+  id: 70,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ひかりぱわあめえたあ",
@@ -468,7 +468,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 78
   },
   {
-  id: 81,
+  id: 71,
   category: "tsushin",
   source: "jac-ch4",
   furi: "きょうどうこう",
@@ -479,7 +479,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 79
   },
   {
-  id: 82,
+  id: 72,
   category: "haikan",
   source: "jac-ch5",
   furi: "たんそこうこうかん",
@@ -490,7 +490,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 80
   },
   {
-  id: 83,
+  id: 73,
   category: "haikan",
   source: "jac-ch5",
   furi: "こうしつえんかびにるかんう",
@@ -502,7 +502,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 81
   },
   {
-  id: 84,
+  id: 74,
   category: "haikan",
   source: "jac-ch5",
   furi: "たいしょうげっきせいえんびかん",
@@ -513,7 +513,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 82
   },
   {
-  id: 85,
+  id: 75,
   category: "haikan",
   source: "jac-ch5",
   furi: "だくたいるちゅうてつかん",
@@ -524,7 +524,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 83
   },
   {
-  id: 86,
+  id: 76,
   category: "haikan",
   source: "jac-ch5",
   furi: "どうかん",
@@ -536,7 +536,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 84
   },
   {
-  id: 87,
+  id: 77,
   category: "haikan",
   source: "jac-ch6",
   furi: "しいるてえぷ",
@@ -547,7 +547,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 85
   },
   {
-  id: 88,
+  id: 78,
   category: "haikan",
   source: "jac-jitsugi1",
   furi: "ぱいぷかったあ",
@@ -558,7 +558,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 86
   },
   {
-  id: 89,
+  id: 79,
   category: "haikan",
   source: "jac-ch5",
   furi: "ぱいぷれんち",
@@ -570,7 +570,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 87
   },
   {
-  id: 90,
+  id: 80,
   category: "haikan",
   source: "jac-ch6",
   furi: "ねじきりき",
@@ -581,7 +581,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 88
   },
   {
-  id: 92,
+  id: 81,
   category: "haikan",
   source: "jac-ch5",
   furi: "すりいぶ",
@@ -592,7 +592,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 89
   },
   {
-  id: 93,
+  id: 82,
   category: "haikan",
   source: "jac-ch5",
   furi: "えるぼ",
@@ -604,7 +604,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 90
   },
   {
-  id: 94,
+  id: 83,
   category: "haikan",
   source: "jac-ch5",
   furi: "ちいず",
@@ -616,7 +616,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 91
   },
   {
-  id: 95,
+  id: 84,
   category: "haikan",
   source: "jac-jitsugi2",
   furi: "ぽりえちれんかんえせつごう",
@@ -627,7 +627,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 92
   },
   {
-  id: 96,
+  id: 85,
   category: "haikan",
   source: "jac-jitsugi1",
   furi: "ねじせつごうあからあ",
@@ -638,7 +638,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 93
   },
   {
-  id: 97,
+  id: 86,
   category: "haikan",
   source: "jac-ch5",
   furi: "ぱいぷまんりき",
@@ -649,7 +649,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 94
   },
   {
-  id: 98,
+  id: 87,
   category: "hoon",
   source: "jac-ch3",
   furi: "ぐらすううるだんねつざい",
@@ -660,7 +660,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 95
   },
   {
-  id: 99,
+  id: 88,
   category: "hoon",
   source: "jac-ch3",
   furi: "ろっくううるだんねつざい",
@@ -671,7 +671,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 96
   },
   {
-  id: 100,
+  id: 89,
   category: "hoon",
   source: "jac-ch5",
   furi: "はっぽうすちろるだんねつざい",
@@ -683,7 +683,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 97
   },
   {
-  id: 101,
+  id: 90,
   category: "hoon",
   source: "jac-ch6",
   furi: "れいばいかんひふくどうかん",
@@ -694,7 +694,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 98
   },
   {
-  id: 102,
+  id: 91,
   category: "hoon",
   source: "jac-jitsugi2",
   furi: "ぐらすううるろっくううる",
@@ -705,7 +705,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 99
   },
   {
-  id: 103,
+  id: 92,
   category: "hoon",
   source: "jac-jitsugi2",
   furi: "らっきんぐかばあ",
@@ -716,7 +716,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 100
   },
   {
-  id: 104,
+  id: 93,
   category: "hoon",
   source: "jac-ch5",
   furi: "けいさんかるしうむほおんざい",
@@ -727,7 +727,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 101
   },
   {
-  id: 105,
+  id: 94,
   category: "shoubou",
   source: "jac-ch2",
   furi: "しょうかいき",
@@ -739,7 +739,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 102
   },
   {
-  id: 106,
+  id: 95,
   category: "shoubou",
   source: "jac-ch5",
   furi: "すぷりんくらあせつび",
@@ -750,7 +750,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 103
   },
   {
-  id: 107,
+  id: 96,
   category: "shoubou",
   source: "jac-jitsugi1",
   furi: "おくがいしょうかいせんせつび",
@@ -761,7 +761,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 104
   },
   {
-  id: 109,
+  id: 97,
   category: "shoubou",
   source: "jac-ch5",
   furi: "ふんまつしょうかせつび",
@@ -772,7 +772,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 105
   },
   {
-  id: 110,
+  id: 98,
   category: "shoubou",
   source: "jac-jitsugi1",
   furi: "おくがいおくないしょうかいせん",
@@ -783,7 +783,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 106
   },
   {
-  id: 207,
+  id: 164,
   category: "denki",
   source: "jac-ch3",
   furi: "がいせんこうじないせんこうじ",
@@ -795,7 +795,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 198
   },
   {
-  id: 228,
+  id: 174,
   category: "haikan",
   source: "jac-ch3",
   furi: "れいとうくうきちょうわききこうじだいひょうきき",
@@ -807,7 +807,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 219
   },
   {
-  id: 229,
+  id: 175,
   category: "shoubou",
   source: "jac-ch3",
   furi: "しょうぼうせつびぶんるいしょうかけいほうひなん",
@@ -819,7 +819,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 220
   },
   {
-  id: 230,
+  id: 176,
   category: "setsubi_kougu",
   source: "jac-ch3",
   furi: "かくしゅろのしゅるいちくろこうじしょうさい",
@@ -831,7 +831,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 221
   },
   {
-  id: 239,
+  id: 179,
   category: "setsubi_kougu",
   source: "jac-ch3",
   furi: "だくとしゅるいはいえんくうちょうはいき",
@@ -843,7 +843,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 230
   },
   {
-  id: 280,
+  id: 207,
   category: "denki",
   source: "jac-ch4",
   furi: "ぜつえんろうでんせっちああす",
@@ -855,7 +855,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 271
   },
   {
-  id: 281,
+  id: 208,
   category: "denki",
   source: "jac-ch4",
   furi: "かくうはいせんまいせつはいせん",
@@ -867,7 +867,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 272
   },
   {
-  id: 282,
+  id: 209,
   category: "denki",
   source: "jac-ch4",
   furi: "いんぺいはいかんろしゅつはいかん",
@@ -879,7 +879,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 273
   },
   {
-  id: 283,
+  id: 210,
   category: "denki",
   source: "jac-ch4",
   furi: "ていあつこうあつとくべつこうあつ",
@@ -891,7 +891,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 274
   },
   {
-  id: 284,
+  id: 211,
   category: "denki",
   source: "jac-ch4",
   furi: "ちょくりゅうこうりゅう",
@@ -903,7 +903,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 275
   },
   {
-  id: 285,
+  id: 212,
   category: "denki",
   source: "jac-ch4",
   furi: "えむぢいえふ",
@@ -915,7 +915,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 276
   },
   {
-  id: 286,
+  id: 213,
   category: "denki",
   source: "jac-ch4",
   furi: "あいぢばあぱいぢこんるし",
@@ -927,7 +927,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 277
   },
   {
-  id: 287,
+  id: 214,
   category: "denki",
   source: "jac-ch4",
   furi: "つうでんあたるかしめるとぶおちる",
@@ -939,7 +939,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 278
   },
   {
-  id: 288,
+  id: 215,
   category: "setsubi_kougu",
   source: "jac-ch4",
   furi: "くうちょうかんきはいえん",
@@ -951,7 +951,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 279
   },
   {
-  id: 289,
+  id: 216,
   category: "haikan",
   source: "jac-ch4",
   furi: "おすいざつはいすい",
@@ -963,7 +963,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 280
   },
   {
-  id: 290,
+  id: 217,
   category: "haikan",
   source: "jac-ch4",
   furi: "ろうえいしけんすいあつしけんまんすいしけん",
@@ -975,7 +975,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 281
   },
   {
-  id: 291,
+  id: 218,
   category: "haikan",
   source: "jac-ch4",
   furi: "らいにんぐぎゃくかんこうばい",
@@ -987,7 +987,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 282
   },
   {
-  id: 306,
+  id: 232,
   category: "denki",
   source: "jac-ch4",
   furi: "はいせんりかくかんつう",
@@ -999,7 +999,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 297
   },
   {
-  id: 307,
+  id: 233,
   category: "denki",
   source: "jac-ch4",
   furi: "つうせんはいかんするすらぶはいかんしこむ",
@@ -1011,7 +1011,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 298
   },
   {
-  id: 308,
+  id: 234,
   category: "denki",
   source: "jac-ch4",
   furi: "ひらいしんひらいき",
@@ -1023,7 +1023,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 299
   },
   {
-  id: 309,
+  id: 235,
   category: "denki",
   source: "jac-ch4",
   furi: "ひふくいちじがわにじがわ",
@@ -1035,7 +1035,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 300
   },
   {
-  id: 310,
+  id: 236,
   category: "denki",
   source: "jac-ch4",
   furi: "まししめまあきんぐ",
@@ -1047,7 +1047,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 301
   },
   {
-  id: 311,
+  id: 237,
   category: "denki",
   source: "jac-ch4",
   furi: "ふるせるふせる",
@@ -1059,7 +1059,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 302
   },
   {
-  id: 312,
+  id: 238,
   category: "haikan",
   source: "jac-ch4",
   furi: "えいせいせつびしにみず",
@@ -1071,7 +1071,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 303
   },
   {
-  id: 314,
+  id: 240,
   category: "haikan",
   source: "jac-ch4",
   furi: "ぶんきしんしゅくじゃばら",
@@ -1083,7 +1083,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 305
   },
   {
-  id: 315,
+  id: 241,
   category: "haikan",
   source: "jac-ch4",
   furi: "しんさきはいかんようご",
@@ -1095,7 +1095,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 306
   },
   {
-  id: 324,
+  id: 246,
   category: "denki",
   source: "jac-ch4",
   furi: "せつぞくけっせん",
@@ -1107,7 +1107,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 315
   },
   {
-  id: 325,
+  id: 247,
   category: "denki",
   source: "jac-ch4",
   furi: "ばいぶれえたあうちこみ",
@@ -1119,7 +1119,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 316
   },
   {
-  id: 329,
+  id: 251,
   category: "denki",
   source: "jac-ch4",
   furi: "あつちゃくぺんちりんぐすりいぶ",
@@ -1131,7 +1131,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 320
   },
   {
-  id: 334,
+  id: 256,
   category: "denki",
   source: "jac-ch5",
   furi: "べんだあ",
@@ -1143,7 +1143,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 325
   },
   {
-  id: 335,
+  id: 257,
   category: "denki",
   source: "jac-ch5",
   furi: "しいぢいかんぴいえふかん",
@@ -1155,7 +1155,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 326
   },
   {
-  id: 336,
+  id: 258,
   category: "denki",
   source: "jac-ch5",
   furi: "しいかんうすこうでんせんかんじいかんあつこうでんせんかん",
@@ -1167,7 +1167,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 327
   },
   {
-  id: 337,
+  id: 259,
   category: "denki",
   source: "jac-ch5",
   furi: "ぼいどかん",
@@ -1179,7 +1179,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 328
   },
   {
-  id: 338,
+  id: 260,
   category: "denki",
   source: "jac-ch5",
   furi: "あうとれっとぼっくす",
@@ -1191,7 +1191,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 329
   },
   {
-  id: 339,
+  id: 261,
   category: "denki",
   source: "jac-ch5",
   furi: "あっちゃくぺんちたんしようあかりんぐすりいぶようき",
@@ -1203,7 +1203,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 330
   },
   {
-  id: 340,
+  id: 262,
   category: "denki",
   source: "jac-ch5",
   furi: "りんぐすりいぶ",
@@ -1215,7 +1215,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 331
   },
   {
-  id: 341,
+  id: 263,
   category: "denki",
   source: "jac-ch5",
   furi: "よびせん",
@@ -1227,7 +1227,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 332
   },
   {
-  id: 342,
+  id: 264,
   category: "denki",
   source: "jac-ch5",
   furi: "れえすゑえ",
@@ -1239,7 +1239,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 333
   },
   {
-  id: 343,
+  id: 265,
   category: "denki",
   source: "jac-ch5",
   furi: "つりぼるとぜんねじぼると",
@@ -1251,7 +1251,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 334
   },
   {
-  id: 344,
+  id: 266,
   category: "denki",
   source: "jac-ch5",
   furi: "わいやあすとりっぱ",
@@ -1263,7 +1263,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 335
   },
   {
-  id: 345,
+  id: 267,
   category: "denki",
   source: "jac-ch5",
   furi: "しいぶいけえぷるいいえむいいいいえふ",
@@ -1275,7 +1275,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 336
   },
   {
-  id: 346,
+  id: 268,
   category: "denki",
   source: "jac-ch5",
   furi: "しいちいぶいしいちいいどうようでんせん",
@@ -1287,7 +1287,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 337
   },
   {
-  id: 347,
+  id: 269,
   category: "denki",
   source: "jac-ch5",
   furi: "さあまるりれえ",
@@ -1299,7 +1299,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 338
   },
   {
-  id: 348,
+  id: 270,
   category: "tsushin",
   source: "jac-ch5",
   furi: "くろおじゃあ",
@@ -1311,7 +1311,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 339
   },
   {
-  id: 349,
+  id: 271,
   category: "tsushin",
   source: "jac-ch5",
   furi: "つりせんめっせんじゃあわいやあ",
@@ -1323,7 +1323,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 340
   },
   {
-  id: 350,
+  id: 272,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ちょうせんきかくせんき",
@@ -1335,7 +1335,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 341
   },
   {
-  id: 351,
+  id: 273,
   category: "tsushin",
   source: "jac-ch5",
   furi: "せいりゅうきちくでんち",
@@ -1347,7 +1347,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 342
   },
   {
-  id: 352,
+  id: 274,
   category: "tsushin",
   source: "jac-ch5",
   furi: "らんてすたあ",
@@ -1359,7 +1359,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 343
   },
   {
-  id: 353,
+  id: 275,
   category: "haikan",
   source: "jac-ch5",
   furi: "はいかんだくと",
@@ -1371,7 +1371,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 344
   },
   {
-  id: 354,
+  id: 276,
   category: "haikan",
   source: "jac-ch5",
   furi: "ひゅうぶかったあぱいぷかったあ",
@@ -1383,7 +1383,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 345
   },
   {
-  id: 355,
+  id: 277,
   category: "haikan",
   source: "jac-ch5",
   furi: "ふれありんぐうつうる",
@@ -1395,7 +1395,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 346
   },
   {
-  id: 356,
+  id: 278,
   category: "haikan",
   source: "jac-ch5",
   furi: "えきすぱんだあ",
@@ -1407,7 +1407,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 347
   },
   {
-  id: 357,
+  id: 279,
   category: "haikan",
   source: "jac-ch5",
   furi: "すいあつしけんきいてすとぽんぷ",
@@ -1419,7 +1419,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 348
   },
   {
-  id: 358,
+  id: 280,
   category: "haikan",
   source: "jac-ch5",
   furi: "たいねつせいこうしつえんかびにるかんかん",
@@ -1431,7 +1431,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 349
   },
   {
-  id: 359,
+  id: 281,
   category: "haikan",
   source: "jac-ch6",
   furi: "すいどうようこうしつえんかびにるらいにんぐこうかん",
@@ -1443,7 +1443,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 350
   },
   {
-  id: 360,
+  id: 282,
   category: "haikan",
   source: "jac-ch5",
   furi: "がすこっくまったんちゅうかん",
@@ -1455,7 +1455,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 351
   },
   {
-  id: 361,
+  id: 283,
   category: "haikan",
   source: "jac-ch5",
   furi: "がすもれけいほうき",
@@ -1467,7 +1467,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 352
   },
   {
-  id: 362,
+  id: 284,
   category: "haikan",
   source: "jac-ch5",
   furi: "べんだんぱあ",
@@ -1479,7 +1479,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 353
   },
   {
-  id: 363,
+  id: 285,
   category: "haikan",
   source: "jac-ch5",
   furi: "とらっぷ",
@@ -1491,7 +1491,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 354
   },
   {
-  id: 364,
+  id: 286,
   category: "haikan",
   source: "jac-ch5",
   furi: "えいせいせつびきゅうはいすいえいせいせつびのろくぶにゃ",
@@ -1503,7 +1503,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 355
   },
   {
-  id: 366,
+  id: 288,
   category: "shoubou",
   source: "jac-ch5",
   furi: "みずふんむしょうかせつび",
@@ -1515,7 +1515,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 357
   },
   {
-  id: 367,
+  id: 289,
   category: "shoubou",
   source: "jac-ch5",
   furi: "あわしょうかせつび",
@@ -1527,7 +1527,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 358
   },
   {
-  id: 368,
+  id: 290,
   category: "shoubou",
   source: "jac-ch5",
   furi: "ふかあっせいがすしょうかせつび",
@@ -1539,7 +1539,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 359
   },
   {
-  id: 369,
+  id: 291,
   category: "shoubou",
   source: "jac-ch5",
   furi: "はろげんかぶつしょうかせつび",
@@ -1551,7 +1551,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 360
   },
   {
-  id: 399,
+  id: 321,
   category: "denki",
   source: "jac-ch5",
   furi: "いいかん（ねじなしこうせいでんせんかん）",
@@ -1563,7 +1563,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 390
   },
   {
-  id: 400,
+  id: 322,
   category: "denki",
   source: "jac-ch5",
   furi: "かっぷりんぐ vs こんびねえしょんかっぷりんぐ",
@@ -1575,7 +1575,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 391
   },
   {
-  id: 401,
+  id: 323,
   category: "denki",
   source: "jac-ch5",
   furi: "だくたあちゃんねる（このじがただんめん）",
@@ -1587,7 +1587,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 392
   },
   {
-  id: 402,
+  id: 324,
   category: "denki",
   source: "jac-ch5",
   furi: "だぶるなっと / さどる",
@@ -1599,7 +1599,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 393
   },
   {
-  id: 403,
+  id: 325,
   category: "denki",
   source: "jac-ch5",
   furi: "VVR（まるがた）vs VVF（ひらがた）",
@@ -1611,7 +1611,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 394
   },
   {
-  id: 404,
+  id: 326,
   category: "denki",
   source: "jac-ch5",
   furi: "りれえ vs さあまるりれえ",
@@ -1623,7 +1623,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 395
   },
   {
-  id: 405,
+  id: 327,
   category: "denki",
   source: "jac-ch5",
   furi: "じこゆうちゃくてえぷ",
@@ -1635,7 +1635,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 396
   },
   {
-  id: 406,
+  id: 328,
   category: "denki",
   source: "jac-ch5",
   furi: "さしこみこねくた / ちいがたこねくた",
@@ -1647,7 +1647,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 397
   },
   {
-  id: 407,
+  id: 329,
   category: "denki",
   source: "jac-ch5",
   furi: "でんこうどらむ",
@@ -1659,7 +1659,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 398
   },
   {
-  id: 408,
+  id: 330,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ひかりふぁいばあゆうちゃくせつぞく（さんほうしき）",
@@ -1671,7 +1671,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 399
   },
   {
-  id: 409,
+  id: 331,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ひかりぱるすしけんき（OTDR）",
@@ -1683,7 +1683,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 400
   },
   {
-  id: 410,
+  id: 332,
   category: "tsushin",
   source: "jac-ch5",
   furi: "じこしじけえぷる",
@@ -1695,7 +1695,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 401
   },
   {
-  id: 411,
+  id: 333,
   category: "haikan",
   source: "jac-ch5",
   furi: "ぱいぷまんりき / ぱいぷねじきりき",
@@ -1707,7 +1707,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 402
   },
   {
-  id: 412,
+  id: 334,
   category: "haikan",
   source: "jac-ch5",
   furi: "めんとりき",
@@ -1719,7 +1719,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 403
   },
   {
-  id: 413,
+  id: 335,
   category: "haikan",
   source: "jac-ch5",
   furi: "しいるざい（えきじょう / しいるてえぷ）",
@@ -1731,7 +1731,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 404
   },
   {
-  id: 414,
+  id: 336,
   category: "haikan",
   source: "jac-ch6",
   furi: "はいかんようたんそこうこうかん（SGP / がすかん）",
@@ -1743,7 +1743,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 405
   },
   {
-  id: 415,
+  id: 337,
   category: "haikan",
   source: "jac-ch5",
   furi: "こうしつぽりえんかびにるかん（VP vs VU）",
@@ -1755,7 +1755,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 406
   },
   {
-  id: 416,
+  id: 338,
   category: "haikan",
   source: "jac-ch5",
   furi: "ねじこみしきかたんちゅうてつせいかんつぎて",
@@ -1767,7 +1767,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 407
   },
   {
-  id: 417,
+  id: 339,
   category: "haikan",
   source: "jac-ch5",
   furi: "せきめんせめんとかん（あすべすとかん）",
@@ -1779,7 +1779,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 408
   },
   {
-  id: 418,
+  id: 340,
   category: "shoubou",
   source: "jac-ch5",
   furi: "おくないしょうかせんせつび（いちごう / いそうさせい / にごう）",
@@ -1791,7 +1791,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 409
   },
   {
-  id: 438,
+  id: 359,
   category: "denki",
   source: "jac-ch5",
   furi: "こんてすたあ",
@@ -1803,7 +1803,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 429
   },
   {
-  id: 439,
+  id: 360,
   category: "denki",
   source: "jac-ch5",
   furi: "でんどうはんまあ",
@@ -1815,7 +1815,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 430
   },
   {
-  id: 440,
+  id: 361,
   category: "denki",
   source: "jac-ch5",
   furi: "まわしびき",
@@ -1827,7 +1827,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 431
   },
   {
-  id: 441,
+  id: 362,
   category: "denki",
   source: "jac-ch5",
   furi: "ぬりしろかばあ",
@@ -1839,7 +1839,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 432
   },
   {
-  id: 442,
+  id: 363,
   category: "denki",
   source: "jac-ch5",
   furi: "ぼっくすこねくた",
@@ -1851,7 +1851,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 433
   },
   {
-  id: 443,
+  id: 364,
   category: "denki",
   source: "jac-ch5",
   furi: "らじあすくらんぷ",
@@ -1863,7 +1863,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 434
   },
   {
-  id: 444,
+  id: 365,
   category: "denki",
   source: "jac-ch5",
   furi: "あっしゅくたんし vs あっちゃくたんし",
@@ -1875,7 +1875,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 435
   },
   {
-  id: 445,
+  id: 366,
   category: "denki",
   source: "jac-ch5",
   furi: "ぼうたんし",
@@ -1887,7 +1887,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 436
   },
   {
-  id: 446,
+  id: 367,
   category: "denki",
   source: "jac-ch5",
   furi: "COS（ちぇんじおおばあすいっち）",
@@ -1899,7 +1899,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 437
   },
   {
-  id: 447,
+  id: 368,
   category: "denki",
   source: "jac-ch5",
   furi: "べるまうす",
@@ -1911,7 +1911,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 438
   },
   {
-  id: 448,
+  id: 369,
   category: "denki",
   source: "jac-ch5",
   furi: "ああすぼんどせん vs のんぼんどつぎて",
@@ -1923,7 +1923,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 439
   },
   {
-  id: 449,
+  id: 370,
   category: "denki",
   source: "jac-ch5",
   furi: "えんどかばあ / すたっとばあ",
@@ -1935,7 +1935,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 440
   },
   {
-  id: 450,
+  id: 371,
   category: "tsushin",
   source: "jac-ch5",
   furi: "けえぷるくりだしき（かっしゃしき）",
@@ -1947,7 +1947,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 441
   },
   {
-  id: 451,
+  id: 372,
   category: "tsushin",
   source: "jac-ch5",
   furi: "きんしゃ",
@@ -1959,7 +1959,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 442
   },
   {
-  id: 452,
+  id: 373,
   category: "haikan",
   source: "jac-ch5",
   furi: "ぽんぷ（はいかんないのみずをとおく・たかくへ）",
@@ -1971,7 +1971,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 443
   },
   {
-  id: 453,
+  id: 374,
   category: "haikan",
   source: "jac-ch5",
   furi: "ねじげえじ",
@@ -1983,7 +1983,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 444
   },
   {
-  id: 465,
+  id: 386,
   category: "haikan",
   source: "jac-ch5",
   furi: "ちゅうぶべんだあ（どうかんせんよう）",
@@ -1995,7 +1995,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 456
   },
   {
-  id: 466,
+  id: 387,
   category: "denki",
   source: "jac-ch5",
   furi: "ばん",
@@ -2007,7 +2007,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 457
   },
   {
-  id: 467,
+  id: 388,
   category: "denki",
   source: "jac-ch5",
   furi: "あいぶい（おくないびにるぜつえんでんせん）",
@@ -2019,7 +2019,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 458
   },
   {
-  id: 468,
+  id: 389,
   category: "denki",
   source: "jac-ch5",
   furi: "ろしゅつぼっくす vs ろしゅつすいっちぼっくす",
@@ -2031,7 +2031,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 459
   },
   {
-  id: 474,
+  id: 395,
   category: "denki",
   source: "jac-ch5",
   furi: "VVF すとりっぱあ",
@@ -2043,7 +2043,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 465
   },
   {
-  id: 475,
+  id: 396,
   category: "denki",
   source: "jac-ch5",
   furi: "すとりっぷげえじ",
@@ -2055,7 +2055,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 466
   },
   {
-  id: 476,
+  id: 397,
   category: "denki",
   source: "jac-ch5",
   furi: "こんせんと（うめこみがた・ろしゅつがた）",
@@ -2067,7 +2067,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 467
   },
   {
-  id: 477,
+  id: 398,
   category: "denki",
   source: "jac-ch5",
   furi: "やくもの",
@@ -2079,7 +2079,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 468
   },
   {
-  id: 478,
+  id: 399,
   category: "denki",
   source: "jac-ch5",
   furi: "ふれどめ",
@@ -2091,7 +2091,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 469
   },
   {
-  id: 479,
+  id: 400,
   category: "denki",
   source: "jac-ch5",
   furi: "つりぼるとしじかなぐ",
@@ -2103,7 +2103,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 470
   },
   {
-  id: 480,
+  id: 401,
   category: "denki",
   source: "jac-ch4",
   furi: "りいどたんし",
@@ -2115,7 +2115,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 471
   },
   {
-  id: 481,
+  id: 402,
   category: "tsushin",
   source: "jac-ch5",
   furi: "めたるけえぷる（どうじく・ついすとぺあ）",
@@ -2127,7 +2127,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 472
   },
   {
-  id: 482,
+  id: 403,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ふぁいばあほごすりいぶ",
@@ -2139,7 +2139,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 473
   },
   {
-  id: 483,
+  id: 404,
   category: "tsushin",
   source: "jac-ch5",
   furi: "ふぁいばあほるだ",
@@ -2151,7 +2151,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 474
   },
   {
-  id: 484,
+  id: 405,
   category: "tsushin",
   source: "jac-ch5",
   furi: "じゃけっとりむうば",
@@ -2163,7 +2163,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 475
   },
   {
-  id: 485,
+  id: 406,
   category: "tsushin",
   source: "jac-ch5",
   furi: "どうじくけえぷるちぇっかあ",
@@ -2175,7 +2175,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 476
   },
   {
-  id: 486,
+  id: 407,
   category: "haikan",
   source: "jac-ch5",
   furi: "れいばいようどうかん",
@@ -2187,7 +2187,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 477
   },
   {
-  id: 487,
+  id: 408,
   category: "haikan",
   source: "jac-ch5",
   furi: "えあふぃるたあ（くうちょう）",
@@ -2199,7 +2199,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 478
   },
   {
-  id: 488,
+  id: 409,
   category: "haikan",
   source: "jac-ch3",
   furi: "えいせいきぐせつび",
@@ -2211,7 +2211,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 479
   },
   {
-  id: 505,
+  id: 426,
   category: "haikan",
   source: "jac-ch6",
   furi: "Aこしょう vs Bこしょう",
@@ -2223,7 +2223,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 496
   },
   {
-  id: 507,
+  id: 428,
   category: "haikan",
   source: "jac-ch6",
   furi: "ななめぎれ・だんぎれ",
@@ -2235,7 +2235,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 498
   },
   {
-  id: 509,
+  id: 430,
   category: "haikan",
   source: "jac-ch6",
   furi: "しいるてえぷのまきかた",
@@ -2247,7 +2247,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 500
   },
   {
-  id: 510,
+  id: 431,
   category: "haikan",
   source: "jac-ch6",
   furi: "ねじこみのこつ",
@@ -2259,7 +2259,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 501
   },
   {
-  id: 511,
+  id: 432,
   category: "haikan",
   source: "jac-ch6",
   furi: "さびのあるねじはぜったいしようきんし",
@@ -2271,7 +2271,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 502
   },
   {
-  id: 514,
+  id: 435,
   category: "haikan",
   source: "jac-ch6",
   furi: "えきじょうしいるざい",
@@ -2283,7 +2283,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 505
   },
   {
-  id: 515,
+  id: 436,
   category: "haikan",
   source: "jac-ch6",
   furi: "がすようせつせつごうほう",
@@ -2295,7 +2295,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 506
   },
   {
-  id: 516,
+  id: 437,
   category: "haikan",
   source: "jac-ch6",
   furi: "ひふくああくようせつせつごうほう",
@@ -2307,7 +2307,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 507
   },
   {
-  id: 517,
+  id: 438,
   category: "haikan",
   source: "jac-ch6",
   furi: "かいさきかこうがたがたれがたいがた",
@@ -2319,7 +2319,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 508
   },
   {
-  id: 518,
+  id: 439,
   category: "haikan",
   source: "jac-ch6",
   furi: "かりつけようせつ",
@@ -2331,7 +2331,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 509
   },
   {
-  id: 519,
+  id: 440,
   category: "haikan",
   source: "jac-ch6",
   furi: "めかにかるせつごうほうほう",
@@ -2343,7 +2343,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 510
   },
   {
-  id: 520,
+  id: 441,
   category: "haikan",
   source: "jac-ch6",
   furi: "のみこみのまあきんぐ",
@@ -2355,7 +2355,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 511
   },
   {
-  id: 521,
+  id: 442,
   category: "haikan",
   source: "jac-ch6",
   furi: "せっちゃくざいえんびかんよう",
@@ -2367,7 +2367,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 512
   },
   {
-  id: 523,
+  id: 444,
   category: "haikan",
   source: "jac-ch6",
   furi: "まくれ（ばり）とらいにんぐかんようりいま",
@@ -2379,7 +2379,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 514
   },
   {
-  id: 524,
+  id: 445,
   category: "haikan",
   source: "jac-ch6",
   furi: "かんたんぼうしょくつぎて",
@@ -2391,7 +2391,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 515
   },
   {
-  id: 526,
+  id: 447,
   category: "haikan",
   source: "jac-ch6",
   furi: "ばりとりはどうかんをしたむきに",
@@ -2403,7 +2403,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 517
   },
   {
-  id: 527,
+  id: 448,
   category: "setsubi_kougu",
   source: "jac-ch6",
   furi: "さいじんぐつうる（れいばいかんようしねんしゅうせい）",
@@ -2415,7 +2415,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 518
   },
   {
-  id: 528,
+  id: 449,
   category: "haikan",
   source: "jac-ch6",
   furi: "さいしょうまげはんけいれいばいようひふくどうかん",
@@ -2427,7 +2427,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 519
   },
   {
-  id: 529,
+  id: 450,
   category: "haikan",
   source: "jac-ch6",
   furi: "ふれあせつごう",
@@ -2439,7 +2439,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 520
   },
   {
-  id: 530,
+  id: 451,
   category: "haikan",
   source: "jac-ch6",
   furi: "ろうせつごう",
@@ -2451,7 +2451,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 521
   },
   {
-  id: 531,
+  id: 452,
   category: "hoon",
   source: "jac-ch6",
   furi: "ほおんざいのしゅうしゅく（さいだいにぱあせんと）",
@@ -2463,7 +2463,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 522
   },
   {
-  id: 532,
+  id: 453,
   category: "hoon",
   source: "jac-ch6",
   furi: "ほおんざいのけいじょういたじょうおびじょうつつじょう",
@@ -2475,7 +2475,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 523
   },
   {
-  id: 533,
+  id: 454,
   category: "hoon",
   source: "jac-ch6",
   furi: "ALGC / ALK",
@@ -2487,7 +2487,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 524
   },
   {
-  id: 534,
+  id: 455,
   category: "hoon",
   source: "jac-ch6",
   furi: "きっこうかなあみ",
@@ -2499,7 +2499,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 525
   },
   {
-  id: 535,
+  id: 456,
   category: "haikan",
   source: "jac-ch6",
   furi: "GXがただくたいるちゅうてつかん",
@@ -2511,7 +2511,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 526
   },
   {
-  id: 536,
+  id: 457,
   category: "haikan",
   source: "jac-ch6",
   furi: "ろっくりんぐ / ろっくりんぐほるだあ",
@@ -2523,7 +2523,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 527
   },
   {
-  id: 537,
+  id: 458,
   category: "haikan",
   source: "jac-ch6",
   furi: "かつざい",
@@ -2535,7 +2535,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 528
   },
   {
-  id: 538,
+  id: 459,
   category: "haikan",
   source: "jac-ch6",
   furi: "EFせつごう（えれくとろふゅうじょん）",
@@ -2547,7 +2547,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 529
   },
   {
-  id: 539,
+  id: 460,
   category: "haikan",
   source: "jac-ch6",
   furi: "EFせつごうのななめせつだんきょようげんど",
@@ -2559,7 +2559,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 530
   },
   {
-  id: 547,
+  id: 468,
   category: "haikan",
   source: "jac-ch2",
   furi: "あんぐるふらんじこうほう",
@@ -2571,7 +2571,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 538
   },
   {
-  id: 548,
+  id: 469,
   category: "haikan",
   source: "jac-ch6",
   furi: "ともいたふらんじこうほう",
@@ -2583,7 +2583,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 539
   },
   {
-  id: 549,
+  id: 470,
   category: "haikan",
   source: "jac-ch2",
   furi: "すらいどおんふらんじこうほう",
@@ -2595,7 +2595,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 540
   },
   {
-  id: 550,
+  id: 471,
   category: "haikan",
   source: "jac-ch6",
   furi: "まるだくとのふらんじこうほう",
@@ -2607,7 +2607,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 541
   },
   {
-  id: 551,
+  id: 472,
   category: "denki",
   source: "jac-ch6",
   furi: "PAS（こうあつきちゅうかいへいき）",
@@ -2619,7 +2619,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 542
   },
   {
-  id: 552,
+  id: 473,
   category: "denki",
   source: "jac-ch6",
   furi: "きゅうびくる",
@@ -2631,7 +2631,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 543
   },
   {
-  id: 553,
+  id: 474,
   category: "denki",
   source: "jac-ch6",
   furi: "かっせん",
@@ -2643,7 +2643,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 544
   },
   {
-  id: 554,
+  id: 475,
   category: "denki",
   source: "jac-ch6",
   furi: "ちらく",
@@ -2655,7 +2655,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 545
   },
   {
-  id: 555,
+  id: 476,
   category: "denki",
   source: "jac-ch6",
   furi: "ろうでんとろうでんしゃだんき",
@@ -2667,7 +2667,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 546
   },
   {
-  id: 556,
+  id: 477,
   category: "denki",
   source: "jac-ch6",
   furi: "あっちゃくふりょうはつねつはっか",
@@ -2679,7 +2679,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 547
   },
   {
-  id: 560,
+  id: 481,
   category: "tsushin",
   source: "jac-ch6",
   furi: "しいしいぼっくす",
@@ -2691,7 +2691,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 551
   },
   {
-  id: 561,
+  id: 482,
   category: "tsushin",
   source: "jac-ch6",
   furi: "どかぶり",
@@ -2703,7 +2703,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 552
   },
   {
-  id: 562,
+  id: 483,
   category: "tsushin",
   source: "jac-ch6",
   furi: "かんろとまいせつぶつのりかくきょり",
@@ -2715,7 +2715,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 553
   },
   {
-  id: 563,
+  id: 484,
   category: "tsushin",
   source: "jac-ch6",
   furi: "まんどれるつうかしけん",
@@ -2727,7 +2727,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 554
   },
   {
-  id: 564,
+  id: 485,
   category: "tsushin",
   source: "jac-ch6",
   furi: "きみつしけん（かんろふせつご）",
@@ -2739,7 +2739,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 555
   },
   {
-  id: 565,
+  id: 486,
   category: "setsubi_kougu",
   source: "jac-ch6",
   furi: "たいかれんが / たいかだんねつれんが",
@@ -2751,7 +2751,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 556
   },
   {
-  id: 566,
+  id: 487,
   category: "setsubi_kougu",
   source: "jac-ch6",
   furi: "ねっこうせいもるたる vs きこうせいもるたる",
@@ -2763,7 +2763,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 557
   },
   {
-  id: 567,
+  id: 488,
   category: "setsubi_kougu",
   source: "jac-ch6",
   furi: "れんがずみのろくげんそく",
@@ -2775,7 +2775,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 558
   },
   {
-  id: 568,
+  id: 489,
   category: "shoubou",
   source: "jac-ch6",
   furi: "こすいそうち",
@@ -2787,7 +2787,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 559
   },
   {
-  id: 569,
+  id: 490,
   category: "shoubou",
   source: "jac-ch6",
   furi: "すいおんじょうしょうぼうしようにがしはいかん",
@@ -2799,7 +2799,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 560
   },
   {
-  id: 570,
+  id: 491,
   category: "shoubou",
   source: "jac-ch6",
   furi: "せいのうしけんそうちしょうぼうぽんぷ",
@@ -2811,7 +2811,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 561
   },
   {
-  id: 571,
+  id: 492,
   category: "shoubou",
   source: "jac-ch6",
   furi: "ないめんらいにんぐこうかんのしようきんし",
@@ -2823,7 +2823,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 562
   },
   {
-  id: 639,
+  id: 550,
   category: "haikan",
   source: "jac-ch3",
   furi: "ゑるぽいんとこうほうちかすいはいすいさいだいじゅめえとる",
@@ -2835,7 +2835,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 630
   },
   {
-  id: 646,
+  id: 552,
   category: "setsubi_kougu",
   source: "jac-ch3",
   furi: "とそうこうじのさんこうほう",
@@ -2847,7 +2847,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 637
   },
   {
-  id: 659,
+  id: 558,
   category: "setsubi_kougu",
   source: "jac-ch3",
   furi: "けんちくばんきんこうじのだくとさんしゅるいはいえんくうちょうはいき",
@@ -2859,7 +2859,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 650
   },
   {
-  id: 679,
+  id: 568,
   category: "haikan",
   source: "jac-ch4",
   furi: "みずかえかまばやまずなみずしめまんぼう",
@@ -2871,7 +2871,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 670
   },
   {
-  id: 694,
+  id: 578,
   category: "denki",
   source: "jac-ch4",
   furi: "せつぞくはいせんりかくぜつえんかんつうかんろ",
@@ -2883,7 +2883,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 685
   },
   {
-  id: 695,
+  id: 579,
   category: "denki",
   source: "jac-ch4",
   furi: "まいせつさんしきかくうはいせん",
@@ -2895,7 +2895,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 686
   },
   {
-  id: 696,
+  id: 580,
   category: "denki",
   source: "jac-ch4",
   furi: "はいかんするつうせんすらぶはいかんいんぺいろしゅつふせる",
@@ -2907,7 +2907,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 687
   },
   {
-  id: 697,
+  id: 581,
   category: "denki",
   source: "jac-ch4",
   furi: "かんでんろうでんせっちひらいしんひらいき",
@@ -2919,7 +2919,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 688
   },
   {
-  id: 698,
+  id: 582,
   category: "denki",
   source: "jac-ch4",
   furi: "たんらくていあつこうあつとくべつこうあつあっちゃくちょくりゅうこうりゅう",
@@ -2931,7 +2931,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 689
   },
   {
-  id: 699,
+  id: 583,
   category: "denki",
   source: "jac-ch4",
   furi: "てんめつひふくいちじがわにじがわまししめまあきんぐつうでん",
@@ -2943,7 +2943,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 690
   },
   {
-  id: 700,
+  id: 584,
   category: "denki",
   source: "jac-ch4",
   furi: "あたるかしめるしこむふるせるとぶおちるぱい",
@@ -2955,7 +2955,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 691
   },
   {
-  id: 701,
+  id: 585,
   category: "haikan",
   source: "jac-ch4",
   furi: "くうちょうおんどしつどかんきはいえんえいせい",
@@ -2967,7 +2967,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 692
   },
   {
-  id: 702,
+  id: 586,
   category: "haikan",
   source: "jac-ch4",
   furi: "しにみずばりぎゃくりゅうぶんきしんしゅくじゃばららいにんぐ",
@@ -2979,7 +2979,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 693
   },
   {
-  id: 703,
+  id: 587,
   category: "haikan",
   source: "jac-ch4",
   furi: "ろうえいしけんすいあつしけんまんすいしけんこうばいおすいざつはいすい",
@@ -2991,7 +2991,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 694
   },
   {
-  id: 704,
+  id: 588,
   category: "haikan",
   source: "jac-ch4",
   furi: "しんさきつらせつびようご",
@@ -3003,7 +3003,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 695
   },
   {
-  id: 714,
+  id: 596,
   category: "haikan",
   source: "jac-ch3",
   furi: "はいかんこうじがいよう",
@@ -3015,7 +3015,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 705
   },
   {
-  id: 716,
+  id: 597,
   category: "denki",
   source: "jac-ch5",
   furi: "かでんりゅうしゃだんき / ぶれえかあ / NFB",
@@ -3027,7 +3027,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 707
   },
   {
-  id: 719,
+  id: 600,
   category: "denki",
   source: "jac-ch5",
   furi: "はさみ・かったあないふ",
@@ -3039,7 +3039,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 710
   },
   {
-  id: 722,
+  id: 603,
   category: "haikan",
   source: "jac-ch5",
   furi: "ぐらすうおる / ろっくうおる / ぽりすちれんふぉおむ",
@@ -3051,7 +3051,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 713
   },
   {
-  id: 723,
+  id: 604,
   category: "haikan",
   source: "jac-ch6",
   furi: "ほおんこうじのばしょべつしあげしゅるい",
@@ -3063,7 +3063,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 714
   },
   {
-  id: 724,
+  id: 605,
   category: "haikan",
   source: "jac-ch6",
   furi: "だくとのほおんほれいこうじ",
@@ -3075,7 +3075,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 715
   },
   {
-  id: 725,
+  id: 606,
   category: "haikan",
   source: "jac-ch6",
   furi: "さしこみつぎてこうほう（まるだくと）",
@@ -3087,7 +3087,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 716
   },
   {
-  id: 726,
+  id: 607,
   category: "haikan",
   source: "jac-ch6",
   furi: "がすようせつのさんしゅるい",
@@ -3099,7 +3099,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 717
   },
   {
-  id: 727,
+  id: 608,
   category: "haikan",
   source: "jac-ch6",
   furi: "こうしつえんかびにるかん（せっちゃくざいせつごう）",
@@ -3111,7 +3111,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 718
   },
   {
-  id: 728,
+  id: 609,
   category: "haikan",
   source: "jac-ch6",
   furi: "こうしつえんかびにるかんのめんとり",
@@ -3123,7 +3123,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 719
   },
   {
-  id: 729,
+  id: 610,
   category: "haikan",
   source: "jac-ch6",
   furi: "ねじこみはいかん（つうすいはようじょうご）",
@@ -3135,7 +3135,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 720
   },
   {
-  id: 730,
+  id: 611,
   category: "denki",
   source: "jac-ch6",
   furi: "きゅうびくる（ろくせんろっぴゃっぼるとへんかん）",
@@ -3147,7 +3147,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 721
   },
   {
-  id: 731,
+  id: 612,
   category: "haikan",
   source: "jac-ch6",
   furi: "EFせつごう（いんじけえたあかくにん）",
@@ -3159,7 +3159,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 722
   },
   {
-  id: 732,
+  id: 613,
   category: "haikan",
   source: "jac-ch6",
   furi: "えせつごうばあこおどりいだあでゆうちゃくでえたよみこみ",
@@ -3171,7 +3171,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 723
   },
   {
-  id: 733,
+  id: 614,
   category: "tsushin",
   source: "jac-ch6",
   furi: "まんどれるつうかしけん",
@@ -3183,7 +3183,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 724
   },
   {
-  id: 734,
+  id: 615,
   category: "haikan",
   source: "jac-ch6",
   furi: "GXがただくたいるちゅうてつかんのまがりはいかん",
@@ -3195,7 +3195,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 725
   },
   {
-  id: 735,
+  id: 616,
   category: "tsushin",
   source: "jac-ch6",
   furi: "くろおじゃあのいろわけ",
@@ -3207,7 +3207,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 726
   },
   {
-  id: 736,
+  id: 617,
   category: "tsushin",
   source: "jac-ch6",
   furi: "でんせんきょうどうこう",
@@ -3219,7 +3219,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 727
   },
   {
-  id: 737,
+  id: 618,
   category: "tsushin",
   source: "jac-ch6",
   furi: "でんちゅうをたてるてじゅんすてっぷ",
@@ -3231,7 +3231,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 728
   },
   {
-  id: 738,
+  id: 619,
   category: "haikan",
   source: "jac-ch6",
   furi: "べんだあまげかこう（さいしょうまげはんけい）",
@@ -3243,7 +3243,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 729
   },
   {
-  id: 739,
+  id: 620,
   category: "haikan",
   source: "jac-ch6",
   furi: "ろうづけごのかくにん",
@@ -3255,7 +3255,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 730
   },
   {
-  id: 754,
+  id: 631,
   category: "haikan",
   source: "vocab-general",
   furi: "とうけつ",
@@ -3267,7 +3267,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 745
   },
   {
-  id: 756,
+  id: 632,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "しんくうびき",
@@ -3279,7 +3279,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 746
   },
   {
-  id: 764,
+  id: 638,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "たわみ",
@@ -3290,7 +3290,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 752
   },
   {
-  id: 766,
+  id: 639,
   category: "haikan",
   source: "vocab-general",
   furi: "りゅうりょう",
@@ -3302,7 +3302,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 753
   },
   {
-  id: 772,
+  id: 644,
   category: "hoon",
   source: "vocab-general",
   furi: "あぶら",
@@ -3314,7 +3314,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 758
   },
   {
-  id: 794,
+  id: 666,
   category: "haikan",
   source: "vocab-general",
   furi: "きろく",
@@ -3326,7 +3326,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 780
   },
   {
-  id: 818,
+  id: 688,
   category: "denki",
   source: "vocab-supplementary",
   furi: "しがいせん",
@@ -3337,7 +3337,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 802
   },
   {
-  id: 820,
+  id: 690,
   category: "denki",
   source: "vocab-supplementary",
   furi: "ねつがこもる",
@@ -3348,7 +3348,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 804
   },
   {
-  id: 888,
+  id: 758,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "たばねる",
@@ -3360,7 +3360,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 872
   },
   {
-  id: 960,
+  id: 819,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "どかぶり",
@@ -3371,7 +3371,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 944
   },
   {
-  id: 961,
+  id: 820,
   category: "haikan",
   source: "vocab-general",
   furi: "ぼうせい",
@@ -3383,7 +3383,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 945
   },
   {
-  id: 998,
+  id: 851,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "おんすいかん",
@@ -3394,7 +3394,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 978
   },
   {
-  id: 999,
+  id: 852,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かいへいべん",
@@ -3406,7 +3406,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 979
   },
   {
-  id: 1000,
+  id: 853,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "はいすいろ",
@@ -3417,7 +3417,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 980
   },
   {
-  id: 1001,
+  id: 854,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "きゅうすいこう",
@@ -3428,7 +3428,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 981
   },
   {
-  id: 1003,
+  id: 855,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ちちゅうかん",
@@ -3439,7 +3439,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 982
   },
   {
-  id: 1004,
+  id: 856,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "てんじょうかん",
@@ -3450,7 +3450,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 983
   },
   {
-  id: 1005,
+  id: 857,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "しすいせん",
@@ -3461,7 +3461,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 984
   },
   {
-  id: 1008,
+  id: 860,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かんきせん",
@@ -3473,7 +3473,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 987
   },
   {
-  id: 1009,
+  id: 861,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "はいきこう",
@@ -3484,7 +3484,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 988
   },
   {
-  id: 1014,
+  id: 866,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "うすいかん",
@@ -3495,7 +3495,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 993
   },
   {
-  id: 1015,
+  id: 867,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "れいきゃくとう",
@@ -3506,7 +3506,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 994
   },
   {
-  id: 1016,
+  id: 868,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かんきこう",
@@ -3517,7 +3517,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 995
   },
   {
-  id: 1018,
+  id: 870,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "れいふうかん",
@@ -3528,7 +3528,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 997
   },
   {
-  id: 1019,
+  id: 871,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "おんぷうかん",
@@ -3539,7 +3539,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 998
   },
   {
-  id: 1023,
+  id: 875,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ぐりる",
@@ -3550,7 +3550,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1002
   },
   {
-  id: 1025,
+  id: 877,
   category: "setsubi_kougu",
   source: "vocab-general",
   furi: "しゃこ",
@@ -3561,7 +3561,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1004
   },
   {
-  id: 1029,
+  id: 881,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "さしくちのそうにゅう",
@@ -3572,7 +3572,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1008
   },
   {
-  id: 1033,
+  id: 885,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ゆうちゃくめんのせいそう",
@@ -3583,7 +3583,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1012
   },
   {
-  id: 1037,
+  id: 889,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "すいどうはいすいようぽりえちれんかん",
@@ -3594,7 +3594,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1016
   },
   {
-  id: 1040,
+  id: 892,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かくだくとのせつぞく",
@@ -3605,7 +3605,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1019
   },
   {
-  id: 1049,
+  id: 900,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "おんすいき",
@@ -3616,7 +3616,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1028
   },
   {
-  id: 1050,
+  id: 901,
   category: "haikan",
   source: "vocab-general",
   furi: "ふうかん",
@@ -3627,7 +3627,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1029
   },
   {
-  id: 1059,
+  id: 910,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かりつけようせつ",
@@ -3638,7 +3638,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1038
   },
   {
-  id: 1060,
+  id: 911,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かいさきかこう",
@@ -3649,7 +3649,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1039
   },
   {
-  id: 1061,
+  id: 912,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "てまげかこう",
@@ -3660,7 +3660,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1040
   },
   {
-  id: 1062,
+  id: 913,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "べんだーまげかこう",
@@ -3671,7 +3671,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1041
   },
   {
-  id: 1064,
+  id: 915,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かんとつぎてのそうにゅう・こてい",
@@ -3682,7 +3682,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1043
   },
   {
-  id: 1065,
+  id: 916,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ちじょうかん",
@@ -3693,7 +3693,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1044
   },
   {
-  id: 1066,
+  id: 917,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "れいきゃくき",
@@ -3704,7 +3704,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1045
   },
   {
-  id: 1067,
+  id: 918,
   category: "denki",
   source: "vocab-supplementary",
   furi: "てこうぐ",
@@ -3715,7 +3715,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1046
   },
   {
-  id: 1068,
+  id: 919,
   category: "denki",
   source: "vocab-supplementary",
   furi: "さんろスイッチ",
@@ -3726,7 +3726,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1047
   },
   {
-  id: 1069,
+  id: 920,
   category: "denki",
   source: "vocab-supplementary",
   furi: "よんろスイッチ",
@@ -3737,7 +3737,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1048
   },
   {
-  id: 1070,
+  id: 921,
   category: "denki",
   source: "vocab-supplementary",
   furi: "たんきょくスイッチ",
@@ -3748,7 +3748,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1049
   },
   {
-  id: 1071,
+  id: 922,
   category: "denki",
   source: "vocab-supplementary",
   furi: "テープまき",
@@ -3759,7 +3759,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1050
   },
   {
-  id: 1074,
+  id: 925,
   category: "denki",
   source: "vocab-general",
   furi: "しせん",
@@ -3770,7 +3770,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1053
   },
   {
-  id: 1075,
+  id: 926,
   category: "denki",
   source: "vocab-supplementary",
   furi: "きゅうきファン",
@@ -3781,7 +3781,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1054
   },
   {
-  id: 1076,
+  id: 927,
   category: "denki",
   source: "vocab-supplementary",
   furi: "ぼうしんゴム",
@@ -3792,7 +3792,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1055
   },
   {
-  id: 1077,
+  id: 928,
   category: "denki",
   source: "vocab-supplementary",
   furi: "きゅうおんざい",
@@ -3803,7 +3803,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1056
   },
   {
-  id: 1078,
+  id: 929,
   category: "denki",
   source: "vocab-supplementary",
   furi: "くうきせいじょうき",
@@ -3814,7 +3814,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1057
   },
   {
-  id: 1079,
+  id: 930,
   category: "denki",
   source: "vocab-supplementary",
   furi: "さぎょうとう",
@@ -3825,7 +3825,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1058
   },
   {
-  id: 1080,
+  id: 931,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "そうすいポンプ",
@@ -3836,7 +3836,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1059
   },
   {
-  id: 1083,
+  id: 934,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "おんすいじゅんかんポンプ",
@@ -3847,7 +3847,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1062
   },
   {
-  id: 1084,
+  id: 935,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ポリブテンかん",
@@ -3858,7 +3858,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1063
   },
   {
-  id: 1085,
+  id: 936,
   category: "haikan",
   source: "vocab-general",
   furi: "なまりかん",
@@ -3869,7 +3869,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1064
   },
   {
-  id: 1087,
+  id: 938,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "パイプバンド",
@@ -3880,7 +3880,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1066
   },
   {
-  id: 1100,
+  id: 951,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "さどうしきかんちき",
@@ -3891,7 +3891,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1079
   },
   {
-  id: 1101,
+  id: 952,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "ていおんしきかんちき",
@@ -3902,7 +3902,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1080
   },
   {
-  id: 1102,
+  id: 953,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "こうでんしきかんちき",
@@ -3913,7 +3913,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1081
   },
   {
-  id: 1103,
+  id: 954,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "いおんかしきかんちき",
@@ -3924,7 +3924,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1082
   },
   {
-  id: 1104,
+  id: 955,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "じどうかさいほうちせつび",
@@ -3935,7 +3935,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1083
   },
   {
-  id: 1105,
+  id: 956,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "かんこうき",
@@ -3946,7 +3946,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1084
   },
   {
-  id: 1107,
+  id: 958,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "きゅうじょぶくろ",
@@ -3957,7 +3957,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1086
   },
   {
-  id: 1108,
+  id: 959,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "ぼうかど",
@@ -3968,7 +3968,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1087
   },
   {
-  id: 1110,
+  id: 961,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "れんけつさんすいせつび",
@@ -3979,7 +3979,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1089
   },
   {
-  id: 1111,
+  id: 962,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "れんけつそうすいかん",
@@ -3990,7 +3990,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1090
   },
   {
-  id: 1113,
+  id: 964,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "ひじょうとう",
@@ -4001,7 +4001,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1092
   },
   {
-  id: 1114,
+  id: 965,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "ゆうどうとう",
@@ -4012,7 +4012,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1093
   },
   {
-  id: 1117,
+  id: 968,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "はいえんせつび",
@@ -4023,7 +4023,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1096
   },
   {
-  id: 1118,
+  id: 969,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "ふんまつしょうかき",
@@ -4034,7 +4034,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1097
   },
   {
-  id: 1120,
+  id: 971,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "ぼうかくかく",
@@ -4045,7 +4045,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1099
   },
   {
-  id: 1121,
+  id: 972,
   category: "shoubou",
   source: "vocab-supplementary",
   furi: "たいかこうぞう",
@@ -4056,7 +4056,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1100
   },
   {
-  id: 1123,
+  id: 974,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "びーずほうぽりすちれんふぉーむ",
@@ -4067,7 +4067,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1102
   },
   {
-  id: 1124,
+  id: 975,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "おしだしほうぽりすちれんふぉーむ",
@@ -4078,7 +4078,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1103
   },
   {
-  id: 1126,
+  id: 977,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ふぇのーるふぉーむ",
@@ -4089,7 +4089,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1105
   },
   {
-  id: 1130,
+  id: 981,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ぼうしつそう",
@@ -4101,7 +4101,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1109
   },
   {
-  id: 1131,
+  id: 982,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ぼうろこうじ",
@@ -4113,7 +4113,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1110
   },
   {
-  id: 1132,
+  id: 983,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "しんしゅくつぎてかばー",
@@ -4125,7 +4125,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1111
   },
   {
-  id: 1135,
+  id: 986,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "あえんてっせん",
@@ -4137,7 +4137,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1114
   },
   {
-  id: 1136,
+  id: 987,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ねつでんどうりつ",
@@ -4148,7 +4148,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1115
   },
   {
-  id: 1137,
+  id: 988,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ねつていこう",
@@ -4159,7 +4159,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1116
   },
   {
-  id: 1138,
+  id: 989,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ねつかんりゅうりつ",
@@ -4170,7 +4170,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1117
   },
   {
-  id: 1139,
+  id: 990,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ほおんあつさけいさん",
@@ -4181,7 +4181,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1118
   },
   {
-  id: 1140,
+  id: 991,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "けつろぼうし",
@@ -4192,7 +4192,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1119
   },
   {
-  id: 1141,
+  id: 992,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "たいねつおんど",
@@ -4203,7 +4203,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1120
   },
   {
-  id: 1142,
+  id: 993,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "きゅうすいりつ",
@@ -4214,7 +4214,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1121
   },
   {
-  id: 1143,
+  id: 994,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ほかんつうかんすいしょり",
@@ -4225,7 +4225,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1122
   },
   {
-  id: 1144,
+  id: 995,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ほおんせこうてじゅん",
@@ -4236,7 +4236,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1123
   },
   {
-  id: 1145,
+  id: 996,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ぽりえちれんふぉーむ",
@@ -4247,7 +4247,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1124
   },
   {
-  id: 1148,
+  id: 999,
   category: "denki",
   source: "vocab-supplementary",
   furi: "へんあつき",
@@ -4258,7 +4258,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1127
   },
   {
-  id: 1149,
+  id: 1000,
   category: "denki",
   source: "vocab-supplementary",
   furi: "じゃんくしょんぼっくす",
@@ -4269,7 +4269,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1128
   },
   {
-  id: 1150,
+  id: 1001,
   category: "denki",
   source: "vocab-supplementary",
   furi: "せっちていこう",
@@ -4280,7 +4280,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1129
   },
   {
-  id: 1151,
+  id: 1002,
   category: "denki",
   source: "vocab-supplementary",
   furi: "ぶっしんぐ",
@@ -4291,7 +4291,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1130
   },
   {
-  id: 1152,
+  id: 1003,
   category: "denki",
   source: "vocab-supplementary",
   furi: "でんりょくりょうけい",
@@ -4302,7 +4302,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1131
   },
   {
-  id: 1153,
+  id: 1004,
   category: "denki",
   source: "vocab-general",
   furi: "かんせん",
@@ -4313,7 +4313,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1132
   },
   {
-  id: 1154,
+  id: 1005,
   category: "denki",
   source: "vocab-supplementary",
   furi: "ぶんきかいろ",
@@ -4324,7 +4324,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1133
   },
   {
-  id: 1156,
+  id: 1007,
   category: "denki",
   source: "vocab-general",
   furi: "さんそう",
@@ -4335,7 +4335,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1135
   },
   {
-  id: 1158,
+  id: 1009,
   category: "denki",
   source: "vocab-supplementary",
   furi: "ぜつえんていこうそくてい",
@@ -4346,7 +4346,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1137
   },
   {
-  id: 1159,
+  id: 1010,
   category: "denki",
   source: "vocab-general",
   furi: "がいし",
@@ -4357,7 +4357,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1138
   },
   {
-  id: 1160,
+  id: 1011,
   category: "denki",
   source: "vocab-supplementary",
   furi: "はいせんようしゃだんき",
@@ -4368,7 +4368,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1139
   },
   {
-  id: 1161,
+  id: 1012,
   category: "denki",
   source: "vocab-supplementary",
   furi: "けーぶるとれい",
@@ -4379,7 +4379,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1140
   },
   {
-  id: 1165,
+  id: 1015,
   category: "denki",
   source: "vocab-supplementary",
   furi: "せっちこうじのしゅるい",
@@ -4390,7 +4390,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1143
   },
   {
-  id: 1167,
+  id: 1017,
   category: "denki",
   source: "vocab-supplementary",
   furi: "あーすくらんぷ",
@@ -4401,7 +4401,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1145
   },
   {
-  id: 1168,
+  id: 1018,
   category: "denki",
   source: "vocab-supplementary",
   furi: "のっくあうと",
@@ -4412,7 +4412,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1146
   },
   {
-  id: 1169,
+  id: 1019,
   category: "denki",
   source: "vocab-supplementary",
   furi: "でんせんのしきべつしょく",
@@ -4423,7 +4423,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1147
   },
   {
-  id: 1170,
+  id: 1020,
   category: "denki",
   source: "vocab-supplementary",
   furi: "ひきこみせん",
@@ -4434,7 +4434,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1148
   },
   {
-  id: 1172,
+  id: 1022,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "しきりべん",
@@ -4445,7 +4445,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1150
   },
   {
-  id: 1173,
+  id: 1023,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "たまがたべん",
@@ -4456,7 +4456,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1151
   },
   {
-  id: 1174,
+  id: 1024,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ボールバルブ",
@@ -4468,7 +4468,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1152
   },
   {
-  id: 1175,
+  id: 1025,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "バタフライバルブ",
@@ -4479,7 +4479,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1153
   },
   {
-  id: 1176,
+  id: 1026,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ぎゃくしべん",
@@ -4491,7 +4491,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1154
   },
   {
-  id: 1177,
+  id: 1027,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "あんぜんべん",
@@ -4502,7 +4502,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1155
   },
   {
-  id: 1181,
+  id: 1031,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ストレーナー",
@@ -4514,7 +4514,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1159
   },
   {
-  id: 1182,
+  id: 1032,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "レデューサー",
@@ -4525,7 +4525,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1160
   },
   {
-  id: 1183,
+  id: 1033,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ユニオン",
@@ -4536,7 +4536,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1161
   },
   {
-  id: 1184,
+  id: 1034,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ゆーボルト",
@@ -4547,7 +4547,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1162
   },
   {
-  id: 1185,
+  id: 1035,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "つりバンド",
@@ -4558,7 +4558,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1163
   },
   {
-  id: 1186,
+  id: 1036,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ぼうしんつぎて",
@@ -4569,7 +4569,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1164
   },
   {
-  id: 1187,
+  id: 1037,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かとうつぎて",
@@ -4580,7 +4580,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1165
   },
   {
-  id: 1188,
+  id: 1038,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "つうきかん",
@@ -4591,7 +4591,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1166
   },
   {
-  id: 1194,
+  id: 1044,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "はいかんず",
@@ -4602,7 +4602,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1172
   },
   {
-  id: 1195,
+  id: 1045,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "かんしじかなぐ",
@@ -4613,7 +4613,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1173
   },
   {
-  id: 1196,
+  id: 1046,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "すいげきさよう",
@@ -4624,7 +4624,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1174
   },
   {
-  id: 1197,
+  id: 1047,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "おーえぬゆー（ひかりかいせんしゅうたんそうち）",
@@ -4635,7 +4635,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1175
   },
   {
-  id: 1198,
+  id: 1048,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "おーえるてぃー（ひかりかにゅうしゃせんしゅうたんそうち）",
@@ -4646,7 +4646,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1176
   },
   {
-  id: 1199,
+  id: 1049,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "しんぐるもーどふぁいばー",
@@ -4657,7 +4657,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1177
   },
   {
-  id: 1200,
+  id: 1050,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "まるちもーどふぁいばー",
@@ -4668,7 +4668,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1178
   },
   {
-  id: 1203,
+  id: 1053,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "えすてぃーこねくた",
@@ -4679,7 +4679,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1181
   },
   {
-  id: 1204,
+  id: 1054,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "はんしゃそんしつ",
@@ -4690,7 +4690,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1182
   },
   {
-  id: 1205,
+  id: 1055,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "そうにゅうそんしつ",
@@ -4701,7 +4701,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1183
   },
   {
-  id: 1206,
+  id: 1056,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "でっどぞーん",
@@ -4712,7 +4712,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1184
   },
   {
-  id: 1207,
+  id: 1057,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "ぱっちぱねる",
@@ -4723,7 +4723,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1185
   },
   {
-  id: 1208,
+  id: 1058,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "えすてぃーぴーけーぶる",
@@ -4734,7 +4734,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1186
   },
   {
-  id: 1211,
+  id: 1061,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "あいでぃーえふ（ちゅうかんはいせんばん）",
@@ -4745,7 +4745,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1189
   },
   {
-  id: 1212,
+  id: 1062,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "せっちたんしばん",
@@ -4756,7 +4756,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1190
   },
   {
-  id: 1214,
+  id: 1064,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "たんしだい",
@@ -4767,7 +4767,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1192
   },
   {
-  id: 1215,
+  id: 1065,
   category: "tsushin",
   source: "vocab-general",
   furi: "せいたん",
@@ -4779,7 +4779,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1193
   },
   {
-  id: 1216,
+  id: 1066,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "しんせんたいしょう",
@@ -4790,7 +4790,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1194
   },
   {
-  id: 1217,
+  id: 1067,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "ひかりけーぶるのまげはんけい",
@@ -4801,7 +4801,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1195
   },
   {
-  id: 1218,
+  id: 1068,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "かてごりーごいーけーぶる",
@@ -4812,7 +4812,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1196
   },
   {
-  id: 1219,
+  id: 1069,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "かてごりーろくけーぶる",
@@ -4823,7 +4823,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1197
   },
   {
-  id: 1220,
+  id: 1070,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "ひかりすぷりったー",
@@ -4834,7 +4834,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1198
   },
   {
-  id: 1221,
+  id: 1071,
   category: "tsushin",
   source: "vocab-supplementary",
   furi: "ぽん（じゅどうひかりねっとわーく）",
@@ -4845,7 +4845,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1199
   },
   {
-  id: 1276,
+  id: 1108,
   category: "denki",
   source: "vocab-supplementary",
   furi: "フリーアクセスフロア",
@@ -4856,7 +4856,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1254
   },
   {
-  id: 1294,
+  id: 1118,
   category: "hoon",
   source: "vocab-supplementary",
   furi: "ロックウールきゅうおんばん",
@@ -4867,7 +4867,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1272
   },
   {
-  id: 1300,
+  id: 1122,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ぱいぷばいす",
@@ -4879,7 +4879,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1278
   },
   {
-  id: 1301,
+  id: 1123,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ぱいぷべんだー",
@@ -4891,7 +4891,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1279
   },
   {
-  id: 1303,
+  id: 1125,
   category: "denki",
   source: "vocab-supplementary",
   furi: "あっちゃくこうぐ",
@@ -4903,7 +4903,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1281
   },
   {
-  id: 1308,
+  id: 1130,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ほーるそー",
@@ -4914,7 +4914,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1286
   },
   {
-  id: 1318,
+  id: 1140,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "ぼうばくこうぐ",
@@ -4925,7 +4925,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1296
   },
   {
-  id: 1373,
+  id: 1189,
   category: "haikan",
   source: "vocab-supplementary",
   furi: "もれしけん",
@@ -4936,7 +4936,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1345
   },
   {
-  id: 1439,
+  id: 1254,
   category: "setsubi_kougu",
   source: "text3l",
   furi: "けんせつこうじのさんくぶん",
@@ -4948,7 +4948,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1410
   },
   {
-  id: 1440,
+  id: 1255,
   category: "hoon",
   source: "text3l",
   furi: "ふきつけうれたんだんねつこうじ",
@@ -4960,7 +4960,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1411
   },
   {
-  id: 1441,
+  id: 1256,
   category: "hoon",
   source: "text3l",
   furi: "うれたんだんねつしこうかんり",
@@ -4972,7 +4972,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1412
   },
   {
-  id: 1442,
+  id: 1257,
   category: "hoon",
   source: "text3l",
   furi: "ぼうろこうじ",
@@ -4983,7 +4983,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1413
   },
   {
-  id: 1443,
+  id: 1258,
   category: "hoon",
   source: "text3l",
   furi: "ほおんほれいこうじのあんぜんきのう",
@@ -4995,7 +4995,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1414
   },
   {
-  id: 1444,
+  id: 1259,
   category: "haikan",
   source: "text3l",
   furi: "すいしんとんねるこうじ",
@@ -5007,7 +5007,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1415
   },
   {
-  id: 1445,
+  id: 1260,
   category: "haikan",
   source: "text3l",
   furi: "すいしんかんのしゅるい",
@@ -5018,7 +5018,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1416
   },
   {
-  id: 1446,
+  id: 1261,
   category: "haikan",
   source: "text3l",
   furi: "はいかんこうじのきほんぎのう",
@@ -5030,7 +5030,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1417
   },
   {
-  id: 1447,
+  id: 1262,
   category: "haikan",
   source: "text3l",
   furi: "じゅすいそう",
@@ -5042,7 +5042,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1418
   },
   {
-  id: 1448,
+  id: 1263,
   category: "haikan",
   source: "text3l",
   furi: "つうきせつび",
@@ -5053,7 +5053,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1419
   },
   {
-  id: 1449,
+  id: 1264,
   category: "hoon",
   source: "text3l",
   furi: "うれたんぼうすいこうじ",
@@ -5064,7 +5064,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1420
   },
   {
-  id: 1450,
+  id: 1265,
   category: "hoon",
   source: "text3l",
   furi: "FRPぼうすいこうじ",
@@ -5076,7 +5076,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1421
   },
   {
-  id: 1451,
+  id: 1266,
   category: "hoon",
   source: "text3l",
   furi: "しーりんぐぼうすいこうじ",
@@ -5087,7 +5087,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1422
   },
   {
-  id: 1452,
+  id: 1267,
   category: "haikan",
   source: "text3l",
   furi: "さくせいこうじのしゅるい",
@@ -5099,7 +5099,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1423
   },
   {
-  id: 1453,
+  id: 1268,
   category: "tsushin",
   source: "text3l",
   furi: "でんきつうしんこうじのつうしんどぼく",
@@ -5111,7 +5111,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1424
   },
   {
-  id: 1454,
+  id: 1269,
   category: "haikan",
   source: "text3l",
   furi: "じょうすいどうこうじのながれ",
@@ -5123,7 +5123,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1425
   },
   {
-  id: 1455,
+  id: 1270,
   category: "haikan",
   source: "text3l",
   furi: "げすいどうこうじのながれ",
@@ -5135,7 +5135,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1426
   },
   {
-  id: 1456,
+  id: 1271,
   category: "shoubou",
   source: "text3l",
   furi: "しょうぼうほうによるせっちぎむ",
@@ -5148,7 +5148,7 @@ export const CARDS_LIFELINE = [
   },
 
   {
-  id: 751,
+  id: 628,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "はいかん",
@@ -5160,7 +5160,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 742
   },
   {
-  id: 752,
+  id: 629,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "まいせつ",
@@ -5171,7 +5171,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 743
   },
   {
-  id: 753,
+  id: 630,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ちか",
@@ -5182,7 +5182,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 744
   },
   {
-  id: 757,
+  id: 633,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "かんたん",
@@ -5194,7 +5194,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 747
   },
   {
-  id: 758,
+  id: 634,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "がすはいかん",
@@ -5205,7 +5205,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 748
   },
   {
-  id: 759,
+  id: 635,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "せつぞく",
@@ -5216,7 +5216,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 749
   },
   {
-  id: 760,
+  id: 636,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "せつぞくぶ",
@@ -5227,7 +5227,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 750
   },
   {
-  id: 763,
+  id: 637,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "かんかく",
@@ -5238,7 +5238,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 751
   },
   {
-  id: 767,
+  id: 640,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "ほおんざい",
@@ -5249,7 +5249,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 754
   },
   {
-  id: 768,
+  id: 641,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "だんねつざい",
@@ -5260,7 +5260,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 755
   },
   {
-  id: 770,
+  id: 642,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "しーりんぐざい",
@@ -5271,7 +5271,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 756
   },
   {
-  id: 771,
+  id: 643,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "ぜつえんてーぷ",
@@ -5282,7 +5282,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 757
   },
   {
-  id: 773,
+  id: 645,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "たいこうせい",
@@ -5293,7 +5293,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 759
   },
   {
-  id: 774,
+  id: 646,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "あつさ",
@@ -5304,7 +5304,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 760
   },
   {
-  id: 810,
+  id: 681,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "せんじょう",
@@ -5315,7 +5315,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 795
   },
   {
-  id: 815,
+  id: 685,
   category: "denki",
   source: "vocab-lifeline",
   furi: "でんきせつび",
@@ -5326,7 +5326,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 799
   },
   {
-  id: 816,
+  id: 686,
   category: "denki",
   source: "vocab-lifeline",
   furi: "でんどうこうぐ",
@@ -5337,7 +5337,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 800
   },
   {
-  id: 817,
+  id: 687,
   category: "denki",
   source: "vocab-lifeline",
   furi: "でんげん",
@@ -5348,7 +5348,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 801
   },
   {
-  id: 819,
+  id: 689,
   category: "denki",
   source: "vocab-lifeline",
   furi: "ふくすう",
@@ -5359,7 +5359,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 803
   },
   {
-  id: 833,
+  id: 703,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "ざいりょう",
@@ -5370,7 +5370,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 817
   },
   {
-  id: 834,
+  id: 704,
   category: "denki",
   source: "vocab-lifeline",
   furi: "こーど",
@@ -5381,7 +5381,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 818
   },
   {
-  id: 843,
+  id: 713,
   category: "denki",
   source: "vocab-lifeline",
   furi: "でんせん",
@@ -5392,7 +5392,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 827
   },
   {
-  id: 851,
+  id: 721,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ながれ",
@@ -5403,7 +5403,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 835
   },
   {
-  id: 873,
+  id: 743,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ひろい",
@@ -5414,7 +5414,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 857
   },
   {
-  id: 889,
+  id: 759,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "とおす",
@@ -5425,7 +5425,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 873
   },
   {
-  id: 890,
+  id: 760,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ひらく",
@@ -5436,7 +5436,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 874
   },
   {
-  id: 896,
+  id: 766,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "うめる",
@@ -5447,7 +5447,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 880
   },
   {
-  id: 908,
+  id: 778,
   category: "hoon",
   source: "vocab-lifeline",
   furi: "こうじ",
@@ -5458,7 +5458,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 892
   },
   {
-  id: 933,
+  id: 801,
   category: "haikan",
   source: "vocab-jac",
   furi: "うめもどし",
@@ -5470,7 +5470,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 917
   },
   {
-  id: 947,
+  id: 809,
   category: "haikan",
   source: "vocab-jac",
   furi: "しほこう",
@@ -5482,7 +5482,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 931
   },
   {
-  id: 956,
+  id: 815,
   category: "haikan",
   source: "vocab-jac",
   furi: "かんろ",
@@ -5493,7 +5493,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 940
   },
   {
-  id: 957,
+  id: 816,
   category: "haikan",
   source: "vocab-jac",
   furi: "まいせつぶつ",
@@ -5504,7 +5504,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 941
   },
   {
-  id: 958,
+  id: 817,
   category: "haikan",
   source: "vocab-jac",
   furi: "たてこう",
@@ -5515,7 +5515,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 942
   },
   {
-  id: 959,
+  id: 818,
   category: "haikan",
   source: "vocab-jac",
   furi: "きょうどうこう",
@@ -5526,7 +5526,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 943
   },
   {
-  id: 962,
+  id: 821,
   category: "denki",
   source: "vocab-jac",
   furi: "ぜつえん",
@@ -5537,7 +5537,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 946
   },
   {
-  id: 963,
+  id: 822,
   category: "denki",
   source: "vocab-jac",
   furi: "せっち",
@@ -5549,7 +5549,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 947
   },
   {
-  id: 964,
+  id: 823,
   category: "denki",
   source: "vocab-jac",
   furi: "ろうでん",
@@ -5560,7 +5560,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 948
   },
   {
-  id: 965,
+  id: 824,
   category: "denki",
   source: "vocab-jac",
   furi: "たんらく",
@@ -5571,7 +5571,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 949
   },
   {
-  id: 988,
+  id: 845,
   category: "haikan",
   source: "vocab-core",
   furi: "せつごう",
@@ -5582,7 +5582,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 972
   },
   {
-  id: 989,
+  id: 846,
   category: "denki",
   source: "vocab-core",
   furi: "でんちゅう",
@@ -5593,7 +5593,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 973
   },
   {
-  id: 990,
+  id: 847,
   category: "denki",
   source: "vocab-core",
   furi: "まんほーる",
@@ -5604,7 +5604,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 974
   },
   {
-  id: 1007,
+  id: 859,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "きゅうとうかん",
@@ -5615,7 +5615,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 986
   },
   {
-  id: 1012,
+  id: 864,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ぱいぷれんち",
@@ -5627,7 +5627,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 991
   },
   {
-  id: 1020,
+  id: 872,
   category: "denki",
   source: "vocab-lifeline",
   furi: "ちちゅうけーぶる",
@@ -5638,7 +5638,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 999
   },
   {
-  id: 1021,
+  id: 873,
   category: "denki",
   source: "vocab-lifeline",
   furi: "ちじょうけーぶる",
@@ -5649,7 +5649,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1000
   },
   {
-  id: 1022,
+  id: 874,
   category: "denki",
   source: "vocab-lifeline",
   furi: "かくうけーぶる",
@@ -5660,7 +5660,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1001
   },
   {
-  id: 1028,
+  id: 880,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "かつざいのとふ",
@@ -5671,7 +5671,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1007
   },
   {
-  id: 1030,
+  id: 882,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ごむわのせっと",
@@ -5682,7 +5682,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1009
   },
   {
-  id: 1031,
+  id: 883,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ごむわのいち",
@@ -5693,7 +5693,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1010
   },
   {
-  id: 1032,
+  id: 884,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "ゆうちゃくじゅんび",
@@ -5704,7 +5704,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1011
   },
   {
-  id: 1034,
+  id: 886,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "いーえふそけっと",
@@ -5715,7 +5715,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1013
   },
   {
-  id: 1035,
+  id: 887,
   category: "denki",
   source: "vocab-lifeline",
   furi: "こんとろーら",
@@ -5726,7 +5726,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1014
   },
   {
-  id: 1036,
+  id: 888,
   category: "denki",
   source: "vocab-lifeline",
   furi: "いんじけーた",
@@ -5737,7 +5737,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1015
   },
   {
-  id: 1041,
+  id: 893,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "だくとのせつぞくほうほう",
@@ -5748,7 +5748,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1020
   },
   {
-  id: 1042,
+  id: 894,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "あんぐるふらんじ",
@@ -5759,7 +5759,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1021
   },
   {
-  id: 1047,
+  id: 898,
   category: "denki",
   source: "vocab-lifeline",
   furi: "こうあつ・ていあつ",
@@ -5770,7 +5770,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1026
   },
   {
-  id: 1053,
+  id: 904,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "きゃっぷ",
@@ -5781,7 +5781,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1032
   },
   {
-  id: 1054,
+  id: 905,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "こっく",
@@ -5792,7 +5792,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1033
   },
   {
-  id: 1057,
+  id: 908,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "しんえんしゅうせい",
@@ -5803,7 +5803,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1036
   },
   {
-  id: 1058,
+  id: 909,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "かんかこう",
@@ -5814,7 +5814,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1037
   },
   {
-  id: 1072,
+  id: 923,
   category: "denki",
   source: "vocab-lifeline",
   furi: "ほごテープ",
@@ -5825,7 +5825,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1051
   },
   {
-  id: 1073,
+  id: 924,
   category: "denki",
   source: "vocab-lifeline",
   furi: "けっそくバンド",
@@ -5836,7 +5836,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1052
   },
   {
-  id: 1081,
+  id: 932,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "はいすいポンプ",
@@ -5847,7 +5847,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1060
   },
   {
-  id: 1082,
+  id: 933,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "れいきゃくポンプ",
@@ -5858,7 +5858,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1061
   },
   {
-  id: 1086,
+  id: 937,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "きゅうすいたんく",
@@ -5869,7 +5869,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1065
   },
   {
-  id: 1095,
+  id: 946,
   category: "tsushin",
   source: "vocab-lifeline",
   furi: "ひかりケーブルちちゅうはいせん",
@@ -5880,7 +5880,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1074
   },
   {
-  id: 1096,
+  id: 947,
   category: "haikan",
   source: "vocab-lifeline",
   furi: "かしつき",
@@ -5891,7 +5891,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1075
   },
   {
-  id: 1097,
+  id: 948,
   category: "shoubou",
   source: "vocab-exam",
   furi: "すぷりんくらーへっど",
@@ -5902,7 +5902,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1076
   },
   {
-  id: 1098,
+  id: 949,
   category: "shoubou",
   source: "vocab-exam",
   furi: "かいほうがたすぷりんくらー",
@@ -5913,7 +5913,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1077
   },
   {
-  id: 1099,
+  id: 950,
   category: "shoubou",
   source: "vocab-exam",
   furi: "へいさがたすぷりんくらー",
@@ -5924,7 +5924,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1078
   },
   {
-  id: 1106,
+  id: 957,
   category: "shoubou",
   source: "vocab-exam",
   furi: "ひなんはしご",
@@ -5935,7 +5935,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1085
   },
   {
-  id: 1109,
+  id: 960,
   category: "shoubou",
   source: "vocab-exam",
   furi: "ぼうかだんぱー",
@@ -5946,7 +5946,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1088
   },
   {
-  id: 1112,
+  id: 963,
   category: "shoubou",
   source: "vocab-exam",
   furi: "しょうかぽんぷ",
@@ -5957,7 +5957,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1091
   },
   {
-  id: 1115,
+  id: 966,
   category: "shoubou",
   source: "vocab-exam",
   furi: "はっしんき",
@@ -5968,7 +5968,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1094
   },
   {
-  id: 1116,
+  id: 967,
   category: "shoubou",
   source: "vocab-exam",
   furi: "じゅしんき",
@@ -5979,7 +5979,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1095
   },
   {
-  id: 1119,
+  id: 970,
   category: "shoubou",
   source: "vocab-exam",
   furi: "しょうぼうようすい",
@@ -5990,7 +5990,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1098
   },
   {
-  id: 1122,
+  id: 973,
   category: "hoon",
   source: "vocab-exam",
   furi: "ろっくうーる",
@@ -6001,7 +6001,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1101
   },
   {
-  id: 1125,
+  id: 976,
   category: "hoon",
   source: "vocab-exam",
   furi: "こうしつうれたんふぉーむ",
@@ -6012,7 +6012,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1104
   },
   {
-  id: 1127,
+  id: 978,
   category: "hoon",
   source: "vocab-exam",
   furi: "ぱーらいとほおんざい",
@@ -6023,7 +6023,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1106
   },
   {
-  id: 1128,
+  id: 979,
   category: "hoon",
   source: "vocab-exam",
   furi: "がいそうざい",
@@ -6034,7 +6034,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1107
   },
   {
-  id: 1129,
+  id: 980,
   category: "hoon",
   source: "vocab-exam",
   furi: "あるみがいそう",
@@ -6045,7 +6045,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1108
   },
   {
-  id: 1133,
+  id: 984,
   category: "hoon",
   source: "vocab-exam",
   furi: "ほおんとう",
@@ -6056,7 +6056,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1112
   },
   {
-  id: 1134,
+  id: 985,
   category: "hoon",
   source: "vocab-exam",
   furi: "ほおんたい",
@@ -6067,7 +6067,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1113
   },
   {
-  id: 1146,
+  id: 997,
   category: "hoon",
   source: "vocab-exam",
   furi: "ほれいこうじ",
@@ -6078,7 +6078,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1125
   },
   {
-  id: 1147,
+  id: 998,
   category: "denki",
   source: "vocab-exam",
   furi: "ぶんでんばん",
@@ -6089,7 +6089,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1126
   },
   {
-  id: 1155,
+  id: 1006,
   category: "denki",
   source: "vocab-exam",
   furi: "たんそう",
@@ -6100,7 +6100,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1134
   },
   {
-  id: 1157,
+  id: 1008,
   category: "denki",
   source: "vocab-exam",
   furi: "きょようでんりゅう",
@@ -6111,7 +6111,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1136
   },
   {
-  id: 1162,
+  id: 1013,
   category: "denki",
   source: "vocab-exam",
   furi: "ていあつ",
@@ -6122,7 +6122,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1141
   },
   {
-  id: 1163,
+  id: 1014,
   category: "denki",
   source: "vocab-exam",
   furi: "こうあつ",
@@ -6133,7 +6133,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1142
   },
   {
-  id: 1166,
+  id: 1016,
   category: "denki",
   source: "vocab-exam",
   furi: "せいぎょけーぶる",
@@ -6144,7 +6144,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1144
   },
   {
-  id: 1171,
+  id: 1021,
   category: "denki",
   source: "vocab-exam",
   furi: "でんきこうじし",
@@ -6155,7 +6155,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1149
   },
   {
-  id: 1178,
+  id: 1028,
   category: "haikan",
   source: "vocab-exam",
   furi: "フランジせつごう",
@@ -6166,7 +6166,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1156
   },
   {
-  id: 1179,
+  id: 1029,
   category: "haikan",
   source: "vocab-exam",
   furi: "ソケットせつごう",
@@ -6177,7 +6177,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1157
   },
   {
-  id: 1180,
+  id: 1030,
   category: "haikan",
   source: "vocab-exam",
   furi: "グルーブドせつごう",
@@ -6188,7 +6188,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1158
   },
   {
-  id: 1189,
+  id: 1039,
   category: "haikan",
   source: "vocab-exam",
   furi: "よびけい",
@@ -6199,7 +6199,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1167
   },
   {
-  id: 1190,
+  id: 1040,
   category: "haikan",
   source: "vocab-exam",
   furi: "きみつしけん",
@@ -6210,7 +6210,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1168
   },
   {
-  id: 1191,
+  id: 1041,
   category: "haikan",
   source: "vocab-exam",
   furi: "きゅうすいかん",
@@ -6221,7 +6221,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1169
   },
   {
-  id: 1192,
+  id: 1042,
   category: "haikan",
   source: "vocab-exam",
   furi: "はいすいかん",
@@ -6232,7 +6232,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1170
   },
   {
-  id: 1193,
+  id: 1043,
   category: "haikan",
   source: "vocab-exam",
   furi: "ニップル",
@@ -6243,7 +6243,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1171
   },
   {
-  id: 1201,
+  id: 1051,
   category: "tsushin",
   source: "vocab-exam",
   furi: "えすしーこねくた",
@@ -6254,7 +6254,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1179
   },
   {
-  id: 1202,
+  id: 1052,
   category: "tsushin",
   source: "vocab-exam",
   furi: "えるしーこねくた",
@@ -6265,7 +6265,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1180
   },
   {
-  id: 1209,
+  id: 1059,
   category: "tsushin",
   source: "vocab-exam",
   furi: "つうしんらっく",
@@ -6276,7 +6276,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1187
   },
   {
-  id: 1210,
+  id: 1060,
   category: "tsushin",
   source: "vocab-exam",
   furi: "つうしんきゃびねっと",
@@ -6287,7 +6287,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1188
   },
   {
-  id: 1213,
+  id: 1063,
   category: "tsushin",
   source: "vocab-exam",
   furi: "ほあんき",
@@ -6298,7 +6298,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1191
   },
   {
-  id: 1275,
+  id: 1107,
   category: "setsubi_kougu",
   source: "vocab-exam",
   furi: "システムてんじょう",
@@ -6309,7 +6309,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1253
   },
   {
-  id: 1321,
+  id: 1143,
   category: "haikan",
   source: "vocab-exam",
   furi: "しんくうぽんぷ",
@@ -6321,7 +6321,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1299
   },
   {
-  id: 1370,
+  id: 1186,
   category: "haikan",
   source: "vocab-teori",
   furi: "れいばい",
@@ -6332,7 +6332,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1342
   },
   {
-  id: 1371,
+  id: 1187,
   category: "haikan",
   source: "vocab-teori",
   furi: "こうばい",
@@ -6343,7 +6343,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1343
   },
   {
-  id: 1372,
+  id: 1188,
   category: "haikan",
   source: "vocab-teori",
   furi: "すいあつしけん",
@@ -6355,7 +6355,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1344
   },
   {
-  id: 1374,
+  id: 1190,
   category: "haikan",
   source: "vocab-teori",
   furi: "さどる",
@@ -6366,7 +6366,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1346
   },
   {
-  id: 1375,
+  id: 1191,
   category: "haikan",
   source: "vocab-teori",
   furi: "つぎて",
@@ -6377,7 +6377,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1347
   },
   {
-  id: 1376,
+  id: 1192,
   category: "haikan",
   source: "vocab-teori",
   furi: "ふらんじ",
@@ -6389,7 +6389,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1348
   },
   {
-  id: 1377,
+  id: 1193,
   category: "haikan",
   source: "vocab-teori",
   furi: "ばるぶ",
@@ -6400,7 +6400,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1349
   },
   {
-  id: 1378,
+  id: 1194,
   category: "denki",
   source: "vocab-teori",
   furi: "はいせん",
@@ -6411,7 +6411,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1350
   },
   {
-  id: 1379,
+  id: 1195,
   category: "denki",
   source: "vocab-teori",
   furi: "ぶんき",
@@ -6422,7 +6422,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1351
   },
   {
-  id: 1380,
+  id: 1196,
   category: "denki",
   source: "vocab-teori",
   furi: "でんねつせん",
@@ -6433,7 +6433,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1352
   },
   {
-  id: 1435,
+  id: 1250,
   category: "setsubi_kougu",
   source: "vocab-jac",
   furi: "しつがいき",
@@ -6444,7 +6444,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1406
   },
   {
-  id: 1436,
+  id: 1251,
   category: "haikan",
   source: "vocab-jac",
   furi: "しつないき",
@@ -6455,7 +6455,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1407
   },
   {
-  id: 1437,
+  id: 1252,
   category: "haikan",
   source: "vocab-jac",
   furi: "ふれあかこう",
@@ -6467,7 +6467,7 @@ export const CARDS_LIFELINE = [
   _origIndex: 1408
   },
   {
-  id: 1438,
+  id: 1253,
   category: "haikan",
   source: "vocab-jac",
   furi: "どれんはいかん",

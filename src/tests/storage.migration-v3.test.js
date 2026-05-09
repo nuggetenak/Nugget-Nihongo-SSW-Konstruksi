@@ -1,5 +1,5 @@
 // ─── tests/storage.migration-v3.test.js ──────────────────────────────────────
-// A.6: v2→v3, v1→v3, fresh-install migration tests.
+// Storage migration tests: v1→v4, v2→v4, fresh install schema.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import { _reset_for_test, init, get } from '../storage/engine.js';
@@ -10,30 +10,30 @@ beforeEach(() => {
   _reset_for_test();
 });
 
-describe('A.6 Storage v3', () => {
-  it('STORAGE_VERSION is 3', () => {
-    expect(STORAGE_VERSION).toBe(3);
+describe('storage v3→v4 migration', () => {
+  it('STORAGE_VERSION is 4', () => {
+    expect(STORAGE_VERSION).toBe(4);
   });
 
-  it('fresh install creates v3 schema with all new fields', () => {
+  it('fresh install creates current schema with all fields', () => {
     init();
     const prog = get('progress');
     const prefs = get('prefs');
 
-    expect(prog._v).toBe(3);
+    expect(prog._v).toBe(STORAGE_VERSION);
     expect(prog.sipilScores).toBeDefined();
     expect(prog.bangunanScores).toBeDefined();
     expect(prog.sessions).toEqual([]);
     expect(prog.dailyMission).toBeNull();
 
-    expect(prefs._v).toBe(3);
+    expect(prefs._v).toBe(STORAGE_VERSION);
     expect(prefs.examDate).toBeNull();
     expect(prefs.audioEnabled).toBe(true);
     expect(prefs.studyAnchor).toBeNull();
     expect(prefs.furiganaPolicy).toBe('always');
   });
 
-  it('v2 data migrates to v3 preserving existing fields', () => {
+  it('v2 data migrates to v4 preserving existing fields', () => {
     // Simulate v2 data in localStorage
     const v2Progress = {
       _v: 2,
@@ -69,20 +69,22 @@ describe('A.6 Storage v3', () => {
 
     // Old fields preserved
     expect(prog.known).toEqual([1, 2, 3]);
+    expect(prog.unknown).toEqual([4]); // 5 was deleted in renumbering
     expect(prog.jacScores['set-1'].correct).toBe(8);
     expect(prog.streakData.days).toBe(5);
     expect(prefs.track).toBe('doboku');
     expect(prefs.theme).toBe('dark');
     expect(prefs.dailyGoal).toBe(30);
-    expect(srs.cards['42']).toBeDefined();
+    // card 42 was deleted in renumbering (gap 42-49 removed) → not in v4
+    expect(srs.cards['42']).toBeUndefined();
 
     // New v3 fields added
-    expect(prog._v).toBe(3);
+    expect(prog._v).toBe(STORAGE_VERSION);
     expect(prog.sipilScores).toEqual({});
     expect(prog.bangunanScores).toEqual({});
     expect(prog.sessions).toEqual([]);
     expect(prog.dailyMission).toBeNull();
-    expect(prefs._v).toBe(3);
+    expect(prefs._v).toBe(STORAGE_VERSION);
     expect(prefs.examDate).toBeNull();
     expect(prefs.audioEnabled).toBe(true);
     expect(prefs.furiganaPolicy).toBe('always');

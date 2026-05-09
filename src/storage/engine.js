@@ -6,7 +6,7 @@
 import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
 import {
   hasV1Data, migrate_v1_to_v2, cleanup_v1_keys,
-  migrate_v2_to_v3,
+  migrate_v2_to_v3, migrate_v3_to_v4,
 } from './migrations.js';
 import LZString from 'lz-string';
 import { isQuotaError, notifyQuotaExceeded } from '../utils/storage-quota.js';
@@ -70,9 +70,23 @@ export function init() {
     _cache.srs = readDoc(DOCS.srs) ?? { _v: STORAGE_VERSION, cards: {} };
     _cache.prefs = readDoc(DOCS.prefs) ?? { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
 
+  } else if (version === 3) {
+    // v3 → v4: card IDs renumbered to be contiguous
+    const migrated = migrate_v3_to_v4();
+    _cache.progress = migrated.progress;
+    _cache.srs = migrated.srs;
+    _cache.prefs = migrated.prefs;
+    writeDoc(DOCS.progress, _cache.progress);
+    writeDoc(DOCS.srs, _cache.srs);
+    writeDoc(DOCS.prefs, _cache.prefs);
+
   } else if (version === 2) {
-    // v2 → v3 migration
-    const migrated = migrate_v2_to_v3();
+    // v2 → v3 → v4 migration chain
+    const migrated23 = migrate_v2_to_v3();
+    writeDoc(DOCS.progress, migrated23.progress);
+    writeDoc(DOCS.srs, migrated23.srs);
+    writeDoc(DOCS.prefs, migrated23.prefs);
+    const migrated = migrate_v3_to_v4();
     _cache.progress = migrated.progress;
     _cache.srs = migrated.srs;
     _cache.prefs = migrated.prefs;
@@ -87,10 +101,14 @@ export function init() {
     writeDoc(DOCS.progress, v2.progress);
     writeDoc(DOCS.srs, v2.srs);
     writeDoc(DOCS.prefs, v2.prefs);
-    const migrated = migrate_v2_to_v3();
-    _cache.progress = migrated.progress;
-    _cache.srs = migrated.srs;
-    _cache.prefs = migrated.prefs;
+    const migrated23 = migrate_v2_to_v3();
+    writeDoc(DOCS.progress, migrated23.progress);
+    writeDoc(DOCS.srs, migrated23.srs);
+    writeDoc(DOCS.prefs, migrated23.prefs);
+    const migrated34 = migrate_v3_to_v4();
+    _cache.progress = migrated34.progress;
+    _cache.srs = migrated34.srs;
+    _cache.prefs = migrated34.prefs;
     writeDoc(DOCS.progress, _cache.progress);
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);

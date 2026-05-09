@@ -1,3 +1,22 @@
+## [4.22.0] - 2026-05-09
+
+### feat(data+storage): card ID renumbering — contiguous 1–1443
+
+**Card IDs renumbered:**
+- All 1,443 cards now have contiguous IDs 1–1443 (was 1–1628 with 185 gaps)
+- Source files updated: cards-common.js (879 cards), cards-lifeline.js (564 cards)
+- Cross-references updated: 73 JAC `related_card_id` refs, 24 `angka-kunci.js` kartu refs
+- `scripts/renumber-cards.mjs`: one-shot script that built the mapping and rewrote all files
+
+**Storage schema v4:**
+- `STORAGE_VERSION` bumped 3 → 4
+- `src/storage/card-id-map-v4.js`: old→new ID mapping (1443 entries)
+- `migrate_v3_to_v4()`: remaps SRS card keys, known/unknown/starred arrays, quizWrong/wrongCounts
+- Full migration chain: v1→v4, v2→v4, v3→v4 all handled in engine.js init
+- Existing users' SRS progress fully preserved via remap
+
+**Tests:** 457 passing (41 files) — version assertions updated (v3→v4), SRS key expectations updated
+
 ## [4.21.1] - 2026-05-09
 
 ### refactor(hooks) + fix(WaygroundMode) + feat(ExportMode): OVERHAUL-1 + ENG-4 + ENG-6

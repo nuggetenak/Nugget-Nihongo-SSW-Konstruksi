@@ -11,9 +11,9 @@ beforeEach(() => {
   init();
 });
 
-describe('Storage v3 — Schema Fields', () => {
-  it('STORAGE_VERSION is 3', () => {
-    expect(STORAGE_VERSION).toBe(3);
+describe('Storage schema — field defaults', () => {
+  it('STORAGE_VERSION is 4', () => {
+    expect(STORAGE_VERSION).toBe(4);
   });
 
   it('all v3 progress fields exist in DEFAULTS', () => {
@@ -64,7 +64,7 @@ describe('Storage v3 — Schema Fields', () => {
   });
 });
 
-describe('Storage v3 — Progress Fields', () => {
+describe('Storage schema — progress fields', () => {
   it('sipilScores starts empty', () => {
     expect(get('progress').sipilScores).toEqual({});
   });

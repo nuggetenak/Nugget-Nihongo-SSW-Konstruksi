@@ -86,12 +86,13 @@ describe('init — v1 migration', () => {
 
   it('migrates ssw-srs-{id} keys to srs.cards', () => {
     const cardEntry = { card: { stability: 1, difficulty: 5 }, history: [], reviewed_at: null };
+    // Card 42 was in a gap removed by renumbering; card 100 → 89
     localStorage.setItem('ssw-srs-42', JSON.stringify(cardEntry));
     localStorage.setItem('ssw-srs-100', JSON.stringify(cardEntry));
     init();
     const cards = getAllSRSCards();
-    expect(Object.keys(cards)).toContain('42');
-    expect(Object.keys(cards)).toContain('100');
+    expect(Object.keys(cards)).not.toContain('42'); // 42 was deleted in renumbering
+    expect(Object.keys(cards)).toContain('89'); // 100 → 89 after renumbering
   });
 
   it('deletes old ssw-known key after migration', () => {

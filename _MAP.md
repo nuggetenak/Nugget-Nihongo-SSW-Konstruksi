@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 — hygiene pass 3 (archive + clean slate at v4.21.1)
-> **Version:** v4.21.1 · **Status:** STABLE ✅ — no queued tasks
+> **Last updated:** 2026-05-09 — v4.22.0: card IDs renumbered (1628→1443 contiguous), storage v4
+> **Version:** v4.22.0 · **Status:** STABLE ✅ — no queued tasks
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
 > **Archive:** `docs/archive/ARCHIVE-INDEX.md` ← all historical docs
 
@@ -38,7 +38,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← one-time pre-commit hook setup (run locally, not CI)
 ├── index.html
-├── package.json                    ← v4.21.1 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← v4.22.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60%
 ├── eslint.config.js / .prettierrc
@@ -103,7 +103,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.21.1** |
+| Version | **4.22.0** |
 | Tests | **457** (41 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -137,6 +137,7 @@ All phases complete. See `docs/BLUEPRINT-CURRENT.md` for full deliverable table.
 | v4.20.0–4.20.15 | P0 bugs, refactors, engines (session-analytics, OVERHAUL-2), storage quota, context memo, useTrackedCards |
 | v4.21.0 | REF-8/REF-9: vocab merge (8→4 source files), absorb sipil/bangunan sets; C1-C9 data-integrity tests |
 | v4.21.1 | OVERHAUL-1: retire usePersistedState; ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary |
+| v4.22.0 | Card ID renumber: 185 gaps removed; IDs contiguous 1–1443; storage schema v4 + remap migration |
 
 ---
 
@@ -209,6 +210,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/hooks/useStableContextValue.js` | useMemo wrapper for context stability (REF-10 v4.20.13) |
 | `src/utils/session-analytics.js` | Session duration/accuracy analytics (ENG-1 v4.20.3) |
 | `src/utils/storage-quota.js` | QuotaExceededError detection + user notification (ENG-12 v4.20.12) |
+| `src/storage/card-id-map-v4.js` | Old→new card ID mapping used by v3→v4 storage migration (1443 entries) |
 | `src/components/ErrorBoundary.jsx` | Class-based EB + TabError + FlatCardFallback |
 | `src/components/OfflineBanner.jsx` | Fixed offline status banner |
 | `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap |
@@ -228,6 +230,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.22.0 | Sonnet 4.6: Card IDs renumbered 1–1443 (185 gaps removed, max 1628→1443); storage v4 migration; 457 tests |
 | 2026-05-09 | v4.21.1 | Sonnet 4.6: OVERHAUL-1 retire usePersistedState (3 sites → useProgress); ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary; 457 tests (41 files) |
 | 2026-05-09 | v4.21.0 | Sonnet 4.6: REF-8 merge vocab sources (8→4); REF-9 absorb sipil/bangunan into quiz-sets.js; C1-C9 integrity tests (448 tests, 40 files) |
 | 2026-05-09 | v4.20.15 | Sonnet 4.6: ENG-11 useTrackedCards hook; 6 new tests (439 total, 39 files) |

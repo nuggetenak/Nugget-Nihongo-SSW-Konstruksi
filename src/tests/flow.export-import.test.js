@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import { _reset_for_test, init, get, set, exportAll, importAllSafe } from '../storage/engine.js';
+import { STORAGE_VERSION } from '../storage/schema.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -29,7 +30,7 @@ describe('G.2 Flow — export → import cycle', () => {
 
     // Export
     const snap = exportAll();
-    expect(snap._storage_version).toBe(3);
+    expect(snap._storage_version).toBe(STORAGE_VERSION);
 
     // Reset to empty
     set('progress', (p) => ({ ...p, known: [], sessions: [] }));
