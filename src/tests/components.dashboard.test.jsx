@@ -5,7 +5,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Dashboard from '../components/Dashboard.jsx';
+import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test, init } from '../storage/engine.js';
+
+function renderDashboard(props = {}) {
+  return render(
+    <ProgressProvider>
+      <Dashboard {...defaultProps} {...props} />
+    </ProgressProvider>
+  );
+}
 
 const defaultProps = {
   known: new Set(),
@@ -27,36 +36,36 @@ describe('Dashboard', () => {
 
   describe('header', () => {
     it('renders brand name', () => {
-      render(<Dashboard {...defaultProps} />);
+      renderDashboard();
       expect(screen.getByText('SSW Konstruksi')).toBeTruthy();
     });
 
     it('renders Nugget Nihongo subtitle', () => {
-      render(<Dashboard {...defaultProps} />);
+      renderDashboard();
       expect(screen.getByText(/Nugget Nihongo/)).toBeTruthy();
     });
 
     it('renders theme toggle button', () => {
-      render(<Dashboard {...defaultProps} isDark={true} />);
+      renderDashboard({isDark: true });
       // Dark mode shows sun icon
       expect(screen.getByText('☀️')).toBeTruthy();
     });
 
     it('shows moon icon in light mode', () => {
-      render(<Dashboard {...defaultProps} isDark={false} />);
+      renderDashboard({isDark: false });
       expect(screen.getByText('🌙')).toBeTruthy();
     });
 
     it('calls onToggleTheme when theme button clicked', () => {
       const onToggleTheme = vi.fn();
-      render(<Dashboard {...defaultProps} onToggleTheme={onToggleTheme} />);
+      renderDashboard({onToggleTheme: onToggleTheme });
       fireEvent.click(screen.getByText('☀️'));
       expect(onToggleTheme).toHaveBeenCalledOnce();
     });
 
     it('calls onChangeTrack when track pill clicked', () => {
       const onChangeTrack = vi.fn();
-      render(<Dashboard {...defaultProps} onChangeTrack={onChangeTrack} />);
+      renderDashboard({onChangeTrack: onChangeTrack });
       fireEvent.click(screen.getByText(/土木/));
       expect(onChangeTrack).toHaveBeenCalledOnce();
     });
@@ -64,44 +73,44 @@ describe('Dashboard', () => {
 
   describe('progress ring', () => {
     it('shows 0 kartu hafal when known is empty', () => {
-      render(<Dashboard {...defaultProps} known={new Set()} />);
+      renderDashboard({known: new Set() });
       expect(screen.getByText('0 kartu hafal')).toBeTruthy();
     });
 
     it('shows correct count when known has cards', () => {
-      render(<Dashboard {...defaultProps} known={new Set([1, 2, 3, 4, 5])} />);
+      renderDashboard({known: new Set([1, 2, 3, 4, 5]) });
       expect(screen.getByText('5 kartu hafal')).toBeTruthy();
     });
 
     it('shows unknown count in detail text', () => {
-      render(<Dashboard {...defaultProps} unknown={new Set([10, 11, 12])} />);
+      renderDashboard({unknown: new Set([10, 11, 12]) });
       expect(screen.getByText(/3 belum/)).toBeTruthy();
     });
   });
 
   describe('smart CTA logic', () => {
     it('shows SRS review CTA when dueCount > 0', () => {
-      render(<Dashboard {...defaultProps} srs={{ dueCount: 20, stats: { mature: 0 } }} />);
+      renderDashboard({ srs: { dueCount: 20, stats: { mature: 0 } } });
       // A2: recommendMode returns 'Ulasan SRS' for dueCount >= 20
       expect(screen.getByText(/Ulasan SRS/)).toBeTruthy();
     });
 
     it('navigates to ulasan when SRS CTA clicked', () => {
       const onNavigate = vi.fn();
-      render(<Dashboard {...defaultProps} srs={{ dueCount: 20, stats: { mature: 0 } }} onNavigate={onNavigate} />);
+      renderDashboard({ srs: { dueCount: 20, stats: { mature: 0 } }, onNavigate });
       fireEvent.click(screen.getByText(/Ulasan SRS/));
       expect(onNavigate).toHaveBeenCalledWith('ulasan');
     });
 
     it('shows Mode Kartu when known is empty and no SRS due', () => {
-      render(<Dashboard {...defaultProps} known={new Set()} srs={{ dueCount: 0, stats: { mature: 0 } }} />);
+      renderDashboard({ known: new Set(), srs: { dueCount: 0, stats: { mature: 0 } } });
       // A2: streak=0 → recommend kartu
       expect(screen.getByText(/Mode Kartu/)).toBeTruthy();
     });
 
     it('navigates to kartu when Mode Kartu CTA clicked', () => {
       const onNavigate = vi.fn();
-      render(<Dashboard {...defaultProps} known={new Set()} srs={{ dueCount: 0, stats: { mature: 0 } }} onNavigate={onNavigate} />);
+      renderDashboard({ known: new Set(), srs: { dueCount: 0, stats: { mature: 0 } }, onNavigate });
       fireEvent.click(screen.getByText(/Mode Kartu/));
       expect(onNavigate).toHaveBeenCalledWith('kartu');
     });
@@ -109,7 +118,7 @@ describe('Dashboard', () => {
 
   describe('quick mode grid', () => {
     it('renders 4 quick action tiles', () => {
-      render(<Dashboard {...defaultProps} />);
+      renderDashboard();
       expect(screen.getByText('Kartu')).toBeTruthy();
       expect(screen.getByText('Kuis')).toBeTruthy();
       expect(screen.getByText('Sprint')).toBeTruthy();
@@ -118,14 +127,14 @@ describe('Dashboard', () => {
 
     it('navigates to correct mode when quick tile clicked', () => {
       const onNavigate = vi.fn();
-      render(<Dashboard {...defaultProps} onNavigate={onNavigate} />);
+      renderDashboard({onNavigate: onNavigate });
       fireEvent.click(screen.getByText('Kuis'));
       expect(onNavigate).toHaveBeenCalledWith('kuis');
     });
 
     it('navigates to sprint mode', () => {
       const onNavigate = vi.fn();
-      render(<Dashboard {...defaultProps} onNavigate={onNavigate} />);
+      renderDashboard({onNavigate: onNavigate });
       fireEvent.click(screen.getByText('Sprint'));
       expect(onNavigate).toHaveBeenCalledWith('sprint');
     });
@@ -133,7 +142,7 @@ describe('Dashboard', () => {
 
   describe('streak hero', () => {
     it('does not show streak hero when streak < 2', () => {
-      render(<Dashboard {...defaultProps} />);
+      renderDashboard();
       // No "hari berturut-turut" text
       expect(screen.queryByText(/hari berturut-turut/)).toBeNull();
     });
@@ -141,17 +150,17 @@ describe('Dashboard', () => {
 
   describe('track variants', () => {
     it('renders doboku track', () => {
-      render(<Dashboard {...defaultProps} track="doboku" />);
+      renderDashboard({ track: 'doboku' });
       expect(screen.getByText(/土木/)).toBeTruthy();
     });
 
     it('renders bangunan track', () => {
-      render(<Dashboard {...defaultProps} track="kenchiku" />);
+      renderDashboard({ track: 'kenchiku' });
       expect(screen.getByText(/建築/)).toBeTruthy();
     });
 
     it('renders lifeline track', () => {
-      render(<Dashboard {...defaultProps} track="lifeline" />);
+      renderDashboard({ track: 'lifeline' });
       expect(screen.getByText(/ライフライン/)).toBeTruthy();
     });
   });

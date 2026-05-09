@@ -20,10 +20,15 @@ const DURATIONS = [
   { key: '120', label: '2 menit', value: 120 },
 ];
 
-function getPersonalBest() { return storageGet('prefs')?.sprintBest ?? 0; }
-function getBestTimeline() { return storageGet('prefs')?.sprintBestTimeline ?? []; }
-function savePersonalBest(score, timeline) {
-  storageSet('prefs', (p) => ({ ...p, sprintBest: Math.max(p?.sprintBest ?? 0, score), sprintBestTimeline: timeline }));
+function getDurationBests(key) { return storageGet('prefs')?.sprintBests?.[key] ?? { score: 0, timeline: [] }; }
+function saveDurationBests(key, score, timeline) {
+  storageSet('prefs', (p) => ({
+    ...p,
+    sprintBests: {
+      ...(p.sprintBests ?? {}),
+      [key]: { score: Math.max((p.sprintBests?.[key]?.score ?? 0), score), timeline },
+    },
+  }));
 }
 
 export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = null }) {
@@ -34,17 +39,17 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const [wrong, setWrong] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [personalBest, setPersonalBest] = useState(() => getPersonalBest());
   const [newBest, setNewBest] = useState(false);
   // B2: setup options
   const [selectedDuration, setSelectedDuration] = useState('60');
   const [selectedCat, setSelectedCat] = useState('all');
   const sessionEndFired = useRef(false);
   const { getDurationMs } = useSessionTimer();
-  // F4: ghost timeline — record { t: secondsElapsed, score: correctCount } every 5s
-  const [ghostTimeline] = useState(() => getBestTimeline());
+  // N10: ghost timeline scoped by selectedDuration key
+  const [ghostTimeline, setGhostTimeline] = useState(() => getDurationBests('60').timeline);
   const currentTimeline = useRef([]);
   const [ghostScore, setGhostScore] = useState(0);
+  const [personalBest, setPersonalBest] = useState(() => getDurationBests('60').score);
 
   // B2: available categories from the cards prop
   // SB3: if filterIds set (launched from SumberMode), scope to those cards
@@ -69,9 +74,10 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     if (sessionEndFired.current) return;
     sessionEndFired.current = true;
     onSessionEnd?.({ correct: c, total: c + w, durationMs: getDurationMs() });
-    const prev = getPersonalBest();
+    const key = selectedDuration;
+    const prev = getDurationBests(key).score;
     const finalTimeline = [...currentTimeline.current, { t: DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60, score: c }];
-    if (c > prev) { savePersonalBest(c, finalTimeline); setPersonalBest(c); setNewBest(true); }
+    if (c > prev) { saveDurationBests(key, c, finalTimeline); setPersonalBest(c); setNewBest(true); }
   }, [onSessionEnd, selectedDuration, getDurationMs]);
 
   useEffect(() => {
@@ -120,7 +126,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   };
 
   if (phase === 'ready') {
-    const pb = getPersonalBest();
+    const pb = personalBest;
     return (
       <div className={S.page}>
         <button className={S.btnBack} onClick={onExit}>← Kembali</button>
@@ -135,7 +141,12 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
         <div className={S.sectionLabel}>Durasi</div>
         <div className={S.row} style={{ gap: 8, marginBottom: 16 }}>
           {DURATIONS.map((d) => (
-            <button key={d.key} onClick={() => setSelectedDuration(d.key)}
+            <button key={d.key} onClick={() => {
+              setSelectedDuration(d.key);
+              const bests = getDurationBests(d.key);
+              setPersonalBest(bests.score);
+              setGhostTimeline(bests.timeline);
+            }}
               style={{ flex: 1, padding: '10px 6px', fontFamily: 'inherit', fontSize: 12, fontWeight: 700, borderRadius: T.r.md, cursor: 'pointer', border: `1px solid ${selectedDuration === d.key ? T.amber : T.border}`, background: selectedDuration === d.key ? 'rgba(245,158,11,0.12)' : T.surface, color: selectedDuration === d.key ? T.amber : T.text }}>
               {d.label}
             </button>
