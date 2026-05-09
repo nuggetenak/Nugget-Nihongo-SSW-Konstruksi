@@ -8,6 +8,7 @@ import { CARDS } from '../data/cards.js';
 import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { calcReadiness } from '../utils/session-analytics.js';
+import { MODE_META } from '../router/modes.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ProgressRing from '../components/ProgressRing.jsx';
 import StudyHeatmap from '../components/StudyHeatmap.jsx';
@@ -150,7 +151,6 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
 
       <div className={S.sectionLabel}>7 Hari Terakhir</div>
       {(() => {
-        const MODE_COLORS = { ulasan: '#22c55e', kuis: '#f59e0b', kartu: '#60a5fa', sprint: '#a78bfa', fokus: '#f472b6', jac: '#fb923c', angka: '#34d399', jebak: '#f87171' };
         const days = Array.from({ length: 7 }, (_, i) => {
           const d = new Date(); d.setDate(d.getDate() - (6 - i));
           return d.toISOString().slice(0, 10);
@@ -167,7 +167,7 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
               const h = count === 0 ? 4 : Math.max(12, Math.round((count / maxC) * 52));
               const dominant = dayS.reduce((acc, s) => { acc[s.mode] = (acc[s.mode] ?? 0) + 1; return acc; }, {});
               const topMode = Object.entries(dominant).sort((a, b) => b[1] - a[1])[0]?.[0];
-              const color = topMode ? (MODE_COLORS[topMode] ?? T.amber) : T.border;
+              const color = topMode ? (MODE_META[topMode]?.color ?? T.amber) : T.border;
               const label = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'][new Date(d + 'T00:00:00').getDay()];
               const isToday = new Date(d + 'T00:00:00').toDateString() === new Date().toDateString();
               return (
