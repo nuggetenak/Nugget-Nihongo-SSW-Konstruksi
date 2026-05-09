@@ -2,9 +2,10 @@ import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
@@ -29,7 +30,7 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
   const [activeSet, setActiveSet] = useState(null);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
-  const [scores, setScores] = usePersistedState('ssw-vocab-scores', {});
+  const { saveScore, vocabScores: scores } = useProgress();
 
   const setDef = activeSet === MIX_ALL_ID ? MIX_ALL : VOCAB_SETS.find((s) => s.id === activeSet);
 
@@ -48,23 +49,27 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
     }));
   }, [activeSet, setDef, showFuri, showHint, VOCAB_SETS]);
 
-  const [_wrongCounts, setWrongCounts] = usePersistedState(
-    activeSet ? `ssw-vocab-wrong-${activeSet}` : 'ssw-vocab-temp', {}
-  );
+  const [_wrongCounts, setWrongCounts] = useState(() => get('progress')?.vocabWrong ?? {});
 
   const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
     if (!isCorrect && activeSet) {
       const qId = questions[qIdx]?._qId;
-      if (qId) setWrongCounts((w) => ({ ...w, [qId]: makeWrongEntry(w[qId]) }));
+      if (qId) {
+        setWrongCounts((prev) => {
+          const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
+          storageSet('progress', (p) => ({ ...p, vocabWrong: updated }));
+          return updated;
+        });
+      }
     }
-  }, [questions, activeSet, setWrongCounts]);
+  }, [questions, activeSet]);
 
   const handleFinish = useCallback(({ correct, total, maxStreak, durationMs = 0 }) => {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    setScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
+    saveScore('vocab', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
     onSessionEnd?.({ correct, total, durationMs });
-  }, [activeSet, setScores, onSessionEnd]);
+  }, [activeSet, saveScore, onSessionEnd]);
 
   if (activeSet) {
     return (

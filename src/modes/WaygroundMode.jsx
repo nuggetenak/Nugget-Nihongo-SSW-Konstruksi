@@ -2,9 +2,10 @@ import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount, loadFromStorage } from '../utils/wrong-tracker.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
@@ -33,11 +34,11 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   const [lemahMode, setLemahMode] = useState(false);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
-  const [wgScores, setWgScores] = usePersistedState('ssw-wg-scores', {});
+  const { saveScore, wgScores } = useProgress();
 
   const set = TEORI_PRAKTIK.find((s) => s.id === activeSet);
 
-  const [wrongCounts, setWrongCounts] = usePersistedState(activeSet ? `ssw-wg-wrong-${activeSet}` : 'ssw-wg-temp', {});
+  const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wgWrong ?? {});
 
   const questions = useMemo(() => {
     if (!set) return [];
@@ -58,16 +59,25 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   }, [set, showFuri, showHint, lemahMode, wrongCounts]);
 
   const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
-    if (!isCorrect && set) { const qId = questions[qIdx]?._qId; if (qId) setWrongCounts((w) => ({ ...w, [qId]: makeWrongEntry(w[qId]) })); }
-  }, [questions, set, setWrongCounts]);
+    if (!isCorrect && set) {
+      const qId = questions[qIdx]?._qId;
+      if (qId) {
+        setWrongCounts((prev) => {
+          const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
+          storageSet('progress', (p) => ({ ...p, wgWrong: updated }));
+          return updated;
+        });
+      }
+    }
+  }, [questions, set]);
 
   const handleFinish = useCallback(({ correct, total, maxStreak, durationMs = 0 }) => {
     if (!activeSet) return;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     // Only update score for full set runs, not lemah-mode runs
-    if (!lemahMode) setWgScores((s) => ({ ...s, [activeSet]: { score: correct, total, pct, maxStreak, date: Date.now() } }));
+    if (!lemahMode) saveScore('wg', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
     onSessionEnd?.({ correct, total, durationMs });
-  }, [activeSet, lemahMode, setWgScores, onSessionEnd]);
+  }, [activeSet, lemahMode, saveScore, onSessionEnd]);
 
   const handleExit = useCallback(() => {
     setActiveSet(null);
