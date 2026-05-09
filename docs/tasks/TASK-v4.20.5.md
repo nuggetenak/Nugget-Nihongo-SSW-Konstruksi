@@ -1,5 +1,5 @@
 # TASK v4.20.5 — B4, N6 (14 sites), OVERHAUL-2, N8/REF-5, N14, N22
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.4 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.4 DONE
 
 ---
 

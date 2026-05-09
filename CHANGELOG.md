@@ -1,3 +1,18 @@
+## [4.20.5] - 2026-05-09
+
+### feat + fix: useSessionTimer, durationMs, recordWrong, N14, B4 (OVERHAUL-2, N6, N21, N22, N14, B4)
+
+- OVERHAUL-2: New src/hooks/useSessionTimer.js — centralized session duration tracking (getDurationMs, reset)
+- N6/N17: ModeRouter — both makeSessionEnd and makeFinishHandler now accept + forward durationMs
+- N6: QuizShell — tracks startTimeRef, passes durationMs to onFinish
+- N6: 5 QuizShell modes (JAC, Vocab, Wayground, Sipil, Bangunan) forward durationMs in handleFinish
+- N6/N21: All 9 non-QuizShell modes (Sprint, Simulasi, Confusion, Production, Danger, Angka, Review, QuizProduksi, Dengar) add useSessionTimer + pass durationMs
+- N22: ProgressContext.recordWrong — uses makeWrongEntry format (was plain int)
+- N14: daily-challenge.js — buildAllQuestions() hoisted to module-level const ALL_QUESTIONS (called once on import)
+- B4: recommend-mode.js — maintenance-phase rotation (produksi/dengar/mirip) when matureCount > 300 && avgAcc > 70
+- eslint: react-hooks/purity off (not using React Compiler)
+- Tests: 429 passing, 37 files
+
 ## [4.20.4] - 2026-05-09
 
 ### feat + fix: MODE_META color/strand (ENG-3, F3, B2, REF-4)

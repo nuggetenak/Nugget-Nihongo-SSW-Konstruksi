@@ -26,7 +26,7 @@
 | v4.20.2 | TASK-v4.20.2.md | **DONE** ✅ | Low | ENG-2, N15, N19, B5, B1 |
 | v4.20.3 | TASK-v4.20.3.md | **DONE** ✅ | Medium | ENG-1, ENG-7, B3, N2, N4 |
 | v4.20.4 | TASK-v4.20.4.md | **DONE** ✅ | Medium | ENG-3, B2, F3, REF-4 |
-| v4.20.5 | TASK-v4.20.5.md | **READY** | Medium | B4, N6/OVERHAUL-2, N8/REF-5, N14, N22 |
+| v4.20.5 | TASK-v4.20.5.md | **DONE** ✅ | Medium | B4, N6/OVERHAUL-2, N8/REF-5, N14, N22 |
 | v4.20.6 | TASK-v4.20.6.md | **READY** | Medium | N3, N7, N16, REF-3, N20, REF-3b, N11, R3, N23, OVERHAUL-3 |
 | v4.20.7 | TASK-v4.20.7.md | **READY** | Low | ENG-5 |
 | v4.20.8 | TASK-v4.20.8.md | **READY** | Low | F1, F2, F4, R1, R2, N10 |

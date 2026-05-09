@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.4: ENG-3 MODE_META color+strand, F3 StatsMode, B2+REF-4 daily-mission)
-> **Version:** v4.20.3
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.5: OVERHAUL-2 useSessionTimer, N6/N21 durationMs, N22 recordWrong, N14 daily-challenge hoist, B4 rotation)
+> **Version:** v4.20.5
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -329,6 +329,8 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | v4.10.0–4.14.0 | Sonnet 4.6: Feature batches — JACMode SRS bridge, SumberMode actions, GlossaryMode Anki export, JAC topic tags |
 | 2026-05-08 | v4.15.x–4.17.0 | Sonnet 4.6: JAC content audit (23 fixes), C1 text3 +18 cards, C1 pass2 +15 cards |
 | 2026-05-08 | v4.18.0–4.19.0 | Sonnet 4.6: Refactors — doboku/kenchiku→common; JAC split; quiz-sets merge; track fields |
+| 2026-05-09 | v4.20.5 | Sonnet 4.6: OVERHAUL-2 useSessionTimer; N6/N21 durationMs all 14 sites; N22 recordWrong makeWrongEntry; N14 buildAllQuestions hoist; B4 maintenance rotation; 429 tests |
+| 2026-05-09 | v4.20.4 | Sonnet 4.6: ENG-3 MODE_META color+strand; F3 StatsMode MODE_META.color; B2+REF-4 daily-mission MISSION_TYPES |
 | 2026-05-09 | v4.20.3 | Sonnet 4.6: ENG-1 session-analytics.js; B3 StatsMode calcReadiness; N2 recommend-mode getAvgAccuracy; N4 achievements getAvgAccuracy; ENG-7 13 new tests (429 total) |
 | 2026-05-09 | v4.20.2 | Sonnet 4.6: ENG-2 constants.js, N15 SESSIONS_CAP, N19 SRS_MATURE_DAYS, B5 calcReadiness ×100 removed, B1 achievement thresholds corrected |
 | 2026-05-09 | v4.20.1 | Sonnet 4.6: REF-6 date.js (local tz UTC fix), N13 ProgressContext streak, N9 daily files, N18 StudyHeatmap, Dashboard; ENG-8 date.test.js (416 tests, 36 files) |
