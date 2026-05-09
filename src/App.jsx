@@ -10,6 +10,7 @@ import { T } from './styles/theme.js';
 import { useApp } from './contexts/AppContext.jsx';
 import { useProgress } from './contexts/ProgressContext.jsx';
 import { useSRSContext } from './contexts/SRSContext.jsx';
+import { setQuotaHandler } from './utils/storage-quota.js';
 
 import ErrorBoundary, { TabError } from './components/ErrorBoundary.jsx';
 import OfflineBanner from './components/OfflineBanner.jsx';
@@ -49,6 +50,13 @@ export default function App() {
     };
     navigator.serviceWorker.addEventListener('message', handler);
     return () => navigator.serviceWorker.removeEventListener('message', handler);
+  }, [toast]);
+
+  // ENG-12: Register quota error handler — shows toast if localStorage write fails.
+  useEffect(() => {
+    setQuotaHandler(() => {
+      toast.show('💾 Penyimpanan penuh. Backup data di menu Pengaturan sebelum data hilang.', { duration: 8000, type: 'error' });
+    });
   }, [toast]);
 
   // Active mode takes full screen

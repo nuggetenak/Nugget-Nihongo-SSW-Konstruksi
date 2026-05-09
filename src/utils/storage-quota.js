@@ -17,6 +17,7 @@ export function isQuotaError(err) {
 }
 
 export function notifyQuotaExceeded(docKey = '') {
+  // eslint-disable-next-line no-console
   console.warn('[storage] QuotaExceededError on key:', docKey);
   if (_handler) _handler(docKey);
 }

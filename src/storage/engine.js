@@ -42,6 +42,7 @@ function writeDoc(docKey, data) {
       notifyQuotaExceeded(docKey);
       return { ok: false, reason: 'quota' };
     }
+    // eslint-disable-next-line no-console
     console.error('[storage] writeDoc failed:', docKey, err);
     return { ok: false, reason: 'unknown' };
   }

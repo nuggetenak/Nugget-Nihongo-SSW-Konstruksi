@@ -1,5 +1,5 @@
 # TASK v4.20.12 — STORAGE-1: Quota Detection + Recovery (ENG-12)
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.9 DONE
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.9 DONE
 
 ## Goal
 `localStorage.setItem` in `engine.js` silently swallows `QuotaExceededError`. Add detection, user toast, and recovery path.

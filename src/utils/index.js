@@ -20,3 +20,5 @@ export { TOTAL_CARDS, HALF_DECK_THRESHOLD, FULL_DECK_THRESHOLD,
          DAILY_CHALLENGE_KEY } from './constants.js';
 // ENG-1: shared session analytics
 export { getAvgAccuracy, getBestSimScore, hasPerfectSprint, getStrandCounts, calcReadiness } from './session-analytics.js';
+// ENG-12: storage quota detection + recovery
+export { setQuotaHandler, isQuotaError, notifyQuotaExceeded, estimateStorageUsage } from './storage-quota.js';

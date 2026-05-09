@@ -1,3 +1,12 @@
+## [4.20.12] - 2026-05-09
+
+### fix + feat: storage quota detection (STORAGE-1 + ENG-12)
+
+- engine.js writeDoc: QuotaExceededError no longer silently swallowed; returns {ok, reason}
+- New utils/storage-quota.js: isQuotaError, notifyQuotaExceeded, estimateStorageUsage, setQuotaHandler
+- App.jsx: registers quota handler → toast on write failure
+- utils/index.js: barrel updated
+
 ## [4.20.11] - 2026-05-09
 
 ### fix: direct-import corrections

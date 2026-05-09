@@ -33,7 +33,7 @@
 | v4.20.9 | TASK-v4.20.9.md | ~~DONE~~ ✅ | Low | DB-2,3,4,5, ENG-9, ENG-10 |
 | v4.20.10 | TASK-v4.20.10.md | ~~DONE~~ ✅ | Medium | DB-1, DB-6, DB-7, DB-8 |
 | v4.20.11 | TASK-v4.20.11.md | ~~DONE~~ ✅ | Low | N24, N25 |
-| v4.20.12 | TASK-v4.20.12.md | **READY** | Low | STORAGE-1, ENG-12 |
+| v4.20.12 | TASK-v4.20.12.md | **DONE** ✅ | Low | STORAGE-1, ENG-12 |
 | v4.20.13 | TASK-v4.20.13.md | **READY** | Medium | PERF-1, REF-10, ENG-13 |
 | v4.20.14 | TASK-v4.20.14.md | **READY** | Low | PERF-2, REF-11 |
 | v4.20.15 | TASK-v4.20.15.md | **READY** | Medium | ENG-11, migrate ~15 card-filter sites |
