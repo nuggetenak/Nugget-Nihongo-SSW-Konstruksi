@@ -57,7 +57,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
 
   const questions = useMemo(() => filtered.map((q) => {
     const reading = showFuri ? extractReadings(q.jp) : null;
-    return { question: showFuri ? q.jp : stripFuri(q.jp), questionSub: showID ? q.id_text : reading || null, options: q.options.map((opt) => ({ text: showFuri ? opt : stripFuri(opt), sub: null })), correctIdx: q.answer, explanation: q.explanation, hint: q.hasPhoto ? `📷 ${q.photoDesc || 'Soal ini aslinya pakai foto'}` : null, _qId: q.id };
+    return { question: showFuri ? q.jp : stripFuri(q.jp), questionSub: showID ? q.id_text : reading || null, options: q.options.map((opt) => ({ text: showFuri ? opt : stripFuri(opt), sub: null })), correctIdx: q.answer, explanation: q.explanation, hint: q.hasPhoto ? `📷 ${q.photoDesc || 'Soal ini aslinya pakai foto'}` : null, hasPhoto: q.hasPhoto ?? false, photoDesc: q.photoDesc ?? null, _qId: q.id };
   }), [filtered, showFuri, showID]);
 
   const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {

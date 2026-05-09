@@ -182,6 +182,13 @@ export default function QuizShell({
         <div className={S.questionText} style={{ fontFamily: T.fontJP }}>{q.question}</div>
         {q.questionSub && <div className={S.questionSub}>{q.questionSub}</div>}
         {showHint && q.hint && <div className={S.hint}>💡 {q.hint}</div>}
+        {q.hasPhoto && (
+          <div style={{ background: 'rgba(234,179,8,0.12)', border: '1px solid rgba(234,179,8,0.4)',
+                        borderRadius: 8, padding: '6px 12px', marginBottom: 8, fontSize: 12, color: '#ca8a04' }}>
+            📷 Soal ini aslinya menggunakan foto/diagram dari buku JAC.
+            Keterangan: {q.photoDesc || 'Lihat buku ujian JAC.'}
+          </div>
+        )}
         {renderExtra?.(q)}
       </div>
 
