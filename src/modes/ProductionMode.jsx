@@ -5,6 +5,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
@@ -45,6 +46,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
   const [sessionFired, setSessionFired] = useState(false);
   const inputRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
+  const { recordWrong } = useProgress();
 
   const startSession = () => {
     const q = shuffle(cards).slice(0, count);
@@ -70,7 +72,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
     if (phase !== 'prompt' || !card) return;
     const correct = isCorrect(input, card);
     if (correct) haptic.correct();
-    else haptic.wrong();
+    else { haptic.wrong(); recordWrong(card.id); }
 
     if (audioEnabled && canSpeak()) {
       speakJP(stripFuri(card.jp));
@@ -100,6 +102,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
   const handleSkip = useCallback(() => {
     if (phase !== 'prompt' || !card) return;
     haptic.wrong();
+    recordWrong(card.id);
     setResults((r) => [...r, { card, input: '', correct: false, skipped: true }]);
     setPhase('revealed');
   }, [phase, card]);
