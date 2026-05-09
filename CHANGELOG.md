@@ -1,3 +1,14 @@
+## [4.20.1] - 2026-05-09
+
+### fix + feat: UTC date bugs (REF-6 + ENG-8)
+
+- REF-6: New src/utils/date.js — todayStr/prevDayStr/isoToLocalDate (local tz, not UTC)
+- N13 (P1): ProgressContext streak tracking now uses local dates — fixes false streak resets at 07:00 WIB
+- N9: daily-challenge + daily-mission use local todayStr
+- N18: StudyHeatmap grid keys use local timezone
+- Dashboard.jsx: UTC date references fixed
+- ENG-8: src/tests/date.test.js (5 tests)
+
 ## [4.20.0] - 2026-05-09
 
 ### fix: P0 critical bugs + pre-existing lint crashes

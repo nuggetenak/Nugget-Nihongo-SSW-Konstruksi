@@ -1,5 +1,5 @@
 # TASK v4.20.1 — REF-6: UTC Date Fix + ENG-8: Date Tests
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.0 DONE
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.0 DONE
 
 ## Goal
 Create `src/utils/date.js` with local-timezone date helpers. Fix 6 UTC date bugs across 5 files. Create date tests.
