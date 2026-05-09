@@ -87,7 +87,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const handleAddToSRS = useCallback(() => {
     const relatedIds = wrongQIds
       .map((qId) => JAC_OFFICIAL.find((q) => q.id === qId)?.related_card_id)
-      .filter(Boolean);
+      .filter((id) => typeof id === 'number');
     const unique = [...new Set(relatedIds)];
     unique.forEach((cardId) => recordReview(cardId, 1));
     setSrsAdded(unique.length);
