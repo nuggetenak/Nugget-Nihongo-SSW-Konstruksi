@@ -11,3 +11,5 @@ export { useFocusTrap } from './useFocusTrap.js';
 
 export { useSessionTimer } from './useSessionTimer.js';
 export { useDailyChallenge } from './useDailyChallenge.js';
+// ENG-11: centralized filtered-cards hook
+export { useTrackedCards } from './useTrackedCards.js';
