@@ -133,7 +133,7 @@ export default function FlipCard({
           </div>
 
           <div className={S.backBody}>
-            <div className={S.backJp}>{card.jp}</div>
+            <div className={S.backJp}>{renderJPWithRuby(card.jp, parseRubyFragments(card.jp))}</div>
             <div className={S.backFuri}>{card.furi}</div>
             <div className={S.backId}>{card.id_text}</div>
           </div>
@@ -154,14 +154,7 @@ export default function FlipCard({
               )}
             </div>
           )}
-          {card.quote && (
-            <div className={S.quoteBlock}>
-              <span className={S.quoteLabel}>{renderJPWithRuby('現場《げんば》より', parseRubyFragments('現場《げんば》より'))}</span>
-              <div className={S.quoteText}>
-                「{renderJPWithRuby(card.quote, parseRubyFragments(card.quote))}」
-              </div>
-            </div>
-          )}
+
         </div>
       </div>
     </div>

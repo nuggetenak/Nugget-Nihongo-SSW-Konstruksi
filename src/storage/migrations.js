@@ -177,8 +177,8 @@ export function migrate_v2_to_v3() {
 
   // Bump version and add new progress fields
   progress._v = 3;
-  progress.sipilScores    = progress.sipilScores    ?? {};
-  progress.bangunanScores = progress.bangunanScores ?? {};
+  progress.dobokuScores   = progress.dobokuScores   ?? {};
+  progress.kenchikuScores = progress.kenchikuScores ?? {};
   progress.sessions       = progress.sessions       ?? [];
   progress.dailyMission   = progress.dailyMission   ?? null;
 
@@ -249,6 +249,34 @@ export function migrate_v3_to_v4() {
   progress._v = 4;
   srs._v = 4;
   prefs._v = 4;
+
+  return { progress, srs, prefs };
+}
+
+// ── v4 → v5 migration ────────────────────────────────────────────────────────
+// Renames sipilScores→dobokuScores, bangunanScores→kenchikuScores.
+
+export function hasV4Data() {
+  try {
+    const parsed = safeGetDoc('ssw-progress', null);
+    return parsed?._v === 4;
+  } catch { return false; }
+}
+
+export function migrate_v4_to_v5() {
+  const progress = safeGetDoc('ssw-progress', {});
+  const srs      = safeGetDoc('ssw-srs-data', { _v: 4, cards: {} });
+  const prefs    = safeGetDoc('ssw-prefs', {});
+
+  // Rename score keys
+  progress.dobokuScores   = progress.sipilScores    ?? {};
+  progress.kenchikuScores = progress.bangunanScores ?? {};
+  delete progress.sipilScores;
+  delete progress.bangunanScores;
+
+  progress._v = 5;
+  srs._v = 5;
+  prefs._v = 5;
 
   return { progress, srs, prefs };
 }

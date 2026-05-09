@@ -9,7 +9,7 @@ export const FULL_DECK_THRESHOLD     = TOTAL_CARDS;
 /** All modes whose sessions contribute to quiz accuracy scoring. */
 export const SCORED_QUIZ_MODES = [
   'kuis', 'jac', 'wayground',
-  'simulasi', 'sipil', 'bangunan', 'vocab', 'kuisprod',
+  'simulasi', 'doboku', 'kenchiku', 'vocab', 'kuisprod',
 ];
 
 /** FSRS card considered "mature" at this interval (days). */

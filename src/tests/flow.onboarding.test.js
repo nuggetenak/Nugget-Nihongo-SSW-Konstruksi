@@ -21,10 +21,10 @@ describe('G.2 Flow — Onboarding', () => {
   });
 
   it('track selection persists after onboarding', () => {
-    set('prefs', (p) => ({ ...p, onboarded: true, track: 'bangunan' }));
+    set('prefs', (p) => ({ ...p, onboarded: true, track: 'kenchiku' }));
     const prefs = get('prefs');
     expect(prefs.onboarded).toBe(true);
-    expect(prefs.track).toBe('bangunan');
+    expect(prefs.track).toBe('kenchiku');
   });
 
   it('dailyGoal defaults to 20 and can be changed', () => {
@@ -34,12 +34,12 @@ describe('G.2 Flow — Onboarding', () => {
   });
 
   it('onboarded persists across engine re-init', () => {
-    set('prefs', (p) => ({ ...p, onboarded: true, track: 'sipil' }));
+    set('prefs', (p) => ({ ...p, onboarded: true, track: 'doboku' }));
     // Simulate re-open: reset engine cache, re-init from localStorage
     _reset_for_test();
     init();
     const prefs = get('prefs');
     expect(prefs.onboarded).toBe(true);
-    expect(prefs.track).toBe('sipil');
+    expect(prefs.track).toBe('doboku');
   });
 });

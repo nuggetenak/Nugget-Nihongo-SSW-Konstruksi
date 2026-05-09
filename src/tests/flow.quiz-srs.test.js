@@ -17,14 +17,14 @@ describe('G.2 Flow — quiz session recording', () => {
     const sessions = [
       { mode: 'kuis',  correct: 7, total: 10, durationMs: 5000, date: '2026-05-01T10:00:00Z' },
       { mode: 'jac',   correct: 4, total: 5,  durationMs: 3000, date: '2026-05-01T11:00:00Z' },
-      { mode: 'sipil', correct: 12, total: 15, durationMs: 8000, date: '2026-05-01T12:00:00Z' },
+      { mode: 'doboku', correct: 12, total: 15, durationMs: 8000, date: '2026-05-01T12:00:00Z' },
     ];
     set('progress', (p) => ({ ...p, sessions }));
 
     const stored = get('progress').sessions;
     expect(stored.length).toBe(3);
     expect(stored[0].mode).toBe('kuis');
-    expect(stored[2].mode).toBe('sipil');
+    expect(stored[2].mode).toBe('doboku');
   });
 
   it('sessions are capped at 90 entries', () => {
@@ -44,15 +44,15 @@ describe('G.2 Flow — quiz session recording', () => {
     expect(typeof after.completedAt).toBe('number');
   });
 
-  it('sipilScores and bangunanScores can be written and read', () => {
+  it('dobokuScores and kenchikuScores can be written and read', () => {
     set('progress', (p) => ({
       ...p,
-      sipilScores: { 'sipil-01': { correct: 12, total: 15, date: '2026-05-01' } },
-      bangunanScores: { 'bangunan-01': { correct: 10, total: 15, date: '2026-05-01' } },
+      dobokuScores: { 'doboku-01': { correct: 12, total: 15, date: '2026-05-01' } },
+      kenchikuScores: { 'kenchiku-01': { correct: 10, total: 15, date: '2026-05-01' } },
     }));
 
     const prog = get('progress');
-    expect(prog.sipilScores['sipil-01'].correct).toBe(12);
-    expect(prog.bangunanScores['bangunan-01'].correct).toBe(10);
+    expect(prog.dobokuScores['doboku-01'].correct).toBe(12);
+    expect(prog.kenchikuScores['kenchiku-01'].correct).toBe(10);
   });
 });

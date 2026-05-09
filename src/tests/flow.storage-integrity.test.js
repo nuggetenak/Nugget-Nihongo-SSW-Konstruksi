@@ -21,8 +21,8 @@ describe('storage integrity — complete v3 schema', () => {
     expect(Array.isArray(p.starred)).toBe(true);
     expect(typeof p.quizWrong).toBe('object');
     expect(typeof p.jacScores).toBe('object');
-    expect(typeof p.sipilScores).toBe('object');     // Phase B
-    expect(typeof p.bangunanScores).toBe('object');  // Phase B
+    expect(typeof p.dobokuScores).toBe('object');     // Phase B
+    expect(typeof p.kenchikuScores).toBe('object');  // Phase B
     expect(Array.isArray(p.sessions)).toBe(true);    // Phase C
     expect(p.dailyMission === null || typeof p.dailyMission === 'object').toBe(true); // Phase C
     expect(typeof p.milestoneStreak7).toBe('boolean');
@@ -47,8 +47,8 @@ describe('storage integrity — complete v3 schema', () => {
   });
 
   it('DEFAULTS match expected shapes', () => {
-    expect(DEFAULTS.progress.sipilScores).toBeDefined();
-    expect(DEFAULTS.progress.bangunanScores).toBeDefined();
+    expect(DEFAULTS.progress.dobokuScores).toBeDefined();
+    expect(DEFAULTS.progress.kenchikuScores).toBeDefined();
     expect(DEFAULTS.progress.sessions).toBeDefined();
     expect(DEFAULTS.prefs.examDate).toBeDefined();
     expect(DEFAULTS.prefs.audioEnabled).toBeDefined();

@@ -20,7 +20,7 @@ const makeValidSnapshot = (overrides = {}) => ({
     _v: 3, known: [1, 2, 3], unknown: [4], starred: [],
     quizWrong: {}, wrongCounts: {}, wgWrong: {}, vocabWrong: {},
     jacScores: {}, wgScores: {}, vocabScores: {},
-    sipilScores: {}, bangunanScores: {},
+    dobokuScores: {}, kenchikuScores: {},
     streakData: {}, dailyCount: { count: 0, date: '' },
     recentCards: [], milestoneStreak7: false, milestoneQuiz70: false,
     sessions: [], dailyMission: null,

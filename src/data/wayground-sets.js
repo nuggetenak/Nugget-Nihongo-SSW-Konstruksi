@@ -434,7 +434,7 @@ export const WAYGROUND_SETS = [
     ]
   },
   {
-    id: "wg10", title: "Praktik Set 6 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "wayground-quizizz",
+    id: "wp5", title: "Praktik Set 5 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "天井《てんじょう》裏（てんじょううら）に電線《でんせん》（でんせん）を通（とお）すときは、＿＿が必要《ひつよう》（ひつよう）です。", hint: "Untuk memasang kabel di atas langit-langit, diperlukan...", opts: ["カッター", "脚立《きゃたつ》（きゃたつ）", "ハンマー"], opts_id: ["Cutter", "Tangga lipat", "Palu"], ans: 1, exp: "脚立（tangga lipat）diperlukan untuk menjangkau langit-langit." },
@@ -461,7 +461,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg6: Lifeline Vocab 50qs ──
   {
-    id: "wp1", title: "Praktik Set 7 · 20qs", subtitle: "保温継手・工具・安全基準 実技",
+    id: "wp1", title: "Praktik Set 1 · 20qs", subtitle: "保温継手・工具・安全基準 実技",
     track: "lifeline",
     emoji: "🔩", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)",
     source: "wayground-jac",
@@ -489,7 +489,7 @@ export const WAYGROUND_SETS = [
     ]
   },
   {
-    id: "wp2", title: "Praktik Set 8 · 20qs", subtitle: "安全装備・圧力試験・施工基準 実技",
+    id: "wp2", title: "Praktik Set 2 · 20qs", subtitle: "安全装備・圧力試験・施工基準 実技",
     track: "lifeline",
     emoji: "🛡️", color: "#4ade80", grad: "linear-gradient(135deg,#052e16,#15803d)",
     source: "wayground-jac",
@@ -517,7 +517,7 @@ export const WAYGROUND_SETS = [
     ]
   },
   {
-    id: "wp3", title: "Praktik Set 9 · 20qs", subtitle: "冷媒配管・保温材・断熱材 実技",
+    id: "wp3", title: "Praktik Set 3 · 20qs", subtitle: "冷媒配管・保温材・断熱材 実技",
     track: "lifeline",
     emoji: "🌡️", color: "#fb923c", grad: "linear-gradient(135deg,#431407,#c2410c)",
     source: "wayground-jac",
@@ -545,7 +545,7 @@ export const WAYGROUND_SETS = [
     ]
   },
   {
-    id: "wp4", title: "Praktik Set 10 · 20qs", subtitle: "溶接・フランジ・配管加工 実技",
+    id: "wp4", title: "Praktik Set 4 · 20qs", subtitle: "溶接・フランジ・配管加工 実技",
     track: "lifeline",
     emoji: "⚙️", color: "#c084fc", grad: "linear-gradient(135deg,#2e1065,#7c3aed)",
     source: "wayground-jac",
@@ -631,7 +631,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg7: 第6章 Vocab 46qs (from PDF 07) ──
   {
-    id: "wg7", title: "Vocab Set 7 · 46qs", subtitle: "Kosakata ライフライン第6章 (1)",
+    id: "wg7", title: "Vocab Set 2 · 46qs", subtitle: "Kosakata ライフライン第6章 (1)",
     track: "lifeline",
     emoji: "📖", color: "#a78bfa", grad: "linear-gradient(135deg,#4c1d95,#6d28d9)",
     source: "wayground-pdf7",
@@ -686,7 +686,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg8: 第6章 Vocab 45qs (from PDF 08) ──
   {
-    id: "wg8", title: "Vocab Set 8 · 45qs", subtitle: "Kosakata ライフライン第6章 (2)",
+    id: "wg8", title: "Vocab Set 3 · 45qs", subtitle: "Kosakata ライフライン第6章 (2)",
     track: "lifeline",
     emoji: "📖", color: "#818cf8", grad: "linear-gradient(135deg,#312e81,#4338ca)",
     source: "wayground-pdf8",
@@ -740,7 +740,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg9: ライフライン 6 (2) 47qs (from PDF 09 OCR) ──
   {
-    id: "wg9", title: "Vocab Set 9 · 47qs", subtitle: "Kosakata ライフライン 6 (2)",
+    id: "wg9", title: "Vocab Set 4 · 45qs", subtitle: "Kosakata ライフライン第6章 (3)",
     track: "lifeline",
     emoji: "📚", color: "#34d399", grad: "linear-gradient(135deg,#064e3b,#059669)",
     source: "wayground-pdf9",
@@ -760,7 +760,6 @@ export const WAYGROUND_SETS = [
     { id: 13, q: "Apa bahasa Jepangnya \"Sambungan flare\"?", hint: "Sambungan flare", opts: ["フレア接合《フレアせつごう》","ろう接合《ろうせつごう》","メカニカル接合《メカニカルせつごう》"], opts_id: ["Sambungan flare","",""], ans: 0, exp: "フレア接合《フレアせつごう》 = bahasa Jepangnya." },
     { id: 14, q: "Apa bahasa Jepangnya \"Gudang\"?", hint: "Gudang", opts: ["倉庫《そうこ》","車庫《しゃこ》","機械室《きかいしつ》"], opts_id: ["Gudang","",""], ans: 0, exp: "倉庫《そうこ》 = bahasa Jepangnya." },
     { id: 15, q: "Apa bahasa Jepangnya \"Pipa polietilen untuk distribusi air\"?", hint: "Pipa polietilen untuk distribusi air", opts: ["水道配水用ポリエチレン管《すいどうはいすいようポリエチレンかん》","光ケーブル《ひかりケーブル》","配管《はいかん》"], opts_id: ["Pipa polietilen untuk distribusi air","",""], ans: 0, exp: "水道配水用ポリエチレン管《すいどうはいすいようポリエチレンかん》 = bahasa Jepangnya." },
-    { id: 16, q: "滑剤の塗布《かつざいのとふ》の意味は何ですか？", hint: "滑剤の塗布《かつざいのとふ》の意味は何ですか？", opts: ["Pengolesan pelumas","Pembersihan pipa","Pemasangan pipa"], opts_id: ["Pengolesan pelumas","Pembersihan pipa","Pemasangan pipa"], ans: 0, exp: "Pengolesan pelumas = artinya." },
     { id: 17, q: "融着準備《ゆうちゃくじゅんび》の意味は何ですか？", hint: "融着準備《ゆうちゃくじゅんび》の意味は何ですか？", opts: ["Persiapan fusi","Pemotongan pipa","Penyambungan pipa"], opts_id: ["Persiapan fusi","Pemotongan pipa","Penyambungan pipa"], ans: 0, exp: "Persiapan fusi = artinya." },
     { id: 18, q: "電気通信工事《でんきつうしんこうじ》の意味は何ですか？", hint: "電気通信工事《でんきつうしんこうじ》の意味は何ですか？", opts: ["Pekerjaan telekomunikasi","Pekerjaan listrik","Pekerjaan pendingin"], opts_id: ["Pekerjaan telekomunikasi","Pekerjaan listrik","Pekerjaan pendingin"], ans: 0, exp: "Pekerjaan telekomunikasi = artinya." },
     { id: 19, q: "高圧・低圧《こうあつ・ていあつ》の意味は何ですか？", hint: "高圧・低圧《こうあつ・ていあつ》の意味は何ですか？", opts: ["Tegangan tinggi dan rendah","Pemotongan pipa","Pemasangan kabel"], opts_id: ["Tegangan tinggi dan rendah","Pemotongan pipa","Pemasangan kabel"], ans: 0, exp: "Tegangan tinggi dan rendah = artinya." },
@@ -771,7 +770,6 @@ export const WAYGROUND_SETS = [
     { id: 24, q: "Apa bahasa Jepangnya \"Posisi cincin karet\"?", hint: "Posisi cincin karet", opts: ["ゴム輪の位置《ゴムわのいち》","ゴム輪《ゴムわ》","ゴム輪のセット《ゴムわのセット》"], opts_id: ["Posisi cincin karet","",""], ans: 0, exp: "ゴム輪の位置《ゴムわのいち》 = bahasa Jepangnya." },
     { id: 25, q: "Apa bahasa Jepangnya \"Pekerjaan telekomunikasi\"?", hint: "Pekerjaan telekomunikasi", opts: ["電気通信工事《でんきつうしんこうじ》","通信ケーブル《つうしんケーブル》","ケーブル配線《ケーブルはいせん》"], opts_id: ["Pekerjaan telekomunikasi","",""], ans: 0, exp: "電気通信工事《でんきつうしんこうじ》 = bahasa Jepangnya." },
     { id: 26, q: "マンホールの意味は何ですか？", hint: "マンホールの意味は何ですか？", opts: ["Manhole","Gudang","Terowongan"], opts_id: ["Manhole","Gudang","Terowongan"], ans: 0, exp: "Manhole = artinya." },
-    { id: 27, q: "溶接《ようせつ》の意味は何ですか？", hint: "溶接《ようせつ》の意味は何ですか？", opts: ["Pengelasan","Pengeboran","Pemasangan pipa"], opts_id: ["Pengelasan","Pengeboran","Pemasangan pipa"], ans: 0, exp: "Pengelasan = artinya." },
     { id: 28, q: "電柱《でんちゅう》の意味は何ですか？", hint: "電柱《でんちゅう》の意味は何ですか？", opts: ["Tiang listrik","Kabel listrik","Konstruksi baja"], opts_id: ["Tiang listrik","Kabel listrik","Konstruksi baja"], ans: 0, exp: "Tiang listrik = artinya." },
     { id: 29, q: "光ファイバーケーブルの意味は何ですか？", hint: "光ファイバーケーブルの意味は何ですか？", opts: ["Kabel serat optik","Kabel listrik","Kabel logam"], opts_id: ["Kabel serat optik","Kabel listrik","Kabel logam"], ans: 0, exp: "Kabel serat optik = artinya." },
     { id: 30, q: "短絡《たんらく》の意味は何ですか？", hint: "短絡《たんらく》の意味は何ですか？", opts: ["Korsleting","Kebocoran listrik","Pemutusan kabel"], opts_id: ["Korsleting","Kebocoran listrik","Pemutusan kabel"], ans: 0, exp: "Korsleting = artinya." },
@@ -796,7 +794,7 @@ export const WAYGROUND_SETS = [
   },
   // ── wg11: ライフライン言葉第5章 50qs (from PDF 11 OCR) ──
   {
-    id: "wg11", title: "Vocab Set 11 · 50qs", subtitle: "Kosakata ライフライン言葉第5章",
+    id: "wg11", title: "Vocab Set 5 · 50qs", subtitle: "Kosakata ライフライン言葉第5章",
     track: "lifeline",
     emoji: "🔧", color: "#f472b6", grad: "linear-gradient(135deg,#831843,#db2777)",
     source: "wayground-pdf11",

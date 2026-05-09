@@ -21,6 +21,7 @@ export { QUIZ_SETS, getQuizSetsForTrack } from './quiz-sets.js';
 // Study aids — with track field
 export { ANGKA_KUNCI } from './angka-kunci.js';
 export { DANGER_PAIRS } from './danger-pairs.js';
+export { CONFUSION_PAIRS } from './confusion-pairs.js';
 
 export {
   CATEGORIES,

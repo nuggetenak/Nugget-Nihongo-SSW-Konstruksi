@@ -21,8 +21,8 @@ describe('storage v3→v4 migration', () => {
     const prefs = get('prefs');
 
     expect(prog._v).toBe(STORAGE_VERSION);
-    expect(prog.sipilScores).toBeDefined();
-    expect(prog.bangunanScores).toBeDefined();
+    expect(prog.dobokuScores).toBeDefined();
+    expect(prog.kenchikuScores).toBeDefined();
     expect(prog.sessions).toEqual([]);
     expect(prog.dailyMission).toBeNull();
 
@@ -80,8 +80,8 @@ describe('storage v3→v4 migration', () => {
 
     // New v3 fields added
     expect(prog._v).toBe(STORAGE_VERSION);
-    expect(prog.sipilScores).toEqual({});
-    expect(prog.bangunanScores).toEqual({});
+    expect(prog.dobokuScores).toEqual({});
+    expect(prog.kenchikuScores).toEqual({});
     expect(prog.sessions).toEqual([]);
     expect(prog.dailyMission).toBeNull();
     expect(prefs._v).toBe(STORAGE_VERSION);
@@ -92,8 +92,8 @@ describe('storage v3→v4 migration', () => {
 
   it('DEFAULTS.progress has all required v3 fields', () => {
     const p = DEFAULTS.progress;
-    expect(p.sipilScores).toBeDefined();
-    expect(p.bangunanScores).toBeDefined();
+    expect(p.dobokuScores).toBeDefined();
+    expect(p.kenchikuScores).toBeDefined();
     expect(p.sessions).toBeDefined();
     expect(p.dailyMission).toBeDefined();
   });

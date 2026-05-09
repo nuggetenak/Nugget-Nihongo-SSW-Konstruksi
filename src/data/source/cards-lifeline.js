@@ -10,7 +10,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan lifeline",
   desc: "Pekerjaan utilitas vital: listrik, gas kota, air, drainase, dan telekomunikasi.",
-  quote: "「ライフラインの工事《こうじ》中《ちゅう》は近隣《きんりん》への影響《えいきょう》に注意《ちゅうい》して」",
   _origIndex: 26
   },
   {
@@ -33,7 +32,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan gas kota",
   desc: "Aliran gas kota: LNG → tangki → pipa bawah tanah → distribusi ke pabrik/rumah.",
-  quote: "「ガス管《かん》の近《ちか》くは火気《かき》厳禁《げんきん》です」",
   _origIndex: 29
   },
   {
@@ -45,7 +43,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan telekomunikasi",
   desc: "Pembangunan jaringan telepon & internet dengan kabel logam atau serat optik.",
-  quote: "「通信《つうしん》ケーブルは傷《きず》つけないよう注意《ちゅうい》して」",
   _origIndex: 31
   },
   {
@@ -57,7 +54,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan sistem AC",
   desc: "Pemasangan sistem pengatur suhu, kelembapan, dan pemurnian udara dalam ruangan.",
-  quote: "「空調《くうちょう》設備《せつび》の試運転《しうんてん》前《まえ》に配管《はいかん》の確認《かくにん》をして」",
   _origIndex: 32
   },
   {
@@ -69,7 +65,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sistem proteksi kebakaran",
   desc: "Pemasangan sistem proteksi kebakaran: alarm, sprinkler, dan pompa pemadam.",
-  quote: "「消防《しょうぼう》設備《せつび》は定期《ていき》点検《てんけん》が義務《ぎむ》です」",
   _origIndex: 33
   },
   {
@@ -147,7 +142,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Detektor fase",
   desc: "Alat cek urutan fase sistem 3-fase untuk menentukan arah rotasi motor.",
-  quote: "「モーター接続《せつぞく》前《まえ》に検相器《けんそうき》で確認《かくにん》して」",
   _origIndex: 50
   },
   {
@@ -159,7 +153,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Tester / Multimeter",
   desc: "Alat ukur voltase, arus, dan resistansi pada rangkaian listrik.",
-  quote: "「テスターで断線《だんせん》していないか確認《かくにん》して」",
   _origIndex: 51
   },
   {
@@ -171,7 +164,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Clamp meter",
   desc: "Alat ukur arus listrik dengan menjepit kabel tanpa memutus rangkaian.",
-  quote: "「クランプメーターで負荷《ふか》電流《でんりゅう》を測《はか》って」",
   _origIndex: 52
   },
   {
@@ -194,7 +186,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Conduit fleksibel",
   desc: "Conduit yang bisa ditekuk bebas. Tersedia jenis logam dan resin (PF/CD).",
-  quote: "「機器《きき》の接続部《せつぞくぶ》にはフレキを使《つか》って」",
   _origIndex: 54
   },
   {
@@ -206,7 +197,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pull box",
   desc: "Kotak junction untuk menghubungkan dan mencabangkan kabel. Jenis logam dan resin.",
-  quote: "「プルボックスのサイズを図面《ずめん》で確認《かくにん》して」",
   _origIndex: 55
   },
   {
@@ -229,7 +219,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kabel VVF",
   desc: "Kabel listrik berisolasi vinil berbentuk datar untuk instalasi rumah/gedung.",
-  quote: "「VVFは露出《ろしゅつ》配線《はいせん》に使《つか》わないで」",
   _origIndex: 57
   },
   {
@@ -263,7 +252,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Batang pentanahan",
   desc: "Batang baja berlapis yang ditancapkan ke tanah untuk sistem pentanahan (grounding).",
-  quote: "「接地棒《せっちぼう》は規定《きてい》の深《ふか》さまで打《う》ち込《こ》んで」",
   _origIndex: 60
   },
   {
@@ -275,7 +263,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Handhole",
   desc: "Kotak akses kabel bawah tanah — lebih kecil dari manhole. Untuk listrik dan komunikasi.",
-  quote: "「ハンドホールの蓋《ふた》はしっかり閉《し》めて」",
   _origIndex: 61
   },
   {
@@ -331,7 +318,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kabel serat optik",
   desc: "Kabel serat optik yang dibundel. Tersedia 20 hingga 400 inti.",
-  quote: "「光《ひかり》ファイバーは曲《ま》げ半径《はんけい》に注意《ちゅうい》して」",
   _origIndex: 66
   },
   {
@@ -398,7 +384,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Router",
   desc: "Perangkat jaringan yang menghubungkan dan memisahkan beberapa jaringan berbeda.",
-  quote: "「ルーターの設置《せっち》場所《ばしょ》を監督《かんとく》に確認《かくにん》して」",
   _origIndex: 72
   },
   {
@@ -498,7 +483,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa PVC keras (VP/VU)",
   desc: "Pipa PVC abu-abu: VP=tebal, VU=tipis. Ringan & halus, tapi rentan benturan dan panas.",
-  quote: "「VPとVUを間違《まちが》えないように確認《かくにん》して」",
   _origIndex: 81
   },
   {
@@ -532,7 +516,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa tembaga",
   desc: "Pipa tembaga tanpa sambungan untuk jalur refrigeran AC. Ditutupi bahan isolasi termal tahan api.",
-  quote: "「銅管《どうかん》は傷《きず》つけないよう丁寧《ていねい》に扱《あつか》って」",
   _origIndex: 84
   },
   {
@@ -566,7 +549,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kunci pipa (piren)",
   desc: "Tang pipa untuk mencengkeram dan memutar pipa bulat saat penyambungan.",
-  quote: "「パイプレンチは正《ただ》しい方向《ほうこう》に使《つか》って」",
   _origIndex: 87
   },
   {
@@ -600,7 +582,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Siku (elbow)",
   desc: "Sambungan pipa yang mengubah arah aliran 45° atau 90°.",
-  quote: "「エルボの向《む》きを図面《ずめん》で確認《かくにん》してから取《と》り付《つ》けて」",
   _origIndex: 90
   },
   {
@@ -612,7 +593,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Tee",
   desc: "Sambungan pipa tiga arah untuk membuat cabang aliran.",
-  quote: "「チーズのサイズは配管径《はいかんけい》に合《あ》わせて」",
   _origIndex: 91
   },
   {
@@ -679,7 +659,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Isolasi busa polistiren",
   desc: "Insulasi polistirena — tidak tahan suhu ≥70°C. Umum dipakai untuk pipa air dan drainase.",
-  quote: "「高温《こうおん》配管《はいかん》には発泡《はっぽう》スチロールは使《つか》えません」",
   _origIndex: 97
   },
   {
@@ -735,7 +714,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alat pemadam api (APAR)",
   desc: "Perangkat portabel untuk memadamkan api awal kebakaran. Dipasang di setiap lokasi sesuai",
-  quote: "「消火器《しょうかき》の場所《ばしょ》と使《つか》い方《かた》を必《かなら》ず覚《おぼ》えておけよ」",
   _origIndex: 102
   },
   {
@@ -791,7 +769,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Instalasi luar vs dalam",
   desc: "外線《がいせん》=hubung tiang ke gedung. 内線《ないせん》=listrik dalam gedung (grounding, panel, AC).",
-  quote: "「内線《ないせん》の配線図《はいせんず》もってきて」",
   _origIndex: 198
   },
   {
@@ -803,7 +780,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Mesin utama pekerjaan AC",
   desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport",
-  quote: undefined,
   _origIndex: 219
   },
   {
@@ -815,7 +791,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 kategori pemadam K3",
   desc: "①消火《しょうか》=sprinkler/hidran ②警報《けいほう》=alarm asap ③避難《ひなん》=jalur evakuasi; wajib dipasang dan dirawat.",
-  quote: "「消防《しょうぼう》設備《せつび》の点検《てんけん》記録《きろく》見《み》せて」",
   _origIndex: 220
   },
   {
@@ -827,7 +802,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Jenis tungku (chikuro)",
   desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku",
-  quote: "「炉《ろ》の内壁《ないへき》点検《てんけん》して」",
   _origIndex: 221
   },
   {
@@ -839,7 +813,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 jenis duct gedung",
   desc: "排煙《はいえん》duct=buang asap kebakaran; 空調《くうちょう》duct=distribusi udara AC; 排気《はいき》duct=buang panas/bau.",
-  quote: "「排煙《はいえん》ダクトの気密《きみつ》テストして」",
   _origIndex: 230
   },
   {
@@ -851,7 +824,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Isolasi, bocor, grounding",
   desc: "絶縁《ぜつえん》=cegah arus bocor; 漏電《ろうでん》=arus bocor — bahaya; 接地《せっち》(アース)=hubung ke tanah cegah",
-  quote: "「アースが取《と》れているか確認《かくにん》してくれよ」",
   _origIndex: 271
   },
   {
@@ -863,7 +835,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kabel aerial vs ditanam",
   desc: "架空配線《かくうはいせん》=kabel via tiang; 埋設《まいせつ》=kabel ditanam via 3 cara: 管《かん》路式《かんろしき》, 直接埋設《ちょくせつまいせつ》,",
-  quote: "「埋設《まいせつ》方式《ほうしき》だから掘削《くっさく》に注意《ちゅうい》して」",
   _origIndex: 272
   },
   {
@@ -875,7 +846,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa dalam vs pipa luar",
   desc: "隠《かく》ぺい配管《はいかん》=pipa dalam dinding/plafon; 露出《ろしゅつ》配管《はいかん》=pipa tampak di permukaan.",
-  quote: "「この部《ぶ》屋《へや》は露出《ろしゅつ》配管《はいかん》でいいから天井《てんじょう》へ」",
   _origIndex: 273
   },
   {
@@ -887,7 +857,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 kelas tegangan DC/AC",
   desc: "低圧《ていあつ》: DC≤750V, AC≤600V; 高圧《こうあつ》: s.d. 7000V; 特別高圧《とくべつこうあつ》: >7000V.",
-  quote: "「高圧《こうあつ》部《ぶ》分《ぶぶん》には絶対《ぜったい》に触《ふ》れるな」",
   _origIndex: 274
   },
   {
@@ -899,7 +868,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Arus DC vs AC",
   desc: "直流《ちょくりゅう》(DC)=arus tidak berubah arah; 交流《こうりゅう》(AC)=arus periodik. Listrik rumah Jepang: AC 100V.",
-  quote: "「直流《ちょくりゅう》と交流《こうりゅう》を間違《まちが》えないようにして」",
   _origIndex: 275
   },
   {
@@ -911,7 +879,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Panel distribusi telecom",
   desc: "Papan distribusi komunikasi gedung; semua jalur dari luar masuk ke MDF sebelum didistribusikan.",
-  quote: "「MDFの配線《はいせん》は図面《ずめん》通《とお》りにやってくれ」",
   _origIndex: 276
   },
   {
@@ -923,7 +890,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Simbol diameter dibaca パイ",
   desc: "Simbol diameter Φ; di lapangan konstruksi Jepang dibaca パイ, bukan ファイ secara matematik.",
-  quote: "「このパイプ、パイ50だから間違《まちが》えるな」",
   _origIndex: 277
   },
   {
@@ -935,7 +901,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Jargon listrik lapangan",
   desc: "通電《つうでん》=arus aktif; あたる=cek pakai alat ukur; かしめる=crimp; 飛《と》ぶ/落《お》ちる=breaker trip.",
-  quote: "「ブレーカーが飛《と》んだら原因《げんいん》確認《かくにん》してから復旧《ふっきゅう》して」",
   _origIndex: 278
   },
   {
@@ -947,7 +912,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "AC, ventilasi, asap",
   desc: "空調《くうちょう》=atur suhu & kualitas udara; 換気《かんき》=ganti udara kotor; 排煙《はいえん》=keluarkan asap saat",
-  quote: "「排煙《はいえん》ダクトは図面《ずめん》通《とお》りにしてくれ」",
   _origIndex: 279
   },
   {
@@ -959,7 +923,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Air kotor WC vs non-WC",
   desc: "汚水《おすい》=air buangan WC; 雑排水《ざつはいすい》=buangan kamar mandi/dapur; keduanya disalurkan terpisah.",
-  quote: "「汚水管《おすいかん》と雑排水管《ざつはいすいかん》を間違《まちが》えないで接続《せつぞく》してくれ」",
   _origIndex: 280
   },
   {
@@ -971,7 +934,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Uji kebocoran pipa",
   desc: "Uji kebocoran: 水圧《すいあつ》試験《しけん》=tekanan pipa suplai; 満水《まんすい》試験《しけん》=isi penuh pipa drainase.",
-  quote: "「試験《しけん》前《まえ》に全《ぜん》バルブを閉《し》めてから加圧《かあつ》してくれ」",
   _origIndex: 281
   },
   {
@@ -983,7 +945,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Lining, balik, kemiringan",
   desc: "ライニング=lapisan dalam pipa; 逆流《ぎゃくりゅう》=aliran balik; 勾配《こうばい》=kemiringan pipa agar air mengalir.",
-  quote: "「勾配《こうばい》を確認《かくにん》してから配管《はいかん》固定《こてい》してくれよ」",
   _origIndex: 282
   },
   {
@@ -995,7 +956,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Penarikan, jarak, tembus",
   desc: "配線《はいせん》=pasang/rentang kabel; 離隔《りかく》=jarak pisah antar kabel; 貫通《かんつう》=lubangi dinding untuk",
-  quote: "「離隔《りかく》距離《きょり》を守《まも》って配線《はいせん》してくれよ」",
   _origIndex: 297
   },
   {
@@ -1007,7 +967,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "通線/konduit/slab/siapkan",
   desc: "通線《つうせん》=tarik kabel; 配管《はいかん》する=pasang konduit; スラブ配管《はいかん》=konduit dalam slab; 仕込《しこ》む=persiapkan.",
-  quote: "「スラブ配管《はいかん》は打設《だせつ》前《まえ》に仕込《しこ》んでおいてくれ」",
   _origIndex: 298
   },
   {
@@ -1019,7 +978,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Penangkal vs arrester",
   desc: "避雷針《ひらいしん》=tangkap petir di atap (lindungi bangunan); 避雷器《ひらいき》=lindungi peralatan dari lonjakan",
-  quote: "「避雷針《ひらいしん》と避雷器《ひらいき》は違《ちが》うから図面《ずめん》で確認《かくにん》してくれ」",
   _origIndex: 299
   },
   {
@@ -1031,7 +989,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Selubung/input/output",
   desc: "被覆《ひふく》=insulasi kawat; 一次側《いちじがわ》=sisi input listrik; 二次側《にじがわ》=sisi output. Penting saat koneksi",
-  quote: "「一次側《いちじがわ》と二次側《にじがわ》を間違《まちが》えないよう接続《せつぞく》してくれ」",
   _origIndex: 300
   },
   {
@@ -1043,7 +1000,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kencang ulang & penandaan",
   desc: "増《ま》し締《し》めめ=kencangkan kembali baut yang kendur; マーキング=tandai baut setelah dikencangkan agar",
-  quote: "「増《ま》し締《し》め後《ご》には必《かなら》ずマーキングしてくれよ」",
   _origIndex: 301
   },
   {
@@ -1055,7 +1011,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Reroute, sero, exit slab",
   desc: "振《ふ》る=ubah jalur menghindari hambatan; 競《せ》る=dua elemen hampir bersentuhan; 伏《ふ》せる=exit pipa dari",
-  quote: "「競《せ》っているところを振《ふ》って回避《かいひ》してくれ」",
   _origIndex: 302
   },
   {
@@ -1067,7 +1022,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sanitasi & air stagnan",
   desc: "衛生設備《えいせいせつび》=peralatan toilet & kamar mandi; 死水《しみず》=air stagnan dalam pipa, berpotensi",
-  quote: "「定期的《ていきてき》に水《みず》を流《なが》して死水《しみず》対策《たいさく》をしてくれ」",
   _origIndex: 303
   },
   {
@@ -1079,7 +1033,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Cabang/muai/akordeon",
   desc: "分岐《ぶんき》=pipa terbagi dua; 伸縮《しんしゅく》=memuai/menyusut akibat suhu; 蛇腹《じゃばら》=konektor fleksibel",
-  quote: "「長《なが》い配管《はいかん》には蛇腹《じゃばら》を入《い》れて伸縮《しんしゅく》に対応《たいおう》してくれ」",
   _origIndex: 305
   },
   {
@@ -1091,7 +1044,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Garis sumbu / ujung pipa",
   desc: "芯《しん》=garis tengah (centerline) pipa/duct — referensi pengukuran; 先《さき》=ujung dari pipa.",
-  quote: "「芯《しん》から先《さき》の長《なが》さを正確《せいかく》に測《はか》ってくれ」",
   _origIndex: 306
   },
   {
@@ -1103,7 +1055,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sambung kabel komunikasi",
   desc: "接続《せつぞく》=hubungkan dua elemen (umum); 結線《けっせん》=khusus sambung kabel komunikasi.",
-  quote: "「通信線《つうしんせん》の結線《けっせん》は図面《ずめん》通《とお》りに正確《せいかく》にやってくれ」",
   _origIndex: 315
   },
   {
@@ -1115,7 +1066,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Vibrator & tuang beton",
   desc: "打《う》ち込《こ》み=tuang beton ke bekisting; バイブレーター=alat getar hilangkan rongga udara dalam beton cair.",
-  quote: "「バイブレーターを入《い》れながら打《う》ち込《こ》んでくれ」",
   _origIndex: 316
   },
   {
@@ -1127,7 +1077,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Tang crimp & ring sleeve",
   desc: "圧着《あっちゃく》ペンチ=tang crimp kabel ke terminal; リングスリーブ=selongsong logam untuk sambung beberapa kabel.",
-  quote: "「リングスリーブをきちんとかしめてくれよ」",
   _origIndex: 320
   },
   {
@@ -1139,7 +1088,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Conduit bender pipa logam",
   desc: "Alat membengkokkan pipa logam (金属管《きんぞくかん》) sesuai sudut yang dibutuhkan dalam instalasi listrik.",
-  quote: undefined,
   _origIndex: 325
   },
   {
@@ -1151,7 +1099,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "CD konduit vs PF konduit",
   desc: "CD管《かん》=tidak tahan nyala, khusus tanam dalam beton (oranye). PF管《かん》=tahan nyala, instalasi umum.",
-  quote: undefined,
   _origIndex: 326
   },
   {
@@ -1163,7 +1110,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Konduit baja C vs G",
   desc: "C管《かん》=baja tipis, kuat benturan, dalam ruangan; G管《かん》=baja tebal, berlapis galvanis, tahan cuaca.",
-  quote: undefined,
   _origIndex: 327
   },
   {
@@ -1175,7 +1121,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa kertas (void tube)",
   desc: "Pipa kertas ditanam sebelum cor beton membentuk lubang tembus; dilepas setelah beton mengeras.",
-  quote: undefined,
   _origIndex: 328
   },
   {
@@ -1187,7 +1132,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kotak cabang kabel",
   desc: "Kotak untuk percabangan dan penyambungan kabel; berbeda dari pull box yang untuk tarik kabel antar",
-  quote: undefined,
   _origIndex: 329
   },
   {
@@ -1199,7 +1143,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Crimping: merah vs kuning",
   desc: "Merah=untuk 圧着《あっちゃく》端子《たんし》(terminal); kuning=untuk リングスリーブ (sambung beberapa kabel). Warna tidak",
-  quote: undefined,
   _origIndex: 330
   },
   {
@@ -1211,7 +1154,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Penyambung beberapa kabel",
   desc: "Selongsong cincin untuk sambung beberapa kabel; di-crimp dengan tang 圧着《あっちゃく》pegangan kuning.",
-  quote: undefined,
   _origIndex: 331
   },
   {
@@ -1223,7 +1165,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kawat panduan konduit",
   desc: "Kawat dimasukkan dahulu ke konduit; kabel utama disambung ke ujungnya lalu ditarik melewati pipa.",
-  quote: undefined,
   _origIndex: 332
   },
   {
@@ -1235,7 +1176,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Raceway listrik gedung",
   desc: "Rel distribusi listrik sekaligus penggantung lampu; digunakan di gudang atau area tanpa plafon.",
-  quote: undefined,
   _origIndex: 333
   },
   {
@@ -1247,7 +1187,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Baut gantung penuh ulir",
   desc: "Baut panjang berulir penuh tanpa kepala; untuk menggantung konduit, kabel rack, dan raceway.",
-  quote: undefined,
   _origIndex: 334
   },
   {
@@ -1259,7 +1198,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alat kupas isolasi kabel",
   desc: "Alat mengupas insulasi kabel tanpa merusak kawat inti; sering dilengkapi strip gauge pengukur",
-  quote: undefined,
   _origIndex: 335
   },
   {
@@ -1271,7 +1209,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kabel CV vs EM-EEF",
   desc: "EM-EEF=VVF berselubung polyethylene; CV=insulasi 架橋《かきょう》ポリエチレン, ketahanan nyala lebih tinggi.",
-  quote: undefined,
   _origIndex: 336
   },
   {
@@ -1283,7 +1220,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "CT (karet) / VCT (vinyl)",
   desc: "CT=selubung karet, tahan abrasi, untuk kabel bergerak; VCT=selubung vinyl, tahan nyala dan air.",
-  quote: undefined,
   _origIndex: 337
   },
   {
@@ -1295,7 +1231,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Thermal relay panas motor",
   desc: "Memutus rangkaian saat suhu melampaui batas; melindungi motor listrik dari panas berlebih.",
-  quote: undefined,
   _origIndex: 338
   },
   {
@@ -1307,7 +1242,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kotak sambungan aerial",
   desc: "Kotak di tiang untuk sambung/cabang inti kabel aerial; serat optik=abu-abu, kabel metal=hitam.",
-  quote: undefined,
   _origIndex: 339
   },
   {
@@ -1319,7 +1253,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kawat penopang aerial",
   desc: "Kawat baja di atas kabel aerial agar kabel tidak menanggung beban tarik sendiri.",
-  quote: undefined,
   _origIndex: 340
   },
   {
@@ -1331,7 +1264,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Penegang & penjepit kawat",
   desc: "掴線器《かくせんき》=penjepit kawat gantung; 張線器《ちょうせんき》=penegang kawat gantung agar tidak kendur.",
-  quote: undefined,
   _origIndex: 341
   },
   {
@@ -1343,7 +1275,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Rectifier vs baterai",
   desc: "整流器《せいりゅうき》=ubah AC ke DC; 蓄電池《ちくでんち》=simpan energi listrik (isi daya). Digunakan dalam sistem",
-  quote: undefined,
   _origIndex: 342
   },
   {
@@ -1355,7 +1286,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "LAN tester 8 kawat",
   desc: "Alat cek 8 kawat kabel LAN apakah ada yang putus atau bersilang; dipasang di kedua ujung konektor.",
-  quote: undefined,
   _origIndex: 343
   },
   {
@@ -1367,7 +1297,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa vs duct udara",
   desc: "配管《はいかん》=pipa untuk alirkan air/gas; ダクト=saluran udara, ada tipe kotak (角《かく》) dan bundar (丸《まる》).",
-  quote: undefined,
   _origIndex: 344
   },
   {
@@ -1379,7 +1308,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Tube vs pipe cutter",
   desc: "チューブカッター=potong pipa tipis (tembaga, baja, aluminium); パイプカッター=potong pipa lebih tebal.",
-  quote: undefined,
   _origIndex: 345
   },
   {
@@ -1391,7 +1319,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Flaring tool pipa tembaga",
   desc: "Alat melebarkan ujung pipa tembaga menjadi bentuk terompet untuk sambungan instalasi pendingin (AC).",
-  quote: undefined,
   _origIndex: 346
   },
   {
@@ -1403,7 +1330,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Expander pipa tembaga",
   desc: "Alat perlebar (拡管《かっかん》) ujung pipa tembaga agar pipa lain bisa dimasukkan; berbeda dari flaring",
-  quote: undefined,
   _origIndex: 347
   },
   {
@@ -1415,7 +1341,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alat uji tekanan hidrolik",
   desc: "Alat ukur saat uji tekanan air (水圧《すいあつ》試験《しけん》) pada pipa air bersih dan panas untuk cek kebocoran.",
-  quote: undefined,
   _origIndex: 348
   },
   {
@@ -1427,7 +1352,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa PVC tahan panas",
   desc: "Pipa PVC keras tahan panas, berwarna merah-kecoklatan; untuk instalasi pendingin-pemanas dan kolam",
-  quote: undefined,
   _origIndex: 349
   },
   {
@@ -1439,7 +1363,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa baja lapis PVC (VLP)",
   desc: "Pipa baja dilapisi PVC keras di dalamnya untuk cegah korosi; digunakan untuk jalur air bersih.",
-  quote: undefined,
   _origIndex: 350
   },
   {
@@ -1451,7 +1374,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kran gas ujung vs tengah",
   desc: "末端《まったん》コック=kran ujung pipa untuk kompor; 中間《ちゅうかん》コック=katup di tengah jalur sebagai pemutus.",
-  quote: undefined,
   _origIndex: 351
   },
   {
@@ -1463,7 +1385,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Detektor kebocoran gas",
   desc: "Alat deteksi kebocoran gas dan keluarkan alarm; dipasang di dapur atau ruangan bergas.",
-  quote: undefined,
   _origIndex: 352
   },
   {
@@ -1475,7 +1396,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Katup pipa vs damper duct",
   desc: "弁《べん》(バルブ)=atur aliran cairan/gas dalam pipa; ダンパー=atur aliran udara dalam duct.",
-  quote: undefined,
   _origIndex: 353
   },
   {
@@ -1487,7 +1407,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Perangkap bau drainase",
   desc: "Bagian pipa drainase selalu berisi air untuk cegah bau dari saluran pembuangan masuk ke ruangan.",
-  quote: undefined,
   _origIndex: 354
   },
   {
@@ -1499,7 +1418,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sanitasi gedung 6 bidang",
   desc: "6 bidang sanitasi: air bersih, drainase, alat sanitasi, air panas, gas, dan pemadam.",
-  quote: "「どの設備《せつび》工事《こうじ》か図面《ずめん》で確認《かくにん》してから始《はじ》めて」",
   _origIndex: 355
   },
   {
@@ -1511,7 +1429,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sistem pemadam kabut air",
   desc: "Semprotkan kabut air untuk padam kebakaran; digunakan di parkir dan area bahan mudah terbakar.",
-  quote: undefined,
   _origIndex: 357
   },
   {
@@ -1523,7 +1440,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pemadam busa (minyak)",
   desc: "Untuk kebakaran minyak; busa menutup api (窒息《ちっそく》) dan sekaligus mendinginkan.",
-  quote: undefined,
   _origIndex: 358
   },
   {
@@ -1535,7 +1451,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sistem pemadam gas inert",
   desc: "Gas inert kurangi oksigen dan dinginkan; tidak merusak peralatan, cocok untuk server dan arsip.",
-  quote: undefined,
   _origIndex: 359
   },
   {
@@ -1547,7 +1462,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sistem pemadam halogen",
   desc: "Senyawa halogen hambat reaksi pembakaran; efektif untuk peralatan listrik aktif, komputer, dan",
-  quote: undefined,
   _origIndex: 360
   },
   {
@@ -1559,7 +1473,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Konduit baja tanpa ulir",
   desc: "Pipa baja instalasi listrik tanpa ulir; ukuran = diameter luar (E19=Ø19mm, E25=Ø25mm).",
-  quote: "「E管《かん》を配管《はいかん》して」",
   _origIndex: 390
   },
   {
@@ -1571,7 +1484,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Coupling vs combination",
   desc: "カップリング=sambung 2 konduit jenis sama; コンビネーションカップリング=sambung konduit beda jenis.",
-  quote: undefined,
   _origIndex: 391
   },
   {
@@ -1583,7 +1495,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Daktar channel profil C",
   desc: "Rel berbentuk C sebagai hanger untuk cable rack, konduit, dan peralatan MEP dari plafon.",
-  quote: undefined,
   _origIndex: 392
   },
   {
@@ -1595,7 +1506,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Double nut & saddle",
   desc: "Double nut=dua mur agar tidak kendur akibat getaran; saddle=braket U tempelkan konduit ke dinding.",
-  quote: undefined,
   _origIndex: 393
   },
   {
@@ -1607,7 +1517,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "VVF gepeng vs VVR bulat",
   desc: "VVF=vinyl gepeng, umum untuk instalasi dinding; VVR=vinyl bulat, lebih fleksibel.",
-  quote: undefined,
   _origIndex: 394
   },
   {
@@ -1619,7 +1528,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Relay vs thermal relay",
   desc: "リレー=saklar dikontrol sinyal kecil untuk rangkaian besar; サーマルリレー=proteksi motor dari panas berlebih.",
-  quote: undefined,
   _origIndex: 395
   },
   {
@@ -1631,7 +1539,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Self-fusing tape",
   desc: "Tape yang menyatu sendiri saat dililitkan sambil ditarik; digunakan untuk cegah bocor pada pipa air.",
-  quote: undefined,
   _origIndex: 396
   },
   {
@@ -1643,7 +1550,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Konektor colok / T-cabang",
   desc: "Konektor sisip: sambung tanpa crimping.\nT-konektor: cabang dari kabel induk.",
-  quote: undefined,
   _origIndex: 397
   },
   {
@@ -1655,7 +1561,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Gulungan kabel konstruksi",
   desc: "Gulungan kabel perpanjang listrik di lokasi konstruksi.\nGelar penuh — jika digulung panas berlebih.",
-  quote: undefined,
   _origIndex: 398
   },
   {
@@ -1667,7 +1572,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Fusion splice 3 metode",
   desc: "①Fusion: ujung serat dilelehkan — rugi terkecil.\n②Mekanik: tanpa panas.\n③Konektor: bisa dilepas.",
-  quote: undefined,
   _origIndex: 399
   },
   {
@@ -1679,7 +1583,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "OTDR — ukur panjang serat",
   desc: "Alat ukur jalur serat optik: panjang total, rugi di sambungan, dan lokasi kerusakan.",
-  quote: undefined,
   _origIndex: 400
   },
   {
@@ -1691,7 +1594,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kabel aerial terintegrasi",
   desc: "Kabel dengan kawat penopang terintegrasi; dipasang langsung ke tiang tanpa kawat gantung terpisah.",
-  quote: undefined,
   _origIndex: 401
   },
   {
@@ -1703,7 +1605,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Ragum pipa & mesin ulir",
   desc: "Ragum pipa: jepit pipa saat dipotong.\nMesin ulir: buat ulir di ujung pipa untuk fitting.",
-  quote: undefined,
   _origIndex: 402
   },
   {
@@ -1715,7 +1616,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alat debur ujung pipa",
   desc: "Alat hilangkan sisa potongan (burr) di ujung pipa logam/PVC sebelum penyambungan.",
-  quote: undefined,
   _origIndex: 403
   },
   {
@@ -1727,7 +1627,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sealant pipa: cair / tape",
   desc: "Sealant sambungan pipa berulir: tipe cair atau PTFE tape untuk cegah bocor.",
-  quote: undefined,
   _origIndex: 404
   },
   {
@@ -1739,7 +1638,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa SGP galvanis / polos",
   desc: "Pipa baja karbon (SGP) untuk instalasi berbagai fluida.\n白管《しろかん》= galvanis; 黒管《くろかん》= tanpa lapisan.",
-  quote: undefined,
   _origIndex: 405
   },
   {
@@ -1751,7 +1649,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa PVC: VP vs VU",
   desc: "VP = dinding tebal (tekanan); VU = dinding tipis (drainase). Keduanya abu-abu dan ringan.",
-  quote: undefined,
   _origIndex: 406
   },
   {
@@ -1763,7 +1660,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Fitting ulir besi tempa",
   desc: "Fitting besi tempa untuk pipa berulir: elbow 90°, tee 3 arah, socket lurus.",
-  quote: undefined,
   _origIndex: 407
   },
   {
@@ -1775,7 +1671,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa asbestos: dihentikan",
   desc: "Pipa asbes-semen: produksi dihentikan karena serat asbes menyebabkan mesothelioma.",
-  quote: undefined,
   _origIndex: 408
   },
   {
@@ -1787,7 +1682,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Hidran gedung: 3 jenis",
   desc: "Tipe 1 = 2 orang; Tipe mudah (kapasitas sama) = 1 orang; Tipe 2 = 1 orang, kapasitas kecil.",
-  quote: undefined,
   _origIndex: 409
   },
   {
@@ -1799,7 +1693,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Cek polaritas outlet",
   desc: "Dicolokkan ke stopkontak untuk memeriksa polaritas dan koneksi arde sudah benar.",
-  quote: undefined,
   _origIndex: 429
   },
   {
@@ -1811,7 +1704,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Palu elektrik — bor beton",
   desc: "Alat elektrik untuk melubangi atau meratakan dinding/slab beton saat membuka jalur konduit.",
-  quote: undefined,
   _origIndex: 430
   },
   {
@@ -1823,7 +1715,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Gergaji lubang gypsum",
   desc: "Gergaji sempit untuk buat lubang di gypsum/triplek, misal untuk kotak saklar atau outlet.",
-  quote: undefined,
   _origIndex: 431
   },
   {
@@ -1835,7 +1726,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Cover kotak tanam beton",
   desc: "Penutup dipasang pada kotak outlet sebelum dicor, melindungi dari masuknya material beton/plester.",
-  quote: undefined,
   _origIndex: 432
   },
   {
@@ -1847,7 +1737,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Konektor konduit ke kotak",
   desc: "Menghubungkan kotak instalasi dengan konduit logam atau konduit PF; dipasang di sisi kotak.",
-  quote: undefined,
   _origIndex: 433
   },
   {
@@ -1859,7 +1748,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Radius clamp grounding",
   desc: "Fitting logam untuk memastikan kontinuitas grounding antara kotak instalasi baja dan konduit logam.",
-  quote: undefined,
   _origIndex: 434
   },
   {
@@ -1871,7 +1759,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Terminal: press vs crimp",
   desc: "Press terminal: mesin khusus, kabel besar.\nCrimp terminal: tang tangan, kabel kecil.",
-  quote: undefined,
   _origIndex: 435
   },
   {
@@ -1883,7 +1770,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Terminal berbentuk batang",
   desc: "Crimp terminal ujung batang untuk blok terminal panel; dikrimping pakai tang crimping khusus.",
-  quote: undefined,
   _origIndex: 436
   },
   {
@@ -1895,7 +1781,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "COS — saklar pindah daya",
   desc: "Saklar pemindah sumber daya (PLN ke generator); dipasang di panel utama gedung.",
-  quote: undefined,
   _origIndex: 437
   },
   {
@@ -1907,7 +1792,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Bell mouth konduit",
   desc: "Komponen corong dipasang di ujung konduit saat menarik kabel, mencegah kabel tergores atau rusak.",
-  quote: undefined,
   _origIndex: 438
   },
   {
@@ -1919,7 +1803,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Grounding kabel rack",
   desc: "Antar cable rack butuh koneksi grounding: pakai earth bond wire atau non-bond fitting.",
-  quote: undefined,
   _origIndex: 439
   },
   {
@@ -1931,7 +1814,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "End cover / stud bar",
   desc: "End cover: tutup titik keluar kabel dari plafon.\nStud bar: pasang kotak ke tulangan tanpa bor.",
-  quote: undefined,
   _origIndex: 440
   },
   {
@@ -1943,7 +1825,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Keluarkan kabel dari drum",
   desc: "Mesin katrol untuk keluarkan kabel dari drum secara terkontrol saat instalasi kabel aerial.",
-  quote: undefined,
   _origIndex: 441
   },
   {
@@ -1955,7 +1836,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Katrol kabel aerial",
   desc: "Katrol kecil pada kawat gantung; kabel diletakkan di atasnya agar mudah ditarik tanpa gesekan.",
-  quote: undefined,
   _origIndex: 442
   },
   {
@@ -1967,7 +1847,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pompa pipa gedung",
   desc: "Memberikan energi kepada air dalam pipa agar mengalir ke tempat jauh atau ke lantai atas.",
-  quote: undefined,
   _origIndex: 443
   },
   {
@@ -1979,7 +1858,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alat ukur ulir pipa",
   desc: "Alat memeriksa ulir pada pipa dan fitting agar sesuai standar, memastikan sambungan tidak bocor.",
-  quote: undefined,
   _origIndex: 444
   },
   {
@@ -1991,7 +1869,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Bender pipa tembaga (AC)",
   desc: "Alat bengkokkan pipa tembaga tanpa gepeng/retak; khusus untuk instalasi refrigeran AC.",
-  quote: undefined,
   _origIndex: 456
   },
   {
@@ -2003,7 +1880,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Panel distribusi listrik",
   desc: "Panel berisi breaker: 自立盤《じりつばん》= berdiri lantai; 壁掛《かべか》けけ盤《かべかけばん》= di dinding.",
-  quote: undefined,
   _origIndex: 457
   },
   {
@@ -2015,7 +1891,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kawat IV insulasi tunggal",
   desc: "Kawat berinsulasi PVC untuk dalam ruangan; harus dalam konduit, bukan kabel berselubung.",
-  quote: undefined,
   _origIndex: 458
   },
   {
@@ -2027,7 +1902,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kotak instalasi tempel",
   desc: "Kotak instalasi menempel di dinding: tipe umum atau tipe khusus saklar/stopkontak.",
-  quote: undefined,
   _origIndex: 459
   },
   {
@@ -2039,7 +1913,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "VVF stripper dua lapisan",
   desc: "Alat khusus mengupas dua lapisan kabel VVF sekaligus: selubung luar dan insulasi inti kawat.",
-  quote: undefined,
   _origIndex: 465
   },
   {
@@ -2051,7 +1924,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Strip gauge: ukur kupasan",
   desc: "Gauge untuk mengukur panjang kupasan isolasi kabel; biasanya menjadi satu dengan wire stripper.",
-  quote: undefined,
   _origIndex: 466
   },
   {
@@ -2063,7 +1935,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Stopkontak: 2 tipe pasang",
   desc: "Stopkontak 100V: tanam dalam dinding atau tempel di permukaan; tipe tanam lebih umum di bangunan",
-  quote: undefined,
   _origIndex: 467
   },
   {
@@ -2075,7 +1946,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Aksesori bentuk khusus",
   desc: "Komponen berbentuk khusus digunakan pada posisi tertentu, misal sudut atau belokan pada cable rack.",
-  quote: undefined,
   _origIndex: 468
   },
   {
@@ -2087,7 +1957,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Anti-sway brace raceway",
   desc: "Penopang diagonal agar raceway tidak bergoyang; wajib di area rawan gempa atau getaran.",
-  quote: undefined,
   _origIndex: 469
   },
   {
@@ -2099,7 +1968,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Baut gantung tanpa bor",
   desc: "Fitting pasang baut gantung ke baja atau dek tanpa bor; mempercepat instalasi konduit dan rack.",
-  quote: undefined,
   _origIndex: 470
   },
   {
@@ -2111,7 +1979,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Lead terminal grounding",
   desc: "Menghubungkan 接地棒《せっちぼう》dengan 接地線《せっちせん》menuju panel.",
-  quote: "「リード端子《たんし》の圧着《あっちゃく》がしっかりできているか確認《かくにん》して」",
   _origIndex: 471
   },
   {
@@ -2123,7 +1990,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kabel metal: 2 jenis",
   desc: "Kabel tembaga untuk telekomunikasi: coaxial untuk antena TV dan UTP twisted pair untuk LAN/telepon.",
-  quote: undefined,
   _origIndex: 472
   },
   {
@@ -2135,7 +2001,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pelindung sambungan serat",
   desc: "Pelindung titik fusion splice; WAJIB dipasang ke kabel sebelum fusion dimulai.",
-  quote: undefined,
   _origIndex: 473
   },
   {
@@ -2147,7 +2012,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Fiber holder serat optik",
   desc: "Dudukan serat optik saat digunakan pada jacket remover, fiber cutter, atau mesin fusion splice.",
-  quote: "「ファイバーホルダにセットしてから作業《さぎょう》して」",
   _origIndex: 474
   },
   {
@@ -2159,7 +2023,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kupas jacket serat optik",
   desc: "Alat mengupas lapisan pelindung (jacket) ujung serat optik sebelum pemotongan dan fusion splice.",
-  quote: undefined,
   _origIndex: 475
   },
   {
@@ -2171,7 +2034,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Checker kabel koaksial",
   desc: "Alat cek konduktivitas sambungan kabel koaksial; berbeda dari LAN tester untuk kabel LAN.",
-  quote: undefined,
   _origIndex: 476
   },
   {
@@ -2183,7 +2045,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa tembaga refrigeran",
   desc: "Pipa tanpa sambungan dari tembaga untuk mensirkulasikan refrigeran antara unit luar dan dalam AC.",
-  quote: undefined,
   _origIndex: 477
   },
   {
@@ -2195,7 +2056,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Filter udara AC/HVAC",
   desc: "Penyaring debu dan partikel dari udara sebelum masuk sistem AC; perlu dibersihkan berkala.",
-  quote: undefined,
   _origIndex: 478
   },
   {
@@ -2207,7 +2067,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Peralatan sanitasi gedung",
   desc: "Peralatan air dalam gedung: keran, toilet, urinoir, wastafel, bak mandi, dan sink.",
-  quote: "「衛生《えいせい》器具《きぐ》の取付《とりつけ》完了《かんりょう》しましたか」",
   _origIndex: 479
   },
   {
@@ -2219,7 +2078,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Diameter nominal A vs B",
   desc: "Diameter nominal pipa: A-nominal (mm) dan B-nominal (inci); contoh 25A = 1B, 100A = 4B.",
-  quote: "「25Aの配管《はいかん》を持《も》ってきて」",
   _origIndex: 496
   },
   {
@@ -2231,7 +2089,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Cacat potong pipa ≥1 mm",
   desc: "Cacat potongan pipa: miring atau bertangga ≥1,0 mm menyebabkan sambungan bocor.",
-  quote: undefined,
   _origIndex: 498
   },
   {
@@ -2243,7 +2100,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Cara lilit seal tape pipa",
   desc: "Gulung searah putaran, 6–7 kali mulai 1 ulir dari ujung; tape di ujung berpotensi jadi penyumbat.",
-  quote: undefined,
   _origIndex: 500
   },
   {
@@ -2255,7 +2111,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kunci pasang ulir pipa",
   desc: "Kencangkan tangan dulu, lalu pipe wrench; hentikan saat masih tersisa 2–2,5 ulir.",
-  quote: undefined,
   _origIndex: 501
   },
   {
@@ -2267,7 +2122,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Ulir berkarat dilarang",
   desc: "Pipa/fitting berulir berkarat dilarang digunakan; karat membuat sambungan tidak rapat dan bocor.",
-  quote: undefined,
   _origIndex: 502
   },
   {
@@ -2279,7 +2133,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sealant cair ulir: K3",
   desc: "Dioleskan merata ke ulir; terkena mata→cuci banyak air dan ke dokter; terkena kulit→cuci sabun.",
-  quote: undefined,
   _origIndex: 505
   },
   {
@@ -2291,7 +2144,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Las gas untuk pipa kecil",
   desc: "3 jenis las gas: oksigen-asetilen, oksigen-hidrogen, udara-asetilen; untuk pipa diameter kecil.",
-  quote: undefined,
   _origIndex: 506
   },
   {
@@ -2303,7 +2155,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Las SMAW untuk pipa ≥100A",
   desc: "Las dengan elektroda berlapis fluks untuk melindungi logam cair; digunakan untuk pipa ≥100A.",
-  quote: undefined,
   _origIndex: 507
   },
   {
@@ -2315,7 +2166,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Beveling pipa 4 jenis",
   desc: "Pengerjaan ujung pipa untuk penetrasi las lebih baik; 4 jenis: V型《かた》, Y型《かた》, レ型《かた》, I型《かた》.",
-  quote: undefined,
   _origIndex: 508
   },
   {
@@ -2327,7 +2177,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Tack welding sebelum las",
   desc: "Las pendek sebelum pengelasan utama untuk menstabilkan posisi dan mencegah distorsi pada area bevel.",
-  quote: undefined,
   _origIndex: 509
   },
   {
@@ -2339,7 +2188,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sambungan mekanis pipa",
   desc: "Sambungan pipa menggunakan komponen mekanis: housing, MD, coupling, atau NO-HUB fitting.",
-  quote: undefined,
   _origIndex: 510
   },
   {
@@ -2351,7 +2199,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Marking insersi pipa PVC",
   desc: "Tanda di pipa sepanjang kedalaman masuk ke fitting; marking harus tercapai atau sambungan bocor.",
-  quote: undefined,
   _origIndex: 511
   },
   {
@@ -2363,7 +2210,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Adhesif PVC: urutan benar",
   desc: "Oleskan dari fitting dulu, lalu pipa; dorong penuh sekaligus dan tahan ±10 detik.",
-  quote: undefined,
   _origIndex: 512
   },
   {
@@ -2375,7 +2221,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Reamer khusus pipa lining",
   desc: "Burr pipa lining wajib dibuang dengan reamer khusus; reamer biasa merusak lapisan lining.",
-  quote: "「ライニング管《かん》用《よう》リーマでバリを取《と》って」",
   _origIndex: 514
   },
   {
@@ -2387,7 +2232,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Anti-korosi ujung lining",
   desc: "Melindungi ujung pipa baja lining dari korosi; ujung wajib di-chamfer 1/2–2/3 tebal lapisan PVC.",
-  quote: undefined,
   _origIndex: 515
   },
   {
@@ -2399,7 +2243,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Burr tembaga: arah bawah",
   desc: "Arahkan ujung pipa tembaga ke bawah saat deburring agar serbuk tidak masuk ke pipa refrigeran.",
-  quote: undefined,
   _origIndex: 517
   },
   {
@@ -2411,7 +2254,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sizing tool pipa tembaga",
   desc: "Koreksi kebulatan ujung pipa tembaga setelah deburring sebelum proses flaring.",
-  quote: undefined,
   _origIndex: 518
   },
   {
@@ -2423,7 +2265,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Radius tekuk min pipa AC",
   desc: "Tekuk manual: min 6× atau 10× dia; tekuk bender: min 4× dia. Di bawah batas pipa penyok.",
-  quote: undefined,
   _origIndex: 519
   },
   {
@@ -2435,7 +2276,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Flare joining pipa AC",
   desc: "Ujung pipa dikembangkan jadi terompet, dikencangkan dengan flare nut hingga sambungan kedap",
-  quote: undefined,
   _origIndex: 520
   },
   {
@@ -2447,7 +2287,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Brazing pipa tembaga",
   desc: "Bahan brazing dilelehkan ke celah sambungan; bebas oksida dan suhu tepat. Dinginkan dan cek pinhole.",
-  quote: undefined,
   _origIndex: 521
   },
   {
@@ -2459,7 +2298,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Insulasi menyusut maks 2%",
   desc: "Insulasi menyusut hingga 2% searah panjang (±8 cm per 4 m); celah menyebabkan kondensasi.",
-  quote: undefined,
   _origIndex: 522
   },
   {
@@ -2471,7 +2309,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Bentuk insulasi: 3 jenis",
   desc: "板状《いたじょう》dan 帯状《おびじょう》= untuk duct; 筒状《つつじょう》= untuk pipa. Material: GW, RW, PS.",
-  quote: undefined,
   _origIndex: 523
   },
   {
@@ -2483,7 +2320,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "ALGC dan ALK",
   desc: "Laminasi aluminium untuk membungkus insulasi di ruang tersembunyi/garasi.\nALGC = aluminium + glass",
-  quote: undefined,
   _origIndex: 524
   },
   {
@@ -2495,7 +2331,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Jaring kawat hexagonal",
   desc: "Jaring kawat berbentuk sarang lebah untuk mengikat insulasi pipa di ruang mesin/garasi.",
-  quote: undefined,
   _origIndex: 525
   },
   {
@@ -2507,7 +2342,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa ductile iron GX",
   desc: "Pipa ductile GX paling umum di Jepang; sambungan berfungsi伸縮《しんしゅく》dan",
-  quote: "GX形《けい》を使《つか》って接合《せつごう》して",
   _origIndex: 526
   },
   {
@@ -2519,7 +2353,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Lock ring & holder",
   desc: "Saat pipa memanjang maksimum, tonjolan dalam pipa tertahan lock ring sehingga tidak bisa terlepas.",
-  quote: undefined,
   _origIndex: 527
   },
   {
@@ -2531,7 +2364,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pelumas pemasangan pipa",
   desc: "Dioleskan pada bagian dalam taper ゴム輪《わ》dan permukaan luar ujung pipa dari garis putih ke ujungnya.",
-  quote: undefined,
   _origIndex: 528
   },
   {
@@ -2543,7 +2375,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Sambungan electrofusion",
   desc: "Kawat pemanas tertanam dalam fitting EF; setelah pipa diklem, controller dialirkan arus untuk",
-  quote: undefined,
   _origIndex: 529
   },
   {
@@ -2555,7 +2386,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Toleransi potong miring",
   desc: "Toleransi kemiringan potongan pipa polietilen untuk EF接合《せつごう》adalah 5 mm ke semua arah, tidak",
-  quote: undefined,
   _origIndex: 530
   },
   {
@@ -2567,7 +2397,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Angle flange",
   desc: "Sambungan duct kotak menggunakan flange sudut; kekuatan dan kerapatan tinggi, digunakan",
-  quote: "排煙《はいえん》ダクトはアングルフランジで接続《せつぞく》してくれよ",
   _origIndex: 538
   },
   {
@@ -2579,7 +2408,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Shared-plate flange",
   desc: "Flange dibuat dari bagian duct itu sendiri yang dilipat; empat sudut dikunci dengan klip khusus.",
-  quote: undefined,
   _origIndex: 539
   },
   {
@@ -2591,7 +2419,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Slide-on flange",
   desc: "Flange siap pakai dimasukkan ke duct, dilas titik, dikencangkan baut + penjepit ラッツ di 4 sudut.",
-  quote: "四隅《よすみ》のラッツを忘《わす》れるな、気密性《きみつせい》が落《お》ちるぞ",
   _origIndex: 540
   },
   {
@@ -2603,7 +2430,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Duct bulat",
   desc: "Sambungan duct spiral: Ø75–100 mm → 板状《いたじょう》プレートフランジ; Ø≥200 mm → アングルフランジ.\nPilih sesuai diameter",
-  quote: "径《けい》に合《あ》わせてフランジを選《えら》んで",
   _origIndex: 541
   },
   {
@@ -2615,7 +2441,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "PAS",
   desc: "Dipasang di tiang listrik架空《かくう》配線《はいせん》; listrik 6600V melewati PAS sebelum masuk ke キュービクル.",
-  quote: undefined,
   _origIndex: 542
   },
   {
@@ -2627,7 +2452,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kubikl",
   desc: "Mengubah 6600V menjadi 100V/200V; berisi遮断器《しゃだんき》dan断路器《だんろき》.\nDipasang di dalam/bawah tanah/atap",
-  quote: undefined,
   _origIndex: 543
   },
   {
@@ -2639,7 +2463,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Live line",
   desc: "Kabel masih dialiri arus; bekerja pada sisi活線《かっせん》一次側《いちじがわ》dapat menyebabkan sengatan atau",
-  quote: undefined,
   _origIndex: 544
   },
   {
@@ -2651,7 +2474,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Ground fault",
   desc: "Arus mengalir ke tanah yang seharusnya terisolasi; misalnya karena polaritas grounding アース",
-  quote: undefined,
   _origIndex: 545
   },
   {
@@ -2663,7 +2485,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Arus bocor dan pemutus",
   desc: "æ¼é»ãããã§ãã= arus ke jalur yang tidak seharusnya; menyebabkan sengatan dan kebakaran.",
-  quote: undefined,
   _origIndex: 546
   },
   {
@@ -2675,7 +2496,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Crimping buruk → panas",
   desc: "圧着《あっちゃく》不《ふ》良《ふりょう》menyebabkan発熱《はつねつ》・発火《はっか》.\nWajib crimp tepat di tengah sleeve",
-  quote: undefined,
   _origIndex: 547
   },
   {
@@ -2687,7 +2507,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "CC-Box",
   desc: "Struktur beton berbentuk U ditanam di bawah jalan untuk menampung kabel komunikasi, listrik, dan",
-  quote: undefined,
   _origIndex: 551
   },
   {
@@ -2699,7 +2518,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kedalaman tutup tanah di",
   desc: "Jarak permukaan jalan ke bagian atas管《かん》路《かんろ》; berdasarkan道《みち》路《どうろ》法施行《おこな》う令《ほうしこうれい》:",
-  quote: undefined,
   _origIndex: 552
   },
   {
@@ -2711,7 +2529,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Jarak aman saluran",
   desc: "Paralel: kereta=1,0 m, listrik=0,3 m, listrik sangat tinggi=0,6 m, lain=0,3 m.\nVertikal silang:",
-  quote: undefined,
   _origIndex: 553
   },
   {
@@ -2723,7 +2540,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Uji mandrel",
   desc: "Batang mandrel dimasukkan setelah pemasangan untuk memastikan管《かん》路《かんろ》terhubung sempurna.",
-  quote: undefined,
   _origIndex: 554
   },
   {
@@ -2735,7 +2551,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Uji kerapatan saluran",
   desc: "Tekanan dinaikkan ke 49 kPa, dibiarkan 3 menit; penurunan tekanan harus ≤1,96 kPa untuk lulus.",
-  quote: undefined,
   _origIndex: 555
   },
   {
@@ -2747,7 +2562,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Bata tahan api / bata",
   desc: "Dua jenis bata untuk築炉《ちくろ》工事《こうじ》; perekatnya mortar khusus tahan",
-  quote: undefined,
   _origIndex: 556
   },
   {
@@ -2759,7 +2573,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Mortar tahan api",
   desc: "熱硬《ねっこう》性《せい》モルタル = mengeras saat dipanaskan suhu tinggi.\n気硬《きこう》性《せい》モルタル = mengeras di udara",
-  quote: "熱硬性《ねっこうせい》モルタルを使《つか》って積《つ》んで",
   _origIndex: 557
   },
   {
@@ -2771,7 +2584,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "6 aturan mutlak",
   desc: "①Material benar ②Dimensi tepat ③Mortar merata ④Pasangan selang-seling wajib ⑤Bata ≤1/4 panjang",
-  quote: undefined,
   _origIndex: 558
   },
   {
@@ -2783,7 +2595,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Priming device",
   desc: "Memastikan pompa pemadam terisi air sebelum beroperasi; wajib dipasang jika水源《すいげん》lebih rendah",
-  quote: undefined,
   _origIndex: 559
   },
   {
@@ -2795,7 +2606,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa bypass pompa pemadam",
   desc: "Mencegah pompa overheat saat berputar tanpa memompa (sisi keluar tertutup).\nTanpa pipa ini pompa",
-  quote: undefined,
   _origIndex: 560
   },
   {
@@ -2807,7 +2617,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alat uji performa pompa",
   desc: "Dipasang untuk memverifikasi pompa bekerja sesuai kapasitas yang",
-  quote: undefined,
   _origIndex: 561
   },
   {
@@ -2819,7 +2628,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa baja berlapis dalam",
   desc: "Jika pipa pemadam tanpa air terkena panas api, lapisan ライニング meleleh dan mengeras sehingga air",
-  quote: undefined,
   _origIndex: 562
   },
   {
@@ -2831,7 +2639,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Well point",
   desc: "Banyak揚水管《ようすいかん》ditancapkan ke tanah, pompa vakum sedot air via集水管《しゅうすいかん》; efektif maks 10 m.",
-  quote: "ウェルポイントの水位《すいい》確認《かくにん》して",
   _origIndex: 630
   },
   {
@@ -2843,7 +2650,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 metode pengecatan",
   desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut",
-  quote: "外壁《がいへき》はローラーで仕上《しあ》げて",
   _origIndex: 637
   },
   {
@@ -2855,7 +2661,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Plat logam",
   desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap",
-  quote: "ダクトの気密《きみつ》テスト完了《かんりょう》しましたか",
   _origIndex: 650
   },
   {
@@ -2867,7 +2672,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "5 istilah drainase &",
   desc: "水替《みずか》え=pompa air di dasar galian. 釜場《かまば》=lubang untuk pompa. 山砂《やまずな》=pasir daratan.",
-  quote: "釜場《かまば》のポンプを定期的《ていきてき》に確認《かくにん》してくれよ",
   _origIndex: 670
   },
   {
@@ -2879,7 +2683,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "6 istilah dasar listrik",
   desc: "接続《せつぞく》=hubungkan. 配線《はいせん》=pasang kabel. 離隔《りかく》=jarak pisah wajib. 絶縁《ぜつえん》=cegah bocor.",
-  quote: "離隔《りかく》距離《きょり》を守《まも》って配線《はいせん》ルートを決《き》めてくれよ",
   _origIndex: 685
   },
   {
@@ -2891,7 +2694,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 cara tanam kabel +",
   desc: "埋設《まいせつ》3方式《ほうしき》: ①管《かん》路式《かんろしき》=kubur pipa lalu masukkan kabel",
-  quote: "管《かん》路式《かんろしき》埋設《まいせつ》は保護管《ほごかん》の深《ふか》さを守《まも》ってくれ",
   _origIndex: 686
   },
   {
@@ -2903,7 +2705,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "6 istilah pemasangan",
   desc: "配管《はいかん》する=pasang konduit. 通線《つうせん》=masukkan kabel ke konduit. スラブ配管《はいかん》=konduit di slab.",
-  quote: "スラブ配管《はいかん》は打設前《うちせつまえ》に仕込《しこ》み完了《かんりょう》させてくれ",
   _origIndex: 687
   },
   {
@@ -2915,7 +2716,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "5 istilah keselamatan",
   desc: "感電《かんでん》=arus ke tubuh. 漏電《ろうでん》=listrik bocor. 接地《せっち》/アース=hubungkan ke tanah cegah感電《かんでん》.",
-  quote: "アースが正《ただ》しく施工《せこう》されているか確認《かくにん》してくれよ",
   _origIndex: 688
   },
   {
@@ -2927,7 +2727,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "7 istilah tegangan",
   desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》:",
-  quote: "圧着《あっちゃく》端子《たんし》のサイズを確認《かくにん》してからかしめてくれよ",
   _origIndex: 689
   },
   {
@@ -2939,7 +2738,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "6 istilah operasi &",
   desc: "点滅《てんめつ》=nyala-mati. 被覆《ひふく》=isolasi kabel. 一次側《いちじがわ》/二次側《にじがわ》=sisi masuk/keluar.",
-  quote: "増《ま》し締《し》め後《ご》はマーキングしてくれよ",
   _origIndex: 690
   },
   {
@@ -2951,7 +2749,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "6 istilah slang",
   desc: "あたる=cek dengan alat ukur. かしめる=crimp kabel. 仕込《しこ》む=persiapkan pekerjaan. 振《ふ》る=reroute pipa/kabel.",
-  quote: "配管《はいかん》が競《せ》っていたら早《はや》めに振《ふ》って対処《たいしょ》してくれよ",
   _origIndex: 691
   },
   {
@@ -2963,7 +2760,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "4 istilah dasar",
   desc: "空調《くうちょう》=mengatur suhu & kelembaban. 換気《かんき》=ganti udara kotor dengan segar. 排煙《はいえん》=keluarkan",
-  quote: "換気量《かんきりょう》が設計《せっけい》通《とお》りか確認《かくにん》してくれよ",
   _origIndex: 692
   },
   {
@@ -2975,7 +2771,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "7 istilah kondisi &",
   desc: "死水《しにみず》=air diam lama dalam pipa. バリ=sisa material di tepi. 逆流《ぎゃくりゅう》=aliran berlawanan.",
-  quote: "定期的《ていきてき》に流《なが》して死水《しにみず》を防《ふせ》いでくれよ",
   _origIndex: 693
   },
   {
@@ -2987,7 +2782,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "6 istilah uji kebocoran",
   desc: "漏洩《ろうえい》試験《しけん》=uji kebocoran (水圧《すいあつ》/満水《まんすい》試験《しけん》). 勾配《こうばい》=kemiringan. 汚水《おすい》=limbah",
-  quote: "試験《しけん》前《まえ》に全《ぜん》バルブを確認《かくにん》してくれよ",
   _origIndex: 694
   },
   {
@@ -2999,7 +2793,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 istilah pendek teknis",
   desc: "芯《しん》=garis tengah pipa/duct. 先《さき》=ujung pipa. 面《つら》=permukaan flange. Kata pendek namun bermakna",
-  quote: "芯《しん》から先《さき》までの寸法《すんぽう》を正確《せいかく》に出《だ》してくれよ",
   _origIndex: 695
   },
   {
@@ -3011,7 +2804,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Gambaran umum pekerjaan",
   desc: "Alirkan air/minyak/gas/uap via pipa logam; meliputi給水《きゅうすい》, 排水《はいすい》, 消火《しょうか》, AC冷媒管《れいばいかん》.",
-  quote: "圧力《あつりょく》テスト後《ご》、隠《かく》ぺいしてください",
   _origIndex: 705
   },
   {
@@ -3023,7 +2815,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pemutus arus lebih",
   desc: "Memutus suplai listrik otomatis saat arus berlebih過電流《かでんりゅう》mengalir.\nVersi modern tanpa sekring",
-  quote: undefined,
   _origIndex: 707
   },
   {
@@ -3035,7 +2826,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Gunting & cutter",
   desc: "はさみ = dua bilah menjepit untuk memotong.\nカッターナイフ = pisau dengan mata yang bisa dipatahkan untuk",
-  quote: undefined,
   _origIndex: 710
   },
   {
@@ -3047,7 +2837,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 bahan insulasi termal",
   desc: "①GW (グラスウール): serat kaca, ringan & murah ②RW (ロックウール): serat batu, tahan api lebih baik ③PS",
-  quote: undefined,
   _origIndex: 713
   },
   {
@@ -3059,7 +2848,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Finishing insulasi pipa",
   desc: "①天井《てんじょう》内《うち》/隠蔽《いんぺい》部《ぶ》: ALGC/ALK ②屋内《おくない》露出《ろしゅつ》: 合成樹脂《ごうせいじゅし》カバー/ラッキング",
-  quote: undefined,
   _origIndex: 714
   },
   {
@@ -3071,7 +2859,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Insulasi termal duct",
   desc: "Melilit insulasi pada duct meningkatkan efisiensi HVAC dan hemat energi.\nTanpa insulasi, kondensasi",
-  quote: undefined,
   _origIndex: 715
   },
   {
@@ -3083,7 +2870,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Insert joint duct bulat",
   desc: "丸《まる》ダクト disambung dengan ニップル → kencangkan 2–3 baut → balut duct tape.\nPENTING: jangan pasang",
-  quote: undefined,
   _origIndex: 716
   },
   {
@@ -3095,7 +2881,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 jenis las gas",
   desc: "①酸素《さんそ》アセチレン溶接《ようせつ》(paling umum) ②酸素《さんそ》水素《すいそ》溶接《ようせつ》 ③空気《くうき》アセチレン溶接《ようせつ》.\nBanyak digunakan",
-  quote: "ガス溶接《ようせつ》で小口径管《しょうこうけいかん》を接合《せつごう》して",
   _origIndex: 717
   },
   {
@@ -3107,7 +2892,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa PVC keras",
   desc: "Setelah masukkan継手《つぎて》, tahan 10 detik tanpa melepas tekanan.\nJika tidak ditahan, pipa terdorong",
-  quote: undefined,
   _origIndex: 718
   },
   {
@@ -3119,7 +2903,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Chamfering pipa PVC",
   desc: "Setelah dipotong, bevel dalam dan luar agar pipa mudah masuk ke fitting.\nUntuk pipa air",
-  quote: undefined,
   _origIndex: 719
   },
   {
@@ -3131,7 +2914,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pipa ulir",
   desc: "Setelah シール剤《ざい》dan ねじ込《こ》み selesai, aliran air通水《つうすい》hanya boleh dilakukan setelah curing cukup.",
-  quote: undefined,
   _origIndex: 720
   },
   {
@@ -3143,7 +2925,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Cubicle",
   desc: "Listrik 6600V masuk via PAS lalu ke ã­ã¥ã¼ãã¯ã« yang mengubah menjadi 100V/200V.",
-  quote: undefined,
   _origIndex: 721
   },
   {
@@ -3155,7 +2936,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "EF joint",
   desc: "Konfirmasi berhasil: indikator EF socket harus menonjol隆起《りゅうき》di kiri dan kanan.\nSetelah dingin,",
-  quote: undefined,
   _origIndex: 722
   },
   {
@@ -3167,7 +2947,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "EF joint",
   desc: "Urutan persiapan融着《ゆうちゃく》EF: ①colokkan controller ②nyalakan ③sambungkan kabel output ke",
-  quote: undefined,
   _origIndex: 723
   },
   {
@@ -3179,7 +2958,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Mandrel test",
   desc: "Saluran >150 m: wajib lewati mandrel No.4 (Ø600 mm).\nSaluran ≤150 m yang tidak bisa lewat No.4:",
-  quote: undefined,
   _origIndex: 724
   },
   {
@@ -3191,7 +2969,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Ductile iron GX",
   desc: "Setelah disambung, tiap pipa bisa ditekuk maksimal 2°.\nJangan tekuk di satu sambungan saja — bagi",
-  quote: undefined,
   _origIndex: 725
   },
   {
@@ -3203,7 +2980,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Closure",
   desc: "Closure = kotak sambungan/percabangan kabel di tiang listrik.\nAbu-abu untuk serat optik光《ひかり》ファイバー,",
-  quote: undefined,
   _origIndex: 726
   },
   {
@@ -3215,7 +2991,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Common utility duct",
   desc: "Fasilitas memindahkan kabel tiang listrik ke bawah tanah.\nTujuan: ①estetika kota ②kelancaran lalu",
-  quote: undefined,
   _origIndex: 727
   },
   {
@@ -3227,7 +3002,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "5 langkah mendirikan",
   desc: "①Tentukan posisi ②Konfirmasi埋設物《まいせつぶつ》dengan探針棒《たんしんぼう》 ③Gali manual + mesin穴掘《あなほ》り建柱車《けんちゅうしゃ》",
-  quote: undefined,
   _origIndex: 728
   },
   {
@@ -3239,7 +3013,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Bender bending",
   desc: "Membengkokkan pipa tembaga refrigeran pakai bender: radius minimum = 4x diameter luar pipa.",
-  quote: undefined,
   _origIndex: 729
   },
   {
@@ -3251,7 +3024,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Setelah brazing",
   desc: "Setelah brazing pipa refrigeran: ①dinginkan dengan kain basah ②periksa pinhole",
-  quote: undefined,
   _origIndex: 730
   },
   {
@@ -4944,7 +4716,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "3 divisi pekerjaan konstruksi",
   desc: "土木工事《どぼくこうじ》=infrastruktur alam (bendungan, jalan, terowongan).\n建築工事《けんちくこうじ》=bangunan (gedung, rumah, rumah sakit).\nライフライン・設備工事《せつびこうじ》=utilitas vital (listrik, gas, air, komunikasi).",
-  quote: "「この現場《げんば》は建築《けんちく》とライフライン両方《りょうほう》が同時《どうじ》に進行《しんこう》する」",
   _origIndex: 1410
   },
   {
@@ -4956,7 +4727,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan insulasi semprot uretan",
   desc: "Menyemprotkan bahan dua-komponen (ポリオール成分《せいぶん》 + ポリイソシアネート成分《せいぶん》) langsung ke struktur bangunan dengan mesin khusus.\nMembentuk 硬質《こうしつ》ウレタンフォーム di tempat → lapisan insulasi tanpa celah.",
-  quote: "「吹付《ふきつ》け前《まえ》に面《めん》の汚《よご》れを取《と》らないと接着力《せっちゃくりょく》が下《さ》がる」",
   _origIndex: 1411
   },
   {
@@ -4968,7 +4738,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kontrol kualitas insulasi uretan",
   desc: "①施工前《しこうまえ》: 450mm角《かく》の板《いた》に試験吹付《しけんふきつ》け → 発泡密度《はっぽうみつど》を確認《かくにん》。\n②施工中《しこうちゅう》: 4〜5m間隔《かんかく》でウレタン厚測定機《あつそくていき》で厚《あつ》さを確認。\n③面《めん》はほこり・油分《あぶらぶん》を除去《じょきょ》してから吹付け。",
-  quote: "「4mごとに厚《あつ》さを測定《そくてい》してください」",
   _origIndex: 1412
   },
   {
@@ -4991,7 +4760,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Fungsi keselamatan insulasi termal",
   desc: "①熱損失《ねつそんしつ》低減《ていげん》→燃料消費《ねんりょうしょうひ》を抑《おさ》える（省エネ《しょうえね》）。\n②熱《あつ》い物体《ぶったい》への保温材《ほおんざい》取付→火傷防止《やけどぼうし》（安全対策《あんぜんたいさく》）。\n対象設備: 空気調和設備《くうきちょうわせつび》・衛生設備《えいせいせつび》.",
-  quote: "「この配管《はいかん》に保温材《ほおんざい》を巻《ま》いて火傷《やけど》を防《ふせ》いで」",
   _origIndex: 1414
   },
   {
@@ -5003,7 +4771,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan terowongan jack-pipe",
   desc: "Memasang pipa bawah tanah tanpa gali terbuka: ジャッキで推進管《すいしんかん》を地中《ちちゅう》に圧入《あつにゅう》。\n主《おも》に都市部《としぶ》での社会基盤《しゃかいきばん》（下水道《げすいどう》・上水道《じょうすいどう》・電力《でんりょく》・通信《つうしん》・ガスなど）の管路《かんろ》に利用。",
-  quote: "「推進工法《すいしんこうほう》なら道路《どうろ》を掘《ほ》らずに管《かん》を通《とお》せる」",
   _origIndex: 1415
   },
   {
@@ -5026,7 +4793,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Keterampilan dasar pekerjaan pipa",
   desc: "①切断《せつだん》: 管材料《かんざいりょう》を切ること。\n②接合《せつごう》: 管と管をつなぐこと。\n③組み立て《くみたて》: 管を正確《せいかく》に組み立てること。\n水・油・ガス・水蒸気《すいじょうき》等を金属管《きんぞくかん》などで必要な場所《ばしょ》に配送《はいそう》。",
-  quote: "「配管《はいかん》の切断面《せつだんめん》をきれいに仕上《しあ》げてから接合《せつごう》して」",
   _origIndex: 1417
   },
   {
@@ -5038,7 +4804,6 @@ export const CARDS_LIFELINE = [
   type: "vocab",
   id_text: "Tangki penerima air",
   desc: "配水管《はいすいかん》から供給《きょうきゅう》された水を一時貯留《いちじちょりゅう》するタンク。\nポンプで各階《かくかい》のトイレ・キッチンなどへ送水《そうすい》。\n給水設備工事《きゅうすいせつびこうじ》の一部。",
-  quote: "「受水槽《じゅすいそう》の清掃《せいそう》は定期的《ていきてき》に行《おこな》ってください」",
   _origIndex: 1418
   },
   {
@@ -5072,7 +4837,6 @@ export const CARDS_LIFELINE = [
   type: "vocab",
   id_text: "Pekerjaan waterproofing FRP",
   desc: "ガラス繊維《せんい》マットを敷《し》き、ポリエステル樹脂《じゅし》を塗る工法。\n特長: 丈夫《じょうぶ》で乾燥《かんそう》が早い。\nFRP = Fiber Reinforced Plastics（繊維強化プラスチック）。",
-  quote: "「FRP防水《ぼうすい》は強度《きょうど》が高《たか》く陸屋根《りくやね》に向《む》いている」",
   _origIndex: 1421
   },
   {
@@ -5095,7 +4859,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Jenis pekerjaan pengeboran sumur",
   desc: "①水源井《すいげんせい》工事: 地下水《ちかすい》をくみ上げるボーリング。\n②観測井《かんそくせい》工事: 地盤沈下《じばんちんか》を観測《かんそく》するための井戸《いど》。\n③温泉井《おんせんせい》工事: 500〜1000m掘削—天然ガス対策《たいさく》で許可《きょか》が必要。\n④地熱井《ちねつせい》工事: 約2000m—高《たか》い技術《ぎじゅつ》が必要。",
-  quote: "「温泉《おんせん》掘削《くっさく》中《ちゅう》は天然ガス《てんねんガス》に注意《ちゅうい》して」",
   _origIndex: 1423
   },
   {
@@ -5107,7 +4870,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Pekerjaan sipil telekomunikasi",
   desc: "通信ケーブル《つうしんけーぶる》を通すための管路《かんろ》工事・マンホール・ハンドホール・とう道《どう》（通信用トンネル）の建設。\n有線《ゆうせん》: メタルケーブル（銅線《どうせん》）または光ファイバーケーブル。\n現在《げんざい》は光ファイバーが多く使用。",
-  quote: "「光《ひかり》ケーブルのマンホール設置《せっち》位置《いち》を確認《かくにん》して」",
   _origIndex: 1424
   },
   {
@@ -5119,7 +4881,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alur pekerjaan saluran air bersih",
   desc: "河川《かせん》→浄水場《じょうすいじょう》（清浄化《せいじょうか》）→浄水池《じょうすいち》・配水池《はいすいち》→配水管《はいすいかん》（地中《ちちゅう》）→穿孔《せんこう》→給水管《きゅうすいかん》→家庭・建物。\n地下水《ちかすい》は消毒《しょうどく》後に貯水。",
-  quote: "「配水管《はいすいかん》に穿孔《せんこう》して給水管《きゅうすいかん》を分岐《ぶんき》する」",
   _origIndex: 1425
   },
   {
@@ -5131,7 +4892,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Alur pekerjaan saluran limbah",
   desc: "建物《たてもの》の汚水《おすい》→下水道本管《げすいどうほんかん》に集める→下水処理場《げすいしょりじょう》で清浄化《せいじょうか》→河川・海《うみ》に放流《ほうりゅう》。\n本管未整備地域《ほんかんみせいびちいき》: 汚水処理施設《おすいしょりしせつ》を使用。",
-  quote: "「汚水《おすい》の下水道接続《げすいどうせつぞく》工事《こうじ》をお願いします」",
   _origIndex: 1426
   },
   {
@@ -5143,7 +4903,6 @@ export const CARDS_LIFELINE = [
   type: "konsep",
   id_text: "Kewajiban pemasangan peralatan kebakaran",
   desc: "消防法《しょうぼうほう》により設置・維持《いじ》が義務付《ぎむづ》けられた3カテゴリ:\n①消防の用《よう》に供する設備《せつび》（消火《しょうか》・警報《けいほう》・避難《ひなん》）\n②消防用水《しょうぼうようすい》\n③消火活動上必要な施設《しせつ》（排煙《はいえん》・非常コンセント等）",
-  quote: "「消防設備《しょうぼうせつび》は消防法《しょうぼうほう》で設置《せっち》が義務《ぎむ》です」",
   _origIndex: 1427
   },
 

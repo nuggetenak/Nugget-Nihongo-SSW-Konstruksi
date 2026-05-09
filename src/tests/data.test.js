@@ -440,7 +440,7 @@ describe('QUIZ_SETS + getQuizSetsForTrack', () => {
     const sets = getQuizSetsForTrack('doboku');
     expect(sets.some((s) => s.track === 'common')).toBe(true);
     expect(sets.some((s) => s.id.startsWith('wt'))).toBe(true);
-    expect(sets.some((s) => s.id.startsWith('sipil'))).toBe(true);
+    expect(sets.some((s) => s.id.startsWith('doboku'))).toBe(true);
   });
 
   it('getQuizSetsForTrack(kenchiku) includes common + bangunan sets', () => {
@@ -448,7 +448,7 @@ describe('QUIZ_SETS + getQuizSetsForTrack', () => {
     const sets = getQuizSetsForTrack('kenchiku');
     expect(sets.length).toBeGreaterThan(0);
     expect(sets.some((s) => s.track === 'common')).toBe(true);
-    expect(sets.some((s) => s.id.startsWith('bangunan'))).toBe(true);
+    expect(sets.some((s) => s.id.startsWith('kenchiku'))).toBe(true);
   });
 });
 

@@ -18,8 +18,8 @@ describe('Storage schema — field defaults', () => {
 
   it('all v3 progress fields exist in DEFAULTS', () => {
     const p = DEFAULTS.progress;
-    expect(p).toHaveProperty('sipilScores');
-    expect(p).toHaveProperty('bangunanScores');
+    expect(p).toHaveProperty('dobokuScores');
+    expect(p).toHaveProperty('kenchikuScores');
     expect(p).toHaveProperty('sessions');
     expect(p).toHaveProperty('dailyMission');
   });
@@ -65,12 +65,12 @@ describe('Storage schema — field defaults', () => {
 });
 
 describe('Storage schema — progress fields', () => {
-  it('sipilScores starts empty', () => {
-    expect(get('progress').sipilScores).toEqual({});
+  it('dobokuScores starts empty', () => {
+    expect(get('progress').dobokuScores).toEqual({});
   });
 
-  it('bangunanScores starts empty', () => {
-    expect(get('progress').bangunanScores).toEqual({});
+  it('kenchikuScores starts empty', () => {
+    expect(get('progress').kenchikuScores).toEqual({});
   });
 
   it('sessions starts empty', () => {
@@ -85,9 +85,9 @@ describe('Storage schema — progress fields', () => {
     const score = { correct: 12, total: 15, date: '2026-05-01T00:00:00Z' };
     set('progress', (p) => ({
       ...p,
-      sipilScores: { ...p.sipilScores, 'sipil-01': score },
+      dobokuScores: { ...p.dobokuScores, 'doboku-01': score },
     }));
-    expect(get('progress').sipilScores['sipil-01']).toEqual(score);
+    expect(get('progress').dobokuScores['doboku-01']).toEqual(score);
   });
 });
 

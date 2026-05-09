@@ -128,8 +128,8 @@ describe('get and set', () => {
 
   it('set with object merges into doc', () => {
     init();
-    set('prefs', { track: 'sipil' });
-    expect(get('prefs').track).toBe('sipil');
+    set('prefs', { track: 'doboku' });
+    expect(get('prefs').track).toBe('doboku');
   });
 
   it('set with function receives previous value', () => {
@@ -207,7 +207,7 @@ describe('resetAll', () => {
 
   it('keeps prefs after reset', () => {
     init();
-    set('prefs', { track: 'sipil', theme: 'dark' });
+    set('prefs', { track: 'doboku', theme: 'dark' });
     resetAll();
     // resetAll resets to defaults, so track goes to null
     expect(get('prefs').track).toBeNull();

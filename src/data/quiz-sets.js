@@ -7,12 +7,12 @@ import { WAYGROUND_SETS } from './wayground-sets.js';
 import { CSV_SETS } from './csv-sets.js';
 
 // ── Sipil sets ───────────────────────────────────────────────────────────────
-const SIPIL_SETS = [
+const DOBOKU_SETS = [
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // SET 1: 土工事・基礎の基本 — Pekerjaan Tanah & Dasar Sipil
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {
-    id: 'sipil-01',
+    id: 'doboku-01',
     title: '土工事・基礎の基本',
     subtitle: 'Pekerjaan Tanah & Dasar Sipil',
     emoji: '⛏️',
@@ -159,7 +159,7 @@ const SIPIL_SETS = [
   // SET 2: 道路・舗装・排水 — Jalan, Perkerasan & Drainase
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {
-    id: 'sipil-02',
+    id: 'doboku-02',
     title: '道路・舗装・排水',
     subtitle: 'Jalan, Perkerasan & Drainase',
     emoji: '🛣️',
@@ -306,7 +306,7 @@ const SIPIL_SETS = [
   // SET 3: 安全管理・法規 — Manajemen Keselamatan & Peraturan
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {
-    id: 'sipil-03',
+    id: 'doboku-03',
     title: '安全管理・法規',
     subtitle: 'Manajemen Keselamatan & Peraturan',
     emoji: '🛡️',
@@ -451,12 +451,12 @@ const SIPIL_SETS = [
 ];
 
 // ── Bangunan sets ────────────────────────────────────────────────────────────
-const BANGUNAN_SETS = [
+const KENCHIKU_SETS = [
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // SET 1: 型枠・鉄筋・コンクリート — Bekisting, Tulangan & Beton
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {
-    id: 'bangunan-01',
+    id: 'kenchiku-01',
     title: '型枠・鉄筋・コンクリート',
     subtitle: 'Bekisting, Tulangan & Beton',
     emoji: '🏗️',
@@ -603,7 +603,7 @@ const BANGUNAN_SETS = [
   // SET 2: 仕上げ・内装・外壁 — Finishing, Interior & Eksterior
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {
-    id: 'bangunan-02',
+    id: 'kenchiku-02',
     title: '仕上げ・内装・外壁',
     subtitle: 'Finishing, Interior & Eksterior',
     emoji: '🎨',
@@ -750,7 +750,7 @@ const BANGUNAN_SETS = [
   // SET 3: 建築の安全管理 — Keselamatan Konstruksi Bangunan
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {
-    id: 'bangunan-03',
+    id: 'kenchiku-03',
     title: '建築の安全管理',
     subtitle: 'Keselamatan Konstruksi Bangunan',
     emoji: '🛡️',
@@ -895,10 +895,10 @@ const BANGUNAN_SETS = [
 ];
 
 // Add track field to sipil/bangunan sets
-const SIPIL_WITH_TRACK = SIPIL_SETS.map(s => ({ ...s, track: 'doboku' }));
-const BANGUNAN_WITH_TRACK = BANGUNAN_SETS.map(s => ({ ...s, track: 'kenchiku' }));
+const DOBOKU_WITH_TRACK = DOBOKU_SETS.map(s => ({ ...s, track: 'doboku' }));
+const KENCHIKU_WITH_TRACK = KENCHIKU_SETS.map(s => ({ ...s, track: 'kenchiku' }));
 
-export const QUIZ_SETS = [...WAYGROUND_SETS, ...CSV_SETS, ...SIPIL_WITH_TRACK, ...BANGUNAN_WITH_TRACK];
+export const QUIZ_SETS = [...WAYGROUND_SETS, ...CSV_SETS, ...DOBOKU_WITH_TRACK, ...KENCHIKU_WITH_TRACK];
 
 export const getQuizSetsForTrack = (track) =>
   QUIZ_SETS.filter((s) => s.track === 'common' || s.track === track);

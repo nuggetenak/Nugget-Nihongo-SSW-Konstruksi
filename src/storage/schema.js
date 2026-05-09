@@ -24,8 +24,8 @@ export const DEFAULTS = {
     jacScores: {},      // { [setId]: { correct, total, date } }
     wgScores: {},
     vocabScores: {},
-    sipilScores: {},    // { [setId]: { correct, total, date } }
-    bangunanScores: {}, // { [setId]: { correct, total, date } }
+    dobokuScores: {},   // { [setId]: { correct, total, date } }
+    kenchikuScores: {}, // { [setId]: { correct, total, date } }
     streakData: {},     // { days, lastDate }
     dailyCount: { count: 0, date: '' },
     recentCards: [],    // array of cardIds (max 20)

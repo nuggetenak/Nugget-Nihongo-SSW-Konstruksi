@@ -10,7 +10,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Apel pagi",
   desc: "Pertemuan wajib setiap pagi sebelum kerja. Ada 2 jenis: apel umum dan apel per jenis pekerjaan.",
-  quote: "「朝礼《ちょうれい》には絶対《ぜったい》遅《おく》れるな」",
   _origIndex: 0
   },
   {
@@ -22,7 +21,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Prediksi Bahaya KY",
   desc: "Identifikasi bahaya sebelum mulai kerja, dilakukan saat apel per jenis pekerjaan.",
-  quote: "「KY表《ひょう》はちゃんと書《か》けよ」",
   _origIndex: 1
   },
   {
@@ -34,7 +32,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Senam radio",
   desc: "Senam pemanasan saat apel pagi untuk mencegah cedera. Wajib diikuti semua pekerja sebelum kerja.",
-  quote: "「体操《たいそう》しっかりやれ、怪我《けが》の予防《よぼう》になる」",
   _origIndex: 2
   },
   {
@@ -46,7 +43,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tunjuk dan panggil",
   desc: "Metode konfirmasi keselamatan dengan menunjuk dan menyebut keras. Wajib tiap cek kondisi kerja.",
-  quote: "「確認《かくにん》は必《かなら》ず指差《ゆびさ》し呼称《こしょう》でやれよ」",
   _origIndex: 3
   },
   {
@@ -58,7 +54,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Standar Tenaga Kerja",
   desc: "Maks 8 jam/hari & 40 jam/minggu. Lembur wajib dibayar 割増賃金《わりましちんぎん》.",
-  quote: "「8時間《じかん》超《こ》えたら記録《きろく》してくれ」",
   _origIndex: 4
   },
   {
@@ -70,7 +65,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU K3 Jepang",
   desc: "UU yang menjamin keselamatan dan kesehatan pekerja. Di lapangan: dasar aturan APD dan K3.",
-  quote: "「ヘルメットと安全帯《あんぜんたい》は必《かなら》ず着《つ》けてくれよ」",
   _origIndex: 5
   },
   {
@@ -82,7 +76,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Upah Minimum",
   desc: "UU batas terendah upah yang boleh diberikan, ditetapkan per prefektur. Besaran berbeda tiap daerah.",
-  quote: "「最低賃金《さいていちんぎん》以上《いじょう》は必《かなら》ず払《はら》うよ」",
   _origIndex: 6
   },
   {
@@ -94,7 +87,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Industri Konstruksi",
   desc: "UU izin usaha, kontrak, dan tanggung jawab konstruksi. Izin wajib per jenis pekerjaan.",
-  quote: "「うちはちゃんと許可《きょか》を持《も》ってるから安心《あんしん》して」",
   _origIndex: 7
   },
   {
@@ -106,7 +98,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Standar Bangunan",
   desc: "UU standar minimum pembangunan dan penggunaan gedung. Semua pekerjaan wajib patuh.",
-  quote: "「図面《ずめん》通《とお》りに施工《せこう》しないと検査《けんさ》に通《つう》らないぞ」",
   _origIndex: 8
   },
   {
@@ -118,7 +109,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Pemadam Kebakaran",
   desc: "UU yang mengatur APAR, sprinkler, dan alarm kebakaran. Di lapangan: posisi APAR wajib diketahui.",
-  quote: "「消火器《しょうかき》の場所《ばしょ》は必《かなら》ず覚《おぼ》えておけよ」",
   _origIndex: 9
   },
   {
@@ -130,7 +120,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Air Bersih",
   desc: "UU instalasi pasokan air bersih. Hanya teknisi berlisensi yang boleh mengerjakannya.",
-  quote: "「水道《すいどう》工事《こうじ》は有資格者《ゆうしかくしゃ》しかできないぞ」",
   _origIndex: 10
   },
   {
@@ -142,7 +131,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Usaha Kelistrikan",
   desc: "UU standar instalasi dan pemeliharaan fasilitas listrik. Dasar keamanan semua instalasi listrik.",
-  quote: "「電気《でんき》設備《せつび》は専門業者《せんもんぎょうしゃ》に任《まか》せろ、触《さわ》るな」",
   _origIndex: 11
   },
   {
@@ -154,7 +142,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Usaha Telekomunikasi",
   desc: "UU pemasangan jaringan dan peralatan telekomunikasi. Hanya insinyur berkualifikasi yang boleh.",
-  quote: "「通《つう》信《つうしん》配線《はいせん》は有資格者《ゆうしかくしゃ》しか触《さわ》れないぞ」",
   _origIndex: 12
   },
   {
@@ -166,7 +153,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Perjanjian 36 (lembur)",
   desc: "Perjanjian lembur berdasar Pasal 36 UU Tenaga Kerja. Tanpa ini, perusahaan dilarang minta lembur.",
-  quote: "「36協定《きょうてい》の範囲内《はんいない》で残業《ざんぎょう》を頼《たの》むよ」",
   _origIndex: 13
   },
   {
@@ -178,7 +164,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Asuransi kecelakaan kerja",
   desc: "Asuransi negara untuk cedera/sakit/meninggal akibat kerja. Premi 100% ditanggung pemberi kerja.",
-  quote: "「怪我《けが》したらすぐ報告《ほうこく》してくれ」",
   _origIndex: 14
   },
   {
@@ -190,7 +175,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Manifest limbah industri",
   desc: "Dokumen wajib bukti pembuangan limbah industri yang benar. Kontraktor utama wajib membuatnya.",
-  quote: "「産廃《さんぱい》はマニフェスト書《か》いてから出《だ》してくれよ」",
   _origIndex: 15
   },
   {
@@ -202,7 +186,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Daur Ulang Konstruksi",
   desc: "Mewajibkan pemilahan dan daur ulang limbah konstruksi. Sampah wajib disimpan per jenis (分別《ぶんべつ》).",
-  quote: "「ゴミは必《かなら》ず分別《ぶんべつ》してから置《お》いとけよ」",
   _origIndex: 16
   },
   {
@@ -214,7 +197,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Asuransi Pengangguran",
   desc: "Tunjangan pengangguran bagi yang kehilangan pekerjaan. Premi dibagi pekerja dan pemberi kerja.",
-  quote: "「雇用保険《こようほけん》は失業《しつぎょう》した時《とき》のためだよ」",
   _origIndex: 17
   },
   {
@@ -226,7 +208,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Usaha Gas",
   desc: "UU usaha gas kota (都市《とし》ガス), berbeda dari gas LPG. Hanya kontraktor berlisensi khusus.",
-  quote: "「都市《とし》ガス工事《こうじ》は専門業者《せんもんぎょうしゃ》に任《まか》せろ」",
   _origIndex: 18
   },
   {
@@ -238,7 +219,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Saluran Air Limbah",
   desc: "Mengatur sistem saluran pembuangan air limbah kota. Gedung wajib terhubung ke sistem resmi.",
-  quote: "「排水《はいすい》は直《なお》し接《ちょくせつ》側溝《そっこう》に流《なが》すな、下水《げすい》へ」",
   _origIndex: 19
   },
   {
@@ -250,7 +230,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Pengelolaan Limbah",
   desc: "Mengatur pengelolaan limbah industri. Manifest wajib dibuat kontraktor utama sebelum pengangkutan.",
-  quote: "「産廃《さんぱい》は許可業者《きょかぎょうしゃ》しか運《はこ》べないぞ」",
   _origIndex: 20
   },
   {
@@ -262,7 +241,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Tutupi kecelakaan kerja",
   desc: "Menyembunyikan kecelakaan dari kantor inspeksi adalah kejahatan. Wajib dilaporkan segera.",
-  quote: "「労災《ろうさい》を隠《かく》すのは犯罪《はんざい》だ、必《かなら》ず報告《ほうこく》しろよ」",
   _origIndex: 21
   },
   {
@@ -274,7 +252,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Kontraktor Listrik",
   desc: "Berbeda dari 電気事業法《でんきじぎょうほう》. Mengatur kontraktor pekerjaan listrik. Wajib terdaftar terpisah.",
-  quote: "「電気工事業《でんきこうじぎょう》の登録《とうろく》なしには工事《こうじ》できないぞ」",
   _origIndex: 22
   },
   {
@@ -286,7 +263,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "29 jenis usaha berlisensi",
   desc: "29 jenis konstruksi wajib berizin per 建設業法《けんせつぎょうほう》. Termasuk listrik, pipa, insulasi.",
-  quote: "「業種《ぎょうしゅ》ごとに許可《きょか》を取《と》らないといけないんだ」",
   _origIndex: 23
   },
   {
@@ -298,7 +274,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Asbes — DILARANG",
   desc: "Mineral penyebab kanker paru, dilarang. Gedung lama wajib disurvei sebelum dibongkar.",
-  quote: "「アスベストが疑《うたが》われる建物《たてもの》は素手《すで》で触《さわ》るな」",
   _origIndex: 24
   },
   {
@@ -310,7 +285,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Pencegahan Polusi",
   desc: "Bongkar gedung berisi asbes wajib lapor ke 知事《ちじ》 prefektur 14 hari sebelumnya.",
-  quote: "「アスベスト解体《かいたい》は14日《にち》前《まえ》に知事《ちじ》への届出《とどけで》が必《かなら》ず要《ひつよう》だ」",
   _origIndex: 25
   },
   {
@@ -355,7 +329,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Keselamatan Utama",
   desc: "Prinsip utama konstruksi Jepang: keselamatan di atas segalanya. Terpasang di semua lokasi.",
-  quote: "「急《いそ》いでても安全《あんぜん》を後《あと》回《あとまわ》しにするな」",
   _origIndex: 107
   },
   {
@@ -378,7 +351,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jatuh dari ketinggian",
   desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total.",
-  quote: "「高所《こうしょ》作業《さぎょう》では絶対《ぜったい》にフルハーネスをつけてくれよ」",
   _origIndex: 109
   },
   {
@@ -522,7 +494,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Karier Konstruksi CCUS",
   desc: "Rekam karier pekerja konstruksi, 4 level: putih→biru→perak→emas. Level 2 butuh ≥645 hari kerja.",
-  quote: "「CCUSカードは毎日《まいにち》タッチするのを忘《わす》れるな」",
   _origIndex: 122
   },
   {
@@ -534,7 +505,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kontraktor utama",
   desc: "Menerima kontrak dari klien, mengatur seluruh pekerjaan dan sub-kontraktor.",
-  quote: "「ゼネコンからの指示《しじ》は最優先《さいゆうせん》で動《うご》けよ」",
   _origIndex: 123
   },
   {
@@ -546,7 +516,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Sub-kontraktor spesialis",
   desc: "Menerima subkontrak dari kontraktor utama. Bekerja sesuai instruksi 職長《しょくちょう》.",
-  quote: "「職長《しょくちょう》の指示《しじ》に従《したが》って確実《かくじつ》に作業《さぎょう》してくれよ」",
   _origIndex: 124
   },
   {
@@ -591,7 +560,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Pelecehan seksual",
   desc: "Tindakan atau ucapan seksual tidak diinginkan di tempat kerja. Dilarang keras bersama パワハラ.",
-  quote: "セクハラは厳《きび》しく対処《たいしょ》する、相談《そうだん》してくれ",
   _origIndex: 128
   },
   {
@@ -614,7 +582,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Theodolit / transit",
   desc: "Alat ukur sudut vertikal dan horizontal — umumnya versi digital saat ini.",
-  quote: "トランシットで通《とお》りと直《なお》し角《ちょっかく》を確認《かくにん》して",
   _origIndex: 130
   },
   {
@@ -626,7 +593,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Total station",
   desc: "Gabungan alat ukur jarak dan sudut elektronik dalam satu perangkat.",
-  quote: "トータルステーションで座標《ざひょう》を確認《かくにん》して",
   _origIndex: 131
   },
   {
@@ -649,7 +615,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Meteran pita",
   desc: "Meteran pita logam tipis — nama resmi 'convex rule', di lapangan dipanggil 'konbe'.",
-  quote: "コンベックスで寸法《すんぽう》を二度《にど》確認《かくにん》して",
   _origIndex: 133
   },
   {
@@ -672,7 +637,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Sander (alat ampelas)",
   desc: "Alat listrik untuk ampelas permukaan datar. Jenis: getar, sabuk, dan putar.",
-  quote: "サンダーかける前《まえ》に養生《ようじょう》してください",
   _origIndex: 135
   },
   {
@@ -750,7 +714,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Lembur +25% / libur +35%",
   desc: "通常残業《つうじょうざんぎょう》+25%、休日出勤《きゅうじつしゅっきん》+35%、深夜残業《しんやざんぎょう》+25%。上限: 45 jam/bulan, 360 jam/tahun (berlaku konstruksi April 2024).",
-  quote: "残業代《ざんぎょうだい》は法律《ほうりつ》通《どお》りに払《はら》うから記録《きろく》してくれ",
   _origIndex: 142
   },
   {
@@ -762,7 +725,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Kecelakaan perjalanan vs",
   desc: "通《つう》勤《つうきん》災害《さいがい》: kecelakaan saat perjalanan rumah↔kerja. 業務《ぎょうむ》災害《さいがい》: akibat pekerjaan.",
-  quote: "通《つう》勤《つうきん》中《ちゅう》の事故《じこ》もすぐ報告《ほうこく》してくれよ",
   _origIndex: 143
   },
   {
@@ -774,7 +736,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Uji keterampilan /",
   desc: "Sertifikasi nasional; lulus → dapat 合格《ごうかく》証書《しょうしょ》, berhak sebut diri 技能士《ぎのうし》. 32 jenis konstruksi; level: 特級《とっきゅう》・1〜3級《きゅう》・基礎級《きそきゅう》.",
-  quote: "2級《きゅう》取《と》ったら手当《てあて》もつくし、CCUSも上《あ》がるぞ",
   _origIndex: 144
   },
   {
@@ -786,7 +747,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "SSW asing bisa dapat",
   desc: "SSW yang kehilangan pekerjaan dapat 雇用《こよう》保険《ほけん》 — tidak wajib langsung pulang selama aktif cari kerja dalam periode 在留資格《ざいりゅうしかく》.",
-  quote: "仕事《しごと》なくなってもすぐ帰《かえ》り国《きこく》しなくていいぞ",
   _origIndex: 145
   },
   {
@@ -798,7 +758,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Syarat tunjangan",
   desc: "Syarat: menganggur + mau bekerja + ≥12 bulan asuransi dalam 2 tahun terakhir. Tunjangan 基本手当《きほんてあて》: 45〜80% upah harian selama 90〜360 hari.",
-  quote: "12ヶ月以上《いじょう》入《はい》ってれば給付《きゅうふ》もらえるよ",
   _origIndex: 146
   },
   {
@@ -810,7 +769,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Cek stres wajib ≥50",
   desc: "Perusahaan ≥50 karyawan wajib cek beban psikologis tiap tahun. Diatur 労働《ろうどう》安全《あんぜん》衛生法《えいせいほう》.",
-  quote: "ストレスチェックは必《かなら》ず受《う》けてくれよ",
   _origIndex: 147
   },
   {
@@ -822,7 +780,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Drone ≥100g wajib",
   desc: "Drone berat ≥100g wajib didaftarkan sebagai pesawat tak berawak. Termasuk drone survei 測量《そくりょう》 di",
-  quote: "現場《げんば》でドローン使《つか》う前《まえ》に登録《とうろく》を確認《かくにん》しろよ",
   _origIndex: 148
   },
   {
@@ -834,7 +791,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Lampu hambatan",
   desc: "Bangunan, crane, atau struktur setinggi ≥60m wajib dipasangi lampu hambatan penerbangan, termasuk",
-  quote: "60メートル以上《いじょう》のクレーンには航空《こうくう》障害灯《しょうがいとう》が必《かなら》ず要《ひつよう》だぞ",
   _origIndex: 149
   },
   {
@@ -846,7 +802,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "5 prinsip pembayaran upah",
   desc: "①tunai ②langsung ③penuh ④min. 1x/bulan ⑤tanggal tetap. Semua 5 wajib terpenuhi sesuai UU.",
-  quote: "給料《きゅうりょう》は毎月《まいつき》決《き》まった日《ひ》に全額《ぜんがく》渡《わた》すのが法律《ほうりつ》だよ",
   _origIndex: 150
   },
   {
@@ -858,7 +813,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Istirahat",
   desc: "Istirahat diberikan di tengah jam kerja secara serentak. Kerja >6 jam → 45 menit. Kerja >8 jam → 1 jam.",
-  quote: "8時間《じかん》超《こ》えたら1時間《じかん》休憩《きゅうけい》を取《と》らせるぞ",
   _origIndex: 151
   },
   {
@@ -870,7 +824,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "PHK wajib diumumkan 30",
   desc: "Pemberi kerja wajib beritahu 30 hari sebelum memecat. Jika tidak, wajib bayar ganti 30 hari upah.",
-  quote: "辞《や》めてもらう時《とき》は30日《にち》前《まえ》に必《かなら》ず言《い》うよ",
   _origIndex: 152
   },
   {
@@ -882,7 +835,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Kebisingan",
   desc: "Wajib memilih mesin 低騒音《ていそうおん》型《がた》dan mengatur jadwal/zona bising sesuai 騒音《そうおん》規制《きせい》法《ほう》.",
-  quote: "この現場《げんば》では低騒音《ていそうおん》型《がた》の機械《きかい》を選《えら》ぶように",
   _origIndex: 153
   },
   {
@@ -894,7 +846,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Gelombang Radio",
   desc: "Transceiver tanpa izin atau impor tak disetujui Jepang adalah ilegal sesuai 電波《でんぱ》法《ほう》.",
-  quote: "そのトランシーバー、免許《めんきょ》あるか確認《かくにん》したか？",
   _origIndex: 154
   },
   {
@@ -906,7 +857,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "4 tunjangan asuransi",
   desc: "4 tunjangan 労災《ろうさい》: ①療養《りょうよう》=biaya pengobatan penuh ②休業《きゅうぎょう》=ganti upah ③遺族《いぞく》=ahli waris ④介護《かいご》=perawatan setelah 1.5 tahun cacat.",
-  quote: "怪我《けが》したら労災《ろうさい》で全部《ぜんぶ》面倒《めんどう》みてもらえるよ",
   _origIndex: 155
   },
   {
@@ -918,7 +868,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Jalur khusus asuransi",
   desc: "労災《ろうさい》保険《ほけん》biasanya hanya karyawan, tapi kontraktor mandiri 一人親方《ひとりおやかた》 bisa masuk via",
-  quote: "一人親方《ひとりおやかた》でも特《とく》別《とくべつ》加入《かにゅう》で労災《ろうさい》に入《はい》れるぞ",
   _origIndex: 156
   },
   {
@@ -930,7 +879,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Peningkatan",
   desc: "UU yang mendorong perbaikan kondisi kerja konstruksi. Rencana ke-10 (2021–2025) menargetkan CCUS",
-  quote: "CCUSカードは毎日《まいにち》忘《わす》れずタッチしてくれよ",
   _origIndex: 157
   },
   {
@@ -942,7 +890,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Perparkiran",
   desc: "Membangun atau memodifikasi fasilitas parkir di perkotaan wajib lapor ke pemda sebelum mulai.",
-  quote: "駐車場《ちゅうしゃじょう》工事《こうじ》は着工《ちゃっこう》前《まえ》に届出《とどけで》が要《い》るぞ",
   _origIndex: 158
   },
   {
@@ -954,7 +901,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Pencemaran Air",
   desc: "Air yang kontak beton sangat basa, wajib dinetralkan dengan CO₂ sebelum dibuang ke saluran.",
-  quote: "コンクリートの排水《はいすい》は中和《ちゅうわ》してから流《なが》してくれよ",
   _origIndex: 159
   },
   {
@@ -966,7 +912,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Dilarang tetapkan denda",
   desc: "Pemberi kerja dilarang mencantumkan klausul denda pemutusan di muka. Pekerja boleh menolak kontrak",
-  quote: "契約《けいやく》に罰金《ばっきん》条項《じょうこう》は違法《いほう》だよ、サインするな",
   _origIndex: 160
   },
   {
@@ -978,7 +923,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Non",
   desc: "Dilarang beda upah berdasarkan kebangsaan/kepercayaan/status sosial. Dilarang kerja paksa.",
-  quote: "国籍《こくせき》が違《ちが》っても同《おな》じ条件《じょうけん》で働《はたら》いてもらうぞ",
   _origIndex: 161
   },
   {
@@ -990,7 +934,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Dilarang pecat saat",
   desc: "Pekerja yang sakit/cedera karena kerja tidak boleh dipecat selama pengobatan + 30 hari setelahnya.",
-  quote: "仕事《しごと》中《ちゅう》の怪我《けが》で休《やす》んでる間《あいだ》は解雇《かいこ》できないから安心《あんしん》しろ",
   _origIndex: 162
   },
   {
@@ -1002,7 +945,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "6 hal wajib diberitahu",
   desc: "6 hal wajib tertulis: durasi kontrak, lokasi/jenis kerja, jam kerja, upah, libur, ketentuan",
-  quote: "契約《けいやく》の時《とき》に条件《じょうけん》は書面《しょめん》でもらってくれよ",
   _origIndex: 163
   },
   {
@@ -1014,7 +956,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Upah minimum berbeda per",
   desc: "Upah minimum ditetapkan per prefektur sesuai biaya hidup. Berlaku semua pekerja tanpa memandang",
-  quote: "最低《さいてい》賃金《ちんぎん》は毎年《まいとし》変《か》わるから確認《かくにん》してくれよ",
   _origIndex: 164
   },
   {
@@ -1026,7 +967,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Pelatihan vokasi diakui",
   desc: "Pelatihan vokasi oleh pihak swasta yang diakui resmi gubernur prefektur. Berbeda dari pelatihan",
-  quote: "この研修《けんしゅう》は知事《ちじ》認定《にんてい》だから証《しょう》書《しょうしょ》がもらえるぞ",
   _origIndex: 165
   },
   {
@@ -1038,7 +978,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Hari libur wajib",
   desc: "Minimal 1 hari libur per minggu wajib diberikan. Kerja di hari ini → upah +35%",
-  quote: "週《しゅう》に1日《にち》は必《かなら》ず休《やす》んでくれよ、法律《ほうりつ》で決《き》まってるから",
   _origIndex: 166
   },
   {
@@ -1050,7 +989,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Dilarang tukarkan cuti",
   desc: "Pemberi kerja tidak boleh mengkonversi 有給《ゆうきゅう》休暇《きゅうか》 menjadi uang. Cuti harus digunakan sebagai",
-  quote: "有給《ゆうきゅう》はお金《かね》に変《か》えられないから、ちゃんと休《やす》んで使《つか》ってくれ",
   _origIndex: 167
   },
   {
@@ -1062,7 +1000,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Cek kesehatan",
   desc: "Perusahaan wajib selenggarakan 健康《けんこう》診断《しんだん》 1x/tahun dan saat rekrut baru. Biaya ditanggung",
-  quote: "年《ねん》1回《かい》の健康《けんこう》診断《しんだん》は会社《かいしゃ》が出《だ》すから必《かなら》ず受《う》けてくれよ",
   _origIndex: 168
   },
   {
@@ -1085,7 +1022,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 kategori pengelasan",
   desc: "融接《ゆうせつ》=material dilelehkan (arc/gas). 圧接《あっせつ》=dipanaskan+ditekan tanpa cair. ろう接《せつ》=logam",
-  quote: "融接《ゆうせつ》箇所《かしょ》の検査《けんさ》します",
   _origIndex: 190
   },
   {
@@ -1097,7 +1033,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Vibrator pemadatan beton",
   desc: "Alat getar dimasukkan ke beton segar untuk hilangkan 気泡《きほう》 dan pastikan beton isi sudut bekisting",
-  quote: "バイブレータちゃんと入《い》れて、気泡《きほう》抜《ぬ》いて",
   _origIndex: 193
   },
   {
@@ -1109,7 +1044,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Rigging crane",
   desc: "玉掛《たまが》け=ikat beban ke kait crane. ≥1t wajib 技能《ぎのう》講習《こうしゅう》. <1t cukup 特《とく》別《とくべつ》教育《きょういく》.",
-  quote: "玉掛《たまが》け資格《しかく》ある人《ひと》でやって",
   _origIndex: 199
   },
   {
@@ -1121,7 +1055,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 tingkat kualifikasi K3",
   desc: "①国家《こっか》免許《めんきょ》=lisensi negara. ②技能《ぎのう》講習《こうしゅう》修了《しゅうりょう》証《しょう》=lulus pelatihan terdaftar.",
-  quote: "この作業《さぎょう》、技能《ぎのう》講習《こうしゅう》持《も》ってる人《ひと》ですか",
   _origIndex: 200
   },
   {
@@ -1133,7 +1066,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Lisensi juru peledak",
   desc: "Wajib lisensi negara 発破《はっぱ》技士《ぎし》 untuk peledakan di konstruksi/tambang. Tugas: bor, pasang",
-  quote: "発破《はっぱ》技士《ぎし》いますか",
   _origIndex: 201
   },
   {
@@ -1145,7 +1077,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pembongkaran bangunan +",
   desc: "Sebelum bongkar, survei 石綿《いしわた》 (asbes) wajib. Limbah 解体《かいたい》ガラ dipilah: beton, besi, berbahaya.",
-  quote: "石綿《いしわた》調査《ちょうさ》の結果《けっか》出《で》ましたか",
   _origIndex: 202
   },
   {
@@ -1157,7 +1088,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan ubin",
   desc: "Ubin jatuh dari ketinggian berpotensi fatal. Koordinasi 配管《はいかん》 dan listrik wajib dilakukan",
-  quote: "配管《はいかん》確認《かくにん》してから貼《は》って",
   _origIndex: 207
   },
   {
@@ -1169,7 +1099,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Lisensi crane",
   desc: "クレーン: ≥5t→免許《めんきょ》, 1〜5t→技能《ぎのう》講習《こうしゅう》. 移動《うご》き式《いどうしき》: ≥5t→免許《めんきょ》. 玉掛《たまが》け:",
-  quote: "何《なん》トン吊《つ》りですか、資格《しかく》確認《かくにん》して",
   _origIndex: 215
   },
   {
@@ -1181,7 +1110,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Kendaraan ketinggian",
   desc: "作業床《さぎょうゆか》 ≥10m → 技能講習《ぎのうこうしゅう》修了者《しゅうりょうしゃ》.",
-  quote: "「高所作業車《こうしょさぎょうしゃ》、10m以上《いじょう》なら技能講習《ぎのうこうしゅう》ね」",
   _origIndex: 216
   },
   {
@@ -1193,7 +1121,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Alat berat",
   desc: "機体重《かさ》ね量《きたいじゅうりょう》 ≥3t → 技能講習《ぎのうこうしゅう》. <3t → 特《とく》別教育《とくべつきょういく》.",
-  quote: "「機体重《かさ》ね量《きたいじゅうりょう》3t以上《いじょう》は技能講習《ぎのうこうしゅう》持《も》ってる人《ひと》で」",
   _origIndex: 217
   },
   {
@@ -1205,7 +1132,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Las gas",
   desc: "ガス溶接《ようせつ》作業主任者《さぎょうしゅにんしゃ》=免許《めんきょ》(negara). 作業者《さぎょうしゃ》=技能講習《ぎのうこうしゅう》.",
-  quote: "「ガス溶接《ようせつ》の主任者《しゅにんしゃ》は免許《めんきょ》持《も》ってますよね」",
   _origIndex: 218
   },
   {
@@ -1217,7 +1143,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Alat berat tanah",
   desc: "ブルドーザ=dorong tanah. 油圧《ゆあつ》ショベル=gali+muat. ホイールローダ=muat material.\nクラムシェル=gali bawah air.",
-  quote: "「ショベルで掘《ほ》って、すぐローダに積《つ》んで」",
   _origIndex: 222
   },
   {
@@ -1229,7 +1154,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Standar tahan gempa",
   desc: "震度《しんど》5強《きょう》→機能保持《きのうほじ》 (tetap berfungsi). 震度《しんど》6強《きょう》〜7→倒壊《とうかい》しない (tidak runtuh).",
-  quote: "「耐震補強《たいしんほきょう》の設計確認《せっけいかくにん》して」",
   _origIndex: 224
   },
   {
@@ -1241,7 +1165,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Teknisi listrik",
   desc: "二種《にしゅ》=rumah/kecil (600V以下《いか》). 一種《いっしゅ》=gedung besar, pabrik, tegangan tinggi—wajib.",
-  quote: "「高圧工事《こうあつこうじ》は一種《いっしゅ》持《も》ちでやって」",
   _origIndex: 232
   },
   {
@@ -1253,7 +1176,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Lisensi telekomunikasi",
   desc: "①工事担任者《こうじたんにんしゃ》 dan ②電気通《つう》信主任技術者《でんきつうしんしゅにんぎじゅつしゃ》=lisensi wajib, bukan 特《とく》別教育《とくべつきょういく》.",
-  quote: "「工事担任者《こうじたんにんしゃ》の資格証《しかくしょう》確認《かくにん》させて」",
   _origIndex: 233
   },
   {
@@ -1265,7 +1187,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Gondola gedung tinggi →",
   desc: "ゴンドラ=platform gantung untuk dinding luar gedung tinggi → wajib 特《とく》別教育《とくべつきょういく》.",
-  quote: "「ゴンドラ作業《さぎょう》、特《とく》別教育《とくべつきょういく》受《う》けけてる人《ひと》ですか」",
   _origIndex: 234
   },
   {
@@ -1277,7 +1198,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Pengawas kerja O₂ rendah",
   desc: "Manhole/terowongan: risiko 酸素欠乏症《さんそけつぼうしょう》 dan 硫化水素中毒《りゅうかすいそちゅうどく》.",
-  quote: "「地下道《ちかどう》に入《い》りる前《まえ》、酸欠《さんけつ》の確認《かくにん》して」",
   _origIndex: 235
   },
   {
@@ -1289,7 +1209,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Pekerja asbes bongkar",
   desc: "Pembongkaran bangunan lama mengandung 石綿《いしわた》 (asbes) → wajib 特《とく》別教育《とくべつきょういく》修了者《しゅうりょうしゃ》",
-  quote: "「石綿《いしわた》は飛散《ひさん》しないよう防護《ぼうご》してくれ」",
   _origIndex: 236
   },
   {
@@ -1301,7 +1220,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Pengawas pelarut organik",
   desc: "Bekerja dengan 有機溶剤《ゆうきようざい》 di ruang dalam/tangki bisa menyebabkan keracunan.",
-  quote: "「有機溶剤《ゆうきようざい》使《つか》いう前《まえ》に換気《かんき》して」",
   _origIndex: 237
   },
   {
@@ -1313,7 +1231,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Garis vertikal / Garis",
   desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom.",
-  quote: "「立《た》てて墨《たてずみ》と仕上《しあ》げげ墨《しあげずみ》の位置《いち》を確認《かくにん》して」",
   _origIndex: 241
   },
   {
@@ -1336,7 +1253,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Buat sudut 90° /",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
-  quote: "「矩《かね》と墨付《すみつ》けけ《すみつけ》を正確《せいかく》にやれ」",
   _origIndex: 243
   },
   {
@@ -1359,7 +1275,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "FH=tinggi tanah /",
   desc: "FH=Formation Height (tinggi tanah rencana). SL=Slab Level (tinggi slab). CH=Ceiling Height (FL ke",
-  quote: "「FHとSLとCHを図面《ずめん》で確認《かくにん》して」",
   _origIndex: 246
   },
   {
@@ -1371,7 +1286,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Dinding penahan tanah /",
   desc: "擁壁《ようへき》=dinding penahan tanah. 矢板《やいた》=papan penahan tanah.",
-  quote: "「鋼矢板《こうやいた》の継《つ》ぎ目《め》を確認《かくにん》して」",
   _origIndex: 250
   },
   {
@@ -1383,7 +1297,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Lubang pompa / pemompaan",
   desc: "釜場《かまば》=lubang di dasar galian untuk pompa. 水替《みずか》ええ《みずかえ》=pompa air menggenang.",
-  quote: "「釜場《かまば》のポンプを動《うご》きかしておけよ」",
   _origIndex: 252
   },
   {
@@ -1395,7 +1308,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan pondasi / 3",
   desc: "地業《じぎょう》=pekerjaan di bawah slab pondasi. ベタ基礎《きそ》=cor seluruh dasar.",
-  quote: "「転《ころ》び圧《てんあつ》後《あと》に捨《す》てコンを打《う》ちてよ」",
   _origIndex: 253
   },
   {
@@ -1418,7 +1330,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jenis perancah",
   desc: "枠組《わくぐ》み=rangka prefabrikasi. 単管《たんかん》=pipa tunggal, fleksibel.",
-  quote: "「足場《あしば》の種類《しゅるい》は作業内容《さぎょうないよう》に合《あ》わせわせて選《えら》びんでくれ」",
   _origIndex: 256
   },
   {
@@ -1430,7 +1341,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Lantai kerja perancah /",
   desc: "作業床《さぎょうゆか》=lantai dari papan tempat pekerja berdiri di perancah.",
-  quote: "「作業床《さぎょうゆか》の隙間《すきま》と仮囲《かりかこ》いい《かりがこい》の固定《こてい》を確認《かくにん》しろよ」",
   _origIndex: 257
   },
   {
@@ -1442,7 +1352,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Beton lantai kerja",
   desc: "Beton tipis 5–10 cm dicor di atas 地業《じぎょう》 sebelum tulangan/bekisting dipasang.",
-  quote: "「捨《す》てコンの墨出《すみだ》しし《すみだし》をしっかりやってくれ」",
   _origIndex: 260
   },
   {
@@ -1454,7 +1363,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengikatan tulangan /",
   desc: "結束《けっそく》=mengikat persilangan tulangan dengan kawat 結束線《けっそくせん》 menggunakan ハッカー.",
-  quote: "「ハッカーの使《つか》いい方《つかいかた》を覚《おぼ》ええてくれよ」",
   _origIndex: 261
   },
   {
@@ -1466,7 +1374,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Cor di atas beton",
   desc: "打《う》ちち重《かさ》ねね《うちかさね》=cor di atas beton BELUM keras: batas 150 mnt (<25°C) / 120 mnt (≥25°C).",
-  quote: "「時間《じかん》を守《まも》りって打《う》ちち重《かさ》ねねろ」",
   _origIndex: 262
   },
   {
@@ -1478,7 +1385,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pecahnya bekisting",
   desc: "Bekisting pecah saat pengecoran karena 支保工《しほこう》 tidak kuat → beton mengalir keluar.",
-  quote: "「パンクしたらすぐ作業《さぎょう》を止《と》めめて報告《ほうこく》しろよ」",
   _origIndex: 263
   },
   {
@@ -1490,7 +1396,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kerapian pemasangan /",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
-  quote: "「取《と》り合《とりあ》いい《とりあい》の納《おさ》めまり《おさまり》が悪《わる》いいから直《なお》ししてくれ」",
   _origIndex: 264
   },
   {
@@ -1502,7 +1407,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Rata sejajar /",
   desc: "面一《つらいち》=dua permukaan dalam satu bidang rata. 不陸《ふろく》=permukaan bergelombang.",
-  quote: "「面一《つらいち》になってるか確認《かくにん》してくれよ」",
   _origIndex: 265
   },
   {
@@ -1514,7 +1418,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Sisa pekerjaan / koreksi",
   desc: "駄目《だめ》=pekerjaan terlewat saat hampir finishing. 手直《てなお》しし《てなおし》=koreksi sebagian.",
-  quote: "「段取《だんど》りり《だんどり》して手戻《てもど》りり《てもどり》を減《へ》りらせよ」",
   _origIndex: 266
   },
   {
@@ -1526,7 +1429,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tinggi elemen / ujung",
   desc: "建端《たっぱ》=tinggi elemen. 上端《うわば》=tepi atas elemen. 下端《したば》=tepi bawah elemen.",
-  quote: "「上端《うわば》と下端《したば》の位置《いち》を確認《かくにん》してから取《と》りり付《つ》きけて」",
   _origIndex: 267
   },
   {
@@ -1538,7 +1440,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "1 ken≈1.8m / 1",
   desc: "Satuan lama yang masih dipakai: 1間《けん》≈1.818m, 1尺《しゃく》≈30.3cm, 1寸《すん》≈3.03cm.",
-  quote: "「この部屋《へや》は3坪《つぼ》くらいだ」",
   _origIndex: 268
   },
   {
@@ -1550,7 +1451,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jarak pemasangan",
   desc: "Jarak antara elemen yang dipasang berulang: tulangan, baut, atau tile.",
-  quote: "「ピッチ200ミリで正確《せいかく》に並《なら》びべてくれ」",
   _origIndex: 269
   },
   {
@@ -1562,7 +1462,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Laporan / Komunikasi /",
   desc: "報告《ほうこく》=lapor ke atasan. 連絡《れんらく》=sampaikan info/jadwal. 相談《そうだん》=konsultasikan masalah.",
-  quote: "「問題《もんだい》があったらすぐ相談《そうだん》してくれよ」",
   _origIndex: 283
   },
   {
@@ -1574,7 +1473,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Aturan di ruang",
   desc: "作業員詰《さぎょういんつ》めめ所《さぎょういんつめしょ》=ruang ganti/istirahat. Aturan: merokok di tempat khusus,",
-  quote: "「詰《つ》めめ所《つめしょ》のルールを守《まも》りってくれよ」",
   _origIndex: 284
   },
   {
@@ -1586,7 +1484,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tampak penuh / sebagian",
   desc: "見《み》え付《みつ》けけ《みつけ》=permukaan sepenuhnya terlihat dari depan. 見《み》ええ掛《か》けかり《みえがかり》=tampak dari",
-  quote: "「見《み》え付《みつ》けけ《みつけ》部分《ぶぶん》は特《とく》に丁寧《ていねい》に仕上《しあ》げげてくれ」",
   _origIndex: 285
   },
   {
@@ -1598,7 +1495,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Cekung / cembung /",
   desc: "反《はん》り《そり》=melengkung CEKUNG. 起《お》きり《むくり》=melengkung CEMBUNG.",
-  quote: "「この面《めん》が反《はん》っているから直《なお》ししてくれよ」",
   _origIndex: 286
   },
   {
@@ -1610,7 +1506,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Elemen miring dari",
   desc: "転《ころ》びび《ころび》=kolom/dinding yang seharusnya tegak namun miring.",
-  quote: "「柱《はしら》が転《ころ》びんでいるから修正《しゅうせい》してくれ」",
   _origIndex: 287
   },
   {
@@ -1622,7 +1517,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Selesaikan sambungan /",
   desc: "見《み》え切《みき》りる《みきる》=selesaikan sambungan dua pekerjaan finishing.",
-  quote: "「見《み》え切《みき》りり材《みきりざい》の馴染《なじ》みみ《なじみ》が悪《わる》いいから直《なお》ししてくれ」",
   _origIndex: 288
   },
   {
@@ -1634,7 +1528,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tutup seluruh permukaan",
   desc: "ベタ=menutupi seluruh permukaan tanpa celah (contoh: ベタ塗《ぬ》り).",
-  quote: "「ここはふかして仕上《しあ》げげ《しあげ》をそろえてくれ」",
   _origIndex: 289
   },
   {
@@ -1646,7 +1539,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Mengecek kelurusan elemen",
   desc: "通《つう》り《とおり》=kondisi lurus; 通《つう》りが悪《わる》いい=bengkok.",
-  quote: "「柱《はしら》の通《つう》りを見《み》えてくれよ、少《すく》ないし曲《ま》げがってるぞ」",
   _origIndex: 290
   },
   {
@@ -1658,7 +1550,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Perhitungan kebutuhan",
   desc: "Proses membaca gambar kerja untuk menghitung jumlah material dan tenaga kerja.",
-  quote: "「拾《ひろ》いい出《で》し《ひろいだし》をしてから材料《ざいりょう》を発注《はっちゅう》してくれよ」",
   _origIndex: 291
   },
   {
@@ -1670,7 +1561,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengecoran di lokasi /",
   desc: "場所打《ばしょう》ちち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.",
-  quote: "「打《う》ち設《だせつ》前《まえ》に型枠《かたわく》を確認《かくにん》して」",
   _origIndex: 292
   },
   {
@@ -1682,19 +1572,17 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Adukan semen encer /",
   desc: "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting.",
-  quote: "「ノロが漏《も》れないよう型枠《かたわく》を締《し》めめてくれ」",
   _origIndex: 293
   },
   {
   id: 230,
   category: "sekou",
   source: "jac-ch4",
-  furi: "てにょうくぎじまい",
+  furi: "てんようくぎじまい",
   jp: "転用（てんよう）・釘仕舞",
   type: "konsep",
   id_text: "Pakai ulang bekisting /",
   desc: "転《ころ》び用《てんよう》=memakai kembali bekisting di lokasi berbeda untuk hemat biaya.",
-  quote: "「転《ころ》び用《てんよう》するなら釘仕舞《くぎじまい》をちゃんとやってくれ」",
   _origIndex: 294
   },
   {
@@ -1706,7 +1594,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Rasio campuran /",
   desc: "配合《はいごう》=perbandingan semen, pasir, kerikil, air. 練《ね》りり混《ま》ぜぜ《ねりまぜ》=mencampur hingga merata.",
-  quote: "「配合《はいごう》は設計《せっけい》通《つう》りにして、タンピングも忘《わす》れれずに」",
   _origIndex: 295
   },
   {
@@ -1718,7 +1605,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Gerinda sisa pemotongan",
   desc: "バリ=tonjolan sisa material di tepi logam/plastik akibat pemotongan.",
-  quote: "「パイプを切《き》りったらバリ取《と》りりをして怪我《けが》防止《ぼうし》しろ」",
   _origIndex: 304
   },
   {
@@ -1730,7 +1616,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 pantangan pakaian di",
   desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《そでまくりきんし》 ④ポケット手禁止《てきんし》",
-  quote: "「服装《ふくそう》を整《ととの》ええて入《い》り場《にゅうじょう》してくれ」",
   _origIndex: 307
   },
   {
@@ -1742,7 +1627,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Beres",
   desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》りり《だんどり》 untuk esok.",
-  quote: "「帰《かえ》りる前《まえ》に火《ひ》の元《もと》を必《かなら》ずず確認《かくにん》してくれよ」",
   _origIndex: 308
   },
   {
@@ -1754,7 +1638,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Material sacrificial",
   desc: "捨《す》てて《すて》=material non-struktural untuk memudahkan 施工《せこう》.",
-  quote: "「捨《す》てコンを打《う》ちってから墨出《すみだ》しし《すみだし》をするんだよ」",
   _origIndex: 309
   },
   {
@@ -1766,7 +1649,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Ukur berurutan dari",
   desc: "追《お》いう《おう》=mengukur posisi berurutan dari titik referensi.",
-  quote: "「基準《きじゅん》から追《お》いって寸法《すんぽう》を確認《かくにん》してくれよ」",
   _origIndex: 314
   },
   {
@@ -1778,7 +1660,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Permukaan, siku, miring",
   desc: "面《つら》=permukaan elemen bangunan; 矩《かね》=sudut 90°; 拝《おが》む=elemen miring tidak tegak lurus.",
-  quote: "「柱《はしら》が拝《おが》んでいるから、矩《かね》を確認《かくにん》してくれよ」",
   _origIndex: 317
   },
   {
@@ -1790,7 +1671,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 definisi kegiatan 5S",
   desc: "5S: ①整《ととの》え理《せいり》=pilah; ②整《ととの》え頓《せいとん》=tata; ③清掃《せいそう》=bersih; ④清潔《せいけつ》=jaga; ⑤しつけ=biasakan ①–④.",
-  quote: "「5Sを毎日《まいにち》全員《ぜんいん》でやってくれ」",
   _origIndex: 318
   },
   {
@@ -1802,7 +1682,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pamit pulang lebih dulu",
   desc: "Diucapkan saat kamu pulang lebih dulu dari rekan yang masih bekerja.\nRespons rekan: お疲《つか》れさまでした.",
-  quote: "「先《さき》に失礼《しつれい》します」→「お疲《つか》れさまでした！」",
   _origIndex: 319
   },
   {
@@ -1814,7 +1693,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Larangan sampah & permen",
   desc: "ポイ捨《す》て=buang sampah liar, dilarang.\nPermen karet: risiko ポイ捨《す》てて & bahaya gigit lidah mendadak.",
-  quote: "「ガムを噛《か》みながら作業《さぎょう》するのは禁止《きんし》だからな」",
   _origIndex: 321
   },
   {
@@ -1892,7 +1770,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Gergaji sirkel — kickback",
   desc: "Gergaji sirkel putar tinggi — bahaya キックバック (alat bisa mental balik). Cek safety cover sebelum",
-  quote: "「カバーを確認《かくにん》してから使《つか》え」",
   _origIndex: 363
   },
   {
@@ -1926,7 +1803,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tiga mesin pemadat tanah",
   desc: "ランマ=pemadat dalam (tumbuk kuat). バイブロコンパクタ=getaran, jangkauan luas. プレートコンパクタ=plat besar, ratakan",
-  quote: "「ランマで締《し》め固《かた》めて」",
   _origIndex: 366
   },
   {
@@ -1938,7 +1814,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Laser level: hijau/merah",
   desc: "Garis acuan H/V di dinding & lantai. Hijau (緑《みどり》) lebih jelas di tempat terang vs merah.",
-  quote: "「緑《みどり》レーザーで墨出《すみだ》しして」",
   _origIndex: 367
   },
   {
@@ -1972,7 +1847,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tali acuan — tidak mulur",
   desc: "Tali tidak mulur untuk memastikan garis lurus dan ketinggian seragam saat pasang pondasi atau bata.",
-  quote: "「水糸《みずいと》はピンと張《は》ってから作業《さぎょう》してくれ」",
   _origIndex: 370
   },
   {
@@ -2083,7 +1957,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kunci inggris adjustable",
   desc: "Kunci adjustable. PENTING: putar ke 上《うえ》あご (rahang atas). Jika terbalik → bisa rusak atau cedera.",
-  quote: "「上《うえ》あごに力《ちから》をかけて回《まわ》せ」",
   _origIndex: 380
   },
   {
@@ -2161,7 +2034,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Excavator / backhoe utama",
   desc: "Mesin penggali boom-arm-bucket, upper body berputar (旋回体《せんかいたい》). Untuk gali pondasi dan parit.",
-  quote: "「バックホウで掘削《くっさく》して」",
   _origIndex: 387
   },
   {
@@ -2173,7 +2045,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Traktor shovel dua tipe",
   desc: "Bucket di depan untuk sekop material ke dump truck. ホイール=lincah di jalan; クローラ=medan berat.",
-  quote: "「ホイールローダで砂利《じゃり》を積《つ》んで」",
   _origIndex: 388
   },
   {
@@ -2185,7 +2056,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Truck vs crawler crane",
   desc: "トラッククレーン=crane di atas truk, mobile di jalan. クローラクレーン=bergerak dengan rantai, cocok untuk medan",
-  quote: "「クローラクレーンを手配《てはい》して」",
   _origIndex: 389
   },
   {
@@ -2208,7 +2078,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Post hole digger",
   desc: "Sekop dua bilah untuk gali lubang dalam secara vertikal. Digunakan pasang tiang listrik atau",
-  quote: "「ダブルスコップで穴《あな》を掘《ほ》って」",
   _origIndex: 411
   },
   {
@@ -2220,7 +2089,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pickaxe gali tanah keras",
   desc: "Kepala logam melengkung dua ujung, gagang kayu. Untuk gali tanah keras/batuan dan pecah lapisan",
-  quote: "「つるはしで掘《ほ》り起《おこ》こして」",
   _origIndex: 412
   },
   {
@@ -2331,7 +2199,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tirfor winch manual",
   desc: "Winch manual lever untuk menarik wire rope — tarik beban atau arahkan pohon tanpa perlu listrik.",
-  quote: "「チルホールで引《ひ》き寄《よ》せて」",
   _origIndex: 423
   },
   {
@@ -2354,7 +2221,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Lever block",
   desc: "Alat angkat atau kencangkan beban via lever dan rantai.",
-  quote: "「レバーブロックで引《ひ》っ張《ぱ》って鉄骨《てっこつ》を起《お》こして」",
   _origIndex: 425
   },
   {
@@ -2531,7 +2397,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Aerial work platform",
   desc: "Kendaraan dengan keranjang ke ≥2m via boom atau scissor.",
-  quote: "「高所作業車《こうしょさぎょうしゃ》の点検《てんけん》記録《きろく》見《み》せて」",
   _origIndex: 461
   },
   {
@@ -2576,7 +2441,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Batu asah untuk pahat,",
   desc: "Batu untuk mengasah logam; berbentuk balok kecil (直《なお》し方体《ちょくほうたい》) digunakan untuk mengasah のみ",
-  quote: "「のみの刃《は》、砥石《といし》で研《と》いどいて」",
   _origIndex: 480
   },
   {
@@ -2731,7 +2595,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Alat laser untuk",
   desc: "Memancarkan cahaya laser menggantikan 墨《すみ》つぼ konvensional; memudahkan pengecekan sudut siku",
-  quote: "「レーザーで墨《すみ》を出《だ》して」",
   _origIndex: 494
   },
   {
@@ -2743,7 +2606,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 jenis sumidashi",
   desc: "①基準《きじゅん》墨《すみ》 = acuan posisi, ketinggian, dan通《とお》り芯《しん》.",
-  quote: "「基準《きじゅん》墨《すみ》を出《だ》してから始《はじ》めて」",
   _origIndex: 495
   },
   {
@@ -2799,7 +2661,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "DILARANG",
   desc: "Pemotongan ライニング鋼管《こうかん》 dengan ガス溶断《ようだん》 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak",
-  quote: "「ライニング管《かん》はバンドソーで切《き》って」",
   _origIndex: 513
   },
   {
@@ -2833,7 +2694,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kode warna lembar",
   desc: "Dipasang antara utilitas dan permukaan tanah sebagai peringatan saat penggalian.",
-  quote: "「掘削《くっさく》前《まえ》に埋設物《まいせつぶつ》表示《ひょうじ》シートを確認《かくにん》して」",
   _origIndex: 532
   },
   {
@@ -2856,7 +2716,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kepala kerja area rendah",
   desc: "Yang boleh masuk manhole hanya pemegang sertifikasi 酸素欠乏《さんそけつぼう》危険《きけん》作業《さぎょう》主任者《しゅにんしゃ》 atau",
-  quote: "「酸素《さんそ》濃度《のうど》を計測《けいそく》してから入《はい》って」",
   _origIndex: 534
   },
   {
@@ -2934,7 +2793,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Hierarki manajemen",
   desc: "Urutan: 発注《はっちゅう》者《はっちゅうしゃ》→監理者《かんりしゃ》→ゼネコン→専門工事業者《せんもんこうじぎょうしゃ》→職長《しょくちょう》→作業員《さぎょういん》.",
-  quote: "ゼネコンの現場監督《げんばかんとく》の指示《しじ》に従《したが》ってくれよ",
   _origIndex: 563
   },
   {
@@ -2946,7 +2804,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pemberi order konstruksi",
   desc: "Pihak yang memesan pekerjaan konstruksi.",
-  quote: "発注《はっちゅう》者《はっちゅうしゃ》の要求《ようきゅう》に応《こた》えるのが私《わたし》たちの仕事《しごと》だ",
   _origIndex: 564
   },
   {
@@ -2958,7 +2815,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengawas konstruksi",
   desc: "Teknisi yang memastikan pekerjaan sesuai gambar/blueprint.",
-  quote: "監理者《かんりしゃ》から指摘《してき》があったらすぐ俺《おれ》に報告《ほうこく》してくれ",
   _origIndex: 565
   },
   {
@@ -2970,7 +2826,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Perancang / Desainer",
   desc: "Teknisi yang membuat dokumen desain untuk mewujudkan permintaan klien.",
-  quote: "図面《ずめん》に疑問《ぎもん》があったら勝手《かって》に変《か》えるな、確認《かくにん》が必《かなら》ず要《ひつよう》だ",
   _origIndex: 566
   },
   {
@@ -2982,7 +2837,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "General Contractor",
   desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek",
-  quote: "ゼネコンからの指示《しじ》は最優先《さいゆうせん》で対応《たいおう》してくれよ",
   _origIndex: 567
   },
   {
@@ -2994,7 +2848,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengawas lapangan",
   desc: "Teknisi yang mengawasi pekerjaan di lokasi konstruksi.",
-  quote: "今日《きょう》の指示《しじ》は朝《あさ》のミーティングでもらうぞ",
   _origIndex: 568
   },
   {
@@ -3006,7 +2859,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kontraktor spesialis",
   desc: "Kontraktor spesialis yang menerima subkontrak dari ゼネコン.",
-  quote: "うちは配管《はいかん》専門《せんもん》だ、他《ほか》の工事《こうじ》に口《くち》を出《だ》すな",
   _origIndex: 569
   },
   {
@@ -3018,7 +2870,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Mandor / Foreman",
   desc: "Pemimpin langsung pekerja; menerima instruksi dari 現場監督《げんばかんとく》 dan meneruskan ke 技能者《ぎのうしゃ》.",
-  quote: "作業《さぎょう》中《ちゅう》に疑問《ぎもん》があれば、まず俺《おれ》に聞《き》けよ",
   _origIndex: 570
   },
   {
@@ -3030,7 +2881,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerja terampil",
   desc: "Pekerja yang memiliki keahlian teknis di bidang konstruksi.",
-  quote: "CCUSのレベルを上《あ》げたいなら資格《しかく》を取《と》れよ",
   _origIndex: 571
   },
   {
@@ -3042,7 +2892,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pemilik bangunan / klien",
   desc: "Pihak yang memesan bangunan; istilah khas proyek kecil seperti rumah tinggal.",
-  quote: "施主《せしゅ》さんの要望《ようぼう》を最優先《さいゆうせん》に作業《さぎょう》してくれよ",
   _origIndex: 572
   },
   {
@@ -3054,7 +2903,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kontraktor lokal kecil",
   desc: "Kontraktor kecil untuk proyek rumah tinggal; bertindak sebagai 元請《もとうけ》け dari 施主《せしゅ》.",
-  quote: "近隣《きんりん》への挨拶《あいさつ》も大事《だいじ》な仕事《しごと》だ、忘《わす》れるな",
   _origIndex: 573
   },
   {
@@ -3066,7 +2914,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kontraktor utama",
   desc: "Pihak yang menerima kontrak langsung dari klien lalu memberi subkontrak ke spesialis.",
-  quote: "元請《もとうけ》けから指示《しじ》が来《き》たら最優先《さいゆうせん》で動《うご》けよ",
   _origIndex: 574
   },
   {
@@ -3078,7 +2925,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 kriteria CCUS",
   desc: "Tiga kriteria evaluasi CCUS: ①hari kerja tercatat ②lisensi/sertifikat ③kemampuan manajerial.",
-  quote: "経験《けいけん》と資格《しかく》を積《つ》んでCCUSレベルを上《あ》げろよ",
   _origIndex: 575
   },
   {
@@ -3090,7 +2936,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerja baru pertama",
   desc: "Pekerja yang pertama kali masuk lokasi konstruksi tertentu.",
-  quote: "名前《なまえ》と会社《かいしゃ》を大声《おおごえ》で言《い》えよ",
   _origIndex: 576
   },
   {
@@ -3102,7 +2947,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Seruan keselamatan",
   desc: "Seruan keselamatan dan tumpuk tangan bersama di apel per jenis pekerjaan.",
-  quote: "全員《ぜんいん》で指差《ゆびさ》しして、ゼロ災《さい》で行《い》こう、ヨシ！と言《い》えよ",
   _origIndex: 577
   },
   {
@@ -3114,7 +2958,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "\"Zero kecelakaan, maju!",
   desc: "Slogan 安全唱和《あんぜんしょうわ》 diucapkan sambil 指《ゆび》さし saat apel per jenis pekerjaan.",
-  quote: "全員《ぜんいん》で声《こえ》を合《あ》わせて、ゼロ災《さい》で行《い》こう、ヨシ！！",
   _origIndex: 578
   },
   {
@@ -3126,7 +2969,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 langkah KY",
   desc: "4 langkah KY活動《かつどう》: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target",
-  quote: "KY活動《かつどう》は4ステップちゃんとやってくれよ",
   _origIndex: 579
   },
   {
@@ -3138,7 +2980,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "KY Board",
   desc: "Formulir yang diisi saat KY活動《かつどう》: kolom titik bahaya dan solusi tim.",
-  quote: "KYボードはちゃんと記入《きにゅう》してから貼《は》り出《だ》せよ",
   _origIndex: 580
   },
   {
@@ -3150,7 +2991,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 agenda apel pagi umum",
   desc: "6 agenda: sapaan, senam radio, konfirmasi kerja, KY, cek keselamatan berpasangan, lalu「ご安全《あんぜん》に!」.",
-  quote: "全体朝礼《ぜんたいちょうれい》は全員《ぜんいん》参加《さんか》が基本《きほん》だぞ",
   _origIndex: 581
   },
   {
@@ -3162,7 +3002,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "8 item cek keselamatan",
   desc: "Di akhir 全体朝礼《ぜんたいちょうれい》, 2人《にん》1組《くみ》 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali",
-  quote: "二人《ふたり》一組《ひとくみ》で確認《かくにん》し合《あ》うのが決《き》まりだぞ",
   _origIndex: 582
   },
   {
@@ -3174,7 +3013,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Rasa kesatuan tim di",
   desc: "Rasa kesatuan yang terbentuk dari pekerja berbagai bidang yang bekerja sama.",
-  quote: "現場《げんば》はチームワークが大事《だいじ》だ、他《ほか》の職種《しょくしゅ》にも挨拶《あいさつ》しろよ",
   _origIndex: 583
   },
   {
@@ -3379,7 +3217,7 @@ export const CARDS_COMMON = [
   id: 532,
   category: "anzen",
   source: "jac-ch7",
-  furi: "ねちゅうしょうのしょうじょう",
+  furi: "ねっちゅうしょうのしょうじょう",
   jp: "熱中症の症状（ねっちゅうしょうのしょうじょう）",
   type: "konsep",
   id_text: "Gejala heatstroke",
@@ -3461,7 +3299,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Anti",
   desc: "UU yang mewajibkan perusahaan membuat kebijakan anti-パワハラ dan menyediakan loket konsultasi.",
-  quote: "困《こま》ったら相談窓口《そうだんまどぐち》を使《つか》えよ、会社《かいしゃ》が対処《たいしょ》する",
   _origIndex: 609
   },
   {
@@ -3473,7 +3310,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Tabel cuti tahunan",
   desc: "Syarat: kerja ≥6 bln + hadir ≥80%. Tabel: 0.5th→10hr, 1.5th→11hr, ≥6.5th→20hr (maks).",
-  quote: "6ヶ月《かげつ》経《た》ったら有給《ゆうきゅう》が10日《とおか》使《つか》えるぞ",
   _origIndex: 610
   },
   {
@@ -3485,7 +3321,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "2 wajib K3",
   desc: "Pendidikan K3 wajib dua kali: ①saat rekrut baru ②saat isi pekerjaan berubah. Tugas khusus butuh",
-  quote: "作業《さぎょう》内容《ないよう》が変《か》わったらK3教育《きょういく》をするぞ",
   _origIndex: 611
   },
   {
@@ -3497,7 +3332,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Kewajiban pekerja",
   desc: "UU K3 tidak hanya mengatur pengusaha — pekerja juga wajib mematuhi aturan K3 dan kooperatif dengan tindakan pencegahan kecelakaan.",
-  quote: "安全《あんぜん》ルールを守《まも》るのは労働者《ろうどうしゃ》の義務《ぎむ》でもあるんだ",
   _origIndex: 612
   },
   {
@@ -3509,7 +3343,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Bendera Keselamatan vs",
   desc: "安全旗《あんぜんき》: dikibarkan hanya saat 安全週間《あんぜんしゅうかん》. 安全衛生旗《あんぜんえいせいき》: permanen di lokasi kerja.",
-  quote: "安全衛生旗《あんぜんえいせいき》は常《つね》に掲《かか》げておくものだよ",
   _origIndex: 613
   },
   {
@@ -3521,7 +3354,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Top 5 penyebab kematian",
   desc: "令和《れいわ》3年度《ねんど》 288 kematian: ①墜落《ついらく》・転落《てんらく》=110件 ②崩壊《ほうかい》・倒壊《とうかい》=31件 ③はさまれ=27件 ④交通事故《こうつうじこ》=25件 ⑤激突《げきとつ》=19件.",
-  quote: "墜落《ついらく》が一番《いちばん》多《おお》い、高所《こうしょ》は絶対《ぜったい》フルハーネスを使《つか》えよ",
   _origIndex: 614
   },
   {
@@ -3533,7 +3365,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "5 tujuan UU Industri",
   desc: "5 tujuan 建設業法《けんせつぎょうほう》: ①kualitas usaha ②kontrak layak ③pelaksanaan tepat ④perlindungan pemesan ⑤perkembangan industri konstruksi yang sehat.",
-  quote: "建設業法《けんせつぎょうほう》は俺《おれ》たちを守《まも》るためにある",
   _origIndex: 615
   },
   {
@@ -3545,7 +3376,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Bangunan",
   desc: "単体《たんたい》規定《きてい》: standar bangunan (tahan gempa, kebakaran, ventilasi dll). 集団《しゅうだん》規定《きてい》: aturan kawasan (建ぺい率《けんぺいりつ》, 容積率《ようせきりつ》, ketinggian dll).",
-  quote: "建《け》ぺい率《りつ》と容積率《ようせきりつ》は図面《ずめん》で確認《かくにん》してくれよ",
   _origIndex: 616
   },
   {
@@ -3557,7 +3387,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Limbah",
   desc: "Pengangkutan 産廃《さんぱい》 butuh izin. 元請《もとうけ》 wajib buat manifest & konfirmasi pembuangan akhir. Sub-kontraktor wajib simpan 産廃 dengan benar di lokasi.",
-  quote: "産廃《さんぱい》は許可《きょか》業者《ぎょうしゃ》しか運《はこ》べない、分別《ぶんべつ》して保管《ほかん》して",
   _origIndex: 617
   },
   {
@@ -3569,7 +3398,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Saluran Pembuangan",
   desc: "6 alasan dilarang buang ke saluran: korosi pipa, gas beracun, sumbat pipa, bahaya pekerja, ganggu pengolahan, persulit lumpur. Air beton = alkali tinggi, wajib dinetralkan dulu.",
-  quote: "コンクリートの排水《はいすい》は中和《ちゅうわ》処理《しょり》してから流《なが》してくれよ",
   _origIndex: 618
   },
   {
@@ -3581,7 +3409,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 kategori besar",
   desc: "①土木《どぼく》=alam: dam, jalan, jembatan. ②建築《けんちく》=gedung: rumah, RS. ③ライフライン・設備《せつび》=infrastruktur:",
-  quote: "土木《どぼく》か建築《けんちく》か、まず確認《かくにん》して",
   _origIndex: 619
   },
   {
@@ -3593,7 +3420,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 kategori las",
   desc: "①融接《ゆうせつ》=lelehkan material (arc/gas/laser), paling umum. ②圧接《あっせつ》=panas+tekan tanpa cair",
-  quote: "融接《ゆうせつ》箇所《かしょ》の検査《けんさ》します",
   _origIndex: 634
   },
   {
@@ -3605,7 +3431,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan bongkar",
   desc: "Bongkar bangunan tua: survei アスベスト wajib dulu. 解体《かいたい》ガラ dipilah (beton, besi, berbahaya) per",
-  quote: "石綿《いしわた》飛散《ひさん》防止《ぼうし》処置《しょち》してから始《はじ》めて",
   _origIndex: 643
   },
   {
@@ -3617,7 +3442,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 tingkat kualifikasi",
   desc: "①国家《こっか》免許《めんきょ》=lisensi negara tertinggi. ②技能《ぎのう》講習《こうしゅう》修了証《しゅうりょうしょう》=lulus pelatihan",
-  quote: "この作業《さぎょう》の主任者《しゅにんしゃ》はだれですか",
   _origIndex: 644
   },
   {
@@ -3629,7 +3453,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kualifikasi crane &",
   desc: "クレーン: ≥5t免許《めんきょ》, 1〜5t技能《ぎのう》講習《こうしゅう》, <1t特《とく》別《とくべつ》教育《きょういく》. 玉掛《たまか》け: ≥1t技能《ぎのう》講習《こうしゅう》.",
-  quote: "何《なん》トンの荷物《にもつ》か確認《かくにん》して資格《しかく》チェックして",
   _origIndex: 645
   },
   {
@@ -3641,7 +3464,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kualifikasi alat berat",
   desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》:",
-  quote: "機体《きたい》重《かさ》ね量《じゅうりょう》確認《かくにん》してから乗《の》せて",
   _origIndex: 646
   },
   {
@@ -3653,7 +3475,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kualifikasi las/O₂",
   desc: "ガス溶接《ようせつ》者《もの》=技能《ぎのう》講習《こうしゅう》. アーク溶接《ようせつ》者《もの》=特《とく》別《とくべつ》教育《きょういく》.",
-  quote: "作業《さぎょう》前《まえ》に資格証《しかくしょう》確認《かくにん》してから始《はじ》めて",
   _origIndex: 647
   },
   {
@@ -3676,7 +3497,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Semoga selamat",
   desc: "Ungkapan harapan agar selamat dan tidak kecelakaan. Digunakan saat akhir 朝礼《ちょうれい》 dan saat",
-  quote: "では、今日《きょう》もご安全《あんぜん》に！",
   _origIndex: 653
   },
   {
@@ -3699,7 +3519,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Gokurosama tidak sopan",
   desc: "ご苦労《くろう》さま=kurang sopan untuk atasan. おつかれさまです=lebih sopan, bisa ke siapa saja. Atasan bilang",
-  quote: "上司《じょうし》にはおつかれさまですって言《い》ってくれよ",
   _origIndex: 655
   },
   {
@@ -3711,7 +3530,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Permisi / maaf mengganggu",
   desc: "3 situasi: ①masuk ruangan ②menyela percakapan mendesak ③pulang lebih dulu: お先《さき》に失礼《しつれい》します →",
-  quote: "部屋《へや》に入《はい》る前《まえ》に失礼《しつれい》しますって言《い》ってくれよ",
   _origIndex: 656
   },
   {
@@ -3723,7 +3541,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Awas! Minggir!",
   desc: "Saat seseorang tidak menyadari bahaya, orang sekitar berteriak 危《あぶ》ない！. Untuk benda jatuh:",
-  quote: "危《あぶ》ない！と言《い》われたら迷《まよ》わず動《うご》けよ！",
   _origIndex: 657
   },
   {
@@ -3735,7 +3552,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 istilah dasar garis",
   desc: "墨出《すみだ》し=menarik garis referensi konstruksi. 基準《きじゅん》墨《ずみ》=garis referensi utama bangunan.",
-  quote: "基準《きじゅん》墨《ずみ》を正確《せいかく》に引《ひ》いてから通《とお》り芯《しん》を出《だ》してくれ",
   _origIndex: 658
   },
   {
@@ -3747,7 +3563,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 jenis garis tinta",
   desc: "逃《に》げ墨《ずみ》=paralel dari referensi. 陸《ろく》墨《ずみ》=referensi ketinggian. 立《た》て墨《ずみ》=garis vertikal.",
-  quote: "逃《に》げ墨《ずみ》は何《なん》センチか必《かなら》ずメモして",
   _origIndex: 659
   },
   {
@@ -3759,7 +3574,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 referensi ketinggian",
   desc: "BM=titik referensi ketinggian proyek. GL=tinggi tanah. FH=tinggi tanah rencana. FL=tinggi lantai",
-  quote: "全部《ぜんぶ》の高《たか》さはBMからの+/-で確認《かくにん》してくれ",
   _origIndex: 662
   },
   {
@@ -3771,7 +3585,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan tanah dasar &",
   desc: "地業《じぎょう》=lapisan bawah slab pondasi (pasir/kerikil/捨《す》てコン/tiang). ベタ基礎《きそ》=cor seluruh dasar.",
-  quote: "転《ころ》び圧《てんあつ》後《ご》に捨《す》てコンを打《う》てよ",
   _origIndex: 671
   },
   {
@@ -3783,7 +3596,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jenis perancah, lantai",
   desc: "足場《あしば》=lantai sementara di ketinggian (枠組《わくぐ》み/単管《たんかん》/くさび). 作業床《さぎょうゆか》=lantai perancah.",
-  quote: "作業床《さぎょうゆか》の点検《てんけん》を毎日《まいにち》してくれよ",
   _origIndex: 673
   },
   {
@@ -3795,7 +3607,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengecoran berlapis",
   desc: "打《う》ち重《かさ》ね=cor di atas beton BELUM keras (<25°C→150mnt, ≥25°C→120mnt). Terlambat→コールドジョイント.",
-  quote: "時間《じかん》オーバーでコールドジョイントにするなよ",
   _origIndex: 677
   },
   {
@@ -3807,7 +3618,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 istilah kualitas",
   desc: "締《し》め固《しめかた》め=vibrasi beton hilangkan rongga. タンピング=pukul permukaan slab agar padat.",
-  quote: "バイブレーターを入《い》れながら締《し》め固《かた》めてくれよ",
   _origIndex: 678
   },
   {
@@ -3819,7 +3629,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah finishing &",
   desc: "納《おさ》まり=keseimbangan penempatan. 取《と》り合《とりあ》い=pertemuan 2+ komponen. 見《み》え付《みつ》け=tampak penuh dari",
-  quote: "取《と》り合《とりあ》いの納《おさ》まりが悪《わる》いから図面《ずめん》と照合《しょうごう》してくれ",
   _origIndex: 679
   },
   {
@@ -3831,7 +3640,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 istilah kelurusan,",
   desc: "通《とお》り=kondisi lurus. 面一《つらいち》=dua permukaan rata sejajar. 反《そ》り=cekung. 起《むく》り=cembung.",
-  quote: "不陸《ふろく》があったらサンダーで修正《しゅうせい》してくれよ",
   _origIndex: 680
   },
   {
@@ -3843,7 +3651,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah cacat &",
   desc: "目違《めちが》い=sambungan tidak rata. 拝《おが》む=elemen miring. 転《ころ》び=kolom miring dari vertikal.",
-  quote: "目違《めちが》いと転《ころ》びがないか最終《さいしゅう》確認《かくにん》してくれよ",
   _origIndex: 681
   },
   {
@@ -3855,7 +3662,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah kondisi",
   desc: "駄目《だめ》=bagian terlewat saat hampir selesai. 手直《てなお》し=koreksi pekerjaan. 手戻《てもど》り=pengerjaan ulang.",
-  quote: "駄目《だめ》直《なお》しはリストを作《つく》って確実《かくじつ》に終《お》わらせてくれ",
   _origIndex: 682
   },
   {
@@ -3867,7 +3673,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "7 istilah ukuran +",
   desc: "ピッチ=jarak antar elemen berulang. 追《お》う=ukur dari titik referensi. 寸法《すんぽう》=dimensi panjang.",
-  quote: "ピッチ300ミリで追《お》って墨《すみ》を出《だ》してくれよ",
   _origIndex: 683
   },
   {
@@ -3879,7 +3684,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Program 5S",
   desc: "①整《ととの》え理《せいり》=pisahkan perlu & tidak. ②整《ととの》え頓《せいとん》=tempatkan di tempat ditentukan.",
-  quote: "5Sを毎日《まいにち》全員《ぜんいん》でやってくれ",
   _origIndex: 696
   },
   {
@@ -3891,7 +3695,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 aturan ruang istirahat",
   desc: "詰《つ》め所《しょ》=ruang ganti & istirahat. Aturan: merokok di tempat khusus, ポイ捨《す》て禁止《きんし》, helm di",
-  quote: "詰《つ》め所《しょ》のルールを全員《ぜんいん》守《まも》ってくれよ",
   _origIndex: 697
   },
   {
@@ -3903,7 +3706,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 larangan pakaian di",
   desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着《うわぎ》前《まえ》開《まえあ》け禁止《きんし》 ③袖《そで》まくり禁止《きんし》(lengan ke pergelangan)",
-  quote: "服装《ふくそう》を整《ととの》えて入《い》り場《にゅうじょう》してくれよ",
   _origIndex: 698
   },
   {
@@ -3915,7 +3717,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Hourensou",
   desc: "ほうれんそう=報告《ほうこく》(lapor ke atasan), 連絡《れんらく》(sampaikan info/jadwal), 相談《そうだん》(konsultasikan masalah).",
-  quote: "何《なに》かあったらすぐほうれんそうしてくれよ",
   _origIndex: 699
   },
   {
@@ -3927,7 +3728,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Beres",
   desc: "Setelah selesai bekerja WAJIB 後《あと》片付《あとかたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan",
-  quote: "帰《かえ》る前《まえ》に火《ひ》の元《もと》を確認《かくにん》したか？確《たし》かめてくれよ",
   _origIndex: 700
   },
   {
@@ -3939,7 +3739,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "UU Pengembangan",
   desc: "UU yang tingkatkan kemampuan kerja lewat pelatihan & sertifikasi. Lulus 技能《ぎのう》検定《けんてい》→ dapat",
-  quote: "技能士《ぎのうし》の資格《しかく》を取《と》れば手当《てあて》もつくし、CCUSも上《あ》がるぞ",
   _origIndex: 701
   },
   {
@@ -3951,7 +3750,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Jam kerja legal",
   desc: "Jam kerja legal: max 8 jam/hari & 40 jam/minggu. Lembur butuh 36協定《きょうてい》 dan dibayar upah",
-  quote: "8時間《じかん》超《こ》えたら必《かなら》ず記録《きろく》してくれよ",
   _origIndex: 703
   },
   {
@@ -5699,7 +5497,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 level CCUS dan syaratnya",
   desc: "Lv.1 白(ホワイト)=初級技能者・見習い。\nLv.2 青(ブルー)=中堅・一人前 ← 登録後645日(3年)以上。\nLv.3 銀(シルバー)=職長として現場に従事できる技能者。\nLv.4 金(ゴールド)=高度マネジメント能力(登録基幹技能者など)。",
-  quote: "「レベル2にはまず645日《にち》の就業実績《しゅうぎょうじっせき》が必要《ひつよう》だぞ」",
   _origIndex: 1428
   },
   {
@@ -5711,7 +5508,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "5 larangan penerbangan drone",
   desc: "航空法で定める飛行禁止ルール（禁止区域問わず適用）:\n①飲酒時《いんしゅじ》の飛行禁止\n②夜間《やかん》の飛行禁止\n③目視外《もくしがい》飛行の禁止\n④人・建物から安全距離を保つ\n⑤危険物輸送・物件投下禁止",
-  quote: "「夜間《やかん》と目視外《もくしがい》はドローン絶対《ぜったい》ダメだ」",
   _origIndex: 1429
   },
   {
@@ -5723,7 +5519,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Izin usaha sektor utilitas",
   desc: "29業種のうち設備関係の主要業種:\n①電気工事業\n②管工事業\n③熱絶縁工事業《ねつぜつえんこうじぎょう》←ライフライン核心\n④電気通信工事業\n⑤消防施設工事業\n⑥水道施設工事業",
-  quote: "「熱絶縁《ねつぜつえん》には熱絶縁工事業《ねつぜつえんこうじぎょう》の許可《きょか》が必要だぞ」",
   _origIndex: 1430
   },
   {
@@ -5735,7 +5530,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kebijakan utama perbaikan tenaga kerja",
   desc: "第10次計画(2021–2025)の主な施策:\n①CCUS等による担い手確保・育成\n②2024年度から残業上限規制（月45h・年360h）建設業に適用\n③高所作業:原則フルハーネス型使用\n④外国人労働者（技能実習/特定技能）の適正受入れ",
-  quote: "「2024年《ねん》4月《がつ》から残業《ざんぎょう》上限《じょうげん》が建設業《けんせつぎょう》にも適用《てきよう》だぞ」",
   _origIndex: 1431
   },
   {
@@ -5747,7 +5541,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Aturan tinggal TK asing saat menganggur",
   desc: "失業しても即帰国義務なし—就職活動中は在留期間内在留可能。\nただし3ヶ月以上、正当な理由なく「特定技能」活動をしない場合→在留資格取消の可能性。\n雇用保険の基本手当:離職前6ヶ月の日額45〜80%・90〜360日分。",
-  quote: "「仕事《しごと》を辞《や》めてもすぐ帰国しなくていい—でも3ヶ月以内《いない》に次《つぎ》を探《さが》せよ」",
   _origIndex: 1432
   },
   {
@@ -5759,7 +5552,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Mandor & pekerja pemasangan perancah",
   desc: "作業主任者: つり足場・張出し足場、または高さ5m以上の構造の足場→技能講習修了。\n全作業者: 足場の組立て・解体・変更の業務→特別教育修了。",
-  quote: "「高さ5m以上《いじょう》の足場《あしば》には主任者《しゅにんしゃ》が必要《ひつよう》だ」",
   _origIndex: 1433
   },
   {
@@ -5771,7 +5563,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Mandor galian tanah & penopang dinding",
   desc: "掘削面《くっさくめん》の高さ2m以上→技能講習修了が必要。\n対象作業: 地山の掘削、土止め支保工の切りばり・腹おこしの取付け・取りはずし。",
-  quote: "「2m以上《いじょう》掘《ほ》るなら地山掘削主任者《くっさくしゅにんしゃ》が必要《ひつよう》だ」",
   _origIndex: 1434
   },
   {
@@ -5783,7 +5574,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan tali di ketinggian",
   desc: "高さ2m以上で作業床を設けることが困難な場所で、昇降器具を用いて身体を保持しながら行う業務→特別教育修了が必要。",
-  quote: "「作業床《さぎょうゆか》が作れない高所《こうしょ》はロープ特別教育《とくべつきょういく》だ」",
   _origIndex: 1435
   },
   {
@@ -5795,7 +5585,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Mandor bekisting & terowongan",
   desc: "型わく支保工の組立て・解体→技能講習修了(型わく主任者)。\nずい道等の掘削・ロックボルト取付け・吹付けコンクリート→技能講習修了(掘削主任者)。\nずい道内作業者→特別教育修了。",
-  quote: "「トンネル内《ない》作業者《さぎょうしゃ》には特別教育《とくべつきょういく》が必要《ひつよう》だぞ」",
   _origIndex: 1436
   },
   {
@@ -5807,7 +5596,6 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "6 jenis tukang tobi",
   desc: "①足場《あしば》とび=塗装などの足場組立て\n②鉄骨とび=高層ビル鉄骨組上げ\n③橋梁《きょうりょう》とび=橋・ダム・鉄塔・高速の鉄骨\n④重量とび=重機の据付(数百トン)\n⑤送電《そうでん》とび=鉄塔の送電線・高所電気工事\n⑥町場《まちば》とび=住宅・マンションの足場",
-  quote: "「送電《そうでん》とびは高所《こうしょ》での電気工事《でんきこうじ》も担当《たんとう》するぞ」",
   _origIndex: 1437
   },
   {
@@ -5819,7 +5607,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 tipe & 2 metode konstruksi baja",
   desc: "構造の3種類:\n①ブレース構造=柱と柱の間に筋交いを入れて補強\n②ラーメン構造=柱・梁を剛接合—耐震性優れ開放的\n③トラス構造=三角形基本—屋根・ドーム・橋梁\n工法: 建て逃げ(移動クレーン・奥から手前) / 水平積上げ(タワークレーン・1階ずつ・高層用)",
-  quote: "「ここはラーメン構造《こうぞう》だから剛接合《ごうせつごう》の確認《かくにん》して」",
   _origIndex: 1438
   },
   {
@@ -5831,7 +5618,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Alat berat kelas kendaraan & batas 3 ton",
   desc: "整地・運搬・積込み・掘削用:\n機体重量3t以上→技能講習修了\n3t未満→特別教育修了\n締固め用(ローラー)→特別教育修了\n高所作業車: 作業床10m以上→技能講習; 10m未満→特別教育",
-  quote: "「3t以上《いじょう》の重機《じゅうき》は技能講習《ぎのうこうしゅう》修了者《しゅうりょうしゃ》しか運転《うんてん》できないぞ」",
   _origIndex: 1439
   },
   {
@@ -5843,7 +5629,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Penyimpanan limbah & manifest",
   desc: "元請け業者: マニフェスト(建設系廃棄物管理票)作成・最終処分まで確認が義務。\n下請け業者: 工事現場での産業廃棄物の「保管」に廃棄物処理法が適用される。\n廃棄物は現場で決められた分類に従い保管。",
-  quote: "「マニフェストなしで廃棄物《はいきぶつ》を出《だ》すのは違法《いほう》だ」",
   _origIndex: 1440
   },
   {
@@ -5855,7 +5640,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 pencegahan heat stroke",
   desc: "夏の熱中症予防措置(労働安全衛生法):\n①日陰《ひかげ》の確保\n②水・塩飴《しおあめ》の配備\n③救急対応の準備\n※熱中症は命に関わる労働災害につながる。",
-  quote: "「水《みず》と塩飴《しおあめ》を持《も》って作業《さぎょう》してくれよ」",
   _origIndex: 1441
   },
   {
@@ -5867,7 +5651,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Lampu rintangan & angka regulasi drone",
   desc: "航空障害灯: 地表・水面から60m以上の物件に設置義務。\nドローン登録義務: 重量100g以上。\n飛行禁止区域: 空港周辺・高さ150m以上・人口集中地区など。",
-  quote: "「クレーンが60m以上《いじょう》になるから航空障害灯《こうくうしょうがいとう》の設置《せっち》を確認《かくにん》して」",
   _origIndex: 1442
   },
 
@@ -5882,7 +5665,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Suplai air & drainase",
   desc: "Sistem pipa suplai air bersih dan pembuangan air kotor pada gedung.",
-  quote: undefined,
   _origIndex: 1443
   },
   {
@@ -5894,7 +5676,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pemadatan dengan roller",
   desc: "Memadatkan tanah atau aspal menggunakan mesin roller berat.",
-  quote: undefined,
   _origIndex: 1444
   },
   {
@@ -5906,7 +5687,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 lapisan perkerasan",
   desc: "①路床《ろしょう》=dasar (digali ±1m) ②路盤《ろばん》=batu pecah dipadatkan ③表層《ひょうそう》=aspal atas.",
-  quote: undefined,
   _origIndex: 1445
   },
   {
@@ -5918,7 +5698,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Setting out bangunan",
   desc: "Rangka sementara tiang+papan horizontal untuk menentukan posisi dan ketinggian bangunan.",
-  quote: undefined,
   _origIndex: 1446
   },
   {
@@ -5930,7 +5709,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Chisui vs Risui",
   desc: "Dua fungsi bendungan: 治水《ちすい》=tampung banjir agar sungai tidak meluap.\n利水《りすい》=sediakan air stabil",
-  quote: undefined,
   _origIndex: 1447
   },
   {
@@ -5942,7 +5720,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "NATM: terowongan gunung",
   desc: "Gali gunung dengan bor/ledak, lalu semprot beton, pasang rangka baja dan rock bolt.",
-  quote: "「吹付《ふきつ》け準備《じゅんび》して」",
   _origIndex: 1448
   },
   {
@@ -5954,7 +5731,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Terowongan shield-segmen",
   desc: "Mesin shield menggali dari 立坑《たてこう》, segmen beton/baja dipasang di belakang mesin.",
-  quote: "「セグメントを組《く》み立《た》てて」",
   _origIndex: 1449
   },
   {
@@ -5966,7 +5742,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jembatan: bawah & atas",
   desc: "下部《ぶ》工《かぶこう》=pondasi penopang jembatan.\n上《うえ》部《ぶ》工《じょうぶこう》=badan jembatan untuk kendaraan/pejalan",
-  quote: "「下部《ぶ》工《かぶこう》の検査《けんさ》入《はい》ります」",
   _origIndex: 1450
   },
   {
@@ -5978,7 +5753,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan sipil laut",
   desc: "Pembangunan pelabuhan, jembatan, terowongan bawah laut menggunakan kapal kerja dan penyelam.",
-  quote: undefined,
   _origIndex: 1451
   },
   {
@@ -5990,7 +5764,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengerukan dasar laut",
   desc: "Mengangkat lumpur/pasir dari dasar laut atau sungai menggunakan kapal keruk (浚渫船《しゅんせつせん》).",
-  quote: undefined,
   _origIndex: 1452
   },
   {
@@ -6002,7 +5775,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Caisson pemecah gelombang",
   desc: "Kotak beton besar diletakkan di dasar laut lalu diisi pasir untuk memecah gelombang.",
-  quote: undefined,
   _origIndex: 1453
   },
   {
@@ -6014,7 +5786,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Investigasi tanah dasar",
   desc: "Pengeboran tanah untuk menemukan lapisan keras (支持層《しじそう》) tempat ujung tiang harus mencapai.",
-  quote: "「支持層《しじそう》まで何《なん》mか確認《かくにん》して」",
   _origIndex: 1454
   },
   {
@@ -6026,7 +5797,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tiang fondasi 2 metode",
   desc: "場所打《ばしょう》ち杭《くい》=cor beton di lubang di tempat.\n既成《きせい》杭《くい》=tiang pabrik (beton/baja/kayu)",
-  quote: "「既成《きせい》杭《くい》の搬入《はんにゅう》確認《かくにん》して」",
   _origIndex: 1455
   },
   {
@@ -6038,7 +5808,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Galian pondasi bangunan",
   desc: "Penggalian tanah di lokasi pondasi bangunan agar struktur bawah tanah bisa dibangun.",
-  quote: undefined,
   _origIndex: 1456
   },
   {
@@ -6050,7 +5819,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Timbunan vs potong tanah",
   desc: "盛《も》り土《ど》=tanah ditimbun untuk meratakan lahan miring.\n切《き》り土《ど》=tanah dipotong agar permukaan rata.",
-  quote: undefined,
   _origIndex: 1457
   },
   {
@@ -6062,7 +5830,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pengurugan kembali tanah",
   desc: "Setelah pekerjaan bawah tanah selesai, ruang kosong di sekitar struktur ditimbun kembali.",
-  quote: undefined,
   _origIndex: 1458
   },
   {
@@ -6074,7 +5841,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 jenis pengeboran sumur",
   desc: "①水源《すいげん》井《い》=air tanah ②観測《かんそく》井《い》=pantau penurunan tanah ③温泉《おんせん》井《い》=500–1000m",
-  quote: "「掘削《くっさく》深度《しんど》の記録《きろく》つけて」",
   _origIndex: 1459
   },
   {
@@ -6086,7 +5852,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Deep well dewatering",
   desc: "Metode pemompaan air tanah untuk galian dalam (>10m).\nBerbeda dari wellpoint yang hanya efektif",
-  quote: undefined,
   _origIndex: 1460
   },
   {
@@ -6098,7 +5863,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jenis pekerjaan tobi",
   desc: "6 spesialisasi: 足場《あしば》(perancah), 鉄骨《てっこつ》(rangka baja), 橋《はし》梁《きょうりょう》(jembatan), 重量《じゅうりょう》(mesin",
-  quote: "「足場《あしば》の点検《てんけん》してくれ」",
   _origIndex: 1461
   },
   {
@@ -6110,7 +5874,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Terowongan gali-tutup",
   desc: "Tanah digali dari permukaan, terowongan dibangun di dalam galian, lalu ditimbun kembali.",
-  quote: "「土留《どどめ》め支保工《しほこう》の点検《てんけん》して」",
   _origIndex: 1462
   },
   {
@@ -6122,7 +5885,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Stabilisasi lereng",
   desc: "①Semprot mortar ke lereng untuk stabilisasi.\n②Mat benih ditempel agar tanaman tumbuh menahan tanah.",
-  quote: "「吹付《ふきつ》けの厚《あつ》さ確認《かくにん》して」",
   _origIndex: 1463
   },
   {
@@ -6134,7 +5896,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Struktur sungai & pantai",
   desc: "防波堤《ぼうはてい》=pecah gelombang. 防潮堤《ぼうちょうてい》=tahan tsunami. 護岸《ごがん》=turap tepi. 堤防《ていぼう》=tanggul.",
-  quote: "「護岸《ごがん》の法面《のりめん》点検《てんけん》して」",
   _origIndex: 1464
   },
   {
@@ -6146,7 +5907,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan rel kereta",
   desc: "Proyek paling kompleks — mencakup sipil, elektrikal, dan bangunan dalam satu pekerjaan.",
-  quote: "「各《かく》職種《しょくしゅ》の工程《こうてい》調整《ちょうせい》してくれ」",
   _origIndex: 1465
   },
   {
@@ -6158,7 +5918,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pipa air bersih & limbah",
   desc: "上《うえ》水道《じょうすいどう》: sungai→treatment→pipa→rumah.\n下水道《げすいどう》: air kotor→treatment→sungai.",
-  quote: "「管《くだ》の勾配《こうばい》ちゃんと確認《かくにん》して」",
   _origIndex: 1466
   },
   {
@@ -6170,7 +5929,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pemulihan pasca bencana",
   desc: "Perbaikan cepat fasilitas sipil (sungai, jalan, pelabuhan) yang rusak akibat bencana alam.",
-  quote: "「早急《さっきゅう》に復旧《ふっきゅう》工事《こうじ》に取《と》り掛《か》かれ」",
   _origIndex: 1467
   },
   {
@@ -6182,7 +5940,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Reklamasi vs dermaga",
   desc: "埋立《うめたて》=timbun laut jadi lahan baru.\n岸壁《がんぺき》=dermaga kapal pakai sheet pile dan tiang.",
-  quote: "「鋼矢板《こうやいた》の打設《だせつ》確認《かくにん》して」",
   _origIndex: 1468
   },
   {
@@ -6194,7 +5951,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 lapisan jalan beraspal",
   desc: "①路床《ろしょう》=dasar terbawah ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.",
-  quote: "「路盤《ろばん》の締《し》め固《しめかた》め確認《かくにん》してから基層《きそう》打《う》って」",
   _origIndex: 1469
   },
   {
@@ -6206,7 +5962,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 material tiang pondasi",
   desc: "木杭《きぐい》=kayu (tanah lunak). 鋼杭《こうくい》=baja (dalam). コンクリート杭《くい》=paling umum: cor di tempat atau",
-  quote: "「支持層《しじそう》まで何《なん》mか報告《ほうこく》して」",
   _origIndex: 1470
   },
   {
@@ -6218,7 +5973,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Sumur panas & panas bumi",
   desc: "温泉《おんせん》井《い》=500–1000m, bahaya gas alam. 地熱《ちねつ》井《い》=±2000m, bahaya uap panas & bahan berbahaya.",
-  quote: "「掘削《くっさく》中《ちゅう》はガス検知器《けんちき》つけといて」",
   _origIndex: 1471
   },
   {
@@ -6230,7 +5984,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tali & benang referensi",
   desc: "地縄張《じなわは》り=tandai batas pondasi di tanah.\n水糸《みずいと》=benang horizontal antar papan sebagai referensi",
-  quote: "「地縄《じなわ》と水糸《みずいと》を確認《かくにん》してから掘《ほ》れ」",
   _origIndex: 1472
   },
   {
@@ -6242,7 +5995,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Timbunan & tangga lereng",
   desc: "盛《も》り土《ど》=timbunan untuk meratakan lahan miring.\n段切《だんぎ》り=potong lereng bertangga sebelum ditimbun",
-  quote: undefined,
   _origIndex: 1473
   },
   {
@@ -6254,7 +6006,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tahapan galian pondasi",
   desc: "根切《ねぎ》り=gali ke kedalaman pondasi. 余堀《よぼ》り=galian ekstra untuk ruang kerja. 鋤取《すきと》り=ratakan dasar.",
-  quote: "「床付《とこづ》けは丁寧《ていねい》にやれよ」",
   _origIndex: 1474
   },
   {
@@ -6266,7 +6017,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Urugan balik 3 metode",
   desc: "埋《う》め戻《もど》し=isi kembali tanah. 突《つ》き固《かた》め=padatkan dengan ランマ. 水締《みずじ》め=tuang air saat pemadatan.",
-  quote: "「しっかり締《し》め固《かた》めてくれ」",
   _origIndex: 1475
   },
   {
@@ -6278,7 +6028,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tiang: ratakan & angkat",
   desc: "杭《くい》間《くいま》さらい=ratakan tanah di antara tiang saat 床付《とこづ》け.\n段跳《だんは》ね=angkat tanah bertahap ke atas",
-  quote: "「杭《くい》間《くいま》さらいは基礎《きそ》工事《こうじ》に影響《えいきょう》するからちゃんとやれ」",
   _origIndex: 1476
   },
   {
@@ -6290,7 +6039,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pasir gunung / daratan",
   desc: "Pasir dari daratan (bukan sungai), daya serap air lebih tinggi.\nDigunakan sebagai material urugan",
-  quote: "「山砂《やまずな》は保水性《ほすいせい》が高《たか》いから水締《みずじ》めをしっかりやってくれよ」",
   _origIndex: 1477
   },
   {
@@ -6302,7 +6050,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tiang: pabrik vs cor",
   desc: "既成杭《きせいくい》=dipancang dari pabrik. 場所打《ばしょう》ち杭《くい》=lubang dibor lalu dicor di tempat.",
-  quote: "「杭《くい》工法《こうほう》は地質《ちしつ》調査《ちょうさ》の結果《けっか》で決《き》めるんだ」",
   _origIndex: 1478
   },
   {
@@ -6314,7 +6061,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tamper vs Taco pemadatan",
   desc: "タンパー=plat logam dihentakkan untuk memadatkan aspal/tanah.\nたこ=beban masif dijatuhkan untuk",
-  quote: undefined,
   _origIndex: 1479
   },
   {
@@ -6326,7 +6072,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tujuan bendungan 2 fungsi",
   desc: "治水《ちすい》=tampung air saat banjir, atur debit sungai.\n利水《りすい》=sediakan air stabil untuk pertanian,",
-  quote: "「洪水《こうずい》吐《は》きゲートの点検《てんけん》して」",
   _origIndex: 1480
   },
   {
@@ -6338,7 +6083,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 jenis terowongan",
   desc: "①山岳《さんがく》=NATM di gunung. ②開削《かいさく》=gali-tutup. ③シールド=mesin+segmen, tanah lunak. ④推進《すいしん》=pipa",
-  quote: undefined,
   _origIndex: 1481
   },
   {
@@ -6350,7 +6094,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "NATM: 3 elemen penyangga",
   desc: "NATM: gali dengan ledak/mesin. 3 penyangga: ①吹付《ふきつ》けコンクリート ②鋼製《こうせい》支保工《しほこう》 ③ロックボルト.",
-  quote: "「吹付《ふきつ》け後《あと》にボルト打《う》って」",
   _origIndex: 1482
   },
   {
@@ -6362,7 +6105,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Shield tunnel & segmen",
   desc: "①Bangun 立坑《たてこう》 ②Mesin shield menggali ③Panel segmen beton/baja dipasang di belakang mesin.",
-  quote: "「セグメント組《く》み立《た》て確認《かくにん》して」",
   _origIndex: 1483
   },
   {
@@ -6374,7 +6116,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Jembatan: jenis & tahapan",
   desc: "6 jenis jembatan: 桁《けた》橋《はし》・トラス・アーチ・ラーメン・斜張橋《しゃちょうきょう》・吊橋《つりばし》.\n下部《ぶ》工《かぶこう》=fondasi →",
-  quote: "「下部《ぶ》工《かぶこう》の出来形《できがた》検査《けんさ》入《はい》ります」",
   _origIndex: 1484
   },
   {
@@ -6386,7 +6127,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Sipil laut & alat kerja",
   desc: "Bangun di laut: pelabuhan, bandara, jembatan, terowongan bawah laut.\nAlat: 作業船《さぎょうせん》dan",
-  quote: "「作業船《さぎょうせん》の位置《いち》確認《かくにん》してから開始《かいし》して」",
   _origIndex: 1485
   },
   {
@@ -6398,7 +6138,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 jenis pekerjaan tanah",
   desc: "①掘削《くっさく》=gali ②積込《つみこ》み=muat ③盛《も》り土《ど》/切《き》り土《ど》 ④埋《う》め戻《もど》し ⑤締《し》め固《しめかた》め ⑥法面《のりめん》=lereng.",
-  quote: "「残《のこ》土《ざんど》の運搬《うんぱん》、記録《きろく》つけて」",
   _origIndex: 1486
   },
   {
@@ -6410,7 +6149,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 lapisan jalan beraspal",
   desc: "①路床《ろしょう》 ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.\n基層《きそう》sering terlupa!",
-  quote: "「路盤《ろばん》後《あと》に基層《きそう》打《う》って」",
   _origIndex: 1487
   },
   {
@@ -6422,7 +6160,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 jenis pekerjaan tobi",
   desc: "Spesialis tali baja di ketinggian: 足場《あしば》, 鉄骨《てっこつ》, 橋《はし》梁《きょうりょう》, 重量《じゅうりょう》, 送電《そうでん》, 町場《まちば》.",
-  quote: "「足場《あしば》の壁《かべ》つなぎ確認《かくにん》して」",
   _origIndex: 1488
   },
   {
@@ -6434,7 +6171,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 pekerjaan sipil laut",
   desc: "①浚渫《しゅんせつ》=keruk dasar ②埋立《うめたて》=reklamasi ③岸壁《がんぺき》=dermaga ④防波堤《ぼうはてい》=pemecah gelombang+caisson.",
-  quote: "「ケーソンの据付《すえつけ》位置《いち》確認《かくにん》して」",
   _origIndex: 1489
   },
   {
@@ -6446,7 +6182,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah yarikata",
   desc: "遣《や》り方《かた》=pagar referensi bangunan. 水貫《みずぬき》=papan horizontal. 水盛《みずも》り=tentukan referensi rata.",
-  quote: "「遣《や》り方《かた》を絶対《ぜったい》に動《うご》かすな」",
   _origIndex: 1490
   },
   {
@@ -6458,7 +6193,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 istilah tanah dasar",
   desc: "盛《も》り土《ど》, 段切《だんぎ》り, 締《し》め固《しめかた》め, 転圧《てんあつ》, 埋《う》め戻《もど》し, 突《つ》き固《かた》め — enam operasi tanah dasar.",
-  quote: "「埋《う》め戻《もど》しは締《し》め固《しめかた》めをしっかりやれよ」",
   _origIndex: 1491
   },
   {
@@ -6470,7 +6204,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 lapisan jalan",
   desc: "表層《ひょうそう》=aspal paling atas. 路盤《ろばん》=sebarkan beban di atas 路床《ろしょう》. 路床《ろしょう》=tanah dasar penopang",
-  quote: "「路盤《ろばん》の厚《あつ》みを設計《せっけい》通《とお》りに確保《かくほ》してくれよ」",
   _origIndex: 1492
   },
   {
@@ -6482,7 +6215,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 istilah galian pondasi",
   desc: "地縄張《じなわは》り=tandai batas. 根切《ねぎ》り=gali ke pondasi. 根入《ねい》れ長《なが》さ=kedalaman ujung. 素掘《すぼ》り=galian",
-  quote: "「根入《ねい》れ長《なが》さが設計《せっけい》値《ち》に達《たっ》しているか確認《かくにん》して」",
   _origIndex: 1493
   },
   {
@@ -6494,7 +6226,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Cor beton di tempat",
   desc: "場所打《ばしょう》ち=cor beton langsung di lokasi (bukan precast).\n打設《だせつ》する=istilah teknis untuk menuang",
-  quote: "「コンクリートを打設《だせつ》する前《まえ》に型《かた》枠《かたわく》を必《かなら》ず確認《かくにん》して」",
   _origIndex: 1494
   },
   {
@@ -6506,7 +6237,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah galian & dasar",
   desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭《くい》間《くいま》さらい=bersihkan",
-  quote: "「床付《とこづ》けは慎重《しんちょう》にやれよ」",
   _origIndex: 1495
   },
   {
@@ -6518,7 +6248,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Karakteristik doboku",
   desc: "Pekerjaan sipil berhadapan dengan alam: ダム, 河川《かせん》, 道《みち》路《どうろ》, トンネル, 橋《はし》梁《きょうりょう》, 鉄道《てつどう》,",
-  quote: "「河川《かせん》工事《こうじ》の安全《あんぜん》確認《かくにん》からだ」",
   _origIndex: 1496
   },
   {
@@ -6530,7 +6259,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan penghamparan",
   desc: "Menyebarkan dan meratakan material (aspal, agregat, tanah) menggunakan mesin paver/finisher.",
-  quote: undefined,
   _origIndex: 1497
   },
   {
@@ -6579,7 +6307,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Konversi fungsi bangunan",
   desc: "Memanfaatkan struktur bangunan lama untuk diubah ke fungsi baru.\nContoh: kantor → apartemen.",
-  quote: undefined,
   _origIndex: 1501
   },
   {
@@ -6591,7 +6318,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Angkur pasca-cor",
   desc: "Angkur yang dipasang pada beton yang sudah mengeras.\n2 jenis: 金属系《きんぞくけい》(metal) dan",
-  quote: undefined,
   _origIndex: 1502
   },
   {
@@ -6603,7 +6329,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Baja ringan LGS vs baja",
   desc: "軽量鉄骨《けいりょうてっこつ》(LGS): tebal <6mm — rangka dinding/plafon.\n重量鉄骨《じゅうりょうてっこつ》: ≥6mm — struktur utama",
-  quote: undefined,
   _origIndex: 1503
   },
   {
@@ -6615,7 +6340,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 jenis struktur baja",
   desc: "①ブレース: diagonal brace. ②ラーメン: sambungan kaku kolom-balok, tahan gempa.\n③トラス: susunan segitiga untuk",
-  quote: undefined,
   _origIndex: 1504
   },
   {
@@ -6627,7 +6351,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Erection baja",
   desc: "建《た》て逃《に》げ: mobile crane, dari belakang ke depan.\n水平積《すいへいつ》み上《うえ》げ: tower crane, lantai per lantai",
-  quote: undefined,
   _origIndex: 1505
   },
   {
@@ -6639,7 +6362,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Terowongan jack-push /",
   desc: "Pipa prefabrikasi didorong ke tanah oleh jack dari shaft peluncur.\nDigunakan untuk infrastruktur",
-  quote: undefined,
   _origIndex: 1506
   },
   {
@@ -6651,7 +6373,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 jenis struktur",
   desc: "RC造《ぞう》=tulangan+beton, S造《つく》り=baja, SRC造《つく》り=baja+RC (terkuat), 木造《もくぞう》=kayu, CB造《つく》り=blok",
-  quote: "ここはS造《ぞう》だから溶接《ようせつ》確認《かくにん》して",
   _origIndex: 1507
   },
   {
@@ -6663,7 +6384,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Penahan tanah & shoring",
   desc: "Dinding sementara di dalam tanah untuk cegah longsor saat penggalian.\nDiperkuat strutting",
-  quote: "山留《やまど》めの切梁《きりばり》確認《かくにん》して",
   _origIndex: 1508
   },
   {
@@ -6675,7 +6395,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tahan gempa / kontrol",
   desc: "耐震《たいしん》=perkuat kolom/balok. 制振《せいしん》=damper serap getaran.\n免振《めんしん》=isolator di fondasi agar",
-  quote: undefined,
   _origIndex: 1509
   },
   {
@@ -6687,7 +6406,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 metode penyambungan",
   desc: "①ガス圧接《あっせつ》=panas+tekan (umum). ②溶接《ようせつ》継手《つぎて》=las busur.\n③機械式《きかいしき》=coupler berulir.",
-  quote: undefined,
   _origIndex: 1510
   },
   {
@@ -6699,7 +6417,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan bekisting dan",
   desc: "Cetakan kayu (型《かた》枠《かたわく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah menge",
-  quote: "型《かた》枠《かたわく》の締《し》め付《つ》け確認《かくにん》して",
   _origIndex: 1511
   },
   {
@@ -6711,7 +6428,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Ready-mix concrete dan",
   desc: "Beton berkualitas dari pabrik (生《なま》コン) dikirim truk molen, lalu dipompa ke bekisting.",
-  quote: "生《なま》コン到着《とうちゃく》したら圧送《あっそう》開始《かいし》して",
   _origIndex: 1512
   },
   {
@@ -6723,7 +6439,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Plesteran tradisional",
   desc: "Gunakan kote (roskam) untuk oleskan 壁土《かべつち》, 漆喰《しっくい》 (kapur), atau モルタル ke dinding/lantai.",
-  quote: "左官《さかん》さん、仕上《しあ》げはいつですか",
   _origIndex: 1513
   },
   {
@@ -6735,7 +6450,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 jenis waterproofing",
   desc: "①ウレタン=cairan. ②FRP=serat kaca+resin. ③シート=lembaran karet.\n④アスファルト=lembaran aspal. ⑤シーリング=sealant",
-  quote: "プライマー塗《ぬ》ってから施工《せこう》して",
   _origIndex: 1514
   },
   {
@@ -6747,7 +6461,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tukang kayu kuil &",
   desc: "Spesialis bangun/renovasi kuil (お寺《てら》) dan shrine (神社《じんじゃ》).\nButuh keahlian sambungan kayu agar",
-  quote: "仕口《しぐち》の加工《かこう》、寸法《すんぽう》確認《かくにん》して",
   _origIndex: 1515
   },
   {
@@ -6759,7 +6472,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Sistem cegah infiltrasi",
   desc: "Teknik konstruksi untuk mencegah air hujan masuk melalui atap dan sambungan material.",
-  quote: undefined,
   _origIndex: 1516
   },
   {
@@ -6771,7 +6483,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 metode cat",
   desc: "①はけ塗《ぬ》り=kuas, cocok semua bentuk. ②ローラー=efisien area luas.\n③エアスプレー=cat dikabut kompresor untuk",
-  quote: "外壁《がいへき》はローラーで仕上《しあ》げて",
   _origIndex: 1517
   },
   {
@@ -6783,7 +6494,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 jenis pekerjaan",
   desc: "①植栽《しょくさい》=tanam pohon. ②屋上《うえ》緑化《おくじょうりょっか》=hijau atap/dinding.\n③広場《ひろば》. ④公園設備《こうえんせつび》.",
-  quote: "植栽《しょくさい》の配置図《はいちず》確認《かくにん》して",
   _origIndex: 1518
   },
   {
@@ -6795,7 +6505,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "LGS + papan gypsum +",
   desc: "LGS (スタッド) untuk rangka dinding/plafon (軽天《けいてん》工事《こうじ》).\nDi atasnya papan gypsum → pate →",
-  quote: "LGSのピッチ確認《かくにん》して",
   _origIndex: 1519
   },
   {
@@ -6807,7 +6516,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Renovasi kusen tanpa",
   desc: "Pasang rangka baru DI ATAS rangka lama tanpa bongkar, lalu pasang sash baru.\nLebih hemat biaya dan",
-  quote: "カバー工法《こうほう》で行《い》きましょう",
   _origIndex: 1520
   },
   {
@@ -6819,7 +6527,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan batu",
   desc: "大理石《だいりせき》=marmer, 御影石《みかげいし》=granit, 擬石《ぎせき》=batu tiruan.\nDipasang untuk estetika, bukan struktur.",
-  quote: "大理石《だいりせき》、割《わ》れないよう慎重《しんちょう》に",
   _origIndex: 1521
   },
   {
@@ -6831,7 +6538,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 peran tim cor beton",
   desc: "①オペレータ=operasikan pompa. ②筒先《つつさき》作業員《さぎょういん》=arahkan selang.\n③土工《どこう》作業員《さぎょういん》=操作《そうさ》 バイブレータ",
-  quote: "3人《にん》ちゃんと連携《れんけい》してくれ",
   _origIndex: 1522
   },
   {
@@ -6843,7 +6549,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Finishing plester",
   desc: "研《と》ぎ出《だ》し=permukaan dipoles mengkilap.\n洗《あら》い出《だ》し=batu hias+semen, dicuci sikat agar batu",
-  quote: "洗《あら》い出《だ》し仕上《しあ》げ、丁寧《ていねい》にやって",
   _origIndex: 1523
   },
   {
@@ -6855,7 +6560,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Rangka kayu tradisional",
   desc: "Metode kayu paling umum di Jepang: kolom (柱《はしら》) dan balok (梁《はり》) dirakit sebagai rangka",
-  quote: "柱《はしら》と梁《はり》の接合部《せつごうぶ》確認《かくにん》して",
   _origIndex: 1524
   },
   {
@@ -6867,7 +6571,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Material kusen/pintu +",
   desc: "建具《たてぐ》=semua pemasangan di bukaan (pintu, jendela, fusuma, shoji).\nMaterial: kayu, aluminium,",
-  quote: "建具《たてぐ》の建《た》て付《つ》け調整《ちょうせい》して",
   _origIndex: 1525
   },
   {
@@ -6879,7 +6582,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "QC uretan semprot",
   desc: "Sebelum施工《せこう》: semprotkan ke papan 450mm×450mm, cek kepadatan busa.\nSelama施工《せこう》: tiap 4〜5m ukur",
-  quote: "施工《せこう》前《せこうまえ》確認板《かくにんばん》、見《み》せて",
   _origIndex: 1526
   },
   {
@@ -6891,7 +6593,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "CB造",
   desc: "Blok beton berlubang disusun, rongga diisi tulangan lalu dicor mortar.\nLebih kokoh dari bata biasa.",
-  quote: "ブロックの通《とお》り確認《かくにん》して",
   _origIndex: 1527
   },
   {
@@ -6903,7 +6604,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 istilah lereng galian",
   desc: "法面《のりめん》=permukaan miring galian. 地山《じやま》=tanah alami.\n山《やま》がくる=lereng LONGSOR — BAHAYA!",
-  quote: "山留《やまど》めが変形《へんけい》したらすぐ報告《ほうこく》して",
   _origIndex: 1528
   },
   {
@@ -6915,7 +6615,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Isolasi seismik pada",
   desc: "Sistem yang menyerap gaya horizontal gempa sehingga getaran berkurang sebelum masuk bangunan.",
-  quote: "免振《めんしん》の点検《てんけん》は専門業者《せんもんぎょうしゃ》に任《まか》せてくれよ",
   _origIndex: 1529
   },
   {
@@ -6927,7 +6626,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Tulangan",
   desc: "配筋《はいきん》=mengatur dan merakit besi tulangan.\n間隔《かんかく》=jarak center-to-center. あき=jarak BERSIH antar",
-  quote: "あきと間隔《かんかく》を図面《ずめん》通《とお》りに確認《かくにん》して",
   _origIndex: 1530
   },
   {
@@ -6939,7 +6637,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Selimut beton",
   desc: "Jarak dari permukaan luar besi tulangan ke permukaan beton yang menutupinya.\nHarus cukup tebal",
-  quote: undefined,
   _origIndex: 1531
   },
   {
@@ -6951,7 +6648,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "RC / S / SRC / kayu",
   desc: "RC造《ぞう》=beton bertulang. S造《つく》り=baja. SRC造《つく》り=baja+RC. 木造《もくぞう》=kayu.\nWajib dikenali untuk",
-  quote: "この現場《げんば》はRC造《ぞう》だから配筋《はいきん》が重要《じゅうよう》だ",
   _origIndex: 1532
   },
   {
@@ -6963,7 +6659,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Kelonggaran sambungan /",
   desc: "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang.\n建込《たてこ》み=mendirikan bekisting",
-  quote: "建込《たてこ》みは墨《すみ》に合《あ》わせてあそびを確認《かくにん》してくれ",
   _origIndex: 1533
   },
   {
@@ -6975,7 +6670,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Struktur blok beton yang",
   desc: "Jenis struktur menggunakan blok beton yang ditumpuk.\nDigunakan untuk pagar, dinding pembatas, dan",
-  quote: "ブロック積《つ》みは目地《めじ》を一直線《いっちょくせん》にそろえてくれよ",
   _origIndex: 1534
   },
   {
@@ -6987,7 +6681,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 jenis struktur",
   desc: "RC造《ぞう》=tulangan+beton. S造《つく》り=baja. SRC造《つく》り=baja+RC, gedung tinggi.\n木造《もくぞう》=kayu. CB造《つく》り=blok",
-  quote: "ここはRC造《ぞう》、型《かた》枠《かたわく》と鉄筋《てっきん》の確認《かくにん》して",
   _origIndex: 1535
   },
   {
@@ -6999,7 +6692,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Urutan tahapan",
   desc: "①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上《うえ》躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali",
-  quote: "次《つぎ》は山留《やまど》め確認《かくにん》からだ",
   _origIndex: 1536
   },
   {
@@ -7011,7 +6703,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 metode proteksi gempa",
   desc: "①耐震《たいしん》=perkuat kolom & balok. ②制振《せいしん》=ダンパー kurangi goyangan.\n③免振《めんしん》=アイソレータ di fondasi,",
-  quote: "免振装置《めんしんそうち》の点検記録《てんけんきろく》見《み》せて",
   _origIndex: 1537
   },
   {
@@ -7023,7 +6714,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 jenis sambungan besi",
   desc: "①ガス圧接《あっせつ》=panas+tekan (umum). ②溶接《ようせつ》=las busur.\n③機械式《きかいしき》=coupler berulir. ④重《かさ》ね=tumpuk",
-  quote: "ガス圧接《あっせつ》の外観《がいかん》確認《かくにん》して",
   _origIndex: 1538
   },
   {
@@ -7035,7 +6725,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Bekisting & perancah",
   desc: "Cetakan kayu dibuat 型《かた》枠大工《かたわくだいく》. Beton cair → tekanan besar → perkuat 支保工《しほこう》.\nSetelah menge",
-  quote: "支保工《しほこう》の本数《ほんすう》、図面《ずめん》通《とお》り確認《かくにん》して",
   _origIndex: 1539
   },
   {
@@ -7047,7 +6736,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Cor pompa beton",
   desc: "生《なま》コン → truk アジテータ → ポンプ車《しゃ》.\n3 peran: ①オペレータ(pompa) ②筒先《つつさき》(selang) ③土工《どこう》(振動機《しんどうき》).",
-  quote: "3人《にん》連携《れんけい》、タイムロスなしで",
   _origIndex: 1540
   },
   {
@@ -7059,7 +6747,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Plester + 2 teknik",
   desc: "左官《さかん》工事《こうじ》=oles 壁土《かべつち》/モルタル/漆喰《しっくい》 pakai こて.",
-  quote: "漆喰《しっくい》の養生期間《ようじょうきかん》守《まも》ってください",
   _origIndex: 1541
   },
   {
@@ -7071,7 +6758,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Insulasi semprot uretan",
   desc: "Semprot 硬質《こうしつ》ウレタンフォーム ke bangunan. Bahan: ①ポリオール + ②ポリイソシアネート.\nQC: sebelum=uji papan",
-  quote: "施工《せこう》前《せこうまえ》確認板《かくにんばん》、見《み》せてください",
   _origIndex: 1542
   },
   {
@@ -7083,7 +6769,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Finishing interior",
   desc: "①LGS/軽天《けいてん》=rangka baja ringan. ②ボード=papan gypsum+pate. ③クロス=wallpaper.\n④塗装《とそう》仕上《うえ》げ.",
-  quote: "LGSのピッチ、設計《せっけい》通《とお》りか確認《かくにん》して",
   _origIndex: 1543
   },
   {
@@ -7095,7 +6780,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan sash logam +",
   desc: "サッシ工事《こうじ》=pasang kusen logam: jendela aluminium, pintu, kasa.\nカバー工法《こうほう》=pasang kusen baru DI",
-  quote: "カバー工法《こうほう》で対応《たいおう》します",
   _origIndex: 1544
   },
   {
@@ -7107,7 +6791,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 jenis tukang kayu",
   desc: "①町大工《まちだいく》=rumah tinggal biasa. ②造《つく》り作大工《ぞうさくだいく》=pasang pintu/interior.\n③宮大工《みやだいく》=kuil/shrine,",
-  quote: "造《つく》り作大工《ぞうさくだいく》さん、建具《たてぐ》の取付《とりつ》けお願《ねが》いします",
   _origIndex: 1545
   },
   {
@@ -7119,7 +6802,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan atap",
   desc: "瓦《かわら》=genteng tanah liat. 雨仕舞《あまじまい》い=alirkan air hujan, wajib dikuasai.",
-  quote: "雨仕舞《あまじまい》いの施工《せこう》確認《かくにん》して、漏《も》れないように",
   _origIndex: 1546
   },
   {
@@ -7131,7 +6813,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pasang batu alam/buatan",
   desc: "大理石《だいりせき》(marmer), 御影石《みかげいし》(granit), 擬石《ぎせき》(tiruan) dipasang untuk estetika bukan struktur.",
-  quote: "大理石《だいりせき》、慎重《しんちょう》に加工《かこう》して",
   _origIndex: 1547
   },
   {
@@ -7143,7 +6824,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah sumidashi",
   desc: "壁芯《かべしん》=garis tengah dinding. 柱芯《はしらしん》=garis tengah kolom. 親墨《おやずみ》=referensi dasar.",
-  quote: "壁芯《かべしん》と柱芯《はしらしん》がずれていないか確認《かくにん》してくれ",
   _origIndex: 1548
   },
   {
@@ -7155,7 +6835,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah penahan tanah",
   desc: "土留《どど》め=cegah longsor. 擁壁《ようへき》=土留《どどめ》め berbentuk dinding. 矢板《やいた》=papan penahan.",
-  quote: "山留《やまど》めの変形《へんけい》があれば報告《ほうこく》して",
   _origIndex: 1549
   },
   {
@@ -7167,7 +6846,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 istilah tanah alami &",
   desc: "地山《じやま》=tanah dalam kondisi alami. 法面《のりめん》=permukaan miring pada galian.\n山《やま》がくる=turap atau",
-  quote: "法面《のりめん》が崩《くず》れそうなら作業《さぎょう》を止《と》めて報告《ほうこく》してくれ",
   _origIndex: 1550
   },
   {
@@ -7179,7 +6857,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "4 istilah pondasi tiang,",
   desc: "杭《くい》基礎《くいきそ》=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan.\n杭《くい》地業《くいじぎょう》=pekerjaan",
-  quote: "杭《くい》の打設記録《だせつきろく》を毎本《まいほん》記録《きろく》してくれよ",
   _origIndex: 1551
   },
   {
@@ -7191,7 +6868,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 istilah dasar",
   desc: "配筋《はいきん》=rakit besi tulangan. 拾《ひろ》い出《だ》し=hitung material dari gambar.\nあそび=toleransi. あき=jarak",
-  quote: "あきと間隔《かんかく》は設計図《せっけいず》通《とお》りかチェックして",
   _origIndex: 1552
   },
   {
@@ -7203,7 +6879,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "3 istilah presisi beton",
   desc: "捨《す》てコン=cor tipis 5–10cm sebagai referensi ketinggian.\n結束《けっそく》=ikat persilangan tulangan pakai",
-  quote: "かぶり厚《あつ》さが設計値《せっけいち》を満《み》たしているか確認《かくにん》してくれ",
   _origIndex: 1553
   },
   {
@@ -7215,7 +6890,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "6 istilah pekerjaan",
   desc: "建込《たてこ》み=dirikan bekisting. ノロ=bocoran beton. アンコ=pengisi alur. 転用《てんよう》=pakai ulang.",
-  quote: "パンクしないよう支保工《しほこう》をしっかりしてくれよ",
   _origIndex: 1554
   },
   {
@@ -7227,7 +6901,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "5 singkatan struktur",
   desc: "RC造《ぞう》=鉄筋《てっきん》コンクリート. S造《つく》り=鉄骨《てっこつ》. SRC造《つく》り=鉄骨《てっこつ》鉄筋《てっきん》コンクリート.\n木造《もくぞう》=kayu.",
-  quote: "この現場《げんば》はSRC造《ぞう》だから、鉄骨《てっこつ》と配筋《はいきん》の両方《りょうほう》が重要《じゅうよう》だ",
   _origIndex: 1555
   },
   {
@@ -7239,7 +6912,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan jalan",
   desc: "Membuat/memperbaiki jalan: aspal, rambu (標識《ひょうしき》), lampu lalu lintas, trotoar, marka.",
-  quote: "舗装《ほそう》の厚《あつ》さ、規定《きてい》通《とお》りか確認《かくにん》して",
   _origIndex: 1556
   },
   {
@@ -7251,7 +6923,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan pelapis",
   desc: "Bagian 内装仕上《ないそうしあ》げ工事《こうじ》, TIDAK termasuk LGS.\n5 jenis: 壁仕上《かべしあ》げ, 天井《てんじょう》, 床《ゆか》, 塗装《とそう》,",
-  quote: "クロス張《は》りの前《まえ》にパテ処理《しょり》して",
   _origIndex: 1557
   },
   {
@@ -7263,7 +6934,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan struktur baja",
   desc: "Membangun rangka bangunan menggunakan baja: kolom (柱《はしら》), balok (梁《はり》), dan elemen diagonal.",
-  quote: undefined,
   _origIndex: 1558
   },
   {
@@ -7275,7 +6945,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Pekerjaan pengecoran",
   desc: "Menuangkan beton cair (生《なま》コン) ke bekisting (型《かた》枠《かたわく》).\nAlur: muat → pompa → tuang → padatkan",
-  quote: "バイブレータでしっかり締《し》め固《かた》めて",
   _origIndex: 1559
   },
   {
@@ -7287,7 +6956,6 @@ export const CARDS_COMMON = [
   type: "konsep",
   id_text: "Struktur utama bangunan",
   desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》,",
-  quote: undefined,
   _origIndex: 1560
   },
   {
@@ -9402,7 +9070,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Izin usaha konstruksi",
   desc: "Wajib mendapat izin dari gubernur/menteri sebelum menjalankan usaha konstruksi.",
-  quote: undefined,
   _origIndex: 1323
   },
   {
@@ -9414,7 +9081,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Kontrak borongan",
   desc: "Kontrak antara pemilik proyek dan kontraktor utama untuk pekerjaan konstruksi.",
-  quote: undefined,
   _origIndex: 1324
   },
   {
@@ -9426,7 +9092,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Kontraktor utama",
   desc: "Pihak yang menerima proyek langsung dari pemilik dan mengelola semua sub-kontraktor.",
-  quote: undefined,
   _origIndex: 1325
   },
   {
@@ -9438,7 +9103,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Sub-kontraktor",
   desc: "Pihak yang menerima pekerjaan dari kontraktor utama.\nBisa berlapis: 二次《にじ》・三次《さんじ》下請《したう》けけ《したうけ》.",
-  quote: undefined,
   _origIndex: 1326
   },
   {
@@ -9450,7 +9114,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Lembaga pengawas kerja",
   desc: "Instansi pengawas kepatuhan UU Ketenagakerjaan.\nKecelakaan kerja wajib dilaporkan segera.",
-  quote: undefined,
   _origIndex: 1327
   },
   {
@@ -9462,7 +9125,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Cuti berbayar",
   desc: "10 hari cuti setelah 6 bulan kerja, kehadiran ≥80%.\nDiatur 労働《ろうどう》基準《きじゅん》法《ほう》.",
-  quote: undefined,
   _origIndex: 1328
   },
   {
@@ -9474,7 +9136,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Upah lembur premi",
   desc: "Upah lembur minimal 1,25× gaji normal sesuai UU.\nLembur >60 jam/bulan = 1,5×.",
-  quote: undefined,
   _origIndex: 1329
   },
   {
@@ -9486,7 +9147,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Sanksi hukum / pidana",
   desc: "Sanksi atas pelanggaran UU Konstruksi berupa pencabutan izin atau denda.",
-  quote: undefined,
   _origIndex: 1330
   },
   {
@@ -9579,7 +9239,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Pemilik / pemberi proyek",
   desc: "Pihak yang memesan proyek, menentukan isi/durasi/anggaran, dan menandatangani kontrak borongan.",
-  quote: undefined,
   _origIndex: 1340
   },
   {
@@ -9741,7 +9400,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "SSW / status kerja Jepang",
   desc: "Status tinggal 2019 untuk 14 bidang; SSW 1号《ごう》 maks 5 tahun, SSW 2号《ごう》 renewable.",
-  quote: undefined,
   _origIndex: 1388
   },
   {
@@ -9753,7 +9411,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Kartu izin tinggal",
   desc: "Wajib dibawa dan ditunjukkan bila diminta polisi/imigrasi.\nPerubahan alamat: lapor dalam 14 hari.",
-  quote: undefined,
   _origIndex: 1389
   },
   {
@@ -9765,7 +9422,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Jenis status izin tinggal",
   desc: "Menentukan jenis pekerjaan yang boleh dilakukan.\nBekerja di luar kategori = pelanggaran hukum.",
-  quote: undefined,
   _origIndex: 1390
   },
   {
@@ -9777,7 +9433,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Masa berlaku izin tinggal",
   desc: "SSW1 maks 5 tahun; wajib perpanjang sebelum kedaluwarsa.\nMelewati batas = overstay, bisa diusir.",
-  quote: undefined,
   _origIndex: 1391
   },
   {
@@ -9789,7 +9444,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Perpanjangan izin tinggal",
   desc: "Dapat diajukan mulai 3 bulan sebelum kedaluwarsa.\nBerlaku juga untuk perpanjangan kontrak dan SIM.",
-  quote: undefined,
   _origIndex: 1393
   },
   {
@@ -9801,7 +9455,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Asuransi sosial wajib",
   desc: "Istilah umum untuk semua asuransi wajib.\nBiaya ditanggung bersama antara perusahaan dan karyawan.",
-  quote: undefined,
   _origIndex: 1394
   },
   {
@@ -9813,7 +9466,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Asuransi kesehatan wajib",
   desc: "Biaya medis jadi 30% tanggungan sendiri — 70% ditanggung.\nKartu wajib dibawa ke rumah sakit.",
-  quote: undefined,
   _origIndex: 1395
   },
   {
@@ -9825,7 +9477,6 @@ export const CARDS_COMMON = [
   type: "hukum",
   id_text: "Asuransi ketenagakerjaan",
   desc: "Tunjangan pengangguran jika kehilangan pekerjaan.\nBiaya ditanggung bersama antara perusahaan dan",
-  quote: undefined,
   _origIndex: 1397
   },
   {

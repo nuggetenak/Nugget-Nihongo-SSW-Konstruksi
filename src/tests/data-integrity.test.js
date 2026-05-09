@@ -63,12 +63,12 @@ describe('Data Integrity', () => {
   // C8: getQuizSetsForTrack('doboku') includes sipil sets
   it('C8: getQuizSetsForTrack doboku includes sipil sets', () => {
     const sets = getQuizSetsForTrack('doboku');
-    expect(sets.some(s => s.id.startsWith('sipil'))).toBe(true);
+    expect(sets.some(s => s.id.startsWith('doboku'))).toBe(true);
   });
 
   // C9: getQuizSetsForTrack('kenchiku') includes bangunan sets
   it('C9: getQuizSetsForTrack kenchiku includes bangunan sets', () => {
     const sets = getQuizSetsForTrack('kenchiku');
-    expect(sets.some(s => s.id.startsWith('bangunan'))).toBe(true);
+    expect(sets.some(s => s.id.startsWith('kenchiku'))).toBe(true);
   });
 });
