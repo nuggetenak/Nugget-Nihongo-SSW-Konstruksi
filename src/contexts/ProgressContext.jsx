@@ -10,6 +10,7 @@ import { createContext, useContext, useState, useCallback } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { todayStr, prevDayStr } from '../utils/date.js';
 import { SESSIONS_CAP } from '../utils/constants.js';
+import { makeWrongEntry } from '../utils/wrong-tracker.js';
 
 const ProgressCtx = createContext(null);
 
@@ -99,7 +100,7 @@ export function ProgressProvider({ children }) {
   const recordWrong = useCallback((cardId) => {
     setProg((prev) => {
       const qw = { ...(prev.quizWrong ?? {}) };
-      qw[cardId] = (qw[cardId] ?? 0) + 1;
+      qw[cardId] = makeWrongEntry(qw[cardId]);
       return { ...prev, quizWrong: qw };
     });
   }, [setProg]);
