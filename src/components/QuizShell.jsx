@@ -3,7 +3,7 @@
 //     Evidence: Young (1991) — normalizing errors reduces language anxiety.
 // A.5: Updated import from useStreak → useAnswerStreak.
 // Note: timer color (red when <60s) kept inline — conditional/prop-driven.
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
 import { useAnswerStreak } from '../hooks/useAnswerStreak.js';
@@ -37,6 +37,7 @@ export default function QuizShell({
   const [timeLeft, setTimeLeft] = useState(timer);
   const { streak, maxStreak, _wrongStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
   const { toast } = useApp();
+  const startTimeRef = useRef(Date.now());
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
@@ -93,7 +94,8 @@ export default function QuizShell({
   useEffect(() => {
     if (phase === 'finished') {
       const correct = results.filter((r) => r.isCorrect).length;
-      onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak });
+      onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak,
+        durationMs: Date.now() - startTimeRef.current });
 
       // A.4 BUG-04: Anxiety-reduction toast — fires when ≥5 consecutive wrong answers.
       // Normalizes struggle as expected for new material (Young 1991, Zhang 2019).
