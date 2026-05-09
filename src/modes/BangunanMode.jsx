@@ -1,4 +1,4 @@
-// ─── BangunanMode.jsx (phaseB) ────────────────────────────────────────────────
+// ─── BangunanMode.jsx ───────────────────────────────────────────────────────
 // Quiz mode for Bangunan (建築) track.
 // Uses BANGUNAN_SETS data, saves scores to bangunanScores in storage v3.
 // ─────────────────────────────────────────────────────────────────────────────

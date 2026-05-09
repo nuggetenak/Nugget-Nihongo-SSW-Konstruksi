@@ -52,7 +52,7 @@ export default function FlashcardMode({
   const [reviewBelum, setReviewBelum]   = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const confirmTimer                     = useRef(null);
-  // K2: read-only mode — browse without FSRS rating
+  // Read-only mode — browse without FSRS rating.
   const [readOnly, setReadOnly]         = useState(false);
 
   // furiganaPolicy — wired to FlipCard → JpFront.
@@ -267,7 +267,7 @@ export default function FlashcardMode({
         />
       </ErrorBoundary>
 
-      {/* FSRS rating row — hidden in K2 read-only mode */}
+      {/* FSRS rating row — hidden in read-only mode */}
       {!readOnly && (
         <RatingRow
           flipped={flipped}

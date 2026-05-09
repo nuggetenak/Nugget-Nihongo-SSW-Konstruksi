@@ -20,7 +20,7 @@ export default function GlossaryMode({ onExit, track }) {
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
   const [compactView, setCompactView] = useState(true); // G2: true=click-to-expand; false=always-show-all
-  // G3: select mode for mini deck export
+  // Select mode for mini deck export.
   const [selectMode, setSelectMode] = useState(false);
   const [selected, setSelected] = useState(new Set());
   const [exportDone, setExportDone] = useState(false);
@@ -92,13 +92,13 @@ export default function GlossaryMode({ onExit, track }) {
     if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 52, behavior: 'smooth' }); setActiveLetter(letter); }
   }
 
-  // G3: toggle select mode
+  // Toggle select mode.
   function toggleSelectMode() {
     setSelectMode((v) => { if (v) setSelected(new Set()); return !v; });
     setExportDone(false);
   }
 
-  // G3: toggle card selection
+  // Toggle card selection.
   function toggleCard(id, e) {
     e.stopPropagation();
     setSelected((prev) => {
@@ -108,7 +108,7 @@ export default function GlossaryMode({ onExit, track }) {
     });
   }
 
-  // G3: export selected cards as Anki TSV
+  // Export selected cards as Anki TSV.
   function exportMiniDeck() {
     const cards = sorted.filter((c) => selected.has(c.id));
     if (cards.length === 0) return;
@@ -133,7 +133,7 @@ export default function GlossaryMode({ onExit, track }) {
     setTimeout(() => setExportDone(false), 2500);
   }
 
-  // G3: select all visible
+  // Select all visible.
   function selectAll() {
     setSelected(new Set(sorted.map((c) => c.id)));
   }
@@ -158,7 +158,7 @@ export default function GlossaryMode({ onExit, track }) {
                 color: compactView ? T.textMuted : T.gold }}>
               {compactView ? '≡ Kompak' : '⊞ Lebar'}
             </button>
-            {/* G3: select mode toggle */}
+            {/* Select mode toggle */}
             <button onClick={toggleSelectMode}
               style={{ fontFamily: 'inherit', fontSize: 11, padding: '2px 8px', borderRadius: 99, cursor: 'pointer',
                 background: selectMode ? 'rgba(99,102,241,0.15)' : T.surface,
@@ -264,7 +264,7 @@ export default function GlossaryMode({ onExit, track }) {
                       {c.furi && (
                         <div className={G.termFuriRow}>
                           <span className={G.termFuri}>{c.furi}</span>
-                          {/* G1: Audio per entry */}
+                          {/* Audio per entry */}
                           {audioEnabled && (
                             <button
                               onClick={(e) => { e.stopPropagation(); speakJP(stripFuri(c.jp)); }}
@@ -298,7 +298,7 @@ export default function GlossaryMode({ onExit, track }) {
         ))}
       </div>
 
-      {/* G3: Export mini deck footer */}
+      {/* Export mini deck footer */}
       {selectMode && (
         <div style={{
           position: 'fixed', bottom: 56, left: 0, right: 0, zIndex: 40,

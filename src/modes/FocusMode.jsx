@@ -8,7 +8,7 @@ import S from './modes.module.css';
 
 export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd }) {
   const [activeCat, setActiveCat] = useState(null);
-  // F3: track which categories trained this session
+  // Track which categories trained this session.
   const [trainedKeys, setTrainedKeys] = useState(new Set());
 
   const catStats = useMemo(() => {
@@ -26,7 +26,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
       .sort((a, b) => a.score - b.score);
   }, [known, quizWrong]);
 
-  // F2: after sprint, mark trained and auto-suggest next weakest
+  // After drill, mark trained and auto-suggest next weakest.
   const handleSprintEnd = (sessionData) => {
     if (onSessionEnd) onSessionEnd(sessionData);
     // Compute next BEFORE updating state (avoid stale closure)
@@ -40,7 +40,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
     const cat = catStats.find((c) => c.key === activeCat);
     if (!cat) return null;
 
-    // F1: Show "kenapa kategori ini?" before drill
+    // Show "kenapa kategori ini?" before drill
     return (
       <div className={S.page}>
         <button className={S.btnBack} onClick={() => setActiveCat(null)}>← Fokus</button>
@@ -69,7 +69,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
       <h2 className={S.pageTitle}>🎯 Mode Fokus</h2>
       <p className={S.pageSub}>Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.</p>
 
-      {/* F3: Session progress counter */}
+      {/* Session progress counter */}
       {trainedKeys.size > 0 && (
         <div style={{ background: 'var(--ssw-surface)', border: '1px solid var(--ssw-border)', borderRadius: 12, padding: '10px 14px', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 18 }}>💪</span>

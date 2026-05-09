@@ -24,7 +24,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
   // preventing stale seen-card memory across separate mode sessions.
   const seenPool = useRef(new Set());
 
-  // SB3: scope cards if filterIds provided (launched from SumberMode)
+  // Scope cards if filterIds provided (launched from SumberMode).
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
 
   const lemahCards = baseCards

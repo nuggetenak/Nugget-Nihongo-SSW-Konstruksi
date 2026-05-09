@@ -186,7 +186,7 @@ export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakD
       })()}
 
       <div className={S.sectionLabel}>Per Kategori</div>
-      {/* ST4: This week vs last week */}
+      {/* This week vs last week */}
       {(() => {
         const now = new Date();
         const startOfWeek = (d) => { const s = new Date(d); s.setDate(s.getDate() - s.getDay()); s.setHours(0,0,0,0); return s; };

@@ -1,5 +1,5 @@
 // ─── utils/recommend-mode.js ──────────────────────────────────────────────────
-// A2: Smart Mode Recommendation Engine — pure function, no side effects.
+// Smart Mode Recommendation Engine — pure function, no side effects.
 // Returns a recommendation object based on current user state.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -20,7 +20,7 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
     daysUntilExam = Math.ceil(diff / (1000 * 60 * 60 * 24));
   }
 
-  // Average quiz accuracy from recent scored sessions (last 10) — N2 fix
+  // Average quiz accuracy from recent scored sessions (last 10).
   const avgAcc = getAvgAccuracy(sessions, 10);
 
   // Best sim score

@@ -1,5 +1,5 @@
 // ─── utils/achievements.js ────────────────────────────────────────────────────
-// F1: Achievement badge system. Pure functions — no side effects.
+// Achievement badge system. Pure functions — no side effects.
 // Checks are run against a snapshot of user state.
 // ─────────────────────────────────────────────────────────────────────────────
 import { HALF_DECK_THRESHOLD, TOTAL_CARDS } from './constants.js';
@@ -46,7 +46,7 @@ export function buildAchievementState({ known, streakData, sessions = [], srs, j
   const jacMastery = jacEntries.length >= 4 &&
     jacEntries.every((s) => s.total > 0 && (s.correct / s.total) * 100 >= 80);
 
-  // Average quiz accuracy across all scored quiz modes — N4 fix
+  // Average quiz accuracy across all scored quiz modes.
   const avgQuizAcc = getAvgAccuracy(sessions) ?? 0;
 
   return { known: knownN, streak, matureSRS, totalSessions, bestSimScore, perfectSprint, jacMastery, avgQuizAcc };

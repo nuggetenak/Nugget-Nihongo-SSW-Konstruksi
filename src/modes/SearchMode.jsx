@@ -97,7 +97,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         style={{ width: '100%', marginBottom: 16 }}
       />
 
-      {/* SR1: Search history — show when input empty */}
+      {/* Search history — show when input empty */}
       {debouncedQuery.length < 2 && history.length > 0 && (
         <div style={{ marginBottom: 12 }}>
           <div style={{ fontSize: 10, fontWeight: 700, color: T.textMuted, letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 6 }}>Pencarian terakhir</div>

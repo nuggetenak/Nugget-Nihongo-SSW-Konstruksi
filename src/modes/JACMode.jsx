@@ -39,7 +39,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const [showFuri, setShowFuri] = useState(true);
   const [showID, setShowID] = useState(true);
   const [autoDelay, setAutoDelay] = useState(2000);
-  // J1: track wrong question IDs during session for SRS add-to-queue
+  // Track wrong question IDs during session for SRS add-to-queue.
   const [wrongQIds, setWrongQIds] = useState([]);
   const [_srsAdded, setSrsAdded] = useState(0);
   const [topicFilter, setTopicFilter] = useState(null);
@@ -70,7 +70,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
           return updated;
         });
       }
-      // J1: collect wrong question IDs for SRS add
+      // Collect wrong question IDs for SRS add.
       if (q?.id && !wrongQIds.includes(q.id)) setWrongQIds((prev) => [...prev, q.id]);
     }
   }, [filtered, setWrongCounts, wrongQIds]);
@@ -83,7 +83,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
     onSessionEnd?.({ correct, total, durationMs });
   }, [setKey, saveScore, jacScores, onSessionEnd]);
 
-  // J1: Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now)
+  // Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now).
   const handleAddToSRS = useCallback(() => {
     const relatedIds = wrongQIds
       .map((qId) => JAC_OFFICIAL.find((q) => q.id === qId)?.related_card_id)
@@ -139,7 +139,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
         </div>
       </div>
 
-      {/* J2/J4: Topic filter */}
+      {/* Topic filter */}
       <div style={{ marginBottom: 20 }}>
         <div className={S.sectionLabel}>Filter Topik {topicFilter && <span style={{ color: T.textMuted, fontWeight: 400 }}>— aktif</span>}</div>
         <div className={S.row} style={{ gap: 6, flexWrap: 'wrap' }}>

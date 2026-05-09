@@ -10,7 +10,7 @@ export default function SumberMode({ onExit, onNavigate }) {
   const [activeSrc, setActiveSrc] = useState(null);
   const [expanded, setExpanded] = useState(null);
 
-  // SB1/SB2: progress per source from storage
+  // Progress per source from storage.
   const known = new Set(storageGet('progress')?.known ?? []);
 
   if (activeSrc) {
@@ -23,7 +23,7 @@ export default function SumberMode({ onExit, onNavigate }) {
         <button className={S.btnBack} onClick={() => setActiveSrc(null)}>← Sumber</button>
         <h2 className={S.pageTitle} style={{ fontSize: 16 }}>{meta.emoji} {meta.label}</h2>
         <p className={S.pageSub} style={{ fontSize: 12 }}>{srcCards.length} kartu</p>
-        {/* SB3: quick-launch actions per source */}
+        {/* Quick-launch actions per source */}
         {onNavigate && (
           <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
             <button

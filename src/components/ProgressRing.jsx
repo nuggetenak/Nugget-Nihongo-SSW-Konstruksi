@@ -1,5 +1,5 @@
 // ─── components/ProgressRing.jsx ──────────────────────────────────────────────
-// Circular SVG progress ring. Phase 6: 0 inline styles.
+// Circular SVG progress ring.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import s from './ProgressRing.module.css';

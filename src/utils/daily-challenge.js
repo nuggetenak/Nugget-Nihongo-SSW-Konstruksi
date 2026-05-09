@@ -1,5 +1,5 @@
 // ─── utils/daily-challenge.js ─────────────────────────────────────────────────
-// F2: Daily Challenge — one JAC/Wayground/CSV question per day, seeded by date.
+// One JAC/Wayground/CSV question per day, seeded by date.
 // ─────────────────────────────────────────────────────────────────────────────
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';

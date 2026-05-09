@@ -11,7 +11,7 @@ import { recommendMode } from '../utils/recommend-mode.js';
 
 const getRecent     = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
 
-// A2: Smart recommendation — replaces simple getQuickStart heuristics
+// Smart mode recommendation via recommendMode()
 function getQuickStart(knownN, pct, dueCount, srs, examDate) {
   const sessions = storageGet('progress')?.sessions ?? [];
   const streak   = storageGet('progress')?.streakData?.days ?? 0;
@@ -167,7 +167,7 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
         ))}
       </div>
 
-      {/* F1: Starred-cards quiz button */}
+      {/* Starred-cards quiz button */}
       {starred.size > 0 && (
         <button className={s.quickTile} style={{ width: '100%', marginTop: 8 }}
           onClick={() => onNavigate('kuis', { filterIds: [...starred] })}>

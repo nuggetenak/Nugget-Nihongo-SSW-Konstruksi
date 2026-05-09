@@ -1,5 +1,5 @@
-// cards-lifeline.js — re-annotated CS-05 (C1..C6)
-// Cards: 444
+// cards-lifeline.js — lifeline track source cards.
+// Cards: 564
 export const CARDS_LIFELINE = [
   {
   id: 28,

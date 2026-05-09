@@ -1,5 +1,5 @@
 // ─── OptionButton.jsx ────────────────────────────────────────────────────────
-// Quiz option button. Phase 6: 0 inline styles.
+// Quiz option button.
 // Plays haptic feedback on answer reveal.
 // ─────────────────────────────────────────────────────────────────────────────
 

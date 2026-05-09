@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite';
+import { readFileSync } from 'fs';
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { resolve } from 'path';
@@ -15,6 +17,9 @@ export default defineConfig(({ mode }) => ({
       title: 'SSW Konstruksi — Bundle Analysis',
     }),
   ].filter(Boolean),
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+  },
   resolve: {
     alias: { '@': resolve(__dirname, 'src') },
   },

@@ -28,7 +28,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const [done, setDone] = useState(false);
   const [intervals, setIntervals] = useState({});
   const [sessionCorrect, setSessionCorrect] = useState(0);
-  // R1: Rating distribution tracking
+  // Rating distribution tracking.
   const [ratingDist, setRatingDist] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
   const { getDurationMs } = useSessionTimer();
 
@@ -153,7 +153,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
             ))}
           </div>
         )}
-        {/* R1: Rating distribution */}
+        {/* Rating distribution */}
         {total > 0 && (
           <div style={{ width: '100%', maxWidth: 280, margin: '12px auto 0' }}>
             <div style={{ fontSize: 11, color: T.textDim, marginBottom: 6, textAlign: 'center', letterSpacing: 0.4 }}>DISTRIBUSI RATING</div>
@@ -212,7 +212,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
         <span className={S.pill} style={{ fontSize: 10, background: `${info.strength.color}15`, color: info.strength.color, border: `1px solid ${info.strength.color}30` }}>
           {info.strength.label} · {Math.round(info.R * 100)}% ingat
         </span>
-        {/* R2: Due reason — interval + reps */}
+        {/* Due reason — interval + reps */}
         {info.seen && (
           <span className={S.pill} style={{ fontSize: 10, background: T.surface, color: T.textMuted, border: `1px solid ${T.border}` }}>
             {info.reps > 0 ? `${info.reps}× ulasan` : 'Baru'}{info.reps > 0 ? ` · interval ${fmtInterval(intervals[3])}` : ''}

@@ -1,11 +1,11 @@
 // ─── components/SayaTab.jsx ───────────────────────────────────────────────────
-// "Saya" tab — personal hub. Phase 6: 0 inline styles.
+// "Saya" tab — personal hub.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import s from './SayaTab.module.css';
 import { CARDS } from '../data/cards.js';
-import { exportAll, importAll, resetAll } from '../storage/engine.js';
+import { exportAll, importAllSafe, resetAll } from '../storage/engine.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
@@ -59,14 +59,14 @@ export default function SayaTab() {
   const young    = srs.stats?.young  ?? 0;
   const newCards = srs.stats?.new    ?? 0;
 
-  // F1: Achievements
+  // Achievements
   const achievements = useMemo(() => {
     const state = buildAchievementState({ known, streakData, sessions, srs, jacScores });
     return evaluateAchievements(state);
   }, [known, streakData, sessions, srs, jacScores]);
   const unlockedCount = achievements.filter((a) => a.unlocked).length;
 
-  // F2: Daily Challenge
+  // Daily Challenge
   const today = todayStr();
   const { question: dailyChallengeQ, answered: dcAnswered, submit: submitChallenge } = useDailyChallenge();
 
@@ -142,10 +142,11 @@ export default function SayaTab() {
       const reader = new FileReader();
       reader.onload = (ev) => {
         try {
-          importAll(JSON.parse(ev.target.result));
+          const parsed = JSON.parse(ev.target.result);
+          importAllSafe(parsed);
           toast.show('📥 Progress diimpor — muat ulang halaman');
           setTimeout(() => window.location.reload(), 1500);
-        } catch { toast.show('❌ File tidak valid'); }
+        } catch (err) { toast.show(`❌ ${err.message ?? 'File tidak valid'}`); }
       };
       reader.readAsText(file);
     };
@@ -184,7 +185,7 @@ export default function SayaTab() {
         </div>
       </div>
 
-      {/* F2: Daily Challenge */}
+      {/* Daily Challenge */}
       {dailyChallengeQ && (
         <Section title={`🗓️ Soal Hari Ini · ${today}`}>
           <div style={{ padding: '12px 14px', background: 'var(--ssw-surface)', borderRadius: 12, border: '1px solid var(--ssw-border)' }}>
@@ -220,7 +221,7 @@ export default function SayaTab() {
         </Section>
       )}
 
-      {/* F1: Achievement Badges */}
+      {/* Achievement Badges */}
       <Section title={`🏅 Pencapaian (${unlockedCount}/${achievements.length})`}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, padding: '8px 0' }}>
           {achievements.map((a) => (
@@ -332,13 +333,13 @@ export default function SayaTab() {
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
         <Row
           label="ℹ️ Tentang Aplikasi"
-          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v4.21.1`}
-          onClick={() => toast.show(`SSW Konstruksi v4.21.1 · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`)}
+          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v${__APP_VERSION__}`}
+          onClick={() => toast.show(`SSW Konstruksi v${__APP_VERSION__} · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`)}
         />
       </Section>
 
       <div className={s.footer}>
-        SSW Konstruksi v4.21.1<br />
+        SSW Konstruksi v{__APP_VERSION__}<br />
         by Nugget Nihongo<br />
         土木 · 建築 · ライフライン設備
       </div>

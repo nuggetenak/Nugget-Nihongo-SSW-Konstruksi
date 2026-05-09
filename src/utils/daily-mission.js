@@ -1,4 +1,4 @@
-// ─── utils/daily-mission.js (phaseC) ─────────────────────────────────────────
+// ─── utils/daily-mission.js ─────────────────────────────────────────────────
 // Daily Mission engine — recommends one study activity per day.
 // Grounded in: Fogg (2009) Behavior Model, Clear (2018) Habit Loop,
 // Nation (2007) Four Strands balance.

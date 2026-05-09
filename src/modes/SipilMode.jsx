@@ -1,4 +1,4 @@
-// ─── SipilMode.jsx (phaseB) ───────────────────────────────────────────────────
+// ─── SipilMode.jsx ──────────────────────────────────────────────────────────
 // Quiz mode for Teknik Sipil (土木) track.
 // Uses SIPIL_SETS data, saves scores to sipilScores in storage v3.
 // ─────────────────────────────────────────────────────────────────────────────

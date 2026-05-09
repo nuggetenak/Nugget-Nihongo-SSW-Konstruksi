@@ -1,4 +1,4 @@
-// ─── SprintMode.jsx (phaseH + B2) ────────────────────────────────────────────
+// ─── SprintMode.jsx ─────────────────────────────────────────────────────────
 // Personal best tracking via prefs.sprintBests (per duration).
 // onSessionEnd prop fires when sprint ends → ModeRouter records session + mission.
 // B2: Category lock + duration picker + escalating visual urgency
@@ -52,7 +52,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const [personalBest, setPersonalBest] = useState(() => getDurationBests('60').score);
 
   // B2: available categories from the cards prop
-  // SB3: if filterIds set (launched from SumberMode), scope to those cards
+  // Scope to filterIds if launched from SumberMode.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
   const availableCats = useMemo(() => {
     const catKeys = new Set(baseCards.map((c) => c.category));
@@ -84,13 +84,13 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     if (phase !== 'playing') return;
     if (timeLeft <= 0) { setPhase('done'); fireSessionEnd(correct, wrong); return; }
 
-    // F4: record timeline point every 5 seconds (at t=5,10,15,...)
+    // Record ghost timeline point every 5 seconds.
     const duration = DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60;
     const elapsed = duration - timeLeft;
     if (elapsed > 0 && elapsed % 5 === 0) {
       currentTimeline.current = [...currentTimeline.current, { t: elapsed, score: correct }];
     }
-    // F4: update ghost score from saved best timeline
+    // Update ghost score from saved best timeline.
     if (ghostTimeline.length > 0) {
       const bestPoint = ghostTimeline.filter((p) => p.t <= elapsed).pop();
       if (bestPoint) setGhostScore(bestPoint.score);

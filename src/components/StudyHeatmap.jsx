@@ -1,5 +1,5 @@
 // ─── components/StudyHeatmap.jsx ─────────────────────────────────────────────
-// ST1: GitHub-style 52-week study heatmap using SVG.
+// GitHub-style 52-week study activity heatmap using SVG.
 // Data from sessions array (capped 180, so ~6 months of real data shown).
 // ─────────────────────────────────────────────────────────────────────────────
 import { useMemo } from 'react';

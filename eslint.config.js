@@ -13,7 +13,7 @@ export default [
     files: ['src/**/*.{js,jsx}'],
     plugins: { react: reactPlugin, 'react-hooks': reactHooks },
     languageOptions: {
-      globals: { ...globals.browser },
+      globals: { ...globals.browser, __APP_VERSION__: 'readonly' },
       parserOptions: { ecmaFeatures: { jsx: true }, ecmaVersion: 'latest', sourceType: 'module' },
     },
     settings: { react: { version: '19' } },

@@ -53,7 +53,7 @@ export function getStrandCounts(sessions, modeMeta, days = 7) {
 
 /**
  * Composite readiness score 0–100.
- * Extracted from StatsMode.calcReadiness (B3 fix).
+ * Composite readiness score used by StatsMode and recommend-mode.
  */
 export function calcReadiness({ srs, sessions, streakData }) {
   const avgAcc = getAvgAccuracy(sessions);
