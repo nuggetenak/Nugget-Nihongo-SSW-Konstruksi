@@ -57,5 +57,6 @@ export const DEFAULTS = {
     quizQuestionCount: 10,    // Q4: persist quiz question count
     sprintBests: {},          // N10: scoped best scores { [durationKey]: { score, timeline } }
     // sprintBest / sprintBestTimeline: F4 — set dynamically by SprintMode, not in DEFAULTS
+    dailyChallengeLog: {},    // ENG-5: { [YYYY-MM-DD]: { selected: number, correct: boolean } }
   },
 };
