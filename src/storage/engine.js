@@ -198,6 +198,7 @@ export function validateSnapshot(snapshot) {
       srsCards: Object.keys(snapshot.srs.cards).length,
       sessions: (snapshot.progress.sessions ?? []).length,
       version:  snapshot._storage_version ?? snapshot.progress._v ?? 'unknown',
+      migrated: (snapshot._storage_version ?? snapshot.progress._v ?? 0) < STORAGE_VERSION,
     },
   };
 }

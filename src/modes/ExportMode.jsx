@@ -86,10 +86,11 @@ export default function ExportMode({ onExit }) {
   const handleConfirmImport = () => {
     if (!previewData) return;
     try {
-      importAllSafe(previewData.snapshot);
+      const result = importAllSafe(previewData.snapshot);
       setSummary(readSummary());
       setPreviewData(null);
-      setStatus({ type: 'ok', msg: `✅ Dipulihkan! ${previewData.incoming.known} hafal, ${previewData.incoming.srsCards} kartu SRS. Muat ulang halaman.` });
+      const migratedNote = result?.migrated ? ' ℹ️ Data diperbarui dari format lama.' : '';
+      setStatus({ type: 'ok', msg: `✅ Dipulihkan! ${previewData.incoming.known} hafal, ${previewData.incoming.srsCards} kartu SRS. Muat ulang halaman.${migratedNote}` });
     } catch (e) {
       setStatus({ type: 'err', msg: `❌ Import gagal (progress lama tetap): ${e.message}` });
       setPreviewData(null);
@@ -131,9 +132,10 @@ export default function ExportMode({ onExit }) {
       const snapshot = await pullFromGist(gistPat, targetId);
       const validation = validateSnapshot(snapshot);
       if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
-      importAllSafe(snapshot);
+      const gistResult = importAllSafe(snapshot);
       setSummary(readSummary());
-      setGistStatus({ type: 'ok', msg: '✅ Progress dipulihkan dari Gist! Muat ulang halaman.' });
+      const gistMigratedNote = gistResult?.migrated ? ' ℹ️ Data diperbarui dari format lama.' : '';
+      setGistStatus({ type: 'ok', msg: `✅ Progress dipulihkan dari Gist! Muat ulang halaman.${gistMigratedNote}` });
     } catch (e) {
       setGistStatus({ type: 'err', msg: `❌ ${e.message}` });
     } finally { setGistBusy(false); }
