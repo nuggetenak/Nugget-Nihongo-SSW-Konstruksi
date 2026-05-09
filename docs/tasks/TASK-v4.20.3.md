@@ -1,5 +1,5 @@
 # TASK v4.20.3 — ENG-1: session-analytics.js + ENG-7: Tests
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.2 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.2 DONE
 
 ## Goal
 Create `session-analytics.js` to fix the same narrow quiz filter bug appearing in 3 separate files.

@@ -1,3 +1,13 @@
+## [4.20.3] - 2026-05-09
+
+### feat + fix: session-analytics.js (ENG-1, ENG-7, B3, N2, N4)
+
+- ENG-1: New src/utils/session-analytics.js — single source of truth for session math (getAvgAccuracy, getBestSimScore, hasPerfectSprint, getStrandCounts, calcReadiness)
+- B3: StatsMode.jsx — replaced local calcReadiness + narrow ['kuis','jac','wayground'] filter with session-analytics imports
+- N2: recommend-mode.js — replaced narrow quiz filter with getAvgAccuracy(sessions, 10)
+- N4: achievements.js — replaced narrow quiz filter with getAvgAccuracy; quiz_70 now fires for all SCORED_QUIZ_MODES
+- ENG-7: session-analytics.test.js — 13 new tests (429 total, 37 files)
+
 ## [4.20.2] - 2026-05-09
 
 ### feat + fix: constants extraction (ENG-2)

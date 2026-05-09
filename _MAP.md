@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (v4.20.2: ENG-2 constants.js, N15/N19 constants, B5 readiness fix, B1 achievements thresholds)
-> **Version:** v4.20.2
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (v4.20.3: ENG-1 session-analytics.js, B3 StatsMode calcReadiness, N2 recommend-mode, N4 achievements)
+> **Version:** v4.20.3
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -200,8 +200,8 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.20.2** |
-| Tests | **416** (36 files) |
+| Version | **4.20.3** |
+| Tests | **429** (37 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,443** |
@@ -329,6 +329,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | v4.10.0–4.14.0 | Sonnet 4.6: Feature batches — JACMode SRS bridge, SumberMode actions, GlossaryMode Anki export, JAC topic tags |
 | 2026-05-08 | v4.15.x–4.17.0 | Sonnet 4.6: JAC content audit (23 fixes), C1 text3 +18 cards, C1 pass2 +15 cards |
 | 2026-05-08 | v4.18.0–4.19.0 | Sonnet 4.6: Refactors — doboku/kenchiku→common; JAC split; quiz-sets merge; track fields |
+| 2026-05-09 | v4.20.3 | Sonnet 4.6: ENG-1 session-analytics.js; B3 StatsMode calcReadiness; N2 recommend-mode getAvgAccuracy; N4 achievements getAvgAccuracy; ENG-7 13 new tests (429 total) |
 | 2026-05-09 | v4.20.2 | Sonnet 4.6: ENG-2 constants.js, N15 SESSIONS_CAP, N19 SRS_MATURE_DAYS, B5 calcReadiness ×100 removed, B1 achievement thresholds corrected |
 | 2026-05-09 | v4.20.1 | Sonnet 4.6: REF-6 date.js (local tz UTC fix), N13 ProgressContext streak, N9 daily files, N18 StudyHeatmap, Dashboard; ENG-8 date.test.js (416 tests, 36 files) |
 | 2026-05-09 | v4.20.0 | Sonnet 4.6: P0 bugs — VocabMode X1 (MIX_ALL inside component + VOCAB_SETS memoized), SprintMode X2 (quizWrong→progress doc), AngkaMode+DangerMode import alias crashes, WaygroundMode React Compiler rule off |
