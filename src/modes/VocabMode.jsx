@@ -6,7 +6,7 @@ import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
-import { WAYGROUND_SETS } from '../data/wayground-sets.js';
+import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
@@ -16,7 +16,7 @@ const MIX_ALL_ID = '__vocab_mix__';
 export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
   const VOCAB_SETS = useMemo(
-    () => WAYGROUND_SETS.filter((s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)),
+    () => QUIZ_SETS.filter((s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)),
     [track]
   );
   const totalSoal = VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0);
