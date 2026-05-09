@@ -1,9 +1,9 @@
-# 🏗️ SSW Konstruksi — Blueprint Current (v4.19.5)
+# 🏗️ SSW Konstruksi — Blueprint Current (v4.19.5 → v4.21.x)
 
-> **Status:** ALL PHASES COMPLETE ✅ — NO OPEN ITEMS
+> **Status:** v4.19.5 STABLE ✅ — v4.20.x IMPLEMENTATION QUEUED
 > **Version:** 4.19.5
-> **Last updated:** 2026-05-09 (hygiene passes v4.19.1–v4.19.5 complete)
-> **For new agents:** Start with `_MAP.md` in repo root.
+> **Last updated:** 2026-05-09 (proposal pass 14 approved; task files in docs/tasks/; v4.20.0–v4.21.1 queued)
+> **For new agents:** Read `_MAP.md` → `docs/tasks/TASK-MASTER.md` → pick lowest READY task.
 
 ---
 
@@ -50,6 +50,25 @@ React 19 PWA for Indonesian construction workers studying the JAC SSW exam.
 | v4.19.5 | Hygiene | Onboarding/index.html 1438→1443; daily-challenge QUIZ_SETS; vite chunks |
 
 ---
+
+---
+
+## v4.20 Implementation Queue
+
+Work is queued in `docs/tasks/`. 19 task files cover v4.20.0 → v4.21.1.
+
+| Batch | Versions | Focus |
+|-------|----------|-------|
+| Quick fixes | v4.20.0–v4.20.2 | P0 bugs, date util, constants |
+| Engines | v4.20.3–v4.20.5 | session-analytics, MODE_META, OVERHAUL-2 |
+| Features | v4.20.6–v4.20.8 | open items batch |
+| Data layer | v4.20.9–v4.20.11 | DB bugs, ENG-9/10, N24/N25 |
+| Resilience | v4.20.12 | storage quota detection |
+| Performance | v4.20.13–v4.20.15 | context memo, JpDisplay memo, useTrackedCards |
+| Structural | v4.21.0–v4.21.1 | vocab merge, sipil/bangunan absorption, OVERHAUL-1 |
+
+Full spec: `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14)
+
 
 ## Known Gaps & Deferred Work
 
