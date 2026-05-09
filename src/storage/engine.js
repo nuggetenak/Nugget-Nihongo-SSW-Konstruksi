@@ -9,6 +9,7 @@ import {
   migrate_v2_to_v3,
 } from './migrations.js';
 import LZString from 'lz-string';
+import { isQuotaError, notifyQuotaExceeded } from '../utils/storage-quota.js';
 
 // ── In-memory cache ────────────────────────────────────────────────────────
 let _cache = { progress: null, srs: null, prefs: null };
@@ -35,7 +36,15 @@ function writeDoc(docKey, data) {
     // E4: compress before writing
     const compressed = LZString.compressToUTF16(JSON.stringify(data));
     localStorage.setItem(docKey, compressed);
-  } catch {}
+    return { ok: true };
+  } catch (err) {
+    if (isQuotaError(err)) {
+      notifyQuotaExceeded(docKey);
+      return { ok: false, reason: 'quota' };
+    }
+    console.error('[storage] writeDoc failed:', docKey, err);
+    return { ok: false, reason: 'unknown' };
+  }
 }
 
 function freshDefaults() {
