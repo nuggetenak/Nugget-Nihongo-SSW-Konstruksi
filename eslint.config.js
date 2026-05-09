@@ -29,6 +29,8 @@ export default [
       // Hooks — set-state-in-effect is intentional in init useEffects (e.g. GlossaryMode reset)
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/set-state-in-effect': 'off',
+      // React Compiler memoization warnings — not using React Compiler in this project
+      'react-hooks/preserve-manual-memoization': 'off',
 
       // Quality
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' }],

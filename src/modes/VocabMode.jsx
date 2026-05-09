@@ -9,21 +9,23 @@ import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
-// VOCAB_SETS computed inside component — see track filter below
+// VOCAB_SETS and MIX_ALL computed inside component — track-filtered
 const MIX_ALL_ID = '__vocab_mix__';
-const MIX_ALL = {
-  id: MIX_ALL_ID,
-  title: `Mix All · ${VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0)}qs`,
-  subtitle: '全語彙セット — semua vocab acak',
-  emoji: '🔀',
-  color: '#a78bfa',
-};
 
 export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
-  const VOCAB_SETS = WAYGROUND_SETS.filter(
-    (s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)
+  const VOCAB_SETS = useMemo(
+    () => WAYGROUND_SETS.filter((s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)),
+    [track]
   );
+  const totalSoal = VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0);
+  const MIX_ALL = {
+    id: MIX_ALL_ID,
+    title: `Mix All · ${totalSoal}qs`,
+    subtitle: '全語彙セット — semua vocab acak',
+    emoji: '🔀',
+    color: '#a78bfa',
+  };
   const [activeSet, setActiveSet] = useState(null);
   const [showFuri, setShowFuri] = useState(true);
   const [showHint, setShowHint] = useState(true);
@@ -44,7 +46,7 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
       explanation: q.exp,
       _qId: `${activeSet}-${q.id}`,
     }));
-  }, [activeSet, setDef, showFuri, showHint]);
+  }, [activeSet, setDef, showFuri, showHint, VOCAB_SETS]);
 
   const [_wrongCounts, setWrongCounts] = usePersistedState(
     activeSet ? `ssw-vocab-wrong-${activeSet}` : 'ssw-vocab-temp', {}
@@ -78,8 +80,6 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
       />
     );
   }
-
-  const totalSoal = VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0);
 
   return (
     <div className={S.page}>

@@ -100,7 +100,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     // S5: Record wrong answer to quiz wrong-tracker
     const cardId = order[idx]?.id;
     if (cardId) {
-      storageSet('prefs', (p) => {
+      storageSet('progress', (p) => {
         const qw = { ...(p?.quizWrong ?? {}) };
         qw[cardId] = makeWrongEntry(qw[cardId]);
         return { ...p, quizWrong: qw };

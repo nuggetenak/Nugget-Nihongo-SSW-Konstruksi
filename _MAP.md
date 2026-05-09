@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (proposal pass 14 approved; 19 task files in docs/tasks/; v4.20.x queued)
-> **Version:** v4.19.5 (stable) — v4.20.x queued
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (v4.20.0: X1 VocabMode crash, X2 SprintMode doc, AngkaMode/DangerMode import crashes, lint clean)
+> **Version:** v4.20.0
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -200,7 +200,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.19.5** |
+| Version | **4.20.0** |
 | Tests | **411** (35 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -329,4 +329,5 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | 2026-05-08 | v4.10.0–4.14.0 | Sonnet 4.6: Feature batches — JACMode SRS bridge, SumberMode actions, GlossaryMode Anki export, JAC topic tags |
 | 2026-05-08 | v4.15.x–4.17.0 | Sonnet 4.6: JAC content audit (23 fixes), C1 text3 +18 cards, C1 pass2 +15 cards |
 | 2026-05-08 | v4.18.0–4.19.0 | Sonnet 4.6: Refactors — doboku/kenchiku→common; JAC split; quiz-sets merge; track fields |
+| 2026-05-09 | v4.20.0 | Sonnet 4.6: P0 bugs — VocabMode X1 (MIX_ALL inside component + VOCAB_SETS memoized), SprintMode X2 (quizWrong→progress doc), AngkaMode+DangerMode import alias crashes, WaygroundMode React Compiler rule off |
 | 2026-05-09 | v4.19.1–4.19.5 | Sonnet 4.6: 5 hygiene passes — C1 closure; SOURCE_GROUPS fix; track bugs (wt1-10, csv-sets); SimulasiMode+daily-challenge CSV pool; +24 tests; SearchMode wrongCount fix; barrel clean; stale counts |

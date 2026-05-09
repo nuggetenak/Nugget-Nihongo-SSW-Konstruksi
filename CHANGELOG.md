@@ -1,3 +1,15 @@
+## [4.20.0] - 2026-05-09
+
+### fix: P0 critical bugs + pre-existing lint crashes
+
+- X1 (VocabMode): MIX_ALL moved inside component; VOCAB_SETS memoized with useMemo — fixes ReferenceError on load
+- X2 (SprintMode): quizWrong written to progress doc (was: prefs)
+- AngkaMode: `ANGKA_KUNCI` aliased as `ANGKA` at import; removed self-referencing filter — fixes crash on load
+- DangerMode: `DANGER_PAIRS` aliased as `PAIRS` at import; removed self-referencing filter — fixes crash on load
+- eslint.config.js: `react-hooks/preserve-manual-memoization` disabled (no React Compiler in project)
+
+---
+
 ## [v4.20.x] - QUEUED — 2026-05-09
 
 ### plan: v4.20.0–v4.21.1 implementation queued (Proposal pass 14)

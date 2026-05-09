@@ -4,8 +4,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { useApp } from '../contexts/AppContext.jsx';
-import { DANGER_PAIRS } from '../data/danger-pairs.js';
+import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
@@ -21,8 +20,6 @@ const CONFUSION_LABELS = {
 };
 
 export default function DangerMode({ onExit, onSessionEnd }) {
-  const { track } = useApp();
-  const PAIRS = PAIRS.filter((p) => !p.track || p.track === 'common' || p.track === track);
   const [view, setView] = useState('panel');
   const [filterType, setFilterType] = useState('all');
   return view === 'panel'

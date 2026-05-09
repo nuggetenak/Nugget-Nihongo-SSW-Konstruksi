@@ -4,8 +4,7 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { useApp } from '../contexts/AppContext.jsx';
-import { ANGKA_KUNCI } from '../data/angka-kunci.js';
+import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
 import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -38,8 +37,6 @@ function buildQuizItems() {
 }
 
 export default function AngkaMode({ onExit, onSessionEnd }) {
-  const { track } = useApp();
-  const ANGKA = ANGKA.filter((a) => !a.track || a.track === 'common' || a.track === track);
   const [view, setView] = useState('panel');
   const [quizMode, setQuizMode] = useState('pilihan'); // 'pilihan' or 'ketik'
   if (view === 'panel') return <PanelView onExit={onExit} onStartQuiz={(mode) => { setQuizMode(mode); setView('quiz'); }} />;
