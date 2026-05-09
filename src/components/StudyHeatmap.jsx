@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useMemo } from 'react';
 import { T } from '../styles/theme.js';
+import { isoToLocalDate } from '../utils/date.js';
 
 const CELL = 11;
 const GAP  = 2;
@@ -17,7 +18,7 @@ export default function StudyHeatmap({ sessions = [] }) {
     // Build date → count map
     const byDate = {};
     sessions.forEach((sess) => {
-      const d = sess.date?.slice(0, 10);
+      const d = isoToLocalDate(sess.date);
       if (d) byDate[d] = (byDate[d] ?? 0) + 1;
     });
     // Build grid: COLS * DAYS cells ending today
@@ -26,7 +27,7 @@ export default function StudyHeatmap({ sessions = [] }) {
     for (let i = totalDays - 1; i >= 0; i--) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
-      const key = d.toISOString().slice(0, 10);
+      const key = d.toLocaleDateString('sv');
       cells.push({ key, count: byDate[key] ?? 0, dayOfWeek: d.getDay() });
     }
     const max = Math.max(...cells.map((c) => c.count), 1);
