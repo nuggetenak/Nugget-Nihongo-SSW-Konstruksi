@@ -8,8 +8,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { stripFuri } from '../utils/jp-helpers.js';
-import { makeWrongEntry } from '../utils/wrong-tracker.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -39,8 +38,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
   const [sessionFired, setSessionFired] = useState(false);
   const speakCountRef = useRef(0);
   const { getDurationMs } = useSessionTimer();
-  // D1-WT: wrong-tracker — records incorrect answers to shared quizWrong pool
-  const [, setQuizWrong] = usePersistedState('ssw-quiz-wrong', {});
+  const { recordWrong } = useProgress();
 
   const hasAudio = canSpeak();
 
@@ -82,7 +80,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
     // D1-WT: record wrong answer in shared wrong-tracker pool
     if (!isCorrect) {
       const cardId = currentQ.card.id;
-      if (cardId) setQuizWrong((w) => ({ ...w, [cardId]: makeWrongEntry(w[cardId]) }));
+      if (cardId) recordWrong(cardId);
     }
 
     // Advance after 1.5s
@@ -101,7 +99,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
         setIdx(questions.length); // trigger done state
       }
     }, 1500);
-  }, [selected, currentQ, idx, questions.length, results, sessionFired, onSessionEnd, setQuizWrong, getDurationMs]);
+  }, [selected, currentQ, idx, questions.length, results, sessionFired, onSessionEnd, recordWrong, getDurationMs]);
 
   // ── Settings screen ──────────────────────────────────────────────────────
   if (!started) {

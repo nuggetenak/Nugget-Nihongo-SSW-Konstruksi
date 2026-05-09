@@ -4,12 +4,12 @@
 import { useState, useCallback, useRef, useMemo } from 'react';
 import { T } from '../styles/theme.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
-import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { getWrongCount } from '../utils/wrong-tracker.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
 import { CATEGORIES } from '../data/categories.js';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
@@ -20,7 +20,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
   const [autoNextDelay, setAutoNextDelay] = useState(2000);
   const [showSettings, setShowSettings] = useState(false);
   const [started, setStarted] = useState(false);
-  const [quizWrong, setQuizWrong] = usePersistedState('ssw-quiz-wrong', {});
+  const { quizWrong, recordWrong } = useProgress();
 
   // A.1 FIX: seenPool as useRef — resets when component unmounts/remounts,
   // preventing stale seen-card memory across separate mode sessions.
@@ -49,10 +49,10 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
     (qIdx, _selIdx, isCorrect) => {
       if (!isCorrect) {
         const cardId = questions[qIdx]?._cardId;
-        if (cardId) setQuizWrong((w) => ({ ...w, [cardId]: makeWrongEntry(w[cardId]) }));
+        if (cardId) recordWrong(cardId);
       }
     },
-    [questions, setQuizWrong]
+    [questions, recordWrong]
   );
 
   const startQuiz = () => {

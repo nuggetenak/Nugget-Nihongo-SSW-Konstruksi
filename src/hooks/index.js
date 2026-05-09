@@ -1,4 +1,3 @@
-export { usePersistedState } from './usePersistedState.js';
 export { useQuizKeyboard } from './useQuizKeyboard.js';
 // A.5: useStreak renamed to useAnswerStreak
 // ENG-13: stable context value pattern marker (useMemo inline in each context)

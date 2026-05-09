@@ -6,8 +6,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
-import { makeWrongEntry } from '../utils/wrong-tracker.js';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -103,7 +102,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
 }
 
 function QuizView({ onBack, onSessionEnd, filterType }) {
-  const [, setDangerWrong] = usePersistedState('ssw-quiz-wrong', {});
+  const { recordWrong } = useProgress();
   const buildFilteredItems = () => {
     const pool = filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
     return shuffle(pool).map((pair) => {
@@ -130,12 +129,12 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
     const isCorrect = idx === item.correctIdx;
     if (!isCorrect) {
       const key = `danger-${item.pair.term}`;
-      setDangerWrong((w) => ({ ...w, [key]: makeWrongEntry(w[key]) }));
+      recordWrong(key);
     }
     const ns = isCorrect ? streak + 1 : 0;
     setStreak(ns); setMaxStreak((m) => Math.max(m, ns));
     setResults((r) => [...r, { isCorrect, picked: idx, item }]);
-  }, [selected, phase, item, streak, setDangerWrong]);
+  }, [selected, phase, item, streak, recordWrong]);
 
   useEffect(() => {
     if (selected === null || phase !== 'playing') return;
