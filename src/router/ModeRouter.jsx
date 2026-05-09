@@ -230,7 +230,7 @@ export default function ModeRouter() {
       filterIds: modeParams?.filterIds ?? null,
     },
     sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint'), filterIds: modeParams?.filterIds ?? null },
-    fokus:    { known, unknown, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
+    fokus:    { known, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
     stats:    { known, unknown, quizWrong, srs, streakData, sessions, onExit: exitMode },
     angka:    { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
     jebak:    { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },

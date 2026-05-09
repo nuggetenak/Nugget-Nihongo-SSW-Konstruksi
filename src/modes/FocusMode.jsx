@@ -6,7 +6,7 @@ import { getWrongCount } from '../utils/wrong-tracker.js';
 import SprintMode from './SprintMode.jsx';
 import S from './modes.module.css';
 
-export default function FocusMode({ known, _unknown, quizWrong = {}, onExit, onSessionEnd }) {
+export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd }) {
   const [activeCat, setActiveCat] = useState(null);
   // F3: track which categories trained this session
   const [trainedKeys, setTrainedKeys] = useState(new Set());
