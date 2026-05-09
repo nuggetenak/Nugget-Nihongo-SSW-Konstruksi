@@ -1,8 +1,9 @@
 // ─── tests/bangunan-data.test.js ─────────────────────────────────────────────
-// Phase B: Schema validation for BANGUNAN_SETS data.
+// Phase B: Schema validation for BANGUNAN_SETS data. (REF-9: now in quiz-sets.js)
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
-import { BANGUNAN_SETS } from '../data/bangunan-sets.js';
+import { getQuizSetsForTrack } from '../data/quiz-sets.js';
+const BANGUNAN_SETS = getQuizSetsForTrack('kenchiku').filter(s => s.track === 'kenchiku');
 
 describe('Phase B — BANGUNAN_SETS data', () => {
   it('exports an array of sets', () => {
@@ -65,9 +66,9 @@ describe('Phase B — BANGUNAN_SETS data', () => {
     }
   });
 
-  it('SIPIL and BANGUNAN set IDs do not overlap', async () => {
-    const { SIPIL_SETS } = await import('../data/sipil-sets.js');
-    const sipilIds = new Set(SIPIL_SETS.map((s) => s.id));
+  it('SIPIL and BANGUNAN set IDs do not overlap', () => {
+    const sipilSets = getQuizSetsForTrack('doboku').filter(s => s.track === 'doboku');
+    const sipilIds = new Set(sipilSets.map((s) => s.id));
     for (const set of BANGUNAN_SETS) {
       expect(sipilIds.has(set.id)).toBe(false);
     }

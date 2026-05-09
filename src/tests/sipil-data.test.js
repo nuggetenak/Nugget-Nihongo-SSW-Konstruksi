@@ -1,8 +1,9 @@
 // ─── tests/sipil-data.test.js ────────────────────────────────────────────────
-// Phase B: Schema validation for SIPIL_SETS data.
+// Phase B: Schema validation for SIPIL_SETS data. (REF-9: now in quiz-sets.js)
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
-import { SIPIL_SETS } from '../data/sipil-sets.js';
+import { getQuizSetsForTrack } from '../data/quiz-sets.js';
+const SIPIL_SETS = getQuizSetsForTrack('doboku').filter(s => s.track === 'doboku');
 
 describe('Phase B — SIPIL_SETS data', () => {
   it('exports an array of sets', () => {

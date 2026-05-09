@@ -3,7 +3,7 @@
 // Uses SIPIL_SETS data, saves scores to sipilScores in storage v3.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState } from 'react';
-import { SIPIL_SETS } from '../data/sipil-sets.js';
+import { getQuizSetsForTrack } from '../data/quiz-sets.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
@@ -25,6 +25,7 @@ function normalizeQuestions(set) {
 }
 
 export default function SipilMode({ onExit, onSessionEnd }) {
+  const SIPIL_SETS = getQuizSetsForTrack('doboku');
   const [selectedSet, setSelectedSet] = useState(null);
   const scores = get('progress')?.sipilScores ?? {};
 

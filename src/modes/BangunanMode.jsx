@@ -3,7 +3,7 @@
 // Uses BANGUNAN_SETS data, saves scores to bangunanScores in storage v3.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState } from 'react';
-import { BANGUNAN_SETS } from '../data/bangunan-sets.js';
+import { getQuizSetsForTrack } from '../data/quiz-sets.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
@@ -25,6 +25,7 @@ function normalizeQuestions(set) {
 }
 
 export default function BangunanMode({ onExit, onSessionEnd }) {
+  const BANGUNAN_SETS = getQuizSetsForTrack('kenchiku');
   const [selectedSet, setSelectedSet] = useState(null);
   const scores = get('progress')?.bangunanScores ?? {};
 

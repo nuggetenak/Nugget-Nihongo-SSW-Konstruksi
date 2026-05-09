@@ -3,8 +3,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export { CARDS } from './cards.js';
-export { SIPIL_SETS } from './sipil-sets.js';
-export { BANGUNAN_SETS } from './bangunan-sets.js';
 
 // JAC Official — split by type
 // jac-official.js is a backward-compat shim: [...JAC_TEORI, ...JAC_LIFELINE, ...]
