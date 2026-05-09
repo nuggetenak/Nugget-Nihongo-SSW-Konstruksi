@@ -16,6 +16,7 @@ import {
 } from './fsrs-core.js';
 
 import { getCard, saveCard, getAllCards } from './fsrs-store.js';
+import { SRS_MATURE_DAYS } from '../utils/constants.js';
 
 const HISTORY_LIMIT = 20;
 
@@ -115,7 +116,7 @@ export function getSRSStats(allCardIds = [], now = new Date()) {
     if (isDue(card, now)) due++;
     const s = card.stability ?? 0;
     if (card.state === State.Learning || card.state === State.Relearning) learning++;
-    else if (s >= 21) mature++;
+    else if (s >= SRS_MATURE_DAYS) mature++;
     else young++;
   }
 
