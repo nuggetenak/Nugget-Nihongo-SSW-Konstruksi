@@ -5,7 +5,7 @@
 import { T } from '../styles/theme.js';
 import { useMemo, useState } from 'react';
 import { canSpeak, speakJP } from '../utils/speak.js'; // eslint-disable-line no-unused-vars
-import { stripFuri, extractReadings, jpFontSize } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings, jpFontSize, parseDescStructure } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
 // ─── JpFront (phaseE) ─────────────────────────────────────────────────────────
@@ -24,6 +24,16 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
   const clean = stripFuri(jp);
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
   const parsedRuby = useMemo(() => parseRubyFragments(jp), [jp]);
+
+  // REF-11: memoize branch detection — avoids re-running string checks on every render
+  const jpBranch = useMemo(() => {
+    const c = stripFuri(jp);
+    if (/\s*vs\s*/i.test(c)) return 'vs';
+    if (c.includes('・') && !c.includes('：') && c.split('・').length >= 2) return 'bullet';
+    if (c.includes('：')) return 'colon';
+    if (c.includes('→')) return 'arrow';
+    return 'plain';
+  }, [jp]);
   const ruby = showFuri ? parsedRuby : [];
   const hasRubyInText = parsedRuby.length > 0;
   const showReadingRow = !!reading && !hasRubyInText;
@@ -58,9 +68,8 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
   });
 
   // ── A vs B ────────────────────────────────────────────────────────────────
-  const VS_RE = /\s*vs\s*/i;
-  if (VS_RE.test(clean)) {
-    const parts = clean.split(VS_RE).map((p) => p.trim()).filter(Boolean);
+  if (jpBranch === 'vs') {
+    const parts = clean.split(/\s*vs\s*/i).map((p) => p.trim()).filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return wrapInteractive(<div className={S.jpWrap}>
         {parts.map((p, i) => (
@@ -76,24 +85,22 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
   }
 
   // ── A・B・C ───────────────────────────────────────────────────────────────
-  if (clean.includes('・') && !clean.includes('：')) {
+  if (jpBranch === 'bullet') {
     const parts = clean.split('・').map((p) => p.trim()).filter(Boolean);
-    if (parts.length >= 2) {
-      const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-      return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
-          {parts.map((p, i) => (
-            <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
-              {i > 0 && <div className={S.hr} />}
-              <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
-            </div>
-          ))}
-          {_ReadingRow(reading, showReadingRow)}
-        </div>);
-    }
+    const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
+    return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
+        {parts.map((p, i) => (
+          <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
+            {i > 0 && <div className={S.hr} />}
+            <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
+          </div>
+        ))}
+        {_ReadingRow(reading, showReadingRow)}
+      </div>);
   }
 
   // ── Title：Subtitle ───────────────────────────────────────────────────────
-  if (clean.includes('：')) {
+  if (jpBranch === 'colon') {
     const colonIdx = clean.indexOf('：');
     const title = clean.slice(0, colonIdx).trim();
     const sub = clean.slice(colonIdx + 1).trim();
@@ -106,7 +113,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', audioEnabled
   }
 
   // ── A → B → C ────────────────────────────────────────────────────────────
-  if (clean.includes('→')) {
+  if (jpBranch === 'arrow') {
     const parts = clean.split('→').map((p) => p.trim()).filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
@@ -171,39 +178,20 @@ function _ReadingRow(reading, show = true) {
 
 // ─── DescBlock ────────────────────────────────────────────────────────────────
 export function DescBlock({ desc = '', maxLines = 0 }) {
-  if (!desc) return null;
+  const parsed = useMemo(() => parseDescStructure(desc, maxLines), [desc, maxLines]);
+  if (!parsed) return null;
 
-  const CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮';
+  const footnote = parsed.src ? <div className={S.footnote}>{parsed.src}</div> : null;
 
-  const srcRe = /\s*\([^)]*Sumber[^)]*\)\s*$/;
-  const srcMatch = desc.match(srcRe);
-  const main = srcMatch ? desc.slice(0, srcMatch.index).trim() : desc.trim();
-  const src = srcMatch ? srcMatch[0].trim() : null;
-
-  const footnote = src ? <div className={S.footnote}>{src}</div> : null;
-
-  const applyMaxLines = (text) => {
-    if (!maxLines) return text;
-    return text.split(/\n|\\n/).filter(Boolean).slice(0, maxLines).join('\n');
-  };
-
-  // ── Branch A: 【keyword】 ─────────────────────────────────────────────────
-  const bracketMatches = [...main.matchAll(/【([^】]+)】/g)];
-  if (bracketMatches.length >= 2) {
-    const parts = main.split(/(【[^】]+】)/);
-    const items = [];
-    let intro = '';
-    let label = null;
-    for (const p of parts) {
-      const lm = p.match(/^【([^】]+)】$/);
-      if (lm) { label = lm[1]; }
-      else if (label !== null) { items.push({ label, body: p.trim() }); label = null; }
-      else { intro += p; }
-    }
+  if (parsed.branch === 'brackets') {
     return (
       <div className={S.descBlock}>
-        {intro.trim() && <div className={S.intro}>{renderJPWithRuby(intro.trim(), parseRubyFragments(intro.trim()))}</div>}
-        {items.map((item, i) => (
+        {parsed.intro && (
+          <div className={S.intro}>
+            {renderJPWithRuby(parsed.intro, parseRubyFragments(parsed.intro))}
+          </div>
+        )}
+        {parsed.items.map((item, i) => (
           <div key={i} className={S.listRow}>
             <span className={S.labelChip}>【{item.label}】</span>
             <span className={S.body}>{renderJPWithRuby(item.body, parseRubyFragments(item.body))}</span>
@@ -214,31 +202,15 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
     );
   }
 
-  // ── Branch B: ①②③ ──────────────────────────────────────────────────────
-  const hasCircled = [...CIRCLED].some((c) => main.includes(c));
-  if (hasCircled) {
-    const CIDX = Object.fromEntries([...CIRCLED].map((c, i) => [c, i + 1]));
-    const tokens = main.split(new RegExp(`(${[...CIRCLED].join('|')})`));
-    const items = [];
-    let intro = '';
-    let cur = null;
-    let lastIdx = 0;
-    for (const t of tokens) {
-      if (t.length === 1 && CIRCLED.includes(t)) {
-        const tIdx = CIDX[t];
-        if (tIdx > lastIdx) {
-          if (cur) items.push(cur);
-          cur = { num: t, body: '' };
-          lastIdx = tIdx;
-        } else { if (cur) cur.body += t; else intro += t; }
-      } else if (cur) { cur.body += t; }
-      else { intro += t; }
-    }
-    if (cur) items.push(cur);
+  if (parsed.branch === 'circled') {
     return (
       <div className={S.descBlock}>
-        {intro.trim() && <div className={S.intro}>{renderJPWithRuby(intro.trim(), parseRubyFragments(intro.trim()))}</div>}
-        {items.map((item, i) => (
+        {parsed.intro && (
+          <div className={S.intro}>
+            {renderJPWithRuby(parsed.intro, parseRubyFragments(parsed.intro))}
+          </div>
+        )}
+        {parsed.items.map((item, i) => (
           <div key={i} className={`${S.listRow} ${S.listRowTight}`}>
             <span className={S.numLabel}>{item.num}</span>
             <span className={S.body}>{renderJPWithRuby(item.body.trim(), parseRubyFragments(item.body.trim()))}</span>
@@ -249,12 +221,11 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
     );
   }
 
-  // ── Branch C: plain ───────────────────────────────────────────────────────
-  const lines = applyMaxLines(main).split(/\n|\\n/).filter(Boolean);
+  // plain
   return (
     <div className={S.descBlock}>
-      {lines.map((line, i) => (
-        <p key={i} className={S.plainPara} style={{ marginBottom: i < lines.length - 1 ? 5 : 0, opacity: 0.92 }}>
+      {parsed.lines.map((line, i) => (
+        <p key={i} className={S.plainPara} style={{ marginBottom: i < parsed.lines.length - 1 ? 5 : 0, opacity: 0.92 }}>
           {renderJPWithRuby(line, parseRubyFragments(line))}
         </p>
       ))}

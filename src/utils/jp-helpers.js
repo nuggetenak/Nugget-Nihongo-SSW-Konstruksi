@@ -78,3 +78,64 @@ export function jpFontSize(text = '') {
   if (len <= 30) return 15;
   return 13;
 }
+
+/**
+ * REF-11: Parse a desc string into a structured object for memoized rendering.
+ * @returns {{ branch: 'brackets'|'circled'|'plain', intro: string, items: Array, lines: string[], src: string|null }|null}
+ */
+export function parseDescStructure(desc = '', maxLines = 0) {
+  if (!desc) return null;
+
+  const CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮';
+  const srcRe = /\s*\([^)]*Sumber[^)]*\)\s*$/;
+  const srcMatch = desc.match(srcRe);
+  const main = srcMatch ? desc.slice(0, srcMatch.index).trim() : desc.trim();
+  const src = srcMatch ? srcMatch[0].trim() : null;
+
+  // Branch A: 【keyword】
+  const bracketMatches = [...main.matchAll(/【([^】]+)】/g)];
+  if (bracketMatches.length >= 2) {
+    const parts = main.split(/(【[^】]+】)/);
+    const items = [];
+    let intro = '';
+    let label = null;
+    for (const p of parts) {
+      const lm = p.match(/^【([^】]+)】$/);
+      if (lm) { label = lm[1]; }
+      else if (label !== null) { items.push({ label, body: p.trim() }); label = null; }
+      else { intro += p; }
+    }
+    return { branch: 'brackets', intro: intro.trim(), items, src };
+  }
+
+  // Branch B: ①②③
+  const hasCircled = [...CIRCLED].some((c) => main.includes(c));
+  if (hasCircled) {
+    const CIDX = Object.fromEntries([...CIRCLED].map((c, i) => [c, i + 1]));
+    const tokens = main.split(new RegExp(`(${[...CIRCLED].join('|')})`));
+    const items = [];
+    let intro = '';
+    let cur = null;
+    let lastIdx = 0;
+    for (const t of tokens) {
+      if (t.length === 1 && CIRCLED.includes(t)) {
+        const tIdx = CIDX[t];
+        if (tIdx > lastIdx) {
+          if (cur) items.push(cur);
+          cur = { num: t, body: '' };
+          lastIdx = tIdx;
+        } else { if (cur) cur.body += t; else intro += t; }
+      } else if (cur) { cur.body += t; }
+      else { intro += t; }
+    }
+    if (cur) items.push(cur);
+    return { branch: 'circled', intro: intro.trim(), items, src };
+  }
+
+  // Branch C: plain
+  const applyMax = (text) => maxLines
+    ? text.split(/\n|\\n/).filter(Boolean).slice(0, maxLines).join('\n')
+    : text;
+  const lines = applyMax(main).split(/\n|\\n/).filter(Boolean);
+  return { branch: 'plain', lines, src };
+}
