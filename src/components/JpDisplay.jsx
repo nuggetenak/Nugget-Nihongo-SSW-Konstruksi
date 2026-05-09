@@ -124,9 +124,14 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
 
   // ── Plain ─────────────────────────────────────────────────────────────────
   const fs = jpFontSize(clean);
+  const plainContent = hasRubyInText
+    ? renderJPWithRuby(clean, ruby)
+    : (showFuri && reading)
+      ? <ruby className={S.ruby}>{clean}<rt>{reading}</rt></ruby>
+      : clean;
   return wrapInteractive(<div style={{ textAlign: 'center' }}>
-      <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{renderJPWithRuby(clean, ruby)}</span>
-      {_ReadingRow(reading, showReadingRow)}
+      <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{plainContent}</span>
+      {!hasRubyInText && !(showFuri && reading) && _ReadingRow(reading, showReadingRow)}
     </div>);
 }
 
@@ -155,7 +160,10 @@ export function renderJPWithRuby(text, rubyFragments) {
         <rt>{frag.reading}</rt>
       </ruby>,
     );
-    rest = rest.slice(idx + frag.base.length);
+    // Advance past base AND strip the 《reading》 marker that follows it.
+    const afterBase = rest.slice(idx + frag.base.length);
+    const marker = `《${frag.reading}》`;
+    rest = afterBase.startsWith(marker) ? afterBase.slice(marker.length) : afterBase;
   }
   if (!nodes.length) return text;
   if (rest) nodes.push(rest);

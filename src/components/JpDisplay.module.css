@@ -70,9 +70,10 @@
 }
 
 .ruby rt {
-  font-size: 0.52em;
+  font-size: 0.44em;
   color: var(--ssw-amber);
   font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
 }
 
 .readingRow {
