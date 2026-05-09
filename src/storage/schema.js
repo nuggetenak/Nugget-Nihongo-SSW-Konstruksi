@@ -3,7 +3,7 @@
 // All user data lives in progress, srs, or prefs docs (lz-string compressed).
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const STORAGE_VERSION = 4;
+export const STORAGE_VERSION = 5;
 
 export const DOCS = {
   progress: 'ssw-progress', // known/unknown/starred/scores/streak/daily/recent

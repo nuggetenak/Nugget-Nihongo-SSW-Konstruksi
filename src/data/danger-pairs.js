@@ -4,7 +4,7 @@
 
 export const DANGER_PAIRS = [
   {
-    term: '短絡',
+    term: '短絡《たんらく》',
     track: 'common',
     furi: 'たんらく',
     confusionType: 'makna',
@@ -13,7 +13,7 @@ export const DANGER_PAIRS = [
     explanation: '短絡 (hubung singkat), 漏電 (bocor ke tanah), 感電 (kesetrum) — ketiganya melibatkan "arus tidak normal" tapi jalurnya berbeda: short circuit antar kabel, bocor ke bumi, atau masuk ke tubuh manusia.',
   },
   {
-    term: '労災保険',
+    term: '労災保険《ろうさいほけん》',
     track: 'common',
     furi: 'ろうさいほけん',
     confusionType: 'makna',
@@ -22,7 +22,7 @@ export const DANGER_PAIRS = [
     explanation: '労災 vs 雇用保険 — keduanya "asuransi kerja" tapi siapa yang bayar beda total. 労災 = 100% pengusaha (risiko kerja = tanggung jawab pengusaha). 雇用 = bersama (pengangguran = risiko kedua pihak).',
   },
   {
-    term: '雇用保険',
+    term: '雇用保険《こようほけん》',
     track: 'common',
     furi: 'こようほけん',
     confusionType: 'makna',
@@ -31,7 +31,7 @@ export const DANGER_PAIRS = [
     explanation: '雇用 (koyou = pekerjaan) — asuransi saat kehilangan pekerjaan. Risiko PHK melibatkan kedua pihak, maka preminyapun bersama. Beda dengan 労災 yang murni tanggung jawab pengusaha.',
   },
   {
-    term: 'ご苦労様',
+    term: 'ご苦労様《ごくろうさま》',
     track: 'common',
     furi: 'ごくろうさま',
     confusionType: 'kata',
@@ -49,7 +49,7 @@ export const DANGER_PAIRS = [
     explanation: 'グラス = ガラス (kaca), ロック = 岩 (batu). Keduanya berupa serat isolasi berbentuk kapas — penampilan fisik sangat mirip. Kunci: ingat bahan baku dari namanya. Kaca vs batu.',
   },
   {
-    term: '新規入場者教育',
+    term: '新規入場者教育《しんきにゅうじょうしゃきょういく》',
     track: 'common',
     furi: 'しんきにゅうじょうしゃきょういく',
     confusionType: 'kata',
@@ -82,7 +82,7 @@ export const DANGER_PAIRS = [
     explanation: 'ラッキング = lagging (isolasi) + カバー = pelindung logam luar. Pelindung aluminium hanya dibutuhkan saat terekspos cuaca/UV/hujan. Di dalam ruangan cukup lapisan isolasi saja tanpa cover logam.',
   },
   {
-    term: '電気事業法',
+    term: '電気事業法《でんきじぎょうほう》',
     track: 'common',
     furi: 'でんきじぎょうほう',
     confusionType: 'kata',
@@ -94,7 +94,7 @@ export const DANGER_PAIRS = [
     explanation: '電気事業法 vs 電気工事業法 — satu kata 工事 (konstruksi) membuat perbedaan total. 事業法 = regulasi PLN-nya Jepang. 工事業法 = regulasi kontraktor listrik. Hati-hati: hampir identik secara bunyi.',
   },
   {
-    term: '土留め ≥ 1.5m',
+    term: '土留め《どどめ》 ≥ 1.5m',
     track: 'common',
     furi: 'どどめ',
     confusionType: 'angka',
@@ -103,7 +103,7 @@ export const DANGER_PAIRS = [
     explanation: 'Sering dikacaukan dengan angka galian lain: 1.0m = wajib pakai helm di zona, 2.0m = wajib scaffolding dll. Khusus 土留め (penahan tanah): 1.5m karena tanah mulai tidak stabil dan bahaya longsor ke pekerja di bawah.',
   },
   {
-    term: '既成杭工法',
+    term: '既成杭工法《きせいくいこうほう》',
     track: 'common',
     furi: 'きせいくいこうほう',
     confusionType: 'makna',
@@ -115,7 +115,7 @@ export const DANGER_PAIRS = [
     explanation: '既成 (kisei) = "sudah jadi sebelumnya". 場所打ち (basho-uchi) = "cetak di tempat". Logiknya berlawanan: pabrik dulu → kirim → pancang VS gali lubang → cetak beton langsung di situ.',
   },
   {
-    term: 'さく井工事',
+    term: 'さく井工事《さくせいこうじ》',
     track: 'common',
     furi: 'さくせいこうじ',
     confusionType: 'makna',
@@ -124,7 +124,7 @@ export const DANGER_PAIRS = [
     explanation: 'さく井 = 鑿井 — kanji 鑿 (nomi) artinya pahat/bor. Spesifik untuk sumur air tanah dengan teknik pengeboran. Berbeda dari 掘削 (penggalian tanah terbuka). Lingkup terbatas: sumur air, bukan minyak/gas.',
   },
   {
-    term: '押土',
+    term: '押土《おしど》',
     track: 'common',
     furi: 'おしど',
     confusionType: 'kata',
@@ -133,7 +133,7 @@ export const DANGER_PAIRS = [
     explanation: '押土 = mendorong (horizontal, blade). 転圧 = memadatkan dengan tekanan putar (roller). 掘削 = menggali (vertical, bucket). Tiga alat, tiga arah gerak: horizontal / vertikal berputar / vertikal ke bawah.',
   },
   {
-    term: 'CD管 vs PF管',
+    term: 'CD管 vs PF管《CDかん vs PFかん》',
     track: 'lifeline',
     furi: 'CDかん vs PFかん',
     confusionType: 'prosedur',
@@ -146,7 +146,7 @@ export const DANGER_PAIRS = [
     explanation: 'CD管 (oranye) tahan tekanan beton basah, tidak perlu self-extinguishing karena terlindung beton. PF管 (abu-abu) harus self-extinguishing untuk area terbuka. Warna oranye = alarm "hanya untuk dalam beton".',
   },
   {
-    term: 'ライニング管の切断',
+    term: 'ライニング管の切断《ライニングかんのせつだん》',
     track: 'lifeline',
     furi: 'ライニングかんのせつだん',
     confusionType: 'prosedur',
@@ -155,7 +155,7 @@ export const DANGER_PAIRS = [
     explanation: 'ライニング管 = pipa baja berlapis polimer di dalamnya. Panas tinggi dari ガス溶断/grinder membakar lapisan polimer dan menghasilkan gas beracun. バンドソー/gergaji tidak menghasilkan panas tinggi sehingga lapisan aman.',
   },
   {
-    term: '銅管（冷媒管）の切断',
+    term: '銅管（冷媒管）の切断《どうかん（れいばいかん）のせつだん》',
     track: 'lifeline',
     furi: 'どうかん（れいばいかん）のせつだん',
     confusionType: 'prosedur',
@@ -164,7 +164,7 @@ export const DANGER_PAIRS = [
     explanation: 'Tembaga (銅) lunak — 金ノコ/grinder membuat serpihan dan ujung tidak rata sehingga sambungan bocor. パイプカッター berputar mengikuti lingkaran pipa sehingga potongan sempurna tegak lurus dan rapat.',
   },
   {
-    term: '免振 vs 制振 vs 耐震',
+    term: '免振 vs 制振 vs 耐震《めんしん vs せいしん vs たいしん》',
     track: 'common',
     furi: 'めんしん vs せいしん vs たいしん',
     confusionType: 'kata',
@@ -176,7 +176,7 @@ export const DANGER_PAIRS = [
     explanation: '免振 (mensin) = hindari — isolator karet memutus getaran sebelum masuk bangunan. 制振 (seishin) = kendalikan — damper menyerap energi di dalam. 耐震 (taishin) = tahan — struktur sendiri diperkuat. Tiga strategi berbeda: hindari → serap → tahan.',
   },
   {
-    term: '治水 vs 利水',
+    term: '治水 vs 利水《ちすい vs りすい》',
     track: 'common',
     furi: 'ちすい vs りすい',
     confusionType: 'kata',
@@ -188,7 +188,7 @@ export const DANGER_PAIRS = [
     explanation: '治 (osaeru = menekan/mengendalikan) vs 利 (ri = keuntungan/manfaat). 治水 = kendalikan air dari bencana. 利水 = ambil manfaat dari air. Bendungan bisa punya kedua fungsi tapi tujuan rancangnya beda.',
   },
   {
-    term: '圧着ペンチ 赤 vs 黄',
+    term: '圧着ペンチ 赤 vs 黄《あっちゃくペンチ あか vs き》',
     track: 'lifeline',
     furi: 'あっちゃくペンチ あか vs き',
     confusionType: 'angka',
@@ -200,7 +200,7 @@ export const DANGER_PAIRS = [
     explanation: 'Warna berbeda = standar JIS berbeda = ukuran dies berbeda. Merah (赤) untuk terminal kabel berinsulasi (圧着端子). Kuning (黄) untuk ring sleeve sambungan kabel (リングスリーブ). Pakai yang salah = sambungan tidak kuat = bahaya kebakaran.',
   },
   {
-    term: '軍手 + ねじ切り機',
+    term: '軍手 + ねじ切り機《ぐんて + ねじきりき》',
     track: 'lifeline',
     furi: 'ぐんて + ねじきりき',
     confusionType: 'prosedur',
