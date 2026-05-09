@@ -1,18 +1,6 @@
 // src/hooks/useStableContextValue.js
-// ENG-13: Memoizes a context value object based on deps array.
-// Adds dev-only console warning if deps array length changes (structural bug indicator).
-import { useMemo, useRef } from 'react';
-
-export function useStableContextValue(buildFn, deps) {
-  if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const lenRef = useRef(null);
-    if (lenRef.current !== null && lenRef.current !== deps.length) {
-      // eslint-disable-next-line no-console
-      console.warn('[useStableContextValue] deps length changed — possible deps array bug');
-    }
-    lenRef.current = deps.length;
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo(buildFn, deps);
-}
+// ENG-13: Named marker for stable context value pattern.
+// NOTE: react-hooks/exhaustive-deps requires useMemo deps to be inline array literals,
+// so this cannot wrap useMemo directly. Each context uses useMemo inline instead.
+// This export exists for documentation/searchability — used nowhere at runtime.
+export const STABLE_CONTEXT_VALUE = 'ENG-13';
