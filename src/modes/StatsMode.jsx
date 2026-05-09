@@ -7,36 +7,12 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
+import { calcReadiness } from '../utils/session-analytics.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ProgressRing from '../components/ProgressRing.jsx';
 import StudyHeatmap from '../components/StudyHeatmap.jsx';
 import S from './modes.module.css';
 import ST from './StatsMode.module.css';
-
-function calcReadiness({ srs, sessions = [], streakData }) {
-  const matureCards = srs?.stats?.mature ?? 0;
-  const totalCards = CARDS.length || 1;
-  const streak = streakData?.days ?? 0;
-
-  const quizSessions = sessions.filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode));
-  const avgQuizAccuracy = quizSessions.length > 0
-    ? quizSessions.reduce((acc, s) => acc + (s.total > 0 ? (s.correct / s.total) * 100 : 0), 0) / quizSessions.length
-    : 0;
-
-  const simSessions = sessions.filter((s) => s.mode === 'simulasi');
-  const bestSimScore = simSessions.length > 0
-    ? Math.max(...simSessions.map((s) => (s.total > 0 ? (s.correct / s.total) * 100 : 0)))
-    : 0;
-
-  const readiness = (
-    (matureCards / totalCards) * 40 +
-    (avgQuizAccuracy / 100) * 35 +
-    (Math.min(streak, 14) / 14) * 15 +
-    (bestSimScore > 65 ? bestSimScore / 100 : 0) * 10
-  );
-
-  return Math.min(100, Math.round(readiness));
-}
 
 export default function StatsMode({ known, unknown, quizWrong = {}, srs, streakData, sessions = [], onExit }) {
   const total = CARDS.length;
