@@ -3,7 +3,7 @@
 // Reads/writes via storage engine (prefs doc).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { applyTheme } from '../styles/theme.js';
 import { useToast } from '../components/Toast.jsx';
@@ -105,7 +105,7 @@ export function AppProvider({ children }) {
     });
   }, []);
 
-  const ctx = {
+  const ctx = useMemo(() => ({
     // Prefs
     track: prefs.track,
     setTrack,
@@ -123,7 +123,11 @@ export function AppProvider({ children }) {
     modeHistory, goBack, // A3: breadcrumb
     // Toast
     toast,
-  };
+  }), [
+    prefs, tab, setTab, mode, modeParams, goMode, exitMode, goTab,
+    modeHistory, goBack, setTrack, toggleTheme, completeOnboarding,
+    setDailyGoal, setPref, toast,
+  ]);
 
   return <AppCtx.Provider value={ctx}>{children}</AppCtx.Provider>;
 }
