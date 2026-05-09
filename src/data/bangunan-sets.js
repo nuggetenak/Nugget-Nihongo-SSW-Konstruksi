@@ -1,6 +1,6 @@
-// ─── docs/seeds/bangunan-sets-seed.js ─────────────────────────────────────────
-// SEED DATA for Phase B — Copy to src/data/bangunan-sets.js
-// 3 sets × 15 questions = 45 questions (minimum viable)
+// ─── data/bangunan-sets.js ────────────────────────────────────────────────────
+// 3 quiz sets × 15 questions = 45 questions · track: kenchiku
+// Source: Phase B seed · BANGUNAN_SETS exported for BangunanMode
 //
 // Every question checked against LSP Content Authoring Standard.
 // Content sources: JAC textbook Ch.6–8, JAC official 実技 questions

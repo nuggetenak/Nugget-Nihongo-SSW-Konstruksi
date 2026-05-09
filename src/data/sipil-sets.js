@@ -1,6 +1,6 @@
-// ─── docs/seeds/sipil-sets-seed.js ────────────────────────────────────────────
-// SEED DATA for Phase B — Copy to src/data/sipil-sets.js
-// 3 sets × 15 questions = 45 questions (minimum viable)
+// ─── data/sipil-sets.js ───────────────────────────────────────────────────────
+// 3 quiz sets × 15 questions = 45 questions · track: doboku
+// Source: Phase B seed · SIPIL_SETS exported for SipilMode
 //
 // Every question has been checked against the LSP Content Authoring Standard:
 // ✅ F1 — TSA justification (on-site scenario)
