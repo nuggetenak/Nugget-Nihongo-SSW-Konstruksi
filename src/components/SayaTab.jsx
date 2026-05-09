@@ -11,7 +11,8 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import ProgressRing from './ProgressRing.jsx';
 import { buildAchievementState, evaluateAchievements } from '../utils/achievements.js';
-import { getDailyChallenge, todayStr } from '../utils/daily-challenge.js';
+import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
+import { todayStr } from '../utils/date.js';
 
 const TRACK_LABELS = {
   doboku:   '⛏ Teknik Sipil · 土木',
@@ -67,12 +68,7 @@ export default function SayaTab() {
 
   // F2: Daily Challenge
   const today = todayStr();
-  const dailyChallengeQ = useMemo(() => getDailyChallenge(today), [today]);
-  const dcStorageKey = `ssw-dc-${today}`;
-  const [dcAnswered, setDcAnswered] = useState(() => {
-    try { return JSON.parse(sessionStorage.getItem(dcStorageKey)) ?? null; } catch { return null; }
-  });
-  const [dcSelected, setDcSelected] = useState(null);
+  const { question: dailyChallengeQ, answered: dcAnswered, submit: submitChallenge } = useDailyChallenge();
 
   // D1: Inline edit states — replace prompt() for mobile Android
   const [editingGoal, setEditingGoal] = useState(false);
@@ -209,14 +205,11 @@ export default function SayaTab() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {dailyChallengeQ.options.map((opt, i) => (
                     <button key={i} onClick={() => {
-                      const correct = i === dailyChallengeQ.answer;
-                      setDcSelected(i);
-                      setDcAnswered({ correct, selected: i });
-                      sessionStorage.setItem(dcStorageKey, JSON.stringify({ correct, selected: i }));
-                      toast.show(correct ? '✅ Benar! Hebat!' : '❌ Salah — coba lagi besok');
+                      submitChallenge(i, dailyChallengeQ.answer);
+                      toast.show(i === dailyChallengeQ.answer ? '✅ Benar! Hebat!' : '❌ Salah — coba lagi besok');
                     }}
-                      disabled={dcSelected !== null}
-                      style={{ padding: '8px 12px', fontSize: 12, fontFamily: 'inherit', borderRadius: 8, cursor: dcSelected !== null ? 'default' : 'pointer', textAlign: 'left', border: `1px solid ${dcSelected !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correctBorder)' : i === dcSelected ? 'var(--ssw-wrongBorder)' : 'var(--ssw-border)') : 'var(--ssw-border)'}`, background: dcSelected !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correctBg)' : i === dcSelected ? 'var(--ssw-wrongBg)' : 'var(--ssw-surface)') : 'var(--ssw-surface)', color: dcSelected !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correct)' : i === dcSelected ? 'var(--ssw-wrong)' : 'var(--ssw-textDim)') : 'var(--ssw-text)' }}>
+                      disabled={dcAnswered !== null}
+                      style={{ padding: '8px 12px', fontSize: 12, fontFamily: 'inherit', borderRadius: 8, cursor: dcAnswered !== null ? 'default' : 'pointer', textAlign: 'left', border: `1px solid ${dcAnswered !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correctBorder)' : i === dcAnswered.selected ? 'var(--ssw-wrongBorder)' : 'var(--ssw-border)') : 'var(--ssw-border)'}`, background: dcAnswered !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correctBg)' : i === dcAnswered.selected ? 'var(--ssw-wrongBg)' : 'var(--ssw-surface)') : 'var(--ssw-surface)', color: dcAnswered !== null ? (i === dailyChallengeQ.answer ? 'var(--ssw-correct)' : i === dcAnswered.selected ? 'var(--ssw-wrong)' : 'var(--ssw-textDim)') : 'var(--ssw-text)' }}>
                       {opt}
                     </button>
                   ))}
