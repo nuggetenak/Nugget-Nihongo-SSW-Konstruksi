@@ -33,7 +33,7 @@ function calcReadiness({ srs, sessions = [], streakData }) {
     (avgQuizAccuracy / 100) * 35 +
     (Math.min(streak, 14) / 14) * 15 +
     (bestSimScore > 65 ? bestSimScore / 100 : 0) * 10
-  ) * 100;
+  );
 
   return Math.min(100, Math.round(readiness));
 }
