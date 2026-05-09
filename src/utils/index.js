@@ -14,3 +14,7 @@ export { generateQuiz } from './quiz-generator.js';
 export { haptic } from './haptic.js';
 // Phase F: Web Speech API (already in tree, now re-exported for completeness)
 export { speakJP, stopSpeech, canSpeak } from './speak.js';
+// ENG-2: shared constants
+export { TOTAL_CARDS, HALF_DECK_THRESHOLD, FULL_DECK_THRESHOLD,
+         SCORED_QUIZ_MODES, SRS_MATURE_DAYS, SESSIONS_CAP,
+         DAILY_CHALLENGE_KEY } from './constants.js';
