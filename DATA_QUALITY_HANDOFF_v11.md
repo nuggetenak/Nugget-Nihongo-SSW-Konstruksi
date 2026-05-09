@@ -302,7 +302,41 @@ All cross-refs verified valid (v5). Schema migration pending (P16). `hasPhoto`: 
 | **P20** | Rename sipil→doboku, bangunan→kenchiku | all code files | full codebase | ✅ DONE v7 |
 | **P21** | Populate jac-doboku + jac-kenchiku | stubs | After PDF | PENDING |
 
-**Next agent should start at P11 (CSV q+opts ruby, 265q / 1090 opts bare kanji). Then P12 (wayground q+opts).**
+---
+
+## P13 EXECUTION NOTES (Session 4 Planning)
+
+### Analysis Complete
+- **Structure**: 6 quiz sets (doboku-01/02/03, kenchiku-01/02/03), 90 total questions
+- **Current state**: All q and opts are **bare kanji** (0% ruby coverage)
+- **Missing fields**: `hint` (all 90), `id` (per-question, 1-indexed per set)
+- **exp quality**: ✅ Already good (~150 chars avg, real Indonesian)
+
+### P13 Requirements
+1. **Ruby annotation**: Apply to all 90 q + ~360 opts
+   - Reuse OVERRIDES from P11/P12 (87 terms)
+   - Add site-specific: 土工事, 掘削, 転圧, 圧力, 機械, etc.
+2. **Hint field**: Generate 90 short Indonesian paraphrases
+   - Format: "Apa tentang X?" or direct question paraphrase
+   - Source: Use existing `exp`, `opts_id`, `desc` for context
+   - Example: Q="掘削作業を..." → Hint="Pengecekan sebelum penggalian apa?"
+3. **ID field**: Add sequential 1-indexed IDs per set
+   - doboku-01: id=1 to 15
+   - doboku-02: id=1 to 15
+   - doboku-03: id=1 to 15 (same for kenchiku-01/02/03)
+
+### Recommended Approach for Next Agent
+1. Extract all 90 (q, opts_id, exp) tuples → JSON
+2. Use API/manual mapping to generate hints preserving Indonesian idiom
+3. Build FINAL_OVERRIDES (87 + site-specific)
+4. Rebuild quiz-sets.js using regex substitution with id + hint injection
+5. Verify: all q/opts have ruby, all have id + hint
+
+### Notes
+- Don't modify `cat`, `desc`, `exp` fields — these are good
+- Preserve opts_id, ans exactly as-is
+- Check for any existing id/hint fields (expect zero)
+- No double-ruby violations (use careful regex boundaries)
 
 ---
 
