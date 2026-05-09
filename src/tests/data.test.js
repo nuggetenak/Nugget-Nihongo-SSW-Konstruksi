@@ -411,8 +411,9 @@ describe('CSV_SETS track fields (v4.19.2)', () => {
 });
 
 describe('QUIZ_SETS + getQuizSetsForTrack (v4.19.0+)', () => {
-  it('QUIZ_SETS has all 38 sets (26 wayground + 12 csv)', () => {
-    expect(QUIZ_SETS.length).toBe(38);
+  it('QUIZ_SETS has all 44 sets (26 wayground + 12 csv + 3 sipil + 3 bangunan)', () => {
+    // REF-9: sipil + bangunan sets absorbed into quiz-sets.js (v4.21.0)
+    expect(QUIZ_SETS.length).toBe(44);
   });
 
   it('all set IDs are unique', () => {
@@ -434,17 +435,20 @@ describe('QUIZ_SETS + getQuizSetsForTrack (v4.19.0+)', () => {
     expect(ids).toContain('cp01');  // csv lifeline praktik
   });
 
-  it('getQuizSetsForTrack(doboku) includes common sets only', () => {
+  it('getQuizSetsForTrack(doboku) includes common + sipil sets', () => {
+    // REF-9: doboku now also includes sipil sets
     const sets = getQuizSetsForTrack('doboku');
-    expect(sets.every((s) => s.track === 'common')).toBe(true);
-    // wt sets should be visible (track:common)
+    expect(sets.some((s) => s.track === 'common')).toBe(true);
     expect(sets.some((s) => s.id.startsWith('wt'))).toBe(true);
+    expect(sets.some((s) => s.id.startsWith('sipil'))).toBe(true);
   });
 
-  it('getQuizSetsForTrack(kenchiku) returns common sets', () => {
+  it('getQuizSetsForTrack(kenchiku) includes common + bangunan sets', () => {
+    // REF-9: kenchiku now also includes bangunan sets
     const sets = getQuizSetsForTrack('kenchiku');
     expect(sets.length).toBeGreaterThan(0);
-    expect(sets.every((s) => s.track === 'common')).toBe(true);
+    expect(sets.some((s) => s.track === 'common')).toBe(true);
+    expect(sets.some((s) => s.id.startsWith('bangunan'))).toBe(true);
   });
 });
 
