@@ -1,4 +1,4 @@
-// SSW Flashcards: Wayground Quiz Sets — 12 set soal teknis dari Wayground/sensei
+// SSW Flashcards: Wayground Quiz Sets — 26 sets / 659 questions · track: common(10) + lifeline(16)
 // 6 Teori sets (wt1-wt10) + 3 Praktik sets (wp1-wp3) + 3 Vocab sets (wg7-wg12)
 // IMPORTANT: ans field is 0-BASED (ans:0 = first option)
 
