@@ -7,3 +7,5 @@ export { useSRS } from './useSRS.js';
 export { useDebounce } from './useDebounce.js';
 // FE-04-C: focus trap for overlays/dialogs
 export { useFocusTrap } from './useFocusTrap.js';
+
+export { useSessionTimer } from './useSessionTimer.js';
