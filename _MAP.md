@@ -1,8 +1,10 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (hygiene passes complete — v4.19.5 final)
-> **Version:** v4.19.5 — all phases done, all hygiene passes done
-> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, known gaps)
+> **Last updated:** 2026-05-09 by Agent Sonnet 4.6 (proposal pass 14 approved; 19 task files in docs/tasks/; v4.20.x queued)
+> **Version:** v4.19.5 (stable) — v4.20.x queued
+> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
+> **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
+> **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
 > **Archive index:** `docs/archive/ARCHIVE-INDEX.md`
 
 ---
