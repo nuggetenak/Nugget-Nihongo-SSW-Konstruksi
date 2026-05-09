@@ -9,6 +9,7 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { todayStr, prevDayStr } from '../utils/date.js';
+import { SESSIONS_CAP } from '../utils/constants.js';
 
 const ProgressCtx = createContext(null);
 
@@ -137,7 +138,7 @@ export function ProgressProvider({ children }) {
       const sessions = [
         ...(prev.sessions ?? []),
         { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
-      ].slice(-180); // keep last 180 sessions (~6 months for heatmap)
+      ].slice(-SESSIONS_CAP); // keep last SESSIONS_CAP sessions (~6 months for heatmap)
       return { ...prev, sessions };
     });
   }, [setProg]);
