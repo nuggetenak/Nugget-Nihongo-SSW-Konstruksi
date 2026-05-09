@@ -1,4 +1,4 @@
-// ─── Dashboard.jsx v4.0 — UI Overhaul (zero inline styles) ───────────────────
+// ─── Dashboard.jsx ──────────────────────────────────────────────────────────
 import { useMemo } from 'react';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { generateDailyMission, isMissionDoneToday } from '../utils/daily-mission.js';

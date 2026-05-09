@@ -368,7 +368,7 @@ describe('JAC_TEORI / JAC_LIFELINE split', () => {
   });
 });
 
-describe('WAYGROUND_SETS track fields (v4.19.2)', () => {
+describe('WAYGROUND_SETS track fields', () => {
   it('wt1-wt10 have track:common', () => {
     const teori = WAYGROUND_SETS.filter((s) => s.id.startsWith('wt'));
     expect(teori.length).toBe(10);
@@ -392,7 +392,7 @@ describe('WAYGROUND_SETS track fields (v4.19.2)', () => {
   });
 });
 
-describe('CSV_SETS track fields (v4.19.2)', () => {
+describe('CSV_SETS track fields', () => {
   it('ct* sets have track:common', () => {
     const teori = CSV_SETS.filter((s) => s.id.startsWith('ct'));
     expect(teori.length).toBe(6);
@@ -410,9 +410,9 @@ describe('CSV_SETS track fields (v4.19.2)', () => {
   });
 });
 
-describe('QUIZ_SETS + getQuizSetsForTrack (v4.19.0+)', () => {
+describe('QUIZ_SETS + getQuizSetsForTrack', () => {
   it('QUIZ_SETS has all 44 sets (26 wayground + 12 csv + 3 sipil + 3 bangunan)', () => {
-    // REF-9: sipil + bangunan sets absorbed into quiz-sets.js (v4.21.0)
+    
     expect(QUIZ_SETS.length).toBe(44);
   });
 

@@ -1,5 +1,5 @@
 // ─── tests/data-integrity.test.js ────────────────────────────────────────────
-// C1-C9: Data integrity suite (v4.21.0)
+// Data integrity test suite.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
 import { CARDS } from '../data/cards.js';

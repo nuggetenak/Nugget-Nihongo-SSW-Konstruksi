@@ -7,7 +7,7 @@ export const STORAGE_VERSION = 3;
 
 export const DOCS = {
   progress: 'ssw-progress', // known/unknown/starred/scores/streak/daily/recent
-  srs: 'ssw-srs-data',      // all FSRS card states (was 1438+ separate keys)
+  srs: 'ssw-srs-data',      // all FSRS card states
   prefs: 'ssw-prefs',       // track, theme, onboarded, lastMode, dailyGoal
 };
 
