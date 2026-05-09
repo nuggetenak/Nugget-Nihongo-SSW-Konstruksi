@@ -3,6 +3,8 @@
 // Returns a recommendation object based on current user state.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { getAvgAccuracy } from './session-analytics.js';
+
 /**
  * @param {{ srsState, sessions, streak, examDate }} opts
  * @returns {{ mode: string, icon: string, label: string, reason: string }}
@@ -18,13 +20,8 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
     daysUntilExam = Math.ceil(diff / (1000 * 60 * 60 * 24));
   }
 
-  // Average quiz accuracy from recent sessions (last 10)
-  const recentQuiz = sessions
-    .filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode) && s.total > 0)
-    .slice(-10);
-  const avgAcc = recentQuiz.length > 0
-    ? recentQuiz.reduce((acc, s) => acc + (s.correct / s.total) * 100, 0) / recentQuiz.length
-    : null;
+  // Average quiz accuracy from recent scored sessions (last 10) — N2 fix
+  const avgAcc = getAvgAccuracy(sessions, 10);
 
   // Best sim score
   const simSessions = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
