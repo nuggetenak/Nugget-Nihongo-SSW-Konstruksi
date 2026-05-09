@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v9
-**Updated by:** Data Quality Agent (May 2026 — session 2)
-**Supersedes:** v1–v8 (this is the canonical single-source handoff)
+**Updated by:** Data Quality Agent (May 2026 — session 3)
+**Supersedes:** v1–v9 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `79816a1` — P5 completed and pushed
+**Last commit:** `45db60b` — P6 completed and pushed
 
 ---
 
@@ -90,6 +90,8 @@ New cards from JAC Doboku PDF → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`. Kenchik
 > **P4 note (v8):** 220 pure-kana maru `（kana）` → `《kana》` converted. 119 maru patterns remain — these contain non-reading content (synonyms, abbreviations, definitions) and are intentionally preserved as `（）`. Do NOT bulk-convert remaining maru.
 
 > **P5 note (v9):** 1,020 bare-kanji jp fields annotated with full-compound ruby `jp《furi》`. 65 maru cases skipped — kanji inside `（漢字）` are synonyms/expansions, correctly preserved. Zero bare-kanji jp fields remain in either source file.
+
+> **P6 note (v10):** 153 multi-part `jp` fields (109 common + 44 lifeline) annotated with per-segment ruby. All kanji segments across `・`, ` vs `, `／`, `：` separators now have their own `《》`. Zero multi-segment jp fields with unannotated kanji remain.
 
 ### 1B. `furi` Typos — FIXED in v7
 | id | Was | Fixed to |
@@ -280,7 +282,7 @@ All cross-refs verified valid (v5). Schema migration pending (P16). `hasPhoto`: 
 | **P3** | Fix 2 furi typos | source | ids 532, 230 | ✅ DONE v7 |
 | **P4** | Convert `jp（kana）` → `jp《kana》` | source | **220 converted** (119 maru retained — non-reading) | ✅ DONE v8 |
 | **P5** | Add 《》 ruby to bare kanji jp | source | **1020 annotated; 65 maru-kanji skipped** | ✅ DONE v9 |
-| **P6** | Add ruby per-segment multi-part jp | source | ~200 cards | OPEN |
+| **P6** | Add ruby per-segment multi-part jp | source | **153 annotated** | ✅ DONE v10 |
 | **P7** | Align furi separators multi-part | source | 211 cards | OPEN |
 | **P7b** | Add `CONFUSION_PAIRS` to index.js | `index.js` | 1 line | ✅ DONE v7 |
 | **P7c** | Rename wg10→wp5; fix all titles | `wayground-sets.js` | 1 ID + 9 titles | ✅ DONE v7 |
@@ -300,7 +302,7 @@ All cross-refs verified valid (v5). Schema migration pending (P16). `hasPhoto`: 
 | **P20** | Rename sipil→doboku, bangunan→kenchiku | all code files | full codebase | ✅ DONE v7 |
 | **P21** | Populate jac-doboku + jac-kenchiku | stubs | After PDF | PENDING |
 
-**Next agent should start at P6 (add ruby per-segment to multi-part jp, ~200 cards). Or P11 (CSV q+opts ruby, 265q / 1090 opts).**
+**Next agent should start at P11 (CSV q+opts ruby, 265q / 1090 opts bare kanji). Then P12 (wayground q+opts).**
 
 ---
 
@@ -340,6 +342,9 @@ All cross-refs verified valid (v5). Schema migration pending (P16). `hasPhoto`: 
 | `src/data/source/cards-common.js` | P5: 620 bare-kanji jp annotated; 44 maru-kanji skipped |
 | `src/data/source/cards-lifeline.js` | P5: 400 bare-kanji jp annotated; 21 maru-kanji skipped |
 | `src/data/cards.js` | P5: Regenerated (merge-cards) — 1443 cards |
+| `src/data/source/cards-common.js` | P6: 109 multi-part jp fields annotated per-segment |
+| `src/data/source/cards-lifeline.js` | P6: 44 multi-part jp fields annotated per-segment |
+| `src/data/cards.js` | P6: Regenerated (merge-cards) — 1443 cards |
 
 ---
 
