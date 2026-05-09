@@ -54,7 +54,7 @@ export default function FlipCard({
         <div
           className={`fc-face ${S.front}`}
           onClick={() => { haptic.flip(); onFlip(); }}
-          style={{ border: `1.5px solid ${borderColor}` }}
+          style={{ border: `1.5px solid ${borderColor}`, pointerEvents: flipped ? 'none' : 'auto' }}
         >
           {cat && (
             <span
@@ -103,6 +103,7 @@ export default function FlipCard({
             background: `linear-gradient(145deg, ${catColor}dd 0%, ${catColor}88 100%)`,
             border: `1.5px solid ${catColor}88`,
             boxShadow: `0 8px 40px ${catColor}44, 0 2px 12px ${catColor}22`,
+            pointerEvents: flipped ? 'auto' : 'none',
           }}
         >
           <div className={S.backHeader}>
