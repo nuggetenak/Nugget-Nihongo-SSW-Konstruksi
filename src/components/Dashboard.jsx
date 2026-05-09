@@ -1,5 +1,6 @@
 // ─── Dashboard.jsx v4.0 — UI Overhaul (zero inline styles) ───────────────────
 import { useMemo } from 'react';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { generateDailyMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
@@ -7,11 +8,7 @@ import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import ProgressRing from './ProgressRing.jsx';
 import { recommendMode } from '../utils/recommend-mode.js';
-import { todayStr } from '../utils/date.js';
 
-const today = () => todayStr();
-const getStreak     = () => storageGet('progress')?.streakData  ?? { days: 0, lastDate: null };
-const getDailyCount = () => { const dc = storageGet('progress')?.dailyCount ?? { count: 0, date: '' }; return dc.date === today() ? dc.count : 0; };
 const getRecent     = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
 
 // A2: Smart recommendation — replaces simple getQuickStart heuristics
@@ -45,8 +42,7 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
   const dueCount = srs?.dueCount ?? 0;
 
   const trackInfo   = T.track[track] || T.track.doboku;
-  const streak      = useMemo(() => getStreak(), []);
-  const dailyCount  = useMemo(() => getDailyCount(), []);
+  const { streakData, dailyCount, starred } = useProgress();
   const recentIds   = useMemo(() => getRecent(), []);
   const recentCards = useMemo(() => recentIds.map((id) => CARDS.find((c) => c.id === id)).filter(Boolean).slice(0, 3), [recentIds]);
   const examDate   = storageGet('prefs')?.examDate ?? null;
@@ -83,13 +79,13 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
       </div>
 
       {/* ── Streak hero ── */}
-      {streak.days >= 2 && (
+      {streakData.days >= 2 && (
         <div className={s.streakHero}>
           <span className={s.streakEmoji}>🔥</span>
           <div>
-            <div className={s.streakDays}>{streak.days} hari berturut-turut!</div>
+            <div className={s.streakDays}>{streakData.days} hari berturut-turut!</div>
             <div className={s.streakSub}>
-              {dailyCount > 0 ? `+${dailyCount} kartu hari ini` : 'Jaga streakmu — belajar hari ini!'}
+              {dailyCount.count > 0 ? `+${dailyCount.count} kartu hari ini` : 'Jaga streakmu — belajar hari ini!'}
             </div>
           </div>
         </div>
@@ -121,11 +117,11 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
           <div className={s.ringKnown}>{knownN} kartu hafal</div>
           <div className={s.ringDetail}>{unknownN} belum · {total - knownN - unknownN} sisa</div>
           <div className={s.ringPct}>{pct}% selesai</div>
-          {streak.days > 0 && streak.days < 2 && (
-            <div className={s.ringStreak}>🔥 {streak.days} hari streak</div>
+          {streakData.days > 0 && streakData.days < 2 && (
+            <div className={s.ringStreak}>🔥 {streakData.days} hari streak</div>
           )}
-          {dailyCount > 0 && (
-            <div className={s.ringDaily}>+{dailyCount} hari ini</div>
+          {dailyCount.count > 0 && (
+            <div className={s.ringDaily}>+{dailyCount.count} hari ini</div>
           )}
         </div>
       </div>
@@ -170,6 +166,15 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
           </button>
         ))}
       </div>
+
+      {/* F1: Starred-cards quiz button */}
+      {starred.size > 0 && (
+        <button className={s.quickTile} style={{ width: '100%', marginTop: 8 }}
+          onClick={() => onNavigate('kuis', { filterIds: [...starred] })}>
+          <span className={s.quickIcon}>⭐</span>
+          <span className={s.quickLabel}>Kuis Bintang ({starred.size})</span>
+        </button>
+      )}
 
       {/* ── Recent cards ── */}
       {recentCards.length > 0 && (
