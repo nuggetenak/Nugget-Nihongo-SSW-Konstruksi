@@ -170,8 +170,8 @@ export default function ModeRouter() {
   if (!ModeComponent) return null;
 
   // Phase C: Wrap onFinish to also record session + check mission completion
-  const makeFinishHandler = (modeName, extra) => ({ correct = 0, total = 0, maxStreak = 0, maxWrongStreak = 0 } = {}) => {
-    recordSession({ mode: modeName, correct, total });
+  const makeFinishHandler = (modeName, extra) => ({ correct = 0, total = 0, durationMs = 0, maxStreak = 0, maxWrongStreak = 0 } = {}) => {
+    recordSession({ mode: modeName, correct, total, durationMs });
 
     // C.3: Check if this mode matches the daily mission
     const mission = getMission();
@@ -186,8 +186,8 @@ export default function ModeRouter() {
 
   // sessionEnd: lightweight version for modes that manage their own score state.
   // Passed as onSessionEnd prop — modes call it from their existing handleFinish.
-  const makeSessionEnd = (modeName) => ({ correct = 0, total = 0 } = {}) => {
-    recordSession({ mode: modeName, correct, total });
+  const makeSessionEnd = (modeName) => ({ correct = 0, total = 0, durationMs = 0 } = {}) => {
+    recordSession({ mode: modeName, correct, total, durationMs });
     const mission = getMission();
     if (mission && mission.mode === modeName && !isMissionDoneToday()) {
       completeMission();
