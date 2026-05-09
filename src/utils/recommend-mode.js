@@ -54,5 +54,16 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
   if (dueCount > 0) {
     return { mode: 'ulasan', icon: '🔁', label: 'Ulasan SRS', reason: `${dueCount} kartu siap diulang` };
   }
+  if (matureCount > 300 && avgAcc !== null && avgAcc > 70) {
+    const dayIdx = Math.floor(Date.now() / 86400000) % 3;
+    const rotation = ['produksi', 'dengar', 'mirip'];
+    const mode = rotation[dayIdx];
+    return {
+      mode,
+      icon: '🔄',
+      label: 'Mode Rotasi',
+      reason: 'Kuasaan kosakata sudah baik — variasikan latihan',
+    };
+  }
   return { mode: 'kuis', icon: '❓', label: 'Mode Kuis', reason: 'Uji kemampuanmu dengan kuis baru hari ini' };
 }
