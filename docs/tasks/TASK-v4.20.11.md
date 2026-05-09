@@ -1,5 +1,5 @@
 # TASK v4.20.11 — N24, N25: Direct Import Fixes
-**Status:** READY | **Effort:** Low | **Depends on:** can be done any time after v4.20.9
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** can be done any time after v4.20.9
 
 ## Items
 - **N24** (P2) — `VocabMode.jsx` imports `WAYGROUND_SETS` directly → misses 300 CSV questions

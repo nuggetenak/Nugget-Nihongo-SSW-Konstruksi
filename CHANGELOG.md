@@ -1,3 +1,10 @@
+## [4.20.11] - 2026-05-09
+
+### fix: direct-import corrections
+
+- N24: VocabMode — WAYGROUND_SETS → QUIZ_SETS (includes 300 CSV questions in vocab pool)
+- N25: JACMode + SimulasiMode — JAC_OFFICIAL via data/index.js barrel
+
 ## [4.20.10] - 2026-05-09
 
 ### fix: DB-1, DB-6, DB-7, DB-8

@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.10: DB-1/6/7/8)
-> **Version:** v4.20.10
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.11: N24/N25)
+> **Version:** v4.20.11
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -200,7 +200,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 
 | Metric | Value |
 |--------|-------|
-| Version | **4.20.10** |
+| Version | **4.20.11** |
 | Tests | **429** (37 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
@@ -320,6 +320,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.20.11 | Sonnet 4.6: N24 VocabMode QUIZ_SETS; N25 JACMode+SimulasiMode barrel import |
 | 2026-05-09 | v4.20.10 | Sonnet 4.6: DB-1 photo banner in QuizShell; DB-6 empty track categories → placeholder; DB-7 intentional null kartu annotated; DB-8 covered by ENG-9 |
 | 2026-05-09 | v4.20.9 | Sonnet 4.6: DB-2 JACMode filterIds guard; DB-3/4/5 data headers; ENG-9 validate-data.mjs prebuild hook; ENG-10 audit-related-ids.mjs; patched 22 broken JAC refs + 3 ANGKA_KUNCI refs → null |
 | 2026-05-09 | v4.20.8 | Sonnet 4.6: R1 ReviewMode dead state; R2 Dashboard streak/dailyCount from context; F1 starred quiz btn; F2 SumberMode produksi/kuisprod; F4 migration toast; N10 SprintMode duration-keyed bests; test fix ProgressProvider |
