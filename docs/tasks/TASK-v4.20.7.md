@@ -1,5 +1,5 @@
 # TASK v4.20.7 — ENG-5: useDailyChallenge hook
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.6 DONE
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.6 DONE
 
 ## Goal
 Fix N5: daily challenge answer uses `sessionStorage` — lost on tab close/refresh. Move to storage engine.

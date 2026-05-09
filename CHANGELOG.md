@@ -1,3 +1,12 @@
+## [4.20.7] - 2026-05-09
+
+### feat: useDailyChallenge hook — persists to storage engine (ENG-5, N5)
+
+- ENG-5: Added `dailyChallengeLog: {}` to `DEFAULTS.prefs` in schema
+- Created `src/hooks/useDailyChallenge.js` — encapsulates daily challenge state, persists answer to storage engine instead of sessionStorage
+- `hooks/index.js`: barrel-exports `useDailyChallenge`
+- `SayaTab.jsx`: replaced inline sessionStorage state (8+ lines) with `useDailyChallenge()` hook; removed `dcSelected` state; uses `dcAnswered.selected` for option highlighting
+
 ## [4.20.6] - 2026-05-09
 
 ### fix: wrong-answer + score writes via storage engine (N3, N7, N16, REF-3, N20, REF-3b, N11, R3)

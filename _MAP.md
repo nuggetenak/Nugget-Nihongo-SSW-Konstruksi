@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.6: N3/N7/N16/REF-3/N20/REF-3b/N11/R3 wrong+score via engine)
-> **Version:** v4.20.6
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.7: ENG-5 useDailyChallenge hook, N5 sessionStorage→engine)
+> **Version:** v4.20.7
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -320,6 +320,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.20.7 | Sonnet 4.6: ENG-5 useDailyChallenge hook; N5 SayaTab sessionStorage→engine; dailyChallengeLog in DEFAULTS.prefs; 429 tests |
 | 2026-05-09 | v4.20.6 | Sonnet 4.6: N3 ProductionMode recordWrong; N7 JACMode wrongCounts engine; N16 QuizProduksi recordWrong; REF-3 VocabMode/WaygroundMode wrong via engine; N20+REF-3b saveScore all 3 modes; N11 sprintBests DEFAULTS; R3 FocusMode _unknown removed |
 | 2026-05-01 | — | Opus 4.6 (Crunchy): Blueprint v6 — full codebase audit |
 | 2026-05-02 | v4.0.0 | Sonnet 4.6: Phases A–G (storage v3, content, daily mission, export, audio, QA) |
