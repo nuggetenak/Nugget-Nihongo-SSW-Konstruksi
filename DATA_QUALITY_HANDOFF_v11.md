@@ -1,9 +1,9 @@
-# SSW Konstruksi — Data Quality Handoff v9
-**Updated by:** Data Quality Agent (May 2026 — session 3)
-**Supersedes:** v1–v9 (this is the canonical single-source handoff)
+# SSW Konstruksi — Data Quality Handoff v11
+**Updated by:** Data Quality Agent (May 2026 — session 4)
+**Supersedes:** v1–v10 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `45db60b` — P6 completed and pushed
+**Last commit:** `9d4929f` — P11 + P12 completed and pushed
 
 ---
 
@@ -290,8 +290,8 @@ All cross-refs verified valid (v5). Schema migration pending (P16). `hasPhoto`: 
 | **P8** | Add ruby to `termA/termB` | `confusion-pairs.js` | 28 pairs | ✅ DONE v8 |
 | **P9** | Add ruby to `term` in danger-pairs | `danger-pairs.js` | 17/20 (3 kana/romaji skipped) | ✅ DONE v8 |
 | **P10** | Add ruby to `soal` in angka-kunci | `angka-kunci.js` | 29 items | ✅ DONE v8 |
-| **P11** | Add ruby to CSV `q` + `opts` | `csv-sets.js` | 265q, 1090 opts | OPEN |
-| **P12** | Add ruby to wayground bare-kanji `q`+`opts` | `wayground-sets.js` | ~151q, ~164 opts | OPEN |
+| **P11** | Add ruby to CSV `q` + `opts` | `csv-sets.js` | **339q, 409 opts** | ✅ DONE v11 |
+| **P12** | Add ruby to wayground bare-kanji `q`+`opts` | `wayground-sets.js` | **488q, 276 opts** | ✅ DONE v11 |
 | **P13** | Add ruby + hint + id to quiz-set inline q | `quiz-sets.js` | 90q, ~360 opts | OPEN |
 | **P14** | Expand real stub `exp` in teori/praktik sets | `wayground-sets.js` | ~28 stubs | OPEN |
 | **P15** | Replace "modul JAC" exp in CSV | `csv-sets.js` | 40 items | OPEN |
