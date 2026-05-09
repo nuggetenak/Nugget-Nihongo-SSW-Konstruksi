@@ -12,6 +12,7 @@ import { get as storageGet, set as storageSet } from '../../storage/engine.js';
 import ProgressBar from '../../components/ProgressBar.jsx';
 import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.jsx';
 import S from '../modes.module.css';
+import FC from './flashcard.module.css';
 
 import FlipCard   from './FlipCard.jsx';
 import RatingRow  from './RatingRow.jsx';
@@ -281,18 +282,20 @@ export default function FlashcardMode({
       )}
 
       {/* Nav row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginTop: 10 }}>
+      <div className={FC.navRow} style={{ marginTop: 10 }}>
         <button
           onClick={() => go(-1)} disabled={safeIdx === 0}
-          style={{ fontFamily: 'inherit', padding: '11px 8px', borderRadius: T.r.md, border: `1px solid ${T.border}`, background: T.surface, color: safeIdx === 0 ? T.textFaint : T.text, cursor: safeIdx === 0 ? 'default' : 'pointer', fontSize: 13, fontWeight: 600 }}
+          className={FC.navBtn}
+          style={{ opacity: safeIdx === 0 ? 0.4 : 1 }}
         >← Prev</button>
         <button
           onClick={flip}
-          style={{ fontFamily: 'inherit', padding: '11px 8px', borderRadius: T.r.md, border: 'none', background: T.accent, color: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 700, boxShadow: T.shadow.glow }}
+          className={FC.navFlip}
         >{flipped ? '🔄 Balik' : '👁️ Lihat'}</button>
         <button
           onClick={() => go(1)} disabled={safeIdx >= displayCards.length - 1}
-          style={{ fontFamily: 'inherit', padding: '11px 8px', borderRadius: T.r.md, border: `1px solid ${T.border}`, background: T.surface, color: safeIdx >= displayCards.length - 1 ? T.textFaint : T.text, cursor: safeIdx >= displayCards.length - 1 ? 'default' : 'pointer', fontSize: 13, fontWeight: 600 }}
+          className={FC.navBtn}
+          style={{ opacity: safeIdx >= displayCards.length - 1 ? 0.4 : 1 }}
         >Next →</button>
       </div>
 

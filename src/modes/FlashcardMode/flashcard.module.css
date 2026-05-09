@@ -64,7 +64,8 @@
 
 .ratingBtn {
   font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 13px 4px 11px;
+  padding: 14px 4px 12px;
+  min-height: 72px;
   border-radius: var(--r-lg);
   cursor: pointer;
   display: flex;
@@ -130,7 +131,8 @@
 
 .toolBtn {
   font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 8px 4px;
+  padding: 10px 4px;
+  min-height: 56px;
   border-radius: var(--r-md);
   cursor: pointer;
   font-size: 11px;
@@ -185,7 +187,7 @@
 
 .navBtn {
   font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 12px 8px;
+  padding: 14px 8px;
   border-radius: var(--r-lg);
   font-size: 13px;
   font-weight: 600;
@@ -199,7 +201,7 @@
 
 .navFlip {
   font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 12px 8px;
+  padding: 14px 8px;
   border-radius: var(--r-lg);
   font-size: 13px;
   font-weight: 800;

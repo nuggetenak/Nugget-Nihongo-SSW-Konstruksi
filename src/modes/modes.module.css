@@ -256,23 +256,26 @@
 
 .statCell {
   flex: 1;
-  padding: 8px 6px;
+  padding: 10px 6px;
   border-radius: var(--r-lg);
   text-align: center;
   /* bg/border set inline — per-stat color */
 }
 
 .statVal {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 900;
+  font-family: 'Syne', 'DM Sans', sans-serif;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
 .statLabel {
   font-size: var(--fs-micro);
   color: var(--ssw-textDim);
-  margin-top: 2px;
+  margin-top: 3px;
+  font-weight: 600;
 }
 
 /* ── Progress mini bar ── */

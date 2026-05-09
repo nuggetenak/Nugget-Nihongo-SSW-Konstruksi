@@ -14,52 +14,138 @@
 
 /* ── Session done screen ── */
 .doneScreen {
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.35s ease;
+  padding: 24px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doneHero {
+  text-align: center;
+  padding: 28px 20px 24px;
+  border-radius: var(--r-xxl);
+  border: 1px solid var(--ssw-border);
+  background: linear-gradient(160deg, rgba(245,158,11,0.06) 0%, transparent 100%);
+  width: 100%;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.doneHero::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.12), transparent);
+  pointer-events: none;
 }
 
 .doneEmoji {
-  font-size: 52px;
-  margin-bottom: 12px;
+  font-size: 58px;
+  margin-bottom: 10px;
+  display: block;
+  line-height: 1;
+  animation: bounceIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .doneTitle {
-  font-size: 20px;
+  font-size: 24px;
+  margin-bottom: 6px;
 }
 
 .doneSub {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--ssw-textMuted);
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  line-height: 1.5;
 }
 
 .doneMiniGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
-  margin-bottom: 24px;
+  width: 100%;
+  margin-bottom: 16px;
 }
 
 .doneMiniCard {
-  padding: 10px 6px;
-  border-radius: var(--r-md);
+  padding: 12px 6px 10px;
+  border-radius: var(--r-lg);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   text-align: center;
+  transition: transform var(--t-fast);
 }
 
+.doneMiniCard:active { transform: scale(0.96); }
+
 .doneMiniIcon {
-  font-size: 14px;
+  font-size: 16px;
+  margin-bottom: 2px;
 }
 
 /* doneMiniValue — color is dynamic per entry, kept inline */
 .doneMiniValue {
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 22px;
+  font-weight: 900;
   font-family: 'Syne', 'DM Sans', sans-serif;
+  line-height: 1;
+  margin-bottom: 3px;
 }
 
 .doneMiniLabel {
-  font-size: var(--fs-micro);
+  font-size: var(--fs-nano);
+  color: var(--ssw-textDim);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* ── Rating distribution (done screen) ── */
+.doneRatingSection {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.doneRatingLabel {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ssw-textDim);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.doneRatingGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.doneRatingCell {
+  text-align: center;
+  border-radius: var(--r-md);
+  padding: 10px 4px;
+}
+
+.doneRatingEmoji {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.doneRatingCount {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.doneRatingName {
+  font-size: 10px;
   color: var(--ssw-textDim);
 }
 

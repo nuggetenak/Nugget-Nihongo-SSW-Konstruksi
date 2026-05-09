@@ -135,10 +135,15 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
     }
 
     return (
-      <div className={`${S.pageCenter} ${R.doneScreen}`}>
-        <div className={R.doneEmoji}>{pct >= 70 ? '🏆' : '📚'}</div>
-        <h2 className={`${S.pageTitle} ${R.doneTitle}`}>Sesi selesai!</h2>
-        <div className={R.doneSub}>{sessionCorrect} dari {total} kartu dijawab dengan benar ({pct}%)</div>
+      <div className={R.doneScreen}>
+        {/* Hero card */}
+        <div className={R.doneHero}>
+          <div className={R.doneEmoji}>{pct >= 70 ? '🏆' : '📚'}</div>
+          <h2 className={`${S.pageTitle} ${R.doneTitle}`}>Sesi selesai!</h2>
+          <div className={R.doneSub}>{sessionCorrect} dari {total} kartu dijawab dengan benar ({pct}%)</div>
+        </div>
+
+        {/* SRS stats grid */}
         {srs.stats && (
           <div className={R.doneMiniGrid}>
             {[{ n: srs.stats.mature, label: 'Matang', icon: '🌟', color: T.correct },
@@ -153,26 +158,32 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
             ))}
           </div>
         )}
+
         {/* Rating distribution */}
         {total > 0 && (
-          <div style={{ width: '100%', maxWidth: 280, margin: '12px auto 0' }}>
-            <div style={{ fontSize: 11, color: T.textDim, marginBottom: 6, textAlign: 'center', letterSpacing: 0.4 }}>DISTRIBUSI RATING</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+          <div className={R.doneRatingSection}>
+            <div className={R.doneRatingLabel}>Distribusi Rating</div>
+            <div className={R.doneRatingGrid}>
               {[
-                { r: 1, label: 'Lagi', emoji: '🔴', color: '#f87171' },
+                { r: 1, label: 'Lagi',  emoji: '🔴', color: '#f87171' },
                 { r: 2, label: 'Susah', emoji: '🟠', color: '#fb923c' },
-                { r: 3, label: 'Oke', emoji: '🟢', color: T.correct },
-                { r: 4, label: 'Mudah', emoji: '🔵', color: '#60a5fa' },
+                { r: 3, label: 'Oke',   emoji: '🟢', color: T.correct },
+                { r: 4, label: 'Mudah', emoji: '💎', color: '#60a5fa' },
               ].map(({ r, label, emoji, color }) => (
-                <div key={r} style={{ textAlign: 'center', background: `${color}12`, border: `1px solid ${color}30`, borderRadius: 8, padding: '8px 4px' }}>
-                  <div style={{ fontSize: 14 }}>{emoji}</div>
-                  <div style={{ fontSize: 16, fontWeight: 800, color }}>{ratingDist[r]}</div>
-                  <div style={{ fontSize: 10, color: T.textDim }}>{label}</div>
+                <div
+                  key={r}
+                  className={R.doneRatingCell}
+                  style={{ background: `${color}12`, border: `1px solid ${color}30` }}
+                >
+                  <div className={R.doneRatingEmoji}>{emoji}</div>
+                  <div className={R.doneRatingCount} style={{ color }}>{ratingDist[r]}</div>
+                  <div className={R.doneRatingName}>{label}</div>
                 </div>
               ))}
             </div>
           </div>
         )}
+
         <button className={S.btnPrimary} onClick={onExit}>← Kembali</button>
       </div>
     );

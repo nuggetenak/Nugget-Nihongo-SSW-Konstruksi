@@ -46,26 +46,30 @@
 
 .btnCancel {
   flex: 1;
-  padding: 13px;
+  padding: 15px;
   font-size: var(--fs-body);
   font-weight: var(--fw-bold);
   font-family: inherit;
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   color: var(--ssw-textMuted);
   cursor: pointer;
+  transition: background var(--t-fast);
 }
+.btnCancel:active { background: var(--ssw-surfaceActive); }
 
 .btnConfirm {
   flex: 1;
-  padding: 13px;
+  padding: 15px;
   font-size: var(--fs-body);
   font-weight: var(--fw-bold);
   font-family: inherit;
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: var(--ssw-wrong);
   border: none;
   color: #fff;
   cursor: pointer;
+  transition: opacity var(--t-fast), transform var(--t-fast);
 }
+.btnConfirm:active { opacity: 0.85; transform: scale(0.97); }
