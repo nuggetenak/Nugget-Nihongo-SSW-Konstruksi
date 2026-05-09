@@ -10,8 +10,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
-import { makeWrongEntry } from '../utils/wrong-tracker.js';
-import { usePersistedState } from '../hooks/usePersistedState.js';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -46,9 +45,9 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
   const [phase, setPhase] = useState('prompt'); // 'prompt' | 'revealed'
   const [results, setResults] = useState([]);
   const [sessionFired, setSessionFired] = useState(false);
-  const [_quizWrong, setQuizWrong] = usePersistedState('ssw-quiz-produksi-wrong', {});
   const inputRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
+  const { recordWrong } = useProgress();
 
   const startSession = () => {
     const q = shuffle(cards).slice(0, count);
@@ -77,7 +76,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
     else haptic.wrong();
 
     if (!correct) {
-      setQuizWrong((w) => ({ ...w, [card.id]: makeWrongEntry(w[card.id]) }));
+      recordWrong(card.id);
     }
 
     if (audioEnabled && canSpeak()) {
@@ -86,7 +85,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
 
     setResults((r) => [...r, { card, input: input.trim(), correct }]);
     setPhase('revealed');
-  }, [phase, card, input, audioEnabled, setQuizWrong]);
+  }, [phase, card, input, audioEnabled, recordWrong]);
 
   const handleNext = useCallback(() => {
     if (isLast) {
@@ -108,10 +107,10 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
   const handleSkip = useCallback(() => {
     if (phase !== 'prompt' || !card) return;
     haptic.wrong();
-    setQuizWrong((w) => ({ ...w, [card.id]: makeWrongEntry(w[card.id]) }));
+    recordWrong(card.id);
     setResults((r) => [...r, { card, input: '', correct: false, skipped: true }]);
     setPhase('revealed');
-  }, [phase, card, setQuizWrong]);
+  }, [phase, card, recordWrong]);
 
   useEffect(() => {
     const handler = (e) => {
