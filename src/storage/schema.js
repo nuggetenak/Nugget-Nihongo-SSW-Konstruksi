@@ -55,6 +55,7 @@ export const DEFAULTS = {
     notes: {},                // D3: personal notes per card { [cardId]: string }
     speakOnFlip: false,       // R3: speak on flip instead of card advance
     quizQuestionCount: 10,    // Q4: persist quiz question count
+    sprintBests: {},          // N10: scoped best scores { [durationKey]: { score, timeline } }
     // sprintBest / sprintBestTimeline: F4 — set dynamically by SprintMode, not in DEFAULTS
   },
 };
