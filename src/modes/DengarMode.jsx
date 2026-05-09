@@ -101,7 +101,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
         setIdx(questions.length); // trigger done state
       }
     }, 1500);
-  }, [selected, currentQ, idx, questions.length, results, sessionFired, onSessionEnd, setQuizWrong]);
+  }, [selected, currentQ, idx, questions.length, results, sessionFired, onSessionEnd, setQuizWrong, getDurationMs]);
 
   // ── Settings screen ──────────────────────────────────────────────────────
   if (!started) {

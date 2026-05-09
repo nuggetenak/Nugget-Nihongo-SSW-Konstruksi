@@ -103,7 +103,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
       setInput('');
       setPhase('prompt');
     }
-  }, [isLast, results, sessionFired, onSessionEnd]);
+  }, [isLast, results, sessionFired, onSessionEnd, getDurationMs]);
 
   const handleSkip = useCallback(() => {
     if (phase !== 'prompt' || !card) return;

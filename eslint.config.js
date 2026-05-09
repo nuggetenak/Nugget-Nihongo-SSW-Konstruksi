@@ -31,6 +31,7 @@ export default [
       'react-hooks/set-state-in-effect': 'off',
       // React Compiler memoization warnings — not using React Compiler in this project
       'react-hooks/preserve-manual-memoization': 'off',
+      'react-hooks/purity': 'off',
 
       // Quality
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' }],

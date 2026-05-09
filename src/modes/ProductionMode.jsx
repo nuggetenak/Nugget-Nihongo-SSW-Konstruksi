@@ -95,7 +95,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
       setInput('');
       setPhase('prompt');
     }
-  }, [isLast, results, sessionFired, onSessionEnd]);
+  }, [isLast, results, sessionFired, onSessionEnd, getDurationMs]);
 
   const handleSkip = useCallback(() => {
     if (phase !== 'prompt' || !card) return;
