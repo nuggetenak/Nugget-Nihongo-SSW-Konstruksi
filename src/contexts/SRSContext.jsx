@@ -22,7 +22,15 @@ export function SRSProvider({ children }) {
 
   const srs = useSRS(trackCardIds);
 
-  return <SRSCtx.Provider value={srs}>{children}</SRSCtx.Provider>;
+  // REF-10c: Memoize context value — only rebuilds when dueCount changes (i.e. after review()).
+  // Callbacks (review, getDue, getInfo, previewFor) are stable useCallback refs.
+  const stableSrs = useMemo(
+    () => srs,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [srs.dueCount, srs.review, srs.getDue, srs.getInfo, srs.previewFor],
+  );
+
+  return <SRSCtx.Provider value={stableSrs}>{children}</SRSCtx.Provider>;
 }
 
 export function useSRSContext() {
