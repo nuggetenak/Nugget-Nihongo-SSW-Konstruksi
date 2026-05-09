@@ -3,6 +3,7 @@
 // Dynamic values (border color, gradient from cat.color) remain inline.
 // haptic.flip() on card tap.
 // ─────────────────────────────────────────────────────────────────────────────
+import { useRef, useEffect, useState } from 'react';
 import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';
 import { JpFront, DescBlock, parseRubyFragments, renderJPWithRuby } from '../../components/JpDisplay.jsx';
@@ -33,6 +34,16 @@ export default function FlipCard({
 
   const catColor = cat?.color ?? T.amber;
 
+  // Measure back face so the card container expands to fit whichever face is taller.
+  const backRef = useRef(null);
+  const [backH, setBackH] = useState(0);
+  useEffect(() => {
+    if (!backRef.current) return;
+    const ro = new ResizeObserver(([e]) => setBackH(e.contentRect.height));
+    ro.observe(backRef.current);
+    return () => ro.disconnect();
+  }, [card.id, showDesc]);
+
   return (
     <div
       className={`fc-scene ${FC.scene}`}
@@ -46,7 +57,7 @@ export default function FlipCard({
       <div
         className={`fc-card${flipped ? ' is-flipped' : ''}`}
         style={{
-          minHeight: 230,
+          minHeight: Math.max(230, backH),
           transform: `rotateY(${flipped ? 180 : 0}deg) translateX(${cardShiftPx}px) rotate(${cardTiltDeg}deg)`,
         }}
       >
@@ -98,6 +109,7 @@ export default function FlipCard({
 
         {/* ── BACK ──────────────────────────────────────────────────────── */}
         <div
+          ref={backRef}
           className={`fc-face fc-face--back ${S.back}`}
           style={{
             background: `linear-gradient(145deg, ${catColor}dd 0%, ${catColor}88 100%)`,
