@@ -1,4 +1,26 @@
+## [4.21.1] - 2026-05-09
+
+### refactor(hooks) + fix(WaygroundMode) + feat(ExportMode): OVERHAUL-1 + ENG-4 + ENG-6
+
+**OVERHAUL-1 — Retire usePersistedState.js:**
+- `usePersistedState.js` deleted; removed from `hooks/index.js`
+- `QuizMode.jsx`: replaced `usePersistedState('ssw-quiz-wrong', {})` with `useProgress().quizWrong` + `recordWrong`
+- `DangerMode.jsx`: replaced `setDangerWrong(...)` with `useProgress().recordWrong(key)`
+- `DengarMode.jsx`: replaced `setQuizWrong(...)` with `useProgress().recordWrong(cardId)`
+- All quizWrong writes now flow through engine (lz-string compressed, exportable)
+
+**ENG-4 — WaygroundMode legacy read fix:**
+- `getSetWrongCount(setId)` migrated from `loadFromStorage('ssw-wg-wrong-${setId}')` to `get('progress')?.wgWrong` prefix scan
+- `loadFromStorage` import removed from WaygroundMode
+
+**ENG-6 — ExportMode richer summary:**
+- `readSummary()` now includes: `quizWrong`, `wgWrong`, `jacScores`, `wgScores` counts
+- Export stats display shows "Salah Kuis" and "Skor JAC" tiles
+
+**Tests: 457 passing (41 files) — 9 new tests (OVERHAUL-1 × 3, ENG-4 × 2, ENG-6 × 4)**
+
 ## [4.21.0] - 2026-05-09
+
 
 ### refactor(data): data layer consolidation (REF-8 + REF-9 + C1-C9)
 
