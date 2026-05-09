@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.7: ENG-5 useDailyChallenge hook, N5 sessionStorage→engine)
-> **Version:** v4.20.7
+> **Last updated: 2026-05-09 by Agent Sonnet 4.6 (v4.20.8: F1/F2/F4/R1/R2/N10)
+> **Version:** v4.20.8
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← **READ THIS** (constraints, schema, v4.20 queue)
 > **Task files:** `docs/tasks/TASK-MASTER.md` ← **START HERE for implementation**
 > **Proposal:** `docs/UPGRADE-PROPOSAL-v4.20.md` (pass 14) ← full specs for all items
@@ -320,6 +320,7 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-09 | v4.20.8 | Sonnet 4.6: R1 ReviewMode dead state; R2 Dashboard streak/dailyCount from context; F1 starred quiz btn; F2 SumberMode produksi/kuisprod; F4 migration toast; N10 SprintMode duration-keyed bests; test fix ProgressProvider |
 | 2026-05-09 | v4.20.7 | Sonnet 4.6: ENG-5 useDailyChallenge hook; N5 SayaTab sessionStorage→engine; dailyChallengeLog in DEFAULTS.prefs; 429 tests |
 | 2026-05-09 | v4.20.6 | Sonnet 4.6: N3 ProductionMode recordWrong; N7 JACMode wrongCounts engine; N16 QuizProduksi recordWrong; REF-3 VocabMode/WaygroundMode wrong via engine; N20+REF-3b saveScore all 3 modes; N11 sprintBests DEFAULTS; R3 FocusMode _unknown removed |
 | 2026-05-01 | — | Opus 4.6 (Crunchy): Blueprint v6 — full codebase audit |

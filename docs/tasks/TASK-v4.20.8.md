@@ -1,5 +1,5 @@
 # TASK v4.20.8 — F1, F2, F4, R1, R2, N10
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.7 DONE
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.7 DONE
 
 ---
 

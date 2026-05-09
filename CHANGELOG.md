@@ -1,3 +1,15 @@
+## [4.20.8] - 2026-05-09
+
+### fix/feat: F1 F2 F4 R1 R2 N10
+
+- **R1** ReviewMode: removed `_lastResult` / `setLast` dead state (never read; 3 occurrences)
+- **R2** Dashboard: `streak` / `dailyCount` now from `useProgress()` (fixes stale `useMemo([], [])` freeze at mount); removed module-level `getStreak` / `getDailyCount` helpers
+- **F1** Dashboard: starred-cards quiz button — visible when `starred.size > 0`, launches `kuis` with `filterIds`
+- **F2** SumberMode: added `✍️ Produksi` and `🔤 Kuis Prod` quick-launch buttons alongside existing Kartu/Sprint/Kuis
+- **F4** `validateSnapshot` summary: added `migrated` field (`true` when snapshot version < `STORAGE_VERSION`); `ExportMode` shows migration notice on both file-import and Gist-pull restore paths
+- **N10** SprintMode: `sprintBests` now keyed by `selectedDuration` — each duration (30s/60s/2min) has independent personal best + ghost timeline; duration picker reloads bests on switch
+- **Test fix** `components.dashboard.test.jsx`: wrapped all renders in `ProgressProvider` (required by R2 `useProgress` hook)
+
 ## [4.20.7] - 2026-05-09
 
 ### feat: useDailyChallenge hook — persists to storage engine (ENG-5, N5)
