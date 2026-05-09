@@ -1,4 +1,34 @@
+## [4.21.0] - 2026-05-09
+
+### refactor(data): data layer consolidation (REF-8 + REF-9 + C1-C9)
+
+**REF-8 — Merge vocab source files (8 → 4 source files):**
+- cards-common-vocab.js (233 cards) merged into cards-common.js → 879 total
+- cards-lifeline-vocab.js (120 cards) merged into cards-lifeline.js → 564 total
+- cards-doboku-vocab.js + cards-kenchiku-vocab.js (both empty stubs) deleted
+- scripts/merge-cards.mjs inputs updated; count 1443 verified
+
+**REF-9 — Absorb sipil/bangunan sets into quiz-sets.js:**
+- SIPIL_SETS + BANGUNAN_SETS inlined into quiz-sets.js with track:'doboku'/'kenchiku'
+- sipil-sets.js + bangunan-sets.js deleted
+- SipilMode + BangunanMode use getQuizSetsForTrack() instead of direct imports
+- sipil-data.test.js + bangunan-data.test.js updated to import from quiz-sets.js
+- data/index.js: removed direct SIPIL_SETS/BANGUNAN_SETS re-exports
+- Total QUIZ_SETS: 38 → 44 (+ 3 sipil + 3 bangunan)
+
+**Tests C1-C9 — data-integrity.test.js:**
+- C1: SOURCE_GROUPS keys in SOURCE_META
+- C2: related_card_id refs valid
+- C3: every QUIZ_SET has track field
+- C4: no _origIndex in CARDS
+- C5: CARDS count = 1443
+- C6: no duplicate card IDs
+- C7: quiz answer index in bounds
+- C8/C9: doboku/kenchiku track includes sipil/bangunan sets
+- 448 total tests, 40 files
+
 ## [4.20.15] - 2026-05-09
+
 
 ### feat: useTrackedCards hook (ENG-11)
 

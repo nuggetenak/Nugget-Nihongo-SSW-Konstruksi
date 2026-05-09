@@ -1,5 +1,5 @@
 # TASK v4.21.0 — REF-8, REF-9, Tests C1-C7
-**Status:** READY | **Effort:** Medium | **Depends on:** v4.20.15 DONE
+**Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.15 DONE
 
 ## Goal
 Data layer consolidation: merge vocab source files, absorb sipil/bangunan sets, add data integrity tests.

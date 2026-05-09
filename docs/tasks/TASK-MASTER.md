@@ -37,8 +37,8 @@
 | v4.20.13 | TASK-v4.20.13.md | **DONE** ✅ | Medium | PERF-1, REF-10, ENG-13 |
 | v4.20.14 | TASK-v4.20.14.md | **DONE** ✅ | Low | PERF-2, REF-11 |
 | v4.20.15 | TASK-v4.20.15.md | **DONE** ✅ | Medium | ENG-11, migrate ~15 card-filter sites |
-| v4.21.0 | TASK-v4.21.0.md | **READY** | Medium | REF-8, REF-9, Tests C1-C7 |
-| v4.21.1 | TASK-v4.21.1.md | **BLOCKED** | High | OVERHAUL-1 — wait until v4.21.0 done |
+| v4.21.0 | TASK-v4.21.0.md | **DONE** ✅ | Medium | REF-8, REF-9, Tests C1-C7 |
+| v4.21.1 | TASK-v4.21.1.md | **READY** | High | OVERHAUL-1 — v4.21.0 done |
 
 > **BLOCKED** = has dependency. Do not start until prerequisite is DONE.
 
