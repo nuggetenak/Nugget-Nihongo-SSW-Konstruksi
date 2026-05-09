@@ -37,9 +37,14 @@ export default function FlipCard({
   // Measure back face so the card container expands to fit whichever face is taller.
   const backRef = useRef(null);
   const [backH, setBackH] = useState(0);
+  useEffect(() => { setBackH(0); }, [card.id]);
   useEffect(() => {
     if (!backRef.current) return;
-    const ro = new ResizeObserver(([e]) => setBackH(e.contentRect.height));
+    const ro = new ResizeObserver(([e]) => {
+      // borderBoxSize includes padding; fall back to contentRect for older browsers.
+      const h = e.borderBoxSize?.[0]?.blockSize ?? e.contentRect.height;
+      setBackH(h);
+    });
     ro.observe(backRef.current);
     return () => ro.disconnect();
   }, [card.id, showDesc]);
