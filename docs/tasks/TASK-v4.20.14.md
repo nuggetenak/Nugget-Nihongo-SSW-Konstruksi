@@ -1,5 +1,5 @@
 # TASK v4.20.14 — PERF-2: JpDisplay Memoization (REF-11)
-**Status:** READY | **Effort:** Low | **Depends on:** v4.20.13 DONE
+**Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.13 DONE
 
 ## Goal
 `JpDisplay.DescBlock` calls `parseRubyFragments()` on every render for every line/item. Memoize it.

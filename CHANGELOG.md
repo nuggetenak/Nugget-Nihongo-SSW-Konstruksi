@@ -1,3 +1,11 @@
+## [4.20.14] - 2026-05-09
+
+### perf: JpDisplay memoization (REF-11)
+
+- jp-helpers.js: parseDescStructure() — pure function for desc branch detection
+- JpDisplay DescBlock: useMemo([desc, maxLines]) via parseDescStructure — no re-parse on unrelated renders
+- JpDisplay JpFront: jpBranch useMemo([jp]) — vs/bullet/colon/arrow/plain detection memoized
+
 ## [4.20.13] - 2026-05-09
 
 ### perf: context memoization (REF-10 + ENG-13)
