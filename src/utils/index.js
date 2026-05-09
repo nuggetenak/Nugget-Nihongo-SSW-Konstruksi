@@ -18,3 +18,5 @@ export { speakJP, stopSpeech, canSpeak } from './speak.js';
 export { TOTAL_CARDS, HALF_DECK_THRESHOLD, FULL_DECK_THRESHOLD,
          SCORED_QUIZ_MODES, SRS_MATURE_DAYS, SESSIONS_CAP,
          DAILY_CHALLENGE_KEY } from './constants.js';
+// ENG-1: shared session analytics
+export { getAvgAccuracy, getBestSimScore, hasPerfectSprint, getStrandCounts, calcReadiness } from './session-analytics.js';
