@@ -2,12 +2,13 @@
 // F1: Achievement badge system. Pure functions — no side effects.
 // Checks are run against a snapshot of user state.
 // ─────────────────────────────────────────────────────────────────────────────
+import { HALF_DECK_THRESHOLD, TOTAL_CARDS } from './constants.js';
 
 export const ACHIEVEMENTS = [
   { id: 'first_10',       icon: '🌱', label: 'Langkah Pertama',  desc: '10 kartu hafal',                  check: (s) => s.known >= 10 },
   { id: 'first_100',      icon: '🏗️', label: 'Pondasi Kuat',     desc: '100 kartu hafal',                 check: (s) => s.known >= 100 },
-  { id: 'half_deck',      icon: '💪', label: 'Setengah Jalan',   desc: '705+ kartu hafal',                check: (s) => s.known >= 705 },
-  { id: 'full_deck',      icon: '🏆', label: 'Nugget Pro',       desc: 'Semua 1410 kartu hafal',          check: (s) => s.known >= 1410 },
+  { id: 'half_deck',      icon: '💪', label: 'Setengah Jalan',   desc: `${HALF_DECK_THRESHOLD}+ kartu hafal`,  check: (s) => s.known >= HALF_DECK_THRESHOLD },
+  { id: 'full_deck',      icon: '🏆', label: 'Nugget Pro',       desc: `Semua ${TOTAL_CARDS} kartu hafal`,     check: (s) => s.known >= TOTAL_CARDS },
   { id: 'week_streak',    icon: '🔥', label: 'Pekerja Keras',    desc: '7 hari berturut-turut',           check: (s) => s.streak >= 7 },
   { id: 'month_streak',   icon: '🌟', label: 'Konsisten',        desc: '30 hari berturut-turut',          check: (s) => s.streak >= 30 },
   { id: 'perfect_sprint', icon: '⚡', label: 'Kilat',            desc: 'Sprint tanpa salah (≥10 kartu)',  check: (s) => s.perfectSprint },
