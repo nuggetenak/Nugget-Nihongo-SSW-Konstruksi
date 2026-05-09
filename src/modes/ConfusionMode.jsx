@@ -9,6 +9,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { haptic } from '../utils/haptic.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
@@ -200,6 +201,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
   const [results, setResults] = useState([]);
   const [phase, setPhase] = useState('playing'); // 'playing' | 'result'
   const sessionFired = useRef(false);
+  const { getDurationMs } = useSessionTimer();
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
@@ -242,7 +244,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
     if (phase !== 'result' || sessionFired.current) return;
     sessionFired.current = true;
     const correct = results.filter((r) => r.isCorrect).length;
-    onSessionEnd?.({ correct, total: results.length });
+    onSessionEnd?.({ correct, total: results.length, durationMs: getDurationMs() });
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === 'result') {

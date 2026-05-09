@@ -10,6 +10,7 @@ import { JpFront } from '../components/JpDisplay.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { CATEGORIES } from '../data/categories.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
@@ -39,6 +40,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const [selectedDuration, setSelectedDuration] = useState('60');
   const [selectedCat, setSelectedCat] = useState('all');
   const sessionEndFired = useRef(false);
+  const { getDurationMs } = useSessionTimer();
   // F4: ghost timeline — record { t: secondsElapsed, score: correctCount } every 5s
   const [ghostTimeline] = useState(() => getBestTimeline());
   const currentTimeline = useRef([]);
@@ -66,11 +68,11 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const fireSessionEnd = useCallback((c, w) => {
     if (sessionEndFired.current) return;
     sessionEndFired.current = true;
-    onSessionEnd?.({ correct: c, total: c + w });
+    onSessionEnd?.({ correct: c, total: c + w, durationMs: getDurationMs() });
     const prev = getPersonalBest();
     const finalTimeline = [...currentTimeline.current, { t: DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60, score: c }];
     if (c > prev) { savePersonalBest(c, finalTimeline); setPersonalBest(c); setNewBest(true); }
-  }, [onSessionEnd, selectedDuration]);
+  }, [onSessionEnd, selectedDuration, getDurationMs]);
 
   useEffect(() => {
     if (phase !== 'playing') return;

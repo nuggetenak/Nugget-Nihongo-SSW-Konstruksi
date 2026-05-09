@@ -10,6 +10,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import OptionButton from '../components/OptionButton.jsx';
 import S from './modes.module.css';
@@ -66,6 +67,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
+  const { getDurationMs } = useSessionTimer();
 
   const config = PRESETS.find((p) => p.key === preset) || PRESETS[0];
 
@@ -104,7 +106,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   useEffect(() => {
     if (phase === 'result' && results.length > 0) {
       const correct = results.filter((r) => r.isCorrect).length;
-      onSessionEnd?.({ correct, total: results.length });
+      onSessionEnd?.({ correct, total: results.length, durationMs: getDurationMs() });
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 

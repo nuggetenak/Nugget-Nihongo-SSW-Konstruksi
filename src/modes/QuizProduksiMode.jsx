@@ -12,6 +12,7 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
@@ -47,6 +48,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
   const [sessionFired, setSessionFired] = useState(false);
   const [_quizWrong, setQuizWrong] = usePersistedState('ssw-quiz-produksi-wrong', {});
   const inputRef = useRef(null);
+  const { getDurationMs } = useSessionTimer();
 
   const startSession = () => {
     const q = shuffle(cards).slice(0, count);
@@ -92,7 +94,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
       if (!sessionFired) {
         setSessionFired(true);
         const c = finalResults.filter((r) => r.correct).length;
-        onSessionEnd?.({ correct: c, total: finalResults.length });
+        onSessionEnd?.({ correct: c, total: finalResults.length, durationMs: getDurationMs() });
       }
       setStarted(false);
       setIdx(0);

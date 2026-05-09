@@ -7,6 +7,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
 import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 import A from './AngkaMode.module.css';
@@ -143,6 +144,7 @@ function QuizView({ onBack, onSessionEnd }) {
   const [maxStreak, setMaxStreak] = useState(0);
   const [phase, setPhase] = useState('playing');
   const sessionFired = useRef(false);
+  const { getDurationMs } = useSessionTimer();
 
   const item = items[qIdx];
   const isLast = qIdx === items.length - 1;
@@ -180,7 +182,7 @@ function QuizView({ onBack, onSessionEnd }) {
     if (phase !== 'result' || sessionFired.current) return;
     sessionFired.current = true;
     const correct = results.filter((r) => r.isCorrect).length;
-    onSessionEnd?.({ correct, total: results.length });
+    onSessionEnd?.({ correct, total: results.length, durationMs: getDurationMs() });
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === 'result') {
@@ -302,6 +304,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
   const [phase, setPhase] = useState('playing');
   const sessionFired = useRef(false);
   const inputRef = useRef(null);
+  const { getDurationMs } = useSessionTimer();
 
   const item = items[qIdx];
   const isLast = qIdx === items.length - 1;
@@ -339,7 +342,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
     if (phase !== 'result' || sessionFired.current) return;
     sessionFired.current = true;
     const correct = results.filter((r) => r.correct).length;
-    onSessionEnd?.({ correct, total: results.length });
+    onSessionEnd?.({ correct, total: results.length, durationMs: getDurationMs() });
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

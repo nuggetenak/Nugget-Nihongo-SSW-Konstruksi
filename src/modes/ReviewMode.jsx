@@ -13,6 +13,7 @@ import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import { get as storageGet } from '../storage/engine.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Skeleton from '../components/Skeleton.jsx';
 import S from './modes.module.css';
@@ -30,6 +31,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   const [sessionCorrect, setSessionCorrect] = useState(0);
   // R1: Rating distribution tracking
   const [ratingDist, setRatingDist] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
+  const { getDurationMs } = useSessionTimer();
 
   useEffect(() => {
     if (!srs.ready) return;
@@ -47,7 +49,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
 
   useEffect(() => {
     if (!done || !queue) return;
-    onSessionEnd?.({ correct: sessionCorrect, total: queue.length });
+    onSessionEnd?.({ correct: sessionCorrect, total: queue.length, durationMs: getDurationMs() });
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // D5: Auto-speak on card advance — HVPT: passive exposure more effective than manual tap

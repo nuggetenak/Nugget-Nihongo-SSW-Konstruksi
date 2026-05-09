@@ -8,6 +8,7 @@ import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 import D from './DangerMode.module.css';
@@ -114,6 +115,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
   const sessionFired = useRef(false);
+  const { getDurationMs } = useSessionTimer();
   const [results, setResults] = useState([]);
   const [streak, setStreak] = useState(0);
   const [maxStreak, setMaxStreak] = useState(0);
@@ -159,7 +161,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
     if (phase !== 'result' || sessionFired.current) return;
     sessionFired.current = true;
     const correct = results.filter((r) => r.isCorrect).length;
-    onSessionEnd?.({ correct, total: results.length });
+    onSessionEnd?.({ correct, total: results.length, durationMs: getDurationMs() });
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === 'result') {

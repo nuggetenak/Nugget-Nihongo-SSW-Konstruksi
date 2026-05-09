@@ -10,6 +10,7 @@ import { haptic } from '../utils/haptic.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { usePersistedState } from '../hooks/usePersistedState.js';
+import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
@@ -37,6 +38,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
   const [results, setResults] = useState([]);
   const [sessionFired, setSessionFired] = useState(false);
   const speakCountRef = useRef(0);
+  const { getDurationMs } = useSessionTimer();
   // D1-WT: wrong-tracker — records incorrect answers to shared quizWrong pool
   const [, setQuizWrong] = usePersistedState('ssw-quiz-wrong', {});
 
@@ -93,7 +95,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
         const newResults = [...results, { card: currentQ.card, isCorrect }];
         if (!sessionFired && onSessionEnd) {
           const correct = newResults.filter((r) => r.isCorrect).length;
-          onSessionEnd({ mode: 'dengar', correct, total: newResults.length });
+          onSessionEnd({ mode: 'dengar', correct, total: newResults.length, durationMs: getDurationMs() });
           setSessionFired(true);
         }
         setIdx(questions.length); // trigger done state
