@@ -3,6 +3,7 @@ export const SET_DOBOKU_01 = {
     id: 'doboku-01',
     title: '土工事・基礎の基本',
     subtitle: 'Pekerjaan Tanah & Dasar Sipil',
+    track: 'doboku',
     emoji: '⛏️',
     questions: [
       {

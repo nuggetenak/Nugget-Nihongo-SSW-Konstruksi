@@ -3,6 +3,7 @@ export const SET_DOBOKU_02 = {
     id: 'doboku-02',
     title: '道路・舗装・排水',
     subtitle: 'Jalan, Perkerasan & Drainase',
+    track: 'doboku',
     emoji: '🛣️',
     questions: [
       {

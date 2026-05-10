@@ -3,6 +3,7 @@ export const SET_KENCHIKU_03 = {
     id: 'kenchiku-03',
     title: '建築の安全管理',
     subtitle: 'Keselamatan Konstruksi Bangunan',
+    track: 'kenchiku',
     emoji: '🛡️',
     questions: [
       {

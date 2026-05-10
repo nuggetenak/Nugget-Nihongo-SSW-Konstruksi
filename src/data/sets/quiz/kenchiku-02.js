@@ -3,6 +3,7 @@ export const SET_KENCHIKU_02 = {
     id: 'kenchiku-02',
     title: '仕上げ・内装・外壁',
     subtitle: 'Finishing, Interior & Eksterior',
+    track: 'kenchiku',
     emoji: '🎨',
     questions: [
       {

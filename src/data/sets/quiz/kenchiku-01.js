@@ -3,6 +3,7 @@ export const SET_KENCHIKU_01 = {
     id: 'kenchiku-01',
     title: '型枠・鉄筋・コンクリート',
     subtitle: 'Bekisting, Tulangan & Beton',
+    track: 'kenchiku',
     emoji: '🏗️',
     questions: [
       {

@@ -112,10 +112,10 @@ File: `src/data/sets/wayground/wg12.js`
 
 ### H11 — Add explicit `track` field to 6 quiz split files 🟡
 Files: `src/data/sets/quiz/doboku-01.js`, `doboku-02.js`, `doboku-03.js`, `kenchiku-01.js`, `kenchiku-02.js`, `kenchiku-03.js`
-- [ ] Add `track: 'doboku'` to doboku-01/02/03.js (top-level set object field)
-- [ ] Add `track: 'kenchiku'` to kenchiku-01/02/03.js (top-level set object field)
-- [ ] Single-quote strings (canonical for data files)
-- [ ] Verify field is in the SET object, not inside individual questions
+- [x] Add `track: 'doboku'` to doboku-01/02/03.js (top-level set object field)
+- [x] Add `track: 'kenchiku'` to kenchiku-01/02/03.js (top-level set object field)
+- [x] Single-quote strings (canonical for data files)
+- [x] Verify field is in the SET object, not inside individual questions
 
 ### H6 — Handoff file sync & rename ✅ (session 7)
 - [x] Renamed v12 → v13, MASTER EXECUTION ORDER synced, monolithic vs split clarified, P21 DEFERRED

@@ -3,6 +3,7 @@ export const SET_DOBOKU_03 = {
     id: 'doboku-03',
     title: '安全管理・法規',
     subtitle: 'Manajemen Keselamatan & Peraturan',
+    track: 'doboku',
     emoji: '🛡️',
     questions: [
       {
