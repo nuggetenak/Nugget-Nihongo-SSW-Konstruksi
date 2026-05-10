@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (P16 MIGRATE done — JAC teori+lifeline 95 qs)
+**Last updated:** 2026-05-10 (P17 FILL done — confusion-pairs tip_id 28 entries)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -22,7 +22,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 
 ### P17 — confusion-pairs: fill tip_id (28 entries)
 `src/data/confusion-pairs.js`
-- [ ] Fill all 28 `tip_id: null` → Indonesian translation of `tip` field
+- [x] Fill all 28 `tip_id: null` → Indonesian translation of `tip` field
 - **Rule:** `tip_id` = terjemahan bebas Indonesian dari `tip` (JP). Tone: singkat, faktual, ≤100 char.
 - **Verify:** zero `tip_id: null` tersisa
 
