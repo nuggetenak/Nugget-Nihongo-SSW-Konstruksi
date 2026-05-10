@@ -287,8 +287,9 @@ Schema migration pending (P16). `hasPhoto`: teori=5, lifeline=7.
 ## AGENT RULES (canonical)
 
 - **Edit source files** `src/data/source/` for cards; all other data files edit directly.
-- **After any card source edit:** run `node scripts/merge-cards.mjs`
-- **Never edit** `src/data/cards.js` directly — auto-generated.
+- **After any card source edit (on `main`):** run `node scripts/merge-cards.mjs`
+- **On branch `content-dq`:** merge script tidak tersedia. Edit `src/data/source/cards-*.js` DAN `src/data/cards.js` secara bersamaan. Regenerasi otomatis terjadi saat merge ke `main`.
+- **Never edit** `src/data/cards.js` directly on `main` — auto-generated. On `content-dq`, editing it manually is permitted only alongside a matching source file edit.
 - **Never bulk-touch** `furi` fields — only confirmed typos.
 - **Ruby format:** annotate full compound reading, never suffix-only.
 - **Maru `（）` with non-kana content** (synonyms, abbreviations, definitions, explanations) — do NOT convert to `《》`. Only pure-hiragana/katakana readings get converted.
