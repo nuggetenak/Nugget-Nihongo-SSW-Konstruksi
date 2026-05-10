@@ -42,11 +42,11 @@ Files: `src/data/cards/lifeline/jitsugi.js`, `src/data/cards/lifeline/vocab-jac.
 
 ### S3 — Migrate vocab-common.js → vocab-supplementary.js (common)
 Files: `src/data/cards/common/vocab-common.js`, `src/data/cards/common/vocab-supplementary.js`
-- [ ] Append semua 114 cards dari `common/vocab-common.js` ke `common/vocab-supplementary.js`
+- [x] Append semua 114 cards dari `common/vocab-common.js` ke `common/vocab-supplementary.js`
   - Sources: vocab-core(12), vocab-exam(35), vocab-general(31), vocab-teori(29), text3l(7)
   - None have `jac-ch1`–`jac-ch4` source — semua masuk supplementary, zero exception
-- [ ] Delete `common/vocab-common.js`
-- [ ] Verify: `common/vocab-supplementary.js` = 247 cards
+- [x] Delete `common/vocab-common.js`
+- [x] Verify: `common/vocab-supplementary.js` = 247 cards ✅
 
 ### S4 — Reassign vocab-lifeline.js (235 cards) ke chapter files + vocab-supplementary
 Files: `src/data/cards/lifeline/vocab-lifeline.js`, `src/data/cards/lifeline/ch5.js`, `src/data/cards/lifeline/ch6.js`, `src/data/cards/lifeline/ch7.js`, `src/data/cards/lifeline/vocab-supplementary.js`
