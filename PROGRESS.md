@@ -64,9 +64,9 @@ Files: `src/data/cards/lifeline/vocab-lifeline.js`, `src/data/cards/lifeline/ch5
 | `anzen` (21 cards) | `ch7.js` | ch7 = 35 anzen cards exclusively |
 | `career` (37 cards) | `vocab-supplementary.js` | ⚠️ tidak ada di ch5/6/7 — kategori ini orphan di lifeline |
 
-- [ ] Untuk setiap card di `vocab-lifeline.js`: baca `category` → append ke file target sesuai tabel
-- [ ] Delete `lifeline/vocab-lifeline.js`
-- [ ] Verify card counts:
+- [x] Untuk setiap card di `vocab-lifeline.js`: baca `category` → append ke file target sesuai tabel
+- [x] Delete `lifeline/vocab-lifeline.js`
+- [x] Verify card counts:
   - `ch5.js` naik dari 200 ke ~278 (+denki30+tsushin8+sekou40)
   - `ch6.js` naik dari 105 ke ~204 (+haikan62+hoon24+shoubou10+setsubi_kougu3)
   - `ch7.js` naik dari 35 ke ~56 (+anzen21)
