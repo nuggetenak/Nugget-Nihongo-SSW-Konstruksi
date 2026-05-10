@@ -36,7 +36,7 @@ export const SET_CP06 = {
           'Daur ulang',
         ],
         ans: 0,
-        exp: 'Pastikan tidak ada genangan (modul praktik JAC).',
+        exp: 'Air bekas pressure test wajib dibuang ke saluran pembuangan yang sesuai (bukan ke tanah/sungai sembarangan). Sebelum dibuang, pastikan tidak terkontaminasi bahan kimia. Cek tidak ada genangan di area kerja setelah selesai — genangan bisa menyebabkan licin dan kecelakaan.',
       },
       {
         id: 3,
@@ -45,7 +45,7 @@ export const SET_CP06 = {
         opts: ['耐振動手袋《たいしんどうてぶくろ》', 'ヘルメット', '安全《あんぜん》メガネ', '耳栓《みみせん》'],
         opts_id: ['Anti-vibration gloves', 'Helm', 'Kacamata keselamatan', 'Earplug'],
         ans: 0,
-        exp: 'Mengurangi risiko white finger (modul JAC).',
+        exp: 'Alat bergetar (振動工具) seperti grinder atau impact gun menyebabkan Hand-Arm Vibration Syndrome (HAVS) atau white finger (jari putih pucat) jika dipakai lama. PPE wajib: anti-vibration gloves (耐振動手袋) yang menyerap energi getaran. Batasi durasi pemakaian sesuai action value.',
       },
       {
         id: 4,
@@ -61,11 +61,6 @@ export const SET_CP06 = {
         q: 'インパクトドライバーでボルト・ナットを締《し》める時の注意点《ちゅういてん》は？',
         hint: 'Yang perlu diperhatikan saat mengencangkan baut/mur dengan impact driver?',
         opts: ['トルクは関係《かんけい》ない', '規定《きてい》トルクで締《し》め、必要《ひつよう》ならトルクレンチで最終確認《さいしゅうかくにん》', 'できるだけ長時間《ちょうじかん》強《つよ》く回《まわ》す', '手《て》で回《まわ》した方《ほう》が良《よ》い'],
-          'トルクは関係《かんけい》ない',
-          '規定《きてい》トルクで締《し》め、必要《ひつよう》ならトルクレンチで最終確認《さいしゅうかくにん》',
-          'できるだけ長時間《ちょうじかん》強く回す',
-          '手《て》で回した方が良い',
-        ],
         opts_id: [
           'Torsi tidak penting',
           'Kencangkan dengan torsi sesuai spesifikasi, final check pakai torque wrench',
@@ -119,7 +114,7 @@ export const SET_CP06 = {
           'Mengecilkan pipa',
         ],
         ans: 0,
-        exp: 'Untuk sambungan ekspansi (modul praktik).',
+        exp: 'Expander tool (エキスパンダー工具) melebarkan ujung pipa tembaga sehingga bisa dimasukkan ke pipa lain tanpa fitting tambahan — membentuk sambungan langsung pipe-to-pipe. Berbeda dengan swaging yang mengecilkan. Teknik ini menghemat biaya fitting dan mengurangi titik bocor potensial.',
       },
       {
         id: 10,
@@ -135,11 +130,6 @@ export const SET_CP06 = {
         q: '冷却塔《クーリングタワー》の主な機能は何か。',
         hint: 'Fungsi utama cooling tower?',
         opts: ['空気《くうき》を暖《あたた》める', '電気《でんき》を発生《はっせい》させる', '冷凍機《れいとうき》の凝縮器《ぎょうしゅくき》から熱《ねつ》を大気《たいき》に放出《ほうしゅつ》する', '水《みず》を飲料水《いんりょうすい》にする'],
-          '空気《くうき》を暖める',
-          '電気《でんき》を発生《はっせい》させる',
-          '冷凍機《れいとうき》の凝縮器《ぎょうしゅくき》から熱《ねつ》を大気《たいき》に放出《ほうしゅつ》する',
-          '水《みず》を飲料水《いんりょうすい》にする',
-        ],
         opts_id: [
           'Memanaskan udara',
           'Menghasilkan listrik',
@@ -170,7 +160,7 @@ export const SET_CP06 = {
           'Ketebalan',
         ],
         ans: 0,
-        exp: 'Memeriksa kondisi dalam pipa (modul JAC praktik).',
+        exp: 'Inspection mirror / borescope (内面検査鏡) digunakan untuk melihat kondisi dalam pipa: korosi, kerak, serpihan las, atau benda asing yang tidak terlihat dari luar. Dipakai sebelum komisioning sistem atau saat troubleshoot. Benda asing dalam pipa bisa merusak valve atau pompa.',
       },
       {
         id: 14,
@@ -179,7 +169,7 @@ export const SET_CP06 = {
         opts: ['緊急停止《きんきゅうていし》スイッチ・アウトリガー', '色《いろ》', '任意《にんい》', '回転数《かいてんすう》'],
         opts_id: ['Emergency stop switch & outrigger', 'Warna', 'Bebas', 'Putaran'],
         ans: 0,
-        exp: 'Emergency stop & outrigger wajib dicek (modul JAC anzen).',
+        exp: 'Sebelum mengoperasikan aerial work platform (高所作業車), wajib cek: ①Emergency stop switch berfungsi (hentikan semua gerakan saat darurat), ②Outrigger/stabilizer dipasang dan terkunci (mencegah tipping), ③Batas beban, ④Alarm kemiringan. Operasikan hanya di permukaan yang keras dan rata.',
       },
       {
         id: 15,
@@ -197,7 +187,7 @@ export const SET_CP06 = {
         opts: ['普通《ふつう》の手袋《てぶくろ》', 'ヘルメットのみ', '耐《たい》アークフラッシュ衣服《いふく》', '安全靴《あんぜんぐつ》'],
         opts_id: ['Sarung tangan biasa', 'Hanya helm', 'Arc-rated clothing', 'Safety shoes'],
         ans: 2,
-        exp: 'Pakaian tahan busur listrik (modul JAC anzen).',
+        exp: 'Arc flash (アークフラッシュ) = ledakan cahaya dan panas ekstrem saat korsleting listrik tegangan tinggi. PPE wajib: arc-rated clothing (耐アークフラッシュ衣服) dari bahan FR (flame-resistant) dengan nilai cal/cm² sesuai hazard level. Pakaian biasa langsung terbakar. Tambahkan: face shield, sarung tangan listrik, safety shoes.',
       },
       {
         id: 17,
@@ -211,7 +201,7 @@ export const SET_CP06 = {
           'Memotong pipa',
         ],
         ans: 2,
-        exp: 'Untuk sambungan flange yang rapat (modul praktik JAC).',
+        exp: 'Torque wrench (トルクレンチ) digunakan untuk mengencangkan baut flange dengan nilai torsi yang tepat sesuai spesifikasi. Under-torque → gasket tidak tertekan merata → bocor. Over-torque → baut putus atau flange retak. Kencangkan dengan pola silang (cross pattern) untuk distribusi tekanan merata.',
       },
       {
         id: 18,
@@ -220,7 +210,7 @@ export const SET_CP06 = {
         opts: ['接着剤《せっちゃくざい》', '耐火材《たいかざい》', '塗料《とりょう》', 'ベーパーバリア'],
         opts_id: ['Lem', 'Bahan tahan api', 'Cat', 'Vapor barrier'],
         ans: 3,
-        exp: 'Mencegah penetrasi uap air (modul JAC text7l).',
+        exp: 'Aluminium laminate film (アルミラミネートフィルム) berfungsi sebagai vapor barrier pada sistem insulasi pipa dingin. Lapisan aluminium mencegah uap air dari udara menembus masuk ke insulasi. Jika uap air masuk → kondensasi → insulasi basah → performa turun drastis dan korosi pipa.',
       },
       {
         id: 19,
@@ -238,7 +228,7 @@ export const SET_CP06 = {
         opts: ['防塵《ぼうじん》マスク（N95以上）', '耳栓《みみせん》', '安全靴《あんぜんぐつ》', '手袋《てぶくろ》'],
         opts_id: ['Dust mask (N95 atau lebih)', 'Earplug', 'Safety shoes', 'Sarung tangan'],
         ans: 0,
-        exp: 'N95 filter debu halus (modul JAC anzen).',
+        exp: 'PPE untuk pencegahan debu (粉じん対策): dust mask N95 atau lebih (DS2 atau DS3 dalam standar Jepang). N95 menyaring ≥95% partikel berdiameter ≥0.3μm termasuk serat glass wool dan asbes. Tanpa masker, partikel halus masuk ke paru-paru → silikosis atau asbestosis. Ganti masker secara berkala.',
       },
     ],
   };
