@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (doboku-03 done)
+**Last updated:** 2026-05-10 (kenchiku-01 done)
 
 ---
 
@@ -70,7 +70,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 - [x] `src/data/sets/quiz/doboku-01.js` — RUBY+HINT+ID
 - [x] `src/data/sets/quiz/doboku-02.js` — RUBY+HINT+ID
 - [x] `src/data/sets/quiz/doboku-03.js` — RUBY+HINT+ID
-- [ ] `src/data/sets/quiz/kenchiku-01.js` — RUBY+HINT+ID
+- [x] `src/data/sets/quiz/kenchiku-01.js` — RUBY+HINT+ID
 - [ ] `src/data/sets/quiz/kenchiku-02.js` — RUBY+HINT+ID
 - [ ] `src/data/sets/quiz/kenchiku-03.js` — RUBY+HINT+ID
 
