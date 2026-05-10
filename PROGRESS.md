@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (P19 RUBY done — danger-pairs traps+explanation 20 entries)
+**Last updated:** 2026-05-10 (P7 FURI-ALIGN done — 152 cards fixed, 5 romaji/katakana-only terms accepted as exception)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -38,7 +38,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 
 ### P7 — Cards furi separator alignment (213 cards)
 Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
-- [ ] Sesuaikan `furi` separator agar cocok dengan `jp` pada 213 card yang mismatch
+- [x] Sesuaikan `furi` separator agar cocok dengan `jp` pada 213 card yang mismatch
 - **Rule:** jika `jp` punya `vs`, `・`, atau `：` → `furi` harus punya separator yang sama di posisi yang sama
   ```js
   // BAD

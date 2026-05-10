@@ -423,7 +423,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   id: 1084,
   category: "anzen",
   source: "vocab-supplementary",
-  furi: "ろっくあうとたぐあうと",
+  furi: "ろっくあうと・たぐあうと",
   jp: "ロックアウト・タグアウト",
   type: "vocab",
   id_text: "Prosedur LOTO pengamanan",

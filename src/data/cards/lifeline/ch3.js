@@ -126,7 +126,7 @@ export const CARDS_CH3 = [
   id: 164,
   category: "denki",
   source: "jac-ch3",
-  furi: "がいせんこうじないせんこうじ",
+  furi: "がいせんこうじ vs ないせんこうじ",
   jp: "外線工事《がいせんこうじ》 vs 内線工事《ないせんこうじ》（がいせん・ないせん）",
   type: "konsep",
   id_text: "Instalasi luar vs dalam",

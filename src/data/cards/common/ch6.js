@@ -247,7 +247,7 @@ export const CARDS_CH6 = [
   id: 446,
   category: "anzen",
   source: "jac-ch6",
-  furi: "どうかんのせつだんにかのこぐらいんだあきんし",
+  furi: "かのこ・きんし",
   jp: "銅管の切断に金ノコ《かのこ》・グラインダー禁止《きんし》",
   type: "konsep",
   id_text: "DILARANG",
