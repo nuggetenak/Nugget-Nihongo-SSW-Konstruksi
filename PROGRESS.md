@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** (agent updates this after each file)
+**Last updated:** 2026-05-10
 
 ---
 
@@ -21,7 +21,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 ## BATCH 1 — CSV Corruption Fix + Opts Annotation
 *(12 files — prioritas tertinggi, ada corruption dari sesi Haiku)*
 
-- [ ] `src/data/sets/csv/cp01.js` — FIX + ANNOTATE opts
+- [x] `src/data/sets/csv/cp01.js` — FIX + ANNOTATE opts
 - [ ] `src/data/sets/csv/cp02.js` — FIX + ANNOTATE opts
 - [ ] `src/data/sets/csv/cp03.js` — FIX + ANNOTATE opts
 - [ ] `src/data/sets/csv/cp04.js` — FIX + ANNOTATE opts
