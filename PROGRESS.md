@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (kenchiku-03 done)
+**Last updated:** 2026-05-10 (cards/common FURI done)
 
 ---
 
@@ -77,18 +77,18 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 ## BATCH 4 — Cards Furi Alignment
 *(22 files — align furi separators saja, tidak annotate ruby baru)*
 
-- [ ] `src/data/cards/common/ch1.js` — FURI
-- [ ] `src/data/cards/common/ch2.js` — FURI
-- [ ] `src/data/cards/common/ch3.js` — FURI
-- [ ] `src/data/cards/common/ch4.js` — FURI
-- [ ] `src/data/cards/common/ch5.js` — FURI
-- [ ] `src/data/cards/common/ch6.js` — FURI
-- [ ] `src/data/cards/common/ch7.js` — FURI
-- [ ] `src/data/cards/common/gakka.js` — FURI
-- [ ] `src/data/cards/common/vocab-jac.js` — FURI
-- [ ] `src/data/cards/common/vocab-lifeline.js` — FURI
-- [ ] `src/data/cards/common/vocab-misc.js` — FURI
-- [ ] `src/data/cards/common/vocab-supplementary.js` — FURI
+- [x] `src/data/cards/common/ch1.js` — FURI
+- [x] `src/data/cards/common/ch2.js` — FURI
+- [x] `src/data/cards/common/ch3.js` — FURI
+- [x] `src/data/cards/common/ch4.js` — FURI
+- [x] `src/data/cards/common/ch5.js` — FURI
+- [x] `src/data/cards/common/ch6.js` — FURI
+- [x] `src/data/cards/common/ch7.js` — FURI
+- [x] `src/data/cards/common/gakka.js` — FURI
+- [x] `src/data/cards/common/vocab-jac.js` — FURI
+- [x] `src/data/cards/common/vocab-lifeline.js` — FURI
+- [x] `src/data/cards/common/vocab-misc.js` — FURI
+- [x] `src/data/cards/common/vocab-supplementary.js` — FURI
 - [ ] `src/data/cards/lifeline/ch2.js` — FURI
 - [ ] `src/data/cards/lifeline/ch3.js` — FURI
 - [ ] `src/data/cards/lifeline/ch4.js` — FURI
