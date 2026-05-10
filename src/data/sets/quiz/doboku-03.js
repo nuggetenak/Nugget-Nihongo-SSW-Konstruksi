@@ -6,8 +6,10 @@ export const SET_DOBOKU_03 = {
     emoji: '🛡️',
     questions: [
       {
-        q: '酸素欠乏危険作業とは酸素濃度が何%未満の場所？',
-        opts: ['18%未満', '21%未満', '15%未満', '25%未満'],
+        id: 1,
+        q: '酸素《さんそ》欠乏《けつぼう》危険《きけん》作業《さぎょう》とは酸素《さんそ》濃度《のうど》が何《なん》%未満《みまん》の場所《ばしょ》？',
+        hint: 'Di bawah berapa persen kadar oksigen disebut lingkungan defisiensi oksigen?',
+        opts: ['18%未満《みまん》', '21%未満《みまん》', '15%未満《みまん》', '25%未満《みまん》'],
         opts_id: ['Di bawah 18%', 'Di bawah 21%', 'Di bawah 15%', 'Di bawah 25%'],
         ans: 0,
         exp: 'Menurut peraturan K3 Jepang, tempat dengan kadar oksigen di bawah 18% = lingkungan defisiensi oksigen (酸素欠乏). Udara normal = 21%. Kesalahan umum: menjawab 21% (itu kadar normal).',
@@ -15,8 +17,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Standar kadar oksigen minimum. Sebagai pekerja SSW: di manhole, tangki, atau ruang tertutup, WAJIB ukur kadar O2 sebelum masuk. Di bawah 18% = DILARANG masuk tanpa alat bantu napas. Mandor: 酸素濃度を測定してください。'
       },
       {
-        q: '労働安全衛生法で事業者の義務は？',
-        opts: ['労働者の安全と健康を確保すること', '利益を最大化すること', '残業を増やすこと', '工期を短縮すること'],
+        id: 2,
+        q: '労働《ろうどう》安全《あんぜん》衛生法《えいせいほう》で事業者《じぎょうしゃ》の義務《ぎむ》は？',
+        hint: 'Apa kewajiban pemberi kerja menurut UU K3 Jepang?',
+        opts: ['労働者《ろうどうしゃ》の安全《あんぜん》と健康《けんこう》を確保《かくほ》すること', '利益《りえき》を最大化《さいだいか》すること', '残業《ざんぎょう》を増やす《ふやす》こと', '工期《こうき》を短縮《たんしゅく》すること'],
         opts_id: ['Memastikan keselamatan & kesehatan pekerja', 'Memaksimalkan keuntungan', 'Menambah lembur', 'Mempersingkat jadwal'],
         ans: 0,
         exp: '労働安全衛生法 (UU K3 Jepang) mewajibkan pemberi kerja menjamin keselamatan dan kesehatan pekerja. Ini bukan soal profit atau jadwal.',
@@ -24,8 +28,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Kewajiban pemberi kerja menurut UU K3. Sebagai pekerja SSW: kamu punya HAK atas lingkungan kerja yang aman — kalau ada kondisi bahaya, kamu berhak menolak bekerja. Ini dilindungi hukum.'
       },
       {
-        q: '「安全衛生責任者」を選任しなければならない現場は？',
-        opts: ['元請と下請が混在する現場', 'すべての現場', '大規模現場のみ', '公共工事のみ'],
+        id: 3,
+        q: '「安全《あんぜん》衛生《えいせい》責任者《せきにんしゃ》」を選任《せんにん》しなければならない現場《げんば》は？',
+        hint: 'Di proyek mana petugas K3 (安全衛生責任者) wajib ditunjuk?',
+        opts: ['元請《もとうけ》と下請《したうけ》が混在《こんざい》する現場《げんば》', 'すべての現場《げんば》', '大規模《だいきぼ》現場《げんば》のみ', '公共《こうきょう》工事《こうじ》のみ'],
         opts_id: ['Proyek dengan kontraktor utama & sub-kontraktor', 'Semua proyek', 'Hanya proyek besar', 'Hanya proyek pemerintah'],
         ans: 0,
         exp: 'Petugas K3 (安全衛生責任者) wajib ditunjuk saat proyek melibatkan kontraktor utama (元請) dan subkontraktor (下請) bekerja bersama — untuk koordinasi keselamatan antar perusahaan.',
@@ -33,8 +39,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Penunjukan petugas K3. Sebagai pekerja SSW di subkontraktor: kamu melapor ke 安全衛生責任者 perusahaan submu, bukan langsung ke kontraktor utama. Tahu siapa namanya.'
       },
       {
-        q: '「作業主任者」が必要な作業は？',
-        opts: ['型枠支保工の組立て', '掃除', '材料の運搬', '事務作業'],
+        id: 4,
+        q: '「作業《さぎょう》主任者《しゅにんしゃ》」が必要《ひつよう》な作業《さぎょう》は？',
+        hint: 'Pekerjaan mana yang memerlukan supervisor bersertifikat (作業主任者)?',
+        opts: ['型枠《かたわく》支保工《しほこう》の組立《くみた》て', '掃除《そうじ》', '材料《ざいりょう》の運搬《うんぱん》', '事務《じむ》作業《さぎょう》'],
         opts_id: ['Pemasangan shoring bekisting', 'Kebersihan', 'Pengangkutan material', 'Pekerjaan kantor'],
         ans: 0,
         exp: 'Pekerjaan berisiko tinggi seperti pemasangan shoring bekisting (型枠支保工) wajib ada 作業主任者 (supervisor kerja bersertifikat). Kebersihan dan pengangkutan biasa tidak memerlukan.',
@@ -42,8 +50,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Kewajiban supervisor bersertifikat. Sebagai pekerja SSW: pastikan ada 作業主任者 sebelum mulai kerja berisiko — kalau tidak ada, jangan mulai. Ini hakmu.'
       },
       {
-        q: '有機溶剤を使用するときに必要なものは？',
-        opts: ['防毒マスクと換気装置', '軍手だけ', '安全靴だけ', 'ヘルメットだけ'],
+        id: 5,
+        q: '有機《ゆうき》溶剤《ようざい》を使用《しよう》するときに必要《ひつよう》なものは？',
+        hint: 'Apa yang wajib digunakan saat bekerja dengan pelarut organik?',
+        opts: ['防毒《ぼうどく》マスクと換気《かんき》装置《そうち》', '軍手《ぐんて》だけ', '安全靴《あんぜんぐつ》だけ', 'ヘルメットだけ'],
         opts_id: ['Masker anti gas & ventilasi', 'Hanya sarung tangan kain', 'Hanya sepatu safety', 'Hanya helm'],
         ans: 0,
         exp: 'Pelarut organik (有機溶剤) = beracun. WAJIB pakai masker anti gas (防毒マスク) DAN pastikan ventilasi (換気). Sarung tangan kain saja tidak cukup melindungi dari uap kimia.',
@@ -51,8 +61,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Perlindungan dari pelarut organik. Sebagai pekerja SSW: cat, thinner, lem — semua mengandung 有機溶剤. Tanpa masker yang benar = keracunan. Mandor: 防毒マスクをつけてから作業してください。'
       },
       {
-        q: '石綿（アスベスト）を含む建材の解体で必要な措置は？',
-        opts: ['事前調査と届出、飛散防止措置', '普通に解体してよい', '水をかけるだけでよい', '窓を開けるだけでよい'],
+        id: 6,
+        q: '石綿《いしわた》（アスベスト）を含む《ふくむ》建材《けんざい》の解体《かいたい》で必要《ひつよう》な措置《そち》は？',
+        hint: 'Tindakan apa yang diperlukan saat membongkar material yang mengandung asbes?',
+        opts: ['事前《じぜん》調査《ちょうさ》と届出《とどけでる》、飛散《ひさん》防止《ぼうし》措置《そち》', '普通《ふつう》に解体《かいたい》してよい', '水《みず》をかけるだけでよい', '窓《まど》を開ける《あける》だけでよい'],
         opts_id: ['Survei awal, pelaporan, & pencegahan serbuk', 'Boleh bongkar biasa', 'Cukup siram air', 'Cukup buka jendela'],
         ans: 0,
         exp: 'Asbes (石綿/アスベスト) = karsinogenik. Pembongkaran material ber-asbes WAJIB: (1) survei awal, (2) melapor ke pemerintah, (3) tindakan pencegahan penyebaran serat. Bukan pekerjaan biasa.',
@@ -60,8 +72,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Prosedur pembongkaran material ber-asbes. Sebagai pekerja SSW: JANGAN pernah potong atau bor material yang dicurigai asbes tanpa izin — serat asbes menyebabkan kanker paru-paru.'
       },
       {
-        q: '感電防止のために電動工具で確認することは？',
-        opts: ['アース（接地）が正しく接続されている', '色がきれい', '新品である', '値段が高い'],
+        id: 7,
+        q: '感電《かんでん》防止《ぼうし》のために電動《でんどう》工具《こうぐ》で確認《かくにん》することは？',
+        hint: 'Apa yang harus dicek pada alat listrik untuk mencegah kesetrum?',
+        opts: ['アース（接地《せっち》）が正しく《ただしく》接続《せつぞく》されている', '色《いろ》がきれい', '新品《しんぴん》である', '値段《ねだん》が高い《たかい》'],
         opts_id: ['Grounding/arde terpasang dengan benar', 'Warnanya bagus', 'Masih baru', 'Harganya mahal'],
         ans: 0,
         exp: 'Untuk mencegah kesetrum (感電), pastikan alat listrik terhubung grounding/arde (アース/接地) dengan benar. Warna, usia, atau harga alat tidak relevan dengan keselamatan listrik.',
@@ -69,8 +83,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Pencegahan kesetrum. Sebagai pekerja SSW: sebelum pakai bor, gerinda, dll — cek kabel arde. Kalau kabel terkelupas = LAPOR, jangan pakai. Mandor: アースの接続を確認してください。'
       },
       {
-        q: '「新規入場者教育」はいつ行う？',
-        opts: ['現場に初めて入るとき', '毎月1回', '毎年1回', '工事完了時'],
+        id: 8,
+        q: '「新規《しんき》入場者《にゅうじょうしゃ》教育《きょういく》」はいつ行う《おこなう》？',
+        hint: 'Kapan orientasi keselamatan untuk pekerja baru dilaksanakan?',
+        opts: ['現場《げんば》に初めて《はじめて》入る《はいる》とき', '毎月《まいつき》1回《かい》', '毎年《まいとし》1回《かい》', '工事《こうじ》完了《かんりょう》時《とき》'],
         opts_id: ['Saat pertama kali masuk proyek', 'Sebulan sekali', 'Setahun sekali', 'Saat proyek selesai'],
         ans: 0,
         exp: '新規入場者教育 = orientasi keselamatan untuk pekerja yang PERTAMA KALI masuk proyek tersebut. Bukan bulanan atau tahunan.',
@@ -78,8 +94,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Orientasi keselamatan pekerja baru di proyek. Sebagai pekerja SSW: setiap pindah ke proyek baru, kamu WAJIB ikut orientasi ini — biasanya 1-2 jam. Isi: aturan proyek, titik bahaya, jalur evakuasi.'
       },
       {
-        q: '「安全帯使用の免除」が認められる場合は？',
-        opts: ['原則として免除はない', '天気が良いとき', '作業が簡単なとき', '経験が長いとき'],
+        id: 9,
+        q: '「安全帯《あんぜんたい》使用《しよう》の免除《めんじょ》」が認められる《みとめられる》場合《ばあい》は？',
+        hint: 'Kapan penggunaan harness boleh dikecualikan?',
+        opts: ['原則《げんそく》として免除《めんじょ》はない', '天気《てんき》が良い《よい》とき', '作業《さぎょう》が簡単《かんたん》なとき', '経験《けいけん》が長い《ながい》とき'],
         opts_id: ['Pada prinsipnya tidak ada pengecualian', 'Saat cuaca baik', 'Saat pekerjaan mudah', 'Saat pengalaman sudah lama'],
         ans: 0,
         exp: 'Pada prinsipnya TIDAK ADA pengecualian untuk penggunaan harness di ketinggian ≥2m. Cuaca baik, pekerjaan mudah, atau pengalaman lama bukan alasan untuk tidak pakai.',
@@ -87,8 +105,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Tidak ada pengecualian harness. Sebagai pekerja SSW: kalau mandor bilang "tidak perlu harness karena kerjanya cepat" — itu SALAH. Kamu berhak menolak naik tanpa harness.'
       },
       {
-        q: '高さ5m以上の足場の組立てに必要な資格は？',
-        opts: ['足場の組立て等作業主任者', '特に資格は不要', '運転免許', '医師免許'],
+        id: 10,
+        q: '高さ《たかさ》5m以上《いじょう》の足場《あしば》の組立《くみた》てに必要《ひつよう》な資格《しかく》は？',
+        hint: 'Sertifikat apa yang diperlukan untuk memasang scaffolding setinggi 5m atau lebih?',
+        opts: ['足場《あしば》の組立《くみた》て等《など》作業《さぎょう》主任者《しゅにんしゃ》', '特《とく》に資格《しかく》は不要《ふよう》', '運転《うんてん》免許《めんきょ》', '医師《いし》免許《めんきょ》'],
         opts_id: ['Sertifikat supervisor pemasangan scaffolding', 'Tidak perlu sertifikat', 'SIM', 'Izin dokter'],
         ans: 0,
         exp: 'Pemasangan scaffolding ≥5m WAJIB ada supervisor bersertifikat (足場の組立て等作業主任者). Bukan pekerjaan yang boleh dilakukan tanpa pengawasan.',
@@ -96,8 +116,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Sertifikasi scaffolding. Sebagai pekerja SSW: kamu boleh MEMBANTU pasang scaffolding di bawah pengawasan 作業主任者, tapi tidak boleh memimpin pemasangan tanpa sertifikat.'
       },
       {
-        q: '熱中症の初期症状は？',
-        opts: ['めまい・大量の汗・筋肉のけいれん', '頭痛だけ', '鼻血だけ', '目のかゆみだけ'],
+        id: 11,
+        q: '熱中症《ねっちゅうしょう》の初期《しょき》症状《しょうじょう》は？',
+        hint: 'Apa gejala awal heat stroke (熱中症)?',
+        opts: ['めまい・大量《たいりょう》の汗《あせ》・筋肉《きんにく》のけいれん', '頭痛《ずつう》だけ', '鼻血《はなぢ》だけ', '目《め》のかゆみだけ'],
         opts_id: ['Pusing, keringat banyak, kram otot', 'Hanya sakit kepala', 'Hanya mimisan', 'Hanya mata gatal'],
         ans: 0,
         exp: 'Gejala awal heat stroke (熱中症): pusing (めまい), keringat berlebihan (大量の汗), kram otot (筋肉のけいれん). Kalau dibiarkan → pingsan → bisa meninggal.',
@@ -105,8 +127,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Mengenali gejala heat stroke. Sebagai pekerja SSW: musim panas Jepang sangat panas + lembab. Wajib minum air tiap 30 menit. Mandor: 水分補給をこまめにしてください。'
       },
       {
-        q: '労災保険の適用範囲は？',
-        opts: ['すべての労働者（外国人を含む）', '日本人だけ', '正社員だけ', '管理者だけ'],
+        id: 12,
+        q: '労災《ろうさい》保険《ほけん》の適用《てきよう》範囲《はんい》は？',
+        hint: 'Siapa saja yang dicakup oleh asuransi kecelakaan kerja?',
+        opts: ['すべての労働者《ろうどうしゃ》（外国人《がいこくじん》を含む《ふくむ》）', '日本人《にほんじん》だけ', '正社員《せいしゃいん》だけ', '管理者《かんりしゃ》だけ'],
         opts_id: ['Semua pekerja (termasuk WNA)', 'Hanya orang Jepang', 'Hanya karyawan tetap', 'Hanya manajer'],
         ans: 0,
         exp: 'Asuransi kecelakaan kerja (労災保険) berlaku untuk SEMUA pekerja termasuk pekerja asing (外国人). Ini hak kamu sebagai pekerja SSW.',
@@ -114,8 +138,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Hak asuransi kecelakaan kerja. Sebagai pekerja SSW: kalau kamu cedera di tempat kerja, perusahaan WAJIB menanggung biaya pengobatan lewat 労災保険. Ini hakmu — jangan takut melapor.'
       },
       {
-        q: '「指差し呼称（ゆびさしこしょう）」の目的は？',
-        opts: ['確認の精度を上げてミスを防ぐ', '上司に見せるため', '時間を稼ぐため', '体操のため'],
+        id: 13,
+        q: '「指差《ゆびさ》し呼称《こしょう》」の目的《もくてき》は？',
+        hint: 'Apa tujuan dari metode "pointing and calling" (指差し呼称)?',
+        opts: ['確認《かくにん》の精度《せいど》を上げて《あげて》ミスを防ぐ《ふせぐ》', '上司《じょうし》に見せる《みせる》ため', '時間《じかん》を稼ぐ《かせぐ》ため', '体操《たいそう》のため'],
         opts_id: ['Meningkatkan ketelitian pengecekan & mencegah kesalahan', 'Untuk ditunjukkan ke atasan', 'Untuk mengulur waktu', 'Untuk olahraga'],
         ans: 0,
         exp: '指差し呼称 (pointing and calling) = metode konfirmasi keselamatan dengan menunjuk + menyebut item yang dicek dengan suara keras. Terbukti mengurangi kesalahan hingga 85%.',
@@ -123,8 +149,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Metode pointing & calling. Sebagai pekerja SSW: ini kebiasaan Jepang yang mungkin terasa aneh awalnya — tapi sangat efektif. Contoh: tunjuk switch → "スイッチ OFF、ヨシ！"'
       },
       {
-        q: '建設現場の「整理・整頓」の目的は？',
-        opts: ['事故の防止と作業効率の向上', '見た目をきれいにするだけ', '検査に合格するため', '写真を撮るため'],
+        id: 14,
+        q: '建設《けんせつ》現場《げんば》の「整理《せいり》・整頓《せいとん》」の目的《もくてき》は？',
+        hint: 'Apa tujuan budaya 5S (seiri & seiton) di lokasi konstruksi?',
+        opts: ['事故《じこ》の防止《ぼうし》と作業《さぎょう》効率《こうりつ》の向上《こうじょう》', '見た目《みため》をきれいにするだけ', '検査《けんさ》に合格《ごうかく》するため', '写真《しゃしん》を撮る《とる》ため'],
         opts_id: ['Mencegah kecelakaan & meningkatkan efisiensi', 'Hanya supaya terlihat rapi', 'Supaya lulus inspeksi', 'Untuk difoto'],
         ans: 0,
         exp: '整理・整頓 (5S — seiri, seiton) di proyek konstruksi = bukan soal estetika, tapi pencegahan kecelakaan (tersandung material) dan efisiensi (cepat cari alat).',
@@ -132,8 +160,10 @@ export const SET_DOBOKU_03 = {
         desc: 'Budaya rapi/tertib di proyek Jepang. Sebagai pekerja SSW: setelah selesai kerja, WAJIB rapikan area kerja — alat dikembalikan, sampah dibuang, material ditata. Mandor: 今日の片付けをお願いします。'
       },
       {
-        q: '特定技能1号で建設分野の在留期間は最長何年？',
-        opts: ['通算5年', '通算3年', '通算10年', '期限なし'],
+        id: 15,
+        q: '特定《とくてい》技能《ぎのう》1号《ごう》で建設《けんせつ》分野《ぶんや》の在留《ざいりゅう》期間《きかん》は最長《さいちょう》何年《なんねん》？',
+        hint: 'Berapa tahun maksimum masa tinggal SSW 1号 di bidang konstruksi?',
+        opts: ['通算《つうさん》5年《ねん》', '通算《つうさん》3年《ねん》', '通算《つうさん》10年《ねん》', '期限《きげん》なし'],
         opts_id: ['Total 5 tahun', 'Total 3 tahun', 'Total 10 tahun', 'Tanpa batas'],
         ans: 0,
         exp: 'SSW 1号 (特定技能1号) di bidang konstruksi = masa tinggal maksimum total 5 tahun (通算5年). Setelah itu bisa upgrade ke SSW 2号 yang tidak ada batas waktu.',
