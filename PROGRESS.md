@@ -1,6 +1,7 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (BATCH 5 all done)
+**Last updated:** 2026-05-10 (BATCH 5 done; rebuilt from handoff v12)
+**Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
 
@@ -10,131 +11,108 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 ---
 
 ## TASK KEY
-- **FIX** = hapus double ruby + revert wrong ruby ke （）
-- **ANNOTATE** = tambah 《》 ruby ke bare kanji
-- **RUBY+HINT+ID** = tambah ruby ke q+opts, tambah hint (Indonesian), tambah id (1-indexed)
-- **FURI** = align separator di `furi` field supaya cocok dengan `jp`
-- **STRUCT** = structural fix (tambah field, tidak butuh Japanese knowledge)
+- **EXP-STUB** = ganti placeholder "Lihat modul JAC..." dengan penjelasan Indonesian nyata (min 30 char)
+- **STRUCT** = structural fix — tidak butuh Japanese knowledge
+- **MIGRATE** = schema migration: rename fields + split opts → opts + opts_id
 
 ---
 
-## BATCH 1 — CSV Corruption Fix + Opts Annotation
-*(12 files — prioritas tertinggi, ada corruption dari sesi Haiku)*
+## BATCH 1 — CSV exp stubs (P15)
+*(~40 items di 8 file — ganti placeholder "Lihat modul JAC" dengan exp nyata)*
+*(Perlu konteks soal — lihat `q` + `opts` + `ans` per item untuk tulis exp yang benar)*
 
-- [x] `src/data/sets/csv/cp01.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/cp02.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/cp03.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/cp04.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/cp05.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/cp06.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/ct01.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/ct02.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/ct03.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/ct04.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/ct05.js` — FIX + ANNOTATE opts
-- [x] `src/data/sets/csv/ct06.js` — FIX + ANNOTATE opts
+- [ ] `src/data/sets/csv/cp01.js` — EXP-STUB (3 stubs)
+- [ ] `src/data/sets/csv/cp02.js` — EXP-STUB (6 stubs)
+- [ ] `src/data/sets/csv/cp03.js` — EXP-STUB (6 stubs)
+- [ ] `src/data/sets/csv/cp04.js` — EXP-STUB (8 stubs)
+- [ ] `src/data/sets/csv/cp05.js` — EXP-STUB (6 stubs)
+- [ ] `src/data/sets/csv/cp06.js` — EXP-STUB (6 stubs)
+- [ ] `src/data/sets/csv/ct03.js` — EXP-STUB (3 stubs)
+- [ ] `src/data/sets/csv/ct06.js` — EXP-STUB (2 stubs)
 
-## BATCH 2 — Wayground Double Ruby Fix
-*(26 files — fix double ruby saja, tidak perlu annotate baru)*
+---
 
-- [x] `src/data/sets/wayground/wt1.js` — FIX
-- [x] `src/data/sets/wayground/wt2.js` — FIX
-- [x] `src/data/sets/wayground/wt3.js` — FIX
-- [x] `src/data/sets/wayground/wt4.js` — FIX
-- [x] `src/data/sets/wayground/wt5.js` — FIX
-- [x] `src/data/sets/wayground/wt6.js` — FIX
-- [x] `src/data/sets/wayground/wt7.js` — FIX
-- [x] `src/data/sets/wayground/wt8.js` — FIX
-- [x] `src/data/sets/wayground/wt9.js` — FIX
-- [x] `src/data/sets/wayground/wt10.js` — FIX
-- [x] `src/data/sets/wayground/wg1.js` — FIX
-- [x] `src/data/sets/wayground/wg2.js` — FIX
-- [x] `src/data/sets/wayground/wg3.js` — FIX
-- [x] `src/data/sets/wayground/wg4.js` — FIX
-- [x] `src/data/sets/wayground/wg5.js` — FIX
-- [x] `src/data/sets/wayground/wg6.js` — FIX
-- [x] `src/data/sets/wayground/wg7.js` — FIX
-- [x] `src/data/sets/wayground/wg8.js` — FIX
-- [x] `src/data/sets/wayground/wg9.js` — FIX
-- [x] `src/data/sets/wayground/wg11.js` — FIX
-- [x] `src/data/sets/wayground/wg12.js` — FIX
-- [x] `src/data/sets/wayground/wp1.js` — FIX
-- [x] `src/data/sets/wayground/wp2.js` — FIX
-- [x] `src/data/sets/wayground/wp3.js` — FIX
-- [x] `src/data/sets/wayground/wp4.js` — FIX
-- [x] `src/data/sets/wayground/wp5.js` — FIX
+## BATCH 2 — JAC Lifeline: null related_card_id (P18-LL)
+*(1 entry — STRUCT: cukup isi ID kartu yang tepat)*
 
-## BATCH 3 — Quiz Sets Full Annotation
-*(6 files — ruby + hint + id, semua dari nol)*
+- [ ] `src/data/sets/jac/jac-lifeline.js` — STRUCT: fill 1 null `related_card_id` (st1_q13, 感電 → kartu #81)
 
-- [x] `src/data/sets/quiz/doboku-01.js` — RUBY+HINT+ID
-- [x] `src/data/sets/quiz/doboku-02.js` — RUBY+HINT+ID
-- [x] `src/data/sets/quiz/doboku-03.js` — RUBY+HINT+ID
-- [x] `src/data/sets/quiz/kenchiku-01.js` — RUBY+HINT+ID
-- [x] `src/data/sets/quiz/kenchiku-02.js` — RUBY+HINT+ID
-- [x] `src/data/sets/quiz/kenchiku-03.js` — RUBY+HINT+ID
+---
 
-## BATCH 4 — Cards Furi Alignment
-*(22 files — align furi separators saja, tidak annotate ruby baru)*
+## BATCH 3 — JAC Schema Migration (P16)
+*(95 qs — rename + restructure fields ke unified question schema)*
+*(Urutan: teori dulu, lalu lifeline)*
 
-- [x] `src/data/cards/common/ch1.js` — FURI
-- [x] `src/data/cards/common/ch2.js` — FURI
-- [x] `src/data/cards/common/ch3.js` — FURI
-- [x] `src/data/cards/common/ch4.js` — FURI
-- [x] `src/data/cards/common/ch5.js` — FURI
-- [x] `src/data/cards/common/ch6.js` — FURI
-- [x] `src/data/cards/common/ch7.js` — FURI
-- [x] `src/data/cards/common/gakka.js` — FURI
-- [x] `src/data/cards/common/vocab-jac.js` — FURI
-- [x] `src/data/cards/common/vocab-lifeline.js` — FURI
-- [x] `src/data/cards/common/vocab-misc.js` — FURI
-- [x] `src/data/cards/common/vocab-supplementary.js` — FURI
-- [x] `src/data/cards/lifeline/ch2.js` — FURI
-- [x] `src/data/cards/lifeline/ch3.js` — FURI
-- [x] `src/data/cards/lifeline/ch4.js` — FURI
-- [x] `src/data/cards/lifeline/ch5.js` — FURI
-- [x] `src/data/cards/lifeline/ch6.js` — FURI
-- [x] `src/data/cards/lifeline/gakka.js` — FURI
-- [x] `src/data/cards/lifeline/vocab-jac.js` — FURI
-- [x] `src/data/cards/lifeline/vocab-lifeline.js` — FURI
-- [x] `src/data/cards/lifeline/vocab-misc.js` — FURI
-- [x] `src/data/cards/lifeline/vocab-supplementary.js` — FURI
-
-## BATCH 5 — Structural & Small Tasks
-*(agent tasks, tidak butuh Japanese knowledge)*
-
-- [x] `src/data/sets/jac/jac-teori.js` — STRUCT: fill 21 null `related_card_id`
-- [x] `src/data/confusion-pairs.js` — STRUCT: tambah `tip_id: null` ke 28 entries
-- [x] `src/data/danger-pairs.js` — STRUCT: audit + fix ruby di `traps[]` dan `explanation`
+- [ ] `src/data/sets/jac/jac-teori.js` — MIGRATE (65 qs)
+- [ ] `src/data/sets/jac/jac-lifeline.js` — MIGRATE (30 qs)
 
 ---
 
 ## RULES PER TASK TYPE
 
-### FIX (csv + wayground)
-1. Hapus double ruby: `漢字《よみ》《よみ》` → `漢字《よみ》`
-2. Revert wrong ruby: `《non-kana》` → `（non-kana）` — hanya jika isi 《》 tidak mengandung hiragana/katakana
-3. Script HARUS idempotent — strip dulu sebelum apply
+### EXP-STUB
+- Cari semua `exp` yang mengandung teks "Lihat modul JAC", "lihat modul", atau yang < 30 char
+- Ganti dengan penjelasan Indonesian yang nyata, min 30 char
+- Gunakan konteks `q` + `opts` + `ans` dari soal yang sama
+- Pertahankan tone: singkat, faktual, fokus kenapa jawaban benar vs distraktor
+- Contoh target length: 50–150 char
 
-### ANNOTATE opts (csv only)
-- Setiap item di `opts: [...]` yang mengandung kanji → tambah `《よみ》`
-- Format: full compound per segment, BUKAN suffix only
-- Contoh: `'配管の継手'` → `'配管《はいかん》の継手《つぎて》'`
-- Maru `（）` yang isinya non-kana → JANGAN diubah
+### STRUCT (fill null related_card_id)
+- Temukan kartu yang sesuai di `src/data/cards/`
+- Gunakan `id` numerik dari card, bukan string
+- "Kartu #N" di `explanation` field = petunjuk langsung ke card id N
 
-### RUBY+HINT+ID (quiz sets)
-- `q`: annotate semua kanji compound
-- `opts`: annotate semua kanji compound
-- `hint`: tambah field baru — Indonesian paraphrase singkat dari `q` (1 kalimat)
-- `id`: tambah field baru — integer 1-indexed per set
+### MIGRATE (P16 schema)
+Old schema → New (unified question) schema:
 
-### FURI (cards)
-- Cek setiap card: apakah `jp` punya separator (`vs`, `・`, `：`, `/`) tapi `furi` tidak
-- Kalau iya, tambah separator yang sama di posisi yang tepat di `furi`
-- Contoh: `jp: '加湿器 vs 除湿器'`, `furi: 'かしつきじょしつき'` → `furi: 'かしつき vs じょしつき'`
-- Jangan ubah `furi` yang sudah benar
+| Old field | New field | Catatan |
+|---|---|---|
+| `jp` | `q` | tambah ruby 《》 jika ada kanji belum dianotasi |
+| `id_text` | `hint` | rename saja |
+| `options[i]` → split | `opts[i]` = JP part; `opts_id[i]` = ID part | pisah per item |
+| `answer` | `ans` | rename saja |
+| `explanation` | `exp` | rename saja |
+| `hiragana` | — | hapus field ini |
+| `hasPhoto` | tetap | jangan ubah |
+| `photoDesc` | tetap | jangan ubah |
+| `related_card_id` | tetap | jangan ubah |
+| `track` | tetap | jangan ubah |
+| `id`, `set`, `setLabel`, `topic` | tetap | jangan ubah |
 
-### VERIFY sebelum commit
-- Zero double ruby `》《` tersisa
-- Zero kanji non-kana di dalam `《》`
-- Zero bare kanji di field yang dikerjakan (untuk ANNOTATE task)
+**opts split rule:**
+```js
+// Old: options item dengan format "JP（よみ）(ID text)"
+'安全確認（あんぜんかくにん）(Konfirmasi keselamatan)'
+// New:
+opts:    ['安全確認《あんぜんかくにん》']
+opts_id: ['Konfirmasi keselamatan']
+
+// Old: katakana/romaji dengan ID text
+'チームワーク (Kerja tim / Teamwork)'
+// New:
+opts:    ['チームワーク']
+opts_id: ['Kerja tim / Teamwork']
+```
+
+**VERIFY sebelum commit:**
+- Zero `hiragana` field tersisa
+- Zero `options` field tersisa (semua sudah jadi `opts` + `opts_id`)
+- Semua `opts[i]` berisi JP string (dengan ruby jika ada kanji)
+- Semua `opts_id[i]` berisi Indonesian string
+- Length `opts` === length `opts_id` per soal
+
+---
+
+## SELESAI (sesi sebelumnya)
+
+### Batch lama (PROGRESS.md sebelumnya)
+- ✅ BATCH 1–2: CSV + Wayground FIX + ANNOTATE opts (P11-FIX-A/B, P11-C, P12-FIX)
+- ✅ BATCH 3: Quiz sets RUBY+HINT+ID (P13 — 6 files)
+- ✅ BATCH 4: Cards FURI alignment (P7 — 22 files)
+- ✅ BATCH 5: jac-teori null IDs (P18), confusion-pairs tip_id (P17), danger-pairs audit (P19)
+
+### Dari handoff v12 (done sebelum content-dq)
+- ✅ P8: confusion-pairs termA/B ruby
+- ✅ P9: danger-pairs term ruby
+- ✅ P10: angka-kunci soal ruby
+- ✅ P14: wayground exp stubs — 0 remaining (verified 2026-05-10)
