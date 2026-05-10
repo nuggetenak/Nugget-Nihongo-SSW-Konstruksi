@@ -981,7 +981,7 @@ export const JAC_TEORI = [
     hasPhoto: true,
     photoDesc: '📸 FOTO: Batang baja berulir (rebar) dengan coupling sleeve logam di tengah — ini adalah 機械式継手 (mechanical coupler/sambungan mekanis), tulangan disambung lewat selongsong berulir.',
     explanation: '機械式継手 = coupler berulir menghubungkan 2 rebar. Ciri visual: ada selongsong/sleeve di tengah sambungan. 重ね継手 = tumpang, 溶接継手 = las.',
-    related_card_id: null,
+    related_card_id: 1382,
     track: 'common'
   },
   {
@@ -1000,7 +1000,7 @@ export const JAC_TEORI = [
     answer: 1,
     hasPhoto: false,
     explanation: 'ガス圧接継手 = pemanasan gas + tekanan aksial → sambungan permanen tanpa logam pengisi. 溶接継手 = las (ada logam pengisi). Kata kunci: \'dipanaskan + tekanan aksial\'.',
-    related_card_id: null,
+    related_card_id: 1354,
     track: 'common'
   },
   {

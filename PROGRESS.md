@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (cards/lifeline FURI done)
+**Last updated:** 2026-05-10 (BATCH 5 all done)
 
 ---
 
@@ -103,9 +103,9 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 ## BATCH 5 — Structural & Small Tasks
 *(agent tasks, tidak butuh Japanese knowledge)*
 
-- [ ] `src/data/sets/jac/jac-teori.js` — STRUCT: fill 21 null `related_card_id`
-- [ ] `src/data/confusion-pairs.js` — STRUCT: tambah `tip_id: null` ke 28 entries
-- [ ] `src/data/danger-pairs.js` — STRUCT: audit + fix ruby di `traps[]` dan `explanation`
+- [x] `src/data/sets/jac/jac-teori.js` — STRUCT: fill 21 null `related_card_id`
+- [x] `src/data/confusion-pairs.js` — STRUCT: tambah `tip_id: null` ke 28 entries
+- [x] `src/data/danger-pairs.js` — STRUCT: audit + fix ruby di `traps[]` dan `explanation`
 
 ---
 
