@@ -158,5 +158,104 @@ export const CARDS_VOCAB_JAC = [
   id_text: "Pipa drain AC",
   desc: "Mengalirkan air kondensasi dari unit dalam ke luar.\nWajib kemiringan turun",
   _origIndex: 1409
+  },
+{
+  id: 40,
+  category: "sekou",
+  source: "jac-jitsugi1",
+  furi: "せこうかんりしょていのひんしつ",
+  jp: "施工管理《せこうかんりしょていのひんしつ》",
+  type: "konsep",
+  id_text: "Manajemen konstruksi",
+  desc: "Pengelolaan pelaksanaan proyek sesuai rencana. Kunci ujian: 品質《ひんしつ》 (kualitas), bukan 環境《かんきょう》.",
+  _origIndex: 48
+  },
+{
+  id: 105,
+  category: "anzen",
+  source: "jac-jitsugi1",
+  furi: "さんそけつぼう",
+  jp: "酸素欠乏《さんそけつぼう》",
+  type: "konsep",
+  id_text: "Kekurangan oksigen",
+  desc: "Bahaya di ruang tertutup. Cek oksigen sebelum masuk MANHOLE. Kerja di atap tidak termasuk.",
+  _origIndex: 113
+  },
+{
+  id: 106,
+  category: "anzen",
+  source: "jac-jitsugi1",
+  furi: "どどめ",
+  jp: "土留め《どどめ》≥ 1.5m",
+  type: "konsep",
+  id_text: "Penahan tanah galian",
+  desc: "Mencegah longsor (土砂崩《どしゃくず》れ). Wajib ≥1.5m. Berbeda dari 換気《かんき》 dan 排水《はいすい》.",
+  _origIndex: 114
+  },
+{
+  id: 107,
+  category: "anzen",
+  source: "jac-jitsugi2",
+  furi: "しんきにゅうじょうしゃきょういく vs しんにゅうしゃあんぜんえいせいきょういく",
+  jp: "新規入場者教育《しんきにゅうじょうしゃきょういく》 vs 新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》",
+  type: "konsep",
+  id_text: "Dua orientasi K3 berbeda",
+  desc: "①新規入《い》り場《にゅうじょう》者《もの》教育《しんきにゅうじょうしゃきょういく》: pendatang baru ke lokasi.",
+  _origIndex: 115
+  },
+{
+  id: 108,
+  category: "anzen",
+  source: "jac-jitsugi1",
+  furi: "さんだいさいがい",
+  jp: "三大災害《さんだいさいがい》",
+  type: "konsep",
+  id_text: "Tiga bencana besar",
+  desc: "①墜落《ついらく》・転《ころ》び落《てんらく》 (terbanyak) ②機械《きかい》・クレーン災害《さいがい》 ③崩壊《ほうかい》・倒壊《とうかい》. Menyumbang 40–70%",
+  _origIndex: 116
+  },
+{
+  id: 113,
+  category: "anzen",
+  source: "jac-jitsugi2",
+  furi: "ひろうぼうしてきせつなすいみんとしょくじ",
+  jp: "疲労防止《ひろうぼうしてきせつなすいみんとしょくじ》",
+  type: "konsep",
+  id_text: "Pencegahan kelelahan",
+  desc: "Kelelahan kerja menyebabkan kecelakaan. Perhatikan tidur dan makan yang cukup setiap harinya.",
+  _origIndex: 121
+  },
+{
+  id: 121,
+  category: "sekou",
+  source: "jac-jitsugi1",
+  furi: "すいじゅんき",
+  jp: "水準器《レベル》",
+  type: "konsep",
+  id_text: "Waterpas / level",
+  desc: "Alat survei berteleskop untuk mengukur ketinggian/elevasi. Dipasang di atas tripod.",
+  _origIndex: 129
+  },
+{
+  id: 128,
+  category: "sekou",
+  source: "jac-jitsugi1",
+  furi: "すみつぼ",
+  jp: "墨つぼ《すみつぼ》",
+  type: "konsep",
+  id_text: "Wadah tinta / chalk line",
+  desc: "Membuat garis lurus panjang dengan benang bercelup tinta. Berbeda dari 墨《すみ》さし dan レーザー墨出《すみだ》し器《き》.",
+  _origIndex: 136
+  },
+{
+  id: 132,
+  category: "sekou",
+  source: "jac-jitsugi2",
+  furi: "だいしゃ",
+  jp: "台車《だいしゃ》",
+  type: "konsep",
+  id_text: "Kereta dorong datar",
+  desc: "Platform datar beroda untuk mengangkut material berat. Berbeda dari 一輪車《いちりんしゃ》 (satu roda).",
+  _origIndex: 140
   }
 ];

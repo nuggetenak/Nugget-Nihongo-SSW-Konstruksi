@@ -27,11 +27,11 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 
 ### S1 — Split gakka.js: merge ke vocab-jac (common) + pindah ke lifeline
 Files: `src/data/cards/common/gakka.js`, `src/data/cards/common/vocab-jac.js`, `src/data/cards/lifeline/vocab-jac.js`
-- [ ] Buka `common/gakka.js` — 17 cards total:
+- [x] Buka `common/gakka.js` — 17 cards total:
   - Cards dengan `source: "jac-gakka1"` (5) + `source: "jac-gakka2"` (3) → append ke `common/vocab-jac.js`
   - Cards dengan `source: "jac-jitsugi1"` (6) + `source: "jac-jitsugi2"` (3) → append ke `lifeline/vocab-jac.js`
-- [ ] Delete `common/gakka.js`
-- [ ] Verify: `common/vocab-jac.js` = 67 cards, `lifeline/vocab-jac.js` = 23 cards
+- [x] Delete `common/gakka.js`
+- [x] Verify: `common/vocab-jac.js` = 67 cards, `lifeline/vocab-jac.js` = 23 cards ✅, `lifeline/vocab-jac.js` = 23 cards
 
 ### S2 — Merge jitsugi.js ke lifeline/vocab-jac.js
 Files: `src/data/cards/lifeline/jitsugi.js`, `src/data/cards/lifeline/vocab-jac.js`
