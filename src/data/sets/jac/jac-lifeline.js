@@ -257,11 +257,7 @@ export const JAC_LIFELINE = [
     answer: 2,
     hasPhoto: false,
     explanation: '感電 (kanden) = sengatan listrik. Listrik mengalir melalui tubuh → kejutan kuat. Kecelakaan khas pekerjaan listrik. Kartu #81.',
-    related_card_id: null,
-    track: 'lifeline'
-  },
-  {
-    id: 'st1_q14',
+    related_card_id: 81,
     set: 'st1',
     setLabel: '実技 Set 1',
     topic: 'keselamatan',

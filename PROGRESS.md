@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (ct06 EXP-STUB done — BATCH 1 selesai)
+**Last updated:** 2026-05-10 (jac-lifeline STRUCT done — BATCH 2 selesai)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -35,7 +35,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 ## BATCH 2 — JAC Lifeline: null related_card_id (P18-LL)
 *(1 entry — STRUCT: cukup isi ID kartu yang tepat)*
 
-- [ ] `src/data/sets/jac/jac-lifeline.js` — STRUCT: fill 1 null `related_card_id` (st1_q13, 感電 → kartu #81)
+- [x] `src/data/sets/jac/jac-lifeline.js` — STRUCT: fill 1 null `related_card_id` (st1_q13, 感電 → kartu #81)
 
 ---
 
