@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (wt2 done)
+**Last updated:** 2026-05-10 (BATCH 2 all done)
 
 ---
 
@@ -39,30 +39,30 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 
 - [x] `src/data/sets/wayground/wt1.js` — FIX
 - [x] `src/data/sets/wayground/wt2.js` — FIX
-- [ ] `src/data/sets/wayground/wt3.js` — FIX
-- [ ] `src/data/sets/wayground/wt4.js` — FIX
-- [ ] `src/data/sets/wayground/wt5.js` — FIX
-- [ ] `src/data/sets/wayground/wt6.js` — FIX
-- [ ] `src/data/sets/wayground/wt7.js` — FIX
-- [ ] `src/data/sets/wayground/wt8.js` — FIX
-- [ ] `src/data/sets/wayground/wt9.js` — FIX
-- [ ] `src/data/sets/wayground/wt10.js` — FIX
-- [ ] `src/data/sets/wayground/wg1.js` — FIX
-- [ ] `src/data/sets/wayground/wg2.js` — FIX
-- [ ] `src/data/sets/wayground/wg3.js` — FIX
-- [ ] `src/data/sets/wayground/wg4.js` — FIX
-- [ ] `src/data/sets/wayground/wg5.js` — FIX
-- [ ] `src/data/sets/wayground/wg6.js` — FIX
-- [ ] `src/data/sets/wayground/wg7.js` — FIX
-- [ ] `src/data/sets/wayground/wg8.js` — FIX
-- [ ] `src/data/sets/wayground/wg9.js` — FIX
-- [ ] `src/data/sets/wayground/wg11.js` — FIX
-- [ ] `src/data/sets/wayground/wg12.js` — FIX
-- [ ] `src/data/sets/wayground/wp1.js` — FIX
-- [ ] `src/data/sets/wayground/wp2.js` — FIX
-- [ ] `src/data/sets/wayground/wp3.js` — FIX
-- [ ] `src/data/sets/wayground/wp4.js` — FIX
-- [ ] `src/data/sets/wayground/wp5.js` — FIX
+- [x] `src/data/sets/wayground/wt3.js` — FIX
+- [x] `src/data/sets/wayground/wt4.js` — FIX
+- [x] `src/data/sets/wayground/wt5.js` — FIX
+- [x] `src/data/sets/wayground/wt6.js` — FIX
+- [x] `src/data/sets/wayground/wt7.js` — FIX
+- [x] `src/data/sets/wayground/wt8.js` — FIX
+- [x] `src/data/sets/wayground/wt9.js` — FIX
+- [x] `src/data/sets/wayground/wt10.js` — FIX
+- [x] `src/data/sets/wayground/wg1.js` — FIX
+- [x] `src/data/sets/wayground/wg2.js` — FIX
+- [x] `src/data/sets/wayground/wg3.js` — FIX
+- [x] `src/data/sets/wayground/wg4.js` — FIX
+- [x] `src/data/sets/wayground/wg5.js` — FIX
+- [x] `src/data/sets/wayground/wg6.js` — FIX
+- [x] `src/data/sets/wayground/wg7.js` — FIX
+- [x] `src/data/sets/wayground/wg8.js` — FIX
+- [x] `src/data/sets/wayground/wg9.js` — FIX
+- [x] `src/data/sets/wayground/wg11.js` — FIX
+- [x] `src/data/sets/wayground/wg12.js` — FIX
+- [x] `src/data/sets/wayground/wp1.js` — FIX
+- [x] `src/data/sets/wayground/wp2.js` — FIX
+- [x] `src/data/sets/wayground/wp3.js` — FIX
+- [x] `src/data/sets/wayground/wp4.js` — FIX
+- [x] `src/data/sets/wayground/wp5.js` — FIX
 
 ## BATCH 3 — Quiz Sets Full Annotation
 *(6 files — ruby + hint + id, semua dari nol)*
