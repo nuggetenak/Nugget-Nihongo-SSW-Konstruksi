@@ -28,7 +28,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 - [x] `src/data/sets/csv/cp05.js` — FIX + ANNOTATE opts
 - [x] `src/data/sets/csv/cp06.js` — FIX + ANNOTATE opts
 - [x] `src/data/sets/csv/ct01.js` — FIX + ANNOTATE opts
-- [ ] `src/data/sets/csv/ct02.js` — FIX + ANNOTATE opts
+- [x] `src/data/sets/csv/ct02.js` — FIX + ANNOTATE opts
 - [ ] `src/data/sets/csv/ct03.js` — FIX + ANNOTATE opts
 - [ ] `src/data/sets/csv/ct04.js` — FIX + ANNOTATE opts
 - [ ] `src/data/sets/csv/ct05.js` — FIX + ANNOTATE opts
