@@ -316,3 +316,42 @@ Schema migration pending (P16). `hasPhoto`: teori=5, lifeline=7.
 | `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done |
 | `src/data/csv-sets.js` | v11 (P11) | ⚠️ Corrupted — see P11-FIX-A/B |
 | `src/data/wayground-sets.js` | v11 (P12) | ⚠️ Corrupted — see P12-FIX |
+
+---
+
+## PART 10 — SPLIT FILE STRUCTURE (content-dq branch only)
+
+All content files have been split into granular files for isolated DQ work.
+**When merging to main**, agent reassembles these back into monolithic files.
+
+```
+src/data/sets/
+  csv/          cp01.js–cp06.js, ct01.js–ct06.js          (12 files, 20–30 qs each)
+  wayground/    wt1.js–wt10.js, wg1.js–wg7.js, wp1.js–wp5.js  (26 files)
+  quiz/         doboku-01.js–03.js, kenchiku-01.js–03.js   (6 files, 15 qs each)
+  jac/          jac-teori.js, jac-lifeline.js               (2 files, unchanged)
+
+src/data/cards/
+  common/       ch1.js(28) ch2.js(72) ch3.js(110) ch4.js(101) ch5.js(78)
+                ch6.js(34) ch7.js(35) gakka.js(17)
+                vocab-jac.js(59) vocab-lifeline.js(98)
+                vocab-misc.js(114) vocab-supplementary.js(133)
+  lifeline/     ch2.js(3) ch3.js(21) ch4.js(39) ch5.js(122) ch6.js(71)
+                gakka.js(19) vocab-jac.js(14) vocab-lifeline.js(54)
+                vocab-misc.js(83) vocab-supplementary.js(138)
+```
+
+### Split file export naming
+- Sets: `export const SET_CP01 = {...}` (set object with questions array inside)
+- Cards: `export const CARDS_CH1 = [...]` (card array)
+
+### Monolithic originals still present (for reference, do not edit these)
+`src/data/csv-sets.js`, `src/data/wayground-sets.js`, `src/data/quiz-sets.js`,
+`src/data/source/cards-common.js`, `src/data/source/cards-lifeline.js`
+
+### Agent task scope per file (DQ)
+Each split file is self-contained. Work one file at a time:
+1. Clone branch, open target file
+2. Apply DQ fixes (ruby, opts, hints, exp stubs)
+3. Verify, commit, push
+4. Proceed to next file

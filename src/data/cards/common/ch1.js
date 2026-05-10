@@ -1,0 +1,312 @@
+// ch1.js — cards-common cards from source: ch1
+// (28 cards)
+export const CARDS_CH1 = [
+{
+  id: 1,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "ちょうれい",
+  jp: "朝礼《ちょうれい》",
+  type: "konsep",
+  id_text: "Apel pagi",
+  desc: "Pertemuan wajib setiap pagi sebelum kerja. Ada 2 jenis: apel umum dan apel per jenis pekerjaan.",
+  _origIndex: 0
+  },
+{
+  id: 2,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "きけんよちかつどう",
+  jp: "危険予知活動《きけんよちかつどう》（KY活動）",
+  type: "konsep",
+  id_text: "Prediksi Bahaya KY",
+  desc: "Identifikasi bahaya sebelum mulai kerja, dilakukan saat apel per jenis pekerjaan.",
+  _origIndex: 1
+  },
+{
+  id: 3,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "らじおたいそう",
+  jp: "ラジオ体操《らじおたいそう》",
+  type: "konsep",
+  id_text: "Senam radio",
+  desc: "Senam pemanasan saat apel pagi untuk mencegah cedera. Wajib diikuti semua pekerja sebelum kerja.",
+  _origIndex: 2
+  },
+{
+  id: 4,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "ゆびさしこしょう",
+  jp: "指差し呼称《ゆびさしこしょう》",
+  type: "konsep",
+  id_text: "Tunjuk dan panggil",
+  desc: "Metode konfirmasi keselamatan dengan menunjuk dan menyebut keras. Wajib tiap cek kondisi kerja.",
+  _origIndex: 3
+  },
+{
+  id: 114,
+  category: "career",
+  source: "jac-ch1",
+  furi: "けんせつきゃりああっぷしすてむ",
+  jp: "建設キャリアアップシステム《けんせつきゃりああっぷしすてむ》（CCUS）",
+  type: "konsep",
+  id_text: "Karier Konstruksi CCUS",
+  desc: "Rekam karier pekerja konstruksi, 4 level: putih→biru→perak→emas. Level 2 butuh ≥645 hari kerja.",
+  _origIndex: 122
+  },
+{
+  id: 115,
+  category: "career",
+  source: "jac-ch1",
+  furi: "もとうけ",
+  jp: "元請け《もとうけ》",
+  type: "konsep",
+  id_text: "Kontraktor utama",
+  desc: "Menerima kontrak dari klien, mengatur seluruh pekerjaan dan sub-kontraktor.",
+  _origIndex: 123
+  },
+{
+  id: 493,
+  category: "career",
+  source: "jac-ch1",
+  furi: "せこうたいせい",
+  jp: "施工体制《せこうたいせい》",
+  type: "konsep",
+  id_text: "Hierarki manajemen",
+  desc: "Urutan: 発注《はっちゅう》者《はっちゅうしゃ》→監理者《かんりしゃ》→ゼネコン→専門工事業者《せんもんこうじぎょうしゃ》→職長《しょくちょう》→作業員《さぎょういん》.",
+  _origIndex: 563
+  },
+{
+  id: 494,
+  category: "career",
+  source: "jac-ch1",
+  furi: "はっちゅうしゃ",
+  jp: "発注者《はっちゅうしゃ》",
+  type: "konsep",
+  id_text: "Pemberi order konstruksi",
+  desc: "Pihak yang memesan pekerjaan konstruksi.",
+  _origIndex: 564
+  },
+{
+  id: 495,
+  category: "career",
+  source: "jac-ch1",
+  furi: "かんりしゃ",
+  jp: "監理者《かんりしゃ》",
+  type: "konsep",
+  id_text: "Pengawas konstruksi",
+  desc: "Teknisi yang memastikan pekerjaan sesuai gambar/blueprint.",
+  _origIndex: 565
+  },
+{
+  id: 496,
+  category: "career",
+  source: "jac-ch1",
+  furi: "せっけいしゃ",
+  jp: "設計者《せっけいしゃ》",
+  type: "konsep",
+  id_text: "Perancang / Desainer",
+  desc: "Teknisi yang membuat dokumen desain untuk mewujudkan permintaan klien.",
+  _origIndex: 566
+  },
+{
+  id: 497,
+  category: "career",
+  source: "jac-ch1",
+  furi: "ぜねこん",
+  jp: "ゼネコン",
+  type: "konsep",
+  id_text: "General Contractor",
+  desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek",
+  _origIndex: 567
+  },
+{
+  id: 498,
+  category: "career",
+  source: "jac-ch1",
+  furi: "げんばかんとく",
+  jp: "現場監督《げんばかんとく》",
+  type: "konsep",
+  id_text: "Pengawas lapangan",
+  desc: "Teknisi yang mengawasi pekerjaan di lokasi konstruksi.",
+  _origIndex: 568
+  },
+{
+  id: 499,
+  category: "career",
+  source: "jac-ch1",
+  furi: "せんもんこうじぎょうしゃ",
+  jp: "専門工事業者《せんもんこうじぎょうしゃ》",
+  type: "konsep",
+  id_text: "Kontraktor spesialis",
+  desc: "Kontraktor spesialis yang menerima subkontrak dari ゼネコン.",
+  _origIndex: 569
+  },
+{
+  id: 500,
+  category: "career",
+  source: "jac-ch1",
+  furi: "しょくちょう",
+  jp: "職長《しょくちょう》",
+  type: "konsep",
+  id_text: "Mandor / Foreman",
+  desc: "Pemimpin langsung pekerja; menerima instruksi dari 現場監督《げんばかんとく》 dan meneruskan ke 技能者《ぎのうしゃ》.",
+  _origIndex: 570
+  },
+{
+  id: 501,
+  category: "career",
+  source: "jac-ch1",
+  furi: "ぎのうしゃ",
+  jp: "技能者《ぎのうしゃ》",
+  type: "konsep",
+  id_text: "Pekerja terampil",
+  desc: "Pekerja yang memiliki keahlian teknis di bidang konstruksi.",
+  _origIndex: 571
+  },
+{
+  id: 502,
+  category: "career",
+  source: "jac-ch1",
+  furi: "せしゅ",
+  jp: "施主《せしゅ》",
+  type: "konsep",
+  id_text: "Pemilik bangunan / klien",
+  desc: "Pihak yang memesan bangunan; istilah khas proyek kecil seperti rumah tinggal.",
+  _origIndex: 572
+  },
+{
+  id: 503,
+  category: "career",
+  source: "jac-ch1",
+  furi: "こうむてん",
+  jp: "工務店《こうむてん》",
+  type: "konsep",
+  id_text: "Kontraktor lokal kecil",
+  desc: "Kontraktor kecil untuk proyek rumah tinggal; bertindak sebagai 元請《もとうけ》け dari 施主《せしゅ》.",
+  _origIndex: 573
+  },
+{
+  id: 504,
+  category: "career",
+  source: "jac-ch1",
+  furi: "もとうけ",
+  jp: "元請け《もとうけ》",
+  type: "konsep",
+  id_text: "Kontraktor utama",
+  desc: "Pihak yang menerima kontrak langsung dari klien lalu memberi subkontrak ke spesialis.",
+  _origIndex: 574
+  },
+{
+  id: 505,
+  category: "career",
+  source: "jac-ch1",
+  furi: "ひょうかのさんきじゅん",
+  jp: "CCUS評価の3基準《ひょうかのさんきじゅん》",
+  type: "konsep",
+  id_text: "3 kriteria CCUS",
+  desc: "Tiga kriteria evaluasi CCUS: ①hari kerja tercatat ②lisensi/sertifikat ③kemampuan manajerial.",
+  _origIndex: 575
+  },
+{
+  id: 506,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "しんきにゅうじょうしゃ",
+  jp: "新規入場者《しんきにゅうじょうしゃ》",
+  type: "konsep",
+  id_text: "Pekerja baru pertama",
+  desc: "Pekerja yang pertama kali masuk lokasi konstruksi tertentu.",
+  _origIndex: 576
+  },
+{
+  id: 507,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "あんぜんしょうわ・たっちあんどこーる",
+  jp: "安全唱和・タッチアンドコール《あんぜんしょうわ・たっちあんどこーる》",
+  type: "konsep",
+  id_text: "Seruan keselamatan",
+  desc: "Seruan keselamatan dan tumpuk tangan bersama di apel per jenis pekerjaan.",
+  _origIndex: 577
+  },
+{
+  id: 508,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "ぜろさいでいこうよし",
+  jp: "ゼロ災で行こう、ヨシ！！《ぜろさいでいこうよし》",
+  type: "konsep",
+  id_text: "\"Zero kecelakaan, maju!",
+  desc: "Slogan 安全唱和《あんぜんしょうわ》 diucapkan sambil 指《ゆび》さし saat apel per jenis pekerjaan.",
+  _origIndex: 578
+  },
+{
+  id: 509,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "きけんよちかつどうのよんすてっぷ",
+  jp: "KY活動の4ステップ《きけんよちかつどうのよんすてっぷ》",
+  type: "konsep",
+  id_text: "4 langkah KY",
+  desc: "4 langkah KY活動《かつどう》: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target",
+  _origIndex: 579
+  },
+{
+  id: 510,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "きけんよちぼーど",
+  jp: "KYボード",
+  type: "konsep",
+  id_text: "KY Board",
+  desc: "Formulir yang diisi saat KY活動《かつどう》: kolom titik bahaya dan solusi tim.",
+  _origIndex: 580
+  },
+{
+  id: 511,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "ぜんたいちょうれいのろっこうもく",
+  jp: "全体朝礼の6項目《ぜんたいちょうれいのろっこうもく》",
+  type: "konsep",
+  id_text: "6 agenda apel pagi umum",
+  desc: "6 agenda: sapaan, senam radio, konfirmasi kerja, KY, cek keselamatan berpasangan, lalu「ご安全《あんぜん》に!」.",
+  _origIndex: 581
+  },
+{
+  id: 512,
+  category: "gaiyou",
+  source: "jac-ch1",
+  furi: "あんぜんかくにんのはちこうもく",
+  jp: "安全確認の8項目《あんぜんかくにんのはちこうもく》",
+  type: "konsep",
+  id_text: "8 item cek keselamatan",
+  desc: "Di akhir 全体朝礼《ぜんたいちょうれい》, 2人《にん》1組《くみ》 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali",
+  _origIndex: 582
+  },
+{
+  id: 513,
+  category: "career",
+  source: "jac-ch1",
+  furi: "いったいかん",
+  jp: "一体感《いったいかん》",
+  type: "konsep",
+  id_text: "Rasa kesatuan tim di",
+  desc: "Rasa kesatuan yang terbentuk dari pekerja berbagai bidang yang bekerja sama.",
+  _origIndex: 583
+  },
+{
+  id: 1272,
+  category: "career",
+  source: "jac-ch1",
+  furi: "CCUSのよんれべるとじょうけん",
+  jp: "CCUSの4レベルと条件《CCUSのよんれべるとじょうけん》",
+  type: "konsep",
+  id_text: "4 level CCUS dan syaratnya",
+  desc: "Lv.1 白(ホワイト)=初級技能者・見習い。\nLv.2 青(ブルー)=中堅・一人前 ← 登録後645日(3年)以上。\nLv.3 銀(シルバー)=職長として現場に従事できる技能者。\nLv.4 金(ゴールド)=高度マネジメント能力(登録基幹技能者など)。",
+  _origIndex: 1428
+  }
+];
