@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (P17 FILL done — confusion-pairs tip_id 28 entries)
+**Last updated:** 2026-05-10 (P19 RUBY done — danger-pairs traps+explanation 20 entries)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -28,7 +28,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 
 ### P19 — danger-pairs: ruby on traps + explanation (20 entries)
 `src/data/danger-pairs.js`
-- [ ] Tambah ruby 《》 ke semua kanji dalam field `traps[]` dan `explanation`
+- [x] Tambah ruby 《》 ke semua kanji dalam field `traps[]` dan `explanation`
 - **Rule:** annotate full compound, bukan suffix. Maru `（）` untuk sinonim/abbrev — jangan ubah ke `《》`.
 - **Verify:** semua kanji dalam traps/explanation sudah punya 《》
 
