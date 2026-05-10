@@ -6,8 +6,10 @@ export const SET_KENCHIKU_02 = {
     emoji: '🎨',
     questions: [
       {
-        q: '内装工事でクロス（壁紙）を貼る前に必要な下地処理は？',
-        opts: ['パテ処理で平滑にする', '水を塗る', 'ペンキを塗る', '何もしなくてよい'],
+        id: 1,
+        q: '内装《ないそう》工事《こうじ》でクロス（壁紙《かべかみ》）を貼る《はる》前《まえ》に必要《ひつよう》な下地《したじ》処理《しょり》は？',
+        hint: 'Apa persiapan permukaan yang diperlukan sebelum memasang wallpaper?',
+        opts: ['パテ処理《しょり》で平滑《へいかつ》にする', '水《みず》を塗る《ぬる》', 'ペンキを塗る《ぬる》', '何《なに》もしなくてよい'],
         opts_id: ['Meratakan dengan dempul/putty', 'Menyiram air', 'Mengecat', 'Tidak perlu apa-apa'],
         ans: 0,
         exp: 'Sebelum pasang wallpaper (クロス), permukaan dinding harus diratakan dengan putty/dempul (パテ). Permukaan yang tidak rata = wallpaper gelembung atau tidak merekat.',
@@ -15,8 +17,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Persiapan permukaan sebelum wallpaper. Sebagai pekerja SSW: kamu akan bantu dempul dinding — harus benar-benar rata. Mandor: パテをしっかりかけてから、クロスを貼ってください。'
       },
       {
-        q: 'タイル工事で「目地（めじ）」の役割は？',
-        opts: ['タイル間の隙間を埋めて防水する', '飾りのため', 'タイルを固定するため', '色をつけるため'],
+        id: 2,
+        q: 'タイル工事《こうじ》で「目地《めじ》」の役割《やくわり》は？',
+        hint: 'Apa fungsi nat/grout (目地) pada pekerjaan ubin?',
+        opts: ['タイル間《かん》の隙間《すきま》を埋めて《うめて》防水《ぼうすい》する', '飾り《かざり》のため', 'タイルを固定《こてい》するため', '色《いろ》をつけるため'],
         opts_id: ['Mengisi celah antar ubin & waterproofing', 'Untuk dekorasi', 'Untuk fiksasi ubin', 'Untuk memberi warna'],
         ans: 0,
         exp: '目地 (nat/grout) = material yang mengisi celah antar ubin. Fungsi utama: waterproofing + mencegah kotoran masuk. Fiksasi ubin = mortar perekat (bukan grout).',
@@ -24,8 +28,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Fungsi nat/grout pada ubin. Sebagai pekerja SSW: setelah ubin dipasang, kamu akan bantu aplikasi grout — ratakan dengan rubber float dan bersihkan kelebihan segera. Mandor: 目地を丁寧に入れてください。'
       },
       {
-        q: '外壁塗装の工程で正しい順序は？',
-        opts: ['下塗り→中塗り→上塗り', '上塗り→中塗り→下塗り', '中塗り→下塗り→上塗り', '一度塗りのみ'],
+        id: 3,
+        q: '外壁《がいへき》塗装《とそう》の工程《こうてい》で正しい《ただしい》順序《じゅんじょ》は？',
+        hint: 'Bagaimana urutan yang benar dalam pengecatan dinding eksterior?',
+        opts: ['下塗《したぬ》り→中塗《なかぬ》り→上塗《うわぬ》り', '上塗《うわぬ》り→中塗《なかぬ》り→下塗《したぬ》り', '中塗《なかぬ》り→下塗《したぬ》り→上塗《うわぬ》り', '一度《いちど》塗《ぬ》りのみ'],
         opts_id: ['Primer→Mid coat→Top coat', 'Top coat→Mid→Primer', 'Mid→Primer→Top', 'Satu lapis saja'],
         ans: 0,
         exp: 'Urutan pengecatan eksterior: 下塗り (primer) → 中塗り (mid coat) → 上塗り (top coat). Masing-masing harus kering sebelum lapisan berikut. Satu lapis saja = tidak tahan lama.',
@@ -33,8 +39,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Urutan pengecatan 3 lapis. Sebagai pekerja SSW: setiap lapisan harus kering dulu (乾燥時間). Cat di atas lapisan basah = mengelupas. Mandor: 下塗りが乾いてから中塗りをしてください。'
       },
       {
-        q: 'フローリング（床板）の施工で「伸縮目地」を設ける理由は？',
-        opts: ['温度変化による膨張・収縮に対応するため', '掃除をしやすくするため', '見た目をよくするため', '音を大きくするため'],
+        id: 4,
+        q: 'フローリング（床板《ゆかいた》）の施工《せこう》で「伸縮《しんしゅく》目地《めじ》」を設ける《もうける》理由《りゆう》は？',
+        hint: 'Mengapa expansion joint (伸縮目地) dipasang pada lantai kayu?',
+        opts: ['温度《おんど》変化《へんか》による膨張《ぼうちょう》・収縮《しゅうしゅく》に対応《たいおう》するため', '掃除《そうじ》をしやすくするため', '見た目《みため》をよくするため', '音《おと》を大きく《おおきく》するため'],
         opts_id: ['Mengakomodasi pemuaian/penyusutan akibat suhu', 'Agar mudah dibersihkan', 'Agar terlihat bagus', 'Agar suaranya keras'],
         ans: 0,
         exp: 'Expansion joint (伸縮目地) di lantai kayu = celah yang disediakan untuk mengakomodasi pemuaian/penyusutan material akibat perubahan suhu dan kelembaban. Tanpa ini = lantai melenting.',
@@ -42,8 +50,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Expansion joint pada lantai. Sebagai pekerja SSW: tinggalkan celah 5-10mm di tepi dinding saat pasang lantai kayu — ini bukan kesalahan, ini desain. Mandor: 壁際に隙間を取ってください。'
       },
       {
-        q: '石膏ボード（せっこうボード）の施工で注意することは？',
-        opts: ['ビスの間隔と深さを均一にする', '色を選ぶ', '温度を測る', '音を確認する'],
+        id: 5,
+        q: '石膏《せっこう》ボードの施工《せこう》で注意《ちゅうい》することは？',
+        hint: 'Apa yang perlu diperhatikan saat pemasangan gypsum board?',
+        opts: ['ビスの間隔《かんかく》と深さ《ふかさ》を均一《きんいつ》にする', '色《いろ》を選ぶ《えらぶ》', '温度《おんど》を測る《はかる》', '音《おと》を確認《かくにん》する'],
         opts_id: ['Jarak & kedalaman sekrup harus seragam', 'Memilih warna', 'Mengukur suhu', 'Memeriksa suara'],
         ans: 0,
         exp: 'Pemasangan gypsum board: jarak sekrup (ビス間隔) harus seragam (biasanya 150-200mm di tepi, 200-300mm di tengah) dan kedalaman pas — terlalu dalam = gypsum pecah, terlalu dangkal = tidak kencang.',
@@ -51,8 +61,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Pemasangan gypsum board. Sebagai pekerja SSW: ini pekerjaan interior yang sering. Gunakan screw gun dengan stopper agar kedalaman konsisten. Mandor: ビスのピッチは200mmにしてください。'
       },
       {
-        q: 'シーリング工事（コーキング）の目的は？',
-        opts: ['隙間からの雨水の浸入を防ぐ', '壁を美しくする', '壁を厚くする', '壁の色を変える'],
+        id: 6,
+        q: 'シーリング工事《こうじ》（コーキング）の目的《もくてき》は？',
+        hint: 'Apa tujuan pekerjaan sealant/caulking?',
+        opts: ['隙間《すきま》からの雨水《あまみず》の浸入《しんにゅう》を防ぐ《ふせぐ》', '壁《かべ》を美しく《うつくしく》する', '壁《かべ》を厚く《あつく》する', '壁《かべ》の色《いろ》を変える《かえる》'],
         opts_id: ['Mencegah air hujan masuk lewat celah', 'Mempercantik dinding', 'Menambah tebal dinding', 'Mengubah warna dinding'],
         ans: 0,
         exp: 'Sealant/caulking (シーリング) = material elastis yang mengisi celah pada sambungan (目地) untuk mencegah infiltrasi air hujan. Bukan untuk estetika utama.',
@@ -60,8 +72,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Pekerjaan sealant. Sebagai pekerja SSW: kamu akan sering aplikasi sealant di sambungan jendela, panel, dll. Masking tape harus rapi. Mandor: シーリングの目地をきれいに仕上げてください。'
       },
       {
-        q: '吹付け塗装（ふきつけとそう）で養生する理由は？',
-        opts: ['塗料の飛散を防ぐ', '天気を確認するため', '写真を撮るため', '休憩するため'],
+        id: 7,
+        q: '吹付け《ふきつけ》塗装《とそう》で養生《ようじょう》する理由《りゆう》は？',
+        hint: 'Mengapa masking/養生 dilakukan sebelum spray painting?',
+        opts: ['塗料《とりょう》の飛散《ひさん》を防ぐ《ふせぐ》', '天気《てんき》を確認《かくにん》するため', '写真《しゃしん》を撮る《とる》ため', '休憩《きゅうけい》するため'],
         opts_id: ['Mencegah percikan cat', 'Untuk cek cuaca', 'Untuk foto', 'Untuk istirahat'],
         ans: 0,
         exp: '養生 dalam konteks spray painting = menutup/melindungi area yang tidak boleh kena cat menggunakan masking tape + plastik sheet. Cat spray menyebar luas — tanpa 養生, semuanya kena cat.',
@@ -69,8 +83,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Masking sebelum spray painting. Sebagai pekerja SSW: kamu akan bantu pasang plastik sheet di jendela, lantai, dan area sekitar sebelum painting spray dimulai. Mandor: 養生をしっかりしてから吹付けてください。'
       },
       {
-        q: '「建具（たてぐ）」とは何を指す？',
-        opts: ['ドア・窓・障子など開閉する部材', '柱', '基礎', '屋根'],
+        id: 8,
+        q: '「建具《たてぐ》」とは何《なに》を指す《さす》？',
+        hint: 'Apa yang dimaksud dengan istilah \"tategу\" dalam konstruksi?',
+        opts: ['ドア・窓《まど》・障子《しょうじ》など開閉《かいへい》する部材《ぶざい》', '柱《はしら》', '基礎《きそ》', '屋根《やね》'],
         opts_id: ['Pintu, jendela, shoji dll (elemen buka-tutup)', 'Kolom', 'Fondasi', 'Atap'],
         ans: 0,
         exp: '建具 (たてぐ) = semua elemen yang bisa dibuka-tutup: pintu (ドア), jendela (窓), shoji (障子), fusuma. Bukan kolom (柱), fondasi (基礎), atau atap (屋根).',
@@ -78,8 +94,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Elemen buka-tutup bangunan. Sebagai pekerja SSW: pekerjaan 建具 termasuk pasang kusen, engsel, handle, kunci. Mandor: 建具の取り付けを始めてください。'
       },
       {
-        q: 'アルミサッシの取り付けで重要なことは？',
-        opts: ['水平と垂直を正確に合わせる', '速く取り付ける', '安い材料を使う', '色を選ぶ'],
+        id: 9,
+        q: 'アルミサッシの取り付け《とりつけ》で重要《じゅうよう》なことは？',
+        hint: 'Hal terpenting dalam pemasangan kusen aluminium adalah?',
+        opts: ['水平《すいへい》と垂直《すいちょく》を正確《せいかく》に合わせる《あわせる》', '速く《はやく》取り付ける《とりつける》', '安い《やすい》材料《ざいりょう》を使う《つかう》', '色《いろ》を選ぶ《えらぶ》'],
         opts_id: ['Menjaga level horizontal & vertikal yang akurat', 'Pasang secepat mungkin', 'Pakai material murah', 'Memilih warna'],
         ans: 0,
         exp: 'Kusen aluminium (アルミサッシ) harus dipasang level (水平) dan plumb (垂直) secara akurat. Miring sedikit saja = jendela tidak bisa dibuka/ditutup dengan baik.',
@@ -87,8 +105,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Pemasangan kusen aluminium. Sebagai pekerja SSW: selalu gunakan waterpass saat pasang sash — koreksi dengan shim kalau perlu. Mandor: サッシの水平・垂直を確認してください。'
       },
       {
-        q: '外壁の「通気工法」の目的は？',
-        opts: ['壁内の湿気を外に逃がす', '壁を厚くする', '壁に色をつける', '壁に音を通す'],
+        id: 10,
+        q: '外壁《がいへき》の「通気《つうき》工法《こうほう》」の目的《もくてき》は？',
+        hint: 'Apa tujuan sistem dinding berventilasi (通気工法) pada dinding eksterior?',
+        opts: ['壁《かべ》内《ない》の湿気《しっけ》を外《そと》に逃がす《にがす》', '壁《かべ》を厚く《あつく》する', '壁《かべ》に色《いろ》をつける', '壁《かべ》に音《おと》を通す《とおす》'],
         opts_id: ['Membuang kelembaban dari dalam dinding', 'Menambah tebal dinding', 'Memberi warna dinding', 'Meneruskan suara'],
         ans: 0,
         exp: '通気工法 (ventilated facade) = sistem konstruksi dinding eksterior yang menyediakan celah udara (通気層) untuk membuang kelembaban/uap air dari dalam dinding. Mencegah kayu/metal berkarat.',
@@ -96,8 +116,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Sistem dinding berventilasi. Sebagai pekerja SSW: saat pasang siding (外装材), harus ada celah udara di belakangnya — JANGAN tutup rapat. Mandor: 通気層を塞がないように注意してください。'
       },
       {
-        q: '天井の「野縁（のぶち）」の役割は？',
-        opts: ['天井板を取り付ける下地材', '柱を支える材料', '床板を支える材料', '外壁を支える材料'],
+        id: 11,
+        q: '天井《てんじょう》の「野縁《のぶち》」の役割《やくわり》は？',
+        hint: 'Apa fungsi \"nobuchi\" (野縁) pada plafon?',
+        opts: ['天井板《てんじょういた》を取り付ける《とりつける》下地材《したじざい》', '柱《はしら》を支える《ささえる》材料《ざいりょう》', '床板《ゆかいた》を支える《ささえる》材料《ざいりょう》', '外壁《がいへき》を支える《ささえる》材料《ざいりょう》'],
         opts_id: ['Rangka penopang plafon', 'Material penopang kolom', 'Material penopang lantai', 'Material penopang dinding luar'],
         ans: 0,
         exp: '野縁 (のぶち) = ceiling furring strip — rangka horizontal tempat plafon dipasang. Mirip seperti rangka hollow di Indonesia.',
@@ -105,8 +127,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Rangka plafon. Sebagai pekerja SSW: kamu akan pasang 野縁 di bawah langit-langit sebelum gypsum board dipasang. Jarak harus rata. Mandor: 野縁のピッチを確認してください。'
       },
       {
-        q: '「ユニットバス」の施工で最も注意すべきことは？',
-        opts: ['防水と排水の確実な施工', '色の選定', '窓の大きさ', '照明の明るさ'],
+        id: 12,
+        q: '「ユニットバス」の施工《せこう》で最も《もっとも》注意《ちゅうい》すべきことは？',
+        hint: 'Apa yang paling penting diperhatikan saat instalasi unit bath prefab?',
+        opts: ['防水《ぼうすい》と排水《はいすい》の確実《かくじつ》な施工《せこう》', '色《いろ》の選定《せんてい》', '窓《まど》の大きさ《おおきさ》', '照明《しょうめい》の明るさ《あかるさ》'],
         opts_id: ['Waterproofing & drainase yang sempurna', 'Pemilihan warna', 'Ukuran jendela', 'Kecerahan lampu'],
         ans: 0,
         exp: 'Unit bath (bathroom prefab): prioritas utama = waterproofing dan drainase. Kebocoran air di kamar mandi = kerusakan struktur di bawahnya. Warna dan pencahayaan penting tapi bukan prioritas keselamatan.',
@@ -114,8 +138,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Instalasi kamar mandi prefab. Sebagai pekerja SSW: tes kebocoran (漏水テスト) WAJIB setelah instalasi. Mandor: 防水の漏水テストをしてください。'
       },
       {
-        q: '「墨出し」で使う「墨壺（すみつぼ）」の使い方は？',
-        opts: ['糸を引っ張って直線を打つ', '穴を開ける', 'ネジを締める', '釘を打つ'],
+        id: 13,
+        q: '「墨出《すみだ》し」で使う《つかう》「墨壺《すみつぼ》」の使い方《つかいかた》は？',
+        hint: 'Bagaimana cara menggunakan sumitsubo (墨壺) saat marking?',
+        opts: ['糸《いと》を引っ張って《ひっぱって》直線《ちょくせん》を打つ《うつ》', '穴《あな》を開ける《あける》', 'ネジを締める《しめる》', '釘《くぎ》を打つ《うつ》'],
         opts_id: ['Tarik benang & hentakkan untuk garis lurus', 'Membuat lubang', 'Mengencangkan sekrup', 'Memukul paku'],
         ans: 0,
         exp: '墨壺 (sumitsubo/chalk line) = alat tradisional Jepang untuk membuat garis lurus pada permukaan. Tarik benang yang sudah dilumuri tinta → hentakkan → muncul garis lurus.',
@@ -123,8 +149,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Chalk line tradisional Jepang. Sebagai pekerja SSW: walaupun ada laser, 墨壺 masih sering dipakai. Cara pakai: tahan ujung, tarik benang, hentakkan. Mandor: 墨壺で墨を打ってくれ。'
       },
       {
-        q: '「地震力」に対する建物の構造で重要なものは？',
-        opts: ['耐震壁（たいしんへき）と筋交い（すじかい）', '窓ガラスの色', 'カーテンの種類', '照明の数'],
+        id: 14,
+        q: '「地震力《じしんりょく》」に対する《たいする》建物《たてもの》の構造《こうぞう》で重要《じゅうよう》なものは？',
+        hint: 'Elemen struktur apa yang penting untuk menahan gaya gempa?',
+        opts: ['耐震壁《たいしんへき》と筋交い《すじかい》', '窓《まど》ガラスの色《いろ》', 'カーテンの種類《しゅるい》', '照明《しょうめい》の数《かず》'],
         opts_id: ['Dinding tahan gempa & bracing', 'Warna kaca jendela', 'Jenis tirai', 'Jumlah lampu'],
         ans: 0,
         exp: 'Ketahanan gempa (耐震) dicapai dengan dinding tahan gempa (耐震壁/shear wall) dan bracing diagonal (筋交い). Warna kaca atau tirai tidak relevan dengan kekuatan struktur.',
@@ -132,8 +160,10 @@ export const SET_KENCHIKU_02 = {
         desc: 'Elemen tahan gempa bangunan. Sebagai pekerja SSW: Jepang rawan gempa — setiap bangunan harus punya elemen 耐震. Jangan pernah potong 筋交い tanpa izin. Mandor: 筋交いは絶対に切るな！'
       },
       {
-        q: '「GL工法」でボードを壁に貼る接着剤は？',
-        opts: ['GLボンド（石膏系接着剤）', '木工用ボンド', 'セメント', '水'],
+        id: 15,
+        q: '「GL工法《こうほう》」でボードを壁《かべ》に貼る《はる》接着剤《せっちゃくざい》は？',
+        hint: 'Adhesive apa yang digunakan dalam metode GL (GL工法)?',
+        opts: ['GLボンド（石膏系《せっこうけい》接着剤《せっちゃくざい》）', '木工用《もっこうよう》ボンド', 'セメント', '水《みず》'],
         opts_id: ['GL Bond (adhesive berbasis gypsum)', 'Lem kayu', 'Semen', 'Air'],
         ans: 0,
         exp: 'GL工法 = metode pemasangan plasterboard langsung ke dinding beton menggunakan GLボンド (adhesive berbasis gypsum). Bukan lem kayu (terlalu lemah) atau semen (terlalu kaku).',
