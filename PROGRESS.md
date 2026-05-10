@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (jac-lifeline STRUCT done — BATCH 2 selesai)
+**Last updated:** 2026-05-10 (jac-teori MIGRATE done — BATCH 3 item 1)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -43,7 +43,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 *(95 qs — rename + restructure fields ke unified question schema)*
 *(Urutan: teori dulu, lalu lifeline)*
 
-- [ ] `src/data/sets/jac/jac-teori.js` — MIGRATE (65 qs)
+- [x] `src/data/sets/jac/jac-teori.js` — MIGRATE (65 qs)
 - [ ] `src/data/sets/jac/jac-lifeline.js` — MIGRATE (30 qs)
 
 ---
