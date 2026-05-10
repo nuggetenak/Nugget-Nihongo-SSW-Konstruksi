@@ -60,7 +60,7 @@ export const CARDS_CH7 = [
   id: 515,
   category: "anzen",
   source: "jac-ch7",
-  furi: "ひらいらっか",
+  furi: "ひらい・らっか",
   jp: "飛来《ひらい》・落下《らっか》",
   type: "konsep",
   id_text: "Benda melayang / jatuh",

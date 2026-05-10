@@ -645,7 +645,7 @@ export const CARDS_VOCAB_MISC = [
   id: 1091,
   category: "anzen",
   source: "vocab-exam",
-  furi: "ひらいらっか",
+  furi: "ひらい・らっか",
   jp: "飛来《ひらい》・落下《らっか》",
   type: "vocab",
   id_text: "Bahaya benda jatuh atas",

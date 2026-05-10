@@ -487,7 +487,7 @@ export const CARDS_VOCAB_JAC = [
   id: 1218,
   category: "career",
   source: "vocab-jac",
-  furi: "ほうれんそう",
+  furi: "ほう・れん・そう",
   jp: "ほう・れん・そう",
   type: "vocab",
   id_text: "3 pilar komunikasi kerja",

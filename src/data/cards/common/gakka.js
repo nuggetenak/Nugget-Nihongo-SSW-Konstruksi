@@ -38,7 +38,7 @@ export const CARDS_GAKKA = [
   id: 107,
   category: "anzen",
   source: "jac-jitsugi2",
-  furi: "しんきにゅうじょうしゃきょういくしんにゅうしゃあんぜんえいせいきょういく",
+  furi: "しんきにゅうじょうしゃきょういくvsしんにゅうしゃあんぜんえいせいきょういく",
   jp: "新規入場者教育《しんきにゅうじょうしゃきょういく》 vs 新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》",
   type: "konsep",
   id_text: "Dua orientasi K3 berbeda",
