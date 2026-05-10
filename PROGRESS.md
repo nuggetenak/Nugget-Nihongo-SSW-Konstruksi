@@ -1,7 +1,7 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (session 6: housekeeping & pre-expansion hygiene — handoff v13)
-**Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md` (now v13 internally)
+**Last updated:** 2026-05-11 (session 7: handoff hygiene — MASTER EXECUTION ORDER + CODEBASE STATE synced)
+**Handoff ref:** `DATA_QUALITY_HANDOFF_v13.md`
 
 ---
 
@@ -43,7 +43,14 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 - [x] Documented in handoff v13 §11A
 - **Decision:** No new stubs needed. Structure is ready.
 
-### H5 — Path & source convention lock ✅ / ⚠️ partial
+### H6 — Handoff file sync & rename ✅ (session 7)
+- [x] Renamed `DATA_QUALITY_HANDOFF_v12.md` → `DATA_QUALITY_HANDOFF_v13.md` (filename now matches content)
+- [x] MASTER EXECUTION ORDER: all completed tasks updated to ✅ (P7, P11-FIX-A/B, P11-C, P12-FIX, P13-struct/content, P14, P15, P16, P17, P18, P19) — were showing ❌ OPEN despite being done
+- [x] CODEBASE STATE: clarified monolithic vs split file distinction — `csv-sets.js`/`wayground-sets.js` labelled as legacy originals (not working files on content-dq)
+- [x] P21 status updated to ⏸ DEFERRED in execution order
+- **Root cause:** Session 6 agent updated PROGRESS.md but did not sync the handoff's execution order section
+
+
 - [x] Confirmed `jac-doboku.js` / `jac-kenchiku.js` at `src/data/` top-level (not `sets/jac/`)
 - [x] PROGRESS.md P21 path already correct — no fix needed
 - [x] Confirmed `sets/jac/` only has teori+lifeline (split DQ copies)

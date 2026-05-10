@@ -300,31 +300,33 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 
 ## MASTER EXECUTION ORDER (v12)
 
-### 🔴 Corruption fixes — agent, do first
+### 🔴 Corruption fixes — DONE
 | Task | File | Scope | Status |
 |---|---|---|---|
-| **P11-FIX-A** | `csv-sets.js` | Remove double ruby from 39 q lines | ❌ OPEN |
-| **P11-FIX-B** | `csv-sets.js` | Revert 26 wrong 《》 → （） (synonyms/abbrevs) | ❌ OPEN |
-| **P12-FIX** | `wayground-sets.js` | Remove double ruby from 217 lines | ❌ OPEN |
+| **P11-FIX-A** | `sets/csv/*.js` | Remove double ruby from 39 q lines | ✅ DONE (split files) |
+| **P11-FIX-B** | `sets/csv/*.js` | Revert 26 wrong 《》 → （） (synonyms/abbrevs) | ✅ DONE (split files) |
+| **P12-FIX** | `sets/wayground/*.js` | Remove double ruby from 217 lines | ✅ DONE (split files) |
 
-### 🟡 Content tasks — owner does these (needs Japanese knowledge)
-| Task | File | Scope | Status |
-|---|---|---|---|
-| **P11-C** | `csv-sets.js` | Annotate 198 bare opts lines | ❌ OPEN |
-| **P13-content** | `quiz-sets.js` | Ruby for 90 q + ~360 opts + 90 hints | ❌ OPEN |
-| **P15** | `csv-sets.js` | Replace ~40 "modul JAC" exp stubs | ❌ OPEN |
-| **P7** | `cards-common.js`, `cards-lifeline.js` | Align furi separators — 211 cards | ❌ OPEN |
-| **P18** | `jac-teori.js` | Fill 21 null `related_card_id` | ❌ OPEN |
+> **Note:** Monolithic `csv-sets.js` and `wayground-sets.js` still show corruption — these are legacy originals, intentionally not edited on `content-dq`. Split files in `src/data/sets/` are the working source of truth. Monolithics will be replaced at main-merge time.
 
-### 🔵 Agent tasks — scripting only
+### 🟡 Content tasks — DONE
 | Task | File | Scope | Status |
 |---|---|---|---|
-| **P13-struct** | `quiz-sets.js` | Add `id` (1-indexed per set) to all 90 qs | ❌ OPEN |
-| **P14** | `wayground-sets.js` | Expand ~28 stub `exp` fields | ❌ OPEN |
-| **P16** | `jac-teori.js`, `jac-lifeline.js` | Schema migration — 95 qs | ❌ OPEN |
-| **P17** | `confusion-pairs.js` | Add `tip_id` field to 28 entries | ❌ OPEN |
-| **P19** | `danger-pairs.js` | Audit `traps`/`explanation` ruby | ❌ OPEN |
-| **P21** | stubs | Populate `jac-doboku.js` + `jac-kenchiku.js` — **jitsugi** (praktik bergambar) soal per track, bukan teori. Schema sama: `q/hint/opts/opts_id/ans/img/exp`. `img: null` semua dulu. Source: PDF jitsugi doboku/kenchiku. | PENDING |
+| **P11-C** | `sets/csv/*.js` | Annotate 198 bare opts lines | ✅ DONE (split files) |
+| **P13-content** | `sets/quiz/*.js` | Ruby for 90 q + ~360 opts + 90 hints | ✅ DONE |
+| **P15** | `sets/csv/*.js` | Replace ~40 "modul JAC" exp stubs | ✅ DONE |
+| **P7** | `src/data/cards/**/*.js` | Align furi separators — 152 fixed, 5 romaji-only accepted | ✅ DONE |
+| **P18** | `sets/jac/jac-teori.js` | Fill 21 null `related_card_id` — 0 null remaining | ✅ DONE |
+
+### 🔵 Agent tasks — DONE
+| Task | File | Scope | Status |
+|---|---|---|---|
+| **P13-struct** | `sets/quiz/*.js` | Add `id` (1-indexed per set) to all 90 qs | ✅ DONE |
+| **P14** | `sets/wayground/*.js` | Expand ~28 stub `exp` fields | ✅ DONE |
+| **P16** | `sets/jac/jac-teori.js`, `sets/jac/jac-lifeline.js` | Schema migration — 95 qs | ✅ DONE |
+| **P17** | `confusion-pairs.js` | Add `tip_id` field to 28 entries — 0 null remaining | ✅ DONE |
+| **P19** | `danger-pairs.js` | Audit `traps`/`explanation` ruby | ✅ DONE |
+| **P21** | stubs | Populate `jac-doboku.js` + `jac-kenchiku.js` — **jitsugi** (praktik bergambar) soal per track, bukan teori. Schema sama: `q/hint/opts/opts_id/ans/img/exp`. `img: null` semua dulu. Source: PDF jitsugi doboku/kenchiku. | ⏸ DEFERRED — blocked, belum ada PDF |
 
 ### ✅ Done
 | Task | Notes |
@@ -368,6 +370,8 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 
 ## CODEBASE STATE (v13 — storage version 5, unchanged)
 
+> **`content-dq` branch note:** Split files in `src/data/sets/` and `src/data/cards/` are the **working source of truth**. Monolithic files (`csv-sets.js`, `wayground-sets.js`, `quiz-sets.js`) are legacy originals retained for reference — intentionally not edited on this branch. They will be replaced at main-merge time by reassembling from split files.
+
 | File | Last changed | Notes |
 |---|---|---|
 | `src/storage/schema.js` | v8 | STORAGE_VERSION = 5 |
@@ -377,11 +381,17 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | `src/data/source/cards-doboku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
 | `src/data/source/cards-kenchiku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
 | `src/data/cards.js` | v10 | Regenerated — 1,443 cards |
-| `src/data/confusion-pairs.js` | v8 (P8) | 28 pairs, termA/B ruby done |
-| `src/data/danger-pairs.js` | v8 (P9) | 20 items, term ruby done |
-| `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done |
-| `src/data/csv-sets.js` | v11 (P11) | ⚠️ Corrupted — see P11-FIX-A/B |
-| `src/data/wayground-sets.js` | v11 (P12) | ⚠️ Corrupted — see P12-FIX |
+| `src/data/cards/**/*.js` | session 6 | Split files — furi aligned, ruby complete ✅ |
+| `src/data/confusion-pairs.js` | session 6 (P17) | 28 pairs, termA/B ruby done, tip_id filled ✅ |
+| `src/data/danger-pairs.js` | session 6 (P19) | 20 items, term + traps + explanation ruby done ✅ |
+| `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done ✅ |
+| `src/data/sets/csv/*.js` | session 6 (P11) | Double ruby fixed, wrong 《》 reverted, opts annotated ✅ |
+| `src/data/sets/wayground/*.js` | session 6 (P12/P14) | Double ruby fixed, exp stubs filled ✅ |
+| `src/data/sets/quiz/*.js` | session 6 (P13) | id field added, hints filled, ruby done ✅ |
+| `src/data/sets/jac/jac-teori.js` | session 6 (P16/P18) | Schema migrated, related_card_id complete ✅ |
+| `src/data/sets/jac/jac-lifeline.js` | session 6 (P16) | Schema migrated ✅ |
+| `src/data/csv-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/csv/` |
+| `src/data/wayground-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/wayground/` |
 | `src/data/jac-doboku.js` | stub | empty `JAC_DOBOKU = []` — awaiting PDF |
 | `src/data/jac-kenchiku.js` | stub | empty `JAC_KENCHIKU = []` — awaiting PDF |
 
