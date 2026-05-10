@@ -5,7 +5,7 @@ export const CARDS_GAKKA = [
   id: 36,
   category: "setsubi_kougu",
   source: "jac-jitsugi2",
-  furi: "かしつきじょしつき",
+  furi: "かしつきvsじょしつき",
   jp: "加湿器《かしつき》 vs 除湿器《じょしつき》",
   type: "konsep",
   id_text: "Pelembap vs pengering",
