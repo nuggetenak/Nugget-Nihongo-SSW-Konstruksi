@@ -6,8 +6,10 @@ export const SET_DOBOKU_01 = {
     emoji: '⛏️',
     questions: [
       {
-        q: '掘削作業を行う前に必ず確認することは？',
-        opts: ['地下埋設物の有無', '天気予報', '作業員の年齢', '昼食のメニュー'],
+        id: 1,
+        q: '掘削《くっさく》作業《さぎょう》を行う《おこなう》前《まえ》に必ず《かならず》確認《かくにん》することは？',
+        hint: 'Apa yang wajib dicek sebelum memulai pekerjaan galian?',
+        opts: ['地下《ちか》埋設物《まいせつぶつ》の有無《うむ》', '天気《てんき》予報《よほう》', '作業員《さぎょういん》の年齢《ねんれい》', '昼食《ちゅうしょく》のメニュー'],
         opts_id: ['Ada tidaknya utilitas bawah tanah', 'Prakiraan cuaca', 'Usia pekerja', 'Menu makan siang'],
         ans: 0,
         exp: 'Sebelum menggali, WAJIB cek utilitas bawah tanah (gas, listrik, air) untuk mencegah kecelakaan fatal. Kesalahan umum: memilih "prakiraan cuaca" — cuaca penting tapi bukan prioritas keselamatan utama.',
@@ -15,8 +17,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Pengecekan utilitas bawah tanah sebelum galian. Sebagai pekerja SSW: ini prosedur K3 wajib sebelum excavator mulai — pelanggaran bisa berakibat ledakan pipa gas. Atasan akan tanya: 地下埋設物の確認はしましたか？'
       },
       {
-        q: '盛土の転圧に使う機械は？',
-        opts: ['ローラー', 'クレーン', 'ミキサー車', 'ポンプ車'],
+        id: 2,
+        q: '盛土《もりど》の転圧《てんあつ》に使う《つかう》機械《きかい》は？',
+        hint: 'Mesin apa yang digunakan untuk memadatkan tanah timbunan?',
+        opts: ['ローラー', 'クレーン', 'ミキサー車《しゃ》', 'ポンプ車《しゃ》'],
         opts_id: ['Roller/gilas', 'Crane', 'Truk molen', 'Truk pompa'],
         ans: 0,
         exp: 'Roller (ローラー) digunakan untuk memadatkan (転圧) tanah timbunan (盛土). Crane untuk angkat, molen untuk beton, pompa untuk cor.',
@@ -24,8 +28,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Roller untuk pemadatan tanah. Sebagai pekerja SSW sipil: kamu akan sering lihat vibration roller di proyek jalan — tanah yang tidak dipadatkan = jalan ambles. Mandor bilang: ローラーで転圧してください。'
       },
       {
-        q: '法面（のりめん）とは何か？',
-        opts: ['切土や盛土の斜面', '建物の壁', '道路の舗装面', '橋の床板'],
+        id: 3,
+        q: '法面《のりめん》とは何《なに》か？',
+        hint: 'Apa itu "nori-men" (法面) dalam pekerjaan sipil?',
+        opts: ['切土《きりど》や盛土《もりど》の斜面《しゃめん》', '建物《たてもの》の壁《かべ》', '道路《どうろ》の舗装面《ほそうめん》', '橋《はし》の床板《ゆかいた》'],
         opts_id: ['Lereng galian/timbunan', 'Dinding bangunan', 'Permukaan aspal jalan', 'Lantai jembatan'],
         ans: 0,
         exp: '法面 (のりめん) = lereng yang terbentuk akibat galian (切土) atau timbunan (盛土). Bukan dinding bangunan (壁) atau permukaan jalan (舗装面).',
@@ -33,8 +39,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Lereng galian/timbunan di proyek sipil. Sebagai pekerja SSW: lereng yang tidak stabil = longsor. Kamu wajib lapor kalau lihat retakan di 法面. Atasan: 法面の状態を確認してください。'
       },
       {
-        q: '土留め工事で使う「切梁」の役割は？',
-        opts: ['土圧に対抗して壁を支える', '地面を掘る', '水を排出する', 'コンクリートを混ぜる'],
+        id: 4,
+        q: '土留《どどめ》め工事《こうじ》で使う《つかう》「切梁《きりばり》」の役割《やくわり》は？',
+        hint: 'Apa fungsi "kiribari" (切梁) dalam pekerjaan penahan tanah?',
+        opts: ['土圧《どあつ》に対抗《たいこう》して壁《かべ》を支える《ささえる》', '地面《じめん》を掘る《ほる》', '水《みず》を排出《はいしゅつ》する', 'コンクリートを混ぜる《まぜる》'],
         opts_id: ['Menopang dinding terhadap tekanan tanah', 'Menggali tanah', 'Mengalirkan air', 'Mengaduk beton'],
         ans: 0,
         exp: '切梁 (きりばり/strut) berfungsi menopang dinding penahan tanah (土留め壁) terhadap tekanan lateral tanah. Ini bukan alat gali atau pompa air.',
@@ -42,8 +50,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Strut penopang dinding penahan tanah. Sebagai pekerja SSW: kalau strut dipasang tidak benar, dinding bisa runtuh masuk ke galian — ini kecelakaan mematikan. Mandor: 切梁の取り付けを確認しろ。'
       },
       {
-        q: '安全帯（あんぜんたい）はどこに取り付けて使う？',
-        opts: ['親綱やアンカーに取り付ける', '腕に巻く', '頭にかぶる', '足に付ける'],
+        id: 5,
+        q: '安全帯《あんぜんたい》はどこに取り付けて《とりつけて》使う《つかう》？',
+        hint: 'Di mana safety harness harus dikaitkan saat digunakan?',
+        opts: ['親綱《おやづな》やアンカーに取り付ける《とりつける》', '腕《うで》に巻く《まく》', '頭《あたま》にかぶる', '足《あし》に付ける《つける》'],
         opts_id: ['Dikaitkan di tali induk atau jangkar', 'Dililit di lengan', 'Dipakai di kepala', 'Dipasang di kaki'],
         ans: 0,
         exp: 'Safety harness (安全帯) dikaitkan ke lifeline (親綱) atau anchor point. Bukan dipakai di lengan (itu gelang), kepala (itu helm), atau kaki (itu sepatu).',
@@ -51,8 +61,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Safety harness untuk kerja di ketinggian. Sebagai pekerja SSW: WAJIB dipakai di atas 2 meter — tanpa harness = dilarang naik. Atasan: 安全帯をつけましたか？'
       },
       {
-        q: '排水工事の目的は？',
-        opts: ['地下水や雨水を処理する', '建物を建てる', '道路を舗装する', '鉄筋を組む'],
+        id: 6,
+        q: '排水《はいすい》工事《こうじ》の目的《もくてき》は？',
+        hint: 'Apa tujuan dari pekerjaan drainase?',
+        opts: ['地下水《ちかすい》や雨水《あまみず》を処理《しょり》する', '建物《たてもの》を建てる《たてる》', '道路《どうろ》を舗装《ほそう》する', '鉄筋《てっきん》を組む《くむ》'],
         opts_id: ['Mengelola air tanah dan air hujan', 'Membangun gedung', 'Mengaspal jalan', 'Merakit besi tulangan'],
         ans: 0,
         exp: '排水工事 = pekerjaan drainase untuk mengelola air tanah dan hujan. Ini berbeda dari konstruksi gedung, pengaspalan, atau pekerjaan besi.',
@@ -60,8 +72,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Pekerjaan drainase sipil. Sebagai pekerja SSW: air yang menggenang di galian = bahaya longsor dan korsleting. Kamu akan bantu pasang pipa drainase dan pompa. Mandor: 排水ポンプを動かしてください。'
       },
       {
-        q: '測量（そくりょう）で使う「トランシット」の用途は？',
-        opts: ['角度を測る', '重さを測る', '温度を測る', '音を測る'],
+        id: 7,
+        q: '測量《そくりょう》で使う《つかう》「トランシット」の用途《ようと》は？',
+        hint: 'Apa kegunaan alat "transit" dalam pekerjaan survei?',
+        opts: ['角度《かくど》を測る《はかる》', '重さ《おもさ》を測る《はかる》', '温度《おんど》を測る《はかる》', '音《おと》を測る《はかる》'],
         opts_id: ['Mengukur sudut', 'Mengukur berat', 'Mengukur suhu', 'Mengukur suara'],
         ans: 0,
         exp: 'Transit/theodolite (トランシット) digunakan untuk mengukur sudut horizontal dan vertikal dalam survei. Bukan alat ukur berat (timbangan), suhu (termometer), atau suara (desibel meter).',
@@ -69,8 +83,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Transit untuk survei/pengukuran. Sebagai pekerja SSW: kamu mungkin diminta pegang staf/prism saat surveyor ukur — posisi yang salah = titik bangunan geser. Atasan: トランシットの位置を動かすな。'
       },
       {
-        q: '地盤改良工事で「セメント系固化材」を使う目的は？',
-        opts: ['軟弱地盤を硬くする', '地面に色をつける', '地面を掘りやすくする', '雑草を防ぐ'],
+        id: 8,
+        q: '地盤《じばん》改良《かいりょう》工事《こうじ》で「セメント系《けい》固化材《こかざい》」を使う《つかう》目的《もくてき》は？',
+        hint: 'Untuk apa bahan pengikat semen digunakan dalam perbaikan tanah?',
+        opts: ['軟弱《なんじゃく》地盤《じばん》を硬く《かたく》する', '地面《じめん》に色《いろ》をつける', '地面《じめん》を掘り《ほり》やすくする', '雑草《ざっそう》を防ぐ《ふせぐ》'],
         opts_id: ['Mengeraskan tanah lunak', 'Memberi warna tanah', 'Mempermudah penggalian', 'Mencegah rumput liar'],
         ans: 0,
         exp: 'Bahan pengikat semen (セメント系固化材) dicampur ke tanah lunak untuk mengeraskannya (地盤改良). Bukan untuk pewarnaan atau pengendalian gulma.',
@@ -78,8 +94,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Perbaikan tanah dengan semen. Sebagai pekerja SSW: di proyek tanah lunak, kamu akan bantu campurkan stabilizer ke tanah sebelum fondasi dipasang. Mandor: 固化材の量を確認してください。'
       },
       {
-        q: '「KY活動」とは何の略？',
-        opts: ['危険予知活動', '休憩予定活動', '器具安全活動', '緊急避難活動'],
+        id: 9,
+        q: '「KY活動《かつどう》」とは何《なん》の略《りゃく》？',
+        hint: 'KY adalah singkatan dari apa?',
+        opts: ['危険《きけん》予知《よち》活動《かつどう》', '休憩《きゅうけい》予定《よてい》活動《かつどう》', '器具《きぐ》安全《あんぜん》活動《かつどう》', '緊急《きんきゅう》避難《ひなん》活動《かつどう》'],
         opts_id: ['Kegiatan Prediksi Bahaya', 'Kegiatan Jadwal Istirahat', 'Kegiatan Keamanan Alat', 'Kegiatan Evakuasi Darurat'],
         ans: 0,
         exp: 'KY = 危険予知 (Kiken Yochi = Prediksi Bahaya). KY活動 dilakukan setiap pagi sebelum kerja dimulai untuk identifikasi potensi bahaya hari itu.',
@@ -87,8 +105,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Kegiatan identifikasi bahaya harian. Sebagai pekerja SSW: setiap pagi kamu ikut KY meeting — wajib bisa menyebut risiko kerja hari itu dalam bahasa Jepang sederhana. Mandor: 今日のKYを始めます。'
       },
       {
-        q: '舗装工事でアスファルトの温度管理が重要な理由は？',
-        opts: ['温度が低すぎると締め固めができない', '色が変わるから', '臭いが出るから', '機械が壊れるから'],
+        id: 10,
+        q: '舗装《ほそう》工事《こうじ》でアスファルトの温度《おんど》管理《かんり》が重要《じゅうよう》な理由《りゆう》は？',
+        hint: 'Mengapa kontrol suhu aspal penting dalam pekerjaan pengaspalan?',
+        opts: ['温度《おんど》が低すぎる《ひくすぎる》と締め固め《しめかため》ができない', '色《いろ》が変わる《かわる》から', '臭い《におい》が出る《でる》から', '機械《きかい》が壊れる《こわれる》から'],
         opts_id: ['Suhu terlalu rendah = tidak bisa dipadatkan', 'Karena warnanya berubah', 'Karena baunya keluar', 'Karena mesin rusak'],
         ans: 0,
         exp: 'Aspal harus dijaga suhunya saat penghamparan — terlalu dingin = tidak bisa dipadatkan dengan roller, hasilnya permukaan jelek dan mudah rusak.',
@@ -96,8 +116,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Kontrol suhu aspal saat pengaspalan. Sebagai pekerja SSW: kamu akan bantu cek suhu aspal di finisher — di bawah standar harus lapor segera. Mandor: アスファルトの温度は何度ですか？'
       },
       {
-        q: 'バックホウ（ユンボ）の主な用途は？',
-        opts: ['掘削作業', '高所作業', 'コンクリート打設', '溶接作業'],
+        id: 11,
+        q: 'バックホウ（ユンボ）の主《おも》な用途《ようと》は？',
+        hint: 'Apa kegunaan utama excavator (backhoe)?',
+        opts: ['掘削《くっさく》作業《さぎょう》', '高所《こうしょ》作業《さぎょう》', 'コンクリート打設《だせつ》', '溶接《ようせつ》作業《さぎょう》'],
         opts_id: ['Pekerjaan penggalian', 'Kerja di ketinggian', 'Pengecoran beton', 'Pengelasan'],
         ans: 0,
         exp: 'Backhoe/excavator (バックホウ/ユンボ) digunakan utamanya untuk menggali (掘削). Bukan untuk kerja tinggi (aerial), cor beton (打設), atau las (溶接).',
@@ -105,8 +127,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Excavator untuk penggalian. Sebagai pekerja SSW: jangan pernah berdiri di radius putar (旋回範囲) backhoe — zona mematikan. Operator: バックホウの旋回範囲に入るな！'
       },
       {
-        q: '建設現場で「ヒヤリハット」とは？',
-        opts: ['事故にはならなかったが危険を感じた体験', '新しい安全装置の名前', '作業報告書の種類', '休憩時間の合図'],
+        id: 12,
+        q: '建設《けんせつ》現場《げんば》で「ヒヤリハット」とは？',
+        hint: 'Apa itu "hiyari-hatto" di lokasi konstruksi?',
+        opts: ['事故《じこ》にはならなかったが危険《きけん》を感じた《かんじた》体験《たいけん》', '新しい《あたらしい》安全《あんぜん》装置《そうち》の名前《なまえ》', '作業《さぎょう》報告書《ほうこくしょ》の種類《しゅるい》', '休憩《きゅうけい》時間《じかん》の合図《あいず》'],
         opts_id: ['Pengalaman hampir celaka (near miss)', 'Nama alat keselamatan baru', 'Jenis laporan kerja', 'Tanda waktu istirahat'],
         ans: 0,
         exp: 'ヒヤリハット (hiyari-hatto) = near miss / kejadian nyaris celaka. Wajib dilaporkan agar kecelakaan dicegah. Bukan nama alat atau jenis laporan biasa.',
@@ -114,8 +138,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Pelaporan insiden nyaris celaka. Sebagai pekerja SSW: kalau kamu hampir kejatuhan benda atau hampir tersandung, WAJIB lapor ヒヤリハット — ini mencegah kecelakaan berikutnya. Mandor: ヒヤリハットがあったら必ず報告してください。'
       },
       {
-        q: '現場で「玉掛け作業」とは？',
-        opts: ['クレーンで荷物を吊る準備作業', '壁にペンキを塗る作業', '地面を掘る作業', '鉄筋を曲げる作業'],
+        id: 13,
+        q: '現場《げんば》で「玉掛《たまか》け作業《さぎょう》」とは？',
+        hint: 'Apa itu pekerjaan "tama-kake" di lapangan?',
+        opts: ['クレーンで荷物《にもつ》を吊る《つる》準備《じゅんび》作業《さぎょう》', '壁《かべ》にペンキを塗る《ぬる》作業《さぎょう》', '地面《じめん》を掘る《ほる》作業《さぎょう》', '鉄筋《てっきん》を曲げる《まげる》作業《さぎょう》'],
         opts_id: ['Pekerjaan persiapan mengangkat beban dengan crane', 'Pekerjaan mengecat dinding', 'Pekerjaan menggali tanah', 'Pekerjaan membengkokkan besi'],
         ans: 0,
         exp: '玉掛け (たまかけ) = rigging/slinging — pekerjaan memasang sling/tali ke beban sebelum diangkat crane. Butuh sertifikat khusus. Bukan mengecat, menggali, atau membengkokkan besi.',
@@ -123,8 +149,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Pekerjaan rigging crane. Sebagai pekerja SSW: kamu perlu sertifikat 玉掛け技能講習 untuk boleh pasang sling. Tanpa sertifikat = dilarang menyentuh beban crane. Mandor: 玉掛けの資格を持っていますか？'
       },
       {
-        q: '高所作業とは地上何メートル以上の作業？',
-        opts: ['2メートル以上', '5メートル以上', '10メートル以上', '1メートル以上'],
+        id: 14,
+        q: '高所《こうしょ》作業《さぎょう》とは地上《ちじょう》何《なん》メートル以上《いじょう》の作業《さぎょう》？',
+        hint: 'Pekerjaan di ketinggian berapa meter ke atas yang disebut "kerja tinggi"?',
+        opts: ['2メートル以上《いじょう》', '5メートル以上《いじょう》', '10メートル以上《いじょう》', '1メートル以上《いじょう》'],
         opts_id: ['2 meter ke atas', '5 meter ke atas', '10 meter ke atas', '1 meter ke atas'],
         ans: 0,
         exp: 'Menurut UU K3 Jepang (労働安全衛生規則), kerja di ketinggian (高所作業) didefinisikan sebagai 2 meter ke atas. Kesalahan umum: mengira 5 atau 10 meter.',
@@ -132,8 +160,10 @@ export const SET_DOBOKU_01 = {
         desc: 'Definisi kerja di ketinggian. Sebagai pekerja SSW: di atas 2 meter = WAJIB harness + helm. Banyak pekerja Indonesia mengira 5 meter — itu standar Indonesia, bukan Jepang. Mandor: 2メートル以上は安全帯必須です。'
       },
       {
-        q: '「墜落制止用器具」の新しい規格で求められるものは？',
-        opts: ['フルハーネス型', '胴ベルト型のみ', '安全靴のみ', 'ヘルメットのみ'],
+        id: 15,
+        q: '「墜落《ついらく》制止《せいし》用《よう》器具《きぐ》」の新しい《あたらしい》規格《きかく》で求められる《もとめられる》ものは？',
+        hint: 'Apa yang disyaratkan dalam standar baru alat pencegah jatuh?',
+        opts: ['フルハーネス型《がた》', '胴《どう》ベルト型《がた》のみ', '安全靴《あんぜんぐつ》のみ', 'ヘルメットのみ'],
         opts_id: ['Tipe full harness', 'Hanya sabuk pinggang', 'Hanya sepatu safety', 'Hanya helm'],
         ans: 0,
         exp: 'Regulasi baru Jepang (2019) mewajibkan full harness (フルハーネス型) untuk kerja di ketinggian ≥6.75m (konstruksi baja/besi). Sabuk pinggang saja tidak lagi cukup.',
