@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (cards/common FURI done)
+**Last updated:** 2026-05-10 (cards/lifeline FURI done)
 
 ---
 
@@ -89,16 +89,16 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 - [x] `src/data/cards/common/vocab-lifeline.js` — FURI
 - [x] `src/data/cards/common/vocab-misc.js` — FURI
 - [x] `src/data/cards/common/vocab-supplementary.js` — FURI
-- [ ] `src/data/cards/lifeline/ch2.js` — FURI
-- [ ] `src/data/cards/lifeline/ch3.js` — FURI
-- [ ] `src/data/cards/lifeline/ch4.js` — FURI
-- [ ] `src/data/cards/lifeline/ch5.js` — FURI
-- [ ] `src/data/cards/lifeline/ch6.js` — FURI
-- [ ] `src/data/cards/lifeline/gakka.js` — FURI
-- [ ] `src/data/cards/lifeline/vocab-jac.js` — FURI
-- [ ] `src/data/cards/lifeline/vocab-lifeline.js` — FURI
-- [ ] `src/data/cards/lifeline/vocab-misc.js` — FURI
-- [ ] `src/data/cards/lifeline/vocab-supplementary.js` — FURI
+- [x] `src/data/cards/lifeline/ch2.js` — FURI
+- [x] `src/data/cards/lifeline/ch3.js` — FURI
+- [x] `src/data/cards/lifeline/ch4.js` — FURI
+- [x] `src/data/cards/lifeline/ch5.js` — FURI
+- [x] `src/data/cards/lifeline/ch6.js` — FURI
+- [x] `src/data/cards/lifeline/gakka.js` — FURI
+- [x] `src/data/cards/lifeline/vocab-jac.js` — FURI
+- [x] `src/data/cards/lifeline/vocab-lifeline.js` — FURI
+- [x] `src/data/cards/lifeline/vocab-misc.js` — FURI
+- [x] `src/data/cards/lifeline/vocab-supplementary.js` — FURI
 
 ## BATCH 5 — Structural & Small Tasks
 *(agent tasks, tidak butuh Japanese knowledge)*
