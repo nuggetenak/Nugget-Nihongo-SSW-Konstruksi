@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (jac-lifeline MIGRATE done + st1_q14 struct fix — BATCH 3 selesai)
+**Last updated:** 2026-05-10 (P16 MIGRATE done — JAC teori+lifeline 95 qs)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -11,108 +11,78 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 ---
 
 ## TASK KEY
-- **EXP-STUB** = ganti placeholder "Lihat modul JAC..." dengan penjelasan Indonesian nyata (min 30 char)
-- **STRUCT** = structural fix — tidak butuh Japanese knowledge
-- **MIGRATE** = schema migration: rename fields + split opts → opts + opts_id
+- **RUBY** = tambah ruby 《》 ke field yang masih bare kanji (butuh Japanese knowledge)
+- **FURI-ALIGN** = sesuaikan separator di `furi` agar cocok dengan `jp` (vs / ・ / ：)
+- **FILL** = isi field yang null/kosong dengan konten yang benar
+- **AUDIT** = cek + tambah ruby ke field dalam file tertentu
 
 ---
 
-## BATCH 1 — CSV exp stubs (P15)
-*(~40 items di 8 file — ganti placeholder "Lihat modul JAC" dengan exp nyata)*
-*(Perlu konteks soal — lihat `q` + `opts` + `ans` per item untuk tulis exp yang benar)*
+## BATCH A — Agent tasks (scripting only)
 
-- [x] `src/data/sets/csv/cp01.js` — EXP-STUB (3 stubs)
-- [x] `src/data/sets/csv/cp02.js` — EXP-STUB (6 stubs)
-- [x] `src/data/sets/csv/cp03.js` — EXP-STUB (6 stubs)
-- [x] `src/data/sets/csv/cp04.js` — EXP-STUB (8 stubs)
-- [x] `src/data/sets/csv/cp05.js` — EXP-STUB (6 stubs)
-- [x] `src/data/sets/csv/cp06.js` — EXP-STUB (6 stubs)
-- [x] `src/data/sets/csv/ct03.js` — EXP-STUB (3 stubs)
-- [x] `src/data/sets/csv/ct06.js` — EXP-STUB (2 stubs)
+### P17 — confusion-pairs: fill tip_id (28 entries)
+`src/data/confusion-pairs.js`
+- [ ] Fill all 28 `tip_id: null` → Indonesian translation of `tip` field
+- **Rule:** `tip_id` = terjemahan bebas Indonesian dari `tip` (JP). Tone: singkat, faktual, ≤100 char.
+- **Verify:** zero `tip_id: null` tersisa
 
----
-
-## BATCH 2 — JAC Lifeline: null related_card_id (P18-LL)
-*(1 entry — STRUCT: cukup isi ID kartu yang tepat)*
-
-- [x] `src/data/sets/jac/jac-lifeline.js` — STRUCT: fill 1 null `related_card_id` (st1_q13, 感電 → kartu #81)
+### P19 — danger-pairs: ruby on traps + explanation (20 entries)
+`src/data/danger-pairs.js`
+- [ ] Tambah ruby 《》 ke semua kanji dalam field `traps[]` dan `explanation`
+- **Rule:** annotate full compound, bukan suffix. Maru `（）` untuk sinonim/abbrev — jangan ubah ke `《》`.
+- **Verify:** semua kanji dalam traps/explanation sudah punya 《》
 
 ---
 
-## BATCH 3 — JAC Schema Migration (P16)
-*(95 qs — rename + restructure fields ke unified question schema)*
-*(Urutan: teori dulu, lalu lifeline)*
+## BATCH B — Owner tasks (butuh Japanese knowledge)
 
-- [x] `src/data/sets/jac/jac-teori.js` — MIGRATE (65 qs)
-- [x] `src/data/sets/jac/jac-lifeline.js` — MIGRATE (30 qs)
-
----
-
-## RULES PER TASK TYPE
-
-### EXP-STUB
-- Cari semua `exp` yang mengandung teks "Lihat modul JAC", "lihat modul", atau yang < 30 char
-- Ganti dengan penjelasan Indonesian yang nyata, min 30 char
-- Gunakan konteks `q` + `opts` + `ans` dari soal yang sama
-- Pertahankan tone: singkat, faktual, fokus kenapa jawaban benar vs distraktor
-- Contoh target length: 50–150 char
-
-### STRUCT (fill null related_card_id)
-- Temukan kartu yang sesuai di `src/data/cards/`
-- Gunakan `id` numerik dari card, bukan string
-- "Kartu #N" di `explanation` field = petunjuk langsung ke card id N
-
-### MIGRATE (P16 schema)
-Old schema → New (unified question) schema:
-
-| Old field | New field | Catatan |
-|---|---|---|
-| `jp` | `q` | tambah ruby 《》 jika ada kanji belum dianotasi |
-| `id_text` | `hint` | rename saja |
-| `options[i]` → split | `opts[i]` = JP part; `opts_id[i]` = ID part | pisah per item |
-| `answer` | `ans` | rename saja |
-| `explanation` | `exp` | rename saja |
-| `hiragana` | — | hapus field ini |
-| `hasPhoto` | tetap | jangan ubah |
-| `photoDesc` | tetap | jangan ubah |
-| `related_card_id` | tetap | jangan ubah |
-| `track` | tetap | jangan ubah |
-| `id`, `set`, `setLabel`, `topic` | tetap | jangan ubah |
-
-**opts split rule:**
-```js
-// Old: options item dengan format "JP（よみ）(ID text)"
-'安全確認（あんぜんかくにん）(Konfirmasi keselamatan)'
-// New:
-opts:    ['安全確認《あんぜんかくにん》']
-opts_id: ['Konfirmasi keselamatan']
-
-// Old: katakana/romaji dengan ID text
-'チームワーク (Kerja tim / Teamwork)'
-// New:
-opts:    ['チームワーク']
-opts_id: ['Kerja tim / Teamwork']
-```
-
-**VERIFY sebelum commit:**
-- Zero `hiragana` field tersisa
-- Zero `options` field tersisa (semua sudah jadi `opts` + `opts_id`)
-- Semua `opts[i]` berisi JP string (dengan ruby jika ada kanji)
-- Semua `opts_id[i]` berisi Indonesian string
-- Length `opts` === length `opts_id` per soal
+### P7 — Cards furi separator alignment (213 cards)
+Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
+- [ ] Sesuaikan `furi` separator agar cocok dengan `jp` pada 213 card yang mismatch
+- **Rule:** jika `jp` punya `vs`, `・`, atau `：` → `furi` harus punya separator yang sama di posisi yang sama
+  ```js
+  // BAD
+  jp: "加湿器《かしつき》 vs 除湿器《じょしつき》", furi: "かしつきじょしつき"
+  // GOOD
+  jp: "加湿器《かしつき》 vs 除湿器《じょしつき》", furi: "かしつき vs じょしつき"
+  ```
+- **Verify:** zero furi mismatch (run check script)
 
 ---
 
-## SELESAI (sesi sebelumnya)
+## BATCH C — Pending (blocked)
 
-### Batch lama (PROGRESS.md sebelumnya)
-- ✅ BATCH 1–2: CSV + Wayground FIX + ANNOTATE opts (P11-FIX-A/B, P11-C, P12-FIX)
-- ✅ BATCH 3: Quiz sets RUBY+HINT+ID (P13 — 6 files)
-- ✅ BATCH 4: Cards FURI alignment (P7 — 22 files)
-- ✅ BATCH 5: jac-teori null IDs (P18), confusion-pairs tip_id (P17), danger-pairs audit (P19)
+### P21 — JAC Doboku + Kenchiku stubs
+`src/data/sets/jac/jac-doboku.js`, `src/data/sets/jac/jac-kenchiku.js`
+- [ ] Populate stubs setelah PDF JAC Doboku/Kenchiku tersedia
+- **Blocked:** belum ada PDF source material
+- **Schema:** gunakan unified question schema (`q`, `hint`, `opts`, `opts_id`, `ans`, `exp`) dari awal
 
-### Dari handoff v12 (done sebelum content-dq)
-- ✅ P8: confusion-pairs termA/B ruby
-- ✅ P9: danger-pairs term ruby
-- ✅ P10: angka-kunci soal ruby
-- ✅ P14: wayground exp stubs — 0 remaining (verified 2026-05-10)
+---
+
+## SELESAI (semua sesi sebelumnya)
+
+### Konfirmasi dari audit aktual (2026-05-10)
+- ✅ **P16**: jac-teori.js (65 qs) + jac-lifeline.js (30 qs) — MIGRATE selesai hari ini. Bonus: structural fix st1_q14.
+- ✅ **P18**: jac-teori.js null related_card_id — 0 null tersisa (verified)
+- ✅ **P14**: wayground exp stubs — 0 stub tersisa (verified)
+- ✅ **P13-struct**: quiz-sets — id field ditambah ke semua 90 qs (verified)
+- ✅ **P13-content**: quiz-sets — hint + ruby pada q + opts (verified)
+- ✅ **P12-FIX**: wayground double ruby — clean (verified wt1)
+- ✅ **P11-FIX-B**: csv wrong 《》 → （） — clean (verified)
+- ✅ **P15**: csv exp stubs ~40 items — semua replaced
+
+### Dari handoff v12 DONE list
+- ✅ P0–P0d: UI fixes, wg renames, quote removal
+- ✅ P1: Delete semua `quote` fields (590 removed)
+- ✅ P2: Fix 4 malformed jp-ruby cards (ids 293, 476, 489, 491)
+- ✅ P3: Fix 2 furi typos (ids 532, 230)
+- ✅ P4: 220 maru→ruby conversions
+- ✅ P5: 1,020 bare-kanji jp fields annotated
+- ✅ P6: 153 multi-part jp fields annotated per-segment
+- ✅ P7b/c/d: index.js, wg10→wp5, quote style jac-*
+- ✅ P8: Ruby pada termA/termB confusion-pairs (28 pairs)
+- ✅ P9: Ruby pada term danger-pairs (17/20; 3 kana/romaji skipped)
+- ✅ P10: Ruby pada soal angka-kunci (29 items)
+- ✅ P11 (FIX-A/B + C): csv double ruby fix + wrong 《》 revert + 198 bare opts annotated
+- ✅ P20: Rename sipil→doboku, bangunan→kenchiku
