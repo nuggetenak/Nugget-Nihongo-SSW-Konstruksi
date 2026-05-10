@@ -1,7 +1,7 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (schema update: hasPhoto→img:null, P21 clarified jitsugi+pairing)
-**Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
+**Last updated:** 2026-05-10 (session 6: housekeeping & pre-expansion hygiene — handoff v13)
+**Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md` (now v13 internally)
 
 ---
 
@@ -18,7 +18,42 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 
 ---
 
-## BATCH A — Agent tasks (scripting only)
+## BATCH D — Housekeeping & pre-expansion hygiene (session 6)
+
+### H1 — `_origIndex` audit & policy lock ✅
+- [x] Verified: `cards.js` exports 0 `_origIndex` fields — merge script strips correctly
+- [x] Verified: source files (879+564) and split card files (1,443) retain it intentionally
+- [x] Policy documented in handoff v13 §1G + §11C
+- **Decision:** NO stripping needed from source/split files. Field is a merge artifact, not a data field.
+
+### H2 — `usage` field policy lock ✅
+- [x] Verified count: 123 common + 30 lifeline = 153 total (matches handoff)
+- [x] Policy locked in handoff v13 §1F: optional, no null-fill, no bulk-add
+- **Decision (owner):** Absent = intentional. New cards: include only if natural example exists.
+
+### H3 — `type` enum audit & documentation ✅
+- [x] Audited actual values in both source files — zero anomalies
+- [x] Lifeline: `konsep` (286) + `vocab` (278) — no `hukum` ✅
+- [x] Common: `konsep` (406) + `vocab` (377) + `hukum` (96) ✅
+- [x] Definitions documented in handoff v13 §1E
+- **Decision:** No fixes needed. Enum is clean.
+
+### H4 — `category` stubs for doboku/kenchiku ✅
+- [x] Verified `categories.js` already has D1/D2/D3 + B1/B2 stubs with `placeholder: true`
+- [x] Documented in handoff v13 §11A
+- **Decision:** No new stubs needed. Structure is ready.
+
+### H5 — Path & source convention lock ✅ / ⚠️ partial
+- [x] Confirmed `jac-doboku.js` / `jac-kenchiku.js` at `src/data/` top-level (not `sets/jac/`)
+- [x] PROGRESS.md P21 path already correct — no fix needed
+- [x] Confirmed `sets/jac/` only has teori+lifeline (split DQ copies)
+- [x] Documented in handoff v13 §11B
+- [x] Soal source convention (`jac-gakka-d{n}` / `jac-jitsugi-d{n}`) already in handoff §0E
+- ⚠️ **OWNER DECISION NEEDED**: Chapter card source naming for doboku/kenchiku (`jac-ch{n}-d` vs `jac-doboku-ch{n}` vs reuse `jac-ch{n}`) — documented in handoff §0E and §11E. Resolve before first card batch.
+
+---
+
+
 
 ### P17 — confusion-pairs: fill tip_id (28 entries)
 `src/data/confusion-pairs.js`
