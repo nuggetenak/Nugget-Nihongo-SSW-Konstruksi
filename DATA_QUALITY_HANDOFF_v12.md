@@ -1,9 +1,9 @@
-# SSW Konstruksi — Data Quality Handoff v12
-**Updated:** May 2026 — session 5 (admin/audit pass)
-**Supersedes:** v1–v11 (this is the canonical single-source handoff)
+# SSW Konstruksi — Data Quality Handoff v13
+**Updated:** May 2026 — session 6 (housekeeping & pre-expansion hygiene)
+**Supersedes:** v1–v12 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `f4a47fb`
+**Last commit:** `f4a47fb` (pre-session-6)
 
 ---
 
@@ -57,7 +57,14 @@ From JAC PDF: `jac-ch1` through `jac-ch7`
 From JAC sample exams: `jac-gakka1`, `jac-gakka2`, `jac-jitsugi1`, `jac-jitsugi2`
 Vocab: `vocab-core`, `vocab-exam`, `vocab-jac`, `vocab-lifeline`, `vocab-teori`, `vocab-general`, `vocab-supplementary`
 Other: `text3l`
-New cards from JAC Doboku PDF → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`. Kenchiku → `-k{n}`.
+New cards from JAC Doboku sample exams → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`. Kenchiku → `-k{n}`.
+
+> ⚠️ **OWNER DECISION NEEDED — source naming for doboku/kenchiku chapter cards**  
+> If JAC doboku/kenchiku PDFs use chapter structure (Ch.1–Ch.N), what `source` value should cards use?  
+> **Option A:** `jac-ch{n}-d` / `jac-ch{n}-k` (suffix the track)  
+> **Option B:** `jac-doboku-ch{n}` / `jac-kenchiku-ch{n}` (prefix the track)  
+> **Option C:** Reuse existing `jac-ch{n}` (if shared chapters — e.g. common safety content)  
+> `cards-doboku.js` is currently empty — no existing values to derive from. Decide before first card batch.
 
 ---
 
@@ -71,14 +78,51 @@ New cards from JAC Doboku PDF → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`. Kenchik
   source,       // 'jac-ch1' etc
   furi,         // hiragana reading
   jp,           // Japanese term (target: all contain 《》 ruby)
-  type,         // 'konsep' | 'hukum' | 'vocab'
+  type,         // 'konsep' | 'hukum' | 'vocab'  — see §1E for definitions
   id_text,      // Indonesian definition
   desc,         // Indonesian context description
-  usage,        // [OPTIONAL, 153 cards] usage example sentence
-  _origIndex,   // [SOURCE ONLY] stripped by merge script — do not edit
+  usage,        // [OPTIONAL — see §1F] usage example sentence
+  _origIndex,   // [SOURCE ONLY — see §1G] stripped by merge script — do not edit
 }
 ```
 `quote` field: **DELETED** in v7. Zero remaining in both source files.
+
+### 1E. `type` Enum — Definitions (VERIFIED session 6)
+
+| Value | Common | Lifeline | Definition |
+|---|---|---|---|
+| `konsep` | ✅ 406 | ✅ 286 | Conceptual/procedural knowledge — not a law, not pure vocab |
+| `vocab` | ✅ 377 | ✅ 278 | Vocabulary term — Japanese term + Indonesian gloss, may have desc |
+| `hukum` | ✅ 96 | ❌ 0 | Law, regulation, or legal provision — common track only |
+
+**No anomalies found.** Lifeline correctly has zero `hukum` cards — all legal content is in common.  
+Future doboku/kenchiku cards: use same three values. `hukum` is valid for track-specific regulations.
+
+### 1F. `usage` Field Policy (VERIFIED session 6)
+
+| File | Cards with `usage` | Cards without |
+|---|---|---|
+| `cards-common.js` | 123 | 756 |
+| `cards-lifeline.js` | 30 | 534 |
+| **TOTAL** | **153** | **1,290** |
+
+**Policy (owner decision):** `usage` is **optional**. Absent = no usage example available.  
+**Rule:** Do NOT null-fill missing `usage`. Do NOT bulk-add. Leave absent cards as-is.  
+When adding new cards (doboku/kenchiku), include `usage` only if a natural example exists.
+
+### 1G. `_origIndex` Field Policy (VERIFIED session 6)
+
+`_origIndex` exists in **source files only** (`src/data/source/cards-*.js`) and **split card files** (`src/data/cards/**/*.js`). It does **NOT** appear in the exported `src/data/cards.js`.
+
+| File | `_origIndex` present |
+|---|---|
+| `src/data/source/cards-common.js` | ✅ 879 (intentional) |
+| `src/data/source/cards-lifeline.js` | ✅ 564 (intentional) |
+| `src/data/cards/**/*.js` (split files) | ✅ 1,443 (intentional) |
+| `src/data/cards.js` (exported) | **0** — stripped by merge script ✅ |
+
+**Rule:** Do NOT strip `_origIndex` from source or split files. It is a merge-time artifact used to preserve original ordering. The merge script (`scripts/merge-cards.mjs`) strips it automatically when generating `cards.js`.  
+**On `content-dq` branch:** `_origIndex` is retained in split files. It will be stripped when reassembled into `cards.js` at main-merge time.
 
 ### 1A. Current `jp` Ruby Status
 | File | Total | Has 《》 ruby | Maru（kanji）remaining | Bare kanji | Pure kana/romaji |
@@ -322,7 +366,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 
 ---
 
-## CODEBASE STATE (v12 — storage version 5, unchanged)
+## CODEBASE STATE (v13 — storage version 5, unchanged)
 
 | File | Last changed | Notes |
 |---|---|---|
@@ -330,12 +374,16 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | `src/storage/engine.js` | v8 | v4→v5 migration wired |
 | `src/data/source/cards-common.js` | v10 (P6) | 879 cards, jp ruby complete |
 | `src/data/source/cards-lifeline.js` | v10 (P6) | 564 cards, jp ruby complete |
+| `src/data/source/cards-doboku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
+| `src/data/source/cards-kenchiku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
 | `src/data/cards.js` | v10 | Regenerated — 1,443 cards |
 | `src/data/confusion-pairs.js` | v8 (P8) | 28 pairs, termA/B ruby done |
 | `src/data/danger-pairs.js` | v8 (P9) | 20 items, term ruby done |
 | `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done |
 | `src/data/csv-sets.js` | v11 (P11) | ⚠️ Corrupted — see P11-FIX-A/B |
 | `src/data/wayground-sets.js` | v11 (P12) | ⚠️ Corrupted — see P12-FIX |
+| `src/data/jac-doboku.js` | stub | empty `JAC_DOBOKU = []` — awaiting PDF |
+| `src/data/jac-kenchiku.js` | stub | empty `JAC_KENCHIKU = []` — awaiting PDF |
 
 ---
 
@@ -375,3 +423,50 @@ Each split file is self-contained. Work one file at a time:
 2. Apply DQ fixes (ruby, opts, hints, exp stubs)
 3. Verify, commit, push
 4. Proceed to next file
+
+---
+
+## PART 11 — DOBOKU/KENCHIKU PRE-EXPANSION STATE (session 6 audit)
+
+### 11A. Category Stubs — VERIFIED ✅
+`src/data/categories.js` already defines doboku/kenchiku track categories with `placeholder: true`.
+
+| Key | Label | Module | Track | Status |
+|---|---|---|---|---|
+| `doboku_doko` | 土工事・インフラ | D1 | `doboku` | stub ✅ |
+| `doboku_hoso` | 舗装・道路 | D2 | `doboku` | stub ✅ |
+| `doboku_haisui` | 排水・基礎・杭 | D3 | `doboku` | stub ✅ |
+| `kenchiku_kutai` | 躯体工事 | B1 | `kenchiku` | stub ✅ |
+| `kenchiku_shiage` | 仕上げ・内装 | B2 | `kenchiku` | stub ✅ |
+
+All marked `placeholder: true, note: 'Future Ch.5+ content'`. Do NOT remove `placeholder` until content is populated.  
+**Rule:** When adding doboku/kenchiku cards, assign to these category keys. Do NOT invent new category keys without owner approval.
+
+### 11B. File Locations — VERIFIED ✅
+
+| File | Location | Notes |
+|---|---|---|
+| `jac-doboku.js` | `src/data/jac-doboku.js` | TOP-LEVEL — not in `sets/jac/` |
+| `jac-kenchiku.js` | `src/data/jac-kenchiku.js` | TOP-LEVEL — not in `sets/jac/` |
+| `cards-doboku.js` | `src/data/source/cards-doboku.js` | Source stub — 0 cards |
+| `cards-kenchiku.js` | `src/data/source/cards-kenchiku.js` | Source stub — 0 cards |
+
+`src/data/sets/jac/` only contains `jac-teori.js` and `jac-lifeline.js` (split DQ copies). Doboku/kenchiku stubs do NOT go in `sets/jac/`.
+
+### 11C. `_origIndex` Policy — VERIFIED ✅ (no action needed)
+
+`_origIndex` is stripped automatically by `scripts/merge-cards.mjs` at merge time.  
+Verified: `src/data/cards.js` exports **0** `_origIndex` fields.  
+Source files and split card files retain it intentionally — it is a merge ordering artifact, not a data field.  
+**Do NOT strip from source or split files. Do NOT export to consumers.**
+
+### 11D. `usage` Field Policy — LOCKED (owner decision)
+
+`usage` is **optional**. 153/1,443 cards have it. Absent = intentional.  
+**No null-fill. No bulk addition.** New doboku/kenchiku cards: include only if natural example exists.
+
+### 11E. Source Naming for Doboku/Kenchiku Chapter Cards
+
+> ⚠️ **OWNER DECISION PENDING** — see §0E for options (A/B/C).  
+> `cards-doboku.js` and `cards-kenchiku.js` are currently empty.  
+> Resolve before first card batch for either track.
