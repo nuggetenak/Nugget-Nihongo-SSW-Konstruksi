@@ -49,7 +49,7 @@ export const SET_CP02 = {
           'Maksimal 2m di bawah permukaan kerja',
         ],
         ans: 3,
-        exp: 'Maksimal 2m di bawah level kerja (modul JAC anzen).',
+        exp: 'Safety net (落下防止ネット) dipasang maksimal 2m di bawah level lantai kerja saat bongkar scaffold. Jika jarak lebih dari 2m, material/pekerja yang jatuh bisa mengenai area bawah sebelum tertangkap net. Wajib berdasarkan regulasi K3 perancah.',
       },
       {
         id: 5,
@@ -58,7 +58,7 @@ export const SET_CP02 = {
         opts: ['最低部《さいていぶ》（末端《まったん》）', '中央《ちゅうおう》', '天井《てんじょう》最高部《さいこうぶ》', '任意《にんい》'],
         opts_id: ['Titik terendah (ujung)', 'Tengah', 'Titik tertinggi langit-langit', 'Bebas'],
         ans: 0,
-        exp: 'Di titik terendah untuk pembuangan air (modul JAC).',
+        exp: 'Drain valve (ドレン弁) dipasang di titik terendah sistem sprinkler agar air bisa terkuras secara gravitasi saat sistem dikuras/diperbaiki. Jika dipasang di titik lain, air tersisa tidak bisa keluar sempurna dan bisa menyebabkan korosi atau kerusakan saat membeku.',
       },
       {
         id: 6,
@@ -76,7 +76,7 @@ export const SET_CP02 = {
         opts: ['手《て》で締《し》める', 'メーカー指定《してい》値《ち》に従《したが》う', '最大値《さいだいち》', '任意《にんい》'],
         opts_id: ['Kencangkan manual', 'Ikuti nilai yang ditentukan pabrik', 'Maksimal', 'Bebas'],
         ans: 1,
-        exp: 'Ikuti spec pabrik agar tidak deformasi (modul JAC perpipaan).',
+        exp: 'Torsi U-bolt wajib mengikuti nilai spesifikasi pabrik. Over-torque menyebabkan deformasi pipa atau U-bolt patah; under-torque menyebabkan pipa bergeser atau jatuh. Gunakan torque wrench (kunci momen) untuk pengukuran akurat, bukan dikira-kira.',
       },
       {
         id: 8,
@@ -85,7 +85,7 @@ export const SET_CP02 = {
         opts: ['テープで巻《ま》く', '放置《ほうち》する', '塗料《とりょう》を塗《ぬ》る', '溶接《ようせつ》する'],
         opts_id: ['Dibungkus tape', 'Dibiarkan', 'Dicat', 'Dilas'],
         ans: 0,
-        exp: 'Bungkus tape untuk mencegah penyusutan & kondensasi (modul praktik).',
+        exp: 'Sambungan pipa refrigerant wajib dibungkus tape insulasi (テープ巻き) setelah brazing. Jika sambungan dibiarkan terbuka, kondensasi air terbentuk di permukaan dingin → korosi dan penyusutan insulasi. Gunakan tape self-amalgamating atau armaflex sesuai spesifikasi proyek.',
       },
       {
         id: 9,
@@ -94,7 +94,7 @@ export const SET_CP02 = {
         opts: ['巻尺《まきじゃく》', '厚《あつ》さ測定《そくてい》ピン', 'レベル', '角度計《かくどけい》'],
         opts_id: ['Measuring tape', 'Thickness pin gauge', 'Level', 'Protractor'],
         ans: 1,
-        exp: 'Pin gauge untuk verifikasi setelah semprot (modul JAC insulasi).',
+        exp: 'Ketebalan spray polyurethane foam diukur dengan thickness pin gauge (ピン式厚さ計) yang ditancapkan langsung ke foam setelah mengeras. Pengukuran acak per area memastikan seluruh permukaan memenuhi spesifikasi. Jika kurang dari ketebalan minimal, area tersebut harus disemprot ulang.',
       },
       {
         id: 10,
@@ -126,7 +126,7 @@ export const SET_CP02 = {
         opts: ['クランプメーター', '接地《せっち》抵抗計《ていこうけい》', '電圧計《でんあつけい》', 'テスター'],
         opts_id: ['Clamp meter', 'Earth resistance tester', 'Voltmeter', 'Tester'],
         ans: 1,
-        exp: 'Earth tester memastikan resistansi grounding <1Ω (modul JAC anzen).',
+        exp: 'Grounding alat listrik diverifikasi dengan earth resistance tester (接地抵抗計). Nilai normal ≤100Ω (umum) atau ≤10Ω (area khusus). Grounding buruk menyebabkan sengatan listrik jika ada kebocoran arus. Clamp meter tidak bisa mengukur resistansi grounding secara akurat.',
       },
       {
         id: 13,
@@ -167,7 +167,7 @@ export const SET_CP02 = {
         opts: ['切断《せつだん》', '曲《ま》げ', '塗装《とそう》', 'ベベル加工《かこう》と清掃《せいそう》'],
         opts_id: ['Pemotongan', 'Pembengkokan', 'Pengecatan', 'Bevel + pembersihan'],
         ans: 3,
-        exp: 'Bevel 30° + bersihkan oli (modul JAC perpipaan).',
+        exp: 'Sebelum overlay welding: (1) Bevel sekitar 30° pada ujung pipa untuk penetrasi las yang cukup, (2) Bersihkan permukaan dari oli, karat, dan cat dengan wire brush atau grinding. Permukaan kotor menyebabkan cacat las (porosity, slag inclusion). Preheating diperlukan untuk baja tebal.',
       },
       {
         id: 17,

@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (cp01 EXP-STUB done)
+**Last updated:** 2026-05-10 (cp02 EXP-STUB done)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -22,7 +22,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 *(Perlu konteks soal — lihat `q` + `opts` + `ans` per item untuk tulis exp yang benar)*
 
 - [x] `src/data/sets/csv/cp01.js` — EXP-STUB (3 stubs)
-- [ ] `src/data/sets/csv/cp02.js` — EXP-STUB (6 stubs)
+- [x] `src/data/sets/csv/cp02.js` — EXP-STUB (6 stubs)
 - [ ] `src/data/sets/csv/cp03.js` — EXP-STUB (6 stubs)
 - [ ] `src/data/sets/csv/cp04.js` — EXP-STUB (8 stubs)
 - [ ] `src/data/sets/csv/cp05.js` — EXP-STUB (6 stubs)
