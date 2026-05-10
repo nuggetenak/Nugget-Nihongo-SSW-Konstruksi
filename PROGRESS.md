@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (P7 FURI-ALIGN done — 152 cards fixed, 5 romaji/katakana-only terms accepted as exception)
+**Last updated:** 2026-05-10 (schema update: hasPhoto→img:null, P21 clarified jitsugi+pairing)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v12.md`
 
 ---
@@ -52,11 +52,14 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 
 ## BATCH C — Pending (blocked)
 
-### P21 — JAC Doboku + Kenchiku stubs
-`src/data/sets/jac/jac-doboku.js`, `src/data/sets/jac/jac-kenchiku.js`
-- [ ] Populate stubs setelah PDF JAC Doboku/Kenchiku tersedia
+### P21 — JAC Doboku + Kenchiku jitsugi stubs
+`src/data/jac-doboku.js`, `src/data/jac-kenchiku.js`
+- [ ] Populate stubs setelah PDF JAC jitsugi doboku/kenchiku tersedia
 - **Blocked:** belum ada PDF source material
-- **Schema:** gunakan unified question schema (`q`, `hint`, `opts`, `opts_id`, `ans`, `exp`) dari awal
+- **Clarification:** file ini berisi soal **jitsugi** (praktik bergambar) per track — BUKAN soal teori. `jac-teori.js` dipakai bersama oleh semua 3 track.
+- **Schema:** gunakan unified question schema (`q`, `hint`, `opts`, `opts_id`, `ans`, `img`, `exp`) — `img: null` semua dulu
+- **ID format:** doboku → `dt{n}_q{nn}`, kenchiku → `kt{n}_q{nn}`
+- **Exam pairing:** Teori Set 1/2 (tt1/tt2) dipasangkan dengan jitsugi set masing-masing track
 
 ---
 

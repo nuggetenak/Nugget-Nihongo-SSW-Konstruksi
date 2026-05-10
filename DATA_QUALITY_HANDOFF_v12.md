@@ -125,22 +125,42 @@ jp: "加湿器 vs 除湿器", furi: "かしつき vs じょしつき"
 
 ## PART 2 — SCHEMA STATUS
 
-### Unified Question Schema (canonical — wayground + csv already on this)
+### Unified Question Schema (canonical — all JAC sets use this)
 ```js
 {
-  id,       // integer, unique within set
+  id,       // string ID e.g. 'tt1_q01', 'st1_q01', 'kt1_q01', 'dt1_q01'
   q,        // JP question string with 《》 ruby
   hint,     // Indonesian paraphrase of q (required)
   opts,     // JP options array with 《》 ruby
   opts_id,  // Indonesian options array (parallel)
   ans,      // 0-based index
+  img,      // image filename string | null (null = no image yet / no image)
   exp,      // Indonesian explanation, min 30 chars
-  // set-level: track, source
+  // set-level fields: id, set, setLabel, topic, track, related_card_id
 }
 ```
 
-### jac-teori.js + jac-lifeline.js — Old Schema (OPEN P16 — agent task)
-Still uses old schema. Migration target: `jp`→`q` (add ruby), `answer`→`ans`, `explanation`→`exp`, split `options`→`opts`+`opts_id`, `id_text`→`hint`, drop `hiragana`.
+> **`img` field:** All JAC sets (teori, lifeline, doboku, kenchiku) have photo-based questions. Use `img: null` as placeholder — populate filename when assets are ready. `hasPhoto` boolean is **deprecated** — replaced by `img`.
+
+### JAC Exam Session Pairing
+Each track has 2 exam sessions. Default pairing (teori shared across all tracks):
+```
+Lifeline:  Teori Set 1 (tt1) + Lifeline Set 1 (st1)
+           Teori Set 2 (tt2) + Lifeline Set 2 (st2)
+Kenchiku:  Teori Set 1 (tt1) + Kenchiku Set 1 (kt1)
+           Teori Set 2 (tt2) + Kenchiku Set 2 (kt2)
+Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
+           Teori Set 2 (tt2) + Doboku Set 2 (dt2)
+```
+`jac-teori.js` is shared — same 65 qs used by all 3 tracks.
+
+### ID Conventions
+| File | Question ID format |
+|---|---|
+| `jac-teori.js` | `tt{n}_q{nn}` |
+| `jac-lifeline.js` | `st{n}_q{nn}` |
+| `jac-kenchiku.js` | `kt{n}_q{nn}` |
+| `jac-doboku.js` | `dt{n}_q{nn}` |
 
 ---
 
@@ -195,7 +215,7 @@ Set IDs: `doboku-01`, `doboku-02`, `doboku-03`, `kenchiku-01`, `kenchiku-02`, `k
 | `jac-teori.js` | 65 | 44 | **21** |
 | `jac-lifeline.js` | 30 | 29 | 1 |
 
-Schema migration pending (P16). `hasPhoto`: teori=5, lifeline=7.
+Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: null` on all qs (teori 65 + lifeline 30).
 
 ---
 
@@ -260,7 +280,7 @@ Schema migration pending (P16). `hasPhoto`: teori=5, lifeline=7.
 | **P16** | `jac-teori.js`, `jac-lifeline.js` | Schema migration — 95 qs | ❌ OPEN |
 | **P17** | `confusion-pairs.js` | Add `tip_id` field to 28 entries | ❌ OPEN |
 | **P19** | `danger-pairs.js` | Audit `traps`/`explanation` ruby | ❌ OPEN |
-| **P21** | stubs | Populate jac-doboku + jac-kenchiku (after PDF) | PENDING |
+| **P21** | stubs | Populate `jac-doboku.js` + `jac-kenchiku.js` — **jitsugi** (praktik bergambar) soal per track, bukan teori. Schema sama: `q/hint/opts/opts_id/ans/img/exp`. `img: null` semua dulu. Source: PDF jitsugi doboku/kenchiku. | PENDING |
 
 ### ✅ Done
 | Task | Notes |

@@ -16,7 +16,7 @@ export const JAC_TEORI = [
       'Kerja tim / Teamwork'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'Kerjasama antar kontraktor spesialis = チームワーク. Tanpa teamwork, alur konstruksi kacau.',
     related_card_id: 746,
     track: 'common'
@@ -39,7 +39,7 @@ export const JAC_TEORI = [
       'Konfirmasi keselamatan'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'Di akhir apel pagi, berpasangan → 安全確認 (konfirmasi keselamatan) sambil bersuara keras. Ini adalah 指差し呼称.',
     related_card_id: 4,
     track: 'common'
@@ -62,7 +62,7 @@ export const JAC_TEORI = [
       'Alcohol Harassment'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'パワハラ = pelecehan berbasis kekuasaan jabatan. セクハラ = pelecehan seksual. Kata kunci: \'superioritas jabatan + penderitaan fisik/mental\'.',
     related_card_id: 135,
     track: 'common'
@@ -85,7 +85,7 @@ export const JAC_TEORI = [
       '12 jam'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'Batas jam kerja legal = 8 jam/hari & 40 jam/minggu (UU Standar Ketenagakerjaan). Kartu #9.',
     related_card_id: 6,
     track: 'common'
@@ -108,7 +108,7 @@ export const JAC_TEORI = [
       'Lebih dari yang diperlukan'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '建築基準法 = menetapkan standar MINIMUM (最低限の) untuk bangunan. Bukan jaminan mutlak, bukan berlebihan. Kartu #13.',
     related_card_id: 10,
     track: 'common'
@@ -129,7 +129,7 @@ export const JAC_TEORI = [
       'Mengurangi / Meringankan'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'Tujuan 消防法 = MENGURANGI (軽減) kerugian bencana. Bukan meningkatkan! Kartu #14.',
     related_card_id: 11,
     track: 'common'
@@ -152,7 +152,7 @@ export const JAC_TEORI = [
       'Menyuplai air yang kotor'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '水道法 = bertujuan menyuplai air bersih yang terjangkau (安価). Bukan air mahal, bukan air kotor. Kartu #15.',
     related_card_id: 12,
     track: 'common'
@@ -177,7 +177,7 @@ export const JAC_TEORI = [
       'UU Usaha Kelistrikan'
     ],
     ans: 3,
-    hasPhoto: false,
+    img: null,
     exp: '電気事業法 = mengatur konstruksi, pemeliharaan, & keamanan fasilitas listrik. Jangan bingung dengan 電気工事業法 (UU kontraktor listrik). Kartu #16.',
     related_card_id: 13,
     track: 'common'
@@ -200,7 +200,7 @@ export const JAC_TEORI = [
       'Membangun bendungan'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '建築工事 = membangun gedung/rumah. Jalan & bendungan = 土木工事 (sipil). Perbedaan kunci: 建築 = struktur bangunan, 土木 = infrastruktur.',
     related_card_id: 628,
     track: 'common'
@@ -223,7 +223,7 @@ export const JAC_TEORI = [
       'Alat AC'
     ],
     ans: 1,
-    hasPhoto: true,
+    img: null,
     photoDesc: '📸 FOTO: Perangkat berbentuk silinder/bantalan karet tebal di bawah struktur bangunan — ini adalah 免振装置 (seismic isolator), sistem isolasi gempa yang memisahkan bangunan dari gerakan tanah.',
     exp: '免振装置 = seismic isolator — bantalan karet + baja berlapis di fondasi bangunan untuk meredam getaran gempa. Berbeda dari 制振 (damper) dan 耐震 (tahan gempa kaku).',
     related_card_id: 1353,
@@ -247,7 +247,7 @@ export const JAC_TEORI = [
       'Pekerjaan sipil'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'ライフライン工事 = pekerjaan jaringan utilitas vital: listrik, gas kota, air, telekomunikasi. Kartu #21.',
     related_card_id: 28,
     track: 'common'
@@ -272,7 +272,7 @@ export const JAC_TEORI = [
       'Pekerjaan gali lubang'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'さく井工事 = pengeboran sumur air secara vertikal. Bukan 掘削 (galian umum) atau 穴掘 (galian biasa). Kata kunci: \'menggali SUMUR\' (井戸).',
     related_card_id: 1267,
     track: 'common'
@@ -297,7 +297,7 @@ export const JAC_TEORI = [
       'Beton segar dituang ke lubang untuk membuat tiang'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '既成杭 = precast pile: dibuat di pabrik → dibawa ke lapangan → dipancang. Lawannya: 場所打ち杭 = beton cor di tempat (opsi 4). Pasangan jebakan klasik!',
     related_card_id: 1322,
     track: 'common'
@@ -322,7 +322,7 @@ export const JAC_TEORI = [
       'Pekerjaan struktur baja'
     ],
     ans: 3,
-    hasPhoto: false,
+    img: null,
     exp: '鉄骨工事 = pekerjaan struktur baja (kolom+balok baja). 鉄筋工事 = pekerjaan tulangan beton. Jangan tukar: 骨 (kerangka/baja) vs 筋 (tulangan/rebar).',
     related_card_id: 1402,
     track: 'common'
@@ -347,7 +347,7 @@ export const JAC_TEORI = [
       'Pemasangan kusen jendela'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '型枠工事 = membuat cetakan (formwork/bekisting) agar beton mengeras dalam bentuk yang diinginkan. 鉄筋工事 = pasang tulangan baja saja.',
     related_card_id: 1383,
     track: 'common'
@@ -372,7 +372,7 @@ export const JAC_TEORI = [
       'Pekerjaan atap'
     ],
     ans: 0,
-    hasPhoto: true,
+    img: null,
     photoDesc: '📸 FOTO: Beberapa pekerja berhelm merah & putih di atap bangunan mendatar, menggunakan selang besar & alat perata — ini adalah コンクリート打設工事 (pengecoran beton). Terlihat beton segar dituang & diratakan.',
     exp: 'コンクリート打設工事 = pengecoran beton. Ciri: selang pompa beton, alat pemadat (vibrator), permukaan datar yang sedang diisi beton.',
     related_card_id: 1403,
@@ -398,7 +398,7 @@ export const JAC_TEORI = [
       'Teknisi peralatan pemadam'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '電気工事士 = kualifikasi WAJIB untuk pekerjaan listrik. 工事担任者 = untuk telekomunikasi. 消防設備士 = untuk pemadam. Jangan tertukar!',
     related_card_id: 241,
     track: 'common'
@@ -423,7 +423,7 @@ export const JAC_TEORI = [
       'AC'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'スプリンクラー (sprinkler) = peralatan pemadam otomatis → dipasang dalam 消防設備工事. Wastafel = sanitasi, AC = AC, tungku = bukan pemadam. Kartu #28.',
     related_card_id: 35,
     track: 'common'
@@ -448,7 +448,7 @@ export const JAC_TEORI = [
       'Menghancurkan/membongkar'
     ],
     ans: 3,
-    hasPhoto: false,
+    img: null,
     exp: '解体工事 = pekerjaan pembongkaran → kata kuncinya 壊す (menghancurkan). Bukan membuat, memperbaiki, atau merakit.',
     related_card_id: 211,
     track: 'common'
@@ -471,7 +471,7 @@ export const JAC_TEORI = [
       'Kartu izin tinggal'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'Ada pekerjaan konstruksi yang memerlukan 免許 (lisensi/sertifikasi resmi), seperti pekerjaan listrik, crane, dll. Paspor & kartu tinggal bukan untuk pekerjaan teknis.',
     related_card_id: 209,
     track: 'common'
@@ -494,7 +494,7 @@ export const JAC_TEORI = [
       'Di kantor tenaga kerja'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '特別教育 = 2 cara: ①社外 (eksternal, lembaga luar) dan ②社内 (internal, di dalam perusahaan sendiri). Keduanya sah secara hukum.',
     related_card_id: 209,
     track: 'common'
@@ -517,7 +517,7 @@ export const JAC_TEORI = [
       'Harap berhati-hati'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'ご安全に = sapaan keselamatan khas konstruksi, bermakna \'semoga selamat bekerja\'. Diucapkan di awal/akhir kerja. Kartu #678.',
     related_card_id: 662,
     track: 'common'
@@ -540,7 +540,7 @@ export const JAC_TEORI = [
       'Terima kasih atas kerja kerasnya'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'お疲れ様です = bisa dipakai kapan saja & di mana saja di lingkungan kerja. ご安全に = khas lokasi konstruksi/berbahaya saja. Kartu #679.',
     related_card_id: 663,
     track: 'common'
@@ -565,7 +565,7 @@ export const JAC_TEORI = [
       'Garis lantai'
     ],
     ans: 3,
-    hasPhoto: false,
+    img: null,
     exp: '地墨 (じずみ) = garis tinta di permukaan HORIZONTAL (lantai). 立て墨 = garis vertikal (kolom/dinding). 逃げ墨 = garis offset/referensi.',
     related_card_id: 668,
     track: 'common'
@@ -590,7 +590,7 @@ export const JAC_TEORI = [
       'Galian mentah tanpa perkuatan'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '盛り土 = menambah/menumpuk tanah untuk meratakan permukaan. 根切り = menggali untuk fondasi. 埋戻し = menutup kembali galian setelah selesai.',
     related_card_id: 1301,
     track: 'common'
@@ -615,7 +615,7 @@ export const JAC_TEORI = [
       'Jarak/spasi'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'かぶり厚さ = selimut beton (concrete cover) — jarak dari tulangan ke permukaan beton. Fungsi: melindungi tulangan dari korosi & api.',
     related_card_id: 1375,
     track: 'common'
@@ -640,7 +640,7 @@ export const JAC_TEORI = [
       'Sanitasi'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '空調 (くうちょう) = Air Conditioning → mengatur suhu & kelembapan. 換気 = hanya sirkulasi udara. 排煙 = pembuangan asap darurat. Kartu #27.',
     related_card_id: 34,
     track: 'common'
@@ -663,7 +663,7 @@ export const JAC_TEORI = [
       'Disiplin/Shitsuke'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '5S = 整理(Seiri) + 整頓(Seiton) + 清掃(Seisou) + 清潔(Seiketsu) + しつけ(Shitsuke/Disiplin). Semua diawali \'S\'. Hafal 5 kata ini!',
     related_card_id: 134,
     track: 'common'
@@ -686,7 +686,7 @@ export const JAC_TEORI = [
       'Simpan helm & harness di tempat yang ditentukan'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'Helm & harness disimpan di tempat yang SUDAH DITENTUKAN → mudah ditemukan & tidak rusak. Merokok sembarangan & membiarkan sampah = SALAH.',
     related_card_id: 293,
     track: 'common'
@@ -709,7 +709,7 @@ export const JAC_TEORI = [
       'Nyanyian keselamatan'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '朝礼 = apel pagi wajib setiap hari sebelum kerja, dihadiri SEMUA pekerja. Ada 2 jenis: apel umum & apel per jenis kerja. Kartu #4.',
     related_card_id: 1,
     track: 'common'
@@ -732,7 +732,7 @@ export const JAC_TEORI = [
       'Senam radio'
     ],
     ans: 1,
-    hasPhoto: true,
+    img: null,
     photoDesc: '📸 FOTO: Beberapa pekerja berhelm menumpuk tangan di tengah (seperti yel-yel tim olahraga) — ini adalah タッチアンドコール (touch-and-call), konfirmasi komitmen keselamatan kelompok.',
     exp: 'タッチアンドコール = semua anggota tumpuk tangan → teriak bersama → konfirmasi komitmen keselamatan. Berbeda dari KY活動 (identifikasi bahaya per titik).',
     related_card_id: 586,
@@ -754,7 +754,7 @@ export const JAC_TEORI = [
       'Pekerja/karyawan'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '労災保険 = premi 100% ditanggung 事業主 (pengusaha). Pekerja tidak bayar sama sekali. BERBEDA dari 雇用保険 yang dibayar bersama. Kartu #19.',
     related_card_id: 16,
     track: 'common'
@@ -775,7 +775,7 @@ export const JAC_TEORI = [
       'UU Keselamatan & Kesehatan Kerja'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '労働安全衛生法 = UU K3 → keselamatan & kesehatan pekerja di tempat kerja. 雇用保険法 = asuransi saat kehilangan pekerjaan. Kartu #10.',
     related_card_id: 7,
     track: 'common'
@@ -796,7 +796,7 @@ export const JAC_TEORI = [
       'Peningkatan KETERAMPILAN pelaku konstruksi'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '建設業法の目的 = meningkatkan 資質 (kualitas/kompetensi menyeluruh). Bukan hanya 技能 (skill teknis). 資質 mencakup etika, manajemen, dll. Kartu #12.',
     related_card_id: 9,
     track: 'common'
@@ -817,7 +817,7 @@ export const JAC_TEORI = [
       'Material sisa/limbah konstruksi'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '建設リサイクル法 = mengatur daur ulang 廃材 (material sisa konstruksi: beton, kayu, aspal). Bukan polutan udara. Kartu #116.',
     related_card_id: 18,
     track: 'common'
@@ -838,7 +838,7 @@ export const JAC_TEORI = [
       'Gas LPG'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'ガス事業法 = untuk 都市ガス (gas kota, distribusi lewat pipa/導管). LPガス diatur UU berbeda. Kata kunci: 導管 (pipa) = gas kota. Kartu #118.',
     related_card_id: 20,
     track: 'common'
@@ -859,7 +859,7 @@ export const JAC_TEORI = [
       'Penanggung jawab pekerjaan telekomunikasi'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '工事担任者 = kualifikasi untuk pekerjaan TELEKOMUNIKASI. 電気工事士 = untuk pekerjaan LISTRIK. Pasangan jebakan klasik! Kartu #17.',
     related_card_id: 14,
     track: 'common'
@@ -880,7 +880,7 @@ export const JAC_TEORI = [
       'Kebocoran gas'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'Listrik yang ditangani salah → kebakaran (火災) & sengatan listrik (感電). Bukan kebocoran gas. Kartu #81 (感電).',
     related_card_id: 1181,
     track: 'common'
@@ -905,7 +905,7 @@ export const JAC_TEORI = [
       'Konservasi lahan pegunungan'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'Tujuan utama bendungan = 治水 (pengendalian banjir, penyediaan air). 治山 = reboisasi/konservasi gunung. Jangan tukar keduanya.',
     related_card_id: 1324,
     track: 'common'
@@ -930,7 +930,7 @@ export const JAC_TEORI = [
       'Jembatan'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'Terowongan digunakan untuk 鉄道 (kereta api), jalan raya, saluran air. Bukan jalur laut/udara — itu di atas permukaan.',
     related_card_id: 1325,
     track: 'common'
@@ -955,7 +955,7 @@ export const JAC_TEORI = [
       'Galian uji coba'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '山留め = mencegah tanah di sisi galian runtuh. Di bidang konstruksi sering disebut 土留め. Wajib jika kedalaman ≥1.5m. Kartu #108.',
     related_card_id: 121,
     track: 'common'
@@ -980,7 +980,7 @@ export const JAC_TEORI = [
       'Struktur utama/kutai'
     ],
     ans: 3,
-    hasPhoto: false,
+    img: null,
     exp: '躯体 (くたい) = struktur utama bangunan: fondasi + kolom + balok + dinding + lantai. 仕上げ = finishing, 建具 = kusen, 屋根 = atap.',
     related_card_id: 1404,
     track: 'common'
@@ -1005,7 +1005,7 @@ export const JAC_TEORI = [
       'Pekerjaan tiang listrik'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '都市ガス工事 = pekerjaan jaringan PIPA (管路) untuk mendistribusikan gas kota. Kabel & panel = pekerjaan listrik. Kartu #24.',
     related_card_id: 31,
     track: 'common'
@@ -1030,7 +1030,7 @@ export const JAC_TEORI = [
       'Pekerjaan listrik'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '下水道工事 = membangun sistem pengumpulan air LIMBAH (bekas pakai). 上水道 = air BERSIH. Air yang sudah dipakai → 下水道. Kartu #25.',
     related_card_id: 1270,
     track: 'common'
@@ -1053,7 +1053,7 @@ export const JAC_TEORI = [
       'Cincin pendorong'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '推進トンネル工事 (pipe jacking) = pipa didorong dengan JACKS hidrolik (ジャッキ). Bukan crane (digunakan angkat, bukan dorong horizontal).',
     related_card_id: 1350,
     track: 'common'
@@ -1076,7 +1076,7 @@ export const JAC_TEORI = [
       'Pelatihan teknisi inti'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'Operasi mesin berat = wajib 技能講習 (pelatihan keterampilan, misal: crane, forklift) + 特別教育. Bukan manajemen atau teknisi inti.',
     related_card_id: 209,
     track: 'common'
@@ -1099,7 +1099,7 @@ export const JAC_TEORI = [
       'Pekerjaan penghamparan/grading'
     ],
     ans: 2,
-    hasPhoto: true,
+    img: null,
     photoDesc: '📸 FOTO: Mesin paver aspal besar (asphalt finisher) berwarna hijau sedang bergerak di atas permukaan jalan, menghamparkan material aspal secara merata — ini adalah 敷き均し作業.',
     exp: '敷き均し作業 = penghamparan material (aspal dll) secara merata menggunakan mesin finisher. Berbeda dari 盛り土 (timbunan tanah) atau 積み込み (pemuatan).',
     related_card_id: 1341,
@@ -1123,7 +1123,7 @@ export const JAC_TEORI = [
       'Penggalian'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '押土 (おしど) = mendorong tanah dengan blade bulldozer. 掘削 = menggali. 運搬 = mengangkut. Kata kunci: \'mendorong\' (押す) + bulldozer. Kartu #148 (転圧関連).',
     related_card_id: 231,
     track: 'common'
@@ -1146,7 +1146,7 @@ export const JAC_TEORI = [
       'Semprot insulasi uretan'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '漆喰補修工事 (perbaikan plester/mortar) = masuk 屋根工事 karena atap tradisional Jepang menggunakan plester. Tirai = interior. Semprot uretan = biasanya isolasi dinding/lantai.',
     related_card_id: 1390,
     track: 'common'
@@ -1169,7 +1169,7 @@ export const JAC_TEORI = [
       'Perancah penyangga/shoring'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '支保工 = sistem perancah/shoring dengan pipa besi untuk menopang bekisting saat pengecoran. 打設 = menuang beton. 保温 = isolasi panas.',
     related_card_id: 809,
     track: 'common'
@@ -1192,7 +1192,7 @@ export const JAC_TEORI = [
       'Sambungan las'
     ],
     ans: 0,
-    hasPhoto: true,
+    img: null,
     photoDesc: '📸 FOTO: Batang baja berulir (rebar) dengan coupling sleeve logam di tengah — ini adalah 機械式継手 (mechanical coupler/sambungan mekanis), tulangan disambung lewat selongsong berulir.',
     exp: '機械式継手 = coupler berulir menghubungkan 2 rebar. Ciri visual: ada selongsong/sleeve di tengah sambungan. 重ね継手 = tumpang, 溶接継手 = las.',
     related_card_id: 1382,
@@ -1216,7 +1216,7 @@ export const JAC_TEORI = [
       'Tumpang'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: 'ガス圧接継手 = pemanasan gas + tekanan aksial → sambungan permanen tanpa logam pengisi. 溶接継手 = las (ada logam pengisi). Kata kunci: \'dipanaskan + tekanan aksial\'.',
     related_card_id: 1354,
     track: 'common'
@@ -1239,7 +1239,7 @@ export const JAC_TEORI = [
       'Pekerjaan instalasi dalam gedung'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'Listrik = 外線工事 (jaringan luar: tiang, kabel udara/bawah tanah) + 内線工事 (instalasi dalam gedung). Kartu #23.',
     related_card_id: 30,
     track: 'common'
@@ -1262,7 +1262,7 @@ export const JAC_TEORI = [
       'Internet'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'Telekomunikasi = 有線方式 (kabel, termasuk serat optik) + 無線方式 (nirkabel, gelombang radio). Serat optik masih 有線 (berkabel). Kartu #45, #26.',
     related_card_id: 33,
     track: 'common'
@@ -1285,7 +1285,7 @@ export const JAC_TEORI = [
       'Tangki air panas'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '衛生器具設備 = peralatan sanitasi: toilet/closet, wastafel, bath tub. AC = 空調. Tangki air panas = perlengkapan pemanas air, bukan sanitasi.',
     related_card_id: 37,
     track: 'common'
@@ -1308,7 +1308,7 @@ export const JAC_TEORI = [
       'Peralatan alarm/peringatan'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '警報設備 = sistem alarm: detektor asap/panas, bel darurat, siaran darurat. 消火設備 = aktif memadamkan api (sprinkler, hidran). 避難設備 = tangga darurat, tanda evakuasi.',
     related_card_id: 35,
     track: 'common'
@@ -1333,7 +1333,7 @@ export const JAC_TEORI = [
       'Berdiri'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: 'Teriakan 危ない！= bahaya mengancam SEGERA. Harus langsung bereaksi, minggir, atau hindari. Kartu #682.',
     related_card_id: 666,
     track: 'common'
@@ -1356,7 +1356,7 @@ export const JAC_TEORI = [
       'Papan horizontal referensi'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '遣り方 = rangka tiang kayu + papan (水貫) untuk menentukan posisi & ketinggian. Di sipil disebut 丁張り. 水盛り = hanya untuk cek kerataan. Kartu #152.',
     related_card_id: 1290,
     track: 'common'
@@ -1379,7 +1379,7 @@ export const JAC_TEORI = [
       'Potongan bertangga/step cutting'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '段切り = memotong lereng secara BERTANGGA (seperti tangga) sebelum menambah urugan → mencegah urugan meluncur. 締固め = memadatkan tanah (berbeda tahap).',
     related_card_id: 1425,
     track: 'common'
@@ -1402,7 +1402,7 @@ export const JAC_TEORI = [
       'Shaku — satuan panjang'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '坪 (つぼ) = satuan luas tradisional Jepang ≈ 3.3 m². Masih digunakan dalam properti. 寸/尺 = satuan PANJANG (bukan luas).',
     related_card_id: 277,
     track: 'common'
@@ -1425,7 +1425,7 @@ export const JAC_TEORI = [
       'Pengikatan dengan paku'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '釘仕舞 (くぎじまい) = mencabut paku dari bekisting yang sudah dibongkar, agar papan bisa dipakai ulang. 打ち込み = menancapkan. 釘止め = mengencangkan.',
     related_card_id: 303,
     track: 'common'
@@ -1448,7 +1448,7 @@ export const JAC_TEORI = [
       'Isolasi'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: '絶縁 (ぜつえん) = isolasi listrik — mencegah arus mengalir ke tempat yang tidak diinginkan. Dilakukan dengan karet, plastik, atau bahan dielektrik lainnya.',
     related_card_id: 280,
     track: 'common'
@@ -1471,7 +1471,7 @@ export const JAC_TEORI = [
       'Penarikan kabel'
     ],
     ans: 0,
-    hasPhoto: false,
+    img: null,
     exp: '接地 (せっち) = grounding — menghubungkan ke tanah untuk keamanan (jika ada arus bocor, mengalir ke bumi bukan ke manusia). 漏電 = KEADAAN bocor, bukan tindakan.',
     related_card_id: 62,
     track: 'common'
@@ -1494,7 +1494,7 @@ export const JAC_TEORI = [
       'Bersih/higienis — Seiketsu'
     ],
     ans: 1,
-    hasPhoto: false,
+    img: null,
     exp: '整頓 (せいとん) = Seiton = meletakkan barang di TEMPAT YANG DITENTUKAN agar mudah ditemukan. 清潔 = menjaga kebersihan. 掃除 = aktif membersihkan.',
     related_card_id: 327,
     track: 'common'
@@ -1517,7 +1517,7 @@ export const JAC_TEORI = [
       'Turunkan lengan baju hingga pergelangan tangan'
     ],
     ans: 2,
-    hasPhoto: false,
+    img: null,
     exp: 'Di lokasi konstruksi: lengan HARUS diturunkan ke pergelangan tangan (melindungi dari luka/lecet). Kancing harus terkancing. Lengan pendek = DILARANG karena bahaya.',
     related_card_id: 316,
     track: 'common'
