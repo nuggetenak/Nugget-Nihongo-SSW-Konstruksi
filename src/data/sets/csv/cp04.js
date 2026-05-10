@@ -40,7 +40,7 @@ export const SET_CP04 = {
           'Mempercepat pemotongan',
         ],
         ans: 2,
-        exp: 'Untuk persiapan pengelasan pipa (modul perpipaan JAC).',
+        exp: 'Bevel processing (ベベル加工) = membuat sudut miring pada ujung pipa sebelum las. Ini menciptakan groove V/U antara dua pipa sehingga filler las bisa menembus ke inti (full penetration). Tanpa bevel, las hanya di permukaan luar → tidak kuat, rentan bocor di tekanan tinggi.',
       },
       {
         id: 4,
@@ -49,7 +49,7 @@ export const SET_CP04 = {
         opts: ['フレアー工具《こうぐ》', 'パイプレンチ', 'ねじ切機《きりき》', 'パイプカッター'],
         opts_id: ['Flaring tool', 'Pipe wrench', 'Threading machine', 'Pipe cutter'],
         ans: 0,
-        exp: 'Digunakan untuk sambungan flare refrigerant (modul praktik).',
+        exp: 'Flaring tool (フレアー工具) membentuk ujung pipa tembaga menjadi kerucut 45° (flare). Bentuk ini memungkinkan sambungan mekanis yang bisa dibuka kembali tanpa las. Digunakan di sistem AC untuk menyambung unit indoor/outdoor dengan pipa refrigerant lewat flare nut.',
       },
       {
         id: 5,
@@ -81,7 +81,7 @@ export const SET_CP04 = {
         opts: ['ひび割《われ》れ・腐食《ふしょく》・変形《へんけい》', '軽《かる》い汚《よご》れ', '色褪《いろあ》せ', '長《なが》さの違《ちが》い'],
         opts_id: ['Retak, korosi, atau deformasi', 'Kotoran ringan', 'Pudar warna', 'Beda panjang'],
         ans: 0,
-        exp: 'Retak/korosi = wajib ganti (modul JAC anzen).',
+        exp: 'Inspeksi papan scaffold (足場板) wajib periksa: ①Retak/patah → ganti segera, ②Korosi yang mengurangi kekuatan, ③Deformasi/bengkok. Papan rusak bisa patah saat diinjak → pekerja jatuh. Kotoran ringan dan warna pudar bukan alasan ganti, tapi retak dan korosi parah wajib ganti.',
       },
       {
         id: 8,
@@ -99,7 +99,7 @@ export const SET_CP04 = {
         opts: ['5mm', '管径《かんけい》の1.5倍《ばい》程度《ていど》', '10mm', '任意《にんい》'],
         opts_id: ['5mm', 'Sekitar 1.5× diameter pipa', '10mm', 'Bebas'],
         ans: 1,
-        exp: '1.5× OD untuk kekuatan sambungan (modul JAC praktik).',
+        exp: 'Panjang brazing untuk capillary fitting pipa tembaga: minimal 1.5× diameter luar (OD) pipa. Contoh: pipa OD 12.7mm → panjang brazing min ≈19mm. Kurang dari ini → kekuatan sambungan tidak cukup untuk menahan tekanan operasi sistem refrigerant.',
       },
       {
         id: 10,
@@ -126,7 +126,7 @@ export const SET_CP04 = {
         opts: ['電圧計《でんあつけい》', 'クランプメーター', '水圧試験《すいあつしけん》ポンプ', 'テスター'],
         opts_id: ['Voltmeter', 'Clamp meter', 'Hydrostatic test pump', 'Tester'],
         ans: 2,
-        exp: 'Hydrostatic pump (modul JAC st2_sample_l).',
+        exp: 'Water pressure test (水圧試験) pada pipa air bersih/panas menggunakan hydrostatic test pump (水圧試験ポンプ) untuk menghasilkan tekanan 1.5× tekanan kerja. Tekanan dijaga minimal 30 menit — jika turun menunjukkan kebocoran. Voltmeter dan clamp meter tidak relevan untuk pengujian ini.',
       },
       {
         id: 13,
@@ -135,7 +135,7 @@ export const SET_CP04 = {
         opts: ['任意《にんい》', '試験圧《しけんあつ》の1.5倍《ばい》以上《いじょう》で作業員《さぎょういん》を退避《たいひ》', '5m', '1m'],
         opts_id: ['Bebas', 'Evakuasi pekerja minimal 1.5× tekanan uji', '5m', '1m'],
         ans: 1,
-        exp: 'Jauhkan pekerja dari potensi ledakan (modul JAC praktik).',
+        exp: 'Saat pressure test pada 1.5× tekanan kerja, pekerja yang tidak perlu WAJIB menjauh dari area pengujian. Jika pipa/fitting gagal bertekanan tinggi, semburan air atau kerusakan fitting sangat berbahaya. Hanya teknisi pengawas yang boleh berada dekat selama pengujian berlangsung.',
       },
       {
         id: 14,
@@ -144,7 +144,7 @@ export const SET_CP04 = {
         opts: ['EF機器《きき》が必要《ひつよう》', 'ボルトで締《し》め付《つ》けるだけ', 'ろう付《づ》け', '溶着《ようちゃく》が必要《ひつよう》'],
         opts_id: ['Perlu mesin EF', 'Hanya dikencangkan dengan baut', 'Brazing', 'Perlu difusi'],
         ans: 1,
-        exp: 'Mechanical joint hanya baut, tanpa listrik (modul JAC st2_sample_l).',
+        exp: 'Mechanical joint (メカニカルジョイント) pipa PE disambung hanya dengan mengencangkan baut/nut — tanpa listrik atau mesin. Lebih cepat dan mudah di lapangan. Berbeda dengan EF coupling (electrofusion) yang membutuhkan mesin pengontrol arus/suhu untuk menyatu. Cocok untuk lokasi tanpa akses listrik.',
       },
       {
         id: 15,
@@ -167,7 +167,7 @@ export const SET_CP04 = {
         opts: ['10mm', '50mm以上《いじょう》', '5mm', '任意《にんい》'],
         opts_id: ['10mm', 'Minimal 50mm', '5mm', 'Bebas'],
         ans: 1,
-        exp: 'Minimal 50mm untuk kedap sempurna (modul JAC insulasi).',
+        exp: 'Tape kedap udara (気密テープ) pada insulasi wajib overlap minimal 50mm di setiap sambungan. Overlap kurang → ada celah → uap air meresap masuk → kondensasi, jamur, dan insulasi rusak. Tekan tape dengan kuat terutama di belokan pipa agar adhesif menempel sempurna.',
       },
       {
         id: 17,
@@ -181,7 +181,7 @@ export const SET_CP04 = {
           'Aluminium tape',
         ],
         ans: 1,
-        exp: 'Pre-formed valve cover untuk mudah dibuka (modul JAC text7l).',
+        exp: 'Insulasi valve menggunakan pre-formed valve cover (バルブ用断熱カバー) yang berbentuk presisi sesuai body valve. Keunggulan: (1) Mudah dibuka saat valve perlu maintenance/inspeksi, (2) Tidak ada celah karena presisi, (3) Bisa dipasang ulang. Jangan pakai insulasi lembaran permanen karena valve butuh akses rutin.',
       },
       {
         id: 18,
@@ -204,7 +204,7 @@ export const SET_CP04 = {
           'Membengkokkan',
         ],
         ans: 0,
-        exp: 'Hindari beban berat sebelum permanent hanger (modul JAC perpipaan).',
+        exp: 'Temporary support (仮支持) menjaga posisi pipa sesuai rencana selama proses pemasangan sebelum permanent hanger dipasang. Tanpa support sementara, pipa bergeser karena beratnya sendiri → tegangan berlebih di sambungan atau alignment meleset → kebocoran saat operasi.',
       },
       {
         id: 20,
