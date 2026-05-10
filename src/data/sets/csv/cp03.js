@@ -36,7 +36,7 @@ export const SET_CP03 = {
           'Bebas',
         ],
         ans: 1,
-        exp: 'Di titik rendah untuk kumpulkan oli (modul JAC praktik).',
+        exp: 'Oil trap (オイルトラップ) dipasang di titik terendah pipa horizontal refrigerant untuk mengumpulkan oli kompresor yang ikut mengalir. Oli kemudian dikembalikan ke kompresor. Tanpa oil trap, kompresor kekurangan pelumas → overheating dan kerusakan permanen.',
       },
       {
         id: 3,
@@ -54,7 +54,7 @@ export const SET_CP03 = {
         opts: ['耐火性《たいかせい》が高《たか》い', '軽量《けいりょう》すぎる', '吸湿性《きゅうしつせい》が高《たか》い', '導電性《どうでんせい》が高《たか》い'],
         opts_id: ['Tahan api tinggi', 'Terlalu ringan', 'Mudah menyerap air', 'Konduktif listrik'],
         ans: 0,
-        exp: 'Tahan api & suhu tinggi (modul JAC Ch3.2.35).',
+        exp: 'Rock wool (ロックウール) dibuat dari batuan vulkanik/terak yang dilebur jadi serat. Keunggulan utama: titik leleh sangat tinggi (>1000°C) → tahan api dan suhu tinggi. Cocok untuk pipa steam dan saluran gas panas. Lebih berat dari glass wool tapi jauh lebih tahan panas.',
       },
       {
         id: 5,
@@ -72,7 +72,7 @@ export const SET_CP03 = {
         opts: ['手袋《てぶくろ》', 'フルハーネス', 'ヘルメットのみ', '安全帯（墜落防止）'],
         opts_id: ['Sarung tangan', 'Full harness', 'Hanya helm', 'Safety belt (fall protection)'],
         ans: 3,
-        exp: 'Full harness wajib saat merakit scaffolding (modul JAC anzen).',
+        exp: 'Saat merakit scaffold, pekerja berada di ketinggian sehingga wajib memakai alat pencegah jatuh (安全帯/墜落防止器具). Sejak revisi 2022, full harness wajib di ≥5m. Wajib juga: helm, safety shoes, dan sarung tangan saat menangani besi. Tanpa harness → risiko fatal.',
       },
       {
         id: 7,
@@ -113,7 +113,7 @@ export const SET_CP03 = {
         opts: ['毎朝《まいあさ》使用前《しようまえ》', '任意《にんい》', '作業終了後《さぎょうしゅうりょうご》', '月《つき》1回《かい》'],
         opts_id: ['Setiap pagi sebelum pakai', 'Bebas', 'Setelah kerja selesai', '1x sebulan'],
         ans: 0,
-        exp: 'Wajib sebelum pakai setiap hari (modul JAC anzen).',
+        exp: 'Buku inspeksi scaffold (足場点検簿) wajib diisi setiap pagi sebelum kerja dimulai. Tujuan: memastikan scaffold aman (sambungan kencang, papan tidak rusak, baut tidak longgar). Jika ada kerusakan, scaffold wajib diperbaiki dulu sebelum digunakan. Ini kewajiban hukum K3 Jepang.',
       },
       {
         id: 11,
@@ -122,7 +122,7 @@ export const SET_CP03 = {
         opts: ['塩化物系《えんかぶつけい》フラックス', '酸性《さんせい》フラックス', '樹脂系《じゅしけい》フラックス', '不要《ふよう》'],
         opts_id: ['Chloride-based flux', 'Acid flux', 'Resin-based flux', 'Tidak perlu'],
         ans: 0,
-        exp: 'Chloride flux membersihkan oksida pada copper (modul JAC praktik).',
+        exp: 'Flux (フラックス) untuk brazing tembaga berfungsi mencegah oksidasi permukaan saat pemanasan, agar filler alloy mengalir merata. Jenis paste chloride-based digunakan pada suhu brazing tembaga 700–900°C. Penting: flux wajib dibersihkan sempurna setelah brazing untuk mencegah korosi.',
       },
       {
         id: 12,
@@ -136,7 +136,7 @@ export const SET_CP03 = {
           'Membengkokkan',
         ],
         ans: 1,
-        exp: 'Membentuk ujung pipa untuk fitting (modul praktik).',
+        exp: 'Swaging tool (スウェージング工具) membentuk ujung pipa tembaga menjadi lebih kecil agar bisa masuk ke dalam fitting sambungan. Berbeda dengan flaring tool yang melebarkan ujung pipa berbentuk kerucut. Dengan swaging, sambungan langsung antar pipa dimungkinkan tanpa fitting tambahan.',
       },
       {
         id: 13,
@@ -200,7 +200,7 @@ export const SET_CP03 = {
         opts: ['切断《せつだん》する', '拡張《かくちょう》する', 'ねじを切《き》る', '管《かん》を曲《ま》げる'],
         opts_id: ['Memotong', 'Melebarkan', 'Memotong ulir', 'Membengkokkan pipa'],
         ans: 3,
-        exp: 'Membengkokkan copper pipe tanpa kerut (modul alat praktik).',
+        exp: 'Pipe bender (パイプベンダー) membengkokkan pipa tembaga atau baja dengan presisi tanpa merusak bentuk silinder pipa. Ada 2 jenis: manual (pipa kecil ≤22mm) dan hydraulic (pipa besar). Tekukan harus dilakukan perlahan agar bagian dalam tidak keriput (kink) yang bisa menyumbat aliran.',
       },
       {
         id: 19,
@@ -214,7 +214,7 @@ export const SET_CP03 = {
           'Hanya pembuangan air',
         ],
         ans: 1,
-        exp: 'Dry nitrogen purge untuk hilangkan moisture (modul JAC praktik).',
+        exp: 'Setelah pressure test, wajib purge dengan dry nitrogen (kering, bebas moisture) untuk menghilangkan kelembaban dari dalam pipa. Moisture bereaksi dengan refrigerant membentuk asam yang merusak kompresor. Setelah purge nitrogen, lakukan vacuum drawing (真空引き) sebelum mengisi refrigerant.',
       },
       {
         id: 20,
