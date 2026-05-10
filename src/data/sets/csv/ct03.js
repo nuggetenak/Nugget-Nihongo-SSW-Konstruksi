@@ -31,7 +31,7 @@ export const SET_CT03 = {
         opts: ['毎朝《まいあさ》の朝礼時《ちょうれいじ》', '任意《にんい》', '年《ねん》1回《かい》', '1ヶ月《かげつ》に1回《かい》'],
         opts_id: ['Setiap apel pagi', 'Bebas', '1x setahun', '1x sebulan'],
         ans: 0,
-        exp: 'Setiap pagi di chōrei (modul JAC Bab 1.5).',
+        exp: 'KY (危険予知/Kiken Yochi) training wajib dilakukan setiap pagi saat apel (朝礼/chōrei) sebelum kerja dimulai. Tujuan: mengidentifikasi potensi bahaya hari itu dan menetapkan tindakan pencegahan bersama-sama. KY rutin terbukti menurunkan angka kecelakaan kerja secara signifikan di site konstruksi.',
       },
       {
         id: 3,
@@ -49,7 +49,7 @@ export const SET_CT03 = {
         opts: ['5m以上《いじょう》', '作業面《さぎょうめん》から下方《かほう》2m以内《いない》', '地面《じめん》から2m', '任意《にんい》'],
         opts_id: ['5m ke atas', 'Maksimal 2m di bawah permukaan kerja', '2m dari tanah', 'Bebas'],
         ans: 1,
-        exp: 'Maksimal 2m di bawah level kerja (modul JAC).',
+        exp: 'Safety net (墜落防止ネット) dipasang maksimal 2m di bawah permukaan kerja untuk menangkap pekerja atau material yang jatuh. Jika dipasang lebih dari 2m di bawah, energi jatuh sudah terlalu besar saat menyentuh net → cedera serius tetap terjadi. Wajib berdasarkan regulasi K3 konstruksi Jepang.',
       },
       {
         id: 5,
@@ -213,7 +213,7 @@ export const SET_CT03 = {
           'Mencatat',
         ],
         ans: 2,
-        exp: 'Mencegah kesalahan & meningkatkan keselamatan (modul JAC Bab 1.4).',
+        exp: 'Komunikasi yang baik di tempat kerja berfungsi mencegah kesalahpahaman instruksi yang bisa berujung kecelakaan. Contoh: instruksi tidak jelas → pekerja melakukan tindakan salah → bahaya. Komunikasi aktif (4-eyes principle, repeat-back/sagekaeshi) memastikan informasi tersampaikan dengan benar ke semua pihak.',
       },
       {
         id: 16,
