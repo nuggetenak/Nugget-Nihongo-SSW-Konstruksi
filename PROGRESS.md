@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (wt1 done)
+**Last updated:** 2026-05-10 (wt2 done)
 
 ---
 
@@ -38,7 +38,7 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 *(26 files — fix double ruby saja, tidak perlu annotate baru)*
 
 - [x] `src/data/sets/wayground/wt1.js` — FIX
-- [ ] `src/data/sets/wayground/wt2.js` — FIX
+- [x] `src/data/sets/wayground/wt2.js` — FIX
 - [ ] `src/data/sets/wayground/wt3.js` — FIX
 - [ ] `src/data/sets/wayground/wt4.js` — FIX
 - [ ] `src/data/sets/wayground/wt5.js` — FIX
