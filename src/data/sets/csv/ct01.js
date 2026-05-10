@@ -14,7 +14,7 @@ export const SET_CT01 = {
         id: 1,
         q: '建設工事《けんせつこうじ》で「化学物質《かがくぶっしつ》」を使用《しよう》する際に必ず確認《かくにん》すべき文書《ぶんしょ》はどれか。',
         hint: "Dokumen yang WAJIB diperiksa saat menggunakan 'bahan kimia' di pekerjaan konstruksi adalah?",
-        opts: ['作業工程表', '施工体制台帳', '安全データシート《SDS/MSDS》', '工事請負契約書'],
+        opts: ['作業工程表《さぎょうこうていひょう》', '施工体制台帳《せこうたいせいだいちょう》', '安全《あんぜん》データシート（SDS/MSDS）', '工事請負契約書《こうじうけおいけいやくしょ》'],
         opts_id: [
           'Jadwal pekerjaan',
           'Buku sistem pelaksanaan',
@@ -28,7 +28,7 @@ export const SET_CT01 = {
         id: 2,
         q: '建設現場《けんせつげんば》の安全管理体制《あんぜんかんりたいせい》で、元方事業者《もとかたじぎょうしゃ》が行うべきことは？',
         hint: 'Hal yang harus dilakukan kontraktor utama dalam sistem manajemen keselamatan lokasi konstruksi adalah?',
-        opts: ['統一した安全ルールの策定', '下請けの監督のみ', 'なし', '任意'],
+        opts: ['統一《とういつ》した安全《あんぜん》ルールの策定《さくてい》', '下請《したうけ》けの監督《かんとく》のみ', 'なし', '任意《にんい》'],
         opts_id: [
           'Menyusun aturan keselamatan terpadu',
           'Hanya mengawasi subkontraktor',
@@ -42,7 +42,7 @@ export const SET_CT01 = {
         id: 3,
         q: 'KY活動《かつどう》の4ステップのうち、2番目《ばんめ》のステップは？',
         hint: 'Langkah ke-2 dalam 4 langkah KY adalah?',
-        opts: ['危険を指摘する', '目標を宣言する', '危険を予測する', '対策を決める'],
+        opts: ['危険《きけん》を指摘《してき》する', '目標《もくひょう》を宣言《せんげん》する', '危険《きけん》を予測《よそく》する', '対策《たいさく》を決《き》める'],
         opts_id: [
           'Menunjukkan bahaya',
           'Deklarasi tujuan',
@@ -56,7 +56,7 @@ export const SET_CT01 = {
         id: 4,
         q: '5S活動《かつどう》の「可視化《かしか》」の目的《もくてき》は？',
         hint: 'Tujuan visualisasi dalam 5S adalah?',
-        opts: ['記録を取る', '物を隠す', '掃除を減らす', '異常をすぐに発見できるようにする'],
+        opts: ['記録《きろく》を取《と》る', '物《もの》を隠《かく》す', '掃除《そうじ》を減《へ》らす', '異常《いじょう》をすぐに発見《はっけん》できるようにする'],
         opts_id: [
           'Mencatat',
           'Menyembunyikan barang',
@@ -70,7 +70,7 @@ export const SET_CT01 = {
         id: 5,
         q: 'KY活動《かつどう》の4ステップで最初《さいしょ》に行うことは？',
         hint: 'Langkah pertama dari 4 langkah KY adalah?',
-        opts: ['対策を決める', '危険を予測する', '目標宣言', '危険を指摘する'],
+        opts: ['対策《たいさく》を決《き》める', '危険《きけん》を予測《よそく》する', '目標宣言《もくひょうせんげん》', '危険《きけん》を指摘《してき》する'],
         opts_id: [
           'Menentukan tindakan',
           'Memprediksi bahaya',
@@ -82,13 +82,13 @@ export const SET_CT01 = {
       },
       {
         id: 6,
-        q: '産業安全衛生法で、危険予知活動《KY活動》の主な目的は何か。',
+        q: '産業安全衛生法で、危険予知活動（KY活動）の主な目的は何か。',
         hint: 'Menurut UU Keselamatan dan Kesehatan Kerja, tujuan utama KY adalah?',
-        opts: [
+        opts: ['休憩《きゅうけい》を取《と》る', '危険《きけん》を予測《よそく》し、対策《たいさく》を立《た》てる', '作業《さぎょう》を速《はや》く終《お》わらせる', '工具《こうぐ》を片付《かたづ》ける'],
           '休憩《きゅうけい》を取る',
           '危険《きけん》を予測《よそく》し、対策《たいさく》を立てる',
           '作業《さぎょう》を速く終わらせる',
-          '工具《こうぐ》《こうぐ》を片付《かたづ》ける',
+          '工具《こうぐ》を片付《かたづ》ける',
         ],
         opts_id: [
           'Beristirahat',
@@ -103,7 +103,7 @@ export const SET_CT01 = {
         id: 7,
         q: '朝礼後《ちょうれいご》の安全教育《あんぜんきょういく》で必ず伝えるべきことは？',
         hint: 'Hal wajib disampaikan di pendidikan keselamatan setelah apel pagi adalah?',
-        opts: ['給料の話', '今日の作業予定のみ', '休憩時間', '当日の危険箇所と対策'],
+        opts: ['給料《きゅうりょう》の話《はなし》', '今日《きょう》の作業予定《さぎょうよてい》のみ', '休憩時間《きゅうけいじかん》', '当日《とうじつ》の危険箇所《きけんかしょ》と対策《たいさく》'],
         opts_id: [
           'Pembahasan gaji',
           'Hanya jadwal kerja hari ini',
@@ -117,7 +117,7 @@ export const SET_CT01 = {
         id: 8,
         q: '建設現場《けんせつげんば》での「竣工《しゅんこう》」とはどういう意味《いみ》か。',
         hint: "Apa arti '竣工' (shunko) di site konstruksi?",
-        opts: ['工事の開始', '工事の中断', '工事の完了', '工事の変更'],
+        opts: ['工事《こうじ》の開始《かいし》', '工事《こうじ》の中断《ちゅうだん》', '工事《こうじ》の完了《かんりょう》', '工事《こうじ》の変更《へんこう》'],
         opts_id: [
           'Dimulainya konstruksi',
           'Penghentian konstruksi',
@@ -131,7 +131,7 @@ export const SET_CT01 = {
         id: 9,
         q: '特別管理産業廃棄物《とくべつかんりさんぎょうはいきぶつ》のうち、石綿含有廃棄物《いしわたがんゆうはいきぶつ》の処理《しょり》で必要《ひつよう》な資格《しかく》は？',
         hint: 'Kualifikasi yang diperlukan untuk pengolahan limbah khusus mengandung asbes adalah?',
-        opts: ['石綿取扱い特別教育修了者', '普通の廃棄物処理業', 'なし', '任意'],
+        opts: ['石綿取扱《いしわたとりあつか》い特別教育修了者《とくべつきょういくしゅうりょうしゃ》', '普通《ふつう》の廃棄物処理業《はいきぶつしょりぎょう》', 'なし', '任意《にんい》'],
         opts_id: [
           'Lulus pendidikan khusus penanganan asbes',
           'Pengolahan limbah biasa',
@@ -145,16 +145,16 @@ export const SET_CT01 = {
         id: 10,
         q: '作業中《さぎょうちゅう》の熱中症防止対策《ねっちゅうしょうぼうしたいさく》は？',
         hint: 'Pencegahan heat stroke saat kerja adalah?',
-        opts: ['水分補給と塩分', '重労働のみ', '休憩なし', '無視'],
+        opts: ['水分補給《すいぶんほきゅう》と塩分《えんぶん》', '重労働《じゅうろうどう》のみ', '休憩《きゅうけい》なし', '無視《むし》'],
         opts_id: ['Minum air & garam', 'Hanya kerja berat', 'Tanpa istirahat', 'Diabaikan'],
         ans: 0,
         exp: 'Pencegahan heat stroke saat kerja panas: ①Sediakan tempat istirahat sejuk/ber-AC, ②Sediakan air & minuman elektrolit, ③Istirahat teratur, ④Pakaian breathable, ⑤Monitor suhu tubuh. Jangan biarkan pekerja kerja terus tanpa istirahat di cuaca panas.',
       },
       {
         id: 11,
-        q: 'ロックアウト・タグアウト《LO/TO》の実施手順で最初に行うことは？',
+        q: 'ロックアウト・タグアウト（LO/TO）の実施手順で最初に行うことは？',
         hint: 'Langkah pertama pelaksanaan Lockout-Tagout adalah?',
-        opts: ['確認だけ', 'タグを付ける', '作業を開始する', 'エネルギー源を遮断する'],
+        opts: ['確認《かくにん》だけ', 'タグを付《つ》ける', '作業《さぎょう》を開始《かいし》する', 'エネルギー源《げん》を遮断《しゃだん》する'],
         opts_id: ['Hanya konfirmasi', 'Memasang tag', 'Mulai kerja', 'Memutus sumber energi'],
         ans: 3,
         exp: "Langkah LOTO (Lockout-Tagout/ロックアウト・タグアウト): ①MATIKAN & KUNCI sumber energi (listrik/hidrolik/pneumatik), ②Pasang tag 'DO NOT OPERATE', ③Pastikan energi tersimpan (kapasitor, spring) juga dibuang (zero energy state). Ini mencegah kecelakaan saat maintenance mesin.",
@@ -163,7 +163,7 @@ export const SET_CT01 = {
         id: 12,
         q: '建設現場《けんせつげんば》の「安全衛生委員会《あんぜんえいせいいいんかい》」の役割《やくわり》は？',
         hint: 'Peran komite keselamatan & kesehatan di lokasi konstruksi adalah?',
-        opts: ['給与を決める', '休憩を管理', '作業を監督する', '危険要因の調査と改善提案'],
+        opts: ['給与《きゅうよ》を決《き》める', '休憩《きゅうけい》を管理《かんり》', '作業《さぎょう》を監督《かんとく》する', '危険要因《きけんよういん》の調査《ちょうさ》と改善提案《かいぜんていあん》'],
         opts_id: [
           'Menentukan gaji',
           'Mengatur istirahat',
@@ -177,7 +177,7 @@ export const SET_CT01 = {
         id: 13,
         q: '水道法《すいどうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
         hint: 'Tujuan yang benar dari Water Supply Act (水道法) adalah?',
-        opts: [
+        opts: ['清潔《せいけつ》で安全《あんぜん》な飲料水《いんりょうすい》を安定的《あんていてき》に供給《きょうきゅう》すること', '建設工事《けんせつこうじ》の費用《ひよう》を削減《さくげん》すること', '下水《げすい》を処理《しょり》して河川《かせん》を守《まも》ること', '電力《でんりょく》を安定供給《あんていきょうきゅう》すること'],
           '清潔《せいけつ》で安全《あんぜん》な飲料水《いんりょうすい》を安定的《あんていてき》に供給《きょうきゅう》すること',
           '建設工事《けんせつこうじ》の費用《ひよう》を削減《さくげん》すること',
           '下水《げすい》を処理《しょり》して河川《かせん》を守ること',
@@ -194,9 +194,9 @@ export const SET_CT01 = {
       },
       {
         id: 14,
-        q: '労働基準法で、時間外労働《残業》の割増賃金率の最低基準は？',
+        q: '労働基準法で、時間外労働（残業）の割増賃金率の最低基準は？',
         hint: 'Menurut UU Standar Ketenagakerjaan, tarif minimal upah lembur adalah?',
-        opts: ['2.0 倍', '1.5 倍', '1.0 倍', '1.25 倍'],
+        opts: ['2.0 倍《ばい》', '1.5 倍《ばい》', '1.0 倍《ばい》', '1.25 倍《ばい》'],
         opts_id: ['2.0 kali', '1.5 kali', '1.0 kali', '1.25 kali'],
         ans: 3,
         exp: 'Upah lembur minimal 1.25× gaji pokok. Khusus lembur >60 jam/bulan, tarif naik menjadi 1.50×. Lembur di hari libur resmi (法定休日) minimal 1.35×. Ketentuan ini wajib dipatuhi semua perusahaan di Jepang.',
@@ -205,7 +205,7 @@ export const SET_CT01 = {
         id: 15,
         q: '工程表《こうていひょう》として最もよく使われる「バーチャート」の特徴《とくちょう》はどれか。',
         hint: "Karakteristik jadwal konstruksi yang paling sering digunakan 'bar chart' (バーチャート) adalah?",
-        opts: [
+        opts: ['作業《さぎょう》の依存関係《いぞんかんけい》が一目《ひとめ》でわかる', '縦軸《たてじく》に作業名《さぎょうめい》、横軸《よこじく》に時間《じかん》を示《しめ》す', '円《えん》グラフで進捗《しんちょく》を表示《ひょうじ》する', '工事費《こうじひ》の推移《すいい》を線《せん》グラフで示《しめ》す'],
           '作業《さぎょう》の依存関係《いぞんかんけい》が一目《ひとめ》でわかる',
           '縦軸《たてじく》に作業名《さぎょうめい》、横軸《よこじく》に時間《じかん》を示す',
           '円《えん》グラフで進捗《しんちょく》を表示《ひょうじ》する',
@@ -222,13 +222,13 @@ export const SET_CT01 = {
       },
       {
         id: 16,
-        q: '建設キャリアアップシステム《CCUS》の目的として正しいものはどれか。',
+        q: '建設キャリアアップシステム（CCUS）の目的として正しいものはどれか。',
         hint: 'Tujuan yang benar dari Construction Career Up System (CCUS) adalah?',
-        opts: [
+        opts: ['建設《けんせつ》コストを削減《さくげん》する', '外国人労働者《がいこくじんろうどうしゃ》の数《かず》を制限《せいげん》する', '技能者《ぎのうしゃ》の就業履歴《しゅうぎょうりれき》と資格《しかく》を見《み》える化《か》する', '工事《こうじ》の工期《こうき》を短縮《たんしゅく》する'],
           '建設《けんせつ》コストを削減《さくげん》する',
           '外国人労働者《がいこくじんろうどうしゃ》の数《かず》を制限《せいげん》する',
           '技能者《ぎのうしゃ》の就業履歴《しゅうぎょうりれき》と資格《しかく》を見える化《か》する',
-          '工事《こうじ》《こうじ》の工期《こうき》を短縮《たんしゅく》する',
+          '工事《こうじ》の工期《こうき》を短縮《たんしゅく》する',
         ],
         opts_id: [
           'Mengurangi biaya konstruksi',
@@ -243,11 +243,11 @@ export const SET_CT01 = {
         id: 17,
         q: '建設現場《けんせつげんば》における「仮設工事《かせつこうじ》」の例として正《ただ》しいものはどれか。',
         hint: "Contoh yang benar dari 'pekerjaan sementara' (仮設工事) di site konstruksi adalah?",
-        opts: [
+        opts: ['建物《たてもの》の基礎《きそ》コンクリート工事《こうじ》', '建物《たてもの》の外壁《がいへき》タイル工事《こうじ》', '施工中《せこうちゅう》に使用《しよう》する足場《あしば》の設置《せっち》', '建物《たてもの》の屋根《やね》工事《こうじ》'],
           '建物《たてもの》の基礎《きそ》コンクリート工事《こうじ》',
           '建物《たてもの》の外壁《がいへき》タイル工事《こうじ》',
           '施工中《せこうちゅう》に使用《しよう》する足場《あしば》の設置《せっち》',
-          '建物《たてもの》の屋根《やね》工事《こうじ》《こうじ》',
+          '建物《たてもの》の屋根《やね》工事《こうじ》',
         ],
         opts_id: [
           'Pekerjaan beton fondasi bangunan',
@@ -262,11 +262,11 @@ export const SET_CT01 = {
         id: 18,
         q: '建設現場《けんせつげんば》における「労災保険《ろうさいほけん》」の保険料《ほけんりょう》を支払う義務《ぎむ》があるのはだれか。',
         hint: 'Siapa yang berkewajiban membayar premi asuransi kecelakaan kerja (労災保険) di site konstruksi?',
-        opts: [
+        opts: ['労働者《ろうどうしゃ》が全額《ぜんがく》負担《ふたん》する', '労働者《ろうどうしゃ》と使用者《しようしゃ》が半分《はんぶん》ずつ負担《ふたん》する', '政府《せいふ》が全額《ぜんがく》負担《ふたん》する', '事業主（使用者）が全額《ぜんがく》負担《ふたん》する'],
           '労働者《ろうどうしゃ》が全額《ぜんがく》負担《ふたん》する',
           '労働者《ろうどうしゃ》と使用者《しようしゃ》が半分《はんぶん》ずつ負担《ふたん》する',
           '政府《せいふ》が全額《ぜんがく》負担《ふたん》する',
-          '事業主《使用者》が全額負担する',
+          '事業主（使用者）が全額負担する',
         ],
         opts_id: [
           'Pekerja menanggung seluruh biaya',
@@ -279,9 +279,9 @@ export const SET_CT01 = {
       },
       {
         id: 19,
-        q: '建設現場で「高温作業環境」における「WBGT《暑さ指数》」の基準として、厳重警戒レベルはどれか。',
+        q: '建設現場で「高温作業環境」における「WBGT（暑さ指数）」の基準として、厳重警戒レベルはどれか。',
         hint: "Dalam lingkungan kerja panas di site konstruksi, nilai WBGT (indeks panas) untuk level 'peringatan ketat' (厳重警戒) adalah?",
-        opts: ['21°C以上25°C未満', '25°C以上28°C未満', '28°C以上31°C未満', '31°C以上'],
+        opts: ['21°C以上《いじょう》25°C未満《みまん》', '25°C以上《いじょう》28°C未満《みまん》', '28°C以上《いじょう》31°C未満《みまん》', '31°C以上《いじょう》'],
         opts_id: [
           '21°C atau lebih, di bawah 25°C',
           '25°C atau lebih, di bawah 28°C',
@@ -295,7 +295,7 @@ export const SET_CT01 = {
         id: 20,
         q: '人間《にんげん》の誤《あやま》り防止《ぼうし》で「ダブルチェック」の意味《いみ》は？',
         hint: 'Arti double-check untuk pencegahan human error adalah?',
-        opts: ['一人で確認', '記録不要', '二人以上で確認', '目視だけ'],
+        opts: ['一人《ひとり》で確認《かくにん》', '記録不要《きろくふよう》', '二人《ふたり》以上《いじょう》で確認《かくにん》', '目視《もくし》だけ'],
         opts_id: [
           'Konfirmasi sendiri',
           'Tidak perlu catat',
@@ -307,9 +307,9 @@ export const SET_CT01 = {
       },
       {
         id: 21,
-        q: '時間外労働の協定《36協定》で、特別条項を設ける場合の限度時間は？',
+        q: '時間外労働の協定（36協定）で、特別条項を設ける場合の限度時間は？',
         hint: 'Batas waktu lembur saat ada klausul khusus dalam perjanjian 36 adalah?',
-        opts: ['年720時間', 'なし', '月45時間', '任意'],
+        opts: ['年《ねん》720時間《じかん》', 'なし', '月《つき》45時間《じかん》', '任意《にんい》'],
         opts_id: ['720 jam/tahun', 'Tidak ada', '45 jam/bulan', 'Bebas'],
         ans: 0,
         exp: '36 agreement (36協定/san-roku kyōtei) = perjanjian antara pengusaha dan serikat pekerja tentang lembur. Dengan klausul khusus (特別条項), lembur diperbolehkan maksimal 720 jam/tahun atau 100 jam/bulan pada bulan tertentu. Tanpa 36 agreement, lembur apa pun dilarang.',
@@ -318,7 +318,7 @@ export const SET_CT01 = {
         id: 22,
         q: '建設現場《けんせつげんば》で「作業員名簿《さぎょういんめいぼ》」に記載《きさい》すべき事項《じこう》として正《ただ》しいものはどれか。',
         hint: "Hal yang benar untuk dicantumkan dalam 'daftar pekerja' (作業員名簿) di site konstruksi adalah?",
-        opts: [
+        opts: ['作業員《さぎょういん》の家族構成《かぞくこうせい》のみ', '作業員《さぎょういん》の趣味《しゅみ》と特技《とくぎ》のみ', '氏名《しめい》・生年月日《せいねんがっぴ》・所属会社《しょぞくかいしゃ》・保有資格《ほゆうしかく》など', '作業員《さぎょういん》の銀行口座情報《ぎんこうこうざじょうほう》のみ'],
           '作業員《さぎょういん》の家族構成《かぞくこうせい》のみ',
           '作業員《さぎょういん》の趣味《しゅみ》と特技《とくぎ》のみ',
           '氏名《しめい》・生年月日《せいねんがっぴ》・所属会社《しょぞくかいしゃ》・保有資格《ほゆうしかく》など',
@@ -337,7 +337,7 @@ export const SET_CT01 = {
         id: 23,
         q: '安全衛生委員会《あんぜんえいせいいいんかい》の設置義務《せっちぎむ》がある事業場《じぎょうじょう》の規模《きぼ》は？',
         hint: 'Skala perusahaan yang wajib membentuk komite keselamatan & kesehatan adalah?',
-        opts: ['10人以上', 'なし', '50人以上', '任意'],
+        opts: ['10人《にん》以上《いじょう》', 'なし', '50人《にん》以上《いじょう》', '任意《にんい》'],
         opts_id: ['10 orang atau lebih', 'Tidak ada', '50 orang atau lebih', 'Sukarela'],
         ans: 2,
         exp: 'Berdasarkan Industrial Safety & Health Act, perusahaan dengan ≥50 pekerja WAJIB membentuk 安全衛生委員会 (komite keselamatan & kesehatan). Komite bertugas mengawasi kondisi kerja dan membuat rekomendasi perbaikan. Perusahaan <50 pekerja dianjurkan tapi tidak wajib.',
@@ -346,7 +346,7 @@ export const SET_CT01 = {
         id: 24,
         q: '技能検定《ぎのうけんてい》に合格《ごうかく》した人は、何と名乗《なの》ることができるか。',
         hint: 'Orang yang lulus uji keterampilan dapat menyebut dirinya apa?',
-        opts: ['弁護士', '技能士', '司法書士', '技術士'],
+        opts: ['弁護士《べんごし》', '技能士《ぎのうし》', '司法書士《しほうしょし》', '技術士《ぎじゅつし》'],
         opts_id: ['Lawyer', 'Skill technician', 'Judicial scrivener', 'Engineer'],
         ans: 1,
         exp: 'Orang yang lulus 技能検定 (uji keterampilan teknis/skill certification) berhak menyebut diri 技能士 (Ginōshi = skilled worker). Ini bukan gelar akademik tapi pengakuan kompetensi teknis resmi dari pemerintah Jepang. Ada berbagai level (1, 2, 特級).',
@@ -355,7 +355,7 @@ export const SET_CT01 = {
         id: 25,
         q: '建設業界《けんせつぎょうかい》の三大災害《さんだいさいがい》で最も多い事故《じこ》の種類《しゅるい》はどれか。',
         hint: 'Jenis kecelakaan yang paling banyak terjadi di antara tiga besar kecelakaan industri konstruksi adalah?',
-        opts: [
+        opts: ['感電《かんでん》による死亡《しぼう》', '建設機械《けんせつきかい》による事故《じこ》', '墜落《ついらく》・転落《てんらく》による事故《じこ》', '崩壊《ほうかい》・倒壊《とうかい》による事故《じこ》'],
           '感電《かんでん》による死亡《しぼう》',
           '建設機械《けんせつきかい》による事故《じこ》',
           '墜落《ついらく》・転落《てんらく》による事故《じこ》',
@@ -372,10 +372,10 @@ export const SET_CT01 = {
       },
       {
         id: 26,
-        q: '建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》《したうけおいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
+        q: '建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
         hint: 'Penjelasan yang benar tentang subkontraktor (下請負業者《したうけおいぎょうしゃ》) dalam konstruksi adalah?',
-        opts: [
-          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
+        opts: ['発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》', '主《おも》に設計図《せっけいず》を作成《さくせい》する業者《ぎょうしゃ》', '元請《もとうけ》から専門工事《せんもんこうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》', '工事現場《こうじげんば》の安全管理《あんぜんかんり》のみを担当《たんとう》する業者《ぎょうしゃ》'],
+          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
           '主に設計図《せっけいず》を作成《さくせい》する業者《ぎょうしゃ》',
           '元請《もとうけ》から専門工事《せんもんこうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
           '工事現場《こうじげんば》の安全管理《あんぜんかんり》のみを担当《たんとう》する業者《ぎょうしゃ》',
@@ -393,7 +393,7 @@ export const SET_CT01 = {
         id: 27,
         q: '建設現場《けんせつげんば》の朝礼後《ちょうれいご》に「今日《きょう》の作業内容《さぎょうないよう》と危険箇所《きけんかしょ》」を伝える活動《かつどう》として正《ただ》しいものはどれか。',
         hint: "Kegiatan yang benar untuk menyampaikan 'isi pekerjaan dan bahaya hari ini' setelah apel pagi di site konstruksi adalah?",
-        opts: ['5S活動', 'KY《危険予知》活動', '産業廃棄物処理', '施工体制台帳の記入'],
+        opts: ['5S活動《かつどう》', 'KY（危険予知）活動《かつどう》', '産業廃棄物処理《さんぎょうはいきぶつしょり》', '施工体制台帳《せこうたいせいだいちょう》の記入《きにゅう》'],
         opts_id: [
           'Kegiatan 5S',
           'Kegiatan KY (prediksi bahaya)',
@@ -407,7 +407,7 @@ export const SET_CT01 = {
         id: 28,
         q: '作業中《さぎょうちゅう》の「指差呼称《ゆびさしこしょう》」実施《じっし》の目的《もくてき》は？',
         hint: 'Tujuan melaksanakan pointing & calling saat kerja adalah?',
-        opts: ['休憩を促す', '挨拶をする', '時間を節約する', '確認作業の正確性を高める'],
+        opts: ['休憩《きゅうけい》を促《うなが》す', '挨拶《あいさつ》をする', '時間《じかん》を節約《せつやく》する', '確認作業《かくにんさぎょう》の正確性《せいかくせい》を高《たか》める'],
         opts_id: [
           'Mendorong istirahat',
           'Memberi sapaan',
@@ -421,7 +421,7 @@ export const SET_CT01 = {
         id: 29,
         q: '建設工事《けんせつこうじ》で「防火区画《ぼうかくかく》」を設ける目的《もくてき》として正《ただ》しいものはどれか。',
         hint: "Tujuan yang benar dari pemasangan 'kompartemen tahan api' (防火区画) dalam konstruksi adalah?",
-        opts: [
+        opts: ['建物《たてもの》の断熱性《だんねつせい》を高《たか》めるため', '建物《たてもの》の防音性能《ぼうおんせいのう》を高《たか》めるため', '建物内《たてものない》での火災《かさい》や煙《けむり》の拡大《かくだい》を防《ふせ》ぐため', '建物《たてもの》の構造強度《こうぞうきょうど》を高《たか》めるため'],
           '建物《たてもの》の断熱性《だんねつせい》を高めるため',
           '建物《たてもの》の防音性能《ぼうおんせいのう》を高めるため',
           '建物内《たてものない》での火災《かさい》や煙《けむり》の拡大《かくだい》を防ぐため',
@@ -440,7 +440,7 @@ export const SET_CT01 = {
         id: 30,
         q: '建設現場《けんせつげんば》で「スプリンクラー設備工事《せつびこうじ》」で設置《せっち》するものはどれか。',
         hint: "Apa yang dipasang dalam 'pekerjaan instalasi sprinkler' (スプリンクラー設備工事)?",
-        opts: ['空調設備', '自動火災報知設備', '消火のための水を自動散水する設備', '給排水設備'],
+        opts: ['空調設備《くうちょうせつび》', '自動火災報知設備《じどうかさいほうちせつび》', '消火《しょうか》のための水《みず》を自動散水《じどうさんすい》する設備《せつび》', '給排水設備《きゅうはいすいせつび》'],
         opts_id: [
           'Peralatan AC/pendingin udara',
           'Sistem peringatan kebakaran otomatis',
