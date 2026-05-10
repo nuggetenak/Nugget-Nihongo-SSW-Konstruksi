@@ -1,7 +1,7 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
 **Last updated:** 2026-05-11 (session 9: H9/H10/H11/S1-S4 execution)
-**Handoff ref:** `DATA_QUALITY_HANDOFF_v14.md`
+**Handoff ref:** `DATA_QUALITY_HANDOFF_v15.md`
 
 ---
 
@@ -31,7 +31,7 @@ Files: `src/data/cards/common/gakka.js`, `src/data/cards/common/vocab-jac.js`, `
   - Cards dengan `source: "jac-gakka1"` (5) + `source: "jac-gakka2"` (3) → append ke `common/vocab-jac.js`
   - Cards dengan `source: "jac-jitsugi1"` (6) + `source: "jac-jitsugi2"` (3) → append ke `lifeline/vocab-jac.js`
 - [x] Delete `common/gakka.js`
-- [x] Verify: `common/vocab-jac.js` = 67 cards, `lifeline/vocab-jac.js` = 23 cards ✅, `lifeline/vocab-jac.js` = 23 cards
+- [x] Verify: `common/vocab-jac.js` = 67 cards ✅, `lifeline/vocab-jac.js` = 23 cards ✅
 
 ### S2 — Merge jitsugi.js ke lifeline/vocab-jac.js
 Files: `src/data/cards/lifeline/jitsugi.js`, `src/data/cards/lifeline/vocab-jac.js`
@@ -67,11 +67,11 @@ Files: `src/data/cards/lifeline/vocab-lifeline.js`, `src/data/cards/lifeline/ch5
 - [x] Untuk setiap card di `vocab-lifeline.js`: baca `category` → append ke file target sesuai tabel
 - [x] Delete `lifeline/vocab-lifeline.js`
 - [x] Verify card counts:
-  - `ch5.js` naik dari 200 ke ~278 (+denki30+tsushin8+sekou40)
-  - `ch6.js` naik dari 105 ke ~204 (+haikan62+hoon24+shoubou10+setsubi_kougu3)
-  - `ch7.js` naik dari 35 ke ~56 (+anzen21)
-  - `vocab-supplementary.js` naik dari 138 ke ~175 (+career37)
-  - Total harus tetap 235 cards terdistribusi
+  - `ch5.js` naik dari 200 ke 278 (+denki30+tsushin8+sekou40) ✅
+  - `ch6.js` naik dari 105 ke 204 (+haikan62+hoon24+shoubou10+setsubi_kougu3) ✅
+  - `ch7.js` naik dari 35 ke 56 (+anzen21) ✅
+  - `vocab-supplementary.js` naik dari 138 ke 175 (+career37) ✅
+  - Total 235 cards terdistribusi, grand total tetap 1,443 ✅
 
 > ⚠️ `career` cards (37) di vocab-lifeline.js adalah kategori yang tidak ada mapping-nya ke lifeline chapter manapun. Owner decision: sudah confirmed → `vocab-supplementary.js`.
 
@@ -142,6 +142,14 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 ---
 
 ## SELESAI (semua sesi sebelumnya)
+- ✅ H9: ct01.js + ct02.js syntax errors fixed (orphaned duplicate opts lines removed)
+- ✅ H10: wg12 track "lifeline" → "common"
+- ✅ H11: track field added to 6 quiz split files (doboku/kenchiku)
+- ✅ S1: gakka.js split — 8 cards→common/vocab-jac.js (67), 9 cards→lifeline/vocab-jac.js (23), gakka.js deleted
+- ✅ S2: jitsugi.js merged → lifeline/vocab-jac.js (42 total), jitsugi.js deleted
+- ✅ S3: vocab-common.js migrated → common/vocab-supplementary.js (247 total), vocab-common.js deleted
+- ✅ S4: vocab-lifeline.js (235 cards) redistributed by category → ch5(278)/ch6(204)/ch7(56)/vocab-supp(175), vocab-lifeline.js deleted
+
 
 - ✅ H1–H6: housekeeping, policy locks, handoff sync
 - ✅ P7: furi separator alignment (213 cards)

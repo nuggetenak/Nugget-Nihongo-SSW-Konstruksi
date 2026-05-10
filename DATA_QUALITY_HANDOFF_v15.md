@@ -1,6 +1,6 @@
-# SSW Konstruksi — Data Quality Handoff v14
-**Updated:** May 2026 — session 8 (card taxonomy architecture + restructure spec)
-**Supersedes:** v1–v13 (this is the canonical single-source handoff)
+# SSW Konstruksi — Data Quality Handoff v15
+**Updated:** May 2026 — session 9 (H9/H10/H11 housekeeping + S1–S4 card restructure complete)
+**Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
 **Last commit:** `f4a47fb` (pre-session-6)
@@ -235,7 +235,7 @@ Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
 **Grand total: 657 qs across 26 files**
 > No `wg10` — was renamed to `wp5`. No `wg12` is excluded from grand total reassignment pending H10 fix.
 
-> ⚠️ **`wg12` track bug:** `track: "lifeline"` — but content is 学科 (common) keywords. Must be corrected to `track: "common"`. See task **H10** in PROGRESS.md.
+> ~~**`wg12` track bug**~~ **FIXED (H10):** `track` corrected to `"common"`. Content is 学科 keywords, not lifeline-specific.
 
 > **`wg6`–`wg11` short `exp` fields** are intentional vocab-recognition format — do NOT expand.
 
@@ -350,6 +350,13 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 ### ✅ Done
 | Task | Notes |
 |---|---|
+| H9 | Fix orphaned duplicate opts lines in ct01.js + ct02.js — both exit clean |
+| H10 | wg12 `track: "lifeline"` → `"common"` |
+| H11 | Add `track` field to 6 quiz split files (doboku-01/02/03, kenchiku-01/02/03) |
+| S1 | Split gakka.js: 8→common/vocab-jac.js (67), 9→lifeline/vocab-jac.js (23), deleted |
+| S2 | Merge jitsugi.js (19) → lifeline/vocab-jac.js (42 total), deleted |
+| S3 | Migrate vocab-common.js (114) → common/vocab-supplementary.js (247 total), deleted |
+| S4 | Redistribute vocab-lifeline.js (235) by category: ch5(278)/ch6(204)/ch7(56)/vocab-supp(175), deleted |
 | P0–P0d | UI fixes, wg renames, quote removal |
 | P1 | Delete all `quote` fields (590 removed) |
 | P2 | Fix 4 malformed jp-ruby cards (ids 293,476,489,491) |
@@ -400,13 +407,13 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | `src/data/source/cards-doboku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
 | `src/data/source/cards-kenchiku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
 | `src/data/cards.js` | v10 | Regenerated — 1,443 cards |
-| `src/data/cards/**/*.js` | session 6 | Split files — furi aligned, ruby complete ✅ |
+| `src/data/cards/**/*.js` | session 9 (S1–S4) | Split files — furi aligned, ruby complete ✅. Restructure complete: deprecated files deleted, 1,443 cards redistributed ✅ |
 | `src/data/confusion-pairs.js` | session 6 (P17) | 28 pairs, termA/B ruby done, tip_id filled ✅ |
 | `src/data/danger-pairs.js` | session 6 (P19) | 20 items, term + traps + explanation ruby done ✅ |
 | `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done ✅ |
-| `src/data/sets/csv/*.js` | session 6 (P11) | Double ruby fixed, wrong 《》 reverted, opts annotated ✅ |
-| `src/data/sets/wayground/*.js` | session 6 (P12/P14) | Double ruby fixed, exp stubs filled ✅ |
-| `src/data/sets/quiz/*.js` | session 6 (P13) | id field added, hints filled, ruby done ✅ |
+| `src/data/sets/csv/*.js` | session 9 (H9) | Double ruby fixed, wrong 《》 reverted, opts annotated ✅. ct01.js + ct02.js syntax errors fixed ✅ |
+| `src/data/sets/wayground/*.js` | session 9 (H10) | Double ruby fixed, exp stubs filled ✅. wg12 track corrected: "lifeline"→"common" ✅ |
+| `src/data/sets/quiz/*.js` | session 9 (H11) | id field added, hints filled, ruby done ✅. track field added to all 6 files ✅ |
 | `src/data/sets/jac/jac-teori.js` | session 6 (P16/P18) | Schema migrated, related_card_id complete ✅ |
 | `src/data/sets/jac/jac-lifeline.js` | session 6 (P16) | Schema migrated ✅ |
 | `src/data/csv-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/csv/` |
@@ -420,82 +427,52 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 
 All content files have been split into granular files for isolated DQ work.
 **When merging to main**, agent reassembles these back into monolithic files.
+**Card restructure (S1–S4) complete** — deprecated files deleted, 1,443 cards redistributed. ✅
 
 ### 10A. Question Sets — current state ✅
 ```
 src/data/sets/
   csv/          cp01.js–cp06.js  (lifeline, 20qs each)
                 ct01.js–ct06.js  (common, 30qs each)
-                ⚠️ ct01.js + ct02.js have SYNTAX ERRORS — see task H9
+                ct01.js + ct02.js syntax errors fixed ✅ (H9)
   wayground/    wt1.js–wt10.js, wg1.js–wg9.js, wg11.js, wg12.js, wp1.js–wp5.js
                 (26 files — see Part 3 for full inventory)
   quiz/         doboku-01.js–03.js, kenchiku-01.js–03.js   (6 files, 15qs each)
-                ⚠️ Missing explicit `track` field — see task H11
+                track field added to all 6 files ✅ (H11)
   jac/          jac-teori.js, jac-lifeline.js               (2 files, unchanged)
 ```
 
-### 10B. Card Split Files — CURRENT state (pre-restructure)
+### 10B. Card Split Files — CURRENT state (post S1–S4 restructure ✅)
 
-> ⚠️ **Restructure in progress (S1–S4).** Files marked ❌ DEPRECATED will be deleted or merged. Do not add new cards to deprecated files.
-
-```
-src/data/cards/
-  common/
-    ch1.js              28 cards  ✅ pure source: jac-ch1
-    ch2.js              75 cards  ✅ pure source: jac-ch2
-    ch3.js             131 cards  ✅ pure source: jac-ch3
-    ch4.js             140 cards  ✅ pure source: jac-ch4
-    gakka.js            17 cards  ❌ DEPRECATED — mixed sources (see S1)
-    vocab-jac.js        59 cards  source: vocab-jac
-    vocab-common.js    114 cards  ❌ DEPRECATED — no jac-ch source (see S3)
-    vocab-supplementary.js  133 cards  source: vocab-supplementary
-
-  lifeline/
-    ch5.js             200 cards  ✅ pure source: jac-ch5
-    ch6.js             105 cards  ✅ pure source: jac-ch6
-    ch7.js              35 cards  ✅ pure source: jac-ch7
-    jitsugi.js          19 cards  ❌ DEPRECATED — will merge to vocab-jac (see S2)
-    vocab-jac.js        14 cards  source: vocab-jac
-    vocab-lifeline.js  235 cards  ❌ DEPRECATED — needs chapter reassignment (see S4)
-    vocab-supplementary.js  138 cards  source: vocab-supplementary
-```
-
-**gakka.js contents (17 cards):**
-- `jac-gakka1` (5) + `jac-gakka2` (3) → belong in common/vocab-jac.js
-- `jac-jitsugi1` (6) + `jac-jitsugi2` (3) → misplaced, belong in lifeline/vocab-jac.js
-
-**vocab-common.js contents (114 cards):**
-- Sources: vocab-core(12), vocab-exam(35), vocab-general(31), vocab-teori(29), text3l(7)
-- None are from `jac-ch1`–`jac-ch4` → all 114 cards move to common/vocab-supplementary.js
-
-**vocab-lifeline.js contents (235 cards):**
-- Sources: vocab-lifeline(152), vocab-exam(39), text3l(18), vocab-general(13), vocab-teori(10), vocab-core(3)
-- Category distribution: haikan(62), sekou(40), career(37), denki(30), hoon(24), anzen(21), shoubou(10), tsushin(8), setsubi_kougu(3)
-- Per-card reassignment to ch5/ch6/ch7 or vocab-supplementary — see S4 mapping rules
-
-### 10C. Card Split Files — TARGET state (post S1–S4)
+> **Restructure COMPLETE as of session 9.** All deprecated files deleted. 1,443 cards preserved, zero data change.
 
 ```
 src/data/cards/
   common/
-    ch1.js              28 cards  (untouched)
-    ch2.js              75 cards  (untouched)
-    ch3.js             131 cards  (untouched)
-    ch4.js             140 cards  (untouched)
-    vocab-jac.js       ~67 cards  (59 + 8 from gakka.js)
-    vocab-supplementary.js  ~247 cards  (133 + 114 from vocab-common.js)
-    [DELETED] gakka.js
-    [DELETED] vocab-common.js
+    ch1.js                    28 cards  ✅ pure source: jac-ch1
+    ch2.js                    75 cards  ✅ pure source: jac-ch2
+    ch3.js                   131 cards  ✅ pure source: jac-ch3
+    ch4.js                   140 cards  ✅ pure source: jac-ch4
+    vocab-jac.js              67 cards  ✅ vocab-jac + jac-gakka1/2 (S1)
+    vocab-supplementary.js   247 cards  ✅ supplementary + vocab-common migrated (S3)
+    [DELETED] gakka.js                     (S1 — split to vocab-jac common+lifeline)
+    [DELETED] vocab-common.js              (S3 — migrated to vocab-supplementary)
 
   lifeline/
-    ch5.js             200+       (will receive sekou/denki/tsushin cards from S4)
-    ch6.js             105+       (will receive haikan/hoon/shoubou/setsubi_kougu cards from S4)
-    ch7.js              35+       (will receive anzen cards from S4)
-    vocab-jac.js       ~42 cards  (14 + 19 jitsugi.js + 9 misplaced from gakka.js)
-    vocab-supplementary.js  ~175 cards  (138 + career/unassignable cards from S4)
-    [DELETED] jitsugi.js
-    [DELETED] vocab-lifeline.js
+    ch5.js                   278 cards  ✅ jac-ch5 + denki/tsushin/sekou from S4
+    ch6.js                   204 cards  ✅ jac-ch6 + haikan/hoon/shoubou/setsubi_kougu from S4
+    ch7.js                    56 cards  ✅ jac-ch7 + anzen from S4
+    vocab-jac.js              42 cards  ✅ vocab-jac + jac-jitsugi1/2 (S1+S2)
+    vocab-supplementary.js   175 cards  ✅ supplementary + career cards from S4
+    [DELETED] jitsugi.js                   (S2 — merged to lifeline/vocab-jac.js)
+    [DELETED] vocab-lifeline.js            (S4 — distributed by category)
 ```
+
+**Grand total: 1,443 cards** (28+75+131+140+67+247+278+204+56+42+175 = 1,443 ✅)
+
+### 10C. Card Split Files — TARGET state (post S1–S4) ✅ ACHIEVED
+
+> **Target state reached.** Section retained for historical reference — see 10B for current canonical state.
 
 ### 10D. Card taxonomy — canonical rules (locked this session)
 
