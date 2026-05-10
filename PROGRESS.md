@@ -35,10 +35,10 @@ Files: `src/data/cards/common/gakka.js`, `src/data/cards/common/vocab-jac.js`, `
 
 ### S2 — Merge jitsugi.js ke lifeline/vocab-jac.js
 Files: `src/data/cards/lifeline/jitsugi.js`, `src/data/cards/lifeline/vocab-jac.js`
-- [ ] Append semua 19 cards dari `lifeline/jitsugi.js` ke `lifeline/vocab-jac.js`
+- [x] Append semua 19 cards dari `lifeline/jitsugi.js` ke `lifeline/vocab-jac.js`
   - All 19 cards: `source: "jac-jitsugi1"` (7) + `source: "jac-jitsugi2"` (12)
-- [ ] Delete `lifeline/jitsugi.js`
-- [ ] Verify: `lifeline/vocab-jac.js` = 42 cards total (23 dari S1 + 19)
+- [x] Delete `lifeline/jitsugi.js`
+- [x] Verify: `lifeline/vocab-jac.js` = 42 cards total ✅ (23 dari S1 + 19)
 
 ### S3 — Migrate vocab-common.js → vocab-supplementary.js (common)
 Files: `src/data/cards/common/vocab-common.js`, `src/data/cards/common/vocab-supplementary.js`
