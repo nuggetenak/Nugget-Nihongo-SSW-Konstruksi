@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-10 (cp03 done)
+**Last updated:** 2026-05-10 (ct06 done)
 
 ---
 
@@ -29,10 +29,10 @@ Agent: cek file ini dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Cen
 - [x] `src/data/sets/csv/cp06.js` — FIX + ANNOTATE opts
 - [x] `src/data/sets/csv/ct01.js` — FIX + ANNOTATE opts
 - [x] `src/data/sets/csv/ct02.js` — FIX + ANNOTATE opts
-- [ ] `src/data/sets/csv/ct03.js` — FIX + ANNOTATE opts
-- [ ] `src/data/sets/csv/ct04.js` — FIX + ANNOTATE opts
-- [ ] `src/data/sets/csv/ct05.js` — FIX + ANNOTATE opts
-- [ ] `src/data/sets/csv/ct06.js` — FIX + ANNOTATE opts
+- [x] `src/data/sets/csv/ct03.js` — FIX + ANNOTATE opts
+- [x] `src/data/sets/csv/ct04.js` — FIX + ANNOTATE opts
+- [x] `src/data/sets/csv/ct05.js` — FIX + ANNOTATE opts
+- [x] `src/data/sets/csv/ct06.js` — FIX + ANNOTATE opts
 
 ## BATCH 2 — Wayground Double Ruby Fix
 *(26 files — fix double ruby saja, tidak perlu annotate baru)*
