@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-11 (session 8: card taxonomy architecture + restructure spec)
+**Last updated:** 2026-05-11 (session 9: H9/H10/H11/S1-S4 execution)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v14.md`
 
 ---
@@ -91,16 +91,16 @@ Files: `src/data/cards/lifeline/vocab-lifeline.js`, `src/data/cards/lifeline/ch5
 
 ### H9 — Fix ct01.js + ct02.js syntax errors 🔴
 Files: `src/data/sets/csv/ct01.js`, `src/data/sets/csv/ct02.js`
-- [ ] **ct01.js:** Ada orphaned lines setelah `opts:` array — stray duplicate lines tanpa key/value context. Locate dan delete.
+- [x] **ct01.js:** Ada orphaned lines setelah `opts:` array — stray duplicate lines tanpa key/value context. Locate dan delete.
   ```
   // Pattern: setelah opts: [...] ada baris stray seperti:
   '休憩《きゅうけい》を取る',
   '危険《きけん》を予測...
   ```
   Cek sekitar line 87–93. Remove semua orphaned lines antara `opts:` dan `opts_id:`.
-- [ ] **ct02.js:** Same pattern — orphaned lines antara `opts:` dan `opts_id:`. Cek sekitar line 38–44.
-- [ ] Verify: `node --input-type=module < src/data/sets/csv/ct01.js` exits clean
-- [ ] Verify: `node --input-type=module < src/data/sets/csv/ct02.js` exits clean
+- [x] **ct02.js:** Same pattern — orphaned lines antara `opts:` dan `opts_id:`. Cek sekitar line 38–44.
+- [x] Verify: `node --input-type=module < src/data/sets/csv/ct01.js` exits clean
+- [x] Verify: `node --input-type=module < src/data/sets/csv/ct02.js` exits clean
 - **Root cause:** Previous agent melakukan opts collapse tapi tidak membersihkan original opts lines
 
 ### H10 — Fix wg12 track field 🟡
