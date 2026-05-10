@@ -83,7 +83,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['5m tetap', 'Setiap 10m tetap', '1-3m tergantung diameter', 'Bebas'],
         ans: 2,
-        exp: 'Sesuai diameter & berat pipa (modul JAC perpipaan).',
+        exp: 'Jarak hanger/support pipa ditentukan berdasarkan diameter (管径): makin besar diameter → makin berat → jarak makin pendek. Standar umum: 1–3m tergantung ukuran pipa.',
       },
       {
         id: 6,
@@ -224,7 +224,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Voltage detector', 'Overcurrent breaker', 'Tester', 'Clamp meter'],
         ans: 1,
-        exp: 'Overcurrent protection device (modul JAC st_sample_l).',
+        exp: '過電流遮断器 = memutus suplai listrik secara otomatis saat arus melebihi batas aman. 検電器 = hanya mendeteksi ada/tidak tegangan. テスター/クランプメーター = alat ukur, tidak memutus arus.',
       },
       {
         id: 15,
@@ -257,7 +257,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Ikuti arah panah', 'Terbalik', 'Bebas', 'Horizontal'],
         ans: 0,
-        exp: 'Ikuti panah aliran (modul JAC praktik).',
+        exp: 'Filter dryer harus dipasang sesuai arah panah yang tercetak di badannya — menunjukkan arah aliran refrigerant. Pemasangan terbalik = refrigerant tidak tersaring + risiko blokir sistem.',
       },
       {
         id: 17,
