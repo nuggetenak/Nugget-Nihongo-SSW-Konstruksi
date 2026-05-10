@@ -392,7 +392,7 @@ export const SET_CT06 = {
         opts: ['5 年《ねん》', '10 年《ねん》', '3 年《ねん》', '1 年《ねん》'],
         opts_id: ['5 tahun', '10 tahun', '3 tahun', '1 tahun'],
         ans: 2,
-        exp: 'Maksimal 3 tahun (modul JAC tt2_sample_id.pdf).',
+        exp: 'Teknisi magang (技能実習生/ginou jisshusei) dapat bekerja di Jepang maksimal 3 tahun untuk magang biasa, atau 5 tahun jika lulus ujian ke jenjang 2. Namun sistem ini kini bertransisi ke SSW (特定技能). Berbeda dengan SSW yang bisa diperpanjang tidak terbatas untuk SSW2 (特定技能2号).',
       },
       {
         id: 27,
@@ -401,7 +401,7 @@ export const SET_CT06 = {
         opts: ['最低限《さいていげん》の', '必要以上《ひつようじじょう》の', '任意《にんい》の', '安全《あんぜん》が保証《ほしょう》される'],
         opts_id: ['Minimum', 'Lebih dari perlu', 'Sukarela', 'Dijamin aman'],
         ans: 0,
-        exp: 'Aturan minimum (saiteigen) menurut Building Standards Act (modul JAC Bab 2).',
+        exp: 'Building Standards Act (建築基準法/Kenchiku Kijunhō) menetapkan aturan MINIMUM (最低限/saiteigen) untuk keselamatan dan kenyamanan bangunan. "Minimum" artinya: bangunan boleh melebihi standar ini, tapi tidak boleh di bawahnya. Cakupan: kekuatan struktural, ukuran ruangan, ventilasi, proteksi kebakaran.',
       },
       {
         id: 28,
