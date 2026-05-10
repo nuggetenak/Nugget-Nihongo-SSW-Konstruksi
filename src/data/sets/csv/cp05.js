@@ -17,7 +17,7 @@ export const SET_CP05 = {
         opts: ['パイプリーマー', 'トルクレンチ', 'パイプレンチ', 'パイプカッター'],
         opts_id: ['Pipe reamer', 'Torque wrench', 'Pipe wrench', 'Pipe cutter'],
         ans: 0,
-        exp: 'Pipe reamer membersihkan burr agar sambungan rapat (modul JAC st_sample2_l).',
+        exp: 'Pipe reamer (パイプリーマー) membersihkan burr (sisa potongan kasar) di ujung dalam pipa setelah dipotong. Burr yang tidak dibersihkan bisa menggores O-ring atau gasket, menyebabkan kebocoran. Juga bisa menyempitkan aliran. Wajib dipakai sebelum threading atau brazing.',
       },
       {
         id: 2,
@@ -54,7 +54,7 @@ export const SET_CP05 = {
           'Menurunkan voltase',
         ],
         ans: 0,
-        exp: 'Melindungi dari sengatan listrik (modul JAC anzen).',
+        exp: 'Earth leakage breaker (漏電ブレーカー/ELCB) mendeteksi arus bocor ke ground dan MEMUTUS sirkuit dalam <0.1 detik. Jika ada isolasi rusak pada power tool, arus bocor terdeteksi dan listrik diputus sebelum menyentuh manusia. Berbeda dengan MCB yang hanya melindungi dari overcurrent, bukan sengatan listrik.',
       },
       {
         id: 5,
@@ -68,18 +68,13 @@ export const SET_CP05 = {
           'Bebas',
         ],
         ans: 2,
-        exp: 'Wajib ganti setelah terkena beban jatuh (modul JAC anzen).',
+        exp: 'Energy absorber (エネルギーアブソーバー) pada lanyard full harness wajib diganti SEGERA setelah menerima beban jatuh, meski terlihat masih utuh. Saat terpakai, bagian dalam sobek/meregang secara permanen dan tidak bisa melindungi lagi. Juga ganti jika terlihat deformasi, sobek, atau berusia >5 tahun.',
       },
       {
         id: 6,
         q: '溶接作業《ようせつさぎょう》で使用《しよう》する保護《ほご》メガネの主な目的《もくてき》は？',
         hint: 'Tujuan utama kacamata pelindung saat pengelasan?',
         opts: ['強《つよ》い光（アーク光）と飛散物《ひさんぶつ》から目《め》を守《まも》る', '視力《しりょく》を上《あ》げる', '太陽光《たいようこう》を見《み》る', 'ファッション'],
-          '強い光（アーク光）と飛散物から目を守る',
-          '視力《しりょく》を上げる',
-          '太陽光《たいようこう》を見る',
-          'ファッション',
-        ],
         opts_id: [
           'Melindungi mata dari sinar las & percikan',
           'Meningkatkan penglihatan',
@@ -96,7 +91,7 @@ export const SET_CP05 = {
         opts: ['任意《にんい》', '施工完了後《せこうかんりょうご》', '施工前《せこうまえ》', '1週間後《しゅうかんご》'],
         opts_id: ['Bebas', 'Setelah pemasangan selesai', 'Sebelum pemasangan', 'Setelah 1 minggu'],
         ans: 1,
-        exp: 'Setelah selesai untuk verifikasi kualitas (modul JAC insulasi).',
+        exp: 'Suhu permukaan insulasi diukur setelah pemasangan selesai untuk verifikasi kualitas. Jika insulasi terpasang benar, suhu permukaan luar seharusnya mendekati suhu ruangan (bukan suhu pipa). Pengukuran dengan termometer infrared. Titik panas di permukaan = ada celah/ketebalan kurang.',
       },
       {
         id: 8,
@@ -142,7 +137,7 @@ export const SET_CP05 = {
           'Mengukur ketebalan',
         ],
         ans: 2,
-        exp: 'Verifikasi NPT/BSP (modul JAC praktik).',
+        exp: 'Thread gauge (ねじゲージ) digunakan untuk memverifikasi standar ulir pipa: NPT (National Pipe Taper, Amerika), BSP (British Standard Pipe, Inggris/Jepang). Ulir NPT dan BSP tidak kompatibel meski terlihat mirip. Salah standar → kebocoran karena profil ulir berbeda. Wajib dicek sebelum pemasangan.',
       },
       {
         id: 12,
@@ -234,7 +229,7 @@ export const SET_CP05 = {
         opts: ['アルミガラス布（ALGC）', 'ガルバリウム', '紙《かみ》', '薄鋼板《うすこうはん》'],
         opts_id: ['Aluminium glass cloth', 'Galvalume', 'Kertas', 'Thin steel sheet'],
         ans: 0,
-        exp: 'ALGC ringan & tahan api untuk indoor (modul JAC text7l).',
+        exp: 'ALGC (Aluminium Glass Cloth = アルミガラス布) adalah bahan outer cover insulasi untuk indoor: kombinasi foil aluminium + kain serat kaca. Lebih ringan dari steel sheet, tahan api, mudah dipasang, dan estetis. Untuk outdoor tidak direkomendasikan karena tidak tahan hujan/UV jangka panjang.',
       },
       {
         id: 20,
