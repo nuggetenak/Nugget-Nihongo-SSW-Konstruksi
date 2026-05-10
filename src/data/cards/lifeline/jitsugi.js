@@ -1,6 +1,6 @@
-// gakka.js — cards-lifeline cards from source: gakka
+// lifeline/jitsugi.js — lifeline JAC sample jitsugi exam cards
 // (19 cards)
-export const CARDS_GAKKA = [
+export const CARDS_LIFELINE_JITSUGI = [
 {
   id: 36,
   category: "setsubi_kougu",

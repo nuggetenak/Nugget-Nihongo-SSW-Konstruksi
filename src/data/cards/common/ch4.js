@@ -1,5 +1,5 @@
-// ch4.js — cards-common cards from source: ch4
-// (101 cards)
+// common/ch4.js — common track cards from source: ch4
+// (140 cards)
 export const CARDS_CH4 = [
 {
   id: 111,
@@ -1111,5 +1111,434 @@ export const CARDS_CH4 = [
   id_text: "5 singkatan struktur",
   desc: "RC造《ぞう》=鉄筋《てっきん》コンクリート. S造《つく》り=鉄骨《てっこつ》. SRC造《つく》り=鉄骨《てっこつ》鉄筋《てっきん》コンクリート.\n木造《もくぞう》=kayu.",
   _origIndex: 1555
+  },
+{
+  id: 50,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "あっちゃくたんし",
+  jp: "圧着端子《あっちゃくたんし》",
+  type: "konsep",
+  id_text: "Terminal crimping",
+  desc: "Terminal untuk menghubungkan kabel ke peralatan listrik, dikencangkan dengan tekanan.",
+  _origIndex: 58
+  },
+{
+  id: 71,
+  category: "tsushin",
+  source: "jac-ch4",
+  furi: "きょうどうこう",
+  jp: "共同溝《きょうどうこう》",
+  type: "konsep",
+  id_text: "Saluran utilitas bersama",
+  desc: "Saluran bawah tanah besar untuk berbagai utilitas.\nBerbeda dari 管路《かんろ》 yang menghubungkan manhole.",
+  _origIndex: 79
+  },
+{
+  id: 207,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ぜつえん・ろうでん・せっち・あーす",
+  jp: "絶縁《ぜつえん》・漏電《ろうでん》・接地《せっち》・アース",
+  type: "konsep",
+  id_text: "Isolasi, bocor, grounding",
+  desc: "絶縁《ぜつえん》=cegah arus bocor; 漏電《ろうでん》=arus bocor — bahaya; 接地《せっち》(アース)=hubung ke tanah cegah",
+  _origIndex: 271
+  },
+{
+  id: 208,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "かくうはいせん vs まいせつはいせん",
+  jp: "架空配線《かくうはいせん》 vs 埋設配線《まいせつはいせん》",
+  type: "konsep",
+  id_text: "Kabel aerial vs ditanam",
+  desc: "架空配線《かくうはいせん》=kabel via tiang; 埋設《まいせつ》=kabel ditanam via 3 cara: 管《かん》路式《かんろしき》, 直接埋設《ちょくせつまいせつ》,",
+  _origIndex: 272
+  },
+{
+  id: 209,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "いんぺいはいかん vs ろしゅつはいかん",
+  jp: "隠ぺい配管《いんぺいはいかん》 vs 露出配管《ろしゅつはいかん》",
+  type: "konsep",
+  id_text: "Pipa dalam vs pipa luar",
+  desc: "隠《かく》ぺい配管《はいかん》=pipa dalam dinding/plafon; 露出《ろしゅつ》配管《はいかん》=pipa tampak di permukaan.",
+  _origIndex: 273
+  },
+{
+  id: 210,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ていあつ・こうあつ・とくべつこうあつ",
+  jp: "低圧《ていあつ》・高圧《こうあつ》・特別高圧《とくべつこうあつ》（電圧の区分）",
+  type: "konsep",
+  id_text: "3 kelas tegangan DC/AC",
+  desc: "低圧《ていあつ》: DC≤750V, AC≤600V; 高圧《こうあつ》: s.d. 7000V; 特別高圧《とくべつこうあつ》: >7000V.",
+  _origIndex: 274
+  },
+{
+  id: 211,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ちょくりゅうこうりゅうvs",
+  jp: "直流《ちょくりゅうこうりゅう》（DC）vs 交流（AC）",
+  type: "konsep",
+  id_text: "Arus DC vs AC",
+  desc: "直流《ちょくりゅう》(DC)=arus tidak berubah arah; 交流《こうりゅう》(AC)=arus periodik. Listrik rumah Jepang: AC 100V.",
+  _origIndex: 275
+  },
+{
+  id: 212,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "えむぢいえふ",
+  jp: "MDF（通信分配盤）",
+  type: "konsep",
+  id_text: "Panel distribusi telecom",
+  desc: "Papan distribusi komunikasi gedung; semua jalur dari luar masuk ke MDF sebelum didistribusikan.",
+  _origIndex: 276
+  },
+{
+  id: 213,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "あいぢばあぱいぢこんるし",
+  jp: "Φ（ファイ / パイ）",
+  type: "konsep",
+  id_text: "Simbol diameter dibaca パイ",
+  desc: "Simbol diameter Φ; di lapangan konstruksi Jepang dibaca パイ, bukan ファイ secara matematik.",
+  _origIndex: 277
+  },
+{
+  id: 214,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "つうでん・あたる・かしめる・とぶおちる",
+  jp: "通電《つうでん》・あたる・かしめる・飛ぶ《とぶ》/落ちる《おちる》",
+  type: "konsep",
+  id_text: "Jargon listrik lapangan",
+  desc: "通電《つうでん》=arus aktif; あたる=cek pakai alat ukur; かしめる=crimp; 飛《と》ぶ/落《お》ちる=breaker trip.",
+  _origIndex: 278
+  },
+{
+  id: 215,
+  category: "setsubi_kougu",
+  source: "jac-ch4",
+  furi: "くうちょう・かんき・はいえん",
+  jp: "空調《くうちょう》・換気《かんき》・排煙《はいえん》",
+  type: "konsep",
+  id_text: "AC, ventilasi, asap",
+  desc: "空調《くうちょう》=atur suhu & kualitas udara; 換気《かんき》=ganti udara kotor; 排煙《はいえん》=keluarkan asap saat",
+  _origIndex: 279
+  },
+{
+  id: 216,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "おすい・ざつはいすい",
+  jp: "汚水《おすい》・雑排水《ざつはいすい》",
+  type: "konsep",
+  id_text: "Air kotor WC vs non-WC",
+  desc: "汚水《おすい》=air buangan WC; 雑排水《ざつはいすい》=buangan kamar mandi/dapur; keduanya disalurkan terpisah.",
+  _origIndex: 280
+  },
+{
+  id: 217,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "ろうえいしけん：すいあつしけん・まんすいしけん",
+  jp: "漏洩試験《ろうえいしけん》：水圧試験《すいあつしけん》・満水試験《まんすいしけん》",
+  type: "konsep",
+  id_text: "Uji kebocoran pipa",
+  desc: "Uji kebocoran: 水圧《すいあつ》試験《しけん》=tekanan pipa suplai; 満水《まんすい》試験《しけん》=isi penuh pipa drainase.",
+  _origIndex: 281
+  },
+{
+  id: 218,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "らいにんぐ・ぎゃくりゅう・こうばい",
+  jp: "ライニング・逆流《ぎゃくりゅう》・勾配《こうばい》",
+  type: "konsep",
+  id_text: "Lining, balik, kemiringan",
+  desc: "ライニング=lapisan dalam pipa; 逆流《ぎゃくりゅう》=aliran balik; 勾配《こうばい》=kemiringan pipa agar air mengalir.",
+  _origIndex: 282
+  },
+{
+  id: 232,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "はいせん・りかく・かんつう",
+  jp: "配線《はいせん》・離隔《りかく》・貫通《かんつう》",
+  type: "konsep",
+  id_text: "Penarikan, jarak, tembus",
+  desc: "配線《はいせん》=pasang/rentang kabel; 離隔《りかく》=jarak pisah antar kabel; 貫通《かんつう》=lubangi dinding untuk",
+  _origIndex: 297
+  },
+{
+  id: 233,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "つうせん・はいかんする・すらぶはいかん・しこむ",
+  jp: "通線《つうせん》・配管する《はいかんする》・スラブ配管《すらぶはいかん》・仕込む《しこむ》",
+  type: "konsep",
+  id_text: "通線/konduit/slab/siapkan",
+  desc: "通線《つうせん》=tarik kabel; 配管《はいかん》する=pasang konduit; スラブ配管《はいかん》=konduit dalam slab; 仕込《しこ》む=persiapkan.",
+  _origIndex: 298
+  },
+{
+  id: 234,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ひらいしん vs ひらいき",
+  jp: "避雷針《ひらいしん》 vs 避雷器《ひらいき》",
+  type: "konsep",
+  id_text: "Penangkal vs arrester",
+  desc: "避雷針《ひらいしん》=tangkap petir di atap (lindungi bangunan); 避雷器《ひらいき》=lindungi peralatan dari lonjakan",
+  _origIndex: 299
+  },
+{
+  id: 235,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ひふく・いちじがわ・にじがわ",
+  jp: "被覆《ひふく》・一次側《いちじがわ》・二次側《にじがわ》",
+  type: "konsep",
+  id_text: "Selubung/input/output",
+  desc: "被覆《ひふく》=insulasi kawat; 一次側《いちじがわ》=sisi input listrik; 二次側《にじがわ》=sisi output. Penting saat koneksi",
+  _origIndex: 300
+  },
+{
+  id: 236,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ましじめ・まーきんぐ",
+  jp: "増し締め《ましじめ》・マーキング",
+  type: "konsep",
+  id_text: "Kencang ulang & penandaan",
+  desc: "増《ま》し締《し》めめ=kencangkan kembali baut yang kendur; マーキング=tandai baut setelah dikencangkan agar",
+  _origIndex: 301
+  },
+{
+  id: 237,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ふる・せる・ふせる",
+  jp: "振る《ふる》・競る《せる》・伏せる《ふせる》",
+  type: "konsep",
+  id_text: "Reroute, sero, exit slab",
+  desc: "振《ふ》る=ubah jalur menghindari hambatan; 競《せ》る=dua elemen hampir bersentuhan; 伏《ふ》せる=exit pipa dari",
+  _origIndex: 302
+  },
+{
+  id: 238,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "えいせいせつび・しにみず",
+  jp: "衛生設備《えいせいせつび》・死水《しにみず》",
+  type: "konsep",
+  id_text: "Sanitasi & air stagnan",
+  desc: "衛生設備《えいせいせつび》=peralatan toilet & kamar mandi; 死水《しみず》=air stagnan dalam pipa, berpotensi",
+  _origIndex: 303
+  },
+{
+  id: 240,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "ぶんき・しんしゅく・じゃばら",
+  jp: "分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》",
+  type: "konsep",
+  id_text: "Cabang/muai/akordeon",
+  desc: "分岐《ぶんき》=pipa terbagi dua; 伸縮《しんしゅく》=memuai/menyusut akibat suhu; 蛇腹《じゃばら》=konektor fleksibel",
+  _origIndex: 305
+  },
+{
+  id: 241,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "しん・さき",
+  jp: "芯《しん》・先《さき》（配管用語）",
+  type: "konsep",
+  id_text: "Garis sumbu / ujung pipa",
+  desc: "芯《しん》=garis tengah (centerline) pipa/duct — referensi pengukuran; 先《さき》=ujung dari pipa.",
+  _origIndex: 306
+  },
+{
+  id: 246,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "せつぞく・けっせん",
+  jp: "接続《せつぞく》・結線《けっせん》",
+  type: "konsep",
+  id_text: "Sambung kabel komunikasi",
+  desc: "接続《せつぞく》=hubungkan dua elemen (umum); 結線《けっせん》=khusus sambung kabel komunikasi.",
+  _origIndex: 315
+  },
+{
+  id: 247,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "ばいぶれーたー・うちこみ",
+  jp: "バイブレーター・打ち込み《うちこみ》",
+  type: "konsep",
+  id_text: "Vibrator & tuang beton",
+  desc: "打《う》ち込《こ》み=tuang beton ke bekisting; バイブレーター=alat getar hilangkan rongga udara dalam beton cair.",
+  _origIndex: 316
+  },
+{
+  id: 251,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "あっちゃく・りんぐすりーぶ",
+  jp: "圧着《あっちゃく》ペンチ・リングスリーブ",
+  type: "konsep",
+  id_text: "Tang crimp & ring sleeve",
+  desc: "圧着《あっちゃく》ペンチ=tang crimp kabel ke terminal; リングスリーブ=selongsong logam untuk sambung beberapa kabel.",
+  _origIndex: 320
+  },
+{
+  id: 401,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "りいどたんし",
+  jp: "リード端子《りーどたんし》",
+  type: "konsep",
+  id_text: "Lead terminal grounding",
+  desc: "Menghubungkan 接地棒《せっちぼう》dengan 接地線《せっちせん》menuju panel.",
+  _origIndex: 471
+  },
+{
+  id: 568,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "みずかえ・かまば・やまずな・みずしめ・まんぼう",
+  jp: "水替え《みずかえ》・釜場《かまば》・山砂《やまずな》・水締め《みずしめ》・万棒《まんぼう》（排水・管理5語）",
+  type: "konsep",
+  id_text: "5 istilah drainase &",
+  desc: "水替《みずか》え=pompa air di dasar galian. 釜場《かまば》=lubang untuk pompa. 山砂《やまずな》=pasir daratan.",
+  _origIndex: 670
+  },
+{
+  id: 578,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "せつぞく・はいせん・りかく・ぜつえん・かんつう・かんろ",
+  jp: "接続《せつぞく》・配線《はいせん》・離隔《りかく》・絶縁《ぜつえん》・貫通《かんつう》・管路《かんろ》",
+  type: "konsep",
+  id_text: "6 istilah dasar listrik",
+  desc: "接続《せつぞく》=hubungkan. 配線《はいせん》=pasang kabel. 離隔《りかく》=jarak pisah wajib. 絶縁《ぜつえん》=cegah bocor.",
+  _origIndex: 685
+  },
+{
+  id: 579,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "まいせつ・かくうはいせん",
+  jp: "埋設《まいせつ》（3方式）・架空配線《かくうはいせん》",
+  type: "konsep",
+  id_text: "3 cara tanam kabel +",
+  desc: "埋設《まいせつ》3方式《ほうしき》: ①管《かん》路式《かんろしき》=kubur pipa lalu masukkan kabel",
+  _origIndex: 686
+  },
+{
+  id: 580,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "はいかんする・つうせん・すらぶはいかん・いんぺい・ろしゅつ・ふせる",
+  jp: "配管する《はいかんする》・通線《つうせん》・スラブ配管《すらぶはいかん》・隠ぺい《いんぺい》・露出《ろしゅつ》・伏せる《ふせる》",
+  type: "konsep",
+  id_text: "6 istilah pemasangan",
+  desc: "配管《はいかん》する=pasang konduit. 通線《つうせん》=masukkan kabel ke konduit. スラブ配管《はいかん》=konduit di slab.",
+  _origIndex: 687
+  },
+{
+  id: 581,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "かんでん・ろうでん・せっち・ひらいしん・ひらいき",
+  jp: "感電《かんでん》・漏電《ろうでん》・接地《せっち》（アース）・避雷針《ひらいしん》・避雷器《ひらいき》",
+  type: "konsep",
+  id_text: "5 istilah keselamatan",
+  desc: "感電《かんでん》=arus ke tubuh. 漏電《ろうでん》=listrik bocor. 接地《せっち》/アース=hubungkan ke tanah cegah感電《かんでん》.",
+  _origIndex: 688
+  },
+{
+  id: 582,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "たんらく・ていあつ・こうあつ・とくべつこうあつ・あっちゃく・ちょくりゅう・こうりゅう",
+  jp: "短絡《たんらく》・低圧《ていあつ》・高圧《こうあつ》・特別高圧《とくべつこうあつ》・圧着《あっちゃく》・直流《ちょくりゅう》・交流《こうりゅう》",
+  type: "konsep",
+  id_text: "7 istilah tegangan",
+  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》:",
+  _origIndex: 689
+  },
+{
+  id: 583,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "てんめつ・ひふく・いちじがわ・ましじめ・まーきんぐ・つうでん",
+  jp: "点滅《てんめつ》・被覆《ひふく》・一次側《いちじがわ》・増し締め《ましじめ》・マーキング・通電《つうでん》",
+  type: "konsep",
+  id_text: "6 istilah operasi &",
+  desc: "点滅《てんめつ》=nyala-mati. 被覆《ひふく》=isolasi kabel. 一次側《いちじがわ》/二次側《にじがわ》=sisi masuk/keluar.",
+  _origIndex: 690
+  },
+{
+  id: 584,
+  category: "denki",
+  source: "jac-ch4",
+  furi: "あたる・かしめる・しこむ・ふる・せる",
+  jp: "あたる・かしめる・仕込む《しこむ》・振る《ふる》・競る《せる》・Φ",
+  type: "konsep",
+  id_text: "6 istilah slang",
+  desc: "あたる=cek dengan alat ukur. かしめる=crimp kabel. 仕込《しこ》む=persiapkan pekerjaan. 振《ふ》る=reroute pipa/kabel.",
+  _origIndex: 691
+  },
+{
+  id: 585,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "くうちょう・おんど・しつど・かんき・はいえん・えいせい",
+  jp: "空調《くうちょう》・温度《おんど》・湿度《しつど》・換気《かんき》・排煙《はいえん》・衛生《えいせい》（設備基本6語）",
+  type: "konsep",
+  id_text: "4 istilah dasar",
+  desc: "空調《くうちょう》=mengatur suhu & kelembaban. 換気《かんき》=ganti udara kotor dengan segar. 排煙《はいえん》=keluarkan",
+  _origIndex: 692
+  },
+{
+  id: 586,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "しにみず・ばり・ぎゃくりゅう・ぶんき・しんしゅく・じゃばら・らいにんぐ",
+  jp: "死水《しにみず》・バリ・逆流《ぎゃくりゅう》・分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》・ライニング",
+  type: "konsep",
+  id_text: "7 istilah kondisi &",
+  desc: "死水《しにみず》=air diam lama dalam pipa. バリ=sisa material di tepi. 逆流《ぎゃくりゅう》=aliran berlawanan.",
+  _origIndex: 693
+  },
+{
+  id: 587,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "ろうえいしけん・すいあつしけん・まんすいしけん・こうばい・おすい・ざつはいすい",
+  jp: "漏洩試験《ろうえいしけん》・水圧試験《すいあつしけん》・満水試験《まんすいしけん》・勾配《こうばい》・汚水《おすい》・雑排水《ざつはいすい》",
+  type: "konsep",
+  id_text: "6 istilah uji kebocoran",
+  desc: "漏洩《ろうえい》試験《しけん》=uji kebocoran (水圧《すいあつ》/満水《まんすい》試験《しけん》). 勾配《こうばい》=kemiringan. 汚水《おすい》=limbah",
+  _origIndex: 694
+  },
+{
+  id: 588,
+  category: "haikan",
+  source: "jac-ch4",
+  furi: "しん・さき・つら",
+  jp: "芯《しん》・先《さき》・面《つら》（設備工事の3短語）",
+  type: "konsep",
+  id_text: "3 istilah pendek teknis",
+  desc: "芯《しん》=garis tengah pipa/duct. 先《さき》=ujung pipa. 面《つら》=permukaan flange. Kata pendek namun bermakna",
+  _origIndex: 695
   }
 ];

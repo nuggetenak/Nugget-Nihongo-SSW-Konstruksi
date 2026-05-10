@@ -1,5 +1,5 @@
-// ch2.js — cards-common cards from source: ch2
-// (72 cards)
+// common/ch2.js — common track cards from source: ch2
+// (75 cards)
 export const CARDS_CH2 = [
 {
   id: 5,
@@ -792,5 +792,38 @@ export const CARDS_CH2 = [
   id_text: "Lampu rintangan & angka regulasi drone",
   desc: "航空障害灯: 地表・水面から60m以上の物件に設置義務。\nドローン登録義務: 重量100g以上。\n飛行禁止区域: 空港周辺・高さ150m以上・人口集中地区など。",
   _origIndex: 1442
+  },
+{
+  id: 94,
+  category: "shoubou",
+  source: "jac-ch2",
+  furi: "しょうかいき",
+  jp: "消火器《しょうかいき》",
+  type: "konsep",
+  id_text: "Alat pemadam api (APAR)",
+  desc: "Perangkat portabel untuk memadamkan api awal kebakaran. Dipasang di setiap lokasi sesuai",
+  _origIndex: 102
+  },
+{
+  id: 468,
+  category: "haikan",
+  source: "jac-ch2",
+  furi: "あんぐるふらんじこうほう",
+  jp: "アングルフランジ工法《アングルフランジこうほう》",
+  type: "konsep",
+  id_text: "Angle flange",
+  desc: "Sambungan duct kotak menggunakan flange sudut; kekuatan dan kerapatan tinggi, digunakan",
+  _origIndex: 538
+  },
+{
+  id: 470,
+  category: "haikan",
+  source: "jac-ch2",
+  furi: "すらいどおんふらんじこうほう",
+  jp: "スライドオンフランジ工法《すらいどおんふらんじこうほう》",
+  type: "konsep",
+  id_text: "Slide-on flange",
+  desc: "Flange siap pakai dimasukkan ke duct, dilas titik, dikencangkan baut + penjepit ラッツ di 4 sudut.",
+  _origIndex: 540
   }
 ];

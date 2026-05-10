@@ -1,6 +1,6 @@
-// vocab-misc.js — cards-common cards from source: vocab-misc
+// common/vocab-common.js — general construction vocabulary (all tracks)
 // (114 cards)
-export const CARDS_VOCAB_MISC = [
+export const CARDS_COMMON_VOCAB_COMMON = [
 {
   id: 649,
   category: "anzen",

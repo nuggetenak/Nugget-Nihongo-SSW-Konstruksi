@@ -1,6 +1,6 @@
-// ch7.js — cards-common cards from source: ch7
+// lifeline/ch7.js — lifeline track ch7 cards (text7l: safety)
 // (35 cards)
-export const CARDS_CH7 = [
+export const CARDS_LIFELINE_CH7 = [
 {
   id: 100,
   category: "anzen",
