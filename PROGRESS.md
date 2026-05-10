@@ -105,9 +105,9 @@ Files: `src/data/sets/csv/ct01.js`, `src/data/sets/csv/ct02.js`
 
 ### H10 — Fix wg12 track field 🟡
 File: `src/data/sets/wayground/wg12.js`
-- [ ] Change `track: "lifeline"` → `track: "common"`
-- [ ] Subtitle: "学科キーワード 法規・安全《あんぜん》・施工管理" — content is teori/common keywords, not lifeline-specific
-- [ ] Verify no other field changes needed
+- [x] Change `track: "lifeline"` → `track: "common"`
+- [x] Subtitle: "学科キーワード 法規・安全《あんぜん》・施工管理" — content is teori/common keywords, not lifeline-specific
+- [x] Verify no other field changes needed
 - **Root cause:** Possibly agent hallucination filling an empty track slot
 
 ### H11 — Add explicit `track` field to 6 quiz split files 🟡
