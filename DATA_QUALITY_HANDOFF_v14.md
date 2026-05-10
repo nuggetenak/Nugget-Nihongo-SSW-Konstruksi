@@ -1,6 +1,6 @@
-# SSW Konstruksi — Data Quality Handoff v13
-**Updated:** May 2026 — session 6 (housekeeping & pre-expansion hygiene)
-**Supersedes:** v1–v12 (this is the canonical single-source handoff)
+# SSW Konstruksi — Data Quality Handoff v14
+**Updated:** May 2026 — session 8 (card taxonomy architecture + restructure spec)
+**Supersedes:** v1–v13 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
 **Last commit:** `f4a47fb` (pre-session-6)
@@ -210,15 +210,34 @@ Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
 
 ## PART 3 — WAYGROUND QUESTIONS
 
-### Set List (26 sets, 657 total qs)
-| ID | Title | Track | qs |
-|---|---|---|---|
-| `wt1`–`wt10` | Teori Set 1–10 | `common` | varies |
-| `wg1`–`wg5` | Praktik Set 1–5 (quizizz) | `lifeline` | 20 each |
-| `wp5` | Praktik Set 5 (was wg10) | `lifeline` | 20 |
-| `wp1`–`wp4` | Praktik Set 1–4 | `lifeline` | 20 each |
-| `wg6` | Vocab Set 1 | `lifeline` | 50 |
-| `wg7` | Vocab Set 2 (was Set 7) | `lifeline` | 46 |
+### Set List (26 files, 657 total qs)
+
+**Teori sets — track: `common`**
+| ID | Subtitle | qs |
+|---|---|---|
+| `wt1` | Teori Set 1 | 19 |
+| `wt2`–`wt10` | Teori Set 2–10 | 20 each |
+| **Total wt** | | **199** |
+
+**Vocab/Praktik sets — track: `lifeline`**
+| ID | Title | Subtitle | qs | Notes |
+|---|---|---|---|---|
+| `wg1`–`wg5` | Praktik Set 1–5 | Quizizz-imported | 20 each | 100 total |
+| `wg6` | Vocab Set 1 | Kosakata ライフライン第5章 | 50 | |
+| `wg7` | Vocab Set 2 | Kosakata ライフライン第6章 (1) | 46 | |
+| `wg8` | Vocab Set 3 | Kosakata ライフライン第6章 (2) | 45 | |
+| `wg9` | Vocab Set 4 | Kosakata ライフライン第6章 (3) | 45 | |
+| `wg11` | Vocab Set 5 | Kosakata ライフライン言葉第5章 | 50 | |
+| `wg12` | Vocab Teori Set 1 | 学科キーワード 法規・安全・施工管理 | 22 | ⚠️ track bug — see H10 |
+| `wp1`–`wp5` | Praktik Set 1–5 | | 20 each | 100 total |
+| **Total wg+wp** | | | **458** | |
+
+**Grand total: 657 qs across 26 files**
+> No `wg10` — was renamed to `wp5`. No `wg12` is excluded from grand total reassignment pending H10 fix.
+
+> ⚠️ **`wg12` track bug:** `track: "lifeline"` — but content is 学科 (common) keywords. Must be corrected to `track: "common"`. See task **H10** in PROGRESS.md.
+
+> **`wg6`–`wg11` short `exp` fields** are intentional vocab-recognition format — do NOT expand.
 
 ---
 
@@ -402,37 +421,149 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 All content files have been split into granular files for isolated DQ work.
 **When merging to main**, agent reassembles these back into monolithic files.
 
+### 10A. Question Sets — current state ✅
 ```
 src/data/sets/
-  csv/          cp01.js–cp06.js, ct01.js–ct06.js          (12 files, 20–30 qs each)
-  wayground/    wt1.js–wt10.js, wg1.js–wg7.js, wp1.js–wp5.js  (26 files)
-  quiz/         doboku-01.js–03.js, kenchiku-01.js–03.js   (6 files, 15 qs each)
+  csv/          cp01.js–cp06.js  (lifeline, 20qs each)
+                ct01.js–ct06.js  (common, 30qs each)
+                ⚠️ ct01.js + ct02.js have SYNTAX ERRORS — see task H9
+  wayground/    wt1.js–wt10.js, wg1.js–wg9.js, wg11.js, wg12.js, wp1.js–wp5.js
+                (26 files — see Part 3 for full inventory)
+  quiz/         doboku-01.js–03.js, kenchiku-01.js–03.js   (6 files, 15qs each)
+                ⚠️ Missing explicit `track` field — see task H11
   jac/          jac-teori.js, jac-lifeline.js               (2 files, unchanged)
-
-src/data/cards/
-  common/       ch1.js(28) ch2.js(72) ch3.js(110) ch4.js(101) ch5.js(78)
-                ch6.js(34) ch7.js(35) gakka.js(17)
-                vocab-jac.js(59) vocab-lifeline.js(98)
-                vocab-misc.js(114) vocab-supplementary.js(133)
-  lifeline/     ch2.js(3) ch3.js(21) ch4.js(39) ch5.js(122) ch6.js(71)
-                gakka.js(19) vocab-jac.js(14) vocab-lifeline.js(54)
-                vocab-misc.js(83) vocab-supplementary.js(138)
 ```
 
-### Split file export naming
+### 10B. Card Split Files — CURRENT state (pre-restructure)
+
+> ⚠️ **Restructure in progress (S1–S4).** Files marked ❌ DEPRECATED will be deleted or merged. Do not add new cards to deprecated files.
+
+```
+src/data/cards/
+  common/
+    ch1.js              28 cards  ✅ pure source: jac-ch1
+    ch2.js              75 cards  ✅ pure source: jac-ch2
+    ch3.js             131 cards  ✅ pure source: jac-ch3
+    ch4.js             140 cards  ✅ pure source: jac-ch4
+    gakka.js            17 cards  ❌ DEPRECATED — mixed sources (see S1)
+    vocab-jac.js        59 cards  source: vocab-jac
+    vocab-common.js    114 cards  ❌ DEPRECATED — no jac-ch source (see S3)
+    vocab-supplementary.js  133 cards  source: vocab-supplementary
+
+  lifeline/
+    ch5.js             200 cards  ✅ pure source: jac-ch5
+    ch6.js             105 cards  ✅ pure source: jac-ch6
+    ch7.js              35 cards  ✅ pure source: jac-ch7
+    jitsugi.js          19 cards  ❌ DEPRECATED — will merge to vocab-jac (see S2)
+    vocab-jac.js        14 cards  source: vocab-jac
+    vocab-lifeline.js  235 cards  ❌ DEPRECATED — needs chapter reassignment (see S4)
+    vocab-supplementary.js  138 cards  source: vocab-supplementary
+```
+
+**gakka.js contents (17 cards):**
+- `jac-gakka1` (5) + `jac-gakka2` (3) → belong in common/vocab-jac.js
+- `jac-jitsugi1` (6) + `jac-jitsugi2` (3) → misplaced, belong in lifeline/vocab-jac.js
+
+**vocab-common.js contents (114 cards):**
+- Sources: vocab-core(12), vocab-exam(35), vocab-general(31), vocab-teori(29), text3l(7)
+- None are from `jac-ch1`–`jac-ch4` → all 114 cards move to common/vocab-supplementary.js
+
+**vocab-lifeline.js contents (235 cards):**
+- Sources: vocab-lifeline(152), vocab-exam(39), text3l(18), vocab-general(13), vocab-teori(10), vocab-core(3)
+- Category distribution: haikan(62), sekou(40), career(37), denki(30), hoon(24), anzen(21), shoubou(10), tsushin(8), setsubi_kougu(3)
+- Per-card reassignment to ch5/ch6/ch7 or vocab-supplementary — see S4 mapping rules
+
+### 10C. Card Split Files — TARGET state (post S1–S4)
+
+```
+src/data/cards/
+  common/
+    ch1.js              28 cards  (untouched)
+    ch2.js              75 cards  (untouched)
+    ch3.js             131 cards  (untouched)
+    ch4.js             140 cards  (untouched)
+    vocab-jac.js       ~67 cards  (59 + 8 from gakka.js)
+    vocab-supplementary.js  ~247 cards  (133 + 114 from vocab-common.js)
+    [DELETED] gakka.js
+    [DELETED] vocab-common.js
+
+  lifeline/
+    ch5.js             200+       (will receive sekou/denki/tsushin cards from S4)
+    ch6.js             105+       (will receive haikan/hoon/shoubou/setsubi_kougu cards from S4)
+    ch7.js              35+       (will receive anzen cards from S4)
+    vocab-jac.js       ~42 cards  (14 + 19 jitsugi.js + 9 misplaced from gakka.js)
+    vocab-supplementary.js  ~175 cards  (138 + career/unassignable cards from S4)
+    [DELETED] jitsugi.js
+    [DELETED] vocab-lifeline.js
+```
+
+### 10D. Card taxonomy — canonical rules (locked this session)
+
+**Two orthogonal dimensions:**
+```
+Dimension 1 — CHAPTER (source field): where in the textbook
+  jac-ch1..ch4  → common/ folder
+  jac-ch5..ch7  → lifeline/ folder
+
+Dimension 2 — TOPIC (category field): what the content is about
+  gaiyou, career, hourei, sekou, anzen  → K-series (teori/umum)
+  haikan, denki, tsushin, shoubou,
+  hoon, setsubi_kougu                   → L-series (lifeline equipment)
+```
+
+Chapter and category are **orthogonal** — the same category (e.g. `haikan`) appears in both ch3 (introductory) and ch6 (advanced). This is correct per textbook structure.
+
+**File roles:**
+| File | Contains | Source filter |
+|---|---|---|
+| `chN.js` | All cards from JAC textbook chapter N | `jac-chN` |
+| `vocab-jac.js` (common) | Vocab from JAC official sample exams 学科 | `vocab-jac`, `jac-gakka1`, `jac-gakka2` |
+| `vocab-jac.js` (lifeline) | Vocab from JAC official sample exams 実技 | `vocab-jac`, `jac-jitsugi1`, `jac-jitsugi2` |
+| `vocab-supplementary.js` | All vocab not from JAC textbook chapters or official exams | everything else |
+
+**Rule:** Never put a card in `chN.js` unless its `source` is `jac-chN`. Cards from other sources that belong to the same domain go to vocab-supplementary.
+
+### 10E. Split file export naming
 - Sets: `export const SET_CP01 = {...}` (set object with questions array inside)
 - Cards: `export const CARDS_CH1 = [...]` (card array)
 
-### Monolithic originals still present (for reference, do not edit these)
+### 10F. Monolithic originals (reference only — do not edit)
 `src/data/csv-sets.js`, `src/data/wayground-sets.js`, `src/data/quiz-sets.js`,
 `src/data/source/cards-common.js`, `src/data/source/cards-lifeline.js`
 
-### Agent task scope per file (DQ)
+---
+
+## PART 12 — FUTURE DEVELOPMENT NOTES
+
+### 12A. Agent task scope per split file (DQ)
 Each split file is self-contained. Work one file at a time:
 1. Clone branch, open target file
 2. Apply DQ fixes (ruby, opts, hints, exp stubs)
 3. Verify, commit, push
 4. Proceed to next file
+
+### 12B. Option B — Chapter & Type filter UI (DEFERRED — post card restructure)
+
+**Context:** Currently FlashcardMode has only two filter dimensions: text search and `__cat:` category filter. The `source` and `type` fields on cards are populated but not exposed to the user. This creates a UX gap — user cannot say "show me only ch5 vocab" or "vocab cards only."
+
+**When:** After S1–S4 card restructure is complete and verified on `content-dq`.
+
+**What to build:**
+- **Chapter filter** — FilterBar dropdown: "Semua bab" / "Bab 5" / "Bab 6" / "Bab 7" (powered by `source: jac-chN`)
+- **Type filter** — Toggle: "Semua" / "Vocab saja" / "Konsep saja" (powered by `type: 'vocab'|'konsep'|'hukum'`)
+- Both filters should compose with existing category filter
+
+**Files to touch:**
+- `src/modes/FlashcardMode/FilterBar.jsx` — add filter controls
+- `src/modes/FlashcardMode/index.jsx` — add filter state + apply to `displayCards`
+- `src/router/ModeRouter.jsx` — no change needed (filters are in-mode, not at card-load level)
+
+**Data already ready:**
+- `source` field: `jac-ch5` / `jac-ch6` / `jac-ch7` on all chapter cards ✅
+- `type` field: `konsep` / `vocab` / `hukum` on all cards ✅
+- After S1–S4: chapter cards will be in clean `chN.js` files and source will be authoritative
+
+**Dependency:** S1–S4 must be merged and verified first. Do not build Option B against the current mixed/deprecated file state.
 
 ---
 
