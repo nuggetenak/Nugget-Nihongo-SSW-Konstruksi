@@ -200,3 +200,40 @@ jac-chN totals post-F1+F2:
 Remaining legacy labels (548 cards):
   vocab-supplementary(271) vocab-lifeline(113) vocab-jac(49) vocab-general(44) vocab-exam(38) vocab-teori(20) vocab-core(13)
   ⚠️ OWNER DECISION NEEDED: 183 multi-match cards (term ada di 2-7 chapters) — relabel ke apa?
+
+### F3 — categories.js cleanup: hapus text3l (defunct)
+- [x] Hapus `text3l` dari SOURCE_META (sudah jadi jac-ch3 via F1)
+- [x] Hapus `text3l` dari SOURCE_GROUPS['Sumber Tambahan']
+- [x] Hapus `text3l` dari SOURCE_ACCENT
+- [x] Verify: 0 text3l refs tersisa di categories.js
+
+---
+
+## TEMUAN SESSION 10 — untuk agent berikutnya
+
+### ⚠️ DOBOKU & KENCHIKU — CONFIRMED AI-GENERATED
+`jac-doboku.js` dan `jac-kenchiku.js` = empty stubs. TIDAK ADA PDF JAC untuk track ini.
+2 set seed doboku & kenchiku (SIPIL_SETS dan BANGUNAN_SETS di quiz-sets.js) = murni
+buatan Claude Opus, TIDAK mengacu dari PDF JAC manapun.
+Status P21 (populate jac-doboku + jac-kenchiku) = BLOCKED sampai owner upload PDF resmi.
+
+### SOURCE LABELS — KEPUTUSAN FINAL (tidak disederhanakan)
+Labels legacy (vocab-lifeline, vocab-jac, vocab-exam, vocab-teori, vocab-core,
+vocab-supplementary, vocab-general) DIPERTAHANKAN karena:
+1. Semantiknya meaningful di UI (ditampilkan via SOURCE_META ke user)
+2. Multi-match cards tidak bisa di-pin ke satu chapter (muncul di banyak PDF)
+3. External cards (vocab-supplementary 270, vocab-general 32) memang dari luar 11 PDF JAC
+
+Trace audit selesai (11 PDF = 7 textbook + 4 soal ujian JAC lifeline):
+- F1+F2 fixed 145 cards: text3l→jac-ch3 (25) + single-match→jac-chN (120)
+- 548 remaining legacy = correct as-is, tidak perlu diubah
+
+### FITUR BARU — PDF VIEWER MODE (belum dikerjakan)
+Owner request: mode baru di app untuk baca PDF textbook JAC resmi.
+Spec awal:
+- Option C: fetch langsung dari URL resmi JAC (butuh internet — OK)
+- 7 PDF: text1l, text2, text3, text4, text5l, text6l, text7l
+- Nanti tambah versi Indonesia (7 PDF lagi = 14 total)
+- Implementasi: agent di branch terpisah atau lanjut di content-dq
+- Owner perlu supply URL resmi JAC sebelum implementasi bisa mulai
+⚠️ BLOCKED: butuh URL PDF resmi JAC dari owner

@@ -58,7 +58,6 @@ export const SOURCE_META = {
   'vocab-exam': { label: 'Vocab Exam — 250 kosakata ujian', emoji: '🎯', color: '#7c3aed' },
   'vocab-teori': { label: 'Vocab Teori — Kosakata 学科', emoji: '📋', color: '#dc2626' },
   // ── Sumber Tambahan (supplementary — provenance audit) ────────────────────
-  'text3l': { label: 'Teks Ch.3 — Jenis & Prosedur Pekerjaan Konstruksi', emoji: '🏗️', color: '#1a365d' },
   'vocab-supplementary': { label: 'Vocab Supplementary — Kosakata pelengkap', emoji: '📝', color: '#6b7280' },
   'vocab-general': { label: 'Vocab General — Kata umum konstruksi', emoji: '📎', color: '#9ca3af' },
 };
@@ -69,7 +68,7 @@ export const SOURCE_GROUPS = [
   { label: 'PDF Utama JAC', keys: ['jac-ch1','jac-ch2','jac-ch3','jac-ch4','jac-ch5','jac-ch6','jac-ch7'] },
   { label: 'Soal Contoh', keys: ['jac-gakka1','jac-gakka2','jac-jitsugi1','jac-jitsugi2'] },
   { label: 'Kosakata', keys: ['vocab-lifeline','vocab-jac','vocab-core','vocab-exam','vocab-teori'] },
-  { label: 'Sumber Tambahan', keys: ['text3l','vocab-supplementary','vocab-general'] },
+  { label: 'Sumber Tambahan', keys: ['vocab-supplementary','vocab-general'] },
 ];
 
 export const SOURCE_ACCENT = {
@@ -80,7 +79,6 @@ export const SOURCE_ACCENT = {
   'jac-jitsugi1': '#68d391', 'jac-jitsugi2': '#68d391',
   'vocab-lifeline': '#63b3ed', 'vocab-jac': '#93c5fd', 'vocab-core': '#cbd5e0',
   'vocab-exam': '#b794f4', 'vocab-teori': '#f56565',
-  'text3l': '#667eea',
   'vocab-supplementary': '#9ca3af',
   'vocab-general': '#d1d5db',
 };
