@@ -3,7 +3,7 @@
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `c1e1a53` (DOCS: ADM1 — admin hygiene sync post-sessions-11-12)
+**Last commit:** `efc8f02` (DOCS: ADM3 — _MAP.md + README-CONTENT-DQ.md hygiene)
 
 ---
 
@@ -30,10 +30,10 @@
 | `wgdv{nn}` | Wayground Doboku Vocab (future) | `sets/wayground/doboku/vocab/` |
 | `wgk{nn}` | Wayground Kenchiku Praktik (future) | `sets/wayground/kenchiku/praktik/` |
 | `wgkv{nn}` | Wayground Kenchiku Vocab (future) | `sets/wayground/kenchiku/vocab/` |
-| `ct{n}` | CSV Teori | `csv-sets.js` |
-| `cp{n}` | CSV Praktik | `csv-sets.js` |
-| `doboku-{n}` | Quiz Doboku | `quiz-sets.js` |
-| `kenchiku-{n}` | Quiz Kenchiku | `quiz-sets.js` |
+| `ct{n}` | CSV Teori | `sets/csv/ct*.js` |
+| `cp{n}` | CSV Praktik | `sets/csv/cp*.js` |
+| `doboku-{n}` | Quiz Doboku | `sets/quiz/doboku-*.js` |
+| `kenchiku-{n}` | Quiz Kenchiku | `sets/quiz/kenchiku-*.js` |
 | `tt{n}_q{nn}` | JAC Teori question ID | `jac-teori.js` |
 | `st{n}_q{nn}` | JAC Lifeline question ID | `jac-lifeline.js` |
 
@@ -63,7 +63,7 @@
 From JAC PDF: `jac-ch1` through `jac-ch7`
 From JAC sample exams: `jac-gakka1`, `jac-gakka2`, `jac-jitsugi1`, `jac-jitsugi2`
 Vocab: `vocab-core`, `vocab-exam`, `vocab-jac`, `vocab-lifeline`, `vocab-teori`, `vocab-general`, `vocab-supplementary`
-Other: `text3l`
+~~`text3l`~~ — retired by F3; all 25 cards relabeled to `jac-ch3`
 New cards from JAC Doboku sample exams → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`. Kenchiku → `-k{n}`.
 
 > ⚠️ **OWNER DECISION NEEDED — source naming for doboku/kenchiku chapter cards**  
@@ -317,7 +317,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | `termA` / `termB` ruby | ✅ DONE v8 |
 | `furiA` / `furiB` | ✅ present |
 | `tip_id` field | ✅ DONE (P17) — 0 null remaining |
-| `track` field | missing on all 28 — OPEN (no task assigned)
+| `track` field | missing on all 28 — OPEN (no task assigned) |
 
 ---
 
@@ -328,7 +328,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | `term` ruby | ✅ DONE v8 — 17/20 (3 pure kana/romaji skipped) |
 | `furi` | ✅ all 20 |
 | `track` | ✅ all 20 |
-| `traps[]` + `explanation` ruby | ✅ DONE (P19)
+| `traps[]` + `explanation` ruby | ✅ DONE (P19) |
 
 ---
 
@@ -418,7 +418,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 - **`angka.kartu`** is a number (card id), not a string field `kartu_id`.
 - **Track values:** `common`, `lifeline`, `doboku`, `kenchiku` only.
 - **Single-quote strings** in all data files — canonical. Exception: `cards-common.js` / `cards-lifeline.js` use double-quotes — do not change.
-- **Storage version:** Per CHANGELOG main `v4.22.0`, `STORAGE_VERSION` pada main adalah `4` (bumped 3→4). ⚠️ Handoff references di bawah (v8: v5) mungkin dari snapshot berbeda — reconcile di main saat merge.
+- **Storage version:** Per CHANGELOG main `v4.22.0`, `STORAGE_VERSION` pada main adalah `4` (bumped 3→4). Reconcile di main saat merge — content-dq tidak punya `src/storage/`.
 
 ---
 
@@ -544,16 +544,16 @@ Chapter and category are **orthogonal** — the same category (e.g. `haikan`) ap
 
 ---
 
-## PART 12 — FUTURE DEVELOPMENT NOTES
+## PART 14 — FUTURE DEVELOPMENT NOTES
 
-### 12A. Agent task scope per split file (DQ)
+### 14A. Agent task scope per split file (DQ)
 Each split file is self-contained. Work one file at a time:
 1. Clone branch, open target file
 2. Apply DQ fixes (ruby, opts, hints, exp stubs)
 3. Verify, commit, push
 4. Proceed to next file
 
-### 12B. Option B — Chapter & Type filter UI (DEFERRED — post card restructure)
+### 14B. Option B — Chapter & Type filter UI (DEFERRED — post card restructure)
 
 **Context:** Currently FlashcardMode has only two filter dimensions: text search and `__cat:` category filter. The `source` and `type` fields on cards are populated but not exposed to the user. This creates a UX gap — user cannot say "show me only ch5 vocab" or "vocab cards only."
 
@@ -743,7 +743,7 @@ Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-gener
 
 ## RINGKASAN LENGKAP STATE AKHIR SESSION 12
 
-**Last commit:** `ea6127d` (branch: content-dq) — W1 wayground taxonomy restructure
+**Last commit (latest):** `efc8f02` (DOCS: ADM3) — most recent on branch
 
 **Cards:** 1,443 total (tidak berubah)
 

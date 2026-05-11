@@ -98,8 +98,6 @@ Files: `src/data/cards/common/vocab-supplementary.js`, `src/data/source/cards-co
 
 ---
 
-
-
 ### H1–H6 ✅ (lihat SELESAI di bawah)
 
 ### H7 — Update handoff Part 3 + Part 10 ✅
@@ -159,8 +157,6 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 - **Blocked:** belum ada PDF source material
 - **Schema:** gunakan unified question schema (`q`, `hint`, `opts`, `opts_id`, `ans`, `img`, `exp`) — `img: null` semua dulu
 - **ID format:** doboku → `dt{n}_q{nn}`, kenchiku → `kt{n}_q{nn}`
-
----
 
 ---
 
@@ -225,7 +221,6 @@ Files: `DATA_QUALITY_HANDOFF_v16.md`, `PROGRESS.md`
 - ✅ S3: vocab-common.js migrated → common/vocab-supplementary.js (247 total), vocab-common.js deleted
 - ✅ S4: vocab-lifeline.js (235 cards) redistributed by category → ch5(278)/ch6(204)/ch7(56)/vocab-supp(175), vocab-lifeline.js deleted
 
-
 - ✅ H1–H6: housekeeping, policy locks, handoff sync
 - ✅ P7: furi separator alignment (213 cards)
 - ✅ P17: confusion-pairs tip_id filled (28 entries)
@@ -272,9 +267,9 @@ Files: `src/data/cards/lifeline/ch5.js` (1), `src/data/cards/lifeline/ch6.js` (1
 jac-chN totals post-F1+F2:
   jac-ch1:28 | jac-ch2:99 | jac-ch3:183 | jac-ch4:150 | jac-ch5:217 | jac-ch6:134 | jac-ch7:48
 
-Remaining legacy labels (548 cards):
-  vocab-supplementary(271) vocab-lifeline(113) vocab-jac(49) vocab-general(44) vocab-exam(38) vocab-teori(20) vocab-core(13)
-  ⚠️ OWNER DECISION NEEDED: 183 multi-match cards (term ada di 2-7 chapters) — relabel ke apa?
+Remaining legacy labels (548 cards, pre-G2 counts):
+  vocab-supplementary(271→272 post-G2) vocab-lifeline(113) vocab-jac(49) vocab-general(44) vocab-exam(38) vocab-teori(20→18 post-G2) vocab-core(13)
+  Multi-match decision: RESOLVED — 183 multi-match cards retained with legacy labels (DIPERTAHANKAN)
 
 ### F3 — categories.js cleanup: hapus text3l (defunct)
 - [x] Hapus `text3l` dari SOURCE_META (sudah jadi jac-ch3 via F1)
@@ -302,6 +297,8 @@ vocab-supplementary, vocab-general) DIPERTAHANKAN karena:
 Trace audit selesai (11 PDF = 7 textbook + 4 soal ujian JAC lifeline):
 - F1+F2 fixed 145 cards: text3l→jac-ch3 (25) + single-match→jac-chN (120)
 - 548 remaining legacy = correct as-is, tidak perlu diubah
+- Counts di atas (vocab-supplementary 270, vocab-general 32) = pre-G2 session 10 snapshot
+- Post-G2 actuals: vocab-supplementary 272, vocab-teori 18 (lihat RINGKASAN SESSION 12 di handoff)
 
 ### FITUR BARU — PDF VIEWER MODE (belum dikerjakan)
 Owner request: mode baru di app untuk baca PDF textbook JAC resmi.

@@ -10,7 +10,7 @@ git clone -b content-dq https://[token]@github.com/nuggetenak/Nugget-Nihongo-SSW
 ## KONTEKS SESI INI
 
 Baca DATA_QUALITY_HANDOFF_v16.md dan PROGRESS.md sebelum apapun.
-Canonical source of truth ada di sana. Last commit: ea6127d
+Canonical source of truth ada di sana. Last commit: efc8f02
 
 Tujuan branch content-dq: data hygiene, housekeeping, accuracy — sampai
 semua 1,443 cards 100% akurat dan bersih.
