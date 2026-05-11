@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-11 (session 13: admin hygiene — handoff/session-prompt/README/MAP sync)
+**Last updated:** 2026-05-12 (session 13: ADM2 deep hygiene — all stale refs purged across handoff)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -164,17 +164,6 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 
 ---
 
-## BATCH ADM — Administrative hygiene (session 13)
-
-### ADM1 — Sync admin docs post-sessions-11-12 ✅
-Files: `SESSION_PROMPT.md`, `DATA_QUALITY_HANDOFF_v16.md`, `README-CONTENT-DQ.md`, `_MAP.md`
-- [x] SESSION_PROMPT.md: last commit `a8f6e82` → `ea6127d`; TASK SESI INI rewritten (G1+G2+W1 done, P21/PDF viewer blocked)
-- [x] DATA_QUALITY_HANDOFF_v16.md: header updated (session 12, last commit ea6127d); source counts corrected (vocab-teori 20→18, vocab-supp 271→272, jac-gakka1 5→6); §13A updated (Opsi A DONE); CODEBASE STATE wayground row updated (new folder structure); added RINGKASAN SESSION 12; storage version note clarified (v5 claim vs CHANGELOG v4 discrepancy flagged)
-- [x] README-CONTENT-DQ.md: `v12` → `v16` (×2); "Not present here" updated (3 G1 files ARE present)
-- [x] _MAP.md: "Storage Schema v3" → v4; `_v:3` → `_v:4` in all 3 schema docs; metrics table v3→v4
-
----
-
 ## BATCH W — Wayground taxonomy restructure (session 12)
 
 ### W1 — Wayground set rename + folder restructure ✅
@@ -192,7 +181,36 @@ Files: `src/data/sets/wayground/**`
 - **Future slots:** wtv02–wtv10, wglv06–wglv10, wgl11+ reserved for expansion
 - **Doboku future:** `doboku/praktik/wgd01–...`, `doboku/vocab/wgdv01–...`
 - **Kenchiku future:** `kenchiku/praktik/wgk01–...`, `kenchiku/vocab/wgkv01–...`
-- **Storage note:** Set ID rename = breaking change. Storage migration (v5→v6) required at main-merge time.
+- **Storage note:** Set ID rename = breaking change. Migration version TBD — reconcile with main STORAGE_VERSION (currently 4 per CHANGELOG v4.22.0; next = 5).
+
+---
+
+## BATCH ADM — Administrative hygiene (session 13)
+
+### ADM1 — Sync admin docs post-sessions-11-12 ✅
+Files: `SESSION_PROMPT.md`, `DATA_QUALITY_HANDOFF_v16.md`, `README-CONTENT-DQ.md`, `_MAP.md`
+- [x] SESSION_PROMPT.md: last commit `a8f6e82` → `ea6127d`; TASK SESI INI rewritten (G1+G2+W1 done, P21/PDF viewer blocked)
+- [x] DATA_QUALITY_HANDOFF_v16.md: header (session 12, ea6127d); source counts (vocab-teori 20→18, vocab-supp 271→272, jac-gakka1 5→6); §13A Opsi A DONE; CODEBASE STATE wayground row updated; RINGKASAN SESSION 12 added; storage version clarified
+- [x] README-CONTENT-DQ.md: `v12` → `v16` (×2); not-present note corrected (3 G1 files present)
+- [x] _MAP.md: Storage Schema v3→v4; `_v:3`→`_v:4` in 3 schema docs; metrics table v3→v4
+
+### ADM2 — Deep hygiene pass (session 13) ✅
+Files: `DATA_QUALITY_HANDOFF_v16.md`, `PROGRESS.md`
+- [x] §0B: wayground prefix taxonomy updated (old wg/wp retired, full post-W1 canonical set)
+- [x] §1C: furi alignment marked DONE (P7 complete)
+- [x] Part 3: set list replaced with post-W1 canonical IDs (wt/wtv/wgl/wglv); wg/wp old IDs removed
+- [x] §3A storage version note: fixed (5→6 → 4→5, reconcile at merge)
+- [x] Part 4: all tasks marked DONE (P11-FIX-A/B, P11-C, P15 complete)
+- [x] Part 5: schema gaps table replaced with completed status; AI-generated caveat added
+- [x] Part 6: jac-teori.js related_card_id updated (21 null → 0; P18 done)
+- [x] Part 7: tip_id marked DONE (P17 complete)
+- [x] Part 8: traps/explanation ruby marked DONE (P19 complete)
+- [x] Part 12A: legacy label counts updated to post-G2 actuals (vocab-supplementary 271→272, vocab-teori 20→18)
+- [x] AGENT RULES: wg6/wg11 old IDs → wglv01–wglv05
+- [x] MASTER EXECUTION ORDER: P12-FIX and P14 path refs updated (flat → **)
+- [x] §13C (duplicate of §12C) removed
+- [x] Session 10 historical summary compressed (22 lines → 4 lines)
+- [x] PROGRESS.md: BATCH W and BATCH ADM reordered (W=session 12 before ADM=session 13); W1 storage version note fixed (5→6 → 4→5)
 
 ---
 

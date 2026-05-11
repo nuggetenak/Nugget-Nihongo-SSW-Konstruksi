@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v16
-**Updated:** May 2026 — session 12 (G1+G2 type-based filtering + W1 wayground restructure complete)
+**Updated:** May 2026 — session 13 (ADM2 deep hygiene pass — all stale refs purged)
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `ea6127d` (ARCH: W1 — wayground taxonomy restructure + full set rename)
+**Last commit:** `c1e1a53` (DOCS: ADM1 — admin hygiene sync post-sessions-11-12)
 
 ---
 
@@ -20,17 +20,24 @@
 **Rule:** `track` field values are always the romaji column. Never `sipil`, never `bangunan`, never `gakka`.
 
 ### 0B. Set ID Prefix Taxonomy
-| Prefix | Meaning | File |
+| Prefix | Meaning | Location |
 |---|---|---|
-| `wt{n}` | Wayground Teori | `wayground-sets.js` |
-| `wg{n}` | Wayground Vocab | `wayground-sets.js` |
-| `wp{n}` | Wayground Praktik | `wayground-sets.js` |
+| `wt{nn}` | Wayground Teori (common) | `sets/wayground/teori/` |
+| `wtv{nn}` | Wayground Vocab (common) | `sets/wayground/vocab/` |
+| `wgl{nn}` | Wayground Lifeline Praktik | `sets/wayground/lifeline/praktik/` |
+| `wglv{nn}` | Wayground Lifeline Vocab | `sets/wayground/lifeline/vocab/` |
+| `wgd{nn}` | Wayground Doboku Praktik (future) | `sets/wayground/doboku/praktik/` |
+| `wgdv{nn}` | Wayground Doboku Vocab (future) | `sets/wayground/doboku/vocab/` |
+| `wgk{nn}` | Wayground Kenchiku Praktik (future) | `sets/wayground/kenchiku/praktik/` |
+| `wgkv{nn}` | Wayground Kenchiku Vocab (future) | `sets/wayground/kenchiku/vocab/` |
 | `ct{n}` | CSV Teori | `csv-sets.js` |
 | `cp{n}` | CSV Praktik | `csv-sets.js` |
 | `doboku-{n}` | Quiz Doboku | `quiz-sets.js` |
 | `kenchiku-{n}` | Quiz Kenchiku | `quiz-sets.js` |
 | `tt{n}_q{nn}` | JAC Teori question ID | `jac-teori.js` |
 | `st{n}_q{nn}` | JAC Lifeline question ID | `jac-lifeline.js` |
+
+> Old IDs (`wg{n}`, `wp{n}`) fully retired by W1 (session 12). See §3A for rename map.
 
 **Future JAC doboku/kenchiku IDs:** use `dt{n}_q{nn}` / `kt{n}_q{nn}`.
 
@@ -137,15 +144,8 @@ When adding new cards (doboku/kenchiku), include `usage` only if a natural examp
 | 532 | `ねちゅうしょうのしょうじょう` | `ねっちゅうしょうのしょうじょう` ✅ |
 | 230 | `てにょうくぎじまい` | `てんようくぎじまい` ✅ |
 
-### 1C. Multi-Part `furi` — 211 cards (OPEN — **needs owner**)
-Cards where `jp` has multi-part segments (・ vs / ：) but `furi` is unseparated flat string.
-Fix: align `furi` separators to match `jp`. **Requires Japanese knowledge — owner does this.**
-```js
-// BAD
-jp: "加湿器 vs 除湿器", furi: "かしつきじょしつき"
-// GOOD
-jp: "加湿器 vs 除湿器", furi: "かしつき vs じょしつき"
-```
+### 1C. Multi-Part `furi` — ✅ DONE (P7, session owner)
+Furi separators aligned on 213 cards (152 fixed, 5 romaji-only accepted, remainder kana-only). No remaining mismatches.
 
 ### 1D. Ruby Format Rules (canonical)
 ```js
@@ -210,34 +210,33 @@ Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
 
 ## PART 3 — WAYGROUND QUESTIONS
 
-### Set List (26 files, 657 total qs)
+### Set List (26 files, 657 total qs) — post-W1 canonical IDs
 
-**Teori sets — track: `common`**
-| ID | Subtitle | qs |
-|---|---|---|
-| `wt1` | Teori Set 1 | 19 |
-| `wt2`–`wt10` | Teori Set 2–10 | 20 each |
-| **Total wt** | | **199** |
+**Common sets**
+| ID | Subtitle | qs | Track |
+|---|---|---|---|
+| `wt01` | Teori Set 1 | 19 | common |
+| `wt02`–`wt10` | Teori Set 2–10 | 20 each | common |
+| `wtv01` | 学科キーワード 法規・安全・施工管理 | 22 | common |
+| **Total common** | | **221** | |
 
-**Vocab/Praktik sets — track: `lifeline`**
-| ID | Title | Subtitle | qs | Notes |
-|---|---|---|---|---|
-| `wg1`–`wg5` | Praktik Set 1–5 | Quizizz-imported | 20 each | 100 total |
-| `wg6` | Vocab Set 1 | Kosakata ライフライン第5章 | 50 | |
-| `wg7` | Vocab Set 2 | Kosakata ライフライン第6章 (1) | 46 | |
-| `wg8` | Vocab Set 3 | Kosakata ライフライン第6章 (2) | 45 | |
-| `wg9` | Vocab Set 4 | Kosakata ライフライン第6章 (3) | 45 | |
-| `wg11` | Vocab Set 5 | Kosakata ライフライン言葉第5章 | 50 | |
-| `wg12` | Vocab Teori Set 1 | 学科キーワード 法規・安全・施工管理 | 22 | ⚠️ track bug — see H10 |
-| `wp1`–`wp5` | Praktik Set 1–5 | | 20 each | 100 total |
-| **Total wg+wp** | | | **458** | |
+**Lifeline sets**
+| ID | Subtitle | qs | Notes |
+|---|---|---|---|
+| `wgl01`–`wgl05` | Praktik Set 1–5 | 20 each | Quizizz-imported |
+| `wgl06`–`wgl10` | Praktik Set 6–10 | 20 each | Original |
+| `wglv01` | Kosakata ライフライン第5章 | 50 | |
+| `wglv02` | Kosakata ライフライン第6章 (1) | 46 | |
+| `wglv03` | Kosakata ライフライン第6章 (2) | 45 | |
+| `wglv04` | Kosakata ライフライン第6章 (3) | 45 | |
+| `wglv05` | Kosakata ライフライン言葉第5章 | 50 | |
+| **Total lifeline** | | **436** | |
 
-**Grand total: 657 qs across 26 files** (unchanged)
-> No `wg10` — was renamed to `wp5` (pre-session 12). All sets renamed and reorganized per W1 — see §3A.
+**Grand total: 657 qs across 26 files**
 
-> ~~**`wg12` track bug**~~ **FIXED (H10):** `track` corrected to `"common"`. Content is 学科 keywords, not lifeline-specific. **Renamed (W1):** `wg12` → `wtv01`.
+> **`wglv01–wglv05` short `exp` fields** are intentional vocab-recognition format — do NOT expand.
 
-> **`wg6`–`wg11` short `exp` fields** are intentional vocab-recognition format — do NOT expand.
+> No `wg10` — was renamed to `wp5` before W1, then `wp5` → `wgl10` in W1.
 
 ### 3A. Wayground Taxonomy (post-W1 — canonical)
 
@@ -263,21 +262,21 @@ Folder structure under `src/data/sets/wayground/`:
 | wp1–wp5 | wgl06–wgl10 | Lifeline praktik (original) |
 | wg6–wg9, wg11 | wglv01–wglv05 | Lifeline vocab |
 
-**Storage note:** Set ID rename = STORAGE_VERSION 5→6 migration required at main-merge time.
+**Storage note:** Set ID rename = breaking change. Storage migration required at main-merge time. Exact version TBD — reconcile with main `STORAGE_VERSION` (currently 4 per CHANGELOG v4.22.0; next migration = 5).
 
 ---
 
 ## PART 4 — CSV SETS (`csv-sets.js`, 12 sets, 300 qs)
 
-### Ruby Status (post-audit v12 — ACTUAL counts)
+### Ruby Status — ✅ COMPLETE (split files)
 | Field | Status |
 |---|---|
-| `q` ruby | Partially done — 39 q lines have **double ruby corruption** (needs fix first) |
-| `opts` ruby | **198/300 opts lines completely bare** — major gap |
+| `q` ruby | ✅ DONE — double ruby removed (P11-FIX-A), wrong 《》 reverted (P11-FIX-B) |
+| `opts` ruby | ✅ DONE — 198 bare opts annotated (P11-C) |
 | `hint` | ✅ all present |
-| `exp` "modul JAC" stubs | ~40 items — OPEN P15 |
+| `exp` | ✅ DONE — "modul JAC" stubs replaced (P15) |
 
-> **Wrong ruby (26 lines):** Haiku put kanji synonyms/explanations inside 《》 — e.g. `時間外労働《残業》`, `グラインダー《研削盤》`. These violate the maru rule and must be reverted to `（）`.
+> **Note:** Monolithic `csv-sets.js` still shows original state — working copy is `sets/csv/*.js`. Monolithic will be replaced at main-merge time.
 
 ---
 
@@ -285,15 +284,18 @@ Folder structure under `src/data/sets/wayground/`:
 
 Set IDs: `doboku-01`, `doboku-02`, `doboku-03`, `kenchiku-01`, `kenchiku-02`, `kenchiku-03`.
 
-### Schema Gaps (OPEN P13)
+### Schema Status — ✅ COMPLETE (P13-struct + P13-content)
 | Field | Status |
 |---|---|
-| `q` ruby | 0/90 — all bare kanji |
-| `opts` ruby | 0/~360 |
-| `hint` | missing on all 90 |
-| `id` per question | missing on all 90 |
+| `q` ruby | ✅ DONE |
+| `opts` ruby | ✅ DONE |
+| `hint` | ✅ DONE — all 90 filled |
+| `id` per question | ✅ DONE — 1-indexed per set |
 | `exp` quality | ✅ avg 154 chars — good |
-| `cat`, `desc` | present (extra fields — keep until DC-1/DC-2 migration) |
+| `cat`, `desc` | ✅ present (extra fields — keep until DC-1/DC-2 migration) |
+| `track` | ✅ DONE (H11) — all 6 files have track field |
+
+> ⚠️ Content is AI-generated (no real JAC PDF). Treat as draft/placeholder — see §12B.
 
 ---
 
@@ -301,10 +303,10 @@ Set IDs: `doboku-01`, `doboku-02`, `doboku-03`, `kenchiku-01`, `kenchiku-02`, `k
 
 | File | qs | `related_card_id` filled | null |
 |---|---|---|---|
-| `jac-teori.js` | 65 | 44 | **21** |
-| `jac-lifeline.js` | 30 | 29 | 1 |
+| `jac-teori.js` | 65 | **65** ✅ | 0 (P18 done) |
+| `jac-lifeline.js` | 30 | 29 | **1** (open — no task assigned) |
 
-Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: null` on all qs (teori 65 + lifeline 30).
+Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: null` on all qs.
 
 ---
 
@@ -314,8 +316,8 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 |---|---|
 | `termA` / `termB` ruby | ✅ DONE v8 |
 | `furiA` / `furiB` | ✅ present |
-| `tip_id` field | missing — OPEN P17 (agent task) |
-| `track` field | missing on all 28 — OPEN |
+| `tip_id` field | ✅ DONE (P17) — 0 null remaining |
+| `track` field | missing on all 28 — OPEN (no task assigned)
 
 ---
 
@@ -326,7 +328,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | `term` ruby | ✅ DONE v8 — 17/20 (3 pure kana/romaji skipped) |
 | `furi` | ✅ all 20 |
 | `track` | ✅ all 20 |
-| `traps[]` + `explanation` ruby | audit needed — OPEN P19 (agent task) |
+| `traps[]` + `explanation` ruby | ✅ DONE (P19)
 
 ---
 
@@ -350,7 +352,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 |---|---|---|---|
 | **P11-FIX-A** | `sets/csv/*.js` | Remove double ruby from 39 q lines | ✅ DONE (split files) |
 | **P11-FIX-B** | `sets/csv/*.js` | Revert 26 wrong 《》 → （） (synonyms/abbrevs) | ✅ DONE (split files) |
-| **P12-FIX** | `sets/wayground/*.js` | Remove double ruby from 217 lines | ✅ DONE (split files) |
+| **P12-FIX** | `sets/wayground/**/*.js` | Remove double ruby from 217 lines | ✅ DONE (split files) |
 
 > **Note:** Monolithic `csv-sets.js` and `wayground-sets.js` still show corruption — these are legacy originals, intentionally not edited on `content-dq`. Split files in `src/data/sets/` are the working source of truth. Monolithics will be replaced at main-merge time.
 
@@ -367,7 +369,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 | Task | File | Scope | Status |
 |---|---|---|---|
 | **P13-struct** | `sets/quiz/*.js` | Add `id` (1-indexed per set) to all 90 qs | ✅ DONE |
-| **P14** | `sets/wayground/*.js` | Expand ~28 stub `exp` fields | ✅ DONE |
+| **P14** | `sets/wayground/**/*.js` | Expand ~28 stub `exp` fields | ✅ DONE |
 | **P16** | `sets/jac/jac-teori.js`, `sets/jac/jac-lifeline.js` | Schema migration — 95 qs | ✅ DONE |
 | **P17** | `confusion-pairs.js` | Add `tip_id` field to 28 entries — 0 null remaining | ✅ DONE |
 | **P19** | `danger-pairs.js` | Audit `traps`/`explanation` ruby | ✅ DONE |
@@ -412,7 +414,7 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 - **Ruby format:** annotate full compound reading, never suffix-only.
 - **Maru `（）` with non-kana content** (synonyms, abbreviations, definitions, explanations) — do NOT convert to `《》`. Only pure-hiragana/katakana readings get converted.
 - **`exp` minimum:** 30 chars for non-vocab sets; real Indonesian, not placeholder.
-- **wg6/wg7/wg8/wg9/wg11 short exp** = intentional vocab-recognition format — do NOT expand.
+- **`wglv01–wglv05` short exp** = intentional vocab-recognition format — do NOT expand.
 - **`angka.kartu`** is a number (card id), not a string field `kartu_id`.
 - **Track values:** `common`, `lifeline`, `doboku`, `kenchiku` only.
 - **Single-quote strings** in all data files — canonical. Exception: `cards-common.js` / `cards-lifeline.js` use double-quotes — do not change.
@@ -655,12 +657,12 @@ All 1,443 cards audited against **11 JAC PDFs** (7 textbook + 4 soal ujian lifel
 
 | Label | Count | Nature |
 |---|---|---|
-| `vocab-supplementary` | 271 | External — technical vocab not in any JAC PDF |
+| `vocab-supplementary` | **272** | External — technical vocab not in any JAC PDF |
 | `vocab-lifeline` | 113 | Cross-chapter + external lifeline terms |
 | `vocab-jac` | 49 | Cross-chapter JAC terms (appear in both textbook + exam PDFs) |
 | `vocab-general` | 44 | External — general construction vocab |
 | `vocab-exam` | 38 | Cross-chapter exam-prep terms |
-| `vocab-teori` | 20 | Cross-chapter theory terms |
+| `vocab-teori` | **18** | Cross-chapter theory terms (2 moved to vocab-supplementary/jac-gakka1 in G2) |
 | `vocab-core` | 13 | Cross-chapter core terms |
 
 These labels are pedagogically meaningful and displayed to users via `SOURCE_META`. Multi-match terms cannot be attributed to a single chapter — keeping labels is correct.
@@ -729,34 +731,13 @@ File ada di `legacy/ssw_flashcards_v87.jsx` di branch `main` (6000+ baris).
 4. List mode yang ada di v87 tapi tidak ada di current app
 5. Laporkan ke owner sebelum mengerjakan apapun
 
-### 13C. PDF Viewer Mode — masih BLOCKED
-
-Butuh URL resmi JAC dari owner. Jangan implementasi sampai URL tersedia.
-
 ---
 
-## RINGKASAN LENGKAP STATE AKHIR SESSION 10
+## RINGKASAN STATE AKHIR SESSION 10 (historical)
 
-**Last commit (session 10):** `24a5f58` (branch: content-dq)
+**Commit:** `24a5f58` | **Cards:** 1,443 | Source counts: vocab-supplementary:271, vocab-teori:20, jac-gakka1:5 (pre-G2)
 
-**Cards:** 1,443 total (tidak berubah dari session 9)
-
-**Source field — post F1+F2+F3 (session 10):**
-```
-jac-ch1:  28   jac-ch2:  99   jac-ch3: 183
-jac-ch4: 150   jac-ch5: 217   jac-ch6: 134   jac-ch7:  48
-jac-gakka1: 5  jac-gakka2: 3
-jac-jitsugi1: 13  jac-jitsugi2: 15
-vocab-supplementary: 271  vocab-lifeline: 113  vocab-jac: 49
-vocab-general: 44  vocab-exam: 38  vocab-teori: 20  vocab-core: 13
-```
-`text3l` = 0 (sudah jadi jac-ch3)
-
-**Keputusan yang dikonfirmasi session 10:**
-- Legacy source labels (vocab-*) DIPERTAHANKAN — semantiknya meaningful di UI
-- Doboku/kenchiku = AI-generated, tidak ada PDF, P21 BLOCKED
-- Opsi A (type-based filtering) = APPROVED tapi belum dieksekusi
-- PDF Viewer = APPROVED spec-nya, BLOCKED URL
+Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-generated (P21 BLOCKED); Opsi A = APPROVED; PDF Viewer spec APPROVED tapi URL BLOCKED.
 
 ---
 
