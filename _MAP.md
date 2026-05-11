@@ -230,7 +230,8 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
-| 2026-05-12 | content-dq | Sonnet 4.6: ADM5 deep hygiene — last commit hash sync (→8da61d7), SIPIL/BANGUNAN→DOBOKU/KENCHIKU in _MAP+HANDOFF, _MAP session log gaps (ADM3/ADM4), PROGRESS ADM3/ADM4/ADM5 retroactive tracking |
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM6 deep hygiene — last commit hash sync (→9ed5e7e), categories.js comment fix (Sipil→Doboku, Bangunan→Kenchiku), SESSION_PROMPT/HANDOFF/PROGRESS session 14→15, ADM6 tracking |
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM5 deep hygiene — last commit hash sync (→9ed5e7e), SIPIL/BANGUNAN→DOBOKU/KENCHIKU in _MAP+HANDOFF, _MAP session log gaps (ADM3/ADM4), PROGRESS ADM3/ADM4/ADM5 retroactive tracking |
 | 2026-05-11 | content-dq | Sonnet 4.6: ADM4 hygiene pass 4 — HANDOFF prefix taxonomy + Part 7/8 table fixes + Part 12→14 renumber, SESSION_PROMPT last commit, PROGRESS stale count annotations |
 | 2026-05-11 | content-dq | Sonnet 4.6: ADM3 _MAP.md + README-CONTENT-DQ.md hygiene — §0B set prefix locations, §0E text3l crossed out, Part 7/8 table rows, AGENT RULES dangling ref, Part 12→14 renumber |
 | 2026-05-11 | content-dq | Sonnet 4.6: ADM2 deep hygiene pass — all stale refs purged (handoff v16, §0B prefix taxonomy, Parts 3–8, session summaries, PROGRESS batch order) |

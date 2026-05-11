@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v16
-**Updated:** May 2026 — session 14 (ADM5: commit hash sync, SIPIL/BANGUNAN→DOBOKU/KENCHIKU, _MAP session log gaps)
+**Updated:** May 2026 — session 15 (ADM6: commit hash sync, categories.js comment fix Sipil/Bangunan→Doboku/Kenchiku)
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `8da61d7` (DOCS: ADM4 — hygiene pass 4, no-assume audit)
+**Last commit:** `9ed5e7e` (DOCS: ADM5 — session 14 deep hygiene)
 
 ---
 
@@ -743,7 +743,7 @@ Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-gener
 
 ## RINGKASAN LENGKAP STATE AKHIR SESSION 12
 
-**Last commit (latest):** `8da61d7` (DOCS: ADM4) — most recent pre-ADM5
+**Last commit (latest):** `9ed5e7e` (DOCS: ADM5) — most recent pre-ADM6
 
 **Cards:** 1,443 total (tidak berubah)
 

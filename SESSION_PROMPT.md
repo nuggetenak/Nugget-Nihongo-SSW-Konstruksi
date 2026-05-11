@@ -10,20 +10,20 @@ git clone -b content-dq https://[token]@github.com/nuggetenak/Nugget-Nihongo-SSW
 ## KONTEKS SESI INI
 
 Baca DATA_QUALITY_HANDOFF_v16.md dan PROGRESS.md sebelum apapun.
-Canonical source of truth ada di sana. Last commit: 8da61d7
+Canonical source of truth ada di sana. Last commit: 9ed5e7e
 
 Tujuan branch content-dq: data hygiene, housekeeping, accuracy — sampai
 semua 1,443 cards 100% akurat dan bersih.
 
 ---
 
-## STATE SAAT INI (per session 14)
+## STATE SAAT INI (per session 15)
 
 Semua task aktif di content-dq SELESAI:
 - ✅ G1: type-based filtering (useTrackedCards, FilterPopup, FocusMode)
 - ✅ G2: source fix — 2 hukum cards (id:1184 → vocab-supplementary, id:1233 → jac-gakka1)
 - ✅ W1: wayground taxonomy restructure + set rename (wg/wp → wgl/wglv/wtv)
-- ✅ ADM1–ADM5: admin hygiene passes (session 13–14)
+- ✅ ADM1–ADM6: admin hygiene passes (session 13–15)
 
 Hanya blocked items yang tersisa:
 - ⏸ P21: jac-doboku.js + jac-kenchiku.js — tunggu PDF JAC resmi

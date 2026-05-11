@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-12 (session 14: ADM5 — commit hash sync, SIPIL/BANGUNAN terminology, _MAP session log gaps)
+**Last updated:** 2026-05-12 (session 15: ADM6 — commit hash sync, categories.js Sipil/Bangunan→Doboku/Kenchiku comments)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -236,6 +236,15 @@ Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.
 - [x] PROGRESS.md: ADM3, ADM4 entries added retroactively; ADM5 this entry; batch header updated
 
 ---
+
+### ADM6 — Session 15 deep hygiene: commit hash sync, categories.js comment fix ✅
+Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.md`, `src/data/categories.js`
+- [x] HANDOFF header: last commit `8da61d7` → `9ed5e7e` (ADM5); Updated: session 14 → session 15; ADM6 description
+- [x] HANDOFF RINGKASAN SESSION 12: last commit `8da61d7 (DOCS: ADM4)` → `9ed5e7e (DOCS: ADM5)`
+- [x] SESSION_PROMPT: last commit `8da61d7` → `9ed5e7e`; STATE per session 14 → per session 15; ADM1–ADM5 → ADM1–ADM6
+- [x] _MAP.md: ADM5 session log entry hash `→8da61d7` → `→9ed5e7e`; ADM6 session log entry added
+- [x] PROGRESS.md: Last updated → session 15 ADM6; ADM6 entry added
+- [x] `src/data/categories.js`: comments `// Sipil` → `// Doboku`, `// Bangunan` → `// Kenchiku` (missed by P20)
 
 ## SELESAI (semua sesi sebelumnya)
 - ✅ G1: App logic switch source→type-based (useTrackedCards, FilterPopup, FocusMode) — 655 vocab + 96 hukum now correctly filtered

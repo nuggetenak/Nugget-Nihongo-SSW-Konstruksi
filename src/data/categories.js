@@ -11,11 +11,11 @@ export const CATEGORIES = [
   { key: 'hourei', label: '法令・規制',     color: '#285e61', emoji: '⚖️', tracks: ['doboku','kenchiku','lifeline'], module: 'K3' },
   { key: 'sekou',  label: '施工管理・共通',  color: '#2d3748', emoji: '📋', tracks: ['doboku','kenchiku','lifeline'], module: 'K4' },
   { key: 'career', label: 'キャリア・雇用',  color: '#553c9a', emoji: '👷', tracks: ['doboku','kenchiku','lifeline'], module: 'K5' },
-  // Sipil
+  // Doboku
   { key: 'doboku_doko',   label: '土工事・インフラ', color: '#744210', emoji: '⛏️', tracks: ['doboku'], module: 'D1', placeholder: true, note: 'Future Ch.5+ content' },
   { key: 'doboku_hoso',   label: '舗装・道路',      color: '#975a16', emoji: '🛣️', tracks: ['doboku'], module: 'D2', placeholder: true, note: 'Future Ch.5+ content' },
   { key: 'doboku_haisui', label: '排水・基礎・杭',   color: '#2c5282', emoji: '🌊', tracks: ['doboku'], module: 'D3', placeholder: true, note: 'Future Ch.5+ content' },
-  // Bangunan
+  // Kenchiku
   { key: 'kenchiku_kutai',  label: '躯体工事',     color: '#1a365d', emoji: '🏗️', tracks: ['kenchiku'], module: 'B1', placeholder: true, note: 'Future Ch.5+ content' },
   { key: 'kenchiku_shiage', label: '仕上げ・内装',  color: '#6b46c1', emoji: '🎨', tracks: ['kenchiku'], module: 'B2', placeholder: true, note: 'Future Ch.5+ content' },
   // Lifeline
