@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-12 (session 16: ADM7 — data audit, Part 6 jac-lifeline null fix, Part 7 schema doc)
+**Last updated:** 2026-05-12 (session 17: ADM8 — commit hash sync, ADM7 self-reference fix)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -255,6 +255,14 @@ Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.
 - [x] SESSION_PROMPT: last commit→`3a199f1`; STATE per session 16; ADM1–ADM7
 - [x] _MAP.md: ADM7 session log entry added
 - [x] PROGRESS.md: header→session 16 ADM7; ADM7 entry added
+
+### ADM8 — Session 17 deep hygiene: ADM7 self-reference fix ✅
+Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.md`
+- [x] HANDOFF header: last commit `3a199f1 (ADM6)` → `e0e689b (ADM7)`; Updated session 16→17; ADM8 description
+- [x] HANDOFF RINGKASAN: last commit `3a199f1 (DOCS: ADM6) — most recent pre-ADM7` → `e0e689b (DOCS: ADM7) — most recent pre-ADM8`
+- [x] SESSION_PROMPT: last commit `3a199f1` → `e0e689b`; STATE per session 16→17; ADM1–ADM7→ADM1–ADM8
+- [x] _MAP.md: ADM8 session log entry added
+- [x] PROGRESS.md: header→session 17 ADM8; ADM8 entry added
 
 ## SELESAI (semua sesi sebelumnya)
 - ✅ G1: App logic switch source→type-based (useTrackedCards, FilterPopup, FocusMode) — 655 vocab + 96 hukum now correctly filtered

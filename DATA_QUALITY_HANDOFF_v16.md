@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v16
-**Updated:** May 2026 — session 16 (ADM7: Part 6 jac-lifeline null fix, Part 7 confusion-pairs schema clarification)
+**Updated:** May 2026 — session 17 (ADM8: commit hash sync, self-reference fix ADM7)
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `3a199f1` (DOCS: ADM6 — session 15 hygiene)
+**Last commit:** `e0e689b` (DOCS: ADM7 — session 16 hygiene)
 
 ---
 
@@ -746,7 +746,7 @@ Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-gener
 
 ## RINGKASAN LENGKAP STATE AKHIR SESSION 12
 
-**Last commit (latest):** `3a199f1` (DOCS: ADM6) — most recent pre-ADM7
+**Last commit (latest):** `e0e689b` (DOCS: ADM7) — most recent pre-ADM8
 
 **Cards:** 1,443 total (tidak berubah)
 
