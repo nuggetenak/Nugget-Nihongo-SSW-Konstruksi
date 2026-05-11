@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-12 (session 15: ADM6 — commit hash sync, categories.js Sipil/Bangunan→Doboku/Kenchiku comments)
+**Last updated:** 2026-05-12 (session 16: ADM7 — data audit, Part 6 jac-lifeline null fix, Part 7 schema doc)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -245,6 +245,16 @@ Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.
 - [x] _MAP.md: ADM5 session log entry hash `→8da61d7` → `→9ed5e7e`; ADM6 session log entry added
 - [x] PROGRESS.md: Last updated → session 15 ADM6; ADM6 entry added
 - [x] `src/data/categories.js`: comments `// Sipil` → `// Doboku`, `// Bangunan` → `// Kenchiku` (missed by P20)
+### ADM7 — Session 16 deep hygiene: data audit + handoff corrections ✅
+Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.md`
+- [x] Full data audit: cards (1443), sets (csv/wayground/quiz/jac), pairs, angka — 0 new data issues
+- [x] HANDOFF Part 6: jac-lifeline.js `related_card_id` null=1→null=0, filled=29→30 ✅ (filled in commit 5b012e5, undocumented until now)
+- [x] HANDOFF Part 7: added actual schema field list + `defA`/`defB` field documentation
+- [x] HANDOFF header: last commit `9ed5e7e`→`3a199f1` (ADM6); Updated session 15→16; ADM7 description
+- [x] HANDOFF RINGKASAN: last commit updated to `3a199f1 (DOCS: ADM6)`
+- [x] SESSION_PROMPT: last commit→`3a199f1`; STATE per session 16; ADM1–ADM7
+- [x] _MAP.md: ADM7 session log entry added
+- [x] PROGRESS.md: header→session 16 ADM7; ADM7 entry added
 
 ## SELESAI (semua sesi sebelumnya)
 - ✅ G1: App logic switch source→type-based (useTrackedCards, FilterPopup, FocusMode) — 655 vocab + 96 hukum now correctly filtered

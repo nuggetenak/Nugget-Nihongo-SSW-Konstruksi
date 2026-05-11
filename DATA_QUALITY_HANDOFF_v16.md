@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v16
-**Updated:** May 2026 — session 15 (ADM6: commit hash sync, categories.js comment fix Sipil/Bangunan→Doboku/Kenchiku)
+**Updated:** May 2026 — session 16 (ADM7: Part 6 jac-lifeline null fix, Part 7 confusion-pairs schema clarification)
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `9ed5e7e` (DOCS: ADM5 — session 14 deep hygiene)
+**Last commit:** `3a199f1` (DOCS: ADM6 — session 15 hygiene)
 
 ---
 
@@ -304,7 +304,7 @@ Set IDs: `doboku-01`, `doboku-02`, `doboku-03`, `kenchiku-01`, `kenchiku-02`, `k
 | File | qs | `related_card_id` filled | null |
 |---|---|---|---|
 | `jac-teori.js` | 65 | **65** ✅ | 0 (P18 done) |
-| `jac-lifeline.js` | 30 | 29 | **1** (open — no task assigned) |
+| `jac-lifeline.js` | 30 | **30** ✅ | 0 |
 
 Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: null` on all qs.
 
@@ -312,11 +312,14 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 
 ## PART 7 — CONFUSION_PAIRS (28 entries)
 
+Actual schema fields per entry: `type`, `label`, `termA`, `furiA`, `defA`, `termB`, `furiB`, `defB`, `tip`, `tip_id`
+
 | Field | Status |
 |---|---|
 | `termA` / `termB` ruby | ✅ DONE v8 |
 | `furiA` / `furiB` | ✅ present |
-| `tip_id` field | ✅ DONE (P17) — 0 null remaining |
+| `defA` / `defB` | ✅ present — Indonesian definitions (28/28) |
+| `tip` / `tip_id` | ✅ DONE (P17) — 0 null remaining |
 | `track` field | missing on all 28 — OPEN (no task assigned) |
 
 ---
@@ -743,7 +746,7 @@ Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-gener
 
 ## RINGKASAN LENGKAP STATE AKHIR SESSION 12
 
-**Last commit (latest):** `9ed5e7e` (DOCS: ADM5) — most recent pre-ADM6
+**Last commit (latest):** `3a199f1` (DOCS: ADM6) — most recent pre-ADM7
 
 **Cards:** 1,443 total (tidak berubah)
 
