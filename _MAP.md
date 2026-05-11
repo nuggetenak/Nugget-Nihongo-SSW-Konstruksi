@@ -70,7 +70,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── cards.js                ← CARDS[1443] (assembled by merge-cards.mjs)
     │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
     │   │                              cards-doboku/kenchiku (empty stubs)
-    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + sipil + bangunan
+    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + doboku + kenchiku
     │   ├── jac-teori.js / jac-lifeline.js / jac-official.js
     │   ├── jac-doboku.js / jac-kenchiku.js   ← empty stubs (future 実技 content)
     │   ├── wayground-sets.js / csv-sets.js    ← source sets (imported by quiz-sets.js)
@@ -187,7 +187,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
 | `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
 | `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
-| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + CSV_SETS + SIPIL_SETS + BANGUNAN_SETS (44 sets total); getQuizSetsForTrack() helper; sipil/bangunan sets inlined here (REF-9 v4.21.0) |
+| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + CSV_SETS + DOBOKU_SETS + KENCHIKU_SETS (44 sets total); getQuizSetsForTrack() helper; doboku/kenchiku sets inlined here (REF-9 v4.21.0, renamed P20) |
 | `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
 | `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
 | `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
@@ -230,6 +230,9 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM5 deep hygiene — last commit hash sync (→8da61d7), SIPIL/BANGUNAN→DOBOKU/KENCHIKU in _MAP+HANDOFF, _MAP session log gaps (ADM3/ADM4), PROGRESS ADM3/ADM4/ADM5 retroactive tracking |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM4 hygiene pass 4 — HANDOFF prefix taxonomy + Part 7/8 table fixes + Part 12→14 renumber, SESSION_PROMPT last commit, PROGRESS stale count annotations |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM3 _MAP.md + README-CONTENT-DQ.md hygiene — §0B set prefix locations, §0E text3l crossed out, Part 7/8 table rows, AGENT RULES dangling ref, Part 12→14 renumber |
 | 2026-05-11 | content-dq | Sonnet 4.6: ADM2 deep hygiene pass — all stale refs purged (handoff v16, §0B prefix taxonomy, Parts 3–8, session summaries, PROGRESS batch order) |
 | 2026-05-11 | content-dq | Sonnet 4.6: ADM1 admin sync post-sessions-11-12 (source counts, §13A, CODEBASE STATE wayground, _MAP.md storage v3→v4) |
 | 2026-05-10 | content-dq | Sonnet 4.6: W1 wayground taxonomy restructure — 26 sets renamed+reorganized into teori/vocab/lifeline/praktik/lifeline/vocab subfolders |

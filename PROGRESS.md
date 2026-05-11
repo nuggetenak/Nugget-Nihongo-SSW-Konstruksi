@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-12 (session 13: ADM2 deep hygiene — all stale refs purged across handoff)
+**Last updated:** 2026-05-12 (session 14: ADM5 — commit hash sync, SIPIL/BANGUNAN terminology, _MAP session log gaps)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -181,7 +181,7 @@ Files: `src/data/sets/wayground/**`
 
 ---
 
-## BATCH ADM — Administrative hygiene (session 13)
+## BATCH ADM — Administrative hygiene (sessions 13–14)
 
 ### ADM1 — Sync admin docs post-sessions-11-12 ✅
 Files: `SESSION_PROMPT.md`, `DATA_QUALITY_HANDOFF_v16.md`, `README-CONTENT-DQ.md`, `_MAP.md`
@@ -207,6 +207,33 @@ Files: `DATA_QUALITY_HANDOFF_v16.md`, `PROGRESS.md`
 - [x] §13C (duplicate of §12C) removed
 - [x] Session 10 historical summary compressed (22 lines → 4 lines)
 - [x] PROGRESS.md: BATCH W and BATCH ADM reordered (W=session 12 before ADM=session 13); W1 storage version note fixed (5→6 → 4→5)
+
+### ADM3 — _MAP.md + README-CONTENT-DQ.md hygiene (session 13) ✅
+Files: `_MAP.md`, `README-CONTENT-DQ.md`
+- [x] §0B: ct/cp prefix location corrected (csv-sets.js → sets/csv/*.js); doboku-/kenchiku- → sets/quiz/*.js
+- [x] §0E: text3l crossed out (retired by F3)
+- [x] Part 7+8: missing closing `|` on table rows fixed
+- [x] AGENT RULES: dangling `(v8: v5)` reference to deleted table removed
+- [x] PART 12 FUTURE DEVELOPMENT NOTES renumbered → PART 14 (14A, 14B) — no longer conflicts with Part 12
+- [x] README-CONTENT-DQ.md: last commit updated
+
+### ADM4 — Hygiene pass 4, no-assume audit (session 13) ✅
+Files: `DATA_QUALITY_HANDOFF_v16.md`, `PROGRESS.md`, `SESSION_PROMPT.md`
+- [x] HANDOFF header: last commit `c1e1a53` → `efc8f02`
+- [x] PROGRESS.md: F2 stale pre-G2 counts annotated (271→272, 20→18); TEMUAN SESSION 10 snapshot pointer added
+- [x] PROGRESS.md: double `---` at end of BATCH C removed; double blank lines removed
+- [x] SESSION_PROMPT.md: last commit `ea6127d` → `efc8f02`
+
+### ADM5 — Session 14 deep hygiene: commit hash, terminology, session log ✅
+Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.md`
+- [x] HANDOFF header + RINGKASAN SESSION 12: last commit `efc8f02` → `8da61d7` (ADM4)
+- [x] HANDOFF §12B: `SIPIL_SETS and BANGUNAN_SETS` → `DOBOKU_SETS and KENCHIKU_SETS` (post-P20)
+- [x] HANDOFF Updated field: session 13 → session 14
+- [x] SESSION_PROMPT: last commit `efc8f02` → `8da61d7`; STATE updated to per session 14
+- [x] _MAP.md line 73: `sipil + bangunan` → `doboku + kenchiku` in QUIZ_SETS description
+- [x] _MAP.md line 190: `SIPIL_SETS + BANGUNAN_SETS` → `DOBOKU_SETS + KENCHIKU_SETS` (post-P20)
+- [x] _MAP.md session log: ADM3, ADM4, ADM5 entries added (were missing)
+- [x] PROGRESS.md: ADM3, ADM4 entries added retroactively; ADM5 this entry; batch header updated
 
 ---
 
