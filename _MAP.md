@@ -109,7 +109,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,443** |
 | Quiz questions | **~974** (JAC 95 + Wayground 579 + CSV 300 — all in SimulasiMode pool) |
-| Storage schema | **v3** |
+| Storage schema | **v4** |
 | localStorage docs | **3** (progress, srs, prefs) |
 | CI/CD | ✅ GitHub Actions (auto-deploy) |
 | SW auto-bump | ✅ deploy.yml |
@@ -154,12 +154,12 @@ All phases complete. See `docs/BLUEPRINT-CURRENT.md` for full deliverable table.
 
 ---
 
-## 6. Storage Schema v3
+## 6. Storage Schema v4
 
 ```js
 DOCS = { progress: 'ssw-progress', srs: 'ssw-srs-data', prefs: 'ssw-prefs' }
 
-progress: { _v:3, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
+progress: { _v:4, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             wgWrong{}, vocabWrong{}, jacScores{}, wgScores{}, vocabScores{},
             sipilScores{}, bangunanScores{},
             streakData{}, dailyCount{}, recentCards[],
@@ -167,13 +167,13 @@ progress: { _v:3, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             sessions[],                               // cap 180 (bumped v4.4.0)
             dailyMission }
 
-prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
+prefs:    { _v:4, track, theme, onboarded, tutorialFlashcard, lastMode,
             dailyGoal, flashcardHintCount,
             examDate, audioEnabled, studyAnchor, furiganaPolicy,
             notes: {},                     // D3: personal notes per cardId (v4.4.0)
             sprintBestTimeline: [] }       // F4: ghost score timeline for Sprint (v4.6.0)
 
-srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
+srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 ```
 
 ---

@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-11 (session 12: W1 wayground taxonomy restructure)
+**Last updated:** 2026-05-11 (session 13: admin hygiene — handoff/session-prompt/README/MAP sync)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -161,6 +161,17 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 - **ID format:** doboku → `dt{n}_q{nn}`, kenchiku → `kt{n}_q{nn}`
 
 ---
+
+---
+
+## BATCH ADM — Administrative hygiene (session 13)
+
+### ADM1 — Sync admin docs post-sessions-11-12 ✅
+Files: `SESSION_PROMPT.md`, `DATA_QUALITY_HANDOFF_v16.md`, `README-CONTENT-DQ.md`, `_MAP.md`
+- [x] SESSION_PROMPT.md: last commit `a8f6e82` → `ea6127d`; TASK SESI INI rewritten (G1+G2+W1 done, P21/PDF viewer blocked)
+- [x] DATA_QUALITY_HANDOFF_v16.md: header updated (session 12, last commit ea6127d); source counts corrected (vocab-teori 20→18, vocab-supp 271→272, jac-gakka1 5→6); §13A updated (Opsi A DONE); CODEBASE STATE wayground row updated (new folder structure); added RINGKASAN SESSION 12; storage version note clarified (v5 claim vs CHANGELOG v4 discrepancy flagged)
+- [x] README-CONTENT-DQ.md: `v12` → `v16` (×2); "Not present here" updated (3 G1 files ARE present)
+- [x] _MAP.md: "Storage Schema v3" → v4; `_v:3` → `_v:4` in all 3 schema docs; metrics table v3→v4
 
 ---
 

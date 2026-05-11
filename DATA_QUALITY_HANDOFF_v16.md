@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v16
-**Updated:** May 2026 — session 10 (H9/H10/H11 housekeeping + S1–S4 card restructure complete)
+**Updated:** May 2026 — session 12 (G1+G2 type-based filtering + W1 wayground restructure complete)
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `f4a47fb` (pre-session-6)
+**Last commit:** `ea6127d` (ARCH: W1 — wayground taxonomy restructure + full set rename)
 
 ---
 
@@ -416,32 +416,35 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 - **`angka.kartu`** is a number (card id), not a string field `kartu_id`.
 - **Track values:** `common`, `lifeline`, `doboku`, `kenchiku` only.
 - **Single-quote strings** in all data files — canonical. Exception: `cards-common.js` / `cards-lifeline.js` use double-quotes — do not change.
-- **Storage version:** currently `5`. Next schema change → bump to `6`.
+- **Storage version:** Per CHANGELOG main `v4.22.0`, `STORAGE_VERSION` pada main adalah `4` (bumped 3→4). ⚠️ Handoff references di bawah (v8: v5) mungkin dari snapshot berbeda — reconcile di main saat merge.
 
 ---
 
-## CODEBASE STATE (v13 — storage version 5, unchanged)
+## CODEBASE STATE (v16 — post session 12)
 
 > **`content-dq` branch note:** Split files in `src/data/sets/` and `src/data/cards/` are the **working source of truth**. Monolithic files (`csv-sets.js`, `wayground-sets.js`, `quiz-sets.js`) are legacy originals retained for reference — intentionally not edited on this branch. They will be replaced at main-merge time by reassembling from split files.
 
 | File | Last changed | Notes |
 |---|---|---|
-| `src/storage/schema.js` | v8 | STORAGE_VERSION = 5 |
-| `src/storage/engine.js` | v8 | v4→v5 migration wired |
+| `src/storage/schema.js` | main only | ⚠️ Not on content-dq. Per CHANGELOG v4.22.0: STORAGE_VERSION = 4 |
+| `src/storage/engine.js` | main only | ⚠️ Not on content-dq |
 | `src/data/source/cards-common.js` | v10 (P6) | 879 cards, jp ruby complete |
 | `src/data/source/cards-lifeline.js` | v10 (P6) | 564 cards, jp ruby complete |
 | `src/data/source/cards-doboku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
 | `src/data/source/cards-kenchiku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
-| `src/data/cards.js` | v10 | Regenerated — 1,443 cards |
-| `src/data/cards/**/*.js` | session 9 (S1–S4) | Split files — furi aligned, ruby complete ✅. Restructure complete: deprecated files deleted, 1,443 cards redistributed ✅ |
+| `src/data/cards.js` | session 11 (G2) | 1,443 cards — source counts updated (vocab-teori:18, vocab-supp:272, jac-gakka1:6) |
+| `src/data/cards/**/*.js` | session 11 (G2) | Split files — restructure complete ✅, source counts updated ✅ |
 | `src/data/confusion-pairs.js` | session 6 (P17) | 28 pairs, termA/B ruby done, tip_id filled ✅ |
 | `src/data/danger-pairs.js` | session 6 (P19) | 20 items, term + traps + explanation ruby done ✅ |
 | `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done ✅ |
 | `src/data/sets/csv/*.js` | session 9 (H9) | Double ruby fixed, wrong 《》 reverted, opts annotated ✅. ct01.js + ct02.js syntax errors fixed ✅ |
-| `src/data/sets/wayground/*.js` | session 9 (H10) | Double ruby fixed, exp stubs filled ✅. wg12 track corrected: "lifeline"→"common" ✅ |
+| `src/data/sets/wayground/**/*.js` | session 12 (W1) | Renamed + reorganized into teori/vocab/lifeline/praktik/lifeline/vocab/ subfolders ✅ |
 | `src/data/sets/quiz/*.js` | session 9 (H11) | id field added, hints filled, ruby done ✅. track field added to all 6 files ✅ |
 | `src/data/sets/jac/jac-teori.js` | session 6 (P16/P18) | Schema migrated, related_card_id complete ✅ |
 | `src/data/sets/jac/jac-lifeline.js` | session 6 (P16) | Schema migrated ✅ |
+| `src/hooks/useTrackedCards.js` | session 11 (G1) | type-based filtering: `c.type === 'vocab'` ✅ |
+| `src/components/FilterPopup.jsx` | session 11 (G1) | type-based filtering ✅ |
+| `src/modes/FocusMode.jsx` | session 11 (G1) | type-based filtering ✅ |
 | `src/data/csv-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/csv/` |
 | `src/data/wayground-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/wayground/` |
 | `src/data/jac-doboku.js` | stub | empty `JAC_DOBOKU = []` — awaiting PDF |
@@ -461,8 +464,11 @@ src/data/sets/
   csv/          cp01.js–cp06.js  (lifeline, 20qs each)
                 ct01.js–ct06.js  (common, 30qs each)
                 ct01.js + ct02.js syntax errors fixed ✅ (H9)
-  wayground/    wt1.js–wt10.js, wg1.js–wg9.js, wg11.js, wg12.js, wp1.js–wp5.js
-                (26 files — see Part 3 for full inventory)
+  wayground/    teori/wt01.js–wt10.js          (common, 10 files)
+                vocab/wtv01.js                  (common, 1 file)
+                lifeline/praktik/wgl01.js–wgl10.js  (lifeline, 10 files)
+                lifeline/vocab/wglv01.js–wglv05.js  (lifeline, 5 files)
+                ← W1 rename complete: old wg/wp IDs gone ✅
   quiz/         doboku-01.js–03.js, kenchiku-01.js–03.js   (6 files, 15qs each)
                 track field added to all 6 files ✅ (H11)
   jac/          jac-teori.js, jac-lifeline.js               (2 files, unchanged)
@@ -691,33 +697,25 @@ Agent must NOT guess or hardcode URLs. Wait for owner to provide.
 
 **Updated:** May 2026 — session 10 late (type field analysis, v87 comparison pending)
 
-### 13A. Type Field Audit — FINDING ⚠️
+### 13A. Type Field Audit — ✅ SELESAI (session 11)
 
-`type` field (`konsep`|`vocab`|`hukum`) ada di setiap card dan defined di `src/types.js`, tapi **TIDAK dipakai di satu mode pun** di app saat ini. Semua filtering pakai `VOCAB_SOURCES` (source-based), bukan `type`.
+`type` field (`konsep`|`vocab`|`hukum`) sekarang **dipakai** di app untuk filtering.
 
-**Dua masalah nyata ditemukan:**
+**Dua masalah yang ditemukan (session 10) dan sudah di-fix (session 11):**
 
-Problem 1 — 428 vocab-type cards tidak terdeteksi app sebagai vocab:
-```
-vocab-supplementary: 268  (source tidak ada di VOCAB_SOURCES)
-vocab-general:        43  (sama)
-jac-ch3/5/6/7/...:   117  (vocab embed di chapter files, hasil S4)
-```
+~~Problem 1~~ **FIXED** — 428 vocab-type cards tidak terdeteksi: sekarang semua 655 vocab-type cards terdeteksi via `c.type === 'vocab'`
 
-Problem 2 — 6 hukum cards masuk VOCAB_SOURCES:
-```
-id: 1167,1168,1169,1184,1233,1237
-type: hukum, source: vocab-teori, cat: hourei
-```
+~~Problem 2~~ **FIXED** — 6 hukum cards di VOCAB_SOURCES: 2 source-fixed (G2), 4 vocab-teori retained (cross-chapter confirmed)
 
-**Keputusan owner (session 10):** Opsi A — ganti logika app dari source-based ke type-based filtering. Implementasinya:
-1. `useTrackedCards.js`: ganti `VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
-2. `FilterPopup.jsx`: ganti `isVocab = VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
-3. `FocusMode.jsx`: ganti filter inline → `c.type !== 'vocab'`
-4. Fix 6 hukum cards: `source: vocab-teori` → cari source yang tepat atau pindahkan ke non-VOCAB_SOURCES
-5. Verifikasi semua 428 vocab cards punya `type: 'vocab'` yang benar di data
+**G1 (session 11):** 3 files diupdate:
+1. `useTrackedCards.js`: `VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
+2. `FilterPopup.jsx`: `isVocab = VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
+3. `FocusMode.jsx`: filter inline → `c.type !== 'vocab'`
 
-⚠️ AGENT: Sebelum eksekusi Opsi A, audit `type` field dulu — apakah semua 655 vocab cards benar-benar `type: 'vocab'`? Jangan assume. Check aktual.
+**G2 (session 11):** Source fixes:
+- id:1184 `vocab-teori` → `vocab-supplementary` (no JAC PDF match)
+- id:1233 `vocab-teori` → `jac-gakka1` (single-match tt_sample.pdf)
+- id:1167, 1168, 1169, 1237 — `vocab-teori` RETAINED (cross-chapter confirmed, 2–3 PDFs each)
 
 ### 13B. v87 Comparison — PENDING ⚠️ BLOCKED (context window)
 
@@ -739,11 +737,11 @@ Butuh URL resmi JAC dari owner. Jangan implementasi sampai URL tersedia.
 
 ## RINGKASAN LENGKAP STATE AKHIR SESSION 10
 
-**Last commit:** `24a5f58` (branch: content-dq)
+**Last commit (session 10):** `24a5f58` (branch: content-dq)
 
 **Cards:** 1,443 total (tidak berubah dari session 9)
 
-**Source field — post F1+F2+F3:**
+**Source field — post F1+F2+F3 (session 10):**
 ```
 jac-ch1:  28   jac-ch2:  99   jac-ch3: 183
 jac-ch4: 150   jac-ch5: 217   jac-ch6: 134   jac-ch7:  48
@@ -760,8 +758,41 @@ vocab-general: 44  vocab-exam: 38  vocab-teori: 20  vocab-core: 13
 - Opsi A (type-based filtering) = APPROVED tapi belum dieksekusi
 - PDF Viewer = APPROVED spec-nya, BLOCKED URL
 
-**Tasks open untuk sesi berikutnya (prioritas urut):**
-1. [ ] Eksekusi Opsi A (type field) — audit data dulu, lalu fix app logic
-2. [ ] v87 comparison — mode audit (baca partial, jangan full file)
-3. [ ] PDF Viewer — tunggu URL JAC dari owner
-4. [ ] P21 (jac-doboku + jac-kenchiku) — tunggu PDF JAC
+---
+
+## RINGKASAN LENGKAP STATE AKHIR SESSION 12
+
+**Last commit:** `ea6127d` (branch: content-dq) — W1 wayground taxonomy restructure
+
+**Cards:** 1,443 total (tidak berubah)
+
+**Type field — VERIFIED:**
+```
+vocab: 655   konsep: 692   hukum: 96
+```
+
+**Source field — post F1+F2+F3+G2 (AKTUAL, verified dari cards.js):**
+```
+jac-ch1:  28   jac-ch2:  99   jac-ch3: 183
+jac-ch4: 150   jac-ch5: 217   jac-ch6: 134   jac-ch7:  48
+jac-gakka1: 6  jac-gakka2: 3
+jac-jitsugi1: 13  jac-jitsugi2: 15
+vocab-supplementary: 272  vocab-lifeline: 113  vocab-jac: 49
+vocab-general: 44  vocab-exam: 38  vocab-teori: 18  vocab-core: 13
+```
+`text3l` = 0
+
+**Selesai di session 11 (G1+G2):**
+- App logic: source-based → type-based filtering (useTrackedCards, FilterPopup, FocusMode)
+- Source fix: id:1184 vocab-teori → vocab-supplementary; id:1233 vocab-teori → jac-gakka1
+
+**Selesai di session 12 (W1):**
+- Wayground taxonomy restructure: 26 sets di-rename dan dipindah ke subfolders
+- Old: `wt1–wt10`, `wg1–wg9`, `wg11`, `wg12`, `wp1–wp5` (flat in `sets/wayground/`)
+- New: `wt01–wt10` (teori/), `wtv01` (vocab/), `wgl01–wgl10` (lifeline/praktik/), `wglv01–wglv05` (lifeline/vocab/)
+- ⚠️ W1 = breaking change: storage migration required at main-merge time
+
+**Tasks open (semua blocked):**
+1. [ ] v87 comparison — task di MAIN bukan content-dq; baca partial jangan full file (lihat §13B)
+2. [ ] PDF Viewer — tunggu URL JAC dari owner (BLOCKED)
+3. [ ] P21 (jac-doboku + jac-kenchiku) — tunggu PDF JAC (BLOCKED)

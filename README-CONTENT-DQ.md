@@ -30,14 +30,16 @@ src/data/                        ← all content files (edit here)
   index.js                       ← shim/re-export only
 
 viewer.html                      ← Open in browser to review content
-DATA_QUALITY_HANDOFF_v12.md      ← Master task list & specs
+DATA_QUALITY_HANDOFF_v16.md      ← Master task list & specs
 _MAP.md                          ← App orientation & codebase overview
 CHANGELOG.md                     ← Version history
 README.md                        ← App README
 README-CONTENT-DQ.md             ← This file
 ```
 
-**Not present here:** `src/modes/`, `src/components/`, `src/storage/`, `src/tests/`, `public/`, `package.json`, etc. — those live on `main` only.
+**Also present (added by G1, session 11):** `src/hooks/useTrackedCards.js`, `src/components/FilterPopup.jsx`, `src/modes/FocusMode.jsx` — type-based filtering files.
+
+**Not present here:** other `src/modes/`, `src/components/`, `src/storage/`, `src/tests/`, `public/`, `package.json`, etc. — those live on `main` only.
 
 ---
 
@@ -54,7 +56,7 @@ README-CONTENT-DQ.md             ← This file
 
 ## Agent instructions
 
-- **Read `DATA_QUALITY_HANDOFF_v12.md` first** — full task list, schemas, rules
+- **Read `DATA_QUALITY_HANDOFF_v16.md` first** — full task list, schemas, rules
 - Clone **this branch** (`content-dq`), not `main`
 - Cards source edits: edit `src/data/source/cards-*.js`, then run `node scripts/merge-cards.mjs` — wait, **merge script is on main only**. For source card edits in this branch, edit both source AND `cards.js` manually, or note the changes for merge time.
 - All other data files: edit directly

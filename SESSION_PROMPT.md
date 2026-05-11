@@ -10,41 +10,45 @@ git clone -b content-dq https://[token]@github.com/nuggetenak/Nugget-Nihongo-SSW
 ## KONTEKS SESI INI
 
 Baca DATA_QUALITY_HANDOFF_v16.md dan PROGRESS.md sebelum apapun.
-Canonical source of truth ada di sana. Last commit: a8f6e82
+Canonical source of truth ada di sana. Last commit: ea6127d
 
 Tujuan branch content-dq: data hygiene, housekeeping, accuracy — sampai
 semua 1,443 cards 100% akurat dan bersih.
 
 ---
 
-## TASK SESI INI (SATU TASK SAJA)
+## STATE SAAT INI (per session 13)
 
-### Opsi A — Ganti source-based filtering ke type-based filtering
+Semua task aktif di content-dq SELESAI:
+- ✅ G1: type-based filtering (useTrackedCards, FilterPopup, FocusMode)
+- ✅ G2: source fix — 2 hukum cards (id:1184 → vocab-supplementary, id:1233 → jac-gakka1)
+- ✅ W1: wayground taxonomy restructure + set rename (wg/wp → wgl/wglv/wtv)
 
-STEP 1 — Audit data dulu, jangan langsung eksekusi:
-- Cek: apakah semua 655 vocab-type cards benar-benar punya type: 'vocab'?
-- Cek: apakah semua 692 konsep-type cards benar-benar punya type: 'konsep'?
-- Cek: apakah semua 96 hukum-type cards benar-benar punya type: 'hukum'?
-- Temukan anomali → laporkan ke owner sebelum lanjut
+Hanya blocked items yang tersisa:
+- ⏸ P21: jac-doboku.js + jac-kenchiku.js — tunggu PDF JAC resmi
+- ⏸ PDF Viewer Mode — tunggu URL PDF resmi JAC dari owner
 
-STEP 2 — Setelah owner konfirmasi audit result, baru fix:
-1. src/hooks/useTrackedCards.js
-   Ganti: VOCAB_SOURCES.includes(c.source)
-   Jadi:  c.type === 'vocab'
+---
 
-2. src/components/FilterPopup.jsx
-   Ganti: isVocab = VOCAB_SOURCES.includes(c.source)
-   Jadi:  isVocab = c.type === 'vocab'
+## TASK SESI INI
 
-3. src/modes/FocusMode.jsx
-   Ganti: !VOCAB_SOURCES.includes(c.source)
-   Jadi:  c.type !== 'vocab'
+### Opsi: Merge prep — verifikasi branch siap merge ke main
 
-4. Fix 6 hukum cards yang source-nya vocab-teori
-   (id: 1167, 1168, 1169, 1184, 1233, 1237)
-   → Audit dulu: source yang tepat apa? Jangan assume.
+Kalau owner ingin melanjutkan ke merge, langkah-langkahnya:
 
-STEP 3 — Setelah semua fix: jalankan test suite, pastikan passing.
+1. Verifikasi data integrity:
+   - Total cards: 1,443 ✅
+   - Source counts post-G2: vocab-teori:18, vocab-supplementary:272, jac-gakka1:6
+   - Type counts: vocab:655, konsep:692, hukum:96
+
+2. Storage migration note (UNTUK AGENT DI MAIN):
+   - W1 = breaking change: set IDs di-rename (wg/wp → wgl/wglv/wtv)
+   - Di main: wiring STORAGE_VERSION bump + migration (v_current → v_next) required
+   - Jangan lupa update wayground-sets.js di main agar ID-nya cocok
+
+3. v87 comparison (lihat §13B handoff) — ini task di MAIN, bukan content-dq
+
+### Kalau owner punya task baru: tulis di sini sebelum sesi dimulai.
 
 ---
 
@@ -57,6 +61,4 @@ STEP 3 — Setelah semua fix: jalankan test suite, pastikan passing.
 - Jangan push ke main
 - Kalau ada ambiguitas → catat di handoff, tanya owner, jangan lanjut
 - jac-doboku.js dan jac-kenchiku.js jangan disentuh
-- JANGAN kerjakan selain Opsi A di sesi ini
-  (PDF viewer, v87 comparison, P21 = defer ke sesi berikutnya)
 ```
