@@ -17,9 +17,18 @@ src/data/                        ← all content files (edit here)
     cards-kenchiku.js (stub)
   cards.js                       ← AUTO-GENERATED — do not edit
   categories.js                  ← taxonomy — edit only if adding new categories
-  csv-sets.js                    ← CSV quiz sets (12 sets, 300 qs)
-  wayground-sets.js              ← Wayground quiz (26 sets, 657 qs)
-  quiz-sets.js                   ← Doboku/Kenchiku quiz (6 sets, 90 qs)
+  csv-sets.js                    ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/csv/*.js
+  wayground-sets.js              ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/wayground/**/*.js
+  quiz-sets.js                   ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/quiz/*.js
+  sets/                          ← ✅ WORKING SPLIT FILES — edit these
+    csv/    cp01–cp06.js, ct01–ct06.js
+    wayground/
+      teori/      wt01–wt10.js
+      vocab/      wtv01.js
+      lifeline/praktik/   wgl01–wgl10.js
+      lifeline/vocab/     wglv01–wglv05.js
+    quiz/   doboku-01–03.js, kenchiku-01–03.js
+    jac/    jac-teori.js, jac-lifeline.js
   jac-teori.js                   ← JAC official exam Teori (65 qs)
   jac-lifeline.js                ← JAC official exam Lifeline (30 qs)
   jac-doboku.js (stub)
@@ -70,6 +79,7 @@ README-CONTENT-DQ.md             ← This file
 Agent on `main` will:
 1. Copy all `src/data/` files from `content-dq` → `main`
 2. Update any renamed file imports in `src/modes/`, `src/components/`, etc.
-3. Run `npm test` → verify 387 tests pass
-4. Bump version + CHANGELOG entry
-5. Push to main
+3. **W1 storage migration:** Wayground set IDs renamed (wg/wp → wgl/wglv/wtv). Bump `STORAGE_VERSION` (currently 4 → 5) and add migration in `migrations.js` to remap stored wgScores keys.
+4. Run `npm test` → verify 457 tests pass (41 files)
+5. Bump version + CHANGELOG entry
+6. Push to main

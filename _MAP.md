@@ -80,7 +80,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── categories.js           ← CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT
     │   └── index.js                ← barrel
     ├── srs/                        ← FSRS engine: fsrs-core, fsrs-store, fsrs-scheduler
-    ├── storage/                    ← engine.js (3-doc R/W), schema.js (v3), migrations.js
+    ├── storage/                    ← engine.js (3-doc R/W), schema.js (v4), migrations.js
     ├── hooks/                      ← useAnswerStreak, useDailyChallenge, useDebounce,
     │                                  useFocusTrap, useQuizKeyboard, useSRS, useSessionTimer,
     │                                  useStableContextValue, useTrackedCards + index.js barrel
@@ -108,7 +108,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
 | Modes | **23** (all React.lazy) |
 | Flashcards | **1,443** |
-| Quiz questions | **~974** (JAC 95 + Wayground 579 + CSV 300 — all in SimulasiMode pool) |
+| Quiz questions | **~1052** (JAC 95 + Wayground 657 + CSV 300 — all in SimulasiMode pool) |
 | Storage schema | **v4** |
 | localStorage docs | **3** (progress, srs, prefs) |
 | CI/CD | ✅ GitHub Actions (auto-deploy) |
@@ -192,7 +192,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
 | `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
 | `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE, ...]` |
-| `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. text3l/vocab-supplementary/vocab-general), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
+| `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. vocab-supplementary/vocab-general/jac-ch1–7), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
 
 ### Source/Utils (v4.0.x → v4.21.1)
 | File | Purpose |
@@ -230,7 +230,11 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
-| 2026-05-09 | v4.22.0 | Sonnet 4.6: Card IDs renumbered 1–1443 (185 gaps removed, max 1628→1443); storage v4 migration; 457 tests |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM2 deep hygiene pass — all stale refs purged (handoff v16, §0B prefix taxonomy, Parts 3–8, session summaries, PROGRESS batch order) |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM1 admin sync post-sessions-11-12 (source counts, §13A, CODEBASE STATE wayground, _MAP.md storage v3→v4) |
+| 2026-05-10 | content-dq | Sonnet 4.6: W1 wayground taxonomy restructure — 26 sets renamed+reorganized into teori/vocab/lifeline/praktik/lifeline/vocab subfolders |
+| 2026-05-10 | content-dq | Sonnet 4.6: G1 type-based filtering (useTrackedCards, FilterPopup, FocusMode); G2 source fix (id:1184 vocab-supp, id:1233 jac-gakka1) |
+| 2026-05-09 | content-dq | Sonnet 4.6: sessions 1–8 data hygiene — ruby annotation, furi alignment, schema migration, confusion/danger pairs, csv/quiz/wayground audits, card restructure (S1–S4), source cleanup (F1–F3), housekeeping (H1–H11) |
 | 2026-05-09 | v4.21.1 | Sonnet 4.6: OVERHAUL-1 retire usePersistedState (3 sites → useProgress); ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary; 457 tests (41 files) |
 | 2026-05-09 | v4.21.0 | Sonnet 4.6: REF-8 merge vocab sources (8→4); REF-9 absorb sipil/bangunan into quiz-sets.js; C1-C9 integrity tests (448 tests, 40 files) |
 | 2026-05-09 | v4.20.15 | Sonnet 4.6: ENG-11 useTrackedCards hook; 6 new tests (439 total, 39 files) |
