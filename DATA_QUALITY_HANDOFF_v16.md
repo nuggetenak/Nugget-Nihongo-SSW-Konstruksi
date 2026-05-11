@@ -658,3 +658,84 @@ These labels are pedagogically meaningful and displayed to users via `SOURCE_MET
 Agent must NOT guess or hardcode URLs. Wait for owner to provide.
 
 **When ready:** implement as new mode (e.g. `TeksMode` or `BacaMode`), React.lazy(), follows constraint #3 (all modes lazy). Add to `src/router/modes.js` registry.
+
+---
+
+## PART 13 — SESSION 10 LATE UPDATES (type field audit + next session briefing)
+
+**Updated:** May 2026 — session 10 late (type field analysis, v87 comparison pending)
+
+### 13A. Type Field Audit — FINDING ⚠️
+
+`type` field (`konsep`|`vocab`|`hukum`) ada di setiap card dan defined di `src/types.js`, tapi **TIDAK dipakai di satu mode pun** di app saat ini. Semua filtering pakai `VOCAB_SOURCES` (source-based), bukan `type`.
+
+**Dua masalah nyata ditemukan:**
+
+Problem 1 — 428 vocab-type cards tidak terdeteksi app sebagai vocab:
+```
+vocab-supplementary: 268  (source tidak ada di VOCAB_SOURCES)
+vocab-general:        43  (sama)
+jac-ch3/5/6/7/...:   117  (vocab embed di chapter files, hasil S4)
+```
+
+Problem 2 — 6 hukum cards masuk VOCAB_SOURCES:
+```
+id: 1167,1168,1169,1184,1233,1237
+type: hukum, source: vocab-teori, cat: hourei
+```
+
+**Keputusan owner (session 10):** Opsi A — ganti logika app dari source-based ke type-based filtering. Implementasinya:
+1. `useTrackedCards.js`: ganti `VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
+2. `FilterPopup.jsx`: ganti `isVocab = VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
+3. `FocusMode.jsx`: ganti filter inline → `c.type !== 'vocab'`
+4. Fix 6 hukum cards: `source: vocab-teori` → cari source yang tepat atau pindahkan ke non-VOCAB_SOURCES
+5. Verifikasi semua 428 vocab cards punya `type: 'vocab'` yang benar di data
+
+⚠️ AGENT: Sebelum eksekusi Opsi A, audit `type` field dulu — apakah semua 655 vocab cards benar-benar `type: 'vocab'`? Jangan assume. Check aktual.
+
+### 13B. v87 Comparison — PENDING ⚠️ BLOCKED (context window)
+
+Owner ingin tahu fitur apa yang ada di v87 tapi belum ada di versi baru.
+File ada di `legacy/ssw_flashcards_v87.jsx` di branch `main` (6000+ baris).
+
+**Instruksi untuk agent berikutnya:**
+1. Jangan baca seluruh file sekaligus
+2. Baca dulu hanya bagian mode registry / navigation (cari `modes`, `tabs`, `sections`)
+3. Bandingkan dengan `src/router/modes.js` yang ada 23 mode
+4. List mode yang ada di v87 tapi tidak ada di current app
+5. Laporkan ke owner sebelum mengerjakan apapun
+
+### 13C. PDF Viewer Mode — masih BLOCKED
+
+Butuh URL resmi JAC dari owner. Jangan implementasi sampai URL tersedia.
+
+---
+
+## RINGKASAN LENGKAP STATE AKHIR SESSION 10
+
+**Last commit:** `24a5f58` (branch: content-dq)
+
+**Cards:** 1,443 total (tidak berubah dari session 9)
+
+**Source field — post F1+F2+F3:**
+```
+jac-ch1:  28   jac-ch2:  99   jac-ch3: 183
+jac-ch4: 150   jac-ch5: 217   jac-ch6: 134   jac-ch7:  48
+jac-gakka1: 5  jac-gakka2: 3
+jac-jitsugi1: 13  jac-jitsugi2: 15
+vocab-supplementary: 271  vocab-lifeline: 113  vocab-jac: 49
+vocab-general: 44  vocab-exam: 38  vocab-teori: 20  vocab-core: 13
+```
+`text3l` = 0 (sudah jadi jac-ch3)
+
+**Keputusan yang dikonfirmasi session 10:**
+- Legacy source labels (vocab-*) DIPERTAHANKAN — semantiknya meaningful di UI
+- Doboku/kenchiku = AI-generated, tidak ada PDF, P21 BLOCKED
+- Opsi A (type-based filtering) = APPROVED tapi belum dieksekusi
+- PDF Viewer = APPROVED spec-nya, BLOCKED URL
+
+**Tasks open untuk sesi berikutnya (prioritas urut):**
+1. [ ] Eksekusi Opsi A (type field) — audit data dulu, lalu fix app logic
+2. [ ] v87 comparison — mode audit (baca partial, jangan full file)
+3. [ ] PDF Viewer — tunggu URL JAC dari owner
+4. [ ] P21 (jac-doboku + jac-kenchiku) — tunggu PDF JAC
