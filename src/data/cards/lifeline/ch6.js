@@ -1684,7 +1684,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1254,
   category: "setsubi_kougu",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "けんせつこうじのさんくぶん",
   jp: "建設工事の3区分《けんせつこうじのさんくぶん》",
   type: "konsep",
@@ -1695,7 +1695,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1255,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "ふきつけうれたんだんねつこうじ",
   jp: "吹付けウレタン断熱工事《ふきつけうれたんだんねつこうじ》",
   type: "konsep",
@@ -1706,7 +1706,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1256,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "うれたんだんねつしこうかんり",
   jp: "ウレタン断熱施工品質管理《うれたんだんねつしこうかんり》",
   type: "konsep",
@@ -1717,7 +1717,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1257,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "ぼうろこうじ",
   jp: "防露工事《ぼうろこうじ》",
   type: "vocab",
@@ -1728,7 +1728,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1258,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "ほおんほれいこうじのあんぜんきのう",
   jp: "保温保冷工事の安全機能《ほおんほれいこうじのあんぜんきのう》",
   type: "konsep",
@@ -1739,7 +1739,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1259,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "すいしんとんねるこうじ",
   jp: "推進トンネル工事《すいしんとんねるこうじ》",
   type: "konsep",
@@ -1750,7 +1750,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1260,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "すいしんかんのしゅるい",
   jp: "推進管の種類《すいしんかんのしゅるい》",
   type: "vocab",
@@ -1761,7 +1761,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1261,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "はいかんこうじのきほんぎのう",
   jp: "配管工事の基本技能《はいかんこうじのきほんぎのう》",
   type: "konsep",
@@ -1772,7 +1772,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1262,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "じゅすいそう",
   jp: "受水槽《じゅすいそう》",
   type: "vocab",
@@ -1783,7 +1783,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1263,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "つうきせつび",
   jp: "通気設備《つうきせつび》",
   type: "vocab",
@@ -1794,7 +1794,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1264,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "うれたんぼうすいこうじ",
   jp: "ウレタン防水工事《うれたんぼうすいこうじ》",
   type: "vocab",
@@ -1805,7 +1805,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1265,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "FRPぼうすいこうじ",
   jp: "FRP防水工事《FRPぼうすいこうじ》",
   type: "vocab",
@@ -1816,7 +1816,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1266,
   category: "hoon",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "しーりんぐぼうすいこうじ",
   jp: "シーリング防水工事《しーりんぐぼうすいこうじ》",
   type: "vocab",
@@ -1827,7 +1827,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1267,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "さくせいこうじのしゅるい",
   jp: "さく井工事の種類《さくせいこうじのしゅるい》",
   type: "konsep",
@@ -1838,7 +1838,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1269,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "じょうすいどうこうじのながれ",
   jp: "上水道工事の流れ《じょうすいどうこうじのながれ》",
   type: "konsep",
@@ -1849,7 +1849,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1270,
   category: "haikan",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "げすいどうこうじのながれ",
   jp: "下水道工事の流れ《げすいどうこうじのながれ》",
   type: "konsep",
@@ -1860,7 +1860,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1271,
   category: "shoubou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "しょうぼうほうによるせっちぎむ",
   jp: "消防法による設置義務《しょうぼうほうによるせっちぎむ》",
   type: "konsep",

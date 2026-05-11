@@ -173,3 +173,14 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 - ✅ P10: Ruby pada soal angka-kunci (29 items)
 - ✅ P11 (FIX-A/B + C): csv double ruby fix + wrong 《》 revert + 198 bare opts annotated
 - ✅ P20: Rename sipil→doboku, bangunan→kenchiku
+
+---
+
+## BATCH F — Source field cleanup (session 10)
+
+### F1 — Relabel text3l → jac-ch3 (25 cards)
+Files: `src/data/cards/lifeline/ch5.js` (1), `src/data/cards/lifeline/ch6.js` (10), `src/data/cards/common/vocab-supplementary.js` (7+), `src/data/source/cards-lifeline.js`, `src/data/source/cards-common.js`, `src/data/cards.js`
+- [x] `text3l` adalah konten dari text3.pdf (JAC ch3). 9 cards confirmed match di text3.pdf.
+- [x] 16 "external" text3l cards = synthesized terms dari ch3, tidak verbatim → tetap jac-ch3
+- [x] Replaced semua `source: "text3l"` → `source: "jac-ch3"` di 6 file
+- [x] Verify: 0 text3l remaining, jac-ch3 total = 131 (ch3.js) + 25 = 156 ✅

@@ -5546,7 +5546,7 @@ export const CARDS_COMMON = [
   {
   id: 1277,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "あしばのくみたてとうさぎょうしゅにんしゃ",
   jp: "足場の組立て等作業主任者《あしばのくみたてとうさぎょうしゅにんしゃ》・作業者《さぎょうしゃ》",
   type: "konsep",
@@ -5557,7 +5557,7 @@ export const CARDS_COMMON = [
   {
   id: 1278,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "じやまくっさくどどめしほこうさぎょうしゅにんしゃ",
   jp: "地山の掘削及び土止め支保工作業主任者《じやまくっさくどどめしほこうさぎょうしゅにんしゃ》",
   type: "konsep",
@@ -5568,7 +5568,7 @@ export const CARDS_COMMON = [
   {
   id: 1279,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "ろーぷこうしょさぎょうとくべつきょういく",
   jp: "ロープ高所作業《ろーぷこうしょさぎょうとくべつきょういく》（特別教育）",
   type: "konsep",
@@ -5579,7 +5579,7 @@ export const CARDS_COMMON = [
   {
   id: 1280,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "かたわくしほこうずいどうくっさくさぎょうしゅにんしゃ",
   jp: "型わく支保工《かたわくしほこう》・ずい道等掘削作業主任者《くっさくさぎょうしゅにんしゃ》",
   type: "konsep",
@@ -5590,7 +5590,7 @@ export const CARDS_COMMON = [
   {
   id: 1281,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "とびしょくのろくしゅるい",
   jp: "とび職の6種類《とびしょくのろくしゅるい》",
   type: "vocab",
@@ -5601,7 +5601,7 @@ export const CARDS_COMMON = [
   {
   id: 1282,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "てっこつこうぞうのさんしゅるいとにこうほう",
   jp: "鉄骨構造の3種類と2工法《てっこつこうぞうのさんしゅるいとにこうほう》",
   type: "konsep",
@@ -5612,7 +5612,7 @@ export const CARDS_COMMON = [
   {
   id: 1283,
   category: "sekou",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "しゃりょうけいけんせつきかいとさんトンきょうかい",
   jp: "車両系建設機械と3t境界《しゃりょうけいけんせつきかいとさんトンきょうかい》",
   type: "konsep",

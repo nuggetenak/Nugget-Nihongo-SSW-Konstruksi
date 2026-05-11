@@ -2425,7 +2425,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1268,
   category: "tsushin",
-  source: "text3l",
+  source: "jac-ch3",
   furi: "でんきつうしんこうじのつうしんどぼく",
   jp: "電気通信工事の通信土木《でんきつうしんこうじのつうしんどぼく》",
   type: "konsep",
