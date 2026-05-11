@@ -1,7 +1,7 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-11 (session 9: H9/H10/H11/S1-S4 execution)
-**Handoff ref:** `DATA_QUALITY_HANDOFF_v15.md`
+**Last updated:** 2026-05-11 (session 11: Opsi A — type-based filtering + source fix 2 hukum cards)
+**Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
 
@@ -77,7 +77,28 @@ Files: `src/data/cards/lifeline/vocab-lifeline.js`, `src/data/cards/lifeline/ch5
 
 ---
 
-## BATCH D — Housekeeping & pre-expansion hygiene (session 6 & 7)
+## BATCH G — Opsi A: Type-based filtering (session 11)
+
+### G1 — App logic: switch source-based → type-based filtering ✅
+Files: `src/hooks/useTrackedCards.js`, `src/components/FilterPopup.jsx`, `src/modes/FocusMode.jsx`
+- [x] `useTrackedCards.js`: `VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`, remove VOCAB_SOURCES import, update JSDoc
+- [x] `FilterPopup.jsx`: `isVocab = VOCAB_SOURCES.includes(c.source)` → `isVocab = c.type === 'vocab'`, remove VOCAB_SOURCES import
+- [x] `FocusMode.jsx`: `!VOCAB_SOURCES.includes(c.source)` → `c.type !== 'vocab'`, remove VOCAB_SOURCES import
+- [x] Verify: 0 VOCAB_SOURCES references remaining in 3 files ✅
+- [x] Impact: 428 vocab-type cards sekarang terdeteksi benar; 6 hukum cards tidak lagi salah terdeteksi
+
+### G2 — Source fix: 2 hukum cards (PDF audit) ✅
+Files: `src/data/cards/common/vocab-supplementary.js`, `src/data/source/cards-common.js`, `src/data/cards.js`
+- [x] Audit 6 hukum cards vs 11 JAC PDFs (7 textbook + 4 soal ujian)
+- [x] id:1184 発注者 — NOT FOUND di semua 11 PDF → `vocab-teori` → `vocab-supplementary` (external/no source)
+- [x] id:1233 在留カード — single-match di tt_sample only → `vocab-teori` → `jac-gakka1` ✅
+- [x] id:1167 許可, 1168 請負契約, 1169 元請け, 1237 更新 — multi-match (2–3 PDFs each) → `vocab-teori` RETAINED (cross-chapter confirmed)
+- [x] vocab-teori count: 20 → 18 (4 hukum + 14 vocab remaining, all cross-chapter)
+- [x] Updated in 3 files: split, source, exported ✅
+
+---
+
+
 
 ### H1–H6 ✅ (lihat SELESAI di bawah)
 
@@ -142,6 +163,8 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 ---
 
 ## SELESAI (semua sesi sebelumnya)
+- ✅ G1: App logic switch source→type-based (useTrackedCards, FilterPopup, FocusMode) — 655 vocab + 96 hukum now correctly filtered
+- ✅ G2: Source fix — id:1184 vocab-teori→vocab-supplementary, id:1233 vocab-teori→jac-gakka1 (PDF audit confirmed)
 - ✅ H9: ct01.js + ct02.js syntax errors fixed (orphaned duplicate opts lines removed)
 - ✅ H10: wg12 track "lifeline" → "common"
 - ✅ H11: track field added to 6 quiz split files (doboku/kenchiku)

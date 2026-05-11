@@ -2525,7 +2525,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1184,
   category: "hourei",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "はっちゅうしゃ",
   jp: "発注者《はっちゅうしゃ》",
   type: "hukum",
@@ -2547,7 +2547,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1233,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-gakka1",
   furi: "ざいりゅうかーど",
   jp: "在留カード《ざいりゅうかーど》",
   type: "hukum",
