@@ -700,7 +700,7 @@ Agent must NOT guess or hardcode URLs. Wait for owner to provide.
 
 ## PART 13 — SESSION 10 LATE UPDATES (type field audit + next session briefing)
 
-**Updated:** May 2026 — session 10 late (type field analysis, v87 comparison pending)
+**Updated:** May 2026 — session 10 late (type field analysis, v87 comparison — selesai owner-side)
 
 ### 13A. Type Field Audit — ✅ SELESAI (session 11)
 
@@ -722,17 +722,9 @@ Agent must NOT guess or hardcode URLs. Wait for owner to provide.
 - id:1233 `vocab-teori` → `jac-gakka1` (single-match tt_sample.pdf)
 - id:1167, 1168, 1169, 1237 — `vocab-teori` RETAINED (cross-chapter confirmed, 2–3 PDFs each)
 
-### 13B. v87 Comparison — PENDING ⚠️ BLOCKED (context window)
+### 13B. v87 Comparison — ✅ SELESAI (owner-confirmed)
 
-Owner ingin tahu fitur apa yang ada di v87 tapi belum ada di versi baru.
-File ada di `legacy/ssw_flashcards_v87.jsx` di branch `main` (6000+ baris).
-
-**Instruksi untuk agent berikutnya:**
-1. Jangan baca seluruh file sekaligus
-2. Baca dulu hanya bagian mode registry / navigation (cari `modes`, `tabs`, `sections`)
-3. Bandingkan dengan `src/router/modes.js` yang ada 23 mode
-4. List mode yang ada di v87 tapi tidak ada di current app
-5. Laporkan ke owner sebelum mengerjakan apapun
+Comparison selesai dikerjakan di branch main oleh owner. Semua fitur gap sudah diidentifikasi.
 
 ---
 
@@ -777,6 +769,5 @@ vocab-general: 44  vocab-exam: 38  vocab-teori: 18  vocab-core: 13
 - ⚠️ W1 = breaking change: storage migration required at main-merge time
 
 **Tasks open (semua blocked):**
-1. [ ] v87 comparison — task di MAIN bukan content-dq; baca partial jangan full file (lihat §13B)
-2. [ ] PDF Viewer — tunggu URL JAC dari owner (BLOCKED)
-3. [ ] P21 (jac-doboku + jac-kenchiku) — tunggu PDF JAC (BLOCKED)
+1. [ ] PDF Viewer — tunggu URL JAC dari owner (BLOCKED)
+2. [ ] P21 (jac-doboku + jac-kenchiku) — tunggu PDF JAC (BLOCKED)

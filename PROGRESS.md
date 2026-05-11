@@ -265,6 +265,7 @@ Files: `DATA_QUALITY_HANDOFF_v16.md`, `SESSION_PROMPT.md`, `_MAP.md`, `PROGRESS.
 - [x] PROGRESS.md: header→session 17 ADM8; ADM8 entry added
 
 ## SELESAI (semua sesi sebelumnya)
+- ✅ v87 comparison — feature gap analysis selesai (owner-side, di main)
 - ✅ G1: App logic switch source→type-based (useTrackedCards, FilterPopup, FocusMode) — 655 vocab + 96 hukum now correctly filtered
 - ✅ G2: Source fix — id:1184 vocab-teori→vocab-supplementary, id:1233 vocab-teori→jac-gakka1 (PDF audit confirmed)
 - ✅ H9: ct01.js + ct02.js syntax errors fixed (orphaned duplicate opts lines removed)

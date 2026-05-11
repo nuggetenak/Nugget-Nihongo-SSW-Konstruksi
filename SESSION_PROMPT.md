@@ -47,8 +47,6 @@ Kalau owner ingin melanjutkan ke merge, langkah-langkahnya:
    - Di main: wiring STORAGE_VERSION bump + migration (v_current → v_next) required
    - Jangan lupa update wayground-sets.js di main agar ID-nya cocok
 
-3. v87 comparison (lihat §13B handoff) — ini task di MAIN, bukan content-dq
-
 ### Kalau owner punya task baru: tulis di sini sebelum sesi dimulai.
 
 ---
