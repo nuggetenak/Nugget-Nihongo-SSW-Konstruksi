@@ -1193,7 +1193,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 633,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "かんたん",
   jp: "管端《かんたん》",
   type: "vocab",
@@ -1260,7 +1260,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 641,
   category: "hoon",
-  source: "vocab-lifeline",
+  source: "jac-ch3",
   furi: "だんねつざい",
   jp: "断熱材《だんねつざい》",
   type: "vocab",
@@ -1271,7 +1271,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 642,
   category: "hoon",
-  source: "vocab-lifeline",
+  source: "jac-ch3",
   furi: "しーりんぐざい",
   jp: "シーリング材《しーりんぐざい》",
   type: "vocab",
@@ -1370,7 +1370,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 760,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch5",
   furi: "ひらく",
   jp: "開く《ひらく》",
   type: "vocab",
@@ -1426,7 +1426,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 880,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "かつざいのとふ",
   jp: "滑剤の塗布《かつざいのとふ》",
   type: "vocab",
@@ -1437,7 +1437,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 882,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ごむわのせっと",
   jp: "ゴム輪のセット《ごむわのせっと》",
   type: "vocab",
@@ -1448,7 +1448,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 883,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ごむわのいち",
   jp: "ゴム輪の位置《ごむわのいち》",
   type: "vocab",
@@ -1459,7 +1459,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 884,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ゆうちゃくじゅんび",
   jp: "融着準備《ゆうちゃくじゅんび》",
   type: "vocab",
@@ -1470,7 +1470,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 886,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "いーえふそけっと",
   jp: "EFソケット",
   type: "vocab",
@@ -1492,7 +1492,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 894,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "あんぐるふらんじ",
   jp: "アングルフランジ",
   type: "vocab",
@@ -1503,7 +1503,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 904,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "きゃっぷ",
   jp: "キャップ",
   type: "vocab",
@@ -1525,7 +1525,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 908,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "しんえんしゅうせい",
   jp: "真円修正《しんえんしゅうせい》",
   type: "vocab",
@@ -1536,7 +1536,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 909,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "かんかこう",
   jp: "管加工《かんかこう》",
   type: "vocab",
@@ -1580,7 +1580,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 947,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch5",
   furi: "かしつき",
   jp: "加湿器《かしつき》",
   type: "vocab",
@@ -1882,7 +1882,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 948,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "すぷりんくらーへっど",
   jp: "スプリンクラーヘッド",
   type: "vocab",
@@ -1893,7 +1893,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 949,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "かいほうがたすぷりんくらー",
   jp: "開放型スプリンクラー《かいほうがたすぷりんくらー》",
   type: "vocab",
@@ -1904,7 +1904,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 950,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "へいさがたすぷりんくらー",
   jp: "閉鎖型スプリンクラー《へいさがたすぷりんくらー》",
   type: "vocab",
@@ -1915,7 +1915,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 957,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch2",
   furi: "ひなんはしご",
   jp: "避難はしご《ひなんはしご》",
   type: "vocab",
@@ -1937,7 +1937,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 963,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しょうかぽんぷ",
   jp: "消火ポンプ《しょうかぽんぷ》",
   type: "vocab",
@@ -1948,7 +1948,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 966,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "はっしんき",
   jp: "発信機《はっしんき》",
   type: "vocab",
@@ -1959,7 +1959,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 967,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "じゅしんき",
   jp: "受信機《じゅしんき》",
   type: "vocab",
@@ -1970,7 +1970,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 970,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しょうぼうようすい",
   jp: "消防用水《しょうぼうようすい》",
   type: "vocab",
@@ -1992,7 +1992,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 976,
   category: "hoon",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "こうしつうれたんふぉーむ",
   jp: "硬質ウレタンフォーム《こうしつうれたんふぉーむ》",
   type: "vocab",
@@ -2014,7 +2014,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 979,
   category: "hoon",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "がいそうざい",
   jp: "外装材《がいそうざい》",
   type: "vocab",
@@ -2102,7 +2102,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1039,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "よびけい",
   jp: "呼び径《よびけい》",
   type: "vocab",
@@ -2113,7 +2113,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1040,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "きみつしけん",
   jp: "気密試験《きみつしけん》",
   type: "vocab",
@@ -2124,7 +2124,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1041,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "きゅうすいかん",
   jp: "給水管《きゅうすいかん》",
   type: "vocab",
@@ -2168,7 +2168,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1143,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しんくうぽんぷ",
   jp: "真空ポンプ《しんくうぽんぷ》",
   type: "vocab",
@@ -2214,7 +2214,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1190,
   category: "haikan",
-  source: "vocab-teori",
+  source: "jac-ch5",
   furi: "さどる",
   jp: "サドル",
   type: "vocab",
@@ -2225,7 +2225,7 @@ export const CARDS_LIFELINE_CH6 = [
 {
   id: 1191,
   category: "haikan",
-  source: "vocab-teori",
+  source: "jac-ch3",
   furi: "つぎて",
   jp: "継手《つぎて》",
   type: "vocab",

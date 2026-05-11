@@ -4943,7 +4943,7 @@ export const CARDS_LIFELINE = [
   {
   id: 633,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "かんたん",
   jp: "管端《かんたん》",
   type: "vocab",
@@ -5010,7 +5010,7 @@ export const CARDS_LIFELINE = [
   {
   id: 641,
   category: "hoon",
-  source: "vocab-lifeline",
+  source: "jac-ch3",
   furi: "だんねつざい",
   jp: "断熱材《だんねつざい》",
   type: "vocab",
@@ -5021,7 +5021,7 @@ export const CARDS_LIFELINE = [
   {
   id: 642,
   category: "hoon",
-  source: "vocab-lifeline",
+  source: "jac-ch3",
   furi: "しーりんぐざい",
   jp: "シーリング材《しーりんぐざい》",
   type: "vocab",
@@ -5087,7 +5087,7 @@ export const CARDS_LIFELINE = [
   {
   id: 686,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "jac-ch5",
   furi: "でんどうこうぐ",
   jp: "電動工具《でんどうこうぐ》",
   type: "vocab",
@@ -5186,7 +5186,7 @@ export const CARDS_LIFELINE = [
   {
   id: 760,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch5",
   furi: "ひらく",
   jp: "開く《ひらく》",
   type: "vocab",
@@ -5219,7 +5219,7 @@ export const CARDS_LIFELINE = [
   {
   id: 801,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "うめもどし",
   jp: "埋戻し《うめもどし》",
   type: "vocab",
@@ -5231,7 +5231,7 @@ export const CARDS_LIFELINE = [
   {
   id: 809,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "しほこう",
   jp: "支保工《しほこう》",
   type: "vocab",
@@ -5254,7 +5254,7 @@ export const CARDS_LIFELINE = [
   {
   id: 816,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch6",
   furi: "まいせつぶつ",
   jp: "埋設物《まいせつぶつ》",
   type: "vocab",
@@ -5265,7 +5265,7 @@ export const CARDS_LIFELINE = [
   {
   id: 817,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "たてこう",
   jp: "立坑《たてこう》",
   type: "vocab",
@@ -5421,7 +5421,7 @@ export const CARDS_LIFELINE = [
   {
   id: 880,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "かつざいのとふ",
   jp: "滑剤の塗布《かつざいのとふ》",
   type: "vocab",
@@ -5432,7 +5432,7 @@ export const CARDS_LIFELINE = [
   {
   id: 882,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ごむわのせっと",
   jp: "ゴム輪のセット《ごむわのせっと》",
   type: "vocab",
@@ -5443,7 +5443,7 @@ export const CARDS_LIFELINE = [
   {
   id: 883,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ごむわのいち",
   jp: "ゴム輪の位置《ごむわのいち》",
   type: "vocab",
@@ -5454,7 +5454,7 @@ export const CARDS_LIFELINE = [
   {
   id: 884,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ゆうちゃくじゅんび",
   jp: "融着準備《ゆうちゃくじゅんび》",
   type: "vocab",
@@ -5465,7 +5465,7 @@ export const CARDS_LIFELINE = [
   {
   id: 886,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "いーえふそけっと",
   jp: "EFソケット",
   type: "vocab",
@@ -5476,7 +5476,7 @@ export const CARDS_LIFELINE = [
   {
   id: 887,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "こんとろーら",
   jp: "コントローラ",
   type: "vocab",
@@ -5487,7 +5487,7 @@ export const CARDS_LIFELINE = [
   {
   id: 888,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "いんじけーた",
   jp: "インジケータ",
   type: "vocab",
@@ -5509,7 +5509,7 @@ export const CARDS_LIFELINE = [
   {
   id: 894,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "あんぐるふらんじ",
   jp: "アングルフランジ",
   type: "vocab",
@@ -5531,7 +5531,7 @@ export const CARDS_LIFELINE = [
   {
   id: 904,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "きゃっぷ",
   jp: "キャップ",
   type: "vocab",
@@ -5553,7 +5553,7 @@ export const CARDS_LIFELINE = [
   {
   id: 908,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "しんえんしゅうせい",
   jp: "真円修正《しんえんしゅうせい》",
   type: "vocab",
@@ -5564,7 +5564,7 @@ export const CARDS_LIFELINE = [
   {
   id: 909,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "かんかこう",
   jp: "管加工《かんかこう》",
   type: "vocab",
@@ -5630,7 +5630,7 @@ export const CARDS_LIFELINE = [
   {
   id: 946,
   category: "tsushin",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "ひかりケーブルちちゅうはいせん",
   jp: "光ケーブル地中配線《ひかりケーブルちちゅうはいせん》",
   type: "vocab",
@@ -5641,7 +5641,7 @@ export const CARDS_LIFELINE = [
   {
   id: 947,
   category: "haikan",
-  source: "vocab-lifeline",
+  source: "jac-ch5",
   furi: "かしつき",
   jp: "加湿器《かしつき》",
   type: "vocab",
@@ -5652,7 +5652,7 @@ export const CARDS_LIFELINE = [
   {
   id: 948,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "すぷりんくらーへっど",
   jp: "スプリンクラーヘッド",
   type: "vocab",
@@ -5663,7 +5663,7 @@ export const CARDS_LIFELINE = [
   {
   id: 949,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "かいほうがたすぷりんくらー",
   jp: "開放型スプリンクラー《かいほうがたすぷりんくらー》",
   type: "vocab",
@@ -5674,7 +5674,7 @@ export const CARDS_LIFELINE = [
   {
   id: 950,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "へいさがたすぷりんくらー",
   jp: "閉鎖型スプリンクラー《へいさがたすぷりんくらー》",
   type: "vocab",
@@ -5685,7 +5685,7 @@ export const CARDS_LIFELINE = [
   {
   id: 957,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch2",
   furi: "ひなんはしご",
   jp: "避難はしご《ひなんはしご》",
   type: "vocab",
@@ -5707,7 +5707,7 @@ export const CARDS_LIFELINE = [
   {
   id: 963,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しょうかぽんぷ",
   jp: "消火ポンプ《しょうかぽんぷ》",
   type: "vocab",
@@ -5718,7 +5718,7 @@ export const CARDS_LIFELINE = [
   {
   id: 966,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "はっしんき",
   jp: "発信機《はっしんき》",
   type: "vocab",
@@ -5729,7 +5729,7 @@ export const CARDS_LIFELINE = [
   {
   id: 967,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "じゅしんき",
   jp: "受信機《じゅしんき》",
   type: "vocab",
@@ -5740,7 +5740,7 @@ export const CARDS_LIFELINE = [
   {
   id: 970,
   category: "shoubou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しょうぼうようすい",
   jp: "消防用水《しょうぼうようすい》",
   type: "vocab",
@@ -5762,7 +5762,7 @@ export const CARDS_LIFELINE = [
   {
   id: 976,
   category: "hoon",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "こうしつうれたんふぉーむ",
   jp: "硬質ウレタンフォーム《こうしつうれたんふぉーむ》",
   type: "vocab",
@@ -5784,7 +5784,7 @@ export const CARDS_LIFELINE = [
   {
   id: 979,
   category: "hoon",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "がいそうざい",
   jp: "外装材《がいそうざい》",
   type: "vocab",
@@ -5839,7 +5839,7 @@ export const CARDS_LIFELINE = [
   {
   id: 998,
   category: "denki",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "ぶんでんばん",
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
@@ -5850,7 +5850,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1006,
   category: "denki",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "たんそう",
   jp: "単相《たんそう》",
   type: "vocab",
@@ -5861,7 +5861,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1008,
   category: "denki",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "きょようでんりゅう",
   jp: "許容電流《きょようでんりゅう》",
   type: "vocab",
@@ -5949,7 +5949,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1039,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "よびけい",
   jp: "呼び径《よびけい》",
   type: "vocab",
@@ -5960,7 +5960,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1040,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch6",
   furi: "きみつしけん",
   jp: "気密試験《きみつしけん》",
   type: "vocab",
@@ -5971,7 +5971,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1041,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "きゅうすいかん",
   jp: "給水管《きゅうすいかん》",
   type: "vocab",
@@ -6004,7 +6004,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1051,
   category: "tsushin",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "えすしーこねくた",
   jp: "SCコネクタ",
   type: "vocab",
@@ -6015,7 +6015,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1052,
   category: "tsushin",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "えるしーこねくた",
   jp: "LCコネクタ",
   type: "vocab",
@@ -6048,7 +6048,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1063,
   category: "tsushin",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "ほあんき",
   jp: "保安器《ほあんき》",
   type: "vocab",
@@ -6070,7 +6070,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1143,
   category: "haikan",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しんくうぽんぷ",
   jp: "真空ポンプ《しんくうぽんぷ》",
   type: "vocab",
@@ -6116,7 +6116,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1190,
   category: "haikan",
-  source: "vocab-teori",
+  source: "jac-ch5",
   furi: "さどる",
   jp: "サドル",
   type: "vocab",
@@ -6127,7 +6127,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1191,
   category: "haikan",
-  source: "vocab-teori",
+  source: "jac-ch3",
   furi: "つぎて",
   jp: "継手《つぎて》",
   type: "vocab",
@@ -6183,7 +6183,7 @@ export const CARDS_LIFELINE = [
   {
   id: 1196,
   category: "denki",
-  source: "vocab-teori",
+  source: "jac-ch6",
   furi: "でんねつせん",
   jp: "電熱線《でんねつせん》",
   type: "vocab",

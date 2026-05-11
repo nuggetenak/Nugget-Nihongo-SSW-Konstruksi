@@ -4,7 +4,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 801,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "うめもどし",
   jp: "埋戻し《うめもどし》",
   type: "vocab",
@@ -16,7 +16,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 809,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "しほこう",
   jp: "支保工《しほこう》",
   type: "vocab",
@@ -39,7 +39,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 816,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch6",
   furi: "まいせつぶつ",
   jp: "埋設物《まいせつぶつ》",
   type: "vocab",
@@ -50,7 +50,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 817,
   category: "haikan",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "たてこう",
   jp: "立坑《たてこう》",
   type: "vocab",

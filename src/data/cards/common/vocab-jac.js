@@ -50,7 +50,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 786,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "しつけ",
   jp: "しつけ",
   type: "vocab",
@@ -72,7 +72,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 788,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "ゆういせい",
   jp: "優位性《ゆういせい》",
   type: "vocab",
@@ -83,7 +83,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 789,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "くつう",
   jp: "苦痛《くつう》",
   type: "vocab",
@@ -105,7 +105,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 791,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "じぎょうぬし",
   jp: "事業主《じぎょうぬし》",
   type: "vocab",
@@ -116,7 +116,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 792,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "ししつ",
   jp: "資質《ししつ》",
   type: "vocab",
@@ -138,7 +138,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 794,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "さいていげん",
   jp: "最低限《さいていげん》",
   type: "vocab",
@@ -149,7 +149,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 795,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "けいげん",
   jp: "軽減《けいげん》",
   type: "vocab",
@@ -204,7 +204,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 800,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "じゅんびこうじ",
   jp: "準備工事《じゅんびこうじ》",
   type: "vocab",
@@ -215,7 +215,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 804,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch7",
   furi: "こうき",
   jp: "工期《こうき》",
   type: "vocab",
@@ -226,7 +226,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 805,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "おしど",
   jp: "押土《おしど》",
   type: "vocab",
@@ -272,7 +272,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 810,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch5",
   furi: "ようじょう",
   jp: "養生《ようじょう》",
   type: "vocab",
@@ -406,7 +406,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1199,
   category: "gaiyou",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "ありがとうございます",
   jp: "ありがとうございます",
   type: "vocab",
@@ -417,7 +417,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1206,
   category: "gaiyou",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "おさきにしつれいします",
   jp: "お先に失礼します《おさきにしつれいします》",
   type: "vocab",
@@ -509,7 +509,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1224,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "とどけで",
   jp: "届け出《とどけで》",
   type: "vocab",
@@ -533,7 +533,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1229,
   category: "career",
-  source: "vocab-jac",
+  source: "jac-ch2",
   furi: "ざんぎょう",
   jp: "残業《ざんぎょう》",
   type: "vocab",
@@ -545,7 +545,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1422,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "やりかた",
   jp: "遣り方《やりかた》",
   type: "vocab",
@@ -581,7 +581,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1425,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "だんきり",
   jp: "段切り《だんきり》",
   type: "vocab",
@@ -605,7 +605,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1427,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "しきならし",
   jp: "敷き均し《しきならし》",
   type: "vocab",
@@ -617,7 +617,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1431,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch3",
   furi: "やまどめ",
   jp: "山留め《やまどめ》",
   type: "vocab",
@@ -653,7 +653,7 @@ export const CARDS_VOCAB_JAC = [
 {
   id: 1434,
   category: "sekou",
-  source: "vocab-jac",
+  source: "jac-ch4",
   furi: "くぎじまい",
   jp: "釘仕舞《くぎじまい》",
   type: "vocab",

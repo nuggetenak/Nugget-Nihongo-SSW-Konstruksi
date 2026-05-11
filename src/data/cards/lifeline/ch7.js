@@ -389,7 +389,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 648,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "けつろ",
   jp: "結露《けつろ》",
   type: "vocab",
@@ -400,7 +400,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 650,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "jac-ch7",
   furi: "すいぶん",
   jp: "水分《すいぶん》",
   type: "vocab",
@@ -411,7 +411,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 651,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "jac-ch4",
   furi: "こしょう",
   jp: "故障《こしょう》",
   type: "vocab",
@@ -445,7 +445,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 656,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "jac-ch3",
   furi: "しんにゅう",
   jp: "侵入《しんにゅう》",
   type: "vocab",

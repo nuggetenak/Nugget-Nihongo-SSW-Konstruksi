@@ -184,3 +184,19 @@ Files: `src/data/cards/lifeline/ch5.js` (1), `src/data/cards/lifeline/ch6.js` (1
 - [x] 16 "external" text3l cards = synthesized terms dari ch3, tidak verbatim → tetap jac-ch3
 - [x] Replaced semua `source: "text3l"` → `source: "jac-ch3"` di 6 file
 - [x] Verify: 0 text3l remaining, jac-ch3 total = 131 (ch3.js) + 25 = 156 ✅
+
+### F2 — Single-match source trace relabel (120 cards)
+- [x] Trace 693 legacy cards against 7 cleaned PDFs (space-stripped, furigana-stripped)
+- [x] Result: 129 single_match | 183 multi_match | 369 external | 12 too_short
+- [x] Exclude 9 text3l cards already fixed in F1
+- [x] Relabel 120 remaining single-match → confirmed jac-chN
+  - jac-ch2: +24 | jac-ch3: +27 | jac-ch4: +10 | jac-ch5: +17 | jac-ch6: +29 | jac-ch7: +13
+- [x] Applied to 7 split files + cards-common.js + cards-lifeline.js + cards.js
+- [x] Verify: 0 errors, 120/120 changed
+
+jac-chN totals post-F1+F2:
+  jac-ch1:28 | jac-ch2:99 | jac-ch3:183 | jac-ch4:150 | jac-ch5:217 | jac-ch6:134 | jac-ch7:48
+
+Remaining legacy labels (548 cards):
+  vocab-supplementary(271) vocab-lifeline(113) vocab-jac(49) vocab-general(44) vocab-exam(38) vocab-teori(20) vocab-core(13)
+  ⚠️ OWNER DECISION NEEDED: 183 multi-match cards (term ada di 2-7 chapters) — relabel ke apa?

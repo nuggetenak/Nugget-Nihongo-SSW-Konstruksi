@@ -1536,7 +1536,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 691,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch7",
   furi: "ふじゅうぶん",
   jp: "不十分《ふじゅうぶん》",
   type: "vocab",
@@ -1547,7 +1547,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 692,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch7",
   furi: "ふそく",
   jp: "不足《ふそく》",
   type: "vocab",
@@ -1724,7 +1724,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 726,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch2",
   furi: "いってい",
   jp: "一定《いってい》",
   type: "vocab",
@@ -1746,7 +1746,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 735,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "あさい",
   jp: "浅い《あさい》",
   type: "vocab",
@@ -1779,7 +1779,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 748,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch5",
   furi: "ふとい",
   jp: "太い《ふとい》",
   type: "vocab",
@@ -1891,7 +1891,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 770,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch7",
   furi: "しようちゅう",
   jp: "使用中《しようちゅう》",
   type: "vocab",
@@ -1925,7 +1925,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 773,
   category: "career",
-  source: "vocab-lifeline",
+  source: "jac-ch6",
   furi: "のこる",
   jp: "残る《のこる》",
   type: "vocab",

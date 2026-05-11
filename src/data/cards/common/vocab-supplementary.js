@@ -1985,7 +1985,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 843,
   category: "sekou",
-  source: "vocab-core",
+  source: "jac-ch4",
   furi: "にげずみ",
   jp: "逃げ墨《にげずみ》",
   type: "vocab",
@@ -1996,7 +1996,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 844,
   category: "sekou",
-  source: "vocab-core",
+  source: "jac-ch4",
   furi: "じずみ",
   jp: "地墨《じずみ》",
   type: "vocab",
@@ -2076,7 +2076,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1076,
   category: "anzen",
-  source: "vocab-exam",
+  source: "jac-ch7",
   furi: "てすり",
   jp: "手すり《てすり》",
   type: "vocab",
@@ -2122,7 +2122,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1088,
   category: "anzen",
-  source: "vocab-exam",
+  source: "jac-ch7",
   furi: "あんぜんぱとろーる",
   jp: "安全パトロール《あんぜんぱとろーる》",
   type: "vocab",
@@ -2146,7 +2146,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1091,
   category: "anzen",
-  source: "vocab-exam",
+  source: "jac-ch7",
   furi: "ひらい・らっか",
   jp: "飛来《ひらい》・落下《らっか》",
   type: "vocab",
@@ -2179,7 +2179,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1094,
   category: "anzen",
-  source: "vocab-exam",
+  source: "jac-ch2",
   furi: "りすくあせすめんと",
   jp: "リスクアセスメント",
   type: "vocab",
@@ -2191,7 +2191,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1099,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しーとぱいる",
   jp: "シートパイル",
   type: "vocab",
@@ -2215,7 +2215,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1110,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "カーテンウォール",
   jp: "カーテンウォール",
   type: "vocab",
@@ -2226,7 +2226,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1111,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "サイディング",
   jp: "サイディング",
   type: "vocab",
@@ -2238,7 +2238,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1113,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "プライマー",
   jp: "プライマー",
   type: "vocab",
@@ -2250,7 +2250,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1120,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "いんぱくとどらいばー",
   jp: "インパクトドライバー",
   type: "vocab",
@@ -2262,7 +2262,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1121,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch5",
   furi: "ういんち",
   jp: "ウインチ",
   type: "vocab",
@@ -2298,7 +2298,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1139,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch7",
   furi: "ぼーるばん",
   jp: "ボール盤《ぼーるばん》",
   type: "vocab",
@@ -2345,7 +2345,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1164,
   category: "career",
-  source: "vocab-exam",
+  source: "jac-ch2",
   furi: "せこうたいせいだいちょう",
   jp: "施工体制台帳《せこうたいせいだいちょう》",
   type: "vocab",
@@ -2389,7 +2389,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1170,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "したうけ",
   jp: "下請け《したうけ》",
   type: "hukum",
@@ -2400,7 +2400,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1171,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "ろうどうきじゅんかんとくしょ",
   jp: "労働基準監督署《ろうどうきじゅんかんとくしょ》",
   type: "hukum",
@@ -2411,7 +2411,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1172,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "ゆうきゅうきゅうか",
   jp: "有給休暇《ゆうきゅうきゅうか》",
   type: "hukum",
@@ -2422,7 +2422,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1173,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "わりましちんぎん",
   jp: "割増賃金《わりましちんぎん》",
   type: "hukum",
@@ -2433,7 +2433,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1174,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "ばっそく",
   jp: "罰則《ばっそく》",
   type: "hukum",
@@ -2444,7 +2444,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1176,
   category: "anzen",
-  source: "vocab-teori",
+  source: "jac-ch7",
   furi: "さんだいさいがい",
   jp: "三大災害《さんだいさいがい》",
   type: "vocab",
@@ -2479,7 +2479,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1179,
   category: "anzen",
-  source: "vocab-teori",
+  source: "jac-ch7",
   furi: "たちいりきんし",
   jp: "立入禁止《たちいりきんし》",
   type: "vocab",
@@ -2513,7 +2513,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1182,
   category: "sekou",
-  source: "vocab-teori",
+  source: "jac-ch6",
   furi: "せこうけいかく",
   jp: "施工計画《せこうけいかく》",
   type: "vocab",
@@ -2536,7 +2536,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1232,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "とくていぎのう",
   jp: "特定技能《とくていぎのう》",
   type: "hukum",
@@ -2558,7 +2558,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1234,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "ざいりゅうしかく",
   jp: "在留資格《ざいりゅうしかく》",
   type: "hukum",
@@ -2569,7 +2569,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1235,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "ざいりゅうきかん",
   jp: "在留期間《ざいりゅうきかん》",
   type: "hukum",
@@ -2591,7 +2591,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1238,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "しゃかいほけん",
   jp: "社会保険《しゃかいほけん》",
   type: "hukum",
@@ -2602,7 +2602,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1239,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "けんこうほけん",
   jp: "健康保険《けんこうほけん》",
   type: "hukum",
@@ -2613,7 +2613,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1241,
   category: "hourei",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "こようほけん",
   jp: "雇用保険《こようほけん》",
   type: "hukum",
@@ -2636,7 +2636,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1244,
   category: "anzen",
-  source: "vocab-teori",
+  source: "jac-ch7",
   furi: "あんぜんぐつ",
   jp: "安全靴《あんぜんぐつ》",
   type: "vocab",
@@ -2660,7 +2660,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1248,
   category: "career",
-  source: "vocab-teori",
+  source: "jac-ch2",
   furi: "けんせつきゃりああっぷしすてむ",
   jp: "CCUS（建設キャリアアップシステム）",
   type: "vocab",
@@ -2708,7 +2708,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1436,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "あすふぁるとぼうすい",
   jp: "アスファルト防水《あすふぁるとぼうすい》",
   type: "vocab",
@@ -2720,7 +2720,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1437,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "しーとぼうすい",
   jp: "シート防水《しーとぼうすい》",
   type: "vocab",
@@ -2756,7 +2756,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1440,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "ぼうすいシート",
   jp: "防水シート《ぼうすいシート》",
   type: "vocab",
@@ -2792,7 +2792,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1443,
   category: "sekou",
-  source: "vocab-exam",
+  source: "jac-ch3",
   furi: "スタッド",
   jp: "スタッド",
   type: "vocab",
