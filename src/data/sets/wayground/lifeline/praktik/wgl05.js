@@ -1,6 +1,6 @@
-// wg5.js — Wayground Set: wg5
-export const SET_WG5 = {
-    id: "wg5", title: "Praktik Set 5 · 20qs", subtitle: "溶接・フレア・保冷 施工問題", emoji: "🔩", color: "#fbbf24", grad: "linear-gradient(135deg,#92400e,#b45309)", source: "wayground-quizizz",
+// wgl05.js — Wayground Set: wgl05
+export const SET_WGL05 = {
+    id: "wgl05", title: "Praktik Set 5 · 20qs", subtitle: "溶接・フレア・保冷 施工問題", emoji: "🔩", color: "#fbbf24", grad: "linear-gradient(135deg,#92400e,#b45309)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）を溶接《ようせつ》（ようせつ）する前（まえ）に最（もっと）も重要（じゅうよう）な確認《かくにん》（かくにん）はどれですか？", hint: "Pemeriksaan paling penting sebelum mengelas pipa?", opts: ["接合《せつごう》部（せつごうぶ）の清掃《せいそう》（せいそう）", "配管《はいかん》（はいかん）の色（いろ）", "配管《はいかん》（はいかん）の材質（ざいしつ）"], opts_id: ["Bersihkan bagian sambungan", "Warna pipa", "Jenis material pipa"], ans: 0, exp: "Sebelum las → 接合部の清掃（bersihkan sambungan）agar las sempurna." },

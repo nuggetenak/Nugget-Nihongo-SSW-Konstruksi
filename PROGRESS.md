@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-11 (session 11: Opsi A — type-based filtering + source fix 2 hukum cards)
+**Last updated:** 2026-05-11 (session 12: W1 wayground taxonomy restructure)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v16.md`
 
 ---
@@ -159,6 +159,29 @@ Files: `src/data/cards/common/**/*.js` + `src/data/cards/lifeline/**/*.js`
 - **Blocked:** belum ada PDF source material
 - **Schema:** gunakan unified question schema (`q`, `hint`, `opts`, `opts_id`, `ans`, `img`, `exp`) — `img: null` semua dulu
 - **ID format:** doboku → `dt{n}_q{nn}`, kenchiku → `kt{n}_q{nn}`
+
+---
+
+---
+
+## BATCH W — Wayground taxonomy restructure (session 12)
+
+### W1 — Wayground set rename + folder restructure ✅
+Files: `src/data/sets/wayground/**`
+- [x] Create folder structure: teori/, vocab/, lifeline/praktik/, lifeline/vocab/
+- [x] wt01–wt10: teori drills (common, shared) → `teori/`
+- [x] wtv01: common vocab → `vocab/`
+- [x] wgl01–wgl05: lifeline praktik quizizz (ex wg1–wg5) → `lifeline/praktik/`
+- [x] wgl06–wgl10: lifeline praktik original (ex wp1–wp5) → `lifeline/praktik/`
+- [x] wglv01–wglv05: lifeline vocab (ex wg6–wg9,wg11) → `lifeline/vocab/`
+- [x] All set-level `id:` fields and `export const` names updated
+- [x] Comment headers updated to new IDs
+- [x] Zero old flat files remaining in wayground root
+- [x] No app-code references to old IDs found (monolithic wayground-sets.js = legacy, untouched)
+- **Future slots:** wtv02–wtv10, wglv06–wglv10, wgl11+ reserved for expansion
+- **Doboku future:** `doboku/praktik/wgd01–...`, `doboku/vocab/wgdv01–...`
+- **Kenchiku future:** `kenchiku/praktik/wgk01–...`, `kenchiku/vocab/wgkv01–...`
+- **Storage note:** Set ID rename = breaking change. Storage migration (v5→v6) required at main-merge time.
 
 ---
 

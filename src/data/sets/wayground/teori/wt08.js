@@ -1,6 +1,6 @@
-// wt8.js — Wayground Set: wt8
-export const SET_WT8 = {
-    id: "wt8", title: "Teori Set 8 · 20qs", subtitle: "施工技術・資格・建設材料",
+// wt08.js — Wayground Set: wt08
+export const SET_WT08 = {
+    id: "wt08", title: "Teori Set 8 · 20qs", subtitle: "施工技術・資格・建設材料",
     track: "common",
     emoji: "🏛️", color: "#a3e635", grad: "linear-gradient(135deg,#1a2e05,#4d7c0f)",
     source: "wayground-jac",

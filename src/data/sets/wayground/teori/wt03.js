@@ -1,6 +1,6 @@
-// wt3.js — Wayground Set: wt3
-export const SET_WT3 = {
-    id: "wt3", title: "Teori Set 3 · 20qs", subtitle: "労働基準法・雇用・36協定",
+// wt03.js — Wayground Set: wt03
+export const SET_WT03 = {
+    id: "wt03", title: "Teori Set 3 · 20qs", subtitle: "労働基準法・雇用・36協定",
     track: "common",
     emoji: "⚖️", color: "#eab308", grad: "linear-gradient(135deg,#713f12,#ca8a04)",
     source: "wayground-teori",

@@ -1,6 +1,6 @@
-// wg3.js — Wayground Set: wg3
-export const SET_WG3 = {
-    id: "wg3", title: "Praktik Set 3 · 20qs", subtitle: "保温・配管《はいかん》・電気 応用問題", emoji: "⚡", color: "#f472b6", grad: "linear-gradient(135deg,#9d174d,#be185d)", source: "wayground-quizizz",
+// wgl03.js — Wayground Set: wgl03
+export const SET_WGL03 = {
+    id: "wgl03", title: "Praktik Set 3 · 20qs", subtitle: "保温・配管《はいかん》・電気 応用問題", emoji: "⚡", color: "#f472b6", grad: "linear-gradient(135deg,#9d174d,#be185d)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）に保温材《ほおんざい》（ほおんざい）を取（と）り付（つ）けた後（あと）、外装（がいそう）に小（ちい）さな穴（あな）が空（あ）いている場合《ばあい》（ばあい）、正（ただ）しい対応《たいおう》（たいおう）はどれですか？", hint: "Jika ada lubang kecil pada jacketing setelah insulasi?", opts: ["外装（がいそう）を全（ぜん）て交換《こうかん》（こうかん）する", "穴（あな）をテープで補修（ほしゅう）する", "放置《ほうち》（ほうち）して次（つぎ）の作業《さぎょう》（さぎょう）に進（すす）む"], opts_id: ["Ganti seluruh jacketing", "Tambal dengan selotip", "Biarkan, lanjut kerja"], ans: 0, exp: "Lubang kecil pun → air masuk & rusak insulasi → 外装を全て交換する." },

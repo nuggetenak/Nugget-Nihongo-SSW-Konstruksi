@@ -1,6 +1,6 @@
-// wt9.js — Wayground Set: wt9
-export const SET_WT9 = {
-    id: "wt9", title: "Teori Set 9 · 20qs", subtitle: "職場ルール・5S詳細・労働環境",
+// wt09.js — Wayground Set: wt09
+export const SET_WT09 = {
+    id: "wt09", title: "Teori Set 9 · 20qs", subtitle: "職場ルール・5S詳細・労働環境",
     track: "common",
     emoji: "🏢", color: "#e879f9", grad: "linear-gradient(135deg,#4a044e,#a21caf)",
     source: "wayground-jac",

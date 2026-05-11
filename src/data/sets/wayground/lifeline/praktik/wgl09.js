@@ -1,6 +1,6 @@
-// wp4.js — Wayground Set: wp4
-export const SET_WP4 = {
-    id: "wp4", title: "Praktik Set 4 · 20qs", subtitle: "溶接・フランジ・配管加工 実技",
+// wgl09.js — Wayground Set: wgl09
+export const SET_WGL09 = {
+    id: "wgl09", title: "Praktik Set 4 · 20qs", subtitle: "溶接・フランジ・配管加工 実技",
     track: "lifeline",
     emoji: "⚙️", color: "#c084fc", grad: "linear-gradient(135deg,#2e1065,#7c3aed)",
     source: "wayground-jac",

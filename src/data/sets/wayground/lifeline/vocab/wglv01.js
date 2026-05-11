@@ -1,6 +1,6 @@
-// wg6.js — Wayground Set: wg6
-export const SET_WG6 = {
-    id: "wg6", title: "Vocab Set 1 · 50qs", subtitle: "Kosakata peralatan & pipa 設備《せつび》", emoji: "📖", color: "#60a5fa", grad: "linear-gradient(135deg,#1e40af,#0369a1)", source: "wayground-quizizz",
+// wglv01.js — Wayground Set: wglv01
+export const SET_WGLV01 = {
+    id: "wglv01", title: "Vocab Set 1 · 50qs", subtitle: "Kosakata peralatan & pipa 設備《せつび》", emoji: "📖", color: "#60a5fa", grad: "linear-gradient(135deg,#1e40af,#0369a1)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "Apa arti dari \"pipa air panas\"?", hint: "温=panas/hangat, 水=air, 管=pipa — fokus pada suhu air", opts: ["温水管（おんすいかん）", "給水《きゅうすい》管（きゅうすいかん）", "排水《はいすい》管（はいすいかん）"], opts_id: ["Pipa air panas", "Pipa suplai air", "Pipa pembuangan"], ans: 0, exp: "温水管（おんすいかん）= pipa air panas." },

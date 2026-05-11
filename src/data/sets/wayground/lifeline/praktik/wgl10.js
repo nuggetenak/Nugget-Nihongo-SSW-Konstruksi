@@ -1,6 +1,6 @@
-// wp5.js — Wayground Set: wp5
-export const SET_WP5 = {
-    id: "wp5", title: "Praktik Set 5 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "wayground-quizizz",
+// wgl10.js — Wayground Set: wgl10
+export const SET_WGL10 = {
+    id: "wgl10", title: "Praktik Set 5 · 20qs", subtitle: "第5章 電気設備 穴埋め問題", emoji: "⚡", color: "#facc15", grad: "linear-gradient(135deg,#713f12,#a16207)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "天井《てんじょう》裏（てんじょううら）に電線《でんせん》（でんせん）を通（とお）すときは、＿＿が必要《ひつよう》（ひつよう）です。", hint: "Untuk memasang kabel di atas langit-langit, diperlukan...", opts: ["カッター", "脚立《きゃたつ》（きゃたつ）", "ハンマー"], opts_id: ["Cutter", "Tangga lipat", "Palu"], ans: 1, exp: "脚立（tangga lipat）diperlukan untuk menjangkau langit-langit." },

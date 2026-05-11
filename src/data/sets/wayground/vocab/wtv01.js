@@ -1,6 +1,6 @@
-// wg12.js — Wayground Set: wg12
-export const SET_WG12 = {
-    id: "wg12", title: "Vocab Teori Set 1 · 22qs", subtitle: "学科キーワード 法規・安全《あんぜん》・施工管理",
+// wtv01.js — Wayground Set: wtv01
+export const SET_WTV01 = {
+    id: "wtv01", title: "Vocab Teori Set 1 · 22qs", subtitle: "学科キーワード 法規・安全《あんぜん》・施工管理",
     track: "common",
     emoji: "📋", color: "#dc2626", grad: "linear-gradient(135deg,#7f1d1d,#b91c1c)",
     source: "wayground-vocab",

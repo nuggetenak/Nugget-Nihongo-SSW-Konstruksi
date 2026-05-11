@@ -1,6 +1,6 @@
-// wt1.js — Wayground Set: wt1
-export const SET_WT1 = {
-    id: "wt1", title: "Teori Set 1 · 19qs", subtitle: "安全管理 KY・5S・指差呼称",
+// wt01.js — Wayground Set: wt01
+export const SET_WT01 = {
+    id: "wt01", title: "Teori Set 1 · 19qs", subtitle: "安全管理 KY・5S・指差呼称",
     track: "common",
     emoji: "🎯", color: "#f97316", grad: "linear-gradient(135deg,#9a3412,#ea580c)",
     source: "wayground-teori",

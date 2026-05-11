@@ -1,6 +1,6 @@
-// wt6.js — Wayground Set: wt6
-export const SET_WT6 = {
-    id: "wt6", title: "Teori Set 6 · 20qs", subtitle: "総合ファイナル 頻出問題",
+// wt06.js — Wayground Set: wt06
+export const SET_WT06 = {
+    id: "wt06", title: "Teori Set 6 · 20qs", subtitle: "総合ファイナル 頻出問題",
     track: "common",
     emoji: "🏆", color: "#ec4899", grad: "linear-gradient(135deg,#831843,#db2777)",
     source: "wayground-teori",

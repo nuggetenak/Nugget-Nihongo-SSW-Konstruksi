@@ -1,6 +1,6 @@
-// wp3.js — Wayground Set: wp3
-export const SET_WP3 = {
-    id: "wp3", title: "Praktik Set 3 · 20qs", subtitle: "冷媒配管・保温材・断熱材 実技",
+// wgl08.js — Wayground Set: wgl08
+export const SET_WGL08 = {
+    id: "wgl08", title: "Praktik Set 3 · 20qs", subtitle: "冷媒配管・保温材・断熱材 実技",
     track: "lifeline",
     emoji: "🌡️", color: "#fb923c", grad: "linear-gradient(135deg,#431407,#c2410c)",
     source: "wayground-jac",

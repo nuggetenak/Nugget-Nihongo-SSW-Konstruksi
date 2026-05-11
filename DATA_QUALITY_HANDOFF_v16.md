@@ -232,12 +232,38 @@ Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
 | `wp1`–`wp5` | Praktik Set 1–5 | | 20 each | 100 total |
 | **Total wg+wp** | | | **458** | |
 
-**Grand total: 657 qs across 26 files**
-> No `wg10` — was renamed to `wp5`. No `wg12` is excluded from grand total reassignment pending H10 fix.
+**Grand total: 657 qs across 26 files** (unchanged)
+> No `wg10` — was renamed to `wp5` (pre-session 12). All sets renamed and reorganized per W1 — see §3A.
 
-> ~~**`wg12` track bug**~~ **FIXED (H10):** `track` corrected to `"common"`. Content is 学科 keywords, not lifeline-specific.
+> ~~**`wg12` track bug**~~ **FIXED (H10):** `track` corrected to `"common"`. Content is 学科 keywords, not lifeline-specific. **Renamed (W1):** `wg12` → `wtv01`.
 
 > **`wg6`–`wg11` short `exp` fields** are intentional vocab-recognition format — do NOT expand.
+
+### 3A. Wayground Taxonomy (post-W1 — canonical)
+
+Folder structure under `src/data/sets/wayground/`:
+
+| Folder | IDs | Track | Notes |
+|---|---|---|---|
+| `teori/` | wt01–wt10 | common | Shared all tracks |
+| `vocab/` | wtv01–... | common | Shared all tracks |
+| `lifeline/praktik/` | wgl01–wgl10 | lifeline | wgl01–05 quizizz, wgl06–10 original |
+| `lifeline/vocab/` | wglv01–wglv05 | lifeline | |
+| `doboku/praktik/` | wgd01–... | doboku | future |
+| `doboku/vocab/` | wgdv01–... | doboku | future |
+| `kenchiku/praktik/` | wgk01–... | kenchiku | future |
+| `kenchiku/vocab/` | wgkv01–... | kenchiku | future |
+
+**W1 ID rename map:**
+| Old | New | Category |
+|---|---|---|
+| wt1–wt10 | wt01–wt10 | Teori common |
+| wg12 | wtv01 | Vocab common |
+| wg1–wg5 | wgl01–wgl05 | Lifeline praktik (quizizz) |
+| wp1–wp5 | wgl06–wgl10 | Lifeline praktik (original) |
+| wg6–wg9, wg11 | wglv01–wglv05 | Lifeline vocab |
+
+**Storage note:** Set ID rename = STORAGE_VERSION 5→6 migration required at main-merge time.
 
 ---
 

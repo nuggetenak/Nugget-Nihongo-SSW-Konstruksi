@@ -1,6 +1,6 @@
-// wg4.js — Wayground Set: wg4
-export const SET_WG4 = {
-    id: "wg4", title: "Praktik Set 4 · 20qs", subtitle: "配管《はいかん》・保温・電気 施工問題", emoji: "🛠️", color: "#34d399", grad: "linear-gradient(135deg,#065f46,#047857)", source: "wayground-quizizz",
+// wgl04.js — Wayground Set: wgl04
+export const SET_WGL04 = {
+    id: "wgl04", title: "Praktik Set 4 · 20qs", subtitle: "配管《はいかん》・保温・電気 施工問題", emoji: "🛠️", color: "#34d399", grad: "linear-gradient(135deg,#065f46,#047857)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "配管《はいかん》（はいかん）を壁（かべ）に固定《こてい》（こてい）するための部品（ぶひん）は何（なん）ですか？", hint: "Komponen untuk fiksasi pipa ke dinding?", opts: ["サドル", "バルブ", "ガスケット"], opts_id: ["Saddle (penyangga)", "Valve / katup", "Gasket"], ans: 0, exp: "サドル（saddle）= bracket pelana untuk mengikat pipa ke dinding." },

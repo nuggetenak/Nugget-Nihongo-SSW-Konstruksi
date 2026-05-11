@@ -1,6 +1,6 @@
-// wt4.js — Wayground Set: wt4
-export const SET_WT4 = {
-    id: "wt4", title: "Teori Set 4 · 20qs", subtitle: "建設業法・環境法・水道法・消防法",
+// wt04.js — Wayground Set: wt04
+export const SET_WT04 = {
+    id: "wt04", title: "Teori Set 4 · 20qs", subtitle: "建設業法・環境法・水道法・消防法",
     track: "common",
     emoji: "📜", color: "#22c55e", grad: "linear-gradient(135deg,#14532d,#16a34a)",
     source: "wayground-teori",

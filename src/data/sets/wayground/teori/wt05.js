@@ -1,6 +1,6 @@
-// wt5.js — Wayground Set: wt5
-export const SET_WT5 = {
-    id: "wt5", title: "Teori Set 5 · 20qs", subtitle: "施工管理・構造・役割《やくわり》・CCUS",
+// wt05.js — Wayground Set: wt05
+export const SET_WT05 = {
+    id: "wt05", title: "Teori Set 5 · 20qs", subtitle: "施工管理・構造・役割《やくわり》・CCUS",
     track: "common",
     emoji: "🏗️", color: "#818cf8", grad: "linear-gradient(135deg,#312e81,#4f46e5)",
     source: "wayground-teori",

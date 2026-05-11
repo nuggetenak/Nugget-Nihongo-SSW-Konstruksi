@@ -1,6 +1,6 @@
-// wg1.js — Wayground Set: wg1
-export const SET_WG1 = {
-    id: "wg1",
+// wgl01.js — Wayground Set: wgl01
+export const SET_WGL01 = {
+    id: "wgl01",
     track: "lifeline",
     title: "Praktik Set 1 · 20qs",
     subtitle: "配管《はいかん》・保温・電気設備 実技問題",

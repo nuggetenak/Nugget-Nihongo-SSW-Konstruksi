@@ -1,6 +1,6 @@
-// wt2.js — Wayground Set: wt2
-export const SET_WT2 = {
-    id: "wt2", title: "Teori Set 2 · 20qs", subtitle: "三大災害・PPE・LOTO・酸素欠乏",
+// wt02.js — Wayground Set: wt02
+export const SET_WT02 = {
+    id: "wt02", title: "Teori Set 2 · 20qs", subtitle: "三大災害・PPE・LOTO・酸素欠乏",
     track: "common",
     emoji: "⚠️", color: "#ef4444", grad: "linear-gradient(135deg,#7f1d1d,#dc2626)",
     source: "wayground-teori",

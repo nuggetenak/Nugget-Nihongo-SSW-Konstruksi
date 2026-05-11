@@ -1,6 +1,6 @@
-// wg2.js — Wayground Set: wg2
-export const SET_WG2 = {
-    id: "wg2", title: "Praktik Set 2 · 20qs", subtitle: "配管《はいかん》・断熱・配線 実技問題", emoji: "🔌", color: "#818cf8", grad: "linear-gradient(135deg,#3730a3,#6d28d9)", source: "wayground-quizizz",
+// wgl02.js — Wayground Set: wgl02
+export const SET_WGL02 = {
+    id: "wgl02", title: "Praktik Set 2 · 20qs", subtitle: "配管《はいかん》・断熱・配線 実技問題", emoji: "🔌", color: "#818cf8", grad: "linear-gradient(135deg,#3730a3,#6d28d9)", source: "wayground-quizizz",
     track: "lifeline",
     questions: [
     { id: 1, q: "高温《こうおん》（こうおん）配管《はいかん》（はいかん）に断熱《だんねつ》材《だんねつざい》（だんねつざい）を施工《せこう》（せこう）する主（おも）な目的《もくてき》（もくてき）は何（なん）ですか？", hint: "Tujuan utama memasang insulasi termal pada pipa suhu tinggi adalah...", opts: ["作業員《さぎょういん》（さぎょういん）の安全《あんぜん》（あんぜん）確保《かくほ》（かくほ）", "流量（りゅうりょう）の増加（ぞうか）", "配管《はいかん》（はいかん）の色（いろ）維持《いじ》（いじ）"], opts_id: ["Menjamin keselamatan pekerja dari panas", "Meningkatkan debit aliran", "Menjaga warna pipa tetap sama"], ans: 0, exp: "Pipa suhu tinggi bisa menyebabkan luka bakar → insulasi 断熱材 melindungi 作業員の安全." },

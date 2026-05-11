@@ -1,6 +1,6 @@
-// wg11.js — Wayground Set: wg11
-export const SET_WG11 = {
-    id: "wg11", title: "Vocab Set 5 · 50qs", subtitle: "Kosakata ライフライン言葉第5章",
+// wglv05.js — Wayground Set: wglv05
+export const SET_WGLV05 = {
+    id: "wglv05", title: "Vocab Set 5 · 50qs", subtitle: "Kosakata ライフライン言葉第5章",
     track: "lifeline",
     emoji: "🔧", color: "#f472b6", grad: "linear-gradient(135deg,#831843,#db2777)",
     source: "wayground-pdf11",

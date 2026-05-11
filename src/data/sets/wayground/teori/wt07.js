@@ -1,6 +1,6 @@
-// wt7.js — Wayground Set: wt7
-export const SET_WT7 = {
-    id: "wt7", title: "Teori Set 7 · 20qs", subtitle: "現場安全・リスク・コミュニケーション",
+// wt07.js — Wayground Set: wt07
+export const SET_WT07 = {
+    id: "wt07", title: "Teori Set 7 · 20qs", subtitle: "現場安全・リスク・コミュニケーション",
     track: "common",
     emoji: "🗣️", color: "#22d3ee", grad: "linear-gradient(135deg,#164e63,#0891b2)",
     source: "wayground-jac",

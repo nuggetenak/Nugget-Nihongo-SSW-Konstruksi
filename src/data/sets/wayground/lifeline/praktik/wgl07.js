@@ -1,6 +1,6 @@
-// wp2.js — Wayground Set: wp2
-export const SET_WP2 = {
-    id: "wp2", title: "Praktik Set 2 · 20qs", subtitle: "安全装備・圧力試験・施工基準 実技",
+// wgl07.js — Wayground Set: wgl07
+export const SET_WGL07 = {
+    id: "wgl07", title: "Praktik Set 2 · 20qs", subtitle: "安全装備・圧力試験・施工基準 実技",
     track: "lifeline",
     emoji: "🛡️", color: "#4ade80", grad: "linear-gradient(135deg,#052e16,#15803d)",
     source: "wayground-jac",
