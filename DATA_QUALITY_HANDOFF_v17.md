@@ -3,7 +3,7 @@
 **Supersedes:** v1–v16 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `740ed0a` (DOCS: ADM10 — consolidated spec, HANDOFF v17, PROGRESS compacted)
+**Last commit:** `a9f9c94` (DOCS: ADM11 — recheck fixes)
 **Spec:** `docs/CARD_CONTENT_SPEC.md` — canonical schema, ruby rules, taxonomy, DQ task list
 
 ---
@@ -66,7 +66,7 @@ Quote style: single-quote canonical. Source field values: unchanged — see §12
   source,       // 'jac-ch1' etc
   furi,         // DEPRECATED — drop at merge time
   jp,           // Japanese term with 《》 ruby
-  type,         // 'konsep' | 'hukum' | 'vocab'
+  type,         // 'konsep' | 'vocab' | 'hukum'
   id_text,      // Indonesian translation — frasa nominal
   desc,         // Indonesian explanation — wajib ending punct
   usage,        // [vocab only, optional] usage example sentence
@@ -152,7 +152,7 @@ Do NOT maintain furi. Fix jp ruby (P1) first, then drop furi at merge time (P12)
 
 ## PART 3 — WAYGROUND SETS (post-W1)
 
-26 files, 657 total qs. See v16 §3 for full set list — unchanged.
+26 files, 657 total qs. Full set list in `docs/CARD_CONTENT_SPEC.md` §5.5.
 
 **wglv01–05 current state (pre-P16 split):**
 | File | Total | ID→JP | JP→ID |
@@ -341,4 +341,4 @@ See `docs/CARD_CONTENT_SPEC.md` §12 OD-1 for pending owner decision on reclassi
 | OD-3 | P17, P8a item 2 | jac-mockup rename: sekarang atau saat merge? |
 | OD-4 | P10 | wglv02/03 hint: update ke ID clue atau keep? |
 | OD-5 | P12 | SSW Flashcards repo: pakai `card.furi` field? |
-| — | P21 | Doboku/kenchiku source naming convention (A/B/C — see §0E v16) |
+| — | P21 | Doboku/kenchiku source naming convention — see `docs/CARD_CONTENT_SPEC.md` §5.3 note |

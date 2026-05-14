@@ -759,7 +759,7 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 
 *Dependency order: P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → P8b → P10 → P11 → P6⚠️ → P12(merge) → P13 → P14 → P15*
 
-> **Note untuk agent:** P16 dan P17 tercantum di bagian bawah §8 ini karena blocked oleh OD-2/OD-3, tapi dalam urutan eksekusi mereka harus selesai **sebelum** P8a item 2 (P17) dan P8b/P10/P11 (P16). Ikuti dependency order di atas, bukan urutan fisik dalam dokumen ini.
+> **Note untuk agent:** (1) P16 dan P17 tercantum di bagian bawah §8 ini karena blocked oleh OD-2/OD-3, tapi dalam urutan eksekusi mereka harus selesai **sebelum** P8a item 2 (P17) dan P8b/P10/P11 (P16). (2) P6 tercantum antara P5 dan P7 secara numerik, tapi dalam urutan eksekusi P6 datang **setelah P11** dan hanya jika OD-1 sudah dikonfirmasi. Ikuti dependency order di atas, bukan urutan fisik dalam dokumen ini.
 
 ### P0 — 🔴 BLOCKING
 - [ ] Fix encoding corrupt id=476, 773 (`cards/lifeline/ch6.js`)

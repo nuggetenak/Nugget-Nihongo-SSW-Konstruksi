@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-14 — ADM10: consolidated spec committed, DQ tasks discovered, admin sync
+> **Last updated:** 2026-05-14 — ADM11: recheck fixes (commit hash, P8a prereq note, §8 ordering warning)
 > **Version:** v4.22.0 · **Status:** content-dq DQ ACTIVE — see PROGRESS.md
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
 > **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list
@@ -231,6 +231,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM11 — recheck: commit hash a9f9c94, P8a prereq note, SPEC §8 dependency order warning for P16/P17 |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM10 — CARD_CONTENT_SPEC consolidated (v1.0–v1.6 + DATA_ARCH_AUDIT merged), DATA_QUALITY_HANDOFF v16→v17, PROGRESS.md compacted, SESSION_PROMPT/\_MAP updated, docs/ created |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM9 — mark v87 comparison done (owner-confirmed), remove from blocked list |
 | 2026-05-12 | content-dq | Sonnet 4.6: ADM8 commit hash sync — ADM7 self-reference fix (3a199f1→e0e689b), session 16→17, ADM1–ADM7→ADM1–ADM8 |
