@@ -2228,7 +2228,7 @@ export const CARDS_COMMON = [
   category: "anzen",
   source: "jac-ch5",
   furi: "かはんしきさぎょうだい《のびうま》",
-  jp: "可搬式作業台《かはんしきさぎょうだい《のびうま》》（伸び馬）",
+  jp: "可搬式作業台《かはんしきさぎょうだい》（伸び馬《のびうま》）",
   type: "konsep",
   id_text: "Meja kerja portabel kaki",
   desc: "Platform kerja 2 kaki yang panjangnya bisa disesuaikan, dilengkapi railing (手《て》すり).",
