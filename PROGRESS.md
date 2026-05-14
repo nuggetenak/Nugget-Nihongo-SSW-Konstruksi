@@ -109,7 +109,7 @@ Files: `src/data/sets/csv/` → `src/data/sets/jac-mockup/`
 
 ---
 
-### P8a — Ruby: standard question sets *(P7 + P17 dulu)*
+### P8a — Ruby: standard question sets *(P7 dulu; P17 dulu untuk item 2)*
 Priority: JAC → jac-mockup → wt/wgl → quiz → wtv
 - [ ] `sets/jac/`: 95 naked `q` + naked `exp`/`hint`
 - [ ] `sets/jac-mockup/` (ex-csv): ~56 naked `q` + ~164 naked `exp`

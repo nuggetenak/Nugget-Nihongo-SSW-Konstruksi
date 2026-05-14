@@ -11,7 +11,7 @@ git clone -b content-dq https://[token]@github.com/nuggetenak/Nugget-Nihongo-SSW
 
 Baca DATA_QUALITY_HANDOFF_v17.md dan PROGRESS.md sebelum apapun.
 Canonical spec ada di docs/CARD_CONTENT_SPEC.md.
-Last commit: d2ca97d
+Last commit: 740ed0a
 
 Tujuan branch content-dq: data hygiene, housekeeping, accuracy — sampai
 semua 1,443 cards dan 1,142 soal 100% akurat dan bersih.

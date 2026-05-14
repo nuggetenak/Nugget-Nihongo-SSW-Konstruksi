@@ -757,7 +757,9 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 
 ## 8. DQ TASK LIST
 
-*Dependency order: P0 → P1/P2/P3 → P4/P5 → P9 → P7 → P16 → P17 → P8a → P8b → P10 → P11 → P6⚠️ → P12(merge) → P13 → P14 → P15*
+*Dependency order: P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → P8b → P10 → P11 → P6⚠️ → P12(merge) → P13 → P14 → P15*
+
+> **Note untuk agent:** P16 dan P17 tercantum di bagian bawah §8 ini karena blocked oleh OD-2/OD-3, tapi dalam urutan eksekusi mereka harus selesai **sebelum** P8a item 2 (P17) dan P8b/P10/P11 (P16). Ikuti dependency order di atas, bukan urutan fisik dalam dokumen ini.
 
 ### P0 — 🔴 BLOCKING
 - [ ] Fix encoding corrupt id=476, 773 (`cards/lifeline/ch6.js`)
@@ -802,7 +804,7 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 - [ ] `sets/jac/jac-teori.js`: 8 exp berakhir `\'` → complete/fix
 - [ ] `sets/jac/jac-lifeline.js`: 4 exp berakhir `\'` → complete/fix
 
-### P8a — Ruby: standard question sets
+### P8a — Ruby: standard question sets *(P7 dulu; P17 dulu untuk item 2)*
 Priority:
 1. JAC teori + lifeline: 95 naked `q` (100%)
 2. jac-mockup `q` dan `exp`: ~220

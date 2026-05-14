@@ -3,7 +3,7 @@
 **Supersedes:** v1–v16 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `d2ca97d` (DOCS: ADM9 — mark v87 comparison done)
+**Last commit:** `740ed0a` (DOCS: ADM10 — consolidated spec, HANDOFF v17, PROGRESS compacted)
 **Spec:** `docs/CARD_CONTENT_SPEC.md` — canonical schema, ruby rules, taxonomy, DQ task list
 
 ---
