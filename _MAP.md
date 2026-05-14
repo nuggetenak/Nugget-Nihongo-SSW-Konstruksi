@@ -1,6 +1,6 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-14 — ADM11: recheck fixes (commit hash, P8a prereq note, §8 ordering warning)
+> **Last updated:** 2026-05-14 — ADM13: last pass — file path fixes (C1/C2), C2 table row 619, OD-4, hash sync
 > **Version:** v4.22.0 · **Status:** content-dq DQ ACTIVE — see PROGRESS.md
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
 > **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list
@@ -231,6 +231,8 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM13 — last pass: C1 file path (773→vocab-supplementary), C2 table row 619 added, SESSION_PROMPT OD-4, hash sync 319f2c8 |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM12 — recheck2: hash 319f2c8, type enum order, dangling v16 refs, §8 P6 ordering warning, _MAP ADM11 entry |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM11 — recheck: commit hash a9f9c94, P8a prereq note, SPEC §8 dependency order warning for P16/P17 |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM10 — CARD_CONTENT_SPEC consolidated (v1.0–v1.6 + DATA_ARCH_AUDIT merged), DATA_QUALITY_HANDOFF v16→v17, PROGRESS.md compacted, SESSION_PROMPT/\_MAP updated, docs/ created |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM9 — mark v87 comparison done (owner-confirmed), remove from blocked list |

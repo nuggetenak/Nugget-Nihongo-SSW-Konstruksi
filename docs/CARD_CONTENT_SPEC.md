@@ -181,8 +181,8 @@ Yang wajib difix: 41 truncated (ending `/`), 13 multi-slash list, 3 id_text beri
 
 | id | src | Fix |
 |----|-----|-----|
-| 476 | jac-ch6 | desc berisi bytes UTF-8 decoded sebagai latin1 |
-| 773 | jac-ch6 | idem |
+| 476 | ch6.js | desc berisi bytes UTF-8 decoded sebagai latin1 |
+| 773 | vocab-supplementary.js | idem (source=jac-ch6 tapi file di vocab-supplementary) |
 
 **C2 — Nested ruby `《A《B》》`: 12 kartu**
 
@@ -201,7 +201,7 @@ Invalid syntax — akan crash renderer. Semua dari jac-ch5/ch6.
 | 608 | `硬質塩化ビニル管《…《せっちゃくざいせつごう》》` | idem |
 | 610 | `ねじ込み配管《…《つうすいはようじょうご》》` | idem |
 | 612 | `EF接合《EFせつごう《えれくとろふゅうじょん》》` | idem |
-| 619 | `ベンダー曲げ加工《…《さいしょうまげはんけい》》` | idem |
+| 619 | `ベンダー曲げ加工《べんだあまげかこう《さいしょうまげはんけい》》` | idem |
 
 Fix pattern:
 ```
@@ -762,8 +762,8 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 > **Note untuk agent:** (1) P16 dan P17 tercantum di bagian bawah §8 ini karena blocked oleh OD-2/OD-3, tapi dalam urutan eksekusi mereka harus selesai **sebelum** P8a item 2 (P17) dan P8b/P10/P11 (P16). (2) P6 tercantum antara P5 dan P7 secara numerik, tapi dalam urutan eksekusi P6 datang **setelah P11** dan hanya jika OD-1 sudah dikonfirmasi. Ikuti dependency order di atas, bukan urutan fisik dalam dokumen ini.
 
 ### P0 — 🔴 BLOCKING
-- [ ] Fix encoding corrupt id=476, 773 (`cards/lifeline/ch6.js`)
-- [ ] Fix 12 nested ruby cards (id: 321,330,339,356,371,452,485,606,608,610,612,619)
+- [ ] Fix encoding corrupt id=476 (`cards/lifeline/ch6.js`), id=773 (`cards/lifeline/vocab-supplementary.js`)
+- [ ] Fix 12 nested ruby cards (id: 321,330,339,356,371 in ch5.js; 452,485,606,608,610,612,619 in ch6.js)
 
 ### P1 — Ruby: jp field (prerequisite furi drop)
 - [ ] 62 kartu jp tanpa ruby → tambahkan ruby
