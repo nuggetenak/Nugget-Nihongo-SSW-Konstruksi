@@ -1,8 +1,9 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 — v4.22.0: card IDs renumbered (1628→1443 contiguous), storage v4
-> **Version:** v4.22.0 · **Status:** STABLE ✅ — no queued tasks
+> **Last updated:** 2026-05-14 — ADM10: consolidated spec committed, DQ tasks discovered, admin sync
+> **Version:** v4.22.0 · **Status:** content-dq DQ ACTIVE — see PROGRESS.md
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
+> **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list
 > **Archive:** `docs/archive/ARCHIVE-INDEX.md` ← all historical docs
 
 ---
@@ -230,6 +231,8 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM10 — CARD_CONTENT_SPEC consolidated (v1.0–v1.6 + DATA_ARCH_AUDIT merged), DATA_QUALITY_HANDOFF v16→v17, PROGRESS.md compacted, SESSION_PROMPT/\_MAP updated, docs/ created |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM9 — mark v87 comparison done (owner-confirmed), remove from blocked list |
 | 2026-05-12 | content-dq | Sonnet 4.6: ADM8 commit hash sync — ADM7 self-reference fix (3a199f1→e0e689b), session 16→17, ADM1–ADM7→ADM1–ADM8 |
 | 2026-05-12 | content-dq | Sonnet 4.6: ADM7 hygiene audit — data audit all sets/cards/pairs/angka; Part 6 jac-lifeline null fix (29→30); Part 7 confusion-pairs defA/defB schema doc; session 15→16 sync |
 | 2026-05-12 | content-dq | Sonnet 4.6: ADM6 deep hygiene — last commit hash sync (→9ed5e7e), categories.js comment fix (Sipil→Doboku, Bangunan→Kenchiku), SESSION_PROMPT/HANDOFF/PROGRESS session 14→15, ADM6 tracking |
