@@ -449,7 +449,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "漏電《ろうでん》と漏電遮断機《しゃだんき》",
   type: "konsep",
   id_text: "Arus bocor dan pemutus",
-  desc: "æ¼é»ãããã§ãã= arus ke jalur yang tidak seharusnya; menyebabkan sengatan dan kebakaran.",
+  desc: "漏電《ろうでん》= arus ke jalur yang tidak seharusnya; menyebabkan sengatan dan kebakaran.",
   _origIndex: 546
   },
 {

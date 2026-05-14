@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-14 (session 18: ADM13 — last pass, all issues fixed)
+**Last updated:** 2026-05-14 (session 19: P0-C1 done — encoding corrupt fixed id=476,773)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -19,7 +19,7 @@ P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → 
 ### P0 — 🔴 BLOCKING (fix dulu sebelum apapun)
 Files C1: `src/data/cards/lifeline/ch6.js` (id=476), `src/data/cards/lifeline/vocab-supplementary.js` (id=773)
 Files C2: `src/data/cards/lifeline/ch5.js` (id=321–371), `src/data/cards/lifeline/ch6.js` (id=452–619)
-- [ ] **C1:** Fix encoding corrupt desc — `id=476` (ch6.js), `id=773` (vocab-supplementary.js)
+- [x] **C1:** Fix encoding corrupt desc — `id=476` (ch6.js), `id=773` (vocab-supplementary.js)
 - [ ] **C2:** Fix 12 nested ruby `《A《B》》` — id: 321, 330, 339, 356, 371, 452, 485, 606, 608, 610, 612, 619
 
 ---

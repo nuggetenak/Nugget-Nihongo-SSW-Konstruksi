@@ -1930,7 +1930,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "残る《のこる》",
   type: "vocab",
   id_text: "Tersisa / tertinggal",
-  desc: "æ®ãã®ããã = tersisa (intransitif); æ®ãã®ããã = menyisakan",
+  desc: "残《のこ》る = tersisa (intransitif); 残《のこ》す = menyisakan",
   _origIndex: 887
   },
 {
