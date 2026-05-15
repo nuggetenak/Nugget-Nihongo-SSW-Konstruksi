@@ -119,7 +119,7 @@ export const CARDS_CH3 = [
   jp: "クレーン・移動式クレーン資格《くれえんいどうしきくれえんしかくしきい》",
   type: "konsep",
   id_text: "Lisensi crane",
-  desc: "クレーン: ≥5t→免許《めんきょ》, 1〜5t→技能《ぎのう》講習《こうしゅう》. 移動《うご》き式《いどうしき》: ≥5t→免許《めんきょ》. 玉掛《たまが》け:",
+  desc: "クレーン: ≥5t→免許《めんきょ》, 1〜5t→技能《ぎのう》講習《こうしゅう》. 移動《うご》き式《いどうしき》: ≥5t→免許《めんきょ》. 玉掛《たまが》け: ≥1t→技能《ぎのう》講習《こうしゅう》, <1t→特別《とくべつ》教育《きょういく》.",
   _origIndex: 215
   },
 {
@@ -229,7 +229,7 @@ export const CARDS_CH3 = [
   jp: "石綿《いしわた》（アスベスト）取り扱い作業者",
   type: "hukum",
   id_text: "Pekerja asbes bongkar",
-  desc: "Pembongkaran bangunan lama mengandung 石綿《いしわた》 (asbes) → wajib 特《とく》別教育《とくべつきょういく》修了者《しゅうりょうしゃ》",
+  desc: "Pembongkaran bangunan lama mengandung 石綿《いしわた》 (asbes) → wajib 特《とく》別教育《とくべつきょういく》修了者《しゅうりょうしゃ》.",
   _origIndex: 236
   },
 {
@@ -273,7 +273,7 @@ export const CARDS_CH3 = [
   jp: "建設工事の3大分類《けんせつこうじのさんだいぶんるい》",
   type: "konsep",
   id_text: "3 kategori besar",
-  desc: "①土木《どぼく》=alam: dam, jalan, jembatan. ②建築《けんちく》=gedung: rumah, RS. ③ライフライン・設備《せつび》=infrastruktur:",
+  desc: "①土木《どぼく》=alam: dam, jalan, jembatan. ②建築《けんちく》=gedung: rumah, RS. ③ライフライン・設備《せつび》=infrastruktur: gas, listrik, air.",
   _origIndex: 619
   },
 {
@@ -328,7 +328,7 @@ export const CARDS_CH3 = [
   jp: "車両系《しゃりょうけい》・高所作業車《こうしょさぎょうしゃ》・フォークリフト資格《しかく》",
   type: "konsep",
   id_text: "Kualifikasi alat berat",
-  desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》:",
+  desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》.",
   _origIndex: 646
   },
 {

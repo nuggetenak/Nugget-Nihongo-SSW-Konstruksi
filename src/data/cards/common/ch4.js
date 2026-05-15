@@ -64,7 +64,7 @@ export const CARDS_CH4 = [
   jp: "親墨《おやずみ》",
   type: "konsep",
   id_text: "Garis induk / referensi",
-  desc: "Garis referensi utama (通《つう》り芯《とおりしん》, 陸墨《ろくずみ》) yang menjadi dasar semua 墨出《すみだ》しし《すみだし》",
+  desc: "Garis referensi utama (通《つう》り芯《とおりしん》, 陸墨《ろくずみ》) yang menjadi dasar semua 墨出《すみだ》し.",
   _origIndex: 242
   },
 {
@@ -438,7 +438,7 @@ export const CARDS_CH4 = [
   jp: "服装の注意《ふくそうのちゅうい》4項目",
   type: "konsep",
   id_text: "4 pantangan pakaian di",
-  desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《そでまくりきんし》 ④ポケット手禁止《てきんし》",
+  desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《そでまくりきんし》 ④ポケット手禁止《てきんし》.",
   _origIndex: 307
   },
 {
@@ -559,7 +559,7 @@ export const CARDS_CH4 = [
   jp: "おつかれさまです（感謝《かんしゃ》・労い）",
   type: "konsep",
   id_text: "Kerja keras ya",
-  desc: "Ungkapan terima kasih atas kerja keras. Bisa dipakai ke siapa saja, kapan saja. Sudah selesai:",
+  desc: "Ungkapan terima kasih atas kerja keras. Bisa dipakai ke siapa saja, kapan saja. Sudah selesai: お疲《つか》れ様《さま》でした.",
   _origIndex: 654
   },
 {
@@ -1461,7 +1461,7 @@ export const CARDS_CH4 = [
   jp: "短絡《たんらく》・低圧《ていあつ》・高圧《こうあつ》・特別高圧《とくべつこうあつ》・圧着《あっちゃく》・直流《ちょくりゅう》・交流《こうりゅう》",
   type: "konsep",
   id_text: "7 istilah tegangan",
-  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》:",
+  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》: >7000V.",
   _origIndex: 689
   },
 {

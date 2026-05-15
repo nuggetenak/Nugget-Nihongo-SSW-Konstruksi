@@ -1406,7 +1406,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "一輪車《いちりんしゃ》",
   type: "konsep",
   id_text: "Gerobak sorong satu roda",
-  desc: "Satu roda di depan, dua gagang di belakang. Untuk angkut tanah, pasir, beton. Berbeda dari 台車《だいしゃ》",
+  desc: "Satu roda di depan, dua gagang di belakang. Untuk angkut tanah, pasir, beton. Berbeda dari 台車《だいしゃ》.",
   _origIndex: 141
   },
 {
@@ -2518,7 +2518,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "電気工事士《でんきこうじし》",
   type: "vocab",
   id_text: "Teknisi listrik (definisi)",
-  desc: "Lisensi nasional untuk instalasi listrik. Tingkat 2: AC ≤600V. Tingkat 1:",
+  desc: "Lisensi nasional untuk instalasi listrik. Tingkat 2: AC ≤600V. Tingkat 1: semua tegangan (termasuk >600V).",
   _origIndex: 1149
   },
 {

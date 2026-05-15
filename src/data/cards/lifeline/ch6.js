@@ -746,7 +746,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "電柱を建てる手順《でんちゅうをたてるてじゅんすてっぷ》（5ステップ）",
   type: "konsep",
   id_text: "5 langkah mendirikan",
-  desc: "①Tentukan posisi ②Konfirmasi埋設物《まいせつぶつ》dengan探針棒《たんしんぼう》 ③Gali manual + mesin穴掘《あなほ》り建柱車《けんちゅうしゃ》",
+  desc: "①Tentukan posisi ②Konfirmasi埋設物《まいせつぶつ》dengan探針棒《たんしんぼう》 ③Gali manual + mesin穴掘《あなほ》り建柱車《けんちゅうしゃ》.",
   _origIndex: 728
   },
 {

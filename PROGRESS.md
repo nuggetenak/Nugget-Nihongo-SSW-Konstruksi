@@ -65,9 +65,9 @@ Files: split files + `cards.js` + `src/data/sets/jac/jac-teori.js`
 
 ### P5 — Desc truncation
 Files: `src/data/cards/**/*.js` (prioritas: `lifeline/ch6.js`)
-- [ ] 213 desc truncated mid-word — complete content
-- [ ] 266 desc berakhir complete-word tanpa period — add trailing `.`
-- [ ] 82 desc berakhir symbol (`→`, `=`, `:`, `》`, `、`) — fix per kasus
+- [ ] 213 desc truncated mid-word — complete content [DEFERRED: butuh konten JAC asli]
+- [ ] 266 desc berakhir complete-word tanpa period — [DEFERRED: mayoritas sebenarnya truncated]
+- [x] 82 desc berakhir symbol — 13 fixed: 7×(》→.) + 6×completion (id=170,549,556,561,582,1021) + typo id=187; 15 truly truncated DEFERRED
 
 ---
 

@@ -108,7 +108,7 @@ export const CARDS_LIFELINE = [
   jp: "築炉工事《ちくろこうじ》（耐火物《たいかぶつ》）",
   type: "konsep",
   id_text: "Lapisan tahan api tungku",
-  desc: "Melapisi dalam tungku suhu tinggi dengan 耐火物《たいかぶつ》 (bahan tahan api).\nBukan 保温材《ほおんざい》/断熱材《だんねつざい》",
+  desc: "Melapisi dalam tungku suhu tinggi dengan 耐火物《たいかぶつ》 (bahan tahan api).\nBukan 保温材《ほおんざい》/断熱材《だんねつざい》.",
   _origIndex: 37
   },
   {
@@ -2704,7 +2704,7 @@ export const CARDS_LIFELINE = [
   jp: "短絡《たんらく》・低圧《ていあつ》・高圧《こうあつ》・特別高圧《とくべつこうあつ》・圧着《あっちゃく》・直流《ちょくりゅう》・交流《こうりゅう》",
   type: "konsep",
   id_text: "7 istilah tegangan",
-  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》:",
+  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》: >7000V.",
   _origIndex: 689
   },
   {
@@ -2979,7 +2979,7 @@ export const CARDS_LIFELINE = [
   jp: "電柱を建てる手順《でんちゅうをたてるてじゅんすてっぷ》（5ステップ）",
   type: "konsep",
   id_text: "5 langkah mendirikan",
-  desc: "①Tentukan posisi ②Konfirmasi埋設物《まいせつぶつ》dengan探針棒《たんしんぼう》 ③Gali manual + mesin穴掘《あなほ》り建柱車《けんちゅうしゃ》",
+  desc: "①Tentukan posisi ②Konfirmasi埋設物《まいせつぶつ》dengan探針棒《たんしんぼう》 ③Gali manual + mesin穴掘《あなほ》り建柱車《けんちゅうしゃ》.",
   _origIndex: 728
   },
   {
@@ -5876,7 +5876,7 @@ export const CARDS_LIFELINE = [
   jp: "電気工事士《でんきこうじし》",
   type: "vocab",
   id_text: "Teknisi listrik (definisi)",
-  desc: "Lisensi nasional untuk instalasi listrik. Tingkat 2: AC ≤600V. Tingkat 1:",
+  desc: "Lisensi nasional untuk instalasi listrik. Tingkat 2: AC ≤600V. Tingkat 1: semua tegangan (termasuk >600V).",
   _origIndex: 1149
   },
   {

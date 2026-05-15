@@ -277,7 +277,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "築炉工事《ちくろこうじ》（耐火物《たいかぶつ》）",
   type: "konsep",
   id_text: "Lapisan tahan api tungku",
-  desc: "Melapisi dalam tungku suhu tinggi dengan 耐火物《たいかぶつ》 (bahan tahan api).\nBukan 保温材《ほおんざい》/断熱材《だんねつざい》",
+  desc: "Melapisi dalam tungku suhu tinggi dengan 耐火物《たいかぶつ》 (bahan tahan api).\nBukan 保温材《ほおんざい》/断熱材《だんねつざい》.",
   _origIndex: 37
   },
 {

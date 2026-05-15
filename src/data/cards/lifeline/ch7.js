@@ -595,7 +595,7 @@ export const CARDS_LIFELINE_CH7 = [
   jp: "安全《あんぜん》",
   type: "vocab",
   id_text: "Aman / keselamatan",
-  desc: "Kondisi aman / safety. Kombinasi umum: 安全確認《あんぜんかくにん》、安全管《かん》理《あんぜんかんり》",
+  desc: "Kondisi aman / safety. Kombinasi umum: 安全確認《あんぜんかくにん》、安全管《かん》理《あんぜんかんり》.",
   _origIndex: 893
   },
 {
