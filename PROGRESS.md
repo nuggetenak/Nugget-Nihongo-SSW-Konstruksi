@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-15 (session 19: P0 done; P1-A/B/C done — 240 jp ruby fixes across 218 distinct cards)
+**Last updated:** 2026-05-15 (session 19: P0→P4 selesai — ruby, encoding, id_text, metadata, 5 card deletions, 26 id_text disambiguasi)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
