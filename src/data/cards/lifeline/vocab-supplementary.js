@@ -907,7 +907,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "じゃんくしょんぼっくす",
   jp: "ジャンクションボックス",
   type: "vocab",
-  id_text: "Kotak sambungan /",
+  id_text: "Kotak sambungan",
   desc: "Kotak tempat percabangan dan sambungan kabel dilakukan, lalu ditutup untuk",
   _origIndex: 1128
   },
@@ -918,7 +918,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "せっちていこう",
   jp: "接地抵抗《せっちていこう》",
   type: "vocab",
-  id_text: "Resistansi pembumian /",
+  id_text: "Resistansi pembumian",
   desc: "Nilai hambatan pada sistem grounding. Grounding jenis D不《ふ》boleh melebihi 100Ω.",
   _origIndex: 1129
   },
@@ -995,7 +995,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "せっちこうじのしゅるい",
   jp: "接地工事の種類《せっちこうじのしゅるい》",
   type: "vocab",
-  id_text: "Jenis grounding A/B/C/D",
+  id_text: "Jenis grounding A, B, C, D",
   desc: "Nilai resistansi: jenis A & C ≤10Ω, jenis D ≤100Ω.\nSering muncul dalam soal",
   _origIndex: 1143
   },
@@ -1006,7 +1006,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "あーすくらんぷ",
   jp: "アースクランプ",
   type: "vocab",
-  id_text: "Klem grounding /",
+  id_text: "Klem grounding",
   desc: "Penjepit yang menghubungkan kabel bumi ke batang grounding secara kuat dan",
   _origIndex: 1145
   },
@@ -1163,7 +1163,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "つりバンド",
   jp: "吊りバンド《つりバンド》",
   type: "vocab",
-  id_text: "Pipe hanger band /",
+  id_text: "Pipe hanger band",
   desc: "Digantung dari pelat beton lewat baut gantung untuk menopang pipa horizontal di",
   _origIndex: 1163
   },
@@ -1174,7 +1174,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ぼうしんつぎて",
   jp: "防振継手《ぼうしんつぎて》",
   type: "vocab",
-  id_text: "Anti-vibration joint /",
+  id_text: "Anti-vibration joint",
   desc: "Dipasang di sambungan keluar pompa untuk mencegah getaran merambat ke jaringan",
   _origIndex: 1164
   },
@@ -1185,7 +1185,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "かとうつぎて",
   jp: "可とう継手《かとうつぎて》",
   type: "vocab",
-  id_text: "Flexible joint /",
+  id_text: "Flexible joint",
   desc: "Menyerap perpindahan saat gempa dan ekspansi-kontraksi akibat perubahan suhu",
   _origIndex: 1165
   },
@@ -1207,7 +1207,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "はいかんず",
   jp: "配管図《はいかんず》",
   type: "vocab",
-  id_text: "Diagram perpipaan /",
+  id_text: "Diagram perpipaan",
   desc: "Gambar teknik yang menunjukkan posisi katup dan arah aliran dalam sistem",
   _origIndex: 1172
   },
@@ -1449,7 +1449,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "フリーアクセスフロア",
   jp: "フリーアクセスフロア",
   type: "vocab",
-  id_text: "Raised access floor /",
+  id_text: "Raised access floor",
   desc: "Struktur lantai ganda yang memungkinkan kabel listrik dan LAN diatur bebas di",
   _origIndex: 1254
   },
@@ -1518,7 +1518,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ぼうばくこうぐ",
   jp: "防爆工具《ぼうばくこうぐ》",
   type: "vocab",
-  id_text: "Alat anti-percikan /",
+  id_text: "Alat anti-percikan",
   desc: "Wajib digunakan saat bekerja di sekitar pipa gas atau ruang dengan gas mudah",
   _origIndex: 1296
   },
@@ -1827,7 +1827,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "かならず",
   jp: "必ず《かならず》",
   type: "vocab",
-  id_text: "Wajib / pasti / selalu",
+  id_text: "Wajib, pasti, selalu",
   desc: "Wajib, tidak boleh dilewati. Kata kunci prosedur yang tidak bisa dilewati.",
   _origIndex: 877
   },

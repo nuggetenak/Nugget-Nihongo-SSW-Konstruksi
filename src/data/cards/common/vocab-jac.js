@@ -43,7 +43,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "せいけつ",
   jp: "清潔《せいけつ》",
   type: "vocab",
-  id_text: "Jaga kebersihan /",
+  id_text: "Jaga kebersihan",
   desc: "Menjaga kondisi tetap bersih dan sehat. S keempat dari 5S.",
   _origIndex: 899
   },
@@ -76,7 +76,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "ゆういせい",
   jp: "優位性《ゆういせい》",
   type: "vocab",
-  id_text: "Keunggulan /",
+  id_text: "Keunggulan",
   desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang",
   _origIndex: 902
   },

@@ -42,15 +42,15 @@ Files: `src/data/cards/**/*.js`
 
 ### P3 — Field fixes: cards
 Files: split files + `src/data/source/cards-*.js` + `src/data/cards.js`
-- [ ] `id=136` — id_text `'Uji keterampilan /'` → lengkapi phrase
-- [ ] `id=233` — id_text `'通線/konduit/slab/siapkan'` → satu frasa BI yang readable
-- [ ] `id=1371` — id_text `'CB造'` → `'Konstruksi bata beton (CB)'`
-- [ ] 41 id_text truncated ending `/` → lengkapi
-- [ ] 13 id_text multi-slash list → rewrite sebagai frasa BI
-- [ ] `id=166, 167, 170` — reclassify `category` → `'career'`
-- [ ] `id=1275` — retype `type` → `'hukum'`
-- [ ] `id=1184, 1185` — fix `source` → `'jac-ch2'`
-- [ ] `id=1240` — fix `source` → source yang sesuai konten
+- [x] `id=136` — id_text → `Uji keterampilan + Teknisi bersertifikat`
+- [x] `id=233` — id_text → `Tarik kabel, pasang konduit, slab, siapkan`
+- [x] `id=1371` — id_text → `Konstruksi bata beton (CB)`
+- [x] 41 id_text truncated ending `/` → lengkapi
+- [x] 13 id_text multi-slash list → rewrite sebagai frasa BI
+- [x] `id=166, 167, 170` — reclassify `category` → `'career'`
+- [x] `id=1275` — retype `type` → `'hukum'`
+- [x] `id=1184, 1185` — fix `source` → `'jac-ch2'`
+- [ ] `id=1240` — fix `source` → DEFERRED: ambiguous; 厚生年金 konten jac-ch2 tapi belum dikonfirmasi
 
 ---
 

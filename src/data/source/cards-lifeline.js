@@ -965,7 +965,7 @@ export const CARDS_LIFELINE = [
   furi: "つうせんはいかんするすらぶはいかんしこむ",
   jp: "通線《つうせん》・配管する《はいかんする》・スラブ配管《すらぶはいかん》・仕込む《しこむ》",
   type: "konsep",
-  id_text: "通線/konduit/slab/siapkan",
+  id_text: "Tarik kabel, pasang konduit, slab, siapkan",
   desc: "通線《つうせん》=tarik kabel; 配管《はいかん》する=pasang konduit; スラブ配管《はいかん》=konduit dalam slab; 仕込《しこ》む=persiapkan.",
   _origIndex: 298
   },
@@ -987,7 +987,7 @@ export const CARDS_LIFELINE = [
   furi: "ひふくいちじがわにじがわ",
   jp: "被覆《ひふく》・一次側《いちじがわ》・二次側《にじがわ》",
   type: "konsep",
-  id_text: "Selubung/input/output",
+  id_text: "Selubung, sisi primer, sisi sekunder",
   desc: "被覆《ひふく》=insulasi kawat; 一次側《いちじがわ》=sisi input listrik; 二次側《にじがわ》=sisi output. Penting saat koneksi",
   _origIndex: 300
   },
@@ -1031,7 +1031,7 @@ export const CARDS_LIFELINE = [
   furi: "ぶんきしんしゅくじゃばら",
   jp: "分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》",
   type: "konsep",
-  id_text: "Cabang/muai/akordeon",
+  id_text: "Cabang, muai, akor lipatan",
   desc: "分岐《ぶんき》=pipa terbagi dua; 伸縮《しんしゅく》=memuai/menyusut akibat suhu; 蛇腹《じゃばら》=konektor fleksibel",
   _origIndex: 305
   },
@@ -4036,7 +4036,7 @@ export const CARDS_LIFELINE = [
   furi: "じゃんくしょんぼっくす",
   jp: "ジャンクションボックス",
   type: "vocab",
-  id_text: "Kotak sambungan /",
+  id_text: "Kotak sambungan",
   desc: "Kotak tempat percabangan dan sambungan kabel dilakukan, lalu ditutup untuk",
   _origIndex: 1128
   },
@@ -4047,7 +4047,7 @@ export const CARDS_LIFELINE = [
   furi: "せっちていこう",
   jp: "接地抵抗《せっちていこう》",
   type: "vocab",
-  id_text: "Resistansi pembumian /",
+  id_text: "Resistansi pembumian",
   desc: "Nilai hambatan pada sistem grounding. Grounding jenis D不《ふ》boleh melebihi 100Ω.",
   _origIndex: 1129
   },
@@ -4157,7 +4157,7 @@ export const CARDS_LIFELINE = [
   furi: "せっちこうじのしゅるい",
   jp: "接地工事の種類《せっちこうじのしゅるい》",
   type: "vocab",
-  id_text: "Jenis grounding A/B/C/D",
+  id_text: "Jenis grounding A, B, C, D",
   desc: "Nilai resistansi: jenis A & C ≤10Ω, jenis D ≤100Ω.\nSering muncul dalam soal",
   _origIndex: 1143
   },
@@ -4168,7 +4168,7 @@ export const CARDS_LIFELINE = [
   furi: "あーすくらんぷ",
   jp: "アースクランプ",
   type: "vocab",
-  id_text: "Klem grounding /",
+  id_text: "Klem grounding",
   desc: "Penjepit yang menghubungkan kabel bumi ke batang grounding secara kuat dan",
   _origIndex: 1145
   },
@@ -4325,7 +4325,7 @@ export const CARDS_LIFELINE = [
   furi: "つりバンド",
   jp: "吊りバンド《つりバンド》",
   type: "vocab",
-  id_text: "Pipe hanger band /",
+  id_text: "Pipe hanger band",
   desc: "Digantung dari pelat beton lewat baut gantung untuk menopang pipa horizontal di",
   _origIndex: 1163
   },
@@ -4336,7 +4336,7 @@ export const CARDS_LIFELINE = [
   furi: "ぼうしんつぎて",
   jp: "防振継手《ぼうしんつぎて》",
   type: "vocab",
-  id_text: "Anti-vibration joint /",
+  id_text: "Anti-vibration joint",
   desc: "Dipasang di sambungan keluar pompa untuk mencegah getaran merambat ke jaringan",
   _origIndex: 1164
   },
@@ -4347,7 +4347,7 @@ export const CARDS_LIFELINE = [
   furi: "かとうつぎて",
   jp: "可とう継手《かとうつぎて》",
   type: "vocab",
-  id_text: "Flexible joint /",
+  id_text: "Flexible joint",
   desc: "Menyerap perpindahan saat gempa dan ekspansi-kontraksi akibat perubahan suhu",
   _origIndex: 1165
   },
@@ -4369,7 +4369,7 @@ export const CARDS_LIFELINE = [
   furi: "はいかんず",
   jp: "配管図《はいかんず》",
   type: "vocab",
-  id_text: "Diagram perpipaan /",
+  id_text: "Diagram perpipaan",
   desc: "Gambar teknik yang menunjukkan posisi katup dan arah aliran dalam sistem",
   _origIndex: 1172
   },
@@ -4623,7 +4623,7 @@ export const CARDS_LIFELINE = [
   furi: "フリーアクセスフロア",
   jp: "フリーアクセスフロア",
   type: "vocab",
-  id_text: "Raised access floor /",
+  id_text: "Raised access floor",
   desc: "Struktur lantai ganda yang memungkinkan kabel listrik dan LAN diatur bebas di",
   _origIndex: 1254
   },
@@ -4692,7 +4692,7 @@ export const CARDS_LIFELINE = [
   furi: "ぼうばくこうぐ",
   jp: "防爆工具《ぼうばくこうぐ》",
   type: "vocab",
-  id_text: "Alat anti-percikan /",
+  id_text: "Alat anti-percikan",
   desc: "Wajib digunakan saat bekerja di sekitar pipa gas atau ruang dengan gas mudah",
   _origIndex: 1296
   },
@@ -5235,7 +5235,7 @@ export const CARDS_LIFELINE = [
   furi: "しほこう",
   jp: "支保工《しほこう》",
   type: "vocab",
-  id_text: "Perancah penyangga /",
+  id_text: "Perancah penyangga",
   desc: "Struktur penyangga sementara untuk bekisting atau dinding galian.",
   usage: "支保工《しほこう》を設置《せっち》する（memasang perancah penyangga）",
   _origIndex: 931
@@ -5843,7 +5843,7 @@ export const CARDS_LIFELINE = [
   furi: "ぶんでんばん",
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
-  id_text: "Panel distribusi /",
+  id_text: "Panel distribusi",
   desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit",
   _origIndex: 1126
   },
@@ -5942,7 +5942,7 @@ export const CARDS_LIFELINE = [
   furi: "グルーブドせつごう",
   jp: "グルーブド接合《グルーブドせつごう》",
   type: "vocab",
-  id_text: "Sambungan grooved /",
+  id_text: "Sambungan grooved",
   desc: "Sambungan menggunakan alur di ujung pipa dan coupling. Pengerjaan lebih cepat",
   _origIndex: 1158
   },
@@ -6063,7 +6063,7 @@ export const CARDS_LIFELINE = [
   furi: "システムてんじょう",
   jp: "システム天井《システムてんじょう》",
   type: "vocab",
-  id_text: "Plafon sistem /",
+  id_text: "Plafon sistem",
   desc: "Plafon modular yang mengintegrasikan pencahayaan, AC, dan peralatan kebakaran",
   _origIndex: 1253
   },

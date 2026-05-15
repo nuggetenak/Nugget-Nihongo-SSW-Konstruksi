@@ -316,7 +316,7 @@ export const CARDS_CH2 = [
   furi: "ぎのうけんてい／ぎのうし",
   jp: "技能検定《ぎのうけんてい》 / 技能士《ぎのうし》",
   type: "hukum",
-  id_text: "Uji keterampilan /",
+  id_text: "Uji keterampilan + Teknisi bersertifikat",
   desc: "Sertifikasi nasional; lulus → dapat 合格《ごうかく》証書《しょうしょ》, berhak sebut diri 技能士《ぎのうし》. 32 jenis konstruksi; level: 特級《とっきゅう》・1〜3級《きゅう》・基礎級《きそきゅう》.",
   _origIndex: 144
   },
@@ -744,7 +744,7 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "けんせつろうどうしゃこようかいぜんほうじゅうてんしさく",
   jp: "建設労働者雇用改善法の重点施策《けんせつろうどうしゃこようかいぜんほうじゅうてんしさく》",
-  type: "konsep",
+  type: "hukum",
   id_text: "Kebijakan utama perbaikan tenaga kerja",
   desc: "第《だい》10次《じ》計画《けいかく》(2021–2025)の主《おも》な施策《しさく》:\n①CCUS等による担《にな》い手《て》確保《かくほ》・育成《いくせい》\n②2024年度《ねんど》から残業《ざんぎょう》上限《じょうげん》規制《きせい》（月《げつ》45h・年《ねん》360h）建設業《けんせつぎょう》に適用《てきよう》\n③高所作業《こうしょさぎょう》:原則《げんそく》フルハーネス型《がた》使用《しよう》\n④外国人《がいこくじん》労働者《ろうどうしゃ》（技能実習《ぎのうじっしゅう》/特定技能《とくていぎのう》）の適正《てきせい》受入《うけい》れ",
   _origIndex: 1431

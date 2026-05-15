@@ -668,7 +668,7 @@ export const CARDS_COMMON = [
   furi: "べんちまーく",
   jp: "ベンチマーク（BM）・GL・FL",
   type: "konsep",
-  id_text: "BM / GL / FL",
+  id_text: "Simbol tinggi BM, GL, FL",
   desc: "BM: titik referensi ketinggian di lokasi. GL: tinggi permukaan tanah. FL: tinggi lantai jadi (1FL,",
   _origIndex: 138
   },
@@ -734,7 +734,7 @@ export const CARDS_COMMON = [
   furi: "ぎのうけんてい／ぎのうし",
   jp: "技能検定《ぎのうけんてい》 / 技能士《ぎのうし》",
   type: "hukum",
-  id_text: "Uji keterampilan /",
+  id_text: "Uji keterampilan + Teknisi bersertifikat",
   desc: "Sertifikasi nasional; lulus → dapat 合格《ごうかく》証書《しょうしょ》, berhak sebut diri 技能士《ぎのうし》. 32 jenis konstruksi; level: 特級《とっきゅう》・1〜3級《きゅう》・基礎級《きそきゅう》.",
   _origIndex: 144
   },
@@ -1048,7 +1048,7 @@ export const CARDS_COMMON = [
   },
   {
   id: 166,
-  category: "hourei",
+  category: "career",
   source: "jac-ch3",
   furi: "しかくしゅるいこっかめんきょぎのうこうしゅうとくべつきょういく",
   jp: "資格の3種類《しかくのさんしゅるい》：国家免許《こっかめんきょ》・技能講習《ぎのうこうしゅう》・特別教育《とくべつきょういく》",
@@ -1059,7 +1059,7 @@ export const CARDS_COMMON = [
   },
   {
   id: 167,
-  category: "hourei",
+  category: "career",
   source: "jac-ch3",
   furi: "はっぱぎしめんきょ",
   jp: "発破技士免許《はっぱぎし》",
@@ -1092,7 +1092,7 @@ export const CARDS_COMMON = [
   },
   {
   id: 170,
-  category: "hourei",
+  category: "career",
   source: "jac-ch3",
   furi: "くれえんいどうしきくれえんしかくしきい",
   jp: "クレーン・移動式クレーン資格《くれえんいどうしきくれえんしかくしきい》",
@@ -1251,7 +1251,7 @@ export const CARDS_COMMON = [
   furi: "かねをふるすみつけ",
   jp: "矩を振る《かねをふる》・墨付け《すみつけ》",
   type: "konsep",
-  id_text: "Buat sudut 90° /",
+  id_text: "Buat sudut 90° + markah garis",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
   _origIndex: 243
   },
@@ -1273,7 +1273,7 @@ export const CARDS_COMMON = [
   furi: "たかさきごう",
   jp: "FH・SL・CH（高《たか》さ記号《きごう》）",
   type: "konsep",
-  id_text: "FH=tinggi tanah /",
+  id_text: "FH, SL, CH — simbol tinggi",
   desc: "FH=Formation Height (tinggi tanah rencana). SL=Slab Level (tinggi slab). CH=Ceiling Height (FL ke",
   _origIndex: 246
   },
@@ -1284,7 +1284,7 @@ export const CARDS_COMMON = [
   furi: "ようへきやいたこうやいた",
   jp: "擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》",
   type: "konsep",
-  id_text: "Dinding penahan tanah /",
+  id_text: "Dinding penahan + turap sheet pile",
   desc: "擁壁《ようへき》=dinding penahan tanah. 矢板《やいた》=papan penahan tanah.",
   _origIndex: 250
   },
@@ -1339,7 +1339,7 @@ export const CARDS_COMMON = [
   furi: "さぎょうゆかかりがこい",
   jp: "作業床《さぎょうゆか》・仮囲い《かりがこい》",
   type: "konsep",
-  id_text: "Lantai kerja perancah /",
+  id_text: "Lantai kerja + pagar sementara",
   desc: "作業床《さぎょうゆか》=lantai dari papan tempat pekerja berdiri di perancah.",
   _origIndex: 257
   },
@@ -1361,7 +1361,7 @@ export const CARDS_COMMON = [
   furi: "けっそくはっかあ",
   jp: "結束《けっそく》・ハッカー",
   type: "konsep",
-  id_text: "Pengikatan tulangan /",
+  id_text: "Pengikatan tulangan + hacker",
   desc: "結束《けっそく》=mengikat persilangan tulangan dengan kawat 結束線《けっそくせん》 menggunakan ハッカー.",
   _origIndex: 261
   },
@@ -1394,7 +1394,7 @@ export const CARDS_COMMON = [
   furi: "おさまりとりあい",
   jp: "納まり《おさまり》・取合い《とりあい》",
   type: "konsep",
-  id_text: "Kerapian pemasangan /",
+  id_text: "Kerapian + antarmuka pemasangan",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
   _origIndex: 264
   },
@@ -1405,7 +1405,7 @@ export const CARDS_COMMON = [
   furi: "つらいちふろくめちがい",
   jp: "面一《つらいち》・不陸《ふろく》・目違い《めちがい》",
   type: "konsep",
-  id_text: "Rata sejajar /",
+  id_text: "Rata sejajar, tidak rata, tidak sejajar",
   desc: "面一《つらいち》=dua permukaan dalam satu bidang rata. 不陸《ふろく》=permukaan bergelombang.",
   _origIndex: 265
   },
@@ -1460,7 +1460,7 @@ export const CARDS_COMMON = [
   furi: "ほうれんそうほうこくれんらくそうだん",
   jp: "ほうれんそう（報告《ほうこく》・連絡《れんらく》・相談《そうだん》）",
   type: "konsep",
-  id_text: "Laporan / Komunikasi /",
+  id_text: "Laporan, Komunikasi, Konsultasi",
   desc: "報告《ほうこく》=lapor ke atasan. 連絡《れんらく》=sampaikan info/jadwal. 相談《そうだん》=konsultasikan masalah.",
   _origIndex: 283
   },
@@ -1493,7 +1493,7 @@ export const CARDS_COMMON = [
   furi: "そりむくりろく",
   jp: "反り《そり》 vs 起り《むくり》・陸《ろく》",
   type: "konsep",
-  id_text: "Cekung / cembung /",
+  id_text: "Cekung, cembung, rata",
   desc: "反《はん》り《そり》=melengkung CEKUNG. 起《お》きり《むくり》=melengkung CEMBUNG.",
   _origIndex: 286
   },
@@ -1515,7 +1515,7 @@ export const CARDS_COMMON = [
   furi: "みきるみきりざえなじみ",
   jp: "見切る《みきる》・見切り材《みきりざい》・馴染み《なじみ》",
   type: "konsep",
-  id_text: "Selesaikan sambungan /",
+  id_text: "Selesaikan sambungan + bahan trim",
   desc: "見《み》え切《みき》りる《みきる》=selesaikan sambungan dua pekerjaan finishing.",
   _origIndex: 288
   },
@@ -1559,7 +1559,7 @@ export const CARDS_COMMON = [
   furi: "ばしょううちうつだせつする",
   jp: "場所打ち《ばしょうち》・打つ《うつ》／打設する《だせつ》",
   type: "konsep",
-  id_text: "Pengecoran di lokasi /",
+  id_text: "Pengecoran di lokasi",
   desc: "場所打《ばしょう》ちち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.",
   _origIndex: 292
   },
@@ -1570,7 +1570,7 @@ export const CARDS_COMMON = [
   furi: "のろあんこ",
   jp: "ノロ・アンコ",
   type: "konsep",
-  id_text: "Adukan semen encer /",
+  id_text: "Adukan encer + filler (noro/anko)",
   desc: "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting.",
   _origIndex: 293
   },
@@ -1581,7 +1581,7 @@ export const CARDS_COMMON = [
   furi: "てんようくぎじまい",
   jp: "転用《てんよう》・釘仕舞《くぎじまい》",
   type: "konsep",
-  id_text: "Pakai ulang bekisting /",
+  id_text: "Pakai ulang bekisting + rapikan paku",
   desc: "転《ころ》び用《てんよう》=memakai kembali bekisting di lokasi berbeda untuk hemat biaya.",
   _origIndex: 294
   },
@@ -1592,7 +1592,7 @@ export const CARDS_COMMON = [
   furi: "はいごうねりまぜたんぴんぐ",
   jp: "配合《はいごう》・練り混ぜ《ねりまぜ》・タンピング",
   type: "konsep",
-  id_text: "Rasio campuran /",
+  id_text: "Rasio campuran + pengadukan + tamping",
   desc: "配合《はいごう》=perbandingan semen, pasir, kerikil, air. 練《ね》りり混《ま》ぜぜ《ねりまぜ》=mencampur hingga merata.",
   _origIndex: 295
   },
@@ -2164,7 +2164,7 @@ export const CARDS_COMMON = [
   furi: "そけっとれんち / ぼっくすれんち / ろっかくれんち",
   jp: "ソケットレンチ / ボックスレンチ / 六角レンチ《そけっとれんち / ぼっくすれんち / ろっかくれんち》",
   type: "konsep",
-  id_text: "Socket / box / hex wrench",
+  id_text: "Kunci soket, box, dan hex",
   desc: "ソケットレンチ=kepala soket ganti. ボックスレンチ=soket+handle menyatu. 六角《ろっかく》レンチ=batang hex untuk baut",
   _origIndex: 420
   },
@@ -2362,7 +2362,7 @@ export const CARDS_COMMON = [
   furi: "ほうき + ちりとり + ぶろああ",
   jp: "ほうき + ちりとり + ブロアー",
   type: "konsep",
-  id_text: "Sapu / Pengki / Blower",
+  id_text: "Sapu, pengki, dan blower",
   desc: "ほうき = sapu membersihkan lantai.\nちりとり = pengki mengumpulkan sampah sapuan.",
   _origIndex: 454
   },
@@ -3044,7 +3044,7 @@ export const CARDS_COMMON = [
   furi: "げきとつされはさまれまきこまれ",
   jp: "激突され《げきとつされ》/ はさまれ・巻き込まれ《まきこまれ》",
   type: "konsep",
-  id_text: "Tertabrak alat berat /",
+  id_text: "Tertabrak + terjepit/terlibas",
   desc: "激突《げきとつ》され = tertabrak kendaraan berat atau bucket crane saat berputar.",
   _origIndex: 586
   },
@@ -3055,7 +3055,7 @@ export const CARDS_COMMON = [
   furi: "ゆうがいぶつせっしょく / おぼれる / かさい",
   jp: "有害物接触 / おぼれ / 火災《ゆうがいぶつせっしょく / おぼれる / かさい》",
   type: "konsep",
-  id_text: "Kontak bahan berbahaya /",
+  id_text: "Kontak bahan berbahaya, tenggelam, kebakaran",
   desc: "有害物《ゆうがいぶつ》接触《せっしょく》: zat kimia menyentuh kulit → gangguan kesehatan.",
   _origIndex: 587
   },
@@ -3198,7 +3198,7 @@ export const CARDS_COMMON = [
   furi: "しいるどめんつきへるめっと / あんぜんぐつ",
   jp: "シールド面付きヘルメット / 安全靴《しいるどめんつきへるめっと / あんぜんぐつ》",
   type: "konsep",
-  id_text: "Helm pelindung wajah /",
+  id_text: "Helm wajah + sepatu safety",
   desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari",
   _origIndex: 600
   },
@@ -3209,7 +3209,7 @@ export const CARDS_COMMON = [
   furi: "あつさしすうまなつびもうしょび",
   jp: "WBGT（暑さ指数《あつさしすう》）・真夏日《まなつび》・猛暑日《もうしょび》",
   type: "konsep",
-  id_text: "WBGT / Hari panas 30℃+ /",
+  id_text: "WBGT + hari panas 30℃+ + hari terik 35℃+",
   desc: "WBGT = indeks risiko 熱中症《ねっちゅうしょう》 dari 気象庁《きしょうちょう》. 真夏日《まなつび》 = >30℃, 猛暑日《もうしょび》 = >35℃.",
   _origIndex: 601
   },
@@ -3770,7 +3770,7 @@ export const CARDS_COMMON = [
   furi: "めじゃあ《まきじゃく》・じょうぎ",
   jp: "メジャー（巻き尺《まきじゃく》）・定規《じょうぎ》",
   type: "konsep",
-  id_text: "Meteran gulung /",
+  id_text: "Meteran gulung + mistar",
   desc: "メジャー=pita ukur gulung; tipe baja tipis disebut コンベックス. 定規《じょうぎ》=penggaris untuk menarik garis",
   _origIndex: 709
   },
@@ -5180,7 +5180,7 @@ export const CARDS_COMMON = [
   {
   id: 1185,
   category: "hourei",
-  source: "vocab-supplementary",
+  source: "jac-ch2",
   furi: "せんもんぎょうしゃ",
   jp: "専門業者《せんもんぎょうしゃ》",
   type: "hukum",
@@ -5206,7 +5206,7 @@ export const CARDS_COMMON = [
   furi: "すみません",
   jp: "すみません",
   type: "vocab",
-  id_text: "Permisi / maaf / excuse",
+  id_text: "Permisi, maaf, excuse me",
   desc: "Dipakai untuk meminta izin lewat, minta tolong, menarik perhatian, atau minta",
   _origIndex: 1356
   },
@@ -5481,7 +5481,7 @@ export const CARDS_COMMON = [
   furi: "みみせん",
   jp: "耳栓《みみせん》",
   type: "vocab",
-  id_text: "Penyumbat telinga /",
+  id_text: "Penyumbat telinga",
   desc: "Wajib pakai pelindung telinga di lingkungan kebisingan >85 dB (gerinda,",
   _origIndex: 1402
   },
@@ -5527,7 +5527,7 @@ export const CARDS_COMMON = [
   source: "jac-ch2",
   furi: "けんせつろうどうしゃこようかいぜんほうじゅうてんしさく",
   jp: "建設労働者雇用改善法の重点施策《けんせつろうどうしゃこようかいぜんほうじゅうてんしさく》",
-  type: "konsep",
+  type: "hukum",
   id_text: "Kebijakan utama perbaikan tenaga kerja",
   desc: "第《だい》10次《じ》計画《けいかく》(2021–2025)の主《おも》な施策《しさく》:\n①CCUS等による担《にな》い手《て》確保《かくほ》・育成《いくせい》\n②2024年度《ねんど》から残業《ざんぎょう》上限《じょうげん》規制《きせい》（月《げつ》45h・年《ねん》360h）建設業《けんせつぎょう》に適用《てきよう》\n③高所作業《こうしょさぎょう》:原則《げんそく》フルハーネス型《がた》使用《しよう》\n④外国人《がいこくじん》労働者《ろうどうしゃ》（技能実習《ぎのうじっしゅう》/特定技能《とくていぎのう》）の適正《てきせい》受入《うけい》れ",
   _origIndex: 1431
@@ -6360,7 +6360,7 @@ export const CARDS_COMMON = [
   furi: "すいしんとんねる",
   jp: "推進トンネル《すいしんトンネル》",
   type: "konsep",
-  id_text: "Terowongan jack-push /",
+  id_text: "Terowongan jack-push",
   desc: "Pipa prefabrikasi didorong ke tanah oleh jack dari shaft peluncur.\nDigunakan untuk infrastruktur",
   _origIndex: 1506
   },
@@ -6591,7 +6591,7 @@ export const CARDS_COMMON = [
   furi: "こんくりいとぶろっくぞうぞうてっきんもるたるほきょう",
   jp: "コンクリートブロック造《ぞう》（CB造《ぞう》）",
   type: "konsep",
-  id_text: "CB造",
+  id_text: "Konstruksi bata beton (CB)",
   desc: "Blok beton berlubang disusun, rongga diisi tulangan lalu dicor mortar.\nLebih kokoh dari bata biasa.",
   _origIndex: 1527
   },
@@ -6646,7 +6646,7 @@ export const CARDS_COMMON = [
   furi: "ぞうぞうぞうもくぞう",
   jp: "RC造《あーるしーぞう》・S造《えすぞう》・SRC造《えすあーるしーぞう》・木造《もくぞう》",
   type: "konsep",
-  id_text: "RC / S / SRC / kayu",
+  id_text: "Jenis struktur RC, S, SRC, kayu",
   desc: "RC造《ぞう》=beton bertulang. S造《つく》り=baja. SRC造《つく》り=baja+RC. 木造《もくぞう》=kayu.\nWajib dikenali untuk",
   _origIndex: 1532
   },
@@ -6657,7 +6657,7 @@ export const CARDS_COMMON = [
   furi: "あそびたてかみ",
   jp: "あそび・建込み《たてこみ》",
   type: "konsep",
-  id_text: "Kelonggaran sambungan /",
+  id_text: "Kelonggaran + pemasangan komponen",
   desc: "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang.\n建込《たてこ》み=mendirikan bekisting",
   _origIndex: 1533
   },
@@ -6989,7 +6989,7 @@ export const CARDS_COMMON = [
   furi: "すぺーさー",
   jp: "スペーサー",
   type: "vocab",
-  id_text: "Penyangga tulangan /",
+  id_text: "Penyangga tulangan",
   desc: "Benda kecil dari mortar atau plastik yang diletakkan di bawah tulangan untuk",
   usage: "スペーサーを敷《し》く（meletakkan beton tahu）",
   _origIndex: 1563
@@ -7096,7 +7096,7 @@ export const CARDS_COMMON = [
   furi: "ふきつけとそう",
   jp: "吹付け塗装《ふきつけとそう》",
   type: "vocab",
-  id_text: "Pengecatan semprot /",
+  id_text: "Pengecatan semprot",
   desc: "Metode pengecatan menggunakan semprotan udara bertekanan untuk menghasilkan",
   usage: "吹付《ふきつ》け塗装《とそう》する（melakukan spray painting）",
   _origIndex: 1572
@@ -7120,7 +7120,7 @@ export const CARDS_COMMON = [
   furi: "かべクロス",
   jp: "壁クロス《かべクロス》",
   type: "vocab",
-  id_text: "Wallpaper vinil /",
+  id_text: "Wallpaper vinil",
   desc: "Material pelapis dinding berbahan vinil yang ditempel pada papan gipsum",
   usage: "壁《かべ》クロスを張《は》る（memasang wallpaper）",
   _origIndex: 1574
@@ -7867,7 +7867,7 @@ export const CARDS_COMMON = [
   furi: "かならず",
   jp: "必ず《かならず》",
   type: "vocab",
-  id_text: "Wajib / pasti / selalu",
+  id_text: "Wajib, pasti, selalu",
   desc: "Wajib, tidak boleh dilewati. Kata kunci prosedur yang tidak bisa dilewati.",
   _origIndex: 877
   },
@@ -8096,7 +8096,7 @@ export const CARDS_COMMON = [
   furi: "せいけつ",
   jp: "清潔《せいけつ》",
   type: "vocab",
-  id_text: "Jaga kebersihan /",
+  id_text: "Jaga kebersihan",
   desc: "Menjaga kondisi tetap bersih dan sehat. S keempat dari 5S.",
   _origIndex: 899
   },
@@ -8129,7 +8129,7 @@ export const CARDS_COMMON = [
   furi: "ゆういせい",
   jp: "優位性《ゆういせい》",
   type: "vocab",
-  id_text: "Keunggulan /",
+  id_text: "Keunggulan",
   desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang",
   _origIndex: 902
   },
@@ -9233,7 +9233,7 @@ export const CARDS_COMMON = [
   {
   id: 1184,
   category: "hourei",
-  source: "vocab-supplementary",
+  source: "jac-ch2",
   furi: "はっちゅうしゃ",
   jp: "発注者《はっちゅうしゃ》",
   type: "hukum",

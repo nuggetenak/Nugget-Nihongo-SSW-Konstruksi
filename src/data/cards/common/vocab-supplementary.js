@@ -1017,7 +1017,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1185,
   category: "hourei",
-  source: "vocab-supplementary",
+  source: "jac-ch2",
   furi: "せんもんぎょうしゃ",
   jp: "専門業者《せんもんぎょうしゃ》",
   type: "hukum",
@@ -1043,7 +1043,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "すみません",
   jp: "すみません",
   type: "vocab",
-  id_text: "Permisi / maaf / excuse",
+  id_text: "Permisi, maaf, excuse me",
   desc: "Dipakai untuk meminta izin lewat, minta tolong, menarik perhatian, atau minta",
   _origIndex: 1356
   },
@@ -1332,7 +1332,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "すぺーさー",
   jp: "スペーサー",
   type: "vocab",
-  id_text: "Penyangga tulangan /",
+  id_text: "Penyangga tulangan",
   desc: "Benda kecil dari mortar atau plastik yang diletakkan di bawah tulangan untuk",
   usage: "スペーサーを敷《し》く（meletakkan beton tahu）",
   _origIndex: 1563
@@ -1439,7 +1439,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ふきつけとそう",
   jp: "吹付け塗装《ふきつけとそう》",
   type: "vocab",
-  id_text: "Pengecatan semprot /",
+  id_text: "Pengecatan semprot",
   desc: "Metode pengecatan menggunakan semprotan udara bertekanan untuk menghasilkan",
   usage: "吹付《ふきつ》け塗装《とそう》する（melakukan spray painting）",
   _origIndex: 1572
@@ -1463,7 +1463,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "かべクロス",
   jp: "壁クロス《かべクロス》",
   type: "vocab",
-  id_text: "Wallpaper vinil /",
+  id_text: "Wallpaper vinil",
   desc: "Material pelapis dinding berbahan vinil yang ditempel pada papan gipsum",
   usage: "壁《かべ》クロスを張《は》る（memasang wallpaper）",
   _origIndex: 1574
@@ -1845,7 +1845,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "みみせん",
   jp: "耳栓《みみせん》",
   type: "vocab",
-  id_text: "Penyumbat telinga /",
+  id_text: "Penyumbat telinga",
   desc: "Wajib pakai pelindung telinga di lingkungan kebisingan >85 dB (gerinda,",
   _origIndex: 1402
   },
@@ -2525,7 +2525,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 1184,
   category: "hourei",
-  source: "vocab-supplementary",
+  source: "jac-ch2",
   furi: "はっちゅうしゃ",
   jp: "発注者《はっちゅうしゃ》",
   type: "hukum",

@@ -30,7 +30,7 @@ export const CARDS_CH4 = [
   furi: "べんちまーく",
   jp: "ベンチマーク（BM）・GL・FL",
   type: "konsep",
-  id_text: "BM / GL / FL",
+  id_text: "Simbol tinggi BM, GL, FL",
   desc: "BM: titik referensi ketinggian di lokasi. GL: tinggi permukaan tanah. FL: tinggi lantai jadi (1FL,",
   _origIndex: 138
   },
@@ -74,7 +74,7 @@ export const CARDS_CH4 = [
   furi: "かねをふる・すみつけ",
   jp: "矩を振る《かねをふる》・墨付け《すみつけ》",
   type: "konsep",
-  id_text: "Buat sudut 90° /",
+  id_text: "Buat sudut 90° + markah garis",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
   _origIndex: 243
   },
@@ -96,7 +96,7 @@ export const CARDS_CH4 = [
   furi: "たかさきごう",
   jp: "FH・SL・CH（高《たか》さ記号《きごう》）",
   type: "konsep",
-  id_text: "FH=tinggi tanah /",
+  id_text: "FH, SL, CH — simbol tinggi",
   desc: "FH=Formation Height (tinggi tanah rencana). SL=Slab Level (tinggi slab). CH=Ceiling Height (FL ke",
   _origIndex: 246
   },
@@ -107,7 +107,7 @@ export const CARDS_CH4 = [
   furi: "ようへき・やいた・こうやいた",
   jp: "擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》",
   type: "konsep",
-  id_text: "Dinding penahan tanah /",
+  id_text: "Dinding penahan + turap sheet pile",
   desc: "擁壁《ようへき》=dinding penahan tanah. 矢板《やいた》=papan penahan tanah.",
   _origIndex: 250
   },
@@ -162,7 +162,7 @@ export const CARDS_CH4 = [
   furi: "さぎょうゆか・かりがこい",
   jp: "作業床《さぎょうゆか》・仮囲い《かりがこい》",
   type: "konsep",
-  id_text: "Lantai kerja perancah /",
+  id_text: "Lantai kerja + pagar sementara",
   desc: "作業床《さぎょうゆか》=lantai dari papan tempat pekerja berdiri di perancah.",
   _origIndex: 257
   },
@@ -184,7 +184,7 @@ export const CARDS_CH4 = [
   furi: "けっそく・はっかー",
   jp: "結束《けっそく》・ハッカー",
   type: "konsep",
-  id_text: "Pengikatan tulangan /",
+  id_text: "Pengikatan tulangan + hacker",
   desc: "結束《けっそく》=mengikat persilangan tulangan dengan kawat 結束線《けっそくせん》 menggunakan ハッカー.",
   _origIndex: 261
   },
@@ -217,7 +217,7 @@ export const CARDS_CH4 = [
   furi: "おさまり・とりあい",
   jp: "納まり《おさまり》・取合い《とりあい》",
   type: "konsep",
-  id_text: "Kerapian pemasangan /",
+  id_text: "Kerapian + antarmuka pemasangan",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
   _origIndex: 264
   },
@@ -228,7 +228,7 @@ export const CARDS_CH4 = [
   furi: "つらいち・ふろく・めちがい",
   jp: "面一《つらいち》・不陸《ふろく》・目違い《めちがい》",
   type: "konsep",
-  id_text: "Rata sejajar /",
+  id_text: "Rata sejajar, tidak rata, tidak sejajar",
   desc: "面一《つらいち》=dua permukaan dalam satu bidang rata. 不陸《ふろく》=permukaan bergelombang.",
   _origIndex: 265
   },
@@ -283,7 +283,7 @@ export const CARDS_CH4 = [
   furi: "ほうれんそうほうこくれんらくそうだん",
   jp: "ほうれんそう（報告《ほうこく》・連絡《れんらく》・相談《そうだん》）",
   type: "konsep",
-  id_text: "Laporan / Komunikasi /",
+  id_text: "Laporan, Komunikasi, Konsultasi",
   desc: "報告《ほうこく》=lapor ke atasan. 連絡《れんらく》=sampaikan info/jadwal. 相談《そうだん》=konsultasikan masalah.",
   _origIndex: 283
   },
@@ -316,7 +316,7 @@ export const CARDS_CH4 = [
   furi: "そり vs むくり・ろく",
   jp: "反り《そり》 vs 起り《むくり》・陸《ろく》",
   type: "konsep",
-  id_text: "Cekung / cembung /",
+  id_text: "Cekung, cembung, rata",
   desc: "反《はん》り《そり》=melengkung CEKUNG. 起《お》きり《むくり》=melengkung CEMBUNG.",
   _origIndex: 286
   },
@@ -338,7 +338,7 @@ export const CARDS_CH4 = [
   furi: "みきる・みきりざい・なじみ",
   jp: "見切る《みきる》・見切り材《みきりざい》・馴染み《なじみ》",
   type: "konsep",
-  id_text: "Selesaikan sambungan /",
+  id_text: "Selesaikan sambungan + bahan trim",
   desc: "見《み》え切《みき》りる《みきる》=selesaikan sambungan dua pekerjaan finishing.",
   _origIndex: 288
   },
@@ -382,7 +382,7 @@ export const CARDS_CH4 = [
   furi: "ばしょうち・うつだせつ",
   jp: "場所打ち《ばしょうち》・打つ《うつ》／打設する《だせつ》",
   type: "konsep",
-  id_text: "Pengecoran di lokasi /",
+  id_text: "Pengecoran di lokasi",
   desc: "場所打《ばしょう》ちち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.",
   _origIndex: 292
   },
@@ -393,7 +393,7 @@ export const CARDS_CH4 = [
   furi: "のろ・あんこ",
   jp: "ノロ・アンコ",
   type: "konsep",
-  id_text: "Adukan semen encer /",
+  id_text: "Adukan encer + filler (noro/anko)",
   desc: "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting.",
   _origIndex: 293
   },
@@ -404,7 +404,7 @@ export const CARDS_CH4 = [
   furi: "てんよう・くぎじまい",
   jp: "転用《てんよう》・釘仕舞《くぎじまい》",
   type: "konsep",
-  id_text: "Pakai ulang bekisting /",
+  id_text: "Pakai ulang bekisting + rapikan paku",
   desc: "転《ころ》び用《てんよう》=memakai kembali bekisting di lokasi berbeda untuk hemat biaya.",
   _origIndex: 294
   },
@@ -415,7 +415,7 @@ export const CARDS_CH4 = [
   furi: "はいごう・ねりまぜ・たんぴんぐ",
   jp: "配合《はいごう》・練り混ぜ《ねりまぜ》・タンピング",
   type: "konsep",
-  id_text: "Rasio campuran /",
+  id_text: "Rasio campuran + pengadukan + tamping",
   desc: "配合《はいごう》=perbandingan semen, pasir, kerikil, air. 練《ね》りり混《ま》ぜぜ《ねりまぜ》=mencampur hingga merata.",
   _origIndex: 295
   },
@@ -998,7 +998,7 @@ export const CARDS_CH4 = [
   furi: "あーるしーぞう・えすぞう・えすあーるしーぞう・もくぞう",
   jp: "RC造《あーるしーぞう》・S造《えすぞう》・SRC造《えすあーるしーぞう》・木造《もくぞう》",
   type: "konsep",
-  id_text: "RC / S / SRC / kayu",
+  id_text: "Jenis struktur RC, S, SRC, kayu",
   desc: "RC造《ぞう》=beton bertulang. S造《つく》り=baja. SRC造《つく》り=baja+RC. 木造《もくぞう》=kayu.\nWajib dikenali untuk",
   _origIndex: 1532
   },
@@ -1009,7 +1009,7 @@ export const CARDS_CH4 = [
   furi: "あそび・たてこみ",
   jp: "あそび・建込み《たてこみ》",
   type: "konsep",
-  id_text: "Kelonggaran sambungan /",
+  id_text: "Kelonggaran + pemasangan komponen",
   desc: "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang.\n建込《たてこ》み=mendirikan bekisting",
   _origIndex: 1533
   },
@@ -1284,7 +1284,7 @@ export const CARDS_CH4 = [
   furi: "つうせん・はいかんする・すらぶはいかん・しこむ",
   jp: "通線《つうせん》・配管する《はいかんする》・スラブ配管《すらぶはいかん》・仕込む《しこむ》",
   type: "konsep",
-  id_text: "通線/konduit/slab/siapkan",
+  id_text: "Tarik kabel, pasang konduit, slab, siapkan",
   desc: "通線《つうせん》=tarik kabel; 配管《はいかん》する=pasang konduit; スラブ配管《はいかん》=konduit dalam slab; 仕込《しこ》む=persiapkan.",
   _origIndex: 298
   },
@@ -1306,7 +1306,7 @@ export const CARDS_CH4 = [
   furi: "ひふく・いちじがわ・にじがわ",
   jp: "被覆《ひふく》・一次側《いちじがわ》・二次側《にじがわ》",
   type: "konsep",
-  id_text: "Selubung/input/output",
+  id_text: "Selubung, sisi primer, sisi sekunder",
   desc: "被覆《ひふく》=insulasi kawat; 一次側《いちじがわ》=sisi input listrik; 二次側《にじがわ》=sisi output. Penting saat koneksi",
   _origIndex: 300
   },
@@ -1350,7 +1350,7 @@ export const CARDS_CH4 = [
   furi: "ぶんき・しんしゅく・じゃばら",
   jp: "分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》",
   type: "konsep",
-  id_text: "Cabang/muai/akordeon",
+  id_text: "Cabang, muai, akor lipatan",
   desc: "分岐《ぶんき》=pipa terbagi dua; 伸縮《しんしゅく》=memuai/menyusut akibat suhu; 蛇腹《じゃばら》=konektor fleksibel",
   _origIndex: 305
   },

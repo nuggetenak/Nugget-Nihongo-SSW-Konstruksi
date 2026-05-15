@@ -1867,7 +1867,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "そけっとれんち / ぼっくすれんち / ろっかくれんち",
   jp: "ソケットレンチ / ボックスレンチ / 六角レンチ《そけっとれんち / ぼっくすれんち / ろっかくれんち》",
   type: "konsep",
-  id_text: "Socket / box / hex wrench",
+  id_text: "Kunci soket, box, dan hex",
   desc: "ソケットレンチ=kepala soket ganti. ボックスレンチ=soket+handle menyatu. 六角《ろっかく》レンチ=batang hex untuk baut",
   _origIndex: 420
   },
@@ -2065,7 +2065,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "ほうき + ちりとり + ぶろああ",
   jp: "ほうき + ちりとり + ブロアー",
   type: "konsep",
-  id_text: "Sapu / Pengki / Blower",
+  id_text: "Sapu, pengki, dan blower",
   desc: "ほうき = sapu membersihkan lantai.\nちりとり = pengki mengumpulkan sampah sapuan.",
   _origIndex: 454
   },
@@ -2164,7 +2164,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "めじゃあ《まきじゃく》・じょうぎ",
   jp: "メジャー（巻き尺《まきじゃく》）・定規《じょうぎ》",
   type: "konsep",
-  id_text: "Meteran gulung /",
+  id_text: "Meteran gulung + mistar",
   desc: "メジャー=pita ukur gulung; tipe baja tipis disebut コンベックス. 定規《じょうぎ》=penggaris untuk menarik garis",
   _origIndex: 709
   },
@@ -2462,7 +2462,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "ぶんでんばん",
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
-  id_text: "Panel distribusi /",
+  id_text: "Panel distribusi",
   desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit",
   _origIndex: 1126
   },

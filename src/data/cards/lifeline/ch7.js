@@ -74,7 +74,7 @@ export const CARDS_LIFELINE_CH7 = [
   furi: "げきとつされ・まきこまれ",
   jp: "激突され《げきとつされ》/ はさまれ・巻き込まれ《まきこまれ》",
   type: "konsep",
-  id_text: "Tertabrak alat berat /",
+  id_text: "Tertabrak + terjepit/terlibas",
   desc: "激突《げきとつ》され = tertabrak kendaraan berat atau bucket crane saat berputar.",
   _origIndex: 586
   },
@@ -85,7 +85,7 @@ export const CARDS_LIFELINE_CH7 = [
   furi: "ゆうがいぶつせっしょく / おぼれる / かさい",
   jp: "有害物接触 / おぼれ / 火災《ゆうがいぶつせっしょく / おぼれる / かさい》",
   type: "konsep",
-  id_text: "Kontak bahan berbahaya /",
+  id_text: "Kontak bahan berbahaya, tenggelam, kebakaran",
   desc: "有害物《ゆうがいぶつ》接触《せっしょく》: zat kimia menyentuh kulit → gangguan kesehatan.",
   _origIndex: 587
   },
@@ -228,7 +228,7 @@ export const CARDS_LIFELINE_CH7 = [
   furi: "しいるどめんつきへるめっと / あんぜんぐつ",
   jp: "シールド面付きヘルメット / 安全靴《しいるどめんつきへるめっと / あんぜんぐつ》",
   type: "konsep",
-  id_text: "Helm pelindung wajah /",
+  id_text: "Helm wajah + sepatu safety",
   desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari",
   _origIndex: 600
   },
@@ -239,7 +239,7 @@ export const CARDS_LIFELINE_CH7 = [
   furi: "あつさしすう・まなつび・もうしょび",
   jp: "WBGT（暑さ指数《あつさしすう》）・真夏日《まなつび》・猛暑日《もうしょび》",
   type: "konsep",
-  id_text: "WBGT / Hari panas 30℃+ /",
+  id_text: "WBGT + hari panas 30℃+ + hari terik 35℃+",
   desc: "WBGT = indeks risiko 熱中症《ねっちゅうしょう》 dari 気象庁《きしょうちょう》. 真夏日《まなつび》 = >30℃, 猛暑日《もうしょび》 = >35℃.",
   _origIndex: 601
   },

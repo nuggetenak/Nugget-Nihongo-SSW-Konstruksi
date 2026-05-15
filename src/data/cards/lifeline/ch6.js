@@ -2095,7 +2095,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "グルーブドせつごう",
   jp: "グルーブド接合《グルーブドせつごう》",
   type: "vocab",
-  id_text: "Sambungan grooved /",
+  id_text: "Sambungan grooved",
   desc: "Sambungan menggunakan alur di ujung pipa dan coupling. Pengerjaan lebih cepat",
   _origIndex: 1158
   },
@@ -2161,7 +2161,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "システムてんじょう",
   jp: "システム天井《システムてんじょう》",
   type: "vocab",
-  id_text: "Plafon sistem /",
+  id_text: "Plafon sistem",
   desc: "Plafon modular yang mengintegrasikan pencahayaan, AC, dan peralatan kebakaran",
   _origIndex: 1253
   },

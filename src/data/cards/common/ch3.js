@@ -69,7 +69,7 @@ export const CARDS_CH3 = [
   },
 {
   id: 166,
-  category: "hourei",
+  category: "career",
   source: "jac-ch3",
   furi: "しかくのさんしゅるい：こっかめんきょ・ぎのうこうしゅう・とくべつきょういく",
   jp: "資格の3種類《しかくのさんしゅるい》：国家免許《こっかめんきょ》・技能講習《ぎのうこうしゅう》・特別教育《とくべつきょういく》",
@@ -80,7 +80,7 @@ export const CARDS_CH3 = [
   },
 {
   id: 167,
-  category: "hourei",
+  category: "career",
   source: "jac-ch3",
   furi: "はっぱぎしめんきょ",
   jp: "発破技士免許《はっぱぎし》",
@@ -113,7 +113,7 @@ export const CARDS_CH3 = [
   },
 {
   id: 170,
-  category: "hourei",
+  category: "career",
   source: "jac-ch3",
   furi: "くれーん・くれえんいどうしきくれえんしかくしきい",
   jp: "クレーン・移動式クレーン資格《くれえんいどうしきくれえんしかくしきい》",
@@ -811,7 +811,7 @@ export const CARDS_CH3 = [
   furi: "すいしんとんねる",
   jp: "推進トンネル《すいしんトンネル》",
   type: "konsep",
-  id_text: "Terowongan jack-push /",
+  id_text: "Terowongan jack-push",
   desc: "Pipa prefabrikasi didorong ke tanah oleh jack dari shaft peluncur.\nDigunakan untuk infrastruktur",
   _origIndex: 1506
   },
@@ -1042,7 +1042,7 @@ export const CARDS_CH3 = [
   furi: "こんくりいとぶろっくぞうぞうてっきんもるたるほきょう",
   jp: "コンクリートブロック造《ぞう》（CB造《ぞう》）",
   type: "konsep",
-  id_text: "CB造",
+  id_text: "Konstruksi bata beton (CB)",
   desc: "Blok beton berlubang disusun, rongga diisi tulangan lalu dicor mortar.\nLebih kokoh dari bata biasa.",
   _origIndex: 1527
   },

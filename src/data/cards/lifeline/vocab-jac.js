@@ -20,7 +20,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "しほこう",
   jp: "支保工《しほこう》",
   type: "vocab",
-  id_text: "Perancah penyangga /",
+  id_text: "Perancah penyangga",
   desc: "Struktur penyangga sementara untuk bekisting atau dinding galian.",
   usage: "支保工《しほこう》を設置《せっち》する（memasang perancah penyangga）",
   _origIndex: 931
