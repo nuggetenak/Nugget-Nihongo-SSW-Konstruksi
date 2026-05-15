@@ -35,8 +35,8 @@ Files: `src/data/cards/**/*.js` (split files)
 
 ### P2 — Ruby: desc + usage
 Files: `src/data/cards/**/*.js`
-- [ ] 33 naked kanji di desc — tambahkan ruby (prioritas: id range 1256–1286, jac-ch3)
-- [ ] 2 naked kanji di usage — `id=662`, `id=939`
+- [x] 33 naked kanji di desc — tambahkan ruby (10 kartu fixed; 1256–1286 range)
+- [x] 2 naked kanji di usage — `id=662` fixed; `id=939` sudah clean
 
 ---
 
