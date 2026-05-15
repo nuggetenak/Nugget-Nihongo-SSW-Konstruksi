@@ -254,7 +254,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "くったい",
   jp: "躯体《くったい》",
   type: "vocab",
-  id_text: "Struktur utama bangunan",
+  id_text: "Struktur utama bangunan (くったい)",
   desc: "Rangka pokok bangunan: fondasi, kolom, balok, dinding, lantai.\nSemua elemen",
   _origIndex: 928
   },
@@ -265,7 +265,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "ないそう",
   jp: "内装《ないそう》",
   type: "vocab",
-  id_text: "Finishing interior",
+  id_text: "Interior / 内装",
   desc: "Pekerjaan finishing bagian dalam bangunan.\nDilakukan setelah pekerjaan struktur",
   _origIndex: 929
   },
@@ -299,7 +299,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "ついらく",
   jp: "墜落《ついらく》",
   type: "vocab",
-  id_text: "Jatuh dari ketinggian",
+  id_text: "Jatuh vertikal (墜落)",
   desc: "Jatuh dari tempat tinggi. Penyebab kecelakaan terbesar di konstruksi Jepang.",
   _origIndex: 950
   },
@@ -310,7 +310,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "さんそけつぼう",
   jp: "酸素欠乏《さんそけつぼう》",
   type: "vocab",
-  id_text: "Kekurangan oksigen",
+  id_text: "Kekurangan oksigen (konsep)",
   desc: "Kondisi kadar oksigen rendah di ruang tertutup.\nWaspadai 酸素欠乏《さんそけつぼう》saat",
   _origIndex: 951
   },
@@ -321,7 +321,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "どどめ",
   jp: "土留め《どどめ》",
   type: "vocab",
-  id_text: "Penahan tanah",
+  id_text: "Penahan tanah (土留め vocab)",
   desc: "Struktur penahan dinding tanah agar tidak longsor.\nGalian >1.5m wajib pasang",
   _origIndex: 952
   },
@@ -344,7 +344,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "せこうかんり",
   jp: "施工管理《せこうかんり》",
   type: "vocab",
-  id_text: "Manajemen konstruksi",
+  id_text: "Manajemen konstruksi (vocab)",
   desc: "Pengelolaan pelaksanaan konstruksi: kualitas, jadwal, biaya, K3, lingkungan.",
   _origIndex: 954
   },
@@ -421,7 +421,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "おさきにしつれいします",
   jp: "お先に失礼します《おさきにしつれいします》",
   type: "vocab",
-  id_text: "Pamit pulang lebih dulu",
+  id_text: "Pamit pulang lebih dulu (vocab)",
   desc: "Ucapan saat pulang duluan.\nWajib — tidak bilang ini dianggap tidak sopan.",
   _origIndex: 1362
   },
@@ -621,7 +621,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "やまどめ",
   jp: "山留め《やまどめ》",
   type: "vocab",
-  id_text: "Penahan tanah",
+  id_text: "Penahan tanah (山留め)",
   desc: "Sistem penahan tanah untuk galian dalam agar tidak longsor.",
   usage: "山留め《やまどめ》を設置《せっち》する（memasang sistem penahan tanah）",
   _origIndex: 1587
@@ -758,7 +758,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "くたい",
   jp: "躯体《くたい》",
   type: "konsep",
-  id_text: "Struktur utama bangunan",
+  id_text: "Struktur utama bangunan (くたい)",
   desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》,",
   _origIndex: 1560
   }

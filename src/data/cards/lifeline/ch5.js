@@ -1113,17 +1113,6 @@ export const CARDS_LIFELINE_CH5 = [
   _origIndex: 443
   },
 {
-  id: 374,
-  category: "haikan",
-  source: "jac-ch5",
-  furi: "ねじげえじ",
-  jp: "ねじゲージ",
-  type: "konsep",
-  id_text: "Alat ukur ulir pipa",
-  desc: "Alat memeriksa ulir pada pipa dan fitting agar sesuai standar, memastikan sambungan tidak bocor.",
-  _origIndex: 444
-  },
-{
   id: 386,
   category: "haikan",
   source: "jac-ch5",
@@ -1141,7 +1130,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "ばん",
   jp: "盤《ばん》",
   type: "konsep",
-  id_text: "Panel distribusi listrik",
+  id_text: "Panel listrik (盤 — generik)",
   desc: "Panel berisi breaker: 自立盤《じりつばん》= berdiri lantai; 壁掛《かべか》けけ盤《かべかけばん》= di dinding.",
   _origIndex: 457
   },
@@ -2462,7 +2451,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "ぶんでんばん",
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
-  id_text: "Panel distribusi",
+  id_text: "Panel distribusi listrik (分電盤)",
   desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit",
   _origIndex: 1126
   },
@@ -2528,7 +2517,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "でんきこうじし",
   jp: "電気工事士《でんきこうじし》",
   type: "vocab",
-  id_text: "Teknisi listrik",
+  id_text: "Teknisi listrik (definisi)",
   desc: "Lisensi nasional untuk instalasi listrik. Tingkat 2: AC ≤600V. Tingkat 1:",
   _origIndex: 1149
   },
@@ -2539,7 +2528,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "えすしーこねくた",
   jp: "SCコネクタ",
   type: "vocab",
-  id_text: "Konektor fiber optik",
+  id_text: "Konektor fiber optik SC",
   desc: "Konektor push-pull untuk sambungan ONU. Mudah dipasang dan dilepas dengan satu",
   _origIndex: 1179
   },
@@ -2550,7 +2539,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "えるしーこねくた",
   jp: "LCコネクタ",
   type: "vocab",
-  id_text: "Konektor fiber optik",
+  id_text: "Konektor fiber optik LC",
   desc: "Lebih kecil dari SC, memungkinkan kepadatan tinggi. Banyak dipakai di switch",
   _origIndex: 1180
   },

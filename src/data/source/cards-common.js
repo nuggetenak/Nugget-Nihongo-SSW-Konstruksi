@@ -316,7 +316,7 @@ export const CARDS_COMMON = [
   furi: "せこうかんりしょていのひんしつ",
   jp: "施工管理《せこうかんりしょていのひんしつ》",
   type: "konsep",
-  id_text: "Manajemen konstruksi",
+  id_text: "Manajemen konstruksi (kualitas)",
   desc: "Pengelolaan pelaksanaan proyek sesuai rencana. Kunci ujian: 品質《ひんしつ》 (kualitas), bukan 環境《かんきょう》.",
   _origIndex: 48
   },
@@ -349,7 +349,7 @@ export const CARDS_COMMON = [
   furi: "ついらくてんらく",
   jp: "墜落《ついらく》・転落《てんらく》",
   type: "konsep",
-  id_text: "Jatuh dari ketinggian",
+  id_text: "Jatuh dari ketinggian (墜落・転落)",
   desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total.",
   _origIndex: 109
   },
@@ -393,7 +393,7 @@ export const CARDS_COMMON = [
   furi: "さんそけつぼう",
   jp: "酸素欠乏《さんそけつぼう》",
   type: "konsep",
-  id_text: "Kekurangan oksigen",
+  id_text: "Kekurangan oksigen (vocab)",
   desc: "Bahaya di ruang tertutup. Cek oksigen sebelum masuk MANHOLE. Kerja di atap tidak termasuk.",
   _origIndex: 113
   },
@@ -1163,7 +1163,7 @@ export const CARDS_COMMON = [
   furi: "でんきこうじしいっしゅにしゅおおがたしせついっしゅ",
   jp: "電気工事士《でんきこうじし》（一種《いっしゅ》・二種《にしゅ》）",
   type: "hukum",
-  id_text: "Teknisi listrik",
+  id_text: "Teknisi listrik (kelas 1 dan 2)",
   desc: "二種《にしゅ》=rumah/kecil (600V以下《いか》). 一種《いっしゅ》=gedung besar, pabrik, tegangan tinggi—wajib.",
   _origIndex: 232
   },
@@ -1625,7 +1625,7 @@ export const CARDS_COMMON = [
   furi: "あとかたづけしょうかかくにん",
   jp: "後片付け《あとかたづけ》・消火確認《しょうかかくにん》",
   type: "konsep",
-  id_text: "Beres",
+  id_text: "Beres + cek api",
   desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》りり《だんどり》 untuk esok.",
   _origIndex: 308
   },
@@ -2472,7 +2472,7 @@ export const CARDS_COMMON = [
   furi: "とちのせいやく",
   jp: "土地の制約《とちのせいやく》",
   type: "konsep",
-  id_text: "Karakteristik konstruksi",
+  id_text: "Karakteristik konstruksi — batasan lahan",
   desc: "Setiap proyek melekat pada lahan unik sehingga kondisi identik tidak pernah berulang; berbeda dari",
   _origIndex: 483
   },
@@ -2483,7 +2483,7 @@ export const CARDS_COMMON = [
   furi: "しぜんじょうけんによるえいきょう",
   jp: "自然条件による影響《しぜんじょうけんによるえいきょう》",
   type: "konsep",
-  id_text: "Karakteristik konstruksi",
+  id_text: "Karakteristik konstruksi — kondisi alam",
   desc: "Pekerjaan konstruksi umumnya di luar ruangan sehingga terpengaruh topografi, musim, dan cuaca —",
   _origIndex: 484
   },
@@ -2494,7 +2494,7 @@ export const CARDS_COMMON = [
   furi: "しゃかいてきせいやく",
   jp: "社会的制約《しゃかいてきせいやく》",
   type: "konsep",
-  id_text: "Karakteristik konstruksi",
+  id_text: "Karakteristik konstruksi — batasan sosial",
   desc: "Karena produksi di lokasi asli (現地《げんち》生産《せいさん》), wajib memenuhi peraturan keselamatan dan",
   _origIndex: 485
   },
@@ -2659,7 +2659,7 @@ export const CARDS_COMMON = [
   furi: "らいにんぐこうかんのがすようだんぜったいきんし",
   jp: "ライニング鋼管のガス溶断絶対禁止《らいにんぐこうかんのがすようだんぜったいきんし》",
   type: "konsep",
-  id_text: "DILARANG",
+  id_text: "DILARANG: las gas pada pipa lining",
   desc: "Pemotongan ライニング鋼管《こうかん》 dengan ガス溶断《ようだん》 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak",
   _origIndex: 513
   },
@@ -2670,7 +2670,7 @@ export const CARDS_COMMON = [
   furi: "どうかんのせつだんにかのこぐらいんだあきんし",
   jp: "銅管の切断に金ノコ《かのこ》・グラインダー禁止《きんし》",
   type: "konsep",
-  id_text: "DILARANG",
+  id_text: "DILARANG: gergaji/gerinda pada pipa tembaga",
   desc: "Memotong pipa tembaga (銅管《どうかん》) dengan 金《かな》ノコ atau グラインダー menghasilkan serbuk logam di dalam pipa",
   _origIndex: 516
   },
@@ -2681,7 +2681,7 @@ export const CARDS_COMMON = [
   furi: "こうそくといしたいぷのせつだんこうぐ",
   jp: "高速砥石タイプの切断工具《こうそくといしたいぷのせつだんこうぐ》",
   type: "konsep",
-  id_text: "DILARANG",
+  id_text: "DILARANG: gerinda kecepatan tinggi",
   desc: "Panas dari grinder dapat mendistorsi permukaan potongan pipa polietilen yang dipakai untuk",
   _origIndex: 531
   },
@@ -2857,7 +2857,7 @@ export const CARDS_COMMON = [
   furi: "せんもんこうじぎょうしゃ",
   jp: "専門工事業者《せんもんこうじぎょうしゃ》",
   type: "konsep",
-  id_text: "Kontraktor spesialis",
+  id_text: "Kontraktor spesialis (工事業者)",
   desc: "Kontraktor spesialis yang menerima subkontrak dari ゼネコン.",
   _origIndex: 569
   },
@@ -2912,7 +2912,7 @@ export const CARDS_COMMON = [
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
   type: "konsep",
-  id_text: "Kontraktor utama",
+  id_text: "Kontraktor utama (konsep)",
   desc: "Pihak yang menerima kontrak langsung dari klien lalu memberi subkontrak ke spesialis.",
   _origIndex: 574
   },
@@ -3060,24 +3060,13 @@ export const CARDS_COMMON = [
   _origIndex: 587
   },
   {
-  id: 518,
-  category: "anzen",
-  source: "jac-ch7",
-  furi: "たまがけ",
-  jp: "玉掛け《たまがけ》",
-  type: "konsep",
-  id_text: "Pengikatan beban crane",
-  desc: "Teknik mengikat material ke kait crane dengan wire rope atau sling sebelum diangkat.",
-  _origIndex: 588
-  },
-  {
   id: 519,
   category: "anzen",
   source: "jac-ch7",
   furi: "どどめくっさくふかさいじょうでげんそくひつよう",
   jp: "土留め《どどめ》",
   type: "konsep",
-  id_text: "Penahan tanah",
+  id_text: "Penahan tanah (土留め)",
   desc: "Saat menggali parit untuk pipa, tanah bisa longsor menimbun pekerja.",
   _origIndex: 589
   },
@@ -3709,24 +3698,13 @@ export const CARDS_COMMON = [
   _origIndex: 698
   },
   {
-  id: 592,
-  category: "career",
-  source: "jac-ch4",
-  furi: "ほうれんそうほおこくれんらくそうだん",
-  jp: "ほうれんそう（報告《ほうこく》・連絡《れんらく》・相談《そうだん》）",
-  type: "konsep",
-  id_text: "Hourensou",
-  desc: "ほうれんそう=報告《ほうこく》(lapor ke atasan), 連絡《れんらく》(sampaikan info/jadwal), 相談《そうだん》(konsultasikan masalah).",
-  _origIndex: 699
-  },
-  {
   id: 593,
   category: "anzen",
   source: "jac-ch4",
   furi: "あとかたずけさぎょうしゅうりょうごのぎむ",
   jp: "後片付け《あとかたずけ》（作業《さぎょう》終了《しゅうりょう》後《ご》の義務《ぎむ》・火《ひ》の確認《かくにん》）",
   type: "konsep",
-  id_text: "Beres",
+  id_text: "Beres (kewajiban setelah kerja)",
   desc: "Setelah selesai bekerja WAJIB 後《あと》片付《あとかたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan",
   _origIndex: 700
   },
@@ -4396,7 +4374,7 @@ export const CARDS_COMMON = [
   furi: "すいへいき",
   jp: "水平器《すいへいき》",
   type: "vocab",
-  id_text: "Waterpass / spirit level",
+  id_text: "Waterpass / spirit level (vocab)",
   desc: "Alat untuk memeriksa kerataan horizontal saat pemasangan pipa dan peralatan.",
   usage: "水平器《すいへいき》で確認《かくにん》する（memeriksa dengan waterpass）",
   _origIndex: 985
@@ -4655,7 +4633,7 @@ export const CARDS_COMMON = [
   furi: "しつじゅんようじょう",
   jp: "湿潤養生《しつじゅんようじょう》",
   type: "vocab",
-  id_text: "Perawatan beton dengan",
+  id_text: "Perawatan beton — pembasahan",
   desc: "Metode perawatan beton dengan menjaga kelembaban permukaan untuk mencegah retak.",
   _origIndex: 1233
   },
@@ -4666,7 +4644,7 @@ export const CARDS_COMMON = [
   furi: "じょうきようじょう",
   jp: "蒸気養生《じょうきようじょう》",
   type: "vocab",
-  id_text: "Perawatan beton dengan",
+  id_text: "Perawatan beton — uap",
   desc: "Curing produk precast menggunakan uap panas (~60–80°C) agar kekuatan awal",
   _origIndex: 1234
   },
@@ -4677,7 +4655,7 @@ export const CARDS_COMMON = [
   furi: "ひまくようじょう",
   jp: "被膜養生《ひまくようじょう》",
   type: "vocab",
-  id_text: "Perawatan beton dengan",
+  id_text: "Perawatan beton — membran",
   desc: "Penyemprotan agen membran ke permukaan beton untuk mencegah penguapan air.",
   _origIndex: 1235
   },
@@ -5018,7 +4996,7 @@ export const CARDS_COMMON = [
   furi: "ちょくせつかせつ",
   jp: "直接仮設《ちょくせつかせつ》",
   type: "vocab",
-  id_text: "Pekerjaan sementara",
+  id_text: "Pekerjaan sementara langsung",
   desc: "Pekerjaan sementara yang khusus untuk satu area/jenis pekerjaan tertentu.",
   _origIndex: 1308
   },
@@ -5029,7 +5007,7 @@ export const CARDS_COMMON = [
   furi: "きょうつうかせつ",
   jp: "共通仮設《きょうつうかせつ》",
   type: "vocab",
-  id_text: "Pekerjaan sementara",
+  id_text: "Pekerjaan sementara bersama",
   desc: "Fasilitas sementara yang dipakai semua pihak di proyek (kantor, toilet,",
   _origIndex: 1309
   },
@@ -5140,7 +5118,7 @@ export const CARDS_COMMON = [
   furi: "そうごうせこうけいかくしょ",
   jp: "総合施工計画書《そうごうせこうけいかくしょ》",
   type: "vocab",
-  id_text: "Rencana pelaksanaan",
+  id_text: "Rencana pelaksanaan komprehensif",
   desc: "Dokumen yang merangkum rencana keseluruhan proyek, dibuat sebelum pekerjaan",
   _origIndex: 1321
   },
@@ -5184,7 +5162,7 @@ export const CARDS_COMMON = [
   furi: "せんもんぎょうしゃ",
   jp: "専門業者《せんもんぎょうしゃ》",
   type: "hukum",
-  id_text: "Kontraktor spesialis",
+  id_text: "Kontraktor spesialis (業者)",
   desc: "Kontraktor yang mengerjakan bidang khusus seperti listrik, AC, dan perpipaan.",
   _origIndex: 1341
   },
@@ -5949,7 +5927,7 @@ export const CARDS_COMMON = [
   furi: "ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ",
   jp: "舗装の4層《ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ》",
   type: "konsep",
-  id_text: "4 lapisan jalan beraspal",
+  id_text: "4 lapisan perkerasan (komposisi)",
   desc: "①路床《ろしょう》=dasar terbawah ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.",
   _origIndex: 1469
   },
@@ -6147,7 +6125,7 @@ export const CARDS_COMMON = [
   furi: "ほそうこうじのよんそうこうぞうきそうをわすれずに",
   jp: "舗装工事の4層構造《ほそうこうじのよんそうこうぞうきそうをわすれずに》",
   type: "konsep",
-  id_text: "4 lapisan jalan beraspal",
+  id_text: "4 lapisan perkerasan (konstruksi)",
   desc: "①路床《ろしょう》 ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.\n基層《きそう》sering terlupa!",
   _origIndex: 1487
   },
@@ -6371,7 +6349,7 @@ export const CARDS_COMMON = [
   furi: "けんちくぶつのこうぞうしゅるい",
   jp: "建築物の構造種類《けんちくぶつのこうぞうしゅるい》（RC・S・SRC・木造《もくぞう》・CB造《ぞう》）",
   type: "konsep",
-  id_text: "5 jenis struktur",
+  id_text: "5 jenis struktur (RC,S,SRC,kayu,CB)",
   desc: "RC造《ぞう》=tulangan+beton, S造《つく》り=baja, SRC造《つく》り=baja+RC (terkuat), 木造《もくぞう》=kayu, CB造《つく》り=blok",
   _origIndex: 1507
   },
@@ -6679,7 +6657,7 @@ export const CARDS_COMMON = [
   furi: "けんちくぶつのこうぞうごしゅるい",
   jp: "建築物の構造5種類《けんちくぶつのこうぞうごしゅるい》",
   type: "konsep",
-  id_text: "5 jenis struktur",
+  id_text: "5 jenis struktur bangunan",
   desc: "RC造《ぞう》=tulangan+beton. S造《つく》り=baja. SRC造《つく》り=baja+RC, gedung tinggi.\n木造《もくぞう》=kayu. CB造《つく》り=blok",
   _origIndex: 1535
   },
@@ -6767,7 +6745,7 @@ export const CARDS_COMMON = [
   furi: "ないそうしあげこうじぼおどくろすゆかかあてん",
   jp: "内装仕上げ工事《ないそうしあげこうじ》（LGS・ボード・クロス・床《ゆか》）",
   type: "konsep",
-  id_text: "Finishing interior",
+  id_text: "Pekerjaan finishing interior",
   desc: "①LGS/軽天《けいてん》=rangka baja ringan. ②ボード=papan gypsum+pate. ③クロス=wallpaper.\n④塗装《とそう》仕上《うえ》げ.",
   _origIndex: 1543
   },
@@ -6954,7 +6932,7 @@ export const CARDS_COMMON = [
   furi: "くたい",
   jp: "躯体《くたい》",
   type: "konsep",
-  id_text: "Struktur utama bangunan",
+  id_text: "Struktur utama bangunan (くたい)",
   desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》,",
   _origIndex: 1560
   },
@@ -8307,7 +8285,7 @@ export const CARDS_COMMON = [
   furi: "くったい",
   jp: "躯体《くったい》",
   type: "vocab",
-  id_text: "Struktur utama bangunan",
+  id_text: "Struktur utama bangunan (くったい)",
   desc: "Rangka pokok bangunan: fondasi, kolom, balok, dinding, lantai.\nSemua elemen",
   _origIndex: 928
   },
@@ -8318,7 +8296,7 @@ export const CARDS_COMMON = [
   furi: "ないそう",
   jp: "内装《ないそう》",
   type: "vocab",
-  id_text: "Finishing interior",
+  id_text: "Interior / 内装",
   desc: "Pekerjaan finishing bagian dalam bangunan.\nDilakukan setelah pekerjaan struktur",
   _origIndex: 929
   },
@@ -8352,7 +8330,7 @@ export const CARDS_COMMON = [
   furi: "ついらく",
   jp: "墜落《ついらく》",
   type: "vocab",
-  id_text: "Jatuh dari ketinggian",
+  id_text: "Jatuh vertikal (墜落)",
   desc: "Jatuh dari tempat tinggi. Penyebab kecelakaan terbesar di konstruksi Jepang.",
   _origIndex: 950
   },
@@ -8363,7 +8341,7 @@ export const CARDS_COMMON = [
   furi: "さんそけつぼう",
   jp: "酸素欠乏《さんそけつぼう》",
   type: "vocab",
-  id_text: "Kekurangan oksigen",
+  id_text: "Kekurangan oksigen (konsep)",
   desc: "Kondisi kadar oksigen rendah di ruang tertutup.\nWaspadai 酸素欠乏《さんそけつぼう》saat",
   _origIndex: 951
   },
@@ -8374,7 +8352,7 @@ export const CARDS_COMMON = [
   furi: "どどめ",
   jp: "土留め《どどめ》",
   type: "vocab",
-  id_text: "Penahan tanah",
+  id_text: "Penahan tanah (土留め vocab)",
   desc: "Struktur penahan dinding tanah agar tidak longsor.\nGalian >1.5m wajib pasang",
   _origIndex: 952
   },
@@ -8397,7 +8375,7 @@ export const CARDS_COMMON = [
   furi: "せこうかんり",
   jp: "施工管理《せこうかんり》",
   type: "vocab",
-  id_text: "Manajemen konstruksi",
+  id_text: "Manajemen konstruksi (vocab)",
   desc: "Pengelolaan pelaksanaan konstruksi: kualitas, jadwal, biaya, K3, lingkungan.",
   _origIndex: 954
   },
@@ -8552,7 +8530,7 @@ export const CARDS_COMMON = [
   furi: "げんばかんとく",
   jp: "現場監督《げんばかんとく》",
   type: "vocab",
-  id_text: "Pengawas lapangan",
+  id_text: "Pengawas lapangan (vocab)",
   desc: "Orang yang mengelola kualitas, K3, dan jadwal di lokasi konstruksi.",
   _origIndex: 977
   },
@@ -9090,7 +9068,7 @@ export const CARDS_COMMON = [
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
   type: "hukum",
-  id_text: "Kontraktor utama",
+  id_text: "Kontraktor utama (vocab)",
   desc: "Pihak yang menerima proyek langsung dari pemilik dan mengelola semua sub-kontraktor.",
   _origIndex: 1325
   },
@@ -9225,7 +9203,7 @@ export const CARDS_COMMON = [
   furi: "せこうけいかく",
   jp: "施工計画《せこうけいかく》",
   type: "vocab",
-  id_text: "Rencana pelaksanaan",
+  id_text: "Rencana pelaksanaan (vocab)",
   desc: "Rencana kerja sebelum konstruksi: jadwal, kualitas, dan keselamatan.",
   usage: "施工《せこう》計画《けいかく》を立《た》てる（menyusun rencana pelaksanaan）",
   _origIndex: 1338
@@ -9270,7 +9248,7 @@ export const CARDS_COMMON = [
   furi: "おさきにしつれいします",
   jp: "お先に失礼します《おさきにしつれいします》",
   type: "vocab",
-  id_text: "Pamit pulang lebih dulu",
+  id_text: "Pamit pulang lebih dulu (vocab)",
   desc: "Ucapan saat pulang duluan.\nWajib — tidak bilang ini dianggap tidak sopan.",
   _origIndex: 1362
   },
@@ -9660,7 +9638,7 @@ export const CARDS_COMMON = [
   furi: "やまどめ",
   jp: "山留め《やまどめ》",
   type: "vocab",
-  id_text: "Penahan tanah",
+  id_text: "Penahan tanah (山留め)",
   desc: "Sistem penahan tanah untuk galian dalam agar tidak longsor.",
   usage: "山留め《やまどめ》を設置《せっち》する（memasang sistem penahan tanah）",
   _origIndex: 1587

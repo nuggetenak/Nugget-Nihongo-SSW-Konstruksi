@@ -184,7 +184,7 @@ export const CARDS_CH3 = [
   furi: "でんきこうじしいっしゅにしゅおおがたしせついっしゅ",
   jp: "電気工事士《でんきこうじし》（一種《いっしゅ》・二種《にしゅ》）",
   type: "hukum",
-  id_text: "Teknisi listrik",
+  id_text: "Teknisi listrik (kelas 1 dan 2)",
   desc: "二種《にしゅ》=rumah/kecil (600V以下《いか》). 一種《いっしゅ》=gedung besar, pabrik, tegangan tinggi—wajib.",
   _origIndex: 232
   },
@@ -613,7 +613,7 @@ export const CARDS_CH3 = [
   furi: "ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ",
   jp: "舗装の4層《ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ》",
   type: "konsep",
-  id_text: "4 lapisan jalan beraspal",
+  id_text: "4 lapisan perkerasan (komposisi)",
   desc: "①路床《ろしょう》=dasar terbawah ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.",
   _origIndex: 1469
   },
@@ -712,7 +712,7 @@ export const CARDS_CH3 = [
   furi: "ほそうこうじのよんそうこうぞうきそうをわすれずに",
   jp: "舗装工事の4層構造《ほそうこうじのよんそうこうぞうきそうをわすれずに》",
   type: "konsep",
-  id_text: "4 lapisan jalan beraspal",
+  id_text: "4 lapisan perkerasan (konstruksi)",
   desc: "①路床《ろしょう》 ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.\n基層《きそう》sering terlupa!",
   _origIndex: 1487
   },
@@ -822,7 +822,7 @@ export const CARDS_CH3 = [
   furi: "けんちくぶつのこうぞうしゅるい",
   jp: "建築物の構造種類《けんちくぶつのこうぞうしゅるい》（RC・S・SRC・木造《もくぞう》・CB造《ぞう》）",
   type: "konsep",
-  id_text: "5 jenis struktur",
+  id_text: "5 jenis struktur (RC,S,SRC,kayu,CB)",
   desc: "RC造《ぞう》=tulangan+beton, S造《つく》り=baja, SRC造《つく》り=baja+RC (terkuat), 木造《もくぞう》=kayu, CB造《つく》り=blok",
   _origIndex: 1507
   },
@@ -1053,7 +1053,7 @@ export const CARDS_CH3 = [
   furi: "けんちくぶつのこうぞうごしゅるい",
   jp: "建築物の構造5種類《けんちくぶつのこうぞうごしゅるい》",
   type: "konsep",
-  id_text: "5 jenis struktur",
+  id_text: "5 jenis struktur bangunan",
   desc: "RC造《ぞう》=tulangan+beton. S造《つく》り=baja. SRC造《つく》り=baja+RC, gedung tinggi.\n木造《もくぞう》=kayu. CB造《つく》り=blok",
   _origIndex: 1535
   },
@@ -1141,7 +1141,7 @@ export const CARDS_CH3 = [
   furi: "ないそうしあげこうじぼおどくろすゆかかあてん",
   jp: "内装仕上げ工事《ないそうしあげこうじ》（LGS・ボード・クロス・床《ゆか》）",
   type: "konsep",
-  id_text: "Finishing interior",
+  id_text: "Pekerjaan finishing interior",
   desc: "①LGS/軽天《けいてん》=rangka baja ringan. ②ボード=papan gypsum+pate. ③クロス=wallpaper.\n④塗装《とそう》仕上《うえ》げ.",
   _origIndex: 1543
   },
@@ -1306,7 +1306,7 @@ export const CARDS_CH3 = [
   furi: "はいでんばん",
   jp: "配電盤《はいでんばん》",
   type: "konsep",
-  id_text: "Panel distribusi listrik",
+  id_text: "Panel distribusi listrik (配電盤)",
   desc: "Perangkat untuk mencabangkan catu daya dan memasok listrik ke setiap perangkat.",
   _origIndex: 62
   },

@@ -267,7 +267,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "すいへいき",
   jp: "水平器《すいへいき》",
   type: "vocab",
-  id_text: "Waterpass / spirit level",
+  id_text: "Waterpass / spirit level (vocab)",
   desc: "Alat untuk memeriksa kerataan horizontal saat pemasangan pipa dan peralatan.",
   usage: "水平器《すいへいき》で確認《かくにん》する（memeriksa dengan waterpass）",
   _origIndex: 985
@@ -514,7 +514,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "しつじゅんようじょう",
   jp: "湿潤養生《しつじゅんようじょう》",
   type: "vocab",
-  id_text: "Perawatan beton dengan",
+  id_text: "Perawatan beton — pembasahan",
   desc: "Metode perawatan beton dengan menjaga kelembaban permukaan untuk mencegah retak.",
   _origIndex: 1233
   },
@@ -525,7 +525,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "じょうきようじょう",
   jp: "蒸気養生《じょうきようじょう》",
   type: "vocab",
-  id_text: "Perawatan beton dengan",
+  id_text: "Perawatan beton — uap",
   desc: "Curing produk precast menggunakan uap panas (~60–80°C) agar kekuatan awal",
   _origIndex: 1234
   },
@@ -536,7 +536,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ひまくようじょう",
   jp: "被膜養生《ひまくようじょう》",
   type: "vocab",
-  id_text: "Perawatan beton dengan",
+  id_text: "Perawatan beton — membran",
   desc: "Penyemprotan agen membran ke permukaan beton untuk mencegah penguapan air.",
   _origIndex: 1235
   },
@@ -877,7 +877,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ちょくせつかせつ",
   jp: "直接仮設《ちょくせつかせつ》",
   type: "vocab",
-  id_text: "Pekerjaan sementara",
+  id_text: "Pekerjaan sementara langsung",
   desc: "Pekerjaan sementara yang khusus untuk satu area/jenis pekerjaan tertentu.",
   _origIndex: 1308
   },
@@ -888,7 +888,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "きょうつうかせつ",
   jp: "共通仮設《きょうつうかせつ》",
   type: "vocab",
-  id_text: "Pekerjaan sementara",
+  id_text: "Pekerjaan sementara bersama",
   desc: "Fasilitas sementara yang dipakai semua pihak di proyek (kantor, toilet,",
   _origIndex: 1309
   },
@@ -977,7 +977,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "そうごうせこうけいかくしょ",
   jp: "総合施工計画書《そうごうせこうけいかくしょ》",
   type: "vocab",
-  id_text: "Rencana pelaksanaan",
+  id_text: "Rencana pelaksanaan komprehensif",
   desc: "Dokumen yang merangkum rencana keseluruhan proyek, dibuat sebelum pekerjaan",
   _origIndex: 1321
   },
@@ -1021,7 +1021,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "せんもんぎょうしゃ",
   jp: "専門業者《せんもんぎょうしゃ》",
   type: "hukum",
-  id_text: "Kontraktor spesialis",
+  id_text: "Kontraktor spesialis (業者)",
   desc: "Kontraktor yang mengerjakan bidang khusus seperti listrik, AC, dan perpipaan.",
   _origIndex: 1341
   },
@@ -2033,7 +2033,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "げんばかんとく",
   jp: "現場監督《げんばかんとく》",
   type: "vocab",
-  id_text: "Pengawas lapangan",
+  id_text: "Pengawas lapangan (vocab)",
   desc: "Orang yang mengelola kualitas, K3, dan jadwal di lokasi konstruksi.",
   _origIndex: 977
   },
@@ -2382,7 +2382,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
   type: "hukum",
-  id_text: "Kontraktor utama",
+  id_text: "Kontraktor utama (vocab)",
   desc: "Pihak yang menerima proyek langsung dari pemilik dan mengelola semua sub-kontraktor.",
   _origIndex: 1325
   },
@@ -2517,7 +2517,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "せこうけいかく",
   jp: "施工計画《せこうけいかく》",
   type: "vocab",
-  id_text: "Rencana pelaksanaan",
+  id_text: "Rencana pelaksanaan (vocab)",
   desc: "Rencana kerja sebelum konstruksi: jadwal, kualitas, dan keselamatan.",
   usage: "施工《せこう》計画《けいかく》を立《た》てる（menyusun rencana pelaksanaan）",
   _origIndex: 1338

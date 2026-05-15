@@ -65,7 +65,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "きょうどうこう",
   jp: "共同溝《きょうどうこう》",
   type: "vocab",
-  id_text: "Saluran utilitas bersama",
+  id_text: "Saluran utilitas bersama (vocab)",
   desc: "Saluran bawah tanah bersama untuk listrik, gas, dan air bersih dalam satu ruang.",
   _origIndex: 943
   },
@@ -166,7 +166,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "せこうかんりしょていのひんしつ",
   jp: "施工管理《せこうかんりしょていのひんしつ》",
   type: "konsep",
-  id_text: "Manajemen konstruksi",
+  id_text: "Manajemen konstruksi (kualitas)",
   desc: "Pengelolaan pelaksanaan proyek sesuai rencana. Kunci ujian: 品質《ひんしつ》 (kualitas), bukan 環境《かんきょう》.",
   _origIndex: 48
   },
@@ -177,7 +177,7 @@ export const CARDS_VOCAB_JAC = [
   furi: "さんそけつぼう",
   jp: "酸素欠乏《さんそけつぼう》",
   type: "konsep",
-  id_text: "Kekurangan oksigen",
+  id_text: "Kekurangan oksigen (vocab)",
   desc: "Bahaya di ruang tertutup. Cek oksigen sebelum masuk MANHOLE. Kerja di atap tidak termasuk.",
   _origIndex: 113
   },

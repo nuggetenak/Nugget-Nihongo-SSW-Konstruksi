@@ -56,10 +56,10 @@ Files: split files + `src/data/source/cards-*.js` + `src/data/cards.js`
 
 ### P4 — Duplicate resolution
 Files: split files + `cards.js` + `src/data/sets/jac/jac-teori.js`
-- [ ] Merge 5 exact duplicate pairs: ねじゲージ (374,433), ほうれんそう (219,592), マンドレル通過試験 (484,614), 玉掛け (165,518), 防露工事 (982,1257)
-- [ ] Merge EF接合 triple: id=459, 612, 613 → satu kartu
-- [ ] Review 6 same-jp ambiguous pairs — decision tree §5.1 di spec
-- [ ] Disambiguate 25 duplicate id_text
+- [x] Merge 5 exact duplicate pairs: ねじゲージ (374→del), ほうれんそう (592→del), マンドレル通過試験 (484→del), 玉掛け (518→del), 防露工事 (982→del)
+- [ ] Merge EF接合 triple: id=459, 612, 613 — DEFERRED: 3 kartu punya konten berbeda, perlu konfirmasi AGENT 12 sebelum merge
+- [ ] Review 6 same-jp ambiguous pairs — DEFERRED: perlu human judgment
+- [x] Fix 26 duplicate id_text → disambiguasi selesai
 
 ---
 

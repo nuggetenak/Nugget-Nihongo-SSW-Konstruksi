@@ -90,24 +90,13 @@ export const CARDS_LIFELINE_CH7 = [
   _origIndex: 587
   },
 {
-  id: 518,
-  category: "anzen",
-  source: "jac-ch7",
-  furi: "たまがけ",
-  jp: "玉掛け《たまがけ》",
-  type: "konsep",
-  id_text: "Pengikatan beban crane",
-  desc: "Teknik mengikat material ke kait crane dengan wire rope atau sling sebelum diangkat.",
-  _origIndex: 588
-  },
-{
   id: 519,
   category: "anzen",
   source: "jac-ch7",
   furi: "どどめくっさくふかさいじょうでげんそくひつよう",
   jp: "土留め《どどめ》",
   type: "konsep",
-  id_text: "Penahan tanah",
+  id_text: "Penahan tanah (土留め)",
   desc: "Saat menggali parit untuk pipa, tanah bisa longsor menimbun pekerja.",
   _origIndex: 589
   },

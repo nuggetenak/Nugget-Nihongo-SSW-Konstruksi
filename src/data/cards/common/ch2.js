@@ -261,7 +261,7 @@ export const CARDS_CH2 = [
   furi: "ついらく・てんらく",
   jp: "墜落《ついらく》・転落《てんらく》",
   type: "konsep",
-  id_text: "Jatuh dari ketinggian",
+  id_text: "Jatuh dari ketinggian (墜落・転落)",
   desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total.",
   _origIndex: 109
   },

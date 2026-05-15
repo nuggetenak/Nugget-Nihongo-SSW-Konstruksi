@@ -140,7 +140,7 @@ export const CARDS_CH1 = [
   furi: "せんもんこうじぎょうしゃ",
   jp: "専門工事業者《せんもんこうじぎょうしゃ》",
   type: "konsep",
-  id_text: "Kontraktor spesialis",
+  id_text: "Kontraktor spesialis (工事業者)",
   desc: "Kontraktor spesialis yang menerima subkontrak dari ゼネコン.",
   _origIndex: 569
   },
@@ -195,7 +195,7 @@ export const CARDS_CH1 = [
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
   type: "konsep",
-  id_text: "Kontraktor utama",
+  id_text: "Kontraktor utama (konsep)",
   desc: "Pihak yang menerima kontrak langsung dari klien lalu memberi subkontrak ke spesialis.",
   _origIndex: 574
   },

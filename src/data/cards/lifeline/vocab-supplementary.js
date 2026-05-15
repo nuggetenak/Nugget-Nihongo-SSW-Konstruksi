@@ -744,18 +744,6 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   _origIndex: 1109
   },
 {
-  id: 982,
-  category: "hoon",
-  source: "vocab-supplementary",
-  furi: "ぼうろこうじ",
-  jp: "防露工事《ぼうろこうじ》",
-  type: "vocab",
-  id_text: "Pekerjaan insulasi",
-  desc: "Pekerjaan insulasi khusus untuk mencegah embun (kondensasi) pada pipa/duct",
-  usage: "防露工事《ぼうろこうじ》を行《おこな》う（melaksanakan pekerjaan anti-kondensasi）",
-  _origIndex: 1110
-  },
-{
   id: 983,
   category: "hoon",
   source: "vocab-supplementary",
@@ -1240,7 +1228,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "おーえぬゆー《ひかりかいせんしゅうたんそうち》",
   jp: "ONU（光《ひかり》回線《かいせん》終端《しゅうたん》装置《そうち》）",
   type: "vocab",
-  id_text: "Perangkat terminasi",
+  id_text: "Perangkat terminasi ONU",
   desc: "Perangkat FTTH yang mengubah sinyal cahaya menjadi sinyal listrik di sisi",
   _origIndex: 1175
   },
@@ -1251,7 +1239,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "おーえるてぃー《ひかりかにゅうしゃせんしゅうたんそうち》",
   jp: "OLT（光《ひかり》加入者《かにゅうしゃ》線《せん》終端《しゅうたん》装置《そうち》）",
   type: "vocab",
-  id_text: "Perangkat terminasi",
+  id_text: "Perangkat terminasi OLT",
   desc: "Dipasang di sisi sentral, mengelola banyak ONU melalui splitter dalam sistem",
   _origIndex: 1176
   },
@@ -1284,7 +1272,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "えすてぃーこねくた",
   jp: "STコネクタ",
   type: "vocab",
-  id_text: "Konektor fiber optik",
+  id_text: "Konektor fiber optik ST",
   desc: "Konektor fiber yang dikunci dengan memutar seperti bayonet; dahulu umum di",
   _origIndex: 1181
   },
@@ -1328,7 +1316,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ぱっちぱねる",
   jp: "パッチパネル",
   type: "vocab",
-  id_text: "Panel distribusi",
+  id_text: "Panel patch distribusi sinyal",
   desc: "Tempat kabel LAN dari berbagai titik disambungkan untuk merapikan kabel menuju",
   _origIndex: 1185
   },

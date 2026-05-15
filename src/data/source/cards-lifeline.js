@@ -272,7 +272,7 @@ export const CARDS_LIFELINE = [
   furi: "はいでんばん",
   jp: "配電盤《はいでんばん》",
   type: "konsep",
-  id_text: "Panel distribusi listrik",
+  id_text: "Panel distribusi listrik (配電盤)",
   desc: "Perangkat untuk mencabangkan catu daya dan memasok listrik ke setiap perangkat.",
   _origIndex: 62
   },
@@ -1850,17 +1850,6 @@ export const CARDS_LIFELINE = [
   _origIndex: 443
   },
   {
-  id: 374,
-  category: "haikan",
-  source: "jac-ch5",
-  furi: "ねじげえじ",
-  jp: "ねじゲージ",
-  type: "konsep",
-  id_text: "Alat ukur ulir pipa",
-  desc: "Alat memeriksa ulir pada pipa dan fitting agar sesuai standar, memastikan sambungan tidak bocor.",
-  _origIndex: 444
-  },
-  {
   id: 386,
   category: "haikan",
   source: "jac-ch5",
@@ -1878,7 +1867,7 @@ export const CARDS_LIFELINE = [
   furi: "ばん",
   jp: "盤《ばん》",
   type: "konsep",
-  id_text: "Panel distribusi listrik",
+  id_text: "Panel listrik (盤 — generik)",
   desc: "Panel berisi breaker: 自立盤《じりつばん》= berdiri lantai; 壁掛《かべか》けけ盤《かべかけばん》= di dinding.",
   _origIndex: 457
   },
@@ -2532,17 +2521,6 @@ export const CARDS_LIFELINE = [
   _origIndex: 553
   },
   {
-  id: 484,
-  category: "tsushin",
-  source: "jac-ch6",
-  furi: "まんどれるつうかしけん",
-  jp: "マンドレル通過試験《まんどれるつうかしけん》",
-  type: "konsep",
-  id_text: "Uji mandrel",
-  desc: "Batang mandrel dimasukkan setelah pemasangan untuk memastikan管《かん》路《かんろ》terhubung sempurna.",
-  _origIndex: 554
-  },
-  {
   id: 485,
   category: "tsushin",
   source: "jac-ch6",
@@ -2934,7 +2912,7 @@ export const CARDS_LIFELINE = [
   furi: "EFせつごう《いんじけえたあかくにん》",
   jp: "EF接合《EFせつごう》（インジケーター確認《いんじけえたあかくにん》）",
   type: "konsep",
-  id_text: "EF joint",
+  id_text: "EF joint — cek indikator",
   desc: "Konfirmasi berhasil: indikator EF socket harus menonjol隆起《りゅうき》di kiri dan kanan.\nSetelah dingin,",
   _origIndex: 722
   },
@@ -2945,7 +2923,7 @@ export const CARDS_LIFELINE = [
   furi: "えせつごうばあこおどりいだあでゆうちゃくでえたよみこみ",
   jp: "EF接合《えせつごうばあこおどりいだあでゆうちゃくでえたよみこみ》",
   type: "konsep",
-  id_text: "EF joint",
+  id_text: "EF joint — urutan persiapan",
   desc: "Urutan persiapan融着《ゆうちゃく》EF: ①colokkan controller ②nyalakan ③sambungkan kabel output ke",
   _origIndex: 723
   },
@@ -3873,18 +3851,6 @@ export const CARDS_LIFELINE = [
   _origIndex: 1109
   },
   {
-  id: 982,
-  category: "hoon",
-  source: "vocab-supplementary",
-  furi: "ぼうろこうじ",
-  jp: "防露工事《ぼうろこうじ》",
-  type: "vocab",
-  id_text: "Pekerjaan insulasi",
-  desc: "Pekerjaan insulasi khusus untuk mencegah embun (kondensasi) pada pipa/duct",
-  usage: "防露工事《ぼうろこうじ》を行《おこな》う（melaksanakan pekerjaan anti-kondensasi）",
-  _origIndex: 1110
-  },
-  {
   id: 983,
   category: "hoon",
   source: "vocab-supplementary",
@@ -4402,7 +4368,7 @@ export const CARDS_LIFELINE = [
   furi: "おーえぬゆー《ひかりかいせんしゅうたんそうち》",
   jp: "ONU（光《ひかり》回線《かいせん》終端《しゅうたん》装置《そうち》）",
   type: "vocab",
-  id_text: "Perangkat terminasi",
+  id_text: "Perangkat terminasi ONU",
   desc: "Perangkat FTTH yang mengubah sinyal cahaya menjadi sinyal listrik di sisi",
   _origIndex: 1175
   },
@@ -4413,7 +4379,7 @@ export const CARDS_LIFELINE = [
   furi: "おーえるてぃー《ひかりかにゅうしゃせんしゅうたんそうち》",
   jp: "OLT（光《ひかり》加入者《かにゅうしゃ》線《せん》終端《しゅうたん》装置《そうち》）",
   type: "vocab",
-  id_text: "Perangkat terminasi",
+  id_text: "Perangkat terminasi OLT",
   desc: "Dipasang di sisi sentral, mengelola banyak ONU melalui splitter dalam sistem",
   _origIndex: 1176
   },
@@ -4446,7 +4412,7 @@ export const CARDS_LIFELINE = [
   furi: "えすてぃーこねくた",
   jp: "STコネクタ",
   type: "vocab",
-  id_text: "Konektor fiber optik",
+  id_text: "Konektor fiber optik ST",
   desc: "Konektor fiber yang dikunci dengan memutar seperti bayonet; dahulu umum di",
   _origIndex: 1181
   },
@@ -4490,7 +4456,7 @@ export const CARDS_LIFELINE = [
   furi: "ぱっちぱねる",
   jp: "パッチパネル",
   type: "vocab",
-  id_text: "Panel distribusi",
+  id_text: "Panel patch distribusi sinyal",
   desc: "Tempat kabel LAN dari berbagai titik disambungkan untuk merapikan kabel menuju",
   _origIndex: 1185
   },
@@ -5280,7 +5246,7 @@ export const CARDS_LIFELINE = [
   furi: "きょうどうこう",
   jp: "共同溝《きょうどうこう》",
   type: "vocab",
-  id_text: "Saluran utilitas bersama",
+  id_text: "Saluran utilitas bersama (vocab)",
   desc: "Saluran bawah tanah bersama untuk listrik, gas, dan air bersih dalam satu ruang.",
   _origIndex: 943
   },
@@ -5843,7 +5809,7 @@ export const CARDS_LIFELINE = [
   furi: "ぶんでんばん",
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
-  id_text: "Panel distribusi",
+  id_text: "Panel distribusi listrik (分電盤)",
   desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit",
   _origIndex: 1126
   },
@@ -5909,7 +5875,7 @@ export const CARDS_LIFELINE = [
   furi: "でんきこうじし",
   jp: "電気工事士《でんきこうじし》",
   type: "vocab",
-  id_text: "Teknisi listrik",
+  id_text: "Teknisi listrik (definisi)",
   desc: "Lisensi nasional untuk instalasi listrik. Tingkat 2: AC ≤600V. Tingkat 1:",
   _origIndex: 1149
   },
@@ -6008,7 +5974,7 @@ export const CARDS_LIFELINE = [
   furi: "えすしーこねくた",
   jp: "SCコネクタ",
   type: "vocab",
-  id_text: "Konektor fiber optik",
+  id_text: "Konektor fiber optik SC",
   desc: "Konektor push-pull untuk sambungan ONU. Mudah dipasang dan dilepas dengan satu",
   _origIndex: 1179
   },
@@ -6019,7 +5985,7 @@ export const CARDS_LIFELINE = [
   furi: "えるしーこねくた",
   jp: "LCコネクタ",
   type: "vocab",
-  id_text: "Konektor fiber optik",
+  id_text: "Konektor fiber optik LC",
   desc: "Lebih kecil dari SC, memungkinkan kepadatan tinggi. Banyak dipakai di switch",
   _origIndex: 1180
   },

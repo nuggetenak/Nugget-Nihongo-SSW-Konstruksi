@@ -448,7 +448,7 @@ export const CARDS_CH4 = [
   furi: "あとかたづけ・しょうかかくにん",
   jp: "後片付け《あとかたづけ》・消火確認《しょうかかくにん》",
   type: "konsep",
-  id_text: "Beres",
+  id_text: "Beres + cek api",
   desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》りり《だんどり》 untuk esok.",
   _origIndex: 308
   },
@@ -761,24 +761,13 @@ export const CARDS_CH4 = [
   _origIndex: 698
   },
 {
-  id: 592,
-  category: "career",
-  source: "jac-ch4",
-  furi: "ほうれんそうほおこくれんらくそうだん",
-  jp: "ほうれんそう（報告《ほうこく》・連絡《れんらく》・相談《そうだん》）",
-  type: "konsep",
-  id_text: "Hourensou",
-  desc: "ほうれんそう=報告《ほうこく》(lapor ke atasan), 連絡《れんらく》(sampaikan info/jadwal), 相談《そうだん》(konsultasikan masalah).",
-  _origIndex: 699
-  },
-{
   id: 593,
   category: "anzen",
   source: "jac-ch4",
   furi: "あとかたずけさぎょうしゅうりょうごのぎむ",
   jp: "後片付け《あとかたずけ》（作業《さぎょう》終了《しゅうりょう》後《ご》の義務《ぎむ》・火《ひ》の確認《かくにん》）",
   type: "konsep",
-  id_text: "Beres",
+  id_text: "Beres (kewajiban setelah kerja)",
   desc: "Setelah selesai bekerja WAJIB 後《あと》片付《あとかたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan",
   _origIndex: 700
   },

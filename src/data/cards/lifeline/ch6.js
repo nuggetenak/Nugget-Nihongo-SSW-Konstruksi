@@ -497,17 +497,6 @@ export const CARDS_LIFELINE_CH6 = [
   _origIndex: 553
   },
 {
-  id: 484,
-  category: "tsushin",
-  source: "jac-ch6",
-  furi: "まんどれるつうかしけん",
-  jp: "マンドレル通過試験《まんどれるつうかしけん》",
-  type: "konsep",
-  id_text: "Uji mandrel",
-  desc: "Batang mandrel dimasukkan setelah pemasangan untuk memastikan管《かん》路《かんろ》terhubung sempurna.",
-  _origIndex: 554
-  },
-{
   id: 485,
   category: "tsushin",
   source: "jac-ch6",
@@ -690,7 +679,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "EFせつごう《いんじけえたあかくにん》",
   jp: "EF接合《EFせつごう》（インジケーター確認《いんじけえたあかくにん》）",
   type: "konsep",
-  id_text: "EF joint",
+  id_text: "EF joint — cek indikator",
   desc: "Konfirmasi berhasil: indikator EF socket harus menonjol隆起《りゅうき》di kiri dan kanan.\nSetelah dingin,",
   _origIndex: 722
   },
@@ -701,7 +690,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "えせつごうばあこおどりいだあでゆうちゃくでえたよみこみ",
   jp: "EF接合《えせつごうばあこおどりいだあでゆうちゃくでえたよみこみ》",
   type: "konsep",
-  id_text: "EF joint",
+  id_text: "EF joint — urutan persiapan",
   desc: "Urutan persiapan融着《ゆうちゃく》EF: ①colokkan controller ②nyalakan ③sambungkan kabel output ke",
   _origIndex: 723
   },
@@ -833,7 +822,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "とちのせいやく",
   jp: "土地の制約《とちのせいやく》",
   type: "konsep",
-  id_text: "Karakteristik konstruksi",
+  id_text: "Karakteristik konstruksi — batasan lahan",
   desc: "Setiap proyek melekat pada lahan unik sehingga kondisi identik tidak pernah berulang; berbeda dari",
   _origIndex: 483
   },
@@ -844,7 +833,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "しぜんじょうけんによるえいきょう",
   jp: "自然条件による影響《しぜんじょうけんによるえいきょう》",
   type: "konsep",
-  id_text: "Karakteristik konstruksi",
+  id_text: "Karakteristik konstruksi — kondisi alam",
   desc: "Pekerjaan konstruksi umumnya di luar ruangan sehingga terpengaruh topografi, musim, dan cuaca —",
   _origIndex: 484
   },
@@ -855,7 +844,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "しゃかいてきせいやく",
   jp: "社会的制約《しゃかいてきせいやく》",
   type: "konsep",
-  id_text: "Karakteristik konstruksi",
+  id_text: "Karakteristik konstruksi — batasan sosial",
   desc: "Karena produksi di lokasi asli (現地《げんち》生産《せいさん》), wajib memenuhi peraturan keselamatan dan",
   _origIndex: 485
   },
@@ -1020,7 +1009,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "らいにんぐこうかんのがすようだんぜったいきんし",
   jp: "ライニング鋼管のガス溶断絶対禁止《らいにんぐこうかんのがすようだんぜったいきんし》",
   type: "konsep",
-  id_text: "DILARANG",
+  id_text: "DILARANG: las gas pada pipa lining",
   desc: "Pemotongan ライニング鋼管《こうかん》 dengan ガス溶断《ようだん》 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak",
   _origIndex: 513
   },
@@ -1031,7 +1020,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "かのこ・きんし",
   jp: "銅管の切断に金ノコ《かのこ》・グラインダー禁止《きんし》",
   type: "konsep",
-  id_text: "DILARANG",
+  id_text: "DILARANG: gergaji/gerinda pada pipa tembaga",
   desc: "Memotong pipa tembaga (銅管《どうかん》) dengan 金《かな》ノコ atau グラインダー menghasilkan serbuk logam di dalam pipa",
   _origIndex: 516
   },
@@ -1042,7 +1031,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "こうそくといしたいぷのせつだんこうぐ",
   jp: "高速砥石タイプの切断工具《こうそくといしたいぷのせつだんこうぐ》",
   type: "konsep",
-  id_text: "DILARANG",
+  id_text: "DILARANG: gerinda kecepatan tinggi",
   desc: "Panas dari grinder dapat mendistorsi permukaan potongan pipa polietilen yang dipakai untuk",
   _origIndex: 531
   },
