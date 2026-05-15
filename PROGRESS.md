@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-15 (session 19: P0→P4 selesai — ruby, encoding, id_text, metadata, 5 card deletions, 26 id_text disambiguasi)
+**Last updated:** 2026-05-16 (session 20: ADMIN — integrity checks all clean; P17 dirty state resolved via OPSI B — fresh clone, jac-mockup files were never committed; session 19 retroactive: P5-C+P9+P7 done)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -102,6 +102,7 @@ Files: `src/data/sets/wayground/lifeline/vocab/`
 
 ### P17 — jac-mockup RENAME *(OD-3: confirm owner sebelum mulai)*
 Files: `src/data/sets/csv/` → `src/data/sets/jac-mockup/`
+> **OPSI B resolved (session 20):** Dirty state dari session 19 (jac-mockup files tidak ter-commit) resolved via fresh clone. Working state bersih. Tunggu OD-3 konfirmasi owner sebelum mulai P17 proper.
 - [ ] Rename folder `sets/csv/` → `sets/jac-mockup/`
 - [ ] Rename files: `ct01–ct06` → `jmt01–jmt06`; `cp01–cp06` → `jml01–jml06`
 - [ ] Update `id:`, `title:`, `source:` field dalam setiap file
