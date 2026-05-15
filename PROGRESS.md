@@ -73,19 +73,19 @@ Files: `src/data/cards/**/*.js` (prioritas: `lifeline/ch6.js`)
 
 ### P9 — Angka-kunci fixes
 File: `src/data/angka-kunci.js`
-- [ ] `kartu: null` → `kartu: 134` — entry `45 jam/bln, 360 jam/thn`
-- [ ] `kartu: null` → `kartu: 1172` — entry `6 bulan → 10 hari`
-- [ ] `kartu: null` → `kartu: 1347` — entry `< 6mm / ≥ 6mm`
-- [ ] Lengkapi `soal` field entry `< 6mm / ≥ 6mm` yang terpotong
-- [ ] Verify 2 exam-meta entries sudah ada comment `// exam-meta`
-- [ ] Ruby pada 28/29 `soal` fields yang masih naked kanji
+- [x] `kartu: null` → `kartu: 134` — entry `45 jam/bln, 360 jam/thn`
+- [x] `kartu: null` → `kartu: 1172` — entry `6 bulan → 10 hari`
+- [x] `kartu: null` → `kartu: 1347` — entry `< 6mm / ≥ 6mm`
+- [x] `soal` field entry `< 6mm / ≥ 6mm` — sudah lengkap, tidak perlu fix
+- [x] Verify 2 exam-meta entries — comment sudah ada ✓
+- [x] Ruby pada soal fields — 0 naked kanji ✓
 
 ---
 
 ### P7 — JAC sets: exp corruption
 Files: `src/data/sets/jac/jac-teori.js`, `src/data/sets/jac/jac-lifeline.js`
-- [ ] `jac-teori.js`: 8 exp berakhir `\'` — complete/fix konten
-- [ ] `jac-lifeline.js`: 4 exp berakhir `\'` — complete/fix konten
+- [x] `jac-teori.js`: 6 dari 8 exp sudah bersih; 2 tersisa adalah konten valid (apostrophe intentional), bukan truncation
+- [x] `jac-lifeline.js`: 0 exp bermasalah — semua sudah bersih ✓
 
 ---
 
