@@ -17,7 +17,7 @@ export const CARDS_CH1 = [
   category: "gaiyou",
   source: "jac-ch1",
   furi: "きけんよちかつどう",
-  jp: "危険予知活動《きけんよちかつどう》（KY活動）",
+  jp: "危険予知活動《きけんよちかつどう》（KY活動《かつどう》）",
   type: "konsep",
   id_text: "Prediksi Bahaya KY",
   desc: "Identifikasi bahaya sebelum mulai kerja, dilakukan saat apel per jenis pekerjaan.",

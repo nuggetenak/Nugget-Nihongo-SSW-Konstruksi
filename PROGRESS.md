@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-14 (session 19: P0-C1 done — encoding corrupt fixed id=476,773; P0-C2 done — 12 nested ruby fixed)
+**Last updated:** 2026-05-15 (session 19: P0 done; P1-A/B/C done — 240 jp ruby fixes across 218 distinct cards)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -26,10 +26,10 @@ Files C2: `src/data/cards/lifeline/ch5.js` (id=321–371), `src/data/cards/lifel
 
 ### P1 — Ruby: jp field
 Files: `src/data/cards/**/*.js` (split files)
-- [ ] 62 kartu jp tanpa ruby — tambahkan ruby `《ひらがな》`
-- [ ] 18 kartu katakana ruby `《katakana》` — convert ke `（katakana）`
-- [ ] ~152 naked kanji di jp dalam `（）` — tambahkan ruby
-- [ ] ~64 naked kanji di jp post-compound (subtitle/qualifier) — review manual
+- [x] 62 kartu jp tanpa ruby — tambahkan ruby `《ひらがな》`
+- [x] 18 kartu katakana ruby `《katakana》` — convert ke `（katakana）`
+- [x] ~152 naked kanji di jp dalam `（）` — tambahkan ruby (140 fixed; 78 post-P1-A)
+- [ ] ~64 naked kanji di jp post-compound (subtitle/qualifier) — review manual [DEFERRED]
 
 ---
 
