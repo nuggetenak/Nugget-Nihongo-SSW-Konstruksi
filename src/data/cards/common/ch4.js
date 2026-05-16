@@ -51,7 +51,7 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "たてずみ・しあげずみ",
   jp: "立て墨《たてずみ》・仕上げ墨《しあげずみ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Garis vertikal / Garis",
   desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom.",
   _origIndex: 241
@@ -73,7 +73,7 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "かねをふる・すみつけ",
   jp: "矩を振る《かねをふる》・墨付け《すみつけ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Buat sudut 90° + markah garis",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
   _origIndex: 243
@@ -216,7 +216,7 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "おさまり・とりあい",
   jp: "納まり《おさまり》・取合い《とりあい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kerapian + antarmuka pemasangan",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
   _origIndex: 264
@@ -1393,7 +1393,7 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "りいどたんし",
   jp: "リード端子《りーどたんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lead terminal grounding",
   desc: "Menghubungkan 接地棒《せっちぼう》dengan 接地線《せっちせん》menuju panel.",
   _origIndex: 471

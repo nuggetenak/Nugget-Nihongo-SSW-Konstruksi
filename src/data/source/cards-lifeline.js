@@ -579,7 +579,7 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "えるぼ",
   jp: "エルボ",
-  type: "konsep",
+  type: \'vocab\',
   id_text: "Siku (elbow)",
   desc: "Sambungan pipa yang mengubah arah aliran 45° atau 90°.",
   _origIndex: 90
@@ -590,7 +590,7 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ちいず",
   jp: "チーズ（チー）",
-  type: "konsep",
+  type: \'vocab\',
   id_text: "Tee",
   desc: "Sambungan pipa tiga arah untuk membuat cabang aliran.",
   _origIndex: 91
@@ -1965,7 +1965,7 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "りいどたんし",
   jp: "リード端子《りーどたんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lead terminal grounding",
   desc: "Menghubungkan 接地棒《せっちぼう》dengan 接地線《せっちせん》menuju panel.",
   _origIndex: 471

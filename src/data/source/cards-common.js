@@ -1228,7 +1228,7 @@ export const CARDS_COMMON = [
   source: "jac-ch4",
   furi: "たてずみしあげずみ",
   jp: "立て墨《たてずみ》・仕上げ墨《しあげずみ》",
-  type: "konsep",
+  type: \'vocab\',
   id_text: "Garis vertikal / Garis",
   desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom.",
   _origIndex: 241
@@ -1250,7 +1250,7 @@ export const CARDS_COMMON = [
   source: "jac-ch4",
   furi: "かねをふるすみつけ",
   jp: "矩を振る《かねをふる》・墨付け《すみつけ》",
-  type: "konsep",
+  type: \'vocab\',
   id_text: "Buat sudut 90° + markah garis",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
   _origIndex: 243
@@ -1393,7 +1393,7 @@ export const CARDS_COMMON = [
   source: "jac-ch4",
   furi: "おさまりとりあい",
   jp: "納まり《おさまり》・取合い《とりあい》",
-  type: "konsep",
+  type: \'vocab\',
   id_text: "Kerapian + antarmuka pemasangan",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
   _origIndex: 264
@@ -1778,7 +1778,7 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "こうそくせつだんきちっぷそおせつだんき",
   jp: "高速切断機《こうそくせつだんき》 vs チップソー切断機《ちっぷそーせつだんき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gerinda batu vs mata",
   desc: "チップソー切《き》り断機《せつだんき》: gergaji bundar, cepat aus.",
   _origIndex: 364
@@ -2328,7 +2328,7 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "うえす・ばけつ・ひしゃく",
   jp: "ウェス・バケツ・ひしゃく",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kain lap oli / Ember",
   desc: "ウェス = kain mengelap oli atau bahan kimia.",
   _origIndex: 451

@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-16 (session 21: ADMIN hygiene — handoff v17 updated: header, card count 1443→1438, source counts, known-issues table, codebase state table, session log sessions 18–20)
+**Last updated:** 2026-05-16 (session 22: P14 — 8 kartu type reclassified konsep→vocab: id=82,83,186,188,201,295,381,401)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -158,7 +158,7 @@ Prerequisites: P1 done, OD-5 confirmed, viewer.html updated
 ---
 
 ### P14 — Type reclassification *(ongoing)*
-- [ ] Review 31 konsep kandidat vocab: id 82,83,102,186,188,201,226,245,295,381,401 (+ others)
+- [x] Review 11 konsep kandidat vocab: reclassified 8 → vocab (id=82,83,186,188,201,295,381,401); kept konsep: 102 (prinsip manajemen QCDSE), 226 (frasa prosedural), 245 (campuran verb/noun)
 
 ---
 

@@ -293,7 +293,7 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "えるぼ",
   jp: "エルボ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Siku (elbow)",
   desc: "Sambungan pipa yang mengubah arah aliran 45° atau 90°.",
   _origIndex: 90
@@ -304,7 +304,7 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "ちいず",
   jp: "チーズ（チー）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tee",
   desc: "Sambungan pipa tiga arah untuk membuat cabang aliran.",
   _origIndex: 91
@@ -1492,7 +1492,7 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "こうそくせつだんき vs ちっぷそーせつだんき",
   jp: "高速切断機《こうそくせつだんき》 vs チップソー切断機《ちっぷそーせつだんき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gerinda batu vs mata",
   desc: "チップソー切《き》り断機《せつだんき》: gergaji bundar, cepat aus.",
   _origIndex: 364
@@ -2020,7 +2020,7 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "うえす・ばけつ・ひしゃく",
   jp: "ウェス・バケツ・ひしゃく",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kain lap oli / Ember",
   desc: "ウェス = kain mengelap oli atau bahan kimia.",
   _origIndex: 451
