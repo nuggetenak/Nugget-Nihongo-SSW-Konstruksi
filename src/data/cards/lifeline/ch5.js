@@ -296,7 +296,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: 'vocab',
   id_text: "Siku (elbow)",
   desc: "Sambungan pipa yang mengubah arah aliran 45° atau 90°.",
-  _origIndex: 90
+  usage: 'エルボを取《と》り付《つ》ける（memasang fitting siku）',
+    _origIndex: 90
   },
 {
   id: 83,
@@ -307,7 +308,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: 'vocab',
   id_text: "Tee",
   desc: "Sambungan pipa tiga arah untuk membuat cabang aliran.",
-  _origIndex: 91
+  usage: 'チーズで配管《はいかん》を分岐《ぶんき》させる（membuat percabangan pipa dengan tee）',
+    _origIndex: 91
   },
 {
   id: 86,
@@ -1495,7 +1497,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: 'vocab',
   id_text: "Gerinda batu vs mata",
   desc: "チップソー切《き》り断機《せつだんき》: gergaji bundar, cepat aus.",
-  _origIndex: 364
+  usage: 'チップソー切断機《ちっぷそーせつだんき》で鋼材《こうざい》を切断《せつだん》する（memotong baja dengan gergaji chip saw）',
+    _origIndex: 364
   },
 {
   id: 296,
@@ -2023,7 +2026,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: 'vocab',
   id_text: "Kain lap oli / Ember",
   desc: "ウェス = kain mengelap oli atau bahan kimia.",
-  _origIndex: 451
+  usage: 'ウェスで油《あぶら》を拭《ふ》き取《と》る（menyeka minyak dengan kain lap）',
+    _origIndex: 451
   },
 {
   id: 382,
@@ -2199,7 +2203,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Peralatan listrik",
   desc: "Sistem dan peralatan yang berhubungan dengan listrik. Wajib pasang grounding",
-  _origIndex: 799
+  usage: '電気設備《でんきせつび》の点検《てんけん》を行《おこな》う（melakukan pemeriksaan instalasi listrik）',
+    _origIndex: 799
   },
 {
   id: 686,
@@ -2210,7 +2215,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Alat listrik (power tool)",
   desc: "Alat kerja bertenaga listrik.\nJika kabel panas saat dipakai → segera hentikan",
-  _origIndex: 800
+  usage: '電動工具《でんどうこうぐ》を使用《しよう》する前《まえ》に点検《てんけん》する（memeriksa power tool sebelum digunakan）',
+    _origIndex: 800
   },
 {
   id: 687,
@@ -2221,7 +2227,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Sumber daya / power",
   desc: "Sumber listrik untuk peralatan.\nBukan solusi menaikkan daya jika kabel sudah",
-  _origIndex: 801
+  usage: '電源《でんげん》を切《き》ってから作業《さぎょう》する（matikan sumber daya sebelum bekerja）',
+    _origIndex: 801
   },
 {
   id: 689,
@@ -2232,7 +2239,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Beberapa / jamak",
   desc: "Lebih dari satu. Konteks: memasukkan beberapa kabel sekaligus dalam satu",
-  _origIndex: 803
+  usage: '複数《ふくすう》の回路《かいろ》を同時《どうじ》に確認《かくにん》する（memeriksa beberapa sirkuit secara bersamaan）',
+    _origIndex: 803
   },
 {
   id: 704,
@@ -2243,7 +2251,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Kabel / kord (power tool)",
   desc: "Kabel listrik pada alat bertenaga listrik.\nKabel terasa panas = tanda bahaya →",
-  _origIndex: 818
+  usage: 'コードが損傷《そんしょう》していないか確認《かくにん》する（periksa apakah kabel tidak rusak）',
+    _origIndex: 818
   },
 {
   id: 713,
@@ -2254,7 +2263,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Kabel listrik / kawat",
   desc: "Kawat penghantar listrik. Berbeda dari 電線管《でんせんかん》 (konduit pelindung).",
-  _origIndex: 827
+  usage: '電線《でんせん》を管内《かんない》に通線《つうせん》する（menarik kawat listrik ke dalam konduit）',
+    _origIndex: 827
   },
 {
   id: 872,
@@ -2353,7 +2363,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Kabel optik bawah tanah",
   desc: "Pemasangan kabel serat optik di dalam tanah melalui 管《かん》路《かんろ》 atau",
-  _origIndex: 1074
+  usage: '光ケーブル《ひかりけーぶる》を地中《ちちゅう》に配線《はいせん》する（memasang kabel optik di bawah tanah）',
+    _origIndex: 1074
   },
 {
   id: 925,
@@ -2431,7 +2442,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Tiang listrik / utility",
   desc: "Tiang untuk membentangkan kabel udara.\nCek utilitas bawah tanah sebelum",
-  _origIndex: 973
+  usage: '電柱《でんちゅう》に架空線《かくうせん》を張《は》る（memasang kabel udara pada tiang listrik）',
+    _origIndex: 973
   },
 {
   id: 847,
@@ -2442,7 +2454,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Manhole",
   desc: "Akses masuk ke saluran bawah tanah.\nWaspadai kekurangan oksigen dan gas",
-  _origIndex: 974
+  usage: 'マンホールから電線《でんせん》を引《ひ》き込《こ》む（menarik kabel masuk dari manhole）',
+    _origIndex: 974
   },
 {
   id: 998,
@@ -2618,7 +2631,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Pemeriksaan keamanan",
   desc: "Langkah verifikasi bahwa kondisi sudah aman sebelum/sesudah pekerjaan.",
-  _origIndex: 778
+  usage: '作業前《さぎょうまえ》に安全確認《あんぜんかくにん》を行《おこな》う（lakukan pemeriksaan keamanan sebelum bekerja）',
+    _origIndex: 778
   },
 {
   id: 665,
@@ -2629,7 +2643,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Konfirmasi / pengecekan",
   desc: "Memastikan sesuatu sudah benar sebelum melanjutkan pekerjaan.",
-  _origIndex: 779
+  usage: '施工後《せこうご》に寸法《すんぽう》を確認《かくにん》する（periksa dimensi setelah konstruksi selesai）',
+    _origIndex: 779
   },
 {
   id: 676,
@@ -2640,7 +2655,8 @@ export const CARDS_LIFELINE_CH5 = [
   type: "vocab",
   id_text: "Insulasi panas",
   desc: "Menjaga suhu pipa panas agar tidak turun selama distribusi.",
-  _origIndex: 790
+  usage: '配管《はいかん》に保温《ほおん》を施《ほどこ》す（aplikasikan insulasi panas pada pipa）',
+    _origIndex: 790
   },
 {
   id: 677,

@@ -81,7 +81,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Metode konstruksi",
   desc: "Cara dan prosedur pelaksanaan pekerjaan konstruksi sesuai dokumen desain dan",
-  _origIndex: 789
+  usage: '施工方法《せこうほうほう》を事前《じぜん》に確認《かくにん》する（konfirmasi metode konstruksi sebelumnya）',
+    _origIndex: 789
   },
 {
   id: 678,
@@ -258,7 +259,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Terima kasih sudah kerja",
   desc: "Ungkapan penghargaan atas kerja keras seseorang. Dapat digunakan di lapangan",
-  _origIndex: 958
+  usage: '退勤時《たいきんじ》に「お疲《つか》れ様《さま》です」と言《い》う（ucapkan "terima kasih sudah bekerja keras" saat pulang）',
+    _origIndex: 958
   },
 {
   id: 858,
@@ -1512,7 +1514,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sering terjadi berulang",
   desc: "Kejadian yang terjadi berulang kali dalam frekuensi tinggi.",
-  _origIndex: 763
+  usage: '同《おな》じ箇所《かしょ》で事故《じこ》が多発《たはつ》する（kecelakaan sering berulang di titik yang sama）',
+    _origIndex: 763
   },
 {
   id: 653,
@@ -1569,7 +1572,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Perubahan mendadak",
   desc: "Perubahan kondisi secara tiba-tiba, misalnya aliran fluida yang berubah drastis",
-  _origIndex: 809
+  usage: '体調《たいちょう》が急変《きゅうへん》したら即座《そくざ》に報告《ほうこく》する（laporkan segera jika kondisi tubuh berubah tiba-tiba）',
+    _origIndex: 809
   },
 {
   id: 696,
@@ -1580,7 +1584,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Segera setelah",
   desc: "Menyatakan waktu yang sangat dekat setelah suatu kejadian. Lebih langsung dari",
-  _origIndex: 810
+  usage: '作業終了《さぎょうしゅうりょう》直後《ちょくご》に片付《かたづ》ける（bersihkan segera setelah pekerjaan selesai）',
+    _origIndex: 810
   },
 {
   id: 705,

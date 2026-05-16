@@ -22,7 +22,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lendutan / defleksi",
   desc: "Pipa melengkung ke bawah akibat beratnya sendiri.\nTerjadi jika interval saddle",
-  _origIndex: 752
+  usage: 'たわみが許容値《きょようち》を超《こ》えないようにする（memastikan lendutan tidak melebihi nilai toleransi）',
+    _origIndex: 752
   },
 {
   id: 688,
@@ -33,7 +34,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sinar ultraviolet (UV)",
   desc: "Radiasi UV dari matahari yang menyebabkan degradasi kabel dan material luar",
-  _origIndex: 802
+  usage: '紫外線《しがいせん》で樹脂《じゅし》が劣化《れっか》する（resin terdegradasi oleh sinar UV）',
+    _origIndex: 802
   },
 {
   id: 690,
@@ -44,7 +46,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Panas terperangkap",
   desc: "Kondisi panas menumpuk di dalam konduit bila terlalu banyak kabel; berisiko",
-  _origIndex: 804
+  usage: '熱《ねつ》がこもらないように換気《かんき》する（ventilasi agar panas tidak terperangkap）',
+    _origIndex: 804
   },
 {
   id: 758,
@@ -67,7 +70,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kedalaman penimbunan pipa",
   desc: "Ketebalan tanah di atas pipa yang ditanam. Pipa di bawah jalan minimal 0,8 m.",
-  _origIndex: 944
+  usage: '土被《どかぶ》りが基準《きじゅん》を満《み》たす（kedalaman penimbunan memenuhi standar）',
+    _origIndex: 944
   },
 {
   id: 851,
@@ -78,7 +82,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa air panas",
   desc: "Pipa untuk mengalirkan air panas dari boiler ke titik penggunaan.",
-  _origIndex: 978
+  usage: '温水管《おんすいかん》に保温材《ほおんざい》を巻《ま》く（membungkus pipa air panas dengan insulasi）',
+    _origIndex: 978
   },
 {
   id: 852,
@@ -531,7 +536,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Detektor panas",
   desc: "Detektor yang aktif saat suhu naik secara tiba-tiba; cocok untuk ruangan suhu",
-  _origIndex: 1079
+  usage: '差動式感知器《さどうしきかんちき》が温度上昇《おんどじょうしょう》を検知《けんち》する（detektor panas mendeteksi kenaikan suhu cepat）',
+    _origIndex: 1079
   },
 {
   id: 952,
@@ -542,7 +548,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Detektor suhu tetap",
   desc: "Detektor yang aktif saat suhu mencapai batas tertentu; cocok untuk dapur atau",
-  _origIndex: 1080
+  usage: '定温式感知器《ていおんしきかんちき》が設定温度《せっていおんど》に達《たっ》して作動《さどう》する（detektor suhu tetap aktif saat mencapai suhu yang ditentukan）',
+    _origIndex: 1080
   },
 {
   id: 953,
@@ -1230,7 +1237,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Perangkat terminasi ONU",
   desc: "Perangkat FTTH yang mengubah sinyal cahaya menjadi sinyal listrik di sisi",
-  _origIndex: 1175
+  usage: 'ONUを取《と》り付《つ》けて回線《かいせん》を終端《しゅうたん》する（pasang ONU untuk terminasi jalur optik）',
+    _origIndex: 1175
   },
 {
   id: 1048,
@@ -1241,7 +1249,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Perangkat terminasi OLT",
   desc: "Dipasang di sisi sentral, mengelola banyak ONU melalui splitter dalam sistem",
-  _origIndex: 1176
+  usage: 'OLTで複数《ふくすう》の加入者線《かにゅうしゃせん》を管理《かんり》する（mengelola beberapa jalur pelanggan melalui OLT）',
+    _origIndex: 1176
   },
 {
   id: 1049,
@@ -1252,7 +1261,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Fiber optik mode tunggal",
   desc: "SMF berdiameter inti sekitar 9μm, digunakan untuk komunikasi trunk jarak jauh.",
-  _origIndex: 1177
+  usage: 'シングルモードファイバーを長距離《ちょうきょり》配線《はいせん》に使用《しよう》する（gunakan fiber mode tunggal untuk instalasi jarak jauh）',
+    _origIndex: 1177
   },
 {
   id: 1050,
@@ -1263,7 +1273,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Fiber optik multi-mode",
   desc: "MMF berdiameter inti 50 atau 62.5μm, umum dipakai untuk kabel LAN dalam gedung.",
-  _origIndex: 1178
+  usage: 'マルチモードファイバーを構内《こうない》配線《はいせん》に使用《しよう》する（gunakan fiber multi-mode untuk instalasi dalam gedung）',
+    _origIndex: 1178
   },
 {
   id: 1053,
@@ -1530,7 +1541,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tidak mencukupi / kurang",
   desc: "Tidak mencapai standar yang diperlukan. Contoh: vakum tidak tuntas.",
-  _origIndex: 805
+  usage: '準備《じゅんび》が不十分《ふじゅうぶん》なまま作業《さぎょう》を始《はじ》める（mulai bekerja dengan persiapan yang tidak memadai）',
+    _origIndex: 805
   },
 {
   id: 692,
@@ -1541,7 +1553,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kekurangan / kurang",
   desc: "Kurang dari standar minimum. Kemiringan pipa kurang → aliran terhambat.",
-  _origIndex: 806
+  usage: '材料《ざいりょう》の不足《ふそく》を早《はや》めに報告《ほうこく》する（laporkan kekurangan material lebih awal）',
+    _origIndex: 806
   },
 {
   id: 693,
@@ -1552,7 +1565,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Stabil",
   desc: "Kondisi tidak berubah. Hasil uji tekanan tidak stabil → kemungkinan bocor.",
-  _origIndex: 807
+  usage: '足場《あしば》が安定《あんてい》しているか確認《かくにん》する（periksa apakah perancah sudah stabil）',
+    _origIndex: 807
   },
 {
   id: 694,
@@ -1563,7 +1577,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Penyebab",
   desc: "Faktor yang menyebabkan masalah. Tekanan tidak stabil → penyebab: ada kebocoran.",
-  _origIndex: 808
+  usage: '事故《じこ》の原因《げんいん》を調査《ちょうさ》する（menyelidiki penyebab kecelakaan）',
+    _origIndex: 808
   },
 {
   id: 697,

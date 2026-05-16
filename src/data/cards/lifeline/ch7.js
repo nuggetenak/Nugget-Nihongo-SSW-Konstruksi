@@ -384,7 +384,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kondensasi / embun",
   desc: "Pengembunan air pada permukaan dingin akibat suhu di bawah titik embun.",
-  _origIndex: 762
+  usage: '温度差《おんどさ》で結露《けつろ》が発生《はっせい》する（kondensasi terjadi akibat perbedaan suhu）',
+    _origIndex: 762
   },
 {
   id: 650,
@@ -395,7 +396,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kandungan air",
   desc: "Kandungan air dalam sistem. Vakum tidak tuntas → air tersisa → kerusakan pipa",
-  _origIndex: 764
+  usage: '水分《すいぶん》が機器《きき》内部《ないぶ》に侵入《しんにゅう》する（kandungan air masuk ke dalam peralatan）',
+    _origIndex: 764
   },
 {
   id: 651,
@@ -406,7 +408,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kerusakan / gangguan",
   desc: "Kegagalan fungsi peralatan. Kelembapan tersisa → kerusakan sistem dari dalam.",
-  _origIndex: 765
+  usage: '機器《きき》の故障《こしょう》を速《はや》やかに報告《ほうこく》する（laporkan kerusakan peralatan dengan segera）',
+    _origIndex: 765
   },
 {
   id: 652,

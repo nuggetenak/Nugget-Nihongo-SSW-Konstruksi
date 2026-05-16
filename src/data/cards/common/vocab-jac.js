@@ -379,7 +379,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Semoga selamat / stay",
   desc: "Sapaan khas di lokasi konstruksi Jepang = semoga selamat bekerja.",
-  _origIndex: 957
+  usage: '出社時《しゅっしゃじ》に「ご安全《ごあんぜん》に」と挨拶《あいさつ》する（sapa "semoga selamat" saat tiba di tempat kerja）',
+    _origIndex: 957
   },
 {
   id: 834,
@@ -390,7 +391,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Bahaya! / Awas!",
   desc: "Seruan peringatan bahaya. Jika ada yang berteriak ini, segera bereaksi.",
-  _origIndex: 959
+  usage: '危《あぶ》ない場所《ばしょ》に近《ちか》づかない（jangan mendekati tempat yang berbahaya）',
+    _origIndex: 959
   },
 {
   id: 1197,
@@ -401,7 +403,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Selamat pagi (formal)",
   desc: "Sapaan pagi formal.\nDi site konstruksi, sering dipakai sepanjang hari.",
-  _origIndex: 1353
+  usage: '朝《あさ》に「おはようございます」と挨拶《あいさつ》する（ucapkan "selamat pagi" di pagi hari）',
+    _origIndex: 1353
   },
 {
   id: 1199,

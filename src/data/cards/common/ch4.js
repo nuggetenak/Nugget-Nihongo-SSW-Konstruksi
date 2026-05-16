@@ -54,7 +54,8 @@ export const CARDS_CH4 = [
   type: 'vocab',
   id_text: "Garis vertikal / Garis",
   desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom.",
-  _origIndex: 241
+  usage: '壁《かべ》に立《た》て墨《たてずみ》を引《ひ》く（membuat garis vertikal di dinding）',
+    _origIndex: 241
   },
 {
   id: 187,
@@ -76,7 +77,8 @@ export const CARDS_CH4 = [
   type: 'vocab',
   id_text: "Buat sudut 90° + markah garis",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
-  _origIndex: 243
+  usage: '矩《かね》を振《ふ》って直角《ちょっかく》を出《だ》す（membuat sudut siku-siku dengan menggunakan try square）',
+    _origIndex: 243
   },
 {
   id: 189,
@@ -219,7 +221,8 @@ export const CARDS_CH4 = [
   type: 'vocab',
   id_text: "Kerapian + antarmuka pemasangan",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
-  _origIndex: 264
+  usage: '納《おさ》まりを確認《かくにん》してから取《と》り付《つ》ける（periksa kerapian pemasangan sebelum dipasang）',
+    _origIndex: 264
   },
 {
   id: 202,
@@ -1396,7 +1399,8 @@ export const CARDS_CH4 = [
   type: 'vocab',
   id_text: "Lead terminal grounding",
   desc: "Menghubungkan 接地棒《せっちぼう》dengan 接地線《せっちせん》menuju panel.",
-  _origIndex: 471
+  usage: 'リード端子《りーどたんし》を接地棒《せっちぼう》に接続《せつぞく》する（menghubungkan lead terminal ke elektroda bumi）',
+    _origIndex: 471
   },
 {
   id: 568,

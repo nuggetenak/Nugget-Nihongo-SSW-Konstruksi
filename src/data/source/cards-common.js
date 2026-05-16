@@ -1231,7 +1231,8 @@ export const CARDS_COMMON = [
   type: \'vocab\',
   id_text: "Garis vertikal / Garis",
   desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom.",
-  _origIndex: 241
+  usage: '壁《かべ》に立《た》て墨《たてずみ》を引《ひ》く（membuat garis vertikal di dinding）',
+    _origIndex: 241
   },
   {
   id: 187,
@@ -1253,7 +1254,8 @@ export const CARDS_COMMON = [
   type: \'vocab\',
   id_text: "Buat sudut 90° + markah garis",
   desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
-  _origIndex: 243
+  usage: '矩《かね》を振《ふ》って直角《ちょっかく》を出《だ》す（membuat sudut siku-siku dengan menggunakan try square）',
+    _origIndex: 243
   },
   {
   id: 189,
@@ -1396,7 +1398,8 @@ export const CARDS_COMMON = [
   type: \'vocab\',
   id_text: "Kerapian + antarmuka pemasangan",
   desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
-  _origIndex: 264
+  usage: '納《おさ》まりを確認《かくにん》してから取《と》り付《つ》ける（periksa kerapian pemasangan sebelum dipasang）',
+    _origIndex: 264
   },
   {
   id: 202,
@@ -1781,7 +1784,8 @@ export const CARDS_COMMON = [
   type: 'vocab',
   id_text: "Gerinda batu vs mata",
   desc: "チップソー切《き》り断機《せつだんき》: gergaji bundar, cepat aus.",
-  _origIndex: 364
+  usage: 'チップソー切断機《ちっぷそーせつだんき》で鋼材《こうざい》を切断《せつだん》する（memotong baja dengan gergaji chip saw）',
+    _origIndex: 364
   },
   {
   id: 296,
@@ -2331,7 +2335,8 @@ export const CARDS_COMMON = [
   type: 'vocab',
   id_text: "Kain lap oli / Ember",
   desc: "ウェス = kain mengelap oli atau bahan kimia.",
-  _origIndex: 451
+  usage: 'ウェスで油《あぶら》を拭《ふ》き取《と》る（menyeka minyak dengan kain lap）',
+    _origIndex: 451
   },
   {
   id: 382,
@@ -3872,7 +3877,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Sering terjadi berulang",
   desc: "Kejadian yang terjadi berulang kali dalam frekuensi tinggi.",
-  _origIndex: 763
+  usage: '同《おな》じ箇所《かしょ》で事故《じこ》が多発《たはつ》する（kecelakaan sering berulang di titik yang sama）',
+    _origIndex: 763
   },
   {
   id: 653,
@@ -3977,7 +3983,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Metode konstruksi",
   desc: "Cara dan prosedur pelaksanaan pekerjaan konstruksi sesuai dokumen desain dan",
-  _origIndex: 789
+  usage: '施工方法《せこうほうほう》を事前《じぜん》に確認《かくにん》する（konfirmasi metode konstruksi sebelumnya）',
+    _origIndex: 789
   },
   {
   id: 678,
@@ -4022,7 +4029,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Perubahan mendadak",
   desc: "Perubahan kondisi secara tiba-tiba, misalnya aliran fluida yang berubah drastis",
-  _origIndex: 809
+  usage: '体調《たいちょう》が急変《きゅうへん》したら即座《そくざ》に報告《ほうこく》する（laporkan segera jika kondisi tubuh berubah tiba-tiba）',
+    _origIndex: 809
   },
   {
   id: 696,
@@ -4033,7 +4041,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Segera setelah",
   desc: "Menyatakan waktu yang sangat dekat setelah suatu kejadian. Lebih langsung dari",
-  _origIndex: 810
+  usage: '作業終了《さぎょうしゅうりょう》直後《ちょくご》に片付《かたづ》ける（bersihkan segera setelah pekerjaan selesai）',
+    _origIndex: 810
   },
   {
   id: 700,
@@ -4332,7 +4341,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Terima kasih sudah kerja",
   desc: "Ungkapan penghargaan atas kerja keras seseorang. Dapat digunakan di lapangan",
-  _origIndex: 958
+  usage: '退勤時《たいきんじ》に「お疲《つか》れ様《さま》です」と言《い》う（ucapkan "terima kasih sudah bekerja keras" saat pulang）',
+    _origIndex: 958
   },
   {
   id: 839,
@@ -7148,7 +7158,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Kondensasi / embun",
   desc: "Pengembunan air pada permukaan dingin akibat suhu di bawah titik embun.",
-  _origIndex: 762
+  usage: '温度差《おんどさ》で結露《けつろ》が発生《はっせい》する（kondensasi terjadi akibat perbedaan suhu）',
+    _origIndex: 762
   },
   {
   id: 650,
@@ -7159,7 +7170,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Kandungan air",
   desc: "Kandungan air dalam sistem. Vakum tidak tuntas → air tersisa → kerusakan pipa",
-  _origIndex: 764
+  usage: '水分《すいぶん》が機器《きき》内部《ないぶ》に侵入《しんにゅう》する（kandungan air masuk ke dalam peralatan）',
+    _origIndex: 764
   },
   {
   id: 651,
@@ -7170,7 +7182,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Kerusakan / gangguan",
   desc: "Kegagalan fungsi peralatan. Kelembapan tersisa → kerusakan sistem dari dalam.",
-  _origIndex: 765
+  usage: '機器《きき》の故障《こしょう》を速《はや》やかに報告《ほうこく》する（laporkan kerusakan peralatan dengan segera）',
+    _origIndex: 765
   },
   {
   id: 652,
@@ -7238,7 +7251,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Pemeriksaan keamanan",
   desc: "Langkah verifikasi bahwa kondisi sudah aman sebelum/sesudah pekerjaan.",
-  _origIndex: 778
+  usage: '作業前《さぎょうまえ》に安全確認《あんぜんかくにん》を行《おこな》う（lakukan pemeriksaan keamanan sebelum bekerja）',
+    _origIndex: 778
   },
   {
   id: 665,
@@ -7249,7 +7263,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Konfirmasi / pengecekan",
   desc: "Memastikan sesuatu sudah benar sebelum melanjutkan pekerjaan.",
-  _origIndex: 779
+  usage: '施工後《せこうご》に寸法《すんぽう》を確認《かくにん》する（periksa dimensi setelah konstruksi selesai）',
+    _origIndex: 779
   },
   {
   id: 667,
@@ -7338,7 +7353,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Insulasi panas",
   desc: "Menjaga suhu pipa panas agar tidak turun selama distribusi.",
-  _origIndex: 790
+  usage: '配管《はいかん》に保温《ほおん》を施《ほどこ》す（aplikasikan insulasi panas pada pipa）',
+    _origIndex: 790
   },
   {
   id: 677,
@@ -7395,7 +7411,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Tidak mencukupi / kurang",
   desc: "Tidak mencapai standar yang diperlukan. Contoh: vakum tidak tuntas.",
-  _origIndex: 805
+  usage: '準備《じゅんび》が不十分《ふじゅうぶん》なまま作業《さぎょう》を始《はじ》める（mulai bekerja dengan persiapan yang tidak memadai）',
+    _origIndex: 805
   },
   {
   id: 692,
@@ -7406,7 +7423,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Kekurangan / kurang",
   desc: "Kurang dari standar minimum. Kemiringan pipa kurang → aliran terhambat.",
-  _origIndex: 806
+  usage: '材料《ざいりょう》の不足《ふそく》を早《はや》めに報告《ほうこく》する（laporkan kekurangan material lebih awal）',
+    _origIndex: 806
   },
   {
   id: 693,
@@ -7417,7 +7435,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Stabil",
   desc: "Kondisi tidak berubah. Hasil uji tekanan tidak stabil → kemungkinan bocor.",
-  _origIndex: 807
+  usage: '足場《あしば》が安定《あんてい》しているか確認《かくにん》する（periksa apakah perancah sudah stabil）',
+    _origIndex: 807
   },
   {
   id: 694,
@@ -7428,7 +7447,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Penyebab",
   desc: "Faktor yang menyebabkan masalah. Tekanan tidak stabil → penyebab: ada kebocoran.",
-  _origIndex: 808
+  usage: '事故《じこ》の原因《げんいん》を調査《ちょうさ》する（menyelidiki penyebab kecelakaan）',
+    _origIndex: 808
   },
   {
   id: 697,
@@ -8410,7 +8430,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Semoga selamat / stay",
   desc: "Sapaan khas di lokasi konstruksi Jepang = semoga selamat bekerja.",
-  _origIndex: 957
+  usage: '出社時《しゅっしゃじ》に「ご安全《ごあんぜん》に」と挨拶《あいさつ》する（sapa "semoga selamat" saat tiba di tempat kerja）',
+    _origIndex: 957
   },
   {
   id: 834,
@@ -8421,7 +8442,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Bahaya! / Awas!",
   desc: "Seruan peringatan bahaya. Jika ada yang berteriak ini, segera bereaksi.",
-  _origIndex: 959
+  usage: '危《あぶ》ない場所《ばしょ》に近《ちか》づかない（jangan mendekati tempat yang berbahaya）',
+    _origIndex: 959
   },
   {
   id: 835,
@@ -9228,7 +9250,8 @@ export const CARDS_COMMON = [
   type: "vocab",
   id_text: "Selamat pagi (formal)",
   desc: "Sapaan pagi formal.\nDi site konstruksi, sering dipakai sepanjang hari.",
-  _origIndex: 1353
+  usage: '朝《あさ》に「おはようございます」と挨拶《あいさつ》する（ucapkan "selamat pagi" di pagi hari）',
+    _origIndex: 1353
   },
   {
   id: 1199,

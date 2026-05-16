@@ -1166,7 +1166,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Instalasi bawah tanah",
   desc: "Pemasangan pipa/kabel di bawah permukaan tanah.\nWajib catat posisi di gambar",
-  _origIndex: 743
+  usage: '水道管《すいどうかん》を埋設《まいせつ》する（menanam pipa air di bawah tanah）',
+    _origIndex: 743
   },
 {
   id: 630,
@@ -1177,7 +1178,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Bawah tanah",
   desc: "Area di bawah permukaan tanah.\n地下配管《ちかはいかん》 = pipa bawah tanah.",
-  _origIndex: 744
+  usage: '地下《ちか》に配管《はいかん》を敷設《ふせつ》する（memasang pipa di bawah tanah）',
+    _origIndex: 744
   },
 {
   id: 633,
@@ -1200,7 +1202,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Perpipaan gas",
   desc: "Sistem pipa untuk mengalirkan gas kota.\nWajib uji kebocoran setelah sambungan.",
-  _origIndex: 748
+  usage: 'ガス配管《がすはいかん》を点検《てんけん》する（memeriksa perpipaan gas）',
+    _origIndex: 748
   },
 {
   id: 635,
@@ -1211,7 +1214,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Penyambungan / koneksi",
   desc: "Menghubungkan dua bagian pipa atau kabel.\nSetiap sambungan harus dicek",
-  _origIndex: 749
+  usage: '継手《つぎて》で配管《はいかん》を接続《せつぞく》する（menyambungkan pipa dengan fitting）',
+    _origIndex: 749
   },
 {
   id: 636,
@@ -1222,7 +1226,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Bagian sambungan",
   desc: "Titik pertemuan dua pipa/komponen; paling rentan bocor.",
-  _origIndex: 750
+  usage: '接続部《せつぞくぶ》の漏《も》れを確認《かくにん》する（memeriksa kebocoran pada bagian sambungan）',
+    _origIndex: 750
   },
 {
   id: 637,
@@ -1233,7 +1238,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Jarak / interval",
   desc: "Jarak antar saddle penyangga pipa.\nJika terlalu jauh → lendutan (たわみ) terjadi.",
-  _origIndex: 751
+  usage: '支持間隔《しじかんかく》を一定《いってい》に保《たも》つ（menjaga jarak penopang tetap konsisten）',
+    _origIndex: 751
   },
 {
   id: 640,
@@ -1244,7 +1250,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Material insulasi panas",
   desc: "Bahan pembungkus pipa panas agar panas tidak terbuang ke lingkungan.",
-  _origIndex: 754
+  usage: '保温材《ほおんざい》を配管《はいかん》に巻《ま》き付《つ》ける（membungkus pipa dengan material insulasi panas）',
+    _origIndex: 754
   },
 {
   id: 641,
@@ -1255,7 +1262,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Material insulasi termal",
   desc: "Bahan pencegah perpindahan panas. Dipakai pada pipa panas & dingin.",
-  _origIndex: 755
+  usage: '断熱材《だんねつざい》を壁内《かべない》に充填《じゅうてん》する（mengisi material insulasi termal di dalam dinding）',
+    _origIndex: 755
   },
 {
   id: 642,
@@ -1266,7 +1274,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Bahan sealant / penyegel",
   desc: "Material untuk menutup celah dan mencegah masuknya air atau udara.",
-  _origIndex: 756
+  usage: 'シーリング材《しーりんぐざい》を隙間《すきま》に充填《じゅうてん》する（mengisi sealant pada celah）',
+    _origIndex: 756
   },
 {
   id: 643,
@@ -1277,7 +1286,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Selotip insulasi listrik",
   desc: "Pita perekat untuk mengisolasi kabel listrik. Berbeda fungsi dari sealant.",
-  _origIndex: 757
+  usage: '接続部《せつぞくぶ》に絶縁テープ《ぜつえんてーぷ》を巻《ま》く（membungkus sambungan dengan selotip insulasi）',
+    _origIndex: 757
   },
 {
   id: 645,
@@ -1288,7 +1298,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Ketahanan cuaca",
   desc: "Kemampuan material bertahan terhadap UV, hujan, dan perubahan suhu luar ruangan.",
-  _origIndex: 759
+  usage: '耐候性《たいこうせい》のある材料《ざいりょう》を選《えら》ぶ（memilih material yang tahan cuaca）',
+    _origIndex: 759
   },
 {
   id: 646,
@@ -1299,7 +1310,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Ketebalan",
   desc: "Tebal material insulasi.\nJika 断熱材《だんねつざい》 terlalu tipis → 結露《けつろ》 sering",
-  _origIndex: 760
+  usage: '保温材《ほおんざい》の厚《あつ》さを確認《かくにん》する（memeriksa ketebalan material insulasi）',
+    _origIndex: 760
   },
 {
   id: 681,
@@ -1310,7 +1322,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pembersihan",
   desc: "Membersihkan bagian dalam pipa dari karat sebelum pemasangan.\nWajib diikuti",
-  _origIndex: 795
+  usage: '配管内部《はいかんないぶ》を洗浄《せんじょう》する（membersihkan bagian dalam pipa）',
+    _origIndex: 795
   },
 {
   id: 703,
@@ -1332,7 +1345,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Aliran (fluida)",
   desc: "Aliran fluida dalam pipa.\n勾配《こうばい》不《ふ》足《ふそく》 → aliran memburuk → fluida",
-  _origIndex: 835
+  usage: '流《なが》れを遮断《しゃだん》する（memutus aliran）',
+    _origIndex: 835
   },
 {
   id: 743,
@@ -1343,7 +1357,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Lebar / luas",
   desc: "Mendeskripsikan jarak. Jarak saddle terlalu lebar → lendutan pipa (たわみ) terjadi.",
-  _origIndex: 857
+  usage: '間隔《かんかく》を広《ひろ》く取《と》る（mengambil jarak yang lebih lebar）',
+    _origIndex: 857
   },
 {
   id: 759,
@@ -1354,7 +1369,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Melewatkan / meneruskan",
   desc: "Melewatkan melalui konduit/pipa.\nKonteks: hal yang diperhatikan saat kabel",
-  _origIndex: 873
+  usage: '電線《でんせん》を管内《かんない》に通《とお》す（memasukkan kabel ke dalam konduit）',
+    _origIndex: 873
   },
 {
   id: 760,
@@ -1365,7 +1381,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Membuka",
   desc: "Membuka katup/valve.\nBuka terlalu cepat → aliran mendadak berubah → muncul",
-  _origIndex: 874
+  usage: 'バルブを開《ひら》く（membuka katup）',
+    _origIndex: 874
   },
 {
   id: 766,
@@ -1376,7 +1393,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Mengubur / menanam (pipa)",
   desc: "Mengubur pipa di bawah tanah.\nYang benar: gunakan 保温材《ほおんざい》+",
-  _origIndex: 880
+  usage: '地中《ちちゅう》に管《かん》を埋《う》める（menanam pipa di dalam tanah）',
+    _origIndex: 880
   },
 {
   id: 778,
@@ -1646,7 +1664,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Garasi",
   desc: "Tempat parkir kendaraan dalam bangunan; perlu ventilasi khusus karena gas buang.",
-  _origIndex: 1004
+  usage: '車庫《しゃこ》に機材《きざい》を格納《かくのう》する（simpan peralatan di garasi）',
+    _origIndex: 1004
   },
 {
   id: 901,
@@ -1866,7 +1885,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Penyambungan / joint",
   desc: "Metode penyambungan pipa. Pipa baja = ulir; pipa PE = EF (electrofusion).",
-  _origIndex: 972
+  usage: '継手《つぎて》で管《かん》を接合《せつごう》する（menyambungkan pipa menggunakan fitting）',
+    _origIndex: 972
   },
 {
   id: 948,
@@ -1877,7 +1897,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Kepala sprinkler pemadam",
   desc: "Kepala sprinkler meleleh saat suhu tinggi → memancarkan air otomatis.",
-  _origIndex: 1076
+  usage: 'スプリンクラーヘッドの位置《いち》を確認《かくにん》する（mengonfirmasi posisi kepala sprinkler）',
+    _origIndex: 1076
   },
 {
   id: 949,
@@ -1888,7 +1909,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Sprinkler jenis terbuka",
   desc: "Digunakan di ruang besar seperti panggung; semua kepala menyembur serentak saat",
-  _origIndex: 1077
+  usage: '開放型《かいほうがた》スプリンクラーが一斉《いっせい》に放水《ほうすい》する（sprinkler jenis terbuka menyemprot serentak）',
+    _origIndex: 1077
   },
 {
   id: 950,
@@ -1899,7 +1921,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Sprinkler jenis tertutup",
   desc: "Hanya kepala yang terkena panas langsung yang menyembur. Paling umum di gedung",
-  _origIndex: 1078
+  usage: '閉鎖型《へいさがた》スプリンクラーが熱《ねつ》で作動《さどう》する（sprinkler jenis tertutup aktif karena panas）',
+    _origIndex: 1078
   },
 {
   id: 957,

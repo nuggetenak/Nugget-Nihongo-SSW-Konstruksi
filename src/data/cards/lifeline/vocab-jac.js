@@ -34,7 +34,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Jalur pipa / conduit path",
   desc: "Jalur pipa yang menghubungkan antar manhole di bawah tanah.",
-  _origIndex: 940
+  usage: '管路《かんろ》の経路《けいろ》を確認《かくにん》する（memeriksa jalur pipa）',
+    _origIndex: 940
   },
 {
   id: 816,
@@ -45,7 +46,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Utilitas bawah tanah",
   desc: "Pipa/kabel yang sudah terpasang di bawah tanah.\nWajib diperiksa sebelum",
-  _origIndex: 941
+  usage: '埋設物《まいせつぶつ》の位置《いち》を確認《かくにん》する（mengonfirmasi posisi utilitas bawah tanah）',
+    _origIndex: 941
   },
 {
   id: 817,
@@ -56,7 +58,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Shaft vertikal / sumur",
   desc: "Lubang vertikal sebagai titik masuk/start konstruksi pipa jacking.",
-  _origIndex: 942
+  usage: '立坑《たてこう》を掘削《くっさく》する（menggali shaft vertikal）',
+    _origIndex: 942
   },
 {
   id: 818,
@@ -67,7 +70,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Saluran utilitas bersama (vocab)",
   desc: "Saluran bawah tanah bersama untuk listrik, gas, dan air bersih dalam satu ruang.",
-  _origIndex: 943
+  usage: '共同溝《きょうどうこう》に配管《はいかん》を収容《しゅうよう》する（memasukkan pipa ke dalam saluran utilitas bersama）',
+    _origIndex: 943
   },
 {
   id: 821,
@@ -78,7 +82,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Insulasi listrik",
   desc: "Mencegah arus listrik mengalir ke bagian lain yang tidak dikehendaki.",
-  _origIndex: 946
+  usage: '絶縁《ぜつえん》抵抗《ていこう》を測定《そくてい》する（mengukur resistansi insulasi）',
+    _origIndex: 946
   },
 {
   id: 822,
@@ -101,7 +106,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Kebocoran listrik",
   desc: "Arus listrik bocor ke luar jalur yang seharusnya → penyebab sengatan dan",
-  _origIndex: 948
+  usage: '漏電《ろうでん》をブレーカーで遮断《しゃだん》する（memutus kebocoran listrik dengan breaker）',
+    _origIndex: 948
   },
 {
   id: 824,
@@ -112,7 +118,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Korsleting / short",
   desc: "Dua kabel bersentuhan langsung tanpa beban → arus sangat besar → bahaya",
-  _origIndex: 949
+  usage: '短絡《たんらく》が発生《はっせい》しないよう配線《はいせん》を確認《かくにん》する（periksa kabel agar tidak terjadi korsleting）',
+    _origIndex: 949
   },
 {
   id: 1250,

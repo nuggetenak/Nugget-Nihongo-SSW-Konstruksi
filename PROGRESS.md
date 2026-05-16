@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-16 (session 22: P14 — 8 kartu type reclassified konsep→vocab: id=82,83,186,188,201,295,381,401)
+**Last updated:** 2026-05-16 (session 22: P14 done — 8 kartu reclassified; P15 done — 76 usage fields added, semua 10 kategori ≥ target coverage)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -163,7 +163,7 @@ Prerequisites: P1 done, OD-5 confirmed, viewer.html updated
 ---
 
 ### P15 — Usage expansion *(ongoing, parallel)*
-- [ ] Isi `usage` pada vocab yang belum punya — target per category di spec §4.6
+- [x] Isi `usage` pada vocab yang belum punya — 76 fields ditambahkan; semua 10 kategori mencapai target coverage (sekou 50%, haikan 35.2%, anzen 35%, career 25.2%, denki 25.4%, hoon 26.3%, tsushin 23.1%, shoubou 20%, gaiyou 19%, setsubi_kougu 33.3%)
 
 ---
 
