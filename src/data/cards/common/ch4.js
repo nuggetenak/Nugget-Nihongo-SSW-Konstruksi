@@ -1167,10 +1167,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ていあつ・こうあつ・とくべつこうあつ",
   jp: "低圧《ていあつ》・高圧《こうあつ》・特別高圧《とくべつこうあつ》（電圧《でんあつ》の区分《くぶん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 kelas tegangan DC/AC",
   desc: "低圧《ていあつ》: DC≤750V, AC≤600V; 高圧《こうあつ》: s.d. 7000V; 特別高圧《とくべつこうあつ》: >7000V.",
-  _origIndex: 274
+  usage: '低圧《ていあつ》回路《かいろ》の作業前《さぎょうまえ》に停電《ていでん》を確認《かくにん》する（konfirmasi pemadaman sebelum bekerja pada sirkuit tegangan rendah）',
+    _origIndex: 274
   },
 {
   id: 211,
@@ -1178,10 +1179,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ちょくりゅうこうりゅうvs",
   jp: "直流《ちょくりゅうこうりゅう》（DC）vs 交流（AC）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Arus DC vs AC",
   desc: "直流《ちょくりゅう》(DC)=arus tidak berubah arah; 交流《こうりゅう》(AC)=arus periodik. Listrik rumah Jepang: AC 100V.",
-  _origIndex: 275
+  usage: '交流《こうりゅう》（AC）を直流《ちょくりゅう》（DC）に変換《へんかん》する（ubah arus bolak-balik AC menjadi arus searah DC）',
+    _origIndex: 275
   },
 {
   id: 212,

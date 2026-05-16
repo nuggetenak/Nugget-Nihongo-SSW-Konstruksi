@@ -410,10 +410,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "ぱいぷかったあ",
   jp: "パイプカッター",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemotong pipa",
   desc: "Alat potong pipa (baja, kuningan, tembaga) via roda menjepit melingkar. Sering diuji lewat FOTO.",
-  _origIndex: 86
+  usage: 'パイプカッターで銅管《どうかん》を切断《せつだん》する（potong pipa tembaga menggunakan pipe cutter）',
+    _origIndex: 86
   },
 {
   id: 84,
@@ -443,10 +444,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "ぐらすうーる vs ろっくうーる",
   jp: "グラスウール vs ロックウール",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Wol kaca vs wol batu",
   desc: "グラスウール: dari kaca dilebur. ロックウール: dari basalt, tahan api lebih baik.\nUjian: 'kaca→serat'=グラスウール.",
-  _origIndex: 99
+  usage: 'グラスウールより耐火性《たいかせい》の高《たか》いロックウールを選《えら》ぶ（pilih wol batu yang ketahanan apinya lebih tinggi dari wol kaca）',
+    _origIndex: 99
   },
 {
   id: 92,
@@ -454,10 +456,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "らっきんぐかばあ",
   jp: "ラッキングカバー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lagging cover pipa",
   desc: "Penutup finishing insulasi pipa di luar ruangan (屋外《おくがい》露出《ろしゅつ》). Dalam ruangan tidak wajib.",
-  _origIndex: 100
+  usage: 'ラッキングカバーで屋外《おくがい》の保温材《ほおんざい》を保護《ほご》する（lindungi insulasi pipa di luar ruangan menggunakan lagging cover）',
+    _origIndex: 100
   },
 {
   id: 96,
@@ -476,9 +479,10 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "おくがいしょうかいせん vs おくないしょうかいせん",
   jp: "屋外消火栓《おくがいしょうかいせん》 vs 屋内消火栓《おくないしょうかいせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Hidran luar vs dalam",
   desc: "屋外《おくがい》: luar gedung, cegah menyebar, lantai 1-2.\n屋内《おくない》: dalam gedung, untuk penghuni, tipe",
-  _origIndex: 106
+  usage: '屋内消火栓《おくないしょうかいせん》のホースを展開《てんかい》して放水《ほうすい》する（bentangkan selang hidran dalam gedung lalu semprotkan air）',
+    _origIndex: 106
   }
 ];

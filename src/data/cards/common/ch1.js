@@ -51,10 +51,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "けんせつきゃりああっぷしすてむ",
   jp: "建設キャリアアップシステム《けんせつきゃりああっぷしすてむ》（CCUS）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Karier Konstruksi CCUS",
   desc: "Rekam karier pekerja konstruksi, 4 level: putih→biru→perak→emas. Level 2 butuh ≥645 hari kerja.",
-  _origIndex: 122
+  usage: 'CCUSのカードで技能者《ぎのうしゃ》の経験《けいけん》を記録《きろく》する（catat pengalaman tenaga ahli menggunakan kartu CCUS）',
+    _origIndex: 122
   },
 {
   id: 115,
@@ -62,10 +63,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kontraktor utama",
   desc: "Menerima kontrak dari klien, mengatur seluruh pekerjaan dan sub-kontraktor.",
-  _origIndex: 123
+  usage: '元請《もとうけ》けが下請《したうけ》に工事《こうじ》を発注《はっちゅう》する（kontraktor utama memberikan order pekerjaan kepada sub-kontraktor）',
+    _origIndex: 123
   },
 {
   id: 493,
@@ -216,10 +218,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "しんきにゅうじょうしゃ",
   jp: "新規入場者《しんきにゅうじょうしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerja baru pertama",
   desc: "Pekerja yang pertama kali masuk lokasi konstruksi tertentu.",
-  _origIndex: 576
+  usage: '新規入場者《しんきにゅうじょうしゃ》に安全教育《あんぜんきょういく》を実施《じっし》する（berikan pendidikan keselamatan kepada pekerja baru）',
+    _origIndex: 576
   },
 {
   id: 507,

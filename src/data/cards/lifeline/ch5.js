@@ -245,10 +245,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "こうしつえんかびにるかんう",
   jp: "硬質塩化ビニル管《こうしつえんかびにるかんう》（VP/VU）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa PVC keras (VP/VU)",
   desc: "Pipa PVC abu-abu: VP=tebal, VU=tipis. Ringan & halus, tapi rentan benturan dan panas.",
-  _origIndex: 81
+  usage: '硬質塩化ビニル管《こうしつえんかびにるかん》（VP）を給水《きゅうすい》配管《はいかん》に使用《しよう》する（gunakan pipa PVC keras VP untuk instalasi air bersih）',
+    _origIndex: 81
   },
 {
   id: 74,
@@ -256,10 +257,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "たいしょうげっきせいえんびかん",
   jp: "耐衝撃性塩ビ管《たいしょうげっきせいえんびかん》（HIVP）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa PVC tahan benturan",
   desc: "Pipa PVC biru tua yang tahan benturan eksternal. Digunakan di tempat benturan besar & daerah dingin.",
-  _origIndex: 82
+  usage: '耐衝撃性塩ビ管《たいしょうげきせいえんびかん》（HIVP）を屋外《おくがい》に配管《はいかん》する（pasang pipa HIVP di area luar gedung）',
+    _origIndex: 82
   },
 {
   id: 75,
@@ -291,10 +293,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "ぱいぷれんち",
   jp: "パイプレンチ（ピレン）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kunci pipa (piren)",
   desc: "Tang pipa untuk mencengkeram dan memutar pipa bulat saat penyambungan.",
-  _origIndex: 87
+  usage: 'パイプレンチ（ピレン）で鋼管《こうかん》を回《まわ》す（putar pipa baja menggunakan pipe wrench）',
+    _origIndex: 87
   },
 {
   id: 81,
@@ -302,10 +305,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "すりいぶ",
   jp: "スリーブ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Selongsong (sleeve)",
   desc: "Tabung silinder pada dinding/lantai/balok untuk melewatkan pipa. Dibenamkan sebelum cor beton.",
-  _origIndex: 89
+  usage: 'スリーブを壁《かべ》に埋《う》め込《こ》んで配管《はいかん》を通《とお》す（tanam sleeve ke dalam dinding lalu lewatkan pipa）',
+    _origIndex: 89
   },
 {
   id: 82,
@@ -348,10 +352,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "はっぽうすちろるだんねつざい",
   jp: "発泡スチロール断熱材 / ポリスチレンフォーム《はっぽうすちろるだんねつざい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Isolasi busa polistiren",
   desc: "Insulasi polistirena — tidak tahan suhu ≥70°C. Umum dipakai untuk pipa air dan drainase.",
-  _origIndex: 97
+  usage: '発泡スチロール断熱材《はっぽうすちろるだんねつざい》を冷水管《れいすいかん》に巻《ま》く（balut pipa air dingin dengan insulasi polistirena）',
+    _origIndex: 97
   },
 {
   id: 93,
@@ -371,10 +376,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "すぷりんくらあせつび",
   jp: "スプリンクラー設備《すぷりんくらあせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Peralatan sprinkler",
   desc: "Alat pada pipa pemadam yang memercikkan air otomatis dari plafon jika terjadi kebakaran.",
-  _origIndex: 103
+  usage: 'スプリンクラー設備《すぷりんくらあせつび》のヘッドを定位置《ていいち》に設置《せっち》する（pasang kepala sprinkler pada posisi yang telah ditentukan）',
+    _origIndex: 103
   },
 {
   id: 97,
@@ -382,10 +388,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "ふんまつしょうかせつび",
   jp: "粉末消火設備《ふんまつしょうかせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sistem pemadam bubuk",
   desc: "Menggunakan bahan pemadam bubuk. Cocok untuk kebakaran minyak dan listrik berenergi.",
-  _origIndex: 105
+  usage: '粉末消火設備《ふんまつしょうかせつび》を電気室《でんきしつ》に設置《せっち》する（pasang sistem pemadam bubuk di ruang panel listrik）',
+    _origIndex: 105
   },
 {
   id: 256,
@@ -549,10 +556,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "くろおじゃあ",
   jp: "クロージャ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kotak sambungan aerial",
   desc: "Kotak di tiang untuk sambung/cabang inti kabel aerial; serat optik=abu-abu, kabel metal=hitam.",
-  _origIndex: 339
+  usage: 'クロージャで光ファイバーの分岐《ぶんき》接続《せつぞく》をする（lakukan percabangan sambungan serat optik menggunakan closure）',
+    _origIndex: 339
   },
 {
   id: 271,
@@ -560,10 +568,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "つりせんめっせんじゃあわいやあ",
   jp: "つり線《せん》（メッセンジャーワイヤー）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kawat penopang aerial",
   desc: "Kawat baja di atas kabel aerial agar kabel tidak menanggung beban tarik sendiri.",
-  _origIndex: 340
+  usage: 'つり線《せん》（メッセンジャーワイヤー）に光ケーブルを固定《こてい》する（kencangkan kabel optik pada messenger wire）',
+    _origIndex: 340
   },
 {
   id: 272,
@@ -730,10 +739,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "みずふんむしょうかせつび",
   jp: "水噴霧消火設備《みずふんむしょうかせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sistem pemadam kabut air",
   desc: "Semprotkan kabut air untuk padam kebakaran; digunakan di parkir dan area bahan mudah terbakar.",
-  _origIndex: 357
+  usage: '水噴霧消火設備《みずふんむしょうかせつび》を駐車場《ちゅうしゃじょう》に設置《せっち》する（pasang sistem pemadam kabut air di area parkir）',
+    _origIndex: 357
   },
 {
   id: 289,
@@ -741,10 +751,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "あわしょうかせつび",
   jp: "泡消火設備《あわしょうかせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemadam busa (minyak)",
   desc: "Untuk kebakaran minyak; busa menutup api (窒息《ちっそく》) dan sekaligus mendinginkan.",
-  _origIndex: 358
+  usage: '泡消火設備《あわしょうかせつび》で油火災《あぶらかさい》を鎮火《ちんか》する（padamkan kebakaran minyak dengan sistem pemadam busa）',
+    _origIndex: 358
   },
 {
   id: 290,
@@ -752,10 +763,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "ふかあっせいがすしょうかせつび",
   jp: "不活性ガス消火設備《ふかあっせいがすしょうかせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sistem pemadam gas inert",
   desc: "Gas inert kurangi oksigen dan dinginkan; tidak merusak peralatan, cocok untuk server dan arsip.",
-  _origIndex: 359
+  usage: '不活性ガス消火設備《ふかっせいがすしょうかせつび》をサーバー室《しつ》に設置《せっち》する（pasang sistem pemadam gas inert di ruang server）',
+    _origIndex: 359
   },
 {
   id: 291,
@@ -1374,10 +1386,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "とらんしっと",
   jp: "トランシット",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Theodolit / transit",
   desc: "Alat ukur sudut vertikal dan horizontal — umumnya versi digital saat ini.",
-  _origIndex: 130
+  usage: 'トランシットで水平角《すいへいかく》を測定《そくてい》する（ukur sudut horizontal menggunakan transit）',
+    _origIndex: 130
   },
 {
   id: 123,
@@ -1385,10 +1398,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "とおたるすてえしょん",
   jp: "トータルステーション",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Total station",
   desc: "Gabungan alat ukur jarak dan sudut elektronik dalam satu perangkat.",
-  _origIndex: 131
+  usage: 'トータルステーションで距離《きょり》と角度《かくど》を同時《どうじ》に測定《そくてい》する（ukur jarak dan sudut secara bersamaan menggunakan total station）',
+    _origIndex: 131
   },
 {
   id: 124,
@@ -1407,10 +1421,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "こんべっくす",
   jp: "コンベックス",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Meteran pita",
   desc: "Meteran pita logam tipis — nama resmi 'convex rule', di lapangan dipanggil 'konbe'.",
-  _origIndex: 133
+  usage: 'コンベックスで壁《かべ》の寸法《すんぽう》を測《はか》る（ukur dimensi dinding menggunakan meteran pita）',
+    _origIndex: 133
   },
 {
   id: 126,
@@ -1418,10 +1433,11 @@ export const CARDS_LIFELINE_CH5 = [
   source: "jac-ch5",
   furi: "ふりこ・さげふり",
   jp: "振り子《ふりこ》・下げ振り《さげふり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bandul lot (plumb bob)",
   desc: "Pemberat berujung kerucut untuk cek tegak lurus tiang. Benang dari atas, ukur jarak ke permukaan.",
-  _origIndex: 134
+  usage: '下《さ》げ振《ふ》りで柱《はしら》の鉛直《えんちょく》を確認《かくにん》する（periksa vertikalitas kolom menggunakan plumb bob）',
+    _origIndex: 134
   },
 {
   id: 127,

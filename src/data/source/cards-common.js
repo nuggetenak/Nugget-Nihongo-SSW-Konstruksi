@@ -337,10 +337,11 @@ export const CARDS_COMMON = [
   source: "jac-ch7",
   furi: "ふるはあねすがたついらくせいしようきぐう",
   jp: "フルハーネス型墜落制止用器具《ふるはあねすがたついらくせいしようきぐう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "APD full harness",
   desc: "Wajib digunakan saat bekerja di ketinggian. Full harness lebih aman dari harness dada saja.",
-  _origIndex: 108
+  usage: 'フルハーネスを着用《ちゃくよう》して高所作業《こうしょさぎょう》を行《おこな》う（kenakan full harness saat bekerja di ketinggian）',
+    _origIndex: 108
   },
   {
   id: 101,
@@ -381,10 +382,11 @@ export const CARDS_COMMON = [
   source: "jac-ch7",
   furi: "あんかあぽいんと",
   jp: "アンカーポイント",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Titik angkur (anchor)",
   desc: "Titik pengait pada struktur untuk mengaitkan peralatan penahan jatuh saat bekerja di ketinggian.",
-  _origIndex: 112
+  usage: '親綱《おやづな》をアンカーポイントに取《と》り付《つ》ける（pasang tali induk pada titik angkur）',
+    _origIndex: 112
   },
   {
   id: 105,
@@ -491,10 +493,11 @@ export const CARDS_COMMON = [
   source: "jac-ch1",
   furi: "けんせつきゃりああっぷしすてむ",
   jp: "建設キャリアアップシステム《けんせつきゃりああっぷしすてむ》（CCUS）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Karier Konstruksi CCUS",
   desc: "Rekam karier pekerja konstruksi, 4 level: putih→biru→perak→emas. Level 2 butuh ≥645 hari kerja.",
-  _origIndex: 122
+  usage: 'CCUSのカードで技能者《ぎのうしゃ》の経験《けいけん》を記録《きろく》する（catat pengalaman tenaga ahli menggunakan kartu CCUS）',
+    _origIndex: 122
   },
   {
   id: 115,
@@ -502,10 +505,11 @@ export const CARDS_COMMON = [
   source: "jac-ch1",
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kontraktor utama",
   desc: "Menerima kontrak dari klien, mengatur seluruh pekerjaan dan sub-kontraktor.",
-  _origIndex: 123
+  usage: '元請《もとうけ》けが下請《したうけ》に工事《こうじ》を発注《はっちゅう》する（kontraktor utama memberikan order pekerjaan kepada sub-kontraktor）',
+    _origIndex: 123
   },
   {
   id: 116,
@@ -513,10 +517,11 @@ export const CARDS_COMMON = [
   source: "jac-ch2",
   furi: "したうけせんもんこうじぎょうしゃ",
   jp: "下請《したうけ》（専門工事業者《せんもんこうじぎょうしゃ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sub-kontraktor spesialis",
   desc: "Menerima subkontrak dari kontraktor utama. Bekerja sesuai instruksi 職長《しょくちょう》.",
-  _origIndex: 124
+  usage: '下請《したうけ》が専門工事《せんもんこうじ》を担当《たんとう》する（sub-kontraktor menangani pekerjaan spesialis）',
+    _origIndex: 124
   },
   {
   id: 117,
@@ -535,10 +540,11 @@ export const CARDS_COMMON = [
   source: "jac-gakka1",
   furi: "ぱわあはらすめんと",
   jp: "パワー・ハラスメント（パワハラ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pelecehan kekuasaan",
   desc: "Memanfaatkan keunggulan posisi untuk memberi tekanan melebihi batas wajar. Berbeda dari セクハラ.",
-  _origIndex: 126
+  usage: 'パワーハラスメントを受《う》けたらすぐ報告《ほうこく》する（laporkan segera jika mengalami pelecehan kekuasaan）',
+    _origIndex: 126
   },
   {
   id: 119,
@@ -580,10 +586,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "とらんしっと",
   jp: "トランシット",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Theodolit / transit",
   desc: "Alat ukur sudut vertikal dan horizontal — umumnya versi digital saat ini.",
-  _origIndex: 130
+  usage: 'トランシットで水平角《すいへいかく》を測定《そくてい》する（ukur sudut horizontal menggunakan transit）',
+    _origIndex: 130
   },
   {
   id: 123,
@@ -591,10 +598,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "とおたるすてえしょん",
   jp: "トータルステーション",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Total station",
   desc: "Gabungan alat ukur jarak dan sudut elektronik dalam satu perangkat.",
-  _origIndex: 131
+  usage: 'トータルステーションで距離《きょり》と角度《かくど》を同時《どうじ》に測定《そくてい》する（ukur jarak dan sudut secara bersamaan menggunakan total station）',
+    _origIndex: 131
   },
   {
   id: 124,
@@ -613,10 +621,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "こんべっくす",
   jp: "コンベックス",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Meteran pita",
   desc: "Meteran pita logam tipis — nama resmi 'convex rule', di lapangan dipanggil 'konbe'.",
-  _origIndex: 133
+  usage: 'コンベックスで壁《かべ》の寸法《すんぽう》を測《はか》る（ukur dimensi dinding menggunakan meteran pita）',
+    _origIndex: 133
   },
   {
   id: 126,
@@ -624,10 +633,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "ふりこさげふり",
   jp: "振り子《ふりこ》・下げ振り《さげふり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bandul lot (plumb bob)",
   desc: "Pemberat berujung kerucut untuk cek tegak lurus tiang. Benang dari atas, ukur jarak ke permukaan.",
-  _origIndex: 134
+  usage: '下《さ》げ振《ふ》りで柱《はしら》の鉛直《えんちょく》を確認《かくにん》する（periksa vertikalitas kolom menggunakan plumb bob）',
+    _origIndex: 134
   },
   {
   id: 127,
@@ -2944,10 +2954,11 @@ export const CARDS_COMMON = [
   source: "jac-ch1",
   furi: "しんきにゅうじょうしゃ",
   jp: "新規入場者《しんきにゅうじょうしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerja baru pertama",
   desc: "Pekerja yang pertama kali masuk lokasi konstruksi tertentu.",
-  _origIndex: 576
+  usage: '新規入場者《しんきにゅうじょうしゃ》に安全教育《あんぜんきょういく》を実施《じっし》する（berikan pendidikan keselamatan kepada pekerja baru）',
+    _origIndex: 576
   },
   {
   id: 507,

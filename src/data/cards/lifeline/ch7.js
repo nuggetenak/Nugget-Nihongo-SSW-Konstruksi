@@ -7,10 +7,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ふるはあねすがたついらくせいしようきぐう",
   jp: "フルハーネス型墜落制止用器具《ふるはあねすがたついらくせいしようきぐう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "APD full harness",
   desc: "Wajib digunakan saat bekerja di ketinggian. Full harness lebih aman dari harness dada saja.",
-  _origIndex: 108
+  usage: 'フルハーネスを着用《ちゃくよう》して高所作業《こうしょさぎょう》を行《おこな》う（kenakan full harness saat bekerja di ketinggian）',
+    _origIndex: 108
   },
 {
   id: 104,
@@ -18,10 +19,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "あんかあぽいんと",
   jp: "アンカーポイント",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Titik angkur (anchor)",
   desc: "Titik pengait pada struktur untuk mengaitkan peralatan penahan jatuh saat bekerja di ketinggian.",
-  _origIndex: 112
+  usage: '親綱《おやづな》をアンカーポイントに取《と》り付《つ》ける（pasang tali induk pada titik angkur）',
+    _origIndex: 112
   },
 {
   id: 110,

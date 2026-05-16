@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-17 (session 22: P14 extended — 63 total konsep→vocab (8+55); P15 extended — 131 total usage added)
+**Last updated:** 2026-05-17 (session 22: P14 waves 1-3 — 95 total konsep→vocab (8+55+31+1); P15 — 162 total usage added)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -159,13 +159,15 @@ Prerequisites: P1 done, OD-5 confirmed, viewer.html updated
 
 ### P14 — Type reclassification *(ongoing)*
 - [x] Review 11 konsep kandidat vocab (session 22): reclassified 8 → vocab (id=82,83,186,188,201,295,381,401); kept konsep: 102, 226, 245
-- [x] Extended scan seluruh konsep (session 22): reclassified 55 tambahan → vocab (tools/instruments/materials/cable types: id=41–94 range, 121, 241, 244, 259, 260, 272, 278, 279, 283, 285, 299, 317, 332, 334, 335, 357, 363, 366, 386, 394); kept konsep: 55 (fenomena listrik), 84 (EF接合 deferred), 96 (system-level), 191/192/224 (grouped/verb), 275/284/358 (vs comparisons)
+- [x] Extended scan seluruh konsep (session 22 wave 2): reclassified 55 tambahan → vocab (tools/instruments/materials/cable types: id=41–94 range, 121, 241, 244, 259, 260, 272, 278, 279, 283, 285, 299, 317, 332, 334, 335, 357, 363, 366, 386, 394); kept konsep: 55 (fenomena listrik), 84 (EF接合 deferred), 96 (system-level), 191/192/224 (grouped/verb), 275/284/358 (vs comparisons)
+- [x] Extended scan wave 3 (session 22): reclassified 31 tambahan → vocab (pipe types, PPE, survey tools, fire systems, career terms: id=73,74,78,79,81,89,91,92,95,97,98,100,104,114,115,116,118,122,123,125,126,210,211,270,271,288,289,290,454,455,506)
 
 ---
 
 ### P15 — Usage expansion *(ongoing, parallel)*
 - [x] Isi `usage` pada vocab yang belum punya — 76 fields (session 22, wave 1): semua 10 kategori ≥ target coverage
-- [x] Isi `usage` pada 55 kartu reclassified (session 22, wave 2): total usage +131 session ini
+- [x] Isi `usage` pada 55 kartu reclassified (session 22, wave 2): +55 usage
+- [x] Isi `usage` pada 31 kartu reclassified (session 22, wave 3): +31 usage; total session 22 = 162 usage added
 
 ---
 

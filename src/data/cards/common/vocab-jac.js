@@ -694,10 +694,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-gakka1",
   furi: "ぱわー・パワハラ",
   jp: "パワー・ハラスメント（パワハラ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pelecehan kekuasaan",
   desc: "Memanfaatkan keunggulan posisi untuk memberi tekanan melebihi batas wajar. Berbeda dari セクハラ.",
-  _origIndex: 126
+  usage: 'パワーハラスメントを受《う》けたらすぐ報告《ほうこく》する（laporkan segera jika mengalami pelecehan kekuasaan）',
+    _origIndex: 126
   },
 {
   id: 119,

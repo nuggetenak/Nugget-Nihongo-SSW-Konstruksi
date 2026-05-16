@@ -307,10 +307,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ALGC / ALK",
   jp: "ALGC（アルミガラスクロス）/ ALK",
-  type: "konsep",
+  type: 'vocab',
   id_text: "ALGC dan ALK",
   desc: "Laminasi aluminium untuk membungkus insulasi di ruang tersembunyi/garasi.\nALGC = aluminium + glass",
-  _origIndex: 524
+  usage: 'ALGCで隠蔽《いんぺい》部《ぶ》の保温材《ほおんざい》を仕上《しあ》げる（selesaikan finishing insulasi di area tersembunyi menggunakan ALGC）',
+    _origIndex: 524
   },
 {
   id: 455,
@@ -318,10 +319,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "きっこうかなあみ",
   jp: "亀甲金網《きっこうかなあみ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jaring kawat hexagonal",
   desc: "Jaring kawat berbentuk sarang lebah untuk mengikat insulasi pipa di ruang mesin/garasi.",
-  _origIndex: 525
+  usage: '亀甲金網《きっこうかなあみ》で保温材《ほおんざい》を縛《しば》り付《つ》ける（ikat material insulasi pada pipa menggunakan jaring kawat hexagonal）',
+    _origIndex: 525
   },
 {
   id: 456,

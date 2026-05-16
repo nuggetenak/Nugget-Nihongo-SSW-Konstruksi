@@ -271,10 +271,11 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "したうけせんもんこうじぎょうしゃ",
   jp: "下請《したうけ》（専門工事業者《せんもんこうじぎょうしゃ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sub-kontraktor spesialis",
   desc: "Menerima subkontrak dari kontraktor utama. Bekerja sesuai instruksi 職長《しょくちょう》.",
-  _origIndex: 124
+  usage: '下請《したうけ》が専門工事《せんもんこうじ》を担当《たんとう》する（sub-kontraktor menangani pekerjaan spesialis）',
+    _origIndex: 124
   },
 {
   id: 120,
