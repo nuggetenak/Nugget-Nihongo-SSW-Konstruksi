@@ -13,7 +13,7 @@ export const SET_DOBOKU_02 = {
         opts: ['路盤《ろばん》→基層《きそう》→表層《ひょうそう》', '表層《ひょうそう》→基層《きそう》→路盤《ろばん》', '基層《きそう》→表層《ひょうそう》→路盤《ろばん》', '路盤《ろばん》→表層《ひょうそう》→基層《きそう》'],
         opts_id: ['Subgrade→Base→Surface', 'Surface→Base→Subgrade', 'Base→Surface→Subgrade', 'Subgrade→Surface→Base'],
         ans: 0,
-        exp: 'Urutan yang benar: 路盤 (subgrade/pondasi bawah) → 基層 (base course/lapisan dasar) → 表層 (surface/lapisan permukaan). Ini prinsip dasar — dari bawah ke atas.',
+        exp: 'Urutan yang benar: 路盤《ろばん》 (subgrade/pondasi bawah) → 基層《きそう》 (base course/lapisan dasar) → 表層《ひょうそう》 (surface/lapisan permukaan). Ini prinsip dasar — dari bawah ke atas.',
         cat: 'sekou',
         desc: 'Urutan pengaspalan. Sebagai pekerja SSW: kalau urutan salah, jalan cepat rusak. Setiap lapisan harus dipadatkan dulu sebelum lapisan berikutnya. Mandor: まず路盤の転圧をしてください。'
       },
@@ -35,7 +35,7 @@ export const SET_DOBOKU_02 = {
         opts: ['道路《どうろ》の雨水《あまみず》を集めて《あつめて》排水《はいすい》する', '車《くるま》を止める《とめる》', '歩行者《ほこうしゃ》を守る《まもる》', '道路《どうろ》を美しく《うつくしく》する'],
         opts_id: ['Mengumpulkan dan mengalirkan air hujan jalan', 'Menghentikan kendaraan', 'Melindungi pejalan kaki', 'Memperindah jalan'],
         ans: 0,
-        exp: '側溝 (saluran tepi jalan) = drainase yang mengumpulkan air hujan dari permukaan jalan. Bukan pembatas kendaraan (guardrail), bukan trotoar (歩道), bukan elemen dekoratif.',
+        exp: '側溝《そっこう》 (saluran tepi jalan) = drainase yang mengumpulkan air hujan dari permukaan jalan. Bukan pembatas kendaraan (guardrail), bukan trotoar (歩道《ほどう》), bukan elemen dekoratif.',
         cat: 'sekou',
         desc: 'Saluran drainase tepi jalan. Sebagai pekerja SSW: kamu akan bantu pasang precast U-ditch atau gali saluran manual. Mandor: 側溝の勾配を確認してください。'
       },
@@ -46,7 +46,7 @@ export const SET_DOBOKU_02 = {
         opts: ['コンクリートは養生《ようじょう》期間《きかん》が長い《ながい》', 'アスファルトは養生《ようじょう》期間《きかん》が長い《ながい》', '両方《りょうほう》同じ《おなじ》養生《ようじょう》期間《きかん》', 'どちらも養生《ようじょう》不要《ふよう》'],
         opts_id: ['Beton butuh curing lebih lama', 'Aspal butuh curing lebih lama', 'Keduanya sama', 'Keduanya tidak perlu curing'],
         ans: 0,
-        exp: 'Perkerasan beton (コンクリート舗装) butuh curing 7–28 hari sebelum bisa dilalui kendaraan. Aspal bisa digunakan setelah dingin (beberapa jam). Ini perbedaan operasional terbesar.',
+        exp: 'Perkerasan beton (コンクリート舗装《コンクリートほそう》) butuh curing 7–28 hari sebelum bisa dilalui kendaraan. Aspal bisa digunakan setelah dingin (beberapa jam). Ini perbedaan operasional terbesar.',
         cat: 'sekou',
         desc: 'Perbandingan beton vs aspal. Sebagai pekerja SSW: di proyek beton, kamu akan bantu proses curing — jaga kelembaban permukaan. Mandor: コンクリートの養生シートを敷いてください。'
       },
@@ -57,7 +57,7 @@ export const SET_DOBOKU_02 = {
         opts: ['安全《あんぜん》確認《かくにん》と作業《さぎょう》内容《ないよう》の共有《きょうゆう》', '昼食《ちゅうしょく》の注文《ちゅうもん》', '給料《きゅうりょう》の計算《けいさん》', '道具《どうぐ》の販売《はんばい》'],
         opts_id: ['Konfirmasi keselamatan & sharing rencana kerja', 'Pesan makan siang', 'Perhitungan gaji', 'Penjualan alat'],
         ans: 0,
-        exp: '朝礼 (chorei/morning assembly) = briefing pagi untuk cek keselamatan, bagi tugas, dan konfirmasi bahaya hari itu. Ini prosedur standar di semua proyek konstruksi Jepang.',
+        exp: '朝礼《ちょうれい》 (chorei/morning assembly) = briefing pagi untuk cek keselamatan, bagi tugas, dan konfirmasi bahaya hari itu. Ini prosedur standar di semua proyek konstruksi Jepang.',
         cat: 'anzen',
         desc: 'Briefing pagi di proyek. Sebagai pekerja SSW: kamu WAJIB hadir di 朝礼 setiap pagi — absen = pelanggaran serius. Kadang kamu diminta baca item KY. Atasan: 朝礼に集合してください。'
       },
@@ -68,7 +68,7 @@ export const SET_DOBOKU_02 = {
         opts: ['地中《ちちゅう》に埋設《まいせつ》した管《かん》で排水《はいすい》する方法《ほうほう》', '空中《くうちゅう》の排水管《はいすいかん》', '川《かわ》に直接《ちょくせつ》流す《ながす》方法《ほうほう》', '水《みず》を蒸発《じょうはつ》させる方法《ほうほう》'],
         opts_id: ['Drainase lewat pipa yang ditanam', 'Pipa drainase di udara', 'Langsung buang ke sungai', 'Menguapkan air'],
         ans: 0,
-        exp: '暗渠排水 = drainase bawah tanah (tertutup), menggunakan pipa perforated yang ditanam di dalam tanah. Lawan kata: 明渠 (saluran terbuka).',
+        exp: '暗渠排水《あんきょはいすい》 = drainase bawah tanah (tertutup), menggunakan pipa perforated yang ditanam di dalam tanah. Lawan kata: 明渠《めいきょ》 (saluran terbuka).',
         cat: 'sekou',
         desc: 'Sistem drainase bawah tanah. Sebagai pekerja SSW: kamu akan bantu gali parit, pasang geotextile, dan letakkan pipa drainase. Mandor: 暗渠管の勾配を取ってください。'
       },
@@ -79,7 +79,7 @@ export const SET_DOBOKU_02 = {
         opts: ['コンクリートなどを適切《てきせつ》な条件《じょうけん》で保護《ほご》すること', '休憩《きゅうけい》すること', '掃除《そうじ》すること', '撤去《てっきょ》すること'],
         opts_id: ['Melindungi beton dll pada kondisi yang tepat', 'Istirahat', 'Membersihkan', 'Membongkar'],
         ans: 0,
-        exp: '養生 (ようじょう) dalam konstruksi = curing/perlindungan material (terutama beton) agar mengeras dengan benar. Bukan istirahat (休憩), bersih-bersih (掃除), atau bongkar (撤去).',
+        exp: '養生《ようじょう》 (ようじょう) dalam konstruksi = curing/perlindungan material (terutama beton) agar mengeras dengan benar. Bukan istirahat (休憩《きゅうけい》), bersih-bersih (掃除《そうじ》), atau bongkar (撤去《てっきょ》).',
         cat: 'sekou',
         desc: 'Proses curing/perlindungan. Sebagai pekerja SSW: kamu akan sering dengar kata ini — 養生シート (curing sheet), 養生期間 (masa curing). Mandor: 養生シートで覆ってください。'
       },
@@ -90,7 +90,7 @@ export const SET_DOBOKU_02 = {
         opts: ['片方《かたほう》の車線《しゃせん》だけ交互《こうご》に通す《とおす》方法《ほうほう》', '全《ぜん》車線《しゃせん》を閉鎖《へいさ》する方法《ほうほう》', '歩行者《ほこうしゃ》のみ通す《とおす》方法《ほうほう》', '大型《おおがた》車両《しゃりょう》のみ通す《とおす》方法《ほうほう》'],
         opts_id: ['Lalu lintas bergantian satu arah', 'Menutup semua jalur', 'Hanya pejalan kaki', 'Hanya kendaraan besar'],
         ans: 0,
-        exp: '片側交互通行 = one-way alternating traffic — satu jalur ditutup untuk pekerjaan, kendaraan bergantian lewat jalur satunya. Ini pengaturan lalin paling umum di proyek jalan.',
+        exp: '片側交互通行《かたがわこうごつうこう》 = one-way alternating traffic — satu jalur ditutup untuk pekerjaan, kendaraan bergantian lewat jalur satunya. Ini pengaturan lalin paling umum di proyek jalan.',
         cat: 'anzen',
         desc: 'Pengaturan lalu lintas kerja jalan. Sebagai pekerja SSW: kamu mungkin ditugaskan sebagai flagman (交通誘導員) — harus hafal aba-aba tangan. Mandor: 片側交互通行の誘導をお願いします。'
       },
@@ -101,7 +101,7 @@ export const SET_DOBOKU_02 = {
         opts: ['水平《すいへい》や直線《ちょくせん》を確認《かくにん》するための糸《いと》', '水《みず》を運ぶ《はこぶ》パイプ', '釣り糸《つりいと》', '電線《でんせん》'],
         opts_id: ['Benang untuk cek level/garis lurus', 'Pipa untuk membawa air', 'Tali pancing', 'Kabel listrik'],
         ans: 0,
-        exp: '水糸 = benang referensi yang ditarik kencang untuk mengecek kelurusan dan level horizontal. Alat dasar survei yang murah tapi krusial.',
+        exp: '水糸《みずいと》 = benang referensi yang ditarik kencang untuk mengecek kelurusan dan level horizontal. Alat dasar survei yang murah tapi krusial.',
         cat: 'sekou',
         desc: 'Benang level/referensi. Sebagai pekerja SSW: ini alat yang paling sering kamu gunakan — pasang dari titik A ke B untuk panduan galian atau pasangan. Mandor: 水糸を張ってくれ。'
       },
@@ -112,7 +112,7 @@ export const SET_DOBOKU_02 = {
         opts: ['コンクリートが所定《しょてい》の強度《きょうど》に達した《たっした》後《あと》', '打設《だせつ》直後《ちょくご》', '翌日《よくじつ》の朝《あさ》', '1時間《じかん》後《ご》'],
         opts_id: ['Setelah beton mencapai kekuatan yang ditentukan', 'Segera setelah cor', 'Pagi esok hari', 'Setelah 1 jam'],
         ans: 0,
-        exp: 'Bekisting (型枠) baru boleh dibongkar setelah beton mencapai kekuatan minimum yang disyaratkan (biasanya 5 N/mm² untuk dinding). Membongkar terlalu cepat = beton runtuh.',
+        exp: 'Bekisting (型枠《かたわく》) baru boleh dibongkar setelah beton mencapai kekuatan minimum yang disyaratkan (biasanya 5 N/mm² untuk dinding). Membongkar terlalu cepat = beton runtuh.',
         cat: 'sekou',
         desc: 'Waktu bongkar bekisting. Sebagai pekerja SSW: jangan pernah bongkar bekisting tanpa izin mandor — harus ada hasil uji tekan. Mandor: 型枠は強度が出てから解体してください。'
       },
@@ -123,7 +123,7 @@ export const SET_DOBOKU_02 = {
         opts: ['施工《せこう》位置《いち》と高さ《たかさ》の基準《きじゅん》を示す《しめす》', '作業員《さぎょういん》の人数《にんずう》を数える《かぞえる》', '工事《こうじ》の予算《よさん》を計算《けいさん》する', '道具《どうぐ》を整理《せいり》する'],
         opts_id: ['Menunjukkan posisi & level referensi konstruksi', 'Menghitung jumlah pekerja', 'Menghitung anggaran', 'Merapikan alat'],
         ans: 0,
-        exp: '丁張り (ちょうはり) = batter board — papan referensi yang menunjukkan posisi dan ketinggian untuk panduan penggalian/konstruksi.',
+        exp: '丁張り《ちょうはり》 (ちょうはり) = batter board — papan referensi yang menunjukkan posisi dan ketinggian untuk panduan penggalian/konstruksi.',
         cat: 'sekou',
         desc: 'Papan referensi konstruksi. Sebagai pekerja SSW: surveyor pasang 丁張り → kamu gali sesuai level yang ditunjukkan. Jangan sentuh atau geser 丁張り yang sudah dipasang. Mandor: 丁張りに合わせて掘削してください。'
       },
@@ -134,7 +134,7 @@ export const SET_DOBOKU_02 = {
         opts: ['油量《ゆりょう》・水量《すいりょう》・ブレーキ・安全《あんぜん》装置《そうち》', '天気《てんき》・気温《きおん》・湿度《しつど》', '作業員《さぎょういん》の食事《しょくじ》', '近所《きんじょ》の住民《じゅうみん》の有無《うむ》'],
         opts_id: ['Oli, air, rem, alat keselamatan', 'Cuaca, suhu, kelembaban', 'Makanan pekerja', 'Ada tidaknya warga sekitar'],
         ans: 0,
-        exp: 'Inspeksi harian alat berat (始業前点検) wajib cek: oli (油量), air radiator (水量), rem (ブレーキ), alat keselamatan (安全装置). Ini kewajiban operator sebelum mesin dinyalakan.',
+        exp: 'Inspeksi harian alat berat (始業前点検《しぎょうまえてんけん》) wajib cek: oli (油量《ゆりょう》), air radiator (水量《すいりょう》), rem (ブレーキ), alat keselamatan (安全装置《あんぜんそうち》). Ini kewajiban operator sebelum mesin dinyalakan.',
         cat: 'anzen',
         desc: 'Inspeksi harian alat berat. Sebagai pekerja SSW: kalau kamu jadi operator, ini checklist pagi yang wajib. Catat hasilnya di form 始業前点検表. Mandor: 始業前点検は終わりましたか？'
       },
@@ -145,7 +145,7 @@ export const SET_DOBOKU_02 = {
         opts: ['埋設物《まいせつぶつ》が近く《ちかく》にある場合《ばあい》', '天気《てんき》が良い《よい》場合《ばあい》', '作業員《さぎょういん》が多い《おおい》場合《ばあい》', '地盤《じばん》が硬い《かたい》場合《ばあい》'],
         opts_id: ['Bila ada utilitas bawah tanah di dekatnya', 'Bila cuaca baik', 'Bila pekerja banyak', 'Bila tanah keras'],
         ans: 0,
-        exp: 'Galian manual (手掘り) dilakukan saat ada utilitas bawah tanah (ガス管, 水道管) di dekat area galian — excavator bisa merusak pipa. Ini prosedur keselamatan.',
+        exp: 'Galian manual (手掘り《てぼり》) dilakukan saat ada utilitas bawah tanah (ガス管《ガスかん》, 水道管《すいどうかん》) di dekat area galian — excavator bisa merusak pipa. Ini prosedur keselamatan.',
         cat: 'sekou',
         desc: 'Galian manual dekat utilitas. Sebagai pekerja SSW: kamu akan diminta gali manual 50cm di sekitar pipa/kabel yang terdeteksi. Lamban tapi wajib — excavator bisa potong pipa gas. Mandor: 埋設物の近くは手掘りでお願いします。'
       },
@@ -156,7 +156,7 @@ export const SET_DOBOKU_02 = {
         opts: ['あご紐《ひも》をしっかり締める《しめる》', 'ゆるく被る《かぶる》', '後ろ向き《うしろむき》に被る《かぶる》', 'あご紐《ひも》は締めない《しめない》'],
         opts_id: ['Tali dagu dikencangkan', 'Dipakai longgar', 'Dipakai terbalik', 'Tali dagu tidak dikencangkan'],
         ans: 0,
-        exp: 'Helm harus dipakai dengan tali dagu (あご紐) dikencangkan. Helm longgar atau terbalik = tidak melindungi saat benda jatuh.',
+        exp: 'Helm harus dipakai dengan tali dagu (あご紐《あごひも》) dikencangkan. Helm longgar atau terbalik = tidak melindungi saat benda jatuh.',
         cat: 'anzen',
         desc: 'Cara pakai helm yang benar. Sebagai pekerja SSW: helm longgar = ditegur mandor. Di Jepang sangat ketat soal ini — beda dengan kebiasaan di Indonesia. Mandor: あご紐をちゃんと締めてください。'
       },
@@ -167,7 +167,7 @@ export const SET_DOBOKU_02 = {
         opts: ['建物《たてもの》の基礎《きそ》をつくるための掘削《くっさく》', '木《き》の根《ね》を切る《きる》作業《さぎょう》', '鉄筋《てっきん》を切る《きる》作業《さぎょう》', '配管《はいかん》を切る《きる》作業《さぎょう》'],
         opts_id: ['Penggalian untuk membuat fondasi bangunan', 'Memotong akar pohon', 'Memotong besi tulangan', 'Memotong pipa'],
         ans: 0,
-        exp: '根切り (ねぎり) = penggalian untuk fondasi. Walaupun huruf kanji 根 (akar) dan 切 (potong), ini BUKAN memotong akar pohon — ini istilah teknis untuk excavation fondasi.',
+        exp: '根切り《ねぎり》 (ねぎり) = penggalian untuk fondasi. Walaupun huruf kanji 根《ね》 (akar) dan 切《き》 (potong), ini BUKAN memotong akar pohon — ini istilah teknis untuk excavation fondasi.',
         cat: 'sekou',
         desc: 'Penggalian fondasi. Sebagai pekerja SSW: 根切り adalah langkah pertama dalam membangun fondasi — kedalaman dan lebarnya harus sesuai gambar. Mandor: 根切りの深さを確認してください。'
       },

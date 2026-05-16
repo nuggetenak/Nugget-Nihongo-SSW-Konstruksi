@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-16 (session 20: ADMIN integrity checks clean; P17 dirty state OPSI B; P8a item 1 — sets/jac/ DONE, 0 naked remaining)
+**Last updated:** 2026-05-16 (session 20: ADMIN integrity checks clean; P17 dirty state OPSI B; P8a items 1+3+4+5 DONE — sets/jac/ + quiz/ annotated, wayground/wtv01 already clean; item 2 awaits P17/OD-3)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -115,9 +115,9 @@ Files: `src/data/sets/csv/` → `src/data/sets/jac-mockup/`
 Priority: JAC → jac-mockup → wt/wgl → quiz → wtv
 - [x] `sets/jac/`: 95 naked `q` + naked `exp`/`hint` — **DONE session 20** (jac-teori.js + jac-lifeline.js, 3-pass annotation, 0 naked remaining, syntax-checked)
 - [ ] `sets/jac-mockup/` (ex-csv): ~56 naked `q` + ~164 naked `exp`
-- [ ] `sets/wayground/teori/` + `lifeline/praktik/`: ~37+84 naked `q`, ~210 naked `exp`
-- [ ] `sets/quiz/`: ~78 naked `exp`
-- [ ] `sets/wayground/vocab/wtv01.js`: ~5 naked `q`, ~22 naked `exp`/`hint`
+- [x] `sets/wayground/teori/` + `lifeline/praktik/`: **DONE session 20** — 0 naked found (already clean pre-session)
+- [x] `sets/quiz/`: **DONE session 20** (doboku-01~03, kenchiku-01~03 — 104 fields annotated, 0 naked remaining, syntax-checked)
+- [x] `sets/wayground/vocab/wtv01.js`: **DONE session 20** — 0 naked found (already clean pre-session)
 
 ---
 
