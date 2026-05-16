@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-16 (session 20: ADMIN — integrity checks all clean; P17 dirty state resolved via OPSI B — fresh clone, jac-mockup files were never committed; session 19 retroactive: P5-C+P9+P7 done)
+**Last updated:** 2026-05-16 (session 20: ADMIN integrity checks clean; P17 dirty state OPSI B; P8a item 1 — sets/jac/ DONE, 0 naked remaining)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -113,7 +113,7 @@ Files: `src/data/sets/csv/` → `src/data/sets/jac-mockup/`
 
 ### P8a — Ruby: standard question sets *(P7 dulu; P17 dulu untuk item 2)*
 Priority: JAC → jac-mockup → wt/wgl → quiz → wtv
-- [ ] `sets/jac/`: 95 naked `q` + naked `exp`/`hint`
+- [x] `sets/jac/`: 95 naked `q` + naked `exp`/`hint` — **DONE session 20** (jac-teori.js + jac-lifeline.js, 3-pass annotation, 0 naked remaining, syntax-checked)
 - [ ] `sets/jac-mockup/` (ex-csv): ~56 naked `q` + ~164 naked `exp`
 - [ ] `sets/wayground/teori/` + `lifeline/praktik/`: ~37+84 naked `q`, ~210 naked `exp`
 - [ ] `sets/quiz/`: ~78 naked `exp`
