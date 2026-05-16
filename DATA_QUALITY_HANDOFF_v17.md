@@ -1,9 +1,9 @@
 # SSW Konstruksi — Data Quality Handoff v17
-**Updated:** 2026-05-14 — session 18 (ADM10: consolidated spec commit, DQ task discovery)
+**Updated:** 2026-05-16 — session 20 (ADM: admin hygiene; P8a items 1+3+4+5 done)
 **Supersedes:** v1–v16 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
 **Repo:** https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi/
-**Last commit:** `319f2c8` (DOCS: ADM12 — recheck2 fixes)
+**Last commit:** `bfeb105` (ADMIN: SESSION_PROMPT update — session 20 state)
 **Spec:** `docs/CARD_CONTENT_SPEC.md` — canonical schema, ruby rules, taxonomy, DQ task list
 
 ---
@@ -76,28 +76,41 @@ Quote style: single-quote canonical. Source field values: unchanged — see §12
 
 See `docs/CARD_CONTENT_SPEC.md` §3–§4 for full field specs.
 
-### 1A. Current State (verified 2026-05-14)
+### 1A. Current State (verified 2026-05-16)
 | Track | Cards | konsep | vocab | hukum |
 |---|---|---|---|---|
-| common | 879 | 406 | 377 | 96 |
-| lifeline | 564 | 286 | 278 | 0 |
-| **TOTAL** | **1,443** | **692** | **655** | **96** |
+| common | 877 | 405 | 376 | 96 |
+| lifeline | 561 | 285 | 276 | 0 |
+| **TOTAL** | **1,438** | **690** | **652** | **96** |
 
-Split files verified: 28+75+131+140+67+247+278+204+56+42+175 = **1,443 ✅**
+Split files verified post-session 20: 1,438 ✅ (5 deleted: id=374,484,518,592,982)
+Mirrors verified: cards.js ↔ cards-common.js + cards-lifeline.js ↔ split files — all 1,438 IDs match ✅
 
-### 1B. Known Issues — NEW (session 18 audit)
-See `docs/CARD_CONTENT_SPEC.md` §2 for full audit findings. Summary:
+### 1B. Known Issues — audited session 18, status updated session 20
 
-| Finding | Count | Task |
-|---|---|---|
-| Encoding corrupt desc | 2 (id=476,773) | P0-C1 🔴 |
-| Nested ruby 《A《B》》 | 12 (id=321,330,339,356,371,452,485,606,608,610,612,619) | P0-C2 🔴 |
-| jp tanpa ruby | 62 | P1 |
-| Katakana in ruby | 18 | P1 |
-| Naked kanji jp（） | ~152 | P1 |
-| Naked kanji desc | 33 | P2 |
-| id_text truncated `/` | 41 | P3 |
-| id_text multi-slash list | 13 | P3 |
+| Finding | Count | Task | Status |
+|---|---|---|---|
+| Encoding corrupt desc | 2 (id=476,773) | P0-C1 | ✅ DONE |
+| Nested ruby 《A《B》》 | 12 (id=321,330,339,356,371,452,485,606,608,610,612,619) | P0-C2 | ✅ DONE |
+| jp tanpa ruby | 62 | P1 | ✅ DONE |
+| Katakana in ruby | 18 | P1 | ✅ DONE |
+| Naked kanji jp（） | ~152 | P1 | ✅ DONE (140 fixed; ~64 DEFERRED manual) |
+| Naked kanji desc | 33 | P2 | ✅ DONE |
+| id_text truncated `/` | 41 | P3 | ✅ DONE |
+| id_text multi-slash list | 13 | P3 | ✅ DONE |
+| Metadata fixes | 6 (category/type/source) | P3 | ✅ DONE (id=1240 DEFERRED) |
+| Duplicate cards | 5 exact pairs | P4 | ✅ DONE (deleted id=374,484,518,592,982) |
+| Duplicate id_text | 26 | P4 | ✅ DONE |
+| EF接合 triple | id=459,612,613 | P4 | ⏸ DEFERRED — await AGENT 12 |
+| 6 ambiguous jp pairs | see PROGRESS.md §P4 | P4 | ⏸ DEFERRED — await AGENT 12 |
+| desc truncated mid-word | 213 | P5-A | ⏸ DEFERRED — need JAC source |
+| desc missing period | 266 | P5-B | ⏸ DEFERRED |
+| desc symbol-ending | 82 total → 13 fixed | P5-C | ✅ DONE (13 fixed; 15 truly truncated DEFERRED) |
+| angka-kunci null kartu | 3 nulls | P9 | ✅ DONE |
+| JAC exp trailing backslash | 12 entries | P7 | ✅ DONE (verified clean) |
+| Naked q/exp/hint sets/jac/ | ~138 fields | P8a-1 | ✅ DONE session 20 |
+| Naked q/exp/hint sets/quiz/ | ~104 fields | P8a-4 | ✅ DONE session 20 |
+| Naked q/exp/hint wayground | 0 | P8a-3+5 | ✅ Already clean |
 | category/type mismatch | 4 | P3 |
 | Desc truncated mid-word | 213 | P5 |
 | Desc missing punct | 266+82 | P5 |
@@ -268,27 +281,27 @@ P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → 
 
 ---
 
-## CODEBASE STATE (v17 — post session 18)
+## CODEBASE STATE (v17 — post session 20)
 
 | File/Module | State | Notes |
 |---|---|---|
-| `src/data/cards/**/*.js` | 1,443 cards ✅ | Working DQ source |
-| `src/data/source/cards-*.js` | mirror of split files | Keep in sync |
-| `src/data/cards.js` | 1,443 exported | Mirror of split files |
-| `src/data/sets/csv/*.js` | 12 files, ruby done ✅ | Pre-P17 rename |
-| `src/data/sets/wayground/**/*.js` | 26 files, W1 done ✅ | wglv pre-P16 split |
-| `src/data/sets/quiz/*.js` | 6 files, done ✅ | AI-generated content |
-| `src/data/sets/jac/*.js` | 2 files — DQ copies ✅ | Orphaned until merge |
+| `src/data/cards/**/*.js` | 1,438 cards ✅ | 5 deleted (id=374,484,518,592,982) |
+| `src/data/source/cards-*.js` | mirror of split files ✅ | Verified in-sync session 20 |
+| `src/data/cards.js` | 1,438 exported ✅ | Mirror verified session 20 |
+| `src/data/sets/csv/*.js` | 12 files, ruby done ✅ | Pre-P17 rename (awaiting OD-3) |
+| `src/data/sets/wayground/**/*.js` | 26 files ✅ | wglv pre-P16 split; q/exp/hint already clean |
+| `src/data/sets/quiz/*.js` | 6 files ✅ | ruby annotated session 20 (0 naked) |
+| `src/data/sets/jac/*.js` | 2 files ✅ | ruby annotated session 20 (0 naked) |
 | `src/data/confusion-pairs.js` | done ✅ | 28 entries |
 | `src/data/danger-pairs.js` | done ✅ | 20 entries |
-| `src/data/angka-kunci.js` | partially done | 5 null kartu, 28 naked soal |
+| `src/data/angka-kunci.js` | done ✅ | 3 null kartu fixed (session 19); 0 naked soal |
 | `src/data/jac-teori.js` (top-level) | OLD schema | Consumed by app; replace at merge |
 | `src/data/jac-lifeline.js` (top-level) | OLD schema | idem |
 | `src/data/jac-doboku.js` | empty stub | Awaiting PDF |
 | `src/data/jac-kenchiku.js` | empty stub | Awaiting PDF |
 | Monolithic `csv-sets.js` etc | legacy, do not edit | Replaced at merge time |
-| `docs/CARD_CONTENT_SPEC.md` | NEW session 18 ✅ | Canonical spec |
-| `docs/DATA_ARCH_AUDIT.md` | NEW session 18 ✅ | Audit reference |
+| `docs/CARD_CONTENT_SPEC.md` | canonical spec ✅ | Last updated session 18 |
+| `docs/DATA_ARCH_AUDIT.md` | audit reference ✅ | Last updated session 18 |
 
 ---
 
@@ -307,6 +320,12 @@ P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → 
 | 12 | W1 | Wayground taxonomy restructure: 26 sets renamed + reorganized |
 | 13–17 | ADM1–ADM9 | Admin doc hygiene, commit hash syncs, session log updates |
 | 17 | ADM9 | v87 comparison marked done (owner-confirmed) |
+| 18 | ADM10 | Consolidated CARD_CONTENT_SPEC (7 versions → 1 canonical); DATA_ARCH_AUDIT; PROGRESS.md P0–P17 task list |
+| 19 | P0–P5, P7, P9 | Encoding fixes (id=476,773); 12 nested ruby; 62 jp ruby; 18 katakana ruby; ~140 naked jp parens; 10 naked desc; 52 id_text fixes; 6 metadata; delete 5 duplicate cards; disambiguate 26 id_text; P5-C 13 symbol fixes; P9 3 null angka-kunci fixed; P7 JAC exp verified clean |
+| 20 | ADMIN | Integrity checks (1,438 IDs, no dups, mirrors ✅, no orphaned related_card_id); P17 dirty state OPSI B |
+| 20 | P8a-1 | sets/jac/ ruby: jac-teori.js + jac-lifeline.js — 3-pass, 138 fields, 0 naked remaining |
+| 20 | P8a-3+5 | sets/wayground/ + wtv01 — verified already clean (0 naked) |
+| 20 | P8a-4 | sets/quiz/ ruby: doboku-01~03 + kenchiku-01~03 — 104 fields, 0 naked remaining |
 
 ### Blocked (unchanged)
 - P21 — JAC Doboku + Kenchiku jitsugi: tunggu PDF JAC resmi
@@ -314,18 +333,18 @@ P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → 
 
 ---
 
-## SOURCE FIELD VALUES — CANONICAL (post F1+F2+G2)
+## SOURCE FIELD VALUES — CANONICAL (post F1+F2+G2+P4 deletions)
 
 ```
-jac-ch1:28  jac-ch2:99  jac-ch3:183  jac-ch4:150
-jac-ch5:217 jac-ch6:134 jac-ch7:48
+jac-ch1:28  jac-ch2:101  jac-ch3:183  jac-ch4:149
+jac-ch5:216 jac-ch6:133 jac-ch7:47
 jac-gakka1:6  jac-gakka2:3
 jac-jitsugi1:13  jac-jitsugi2:15
-vocab-supplementary:272  vocab-lifeline:113  vocab-jac:49
+vocab-supplementary:269  vocab-lifeline:113  vocab-jac:49
 vocab-general:44  vocab-exam:38  vocab-teori:18  vocab-core:13
 ```
 
-Total: 1,443 ✅ | text3l: 0 ✅
+Total: 1,438 ✅ | text3l: 0 ✅ (vs 1,443 pre-P4 — 5 cards deleted)
 
 Legacy vocab-* labels DIPERTAHANKAN — pedagogically meaningful in UI via SOURCE_META.
 See `docs/CARD_CONTENT_SPEC.md` §12 OD-1 for pending owner decision on reclassification.

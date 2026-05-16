@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-16 (session 20: ADMIN integrity checks clean; P17 dirty state OPSI B; P8a items 1+3+4+5 DONE — sets/jac/ + quiz/ annotated, wayground/wtv01 already clean; item 2 awaits P17/OD-3)
+**Last updated:** 2026-05-16 (session 21: ADMIN hygiene — handoff v17 updated: header, card count 1443→1438, source counts, known-issues table, codebase state table, session log sessions 18–20)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
