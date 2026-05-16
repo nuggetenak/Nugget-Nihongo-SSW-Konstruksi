@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-16 (session 22: P14 done — 8 kartu reclassified; P15 done — 76 usage fields added, semua 10 kategori ≥ target coverage)
+**Last updated:** 2026-05-17 (session 22: P14 extended — 63 total konsep→vocab (8+55); P15 extended — 131 total usage added)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -158,12 +158,14 @@ Prerequisites: P1 done, OD-5 confirmed, viewer.html updated
 ---
 
 ### P14 — Type reclassification *(ongoing)*
-- [x] Review 11 konsep kandidat vocab: reclassified 8 → vocab (id=82,83,186,188,201,295,381,401); kept konsep: 102 (prinsip manajemen QCDSE), 226 (frasa prosedural), 245 (campuran verb/noun)
+- [x] Review 11 konsep kandidat vocab (session 22): reclassified 8 → vocab (id=82,83,186,188,201,295,381,401); kept konsep: 102, 226, 245
+- [x] Extended scan seluruh konsep (session 22): reclassified 55 tambahan → vocab (tools/instruments/materials/cable types: id=41–94 range, 121, 241, 244, 259, 260, 272, 278, 279, 283, 285, 299, 317, 332, 334, 335, 357, 363, 366, 386, 394); kept konsep: 55 (fenomena listrik), 84 (EF接合 deferred), 96 (system-level), 191/192/224 (grouped/verb), 275/284/358 (vs comparisons)
 
 ---
 
 ### P15 — Usage expansion *(ongoing, parallel)*
-- [x] Isi `usage` pada vocab yang belum punya — 76 fields ditambahkan; semua 10 kategori mencapai target coverage (sekou 50%, haikan 35.2%, anzen 35%, career 25.2%, denki 25.4%, hoon 26.3%, tsushin 23.1%, shoubou 20%, gaiyou 19%, setsubi_kougu 33.3%)
+- [x] Isi `usage` pada vocab yang belum punya — 76 fields (session 22, wave 1): semua 10 kategori ≥ target coverage
+- [x] Isi `usage` pada 55 kartu reclassified (session 22, wave 2): total usage +131 session ini
 
 ---
 

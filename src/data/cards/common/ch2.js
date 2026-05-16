@@ -799,10 +799,11 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "しょうかいき",
   jp: "消火器《しょうかいき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Alat pemadam api (APAR)",
   desc: "Perangkat portabel untuk memadamkan api awal kebakaran. Dipasang di setiap lokasi sesuai",
-  _origIndex: 102
+  usage: '消火器《しょうかいき》を取《と》り付《つ》け位置《いち》を確認《かくにん》する（konfirmasi posisi pemasangan alat pemadam api）',
+    _origIndex: 102
   },
 {
   id: 468,

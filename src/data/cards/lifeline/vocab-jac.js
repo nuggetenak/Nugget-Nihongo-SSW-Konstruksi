@@ -238,10 +238,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "すいじゅんき",
   jp: "水準器《すいじゅんき》（レベル）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Waterpas / level",
   desc: "Alat survei berteleskop untuk mengukur ketinggian/elevasi. Dipasang di atas tripod.",
-  _origIndex: 129
+  usage: '水準器《すいじゅんき》で配管《はいかん》の水平《すいへい》を確認《かくにん》する（periksa kerataan pipa menggunakan waterpas）',
+    _origIndex: 129
   },
 {
   id: 128,
@@ -304,10 +305,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "ぶれえかあ",
   jp: "ブレーカー（NFB）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemutus arus",
   desc: "Otomatis memutus listrik saat arus berlebih mengalir di sirkuit. NFB = No-Fuse Breaker.",
-  _origIndex: 59
+  usage: 'ブレーカーが過電流《かでんりゅう》で自動的《じどうてき》に遮断《しゃだん》する（breaker memutus arus secara otomatis saat terjadi arus lebih）',
+    _origIndex: 59
   },
 {
   id: 55,
@@ -326,10 +328,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "でんこうないふ",
   jp: "電工ナイフ《でんこうないふ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pisau listrik",
   desc: "Pisau untuk mengupas isolasi kabel. Bilah melengkung, ujung tumpul (mencegah rusak konduktor).",
-  _origIndex: 64
+  usage: '電工ナイフ《でんこうないふ》でケーブルの外皮《がいひ》を剥《む》く（kupas selubung kabel dengan pisau listrik）',
+    _origIndex: 64
   },
 {
   id: 57,
@@ -337,10 +340,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "ひかりあいばあ",
   jp: "光ファイバー《ひかりあいばあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Serat optik",
   desc: "Serat tipis, kapasitas besar, rugi-rugi kecil, non-induktif. Kelemahan: rentan goresan & tekukan.",
-  _origIndex: 65
+  usage: '光ファイバー《ひかりふぁいばあ》で高速《こうそく》データ通信《つうしん》を行《おこな》う（lakukan komunikasi data kecepatan tinggi melalui serat optik）',
+    _origIndex: 65
   },
 {
   id: 61,
@@ -348,10 +352,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "ゆうちゃくせつぞくき",
   jp: "融着接続機《ゆうちゃくせつぞくき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Fusion splicer optik",
   desc: "Mesin yang melelehkan dan menyambungkan ujung 2 kabel serat optik.",
-  _origIndex: 69
+  usage: '融着接続機《ゆうちゃくせつぞくき》で光ファイバーを接続《せつぞく》する（sambungkan serat optik dengan fusion splicer）',
+    _origIndex: 69
   },
 {
   id: 63,
@@ -359,10 +364,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "おおちあちめどまいんれえとめて",
   jp: "OTDR",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Alat uji pulsa optik",
   desc: "Mengukur panjang jalur serat optik dan mendeteksi titik abnormal (rugi sambungan, pantulan).",
-  _origIndex: 71
+  usage: 'OTDRで光ファイバーの損失《そんしつ》を測定《そくてい》する（ukur rugi-rugi serat optik menggunakan OTDR）',
+    _origIndex: 71
   },
 {
   id: 66,
@@ -381,10 +387,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "かんろ",
   jp: "管路《かんろ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jalur kabel bawah tanah",
   desc: "Menghubungkan manhole, handhole, 洞道《とうどう》, dan 引上柱《ひきあげちゅう》. Kedalaman di jalan raya >0.8m.",
-  _origIndex: 75
+  usage: '管路《かんろ》にケーブルを通《とお》す（masukkan kabel ke dalam jalur konduit bawah tanah）',
+    _origIndex: 75
   },
 {
   id: 69,

@@ -568,10 +568,11 @@ export const CARDS_COMMON = [
   source: "jac-jitsugi1",
   furi: "すいじゅんき",
   jp: "水準器《すいじゅんき》（レベル）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Waterpas / level",
   desc: "Alat survei berteleskop untuk mengukur ketinggian/elevasi. Dipasang di atas tripod.",
-  _origIndex: 129
+  usage: '水準器《すいじゅんき》で配管《はいかん》の水平《すいへい》を確認《かくにん》する（periksa kerataan pipa menggunakan waterpas）',
+    _origIndex: 129
   },
   {
   id: 122,
@@ -1638,10 +1639,11 @@ export const CARDS_COMMON = [
   source: "jac-ch4",
   furi: "すてざいりょう",
   jp: "捨て《すて》材料《ざいりょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Material sacrificial",
   desc: "捨《す》てて《すて》=material non-struktural untuk memudahkan 施工《せこう》.",
-  _origIndex: 309
+  usage: '捨《す》て材料《ざいりょう》を使《つか》って試《ため》し切《ぎ》りをする（lakukan pemotongan percobaan menggunakan material sacrificial）',
+    _origIndex: 309
   },
   {
   id: 245,
@@ -1826,10 +1828,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "すいへいき",
   jp: "水平器《すいへいき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Waterpass / spirit level",
   desc: "Alat genggam cek permukaan H/V via gelembung udara (気泡管《きほうかん》). Berbeda dari 水準器《すいじゅんき》 yang alat",
-  _origIndex: 368
+  usage: '水平器《すいへいき》で機器《きき》の水平《すいへい》を確認《かくにん》する（periksa kerataan peralatan menggunakan spirit level）',
+    _origIndex: 368
   },
   {
   id: 300,
@@ -2024,10 +2027,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "おやづなきんちょうき",
   jp: "親綱緊張器《おやづなきんちょうき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengencang tali induk",
   desc: "Alat memasang tali induk (親綱《おやづな》) agar tidak kendur, tempat kait harness pekerja di ketinggian.",
-  _origIndex: 386
+  usage: '親綱緊張器《おやづなきんちょうき》で親綱《おやづな》をしっかり張《は》る（kencangkan tali induk dengan menggunakan tensioner tali）',
+    _origIndex: 386
   },
   {
   id: 318,
@@ -2244,10 +2248,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "ぶろああ《そうふうき》",
   jp: "ブロアー（送風機《そうふうき》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Blower",
   desc: "Alat elektrik menghasilkan aliran udara kencang untuk meniup sampah ringan seperti daun, serbuk",
-  _origIndex: 427
+  usage: 'ブロアー（送風機《そうふうき》）で換気《かんき》を確保《かくほ》する（pastikan ventilasi dengan menggunakan blower）',
+    _origIndex: 427
   },
   {
   id: 358,
@@ -2432,10 +2437,11 @@ export const CARDS_COMMON = [
   source: "jac-ch5",
   furi: "だんぷとらっく",
   jp: "ダンプトラック",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Dump truck",
   desc: "Kendaraan pengangkut tanah dan batuan dengan bak (荷台《にだい》) yang bisa dimiringkan untuk membuang",
-  _origIndex: 464
+  usage: 'ダンプトラックで残土《ざんど》を搬出《はんしゅつ》する（angkut tanah galian menggunakan dump truck）',
+    _origIndex: 464
   },
   {
   id: 410,

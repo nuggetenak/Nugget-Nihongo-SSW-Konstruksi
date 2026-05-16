@@ -7,10 +7,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "しいるてえぷ",
   jp: "シールテープ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sealant tape",
   desc: "Pita untuk cegah kebocoran sambungan ulir. Digulung searah jarum jam, ~6-7 lilitan, sisakan 1 ulir.",
-  _origIndex: 85
+  usage: 'シールテープを雄ねじ《おねじ》に巻《ま》いて漏《も》れを防《ふせ》ぐ（lilitkan seal tape pada ulir jantan untuk mencegah kebocoran）',
+    _origIndex: 85
   },
 {
   id: 80,
@@ -18,10 +19,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ねじきりき",
   jp: "ねじ切り機《ねじきりき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Mesin ulir pipa",
   desc: "Mesin untuk membuat ulir pada pipa baja. JANGAN pakai sarung tangan saat dioperasikan!",
-  _origIndex: 88
+  usage: 'ねじ切り機《ねじきりき》で鋼管《こうかん》にねじを切《き》る（buat ulir pada pipa baja menggunakan mesin ulir）',
+    _origIndex: 88
   },
 {
   id: 90,
@@ -29,10 +31,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "れいばいかんひふくどうかん",
   jp: "冷媒管《れいばいかん》（被覆銅管《ひふくどうかん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa refrigeran berlapis",
   desc: "Pipa pembawa refrigeran antara unit indoor & outdoor AC. Ditutupi insulasi termal tahan api.",
-  _origIndex: 98
+  usage: '冷媒管《れいばいかん》（被覆銅管《ひふくどうかん》）をエアコンに接続《せつぞく》する（hubungkan pipa refrigeran berlapis ke unit AC）',
+    _origIndex: 98
   },
 {
   id: 281,

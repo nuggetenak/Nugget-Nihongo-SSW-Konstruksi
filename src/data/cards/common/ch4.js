@@ -461,10 +461,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "すてざいりょう",
   jp: "捨て《すて》材料《ざいりょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Material sacrificial",
   desc: "捨《す》てて《すて》=material non-struktural untuk memudahkan 施工《せこう》.",
-  _origIndex: 309
+  usage: '捨《す》て材料《ざいりょう》を使《つか》って試《ため》し切《ぎ》りをする（lakukan pemotongan percobaan menggunakan material sacrificial）',
+    _origIndex: 309
   },
 {
   id: 245,
@@ -1110,10 +1111,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あっちゃくたんし",
   jp: "圧着端子《あっちゃくたんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Terminal crimping",
   desc: "Terminal untuk menghubungkan kabel ke peralatan listrik, dikencangkan dengan tekanan.",
-  _origIndex: 58
+  usage: '圧着端子《あっちゃくたんし》で電線《でんせん》を接続《せつぞく》する（sambungkan kabel menggunakan crimping terminal）',
+    _origIndex: 58
   },
 {
   id: 71,
@@ -1352,10 +1354,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "しん・さき",
   jp: "芯《しん》・先《さき》（配管《はいかん》用語《ようご》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Garis sumbu / ujung pipa",
   desc: "芯《しん》=garis tengah (centerline) pipa/duct — referensi pengukuran; 先《さき》=ujung dari pipa.",
-  _origIndex: 306
+  usage: '芯《しん》から寸法《すんぽう》を取《と》って配管《はいかん》する（ukur jarak dari garis sumbu sebelum memasang pipa）',
+    _origIndex: 306
   },
 {
   id: 246,

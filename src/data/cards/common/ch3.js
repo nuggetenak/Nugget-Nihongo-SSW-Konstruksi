@@ -1305,10 +1305,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "はいでんばん",
   jp: "配電盤《はいでんばん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Panel distribusi listrik (配電盤)",
   desc: "Perangkat untuk mencabangkan catu daya dan memasok listrik ke setiap perangkat.",
-  _origIndex: 62
+  usage: '配電盤《はいでんばん》で各回路《かくかいろ》に電力《でんりょく》を分配《ぶんぱい》する（distribusikan daya ke setiap sirkuit melalui panel distribusi）',
+    _origIndex: 62
   },
 {
   id: 87,
@@ -1316,10 +1317,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ぐらすううるだんねつざい",
   jp: "グラスウール断熱材《ぐらすううるだんねつざい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bahan isolasi wol kaca",
   desc: "Kaca dilebur jadi serat tipis. Fleksibel, tahan panas, tak mudah terbakar.",
-  _origIndex: 95
+  usage: 'グラスウール断熱材《ぐらすううるだんねつざい》を屋根《やね》裏《うら》に充填《じゅうてん》する（isi rongga atap dengan insulasi wol kaca）',
+    _origIndex: 95
   },
 {
   id: 88,
@@ -1327,10 +1329,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ろっくううるだんねつざい",
   jp: "ロックウール断熱材《ろっくううるだんねつざい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bahan isolasi wol batu",
   desc: "Basalt dilebur jadi serat. Ketahanan api lebih baik dari wol kaca. Juga untuk pengisi tahan api.",
-  _origIndex: 96
+  usage: 'ロックウール断熱材《ろっくううるだんねつざい》で耐火性能《たいかせいのう》を確保《かくほ》する（pastikan performa tahan api menggunakan insulasi wol batu）',
+    _origIndex: 96
   },
 {
   id: 164,
