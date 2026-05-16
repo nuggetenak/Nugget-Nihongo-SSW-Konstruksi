@@ -11,32 +11,43 @@ git clone -b content-dq https://[token]@github.com/nuggetenak/Nugget-Nihongo-SSW
 
 Baca DATA_QUALITY_HANDOFF_v17.md dan PROGRESS.md sebelum apapun.
 Canonical spec ada di docs/CARD_CONTENT_SPEC.md.
-Last commit: 319f2c8
+Last commit: afe24e5
+⚠️ SESSION_PROMPT intentionally records one commit behind (self-referential limitation — see DATA_QUALITY_HANDOFF_v17.md)
 
 Tujuan branch content-dq: data hygiene, housekeeping, accuracy — sampai
-semua 1,443 cards dan 1,142 soal 100% akurat dan bersih.
+semua 1,438 cards dan 1,142 soal 100% akurat dan bersih.
+(5 kartu sudah dihapus: id=374,592,484,518,982 — total turun dari 1,443)
 
 ---
 
-## STATE SAAT INI (per session 18)
+## STATE SAAT INI (per session 20)
 
-ADM10 selesai: consolidated spec di-commit, admin docs di-sync.
+**✅ SELESAI s/d session 20:**
+- P0–P5, P7, P9: semua done (lihat PROGRESS.md)
+- ADMIN: integrity checks clean — 1,438 IDs, no dups, mirrors konsisten, no orphaned related_card_id
+- P17 dirty state: resolved OPSI B (jac-mockup files tidak pernah ter-commit)
+- P8a items 1,3,4,5: DONE — sets/jac/ + sets/quiz/ annotated; wayground/ + wtv01 sudah bersih
 
-**TASK AKTIF — lihat PROGRESS.md untuk checklist lengkap:**
+**TASK AKTIF BERIKUTNYA:**
 
-🔴 P0 BLOCKING: Fix encoding corrupt (id=476,773) + 12 nested ruby
-🟠 P1–P5: Ruby jp/desc, field fixes cards, duplicate resolution, desc truncation
-🟡 P9: angka-kunci — 3 null kartu, 28 naked soal
-🟡 P7: JAC exp corruption (12 entries berakhir backslash)
-⏳ P16/P17: wglv split + jac-mockup rename (OD-2/OD-3 pending owner confirm)
-⏳ P8a: Ruby standard question sets (setelah P7+P17)
-⏳ P8b/P10/P11: wglv ruby + quality (setelah P16)
+🟡 P8a item 2: `sets/jac-mockup/` — tunggu P17/OD-3 owner confirm
+🟡 P8b: Ruby wglv — tunggu P16/OD-2 owner confirm
+🟡 P10/P11: wglv quality — tunggu P16
+🟡 P14: Type reclassification (bisa mulai kapan saja)
+🟡 P15: Usage expansion (bisa mulai kapan saja)
 
-**Blocked (unchanged):**
-- ⏸ P21: jac-doboku.js + jac-kenchiku.js — tunggu PDF JAC resmi
-- ⏸ PDF Viewer Mode — tunggu URL PDF resmi JAC dari owner
+**Blocked (OD pending owner):**
+- ⏸ P16 (OD-2): wglv split
+- ⏸ P17 (OD-3): jac-mockup rename
+- ⏸ P6 (OD-1): source reclassification
+- ⏸ P12/P13: furi drop + post-reclassify (setelah P6)
 
-**Open decisions dari owner sebelum P6/P16/P17/P12 bisa dikerjakan:**
+**Deferred (butuh AGENT 12 review):**
+- EF接合 triple (id=459,612,613) — P4 deferred
+- 6 ambiguous jp pairs (124/842, 299/858, 862/309, 438/911, 482/819, 416/1182)
+- id=1240 source fix
+
+**Open decisions:**
 - OD-1: source reclassification (P6)
 - OD-2: wglv split timing (P16)
 - OD-3: jac-mockup rename timing (P17)
