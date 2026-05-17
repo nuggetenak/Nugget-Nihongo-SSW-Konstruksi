@@ -353,10 +353,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ほうかい・とうかいさいがい",
   jp: "崩壊《ほうかい》・倒壊災害《とうかいさいがい》の建設特有例",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tiang sementara roboh &",
   desc: "Contoh 崩壊《ほうかい》倒壊《とうかい》 pekerjaan listrik: ①仮設《かせつ》電柱《でんちゅう》 patah & rubuh ②tiang di truk ambruk",
-  _origIndex: 733
+  usage: '崩壊《ほうかい》・倒壊《とうかい》災害《さいがい》の原因《げんいん》（支保工不足《しほこうぶそく》・足場不備《あしばふび》）を理解《りかい》する（pahami penyebab kecelakaan runtuh dan roboh: kurang shoring dan scaffold yang tidak memadai）',
+    _origIndex: 733
   },
 {
   id: 624,
@@ -364,10 +365,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "きかいせっちこうじのしぼうじこおおがたきかいのてんとうによるしたじき",
   jp: "機械設置工事の死亡事故《きかいせっちこうじのしぼうじこおおがたきかいのてんとうによるしたじき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pasang mesin besar",
   desc: "Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat",
-  _origIndex: 734
+  usage: '大型機械《おおがたきかい》の設置工事《せっちこうじ》では転倒《てんとう》による死亡事故《しぼうじこ》に注意《ちゅうい》する（waspadai kecelakaan fatal akibat terbaliknya alat berat saat pekerjaan pemasangan mesin）',
+    _origIndex: 734
   },
 {
   id: 625,
@@ -375,10 +377,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "じょうげすいどうこうじのしゅるいのじこりすく",
   jp: "上下水道工事の3種類の事故リスク《じょうげすいどうこうじのしゅるいのじこりすく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 risiko saluran air",
   desc: "①Tanah longsor di galian → tertimbun (≥1.5m: wajib 鋼矢板《こうやいた》). ②Tersandung kabel atau amblas di",
-  _origIndex: 735
+  usage: '上下水道工事《じょうげすいどうこうじ》では酸素欠乏《さんそけつぼう》・崩壊《ほうかい》・クレーン事故《じこ》の3リスクに備《そな》える（waspadai 3 risiko pekerjaan sanitasi: kekurangan oksigen, longsoran, dan kecelakaan crane）',
+    _origIndex: 735
   },
 {
   id: 626,
@@ -436,7 +439,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kebocoran",
   desc: "Cairan atau gas yang keluar dari tempat yang seharusnya tertutup.",
-  _origIndex: 766
+  usage: '配管《はいかん》の漏《も》れを点検《てんけん》して修理《しゅうり》する（periksa dan perbaiki kebocoran pada pipa）',
+    _origIndex: 766
   },
 {
   id: 655,
@@ -471,7 +475,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Timbulnya lendutan",
   desc: "Ketika jarak saddle terlalu lebar, pipa melengkung ke bawah.",
-  _origIndex: 771
+  usage: 'たわみが大《おお》きくなったら支持《しじ》間隔《かんかく》を狭《せま》める（perkecil jarak tumpuan jika lendutan semakin besar）',
+    _origIndex: 771
   },
 {
   id: 660,
@@ -482,7 +487,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Celah / gap",
   desc: "Celah pada material insulasi tempat panas bisa bocor keluar → ヒートロス.",
-  _origIndex: 774
+  usage: '隙間《すきま》をシーリング材《ざい》で充填《じゅうてん》して気密《きみつ》性《せい》を高《たか》める（tingkatkan kerapatan udara dengan mengisi celah menggunakan sealant）',
+    _origIndex: 774
   },
 {
   id: 667,
@@ -493,7 +499,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Pencegahan",
   desc: "Tindakan pencegahan terhadap suatu bahaya atau kejadian negatif.",
-  _origIndex: 781
+  usage: '感電《かんでん》事故《じこ》を防止《ぼうし》するために絶縁《ぜつえん》を確認《かくにん》する（periksa insulasi untuk mencegah kecelakaan sengatan listrik）',
+    _origIndex: 781
   },
 {
   id: 668,
@@ -504,7 +511,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Pekerjaan di ketinggian",
   desc: "Pekerjaan di atas 2m dari permukaan. Risiko utama: jatuh dan tersetrum.",
-  _origIndex: 782
+  usage: '高所作業《こうしょさぎょう》では必《かなら》ず安全帯《あんぜんたい》を着用《ちゃくよう》する（selalu kenakan harness saat bekerja di ketinggian）',
+    _origIndex: 782
   },
 {
   id: 669,
@@ -515,7 +523,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Jatuh",
   desc: "Bahaya utama pekerjaan di ketinggian. Wajib pakai harness & jaring pengaman.",
-  _origIndex: 783
+  usage: '工具《こうぐ》の落下《らっか》を防《ふせ》ぐために安全《あんぜん》ロープをつける（pasang tali pengaman pada perkakas untuk mencegah benda jatuh）',
+    _origIndex: 783
   },
 {
   id: 670,
@@ -526,7 +535,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kebisingan",
   desc: "Perlu diperhatikan, tapi bukan bahaya utama saat pengelasan di ketinggian.",
-  _origIndex: 784
+  usage: '騒音《そうおん》が大《おお》きい作業《さぎょう》では耳栓《みみせん》を着用《ちゃくよう》する（kenakan pelindung telinga saat pekerjaan menghasilkan kebisingan besar）',
+    _origIndex: 784
   },
 {
   id: 671,
@@ -537,7 +547,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Bahaya",
   desc: "Sesuatu yang berpotensi menyebabkan cedera atau kerugian di tempat kerja.",
-  _origIndex: 785
+  usage: '危険《きけん》な箇所《かしょ》に立入禁止《たちいりきんし》テープを張《は》る（pasang garis larangan masuk di area berbahaya）',
+    _origIndex: 785
   },
 {
   id: 672,
@@ -560,7 +571,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Tindakan penanganan",
   desc: "Langkah yang diambil untuk mengatasi atau mencegah suatu masalah.",
-  _origIndex: 787
+  usage: '怪我《けが》が発生《はっせい》した場合《ばあい》は速《はや》やかに処置《しょち》をして報告《ほうこく》する（berikan penanganan segera dan laporkan jika terjadi cedera）',
+    _origIndex: 787
   },
 {
   id: 708,
@@ -571,7 +583,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Penurunan fungsi",
   desc: "Menurunnya fungsi atau performa. Sealing menurun bila sambungan terkena minyak.",
-  _origIndex: 822
+  usage: '機器《きき》の性能《せいのう》が低下《ていか》したら点検《てんけん》と清掃《せいそう》をする（periksa dan bersihkan peralatan jika kinerjanya menurun）',
+    _origIndex: 822
   },
 {
   id: 710,
@@ -582,7 +595,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kerusakan / pecah",
   desc: "Rusak atau pecah. Manometer pecah adalah pengecoh penyebab suara abnormal.",
-  _origIndex: 824
+  usage: '破損《はそん》した工具《こうぐ》は使用禁止《しようきんし》にして新品《しんぴん》と交換《こうかん》する（larang penggunaan alat yang rusak dan ganti dengan yang baru）',
+    _origIndex: 824
   },
 {
   id: 717,
@@ -593,7 +607,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Kenaikan / peningkatan",
   desc: "Naiknya suatu nilai. Pencegahan kenaikan suhu adalah pengecoh tujuan grounding.",
-  _origIndex: 831
+  usage: '温度《おんど》が上昇《じょうしょう》したら換気《かんき》をして機器《きき》を冷《ひ》やす（ventilasikan dan dinginkan peralatan jika suhu meningkat）',
+    _origIndex: 831
   },
 {
   id: 737,
@@ -604,7 +619,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Perhatian / kewaspadaan",
   desc: "Kewaspadaan terhadap suatu bahaya atau kondisi berisiko.",
-  _origIndex: 851
+  usage: '高所作業《こうしょさぎょう》での注意《ちゅうい》事項《じこう》を始業前《しぎょうまえ》に確認《かくにん》する（periksa hal-hal yang perlu diperhatikan saat bekerja di ketinggian sebelum mulai）',
+    _origIndex: 851
   },
 {
   id: 779,
@@ -615,7 +631,8 @@ export const CARDS_LIFELINE_CH7 = [
   type: "vocab",
   id_text: "Aman / keselamatan",
   desc: "Kondisi aman / safety. Kombinasi umum: 安全確認《あんぜんかくにん》、安全管《かん》理《あんぜんかんり》.",
-  _origIndex: 893
+  usage: '安全《あんぜん》を確認《かくにん》してから機器《きき》を操作《そうさ》する（pastikan keamanan sebelum mengoperasikan peralatan）',
+    _origIndex: 893
   },
 {
   id: 914,

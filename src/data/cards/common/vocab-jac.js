@@ -10,7 +10,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pilah / sortir",
   desc: "Menyortir dan menyingkirkan barang tidak perlu. S pertama dari 5S.",
-  _origIndex: 896
+  usage: '使《つか》わない工具《こうぐ》は整理《せいり》して所定《しょてい》の場所《ばしょ》に戻《もど》す（kembalikan perkakas yang tidak digunakan ke tempat semula setelah disortir）',
+    _origIndex: 896
   },
 {
   id: 783,
@@ -45,7 +46,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Jaga kebersihan",
   desc: "Menjaga kondisi tetap bersih dan sehat. S keempat dari 5S.",
-  _origIndex: 899
+  usage: '作業着《さぎょうぎ》を清潔《せいけつ》に保《たも》って職場《しょくば》の衛生《えいせい》を守《まも》る（jaga kebersihan seragam kerja untuk mempertahankan sanitasi di tempat kerja）',
+    _origIndex: 899
   },
 {
   id: 786,
@@ -56,7 +58,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Disiplin / kebiasaan baik",
   desc: "Menjaga dan mematuhi aturan secara konsisten. S kelima dari 5S.",
-  _origIndex: 900
+  usage: 'しつけとして毎日《まいにち》清掃《せいそう》と片付け《かたづけ》を習慣《しゅうかん》にする（jadikan kebiasaan membersihkan dan membereskan setiap hari sebagai bentuk disiplin）',
+    _origIndex: 900
   },
 {
   id: 787,
@@ -67,7 +70,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Kerja tim",
   desc: "Koordinasi antar pekerja/kontraktor di lokasi konstruksi.",
-  _origIndex: 901
+  usage: 'チームワークで複数《ふくすう》の職種《しょくしゅ》が連携《れんけい》して工事《こうじ》を進《すす》める（beberapa disiplin kerja bekerja sama dalam tim untuk menyelesaikan proyek）',
+    _origIndex: 901
   },
 {
   id: 788,
@@ -78,7 +82,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Keunggulan",
   desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang",
-  _origIndex: 902
+  usage: '品質《ひんしつ》の優位性《ゆういせい》を示《しめ》して施主《せしゅ》の信頼《しんらい》を得《え》る（tunjukkan keunggulan kualitas untuk mendapatkan kepercayaan pemilik bangunan）',
+    _origIndex: 902
   },
 {
   id: 789,
@@ -89,7 +94,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Penderitaan / tekanan",
   desc: "Penderitaan fisik atau mental.\nTindakan yang menyebabkan 苦痛《くつう》mental =",
-  _origIndex: 903
+  usage: '長時間《ちょうじかん》の重作業《じゅうさぎょう》による苦痛《くつう》を減《へ》らすために適切《てきせつ》な道具《どうぐ》を使う（gunakan alat yang tepat untuk mengurangi beban akibat pekerjaan berat berkepanjangan）',
+    _origIndex: 903
   },
 {
   id: 790,
@@ -100,7 +106,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pekerja / tenaga kerja",
   desc: "Orang yang bekerja. Dilindungi oleh 労働安全衛生法《ろうどうあんぜんえいせいほう》.",
-  _origIndex: 904
+  usage: '外国人《がいこくじん》労働者《ろうどうしゃ》が安全《あんぜん》に働《はたら》けるよう日本語《にほんご》での教育《きょういく》をする（berikan pendidikan dalam bahasa Jepang agar pekerja asing dapat bekerja dengan aman）',
+    _origIndex: 904
   },
 {
   id: 791,
@@ -111,7 +118,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pemberi kerja / majikan",
   desc: "Pemilik usaha/perusahaan yang mempekerjakan.\nPremi asuransi kecelakaan kerja",
-  _origIndex: 905
+  usage: '事業主《じぎょうぬし》は労働者《ろうどうしゃ》に安全な職場《しょくば》を提供《ていきょう》する義務《ぎむ》がある（pemberi kerja berkewajiban menyediakan tempat kerja yang aman bagi pekerja）',
+    _origIndex: 905
   },
 {
   id: 792,
@@ -122,7 +130,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Kualitas / kompetensi SDM",
   desc: "Mutu atau kemampuan dasar seseorang/pelaku usaha.\nTujuan UU Konstruksi:",
-  _origIndex: 906
+  usage: 'SSWとして求められる資質《ししつ》（誠実さ・技能《ぎのう》・コミュニケーション）を高《たか》める（tingkatkan kompetensi yang diperlukan sebagai SSW: kejujuran, keterampilan, dan komunikasi）',
+    _origIndex: 906
   },
 {
   id: 793,
@@ -133,7 +142,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Material limbah / sisa",
   desc: "Material sisa bongkaran/konstruksi.\nPenanganan 廃材《はいざい》diatur UU Daur Ulang",
-  _origIndex: 907
+  usage: '廃材《はいざい》を分別《ぶんべつ》して産業廃棄物《さんぎょうはいきぶつ》として適切《てきせつ》に処分《しょぶん》する（pisahkan dan buang sisa material sebagai limbah industri secara benar）',
+    _origIndex: 907
   },
 {
   id: 794,
@@ -144,7 +154,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Minimum / batas paling",
   desc: "Standar atau ambang batas paling rendah yang ditetapkan.\nUU Standar Bangunan",
-  _origIndex: 908
+  usage: '最低限《さいていげん》の安全対策《あんぜんたいさく》として保護具《ほごぐ》を着用《ちゃくよう》する（kenakan APD sebagai tindakan keselamatan minimum）',
+    _origIndex: 908
   },
 {
   id: 795,
@@ -155,7 +166,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pengurangan / mitigasi",
   desc: "Mengurangi dampak atau kerugian.\nUU Pemadam bertujuan 軽減《けいげん》kerugian akibat",
-  _origIndex: 909
+  usage: 'ヒヤリハット報告《ほうこく》で事故《じこ》リスクを軽減《けいげん》する（kurangi risiko kecelakaan melalui pelaporan near miss）',
+    _origIndex: 909
   },
 {
   id: 796,
@@ -166,7 +178,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Murah / terjangkau",
   desc: "Harga yang rendah/terjangkau.\nUU Air Bersih bertujuan menyediakan air secara",
-  _origIndex: 910
+  usage: '安価《あんか》な資材《しざい》を選《えら》ぶ場合《ばあい》でも品質《ひんしつ》基準《きじゅん》を満《み》たす必要《ひつよう》がある（bahkan saat memilih material murah sekalipun, standar kualitas harus tetap terpenuhi）',
+    _origIndex: 910
   },
 {
   id: 797,
@@ -177,7 +190,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pelatihan wajib alat",
   desc: "Pelatihan keterampilan resmi yang wajib sebelum mengoperasikan mesin tertentu.",
-  _origIndex: 911
+  usage: '技能講習《ぎのうこうしゅう》を受講《じゅこう》して特定《とくてい》の機械《きかい》の操作資格《そうさしかく》を取得《しゅとく》する（ikuti pelatihan teknis untuk mendapatkan kualifikasi operasi mesin tertentu）',
+    _origIndex: 911
   },
 {
   id: 798,
@@ -188,7 +202,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pendidikan khusus",
   desc: "Pendidikan keselamatan kerja yang wajib untuk pekerjaan berisiko tertentu.",
-  _origIndex: 912
+  usage: '特別教育《とくべつきょういく》を修了《しゅうりょう》してから高所作業車《こうしょさぎょうしゃ》を操作《そうさ》する（selesaikan pendidikan khusus sebelum mengoperasikan aerial work platform）',
+    _origIndex: 912
   },
 {
   id: 799,
@@ -199,7 +214,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Lisensi / izin resmi",
   desc: "Izin resmi dari negara untuk operasikan alat/pekerjaan berbahaya.",
-  _origIndex: 913
+  usage: '移動式クレーン《いどうしきくれーん》は免許《めんきょ》がなければ操作《そうさ》できない（mobile crane tidak dapat dioperasikan tanpa lisensi）',
+    _origIndex: 913
   },
 {
   id: 800,
@@ -210,7 +226,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pekerjaan persiapan",
   desc: "Pekerjaan yang dilakukan sebelum konstruksi utama dimulai.",
-  _origIndex: 914
+  usage: '本工事《ほんこうじ》の前《まえ》に準備工事《じゅんびこうじ》として仮設設備《かせつせつび》を整《ととの》える（siapkan fasilitas sementara sebagai pekerjaan persiapan sebelum pekerjaan utama）',
+    _origIndex: 914
   },
 {
   id: 804,
@@ -221,7 +238,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Durasi / periode proyek",
   desc: "Jangka waktu pelaksanaan proyek konstruksi.\nUntuk tepat waktu, manajemen",
-  _origIndex: 921
+  usage: '工期《こうき》内《ない》に完成《かんせい》できるよう工程表《こうていひょう》を作成《さくせい》する（buat bagan jadwal agar pekerjaan selesai dalam periode yang ditetapkan）',
+    _origIndex: 921
   },
 {
   id: 805,
@@ -256,7 +274,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Struktur utama bangunan (くったい)",
   desc: "Rangka pokok bangunan: fondasi, kolom, balok, dinding, lantai.\nSemua elemen",
-  _origIndex: 928
+  usage: '躯体《くたい》工事《こうじ》が完了《かんりょう》してから内装《ないそう》・設備工事《せつびこうじ》を進《すす》める（lanjutkan pekerjaan interior dan MEP setelah struktur utama selesai）',
+    _origIndex: 928
   },
 {
   id: 808,
@@ -267,7 +286,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Interior / 内装",
   desc: "Pekerjaan finishing bagian dalam bangunan.\nDilakukan setelah pekerjaan struktur",
-  _origIndex: 929
+  usage: '内装《ないそう》仕上げ工事《しあげこうじ》でボードを張《は》ってからクロスを貼《は》る（tempelkan papan gypsum lalu wallpaper dalam pekerjaan finishing interior）',
+    _origIndex: 929
   },
 {
   id: 810,
@@ -290,7 +310,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "1 Ken — satuan panjang",
   desc: "Satuan panjang tradisional Jepang ≈ 1.818 m.\nJarak antar kolom standar bangunan",
-  _origIndex: 939
+  usage: '1間《いっけん》（約《やく》1.8m）を基準《きじゅん》に柱間隔《はしらかんかく》を設計《せっけい》する（rancang jarak antar kolom berdasarkan 1 ken ≈ 1.8 m）',
+    _origIndex: 939
   },
 {
   id: 825,
@@ -301,7 +322,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Jatuh vertikal (墜落)",
   desc: "Jatuh dari tempat tinggi. Penyebab kecelakaan terbesar di konstruksi Jepang.",
-  _origIndex: 950
+  usage: '2m以上《いじょう》の高所《こうしょ》での墜落《ついらく》は重篤《じゅうとく》な災害《さいがい》になる（jatuh dari ketinggian 2m atau lebih menyebabkan kecelakaan fatal）',
+    _origIndex: 950
   },
 {
   id: 826,
@@ -312,7 +334,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Kekurangan oksigen (konsep)",
   desc: "Kondisi kadar oksigen rendah di ruang tertutup.\nWaspadai 酸素欠乏《さんそけつぼう》saat",
-  _origIndex: 951
+  usage: '酸素欠乏《さんそけつぼう》の恐れ《おそれ》のある空間《くうかん》に入《はい》る前《まえ》は測定《そくてい》をする（lakukan pengukuran sebelum memasuki ruang yang berisiko kekurangan oksigen）',
+    _origIndex: 951
   },
 {
   id: 827,
@@ -323,7 +346,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Penahan tanah (土留め vocab)",
   desc: "Struktur penahan dinding tanah agar tidak longsor.\nGalian >1.5m wajib pasang",
-  _origIndex: 952
+  usage: '1.5m以上《いじょう》の掘削《くっさく》面《めん》に土留め《どどめ》を設置《せっち》する（pasang penahan tanah pada dinding galian sedalam 1.5m atau lebih）',
+    _origIndex: 952
   },
 {
   id: 828,
@@ -346,7 +370,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Manajemen konstruksi (vocab)",
   desc: "Pengelolaan pelaksanaan konstruksi: kualitas, jadwal, biaya, K3, lingkungan.",
-  _origIndex: 954
+  usage: '施工管理《せこうかんり》の4大《よんだい》管理（品質・コスト・工程・安全）を徹底《てってい》する（jalankan 4 pilar manajemen konstruksi secara menyeluruh: kualitas, biaya, jadwal, dan keselamatan）',
+    _origIndex: 954
   },
 {
   id: 830,
@@ -357,7 +382,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Kualitas / mutu",
   desc: "Standar mutu hasil pekerjaan konstruksi.\nSalah satu dari 4 manajemen konstruksi",
-  _origIndex: 955
+  usage: '品質《ひんしつ》基準《きじゅん》を満《み》たすように施工《せこう》して検査《けんさ》を受《う》ける（laksanakan pekerjaan agar memenuhi standar kualitas lalu lakukan inspeksi）',
+    _origIndex: 955
   },
 {
   id: 831,
@@ -368,7 +394,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Jadwal / tahapan proses",
   desc: "Urutan tahapan dan jadwal pelaksanaan konstruksi.\n工程表《こうていひょう》= bagan jadwal",
-  _origIndex: 956
+  usage: '工程《こうてい》を管理《かんり》して遅延《ちえん》が発生《はっせい》しないよう調整《ちょうせい》する（kelola jadwal pekerjaan dan sesuaikan agar tidak terjadi keterlambatan）',
+    _origIndex: 956
   },
 {
   id: 832,
@@ -415,7 +442,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Terima kasih (formal)",
   desc: "Ucapan terima kasih formal setelah dibantu atau menerima sesuatu.",
-  _origIndex: 1355
+  usage: '助《たす》けてもらったときは「ありがとうございます」と感謝《かんしゃ》を伝《つた》える（ucapkan "Arigatō gozaimasu" untuk menyampaikan rasa terima kasih）',
+    _origIndex: 1355
   },
 {
   id: 1206,
@@ -426,7 +454,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pamit pulang lebih dulu (vocab)",
   desc: "Ucapan saat pulang duluan.\nWajib — tidak bilang ini dianggap tidak sopan.",
-  _origIndex: 1362
+  usage: '先《さき》に退社《たいしゃ》するときは「お先《さき》に失礼《しつれい》します」と言《い》って退場《たいじょう》する（ucapkan "Osaki ni shitsurei shimasu" saat pulang lebih awal）',
+    _origIndex: 1362
   },
 {
   id: 1208,
@@ -437,7 +466,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Siap bertindak / roger",
   desc: "Konfirmasi aktif bahwa instruksi dipahami dan siap dilaksanakan.",
-  _origIndex: 1364
+  usage: '指示《しじ》を理解《りかい》して行動《こうどう》できるときは「了解《りょうかい》しました」と答《こた》える（ucapkan "Ryōkai shimashita" saat memahami instruksi dan siap bertindak）',
+    _origIndex: 1364
   },
 {
   id: 1212,
@@ -448,7 +478,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Akan saya cek dahulu",
   desc: "Ucapan saat butuh cek dulu sebelum menjawab.\nJangan bilang OK bila belum yakin.",
-  _origIndex: 1368
+  usage: '内容《ないよう》を確認《かくにん》してから返事《へんじ》するために「確認《かくにん》します」と言《い》う（ucapkan "Kakunin shimasu" sebelum menjawab untuk memeriksa isi terlebih dahulu）',
+    _origIndex: 1368
   },
 {
   id: 1215,
@@ -495,7 +526,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "3 pilar komunikasi kerja",
   desc: "Tiga pilar komunikasi kerja di Jepang: Lapor, Hubungi, Konsultasi.",
-  _origIndex: 1374
+  usage: 'ほう・れん・そう（報告《ほうこく》・連絡《れんらく》・相談《そうだん》）を徹底《てってい》して情報《じょうほう》を共有《きょうゆう》する（jalankan horenso secara menyeluruh untuk berbagi informasi）',
+    _origIndex: 1374
   },
 {
   id: 1219,
@@ -729,10 +761,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-gakka2",
   furi: "しきならしさぎょう",
   jp: "敷き均し作業《しきならしさぎょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan penghamparan",
   desc: "Menyebarkan dan meratakan material (aspal, agregat, tanah) menggunakan mesin paver/finisher.",
-  _origIndex: 1497
+  usage: '敷き均し作業《しきならしさぎょう》でアスファルトを均一《きんいつ》な厚さに広《ひろ》げる（hamparan aspal secara merata dengan ketebalan seragam dalam pekerjaan leveling）',
+    _origIndex: 1497
   },
 {
   id: 1402,
@@ -740,10 +773,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-gakka1",
   furi: "てっこつこうじ",
   jp: "鉄骨工事《てっこつこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan struktur baja",
   desc: "Membangun rangka bangunan menggunakan baja: kolom (柱《はしら》), balok (梁《はり》), dan elemen diagonal.",
-  _origIndex: 1558
+  usage: '鉄骨工事《てっこつこうじ》でアンカーボルト設置《せっちか》から建方《たてかた》まで鉄骨《てっこつ》を組《く》み立《た》てる（rakit struktur baja dari pemasangan anchor bolt hingga erection）',
+    _origIndex: 1558
   },
 {
   id: 1403,
@@ -751,10 +785,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-gakka1",
   furi: "こんくりいとだせつこうじ",
   jp: "コンクリート打設工事《コンクリートだせつこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan pengecoran",
   desc: "Menuangkan beton cair (生《なま》コン) ke bekisting (型《かた》枠《かたわく》).\nAlur: muat → pompa → tuang → padatkan",
-  _origIndex: 1559
+  usage: 'コンクリート打設工事《だせつこうじ》で型枠《かたわく》・配筋《はいきん》・打設《だせつ》・養生《ようじょう》を順番《じゅんばん》に行《おこな》う（lakukan pengecoran secara berurutan: bekisting, pembesian, pengecoran, dan curing）',
+    _origIndex: 1559
   },
 {
   id: 1404,

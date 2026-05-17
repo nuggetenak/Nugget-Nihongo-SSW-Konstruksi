@@ -780,10 +780,11 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "ねっちゅうしょうよぼうのさんたいさく",
   jp: "熱中症予防の3対策《ねっちゅうしょうよぼうのさんたいさく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 pencegahan heat stroke",
   desc: "夏の熱中症予防措置(労働安全衛生法):\n①日陰《ひかげ》の確保\n②水・塩飴《しおあめ》の配備\n③救急対応の準備\n※熱中症は命に関わる労働災害につながる。",
-  _origIndex: 1441
+  usage: '水分補給《すいぶんほきゅう》・休憩《きゅうけい》・涼しい場所《すずしいばしょ》での作業《さぎょう》の3対策《さんたいさく》で熱中症《ねっちゅうしょう》を防《ふせ》ぐ（cegah heatstroke dengan 3 tindakan: hidrasi, istirahat, dan kerja di tempat sejuk）',
+    _origIndex: 1441
   },
 {
   id: 1286,

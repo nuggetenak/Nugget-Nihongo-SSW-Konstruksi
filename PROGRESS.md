@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-17 (session 22: P14 waves 1-4 — 425 total konsep→vocab; P15 — 493 total usage added; vocab=1088 konsep=253 hukum=97; usage coverage 60.1%)
+**Last updated:** 2026-05-17 (session 22 COMPLETE: P14 — 581 konsep→vocab; P15 — 1,092 usage added, vocab coverage 100%; vocab=1244 konsep=97 hukum=97)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -161,14 +161,13 @@ Prerequisites: P1 done, OD-5 confirmed, viewer.html updated
 - [x] Review 11 konsep kandidat vocab (session 22): reclassified 8 → vocab (id=82,83,186,188,201,295,381,401); kept konsep: 102, 226, 245
 - [x] Extended scan seluruh konsep (session 22 wave 2): reclassified 55 tambahan → vocab (tools/instruments/materials/cable types: id=41–94 range, 121, 241, 244, 259, 260, 272, 278, 279, 283, 285, 299, 317, 332, 334, 335, 357, 363, 366, 386, 394); kept konsep: 55 (fenomena listrik), 84 (EF接合 deferred), 96 (system-level), 191/192/224 (grouped/verb), 275/284/358 (vs comparisons)
 - [x] Extended scan wave 3 (session 22): reclassified 31 tambahan → vocab (pipe types, PPE, survey tools, fire systems, career terms: id=73,74,78,79,81,89,91,92,95,97,98,100,104,114,115,116,118,122,123,125,126,210,211,270,271,288,289,290,454,455,506)
-- [x] Extended scan wave 4 (session 22): reclassified 340 tambahan → vocab (tools/materials/terms across all categories); +340 usage; total P14=425 reclassified, total P15=493 usage added session 22
+- [x] Extended scan wave 4 (session 22): reclassified 340 tambahan → vocab; Extended scan wave 5: reclassified 156 tambahan → vocab
+- [x] **P14 SELESAI** — total 581 kartu reclassified konsep→vocab session 22; konsep sisa 97 (genuine principles/procedures/regulations/category overviews)
 
 ---
 
 ### P15 — Usage expansion *(ongoing, parallel)*
-- [x] Isi `usage` pada vocab yang belum punya — 76 fields (session 22, wave 1): semua 10 kategori ≥ target coverage
-- [x] Isi `usage` pada 55 kartu reclassified (session 22, wave 2): +55 usage
-- [x] Isi `usage` pada 31 kartu reclassified (session 22, wave 3): +31 usage; total session 22 = 162 usage added
+- [x] Isi `usage` pada vocab yang belum punya — wave 1 (76) + wave 2 (55) + wave 3 (31) + wave 4 (340) + wave 5 (156) + batch akhir (434) = **1,092 total usage added session 22**; vocab coverage 100% (1244/1244)
 
 ---
 

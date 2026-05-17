@@ -42,10 +42,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ようせつぶんるいゆうせつあっせつろうせつ",
   jp: "溶接の3分類（融接《ゆうせつ》・圧接《あっせつ》・ろう接）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 kategori pengelasan",
   desc: "融接《ゆうせつ》=material dilelehkan (arc/gas). 圧接《あっせつ》=dipanaskan+ditekan tanpa cair. ろう接《せつ》=logam",
-  _origIndex: 190
+  usage: '融接《ゆうせつ》・圧接《あっせつ》・ろう接《ろうせつ》の3種類《さんしゅるい》の溶接《ようせつ》を使い分《つかいわ》ける（bedakan 3 kategori pengelasan: fusion, pressure, dan brazing）',
+    _origIndex: 190
   },
 {
   id: 163,
@@ -168,10 +169,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "きかいどこうこうじだいひょうきかいぶるどおざあゆあつしょべるほいいるろおだあ",
   jp: "機械土工事の代表機械《きかいどこうこうじだいひょうきかいぶるどおざあゆあつしょべるほいいるろおだあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Alat berat tanah",
   desc: "ブルドーザ=dorong tanah. 油圧《ゆあつ》ショベル=gali+muat. ホイールローダ=muat material.\nクラムシェル=gali bawah air.",
-  _origIndex: 222
+  usage: 'ブルドーザ・油圧《ゆあつ》ショベル・ホイールローダを機械土工事《きかいどこうじ》に使用《しよう》する（gunakan buldoser, excavator, dan wheel loader untuk pekerjaan tanah mekanis）',
+    _origIndex: 222
   },
 {
   id: 178,
@@ -361,10 +363,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "きゅうはいすいこうじ",
   jp: "給排水工事《きゅうはいすいこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Suplai air & drainase",
   desc: "Sistem pipa suplai air bersih dan pembuangan air kotor pada gedung.",
-  _origIndex: 1443
+  usage: '給水《きゅうすい》配管《はいかん》と排水《はいすい》配管《はいかん》を分《わ》けて施工《せこう》する（pasang pipa air bersih dan drainase secara terpisah）',
+    _origIndex: 1443
   },
 {
   id: 1289,
@@ -372,10 +375,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ろしょう・ろばん・ひょうそう",
   jp: "路床《ろしょう》・路盤《ろばん》・表層《ひょうそう》（舗装《ほそう》工事《こうじ》の層《そう》構造《こうぞう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 lapisan perkerasan",
   desc: "①路床《ろしょう》=dasar (digali ±1m) ②路盤《ろばん》=batu pecah dipadatkan ③表層《ひょうそう》=aspal atas.",
-  _origIndex: 1445
+  usage: '路床《ろしょう》・路盤《ろばん》・表層《ひょうそう》の3層《さんそう》で舗装《ほそう》を構成《こうせい》する（bangun perkerasan dengan 3 lapisan: subgrade, subbase, dan surface）',
+    _origIndex: 1445
   },
 {
   id: 1291,
@@ -383,10 +387,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ちすいvsりすい",
   jp: "治水《ちすい》vs 利水《りすい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Chisui vs Risui",
   desc: "Dua fungsi bendungan: 治水《ちすい》=tampung banjir agar sungai tidak meluap.\n利水《りすい》=sediakan air stabil",
-  _origIndex: 1447
+  usage: '治水《ちすい》（洪水《こうずい》制御《せいぎょ》）と利水《りすい》（用水《ようすい》確保《かくほ》）の両方《りょうほう》を目的《もくてき》にダムを建設《けんせつ》する（bangun bendungan untuk tujuan pengendalian banjir dan sumber air）',
+    _origIndex: 1447
   },
 {
   id: 1292,
@@ -394,10 +399,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ななとむこうほう",
   jp: "NATM（ナトム）工法《こうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "NATM: terowongan gunung",
   desc: "Gali gunung dengan bor/ledak, lalu semprot beton, pasang rangka baja dan rock bolt.",
-  _origIndex: 1448
+  usage: 'NATM工法《こうほう》でトンネルを掘《ほ》りながら吹付けコンクリート《ふきつけこんくりいと》で覆工《ふっこう》する（gali terowongan dengan NATM sambil melapisi dengan shotcrete）',
+    _origIndex: 1448
   },
 {
   id: 1293,
@@ -405,10 +411,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "しーるどとんねる・せぐめんと",
   jp: "シールドトンネル・セグメント",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Terowongan shield-segmen",
   desc: "Mesin shield menggali dari 立坑《たてこう》, segmen beton/baja dipasang di belakang mesin.",
-  _origIndex: 1449
+  usage: 'シールドマシンで掘削《くっさく》しながらセグメントでトンネルを構築《こうちく》する（gali dan bangun terowongan menggunakan shield machine dan segmen pracetak）',
+    _origIndex: 1449
   },
 {
   id: 1294,
@@ -416,10 +423,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "きょうりょうこうじかぶこうじょうぶこう",
   jp: "橋梁工事《きょうりょうこうじ》（下部工《かぶこう》・上部工《じょうぶこう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jembatan: bawah & atas",
   desc: "下部《ぶ》工《かぶこう》=pondasi penopang jembatan.\n上《うえ》部《ぶ》工《じょうぶこう》=badan jembatan untuk kendaraan/pejalan",
-  _origIndex: 1450
+  usage: '橋梁《きょうりょう》の下部工《かぶこう》（橋脚《きょうかく》）と上部工《じょうぶこう》（桁《けた》）を順《じゅん》に施工《せこう》する（kerjakan struktur bawah jembatan lalu struktur atas secara berurutan）',
+    _origIndex: 1450
   },
 {
   id: 1295,
@@ -427,10 +435,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "かいようどぼくこうじ",
   jp: "海洋土木工事《かいようどぼく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan sipil laut",
   desc: "Pembangunan pelabuhan, jembatan, terowongan bawah laut menggunakan kapal kerja dan penyelam.",
-  _origIndex: 1451
+  usage: '海洋土木工事《かいようどぼくこうじ》で防波堤《ぼうはてい》・護岸《ごがん》・港湾《こうわん》を建設《けんせつ》する（bangun breakwater, revetment, dan pelabuhan pada pekerjaan sipil laut）',
+    _origIndex: 1451
   },
 {
   id: 1296,
@@ -438,10 +447,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "しゅんせつこうじ",
   jp: "浚渫工事《しゅんせつ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengerukan dasar laut",
   desc: "Mengangkat lumpur/pasir dari dasar laut atau sungai menggunakan kapal keruk (浚渫船《しゅんせつせん》).",
-  _origIndex: 1452
+  usage: '浚渫工事《しゅんせつこうじ》で航路《こうろ》の水深《すいしん》を確保《かくほ》する（pastikan kedalaman alur pelayaran melalui pekerjaan pengerukan）',
+    _origIndex: 1452
   },
 {
   id: 1297,
@@ -449,10 +459,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "けえそん",
   jp: "ケーソン（防波堤《ぼうはてい》工事《こうじ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Caisson pemecah gelombang",
   desc: "Kotak beton besar diletakkan di dasar laut lalu diisi pasir untuk memecah gelombang.",
-  _origIndex: 1453
+  usage: 'ケーソンを沈設《ちんせつ》して防波堤《ぼうはてい》を構築《こうちく》する（bangun pemecah gelombang dengan menenggelamkan caisson）',
+    _origIndex: 1453
   },
 {
   id: 1298,
@@ -460,10 +471,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ちょうさ・しじそう",
   jp: "ボーリング調査《ちょうさ》・支持層《しじそう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Investigasi tanah dasar",
   desc: "Pengeboran tanah untuk menemukan lapisan keras (支持層《しじそう》) tempat ujung tiang harus mencapai.",
-  _origIndex: 1454
+  usage: 'ボーリング調査《ちょうさ》で支持層《しじそう》の深《ふか》さを確認《かくにん》する（konfirmasi kedalaman lapisan pendukung melalui investigasi bor）',
+    _origIndex: 1454
   },
 {
   id: 1299,
@@ -471,10 +483,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "くいこうじばしょうちくいきせいくい",
   jp: "杭工事《くいこうじばしょうちくいきせいくい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tiang fondasi 2 metode",
   desc: "場所打《ばしょう》ち杭《くい》=cor beton di lubang di tempat.\n既成《きせい》杭《くい》=tiang pabrik (beton/baja/kayu)",
-  _origIndex: 1455
+  usage: '場所打ち杭《ばしょうちくい》と既製杭《きせいくい》の2工法《にこうほう》を使い分《つかいわ》ける（bedakan penggunaan tiang cor di tempat dan tiang pracetak）',
+    _origIndex: 1455
   },
 {
   id: 1300,
@@ -482,10 +495,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ねぎり",
   jp: "根切り《ねぎり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Galian pondasi bangunan",
   desc: "Penggalian tanah di lokasi pondasi bangunan agar struktur bawah tanah bisa dibangun.",
-  _origIndex: 1456
+  usage: '建物《たてもの》の外周《がいしゅう》に根切り《ねきり》を行《おこな》って基礎《きそ》を設ける（lakukan galian pondasi di sekeliling bangunan untuk membuat fondasi）',
+    _origIndex: 1456
   },
 {
   id: 1301,
@@ -493,10 +507,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "もりどきりど",
   jp: "盛り土《もりど》vs 切り土《きりど》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Timbunan vs potong tanah",
   desc: "盛《も》り土《ど》=tanah ditimbun untuk meratakan lahan miring.\n切《き》り土《ど》=tanah dipotong agar permukaan rata.",
-  _origIndex: 1457
+  usage: '盛り土《もりど》で低地《ていち》を嵩上げ《かさあげ》し、切り土《きりど》で地形《ちけい》を整形《せいけい》する（naikkan lahan rendah dengan timbunan dan bentuk topografi dengan potongan tanah）',
+    _origIndex: 1457
   },
 {
   id: 1302,
@@ -504,10 +519,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "うめもどしさぎょう",
   jp: "埋め戻し作業《うめもどし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengurugan kembali tanah",
   desc: "Setelah pekerjaan bawah tanah selesai, ruang kosong di sekitar struktur ditimbun kembali.",
-  _origIndex: 1458
+  usage: '配管《はいかん》や基礎《きそ》の施工《せこう》後《ご》に埋め戻し《うめもどし》をして地盤《じばん》を回復《かいふく》する（pulihkan lapisan tanah dengan pengurugan kembali setelah pipa dan fondasi selesai dipasang）',
+    _origIndex: 1458
   },
 {
   id: 1303,
@@ -515,10 +531,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "さくせいこうじしゅるい",
   jp: "さく井工事の4種類《さくせいこうじしゅるい》（水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 jenis pengeboran sumur",
   desc: "①水源《すいげん》井《い》=air tanah ②観測《かんそく》井《い》=pantau penurunan tanah ③温泉《おんせん》井《い》=500–1000m",
-  _origIndex: 1459
+  usage: '水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》の4種類《よんしゅるい》のさく井工事《こうじ》を理解《りかい》する（pahami 4 jenis pekerjaan bor sumur: air bersih, observasi, panas bumi, dan geothermal）',
+    _origIndex: 1459
   },
 {
   id: 1304,
@@ -526,10 +543,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ぢいぷうえる",
   jp: "ディープウェル（深井戸《ふかいど》排水《はいすい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Deep well dewatering",
   desc: "Metode pemompaan air tanah untuk galian dalam (>10m).\nBerbeda dari wellpoint yang hanya efektif",
-  _origIndex: 1460
+  usage: 'ディープウェルで地下水位《ちかすいい》を下げて掘削《くっさく》範囲《はんい》を乾燥《かんそう》させる（turunkan muka air tanah menggunakan deep well untuk mengeringkan area galian）',
+    _origIndex: 1460
   },
 {
   id: 1305,
@@ -537,10 +555,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "とびこうじのしゅるい",
   jp: "とび工事の種類《とびこうじのしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jenis pekerjaan tobi",
   desc: "6 spesialisasi: 足場《あしば》(perancah), 鉄骨《てっこつ》(rangka baja), 橋《はし》梁《きょうりょう》(jembatan), 重量《じゅうりょう》(mesin",
-  _origIndex: 1461
+  usage: 'とび工事で仮設《かせつ》工事《こうじ》・鉄骨建方《てっこつたてかた》・重量物《じゅうりょうぶつ》の取付けを担当《たんとう》する（tangani pekerjaan sementara, erection baja, dan pemasangan benda berat dalam pekerjaan tobi）',
+    _origIndex: 1461
   },
 {
   id: 1306,
@@ -548,10 +567,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "かいさくとんねる",
   jp: "開削トンネル《かいさくトンネル》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Terowongan gali-tutup",
   desc: "Tanah digali dari permukaan, terowongan dibangun di dalam galian, lalu ditimbun kembali.",
-  _origIndex: 1462
+  usage: '開削トンネル《かいさくトンネル》で地表《ちひょう》から掘《ほ》り下《さ》げて躯体《くたい》を築いてから埋め戻す（gali dari permukaan tanah, bangun struktur, lalu timbun kembali pada cut-and-cover tunnel）',
+    _origIndex: 1462
   },
 {
   id: 1307,
@@ -559,10 +579,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "のりめんこうじもるたるふきつけしょくせいこうほう",
   jp: "法面工事《のりめん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Stabilisasi lereng",
   desc: "①Semprot mortar ke lereng untuk stabilisasi.\n②Mat benih ditempel agar tanaman tumbuh menahan tanah.",
-  _origIndex: 1463
+  usage: '法面《のりめん》に吹付けモルタルやグラウンドアンカーで崩壊《ほうかい》を防《ふせ》ぐ（cegah longsoran lereng dengan shotcrete mortar dan ground anchor）',
+    _origIndex: 1463
   },
 {
   id: 1308,
@@ -570,10 +591,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "かせん・かいがんのこうぞうぶつ",
   jp: "河川《かせん》・海岸の構造物《かいがんのこうぞうぶつ》（防波堤《ぼうはてい》・防潮堤《ぼうちょうてい》・護岸堤防《ごがんていぼう》・水路《すいろ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Struktur sungai & pantai",
   desc: "防波堤《ぼうはてい》=pecah gelombang. 防潮堤《ぼうちょうてい》=tahan tsunami. 護岸《ごがん》=turap tepi. 堤防《ていぼう》=tanggul.",
-  _origIndex: 1464
+  usage: '防波堤《ぼうはてい》・防潮堤《ぼうちょうてい》・護岸《ごがん》などの河川《かせん》・海岸《かいがん》構造物《こうぞうぶつ》を建設《けんせつ》する（bangun struktur sungai dan pantai seperti breakwater dan revetment）',
+    _origIndex: 1464
   },
 {
   id: 1309,
@@ -581,10 +603,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "てつどうこうじたしょくしゅしゅうやくこうじ",
   jp: "鉄道工事《てつどう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan rel kereta",
   desc: "Proyek paling kompleks — mencakup sipil, elektrikal, dan bangunan dalam satu pekerjaan.",
-  _origIndex: 1465
+  usage: '鉄道工事《てつどうこうじ》でレール・道床《どうしょう》・枕木《まくらぎ》を施工《せこう》する（pasang rel, balas, dan bantalan pada pekerjaan konstruksi rel kereta）',
+    _origIndex: 1465
   },
 {
   id: 1310,
@@ -592,10 +615,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "じょうげすいどうこうじじょうすいじょうげすいしょりじょう",
   jp: "上下水道工事《じょうげすいどうこうじじょうすいじょうげすいしょりじょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa air bersih & limbah",
   desc: "上《うえ》水道《じょうすいどう》: sungai→treatment→pipa→rumah.\n下水道《げすいどう》: air kotor→treatment→sungai.",
-  _origIndex: 1466
+  usage: '上水道《じょうすいどう》工事《こうじ》と下水道《げすいどう》工事《こうじ》を区別《くべつ》して施工《せこう》する（bedakan dan pasang jaringan air bersih dan saluran air limbah）',
+    _origIndex: 1466
   },
 {
   id: 1311,
@@ -603,10 +627,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "さいがいふっきゅうこうじ",
   jp: "災害復旧工事《さいがいふっきゅう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemulihan pasca bencana",
   desc: "Perbaikan cepat fasilitas sipil (sungai, jalan, pelabuhan) yang rusak akibat bencana alam.",
-  _origIndex: 1467
+  usage: '災害復旧工事《さいがいふっきゅうこうじ》で壊れた護岸《ごがん》と道路《どうろ》を早期《そうき》に修繕《しゅうぜん》する（perbaiki revetment dan jalan yang rusak secepatnya dalam pekerjaan pemulihan bencana）',
+    _origIndex: 1467
   },
 {
   id: 1312,
@@ -614,10 +639,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "うめたてこうじ vs がんぺきこうじ",
   jp: "埋立工事《うめたてこうじ》 vs 岸壁工事《がんぺきこうじ》（うめたて・がんぺき）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Reklamasi vs dermaga",
   desc: "埋立《うめたて》=timbun laut jadi lahan baru.\n岸壁《がんぺき》=dermaga kapal pakai sheet pile dan tiang.",
-  _origIndex: 1468
+  usage: '埋立工事《うめたてこうじ》で海面《かいめん》を陸地《りくち》にし、岸壁工事《がんぺきこうじ》で船《ふね》の接岸《せつがん》場所《ばしょ》を作《つく》る（ubah laut menjadi daratan dengan reklamasi dan buat dermaga kapal dengan pekerjaan quay wall）',
+    _origIndex: 1468
   },
 {
   id: 1313,
@@ -625,10 +651,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ",
   jp: "舗装の4層《ほうそうそうろしょうろばんきそうひょうそうあすふるといにっしゃあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 lapisan perkerasan (komposisi)",
   desc: "①路床《ろしょう》=dasar terbawah ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.",
-  _origIndex: 1469
+  usage: '路床《ろしょう》・路盤《ろばん》・基層《きそう》・表層《ひょうそう》の4層《よんそう》で舗装《ほそう》を仕上《しあ》げる（selesaikan perkerasan dengan 4 lapisan: subgrade, subbase, binder, dan surface）',
+    _origIndex: 1469
   },
 {
   id: 1314,
@@ -636,10 +663,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "くいのざいりょうしゅるいきくいこうくいこんくりいとくい",
   jp: "杭の材料3種《くいのざいりょうしゅるいきくいこうくいこんくりいとくい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 material tiang pondasi",
   desc: "木杭《きぐい》=kayu (tanah lunak). 鋼杭《こうくい》=baja (dalam). コンクリート杭《くい》=paling umum: cor di tempat atau",
-  _origIndex: 1470
+  usage: '木杭《きくい》・鋼杭《こうくい》・コンクリート杭《くい》の3種類《さんしゅるい》の材料《ざいりょう》から適切《てきせつ》な杭《くい》を選《えら》ぶ（pilih material tiang yang sesuai dari kayu, baja, atau beton）',
+    _origIndex: 1470
   },
 {
   id: 1315,
@@ -647,10 +675,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "おんせんせい vs ちねつせい",
   jp: "温泉井《おんせんせい》 vs 地熱井《ちねつせい》（深《ふか》さと危険性《きけんせい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sumur panas & panas bumi",
   desc: "温泉《おんせん》井《い》=500–1000m, bahaya gas alam. 地熱《ちねつ》井《い》=±2000m, bahaya uap panas & bahan berbahaya.",
-  _origIndex: 1471
+  usage: '温泉井《おんせんせい》は200m以上《いじょう》、地熱井《ちねつせい》は1000m以上《いじょう》と深《ふか》さが異《こと》なる（sumur panas bumi berbeda kedalaman: panas bumi ≥200m, geothermal ≥1000m）',
+    _origIndex: 1471
   },
 {
   id: 1324,
@@ -658,10 +687,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "もくてき：ちすい vs りすい",
   jp: "ダム工事の目的《もくてき》：治水《ちすい》 vs 利水《りすい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tujuan bendungan 2 fungsi",
   desc: "治水《ちすい》=tampung air saat banjir, atur debit sungai.\n利水《りすい》=sediakan air stabil untuk pertanian,",
-  _origIndex: 1480
+  usage: '治水《ちすい》と利水《りすい》の両方《りょうほう》を目的《もくてき》とするダムの役割《やくわり》を理解《りかい》する（pahami peran ganda bendungan untuk pengendalian banjir dan sumber air）',
+    _origIndex: 1480
   },
 {
   id: 1326,
@@ -669,10 +699,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "なこうほうさんがくとんねるさんようそ",
   jp: "NATM工法《こうほう》（山岳《さんがく》トンネル）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "NATM: 3 elemen penyangga",
   desc: "NATM: gali dengan ledak/mesin. 3 penyangga: ①吹付《ふきつ》けコンクリート ②鋼製《こうせい》支保工《しほこう》 ③ロックボルト.",
-  _origIndex: 1482
+  usage: 'NATM工法《こうほう》で吹付けコンクリート・ロックボルト・鋼製支保工《こうせいしほこう》の3要素《さんようそ》で支持《しじ》する（topang dengan 3 elemen NATM: shotcrete, rock bolt, dan steel support）',
+    _origIndex: 1482
   },
 {
   id: 1327,
@@ -680,10 +711,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "しいるどとんねるこうほうたてこうせぐめんと",
   jp: "シールドトンネル工法《こうほう》（立坑《たてこう》・セグメント）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Shield tunnel & segmen",
   desc: "①Bangun 立坑《たてこう》 ②Mesin shield menggali ③Panel segmen beton/baja dipasang di belakang mesin.",
-  _origIndex: 1483
+  usage: 'シールドトンネルで立坑《たてこう》からシールドマシンを発進《はっしん》させてセグメントを組《く》む（luncurkan shield machine dari shaft vertikal dan rakit segmen）',
+    _origIndex: 1483
   },
 {
   id: 1328,
@@ -691,10 +723,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "きょうりょうこうじ：かぶこう・じょうぶこう",
   jp: "橋梁工事《きょうりょうこうじ》：種類と下部工《かぶこう》・上部工《じょうぶこう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jembatan: jenis & tahapan",
   desc: "6 jenis jembatan: 桁《けた》橋《はし》・トラス・アーチ・ラーメン・斜張橋《しゃちょうきょう》・吊橋《つりばし》.\n下部《ぶ》工《かぶこう》=fondasi →",
-  _origIndex: 1484
+  usage: '橋梁《きょうりょう》の種類（桁橋《けたはし》・トラス橋・アーチ橋）と下部工・上部工の工程《こうてい》を理解《りかい》する（pahami jenis jembatan dan urutan pekerjaan struktur bawah dan atas）',
+    _origIndex: 1484
   },
 {
   id: 1329,
@@ -702,10 +735,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "かいよどぼくこうじのとくちょとしゅよしせつ",
   jp: "海洋土木工事の特徴と主要施設《かいよどぼくこうじのとくちょとしゅよしせつ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sipil laut & alat kerja",
   desc: "Bangun di laut: pelabuhan, bandara, jembatan, terowongan bawah laut.\nAlat: 作業船《さぎょうせん》dan",
-  _origIndex: 1485
+  usage: '海洋土木工事《かいようどぼく》では波浪《はろう》・潮流《ちょうりゅう》を考慮《こうりょ》して施工《せこう》する（pertimbangkan gelombang dan arus pasang surut saat pekerjaan sipil laut）',
+    _origIndex: 1485
   },
 {
   id: 1330,
@@ -713,10 +747,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "どこうじのさぎょうろくしゅるい",
   jp: "土工事の作業6種類《どこうじのさぎょうろくしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "6 jenis pekerjaan tanah",
   desc: "①掘削《くっさく》=gali ②積込《つみこ》み=muat ③盛《も》り土《ど》/切《き》り土《ど》 ④埋《う》め戻《もど》し ⑤締《し》め固《しめかた》め ⑥法面《のりめん》=lereng.",
-  _origIndex: 1486
+  usage: '掘削《くっさく》・運搬《うんぱん》・盛り土・締固め・法面整形《のりめんせいけい》・埋め戻しの6作業《ろくさぎょう》が土工事《どこうじ》の基本《きほん》だ（6 pekerjaan dasar earthwork: gali, angkut, timbun, padatkan, bentuk lereng, dan urug kembali）',
+    _origIndex: 1486
   },
 {
   id: 1331,
@@ -724,10 +759,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ほそうこうじのよんそうこうぞうきそうをわすれずに",
   jp: "舗装工事の4層構造《ほそうこうじのよんそうこうぞうきそうをわすれずに》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 lapisan perkerasan (konstruksi)",
   desc: "①路床《ろしょう》 ②路盤《ろばん》=batu pecah ③基層《きそう》=aspal pertama ④表層《ひょうそう》=aspal atas.\n基層《きそう》sering terlupa!",
-  _origIndex: 1487
+  usage: '路床《ろしょう》・路盤・基層・表層の4層《よんそう》で舗装《ほそう》を構成《こうせい》する（bangun perkerasan dengan 4 lapisan sebagai standar konstruksi jalan）',
+    _origIndex: 1487
   },
 {
   id: 1332,
@@ -735,10 +771,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "とびこうじのろくしゅるい",
   jp: "とび工事の6種類《とびこうじのろくしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "6 jenis pekerjaan tobi",
   desc: "Spesialis tali baja di ketinggian: 足場《あしば》, 鉄骨《てっこつ》, 橋《はし》梁《きょうりょう》, 重量《じゅうりょう》, 送電《そうでん》, 町場《まちば》.",
-  _origIndex: 1488
+  usage: '仮設工事《かせつこうじ》・建方《たてかた》・鳶工事《とびこうじ》・コンクリート工事《こうじ》など6種類《ろくしゅるい》のとび工事《こうじ》を理解《りかい》する（pahami 6 jenis pekerjaan tobi dari sementara hingga cor beton）',
+    _origIndex: 1488
   },
 {
   id: 1333,
@@ -746,10 +783,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "かいよどぼくのよんこうじしゅんせつうめたてがんぺきぼおはていけえそん",
   jp: "海洋土木の4工事《かいよどぼくのよんこうじしゅんせつうめたてがんぺきぼおはていけえそん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 pekerjaan sipil laut",
   desc: "①浚渫《しゅんせつ》=keruk dasar ②埋立《うめたて》=reklamasi ③岸壁《がんぺき》=dermaga ④防波堤《ぼうはてい》=pemecah gelombang+caisson.",
-  _origIndex: 1489
+  usage: '浚渫《しゅんせつ》・埋立《うめたて》・岸壁《がんぺき》・防波堤《ぼうはてい》の4つが海洋土木工事《かいようどぼくこうじ》の代表《だいひょう》だ（4 pekerjaan sipil laut utama: pengerukan, reklamasi, quay wall, dan breakwater）',
+    _origIndex: 1489
   },
 {
   id: 1340,
@@ -803,10 +841,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ぶれすらあめんとらす",
   jp: "鉄骨構造の種類《ぶれすらあめんとらす》（ブレース・ラーメン・トラス）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 jenis struktur baja",
   desc: "①ブレース: diagonal brace. ②ラーメン: sambungan kaku kolom-balok, tahan gempa.\n③トラス: susunan segitiga untuk",
-  _origIndex: 1504
+  usage: 'ブレース・ラーメン・トラスの3種類《さんしゅるい》の鉄骨構造《てっこつこうぞう》を理解《りかい》する（pahami 3 jenis struktur baja: braced frame, rigid frame, dan truss）',
+    _origIndex: 1504
   },
 {
   id: 1349,
@@ -814,10 +853,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "たてにげほうしき vs すいへいつみあげほうしき",
   jp: "建て逃げ方式《たてにげほうしき》 vs 水平積み上げ方式《すいへいつみあげほうしき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Erection baja",
   desc: "建《た》て逃《に》げ: mobile crane, dari belakang ke depan.\n水平積《すいへいつ》み上《うえ》げ: tower crane, lantai per lantai",
-  _origIndex: 1505
+  usage: '建て逃げ方式《たてにげほうしき》と水平積み上げ方式《すいへいつみあげほうしき》の2つの鉄骨建方《てっこつたてかた》を使い分《つかいわ》ける（bedakan 2 metode erection baja: advance per span dan horizontal stacking）',
+    _origIndex: 1505
   },
 {
   id: 1350,
@@ -825,10 +865,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "すいしんとんねる",
   jp: "推進トンネル《すいしんトンネル》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Terowongan jack-push",
   desc: "Pipa prefabrikasi didorong ke tanah oleh jack dari shaft peluncur.\nDigunakan untuk infrastruktur",
-  _origIndex: 1506
+  usage: '推進工法《すいしんこうほう》で立坑《たてこう》から水平《すいへい》に管《かん》を押《お》し進める（dorong pipa secara horizontal dari shaft vertikal menggunakan jack-push method）',
+    _origIndex: 1506
   },
 {
   id: 1351,
@@ -836,10 +877,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "けんちくぶつのこうぞうしゅるい",
   jp: "建築物の構造種類《けんちくぶつのこうぞうしゅるい》（RC・S・SRC・木造《もくぞう》・CB造《ぞう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 jenis struktur (RC,S,SRC,kayu,CB)",
   desc: "RC造《ぞう》=tulangan+beton, S造《つく》り=baja, SRC造《つく》り=baja+RC (terkuat), 木造《もくぞう》=kayu, CB造《つく》り=blok",
-  _origIndex: 1507
+  usage: 'RC造・S造・SRC造・木造・CB造の5種類《ごしゅるい》の構造《こうぞう》から適切《てきせつ》なものを選《えら》ぶ（pilih jenis struktur yang sesuai dari 5 opsi: RC, S, SRC, kayu, dan CB）',
+    _origIndex: 1507
   },
 {
   id: 1352,
@@ -871,10 +913,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "てっきんつぎてこうじしゅるい",
   jp: "鉄筋継手工事の4種類《てっきんつぎて》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 metode penyambungan",
   desc: "①ガス圧接《あっせつ》=panas+tekan (umum). ②溶接《ようせつ》継手《つぎて》=las busur.\n③機械式《きかいしき》=coupler berulir.",
-  _origIndex: 1510
+  usage: '重ね継手《かさねつぎて》・圧接《あっせつ》・機械式継手《きかいしきつぎて》・溶接継手《ようせつつぎて》の4種類《よんしゅるい》から選《えら》ぶ（pilih dari 4 jenis sambungan tulangan: lap joint, pressure weld, mechanical, dan welding）',
+    _origIndex: 1510
   },
 {
   id: 1355,
@@ -906,10 +949,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "さかんこうじかべつちしっくいもるたる",
   jp: "左官工事《さかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Plesteran tradisional",
   desc: "Gunakan kote (roskam) untuk oleskan 壁土《かべつち》, 漆喰《しっくい》 (kapur), atau モルタル ke dinding/lantai.",
-  _origIndex: 1513
+  usage: '左官工事《さかんこうじ》でモルタルや漆喰《しっくい》を壁《かべ》や天井《てんじょう》に塗《ぬ》る（oleskan mortar atau plester kapur pada dinding dan langit-langit dalam pekerjaan plesteran）',
+    _origIndex: 1513
   },
 {
   id: 1358,
@@ -917,10 +961,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ぼうすいこうじしゅるい",
   jp: "防水工事の5種類《ぼうすいこうじしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 jenis waterproofing",
   desc: "①ウレタン=cairan. ②FRP=serat kaca+resin. ③シート=lembaran karet.\n④アスファルト=lembaran aspal. ⑤シーリング=sealant",
-  _origIndex: 1514
+  usage: 'シート防水・塗膜防水・アスファルト防水・モルタル防水・ウレタン防水の5種類《ごしゅるい》から選《えら》ぶ（pilih dari 5 jenis waterproofing: sheet, membran, asphalt, mortar, dan uretan）',
+    _origIndex: 1514
   },
 {
   id: 1359,
@@ -952,10 +997,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "とそうこうじほうほうはけろおらあえあすぷれえ",
   jp: "塗装工事の3方法《とそうこうじほうほうはけろおらあえあすぷれえ》（はけ・ローラー・エアスプレー）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 metode cat",
   desc: "①はけ塗《ぬ》り=kuas, cocok semua bentuk. ②ローラー=efisien area luas.\n③エアスプレー=cat dikabut kompresor untuk",
-  _origIndex: 1517
+  usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》で塗装《とそう》する（cat menggunakan 3 metode: kuas, roller, dan semprotan udara）',
+    _origIndex: 1517
   },
 {
   id: 1362,
@@ -963,10 +1009,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ぞおえんこうじしゅるい",
   jp: "造園工事の5種類《ぞおえんこうじしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 jenis pekerjaan",
   desc: "①植栽《しょくさい》=tanam pohon. ②屋上《うえ》緑化《おくじょうりょっか》=hijau atap/dinding.\n③広場《ひろば》. ④公園設備《こうえんせつび》.",
-  _origIndex: 1518
+  usage: '植栽《しょくさい》・樹木《じゅもく》・芝生《しばふ》・土工事《どこうじ》・園路《えんろ》の5種類《ごしゅるい》の造園工事《ぞおえんこうじ》を理解《りかい》する（pahami 5 jenis pekerjaan lansekap）',
+    _origIndex: 1518
   },
 {
   id: 1363,
@@ -998,10 +1045,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "いしこうじだいりいしみかげいしぎいし",
   jp: "石工事《いしこうじだいりいしみかげいしぎいし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan batu",
   desc: "大理石《だいりせき》=marmer, 御影石《みかげいし》=granit, 擬石《ぎせき》=batu tiruan.\nDipasang untuk estetika, bukan struktur.",
-  _origIndex: 1521
+  usage: '御影石《みかげいし》や大理石《だいりせき》などの石《いし》を壁《かべ》や床《ゆか》に張《は》る石工事《いしこうじ》を行《おこな》う（lakukan pekerjaan batu dengan memasang granit atau marmer pada dinding dan lantai）',
+    _origIndex: 1521
   },
 {
   id: 1366,
@@ -1009,10 +1057,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "こんくりいとあっそうこうじやくちいむわあく",
   jp: "コンクリート圧送工事の3役チームワーク《こんくりいとあっそうこうじやくちいむわあく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 peran tim cor beton",
   desc: "①オペレータ=operasikan pompa. ②筒先《つつさき》作業員《さぎょういん》=arahkan selang.\n③土工《どこう》作業員《さぎょういん》=操作《そうさ》 バイブレータ",
-  _origIndex: 1522
+  usage: 'コンクリート圧送《あっそう》工事《こうじ》では配管工《はいかんこう》・ポンプ工《こう》・打設工《だせつこう》の3役《やく》がチームで動《うご》く（dalam pekerjaan pompa beton, 3 peran: tukang pipa, operator pompa, dan tukang cor bekerja sebagai tim）',
+    _origIndex: 1522
   },
 {
   id: 1367,
@@ -1020,10 +1069,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "さかんしあげとぎだしあらいだし",
   jp: "左官仕上げ《さかんしあげとぎだしあらいだし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Finishing plester",
   desc: "研《と》ぎ出《だ》し=permukaan dipoles mengkilap.\n洗《あら》い出《だ》し=batu hias+semen, dicuci sikat agar batu",
-  _origIndex: 1523
+  usage: '研《と》ぎ出し《だし》・洗い出し《あらいだし》・漆喰《しっくい》などの左官仕上げ《さかんしあげ》技法《ぎほう》を使い分《つかいわ》ける（bedakan teknik finishing plester: poles, cuci, dan kapur）',
+    _origIndex: 1523
   },
 {
   id: 1368,
@@ -1043,10 +1093,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "たてぐのざいりょうしゅるい・じどうどあ",
   jp: "建具の材料種類《たてぐのざいりょうしゅるい》 + シャッター・自動ドア《じどうどあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Material kusen/pintu +",
   desc: "建具《たてぐ》=semua pemasangan di bukaan (pintu, jendela, fusuma, shoji).\nMaterial: kayu, aluminium,",
-  _origIndex: 1525
+  usage: '木製《もくせい》・鋼製《こうせい》・アルミ製《せい》建具《たてぐ》やシャッター・自動ドアの種類《しゅるい》を理解《りかい》する（pahami jenis kusen dari kayu, baja, aluminium serta shutter dan pintu otomatis）',
+    _origIndex: 1525
   },
 {
   id: 1370,
@@ -1078,10 +1129,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "けんちくぶつのこうぞうごしゅるい",
   jp: "建築物の構造5種類《けんちくぶつのこうぞうごしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 jenis struktur bangunan",
   desc: "RC造《ぞう》=tulangan+beton. S造《つく》り=baja. SRC造《つく》り=baja+RC, gedung tinggi.\n木造《もくぞう》=kayu. CB造《つく》り=blok",
-  _origIndex: 1535
+  usage: 'RC造・S造・SRC造・木造・CB造の5種類《ごしゅるい》の構造《こうぞう》を種別《しゅべつ》に理解《りかい》する（pahami 5 jenis struktur bangunan berdasarkan materialnya）',
+    _origIndex: 1535
   },
 {
   id: 1380,
@@ -1100,10 +1152,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "たいしん・せいしん・めんしん",
   jp: "耐震《たいしん》・制振《せいしん》・免振《めんしん》の3種類（地震《じしん》対策《たいさく》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 metode proteksi gempa",
   desc: "①耐震《たいしん》=perkuat kolom & balok. ②制振《せいしん》=ダンパー kurangi goyangan.\n③免振《めんしん》=アイソレータ di fondasi,",
-  _origIndex: 1537
+  usage: '耐震《たいしん》・制振《せいしん》・免振《めんしん》の3つの地震対策《じしんたいさく》を選択《せんたく》する（pilih salah satu dari 3 pendekatan proteksi seismik: tahan, reduksi, atau isolasi）',
+    _origIndex: 1537
   },
 {
   id: 1382,
@@ -1111,10 +1164,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "てっきんひつぎてのよんしゅるい",
   jp: "鉄筋継手の4種類《てっきんひつぎてのよんしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 jenis sambungan besi",
   desc: "①ガス圧接《あっせつ》=panas+tekan (umum). ②溶接《ようせつ》=las busur.\n③機械式《きかいしき》=coupler berulir. ④重《かさ》ね=tumpuk",
-  _origIndex: 1538
+  usage: '4種類《よんしゅるい》の鉄筋継手《てっきんつぎて》の特徴《とくちょう》を理解《りかい》して選《えら》ぶ（pahami karakteristik 4 jenis sambungan tulangan lalu pilih yang sesuai）',
+    _origIndex: 1538
   },
 {
   id: 1383,
@@ -1122,10 +1176,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "かたわくこうじとしほこうかたわくだいく",
   jp: "型枠工事と支保工《かたわくこうじとしほこう》（かたわく大工《だいく》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bekisting & perancah",
   desc: "Cetakan kayu dibuat 型《かた》枠大工《かたわくだいく》. Beton cair → tekanan besar → perkuat 支保工《しほこう》.\nSetelah menge",
-  _origIndex: 1539
+  usage: '型枠工事《かたわくこうじ》と支保工《しほこう》をセットで施工《せこう》する（pasang bekisting bersama shoring sebagai satu kesatuan pekerjaan）',
+    _origIndex: 1539
   },
 {
   id: 1384,
@@ -1133,10 +1188,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "こんくりいとあっそうこうじとさんしゃちいむわあく",
   jp: "コンクリート圧送工事と3者チームワーク《こんくりいとあっそうこうじとさんしゃちいむわあく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cor pompa beton",
   desc: "生《なま》コン → truk アジテータ → ポンプ車《しゃ》.\n3 peran: ①オペレータ(pompa) ②筒先《つつさき》(selang) ③土工《どこう》(振動機《しんどうき》).",
-  _origIndex: 1540
+  usage: '圧送車《あっそうしゃ》・ポンプ工・打設工の3者《さんしゃ》でコンクリート圧送《あっそう》を実施《じっし》する（laksanakan pengecoran pompa dengan 3 pihak: truk pompa, operator pompa, dan tukang cor）',
+    _origIndex: 1540
   },
 {
   id: 1385,
@@ -1144,10 +1200,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "さかんこうじととくしゅしあげとぎだしあらいだししっくい",
   jp: "左官工事《さかんこうじ》（研《と》ぎ出《だ》し・洗《あら》い出《だ》し・漆喰《しっくい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Plester + 2 teknik",
   desc: "左官《さかん》工事《こうじ》=oles 壁土《かべつち》/モルタル/漆喰《しっくい》 pakai こて.",
-  _origIndex: 1541
+  usage: '研《と》ぎ出し・洗い出し・漆喰《しっくい》塗りの3技法《さんぎほう》で左官仕上げ《さかんしあげ》をする（lakukan finishing plester dengan 3 teknik: poles, cuci, dan plester kapur）',
+    _origIndex: 1541
   },
 {
   id: 1386,
@@ -1167,10 +1224,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ないそうしあげこうじぼおどくろすゆかかあてん",
   jp: "内装仕上げ工事《ないそうしあげこうじ》（LGS・ボード・クロス・床《ゆか》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan finishing interior",
   desc: "①LGS/軽天《けいてん》=rangka baja ringan. ②ボード=papan gypsum+pate. ③クロス=wallpaper.\n④塗装《とそう》仕上《うえ》げ.",
-  _origIndex: 1543
+  usage: 'LGS・ボード・クロス・フローリングで内装《ないそう》を仕上《しあ》げる（selesaikan interior dengan LGS, papan gypsum, wallpaper, dan flooring）',
+    _origIndex: 1543
   },
 {
   id: 1388,
@@ -1190,10 +1248,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "けんちくだいくこうじのしゅるいまちぞうさくみや",
   jp: "建築大工工事の種類《けんちくだいくこうじのしゅるい》（町大工《まちだいく》・造作大工《ぞうさくだいく》・宮大工《みやだいく》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 jenis tukang kayu",
   desc: "①町大工《まちだいく》=rumah tinggal biasa. ②造《つく》り作大工《ぞうさくだいく》=pasang pintu/interior.\n③宮大工《みやだいく》=kuil/shrine,",
-  _origIndex: 1545
+  usage: '町大工《まちだいく》・造作大工《ぞうさくだいく》・宮大工《みやだいく》の3種類《さんしゅるい》の建築大工《けんちくだいく》の専門《せんもん》を理解《りかい》する（pahami 3 spesialisasi tukang kayu bangunan）',
+    _origIndex: 1545
   },
 {
   id: 1390,
@@ -1201,10 +1260,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "やねこうじ：かわらぶきあまじまい",
   jp: "屋根工事：瓦ぶき《かわらぶき》と雨仕舞い《あまじまい》 + 5種の屋根工事",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan atap",
   desc: "瓦《かわら》=genteng tanah liat. 雨仕舞《あまじまい》い=alirkan air hujan, wajib dikuasai.",
-  _origIndex: 1546
+  usage: '瓦《かわら》・金属《きんぞく》・スレートなどの屋根材《やねざい》を雨仕舞《あまじまい》に注意《ちゅうい》して葺《ふ》く（pasang material atap seperti genteng, metal, dan slate dengan memperhatikan detail waterproofing）',
+    _origIndex: 1546
   },
 {
   id: 1391,
@@ -1212,10 +1272,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "いしこうじいしくだいりせきみかげいしぎいせき",
   jp: "石工事《いしこうじ》（石工《いしく》・大理石《だいりせき》・御影石《みかげいし》・擬石《ぎいし》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pasang batu alam/buatan",
   desc: "大理石《だいりせき》(marmer), 御影石《みかげいし》(granit), 擬石《ぎせき》(tiruan) dipasang untuk estetika bukan struktur.",
-  _origIndex: 1547
+  usage: '石工《いしく》が大理石《だいりせき》・御影石《みかげいし》・擬石《ぎいし》を施工図《せこうず》通りに張《は》る（tukang batu memasang marmer, granit, dan batu imitasi sesuai gambar kerja）',
+    _origIndex: 1547
   },
 {
   id: 1400,
@@ -1223,10 +1284,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "どうろこうじ",
   jp: "道路工事《どうろこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan jalan",
   desc: "Membuat/memperbaiki jalan: aspal, rambu (標識《ひょうしき》), lampu lalu lintas, trotoar, marka.",
-  _origIndex: 1556
+  usage: '道路工事《どうろこうじ》で舗装《ほそう》・側溝《そっこう》・歩道《ほどう》を施工《せこう》する（pasang perkerasan, parit, dan trotoar dalam pekerjaan jalan）',
+    _origIndex: 1556
   },
 {
   id: 1401,
@@ -1234,10 +1296,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "ひょうそうこうじ",
   jp: "表装工事《ひょうそうこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan pelapis",
   desc: "Bagian 内装仕上《ないそうしあ》げ工事《こうじ》, TIDAK termasuk LGS.\n5 jenis: 壁仕上《かべしあ》げ, 天井《てんじょう》, 床《ゆか》, 塗装《とそう》,",
-  _origIndex: 1557
+  usage: '表装工事《ひょうそうこうじ》でクロス・カーペット・和紙《わし》などを壁《かべ》に張《は》る（pasang wallpaper, karpet, dan kertas Jepang pada dinding dalam pekerjaan surface covering）',
+    _origIndex: 1557
   },
 {
   id: 27,
@@ -1453,10 +1516,11 @@ export const CARDS_CH3 = [
   source: "jac-ch3",
   furi: "とそうこうじのさんこうほう",
   jp: "塗装工事の3工法《とそうこうじのさんこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 metode pengecatan",
   desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut",
-  _origIndex: 637
+  usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》から現場《げんば》に適《てき》した塗装《とそう》方法《ほうほう》を選《えら》ぶ（pilih metode pengecatan yang sesuai dengan kondisi lapangan dari 3 opsi）',
+    _origIndex: 637
   },
 {
   id: 558,

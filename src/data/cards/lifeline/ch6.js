@@ -136,10 +136,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "がすようせつせつごうほう",
   jp: "ガス溶接接合法《ガスようせつせつごうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Las gas untuk pipa kecil",
   desc: "3 jenis las gas: oksigen-asetilen, oksigen-hidrogen, udara-asetilen; untuk pipa diameter kecil.",
-  _origIndex: 506
+  usage: 'ガス溶接《ようせつ》接合法《せつごうほう》で小口径管《しょうこうけいかん》（50A以下《いか》）を溶接《ようせつ》接合《せつごう》する（sambungkan pipa kecil ≤50A menggunakan metode pengelasan gas）',
+    _origIndex: 506
   },
 {
   id: 437,
@@ -147,10 +148,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ひふくああくようせつせつごうほう",
   jp: "被覆アーク溶接接合法《ひふくああくようせつせつごうほう》（SMAW）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Las SMAW untuk pipa ≥100A",
   desc: "Las dengan elektroda berlapis fluks untuk melindungi logam cair; digunakan untuk pipa ≥100A.",
-  _origIndex: 507
+  usage: 'SMAW（被覆アーク溶接《ひふくああくようせつ》）で100A以上《いじょう》の管《かん》を接合《せつごう》する（sambungkan pipa ≥100A menggunakan las SMAW）',
+    _origIndex: 507
   },
 {
   id: 438,
@@ -631,10 +633,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ほおんこうじのばしょべつしあげしゅるい",
   jp: "保温工事の場所別仕上げ《ほおんこうじのばしょべつしあげ》（4種類《しゅるい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Finishing insulasi pipa",
   desc: "①天井《てんじょう》内《うち》/隠蔽《いんぺい》部《ぶ》: ALGC/ALK ②屋内《おくない》露出《ろしゅつ》: 合成樹脂《ごうせいじゅし》カバー/ラッキング",
-  _origIndex: 714
+  usage: '屋外露出《おくがいろしゅつ》・屋内隠蔽《おくないいんぺい》・地中埋設《ちちゅうまいせつ》など場所《ばしょ》に応《おう》じた保温仕上げ《ほおんしあげ》を選《えら》ぶ（pilih finishing insulasi yang sesuai untuk lokasi: terbuka luar, tersembunyi dalam, atau tanam）',
+    _origIndex: 714
   },
 {
   id: 605,
@@ -642,10 +645,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "だくとのほおんほれいこうじ",
   jp: "ダクトの保温保冷工事《だくとのほおんほれいこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Insulasi termal duct",
   desc: "Melilit insulasi pada duct meningkatkan efisiensi HVAC dan hemat energi.\nTanpa insulasi, kondensasi",
-  _origIndex: 715
+  usage: '空調ダクト《くうちょうだくと》に保温材《ほおんざい》を巻《ま》いて結露《けつろ》と熱損失《ねつそんしつ》を防《ふせ》ぐ（balut duct AC dengan insulasi untuk mencegah kondensasi dan kehilangan panas）',
+    _origIndex: 715
   },
 {
   id: 606,
@@ -653,10 +657,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "さしこみつぎてこうほう《まるだくと》",
   jp: "差し込み継手工法《さしこみつぎてこうほう》（丸ダクト《まるだくと》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Insert joint duct bulat",
   desc: "丸《まる》ダクト disambung dengan ニップル → kencangkan 2–3 baut → balut duct tape.\nPENTING: jangan pasang",
-  _origIndex: 716
+  usage: '丸ダクト《まるだくと》を差し込み継手《さしこみつぎて》工法《こうほう》で素早《すばや》く接続《せつぞく》する（sambungkan duct bulat dengan cepat menggunakan insert joint method）',
+    _origIndex: 716
   },
 {
   id: 607,
@@ -664,10 +669,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "がすようせつのさんしゅるい",
   jp: "ガス溶接の3種類《がすようせつのさんしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 jenis las gas",
   desc: "①酸素《さんそ》アセチレン溶接《ようせつ》(paling umum) ②酸素《さんそ》水素《すいそ》溶接《ようせつ》 ③空気《くうき》アセチレン溶接《ようせつ》.\nBanyak digunakan",
-  _origIndex: 717
+  usage: '酸素・アセチレン炎《えん》を使《つか》うガス溶接《ようせつ》の3種類《さんしゅるい》（中性炎《ちゅうせいえん》・酸化炎《さんかえん》・炭化炎《たんかえん》）を使い分《つかいわ》ける（bedakan 3 jenis nyala api las gas: netral, oksidasi, dan karburasi）',
+    _origIndex: 717
   },
 {
   id: 608,
@@ -675,10 +681,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "こうしつえんかびにるかん《せっちゃくざいせつごう》",
   jp: "硬質塩化ビニル管《こうしつえんかびにるかん》（接着剤接合《せっちゃくざいせつごう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa PVC keras",
   desc: "Setelah masukkan継手《つぎて》, tahan 10 detik tanpa melepas tekanan.\nJika tidak ditahan, pipa terdorong",
-  _origIndex: 718
+  usage: '硬質塩化ビニル管《こうしつえんかびにるかん》を接着剤《せっちゃくざい》で接合《せつごう》してから養生《ようじょう》する（sambungkan pipa PVC keras dengan adhesif lalu biarkan mengering）',
+    _origIndex: 718
   },
 {
   id: 609,
@@ -686,10 +693,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "こうしつえんかびにるかんのめんとり",
   jp: "硬質塩化ビニル管の面取り《こうしつえんかびにるかんのめんとり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Chamfering pipa PVC",
   desc: "Setelah dipotong, bevel dalam dan luar agar pipa mudah masuk ke fitting.\nUntuk pipa air",
-  _origIndex: 719
+  usage: '硬質塩化ビニル管《こうしつえんかびにるかん》の切断面《せつだんめん》を面取り《めんとり》してから接合《せつごう》する（buat chamfer pada ujung potongan pipa PVC sebelum disambung）',
+    _origIndex: 719
   },
 {
   id: 610,
@@ -697,10 +705,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ねじこみはいかん《つうすいはようじょうご》",
   jp: "ねじ込み配管《ねじこみはいかん》（通水は養生後《つうすいはようじょうご》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa ulir",
   desc: "Setelah シール剤《ざい》dan ねじ込《こ》み selesai, aliran air通水《つうすい》hanya boleh dilakukan setelah curing cukup.",
-  _origIndex: 720
+  usage: 'ねじ込み配管《ねじこみはいかん》は通水《つうすい》前《まえ》に養生《ようじょう》期間《きかん》を設ける（beri waktu curing pada pipa ulir sebelum mengalirkan air）',
+    _origIndex: 720
   },
 {
   id: 611,
@@ -754,10 +763,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "GXがただくたいるちゅうてつかんのまがりはいかん",
   jp: "GX形ダクタイル鋳鉄管の曲げ配管《GXがただくたいるちゅうてつかんのまがりはいかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Ductile iron GX",
   desc: "Setelah disambung, tiap pipa bisa ditekuk maksimal 2°.\nJangan tekuk di satu sambungan saja — bagi",
-  _origIndex: 725
+  usage: 'GX形ダクタイル鋳鉄管《こうかん》を緩やかな曲線《きょくせん》で曲げ配管《まがりはいかん》する（buat instalasi pipa lengkung menggunakan pipa ductile iron GX）',
+    _origIndex: 725
   },
 {
   id: 616,
@@ -856,10 +866,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "しぎょうまえてんけん",
   jp: "始業前点検《しぎょうまえてんけん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemeriksaan awal kerja",
   desc: "Cek ①mesin ②alat ③prosedur wajib sebelum kerja. Kecelakaan sering terjadi saat menangani alat.",
-  _origIndex: 117
+  usage: '始業前《しぎょうまえ》に機械《きかい》・工具《こうぐ》・保護具《ほごぐ》の点検《てんけん》を行《おこな》う（lakukan pemeriksaan mesin, perkakas, dan APD sebelum memulai kerja）',
+    _origIndex: 117
   },
 {
   id: 413,
@@ -1001,10 +1012,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "きじゅんすみ・おやすみ",
   jp: "基準墨《きじゅんずみ》・親墨《おやずみ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 jenis sumidashi",
   desc: "①基準《きじゅん》墨《すみ》 = acuan posisi, ketinggian, dan通《とお》り芯《しん》.",
-  _origIndex: 495
+  usage: '親墨《おやずみ》・基準墨《きじゅんずみ》・逃げ墨《にげずみ》の3種類《さんしゅるい》の墨《すみ》を理解《りかい》する（pahami 3 jenis garis sumidashi: garis induk, garis referensi, dan garis offset）',
+    _origIndex: 495
   },
 {
   id: 427,
@@ -1024,10 +1036,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ぐんてでのねじかこうぜったいきんし",
   jp: "軍手でのねじ加工は絶対禁止《ぐんてでのねじかこうぜったいきんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sarung tangan kain saat",
   desc: "Menggunakan 軍手《ぐんて》 (sarung tangan kain) saat mengoperasikan mesin ulir sangat berbahaya — tangan",
-  _origIndex: 499
+  usage: '軍手《ぐんて》でのねじ加工《かこう》は巻き込まれ《まきこまれ》の危険《きけん》があるため絶対禁止《ぜったいきんし》だ（pengerjaan ulir menggunakan sarung tangan kain dilarang mutlak karena risiko tergulung）',
+    _origIndex: 499
   },
 {
   id: 433,
@@ -1059,10 +1072,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "らいにんぐこうかんのがすようだんぜったいきんし",
   jp: "ライニング鋼管のガス溶断絶対禁止《らいにんぐこうかんのがすようだんぜったいきんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "DILARANG: las gas pada pipa lining",
   desc: "Pemotongan ライニング鋼管《こうかん》 dengan ガス溶断《ようだん》 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak",
-  _origIndex: 513
+  usage: 'ライニング鋼管《こうかん》をガス溶断《ようだん》すると有毒《ゆうどく》ガスが発生《はっせい》するため絶対禁止《ぜったいきんし》だ（pemotongan pipa baja berlapis dengan api las gas dilarang mutlak karena menghasilkan gas beracun）',
+    _origIndex: 513
   },
 {
   id: 446,
@@ -1070,10 +1084,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "かのこ・きんし",
   jp: "銅管の切断に金ノコ《かのこ》・グラインダー禁止《きんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "DILARANG: gergaji/gerinda pada pipa tembaga",
   desc: "Memotong pipa tembaga (銅管《どうかん》) dengan 金《かな》ノコ atau グラインダー menghasilkan serbuk logam di dalam pipa",
-  _origIndex: 516
+  usage: '銅管《どうかん》の切断《せつだん》に金ノコ《かのこ》やグラインダーを使用禁止《しようきんし》として丸鋸《まるのこ》か専用工具《せんようこうぐ》を使《つか》う（dilarang menggunakan gergaji besi atau gerinda pada pipa tembaga, gunakan gergaji bulat atau alat khusus）',
+    _origIndex: 516
   },
 {
   id: 461,
@@ -1093,10 +1108,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "ちかまいせつぶつひょうじしいとのいろこおど",
   jp: "地下埋設物表示シートの色コード《ちかまいせつぶつひょうじしいとのいろこおど》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kode warna lembar",
   desc: "Dipasang antara utilitas dan permukaan tanah sebagai peringatan saat penggalian.",
-  _origIndex: 532
+  usage: '地下埋設物《ちかまいせつぶつ》の表示シートの色《いろ》（ガス=黄《きいろ》・水道=青《あお》・電力=赤《あか》）を確認《かくにん》する（periksa warna lembar penanda utilitas bawah tanah: gas=kuning, air=biru, listrik=merah）',
+    _origIndex: 532
   },
 {
   id: 463,
@@ -1104,10 +1120,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく",
   jp: "既存埋設管周辺50cm以内は人力掘削《きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Radius 50 cm dari",
   desc: "Dalam radius 50 cm dari utilitas yang sudah ada wajib beralih ke penggalian manual (人力《じんりき》).",
-  _origIndex: 533
+  usage: '既存埋設管《きそんまいせつかん》の周辺《しゅうへん》50cm以内《いない》は人力《じんりき》で掘削《くっさく》する（gali secara manual dalam radius 50 cm dari pipa existing bawah tanah）',
+    _origIndex: 533
   },
 {
   id: 464,
@@ -1199,10 +1216,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch6",
   furi: "とんねるのよんしゅるいこうほうでぶんるい",
   jp: "トンネルの4種類《しゅるい》（工法《こうほう》で分類《ぶんるい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 jenis terowongan",
   desc: "①山岳《さんがく》=NATM di gunung. ②開削《かいさく》=gali-tutup. ③シールド=mesin+segmen, tanah lunak. ④推進《すいしん》=pipa",
-  _origIndex: 1481
+  usage: 'NATM・シールド・推進・開削の4種類《よんしゅるい》のトンネル工法《こうほう》を使い分《つかいわ》ける（bedakan penggunaan 4 metode terowongan: NATM, shield, jack-push, dan cut-and-cover）',
+    _origIndex: 1481
   },
 {
   id: 628,
@@ -1393,7 +1411,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Material / bahan",
   desc: "Bahan yang digunakan dalam konstruksi.\nWarna material sering muncul sebagai",
-  _origIndex: 817
+  usage: '保温《ほおん》工事《こうじ》で使用《しよう》する材料《ざいりょう》の仕様書《しようしょ》を事前《じぜん》に確認《かくにん》する（periksa spesifikasi material yang digunakan dalam pekerjaan insulasi terlebih dahulu）',
+    _origIndex: 817
   },
 {
   id: 721,
@@ -1464,7 +1483,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pekerjaan konstruksi",
   desc: "Pekerjaan konstruksi berskala proyek. Lebih besar dari 作業《さぎょう》 (operasi kerja",
-  _origIndex: 892
+  usage: '保温《ほおん》工事《こうじ》が完了《かんりょう》したら検査《けんさ》を受《う》けて記録《きろく》する（lakukan pemeriksaan dan catat setelah pekerjaan insulasi selesai）',
+    _origIndex: 892
   },
 {
   id: 859,
@@ -1475,7 +1495,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pipa air panas (suplai)",
   desc: "Pipa penyalur air panas ke keran, shower, dll. Berbeda dari 温水管《おんすいかん》.",
-  _origIndex: 986
+  usage: '給湯管《きゅうとうかん》には耐熱性《たいねつせい》のある材料《ざいりょう》を使《つか》う（gunakan material tahan panas untuk pipa suplai air panas）',
+    _origIndex: 986
   },
 {
   id: 864,
@@ -1498,7 +1519,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pengolesan pelumas",
   desc: "Melumasi bagian sambungan pipa agar mudah dimasukkan. Penting dalam pemasangan",
-  _origIndex: 1007
+  usage: '接合前《せつごうまえ》に管端《かんたん》のゴムリングに滑剤《かつざい》を塗布《とふ》する（oleskan pelumas pada ring karet ujung pipa sebelum disambung）',
+    _origIndex: 1007
   },
 {
   id: 882,
@@ -1509,7 +1531,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pemasangan cincin karet",
   desc: "Memasang o-ring/gasket karet pada alur pipa sebelum penyambungan untuk mencegah",
-  _origIndex: 1009
+  usage: '挿入前《そうにゅうまえ》にゴム輪《ごむわ》を溝《みぞ》に正確《せいかく》にセットする（set ring karet dengan tepat pada alur sebelum pemasukan pipa）',
+    _origIndex: 1009
   },
 {
   id: 883,
@@ -1520,7 +1543,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Posisi cincin karet",
   desc: "Pastikan cincin karet berada pada posisi yang benar di alur pipa. Posisi salah",
-  _origIndex: 1010
+  usage: '挿入後《そうにゅうご》にゴム輪《ごむわ》の位置《いち》が正常《せいじょう》かを確認《かくにん》する（periksa posisi ring karet setelah pemasukan pipa）',
+    _origIndex: 1010
   },
 {
   id: 884,
@@ -1531,7 +1555,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Persiapan fusi",
   desc: "Langkah-langkah persiapan sebelum proses electrofusion welding pada pipa",
-  _origIndex: 1011
+  usage: 'EF接合《せつごう》の融着前《ゆうちゃくまえ》にコントローラとバーコードを準備《じゅんび》する（siapkan controller dan barcode sebelum proses fusion pada EF joint）',
+    _origIndex: 1011
   },
 {
   id: 886,
@@ -1542,7 +1567,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Soket EF",
   desc: "Fitting elektrofusi dengan kawat pemanas internal. Untuk menyambung pipa",
-  _origIndex: 1013
+  usage: 'EFソケットにポリエチレン管《かん》を挿入《そうにゅう》して電気融着《でんきゆうちゃく》する（masukkan pipa polietilen ke EF socket lalu lakukan fusion listrik）',
+    _origIndex: 1013
   },
 {
   id: 893,
@@ -1553,7 +1579,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Metode sambungan duct",
   desc: "Cara menyambung saluran udara (ducting). Termasuk metode flange dan tanpa",
-  _origIndex: 1020
+  usage: 'ダクトの接続方法《せつぞくほうほう》をアングルフランジ・共板・スライドオンから選《えら》ぶ（pilih metode sambungan duct dari angle flange, shared plate, atau slide-on）',
+    _origIndex: 1020
   },
 {
   id: 894,
@@ -1564,7 +1591,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Flensa bersudut",
   desc: "Flange dari besi siku yang dipasang di tepi duct untuk penyambungan dengan baut.",
-  _origIndex: 1021
+  usage: 'アングルフランジを矩形ダクト《くけいだくと》の端部《たんぶ》に取《と》り付《つ》けて接続《せつぞく》する（pasang angle flange pada ujung duct persegi untuk disambung）',
+    _origIndex: 1021
   },
 {
   id: 904,
@@ -1575,7 +1603,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Cap / penutup ujung pipa",
   desc: "Tutup yang dipasang di ujung pipa untuk menutup aliran, biasanya saat uji",
-  _origIndex: 1032
+  usage: '配管《はいかん》の未使用末端《みしようまったん》にキャップを付《つ》けて閉塞《へいそく》する（tutup ujung pipa yang belum digunakan menggunakan cap）',
+    _origIndex: 1032
   },
 {
   id: 905,
@@ -1586,7 +1615,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Keran kecil / cock valve",
   desc: "Katup kecil pengatur aliran, lebih kecil dari バルブ. Buka perlahan untuk hindari",
-  _origIndex: 1033
+  usage: '機器《きき》の出入口《でいりぐち》にコックを設置《せっち》して流量《りゅうりょう》を制御《せいぎょ》する（pasang cock valve pada inlet/outlet peralatan untuk mengontrol aliran）',
+    _origIndex: 1033
   },
 {
   id: 908,
@@ -1597,7 +1627,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Koreksi kebulatan pipa",
   desc: "Proses mengembalikan bentuk pipa yang oval atau penyok menjadi bulat sempurna.",
-  _origIndex: 1036
+  usage: 'チューブベンダーで曲げ加工《まげかこう》した後《あと》に真円修正《しんえんしゅうせい》ツールで断面《だんめん》を整《ととの》える（perbaiki penampang menjadi lingkaran sempurna setelah penekukan menggunakan alat koreksi）',
+    _origIndex: 1036
   },
 {
   id: 909,
@@ -1608,7 +1639,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pemrosesan pipa",
   desc: "Semua proses pengerjaan pipa: potong, tekuk, chamfer, deburring, dll.",
-  _origIndex: 1037
+  usage: '管加工《かんかこう》（切断《せつだん》・面取り・曲げ）の順《じゅん》で管《かん》を仕上げる《しあげる》（selesaikan pengolahan pipa dengan urutan: potong, chamfer, lalu tekuk）',
+    _origIndex: 1037
   },
 {
   id: 932,
@@ -1619,7 +1651,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pompa air limbah",
   desc: "Pompa untuk mengalirkan air limbah/kotor dari gedung ke saluran pembuangan.",
-  _origIndex: 1060
+  usage: '排水ポンプ《はいすいポンプ》で水没《すいぼつ》した地下室《ちかしつ》の水《みず》を排除《はいじょ》する（pompa air dari ruang bawah tanah yang tergenang menggunakan pompa drainase）',
+    _origIndex: 1060
   },
 {
   id: 933,
@@ -1630,7 +1663,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pompa pendingin",
   desc: "Pompa sirkulasi air pendingin di sistem AC sentral atau chiller.",
-  _origIndex: 1061
+  usage: '冷却ポンプ《れいきゃくポンプ》で冷水《れいすい》を冷却塔《れいきゃくとう》と機器《きき》の間《あいだ》で循環《じゅんかん》させる（sirkulasikan air dingin antara cooling tower dan peralatan menggunakan cooling pump）',
+    _origIndex: 1061
   },
 {
   id: 937,
@@ -1641,7 +1675,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Tangki air bersih",
   desc: "Tangki penampung air bersih di gedung, biasanya di atap atau ruang bawah tanah.",
-  _origIndex: 1065
+  usage: '給水タンク《きゅうすいタンク》の水量《すいりょう》を定期的《ていきてき》に点検《てんけん》して清掃《せいそう》する（periksa volume air dan bersihkan tangki air bersih secara berkala）',
+    _origIndex: 1065
   },
 {
   id: 947,
@@ -1652,7 +1687,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Humidifier / pelembab",
   desc: "Alat untuk menambah kelembaban udara ruangan. Bagian dari sistem HVAC.",
-  _origIndex: 1075
+  usage: '乾燥《かんそう》する季節《きせつ》に加湿器《かしつき》を稼働《かどう》させて室内《しつない》湿度《しつど》を管理《かんり》する（operasikan humidifier saat musim kering untuk mengelola kelembapan ruangan）',
+    _origIndex: 1075
   },
 {
   id: 631,
@@ -1735,7 +1771,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Duct / saluran udara",
   desc: "Saluran untuk mengalirkan udara dalam sistem HVAC; terbuat dari logam atau",
-  _origIndex: 1029
+  usage: '空調の風管《ふうかん》（ダクト）を断熱《だんねつ》して空調《くうちょう》効率《こうりつ》を高《たか》める（tingkatkan efisiensi AC dengan mengisolasi duct）',
+    _origIndex: 1029
   },
 {
   id: 936,
@@ -1746,7 +1783,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pipa timah",
   desc: "Pipa dari timah hitam; sudah jarang dipakai karena berbahaya bagi kesehatan.",
-  _origIndex: 1064
+  usage: '鉛管《なまりかん》は健康《けんこう》リスクがあるため給水配管《きゅうすいはいかん》には使用禁止《しようきんし》だ（pipa timah dilarang digunakan untuk instalasi air bersih karena risiko kesehatan）',
+    _origIndex: 1064
   },
 {
   id: 1254,
@@ -1754,10 +1792,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch3",
   furi: "けんせつこうじのさんくぶん",
   jp: "建設工事の3区分《けんせつこうじのさんくぶん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 divisi pekerjaan konstruksi",
   desc: "土木工事《どぼくこうじ》=infrastruktur alam (bendungan, jalan, terowongan).\n建築工事《けんちくこうじ》=bangunan (gedung, rumah, rumah sakit).\nライフライン・設備工事《せつびこうじ》=utilitas vital (listrik, gas, air, komunikasi).",
-  _origIndex: 1410
+  usage: '土木《どぼく》・建築《けんちく》・設備工事《せつびこうじ》の3区分《さんくぶん》で建設工事《けんせつこうじ》を分類《ぶんるい》する（klasifikasikan pekerjaan konstruksi ke dalam 3 kategori: sipil, arsitektur, dan MEP）',
+    _origIndex: 1410
   },
 {
   id: 1255,
@@ -1791,7 +1830,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pekerjaan anti-kondensasi",
   desc: "Memasang insulasi pada pipa/saluran untuk mencegah 結露《けつろ》 (embun/kondensasi).\nTermasuk dalam cakupan 保温保冷工事《ほおんほれいこうじ》.\n対象: 断熱・保温・保冷・防露《ぼうろ》が必要な配管《はいかん》や設備《せつび》.",
-  _origIndex: 1413
+  usage: '防露工事《ぼうろこうじ》で結露《けつろ》が発生《はっせい》しやすい箇所《かしょ》に防湿《ぼうしつ》断熱材《だんねつざい》を施工《せこう》する（pasang insulasi tahan kelembapan di area yang rentan kondensasi dalam pekerjaan anti-kondensasi）',
+    _origIndex: 1413
   },
 {
   id: 1258,
@@ -1810,10 +1850,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch3",
   furi: "すいしんとんねるこうじ",
   jp: "推進トンネル工事《すいしんとんねるこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan terowongan jack-pipe",
   desc: "Memasang pipa bawah tanah tanpa gali terbuka: ジャッキで推進管《すいしんかん》を地中《ちちゅう》に圧入《あつにゅう》。\n主《おも》に都市部《としぶ》での社会基盤《しゃかいきばん》（下水道《げすいどう》・上水道《じょうすいどう》・電力《でんりょく》・通信《つうしん》・ガスなど）の管路《かんろ》に利用。",
-  _origIndex: 1415
+  usage: '推進工法《すいしんこうほう》で地表《ちひょう》を掘《ほ》らずに管《かん》を地中《ちちゅう》に布設《ふせつ》する（pasang pipa dalam tanah tanpa membuka permukaan menggunakan jack-push method）',
+    _origIndex: 1415
   },
 {
   id: 1260,
@@ -1824,7 +1865,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Jenis pipa jack-pipe",
   desc: "コンクリート管《かん》・ダクタイル管《かん》・鋼管《こうかん》の3種類《しゅるい》。\n推進機《すいしんき》の先端《せんたん》に取付《とりつ》け、ジャッキで地中《ちちゅう》に押込《おしこ》む。",
-  _origIndex: 1416
+  usage: '推進工法《すいしんこうほう》で使用《しよう》する推進管《すいしんかん》の種類《しゅるい》（ヒューム管《かん》・塩《えん》ビ管《かん》・鋼管）を選定《せんてい》する（pilih jenis pipa jack-push seperti hume pipe, PVC, atau baja）',
+    _origIndex: 1416
   },
 {
   id: 1261,
@@ -1846,7 +1888,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Tangki penerima air",
   desc: "配水管《はいすいかん》から供給《きょうきゅう》された水を一時貯留《いちじちょりゅう》するタンク。\nポンプで各階《かくかい》のトイレ・キッチンなどへ送水《そうすい》。\n給水設備工事《きゅうすいせつびこうじ》の一部。",
-  _origIndex: 1418
+  usage: '受水槽《じゅすいそう》で水道局《すいどうきょく》からの水《みず》を一時《いちじ》貯留《ちょりゅう》して建物《たてもの》内《ない》に供給《きょうきゅう》する（tampung sementara air dari PDAM di tangki penerima lalu distribusikan ke dalam bangunan）',
+    _origIndex: 1418
   },
 {
   id: 1263,
@@ -1857,7 +1900,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Sistem ventilasi pipa drainase",
   desc: "排水管《はいすいかん》内の気圧《きあつ》を安定《あんてい》させ、臭気《しゅうき》の逆流《ぎゃくりゅう》を防ぐ設備。\n排水・通気設備工事《はいすい・つうきせつびこうじ》は給排水衛生設備《きゅうはいすいえいせいせつび》の一部。",
-  _origIndex: 1419
+  usage: '排水立管《はいすいたてかん》に通気設備《つうきせつび》を接続《せつぞく》して排水《はいすい》をスムーズにする（hubungkan sistem ventilasi pipa ke pipa tegak drainase untuk memperlancar aliran）',
+    _origIndex: 1419
   },
 {
   id: 1264,
@@ -1868,7 +1912,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pekerjaan waterproofing uretan",
   desc: "液状《えきじょう》の防水材《ぼうすいざい》を塗布《とふ》。複雑な形状《けいじょう》にも対応可能。\n対象: ベランダ・バルコニー・屋上《おくじょう》・雨漏り補修《あまもりほしゅう》。\n防水工事5種類の1つ（ウレタン・FRP・シート・アスファルト・シーリング）。",
-  _origIndex: 1420
+  usage: 'ウレタン防水《ぼうすい》材《ざい》を塗布《とふ》してシームレスな防水層《ぼうすいそう》を形成《けいせい》する（oleskan material waterproofing uretan untuk membentuk lapisan kedap air tanpa sambungan）',
+    _origIndex: 1420
   },
 {
   id: 1265,
@@ -1879,7 +1924,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pekerjaan waterproofing FRP",
   desc: "ガラス繊維《せんい》マットを敷《し》き、ポリエステル樹脂《じゅし》を塗る工法。\n特長: 丈夫《じょうぶ》で乾燥《かんそう》が早い。\nFRP = Fiber Reinforced Plastics（繊維強化プラスチック）。",
-  _origIndex: 1421
+  usage: 'FRP（ガラス繊維《せんい》強化《きょうか》プラスチック）で防水層《ぼうすいそう》を形成《けいせい》する（bentuk lapisan kedap air menggunakan FRP）',
+    _origIndex: 1421
   },
 {
   id: 1266,
@@ -1890,7 +1936,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pekerjaan waterproofing sealing",
   desc: "部材間《ぶざいかん》の接合部《せつごうぶ》の隙間《すきま》を防水する工法。\n手順: 隙間《すきま》にプライマーを塗布《とふ》→シーリング材《ざい》を充填《じゅうてん》。\nサッシ周り・外壁目地《がいへきめじ》などに使用。",
-  _origIndex: 1422
+  usage: 'シーリング材《ざい》をサッシ周囲《しゅうい》や目地《めじ》に充填《じゅうてん》して防水《ぼうすい》する（isi sealant pada tepi kusen dan nat untuk waterproofing）',
+    _origIndex: 1422
   },
 {
   id: 1267,
@@ -1898,10 +1945,11 @@ export const CARDS_LIFELINE_CH6 = [
   source: "jac-ch3",
   furi: "さくせいこうじのしゅるい",
   jp: "さく井工事の種類《さくせいこうじのしゅるい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jenis pekerjaan pengeboran sumur",
   desc: "①水源井《すいげんせい》工事: 地下水《ちかすい》をくみ上げるボーリング。\n②観測井《かんそくせい》工事: 地盤沈下《じばんちんか》を観測《かんそく》するための井戸《いど》。\n③温泉井《おんせんせい》工事: 500〜1000m掘削—天然ガス対策《たいさく》で許可《きょか》が必要。\n④地熱井《ちねつせい》工事: 約2000m—高《たか》い技術《ぎじゅつ》が必要。",
-  _origIndex: 1423
+  usage: '水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》の4種類《よんしゅるい》のさく井工事《こうじ》を理解《りかい》する（pahami 4 jenis pekerjaan bor sumur berdasarkan tujuannya）',
+    _origIndex: 1423
   },
 {
   id: 1269,
@@ -1993,7 +2041,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Tangga evakuasi darurat",
   desc: "Tangga yang dipasang di jendela untuk turun menyusuri dinding luar saat lift",
-  _origIndex: 1085
+  usage: '避難はしご《ひなんはしご》を窓《まど》や外壁《がいへき》に設置《せっち》して火災時《かさいじ》の脱出《だっしゅつ》に備《そな》える（pasang tangga evakuasi pada jendela atau dinding luar sebagai jalur keluar saat kebakaran）',
+    _origIndex: 1085
   },
 {
   id: 960,
@@ -2004,7 +2053,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Fire damper",
   desc: "Dipasang di titik duct yang menembus dinding tahan api.\nMenutup otomatis saat",
-  _origIndex: 1088
+  usage: '防火ダンパーが火災《かさい》時《じ》に自動閉鎖《じどうへいさ》してダクト経路《けいろ》からの延焼《えんしょう》を防《ふせ》ぐ（fire damper menutup otomatis saat kebakaran untuk mencegah perambatan melalui jalur duct）',
+    _origIndex: 1088
   },
 {
   id: 963,
@@ -2015,7 +2065,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pompa pemadam kebakaran",
   desc: "Menyuplai air bertekanan ke hidran dan sprinkler.",
-  _origIndex: 1091
+  usage: '消火ポンプ《しょうかポンプ》が自動起動《じどうきどう》して消火設備《しょうかせつび》に水《みず》を送《おく》る（pompa pemadam start otomatis dan mengalirkan air ke sistem proteksi kebakaran）',
+    _origIndex: 1091
   },
 {
   id: 966,
@@ -2026,7 +2077,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Tombol alarm kebakaran",
   desc: "Ditekan saat melihat api untuk mengaktifkan alarm; berwarna merah, dipasang di",
-  _origIndex: 1094
+  usage: '火災《かさい》を発見《はっけん》したら発信機《はっしんき》のボタンを押《お》して警報《けいほう》を起動《きどう》する（tekan tombol pada alarm box untuk mengaktifkan peringatan saat menemukan kebakaran）',
+    _origIndex: 1094
   },
 {
   id: 967,
@@ -2037,7 +2089,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Panel penerima alarm",
   desc: "Panel utama sistem alarm kebakaran yang menampilkan lokasi api dan mengaktifkan",
-  _origIndex: 1095
+  usage: '受信機《じゅしんき》でどの感知器《かんちき》から信号《しんごう》が来《き》たか確認《かくにん》する（periksa dari detektor mana sinyal berasal melalui panel penerima alarm）',
+    _origIndex: 1095
   },
 {
   id: 970,
@@ -2048,7 +2101,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Cadangan air pemadam",
   desc: "Tangki/kolam cadangan air di lokasi tertentu sebagai sumber air alternatif saat",
-  _origIndex: 1098
+  usage: '消防用水《しょうぼうようすい》をプールや受水槽《じゅすいそう》に確保《かくほ》して大規模火災《だいきぼかさい》に備《そな》える（sediakan air pemadam kebakaran di kolam atau tangki untuk persiapan kebakaran besar）',
+    _origIndex: 1098
   },
 {
   id: 973,
@@ -2059,7 +2113,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Rock wool / wol batu",
   desc: "Insulasi dari basalt/terak; tahan panas hingga ±600°C. Lebih berat tapi lebih",
-  _origIndex: 1101
+  usage: 'ロックウールを高温《こうおん》配管《はいかん》の保温《ほおん》に使用《しよう》する（gunakan rock wool untuk insulasi pipa suhu tinggi）',
+    _origIndex: 1101
   },
 {
   id: 976,
@@ -2070,7 +2125,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Rigid urethane foam",
   desc: "Busa uretan keras dengan nilai λ sangat rendah (~0.022 W/mK), efisien untuk",
-  _origIndex: 1104
+  usage: '硬質ウレタンフォームを配管《はいかん》や機器《きき》の保冷《ほれい》工事《こうじ》に使用《しよう》する（gunakan rigid urethane foam untuk pekerjaan insulasi dingin pada pipa dan peralatan）',
+    _origIndex: 1104
   },
 {
   id: 978,
@@ -2081,7 +2137,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Perlite insulation",
   desc: "Insulasi dari obsidian/batu vulkanik yang dipanaskan hingga mengembang. Untuk",
-  _origIndex: 1106
+  usage: 'パーライト保温材《ほおんざい》を高温蒸気管《こうおんじょうきかん》の保温《ほおん》に使用《しよう》する（gunakan insulasi perlit untuk pipa uap suhu tinggi）',
+    _origIndex: 1106
   },
 {
   id: 979,
@@ -2092,7 +2149,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Jacketing material",
   desc: "Material penutup luar lapisan insulasi pipa/duct (aluminium, seng, stainless)",
-  _origIndex: 1107
+  usage: '保温材《ほおんざい》の上《うえ》から外装材《がいそうざい》で仕上《しあ》げて保護《ほご》する（lindungi insulasi dengan melapisi bagian luar menggunakan jacketing material）',
+    _origIndex: 1107
   },
 {
   id: 980,
@@ -2103,7 +2161,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Aluminium jacketing",
   desc: "Penutup luar insulasi dari aluminium; ringan dan tahan karat. Umum untuk pipa",
-  _origIndex: 1108
+  usage: '屋外《おくがい》配管《はいかん》の保温材《ほおんざい》をアルミ外装《がいそう》で仕上《しあ》げて防水《ぼうすい》する（selesaikan dan waterproofing insulasi pipa luar ruangan menggunakan aluminium jacketing）',
+    _origIndex: 1108
   },
 {
   id: 984,
@@ -2114,7 +2173,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pre-formed pipe",
   desc: "Insulasi pipa berbentuk setengah silinder yang sudah dicetak; dua keping",
-  _origIndex: 1112
+  usage: '保温筒《ほおんとう》（筒形《つつがた》保温材《ほおんざい》）を配管《はいかん》に被《かぶ》せてテープで固定《こてい》する（pasang insulasi pra-cetak berbentuk silinder pada pipa dan kencangkan dengan selotip）',
+    _origIndex: 1112
   },
 {
   id: 985,
@@ -2125,7 +2185,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Insulation band / blanket",
   desc: "Strip insulasi fleksibel untuk bagian tidak beraturan (valve, fitting, flensa)",
-  _origIndex: 1113
+  usage: '保温帯《ほおんたい》を配管《はいかん》の継手《つぎて》部分《ぶぶん》に巻《ま》いて保温《ほおん》する（balut bagian fitting pipa dengan insulation band untuk isolasi termal）',
+    _origIndex: 1113
   },
 {
   id: 997,
@@ -2136,7 +2197,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Cold insulation work",
   desc: "Pekerjaan insulasi untuk pipa/peralatan bersuhu rendah (chiller, AC, freezer).",
-  _origIndex: 1125
+  usage: '保冷工事《ほれいこうじ》で冷凍《れいとう》倉庫《そうこ》の壁《かべ》・床《ゆか》・天井《てんじょう》を断熱《だんねつ》する（isolasi dinding, lantai, dan langit-langit gudang beku dalam pekerjaan cold insulation）',
+    _origIndex: 1125
   },
 {
   id: 1028,
@@ -2147,7 +2209,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Sambungan flange",
   desc: "Sambungan baut-mur dengan gasket penyekat; mudah dibongkar-pasang untuk",
-  _origIndex: 1156
+  usage: 'フランジ接合《せつごう》でポンプや機器《きき》を配管《はいかん》に取《と》り付《つ》ける（pasang pompa dan peralatan pada pipa menggunakan flange joint）',
+    _origIndex: 1156
   },
 {
   id: 1029,
@@ -2158,7 +2221,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Sambungan soket",
   desc: "Sambungan pipa PVC dengan lem. Oleskan merata lalu masukkan pipa cepat sebelum",
-  _origIndex: 1157
+  usage: 'ソケット接合《せつごう》で塩《えん》ビ管《かん》を素早《すばや》く接続《せつぞく》する（sambungkan pipa PVC dengan cepat menggunakan socket joint）',
+    _origIndex: 1157
   },
 {
   id: 1030,
@@ -2169,7 +2233,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Sambungan grooved",
   desc: "Sambungan menggunakan alur di ujung pipa dan coupling. Pengerjaan lebih cepat",
-  _origIndex: 1158
+  usage: 'グルーブド継手《つぎて》でロールグルーブ加工《かこう》した鋼管《こうかん》を接続《せつぞく》する（sambungkan pipa baja yang telah diproses roll-groove menggunakan grooved coupling）',
+    _origIndex: 1158
   },
 {
   id: 1039,
@@ -2180,7 +2245,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Nominal diameter pipa",
   desc: "Ukuran nominal pipa. Diameter aktual sedikit berbeda tergantung standar A atau",
-  _origIndex: 1167
+  usage: '呼び径《よびけい》（公称《こうしょう》径）と実際《じっさい》の外径《がいけい》を混同《こんどう》しないよう注意《ちゅうい》する（jangan mencampuradukkan nominal diameter dengan diameter luar aktual）',
+    _origIndex: 1167
   },
 {
   id: 1040,
@@ -2191,7 +2257,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Uji kebocoran udara",
   desc: "Uji kerapatan pipa gas dengan tekanan udara. Pantau apakah ada penurunan",
-  _origIndex: 1168
+  usage: '配管《はいかん》布設後《ふせつご》に気密試験《きみつしけん》で漏《も》れがないことを確認《かくにん》する（konfirmasi tidak ada kebocoran melalui uji udara setelah pipa dipasang）',
+    _origIndex: 1168
   },
 {
   id: 1041,
@@ -2202,7 +2269,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pipa suplai air bersih",
   desc: "Pipa yang bercabang dari jaringan utama PDAM dan mendistribusikan air ke setiap",
-  _origIndex: 1169
+  usage: '給水管《きゅうすいかん》は衛生《えいせい》基準《きじゅん》を満《み》たす材料《ざいりょう》を使《つか》う（gunakan material yang memenuhi standar sanitasi untuk pipa suplai air bersih）',
+    _origIndex: 1169
   },
 {
   id: 1042,
@@ -2213,7 +2281,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Pipa drainase / buangan",
   desc: "Pipa pembuangan air limbah.\nKemiringan cukup (umumnya 1/100) agar aliran lancar",
-  _origIndex: 1170
+  usage: '排水管《はいすいかん》に適切《てきせつ》な勾配《こうばい》をつけて自然流下《しぜんりゅうか》させる（berikan kemiringan yang sesuai pada pipa drainase agar air mengalir secara gravitasi）',
+    _origIndex: 1170
   },
 {
   id: 1043,
@@ -2224,7 +2293,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Nipple / sambungan",
   desc: "Fitting pendek dengan ulir jantan di kedua ujungnya. Untuk menyambung dua",
-  _origIndex: 1171
+  usage: 'ニップルで雄ねじ《おねじ》同士《どうし》の配管《はいかん》を接続《せつぞく》する（sambungkan dua ujung berulir jantan menggunakan nipple）',
+    _origIndex: 1171
   },
 {
   id: 1107,
@@ -2235,7 +2305,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Plafon sistem",
   desc: "Plafon modular yang mengintegrasikan pencahayaan, AC, dan peralatan kebakaran",
-  _origIndex: 1253
+  usage: 'システム天井《システムてんじょう》にグリル・照明《しょうめい》・感知器《かんちき》を統合《とうごう》して取《と》り付《つ》ける（pasang grill, lampu, dan detektor secara terintegrasi pada sistem plafon）',
+    _origIndex: 1253
   },
 {
   id: 1143,
@@ -2258,7 +2329,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Refrigeran / zat",
   desc: "Zat pendingin dalam pipa AC (HFC dll).\nSambungan pipa refrigeran wajib diuji",
-  _origIndex: 1342
+  usage: '冷媒《れいばい》を適切《てきせつ》に取《と》り扱《あつか》うために資格《しかく》を持《も》つ技術者《ぎじゅつしゃ》が作業《さぎょう》する（pekerjaan refrigeran harus dilakukan oleh teknisi yang memiliki kualifikasi）',
+    _origIndex: 1342
   },
 {
   id: 1187,
@@ -2269,7 +2341,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Kemiringan pipa drainase",
   desc: "Kemiringan pada pipa drainase agar air mengalir secara gravitasi.",
-  _origIndex: 1343
+  usage: '排水管《はいすいかん》に適切《てきせつ》な勾配《こうばい》（1/50〜1/100）をつけて詰《つ》まりを防《ふせ》ぐ（berikan kemiringan yang tepat 1/50-1/100 pada pipa drainase untuk mencegah penyumbatan）',
+    _origIndex: 1343
   },
 {
   id: 1188,
@@ -2292,7 +2365,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Saddle / braket penopang",
   desc: "Braket untuk menempelkan pipa ke dinding, plafon, atau lantai.\nJarak saddle",
-  _origIndex: 1346
+  usage: 'サドルで配管《はいかん》を天井《てんじょう》スラブや梁《はり》に固定《こてい》する（kencangkan pipa pada slab langit-langit atau balok menggunakan saddle）',
+    _origIndex: 1346
   },
 {
   id: 1191,
@@ -2303,7 +2377,8 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Fitting / komponen",
   desc: "Komponen penghubung antar pipa. Jenis: elbow (belok), tee (T), socket (lurus).",
-  _origIndex: 1347
+  usage: '継手《つぎて》を使《つか》って配管《はいかん》を分岐《ぶんき》・接続《せつぞく》・変換《へんかん》する（gunakan fitting untuk percabangan, penyambungan, dan perubahan arah pipa）',
+    _origIndex: 1347
   },
 {
   id: 1192,
@@ -2326,6 +2401,7 @@ export const CARDS_LIFELINE_CH6 = [
   type: "vocab",
   id_text: "Katup / valve",
   desc: "Mengatur buka/tutup aliran. Jenis: gate (全開《ぜんかい》/全閉《ぜんへい》), ball (cepat),",
-  _origIndex: 1349
+  usage: 'バルブを閉《し》めて流体《りゅうたい》の流れ《ながれ》を制御《せいぎょ》する（kendalikan aliran fluida dengan menutup katup）',
+    _origIndex: 1349
   }
 ];

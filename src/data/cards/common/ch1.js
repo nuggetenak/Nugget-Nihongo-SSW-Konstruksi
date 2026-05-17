@@ -79,10 +79,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "せこうたいせい",
   jp: "施工体制《せこうたいせい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Hierarki manajemen",
   desc: "Urutan: 発注《はっちゅう》者《はっちゅうしゃ》→監理者《かんりしゃ》→ゼネコン→専門工事業者《せんもんこうじぎょうしゃ》→職長《しょくちょう》→作業員《さぎょういん》.",
-  _origIndex: 563
+  usage: '発注者《はっちゅうしゃ》→元請《もとうけ》→下請《したうけ》→専門業者《せんもんぎょうしゃ》の施工体制《せこうたいせい》を理解《りかい》する（pahami hierarki manajemen konstruksi dari pemilik proyek hingga kontraktor spesialis）',
+    _origIndex: 563
   },
 {
   id: 494,

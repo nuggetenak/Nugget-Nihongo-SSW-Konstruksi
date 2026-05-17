@@ -130,7 +130,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Unit luar AC / outdoor",
   desc: "Berisi kompresor dan kondenser; membuang panas ke luar.\nLokasi pemasangan harus",
-  _origIndex: 1406
+  usage: '室外機《しつがいき》（アウトドアユニット）を屋外《おくがい》に設置《せっち》して冷媒管《れいばいかん》と電線《でんせん》を接続《せつぞく》する（pasang unit outdoor AC di luar dan hubungkan pipa refrigeran serta kabel）',
+    _origIndex: 1406
   },
 {
   id: 1251,
@@ -141,7 +142,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Unit dalam AC / indoor",
   desc: "Berisi evaporator dan kipas; mendinginkan ruangan melalui evaporasi refrigeran.",
-  _origIndex: 1407
+  usage: '室内機《しつないき》（インドアユニット）を天井《てんじょう》または壁《かべ》に取《と》り付《つ》けて冷媒管《れいばいかん》を接続《せつぞく》する（pasang unit indoor pada langit-langit atau dinding lalu hubungkan pipa refrigeran）',
+    _origIndex: 1407
   },
 {
   id: 1252,
@@ -164,7 +166,8 @@ export const CARDS_VOCAB_JAC = [
   type: "vocab",
   id_text: "Pipa drain AC",
   desc: "Mengalirkan air kondensasi dari unit dalam ke luar.\nWajib kemiringan turun",
-  _origIndex: 1409
+  usage: 'ドレン配管《どれんはいかん》に適切《てきせつ》な勾配《こうばい》をつけて結露水《けつろすい》を排出《はいしゅつ》する（berikan kemiringan yang sesuai pada pipa drain AC untuk mengalirkan air kondensasi）',
+    _origIndex: 1409
   },
 {
   id: 40,
@@ -195,10 +198,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "どどめ",
   jp: "土留め《どどめ》≥ 1.5m",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penahan tanah galian",
   desc: "Mencegah longsor (土砂崩《どしゃくず》れ). Wajib ≥1.5m. Berbeda dari 換気《かんき》 dan 排水《はいすい》.",
-  _origIndex: 114
+  usage: '1.5m以上《いじょう》の掘削《くっさく》では土留め《どどめ》の設置《せっち》が義務《ぎむ》である（pemasangan penahan tanah wajib pada galian sedalam 1.5m atau lebih）',
+    _origIndex: 114
   },
 {
   id: 107,
@@ -206,10 +210,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "しんきにゅうじょうしゃきょういく vs しんにゅうしゃあんぜんえいせいきょういく",
   jp: "新規入場者教育《しんきにゅうじょうしゃきょういく》 vs 新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Dua orientasi K3 berbeda",
   desc: "①新規入《い》り場《にゅうじょう》者《もの》教育《しんきにゅうじょうしゃきょういく》: pendatang baru ke lokasi.",
-  _origIndex: 115
+  usage: '新規入場者教育《しんきにゅうじょうしゃきょういく》（10分《ぷん》以上《いじょう》）と新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》（6時間《じかん》以上《いじょう》）を区別《くべつ》する（bedakan orientasi pekerja baru 10 menit dengan pendidikan K3 6 jam）',
+    _origIndex: 115
   },
 {
   id: 108,
@@ -217,10 +222,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "さんだいさいがい",
   jp: "三大災害《さんだいさいがい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tiga bencana besar",
   desc: "①墜落《ついらく》・転《ころ》び落《てんらく》 (terbanyak) ②機械《きかい》・クレーン災害《さいがい》 ③崩壊《ほうかい》・倒壊《とうかい》. Menyumbang 40–70%",
-  _origIndex: 116
+  usage: '墜落《ついらく》・崩壊《ほうかい》・飛来落下《ひらいらっか》の三大災害《さんだいさいがい》を重点的《じゅうてんてき》に防止《ぼうし》する（fokuskan pencegahan pada 3 bencana besar: jatuh, longsor, dan tertimpa benda）',
+    _origIndex: 116
   },
 {
   id: 113,
@@ -323,10 +329,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "たんらく",
   jp: "短絡《たんらく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Hubungan arus pendek",
   desc: "2 kabel bersentuhan TANPA melalui beban. Berbeda dari 漏電《ろうでん》 (bocor) & 感電《かんでん》 (sengatan). Bisa",
-  _origIndex: 63
+  usage: '短絡《たんらく》が発生《はっせい》しないよう配線《はいせん》の絶縁《ぜつえん》を確認《かくにん》する（periksa insulasi pengkabelan untuk mencegah terjadinya korsleting）',
+    _origIndex: 63
   },
 {
   id: 56,
@@ -477,10 +484,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "おくがいしょうかいせんせつび",
   jp: "屋外消火栓設備《おくがいしょうかいせんせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Hidran luar gedung",
   desc: "Dipasang di luar gedung untuk pemadaman awal & cegah api menyebar ke bangunan berdekatan (lantai",
-  _origIndex: 104
+  usage: '屋外消火栓設備《おくがいしょうかいせんせつび》を建物外周《たてものがいしゅう》に設置《せっち》して火災時《かさいじ》に使用《しよう》する（pasang sistem hidran luar gedung di sekeliling bangunan untuk digunakan saat kebakaran）',
+    _origIndex: 104
   },
 {
   id: 98,

@@ -106,7 +106,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Saluran pembuangan air",
   desc: "Saluran untuk mengalirkan air limbah keluar dari area kerja atau bangunan.",
-  _origIndex: 980
+  usage: '排水路《はいすいろ》に詰《つ》まりがないか点検《てんけん》する（periksa apakah ada penyumbatan pada saluran drainase）',
+    _origIndex: 980
   },
 {
   id: 854,
@@ -117,7 +118,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lubang suplai air",
   desc: "Titik masuk air bersih ke sistem perpipaan gedung; posisinya dicatat di gambar",
-  _origIndex: 981
+  usage: '給水口《きゅうすいこう》のフィルターを定期的《ていきてき》に清掃《せいそう》する（bersihkan filter pada lubang suplai air secara berkala）',
+    _origIndex: 981
   },
 {
   id: 855,
@@ -128,7 +130,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa bawah tanah",
   desc: "Pipa yang ditanam di bawah permukaan tanah; perlu perhatian kedalaman untuk",
-  _origIndex: 982
+  usage: '地中管《ちちゅうかん》の埋設《まいせつ》深度《しんど》を図面《ずめん》で確認《かくにん》する（periksa kedalaman penanaman pipa bawah tanah pada gambar）',
+    _origIndex: 982
   },
 {
   id: 856,
@@ -139,7 +142,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa langit-langit",
   desc: "Pipa yang dipasang di atas plafon; wajib dibalut insulasi agar tidak terjadi",
-  _origIndex: 983
+  usage: '天井管《てんじょうかん》の固定《こてい》ピッチを確認《かくにん》して支持《しじ》金具《かなぐ》を設置《せっち》する（konfirmasi jarak penopang pipa langit-langit dan pasang hanger）',
+    _origIndex: 983
   },
 {
   id: 857,
@@ -150,7 +154,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Keran penutup air",
   desc: "Keran untuk menghentikan aliran air; dicek fungsinya sebelum serah terima.",
-  _origIndex: 984
+  usage: '工事前《こうじまえ》に止水栓《しすいせん》を閉《し》めて断水《だんすい》する（tutup keran penutup air sebelum pekerjaan untuk memutus aliran）',
+    _origIndex: 984
   },
 {
   id: 860,
@@ -173,7 +178,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lubang pembuangan udara",
   desc: "Lubang tempat udara kotor keluar dari sistem ventilasi; posisi dan ukuran",
-  _origIndex: 988
+  usage: '排気口《はいきこう》をふさがないよう周囲《しゅうい》に十分《じゅうぶん》なスペースを確保《かくほ》する（pastikan cukup ruang di sekitar lubang pembuangan udara agar tidak tersumbat）',
+    _origIndex: 988
   },
 {
   id: 866,
@@ -184,7 +190,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa air hujan",
   desc: "Pipa untuk mengalirkan air hujan dari atap ke saluran drainase.",
-  _origIndex: 993
+  usage: '雨水管《うすいかん》と汚水管《おすいかん》を分《わ》けて別系統《べつけいとう》で施工《せこう》する（pasang pipa air hujan dan pipa limbah pada jalur terpisah）',
+    _origIndex: 993
   },
 {
   id: 867,
@@ -195,7 +202,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Menara pendingin",
   desc: "Peralatan untuk mendinginkan air sirkulasi pada sistem AC gedung.",
-  _origIndex: 994
+  usage: '冷却塔《れいきゃくとう》で冷水《れいすい》を冷《ひ》やして空調《くうちょう》システムに戻《もど》す（dinginkan air menggunakan cooling tower lalu kembalikan ke sistem AC）',
+    _origIndex: 994
   },
 {
   id: 868,
@@ -206,7 +214,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lubang ventilasi",
   desc: "Lubang pada dinding atau langit-langit untuk sirkulasi udara segar.",
-  _origIndex: 995
+  usage: '換気口《かんきこう》の位置《いち》と大きさ《おおきさ》を換気計算《かんきけいさん》に基《もと》づいて設置《せっち》する（pasang ventilasi berdasarkan perhitungan ventilasi）',
+    _origIndex: 995
   },
 {
   id: 870,
@@ -217,7 +226,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa udara dingin",
   desc: "Saluran yang mengalirkan udara dingin dari AC ke ruangan; wajib diinsulasi.",
-  _origIndex: 997
+  usage: '冷風管《れいふうかん》に断熱材《だんねつざい》を巻《ま》いて結露《けつろ》を防《ふせ》ぐ（balut pipa udara dingin dengan insulasi untuk mencegah kondensasi）',
+    _origIndex: 997
   },
 {
   id: 871,
@@ -228,7 +238,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa udara panas",
   desc: "Saluran yang mengalirkan udara panas dari pemanas ke ruangan.",
-  _origIndex: 998
+  usage: '温風管《おんぷうかん》に保温材《ほおんざい》を巻《ま》いて熱損失《ねつそんしつ》を抑《おさ》える（balut pipa udara panas dengan insulasi untuk menekan kehilangan panas）',
+    _origIndex: 998
   },
 {
   id: 875,
@@ -239,7 +250,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Grill ventilasi",
   desc: "Penutup berlubang pada saluran udara untuk mengatur arah dan distribusi aliran",
-  _origIndex: 1002
+  usage: 'グリルを天井《てんじょう》や壁《かべ》に取《と》り付《つ》けて吹き出し口《ふきだしぐち》を整《ととの》える（pasang grill pada langit-langit atau dinding untuk merapikan bukaan aliran udara）',
+    _origIndex: 1002
   },
 {
   id: 881,
@@ -250,7 +262,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Memasukkan spigot pipa",
   desc: "Proses memasukkan ujung spigot pipa ke dalam socket pipa lain saat menyambung.",
-  _origIndex: 1008
+  usage: 'スピゴット端《たん》をソケット内《ない》に挿入《そうにゅう》して配管《はいかん》を接続《せつぞく》する（masukkan ujung spigot ke dalam soket untuk menyambungkan pipa）',
+    _origIndex: 1008
   },
 {
   id: 885,
@@ -261,7 +274,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Membersihkan area fusi",
   desc: "Membersihkan permukaan yang akan difusi dari kotoran/minyak agar sambungan",
-  _origIndex: 1012
+  usage: '融着前《ゆうちゃくまえ》に融着面《ゆうちゃくめん》をアルコールで清掃《せいそう》して脱脂《だっし》する（bersihkan dan hilangkan lemak pada permukaan fusion menggunakan alkohol sebelum proses）',
+    _origIndex: 1012
   },
 {
   id: 889,
@@ -272,7 +286,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa PE distribusi air",
   desc: "Pipa polietilen khusus jaringan distribusi air bersih; disambung dengan metode",
-  _origIndex: 1016
+  usage: '水道配水用ポリエチレン管《すいどうはいすいようぽりえちれんかん》をEF接合《せつごう》で接続《せつぞく》する（sambungkan pipa PE distribusi air menggunakan EF joint）',
+    _origIndex: 1016
   },
 {
   id: 892,
@@ -283,7 +298,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sambungan duct persegi",
   desc: "Cara menyambung saluran udara berbentuk kotak; menggunakan flanged connection.",
-  _origIndex: 1019
+  usage: '角ダクトをアングルフランジ工法《こうほう》で接続《せつぞく》して固定《こてい》する（sambungkan dan kencangkan duct persegi menggunakan angle flange method）',
+    _origIndex: 1019
   },
 {
   id: 900,
@@ -294,7 +310,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pemanas air",
   desc: "Alat untuk memanaskan air sebelum dialirkan ke keran panas; perlu dicek suhu",
-  _origIndex: 1028
+  usage: '温水器《おんすいき》を給水管《きゅうすいかん》・給湯管《きゅうとうかん》・電源《でんげん》に接続《せつぞく》して試運転《しうんてん》する（hubungkan water heater ke pipa air bersih, pipa air panas, dan listrik lalu uji coba）',
+    _origIndex: 1028
   },
 {
   id: 910,
@@ -305,7 +322,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tack welding",
   desc: "Las titik sementara untuk menahan posisi pipa sebelum dilakukan pengelasan",
-  _origIndex: 1038
+  usage: '本溶接《ほんようせつ》の前《まえ》に仮付溶接《かりつけようせつ》で部材《ぶざい》の位置《いち》を固定《こてい》する（kunci posisi komponen dengan tack welding sebelum pengelasan penuh）',
+    _origIndex: 1038
   },
 {
   id: 911,
@@ -316,7 +334,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Bevel preparation",
   desc: "Membuat sudut bevel pada ujung pipa agar hasil las bisa penetrasi sempurna.",
-  _origIndex: 1039
+  usage: '溶接前《ようせつまえ》に管端《かんたん》の開先加工《かいさきかこう》（斜め切断《ななめせつだん》）をする（lakukan bevel preparation pada ujung pipa sebelum pengelasan）',
+    _origIndex: 1039
   },
 {
   id: 912,
@@ -327,7 +346,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tekuk manual pipa",
   desc: "Menekuk pipa dengan tangan tanpa mesin; untuk pipa kecil dan berdinding tipis.",
-  _origIndex: 1040
+  usage: '銅管《どうかん》を手曲げ加工《てまげかこう》するときは最小曲げ半径《さいしょうまげはんけい》を守《まも》る（patuhi radius tekukan minimum saat menekuk pipa tembaga secara manual）',
+    _origIndex: 1040
   },
 {
   id: 913,
@@ -338,7 +358,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tekuk pipa pakai bender",
   desc: "Menekuk pipa menggunakan mesin bender; untuk pipa berdiameter besar atau tebal.",
-  _origIndex: 1041
+  usage: 'チューブベンダーで正確《せいかく》な角度《かくど》にベンダー曲げ加工《まげかこう》する（tekuk ke sudut yang presisi menggunakan tube bender）',
+    _origIndex: 1041
   },
 {
   id: 915,
@@ -349,7 +370,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pasang & kencangkan",
   desc: "Proses memasukkan pipa ke fitting lalu memfiksasi sambungan hingga tidak",
-  _origIndex: 1043
+  usage: '管《かん》と継手《つぎて》を正しく挿入《そうにゅう》して止《と》め金具《かなぐ》で固定《こてい》する（masukkan pipa dan fitting dengan benar lalu kencangkan dengan penjepit）',
+    _origIndex: 1043
   },
 {
   id: 916,
@@ -360,7 +382,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa di atas tanah",
   desc: "Pipa yang dipasang di permukaan tanah; perlu pelindung anti-UV dan",
-  _origIndex: 1044
+  usage: '地上管《ちじょうかん》は支持金具《しじかなぐ》で一定《いってい》間隔《かんかく》で固定《こてい》する（kencangkan pipa di atas tanah dengan hanger pada jarak tetap）',
+    _origIndex: 1044
   },
 {
   id: 917,
@@ -371,7 +394,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Alat pendingin",
   desc: "Perangkat untuk mendinginkan fluida atau udara; perlu dicek kapasitas dan",
-  _origIndex: 1045
+  usage: '冷却器《れいきゃくき》のフィンを清掃《せいそう》して熱交換《ねつこうかん》効率《こうりつ》を維持《いじ》する（bersihkan fin pada alat pendingin untuk mempertahankan efisiensi pertukaran panas）',
+    _origIndex: 1045
   },
 {
   id: 918,
@@ -382,7 +406,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Perkakas tangan",
   desc: "Alat kerja yang dioperasikan manual tanpa motor; contoh: obeng, palu, tang.",
-  _origIndex: 1046
+  usage: '電工ナイフ《でんこうないふ》やプライヤーなど手工具《てこうぐ》を正しく使《つか》う（gunakan perkakas tangan seperti electrician knife dan pliers dengan benar）',
+    _origIndex: 1046
   },
 {
   id: 919,
@@ -393,7 +418,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Saklar dua arah",
   desc: "Saklar yang mengontrol satu lampu dari 2 lokasi berbeda; dipasang di tangga",
-  _origIndex: 1047
+  usage: '3路スイッチ《さんろスイッチ》を2か所《かしょ》に設置《せっち》して照明《しょうめい》を両方《りょうほう》から操作《そうさ》できるようにする（pasang saklar 3-arah di 2 titik untuk mengoperasikan lampu dari keduanya）',
+    _origIndex: 1047
   },
 {
   id: 920,
@@ -404,7 +430,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Saklar empat arah",
   desc: "Saklar tambahan di antara 2 buah saklar tiga arah; memungkinkan kontrol dari 3+",
-  _origIndex: 1048
+  usage: '3路スイッチ2個《さんろスイッチにこ》の間《あいだ》に4路スイッチ《よんろスイッチ》を追加《ついか》して3か所《かしょ》から操作《そうさ》する（tambahkan saklar 4-arah di antara 2 saklar 3-arah untuk kontrol dari 3 titik）',
+    _origIndex: 1048
   },
 {
   id: 921,
@@ -415,7 +442,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Saklar tunggal",
   desc: "Saklar paling dasar — menyalakan/mematikan dari 1 titik saja.",
-  _origIndex: 1049
+  usage: '単極スイッチ《たんきょくスイッチ》で1か所《かしょ》の照明《しょうめい》をオン・オフする（nyalakan dan matikan satu lampu menggunakan saklar tunggal）',
+    _origIndex: 1049
   },
 {
   id: 922,
@@ -426,7 +454,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Balut isolasi kabel",
   desc: "Membalut sambungan kabel dengan selotip isolasi; wajib dilakukan di setiap",
-  _origIndex: 1050
+  usage: '絶縁テープ《ぜつえんてーぷ》（テープ巻き《まき》）で電線《でんせん》の接続部《せつぞくぶ》を巻き包む（balut sambungan kabel dengan selotip insulasi）',
+    _origIndex: 1050
   },
 {
   id: 926,
@@ -437,7 +466,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kipas isap (intake fan)",
   desc: "Kipas yang menarik udara segar dari luar ke dalam ruangan; kebalikan dari",
-  _origIndex: 1054
+  usage: '吸気ファン《きゅうきふぁん》で外気《がいき》を取り込《とりこ》んで換気《かんき》する（masukkan udara luar untuk ventilasi menggunakan intake fan）',
+    _origIndex: 1054
   },
 {
   id: 927,
@@ -448,7 +478,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Karet anti-getar",
   desc: "Karet yang dipasang di bawah mesin AC atau kompresor untuk menyerap getaran.",
-  _origIndex: 1055
+  usage: '振動《しんどう》する機器《きき》の架台《かだい》に防振ゴム《ぼうしんごむ》を敷《し》いて振動《しんどう》を吸収《きゅうしゅう》する（pasang karet anti-getar di bawah dudukan mesin yang bergetar untuk meredam getaran）',
+    _origIndex: 1055
   },
 {
   id: 928,
@@ -459,7 +490,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Material penyerap suara",
   desc: "Bahan yang menyerap gelombang suara untuk mengurangi kebisingan di dalam",
-  _origIndex: 1056
+  usage: '吸音材《きゅうおんざい》を壁《かべ》や天井《てんじょう》に貼《は》って騒音《そうおん》を低減《ていげん》する（tempelkan material penyerap suara pada dinding dan langit-langit untuk mengurangi kebisingan）',
+    _origIndex: 1056
   },
 {
   id: 929,
@@ -470,7 +502,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pembersih udara",
   desc: "Alat untuk memurnikan udara ruangan dengan menyaring debu dan partikel.",
-  _origIndex: 1057
+  usage: '空気清浄機《くうきせいじょうき》を設置《せっち》してフィルター越《こ》しに清潔《せいけつ》な空気《くうき》を供給《きょうきゅう》する（pasang air purifier untuk menyuplai udara bersih melalui filter）',
+    _origIndex: 1057
   },
 {
   id: 930,
@@ -481,7 +514,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lampu kerja",
   desc: "Lampu portabel untuk menerangi area kerja yang gelap di lokasi konstruksi.",
-  _origIndex: 1058
+  usage: '作業灯《さぎょうとう》を設置《せっち》して暗《くら》い場所《ばしょ》での作業《さぎょう》を安全《あんぜん》に行《おこな》う（pasang lampu kerja untuk melakukan pekerjaan dengan aman di area gelap）',
+    _origIndex: 1058
   },
 {
   id: 931,
@@ -492,7 +526,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pompa suplai air bersih",
   desc: "Pompa untuk mengalirkan air bersih ke sistem distribusi gedung.",
-  _origIndex: 1059
+  usage: '送水ポンプ《そうすいポンプ》の吐出圧力《とじゅつあつりょく》を確認《かくにん》して適切《てきせつ》に調整《ちょうせい》する（konfirmasi dan sesuaikan tekanan discharge pompa suplai air）',
+    _origIndex: 1059
   },
 {
   id: 934,
@@ -503,7 +538,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pompa sirkulasi air panas",
   desc: "Pompa untuk mensirkulasikan air panas dalam sistem pemanas gedung.",
-  _origIndex: 1062
+  usage: '温水循環ポンプ《おんすいじゅんかんポンプ》で給湯《きゅうとう》システムの温水《おんすい》を循環《じゅんかん》させる（sirkulasikan air panas pada sistem air panas menggunakan pompa sirkulasi）',
+    _origIndex: 1062
   },
 {
   id: 935,
@@ -514,7 +550,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa polibuten",
   desc: "Pipa plastik fleksibel tahan korosi; dipakai untuk suplai air panas dan dingin.",
-  _origIndex: 1063
+  usage: 'ポリブテン管《ポリブテンかん》を温水《おんすい》配管《はいかん》に使用《しよう》して軽量《けいりょう》施工《せこう》をする（gunakan pipa polibuten untuk instalasi air panas yang lebih ringan）',
+    _origIndex: 1063
   },
 {
   id: 938,
@@ -525,7 +562,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipe band / pengikat pipa",
   desc: "Pengikat logam untuk memfiksasi pipa ke dinding atau langit-langit.",
-  _origIndex: 1066
+  usage: 'パイプバンドで配管《はいかん》を壁《かべ》や天井《てんじょう》にしっかり固定《こてい》する（kencangkan pipa pada dinding atau langit-langit menggunakan pipe band）',
+    _origIndex: 1066
   },
 {
   id: 951,
@@ -560,7 +598,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Detektor asap",
   desc: "Mendeteksi asap yang menghalangi sinar cahaya; efektif untuk asap dari api",
-  _origIndex: 1081
+  usage: '光電式感知器《こうでんしきかんちき》で煙《けむり》による光量《こうりょう》の低下《ていか》を検知《けんち》して報知する（deteksi asap melalui penurunan intensitas cahaya menggunakan detektor fotolistrik）',
+    _origIndex: 1081
   },
 {
   id: 954,
@@ -571,7 +610,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Detektor asap ionisasi",
   desc: "Mendeteksi partikel asap halus sejak dini; sensitif terhadap api nyala terbuka.",
-  _origIndex: 1082
+  usage: 'イオン化式感知器《いおんかしきかんちき》でイオン電流《でんりゅう》の変化《へんか》から煙《けむり》を検知《けんち》する（deteksi asap melalui perubahan arus ionisasi menggunakan detektor ionisasi）',
+    _origIndex: 1082
   },
 {
   id: 955,
@@ -582,7 +622,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sistem alarm kebakaran",
   desc: "Sistem terdiri dari detektor, tombol manual, panel penerima, dan bel peringatan",
-  _origIndex: 1083
+  usage: '自動火災報知設備《じどうかさいほうちせつび》が火災《かさい》を検知《けんち》して全館《ぜんかん》に警報《けいほう》を発《はっ》する（sistem alarm kebakaran mendeteksi api dan membunyikan peringatan ke seluruh gedung）',
+    _origIndex: 1083
   },
 {
   id: 956,
@@ -593,7 +634,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Alat turun perlahan",
   desc: "Alat evakuasi dengan tali untuk turun dari jendela secara perlahan; satu orang",
-  _origIndex: 1084
+  usage: '緩降機《かんこうき》を使《つか》って高層《こうそう》建物《たてもの》から安全《あんぜん》に降下《こうか》する（turun dengan aman dari gedung bertingkat tinggi menggunakan alat penurun）',
+    _origIndex: 1084
   },
 {
   id: 958,
@@ -604,7 +646,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kantong/seluncur evakuasi",
   desc: "Terowongan kain untuk evakuasi; penghuni masuk dan meluncur turun ke titik aman.",
-  _origIndex: 1086
+  usage: '救助袋《きゅうじょぶくろ》（斜降式《しゃこうしき》）で高所《こうしょ》から安全《あんぜん》に避難《ひなん》する（evakuasi dari ketinggian dengan aman menggunakan kantong/seluncur evakuasi）',
+    _origIndex: 1086
   },
 {
   id: 959,
@@ -615,7 +658,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pintu tahan api",
   desc: "Pintu yang menutup otomatis saat kebakaran untuk menghambat penyebaran api",
-  _origIndex: 1087
+  usage: '防火戸《ぼうかど》が火災《かさい》を感知《かんち》して自動《じどう》閉鎖《へいさ》し延焼《えんしょう》を防《ふせ》ぐ（pintu tahan api menutup otomatis saat mendeteksi kebakaran untuk mencegah perambatan api）',
+    _origIndex: 1087
   },
 {
   id: 961,
@@ -626,7 +670,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sistem sprinkler siamese",
   desc: "Sistem di area bawah tanah; pemadam memompakan air dari luar melalui sambungan",
-  _origIndex: 1089
+  usage: '連結散水設備《れんけつさんすいせつび》を地下《ちか》駐車場《ちゅうしゃじょう》に設置《せっち》して消防車《しょうぼうしゃ》から送水《そうすい》する（pasang sistem sprinkler siamese di parkir bawah tanah untuk disuplai air dari mobil pemadam）',
+    _origIndex: 1089
   },
 {
   id: 962,
@@ -637,7 +682,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipa standpipe terhubung",
   desc: "Pipa untuk pemadam menyambung selang di tiap lantai; wajib di gedung 11 lantai",
-  _origIndex: 1090
+  usage: '連結送水管《れんけつそうすいかん》のホース接続口《せつぞくぐち》から消防隊《しょうぼうたい》が放水《ほうすい》する（petugas pemadam menyemprotkan air dari lubang koneksi selang standpipe）',
+    _origIndex: 1090
   },
 {
   id: 964,
@@ -648,7 +694,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lampu darurat",
   desc: "Lampu yang menyala otomatis saat listrik padam; wajib di koridor dan tangga",
-  _origIndex: 1092
+  usage: '非常灯《ひじょうとう》が停電時《ていでんじ》に自動点灯《じどうてんとう》して避難《ひなん》を助《たす》ける（lampu darurat menyala otomatis saat pemadaman untuk membantu evakuasi）',
+    _origIndex: 1092
   },
 {
   id: 965,
@@ -659,7 +706,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Lampu penunjuk evakuasi",
   desc: "Lampu hijau bertanda panah/EXIT untuk memandu ke pintu darurat; beda fungsi",
-  _origIndex: 1093
+  usage: '誘導灯《ゆうどうとう》の矢印《やじるし》に従《したが》って避難《ひなん》口《ぐち》に向《む》かう（ikuti anak panah pada lampu penunjuk evakuasi menuju pintu darurat）',
+    _origIndex: 1093
   },
 {
   id: 968,
@@ -670,7 +718,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sistem pembuangan asap",
   desc: "Sistem exhaust asap yang menjaga koridor bebas asap selama evakuasi kebakaran.",
-  _origIndex: 1096
+  usage: '排煙設備《はいえんせつび》が作動《さどう》して煙《けむり》を強制的《きょうせいてき》に排出《はいしゅつ》する（sistem pembuangan asap beroperasi untuk mengeluarkan asap secara paksa）',
+    _origIndex: 1096
   },
 {
   id: 969,
@@ -681,7 +730,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pemadam bubuk kering",
   desc: "Tabung pemadam portabel berisi bubuk kering; efektif untuk kebakaran kelas A,",
-  _origIndex: 1097
+  usage: '粉末消火器《ふんまつしょうかき》を電気火災《でんきかさい》や油火災《あぶらかさい》に使用《しよう》する（gunakan alat pemadam bubuk untuk kebakaran listrik dan minyak）',
+    _origIndex: 1097
   },
 {
   id: 971,
@@ -692,7 +742,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Zona tahan api",
   desc: "Gedung dibagi zona-zona tahan api dengan dinding dan pintu khusus untuk batasi",
-  _origIndex: 1099
+  usage: '防火区画《ぼうかくかく》を設けて火災《かさい》の延焼《えんしょう》範囲《はんい》を限定《げんてい》する（batasi area perambatan kebakaran dengan membuat kompartemen tahan api）',
+    _origIndex: 1099
   },
 {
   id: 972,
@@ -703,7 +754,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Konstruksi tahan api",
   desc: "Konstruksi dinding, kolom, dan lantai yang mampu menahan panas api dalam waktu",
-  _origIndex: 1100
+  usage: '耐火構造《たいかこうぞう》の壁《かべ》は一定《いってい》時間《じかん》以上《いじょう》火災《かさい》に耐《た》える（dinding konstruksi tahan api dapat menahan kebakaran selama waktu yang ditentukan）',
+    _origIndex: 1100
   },
 {
   id: 974,
@@ -714,7 +766,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "EPS / styrofoam bead",
   desc: "Insulasi dari butiran polistirena yang dipanaskan dalam cetakan; ringan dan",
-  _origIndex: 1102
+  usage: 'ビーズ法EPS（発泡スチロール）を床下《ゆかした》断熱《だんねつ》に使用《しよう》する（gunakan EPS beads method untuk insulasi bawah lantai）',
+    _origIndex: 1102
   },
 {
   id: 975,
@@ -725,7 +778,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "XPS / extruded",
   desc: "Insulasi ekstrusi dengan sel tertutup rapat; tahan air dan kuat tekan tinggi vs",
-  _origIndex: 1103
+  usage: '押出法XPS（スタイロフォーム）を水《みず》が当《あ》たる箇所《かしょ》の断熱《だんねつ》に使用《しよう》する（gunakan XPS extruded di area yang terkena air untuk insulasi）',
+    _origIndex: 1103
   },
 {
   id: 977,
@@ -736,7 +790,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Phenolic foam / busa",
   desc: "Insulasi dengan λ terendah (~0,020 W/mK) dan sangat tahan api; untuk bangunan",
-  _origIndex: 1105
+  usage: 'フェノールフォームを高い断熱性能《だんねつせいのう》が要求《ようきゅう》される箇所《かしょ》に使用《しよう》する（gunakan phenolic foam pada area yang membutuhkan performa insulasi tinggi）',
+    _origIndex: 1105
   },
 {
   id: 981,
@@ -783,7 +838,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Konduktivitas termal",
   desc: "Nilai λ menunjukkan kemudahan panas berpindah melalui material. Satuan: W/(m·K).",
-  _origIndex: 1115
+  usage: '保温材《ほおんざい》の熱伝導率《ねつでんどうりつ》が低《ひく》いほど断熱性能《だんねつせいのう》が高《たか》い（semakin rendah konduktivitas termal material insulasi, semakin tinggi performa insulasinya）',
+    _origIndex: 1115
   },
 {
   id: 988,
@@ -794,7 +850,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Resistansi termal",
   desc: "Nilai R = tebal material ÷ λ. Makin besar R, makin baik hambatan aliran",
-  _origIndex: 1116
+  usage: '熱抵抗《ねつていこう》が大《おお》きい材料《ざいりょう》ほど保温《ほおん》効果《こうか》が高《たか》い（material dengan resistansi termal lebih besar memiliki efek insulasi yang lebih baik）',
+    _origIndex: 1116
   },
 {
   id: 989,
@@ -805,7 +862,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Koefisien transfer panas",
   desc: "Nilai U menunjukkan total perpindahan panas melalui seluruh lapisan",
-  _origIndex: 1117
+  usage: '熱貫流率《ねつかんりゅうりつ》（U値《ち》）が低《ひく》い外壁《がいへき》ほど断熱性《だんねつせい》が優《すぐ》れる（dinding luar dengan koefisien perpindahan panas U yang lebih rendah memiliki insulasi termal yang lebih baik）',
+    _origIndex: 1117
   },
 {
   id: 990,
@@ -816,7 +874,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Perhitungan ketebalan",
   desc: "Menghitung ketebalan insulasi yang diperlukan berdasarkan suhu fluida, suhu",
-  _origIndex: 1118
+  usage: '保温厚さ計算《ほおんあつさけいさん》で必要《ひつよう》な断熱《だんねつ》厚《あつ》さを算出《さんしゅつ》する（hitung ketebalan insulasi yang diperlukan melalui kalkulasi ketebalan insulasi）',
+    _origIndex: 1118
   },
 {
   id: 991,
@@ -827,7 +886,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pencegahan kondensasi",
   desc: "Upaya mencegah terbentuknya embun pada permukaan pipa/duct dingin.",
-  _origIndex: 1119
+  usage: '結露防止《けつろぼうし》のため冷水管《れいすいかん》に防湿《ぼうしつ》層《そう》付き保冷材《ほれいざい》を施工《せこう》する（pasang material insulasi dingin dengan lapisan uap air pada pipa air dingin untuk mencegah kondensasi）',
+    _origIndex: 1119
   },
 {
   id: 992,
@@ -838,7 +898,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Suhu tahan panas",
   desc: "Suhu maksimum yang dapat ditahan material insulasi tanpa degradasi.",
-  _origIndex: 1120
+  usage: '耐熱温度《たいねつおんど》以上《いじょう》の配管《はいかん》には適切《てきせつ》な耐熱《たいねつ》保温材《ほおんざい》を選《えら》ぶ（pilih material insulasi tahan panas yang sesuai untuk pipa yang melebihi suhu tahan panas）',
+    _origIndex: 1120
   },
 {
   id: 993,
@@ -849,7 +910,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tingkat penyerapan air",
   desc: "Persentase air yang dapat diserap material insulasi.\nInsulasi basah kehilangan",
-  _origIndex: 1121
+  usage: '吸水率《きゅうすいりつ》が低《ひく》い保温材《ほおんざい》を屋外《おくがい》または湿潤《しつじゅん》箇所《かしょ》に使用《しよう》する（gunakan material insulasi dengan daya serap air rendah di area luar atau lembap）',
+    _origIndex: 1121
   },
 {
   id: 994,
@@ -860,7 +922,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Penyegelan tembusan",
   desc: "Penyegelan wajib pada titik pipa berinsulasi yang menembus dinding/lantai",
-  _origIndex: 1122
+  usage: '防火区画貫通処理《ぼうかかんつうしょり》で配管《はいかん》が区画《くかく》を通過《つうか》する箇所《かしょ》を耐火充填《たいかじゅうてん》する（isi area tembusan pipa pada kompartemen tahan api dengan material fire-stop）',
+    _origIndex: 1122
   },
 {
   id: 995,
@@ -871,7 +934,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Prosedur pemasangan",
   desc: "Urutan: cek permukaan→pasang insulasi→ikat kawat→pasang lapisan penghalang",
-  _origIndex: 1123
+  usage: '保温施工手順《ほおんせこうてじゅん》（清掃《せいそう》→材料取付《ざいりょうとりつけ》→外装仕上《がいそうしあげ》）を守《まも》って施工《せこう》する（laksanakan pemasangan insulasi sesuai prosedur: bersihkan → pasang material → selesaikan lapisan luar）',
+    _origIndex: 1123
   },
 {
   id: 996,
@@ -882,7 +946,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Busa polietilena",
   desc: "Insulasi busa polietilena yang fleksibel dan ringan.\nCocok untuk pipa AC",
-  _origIndex: 1124
+  usage: 'ポリエチレンフォームを配管《はいかん》の防露《ぼうろ》工事《こうじ》に使用《しよう》する（gunakan polyethylene foam untuk pekerjaan anti-kondensasi pada pipa）',
+    _origIndex: 1124
   },
 {
   id: 999,
@@ -893,7 +958,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Transformator / trafo",
   desc: "Perangkat yang mengubah tegangan tinggi ke rendah untuk menyuplai daya ke",
-  _origIndex: 1127
+  usage: '変圧器《へんあつき》で6600Vを100/200Vに降圧《こうあつ》して一般設備《いっぱんせつび》に供給《きょうきゅう》する（turunkan tegangan 6600V ke 100/200V menggunakan transformator untuk disalurkan ke instalasi umum）',
+    _origIndex: 1127
   },
 {
   id: 1000,
@@ -904,7 +970,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kotak sambungan",
   desc: "Kotak tempat percabangan dan sambungan kabel dilakukan, lalu ditutup untuk",
-  _origIndex: 1128
+  usage: 'ジャンクションボックスで電線《でんせん》を分岐《ぶんき》して接続《せつぞく》する（percabangkan dan sambungkan kabel di dalam junction box）',
+    _origIndex: 1128
   },
 {
   id: 1001,
@@ -915,7 +982,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Resistansi pembumian",
   desc: "Nilai hambatan pada sistem grounding. Grounding jenis D不《ふ》boleh melebihi 100Ω.",
-  _origIndex: 1129
+  usage: '接地抵抗《せっちていこう》を測定《そくてい》して規定値《きていち》以下《いか》を確認《かくにん》する（ukur resistansi pembumian dan konfirmasi nilainya di bawah standar）',
+    _origIndex: 1129
   },
 {
   id: 1002,
@@ -926,7 +994,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Bushing pelindung ujung",
   desc: "Dipasang di ujung konduit untuk melindungi isolasi kabel saat penarikan kabel.",
-  _origIndex: 1130
+  usage: 'ブッシングでケーブルが金属《きんぞく》縁《ふち》で損傷《そんしょう》しないよう保護《ほご》する（lindungi kabel dari kerusakan akibat tepi logam menggunakan bushing）',
+    _origIndex: 1130
   },
 {
   id: 1003,
@@ -937,7 +1006,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "KWh meter / meteran",
   desc: "Alat pengukur akumulasi total konsumsi listrik (kWh) sebagai dasar tagihan.",
-  _origIndex: 1131
+  usage: '電力量計《でんりょくりょうけい》（KWhメーター）で月間《げっかん》の消費電力《しょうひでんりょく》を計測《けいそく》する（ukur konsumsi daya bulanan menggunakan KWh meter）',
+    _origIndex: 1131
   },
 {
   id: 1005,
@@ -948,7 +1018,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sirkuit cabang / branch",
   desc: "Sirkuit individual yang mendistribusikan daya dari panel ke stop kontak atau",
-  _origIndex: 1133
+  usage: '幹線《かんせん》から分岐回路《ぶんきかいろ》に分《わ》けてコンセントや照明《しょうめい》に供給《きょうきゅう》する（distribusikan dari kabel utama ke sirkuit cabang untuk stopkontak dan lampu）',
+    _origIndex: 1133
   },
 {
   id: 1009,
@@ -959,7 +1030,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pengukuran resistansi",
   desc: "Tes megger untuk memverifikasi kondisi isolasi sirkuit pada inspeksi akhir",
-  _origIndex: 1137
+  usage: '絶縁抵抗測定《ぜつえんていこうそくてい》で各回路《かくかいろ》が0.1MΩ以上《いじょう》を確認《かくにん》する（konfirmasi setiap sirkuit ≥0.1MΩ melalui pengukuran resistansi insulasi）',
+    _origIndex: 1137
   },
 {
   id: 1011,
@@ -970,7 +1042,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "MCB / pemutus sirkuit",
   desc: "Memutus sirkuit saat arus lebih atau korsleting, tapi tidak bereaksi terhadap",
-  _origIndex: 1139
+  usage: '配線用遮断器《はいせんようしゃだんき》（MCB）が過電流《かでんりゅう》を検知《けんち》して回路《かいろ》を遮断《しゃだん》する（MCB mendeteksi arus lebih dan memutus sirkuit）',
+    _origIndex: 1139
   },
 {
   id: 1012,
@@ -981,7 +1054,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Cable tray",
   desc: "Jalur kabel berdasar tertutup, lebih tahan debu dan cipratan air dibanding",
-  _origIndex: 1140
+  usage: 'ケーブルトレイに複数《ふくすう》のケーブルを整列《せいれつ》して敷設《ふせつ》する（susun dan pasang beberapa kabel secara teratur pada cable tray）',
+    _origIndex: 1140
   },
 {
   id: 1015,
@@ -992,7 +1066,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Jenis grounding A, B, C, D",
   desc: "Nilai resistansi: jenis A & C ≤10Ω, jenis D ≤100Ω.\nSering muncul dalam soal",
-  _origIndex: 1143
+  usage: 'A種《しゅ》・B種・C種・D種の接地工事《せっちこうじ》の種類《しゅるい》と適用《てきよう》を理解《りかい》する（pahami jenis dan penerapan grounding tipe A, B, C, dan D）',
+    _origIndex: 1143
   },
 {
   id: 1017,
@@ -1003,7 +1078,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Klem grounding",
   desc: "Penjepit yang menghubungkan kabel bumi ke batang grounding secara kuat dan",
-  _origIndex: 1145
+  usage: 'アースクランプで接地線《せっちせん》をアース端子《たんし》にしっかり固定《こてい》する（kencangkan kabel grounding pada terminal earth menggunakan earth clamp）',
+    _origIndex: 1145
   },
 {
   id: 1018,
@@ -1014,7 +1090,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Knockout / bukaan",
   desc: "Bagian panel listrik yang dilepas untuk membuat lubang masuknya konduit kabel.",
-  _origIndex: 1146
+  usage: 'ノックアウトパンチでボックスに電線管《でんせんかん》用の穴《あな》を開《あ》ける（buat lubang untuk konduit pada kotak menggunakan knockout punch）',
+    _origIndex: 1146
   },
 {
   id: 1019,
@@ -1025,7 +1102,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kode warna identifikasi",
   desc: "Sistem single phase 3 kawat: hitam & merah untuk fasa aktif, putih untuk netral.",
-  _origIndex: 1147
+  usage: '電線《でんせん》の識別色《しきべつしょく》（黒《くろ》=非接地側《ひせっちがわ》・白《しろ》=接地側・緑《みどり》=アース）を覚《おぼ》える（hafalkan kode warna identifikasi kabel: hitam=non-grounded, putih=grounded, hijau=earth）',
+    _origIndex: 1147
   },
 {
   id: 1020,
@@ -1036,7 +1114,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kabel masukan dari tiang",
   desc: "Kabel yang ditarik dari tiang listrik ke gedung; menjadi tanggung jawab",
-  _origIndex: 1148
+  usage: '電柱《でんちゅう》から引込線《ひきこみせん》を建物《たてもの》に引《ひ》き込《こ》む（tarik kabel dari tiang listrik ke dalam bangunan）',
+    _origIndex: 1148
   },
 {
   id: 1022,
@@ -1047,7 +1126,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Gate valve / katup pintu",
   desc: "Dipakai posisi buka penuh atau tutup penuh; tidak cocok untuk mengatur debit",
-  _origIndex: 1150
+  usage: '仕切弁《しきりべん》（ゲートバルブ）を全開《ぜんかい》または全閉《ぜんへい》で使《つか》う（gunakan gate valve dalam posisi terbuka penuh atau tertutup penuh）',
+    _origIndex: 1150
   },
 {
   id: 1023,
@@ -1058,7 +1138,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Globe valve / katup bola",
   desc: "Cocok untuk mengatur debit aliran, namun kerugian tekanannya besar dibanding",
-  _origIndex: 1151
+  usage: '玉形弁《たまがたべん》（グローブバルブ）で流量《りゅうりょう》を細《こ》かく調節《ちょうせつ》する（atur aliran secara halus menggunakan globe valve）',
+    _origIndex: 1151
   },
 {
   id: 1024,
@@ -1081,7 +1162,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Butterfly valve / katup",
   desc: "Dipakai pada pipa berdiameter besar untuk pengendalian debit, misal sistem air",
-  _origIndex: 1153
+  usage: 'バタフライバルブで大口径管《だいこうけいかん》の流量《りゅうりょう》を素早《すばや》く制御《せいぎょ》する（kendalikan aliran pipa besar dengan cepat menggunakan butterfly valve）',
+    _origIndex: 1153
   },
 {
   id: 1026,
@@ -1104,7 +1186,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Safety valve / katup",
   desc: "Terbuka otomatis saat tekanan melebihi nilai seting untuk membuang kelebihan",
-  _origIndex: 1155
+  usage: '圧力《あつりょく》が設定値《せっていち》を超《こ》えると安全弁《あんぜんべん》が自動《じどう》で開《ひら》いて圧力《あつりょく》を逃《に》がす（safety valve terbuka otomatis untuk melepas tekanan jika melebihi nilai yang ditetapkan）',
+    _origIndex: 1155
   },
 {
   id: 1031,
@@ -1127,7 +1210,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Reducer / fitting beda",
   desc: "Digunakan untuk menyambung pipa berbeda diameter; tersedia tipe konsentrik dan",
-  _origIndex: 1160
+  usage: 'レデューサーで口径《こうけい》が異《こと》なる配管《はいかん》を接続《せつぞく》する（sambungkan pipa dengan diameter berbeda menggunakan reducer）',
+    _origIndex: 1160
   },
 {
   id: 1033,
@@ -1138,7 +1222,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Union / sambungan pipa",
   desc: "Fitting yang dipasang di sisi masuk/keluar katup agar peralatan mudah dibongkar",
-  _origIndex: 1161
+  usage: 'ユニオン継手《つぎて》で分解《ぶんかい》が必要《ひつよう》な機器《きき》前後《ぜんご》の配管《はいかん》を接続《せつぞく》する（sambungkan pipa sebelum dan sesudah peralatan yang perlu dibongkar menggunakan union）',
+    _origIndex: 1161
   },
 {
   id: 1034,
@@ -1149,7 +1234,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "U-bolt / penjepit pipa",
   desc: "Penjepit pipa pada dudukan; kencangkan sesuai torsi yang ditentukan agar pipa",
-  _origIndex: 1162
+  usage: 'Uボルトで配管《はいかん》を鋼材《こうざい》や壁面《かべめん》にしっかり固定《こてい》する（kencangkan pipa pada baja atau dinding menggunakan U-bolt）',
+    _origIndex: 1162
   },
 {
   id: 1035,
@@ -1160,7 +1246,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pipe hanger band",
   desc: "Digantung dari pelat beton lewat baut gantung untuk menopang pipa horizontal di",
-  _origIndex: 1163
+  usage: '吊りバンド《つりバンド》で天井《てんじょう》から配管《はいかん》を吊《つ》り下《さ》げる（gantungkan pipa dari langit-langit menggunakan pipe hanger band）',
+    _origIndex: 1163
   },
 {
   id: 1036,
@@ -1171,7 +1258,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Anti-vibration joint",
   desc: "Dipasang di sambungan keluar pompa untuk mencegah getaran merambat ke jaringan",
-  _origIndex: 1164
+  usage: '振動《しんどう》機器《きき》の近く《ちかく》に防振継手《ぼうしんつぎて》を設置《せっち》して振動《しんどう》を吸収《きゅうしゅう》する（pasang anti-vibration joint di dekat peralatan yang bergetar untuk menyerap getaran）',
+    _origIndex: 1164
   },
 {
   id: 1037,
@@ -1182,7 +1270,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Flexible joint",
   desc: "Menyerap perpindahan saat gempa dan ekspansi-kontraksi akibat perubahan suhu",
-  _origIndex: 1165
+  usage: '地震《じしん》や熱変形《ねつへんけい》に対応《たいおう》するため可とう継手《かとうつぎて》を設置《せっち》する（pasang flexible joint untuk mengakomodasi gempa bumi dan deformasi termal）',
+    _origIndex: 1165
   },
 {
   id: 1038,
@@ -1193,7 +1282,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Vent pipe / pipa",
   desc: "Menstabilkan tekanan udara dalam pipa drainase agar air dalam trap tidak",
-  _origIndex: 1166
+  usage: '排水立管《はいすいたてかん》に通気管《つうきかん》を接続《せつぞく》して悪臭《あくしゅう》の逆流《ぎゃくりゅう》を防《ふせ》ぐ（hubungkan vent pipe ke pipa tegak drainase untuk mencegah bau busuk mengalir balik）',
+    _origIndex: 1166
   },
 {
   id: 1044,
@@ -1204,7 +1294,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Diagram perpipaan",
   desc: "Gambar teknik yang menunjukkan posisi katup dan arah aliran dalam sistem",
-  _origIndex: 1172
+  usage: '配管図《はいかんず》を見《み》て実際《じっさい》の経路《けいろ》・寸法《すんぽう》・勾配《こうばい》を確認《かくにん》する（periksa jalur, dimensi, dan kemiringan aktual menggunakan diagram perpipaan）',
+    _origIndex: 1172
   },
 {
   id: 1045,
@@ -1215,7 +1306,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Dudukan penopang pipa",
   desc: "Bracket penopang pipa; jarak antar bracket ditentukan oleh diameter dan",
-  _origIndex: 1173
+  usage: '管支持金具《かんしじかなぐ》で適切《てきせつ》な間隔《かんかく》ごとに配管《はいかん》を固定《こてい》する（kencangkan pipa pada jarak yang sesuai menggunakan dudukan penopang pipa）',
+    _origIndex: 1173
   },
 {
   id: 1046,
@@ -1226,7 +1318,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Water hammer / hentakan",
   desc: "Lonjakan tekanan yang terjadi saat pompa mendadak berhenti atau katup ditutup",
-  _origIndex: 1174
+  usage: '水撃作用《すいげきさよう》（ウォーターハンマー）を防《ふせ》ぐためにバルブを徐々《じょじょ》に閉《し》める（tutup katup secara perlahan untuk mencegah water hammer）',
+    _origIndex: 1174
   },
 {
   id: 1047,
@@ -1285,7 +1378,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Konektor fiber optik ST",
   desc: "Konektor fiber yang dikunci dengan memutar seperti bayonet; dahulu umum di",
-  _origIndex: 1181
+  usage: 'STコネクタで古い光ファイバー《ひかりふぁいばあ》設備《せつび》を接続《せつぞく》する（hubungkan peralatan serat optik lama menggunakan konektor ST）',
+    _origIndex: 1181
   },
 {
   id: 1054,
@@ -1296,7 +1390,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Rugi daya akibat",
   desc: "Nilai refleksi tinggi pada sambungan konektor; terlihat sebagai lonjakan pada",
-  _origIndex: 1182
+  usage: '反射損失《はんしゃそんしつ》を低減《ていげん》するためにコネクタを正しく研磨《けんま》する（lakukan pemolesan konektor dengan benar untuk mengurangi rugi refleksi）',
+    _origIndex: 1182
   },
 {
   id: 1055,
@@ -1307,7 +1402,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Rugi sisip pada",
   desc: "Kehilangan daya saat sinyal melewati konektor atau sambungan fusion.",
-  _origIndex: 1183
+  usage: '挿入損失《そうにゅうそんしつ》をOTDRで測定《そくてい》して規定値《きていち》以内《いない》を確認《かくにん》する（ukur rugi sisip menggunakan OTDR dan konfirmasi nilainya dalam batas yang ditentukan）',
+    _origIndex: 1183
   },
 {
   id: 1056,
@@ -1318,7 +1414,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Zona buta OTDR",
   desc: "Area dalam dead zone OTDR yang tidak dapat diukur; rugi tepat setelah konektor",
-  _origIndex: 1184
+  usage: 'OTDRのデッドゾーンが短《みじか》い機器《きき》を選択《せんたく》して近距離《きんきょり》の測定《そくてい》精度《せいど》を上《あ》げる（pilih alat OTDR dengan dead zone pendek untuk meningkatkan akurasi pengukuran jarak dekat）',
+    _origIndex: 1184
   },
 {
   id: 1057,
@@ -1329,7 +1426,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Panel patch distribusi sinyal",
   desc: "Tempat kabel LAN dari berbagai titik disambungkan untuk merapikan kabel menuju",
-  _origIndex: 1185
+  usage: 'パッチパネルで各部屋《かくへや》からのLANケーブルを集中管理《しゅうちゅうかんり》する（kelola kabel LAN dari setiap ruangan secara terpusat menggunakan patch panel）',
+    _origIndex: 1185
   },
 {
   id: 1058,
@@ -1340,7 +1438,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kabel twisted pair",
   desc: "STP memiliki pelindung yang memblokir gangguan elektromagnetik, cocok untuk",
-  _origIndex: 1186
+  usage: 'STPケーブルでノイズ《のいず》の多《おお》い環境《かんきょう》に対応《たいおう》した配線《はいせん》をする（lakukan pengkabelan di lingkungan yang banyak gangguan menggunakan kabel STP）',
+    _origIndex: 1186
   },
 {
   id: 1061,
@@ -1351,7 +1450,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Panel distribusi kabel",
   desc: "Di gedung besar, kabel trunk dari MDF didistribusikan via IDF ke terminal di",
-  _origIndex: 1189
+  usage: 'IDF（中間配線盤《ちゅうかんはいせんばん》）でMDFと各フロア《かくふろあ》間《かん》の配線《はいせん》を中継《ちゅうけい》する（relai kabel antara MDF dan setiap lantai menggunakan IDF）',
+    _origIndex: 1189
   },
 {
   id: 1062,
@@ -1362,7 +1462,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Panel terminal grounding",
   desc: "Kabel grounding semua perangkat komunikasi dikumpulkan di sini untuk",
-  _origIndex: 1190
+  usage: '接地端子盤《せっちたんしばん》で通信機器《つうしんきき》の接地《せっち》を一括《いっかつ》管理《かんり》する（kelola grounding peralatan telekomunikasi secara terpusat menggunakan panel terminal grounding）',
+    _origIndex: 1190
   },
 {
   id: 1064,
@@ -1373,7 +1474,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Terminal block / blok",
   desc: "Beberapa kabel dikencangkan dengan sekrup pada blok ini untuk membagi dan",
-  _origIndex: 1192
+  usage: '端子台《たんしだい》で電線《でんせん》をねじ止めして確実《かくじつ》に接続《せつぞく》する（sambungkan kabel secara andal menggunakan terminal block dengan cara dikencangkan）',
+    _origIndex: 1192
   },
 {
   id: 1066,
@@ -1384,7 +1486,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Identifikasi pasangan",
   desc: "Pemeriksaan untuk memastikan inti mana dalam kabel multi-core yang terhubung ke",
-  _origIndex: 1194
+  usage: '心線対照《しんせんたいしょう》試験《しけん》でケーブルのペア番号《ばんごう》を確認《かくにん》する（konfirmasi nomor pasang kabel melalui uji identifikasi pair）',
+    _origIndex: 1194
   },
 {
   id: 1067,
@@ -1395,7 +1498,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Radius tikungan minimum",
   desc: "Jika radius tikungan lebih kecil dari nilai minimum, rugi cahaya melonjak dan",
-  _origIndex: 1195
+  usage: '光ケーブルの曲げ半径《まげはんけい》を最小値《さいしょうち》以上《いじょう》に保《たも》って損失《そんしつ》増加《ぞうか》を防《ふせ》ぐ（jaga radius tikungan kabel optik di atas nilai minimum untuk mencegah peningkatan rugi）',
+    _origIndex: 1195
   },
 {
   id: 1068,
@@ -1406,7 +1510,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kabel UTP Cat5e, hingga",
   desc: "Kabel Cat5e mendukung Gigabit Ethernet (1000BASE-T), banyak digunakan untuk LAN",
-  _origIndex: 1196
+  usage: 'Cat5eケーブルで1Gbps対応《たいおう》のLAN配線《はいせん》をする（lakukan instalasi LAN berkecepatan 1Gbps menggunakan kabel Cat5e）',
+    _origIndex: 1196
   },
 {
   id: 1069,
@@ -1417,7 +1522,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kabel UTP Cat6, hingga",
   desc: "Lebih tahan noise frekuensi tinggi dari Cat5e; mampu mendukung 10GbE pada jarak",
-  _origIndex: 1197
+  usage: 'Cat6ケーブルで10Gbps対応《たいおう》の高速《こうそく》LAN配線《はいせん》をする（lakukan instalasi LAN 10Gbps menggunakan kabel Cat6）',
+    _origIndex: 1197
   },
 {
   id: 1070,
@@ -1428,7 +1534,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pembagi sinyal optik",
   desc: "Dalam sistem PON, splitter optik membagi satu fiber menjadi jalur untuk banyak",
-  _origIndex: 1198
+  usage: '光スプリッター《ひかりすぷりったー》で1本《ぽん》の光ファイバーを複数《ふくすう》の加入者《かにゅうしゃ》に分配《ぶんぱい》する（distribusikan 1 serat optik ke beberapa pelanggan menggunakan optical splitter）',
+    _origIndex: 1198
   },
 {
   id: 1071,
@@ -1439,7 +1546,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Passive Optical Network",
   desc: "Arsitektur jaringan fiber pasif yang menghubungkan OLT dan ONU melalui splitter",
-  _origIndex: 1199
+  usage: 'PON（受動光ネットワーク）でOLTから複数《ふくすう》のONUにスプリッターを使《つか》って配信《はいしん》する（distribusikan dari OLT ke beberapa ONU menggunakan splitter dalam PON）',
+    _origIndex: 1199
   },
 {
   id: 1108,
@@ -1450,7 +1558,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Raised access floor",
   desc: "Struktur lantai ganda yang memungkinkan kabel listrik dan LAN diatur bebas di",
-  _origIndex: 1254
+  usage: 'フリーアクセスフロアの床下《ゆかした》にケーブルを敷設《ふせつ》して将来《しょうらい》の変更《へんこう》に対応《たいおう》する（pasang kabel di bawah raised floor untuk mengakomodasi perubahan di masa depan）',
+    _origIndex: 1254
   },
 {
   id: 1118,
@@ -1461,7 +1570,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Panel akustik rockwool",
   desc: "Panel plafon dari rockwool yang dapat menyerap suara sekaligus memiliki sifat",
-  _origIndex: 1272
+  usage: 'ロックウール吸音板《きゅうおんばん》を天井《てんじょう》や壁《かべ》に設置《せっち》して騒音《そうおん》を低減《ていげん》する（pasang panel akustik rockwool pada langit-langit dan dinding untuk mengurangi kebisingan）',
+    _origIndex: 1272
   },
 {
   id: 1122,
@@ -1508,7 +1618,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Hole saw / mata bor",
   desc: "Mata bor untuk membuat lubang bulat besar di dinding atau plafon untuk jalur",
-  _origIndex: 1286
+  usage: 'ホールソーでパイプが通《とお》る穴《あな》をコンクリートや木材《もくざい》に開《あ》ける（buat lubang untuk pipa pada beton atau kayu menggunakan hole saw）',
+    _origIndex: 1286
   },
 {
   id: 1140,
@@ -1519,7 +1630,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Alat anti-percikan",
   desc: "Wajib digunakan saat bekerja di sekitar pipa gas atau ruang dengan gas mudah",
-  _origIndex: 1296
+  usage: '危険物《きけんぶつ》が存在《そんざい》する場所《ばしょ》では防爆工具《ぼうばくこうぐ》を使用《しよう》する（gunakan alat anti-percikan di area yang mengandung bahan berbahaya）',
+    _origIndex: 1296
   },
 {
   id: 1189,
@@ -1530,7 +1642,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Uji kebocoran",
   desc: "Wajib dilakukan setelah pengelasan atau penyambungan pipa sebelum sistem",
-  _origIndex: 1345
+  usage: '漏れ試験《もれしけん》で水圧《すいあつ》または空気圧《くうきあつ》をかけて漏《も》れを確認《かくにん》する（terapkan tekanan air atau udara pada uji kebocoran untuk mengkonfirmasi tidak ada kebocoran）',
+    _origIndex: 1345
   },
 {
   id: 691,
@@ -1589,7 +1702,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Permukaan dalam",
   desc: "Sisi bagian dalam pipa. Karat di permukaan dalam → bersihkan sebelum konstruksi.",
-  _origIndex: 811
+  usage: 'ライニング管《かん》の内面《ないめん》を傷《きず》つけないように注意《ちゅうい》して施工《せこう》する（berhati-hati agar tidak merusak permukaan dalam pipa lining saat pemasangan）',
+    _origIndex: 811
   },
 {
   id: 698,
@@ -1600,7 +1714,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Bagian dalam / interior",
   desc: "Ruang dalam perangkat. Kelembapan tersisa di sini → perangkat rusak dari dalam.",
-  _origIndex: 812
+  usage: '機器《きき》の内部《ないぶ》を確認《かくにん》してから試運転《しうんてん》をする（periksa bagian dalam peralatan sebelum uji coba operasi）',
+    _origIndex: 812
   },
 {
   id: 699,
@@ -1623,7 +1738,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Suhu / temperatur",
   desc: "Derajat panas suatu benda. Sering jadi pengecoh soal ujian.",
-  _origIndex: 815
+  usage: '温度《おんど》が急変《きゅうへん》した場合《ばあい》は機器《きき》の異常《いじょう》を確認《かくにん》する（periksa anomali peralatan jika suhu berubah tiba-tiba）',
+    _origIndex: 815
   },
 {
   id: 702,
@@ -1634,7 +1750,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Ada tidaknya / keberadaan",
   desc: "Ada atau tidaknya sesuatu. Misal: periksa ada-tidaknya kebocoran pada sistem.",
-  _origIndex: 816
+  usage: '絶縁不良《ぜつえんふりょう》の有無《うむ》を絶縁抵抗計《ぜつえんていこうけい》で確認《かくにん》する（periksa ada tidaknya insulasi yang buruk menggunakan megger）',
+    _origIndex: 816
   },
 {
   id: 706,
@@ -1645,7 +1762,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Berat / massa",
   desc: "Beban fisik suatu objek. Sering muncul sebagai pengecoh: bertambahnya berat.",
-  _origIndex: 820
+  usage: '重量《じゅうりょう》が重《おも》い資材《しざい》を運《はこ》ぶときはフォークリフトを使用《しよう》する（gunakan forklift saat mengangkut material yang berat）',
+    _origIndex: 820
   },
 {
   id: 709,
@@ -1656,7 +1774,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Posisi / lokasi",
   desc: "Letak suatu benda. Posisi pipa terpendam wajib dicatat di gambar teknik.",
-  _origIndex: 823
+  usage: '取付位置《とりつけいち》を図面《ずめん》で確認《かくにん》してから機器《きき》を設置《せっち》する（konfirmasi posisi pemasangan pada gambar sebelum memasang peralatan）',
+    _origIndex: 823
   },
 {
   id: 714,
@@ -1667,7 +1786,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Luar ruangan / outdoor",
   desc: "Di luar gedung. Insulasi pipa di luar ruangan wajib dilengkapi penutup anti-air.",
-  _origIndex: 828
+  usage: '屋外《おくがい》に設置《せっち》する機器《きき》は耐候性《たいこうせい》のある材料《ざいりょう》を使《つか》う（gunakan material tahan cuaca untuk peralatan yang dipasang di luar ruangan）',
+    _origIndex: 828
   },
 {
   id: 715,
@@ -1678,7 +1798,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Jenis / tipe",
   desc: "Jenis atau ragam. Jenis refrigeran adalah pengecoh soal kondensasi berulang.",
-  _origIndex: 829
+  usage: 'ダクトの種類《しゅるい》によって接続《せつぞく》方法《ほうほう》が異《こと》なる（metode penyambungan berbeda tergantung pada jenis duct）',
+    _origIndex: 829
   },
 {
   id: 716,
@@ -1689,7 +1810,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tujuan / maksud",
   desc: "Hal yang ingin dicapai. Tujuan utama grounding: mencegah sengatan listrik.",
-  _origIndex: 830
+  usage: '工事《こうじ》の目的《もくてき》を理解《りかい》してから施工《せこう》計画《けいかく》を立《た》てる（pahami tujuan pekerjaan konstruksi sebelum membuat rencana pelaksanaan）',
+    _origIndex: 830
   },
 {
   id: 719,
@@ -1700,7 +1822,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Hasil / hasil akhir",
   desc: "Hasil suatu pengujian. Tekanan tidak stabil → kemungkinan ada kebocoran.",
-  _origIndex: 833
+  usage: '施工後《せこうご》の検査《けんさ》で結果《けっか》を確認《かくにん》して記録《きろく》する（konfirmasi dan catat hasil pemeriksaan setelah pekerjaan selesai）',
+    _origIndex: 833
   },
 {
   id: 720,
@@ -1711,7 +1834,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Perubahan",
   desc: "Kondisi berbeda dari semula. Keduanya sering jadi pengecoh di soal ujian.",
-  _origIndex: 834
+  usage: '季節《きせつ》の変化《へんか》に合《あ》わせて空調《くうちょう》設定《せってい》を調整《ちょうせい》する（sesuaikan setelan AC mengikuti perubahan musim）',
+    _origIndex: 834
   },
 {
   id: 722,
@@ -1722,7 +1846,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Masalah / persoalan",
   desc: "Suatu kondisi yang bermasalah. Kemiringan kurang → aliran terhambat/memburuk.",
-  _origIndex: 836
+  usage: '施工上《せこうじょう》の問題《もんだい》は職長《しょくちょう》に報告《ほうこく》して解決《かいけつ》する（laporkan masalah pelaksanaan kepada mandor untuk diselesaikan）',
+    _origIndex: 836
   },
 {
   id: 726,
@@ -1733,7 +1858,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tetap / konstan",
   desc: "Tetap, tidak berubah. Pengecoh: suhu konstan bukan akibat vakum tidak tuntas.",
-  _origIndex: 840
+  usage: '一定《いってい》のピッチで部材《ぶざい》を取《と》り付《つ》けて均等《きんとう》に仕上《しあ》げる（pasang komponen dengan jarak tetap untuk hasil yang merata）',
+    _origIndex: 840
   },
 {
   id: 733,
@@ -1744,7 +1870,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Panjang / panjangnya",
   desc: "Ukuran dari ujung ke ujung. Pengecoh Q18; panas tidak terjebak lebih penting.",
-  _origIndex: 847
+  usage: '配管《はいかん》の長《なが》さを測定《そくてい》して必要《ひつよう》量《りょう》の材料《ざいりょう》を発注《はっちゅう》する（ukur panjang pipa dan pesan material sesuai kebutuhan）',
+    _origIndex: 847
   },
 {
   id: 735,
@@ -1755,7 +1882,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Dangkal",
   desc: "Tidak dalam. Pengecoh Q1 — pipa dangkal justru lebih rentan membeku.",
-  _origIndex: 849
+  usage: '浅《あさ》い掘削《くっさく》でも埋設物《まいせつぶつ》の確認《かくにん》を怠《おこた》ってはいけない（jangan abaikan pengecekan utilitas bawah tanah meski galian dangkal sekalipun）',
+    _origIndex: 849
   },
 {
   id: 741,
@@ -1766,7 +1894,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Kuat / keras",
   desc: "Berdaya besar. Pengecoh Q9 — menaikkan daya saat kabel panas → berbahaya.",
-  _origIndex: 855
+  usage: '強い《つよい》振動《しんどう》が発生《はっせい》する機器《きき》には防振《ぼうしん》ゴムを取《と》り付《つ》ける（pasang karet anti-getar pada peralatan yang menghasilkan getaran kuat）',
+    _origIndex: 855
   },
 {
   id: 746,
@@ -1777,7 +1906,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Dalam kasus / apabila",
   desc: "Ungkapan syarat: apabila / dalam kasus. Muncul di hampir semua soal ujian.",
-  _origIndex: 860
+  usage: '漏水《ろうすい》が発生《はっせい》した場合《ばあい》は直《ただ》ちに元栓《もとせん》を閉《し》める（tutup keran utama segera jika terjadi kebocoran air）',
+    _origIndex: 860
   },
 {
   id: 748,
@@ -1788,7 +1918,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tebal / gemuk (kabel)",
   desc: "Berdiameter besar. Pengecoh Q3: kabel tebal tidak mencegah air masuk konduit.",
-  _origIndex: 862
+  usage: '太い《ふとい》ケーブルは専用《せんよう》の工具《こうぐ》を使《つか》って曲《ま》げる（tekuk kabel tebal menggunakan alat khusus）',
+    _origIndex: 862
   },
 {
   id: 752,
@@ -1799,7 +1930,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Menyebut / memanggil",
   desc: "Menyebut dengan nama. Pola tanya: disebut apa? Muncul di Q10 → heat loss.",
-  _origIndex: 866
+  usage: '現場《げんば》でよく呼ぶ《よぶ》用語《ようご》を事前《じぜん》に覚《おぼ》えておく（hafalkan istilah yang sering dipakai di lapangan terlebih dahulu）',
+    _origIndex: 866
   },
 {
   id: 753,
@@ -1810,7 +1942,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Utama / terutama",
   desc: "Yang paling penting. Q13: tujuan utama grounding → mencegah sengatan listrik.",
-  _origIndex: 867
+  usage: '主な《おもな》配管材料《はいかんざいりょう》（SGP・VP・銅管《どうかん》）の特徴《とくちょう》を理解《りかい》する（pahami karakteristik material pipa utama: SGP, VP, dan tembaga）',
+    _origIndex: 867
   },
 {
   id: 762,
@@ -1821,7 +1954,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Hal perlu diperhatikan",
   desc: "Poin yang perlu diperhatikan. Q18: bundel kabel → panas tidak boleh terjebak.",
-  _origIndex: 876
+  usage: '高所作業《こうしょさぎょう》の注意点《ちゅういてん》を作業前《さぎょうまえ》に全員《ぜんいん》で確認《かくにん》する（konfirmasi hal-hal yang perlu diperhatikan dalam pekerjaan ketinggian bersama semua pekerja sebelum mulai）',
+    _origIndex: 876
   },
 {
   id: 763,
@@ -1832,7 +1966,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Wajib, pasti, selalu",
   desc: "Wajib, tidak boleh dilewati. Kata kunci prosedur yang tidak bisa dilewati.",
-  _origIndex: 877
+  usage: '安全帯《あんぜんたい》は必ず《かならず》フックを掛《か》けてから作業《さぎょう》する（kaitkan harness terlebih dahulu sebelum bekerja）',
+    _origIndex: 877
   },
 {
   id: 764,
@@ -1843,7 +1978,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Pertama-tama",
   desc: "Yang pertama dilakukan. Muncul di Q4 dan Q9 sebagai penanda prioritas utama.",
-  _origIndex: 878
+  usage: 'まず施工図《せこうず》を確認《かくにん》してから作業《さぎょう》を開始《かいし》する（pertama-tama periksa gambar kerja sebelum memulai pekerjaan）',
+    _origIndex: 878
   },
 {
   id: 765,
@@ -1854,7 +1990,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Khususnya / terutama",
   desc: "Penekanan: khususnya/terutama. Q5: bahaya utama yang perlu diwaspadai → jatuh.",
-  _origIndex: 879
+  usage: '特に《とくに》接続部《せつぞくぶ》の漏《も》れ確認《かくにん》を入念《にゅうねん》に行《おこな》う（periksa kebocoran sambungan secara cermat, terutama pada titik-titik sambungan）',
+    _origIndex: 879
   },
 {
   id: 767,
@@ -1889,7 +2026,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Yang dapat diperkirakan",
   desc: "Kemungkinan yang dapat terjadi. Q6: penyebab tekanan tidak stabil → kebocoran.",
-  _origIndex: 883
+  usage: '原因《げんいん》として考えられる《かんがえられる》要素《ようそ》を一つずつ確認《かくにん》する（periksa satu per satu faktor yang dapat menjadi penyebabnya）',
+    _origIndex: 883
   },
 {
   id: 770,
@@ -1900,7 +2038,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Sedang digunakan",
   desc: "Kondisi sedang dipakai. Q9: saat kabel panas saat pemakaian → hentikan segera.",
-  _origIndex: 884
+  usage: '使用中《しようちゅう》の機器《きき》を無断《むだん》で停止《ていし》してはいけない（jangan menghentikan peralatan yang sedang digunakan tanpa izin）',
+    _origIndex: 884
   },
 {
   id: 771,
@@ -1911,7 +2050,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Seharusnya / harus",
   desc: "Kata bantu modal:動詞《どうし》+べき = seharusnya/wajib melakukan.\nSering di soal",
-  _origIndex: 885
+  usage: '不具合《ふぐあい》はその日《ひ》のうちに修正《しゅうせい》すべきだ（cacat pekerjaan seharusnya diperbaiki pada hari yang sama）',
+    _origIndex: 885
   },
 {
   id: 772,
@@ -1934,7 +2074,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Tersisa / tertinggal",
   desc: "残《のこ》る = tersisa (intransitif); 残《のこ》す = menyisakan",
-  _origIndex: 887
+  usage: '現場《げんば》に残る《のこる》廃材《はいざい》は決《き》められた置《お》き場所《ばしょ》に分類《ぶんるい》する（klasifikasikan sisa material yang tertinggal di lokasi ke tempat yang telah ditentukan）',
+    _origIndex: 887
   },
 {
   id: 777,
@@ -1945,6 +2086,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   type: "vocab",
   id_text: "Cara / metode",
   desc: "Cara atau metode untuk melakukan sesuatu.\n〜する方法《ほうほう》 = cara untuk〜; sering",
-  _origIndex: 891
+  usage: '接合《せつごう》の方法《ほうほう》を材料《ざいりょう》の種類《しゅるい》によって選《えら》ぶ（pilih metode penyambungan sesuai jenis material）',
+    _origIndex: 891
   }
 ];
