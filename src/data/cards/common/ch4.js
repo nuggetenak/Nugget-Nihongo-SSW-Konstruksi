@@ -7,10 +7,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "すぼり",
   jp: "素掘り《すぼり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Galian tanpa penahan",
   desc: "Galian tanpa 土留《どどめ》め《どどめ》, hanya jika tanah stabil. Berbeda dari galian ≥1.5m yang wajib pakai",
-  _origIndex: 119
+  usage: '素掘り《すぼり》は崩壊《ほうかい》リスクが高《たか》いため範囲《はんい》を最小限《さいしょうげん》にする（minimalisir area galian terbuka karena risiko longsor yang tinggi）',
+    _origIndex: 119
   },
 {
   id: 129,
@@ -63,10 +64,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "おやずみ",
   jp: "親墨《おやずみ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Garis induk / referensi",
   desc: "Garis referensi utama (通《つう》り芯《とおりしん》, 陸墨《ろくずみ》) yang menjadi dasar semua 墨出《すみだ》し.",
-  _origIndex: 242
+  usage: '親墨《おやずみ》から逃《に》げ墨《すみ》を引《ひ》く（buat garis offset dari garis induk）',
+    _origIndex: 242
   },
 {
   id: 188,
@@ -86,10 +88,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "きじゅんずみ",
   jp: "基準墨《きじゅんずみ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Garis referensi dasar",
   desc: "Garis horizontal/vertikal standar utama saat mendirikan bangunan.",
-  _origIndex: 244
+  usage: '基準墨《きじゅんずみ》を基《もと》に各《かく》部材《ぶざい》を配置《はいち》する（tempatkan setiap komponen berdasarkan garis referensi dasar）',
+    _origIndex: 244
   },
 {
   id: 190,
@@ -130,10 +133,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "じぎょう・べたきそ・ふーちんぐ・くいきそ",
   jp: "地業《じぎょう》・ベタ基礎《べたきそ》・フーチング・杭基礎《くいきそ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan pondasi / 3",
   desc: "地業《じぎょう》=pekerjaan di bawah slab pondasi. ベタ基礎《きそ》=cor seluruh dasar.",
-  _origIndex: 253
+  usage: '地業《じぎょう》を施《ほどこ》した上《うえ》にベタ基礎《べたきそ》を打《う》つ（cor pondasi pelat di atas pekerjaan tanah dasar）',
+    _origIndex: 253
   },
 {
   id: 194,
@@ -141,10 +145,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "すらぶ",
   jp: "スラブ（構造《こうぞう》スラブ・基礎《きそ》スラブ・フラットスラブ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Slab",
   desc: "スラブ=pelat datar (lantai, pondasi, dll). 構造《こうぞう》スラブ=menopang bangunan.",
-  _origIndex: 254
+  usage: 'スラブを型枠《かたわく》と配筋《はいきん》で組《く》み立《た》てる（rakit slab menggunakan bekisting dan pembesian）',
+    _origIndex: 254
   },
 {
   id: 195,
@@ -152,10 +157,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あしばのしゅるい：わくぐみ・たんかん・くさび",
   jp: "足場の種類《あしばのしゅるい》：枠組み《わくぐみ》・単管《たんかん》・くさび",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jenis perancah",
   desc: "枠組《わくぐ》み=rangka prefabrikasi. 単管《たんかん》=pipa tunggal, fleksibel.",
-  _origIndex: 256
+  usage: '枠組み足場《わくぐみあしば》・単管足場《たんかんあしば》・くさび足場《あしば》の特徴《とくちょう》を理解《りかい》する（pahami karakteristik scaffold jenis frame, single pipe, dan wedge）',
+    _origIndex: 256
   },
 {
   id: 196,
@@ -163,10 +169,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "さぎょうゆか・かりがこい",
   jp: "作業床《さぎょうゆか》・仮囲い《かりがこい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lantai kerja + pagar sementara",
   desc: "作業床《さぎょうゆか》=lantai dari papan tempat pekerja berdiri di perancah.",
-  _origIndex: 257
+  usage: '作業床《さぎょうゆか》に隙間《すきま》がないか確認《かくにん》してから作業《さぎょう》する（periksa tidak ada celah di lantai kerja sebelum mulai bekerja）',
+    _origIndex: 257
   },
 {
   id: 197,
@@ -174,10 +181,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "すてこんくりいとすてこん",
   jp: "捨てコンクリート《すてコン》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Beton lantai kerja",
   desc: "Beton tipis 5–10 cm dicor di atas 地業《じぎょう》 sebelum tulangan/bekisting dipasang.",
-  _origIndex: 260
+  usage: '捨《す》てコンの上《うえ》に墨《すみ》を出《だ》す（buat penandaan tinta di atas beton lantai kerja）',
+    _origIndex: 260
   },
 {
   id: 198,
@@ -185,10 +193,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "けっそく・はっかー",
   jp: "結束《けっそく》・ハッカー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengikatan tulangan + hacker",
   desc: "結束《けっそく》=mengikat persilangan tulangan dengan kawat 結束線《けっそくせん》 menggunakan ハッカー.",
-  _origIndex: 261
+  usage: '結束線《けっそくせん》とハッカーで鉄筋《てっきん》を緊結《きんけつ》する（ikat besi tulangan dengan kawat dan hacker）',
+    _origIndex: 261
   },
 {
   id: 199,
@@ -207,10 +216,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ぱんくかたわくほうかい",
   jp: "パンク（型枠《かたわく》崩壊《ほうかい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pecahnya bekisting",
   desc: "Bekisting pecah saat pengecoran karena 支保工《しほこう》 tidak kuat → beton mengalir keluar.",
-  _origIndex: 263
+  usage: '型枠《かたわく》のパンク（崩壊《ほうかい》）を防《ふせ》ぐために側圧《そくあつ》を計算《けいさん》する（hitung tekanan lateral untuk mencegah blowout bekisting）',
+    _origIndex: 263
   },
 {
   id: 201,
@@ -230,10 +240,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "つらいち・ふろく・めちがい",
   jp: "面一《つらいち》・不陸《ふろく》・目違い《めちがい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Rata sejajar, tidak rata, tidak sejajar",
   desc: "面一《つらいち》=dua permukaan dalam satu bidang rata. 不陸《ふろく》=permukaan bergelombang.",
-  _origIndex: 265
+  usage: '仕上《しあ》がりが面一《つらいち》になるよう調整《ちょうせい》する（sesuaikan agar finishing rata sejajar）',
+    _origIndex: 265
   },
 {
   id: 203,
@@ -241,10 +252,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "だめ・てなおし・てもどり・だんどり",
   jp: "駄目《だめ》・手直し《てなおし》・手戻り《てもどり》・段取り《だんどり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sisa pekerjaan / koreksi",
   desc: "駄目《だめ》=pekerjaan terlewat saat hampir finishing. 手直《てなお》しし《てなおし》=koreksi sebagian.",
-  _origIndex: 266
+  usage: '駄目《だめ》を翌日《よくじつ》までに手直し《てなおし》する（selesaikan pekerjaan sisa sebelum keesokan hari）',
+    _origIndex: 266
   },
 {
   id: 204,
@@ -252,10 +264,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "たっぱ・うわば・したば",
   jp: "建端《たっぱ》・上端《うわば》・下端《したば》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tinggi elemen / ujung",
   desc: "建端《たっぱ》=tinggi elemen. 上端《うわば》=tepi atas elemen. 下端《したば》=tepi bawah elemen.",
-  _origIndex: 267
+  usage: '建端《たっぱ》から上端《うわば》まで寸法《すんぽう》を確認《かくにん》する（periksa dimensi dari dasar ke tepi atas komponen）',
+    _origIndex: 267
   },
 {
   id: 205,
@@ -263,10 +276,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "いっけん・いっしゃく・いっすん・ひとつぼ",
   jp: "一間《いっけん》・一尺《いっしゃく》・一寸《いっすん》・一坪《ひとつぼ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "1 ken≈1.8m / 1",
   desc: "Satuan lama yang masih dipakai: 1間《けん》≈1.818m, 1尺《しゃく》≈30.3cm, 1寸《すん》≈3.03cm.",
-  _origIndex: 268
+  usage: '一間《いっけん》（約《やく》1.8m）を基準《きじゅん》に柱《はしら》を配置《はいち》する（atur posisi kolom dengan satuan 1 ken ≈ 1.8 m sebagai acuan）',
+    _origIndex: 268
   },
 {
   id: 206,
@@ -274,10 +288,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ぴっち",
   jp: "ピッチ（割り付《わりつ》けの間隔《かんかく》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jarak pemasangan",
   desc: "Jarak antara elemen yang dipasang berulang: tulangan, baut, atau tile.",
-  _origIndex: 269
+  usage: 'ピッチを均等《きんとう》に保《たも》って取《と》り付《つ》ける（pasang dengan mempertahankan jarak yang merata）',
+    _origIndex: 269
   },
 {
   id: 219,
@@ -307,10 +322,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "みつけ・みえがかり・みえかくれ",
   jp: "見付け《みつけ》・見え掛かり《みえがかり》・見え隠れ《みえかくれ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tampak penuh / sebagian",
   desc: "見《み》え付《みつ》けけ《みつけ》=permukaan sepenuhnya terlihat dari depan. 見《み》ええ掛《か》けかり《みえがかり》=tampak dari",
-  _origIndex: 285
+  usage: '見付け《みつけ》面《めん》を正面《しょうめん》に向《む》けて取《と》り付《つ》ける（pasang dengan sisi tampak menghadap ke depan）',
+    _origIndex: 285
   },
 {
   id: 222,
@@ -318,10 +334,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "そり vs むくり・ろく",
   jp: "反り《そり》 vs 起り《むくり》・陸《ろく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cekung, cembung, rata",
   desc: "反《はん》り《そり》=melengkung CEKUNG. 起《お》きり《むくり》=melengkung CEMBUNG.",
-  _origIndex: 286
+  usage: '反り《そり》のある板《いた》を修正《しゅうせい》してから使用《しよう》する（koreksi papan yang melengkung sebelum digunakan）',
+    _origIndex: 286
   },
 {
   id: 223,
@@ -329,10 +346,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ころび・にげ",
   jp: "転び《ころび》・逃げ《にげ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Elemen miring dari",
   desc: "転《ころ》びび《ころび》=kolom/dinding yang seharusnya tegak namun miring.",
-  _origIndex: 287
+  usage: '転び《ころび》の角度《かくど》を計算《けいさん》してから切断《せつだん》する（hitung sudut kemiringan elemen sebelum memotong）',
+    _origIndex: 287
   },
 {
   id: 224,
@@ -373,10 +391,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ひろいだし",
   jp: "拾い出し《ひろいだし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Perhitungan kebutuhan",
   desc: "Proses membaca gambar kerja untuk menghitung jumlah material dan tenaga kerja.",
-  _origIndex: 291
+  usage: '材料《ざいりょう》の拾い出し《ひろいだし》をして発注数量《はっちゅうすうりょう》を確定《かくてい》する（lakukan material takeoff untuk menentukan jumlah pemesanan）',
+    _origIndex: 291
   },
 {
   id: 228,
@@ -384,10 +403,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ばしょうち・うつだせつ",
   jp: "場所打ち《ばしょうち》・打つ《うつ》／打設する《だせつ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengecoran di lokasi",
   desc: "場所打《ばしょう》ちち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.",
-  _origIndex: 292
+  usage: '型枠《かたわく》内《ない》に場所打ち《ばしょうち》でコンクリートを打設《だせつ》する（cor beton langsung di tempat ke dalam bekisting）',
+    _origIndex: 292
   },
 {
   id: 229,
@@ -395,10 +415,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "のろ・あんこ",
   jp: "ノロ・アンコ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Adukan encer + filler (noro/anko)",
   desc: "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting.",
-  _origIndex: 293
+  usage: 'ノロを水《みず》で薄《うす》めてはいけない（jangan encerkan slurry beton dengan air）',
+    _origIndex: 293
   },
 {
   id: 230,
@@ -406,10 +427,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "てんよう・くぎじまい",
   jp: "転用《てんよう》・釘仕舞《くぎじまい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pakai ulang bekisting + rapikan paku",
   desc: "転《ころ》び用《てんよう》=memakai kembali bekisting di lokasi berbeda untuk hemat biaya.",
-  _origIndex: 294
+  usage: '型枠《かたわく》を転用《てんよう》して次《つぎ》の箇所《かしょ》に使《つか》う（gunakan kembali bekisting untuk area berikutnya）',
+    _origIndex: 294
   },
 {
   id: 231,
@@ -417,10 +439,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "はいごう・ねりまぜ・たんぴんぐ",
   jp: "配合《はいごう》・練り混ぜ《ねりまぜ》・タンピング",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Rasio campuran + pengadukan + tamping",
   desc: "配合《はいごう》=perbandingan semen, pasir, kerikil, air. 練《ね》りり混《ま》ぜぜ《ねりまぜ》=mencampur hingga merata.",
-  _origIndex: 295
+  usage: '水セメント比《みずせめんとひ》を守《まも》って配合《はいごう》する（lakukan pencampuran dengan mempertahankan rasio air-semen）',
+    _origIndex: 295
   },
 {
   id: 239,
@@ -428,10 +451,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ばり・ばりばりとり",
   jp: "バリ・バリ取り《ばりばりとり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gerinda sisa pemotongan",
   desc: "バリ=tonjolan sisa material di tepi logam/plastik akibat pemotongan.",
-  _origIndex: 304
+  usage: 'バリ取り《ばりとり》をしてから寸法《すんぽう》を確認《かくにん》する（hilangkan gerinda lalu periksa dimensinya）',
+    _origIndex: 304
   },
 {
   id: 242,
@@ -484,10 +508,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "つら・かね・おがむ",
   jp: "面《つら》・矩《かね》・拝む《おがむ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Permukaan, siku, miring",
   desc: "面《つら》=permukaan elemen bangunan; 矩《かね》=sudut 90°; 拝《おが》む=elemen miring tidak tegak lurus.",
-  _origIndex: 317
+  usage: '面《つら》を合《あ》わせてから矩《かね》を確認《かくにん》する（ratakan permukaan lalu periksa kesegiempatan）',
+    _origIndex: 317
   },
 {
   id: 249,
@@ -506,10 +531,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "おさきにしつれいします",
   jp: "お先に失礼します《おさきにしつれいします》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pamit pulang lebih dulu",
   desc: "Diucapkan saat kamu pulang lebih dulu dari rekan yang masih bekerja.\nRespons rekan: お疲《つか》れさまでした.",
-  _origIndex: 319
+  usage: '先《さき》に退社《たいしゃ》するときは「お先《さき》に失礼《しつれい》します」と言《い》う（ucapkan "Osaki ni shitsurei shimasu" saat pulang lebih awal dari rekan）',
+    _origIndex: 319
   },
 {
   id: 252,
@@ -528,10 +554,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "みずいと",
   jp: "水糸《みずいと》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tali acuan — tidak mulur",
   desc: "Tali tidak mulur untuk memastikan garis lurus dan ketinggian seragam saat pasang pondasi atau bata.",
-  _origIndex: 370
+  usage: '水糸《みずいと》を張《は》って通り《とおり》を確認《かくにん》する（tegangkan benang acuan untuk memeriksa kelurusan）',
+    _origIndex: 370
   },
 {
   id: 559,
@@ -539,10 +566,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "おはようございます",
   jp: "おはようございます（朝《あさ》のあいさつの基本《きほん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Selamat pagi",
   desc: "Ucapkan kepada orang PERTAMA KALI ditemui pagi hari. Dua fungsi: ①beri kesan baik ②buat lawan",
-  _origIndex: 652
+  usage: '朝《あさ》は「おはようございます」と大《おお》きな声《こえ》で挨拶《あいさつ》する（ucapkan "Ohayō gozaimasu" dengan suara lantang di pagi hari）',
+    _origIndex: 652
   },
 {
   id: 560,
@@ -550,10 +578,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ごあんぜんに",
   jp: "ご安全に《ごあんぜんに》（建設《けんせつ》現場《げんば》専用《せんよう》のあいさつ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Semoga selamat",
   desc: "Ungkapan harapan agar selamat dan tidak kecelakaan. Digunakan saat akhir 朝礼《ちょうれい》 dan saat",
-  _origIndex: 653
+  usage: '建設《けんせつ》現場《げんば》では「ご安全《ごあんぜんに》に」を挨拶《あいさつ》として使《つか》う（gunakan "Go anzen ni" sebagai salam di lokasi konstruksi）',
+    _origIndex: 653
   },
 {
   id: 561,
@@ -561,10 +590,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "おつかれさまです",
   jp: "おつかれさまです（感謝《かんしゃ》・労い）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kerja keras ya",
   desc: "Ungkapan terima kasih atas kerja keras. Bisa dipakai ke siapa saja, kapan saja. Sudah selesai: お疲《つか》れ様《さま》でした.",
-  _origIndex: 654
+  usage: '仕事《しごと》が終《お》わったら「お疲《つか》れ様《さま》です」と声《こえ》をかける（ucapkan "Otsukaresama desu" ketika pekerjaan selesai）',
+    _origIndex: 654
   },
 {
   id: 562,
@@ -572,10 +602,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ごさま vs ごくろさまおつかれさまちがい",
   jp: "ご苦労さま vs おつかれさまです《ごくろさまおつかれさまちがい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gokurosama tidak sopan",
   desc: "ご苦労《くろう》さま=kurang sopan untuk atasan. おつかれさまです=lebih sopan, bisa ke siapa saja. Atasan bilang",
-  _origIndex: 655
+  usage: '上司《じょうし》には「お疲《つか》れ様《さま》です」、目下《めした》には「ご苦労《くろう》さま」は使《つか》わない（gunakan "Otsukaresama" untuk atasan, jangan gunakan "Gokurōsama" kepada mereka）',
+    _origIndex: 655
   },
 {
   id: 563,
@@ -583,10 +614,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "しつれいしますみっつのばめん",
   jp: "失礼します《しつれいします》（3つの場面《ばめん》での使い方《つかいかた》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Permisi / maaf mengganggu",
   desc: "3 situasi: ①masuk ruangan ②menyela percakapan mendesak ③pulang lebih dulu: お先《さき》に失礼《しつれい》します →",
-  _origIndex: 656
+  usage: '部屋《へや》を出入《でい》りするとき「失礼《しつれい》します」と声《こえ》をかける（ucapkan "Shitsurei shimasu" saat keluar-masuk ruangan）',
+    _origIndex: 656
   },
 {
   id: 564,
@@ -594,10 +626,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あぶないよけろ",
   jp: "危ない！よけろっ！《あぶないよけろ》（緊急《きんきゅう》の呼《よ》びかけ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Awas! Minggir!",
   desc: "Saat seseorang tidak menyadari bahaya, orang sekitar berteriak 危《あぶ》ない！. Untuk benda jatuh:",
-  _origIndex: 657
+  usage: '危険《きけん》なときは「危《あぶ》ない！よけろっ！」と大声《おおごえ》で知《し》らせる（beri tahu bahaya dengan berteriak "Abunai! Yokero!" dalam keadaan darurat）',
+    _origIndex: 657
   },
 {
   id: 565,
@@ -781,10 +814,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "てんあつ",
   jp: "転圧《てんあつ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemadatan dengan roller",
   desc: "Memadatkan tanah atau aspal menggunakan mesin roller berat.",
-  _origIndex: 1444
+  usage: 'ローラーで盛り土《もりど》を転圧《てんあつ》する（padatkan timbunan menggunakan roller）',
+    _origIndex: 1444
   },
 {
   id: 1290,
@@ -858,10 +892,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "やまずな",
   jp: "山砂《やまずな》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pasir gunung / daratan",
   desc: "Pasir dari daratan (bukan sungai), daya serap air lebih tinggi.\nDigunakan sebagai material urugan",
-  _origIndex: 1477
+  usage: '山砂《やまずな》を埋め戻し《うめもどし》に使用《しよう》する（gunakan pasir gunung untuk pengurugan kembali）',
+    _origIndex: 1477
   },
 {
   id: 1322,
@@ -946,10 +981,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "のりめん・じやま・やまがくる・やまどめ",
   jp: "法面《のりめん》・地山《じやま》・山がくる《やまがくる》・山留め《やまどめ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 istilah lereng galian",
   desc: "法面《のりめん》=permukaan miring galian. 地山《じやま》=tanah alami.\n山《やま》がくる=lereng LONGSOR — BAHAYA!",
-  _origIndex: 1528
+  usage: '法面《のりめん》の崩壊《ほうかい》を防《ふせ》ぐために山留め《やまどめ》をする（pasang earth retention untuk mencegah longsor lereng galian）',
+    _origIndex: 1528
   },
 {
   id: 1373,
@@ -957,10 +993,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "きそめんしん",
   jp: "基礎免振《きそめんしん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Isolasi seismik pada",
   desc: "Sistem yang menyerap gaya horizontal gempa sehingga getaran berkurang sebelum masuk bangunan.",
-  _origIndex: 1529
+  usage: '基礎免振《きそめんしん》装置《そうち》を基礎《きそ》と躯体《くたい》の間《あいだ》に設置《せっち》する（pasang perangkat isolasi seismik di antara pondasi dan struktur）',
+    _origIndex: 1529
   },
 {
   id: 1374,
@@ -968,10 +1005,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "はいきん・かんかく・あき",
   jp: "配筋《はいきん》・間隔《かんかく》・あき",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tulangan",
   desc: "配筋《はいきん》=mengatur dan merakit besi tulangan.\n間隔《かんかく》=jarak center-to-center. あき=jarak BERSIH antar",
-  _origIndex: 1530
+  usage: '配筋《はいきん》の間隔《かんかく》とあきを設計図《せっけいず》で確認《かくにん》する（periksa jarak dan celah antar tulangan pada gambar rencana）',
+    _origIndex: 1530
   },
 {
   id: 1375,
@@ -979,10 +1017,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "かぶりあつさ",
   jp: "かぶり厚さ《かぶりあつさ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Selimut beton",
   desc: "Jarak dari permukaan luar besi tulangan ke permukaan beton yang menutupinya.\nHarus cukup tebal",
-  _origIndex: 1531
+  usage: 'かぶり厚さ《かぶりあつさ》が基準値《きじゅんち》を満《み》たすか確認《かくにん》する（periksa apakah tebal selimut beton memenuhi nilai standar）',
+    _origIndex: 1531
   },
 {
   id: 1376,
@@ -990,10 +1029,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あーるしーぞう・えすぞう・えすあーるしーぞう・もくぞう",
   jp: "RC造《あーるしーぞう》・S造《えすぞう》・SRC造《えすあーるしーぞう》・木造《もくぞう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jenis struktur RC, S, SRC, kayu",
   desc: "RC造《ぞう》=beton bertulang. S造《つく》り=baja. SRC造《つく》り=baja+RC. 木造《もくぞう》=kayu.\nWajib dikenali untuk",
-  _origIndex: 1532
+  usage: 'RC造《あーるしーぞう》とS造《えすぞう》の特徴《とくちょう》を比較《ひかく》する（bandingkan karakteristik struktur RC dan struktur baja）',
+    _origIndex: 1532
   },
 {
   id: 1377,
@@ -1001,10 +1041,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あそび・たてこみ",
   jp: "あそび・建込み《たてこみ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kelonggaran + pemasangan komponen",
   desc: "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang.\n建込《たてこ》み=mendirikan bekisting",
-  _origIndex: 1533
+  usage: 'あそびの寸法《すんぽう》を確認《かくにん》してから部材《ぶざい》を建込む（periksa toleransi sebelum memasang komponen）',
+    _origIndex: 1533
   },
 {
   id: 1378,
@@ -1023,10 +1064,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "かべしん・はしらしん・おやずみ・かねをふる・すみつけ",
   jp: "壁芯《かべしん》・柱芯《はしらしん》・親墨《おやずみ》・矩を振る《かねをふる》・墨付け《すみつけ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 istilah sumidashi",
   desc: "壁芯《かべしん》=garis tengah dinding. 柱芯《はしらしん》=garis tengah kolom. 親墨《おやずみ》=referensi dasar.",
-  _origIndex: 1548
+  usage: '親墨《おやずみ》から壁芯《かべしん》と柱芯《はしらしん》を出《だ》す（tentukan garis dinding dan kolom dari garis induk）',
+    _origIndex: 1548
   },
 {
   id: 1393,
@@ -1034,10 +1076,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "どどめ・ようへき・やいた・こうやいた・やまどめ",
   jp: "土留め《どどめ》・擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》・山留め《やまどめ》（崩壊《ほうかい》防止《ぼうし》5語《ご》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 istilah penahan tanah",
   desc: "土留《どど》め=cegah longsor. 擁壁《ようへき》=土留《どどめ》め berbentuk dinding. 矢板《やいた》=papan penahan.",
-  _origIndex: 1549
+  usage: '鋼矢板《こうやいた》で土留め《どどめ》をして安全《あんぜん》に掘削《くっさく》する（gali dengan aman menggunakan sheet pile baja sebagai penahan tanah）',
+    _origIndex: 1549
   },
 {
   id: 1394,
@@ -1045,10 +1088,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "じやま・のりめん・やまがくる",
   jp: "地山《じやま》・法面《のりめん》・山がくる《やまがくる》（自然《しぜん》地盤《じばん》と崩壊《ほうかい》危険《きけん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 istilah tanah alami &",
   desc: "地山《じやま》=tanah dalam kondisi alami. 法面《のりめん》=permukaan miring pada galian.\n山《やま》がくる=turap atau",
-  _origIndex: 1550
+  usage: '地山《じやま》の状態《じょうたい》を確認《かくにん》して法面《のりめん》の角度《かくど》を決《き》める（periksa kondisi tanah alami sebelum menentukan sudut lereng galian）',
+    _origIndex: 1550
   },
 {
   id: 1395,
@@ -1056,10 +1100,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "くいきそ・すらぶ・くいじぎょう・きそめんしん",
   jp: "杭基礎《くいきそ》・スラブ・杭地業《くいじぎょう》・基礎免振《きそめんしん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 istilah pondasi tiang,",
   desc: "杭《くい》基礎《くいきそ》=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan.\n杭《くい》地業《くいじぎょう》=pekerjaan",
-  _origIndex: 1551
+  usage: '杭基礎《くいきそ》の上《うえ》にスラブと基礎免振《きそめんしん》を組《く》む（rakit slab dan isolasi seismik di atas pondasi tiang）',
+    _origIndex: 1551
   },
 {
   id: 1396,
@@ -1067,10 +1112,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "はいきん・ひろいだし・あそび・あき・かんかく",
   jp: "配筋《はいきん》・拾い出し《ひろいだし》・あそび・あき・間隔《かんかく》（鉄筋《てっきん》基本《きほん》5語《ご》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 istilah dasar",
   desc: "配筋《はいきん》=rakit besi tulangan. 拾《ひろ》い出《だ》し=hitung material dari gambar.\nあそび=toleransi. あき=jarak",
-  _origIndex: 1552
+  usage: '配筋《はいきん》の拾い出し《ひろいだし》でかぶり厚さを確認《かくにん》する（periksa tebal selimut beton saat material takeoff tulangan）',
+    _origIndex: 1552
   },
 {
   id: 1397,
@@ -1078,10 +1124,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "すてこん・けっそく・かぶりあつさ",
   jp: "捨てコン《すてこん》・結束《けっそく》（ハッカー）・かぶり厚さ《かぶりあつさ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 istilah presisi beton",
   desc: "捨《す》てコン=cor tipis 5–10cm sebagai referensi ketinggian.\n結束《けっそく》=ikat persilangan tulangan pakai",
-  _origIndex: 1553
+  usage: '捨《す》てコンの上《うえ》に鉄筋《てっきん》を組《く》んでかぶり厚さ《かぶりあつさ》を確保《かくほ》する（pasang tulangan di atas beton lantai kerja dengan memastikan tebal selimut）',
+    _origIndex: 1553
   },
 {
   id: 1398,
@@ -1089,10 +1136,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "たてこみ・のろ・あんこ・てんよう・ぱんく・くぎじまい",
   jp: "建込み《たてこみ》・ノロ・アンコ・転用《てんよう》・パンク・釘仕舞《くぎじまい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "6 istilah pekerjaan",
   desc: "建込《たてこ》み=dirikan bekisting. ノロ=bocoran beton. アンコ=pengisi alur. 転用《てんよう》=pakai ulang.",
-  _origIndex: 1554
+  usage: '型枠《かたわく》建込み後《たてこみご》にノロの漏《も》れを確認《かくにん》する（periksa kebocoran slurry setelah pemasangan bekisting）',
+    _origIndex: 1554
   },
 {
   id: 1399,
@@ -1100,10 +1148,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あーるしーぞう・えすぞう・えすあーるしーぞう・もくぞう・しいびいぞう",
   jp: "RC造《あーるしーぞう》・S造《えすぞう》・SRC造《えすあーるしーぞう》・木造《もくぞう》・CB造《しいびいぞう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "5 singkatan struktur",
   desc: "RC造《ぞう》=鉄筋《てっきん》コンクリート. S造《つく》り=鉄骨《てっこつ》. SRC造《つく》り=鉄骨《てっこつ》鉄筋《てっきん》コンクリート.\n木造《もくぞう》=kayu.",
-  _origIndex: 1555
+  usage: 'RC造《あーるしーぞう》とSRC造《えすあーるしーぞう》の違《ちが》いを説明《せつめい》する（jelaskan perbedaan antara struktur RC dan SRC）',
+    _origIndex: 1555
   },
 {
   id: 50,
@@ -1123,10 +1172,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "きょうどうこう",
   jp: "共同溝《きょうどうこう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Saluran utilitas bersama",
   desc: "Saluran bawah tanah besar untuk berbagai utilitas.\nBerbeda dari 管路《かんろ》 yang menghubungkan manhole.",
-  _origIndex: 79
+  usage: '共同溝《きょうどうこう》に複数《ふくすう》の管路《かんろ》を収容《しゅうよう》する（tampung beberapa konduit dalam saluran utilitas bersama）',
+    _origIndex: 79
   },
 {
   id: 207,
@@ -1134,10 +1184,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ぜつえん・ろうでん・せっち・あーす",
   jp: "絶縁《ぜつえん》・漏電《ろうでん》・接地《せっち》・アース",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Isolasi, bocor, grounding",
   desc: "絶縁《ぜつえん》=cegah arus bocor; 漏電《ろうでん》=arus bocor — bahaya; 接地《せっち》(アース)=hubung ke tanah cegah",
-  _origIndex: 271
+  usage: '絶縁《ぜつえん》が損傷《そんしょう》すると漏電《ろうでん》が発生《はっせい》するため接地《せっち》（アース）をする（grounding diperlukan karena insulasi rusak dapat menyebabkan kebocoran arus）',
+    _origIndex: 271
   },
 {
   id: 208,
@@ -1145,10 +1196,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "かくうはいせん vs まいせつはいせん",
   jp: "架空配線《かくうはいせん》 vs 埋設配線《まいせつはいせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kabel aerial vs ditanam",
   desc: "架空配線《かくうはいせん》=kabel via tiang; 埋設《まいせつ》=kabel ditanam via 3 cara: 管《かん》路式《かんろしき》, 直接埋設《ちょくせつまいせつ》,",
-  _origIndex: 272
+  usage: '架空配線《かくうはいせん》と埋設配線《まいせつはいせん》を使い分《つかいわ》ける（pilih kabel udara atau kabel tanam sesuai kondisi）',
+    _origIndex: 272
   },
 {
   id: 209,
@@ -1156,10 +1208,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "いんぺいはいかん vs ろしゅつはいかん",
   jp: "隠ぺい配管《いんぺいはいかん》 vs 露出配管《ろしゅつはいかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa dalam vs pipa luar",
   desc: "隠《かく》ぺい配管《はいかん》=pipa dalam dinding/plafon; 露出《ろしゅつ》配管《はいかん》=pipa tampak di permukaan.",
-  _origIndex: 273
+  usage: '隠ぺい配管《いんぺいはいかん》は仕上《しあ》がり前《まえ》に、露出配管《ろしゅつはいかん》は後《あと》から施工《せこう》する（pasang konduit tersembunyi sebelum finishing, konduit terbuka sesudahnya）',
+    _origIndex: 273
   },
 {
   id: 210,
@@ -1191,10 +1244,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "えむぢいえふ",
   jp: "MDF（通信《つうしん》分配《ぶんぱい》盤《ばん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Panel distribusi telecom",
   desc: "Papan distribusi komunikasi gedung; semua jalur dari luar masuk ke MDF sebelum didistribusikan.",
-  _origIndex: 276
+  usage: 'MDFに電話回線《でんわかいせん》と光ファイバー《ひかりふぁいばあ》を収容《しゅうよう》する（tampung jalur telepon dan serat optik di panel distribusi MDF）',
+    _origIndex: 276
   },
 {
   id: 213,
@@ -1202,10 +1256,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あいぢばあぱいぢこんるし",
   jp: "Φ（ファイ / パイ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Simbol diameter dibaca パイ",
   desc: "Simbol diameter Φ; di lapangan konstruksi Jepang dibaca パイ, bukan ファイ secara matematik.",
-  _origIndex: 277
+  usage: '管径《かんけい》をΦ（パイ）で表示《ひょうじ》して発注《はっちゅう》する（nyatakan diameter pipa dengan Φ saat memesan）',
+    _origIndex: 277
   },
 {
   id: 214,
@@ -1213,10 +1268,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "つうでん・あたる・かしめる・とぶおちる",
   jp: "通電《つうでん》・あたる・かしめる・飛ぶ《とぶ》/落ちる《おちる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jargon listrik lapangan",
   desc: "通電《つうでん》=arus aktif; あたる=cek pakai alat ukur; かしめる=crimp; 飛《と》ぶ/落《お》ちる=breaker trip.",
-  _origIndex: 278
+  usage: '「あたる」「かしめる」「飛《と》ぶ」など現場《げんば》の電気用語《でんきようご》を覚《おぼ》える（hafalkan istilah kelistrikan lapangan seperti "ataru", "kashimeru", "tobu"）',
+    _origIndex: 278
   },
 {
   id: 215,
@@ -1224,10 +1280,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "くうちょう・かんき・はいえん",
   jp: "空調《くうちょう》・換気《かんき》・排煙《はいえん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "AC, ventilasi, asap",
   desc: "空調《くうちょう》=atur suhu & kualitas udara; 換気《かんき》=ganti udara kotor; 排煙《はいえん》=keluarkan asap saat",
-  _origIndex: 279
+  usage: '空調《くうちょう》・換気《かんき》・排煙《はいえん》の設備《せつび》を協調《きょうちょう》させて設計《せっけい》する（rancang sistem AC, ventilasi, dan exhaust asap secara terintegrasi）',
+    _origIndex: 279
   },
 {
   id: 216,
@@ -1235,10 +1292,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "おすい・ざつはいすい",
   jp: "汚水《おすい》・雑排水《ざつはいすい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Air kotor WC vs non-WC",
   desc: "汚水《おすい》=air buangan WC; 雑排水《ざつはいすい》=buangan kamar mandi/dapur; keduanya disalurkan terpisah.",
-  _origIndex: 280
+  usage: '汚水《おすい》と雑排水《ざつはいすい》を別々《べつべつ》の系統《けいとう》で配管《はいかん》する（pasang pipa limbah WC dan non-WC pada jalur terpisah）',
+    _origIndex: 280
   },
 {
   id: 217,
@@ -1246,10 +1304,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ろうえいしけん：すいあつしけん・まんすいしけん",
   jp: "漏洩試験《ろうえいしけん》：水圧試験《すいあつしけん》・満水試験《まんすいしけん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Uji kebocoran pipa",
   desc: "Uji kebocoran: 水圧《すいあつ》試験《しけん》=tekanan pipa suplai; 満水《まんすい》試験《しけん》=isi penuh pipa drainase.",
-  _origIndex: 281
+  usage: '水圧試験《すいあつしけん》で配管《はいかん》の漏洩《ろうえい》を確認《かくにん》する（periksa kebocoran pipa melalui uji tekanan hidrolik）',
+    _origIndex: 281
   },
 {
   id: 218,
@@ -1257,10 +1316,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "らいにんぐ・ぎゃくりゅう・こうばい",
   jp: "ライニング・逆流《ぎゃくりゅう》・勾配《こうばい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lining, balik, kemiringan",
   desc: "ライニング=lapisan dalam pipa; 逆流《ぎゃくりゅう》=aliran balik; 勾配《こうばい》=kemiringan pipa agar air mengalir.",
-  _origIndex: 282
+  usage: 'ライニング管《かん》は逆流《ぎゃくりゅう》防止《ぼうし》のために適切《てきせつ》な勾配《こうばい》を付《つ》ける（berikan kemiringan yang sesuai pada pipa lining untuk mencegah aliran balik）',
+    _origIndex: 282
   },
 {
   id: 232,
@@ -1268,10 +1328,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "はいせん・りかく・かんつう",
   jp: "配線《はいせん》・離隔《りかく》・貫通《かんつう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penarikan, jarak, tembus",
   desc: "配線《はいせん》=pasang/rentang kabel; 離隔《りかく》=jarak pisah antar kabel; 貫通《かんつう》=lubangi dinding untuk",
-  _origIndex: 297
+  usage: '配線《はいせん》を行《おこな》うときは離隔《りかく》距離《きょり》を確保《かくほ》して貫通部《かんつうぶ》を防火《ぼうか》処理《しょり》する（jaga jarak aman dan lakukan penutupan tahan api pada bagian tembus saat pengkabelan）',
+    _origIndex: 297
   },
 {
   id: 233,
@@ -1279,10 +1340,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "つうせん・はいかんする・すらぶはいかん・しこむ",
   jp: "通線《つうせん》・配管する《はいかんする》・スラブ配管《すらぶはいかん》・仕込む《しこむ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tarik kabel, pasang konduit, slab, siapkan",
   desc: "通線《つうせん》=tarik kabel; 配管《はいかん》する=pasang konduit; スラブ配管《はいかん》=konduit dalam slab; 仕込《しこ》む=persiapkan.",
-  _origIndex: 298
+  usage: 'スラブ配管《すらぶはいかん》を仕込《しこ》んでからコンクリートを打設《だせつ》する（pasang konduit di slab lalu cor beton）',
+    _origIndex: 298
   },
 {
   id: 234,
@@ -1290,10 +1352,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ひらいしん vs ひらいき",
   jp: "避雷針《ひらいしん》 vs 避雷器《ひらいき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penangkal vs arrester",
   desc: "避雷針《ひらいしん》=tangkap petir di atap (lindungi bangunan); 避雷器《ひらいき》=lindungi peralatan dari lonjakan",
-  _origIndex: 299
+  usage: '避雷針《ひらいしん》で雷《かみなり》を受《う》け、避雷器《ひらいき》でサージを遮断《しゃだん》する（terima petir melalui lightning rod dan putus lonjakan tegangan melalui arrester）',
+    _origIndex: 299
   },
 {
   id: 235,
@@ -1301,10 +1364,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ひふく・いちじがわ・にじがわ",
   jp: "被覆《ひふく》・一次側《いちじがわ》・二次側《にじがわ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Selubung, sisi primer, sisi sekunder",
   desc: "被覆《ひふく》=insulasi kawat; 一次側《いちじがわ》=sisi input listrik; 二次側《にじがわ》=sisi output. Penting saat koneksi",
-  _origIndex: 300
+  usage: '被覆《ひふく》を剥《む》いて一次側《いちじがわ》と二次側《にじがわ》の電線《でんせん》を確認《かくにん》する（kupas selubung lalu identifikasi kabel sisi primer dan sekunder）',
+    _origIndex: 300
   },
 {
   id: 236,
@@ -1312,10 +1376,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ましじめ・まーきんぐ",
   jp: "増し締め《ましじめ》・マーキング",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kencang ulang & penandaan",
   desc: "増《ま》し締《し》めめ=kencangkan kembali baut yang kendur; マーキング=tandai baut setelah dikencangkan agar",
-  _origIndex: 301
+  usage: '接続部《せつぞくぶ》の増し締め《ましじめ》をしてからマーキングをする（kencangkan kembali sambungan lalu buat penandaan）',
+    _origIndex: 301
   },
 {
   id: 237,
@@ -1323,10 +1388,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ふる・せる・ふせる",
   jp: "振る《ふる》・競る《せる》・伏せる《ふせる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Reroute, sero, exit slab",
   desc: "振《ふ》る=ubah jalur menghindari hambatan; 競《せ》る=dua elemen hampir bersentuhan; 伏《ふ》せる=exit pipa dari",
-  _origIndex: 302
+  usage: 'スラブで配管《はいかん》を伏《ふ》せてから壁《かべ》で振《ふ》る（taruh konduit terlentang di slab lalu keluarkan tegak di dinding）',
+    _origIndex: 302
   },
 {
   id: 238,
@@ -1334,10 +1400,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "えいせいせつび・しにみず",
   jp: "衛生設備《えいせいせつび》・死水《しにみず》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sanitasi & air stagnan",
   desc: "衛生設備《えいせいせつび》=peralatan toilet & kamar mandi; 死水《しみず》=air stagnan dalam pipa, berpotensi",
-  _origIndex: 303
+  usage: '死水《しにみず》が生《しょう》じないように末端《まったん》の衛生設備《えいせいせつび》まで配管《はいかん》する（pasang pipa hingga fixture sanitasi ujung untuk mencegah air stagnan）',
+    _origIndex: 303
   },
 {
   id: 240,
@@ -1345,10 +1412,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "ぶんき・しんしゅく・じゃばら",
   jp: "分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cabang, muai, akor lipatan",
   desc: "分岐《ぶんき》=pipa terbagi dua; 伸縮《しんしゅく》=memuai/menyusut akibat suhu; 蛇腹《じゃばら》=konektor fleksibel",
-  _origIndex: 305
+  usage: '分岐《ぶんき》箇所《かしょ》に伸縮継手《しんしゅくつぎて》を使用《しよう》する（gunakan sambungan ekspansi pada titik percabangan pipa）',
+    _origIndex: 305
   },
 {
   id: 241,
@@ -1368,10 +1436,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "せつぞく・けっせん",
   jp: "接続《せつぞく》・結線《けっせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sambung kabel komunikasi",
   desc: "接続《せつぞく》=hubungkan dua elemen (umum); 結線《けっせん》=khusus sambung kabel komunikasi.",
-  _origIndex: 315
+  usage: '接続《せつぞく》と結線《けっせん》を確認《かくにん》してから通電《つうでん》する（periksa sambungan dan pengkabelan sebelum mengalirkan arus）',
+    _origIndex: 315
   },
 {
   id: 247,
@@ -1390,10 +1459,11 @@ export const CARDS_CH4 = [
   source: "jac-ch4",
   furi: "あっちゃく・りんぐすりーぶ",
   jp: "圧着《あっちゃく》ペンチ・リングスリーブ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tang crimp & ring sleeve",
   desc: "圧着《あっちゃく》ペンチ=tang crimp kabel ke terminal; リングスリーブ=selongsong logam untuk sambung beberapa kabel.",
-  _origIndex: 320
+  usage: '圧着ペンチでリングスリーブ《すりいぶ》を圧着《あっちゃく》して電線《でんせん》を接続《せつぞく》する（sambungkan kabel dengan menekan ring sleeve menggunakan crimping pliers）',
+    _origIndex: 320
   },
 {
   id: 401,

@@ -183,10 +183,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "さんそけつぼう",
   jp: "酸素欠乏《さんそけつぼう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kekurangan oksigen (vocab)",
   desc: "Bahaya di ruang tertutup. Cek oksigen sebelum masuk MANHOLE. Kerja di atap tidak termasuk.",
-  _origIndex: 113
+  usage: '酸素欠乏《さんそけつぼう》の危険箇所《きけんかしょ》では測定《そくてい》してから入場《にゅうじょう》する（ukur kadar oksigen sebelum memasuki area berbahaya）',
+    _origIndex: 113
   },
 {
   id: 106,
@@ -250,10 +251,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "すみつぼ",
   jp: "墨つぼ《すみつぼ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Wadah tinta / chalk line",
   desc: "Membuat garis lurus panjang dengan benang bercelup tinta. Berbeda dari 墨《すみ》さし dan レーザー墨出《すみだ》し器《き》.",
-  _origIndex: 136
+  usage: '墨つぼ《すみつぼ》で長《なが》い直線《ちょくせん》を引《ひ》く（buat garis lurus panjang menggunakan chalk line）',
+    _origIndex: 136
   },
 {
   id: 132,
@@ -261,10 +263,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "だいしゃ",
   jp: "台車《だいしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kereta dorong datar",
   desc: "Platform datar beroda untuk mengangkut material berat. Berbeda dari 一輪車《いちりんしゃ》 (satu roda).",
-  _origIndex: 140
+  usage: '台車《だいしゃ》で重《おも》い資材《しざい》を運《はこ》ぶ（angkut material berat menggunakan kereta dorong）',
+    _origIndex: 140
   },
 {
   id: 36,
@@ -272,10 +275,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "かしつき vs じょしつき",
   jp: "加湿器《かしつき》 vs 除湿器《じょしつき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pelembap vs pengering",
   desc: "加湿器《かしつき》=menambah kelembapan. 除湿器《じょしつき》=mengurangi kelembapan.\n冷却《れいきゃく》コイル=koil pendingin.",
-  _origIndex: 36
+  usage: '冬《ふゆ》の作業室《さぎょうしつ》に加湿器《かしつき》を置《お》いて乾燥《かんそう》を防《ふせ》ぐ（cegah kekeringan di ruang kerja musim dingin dengan memasang humidifier）',
+    _origIndex: 36
   },
 {
   id: 37,
@@ -283,10 +287,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "ちくろこうじ",
   jp: "築炉工事《ちくろこうじ》（耐火物《たいかぶつ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lapisan tahan api tungku",
   desc: "Melapisi dalam tungku suhu tinggi dengan 耐火物《たいかぶつ》 (bahan tahan api).\nBukan 保温材《ほおんざい》/断熱材《だんねつざい》.",
-  _origIndex: 37
+  usage: '築炉工事《ちくろこうじ》で耐火煉瓦《たいかれんが》を積《つ》んで炉《ろ》を築《きず》く（bangun tungku dengan menyusun bata tahan api pada pekerjaan refractory lining）',
+    _origIndex: 37
   },
 {
   id: 38,
@@ -294,10 +299,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "まるだくとさしこみつぎてこうほう",
   jp: "丸ダクト《まるだくとさしこみつぎてこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Saluran udara bulat",
   desc: "丸《まる》ダクト→差込《さしこみ》継手《つぎて》 (insert). 角《かく》ダクト→共板《きょうばん》フランジ工法《こうほう》 (flensa).",
-  _origIndex: 38
+  usage: '丸ダクト《まるだくと》を差し込み継手《さしこみつぎて》で接続《せつぞく》する（sambungkan duct bulat menggunakan insert joint）',
+    _origIndex: 38
   },
 {
   id: 51,
@@ -376,10 +382,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "ゆうちゃく vs こねくた vs めかにかるすぷらいす",
   jp: "融着 vs コネクタ vs メカニカル《ゆうちゃく vs こねくた vs めかにかるすぷらいす》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tiga cara sambungan optik",
   desc: "①融着《ゆうちゃく》=permanen, rugi terkecil. ②コネクタ=bisa lepas-pasang. ③メカニカル=lebih cepat dari fusion.",
-  _origIndex: 74
+  usage: '融着接続《ゆうちゃくせつぞく》・コネクタ接続《せつぞく》・メカニカルスプライスの3方式《さんほうしき》を使い分《つかいわ》ける（bedakan penggunaan 3 metode sambungan optik: fusion, konektor, dan mekanis）',
+    _origIndex: 74
   },
 {
   id: 67,
@@ -399,10 +406,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi2",
   furi: "てぼり・あなほりけんちゅうしゃ・たんしんぼう",
   jp: "手掘り《てぼり》・穴掘建柱車《あなほりけんちゅうしゃ》・探針棒《たんしんぼう》（埋設物《まいせつぶつ》確認《かくにん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cek benda terpendam",
   desc: "Sebelum gali tiang: gunakan 手掘《てぼ》り & 探針棒《たんしんぼう》.\n穴掘建柱車《あなほりけんちゅうしゃ》=kendaraan gali & pendiri",
-  _origIndex: 77
+  usage: '探針棒《たんしんぼう》で埋設物《まいせつぶつ》の位置《いち》を確認《かくにん》してから掘削《くっさく》する（periksa posisi utilitas bawah tanah dengan probe sebelum menggali）',
+    _origIndex: 77
   },
 {
   id: 78,
@@ -433,10 +441,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-jitsugi1",
   furi: "ねじせつごうあからあ",
   jp: "SGP ねじ接合《ねじせつごうあからあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa SGP — sambungan ulir",
   desc: "SGP: ねじ接合《せつごう》 (sambungan ulir) untuk 15A～100A. Di atas 100A→flensa/las.",
-  _origIndex: 93
+  usage: 'SGP管《かん》をねじ込み《ねじこみ》で継手《つぎて》に接合《せつごう》する（sambungkan pipa SGP ke fitting dengan cara ulir）',
+    _origIndex: 93
   },
 {
   id: 91,

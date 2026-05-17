@@ -260,10 +260,11 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "ついらく・てんらく",
   jp: "墜落《ついらく》・転落《てんらく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jatuh dari ketinggian (墜落・転落)",
   desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total.",
-  _origIndex: 109
+  usage: '墜落《ついらく》を防《ふせ》ぐために安全帯《あんぜんたい》を着用《ちゃくよう》する（kenakan harness untuk mencegah jatuh dari ketinggian）',
+    _origIndex: 109
   },
 {
   id: 116,
@@ -635,10 +636,11 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "あんぜんき vs あんぜんえいせいき",
   jp: "安全旗《あんぜんき》 vs 安全衛生旗《あんぜんえいせいき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bendera Keselamatan vs",
   desc: "安全旗《あんぜんき》: dikibarkan hanya saat 安全週間《あんぜんしゅうかん》. 安全衛生旗《あんぜんえいせいき》: permanen di lokasi kerja.",
-  _origIndex: 613
+  usage: '安全旗《あんぜんき》と安全衛生旗《あんぜんえいせいき》の違《ちが》いを理解《りかい》する（pahami perbedaan antara bendera keselamatan dan bendera K3）',
+    _origIndex: 613
   },
 {
   id: 544,
@@ -812,10 +814,11 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "あんぐるふらんじこうほう",
   jp: "アングルフランジ工法《アングルフランジこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Angle flange",
   desc: "Sambungan duct kotak menggunakan flange sudut; kekuatan dan kerapatan tinggi, digunakan",
-  _origIndex: 538
+  usage: 'アングルフランジ工法《アングルフランジこうほう》で矩形ダクト《くけいだくと》を接続《せつぞく》する（sambungkan duct persegi menggunakan metode angle flange）',
+    _origIndex: 538
   },
 {
   id: 470,
@@ -823,9 +826,10 @@ export const CARDS_CH2 = [
   source: "jac-ch2",
   furi: "すらいどおんふらんじこうほう",
   jp: "スライドオンフランジ工法《すらいどおんふらんじこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Slide-on flange",
   desc: "Flange siap pakai dimasukkan ke duct, dilas titik, dikencangkan baut + penjepit ラッツ di 4 sudut.",
-  _origIndex: 540
+  usage: 'スライドオンフランジ工法《すらいどおんふらんじこうほう》でダクトを現場《げんば》で接続《せつぞく》する（sambungkan duct di lapangan menggunakan metode slide-on flange）',
+    _origIndex: 540
   }
 ];

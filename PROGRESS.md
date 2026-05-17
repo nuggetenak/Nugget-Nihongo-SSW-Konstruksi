@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-17 (session 22: P14 waves 1-3 — 95 total konsep→vocab (8+55+31+1); P15 — 162 total usage added)
+**Last updated:** 2026-05-17 (session 22: P14 waves 1-4 — 425 total konsep→vocab; P15 — 493 total usage added; vocab=1088 konsep=253 hukum=97; usage coverage 60.1%)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -161,6 +161,7 @@ Prerequisites: P1 done, OD-5 confirmed, viewer.html updated
 - [x] Review 11 konsep kandidat vocab (session 22): reclassified 8 → vocab (id=82,83,186,188,201,295,381,401); kept konsep: 102, 226, 245
 - [x] Extended scan seluruh konsep (session 22 wave 2): reclassified 55 tambahan → vocab (tools/instruments/materials/cable types: id=41–94 range, 121, 241, 244, 259, 260, 272, 278, 279, 283, 285, 299, 317, 332, 334, 335, 357, 363, 366, 386, 394); kept konsep: 55 (fenomena listrik), 84 (EF接合 deferred), 96 (system-level), 191/192/224 (grouped/verb), 275/284/358 (vs comparisons)
 - [x] Extended scan wave 3 (session 22): reclassified 31 tambahan → vocab (pipe types, PPE, survey tools, fire systems, career terms: id=73,74,78,79,81,89,91,92,95,97,98,100,104,114,115,116,118,122,123,125,126,210,211,270,271,288,289,290,454,455,506)
+- [x] Extended scan wave 4 (session 22): reclassified 340 tambahan → vocab (tools/materials/terms across all categories); +340 usage; total P14=425 reclassified, total P15=493 usage added session 22
 
 ---
 

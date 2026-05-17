@@ -95,10 +95,11 @@ export const CARDS_LIFELINE = [
   source: "jac-jitsugi2",
   furi: "かしつきじょしつき",
   jp: "加湿器《かしつき》 vs 除湿器《じょしつき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pelembap vs pengering",
   desc: "加湿器《かしつき》=menambah kelembapan. 除湿器《じょしつき》=mengurangi kelembapan.\n冷却《れいきゃく》コイル=koil pendingin.",
-  _origIndex: 36
+  usage: '冬《ふゆ》の作業室《さぎょうしつ》に加湿器《かしつき》を置《お》いて乾燥《かんそう》を防《ふせ》ぐ（cegah kekeringan di ruang kerja musim dingin dengan memasang humidifier）',
+    _origIndex: 36
   },
   {
   id: 37,
@@ -106,10 +107,11 @@ export const CARDS_LIFELINE = [
   source: "jac-jitsugi2",
   furi: "ちくろこうじ",
   jp: "築炉工事《ちくろこうじ》（耐火物《たいかぶつ》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lapisan tahan api tungku",
   desc: "Melapisi dalam tungku suhu tinggi dengan 耐火物《たいかぶつ》 (bahan tahan api).\nBukan 保温材《ほおんざい》/断熱材《だんねつざい》.",
-  _origIndex: 37
+  usage: '築炉工事《ちくろこうじ》で耐火煉瓦《たいかれんが》を積《つ》んで炉《ろ》を築《きず》く（bangun tungku dengan menyusun bata tahan api pada pekerjaan refractory lining）',
+    _origIndex: 37
   },
   {
   id: 38,
@@ -117,10 +119,11 @@ export const CARDS_LIFELINE = [
   source: "jac-jitsugi2",
   furi: "まるだくとさしこみつぎてこうほう",
   jp: "丸ダクト《まるだくとさしこみつぎてこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Saluran udara bulat",
   desc: "丸《まる》ダクト→差込《さしこみ》継手《つぎて》 (insert). 角《かく》ダクト→共板《きょうばん》フランジ工法《こうほう》 (flensa).",
-  _origIndex: 38
+  usage: '丸ダクト《まるだくと》を差し込み継手《さしこみつぎて》で接続《せつぞく》する（sambungkan duct bulat menggunakan insert joint）',
+    _origIndex: 38
   },
   {
   id: 41,
@@ -342,10 +345,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "どじくけえぷる",
   jp: "同軸ケーブル《どじくけえぷる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kabel koaksial",
   desc: "Kabel dengan konduktor di tengah, dilindungi isolator & konduktor luar. Digunakan untuk antena TV.",
-  _origIndex: 67
+  usage: '同軸ケーブル《どじくけえぷる》でテレビ信号《しんごう》を伝送《でんそう》する（transmisikan sinyal TV menggunakan kabel koaksial）',
+    _origIndex: 67
   },
   {
   id: 60,
@@ -425,10 +429,11 @@ export const CARDS_LIFELINE = [
   source: "jac-jitsugi2",
   furi: "ゆうちゃく vs こねくた vs めかにかるすぷらいす",
   jp: "融着 vs コネクタ vs メカニカル《ゆうちゃく vs こねくた vs めかにかるすぷらいす》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tiga cara sambungan optik",
   desc: "①融着《ゆうちゃく》=permanen, rugi terkecil. ②コネクタ=bisa lepas-pasang. ③メカニカル=lebih cepat dari fusion.",
-  _origIndex: 74
+  usage: '融着接続《ゆうちゃくせつぞく》・コネクタ接続《せつぞく》・メカニカルスプライスの3方式《さんほうしき》を使い分《つかいわ》ける（bedakan penggunaan 3 metode sambungan optik: fusion, konektor, dan mekanis）',
+    _origIndex: 74
   },
   {
   id: 67,
@@ -460,10 +465,11 @@ export const CARDS_LIFELINE = [
   source: "jac-jitsugi2",
   furi: "てぼりあなほりけんちゅうしゃたんしんぼう",
   jp: "手掘り《てぼり》・穴掘建柱車《あなほりけんちゅうしゃ》・探針棒《たんしんぼう》（埋設物《まいせつぶつ》確認《かくにん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cek benda terpendam",
   desc: "Sebelum gali tiang: gunakan 手掘《てぼ》り & 探針棒《たんしんぼう》.\n穴掘建柱車《あなほりけんちゅうしゃ》=kendaraan gali & pendiri",
-  _origIndex: 77
+  usage: '探針棒《たんしんぼう》で埋設物《まいせつぶつ》の位置《いち》を確認《かくにん》してから掘削《くっさく》する（periksa posisi utilitas bawah tanah dengan probe sebelum menggali）',
+    _origIndex: 77
   },
   {
   id: 70,
@@ -483,10 +489,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "きょうどうこう",
   jp: "共同溝《きょうどうこう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Saluran utilitas bersama",
   desc: "Saluran bawah tanah besar untuk berbagai utilitas.\nBerbeda dari 管路《かんろ》 yang menghubungkan manhole.",
-  _origIndex: 79
+  usage: '共同溝《きょうどうこう》に複数《ふくすう》の管路《かんろ》を収容《しゅうよう》する（tampung beberapa konduit dalam saluran utilitas bersama）',
+    _origIndex: 79
   },
   {
   id: 72,
@@ -649,10 +656,11 @@ export const CARDS_LIFELINE = [
   source: "jac-jitsugi1",
   furi: "ねじせつごうあからあ",
   jp: "SGP ねじ接合《ねじせつごうあからあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa SGP — sambungan ulir",
   desc: "SGP: ねじ接合《せつごう》 (sambungan ulir) untuk 15A～100A. Di atas 100A→flensa/las.",
-  _origIndex: 93
+  usage: 'SGP管《かん》をねじ込み《ねじこみ》で継手《つぎて》に接合《せつごう》する（sambungkan pipa SGP ke fitting dengan cara ulir）',
+    _origIndex: 93
   },
   {
   id: 86,
@@ -660,10 +668,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ぱいぷまんりき",
   jp: "パイプ万力《ぱいぷまんりき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Ragum pipa (pipe vise)",
   desc: "Alat penjepit pipa agar tidak bergerak saat dikerjakan (potong, sambung, ulir). Berbeda dari パイプレンチ.",
-  _origIndex: 94
+  usage: 'パイプ万力《ぱいぷまんりき》で管《かん》を固定《こてい》してからねじを切《き》る（klem pipa dengan pipe vise sebelum membuat ulir）',
+    _origIndex: 94
   },
   {
   id: 87,
@@ -814,10 +823,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "がいせんこうじないせんこうじ",
   jp: "外線工事《がいせんこうじ》 vs 内線工事《ないせんこうじ》（がいせん・ないせん）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Instalasi luar vs dalam",
   desc: "外線《がいせん》=hubung tiang ke gedung. 内線《ないせん》=listrik dalam gedung (grounding, panel, AC).",
-  _origIndex: 198
+  usage: '外線工事《がいせんこうじ》で架空線《かくうせん》を張《は》り、内線工事《ないせんこうじ》で屋内配線《おくないはいせん》をする（pasang kabel udara di instalasi luar, lakukan pengkabelan dalam di instalasi dalam）',
+    _origIndex: 198
   },
   {
   id: 174,
@@ -825,10 +835,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "れいとうくうきちょうわききこうじだいひょうきき",
   jp: "冷凍空気調和機器工事の代表機器《れいとうくうきちょうわききこうじだいひょうきき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Mesin utama pekerjaan AC",
   desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport",
-  _origIndex: 219
+  usage: '冷凍空調工事《れいとうくうちょうこうじ》で圧縮機《あっしゅくき》と膨張弁《ぼうちょうべん》を確認《かくにん》する（periksa kompresor dan katup ekspansi pada pekerjaan AC dan refrigerasi）',
+    _origIndex: 219
   },
   {
   id: 175,
@@ -836,10 +847,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "しょうぼうせつびぶんるいしょうかけいほうひなん",
   jp: "消防設備の3分類《しょうぼうせつびのさんぶんるい》（消火《しょうか》・警報《けいほう》・避難《ひなん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 kategori pemadam K3",
   desc: "①消火《しょうか》=sprinkler/hidran ②警報《けいほう》=alarm asap ③避難《ひなん》=jalur evakuasi; wajib dipasang dan dirawat.",
-  _origIndex: 220
+  usage: '消火《しょうか》・警報《けいほう》・避難設備《ひなんせつび》の3分類《さんぶんるい》を理解《りかい》して設置《せっち》する（pasang sistem proteksi kebakaran dengan memahami 3 kategori: pemadam, alarm, dan evakuasi）',
+    _origIndex: 220
   },
   {
   id: 176,
@@ -847,10 +859,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "かくしゅろのしゅるいちくろこうじしょうさい",
   jp: "各種炉の種類《かくしゅろのしゅるい》（築炉工事《ちくろこうじ》詳細《しょうさい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jenis tungku (chikuro)",
   desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku",
-  _origIndex: 221
+  usage: '各種炉《かくしゅろ》（製鉄炉《せいてつろ》・加熱炉《かねつろ》）に適《てき》した耐火物《たいかぶつ》を選《えら》ぶ（pilih material refractory yang sesuai untuk setiap jenis tungku）',
+    _origIndex: 221
   },
   {
   id: 179,
@@ -858,10 +871,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "だくとしゅるいはいえんくうちょうはいき",
   jp: "ダクトの3種類《だくとしゅるいはいえんくうちょうはいき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 jenis duct gedung",
   desc: "排煙《はいえん》duct=buang asap kebakaran; 空調《くうちょう》duct=distribusi udara AC; 排気《はいき》duct=buang panas/bau.",
-  _origIndex: 230
+  usage: '空調ダクト《くうちょうだくと》・排気ダクト《はいきだくと》・排煙ダクト《はいえんだくと》を系統別《けいとうべつ》に施工《せこう》する（pasang duct sistem AC, exhaust, dan asap secara terpisah per jalur）',
+    _origIndex: 230
   },
   {
   id: 207,
@@ -869,10 +883,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "ぜつえんろうでんせっちああす",
   jp: "絶縁《ぜつえん》・漏電《ろうでん》・接地《せっち》・アース",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Isolasi, bocor, grounding",
   desc: "絶縁《ぜつえん》=cegah arus bocor; 漏電《ろうでん》=arus bocor — bahaya; 接地《せっち》(アース)=hubung ke tanah cegah",
-  _origIndex: 271
+  usage: '絶縁《ぜつえん》が損傷《そんしょう》すると漏電《ろうでん》が発生《はっせい》するため接地《せっち》（アース）をする（grounding diperlukan karena insulasi rusak dapat menyebabkan kebocoran arus）',
+    _origIndex: 271
   },
   {
   id: 208,
@@ -880,10 +895,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "かくうはいせんまいせつはいせん",
   jp: "架空配線《かくうはいせん》 vs 埋設配線《まいせつはいせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kabel aerial vs ditanam",
   desc: "架空配線《かくうはいせん》=kabel via tiang; 埋設《まいせつ》=kabel ditanam via 3 cara: 管《かん》路式《かんろしき》, 直接埋設《ちょくせつまいせつ》,",
-  _origIndex: 272
+  usage: '架空配線《かくうはいせん》と埋設配線《まいせつはいせん》を使い分《つかいわ》ける（pilih kabel udara atau kabel tanam sesuai kondisi）',
+    _origIndex: 272
   },
   {
   id: 209,
@@ -891,10 +907,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "いんぺいはいかんろしゅつはいかん",
   jp: "隠ぺい配管《いんぺいはいかん》 vs 露出配管《ろしゅつはいかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa dalam vs pipa luar",
   desc: "隠《かく》ぺい配管《はいかん》=pipa dalam dinding/plafon; 露出《ろしゅつ》配管《はいかん》=pipa tampak di permukaan.",
-  _origIndex: 273
+  usage: '隠ぺい配管《いんぺいはいかん》は仕上《しあ》がり前《まえ》に、露出配管《ろしゅつはいかん》は後《あと》から施工《せこう》する（pasang konduit tersembunyi sebelum finishing, konduit terbuka sesudahnya）',
+    _origIndex: 273
   },
   {
   id: 210,
@@ -926,10 +943,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "えむぢいえふ",
   jp: "MDF（通信《つうしん》分配《ぶんぱい》盤《ばん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Panel distribusi telecom",
   desc: "Papan distribusi komunikasi gedung; semua jalur dari luar masuk ke MDF sebelum didistribusikan.",
-  _origIndex: 276
+  usage: 'MDFに電話回線《でんわかいせん》と光ファイバー《ひかりふぁいばあ》を収容《しゅうよう》する（tampung jalur telepon dan serat optik di panel distribusi MDF）',
+    _origIndex: 276
   },
   {
   id: 213,
@@ -937,10 +955,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "あいぢばあぱいぢこんるし",
   jp: "Φ（ファイ / パイ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Simbol diameter dibaca パイ",
   desc: "Simbol diameter Φ; di lapangan konstruksi Jepang dibaca パイ, bukan ファイ secara matematik.",
-  _origIndex: 277
+  usage: '管径《かんけい》をΦ（パイ）で表示《ひょうじ》して発注《はっちゅう》する（nyatakan diameter pipa dengan Φ saat memesan）',
+    _origIndex: 277
   },
   {
   id: 214,
@@ -948,10 +967,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "つうでんあたるかしめるとぶおちる",
   jp: "通電《つうでん》・あたる・かしめる・飛ぶ《とぶ》/落ちる《おちる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jargon listrik lapangan",
   desc: "通電《つうでん》=arus aktif; あたる=cek pakai alat ukur; かしめる=crimp; 飛《と》ぶ/落《お》ちる=breaker trip.",
-  _origIndex: 278
+  usage: '「あたる」「かしめる」「飛《と》ぶ」など現場《げんば》の電気用語《でんきようご》を覚《おぼ》える（hafalkan istilah kelistrikan lapangan seperti "ataru", "kashimeru", "tobu"）',
+    _origIndex: 278
   },
   {
   id: 215,
@@ -959,10 +979,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "くうちょうかんきはいえん",
   jp: "空調《くうちょう》・換気《かんき》・排煙《はいえん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "AC, ventilasi, asap",
   desc: "空調《くうちょう》=atur suhu & kualitas udara; 換気《かんき》=ganti udara kotor; 排煙《はいえん》=keluarkan asap saat",
-  _origIndex: 279
+  usage: '空調《くうちょう》・換気《かんき》・排煙《はいえん》の設備《せつび》を協調《きょうちょう》させて設計《せっけい》する（rancang sistem AC, ventilasi, dan exhaust asap secara terintegrasi）',
+    _origIndex: 279
   },
   {
   id: 216,
@@ -970,10 +991,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "おすいざつはいすい",
   jp: "汚水《おすい》・雑排水《ざつはいすい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Air kotor WC vs non-WC",
   desc: "汚水《おすい》=air buangan WC; 雑排水《ざつはいすい》=buangan kamar mandi/dapur; keduanya disalurkan terpisah.",
-  _origIndex: 280
+  usage: '汚水《おすい》と雑排水《ざつはいすい》を別々《べつべつ》の系統《けいとう》で配管《はいかん》する（pasang pipa limbah WC dan non-WC pada jalur terpisah）',
+    _origIndex: 280
   },
   {
   id: 217,
@@ -981,10 +1003,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "ろうえいしけんすいあつしけんまんすいしけん",
   jp: "漏洩試験《ろうえいしけん》：水圧試験《すいあつしけん》・満水試験《まんすいしけん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Uji kebocoran pipa",
   desc: "Uji kebocoran: 水圧《すいあつ》試験《しけん》=tekanan pipa suplai; 満水《まんすい》試験《しけん》=isi penuh pipa drainase.",
-  _origIndex: 281
+  usage: '水圧試験《すいあつしけん》で配管《はいかん》の漏洩《ろうえい》を確認《かくにん》する（periksa kebocoran pipa melalui uji tekanan hidrolik）',
+    _origIndex: 281
   },
   {
   id: 218,
@@ -992,10 +1015,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "らいにんぐぎゃくかんこうばい",
   jp: "ライニング・逆流《ぎゃくりゅう》・勾配《こうばい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lining, balik, kemiringan",
   desc: "ライニング=lapisan dalam pipa; 逆流《ぎゃくりゅう》=aliran balik; 勾配《こうばい》=kemiringan pipa agar air mengalir.",
-  _origIndex: 282
+  usage: 'ライニング管《かん》は逆流《ぎゃくりゅう》防止《ぼうし》のために適切《てきせつ》な勾配《こうばい》を付《つ》ける（berikan kemiringan yang sesuai pada pipa lining untuk mencegah aliran balik）',
+    _origIndex: 282
   },
   {
   id: 232,
@@ -1003,10 +1027,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "はいせんりかくかんつう",
   jp: "配線《はいせん》・離隔《りかく》・貫通《かんつう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penarikan, jarak, tembus",
   desc: "配線《はいせん》=pasang/rentang kabel; 離隔《りかく》=jarak pisah antar kabel; 貫通《かんつう》=lubangi dinding untuk",
-  _origIndex: 297
+  usage: '配線《はいせん》を行《おこな》うときは離隔《りかく》距離《きょり》を確保《かくほ》して貫通部《かんつうぶ》を防火《ぼうか》処理《しょり》する（jaga jarak aman dan lakukan penutupan tahan api pada bagian tembus saat pengkabelan）',
+    _origIndex: 297
   },
   {
   id: 233,
@@ -1014,10 +1039,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "つうせんはいかんするすらぶはいかんしこむ",
   jp: "通線《つうせん》・配管する《はいかんする》・スラブ配管《すらぶはいかん》・仕込む《しこむ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tarik kabel, pasang konduit, slab, siapkan",
   desc: "通線《つうせん》=tarik kabel; 配管《はいかん》する=pasang konduit; スラブ配管《はいかん》=konduit dalam slab; 仕込《しこ》む=persiapkan.",
-  _origIndex: 298
+  usage: 'スラブ配管《すらぶはいかん》を仕込《しこ》んでからコンクリートを打設《だせつ》する（pasang konduit di slab lalu cor beton）',
+    _origIndex: 298
   },
   {
   id: 234,
@@ -1025,10 +1051,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "ひらいしんひらいき",
   jp: "避雷針《ひらいしん》 vs 避雷器《ひらいき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penangkal vs arrester",
   desc: "避雷針《ひらいしん》=tangkap petir di atap (lindungi bangunan); 避雷器《ひらいき》=lindungi peralatan dari lonjakan",
-  _origIndex: 299
+  usage: '避雷針《ひらいしん》で雷《かみなり》を受《う》け、避雷器《ひらいき》でサージを遮断《しゃだん》する（terima petir melalui lightning rod dan putus lonjakan tegangan melalui arrester）',
+    _origIndex: 299
   },
   {
   id: 235,
@@ -1036,10 +1063,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "ひふくいちじがわにじがわ",
   jp: "被覆《ひふく》・一次側《いちじがわ》・二次側《にじがわ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Selubung, sisi primer, sisi sekunder",
   desc: "被覆《ひふく》=insulasi kawat; 一次側《いちじがわ》=sisi input listrik; 二次側《にじがわ》=sisi output. Penting saat koneksi",
-  _origIndex: 300
+  usage: '被覆《ひふく》を剥《む》いて一次側《いちじがわ》と二次側《にじがわ》の電線《でんせん》を確認《かくにん》する（kupas selubung lalu identifikasi kabel sisi primer dan sekunder）',
+    _origIndex: 300
   },
   {
   id: 236,
@@ -1047,10 +1075,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "まししめまあきんぐ",
   jp: "増し締め《ましじめ》・マーキング",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kencang ulang & penandaan",
   desc: "増《ま》し締《し》めめ=kencangkan kembali baut yang kendur; マーキング=tandai baut setelah dikencangkan agar",
-  _origIndex: 301
+  usage: '接続部《せつぞくぶ》の増し締め《ましじめ》をしてからマーキングをする（kencangkan kembali sambungan lalu buat penandaan）',
+    _origIndex: 301
   },
   {
   id: 237,
@@ -1058,10 +1087,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "ふるせるふせる",
   jp: "振る《ふる》・競る《せる》・伏せる《ふせる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Reroute, sero, exit slab",
   desc: "振《ふ》る=ubah jalur menghindari hambatan; 競《せ》る=dua elemen hampir bersentuhan; 伏《ふ》せる=exit pipa dari",
-  _origIndex: 302
+  usage: 'スラブで配管《はいかん》を伏《ふ》せてから壁《かべ》で振《ふ》る（taruh konduit terlentang di slab lalu keluarkan tegak di dinding）',
+    _origIndex: 302
   },
   {
   id: 238,
@@ -1069,10 +1099,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "えいせいせつびしにみず",
   jp: "衛生設備《えいせいせつび》・死水《しにみず》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sanitasi & air stagnan",
   desc: "衛生設備《えいせいせつび》=peralatan toilet & kamar mandi; 死水《しみず》=air stagnan dalam pipa, berpotensi",
-  _origIndex: 303
+  usage: '死水《しにみず》が生《しょう》じないように末端《まったん》の衛生設備《えいせいせつび》まで配管《はいかん》する（pasang pipa hingga fixture sanitasi ujung untuk mencegah air stagnan）',
+    _origIndex: 303
   },
   {
   id: 240,
@@ -1080,10 +1111,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "ぶんきしんしゅくじゃばら",
   jp: "分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cabang, muai, akor lipatan",
   desc: "分岐《ぶんき》=pipa terbagi dua; 伸縮《しんしゅく》=memuai/menyusut akibat suhu; 蛇腹《じゃばら》=konektor fleksibel",
-  _origIndex: 305
+  usage: '分岐《ぶんき》箇所《かしょ》に伸縮継手《しんしゅくつぎて》を使用《しよう》する（gunakan sambungan ekspansi pada titik percabangan pipa）',
+    _origIndex: 305
   },
   {
   id: 241,
@@ -1103,10 +1135,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "せつぞくけっせん",
   jp: "接続《せつぞく》・結線《けっせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sambung kabel komunikasi",
   desc: "接続《せつぞく》=hubungkan dua elemen (umum); 結線《けっせん》=khusus sambung kabel komunikasi.",
-  _origIndex: 315
+  usage: '接続《せつぞく》と結線《けっせん》を確認《かくにん》してから通電《つうでん》する（periksa sambungan dan pengkabelan sebelum mengalirkan arus）',
+    _origIndex: 315
   },
   {
   id: 247,
@@ -1125,10 +1158,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch4",
   furi: "あつちゃくぺんちりんぐすりいぶ",
   jp: "圧着《あっちゃく》ペンチ・リングスリーブ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tang crimp & ring sleeve",
   desc: "圧着《あっちゃく》ペンチ=tang crimp kabel ke terminal; リングスリーブ=selongsong logam untuk sambung beberapa kabel.",
-  _origIndex: 320
+  usage: '圧着ペンチでリングスリーブ《すりいぶ》を圧着《あっちゃく》して電線《でんせん》を接続《せつぞく》する（sambungkan kabel dengan menekan ring sleeve menggunakan crimping pliers）',
+    _origIndex: 320
   },
   {
   id: 256,
@@ -1136,10 +1170,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "べんだあ",
   jp: "ベンダー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Conduit bender pipa logam",
   desc: "Alat membengkokkan pipa logam (金属管《きんぞくかん》) sesuai sudut yang dibutuhkan dalam instalasi listrik.",
-  _origIndex: 325
+  usage: 'ベンダーで電線管《でんせんかん》を曲《ま》げて配管《はいかん》する（tekuk konduit menggunakan bender untuk instalasi）',
+    _origIndex: 325
   },
   {
   id: 257,
@@ -1147,10 +1182,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "しいぢいかんぴいえふかん",
   jp: "CD管《しいぢいかん》 vs PF管《ぴいえふかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "CD konduit vs PF konduit",
   desc: "CD管《かん》=tidak tahan nyala, khusus tanam dalam beton (oranye). PF管《かん》=tahan nyala, instalasi umum.",
-  _origIndex: 326
+  usage: 'CD管《しいぢいかん》はコンクリート埋設《まいせつ》用、PF管《ぴいえふかん》は露出《ろしゅつ》用に使《つか》う（gunakan konduit CD untuk ditanam dalam beton, PF untuk instalasi terbuka）',
+    _origIndex: 326
   },
   {
   id: 258,
@@ -1158,10 +1194,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "しいかんうすこうでんせんかんじいかんあつこうでんせんかん",
   jp: "C管《しいかん》（薄鋼電線管《うすこうでんせんかん》）vs G管《じいかん》（厚鋼電線管《あつこうでんせんかん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Konduit baja C vs G",
   desc: "C管《かん》=baja tipis, kuat benturan, dalam ruangan; G管《かん》=baja tebal, berlapis galvanis, tahan cuaca.",
-  _origIndex: 327
+  usage: 'G管《じいかん》（厚鋼《あつこう》）を屋外《おくがい》や防護《ぼうご》が必要《ひつよう》な箇所《かしょ》に使《つか》う（gunakan konduit G tebal di luar ruangan atau area yang memerlukan perlindungan ekstra）',
+    _origIndex: 327
   },
   {
   id: 259,
@@ -1193,10 +1230,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "あっちゃくぺんちたんしようあかりんぐすりいぶようき",
   jp: "圧着《あっちゃく》ペンチ（端子《たんし》用《よう》=赤《あか》・リングスリーブ用《よう》=黄《き》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Crimping: merah vs kuning",
   desc: "Merah=untuk 圧着《あっちゃく》端子《たんし》(terminal); kuning=untuk リングスリーブ (sambung beberapa kabel). Warna tidak",
-  _origIndex: 330
+  usage: '端子用赤《たんしようあか》ペンチでリングスリーブ用黄《よう》ペンチと使い分《つかいわ》ける（bedakan penggunaan tang crimping merah untuk terminal dan kuning untuk ring sleeve）',
+    _origIndex: 330
   },
   {
   id: 262,
@@ -1204,10 +1242,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "りんぐすりいぶ",
   jp: "リングスリーブ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penyambung beberapa kabel",
   desc: "Selongsong cincin untuk sambung beberapa kabel; di-crimp dengan tang 圧着《あっちゃく》pegangan kuning.",
-  _origIndex: 331
+  usage: 'リングスリーブで複数《ふくすう》の電線《でんせん》を1か所《かしょ》で接続《せつぞく》する（sambungkan beberapa kabel di satu titik menggunakan ring sleeve）',
+    _origIndex: 331
   },
   {
   id: 263,
@@ -1215,10 +1254,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "よびせん",
   jp: "呼び線《よびせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kawat panduan konduit",
   desc: "Kawat dimasukkan dahulu ke konduit; kabel utama disambung ke ujungnya lalu ditarik melewati pipa.",
-  _origIndex: 332
+  usage: '呼び線《よびせん》を先《さき》に通《とお》してから電線《でんせん》を引《ひ》き込《こ》む（masukkan pull wire terlebih dahulu lalu tarik kabel mengikutinya）',
+    _origIndex: 332
   },
   {
   id: 264,
@@ -1226,10 +1266,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "れえすゑえ",
   jp: "レースウェイ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Raceway listrik gedung",
   desc: "Rel distribusi listrik sekaligus penggantung lampu; digunakan di gudang atau area tanpa plafon.",
-  _origIndex: 333
+  usage: 'レースウェイにケーブルを整理《せいり》して敷設《ふせつ》する（pasang kabel secara teratur di dalam raceway）',
+    _origIndex: 333
   },
   {
   id: 265,
@@ -1237,10 +1278,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "つりぼるとぜんねじぼると",
   jp: "吊りボルト《つりぼると》（全《ぜん》ねじボルト）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Baut gantung penuh ulir",
   desc: "Baut panjang berulir penuh tanpa kepala; untuk menggantung konduit, kabel rack, dan raceway.",
-  _origIndex: 334
+  usage: '吊りボルト《つりぼると》（全ねじボルト）でラックを天井《てんじょう》から吊《つ》る（gantung rak dari langit-langit menggunakan threaded rod）',
+    _origIndex: 334
   },
   {
   id: 266,
@@ -1248,10 +1290,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "わいやあすとりっぱ",
   jp: "ワイヤーストリッパー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Alat kupas isolasi kabel",
   desc: "Alat mengupas insulasi kabel tanpa merusak kawat inti; sering dilengkapi strip gauge pengukur",
-  _origIndex: 335
+  usage: 'ワイヤーストリッパーで絶縁体《ぜつえんたい》を傷《きず》つけずに剥《む》く（kupas insulasi tanpa merusak kabel menggunakan wire stripper）',
+    _origIndex: 335
   },
   {
   id: 267,
@@ -1259,10 +1302,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "しいぶいけえぷるいいえむいいいいえふ",
   jp: "CVケーブル vs EM-EEF",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kabel CV vs EM-EEF",
   desc: "EM-EEF=VVF berselubung polyethylene; CV=insulasi 架橋《かきょう》ポリエチレン, ketahanan nyala lebih tinggi.",
-  _origIndex: 336
+  usage: 'CVケーブルを固定配線《こていはいせん》に、EM-EEFを分岐回路《ぶんきかいろ》に使用《しよう》する（gunakan kabel CV untuk instalasi tetap dan EM-EEF untuk sirkuit cabang）',
+    _origIndex: 336
   },
   {
   id: 268,
@@ -1270,10 +1314,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "しいちいぶいしいちいいどうようでんせん",
   jp: "CT / VCT（移動《いどう》用《よう》電線《でんせん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "CT (karet) / VCT (vinyl)",
   desc: "CT=selubung karet, tahan abrasi, untuk kabel bergerak; VCT=selubung vinyl, tahan nyala dan air.",
-  _origIndex: 337
+  usage: 'VCTケーブルを移動《いどう》機器《きき》への配線《はいせん》に使用《しよう》する（gunakan kabel VCT untuk pengkabelan ke peralatan yang dipindah）',
+    _origIndex: 337
   },
   {
   id: 269,
@@ -1281,10 +1326,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "さあまるりれえ",
   jp: "サーマルリレー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Thermal relay panas motor",
   desc: "Memutus rangkaian saat suhu melampaui batas; melindungi motor listrik dari panas berlebih.",
-  _origIndex: 338
+  usage: 'サーマルリレーでモーターの過熱《かねつ》を検知《けんち》して保護《ほご》する（lindungi motor dari panas berlebih menggunakan thermal relay）',
+    _origIndex: 338
   },
   {
   id: 270,
@@ -1328,10 +1374,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "せいりゅうきちくでんち",
   jp: "整流器《せいりゅうき》 vs 蓄電池《ちくでんち》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Rectifier vs baterai",
   desc: "整流器《せいりゅうき》=ubah AC ke DC; 蓄電池《ちくでんち》=simpan energi listrik (isi daya). Digunakan dalam sistem",
-  _origIndex: 342
+  usage: '整流器《せいりゅうき》で交流《こうりゅう》を直流《ちょくりゅう》に変換《へんかん》して蓄電池《ちくでんち》を充電《じゅうでん》する（ubah AC ke DC menggunakan rectifier untuk mengisi baterai）',
+    _origIndex: 342
   },
   {
   id: 274,
@@ -1339,10 +1386,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "らんてすたあ",
   jp: "LANテスター",
-  type: "konsep",
+  type: 'vocab',
   id_text: "LAN tester 8 kawat",
   desc: "Alat cek 8 kawat kabel LAN apakah ada yang putus atau bersilang; dipasang di kedua ujung konektor.",
-  _origIndex: 343
+  usage: 'LANテスターで8本《ほん》の線《せん》の接続順序《せつぞくじゅんじょ》を確認《かくにん》する（periksa urutan 8 koneksi kabel menggunakan LAN tester）',
+    _origIndex: 343
   },
   {
   id: 275,
@@ -1361,10 +1409,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ひゅうぶかったあぱいぷかったあ",
   jp: "チューブカッター vs パイプカッター",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tube vs pipe cutter",
   desc: "チューブカッター=potong pipa tipis (tembaga, baja, aluminium); パイプカッター=potong pipa lebih tebal.",
-  _origIndex: 345
+  usage: 'チューブカッターで銅管《どうかん》を垂直《すいちょく》に切断《せつだん》する（potong pipa tembaga tegak lurus menggunakan tube cutter）',
+    _origIndex: 345
   },
   {
   id: 277,
@@ -1372,10 +1421,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ふれありんぐうつうる",
   jp: "フレアリングツール",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Flaring tool pipa tembaga",
   desc: "Alat melebarkan ujung pipa tembaga menjadi bentuk terompet untuk sambungan instalasi pendingin (AC).",
-  _origIndex: 346
+  usage: 'フレアリングツールで銅管《どうかん》の端部《たんぶ》をフレア加工《かこう》する（kerjakan ujung pipa tembaga menjadi bentuk flare menggunakan flaring tool）',
+    _origIndex: 346
   },
   {
   id: 278,
@@ -1407,10 +1457,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "たいねつせいこうしつえんかびにるかんかん",
   jp: "耐熱性硬質塩化ビニル管《たいねつせいこうしつえんかびにるかん》（HT管《かん》・HTVP管《かん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa PVC tahan panas",
   desc: "Pipa PVC keras tahan panas, berwarna merah-kecoklatan; untuk instalasi pendingin-pemanas dan kolam",
-  _origIndex: 349
+  usage: '耐熱《たいねつ》HT管《かん》を給湯《きゅうとう》配管《はいかん》に使用《しよう》する（gunakan pipa HT tahan panas untuk instalasi air panas）',
+    _origIndex: 349
   },
   {
   id: 281,
@@ -1418,10 +1469,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "すいどうようこうしつえんかびにるらいにんぐこうかん",
   jp: "水道用硬質塩化ビニルライニング鋼管《すいどうようこうしつえんかびにるらいにんぐこうかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa baja lapis PVC (VLP)",
   desc: "Pipa baja dilapisi PVC keras di dalamnya untuk cegah korosi; digunakan untuk jalur air bersih.",
-  _origIndex: 350
+  usage: 'VLP管《かん》を給水《きゅうすい》配管《はいかん》の主管《しゅかん》に使用《しよう》する（gunakan pipa VLP berlapis PVC untuk jalur utama air bersih）',
+    _origIndex: 350
   },
   {
   id: 282,
@@ -1429,10 +1481,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "がすこっくまったんちゅうかん",
   jp: "ガスコック（末端《まったん》vs 中間《ちゅうかん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kran gas ujung vs tengah",
   desc: "末端《まったん》コック=kran ujung pipa untuk kompor; 中間《ちゅうかん》コック=katup di tengah jalur sebagai pemutus.",
-  _origIndex: 351
+  usage: 'ガスコックを閉《し》めてから工事《こうじ》を開始《かいし》する（tutup kran gas sebelum memulai pekerjaan）',
+    _origIndex: 351
   },
   {
   id: 283,
@@ -1522,10 +1575,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "はろげんかぶつしょうかせつび",
   jp: "ハロゲン化物消火設備《はろげんかぶつしょうかせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sistem pemadam halogen",
   desc: "Senyawa halogen hambat reaksi pembakaran; efektif untuk peralatan listrik aktif, komputer, dan",
-  _origIndex: 360
+  usage: 'ハロゲン化物消火設備《はろげんかぶつしょうかせつび》をサーバー室《しつ》に設置《せっち》する（pasang sistem pemadam halon di ruang server）',
+    _origIndex: 360
   },
   {
   id: 321,
@@ -1533,10 +1587,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "いいかん《ねじなしこうせいでんせんかん》",
   jp: "E管《いいかん》（ねじなし鋼製電線管《ねじなしこうせいでんせんかん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Konduit baja tanpa ulir",
   desc: "Pipa baja instalasi listrik tanpa ulir; ukuran = diameter luar (E19=Ø19mm, E25=Ø25mm).",
-  _origIndex: 390
+  usage: 'E管《いいかん》をカップリングで接続《せつぞく》して配管《はいかん》する（sambungkan konduit E menggunakan coupling untuk instalasi）',
+    _origIndex: 390
   },
   {
   id: 322,
@@ -1544,10 +1599,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "かっぷりんぐ vs こんびねえしょんかっぷりんぐ",
   jp: "カップリング vs コンビネーションカップリング",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Coupling vs combination",
   desc: "カップリング=sambung 2 konduit jenis sama; コンビネーションカップリング=sambung konduit beda jenis.",
-  _origIndex: 391
+  usage: 'コンビネーションカップリングでE管《いいかん》をアウトレットボックスに接続《せつぞく》する（hubungkan konduit E ke outlet box menggunakan combination coupling）',
+    _origIndex: 391
   },
   {
   id: 323,
@@ -1555,10 +1611,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "だくたあちゃんねる《このじがただんめん》",
   jp: "ダクターチャンネル（コの字《じ》型《がた》断面《だんめん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Daktar channel profil C",
   desc: "Rel berbentuk C sebagai hanger untuk cable rack, konduit, dan peralatan MEP dari plafon.",
-  _origIndex: 392
+  usage: 'ダクターチャンネルに電線《でんせん》を整列《せいれつ》して収納《しゅうのう》する（susun kabel secara teratur di dalam daktar channel）',
+    _origIndex: 392
   },
   {
   id: 324,
@@ -1566,10 +1623,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "だぶるなっと / さどる",
   jp: "ダブルナット / サドル",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Double nut & saddle",
   desc: "Double nut=dua mur agar tidak kendur akibat getaran; saddle=braket U tempelkan konduit ke dinding.",
-  _origIndex: 393
+  usage: 'ダブルナットで吊りボルト《つりぼると》の緩《ゆる》みを防《ふせ》ぐ（cegah kendornya threaded rod menggunakan double nut）',
+    _origIndex: 393
   },
   {
   id: 325,
@@ -1577,10 +1635,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "VVR《まるがた》vs VVF《ひらがた》",
   jp: "VVR（丸《まる》型《がた》）vs VVF（平《ひら》型《がた》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "VVF gepeng vs VVR bulat",
   desc: "VVF=vinyl gepeng, umum untuk instalasi dinding; VVR=vinyl bulat, lebih fleksibel.",
-  _origIndex: 394
+  usage: 'VVFケーブルを屋内配線《おくないはいせん》に、VVRケーブルを分電盤《ぶんでんばん》引込み《ひきこみ》に使用《しよう》する（gunakan VVF untuk kabel dalam ruangan dan VVR untuk kabel masuk panel）',
+    _origIndex: 394
   },
   {
   id: 326,
@@ -1588,10 +1647,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "りれえ vs さあまるりれえ",
   jp: "リレー vs サーマルリレー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Relay vs thermal relay",
   desc: "リレー=saklar dikontrol sinyal kecil untuk rangkaian besar; サーマルリレー=proteksi motor dari panas berlebih.",
-  _origIndex: 395
+  usage: 'サーマルリレーを組《く》み合《あ》わせてモーターを過電流《かでんりゅう》から保護《ほご》する（kombinasikan thermal relay untuk melindungi motor dari arus lebih）',
+    _origIndex: 395
   },
   {
   id: 327,
@@ -1599,10 +1659,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "じこゆうちゃくてえぷ",
   jp: "自己融着テープ《じこゆうちゃくてえぷ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Self-fusing tape",
   desc: "Tape yang menyatu sendiri saat dililitkan sambil ditarik; digunakan untuk cegah bocor pada pipa air.",
-  _origIndex: 396
+  usage: '自己融着テープ《じこゆうちゃくてえぷ》で防水《ぼうすい》が必要《ひつよう》な接続部《せつぞくぶ》を絶縁《ぜつえん》する（isolasi sambungan yang membutuhkan anti-air menggunakan self-fusing tape）',
+    _origIndex: 396
   },
   {
   id: 328,
@@ -1610,10 +1671,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "さしこみこねくた / ちいがたこねくた",
   jp: "差し込みコネクタ / T型コネクタ《さしこみこねくた / ちいがたこねくた》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Konektor colok / T-cabang",
   desc: "Konektor sisip: sambung tanpa crimping.\nT-konektor: cabang dari kabel induk.",
-  _origIndex: 397
+  usage: '差し込みコネクタで電線《でんせん》を素早《すばや》く接続《せつぞく》する（sambungkan kabel dengan cepat menggunakan push-in connector）',
+    _origIndex: 397
   },
   {
   id: 329,
@@ -1621,10 +1683,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "でんこうどらむ",
   jp: "電工ドラム《でんこうどらむ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gulungan kabel konstruksi",
   desc: "Gulungan kabel perpanjang listrik di lokasi konstruksi.\nGelar penuh — jika digulung panas berlebih.",
-  _origIndex: 398
+  usage: '電工ドラム《でんこうどらむ》を完全《かんぜん》に伸《の》ばしてから使用《しよう》する（buka gulungan kabel konstruksi sepenuhnya sebelum digunakan）',
+    _origIndex: 398
   },
   {
   id: 330,
@@ -1632,10 +1695,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ひかりふぁいばあゆうちゃくせつぞく《さんほうしき》",
   jp: "光ファイバー融着接続《ひかりふぁいばあゆうちゃくせつぞく》（3方式《さんほうしき》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Fusion splice 3 metode",
   desc: "①Fusion: ujung serat dilelehkan — rugi terkecil.\n②Mekanik: tanpa panas.\n③Konektor: bisa dilepas.",
-  _origIndex: 399
+  usage: '融着接続機《ゆうちゃくせつぞくき》でV溝《みぞ》・コア整合《せいごう》・クラッド整合《せいごう》の3方式《さんほうしき》を理解《りかい》する（pahami 3 metode fusion splice: V-groove, core alignment, dan cladding alignment）',
+    _origIndex: 399
   },
   {
   id: 331,
@@ -1643,10 +1707,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ひかりぱるすしけんき（OTDR）",
   jp: "光パルス試験機《ひかりぱるすしけんき（OTDR）》（OTDR）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "OTDR — ukur panjang serat",
   desc: "Alat ukur jalur serat optik: panjang total, rugi di sambungan, dan lokasi kerusakan.",
-  _origIndex: 400
+  usage: '光パルス試験機《ひかりぱるすしけんき》（OTDR）で光ファイバーの損失点《そんしつてん》を特定《とくてい》する（identifikasi titik rugi-rugi serat optik menggunakan OTDR）',
+    _origIndex: 400
   },
   {
   id: 332,
@@ -1666,10 +1731,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ぱいぷまんりき / ぱいぷねじきりき",
   jp: "パイプ万力 / パイプねじ切機《ぱいぷまんりき / ぱいぷねじきりき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Ragum pipa & mesin ulir",
   desc: "Ragum pipa: jepit pipa saat dipotong.\nMesin ulir: buat ulir di ujung pipa untuk fitting.",
-  _origIndex: 402
+  usage: 'パイプ万力《ぱいぷまんりき》で固定《こてい》してパイプねじ切機《ねじきりき》でねじを切《き》る（klem pipa dengan pipe vise lalu buat ulir menggunakan pipe threader）',
+    _origIndex: 402
   },
   {
   id: 334,
@@ -1701,10 +1767,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "はいかんようたんそこうこうかん（SGP / がすかん）",
   jp: "配管用炭素鋼鋼管《はいかんようたんそこうこうかん》（SGP / ガス管《かん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa SGP galvanis / polos",
   desc: "Pipa baja karbon (SGP) untuk instalasi berbagai fluida.\n白管《しろかん》= galvanis; 黒管《くろかん》= tanpa lapisan.",
-  _origIndex: 405
+  usage: 'SGP（ガス管《かん》）を防錆《ぼうさび》処理《しょり》してから埋設《まいせつ》する（lakukan perlindungan karat pada pipa SGP sebelum ditanam）',
+    _origIndex: 405
   },
   {
   id: 337,
@@ -1712,10 +1779,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "こうしつぽりえんかびにるかん（VP vs VU）",
   jp: "硬質ポリ塩化ビニル管《こうしつぽりえんかびにるかん》（VP管《かん》vs VU管《かん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa PVC: VP vs VU",
   desc: "VP = dinding tebal (tekanan); VU = dinding tipis (drainase). Keduanya abu-abu dan ringan.",
-  _origIndex: 406
+  usage: 'VP管《かん》を給水《きゅうすい》に、VU管《かん》を排水《はいすい》に使用《しよう》する（gunakan pipa VP untuk air bersih dan pipa VU untuk drainase）',
+    _origIndex: 406
   },
   {
   id: 338,
@@ -1723,10 +1791,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ねじこみしきかたんちゅうてつせいかんつぎて",
   jp: "ねじ込み式可鍛鋳鉄製管継手《ねじこみしきかたんちゅうてつせいかんつぎて》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Fitting ulir besi tempa",
   desc: "Fitting besi tempa untuk pipa berulir: elbow 90°, tee 3 arah, socket lurus.",
-  _origIndex: 407
+  usage: 'ねじ込み式《ねじこみしき》可鍛鋳鉄《かたんちゅうてつ》継手《つぎて》でSGP配管《はいかん》を接続《せつぞく》する（sambungkan pipa SGP menggunakan fitting ulir besi tempa）',
+    _origIndex: 407
   },
   {
   id: 339,
@@ -1734,10 +1803,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "せきめんせめんとかん《あすべすとかん》",
   jp: "石綿セメント管《せきめんせめんとかん》（アスベスト管《あすべすとかん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa asbestos: dihentikan",
   desc: "Pipa asbes-semen: produksi dihentikan karena serat asbes menyebabkan mesothelioma.",
-  _origIndex: 408
+  usage: '石綿セメント管《せきめんせめんとかん》（アスベスト管《かん》）は現在《げんざい》使用禁止《しようきんし》である（pipa asbestos kini dilarang digunakan）',
+    _origIndex: 408
   },
   {
   id: 340,
@@ -1745,10 +1815,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "おくないしょうかせんせつび（いちごう / いそうさせい / にごう）",
   jp: "屋内消火栓設備《おくないしょうかせんせつび》（1号《ごう》/ 易操作《いそうさ》/ 2号《ごう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Hidran gedung: 3 jenis",
   desc: "Tipe 1 = 2 orang; Tipe mudah (kapasitas sama) = 1 orang; Tipe 2 = 1 orang, kapasitas kecil.",
-  _origIndex: 409
+  usage: '屋内消火栓設備《おくないしょうかせんせつび》の号数《ごうすう》（1号・易操作・2号）を確認《かくにん》してから設置《せっち》する（konfirmasi jenis hidran dalam gedung sebelum memasang）',
+    _origIndex: 409
   },
   {
   id: 359,
@@ -1756,10 +1827,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "こんてすたあ",
   jp: "コンテスター",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cek polaritas outlet",
   desc: "Dicolokkan ke stopkontak untuk memeriksa polaritas dan koneksi arde sudah benar.",
-  _origIndex: 429
+  usage: 'コンテスターでコンセントの極性《きょくせい》を確認《かくにん》する（periksa polaritas stopkontak menggunakan outlet tester）',
+    _origIndex: 429
   },
   {
   id: 360,
@@ -1767,10 +1839,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "でんどうはんまあ",
   jp: "電動ハンマー《でんどうはんまあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Palu elektrik — bor beton",
   desc: "Alat elektrik untuk melubangi atau meratakan dinding/slab beton saat membuka jalur konduit.",
-  _origIndex: 430
+  usage: '電動ハンマー《でんどうはんまあ》でコンクリートに穴《あな》を開《あ》ける（bor lubang pada beton menggunakan electric hammer）',
+    _origIndex: 430
   },
   {
   id: 361,
@@ -1778,10 +1851,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "まわしびき",
   jp: "廻し挽き《まわしびき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gergaji lubang gypsum",
   desc: "Gergaji sempit untuk buat lubang di gypsum/triplek, misal untuk kotak saklar atau outlet.",
-  _origIndex: 431
+  usage: '廻し挽き《まわしびき》でボードに丸穴《まるあな》を開《あ》ける（buat lubang bulat pada papan gypsum menggunakan keyhole saw）',
+    _origIndex: 431
   },
   {
   id: 362,
@@ -1789,10 +1863,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ぬりしろかばあ",
   jp: "塗代カバー《ぬりしろかばあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cover kotak tanam beton",
   desc: "Penutup dipasang pada kotak outlet sebelum dicor, melindungi dari masuknya material beton/plester.",
-  _origIndex: 432
+  usage: '塗代カバー《ぬりしろかばあ》でボックスの深《ふか》さを仕上げ厚《しあげあつ》に合《あ》わせる（sesuaikan kedalaman kotak dengan tebal finishing menggunakan depth cover）',
+    _origIndex: 432
   },
   {
   id: 363,
@@ -1812,10 +1887,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "らじあすくらんぷ",
   jp: "ラジアスクランプ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Radius clamp grounding",
   desc: "Fitting logam untuk memastikan kontinuitas grounding antara kotak instalasi baja dan konduit logam.",
-  _origIndex: 434
+  usage: 'ラジアスクランプで接地線《せっちせん》をケーブルラックに接続《せつぞく》する（hubungkan kabel grounding ke rak kabel menggunakan radius clamp）',
+    _origIndex: 434
   },
   {
   id: 365,
@@ -1823,10 +1899,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "あっしゅくたんし vs あっちゃくたんし",
   jp: "圧縮端子《あっしゅくたんし》 vs 圧着端子《あっちゃくたんし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Terminal: press vs crimp",
   desc: "Press terminal: mesin khusus, kabel besar.\nCrimp terminal: tang tangan, kabel kecil.",
-  _origIndex: 435
+  usage: '圧縮端子《あっしゅくたんし》と圧着端子《あっちゃくたんし》を用途《ようと》に応《おう》じて使い分《つかいわ》ける（bedakan penggunaan terminal tekan dan crimping sesuai kebutuhan）',
+    _origIndex: 435
   },
   {
   id: 366,
@@ -1846,10 +1923,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "COS《ちぇんじおおばあすいっち》",
   jp: "COS（Change Over Switch）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "COS — saklar pindah daya",
   desc: "Saklar pemindah sumber daya (PLN ke generator); dipasang di panel utama gedung.",
-  _origIndex: 437
+  usage: 'COSで商用電源《しょうようでんげん》と非常用電源《ひじょうようでんげん》を切《き》り替《か》える（alihkan antara daya PLN dan daya cadangan menggunakan COS）',
+    _origIndex: 437
   },
   {
   id: 368,
@@ -1857,10 +1935,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "べるまうす",
   jp: "ベルマウス",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bell mouth konduit",
   desc: "Komponen corong dipasang di ujung konduit saat menarik kabel, mencegah kabel tergores atau rusak.",
-  _origIndex: 438
+  usage: 'ベルマウスで電線管《でんせんかん》の端部《たんぶ》を保護《ほご》する（lindungi ujung konduit menggunakan bell mouth）',
+    _origIndex: 438
   },
   {
   id: 369,
@@ -1868,10 +1947,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ああすぼんどせん vs のんぼんどつぎて",
   jp: "アースボンド線《ああすぼんどせん》 vs ノンボンド継手《のんぼんどつぎて》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Grounding kabel rack",
   desc: "Antar cable rack butuh koneksi grounding: pakai earth bond wire atau non-bond fitting.",
-  _origIndex: 439
+  usage: 'アースボンド線《ああすぼんどせん》でケーブルラックを接地《せっち》する（hubungkan rak kabel ke tanah menggunakan earth bonding cable）',
+    _origIndex: 439
   },
   {
   id: 370,
@@ -1879,10 +1959,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "えんどかばあ / すたっとばあ",
   jp: "エンドカバー / スタットバー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "End cover / stud bar",
   desc: "End cover: tutup titik keluar kabel dari plafon.\nStud bar: pasang kotak ke tulangan tanpa bor.",
-  _origIndex: 440
+  usage: 'エンドカバーでダクターチャンネルの端部《たんぶ》を塞《ふさ》ぐ（tutup ujung daktar channel menggunakan end cover）',
+    _origIndex: 440
   },
   {
   id: 371,
@@ -1890,10 +1971,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "けえぷるくりだしき《かっしゃしき》",
   jp: "ケーブル繰り出し機《けえぷるくりだしき》（滑車式《かっしゃしき》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Keluarkan kabel dari drum",
   desc: "Mesin katrol untuk keluarkan kabel dari drum secara terkontrol saat instalasi kabel aerial.",
-  _origIndex: 441
+  usage: 'ケーブル繰り出し機《けえぷるくりだしき》でドラムからケーブルをスムーズに引《ひ》き出《だ》す（keluarkan kabel dari drum secara lancar menggunakan cable reel machine）',
+    _origIndex: 441
   },
   {
   id: 372,
@@ -1901,10 +1983,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "きんしゃ",
   jp: "金車《きんしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Katrol kabel aerial",
   desc: "Katrol kecil pada kawat gantung; kabel diletakkan di atasnya agar mudah ditarik tanpa gesekan.",
-  _origIndex: 442
+  usage: '金車《きんしゃ》を電柱《でんちゅう》に取《と》り付《つ》けてケーブルを引《ひ》き込《こ》む（pasang katrol pada tiang listrik lalu tarik kabel masuk）',
+    _origIndex: 442
   },
   {
   id: 373,
@@ -1912,10 +1995,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ぽんぷ（はいかんないのみずをとおく・たかくへ）",
   jp: "ポンプ（配管《はいかん》内《ない》の水《みず》を遠く・高くへ）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pompa pipa gedung",
   desc: "Memberikan energi kepada air dalam pipa agar mengalir ke tempat jauh atau ke lantai atas.",
-  _origIndex: 443
+  usage: 'ポンプで地下《ちか》の水《みず》を高層階《こうそうかい》に圧送《あっそう》する（pompa air dari bawah tanah ke lantai tinggi menggunakan pompa）',
+    _origIndex: 443
   },
   {
   id: 386,
@@ -1935,10 +2019,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ばん",
   jp: "盤《ばん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Panel listrik (盤 — generik)",
   desc: "Panel berisi breaker: 自立盤《じりつばん》= berdiri lantai; 壁掛《かべか》けけ盤《かべかけばん》= di dinding.",
-  _origIndex: 457
+  usage: '盤《ばん》に回路《かいろ》ごとにブレーカーを取《と》り付《つ》ける（pasang breaker per sirkuit pada panel listrik）',
+    _origIndex: 457
   },
   {
   id: 388,
@@ -1946,10 +2031,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "あいぶい《おくないびにるぜつえんでんせん》",
   jp: "IV（屋内《おくない》ビニル絶縁《ぜつえん》電線《でんせん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kawat IV insulasi tunggal",
   desc: "Kawat berinsulasi PVC untuk dalam ruangan; harus dalam konduit, bukan kabel berselubung.",
-  _origIndex: 458
+  usage: 'IVケーブルを配電盤《はいでんばん》内《ない》の配線《はいせん》に使用《しよう》する（gunakan kabel IV untuk pengkabelan di dalam panel distribusi）',
+    _origIndex: 458
   },
   {
   id: 389,
@@ -1957,10 +2043,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ろしゅつぼっくす vs ろしゅつすいっちぼっくす",
   jp: "露出ボックス《ろしゅつぼっくす》 vs 露出スイッチボックス《ろしゅつすいっちぼっくす》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kotak instalasi tempel",
   desc: "Kotak instalasi menempel di dinding: tipe umum atau tipe khusus saklar/stopkontak.",
-  _origIndex: 459
+  usage: '露出ボックス《ろしゅつぼっくす》を壁面《かべめん》に直付《じかづ》けして配管《はいかん》する（pasang kotak tempel langsung di permukaan dinding）',
+    _origIndex: 459
   },
   {
   id: 395,
@@ -1968,10 +2055,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "VVF すとりっぱあ",
   jp: "VVFストリッパー",
-  type: "konsep",
+  type: 'vocab',
   id_text: "VVF stripper dua lapisan",
   desc: "Alat khusus mengupas dua lapisan kabel VVF sekaligus: selubung luar dan insulasi inti kawat.",
-  _origIndex: 465
+  usage: 'VVFストリッパーでVVFケーブルの外皮《がいひ》と絶縁体《ぜつえんたい》を一度《いちど》に剥《む》く（kupas selubung luar dan insulasi kabel VVF sekaligus menggunakan VVF stripper）',
+    _origIndex: 465
   },
   {
   id: 396,
@@ -1979,10 +2067,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "すとりっぷげえじ",
   jp: "ストリップゲージ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Strip gauge: ukur kupasan",
   desc: "Gauge untuk mengukur panjang kupasan isolasi kabel; biasanya menjadi satu dengan wire stripper.",
-  _origIndex: 466
+  usage: 'ストリップゲージで絶縁体《ぜつえんたい》の剥《む》く長《なが》さを正確《せいかく》に測《はか》る（ukur panjang kupasan insulasi secara presisi menggunakan strip gauge）',
+    _origIndex: 466
   },
   {
   id: 397,
@@ -1990,10 +2079,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "こんせんと（うめこみがた・ろしゅつがた）",
   jp: "コンセント（埋込《うめこみ》型《がた》・露出《ろしゅつ》型《がた》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Stopkontak: 2 tipe pasang",
   desc: "Stopkontak 100V: tanam dalam dinding atau tempel di permukaan; tipe tanam lebih umum di bangunan",
-  _origIndex: 467
+  usage: '埋込型《うめこみがた》コンセントを壁《かべ》内《ない》のボックスに取《と》り付《つ》ける（pasang stopkontak tipe tanam pada kotak di dalam dinding）',
+    _origIndex: 467
   },
   {
   id: 398,
@@ -2001,10 +2091,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "やくもの",
   jp: "役物《やくもの》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Aksesori bentuk khusus",
   desc: "Komponen berbentuk khusus digunakan pada posisi tertentu, misal sudut atau belokan pada cable rack.",
-  _origIndex: 468
+  usage: '役物《やくもの》でダクターチャンネルのコーナー部《ぶ》を処理《しょり》する（tangani sudut-sudut daktar channel menggunakan aksesori khusus）',
+    _origIndex: 468
   },
   {
   id: 399,
@@ -2012,10 +2103,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ふれどめ",
   jp: "振れ止め《ふれどめ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Anti-sway brace raceway",
   desc: "Penopang diagonal agar raceway tidak bergoyang; wajib di area rawan gempa atau getaran.",
-  _origIndex: 469
+  usage: '振れ止め《ふれどめ》でケーブルラックの横《よこ》揺れ《ゆれ》を防《ふせ》ぐ（cegah ayunan lateral rak kabel menggunakan anti-sway brace）',
+    _origIndex: 469
   },
   {
   id: 400,
@@ -2023,10 +2115,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "つりぼるとしじかなぐ",
   jp: "吊りボルト支持金具《つりぼるとしじかなぐ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Baut gantung tanpa bor",
   desc: "Fitting pasang baut gantung ke baja atau dek tanpa bor; mempercepat instalasi konduit dan rack.",
-  _origIndex: 470
+  usage: '吊りボルト支持金具《つりぼるとしじかなぐ》でコンクリートスラブを傷《きず》つけずにラックを吊《つ》る（gantung rak tanpa merusak slab beton menggunakan hanger clamp）',
+    _origIndex: 470
   },
   {
   id: 401,
@@ -2046,10 +2139,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "めたるけえぷる（どうじく・ついすとぺあ）",
   jp: "メタルケーブル（同軸《どうじく》・ツイストペア）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kabel metal: 2 jenis",
   desc: "Kabel tembaga untuk telekomunikasi: coaxial untuk antena TV dan UTP twisted pair untuk LAN/telepon.",
-  _origIndex: 472
+  usage: '同軸ケーブル《どうじくけえぷる》とUTPケーブルの用途《ようと》を使い分《つかいわ》ける（bedakan penggunaan kabel koaksial dan UTP sesuai fungsinya）',
+    _origIndex: 472
   },
   {
   id: 403,
@@ -2057,10 +2151,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ふぁいばあほごすりいぶ",
   jp: "ファイバー保護スリーブ《ふぁいばあほごすりいぶ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pelindung sambungan serat",
   desc: "Pelindung titik fusion splice; WAJIB dipasang ke kabel sebelum fusion dimulai.",
-  _origIndex: 473
+  usage: 'ファイバー保護スリーブ《すりいぶ》で融着部《ゆうちゃくぶ》を熱収縮《ねつしゅうしゅく》補強《ほきょう》する（perkuat bagian fusion dengan heat-shrink menggunakan fiber protection sleeve）',
+    _origIndex: 473
   },
   {
   id: 404,
@@ -2068,10 +2163,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "ふぁいばあほるだ",
   jp: "ファイバーホルダ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Fiber holder serat optik",
   desc: "Dudukan serat optik saat digunakan pada jacket remover, fiber cutter, atau mesin fusion splice.",
-  _origIndex: 474
+  usage: 'ファイバーホルダで光ファイバーを正確《せいかく》にセットしてから切断《せつだん》する（set serat optik dengan presisi menggunakan fiber holder sebelum dipotong）',
+    _origIndex: 474
   },
   {
   id: 405,
@@ -2079,10 +2175,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "じゃけっとりむうば",
   jp: "ジャケットリムーバ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kupas jacket serat optik",
   desc: "Alat mengupas lapisan pelindung (jacket) ujung serat optik sebelum pemotongan dan fusion splice.",
-  _origIndex: 475
+  usage: 'ジャケットリムーバでファイバーの外被《がいひ》を剥《む》く（kupas selubung luar serat optik menggunakan jacket remover）',
+    _origIndex: 475
   },
   {
   id: 406,
@@ -2090,10 +2187,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "どうじくけえぷるちぇっかあ",
   jp: "同軸ケーブルチェッカー《どうじくけえぷるちぇっかあ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Checker kabel koaksial",
   desc: "Alat cek konduktivitas sambungan kabel koaksial; berbeda dari LAN tester untuk kabel LAN.",
-  _origIndex: 476
+  usage: '同軸ケーブルチェッカーで導通《どうつう》と絶縁《ぜつえん》を確認《かくにん》する（periksa kontinuitas dan isolasi menggunakan coaxial cable checker）',
+    _origIndex: 476
   },
   {
   id: 407,
@@ -2101,10 +2199,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "れいばいようどうかん",
   jp: "冷媒用銅管《れいばいようどうかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa tembaga refrigeran",
   desc: "Pipa tanpa sambungan dari tembaga untuk mensirkulasikan refrigeran antara unit luar dan dalam AC.",
-  _origIndex: 477
+  usage: '冷媒用銅管《れいばいようどうかん》を正確《せいかく》な長《なが》さに切断《せつだん》してから接合《せつごう》する（potong pipa tembaga refrigeran ke panjang yang presisi sebelum disambung）',
+    _origIndex: 477
   },
   {
   id: 408,
@@ -2112,10 +2211,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "えあふぃるたあ《くうちょう》",
   jp: "エアフィルター（空調《くうちょう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Filter udara AC/HVAC",
   desc: "Penyaring debu dan partikel dari udara sebelum masuk sistem AC; perlu dibersihkan berkala.",
-  _origIndex: 478
+  usage: 'エアフィルターを定期的《ていきてき》に清掃《せいそう》して空調《くうちょう》性能《せいのう》を維持《いじ》する（bersihkan filter udara secara rutin untuk menjaga performa AC）',
+    _origIndex: 478
   },
   {
   id: 409,
@@ -2123,10 +2223,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "えいせいきぐせつび",
   jp: "衛生器具設備《えいせいきぐせつび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Peralatan sanitasi gedung",
   desc: "Peralatan air dalam gedung: keran, toilet, urinoir, wastafel, bak mandi, dan sink.",
-  _origIndex: 479
+  usage: '衛生器具設備《えいせいきぐせつび》を施工図《せこうず》通《とお》りに設置《せっち》する（pasang fixtures sanitasi sesuai gambar kerja）',
+    _origIndex: 479
   },
   {
   id: 426,
@@ -2134,10 +2235,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "Aこしょう vs Bこしょう",
   jp: "A呼称《Aこしょう》 vs B呼称《Bこしょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Diameter nominal A vs B",
   desc: "Diameter nominal pipa: A-nominal (mm) dan B-nominal (inci); contoh 25A = 1B, 100A = 4B.",
-  _origIndex: 496
+  usage: 'A呼称《Aこしょう》とB呼称《Bこしょう》のどちらで発注《はっちゅう》するか確認《かくにん》する（konfirmasi apakah menggunakan nominasi A atau B saat memesan pipa）',
+    _origIndex: 496
   },
   {
   id: 428,
@@ -2145,10 +2247,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ななめぎれ・だんぎれ",
   jp: "斜め切れ《ななめぎれ》・段切れ《だんぎれ》 ≥1.0mm",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cacat potong pipa ≥1 mm",
   desc: "Cacat potongan pipa: miring atau bertangga ≥1,0 mm menyebabkan sambungan bocor.",
-  _origIndex: 498
+  usage: '斜め切れ《ななめぎれ》が1.0mm以上《いじょう》あれば再切断《さいせつだん》する（potong ulang jika kemiringan potongan 1.0 mm atau lebih）',
+    _origIndex: 498
   },
   {
   id: 430,
@@ -2189,10 +2292,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "えきじょうしいるざい",
   jp: "液状シール剤《えきじょうシールざい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sealant cair ulir: K3",
   desc: "Dioleskan merata ke ulir; terkena mata→cuci banyak air dan ke dokter; terkena kulit→cuci sabun.",
-  _origIndex: 505
+  usage: '液状シール剤《えきじょうシールざい》をねじ山《ねじやま》に塗《ぬ》ってから接続《せつぞく》する（oleskan sealant cair pada ulir sebelum menyambung）',
+    _origIndex: 505
   },
   {
   id: 436,
@@ -2222,10 +2326,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "かいさきかこうがたがたれがたいがた",
   jp: "開先加工《かいさきかこう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Beveling pipa 4 jenis",
   desc: "Pengerjaan ujung pipa untuk penetrasi las lebih baik; 4 jenis: V型《かた》, Y型《かた》, レ型《かた》, I型《かた》.",
-  _origIndex: 508
+  usage: '溶接前《ようせつまえ》に管端《かんたん》の開先加工《かいさきかこう》をする（lakukan beveling pada ujung pipa sebelum pengelasan）',
+    _origIndex: 508
   },
   {
   id: 439,
@@ -2233,10 +2338,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "かりつけようせつ",
   jp: "仮付け溶接《かりつけようせつ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tack welding sebelum las",
   desc: "Las pendek sebelum pengelasan utama untuk menstabilkan posisi dan mencegah distorsi pada area bevel.",
-  _origIndex: 509
+  usage: '本溶接《ほんようせつ》の前《まえ》に仮付け溶接《かりつけようせつ》で位置《いち》を固定《こてい》する（kunci posisi dengan tack welding sebelum pengelasan penuh）',
+    _origIndex: 509
   },
   {
   id: 440,
@@ -2244,10 +2350,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "めかにかるせつごうほうほう",
   jp: "メカニカル接合方法《メカニカルせつごうほうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sambungan mekanis pipa",
   desc: "Sambungan pipa menggunakan komponen mekanis: housing, MD, coupling, atau NO-HUB fitting.",
-  _origIndex: 510
+  usage: 'メカニカル継手《つぎて》で銅管《どうかん》を工具不要《こうぐふよう》で接続《せつぞく》する（sambungkan pipa tembaga tanpa alat khusus menggunakan fitting mekanis）',
+    _origIndex: 510
   },
   {
   id: 441,
@@ -2277,10 +2384,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "まくれ《ばり》とらいにんぐかんようりいま",
   jp: "まくれ（バリ）とライニング管用《かんよう》リーマ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Reamer khusus pipa lining",
   desc: "Burr pipa lining wajib dibuang dengan reamer khusus; reamer biasa merusak lapisan lining.",
-  _origIndex: 514
+  usage: 'リーマでライニング管《かん》の切断面《せつだんめん》のまくれを取《と》る（hilangkan burr pada tepi potongan pipa lining menggunakan reamer）',
+    _origIndex: 514
   },
   {
   id: 445,
@@ -2288,10 +2396,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "かんたんぼうしょくつぎて",
   jp: "管端防食継手《かんたんぼうしょくつぎて》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Anti-korosi ujung lining",
   desc: "Melindungi ujung pipa baja lining dari korosi; ujung wajib di-chamfer 1/2–2/3 tebal lapisan PVC.",
-  _origIndex: 515
+  usage: '管端防食継手《かんたんぼうしょくつぎて》でライニング管端《かんたん》の腐食《ふしょく》を防《ふせ》ぐ（cegah korosi ujung pipa lining menggunakan anti-corrosion end fitting）',
+    _origIndex: 515
   },
   {
   id: 447,
@@ -2310,10 +2419,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "さいじんぐつうる《れいばいかんようしねんしゅうせい》",
   jp: "サイジングツール（冷媒《れいばい》管《かん》用《よう》真円《しんえん》修正《しゅうせい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sizing tool pipa tembaga",
   desc: "Koreksi kebulatan ujung pipa tembaga setelah deburring sebelum proses flaring.",
-  _origIndex: 518
+  usage: 'サイジングツールで冷媒管《れいばいかん》の端部《たんぶ》を真円《しんえん》に修正《しゅうせい》する（koreksi ujung pipa refrigeran menjadi lingkaran sempurna menggunakan sizing tool）',
+    _origIndex: 518
   },
   {
   id: 449,
@@ -2321,10 +2431,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "さいしょうまげはんけいれいばいようひふくどうかん",
   jp: "最小曲げ半径《さいしょうまげはんけい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Radius tekuk min pipa AC",
   desc: "Tekuk manual: min 6× atau 10× dia; tekuk bender: min 4× dia. Di bawah batas pipa penyok.",
-  _origIndex: 519
+  usage: '最小曲げ半径《さいしょうまげはんけい》以下《いか》に曲《ま》げると冷媒管《れいばいかん》が変形《へんけい》する（pipa refrigeran akan berubah bentuk jika ditekuk di bawah radius minimum）',
+    _origIndex: 519
   },
   {
   id: 450,
@@ -2332,10 +2443,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ふれあせつごう",
   jp: "フレア接合《フレアせつごう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Flare joining pipa AC",
   desc: "Ujung pipa dikembangkan jadi terompet, dikencangkan dengan flare nut hingga sambungan kedap",
-  _origIndex: 520
+  usage: 'フレア加工《かこう》した銅管《どうかん》をフレア接合《せつごう》で接続《せつぞく》する（sambungkan pipa tembaga yang telah dibuat flare menggunakan flare joint）',
+    _origIndex: 520
   },
   {
   id: 451,
@@ -2343,10 +2455,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ろうせつごう",
   jp: "ろう接合《ろうせつごう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Brazing pipa tembaga",
   desc: "Bahan brazing dilelehkan ke celah sambungan; bebas oksida dan suhu tepat. Dinginkan dan cek pinhole.",
-  _origIndex: 521
+  usage: 'ろう接合《ろうせつごう》（ろう付け）で銅管《どうかん》同士《どうし》を接続《せつぞく》する（sambungkan pipa tembaga menggunakan brazing）',
+    _origIndex: 521
   },
   {
   id: 452,
@@ -2354,10 +2467,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ほおんざいのしゅうしゅく《さいだいにぱあせんと》",
   jp: "保温材の収縮《ほおんざいのしゅうしゅく》（最大2%《さいだいにぱあせんと》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Insulasi menyusut maks 2%",
   desc: "Insulasi menyusut hingga 2% searah panjang (±8 cm per 4 m); celah menyebabkan kondensasi.",
-  _origIndex: 522
+  usage: '保温材《ほおんざい》の収縮《しゅうしゅく》が最大2%以内《いない》かを確認《かくにん》する（pastikan penyusutan material insulasi dalam batas maksimal 2%）',
+    _origIndex: 522
   },
   {
   id: 453,
@@ -2365,10 +2479,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ほおんざいのけいじょういたじょうおびじょうつつじょう",
   jp: "保温材の形状《ほおんざいのけいじょういたじょうおびじょうつつじょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bentuk insulasi: 3 jenis",
   desc: "板状《いたじょう》dan 帯状《おびじょう》= untuk duct; 筒状《つつじょう》= untuk pipa. Material: GW, RW, PS.",
-  _origIndex: 523
+  usage: '板状《いたじょう》・帯状《おびじょう》・筒状《つつじょう》の保温材《ほおんざい》を管《かん》の形状《けいじょう》に合《あ》わせて選《えら》ぶ（pilih bentuk insulasi pelat, pita, atau silinder sesuai bentuk pipa）',
+    _origIndex: 523
   },
   {
   id: 454,
@@ -2400,10 +2515,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "GXがただくたいるちゅうてつかん",
   jp: "GX形ダクタイル鋳鉄管《GXがただくたいるちゅうてつかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa ductile iron GX",
   desc: "Pipa ductile GX paling umum di Jepang; sambungan berfungsi伸縮《しんしゅく》dan",
-  _origIndex: 526
+  usage: 'GX形ダクタイル鋳鉄管《GXがただくたいるちゅうてつかん》を本管《ほんかん》に接続《せつぞく》する（sambungkan pipa ductile iron GX ke jalur pipa utama）',
+    _origIndex: 526
   },
   {
   id: 457,
@@ -2411,10 +2527,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ろっくりんぐ / ろっくりんぐほるだあ",
   jp: "ロックリング / ロックリングホルダ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Lock ring & holder",
   desc: "Saat pipa memanjang maksimum, tonjolan dalam pipa tertahan lock ring sehingga tidak bisa terlepas.",
-  _origIndex: 527
+  usage: 'ロックリングを溝《みぞ》にはめ込《こ》んで管《かん》を固定《こてい》する（kunci pipa dengan memasukkan lock ring ke alur）',
+    _origIndex: 527
   },
   {
   id: 458,
@@ -2422,10 +2539,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "かつざい",
   jp: "滑剤《かつざい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pelumas pemasangan pipa",
   desc: "Dioleskan pada bagian dalam taper ゴム輪《わ》dan permukaan luar ujung pipa dari garis putih ke ujungnya.",
-  _origIndex: 528
+  usage: '滑剤《かつざい》をゴムリングに塗《ぬ》って管《かん》を差《さ》し込《こ》む（oleskan pelumas pada ring karet lalu masukkan pipa）',
+    _origIndex: 528
   },
   {
   id: 459,
@@ -2455,10 +2573,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch2",
   furi: "あんぐるふらんじこうほう",
   jp: "アングルフランジ工法《アングルフランジこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Angle flange",
   desc: "Sambungan duct kotak menggunakan flange sudut; kekuatan dan kerapatan tinggi, digunakan",
-  _origIndex: 538
+  usage: 'アングルフランジ工法《アングルフランジこうほう》で矩形ダクト《くけいだくと》を接続《せつぞく》する（sambungkan duct persegi menggunakan metode angle flange）',
+    _origIndex: 538
   },
   {
   id: 469,
@@ -2466,10 +2585,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ともいたふらんじこうほう",
   jp: "共板フランジ工法《ともいたふらんじこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Shared-plate flange",
   desc: "Flange dibuat dari bagian duct itu sendiri yang dilipat; empat sudut dikunci dengan klip khusus.",
-  _origIndex: 539
+  usage: '共板フランジ工法《ともいたふらんじこうほう》でダクトを効率《こうりつ》よく接続《せつぞく》する（sambungkan duct secara efisien menggunakan metode shared-plate flange）',
+    _origIndex: 539
   },
   {
   id: 470,
@@ -2477,10 +2597,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch2",
   furi: "すらいどおんふらんじこうほう",
   jp: "スライドオンフランジ工法《すらいどおんふらんじこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Slide-on flange",
   desc: "Flange siap pakai dimasukkan ke duct, dilas titik, dikencangkan baut + penjepit ラッツ di 4 sudut.",
-  _origIndex: 540
+  usage: 'スライドオンフランジ工法《すらいどおんふらんじこうほう》でダクトを現場《げんば》で接続《せつぞく》する（sambungkan duct di lapangan menggunakan metode slide-on flange）',
+    _origIndex: 540
   },
   {
   id: 471,
@@ -2488,10 +2609,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "まるだくとのふらんじこうほう",
   jp: "丸ダクトのフランジ工法《まるだくとのふらんじこうほう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Duct bulat",
   desc: "Sambungan duct spiral: Ø75–100 mm → 板状《いたじょう》プレートフランジ; Ø≥200 mm → アングルフランジ.\nPilih sesuai diameter",
-  _origIndex: 541
+  usage: '丸ダクト《まるだくと》のフランジ工法《こうほう》で空調《くうちょう》系統《けいとう》を構成《こうせい》する（bangun sistem sirkulasi udara menggunakan duct bulat dengan metode flange）',
+    _origIndex: 541
   },
   {
   id: 472,
@@ -2499,10 +2621,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "PAS《こうあつきちゅうかいへいき》",
   jp: "PAS（高圧《こうあつ》気中《きちゅう》開閉器《かいへいき》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "PAS",
   desc: "Dipasang di tiang listrik架空《かくう》配線《はいせん》; listrik 6600V melewati PAS sebelum masuk ke キュービクル.",
-  _origIndex: 542
+  usage: 'PASで高圧《こうあつ》系統《けいとう》を常時《じょうじ》開閉《かいへい》できる（gunakan PAS untuk membuka dan menutup sistem tegangan tinggi kapan saja）',
+    _origIndex: 542
   },
   {
   id: 473,
@@ -2510,10 +2633,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "きゅうびくる",
   jp: "キュービクル",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kubikl",
   desc: "Mengubah 6600V menjadi 100V/200V; berisi遮断器《しゃだんき》dan断路器《だんろき》.\nDipasang di dalam/bawah tanah/atap",
-  _origIndex: 543
+  usage: 'キュービクルで6600Vを100/200Vに降圧《こうあつ》する（turunkan tegangan dari 6600V ke 100/200V menggunakan cubicle）',
+    _origIndex: 543
   },
   {
   id: 474,
@@ -2521,10 +2645,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "かっせん",
   jp: "活線《かっせん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Live line",
   desc: "Kabel masih dialiri arus; bekerja pada sisi活線《かっせん》一次側《いちじがわ》dapat menyebabkan sengatan atau",
-  _origIndex: 544
+  usage: '活線《かっせん》作業《さぎょう》では絶縁保護具《ぜつえんほごぐ》を必《かなら》ず使用《しよう》する（selalu gunakan APD insulasi saat bekerja pada jalur bertegangan）',
+    _origIndex: 544
   },
   {
   id: 475,
@@ -2532,10 +2657,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ちらく",
   jp: "地絡《ちらく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Ground fault",
   desc: "Arus mengalir ke tanah yang seharusnya terisolasi; misalnya karena polaritas grounding アース",
-  _origIndex: 545
+  usage: '地絡《ちらく》が発生《はっせい》した回路《かいろ》をすぐに遮断《しゃだん》する（segera putuskan sirkuit yang mengalami ground fault）',
+    _origIndex: 545
   },
   {
   id: 476,
@@ -2543,10 +2669,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ろうでんとろうでんしゃだんき",
   jp: "漏電《ろうでん》と漏電遮断機《しゃだんき》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Arus bocor dan pemutus",
   desc: "漏電《ろうでん》= arus ke jalur yang tidak seharusnya; menyebabkan sengatan dan kebakaran.",
-  _origIndex: 546
+  usage: '漏電《ろうでん》を漏電遮断機《しゃだんき》（ELB）で早期《そうき》に検知《けんち》して遮断《しゃだん》する（deteksi dan putus arus bocor lebih awal menggunakan ELCB）',
+    _origIndex: 546
   },
   {
   id: 477,
@@ -2554,10 +2681,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "あっちゃくふりょうはつねつはっか",
   jp: "圧着不良《あっちゃくふりょうはつねつはっか》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Crimping buruk → panas",
   desc: "圧着《あっちゃく》不《ふ》良《ふりょう》menyebabkan発熱《はつねつ》・発火《はっか》.\nWajib crimp tepat di tengah sleeve",
-  _origIndex: 547
+  usage: '圧着不良《あっちゃくふりょう》を防《ふせ》ぐために圧着《あっちゃく》後《ご》は引っ張り試験《ひっぱりしけん》をする（lakukan tes tarikan setelah crimping untuk mencegah hasil crimping yang buruk）',
+    _origIndex: 547
   },
   {
   id: 481,
@@ -2565,10 +2693,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "しいしいぼっくす",
   jp: "C・C・BOX（シーシーボックス）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "CC-Box",
   desc: "Struktur beton berbentuk U ditanam di bawah jalan untuk menampung kabel komunikasi, listrik, dan",
-  _origIndex: 551
+  usage: 'CC-BOXに通信ケーブルを収容《しゅうよう》して分岐《ぶんき》する（tampung dan percabangkan kabel komunikasi di dalam CC-Box）',
+    _origIndex: 551
   },
   {
   id: 482,
@@ -2576,10 +2705,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "どかぶり",
   jp: "土被り《どかぶり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kedalaman tutup tanah di",
   desc: "Jarak permukaan jalan ke bagian atas管《かん》路《かんろ》; berdasarkan道《みち》路《どうろ》法施行《おこな》う令《ほうしこうれい》:",
-  _origIndex: 552
+  usage: '土被り《どかぶり》が規定《きてい》深度《しんど》を満《み》たすか確認《かくにん》する（periksa apakah kedalaman penutup tanah memenuhi kedalaman yang ditetapkan）',
+    _origIndex: 552
   },
   {
   id: 483,
@@ -2587,10 +2717,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "かんろとまいせつぶつのりかくきょり",
   jp: "管路と埋設物の離隔距離《かんろとまいせつぶつのりかくきょり》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Jarak aman saluran",
   desc: "Paralel: kereta=1,0 m, listrik=0,3 m, listrik sangat tinggi=0,6 m, lain=0,3 m.\nVertikal silang:",
-  _origIndex: 553
+  usage: '管路《かんろ》と既存埋設物《きそんまいせつぶつ》の離隔距離《りかくきょり》を図面《ずめん》で確認《かくにん》する（periksa jarak aman antara konduit dan utilitas existing pada gambar）',
+    _origIndex: 553
   },
   {
   id: 485,
@@ -2598,10 +2729,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "きみつしけん《かんろふせつご》",
   jp: "気密試験《きみつしけん》（管路布設後《かんろふせつご》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Uji kerapatan saluran",
   desc: "Tekanan dinaikkan ke 49 kPa, dibiarkan 3 menit; penurunan tekanan harus ≤1,96 kPa untuk lulus.",
-  _origIndex: 555
+  usage: '管路布設後《かんろふせつご》に気密試験《きみつしけん》で管内《かんない》の密閉性《みっぺいせい》を確認《かくにん》する（periksa kerapatan dalam konduit setelah pemasangan melalui air tightness test）',
+    _origIndex: 555
   },
   {
   id: 486,
@@ -2609,10 +2741,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "たいかれんが / たいかだんねつれんが",
   jp: "耐火煉瓦 / 耐火断熱煉瓦《たいかれんが / たいかだんねつれんが》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bata tahan api / bata",
   desc: "Dua jenis bata untuk築炉《ちくろ》工事《こうじ》; perekatnya mortar khusus tahan",
-  _origIndex: 556
+  usage: '耐火煉瓦《たいかれんが》と耐火断熱煉瓦《たいかだんねつれんが》を用途《ようと》に応《おう》じて使い分《つかいわ》ける（bedakan penggunaan bata tahan api dan bata insulasi panas sesuai fungsinya）',
+    _origIndex: 556
   },
   {
   id: 487,
@@ -2620,10 +2753,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "ねっこうせいもるたる vs きこうせいもるたる",
   jp: "熱硬性モルタル《ねっこうせいもるたる》 vs 気硬性モルタル《きこうせいもるたる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Mortar tahan api",
   desc: "熱硬《ねっこう》性《せい》モルタル = mengeras saat dipanaskan suhu tinggi.\n気硬《きこう》性《せい》モルタル = mengeras di udara",
-  _origIndex: 557
+  usage: '熱硬性《ねっこうせい》モルタルを炉《ろ》の高温部《こうおんぶ》に使用《しよう》する（gunakan mortar termal setting pada area suhu tinggi tungku）',
+    _origIndex: 557
   },
   {
   id: 488,
@@ -2642,10 +2776,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "こすいそうち",
   jp: "呼水装置《こすいそうち》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Priming device",
   desc: "Memastikan pompa pemadam terisi air sebelum beroperasi; wajib dipasang jika水源《すいげん》lebih rendah",
-  _origIndex: 559
+  usage: '呼水装置《こすいそうち》でポンプの呼水《こすい》を維持《いじ》する（jaga priming pompa menggunakan priming device）',
+    _origIndex: 559
   },
   {
   id: 490,
@@ -2653,10 +2788,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "すいおんじょうしょうぼうしようにがしはいかん",
   jp: "水温上昇防止用逃がし配管《すいおんじょうしょうぼうしようにがしはいかん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pipa bypass pompa pemadam",
   desc: "Mencegah pompa overheat saat berputar tanpa memompa (sisi keluar tertutup).\nTanpa pipa ini pompa",
-  _origIndex: 560
+  usage: '水温上昇《すいおんじょうしょう》防止《ぼうし》のために逃がし配管《にがしはいかん》を設置《せっち》する（pasang pipa bypass untuk mencegah kenaikan suhu air）',
+    _origIndex: 560
   },
   {
   id: 491,
@@ -2664,10 +2800,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "せいのうしけんそうちしょうぼうぽんぷ",
   jp: "性能試験装置《せいのうしけんそうち》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Alat uji performa pompa",
   desc: "Dipasang untuk memverifikasi pompa bekerja sesuai kapasitas yang",
-  _origIndex: 561
+  usage: '性能試験装置《せいのうしけんそうち》でポンプの吐出量《とじゅつりょう》と揚程《ようてい》を確認《かくにん》する（periksa debit dan head pompa menggunakan alat uji performa）',
+    _origIndex: 561
   },
   {
   id: 492,
@@ -2686,10 +2823,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "ゑるぽいんとこうほうちかすいはいすいさいだいじゅめえとる",
   jp: "ウェルポイント工法《こうほう》（地下水《ちかすい》排水《はいすい》・最大《さいだい》10m）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Well point",
   desc: "Banyak揚水管《ようすいかん》ditancapkan ke tanah, pompa vakum sedot air via集水管《しゅうすいかん》; efektif maks 10 m.",
-  _origIndex: 630
+  usage: 'ウェルポイント工法《こうほう》で地下水位《ちかすいい》を下《さ》げて掘削《くっさく》する（turunkan muka air tanah dengan wellpoint sebelum menggali）',
+    _origIndex: 630
   },
   {
   id: 552,
@@ -2708,10 +2846,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "けんちくばんきんこうじのだくとさんしゅるいはいえんくうちょうはいき",
   jp: "建築板金工事《けんちくばんきんこうじ》のダクト3種《さんしゅ》（排煙《はいえん》・空調《くうちょう》・排気《はいき》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Plat logam",
   desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap",
-  _origIndex: 650
+  usage: '排煙ダクト《はいえんだくと》・空調ダクト・排気ダクトの板金《ばんきん》工事《こうじ》を担当《たんとう》する（tangani pekerjaan sheet metal untuk duct asap, AC, dan exhaust）',
+    _origIndex: 650
   },
   {
   id: 568,
@@ -2862,10 +3001,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "かでんりゅうしゃだんき / ぶれえかあ / NFB",
   jp: "過電流遮断機《しゃだんき》 / ブレーカー / NFB",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemutus arus lebih",
   desc: "Memutus suplai listrik otomatis saat arus berlebih過電流《かでんりゅう》mengalir.\nVersi modern tanpa sekring",
-  _origIndex: 707
+  usage: '過電流遮断機《かでんりゅうしゃだんき》（NFB）で各回路《かくかいろ》を保護《ほご》する（lindungi setiap sirkuit menggunakan circuit breaker NFB）',
+    _origIndex: 707
   },
   {
   id: 600,
@@ -2873,10 +3013,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch5",
   furi: "はさみ・かったあないふ",
   jp: "はさみ・カッターナイフ",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Gunting & cutter",
   desc: "はさみ = dua bilah menjepit untuk memotong.\nカッターナイフ = pisau dengan mata yang bisa dipatahkan untuk",
-  _origIndex: 710
+  usage: 'カッターナイフでケーブルの外皮《がいひ》を慎重《しんちょう》に剥《む》く（kupas selubung kabel dengan hati-hati menggunakan cutter knife）',
+    _origIndex: 710
   },
   {
   id: 603,
@@ -2972,10 +3113,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "きゅうびくる《ろくせんろっぴゃっぼるとへんかん》",
   jp: "キュービクル（6600V変換《へんかん》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Cubicle",
   desc: "Listrik 6600V masuk via PAS lalu ke ã­ã¥ã¼ãã¯ã« yang mengubah menjadi 100V/200V.",
-  _origIndex: 721
+  usage: 'キュービクル（6600V）の点検《てんけん》は停電《ていでん》してから行《おこな》う（lakukan pemeriksaan cubicle 6600V setelah pemadaman）',
+    _origIndex: 721
   },
   {
   id: 612,
@@ -3005,10 +3147,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "まんどれるつうかしけん",
   jp: "マンドレル通過試験《まんどれるつうかしけん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Mandrel test",
   desc: "Saluran >150 m: wajib lewati mandrel No.4 (Ø600 mm).\nSaluran ≤150 m yang tidak bisa lewat No.4:",
-  _origIndex: 724
+  usage: 'マンドレル通過試験《まんどれるつうかしけん》で管路《かんろ》の変形《へんけい》がないことを確認《かくにん》する（konfirmasi tidak ada deformasi konduit melalui mandrel test）',
+    _origIndex: 724
   },
   {
   id: 615,
@@ -3027,10 +3170,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "くろおじゃあのいろわけ",
   jp: "クロージャの色分け《くろおじゃあのいろわけ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Closure",
   desc: "Closure = kotak sambungan/percabangan kabel di tiang listrik.\nAbu-abu untuk serat optik光《ひかり》ファイバー,",
-  _origIndex: 726
+  usage: 'クロージャの色分け《いろわけ》でどの回線《かいせん》かを識別《しきべつ》する（identifikasi jalur komunikasi berdasarkan kode warna closure）',
+    _origIndex: 726
   },
   {
   id: 617,
@@ -3038,10 +3182,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "でんせんきょうどうこう",
   jp: "電線共同溝《でんせんきょうどうこう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Common utility duct",
   desc: "Fasilitas memindahkan kabel tiang listrik ke bawah tanah.\nTujuan: ①estetika kota ②kelancaran lalu",
-  _origIndex: 727
+  usage: '電線共同溝《でんせんきょうどうこう》に電力線《でんりょくせん》と通信線《つうしんせん》を一括《いっかつ》収容《しゅうよう》する（tampung kabel listrik dan telekomunikasi sekaligus dalam common utility duct）',
+    _origIndex: 727
   },
   {
   id: 618,
@@ -3060,10 +3205,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch6",
   furi: "べんだあまげかこう《さいしょうまげはんけい》",
   jp: "ベンダー曲げ加工《べんだあまげかこう》（最小曲げ半径《さいしょうまげはんけい》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Bender bending",
   desc: "Membengkokkan pipa tembaga refrigeran pakai bender: radius minimum = 4x diameter luar pipa.",
-  _origIndex: 729
+  usage: 'チューブベンダーで最小曲げ半径《さいしょうまげはんけい》を守《まも》りながら銅管《どうかん》を曲《ま》げる（tekuk pipa tembaga sesuai radius minimum menggunakan tube bender）',
+    _origIndex: 729
   },
   {
   id: 620,
@@ -4774,10 +4920,11 @@ export const CARDS_LIFELINE = [
   source: "jac-ch3",
   furi: "ふきつけうれたんだんねつこうじ",
   jp: "吹付けウレタン断熱工事《ふきつけうれたんだんねつこうじ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerjaan insulasi semprot uretan",
   desc: "Menyemprotkan bahan dua-komponen (ポリオール成分《せいぶん》 + ポリイソシアネート成分《せいぶん》) langsung ke struktur bangunan dengan mesin khusus.\nMembentuk 硬質《こうしつ》ウレタンフォーム di tempat → lapisan insulasi tanpa celah.",
-  _origIndex: 1411
+  usage: '吹付けウレタン断熱工事《ふきつけうれたんだんねつこうじ》で壁《かべ》と屋根《やね》を断熱《だんねつ》する（isolasi dinding dan atap dengan pekerjaan insulasi semprot uretan）',
+    _origIndex: 1411
   },
   {
   id: 1256,

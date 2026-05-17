@@ -7,10 +7,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "ちょうれい",
   jp: "朝礼《ちょうれい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Apel pagi",
   desc: "Pertemuan wajib setiap pagi sebelum kerja. Ada 2 jenis: apel umum dan apel per jenis pekerjaan.",
-  _origIndex: 0
+  usage: '朝礼《ちょうれい》で今日《きょう》の作業内容《さぎょうないよう》と安全事項《あんぜんじこう》を確認《かくにん》する（konfirmasi pekerjaan hari ini dan hal-hal keselamatan saat apel pagi）',
+    _origIndex: 0
   },
 {
   id: 2,
@@ -18,10 +19,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "きけんよちかつどう",
   jp: "危険予知活動《きけんよちかつどう》（KY活動《かつどう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Prediksi Bahaya KY",
   desc: "Identifikasi bahaya sebelum mulai kerja, dilakukan saat apel per jenis pekerjaan.",
-  _origIndex: 1
+  usage: 'KY活動《かつどう》で作業前《さぎょうまえ》に潜在的《せんざいてき》な危険《きけん》を洗い出《あらいだ》す（identifikasi bahaya tersembunyi sebelum bekerja melalui KY活動）',
+    _origIndex: 1
   },
 {
   id: 3,
@@ -29,10 +31,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "らじおたいそう",
   jp: "ラジオ体操《らじおたいそう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Senam radio",
   desc: "Senam pemanasan saat apel pagi untuk mencegah cedera. Wajib diikuti semua pekerja sebelum kerja.",
-  _origIndex: 2
+  usage: 'ラジオ体操《らじおたいそう》で体《からだ》をほぐしてから作業《さぎょう》を始《はじ》める（lakukan peregangan dengan senam radio sebelum mulai bekerja）',
+    _origIndex: 2
   },
 {
   id: 4,
@@ -40,10 +43,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "ゆびさしこしょう",
   jp: "指差し呼称《ゆびさしこしょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tunjuk dan panggil",
   desc: "Metode konfirmasi keselamatan dengan menunjuk dan menyebut keras. Wajib tiap cek kondisi kerja.",
-  _origIndex: 3
+  usage: '「ヨシ！」と指差し呼称《ゆびさしこしょう》しながら安全《あんぜん》を確認《かくにん》する（konfirmasi keselamatan sambil menunjuk dan berkata "Yoshi!" dalam pointing and calling）',
+    _origIndex: 3
   },
 {
   id: 114,
@@ -86,10 +90,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "はっちゅうしゃ",
   jp: "発注者《はっちゅうしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemberi order konstruksi",
   desc: "Pihak yang memesan pekerjaan konstruksi.",
-  _origIndex: 564
+  usage: '発注者《はっちゅうしゃ》から元請け《もとうけ》に工事《こうじ》が発注《はっちゅう》される（proyek konstruksi diberikan dari pemilik proyek ke kontraktor utama）',
+    _origIndex: 564
   },
 {
   id: 495,
@@ -97,10 +102,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "かんりしゃ",
   jp: "監理者《かんりしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengawas konstruksi",
   desc: "Teknisi yang memastikan pekerjaan sesuai gambar/blueprint.",
-  _origIndex: 565
+  usage: '監理者《かんりしゃ》が設計図《せっけいず》通り施工《せこう》されているか確認《かくにん》する（pengawas konstruksi memeriksa apakah pekerjaan sesuai gambar rencana）',
+    _origIndex: 565
   },
 {
   id: 496,
@@ -108,10 +114,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "せっけいしゃ",
   jp: "設計者《せっけいしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Perancang / Desainer",
   desc: "Teknisi yang membuat dokumen desain untuk mewujudkan permintaan klien.",
-  _origIndex: 566
+  usage: '設計者《せっけいしゃ》が施工図《せこうず》を作成《さくせい》して現場《げんば》に提出《ていしゅつ》する（perancang menyiapkan gambar kerja dan menyerahkan ke lapangan）',
+    _origIndex: 566
   },
 {
   id: 497,
@@ -119,10 +126,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "ぜねこん",
   jp: "ゼネコン",
-  type: "konsep",
+  type: 'vocab',
   id_text: "General Contractor",
   desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek",
-  _origIndex: 567
+  usage: 'ゼネコンが複数《ふくすう》の専門業者《せんもんぎょうしゃ》を管理《かんり》して工事《こうじ》を進《すす》める（GC mengelola beberapa kontraktor spesialis untuk melanjutkan proyek）',
+    _origIndex: 567
   },
 {
   id: 498,
@@ -130,10 +138,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "げんばかんとく",
   jp: "現場監督《げんばかんとく》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengawas lapangan",
   desc: "Teknisi yang mengawasi pekerjaan di lokasi konstruksi.",
-  _origIndex: 568
+  usage: '現場監督《げんばかんとく》が施工《せこう》の進捗《しんちょく》を管理《かんり》する（pengawas lapangan mengelola kemajuan pelaksanaan pekerjaan）',
+    _origIndex: 568
   },
 {
   id: 499,
@@ -141,10 +150,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "せんもんこうじぎょうしゃ",
   jp: "専門工事業者《せんもんこうじぎょうしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kontraktor spesialis (工事業者)",
   desc: "Kontraktor spesialis yang menerima subkontrak dari ゼネコン.",
-  _origIndex: 569
+  usage: '専門工事業者《せんもんこうじぎょうしゃ》が配管《はいかん》や電気《でんき》などを担当《たんとう》する（kontraktor spesialis menangani pekerjaan seperti perpipaan dan listrik）',
+    _origIndex: 569
   },
 {
   id: 500,
@@ -152,10 +162,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "しょくちょう",
   jp: "職長《しょくちょう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Mandor / Foreman",
   desc: "Pemimpin langsung pekerja; menerima instruksi dari 現場監督《げんばかんとく》 dan meneruskan ke 技能者《ぎのうしゃ》.",
-  _origIndex: 570
+  usage: '職長《しょくちょう》が作業員《さぎょういん》に作業手順《さぎょうてじゅん》を指示《しじ》する（mandor memberikan instruksi prosedur kerja kepada pekerja）',
+    _origIndex: 570
   },
 {
   id: 501,
@@ -163,10 +174,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "ぎのうしゃ",
   jp: "技能者《ぎのうしゃ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pekerja terampil",
   desc: "Pekerja yang memiliki keahlian teknis di bidang konstruksi.",
-  _origIndex: 571
+  usage: '技能者《ぎのうしゃ》がCCUSカードで経験《けいけん》を蓄積《ちくせき》する（pekerja terampil mengumpulkan pengalaman melalui kartu CCUS）',
+    _origIndex: 571
   },
 {
   id: 502,
@@ -174,10 +186,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "せしゅ",
   jp: "施主《せしゅ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pemilik bangunan / klien",
   desc: "Pihak yang memesan bangunan; istilah khas proyek kecil seperti rumah tinggal.",
-  _origIndex: 572
+  usage: '施主《せしゅ》の要望《ようぼう》を設計者《せっけいしゃ》に伝《つた》える（sampaikan permintaan pemilik bangunan kepada perancang）',
+    _origIndex: 572
   },
 {
   id: 503,
@@ -185,10 +198,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "こうむてん",
   jp: "工務店《こうむてん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kontraktor lokal kecil",
   desc: "Kontraktor kecil untuk proyek rumah tinggal; bertindak sebagai 元請《もとうけ》け dari 施主《せしゅ》.",
-  _origIndex: 573
+  usage: '工務店《こうむてん》が地域《ちいき》の住宅《じゅうたく》工事《こうじ》を一括《いっかつ》して請《う》け負《お》う（kontraktor lokal menangani semua pekerjaan konstruksi rumah di wilayahnya）',
+    _origIndex: 573
   },
 {
   id: 504,
@@ -196,10 +210,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kontraktor utama (konsep)",
   desc: "Pihak yang menerima kontrak langsung dari klien lalu memberi subkontrak ke spesialis.",
-  _origIndex: 574
+  usage: '元請け《もとうけ》が下請け《したうけ》の工程《こうてい》を管理《かんり》する（kontraktor utama mengelola jadwal sub-kontraktor）',
+    _origIndex: 574
   },
 {
   id: 505,
@@ -207,10 +222,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "ひょうかのさんきじゅん",
   jp: "CCUS評価の3基準《ひょうかのさんきじゅん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "3 kriteria CCUS",
   desc: "Tiga kriteria evaluasi CCUS: ①hari kerja tercatat ②lisensi/sertifikat ③kemampuan manajerial.",
-  _origIndex: 575
+  usage: 'CCUSの評価基準《ひょうかきじゅん》（就業日数《しゅうぎょうにっすう》・資格・現場数《げんばすう》）でレベルを確認《かくにん》する（periksa level berdasarkan kriteria CCUS: hari kerja, kualifikasi, jumlah proyek）',
+    _origIndex: 575
   },
 {
   id: 506,
@@ -230,10 +246,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "あんぜんしょうわ・たっちあんどこーる",
   jp: "安全唱和・タッチアンドコール《あんぜんしょうわ・たっちあんどこーる》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Seruan keselamatan",
   desc: "Seruan keselamatan dan tumpuk tangan bersama di apel per jenis pekerjaan.",
-  _origIndex: 577
+  usage: '朝礼《ちょうれい》の最後《さいご》にタッチアンドコールで安全《あんぜん》を誓《ちか》う（ucapkan tekad keselamatan dengan touch and call di akhir apel pagi）',
+    _origIndex: 577
   },
 {
   id: 508,
@@ -241,10 +258,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "ぜろさいでいこうよし",
   jp: "ゼロ災で行こう、ヨシ！！《ぜろさいでいこうよし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "\"Zero kecelakaan, maju!",
   desc: "Slogan 安全唱和《あんぜんしょうわ》 diucapkan sambil 指《ゆび》さし saat apel per jenis pekerjaan.",
-  _origIndex: 578
+  usage: '「ゼロ災で行こう、ヨシ！」と唱和《しょうわ》して全員《ぜんいん》の安全意識《あんぜんいしき》を高《たか》める（tingkatkan kesadaran keselamatan semua orang dengan seruan "Zero sai de ikō, Yoshi!"）',
+    _origIndex: 578
   },
 {
   id: 509,
@@ -263,10 +281,11 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "きけんよちぼーど",
   jp: "KYボード",
-  type: "konsep",
+  type: 'vocab',
   id_text: "KY Board",
   desc: "Formulir yang diisi saat KY活動《かつどう》: kolom titik bahaya dan solusi tim.",
-  _origIndex: 580
+  usage: 'KYボードに本日《ほんじつ》の危険《きけん》と対策《たいさく》を記入《きにゅう》してから作業《さぎょう》する（isi KY board dengan bahaya dan tindakan pencegahan hari ini sebelum bekerja）',
+    _origIndex: 580
   },
 {
   id: 511,
@@ -307,9 +326,10 @@ export const CARDS_CH1 = [
   source: "jac-ch1",
   furi: "CCUSのよんれべるとじょうけん",
   jp: "CCUSの4レベルと条件《CCUSのよんれべるとじょうけん》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "4 level CCUS dan syaratnya",
   desc: "Lv.1 白《しろ》(ホワイト)=初級《しょきゅう》技能者《ぎのうしゃ》・見習《みなら》い。\nLv.2 青《あお》(ブルー)=中堅《ちゅうけん》・一人前《いちにんまえ》 ← 登録《とうろく》後《ご》645日《にち》(3年《ねん》)以上《いじょう》。\nLv.3 銀《ぎん》(シルバー)=職長《しょくちょう》として現場《げんば》に従事《じゅうじ》できる技能者。\nLv.4 金《きん》(ゴールド)=高度《こうど》マネジメント能力《のうりょく》(登録基幹《きかん》技能者など)。",
-  _origIndex: 1428
+  usage: 'CCUSのレベル4を取得《しゅとく》するために必要《ひつよう》な条件《じょうけん》を確認《かくにん》する（periksa persyaratan yang diperlukan untuk mendapatkan level 4 CCUS）',
+    _origIndex: 1428
   }
 ];

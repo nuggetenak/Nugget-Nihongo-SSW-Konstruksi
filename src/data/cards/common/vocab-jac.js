@@ -706,10 +706,11 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-gakka2",
   furi: "しかくのしゅるい：でんきこうじし・こうじたんにんしゃ・しょうぼうせつびし",
   jp: "資格の種類《しかくのしゅるい》：電気工事士《でんきこうじし》・工事担任者《こうじたんにんしゃ》・消防設備士《しょうぼうせつびし》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tiga jenis kualifikasi",
   desc: "①電気工事士《でんきこうじし》: listrik. ②工事担任者《こうじたんにんしゃ》: telekomunikasi. ③消防設備士《しょうぼうせつびし》: pemadam.",
-  _origIndex: 127
+  usage: '電気工事士《でんきこうじし》や消防設備士《しょうぼうせつびし》などの資格《しかく》を取得《しゅとく》してスキルを高《たか》める（tingkatkan kemampuan dengan mendapatkan lisensi seperti ahli listrik dan proteksi kebakaran）',
+    _origIndex: 127
   },
 {
   id: 627,
@@ -761,9 +762,10 @@ export const CARDS_VOCAB_JAC = [
   source: "jac-gakka2",
   furi: "くたい",
   jp: "躯体《くたい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Struktur utama bangunan (くたい)",
   desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》,",
-  _origIndex: 1560
+  usage: '躯体《くたい》が完成《かんせい》してから内装《ないそう》工事《こうじ》を始《はじ》める（mulai pekerjaan interior setelah struktur utama selesai）',
+    _origIndex: 1560
   }
 ];

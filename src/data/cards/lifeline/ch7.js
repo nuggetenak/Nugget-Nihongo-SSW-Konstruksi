@@ -53,10 +53,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "てんとう",
   jp: "転倒《てんとう》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tersandung / Kehilangan",
   desc: "Kecelakaan kerja: benda menghalangi → tersandung, atau kehilangan keseimbangan → jatuh di permukaan",
-  _origIndex: 584
+  usage: '足元《あしもと》を確認《かくにん》して転倒《てんとう》を防《ふせ》ぐ（perhatikan pijakan kaki untuk mencegah tersandung）',
+    _origIndex: 584
   },
 {
   id: 515,
@@ -64,10 +65,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ひらい・らっか",
   jp: "飛来《ひらい》・落下《らっか》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Benda melayang / jatuh",
   desc: "Kecelakaan: material terlepas dari crane atau benda jatuh dari ketinggian menimpa pekerja.",
-  _origIndex: 585
+  usage: '飛来・落下防止《ひらいらっかぼうし》のため養生ネットを設置《せっち》する（pasang jaring pengaman untuk mencegah benda melayang dan jatuh）',
+    _origIndex: 585
   },
 {
   id: 516,
@@ -75,10 +77,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "げきとつされ・まきこまれ",
   jp: "激突され《げきとつされ》/ はさまれ・巻き込まれ《まきこまれ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Tertabrak + terjepit/terlibas",
   desc: "激突《げきとつ》され = tertabrak kendaraan berat atau bucket crane saat berputar.",
-  _origIndex: 586
+  usage: '重機《じゅうき》の旋回《せんかい》範囲《はんい》内《ない》に立《た》ち入《い》らない（jangan memasuki area putar alat berat）',
+    _origIndex: 586
   },
 {
   id: 517,
@@ -86,10 +89,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ゆうがいぶつせっしょく / おぼれる / かさい",
   jp: "有害物接触 / おぼれ / 火災《ゆうがいぶつせっしょく / おぼれる / かさい》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kontak bahan berbahaya, tenggelam, kebakaran",
   desc: "有害物《ゆうがいぶつ》接触《せっしょく》: zat kimia menyentuh kulit → gangguan kesehatan.",
-  _origIndex: 587
+  usage: '有害物質《ゆうがいぶっしつ》を扱《あつか》うときは保護具《ほごぐ》を着用《ちゃくよう》する（kenakan APD saat menangani bahan berbahaya）',
+    _origIndex: 587
   },
 {
   id: 519,
@@ -97,10 +101,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "どどめくっさくふかさいじょうでげんそくひつよう",
   jp: "土留め《どどめ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Penahan tanah (土留め)",
   desc: "Saat menggali parit untuk pipa, tanah bisa longsor menimbun pekerja.",
-  _origIndex: 589
+  usage: '土留め《どどめ》を設置《せっち》してから掘削《くっさく》する（pasang penahan tanah sebelum menggali）',
+    _origIndex: 589
   },
 {
   id: 520,
@@ -108,10 +113,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "こうやいた",
   jp: "鋼矢板《こうやいた》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Sheet pile baja",
   desc: "Material utama 土留《どど》め. Lembaran baja yang dipancang vertikal di sisi galian untuk mencegah longsor",
-  _origIndex: 590
+  usage: '鋼矢板《こうやいた》を打《う》ち込《こ》んで土留め《どどめ》とする（tancapkan sheet pile baja sebagai penahan tanah）',
+    _origIndex: 590
   },
 {
   id: 521,
@@ -119,10 +125,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ほあんせつび・ゆうどういん・ゆうどういん",
   jp: "保安設備《ほあんせつび》・誘導員《ゆうどういん》（ほあんせつび・ゆうどういん）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Pengaman & pemandu lalu",
   desc: "Saat bekerja di jalan umum (公道《こうどう》): wajib pasang 囲《かこ》い/柵《さく》/ガード untuk cegah kendaraan masuk.",
-  _origIndex: 591
+  usage: '保安設備《ほあんせつび》を設置《せっち》して誘導員《ゆうどういん》を配置《はいち》する（pasang perangkat pengaman dan tempatkan petugas pengarah lalu lintas）',
+    _origIndex: 591
   },
 {
   id: 522,
@@ -130,10 +137,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "きいろっくほうしきろおぷ",
   jp: "キーロック方式《ほうしき》ロープ（移動《いどう》用《よう》ロープの安全《あんぜん》機構《きこう》）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Key",
   desc: "Sistem keselamatan フルハーネス saat pindah titik pengaman.",
-  _origIndex: 592
+  usage: 'キーロック方式《ほうしき》ロープに安全帯《あんぜんたい》を接続《せつぞく》して移動《いどう》する（hubungkan harness ke tali key-lock saat bergerak di ketinggian）',
+    _origIndex: 592
   },
 {
   id: 523,
@@ -174,10 +182,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ふるはあねすぎむたかさ",
   jp: "フルハーネス義務高さ《ふるはあねすぎむたかさ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Wajib full harness",
   desc: "2022年《ねん》1月《ねんいちがつ》施行《しこう》: ketinggian >6.75m → semua sektor wajib full harness.",
-  _origIndex: 596
+  usage: 'フルハーネス義務高さ《ふるはあねすぎむたかさ》（5m以上《いじょう》）では必《かなら》ずフルハーネスを着用《ちゃくよう》する（kenakan full harness wajib di atas ketinggian 5m）',
+    _origIndex: 596
   },
 {
   id: 527,
@@ -185,10 +194,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ほごめがね",
   jp: "保護メガネ《ほごめがね》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Kacamata pelindung dari",
   desc: "Melindungi mata dari: debu logam/kayu (粉《こな》じん), percikan api las (火花《ひばな》), panas & asap, sinar",
-  _origIndex: 597
+  usage: '切断《せつだん》・研削作業《けんさくさぎょう》では保護メガネ《ほごめがね》を着用《ちゃくよう》する（kenakan safety goggles saat pekerjaan pemotongan dan penggerindaan）',
+    _origIndex: 597
   },
 {
   id: 528,
@@ -196,10 +206,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "ほごますく・じんぱい・じんぱい",
   jp: "保護マスク《ほごますく》・じん肺《じんぱい》（ほごますく・じんぱい）",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Masker debu",
   desc: "じん肺《はい》 = kerusakan paru akibat debu logam/batu jangka panjang saat las busur atau potong batu.",
-  _origIndex: 598
+  usage: '粉塵《ふんじん》が出《で》る作業《さぎょう》では保護マスク《ほごますく》を着用《ちゃくよう》してじん肺《じんぱい》を防《ふせ》ぐ（kenakan masker pelindung saat ada debu untuk mencegah pneumoconiosis）',
+    _origIndex: 598
   },
 {
   id: 529,
@@ -218,10 +229,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "しいるどめんつきへるめっと / あんぜんぐつ",
   jp: "シールド面付きヘルメット / 安全靴《しいるどめんつきへるめっと / あんぜんぐつ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Helm wajah + sepatu safety",
   desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari",
-  _origIndex: 600
+  usage: '溶接《ようせつ》・研削作業《けんさくさぎょう》ではシールド面付き《めんつき》ヘルメットと安全靴《あんぜんぐつ》を着用《ちゃくよう》する（kenakan helm berpelindung wajah dan sepatu safety saat pengelasan）',
+    _origIndex: 600
   },
 {
   id: 531,
@@ -229,10 +241,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "あつさしすう・まなつび・もうしょび",
   jp: "WBGT（暑さ指数《あつさしすう》）・真夏日《まなつび》・猛暑日《もうしょび》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "WBGT + hari panas 30℃+ + hari terik 35℃+",
   desc: "WBGT = indeks risiko 熱中症《ねっちゅうしょう》 dari 気象庁《きしょうちょう》. 真夏日《まなつび》 = >30℃, 猛暑日《もうしょび》 = >35℃.",
-  _origIndex: 601
+  usage: 'WBGTが28度《ど》を超《こ》えたら熱中症《ねっちゅうしょう》対策《たいさく》を強化《きょうか》する（perkuat langkah pencegahan heatstroke saat WBGT melebihi 28°C）',
+    _origIndex: 601
   },
 {
   id: 532,
@@ -251,10 +264,11 @@ export const CARDS_LIFELINE_CH7 = [
   source: "jac-ch7",
   furi: "みどりじゅうじ / あんぜんえいせいき / きゅうきゅうばこ",
   jp: "緑十字 / 安全衛生旗 / 救急箱《みどりじゅうじ / あんぜんえいせいき / きゅうきゅうばこ》",
-  type: "konsep",
+  type: 'vocab',
   id_text: "Palang Hijau / Bendera",
   desc: "緑十字《みどりじゅうじ》 (palang hijau di latar putih) = simbol K3, dipasang di helm dan 救急箱《きゅうきゅうばこ》.",
-  _origIndex: 603
+  usage: '緑十字《みどりじゅうじ》と救急箱《きゅうきゅうばこ》の位置《いち》を作業前《さぎょうまえ》に確認《かくにん》する（periksa lokasi palang hijau dan kotak P3K sebelum bekerja）',
+    _origIndex: 603
   },
 {
   id: 534,
