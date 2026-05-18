@@ -26,7 +26,7 @@ export const SET_CP02 = {
         opts: ['作業《さぎょう》圧《あつ》の1.1倍《ばい》以下《いか》', '作業《さぎょう》圧《あつ》の0.5倍《ばい》', '常圧《じょうあつ》', '真空《しんくう》'],
         opts_id: ['Maksimal 1.1× tekanan kerja', '0.5× tekanan kerja', 'Tekanan normal', 'Vakum'],
         ans: 0,
-        exp: 'Pneumatic test (air test/エアー試験) untuk sistem gas menggunakan nitrogen (bukan udara biasa) pada tekanan 1.5× working pressure selama minimum 15 menit. Tidak menggunakan udara biasa karena ada risiko detonasi. Bandingkan dengan water pressure test (hydrostatic) yang lebih aman.',
+        exp: 'Pneumatic test (air test/エアー試験《しけん》) untuk sistem gas menggunakan nitrogen (bukan udara biasa) pada tekanan 1.5× working pressure selama minimum 15 menit. Tidak menggunakan udara biasa karena ada risiko detonasi. Bandingkan dengan water pressure test (hydrostatic) yang lebih aman.',
       },
       {
         id: 3,
@@ -35,7 +35,7 @@ export const SET_CP02 = {
         opts: ['90度《ど》', '180度《完全に開く》', '75度《ど》程度《開き止め金具を確実に》', '30度《ど》'],
         opts_id: ['90°', '180° (terbuka penuh)', 'Sekitar 75° (spreader terkunci)', '30°'],
         ans: 2,
-        exp: 'Kyatatsu (脚立/tangga lipat) dibuka dengan sudut antara kedua kaki sekitar 75°. Rantai pengaman atau spreader WAJIB terpasang sebelum naik. JANGAN berdiri di tangga paling atas (anak tangga tertinggi) karena tidak stabil. Tempatkan di permukaan rata dan tidak licin.',
+        exp: 'Kyatatsu (脚立《きゃたつ》/tangga lipat) dibuka dengan sudut antara kedua kaki sekitar 75°. Rantai pengaman atau spreader WAJIB terpasang sebelum naik. JANGAN berdiri di tangga paling atas (anak tangga tertinggi) karena tidak stabil. Tempatkan di permukaan rata dan tidak licin.',
       },
       {
         id: 4,
@@ -49,7 +49,7 @@ export const SET_CP02 = {
           'Maksimal 2m di bawah permukaan kerja',
         ],
         ans: 3,
-        exp: 'Safety net (落下防止ネット) dipasang maksimal 2m di bawah level lantai kerja saat bongkar scaffold. Jika jarak lebih dari 2m, material/pekerja yang jatuh bisa mengenai area bawah sebelum tertangkap net. Wajib berdasarkan regulasi K3 perancah.',
+        exp: 'Safety net (落下防止ネット《らっかぼうしねっと》) dipasang maksimal 2m di bawah level lantai kerja saat bongkar scaffold. Jika jarak lebih dari 2m, material/pekerja yang jatuh bisa mengenai area bawah sebelum tertangkap net. Wajib berdasarkan regulasi K3 perancah.',
       },
       {
         id: 5,
@@ -58,7 +58,7 @@ export const SET_CP02 = {
         opts: ['最低部《さいていぶ》（末端《まったん》）', '中央《ちゅうおう》', '天井《てんじょう》最高部《さいこうぶ》', '任意《にんい》'],
         opts_id: ['Titik terendah (ujung)', 'Tengah', 'Titik tertinggi langit-langit', 'Bebas'],
         ans: 0,
-        exp: 'Drain valve (ドレン弁) dipasang di titik terendah sistem sprinkler agar air bisa terkuras secara gravitasi saat sistem dikuras/diperbaiki. Jika dipasang di titik lain, air tersisa tidak bisa keluar sempurna dan bisa menyebabkan korosi atau kerusakan saat membeku.',
+        exp: 'Drain valve (ドレン弁《べん》) dipasang di titik terendah sistem sprinkler agar air bisa terkuras secara gravitasi saat sistem dikuras/diperbaiki. Jika dipasang di titik lain, air tersisa tidak bisa keluar sempurna dan bisa menyebabkan korosi atau kerusakan saat membeku.',
       },
       {
         id: 6,
@@ -67,7 +67,7 @@ export const SET_CP02 = {
         opts: ['鉄筋《てっきん》', 'ガラスウール', '耐火《たいか》レンガ', 'コンクリート'],
         opts_id: ['Besi beton', 'Glass wool', 'Bata tahan api', 'Beton'],
         ans: 1,
-        exp: 'Bahan insulasi panas/dingin (保温・断熱材) yang umum: Glass wool (グラスウール) = ekonomis, untuk suhu -50 to 350°C. Rock wool (ロックウール) = tahan api lebih baik. Polyurethane foam = nilai insulasi (R-value) terbaik. Pemilihan berdasarkan suhu operasi dan persyaratan kebakaran.',
+        exp: 'Bahan insulasi panas/dingin (保温《ほおん》・断熱材《だんねつざい》) yang umum: Glass wool (グラスウール) = ekonomis, untuk suhu -50 to 350°C. Rock wool (ロックウール) = tahan api lebih baik. Polyurethane foam = nilai insulasi (R-value) terbaik. Pemilihan berdasarkan suhu operasi dan persyaratan kebakaran.',
       },
       {
         id: 7,
@@ -85,7 +85,7 @@ export const SET_CP02 = {
         opts: ['テープで巻《ま》く', '放置《ほうち》する', '塗料《とりょう》を塗《ぬ》る', '溶接《ようせつ》する'],
         opts_id: ['Dibungkus tape', 'Dibiarkan', 'Dicat', 'Dilas'],
         ans: 0,
-        exp: 'Sambungan pipa refrigerant wajib dibungkus tape insulasi (テープ巻き) setelah brazing. Jika sambungan dibiarkan terbuka, kondensasi air terbentuk di permukaan dingin → korosi dan penyusutan insulasi. Gunakan tape self-amalgamating atau armaflex sesuai spesifikasi proyek.',
+        exp: 'Sambungan pipa refrigerant wajib dibungkus tape insulasi (テープ巻き《まき》) setelah brazing. Jika sambungan dibiarkan terbuka, kondensasi air terbentuk di permukaan dingin → korosi dan penyusutan insulasi. Gunakan tape self-amalgamating atau armaflex sesuai spesifikasi proyek.',
       },
       {
         id: 9,
@@ -94,7 +94,7 @@ export const SET_CP02 = {
         opts: ['巻尺《まきじゃく》', '厚《あつ》さ測定《そくてい》ピン', 'レベル', '角度計《かくどけい》'],
         opts_id: ['Measuring tape', 'Thickness pin gauge', 'Level', 'Protractor'],
         ans: 1,
-        exp: 'Ketebalan spray polyurethane foam diukur dengan thickness pin gauge (ピン式厚さ計) yang ditancapkan langsung ke foam setelah mengeras. Pengukuran acak per area memastikan seluruh permukaan memenuhi spesifikasi. Jika kurang dari ketebalan minimal, area tersebut harus disemprot ulang.',
+        exp: 'Ketebalan spray polyurethane foam diukur dengan thickness pin gauge (ピン式《いどうしき》厚さ《あつさ》計) yang ditancapkan langsung ke foam setelah mengeras. Pengukuran acak per area memastikan seluruh permukaan memenuhi spesifikasi. Jika kurang dari ketebalan minimal, area tersebut harus disemprot ulang.',
       },
       {
         id: 10,
@@ -108,7 +108,7 @@ export const SET_CP02 = {
           'Melunakkan agar mudah dibengkokkan',
         ],
         ans: 3,
-        exp: 'Annealing (焼鈍/shōdon) pipa tembaga = memanaskan pipa tembaga hingga merah-oranye lalu didinginkan PERLAHAN. Tujuan: membuat pipa lunak (ductile) agar bisa dibengkokkan tanpa retak. Pipa tembaga yang belum di-anneal keras dan mudah patah saat dibengkokkan.',
+        exp: 'Annealing (焼鈍《しょうどん》/shōdon) pipa tembaga = memanaskan pipa tembaga hingga merah-oranye lalu didinginkan PERLAHAN. Tujuan: membuat pipa lunak (ductile) agar bisa dibengkokkan tanpa retak. Pipa tembaga yang belum di-anneal keras dan mudah patah saat dibengkokkan.',
       },
       {
         id: 11,
@@ -117,7 +117,7 @@ export const SET_CP02 = {
         opts: ['ガムテープ', '接着剤《せっちゃくざい》', 'ろう付《つ》け《ブレージング》', 'ネジ止《ど》め'],
         opts_id: ['Lakban', 'Lem', 'Brazing', 'Ulir skrup'],
         ans: 2,
-        exp: 'Pipa tembaga refrigerant disambung dengan brazing (ろう付け/rōzuke) menggunakan filler alloy phosphor-copper (BCuP) atau silver alloy (BAg). Selama brazing, nitrogen dialirkan ke dalam pipa untuk mencegah terbentuknya copper oxide yang bisa merusak compressor. Suhu brazing: 700-900°C.',
+        exp: 'Pipa tembaga refrigerant disambung dengan brazing (ろう付《みつ》け/rōzuke) menggunakan filler alloy phosphor-copper (BCuP) atau silver alloy (BAg). Selama brazing, nitrogen dialirkan ke dalam pipa untuk mencegah terbentuknya copper oxide yang bisa merusak compressor. Suhu brazing: 700-900°C.',
       },
       {
         id: 12,
@@ -126,7 +126,7 @@ export const SET_CP02 = {
         opts: ['クランプメーター', '接地《せっち》抵抗計《ていこうけい》', '電圧計《でんあつけい》', 'テスター'],
         opts_id: ['Clamp meter', 'Earth resistance tester', 'Voltmeter', 'Tester'],
         ans: 1,
-        exp: 'Grounding alat listrik diverifikasi dengan earth resistance tester (接地抵抗計). Nilai normal ≤100Ω (umum) atau ≤10Ω (area khusus). Grounding buruk menyebabkan sengatan listrik jika ada kebocoran arus. Clamp meter tidak bisa mengukur resistansi grounding secara akurat.',
+        exp: 'Grounding alat listrik diverifikasi dengan earth resistance tester (接地抵抗計《せっちていこうけい》). Nilai normal ≤100Ω (umum) atau ≤10Ω (area khusus). Grounding buruk menyebabkan sengatan listrik jika ada kebocoran arus. Clamp meter tidak bisa mengukur resistansi grounding secara akurat.',
       },
       {
         id: 13,
@@ -140,7 +140,7 @@ export const SET_CP02 = {
           'Pencegahan kebocoran arus',
         ],
         ans: 3,
-        exp: 'Sebelum menggunakan alat listrik (電動工具), wajib mengukur resistansi isolasi (絶縁抵抗) dengan megger (insulation tester). Nilai normal ≥1 MΩ. Jika di bawah ini = isolasi rusak = risiko sengatan listrik (感電) atau kebakaran. Ini pemeriksaan keselamatan wajib harian.',
+        exp: 'Sebelum menggunakan alat listrik (電動工具《でんどうこうぐ》), wajib mengukur resistansi isolasi (絶縁《ぜつえん》抵抗《ていこう》) dengan megger (insulation tester). Nilai normal ≥1 MΩ. Jika di bawah ini = isolasi rusak = risiko sengatan listrik (感電《かんでん》) atau kebakaran. Ini pemeriksaan keselamatan wajib harian.',
       },
       {
         id: 14,
@@ -176,7 +176,7 @@ export const SET_CP02 = {
         opts: ['時計《とけい》', '温度計《おんどけい》のみ', '安全弁《あんぜんべん》', '音楽《おんがく》プレーヤー'],
         opts_id: ['Jam', 'Hanya termometer', 'Safety valve (katup pengaman)', 'Pemutar musik'],
         ans: 2,
-        exp: 'Safety valve (安全弁/リリーフバルブ) wajib dipasang pada boiler. Fungsi: otomatis membuka untuk melepas tekanan lebih agar tidak melebihi batas aman. Juga wajib: pressure gauge, water level gauge, low water cut-off. Safety valve yang tersumbat = risiko ledakan boiler.',
+        exp: 'Safety valve (安全弁《あんぜんべん》/リリーフバルブ) wajib dipasang pada boiler. Fungsi: otomatis membuka untuk melepas tekanan lebih agar tidak melebihi batas aman. Juga wajib: pressure gauge, water level gauge, low water cut-off. Safety valve yang tersumbat = risiko ledakan boiler.',
       },
       {
         id: 18,

@@ -26,7 +26,7 @@ export const SET_CT02 = {
       },
       {
         id: 2,
-        q: '以下の文章のに入る言葉を選びなさい。一般的には、朝礼の最後に、２人１組となって、声を出しながら、を行う。',
+        q: '以下《いか》の文章《ぶんしょう》のに入《はい》る言葉《ことば》を選《えら》びなさい。一般的《いっぱんてき》には、朝礼《ちょうれい》の最後《さいご》に、２人１組となって、声《こえ》を出し《だし》ながら、を行う《おこなう》。',
         hint: 'Pilih kata yang tepat untuk mengisi ( ). Biasanya di akhir apel pagi, berpasangan 2 orang sambil bersuara melakukan ( ).',
         opts: ['KY活動《かつどう》', '安全確認《あんぜんかくにん》', 'あいさつ', '体操《たいそう》'],
         opts_id: ['Kegiatan KY', 'Pengecekan keselamatan', 'Sapaan', 'Senam'],
@@ -45,7 +45,7 @@ export const SET_CT02 = {
           '3 milyar yen atau lebih per kontrak',
         ],
         ans: 0,
-        exp: 'Berdasarkan Construction Business Act: izin konstruksi (建設業許可) diperlukan jika nilai satu kontrak ≥500万円 (~35 juta rupiah) untuk pekerjaan khusus, atau ≥1,500万円 untuk konstruksi bangunan umum. Di bawah batas ini = 軽微な建設工事 (pekerjaan konstruksi kecil) yang bisa dilakukan tanpa izin. Ini melindungi konsumen dari kontraktor tidak kompeten.',
+        exp: 'Berdasarkan Construction Business Act: izin konstruksi (建設業《けんせつぎょう》許可《きょか》) diperlukan jika nilai satu kontrak ≥500万円 (~35 juta rupiah) untuk pekerjaan khusus, atau ≥1,500万円 untuk konstruksi bangunan umum. Di bawah batas ini = 軽微な建設工事《けんせつこうじ》 (pekerjaan konstruksi kecil) yang bisa dilakukan tanpa izin. Ini melindungi konsumen dari kontraktor tidak kompeten.',
       },
       {
         id: 4,
@@ -86,7 +86,7 @@ export const SET_CT02 = {
         opts: ['チームワーク', '十分《じゅうぶん》な睡眠《すいみん》', '疲労《ひろう》やストレス', '経験《けいけん》の豊富《ほうふ》さ'],
         opts_id: ['Kerja tim', 'Tidur cukup', 'Kelelahan atau stres', 'Pengalaman berlimpah'],
         ans: 2,
-        exp: 'Faktor utama human error: kelelahan (疲労), stres, monoton, kurang tidur, tekanan waktu, kondisi lingkungan buruk (panas/bising). Kelelahan menurunkan konsentrasi dan waktu reaksi secara signifikan. Ini sebabnya jam kerja dibatasi dan istirahat wajib.',
+        exp: 'Faktor utama human error: kelelahan (疲《つか》労), stres, monoton, kurang tidur, tekanan waktu, kondisi lingkungan buruk (panas/bising). Kelelahan menurunkan konsentrasi dan waktu reaksi secara signifikan. Ini sebabnya jam kerja dibatasi dan istirahat wajib.',
       },
       {
         id: 8,
@@ -95,7 +95,7 @@ export const SET_CT02 = {
         opts: ['挨拶《あいさつ》', '火災防止《かさいぼうし》', '休憩確認《きゅうけいかくにん》', '工具《こうぐ》の確認《かくにん》'],
         opts_id: ['Sapaan', 'Pencegahan kebakaran', 'Konfirmasi istirahat', 'Cek alat'],
         ans: 1,
-        exp: 'Setelah kerja selesai, konfirmasi penggunaan api (火気使用確認): pastikan tidak ada sumber api/panas tersisa seperti rokok yang menyala, peralatan las yang masih panas, kabel terbakar. Ini mencegah kebakaran yang sering terjadi setelah jam kerja saat tidak ada orang.',
+        exp: 'Setelah kerja selesai, konfirmasi penggunaan api (火気使用《しよう》確認《かくにん》): pastikan tidak ada sumber api/panas tersisa seperti rokok yang menyala, peralatan las yang masih panas, kabel terbakar. Ini mencegah kebakaran yang sering terjadi setelah jam kerja saat tidak ada orang.',
       },
       {
         id: 9,
@@ -109,7 +109,7 @@ export const SET_CT02 = {
           'Mengelola keselamatan semua pekerja di site (termasuk subkontraktor)',
         ],
         ans: 3,
-        exp: 'Labor Safety & Health Act mengatur bahwa 元方事業者 (moto-kata jigyōsha / kontraktor utama) bertanggung jawab atas keselamatan SEMUA pekerja di site, termasuk pekerja subkontraktor. Ini disebut 統括安全衛生管理 (tōkatsu anzen eisei kanri = manajemen K3 terpadu). Pekerja SSW Anda dilindungi oleh tanggung jawab ini.',
+        exp: 'Labor Safety & Health Act mengatur bahwa 元方《かた》事業者《ぎょうしゃ》 (moto-kata jigyōsha / kontraktor utama) bertanggung jawab atas keselamatan SEMUA pekerja di site, termasuk pekerja subkontraktor. Ini disebut 統括安全衛生《あんぜんえいせい》管理《かんり》 (tōkatsu anzen eisei kanri = manajemen K3 terpadu). Pekerja SSW Anda dilindungi oleh tanggung jawab ini.',
       },
       {
         id: 10,
@@ -118,7 +118,7 @@ export const SET_CT02 = {
         opts: ['48 時間《じかん》', '40 時間《じかん》', '36 時間《じかん》', '44 時間《じかん》'],
         opts_id: ['48 jam', '40 jam', '36 jam', '44 jam'],
         ans: 1,
-        exp: 'Menurut UU Standar Ketenagakerjaan (Labor Standards Act), waktu kerja resmi adalah 40 jam/minggu (8 jam/hari × 5 hari). Jika melebihi ini, disebut lembur (時間外労働) dan wajib dibayar tarif lebih tinggi. Ini adalah hak dasar semua pekerja di Jepang.',
+        exp: 'Menurut UU Standar Ketenagakerjaan (Labor Standards Act), waktu kerja resmi adalah 40 jam/minggu (8 jam/hari × 5 hari). Jika melebihi ini, disebut lembur (時間外労働《じかんがいろうどう》) dan wajib dibayar tarif lebih tinggi. Ini adalah hak dasar semua pekerja di Jepang.',
       },
       {
         id: 11,
@@ -132,7 +132,7 @@ export const SET_CT02 = {
           'Perusahaan yang menangani kebersihan site',
         ],
         ans: 0,
-        exp: '元請負業者 (moto ukeoi gyōsha / kontraktor utama) = perusahaan yang menerima kontrak proyek langsung dari pemberi proyek (発注者). Mereka kemudian mendelegasikan pekerjaan ke subkontraktor. Alur: Pemberi proyek → Kontraktor utama → Subkontraktor. Sebagai pekerja SSW, Anda bekerja di bawah salah satu dari rantai ini.',
+        exp: '元請《もとうけ》負業者《ぎょうしゃ》 (moto ukeoi gyōsha / kontraktor utama) = perusahaan yang menerima kontrak proyek langsung dari pemberi proyek (発注者《はっちゅうしゃ》). Mereka kemudian mendelegasikan pekerjaan ke subkontraktor. Alur: Pemberi proyek → Kontraktor utama → Subkontraktor. Sebagai pekerja SSW, Anda bekerja di bawah salah satu dari rantai ini.',
       },
       {
         id: 12,
@@ -160,7 +160,7 @@ export const SET_CT02 = {
           'Membuat jadwal konstruksi',
         ],
         ans: 2,
-        exp: '仕様書 (shiyōsho / specification document) = dokumen teknis yang menentukan: ①Material yang harus digunakan (merek, grade, standar), ②Metode pelaksanaan (cara kerja yang benar), ③Standar kualitas yang harus dicapai. Kontraktor wajib mengikuti shiyōsho. Jika ada pertentangan antara gambar dan shiyōsho, tanyakan ke supervisor atau engineer.',
+        exp: '仕様書《しようしょ》 (shiyōsho / specification document) = dokumen teknis yang menentukan: ①Material yang harus digunakan (merek, grade, standar), ②Metode pelaksanaan (cara kerja yang benar), ③Standar kualitas yang harus dicapai. Kontraktor wajib mengikuti shiyōsho. Jika ada pertentangan antara gambar dan shiyōsho, tanyakan ke supervisor atau engineer.',
       },
       {
         id: 14,
@@ -174,7 +174,7 @@ export const SET_CT02 = {
           'Pembuatan dokumen',
         ],
         ans: 2,
-        exp: '作業主任者 (sagyō shuninsha) = supervisor bersertifikat yang WAJIB ditunjuk untuk pekerjaan berbahaya. Daftar wajib 作業主任者: ①足場の組立て (scaffolding assembly), ②掘削 >2m (excavation), ③酸素欠乏危険場所 (confined space), ④アーク溶接 (arc welding), dll. Tanpa 作業主任者, pekerjaan ini DILARANG dimulai.',
+        exp: '作業主任者《さぎょうしゅにんしゃ》 (sagyō shuninsha) = supervisor bersertifikat yang WAJIB ditunjuk untuk pekerjaan berbahaya. Daftar wajib 作業主任者《さぎょうしゅにんしゃ》: ①足場《にゅうじょう》の組立《くみた》て (scaffolding assembly), ②掘削 >2m (excavation), ③酸素欠乏危険《きけん》場所《ばしょ》 (confined space), ④アーク溶接《ようせつ》 (arc welding), dll. Tanpa 作業主任者《さぎょうしゅにんしゃ》, pekerjaan ini DILARANG dimulai.',
       },
       {
         id: 15,
@@ -206,7 +206,7 @@ export const SET_CT02 = {
           'Mengukur berat material',
         ],
         ans: 2,
-        exp: 'レーザー墨出し器 (rēzā sumidashi-ki / laser level) memancarkan garis laser merah/hijau untuk menandai posisi yang presisi di dinding, lantai, dan langit-langit. Sangat berguna untuk: pemasangan duct AC yang harus lurus, pemasangan pipa dengan kemiringan tepat, penentuan posisi instalasi yang harus sejajar. Jauh lebih akurat dan cepat dari water level konvensional untuk jarak panjang.',
+        exp: 'レーザー墨出し器《すみだしき》 (rēzā sumidashi-ki / laser level) memancarkan garis laser merah/hijau untuk menandai posisi yang presisi di dinding, lantai, dan langit-langit. Sangat berguna untuk: pemasangan duct AC yang harus lurus, pemasangan pipa dengan kemiringan tepat, penentuan posisi instalasi yang harus sejajar. Jauh lebih akurat dan cepat dari water level konvensional untuk jarak panjang.',
       },
       {
         id: 18,
@@ -215,7 +215,7 @@ export const SET_CT02 = {
         opts: ['5m以上《いじょう》', '地面《じめん》から2m', '任意《にんい》', '作業面《さぎょうめん》から下方《かほう》2m以内《いない》'],
         opts_id: ['5m ke atas', '2m dari tanah', 'Bebas', 'Maksimal 2m di bawah permukaan kerja'],
         ans: 3,
-        exp: 'Safety net (墜落防止ネット) wajib dipasang maksimal 2m di bawah level kerja yang berisiko jatuh. Fungsi: menangkap pekerja yang jatuh sebelum mencapai lantai. Harus memenuhi standar JIS untuk kekuatan dan ukuran jaring. Wajib dicek sebelum digunakan.',
+        exp: 'Safety net (墜落《ついらく》防止《ぼうし》ネット) wajib dipasang maksimal 2m di bawah level kerja yang berisiko jatuh. Fungsi: menangkap pekerja yang jatuh sebelum mencapai lantai. Harus memenuhi standar JIS untuk kekuatan dan ukuran jaring. Wajib dicek sebelum digunakan.',
       },
       {
         id: 19,
@@ -238,7 +238,7 @@ export const SET_CT02 = {
           'Gambar yang menunjukkan tekanan pipa',
         ],
         ans: 1,
-        exp: '平面図 (heimen-zu / denah) = gambar penampang horizontal bangunan yang menunjukkan tata letak ruangan, pintu, jendela, dinding, dan kolom dilihat dari atas. Ini adalah gambar paling dasar. Jenis gambar lain: 立面図 (tampak luar dari samping), 断面図 (potongan vertikal), 詳細図 (detail konstruksi). Pekerja instalasi sering menggunakan 配管図 (diagram pipa).',
+        exp: '平《ひら》面《めん》図 (heimen-zu / denah) = gambar penampang horizontal bangunan yang menunjukkan tata letak ruangan, pintu, jendela, dinding, dan kolom dilihat dari atas. Ini adalah gambar paling dasar. Jenis gambar lain: 立面《めん》図 (tampak luar dari samping), 断面《だんめん》図 (potongan vertikal), 詳細《しょうさい》図 (detail konstruksi). Pekerja instalasi sering menggunakan 配管図《はいかんず》 (diagram pipa).',
       },
       {
         id: 21,
@@ -256,7 +256,7 @@ export const SET_CT02 = {
       },
       {
         id: 22,
-        q: '以下の文章のに入る言葉を選びなさい。築炉とは、電気炉など、高温になる内側を、で構築する工事のことである。',
+        q: '以下《いか》の文章《ぶんしょう》のに入《はい》る言葉《ことば》を選《えら》びなさい。築炉《ちくろ》とは、電気炉《でんきろ》など、高温《こうおん》になる内側《うちがわ》を、で構築《こうちく》する工事《らいふらいんこうじ》のことである。',
         hint: 'Pekerjaan furnace (築炉) adalah membangun bagian dalam tungku suhu tinggi dengan ( ).',
         opts: ['保冷材《ほれいざい》', '断熱材《だんねつざい》', '保温材《ほおんざい》', '耐火物《たいかぶつ》'],
         opts_id: [
@@ -266,7 +266,7 @@ export const SET_CT02 = {
           'Bahan tahan api',
         ],
         ans: 3,
-        exp: '築炉 (chikkuro/furnace construction) = membangun bagian dalam tungku suhu tinggi menggunakan 耐火物 (refractory material/bata tahan api). Digunakan untuk kiln industri, boiler, dsb. Bahan harus tahan suhu >1000°C tanpa meleleh atau rusak.',
+        exp: '築炉《ちくろ》 (chikkuro/furnace construction) = membangun bagian dalam tungku suhu tinggi menggunakan 耐火物《たいかぶつ》 (refractory material/bata tahan api). Digunakan untuk kiln industri, boiler, dsb. Bahan harus tahan suhu >1000°C tanpa meleleh atau rusak.',
       },
       {
         id: 23,
@@ -280,7 +280,7 @@ export const SET_CT02 = {
           'Memesan konstruksi dan membayar biayanya',
         ],
         ans: 3,
-        exp: '発注者 (hatchūsha) = pemilik/owner yang MEMESAN konstruksi dan MEMBAYAR biayanya. Bisa berupa: pemerintah (infrastruktur publik), perusahaan swasta (gedung pabrik), atau individu (rumah). Mereka menentukan apa yang dibangun, kapan, dan dengan budget berapa. Mereka bukan yang membangun sendiri.',
+        exp: '発注者《はっちゅうしゃ》 (hatchūsha) = pemilik/owner yang MEMESAN konstruksi dan MEMBAYAR biayanya. Bisa berupa: pemerintah (infrastruktur publik), perusahaan swasta (gedung pabrik), atau individu (rumah). Mereka menentukan apa yang dibangun, kapan, dan dengan budget berapa. Mereka bukan yang membangun sendiri.',
       },
       {
         id: 24,
@@ -289,7 +289,7 @@ export const SET_CT02 = {
         opts: ['月《つき》1回《かい》', '任意《にんい》', '半年《はんとし》に1回《かい》以上《いじょう》', '年《ねん》1回《かい》'],
         opts_id: ['1x sebulan', 'Bebas', 'Minimal 1x setiap 6 bulan', '1x setahun'],
         ans: 2,
-        exp: 'Latihan evakuasi (避難訓練) di lokasi konstruksi wajib dilakukan minimal 2 kali per tahun berdasarkan Fire Service Act (消防法). Tujuan: memastikan semua pekerja tahu jalur evakuasi, titik kumpul, dan prosedur darurat. Harus melibatkan SEMUA orang di site.',
+        exp: 'Latihan evakuasi (避難《ひなん》訓練《くんれん》) di lokasi konstruksi wajib dilakukan minimal 2 kali per tahun berdasarkan Fire Service Act (消防法《しょうぼうほう》). Tujuan: memastikan semua pekerja tahu jalur evakuasi, titik kumpul, dan prosedur darurat. Harus melibatkan SEMUA orang di site.',
       },
       {
         id: 25,
@@ -317,7 +317,7 @@ export const SET_CT02 = {
           'Lulus JLPT N3',
         ],
         ans: 1,
-        exp: 'Untuk mendapatkan status tinggal Keterampilan Khusus (特定技能/Tokutei Ginō): ①Lulus uji bahasa Jepang (JLPT N4 atau setara / 日本語能力試験・日本語基礎テスト), ②Lulus uji evaluasi keterampilan bidang (misalnya ujian JAC untuk konstruksi). Tidak harus N1 atau lulusan universitas. Ujian yang Anda ikuti sekarang adalah syarat nomor 2.',
+        exp: 'Untuk mendapatkan status tinggal Keterampilan Khusus (特定技能《とくていぎのう》/Tokutei Ginō): ①Lulus uji bahasa Jepang (JLPT N4 atau setara / 日本語《にほんご》能力《のうりょく》試験《しけん》・日本語《にほんご》基礎《べたきそ》テスト), ②Lulus uji evaluasi keterampilan bidang (misalnya ujian JAC untuk konstruksi). Tidak harus N1 atau lulusan universitas. Ujian yang Anda ikuti sekarang adalah syarat nomor 2.',
       },
       {
         id: 27,
@@ -331,16 +331,16 @@ export const SET_CT02 = {
           'Kontraktor utama pemegang izin konstruksi khusus',
         ],
         ans: 3,
-        exp: '施工体制台帳 = dokumen yang mencatat seluruh kontraktor dan subkontraktor yang terlibat, tanggung jawab masing-masing, dan jadwal pekerjaan. Wajib dibuat oleh 特定建設業 (kontraktor utama berizin khusus) saat nilai subkontrak melebihi batas tertentu. Dokumen ini harus dipajang di site dan bisa diperiksa kapan saja.',
+        exp: '施工体制台帳《せこうたいせいだいちょう》 = dokumen yang mencatat seluruh kontraktor dan subkontraktor yang terlibat, tanggung jawab masing-masing, dan jadwal pekerjaan. Wajib dibuat oleh 特定《とくてい》建設業《けんせつぎょう》 (kontraktor utama berizin khusus) saat nilai subkontrak melebihi batas tertentu. Dokumen ini harus dipajang di site dan bisa diperiksa kapan saja.',
       },
       {
         id: 28,
-        q: '労働基準法で、深夜労働（22時～5時）の割増賃金率は？',
+        q: '労働基準法《ろうどうきじゅんほう》で、深夜労働《しんやろうどう》（22時～5時）の割増賃金率《わりましちんぎんりつ》は？',
         hint: 'Tarif upah tambahan untuk kerja malam (22.00–05.00) menurut UU Standar Ketenagakerjaan adalah?',
         opts: ['2.0 倍《ばい》', '1.25 倍《ばい》', '1.0 倍《ばい》', '1.5 倍《ばい》'],
         opts_id: ['2.0 kali', '1.25 kali', '1.0 kali', '1.5 kali'],
         ans: 1,
-        exp: 'Kerja malam 22:00–05:00 mendapat tambahan minimal 0.25× gaji pokok (total gaji malam = gaji normal × 1.25). Jika kerja malam + lembur, keduanya dijumlahkan (total bisa 1.50×). Ini disebut warimashi chingin (割増賃金).',
+        exp: 'Kerja malam 22:00–05:00 mendapat tambahan minimal 0.25× gaji pokok (total gaji malam = gaji normal × 1.25). Jika kerja malam + lembur, keduanya dijumlahkan (total bisa 1.50×). Ini disebut warimashi chingin (割増賃金《わりましちんぎん》).',
       },
       {
         id: 29,
@@ -354,7 +354,7 @@ export const SET_CT02 = {
           'Pemerintah daerah (kota/kecamatan)',
         ],
         ans: 1,
-        exp: 'Penanggung jawab pengelolaan limbah industri di site = kontraktor UTAMA (元請負業者). Meskipun ada banyak subkontraktor yang menghasilkan limbah, kontraktor utama bertanggung jawab memastikan semua limbah dikelola sesuai hukum (Waste Management Act). Mereka wajib membuat manifest dan memastikan pembuangan dilakukan oleh perusahaan berlisensi.',
+        exp: 'Penanggung jawab pengelolaan limbah industri di site = kontraktor UTAMA (元請《もとうけ》負業者《ぎょうしゃ》). Meskipun ada banyak subkontraktor yang menghasilkan limbah, kontraktor utama bertanggung jawab memastikan semua limbah dikelola sesuai hukum (Waste Management Act). Mereka wajib membuat manifest dan memastikan pembuangan dilakukan oleh perusahaan berlisensi.',
       },
       {
         id: 30,
@@ -368,7 +368,7 @@ export const SET_CT02 = {
           'Menjamin keselamatan semua pekerja terkait',
         ],
         ans: 3,
-        exp: 'Kontraktor utama (元方事業者/moto kata) bertanggung jawab atas keselamatan SEMUA pekerja di lokasi, termasuk pekerja subkontraktor. Ini diatur dalam Industrial Safety & Health Act (労働安全衛生法). Tanggung jawab ini tidak bisa dilimpahkan.',
+        exp: 'Kontraktor utama (元方《かた》事業者《ぎょうしゃ》/moto kata) bertanggung jawab atas keselamatan SEMUA pekerja di lokasi, termasuk pekerja subkontraktor. Ini diatur dalam Industrial Safety & Health Act (労働安全衛生法《ろうどうあんぜんえいせいほう》). Tanggung jawab ini tidak bisa dilimpahkan.',
       },
     ],
   };

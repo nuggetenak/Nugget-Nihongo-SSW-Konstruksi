@@ -45,7 +45,7 @@ export const SET_CP03 = {
         opts: ['布《ぬの》', '紙《かみ》', '薄鋼板《うすこうはん》', 'アルミガラス布《ぬの》'],
         opts_id: ['Kain', 'Kertas', 'Lembaran baja tipis', 'ALGC'],
         ans: 2,
-        exp: 'Bahan outer cover insulasi untuk outdoor yang paling umum: thin steel sheet (薄鋼板) seperti galvalume atau aluminium sheet. Ini melindungi insulasi dari cuaca (hujan, UV, ekspansi termal). Indoor umumnya memakai ALGC (lebih ringan dan estetis).',
+        exp: 'Bahan outer cover insulasi untuk outdoor yang paling umum: thin steel sheet (薄鋼板《うすこうばん》) seperti galvalume atau aluminium sheet. Ini melindungi insulasi dari cuaca (hujan, UV, ekspansi termal). Indoor umumnya memakai ALGC (lebih ringan dan estetis).',
       },
       {
         id: 4,
@@ -63,7 +63,7 @@ export const SET_CP03 = {
         opts: ['先芯（鉄先・樹脂先）', '靴紐《くつひも》', '靴底《くつぞこ》', '靴《くつ》の色《いろ》'],
         opts_id: ['Toe cap (baja / komposit)', 'Tali sepatu', 'Sol sepatu', 'Warna sepatu'],
         ans: 0,
-        exp: 'Pada standar JIS T 8101 safety shoes, ketahanan benturan ujung jari (toe cap) ditandai dengan grade: 普通 (normal, 100J) atau 高機能 (high performance, 200J). Juga cek: sol anti-selip, anti-penetrasi (benda tajam dari bawah), dan anti-statis. Grade harus sesuai jenis pekerjaan.',
+        exp: 'Pada standar JIS T 8101 safety shoes, ketahanan benturan ujung jari (toe cap) ditandai dengan grade: 普通《とお》 (normal, 100J) atau 高《たか》機能《きのう》 (high performance, 200J). Juga cek: sol anti-selip, anti-penetrasi (benda tajam dari bawah), dan anti-statis. Grade harus sesuai jenis pekerjaan.',
       },
       {
         id: 6,
@@ -72,7 +72,7 @@ export const SET_CP03 = {
         opts: ['手袋《てぶくろ》', 'フルハーネス', 'ヘルメットのみ', '安全帯（墜落防止）'],
         opts_id: ['Sarung tangan', 'Full harness', 'Hanya helm', 'Safety belt (fall protection)'],
         ans: 3,
-        exp: 'Saat merakit scaffold, pekerja berada di ketinggian sehingga wajib memakai alat pencegah jatuh (安全帯/墜落防止器具). Sejak revisi 2022, full harness wajib di ≥5m. Wajib juga: helm, safety shoes, dan sarung tangan saat menangani besi. Tanpa harness → risiko fatal.',
+        exp: 'Saat merakit scaffold, pekerja berada di ketinggian sehingga wajib memakai alat pencegah jatuh (安全帯《あんぜんたい》/墜落《ついらく》防止《ぼうし》器具《きぐ》). Sejak revisi 2022, full harness wajib di ≥5m. Wajib juga: helm, safety shoes, dan sarung tangan saat menangani besi. Tanpa harness → risiko fatal.',
       },
       {
         id: 7,
@@ -95,7 +95,7 @@ export const SET_CP03 = {
         opts: ['ねじ式《しき》のみ', 'フランジと同《おな》じ', '溶接《ようせつ》が必要《ひつよう》', '挿入《そうにゅう》して接着《せっちゃく》または溶着《ようちゃく》'],
         opts_id: ['Hanya ulir', 'Sama dengan flange', 'Perlu las', 'Dimasukkan lalu dilem/difusi'],
         ans: 3,
-        exp: 'Socket joint (ソケット継手) = fitting yang dimasukkan (insert) ke dalam pipa lalu direkatkan dengan lem PVC (untuk PVC) atau difusion-welded (untuk PE). Karakteristik: permanen, cepat dipasang, tapi tidak bisa dilepas. Berbeda dengan flange yang bisa dilepas.',
+        exp: 'Socket joint (ソケット継手《つぎて》) = fitting yang dimasukkan (insert) ke dalam pipa lalu direkatkan dengan lem PVC (untuk PVC) atau difusion-welded (untuk PE). Karakteristik: permanen, cepat dipasang, tapi tidak bisa dilepas. Berbeda dengan flange yang bisa dilepas.',
       },
       {
         id: 9,
@@ -113,7 +113,7 @@ export const SET_CP03 = {
         opts: ['毎朝《まいあさ》使用前《しようまえ》', '任意《にんい》', '作業終了後《さぎょうしゅうりょうご》', '月《つき》1回《かい》'],
         opts_id: ['Setiap pagi sebelum pakai', 'Bebas', 'Setelah kerja selesai', '1x sebulan'],
         ans: 0,
-        exp: 'Buku inspeksi scaffold (足場点検簿) wajib diisi setiap pagi sebelum kerja dimulai. Tujuan: memastikan scaffold aman (sambungan kencang, papan tidak rusak, baut tidak longgar). Jika ada kerusakan, scaffold wajib diperbaiki dulu sebelum digunakan. Ini kewajiban hukum K3 Jepang.',
+        exp: 'Buku inspeksi scaffold (足場点検簿《あしばてんけんぼ》) wajib diisi setiap pagi sebelum kerja dimulai. Tujuan: memastikan scaffold aman (sambungan kencang, papan tidak rusak, baut tidak longgar). Jika ada kerusakan, scaffold wajib diperbaiki dulu sebelum digunakan. Ini kewajiban hukum K3 Jepang.',
       },
       {
         id: 11,
@@ -136,7 +136,7 @@ export const SET_CP03 = {
           'Membengkokkan',
         ],
         ans: 1,
-        exp: 'Swaging tool (スウェージング工具) membentuk ujung pipa tembaga menjadi lebih kecil agar bisa masuk ke dalam fitting sambungan. Berbeda dengan flaring tool yang melebarkan ujung pipa berbentuk kerucut. Dengan swaging, sambungan langsung antar pipa dimungkinkan tanpa fitting tambahan.',
+        exp: 'Swaging tool (スウェージング工具《こうぐ》) membentuk ujung pipa tembaga menjadi lebih kecil agar bisa masuk ke dalam fitting sambungan. Berbeda dengan flaring tool yang melebarkan ujung pipa berbentuk kerucut. Dengan swaging, sambungan langsung antar pipa dimungkinkan tanpa fitting tambahan.',
       },
       {
         id: 13,
@@ -145,7 +145,7 @@ export const SET_CP03 = {
         opts: ['アルミシートまたは薄鋼板《うすこうはん》', '布《ぬの》', '紙《かみ》テープ', '発泡《はっぽう》スチロール'],
         opts_id: ['Aluminium sheet or thin steel sheet', 'Kain', 'Kertas tape', 'Styrofoam'],
         ans: 0,
-        exp: 'Bahan outer cover insulasi yang direkomendasikan untuk outdoor: galvalume steel sheet (ガルバリウム鋼板) atau aluminium sheet dengan coating weather-resistant. Harus tahan: ①Hujan, ②UV, ③Ekspansi/kontraksi termal, ④Benturan ringan. Indoor bisa pakai ALGC yang lebih ringan.',
+        exp: 'Bahan outer cover insulasi yang direkomendasikan untuk outdoor: galvalume steel sheet (ガルバリウム鋼板《いた》) atau aluminium sheet dengan coating weather-resistant. Harus tahan: ①Hujan, ②UV, ③Ekspansi/kontraksi termal, ④Benturan ringan. Indoor bisa pakai ALGC yang lebih ringan.',
       },
       {
         id: 14,
@@ -154,7 +154,7 @@ export const SET_CP03 = {
         opts: ['角度《かくど》を測《はか》る', '水平《すいへい》を確認《かくにん》する', '長《なが》さを測《はか》る', '垂直《すいちょく》を確認《かくにん》する'],
         opts_id: ['Mengukur sudut', 'Mengecek horizontal', 'Mengukur panjang', 'Mengecek vertikal'],
         ans: 1,
-        exp: 'Level (水準器/レベル) digunakan di site untuk memastikan: ①Pipa terpasang horizontal/sesuai kemiringan rencana, ②Duct AC rata, ③Platform scaffold horizontal aman. Jenis: bubble level (konvensional) dan laser level (presisi tinggi). Wajib dikalibrasi berkala.',
+        exp: 'Level (水準器《すいじゅんき》/レベル) digunakan di site untuk memastikan: ①Pipa terpasang horizontal/sesuai kemiringan rencana, ②Duct AC rata, ③Platform scaffold horizontal aman. Jenis: bubble level (konvensional) dan laser level (presisi tinggi). Wajib dikalibrasi berkala.',
       },
       {
         id: 15,
@@ -181,7 +181,7 @@ export const SET_CP03 = {
       },
       {
         id: 17,
-        q: '2022年1月の法改正により、高所作業（原則）で義務となった墜落制止用器具は？',
+        q: '2022年1月の法改正《ほうかいせい》により、高所作業《こうしょさぎょう》（原則）で義務《ぎむ》となった墜落制止用器具《ついらくせいしようきぐ》は？',
         hint: 'Menurut revisi hukum Jan 2022, alat pencegah jatuh yang wajib di kerja ketinggian (prinsip) adalah?',
         opts: ['従来《じゅうらい》の胴《どう》ベルト型《がた》', 'フルハーネス型《がた》', 'ロープのみ', '手袋《てぶくろ》'],
         opts_id: [
@@ -191,7 +191,7 @@ export const SET_CP03 = {
           'Sarung tangan',
         ],
         ans: 1,
-        exp: 'Sejak revisi hukum Januari 2022, kerja di ketinggian ≥6.75m (konstruksi ≥5m) WAJIB menggunakan full body harness (フルハーネス型安全帯), bukan belt tunggal. Full harness mendistribusikan beban seluruh tubuh sehingga lebih aman jika jatuh. Ini adalah kewajiban hukum, bukan rekomendasi.',
+        exp: 'Sejak revisi hukum Januari 2022, kerja di ketinggian ≥6.75m (konstruksi ≥5m) WAJIB menggunakan full body harness (フルハーネス型《がた》安全帯《あんぜんたい》), bukan belt tunggal. Full harness mendistribusikan beban seluruh tubuh sehingga lebih aman jika jatuh. Ini adalah kewajiban hukum, bukan rekomendasi.',
       },
       {
         id: 18,
@@ -214,7 +214,7 @@ export const SET_CP03 = {
           'Hanya pembuangan air',
         ],
         ans: 1,
-        exp: 'Setelah pressure test, wajib purge dengan dry nitrogen (kering, bebas moisture) untuk menghilangkan kelembaban dari dalam pipa. Moisture bereaksi dengan refrigerant membentuk asam yang merusak kompresor. Setelah purge nitrogen, lakukan vacuum drawing (真空引き) sebelum mengisi refrigerant.',
+        exp: 'Setelah pressure test, wajib purge dengan dry nitrogen (kering, bebas moisture) untuk menghilangkan kelembaban dari dalam pipa. Moisture bereaksi dengan refrigerant membentuk asam yang merusak kompresor. Setelah purge nitrogen, lakukan vacuum drawing (真空引き《しんくうびき》) sebelum mengisi refrigerant.',
       },
       {
         id: 20,
@@ -223,7 +223,7 @@ export const SET_CP03 = {
         opts: ['1m以上《いじょう》の高所《こうしょ》', '5m以上《いじょう》の高所《こうしょ》', '室内《しつない》のみ', '地面《じめん》作業《さぎょう》'],
         opts_id: ['Ketinggian >1m', 'Ketinggian >5m', 'Hanya indoor', 'Kerja di tanah'],
         ans: 1,
-        exp: 'Full body harness WAJIB digunakan saat bekerja di ketinggian ≥5m (untuk konstruksi) atau ≥6.75m (umum), berlaku sejak Januari 2022. Sebelumnya boleh pakai belt tunggal (一本吊り). Perubahan ini karena full harness terbukti jauh lebih aman — distribusi beban lebih merata.',
+        exp: 'Full body harness WAJIB digunakan saat bekerja di ketinggian ≥5m (untuk konstruksi) atau ≥6.75m (umum), berlaku sejak Januari 2022. Sebelumnya boleh pakai belt tunggal (一本《ほん》吊り). Perubahan ini karena full harness terbukti jauh lebih aman — distribusi beban lebih merata.',
       },
     ],
   };

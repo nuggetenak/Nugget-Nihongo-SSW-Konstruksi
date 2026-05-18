@@ -27,7 +27,7 @@ export const SET_CT04 = {
           'Alat listrik boleh digunakan di tempat basah',
         ],
         ans: 1,
-        exp: 'Pencegahan sengatan listrik (感電防止): ①Cek resistansi isolasi (絶縁抵抗) sebelum pakai → normal ≥1 MΩ, ②Gunakan ELCB (漏電ブレーカー/earth leakage breaker), ③JANGAN gunakan alat listrik dengan tangan basah atau di tempat basah tanpa perlindungan, ④Pekerjaan listrik hanya boleh dilakukan oleh yang berlisensi (電気工事士).',
+        exp: 'Pencegahan sengatan listrik (感電《かんでん》防止《ぼうし》): ①Cek resistansi isolasi (絶縁《ぜつえん》抵抗《ていこう》) sebelum pakai → normal ≥1 MΩ, ②Gunakan ELCB (漏電《ろうでん》ブレーカー/earth leakage breaker), ③JANGAN gunakan alat listrik dengan tangan basah atau di tempat basah tanpa perlindungan, ④Pekerjaan listrik hanya boleh dilakukan oleh yang berlisensi (電気工事士《でんきこうじし》).',
       },
       {
         id: 2,
@@ -50,7 +50,7 @@ export const SET_CT04 = {
           'Memasang alat pemadam kebakaran',
         ],
         ans: 2,
-        exp: '土木工事 (Doboku kōji / pekerjaan sipil) = pekerjaan yang berhubungan dengan infrastruktur alam: jalan raya, jembatan, terowongan, bendungan, sungai, dermaga, pelabuhan. Membuat jalan raya = doboku. Membangun rumah = 建築工事. Memasang AC/alat pemadam = 設備工事.',
+        exp: '土木工事《どぼくこうじ》 (Doboku kōji / pekerjaan sipil) = pekerjaan yang berhubungan dengan infrastruktur alam: jalan raya, jembatan, terowongan, bendungan, sungai, dermaga, pelabuhan. Membuat jalan raya = doboku. Membangun rumah = 建築工事《けんちくこうじ》. Memasang AC/alat pemadam = 設備工事《せつびこうじ》.',
       },
       {
         id: 4,
@@ -64,7 +64,7 @@ export const SET_CT04 = {
           'Bahaya sengatan listrik',
         ],
         ans: 2,
-        exp: 'Kadar oksigen (酸素濃度) normal = 21%. Di bawah 18% = bahaya (酸素欠乏/sanso ketsubō). Di bawah 16% = berbahaya akut (pusing, jantung berdebar). Di bawah 6% = fatal dalam menit (kehilangan kesadaran). Gejala muncul SANGAT CEPAT tanpa peringatan. WAJIB: ukur O₂ dulu, ventilasi paksa, standby person di luar manhole.',
+        exp: 'Kadar oksigen (酸素《さんそ》濃度《やくななじゅうごど》) normal = 21%. Di bawah 18% = bahaya (酸素欠乏《さんそけつぼう》/sanso ketsubō). Di bawah 16% = berbahaya akut (pusing, jantung berdebar). Di bawah 6% = fatal dalam menit (kehilangan kesadaran). Gejala muncul SANGAT CEPAT tanpa peringatan. WAJIB: ukur O₂ dulu, ventilasi paksa, standby person di luar manhole.',
       },
       {
         id: 5,
@@ -83,7 +83,7 @@ export const SET_CT04 = {
           'Diperlukan tindakan seperti penjelasan awal, tirai peredam suara, penyiraman air untuk meminimalkan dampak ke lingkungan sekitar',
         ],
         ans: 3,
-        exp: 'Konstruksi menimbulkan dampak ke lingkungan sekitar: kebisingan (騒音), getaran (振動), debu (粉塵), lumpur, hambatan lalu lintas. Kewajiban kontraktor: ①Jelaskan rencana kerja ke warga sekitar SEBELUM mulai, ②Pasang 防音シート (tirai peredam suara), ③Sirami area agar tidak berdebu, ④Batasi jam kerja sesuai peraturan daerah, ⑤Jaga kebersihan jalan sekitar site. Ini bukan hanya etika tapi ada peraturan hukumnya.',
+        exp: 'Konstruksi menimbulkan dampak ke lingkungan sekitar: kebisingan (騒音《そうおん》), getaran (振動《しんどう》), debu (粉塵《ふんじん》), lumpur, hambatan lalu lintas. Kewajiban kontraktor: ①Jelaskan rencana kerja ke warga sekitar SEBELUM mulai, ②Pasang 防《ふせ》音《おと》シート (tirai peredam suara), ③Sirami area agar tidak berdebu, ④Batasi jam kerja sesuai peraturan daerah, ⑤Jaga kebersihan jalan sekitar site. Ini bukan hanya etika tapi ada peraturan hukumnya.',
       },
       {
         id: 6,
@@ -121,7 +121,7 @@ export const SET_CT04 = {
           'Memperbaiki tanah tanpa menggunakan tiang',
         ],
         ans: 1,
-        exp: '既成杭工法 (kisei kui kōhō / precast pile method) = tiang dibuat di pabrik dengan kualitas terkontrol, kemudian dikirim ke site dan dipancang. Contoh: PHC pile (コンクリート杭), H-pile (H形鋼杭). Keunggulan: kualitas konsisten, cepat. Berbeda dari 現場打ち杭 (cast-in-place) di mana beton dituang langsung di lubang bor site.',
+        exp: '既成杭工法《きせいくいこうほう》 (kisei kui kōhō / precast pile method) = tiang dibuat di pabrik dengan kualitas terkontrol, kemudian dikirim ke site dan dipancang. Contoh: PHC pile (コンクリート杭《くい》), H-pile (H形鋼杭《こうくい》). Keunggulan: kualitas konsisten, cepat. Berbeda dari 現場《げんば》打ち杭《くい》 (cast-in-place) di mana beton dituang langsung di lubang bor site.',
       },
       {
         id: 8,
@@ -135,7 +135,7 @@ export const SET_CT04 = {
           'Limbah radioaktif',
         ],
         ans: 0,
-        exp: 'Bahan bangunan mengandung asbes (石綿含有建材) termasuk 特別管理産業廃棄物 (special controlled industrial waste). Ini karena asbes adalah karsinogen (penyebab kanker). Pembuangannya WAJIB dilakukan oleh perusahaan berlisensi khusus, dengan pelaporan ke pemerintah.',
+        exp: 'Bahan bangunan mengandung asbes (石綿《いしわた》含有建材《ざい》) termasuk 特別《とくべつ》管理《かんり》産業廃棄物《さんぎょうはいきぶつ》 (special controlled industrial waste). Ini karena asbes adalah karsinogen (penyebab kanker). Pembuangannya WAJIB dilakukan oleh perusahaan berlisensi khusus, dengan pelaporan ke pemerintah.',
       },
       {
         id: 9,
@@ -177,7 +177,7 @@ export const SET_CT04 = {
           'Kontraktor utama (manajer konstruksi)',
         ],
         ans: 3,
-        exp: 'Rencana K3 (安全衛生計画) wajib dibuat oleh kontraktor utama (元請業者) sebagai penanggungjawab seluruh site. Rencana ini mencakup: identifikasi bahaya per jenis pekerjaan, jadwal inspeksi, rencana pendidikan K3, prosedur darurat, dan rencana patroli keselamatan. Subkontraktor mengikuti rencana yang dibuat motouke.',
+        exp: 'Rencana K3 (安全衛生《あんぜんえいせい》計画《けいかく》) wajib dibuat oleh kontraktor utama (元請《もとうけ》業者《ぎょうしゃ》) sebagai penanggungjawab seluruh site. Rencana ini mencakup: identifikasi bahaya per jenis pekerjaan, jadwal inspeksi, rencana pendidikan K3, prosedur darurat, dan rencana patroli keselamatan. Subkontraktor mengikuti rencana yang dibuat motouke.',
       },
       {
         id: 12,
@@ -200,7 +200,7 @@ export const SET_CT04 = {
           'Memberi sanksi',
         ],
         ans: 2,
-        exp: 'Pengusaha wajib membuat rencana cuti terencana (計画年休) agar pekerja menggunakan minimal 5 hari cuti per tahun. Ini diwajibkan oleh revisi Labor Standards Act 2019. Pekerja yang tidak dibantu mengambil cuti = pelanggaran hukum.',
+        exp: 'Pengusaha wajib membuat rencana cuti terencana (計画《けいかく》年休) agar pekerja menggunakan minimal 5 hari cuti per tahun. Ini diwajibkan oleh revisi Labor Standards Act 2019. Pekerja yang tidak dibantu mengambil cuti = pelanggaran hukum.',
       },
       {
         id: 14,
@@ -209,7 +209,7 @@ export const SET_CT04 = {
         opts: ['5S活動《かつどう》', '安全教育《あんぜんきょういく》', 'KY活動《かつどう》', '朝礼《ちょうれい》'],
         opts_id: ['Kegiatan 5S', 'Pendidikan keselamatan', 'Kegiatan KY', 'Apel pagi'],
         ans: 3,
-        exp: 'Apel pagi (朝礼/chōrei) = pertemuan harian WAJIB di mana semua pekerja berkumpul sebelum mulai kerja. Isi apel: safety briefing hari ini, pembagian tugas, KY (prediksi bahaya), senam konfirmasi keselamatan. Chōrei bukan formalitas tapi fondasi manajemen keselamatan.',
+        exp: 'Apel pagi (朝礼《ちょうれい》/chōrei) = pertemuan harian WAJIB di mana semua pekerja berkumpul sebelum mulai kerja. Isi apel: safety briefing hari ini, pembagian tugas, KY (prediksi bahaya), senam konfirmasi keselamatan. Chōrei bukan formalitas tapi fondasi manajemen keselamatan.',
       },
       {
         id: 15,
@@ -228,7 +228,7 @@ export const SET_CT04 = {
           'Hanya menetapkan standar keselamatan site konstruksi',
         ],
         ans: 1,
-        exp: '建設業法 (Kensetsu-gyō Hō / Construction Business Act) tujuan utamanya: ①Meningkatkan kualitas pelaku usaha konstruksi (資質の向上), ②Memastikan pelaksanaan konstruksi yang tepat (適正施工), ③Melindungi kepentingan pemberi proyek (発注者保護), ④Mendorong perkembangan industri konstruksi yang sehat. Bukan mengatur gaji atau keselamatan saja.',
+        exp: '建設業法《けんせつぎょうほう》 (Kensetsu-gyō Hō / Construction Business Act) tujuan utamanya: ①Meningkatkan kualitas pelaku usaha konstruksi (資質《ししつ》の向上《うえ》), ②Memastikan pelaksanaan konstruksi yang tepat (適正《てきせい》施工《せこう》), ③Melindungi kepentingan pemberi proyek (発注者《はっちゅうしゃ》保護《ほご》), ④Mendorong perkembangan industri konstruksi yang sehat. Bukan mengatur gaji atau keselamatan saja.',
       },
       {
         id: 16,
@@ -237,7 +237,7 @@ export const SET_CT04 = {
         opts: ['朝礼《ちょうれい》', '指差確認《ゆびさしかくにん》', '安全確認《あんぜんかくにん》', 'KY活動《かつどう》'],
         opts_id: ['Apel pagi', 'Pointing confirmation', 'Safety check', 'Kegiatan KY'],
         ans: 1,
-        exp: '名前 resmi untuk pointing & calling dalam bahasa Jepang adalah 指差呼称 (yubi-sashi kakunin). 指差 = menunjuk, 呼称 = menyebut keras. Teknik ini dikembangkan oleh industri perkeretaapian Jepang dan kini digunakan luas di seluruh industri konstruksi.',
+        exp: '名前《まえ》 resmi untuk pointing & calling dalam bahasa Jepang adalah 指《ゆび》差呼称 (yubi-sashi kakunin). 指《ゆび》差 = menunjuk, 呼称 = menyebut keras. Teknik ini dikembangkan oleh industri perkeretaapian Jepang dan kini digunakan luas di seluruh industri konstruksi.',
       },
       {
         id: 17,
@@ -251,7 +251,7 @@ export const SET_CT04 = {
           'Beristirahat',
         ],
         ans: 2,
-        exp: 'Tujuan KY di apel pagi: meningkatkan kesadaran bahaya (危険意識) setiap pekerja sebelum memulai kerja. Dengan terbiasa memikirkan bahaya setiap hari, pekerja lebih waspada dan cenderung menghindari perilaku berbahaya.',
+        exp: 'Tujuan KY di apel pagi: meningkatkan kesadaran bahaya (危険《きけん》意識) setiap pekerja sebelum memulai kerja. Dengan terbiasa memikirkan bahaya setiap hari, pekerja lebih waspada dan cenderung menghindari perilaku berbahaya.',
       },
       {
         id: 18,
@@ -260,7 +260,7 @@ export const SET_CT04 = {
         opts: ['口頭《こうとう》のみ', '作業内容《さぎょうないよう》・工期《こうき》・代金《だいきん》', 'すべて任意《にんい》', 'なし'],
         opts_id: ['Hanya lisan', 'Isi pekerjaan, jadwal, & harga', 'Semua sukarela', 'Tidak ada'],
         ans: 1,
-        exp: 'Saat membuat kontrak subkontraktor (下請負契約), hal yang WAJIB dicantumkan: ①Deskripsi pekerjaan, ②Jadwal (tanggal mulai & selesai), ③Harga kontrak, ④Metode pembayaran, ⑤Kondisi perubahan (追加変更). Kontrak verbal tidak sah. Ini diatur dalam Construction Business Act.',
+        exp: 'Saat membuat kontrak subkontraktor (下請《したうけ》負契約《やく》), hal yang WAJIB dicantumkan: ①Deskripsi pekerjaan, ②Jadwal (tanggal mulai & selesai), ③Harga kontrak, ④Metode pembayaran, ⑤Kondisi perubahan (追加《ついか》変更《へんこう》). Kontrak verbal tidak sah. Ini diatur dalam Construction Business Act.',
       },
       {
         id: 19,
@@ -279,7 +279,7 @@ export const SET_CT04 = {
           'Upah minimum tidak berlaku untuk pekerja asing',
         ],
         ans: 2,
-        exp: '最低賃金 (saitei chingin / minimum wage) di Jepang: ①Ditentukan per prefektur oleh gubernur (tidak sama di seluruh Jepang), ②Kontrak kerja dengan upah di bawah minimum = BATAL DEMI HUKUM, otomatis berlaku upah minimum. ③Berlaku untuk SEMUA pekerja termasuk pekerja asing (pekerja SSW). Jika dibayar di bawah minimum → laporkan ke Labor Standards Office (労働基準監督署).',
+        exp: '最低《ひく》賃金《かな》 (saitei chingin / minimum wage) di Jepang: ①Ditentukan per prefektur oleh gubernur (tidak sama di seluruh Jepang), ②Kontrak kerja dengan upah di bawah minimum = BATAL DEMI HUKUM, otomatis berlaku upah minimum. ③Berlaku untuk SEMUA pekerja termasuk pekerja asing (pekerja SSW). Jika dibayar di bawah minimum → laporkan ke Labor Standards Office (労働基準監督署《ろうどうきじゅんかんとくしょ》).',
       },
       {
         id: 20,
@@ -302,7 +302,7 @@ export const SET_CT04 = {
           'Menentukan tempat tetap',
         ],
         ans: 0,
-        exp: 'Shituke (躾) setelah Seiketsu adalah: membentuk kebiasaan baik agar aturan 5S dipatuhi tanpa perlu dipaksa. Caranya: audit rutin, reward & recognition, menjadikan 5S bagian dari budaya kerja. Seiketsu = standar, Shituke = kebiasaan.',
+        exp: 'Shituke (躾《しつけ》) setelah Seiketsu adalah: membentuk kebiasaan baik agar aturan 5S dipatuhi tanpa perlu dipaksa. Caranya: audit rutin, reward & recognition, menjadikan 5S bagian dari budaya kerja. Seiketsu = standar, Shituke = kebiasaan.',
       },
       {
         id: 22,
@@ -316,7 +316,7 @@ export const SET_CT04 = {
           'Memasang penahan tanah (sheet pile, dll)',
         ],
         ans: 3,
-        exp: 'Penggalian (掘削/kussaku) sedalam ≥1.5m wajib menggunakan 土留め (dodome / penahan tanah) seperti sheet pile (矢板), soldier pile, atau soil nailing untuk mencegah longsoran. Ini diwajibkan oleh Industrial Safety & Health Act. Tanpa penahan tanah, dinding galian bisa runtuh mendadak dan menimbun pekerja.',
+        exp: 'Penggalian (掘削《くっさく》/kussaku) sedalam ≥1.5m wajib menggunakan 土留め《どどめ》 (dodome / penahan tanah) seperti sheet pile (矢板《やいた》), soldier pile, atau soil nailing untuk mencegah longsoran. Ini diwajibkan oleh Industrial Safety & Health Act. Tanpa penahan tanah, dinding galian bisa runtuh mendadak dan menimbun pekerja.',
       },
       {
         id: 23,
@@ -366,7 +366,7 @@ export const SET_CT04 = {
       },
       {
         id: 27,
-        q: '建設現場の「ツールボックスミーティング（TBM）」とはどういうものか。',
+        q: '建設現場《けんせつげんば》の「ツールボックスミーティング（TBM）」とはどういうものか。',
         hint: "Apa itu 'Toolbox Meeting (TBM)' di site konstruksi?",
         opts: [
           '工具《こうぐ》の点検《てんけん》を行う会議《かいぎ》',
@@ -395,7 +395,7 @@ export const SET_CT04 = {
           'Tidak perlu catat',
         ],
         ans: 1,
-        exp: 'Untuk mempertahankan 5S (維持/iji), perlu audit rutin (定期パトロール) yang dilakukan secara konsisten. Tanpa pemantauan berkala, kondisi 5S cenderung menurun. Audit bukan hukuman tapi sarana menjaga standar.',
+        exp: 'Untuk mempertahankan 5S (維持《いじ》/iji), perlu audit rutin (定期パトロール) yang dilakukan secara konsisten. Tanpa pemantauan berkala, kondisi 5S cenderung menurun. Audit bukan hukuman tapi sarana menjaga standar.',
       },
       {
         id: 29,
@@ -409,7 +409,7 @@ export const SET_CT04 = {
           'UU Konstruksi',
         ],
         ans: 1,
-        exp: 'Industrial Safety and Health Act (労働安全衛生法) adalah UU yang menjamin keselamatan & kesehatan pekerja. Berbeda dengan Labor Standards Act yang mengatur upah & jam kerja. UU ini mewajibkan pemeriksaan kesehatan, pelatihan keselamatan, dan pembentukan komite K3.',
+        exp: 'Industrial Safety and Health Act (労働安全衛生法《ろうどうあんぜんえいせいほう》) adalah UU yang menjamin keselamatan & kesehatan pekerja. Berbeda dengan Labor Standards Act yang mengatur upah & jam kerja. UU ini mewajibkan pemeriksaan kesehatan, pelatihan keselamatan, dan pembentukan komite K3.',
       },
       {
         id: 30,

@@ -45,7 +45,7 @@ export const SET_CP01 = {
       },
       {
         id: 3,
-        q: 'グラインダー（研削盤）の砥石の最大使用期限の目安は？',
+        q: 'グラインダー（研削盤《けんさくばん》）の砥石《といし》の最大《さいだい》使用期限《しようきげん》の目安《めやす》は？',
         hint: 'Batas masa pakai maksimum batu gerinda?',
         opts: [
           '無期限《むきげん》',
@@ -69,7 +69,7 @@ export const SET_CP01 = {
         opts: ['300℃', '72℃', '30℃', '150℃'],
         opts_id: ['300°C', '72°C', '30°C', '150°C'],
         ans: 1,
-        exp: 'Fire damper (防火ダンパー/FD) standar untuk AC umum (hunian, perkantoran) menggunakan fusible link (温度ヒューズ) yang melebur pada 72°C. Saat suhu udara yang melewati duct mencapai 72°C → fusible link melebur → damper menutup otomatis → api tidak menyebar lewat duct.',
+        exp: 'Fire damper (防火《ぼうか》ダンパー/FD) standar untuk AC umum (hunian, perkantoran) menggunakan fusible link (温度《おんど》ヒューズ) yang melebur pada 72°C. Saat suhu udara yang melewati duct mencapai 72°C → fusible link melebur → damper menutup otomatis → api tidak menyebar lewat duct.',
       },
       {
         id: 5,
@@ -83,7 +83,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['5m tetap', 'Setiap 10m tetap', '1-3m tergantung diameter', 'Bebas'],
         ans: 2,
-        exp: 'Jarak hanger/support pipa ditentukan berdasarkan diameter (管径): makin besar diameter → makin berat → jarak makin pendek. Standar umum: 1–3m tergantung ukuran pipa.',
+        exp: 'Jarak hanger/support pipa ditentukan berdasarkan diameter (管径《かんけい》): makin besar diameter → makin berat → jarak makin pendek. Standar umum: 1–3m tergantung ukuran pipa.',
       },
       {
         id: 6,
@@ -144,7 +144,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Mengecek warna', 'Mengecek kebocoran', 'Mengukur kekuatan', 'Mengukur panjang'],
         ans: 1,
-        exp: 'Water pressure test (水圧試験) dilakukan SETELAH pemasangan pipa selesai untuk memastikan tidak ada kebocoran pada sambungan, fitting, dan valve. Tekanan uji = 1.5× tekanan kerja. Durasi: minimum 30 menit tanpa penurunan tekanan. Jika tekanan turun → ada kebocoran.',
+        exp: 'Water pressure test (水圧試験《すいあつしけん》) dilakukan SETELAH pemasangan pipa selesai untuk memastikan tidak ada kebocoran pada sambungan, fitting, dan valve. Tekanan uji = 1.5× tekanan kerja. Durasi: minimum 30 menit tanpa penurunan tekanan. Jika tekanan turun → ada kebocoran.',
       },
       {
         id: 10,
@@ -177,7 +177,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Mengukur sudut', 'Mengukur vertikal', 'Menjamin horizontal', 'Mengukur panjang'],
         ans: 2,
-        exp: 'Level (水準器) digunakan saat merakit scaffold untuk memastikan platform horizontal (datar). Scaffold yang tidak rata = pekerja tidak bisa berdiri stabil = risiko jatuh. Cek setiap komponen utama: base plate, ledger (balok horizontal), dan platform board.',
+        exp: 'Level (水準器《すいじゅんき》) digunakan saat merakit scaffold untuk memastikan platform horizontal (datar). Scaffold yang tidak rata = pekerja tidak bisa berdiri stabil = risiko jatuh. Cek setiap komponen utama: base plate, ledger (balok horizontal), dan platform board.',
       },
       {
         id: 12,
@@ -196,7 +196,7 @@ export const SET_CP01 = {
           'Semua pekerja',
         ],
         ans: 1,
-        exp: 'Buku inspeksi scaffold (点検簿) wajib diisi oleh supervisor/工事監督者 setiap HARI sebelum digunakan. Isi checklist: kondisi sambungan, kestabilan vertikal, kerataan platform, safety net, dan anti-jatuh. Scaffold yang tidak dicek = risiko runtuh.',
+        exp: 'Buku inspeksi scaffold (点検簿《てんけんぼ》) wajib diisi oleh supervisor/工事監督者《こうじかんとくしゃ》 setiap HARI sebelum digunakan. Isi checklist: kondisi sambungan, kestabilan vertikal, kerataan platform, safety net, dan anti-jatuh. Scaffold yang tidak dicek = risiko runtuh.',
       },
       {
         id: 13,
@@ -210,7 +210,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Boiler', 'Substation', 'Wash basin & toilet', 'Cooling tower'],
         ans: 2,
-        exp: 'Pekerjaan instalasi sanitary fixture (衛生器具設備工事) memasang: toilet, wastafel, bathtub, shower, bidet, urinal, dan semua fitting yang berhubungan dengan air bersih/kotor untuk penggunaan sanitasi. Bukan AC, bukan listrik umum.',
+        exp: 'Pekerjaan instalasi sanitary fixture (衛生器具設備工事《えいせいきぐせつびこうじ》) memasang: toilet, wastafel, bathtub, shower, bidet, urinal, dan semua fitting yang berhubungan dengan air bersih/kotor untuk penggunaan sanitasi. Bukan AC, bukan listrik umum.',
       },
       {
         id: 14,
@@ -224,7 +224,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Voltage detector', 'Overcurrent breaker', 'Tester', 'Clamp meter'],
         ans: 1,
-        exp: '過電流遮断器 = memutus suplai listrik secara otomatis saat arus melebihi batas aman. 検電器 = hanya mendeteksi ada/tidak tegangan. テスター/クランプメーター = alat ukur, tidak memutus arus.',
+        exp: '過電流遮断器《かでんりゅうしゃだんき》 = memutus suplai listrik secara otomatis saat arus melebihi batas aman. 検電器《けんでんき》 = hanya mendeteksi ada/tidak tegangan. テスター/クランプメーター = alat ukur, tidak memutus arus.',
       },
       {
         id: 15,
@@ -295,11 +295,11 @@ export const SET_CP01 = {
           'Meningkatkan tekanan',
         ],
         ans: 0,
-        exp: 'Vacuum drawing (真空引き) pada sistem AC/refrigerant: menyedot udara dan uap air dari dalam sistem sebelum pengisian refrigerant. Tujuan: ①Hilangkan uap air (yang bisa membeku di katup ekspansi), ②Hilangkan oksigen (mencegah oksidasi), ③Deteksi kebocoran. Durasi standar: 15-60 menit dengan vacuum pump.',
+        exp: 'Vacuum drawing (真空引き《しんくうびき》) pada sistem AC/refrigerant: menyedot udara dan uap air dari dalam sistem sebelum pengisian refrigerant. Tujuan: ①Hilangkan uap air (yang bisa membeku di katup ekspansi), ②Hilangkan oksigen (mencegah oksidasi), ③Deteksi kebocoran. Durasi standar: 15-60 menit dengan vacuum pump.',
       },
       {
         id: 19,
-        q: '断熱工事で「アルミガラス布（ALGC）」の役割は？',
+        q: '断熱工事《だんねつこうじ》で「アルミガラス布《ぬの》（ALGC）」の役割《やくわり》は？',
         hint: 'Peran ALGC (aluminum glass cloth) dalam insulasi adalah?',
         opts: [
           '芯材《しんざい》',
@@ -309,7 +309,7 @@ export const SET_CP01 = {
         ],
         opts_id: ['Bahan inti', 'Bahan pengisi', 'Lem', 'Bahan pelindung luar'],
         ans: 3,
-        exp: 'ALGC (Aluminum Glass Cloth) = aluminium yang dilaminasi dengan kain fiberglass. Digunakan sebagai outer cover (外被材) insulasi untuk indoor. Sifat: tahan api, ringan, fleksibel, tidak mudah sobek. Berbeda dengan foil aluminium biasa yang lebih tipis dan mudah sobek.',
+        exp: 'ALGC (Aluminum Glass Cloth) = aluminium yang dilaminasi dengan kain fiberglass. Digunakan sebagai outer cover (外被材《がいひざい》) insulasi untuk indoor. Sifat: tahan api, ringan, fleksibel, tidak mudah sobek. Berbeda dengan foil aluminium biasa yang lebih tipis dan mudah sobek.',
       },
       {
         id: 20,

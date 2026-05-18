@@ -54,7 +54,7 @@ export const SET_CP05 = {
           'Menurunkan voltase',
         ],
         ans: 0,
-        exp: 'Earth leakage breaker (漏電ブレーカー/ELCB) mendeteksi arus bocor ke ground dan MEMUTUS sirkuit dalam <0.1 detik. Jika ada isolasi rusak pada power tool, arus bocor terdeteksi dan listrik diputus sebelum menyentuh manusia. Berbeda dengan MCB yang hanya melindungi dari overcurrent, bukan sengatan listrik.',
+        exp: 'Earth leakage breaker (漏電《ろうでん》ブレーカー/ELCB) mendeteksi arus bocor ke ground dan MEMUTUS sirkuit dalam <0.1 detik. Jika ada isolasi rusak pada power tool, arus bocor terdeteksi dan listrik diputus sebelum menyentuh manusia. Berbeda dengan MCB yang hanya melindungi dari overcurrent, bukan sengatan listrik.',
       },
       {
         id: 5,
@@ -160,7 +160,7 @@ export const SET_CP05 = {
         opts: ['薄鋼板《うすこうはん》', '発泡《はっぽう》スチロール', '布《ぬの》', '紙《かみ》'],
         opts_id: ['Thin steel sheet', 'Styrofoam', 'Kain', 'Kertas'],
         ans: 0,
-        exp: 'Untuk insulasi pipa yang terekspos di luar ruangan, lapisan luar insulation tube ditutup dengan thin steel sheet (薄鋼板) seperti galvalume atau aluminium sheet. Fungsi: melindungi insulasi dari hujan, UV, dan kerusakan fisik. Tanpa pelindung ini, insulasi cepat rusak.',
+        exp: 'Untuk insulasi pipa yang terekspos di luar ruangan, lapisan luar insulation tube ditutup dengan thin steel sheet (薄鋼板《うすこうばん》) seperti galvalume atau aluminium sheet. Fungsi: melindungi insulasi dari hujan, UV, dan kerusakan fisik. Tanpa pelindung ini, insulasi cepat rusak.',
       },
       {
         id: 14,
@@ -229,7 +229,7 @@ export const SET_CP05 = {
         opts: ['アルミガラス布（ALGC）', 'ガルバリウム', '紙《かみ》', '薄鋼板《うすこうはん》'],
         opts_id: ['Aluminium glass cloth', 'Galvalume', 'Kertas', 'Thin steel sheet'],
         ans: 0,
-        exp: 'ALGC (Aluminium Glass Cloth = アルミガラス布) adalah bahan outer cover insulasi untuk indoor: kombinasi foil aluminium + kain serat kaca. Lebih ringan dari steel sheet, tahan api, mudah dipasang, dan estetis. Untuk outdoor tidak direkomendasikan karena tidak tahan hujan/UV jangka panjang.',
+        exp: 'ALGC (Aluminium Glass Cloth = アルミガラス布《ぬの》) adalah bahan outer cover insulasi untuk indoor: kombinasi foil aluminium + kain serat kaca. Lebih ringan dari steel sheet, tahan api, mudah dipasang, dan estetis. Untuk outdoor tidak direkomendasikan karena tidak tahan hujan/UV jangka panjang.',
       },
       {
         id: 20,

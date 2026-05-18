@@ -27,7 +27,7 @@ export const SET_CT05 = {
           'Pekerjaan waterproofing bangunan',
         ],
         ans: 2,
-        exp: '型枠工事 (katawaku kōji) = membuat cetakan (bekisting) dari kayu/baja untuk menampung beton cair saat dituang, kemudian dibongkar setelah beton mengeras. Urutan pekerjaan RC (beton bertulang): 型枠設置 → 鉄筋工事 (penulangan) → コンクリート打設 (pengecoran) → 型枠解体 (bongkar bekisting).',
+        exp: '型枠工事《かたわくこうじ》 (katawaku kōji) = membuat cetakan (bekisting) dari kayu/baja untuk menampung beton cair saat dituang, kemudian dibongkar setelah beton mengeras. Urutan pekerjaan RC (beton bertulang): 型枠《かたわく》設置《せっち》 → 鉄筋《てっきん》工事《らいふらいんこうじ》 (penulangan) → コンクリート打設《だせつ》 (pengecoran) → 型枠《かたわく》解体《かいたい》 (bongkar bekisting).',
       },
       {
         id: 2,
@@ -36,7 +36,7 @@ export const SET_CT05 = {
         opts: ['普通作業員《ふつうさぎょういん》', '足場組立等技能講習修了者《あしばくみたてとうぎのうこうしゅうしゅうりょうしゃ》', 'ヘルメット', '任意《にんい》'],
         opts_id: ['Pekerja biasa', 'Lulus pelatihan skill merakit scaffold', 'Helm', 'Bebas'],
         ans: 1,
-        exp: 'Supervisor yang bertanggung jawab perakitan scaffold (足場の組立等作業主任者) WAJIB memiliki sertifikat 足場の組立て等作業主任者技能講習 (skill training for scaffold assembly). Tanpa sertifikat ini, seseorang dilarang menjadi penanggungjawab scaffold assembly. Ini kewajiban hukum.',
+        exp: 'Supervisor yang bertanggung jawab perakitan scaffold (足場の組立《くみた》等作業主任者《さぎょうしゅにんしゃ》) WAJIB memiliki sertifikat 足場の組立《くみた》て等作業主任者《さぎょうしゅにんしゃ》技能講習《ぎのうこうしゅう》 (skill training for scaffold assembly). Tanpa sertifikat ini, seseorang dilarang menjadi penanggungjawab scaffold assembly. Ini kewajiban hukum.',
       },
       {
         id: 3,
@@ -59,7 +59,7 @@ export const SET_CT05 = {
         opts: ['整理《せいり》する', '守《まも》る', '整頓《せいとん》する', '掃除《そうじ》する'],
         opts_id: ['Mengatur', 'Mematuhi', 'Merapikan', 'Membersihkan'],
         ans: 3,
-        exp: '5S: Seiri (整理) = sortir, Seiton (整頓) = rapikan, Seisou (清掃) = bersihkan, Seiketsu (清潔) = jaga kebersihan, Shituke (躾) = disiplinkan. 清掃 (Seisou) = membersihkan area kerja secara menyeluruh, bukan sekadar menyapu. Tujuan: temukan masalah tersembunyi.',
+        exp: '5S: Seiri (整理《せいり》) = sortir, Seiton (整頓《せいとん》) = rapikan, Seisou (清掃《せいそう》) = bersihkan, Seiketsu (清潔《せいけつ》) = jaga kebersihan, Shituke (躾) = disiplinkan. 清掃《せいそう》 (Seisou) = membersihkan area kerja secara menyeluruh, bukan sekadar menyapu. Tujuan: temukan masalah tersembunyi.',
       },
       {
         id: 5,
@@ -73,7 +73,7 @@ export const SET_CT05 = {
           'Pekerjaan perpipaan biasa',
         ],
         ans: 1,
-        exp: 'Pekerjaan yang WAJIB mengikuti pendidikan khusus (特別教育): operasi aerial work platform (高所作業車) termasuk di dalamnya. Juga: scaffolding assembly, arc welding, crane operation, forklift, dll. Tanpa pendidikan ini, pengusaha melanggar Industrial Safety & Health Act.',
+        exp: 'Pekerjaan yang WAJIB mengikuti pendidikan khusus (特別教育《とくべつきょういく》): operasi aerial work platform (高所作業車《こうしょさぎょうしゃ》) termasuk di dalamnya. Juga: scaffolding assembly, arc welding, crane operation, forklift, dll. Tanpa pendidikan ini, pengusaha melanggar Industrial Safety & Health Act.',
       },
       {
         id: 6,
@@ -82,7 +82,7 @@ export const SET_CT05 = {
         opts: ['毎朝《まいあさ》の朝礼時《ちょうれいじ》', '1ヶ月《かげつ》に1回《かい》', '年《ねん》1回《かい》', '任意《にんい》'],
         opts_id: ['Setiap apel pagi', '1x sebulan', '1x setahun', 'Bebas'],
         ans: 0,
-        exp: 'KY (Kiken Yochi = prediksi bahaya) dilakukan SETIAP PAGI di apel pagi (朝礼), bukan mingguan atau bulanan. Ini adalah rutinitas harian yang tidak bisa dilewati. Frekuensi harian memastikan kesadaran bahaya selalu terjaga.',
+        exp: 'KY (Kiken Yochi = prediksi bahaya) dilakukan SETIAP PAGI di apel pagi (朝礼《ちょうれい》), bukan mingguan atau bulanan. Ini adalah rutinitas harian yang tidak bisa dilewati. Frekuensi harian memastikan kesadaran bahaya selalu terjaga.',
       },
       {
         id: 7,
@@ -115,7 +115,7 @@ export const SET_CT05 = {
           'Memperkuat fondasi bangunan',
         ],
         ans: 1,
-        exp: '防水工事 (bōsui kōji / waterproofing) bertujuan mencegah air (hujan, rembesan tanah) masuk ke dalam bangunan melalui atap, lantai basement, dinding basement, balkon, dan area basah (kamar mandi). Tanpa waterproofing yang baik → kebocoran → kerusakan struktur, korosi tulangan baja, dan pertumbuhan jamur.',
+        exp: '防水工事《うれたんぼうすいこうじ》 (bōsui kōji / waterproofing) bertujuan mencegah air (hujan, rembesan tanah) masuk ke dalam bangunan melalui atap, lantai basement, dinding basement, balkon, dan area basah (kamar mandi). Tanpa waterproofing yang baik → kebocoran → kerusakan struktur, korosi tulangan baja, dan pertumbuhan jamur.',
       },
       {
         id: 9,
@@ -166,7 +166,7 @@ export const SET_CT05 = {
         opts: ['50 cm', '80 cm', '任意《にんい》', '90 cm以上《いじょう》'],
         opts_id: ['50 cm', '80 cm', 'Bebas', 'Minimal 90 cm'],
         ans: 3,
-        exp: 'Standar pagar pengaman jatuh (墜落防止柵) di tepi platform/scaffolding: tinggi ≥85cm (standar lama) atau ≥90cm (standar baru 2023). Pagar harus terpasang di semua tepi dengan risiko jatuh ≥2m. Wajib ada hand rail (pegangan atas) dan mid rail (pegangan tengah).',
+        exp: 'Standar pagar pengaman jatuh (墜落《ついらく》防止《ぼうし》柵《さく》) di tepi platform/scaffolding: tinggi ≥85cm (standar lama) atau ≥90cm (standar baru 2023). Pagar harus terpasang di semua tepi dengan risiko jatuh ≥2m. Wajib ada hand rail (pegangan atas) dan mid rail (pegangan tengah).',
       },
       {
         id: 13,
@@ -175,7 +175,7 @@ export const SET_CT05 = {
         opts: ['掃除《そうじ》', '昼食《ちゅうしょく》', 'KY活動《かつどう》', '休憩《きゅうけい》'],
         opts_id: ['Membersihkan', 'Makan siang', 'Kegiatan KY', 'Istirahat'],
         ans: 2,
-        exp: 'Sebelum memulai pekerjaan di lokasi konstruksi, WAJIB melakukan KY (Kiken Yochi/危険予知) = prediksi bahaya. Ini dilakukan setiap pagi di apel pagi (朝礼). KY bukan pilihan tapi kewajiban keselamatan yang fundamental.',
+        exp: 'Sebelum memulai pekerjaan di lokasi konstruksi, WAJIB melakukan KY (Kiken Yochi/危険《きけん》予知《よち》) = prediksi bahaya. Ini dilakukan setiap pagi di apel pagi (朝礼《ちょうれい》). KY bukan pilihan tapi kewajiban keselamatan yang fundamental.',
       },
       {
         id: 14,
@@ -184,7 +184,7 @@ export const SET_CT05 = {
         opts: ['スプリンクラー', '消火栓《しょうかせん》', '消火器《しょうかき》', 'すべて任意《にんい》'],
         opts_id: ['Sprinkler', 'Hydrant', 'Alat pemadam api', 'Semua sukarela'],
         ans: 2,
-        exp: 'Berdasarkan Fire Service Act (消防法), lokasi konstruksi wajib memiliki setidaknya fire extinguisher (消火器). Untuk bangunan lebih besar/tinggi, diperlukan juga hydrant, sprinkler, dll. Ini adalah persyaratan minimum yang wajib dipenuhi saat konstruksi berlangsung.',
+        exp: 'Berdasarkan Fire Service Act (消防法《しょうぼうほう》), lokasi konstruksi wajib memiliki setidaknya fire extinguisher (消火器《しょうかいき》). Untuk bangunan lebih besar/tinggi, diperlukan juga hydrant, sprinkler, dll. Ini adalah persyaratan minimum yang wajib dipenuhi saat konstruksi berlangsung.',
       },
       {
         id: 15,
@@ -193,7 +193,7 @@ export const SET_CT05 = {
         opts: ['監督員《かんとくいん》のみ', '作業員自身《さぎょういんじしん》', '下請《したうけ》け作業員《さぎょういん》', '元請負業者《もとうけおいぎょうしゃ》'],
         opts_id: ['Hanya pengawas', 'Pekerja sendiri', 'Subkontraktor pekerja', 'Kontraktor utama'],
         ans: 3,
-        exp: 'Penyelenggara pendidikan keselamatan di lokasi konstruksi adalah kontraktor UTAMA (元請負業者). Meskipun ada banyak subkontraktor, kontraktor utama bertanggung jawab memastikan SEMUA pekerja mendapat pendidikan keselamatan yang memadai.',
+        exp: 'Penyelenggara pendidikan keselamatan di lokasi konstruksi adalah kontraktor UTAMA (元請《もとうけ》負業者《ぎょうしゃ》). Meskipun ada banyak subkontraktor, kontraktor utama bertanggung jawab memastikan SEMUA pekerja mendapat pendidikan keselamatan yang memadai.',
       },
       {
         id: 16,
@@ -212,7 +212,7 @@ export const SET_CT05 = {
           'Rencanakan, laksanakan, evaluasi, perbaiki',
         ],
         ans: 1,
-        exp: '4 pilar manajemen konstruksi (施工管理の4大管理): ①品質管理 (kualitas = produk sesuai spec), ②工程管理 (jadwal = selesai tepat waktu), ③安全管理 (keselamatan = cegah kecelakaan), ④原価管理 (biaya = sesuai anggaran). Sebagai pekerja lapangan, Anda berkontribusi langsung ke keempat aspek ini setiap hari.',
+        exp: '4 pilar manajemen konstruksi (施工管理《せこうかんり》の4大管理《かんり》): ①品質管理《かんり》 (kualitas = produk sesuai spec), ②工程管理《かんり》 (jadwal = selesai tepat waktu), ③安全《ぜん》管理《かんり》 (keselamatan = cegah kecelakaan), ④原価管理《かんり》 (biaya = sesuai anggaran). Sebagai pekerja lapangan, Anda berkontribusi langsung ke keempat aspek ini setiap hari.',
       },
       {
         id: 17,
@@ -221,7 +221,7 @@ export const SET_CT05 = {
         opts: ['8 時間《じかん》', '10 時間《じかん》', '6 時間《じかん》', '12 時間《じかん》'],
         opts_id: ['8 jam', '10 jam', '6 jam', '12 jam'],
         ans: 0,
-        exp: 'Maksimal waktu kerja adalah 8 jam/hari dan 40 jam/minggu. Ini disebut 法定労働時間 (waktu kerja menurut undang-undang). Jika ada perjanjian 36 (36協定) dengan serikat pekerja, lembur diperbolehkan dengan batas tertentu.',
+        exp: 'Maksimal waktu kerja adalah 8 jam/hari dan 40 jam/minggu. Ini disebut 法定労働時間《ほうていろうどうじかん》 (waktu kerja menurut undang-undang). Jika ada perjanjian 36 (36協定) dengan serikat pekerja, lembur diperbolehkan dengan batas tertentu.',
       },
       {
         id: 18,
@@ -253,11 +253,11 @@ export const SET_CT05 = {
         opts: ['赤《あか》', '黄《き》', '緑《みどり》', '青《あお》'],
         opts_id: ['Merah', 'Kuning', 'Hijau', 'Biru'],
         ans: 2,
-        exp: 'Warna tanda pintu keluar darurat (非常口/非常出口): HIJAU (緑/みどり). Ini berdasarkan Fire Service Act dan standar internasional ISO 3864. Hijau = aman/jalan keluar. Merah = bahaya/peringatan. Tanda hijau berpendar harus terlihat saat listrik padam.',
+        exp: 'Warna tanda pintu keluar darurat (非常口《くち》/非常出口《くち》): HIJAU (緑《みどり》/みどり). Ini berdasarkan Fire Service Act dan standar internasional ISO 3864. Hijau = aman/jalan keluar. Merah = bahaya/peringatan. Tanda hijau berpendar harus terlihat saat listrik padam.',
       },
       {
         id: 21,
-        q: '危険予知活動（KY活動）の最終目的は？',
+        q: '危険予知活動《きけんよちかつどう》（KY活動《かつどう》）の最終《さいしゅう》目的《もくてき》は？',
         hint: 'Tujuan akhir kegiatan KY adalah?',
         opts: ['休憩《きゅうけい》', '記録《きろく》を取《と》る', '事故《じこ》ゼロの実現《じつげん》', '作業《さぎょう》を速く終わらせる'],
         opts_id: [
@@ -267,7 +267,7 @@ export const SET_CT05 = {
           'Menyelesaikan kerja cepat',
         ],
         ans: 2,
-        exp: 'Tujuan akhir KY bukan hanya mengenal bahaya, tapi mewujudkan ZERO ACCIDENT (ゼロ災害). Setiap pagi, melalui KY, pekerja membangun kesadaran bahaya sehingga bisa bertindak sebelum insiden terjadi. KY = pencegahan aktif.',
+        exp: 'Tujuan akhir KY bukan hanya mengenal bahaya, tapi mewujudkan ZERO ACCIDENT (ゼロ災害《さいがい》). Setiap pagi, melalui KY, pekerja membangun kesadaran bahaya sehingga bisa bertindak sebelum insiden terjadi. KY = pencegahan aktif.',
       },
       {
         id: 22,
@@ -281,7 +281,7 @@ export const SET_CT05 = {
           'Pekerjaan perpipaan biasa',
         ],
         ans: 1,
-        exp: 'Pekerja yang akan melakukan pekerjaan berbahaya WAJIB menyelesaikan 特別教育 (tokubetsu kyōiku/special education) terlebih dahulu. Contoh: kerja ketinggian → wajib special ed untuk full harness; grinder → wajib special ed untuk abrasive wheel. Ini hukum, bukan rekomendasi.',
+        exp: 'Pekerja yang akan melakukan pekerjaan berbahaya WAJIB menyelesaikan 特別教育《とくべつきょういく》 (tokubetsu kyōiku/special education) terlebih dahulu. Contoh: kerja ketinggian → wajib special ed untuk full harness; grinder → wajib special ed untuk abrasive wheel. Ini hukum, bukan rekomendasi.',
       },
       {
         id: 23,
@@ -300,11 +300,11 @@ export const SET_CT05 = {
           'Napas cepat dan nyeri dada',
         ],
         ans: 2,
-        exp: 'Gejala awal heat stroke (熱中症): ①めまい/立ちくらみ (pusing saat berdiri tiba-tiba), ②大量の発汗 (keringat berlebihan = tubuh kelelahan mendinginkan diri), ③筋肉のけいれん (kram otot = kehilangan elektrolit), ④気分が悪い (mual). Jika ada gejala ini: segera pindah ke tempat sejuk, minum air+elektrolit, dinginkan tubuh. Jangan biarkan berlanjut.',
+        exp: 'Gejala awal heat stroke (熱中症《ねっちゅうしょう》): ①めまい/立ちくらみ (pusing saat berdiri tiba-tiba), ②大量《きたいじゅうりょう》の発《はっ》汗 (keringat berlebihan = tubuh kelelahan mendinginkan diri), ③筋肉のけいれん (kram otot = kehilangan elektrolit), ④気分《ぷん》が悪《わる》い (mual). Jika ada gejala ini: segera pindah ke tempat sejuk, minum air+elektrolit, dinginkan tubuh. Jangan biarkan berlanjut.',
       },
       {
         id: 24,
-        q: '建設現場で「ヒューマンエラー（人的ミス）」を防ぐための「ポカヨケ」の例として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》で「ヒューマンエラー（人的《じんてき》ミス）」を防ぐ《ふせぐ》ための「ポカヨケ」の例として正しいものはどれか。',
         hint: "Contoh yang benar dari 'poka-yoke' (perangkat anti-kesalahan) untuk mencegah human error di site konstruksi adalah?",
         opts: [
           '安全教育《あんぜんきょういく》を増やす',
@@ -352,7 +352,7 @@ export const SET_CT05 = {
           'Ditentukan hanya dari pengalaman pekerja',
         ],
         ans: 2,
-        exp: 'Dalam risk assessment: Risiko (リスク) = Tingkat Keparahan (重篤性/jūtokusei) × Probabilitas Terjadinya (発生確率/hassei kakuritsu). Contoh: tertimpa benda jatuh 10kg dari 5m = keparahan TINGGI × probabilitas SEDANG → risiko TINGGI. Kedua faktor harus dipertimbangkan bersama untuk menentukan prioritas countermeasure.',
+        exp: 'Dalam risk assessment: Risiko (リスク) = Tingkat Keparahan (重篤《じゅうとく》性《せい》/jūtokusei) × Probabilitas Terjadinya (発生《はっせい》確率/hassei kakuritsu). Contoh: tertimpa benda jatuh 10kg dari 5m = keparahan TINGGI × probabilitas SEDANG → risiko TINGGI. Kedua faktor harus dipertimbangkan bersama untuk menentukan prioritas countermeasure.',
       },
       {
         id: 27,
@@ -366,7 +366,7 @@ export const SET_CT05 = {
           'Tempat tetap, jumlah tetap, barang tetap',
         ],
         ans: 3,
-        exp: '3-tei (三定) dalam 5S: ①定位置 (teiichi) = tempat tetap, ②定品 (teihin) = barang tertentu, ③定量 (teiryō) = jumlah tetap. Contoh: helm SELALU di rak pojok kiri (tempat tetap), yang tersimpan HANYA helm (barang tertentu), maksimal 5 buah (jumlah tetap).',
+        exp: '3-tei (三定) dalam 5S: ①定位置《いち》 (teiichi) = tempat tetap, ②定品 (teihin) = barang tertentu, ③定量《きたいじゅうりょう》 (teiryō) = jumlah tetap. Contoh: helm SELALU di rak pojok kiri (tempat tetap), yang tersimpan HANYA helm (barang tertentu), maksimal 5 buah (jumlah tetap).',
       },
       {
         id: 28,
@@ -385,7 +385,7 @@ export const SET_CT05 = {
           'Menetapkan tarif asuransi kebakaran',
         ],
         ans: 1,
-        exp: '消防法 (Shōbō-hō / Fire Service Act) bertujuan: melindungi kehidupan, tubuh, dan properti dari kebakaran dan bencana (gempa, dsb). Mengatur: ①Peralatan pemadam kebakaran wajib (消火器, sprinkler, hydrant), ②Sistem peringatan kebakaran, ③Rencana pencegahan kebakaran, ④Latihan evakuasi. Wajib dipatuhi semua bangunan dan site konstruksi.',
+        exp: '消防法《しょうぼうほう》 (Shōbō-hō / Fire Service Act) bertujuan: melindungi kehidupan, tubuh, dan properti dari kebakaran dan bencana (gempa, dsb). Mengatur: ①Peralatan pemadam kebakaran wajib (消火器《しょうかいき》, sprinkler, hydrant), ②Sistem peringatan kebakaran, ③Rencana pencegahan kebakaran, ④Latihan evakuasi. Wajib dipatuhi semua bangunan dan site konstruksi.',
       },
       {
         id: 29,
@@ -399,11 +399,11 @@ export const SET_CT05 = {
           'Hanya desain',
         ],
         ans: 0,
-        exp: 'Dalam sistem pelaksanaan proyek (施工体制), kontraktor spesialis (専門工事業者) bertugas melaksanakan pekerjaan spesialisasi teknis seperti: pipa, listrik, AC, insulasi. Mereka memiliki keahlian dan lisensi khusus yang tidak dimiliki kontraktor umum.',
+        exp: 'Dalam sistem pelaksanaan proyek (施工体制《せこうたいせい》), kontraktor spesialis (専門工事業者《せんもんこうじぎょうしゃ》) bertugas melaksanakan pekerjaan spesialisasi teknis seperti: pipa, listrik, AC, insulasi. Mereka memiliki keahlian dan lisensi khusus yang tidak dimiliki kontraktor umum.',
       },
       {
         id: 30,
-        q: '建設現場で「安全通路（避難経路）」を確保する目的として正しいものはどれか。',
+        q: '建設現場《けんせつげんば》で「安全通路《あんぜんつうろ》（避難経路《ひなんけいろ》）」を確保《かくほ》する目的《もくてき》として正しいものはどれか。',
         hint: "Tujuan yang benar dari menjaga 'jalur keselamatan (jalur evakuasi)' di site konstruksi adalah?",
         opts: [
           '作業効率《さぎょうこうりつ》を上げるため',
@@ -418,7 +418,7 @@ export const SET_CT05 = {
           'Agar site terlihat bersih',
         ],
         ans: 2,
-        exp: 'Jalur evakuasi (避難経路/hinan keiro) WAJIB selalu dijaga bersih dan bebas dari material/peralatan. Alasan: saat kebakaran atau kecelakaan, evakuasi harus berlangsung cepat (detik menentukan). Jalur yang terhalang = evakuasi lambat = korban lebih banyak. Wajib ditandai dengan tanda hijau (緑の標識). Diperiksa setiap hari.',
+        exp: 'Jalur evakuasi (避難経路《ひなんけいろ》/hinan keiro) WAJIB selalu dijaga bersih dan bebas dari material/peralatan. Alasan: saat kebakaran atau kecelakaan, evakuasi harus berlangsung cepat (detik menentukan). Jalur yang terhalang = evakuasi lambat = korban lebih banyak. Wajib ditandai dengan tanda hijau (緑《みどり》の標識《ひょうしき》). Diperiksa setiap hari.',
       },
     ],
   };

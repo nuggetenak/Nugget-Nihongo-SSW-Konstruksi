@@ -50,7 +50,7 @@ export const SET_CT06 = {
           'Melaksanakan pekerjaan spesialis',
         ],
         ans: 3,
-        exp: 'Kontraktor spesialis (専門工事業者) dalam sistem pelaksanaan proyek melaksanakan pekerjaan KHUSUS seperti instalasi pipa, listrik, AC, dll. Mereka menerima perintah dari kontraktor utama dan bertanggung jawab atas pekerjaan spesialisasi mereka.',
+        exp: 'Kontraktor spesialis (専門工事業者《せんもんこうじぎょうしゃ》) dalam sistem pelaksanaan proyek melaksanakan pekerjaan KHUSUS seperti instalasi pipa, listrik, AC, dll. Mereka menerima perintah dari kontraktor utama dan bertanggung jawab atas pekerjaan spesialisasi mereka.',
       },
       {
         id: 4,
@@ -69,7 +69,7 @@ export const SET_CT06 = {
           'Membatasi jumlah kontraktor listrik',
         ],
         ans: 0,
-        exp: '電気事業法 (Denki Jigyō-hō) bertujuan: ①Memastikan pasokan listrik yang aman dan stabil, ②Memastikan keamanan instalasi listrik (電気設備の保安). Mengatur persyaratan pembangkit, transmisi, distribusi listrik, dan standar keselamatan. Pekerjaan instalasi listrik wajib dilakukan oleh 電気工事士 (teknisi listrik berlisensi) berdasarkan UU ini.',
+        exp: '電気事業法《でんきじぎょうほう》 (Denki Jigyō-hō) bertujuan: ①Memastikan pasokan listrik yang aman dan stabil, ②Memastikan keamanan instalasi listrik (電気設備《でんきせつび》の保《たも》安). Mengatur persyaratan pembangkit, transmisi, distribusi listrik, dan standar keselamatan. Pekerjaan instalasi listrik wajib dilakukan oleh 電気工事士《でんきこうじし》 (teknisi listrik berlisensi) berdasarkan UU ini.',
       },
       {
         id: 5,
@@ -83,7 +83,7 @@ export const SET_CT06 = {
           'Membangun rumah tinggal',
         ],
         ans: 3,
-        exp: '建築工事 (Kenchiku kōji) = membangun atau merenovasi bangunan/gedung: rumah, apartemen, kantor, sekolah, pabrik. Bendungan dan jalan = 土木工事 (pekerjaan sipil). Pipa air = 設備工事 (pekerjaan instalasi). Rumah tinggal = kenchiku kōji.',
+        exp: '建築工事《けんちくこうじ》 (Kenchiku kōji) = membangun atau merenovasi bangunan/gedung: rumah, apartemen, kantor, sekolah, pabrik. Bendungan dan jalan = 土木工事《どぼくこうじ》 (pekerjaan sipil). Pipa air = 設備工事《せつびこうじ》 (pekerjaan instalasi). Rumah tinggal = kenchiku kōji.',
       },
       {
         id: 6,
@@ -125,7 +125,7 @@ export const SET_CT06 = {
           'Dalam 10m di bawah permukaan kerja',
         ],
         ans: 2,
-        exp: 'Safety net (墜落防止ネット) wajib dipasang MAKSIMAL 2m di BAWAH permukaan kerja yang berisiko jatuh. Semakin dekat ke permukaan kerja, semakin efektif menangkap pekerja yang jatuh sebelum mencapai kecepatan tinggi. Safety net harus memenuhi standar JIS untuk kekuatan penangkapan dan diinspeksi sebelum digunakan.',
+        exp: 'Safety net (墜落《ついらく》防止《ぼうし》ネット) wajib dipasang MAKSIMAL 2m di BAWAH permukaan kerja yang berisiko jatuh. Semakin dekat ke permukaan kerja, semakin efektif menangkap pekerja yang jatuh sebelum mencapai kecepatan tinggi. Safety net harus memenuhi standar JIS untuk kekuatan penangkapan dan diinspeksi sebelum digunakan.',
       },
       {
         id: 9,
@@ -158,7 +158,7 @@ export const SET_CT06 = {
           'Menempatkan dan merakit tulangan baja yang dimasukkan ke dalam beton',
         ],
         ans: 3,
-        exp: '鉄筋工事 (tekkin kōji) = menempatkan dan mengikat tulangan baja (鉄筋/rebar) di dalam bekisting sebelum pengecoran beton. Ini menghasilkan 鉄筋コンクリート (RC = reinforced concrete). Rebar memberikan kekuatan tarik yang tidak dimiliki beton. Urutan: 型枠設置 → 鉄筋配置 (tekkin haichi) → コンクリート打設 (pengecoran).',
+        exp: '鉄筋《てっきん》工事《らいふらいんこうじ》 (tekkin kōji) = menempatkan dan mengikat tulangan baja (鉄筋《てっきん》/rebar) di dalam bekisting sebelum pengecoran beton. Ini menghasilkan 鉄筋《てっきん》コンクリート (RC = reinforced concrete). Rebar memberikan kekuatan tarik yang tidak dimiliki beton. Urutan: 型枠《かたわく》設置《せっち》 → 鉄筋《てっきん》配置《はいち》 (tekkin haichi) → コンクリート打設《だせつ》 (pengecoran).',
       },
       {
         id: 11,
@@ -196,7 +196,7 @@ export const SET_CT06 = {
           '36 Agreement ditentukan sepihak oleh perusahaan',
         ],
         ans: 1,
-        exp: '36協定 (san-roku kyōtei) = perjanjian berdasarkan pasal 36 Labor Standards Act antara pengusaha dan perwakilan pekerja (serikat pekerja atau perwakilan mayoritas). Tanpa 36協定, lembur apa pun DILARANG. Dengan 36協定 standar: max 45 jam/bulan, 360 jam/tahun. Dengan klausul khusus (特別条項): max 100 jam/bulan, 720 jam/tahun.',
+        exp: '36協定 (san-roku kyōtei) = perjanjian berdasarkan pasal 36 Labor Standards Act antara pengusaha dan perwakilan pekerja (serikat pekerja atau perwakilan mayoritas). Tanpa 36協定, lembur apa pun DILARANG. Dengan 36協定 standar: max 45 jam/bulan, 360 jam/tahun. Dengan klausul khusus (特別条項《とくべつじょうこう》): max 100 jam/bulan, 720 jam/tahun.',
       },
       {
         id: 13,
@@ -215,7 +215,7 @@ export const SET_CT06 = {
           'Menguji kekuatan beton',
         ],
         ans: 1,
-        exp: 'コンクリート打設 (dasetsu) = pengecoran beton = menuangkan beton segar (生コン/namakon) ke dalam bekisting yang sudah berisi tulangan baja. Setelah dituang: dipadatkan dengan vibrator (tidak ada rongga udara), kemudian curing (perawatan) hingga mencapai kekuatan rencana (biasanya 28 hari untuk 100% kekuatan).',
+        exp: 'コンクリート打設《だせつ》 (dasetsu) = pengecoran beton = menuangkan beton segar (生《なま》コン/namakon) ke dalam bekisting yang sudah berisi tulangan baja. Setelah dituang: dipadatkan dengan vibrator (tidak ada rongga udara), kemudian curing (perawatan) hingga mencapai kekuatan rencana (biasanya 28 hari untuk 100% kekuatan).',
       },
       {
         id: 14,
@@ -229,7 +229,7 @@ export const SET_CT06 = {
           'Beristirahat',
         ],
         ans: 2,
-        exp: 'Senam konfirmasi keselamatan (安全確認体操) setelah apel pagi: pekerja berpasangan saling menghadap dan mengucapkan/menyanyikan safety check bersama. Tujuan: ①Peregangan fisik, ②Konfirmasi keselamatan, ③Membangun rasa tanggung jawab bersama.',
+        exp: 'Senam konfirmasi keselamatan (安全確認《あんぜんかくにん》体操《らじおたいそう》) setelah apel pagi: pekerja berpasangan saling menghadap dan mengucapkan/menyanyikan safety check bersama. Tujuan: ①Peregangan fisik, ②Konfirmasi keselamatan, ③Membangun rasa tanggung jawab bersama.',
       },
       {
         id: 15,
@@ -243,7 +243,7 @@ export const SET_CT06 = {
           'Bahan bangunan mengandung asbes',
         ],
         ans: 3,
-        exp: 'Limbah industri berbahaya khusus (特別管理産業廃棄物) di konstruksi termasuk: asbes (石綿), PCB, merkuri, baterai listrik, minyak pelumas tercemar. Harus ditangani oleh perusahaan pengolahan berlisensi khusus, tidak bisa dibuang sembarangan.',
+        exp: 'Limbah industri berbahaya khusus (特別《とくべつ》管理《かんり》産業廃棄物《さんぎょうはいきぶつ》) di konstruksi termasuk: asbes (石綿《いしわた》), PCB, merkuri, baterai listrik, minyak pelumas tercemar. Harus ditangani oleh perusahaan pengolahan berlisensi khusus, tidak bisa dibuang sembarangan.',
       },
       {
         id: 16,
@@ -252,7 +252,7 @@ export const SET_CT06 = {
         opts: ['下請《したうけ》けのみ', '任意《にんい》', '事業者《じぎょうしゃ》', '作業員本人《さぎょういんほんにん》'],
         opts_id: ['Hanya subkontraktor', 'Sukarela', 'Pengusaha', 'Pekerja sendiri'],
         ans: 2,
-        exp: 'Untuk pekerjaan berbahaya (危険有害業務), pengusaha wajib memberikan 特別教育 (pendidikan khusus) sebelum pekerja mulai bekerja. Contoh: kerja ketinggian, operasi crane, confined space. Pengusaha adalah penyelenggara, bukan pemerintah atau pekerja sendiri.',
+        exp: 'Untuk pekerjaan berbahaya (危険《きけん》有害業務《ぎょうむ》), pengusaha wajib memberikan 特別教育《とくべつきょういく》 (pendidikan khusus) sebelum pekerja mulai bekerja. Contoh: kerja ketinggian, operasi crane, confined space. Pengusaha adalah penyelenggara, bukan pemerintah atau pekerja sendiri.',
       },
       {
         id: 17,
@@ -261,7 +261,7 @@ export const SET_CT06 = {
         opts: ['作業員本人《さぎょういんほんにん》', '下請《したうけ》け業者《ぎょうしゃ》', '元請負業者《もとうけおいぎょうしゃ》', '監督員《かんとくいん》'],
         opts_id: ['Pekerja sendiri', 'Subkontraktor', 'Kontraktor utama', 'Pengawas'],
         ans: 2,
-        exp: 'Premi asuransi kecelakaan kerja (労災保険/Rōsai Hoken) seluruhnya dibayar oleh pengusaha (事業主). Pekerja tidak membayar premi sama sekali. Jika terjadi kecelakaan kerja, biaya pengobatan dan santunan dibayar dari asuransi ini.',
+        exp: 'Premi asuransi kecelakaan kerja (労災保険《ろうさいほけん》/Rōsai Hoken) seluruhnya dibayar oleh pengusaha (事業主《じぎょうぬし》). Pekerja tidak membayar premi sama sekali. Jika terjadi kecelakaan kerja, biaya pengobatan dan santunan dibayar dari asuransi ini.',
       },
       {
         id: 18,
@@ -270,7 +270,7 @@ export const SET_CT06 = {
         opts: ['5 年《ねん》', '任意《にんい》', '10 年《ねん》', '1 年《ねん》'],
         opts_id: ['5 tahun', 'Sukarela', '10 tahun', '1 tahun'],
         ans: 0,
-        exp: 'Izin usaha konstruksi (建設業許可) berlaku 5 tahun. Perpanjangan harus dilakukan sebelum masa berlaku habis. Ada dua jenis izin: izin gubernur (satu prefektur) dan izin menteri (lintas prefektur).',
+        exp: 'Izin usaha konstruksi (建設業《けんせつぎょう》許可《きょか》) berlaku 5 tahun. Perpanjangan harus dilakukan sebelum masa berlaku habis. Ada dua jenis izin: izin gubernur (satu prefektur) dan izin menteri (lintas prefektur).',
       },
       {
         id: 19,
@@ -322,7 +322,7 @@ export const SET_CT06 = {
           'Hanya saat keluar',
         ],
         ans: 2,
-        exp: 'Pengusaha WAJIB melakukan pemeriksaan kesehatan: ①Saat pertama kali masuk kerja (雇入れ時健康診断), ②Setiap tahun (定期健康診断). Khusus pekerjaan berbahaya, ada pemeriksaan tambahan (特殊健康診断) seperti audiometri untuk pekerja kebisingan.',
+        exp: 'Pengusaha WAJIB melakukan pemeriksaan kesehatan: ①Saat pertama kali masuk kerja (雇入《はい》れ時健康《けんこう》診断《しんだん》), ②Setiap tahun (定期健康《けんこう》診断《しんだん》). Khusus pekerjaan berbahaya, ada pemeriksaan tambahan (特《とく》殊健康《けんこう》診断《しんだん》) seperti audiometri untuk pekerja kebisingan.',
       },
       {
         id: 22,
@@ -341,7 +341,7 @@ export const SET_CT06 = {
           'Merakit rangka kolom dan balok dengan baja struktural',
         ],
         ans: 3,
-        exp: '鉄骨工事 (tekkotsu kōji) = merakit kerangka/rangka bangunan (柱=kolom, 梁=balok) menggunakan baja struktural (H-beam, I-beam, BOX column). Digunakan untuk gedung bertingkat tinggi, pabrik, dan jembatan. Berbeda dari 鉄筋工事 (tekkin kōji = rebar/tulangan dalam beton). Pekerja kōji ini disebut 鉄骨鳶 (tekkotsu tobi).',
+        exp: '鉄骨工事《てっこつこうじ》 (tekkotsu kōji) = merakit kerangka/rangka bangunan (柱《はしら》=kolom, 梁《はり》=balok) menggunakan baja struktural (H-beam, I-beam, BOX column). Digunakan untuk gedung bertingkat tinggi, pabrik, dan jembatan. Berbeda dari 鉄筋《てっきん》工事《らいふらいんこうじ》 (tekkin kōji = rebar/tulangan dalam beton). Pekerja kōji ini disebut 鉄骨《てっこつ》鳶 (tekkotsu tobi).',
       },
       {
         id: 23,
@@ -355,7 +355,7 @@ export const SET_CT06 = {
           'Sukarela',
         ],
         ans: 0,
-        exp: 'Ketua 安全衛生委員会 (komite K3) adalah pengusaha (事業主) atau orang yang ditunjuk (総括安全衛生管理者). Anggota komite meliputi: safety manager, health manager, dan perwakilan pekerja. Ketua bertanggung jawab memimpin rapat bulanan.',
+        exp: 'Ketua 安全衛生《あんぜんえいせい》委員会 (komite K3) adalah pengusaha (事業主《じぎょうぬし》) atau orang yang ditunjuk (総括安全衛生《あんぜんえいせい》管理《かんり》者《もの》). Anggota komite meliputi: safety manager, health manager, dan perwakilan pekerja. Ketua bertanggung jawab memimpin rapat bulanan.',
       },
       {
         id: 24,
@@ -392,7 +392,7 @@ export const SET_CT06 = {
         opts: ['5 年《ねん》', '10 年《ねん》', '3 年《ねん》', '1 年《ねん》'],
         opts_id: ['5 tahun', '10 tahun', '3 tahun', '1 tahun'],
         ans: 2,
-        exp: 'Teknisi magang (技能実習生/ginou jisshusei) dapat bekerja di Jepang maksimal 3 tahun untuk magang biasa, atau 5 tahun jika lulus ujian ke jenjang 2. Namun sistem ini kini bertransisi ke SSW (特定技能). Berbeda dengan SSW yang bisa diperpanjang tidak terbatas untuk SSW2 (特定技能2号).',
+        exp: 'Teknisi magang (技能実習《ぎのうじっしゅう》生《なま》/ginou jisshusei) dapat bekerja di Jepang maksimal 3 tahun untuk magang biasa, atau 5 tahun jika lulus ujian ke jenjang 2. Namun sistem ini kini bertransisi ke SSW (特定技能《とくていぎのう》). Berbeda dengan SSW yang bisa diperpanjang tidak terbatas untuk SSW2 (特定技能《とくていぎのう》2号).',
       },
       {
         id: 27,
@@ -401,7 +401,7 @@ export const SET_CT06 = {
         opts: ['最低限《さいていげん》の', '必要以上《ひつようじじょう》の', '任意《にんい》の', '安全《あんぜん》が保証《ほしょう》される'],
         opts_id: ['Minimum', 'Lebih dari perlu', 'Sukarela', 'Dijamin aman'],
         ans: 0,
-        exp: 'Building Standards Act (建築基準法/Kenchiku Kijunhō) menetapkan aturan MINIMUM (最低限/saiteigen) untuk keselamatan dan kenyamanan bangunan. "Minimum" artinya: bangunan boleh melebihi standar ini, tapi tidak boleh di bawahnya. Cakupan: kekuatan struktural, ukuran ruangan, ventilasi, proteksi kebakaran.',
+        exp: 'Building Standards Act (建築基準法《けんちくきじゅんほう》/Kenchiku Kijunhō) menetapkan aturan MINIMUM (最低限《さいていげん》/saiteigen) untuk keselamatan dan kenyamanan bangunan. "Minimum" artinya: bangunan boleh melebihi standar ini, tapi tidak boleh di bawahnya. Cakupan: kekuatan struktural, ukuran ruangan, ventilasi, proteksi kebakaran.',
       },
       {
         id: 28,
@@ -410,7 +410,7 @@ export const SET_CT06 = {
         opts: ['任意《にんい》', '事業者《じぎょうしゃ》', '作業員《さぎょういん》', '下請《したうけ》け'],
         opts_id: ['Sukarela', 'Pengusaha', 'Pekerja', 'Subkontraktor'],
         ans: 1,
-        exp: 'Pemeriksaan rutin mesin & peralatan wajib dilakukan oleh pengusaha (employer). Jenis pemeriksaan: harian (毎日), periodik (定期), dan setelah kecelakaan. Ini bukan pilihan tapi kewajiban hukum agar pekerja aman.',
+        exp: 'Pemeriksaan rutin mesin & peralatan wajib dilakukan oleh pengusaha (employer). Jenis pemeriksaan: harian (毎日《まいにち》), periodik (定期), dan setelah kecelakaan. Ini bukan pilihan tapi kewajiban hukum agar pekerja aman.',
       },
       {
         id: 29,
@@ -443,7 +443,7 @@ export const SET_CT06 = {
           'Mempersulit komunikasi',
         ],
         ans: 1,
-        exp: 'Penelitian di Jepang membuktikan: 指差呼称 (yubi-sashi kakunin / pointing & calling) mengurangi human error hingga 85% dibandingkan tanpa teknik ini. Mengapa? Karena melibatkan 4 indera sekaligus: MELIHAT (mata), MENUNJUK (tangan), MENYEBUT KERAS (mulut), MENDENGAR (telinga). Keempat saluran ini bersama mengkonfirmasi realitas dan mencegah otomatisasi yang ceroboh.',
+        exp: 'Penelitian di Jepang membuktikan: 指《ゆび》差呼称 (yubi-sashi kakunin / pointing & calling) mengurangi human error hingga 85% dibandingkan tanpa teknik ini. Mengapa? Karena melibatkan 4 indera sekaligus: MELIHAT (mata), MENUNJUK (tangan), MENYEBUT KERAS (mulut), MENDENGAR (telinga). Keempat saluran ini bersama mengkonfirmasi realitas dan mencegah otomatisasi yang ceroboh.',
       },
     ],
   };

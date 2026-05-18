@@ -22,7 +22,7 @@ export const SET_CT03 = {
           'Jumlah pekerja',
         ],
         ans: 1,
-        exp: '工期 (kōki) = periode pelaksanaan konstruksi = jangka waktu dari 着工 (mulai) hingga 竣工 (selesai). Tercantum dalam kontrak. Keterlambatan (遅延) bisa mengakibatkan denda dan masalah reputasi. Manajemen jadwal (工程管理) bertujuan memastikan proyek selesai dalam kōki yang disepakati.',
+        exp: '工期《こうき》 (kōki) = periode pelaksanaan konstruksi = jangka waktu dari 着工《ちゃっこう》 (mulai) hingga 竣工《しゅんこう》 (selesai). Tercantum dalam kontrak. Keterlambatan (遅延《ちえん》) bisa mengakibatkan denda dan masalah reputasi. Manajemen jadwal (工程管理《こうていかんり》) bertujuan memastikan proyek selesai dalam kōki yang disepakati.',
       },
       {
         id: 2,
@@ -31,7 +31,7 @@ export const SET_CT03 = {
         opts: ['毎朝《まいあさ》の朝礼時《ちょうれいじ》', '任意《にんい》', '年《ねん》1回《かい》', '1ヶ月《かげつ》に1回《かい》'],
         opts_id: ['Setiap apel pagi', 'Bebas', '1x setahun', '1x sebulan'],
         ans: 0,
-        exp: 'KY (危険予知/Kiken Yochi) training wajib dilakukan setiap pagi saat apel (朝礼/chōrei) sebelum kerja dimulai. Tujuan: mengidentifikasi potensi bahaya hari itu dan menetapkan tindakan pencegahan bersama-sama. KY rutin terbukti menurunkan angka kecelakaan kerja secara signifikan di site konstruksi.',
+        exp: 'KY (危険《きけん》予知《よち》/Kiken Yochi) training wajib dilakukan setiap pagi saat apel (朝礼《ちょうれい》/chōrei) sebelum kerja dimulai. Tujuan: mengidentifikasi potensi bahaya hari itu dan menetapkan tindakan pencegahan bersama-sama. KY rutin terbukti menurunkan angka kecelakaan kerja secara signifikan di site konstruksi.',
       },
       {
         id: 3,
@@ -40,7 +40,7 @@ export const SET_CT03 = {
         opts: ['なし', '結果《けっか》の掲示《けいじ》又《また》は説明《せつめい》', '任意《にんい》', '1年後《ねんご》'],
         opts_id: ['Tidak ada', 'Memasang atau menjelaskan hasil', 'Sukarela', 'Setelah 1 tahun'],
         ans: 1,
-        exp: 'Hasil pengukuran lingkungan kerja (作業環境測定) WAJIB diumumkan/dijelaskan ke pekerja yang bersangkutan. Caranya: tempel di papan pengumuman, briefing, atau dokumen tertulis. Pekerja berhak tahu kondisi lingkungan kerjanya.',
+        exp: 'Hasil pengukuran lingkungan kerja (作業《さぎょう》環境《かんきょう》測定《そくてい》) WAJIB diumumkan/dijelaskan ke pekerja yang bersangkutan. Caranya: tempel di papan pengumuman, briefing, atau dokumen tertulis. Pekerja berhak tahu kondisi lingkungan kerjanya.',
       },
       {
         id: 4,
@@ -49,7 +49,7 @@ export const SET_CT03 = {
         opts: ['5m以上《いじょう》', '作業面《さぎょうめん》から下方《かほう》2m以内《いない》', '地面《じめん》から2m', '任意《にんい》'],
         opts_id: ['5m ke atas', 'Maksimal 2m di bawah permukaan kerja', '2m dari tanah', 'Bebas'],
         ans: 1,
-        exp: 'Safety net (墜落防止ネット) dipasang maksimal 2m di bawah permukaan kerja untuk menangkap pekerja atau material yang jatuh. Jika dipasang lebih dari 2m di bawah, energi jatuh sudah terlalu besar saat menyentuh net → cedera serius tetap terjadi. Wajib berdasarkan regulasi K3 konstruksi Jepang.',
+        exp: 'Safety net (墜落《ついらく》防止《ぼうし》ネット) dipasang maksimal 2m di bawah permukaan kerja untuk menangkap pekerja atau material yang jatuh. Jika dipasang lebih dari 2m di bawah, energi jatuh sudah terlalu besar saat menyentuh net → cedera serius tetap terjadi. Wajib berdasarkan regulasi K3 konstruksi Jepang.',
       },
       {
         id: 5,
@@ -63,7 +63,7 @@ export const SET_CT03 = {
           'Building Standards Act',
         ],
         ans: 2,
-        exp: '建設業法 (Construction Business Act) bertujuan: ①Meningkatkan kualitas pelaku usaha konstruksi, ②Memastikan pelaksanaan konstruksi yang tepat, ③Mendorong perkembangan industri konstruksi yang sehat. Labor Standards Act = mengatur jam kerja & upah. Building Standards Act = standar teknis bangunan. Safety & Health Act = keselamatan kerja.',
+        exp: '建設業法《けんせつぎょうほう》 (Construction Business Act) bertujuan: ①Meningkatkan kualitas pelaku usaha konstruksi, ②Memastikan pelaksanaan konstruksi yang tepat, ③Mendorong perkembangan industri konstruksi yang sehat. Labor Standards Act = mengatur jam kerja & upah. Building Standards Act = standar teknis bangunan. Safety & Health Act = keselamatan kerja.',
       },
       {
         id: 6,
@@ -82,7 +82,7 @@ export const SET_CT03 = {
           'Asuransi yang menabung untuk pensiunan',
         ],
         ans: 1,
-        exp: '雇用保険 (koyō hoken / Employment Insurance) = asuransi yang melindungi pekerja saat kehilangan pekerjaan akibat PHK (解雇), kebangkrutan perusahaan (倒産), atau alasan lain di luar kehendak sendiri. Memberikan tunjangan pengangguran (失業給付) sementara mencari kerja baru. Premi dibayar bersama pengusaha dan pekerja. Berbeda dari 労災保険 (kecelakaan kerja).',
+        exp: '雇用保険《こようほけん》 (koyō hoken / Employment Insurance) = asuransi yang melindungi pekerja saat kehilangan pekerjaan akibat PHK (解雇), kebangkrutan perusahaan (倒《てんとう》産), atau alasan lain di luar kehendak sendiri. Memberikan tunjangan pengangguran (失業給付《しつぎょうきゅうふ》) sementara mencari kerja baru. Premi dibayar bersama pengusaha dan pekerja. Berbeda dari 労災保険《ろうさいほけん》 (kecelakaan kerja).',
       },
       {
         id: 7,
@@ -91,7 +91,7 @@ export const SET_CT03 = {
         opts: ['作業員《さぎょういん》', '下請《したうけ》けのみ', '任意《にんい》', '元請負業者《もとうけおいぎょうしゃ》'],
         opts_id: ['Pekerja', 'Hanya subkontraktor', 'Sukarela', 'Kontraktor utama'],
         ans: 3,
-        exp: 'Penanggung jawab penyusunan 施工体制台帳 (buku catatan sistem pelaksanaan) dan 安全管理計画書 (rencana manajemen keselamatan) adalah kontraktor UTAMA. Dokumen ini menunjukkan struktur tanggung jawab semua pihak di site.',
+        exp: 'Penanggung jawab penyusunan 施工体制台帳《せこうたいせいだいちょう》 (buku catatan sistem pelaksanaan) dan 安全管理《あんぜんかんり》計画《けいかく》書 (rencana manajemen keselamatan) adalah kontraktor UTAMA. Dokumen ini menunjukkan struktur tanggung jawab semua pihak di site.',
       },
       {
         id: 8,
@@ -110,7 +110,7 @@ export const SET_CT03 = {
           'Mencegah api dan asap menyebar melalui titik tembus pipa/kabel di kompartemen tahan api',
         ],
         ans: 3,
-        exp: 'Pipa, duct, dan kabel yang menembus dinding atau lantai kompartemen tahan api (防火区画) harus ditutup dengan bahan tahan api (耐火充填材/fire-stop material) seperti putty tahan api atau mineral wool. Jika tidak ditutup, celah tersebut menjadi jalur api dan asap menyebar ke kompartemen lain, membatalkan fungsi 防火区画. Ini diatur dalam Building Standards Act.',
+        exp: 'Pipa, duct, dan kabel yang menembus dinding atau lantai kompartemen tahan api (防火区画《ぼうかくかく》) harus ditutup dengan bahan tahan api (耐火充填《たいかじゅうてん》材《ざい》/fire-stop material) seperti putty tahan api atau mineral wool. Jika tidak ditutup, celah tersebut menjadi jalur api dan asap menyebar ke kompartemen lain, membatalkan fungsi 防火区画《ぼうかくかく》. Ini diatur dalam Building Standards Act.',
       },
       {
         id: 9,
@@ -129,7 +129,7 @@ export const SET_CT03 = {
           'Fenomena listrik mengalir lewat tubuh manusia',
         ],
         ans: 1,
-        exp: '短絡 (tanraku / short circuit) = dua kabel atau lebih bersentuhan langsung tanpa melewati beban/resistansi. Arus sangat besar mengalir → panas berlebih → kebakaran atau kerusakan. Dilindungi oleh breaker (ブレーカー). Berbeda: 漏電 (rōden) = listrik bocor ke tanah/bumi, 感電 (kanden) = listrik mengalir lewat tubuh manusia.',
+        exp: '短絡《たんらく》 (tanraku / short circuit) = dua kabel atau lebih bersentuhan langsung tanpa melewati beban/resistansi. Arus sangat besar mengalir → panas berlebih → kebakaran atau kerusakan. Dilindungi oleh breaker (ブレーカー). Berbeda: 漏電《ろうでん》 (rōden) = listrik bocor ke tanah/bumi, 感電《かんでん》 (kanden) = listrik mengalir lewat tubuh manusia.',
       },
       {
         id: 10,
@@ -148,7 +148,7 @@ export const SET_CT03 = {
           'Memperkuat fondasi bangunan',
         ],
         ans: 2,
-        exp: 'さく井工事 (sakusei kōji) = mengebor/menggali tanah untuk membuat sumur (井戸) atau lubang bor guna mengambil air tanah. Digunakan untuk sumber air pertanian, industri, geothermal. Berbeda dari pekerjaan fondasi (地業工事) yang bertujuan memperkuat tanah untuk mendukung bangunan di atasnya.',
+        exp: 'さく井工事《こうじ》 (sakusei kōji) = mengebor/menggali tanah untuk membuat sumur (井戸《いど》) atau lubang bor guna mengambil air tanah. Digunakan untuk sumber air pertanian, industri, geothermal. Berbeda dari pekerjaan fondasi (地業《じぎょう》工事《らいふらいんこうじ》) yang bertujuan memperkuat tanah untuk mendukung bangunan di atasnya.',
       },
       {
         id: 11,
@@ -185,7 +185,7 @@ export const SET_CT03 = {
           'Membangun bendungan',
         ],
         ans: 1,
-        exp: 'Lifeline & 設備工事 (Raifurain setsubi kōji) = instalasi infrastruktur kehidupan: air bersih, listrik, gas, telekomunikasi, internet, AC, sanitasi. Memasang pipa air = lifeline. Apartemen = 建築. Jembatan/bendungan = 土木. Ini adalah kategori ujian SSW untuk spesialisasi Anda.',
+        exp: 'Lifeline & 設備工事《せつびこうじ》 (Raifurain setsubi kōji) = instalasi infrastruktur kehidupan: air bersih, listrik, gas, telekomunikasi, internet, AC, sanitasi. Memasang pipa air = lifeline. Apartemen = 建築《けんちく》. Jembatan/bendungan = 土木《どぼく》. Ini adalah kategori ujian SSW untuk spesialisasi Anda.',
       },
       {
         id: 14,
@@ -199,7 +199,7 @@ export const SET_CT03 = {
           'Dalam 90 hari setelah penerimaan',
         ],
         ans: 2,
-        exp: 'Construction Business Act mengatur: kontraktor utama WAJIB membayar tagihan subkontraktor dalam 50 hari setelah menerima hasil pekerjaan (検収後50日以内). Keterlambatan pembayaran membebani subkontraktor kecil yang butuh arus kas. Pelanggaran bisa dikenakan perintah perbaikan dari pemerintah. Subkontraktor berhak menuntut pembayaran tepat waktu.',
+        exp: 'Construction Business Act mengatur: kontraktor utama WAJIB membayar tagihan subkontraktor dalam 50 hari setelah menerima hasil pekerjaan (検収《けんしゅう》後《あと》50日以内《いない》). Keterlambatan pembayaran membebani subkontraktor kecil yang butuh arus kas. Pelanggaran bisa dikenakan perintah perbaikan dari pemerintah. Subkontraktor berhak menuntut pembayaran tepat waktu.',
       },
       {
         id: 15,
@@ -222,7 +222,7 @@ export const SET_CT03 = {
         opts: ['有機溶剤《ゆうきようざい》', '任意《にんい》', '水《みず》', '一般《いっぱん》の粉《こな》じん'],
         opts_id: ['Pelarut organik', 'Sukarela', 'Air', 'Debu biasa'],
         ans: 0,
-        exp: 'Zat berbahaya yang wajib diukur lingkungan kerjanya: pelarut organik (有機溶剤), debu mineral, logam berat (timbal, merkuri), asbes. Pengukuran dilakukan oleh tenaga ahli bersertifikat. Hasil pengukuran wajib disosialisasikan ke pekerja.',
+        exp: 'Zat berbahaya yang wajib diukur lingkungan kerjanya: pelarut organik (有機溶剤《ゆうきようざい》), debu mineral, logam berat (timbal, merkuri), asbes. Pengukuran dilakukan oleh tenaga ahli bersertifikat. Hasil pengukuran wajib disosialisasikan ke pekerja.',
       },
       {
         id: 17,
@@ -282,7 +282,7 @@ export const SET_CT03 = {
           'Pemesanan → Desain → Konstruksi',
         ],
         ans: 3,
-        exp: 'Alur proyek konstruksi yang benar: ①Keputusan & pemesanan (発注/hatchū) → ②Desain (設計/sekkei): gambar dan spesifikasi → ③Tender & kontrak → ④Konstruksi (施工/sekō) → ⑤Inspeksi → ⑥Serah terima. Desain HARUS selesai sebelum konstruksi dimulai. Tanpa gambar dan spesifikasi, tidak ada panduan untuk membangun.',
+        exp: 'Alur proyek konstruksi yang benar: ①Keputusan & pemesanan (発注《はっちゅう》/hatchū) → ②Desain (設計《せっけい》/sekkei): gambar dan spesifikasi → ③Tender & kontrak → ④Konstruksi (施工《せこう》/sekō) → ⑤Inspeksi → ⑥Serah terima. Desain HARUS selesai sebelum konstruksi dimulai. Tanpa gambar dan spesifikasi, tidak ada panduan untuk membangun.',
       },
       {
         id: 22,
@@ -315,16 +315,16 @@ export const SET_CT03 = {
           'Menentukan standar material pipa gas',
         ],
         ans: 2,
-        exp: 'ガス事業法 (Gasu Jigyō-hō / Gas Business Act) bertujuan: ①Memastikan pasokan gas yang aman dan stabil, ②Memastikan keamanan instalasi gas (保安). Mengatur persyaratan produksi, transmisi, distribusi gas, dan standar keselamatan. Instalasi dan perbaikan pipa gas wajib dilakukan oleh kontraktor berlisensi (ガス工事業者). Kebocoran gas = bahaya ledakan.',
+        exp: 'ガス事業法《がすじぎょうほう》 (Gasu Jigyō-hō / Gas Business Act) bertujuan: ①Memastikan pasokan gas yang aman dan stabil, ②Memastikan keamanan instalasi gas (保《たも》安). Mengatur persyaratan produksi, transmisi, distribusi gas, dan standar keselamatan. Instalasi dan perbaikan pipa gas wajib dilakukan oleh kontraktor berlisensi (ガス工事《らいふらいんこうじ》業者《ぎょうしゃ》). Kebocoran gas = bahaya ledakan.',
       },
       {
         id: 24,
-        q: '労働基準法で、週1回の休日（法定休日）の最低基準は？',
+        q: '労働基準法《ろうどうきじゅんほう》で、週《しゅう》1回の休日（法定休日《ほうていきゅうじつ》）の最低基準《さいていきじゅん》は？',
         hint: 'Menurut UU Standar Ketenagakerjaan, berapa hari libur mingguan minimal (libur resmi)?',
         opts: ['なし', '任意《にんい》', '1 日《ひ》', '2 日《ひ》'],
         opts_id: ['Tidak ada', 'Bebas', '1 hari', '2 hari'],
         ans: 2,
-        exp: 'Pengusaha wajib memberikan minimal 1 hari libur per minggu (週1日). Disebut 法定休日 (hōtei kyūjitsu). Jika bekerja di hari ini, pekerja berhak tarif 1.35× gaji pokok. Libur lebih dari 1 hari/minggu disebut 所定休日.',
+        exp: 'Pengusaha wajib memberikan minimal 1 hari libur per minggu (週《しゅう》1日). Disebut 法定休日《ほうていきゅうじつ》 (hōtei kyūjitsu). Jika bekerja di hari ini, pekerja berhak tarif 1.35× gaji pokok. Libur lebih dari 1 hari/minggu disebut 所定《しょてい》休日.',
       },
       {
         id: 25,
@@ -343,11 +343,11 @@ export const SET_CT03 = {
           'Tagihan dan kwitansi',
         ],
         ans: 1,
-        exp: '設計図書 (sekkei tosho) = dokumen teknis dasar konstruksi: ①設計図面 (gambar teknis: denah, tampak, potongan, detail), ②仕様書 (spesifikasi material dan metode). Kontraktor WAJIB memahami dan mengikuti sekkei tosho. Dokumen lain (buku pekerja, tagihan) = dokumen administrasi, bukan sekkei tosho.',
+        exp: '設計図書《せっけいとしょ》 (sekkei tosho) = dokumen teknis dasar konstruksi: ①設計図面《ずめん》 (gambar teknis: denah, tampak, potongan, detail), ②仕様《さま》書 (spesifikasi material dan metode). Kontraktor WAJIB memahami dan mengikuti sekkei tosho. Dokumen lain (buku pekerja, tagihan) = dokumen administrasi, bukan sekkei tosho.',
       },
       {
         id: 26,
-        q: '建設現場での「墜落制止用器具」（安全帯）のフックは、どの位置に取り付けるべきか。',
+        q: '建設現場《けんせつげんば》での「墜落制止用器具《ついらくせいしようきぐ》」（安全帯《あんぜんたい》）のフックは、どの位置《いち》に取り付け《とりつけ》るべきか。',
         hint: 'Di posisi mana seharusnya hook dari alat pencegah jatuh (安全帯) dipasang?',
         opts: [
           '腰《こし》より低い位置《いち》',
@@ -362,7 +362,7 @@ export const SET_CT03 = {
           'Di posisi lebih tinggi dari pinggang (anchor point di atas kepala)',
         ],
         ans: 3,
-        exp: 'Hook/lanyard HARUS dipasang di anchor point di ATAS kepala (頭上) atau setidaknya setinggi bahu, BUKAN di bawah pinggang. Jika dipasang di bawah pinggang: jarak jatuh bebas lebih panjang → gaya impak lebih besar → risiko cedera lebih tinggi meski tidak sampai lantai. Prinsip: semakin tinggi anchor point, semakin pendek jarak jatuh bebas, semakin aman.',
+        exp: 'Hook/lanyard HARUS dipasang di anchor point di ATAS kepala (頭上《うえ》) atau setidaknya setinggi bahu, BUKAN di bawah pinggang. Jika dipasang di bawah pinggang: jarak jatuh bebas lebih panjang → gaya impak lebih besar → risiko cedera lebih tinggi meski tidak sampai lantai. Prinsip: semakin tinggi anchor point, semakin pendek jarak jatuh bebas, semakin aman.',
       },
       {
         id: 27,
@@ -385,7 +385,7 @@ export const SET_CT03 = {
         opts: ['赤《あか》', '黄《き》', '緑《みどり》', '青《あお》'],
         opts_id: ['Merah', 'Kuning', 'Hijau', 'Biru'],
         ans: 2,
-        exp: 'Tanda jalur evakuasi darurat (避難経路標識) menggunakan warna HIJAU sesuai standar Fire Service Act dan ISO 7010. Hijau = aman/jalan keluar. Tanda harus terlihat dari jarak ≥10m, dan harus menyala (photoluminescent atau lampu emergensi) saat listrik padam.',
+        exp: 'Tanda jalur evakuasi darurat (避難経路《ひなんけいろ》標識《ひょうしき》) menggunakan warna HIJAU sesuai standar Fire Service Act dan ISO 7010. Hijau = aman/jalan keluar. Tanda harus terlihat dari jarak ≥10m, dan harus menyala (photoluminescent atau lampu emergensi) saat listrik padam.',
       },
       {
         id: 29,
@@ -404,7 +404,7 @@ export const SET_CT03 = {
           'Saat bergerak, naikkan fork 15-30cm dari tanah dan miringkan ke belakang',
         ],
         ans: 3,
-        exp: 'Keselamatan forklift saat bergerak: ①Fork dinaikkan 15-30cm dari tanah (tidak terlalu tinggi = stabil, tidak menyapu tanah), ②Fork dimiringkan ke belakang (後傾/kōkei) agar muatan tidak jatuh ke depan, ③Kecepatan maks 8km/jam di dalam, ④Selalu bunyikan klakson di persimpangan, ⑤Pejalan kaki dilarang di jalur forklift. Sertifikat wajib (フォークリフト技能講習修了証).',
+        exp: 'Keselamatan forklift saat bergerak: ①Fork dinaikkan 15-30cm dari tanah (tidak terlalu tinggi = stabil, tidak menyapu tanah), ②Fork dimiringkan ke belakang (後《あと》傾/kōkei) agar muatan tidak jatuh ke depan, ③Kecepatan maks 8km/jam di dalam, ④Selalu bunyikan klakson di persimpangan, ⑤Pejalan kaki dilarang di jalur forklift. Sertifikat wajib (フォークリフト技能講習《ぎのうこうしゅう》修了証《しゅうりょうしょう》).',
       },
       {
         id: 30,
@@ -423,7 +423,7 @@ export const SET_CT03 = {
           'Pemasangan stopkontak listrik dan penerangan',
         ],
         ans: 2,
-        exp: '衛生器具設備工事 (eisei kigu setsubi kōji) = pemasangan perlengkapan sanitasi yang berhubungan dengan air bersih dan air kotor: toilet, wastafel (洗面台), bathtub, shower, urinal, bidet, floor drain, dsb. Ini adalah bagian dari 管工事 (pipa & instalasi). Berbeda dari sprinkler (消防設備) atau AC (空調設備).',
+        exp: '衛生器具設備工事《えいせいきぐせつびこうじ》 (eisei kigu setsubi kōji) = pemasangan perlengkapan sanitasi yang berhubungan dengan air bersih dan air kotor: toilet, wastafel (洗《あら》面《めん》台《だい》), bathtub, shower, urinal, bidet, floor drain, dsb. Ini adalah bagian dari 管工事《らいふらいんこうじ》 (pipa & instalasi). Berbeda dari sprinkler (消防《ふせ》設備《すぷりんくらあせつび》) atau AC (空調《くうちょう》設備《すぷりんくらあせつび》).',
       },
     ],
   };

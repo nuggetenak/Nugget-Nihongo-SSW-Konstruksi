@@ -22,7 +22,7 @@ export const SET_CT01 = {
           'Kontrak borongan konstruksi',
         ],
         ans: 2,
-        exp: 'Safety Data Sheet (SDS/安全データシート = pengganti MSDS) WAJIB dibaca sebelum menggunakan bahan kimia apa pun. SDS berisi: bahaya bahan, cara penanganan aman, APD yang diperlukan, prosedur pertolongan pertama jika terpapar, cara penyimpanan dan pembuangan. Pengusaha wajib menyediakan SDS; pekerja wajib membaca dan mengikutinya.',
+        exp: 'Safety Data Sheet (SDS/安全《あんぜん》データシート = pengganti MSDS) WAJIB dibaca sebelum menggunakan bahan kimia apa pun. SDS berisi: bahaya bahan, cara penanganan aman, APD yang diperlukan, prosedur pertolongan pertama jika terpapar, cara penyimpanan dan pembuangan. Pengusaha wajib menyediakan SDS; pekerja wajib membaca dan mengikutinya.',
       },
       {
         id: 2,
@@ -36,7 +36,7 @@ export const SET_CT01 = {
           'Sukarela',
         ],
         ans: 0,
-        exp: 'Kontraktor utama (元方事業者) dalam sistem manajemen keselamatan wajib: ①Membuat rencana keselamatan bersama, ②Mengkoordinasikan KY seluruh subkontraktor, ③Memastikan semua pekerja mendapat safety education, ④Melakukan patroli keselamatan rutin.',
+        exp: 'Kontraktor utama (元方《かた》事業者《ぎょうしゃ》) dalam sistem manajemen keselamatan wajib: ①Membuat rencana keselamatan bersama, ②Mengkoordinasikan KY seluruh subkontraktor, ③Memastikan semua pekerja mendapat safety education, ④Melakukan patroli keselamatan rutin.',
       },
       {
         id: 3,
@@ -50,7 +50,7 @@ export const SET_CT01 = {
           'Menentukan tindakan',
         ],
         ans: 0,
-        exp: '4 langkah KY: Step 1=identifikasi bahaya, Step 2=tentukan bahaya UTAMA/pokok (本質の危険), Step 3=buat countermeasure, Step 4=komitmen target. Langkah KE-2 adalah menentukan bahaya paling kritis dari semua yang ditemukan.',
+        exp: '4 langkah KY: Step 1=identifikasi bahaya, Step 2=tentukan bahaya UTAMA/pokok (本《ほん》質の危険《きけん》), Step 3=buat countermeasure, Step 4=komitmen target. Langkah KE-2 adalah menentukan bahaya paling kritis dari semua yang ditemukan.',
       },
       {
         id: 4,
@@ -64,7 +64,7 @@ export const SET_CT01 = {
           'Agar kelainan dapat ditemukan segera',
         ],
         ans: 3,
-        exp: 'Visualisasi dalam 5S membuat status terlihat jelas sehingga: ①Masalah terdeteksi lebih cepat, ②Tidak perlu bertanya ke orang lain, ③Semua orang bisa memantau kondisi. Ini mendukung manajemen visual (見える化/mieruka).',
+        exp: 'Visualisasi dalam 5S membuat status terlihat jelas sehingga: ①Masalah terdeteksi lebih cepat, ②Tidak perlu bertanya ke orang lain, ③Semua orang bisa memantau kondisi. Ini mendukung manajemen visual (見える化《みえるか》/mieruka).',
       },
       {
         id: 5,
@@ -82,7 +82,7 @@ export const SET_CT01 = {
       },
       {
         id: 6,
-        q: '産業安全衛生法で、危険予知活動（KY活動）の主な目的は何か。',
+        q: '産業《さんぎょう》安全衛生《あんぜんえいせい》法《ほう》で、危険予知活動《きけんよちかつどう》（KY活動《かつどう》）の主な《おもな》目的《もくてき》は何か。',
         hint: 'Menurut UU Keselamatan dan Kesehatan Kerja, tujuan utama KY adalah?',
         opts: ['休憩《きゅうけい》を取《と》る', '危険《きけん》を予測《よそく》し、対策《たいさく》を立《た》てる', '作業《さぎょう》を速《はや》く終《お》わらせる', '工具《こうぐ》を片付《かたづ》ける'],
         opts_id: [
@@ -92,7 +92,7 @@ export const SET_CT01 = {
           'Merapikan alat',
         ],
         ans: 1,
-        exp: 'KY (Kiken Yochi = 危険予知) bertujuan memprediksi bahaya SEBELUM kerja dimulai. Ini sejalan dengan tujuan Industrial Safety & Health Act yaitu mencegah kecelakaan dan penyakit kerja. KY bukan investigasi kecelakaan yang sudah terjadi.',
+        exp: 'KY (Kiken Yochi = 危険《きけん》予知《よち》) bertujuan memprediksi bahaya SEBELUM kerja dimulai. Ini sejalan dengan tujuan Industrial Safety & Health Act yaitu mencegah kecelakaan dan penyakit kerja. KY bukan investigasi kecelakaan yang sudah terjadi.',
       },
       {
         id: 7,
@@ -134,7 +134,7 @@ export const SET_CT01 = {
           'Bebas',
         ],
         ans: 0,
-        exp: 'Pengolahan limbah yang mengandung asbes (石綿) memerlukan pendidikan khusus (石綿取扱い特別教育). Asbes adalah karsinogen berbahaya → serat mikroskopis yang terhirup menyebabkan mesothelioma (kanker paru). Penanganan salah = bahaya kesehatan jangka panjang.',
+        exp: 'Pengolahan limbah yang mengandung asbes (石綿《いしわた》) memerlukan pendidikan khusus (石綿《いしわた》取扱《あつか》い特別教育《とくべつきょういく》). Asbes adalah karsinogen berbahaya → serat mikroskopis yang terhirup menyebabkan mesothelioma (kanker paru). Penanganan salah = bahaya kesehatan jangka panjang.',
       },
       {
         id: 10,
@@ -147,7 +147,7 @@ export const SET_CT01 = {
       },
       {
         id: 11,
-        q: 'ロックアウト・タグアウト（LO/TO）の実施手順で最初に行うことは？',
+        q: 'ロックアウト・タグアウト（LO/TO）の実施手順《じっしてじゅん》で最初に《さいしょに》行う《おこなう》ことは？',
         hint: 'Langkah pertama pelaksanaan Lockout-Tagout adalah?',
         opts: ['確認《かくにん》だけ', 'タグを付《つ》ける', '作業《さぎょう》を開始《かいし》する', 'エネルギー源《げん》を遮断《しゃだん》する'],
         opts_id: ['Hanya konfirmasi', 'Memasang tag', 'Mulai kerja', 'Memutus sumber energi'],
@@ -166,7 +166,7 @@ export const SET_CT01 = {
           'Investigasi faktor bahaya & usul perbaikan',
         ],
         ans: 3,
-        exp: 'Peran 安全衛生委員会 (komite K3): ①Investigasi kondisi & lingkungan kerja berbahaya, ②Membuat rekomendasi countermeasure, ③Menganalisis kecelakaan & near-miss, ④Membuat program pendidikan K3. Bukan yang memutuskan kebijakan perusahaan.',
+        exp: 'Peran 安全衛生《あんぜんえいせい》委員会 (komite K3): ①Investigasi kondisi & lingkungan kerja berbahaya, ②Membuat rekomendasi countermeasure, ③Menganalisis kecelakaan & near-miss, ④Membuat program pendidikan K3. Bukan yang memutuskan kebijakan perusahaan.',
       },
       {
         id: 13,
@@ -180,16 +180,16 @@ export const SET_CT01 = {
           'Menyediakan listrik secara stabil',
         ],
         ans: 0,
-        exp: '水道法 (Suidō-hō / Water Supply Act) bertujuan: menyediakan air minum yang bersih, aman, dan stabil untuk kehidupan sehari-hari. Mengatur standar kualitas air (水質基準), persyaratan fasilitas, dan pemeliharaan sistem air bersih. Air minum di Jepang memenuhi standar sangat ketat dan aman diminum langsung dari keran.',
+        exp: '水道法《すいどうほう》 (Suidō-hō / Water Supply Act) bertujuan: menyediakan air minum yang bersih, aman, dan stabil untuk kehidupan sehari-hari. Mengatur standar kualitas air (水《みず》質基準《きじゅん》), persyaratan fasilitas, dan pemeliharaan sistem air bersih. Air minum di Jepang memenuhi standar sangat ketat dan aman diminum langsung dari keran.',
       },
       {
         id: 14,
-        q: '労働基準法で、時間外労働（残業）の割増賃金率の最低基準は？',
+        q: '労働基準法《ろうどうきじゅんほう》で、時間外労働《じかんがいろうどう》（残業《ざんぎょう》）の割増賃金率《わりましちんぎんりつ》の最低基準《さいていきじゅん》は？',
         hint: 'Menurut UU Standar Ketenagakerjaan, tarif minimal upah lembur adalah?',
         opts: ['2.0 倍《ばい》', '1.5 倍《ばい》', '1.0 倍《ばい》', '1.25 倍《ばい》'],
         opts_id: ['2.0 kali', '1.5 kali', '1.0 kali', '1.25 kali'],
         ans: 3,
-        exp: 'Upah lembur minimal 1.25× gaji pokok. Khusus lembur >60 jam/bulan, tarif naik menjadi 1.50×. Lembur di hari libur resmi (法定休日) minimal 1.35×. Ketentuan ini wajib dipatuhi semua perusahaan di Jepang.',
+        exp: 'Upah lembur minimal 1.25× gaji pokok. Khusus lembur >60 jam/bulan, tarif naik menjadi 1.50×. Lembur di hari libur resmi (法定休日《ほうていきゅうじつ》) minimal 1.35×. Ketentuan ini wajib dipatuhi semua perusahaan di Jepang.',
       },
       {
         id: 15,
@@ -207,7 +207,7 @@ export const SET_CT01 = {
       },
       {
         id: 16,
-        q: '建設キャリアアップシステム（CCUS）の目的として正しいものはどれか。',
+        q: '建設《けんせつ》キャリアアップシステム（CCUS）の目的《もくてき》として正しいものはどれか。',
         hint: 'Tujuan yang benar dari Construction Career Up System (CCUS) adalah?',
         opts: ['建設《けんせつ》コストを削減《さくげん》する', '外国人労働者《がいこくじんろうどうしゃ》の数《かず》を制限《せいげん》する', '技能者《ぎのうしゃ》の就業履歴《しゅうぎょうりれき》と資格《しかく》を見《み》える化《か》する', '工事《こうじ》の工期《こうき》を短縮《たんしゅく》する'],
         opts_id: [
@@ -249,7 +249,7 @@ export const SET_CT01 = {
       },
       {
         id: 19,
-        q: '建設現場で「高温作業環境」における「WBGT（暑さ指数）」の基準として、厳重警戒レベルはどれか。',
+        q: '建設現場《けんせつげんば》で「高温作業環境《こうおんさぎょうかんきょう》」における「WBGT（暑さ指数《あつさしすう》）」の基準《きじゅん》として、厳重警戒《げんじゅうけいかい》レベルはどれか。',
         hint: "Dalam lingkungan kerja panas di site konstruksi, nilai WBGT (indeks panas) untuk level 'peringatan ketat' (厳重警戒) adalah?",
         opts: ['21°C以上《いじょう》25°C未満《みまん》', '25°C以上《いじょう》28°C未満《みまん》', '28°C以上《いじょう》31°C未満《みまん》', '31°C以上《いじょう》'],
         opts_id: [
@@ -277,12 +277,12 @@ export const SET_CT01 = {
       },
       {
         id: 21,
-        q: '時間外労働の協定（36協定）で、特別条項を設ける場合の限度時間は？',
+        q: '時間外労働《じかんがいろうどう》の協定《きょうてい》（36協定）で、特別条項《とくべつじょうこう》を設《もう》ける場合《ばあい》の限度時間《げんどじかん》は？',
         hint: 'Batas waktu lembur saat ada klausul khusus dalam perjanjian 36 adalah?',
         opts: ['年《ねん》720時間《じかん》', 'なし', '月《つき》45時間《じかん》', '任意《にんい》'],
         opts_id: ['720 jam/tahun', 'Tidak ada', '45 jam/bulan', 'Bebas'],
         ans: 0,
-        exp: '36 agreement (36協定/san-roku kyōtei) = perjanjian antara pengusaha dan serikat pekerja tentang lembur. Dengan klausul khusus (特別条項), lembur diperbolehkan maksimal 720 jam/tahun atau 100 jam/bulan pada bulan tertentu. Tanpa 36 agreement, lembur apa pun dilarang.',
+        exp: '36 agreement (36協定/san-roku kyōtei) = perjanjian antara pengusaha dan serikat pekerja tentang lembur. Dengan klausul khusus (特別条項《とくべつじょうこう》), lembur diperbolehkan maksimal 720 jam/tahun atau 100 jam/bulan pada bulan tertentu. Tanpa 36 agreement, lembur apa pun dilarang.',
       },
       {
         id: 22,
@@ -296,7 +296,7 @@ export const SET_CT01 = {
           'Hanya informasi rekening bank pekerja',
         ],
         ans: 2,
-        exp: '作業員名簿 (sagyō-in meibo / daftar pekerja) wajib berisi: ①氏名 (nama), ②生年月日 (tanggal lahir), ③所属会社 (perusahaan), ④職種 (jenis pekerjaan), ⑤保有資格 (kualifikasi/sertifikat), ⑥健康診断実施状況 (status pemeriksaan kesehatan), ⑦外国人労働者の場合: nomor izin tinggal. Dokumen ini wajib ada di setiap site untuk keperluan inspeksi dan darurat.',
+        exp: '作業員《さぎょういん》名簿 (sagyō-in meibo / daftar pekerja) wajib berisi: ①氏名 (nama), ②生年月日 (tanggal lahir), ③所属会社 (perusahaan), ④職種《さんしゅ》 (jenis pekerjaan), ⑤保有資格《しかく》 (kualifikasi/sertifikat), ⑥健康診断《しんだん》実施《じっし》状況 (status pemeriksaan kesehatan), ⑦外国人《にん》労働者《ろうどうしゃ》の場合《ばあい》: nomor izin tinggal. Dokumen ini wajib ada di setiap site untuk keperluan inspeksi dan darurat.',
       },
       {
         id: 23,
@@ -305,7 +305,7 @@ export const SET_CT01 = {
         opts: ['10人《にん》以上《いじょう》', 'なし', '50人《にん》以上《いじょう》', '任意《にんい》'],
         opts_id: ['10 orang atau lebih', 'Tidak ada', '50 orang atau lebih', 'Sukarela'],
         ans: 2,
-        exp: 'Berdasarkan Industrial Safety & Health Act, perusahaan dengan ≥50 pekerja WAJIB membentuk 安全衛生委員会 (komite keselamatan & kesehatan). Komite bertugas mengawasi kondisi kerja dan membuat rekomendasi perbaikan. Perusahaan <50 pekerja dianjurkan tapi tidak wajib.',
+        exp: 'Berdasarkan Industrial Safety & Health Act, perusahaan dengan ≥50 pekerja WAJIB membentuk 安全衛生《あんぜんえいせい》委員会 (komite keselamatan & kesehatan). Komite bertugas mengawasi kondisi kerja dan membuat rekomendasi perbaikan. Perusahaan <50 pekerja dianjurkan tapi tidak wajib.',
       },
       {
         id: 24,
@@ -314,7 +314,7 @@ export const SET_CT01 = {
         opts: ['弁護士《べんごし》', '技能士《ぎのうし》', '司法書士《しほうしょし》', '技術士《ぎじゅつし》'],
         opts_id: ['Lawyer', 'Skill technician', 'Judicial scrivener', 'Engineer'],
         ans: 1,
-        exp: 'Orang yang lulus 技能検定 (uji keterampilan teknis/skill certification) berhak menyebut diri 技能士 (Ginōshi = skilled worker). Ini bukan gelar akademik tapi pengakuan kompetensi teknis resmi dari pemerintah Jepang. Ada berbagai level (1, 2, 特級).',
+        exp: 'Orang yang lulus 技能検定《ぎのうけんてい》 (uji keterampilan teknis/skill certification) berhak menyebut diri 技能士《ぎのうし》 (Ginōshi = skilled worker). Ini bukan gelar akademik tapi pengakuan kompetensi teknis resmi dari pemerintah Jepang. Ada berbagai level (1, 2, 特級《とっきゅう》).',
       },
       {
         id: 25,
@@ -328,7 +328,7 @@ export const SET_CT01 = {
           'Kecelakaan akibat keruntuhan/ambruk',
         ],
         ans: 2,
-        exp: 'Di industri konstruksi Jepang, 墜落・転落 (jatuh dari ketinggian) adalah penyebab TERBANYAK kecelakaan fatal. Inilah mengapa full harness, guardrail, dan safety net sangat ditekankan. Tiga besar: ①墜落・転落 (paling banyak), ②建設機械災害, ③崩壊・倒壊. Total kecelakaan konstruksi ~30% dari seluruh kecelakaan kerja di Jepang.',
+        exp: 'Di industri konstruksi Jepang, 墜落《ついらく》・転落《てんらく》 (jatuh dari ketinggian) adalah penyebab TERBANYAK kecelakaan fatal. Inilah mengapa full harness, guardrail, dan safety net sangat ditekankan. Tiga besar: ①墜落《てんらく》・転落《てんらく》 (paling banyak), ②建設《もう》機械《きかい》災害《さいがい》, ③崩壊・倒壊《とうかい》. Total kecelakaan konstruksi ~30% dari seluruh kecelakaan kerja di Jepang.',
       },
       {
         id: 26,
@@ -356,7 +356,7 @@ export const SET_CT01 = {
           'Pengisian buku catatan sistem pelaksanaan',
         ],
         ans: 1,
-        exp: 'KY (危険予知/Kiken Yochi = prediksi bahaya) dilakukan setelah apel pagi, langsung di area kerja. Tim kecil (5-10 orang) mendiskusikan: ①Bahaya apa yang ada hari ini?, ②Apa yang paling berbahaya?, ③Bagaimana cara mencegahnya?, ④Target zero accident hari ini (Touch and Call). KY adalah jantung dari budaya keselamatan konstruksi Jepang.',
+        exp: 'KY (危険《きけん》予知《よち》/Kiken Yochi = prediksi bahaya) dilakukan setelah apel pagi, langsung di area kerja. Tim kecil (5-10 orang) mendiskusikan: ①Bahaya apa yang ada hari ini?, ②Apa yang paling berbahaya?, ③Bagaimana cara mencegahnya?, ④Target zero accident hari ini (Touch and Call). KY adalah jantung dari budaya keselamatan konstruksi Jepang.',
       },
       {
         id: 28,
@@ -384,7 +384,7 @@ export const SET_CT01 = {
           'Meningkatkan kekuatan struktural bangunan',
         ],
         ans: 2,
-        exp: '防火区画 (bōka kukaku / fire compartment) = pemisah tahan api yang membagi bangunan menjadi zona-zona untuk mencegah penyebaran api dan asap dari satu area ke area lain. Wajib berdasarkan Building Standards Act untuk bangunan >3 lantai atau >500m². Bahan: beton, pintu tahan api (防火戸), fire damper di duct.',
+        exp: '防火区画《ぼうかくかく》 (bōka kukaku / fire compartment) = pemisah tahan api yang membagi bangunan menjadi zona-zona untuk mencegah penyebaran api dan asap dari satu area ke area lain. Wajib berdasarkan Building Standards Act untuk bangunan >3 lantai atau >500m². Bahan: beton, pintu tahan api (防火戸《ぼうかど》), fire damper di duct.',
       },
       {
         id: 30,
@@ -398,7 +398,7 @@ export const SET_CT01 = {
           'Sistem suplai dan pembuangan air',
         ],
         ans: 2,
-        exp: 'Sprinkler (スプリンクラー) = sistem pemadam kebakaran otomatis yang menyemprotkan air saat kepala sprinkler terpapar panas ≥72°C (fusible link melebur). Terdiri dari: jaringan pipa, kepala sprinkler (head), alarm check valve, pompa, tangki air. Wajib untuk bangunan tertentu berdasarkan Fire Service Act (消防法).',
+        exp: 'Sprinkler (スプリンクラー) = sistem pemadam kebakaran otomatis yang menyemprotkan air saat kepala sprinkler terpapar panas ≥72°C (fusible link melebur). Terdiri dari: jaringan pipa, kepala sprinkler (head), alarm check valve, pompa, tangki air. Wajib untuk bangunan tertentu berdasarkan Fire Service Act (消防法《しょうぼうほう》).',
       },
     ],
   };

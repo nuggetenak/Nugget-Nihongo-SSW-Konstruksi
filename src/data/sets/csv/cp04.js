@@ -17,7 +17,7 @@ export const SET_CP04 = {
         opts: ['耐火材《たいかざい》', '断熱材（吹付け）', '塗料《とりょう》', '接着剤《せっちゃくざい》'],
         opts_id: ['Bahan tahan api', 'Insulasi semprot', 'Cat', 'Lem'],
         ans: 1,
-        exp: 'Rigid polyurethane foam (硬質ポリウレタンフォーム/硬質ウレタンフォーム) = foam insulasi yang disemprotkan dan mengeras. Digunakan sebagai spray foam insulation untuk menutup celah, insulasi duct bentuk tidak beraturan, atau insulasi dinding cold storage. Nilai R yang sangat baik.',
+        exp: 'Rigid polyurethane foam (硬質《こうしつ》ポリウレタンフォーム/硬質《こうしつ》ウレタンフォーム) = foam insulasi yang disemprotkan dan mengeras. Digunakan sebagai spray foam insulation untuk menutup celah, insulasi duct bentuk tidak beraturan, atau insulasi dinding cold storage. Nilai R yang sangat baik.',
       },
       {
         id: 2,
@@ -40,7 +40,7 @@ export const SET_CP04 = {
           'Mempercepat pemotongan',
         ],
         ans: 2,
-        exp: 'Bevel processing (ベベル加工) = membuat sudut miring pada ujung pipa sebelum las. Ini menciptakan groove V/U antara dua pipa sehingga filler las bisa menembus ke inti (full penetration). Tanpa bevel, las hanya di permukaan luar → tidak kuat, rentan bocor di tekanan tinggi.',
+        exp: 'Bevel processing (ベベル加工《かこう》) = membuat sudut miring pada ujung pipa sebelum las. Ini menciptakan groove V/U antara dua pipa sehingga filler las bisa menembus ke inti (full penetration). Tanpa bevel, las hanya di permukaan luar → tidak kuat, rentan bocor di tekanan tinggi.',
       },
       {
         id: 4,
@@ -49,7 +49,7 @@ export const SET_CP04 = {
         opts: ['フレアー工具《こうぐ》', 'パイプレンチ', 'ねじ切機《きりき》', 'パイプカッター'],
         opts_id: ['Flaring tool', 'Pipe wrench', 'Threading machine', 'Pipe cutter'],
         ans: 0,
-        exp: 'Flaring tool (フレアー工具) membentuk ujung pipa tembaga menjadi kerucut 45° (flare). Bentuk ini memungkinkan sambungan mekanis yang bisa dibuka kembali tanpa las. Digunakan di sistem AC untuk menyambung unit indoor/outdoor dengan pipa refrigerant lewat flare nut.',
+        exp: 'Flaring tool (フレアー工具《こうぐ》) membentuk ujung pipa tembaga menjadi kerucut 45° (flare). Bentuk ini memungkinkan sambungan mekanis yang bisa dibuka kembali tanpa las. Digunakan di sistem AC untuk menyambung unit indoor/outdoor dengan pipa refrigerant lewat flare nut.',
       },
       {
         id: 5,
@@ -81,7 +81,7 @@ export const SET_CP04 = {
         opts: ['ひび割《われ》れ・腐食《ふしょく》・変形《へんけい》', '軽《かる》い汚《よご》れ', '色褪《いろあ》せ', '長《なが》さの違《ちが》い'],
         opts_id: ['Retak, korosi, atau deformasi', 'Kotoran ringan', 'Pudar warna', 'Beda panjang'],
         ans: 0,
-        exp: 'Inspeksi papan scaffold (足場板) wajib periksa: ①Retak/patah → ganti segera, ②Korosi yang mengurangi kekuatan, ③Deformasi/bengkok. Papan rusak bisa patah saat diinjak → pekerja jatuh. Kotoran ringan dan warna pudar bukan alasan ganti, tapi retak dan korosi parah wajib ganti.',
+        exp: 'Inspeksi papan scaffold (足場《あしば》板《いた》) wajib periksa: ①Retak/patah → ganti segera, ②Korosi yang mengurangi kekuatan, ③Deformasi/bengkok. Papan rusak bisa patah saat diinjak → pekerja jatuh. Kotoran ringan dan warna pudar bukan alasan ganti, tapi retak dan korosi parah wajib ganti.',
       },
       {
         id: 8,
@@ -90,7 +90,7 @@ export const SET_CP04 = {
         opts: ['100A以上《いじょう》', '200A以上《いじょう》', '15A以下《いか》', '15A～100A'],
         opts_id: ['100A ke atas', '200A ke atas', 'Di bawah 15A', '15A sampai 100A'],
         ans: 3,
-        exp: 'Metode sambungan ulir (ねじ接合) untuk pipa baja karbon digunakan pada ukuran 15A sampai 100A. Di atas 100A, digunakan pengelasan groove (グルーブ溶接) atau flange karena sambungan ulir tidak cukup kuat untuk diameter besar.',
+        exp: 'Metode sambungan ulir (ねじ接合《せつごう》) untuk pipa baja karbon digunakan pada ukuran 15A sampai 100A. Di atas 100A, digunakan pengelasan groove (グルーブ溶接《ようせつ》) atau flange karena sambungan ulir tidak cukup kuat untuk diameter besar.',
       },
       {
         id: 9,
@@ -112,12 +112,12 @@ export const SET_CP04 = {
       },
       {
         id: 11,
-        q: '以下の文章のに入る言葉を選びなさい。配管用炭素鋼鋼管の代表的な接合方法である、ねじ接合方法は、主にに採用されている。',
+        q: '以下《いか》の文章《ぶんしょう》のに入《はい》る言葉《ことば》を選《えら》びなさい。配管《はいかん》用《よう》炭素鋼鋼管《たんそこうこうかん》の代表的《だいひょうてき》な接合方法《せつごうほうほう》である、ねじ接合方法《せつごうほうほう》は、主に《おもに》に採用《さいよう》されている。',
         hint: 'Metode penyambungan ulir untuk pipa baja karbon biasanya digunakan pada ukuran ( ).',
         opts: ['15A 以下《いか》', '15A ～ 100A', '100A 以上《いじょう》', '200A 以上《いじょう》'],
         opts_id: ['Di bawah 15A', '15A sampai 100A', '100A ke atas', '200A ke atas'],
         ans: 1,
-        exp: 'Pipa baja karbon (炭素鋼鋼管) disambung dengan ulir (ねじ接合/neji setsugō) untuk ukuran 15A~100A (small to medium). Untuk ukuran >100A, biasanya digunakan sambungan las (groove welding) atau flange. Ulir dibuat dengan pipe threader (ねじ切り機).',
+        exp: 'Pipa baja karbon (炭素鋼鋼管《たんそこうこうかん》) disambung dengan ulir (ねじ接合《せつごう》/neji setsugō) untuk ukuran 15A~100A (small to medium). Untuk ukuran >100A, biasanya digunakan sambungan las (groove welding) atau flange. Ulir dibuat dengan pipe threader (ねじ切り機《ねじきりき》).',
       },
       {
         id: 12,
@@ -126,7 +126,7 @@ export const SET_CP04 = {
         opts: ['電圧計《でんあつけい》', 'クランプメーター', '水圧試験《すいあつしけん》ポンプ', 'テスター'],
         opts_id: ['Voltmeter', 'Clamp meter', 'Hydrostatic test pump', 'Tester'],
         ans: 2,
-        exp: 'Water pressure test (水圧試験) pada pipa air bersih/panas menggunakan hydrostatic test pump (水圧試験ポンプ) untuk menghasilkan tekanan 1.5× tekanan kerja. Tekanan dijaga minimal 30 menit — jika turun menunjukkan kebocoran. Voltmeter dan clamp meter tidak relevan untuk pengujian ini.',
+        exp: 'Water pressure test (水圧試験《すいあつしけん》) pada pipa air bersih/panas menggunakan hydrostatic test pump (水圧試験《すいあつしけん》ポンプ) untuk menghasilkan tekanan 1.5× tekanan kerja. Tekanan dijaga minimal 30 menit — jika turun menunjukkan kebocoran. Voltmeter dan clamp meter tidak relevan untuk pengujian ini.',
       },
       {
         id: 13,
@@ -158,7 +158,7 @@ export const SET_CP04 = {
           '1.5 kali tekanan kerja',
         ],
         ans: 3,
-        exp: 'Uji kebocoran pipa chilled/hot water dilakukan pada 1.5× tekanan kerja (例: jika tekanan kerja 0.7 MPa → uji pada 1.05 MPa). Durasi: minimal 30 menit tanpa penurunan tekanan. Jika tekanan turun → ada kebocoran → identifikasi dan perbaiki sebelum sistem dioperasikan.',
+        exp: 'Uji kebocoran pipa chilled/hot water dilakukan pada 1.5× tekanan kerja （例《れい》: jika tekanan kerja 0.7 MPa → uji pada 1.05 MPa). Durasi: minimal 30 menit tanpa penurunan tekanan. Jika tekanan turun → ada kebocoran → identifikasi dan perbaiki sebelum sistem dioperasikan.',
       },
       {
         id: 16,
@@ -167,11 +167,11 @@ export const SET_CP04 = {
         opts: ['10mm', '50mm以上《いじょう》', '5mm', '任意《にんい》'],
         opts_id: ['10mm', 'Minimal 50mm', '5mm', 'Bebas'],
         ans: 1,
-        exp: 'Tape kedap udara (気密テープ) pada insulasi wajib overlap minimal 50mm di setiap sambungan. Overlap kurang → ada celah → uap air meresap masuk → kondensasi, jamur, dan insulasi rusak. Tekan tape dengan kuat terutama di belokan pipa agar adhesif menempel sempurna.',
+        exp: 'Tape kedap udara (気密《きみつ》テープ) pada insulasi wajib overlap minimal 50mm di setiap sambungan. Overlap kurang → ada celah → uap air meresap masuk → kondensasi, jamur, dan insulasi rusak. Tekan tape dengan kuat terutama di belokan pipa agar adhesif menempel sempurna.',
       },
       {
         id: 17,
-        q: '保温材のバルブ部（弁部）への施工で使用する専用部材は？',
+        q: '保温材《ほおんざい》のバルブ部（弁部《べんぶ》）への施工《せこう》で使用《しよう》する専用部材《せんようぶざい》は？',
         hint: 'Bahan khusus untuk insulasi bagian valve adalah?',
         opts: ['直管用《ちょっかんよう》シート', 'バルブ用断熱《ようだんねつ》カバー', 'ロックウールのみ', 'アルミテープ'],
         opts_id: [
@@ -181,7 +181,7 @@ export const SET_CP04 = {
           'Aluminium tape',
         ],
         ans: 1,
-        exp: 'Insulasi valve menggunakan pre-formed valve cover (バルブ用断熱カバー) yang berbentuk presisi sesuai body valve. Keunggulan: (1) Mudah dibuka saat valve perlu maintenance/inspeksi, (2) Tidak ada celah karena presisi, (3) Bisa dipasang ulang. Jangan pakai insulasi lembaran permanen karena valve butuh akses rutin.',
+        exp: 'Insulasi valve menggunakan pre-formed valve cover (バルブ用《よう》断熱《だんねつ》カバー) yang berbentuk presisi sesuai body valve. Keunggulan: (1) Mudah dibuka saat valve perlu maintenance/inspeksi, (2) Tidak ada celah karena presisi, (3) Bisa dipasang ulang. Jangan pakai insulasi lembaran permanen karena valve butuh akses rutin.',
       },
       {
         id: 18,
@@ -190,7 +190,7 @@ export const SET_CP04 = {
         opts: ['滑《すべ》り止《ど》め効果《こうか》と強度向上《きょうどこうじょう》', '柔軟性《じゅうなんせい》がない', '軽量《けいりょう》', '安価《あんか》'],
         opts_id: ['Efek anti-slip & meningkatkan kekuatan', 'Tidak fleksibel', 'Ringan', 'Murah'],
         ans: 0,
-        exp: 'Embossed aluminium sheet (エンボス加工アルミシート) keunggulannya: ①Lebih rigid/kaku → tidak mudah penyok, ②Permukaan bergerigi → anti-slip saat pemasangan, ③Tampilan lebih rapi. Dibandingkan flat aluminium sheet yang lebih mudah tergores dan slip.',
+        exp: 'Embossed aluminium sheet (エンボス加工《かこう》アルミシート) keunggulannya: ①Lebih rigid/kaku → tidak mudah penyok, ②Permukaan bergerigi → anti-slip saat pemasangan, ③Tampilan lebih rapi. Dibandingkan flat aluminium sheet yang lebih mudah tergores dan slip.',
       },
       {
         id: 19,
@@ -204,7 +204,7 @@ export const SET_CP04 = {
           'Membengkokkan',
         ],
         ans: 0,
-        exp: 'Temporary support (仮支持) menjaga posisi pipa sesuai rencana selama proses pemasangan sebelum permanent hanger dipasang. Tanpa support sementara, pipa bergeser karena beratnya sendiri → tegangan berlebih di sambungan atau alignment meleset → kebocoran saat operasi.',
+        exp: 'Temporary support (仮支持《しじ》) menjaga posisi pipa sesuai rencana selama proses pemasangan sebelum permanent hanger dipasang. Tanpa support sementara, pipa bergeser karena beratnya sendiri → tegangan berlebih di sambungan atau alignment meleset → kebocoran saat operasi.',
       },
       {
         id: 20,

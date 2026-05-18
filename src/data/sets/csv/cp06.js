@@ -45,7 +45,7 @@ export const SET_CP06 = {
         opts: ['耐振動手袋《たいしんどうてぶくろ》', 'ヘルメット', '安全《あんぜん》メガネ', '耳栓《みみせん》'],
         opts_id: ['Anti-vibration gloves', 'Helm', 'Kacamata keselamatan', 'Earplug'],
         ans: 0,
-        exp: 'Alat bergetar (振動工具) seperti grinder atau impact gun menyebabkan Hand-Arm Vibration Syndrome (HAVS) atau white finger (jari putih pucat) jika dipakai lama. PPE wajib: anti-vibration gloves (耐振動手袋) yang menyerap energi getaran. Batasi durasi pemakaian sesuai action value.',
+        exp: 'Alat bergetar (振動《しんどう》工具《こうぐ》) seperti grinder atau impact gun menyebabkan Hand-Arm Vibration Syndrome (HAVS) atau white finger (jari putih pucat) jika dipakai lama. PPE wajib: anti-vibration gloves (耐振動《しんどう》手袋《てぶくろ》) yang menyerap energi getaran. Batasi durasi pemakaian sesuai action value.',
       },
       {
         id: 4,
@@ -54,7 +54,7 @@ export const SET_CP06 = {
         opts: ['色《いろ》', '厚《あつ》さ・気密性《きみつせい》・外観《がいかん》', '長《なが》さ', '任意《にんい》'],
         opts_id: ['Warna', 'Ketebalan, kedap udara, & tampilan', 'Panjang', 'Bebas'],
         ans: 1,
-        exp: 'Inspeksi akhir pekerjaan insulasi (最終検査) yang wajib dicek: ①Ketebalan insulasi sesuai spesifikasi (±5mm), ②Sambungan tertutup rapat (tidak ada celah), ③Finishing rapi dan tidak ada kerusakan, ④Vapor barrier terpasang benar. Semua harus didokumentasikan.',
+        exp: 'Inspeksi akhir pekerjaan insulasi (最終《さいしゅう》検査《けんさ》) yang wajib dicek: ①Ketebalan insulasi sesuai spesifikasi (±5mm), ②Sambungan tertutup rapat (tidak ada celah), ③Finishing rapi dan tidak ada kerusakan, ④Vapor barrier terpasang benar. Semua harus didokumentasikan.',
       },
       {
         id: 5,
@@ -81,7 +81,7 @@ export const SET_CP06 = {
       },
       {
         id: 7,
-        q: '硬質ポリ塩化ビニル管（VP管）の特徴は？',
+        q: '硬質ポリ塩化ビニル管《こうしつぽりえんかびにるかん》（VP管）の特徴《とくちょう》は？',
         hint: 'Ciri khas rigid PVC pipe (VP) adalah?',
         opts: ['軽量《けいりょう》で加工《かこう》しやすい', '重《おも》い', '耐衝撃性《たいしょうげきせい》が低《ひく》い', '耐熱性《たいねつせい》が高《たか》い'],
         opts_id: [
@@ -91,7 +91,7 @@ export const SET_CP06 = {
           'Tahan panas tinggi',
         ],
         ans: 0,
-        exp: 'Rigid PVC pipe (硬質ポリ塩化ビニル管/VP管) karakteristiknya: ①Ringan (mudah handling), ②Permukaan dalam halus (resistansi aliran rendah), ③Mudah dipotong dan disambung dengan lem PVC, ④Tahan korosi, ⑤Tidak cocok untuk air panas >60°C atau tekanan sangat tinggi.',
+        exp: 'Rigid PVC pipe (硬質ポリ塩化ビニル管《こうしつぽりえんかびにるかん》/VP管) karakteristiknya: ①Ringan (mudah handling), ②Permukaan dalam halus (resistansi aliran rendah), ③Mudah dipotong dan disambung dengan lem PVC, ④Tahan korosi, ⑤Tidak cocok untuk air panas >60°C atau tekanan sangat tinggi.',
       },
       {
         id: 8,
@@ -114,7 +114,7 @@ export const SET_CP06 = {
           'Mengecilkan pipa',
         ],
         ans: 0,
-        exp: 'Expander tool (エキスパンダー工具) melebarkan ujung pipa tembaga sehingga bisa dimasukkan ke pipa lain tanpa fitting tambahan — membentuk sambungan langsung pipe-to-pipe. Berbeda dengan swaging yang mengecilkan. Teknik ini menghemat biaya fitting dan mengurangi titik bocor potensial.',
+        exp: 'Expander tool (エキスパンダー工具《こうぐ》) melebarkan ujung pipa tembaga sehingga bisa dimasukkan ke pipa lain tanpa fitting tambahan — membentuk sambungan langsung pipe-to-pipe. Berbeda dengan swaging yang mengecilkan. Teknik ini menghemat biaya fitting dan mengurangi titik bocor potensial.',
       },
       {
         id: 10,
@@ -137,7 +137,7 @@ export const SET_CP06 = {
           'Mengubah air menjadi air minum',
         ],
         ans: 2,
-        exp: 'Cooling tower (冷却塔/クーリングタワー) = perangkat yang membuang panas dari sistem chiller ke udara. Cara kerja: air panas dari condenser disemprotkan dari atas, bertemu udara dari bawah (atau samping), sebagian air menguap dan membawa panas keluar. Efisiensi tergantung temperatur bola basah (wet bulb) udara.',
+        exp: 'Cooling tower (冷却塔《れいきゃくとう》/クーリングタワー) = perangkat yang membuang panas dari sistem chiller ke udara. Cara kerja: air panas dari condenser disemprotkan dari atas, bertemu udara dari bawah (atau samping), sebagian air menguap dan membawa panas keluar. Efisiensi tergantung temperatur bola basah (wet bulb) udara.',
       },
       {
         id: 12,
@@ -146,7 +146,7 @@ export const SET_CP06 = {
         opts: ['ガラスウール', '耐火《たいか》パネルまたは耐火《たいか》塗料《とりょう》', 'プラスチック', '通常《つうじょう》の断熱材《だんねつざい》'],
         opts_id: ['Glass wool', 'Fire-resistant panel or coating', 'Plastik', 'Insulasi biasa'],
         ans: 1,
-        exp: 'Pekerjaan kompartemenisasi api (防火区画工事/bōka kukaku kōji) menggunakan bahan tahan api untuk membagi bangunan menjadi zona-zona yang mencegah penyebaran api. Bahan utama: concrete, bata tahan api, rock wool, fireproof board. Masing-masing zona dibatasi dengan 防火戸 (fire door).',
+        exp: 'Pekerjaan kompartemenisasi api (防火区画《ぼうかくかく》工事《らいふらいんこうじ》/bōka kukaku kōji) menggunakan bahan tahan api untuk membagi bangunan menjadi zona-zona yang mencegah penyebaran api. Bahan utama: concrete, bata tahan api, rock wool, fireproof board. Masing-masing zona dibatasi dengan 防火戸《ぼうかど》 (fire door).',
       },
       {
         id: 13,
@@ -160,7 +160,7 @@ export const SET_CP06 = {
           'Ketebalan',
         ],
         ans: 0,
-        exp: 'Inspection mirror / borescope (内面検査鏡) digunakan untuk melihat kondisi dalam pipa: korosi, kerak, serpihan las, atau benda asing yang tidak terlihat dari luar. Dipakai sebelum komisioning sistem atau saat troubleshoot. Benda asing dalam pipa bisa merusak valve atau pompa.',
+        exp: 'Inspection mirror / borescope (内面《ないめん》検査《けんさ》鏡) digunakan untuk melihat kondisi dalam pipa: korosi, kerak, serpihan las, atau benda asing yang tidak terlihat dari luar. Dipakai sebelum komisioning sistem atau saat troubleshoot. Benda asing dalam pipa bisa merusak valve atau pompa.',
       },
       {
         id: 14,
@@ -169,7 +169,7 @@ export const SET_CP06 = {
         opts: ['緊急停止《きんきゅうていし》スイッチ・アウトリガー', '色《いろ》', '任意《にんい》', '回転数《かいてんすう》'],
         opts_id: ['Emergency stop switch & outrigger', 'Warna', 'Bebas', 'Putaran'],
         ans: 0,
-        exp: 'Sebelum mengoperasikan aerial work platform (高所作業車), wajib cek: ①Emergency stop switch berfungsi (hentikan semua gerakan saat darurat), ②Outrigger/stabilizer dipasang dan terkunci (mencegah tipping), ③Batas beban, ④Alarm kemiringan. Operasikan hanya di permukaan yang keras dan rata.',
+        exp: 'Sebelum mengoperasikan aerial work platform (高所作業車《こうしょさぎょうしゃ》), wajib cek: ①Emergency stop switch berfungsi (hentikan semua gerakan saat darurat), ②Outrigger/stabilizer dipasang dan terkunci (mencegah tipping), ③Batas beban, ④Alarm kemiringan. Operasikan hanya di permukaan yang keras dan rata.',
       },
       {
         id: 15,
@@ -178,7 +178,7 @@ export const SET_CP06 = {
         opts: ['照度計《しょうどけい》', '騒音計《そうおんけい》', '温度計《おんどけい》', '酸素濃度計《さんそのうどけい》'],
         opts_id: ['Lux meter', 'Noise meter', 'Thermometer', 'Oxygen meter'],
         ans: 3,
-        exp: 'Alat wajib untuk mengukur kadar oksigen (酸素濃度) sebelum masuk manhole/confined space: oxygen meter atau gas detector multi-gas. Kadar O₂ normal: 21%. Aman: ≥18%. Berbahaya: <16%. Segera keluar jika alarm berbunyi. Ventilasi paksa sebelum masuk.',
+        exp: 'Alat wajib untuk mengukur kadar oksigen (酸素《さんそ》濃度《やくななじゅうごど》) sebelum masuk manhole/confined space: oxygen meter atau gas detector multi-gas. Kadar O₂ normal: 21%. Aman: ≥18%. Berbahaya: <16%. Segera keluar jika alarm berbunyi. Ventilasi paksa sebelum masuk.',
       },
       {
         id: 16,
@@ -187,7 +187,7 @@ export const SET_CP06 = {
         opts: ['普通《ふつう》の手袋《てぶくろ》', 'ヘルメットのみ', '耐《たい》アークフラッシュ衣服《いふく》', '安全靴《あんぜんぐつ》'],
         opts_id: ['Sarung tangan biasa', 'Hanya helm', 'Arc-rated clothing', 'Safety shoes'],
         ans: 2,
-        exp: 'Arc flash (アークフラッシュ) = ledakan cahaya dan panas ekstrem saat korsleting listrik tegangan tinggi. PPE wajib: arc-rated clothing (耐アークフラッシュ衣服) dari bahan FR (flame-resistant) dengan nilai cal/cm² sesuai hazard level. Pakaian biasa langsung terbakar. Tambahkan: face shield, sarung tangan listrik, safety shoes.',
+        exp: 'Arc flash (アークフラッシュ) = ledakan cahaya dan panas ekstrem saat korsleting listrik tegangan tinggi. PPE wajib: arc-rated clothing (耐《たい》アークフラッシュ衣服《いふく》) dari bahan FR (flame-resistant) dengan nilai cal/cm² sesuai hazard level. Pakaian biasa langsung terbakar. Tambahkan: face shield, sarung tangan listrik, safety shoes.',
       },
       {
         id: 17,
@@ -219,7 +219,7 @@ export const SET_CP06 = {
         opts: ['汚《よご》れただけ', 'ひび割《われ》れ・変形《へんけい》がある', '色《いろ》が薄《うす》くなった', '1年《ねん》使用《しよう》'],
         opts_id: ['Hanya kotor', 'Ada retak atau deformasi', 'Warnanya pudar', 'Dipakai 1 tahun'],
         ans: 1,
-        exp: 'Helm keselamatan WAJIB diganti jika: ①Ada retakan (ひび割れ), ②Deformasi/penyok (変形), ③Terkena benturan keras (meski tidak terlihat retak). Warna pudar atau kotor saja tidak cukup alasan ganti. Umur pakai umumnya 3-5 tahun meski tanpa benturan.',
+        exp: 'Helm keselamatan WAJIB diganti jika: ①Ada retakan (ひび割れ), ②Deformasi/penyok (変形《へんけい》), ③Terkena benturan keras (meski tidak terlihat retak). Warna pudar atau kotor saja tidak cukup alasan ganti. Umur pakai umumnya 3-5 tahun meski tanpa benturan.',
       },
       {
         id: 20,
@@ -228,7 +228,7 @@ export const SET_CP06 = {
         opts: ['防塵《ぼうじん》マスク（N95以上）', '耳栓《みみせん》', '安全靴《あんぜんぐつ》', '手袋《てぶくろ》'],
         opts_id: ['Dust mask (N95 atau lebih)', 'Earplug', 'Safety shoes', 'Sarung tangan'],
         ans: 0,
-        exp: 'PPE untuk pencegahan debu (粉じん対策): dust mask N95 atau lebih (DS2 atau DS3 dalam standar Jepang). N95 menyaring ≥95% partikel berdiameter ≥0.3μm termasuk serat glass wool dan asbes. Tanpa masker, partikel halus masuk ke paru-paru → silikosis atau asbestosis. Ganti masker secara berkala.',
+        exp: 'PPE untuk pencegahan debu (粉じん《ふんじん》対策《たいさく》): dust mask N95 atau lebih (DS2 atau DS3 dalam standar Jepang). N95 menyaring ≥95% partikel berdiameter ≥0.3μm termasuk serat glass wool dan asbes. Tanpa masker, partikel halus masuk ke paru-paru → silikosis atau asbestosis. Ganti masker secara berkala.',
       },
     ],
   };

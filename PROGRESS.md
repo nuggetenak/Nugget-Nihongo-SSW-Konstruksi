@@ -1,6 +1,6 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-17 (session 22 COMPLETE: P14 — 581 konsep→vocab; P15 — 1,092 usage added, vocab coverage 100%; vocab=1244 konsep=97 hukum=97)
+**Last updated:** 2026-05-17 (session 22: P14/P15 SELESAI + P8a item 2 DONE — csv/ ruby 21q+174exp annotated; total session 22 work complete)
 **Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
@@ -114,7 +114,7 @@ Files: `src/data/sets/csv/` → `src/data/sets/jac-mockup/`
 ### P8a — Ruby: standard question sets *(P7 dulu; P17 dulu untuk item 2)*
 Priority: JAC → jac-mockup → wt/wgl → quiz → wtv
 - [x] `sets/jac/`: 95 naked `q` + naked `exp`/`hint` — **DONE session 20** (jac-teori.js + jac-lifeline.js, 3-pass annotation, 0 naked remaining, syntax-checked)
-- [ ] `sets/jac-mockup/` (ex-csv): ~56 naked `q` + ~164 naked `exp`
+- [x] `sets/jac-mockup/` (ex-csv): ruby annotation done session 22 — 21 q + 174 exp annotated (pre-rename; content complete, await P17 for folder rename)
 - [x] `sets/wayground/teori/` + `lifeline/praktik/`: **DONE session 20** — 0 naked found (already clean pre-session)
 - [x] `sets/quiz/`: **DONE session 20** (doboku-01~03, kenchiku-01~03 — 104 fields annotated, 0 naked remaining, syntax-checked)
 - [x] `sets/wayground/vocab/wtv01.js`: **DONE session 20** — 0 naked found (already clean pre-session)
