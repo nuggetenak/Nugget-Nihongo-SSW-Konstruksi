@@ -14,7 +14,7 @@ export const SET_CP04 = {
         id: 1,
         q: '硬質《こうしつ》ウレタンフォームの主な用途《ようと》は？',
         hint: 'Kegunaan utama rigid polyurethane foam adalah?',
-        opts: ['耐火材《たいかざい》', '断熱材（吹付け）', '塗料《とりょう》', '接着剤《せっちゃくざい》'],
+        opts: ['耐火材《たいかざい》', '断熱材《だんねつざい》（吹付《ふきつけ》け）', '塗料《とりょう》', '接着剤《せっちゃくざい》'],
         opts_id: ['Bahan tahan api', 'Insulasi semprot', 'Cat', 'Lem'],
         ans: 1,
         exp: 'Rigid polyurethane foam (硬質《こうしつ》ポリウレタンフォーム/硬質《こうしつ》ウレタンフォーム) = foam insulasi yang disemprotkan dan mengeras. Digunakan sebagai spray foam insulation untuk menutup celah, insulasi duct bentuk tidak beraturan, atau insulasi dinding cold storage. Nilai R yang sangat baik.',

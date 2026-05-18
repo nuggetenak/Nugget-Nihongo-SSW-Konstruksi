@@ -171,7 +171,7 @@ export const SET_CT01 = {
       {
         id: 13,
         q: '水道法《すいどうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
-        hint: 'Tujuan yang benar dari Water Supply Act (水道法) adalah?',
+        hint: 'Tujuan yang benar dari Water Supply Act (水道法《すいどうほう》) adalah?',
         opts: ['清潔《せいけつ》で安全《あんぜん》な飲料水《いんりょうすい》を安定的《あんていてき》に供給《きょうきゅう》すること', '建設工事《けんせつこうじ》の費用《ひよう》を削減《さくげん》すること', '下水《げすい》を処理《しょり》して河川《かせん》を守《まも》ること', '電力《でんりょく》を安定供給《あんていきょうきゅう》すること'],
         opts_id: [
           'Menyediakan air minum yang bersih, aman, dan stabil',
@@ -236,7 +236,7 @@ export const SET_CT01 = {
       {
         id: 18,
         q: '建設現場《けんせつげんば》における「労災保険《ろうさいほけん》」の保険料《ほけんりょう》を支払う義務《ぎむ》があるのはだれか。',
-        hint: 'Siapa yang berkewajiban membayar premi asuransi kecelakaan kerja (労災保険) di site konstruksi?',
+        hint: 'Siapa yang berkewajiban membayar premi asuransi kecelakaan kerja (労災保険《ろうさいほけん》) di site konstruksi?',
         opts: ['労働者《ろうどうしゃ》が全額《ぜんがく》負担《ふたん》する', '労働者《ろうどうしゃ》と使用者《しようしゃ》が半分《はんぶん》ずつ負担《ふたん》する', '政府《せいふ》が全額《ぜんがく》負担《ふたん》する', '事業主（使用者）が全額《ぜんがく》負担《ふたん》する'],
         opts_id: [
           'Pekerja menanggung seluruh biaya',

@@ -55,7 +55,7 @@ export const SET_CT06 = {
       {
         id: 4,
         q: '電気事業法《でんきじぎょうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
-        hint: 'Tujuan yang benar dari Electricity Business Act (電気事業法) adalah?',
+        hint: 'Tujuan yang benar dari Electricity Business Act (電気事業法《でんきじぎょうほう》) adalah?',
         opts: [
           '電気《でんき》の安全《あんぜん》な供給《きょうきゅう》と電気設備《でんきせつび》の保安《ほあん》を確保《かくほ》すること',
           '電気料金《でんきりょうきん》を決めること',
@@ -74,7 +74,7 @@ export const SET_CT06 = {
       {
         id: 5,
         q: '建築工事《けんちくこうじ》に該当《がいとう》するものはどれか。',
-        hint: 'Yang termasuk pekerjaan bangunan (建築工事) adalah?',
+        hint: 'Yang termasuk pekerjaan bangunan (建築工事《けんちくこうじ》) adalah?',
         opts: ['ダムを造《つく》る', '給水管《きゅうすいかん》を取《と》り付《つ》ける', '道路《どうろ》を造《つく》る', '住宅《じゅうたく》を建《た》てる'],
         opts_id: [
           'Membuat bendungan',
@@ -182,7 +182,7 @@ export const SET_CT06 = {
       {
         id: 12,
         q: '36協定《さぶろく協定》について正しいものはどれか。',
-        hint: 'Pernyataan yang benar tentang 36 Agreement (36協定) adalah?',
+        hint: 'Pernyataan yang benar tentang 36 Agreement (36協定《さぶろくきょうてい》) adalah?',
         opts: [
           '36協定《きょうてい》があれば残業時間《ざんぎょうじかん》の制限《せいげん》はない',
           '36協定《きょうてい》は労働者《ろうどうしゃ》と使用者《しようしゃ》が結ぶ時間外労働《じかんがいろうどう》に関する協定《きょうてい》',
@@ -294,7 +294,7 @@ export const SET_CT06 = {
       {
         id: 20,
         q: '建築基準法《けんちくきじゅんほう》の主な目的《もくてき》として正《ただ》しいものはどれか。',
-        hint: 'Tujuan utama Building Standards Act (建築基準法) yang benar adalah?',
+        hint: 'Tujuan utama Building Standards Act (建築基準法《けんちくきじゅんほう》) yang benar adalah?',
         opts: [
           '建設業者《けんせつぎょうしゃ》の資質《ししつ》を高めること',
           '建設工事《けんせつこうじ》の費用《ひよう》を管理《かんり》すること',

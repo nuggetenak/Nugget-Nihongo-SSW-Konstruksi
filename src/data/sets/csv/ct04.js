@@ -13,7 +13,7 @@ export const SET_CT04 = {
       {
         id: 1,
         q: '建設現場《けんせつげんば》で「感電《かんでん》」を防ぐための基本的《きほんてき》な対策《たいさく》として正《ただ》しいものはどれか。',
-        hint: 'Tindakan dasar yang benar untuk mencegah sengatan listrik (感電/kanden) di site konstruksi adalah?',
+        hint: 'Tindakan dasar yang benar untuk mencegah sengatan listrik (感電《かんでん》/kanden) di site konstruksi adalah?',
         opts: [
           '電動工具《でんどうこうぐ》を濡《ぬ》れた手で使う',
           '電動工具《でんどうこうぐ》を使う前に絶縁抵抗《ぜつえんていこう》を確認《かくにん》する',
@@ -41,7 +41,7 @@ export const SET_CT04 = {
       {
         id: 3,
         q: '土木工事《どぼくこうじ》に該当《がいとう》するものはどれか。',
-        hint: 'Yang termasuk pekerjaan sipil (土木工事) adalah?',
+        hint: 'Yang termasuk pekerjaan sipil (土木工事《どぼくこうじ》) adalah?',
         opts: ['住宅《じゅうたく》を建《た》てる', 'エアコンを設置《せっち》する', '道路《どうろ》を造《つく》る', '消火器《しょうかき》を設置《せっち》する'],
         opts_id: [
           'Membangun rumah tinggal',
@@ -214,7 +214,7 @@ export const SET_CT04 = {
       {
         id: 15,
         q: '建設業法《けんせつぎょうほう》の主な目的《もくてき》はどれか。',
-        hint: 'Tujuan utama Construction Business Act (建設業法) adalah?',
+        hint: 'Tujuan utama Construction Business Act (建設業法《けんせつぎょうほう》) adalah?',
         opts: [
           '建設工事《けんせつこうじ》の費用《ひよう》を決めること',
           '建設業《けんせつぎょう》を営《いとな》む者の資質《ししつ》の向上《こうじょう》と工事《こうじ》の適正施工《てきせいせこう》の確保《かくほ》',

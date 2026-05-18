@@ -226,7 +226,7 @@ export const SET_CP05 = {
         id: 19,
         q: '断熱材《だんねつざい》の「外被材《がいひざい》」として屋内用《おくないよう》に適《てき》したものは？',
         hint: 'Bahan outer cover insulasi yang cocok untuk indoor adalah?',
-        opts: ['アルミガラス布（ALGC）', 'ガルバリウム', '紙《かみ》', '薄鋼板《うすこうはん》'],
+        opts: ['アルミガラス布《ぬの》（ALGC）', 'ガルバリウム', '紙《かみ》', '薄鋼板《うすこうはん》'],
         opts_id: ['Aluminium glass cloth', 'Galvalume', 'Kertas', 'Thin steel sheet'],
         ans: 0,
         exp: 'ALGC (Aluminium Glass Cloth = アルミガラス布《ぬの》) adalah bahan outer cover insulasi untuk indoor: kombinasi foil aluminium + kain serat kaca. Lebih ringan dari steel sheet, tahan api, mudah dipasang, dan estetis. Untuk outdoor tidak direkomendasikan karena tidak tahan hujan/UV jangka panjang.',

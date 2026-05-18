@@ -198,7 +198,7 @@ export const SET_CT05 = {
       {
         id: 16,
         q: '施工管理《せこうかんり》の4大管理《だいかんり》として正《ただ》しい組《く》み合《あわ》わせはどれか。',
-        hint: 'Kombinasi yang benar dari 4 pilar manajemen konstruksi (施工管理) adalah?',
+        hint: 'Kombinasi yang benar dari 4 pilar manajemen konstruksi (施工管理《せこうかんり》) adalah?',
         opts: [
           '設計《せっけい》・発注《はっちゅう》・施工《せこう》・検査《けんさ》',
           '品質《ひんしつ》・工程《こうてい》・安全《あんぜん》・原価《げんか》',
@@ -371,7 +371,7 @@ export const SET_CT05 = {
       {
         id: 28,
         q: '消防法《しょうぼうほう》の目的《もくてき》として正《ただ》しいものはどれか。',
-        hint: 'Tujuan yang benar dari Fire Service Act (消防法) adalah?',
+        hint: 'Tujuan yang benar dari Fire Service Act (消防法《しょうぼうほう》) adalah?',
         opts: [
           '消防署員《しょうぼうしょいん》の給与《きゅうよ》を定めること',
           '火災《かさい》や地震《じしん》の被害《ひがい》を軽減《けいげん》し、安全《あんぜん》を確保《かくほ》すること',

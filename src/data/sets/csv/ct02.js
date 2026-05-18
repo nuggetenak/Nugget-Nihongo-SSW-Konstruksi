@@ -123,7 +123,7 @@ export const SET_CT02 = {
       {
         id: 11,
         q: '元請負業者《もとうけおいぎょうしゃ》の説明《せつめい》として正《ただ》しいものはどれか。',
-        hint: 'Penjelasan yang benar tentang kontraktor utama (元請負業者) adalah?',
+        hint: 'Penjelasan yang benar tentang kontraktor utama (元請負業者《もとうけおいぎょうしゃ》) adalah?',
         opts: ['発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》', '元請負業者《もとうけおいぎょうしゃ》から仕事《しごと》を受《う》ける業者《ぎょうしゃ》', '工事《こうじ》の設計《せっけい》のみを担当《たんとう》する業者《ぎょうしゃ》', '工事現場《こうじげんば》の清掃《せいそう》を担当《たんとう》する業者《ぎょうしゃ》'],
         opts_id: [
           'Perusahaan yang menerima proyek langsung dari pemberi proyek',
@@ -257,7 +257,7 @@ export const SET_CT02 = {
       {
         id: 22,
         q: '以下《いか》の文章《ぶんしょう》のに入《はい》る言葉《ことば》を選《えら》びなさい。築炉《ちくろ》とは、電気炉《でんきろ》など、高温《こうおん》になる内側《うちがわ》を、で構築《こうちく》する工事《らいふらいんこうじ》のことである。',
-        hint: 'Pekerjaan furnace (築炉) adalah membangun bagian dalam tungku suhu tinggi dengan ( ).',
+        hint: 'Pekerjaan furnace (築炉《ちくろ》) adalah membangun bagian dalam tungku suhu tinggi dengan ( ).',
         opts: ['保冷材《ほれいざい》', '断熱材《だんねつざい》', '保温材《ほおんざい》', '耐火物《たいかぶつ》'],
         opts_id: [
           'Bahan insulasi dingin',
@@ -308,7 +308,7 @@ export const SET_CT02 = {
       {
         id: 26,
         q: '特定技能《とくていぎのう》在留資格《ざいりゅうしかく》を取得《しゅとく》するために必要《ひつよう》な要件《ようけん》として正《ただ》しいものはどれか。',
-        hint: 'Persyaratan yang benar untuk mendapatkan status tinggal Keterampilan Khusus (特定技能) adalah?',
+        hint: 'Persyaratan yang benar untuk mendapatkan status tinggal Keterampilan Khusus (特定技能《とくていぎのう》) adalah?',
         opts: ['日本語能力試験（JLPT）N1に合格《ごうかく》していること', '日本語試験《にほんごしけん》と分野別技能評価試験《ぶんやべつぎのうひょうかしけん》に合格《ごうかく》していること', '日本《にほん》の大学《だいがく》を卒業《そつぎょう》していること', '日本語能力試験（JLPT）N3に合格《ごうかく》していること'],
         opts_id: [
           'Lulus JLPT N1',

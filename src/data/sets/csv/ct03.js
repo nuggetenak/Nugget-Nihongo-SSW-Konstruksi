@@ -301,7 +301,7 @@ export const SET_CT03 = {
       {
         id: 23,
         q: 'ガス事業法《じぎょうほう》の主な目的《もくてき》として正《ただ》しいものはどれか。',
-        hint: 'Tujuan utama Gas Business Act (ガス事業法) yang benar adalah?',
+        hint: 'Tujuan utama Gas Business Act (ガス事業法《じぎょうほう》) yang benar adalah?',
         opts: [
           'ガスの価格《かかく》を決めること',
           'ガス工事業者《こうじぎょうしゃ》の数《かず》を増やすこと',
@@ -348,7 +348,7 @@ export const SET_CT03 = {
       {
         id: 26,
         q: '建設現場《けんせつげんば》での「墜落制止用器具《ついらくせいしようきぐ》」（安全帯《あんぜんたい》）のフックは、どの位置《いち》に取り付け《とりつけ》るべきか。',
-        hint: 'Di posisi mana seharusnya hook dari alat pencegah jatuh (安全帯) dipasang?',
+        hint: 'Di posisi mana seharusnya hook dari alat pencegah jatuh (安全帯《あんぜんたい》) dipasang?',
         opts: [
           '腰《こし》より低い位置《いち》',
           '腰《こし》と同じ高さの位置《いち》',
