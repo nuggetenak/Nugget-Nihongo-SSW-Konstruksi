@@ -74,10 +74,10 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── cards.js                ← CARDS[1443 on main; 1,438 on content-dq — 5 dup cards deleted pre-merge, see HANDOFF.md]
     │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
     │   │                              cards-doboku/kenchiku (empty stubs)
-    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + doboku + kenchiku
+    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + jac-mockup + doboku + kenchiku
     │   ├── jac-teori.js / jac-lifeline.js / jac-official.js
     │   ├── jac-doboku.js / jac-kenchiku.js   ← empty stubs (future 実技 content)
-    │   ├── wayground-sets.js / csv-sets.js    ← source sets (imported by quiz-sets.js)
+    │   ├── wayground-sets.js / jac-mockup-sets.js (ex-csv-sets.js, renamed P17)    ← source sets (imported by quiz-sets.js)
     │   ├── angka-kunci.js          ← 29 entries
     │   ├── confusion-pairs.js      ← 28 pairs
     │   ├── danger-pairs.js         ← 20 pairs
@@ -191,7 +191,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
 | `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
 | `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
-| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + CSV_SETS + DOBOKU_SETS + KENCHIKU_SETS (44 sets total); getQuizSetsForTrack() helper; doboku/kenchiku sets inlined here (REF-9 v4.21.0, renamed P20) |
+| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS + DOBOKU_SETS + KENCHIKU_SETS (44 sets total); getQuizSetsForTrack() helper; doboku/kenchiku sets inlined here (REF-9 v4.21.0, renamed P20; CSV_SETS→JAC_MOCKUP_SETS renamed P17) |
 | `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
 | `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
 | `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
@@ -234,7 +234,8 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
-| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd) — owner requested a redesign for a multi-agent relay workflow (upload/download one .md per agent handoff). Consolidated SESSION_PROMPT.md + DATA_QUALITY_HANDOFF_v18.md + PROGRESS.md's active checklist into one file, `HANDOFF.md`, always edited in place (no version numbers); all three archived. Added `scripts/verify-content.mjs` — dependency-free, catches syntax corruption and count mismatches without needing the main-branch build pipeline; confirmed it correctly flags the still-open id=82/83/186/188/201 corruption and correctly passes on a fixed test copy. Updated README-CONTENT-DQ.md + this file's own header/tree-comment to point at HANDOFF.md instead of the now-archived files. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 3) — owner answered OD-1 (merge), OD-2 (now), OD-3 (now) via quick tappable choices. Fixed the id=82/83/186/188/201 corruption (verify script now exits 0). Executed P17: sets/csv/→sets/jac-mockup/, ct*/cp*→jmt*/jml*, source unified to 'jac-mockup', titles/ids/export-names per CARD_CONTENT_SPEC.md §1.4. Also updated csv-sets.js→jac-mockup-sets.js (the actual monolith the running app consumes via quiz-sets.js — not just the split files, which was a scope gap the task list didn't make obvious) + quiz-sets.js + index.js + viewer.html + this file + README-CONTENT-DQ.md reference updates. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 2) — owner requested a redesign for a multi-agent relay workflow (upload/download one .md per agent handoff). Consolidated SESSION_PROMPT.md + DATA_QUALITY_HANDOFF_v18.md + PROGRESS.md's active checklist into one file, `HANDOFF.md`, always edited in place (no version numbers); all three archived. Added `scripts/verify-content.mjs` — dependency-free, catches syntax corruption and count mismatches without needing the main-branch build pipeline; confirmed it correctly flags the still-open id=82/83/186/188/201 corruption and correctly passes on a fixed test copy. Updated README-CONTENT-DQ.md + this file's own header/tree-comment to point at HANDOFF.md instead of the now-archived files. (Note: this row was briefly overwritten by mistake instead of added as a new row, then restored — same class of editing slip as the ADM10-13 duplication earlier this session, caught the same way, by reviewing the diff before trusting it.) |
 | 2026-07-11 | content-dq | Agent Claude: session 23 ADMIN sync — HANDOFF v17→v18 (10 commits/2 sessions stale); SESSION_PROMPT rewrite; README-CONTENT-DQ.md 3× dangling v16 refs fixed; PROGRESS.md ref bump; this session-log gap (sessions 19–22 were missing — ADM10–13 below were already logged, my mistake initially claiming otherwise) backfilled; v16+v17 archived to docs/archive/; cards.js header comment fixed (1443→1438); found (not fixed) type-field corruption in 5 source/ mirror records — see HANDOFF v18 §1D |
 | 2026-05-18 | content-dq | Sonnet 4.6: session 22 — P14/P15 SELESAI (581 konsep→vocab, 1092 usage added, 100% vocab coverage); P8a item 2 sets/csv/ ruby+hint+opts (0 naked remaining) |
 | 2026-05-16 | content-dq | Sonnet 4.6: session 21 — HANDOFF v16→v17 sync (card count, source counts, known-issues, codebase state, session log 18–20) |

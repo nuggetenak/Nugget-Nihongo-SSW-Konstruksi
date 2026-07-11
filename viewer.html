@@ -267,7 +267,7 @@ async function loadData() {
 
   const [cards, csv, wayground, quiz, jacT, jacL] = await Promise.all([
     loadJS('cards.js'),
-    loadJS('csv-sets.js'),
+    loadJS('jac-mockup-sets.js'),
     loadJS('wayground-sets.js'),
     loadJS('quiz-sets.js'),
     loadJS('jac-teori.js'),
@@ -276,8 +276,8 @@ async function loadData() {
 
   DATA.cards = cards?.CARDS || [];
 
-  // CSV_SETS: array of sets each with .questions[]
-  const csvRaw = csv?.CSV_SETS || [];
+  // JAC_MOCKUP_SETS: array of sets each with .questions[]
+  const csvRaw = csv?.JAC_MOCKUP_SETS || [];
   DATA.csv = Object.values(
     csvRaw.reduce((acc, s) => { const k = s.set||s.id||'?'; if(!acc[k]) acc[k]={id:k,questions:[]}; acc[k].questions.push(s); return acc; }, {})
   );

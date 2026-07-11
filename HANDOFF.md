@@ -43,14 +43,20 @@ from the clone. Don't duplicate their content into this file; link to them.
 
 ## CURRENT STATE
 
-**As of commit (this fix), 2026-07-11 (session 23, cont'd).** Verify before trusting past this
-point — this line doesn't update itself.
+**As of this edit, 2026-07-11 (session 23, cont'd).** Verify before trusting past this point —
+this line doesn't update itself.
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
 - P0–P5, P7, P9, P14, P15, P8a: all done
-- **`type` field corruption (id=82,83,186,188,201) — FIXED.** `scripts/verify-content.mjs` now
-  passes clean (exit 0) — all 72 checked leaf files parse, `cards.js` / `source/` mirrors / split
-  files all agree at 1,438. Was open earlier this session; see git log for the fix commit.
+- `type` field corruption (id=82,83,186,188,201): **fixed**, verify script exits 0
+- **Owner answered OD-1/OD-2/OD-3 (2026-07-11):** OD-1 → merge deprecated sources into
+  `vocab-supplementary`. OD-2 → split wglv now. OD-3 → rename jac-mockup now.
+- **P17 done:** `sets/csv/` → `sets/jac-mockup/`, `ct*/cp*` → `jmt*/jml*`, source unified to
+  `'jac-mockup'`, titles/ids/export-names updated. Also touched (not just the split files):
+  the monolith `csv-sets.js` → `jac-mockup-sets.js` (this is what the app actually runs —
+  `quiz-sets.js` imports from the monolith, not the split files directly) plus `quiz-sets.js`,
+  `index.js`, `viewer.html` reference updates. Verify script confirms all files still parse.
+- P6/P13, P16 (+ dependents P8b/P10/P11): now unblocked, in progress or queued this session
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -65,7 +71,6 @@ one" list — check the gate before starting.
 | Task | Depends on | What |
 |---|---|---|
 | P16 | OD-2 | Split `wglv01–05` into `wglv-jp-*` (JP→ID) and `wglv-id-*` (ID→JP); reset ids; update exports; delete old files |
-| P17 | OD-3 | Rename `sets/csv/` → `sets/jac-mockup/`; `ct/cp` files → `jmt/jml`; update id/title/source/export-const-names/references. Content is already 100% clean, this is a pure rename. |
 | P8b | P16 first | wglv-jp: naked `q`/`exp`. wglv-id: naked `hint`/`opts` |
 | P10 | P16 first, OD-4 for hint direction | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
 | P11 | P16 first | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
@@ -92,13 +97,13 @@ one" list — check the gate before starting.
 
 ## OPEN DECISIONS
 
-| ID | Blocks | Question |
-|----|--------|----------|
-| OD-1 | P6, P13 | Source labels: retain legacy vs merge into `vocab-supplementary`? |
-| OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? |
-| OD-3 | P17 | jac-mockup rename: now or at merge time? |
-| OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? |
-| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) |
+| ID | Blocks | Question | Status |
+|----|--------|----------|--------|
+| OD-1 | P6, P13 | Source labels: retain legacy vs merge into `vocab-supplementary`? | ✅ Answered 2026-07-11: merge |
+| OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? | ✅ Answered 2026-07-11: now |
+| OD-3 | P17 | jac-mockup rename: now or at merge time? | ✅ Answered 2026-07-11: now — P17 done |
+| OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | Open |
+| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | Open — doesn't block anything until merge time (P12), not urgent |
 
 Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
 

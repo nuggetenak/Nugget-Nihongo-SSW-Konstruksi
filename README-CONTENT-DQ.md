@@ -17,11 +17,11 @@ src/data/                        ← all content files (edit here)
     cards-kenchiku.js (stub)
   cards.js                       ← AUTO-GENERATED — do not edit
   categories.js                  ← taxonomy — edit only if adding new categories
-  csv-sets.js                    ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/csv/*.js
+  jac-mockup-sets.js             ← ⚠️ LEGACY MONOLITHIC (ex-csv-sets.js, renamed P17) — for routine content edits, use sets/jac-mockup/*.js instead, gets rebuilt into this file at merge time. EXCEPTION: structural changes (renames, field-name changes) must touch both layers immediately, same as this P17 rename did — a stale monolith breaks the running app right away, unlike a routine content fix which just waits for the next rebuild.
   wayground-sets.js              ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/wayground/**/*.js
   quiz-sets.js                   ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/quiz/*.js
   sets/                          ← ✅ WORKING SPLIT FILES — edit these
-    csv/    cp01–cp06.js, ct01–ct06.js
+    jac-mockup/  jml01–jml06.js, jmt01–jmt06.js  (renamed P17, ex sets/csv/ cp*/ct*)
     wayground/
       teori/      wt01–wt10.js
       vocab/      wtv01.js

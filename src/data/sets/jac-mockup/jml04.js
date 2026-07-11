@@ -1,13 +1,13 @@
-// cp04.js — CSV Set: cp04
-// Part of content-dq branch. Merge into csv-sets.js on main.
-export const SET_CP04 = {
-    id: 'cp04',
-    title: 'CSV Praktik 04 · 20qs',
+// jml04.js — JAC Mockup Set: jml04
+// Part of content-dq branch. Merge into jac-mockup-sets.js on main.
+export const SET_JML04 = {
+    id: 'jml04',
+    title: 'JAC Mockup Praktik 04 · 20qs',
     subtitle: 'Soal Praktik Paket 04',
     emoji: '🛠️',
     color: '#4ade80',
     grad: 'linear-gradient(135deg,#14532d,#4ade80)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {

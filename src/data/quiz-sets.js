@@ -1,10 +1,10 @@
 // quiz-sets.js — All question sets, single source of truth.
 // track: 'common'   = Teori (Ch.1-4, all 3 tracks see this)
-// track: 'lifeline' = Praktik Lifeline + CSV Lifeline
+// track: 'lifeline' = Praktik Lifeline + JAC Mockup Lifeline
 // track: 'doboku'   = Praktik Sipil (Doboku track)
 // track: 'kenchiku' = Praktik Bangunan (Kenchiku track)
 import { WAYGROUND_SETS } from './wayground-sets.js';
-import { CSV_SETS } from './csv-sets.js';
+import { JAC_MOCKUP_SETS } from './jac-mockup-sets.js';
 
 // ── Sipil sets ───────────────────────────────────────────────────────────────
 const DOBOKU_SETS = [
@@ -898,7 +898,7 @@ const KENCHIKU_SETS = [
 const DOBOKU_WITH_TRACK = DOBOKU_SETS.map(s => ({ ...s, track: 'doboku' }));
 const KENCHIKU_WITH_TRACK = KENCHIKU_SETS.map(s => ({ ...s, track: 'kenchiku' }));
 
-export const QUIZ_SETS = [...WAYGROUND_SETS, ...CSV_SETS, ...DOBOKU_WITH_TRACK, ...KENCHIKU_WITH_TRACK];
+export const QUIZ_SETS = [...WAYGROUND_SETS, ...JAC_MOCKUP_SETS, ...DOBOKU_WITH_TRACK, ...KENCHIKU_WITH_TRACK];
 
 export const getQuizSetsForTrack = (track) =>
   QUIZ_SETS.filter((s) => s.track === 'common' || s.track === track);

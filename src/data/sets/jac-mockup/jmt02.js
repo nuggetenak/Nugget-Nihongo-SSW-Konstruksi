@@ -1,13 +1,13 @@
-// ct02.js — CSV Set: ct02
-// Part of content-dq branch. Merge into csv-sets.js on main.
-export const SET_CT02 = {
-    id: 'ct02',
-    title: 'CSV Teori 02 · 30qs',
+// jmt02.js — JAC Mockup Set: jmt02
+// Part of content-dq branch. Merge into jac-mockup-sets.js on main.
+export const SET_JMT02 = {
+    id: 'jmt02',
+    title: 'JAC Mockup Teori 02 · 30qs',
     subtitle: 'Soal Teori Paket 02',
     emoji: '📋',
     color: '#ef4444',
     grad: 'linear-gradient(135deg,#991b1b,#ef4444)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {

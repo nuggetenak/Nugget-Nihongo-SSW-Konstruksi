@@ -1,16 +1,16 @@
-// csv-sets.js — 300 soal SSW Konstruksi Setsubi dari CSV
-// 6 Teori sets (ct01-ct06) + 6 Praktik sets (cp01-cp06)
+// jac-mockup-sets.js — 300 soal SSW Konstruksi Setsubi dari CSV
+// 6 Teori sets (jmt01-jmt06) + 6 Praktik sets (jml01-jml06)
 // ans field is 0-BASED (A=0, B=1, C=2, D=3)
 
-export const CSV_SETS = [
+export const JAC_MOCKUP_SETS = [
   {
-    id: 'cp01',
-    title: 'CSV Praktik 01 · 20qs',
+    id: 'jml01',
+    title: 'JAC Mockup Praktik 01 · 20qs',
     subtitle: 'Soal Praktik Paket 01',
     emoji: '🛠️',
     color: '#fb923c',
     grad: 'linear-gradient(135deg,#9a3412,#fb923c)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {
@@ -256,13 +256,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'ct01',
-    title: 'CSV Teori 01 · 30qs',
+    id: 'jmt01',
+    title: 'JAC Mockup Teori 01 · 30qs',
     subtitle: 'Soal Teori Paket 01',
     emoji: '📋',
     color: '#f97316',
     grad: 'linear-gradient(135deg,#9a3412,#f97316)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {
@@ -708,13 +708,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'cp02',
-    title: 'CSV Praktik 02 · 20qs',
+    id: 'jml02',
+    title: 'JAC Mockup Praktik 02 · 20qs',
     subtitle: 'Soal Praktik Paket 02',
     emoji: '🛠️',
     color: '#f87171',
     grad: 'linear-gradient(135deg,#991b1b,#f87171)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {
@@ -930,13 +930,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'ct02',
-    title: 'CSV Teori 02 · 30qs',
+    id: 'jmt02',
+    title: 'JAC Mockup Teori 02 · 30qs',
     subtitle: 'Soal Teori Paket 02',
     emoji: '📋',
     color: '#ef4444',
     grad: 'linear-gradient(135deg,#991b1b,#ef4444)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {
@@ -1347,13 +1347,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'cp03',
-    title: 'CSV Praktik 03 · 20qs',
+    id: 'jml03',
+    title: 'JAC Mockup Praktik 03 · 20qs',
     subtitle: 'Soal Praktik Paket 03',
     emoji: '🛠️',
     color: '#fde047',
     grad: 'linear-gradient(135deg,#854d0e,#fde047)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {
@@ -1574,13 +1574,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'ct03',
-    title: 'CSV Teori 03 · 30qs',
+    id: 'jmt03',
+    title: 'JAC Mockup Teori 03 · 30qs',
     subtitle: 'Soal Teori Paket 03',
     emoji: '📋',
     color: '#eab308',
     grad: 'linear-gradient(135deg,#854d0e,#eab308)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {
@@ -2001,13 +2001,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'cp04',
-    title: 'CSV Praktik 04 · 20qs',
+    id: 'jml04',
+    title: 'JAC Mockup Praktik 04 · 20qs',
     subtitle: 'Soal Praktik Paket 04',
     emoji: '🛠️',
     color: '#4ade80',
     grad: 'linear-gradient(135deg,#14532d,#4ade80)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {
@@ -2218,13 +2218,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'ct04',
-    title: 'CSV Teori 04 · 30qs',
+    id: 'jmt04',
+    title: 'JAC Mockup Teori 04 · 30qs',
     subtitle: 'Soal Teori Paket 04',
     emoji: '📋',
     color: '#22c55e',
     grad: 'linear-gradient(135deg,#14532d,#22c55e)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {
@@ -2645,13 +2645,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'cp05',
-    title: 'CSV Praktik 05 · 20qs',
+    id: 'jml05',
+    title: 'JAC Mockup Praktik 05 · 20qs',
     subtitle: 'Soal Praktik Paket 05',
     emoji: '🛠️',
     color: '#60a5fa',
     grad: 'linear-gradient(135deg,#1e3a5f,#60a5fa)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {
@@ -2897,13 +2897,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'ct05',
-    title: 'CSV Teori 05 · 30qs',
+    id: 'jmt05',
+    title: 'JAC Mockup Teori 05 · 30qs',
     subtitle: 'Soal Teori Paket 05',
     emoji: '📋',
     color: '#3b82f6',
     grad: 'linear-gradient(135deg,#1e3a5f,#3b82f6)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {
@@ -3319,13 +3319,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'cp06',
-    title: 'CSV Praktik 06 · 20qs',
+    id: 'jml06',
+    title: 'JAC Mockup Praktik 06 · 20qs',
     subtitle: 'Soal Praktik Paket 06',
     emoji: '🛠️',
     color: '#c084fc',
     grad: 'linear-gradient(135deg,#581c87,#c084fc)',
-    source: 'csv-praktik',
+    source: 'jac-mockup',
     track: 'lifeline',
     questions: [
       {
@@ -3561,13 +3561,13 @@ export const CSV_SETS = [
     ],
   },
   {
-    id: 'ct06',
-    title: 'CSV Teori 06 · 30qs',
+    id: 'jmt06',
+    title: 'JAC Mockup Teori 06 · 30qs',
     subtitle: 'Soal Teori Paket 06',
     emoji: '📋',
     color: '#a855f7',
     grad: 'linear-gradient(135deg,#581c87,#a855f7)',
-    source: 'csv-teori',
+    source: 'jac-mockup',
     track: 'common',
     questions: [
       {
