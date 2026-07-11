@@ -1,10 +1,13 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-14 — ADM13: last pass — file path fixes (C1/C2), C2 table row 619, OD-4, hash sync
-> **Version:** v4.22.0 · **Status:** content-dq DQ ACTIVE — see PROGRESS.md
-> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
+> **Last updated:** 2026-07-11 — session 23 ADMIN sync: session log below caught up — sessions 19–22 were missing (ADM10–13 were already logged correctly; my first pass at this file wrongly assumed they were missing too and duplicated them, caught in review before commit)
+> **Version:** v4.22.0 · **Status:** content-dq — DQ done for everything not gated on an owner decision; see `DATA_QUALITY_HANDOFF_v18.md`
+> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps (main branch only — not present on content-dq)
 > **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list
-> **Archive:** `docs/archive/ARCHIVE-INDEX.md` ← all historical docs
+> **Archive (main):** `docs/archive/ARCHIVE-INDEX.md` ← main branch's larger archive (proposals, TASK-v4.x files) — not present on content-dq
+> **Archive (content-dq):** this branch has its own smaller `docs/archive/` (superseded DQ handoffs only) — see that folder's own `ARCHIVE-INDEX.md`
+>
+> ⚠️ Much of this file (directory tree below, `package.json`, `scripts/`, `public/`, `.github/`, tests) describes the **full app / main branch**. On `content-dq` you only actually have `src/data/`, `docs/CARD_CONTENT_SPEC.md`, `docs/DATA_ARCH_AUDIT.md`, `docs/archive/`, `viewer.html`, and the admin docs at root — see `README-CONTENT-DQ.md` for the accurate content-dq-only file list.
 
 ---
 
@@ -68,7 +71,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     ├── types.js                    ← JSDoc typedefs (Card, SRSState, Tab, ToastItem)
     ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
     ├── data/
-    │   ├── cards.js                ← CARDS[1443] (assembled by merge-cards.mjs)
+    │   ├── cards.js                ← CARDS[1443 on main; 1,438 on content-dq — 5 dup cards deleted pre-merge, see PROGRESS.md P4]
     │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
     │   │                              cards-doboku/kenchiku (empty stubs)
     │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + doboku + kenchiku
@@ -231,6 +234,11 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-07-11 | content-dq | Agent Claude: session 23 ADMIN sync — HANDOFF v17→v18 (10 commits/2 sessions stale); SESSION_PROMPT rewrite; README-CONTENT-DQ.md 3× dangling v16 refs fixed; PROGRESS.md ref bump; this session-log gap (sessions 19–22 were missing — ADM10–13 below were already logged, my mistake initially claiming otherwise) backfilled; v16+v17 archived to docs/archive/; cards.js header comment fixed (1443→1438); found (not fixed) type-field corruption in 5 source/ mirror records — see HANDOFF v18 §1D |
+| 2026-05-18 | content-dq | Sonnet 4.6: session 22 — P14/P15 SELESAI (581 konsep→vocab, 1092 usage added, 100% vocab coverage); P8a item 2 sets/csv/ ruby+hint+opts (0 naked remaining) |
+| 2026-05-16 | content-dq | Sonnet 4.6: session 21 — HANDOFF v16→v17 sync (card count, source counts, known-issues, codebase state, session log 18–20) |
+| 2026-05-16 | content-dq | Sonnet 4.6: session 20 — integrity checks (1,438 IDs, no dups, mirrors ✅); P17 dirty state OPSI B; P8a items 1/3/4/5 done (sets/jac/, sets/quiz/, wayground, wtv01) |
+| 2026-05-15 | content-dq | Sonnet 4.6: session 19 — P0–P5,P7,P9: encoding fixes (id=476,773), 12 nested ruby, 62 jp ruby, 18 katakana ruby, ~140 naked jp parens, 10 naked desc, 52 id_text, 6 metadata, 5 duplicate cards deleted, 26 id_text disambiguated, P5-C 13 symbol fixes, 3 null angka-kunci fixed |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM13 — last pass: C1 file path (773→vocab-supplementary), C2 table row 619 added, SESSION_PROMPT OD-4, hash sync 319f2c8 |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM12 — recheck2: hash 319f2c8, type enum order, dangling v16 refs, §8 P6 ordering warning, _MAP ADM11 entry |
 | 2026-05-14 | content-dq | Sonnet 4.6: ADM11 — recheck: commit hash a9f9c94, P8a prereq note, SPEC §8 dependency order warning for P16/P17 |

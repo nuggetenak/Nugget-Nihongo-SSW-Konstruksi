@@ -9,10 +9,11 @@ git clone -b content-dq https://[token]@github.com/nuggetenak/Nugget-Nihongo-SSW
 
 ## KONTEKS SESI INI
 
-Baca DATA_QUALITY_HANDOFF_v17.md dan PROGRESS.md sebelum apapun.
+Baca DATA_QUALITY_HANDOFF_v18.md dulu — khususnya STATUS SUMMARY di paling atas
+dan WHAT'S ACTUALLY NEXT di paling bawah. Lalu PROGRESS.md.
 Canonical spec ada di docs/CARD_CONTENT_SPEC.md.
-Last commit: afe24e5
-⚠️ SESSION_PROMPT intentionally records one commit behind (self-referential limitation — see DATA_QUALITY_HANDOFF_v17.md)
+Last commit (sebelum sync ini): 81f7c8d
+⚠️ SESSION_PROMPT intentionally records one commit behind (self-referential limitation — see DATA_QUALITY_HANDOFF_v18.md)
 
 Tujuan branch content-dq: data hygiene, housekeeping, accuracy — sampai
 semua 1,438 cards dan 1,142 soal 100% akurat dan bersih.
@@ -20,32 +21,29 @@ semua 1,438 cards dan 1,142 soal 100% akurat dan bersih.
 
 ---
 
-## STATE SAAT INI (per session 20)
+## STATE SAAT INI (per session 22 + session 23 admin sync)
 
-**✅ SELESAI s/d session 20:**
+**✅ SELESAI:**
 - P0–P5, P7, P9: semua done (lihat PROGRESS.md)
-- ADMIN: integrity checks clean — 1,438 IDs, no dups, mirrors konsisten, no orphaned related_card_id
-- P17 dirty state: resolved OPSI B (jac-mockup files tidak pernah ter-commit)
-- P8a items 1,3,4,5: DONE — sets/jac/ + sets/quiz/ annotated; wayground/ + wtv01 sudah bersih
+- P8a: SEMUA 5 item done (jac/, jac-mockup pre-rename, wayground, quiz, wtv01) — item 2 selesai session 22, sempat tidak tercatat di v17/SESSION_PROMPT lama
+- P14: type reclassification SELESAI — 581 kartu konsep→vocab, konsep sisa 97
+- P15: usage expansion SELESAI — 1,092 usage ditambahkan, vocab coverage 100% (1244/1244)
+- ADMIN: integrity checks clean — 1,438 IDs, no dups, no orphaned related_card_id
 
-**TASK AKTIF BERIKUTNYA:**
+**⚠️ Session 23 admin sync juga menemukan (BELUM diperbaiki, lihat HANDOFF v18 §1D):**
+- `type` field corrupt di 5 record `source/cards-*.js` (id=82,83,186,188,201) — literal `\'vocab\'` alih-alih `'vocab'`. `cards.js` sudah benar. Fix mekanis 1 baris × 5, tapi ini edit file content — belum dikerjakan karena scope sync kemarin murni admin/docs.
 
-🟡 P8a item 2: `sets/jac-mockup/` — tunggu P17/OD-3 owner confirm
-🟡 P8b: Ruby wglv — tunggu P16/OD-2 owner confirm
-🟡 P10/P11: wglv quality — tunggu P16
-🟡 P14: Type reclassification (bisa mulai kapan saja)
-🟡 P15: Usage expansion (bisa mulai kapan saja)
+**TASK AKTIF BERIKUTNYA — baca ini sebelum ambil task pertama yang `[ ]`:**
 
-**Blocked (OD pending owner):**
-- ⏸ P16 (OD-2): wglv split
-- ⏸ P17 (OD-3): jac-mockup rename
-- ⏸ P6 (OD-1): source reclassification
-- ⏸ P12/P13: furi drop + post-reclassify (setelah P6)
+Semua task yang TIDAK butuh keputusan owner atau materi eksternal — SUDAH SELESAI. Yang tersisa:
 
-**Deferred (butuh AGENT 12 review):**
-- EF接合 triple (id=459,612,613) — P4 deferred
-- 6 ambiguous jp pairs (124/842, 299/858, 862/309, 438/911, 482/819, 416/1182)
-- id=1240 source fix
+🔵 **Butuh keputusan owner (OD-1 s/d OD-5)** — lihat HANDOFF v18 "WHAT'S ACTUALLY NEXT" Bucket 1.
+   OD-2 (P16 wglv split) dan OD-3 (P17 jac-mockup rename) membuka jalan paling banyak task lain.
+🟡 **Butuh judgment manual/AGENT 12** (tidak nunggu owner) — EF接合 triple, 6 pasangan jp ambigu, id=1240 source, ~64 kanji jp post-compound. Lihat Bucket 2.
+⏸ **Blocked materi eksternal (PDF JAC resmi)** — P5 desc truncation, P21, PDF Viewer Mode. Bucket 3.
+🟢 **Belum ada nomor task, tapi actionable sekarang tanpa nunggu siapa-siapa:**
+   - Fix corruption id=82,83,186,188,201 di atas (mekanis, low-risk)
+   - confusion-pairs.js: tambahkan field `track` ke 28 entries (belum ada task number, tidak butuh keputusan owner)
 
 **Open decisions:**
 - OD-1: source reclassification (P6)
@@ -58,12 +56,13 @@ semua 1,438 cards dan 1,142 soal 100% akurat dan bersih.
 
 ## RULES
 
-- Baca handoff v17 + PROGRESS.md dulu — jangan asumsi state
+- Baca handoff v18 + PROGRESS.md dulu — jangan asumsi state
 - Audit actual file sebelum edit
-- Commit per task: format CONTENT: [task] — [deskripsi singkat]
+- Commit per task: format CONTENT: [task] — [deskripsi singkat] (atau ADMIN: / DOCS: untuk non-content)
 - Update PROGRESS.md (centang [x]) setiap task selesai, sebelum commit
 - Jangan push ke main
 - Kalau ada ambiguitas → catat di handoff, tanya owner, jangan lanjut
 - jac-doboku.js dan jac-kenchiku.js jangan disentuh
 - Mirror edits: edit split file → juga update source/cards-*.js → juga update cards.js
+- Setelah mirror edit ke source/cards-*.js: pastikan file masih valid JS (parse-check) sebelum commit — session 23 nemu 5 record yang jadi invalid syntax gara-gara ini kelewatan
 ```

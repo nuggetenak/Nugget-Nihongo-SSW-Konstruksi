@@ -1,16 +1,17 @@
 # SSW Konstruksi — DQ Progress Tracker
 **Branch:** content-dq
-**Last updated:** 2026-05-18 (session 22 FINAL: P8a csv/ hint+opts annotated (+20 fields); all integrity checks pass; 0 naked in all sets)
-**Handoff ref:** `DATA_QUALITY_HANDOFF_v17.md`
+**Last content updated:** 2026-05-18 (session 22 FINAL: P8a csv/ hint+opts annotated (+20 fields); all integrity checks pass; 0 naked in all sets)
+**Last admin sync:** 2026-07-11 (session 23 — see HANDOFF v18 for what changed; this file's checklist itself was already accurate, only cross-references were stale)
+**Handoff ref:** `DATA_QUALITY_HANDOFF_v18.md`
 **Spec ref:** `docs/CARD_CONTENT_SPEC.md`
 
 ---
 
 ## HOW TO USE
-Agent: baca `DATA_QUALITY_HANDOFF_v17.md` dulu. Ambil item **pertama yang masih `[ ]`**. Kerjakan. Centang `[x]`. Update "Last updated". Commit push. Lanjut ke item berikutnya atau stop.
+Agent: baca `DATA_QUALITY_HANDOFF_v18.md` dulu — terutama STATUS SUMMARY dan WHAT'S ACTUALLY NEXT (semua task yang tidak OD-gated sudah selesai per session 23). Kalau mau ambil item **pertama yang masih `[ ]`**, cek dulu di HANDOFF v18 apakah item itu OD-gated atau butuh judgment/materi eksternal sebelum mulai. Kerjakan. Centang `[x]`. Update "Last content updated" di atas. Commit push. Lanjut ke item berikutnya atau stop.
 
-**Dependency order:**
-P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → P8b → P10 → P11 → P6⚠️ → P12(merge) → P13 → P14 → P15
+**Dependency order (P14/P15 ditambahkan — sebelumnya hilang dari urutan ini walau aktif dikerjakan; keduanya sudah selesai):**
+P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P14 → P15 → P16 → P17 → P8a → P8b → P10 → P11 → P6⚠️ → P12(merge) → P13
 
 ---
 

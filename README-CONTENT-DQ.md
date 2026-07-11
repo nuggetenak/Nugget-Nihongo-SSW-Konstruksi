@@ -39,7 +39,7 @@ src/data/                        ← all content files (edit here)
   index.js                       ← shim/re-export only
 
 viewer.html                      ← Open in browser to review content
-DATA_QUALITY_HANDOFF_v16.md      ← Master task list & specs
+DATA_QUALITY_HANDOFF_v18.md      ← Master task list & specs (docs/archive/ has superseded v16, v17)
 _MAP.md                          ← App orientation & codebase overview
 CHANGELOG.md                     ← Version history
 README.md                        ← App README
@@ -48,7 +48,7 @@ README-CONTENT-DQ.md             ← This file
 
 **Also present (added by G1, session 11):** `src/hooks/useTrackedCards.js`, `src/components/FilterPopup.jsx`, `src/modes/FocusMode.jsx` — type-based filtering files.
 
-**Not present here:** other `src/modes/`, `src/components/`, `src/storage/`, `src/tests/`, `public/`, `package.json`, etc. — those live on `main` only.
+**Not present here:** other `src/modes/`, `src/components/`, `src/storage/`, `src/tests/`, `public/`, `package.json`, `HUSKY-SETUP.md`, `scripts/`, etc. — those live on `main` only. (README.md at repo root describes the full app including these — if you're only working `content-dq`, most of that doc doesn't apply to what's actually checked out here.)
 
 ---
 
@@ -65,9 +65,9 @@ README-CONTENT-DQ.md             ← This file
 
 ## Agent instructions
 
-- **Read `DATA_QUALITY_HANDOFF_v16.md` first** — full task list, schemas, rules
+- **Read `DATA_QUALITY_HANDOFF_v18.md` first** — full task list, schemas, rules, and (as of session 23) a "what's actually next" breakdown since most P-tasks are OD-gated right now
 - Clone **this branch** (`content-dq`), not `main`
-- Cards source edits: edit `src/data/source/cards-*.js`, then run `node scripts/merge-cards.mjs` — wait, **merge script is on main only**. For source card edits in this branch, edit both source AND `cards.js` manually, or note the changes for merge time.
+- Cards source edits: edit `src/data/source/cards-*.js`. There's no merge script on this branch (`scripts/` is `main`-only) — update `cards.js` by hand too (mirror edit), and double-check the file still parses as valid JS before committing.
 - All other data files: edit directly
 - Commit and push to `content-dq` only
 - Do NOT push to `main` — that happens at merge time
