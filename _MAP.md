@@ -1,7 +1,7 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
 > **Last updated:** 2026-07-11 — session 23 ADMIN sync: session log below caught up — sessions 19–22 were missing (ADM10–13 were already logged correctly; my first pass at this file wrongly assumed they were missing too and duplicated them, caught in review before commit)
-> **Version:** v4.22.0 · **Status:** content-dq — DQ done for everything not gated on an owner decision; see `DATA_QUALITY_HANDOFF_v18.md`
+> **Version:** v4.22.0 · **Status:** content-dq — DQ done for everything not gated on an owner decision; see `HANDOFF.md`
 > **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps (main branch only — not present on content-dq)
 > **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list
 > **Archive (main):** `docs/archive/ARCHIVE-INDEX.md` ← main branch's larger archive (proposals, TASK-v4.x files) — not present on content-dq
@@ -71,7 +71,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     ├── types.js                    ← JSDoc typedefs (Card, SRSState, Tab, ToastItem)
     ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
     ├── data/
-    │   ├── cards.js                ← CARDS[1443 on main; 1,438 on content-dq — 5 dup cards deleted pre-merge, see PROGRESS.md P4]
+    │   ├── cards.js                ← CARDS[1443 on main; 1,438 on content-dq — 5 dup cards deleted pre-merge, see HANDOFF.md]
     │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
     │   │                              cards-doboku/kenchiku (empty stubs)
     │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + doboku + kenchiku
@@ -234,6 +234,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd) — owner requested a redesign for a multi-agent relay workflow (upload/download one .md per agent handoff). Consolidated SESSION_PROMPT.md + DATA_QUALITY_HANDOFF_v18.md + PROGRESS.md's active checklist into one file, `HANDOFF.md`, always edited in place (no version numbers); all three archived. Added `scripts/verify-content.mjs` — dependency-free, catches syntax corruption and count mismatches without needing the main-branch build pipeline; confirmed it correctly flags the still-open id=82/83/186/188/201 corruption and correctly passes on a fixed test copy. Updated README-CONTENT-DQ.md + this file's own header/tree-comment to point at HANDOFF.md instead of the now-archived files. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 ADMIN sync — HANDOFF v17→v18 (10 commits/2 sessions stale); SESSION_PROMPT rewrite; README-CONTENT-DQ.md 3× dangling v16 refs fixed; PROGRESS.md ref bump; this session-log gap (sessions 19–22 were missing — ADM10–13 below were already logged, my mistake initially claiming otherwise) backfilled; v16+v17 archived to docs/archive/; cards.js header comment fixed (1443→1438); found (not fixed) type-field corruption in 5 source/ mirror records — see HANDOFF v18 §1D |
 | 2026-05-18 | content-dq | Sonnet 4.6: session 22 — P14/P15 SELESAI (581 konsep→vocab, 1092 usage added, 100% vocab coverage); P8a item 2 sets/csv/ ruby+hint+opts (0 naked remaining) |
 | 2026-05-16 | content-dq | Sonnet 4.6: session 21 — HANDOFF v16→v17 sync (card count, source counts, known-issues, codebase state, session log 18–20) |

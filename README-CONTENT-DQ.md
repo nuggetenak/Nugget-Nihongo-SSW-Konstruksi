@@ -39,7 +39,7 @@ src/data/                        ← all content files (edit here)
   index.js                       ← shim/re-export only
 
 viewer.html                      ← Open in browser to review content
-DATA_QUALITY_HANDOFF_v18.md      ← Master task list & specs (docs/archive/ has superseded v16, v17)
+HANDOFF.md                       ← Single-file relay baton: state, active tasks, rules, protocol (docs/archive/ has everything it superseded)
 _MAP.md                          ← App orientation & codebase overview
 CHANGELOG.md                     ← Version history
 README.md                        ← App README
@@ -65,9 +65,10 @@ README-CONTENT-DQ.md             ← This file
 
 ## Agent instructions
 
-- **Read `DATA_QUALITY_HANDOFF_v18.md` first** — full task list, schemas, rules, and (as of session 23) a "what's actually next" breakdown since most P-tasks are OD-gated right now
+- **Read `HANDOFF.md` first** — it's a single relay file now (session 23): current state, active tasks, open decisions, rules, and the protocol for keeping it honest. Superseded docs are in `docs/archive/` if you need the old detail (e.g. full original P0–P17 rationale is in the archived `PROGRESS.md`).
+- Run `node scripts/verify-content.mjs` before trusting any number in `HANDOFF.md` and again before updating it — no `npm install` needed, it's dependency-free
 - Clone **this branch** (`content-dq`), not `main`
-- Cards source edits: edit `src/data/source/cards-*.js`. There's no merge script on this branch (`scripts/` is `main`-only) — update `cards.js` by hand too (mirror edit), and double-check the file still parses as valid JS before committing.
+- Cards source edits: edit `src/data/source/cards-*.js`. There's no merge script on this branch (`scripts/` other than the verify script is `main`-only) — update `cards.js` by hand too (mirror edit), then run the verify script before committing.
 - All other data files: edit directly
 - Commit and push to `content-dq` only
 - Do NOT push to `main` — that happens at merge time
