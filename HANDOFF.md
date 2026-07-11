@@ -43,18 +43,16 @@ from the clone. Don't duplicate their content into this file; link to them.
 
 ## CURRENT STATE
 
-**As of commit `1926750`, 2026-07-11 (session 23).** Verify before trusting past this point —
-this line doesn't update itself.
+**As of commit (this fix), 2026-07-11 (session 23, cont'd).** Verify before trusting past this
+point — this line doesn't update itself.
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
 - P0–P5, P7, P9, P14, P15, P8a: all done
-- **Known problem, not yet fixed:** `type` field corrupted in 5 records in
-  `src/data/source/cards-*.js` (id=82,83,186,188,201) — literal `\'vocab\'` instead of `'vocab'`,
-  invalid JS. `cards.js` has these 5 correct already; only the `source/` mirror is broken.
-  `scripts/verify-content.mjs` will flag this every time until it's fixed. One line each, five
-  places, mechanical — see the script's output for exact files.
-- No lint/build/test on this branch (`package.json`/`scripts/` other than the new verify script
-  are `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
+- **`type` field corruption (id=82,83,186,188,201) — FIXED.** `scripts/verify-content.mjs` now
+  passes clean (exit 0) — all 72 checked leaf files parse, `cards.js` / `source/` mirrors / split
+  files all agree at 1,438. Was open earlier this session; see git log for the fix commit.
+- No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
+  `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
 ---
 
@@ -84,7 +82,6 @@ one" list — check the gate before starting.
   don't guess-fill these
 
 ### 🟢 Unblocked, no owner decision needed, just not done yet
-- Fix the `type` field corruption above (mechanical, 5 lines)
 - `confusion-pairs.js`: add `track` field to all 28 entries — no task number assigned, open
 
 ### ⏸ Blocked on external material
