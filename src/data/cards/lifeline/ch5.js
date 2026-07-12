@@ -2391,7 +2391,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 685,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "でんきせつび",
   jp: "電気設備《でんきせつび》",
   type: "vocab",
@@ -2415,7 +2415,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 687,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "でんげん",
   jp: "電源《でんげん》",
   type: "vocab",
@@ -2427,7 +2427,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 689,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ふくすう",
   jp: "複数《ふくすう》",
   type: "vocab",
@@ -2439,7 +2439,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 704,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "こーど",
   jp: "コード",
   type: "vocab",
@@ -2451,7 +2451,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 713,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "でんせん",
   jp: "電線《でんせん》",
   type: "vocab",
@@ -2463,7 +2463,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 872,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ちちゅうけーぶる",
   jp: "地中ケーブル《ちちゅうけーぶる》",
   type: "vocab",
@@ -2475,7 +2475,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 873,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ちじょうけーぶる",
   jp: "地上ケーブル《ちじょうけーぶる》",
   type: "vocab",
@@ -2487,7 +2487,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 874,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かくうけーぶる",
   jp: "架空ケーブル《かくうけーぶる》",
   type: "vocab",
@@ -2523,7 +2523,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 898,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "こうあつ・ていあつ",
   jp: "高圧《こうあつ》・低圧《ていあつ》",
   type: "vocab",
@@ -2535,7 +2535,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 923,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほごテープ",
   jp: "保護テープ《ほごテープ》",
   type: "vocab",
@@ -2547,7 +2547,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 924,
   category: "denki",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "けっそくバンド",
   jp: "結束バンド《けっそくバンド》",
   type: "vocab",
@@ -2571,7 +2571,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 925,
   category: "denki",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "しせん",
   jp: "支線《しせん》",
   type: "vocab",
@@ -2583,7 +2583,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1004,
   category: "denki",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "かんせん",
   jp: "幹線《かんせん》",
   type: "vocab",
@@ -2595,7 +2595,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1007,
   category: "denki",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "さんそう",
   jp: "三相《さんそう》",
   type: "vocab",
@@ -2607,7 +2607,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1010,
   category: "denki",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "がいし",
   jp: "碍子《がいし》",
   type: "vocab",
@@ -2619,7 +2619,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1065,
   category: "tsushin",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "せいたん",
   jp: "成端《せいたん》",
   type: "vocab",
@@ -2643,7 +2643,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 846,
   category: "denki",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "でんちゅう",
   jp: "電柱《でんちゅう》",
   type: "vocab",
@@ -2655,7 +2655,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 847,
   category: "denki",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "まんほーる",
   jp: "マンホール",
   type: "vocab",
@@ -2703,7 +2703,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1013,
   category: "denki",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "ていあつ",
   jp: "低圧《ていあつ》",
   type: "vocab",
@@ -2715,7 +2715,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1014,
   category: "denki",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "こうあつ",
   jp: "高圧《こうあつ》",
   type: "vocab",
@@ -2727,7 +2727,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1016,
   category: "denki",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "せいぎょけーぶる",
   jp: "制御ケーブル《せいぎょけーぶる》",
   type: "vocab",
@@ -2739,7 +2739,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1021,
   category: "denki",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "でんきこうじし",
   jp: "電気工事士《でんきこうじし》",
   type: "vocab",
@@ -2775,7 +2775,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1059,
   category: "tsushin",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "つうしんらっく",
   jp: "通信ラック《つうしんらっく》",
   type: "vocab",
@@ -2787,7 +2787,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1060,
   category: "tsushin",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "つうしんきゃびねっと",
   jp: "通信キャビネット《つうしんきゃびねっと》",
   type: "vocab",
@@ -2811,7 +2811,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1194,
   category: "denki",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "はいせん",
   jp: "配線《はいせん》",
   type: "vocab",
@@ -2823,7 +2823,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1195,
   category: "denki",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "ぶんき",
   jp: "分岐《ぶんき》",
   type: "vocab",
@@ -2847,7 +2847,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 664,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あんぜんかくにん",
   jp: "安全確認《あんぜんかくにん》",
   type: "vocab",
@@ -2859,7 +2859,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 665,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かくにん",
   jp: "確認《かくにん》",
   type: "vocab",
@@ -2871,7 +2871,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 676,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほおん",
   jp: "保温《ほおん》",
   type: "vocab",
@@ -2883,7 +2883,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 677,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ようせつ",
   jp: "溶接《ようせつ》",
   type: "vocab",
@@ -2895,7 +2895,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 679,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "じゅうてん",
   jp: "充填《じゅうてん》",
   type: "vocab",
@@ -2907,7 +2907,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 680,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "はっせい",
   jp: "発生《はっせい》",
   type: "vocab",
@@ -2919,7 +2919,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 684,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ぼうすいかばー",
   jp: "防水カバー《ぼうすいかばー》",
   type: "vocab",
@@ -2931,7 +2931,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 718,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "そくてい",
   jp: "測定《そくてい》",
   type: "vocab",
@@ -2943,7 +2943,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 727,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とりつけ",
   jp: "取り付け《とりつけ》",
   type: "vocab",
@@ -2955,7 +2955,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 728,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "こうかん",
   jp: "交換《こうかん》",
   type: "vocab",
@@ -2967,7 +2967,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 729,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とそう",
   jp: "塗装《とそう》",
   type: "vocab",
@@ -3003,7 +3003,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 749,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おおう",
   jp: "覆う《おおう》",
   type: "vocab",
@@ -3015,7 +3015,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 751,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "きる",
   jp: "切る《きる》",
   type: "vocab",
@@ -3027,7 +3027,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 756,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ぬる",
   jp: "塗る《ぬる》",
   type: "vocab",
@@ -3039,7 +3039,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 757,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "つける",
   jp: "付ける《つける》",
   type: "vocab",
@@ -3051,7 +3051,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 761,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "せこうまえ",
   jp: "施工前《せこうまえ》",
   type: "vocab",
@@ -3063,7 +3063,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 774,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "しけん",
   jp: "試験《しけん》",
   type: "vocab",
@@ -3075,7 +3075,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 775,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "けんさ",
   jp: "検査《けんさ》",
   type: "vocab",
@@ -3087,7 +3087,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 776,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "さぎょう",
   jp: "作業《さぎょう》",
   type: "vocab",
@@ -3099,7 +3099,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 780,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "せこう",
   jp: "施工《せこう》",
   type: "vocab",
@@ -3111,7 +3111,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 781,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とる",
   jp: "取る《とる》",
   type: "vocab",
@@ -3147,7 +3147,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 869,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほーす",
   jp: "ホース",
   type: "vocab",
@@ -3231,7 +3231,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 896,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "なっと",
   jp: "ナット",
   type: "vocab",
@@ -3243,7 +3243,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 897,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かんのまいせつこうじ",
   jp: "管の埋設工事《かんのまいせつこうじ》",
   type: "vocab",
@@ -3255,7 +3255,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 899,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かばー",
   jp: "カバー",
   type: "vocab",
@@ -3267,7 +3267,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 902,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "そうこ",
   jp: "倉庫《そうこ》",
   type: "vocab",
@@ -3279,7 +3279,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 903,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "きかいしつ",
   jp: "機械室《きかいしつ》",
   type: "vocab",
@@ -3291,7 +3291,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 906,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ばりとり",
   jp: "バリ取り《ばりとり》",
   type: "vocab",
@@ -3303,7 +3303,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 907,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "めんをとる",
   jp: "面を取る《めんをとる》",
   type: "vocab",
@@ -3315,7 +3315,7 @@ export const CARDS_LIFELINE_CH5 = [
 {
   id: 1430,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "くっさく",
   jp: "掘削《くっさく》",
   type: "vocab",

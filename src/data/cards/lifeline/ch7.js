@@ -433,7 +433,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 652,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "もれ",
   jp: "漏れ《もれ》",
   type: "vocab",
@@ -445,7 +445,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 655,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ふちゃく",
   jp: "付着《ふちゃく》",
   type: "vocab",
@@ -469,7 +469,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 657,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "たわみはっせい",
   jp: "たわみ発生《たわみはっせい》",
   type: "vocab",
@@ -481,7 +481,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 660,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "すきま",
   jp: "隙間《すきま》",
   type: "vocab",
@@ -493,7 +493,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 667,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ぼうし",
   jp: "防止《ぼうし》",
   type: "vocab",
@@ -505,7 +505,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 668,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "こうしょさぎょう",
   jp: "高所作業《こうしょさぎょう》",
   type: "vocab",
@@ -517,7 +517,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 669,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "らっか",
   jp: "落下《らっか》",
   type: "vocab",
@@ -529,7 +529,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 670,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "そうおん",
   jp: "騒音《そうおん》",
   type: "vocab",
@@ -541,7 +541,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 671,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "きけん",
   jp: "危険《きけん》",
   type: "vocab",
@@ -553,7 +553,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 672,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あーす",
   jp: "アース",
   type: "vocab",
@@ -565,7 +565,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 673,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "しょち",
   jp: "処置《しょち》",
   type: "vocab",
@@ -577,7 +577,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 708,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ていか",
   jp: "低下《ていか》",
   type: "vocab",
@@ -589,7 +589,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 710,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "はそん",
   jp: "破損《はそん》",
   type: "vocab",
@@ -601,7 +601,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 717,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "じょうしょう",
   jp: "上昇《じょうしょう》",
   type: "vocab",
@@ -613,7 +613,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 737,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ちゅうい",
   jp: "注意《ちゅうい》",
   type: "vocab",
@@ -625,7 +625,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 779,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あんぜん",
   jp: "安全《あんぜん》",
   type: "vocab",
@@ -637,7 +637,7 @@ export const CARDS_LIFELINE_CH7 = [
 {
   id: 914,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "てんけん",
   jp: "点検《てんけん》",
   type: "vocab",

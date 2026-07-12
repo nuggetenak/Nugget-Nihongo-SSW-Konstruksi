@@ -4090,7 +4090,7 @@ export const CARDS_COMMON = [
   {
   id: 649,
   category: "anzen",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "たはつ",
   jp: "多発《たはつ》",
   type: "vocab",
@@ -4102,7 +4102,7 @@ export const CARDS_COMMON = [
   {
   id: 653,
   category: "anzen",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "さび",
   jp: "錆《さび》",
   type: "vocab",
@@ -4114,7 +4114,7 @@ export const CARDS_COMMON = [
   {
   id: 654,
   category: "anzen",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "れっか",
   jp: "劣化《れっか》",
   type: "vocab",
@@ -4126,7 +4126,7 @@ export const CARDS_COMMON = [
   {
   id: 658,
   category: "anzen",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "いおん",
   jp: "異音《いおん》",
   type: "vocab",
@@ -4234,7 +4234,7 @@ export const CARDS_COMMON = [
   {
   id: 683,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "へいよう",
   jp: "併用《へいよう》",
   type: "vocab",
@@ -4246,7 +4246,7 @@ export const CARDS_COMMON = [
   {
   id: 695,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "きゅうへん",
   jp: "急変《きゅうへん》",
   type: "vocab",
@@ -4258,7 +4258,7 @@ export const CARDS_COMMON = [
   {
   id: 696,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "ちょくご",
   jp: "直後《ちょくご》",
   type: "vocab",
@@ -4282,7 +4282,7 @@ export const CARDS_COMMON = [
   {
   id: 705,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "げんしょう",
   jp: "現象《げんしょう》",
   type: "vocab",
@@ -4342,7 +4342,7 @@ export const CARDS_COMMON = [
   {
   id: 724,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "いろ",
   jp: "色《いろ》",
   type: "vocab",
@@ -4378,7 +4378,7 @@ export const CARDS_COMMON = [
   {
   id: 731,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "おと",
   jp: "音《おと》",
   type: "vocab",
@@ -4414,7 +4414,7 @@ export const CARDS_COMMON = [
   {
   id: 736,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "はだか",
   jp: "裸《はだか》",
   type: "vocab",
@@ -4426,7 +4426,7 @@ export const CARDS_COMMON = [
   {
   id: 738,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "こくしょく",
   jp: "黒色《こくしょく》",
   type: "vocab",
@@ -4438,7 +4438,7 @@ export const CARDS_COMMON = [
   {
   id: 739,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "けいさん",
   jp: "計算《けいさん》",
   type: "vocab",
@@ -4450,7 +4450,7 @@ export const CARDS_COMMON = [
   {
   id: 742,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "しょうらい",
   jp: "将来《しょうらい》",
   type: "vocab",
@@ -4474,7 +4474,7 @@ export const CARDS_COMMON = [
   {
   id: 745,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "さい",
   jp: "際《さい》",
   type: "vocab",
@@ -4522,7 +4522,7 @@ export const CARDS_COMMON = [
   {
   id: 802,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "しゅんこう",
   jp: "竣工《しゅんこう》",
   type: "vocab",
@@ -4534,7 +4534,7 @@ export const CARDS_COMMON = [
   {
   id: 803,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "ちゃっこう",
   jp: "着工《ちゃっこう》",
   type: "vocab",
@@ -4546,7 +4546,7 @@ export const CARDS_COMMON = [
   {
   id: 811,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "つぼ",
   jp: "坪《つぼ》",
   type: "vocab",
@@ -4558,7 +4558,7 @@ export const CARDS_COMMON = [
   {
   id: 812,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "しゃく",
   jp: "尺《しゃく》",
   type: "vocab",
@@ -4570,7 +4570,7 @@ export const CARDS_COMMON = [
   {
   id: 813,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "すん",
   jp: "寸《すん》",
   type: "vocab",
@@ -4594,7 +4594,7 @@ export const CARDS_COMMON = [
   {
   id: 839,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "はしら",
   jp: "柱《はしら》",
   type: "vocab",
@@ -4606,7 +4606,7 @@ export const CARDS_COMMON = [
   {
   id: 840,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "はり",
   jp: "梁《はり》",
   type: "vocab",
@@ -4618,7 +4618,7 @@ export const CARDS_COMMON = [
   {
   id: 841,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "ゆか",
   jp: "床《ゆか》",
   type: "vocab",
@@ -4642,7 +4642,7 @@ export const CARDS_COMMON = [
   {
   id: 863,
   category: "sekou",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "はしご",
   jp: "梯子《はしご》",
   type: "vocab",
@@ -5386,7 +5386,7 @@ export const CARDS_COMMON = [
   {
   id: 1161,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "けんしゅう",
   jp: "検収《けんしゅう》",
   type: "vocab",
@@ -5398,7 +5398,7 @@ export const CARDS_COMMON = [
   {
   id: 1162,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "ぜせい",
   jp: "是正《ぜせい》",
   type: "vocab",
@@ -5637,7 +5637,7 @@ export const CARDS_COMMON = [
   {
   id: 1220,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "けいご",
   jp: "敬語《けいご》",
   type: "vocab",
@@ -5661,7 +5661,7 @@ export const CARDS_COMMON = [
   {
   id: 1222,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "ちこく",
   jp: "遅刻《ちこく》",
   type: "vocab",
@@ -5673,7 +5673,7 @@ export const CARDS_COMMON = [
   {
   id: 1223,
   category: "career",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "けっきん",
   jp: "欠勤《けっきん》",
   type: "vocab",
@@ -5745,7 +5745,7 @@ export const CARDS_COMMON = [
   {
   id: 1236,
   category: "hourei",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "しゅうろう",
   jp: "就労《しゅうろう》",
   type: "hukum",
@@ -5790,7 +5790,7 @@ export const CARDS_COMMON = [
   {
   id: 1246,
   category: "anzen",
-  source: "vocab-general",
+  source: "vocab-supplementary",
   furi: "みみせん",
   jp: "耳栓《みみせん》",
   type: "vocab",
@@ -7639,7 +7639,7 @@ export const CARDS_COMMON = [
   {
   id: 652,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "もれ",
   jp: "漏れ《もれ》",
   type: "vocab",
@@ -7651,7 +7651,7 @@ export const CARDS_COMMON = [
   {
   id: 655,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ふちゃく",
   jp: "付着《ふちゃく》",
   type: "vocab",
@@ -7675,7 +7675,7 @@ export const CARDS_COMMON = [
   {
   id: 657,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "たわみはっせい",
   jp: "たわみ発生《たわみはっせい》",
   type: "vocab",
@@ -7687,7 +7687,7 @@ export const CARDS_COMMON = [
   {
   id: 660,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "すきま",
   jp: "隙間《すきま》",
   type: "vocab",
@@ -7699,7 +7699,7 @@ export const CARDS_COMMON = [
   {
   id: 664,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あんぜんかくにん",
   jp: "安全確認《あんぜんかくにん》",
   type: "vocab",
@@ -7711,7 +7711,7 @@ export const CARDS_COMMON = [
   {
   id: 665,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かくにん",
   jp: "確認《かくにん》",
   type: "vocab",
@@ -7723,7 +7723,7 @@ export const CARDS_COMMON = [
   {
   id: 667,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ぼうし",
   jp: "防止《ぼうし》",
   type: "vocab",
@@ -7735,7 +7735,7 @@ export const CARDS_COMMON = [
   {
   id: 668,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "こうしょさぎょう",
   jp: "高所作業《こうしょさぎょう》",
   type: "vocab",
@@ -7747,7 +7747,7 @@ export const CARDS_COMMON = [
   {
   id: 669,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "らっか",
   jp: "落下《らっか》",
   type: "vocab",
@@ -7759,7 +7759,7 @@ export const CARDS_COMMON = [
   {
   id: 670,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "そうおん",
   jp: "騒音《そうおん》",
   type: "vocab",
@@ -7771,7 +7771,7 @@ export const CARDS_COMMON = [
   {
   id: 671,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "きけん",
   jp: "危険《きけん》",
   type: "vocab",
@@ -7783,7 +7783,7 @@ export const CARDS_COMMON = [
   {
   id: 672,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あーす",
   jp: "アース",
   type: "vocab",
@@ -7795,7 +7795,7 @@ export const CARDS_COMMON = [
   {
   id: 673,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "しょち",
   jp: "処置《しょち》",
   type: "vocab",
@@ -7807,7 +7807,7 @@ export const CARDS_COMMON = [
   {
   id: 676,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほおん",
   jp: "保温《ほおん》",
   type: "vocab",
@@ -7819,7 +7819,7 @@ export const CARDS_COMMON = [
   {
   id: 677,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ようせつ",
   jp: "溶接《ようせつ》",
   type: "vocab",
@@ -7831,7 +7831,7 @@ export const CARDS_COMMON = [
   {
   id: 679,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "じゅうてん",
   jp: "充填《じゅうてん》",
   type: "vocab",
@@ -7843,7 +7843,7 @@ export const CARDS_COMMON = [
   {
   id: 680,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "はっせい",
   jp: "発生《はっせい》",
   type: "vocab",
@@ -7855,7 +7855,7 @@ export const CARDS_COMMON = [
   {
   id: 684,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ぼうすいかばー",
   jp: "防水カバー《ぼうすいかばー》",
   type: "vocab",
@@ -7891,7 +7891,7 @@ export const CARDS_COMMON = [
   {
   id: 693,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あんてい",
   jp: "安定《あんてい》",
   type: "vocab",
@@ -7903,7 +7903,7 @@ export const CARDS_COMMON = [
   {
   id: 694,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "げんいん",
   jp: "原因《げんいん》",
   type: "vocab",
@@ -7915,7 +7915,7 @@ export const CARDS_COMMON = [
   {
   id: 697,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ないめん",
   jp: "内面《ないめん》",
   type: "vocab",
@@ -7927,7 +7927,7 @@ export const CARDS_COMMON = [
   {
   id: 698,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ないぶ",
   jp: "内部《ないぶ》",
   type: "vocab",
@@ -7939,7 +7939,7 @@ export const CARDS_COMMON = [
   {
   id: 699,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ずめん",
   jp: "図面《ずめん》",
   type: "vocab",
@@ -7951,7 +7951,7 @@ export const CARDS_COMMON = [
   {
   id: 701,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おんど",
   jp: "温度《おんど》",
   type: "vocab",
@@ -7963,7 +7963,7 @@ export const CARDS_COMMON = [
   {
   id: 702,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "うむ",
   jp: "有無《うむ》",
   type: "vocab",
@@ -7975,7 +7975,7 @@ export const CARDS_COMMON = [
   {
   id: 706,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "じゅうりょう",
   jp: "重量《じゅうりょう》",
   type: "vocab",
@@ -7987,7 +7987,7 @@ export const CARDS_COMMON = [
   {
   id: 708,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ていか",
   jp: "低下《ていか》",
   type: "vocab",
@@ -7999,7 +7999,7 @@ export const CARDS_COMMON = [
   {
   id: 709,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "いち",
   jp: "位置《いち》",
   type: "vocab",
@@ -8011,7 +8011,7 @@ export const CARDS_COMMON = [
   {
   id: 710,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "はそん",
   jp: "破損《はそん》",
   type: "vocab",
@@ -8023,7 +8023,7 @@ export const CARDS_COMMON = [
   {
   id: 714,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おくがい",
   jp: "屋外《おくがい》",
   type: "vocab",
@@ -8035,7 +8035,7 @@ export const CARDS_COMMON = [
   {
   id: 715,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "しゅるい",
   jp: "種類《しゅるい》",
   type: "vocab",
@@ -8047,7 +8047,7 @@ export const CARDS_COMMON = [
   {
   id: 716,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "もくてき",
   jp: "目的《もくてき》",
   type: "vocab",
@@ -8059,7 +8059,7 @@ export const CARDS_COMMON = [
   {
   id: 717,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "じょうしょう",
   jp: "上昇《じょうしょう》",
   type: "vocab",
@@ -8071,7 +8071,7 @@ export const CARDS_COMMON = [
   {
   id: 718,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "そくてい",
   jp: "測定《そくてい》",
   type: "vocab",
@@ -8083,7 +8083,7 @@ export const CARDS_COMMON = [
   {
   id: 719,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "けっか",
   jp: "結果《けっか》",
   type: "vocab",
@@ -8095,7 +8095,7 @@ export const CARDS_COMMON = [
   {
   id: 720,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "へんか",
   jp: "変化《へんか》",
   type: "vocab",
@@ -8107,7 +8107,7 @@ export const CARDS_COMMON = [
   {
   id: 722,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "もんだい",
   jp: "問題《もんだい》",
   type: "vocab",
@@ -8131,7 +8131,7 @@ export const CARDS_COMMON = [
   {
   id: 727,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とりつけ",
   jp: "取り付け《とりつけ》",
   type: "vocab",
@@ -8143,7 +8143,7 @@ export const CARDS_COMMON = [
   {
   id: 728,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "こうかん",
   jp: "交換《こうかん》",
   type: "vocab",
@@ -8155,7 +8155,7 @@ export const CARDS_COMMON = [
   {
   id: 729,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とそう",
   jp: "塗装《とそう》",
   type: "vocab",
@@ -8167,7 +8167,7 @@ export const CARDS_COMMON = [
   {
   id: 733,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ながさ",
   jp: "長さ《ながさ》",
   type: "vocab",
@@ -8191,7 +8191,7 @@ export const CARDS_COMMON = [
   {
   id: 737,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ちゅうい",
   jp: "注意《ちゅうい》",
   type: "vocab",
@@ -8215,7 +8215,7 @@ export const CARDS_COMMON = [
   {
   id: 741,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "つよい",
   jp: "強い《つよい》",
   type: "vocab",
@@ -8227,7 +8227,7 @@ export const CARDS_COMMON = [
   {
   id: 746,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ばあい",
   jp: "場合《ばあい》",
   type: "vocab",
@@ -8263,7 +8263,7 @@ export const CARDS_COMMON = [
   {
   id: 749,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おおう",
   jp: "覆う《おおう》",
   type: "vocab",
@@ -8275,7 +8275,7 @@ export const CARDS_COMMON = [
   {
   id: 751,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "きる",
   jp: "切る《きる》",
   type: "vocab",
@@ -8287,7 +8287,7 @@ export const CARDS_COMMON = [
   {
   id: 752,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "よぶ",
   jp: "呼ぶ《よぶ》",
   type: "vocab",
@@ -8299,7 +8299,7 @@ export const CARDS_COMMON = [
   {
   id: 753,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おもな",
   jp: "主な《おもな》",
   type: "vocab",
@@ -8311,7 +8311,7 @@ export const CARDS_COMMON = [
   {
   id: 756,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ぬる",
   jp: "塗る《ぬる》",
   type: "vocab",
@@ -8323,7 +8323,7 @@ export const CARDS_COMMON = [
   {
   id: 757,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "つける",
   jp: "付ける《つける》",
   type: "vocab",
@@ -8335,7 +8335,7 @@ export const CARDS_COMMON = [
   {
   id: 761,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "せこうまえ",
   jp: "施工前《せこうまえ》",
   type: "vocab",
@@ -8347,7 +8347,7 @@ export const CARDS_COMMON = [
   {
   id: 762,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ちゅういてん",
   jp: "注意点《ちゅういてん》",
   type: "vocab",
@@ -8359,7 +8359,7 @@ export const CARDS_COMMON = [
   {
   id: 763,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かならず",
   jp: "必ず《かならず》",
   type: "vocab",
@@ -8371,7 +8371,7 @@ export const CARDS_COMMON = [
   {
   id: 764,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "まず",
   jp: "まず",
   type: "vocab",
@@ -8383,7 +8383,7 @@ export const CARDS_COMMON = [
   {
   id: 765,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とくに",
   jp: "特に《とくに》",
   type: "vocab",
@@ -8395,7 +8395,7 @@ export const CARDS_COMMON = [
   {
   id: 767,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ふせぐ",
   jp: "防ぐ《ふせぐ》",
   type: "vocab",
@@ -8407,7 +8407,7 @@ export const CARDS_COMMON = [
   {
   id: 768,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おこなう",
   jp: "行う《おこなう》",
   type: "vocab",
@@ -8419,7 +8419,7 @@ export const CARDS_COMMON = [
   {
   id: 769,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かんがえられる",
   jp: "考えられる《かんがえられる》",
   type: "vocab",
@@ -8443,7 +8443,7 @@ export const CARDS_COMMON = [
   {
   id: 771,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "べき",
   jp: "べき",
   type: "vocab",
@@ -8455,7 +8455,7 @@ export const CARDS_COMMON = [
   {
   id: 772,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おこる",
   jp: "起こる《おこる》",
   type: "vocab",
@@ -8479,7 +8479,7 @@ export const CARDS_COMMON = [
   {
   id: 774,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "しけん",
   jp: "試験《しけん》",
   type: "vocab",
@@ -8491,7 +8491,7 @@ export const CARDS_COMMON = [
   {
   id: 775,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "けんさ",
   jp: "検査《けんさ》",
   type: "vocab",
@@ -8503,7 +8503,7 @@ export const CARDS_COMMON = [
   {
   id: 776,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "さぎょう",
   jp: "作業《さぎょう》",
   type: "vocab",
@@ -8515,7 +8515,7 @@ export const CARDS_COMMON = [
   {
   id: 777,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほうほう",
   jp: "方法《ほうほう》",
   type: "vocab",
@@ -8527,7 +8527,7 @@ export const CARDS_COMMON = [
   {
   id: 779,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あんぜん",
   jp: "安全《あんぜん》",
   type: "vocab",
@@ -8539,7 +8539,7 @@ export const CARDS_COMMON = [
   {
   id: 780,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "せこう",
   jp: "施工《せこう》",
   type: "vocab",
@@ -8551,7 +8551,7 @@ export const CARDS_COMMON = [
   {
   id: 781,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とる",
   jp: "取る《とる》",
   type: "vocab",
@@ -8983,7 +8983,7 @@ export const CARDS_COMMON = [
   {
   id: 835,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "しようしょ",
   jp: "仕様書《しようしょ》",
   type: "vocab",
@@ -8995,7 +8995,7 @@ export const CARDS_COMMON = [
   {
   id: 836,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "けんちく",
   jp: "建築《けんちく》",
   type: "vocab",
@@ -9007,7 +9007,7 @@ export const CARDS_COMMON = [
   {
   id: 837,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "かいたい",
   jp: "解体《かいたい》",
   type: "vocab",
@@ -9019,7 +9019,7 @@ export const CARDS_COMMON = [
   {
   id: 838,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "きそ",
   jp: "基礎《きそ》",
   type: "vocab",
@@ -9031,7 +9031,7 @@ export const CARDS_COMMON = [
   {
   id: 842,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "すみだし",
   jp: "墨出し《すみだし》",
   type: "vocab",
@@ -9067,7 +9067,7 @@ export const CARDS_COMMON = [
   {
   id: 848,
   category: "anzen",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "さいがい",
   jp: "災害《さいがい》",
   type: "vocab",
@@ -9079,7 +9079,7 @@ export const CARDS_COMMON = [
   {
   id: 849,
   category: "anzen",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "きけんよちかつどう",
   jp: "危険予知活動《きけんよちかつどう》",
   type: "vocab",
@@ -9091,7 +9091,7 @@ export const CARDS_COMMON = [
   {
   id: 850,
   category: "career",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "げんばかんとく",
   jp: "現場監督《げんばかんとく》",
   type: "vocab",
@@ -9127,7 +9127,7 @@ export const CARDS_COMMON = [
   {
   id: 869,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほーす",
   jp: "ホース",
   type: "vocab",
@@ -9211,7 +9211,7 @@ export const CARDS_COMMON = [
   {
   id: 896,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "なっと",
   jp: "ナット",
   type: "vocab",
@@ -9223,7 +9223,7 @@ export const CARDS_COMMON = [
   {
   id: 897,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かんのまいせつこうじ",
   jp: "管の埋設工事《かんのまいせつこうじ》",
   type: "vocab",
@@ -9235,7 +9235,7 @@ export const CARDS_COMMON = [
   {
   id: 899,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かばー",
   jp: "カバー",
   type: "vocab",
@@ -9247,7 +9247,7 @@ export const CARDS_COMMON = [
   {
   id: 902,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "そうこ",
   jp: "倉庫《そうこ》",
   type: "vocab",
@@ -9259,7 +9259,7 @@ export const CARDS_COMMON = [
   {
   id: 903,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "きかいしつ",
   jp: "機械室《きかいしつ》",
   type: "vocab",
@@ -9271,7 +9271,7 @@ export const CARDS_COMMON = [
   {
   id: 906,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ばりとり",
   jp: "バリ取り《ばりとり》",
   type: "vocab",
@@ -9283,7 +9283,7 @@ export const CARDS_COMMON = [
   {
   id: 907,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "めんをとる",
   jp: "面を取る《めんをとる》",
   type: "vocab",
@@ -9295,7 +9295,7 @@ export const CARDS_COMMON = [
   {
   id: 914,
   category: "anzen",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "てんけん",
   jp: "点検《てんけん》",
   type: "vocab",
@@ -9307,7 +9307,7 @@ export const CARDS_COMMON = [
   {
   id: 1073,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "たんかんあしば",
   jp: "単管足場《たんかんあしば》",
   type: "vocab",
@@ -9319,7 +9319,7 @@ export const CARDS_COMMON = [
   {
   id: 1074,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "くさびきんけつしきあしば",
   jp: "くさび緊結式足場《くさびきんけつしきあしば》",
   type: "vocab",
@@ -9331,7 +9331,7 @@ export const CARDS_COMMON = [
   {
   id: 1075,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "あんぜんねっと",
   jp: "安全ネット《あんぜんねっと》",
   type: "vocab",
@@ -9355,7 +9355,7 @@ export const CARDS_COMMON = [
   {
   id: 1081,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "りゅうかすいそ",
   jp: "硫化水素《りゅうかすいそ》",
   type: "vocab",
@@ -9367,7 +9367,7 @@ export const CARDS_COMMON = [
   {
   id: 1083,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "そうきますく",
   jp: "送気マスク《そうきますく》",
   type: "vocab",
@@ -9379,7 +9379,7 @@ export const CARDS_COMMON = [
   {
   id: 1085,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "さぎょうしゅにんしゃ",
   jp: "作業主任者《さぎょうしゅにんしゃ》",
   type: "vocab",
@@ -9403,7 +9403,7 @@ export const CARDS_COMMON = [
   {
   id: 1090,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "ついらくせいしようきぐ",
   jp: "墜落制止用器具《ついらくせいしようきぐ》",
   type: "vocab",
@@ -9427,7 +9427,7 @@ export const CARDS_COMMON = [
   {
   id: 1092,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "ねっちゅうしょう",
   jp: "熱中症《ねっちゅうしょう》",
   type: "vocab",
@@ -9439,7 +9439,7 @@ export const CARDS_COMMON = [
   {
   id: 1093,
   category: "anzen",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "ふんじん",
   jp: "粉じん《ふんじん》",
   type: "vocab",
@@ -9475,7 +9475,7 @@ export const CARDS_COMMON = [
   {
   id: 1106,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "くいうちき",
   jp: "杭打ち機《くいうちき》",
   type: "vocab",
@@ -9547,7 +9547,7 @@ export const CARDS_COMMON = [
   {
   id: 1124,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "ゆあつじゃっき",
   jp: "油圧ジャッキ《ゆあつじゃっき》",
   type: "vocab",
@@ -9559,7 +9559,7 @@ export const CARDS_COMMON = [
   {
   id: 1134,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "でんどうどりる",
   jp: "電動ドリル《でんどうどりる》",
   type: "vocab",
@@ -9583,7 +9583,7 @@ export const CARDS_COMMON = [
   {
   id: 1145,
   category: "career",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "ケーワイシート",
   jp: "KYシート",
   type: "vocab",
@@ -9595,7 +9595,7 @@ export const CARDS_COMMON = [
   {
   id: 1146,
   category: "career",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "しんきにゅうじょうしゃカード",
   jp: "新規入場者カード《しんきにゅうじょうしゃカード》",
   type: "vocab",
@@ -9607,7 +9607,7 @@ export const CARDS_COMMON = [
   {
   id: 1155,
   category: "career",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "せっけいとしょ",
   jp: "設計図書《せっけいとしょ》",
   type: "vocab",
@@ -9631,7 +9631,7 @@ export const CARDS_COMMON = [
   {
   id: 1167,
   category: "hourei",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "きょか",
   jp: "許可《きょか》",
   type: "hukum",
@@ -9642,7 +9642,7 @@ export const CARDS_COMMON = [
   {
   id: 1168,
   category: "hourei",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "うけおいけいやく",
   jp: "請負契約《うけおいけいやく》",
   type: "hukum",
@@ -9653,7 +9653,7 @@ export const CARDS_COMMON = [
   {
   id: 1169,
   category: "hourei",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "もとうけ",
   jp: "元請け《もとうけ》",
   type: "hukum",
@@ -9731,7 +9731,7 @@ export const CARDS_COMMON = [
   {
   id: 1177,
   category: "anzen",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "あんぜんたい",
   jp: "安全帯《あんぜんたい》",
   type: "vocab",
@@ -9743,7 +9743,7 @@ export const CARDS_COMMON = [
   {
   id: 1178,
   category: "anzen",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "ふるはーねすがた",
   jp: "フルハーネス型《ふるはーねすがた》",
   type: "vocab",
@@ -9767,7 +9767,7 @@ export const CARDS_COMMON = [
   {
   id: 1180,
   category: "anzen",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "ほごぐ",
   jp: "保護具《ほごぐ》",
   type: "vocab",
@@ -9779,7 +9779,7 @@ export const CARDS_COMMON = [
   {
   id: 1181,
   category: "anzen",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "かんでん",
   jp: "感電《かんでん》",
   type: "vocab",
@@ -10014,7 +10014,7 @@ export const CARDS_COMMON = [
   {
   id: 1237,
   category: "hourei",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "こうしん",
   jp: "更新《こうしん》",
   type: "hukum",
@@ -10058,7 +10058,7 @@ export const CARDS_COMMON = [
   {
   id: 1243,
   category: "anzen",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "へるめっと",
   jp: "ヘルメット",
   type: "vocab",
@@ -10082,7 +10082,7 @@ export const CARDS_COMMON = [
   {
   id: 1247,
   category: "anzen",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "ほごめがね",
   jp: "保護めがね《ほごめがね》",
   type: "vocab",
@@ -10106,7 +10106,7 @@ export const CARDS_COMMON = [
   {
   id: 1249,
   category: "career",
-  source: "vocab-teori",
+  source: "vocab-supplementary",
   furi: "ぎのうれべる",
   jp: "技能レベル《ぎのうれべる》",
   type: "vocab",
@@ -10193,7 +10193,7 @@ export const CARDS_COMMON = [
   {
   id: 1428,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "どぼく",
   jp: "土木《どぼく》",
   type: "vocab",
@@ -10205,7 +10205,7 @@ export const CARDS_COMMON = [
   {
   id: 1429,
   category: "sekou",
-  source: "vocab-core",
+  source: "vocab-supplementary",
   furi: "みずもり",
   jp: "水盛り《みずもり》",
   type: "vocab",
@@ -10217,7 +10217,7 @@ export const CARDS_COMMON = [
   {
   id: 1430,
   category: "sekou",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "くっさく",
   jp: "掘削《くっさく》",
   type: "vocab",
@@ -10316,7 +10316,7 @@ export const CARDS_COMMON = [
   {
   id: 1438,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "すらんぷしけん",
   jp: "スランプ試験《すらんぷしけん》",
   type: "vocab",
@@ -10328,7 +10328,7 @@ export const CARDS_COMMON = [
   {
   id: 1439,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "せっこうボード",
   jp: "石膏ボード《せっこうボード》",
   type: "vocab",
@@ -10352,7 +10352,7 @@ export const CARDS_COMMON = [
   {
   id: 1441,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "めじ",
   jp: "目地《めじ》",
   type: "vocab",
@@ -10364,7 +10364,7 @@ export const CARDS_COMMON = [
   {
   id: 1442,
   category: "sekou",
-  source: "vocab-exam",
+  source: "vocab-supplementary",
   furi: "モルタル",
   jp: "モルタル",
   type: "vocab",

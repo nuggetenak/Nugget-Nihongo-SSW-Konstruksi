@@ -48,15 +48,15 @@ this line doesn't update itself.
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
 - P0–P5, P7, P9, P14, P15, P8a: all done
-- `type` field corruption (id=82,83,186,188,201): **fixed**, verify script exits 0
+- `type` field corruption (id=82,83,186,188,201): fixed, verify script exits 0
 - **Owner answered OD-1/OD-2/OD-3 (2026-07-11):** OD-1 → merge deprecated sources into
   `vocab-supplementary`. OD-2 → split wglv now. OD-3 → rename jac-mockup now.
-- **P17 done:** `sets/csv/` → `sets/jac-mockup/`, `ct*/cp*` → `jmt*/jml*`, source unified to
-  `'jac-mockup'`, titles/ids/export-names updated. Also touched (not just the split files):
-  the monolith `csv-sets.js` → `jac-mockup-sets.js` (this is what the app actually runs —
-  `quiz-sets.js` imports from the monolith, not the split files directly) plus `quiz-sets.js`,
-  `index.js`, `viewer.html` reference updates. Verify script confirms all files still parse.
-- P6/P13, P16 (+ dependents P8b/P10/P11): now unblocked, in progress or queued this session
+- **P17 done:** `sets/csv/` → `sets/jac-mockup/` (see git log for detail — also touched the
+  monolith `csv-sets.js`→`jac-mockup-sets.js`, not just the split files)
+- **P6 + P13 done:** the 226 cards on `vocab-lifeline`/`vocab-general`/`vocab-teori`/
+  `vocab-core`/`vocab-exam` → `vocab-supplementary`. That source is now 495 (was 269). All 5
+  deprecated values confirmed at 0 remaining across all 3 layers (split/mirror/cards.js).
+- P16 (+ dependents P8b/P10/P11): next up this session
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -74,9 +74,7 @@ one" list — check the gate before starting.
 | P8b | P16 first | wglv-jp: naked `q`/`exp`. wglv-id: naked `hint`/`opts` |
 | P10 | P16 first, OD-4 for hint direction | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
 | P11 | P16 first | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
-| P6 | OD-1 | If approved: 226 kartu deprecated sources → `vocab-supplementary`; edit `source:` in split files |
 | P12 | merge time, not now | Drop `furi` from all split files |
-| P13 | after P6 | Verify zero deprecated sources remain |
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - ~64 naked-kanji `jp` post-compound/qualifier cases (P1) — each may need a different ruby call

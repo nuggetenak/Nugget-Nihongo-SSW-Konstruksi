@@ -1672,7 +1672,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 693,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "あんてい",
   jp: "安定《あんてい》",
   type: "vocab",
@@ -1684,7 +1684,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 694,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "げんいん",
   jp: "原因《げんいん》",
   type: "vocab",
@@ -1696,7 +1696,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 697,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ないめん",
   jp: "内面《ないめん》",
   type: "vocab",
@@ -1708,7 +1708,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 698,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ないぶ",
   jp: "内部《ないぶ》",
   type: "vocab",
@@ -1720,7 +1720,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 699,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ずめん",
   jp: "図面《ずめん》",
   type: "vocab",
@@ -1732,7 +1732,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 701,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おんど",
   jp: "温度《おんど》",
   type: "vocab",
@@ -1744,7 +1744,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 702,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "うむ",
   jp: "有無《うむ》",
   type: "vocab",
@@ -1756,7 +1756,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 706,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "じゅうりょう",
   jp: "重量《じゅうりょう》",
   type: "vocab",
@@ -1768,7 +1768,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 709,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "いち",
   jp: "位置《いち》",
   type: "vocab",
@@ -1780,7 +1780,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 714,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おくがい",
   jp: "屋外《おくがい》",
   type: "vocab",
@@ -1792,7 +1792,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 715,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "しゅるい",
   jp: "種類《しゅるい》",
   type: "vocab",
@@ -1804,7 +1804,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 716,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "もくてき",
   jp: "目的《もくてき》",
   type: "vocab",
@@ -1816,7 +1816,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 719,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "けっか",
   jp: "結果《けっか》",
   type: "vocab",
@@ -1828,7 +1828,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 720,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "へんか",
   jp: "変化《へんか》",
   type: "vocab",
@@ -1840,7 +1840,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 722,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "もんだい",
   jp: "問題《もんだい》",
   type: "vocab",
@@ -1864,7 +1864,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 733,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ながさ",
   jp: "長さ《ながさ》",
   type: "vocab",
@@ -1888,7 +1888,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 741,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "つよい",
   jp: "強い《つよい》",
   type: "vocab",
@@ -1900,7 +1900,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 746,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ばあい",
   jp: "場合《ばあい》",
   type: "vocab",
@@ -1924,7 +1924,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 752,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "よぶ",
   jp: "呼ぶ《よぶ》",
   type: "vocab",
@@ -1936,7 +1936,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 753,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おもな",
   jp: "主な《おもな》",
   type: "vocab",
@@ -1948,7 +1948,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 762,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ちゅういてん",
   jp: "注意点《ちゅういてん》",
   type: "vocab",
@@ -1960,7 +1960,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 763,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かならず",
   jp: "必ず《かならず》",
   type: "vocab",
@@ -1972,7 +1972,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 764,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "まず",
   jp: "まず",
   type: "vocab",
@@ -1984,7 +1984,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 765,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "とくに",
   jp: "特に《とくに》",
   type: "vocab",
@@ -1996,7 +1996,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 767,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ふせぐ",
   jp: "防ぐ《ふせぐ》",
   type: "vocab",
@@ -2008,7 +2008,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 768,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おこなう",
   jp: "行う《おこなう》",
   type: "vocab",
@@ -2020,7 +2020,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 769,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "かんがえられる",
   jp: "考えられる《かんがえられる》",
   type: "vocab",
@@ -2044,7 +2044,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 771,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "べき",
   jp: "べき",
   type: "vocab",
@@ -2056,7 +2056,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 772,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "おこる",
   jp: "起こる《おこる》",
   type: "vocab",
@@ -2080,7 +2080,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
 {
   id: 777,
   category: "career",
-  source: "vocab-lifeline",
+  source: "vocab-supplementary",
   furi: "ほうほう",
   jp: "方法《ほうほう》",
   type: "vocab",
