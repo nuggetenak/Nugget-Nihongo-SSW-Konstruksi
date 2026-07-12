@@ -1,4 +1,4 @@
-// wglv-id-01.js — Wayground Set: wglv-id-01 (P8b ruby pass, session 23)
+// wglv-id-01.js — Wayground Set: wglv-id-01 (P8b ruby + P11 exp pass, session 23)
 // Part of content-dq branch. Merge into wayground-sets.js on main.
 export const SET_WGLV_ID_01 = {
     id: "wglv-id-01", title: "Vocab ID→JP 01 · 39qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",

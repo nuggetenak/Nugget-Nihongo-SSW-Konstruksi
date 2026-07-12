@@ -84,6 +84,10 @@ this line doesn't update itself.
   Left naked rather than guessed; several still have their original round-paren reading sitting
   right there for whoever picks this up next. Re-synced into `wayground-sets.js` after fixing —
   had to redo the P16 splice, caught and fixed an off-by-one that dropped a `{` before pushing.
+- **P11 done.** 50 instances of `"{term} = bahasa Jepangnya."` (a circular non-explanation - just
+  said "= its Japanese") replaced with `"{opts[ans]} = {opts_id[ans]}."` using data already
+  present in the same question object (not invented) - verified `ans` isn't always 0 first (12
+  of 50 weren't) and `opts_id[ans]` is never empty before trusting this approach.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -98,7 +102,6 @@ one" list — check the gate before starting.
 | Task | Depends on | What |
 |---|---|---|
 | P10 | OD-4 for hint direction | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
-| P11 | none | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
 | P12 | merge time, not now | Drop `furi` from all split files |
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
