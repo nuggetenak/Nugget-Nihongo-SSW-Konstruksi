@@ -140,6 +140,14 @@ Yang wajib difix: 41 truncated (ending `/`), 13 multi-slash list, 3 id_text beri
 - wglv01 (semua JP→ID) → langsung jadi `wglv-jp-01`
 - wglv02–05: questions dipecah ke file yang sesuai berdasarkan direction
 
+> **Koreksi (session 23, P16 eksekusi):** klaim "wglv01 semua JP→ID" di atas **salah** —
+> diverifikasi programatically (cek bahasa `opts` per soal): wglv01 aktualnya 26 ID→JP + 24
+> JP→ID, mixed sama seperti wglv02-05. wglv02/04/05 di tabel atas sudah akurat (terverifikasi
+> cocok); hanya wglv01 yang meleset. Total real: 117 ID→JP + 119 JP→ID = 236 (bukan 91+145
+> seperti isyarat tabel). Eksekusi P16 pakai angka terverifikasi ini, bukan tabel di atas.
+> Tidak diketahui dari mana klaim awal "wglv01 100% JP→ID" berasal — mungkin asumsi yang belum
+> pernah dicek, bukan re-verifikasi yang salah.
+
 ---
 
 ### 1.4 CSV Sets — RENAME menjadi `jac-mockup`

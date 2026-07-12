@@ -74,7 +74,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │   ├── cards.js                ← CARDS[1443 on main; 1,438 on content-dq — 5 dup cards deleted pre-merge, see HANDOFF.md]
     │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
     │   │                              cards-doboku/kenchiku (empty stubs)
-    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + jac-mockup + doboku + kenchiku
+    │   ├── quiz-sets.js            ← QUIZ_SETS (45 sets, was 44 pre-P16): wayground + jac-mockup + doboku + kenchiku
     │   ├── jac-teori.js / jac-lifeline.js / jac-official.js
     │   ├── jac-doboku.js / jac-kenchiku.js   ← empty stubs (future 実技 content)
     │   ├── wayground-sets.js / jac-mockup-sets.js (ex-csv-sets.js, renamed P17)    ← source sets (imported by quiz-sets.js)
@@ -191,7 +191,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
 | `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
 | `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
-| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS + DOBOKU_SETS + KENCHIKU_SETS (44 sets total); getQuizSetsForTrack() helper; doboku/kenchiku sets inlined here (REF-9 v4.21.0, renamed P20; CSV_SETS→JAC_MOCKUP_SETS renamed P17) |
+| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS + DOBOKU_SETS + KENCHIKU_SETS (45 sets total, was 44 pre-P16 - wayground went 26→27 sets); getQuizSetsForTrack() helper; doboku/kenchiku sets inlined here (REF-9 v4.21.0, renamed P20; CSV_SETS→JAC_MOCKUP_SETS renamed P17) |
 | `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
 | `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
 | `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
@@ -234,6 +234,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 5) — executed P16 (OD-2: owner confirmed now). Verified the spec's wglv01 direction table was wrong (claimed 100% JP→ID, actual 26 ID→JP/24 JP→ID) before trusting it - corrected in CARD_CONTENT_SPEC.md. Real split: 117 ID→JP + 119 JP→ID = 236, chunked into wglv-jp-01/02/03 + wglv-id-01/02/03 (~39-40 each). Same monolith-drift pattern as P17: wayground-sets.js held stale content under legacy ids wg6/wg7/wg8/wg9/wg11 (not wglv01-05), with at least one confirmed drift (duplicated ruby on wg6 id=4, already fixed in the split file). Rebuilt from the split-file content. Found (not fixed) a malformed-opts data issue in one carried-over question, added to HANDOFF.md's judgment-call bucket. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 4) — executed P6+P13 (OD-1: owner confirmed merge). 226 cards on vocab-lifeline(113)/vocab-general(44)/vocab-teori(18)/vocab-core(13)/vocab-exam(38) reclassified to vocab-supplementary (269→495), across all 3 layers (5 split files + both source/ mirrors + cards.js, 678 total line changes = 226×3). Verify script confirms 0 deprecated values remain, all counts/mirrors still consistent. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 3) — owner answered OD-1 (merge), OD-2 (now), OD-3 (now) via quick tappable choices. Fixed the id=82/83/186/188/201 corruption (verify script now exits 0). Executed P17: sets/csv/→sets/jac-mockup/, ct*/cp*→jmt*/jml*, source unified to 'jac-mockup', titles/ids/export-names per CARD_CONTENT_SPEC.md §1.4. Also updated csv-sets.js→jac-mockup-sets.js (the actual monolith the running app consumes via quiz-sets.js — not just the split files, which was a scope gap the task list didn't make obvious) + quiz-sets.js + index.js + viewer.html + this file + README-CONTENT-DQ.md reference updates. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 2) — owner requested a redesign for a multi-agent relay workflow (upload/download one .md per agent handoff). Consolidated SESSION_PROMPT.md + DATA_QUALITY_HANDOFF_v18.md + PROGRESS.md's active checklist into one file, `HANDOFF.md`, always edited in place (no version numbers); all three archived. Added `scripts/verify-content.mjs` — dependency-free, catches syntax corruption and count mismatches without needing the main-branch build pipeline; confirmed it correctly flags the still-open id=82/83/186/188/201 corruption and correctly passes on a fixed test copy. Updated README-CONTENT-DQ.md + this file's own header/tree-comment to point at HANDOFF.md instead of the now-archived files. (Note: this row was briefly overwritten by mistake instead of added as a new row, then restored — same class of editing slip as the ADM10-13 duplication earlier this session, caught the same way, by reviewing the diff before trusting it.) |

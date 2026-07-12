@@ -26,7 +26,7 @@ src/data/                        ← all content files (edit here)
       teori/      wt01–wt10.js
       vocab/      wtv01.js
       lifeline/praktik/   wgl01–wgl10.js
-      lifeline/vocab/     wglv01–wglv05.js
+      lifeline/vocab/     wglv-jp-01–03.js, wglv-id-01–03.js (P16 split, ex wglv01-05)
     quiz/   doboku-01–03.js, kenchiku-01–03.js
     jac/    jac-teori.js, jac-lifeline.js
   jac-teori.js                   ← JAC official exam Teori (65 qs)

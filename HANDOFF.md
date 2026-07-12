@@ -56,7 +56,20 @@ this line doesn't update itself.
 - **P6 + P13 done:** the 226 cards on `vocab-lifeline`/`vocab-general`/`vocab-teori`/
   `vocab-core`/`vocab-exam` → `vocab-supplementary`. That source is now 495 (was 269). All 5
   deprecated values confirmed at 0 remaining across all 3 layers (split/mirror/cards.js).
-- P16 (+ dependents P8b/P10/P11): next up this session
+- **P16 done.** Same monolith-drift pattern as P17: `wayground-sets.js` held a *stale* copy of
+  this content under legacy ids `wg6/wg7/wg8/wg9/wg11` (not `wglv01-05` — different ids entirely,
+  and at least one confirmed content diff vs. the split files, a duplicated ruby annotation on
+  wg6/id=4 that was already fixed in wglv01.js but never propagated). Rebuilt from the (correct)
+  split-file content, not the stale monolith. **CARD_CONTENT_SPEC.md's direction table was wrong
+  for wglv01** — claimed 100% JP→ID (0/50), verified actual is 26 ID→JP / 24 JP→ID, i.e. mixed
+  like every other wglv file. Correction noted in the spec itself. Real totals used: 117 ID→JP +
+  119 JP→ID = 236 (not the spec-implied 91+145). Decisions made without asking (flagging here,
+  easy to redo differently if wrong): 3 files per direction, ~39-40 questions each, chunked in
+  original wglv01→05 order (not fully interleaved) so each new file stays reasonably coherent;
+  `source: "wayground-lifeline-vocab"` unified across all 6 new files (same move as P17's source
+  unification, old per-file sources wayground-quizizz/pdf7/8/9/11 dropped since files no longer
+  map 1:1 to those origins post-split). One data-quality issue found and carried through
+  unfixed, not judgment-called: see 🟡 bucket below.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -70,10 +83,9 @@ one" list — check the gate before starting.
 ### 🔵 Gated on an owner decision — ask before starting
 | Task | Depends on | What |
 |---|---|---|
-| P16 | OD-2 | Split `wglv01–05` into `wglv-jp-*` (JP→ID) and `wglv-id-*` (ID→JP); reset ids; update exports; delete old files |
-| P8b | P16 first | wglv-jp: naked `q`/`exp`. wglv-id: naked `hint`/`opts` |
-| P10 | P16 first, OD-4 for hint direction | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
-| P11 | P16 first | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
+| P8b | none now (P16 done) | wglv-jp: naked `q`/`exp`. wglv-id: naked `hint`/`opts` |
+| P10 | OD-4 for hint direction (P16 done, no longer blocking) | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
+| P11 | none now (P16 done) | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
 | P12 | merge time, not now | Drop `furi` from all split files |
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
@@ -83,6 +95,11 @@ one" list — check the gate before starting.
 - 6 same-jp ambiguous pairs: 124/842, 299/858, 862/309, 438/911, 482/819, 416/1182 (P4)
 - 213 `desc` truncated mid-word + 266 missing period (~479 cards, P5) — needs real JAC PDF text,
   don't guess-fill these
+- **New (P16, session 23):** what was wglv03 id=23 (now inside one of the wglv-id-* files —
+  original numbering doesn't carry over, search by content: q starts "Apa bahasa Jepangnya
+  'Membersihkan permukaan fusi'") has malformed `opts`: one entry looks like two merged options
+  (`"融着面の清掃《...》b) 管の清掃《...》"`) and one empty string. Needs the original source to
+  fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
 
 ### 🟢 Unblocked, no owner decision needed, just not done yet
 - `confusion-pairs.js`: add `track` field to all 28 entries — no task number assigned, open
