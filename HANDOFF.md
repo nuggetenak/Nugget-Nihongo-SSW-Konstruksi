@@ -70,6 +70,20 @@ this line doesn't update itself.
   unification, old per-file sources wayground-quizizz/pdf7/8/9/11 dropped since files no longer
   map 1:1 to those origins post-split). One data-quality issue found and carried through
   unfixed, not judgment-called: see 🟡 bucket below.
+- **P8b done (mostly).** Scoped to what the task actually specified — `q`/`exp` for wglv-jp,
+  `opts` for wglv-id — not `hint`, after checking the established convention (already-verified
+  P8a files use plain Indonesian prose or kanji=meaning breakdowns in `hint`, never `《》` ruby;
+  confirmed hint's "naked" kanji in wglv are meaning-breakdowns like `温=panas`, not something
+  that was ever meant to carry a reading). Fixed via mechanical passes: strip redundant
+  ruby+round-paren duplicates, convert round-paren-only readings to proper `《》` ruby using the
+  text's own stated reading (not invented), cross-reference the same compound if it's already
+  ruby'd elsewhere in the same question, then a whole-repo dictionary built from 38,754 existing
+  `《》` pairs for remaining high-confidence matches only (≥85% reading consistency required).
+  61 instances across 26 unique compounds left **unresolved on purpose** — mostly single
+  characters (管, 輪, 形, etc.) whose reading genuinely depends on context I can't verify safely.
+  Left naked rather than guessed; several still have their original round-paren reading sitting
+  right there for whoever picks this up next. Re-synced into `wayground-sets.js` after fixing —
+  had to redo the P16 splice, caught and fixed an off-by-one that dropped a `{` before pushing.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -83,9 +97,8 @@ one" list — check the gate before starting.
 ### 🔵 Gated on an owner decision — ask before starting
 | Task | Depends on | What |
 |---|---|---|
-| P8b | none now (P16 done) | wglv-jp: naked `q`/`exp`. wglv-id: naked `hint`/`opts` |
-| P10 | OD-4 for hint direction (P16 done, no longer blocking) | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
-| P11 | none now (P16 done) | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
+| P10 | OD-4 for hint direction | wglv-id: fill `opts_id` for all wrong options. wglv-jp: fix `hint` that's still copy-of-q |
+| P11 | none | wglv-id (ex-04/05): replace generic `"JP = bahasa Jepangnya."` with specific translation |
 | P12 | merge time, not now | Drop `furi` from all split files |
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
