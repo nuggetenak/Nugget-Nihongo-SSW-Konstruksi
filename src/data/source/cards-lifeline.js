@@ -2332,7 +2332,7 @@ export const CARDS_LIFELINE = [
   id: 438,
   category: "haikan",
   source: "jac-ch6",
-  furi: "かいさきかこうがたがたれがたいがた",
+  furi: "かいさきかこう",
   jp: "開先加工《かいさきかこう》",
   type: 'vocab',
   id_text: "Beveling pipa 4 jenis",
