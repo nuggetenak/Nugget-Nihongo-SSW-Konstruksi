@@ -8,6 +8,7 @@ export const CONFUSION_PAIRS = [
   // ── 音が似ている (Sound-alikes) ──────────────────────────────────────────
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '着工《ちゃっこう》', furiA: 'ちゃっこう', defA: 'Mulai konstruksi (proyek dimulai)',
     termB: '竣工《しゅんこう》', furiB: 'しゅんこう', defB: 'Selesai konstruksi (proyek selesai)',
@@ -16,6 +17,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '養生《ようじょう》', furiA: 'ようじょう', defA: 'Perawatan/perlindungan bahan bangunan (beton dll)',
     termB: '用心《ようじん》', furiB: 'ようじん', defB: 'Berhati-hati / kewaspadaan',
@@ -24,6 +26,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '施工《せこう》', furiA: 'せこう', defA: 'Pelaksanaan konstruksi (eksekusi di lapangan)',
     termB: '設計《せっけい》', furiB: 'せっけい', defB: 'Perancangan/desain (di atas kertas)',
@@ -32,6 +35,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '解体《かいたい》', furiA: 'かいたい', defA: 'Pembongkaran bangunan',
     termB: '改築《かいちく》', furiB: 'かいちく', defB: 'Renovasi/pembangunan ulang',
@@ -40,6 +44,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '監督《かんとく》', furiA: 'かんとく', defA: 'Pengawas lapangan / site supervisor',
     termB: '管理《かんり》', furiB: 'かんり', defB: 'Manajemen / administrasi',
@@ -48,6 +53,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '転倒《てんとう》', furiA: 'てんとう', defA: 'Jatuh/terguling (kecelakaan badan)',
     termB: '転落《てんらく》', furiB: 'てんらく', defB: 'Jatuh dari ketinggian',
@@ -56,6 +62,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '墜落《ついらく》', furiA: 'ついらく', defA: 'Terjatuh dari ketinggian (kasus fatal)',
     termB: '転落《てんらく》', furiB: 'てんらく', defB: 'Jatuh dari ketinggian (lebih umum)',
@@ -64,6 +71,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '親方《おやかた》', furiA: 'おやかた', defA: 'Kepala tukang / mandor berpengalaman',
     termB: '方向《ほうこう》', furiB: 'ほうこう', defB: 'Arah / direction',
@@ -72,6 +80,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '補修《ほしゅう》', furiA: 'ほしゅう', defA: 'Perbaikan / repair (setelah rusak)',
     termB: '保守《ほしゅ》', furiB: 'ほしゅ', defB: 'Pemeliharaan rutin / maintenance',
@@ -80,6 +89,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '音',
+    track: 'common',
     label: '発音が似ている',
     termA: '開口《かいこう》', furiA: 'かいこう', defA: 'Lubang/bukaan di lantai atau dinding (bahaya jatuh)',
     termB: '解雇《かいこ》', furiB: 'かいこ', defB: 'PHK / pemecatan',
@@ -90,6 +100,7 @@ export const CONFUSION_PAIRS = [
   // ── 字が似ている (Kanji look-alikes) ──────────────────────────────────────
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '掘削《くっさく》', furiA: 'くっさく', defA: 'Penggalian tanah (dengan alat berat)',
     termB: '削孔《さっこう》', furiB: 'さっこう', defB: 'Pengeboran lubang (bor ke dalam material)',
@@ -98,6 +109,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '鉄筋《てっきん》', furiA: 'てっきん', defA: 'Tulangan baja (rebar) dalam beton',
     termB: '鉄骨《てっこつ》', furiB: 'てっこつ', defB: 'Rangka baja struktural (steel frame)',
@@ -106,6 +118,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '基礎《きそ》', furiA: 'きそ', defA: 'Fondasi bangunan',
     termB: '基盤《きばん》', furiB: 'きばん', defB: 'Fondasi/dasar sistem (lebih abstrak)',
@@ -114,6 +127,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '足場《あしば》', furiA: 'あしば', defA: 'Scaffolding / perancah kerja',
     termB: '地盤《じばん》', furiB: 'じばん', defB: 'Tanah / kondisi lapisan tanah',
@@ -122,6 +136,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '着火《ちゃっか》', furiA: 'ちゃっか', defA: 'Terbakar / bahan mulai menyala',
     termB: '発火《はっか》', furiB: 'はっか', defB: 'Terbakar sendiri / ignisi spontan',
@@ -130,6 +145,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'lifeline',
     label: '漢字が似ている',
     termA: '圧縮《あっしゅく》', furiA: 'あっしゅく', defA: 'Menekan/memampatkan (compression)',
     termB: '圧着《あっちゃく》', furiB: 'あっちゃく', defB: 'Menghubungkan dengan tekanan (crimping)',
@@ -138,6 +154,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '防水《ぼうすい》', furiA: 'ぼうすい', defA: 'Waterproofing / mencegah air masuk',
     termB: '排水《はいすい》', furiB: 'はいすい', defB: 'Drainase / mengalirkan air keluar',
@@ -146,6 +163,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '換気《かんき》', furiA: 'かんき', defA: 'Ventilasi / pertukaran udara',
     termB: '排気《はいき》', furiB: 'はいき', defB: 'Pembuangan udara kotor / gas buang',
@@ -154,6 +172,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '改修《かいしゅう》', furiA: 'かいしゅう', defA: 'Renovasi/perbaikan bangunan (repair + upgrade)',
     termB: '改築《かいちく》', furiB: 'かいちく', defB: 'Rekonstruksi (bongkar + bangun ulang)',
@@ -162,6 +181,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '字',
+    track: 'common',
     label: '漢字が似ている',
     termA: '点検《てんけん》', furiA: 'てんけん', defA: 'Inspeksi / pengecekan berkala',
     termB: '検査《けんさ》', furiB: 'けんさ', defB: 'Pemeriksaan resmi / formal inspection',
@@ -172,6 +192,7 @@ export const CONFUSION_PAIRS = [
   // ── 意味が重なる (Meaning overlap) ────────────────────────────────────────
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '仮設《かせつ》', furiA: 'かせつ', defA: 'Sementara / bersifat provisional (terpasang selama konstruksi)',
     termB: '本設《ほんせつ》', furiB: 'ほんせつ', defB: 'Permanen / bersifat final (terpasang di bangunan jadi)',
@@ -180,6 +201,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '作業主任者《さぎょうしゅにんしゃ》', furiA: 'さぎょうしゅにんしゃ', defA: 'Pengawas keselamatan kerja bersertifikat (wajib untuk pekerjaan berbahaya)',
     termB: '職長《しょくちょう》', furiB: 'しょくちょう', defB: 'Kepala tim / foreman (tidak harus bersertifikat khusus)',
@@ -188,6 +210,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '特定元方事業者《とくていもとかたじぎょうしゃ》', furiA: 'とくていもとかたじぎょうしゃ', defA: 'Kontraktor utama di proyek yang melibatkan banyak kontraktor (みなし元方)',
     termB: '元請け《もとうけ》', furiB: 'もとうけ', defB: 'Kontraktor utama (umum, melawan 下請け)',
@@ -196,6 +219,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '有機溶剤《ゆうきようざい》', furiA: 'ゆうきようざい', defA: 'Pelarut organik (thinner, bensin — uapnya beracun)',
     termB: '危険物《きけんぶつ》', furiB: 'きけんぶつ', defB: 'Bahan berbahaya (mudah terbakar, lebih luas cakupannya)',
@@ -204,6 +228,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '請負《うけおい》', furiA: 'うけおい', defA: 'Kontrak borongan (kontraktor bertanggung jawab hasil)',
     termB: '委託《いたく》', furiB: 'いたく', defB: 'Kontrak jasa/mandat (pemberi kerja tetap kontrol)',
@@ -212,6 +237,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '熱中症《ねっちゅうしょう》', furiA: 'ねっちゅうしょう', defA: 'Heat stroke / penyakit karena panas berlebih',
     termB: '脱水症《だっすいしょう》', furiB: 'だっすいしょう', defB: 'Dehidrasi',
@@ -220,6 +246,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '不活性ガス《ふかっせいガス》', furiA: 'ふかっせいガス', defA: 'Gas inert/tidak reaktif (nitrogen, argon, dll) — bahaya kekurangan O₂',
     termB: '有毒ガス《ゆうどくガス》', furiB: 'ゆうどくガス', defB: 'Gas beracun (CO, H₂S, dll) — bahaya keracunan',
@@ -228,6 +255,7 @@ export const CONFUSION_PAIRS = [
   },
   {
     type: '意',
+    track: 'common',
     label: '意味が似ている',
     termA: '安全帯《あんぜんたい》', furiA: 'あんぜんたい', defA: 'Harness / sabuk pengaman (untuk kerja di ketinggian) — istilah lama',
     termB: '墜落制止用器具《ついらくせいしようきぐ》', furiB: 'ついらくせいしようきぐ', defB: 'Alat pencegah jatuh (istilah resmi baru sejak 2019)',
