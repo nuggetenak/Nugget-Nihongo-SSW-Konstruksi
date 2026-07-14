@@ -1321,17 +1321,6 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
     _origIndex: 1387
   },
 {
-  id: 1240,
-  category: "hourei",
-  source: "vocab-supplementary",
-  furi: "こうせいねんきん",
-  jp: "厚生年金《こうせいねんきん》",
-  type: "hukum",
-  id_text: "Asuransi pensiun karyawan",
-  desc: "Premi pensiun ditanggung bersama perusahaan dan karyawan (50%:50%).",
-  _origIndex: 1396
-  },
-{
   id: 1242,
   category: "hourei",
   source: "vocab-supplementary",

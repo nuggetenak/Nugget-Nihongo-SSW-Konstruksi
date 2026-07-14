@@ -5756,7 +5756,7 @@ export const CARDS_COMMON = [
   {
   id: 1240,
   category: "hourei",
-  source: "vocab-supplementary",
+  source: "jac-ch2",
   furi: "こうせいねんきん",
   jp: "厚生年金《こうせいねんきん》",
   type: "hukum",

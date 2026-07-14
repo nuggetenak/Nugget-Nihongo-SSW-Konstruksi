@@ -832,5 +832,16 @@ export const CARDS_CH2 = [
   desc: "Flange siap pakai dimasukkan ke duct, dilas titik, dikencangkan baut + penjepit ラッツ di 4 sudut.",
   usage: 'スライドオンフランジ工法《すらいどおんふらんじこうほう》でダクトを現場《げんば》で接続《せつぞく》する（sambungkan duct di lapangan menggunakan metode slide-on flange）',
     _origIndex: 540
+  },
+{
+  id: 1240,
+  category: "hourei",
+  source: "jac-ch2",
+  furi: "こうせいねんきん",
+  jp: "厚生年金《こうせいねんきん》",
+  type: "hukum",
+  id_text: "Asuransi pensiun karyawan",
+  desc: "Premi pensiun ditanggung bersama perusahaan dan karyawan (50%:50%).",
+  _origIndex: 1396
   }
 ];
