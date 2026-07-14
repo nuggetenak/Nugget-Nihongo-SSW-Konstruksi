@@ -110,6 +110,23 @@ doesn't update itself.
   `lifeline` (the crimping pair, matches danger-pairs' own lifeline-tagged crimping entry) / 0
   doboku/kenchiku. Lopsided on purpose, not on omission — flagged for a sanity check, easy to
   redo per-line if any single call is wrong. Commit `cbfc0de`, full reasoning in the commit body.
+- **P3 done (session 24).** `id=1240` source: `vocab-supplementary` → `jac-ch2`. Evidence: sits
+  between id=1238/1239/1241 (all jac-ch2, same kind of content — named insurance schemes off the
+  same textbook list), and jac-ch2 is the dominant source for `category:"hourei"` anyway (76/94).
+  Fixed across `cards.js`, `source/cards-common.js`, and moved the object from
+  `cards/common/vocab-supplementary.js` → `cards/common/ch2.js` (split files are 1:1 with source
+  value). Commit `bbcc070`.
+- **P4 done (session 24) — no merges.** EF接合 triple (459/612/613) and all 6 same-jp pairs
+  (124/842, 299/858, 862/309, 438/911, 482/819, 416/1182) reviewed individually — none merged.
+  3 of 6 pairs are the established konsep+vocab dual-card pattern (one deeper explanation, one
+  drill card with `usage`, same headword by design — 842/1182 even self-label `"(vocab)"` in
+  `id_text`). The rest (299/858, 438/911, 482/819) are same-`type` but cover genuinely different
+  angles (e.g. 299 teaches a 水平器/水準器 tool-confusion distinction 858 doesn't have; 438
+  enumerates 4 bevel types 911 doesn't). Bonus fix found along the way: `id=438`'s `furi` had 4
+  bevel-type readings from its own `desc` concatenated onto the headword reading
+  (`かいさきかこうがたがたれがたいがた` → `かいさきかこう`, confirmed against sibling `id=911`'s
+  clean furi for the identical headword). New furi anomaly found on the EF接合 triple itself —
+  not fixed, see 🟡 bucket below. Commit `dae7aef`.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -142,11 +159,14 @@ unknown scope, check before assuming it's the same risk profile as the hint half
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - ~64 naked-kanji `jp` post-compound/qualifier cases (P1) — each may need a different ruby call
-- `id=1240` `source` field — ambiguous jac-ch2 content (P3)
-- EF接合 triple (id=459, 612, 613) — 3 cards, different content, merge candidate (P4)
-- 6 same-jp ambiguous pairs: 124/842, 299/858, 862/309, 438/911, 482/819, 416/1182 (P4)
 - 213 `desc` truncated mid-word + 266 missing period (~479 cards, P5) — needs real JAC PDF text,
   don't guess-fill these
+- **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
+  459/612 nest `《》`-bracketed glosses *inside* the furi string itself (should be plain reading
+  text); 613's furi doesn't read as "EF接合" at all, looks corrupted. No clean sibling to
+  cross-reference (unlike id=438's furi contamination, fixed this session). Needs either the
+  original source or a clearer read on this project's furi convention for EF/katakana-mixed
+  terms before touching — don't guess.
 - **New (P16, session 23):** what was wglv03 id=23 (now inside one of the wglv-id-* files —
   original numbering doesn't carry over, search by content: q starts "Apa bahasa Jepangnya
   'Membersihkan permukaan fusi'") has malformed `opts`: one entry looks like two merged options
