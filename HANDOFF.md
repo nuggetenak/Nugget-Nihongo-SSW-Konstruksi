@@ -59,8 +59,8 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-07-11 (session 23, cont'd).** Verify before trusting past this point —
-this line doesn't update itself.
+**As of this edit, 2026-07-15 (session 24).** Verify before trusting past this point — this line
+doesn't update itself.
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
 - P0–P5, P7, P9, P14, P15, P8a: all done
@@ -104,6 +104,12 @@ this line doesn't update itself.
   said "= its Japanese") replaced with `"{opts[ans]} = {opts_id[ans]}."` using data already
   present in the same question object (not invented) - verified `ans` isn't always 0 first (12
   of 50 weren't) and `opts_id[ans]` is never empty before trusting this approach.
+- **`confusion-pairs.js` done (session 24).** Added `track` to all 28 entries — field didn't exist
+  before. No in-file precedent, so methodology borrowed from the sibling `danger-pairs.js` (same
+  shape, already had `track`) + `_MAP.md`'s "3 Study Tracks" table. Result: 27 `common` / 1
+  `lifeline` (the crimping pair, matches danger-pairs' own lifeline-tagged crimping entry) / 0
+  doboku/kenchiku. Lopsided on purpose, not on omission — flagged for a sanity check, easy to
+  redo per-line if any single call is wrong. Commit `cbfc0de`, full reasoning in the commit body.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -148,11 +154,39 @@ unknown scope, check before assuming it's the same risk profile as the hint half
   fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
 
 ### 🟢 Unblocked, no owner decision needed, just not done yet
-- `confusion-pairs.js`: add `track` field to all 28 entries — no task number assigned, open
+*(none right now — `confusion-pairs.js` track field, the last one, done session 24. Check
+CURRENT STATE before assuming this list is stale.)*
 
 ### ⏸ Blocked on external material
 - P21 — JAC Doboku + Kenchiku jitsugi stubs — needs official PDF from owner
 - PDF Viewer Mode — needs official PDF URL from owner
+
+**P21 detail (investigated session 24, owner asked "why does doboku/kenchiku show up at all if
+everything's sourced from JAC teori+praktik, which is common/lifeline only?"):** confirmed —
+JAC Official (95 soal: tt1/tt2/st1/st2) and JAC Mockup (300 soal: jmt01-06/jml01-06) are 100%
+`common`/`lifeline`, 0 `doboku`/`kenchiku`, both layers. `cards.js` same story — 0 cards tagged
+doboku/kenchiku (`cards-doboku.js`/`cards-kenchiku.js` source mirrors both empty). Not luck:
+`main` commit `1473acb` (v4.18.0) is titled "migrate doboku+kenchiku 157 cards to common",
+reasoning "Ch.1-4 content belongs in common (all tracks)" — this exact failure mode got hit and
+fixed once already. That commit isn't in content-dq's lineage (branch had already diverged), but
+content-dq's current state independently satisfies the same invariant, so the fix still holds
+here regardless of path.
+
+The only current source of doboku/kenchiku-tagged content is **Quiz Internal**
+(`quiz/doboku-01/02/03.js` + `kenchiku-01/02/03.js`, 90 soal) — AI-generated draft, not
+JAC-sourced (matches its own catalog label: "belum ada PDF JAC asli buat validasi"). This is
+exactly what this task is blocked on: `jac-doboku.js`/`jac-kenchiku.js` are empty stubs waiting
+for the real PDF, and until it lands, the Quiz Internal drafts are the *only* content behind
+those two tracks — not a bug, just the current state.
+
+Worth knowing the actual weight of what's blocked here: doboku/kenchiku aren't a minor corner of
+the app, they're 2 of its 3 onboarding tracks (`main`: `TrackPicker.jsx` — "Pilih Jalur Belajar" /
+🏗️ Teknik Sipil · 🏢 Bangunan · ⚡ Lifeline — plus `DobokuMode.jsx`/`KenchikuMode.jsx`, both call
+`getQuizSetsForTrack('doboku'|'kenchiku')` directly). Lifeline is fully JAC-sourced end to end;
+doboku and kenchiku currently run on 100% unvalidated AI-generated questions until this PDF
+shows up. (Also note: content-dq's own `src/components`/`src/modes` only has `FilterPopup.jsx` +
+`FocusMode.jsx` — the full UI above, including TrackPicker/DobokuMode/KenchikuMode, is `main`-only
+right now, consistent with P12 being deferred to merge time.)
 
 ---
 
