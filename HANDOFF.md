@@ -144,8 +144,9 @@ doesn't update itself.
   filled — 35 mechanically via cross-reference to an existing verified translation elsewhere in
   the corpus, 65 by real translation (standard construction/electrical/plumbing terminology).
   Split files + wayground-sets.js monolith both updated, 0 mismatches verified across every
-  touched question. Commit `7bfc516`, full per-half methodology in the commit body. Found (not
-  fixed) a new small furi bug along the way — see 🟡 bucket above (wglv-jp-01 id=31).
+  touched question. Commit `7bfc516`, full per-half methodology in the commit body. Also fixed
+  a small furi bug found along the way (wglv-jp-01 id=31, 共板フランジ工法) — sibling id=30 in
+  the same file showed the correct pattern directly. Commit `8766231`.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -164,10 +165,6 @@ one" list — check the gate before starting.
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - 213 `desc` truncated mid-word + 266 missing period (~479 cards, P5) — needs real JAC PDF text,
   don't guess-fill these
-- **New (found during P10, session 24):** `wglv-jp-01.js` id=31 (共板フランジ工法) has a
-  furi-placement bug in its own `q` field — a second reading `ともいた` is attached to the wrong
-  span (reads like it belongs to 共板 but sits after フランジ工法 instead). Out of scope for the
-  hint fix that found it — didn't touch it, flagging instead.
 - **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
   459/612 nest `《》`-bracketed glosses *inside* the furi string itself (should be plain reading
   text); 613's furi doesn't read as "EF接合" at all, looks corrupted. No clean sibling to
