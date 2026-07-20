@@ -352,7 +352,7 @@ export const CARDS_LIFELINE_CH7 = [
   category: "anzen",
   source: "jac-ch7",
   furi: "ほうかい・とうかいさいがい",
-  jp: "崩壊《ほうかい》・倒壊災害《とうかいさいがい》の建設特有例",
+  jp: "崩壊《ほうかい》・倒壊災害《とうかいさいがい》の建設《けんせつ》特有《とくゆう》例《れい》",
   type: 'vocab',
   id_text: "Tiang sementara roboh &",
   desc: "Contoh 崩壊《ほうかい》倒壊《とうかい》 pekerjaan listrik: ①仮設《かせつ》電柱《でんちゅう》 patah & rubuh ②tiang di truk ambruk",
