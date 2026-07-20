@@ -127,6 +127,16 @@ doesn't update itself.
   (`かいさきかこうがたがたれがたいがた` → `かいさきかこう`, confirmed against sibling `id=911`'s
   clean furi for the identical headword). New furi anomaly found on the EF接合 triple itself —
   not fixed, see 🟡 bucket below. Commit `dae7aef`.
+- **P1 done (session 24) — H2 sub-count was stale.** HANDOFF's "~64 naked-kanji jp
+  post-compound" figure was CARD_CONTENT_SPEC.md's original audit number, never re-verified
+  against live data. Fresh count: 12 (H1, the related "~152 in parens" figure, is fully at 0 —
+  also stale, also never resolved). Fixed all 12, each cross-checked against something already
+  in the corpus (sibling readings, usage-field precedent for common verbs like 見る) rather than
+  guessed — see commit body for the full per-card evidence. Also fixed a second, pre-existing
+  naked-kanji instance on id=1390 that was outside H2's own defined scope (leading 屋根工事,
+  not just the trailing qualifier) — same card, same fix, no reason to leave it. Commit
+  `a0fc3bf`. Surfaced a much bigger separate finding along the way — see 🟢 bucket above
+  (split-file/mirror track drift, 316 cards).
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -158,7 +168,6 @@ The wglv-id half (filling `opts_id` for wrong options) wasn't investigated at al
 unknown scope, check before assuming it's the same risk profile as the hint half.
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
-- ~64 naked-kanji `jp` post-compound/qualifier cases (P1) — each may need a different ruby call
 - 213 `desc` truncated mid-word + 266 missing period (~479 cards, P5) — needs real JAC PDF text,
   don't guess-fill these
 - **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
@@ -174,8 +183,27 @@ unknown scope, check before assuming it's the same risk profile as the hint half
   fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
 
 ### 🟢 Unblocked, no owner decision needed, just not done yet
-*(none right now — `confusion-pairs.js` track field, the last one, done session 24. Check
-CURRENT STATE before assuming this list is stale.)*
+- **New (found during P1, session 24): 316 cards' split-file folder disagrees with their source
+  mirror about track.** `node scripts/audit-track-consistency.mjs` reproduces this — reads
+  fresh, don't trust these numbers past this session either. Rule is 100% validated already
+  (checked all 316, zero exceptions): each card's own `category` field always agrees with the
+  **mirror**, never the split file, cross-checked against categories.js's per-category `tracks`
+  array. So the fix direction is settled — move the split-file copy to match the mirror — this
+  is mechanical, not a judgment call, just not done yet:
+  - 253 cards sit in a `cards/lifeline/*.js` file but belong in `cards/common/`: 82 jac-ch5,
+    43 jac-ch6, 39 jac-ch7, 77 vocab-supplementary, 9 jac-jitsugi1/2, 3 singletons
+    (ch2/ch3/ch4). vocab-supplementary and vocab-jac targets already exist on the common side;
+    ch5/ch6/ch7 don't have a common/ counterpart file yet — create them.
+  - 63 cards sit in `cards/common/*.js` but belong in `cards/lifeline/`: 39 jac-ch4, 21 jac-ch3,
+    3 jac-ch2. lifeline/ doesn't have ch2/ch3/ch4 files yet — create them.
+  - Confirmed **zero live-app risk either way**: `scripts/merge-cards.mjs` (main-only, not on
+    content-dq — read via `git show origin/main:scripts/merge-cards.mjs`) builds `cards.js`
+    straight from `src/data/source/cards-*.js`; it never reads the split files under
+    `src/data/cards/` at all. So this is purely an editing-layer consistency problem, not
+    something reaching real users. That's *why* it wasn't executed this session — 316 cards
+    across 6 new files was real effort for zero user-facing benefit, and P1's actual ruby fixes
+    (live content) were the higher-priority use of the session. Good next-session task: fully
+    mechanical, fully de-risked, just needs the time.
 
 ### ⏸ Blocked on external material
 - P21 — JAC Doboku + Kenchiku jitsugi stubs — needs official PDF from owner
