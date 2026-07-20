@@ -137,6 +137,15 @@ doesn't update itself.
   not just the trailing qualifier) — same card, same fix, no reason to leave it. Commit
   `a0fc3bf`. Surfaced a much bigger separate finding along the way — see 🟢 bucket above
   (split-file/mirror track drift, 316 cards).
+- **P10 done (session 24) — both halves.** 61 copy-of-q wglv-jp hints rewritten term-by-term
+  (not via blanket dictionary lookup — that was the exact risk flagged last session). Every
+  hint checked against the term's own already-known correct answer so the component gloss has
+  to support the known meaning, not just sound plausible. 100 empty wglv-id `opts_id` slots
+  filled — 35 mechanically via cross-reference to an existing verified translation elsewhere in
+  the corpus, 65 by real translation (standard construction/electrical/plumbing terminology).
+  Split files + wayground-sets.js monolith both updated, 0 mismatches verified across every
+  touched question. Commit `7bfc516`, full per-half methodology in the commit body. Found (not
+  fixed) a new small furi bug along the way — see 🟡 bucket above (wglv-jp-01 id=31).
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -150,26 +159,15 @@ one" list — check the gate before starting.
 ### 🔵 Gated on an owner decision — ask before starting
 | Task | Depends on | What |
 |---|---|---|
-| P10 | OD-4 (see note) | wglv-id: fill `opts_id` for all wrong options (currently `["text","",""]` pattern - only the correct answer has a translation). wglv-jp: fix `hint` that's still copy-of-q. |
 | P12 | merge time, not now | Drop `furi` from all split files |
-
-**P10 detail (investigated session 23, not executed):** of 119 wglv-jp hints, 61 are confirmed
-copy-of-q (hint text ≈ question text, adds zero information — detectable via hint containing
-both `意味は` and `ですか`). OD-4 asks whether to fix these, but this isn't really a 50/50 call:
-copy-of-q hints are objectively broken regardless of preference, so "update" is the reasoned
-answer, not a guess. What stopped execution wasn't the decision, it was the *method*: fixing
-these means **composing new kanji-meaning-breakdown hints**, not reusing/reformatting existing
-verified data like every other fix this session did. A quick dictionary check found a live
-example of context-drift risk (柱 aggregated to "kolom" across the corpus, but means "tiang" in
-電柱 specifically) — enough to stop rather than generate 61 at once. If you pick this up: go
-term-by-term with real verification per compound (not a blanket aggregate lookup), or get
-additional source material from the owner, rather than trusting a frequency-based dictionary.
-The wglv-id half (filling `opts_id` for wrong options) wasn't investigated at all this session -
-unknown scope, check before assuming it's the same risk profile as the hint half.
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - 213 `desc` truncated mid-word + 266 missing period (~479 cards, P5) — needs real JAC PDF text,
   don't guess-fill these
+- **New (found during P10, session 24):** `wglv-jp-01.js` id=31 (共板フランジ工法) has a
+  furi-placement bug in its own `q` field — a second reading `ともいた` is attached to the wrong
+  span (reads like it belongs to 共板 but sits after フランジ工法 instead). Out of scope for the
+  hint fix that found it — didn't touch it, flagging instead.
 - **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
   459/612 nest `《》`-bracketed glosses *inside* the furi string itself (should be plain reading
   text); 613's furi doesn't read as "EF接合" at all, looks corrupted. No clean sibling to
