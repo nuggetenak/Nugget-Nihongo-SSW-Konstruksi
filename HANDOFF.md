@@ -147,6 +147,16 @@ doesn't update itself.
   touched question. Commit `7bfc516`, full per-half methodology in the commit body. Also fixed
   a small furi bug found along the way (wglv-jp-01 id=31, 共板フランジ工法) — sibling id=30 in
   the same file showed the correct pattern directly. Commit `8766231`.
+- **Split-file/mirror track drift, done (session 24).** Executed the fix diagnosed earlier this
+  session (commit `e530fd7`) — all 316 mismatches reconciled, `node
+  scripts/audit-track-consistency.mjs` now reports 0/1438. String-aware brace-depth parser
+  moved each card's object verbatim (not reformatted) to the split-file folder its mirror +
+  `category` already agreed on. 6 new files created (common/ch5.js, ch6.js, ch7.js;
+  lifeline/ch2.js, ch3.js, ch4.js), 2 existing ones gained cards (common/vocab-jac.js,
+  vocab-supplementary.js), 1 deleted (lifeline/ch7.js — all 55 of its cards were mismatched;
+  ch7 is JAC's safety chapter, and safety is common-domain by definition, so a whole chapter
+  moving isn't a red flag on the fix itself). verify-content.mjs clean, 1438 unchanged, all 78
+  files parse. Commit `da7337d`, full reasoning in the commit body.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -178,27 +188,7 @@ one" list — check the gate before starting.
   fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
 
 ### 🟢 Unblocked, no owner decision needed, just not done yet
-- **New (found during P1, session 24): 316 cards' split-file folder disagrees with their source
-  mirror about track.** `node scripts/audit-track-consistency.mjs` reproduces this — reads
-  fresh, don't trust these numbers past this session either. Rule is 100% validated already
-  (checked all 316, zero exceptions): each card's own `category` field always agrees with the
-  **mirror**, never the split file, cross-checked against categories.js's per-category `tracks`
-  array. So the fix direction is settled — move the split-file copy to match the mirror — this
-  is mechanical, not a judgment call, just not done yet:
-  - 253 cards sit in a `cards/lifeline/*.js` file but belong in `cards/common/`: 82 jac-ch5,
-    43 jac-ch6, 39 jac-ch7, 77 vocab-supplementary, 9 jac-jitsugi1/2, 3 singletons
-    (ch2/ch3/ch4). vocab-supplementary and vocab-jac targets already exist on the common side;
-    ch5/ch6/ch7 don't have a common/ counterpart file yet — create them.
-  - 63 cards sit in `cards/common/*.js` but belong in `cards/lifeline/`: 39 jac-ch4, 21 jac-ch3,
-    3 jac-ch2. lifeline/ doesn't have ch2/ch3/ch4 files yet — create them.
-  - Confirmed **zero live-app risk either way**: `scripts/merge-cards.mjs` (main-only, not on
-    content-dq — read via `git show origin/main:scripts/merge-cards.mjs`) builds `cards.js`
-    straight from `src/data/source/cards-*.js`; it never reads the split files under
-    `src/data/cards/` at all. So this is purely an editing-layer consistency problem, not
-    something reaching real users. That's *why* it wasn't executed this session — 316 cards
-    across 6 new files was real effort for zero user-facing benefit, and P1's actual ruby fixes
-    (live content) were the higher-priority use of the session. Good next-session task: fully
-    mechanical, fully de-risked, just needs the time.
+*(none right now — the split-file/mirror drift below was the last one, done session 24.)*
 
 ### ⏸ Blocked on external material
 - P21 — JAC Doboku + Kenchiku jitsugi stubs — needs official PDF from owner
