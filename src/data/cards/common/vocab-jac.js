@@ -1,5 +1,5 @@
 // vocab-jac.js — cards-common cards from source: vocab-jac
-// (59 cards)
+// (76 cards)
 export const CARDS_VOCAB_JAC = [
 {
   id: 782,
@@ -802,5 +802,111 @@ export const CARDS_VOCAB_JAC = [
   desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》,",
   usage: '躯体《くたい》が完成《かんせい》してから内装《ないそう》工事《こうじ》を始《はじ》める（mulai pekerjaan interior setelah struktur utama selesai）',
     _origIndex: 1560
+  },
+{
+  id: 40,
+  category: "sekou",
+  source: "jac-jitsugi1",
+  furi: "せこうかんりしょていのひんしつ",
+  jp: "施工管理《せこうかんりしょていのひんしつ》",
+  type: "konsep",
+  id_text: "Manajemen konstruksi (kualitas)",
+  desc: "Pengelolaan pelaksanaan proyek sesuai rencana. Kunci ujian: 品質《ひんしつ》 (kualitas), bukan 環境《かんきょう》.",
+  _origIndex: 48
+  },
+{
+  id: 105,
+  category: "anzen",
+  source: "jac-jitsugi1",
+  furi: "さんそけつぼう",
+  jp: "酸素欠乏《さんそけつぼう》",
+  type: 'vocab',
+  id_text: "Kekurangan oksigen (vocab)",
+  desc: "Bahaya di ruang tertutup. Cek oksigen sebelum masuk MANHOLE. Kerja di atap tidak termasuk.",
+  usage: '酸素欠乏《さんそけつぼう》の危険箇所《きけんかしょ》では測定《そくてい》してから入場《にゅうじょう》する（ukur kadar oksigen sebelum memasuki area berbahaya）',
+    _origIndex: 113
+  },
+{
+  id: 106,
+  category: "anzen",
+  source: "jac-jitsugi1",
+  furi: "どどめ",
+  jp: "土留め《どどめ》≥ 1.5m",
+  type: 'vocab',
+  id_text: "Penahan tanah galian",
+  desc: "Mencegah longsor (土砂崩《どしゃくず》れ). Wajib ≥1.5m. Berbeda dari 換気《かんき》 dan 排水《はいすい》.",
+  usage: '1.5m以上《いじょう》の掘削《くっさく》では土留め《どどめ》の設置《せっち》が義務《ぎむ》である（pemasangan penahan tanah wajib pada galian sedalam 1.5m atau lebih）',
+    _origIndex: 114
+  },
+{
+  id: 107,
+  category: "anzen",
+  source: "jac-jitsugi2",
+  furi: "しんきにゅうじょうしゃきょういく vs しんにゅうしゃあんぜんえいせいきょういく",
+  jp: "新規入場者教育《しんきにゅうじょうしゃきょういく》 vs 新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》",
+  type: 'vocab',
+  id_text: "Dua orientasi K3 berbeda",
+  desc: "①新規入《い》り場《にゅうじょう》者《もの》教育《しんきにゅうじょうしゃきょういく》: pendatang baru ke lokasi.",
+  usage: '新規入場者教育《しんきにゅうじょうしゃきょういく》（10分《ぷん》以上《いじょう》）と新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》（6時間《じかん》以上《いじょう》）を区別《くべつ》する（bedakan orientasi pekerja baru 10 menit dengan pendidikan K3 6 jam）',
+    _origIndex: 115
+  },
+{
+  id: 108,
+  category: "anzen",
+  source: "jac-jitsugi1",
+  furi: "さんだいさいがい",
+  jp: "三大災害《さんだいさいがい》",
+  type: 'vocab',
+  id_text: "Tiga bencana besar",
+  desc: "①墜落《ついらく》・転《ころ》び落《てんらく》 (terbanyak) ②機械《きかい》・クレーン災害《さいがい》 ③崩壊《ほうかい》・倒壊《とうかい》. Menyumbang 40–70%",
+  usage: '墜落《ついらく》・崩壊《ほうかい》・飛来落下《ひらいらっか》の三大災害《さんだいさいがい》を重点的《じゅうてんてき》に防止《ぼうし》する（fokuskan pencegahan pada 3 bencana besar: jatuh, longsor, dan tertimpa benda）',
+    _origIndex: 116
+  },
+{
+  id: 113,
+  category: "anzen",
+  source: "jac-jitsugi2",
+  furi: "ひろうぼうしてきせつなすいみんとしょくじ",
+  jp: "疲労防止《ひろうぼうしてきせつなすいみんとしょくじ》",
+  type: "konsep",
+  id_text: "Pencegahan kelelahan",
+  desc: "Kelelahan kerja menyebabkan kecelakaan. Perhatikan tidur dan makan yang cukup setiap harinya.",
+  _origIndex: 121
+  },
+{
+  id: 121,
+  category: "sekou",
+  source: "jac-jitsugi1",
+  furi: "すいじゅんき",
+  jp: "水準器《すいじゅんき》（レベル）",
+  type: 'vocab',
+  id_text: "Waterpas / level",
+  desc: "Alat survei berteleskop untuk mengukur ketinggian/elevasi. Dipasang di atas tripod.",
+  usage: '水準器《すいじゅんき》で配管《はいかん》の水平《すいへい》を確認《かくにん》する（periksa kerataan pipa menggunakan waterpas）',
+    _origIndex: 129
+  },
+{
+  id: 128,
+  category: "sekou",
+  source: "jac-jitsugi1",
+  furi: "すみつぼ",
+  jp: "墨つぼ《すみつぼ》",
+  type: 'vocab',
+  id_text: "Wadah tinta / chalk line",
+  desc: "Membuat garis lurus panjang dengan benang bercelup tinta. Berbeda dari 墨《すみ》さし dan レーザー墨出《すみだ》し器《き》.",
+  usage: '墨つぼ《すみつぼ》で長《なが》い直線《ちょくせん》を引《ひ》く（buat garis lurus panjang menggunakan chalk line）',
+    _origIndex: 136
+  },
+{
+  id: 132,
+  category: "sekou",
+  source: "jac-jitsugi2",
+  furi: "だいしゃ",
+  jp: "台車《だいしゃ》",
+  type: 'vocab',
+  id_text: "Kereta dorong datar",
+  desc: "Platform datar beroda untuk mengangkut material berat. Berbeda dari 一輪車《いちりんしゃ》 (satu roda).",
+  usage: '台車《だいしゃ》で重《おも》い資材《しざい》を運《はこ》ぶ（angkut material berat menggunakan kereta dorong）',
+    _origIndex: 140
   }
 ];

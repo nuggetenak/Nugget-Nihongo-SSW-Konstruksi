@@ -1,6 +1,6 @@
-// lifeline/ch7.js — lifeline track ch7 cards (text7l: safety)
-// (35 cards)
-export const CARDS_LIFELINE_CH7 = [
+// common/ch7.js — common track ch7 cards, reconciled from source/cards-common.js (session 24 split-file/mirror drift fix — see HANDOFF.md)
+// (55 cards)
+export const CARDS_CH7 = [
 {
   id: 100,
   category: "anzen",
