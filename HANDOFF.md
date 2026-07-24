@@ -191,6 +191,12 @@ one" list — check the gate before starting.
 *(none right now — the split-file/mirror drift below was the last one, done session 24.)*
 
 ### ⏸ Blocked on external material
+**Owner said (end of session 24): PDFs are coming with the next agent session, handed off
+directly — not "still waiting indefinitely."** Check the uploaded files at the start of that
+session before treating any of this as still blocked. Also cross-check P5 in the 🟡 bucket
+above once a PDF lands — "real JAC PDF text" there may be served by the same material, not
+necessarily a separate document.
+
 - P21 — JAC Doboku + Kenchiku jitsugi stubs — needs official PDF from owner
 - PDF Viewer Mode — needs official PDF URL from owner
 
@@ -230,7 +236,7 @@ right now, consistent with P12 being deferred to merge time.)
 | OD-1 | P6, P13 | Source labels: retain legacy vs merge into `vocab-supplementary`? | ✅ Answered 2026-07-11: merge |
 | OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? | ✅ Answered 2026-07-11: now |
 | OD-3 | P17 | jac-mockup rename: now or at merge time? | ✅ Answered 2026-07-11: now — P17 done |
-| OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | Not really open — see P10 detail above, "update" is the reasoned answer. What's actually blocking is the composition method, not this decision. |
+| OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | ✅ Resolved via execution 2026-07-15 — P10 done (both halves), see CURRENT STATE. "Update" was the reasoned answer, not a coin flip; what had stopped session 23 was the composition method, not this decision. |
 | OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | Open — doesn't block anything until merge time (P12), not urgent |
 
 Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
@@ -240,6 +246,11 @@ Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
 ## RULES
 
 - Run `scripts/verify-content.mjs` before and after any edit to `src/data/`
+- Run `scripts/audit-track-consistency.mjs` after any edit that moves a card between
+  `src/data/cards/common/` and `src/data/cards/lifeline/`, or changes a card's `category` or
+  `source` field — it catches split-file/mirror track drift that `verify-content.mjs`'s
+  count-only check can't see (this is how the 316-card drift fixed session 24 went unnoticed
+  for however long it built up)
 - Commit per task: `CONTENT: [task] — [short description]` (or `ADMIN:` / `DOCS:` for non-content)
 - Mirror edits: split file → `src/data/source/cards-*.js` → `src/data/cards.js`, all three. Then
   verify. The session-23 corruption happened because step 3 wasn't checked before commit.
