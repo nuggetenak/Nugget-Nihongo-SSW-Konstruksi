@@ -21,15 +21,18 @@ A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface 
 
 ### Branding
 - **Parent:** Nugget Nihongo · **Product:** SSW Konstruksi
-- **Subtitle:** 土木 · 建築 · ライフライン設備
+- **Subtitle:** ライフライン設備 (was 土木・建築・ライフライン設備 — Doboku/Kenchiku dropped
+  session 24, scope reduced to Lifeline-only per owner decision, see HANDOFF.md)
 
-### 3 Study Tracks
+### Study Track
 | Track | JP | Categories |
 |-------|----|-----------| 
-| Teknik Sipil 🏗️ | 土木 | jenis_kerja, alat_umum + common |
-| Bangunan 🏢 | 建築 | jenis_kerja, alat_umum + common |
 | Lifeline ⚡ | ライフライン・設備 | listrik, pipa, telekomunikasi, isolasi, pemadam + common |
 | **Common** 📋 | 共通 | salam, hukum, keselamatan, karier (all tracks) |
+
+(Teknik Sipil/土木 and Bangunan/建築 tracks removed session 24 — both were still 100%
+AI-generated draft content with zero official JAC material, and dropping them was a
+deliberate scope-reduction call, not a data loss. See HANDOFF.md for the full note.)
 
 ---
 
@@ -72,11 +75,9 @@ Nugget-Nihongo-SSW-Konstruksi/
     ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
     ├── data/
     │   ├── cards.js                ← CARDS[1443 on main; 1,438 on content-dq — 5 dup cards deleted pre-merge, see HANDOFF.md]
-    │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
-    │   │                              cards-doboku/kenchiku (empty stubs)
-    │   ├── quiz-sets.js            ← QUIZ_SETS (45 sets, was 44 pre-P16): wayground + jac-mockup + doboku + kenchiku
+    │   ├── source/                 ← 2 source files: cards-common (877), cards-lifeline (561)
+    │   ├── quiz-sets.js            ← QUIZ_SETS (39 sets): wayground + jac-mockup
     │   ├── jac-teori.js / jac-lifeline.js / jac-official.js
-    │   ├── jac-doboku.js / jac-kenchiku.js   ← empty stubs (future 実技 content)
     │   ├── wayground-sets.js / jac-mockup-sets.js (ex-csv-sets.js, renamed P17)    ← source sets (imported by quiz-sets.js)
     │   ├── angka-kunci.js          ← 29 entries
     │   ├── confusion-pairs.js      ← 28 pairs
@@ -187,15 +188,14 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 ### Data (v4.0.x → v4.21.1)
 | File | Purpose |
 |------|---------|
-| `src/data/source/` (4 files) | CS-01 split: cards-common.js (879 cards), cards-lifeline.js (564 cards), stubs for doboku/kenchiku; vocab files merged in (REF-8 v4.21.0) |
+| `src/data/source/` (2 files, content-dq) | cards-common.js (877 cards), cards-lifeline.js (561 cards) — doboku/kenchiku stubs deleted session 24, scope reduced to Lifeline-only |
 | `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
 | `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
 | `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
-| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS + DOBOKU_SETS + KENCHIKU_SETS (45 sets total, was 44 pre-P16 - wayground went 26→27 sets); getQuizSetsForTrack() helper; doboku/kenchiku sets inlined here (REF-9 v4.21.0, renamed P20; CSV_SETS→JAC_MOCKUP_SETS renamed P17) |
+| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS (39 sets) — DOBOKU_SETS/KENCHIKU_SETS (90 AI-generated draft questions) removed session 24, not merely deprecated; recoverable from git history if ever needed |
 | `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
 | `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
-| `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
-| `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE, ...]` |
+| `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE]` (jac-doboku.js/jac-kenchiku.js removed session 24) |
 | `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. vocab-supplementary/vocab-general/jac-ch1–7), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
 
 ### Source/Utils (v4.0.x → v4.21.1)
@@ -234,6 +234,7 @@ srs:      { _v:4, cards: { [cardId]: { card, history, reviewed_at } } }
 
 | Date | Version | Work |
 |------|---------|------|
+| 2026-07-26 | content-dq | Agent Claude: session 24 (cont'd) — owner decision: drop PDF Viewer Mode + Doboku/Kenchiku tracks entirely, scope reduced to Lifeline-only (owner: "lost track of everything," wanted fewer moving parts to hold in mind at once). Both tracks were still 100% AI-generated draft content (90 quiz questions, zero official JAC material) blocked on a PDF that may never arrive — not a data-loss call, a scope call. Deleted: jac-doboku.js/jac-kenchiku.js stubs, source/cards-doboku.js/cards-kenchiku.js stubs, sets/quiz/doboku-01..03.js + kenchiku-01..03.js (6 files, 90 questions). Edited: quiz-sets.js (dropped DOBOKU_SETS/KENCHIKU_SETS + track-mapping), index.js + jac-official.js (dropped JAC_DOBOKU/JAC_KENCHIKU exports), categories.js (dropped 5 placeholder categories, simplified all `tracks` arrays to `['lifeline']`), useTrackedCards.js (JSDoc). Left untouched: every card whose *content* merely mentions 土木/建築 as vocabulary (e.g. "what counts as doboku work" questions) — those are correctly common-track general knowledge, not track-membership bugs. verify-content.mjs + audit-track-consistency.mjs both clean throughout, 1438 cards unchanged (nothing here touches card data, only the track/quiz scaffolding around it). Not touched: `main` branch's TrackPicker.jsx/DobokuMode.jsx/KenchikuMode.jsx — those need the equivalent update at merge time, flagged in HANDOFF.md, out of scope for a content-dq session. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 8, final) — owner requested handoff to a new agent. Enriched HANDOFF.md: added GETTING STARTED section (repo URL, clone command, token-sharing context) so it works as a standalone upload artifact; added detailed P10 investigation notes (61/119 confirmed copy-of-q hints, the context-drift risk found while dictionary-checking, why generation was not attempted) so the next agent does not have to rediscover this. Caught and fixed a dropped section heading from my own edit before committing. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 7) — executed P11. 50 instances of a circular non-explanation ("{term} = bahasa Jepangnya.") replaced with the actual meaning, using opts[ans]/opts_id[ans] already present in the same question object rather than inventing translations. Verified ans wasn't always 0 first (12/50 weren't) before trusting an index-0 shortcut. |
 | 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 6) — executed P8b (owner: "continue whatever it is until everything's done"). Scoped to q/exp (wglv-jp) + opts (wglv-id) only, not hint, after confirming hint's kanji=meaning-breakdown style was never meant to carry ruby (checked the established P8a-done convention first). Built a whole-repo ruby dictionary (38,754 pairs) for confident lookups; fixed via redundant-dup stripping, round-paren-to-ruby conversion (using the text's own stated reading, not invented), same-question cross-reference, then dictionary lookup at ≥85% confidence. 61 instances across 26 compounds left unresolved on purpose (context-dependent single characters). Caught and fixed an off-by-one in the wayground-sets.js re-splice (missing opening brace before wg12) before committing. |

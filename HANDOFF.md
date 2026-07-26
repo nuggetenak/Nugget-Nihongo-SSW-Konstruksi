@@ -59,7 +59,8 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-07-15 (session 24).** Verify before trusting past this point — this line
+**As of this edit, 2026-07-26 (session 24, cont'd — same conversation, real time passed
+between messages).** Verify before trusting past this point — this line
 doesn't update itself.
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
@@ -157,6 +158,35 @@ doesn't update itself.
   ch7 is JAC's safety chapter, and safety is common-domain by definition, so a whole chapter
   moving isn't a red flag on the fix itself). verify-content.mjs clean, 1438 unchanged, all 78
   files parse. Commit `da7337d`, full reasoning in the commit body.
+- **Scope reduced to Lifeline-only (session 24, owner decision).** Owner: "lost track of
+  everything," wanted fewer moving parts. Dropped PDF Viewer Mode and the Doboku + Kenchiku
+  tracks entirely — not a data-loss call, both tracks were still 100% AI-generated draft
+  content (90 quiz questions total) with zero real JAC material, blocked on a PDF that may
+  never arrive. P21 no longer exists as a task; there's nothing left to reconcile once that
+  PDF shows up because there's no track left for it to feed.
+  - Deleted: `jac-doboku.js`/`jac-kenchiku.js`, `source/cards-doboku.js`/`cards-kenchiku.js`
+    (all 4 were empty stubs), `sets/quiz/doboku-01..03.js` + `kenchiku-01..03.js` (6 files,
+    90 questions) — 10 files total, nothing archived, recoverable from git history before
+    this point if ever needed.
+  - Edited: `quiz-sets.js` (dropped DOBOKU_SETS/KENCHIKU_SETS + the track-tagging map),
+    `index.js` + `jac-official.js` (dropped the JAC_DOBOKU/JAC_KENCHIKU exports),
+    `categories.js` (dropped 5 placeholder categories — doboku_doko/hoso/haisui,
+    kenchiku_kutai/shiage, all 0 cards anyway — simplified every `tracks` array to
+    `['lifeline']`), `useTrackedCards.js` (JSDoc only). `_MAP.md` and
+    `docs/CARD_CONTENT_SPEC.md` updated to match; `docs/DATA_ARCH_AUDIT.md` left alone (it's a
+    dated point-in-time snapshot, not a living doc — same reason `docs/archive/` stays
+    untouched).
+  - Deliberately NOT touched: any card whose *content* mentions 土木/建築 as vocabulary (e.g.
+    "which of these counts as doboku work" general-knowledge questions) — those are correctly
+    common-track material a lifeline learner should still know, not a track-membership bug.
+    Confirmed incidental before leaving them alone, not assumed.
+  - verify-content.mjs + audit-track-consistency.mjs both clean throughout — this touches the
+    track/quiz scaffolding around the cards, not the 1438 cards themselves, which are
+    unchanged.
+  - **Not done, flagged for merge time:** `main` branch has `TrackPicker.jsx` (3-way onboarding
+    picker) and `DobokuMode.jsx`/`KenchikuMode.jsx` — real UI code content-dq doesn't have a
+    copy of. These need the equivalent removal/update when this branch merges, same bucket as
+    P12. Don't forget this exists just because content-dq's own tree looks clean now.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -197,35 +227,9 @@ session before treating any of this as still blocked. Also cross-check P5 in the
 above once a PDF lands — "real JAC PDF text" there may be served by the same material, not
 necessarily a separate document.
 
-- P21 — JAC Doboku + Kenchiku jitsugi stubs — needs official PDF from owner
-- PDF Viewer Mode — needs official PDF URL from owner
-
-**P21 detail (investigated session 24, owner asked "why does doboku/kenchiku show up at all if
-everything's sourced from JAC teori+praktik, which is common/lifeline only?"):** confirmed —
-JAC Official (95 soal: tt1/tt2/st1/st2) and JAC Mockup (300 soal: jmt01-06/jml01-06) are 100%
-`common`/`lifeline`, 0 `doboku`/`kenchiku`, both layers. `cards.js` same story — 0 cards tagged
-doboku/kenchiku (`cards-doboku.js`/`cards-kenchiku.js` source mirrors both empty). Not luck:
-`main` commit `1473acb` (v4.18.0) is titled "migrate doboku+kenchiku 157 cards to common",
-reasoning "Ch.1-4 content belongs in common (all tracks)" — this exact failure mode got hit and
-fixed once already. That commit isn't in content-dq's lineage (branch had already diverged), but
-content-dq's current state independently satisfies the same invariant, so the fix still holds
-here regardless of path.
-
-The only current source of doboku/kenchiku-tagged content is **Quiz Internal**
-(`quiz/doboku-01/02/03.js` + `kenchiku-01/02/03.js`, 90 soal) — AI-generated draft, not
-JAC-sourced (matches its own catalog label: "belum ada PDF JAC asli buat validasi"). This is
-exactly what this task is blocked on: `jac-doboku.js`/`jac-kenchiku.js` are empty stubs waiting
-for the real PDF, and until it lands, the Quiz Internal drafts are the *only* content behind
-those two tracks — not a bug, just the current state.
-
-Worth knowing the actual weight of what's blocked here: doboku/kenchiku aren't a minor corner of
-the app, they're 2 of its 3 onboarding tracks (`main`: `TrackPicker.jsx` — "Pilih Jalur Belajar" /
-🏗️ Teknik Sipil · 🏢 Bangunan · ⚡ Lifeline — plus `DobokuMode.jsx`/`KenchikuMode.jsx`, both call
-`getQuizSetsForTrack('doboku'|'kenchiku')` directly). Lifeline is fully JAC-sourced end to end;
-doboku and kenchiku currently run on 100% unvalidated AI-generated questions until this PDF
-shows up. (Also note: content-dq's own `src/components`/`src/modes` only has `FilterPopup.jsx` +
-`FocusMode.jsx` — the full UI above, including TrackPicker/DobokuMode/KenchikuMode, is `main`-only
-right now, consistent with P12 being deferred to merge time.)
+*(P21 and PDF Viewer Mode themselves no longer exist — dropped session 24 along with the
+Doboku/Kenchiku tracks. See the scope-reduction entry in CURRENT STATE. The note above about
+PDFs still applies to P5.)*
 
 ---
 
@@ -256,7 +260,6 @@ Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
   verify. The session-23 corruption happened because step 3 wasn't checked before commit.
 - Never push to `main`
 - Ambiguity → write it down here, ask the owner, don't guess and proceed
-- `jac-doboku.js` / `jac-kenchiku.js` — don't touch, waiting on PDF
 - Single-quote strings in data files, **except** `cards-common.js`/`cards-lifeline.js` — leave
   their existing quote style alone, don't requote (pre-existing rule, origin unclear — but the
   session-22 `type` field corruption happened in exactly these two files too, so treat them as

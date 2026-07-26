@@ -366,8 +366,11 @@ id=1184, 1185, 1240 — source harus dikoreksi ke chapter/vocab yang sesuai.
 ### 2D — categories.js
 
 Active: gaiyou, anzen, hourei, sekou, career, haikan, denki, tsushin, shoubou, hoon, setsubi_kougu
-Placeholder (0 kartu): doboku_doko, doboku_hoso, doboku_haisui, kenchiku_kutai, kenchiku_shiage
 UI feature: bintang (favorites — tidak di cards, OK)
+
+(Doboku/Kenchiku placeholder categories — doboku_doko, doboku_hoso, doboku_haisui,
+kenchiku_kutai, kenchiku_shiage, all 0 kartu — removed session 24 along with the tracks
+themselves. Scope reduced to Lifeline-only per owner decision, see HANDOFF.md.)
 
 Tidak ada kartu yang menggunakan category tidak terdaftar di categories.js. ✅
 
@@ -400,7 +403,7 @@ Field order wajib seperti di atas. `usage` ditulis hanya jika ada — tidak bole
 ```js
 {
   id:              string|number,  // set: string; q: number (sequential)
-  track:           string,         // 'common'|'lifeline'|'doboku'|'kenchiku'
+  track:           string,         // 'common'|'lifeline'
   q:               string,         // soal JP — semua kanji wajib ruby
   hint:            string,         // ID clue — semua kanji wajib ruby
   opts:            string[],       // wt/wgl: JP strings (ruby wajib)
@@ -654,8 +657,6 @@ Hard rules:
 - Sertifikasi/lisensi teknis → `career`, bukan `hourei`
 - Alat pemadam → `shoubou`, bukan `anzen`
 
-Placeholder (reserved, 0 kartu): `doboku_doko`, `doboku_hoso`, `doboku_haisui`, `kenchiku_kutai`, `kenchiku_shiage`
-
 ---
 
 ### 5.3 `source` — Status saat ini
@@ -684,8 +685,9 @@ Placeholder (reserved, 0 kartu): `doboku_doko`, `doboku_hoso`, `doboku_haisui`, 
 |-------|-----------|
 | `common` | cards/common/, wt, jmt, jac-teori |
 | `lifeline` | cards/lifeline/, wgl, wglv-jp, wglv-id, jml, jac-lifeline |
-| `doboku` | quiz doboku-* |
-| `kenchiku` | quiz kenchiku-* |
+
+(`doboku`/`kenchiku` values, and everything that used them, removed session 24 — scope
+reduced to Lifeline-only per owner decision. See HANDOFF.md.)
 
 ---
 
@@ -702,8 +704,6 @@ Placeholder (reserved, 0 kartu): `doboku_doko`, `doboku_hoso`, `doboku_haisui`, 
 | `jml01`–`jml06` | JAC Mockup Lifeline (post-P17, ex-cp) | lifeline |
 | `tt1`, `tt2` | JAC Official Teori | common |
 | `st1` | JAC Official Lifeline | lifeline |
-| `doboku-01`–`03` | Quiz Doboku | doboku |
-| `kenchiku-01`–`03` | Quiz Kenchiku | kenchiku |
 
 ---
 
@@ -873,8 +873,9 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 - [ ] wglv-id: naked `hint` dan `opts`
 
 ### Blocked
-- ⏸ P21 — JAC Doboku + Kenchiku jitsugi stubs — tunggu PDF JAC resmi dari owner
-- ⏸ PDF Viewer Mode — tunggu URL PDF resmi JAC dari owner
+(P21 — JAC Doboku + Kenchiku jitsugi — and PDF Viewer Mode, both removed session 24 along
+with the Doboku/Kenchiku tracks themselves. Scope reduced to Lifeline-only per owner
+decision. See HANDOFF.md.)
 
 ---
 
