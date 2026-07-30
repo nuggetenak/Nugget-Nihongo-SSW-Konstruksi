@@ -59,7 +59,7 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-07-26 (session 24, cont'd — same conversation, real time passed
+**As of this edit, 2026-07-30 (session 24, cont'd — same conversation, real time passed
 between messages).** Verify before trusting past this point — this line
 doesn't update itself.
 
