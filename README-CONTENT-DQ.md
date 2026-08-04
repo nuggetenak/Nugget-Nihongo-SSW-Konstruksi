@@ -13,13 +13,11 @@ src/data/                        ← all content files (edit here)
   source/                        ← card source files (edit these, NOT cards.js)
     cards-common.js
     cards-lifeline.js
-    cards-doboku.js (stub)
-    cards-kenchiku.js (stub)
   cards.js                       ← AUTO-GENERATED — do not edit
   categories.js                  ← taxonomy — edit only if adding new categories
   jac-mockup-sets.js             ← ⚠️ LEGACY MONOLITHIC (ex-csv-sets.js, renamed P17) — for routine content edits, use sets/jac-mockup/*.js instead, gets rebuilt into this file at merge time. EXCEPTION: structural changes (renames, field-name changes) must touch both layers immediately, same as this P17 rename did — a stale monolith breaks the running app right away, unlike a routine content fix which just waits for the next rebuild.
   wayground-sets.js              ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/wayground/**/*.js
-  quiz-sets.js                   ← ⚠️ LEGACY MONOLITHIC — DO NOT EDIT. Working copy: sets/quiz/*.js
+  quiz-sets.js                   ← aggregator only (session 24+): `QUIZ_SETS = [...WAYGROUND_SETS, ...JAC_MOCKUP_SETS]` — no own content or working-copy folder since Doboku/Kenchiku removal, edit via wayground-sets.js / jac-mockup-sets.js instead
   sets/                          ← ✅ WORKING SPLIT FILES — edit these
     jac-mockup/  jml01–jml06.js, jmt01–jmt06.js  (renamed P17, ex sets/csv/ cp*/ct*)
     wayground/
@@ -27,12 +25,10 @@ src/data/                        ← all content files (edit here)
       vocab/      wtv01.js
       lifeline/praktik/   wgl01–wgl10.js
       lifeline/vocab/     wglv-jp-01–03.js, wglv-id-01–03.js (P16 split, ex wglv01-05)
-    quiz/   doboku-01–03.js, kenchiku-01–03.js
     jac/    jac-teori.js, jac-lifeline.js
   jac-teori.js                   ← JAC official exam Teori (65 qs)
   jac-lifeline.js                ← JAC official exam Lifeline (30 qs)
-  jac-doboku.js (stub)
-  jac-kenchiku.js (stub)
+  jac-official.js                ← backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE]`
   confusion-pairs.js             ← 28 confusion pairs
   danger-pairs.js                ← 20 danger pairs
   angka-kunci.js                 ← 29 angka kunci
