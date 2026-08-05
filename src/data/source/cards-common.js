@@ -810,7 +810,7 @@ export const CARDS_COMMON = [
   jp: "ドローン登録義務《どろおんとうろくぎむ》（≥100g）",
   type: "hukum",
   id_text: "Drone ≥100g wajib",
-  desc: "Drone berat ≥100g wajib didaftarkan sebagai pesawat tak berawak. Termasuk drone survei 測量《そくりょう》 di",
+  desc: "Drone berat ≥100g wajib didaftarkan sebagai pesawat tak berawak. Termasuk drone survei 測量《そくりょう》 di lokasi konstruksi.",
   _origIndex: 148
   },
   {
@@ -821,7 +821,7 @@ export const CARDS_COMMON = [
   jp: "航空障害灯《こうくうしょうがいとう》（≥60m）",
   type: "hukum",
   id_text: "Lampu hambatan",
-  desc: "Bangunan, crane, atau struktur setinggi ≥60m wajib dipasangi lampu hambatan penerbangan, termasuk",
+  desc: "Bangunan, crane, atau struktur setinggi ≥60m wajib dipasangi lampu hambatan penerbangan, termasuk objek yang mengganggu jalur masuk bandara meski di bawah 60m.",
   _origIndex: 149
   },
   {
@@ -898,7 +898,7 @@ export const CARDS_COMMON = [
   jp: "労災保険の特別加入制度《ろうさいほけんとくべつかにゅうせいど》（一人親方《ひとりおやかた》・中小企業主《ちゅうしょうきぎょうぬし》）",
   type: "hukum",
   id_text: "Jalur khusus asuransi",
-  desc: "労災《ろうさい》保険《ほけん》biasanya hanya karyawan, tapi kontraktor mandiri 一人親方《ひとりおやかた》 bisa masuk via",
+  desc: "労災《ろうさい》保険《ほけん》biasanya hanya karyawan, tapi kontraktor mandiri 一人親方《ひとりおやかた》 bisa masuk via skema pendaftaran khusus (bersama pemilik usaha kecil-menengah konstruksi dan keluarga pekerjanya).",
   _origIndex: 156
   },
   {
@@ -909,7 +909,7 @@ export const CARDS_COMMON = [
   jp: "建設労働者雇用改善法《けんせつろうどうしゃこようかいぜんほう》",
   type: "hukum",
   id_text: "UU Peningkatan",
-  desc: "UU yang mendorong perbaikan kondisi kerja konstruksi. Rencana ke-10 (2021–2025) menargetkan CCUS",
+  desc: "UU yang mendorong perbaikan kondisi kerja konstruksi. Rencana ke-10 (2021–2025) menargetkan CCUS, perekrutan/pelatihan pekerja muda, lingkungan kerja yang lebih baik, dan penerimaan tenaga kerja asing yang tepat.",
   _origIndex: 157
   },
   {
@@ -975,7 +975,7 @@ export const CARDS_COMMON = [
   jp: "労働条件の明示《ろうどうじょうけんのめいじろくこうもん》",
   type: "hukum",
   id_text: "6 hal wajib diberitahu",
-  desc: "6 hal wajib tertulis: durasi kontrak, lokasi/jenis kerja, jam kerja, upah, libur, ketentuan",
+  desc: "6 hal wajib tertulis: durasi kontrak, lokasi/jenis kerja, jam kerja, upah, libur, ketentuan pengunduran diri dan PHK.",
   _origIndex: 163
   },
   {
@@ -986,7 +986,7 @@ export const CARDS_COMMON = [
   jp: "地域別最低賃金《ちいきべつさいていちんぎん》",
   type: "hukum",
   id_text: "Upah minimum berbeda per",
-  desc: "Upah minimum ditetapkan per prefektur sesuai biaya hidup. Berlaku semua pekerja tanpa memandang",
+  desc: "Upah minimum ditetapkan per prefektur sesuai biaya hidup. Berlaku semua pekerja tanpa memandang jenis pekerjaan atau status kepegawaian.",
   _origIndex: 164
   },
   {
@@ -997,7 +997,7 @@ export const CARDS_COMMON = [
   jp: "認定訓練《にんていくんれん》",
   type: "hukum",
   id_text: "Pelatihan vokasi diakui",
-  desc: "Pelatihan vokasi oleh pihak swasta yang diakui resmi gubernur prefektur. Berbeda dari pelatihan",
+  desc: "Pelatihan vokasi oleh pihak swasta yang diakui resmi gubernur prefektur. Berbeda dari pelatihan umum yang belum tersertifikasi negara.",
   _origIndex: 165
   },
   {
@@ -1008,7 +1008,7 @@ export const CARDS_COMMON = [
   jp: "法定休日《ほうていきゅうじつまいしゅうすくなくともいっかい》",
   type: "hukum",
   id_text: "Hari libur wajib",
-  desc: "Minimal 1 hari libur per minggu wajib diberikan. Kerja di hari ini → upah +35%",
+  desc: "Minimal 1 hari libur per minggu wajib diberikan. Kerja di hari ini → upah +35%.",
   _origIndex: 166
   },
   {
@@ -1019,7 +1019,7 @@ export const CARDS_COMMON = [
   jp: "有給休暇の買い取り禁止《ゆうきゅうきゅうかのかいとりきんし》",
   type: "hukum",
   id_text: "Dilarang tukarkan cuti",
-  desc: "Pemberi kerja tidak boleh mengkonversi 有給《ゆうきゅう》休暇《きゅうか》 menjadi uang. Cuti harus digunakan sebagai",
+  desc: "Pemberi kerja tidak boleh mengkonversi 有給《ゆうきゅう》休暇《きゅうか》 menjadi uang. Cuti harus digunakan sebagai cuti sesungguhnya, bukan ditukar uang.",
   _origIndex: 167
   },
   {
@@ -3003,7 +3003,7 @@ export const CARDS_COMMON = [
   jp: "ゼネコン",
   type: 'vocab',
   id_text: "General Contractor",
-  desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek",
+  desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek konstruksi skala besar.",
   usage: 'ゼネコンが複数《ふくすう》の専門業者《せんもんぎょうしゃ》を管理《かんり》して工事《こうじ》を進《すす》める（GC mengelola beberapa kontraktor spesialis untuk melanjutkan proyek）',
     _origIndex: 567
   },
@@ -3147,7 +3147,7 @@ export const CARDS_COMMON = [
   jp: "KY活動の4ステップ《きけんよちかつどうのよんすてっぷ》",
   type: "konsep",
   id_text: "4 langkah KY",
-  desc: "4 langkah KY活動《かつどう》: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target",
+  desc: "4 langkah KY活動《かつどう》: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target ④serukan bersama slogan keselamatan hari itu.",
   _origIndex: 579
   },
   {
@@ -3181,7 +3181,7 @@ export const CARDS_COMMON = [
   jp: "安全確認の8項目《あんぜんかくにんのはちこうもく》",
   type: "konsep",
   id_text: "8 item cek keselamatan",
-  desc: "Di akhir 全体朝礼《ぜんたいちょうれい》, 2人《にん》1組《くみ》 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali",
+  desc: "Di akhir 全体朝礼《ぜんたいちょうれい》, 2人《にん》1組《くみ》 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali dagu helm/nama pada seragam.",
   _origIndex: 582
   },
   {
@@ -3503,7 +3503,7 @@ export const CARDS_COMMON = [
   jp: "安全衛生教育の2トリガー《あんぜんえいせいきょういくのとりがあやといいれじさぎょうないようへんこうじ》",
   type: "hukum",
   id_text: "2 wajib K3",
-  desc: "Pendidikan K3 wajib dua kali: ①saat rekrut baru ②saat isi pekerjaan berubah. Tugas khusus butuh",
+  desc: "Pendidikan K3 wajib dua kali: ①saat rekrut baru ②saat isi pekerjaan berubah. Tugas khusus (mis. operator crane) butuh pelatihan keterampilan tambahan.",
   _origIndex: 611
   },
   {
@@ -3933,7 +3933,7 @@ export const CARDS_COMMON = [
   jp: "職業能力開発促進法《しょくぎょうのうりょくかいはつそくしんほう》（技能検定《ぎのうけんてい》）",
   type: "hukum",
   id_text: "UU Pengembangan",
-  desc: "UU yang tingkatkan kemampuan kerja lewat pelatihan & sertifikasi. Lulus 技能《ぎのう》検定《けんてい》→ dapat",
+  desc: "UU yang tingkatkan kemampuan kerja lewat pelatihan & sertifikasi. Lulus 技能《ぎのう》検定《けんてい》→ dapat sertifikat dan gelar 技能士《ぎのうし》.",
   _origIndex: 701
   },
   {
@@ -3944,7 +3944,7 @@ export const CARDS_COMMON = [
   jp: "法定労働時間《ほうていろうどうじかん》（週《しゅう》40時間《じかん》・1日《にち》8時間《じかん》）",
   type: "hukum",
   id_text: "Jam kerja legal",
-  desc: "Jam kerja legal: max 8 jam/hari & 40 jam/minggu. Lembur butuh 36協定《きょうてい》 dan dibayar upah",
+  desc: "Jam kerja legal: max 8 jam/hari & 40 jam/minggu. Lembur butuh 36協定《きょうてい》 dan dibayar upah lembur minimal +25%.",
   _origIndex: 703
   },
   {
@@ -8640,7 +8640,7 @@ export const CARDS_COMMON = [
   jp: "優位性《ゆういせい》",
   type: "vocab",
   id_text: "Keunggulan",
-  desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang",
+  desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang di luar batas wajar pekerjaan = パワー・ハラスメント.",
   usage: '品質《ひんしつ》の優位性《ゆういせい》を示《しめ》して施主《せしゅ》の信頼《しんらい》を得《え》る（tunjukkan keunggulan kualitas untuk mendapatkan kepercayaan pemilik bangunan）',
     _origIndex: 902
   },
@@ -8652,7 +8652,7 @@ export const CARDS_COMMON = [
   jp: "苦痛《くつう》",
   type: "vocab",
   id_text: "Penderitaan / tekanan",
-  desc: "Penderitaan fisik atau mental.\nTindakan yang menyebabkan 苦痛《くつう》mental =",
+  desc: "Penderitaan fisik atau mental.\nTindakan yang menyebabkan 苦痛《くつう》mental = パワー・ハラスメント (power harassment).",
   usage: '長時間《ちょうじかん》の重作業《じゅうさぎょう》による苦痛《くつう》を減《へ》らすために適切《てきせつ》な道具《どうぐ》を使う（gunakan alat yang tepat untuk mengurangi beban akibat pekerjaan berat berkepanjangan）',
     _origIndex: 903
   },
@@ -8676,7 +8676,7 @@ export const CARDS_COMMON = [
   jp: "事業主《じぎょうぬし》",
   type: "vocab",
   id_text: "Pemberi kerja / majikan",
-  desc: "Pemilik usaha/perusahaan yang mempekerjakan.\nPremi asuransi kecelakaan kerja",
+  desc: "Pemilik usaha/perusahaan yang mempekerjakan.\nPremi asuransi kecelakaan kerja (労災保険) ditanggung penuh oleh 事業主《じぎょうぬし》.",
   usage: '事業主《じぎょうぬし》は労働者《ろうどうしゃ》に安全な職場《しょくば》を提供《ていきょう》する義務《ぎむ》がある（pemberi kerja berkewajiban menyediakan tempat kerja yang aman bagi pekerja）',
     _origIndex: 905
   },
@@ -8688,7 +8688,7 @@ export const CARDS_COMMON = [
   jp: "資質《ししつ》",
   type: "vocab",
   id_text: "Kualitas / kompetensi SDM",
-  desc: "Mutu atau kemampuan dasar seseorang/pelaku usaha.\nTujuan UU Konstruksi:",
+  desc: "Mutu atau kemampuan dasar seseorang/pelaku usaha.\nTujuan UU Konstruksi: ①peningkatan kompetensi pelaku usaha ②kontrak kerja yang adil ③pelaksanaan proyek yang tepat ④perlindungan pemberi kerja ⑤perkembangan sehat industri konstruksi.",
   usage: 'SSWとして求められる資質《ししつ》（誠実さ・技能《ぎのう》・コミュニケーション）を高《たか》める（tingkatkan kompetensi yang diperlukan sebagai SSW: kejujuran, keterampilan, dan komunikasi）',
     _origIndex: 906
   },
@@ -8712,7 +8712,7 @@ export const CARDS_COMMON = [
   jp: "最低限《さいていげん》",
   type: "vocab",
   id_text: "Minimum / batas paling",
-  desc: "Standar atau ambang batas paling rendah yang ditetapkan.\nUU Standar Bangunan",
+  desc: "Standar atau ambang batas paling rendah yang ditetapkan.\nUU Standar Bangunan menetapkan aturan minimum saat membangun/memakai gedung agar aman dan nyaman.",
   usage: '最低限《さいていげん》の安全対策《あんぜんたいさく》として保護具《ほごぐ》を着用《ちゃくよう》する（kenakan APD sebagai tindakan keselamatan minimum）',
     _origIndex: 908
   },
@@ -8724,7 +8724,7 @@ export const CARDS_COMMON = [
   jp: "軽減《けいげん》",
   type: "vocab",
   id_text: "Pengurangan / mitigasi",
-  desc: "Mengurangi dampak atau kerugian.\nUU Pemadam bertujuan 軽減《けいげん》kerugian akibat",
+  desc: "Mengurangi dampak atau kerugian.\nUU Pemadam bertujuan 軽減《けいげん》kerugian akibat kebakaran atau bencana seperti gempa.",
   usage: 'ヒヤリハット報告《ほうこく》で事故《じこ》リスクを軽減《けいげん》する（kurangi risiko kecelakaan melalui pelaporan near miss）',
     _origIndex: 909
   },
@@ -10052,7 +10052,7 @@ export const CARDS_COMMON = [
   jp: "雇用保険《こようほけん》",
   type: "hukum",
   id_text: "Asuransi ketenagakerjaan",
-  desc: "Tunjangan pengangguran jika kehilangan pekerjaan.\nBiaya ditanggung bersama antara perusahaan dan",
+  desc: "Tunjangan pengangguran jika kehilangan pekerjaan.\nBiaya ditanggung bersama antara perusahaan dan pekerja, sebagian juga oleh negara.",
   _origIndex: 1397
   },
   {

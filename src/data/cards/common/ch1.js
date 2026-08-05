@@ -129,7 +129,7 @@ export const CARDS_CH1 = [
   jp: "ゼネコン",
   type: 'vocab',
   id_text: "General Contractor",
-  desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek",
+  desc: "Singkatan General Contractor; mengelola semua 専門工事業者《せんもんこうじぎょうしゃ》 sebagai 元請《もとうけ》け di proyek konstruksi skala besar.",
   usage: 'ゼネコンが複数《ふくすう》の専門業者《せんもんぎょうしゃ》を管理《かんり》して工事《こうじ》を進《すす》める（GC mengelola beberapa kontraktor spesialis untuk melanjutkan proyek）',
     _origIndex: 567
   },
@@ -273,7 +273,7 @@ export const CARDS_CH1 = [
   jp: "KY活動の4ステップ《きけんよちかつどうのよんすてっぷ》",
   type: "konsep",
   id_text: "4 langkah KY",
-  desc: "4 langkah KY活動《かつどう》: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target",
+  desc: "4 langkah KY活動《かつどう》: ①identifikasi bahaya ②diskusi solusi (catat di KYボード) ③tetapkan target ④serukan bersama slogan keselamatan hari itu.",
   _origIndex: 579
   },
 {
@@ -307,7 +307,7 @@ export const CARDS_CH1 = [
   jp: "安全確認の8項目《あんぜんかくにんのはちこうもく》",
   type: "konsep",
   id_text: "8 item cek keselamatan",
-  desc: "Di akhir 全体朝礼《ぜんたいちょうれい》, 2人《にん》1組《くみ》 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali",
+  desc: "Di akhir 全体朝礼《ぜんたいちょうれい》, 2人《にん》1組《くみ》 sambil bersuara: kanan/kiri/depan/belakang/atas/bawah/tali dagu helm/nama pada seragam.",
   _origIndex: 582
   },
 {

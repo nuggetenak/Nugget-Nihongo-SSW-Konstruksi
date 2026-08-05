@@ -81,7 +81,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "優位性《ゆういせい》",
   type: "vocab",
   id_text: "Keunggulan",
-  desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang",
+  desc: "Posisi/jabatan yang lebih tinggi.\nMemanfaatkan 優位性《ゆういせい》untuk menekan orang di luar batas wajar pekerjaan = パワー・ハラスメント.",
   usage: '品質《ひんしつ》の優位性《ゆういせい》を示《しめ》して施主《せしゅ》の信頼《しんらい》を得《え》る（tunjukkan keunggulan kualitas untuk mendapatkan kepercayaan pemilik bangunan）',
     _origIndex: 902
   },
@@ -93,7 +93,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "苦痛《くつう》",
   type: "vocab",
   id_text: "Penderitaan / tekanan",
-  desc: "Penderitaan fisik atau mental.\nTindakan yang menyebabkan 苦痛《くつう》mental =",
+  desc: "Penderitaan fisik atau mental.\nTindakan yang menyebabkan 苦痛《くつう》mental = パワー・ハラスメント (power harassment).",
   usage: '長時間《ちょうじかん》の重作業《じゅうさぎょう》による苦痛《くつう》を減《へ》らすために適切《てきせつ》な道具《どうぐ》を使う（gunakan alat yang tepat untuk mengurangi beban akibat pekerjaan berat berkepanjangan）',
     _origIndex: 903
   },
@@ -117,7 +117,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "事業主《じぎょうぬし》",
   type: "vocab",
   id_text: "Pemberi kerja / majikan",
-  desc: "Pemilik usaha/perusahaan yang mempekerjakan.\nPremi asuransi kecelakaan kerja",
+  desc: "Pemilik usaha/perusahaan yang mempekerjakan.\nPremi asuransi kecelakaan kerja (労災保険) ditanggung penuh oleh 事業主《じぎょうぬし》.",
   usage: '事業主《じぎょうぬし》は労働者《ろうどうしゃ》に安全な職場《しょくば》を提供《ていきょう》する義務《ぎむ》がある（pemberi kerja berkewajiban menyediakan tempat kerja yang aman bagi pekerja）',
     _origIndex: 905
   },
@@ -129,7 +129,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "資質《ししつ》",
   type: "vocab",
   id_text: "Kualitas / kompetensi SDM",
-  desc: "Mutu atau kemampuan dasar seseorang/pelaku usaha.\nTujuan UU Konstruksi:",
+  desc: "Mutu atau kemampuan dasar seseorang/pelaku usaha.\nTujuan UU Konstruksi: ①peningkatan kompetensi pelaku usaha ②kontrak kerja yang adil ③pelaksanaan proyek yang tepat ④perlindungan pemberi kerja ⑤perkembangan sehat industri konstruksi.",
   usage: 'SSWとして求められる資質《ししつ》（誠実さ・技能《ぎのう》・コミュニケーション）を高《たか》める（tingkatkan kompetensi yang diperlukan sebagai SSW: kejujuran, keterampilan, dan komunikasi）',
     _origIndex: 906
   },
@@ -153,7 +153,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "最低限《さいていげん》",
   type: "vocab",
   id_text: "Minimum / batas paling",
-  desc: "Standar atau ambang batas paling rendah yang ditetapkan.\nUU Standar Bangunan",
+  desc: "Standar atau ambang batas paling rendah yang ditetapkan.\nUU Standar Bangunan menetapkan aturan minimum saat membangun/memakai gedung agar aman dan nyaman.",
   usage: '最低限《さいていげん》の安全対策《あんぜんたいさく》として保護具《ほごぐ》を着用《ちゃくよう》する（kenakan APD sebagai tindakan keselamatan minimum）',
     _origIndex: 908
   },
@@ -165,7 +165,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "軽減《けいげん》",
   type: "vocab",
   id_text: "Pengurangan / mitigasi",
-  desc: "Mengurangi dampak atau kerugian.\nUU Pemadam bertujuan 軽減《けいげん》kerugian akibat",
+  desc: "Mengurangi dampak atau kerugian.\nUU Pemadam bertujuan 軽減《けいげん》kerugian akibat kebakaran atau bencana seperti gempa.",
   usage: 'ヒヤリハット報告《ほうこく》で事故《じこ》リスクを軽減《けいげん》する（kurangi risiko kecelakaan melalui pelaporan near miss）',
     _origIndex: 909
   },

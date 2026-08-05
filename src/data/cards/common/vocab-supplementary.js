@@ -2750,7 +2750,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "雇用保険《こようほけん》",
   type: "hukum",
   id_text: "Asuransi ketenagakerjaan",
-  desc: "Tunjangan pengangguran jika kehilangan pekerjaan.\nBiaya ditanggung bersama antara perusahaan dan",
+  desc: "Tunjangan pengangguran jika kehilangan pekerjaan.\nBiaya ditanggung bersama antara perusahaan dan pekerja, sebagian juga oleh negara.",
   _origIndex: 1397
   },
 {
