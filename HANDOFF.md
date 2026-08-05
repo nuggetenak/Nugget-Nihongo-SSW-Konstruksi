@@ -59,9 +59,9 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-07-30 (session 24, cont'd — same conversation, real time passed
-between messages).** Verify before trusting past this point — this line
-doesn't update itself.
+**As of this edit, 2026-08-04 (session 25 — new agent chat; owner gave repo+token directly
+rather than uploading this file, same underlying protocol, not a continuation of session 24's
+conversation).** Verify before trusting past this point — this line doesn't update itself.
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
 - P0–P5, P7, P9, P14, P15, P8a: all done
@@ -187,6 +187,25 @@ doesn't update itself.
     picker) and `DobokuMode.jsx`/`KenchikuMode.jsx` — real UI code content-dq doesn't have a
     copy of. These need the equivalent removal/update when this branch merges, same bucket as
     P12. Don't forget this exists just because content-dq's own tree looks clean now.
+- **Session 25 (new agent chat — not a continuation of session 24's conversation; owner
+  provided repo+token directly rather than uploading this file, same underlying protocol).**
+  `verify-content.mjs` + `audit-track-consistency.mjs` re-run fresh: both clean, numbers
+  unchanged from session 24's close (1438 cards, 0 drift). Checked ACTIVE TASKS before starting
+  anything: 🟢 bucket still empty, all 3 🟡 items still need source material or a non-mechanical
+  owner call, P12 still gated on merge time. No PDF this session — owner confirmed directly,
+  also checked `/mnt/user-data/uploads` (empty). Still waiting, see ⏸ below.
+  - **Found + fixed one thing outside the tracked task list:** `README-CONTENT-DQ.md`'s tree
+    still listed 5 files session 24's `d55ac3c` deleted (`cards-doboku.js`/`cards-kenchiku.js`
+    stubs, `jac-doboku.js`/`jac-kenchiku.js` stubs, the whole `sets/quiz/` folder) — that commit
+    updated `_MAP.md`/`CARD_CONTENT_SPEC.md` to match (verified: their remaining doboku/kenchiku
+    mentions are correctly-phrased historical notes, not stale refs) but missed this file. Also
+    corrected `quiz-sets.js`'s description (no longer has its own working-copy folder — that
+    folder's gone, it's a pure aggregator now: `QUIZ_SETS = [...WAYGROUND_SETS,
+    ...JAC_MOCKUP_SETS]`, confirmed by reading the file) and added `jac-official.js` to the tree
+    (a pre-existing 4-line backward-compat shim, already documented in
+    `_MAP.md`/`CHANGELOG.md`/`DATA_ARCH_AUDIT.md`, never listed here). Every file the corrected
+    tree names now checked against the real filesystem — clean match either direction. No
+    content/`src/data/` changes, the 1438 cards untouched. Commit `cbb7ff6`.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -221,11 +240,13 @@ one" list — check the gate before starting.
 *(none right now — the split-file/mirror drift below was the last one, done session 24.)*
 
 ### ⏸ Blocked on external material
-**Owner said (end of session 24): PDFs are coming with the next agent session, handed off
-directly — not "still waiting indefinitely."** Check the uploaded files at the start of that
-session before treating any of this as still blocked. Also cross-check P5 in the 🟡 bucket
-above once a PDF lands — "real JAC PDF text" there may be served by the same material, not
-necessarily a separate document.
+**Session 25 checked at start, per owner's direct message this session: still no PDF.** Owner
+said at the end of session 24 that PDFs were coming "with the next agent session, handed off
+directly" — that didn't happen in session 25; owner was explicit it's not ready yet, not an
+oversight on either side. Next agent: check the uploaded files at the start of your session
+before treating any of this as still blocked, same as session 25 did. Also cross-check P5 in
+the 🟡 bucket above once a PDF lands — "real JAC PDF text" there may be served by the same
+material, not necessarily a separate document.
 
 *(P21 and PDF Viewer Mode themselves no longer exist — dropped session 24 along with the
 Doboku/Kenchiku tracks. See the scope-reduction entry in CURRENT STATE. The note above about
