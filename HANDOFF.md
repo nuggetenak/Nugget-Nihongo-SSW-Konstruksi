@@ -59,9 +59,11 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-04 (session 25 — new agent chat; owner gave repo+token directly
-rather than uploading this file, same underlying protocol, not a continuation of session 24's
-conversation).** Verify before trusting past this point — this line doesn't update itself.
+**As of this edit, 2026-08-12 (session 25, cont'd — same chat as the repo+token clone below,
+real time passed between messages, first 2 teori PDFs arrived partway through).** Verify before
+trusting past this point — this line doesn't update itself. (Correction: an earlier edit this
+same session wrote 2026-08-04, read off the sandbox's stale internal clock rather than the
+authoritative one — noticed and fixed once the PDFs arrived and the true date was checked again.)
 
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
 - P0–P5, P7, P9, P14, P15, P8a: all done
@@ -206,6 +208,25 @@ conversation).** Verify before trusting past this point — this line doesn't up
     `_MAP.md`/`CHANGELOG.md`/`DATA_ARCH_AUDIT.md`, never listed here). Every file the corrected
     tree names now checked against the real filesystem — clean match either direction. No
     content/`src/data/` changes, the 1438 cards untouched. Commit `cbb7ff6`.
+  - **Later, same session: first 2 of 4 teori PDFs arrived** (ch1 `日本の現場で大切にしていること`
+    as `text1l.pdf`, ch2 `日本の現場で働く上で守らなければならない法令` as `text2.pdf`). Owner said
+    PDFs are coming incrementally ("one by one" — token cost was a concern on their end) — don't
+    expect all 7 (4 teori + 3 praktik) in one drop. Full intake tracker moved to ⏸ below (upgraded
+    from a static note into a per-chapter table, since this is now clearly multi-session).
+  - **P5 partial: 22 of 479 desc-truncation cards completed**, scoped exactly to what ch1+ch2
+    cover (source=jac-ch1 ∪ jac-ch2, 130 cards checked, 95 already fine, 22 fixed, 5 left
+    genuinely unresolved even with these 2 chapters — see commit body for the id-by-id
+    reasoning on both the fixed and the deliberately-skipped ones, it's long and shouldn't be
+    duplicated here). 3 of the 22 (149, 157, 159) involved one small inferential step beyond
+    direct restatement — flagged in the commit in case the owner reads them differently. Caught
+    and corrected one own error pre-commit: a mis-keyed furigana reading (事業主 as じぎょうしゃ,
+    should be じぎょうぬし per the card's own jp/furi fields — this project's existing data was
+    right, the draft fix was wrong). Also flagged but did **not** touch: id=468 (`category:
+    "haikan"`, piping-technique content) is tagged `source: "jac-ch2"` despite ch2 being pure
+    law content with nothing resembling this topic — smells like a source mistag, not something
+    P5-style completion can resolve; needs an owner look, not guessed at. verify-content.mjs +
+    audit-track-consistency.mjs both re-run clean after (1438 unchanged, no adds/removes/moves).
+    Commit `61c180a`.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -222,8 +243,15 @@ one" list — check the gate before starting.
 | P12 | merge time, not now | Drop `furi` from all split files |
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
-- 213 `desc` truncated mid-word + 266 missing period (~479 cards, P5) — needs real JAC PDF text,
-  don't guess-fill these
+- **P5, partial:** 213 `desc` truncated mid-word + 266 missing period (~479 cards total) — needs
+  real JAC PDF text, don't guess-fill these. **22 done (session 25, commit `61c180a`)** — every
+  jac-ch1/jac-ch2-sourced card that was both truncated and had enough detail in the now-available
+  ch1+ch2 PDFs to complete safely. 457 still open: jac-ch3 (183 cards) + jac-ch4 (149) need the
+  remaining 2 teori PDFs; jac-ch5/6/7 (216+133+47=396) need the 3 praktik PDFs — see the PDF
+  intake tracker under ⏸ below. Also still open even with ch1+ch2 available: id=94, 152, 160, 957
+  (not enough specific detail in what's been provided so far, see commit `61c180a` body for why
+  each one specifically wasn't safe to complete) and id=468 (looks like a source mistag, not a
+  P5 case — flagged separately, needs an owner look).
 - **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
   459/612 nest `《》`-bracketed glosses *inside* the furi string itself (should be plain reading
   text); 613's furi doesn't read as "EF接合" at all, looks corrupted. No clean sibling to
@@ -239,18 +267,34 @@ one" list — check the gate before starting.
 ### 🟢 Unblocked, no owner decision needed, just not done yet
 *(none right now — the split-file/mirror drift below was the last one, done session 24.)*
 
-### ⏸ Blocked on external material
-**Session 25 checked at start, per owner's direct message this session: still no PDF.** Owner
-said at the end of session 24 that PDFs were coming "with the next agent session, handed off
-directly" — that didn't happen in session 25; owner was explicit it's not ready yet, not an
-oversight on either side. Next agent: check the uploaded files at the start of your session
-before treating any of this as still blocked, same as session 25 did. Also cross-check P5 in
-the 🟡 bucket above once a PDF lands — "real JAC PDF text" there may be served by the same
-material, not necessarily a separate document.
+### ⏸ Blocked on external material — PDF intake tracker
+7 source PDFs total: 4 teori (common, ch1–4) + 3 praktik (lifeline jitsugi, ch5–7). Owner is
+providing them incrementally, not as one batch — token cost was an explicit concern on their
+end (session 25). Don't expect all 7 at once; don't treat "only some are here" as blocked, work
+whatever the available chapters unlock (see P5 in 🟡 above for the main thing this feeds).
+
+| # | Chapter | JAC content covers | Status | Filename |
+|---|---------|---------------------|--------|----------|
+| 1 | teori ch1 | 日本の現場で大切にしていること (teamwork, 施工体制, CCUS, あいさつ, 朝礼) | ✅ received session 25 | `text1l.pdf` |
+| 2 | teori ch2 | 働く上で守らなければならない法令 (labor law + 15 other laws) | ✅ received session 25 | `text2.pdf` |
+| 3 | teori ch3 | 建設工事の種類と業務 (construction work types/trades — large chapter, 183 cards) | ⏸ not yet | — |
+| 4 | teori ch4 | 現場で使われるあいさつ・用語・共同生活上の注意 (site terminology, shared-living notes) | ⏸ not yet | — |
+| 5 | praktik ch5 | Lifeline jitsugi (216 cards — largest single chapter) | ⏸ not yet | — |
+| 6 | praktik ch6 | Lifeline jitsugi (133 cards — also where the EF接合 furi issue and most H5 naked-kanji cards live) | ⏸ not yet | — |
+| 7 | praktik ch7 | Lifeline jitsugi (47 cards) | ⏸ not yet | — |
+
+Next agent, regardless of what this table says: check `/mnt/user-data/uploads` yourself at the
+start of your session — the table can go stale, the upload check can't lie. When a new chapter
+lands, the pattern from session 25 (commit `61c180a`) is reusable: filter `cards.js` by
+`source === "jac-ch{N}"`, check each candidate's actual `desc` against the specific PDF passage
+it should match, complete only what's directly supported, leave the rest flagged rather than
+guessed. Ch6 is worth prioritizing when it arrives — CARD_CONTENT_SPEC.md's P5 entry already
+called it out as the priority chapter for mid-word truncations specifically, and it's also where
+the EF接合 triple (🟡 above) and most of H5's naked-kanji cards live per the spec's own notes.
 
 *(P21 and PDF Viewer Mode themselves no longer exist — dropped session 24 along with the
-Doboku/Kenchiku tracks. See the scope-reduction entry in CURRENT STATE. The note above about
-PDFs still applies to P5.)*
+Doboku/Kenchiku tracks. See the scope-reduction entry in CURRENT STATE — unrelated to this
+tracker, noted here only because this section used to carry that note.)*
 
 ---
 

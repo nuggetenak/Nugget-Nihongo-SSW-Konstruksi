@@ -798,6 +798,11 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 - [ ] Fix 25 duplicate id_text → disambiguate
 
 ### P5 — Desc truncation (cards)
+> **Session 25 (2026-08-12, commit `61c180a`): 22/479 done, scoped to jac-ch1+jac-ch2 (the only
+> chapters with source PDFs available so far — see HANDOFF.md's PDF intake tracker). Not a full
+> pass, don't check these boxes off — 457 remain across jac-ch3/4 (teori, not yet available) and
+> jac-ch5/6/7 (praktik, not yet available). Re-scope by `source === "jac-ch{N}"` as each new
+> chapter's PDF lands.**
 - [ ] 213 mid-word truncated → complete content (prioritas jac-ch6)
 - [ ] 266 complete-word missing period → add `.`
 - [ ] 82 symbol endings (`→`,`=`,`:`,`》`,`、`) → fix per kasus
