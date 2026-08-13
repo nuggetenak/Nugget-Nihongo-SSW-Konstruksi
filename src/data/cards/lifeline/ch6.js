@@ -1693,7 +1693,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "受信機《じゅしんき》",
   type: "vocab",
   id_text: "Panel penerima alarm",
-  desc: "Panel utama sistem alarm kebakaran yang menampilkan lokasi api dan mengaktifkan",
+  desc: "Panel utama sistem alarm kebakaran yang menampilkan lokasi api dan mengaktifkan alarm gedung serta notifikasi ke dinas pemadam kebakaran.",
   usage: '受信機《じゅしんき》でどの感知器《かんちき》から信号《しんごう》が来《き》たか確認《かくにん》する（periksa dari detektor mana sinyal berasal melalui panel penerima alarm）',
     _origIndex: 1095
   },
@@ -1705,7 +1705,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "消防用水《しょうぼうようすい》",
   type: "vocab",
   id_text: "Cadangan air pemadam",
-  desc: "Tangki/kolam cadangan air di lokasi tertentu sebagai sumber air alternatif saat",
+  desc: "Tangki/kolam cadangan air di lokasi tertentu sebagai sumber air alternatif saat pemadaman kebakaran.",
   usage: '消防用水《しょうぼうようすい》をプールや受水槽《じゅすいそう》に確保《かくほ》して大規模火災《だいきぼかさい》に備《そな》える（sediakan air pemadam kebakaran di kolam atau tangki untuk persiapan kebakaran besar）',
     _origIndex: 1098
   },
@@ -1729,7 +1729,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "硬質ウレタンフォーム《こうしつうれたんふぉーむ》",
   type: "vocab",
   id_text: "Rigid urethane foam",
-  desc: "Busa uretan keras dengan nilai λ sangat rendah (~0.022 W/mK), efisien untuk",
+  desc: "Busa uretan keras dengan nilai λ sangat rendah (~0.022 W/mK), efisien untuk insulasi termal bangunan.",
   usage: '硬質ウレタンフォームを配管《はいかん》や機器《きき》の保冷《ほれい》工事《こうじ》に使用《しよう》する（gunakan rigid urethane foam untuk pekerjaan insulasi dingin pada pipa dan peralatan）',
     _origIndex: 1104
   },
@@ -1873,7 +1873,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "給水管《きゅうすいかん》",
   type: "vocab",
   id_text: "Pipa suplai air bersih",
-  desc: "Pipa yang bercabang dari jaringan utama PDAM dan mendistribusikan air ke setiap",
+  desc: "Pipa yang bercabang dari jaringan utama PDAM dan mendistribusikan air ke setiap rumah/bangunan.",
   usage: '給水管《きゅうすいかん》は衛生《えいせい》基準《きじゅん》を満《み》たす材料《ざいりょう》を使《つか》う（gunakan material yang memenuhi standar sanitasi untuk pipa suplai air bersih）',
     _origIndex: 1169
   },

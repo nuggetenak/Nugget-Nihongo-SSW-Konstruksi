@@ -75,7 +75,7 @@ export const CARDS_LIFELINE_CH3 = [
   jp: "保温保冷工事《ほおんほれいこうじ》",
   type: "konsep",
   id_text: "Pekerjaan insulasi termal",
-  desc: "Memasang insulasi termal pada pipa & saluran.\n保温《ほおん》=kurangi panas hilang; 保冷《ほれい》=cegah",
+  desc: "Memasang insulasi termal pada pipa & saluran.\n保温《ほおん》=kurangi panas hilang; 保冷《ほれい》=cegah suhu dingin naik.",
   _origIndex: 34
   },
 {
@@ -145,7 +145,7 @@ export const CARDS_LIFELINE_CH3 = [
   jp: "冷凍空気調和機器工事の代表機器《れいとうくうきちょうわききこうじだいひょうきき》",
   type: 'vocab',
   id_text: "Mesin utama pekerjaan AC",
-  desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport",
+  desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport pendingin.",
   usage: '冷凍空調工事《れいとうくうちょうこうじ》で圧縮機《あっしゅくき》と膨張弁《ぼうちょうべん》を確認《かくにん》する（periksa kompresor dan katup ekspansi pada pekerjaan AC dan refrigerasi）',
     _origIndex: 219
   },
@@ -169,7 +169,7 @@ export const CARDS_LIFELINE_CH3 = [
   jp: "各種炉の種類《かくしゅろのしゅるい》（築炉工事《ちくろこうじ》詳細《しょうさい》）",
   type: 'vocab',
   id_text: "Jenis tungku (chikuro)",
-  desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku",
+  desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku listrik《でんきろ》untuk lebur logam.",
   usage: '各種炉《かくしゅろ》（製鉄炉《せいてつろ》・加熱炉《かねつろ》）に適《てき》した耐火物《たいかぶつ》を選《えら》ぶ（pilih material refractory yang sesuai untuk setiap jenis tungku）',
     _origIndex: 221
   },
@@ -217,7 +217,7 @@ export const CARDS_LIFELINE_CH3 = [
   jp: "塗装工事の3工法《とそうこうじのさんこうほう》",
   type: 'vocab',
   id_text: "3 metode pengecatan",
-  desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut",
+  desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut lalu disemprotkan, cocok bentuk rumit.",
   usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》から現場《げんば》に適《てき》した塗装《とそう》方法《ほうほう》を選《えら》ぶ（pilih metode pengecatan yang sesuai dengan kondisi lapangan dari 3 opsi）',
     _origIndex: 637
   },
@@ -229,7 +229,7 @@ export const CARDS_LIFELINE_CH3 = [
   jp: "建築板金工事《けんちくばんきんこうじ》のダクト3種《さんしゅ》（排煙《はいえん》・空調《くうちょう》・排気《はいき》）",
   type: 'vocab',
   id_text: "Plat logam",
-  desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap",
+  desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap ②空調《くうちょう》= udara dingin/hangat/segar ③排気《はいき》= buang panas/bau dari ruang mesin.",
   usage: '排煙ダクト《はいえんだくと》・空調ダクト・排気ダクトの板金《ばんきん》工事《こうじ》を担当《たんとう》する（tangani pekerjaan sheet metal untuk duct asap, AC, dan exhaust）',
     _origIndex: 650
   },

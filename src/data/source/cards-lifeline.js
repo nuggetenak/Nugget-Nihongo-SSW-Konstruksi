@@ -75,7 +75,7 @@ export const CARDS_LIFELINE = [
   jp: "保温保冷工事《ほおんほれいこうじ》",
   type: "konsep",
   id_text: "Pekerjaan insulasi termal",
-  desc: "Memasang insulasi termal pada pipa & saluran.\n保温《ほおん》=kurangi panas hilang; 保冷《ほれい》=cegah",
+  desc: "Memasang insulasi termal pada pipa & saluran.\n保温《ほおん》=kurangi panas hilang; 保冷《ほれい》=cegah suhu dingin naik.",
   _origIndex: 34
   },
   {
@@ -840,7 +840,7 @@ export const CARDS_LIFELINE = [
   jp: "冷凍空気調和機器工事の代表機器《れいとうくうきちょうわききこうじだいひょうきき》",
   type: 'vocab',
   id_text: "Mesin utama pekerjaan AC",
-  desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport",
+  desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport pendingin.",
   usage: '冷凍空調工事《れいとうくうちょうこうじ》で圧縮機《あっしゅくき》と膨張弁《ぼうちょうべん》を確認《かくにん》する（periksa kompresor dan katup ekspansi pada pekerjaan AC dan refrigerasi）',
     _origIndex: 219
   },
@@ -864,7 +864,7 @@ export const CARDS_LIFELINE = [
   jp: "各種炉の種類《かくしゅろのしゅるい》（築炉工事《ちくろこうじ》詳細《しょうさい》）",
   type: 'vocab',
   id_text: "Jenis tungku (chikuro)",
-  desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku",
+  desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku listrik《でんきろ》untuk lebur logam.",
   usage: '各種炉《かくしゅろ》（製鉄炉《せいてつろ》・加熱炉《かねつろ》）に適《てき》した耐火物《たいかぶつ》を選《えら》ぶ（pilih material refractory yang sesuai untuk setiap jenis tungku）',
     _origIndex: 221
   },
@@ -2845,7 +2845,7 @@ export const CARDS_LIFELINE = [
   jp: "塗装工事の3工法《とそうこうじのさんこうほう》",
   type: 'vocab',
   id_text: "3 metode pengecatan",
-  desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut",
+  desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut lalu disemprotkan, cocok bentuk rumit.",
   usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》から現場《げんば》に適《てき》した塗装《とそう》方法《ほうほう》を選《えら》ぶ（pilih metode pengecatan yang sesuai dengan kondisi lapangan dari 3 opsi）',
     _origIndex: 637
   },
@@ -2857,7 +2857,7 @@ export const CARDS_LIFELINE = [
   jp: "建築板金工事《けんちくばんきんこうじ》のダクト3種《さんしゅ》（排煙《はいえん》・空調《くうちょう》・排気《はいき》）",
   type: 'vocab',
   id_text: "Plat logam",
-  desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap",
+  desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap ②空調《くうちょう》= udara dingin/hangat/segar ③排気《はいき》= buang panas/bau dari ruang mesin.",
   usage: '排煙ダクト《はいえんだくと》・空調ダクト・排気ダクトの板金《ばんきん》工事《こうじ》を担当《たんとう》する（tangani pekerjaan sheet metal untuk duct asap, AC, dan exhaust）',
     _origIndex: 650
   },
@@ -6152,7 +6152,7 @@ export const CARDS_LIFELINE = [
   jp: "受信機《じゅしんき》",
   type: "vocab",
   id_text: "Panel penerima alarm",
-  desc: "Panel utama sistem alarm kebakaran yang menampilkan lokasi api dan mengaktifkan",
+  desc: "Panel utama sistem alarm kebakaran yang menampilkan lokasi api dan mengaktifkan alarm gedung serta notifikasi ke dinas pemadam kebakaran.",
   usage: '受信機《じゅしんき》でどの感知器《かんちき》から信号《しんごう》が来《き》たか確認《かくにん》する（periksa dari detektor mana sinyal berasal melalui panel penerima alarm）',
     _origIndex: 1095
   },
@@ -6164,7 +6164,7 @@ export const CARDS_LIFELINE = [
   jp: "消防用水《しょうぼうようすい》",
   type: "vocab",
   id_text: "Cadangan air pemadam",
-  desc: "Tangki/kolam cadangan air di lokasi tertentu sebagai sumber air alternatif saat",
+  desc: "Tangki/kolam cadangan air di lokasi tertentu sebagai sumber air alternatif saat pemadaman kebakaran.",
   usage: '消防用水《しょうぼうようすい》をプールや受水槽《じゅすいそう》に確保《かくほ》して大規模火災《だいきぼかさい》に備《そな》える（sediakan air pemadam kebakaran di kolam atau tangki untuk persiapan kebakaran besar）',
     _origIndex: 1098
   },
@@ -6188,7 +6188,7 @@ export const CARDS_LIFELINE = [
   jp: "硬質ウレタンフォーム《こうしつうれたんふぉーむ》",
   type: "vocab",
   id_text: "Rigid urethane foam",
-  desc: "Busa uretan keras dengan nilai λ sangat rendah (~0.022 W/mK), efisien untuk",
+  desc: "Busa uretan keras dengan nilai λ sangat rendah (~0.022 W/mK), efisien untuk insulasi termal bangunan.",
   usage: '硬質ウレタンフォームを配管《はいかん》や機器《きき》の保冷《ほれい》工事《こうじ》に使用《しよう》する（gunakan rigid urethane foam untuk pekerjaan insulasi dingin pada pipa dan peralatan）',
     _origIndex: 1104
   },
@@ -6272,7 +6272,7 @@ export const CARDS_LIFELINE = [
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
   id_text: "Panel distribusi listrik (分電盤)",
-  desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit",
+  desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit listrik di bangunan.",
   usage: '分電盤《ぶんでんばん》に回路《かいろ》ごとのブレーカーを配置《はいち》して電力《でんりょく》を分配《ぶんぱい》する（tempatkan breaker per sirkuit pada panel distribusi untuk mendistribusikan daya）',
     _origIndex: 1126
   },
@@ -6416,7 +6416,7 @@ export const CARDS_LIFELINE = [
   jp: "給水管《きゅうすいかん》",
   type: "vocab",
   id_text: "Pipa suplai air bersih",
-  desc: "Pipa yang bercabang dari jaringan utama PDAM dan mendistribusikan air ke setiap",
+  desc: "Pipa yang bercabang dari jaringan utama PDAM dan mendistribusikan air ke setiap rumah/bangunan.",
   usage: '給水管《きゅうすいかん》は衛生《えいせい》基準《きじゅん》を満《み》たす材料《ざいりょう》を使《つか》う（gunakan material yang memenuhi standar sanitasi untuk pipa suplai air bersih）',
     _origIndex: 1169
   },

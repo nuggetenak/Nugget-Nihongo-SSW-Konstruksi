@@ -1737,7 +1737,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "分電盤《ぶんでんばん》",
   type: "vocab",
   id_text: "Panel distribusi listrik (分電盤)",
-  desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit",
+  desc: "Panel berisi breaker utama dan breaker-breaker cabang untuk tiap sirkuit listrik di bangunan.",
   usage: '分電盤《ぶんでんばん》に回路《かいろ》ごとのブレーカーを配置《はいち》して電力《でんりょく》を分配《ぶんぱい》する（tempatkan breaker per sirkuit pada panel distribusi untuk mendistribusikan daya）',
     _origIndex: 1126
   },
