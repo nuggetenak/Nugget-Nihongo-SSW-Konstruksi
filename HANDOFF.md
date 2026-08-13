@@ -59,8 +59,8 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-12 (session 25, cont'd — same chat as the repo+token clone below,
-real time passed between messages, first 2 teori PDFs arrived partway through).** Verify before
+**As of this edit, 2026-08-14 (session 25, cont'd — same chat as the repo+token clone below,
+real time passed between messages, 3rd teori PDF arrived partway through).** Verify before
 trusting past this point — this line doesn't update itself. (Correction: an earlier edit this
 same session wrote 2026-08-04, read off the sandbox's stale internal clock rather than the
 authoritative one — noticed and fixed once the PDFs arrived and the true date was checked again.)
@@ -227,6 +227,18 @@ authoritative one — noticed and fixed once the PDFs arrived and the true date 
     P5-style completion can resolve; needs an owner look, not guessed at. verify-content.mjs +
     audit-track-consistency.mjs both re-run clean after (1438 unchanged, no adds/removes/moves).
     Commit `61c180a`.
+  - **Later still, same session: 3rd teori PDF arrived (ch3), scoped + fixed the same way.**
+    source=jac-ch3 (183 cards): 100 already fine (some end in Japanese 。, not just Latin . —
+    a real second valid convention in this dataset's newer cards, not a bug; learned this after
+    initially over-flagging complete ①②③ enumerations as truncated), 56 fixed, 4 left open
+    (insufficient PDF detail — 砥石/発信機/保安器/真空ポンプ, see commit body). Process catch:
+    jac-ch3 cards aren't all in `common/ch3.js` — they span 8 files including 3 `lifeline/*.js`
+    ones (content sourced from ch3's text but used in lifeline-track vocab). First fix pass
+    missed those + had a find-replace bug for fragment-only old-strings (fine for full-string
+    matches, silently failed for partial ones); both caught via the fix script's own
+    should-have-matched-somewhere check, corrected, re-verified two independent ways (direct
+    per-id punctuation check + fresh verify-content.mjs/audit-track-consistency.mjs, both
+    clean, 1438 unchanged). Commit `dca925e`. P5 running total: 78/479 done.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -244,14 +256,14 @@ one" list — check the gate before starting.
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - **P5, partial:** 213 `desc` truncated mid-word + 266 missing period (~479 cards total) — needs
-  real JAC PDF text, don't guess-fill these. **22 done (session 25, commit `61c180a`)** — every
-  jac-ch1/jac-ch2-sourced card that was both truncated and had enough detail in the now-available
-  ch1+ch2 PDFs to complete safely. 457 still open: jac-ch3 (183 cards) + jac-ch4 (149) need the
-  remaining 2 teori PDFs; jac-ch5/6/7 (216+133+47=396) need the 3 praktik PDFs — see the PDF
-  intake tracker under ⏸ below. Also still open even with ch1+ch2 available: id=94, 152, 160, 957
-  (not enough specific detail in what's been provided so far, see commit `61c180a` body for why
-  each one specifically wasn't safe to complete) and id=468 (looks like a source mistag, not a
-  P5 case — flagged separately, needs an owner look).
+  real JAC PDF text, don't guess-fill these. **78 done so far** — session 25, two batches:
+  22 from jac-ch1/jac-ch2 (commit `61c180a`) + 56 from jac-ch3 (commit `dca925e`). ~401 still
+  open: jac-ch4 (149 cards) needs the last teori PDF; jac-ch5/6/7 (216+133+47=396) need the 3
+  praktik PDFs — see the PDF intake tracker under ⏸ below. Also still open even with the PDF
+  available: id=94, 152, 160, 957 (from ch1/ch2), id=410, 966, 1063, 1143 (from ch3) — none had
+  enough specific detail in the provided chapter text to complete safely, see each commit body
+  for the id-by-id reasoning. Separately flagged, not a P5 case: id=468 (source mistag,
+  piping content tagged jac-ch2).
 - **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
   459/612 nest `《》`-bracketed glosses *inside* the furi string itself (should be plain reading
   text); 613's furi doesn't read as "EF接合" at all, looks corrupted. No clean sibling to
@@ -277,7 +289,7 @@ whatever the available chapters unlock (see P5 in 🟡 above for the main thing 
 |---|---------|---------------------|--------|----------|
 | 1 | teori ch1 | 日本の現場で大切にしていること (teamwork, 施工体制, CCUS, あいさつ, 朝礼) | ✅ received session 25 | `text1l.pdf` |
 | 2 | teori ch2 | 働く上で守らなければならない法令 (labor law + 15 other laws) | ✅ received session 25 | `text2.pdf` |
-| 3 | teori ch3 | 建設工事の種類と業務 (construction work types/trades — large chapter, 183 cards) | ⏸ not yet | — |
+| 3 | teori ch3 | 建設工事の種類と業務 (construction work types/trades — largest teori chapter, 183 cards) | ✅ received session 25 | `text3.pdf` |
 | 4 | teori ch4 | 現場で使われるあいさつ・用語・共同生活上の注意 (site terminology, shared-living notes) | ⏸ not yet | — |
 | 5 | praktik ch5 | Lifeline jitsugi (216 cards — largest single chapter) | ⏸ not yet | — |
 | 6 | praktik ch6 | Lifeline jitsugi (133 cards — also where the EF接合 furi issue and most H5 naked-kanji cards live) | ⏸ not yet | — |
@@ -285,12 +297,21 @@ whatever the available chapters unlock (see P5 in 🟡 above for the main thing 
 
 Next agent, regardless of what this table says: check `/mnt/user-data/uploads` yourself at the
 start of your session — the table can go stale, the upload check can't lie. When a new chapter
-lands, the pattern from session 25 (commit `61c180a`) is reusable: filter `cards.js` by
-`source === "jac-ch{N}"`, check each candidate's actual `desc` against the specific PDF passage
-it should match, complete only what's directly supported, leave the rest flagged rather than
-guessed. Ch6 is worth prioritizing when it arrives — CARD_CONTENT_SPEC.md's P5 entry already
-called it out as the priority chapter for mid-word truncations specifically, and it's also where
-the EF接合 triple (🟡 above) and most of H5's naked-kanji cards live per the spec's own notes.
+lands, the pattern from session 25 (commits `61c180a`, `dca925e`) is reusable: filter `cards.js`
+by `source === "jac-ch{N}"`, check each candidate's actual `desc` against the specific PDF
+passage it should match, complete only what's directly supported, leave the rest flagged rather
+than guessed. Ch6 is worth prioritizing when it arrives — CARD_CONTENT_SPEC.md's P5 entry
+already called it out as the priority chapter for mid-word truncations specifically, and it's
+also where the EF接合 triple (🟡 above) and most of H5's naked-kanji cards live per the spec's
+own notes.
+
+**Don't assume `source: "jac-chN"` cards all live in `common/chN.js`.** The ch3 batch spanned 8
+files: mostly `common/ch3.js`, but also `common/vocab-supplementary.js` and — less expected —
+`lifeline/ch3.js`, `lifeline/ch5.js`, `lifeline/ch6.js` (content originally drawn from ch3's
+text, filed under lifeline-track vocab because that's what the term is actually used for in
+practice). Grep the whole `src/data/cards/` tree for each id before assuming its split-file
+location, don't stop at wherever the majority happen to be. Same goes for the source/ mirror:
+both `cards-common.js` and `cards-lifeline.js` may need the same fix.
 
 *(P21 and PDF Viewer Mode themselves no longer exist — dropped session 24 along with the
 Doboku/Kenchiku tracks. See the scope-reduction entry in CURRENT STATE — unrelated to this

@@ -798,11 +798,14 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 - [ ] Fix 25 duplicate id_text → disambiguate
 
 ### P5 — Desc truncation (cards)
-> **Session 25 (2026-08-12, commit `61c180a`): 22/479 done, scoped to jac-ch1+jac-ch2 (the only
-> chapters with source PDFs available so far — see HANDOFF.md's PDF intake tracker). Not a full
-> pass, don't check these boxes off — 457 remain across jac-ch3/4 (teori, not yet available) and
-> jac-ch5/6/7 (praktik, not yet available). Re-scope by `source === "jac-ch{N}"` as each new
-> chapter's PDF lands.**
+> **Session 25 (2026-08-12 to 08-14): 78/479 done — 22 from jac-ch1+jac-ch2 (commit `61c180a`),
+> 56 more from jac-ch3 (commit `dca925e`) — scoped to whichever chapters had a source PDF
+> available at the time (see HANDOFF.md's PDF intake tracker). Not a full pass, don't check
+> these boxes off — ~401 remain across jac-ch4 (teori, not yet available) and jac-ch5/6/7
+> (praktik, not yet available). Re-scope by `source === "jac-ch{N}"` as each new chapter's PDF
+> lands — and check the WHOLE `src/data/cards/` tree for each id, not just the obvious
+> `common/chN.js`/`lifeline/chN.js` file; jac-ch3's cards turned out to span 8 different split
+> files.**
 - [ ] 213 mid-word truncated → complete content (prioritas jac-ch6)
 - [ ] 266 complete-word missing period → add `.`
 - [ ] 82 symbol endings (`→`,`=`,`:`,`》`,`、`) → fix per kasus
