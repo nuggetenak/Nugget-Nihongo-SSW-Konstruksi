@@ -57,8 +57,14 @@ DATA_ARCH_AUDIT menyatakan "1 null entry" → **SALAH**. Actual: **5 null entrie
 
 **By design** — DQ branch tidak overwrite top-level files. At merge: top-level files harus diganti dengan versi DQ. Lihat §11 Merge Prep.
 
-### 0D. Split File Counts — Verified ✅
+### 0D. Split File Counts — Verified ✅ (original audit baseline, see note)
 1,443 cards total: split files ✅, source/ files ✅, cards.js ✅. Semua konsisten.
+
+*(Session 25 due-diligence note: this reflects the state at the time this spec was first
+written, before P4's 5-duplicate deletion — current live count is 1,438, tracked in
+`HANDOFF.md`'s CURRENT STATE, not here. Left as-is rather than edited, since editing would
+misrepresent what the original audit actually found. Same applies to §2A's card-type
+breakdown below — that's the pre-DQ-campaign baseline, not current.)*
 
 ### 0E. Dokumen Ini Tidak Ada di Repo Sebelumnya
 CARD_CONTENT_SPEC v1.0–v1.6 dan DATA_ARCH_AUDIT adalah dokumen lokal owner. Di-commit di sesi ini sebagai `docs/CARD_CONTENT_SPEC.md` dan `docs/DATA_ARCH_AUDIT.md`.
@@ -181,7 +187,8 @@ Yang wajib difix: 41 truncated (ending `/`), 13 multi-slash list, 3 id_text beri
 
 ## 2. AUDIT FINDINGS
 
-### 2A — Cards (1,443 kartu total: konsep=692, vocab=655, hukum=96)
+### 2A — Cards (1,443 kartu total: konsep=692, vocab=655, hukum=96) — *pre-DQ-campaign
+baseline, see §0D note; current live breakdown is in HANDOFF.md (97/1244/97)*
 
 #### 🔴 CRITICAL
 
@@ -798,14 +805,14 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 - [ ] Fix 25 duplicate id_text → disambiguate
 
 ### P5 — Desc truncation (cards)
-> **Session 25 (2026-08-12 to 08-14): 78/479 done — 22 from jac-ch1+jac-ch2 (commit `61c180a`),
-> 56 more from jac-ch3 (commit `dca925e`) — scoped to whichever chapters had a source PDF
-> available at the time (see HANDOFF.md's PDF intake tracker). Not a full pass, don't check
-> these boxes off — ~401 remain across jac-ch4 (teori, not yet available) and jac-ch5/6/7
-> (praktik, not yet available). Re-scope by `source === "jac-ch{N}"` as each new chapter's PDF
-> lands — and check the WHOLE `src/data/cards/` tree for each id, not just the obvious
-> `common/chN.js`/`lifeline/chN.js` file; jac-ch3's cards turned out to span 8 different split
-> files.**
+> **Session 25 (2026-08-12 to 08-15): 80/479 done — 22 from jac-ch1+jac-ch2 (commit `61c180a`),
+> 58 from jac-ch3 (`dca925e` + a 2-card due-diligence catch in `1afb7a2`) — scoped to whichever
+> chapters had a source PDF available at the time (see HANDOFF.md's PDF intake tracker). Not a
+> full pass, don't check these boxes off — ~399 remain across jac-ch4 (teori, not yet available)
+> and jac-ch5/6/7 (praktik, not yet available). Re-scope by `source === "jac-ch{N}"` as each new
+> chapter's PDF lands — and check the WHOLE `src/data/cards/` tree for each id, not just the
+> obvious `common/chN.js`/`lifeline/chN.js` file; jac-ch3's cards turned out to span 8 different
+> split files.**
 - [ ] 213 mid-word truncated → complete content (prioritas jac-ch6)
 - [ ] 266 complete-word missing period → add `.`
 - [ ] 82 symbol endings (`→`,`=`,`:`,`》`,`、`) → fix per kasus
@@ -861,6 +868,10 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 - [ ] Isi usage pada vocab yang belum punya, per coverage target §4.6
 
 ### P16 — wglv SPLIT (sebelum P8b, P10, P11)
+> **Done, session 23 (commit `3e8cea8`) — see HANDOFF.md CURRENT STATE for full detail
+> (source unification, decisions made without asking, one data-quality issue carried through
+> unfixed). Checkboxes below left unchecked on purpose — this section defines the task, HANDOFF.md
+> tracks live status, same convention as P5's annotation above.**
 - [ ] Pisahkan questions dari wglv01–05 berdasarkan direction
 - [ ] Buat `wglv-jp-01, -02, ...` dari semua JP→ID questions
 - [ ] Buat `wglv-id-01, -02, ...` dari semua ID→JP questions
@@ -870,6 +881,8 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 - [ ] Update exports di index
 
 ### P17 — jac-mockup RENAME (sebelum P8a item 2)
+> **Done, session 23 (commit `001d357` + monolith sync) — see HANDOFF.md CURRENT STATE.
+> Checkboxes left unchecked on purpose, same convention as P5/P16 above.**
 - [ ] Rename folder `sets/csv/` → `sets/jac-mockup/`
 - [ ] Rename files: ct→jmt, cp→jml
 - [ ] Update `id:`, `title:`, `source:` field dalam setiap file
@@ -995,15 +1008,28 @@ kartu: [ ] ID valid di cards.js
 Agent di `main` saat merge dari content-dq:
 
 1. **Replace** `src/data/jac-teori.js` dan `jac-lifeline.js` (top-level) dengan versi `sets/jac/` — new schema (`q/hint/opts/ans/img/exp`)
-2. **Rebuild** `wayground-sets.js` dari `sets/wayground/**/*.js` (W1 IDs: wt/wgl/wglv/wtv)
-3. **Rebuild** `csv-sets.js` dari `sets/csv/*.js` — atau `jac-mockup-sets.js` jika P17 selesai
-4. **Rebuild** `quiz-sets.js` dari `sets/quiz/*.js`
+2. **Rebuild** `wayground-sets.js` dari `sets/wayground/**/*.js` (W1 IDs: wt/wgl/wglv/wtv) —
+   includes the wglv-jp/wglv-id split (P16, done session 23) and the P8b ruby fixes; both are
+   already re-synced into the monolith, this step just needs to not clobber that
+3. **Rebuild** `jac-mockup-sets.js` dari `sets/jac-mockup/*.js` (P17 done session 23 — renamed
+   from `csv-sets.js`/`sets/csv/`; no conditional left, those old names don't exist anymore)
+4. **`quiz-sets.js` needs no separate rebuild step.** Session 24's Doboku/Kenchiku removal
+   deleted `sets/quiz/` entirely (it only ever held doboku-01..03.js/kenchiku-01..03.js) —
+   `quiz-sets.js` is now a pure aggregator, `QUIZ_SETS = [...WAYGROUND_SETS,
+   ...JAC_MOCKUP_SETS]`, no source folder of its own. Once steps 2 and 3 rebuild those two
+   monoliths, this one is automatically current.
 5. **Storage migration:** W1 ID rename = STORAGE_VERSION bump 4→5, add migration di `migrations.js`
 6. **Run** `node scripts/merge-cards.mjs` → regenerate `cards.js` dari `source/`
 7. **Drop `furi`** dari semua split files → re-run merge (P12 prerequisite harus selesai)
 8. **Update** `viewer.html`: `c.furi||''` → `extractReading(c.jp)`
-9. Jika P17 selesai: update `csv-sets.js` shim dan seluruh references di `index.js`, `quiz-sets.js`
-10. Jika P16 selesai: update wayground exports untuk wglv-jp/wglv-id series
+9. ~~Jika P17 selesai: update csv-sets.js shim~~ — **done, folded into item 3 above** (P17
+   completed session 23, including the monolith rename — see `HANDOFF.md` CURRENT STATE)
+10. ~~Jika P16 selesai: update wayground exports~~ — **done, folded into item 2 above** (P16
+    completed session 23, monolith already re-synced per P8b's session-23 note)
+11. **Also update `TrackPicker.jsx`/`DobokuMode.jsx`/`KenchikuMode.jsx`** on `main` — real UI
+    code content-dq doesn't have a copy of, needs the equivalent Doboku/Kenchiku removal
+    (session 24 scope reduction) applied there too. Flagged in `HANDOFF.md`'s CURRENT STATE,
+    added here session 25 since it was missing from this checklist entirely.
 
 ---
 
@@ -1011,13 +1037,13 @@ Agent di `main` saat merge dari content-dq:
 
 Butuh konfirmasi owner sebelum task terkait dikerjakan.
 
-| ID | Issue | Options | Blocks |
-|----|-------|---------|--------|
-| OD-1 | **Source taxonomy: retain legacy labels vs merge ke vocab-supplementary** | A: Retain (handoff v16 decision — labels meaningful di UI) / B: Merge (CARD_CONTENT_SPEC v1.1+) | P6, P13 |
-| OD-2 | wglv split (P16): kerjakan sekarang di content-dq, atau tunda saat merge? | A: Sekarang / B: Tunda | P8b, P10, P11 |
-| OD-3 | jac-mockup rename (P17): kerjakan sekarang? | A: Sekarang / B: Tunda saat merge | P8a item 2 |
-| OD-4 | wglv02/03 hint di JP→ID: ubah ke ID clue seperti wglv04/05, atau biarkan? | A: Update / B: Keep as-is | P10 |
-| OD-5 | SSW Flashcards app (repo terpisah): apakah pakai `card.furi` field? | Confirm / Deny | P12 |
+| ID | Issue | Options | Blocks | Status |
+|----|-------|---------|--------|--------|
+| OD-1 | **Source taxonomy: retain legacy labels vs merge ke vocab-supplementary** | A: Retain (handoff v16 decision — labels meaningful di UI) / B: Merge (CARD_CONTENT_SPEC v1.1+) | P6, P13 | ✅ B, answered 2026-07-11 |
+| OD-2 | wglv split (P16): kerjakan sekarang di content-dq, atau tunda saat merge? | A: Sekarang / B: Tunda | P8b, P10, P11 | ✅ A, answered 2026-07-11 |
+| OD-3 | jac-mockup rename (P17): kerjakan sekarang? | A: Sekarang / B: Tunda saat merge | P8a item 2 | ✅ A, answered 2026-07-11 |
+| OD-4 | wglv02/03 hint di JP→ID: ubah ke ID clue seperti wglv04/05, atau biarkan? | A: Update / B: Keep as-is | P10 | ✅ A, resolved via execution 2026-07-15 |
+| OD-5 | SSW Flashcards app (repo terpisah): apakah pakai `card.furi` field? | Confirm / Deny | P12 | Open — not urgent, doesn't block until merge time |
 
 ---
 

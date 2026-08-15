@@ -239,6 +239,19 @@ authoritative one — noticed and fixed once the PDFs arrived and the true date 
     should-have-matched-somewhere check, corrected, re-verified two independent ways (direct
     per-id punctuation check + fresh verify-content.mjs/audit-track-consistency.mjs, both
     clean, 1438 unchanged). Commit `dca925e`. P5 running total: 78/479 done.
+  - **Part 4, due diligence pass (owner asked explicitly): 2 cards from part 3 recovered.**
+    A full corpus-wide re-scan (not a re-read of the earlier triage) turned up id=1349 and
+    id=1369 — both correctly analyzed and drafted during part 3, but dropped when that part's
+    fix script got rewritten mid-stream to fix the fragment-matching bug; neither made it into
+    the script that actually ran. Every other jac-ch1/ch2/ch3 card still failing the
+    terminal-punctuation check matched one of the two documented lists (known skips or known
+    false-positive enumerations) exactly — these 2 didn't match either, which is what surfaced
+    them. Fixed same as the rest of the batch, verified against the source text. Also checked:
+    file syntax (direct `import()` of all 8 touched files — clean), the 1438/97/1244/97/877/561
+    breakdown in this section (re-verified against live data — still exact), and
+    `docs/CARD_CONTENT_SPEC.md` + `_MAP.md` for other stale numbers while already in there (found
+    a few — see those files' own histories; not duplicating here). Commit `1afb7a2`. **P5 running
+    total, corrected: 80/479.**
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -256,14 +269,14 @@ one" list — check the gate before starting.
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - **P5, partial:** 213 `desc` truncated mid-word + 266 missing period (~479 cards total) — needs
-  real JAC PDF text, don't guess-fill these. **78 done so far** — session 25, two batches:
-  22 from jac-ch1/jac-ch2 (commit `61c180a`) + 56 from jac-ch3 (commit `dca925e`). ~401 still
-  open: jac-ch4 (149 cards) needs the last teori PDF; jac-ch5/6/7 (216+133+47=396) need the 3
-  praktik PDFs — see the PDF intake tracker under ⏸ below. Also still open even with the PDF
-  available: id=94, 152, 160, 957 (from ch1/ch2), id=410, 966, 1063, 1143 (from ch3) — none had
-  enough specific detail in the provided chapter text to complete safely, see each commit body
-  for the id-by-id reasoning. Separately flagged, not a P5 case: id=468 (source mistag,
-  piping content tagged jac-ch2).
+  real JAC PDF text, don't guess-fill these. **80 done so far** — session 25: 22 from
+  jac-ch1/jac-ch2 (commit `61c180a`) + 58 from jac-ch3 (`dca925e` + `1afb7a2`, the latter a
+  2-card due-diligence catch — see CURRENT STATE part 4). ~399 still open: jac-ch4 (149 cards)
+  needs the last teori PDF; jac-ch5/6/7 (216+133+47=396) need the 3 praktik PDFs — see the PDF
+  intake tracker under ⏸ below. Also still open even with the PDF available: id=94, 152, 160, 957
+  (from ch1/ch2), id=410, 966, 1063, 1143 (from ch3) — none had enough specific detail in the
+  provided chapter text to complete safely, see each commit body for the id-by-id reasoning.
+  Separately flagged, not a P5 case: id=468 (source mistag, piping content tagged jac-ch2).
 - **New (P4, session 24):** EF接合 triple (id=459,612,613) `furi` fields are non-standard —
   459/612 nest `《》`-bracketed glosses *inside* the furi string itself (should be plain reading
   text); 613's furi doesn't read as "EF接合" at all, looks corrupted. No clean sibling to
