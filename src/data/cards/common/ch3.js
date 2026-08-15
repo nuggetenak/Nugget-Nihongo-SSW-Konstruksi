@@ -855,7 +855,7 @@ export const CARDS_CH3 = [
   jp: "建て逃げ方式《たてにげほうしき》 vs 水平積み上げ方式《すいへいつみあげほうしき》",
   type: 'vocab',
   id_text: "Erection baja",
-  desc: "建《た》て逃《に》げ: mobile crane, dari belakang ke depan.\n水平積《すいへいつ》み上《うえ》げ: tower crane, lantai per lantai",
+  desc: "建《た》て逃《に》げ: mobile crane, dari belakang ke depan.\n水平積《すいへいつ》み上《うえ》げ: tower crane, lantai per lantai (untuk gedung tinggi).",
   usage: '建て逃げ方式《たてにげほうしき》と水平積み上げ方式《すいへいつみあげほうしき》の2つの鉄骨建方《てっこつたてかた》を使い分《つかいわ》ける（bedakan 2 metode erection baja: advance per span dan horizontal stacking）',
     _origIndex: 1505
   },
@@ -1095,7 +1095,7 @@ export const CARDS_CH3 = [
   jp: "建具の材料種類《たてぐのざいりょうしゅるい》 + シャッター・自動ドア《じどうどあ》",
   type: 'vocab',
   id_text: "Material kusen/pintu +",
-  desc: "建具《たてぐ》=semua pemasangan di bukaan (pintu, jendela, fusuma, shoji).\nMaterial: kayu, aluminium,",
+  desc: "建具《たてぐ》=semua pemasangan di bukaan (pintu, jendela, fusuma, shoji).\nMaterial: kayu, aluminium, resin, baja, stainless.",
   usage: '木製《もくせい》・鋼製《こうせい》・アルミ製《せい》建具《たてぐ》やシャッター・自動ドアの種類《しゅるい》を理解《りかい》する（pahami jenis kusen dari kayu, baja, aluminium serta shutter dan pintu otomatis）',
     _origIndex: 1525
   },
