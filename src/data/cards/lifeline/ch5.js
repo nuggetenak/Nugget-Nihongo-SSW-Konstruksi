@@ -1629,7 +1629,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "光ケーブル地中配線《ひかりケーブルちちゅうはいせん》",
   type: "vocab",
   id_text: "Kabel optik bawah tanah",
-  desc: "Pemasangan kabel serat optik di dalam tanah melalui 管《かん》路《かんろ》 atau",
+  desc: "Pemasangan kabel serat optik di dalam tanah melalui 管《かん》路《かんろ》 atau hand hole, dengan panjang kabel ekstra agar tidak putus saat bencana.",
   usage: '光ケーブル《ひかりけーぶる》を地中《ちちゅう》に配線《はいせん》する（memasang kabel optik di bawah tanah）',
     _origIndex: 1074
   },
@@ -1761,7 +1761,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "許容電流《きょようでんりゅう》",
   type: "vocab",
   id_text: "Ampasitas kabel",
-  desc: "Arus maksimum yang diizinkan mengalir pada kabel.\nMelebihi batas → isolasi",
+  desc: "Arus maksimum yang diizinkan mengalir pada kabel.\nMelebihi batas → isolasi kabel bisa meleleh/terbakar.",
   usage: 'ケーブルの許容電流《きょようでんりゅう》内《ない》で使用《しよう》して過熱《かねつ》を防《ふせ》ぐ（gunakan kabel dalam batas ampasitasnya untuk mencegah panas berlebih）',
     _origIndex: 1136
   },
@@ -1905,7 +1905,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "電熱線《でんねつせん》",
   type: "vocab",
   id_text: "Kabel pemanas anti-beku",
-  desc: "Kawat pemanas yang dililitkan pada pipa luar ruangan di daerah dingin untuk",
+  desc: "Kawat pemanas yang dililitkan pada pipa luar ruangan di daerah dingin untuk mencegah pipa membeku.",
   usage: '電熱線《でんねつせん》を屋外《おくがい》配管《はいかん》に巻《ま》いて凍結《とうけつ》を防《ふせ》ぐ（balut pipa luar ruangan dengan kabel pemanas untuk mencegah pembekuan）',
     _origIndex: 1352
   }

@@ -54,7 +54,7 @@ export const CARDS_CH6 = [
   jp: "土地の制約《とちのせいやく》",
   type: "konsep",
   id_text: "Karakteristik konstruksi — batasan lahan",
-  desc: "Setiap proyek melekat pada lahan unik sehingga kondisi identik tidak pernah berulang; berbeda dari",
+  desc: "Setiap proyek melekat pada lahan unik sehingga kondisi identik tidak pernah berulang; berbeda dari produksi pabrik yang bisa mengulang desain sama (受注一品生産《じゅちゅういっぴんせいさん》).",
   _origIndex: 483
   },
 {
@@ -65,7 +65,7 @@ export const CARDS_CH6 = [
   jp: "自然条件による影響《しぜんじょうけんによるえいきょう》",
   type: "konsep",
   id_text: "Karakteristik konstruksi — kondisi alam",
-  desc: "Pekerjaan konstruksi umumnya di luar ruangan sehingga terpengaruh topografi, musim, dan cuaca —",
+  desc: "Pekerjaan konstruksi umumnya di luar ruangan sehingga terpengaruh topografi, musim, dan cuaca — faktor tak pasti yang memengaruhi jalannya proyek.",
   _origIndex: 484
   },
 {
@@ -76,7 +76,7 @@ export const CARDS_CH6 = [
   jp: "社会的制約《しゃかいてきせいやく》",
   type: "konsep",
   id_text: "Karakteristik konstruksi — batasan sosial",
-  desc: "Karena produksi di lokasi asli (現地《げんち》生産《せいさん》), wajib memenuhi peraturan keselamatan dan",
+  desc: "Karena produksi di lokasi asli (現地《げんち》生産《せいさん》), wajib memenuhi peraturan keselamatan dan pelestarian lingkungan sekitar, serta hukum & kondisi sosial setempat yang berbeda-beda.",
   _origIndex: 485
   },
 {
@@ -87,7 +87,7 @@ export const CARDS_CH6 = [
   jp: "施工計画《せこうけいかく》",
   type: "konsep",
   id_text: "Rencana pelaksanaan",
-  desc: "Rencana berdasarkan dokumen desain untuk mengerjakan konstruksi: kualitas baik, biaya minimal,",
+  desc: "Rencana berdasarkan dokumen desain untuk mengerjakan konstruksi: kualitas baik, biaya minimal, dalam batas waktu (工期内《こうきない》), tanpa kecelakaan, dan menjaga lingkungan.",
   _origIndex: 486
   },
 {
@@ -98,7 +98,7 @@ export const CARDS_CH6 = [
   jp: "施工要領書《せこうようりょうしょ》",
   type: "konsep",
   id_text: "Dokumen prosedur",
-  desc: "Memuat detail teknis pelaksanaan: konfirmasi gambar, kondisi lapangan, urutan kerja, penempatan",
+  desc: "Memuat detail teknis pelaksanaan: konfirmasi gambar, kondisi lapangan, urutan kerja, penempatan personel, persiapan alat/material, dan izin kerja yang dibawa.",
   _origIndex: 487
   },
 {
@@ -109,7 +109,7 @@ export const CARDS_CH6 = [
   jp: "キャリアアップカード・作業免許《きゃりああっぷかあど・さぎょうめんきょ》",
   type: 'vocab',
   id_text: "Kartu CCAS & izin kerja",
-  desc: "Wajib konfirmasi sebelum 施工《せこう》: pastikan pekerja membawa キャリアアップカード dan semua lisensi yang",
+  desc: "Wajib konfirmasi sebelum 施工《せこう》: pastikan pekerja membawa キャリアアップカード dan semua lisensi yang dibutuhkan untuk pekerjaan tersebut.",
   usage: 'キャリアアップカードをICリーダーで記録《きろく》してから現場《げんば》に入《はい》る（catat kartu CCUS di pembaca IC sebelum memasuki lokasi kerja）',
     _origIndex: 488
   },
@@ -121,7 +121,7 @@ export const CARDS_CH6 = [
   jp: "品質管理《ひんしつかんり》",
   type: "konsep",
   id_text: "Manajemen kualitas",
-  desc: "QCDSE の Q. Manajemen memenuhi kualitas yang diminta pemberi kerja; mencakup inspeksi kualitas, uji",
+  desc: "QCDSE の Q. Manajemen memenuhi kualitas yang diminta pemberi kerja; mencakup inspeksi kualitas, uji material, dan uji pelaksanaan sesuai rencana mutu.",
   _origIndex: 489
   },
 {
@@ -132,7 +132,7 @@ export const CARDS_CH6 = [
   jp: "予算の管理《よさんのかんり》",
   type: "konsep",
   id_text: "Manajemen biaya",
-  desc: "QCDSE の C. Mengelola dana di lapangan (biaya material, tenaga kerja, biaya lapangan) agar tidak",
+  desc: "QCDSE の C. Mengelola dana di lapangan (biaya material, tenaga kerja, biaya lapangan) agar tidak melebihi anggaran proyek.",
   _origIndex: 490
   },
 {
@@ -143,7 +143,7 @@ export const CARDS_CH6 = [
   jp: "工程管理《こうていかんり》",
   type: "konsep",
   id_text: "Manajemen jadwal",
-  desc: "QCDSE の D. Koordinasi dengan kontraktor utama dan kontraktor lain agar pekerjaan selesai dalam",
+  desc: "QCDSE の D. Koordinasi dengan kontraktor utama dan kontraktor lain agar pekerjaan selesai dalam batas waktu tanpa keterlambatan.",
   _origIndex: 491
   },
 {
@@ -154,7 +154,7 @@ export const CARDS_CH6 = [
   jp: "安全管理《あんぜんかんり》",
   type: "konsep",
   id_text: "Manajemen keselamatan",
-  desc: "QCDSE の S. Pencegahan jatuh, benda jatuh, dan penyakit akibat kerja; dilaksanakan melalui KY",
+  desc: "QCDSE の S. Pencegahan jatuh, benda jatuh, dan penyakit akibat kerja; dilaksanakan melalui KY (危険予知《きけんよち》), patroli harian, rapat keselamatan, dan aktivitas 5S.",
   _origIndex: 492
   },
 {
@@ -165,7 +165,7 @@ export const CARDS_CH6 = [
   jp: "環境保全管理《かんきょうほぜんかんり》",
   type: "konsep",
   id_text: "Manajemen pelestarian",
-  desc: "QCDSE の E. Meminimalkan dampak kebisingan, getaran, dan pencemaran air akibat konstruksi; wajib",
+  desc: "QCDSE の E. Meminimalkan dampak kebisingan, getaran, dan pencemaran air akibat konstruksi; wajib mematuhi standar dalam hukum & peraturan daerah.",
   _origIndex: 493
   },
 {
@@ -176,7 +176,7 @@ export const CARDS_CH6 = [
   jp: "レーザー照射器《れえざあしょうしゃき》",
   type: 'vocab',
   id_text: "Alat laser untuk",
-  desc: "Memancarkan cahaya laser menggantikan 墨《すみ》つぼ konvensional; memudahkan pengecekan sudut siku",
+  desc: "Memancarkan cahaya laser menggantikan 墨《すみ》つぼ konvensional; memudahkan pengecekan sudut siku (直角《ちょっかく》) dan kerataan horizontal.",
   usage: 'レーザー照射器《れえざあしょうしゃき》で通り芯《とおりしん》を投影《とうえい》する（proyeksikan garis sumbu menggunakan laser level）',
     _origIndex: 494
   },
@@ -212,7 +212,7 @@ export const CARDS_CH6 = [
   jp: "軍手でのねじ加工は絶対禁止《ぐんてでのねじかこうぜったいきんし》",
   type: 'vocab',
   id_text: "Sarung tangan kain saat",
-  desc: "Menggunakan 軍手《ぐんて》 (sarung tangan kain) saat mengoperasikan mesin ulir sangat berbahaya — tangan",
+  desc: "Menggunakan 軍手《ぐんて》 (sarung tangan kain) saat mengoperasikan mesin ulir sangat berbahaya — tangan bisa tergulung/terjepit ke dalam mesin.",
   usage: '軍手《ぐんて》でのねじ加工《かこう》は巻き込まれ《まきこまれ》の危険《きけん》があるため絶対禁止《ぜったいきんし》だ（pengerjaan ulir menggunakan sarung tangan kain dilarang mutlak karena risiko tergulung）',
     _origIndex: 499
   },
@@ -224,7 +224,7 @@ export const CARDS_CH6 = [
   jp: "ねじゲージ",
   type: 'vocab',
   id_text: "Thread gauge",
-  desc: "Wajib periksa: ①3 uliran pertama, ②saat ukuran pipa berubah, ③per ~50 uliran (untuk 25A), ④saat",
+  desc: "Wajib periksa: ①3 uliran pertama, ②saat ukuran pipa berubah, ③per ~50 uliran (untuk 25A), ④saat ganti lot pipa/merek, ⑤saat ganti mata pisau (チェーザ).",
   usage: 'ねじゲージで管《かん》のねじ規格《きかく》を確認《かくにん》する（periksa spesifikasi ulir pipa menggunakan thread gauge）',
     _origIndex: 503
   },
@@ -248,7 +248,7 @@ export const CARDS_CH6 = [
   jp: "ライニング鋼管のガス溶断絶対禁止《らいにんぐこうかんのがすようだんぜったいきんし》",
   type: 'vocab',
   id_text: "DILARANG: las gas pada pipa lining",
-  desc: "Pemotongan ライニング鋼管《こうかん》 dengan ガス溶断《ようだん》 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak",
+  desc: "Pemotongan ライニング鋼管《こうかん》 dengan ガス溶断《ようだん》 atau panas tinggi adalah LARANGAN MUTLAK — panas merusak lapisan resin di dalam pipa.",
   usage: 'ライニング鋼管《こうかん》をガス溶断《ようだん》すると有毒《ゆうどく》ガスが発生《はっせい》するため絶対禁止《ぜったいきんし》だ（pemotongan pipa baja berlapis dengan api las gas dilarang mutlak karena menghasilkan gas beracun）',
     _origIndex: 513
   },
@@ -260,7 +260,7 @@ export const CARDS_CH6 = [
   jp: "銅管の切断に金ノコ《かのこ》・グラインダー禁止《きんし》",
   type: 'vocab',
   id_text: "DILARANG: gergaji/gerinda pada pipa tembaga",
-  desc: "Memotong pipa tembaga (銅管《どうかん》) dengan 金《かな》ノコ atau グラインダー menghasilkan serbuk logam di dalam pipa",
+  desc: "Memotong pipa tembaga (銅管《どうかん》) dengan 金《かな》ノコ atau グラインダー menghasilkan serbuk logam di dalam pipa yang bisa tersangkut dan merusak sistem AC.",
   usage: '銅管《どうかん》の切断《せつだん》に金ノコ《かのこ》やグラインダーを使用禁止《しようきんし》として丸鋸《まるのこ》か専用工具《せんようこうぐ》を使《つか》う（dilarang menggunakan gergaji besi atau gerinda pada pipa tembaga, gunakan gergaji bulat atau alat khusus）',
     _origIndex: 516
   },
@@ -272,7 +272,7 @@ export const CARDS_CH6 = [
   jp: "高速砥石タイプの切断工具《こうそくといしたいぷのせつだんこうぐ》",
   type: 'vocab',
   id_text: "DILARANG: gerinda kecepatan tinggi",
-  desc: "Panas dari grinder dapat mendistorsi permukaan potongan pipa polietilen yang dipakai untuk",
+  desc: "Panas dari grinder dapat mendistorsi permukaan potongan pipa polietilen yang dipakai untuk sambungan EF.",
   usage: '高速砥石《こうそくといし》タイプの切断工具《せつだんこうぐ》をライニング管《かん》に使用《しよう》してはいけない（dilarang menggunakan alat potong abrasif kecepatan tinggi pada pipa lining）',
     _origIndex: 531
   },
@@ -308,7 +308,7 @@ export const CARDS_CH6 = [
   jp: "酸素欠乏危険作業主任者《さんそけつぼうきけんさぎょうしゅにんしゃ》",
   type: 'vocab',
   id_text: "Kepala kerja area rendah",
-  desc: "Yang boleh masuk manhole hanya pemegang sertifikasi 酸素欠乏《さんそけつぼう》危険《きけん》作業《さぎょう》主任者《しゅにんしゃ》 atau",
+  desc: "Yang boleh masuk manhole hanya pemegang sertifikasi 酸素欠乏《さんそけつぼう》危険《きけん》作業《さぎょう》主任者《しゅにんしゃ》 atau yang lulus pelatihan khusus setara.",
   usage: '酸素欠乏危険作業《さんそけつぼうきけんさぎょう》では作業主任者《さぎょうしゅにんしゃ》を配置《はいち》する（tempatkan supervisor K3 khusus di area kerja berbahaya kekurangan oksigen）',
     _origIndex: 534
   },

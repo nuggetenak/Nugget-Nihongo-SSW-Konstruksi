@@ -1268,7 +1268,7 @@ export const CARDS_CH5 = [
   jp: "屋外露出部分《おくがいろしゅつぶぶん》",
   type: "vocab",
   id_text: "Bagian terbuka di luar",
-  desc: "Area pipa/kabel yang terekspos langsung ke cuaca luar.\nPerlu perlindungan",
+  desc: "Area pipa/kabel yang terekspos langsung ke cuaca luar.\nPerlu perlindungan tahan cuaca (lacquing cover) dan anti lembap.",
   usage: '屋外露出部分《おくがいろしゅつぶぶん》の配管《はいかん》には耐候性《たいこうせい》の高《たか》い材料《ざいりょう》と外装《がいそう》を使《つか》う（gunakan material dan jacketing dengan ketahanan cuaca tinggi untuk pipa terbuka di luar）',
     _origIndex: 1005
   },

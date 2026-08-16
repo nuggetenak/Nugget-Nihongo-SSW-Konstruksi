@@ -3361,7 +3361,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "残る《のこる》",
   type: "vocab",
   id_text: "Tersisa / tertinggal",
-  desc: "残《のこ》る = tersisa (intransitif); 残《のこ》す = menyisakan",
+  desc: "残《のこ》る = tersisa (intransitif); 残《のこ》す = menyisakan.",
   usage: '現場《げんば》に残る《のこる》廃材《はいざい》は決《き》められた置《お》き場所《ばしょ》に分類《ぶんるい》する（klasifikasikan sisa material yang tertinggal di lokasi ke tempat yang telah ditentukan）',
     _origIndex: 887
   },

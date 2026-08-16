@@ -45,7 +45,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "埋設物《まいせつぶつ》",
   type: "vocab",
   id_text: "Utilitas bawah tanah",
-  desc: "Pipa/kabel yang sudah terpasang di bawah tanah.\nWajib diperiksa sebelum",
+  desc: "Pipa/kabel yang sudah terpasang di bawah tanah.\nWajib diperiksa sebelum penggalian dimulai.",
   usage: '埋設物《まいせつぶつ》の位置《いち》を確認《かくにん》する（mengonfirmasi posisi utilitas bawah tanah）',
     _origIndex: 941
   },
