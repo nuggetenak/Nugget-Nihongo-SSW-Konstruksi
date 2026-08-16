@@ -267,7 +267,7 @@ Yang wajib merge (same jp, same type):
 | `マンドレル通過試験` | 484, 614 | Merge |
 | `玉掛け` | 165, 518 | Merge |
 | `防露工事` | 982, 1257 | Merge |
-| `EF接合` | 459, 612, 613 | Merge — triple |
+| `EF接合` | 459, 612, 613 | ~~Merge — triple~~ — reviewed P4 (session 24): kept separate, each covers a distinct step (concept / indicator-check / prep-sequence). This table entry predates that review; not an open action.
 
 ~10 pasang same-jp different-type: sebagian legitimate (konsep + vocab), sebagian redundant — review manual.
 
@@ -807,17 +807,21 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 ### P5 — Desc truncation (cards)
 > **Session 25 (2026-08-12 to 08-15): 80/479 done — 22 from jac-ch1+jac-ch2 (commit `61c180a`),
 > 58 from jac-ch3 (`dca925e` + a 2-card due-diligence catch in `1afb7a2`). Session 26 (2026-08-16):
-> +94 from jac-ch4+jac-ch5 (commit `b00bdf2`), running total 174/479 — scoped to whichever
-> chapters had a source PDF available at the time (see HANDOFF.md's PDF intake tracker). Not a
-> full pass, don't check these boxes off — ~305 remain across jac-ch6 and jac-ch7 (both praktik,
-> not yet available). Re-scope by `source === "jac-ch{N}"` as each new chapter's PDF lands — and
-> check the WHOLE `src/data/cards/` tree for each id, not just the obvious
-> `common/chN.js`/`lifeline/chN.js` file; both jac-ch3's and jac-ch4/ch5's cards turned out to
-> span 8 different split files each. Also: dry-run and eyeball every `oldDesc + suffix`
-> concatenation before writing to any file — session 26's first draft had missing spaces and
-> duplicated words at several seams, caught only by an automated preview pass before anything was
-> applied.**
-- [ ] 213 mid-word truncated → complete content (prioritas jac-ch6)
+> +94 from jac-ch4+jac-ch5 (commit `b00bdf2`), running total 174/479. Session 27 (2026-08-17): +66
+> from jac-ch6 (commit `5447c94`), running total 240/479 — scoped to whichever chapters had a
+> source PDF available at the time (see HANDOFF.md's PDF intake tracker). Not a full pass, don't
+> check these boxes off — ~239 remain, all in jac-ch7 (praktik, not yet available, the only
+> chapter left). Re-scope by `source === "jac-ch{N}"` as each new chapter's PDF lands — and check
+> the WHOLE `src/data/cards/` tree for each id, not just the obvious
+> `common/chN.js`/`lifeline/chN.js` file; jac-ch3, jac-ch4/ch5, and jac-ch6 each turned out to
+> span 7-8 different split files. Also: dry-run and eyeball every `oldDesc + suffix` concatenation
+> before writing to any file, with a real checker (adjacent-word repeat, then n-gram phrase
+> repeat, then raw-substring repeat for glued-token collisions, then paren-balance) — each layer
+> was added in session 26/27 only after the previous one let something through, so build all four
+> from the start next time rather than re-discovering them. Separately: the EF接合 furi item
+> (previously tracked in HANDOFF's 🟡 bucket, not an OD in §12) is resolved as of session 27 —
+> see commit `5447c94` for the evidence-based fix, not a guess.**
+- [ ] 213 mid-word truncated → complete content (sisa: jac-ch7 saja)
 - [ ] 266 complete-word missing period → add `.`
 - [ ] 82 symbol endings (`→`,`=`,`:`,`》`,`、`) → fix per kasus
 
