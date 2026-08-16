@@ -40,7 +40,7 @@ export const CARDS_CH7 = [
   id: 309,
   category: "anzen",
   source: "jac-ch7",
-  furi: "きゃたつてんばんきんしまたぎきんし",
+  furi: "きゃたつ",
   jp: "脚立《きゃたつ》",
   type: "konsep",
   id_text: "Tangga A — 3 larangan",
@@ -55,7 +55,7 @@ export const CARDS_CH7 = [
   jp: "転倒《てんとう》",
   type: 'vocab',
   id_text: "Tersandung / Kehilangan",
-  desc: "Kecelakaan kerja: benda menghalangi → tersandung, atau kehilangan keseimbangan → jatuh di permukaan",
+  desc: "Kecelakaan kerja: benda menghalangi → tersandung, atau kehilangan keseimbangan → jatuh di permukaan.",
   usage: '足元《あしもと》を確認《かくにん》して転倒《てんとう》を防《ふせ》ぐ（perhatikan pijakan kaki untuk mencegah tersandung）',
     _origIndex: 584
   },
@@ -99,7 +99,7 @@ export const CARDS_CH7 = [
   id: 519,
   category: "anzen",
   source: "jac-ch7",
-  furi: "どどめくっさくふかさいじょうでげんそくひつよう",
+  furi: "どどめ",
   jp: "土留め《どどめ》",
   type: 'vocab',
   id_text: "Penahan tanah (土留め)",
@@ -115,7 +115,7 @@ export const CARDS_CH7 = [
   jp: "鋼矢板《こうやいた》",
   type: 'vocab',
   id_text: "Sheet pile baja",
-  desc: "Material utama 土留《どど》め. Lembaran baja yang dipancang vertikal di sisi galian untuk mencegah longsor",
+  desc: "Material utama 土留《どど》め. Lembaran baja yang dipancang vertikal di sisi galian untuk mencegah longsor.",
   usage: '鋼矢板《こうやいた》を打《う》ち込《こ》んで土留め《どどめ》とする（tancapkan sheet pile baja sebagai penahan tanah）',
     _origIndex: 590
   },
@@ -151,7 +151,7 @@ export const CARDS_CH7 = [
   jp: "安全施工サイクルの8ステップ《あんぜんせこうさいくるのすてっぷ》",
   type: "konsep",
   id_text: "8 langkah siklus",
-  desc: "①Apel pagi ②Safety meeting (KY) ③Cek mesin & alat ④Pengawasan kerja ⑤Ronda keselamatan ⑥Koordinasi",
+  desc: "①Apel pagi ②Safety meeting (KY) ③Cek mesin & alat ④Pengawasan kerja ⑤Ronda keselamatan ⑥Koordinasi ⑦Beres-beres tempat kerja ⑧Cek keselamatan akhir kerja.",
   _origIndex: 593
   },
 {
@@ -162,18 +162,18 @@ export const CARDS_CH7 = [
   jp: "新入者安全衛生教育の8項目《しんにゅうしゃあんぜんえいせいきょういくのはちこうもく》",
   type: "konsep",
   id_text: "8 materi K3 wajib untuk",
-  desc: "①Bahaya mesin & bahan ②APD & alat keselamatan ③Prosedur kerja ④Cek awal ⑤Penyakit akibat kerja",
+  desc: "①Bahaya mesin & bahan ②APD & alat keselamatan ③Prosedur kerja ④Cek awal ⑤Penyakit akibat kerja ⑥Kerapian & kebersihan ⑦P3K & evakuasi darurat ⑧Hal K3 lain yang diperlukan.",
   _origIndex: 594
   },
 {
   id: 525,
   category: "anzen",
   source: "jac-ch7",
-  furi: "しんきにゅうじょうしゃきょういくしぼうのはんぶんがにゅうじょうしゅうかんいないじっしぷん",
-  jp: "新規入場者教育《しんきにゅうじょうしゃきょういくしぼうのはんぶんがにゅうじょうしゅうかんいないじっしぷん》",
+  furi: "しんきにゅうじょうしゃきょういく",
+  jp: "新規入場者教育《しんきにゅうじょうしゃきょういく》",
   type: "konsep",
   id_text: "Orientasi pekerja baru",
-  desc: "Separuh kematian di lokasi konstruksi terjadi dalam 1 minggu pertama →",
+  desc: "Separuh kematian di lokasi konstruksi terjadi dalam 1 minggu pertama → makanya pemerintah mewajibkan edukasi khusus untuk pekerja baru.",
   _origIndex: 595
   },
 {
@@ -196,7 +196,7 @@ export const CARDS_CH7 = [
   jp: "保護メガネ《ほごめがね》",
   type: 'vocab',
   id_text: "Kacamata pelindung dari",
-  desc: "Melindungi mata dari: debu logam/kayu (粉《こな》じん), percikan api las (火花《ひばな》), panas & asap, sinar",
+  desc: "Melindungi mata dari: debu logam/kayu (粉《こな》じん), percikan api las (火花《ひばな》), panas & asap, sinar berbahaya seperti laser.",
   usage: '切断《せつだん》・研削作業《けんさくさぎょう》では保護メガネ《ほごめがね》を着用《ちゃくよう》する（kenakan safety goggles saat pekerjaan pemotongan dan penggerindaan）',
     _origIndex: 597
   },
@@ -216,11 +216,11 @@ export const CARDS_CH7 = [
   id: 529,
   category: "anzen",
   source: "jac-ch7",
-  furi: "てぶくろきんしかいてんするはものしようじ",
+  furi: "てぶくろぐんてきんし",
   jp: "手袋《てぶくろ》（軍手《ぐんて》）禁止《きんし》",
   type: "konsep",
   id_text: "DILARANG sarung tangan",
-  desc: "丸《まる》のこ、ボール盤《ばん》、パイプねじ切《き》り機《きりき》 dan alat berputar lain → sarung tangan (軍手《ぐんて》) bisa tersangkut",
+  desc: "丸《まる》のこ、ボール盤《ばん》、パイプねじ切《き》り機《きりき》 dan alat berputar lain → sarung tangan (軍手《ぐんて》) bisa tersangkut.",
   _origIndex: 599
   },
 {
@@ -255,7 +255,7 @@ export const CARDS_CH7 = [
   jp: "熱中症の症状《ねっちゅうしょうのしょうじょう》",
   type: "konsep",
   id_text: "Gejala heatstroke",
-  desc: "Bertahap: ①pusing/pingsan ②nyeri & kram otot ③keringat berlebih ④sakit kepala, mual, muntah",
+  desc: "Bertahap: ①pusing/pingsan ②nyeri & kram otot ③keringat berlebih ④sakit kepala, mual, muntah, lemas ⑤kesadaran terganggu, kejang, gangguan gerak tangan/kaki, suhu tubuh tinggi.",
   _origIndex: 602
   },
 {
@@ -289,7 +289,7 @@ export const CARDS_CH7 = [
   jp: "ヒューマンエラー①〜③：認知ミス《にんちみす》・不注意《ふちゅうい》・注意低下《ちゅういていか》",
   type: "konsep",
   id_text: "HA 1–3",
-  desc: "①認知《にんち》ミス = asumsi salah → salah baca instruksi.",
+  desc: "①認知《にんち》ミス = asumsi salah → salah baca instruksi. ②不注意《ふちゅうい》 = kurang fokus, sering muncul saat terlalu fokus di 1 kerjaan sampai lupa sekitar. ③注意《ちゅうい》・意識《いしき》の低下《ていか》 = muncul saat kerja rutin berulang → gerak jadi otomatis tanpa sadar.",
   _origIndex: 605
   },
 {
@@ -300,7 +300,7 @@ export const CARDS_CH7 = [
   jp: "ヒューマンエラー④〜⑤：経験不足《けいけんぶそく》・慣れによる手抜き《てぬき》",
   type: "konsep",
   id_text: "HA 4–5",
-  desc: "④経験《けいけん》・知識不足《ちしきぶそく》 = tidak tahu cara benar; KY活動《かつどう》 membantu belajar dari senior.",
+  desc: "④経験《けいけん》・知識不足《ちしきぶそく》 = tidak tahu cara benar; KY活動《かつどう》 membantu belajar dari senior. ⑤慣《な》れによる手抜《てぬ》き = makin biasa → makin PD → lewatin langkah yang tadinya hati-hati; rawan kecelakaan pas mulai santai.",
   _origIndex: 606
   },
 {
@@ -311,7 +311,7 @@ export const CARDS_CH7 = [
   jp: "ヒューマンエラー⑥〜⑧",
   type: "konsep",
   id_text: "HA 6–8",
-  desc: "⑥集団欠陥《しゅうだんけっかん》 = deadline → tekanan ambil jalan tidak aman.",
+  desc: "⑥集団欠陥《しゅうだんけっかん》 = deadline → tekanan ambil jalan tidak aman. ⑦近道《ちかみち》行動《こうどう》・省略《しょうりゃく》行動《こうどう》 = pengen cepat → skip langkah yang seharusnya dilakukan. ⑧連絡《れんらく》不足《ぶそく》 = instruksi gak jelas → kerja lanjut tanpa paham → kecelakaan/keterlambatan.",
   _origIndex: 607
   },
 {
@@ -322,29 +322,29 @@ export const CARDS_CH7 = [
   jp: "ヒューマンエラー⑨〜⑫",
   type: "konsep",
   id_text: "HA 9–12",
-  desc: "⑨場面本能《ばめんほんのう》 = refleks selamatkan diri → melempar alat → mengenai orang.",
+  desc: "⑨場面本能《ばめんほんのう》 = refleks selamatkan diri → melempar alat → mengenai orang. ⑩パニック = kaget/buru-buru → refleks ambil tindakan tidak aman. ⑪心身《しんしん》の機能《きのう》低下《ていか》 = penurunan fisik akibat usia (kaki, penglihatan) yang pelan-pelan & gak kerasa. ⑫疲労《ひろう》 = capek numpuk → fokus turun → rawan kecelakaan.",
   _origIndex: 608
   },
 {
   id: 621,
   category: "anzen",
   source: "jac-ch7",
-  furi: "さんだいさいがいついらくてんらくけんせつきかいくれええんほうかいとうかい",
+  furi: "さんだいさいがい",
   jp: "三大災害《さんだいさいがい》",
   type: "konsep",
   id_text: "3 Bencana Besar",
-  desc: "①墜落《ついらく》転《ころ》び落《てんらく》(terbanyak, saat kerja di ketinggian) ②建設機械《けんせつきかい》クレーン災害《さいがい》(激突《げきとつ》,",
+  desc: "①墜落《ついらく》転《ころ》び落《てんらく》(terbanyak, saat kerja di ketinggian) ②建設機械《けんせつきかい》クレーン災害《さいがい》(激突《げきとつ》, terjepit, terlilit) ③崩壊《ほうかい》・倒壊《とうかい》災害《さいがい》(runtuhnya struktur/bangunan).",
   _origIndex: 731
   },
 {
   id: 622,
   category: "anzen",
   source: "jac-ch7",
-  furi: "がいこくじんろうどうしゃのしぼうさいがいけんせつぎょうがもっともおおい",
-  jp: "外国人労働者の死亡災害《がいこくじんろうどうしゃのしぼうさいがいけんせつぎょうがもっともおおい》",
+  furi: "がいこくじんろうどうしゃのしぼうさいがい",
+  jp: "外国人労働者の死亡災害《がいこくじんろうどうしゃのしぼうさいがい》",
   type: "konsep",
   id_text: "Kecelakaan fatal TKA",
-  desc: "Data 厚生労働省《こうせいろうどうしょう》 令和《れいわ》2・3年《ねん》度《ねんど》: kematian 外国人《がいこくじん》労働者《ろうどうしゃ》 terbanyak di",
+  desc: "Data 厚生労働省《こうせいろうどうしょう》 令和《れいわ》2・3年《ねん》度《ねんど》: kematian 外国人《がいこくじん》労働者《ろうどうしゃ》 terbanyak di sektor konstruksi《けんせつぎょう》, lebih tinggi dari manufaktur dan sektor lain.",
   _origIndex: 732
   },
 {
@@ -355,7 +355,7 @@ export const CARDS_CH7 = [
   jp: "崩壊《ほうかい》・倒壊災害《とうかいさいがい》の建設《けんせつ》特有《とくゆう》例《れい》",
   type: 'vocab',
   id_text: "Tiang sementara roboh &",
-  desc: "Contoh 崩壊《ほうかい》倒壊《とうかい》 pekerjaan listrik: ①仮設《かせつ》電柱《でんちゅう》 patah & rubuh ②tiang di truk ambruk",
+  desc: "Contoh 崩壊《ほうかい》倒壊《とうかい》 pekerjaan listrik: ①仮設《かせつ》電柱《でんちゅう》 patah & rubuh ②tiang di truk ambruk, menimpa pekerja di bawahnya.",
   usage: '崩壊《ほうかい》・倒壊《とうかい》災害《さいがい》の原因《げんいん》（支保工不足《しほこうぶそく》・足場不備《あしばふび》）を理解《りかい》する（pahami penyebab kecelakaan runtuh dan roboh: kurang shoring dan scaffold yang tidak memadai）',
     _origIndex: 733
   },
@@ -363,8 +363,8 @@ export const CARDS_CH7 = [
   id: 624,
   category: "anzen",
   source: "jac-ch7",
-  furi: "きかいせっちこうじのしぼうじこおおがたきかいのてんとうによるしたじき",
-  jp: "機械設置工事の死亡事故《きかいせっちこうじのしぼうじこおおがたきかいのてんとうによるしたじき》",
+  furi: "きかいせっちこうじのしぼうじこ",
+  jp: "機械設置工事の死亡事故《きかいせっちこうじのしぼうじこ》",
   type: 'vocab',
   id_text: "Pasang mesin besar",
   desc: "Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat",
@@ -379,7 +379,7 @@ export const CARDS_CH7 = [
   jp: "上下水道工事の3種類の事故リスク《じょうげすいどうこうじのしゅるいのじこりすく》",
   type: 'vocab',
   id_text: "3 risiko saluran air",
-  desc: "①Tanah longsor di galian → tertimbun (≥1.5m: wajib 鋼矢板《こうやいた》). ②Tersandung kabel atau amblas di",
+  desc: "①Tanah longsor di galian → tertimbun (≥1.5m: wajib 鋼矢板《こうやいた》). ②Tersandung kabel atau amblas di sekitar 覆工板《ふっこうばん》(pelat penutup galian sementara) → jatuh. ③Risiko バックホウ: tertabrak saat boom berputar, atau tertabrak mundur — wajib ada 誘導員《ゆうどういん》 khusus jaga pekerja di galian.",
   usage: '上下水道工事《じょうげすいどうこうじ》では酸素欠乏《さんそけつぼう》・崩壊《ほうかい》・クレーン事故《じこ》の3リスクに備《そな》える（waspadai 3 risiko pekerjaan sanitasi: kekurangan oksigen, longsoran, dan kecelakaan crane）',
     _origIndex: 735
   },
@@ -414,7 +414,7 @@ export const CARDS_CH7 = [
   jp: "水分《すいぶん》",
   type: "vocab",
   id_text: "Kandungan air",
-  desc: "Kandungan air dalam sistem. Vakum tidak tuntas → air tersisa → kerusakan pipa",
+  desc: "Kandungan air dalam sistem. Vakum tidak tuntas → air tersisa → kerusakan pipa.",
   usage: '水分《すいぶん》が機器《きき》内部《ないぶ》に侵入《しんにゅう》する（kandungan air masuk ke dalam peralatan）',
     _origIndex: 764
   },

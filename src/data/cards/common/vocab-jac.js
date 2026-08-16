@@ -237,7 +237,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "工期《こうき》",
   type: "vocab",
   id_text: "Durasi / periode proyek",
-  desc: "Jangka waktu pelaksanaan proyek konstruksi.\nUntuk tepat waktu, manajemen",
+  desc: "Jangka waktu pelaksanaan proyek konstruksi.\nUntuk tepat waktu, manajemen harus tetap utamakan keselamatan — kejar deadline dengan cara tidak aman malah berisiko kecelakaan yang bikin proyek makin telat.",
   usage: '工期《こうき》内《ない》に完成《かんせい》できるよう工程表《こうていひょう》を作成《さくせい》する（buat bagan jadwal agar pekerjaan selesai dalam periode yang ditetapkan）',
     _origIndex: 921
   },
