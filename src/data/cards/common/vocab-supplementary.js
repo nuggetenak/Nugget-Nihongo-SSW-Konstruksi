@@ -2382,7 +2382,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "インパクトドライバー",
   type: "vocab",
   id_text: "Bor sekrup bertenaga",
-  desc: "Alat listrik pengencang baut/sekrup.\nBerbeda dari drill biasa — ada pukulan",
+  desc: "Alat listrik pengencang baut/sekrup.\nBerbeda dari drill biasa — ada pukulan (impact) tambahan dari palu internal, jadi lebih bertenaga.",
   usage: "インパクトドライバーでビスを締《し》める（mengencangkan sekrup）",
   _origIndex: 1276
   },
@@ -2394,7 +2394,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ウインチ",
   type: "vocab",
   id_text: "Winch / derek bermotor",
-  desc: "Alat bermotor penarik material berat.\nPeriksa tali dan kapasitas sebelum",
+  desc: "Alat bermotor penarik material berat.\nPeriksa tali dan kapasitas sebelum dipakai.",
   usage: "ウインチで荷物《にもつ》を引《ひ》き上《あ》げる（mengangkat material dengan winch）",
   _origIndex: 1277
   },

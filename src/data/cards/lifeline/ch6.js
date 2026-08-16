@@ -1063,7 +1063,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "開く《ひらく》",
   type: "vocab",
   id_text: "Membuka",
-  desc: "Membuka katup/valve.\nBuka terlalu cepat → aliran mendadak berubah → muncul",
+  desc: "Membuka katup/valve.\nBuka terlalu cepat → aliran mendadak berubah → muncul tekanan kejut (water hammer).",
   usage: 'バルブを開《ひら》く（membuka katup）',
     _origIndex: 874
   },
@@ -1621,7 +1621,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "開放型スプリンクラー《かいほうがたすぷりんくらー》",
   type: "vocab",
   id_text: "Sprinkler jenis terbuka",
-  desc: "Digunakan di ruang besar seperti panggung; semua kepala menyembur serentak saat",
+  desc: "Digunakan di ruang besar seperti panggung; semua kepala menyembur serentak saat terjadi kebakaran.",
   usage: '開放型《かいほうがた》スプリンクラーが一斉《いっせい》に放水《ほうすい》する（sprinkler jenis terbuka menyemprot serentak）',
     _origIndex: 1077
   },
@@ -1633,7 +1633,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "閉鎖型スプリンクラー《へいさがたすぷりんくらー》",
   type: "vocab",
   id_text: "Sprinkler jenis tertutup",
-  desc: "Hanya kepala yang terkena panas langsung yang menyembur. Paling umum di gedung",
+  desc: "Hanya kepala yang terkena panas langsung yang menyembur. Paling umum di gedung perkantoran dan gedung umum lainnya.",
   usage: '閉鎖型《へいさがた》スプリンクラーが熱《ねつ》で作動《さどう》する（sprinkler jenis tertutup aktif karena panas）',
     _origIndex: 1078
   },

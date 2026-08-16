@@ -9,7 +9,7 @@ export const CARDS_CH4 = [
   jp: "素掘り《すぼり》",
   type: 'vocab',
   id_text: "Galian tanpa penahan",
-  desc: "Galian tanpa 土留《どどめ》め《どどめ》, hanya jika tanah stabil. Berbeda dari galian ≥1.5m yang wajib pakai",
+  desc: "Galian tanpa 土留め《どどめ》, hanya jika tanah stabil. Berbeda dari galian ≥1.5m yang wajib pakai 土留め《どどめ》.",
   usage: '素掘り《すぼり》は崩壊《ほうかい》リスクが高《たか》いため範囲《はんい》を最小限《さいしょうげん》にする（minimalisir area galian terbuka karena risiko longsor yang tinggi）',
     _origIndex: 119
   },
@@ -21,7 +21,7 @@ export const CARDS_CH4 = [
   jp: "墨出し用語《すみだしようご》：陸墨《ろくずみ》・逃げ墨《にげずみ》・地墨《じずみ》",
   type: 'vocab',
   id_text: "Tinta horizontal / geser",
-  desc: "陸墨《ろくずみ》: garis referensi horizontal. 逃《に》げ墨《ずみ》: garis dipindah karena terhalang. 地墨《じずみ》: garis",
+  desc: "陸墨《ろくずみ》: garis referensi horizontal. 逃《に》げ墨《ずみ》: garis dipindah karena terhalang. 地墨《じずみ》: garis langsung di permukaan horizontal (lantai).",
   usage: '陸墨《ろくずみ》・逃げ墨《にげずみ》・地墨《じずみ》の3種類《さんしゅるい》を使い分《つかいわ》ける（bedakan penggunaan garis horizontal, garis offset, dan garis lantai）',
     _origIndex: 137
   },
@@ -33,7 +33,7 @@ export const CARDS_CH4 = [
   jp: "ベンチマーク（BM）・GL・FL",
   type: 'vocab',
   id_text: "Simbol tinggi BM, GL, FL",
-  desc: "BM: titik referensi ketinggian di lokasi. GL: tinggi permukaan tanah. FL: tinggi lantai jadi (1FL,",
+  desc: "BM: titik referensi ketinggian di lokasi. GL: tinggi permukaan tanah. FL: tinggi lantai jadi (1FL, 2FL, dst).",
   usage: 'ベンチマーク（BM）を基準《きじゅん》にGLとFLを設定《せってい》する（tentukan GL dan FL berdasarkan benchmark）',
     _origIndex: 138
   },
@@ -105,7 +105,7 @@ export const CARDS_CH4 = [
   jp: "FH・SL・CH（高《たか》さ記号《きごう》）",
   type: 'vocab',
   id_text: "FH, SL, CH — simbol tinggi",
-  desc: "FH=Formation Height (tinggi tanah rencana). SL=Slab Level (tinggi slab). CH=Ceiling Height (FL ke",
+  desc: "FH=Formation Height (tinggi tanah rencana). SL=Slab Level (tinggi slab). CH=Ceiling Height (FL ke permukaan plafon).",
   usage: 'FH・SL・CHの高《たか》さ記号《きごう》を施工図《せこうず》で確認《かくにん》する（periksa simbol ketinggian FH, SL, CH pada gambar kerja）',
     _origIndex: 246
   },
@@ -321,7 +321,7 @@ export const CARDS_CH4 = [
   jp: "作業員詰め所《さぎょういんつめしょ》のルール",
   type: "konsep",
   id_text: "Aturan di ruang",
-  desc: "作業員詰《さぎょういんつ》めめ所《さぎょういんつめしょ》=ruang ganti/istirahat. Aturan: merokok di tempat khusus,",
+  desc: "作業員詰め所《さぎょういんつめしょ》=ruang ganti/istirahat. Aturan: merokok di tempat khusus, helm & sabuk pengaman di tempat ditentukan, barang pribadi di loker, cuci tangan & kumur saat masuk-keluar, cek papan pengumuman.",
   _origIndex: 284
   },
 {
@@ -332,7 +332,7 @@ export const CARDS_CH4 = [
   jp: "見付け《みつけ》・見え掛かり《みえがかり》・見え隠れ《みえかくれ》",
   type: 'vocab',
   id_text: "Tampak penuh / sebagian",
-  desc: "見《み》え付《みつ》けけ《みつけ》=permukaan sepenuhnya terlihat dari depan. 見《み》ええ掛《か》けかり《みえがかり》=tampak dari",
+  desc: "見付け《みつけ》=permukaan sepenuhnya terlihat dari depan. 見え掛かり《みえがかり》=tampak dari celah/sudut miring. 見え隠れ《みえかくれ》=kadang tampak kadang tidak (perlu digerakkan untuk terlihat).",
   usage: '見付け《みつけ》面《めん》を正面《しょうめん》に向《む》けて取《と》り付《つ》ける（pasang dengan sisi tampak menghadap ke depan）',
     _origIndex: 285
   },
@@ -578,7 +578,7 @@ export const CARDS_CH4 = [
   jp: "おはようございます（朝《あさ》のあいさつの基本《きほん》）",
   type: 'vocab',
   id_text: "Selamat pagi",
-  desc: "Ucapkan kepada orang PERTAMA KALI ditemui pagi hari. Dua fungsi: ①beri kesan baik ②buat lawan",
+  desc: "Ucapkan kepada orang PERTAMA KALI ditemui pagi hari. Dua fungsi: ①beri kesan baik ②buat lawan bicara jadi lebih semangat.",
   usage: '朝《あさ》は「おはようございます」と大《おお》きな声《こえ》で挨拶《あいさつ》する（ucapkan "Ohayō gozaimasu" dengan suara lantang di pagi hari）',
     _origIndex: 652
   },
@@ -590,7 +590,7 @@ export const CARDS_CH4 = [
   jp: "ご安全に《ごあんぜんに》（建設《けんせつ》現場《げんば》専用《せんよう》のあいさつ）",
   type: 'vocab',
   id_text: "Semoga selamat",
-  desc: "Ungkapan harapan agar selamat dan tidak kecelakaan. Digunakan saat akhir 朝礼《ちょうれい》 dan saat",
+  desc: "Ungkapan harapan agar selamat dan tidak kecelakaan. Digunakan saat akhir 朝礼《ちょうれい》 dan saat berpapasan dengan rekan yang akan kerja berbahaya.",
   usage: '建設《けんせつ》現場《げんば》では「ご安全《ごあんぜんに》に」を挨拶《あいさつ》として使《つか》う（gunakan "Go anzen ni" sebagai salam di lokasi konstruksi）',
     _origIndex: 653
   },
@@ -614,7 +614,7 @@ export const CARDS_CH4 = [
   jp: "ご苦労さま vs おつかれさまです《ごくろさまおつかれさまちがい》",
   type: 'vocab',
   id_text: "Gokurosama tidak sopan",
-  desc: "ご苦労《くろう》さま=kurang sopan untuk atasan. おつかれさまです=lebih sopan, bisa ke siapa saja. Atasan bilang",
+  desc: "ご苦労《くろう》さま=kurang sopan untuk atasan. おつかれさまです=lebih sopan, bisa ke siapa saja. Atasan bilang begitu ke bawahan, artinya dia berterima kasih — jawab「ありがとうございます！」",
   usage: '上司《じょうし》には「お疲《つか》れ様《さま》です」、目下《めした》には「ご苦労《くろう》さま」は使《つか》わない（gunakan "Otsukaresama" untuk atasan, jangan gunakan "Gokurōsama" kepada mereka）',
     _origIndex: 655
   },
@@ -626,7 +626,7 @@ export const CARDS_CH4 = [
   jp: "失礼します《しつれいします》（3つの場面《ばめん》での使い方《つかいかた》）",
   type: 'vocab',
   id_text: "Permisi / maaf mengganggu",
-  desc: "3 situasi: ①masuk ruangan ②menyela percakapan mendesak ③pulang lebih dulu: お先《さき》に失礼《しつれい》します →",
+  desc: "3 situasi: ①masuk ruangan ②menyela percakapan mendesak ③pulang lebih dulu: お先《さき》に失礼《しつれい》します → dijawab dengan「お疲れさまでした」.",
   usage: '部屋《へや》を出入《でい》りするとき「失礼《しつれい》します」と声《こえ》をかける（ucapkan "Shitsurei shimasu" saat keluar-masuk ruangan）',
     _origIndex: 656
   },
@@ -638,7 +638,7 @@ export const CARDS_CH4 = [
   jp: "危ない！よけろっ！《あぶないよけろ》（緊急《きんきゅう》の呼《よ》びかけ）",
   type: 'vocab',
   id_text: "Awas! Minggir!",
-  desc: "Saat seseorang tidak menyadari bahaya, orang sekitar berteriak 危《あぶ》ない！. Untuk benda jatuh:",
+  desc: "Saat seseorang tidak menyadari bahaya, orang sekitar berteriak 危《あぶ》ない！. Untuk benda jatuh: dari atas / menabrak dari samping, teriak「危ない！よけろっ！」",
   usage: '危険《きけん》なときは「危《あぶ》ない！よけろっ！」と大声《おおごえ》で知《し》らせる（beri tahu bahaya dengan berteriak "Abunai! Yokero!" dalam keadaan darurat）',
     _origIndex: 657
   },
@@ -674,7 +674,7 @@ export const CARDS_CH4 = [
   jp: "BM・GL・FH・FL・SL・CH（高《たか》さ基準《きじゅん》6語《ご》）",
   type: 'vocab',
   id_text: "6 referensi ketinggian",
-  desc: "BM=titik referensi ketinggian proyek. GL=tinggi tanah. FH=tinggi tanah rencana. FL=tinggi lantai",
+  desc: "BM=titik referensi ketinggian proyek. GL=tinggi tanah. FH=tinggi tanah rencana. FL=tinggi lantai jadi. SL=Slab Level (tinggi slab). CH=Ceiling Height (tinggi plafon dari FL).",
   usage: 'BM・GL・FH・FL・SL・CHの6つの高《たか》さ基準《きじゅん》語《ご》を一括《いっかつ》して覚《おぼ》える（hafalkan 6 istilah referensi ketinggian sekaligus）',
     _origIndex: 662
   },
@@ -734,7 +734,7 @@ export const CARDS_CH4 = [
   jp: "納まり《おさまり》・取合い《とりあい》・見付け《みつけ》・見え掛かり《みえがかり》・見え隠れ《みえかくれ》",
   type: 'vocab',
   id_text: "5 istilah finishing &",
-  desc: "納《おさ》まり=keseimbangan penempatan. 取《と》り合《とりあ》い=pertemuan 2+ komponen. 見《み》え付《みつ》け=tampak penuh dari",
+  desc: "納《おさ》まり=keseimbangan penempatan. 取《と》り合《とりあ》い=pertemuan 2+ komponen. 見《み》え付《みつ》け=tampak penuh dari depan. 見え掛かり《みえがかり》=tampak dari celah/sudut. 見え隠れ《みえかくれ》=kadang tampak kadang tidak.",
   usage: '納まり《おさまり》・取合い・見付け・見え掛かり・見え隠れの5語《ごご》を覚《おぼ》える（hafalkan 5 istilah fitting, junction, dan visibility）',
     _origIndex: 679
   },
@@ -805,7 +805,7 @@ export const CARDS_CH4 = [
   jp: "作業員詰め所の6ルール《さぎょういんつめしょのろくるうる》",
   type: "konsep",
   id_text: "6 aturan ruang istirahat",
-  desc: "詰《つ》め所《しょ》=ruang ganti & istirahat. Aturan: merokok di tempat khusus, ポイ捨《す》て禁止《きんし》, helm di",
+  desc: "詰《つ》め所《しょ》=ruang ganti & istirahat. Aturan: merokok di tempat khusus, ポイ捨《す》て禁止《きんし》, helm di tempat yang ditentukan, barang pribadi di loker, cuci tangan & kumur saat masuk-keluar, cek papan pengumuman.",
   _origIndex: 697
   },
 {
@@ -816,7 +816,7 @@ export const CARDS_CH4 = [
   jp: "服装の4禁止事項《ふくそうのよんきんしじこう》（建設《けんせつ》現場《げんば》）",
   type: "konsep",
   id_text: "4 larangan pakaian di",
-  desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着《うわぎ》前《まえ》開《まえあ》け禁止《きんし》 ③袖《そで》まくり禁止《きんし》(lengan ke pergelangan)",
+  desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着《うわぎ》前《まえ》開《まえあ》け禁止《きんし》 ③袖《そで》まくり禁止《きんし》(lengan ke pergelangan) ④ポケット《ぽけっと》に手《て》を入《い》れて歩《ある》くの禁止《きんし》(bahaya jatuh mendadak).",
   _origIndex: 698
   },
 {
@@ -827,7 +827,7 @@ export const CARDS_CH4 = [
   jp: "後片付け《あとかたずけ》（作業《さぎょう》終了《しゅうりょう》後《ご》の義務《ぎむ》・火《ひ》の確認《かくにん》）",
   type: "konsep",
   id_text: "Beres (kewajiban setelah kerja)",
-  desc: "Setelah selesai bekerja WAJIB 後《あと》片付《あとかたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan",
+  desc: "Setelah selesai bekerja WAJIB 後《あと》片付《あとかたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan api, pastikan benar-benar padam sebelum pulang.",
   _origIndex: 700
   },
 {
@@ -862,7 +862,7 @@ export const CARDS_CH4 = [
   jp: "地縄張り《じなわばり》・水糸《みずいと》",
   type: 'vocab',
   id_text: "Tali & benang referensi",
-  desc: "地縄張《じなわは》り=tandai batas pondasi di tanah.\n水糸《みずいと》=benang horizontal antar papan sebagai referensi",
+  desc: "地縄張《じなわは》り=tandai batas pondasi di tanah.\n水糸《みずいと》=benang horizontal antar papan sebagai referensi garis tengah (通り芯《とおりしん》).",
   usage: '地縄張り《じなわばり》で建物《たてもの》の配置《はいち》を確認《かくにん》し、水糸《みずいと》で基準線《きじゅんせん》を張《は》る（konfirmasi tata letak bangunan dengan tali tanah, tegangkan string line sebagai acuan）',
     _origIndex: 1472
   },
@@ -874,7 +874,7 @@ export const CARDS_CH4 = [
   jp: "盛り土《もりど》・段切り《だんきり》",
   type: 'vocab',
   id_text: "Timbunan & tangga lereng",
-  desc: "盛《も》り土《ど》=timbunan untuk meratakan lahan miring.\n段切《だんぎ》り=potong lereng bertangga sebelum ditimbun",
+  desc: "盛《も》り土《ど》=timbunan untuk meratakan lahan miring.\n段切《だんぎ》り=potong lereng bertangga sebelum ditimbun agar timbunan tidak longsor.",
   usage: '盛り土《もりど》を層《そう》ごとに転圧《てんあつ》し、傾斜面《けいしゃめん》は段切り《だんきり》してから施工《せこう》する（padatkan timbunan per lapisan dan buat tangga lereng sebelum melanjutkan）',
     _origIndex: 1473
   },
@@ -910,7 +910,7 @@ export const CARDS_CH4 = [
   jp: "杭間さらい《くいまさらい》・段跳ね《だんばね》",
   type: 'vocab',
   id_text: "Tiang: ratakan & angkat",
-  desc: "杭《くい》間《くいま》さらい=ratakan tanah di antara tiang saat 床付《とこづ》け.\n段跳《だんは》ね=angkat tanah bertahap ke atas",
+  desc: "杭《くい》間《くいま》さらい=ratakan tanah di antara tiang saat 床付《とこづ》け.\n段跳《だんは》ね=angkat tanah bertahap ke atas saat galian dalam, untuk buang tanah keluar (排土).",
   usage: '杭間《くいかん》の余掘り土《よぼりど》を杭間さらい《くいまさらい》でさらってから段跳ね《だんばね》で杭《くい》を揚《あ》げる（ratakan tanah antar tiang lalu angkat tiang dengan jack）',
     _origIndex: 1476
   },
@@ -922,7 +922,7 @@ export const CARDS_CH4 = [
   jp: "山砂《やまずな》",
   type: 'vocab',
   id_text: "Pasir gunung / daratan",
-  desc: "Pasir dari daratan (bukan sungai), daya serap air lebih tinggi.\nDigunakan sebagai material urugan",
+  desc: "Pasir dari daratan (bukan sungai), daya serap air lebih tinggi.\nDigunakan sebagai material urugan (埋め戻し/backfill).",
   usage: '山砂《やまずな》を埋め戻し《うめもどし》に使用《しよう》する（gunakan pasir gunung untuk pengurugan kembali）',
     _origIndex: 1477
   },
@@ -970,7 +970,7 @@ export const CARDS_CH4 = [
   jp: "路盤《ろばん》・路床《ろしょう》・表層《ひょうそう》（舗装《ほそう》土《ど》工事《こうじ》3語《ご》）",
   type: 'vocab',
   id_text: "3 lapisan jalan",
-  desc: "表層《ひょうそう》=aspal paling atas. 路盤《ろばん》=sebarkan beban di atas 路床《ろしょう》. 路床《ろしょう》=tanah dasar penopang",
+  desc: "表層《ひょうそう》=aspal paling atas. 路盤《ろばん》=sebarkan beban di atas 路床《ろしょう》. 路床《ろしょう》=tanah dasar penopang jalan, ±1m dari permukaan perkerasan.",
   usage: '路盤《ろばん》・路床《ろしょう》・表層《ひょうそう》の3語《さんご》で舗装《ほそう》の層《そう》を覚《おぼ》える（hafalkan 3 lapisan perkerasan jalan）',
     _origIndex: 1492
   },
@@ -982,7 +982,7 @@ export const CARDS_CH4 = [
   jp: "地縄はり《じなわはり》・根切り《ねきり》・根入れ長さ《ねいれながさ》・素掘り《すぼり》",
   type: 'vocab',
   id_text: "4 istilah galian pondasi",
-  desc: "地縄張《じなわは》り=tandai batas. 根切《ねぎ》り=gali ke pondasi. 根入《ねい》れ長《なが》さ=kedalaman ujung. 素掘《すぼ》り=galian",
+  desc: "地縄張《じなわは》り=tandai batas. 根切《ねぎ》り=gali ke pondasi. 根入《ねい》れ長《なが》さ=kedalaman ujung. 素掘《すぼ》り=galian tanpa 土留め《どどめ》 (bila tanah stabil).",
   usage: '地縄はり・根切り・根入れ・素掘りの4語《よんご》で基礎《きそ》の掘削《くっさく》を覚《おぼ》える（hafalkan 4 istilah galian pondasi）',
     _origIndex: 1493
   },
@@ -994,7 +994,7 @@ export const CARDS_CH4 = [
   jp: "場所打ち《ばしょうち》・打つ《うつ》（打設《だせつ》）",
   type: 'vocab',
   id_text: "Cor beton di tempat",
-  desc: "場所打《ばしょう》ち=cor beton langsung di lokasi (bukan precast).\n打設《だせつ》する=istilah teknis untuk menuang",
+  desc: "場所打《ばしょう》ち=cor beton langsung di lokasi (bukan precast).\n打設《だせつ》する=istilah teknis untuk menuang beton ke dalam bekisting.",
   usage: '場所打ち《ばしょうち》（打設《だせつ》）とは型枠《かたわく》内《ない》で直接《ちょくせつ》コンクリートを打《う》つことだ（cast-in-place berarti mengecor beton langsung di dalam bekisting）',
     _origIndex: 1494
   },
@@ -1006,7 +1006,7 @@ export const CARDS_CH4 = [
   jp: "余堀り《よぼり》・鋤取り《すきとり》・床付け《とこずけ》・杭間さらい《くいまさらい》・段跳ね《だんばね》",
   type: 'vocab',
   id_text: "5 istilah galian & dasar",
-  desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭《くい》間《くいま》さらい=bersihkan",
+  desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭《くい》間《くいま》さらい=bersihkan tanah sisa di antara tiang pancang.",
   usage: '余堀り・鋤取り・床付け・杭間さらい・段跳ねの5語《ごご》で掘削《くっさく》後《ご》の精仕上げ《せいしあげ》を覚《おぼ》える（hafalkan 5 istilah untuk penyempurnaan setelah penggalian）',
     _origIndex: 1495
   },
@@ -1018,7 +1018,7 @@ export const CARDS_CH4 = [
   jp: "法面《のりめん》・地山《じやま》・山がくる《やまがくる》・山留め《やまどめ》",
   type: 'vocab',
   id_text: "4 istilah lereng galian",
-  desc: "法面《のりめん》=permukaan miring galian. 地山《じやま》=tanah alami.\n山《やま》がくる=lereng LONGSOR — BAHAYA!",
+  desc: "法面《のりめん》=permukaan miring galian. 地山《じやま》=tanah alami.\n山《やま》がくる=lereng LONGSOR — BAHAYA! 山留め《やまどめ》=tahan tanah pakai matras/turap agar tidak longsor.",
   usage: '法面《のりめん》の崩壊《ほうかい》を防《ふせ》ぐために山留め《やまどめ》をする（pasang earth retention untuk mencegah longsor lereng galian）',
     _origIndex: 1528
   },
@@ -1042,7 +1042,7 @@ export const CARDS_CH4 = [
   jp: "配筋《はいきん》・間隔《かんかく》・あき",
   type: 'vocab',
   id_text: "Tulangan",
-  desc: "配筋《はいきん》=mengatur dan merakit besi tulangan.\n間隔《かんかく》=jarak center-to-center. あき=jarak BERSIH antar",
+  desc: "配筋《はいきん》=mengatur dan merakit besi tulangan.\n間隔《かんかく》=jarak center-to-center. あき=jarak BERSIH antar permukaan tulangan (bukan as-ke-as).",
   usage: '配筋《はいきん》の間隔《かんかく》とあきを設計図《せっけいず》で確認《かくにん》する（periksa jarak dan celah antar tulangan pada gambar rencana）',
     _origIndex: 1530
   },
@@ -1054,7 +1054,7 @@ export const CARDS_CH4 = [
   jp: "かぶり厚さ《かぶりあつさ》",
   type: 'vocab',
   id_text: "Selimut beton",
-  desc: "Jarak dari permukaan luar besi tulangan ke permukaan beton yang menutupinya.\nHarus cukup tebal",
+  desc: "Jarak dari permukaan luar besi tulangan ke permukaan beton yang menutupinya.\nHarus cukup tebal agar melindungi tulangan dari karat dan api.",
   usage: 'かぶり厚さ《かぶりあつさ》が基準値《きじゅんち》を満《み》たすか確認《かくにん》する（periksa apakah tebal selimut beton memenuhi nilai standar）',
     _origIndex: 1531
   },
@@ -1066,7 +1066,7 @@ export const CARDS_CH4 = [
   jp: "RC造《あーるしーぞう》・S造《えすぞう》・SRC造《えすあーるしーぞう》・木造《もくぞう》",
   type: 'vocab',
   id_text: "Jenis struktur RC, S, SRC, kayu",
-  desc: "RC造《ぞう》=beton bertulang. S造《つく》り=baja. SRC造《つく》り=baja+RC. 木造《もくぞう》=kayu.\nWajib dikenali untuk",
+  desc: "RC造《ぞう》=beton bertulang. S造《つく》り=baja. SRC造《つく》り=baja+RC. 木造《もくぞう》=kayu.\nWajib dikenali untuk memahami gambar kerja dan spesifikasi bangunan.",
   usage: 'RC造《あーるしーぞう》とS造《えすぞう》の特徴《とくちょう》を比較《ひかく》する（bandingkan karakteristik struktur RC dan struktur baja）',
     _origIndex: 1532
   },
@@ -1078,7 +1078,7 @@ export const CARDS_CH4 = [
   jp: "あそび・建込み《たてこみ》",
   type: 'vocab',
   id_text: "Kelonggaran + pemasangan komponen",
-  desc: "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang.\n建込《たてこ》み=mendirikan bekisting",
+  desc: "あそび=kelonggaran yang disengaja agar sambungan tidak terlalu kencang.\n建込《たてこ》み=mendirikan bekisting sesuai garis marking (墨出し線《すみだしせん》).",
   usage: 'あそびの寸法《すんぽう》を確認《かくにん》してから部材《ぶざい》を建込む（periksa toleransi sebelum memasang komponen）',
     _origIndex: 1533
   },
@@ -1090,7 +1090,7 @@ export const CARDS_CH4 = [
   jp: "コンクリートブロック造《ぞう》",
   type: 'vocab',
   id_text: "Struktur blok beton yang",
-  desc: "Jenis struktur menggunakan blok beton yang ditumpuk.\nDigunakan untuk pagar, dinding pembatas, dan",
+  desc: "Jenis struktur menggunakan blok beton yang ditumpuk.\nDigunakan untuk pagar, dinding pembatas, dan bangunan kecil/sederhana.",
   usage: 'コンクリートブロック（CB造《ぞう》）を積《つ》んでモルタルで固《かた》めて壁《かべ》を造《つく》る（susun dan rekatkan blok beton dengan mortar untuk membuat dinding）',
     _origIndex: 1534
   },
@@ -1126,7 +1126,7 @@ export const CARDS_CH4 = [
   jp: "地山《じやま》・法面《のりめん》・山がくる《やまがくる》（自然《しぜん》地盤《じばん》と崩壊《ほうかい》危険《きけん》）",
   type: 'vocab',
   id_text: "3 istilah tanah alami &",
-  desc: "地山《じやま》=tanah dalam kondisi alami. 法面《のりめん》=permukaan miring pada galian.\n山《やま》がくる=turap atau",
+  desc: "地山《じやま》=tanah dalam kondisi alami. 法面《のりめん》=permukaan miring pada galian.\n山《やま》がくる=turap atau lereng galian runtuh — sering jadi penyebab kecelakaan kerja.",
   usage: '地山《じやま》の状態《じょうたい》を確認《かくにん》して法面《のりめん》の角度《かくど》を決《き》める（periksa kondisi tanah alami sebelum menentukan sudut lereng galian）',
     _origIndex: 1550
   },
@@ -1138,7 +1138,7 @@ export const CARDS_CH4 = [
   jp: "杭基礎《くいきそ》・スラブ・杭地業《くいじぎょう》・基礎免振《きそめんしん》",
   type: 'vocab',
   id_text: "4 istilah pondasi tiang,",
-  desc: "杭《くい》基礎《くいきそ》=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan.\n杭《くい》地業《くいじぎょう》=pekerjaan",
+  desc: "杭《くい》基礎《くいきそ》=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan.\n杭《くい》地業《くいじぎょう》=pekerjaan persiapan pondasi tiang (cor beton/baja pracetak). 基礎免振《きそめんしん》=peredam gaya gempa antara tanah dan fondasi.",
   usage: '杭基礎《くいきそ》の上《うえ》にスラブと基礎免振《きそめんしん》を組《く》む（rakit slab dan isolasi seismik di atas pondasi tiang）',
     _origIndex: 1551
   },
@@ -1150,7 +1150,7 @@ export const CARDS_CH4 = [
   jp: "配筋《はいきん》・拾い出し《ひろいだし》・あそび・あき・間隔《かんかく》（鉄筋《てっきん》基本《きほん》5語《ご》）",
   type: 'vocab',
   id_text: "5 istilah dasar",
-  desc: "配筋《はいきん》=rakit besi tulangan. 拾《ひろ》い出《だ》し=hitung material dari gambar.\nあそび=toleransi. あき=jarak",
+  desc: "配筋《はいきん》=rakit besi tulangan. 拾《ひろ》い出《だ》し=hitung material dari gambar.\nあそび=toleransi. あき=jarak bersih antar tulangan. 間隔《かんかく》=jarak as-ke-as tulangan.",
   usage: '配筋《はいきん》の拾い出し《ひろいだし》でかぶり厚さを確認《かくにん》する（periksa tebal selimut beton saat material takeoff tulangan）',
     _origIndex: 1552
   },
@@ -1162,7 +1162,7 @@ export const CARDS_CH4 = [
   jp: "捨てコン《すてこん》・結束《けっそく》（ハッカー）・かぶり厚さ《かぶりあつさ》",
   type: 'vocab',
   id_text: "3 istilah presisi beton",
-  desc: "捨《す》てコン=cor tipis 5–10cm sebagai referensi ketinggian.\n結束《けっそく》=ikat persilangan tulangan pakai",
+  desc: "捨《す》てコン=cor tipis 5–10cm sebagai referensi ketinggian.\n結束《けっそく》=ikat persilangan tulangan pakai kawat khusus dengan alat ハッカー.",
   usage: '捨《す》てコンの上《うえ》に鉄筋《てっきん》を組《く》んでかぶり厚さ《かぶりあつさ》を確保《かくほ》する（pasang tulangan di atas beton lantai kerja dengan memastikan tebal selimut）',
     _origIndex: 1553
   },
