@@ -806,13 +806,17 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 
 ### P5 — Desc truncation (cards)
 > **Session 25 (2026-08-12 to 08-15): 80/479 done — 22 from jac-ch1+jac-ch2 (commit `61c180a`),
-> 58 from jac-ch3 (`dca925e` + a 2-card due-diligence catch in `1afb7a2`) — scoped to whichever
+> 58 from jac-ch3 (`dca925e` + a 2-card due-diligence catch in `1afb7a2`). Session 26 (2026-08-16):
+> +94 from jac-ch4+jac-ch5 (commit `b00bdf2`), running total 174/479 — scoped to whichever
 > chapters had a source PDF available at the time (see HANDOFF.md's PDF intake tracker). Not a
-> full pass, don't check these boxes off — ~399 remain across jac-ch4 (teori, not yet available)
-> and jac-ch5/6/7 (praktik, not yet available). Re-scope by `source === "jac-ch{N}"` as each new
-> chapter's PDF lands — and check the WHOLE `src/data/cards/` tree for each id, not just the
-> obvious `common/chN.js`/`lifeline/chN.js` file; jac-ch3's cards turned out to span 8 different
-> split files.**
+> full pass, don't check these boxes off — ~305 remain across jac-ch6 and jac-ch7 (both praktik,
+> not yet available). Re-scope by `source === "jac-ch{N}"` as each new chapter's PDF lands — and
+> check the WHOLE `src/data/cards/` tree for each id, not just the obvious
+> `common/chN.js`/`lifeline/chN.js` file; both jac-ch3's and jac-ch4/ch5's cards turned out to
+> span 8 different split files each. Also: dry-run and eyeball every `oldDesc + suffix`
+> concatenation before writing to any file — session 26's first draft had missing spaces and
+> duplicated words at several seams, caught only by an automated preview pass before anything was
+> applied.**
 - [ ] 213 mid-word truncated → complete content (prioritas jac-ch6)
 - [ ] 266 complete-word missing period → add `.`
 - [ ] 82 symbol endings (`→`,`=`,`:`,`》`,`、`) → fix per kasus
