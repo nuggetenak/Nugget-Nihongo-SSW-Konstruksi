@@ -804,24 +804,27 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 - [ ] Review 6 same-jp ambiguous pairs → merge atau pertahankan
 - [ ] Fix 25 duplicate id_text → disambiguate
 
-### P5 — Desc truncation (cards)
+### P5 — Desc truncation (cards) — ✅ DONE (session 28)
 > **Session 25 (2026-08-12 to 08-15): 80/479 done — 22 from jac-ch1+jac-ch2 (commit `61c180a`),
 > 58 from jac-ch3 (`dca925e` + a 2-card due-diligence catch in `1afb7a2`). Session 26 (2026-08-16):
 > +94 from jac-ch4+jac-ch5 (commit `b00bdf2`), running total 174/479. Session 27 (2026-08-17): +66
-> from jac-ch6 (commit `5447c94`), running total 240/479 — scoped to whichever chapters had a
-> source PDF available at the time (see HANDOFF.md's PDF intake tracker). Not a full pass, don't
-> check these boxes off — ~239 remain, all in jac-ch7 (praktik, not yet available, the only
-> chapter left). Re-scope by `source === "jac-ch{N}"` as each new chapter's PDF lands — and check
-> the WHOLE `src/data/cards/` tree for each id, not just the obvious
-> `common/chN.js`/`lifeline/chN.js` file; jac-ch3, jac-ch4/ch5, and jac-ch6 each turned out to
-> span 7-8 different split files. Also: dry-run and eyeball every `oldDesc + suffix` concatenation
-> before writing to any file, with a real checker (adjacent-word repeat, then n-gram phrase
-> repeat, then raw-substring repeat for glued-token collisions, then paren-balance) — each layer
-> was added in session 26/27 only after the previous one let something through, so build all four
-> from the start next time rather than re-discovering them. Separately: the EF接合 furi item
-> (previously tracked in HANDOFF's 🟡 bucket, not an OD in §12) is resolved as of session 27 —
-> see commit `5447c94` for the evidence-based fix, not a guess.**
-- [ ] 213 mid-word truncated → complete content (sisa: jac-ch7 saja)
+> from jac-ch6 (commit `5447c94`), running total 240/479. Session 28 (2026-08-17): +18 from
+> jac-ch7 (commit `60dcf1a`), final total 258/479 — this was the 7th and last source PDF, so
+> every chapter has now been checked against its real textbook text at least once. Marking this
+> **done** rather than continuing to track it as partial: the gap between 258 and the original
+> ~479 estimate isn't unstarted work sitting in a queue, it's (a) the specific ids that stayed
+> flagged after real cross-referencing because the source text genuinely didn't have enough detail
+> to complete safely — see HANDOFF.md's "Residual data-quality flags" list for the full,
+> currently-14-id roster (94,152,160,957,410,966,1063,1143,93,1190,1325,530,624 — one from ch6 was
+> a likely source mistag, two new from ch7) — and (b) slack in the original ~479 figure itself,
+> which HANDOFF always caveated as an estimate never reconciled against an exact pre-count; every
+> chapter's real fixed-count came in below what a proportional share of 479 would predict, ch7
+> included (18 of 47 checked cards — same story every other chapter told). Re-opening P5 only
+> makes sense if new source material surfaces for
+> one of the still-flagged ids; there's no more mechanical work here otherwise. Separately: the
+> EF接合 furi item (session 27) and a distinct furi/jp ruby-corruption pattern found on 7 ch7 cards
+> (session 28) are both resolved — see commits `5447c94` and `60dcf1a`.**
+- [ ] 213 mid-word truncated → complete content
 - [ ] 266 complete-word missing period → add `.`
 - [ ] 82 symbol endings (`→`,`=`,`:`,`》`,`、`) → fix per kasus
 

@@ -59,7 +59,7 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-17 (session 27, new agent chat — owner provided repo+token directly,
+**As of this edit, 2026-08-17 (session 28, new agent chat — owner provided repo+token directly,
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
@@ -311,6 +311,43 @@ update itself.
     rather than rebuilding it step by step again.
   - verify-content.mjs + audit-track-consistency.mjs both clean after (1438 unchanged, 0/1438
     track disagreements). Commit `5447c94`.
+- **Session 28 (2026-08-17, new agent chat).** `verify-content.mjs` + `audit-track-consistency.mjs`
+  re-run fresh at start: both clean, 1438/0 unchanged from session 27's close. Checked ACTIVE
+  TASKS first per protocol. Owner attached `text7l.pdf` (ch7: 建設工事の安全) directly in this
+  session's opening message — the 7th and last of the tracked source PDFs.
+  - **P5 done — jac-ch7 was the last chapter, PDF intake now complete.** Scoped source===jac-ch7
+    across the whole `src/data/cards/` tree (landed in 4 files, not just `common/ch7.js` — same
+    multi-file pattern as every prior chapter). 47 total: 27 already had proper terminal
+    punctuation, 18 fixed, 2 left open (530, 624 — source too thin to complete safely, see commit
+    `60dcf1a`'s body for why each specifically can't be guessed). Also caught 7 bonus `furi`/`jp`-
+    ruby corruption fixes along the way (a pattern distinct from anything previously flagged: the
+    correct headword reading with an unrelated extra reading concatenated onto the end, always
+    traceable to content elsewhere on the same card) — each cross-checked against a clean
+    precedent already in the corpus, not guessed. Full id-by-id evidence in commit `60dcf1a`.
+  - **P5 final accounting:** was 240/479, now 258/479 (+18). Calling this done rather than
+    partial because every one of the 7 source chapters has now been checked against its real
+    textbook text at least once — there's no more incoming material that unblocks further
+    mechanical progress. The ~221 gap from the original 479 estimate is the already-enumerated
+    flagged list below (permanently open pending source material that may never arrive) plus
+    slack in the original estimate itself, which HANDOFF always caveated as approximate — every
+    chapter's real fixed-count came in under a proportional share of it, ch7 included.
+    Still-flagged ids, carried forward from every chapter: 94, 152, 160, 957 (ch1/ch2); 410, 966,
+    1063, 1143 (ch3); 93, 1190 (ch5); 1325 (ch6); 530, 624 (ch7, new this session).
+  - **Also found, not a P5 case, not fixed (flagging per the established id=585 pattern):** 517
+    and 533 (like 530 above) each have a `jp` field listing 2-3 combined terms but `desc` only
+    ever covers the first — complete, correctly-punctuated sentences, so not a truncation defect,
+    just a scope choice nobody expanded. And id=524's `id_text` ("8 materi K3 wajib untuk")
+    dangles on a preposition — adding it to the already-tracked list of 8 similar id_text
+    instances (131/223/242/245/411/591/1373/1378) from ch4/ch5; still out of P5's scope (that's
+    `desc` only), still not touched.
+  - **In passing:** CURRENT STATE's own top summary line ("P0–P5, ... all done") already listed
+    P5 as done before this session — it wasn't, ACTIVE TASKS' own 🟡 bucket said so directly one
+    section down. Doesn't need a fix now since P5 actually is done as of this commit, but flagging
+    the drift in case the same top-line/ACTIVE-TASKS disagreement pattern recurs for a different
+    P-number later — that line doesn't auto-verify against ACTIVE TASKS the way the card counts
+    auto-verify against `verify-content.mjs`.
+  - verify-content.mjs + audit-track-consistency.mjs both clean after (1438 unchanged, 0/1438
+    track disagreements). Commit `60dcf1a`.
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -327,23 +364,26 @@ one" list — check the gate before starting.
 | P12 | merge time, not now | Drop `furi` from all split files |
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
-- **P5, partial:** 213 `desc` truncated mid-word + 266 missing period (~479 cards total) — needs
-  real JAC PDF text, don't guess-fill these. **240 done so far** — session 25: 22 from
-  jac-ch1/jac-ch2 (commit `61c180a`) + 58 from jac-ch3 (`dca925e` + `1afb7a2`); session 26: 94 from
-  jac-ch4/jac-ch5 (`b00bdf2`); session 27: 66 from jac-ch6 (`5447c94`). ~239 still open: jac-ch7
-  only (47 cards, praktik, still needs its PDF) — see the PDF intake tracker under ⏸ below. (The
-  ~239 vs. 479-240=239 doesn't perfectly reconcile against the per-chapter card counts because the
-  ~479 was always an estimate, not an exact pre-count — see each session's commit body for the
-  actual checked/fixed/already-fine split per chapter.) Also still open even with a PDF available:
-  id=94, 152, 160, 957 (from ch1/ch2), id=410, 966, 1063, 1143 (from ch3), id=93, 1190 (from ch5),
-  id=1325 (from ch6) — none had enough specific detail in the provided chapter text to complete
-  safely, see each commit body for the id-by-id reasoning. Separately flagged, not a P5 case:
-  id=468 (source mistag, piping content tagged jac-ch2); id=585 (id_text/jp say "6 istilah" but
-  desc only ever drafted 3 of them — pre-existing mismatch, not something a truncation-fix should
-  silently expand to cover); 8 id_text fields (131, 223, 242, 245, 411, 591, 1373, 1378) in
-  jac-ch4/ch5 that dangle on a conjunction/preposition — different shape than P3's already-done
-  "ends in /" pattern, likely a separate undiscovered instance of the same underlying issue, needs
-  its own pass rather than folding into P5.
+- **P5 is done (session 28)** — full accounting in CURRENT STATE. What's left is the residual
+  registry below: small, specific, don't-guess items. None of these are "P5 work sitting in a
+  queue" anymore; each needs either new source material that may never arrive, or an owner/
+  judgment call. Don't re-open P5 to chase these — they're tracked here precisely because they
+  fall outside what a truncation-fix pass can responsibly touch.
+- **Residual data-quality flags (post-P5):**
+  - `desc` fields that stayed truncated even with their chapter's real PDF in hand — not enough
+    specific detail in the source text to complete safely: id=94, 152, 160, 957 (ch1/ch2); 410,
+    966, 1063, 1143 (ch3); 93, 1190 (ch5); 1325 (ch6, likely a source mistag — topic isn't
+    touched anywhere in text6l.pdf); 530, 624 (ch7, see commit `60dcf1a`'s body for why each
+    specifically can't be guessed).
+  - id=468 (source mistag, piping content tagged jac-ch2).
+  - Scope-mismatch pattern — `jp`/`id_text` promises N combined terms, `desc` only ever covers
+    the first, but the sentence present is complete and correctly punctuated so it's not a
+    truncation defect: id=585 (original instance, "6 istilah" vs. 3 drafted), 517, 530, 533
+    (found session 28, same shape).
+  - `id_text` fields that dangle on a conjunction/preposition — different shape than P3's
+    already-done "ends in /" pattern, needs its own pass rather than folding into any single
+    chapter's desc work: 131, 223, 242, 245, 411, 591, 1373, 1378 (ch4/ch5), 524 (ch7, found
+    session 28).
 - **New (P16, session 23):** what was wglv03 id=23 (now inside one of the wglv-id-* files —
   original numbering doesn't carry over, search by content: q starts "Apa bahasa Jepangnya
   'Membersihkan permukaan fusi'") has malformed `opts`: one entry looks like two merged options
@@ -353,11 +393,12 @@ one" list — check the gate before starting.
 ### 🟢 Unblocked, no owner decision needed, just not done yet
 *(none right now.)*
 
-### ⏸ Blocked on external material — PDF intake tracker
-7 source PDFs total: 4 teori (common, ch1–4) + 3 praktik (lifeline jitsugi, ch5–7). Owner is
-providing them incrementally, not as one batch — token cost was an explicit concern on their
-end (session 25). Don't expect all 7 at once; don't treat "only some are here" as blocked, work
-whatever the available chapters unlock (see P5 in 🟡 above for the main thing this feeds).
+### ✅ Resolved (session 28) — PDF intake tracker, kept for the record
+All 7 source PDFs arrived and were processed (owner sent them incrementally across sessions
+25-28, not as one batch — token cost was an explicit concern on their end, session 25). Nothing
+is waiting on external material anymore for P5 specifically. Table kept here as a record of what
+each chapter covers, in case a future task needs to know which PDF a given `source: "jac-chN"`
+card traces back to.
 
 | # | Chapter | JAC content covers | Status | Filename |
 |---|---------|---------------------|--------|----------|
@@ -367,36 +408,27 @@ whatever the available chapters unlock (see P5 in 🟡 above for the main thing 
 | 4 | teori ch4 | 現場で使われるあいさつ・用語・共同生活上の注意 (site terminology, shared-living notes) | ✅ received session 26 | `text4.pdf` |
 | 5 | praktik ch5 | Lifeline jitsugi (216 cards — largest single chapter) | ✅ received session 26 | `text5l.pdf` |
 | 6 | praktik ch6 | Lifeline jitsugi (133 cards — highest truncation rate of any chapter, 51%) | ✅ received session 27 | `text6l.pdf` |
-| 7 | praktik ch7 | Lifeline jitsugi (47 cards) | ⏸ not yet | — |
+| 7 | praktik ch7 | 建設工事の安全 — death-accident stats, 7 accident-type defs, safety cycle, PPE, heatstroke, 12 ヒューマンエラー types (47 cards) | ✅ received session 28 | `text7l.pdf` |
 
-6 of 7 source PDFs are now in. Only ch7 (47 cards, praktik) remains outstanding — this is the
-last chapter needed to close out P5 entirely.
+**Reusable methodology, if a future task needs to cross-reference corpus text against a source
+PDF again** (not just P5 — this generalizes): filter by the relevant `source` value, grep the
+whole `src/data/cards/` tree per id rather than assuming one obvious file (every chapter from
+ch3 onward spanned 4-8 split files, never just 1), complete only what's directly supported by the
+actual passage, leave the rest flagged rather than guessed. Before writing anything, dry-run every
+`oldValue + suffix` concatenation through a 4-layer checker built from the start: (1) exact
+adjacent-word repeat at the seam, (2) repeated 2-3 word n-grams across the seam, (3) repeated raw
+substrings ≥6 chars for glued-token collisions with no space, (4) open-paren count equals
+close-paren count (catches cards that only needed a period, not more content — session 27's
+id=979 was exactly this). Sessions 26/27 each discovered these layers one at a time after the
+previous one let something through; session 28 built all four upfront (script: `check_concat.mjs`,
+scratch tooling, not committed — same as prior sessions' `p5_fixes_chN.mjs` scripts).
 
-Next agent, regardless of what this table says: check `/mnt/user-data/uploads` yourself at the
-start of your session — the table can go stale, the upload check can't lie. When ch7 lands, the
-pattern from sessions 25-27 (commits `61c180a`, `dca925e`, `b00bdf2`, `5447c94`) is reusable:
-filter `cards.js` by `source === "jac-ch7"`, check each candidate's actual `desc` against the
-specific PDF passage it should match, complete only what's directly supported, leave the rest
-flagged rather than guessed. Before writing anything, dry-run the concatenation (`oldDesc +
-suffix`) and run it through a real checker, not just a read-through — by session 27 this had grown
-into three layers (adjacent-word, then n-gram phrase, then raw-substring-for-glued-tokens) plus a
-paren-balance check, each added after the previous one let something through. Build the full
-checker from the start for ch7 rather than re-discovering each layer again; see `p5_fixes_ch6.mjs`
-committed to `5447c94`'s tree state (in git history, not present in the working tree) for what the
-final version looked like, or just reconstruct: (1) exact adjacent-word repeat, (2) repeated 2-3
-word n-grams, (3) repeated raw substrings ≥6 chars to catch same-word collisions across a glued
-Japanese/Indonesian boundary with no space, (4) open-paren count equals close-paren count — the
-last one exists because id=979 in ch6 turned out not to be truncated at all (just missing a
-period after an already-closed paren); treating every flagged card as "needs more content" without
-checking this first will occasionally produce broken parens on cards that only needed a period.
-
-**The EF接合 furi issue (previously flagged here) is resolved** — see session 27's CURRENT STATE
-entry and commit `5447c94` for the fix and its full evidence trail. If a similarly-flagged
-"furi looks wrong, needs convention clarity" item comes up again: search the corpus for
-comparable jp-shapes first (romaji-abbrev+ruby+parenthetical-gloss; pure-katakana parenthetical;
-mixed katakana+kanji parenthetical) before concluding it's unfixable without new material — the
-existing corpus often already encodes the convention, it just takes a few `grep`-equivalent
-passes to surface it.
+**The EF接合 furi issue (session 27) and the furi/jp ruby-corruption pattern (session 28,
+7 cards) are both resolved** — see commits `5447c94` and `60dcf1a` for the fixes and full
+evidence trails. If a similarly-flagged "furi/jp looks wrong" item comes up again: search the
+corpus for comparable jp-shapes or check the same card's own usage-field ruby before concluding
+it's unfixable without new material — the existing corpus often already encodes the correct
+reading, it just takes a few `grep`-equivalent passes to surface it.
 
 **Don't assume `source: "jac-chN"` cards all live in `common/chN.js`.** The ch3 batch spanned 8
 files: mostly `common/ch3.js`, but also `common/vocab-supplementary.js` and — less expected —
