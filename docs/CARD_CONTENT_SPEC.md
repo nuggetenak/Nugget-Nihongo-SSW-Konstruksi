@@ -927,7 +927,12 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
       di wglv **tidak bisa dipakai di sini** — soal-soal ini berupa pernyataan/konsep, bukan istilah,
       jadi distractor-nya harus ditulis, bukan disampel
 - [ ] Fix 1 opsi kosong tersisa = kartu ex-wglv03 id=23 yang sudah lama di-flag di HANDOFF
-- [x] Jumlah soal: **selesai, tidak ada yang perlu diubah.** Outlier cuma `wt01`=19 (sengaja, ada
+- [x] **Jumlah soal SUDAH RATA (session 28, commit `dbf3da6`)** — +23 soal baru, tidak ada yang
+      dihapus. `wt01` 19→20, `wglv-id-01/02/03` + `wglv-jp-03` 39→40, `wtv01` 22→20 + set baru
+      `wtv02` (20). Total korpus 957→980. Semua soal baru dicek duplikat dulu terhadap 957 soal
+      lama — **3 duplikat asli tertangkap dan diganti**. Checker-nya bias template (soal `wglv-id`
+      semua sepola), jadi flag-nya wajib diverifikasi manual
+- [x] Catatan lama: **`jml`=20 vs `jmt`=30 BENAR apa adanya.** Outlier cuma `wt01`=19 (sengaja, ada
       komentar di file) dan `wtv01`=22 (file tunggal). `jml`=20 vs `jmt`=30 **BENAR apa adanya** —
       owner konfirmasi 2026-08-17: mockup meniru struktur simulasi ujian Prometric, dan set JAC asli
       65:30 karena sumbernya memang persis begitu. Jangan disamakan

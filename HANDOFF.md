@@ -482,19 +482,52 @@ These are conceptual/statement questions, so the pooled-sampling trick used for 
 transfer** — their options are claims, not terms, and sampling would produce obvious throwaways.
 They need authored distractors. `wgl` first: it's the one that also has the 60% bias.
 
-**Question counts (the "merata" half) — settled, mostly nothing to do:**
+**✅ Step 2 done (session 28): count equalization. Every set is now even within its family.**
++23 questions, nothing deleted. `wt01` 19→20 (fills the deliberate id-5 gap, ids now contiguous),
+`wglv-id-01/02/03` and `wglv-jp-03` 39→40 each, and `wtv01` 22→20 with a **new `wtv02` (20)** —
+its title always said "Set 1", so Set 2 was the original intent; the 2 displaced questions were
+*moved* into wtv02 and given a 4th option, not trimmed. Corpus 957→980 questions. wglv sets
+re-rebalanced to exactly 10/10/10/10 each. Corpus-wide `ans:0` now 292/980 = 30% (was 45%).
+Commit `dbf3da6`.
+
+⚠️ **Every new question was bigram-checked against all 957 existing ones before writing, and it
+caught 3 real duplicates** — a wt01 5S「清潔」draft that duplicated wt01's own q14, a CCUS question
+that duplicated wt05 q11, and a マンホール question overlapping wt02 q2. All three replaced. **Do
+this check for any future authored questions**; the corpus already has 288 known cross-set
+duplicates and it's very easy to add more by accident. Note the checker is template-biased: all
+`wglv-id` questions share "Apa bahasa Jepangnya X?" so they score ~0.8 against each other even
+when the terms are unrelated — verify flagged pairs by hand rather than trusting the score.
+
+### 🔧 Merge-time: monolith ↔ split-file set-id drift (found session 28)
+`src/data/wayground-sets.js` and the split files under `src/data/sets/wayground/` **disagree on
+21 of 27 set ids.** Pre-existing, not introduced by P22. Nothing was renamed — set ids are
+plausibly what saved progress is keyed on in `main`, so renaming has user-data consequences and is
+a merge-time decision, not a data-cleanup one. Content *was* synced into the monolith under its
+existing ids.
+
+| split file | monolith | note |
+|---|---|---|
+| `wt01`–`wt10` | `wt1`–`wt10` | zero-padding only |
+| `wgl01`–`wgl10` | `wg1`–`wg5`, `wp1`–`wp5` | split into two prefixes, order not verified 1:1 |
+| `wtv01` | `wg12` | monolith ALSO has `track: "lifeline"`; split file's `"common"` is correct (teori set) |
+| `wglv-jp-*`, `wglv-id-*` | same | ✅ only family that matches |
+| — | `wtv02` | new set added session 28, uses the split-file name |
+
+At merge: pick one naming scheme, map old→new, and decide whether to migrate or reset saved
+progress for the renamed sets. The `wg12` track fix should ride along.
+
+**Question counts (the "merata" half) — ✅ DONE, nothing left:**
 `jml01–06` all 20 · `jmt01–06` all 30 · `wgl01–10` all 20 · `wt01`=**19**, `wt02–10` all 20 ·
 `wglv-id-01/02/03`=39/39/39, `wglv-jp-01/02/03`=40/40/39 · `wtv01`=**22** (lone file, no siblings).
-Only 2 things are genuinely uneven, and neither is clearly a defect: `wt01` is 1 short (a Q5 was
-deliberately removed as a near-duplicate — there's a comment in the file saying so), and `wtv01` is
-a singleton at 22 with no siblings to be even *with*. **`jml`=20 vs `jmt`=30 is CORRECT — do not
+Both former outliers are resolved (see Step 2 above). **`jml`=20 vs `jmt`=30 is CORRECT — do not
 "fix" it.** Owner confirmed 2026-08-17: the mockup sets deliberately mirror the Prometric exam
 simulation structure, and the real JAC sets are 65:30 because that's exactly what the source is.
 Any future agent tempted to equalize these two families should stop.
 
-Remaining order: (1) `wgl01–10` — 4th option + rebalance in one pass, worst remaining bias at 60%;
-(2) `wt01–10` + `wtv01` — 4th option only, their bias is already fine; (3) cross-set duplicate
-triage (288); (4) thin-`exp` expansion (157). `jac-mockup` needs none of this.
+Remaining order: (1) `wgl01–10` — 4th option + rebalance in one pass, worst remaining bias at 60%
+(`wgl05` still 20/20); (2) `wt01–10` + `wtv01` — 4th option only, their bias is already fine;
+(3) cross-set duplicate triage (288); (4) thin-`exp` expansion (157). `jac-mockup` and `wtv02` need
+none of this. 419 questions still at 3 options.
 
 ### ✅ Resolved (session 28) — PDF intake tracker, kept for the record
 All 7 source PDFs arrived and were processed (owner sent them incrementally across sessions
