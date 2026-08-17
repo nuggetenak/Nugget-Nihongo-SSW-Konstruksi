@@ -348,6 +348,23 @@ update itself.
     auto-verify against `verify-content.mjs`.
   - verify-content.mjs + audit-track-consistency.mjs both clean after (1438 unchanged, 0/1438
     track disagreements). Commit `60dcf1a`.
+  - **P22 done (new task, owner-requested, not pre-existing) — quiz quality uplift across all
+    non-JAC quiz sets.** Full writeup in ACTIVE TASKS; compact version here. Corpus 957→980
+    questions (957 was 5 files' worth pre-P22; +23 authored for count-equalization, 0 deleted).
+    Every question now 4-option (was 657×3-opt/300×4-opt) and rebalanced: `wglv-*` (236q) via
+    pooled-sampling from the corpus's own answer terms, `wgl01-10`+`wt01-10`+`wtv01` (419q, the
+    bulk of the work) hand-authored one distractor per question after an automated approach was
+    tried and reverted for producing category-mismatched junk. `wayground-sets.js` monolith
+    regenerated wholesale twice (once fixing a pre-existing 21/27 set-id/track drift vs. the split
+    files, once after the 419 distractors landed) rather than hand-patched either time. Two census
+    items resolved by investigation rather than by editing: 288 "duplicate questions" turned out
+    to be a deliberate cumulative-review/mock-exam-compilation architecture (jml/jmt compile from
+    wgl/wt; wt06 compiles from wt01-05+wt08) and weren't touched; 157 thin `exp` fields turned out
+    to be 148 already-adequate and 9 a genuinely different bug (wglv-jp-02 ids 16-24 lost their
+    Japanese headword entirely, predates this session) — flagged in the 🟡 bucket, not fixed.
+    verify-content.mjs + audit-track-consistency.mjs clean throughout (this task never touches
+    `src/data/cards*`, only `src/data/sets/` + the wayground monolith). Commits `4957188` →
+    `d4f3c86` (see git log for the full sequence; ~13 commits, content and docs interleaved).
 - No lint/build/test on this branch (`package.json`/`scripts/` other than the verify script are
   `main`-only) — `scripts/verify-content.mjs` is the only safety net right now.
 
@@ -635,7 +652,7 @@ tracker, noted here only because this section used to carry that note.)*
 | OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? | ✅ Answered 2026-07-11: now |
 | OD-3 | P17 | jac-mockup rename: now or at merge time? | ✅ Answered 2026-07-11: now — P17 done |
 | OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | ✅ Resolved via execution 2026-07-15 — P10 done (both halves), see CURRENT STATE. "Update" was the reasoned answer, not a coin flip; what had stopped session 23 was the composition method, not this decision. |
-| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components**, which is what actually gates P12. Answer: **NOT safe to drop as currently specified.** See the P12 row in ACTIVE TASKS for the specific blockers. |
+| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components** — that finding still stands. **What it means for P12 has since changed**, though: a *separate* owner decision the same session ("branch content-dq emang cuma buat maintain and fix all the quality... I intended to do so even if it breaks main") made breaking `main` acceptable regardless of this finding, so the 6 consumers are now a merge-time reconciliation checklist, not a blocker. P12 itself is unblocked but still unstarted — see ACTIVE TASKS' 📋 list for the consumer checklist and the P12 row for status. |
 
 Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
 
