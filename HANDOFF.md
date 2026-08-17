@@ -358,10 +358,34 @@ update itself.
 Everything below is either gated or genuinely unstarted. Nothing here is a "just pick the first
 one" list — check the gate before starting.
 
+### 🔴 Blocked on real work, not on timing — read before touching P12
+**P12 (drop `furi` from all split files) would break `main` as currently specified.** OD-5 asked
+whether a *separate* flashcards repo consumes `card.furi`; the answer (session 28) is that the
+separate repos don't, but `main` of *this* repo does, extensively. P12 was never really gated on
+merge timing — it's gated on UI work nobody has scoped yet. Verified by reading `main`'s own
+source, not inferred:
+
+| Consumer on `main` | What breaks if `furi` is dropped |
+|---|---|
+| `src/tests/data.test.js:34` | Test literally named *"every card has furi field (Phase 1)"*, asserts `CARDS.filter(c => c.furi == null)` is empty. Dropping furi fails CI immediately. |
+| `src/modes/GlossaryMode.jsx:48,54` | Sorts the whole glossary by `furi` **and** groups entries by `furi[0]` for the A-Z jump nav. Without furi every card falls into a single `'?'` bucket — the mode's primary navigation stops working. |
+| `src/modes/ProductionMode.jsx:34` | `if (card.furi && trimmed === card.furi) return true` — the kana reading is an **accepted correct answer**. Dropping furi silently starts marking correct answers wrong. |
+| `src/modes/FlashcardMode/FlipCard.jsx:90,137` | Renders `furi` on the card back and passes it to `JpDisplay`. |
+| `src/modes/SearchMode.jsx:38,70,177` | Search haystack, result label, and the reading line under each hit. |
+| `src/modes/QuizMode.jsx:68` | `q.card.furi` feeds the quiz prompt's reading. |
+| `src/modes/ConfusionMode.jsx`, `src/components/Onboarding.jsx` | Also reference furi (not audited line-by-line — the six above are already disqualifying). |
+
+Before P12 can be a task at all, someone has to decide what replaces furi in each of those six
+places. The likely answer is the `《》` ruby already inside `jp` (that's what P1 was *for* — see
+CARD_CONTENT_SPEC's "prerequisite furi drop" framing), which would mean each consumer needs a
+`stripFuri`/`extractReading` helper rather than a field read. `SearchMode.jsx` already imports a
+`stripFuri`, so the helper may partly exist. **That's a design task on `main`'s UI, not a data
+task on this branch** — which is why nothing here can move it forward, and why "do it at merge
+time" was always going to hit this wall. Not started, deliberately: re-scoping someone else's UI
+without being asked is a bigger call than a data-cleanup agent should make alone.
+
 ### 🔵 Gated on an owner decision — ask before starting
-| Task | Depends on | What |
-|---|---|---|
-| P12 | merge time, not now | Drop `furi` from all split files |
+*(none right now — OD-5 resolved by investigation, see OPEN DECISIONS.)*
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
 - **P5 is done (session 28)** — full accounting in CURRENT STATE. What's left is the residual
@@ -454,7 +478,7 @@ tracker, noted here only because this section used to carry that note.)*
 | OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? | ✅ Answered 2026-07-11: now |
 | OD-3 | P17 | jac-mockup rename: now or at merge time? | ✅ Answered 2026-07-11: now — P17 done |
 | OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | ✅ Resolved via execution 2026-07-15 — P10 done (both halves), see CURRENT STATE. "Update" was the reasoned answer, not a coin flip; what had stopped session 23 was the composition method, not this decision. |
-| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | Open — doesn't block anything until merge time (P12), not urgent |
+| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components**, which is what actually gates P12. Answer: **NOT safe to drop as currently specified.** See the P12 row in ACTIVE TASKS for the specific blockers. |
 
 Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
 

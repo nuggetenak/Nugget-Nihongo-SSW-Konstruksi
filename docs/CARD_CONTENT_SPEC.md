@@ -863,10 +863,36 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 ### P11 — wglv exp generic (setelah P16)
 - [ ] wglv-id series (ex-wglv04/05): ganti `"JP = bahasa Jepangnya."` → specific translation
 
-### P12 — Furi drop (AT MERGE TIME, setelah P1)
-- [ ] Update `viewer.html`: `c.furi||''` → `extractReading(c.jp)`
-- [ ] Confirm SSW Flashcards repo tidak pakai `card.furi` (OD-5)
-- [ ] Drop furi dari semua split files → re-run merge
+### P12 — Furi drop (BLOCKED — bukan sekadar "at merge time", setelah P1)
+> **Session 28 (2026-08-17): OD-5 terjawab lewat investigasi, dan jawabannya mengubah scope P12.**
+> Pertanyaan OD-5 ("apakah repo SSW Flashcards terpisah pakai `card.furi`?") ternyata menyasar
+> codebase yang salah. Dua repo snapshot (`...-v87`, `SSW-KONSTRUKSI-v85`) **tidak** membaca
+> `card.furi` — satu-satunya `.furi` di sana adalah `item.furi` dari struktur `DANGER_PAIRS` yang
+> terpisah. Tapi **`main` repo ini sendiri membaca `card.furi` di minimal 6 komponen mode**, dan
+> itulah yang sebenarnya menggate P12. Checklist di bawah diganti: item `viewer.html` yang lama
+> sudah tidak mencerminkan arsitektur `main` sekarang (mode-mode JSX, bukan satu viewer).
+> **Blocker konkret (diverifikasi dengan membaca source `main`, bukan asumsi):**
+> - `src/tests/data.test.js:34` — test bernama *"every card has furi field (Phase 1)"*, assert
+>   `CARDS.filter(c => c.furi == null)` kosong. Drop furi → CI langsung merah.
+> - `src/modes/GlossaryMode.jsx:48,54` — sort seluruh glossary by `furi` DAN group by `furi[0]`
+>   untuk nav A-Z. Tanpa furi semua kartu jatuh ke bucket `'?'` — navigasi utama mode itu mati.
+> - `src/modes/ProductionMode.jsx:34` — `card.furi` adalah **jawaban yang diterima** di quiz
+>   produksi. Drop furi → jawaban benar mulai dinilai salah tanpa error apa pun.
+> - `src/modes/FlashcardMode/FlipCard.jsx:90,137`, `src/modes/SearchMode.jsx:38,70,177`,
+>   `src/modes/QuizMode.jsx:68` — render/serch/prompt. (`ConfusionMode.jsx` + `Onboarding.jsx`
+>   juga menyebut furi, belum diaudit baris-per-baris; enam di atas sudah cukup mendiskualifikasi.)
+>
+> Arah penggantian yang paling mungkin tetap `extractReading(c.jp)` dari ruby `《》` (itu memang
+> tujuan P1 — lihat framing "prerequisite furi drop"), tapi artinya tiap consumer butuh helper,
+> bukan sekadar hapus field. `SearchMode.jsx` sudah meng-import `stripFuri`, jadi helper-nya
+> mungkin sebagian sudah ada. **Ini pekerjaan desain UI di `main`, bukan pekerjaan data di
+> content-dq** — tidak ada yang bisa dikerjakan dari branch ini untuk memajukannya.
+- [ ] **PRASYARAT BARU:** putuskan pengganti furi di 6 consumer `main` di atas (kemungkinan
+      `extractReading(c.jp)`) — ini keputusan desain, belum diambil siapa pun
+- [ ] Update tiap consumer + `src/tests/data.test.js` (test-nya sendiri harus ikut berubah)
+- [x] ~~Confirm SSW Flashcards repo tidak pakai `card.furi` (OD-5)~~ — selesai session 28: repo
+      terpisah tidak pakai, tapi `main` pakai. Lihat blocker di atas.
+- [ ] Drop furi dari semua split files → re-run merge (HANYA setelah dua item pertama beres)
 
 ### P13 — Post-source-reclassify (setelah P6)
 - [ ] Re-run merge script → verify cards.js bersih dari deprecated sources
@@ -1054,7 +1080,7 @@ Butuh konfirmasi owner sebelum task terkait dikerjakan.
 | OD-2 | wglv split (P16): kerjakan sekarang di content-dq, atau tunda saat merge? | A: Sekarang / B: Tunda | P8b, P10, P11 | ✅ A, answered 2026-07-11 |
 | OD-3 | jac-mockup rename (P17): kerjakan sekarang? | A: Sekarang / B: Tunda saat merge | P8a item 2 | ✅ A, answered 2026-07-11 |
 | OD-4 | wglv02/03 hint di JP→ID: ubah ke ID clue seperti wglv04/05, atau biarkan? | A: Update / B: Keep as-is | P10 | ✅ A, resolved via execution 2026-07-15 |
-| OD-5 | SSW Flashcards app (repo terpisah): apakah pakai `card.furi` field? | Confirm / Deny | P12 | Open — not urgent, doesn't block until merge time |
+| OD-5 | SSW Flashcards app (repo terpisah): apakah pakai `card.furi` field? | Confirm / Deny | P12 | ✅ **Terjawab session 28 (2026-08-17) lewat investigasi, bukan lewat owner.** Repo terpisah: TIDAK pakai. Tapi `main` repo ini sendiri: PAKAI, di ≥6 komponen mode — dan itu yang sebenarnya menggate P12. Lihat §8 P12 untuk daftar blocker konkret. |
 
 ---
 
