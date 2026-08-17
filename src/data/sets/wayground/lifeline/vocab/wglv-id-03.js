@@ -1,7 +1,6 @@
-// wglv-id-03.js — Wayground Set: wglv-id-03 (P8b ruby + P11 exp pass, session 23)
-// Part of content-dq branch. Merge into wayground-sets.js on main.
+// wglv-id-03.js — Wayground Set: wglv-id-03 (P22: 4-opt + rebalance + count equalization, session 28)
 export const SET_WGLV_ID_03 = {
-    id: "wglv-id-03", title: "Vocab ID→JP 03 · 39qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",
+    id: "wglv-id-03", title: "Vocab ID→JP 03 · 40qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",
     track: "lifeline",
     questions: [
     { id: 1, q: "Apa bahasa Jepangnya \"Metode sambungan las\"?", hint: "Metode sambungan las", opts: ["溶接接合法《ようせつせつごうほう》","ガス溶接接合法《ガスようせつせつごうほう》","被覆《ひふく》アーク溶接接合法《ひふくアークようせつごうほう》","温水管《おんすいかん》"], opts_id: ["Metode sambungan las","Metode sambungan las gas","Metode sambungan las busur berselubung","Pipa air panas"], ans: 0, exp: "溶接接合法《ようせつせつごうほう》 = Metode sambungan las." },
@@ -43,5 +42,6 @@ export const SET_WGLV_ID_03 = {
     { id: 37, q: "Apa bahasa Jepangnya \"Kunci pipa\"?", hint: "Kunci pipa", opts: ["パイプレンチ","モーターレンチ","プライヤー","曲《ま》げ加工《まげかこう》"], opts_id: ["Kunci pipa","Kunci pas bermotor","Tang","Pengolahan tekukan"], ans: 0, exp: "パイプレンチ = Kunci pipa." },
     { id: 38, q: "Apa bahasa Jepangnya \"Peredam getaran AC\"?", hint: "Peredam getaran AC", opts: ["吸音材《きゅうおんざい》","防振《ぼうしん》ゴム《ぼうしんゴム》","絶縁材《ぜつえんざい》","フレア接合《フレアせつごう》"], opts_id: ["Bahan peredam suara","Peredam getaran AC","Bahan isolasi","Sambungan flare"], ans: 1, exp: "防振《ぼうしん》ゴム《ぼうしんゴム》 = Peredam getaran AC." },
     { id: 39, q: "Apa bahasa Jepangnya \"Kipas ventilasi\"?", hint: "Kipas ventilasi", opts: ["扇風機《せんぷうき》","送風機《そうふうき》","換気扇《かんきせん》","天井内《てんじょうない》"], opts_id: ["Kipas angin","Blower / kipas peniup udara","Kipas ventilasi","Bagian dalam plafon"], ans: 2, exp: "換気扇《かんきせん》 = Kipas ventilasi." },
+    { id: 40, q: "Apa bahasa Jepangnya \"kotak tarik kabel\"?", hint: "Dipasang di tengah jalur konduit yang panjang atau banyak belokan, supaya kabel bisa ditarik bertahap", opts: ["ジョイントボックス","ケーブルラック","分電盤《ぶんでんばん》","プルボックス"], opts_id: ["Kotak sambungan","Rak kabel","Panel distribusi listrik","Pull box (kotak tarik kabel)"], ans: 3, exp: "プルボックス = kotak yang disisipkan di jalur konduit panjang/banyak belokan sebagai titik bantu menarik kabel. Tanpa itu, gesekan membuat kabel rusak atau tidak bisa ditarik sampai ujung." },
     ]
 };

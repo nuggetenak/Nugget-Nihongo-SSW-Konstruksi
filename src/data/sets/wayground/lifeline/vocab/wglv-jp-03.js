@@ -1,7 +1,6 @@
-// wglv-jp-03.js — Wayground Set: wglv-jp-03 (P8b ruby pass, session 23)
-// Part of content-dq branch. Merge into wayground-sets.js on main.
+// wglv-jp-03.js — Wayground Set: wglv-jp-03 (P22: 4-opt + rebalance + count equalization, session 28)
 export const SET_WGLV_JP_03 = {
-    id: "wglv-jp-03", title: "Vocab JP→ID 03 · 39qs", subtitle: "Kosakata lifeline: soal Jepang, pilihan Indonesia (gabungan wglv01-05, P16 split)", emoji: "🎌", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)", source: "wayground-lifeline-vocab",
+    id: "wglv-jp-03", title: "Vocab JP→ID 03 · 40qs", subtitle: "Kosakata lifeline: soal Jepang, pilihan Indonesia (gabungan wglv01-05, P16 split)", emoji: "🎌", color: "#38bdf8", grad: "linear-gradient(135deg,#0c4a6e,#0284c7)", source: "wayground-lifeline-vocab",
     track: "lifeline",
     questions: [
     { id: 1, q: "電気通信工事《でんきつうしんこうじ》の意味《いみ》は何《なん》ですか？", hint: "電気通信《でんきつうしん》=telekomunikasi (電気=listrik, 通信=komunikasi), 工事《こうじ》=pekerjaan", opts: ["Pekerjaan telekomunikasi","Pekerjaan listrik","Pekerjaan pendingin","Pemanas air"], opts_id: ["Pekerjaan telekomunikasi","Pekerjaan listrik","Pekerjaan pendingin","Pemanas air (water heater)"], ans: 0, exp: "Pekerjaan telekomunikasi = artinya." },
@@ -43,5 +42,6 @@ export const SET_WGLV_JP_03 = {
     { id: 37, q: "吸気ファン《きゅうきファン》の意味《いみ》は？", hint: "吸気ファン《きゅうきファン》の意味は？", opts: ["Kipas isap (intake fan)","Kipas buang","Exhaust fan","Pengabelan"], opts_id: ["Kipas isap (intake fan)","Kipas buang","Exhaust fan","Pengabelan"], ans: 0, exp: "Kipas isap (intake fan) = artinya." },
     { id: 38, q: "ワイヤーストリッパーの意味《いみ》は？", hint: "ワイヤーストリッパーの意味は？", opts: ["Tang potong","Pengupas kabel","Obeng","Pelaksanaan konstruksi"], opts_id: ["Tang potong","Pengupas kabel","Obeng","Pelaksanaan konstruksi"], ans: 1, exp: "Pengupas kabel = artinya." },
     { id: 39, q: "水平器《すいへいき》の意味《いみ》は？", hint: "水平器《すいへいき》の意味は？", opts: ["Leveling laser","Pengukur jarak","Waterpass/nivo","Peralatan kerja"], opts_id: ["Leveling laser","Pengukur jarak","Waterpass/nivo","Peralatan kerja"], ans: 2, exp: "Waterpass/nivo = artinya." },
+    { id: 40, q: "接地棒《せっちぼう》の役割《やくわり》は何《なん》ですか？", hint: "接地=pentanahan, 棒=batang — ditanam ke tanah, bukan dipasang di panel", opts: ["Batang pemanas anti-beku pipa","Batang penopang pipa di dinding","Batang pengukur kedalaman galian","Batang yang ditanam ke tanah sebagai jalur pembumian"], opts_id: ["Kawat pemanas pipa","Braket penopang pipa","Alat ukur kedalaman","Batang pentanahan (earth rod)"], ans: 3, exp: "接地棒《せっちぼう》 = batang tembaga/baja yang ditancapkan ke tanah sebagai jalur pembumian (アース). Tujuannya 感電防止: arus bocor dialirkan ke tanah, bukan lewat tubuh manusia." },
     ]
 };

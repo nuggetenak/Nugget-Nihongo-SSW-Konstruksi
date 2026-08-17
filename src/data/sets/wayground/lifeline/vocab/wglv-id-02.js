@@ -1,7 +1,6 @@
-// wglv-id-02.js — Wayground Set: wglv-id-02 (P8b ruby + P11 exp pass, session 23)
-// Part of content-dq branch. Merge into wayground-sets.js on main.
+// wglv-id-02.js — Wayground Set: wglv-id-02 (P22: 4-opt + rebalance + count equalization, session 28)
 export const SET_WGLV_ID_02 = {
-    id: "wglv-id-02", title: "Vocab ID→JP 02 · 39qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",
+    id: "wglv-id-02", title: "Vocab ID→JP 02 · 40qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",
     track: "lifeline",
     questions: [
     { id: 1, q: "Apa bahasa Jepang untuk \"Pemipaan tekukan\"?", hint: "曲げ配管《まげはいかん》", opts: ["曲《ま》げ配管《まげはいかん》","配管《まげはいかん》の保温保冷《はいかんのほおんほれい》","地中配管《ちちゅうはいかん》","温水管《おんすいかん》"], opts_id: ["Pemipaan tekukan","Insulasi termal pipa","Pemipaan bawah tanah","Pipa air panas"], ans: 0, exp: "曲げ配管 = Pemipaan tekukan" },
@@ -43,5 +42,6 @@ export const SET_WGLV_ID_02 = {
     { id: 37, q: "Apa bahasa Jepangnya \"Gudang\"?", hint: "Gudang", opts: ["倉庫《そうこ》","車庫《しゃこ》","機械室《きかいしつ》","水道用硬質塩化ビニルライニング鋼管《す いどうようこうしつえんかビニルライニングこうかん》"], opts_id: ["Gudang","Garasi","Ruang mesin","Pipa baja berlapis vinil klorida keras untuk suplai air"], ans: 0, exp: "倉庫《そうこ》 = Gudang." },
     { id: 38, q: "Apa bahasa Jepangnya \"Pipa polietilen untuk distribusi air\"?", hint: "Pipa polietilen untuk distribusi air", opts: ["光《ひかり》ケーブル《ひかりケーブル》","水道配水用ポリエチレン管《すいどうはいすいようポリエチレンかん》","配管《はいかん》","曲《ま》げ配管《まげはいかん》"], opts_id: ["Kabel optik","Pipa polietilen untuk distribusi air","Pemipaan","Pemipaan tekukan"], ans: 1, exp: "水道配水用ポリエチレン管《すいどうはいすいようポリエチレンかん》 = Pipa polietilen untuk distribusi air." },
     { id: 39, q: "Apa bahasa Jepangnya \"Pengolahan pipa baja karbon untuk pemipaan\"?", hint: "Pengolahan pipa baja karbon untuk pemipaan", opts: ["管の切断《かんのせつだん》","銅管《どうかん》の切断《どうかんのせつだん》","配管用炭素鋼鋼管《はいかんようたんそこうこうかん》の加工《はいかんようたんそこうこうかんのかこう》","保温材《ほおんざい》の形状と種類《ほおんざいのけいじょうとしゅるい》"], opts_id: ["Pemotongan pipa","Pemotongan pipa tembaga","Pengolahan pipa baja karbon untuk pemipaan","Bentuk dan jenis bahan isolasi termal"], ans: 2, exp: "配管用炭素鋼鋼管《はいかんようたんそこうこうかん》の加工《はいかんようたんそこうこうかんのかこう》 = Pengolahan pipa baja karbon untuk pemipaan." },
+    { id: 40, q: "Apa bahasa Jepangnya \"rak kabel\"?", hint: "ケーブル=kabel, ラック=rak — penopang memanjang tempat kabel disusun rapi", opts: ["電線管《でんせんかん》","プルボックス","アウトレットボックス","ケーブルラック"], opts_id: ["Konduit pelindung kabel","Pull box (kotak tarik kabel)","Outlet box (kotak percabangan)","Rak kabel"], ans: 3, exp: "ケーブルラック = rak tempat kabel disusun dan ditopang sepanjang jalurnya, digantung dari slab dengan 吊りボルト. Berbeda dari 電線管 yang membungkus kabel, dan dari プルボックス yang hanya titik bantu penarikan." },
     ]
 };

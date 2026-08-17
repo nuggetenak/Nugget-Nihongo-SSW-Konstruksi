@@ -1,7 +1,6 @@
-// wglv-id-01.js — Wayground Set: wglv-id-01 (P8b ruby + P11 exp pass, session 23)
-// Part of content-dq branch. Merge into wayground-sets.js on main.
+// wglv-id-01.js — Wayground Set: wglv-id-01 (P22: 4-opt + rebalance + count equalization, session 28)
 export const SET_WGLV_ID_01 = {
-    id: "wglv-id-01", title: "Vocab ID→JP 01 · 39qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",
+    id: "wglv-id-01", title: "Vocab ID→JP 01 · 40qs", subtitle: "Kosakata lifeline: soal Indonesia, pilihan Jepang (gabungan wglv01-05, P16 split)", emoji: "🌏", color: "#fb7185", grad: "linear-gradient(135deg,#881337,#be123c)", source: "wayground-lifeline-vocab",
     track: "lifeline",
     questions: [
     { id: 1, q: "Apa arti dari \"pipa air panas\"?", hint: "温=panas/hangat, 水=air, 管=pipa — fokus pada suhu air", opts: ["温水管《おんすいかん》","給水《きゅうすい》管《きゅうすいかん》","排水《はいすい》管《はいすいかん》","安全弁《あんぜんべん》"], opts_id: ["Pipa air panas","Pipa suplai air","Pipa pembuangan","Katup pengaman (safety valve)"], ans: 0, exp: "温水管《おんすいかん》= pipa air panas." },
@@ -43,5 +42,6 @@ export const SET_WGLV_ID_01 = {
     { id: 37, q: "Apa bahasa Jepang untuk \"Pipa gas\"?", hint: "ガス管《ガスかん》", opts: ["ガス管《ガスかん》","排水管《はいすいかん》","電線管《でんせんかん》","バリ取《と》り《ばりとり》"], opts_id: ["Pipa gas","Pipa pembuangan","Pipa kabel listrik","Proses debur"], ans: 0, exp: "ガス管 = Pipa gas" },
     { id: 38, q: "Apa bahasa Jepang untuk \"Pipa listrik\"?", hint: "電線管《でんせんかん》", opts: ["水道管《すいどうかん》","電線管《でんせんかん》","光《ひかり》ケーブル《ひかりケーブル》","曲《ま》げ加工《まげかこう》"], opts_id: ["Pipa air","Pipa listrik","Kabel optik","Pengolahan tekukan"], ans: 1, exp: "電線管 = Pipa listrik" },
     { id: 39, q: "Apa bahasa Jepang untuk \"Pipa baja berlapis vinil klorida keras untuk suplai air\"?", hint: "水道用硬質塩化ビニルライニング鋼管《す いどうようこうしつえんかビニルライニングこうかん》", opts: ["バリ取《と》り《ばりとり》","銅管《どうかん》の切断《どうかんのせつだん》","水道用硬質塩化ビニルライニング鋼管《す いどうようこうしつえんかビニルライニングこうかん》","フレア接合《フレアせつごう》"], opts_id: ["Deburring (hilangkan burr)","Pemotongan pipa tembaga","Pipa baja berlapis vinil klorida keras untuk suplai air","Sambungan flare"], ans: 2, exp: "水道用硬質塩化ビニルライニング鋼管 = Pipa baja berlapis vinil klorida keras untuk suplai air" },
+    { id: 40, q: "Apa bahasa Jepangnya \"detektor tegangan\"?", hint: "検=periksa, 電=listrik, 器=alat — dipakai SEBELUM menyentuh kabel untuk memastikan listrik sudah mati", opts: ["絶縁抵抗計《ぜつえんていこうけい》","検相器《けんそうき》","クランプメーター","検電器《けんでんき》"], opts_id: ["Megger (ukur tahanan isolasi)","Detektor urutan fase","Clamp meter (ukur arus)","Detektor tegangan"], ans: 3, exp: "検電器《けんでんき》 = detektor tegangan. Dipakai untuk memastikan jalur benar-benar tidak bertegangan sebelum bekerja — langkah wajib pencegahan 感電. Beda dari 検相器 (urutan fase), クランプメーター (arus), dan 絶縁抵抗計 (tahanan isolasi)." },
     ]
 };
