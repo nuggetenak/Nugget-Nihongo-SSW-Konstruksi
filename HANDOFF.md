@@ -447,24 +447,54 @@ the real work:
 
 | Finding | Number | Note |
 |---|---|---|
-| Answer-index bias | `ans:0` on **432 / 957 = 45%** (spread: 0→432, 1→232, 2→230, 3→63) | **Worst issue.** Always-pick-the-first scores 45% without reading anything. Fix = shuffle answers + re-index, not rewrite content. Highest value per effort. |
+| Answer-index bias | `ans:0` on **432 / 957 = 45%** overall — but **not evenly spread**, see per-family table below | **Worst issue.** Always-pick-the-first scores 45% without reading anything. Fix = 4th option + reindex in one pass. |
 | Duplicate question text across sets | **288** (~30% of corpus) | Compared after stripping `《》`. e.g. wt02/wt03/wt06 overlap heavily; wglv-jp-01/02/03 overlap. Needs dedupe-or-differentiate decisions, some may be intentional reinforcement. |
 | Thin explanations | **157** `exp` shorter than 40 chars | `exp` coverage itself is 100% (0 missing) — P11 did its job. These are just short. |
-| Option-count inconsistency | 657 questions with 3 opts, 300 with 4 | Mixed difficulty across sets. Owner decision needed: standardize to 4, or keep per-set? |
+| Option-count inconsistency | 657 with 3 opts, 300 with 4 | ✅ **Owner answered 2026-08-17: target is 4.** 236 done (wglv), 421 remain. |
 | Empty option string | **1** | This is the already-known malformed `opts` on the ex-wglv03 id=23 card (see 🟡 bucket) — census independently confirms it's the only one. |
 
-**Question counts (the "merata" half) are already near-even** — don't over-plan this part:
+**Answer-bias is concentrated, not spread — this changes the work order.** Per family:
+
+| Family | questions | `ans:0` | verdict |
+|---|---|---|---|
+| `jac-mockup` (jml+jmt) | 300 | 70 = 23% | ✅ healthy, and already 4-opt — **nothing to do** |
+| `wt01–10` + `wtv01` | 221 | 35 = 16% | ✅ bias healthy; still needs the 4th option |
+| `wgl01–10` | 200 | 121 = **60%** | ❌ `wgl05` is 20/20 = **100%** |
+| `wglv-*` | 236 | 206 = **87%** | ❌ `wglv-jp-01` was 40/40 = **100%** — ✅ **DONE, see below** |
+
+100%-at-position-0 sets aren't "biased", they're source data that was never shuffled.
+
+**⚠️ ORDER MATTERS — do not rebalance before adding the 4th option.** Appending a 4th option after
+a rebalance parks every new distractor at index 3 and creates a fresh "position 3 is always wrong"
+tell, which is worse than the bias being fixed. Both must happen in one pass per set.
+
+**✅ Step 1 done (session 28): all 6 `wglv-*` sets, 236 questions.** 4th option added + round-robin
+rebalance, one pass. Distribution 206/236 at position 0 → **60/60/60/56**. The 4th options were
+*sampled, not invented* — each is a real term already serving as the correct answer to another
+question in the same direction pool, carried over with its existing verified `opts_id` gloss, with
+4 guards (not already an option / not the answer / word-overlap <0.5 with the answer's gloss so
+near-synonyms can't be added as "wrong" / not already named in that question's `hint`/`exp`).
+Deterministic, no `Math.random` — re-running reproduces the same file. Monolith `wayground-sets.js`
+re-spliced and cross-checked 236/236 identical. Commit `4957188`.
+
+**Next chunk — 421 questions still at 3 options:** `wgl01–10` (200), `wt01–10` (199), `wtv01` (22).
+These are conceptual/statement questions, so the pooled-sampling trick used for wglv **does not
+transfer** — their options are claims, not terms, and sampling would produce obvious throwaways.
+They need authored distractors. `wgl` first: it's the one that also has the 60% bias.
+
+**Question counts (the "merata" half) — settled, mostly nothing to do:**
 `jml01–06` all 20 · `jmt01–06` all 30 · `wgl01–10` all 20 · `wt01`=**19**, `wt02–10` all 20 ·
 `wglv-id-01/02/03`=39/39/39, `wglv-jp-01/02/03`=40/40/39 · `wtv01`=**22** (lone file, no siblings).
-So only 3 real outliers: `wt01` is 1 short (a Q5 was removed as a near-duplicate — there's a
-comment in the file saying so, so this is a *deliberate* 19, not drift); `wtv01` is a singleton at
-22; and `jml`=20 vs `jmt`=30 differ by family. Whether the jml/jmt split is intentional (mirroring
-real JAC teori-vs-praktik weighting) is an **open question for the owner** — real `jac-teori` is
-65q and `jac-lifeline` is 30q, so the mock ratio doesn't cleanly mirror either.
+Only 2 things are genuinely uneven, and neither is clearly a defect: `wt01` is 1 short (a Q5 was
+deliberately removed as a near-duplicate — there's a comment in the file saying so), and `wtv01` is
+a singleton at 22 with no siblings to be even *with*. **`jml`=20 vs `jmt`=30 is CORRECT — do not
+"fix" it.** Owner confirmed 2026-08-17: the mockup sets deliberately mirror the Prometric exam
+simulation structure, and the real JAC sets are 65:30 because that's exactly what the source is.
+Any future agent tempted to equalize these two families should stop.
 
-Suggested order if picking this up: (1) answer-index rebalance — mechanical, verifiable, biggest
-learner impact; (2) cross-set duplicate triage; (3) thin-`exp` expansion; (4) option-count
-standardization *after* the owner answers whether 3 or 4 is the target.
+Remaining order: (1) `wgl01–10` — 4th option + rebalance in one pass, worst remaining bias at 60%;
+(2) `wt01–10` + `wtv01` — 4th option only, their bias is already fine; (3) cross-set duplicate
+triage (288); (4) thin-`exp` expansion (157). `jac-mockup` needs none of this.
 
 ### ✅ Resolved (session 28) — PDF intake tracker, kept for the record
 All 7 source PDFs arrived and were processed (owner sent them incrementally across sessions

@@ -911,19 +911,26 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 > pass kualitas pedagogis. Scope: seluruh `sets/wayground/**` + `sets/jac-mockup/**` (957 soal).
 > `sets/jac/` (jac-teori 65q, jac-lifeline 30q) **di luar scope** — itu materi ujian JAC asli.
 > Angka lengkap + urutan pengerjaan yang disarankan ada di HANDOFF.md bagian 🟢; ringkas di sini:
-- [ ] **Rebalance `ans`** — `ans:0` muncul di 432/957 soal (45%). Asal pilih opsi pertama = 45%
-      benar tanpa baca. Ini isu terbesar, dan perbaikannya mekanis (acak posisi jawaban + reindex),
-      bukan tulis ulang konten
+- [x] **wglv-* (236 soal) SELESAI session 28** — opsi ke-4 ditambah + rebalance round-robin dalam
+      satu pass. `ans:0` 206/236 (87%) → 60/60/60/56. Opsi ke-4 **disampel dari term pool korpus,
+      bukan dikarang**, dengan 4 guard (termasuk penolakan near-synonym). Deterministik. Commit
+      `4957188`. ⚠️ Urutan wajib: tambah opsi ke-4 DAN rebalance dalam satu pass — kalau rebalance
+      duluan, distractor baru semua mendarat di indeks 3 dan bikin bias baru
+- [ ] **Rebalance `ans` sisanya** — `wgl01-10` masih 121/200 (60%), `wgl05` bahkan 20/20 (100%).
+      `jac-mockup` (23%) dan `wt*` (16%) sudah sehat, tidak perlu disentuh
 - [ ] **Triage 288 soal dengan teks pertanyaan duplikat** lintas set (~30% korpus; dibandingkan
       setelah `《》` di-strip). Sebagian mungkin pengulangan yang disengaja — perlu keputusan
       per-kasus, bukan hapus buta
 - [ ] **Perpanjang 157 `exp` yang <40 karakter** (coverage `exp` sendiri sudah 100%, sisa P11)
-- [ ] **Standardkan jumlah opsi** — sekarang 657 soal 3-opsi, 300 soal 4-opsi. ⚠️ Butuh keputusan
-      owner dulu: target 3 atau 4?
+- [ ] **Standardkan jumlah opsi ke 4** (owner sudah putuskan 2026-08-17: target **4**). Sisa 421
+      soal 3-opsi: `wgl01-10` (200), `wt01-10` (199), `wtv01` (22). ⚠️ Trik sampling yang dipakai
+      di wglv **tidak bisa dipakai di sini** — soal-soal ini berupa pernyataan/konsep, bukan istilah,
+      jadi distractor-nya harus ditulis, bukan disampel
 - [ ] Fix 1 opsi kosong tersisa = kartu ex-wglv03 id=23 yang sudah lama di-flag di HANDOFF
-- [ ] Jumlah soal: sudah nyaris rata. Outlier cuma `wt01`=19 (sengaja — ada komentar di file,
-      Q5 dihapus karena near-duplicate) dan `wtv01`=22 (file tunggal). ⚠️ `jml`=20 vs `jmt`=30
-      beda per-family — tanya owner apakah disengaja sebelum menyamakan
+- [x] Jumlah soal: **selesai, tidak ada yang perlu diubah.** Outlier cuma `wt01`=19 (sengaja, ada
+      komentar di file) dan `wtv01`=22 (file tunggal). `jml`=20 vs `jmt`=30 **BENAR apa adanya** —
+      owner konfirmasi 2026-08-17: mockup meniru struktur simulasi ujian Prometric, dan set JAC asli
+      65:30 karena sumbernya memang persis begitu. Jangan disamakan
 
 ### P13 — Post-source-reclassify (setelah P6)
 - [ ] Re-run merge script → verify cards.js bersih dari deprecated sources
