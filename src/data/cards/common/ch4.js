@@ -356,7 +356,7 @@ export const CARDS_CH4 = [
   jp: "転び《ころび》・逃げ《にげ》",
   type: 'vocab',
   id_text: "Elemen miring dari kolom/dinding",
-  desc: "転び《ころび》=kolom/dinding yang seharusnya tegak namun miring.",
+  desc: "転び《ころび》=kolom/dinding yang seharusnya tegak namun miring. 逃げ《にげ》=celah kecil yang sengaja disisakan agar komponen tidak saling mengganggu atau macet saat dipasang.",
   usage: '転び《ころび》の角度《かくど》を計算《けいさん》してから切断《せつだん》する（hitung sudut kemiringan elemen sebelum memotong）',
     _origIndex: 287
   },

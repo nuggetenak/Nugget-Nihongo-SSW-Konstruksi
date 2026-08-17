@@ -420,8 +420,8 @@ export const CARDS_LIFELINE_CH4 = [
   furi: "くうちょう・おんど・しつど・かんき・はいえん・えいせい",
   jp: "空調《くうちょう》・温度《おんど》・湿度《しつど》・換気《かんき》・排煙《はいえん》・衛生《えいせい》（設備《せつび》基本《きほん》6語《ご》）",
   type: 'vocab',
-  id_text: "4 istilah dasar",
-  desc: "空調《くうちょう》=mengatur suhu & kelembaban. 換気《かんき》=ganti udara kotor dengan segar. 排煙《はいえん》=keluarkan asap saat kebakaran.",
+  id_text: "6 istilah dasar",
+  desc: "空調《くうちょう》=mengatur suhu & kelembaban. 換気《かんき》=ganti udara kotor dengan segar. 排煙《はいえん》=keluarkan asap saat kebakaran. 温度《おんど》=suhu (yang diatur oleh 空調). 湿度《しつど》=kelembaban (yang diatur oleh 空調). 衛生《えいせい》=sistem sanitasi/perpipaan air bersih-kotor dalam bangunan.",
   usage: '空調《くうちょう》・換気《かんき》・排煙《はいえん》・温度《おんど》・湿度《しつど》・衛生《えいせい》の6語《ろくご》で設備《せつび》の基本《きほん》を覚《おぼ》える（hafalkan 6 istilah dasar sistem MEP）',
     _origIndex: 692
   },

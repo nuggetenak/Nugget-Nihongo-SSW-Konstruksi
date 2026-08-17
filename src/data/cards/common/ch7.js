@@ -91,7 +91,7 @@ export const CARDS_CH7 = [
   jp: "有害物接触 / おぼれ / 火災《ゆうがいぶつせっしょく / おぼれる / かさい》",
   type: 'vocab',
   id_text: "Kontak bahan berbahaya, tenggelam, kebakaran",
-  desc: "有害物《ゆうがいぶつ》接触《せっしょく》: zat kimia menyentuh kulit → gangguan kesehatan.",
+  desc: "有害物《ゆうがいぶつ》接触《せっしょく》: zat kimia menyentuh kulit → gangguan kesehatan. おぼれ: tenggelam, misalnya jatuh ke kolam atau saluran air saat bekerja di dekat air. 火災《かさい》: kebakaran akibat korsleting, bahan mudah terbakar, atau pekerjaan panas (las, potong).",
   usage: '有害物質《ゆうがいぶっしつ》を扱《あつか》うときは保護具《ほごぐ》を着用《ちゃくよう》する（kenakan APD saat menangani bahan berbahaya）',
     _origIndex: 587
   },
@@ -231,7 +231,7 @@ export const CARDS_CH7 = [
   jp: "シールド面付きヘルメット / 安全靴《しいるどめんつきへるめっと / あんぜんぐつ》",
   type: 'vocab',
   id_text: "Helm wajah + sepatu safety",
-  desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari percikan api las, sinar busur yang menyilaukan, dan panas.",
+  desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari percikan api las, sinar busur yang menyilaukan, dan panas. 安全靴《あんぜんぐつ》 = sepatu kerja dengan pelindung baja/komposit di ujung jari kaki, melindungi dari benda jatuh dan tertusuk paku/benda tajam.",
   usage: '溶接《ようせつ》・研削作業《けんさくさぎょう》ではシールド面付き《めんつき》ヘルメットと安全靴《あんぜんぐつ》を着用《ちゃくよう》する（kenakan helm berpelindung wajah dan sepatu safety saat pengelasan）',
     _origIndex: 600
   },
@@ -265,8 +265,8 @@ export const CARDS_CH7 = [
   furi: "みどりじゅうじ / あんぜんえいせいき / きゅうきゅうばこ",
   jp: "緑十字 / 安全衛生旗 / 救急箱《みどりじゅうじ / あんぜんえいせいき / きゅうきゅうばこ》",
   type: 'vocab',
-  id_text: "Palang Hijau / Bendera",
-  desc: "緑十字《みどりじゅうじ》 (palang hijau di latar putih) = simbol K3, dipasang di helm dan 救急箱《きゅうきゅうばこ》.",
+  id_text: "Palang Hijau / Bendera K3 / Kotak P3K",
+  desc: "緑十字《みどりじゅうじ》 (palang hijau di latar putih) = simbol K3 universal, dipasang di helm, papan pengumuman, dan 救急箱《きゅうきゅうばこ》. 安全衛生旗《あんぜんえいせいき》 = bendera yang dikibarkan di lokasi proyek untuk menandakan aktivitas K3 sedang berjalan. 救急箱《きゅうきゅうばこ》 = kotak berisi perlengkapan P3K (perban, obat luka, dll) untuk penanganan cedera ringan di lokasi kerja.",
   usage: '緑十字《みどりじゅうじ》と救急箱《きゅうきゅうばこ》の位置《いち》を作業前《さぎょうまえ》に確認《かくにん》する（periksa lokasi palang hijau dan kotak P3K sebelum bekerja）',
     _origIndex: 603
   },
