@@ -498,23 +498,40 @@ duplicates and it's very easy to add more by accident. Note the checker is templ
 `wglv-id` questions share "Apa bahasa Jepangnya X?" so they score ~0.8 against each other even
 when the terms are unrelated — verify flagged pairs by hand rather than trusting the score.
 
-### 🔧 Merge-time: monolith ↔ split-file set-id drift (found session 28)
-`src/data/wayground-sets.js` and the split files under `src/data/sets/wayground/` **disagree on
-21 of 27 set ids.** Pre-existing, not introduced by P22. Nothing was renamed — set ids are
-plausibly what saved progress is keyed on in `main`, so renaming has user-data consequences and is
-a merge-time decision, not a data-cleanup one. Content *was* synced into the monolith under its
-existing ids.
+### ✅ Resolved (session 28): monolith ↔ split-file set-id drift
+Was 21 of 27 sets disagreeing. Owner confirmed `main` and the live site have no users but himself,
+which removed the reason to be careful (set ids are plausibly the key for saved study progress, so
+renaming risked orphaning history). `src/data/wayground-sets.js` is now **regenerated wholesale
+from the split files** and carries a do-not-hand-edit header — hand-editing is what let the drift
+accumulate. Mapping applied: `wt1–wt10`→`wt01–wt10`, `wg1–wg5`+`wp1–wp5`→`wgl01–wgl10` (`wp5`→
+`wgl10`, `wp1–wp4`→`wgl06–wgl09`), `wg12`→`wtv01` (+ track `lifeline`→`common`, it's a teori set).
+Set order preserved so app ordering doesn't shift. 0 id diffs, 0 track diffs, 28 sets, 980
+questions. **If you change a set, edit the split file and regenerate — don't touch the monolith.**
 
-| split file | monolith | note |
-|---|---|---|
-| `wt01`–`wt10` | `wt1`–`wt10` | zero-padding only |
-| `wgl01`–`wgl10` | `wg1`–`wg5`, `wp1`–`wp5` | split into two prefixes, order not verified 1:1 |
-| `wtv01` | `wg12` | monolith ALSO has `track: "lifeline"`; split file's `"common"` is correct (teori set) |
-| `wglv-jp-*`, `wglv-id-*` | same | ✅ only family that matches |
-| — | `wtv02` | new set added session 28, uses the split-file name |
+### ⛔ Do not retry: pooled distractor generation for concept questions
+Attempted and reverted in session 28. The wglv approach (sample a real term from the corpus answer
+pool) **does not transfer** to `wgl`/`wt`/`wtv01`. Vocabulary options are interchangeable members of
+one semantic space; concept options are claims written for one specific question, and no
+substitutable pool exists. Two rankings were tried and both failed:
 
-At merge: pick one naming scheme, map old→new, and decide whether to migrate or reset saved
-progress for the renamed sets. The `wg12` track fix should ride along.
+1. *Rank by similarity to the question stem* → surface matches with no meaning. A question
+   containing 最大 got the option `最大値`.
+2. *Rank by shape match to the question's own options* (length + ending), plus quantity-class,
+   stem-echo and near-duplicate filters → better, but an 11-sample audit spread across all 21 files
+   still found ~8 bad: `15A以下` offered as a **millimetre** tolerance; `ノイズを増やす` as a property
+   of a socket fitting; `ハンマー` in a fill-in-the-blank reading 「＿＿を塗って」; `ダムを造る` as a
+   response to low oxygen; `どちらも同じ`/`どちらでもない` dropped into questions that aren't
+   comparisons; and worst, `wt09 q11` given `建物の断熱性を高めるため` next to its existing distractor
+   `建物を断熱するため` — two options meaning the same thing.
+
+A tighter filter is not the fix. The failure is semantic and the scoring function only sees
+characters and length; it cannot tell that a tool doesn't belong where an event belongs. The
+automated "weak match" counter said 4 of 419 — **that number was meaningless**, because the score it
+thresholds measures shape, not sense. Don't trust a shape metric as a quality metric.
+
+**These 419 need distractors authored per question. There is no shortcut.** Suggested batching:
+one set (20 questions) at a time, reading each question, so quality stays reviewable. `wgl01–10`
+first — it also carries the last remaining answer-position bias (60%, `wgl05` still 20/20).
 
 **Question counts (the "merata" half) — ✅ DONE, nothing left:**
 `jml01–06` all 20 · `jmt01–06` all 30 · `wgl01–10` all 20 · `wt01`=**19**, `wt02–10` all 20 ·
@@ -524,10 +541,11 @@ Both former outliers are resolved (see Step 2 above). **`jml`=20 vs `jmt`=30 is 
 simulation structure, and the real JAC sets are 65:30 because that's exactly what the source is.
 Any future agent tempted to equalize these two families should stop.
 
-Remaining order: (1) `wgl01–10` — 4th option + rebalance in one pass, worst remaining bias at 60%
-(`wgl05` still 20/20); (2) `wt01–10` + `wtv01` — 4th option only, their bias is already fine;
-(3) cross-set duplicate triage (288); (4) thin-`exp` expansion (157). `jac-mockup` and `wtv02` need
-none of this. 419 questions still at 3 options.
+Remaining order — all of it now **authoring work, not scripting work** (see the ⛔ box above):
+(1) `wgl01–10`, 200 questions — author a 4th option + rebalance in one pass, worst remaining bias
+at 60% (`wgl05` still 20/20); (2) `wt01–10` + `wtv01`, 219 questions — 4th option only, their bias
+is already fine; (3) cross-set duplicate triage (288); (4) thin-`exp` expansion (157).
+`jac-mockup` and `wtv02` need none of this. 419 questions still at 3 options.
 
 ### ✅ Resolved (session 28) — PDF intake tracker, kept for the record
 All 7 source PDFs arrived and were processed (owner sent them incrementally across sessions
