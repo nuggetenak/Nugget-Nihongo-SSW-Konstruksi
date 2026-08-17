@@ -814,9 +814,12 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 > **done** rather than continuing to track it as partial: the gap between 258 and the original
 > ~479 estimate isn't unstarted work sitting in a queue, it's (a) the specific ids that stayed
 > flagged after real cross-referencing because the source text genuinely didn't have enough detail
-> to complete safely — see HANDOFF.md's "Residual data-quality flags" list for the full,
-> currently-14-id roster (94,152,160,957,410,966,1063,1143,93,1190,1325,530,624 — one from ch6 was
-> a likely source mistag, two new from ch7) — and (b) slack in the original ~479 figure itself,
+> to complete safely — that roster was **13 ids**, not 14 (94,152,160,957,410,966,1063,1143,93,
+> 1190,1325,530,624; the "14" was a miscount in this note, corrected session 28 part 2). **All 13
+> were subsequently completed in session 28 part 2 from general construction-domain knowledge
+> rather than JAC text, on explicit owner instruction** — see HANDOFF.md's provenance note, they
+> are the only cards in the corpus not traceable to a source PDF — and (b) slack in the original
+> ~479 figure itself,
 > which HANDOFF always caveated as an estimate never reconciled against an exact pre-count; every
 > chapter's real fixed-count came in below what a proportional share of 479 would predict, ch7
 > included (18 of 47 checked cards — same story every other chapter told). Re-opening P5 only
@@ -863,8 +866,13 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 ### P11 — wglv exp generic (setelah P16)
 - [ ] wglv-id series (ex-wglv04/05): ganti `"JP = bahasa Jepangnya."` → specific translation
 
-### P12 — Furi drop (BLOCKED — bukan sekadar "at merge time", setelah P1)
-> **Session 28 (2026-08-17): OD-5 terjawab lewat investigasi, dan jawabannya mengubah scope P12.**
+### P12 — Furi drop (UNBLOCKED session 28 — owner terima konsekuensi ke main; setelah P1)
+> **UPDATE session 28 (part 2): owner menyatakan content-dq memang branch content-quality dan
+> "I intended to do so even if it breaks main branch" — reconfig main dilakukan saat merge. Jadi
+> daftar consumer di bawah BUKAN blocker lagi, melainkan checklist rekonsiliasi merge-time. P12
+> boleh dikerjakan. Isi catatan di bawah tetap dipertahankan karena checklist-nya tetap dipakai.**
+>
+> **Session 28 (part 1): OD-5 terjawab lewat investigasi, dan jawabannya mengubah scope P12.**
 > Pertanyaan OD-5 ("apakah repo SSW Flashcards terpisah pakai `card.furi`?") ternyata menyasar
 > codebase yang salah. Dua repo snapshot (`...-v87`, `SSW-KONSTRUKSI-v85`) **tidak** membaca
 > `card.furi` — satu-satunya `.furi` di sana adalah `item.furi` dari struktur `DANGER_PAIRS` yang
@@ -887,12 +895,35 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 > bukan sekadar hapus field. `SearchMode.jsx` sudah meng-import `stripFuri`, jadi helper-nya
 > mungkin sebagian sudah ada. **Ini pekerjaan desain UI di `main`, bukan pekerjaan data di
 > content-dq** — tidak ada yang bisa dikerjakan dari branch ini untuk memajukannya.
-- [ ] **PRASYARAT BARU:** putuskan pengganti furi di 6 consumer `main` di atas (kemungkinan
-      `extractReading(c.jp)`) — ini keputusan desain, belum diambil siapa pun
+- [ ] **Merge-time (bukan prasyarat):** ganti furi di 6 consumer `main` dengan
+      `extractReading(c.jp)`, dan hapus/tulis-ulang test "every card has furi field (Phase 1)" —
+      test itu memang meng-encode invariant lama, jadi gagalnya adalah sinyal yang diharapkan
 - [ ] Update tiap consumer + `src/tests/data.test.js` (test-nya sendiri harus ikut berubah)
 - [x] ~~Confirm SSW Flashcards repo tidak pakai `card.furi` (OD-5)~~ — selesai session 28: repo
       terpisah tidak pakai, tapi `main` pakai. Lihat blocker di atas.
 - [ ] Drop furi dari semua split files → re-run merge (HANYA setelah dua item pertama beres)
+
+### P22 — Quiz quality: rata + naik kelas (BARU, diminta owner session 28)
+> **Task baru, bukan turunan dari task lama.** Owner: *"before merging with main, aku pengen semua
+> quiz (selain yang resmi dari JAC) itu semuanya jumlah soal merata, kualitas soal & opsi
+> jawabannya juga ditingkatkan."* P8a/P8b/P10/P11 memang menyentuh quiz set, tapi keempatnya
+> defect-fix sempit di `wglv` saja (ruby, `opts_id` kosong, `exp` sirkular) — belum pernah ada
+> pass kualitas pedagogis. Scope: seluruh `sets/wayground/**` + `sets/jac-mockup/**` (957 soal).
+> `sets/jac/` (jac-teori 65q, jac-lifeline 30q) **di luar scope** — itu materi ujian JAC asli.
+> Angka lengkap + urutan pengerjaan yang disarankan ada di HANDOFF.md bagian 🟢; ringkas di sini:
+- [ ] **Rebalance `ans`** — `ans:0` muncul di 432/957 soal (45%). Asal pilih opsi pertama = 45%
+      benar tanpa baca. Ini isu terbesar, dan perbaikannya mekanis (acak posisi jawaban + reindex),
+      bukan tulis ulang konten
+- [ ] **Triage 288 soal dengan teks pertanyaan duplikat** lintas set (~30% korpus; dibandingkan
+      setelah `《》` di-strip). Sebagian mungkin pengulangan yang disengaja — perlu keputusan
+      per-kasus, bukan hapus buta
+- [ ] **Perpanjang 157 `exp` yang <40 karakter** (coverage `exp` sendiri sudah 100%, sisa P11)
+- [ ] **Standardkan jumlah opsi** — sekarang 657 soal 3-opsi, 300 soal 4-opsi. ⚠️ Butuh keputusan
+      owner dulu: target 3 atau 4?
+- [ ] Fix 1 opsi kosong tersisa = kartu ex-wglv03 id=23 yang sudah lama di-flag di HANDOFF
+- [ ] Jumlah soal: sudah nyaris rata. Outlier cuma `wt01`=19 (sengaja — ada komentar di file,
+      Q5 dihapus karena near-duplicate) dan `wtv01`=22 (file tunggal). ⚠️ `jml`=20 vs `jmt`=30
+      beda per-family — tanya owner apakah disengaja sebelum menyamakan
 
 ### P13 — Post-source-reclassify (setelah P6)
 - [ ] Re-run merge script → verify cards.js bersih dari deprecated sources

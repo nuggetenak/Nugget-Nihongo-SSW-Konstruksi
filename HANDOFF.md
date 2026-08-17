@@ -358,12 +358,11 @@ update itself.
 Everything below is either gated or genuinely unstarted. Nothing here is a "just pick the first
 one" list — check the gate before starting.
 
-### 🔴 Blocked on real work, not on timing — read before touching P12
-**P12 (drop `furi` from all split files) would break `main` as currently specified.** OD-5 asked
-whether a *separate* flashcards repo consumes `card.furi`; the answer (session 28) is that the
-separate repos don't, but `main` of *this* repo does, extensively. P12 was never really gated on
-merge timing — it's gated on UI work nobody has scoped yet. Verified by reading `main`'s own
-source, not inferred:
+### 📋 Merge-time reconciliation list — NOT blockers (owner decision, session 28)
+**These used to be filed as blockers for P12. They aren't.** Owner has explicitly accepted that
+content-dq may break `main` and that reconfiguring `main` is merge-time work. Keeping the list
+because it's the reconciliation checklist someone will need at merge — it took a session to
+compile and shouldn't have to be rediscovered. `main` reads `card.furi` in at least these places:
 
 | Consumer on `main` | What breaks if `furi` is dropped |
 |---|---|
@@ -375,14 +374,11 @@ source, not inferred:
 | `src/modes/QuizMode.jsx:68` | `q.card.furi` feeds the quiz prompt's reading. |
 | `src/modes/ConfusionMode.jsx`, `src/components/Onboarding.jsx` | Also reference furi (not audited line-by-line — the six above are already disqualifying). |
 
-Before P12 can be a task at all, someone has to decide what replaces furi in each of those six
-places. The likely answer is the `《》` ruby already inside `jp` (that's what P1 was *for* — see
-CARD_CONTENT_SPEC's "prerequisite furi drop" framing), which would mean each consumer needs a
-`stripFuri`/`extractReading` helper rather than a field read. `SearchMode.jsx` already imports a
-`stripFuri`, so the helper may partly exist. **That's a design task on `main`'s UI, not a data
-task on this branch** — which is why nothing here can move it forward, and why "do it at merge
-time" was always going to hit this wall. Not started, deliberately: re-scoping someone else's UI
-without being asked is a bigger call than a data-cleanup agent should make alone.
+At merge time each of those six needs `card.furi` swapped for `extractReading(c.jp)` off the
+`《》` ruby (that's what P1 exists to guarantee), and `data.test.js`'s "every card has furi field
+(Phase 1)" test needs deleting or rewriting — the test encodes the *old* invariant on purpose, so
+it failing is the expected signal, not a regression. `SearchMode.jsx` already imports a
+`stripFuri`, so part of the helper may exist already.
 
 ### 🔵 Gated on an owner decision — ask before starting
 *(none right now — OD-5 resolved by investigation, see OPEN DECISIONS.)*
@@ -394,11 +390,20 @@ without being asked is a bigger call than a data-cleanup agent should make alone
   judgment call. Don't re-open P5 to chase these — they're tracked here precisely because they
   fall outside what a truncation-fix pass can responsibly touch.
 - **Residual data-quality flags (post-P5):**
-  - `desc` fields that stayed truncated even with their chapter's real PDF in hand — not enough
-    specific detail in the source text to complete safely: id=94, 152, 160, 957 (ch1/ch2); 410,
-    966, 1063, 1143 (ch3); 93, 1190 (ch5); 1325 (ch6, likely a source mistag — topic isn't
-    touched anywhere in text6l.pdf); 530, 624 (ch7, see commit `60dcf1a`'s body for why each
-    specifically can't be guessed).
+  - ~~`desc` fields that stayed truncated even with their chapter's real PDF in hand~~ — **all 13
+    completed session 28 (part 2), commit see git log.** ⚠️ **Provenance: these 13 were completed
+    from general construction-domain knowledge, NOT from JAC textbook text** — owner explicitly
+    authorized this after the PDF route was exhausted ("lengkapi based from your comprehensive
+    intelligence"). They are the only cards in the corpus not traceable to a source PDF. Ids:
+    93, 94, 152, 160, 410, 530, 624, 957, 966, 1063, 1143, 1190, 1325. If JAC's own wording ever
+    becomes available for these, re-check them first — everything else in the corpus was
+    cross-referenced against real chapter text, these weren't. Specific figures used that would
+    be worth spot-checking against JAC's own phrasing: id=94 (20 m / 30 m walking distance to an
+    extinguisher, 消防法), id=152 (労働基準法 art. 16), id=966 (0.8–1.5 m mounting height, 50 m
+    walking distance). Deliberately NOT invented: id=1190's saddle spacing interval — the
+    sentence was closed on the *relationship* (too wide → たわみ, which the corpus already states
+    at id=782/783/894) rather than by making up a millimetre figure, since that missing number
+    was the actual gap session 26 flagged.
   - id=468 (source mistag, piping content tagged jac-ch2).
   - Scope-mismatch pattern — `jp`/`id_text` promises N combined terms, `desc` only ever covers
     the first, but the sentence present is complete and correctly punctuated so it's not a
@@ -414,8 +419,52 @@ without being asked is a bigger call than a data-cleanup agent should make alone
   (`"融着面の清掃《...》b) 管の清掃《...》"`) and one empty string. Needs the original source to
   fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
 
-### 🟢 Unblocked, no owner decision needed, just not done yet
-*(none right now.)*
+### 🟢 Unblocked — owner decision 2026-08-17 (session 28), ready to start
+**Owner clarified the whole branch's contract:** *"branch content-dq emang cuma buat maintain and
+fix all the quality of the content. I intended to do so even if it breaks main branch, because
+emang nanti pas merge ke main harus reconfig & readjust semuanya."* That settles the question the
+P12 writeup below was stuck on. **Breaking `main` is expected and accepted here; reconciliation is
+merge-time work by design.** Don't re-litigate this — a future agent finding `card.furi` consumers
+on `main` should treat that as a merge-time TODO to record, not as a reason to stop.
+
+| Task | What | Status |
+|---|---|---|
+| P12 | Drop `furi` from all split files | **Unblocked.** The 6 `main` consumers listed below are now merge-time reconciliation items, not blockers. Still genuinely unstarted — nobody has done it yet. Do P1 first if it isn't fully done (P12 depends on `《》` ruby in `jp` being complete, since `extractReading(c.jp)` is the intended replacement). |
+| **P22 (NEW)** | Quiz set equalization + question/option quality uplift, all non-JAC sets | **New task, owner-requested 2026-08-17.** Not a pre-existing item — see below. |
+
+#### P22 — Quiz quality (NEW, owner-requested session 28)
+Owner: *"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
+jumlah soal merata, kualitas soal & opsi jawabannya juga ditingkatkan."* This was **not** on the
+task list in any form. P8a/P8b/P10/P11 each touched quiz sets, but all four were narrow
+defect-fixes on `wglv` only (ruby, empty `opts_id`, circular `exp`). There has never been a
+pedagogical-quality pass. Scope is all non-JAC sets — `wayground/**` + `jac-mockup/**`, 957
+questions total. `sets/jac/` (jac-teori 65q, jac-lifeline 30q) is **out of scope**: that's real
+JAC exam material, don't touch it.
+
+**Census run session 28 (script not committed; reproduce by loading each set module and walking
+`.questions`).** The count-evenness half turns out to be nearly done already; the quality half is
+the real work:
+
+| Finding | Number | Note |
+|---|---|---|
+| Answer-index bias | `ans:0` on **432 / 957 = 45%** (spread: 0→432, 1→232, 2→230, 3→63) | **Worst issue.** Always-pick-the-first scores 45% without reading anything. Fix = shuffle answers + re-index, not rewrite content. Highest value per effort. |
+| Duplicate question text across sets | **288** (~30% of corpus) | Compared after stripping `《》`. e.g. wt02/wt03/wt06 overlap heavily; wglv-jp-01/02/03 overlap. Needs dedupe-or-differentiate decisions, some may be intentional reinforcement. |
+| Thin explanations | **157** `exp` shorter than 40 chars | `exp` coverage itself is 100% (0 missing) — P11 did its job. These are just short. |
+| Option-count inconsistency | 657 questions with 3 opts, 300 with 4 | Mixed difficulty across sets. Owner decision needed: standardize to 4, or keep per-set? |
+| Empty option string | **1** | This is the already-known malformed `opts` on the ex-wglv03 id=23 card (see 🟡 bucket) — census independently confirms it's the only one. |
+
+**Question counts (the "merata" half) are already near-even** — don't over-plan this part:
+`jml01–06` all 20 · `jmt01–06` all 30 · `wgl01–10` all 20 · `wt01`=**19**, `wt02–10` all 20 ·
+`wglv-id-01/02/03`=39/39/39, `wglv-jp-01/02/03`=40/40/39 · `wtv01`=**22** (lone file, no siblings).
+So only 3 real outliers: `wt01` is 1 short (a Q5 was removed as a near-duplicate — there's a
+comment in the file saying so, so this is a *deliberate* 19, not drift); `wtv01` is a singleton at
+22; and `jml`=20 vs `jmt`=30 differ by family. Whether the jml/jmt split is intentional (mirroring
+real JAC teori-vs-praktik weighting) is an **open question for the owner** — real `jac-teori` is
+65q and `jac-lifeline` is 30q, so the mock ratio doesn't cleanly mirror either.
+
+Suggested order if picking this up: (1) answer-index rebalance — mechanical, verifiable, biggest
+learner impact; (2) cross-set duplicate triage; (3) thin-`exp` expansion; (4) option-count
+standardization *after* the owner answers whether 3 or 4 is the target.
 
 ### ✅ Resolved (session 28) — PDF intake tracker, kept for the record
 All 7 source PDFs arrived and were processed (owner sent them incrementally across sessions
