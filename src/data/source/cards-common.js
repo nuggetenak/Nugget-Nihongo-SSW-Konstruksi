@@ -1686,7 +1686,7 @@ export const CARDS_COMMON = [
   furi: "ふくそうのちゅうい",
   jp: "服装の注意《ふくそうのちゅうい》4項目《こうもく》",
   type: "konsep",
-  id_text: "4 pantangan pakaian di",
+  id_text: "4 pantangan pakaian di proyek konstruksi",
   desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《そでまくりきんし》 ④ポケット手禁止《てきんし》.",
   _origIndex: 307
   },
@@ -3910,7 +3910,7 @@ export const CARDS_COMMON = [
   furi: "ふくそうのよんきんしじこうけんせつげんば",
   jp: "服装の4禁止事項《ふくそうのよんきんしじこう》（建設《けんせつ》現場《げんば》）",
   type: "konsep",
-  id_text: "4 larangan pakaian di",
+  id_text: "4 larangan pakaian di proyek konstruksi",
   desc: "①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着《うわぎ》前《まえ》開《まえあ》け禁止《きんし》 ③袖《そで》まくり禁止《きんし》(lengan ke pergelangan) ④ポケット《ぽけっと》に手《て》を入《い》れて歩《ある》くの禁止《きんし》(bahaya jatuh mendadak).",
   _origIndex: 698
   },
