@@ -2578,7 +2578,7 @@ export const CARDS_LIFELINE = [
   {
   id: 468,
   category: "haikan",
-  source: "jac-ch2",
+  source: "jac-ch6",
   furi: "あんぐるふらんじこうほう",
   jp: "アングルフランジ工法《アングルフランジこうほう》",
   type: 'vocab',
@@ -2602,7 +2602,7 @@ export const CARDS_LIFELINE = [
   {
   id: 470,
   category: "haikan",
-  source: "jac-ch2",
+  source: "jac-ch6",
   furi: "すらいどおんふらんじこうほう",
   jp: "スライドオンフランジ工法《すらいどおんふらんじこうほう》",
   type: 'vocab',
