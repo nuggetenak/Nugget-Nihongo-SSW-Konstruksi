@@ -707,7 +707,7 @@ export const CARDS_COMMON = [
   furi: "とおりしんかべしんはしらしん",
   jp: "通り芯《とおりしん》・壁芯《かべしん》・柱芯《はしらしん》",
   type: 'vocab',
-  id_text: "Garis sumbu dinding dan",
+  id_text: "Garis sumbu dinding dan kolom",
   desc: "通《とお》り芯《しん》: center line. 壁芯《かべしん》: sumbu dinding. 柱芯《はしらしん》: sumbu kolom.",
   usage: '通り芯《とおりしん》・壁芯《かべしん》・柱芯《はしらしん》を図面《ずめん》で確認《かくにん》してから墨《すみ》を出《だ》す（periksa garis sumbu pada gambar sebelum membuat penandaan tinta）',
     _origIndex: 139
@@ -1567,8 +1567,8 @@ export const CARDS_COMMON = [
   furi: "ころびにげ",
   jp: "転び《ころび》・逃げ《にげ》",
   type: 'vocab',
-  id_text: "Elemen miring dari",
-  desc: "転《ころ》びび《ころび》=kolom/dinding yang seharusnya tegak namun miring.",
+  id_text: "Elemen miring dari kolom/dinding",
+  desc: "転び《ころび》=kolom/dinding yang seharusnya tegak namun miring.",
   usage: '転び《ころび》の角度《かくど》を計算《けいさん》してから切断《せつだん》する（hitung sudut kemiringan elemen sebelum memotong）',
     _origIndex: 287
   },
@@ -1720,7 +1720,7 @@ export const CARDS_COMMON = [
   furi: "おうすんぽう",
   jp: "追う《おう》・寸法《すんぽう》",
   type: "konsep",
-  id_text: "Ukur berurutan dari",
+  id_text: "Ukur berurutan dari titik referensi",
   desc: "追《お》いう《おう》=mengukur posisi berurutan dari titik referensi.",
   _origIndex: 314
   },
@@ -2592,7 +2592,7 @@ export const CARDS_COMMON = [
   furi: "どらいばあ（ぷらす・まいなす）",
   jp: "ドライバー（プラス・マイナス）",
   type: 'vocab',
-  id_text: "Obeng Phillips dan",
+  id_text: "Obeng Phillips dan minus",
   desc: "Alat memutar sekrup (ネジ). プラス = Phillips, マイナス = flathead.",
   usage: 'プラスドライバーでビスを締《し》める（kencangkan sekrup dengan obeng Phillips）',
     _origIndex: 481
@@ -3309,7 +3309,7 @@ export const CARDS_COMMON = [
   furi: "しんにゅうしゃあんぜんえいせいきょういくのはちこうもく",
   jp: "新入者安全衛生教育の8項目《しんにゅうしゃあんぜんえいせいきょういくのはちこうもく》",
   type: "konsep",
-  id_text: "8 materi K3 wajib untuk",
+  id_text: "8 materi K3 wajib untuk pekerja baru",
   desc: "①Bahaya mesin & bahan ②APD & alat keselamatan ③Prosedur kerja ④Cek awal ⑤Penyakit akibat kerja ⑥Kerapian & kebersihan ⑦P3K & evakuasi darurat ⑧Hal K3 lain yang diperlukan.",
   _origIndex: 594
   },
@@ -7019,7 +7019,7 @@ export const CARDS_COMMON = [
   furi: "きそめんしん",
   jp: "基礎免振《きそめんしん》",
   type: 'vocab',
-  id_text: "Isolasi seismik pada",
+  id_text: "Isolasi seismik pada pondasi",
   desc: "Sistem yang menyerap gaya horizontal gempa sehingga getaran berkurang sebelum masuk bangunan.",
   usage: '基礎免振《きそめんしん》装置《そうち》を基礎《きそ》と躯体《くたい》の間《あいだ》に設置《せっち》する（pasang perangkat isolasi seismik di antara pondasi dan struktur）',
     _origIndex: 1529
@@ -7079,7 +7079,7 @@ export const CARDS_COMMON = [
   furi: "こんくりいとぶろっくぞう",
   jp: "コンクリートブロック造《ぞう》",
   type: 'vocab',
-  id_text: "Struktur blok beton yang",
+  id_text: "Struktur blok beton yang ditumpuk",
   desc: "Jenis struktur menggunakan blok beton yang ditumpuk.\nDigunakan untuk pagar, dinding pembatas, dan bangunan kecil/sederhana.",
   usage: 'コンクリートブロック（CB造《ぞう》）を積《つ》んでモルタルで固《かた》めて壁《かべ》を造《つく》る（susun dan rekatkan blok beton dengan mortar untuk membuat dinding）',
     _origIndex: 1534

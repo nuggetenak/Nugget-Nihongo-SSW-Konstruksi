@@ -161,7 +161,7 @@ export const CARDS_CH7 = [
   furi: "しんにゅうしゃあんぜんえいせいきょういくのはちこうもく",
   jp: "新入者安全衛生教育の8項目《しんにゅうしゃあんぜんえいせいきょういくのはちこうもく》",
   type: "konsep",
-  id_text: "8 materi K3 wajib untuk",
+  id_text: "8 materi K3 wajib untuk pekerja baru",
   desc: "①Bahaya mesin & bahan ②APD & alat keselamatan ③Prosedur kerja ④Cek awal ⑤Penyakit akibat kerja ⑥Kerapian & kebersihan ⑦P3K & evakuasi darurat ⑧Hal K3 lain yang diperlukan.",
   _origIndex: 594
   },

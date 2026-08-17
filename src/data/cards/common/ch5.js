@@ -859,7 +859,7 @@ export const CARDS_CH5 = [
   furi: "どらいばあ（ぷらす・まいなす）",
   jp: "ドライバー（プラス・マイナス）",
   type: 'vocab',
-  id_text: "Obeng Phillips dan",
+  id_text: "Obeng Phillips dan minus",
   desc: "Alat memutar sekrup (ネジ). プラス = Phillips, マイナス = flathead.",
   usage: 'プラスドライバーでビスを締《し》める（kencangkan sekrup dengan obeng Phillips）',
     _origIndex: 481
