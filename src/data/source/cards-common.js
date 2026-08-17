@@ -942,7 +942,7 @@ export const CARDS_COMMON = [
   jp: "賠償予定の禁止《ばいしょうよていのきんし》",
   type: "hukum",
   id_text: "Dilarang tetapkan denda",
-  desc: "Pemberi kerja dilarang mencantumkan klausul denda pemutusan di muka. Pekerja boleh menolak kontrak",
+  desc: "Pemberi kerja dilarang mencantumkan klausul denda pemutusan di muka. Pekerja boleh menolak kontrak yang memuat klausul semacam itu — dilarang oleh 労働基準法《ろうどうきじゅんほう》第16条《だいじゅうろくじょう》, termasuk denda kalau berhenti sebelum kontrak habis.",
   _origIndex: 160
   },
   {
@@ -1026,11 +1026,11 @@ export const CARDS_COMMON = [
   id: 160,
   category: "hourei",
   source: "jac-ch2",
-  furi: "けんこうしんだんていきねんいっかいとやといいれじ",
-  jp: "健康診断《けんこうしんだんていきねんいっかいとやといいれじ》",
+  furi: "けんこうしんだん",
+  jp: "健康診断《けんこうしんだん》",
   type: "hukum",
   id_text: "Cek kesehatan",
-  desc: "Perusahaan wajib selenggarakan 健康《けんこう》診断《しんだん》 1x/tahun dan saat rekrut baru. Biaya ditanggung",
+  desc: "Perusahaan wajib selenggarakan 健康《けんこう》診断《しんだん》 1x/tahun dan saat rekrut baru. Biaya ditanggung perusahaan, bukan pekerja.",
   _origIndex: 168
   },
   {
@@ -2581,7 +2581,7 @@ export const CARDS_COMMON = [
   jp: "砥石《といし》",
   type: 'vocab',
   id_text: "Batu asah untuk pahat,",
-  desc: "Batu untuk mengasah logam; berbentuk balok kecil (直《なお》し方体《ちょくほうたい》) digunakan untuk mengasah のみ",
+  desc: "Batu untuk mengasah logam; berbentuk balok kecil (直方体《ちょくほうたい》) digunakan untuk mengasah のみ (pahat) dan かんな (serut). Ada 3 tingkat: 荒砥《あらと》 kasar → 中砥《なかと》 sedang → 仕上げ砥《しあげと》 halus, dipakai berurutan.",
   usage: '砥石《といし》でノミの刃《は》を研《と》ぐ（asah mata pahat menggunakan batu asah）',
     _origIndex: 480
   },
@@ -3379,7 +3379,7 @@ export const CARDS_COMMON = [
   jp: "シールド面付きヘルメット / 安全靴《しいるどめんつきへるめっと / あんぜんぐつ》",
   type: 'vocab',
   id_text: "Helm wajah + sepatu safety",
-  desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari",
+  desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari percikan api las, sinar busur yang menyilaukan, dan panas.",
   usage: '溶接《ようせつ》・研削作業《けんさくさぎょう》ではシールド面付き《めんつき》ヘルメットと安全靴《あんぜんぐつ》を着用《ちゃくよう》する（kenakan helm berpelindung wajah dan sepatu safety saat pengelasan）',
     _origIndex: 600
   },
@@ -4037,7 +4037,7 @@ export const CARDS_COMMON = [
   jp: "機械設置工事の死亡事故《きかいせっちこうじのしぼうじこ》",
   type: 'vocab',
   id_text: "Pasang mesin besar",
-  desc: "Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat",
+  desc: "Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat mengangkat, menurunkan, dan menyetel posisi mesin adalah titik paling rawan — tumpuan belum stabil tapi bebannya sudah penuh.",
   usage: '大型機械《おおがたきかい》の設置工事《せっちこうじ》では転倒《てんとう》による死亡事故《しぼうじこ》に注意《ちゅうい》する（waspadai kecelakaan fatal akibat terbaliknya alat berat saat pekerjaan pemasangan mesin）',
     _origIndex: 734
   },
@@ -6439,11 +6439,11 @@ export const CARDS_COMMON = [
   id: 1325,
   category: "sekou",
   source: "jac-ch6",
-  furi: "とんねるのよんしゅるいこうほうでぶんるい",
+  furi: "とんねるのよんしゅるい",
   jp: "トンネルの4種類《しゅるい》（工法《こうほう》で分類《ぶんるい》）",
   type: 'vocab',
   id_text: "4 jenis terowongan",
-  desc: "①山岳《さんがく》=NATM di gunung. ②開削《かいさく》=gali-tutup. ③シールド=mesin+segmen, tanah lunak. ④推進《すいしん》=pipa",
+  desc: "①山岳《さんがく》=NATM di gunung. ②開削《かいさく》=gali-tutup. ③シールド=mesin+segmen, tanah lunak. ④推進《すいしん》=pipa didorong pakai jack dari 立坑《たてこう》, buat pipa diameter kecil tanpa bongkar jalan.",
   usage: 'NATM・シールド・推進・開削の4種類《よんしゅるい》のトンネル工法《こうほう》を使い分《つかいわ》ける（bedakan penggunaan 4 metode terowongan: NATM, shield, jack-push, dan cut-and-cover）',
     _origIndex: 1481
   },

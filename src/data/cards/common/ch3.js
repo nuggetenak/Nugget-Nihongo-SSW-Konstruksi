@@ -272,7 +272,7 @@ export const CARDS_CH3 = [
   jp: "砥石《といし》",
   type: 'vocab',
   id_text: "Batu asah untuk pahat,",
-  desc: "Batu untuk mengasah logam; berbentuk balok kecil (直《なお》し方体《ちょくほうたい》) digunakan untuk mengasah のみ",
+  desc: "Batu untuk mengasah logam; berbentuk balok kecil (直方体《ちょくほうたい》) digunakan untuk mengasah のみ (pahat) dan かんな (serut). Ada 3 tingkat: 荒砥《あらと》 kasar → 中砥《なかと》 sedang → 仕上げ砥《しあげと》 halus, dipakai berurutan.",
   usage: '砥石《といし》でノミの刃《は》を研《と》ぐ（asah mata pahat menggunakan batu asah）',
     _origIndex: 480
   },

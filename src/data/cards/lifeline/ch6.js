@@ -1645,7 +1645,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "避難はしご《ひなんはしご》",
   type: "vocab",
   id_text: "Tangga evakuasi darurat",
-  desc: "Tangga yang dipasang di jendela untuk turun menyusuri dinding luar saat lift",
+  desc: "Tangga yang dipasang di jendela untuk turun menyusuri dinding luar saat lift tidak bisa dipakai. Ada 3 tipe: 固定式《こていしき》 (permanen), 吊下げ式《つりさげしき》 (digantung saat dipakai), dan 立てかけ式《たてかけしき》 (disandarkan).",
   usage: '避難はしご《ひなんはしご》を窓《まど》や外壁《がいへき》に設置《せっち》して火災時《かさいじ》の脱出《だっしゅつ》に備《そな》える（pasang tangga evakuasi pada jendela atau dinding luar sebagai jalur keluar saat kebakaran）',
     _origIndex: 1085
   },
@@ -1681,7 +1681,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "発信機《はっしんき》",
   type: "vocab",
   id_text: "Tombol alarm kebakaran",
-  desc: "Ditekan saat melihat api untuk mengaktifkan alarm; berwarna merah, dipasang di",
+  desc: "Ditekan saat melihat api untuk mengaktifkan alarm; berwarna merah, dipasang di koridor tiap lantai pada ketinggian 0,8–1,5 m dari lantai, dengan jarak jalan kaki ke unit terdekat maksimal 50 m.",
   usage: '火災《かさい》を発見《はっけん》したら発信機《はっしんき》のボタンを押《お》して警報《けいほう》を起動《きどう》する（tekan tombol pada alarm box untuk mengaktifkan peringatan saat menemukan kebakaran）',
     _origIndex: 1094
   },
@@ -1921,7 +1921,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "真空ポンプ《しんくうぽんぷ》",
   type: "vocab",
   id_text: "Pompa vakum / vacuum pump",
-  desc: "Digunakan setelah pemasangan pipa refrigeran untuk mengosongkan udara dan",
+  desc: "Digunakan setelah pemasangan pipa refrigeran untuk mengosongkan udara dan uap air dari dalam pipa (真空引き《しんくうびき》) sebelum refrigeran diisi. Vakum tidak tuntas → air tersisa → kompresor rusak.",
   usage: "真空《しんくう》引《び》きをする（melakukan vakumisasi pipa refrigeran）",
   _origIndex: 1299
   },
@@ -1969,7 +1969,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "サドル",
   type: "vocab",
   id_text: "Saddle / braket penopang",
-  desc: "Braket untuk menempelkan pipa ke dinding, plafon, atau lantai.\nJarak saddle",
+  desc: "Braket untuk menempelkan pipa ke dinding, plafon, atau lantai.\nJarak saddle mengikuti diameter dan bahan pipa; kalau terlalu lebar, pipa melendut (たわみ).",
   usage: 'サドルで配管《はいかん》を天井《てんじょう》スラブや梁《はり》に固定《こてい》する（kencangkan pipa pada slab langit-langit atau balok menggunakan saddle）',
     _origIndex: 1346
   },

@@ -369,7 +369,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "けい酸カルシウム保温材《けいさんかるしうむほおんざい》",
   type: 'vocab',
   id_text: "Isolasi kalsium silikat",
-  desc: "Insulasi termal berbasis kalsium silikat untuk pipa/peralatan suhu tinggi. Bukan untuk pipa air",
+  desc: "Insulasi termal berbasis kalsium silikat untuk pipa/peralatan suhu tinggi. Bukan untuk pipa air dingin — daya serap airnya tinggi, jadi khusus jalur panas seperti pipa uap dan boiler.",
   usage: 'けい酸カルシウム保温材《けいさんかるしうむほおんざい》を高温蒸気管《こうおんじょうきかん》に巻《ま》く（balut pipa uap bertekanan tinggi dengan insulasi kalsium silikat）',
     _origIndex: 101
   },
@@ -1869,7 +1869,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "保安器《ほあんき》",
   type: "vocab",
   id_text: "Pelindung jalur masuk",
-  desc: "Dipasang di titik masuk kabel untuk melindungi peralatan komunikasi dari",
+  desc: "Dipasang di titik masuk kabel untuk melindungi peralatan komunikasi dari 雷《かみなり》サージ (lonjakan petir) dan 過電流《かでんりゅう》 yang masuk lewat jalur luar.",
   usage: '保安器《ほあんき》で局線《きょくせん》からの雷《かみなり》サージや過電流《かでんりゅう》から機器《きき》を保護《ほご》する（lindungi peralatan dari lonjakan petir dan arus lebih dari jalur telpon menggunakan protector）',
     _origIndex: 1191
   },

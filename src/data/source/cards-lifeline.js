@@ -756,7 +756,7 @@ export const CARDS_LIFELINE = [
   jp: "けい酸カルシウム保温材《けいさんかるしうむほおんざい》",
   type: 'vocab',
   id_text: "Isolasi kalsium silikat",
-  desc: "Insulasi termal berbasis kalsium silikat untuk pipa/peralatan suhu tinggi. Bukan untuk pipa air",
+  desc: "Insulasi termal berbasis kalsium silikat untuk pipa/peralatan suhu tinggi. Bukan untuk pipa air dingin — daya serap airnya tinggi, jadi khusus jalur panas seperti pipa uap dan boiler.",
   usage: 'けい酸カルシウム保温材《けいさんかるしうむほおんざい》を高温蒸気管《こうおんじょうきかん》に巻《ま》く（balut pipa uap bertekanan tinggi dengan insulasi kalsium silikat）',
     _origIndex: 101
   },
@@ -764,11 +764,11 @@ export const CARDS_LIFELINE = [
   id: 94,
   category: "shoubou",
   source: "jac-ch2",
-  furi: "しょうかいき",
-  jp: "消火器《しょうかいき》",
+  furi: "しょうかき",
+  jp: "消火器《しょうかき》",
   type: 'vocab',
   id_text: "Alat pemadam api (APAR)",
-  desc: "Perangkat portabel untuk memadamkan api awal kebakaran. Dipasang di setiap lokasi sesuai",
+  desc: "Perangkat portabel untuk memadamkan api awal kebakaran. Dipasang di setiap lokasi sesuai 消防法《しょうぼうほう》: jarak jalan kaki ke unit terdekat maksimal 20 m (30 m untuk tipe besar).",
   usage: '消火器《しょうかいき》を取《と》り付《つ》け位置《いち》を確認《かくにん》する（konfirmasi posisi pemasangan alat pemadam api）',
     _origIndex: 102
   },
@@ -6104,7 +6104,7 @@ export const CARDS_LIFELINE = [
   jp: "避難はしご《ひなんはしご》",
   type: "vocab",
   id_text: "Tangga evakuasi darurat",
-  desc: "Tangga yang dipasang di jendela untuk turun menyusuri dinding luar saat lift",
+  desc: "Tangga yang dipasang di jendela untuk turun menyusuri dinding luar saat lift tidak bisa dipakai. Ada 3 tipe: 固定式《こていしき》 (permanen), 吊下げ式《つりさげしき》 (digantung saat dipakai), dan 立てかけ式《たてかけしき》 (disandarkan).",
   usage: '避難はしご《ひなんはしご》を窓《まど》や外壁《がいへき》に設置《せっち》して火災時《かさいじ》の脱出《だっしゅつ》に備《そな》える（pasang tangga evakuasi pada jendela atau dinding luar sebagai jalur keluar saat kebakaran）',
     _origIndex: 1085
   },
@@ -6140,7 +6140,7 @@ export const CARDS_LIFELINE = [
   jp: "発信機《はっしんき》",
   type: "vocab",
   id_text: "Tombol alarm kebakaran",
-  desc: "Ditekan saat melihat api untuk mengaktifkan alarm; berwarna merah, dipasang di",
+  desc: "Ditekan saat melihat api untuk mengaktifkan alarm; berwarna merah, dipasang di koridor tiap lantai pada ketinggian 0,8–1,5 m dari lantai, dengan jarak jalan kaki ke unit terdekat maksimal 50 m.",
   usage: '火災《かさい》を発見《はっけん》したら発信機《はっしんき》のボタンを押《お》して警報《けいほう》を起動《きどう》する（tekan tombol pada alarm box untuk mengaktifkan peringatan saat menemukan kebakaran）',
     _origIndex: 1094
   },
@@ -6500,7 +6500,7 @@ export const CARDS_LIFELINE = [
   jp: "保安器《ほあんき》",
   type: "vocab",
   id_text: "Pelindung jalur masuk",
-  desc: "Dipasang di titik masuk kabel untuk melindungi peralatan komunikasi dari",
+  desc: "Dipasang di titik masuk kabel untuk melindungi peralatan komunikasi dari 雷《かみなり》サージ (lonjakan petir) dan 過電流《かでんりゅう》 yang masuk lewat jalur luar.",
   usage: '保安器《ほあんき》で局線《きょくせん》からの雷《かみなり》サージや過電流《かでんりゅう》から機器《きき》を保護《ほご》する（lindungi peralatan dari lonjakan petir dan arus lebih dari jalur telpon menggunakan protector）',
     _origIndex: 1191
   },
@@ -6524,7 +6524,7 @@ export const CARDS_LIFELINE = [
   jp: "真空ポンプ《しんくうぽんぷ》",
   type: "vocab",
   id_text: "Pompa vakum / vacuum pump",
-  desc: "Digunakan setelah pemasangan pipa refrigeran untuk mengosongkan udara dan",
+  desc: "Digunakan setelah pemasangan pipa refrigeran untuk mengosongkan udara dan uap air dari dalam pipa (真空引き《しんくうびき》) sebelum refrigeran diisi. Vakum tidak tuntas → air tersisa → kompresor rusak.",
   usage: "真空《しんくう》引《び》きをする（melakukan vakumisasi pipa refrigeran）",
   _origIndex: 1299
   },
@@ -6572,7 +6572,7 @@ export const CARDS_LIFELINE = [
   jp: "サドル",
   type: "vocab",
   id_text: "Saddle / braket penopang",
-  desc: "Braket untuk menempelkan pipa ke dinding, plafon, atau lantai.\nJarak saddle",
+  desc: "Braket untuk menempelkan pipa ke dinding, plafon, atau lantai.\nJarak saddle mengikuti diameter dan bahan pipa; kalau terlalu lebar, pipa melendut (たわみ).",
   usage: 'サドルで配管《はいかん》を天井《てんじょう》スラブや梁《はり》に固定《こてい》する（kencangkan pipa pada slab langit-langit atau balok menggunakan saddle）',
     _origIndex: 1346
   },

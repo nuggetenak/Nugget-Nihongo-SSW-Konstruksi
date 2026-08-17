@@ -388,11 +388,11 @@ export const CARDS_CH6 = [
   id: 1325,
   category: "sekou",
   source: "jac-ch6",
-  furi: "とんねるのよんしゅるいこうほうでぶんるい",
+  furi: "とんねるのよんしゅるい",
   jp: "トンネルの4種類《しゅるい》（工法《こうほう》で分類《ぶんるい》）",
   type: 'vocab',
   id_text: "4 jenis terowongan",
-  desc: "①山岳《さんがく》=NATM di gunung. ②開削《かいさく》=gali-tutup. ③シールド=mesin+segmen, tanah lunak. ④推進《すいしん》=pipa",
+  desc: "①山岳《さんがく》=NATM di gunung. ②開削《かいさく》=gali-tutup. ③シールド=mesin+segmen, tanah lunak. ④推進《すいしん》=pipa didorong pakai jack dari 立坑《たてこう》, buat pipa diameter kecil tanpa bongkar jalan.",
   usage: 'NATM・シールド・推進・開削の4種類《よんしゅるい》のトンネル工法《こうほう》を使い分《つかいわ》ける（bedakan penggunaan 4 metode terowongan: NATM, shield, jack-push, dan cut-and-cover）',
     _origIndex: 1481
   }

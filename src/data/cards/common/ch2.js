@@ -495,7 +495,7 @@ export const CARDS_CH2 = [
   jp: "賠償予定の禁止《ばいしょうよていのきんし》",
   type: "hukum",
   id_text: "Dilarang tetapkan denda",
-  desc: "Pemberi kerja dilarang mencantumkan klausul denda pemutusan di muka. Pekerja boleh menolak kontrak",
+  desc: "Pemberi kerja dilarang mencantumkan klausul denda pemutusan di muka. Pekerja boleh menolak kontrak yang memuat klausul semacam itu — dilarang oleh 労働基準法《ろうどうきじゅんほう》第16条《だいじゅうろくじょう》, termasuk denda kalau berhenti sebelum kontrak habis.",
   _origIndex: 160
   },
 {
@@ -579,11 +579,11 @@ export const CARDS_CH2 = [
   id: 160,
   category: "hourei",
   source: "jac-ch2",
-  furi: "けんこうしんだんていきねんいっかいとやといいれじ",
-  jp: "健康診断《けんこうしんだんていきねんいっかいとやといいれじ》",
+  furi: "けんこうしんだん",
+  jp: "健康診断《けんこうしんだん》",
   type: "hukum",
   id_text: "Cek kesehatan",
-  desc: "Perusahaan wajib selenggarakan 健康《けんこう》診断《しんだん》 1x/tahun dan saat rekrut baru. Biaya ditanggung",
+  desc: "Perusahaan wajib selenggarakan 健康《けんこう》診断《しんだん》 1x/tahun dan saat rekrut baru. Biaya ditanggung perusahaan, bukan pekerja.",
   _origIndex: 168
   },
 {

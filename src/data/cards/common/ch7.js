@@ -231,7 +231,7 @@ export const CARDS_CH7 = [
   jp: "シールド面付きヘルメット / 安全靴《しいるどめんつきへるめっと / あんぜんぐつ》",
   type: 'vocab',
   id_text: "Helm wajah + sepatu safety",
-  desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari",
+  desc: "シールド面《めん》付《つ》きヘルメット = helm dengan pelindung wajah penuh untuk pekerjaan las — lindungi dari percikan api las, sinar busur yang menyilaukan, dan panas.",
   usage: '溶接《ようせつ》・研削作業《けんさくさぎょう》ではシールド面付き《めんつき》ヘルメットと安全靴《あんぜんぐつ》を着用《ちゃくよう》する（kenakan helm berpelindung wajah dan sepatu safety saat pengelasan）',
     _origIndex: 600
   },
@@ -367,7 +367,7 @@ export const CARDS_CH7 = [
   jp: "機械設置工事の死亡事故《きかいせっちこうじのしぼうじこ》",
   type: 'vocab',
   id_text: "Pasang mesin besar",
-  desc: "Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat",
+  desc: "Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat mengangkat, menurunkan, dan menyetel posisi mesin adalah titik paling rawan — tumpuan belum stabil tapi bebannya sudah penuh.",
   usage: '大型機械《おおがたきかい》の設置工事《せっちこうじ》では転倒《てんとう》による死亡事故《しぼうじこ》に注意《ちゅうい》する（waspadai kecelakaan fatal akibat terbaliknya alat berat saat pekerjaan pemasangan mesin）',
     _origIndex: 734
   },
