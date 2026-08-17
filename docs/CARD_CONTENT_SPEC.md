@@ -903,39 +903,42 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
       terpisah tidak pakai, tapi `main` pakai. Lihat blocker di atas.
 - [ ] Drop furi dari semua split files → re-run merge (HANYA setelah dua item pertama beres)
 
-### P22 — Quiz quality: rata + naik kelas (BARU, diminta owner session 28)
-> **Task baru, bukan turunan dari task lama.** Owner: *"before merging with main, aku pengen semua
-> quiz (selain yang resmi dari JAC) itu semuanya jumlah soal merata, kualitas soal & opsi
-> jawabannya juga ditingkatkan."* P8a/P8b/P10/P11 memang menyentuh quiz set, tapi keempatnya
-> defect-fix sempit di `wglv` saja (ruby, `opts_id` kosong, `exp` sirkular) — belum pernah ada
-> pass kualitas pedagogis. Scope: seluruh `sets/wayground/**` + `sets/jac-mockup/**` (957 soal).
-> `sets/jac/` (jac-teori 65q, jac-lifeline 30q) **di luar scope** — itu materi ujian JAC asli.
-> Angka lengkap + urutan pengerjaan yang disarankan ada di HANDOFF.md bagian 🟢; ringkas di sini:
-- [x] **wglv-* (236 soal) SELESAI session 28** — opsi ke-4 ditambah + rebalance round-robin dalam
-      satu pass. `ans:0` 206/236 (87%) → 60/60/60/56. Opsi ke-4 **disampel dari term pool korpus,
-      bukan dikarang**, dengan 4 guard (termasuk penolakan near-synonym). Deterministik. Commit
-      `4957188`. ⚠️ Urutan wajib: tambah opsi ke-4 DAN rebalance dalam satu pass — kalau rebalance
-      duluan, distractor baru semua mendarat di indeks 3 dan bikin bias baru
-- [ ] **Rebalance `ans` sisanya** — `wgl01-10` masih 121/200 (60%), `wgl05` bahkan 20/20 (100%).
-      `jac-mockup` (23%) dan `wt*` (16%) sudah sehat, tidak perlu disentuh
-- [ ] **Triage 288 soal dengan teks pertanyaan duplikat** lintas set (~30% korpus; dibandingkan
-      setelah `《》` di-strip). Sebagian mungkin pengulangan yang disengaja — perlu keputusan
-      per-kasus, bukan hapus buta
-- [ ] **Perpanjang 157 `exp` yang <40 karakter** (coverage `exp` sendiri sudah 100%, sisa P11)
-- [ ] **Standardkan jumlah opsi ke 4** (owner sudah putuskan 2026-08-17: target **4**). Sisa 421
-      soal 3-opsi: `wgl01-10` (200), `wt01-10` (199), `wtv01` (22). ⚠️ Trik sampling yang dipakai
-      di wglv **tidak bisa dipakai di sini** — soal-soal ini berupa pernyataan/konsep, bukan istilah,
-      jadi distractor-nya harus ditulis, bukan disampel
-- [ ] Fix 1 opsi kosong tersisa = kartu ex-wglv03 id=23 yang sudah lama di-flag di HANDOFF
-- [x] **Jumlah soal SUDAH RATA (session 28, commit `dbf3da6`)** — +23 soal baru, tidak ada yang
-      dihapus. `wt01` 19→20, `wglv-id-01/02/03` + `wglv-jp-03` 39→40, `wtv01` 22→20 + set baru
-      `wtv02` (20). Total korpus 957→980. Semua soal baru dicek duplikat dulu terhadap 957 soal
-      lama — **3 duplikat asli tertangkap dan diganti**. Checker-nya bias template (soal `wglv-id`
-      semua sepola), jadi flag-nya wajib diverifikasi manual
-- [x] Catatan lama: **`jml`=20 vs `jmt`=30 BENAR apa adanya.** Outlier cuma `wt01`=19 (sengaja, ada
-      komentar di file) dan `wtv01`=22 (file tunggal). `jml`=20 vs `jmt`=30 **BENAR apa adanya** —
-      owner konfirmasi 2026-08-17: mockup meniru struktur simulasi ujian Prometric, dan set JAC asli
-      65:30 karena sumbernya memang persis begitu. Jangan disamakan
+### P22 — Quiz quality: rata + naik kelas (diminta owner session 28) — ✅ SELESAI
+> Owner: *"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
+> jumlah soal merata, kualitas soal & opsi jawabannya juga ditingkatkan."* P8a/P8b/P10/P11 memang
+> menyentuh quiz set, tapi keempatnya defect-fix sempit di `wglv` saja. Scope: seluruh
+> `sets/wayground/**` + `sets/jac-mockup/**`. `sets/jac/` **di luar scope**, tidak disentuh sama
+> sekali sepanjang P22. Detail lengkap di HANDOFF.md bagian P22; ringkas di sini:
+- [x] **wglv-* (236 soal)** — opsi ke-4 disampel dari term pool korpus + rebalance. `ans:0` 87%→
+      60/60/60/56. Commit `4957188`.
+- [x] **wgl01-10 + wt01-10 + wtv01 (419 soal)** — trik sampling wglv tidak bisa dipakai di sini
+      (soal konsep, bukan istilah — sempat dicoba otomatis, diaudit, ~8/11 sample jelek, di-revert).
+      **Ditulis manual satu-satu** setelah owner bilang "kamu tulis manual aja semuanya." wgl →
+      persis 50/50/50/50 (commit `ec82166`); wt+wtv01 → persis 55/55/55/55 (commit `d87926d`).
+- [x] **Standardisasi opsi ke 4 SELESAI TOTAL** — 0 soal tersisa di 3-opsi (dari 419). Monolith
+      di-regenerate ulang total dari split file (commit `8177064`), bukan di-patch manual.
+- [x] **Jumlah soal SUDAH RATA** (commit `dbf3da6`) — +23 soal baru, tidak ada yang dihapus.
+      `jml`=20 vs `jmt`=30 **BENAR apa adanya** (owner konfirmasi: meniru simulasi ujian Prometric).
+- [x] **Triage 288 soal "duplikat"** — **DIINVESTIGASI, BUKAN DEFECT.** `jml01-04` ternyata
+      compiled subset dari `wgl06-09` (18-20/20 soal identik), tiap `jmtN` narik 20-30 soal dari
+      BANYAK set `wt` sekaligus, dan `wt06` sendiri narik 20 soal dari 6 set `wt` lain. Ini
+      arsitektur cumulative-review/mock-exam-compilation yang disengaja — cocok dengan konfirmasi
+      owner soal jml/jmt meniru Prometric. Tidak ada yang diubah.
+- [x] **Perpanjang 157 `exp` <40 karakter** — **DIINVESTIGASI, SEBAGIAN BESAR BUKAN DEFECT, tapi
+      nemu bug baru.** 140/157 sudah format "term = translation" yang memang tepat untuk kartu
+      vocab; 8/157 (`wgl02-06`) pakai shorthand arrow-chain korpus sendiri, juga sudah tepat.
+      **9 sisanya BUKAN soal panjang** — `wglv-jp-02` id 16-24 kehilangan headword Jepang-nya
+      sepenuhnya (q/hint/jawaban/exp semua jadi frasa Indonesia yang sama, soal jadi tautologi).
+      Sudah ada sejak commit `3e8cea8` (P16 split awal), bukan dari sesi ini. **Sengaja TIDAK
+      diperbaiki** — merekonstruksi 9 headword yang hilang itu beda kelas dengan melengkapi
+      kalimat terpotong; itu mengarang istilah spesifik yang tidak bisa diverifikasi. Detail +
+      daftar id lengkap di HANDOFF.md bagian 🟡 (butuh source asli atau ingatan owner)
+- [x] Fix 1 opsi kosong tersisa = kartu ex-wglv03 id=23 — **masih belum bisa diperbaiki** (beda
+      isu dari yang di atas, butuh source asli, tetap di-track di HANDOFF bagian 🟡, TIDAK
+      di-guess-fix)
+
+**Verifikasi akhir korpus penuh (980 soal):** 0 di 3-opsi, 0 opsi duplikat dalam satu soal, 0
+mismatch panjang opts/opts_id, 0 indeks ans di luar jangkauan, monolith↔split 0 mismatch.
 
 ### P13 — Post-source-reclassify (setelah P6)
 - [ ] Re-run merge script → verify cards.js bersih dari deprecated sources

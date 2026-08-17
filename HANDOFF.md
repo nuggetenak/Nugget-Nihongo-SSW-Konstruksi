@@ -418,6 +418,20 @@ it failing is the expected signal, not a regression. `SearchMode.jsx` already im
   'Membersihkan permukaan fusi'") has malformed `opts`: one entry looks like two merged options
   (`"融着面の清掃《...》b) 管の清掃《...》"`) and one empty string. Needs the original source to
   fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
+- **New (session 28, part 3, found during P22's thin-`exp` triage): `wglv-jp-02` ids 16–24 (9
+  cards, contiguous) have completely lost their Japanese headword.** `q`, `hint`, the correct
+  answer, and `exp` are all the same Indonesian phrase — e.g. id=16: q="Apa arti dari soket EF?",
+  ans="Soket EF", exp="Soket EF". A tautological question with zero teaching value. Confirmed
+  isolated to exactly this block (scanned all 3 `wglv-jp-*` sets for "question contains zero
+  Japanese characters" — nowhere else). Predates this session (already present at the original
+  P16-split commit `3e8cea8`), so this isn't something introduced by any recent edit. Not
+  guess-fixed: id=16 has real support for "EFソケット" (electrofusion socket — `wgl06` already
+  establishes EF接合 terminology in this exact domain), but the other 8 (17 water-supply
+  polyethylene pipe, 18 terminal pin, 19 "scraping", 20 "cooling", 21 telecom work, 22 underground
+  piping, 23 cable wiring, 24 underground optical cable wiring) each have multiple equally-
+  plausible Japanese candidates with nothing in the data to disambiguate. Needs either the
+  original source material this set was built from, or the owner's own memory of what these 9
+  terms were meant to be.
 
 ### 🟢 Unblocked — owner decision 2026-08-17 (session 28), ready to start
 **Owner clarified the whole branch's contract:** *"branch content-dq emang cuma buat maintain and
@@ -430,73 +444,86 @@ on `main` should treat that as a merge-time TODO to record, not as a reason to s
 | Task | What | Status |
 |---|---|---|
 | P12 | Drop `furi` from all split files | **Unblocked.** The 6 `main` consumers listed below are now merge-time reconciliation items, not blockers. Still genuinely unstarted — nobody has done it yet. Do P1 first if it isn't fully done (P12 depends on `《》` ruby in `jp` being complete, since `extractReading(c.jp)` is the intended replacement). |
-| **P22 (NEW)** | Quiz set equalization + question/option quality uplift, all non-JAC sets | **New task, owner-requested 2026-08-17.** Not a pre-existing item — see below. |
+| **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun out to the 🟡 bucket (wglv-jp-02 headword loss). |
 
-#### P22 — Quiz quality (NEW, owner-requested session 28)
+#### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
 Owner: *"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
 jumlah soal merata, kualitas soal & opsi jawabannya juga ditingkatkan."* This was **not** on the
-task list in any form. P8a/P8b/P10/P11 each touched quiz sets, but all four were narrow
-defect-fixes on `wglv` only (ruby, empty `opts_id`, circular `exp`). There has never been a
-pedagogical-quality pass. Scope is all non-JAC sets — `wayground/**` + `jac-mockup/**`, 957
-questions total. `sets/jac/` (jac-teori 65q, jac-lifeline 30q) is **out of scope**: that's real
-JAC exam material, don't touch it.
+task list in any form — P8a/P8b/P10/P11 each touched quiz sets, but all four were narrow
+defect-fixes on `wglv` only (ruby, empty `opts_id`, circular `exp`). Scope was all non-JAC sets —
+`wayground/**` + `jac-mockup/**`. `sets/jac/` (jac-teori 65q, jac-lifeline 30q) was **out of
+scope** throughout and was never touched.
 
-**Census run session 28 (script not committed; reproduce by loading each set module and walking
-`.questions`).** The count-evenness half turns out to be nearly done already; the quality half is
-the real work:
+**Final state: every one of the 5 original findings is resolved.**
 
-| Finding | Number | Note |
-|---|---|---|
-| Answer-index bias | `ans:0` on **432 / 957 = 45%** overall — but **not evenly spread**, see per-family table below | **Worst issue.** Always-pick-the-first scores 45% without reading anything. Fix = 4th option + reindex in one pass. |
-| Duplicate question text across sets | **288** (~30% of corpus) | Compared after stripping `《》`. e.g. wt02/wt03/wt06 overlap heavily; wglv-jp-01/02/03 overlap. Needs dedupe-or-differentiate decisions, some may be intentional reinforcement. |
-| Thin explanations | **157** `exp` shorter than 40 chars | `exp` coverage itself is 100% (0 missing) — P11 did its job. These are just short. |
-| Option-count inconsistency | 657 with 3 opts, 300 with 4 | ✅ **Owner answered 2026-08-17: target is 4.** 236 done (wglv), 421 remain. |
-| Empty option string | **1** | This is the already-known malformed `opts` on the ex-wglv03 id=23 card (see 🟡 bucket) — census independently confirms it's the only one. |
+| Finding (original census) | Resolution |
+|---|---|
+| `ans:0` on 432/957 = 45%, concentrated in `wgl`/`wglv` | ✅ Fixed. All non-JAC questions now 4-option and rebalanced; see below. |
+| 657 questions at 3 options, 300 at 4 | ✅ Fixed. **0 questions left at 3 options** (was 419 after wglv's 236 were done first). |
+| Question counts uneven across sets in a family | ✅ Fixed. +23 authored (nothing deleted): `wt01` 19→20, `wglv-id-01/02/03`+`wglv-jp-03` 39→40 each, `wtv01` 22→20 + new `wtv02` (20, 2 moved + 18 authored). `jml`=20 vs `jmt`=30 confirmed correct-as-is by owner (mirrors Prometric exam structure) — **do not equalize this**. |
+| 288 duplicate-question groups (556q) | ✅ Investigated, **not a defect** — see below. |
+| 157 `exp` fields under 40 chars | ✅ Investigated, **mostly not a defect** — see below, but turned up a real separate bug. |
 
-**Answer-bias is concentrated, not spread — this changes the work order.** Per family:
+**Option-count + rebalance work, in the order it happened:**
+1. `wglv-*` (236q): 4th option *sampled* from the same-direction answer pool (each a real term
+   already correct elsewhere, with 4 guards including a near-synonym block), rebalanced
+   round-robin in the same pass as the append (rebalancing first would park every new option at
+   index 3 and create a fresh tell — do this in one pass, always). 206/236 at position 0 →
+   60/60/60/56. Commit `4957188`.
+2. `wgl01–10` + `wt01–10` + `wtv01` (419q): the sampling trick from step 1 **does not transfer**
+   here — these are conceptual/statement questions (claims, not interchangeable terms), and an
+   automated pooled-sampling attempt was tried, audited, and reverted (~8/11 sampled bad — see the
+   ⛔ box below). **Hand-authored instead**, one wrong option per question, read individually
+   against its own existing 2 wrong answers. `wgl` matched the corpus's own established
+   generic-technical-parameter register (color/weight/flow-rate/temperature/noise) plus real
+   confusable material/tool swaps where safely defensible (e.g. 保冷材-vs-保温材). `wt`/`wtv` used
+   real adjacent facts/roles/rates (e.g. real overtime multiplier 1.35倍 as a wrong answer to a
+   1.25倍 question; real-but-different roles like 衛生管理者 vs 安全管理者). Deliberately avoided any
+   distractor that could itself be a second valid correct answer (e.g. rejected 経験の浅さ as a
+   "wrong" human-error cause since it's also a true cause elsewhere in the corpus — used 給料の高さ
+   instead). wgl → exact 50/50/50/50 (commit `ec82166`); wt+wtv01 → exact 55/55/55/55 (commit
+   `d87926d`). `wt06` reuses the same distractor text as its verbatim-duplicate twins in wt01–05
+   for consistency rather than authoring independent ones (see duplicate-triage finding below for
+   why wt06 duplicates so much in the first place).
+3. Monolith `wayground-sets.js` fully regenerated (not hand-patched) from the split files after
+   both chunks landed. Commit `8177064`.
 
-| Family | questions | `ans:0` | verdict |
-|---|---|---|---|
-| `jac-mockup` (jml+jmt) | 300 | 70 = 23% | ✅ healthy, and already 4-opt — **nothing to do** |
-| `wt01–10` + `wtv01` | 221 | 35 = 16% | ✅ bias healthy; still needs the 4th option |
-| `wgl01–10` | 200 | 121 = **60%** | ❌ `wgl05` is 20/20 = **100%** |
-| `wglv-*` | 236 | 206 = **87%** | ❌ `wglv-jp-01` was 40/40 = **100%** — ✅ **DONE, see below** |
+**Final corpus-wide check (980 questions, all of `wayground/**` + `jac-mockup/**`):** 0 at 3
+options (was 419), 0 duplicate options within any single question, 0 `opts`/`opts_id` length
+mismatches, 0 out-of-range `ans` indices, monolith↔split cross-check 0 mismatches. Answer-position
+distribution 240/255/252/233 (~24–26% each) — not perfectly flat only because `jac-mockup`'s own
+already-healthy ~23% natural distribution (300q, untouched by design) pulls the aggregate slightly;
+every family P22 actually touched is individually at exact or near-exact even split.
 
-100%-at-position-0 sets aren't "biased", they're source data that was never shuffled.
+**Duplicate-question investigation — resolved as NOT a defect, nothing changed.** Traced which
+sets share which questions. `jml01–04` turned out to be near-1:1 compiled subsets of `wgl06–09`
+(18–20/20 questions each, already 4-opt before this session touched `wgl`), `jml05` mixes from
+`wgl02–04`, and every `jmt0N` draws 20–30 questions spread across *multiple* `wt0N` sets. `wt06`
+does the same thing one level down: 20 questions pulled from 6 different earlier `wt` sets (2 from
+wt01, 5 from wt02, 5 from wt03, 3 from wt05, 4 from wt04, 1 from wt08). This is a
+cumulative-review / mock-exam-compilation architecture — matches the owner's own confirmation that
+`jml`/`jmt` mirror the real Prometric exam structure — not accidental copy-paste. Deleting or
+rewriting any of it would break the design.
 
-**⚠️ ORDER MATTERS — do not rebalance before adding the 4th option.** Appending a 4th option after
-a rebalance parks every new distractor at index 3 and creates a fresh "position 3 is always wrong"
-tell, which is worse than the bias being fixed. Both must happen in one pass per set.
-
-**✅ Step 1 done (session 28): all 6 `wglv-*` sets, 236 questions.** 4th option added + round-robin
-rebalance, one pass. Distribution 206/236 at position 0 → **60/60/60/56**. The 4th options were
-*sampled, not invented* — each is a real term already serving as the correct answer to another
-question in the same direction pool, carried over with its existing verified `opts_id` gloss, with
-4 guards (not already an option / not the answer / word-overlap <0.5 with the answer's gloss so
-near-synonyms can't be added as "wrong" / not already named in that question's `hint`/`exp`).
-Deterministic, no `Math.random` — re-running reproduces the same file. Monolith `wayground-sets.js`
-re-spliced and cross-checked 236/236 identical. Commit `4957188`.
-
-**Next chunk — 421 questions still at 3 options:** `wgl01–10` (200), `wt01–10` (199), `wtv01` (22).
-These are conceptual/statement questions, so the pooled-sampling trick used for wglv **does not
-transfer** — their options are claims, not terms, and sampling would produce obvious throwaways.
-They need authored distractors. `wgl` first: it's the one that also has the 60% bias.
-
-**✅ Step 2 done (session 28): count equalization. Every set is now even within its family.**
-+23 questions, nothing deleted. `wt01` 19→20 (fills the deliberate id-5 gap, ids now contiguous),
-`wglv-id-01/02/03` and `wglv-jp-03` 39→40 each, and `wtv01` 22→20 with a **new `wtv02` (20)** —
-its title always said "Set 1", so Set 2 was the original intent; the 2 displaced questions were
-*moved* into wtv02 and given a 4th option, not trimmed. Corpus 957→980 questions. wglv sets
-re-rebalanced to exactly 10/10/10/10 each. Corpus-wide `ans:0` now 292/980 = 30% (was 45%).
-Commit `dbf3da6`.
-
-⚠️ **Every new question was bigram-checked against all 957 existing ones before writing, and it
-caught 3 real duplicates** — a wt01 5S「清潔」draft that duplicated wt01's own q14, a CCUS question
-that duplicated wt05 q11, and a マンホール question overlapping wt02 q2. All three replaced. **Do
-this check for any future authored questions**; the corpus already has 288 known cross-set
-duplicates and it's very easy to add more by accident. Note the checker is template-biased: all
-`wglv-id` questions share "Apa bahasa Jepangnya X?" so they score ~0.8 against each other even
-when the terms are unrelated — verify flagged pairs by hand rather than trusting the score.
+**Thin-`exp` investigation — resolved as mostly NOT a defect, but surfaced a real separate bug.**
+Of the 157: 140 already follow adequate "term《ruby》 = translation." format (fine for a vocab
+card, expanding would be padding); 8 more (`wgl02–06`) use the corpus's own "A → B → C" arrow-chain
+shorthand, also fine, just compact. **The remaining 9 are not a length problem: `wglv-jp-02` ids
+16–24 have completely lost their Japanese headword** — `q`, `hint`, the correct answer, and `exp`
+are all the same Indonesian phrase (e.g. id=16: q="Apa arti dari soket EF?", ans="Soket EF",
+exp="Soket EF" — a tautological, zero-value question). Scanned all 3 `wglv-jp-*` sets for this
+signature (question containing zero Japanese characters, structurally wrong for a "JP→ID"
+direction quiz) — confirmed isolated to exactly this one contiguous block, nowhere else. Predates
+this session entirely (present already at the original P16-split commit `3e8cea8`).
+**Deliberately NOT fixed** — reconstructing 9 missing Japanese headwords is qualitatively different
+from completing truncated-but-present content; it's inventing which specific term was intended.
+One (id=16) has reasonable support for "EFソケット" given `wgl06` already establishes EF接合
+(electrofusion joint) terminology in this exact domain — but the other 8 (id=17 water-supply
+polyethylene pipe, 18 terminal pin, 19 "scraping", 20 "cooling", 21 telecom work, 22 underground
+piping, 23 cable wiring, 24 underground optical cable wiring) each have multiple equally-plausible
+Japanese candidates with no way to disambiguate from available data. Flagged all 9 together rather
+than fixing 1 of 9 and silently leaving 8 broken. **Needs owner input or new source material** —
+does the owner remember/have a source for what these 9 terms should be?
 
 ### ✅ Resolved (session 28): monolith ↔ split-file set-id drift
 Was 21 of 27 sets disagreeing. Owner confirmed `main` and the live site have no users but himself,
