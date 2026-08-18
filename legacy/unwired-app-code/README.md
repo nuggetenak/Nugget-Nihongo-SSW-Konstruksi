@@ -2,6 +2,10 @@
 
 Moved here 2026-08-18 during a repo hygiene pass, out of `src/`.
 
+**Owner decision (2026-08-18, same day): keep as-is.** *"prolly gonna be useful or handy in some
+ways in the future."* Not a temporary holding spot pending cleanup — settled. No need to
+re-litigate this or suggest deleting it in a future session.
+
 ## What this is
 
 Three React files (`FilterPopup.jsx`, `useTrackedCards.js`, `FocusMode.jsx`) that were sitting
@@ -27,6 +31,6 @@ which reads more like "swept along in a broader find-and-replace for consistency
 call — recoverable in one step if there's a reason they should exist here, easy to actually
 delete later if not.
 
-If you're reading this and know these should just be gone: `git rm -r legacy/unwired-app-code/`
-is safe, history preserves them either way. If you're reading this and these are meant to be
-live app code, they belong on `main` (where `theme.js` etc. presumably do exist), not here.
+If you're reading this and wondering whether these are meant to be live app code: they belong
+on `main` (where `theme.js` etc. presumably do exist), not here — but the owner has decided to
+keep this copy on `content-dq` regardless, so leave it in place.
