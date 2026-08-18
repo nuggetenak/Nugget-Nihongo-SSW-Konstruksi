@@ -388,7 +388,7 @@ export const CARDS_CH3 = [
   jp: "橋梁工事《きょうりょうこうじ》（下部工《かぶこう》・上部工《じょうぶこう》）",
   type: 'vocab',
   id_text: "Jembatan: bawah & atas",
-  desc: "下部《ぶ》工《かぶこう》=pondasi penopang jembatan.\n上《うえ》部《ぶ》工《じょうぶこう》=badan jembatan untuk kendaraan/pejalan kaki. kaki.",
+  desc: "下部工《かぶこう》=pondasi penopang jembatan.\n上《うえ》部《ぶ》工《じょうぶこう》=badan jembatan untuk kendaraan/pejalan kaki.",
   usage: '橋梁《きょうりょう》の下部工《かぶこう》（橋脚《きょうかく》）と上部工《じょうぶこう》（桁《けた》）を順《じゅん》に施工《せこう》する（kerjakan struktur bawah jembatan lalu struktur atas secara berurutan）',
     _origIndex: 1450
   },
@@ -487,7 +487,7 @@ export const CARDS_CH3 = [
   jp: "さく井工事の4種類《さくせいこうじしゅるい》（水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》）",
   type: 'vocab',
   id_text: "4 jenis pengeboran sumur",
-  desc: "①水源《すいげん》井《い》=air tanah ②観測《かんそく》井《い》=pantau penurunan tanah ③温泉《おんせん》井《い》=500–1000m ④地熱《ちねつ》井《せい》=2000m untuk PLTP, butuh teknik tinggi. ④地熱《ちねつ》井《せい》=2000m untuk PLTP, butuh teknik tinggi.",
+  desc: "①水源《すいげん》井《い》=air tanah ②観測《かんそく》井《い》=pantau penurunan tanah ③温泉《おんせん》井《い》=500–1000m ④地熱《ちねつ》井《せい》=2000m untuk PLTP, butuh teknik tinggi.",
   usage: '水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》の4種類《よんしゅるい》のさく井工事《こうじ》を理解《りかい》する（pahami 4 jenis pekerjaan bor sumur: air bersih, observasi, panas bumi, dan geothermal）',
     _origIndex: 1459
   },
@@ -771,7 +771,7 @@ export const CARDS_CH3 = [
   jp: "鉄骨構造の種類《ぶれすらあめんとらす》（ブレース・ラーメン・トラス）",
   type: 'vocab',
   id_text: "3 jenis struktur baja",
-  desc: "①ブレース: diagonal brace. ②ラーメン: sambungan kaku kolom-balok, tahan gempa.\n③トラス: susunan segitiga untuk atap, kubah, jembatan. atap, kubah, jembatan.",
+  desc: "①ブレース: diagonal brace. ②ラーメン: sambungan kaku kolom-balok, tahan gempa.\n③トラス: susunan segitiga untuk atap, kubah, jembatan.",
   usage: 'ブレース・ラーメン・トラスの3種類《さんしゅるい》の鉄骨構造《てっこつこうぞう》を理解《りかい》する（pahami 3 jenis struktur baja: braced frame, rigid frame, dan truss）',
     _origIndex: 1504
   },
@@ -815,7 +815,7 @@ export const CARDS_CH3 = [
   jp: "山留め工事《やまどめ》・支保工《しほこう》",
   type: 'vocab',
   id_text: "Penahan tanah & shoring",
-  desc: "Dinding sementara di dalam tanah untuk cegah longsor saat penggalian.\nDiperkuat strutting (支保工《しほこう》) agar dinding tidak roboh. (支保工《しほこう》) agar dinding tidak roboh.",
+  desc: "Dinding sementara di dalam tanah untuk cegah longsor saat penggalian.\nDiperkuat strutting (支保工《しほこう》) agar dinding tidak roboh.",
   usage: '山留め《やまどめ》と支保工《しほこう》で掘削《くっさく》面《めん》を安全《あんぜん》に保《たも》つ（jaga keamanan dinding galian menggunakan earth retention dan shoring）',
     _origIndex: 1508
   },
@@ -826,7 +826,7 @@ export const CARDS_CH3 = [
   jp: "耐震《たいしん》・制振《せいしん》・免振《めんしん》（たいしん・せいしん・めんしん）",
   type: 'vocab',
   id_text: "Tahan gempa / kontrol",
-  desc: "耐震《たいしん》=perkuat kolom/balok. 制振《せいしん》=damper serap getaran.\n免振《めんしん》=isolator di fondasi agar energi gempa tak merambat ke bangunan. energi gempa tak merambat ke bangunan.",
+  desc: "耐震《たいしん》=perkuat kolom/balok. 制振《せいしん》=damper serap getaran.\n免振《めんしん》=isolator di fondasi agar energi gempa tak merambat ke bangunan.",
   usage: '免振《めんしん》構造《こうぞう》で地震《じしん》エネルギーを建物《たてもの》に伝《つた》えない（cegah energi gempa masuk ke bangunan dengan struktur isolasi seismik）',
     _origIndex: 1509
   },
@@ -914,7 +914,7 @@ export const CARDS_CH3 = [
   jp: "塗装工事の3方法《とそうこうじほうほうはけろおらあえあすぷれえ》（はけ・ローラー・エアスプレー）",
   type: 'vocab',
   id_text: "3 metode cat",
-  desc: "①はけ塗《ぬ》り=kuas, cocok semua bentuk. ②ローラー=efisien area luas.\n③エアスプレー=cat dikabut kompresor untuk hasil merata di bentuk rumit. hasil merata di bentuk rumit.",
+  desc: "①はけ塗《ぬ》り=kuas, cocok semua bentuk. ②ローラー=efisien area luas.\n③エアスプレー=cat dikabut kompresor untuk hasil merata di bentuk rumit.",
   usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》で塗装《とそう》する（cat menggunakan 3 metode: kuas, roller, dan semprotan udara）',
     _origIndex: 1517
   },
@@ -1046,7 +1046,7 @@ export const CARDS_CH3 = [
   jp: "建築工事の流れ《けんちくこうじのながれ》（大規模《だいきぼ》ビル・マンション）",
   type: "konsep",
   id_text: "Urutan tahapan",
-  desc: "①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上《うえ》躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali — tidak boleh dibalik. — tidak boleh dibalik.",
+  desc: "①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上《うえ》躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali — tidak boleh dibalik.",
   _origIndex: 1536
   },
 {
@@ -1056,7 +1056,7 @@ export const CARDS_CH3 = [
   jp: "耐震《たいしん》・制振《せいしん》・免振《めんしん》の3種類（地震《じしん》対策《たいさく》）",
   type: 'vocab',
   id_text: "3 metode proteksi gempa",
-  desc: "①耐震《たいしん》=perkuat kolom & balok. ②制振《せいしん》=ダンパー kurangi goyangan.\n③免振《めんしん》=アイソレータ di fondasi, redam energi gempa sebelum masuk bangunan. redam energi gempa sebelum masuk bangunan.",
+  desc: "①耐震《たいしん》=perkuat kolom & balok. ②制振《せいしん》=ダンパー kurangi goyangan.\n③免振《めんしん》=アイソレータ di fondasi, redam energi gempa sebelum masuk bangunan.",
   usage: '耐震《たいしん》・制振《せいしん》・免振《めんしん》の3つの地震対策《じしんたいさく》を選択《せんたく》する（pilih salah satu dari 3 pendekatan proteksi seismik: tahan, reduksi, atau isolasi）',
     _origIndex: 1537
   },

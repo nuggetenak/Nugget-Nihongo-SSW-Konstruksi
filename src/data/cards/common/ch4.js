@@ -811,7 +811,7 @@ export const CARDS_CH4 = [
   jp: "根切り《ねきり》・余堀り《よぼり》・鋤取り《すきとり》・床付け《とこづけ》",
   type: 'vocab',
   id_text: "Tahapan galian pondasi",
-  desc: "根切《ねぎ》り=gali ke kedalaman pondasi. 余堀《よぼ》り=galian ekstra untuk ruang kerja. 鋤取《すきと》り=ratakan dasar.",
+  desc: "根切《ねぎ》り=gali ke kedalaman pondasi. 余堀《よぼ》り=galian ekstra untuk ruang kerja. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=meratakan/menghaluskan dasar galian dengan presisi sebelum pengecoran.",
   usage: '根切り《ねきり》→余堀り《よぼり》→鋤取り《すきとり》→床付け《とこずけ》の4段階《よんだんかい》で掘削《くっさく》する（gali dalam 4 tahap: galian utama → over-excavation → pemotongan → pembentukan dasar）',
     _origIndex: 1474
   },
@@ -866,7 +866,7 @@ export const CARDS_CH4 = [
   jp: "遣り方《やりかた》・水貫《みずぬき》・水盛り《みずもり》・地縄張り《じなわはり》・水糸《みずいと》",
   type: 'vocab',
   id_text: "5 istilah yarikata",
-  desc: "遣《や》り方《かた》=pagar referensi bangunan. 水貫《みずぬき》=papan horizontal. 水盛《みずも》り=tentukan referensi rata.",
+  desc: "遣《や》り方《かた》=pagar referensi bangunan. 水貫《みずぬき》=papan horizontal. 水盛《みずも》り=tentukan referensi rata. 地縄《じなわ》張《は》り=tandai batas bangunan di tanah dengan tali sebelum penggalian. 水糸《みずいと》=benang yang direntangkan di 水貫 sebagai acuan garis lurus/ketinggian.",
   usage: '遣り方《やりかた》・水貫・水盛り・地縄張り・水糸の5語《ごご》で建物《たてもの》の配置出し《はいちだし》を覚《おぼ》える（hafalkan 5 istilah untuk penentuan posisi bangunan）',
     _origIndex: 1490
   },
@@ -877,7 +877,7 @@ export const CARDS_CH4 = [
   jp: "盛り土《もりど》・段切り《だんぎり》・締固め《しめかため》・転圧《てんあつ》・埋戻し《うめもどし》・突固め《つきがため》",
   type: 'vocab',
   id_text: "6 istilah tanah dasar",
-  desc: "盛《も》り土《ど》, 段切《だんぎ》り, 締《し》め固《しめかた》め, 転圧《てんあつ》, 埋《う》め戻《もど》し, 突《つ》き固《かた》め — enam operasi tanah dasar.",
+  desc: "盛《も》り土《ど》=menimbun tanah untuk menaikkan elevasi. 段切《だんぎ》り=membuat anak tangga pada lereng agar tanah timbunan tidak longsor. 締《し》め固《かた》め=memadatkan tanah lapis demi lapis. 転圧《てんあつ》=memadatkan permukaan dengan alat berat (roller). 埋《う》め戻《もど》し=mengisi kembali galian setelah pekerjaan selesai. 突《つ》き固《かた》め=memadatkan tanah secara manual dengan alat tumbuk.",
   usage: '盛り土・段切り・締固め・転圧・埋戻し・突固めの6語《ろくご》で土工事《どこうじ》を表現《ひょうげん》する（nyatakan pekerjaan tanah menggunakan 6 istilah）',
     _origIndex: 1491
   },
@@ -921,7 +921,7 @@ export const CARDS_CH4 = [
   jp: "余堀り《よぼり》・鋤取り《すきとり》・床付け《とこずけ》・杭間さらい《くいまさらい》・段跳ね《だんばね》",
   type: 'vocab',
   id_text: "5 istilah galian & dasar",
-  desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭《くい》間《くいま》さらい=bersihkan tanah sisa di antara tiang pancang.",
+  desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭間《くいま》さらい=bersihkan tanah sisa di antara tiang pancang. 段跳《だんは》ね=perbedaan ketinggian tak rata akibat urutan penggalian yang tidak tepat.",
   usage: '余堀り・鋤取り・床付け・杭間さらい・段跳ねの5語《ごご》で掘削《くっさく》後《ご》の精仕上げ《せいしあげ》を覚《おぼ》える（hafalkan 5 istilah untuk penyempurnaan setelah penggalian）',
     _origIndex: 1495
   },
@@ -1009,7 +1009,7 @@ export const CARDS_CH4 = [
   jp: "壁芯《かべしん》・柱芯《はしらしん》・親墨《おやずみ》・矩を振る《かねをふる》・墨付け《すみつけ》",
   type: 'vocab',
   id_text: "5 istilah sumidashi",
-  desc: "壁芯《かべしん》=garis tengah dinding. 柱芯《はしらしん》=garis tengah kolom. 親墨《おやずみ》=referensi dasar.",
+  desc: "壁芯《かべしん》=garis tengah dinding. 柱芯《はしらしん》=garis tengah kolom. 親墨《おやずみ》=referensi dasar. 矩《かね》を振《ふ》る=membuat garis sudut 90°. 墨付《すみつ》け=menandai garis potong pada material berdasarkan 墨出し.",
   usage: '親墨《おやずみ》から壁芯《かべしん》と柱芯《はしらしん》を出《だ》す（tentukan garis dinding dan kolom dari garis induk）',
     _origIndex: 1548
   },
@@ -1020,7 +1020,7 @@ export const CARDS_CH4 = [
   jp: "土留め《どどめ》・擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》・山留め《やまどめ》（崩壊《ほうかい》防止《ぼうし》5語《ご》）",
   type: 'vocab',
   id_text: "5 istilah penahan tanah",
-  desc: "土留《どど》め=cegah longsor. 擁壁《ようへき》=土留《どどめ》め berbentuk dinding. 矢板《やいた》=papan penahan.",
+  desc: "土留《どど》め=cegah longsor. 擁壁《ようへき》=土留《どどめ》め berbentuk dinding. 矢板《やいた》=papan penahan. 鋼矢板《こうやいた》=矢板 dari baja, lebih kuat, bisa dicabut & dipakai ulang. 山留《やまど》め=struktur sementara penahan tanah saat penggalian, mencegah longsor.",
   usage: '鋼矢板《こうやいた》で土留め《どどめ》をして安全《あんぜん》に掘削《くっさく》する（gali dengan aman menggunakan sheet pile baja sebagai penahan tanah）',
     _origIndex: 1549
   },
@@ -1075,7 +1075,7 @@ export const CARDS_CH4 = [
   jp: "建込み《たてこみ》・ノロ・アンコ・転用《てんよう》・パンク・釘仕舞《くぎじまい》",
   type: 'vocab',
   id_text: "6 istilah pekerjaan",
-  desc: "建込《たてこ》み=dirikan bekisting. ノロ=bocoran beton. アンコ=pengisi alur. 転用《てんよう》=pakai ulang.",
+  desc: "建込《たてこ》み=dirikan bekisting. ノロ=bocoran beton. アンコ=pengisi alur. 転用《てんよう》=pakai ulang. パンク=beton bocor keluar dari celah bekisting akibat sambungan kurang rapat. 釘仕舞《くぎしまい》=memastikan kepala paku tidak menonjol keluar permukaan.",
   usage: '型枠《かたわく》建込み後《たてこみご》にノロの漏《も》れを確認《かくにん》する（periksa kebocoran slurry setelah pemasangan bekisting）',
     _origIndex: 1554
   },

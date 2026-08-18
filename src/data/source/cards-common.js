@@ -5554,7 +5554,7 @@ export const CARDS_COMMON = [
   jp: "橋梁工事《きょうりょうこうじ》（下部工《かぶこう》・上部工《じょうぶこう》）",
   type: 'vocab',
   id_text: "Jembatan: bawah & atas",
-  desc: "下部《ぶ》工《かぶこう》=pondasi penopang jembatan.\n上《うえ》部《ぶ》工《じょうぶこう》=badan jembatan untuk kendaraan/pejalan kaki. kaki.",
+  desc: "下部工《かぶこう》=pondasi penopang jembatan.\n上《うえ》部《ぶ》工《じょうぶこう》=badan jembatan untuk kendaraan/pejalan kaki.",
   usage: '橋梁《きょうりょう》の下部工《かぶこう》（橋脚《きょうかく》）と上部工《じょうぶこう》（桁《けた》）を順《じゅん》に施工《せこう》する（kerjakan struktur bawah jembatan lalu struktur atas secara berurutan）',
     _origIndex: 1450
   },
@@ -5653,7 +5653,7 @@ export const CARDS_COMMON = [
   jp: "さく井工事の4種類《さくせいこうじしゅるい》（水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》）",
   type: 'vocab',
   id_text: "4 jenis pengeboran sumur",
-  desc: "①水源《すいげん》井《い》=air tanah ②観測《かんそく》井《い》=pantau penurunan tanah ③温泉《おんせん》井《い》=500–1000m ④地熱《ちねつ》井《せい》=2000m untuk PLTP, butuh teknik tinggi. ④地熱《ちねつ》井《せい》=2000m untuk PLTP, butuh teknik tinggi.",
+  desc: "①水源《すいげん》井《い》=air tanah ②観測《かんそく》井《い》=pantau penurunan tanah ③温泉《おんせん》井《い》=500–1000m ④地熱《ちねつ》井《せい》=2000m untuk PLTP, butuh teknik tinggi.",
   usage: '水源《すいげん》・観測《かんそく》・温泉《おんせん》・地熱《ちねつ》の4種類《よんしゅるい》のさく井工事《こうじ》を理解《りかい》する（pahami 4 jenis pekerjaan bor sumur: air bersih, observasi, panas bumi, dan geothermal）',
     _origIndex: 1459
   },
@@ -5818,7 +5818,7 @@ export const CARDS_COMMON = [
   jp: "根切り《ねきり》・余堀り《よぼり》・鋤取り《すきとり》・床付け《とこづけ》",
   type: 'vocab',
   id_text: "Tahapan galian pondasi",
-  desc: "根切《ねぎ》り=gali ke kedalaman pondasi. 余堀《よぼ》り=galian ekstra untuk ruang kerja. 鋤取《すきと》り=ratakan dasar.",
+  desc: "根切《ねぎ》り=gali ke kedalaman pondasi. 余堀《よぼ》り=galian ekstra untuk ruang kerja. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=meratakan/menghaluskan dasar galian dengan presisi sebelum pengecoran.",
   usage: '根切り《ねきり》→余堀り《よぼり》→鋤取り《すきとり》→床付け《とこずけ》の4段階《よんだんかい》で掘削《くっさく》する（gali dalam 4 tahap: galian utama → over-excavation → pemotongan → pembentukan dasar）',
     _origIndex: 1474
   },
@@ -5994,7 +5994,7 @@ export const CARDS_COMMON = [
   jp: "遣り方《やりかた》・水貫《みずぬき》・水盛り《みずもり》・地縄張り《じなわはり》・水糸《みずいと》",
   type: 'vocab',
   id_text: "5 istilah yarikata",
-  desc: "遣《や》り方《かた》=pagar referensi bangunan. 水貫《みずぬき》=papan horizontal. 水盛《みずも》り=tentukan referensi rata.",
+  desc: "遣《や》り方《かた》=pagar referensi bangunan. 水貫《みずぬき》=papan horizontal. 水盛《みずも》り=tentukan referensi rata. 地縄《じなわ》張《は》り=tandai batas bangunan di tanah dengan tali sebelum penggalian. 水糸《みずいと》=benang yang direntangkan di 水貫 sebagai acuan garis lurus/ketinggian.",
   usage: '遣り方《やりかた》・水貫・水盛り・地縄張り・水糸の5語《ごご》で建物《たてもの》の配置出し《はいちだし》を覚《おぼ》える（hafalkan 5 istilah untuk penentuan posisi bangunan）',
     _origIndex: 1490
   },
@@ -6005,7 +6005,7 @@ export const CARDS_COMMON = [
   jp: "盛り土《もりど》・段切り《だんぎり》・締固め《しめかため》・転圧《てんあつ》・埋戻し《うめもどし》・突固め《つきがため》",
   type: 'vocab',
   id_text: "6 istilah tanah dasar",
-  desc: "盛《も》り土《ど》, 段切《だんぎ》り, 締《し》め固《しめかた》め, 転圧《てんあつ》, 埋《う》め戻《もど》し, 突《つ》き固《かた》め — enam operasi tanah dasar.",
+  desc: "盛《も》り土《ど》=menimbun tanah untuk menaikkan elevasi. 段切《だんぎ》り=membuat anak tangga pada lereng agar tanah timbunan tidak longsor. 締《し》め固《かた》め=memadatkan tanah lapis demi lapis. 転圧《てんあつ》=memadatkan permukaan dengan alat berat (roller). 埋《う》め戻《もど》し=mengisi kembali galian setelah pekerjaan selesai. 突《つ》き固《かた》め=memadatkan tanah secara manual dengan alat tumbuk.",
   usage: '盛り土・段切り・締固め・転圧・埋戻し・突固めの6語《ろくご》で土工事《どこうじ》を表現《ひょうげん》する（nyatakan pekerjaan tanah menggunakan 6 istilah）',
     _origIndex: 1491
   },
@@ -6049,7 +6049,7 @@ export const CARDS_COMMON = [
   jp: "余堀り《よぼり》・鋤取り《すきとり》・床付け《とこずけ》・杭間さらい《くいまさらい》・段跳ね《だんばね》",
   type: 'vocab',
   id_text: "5 istilah galian & dasar",
-  desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭《くい》間《くいま》さらい=bersihkan tanah sisa di antara tiang pancang.",
+  desc: "余堀《よぼ》り=galian ekstra. 鋤取《すきと》り=ratakan dasar. 床付《とこづ》け=finishing presisi. 杭間《くいま》さらい=bersihkan tanah sisa di antara tiang pancang. 段跳《だんは》ね=perbedaan ketinggian tak rata akibat urutan penggalian yang tidak tepat.",
   usage: '余堀り・鋤取り・床付け・杭間さらい・段跳ねの5語《ごご》で掘削《くっさく》後《ご》の精仕上げ《せいしあげ》を覚《おぼ》える（hafalkan 5 istilah untuk penyempurnaan setelah penggalian）',
     _origIndex: 1495
   },
@@ -6149,7 +6149,7 @@ export const CARDS_COMMON = [
   jp: "鉄骨構造の種類《ぶれすらあめんとらす》（ブレース・ラーメン・トラス）",
   type: 'vocab',
   id_text: "3 jenis struktur baja",
-  desc: "①ブレース: diagonal brace. ②ラーメン: sambungan kaku kolom-balok, tahan gempa.\n③トラス: susunan segitiga untuk atap, kubah, jembatan. atap, kubah, jembatan.",
+  desc: "①ブレース: diagonal brace. ②ラーメン: sambungan kaku kolom-balok, tahan gempa.\n③トラス: susunan segitiga untuk atap, kubah, jembatan.",
   usage: 'ブレース・ラーメン・トラスの3種類《さんしゅるい》の鉄骨構造《てっこつこうぞう》を理解《りかい》する（pahami 3 jenis struktur baja: braced frame, rigid frame, dan truss）',
     _origIndex: 1504
   },
@@ -6193,7 +6193,7 @@ export const CARDS_COMMON = [
   jp: "山留め工事《やまどめ》・支保工《しほこう》",
   type: 'vocab',
   id_text: "Penahan tanah & shoring",
-  desc: "Dinding sementara di dalam tanah untuk cegah longsor saat penggalian.\nDiperkuat strutting (支保工《しほこう》) agar dinding tidak roboh. (支保工《しほこう》) agar dinding tidak roboh.",
+  desc: "Dinding sementara di dalam tanah untuk cegah longsor saat penggalian.\nDiperkuat strutting (支保工《しほこう》) agar dinding tidak roboh.",
   usage: '山留め《やまどめ》と支保工《しほこう》で掘削《くっさく》面《めん》を安全《あんぜん》に保《たも》つ（jaga keamanan dinding galian menggunakan earth retention dan shoring）',
     _origIndex: 1508
   },
@@ -6204,7 +6204,7 @@ export const CARDS_COMMON = [
   jp: "耐震《たいしん》・制振《せいしん》・免振《めんしん》（たいしん・せいしん・めんしん）",
   type: 'vocab',
   id_text: "Tahan gempa / kontrol",
-  desc: "耐震《たいしん》=perkuat kolom/balok. 制振《せいしん》=damper serap getaran.\n免振《めんしん》=isolator di fondasi agar energi gempa tak merambat ke bangunan. energi gempa tak merambat ke bangunan.",
+  desc: "耐震《たいしん》=perkuat kolom/balok. 制振《せいしん》=damper serap getaran.\n免振《めんしん》=isolator di fondasi agar energi gempa tak merambat ke bangunan.",
   usage: '免振《めんしん》構造《こうぞう》で地震《じしん》エネルギーを建物《たてもの》に伝《つた》えない（cegah energi gempa masuk ke bangunan dengan struktur isolasi seismik）',
     _origIndex: 1509
   },
@@ -6292,7 +6292,7 @@ export const CARDS_COMMON = [
   jp: "塗装工事の3方法《とそうこうじほうほうはけろおらあえあすぷれえ》（はけ・ローラー・エアスプレー）",
   type: 'vocab',
   id_text: "3 metode cat",
-  desc: "①はけ塗《ぬ》り=kuas, cocok semua bentuk. ②ローラー=efisien area luas.\n③エアスプレー=cat dikabut kompresor untuk hasil merata di bentuk rumit. hasil merata di bentuk rumit.",
+  desc: "①はけ塗《ぬ》り=kuas, cocok semua bentuk. ②ローラー=efisien area luas.\n③エアスプレー=cat dikabut kompresor untuk hasil merata di bentuk rumit.",
   usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》で塗装《とそう》する（cat menggunakan 3 metode: kuas, roller, dan semprotan udara）',
     _origIndex: 1517
   },
@@ -6501,7 +6501,7 @@ export const CARDS_COMMON = [
   jp: "建築工事の流れ《けんちくこうじのながれ》（大規模《だいきぼ》ビル・マンション）",
   type: "konsep",
   id_text: "Urutan tahapan",
-  desc: "①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上《うえ》躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali — tidak boleh dibalik. — tidak boleh dibalik.",
+  desc: "①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上《うえ》躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali — tidak boleh dibalik.",
   _origIndex: 1536
   },
   {
@@ -6511,7 +6511,7 @@ export const CARDS_COMMON = [
   jp: "耐震《たいしん》・制振《せいしん》・免振《めんしん》の3種類（地震《じしん》対策《たいさく》）",
   type: 'vocab',
   id_text: "3 metode proteksi gempa",
-  desc: "①耐震《たいしん》=perkuat kolom & balok. ②制振《せいしん》=ダンパー kurangi goyangan.\n③免振《めんしん》=アイソレータ di fondasi, redam energi gempa sebelum masuk bangunan. redam energi gempa sebelum masuk bangunan.",
+  desc: "①耐震《たいしん》=perkuat kolom & balok. ②制振《せいしん》=ダンパー kurangi goyangan.\n③免振《めんしん》=アイソレータ di fondasi, redam energi gempa sebelum masuk bangunan.",
   usage: '耐震《たいしん》・制振《せいしん》・免振《めんしん》の3つの地震対策《じしんたいさく》を選択《せんたく》する（pilih salah satu dari 3 pendekatan proteksi seismik: tahan, reduksi, atau isolasi）',
     _origIndex: 1537
   },
@@ -6632,7 +6632,7 @@ export const CARDS_COMMON = [
   jp: "壁芯《かべしん》・柱芯《はしらしん》・親墨《おやずみ》・矩を振る《かねをふる》・墨付け《すみつけ》",
   type: 'vocab',
   id_text: "5 istilah sumidashi",
-  desc: "壁芯《かべしん》=garis tengah dinding. 柱芯《はしらしん》=garis tengah kolom. 親墨《おやずみ》=referensi dasar.",
+  desc: "壁芯《かべしん》=garis tengah dinding. 柱芯《はしらしん》=garis tengah kolom. 親墨《おやずみ》=referensi dasar. 矩《かね》を振《ふ》る=membuat garis sudut 90°. 墨付《すみつ》け=menandai garis potong pada material berdasarkan 墨出し.",
   usage: '親墨《おやずみ》から壁芯《かべしん》と柱芯《はしらしん》を出《だ》す（tentukan garis dinding dan kolom dari garis induk）',
     _origIndex: 1548
   },
@@ -6643,7 +6643,7 @@ export const CARDS_COMMON = [
   jp: "土留め《どどめ》・擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》・山留め《やまどめ》（崩壊《ほうかい》防止《ぼうし》5語《ご》）",
   type: 'vocab',
   id_text: "5 istilah penahan tanah",
-  desc: "土留《どど》め=cegah longsor. 擁壁《ようへき》=土留《どどめ》め berbentuk dinding. 矢板《やいた》=papan penahan.",
+  desc: "土留《どど》め=cegah longsor. 擁壁《ようへき》=土留《どどめ》め berbentuk dinding. 矢板《やいた》=papan penahan. 鋼矢板《こうやいた》=矢板 dari baja, lebih kuat, bisa dicabut & dipakai ulang. 山留《やまど》め=struktur sementara penahan tanah saat penggalian, mencegah longsor.",
   usage: '鋼矢板《こうやいた》で土留め《どどめ》をして安全《あんぜん》に掘削《くっさく》する（gali dengan aman menggunakan sheet pile baja sebagai penahan tanah）',
     _origIndex: 1549
   },
@@ -6698,7 +6698,7 @@ export const CARDS_COMMON = [
   jp: "建込み《たてこみ》・ノロ・アンコ・転用《てんよう》・パンク・釘仕舞《くぎじまい》",
   type: 'vocab',
   id_text: "6 istilah pekerjaan",
-  desc: "建込《たてこ》み=dirikan bekisting. ノロ=bocoran beton. アンコ=pengisi alur. 転用《てんよう》=pakai ulang.",
+  desc: "建込《たてこ》み=dirikan bekisting. ノロ=bocoran beton. アンコ=pengisi alur. 転用《てんよう》=pakai ulang. パンク=beton bocor keluar dari celah bekisting akibat sambungan kurang rapat. 釘仕舞《くぎしまい》=memastikan kepala paku tidak menonjol keluar permukaan.",
   usage: '型枠《かたわく》建込み後《たてこみご》にノロの漏《も》れを確認《かくにん》する（periksa kebocoran slurry setelah pemasangan bekisting）',
     _origIndex: 1554
   },
