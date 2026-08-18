@@ -279,7 +279,7 @@ export const CARDS_CH3 = [
   jp: "解体工事《かいたいこうじ》（解体《かいたい》ガラ・アスベスト対策《たいさく》）",
   type: "konsep",
   id_text: "Pekerjaan bongkar",
-  desc: "Bongkar bangunan tua: survei アスベスト wajib dulu. 解体《かいたい》ガラ dipilah (beton, besi, berbahaya) per jenis untuk diproses/dibuang. jenis untuk diproses/dibuang.",
+  desc: "Bongkar bangunan tua: survei アスベスト wajib dulu. 解体《かいたい》ガラ dipilah (beton, besi, berbahaya) per jenis untuk diproses/dibuang.",
   _origIndex: 643
   },
 {
@@ -311,7 +311,7 @@ export const CARDS_CH3 = [
   jp: "車両系《しゃりょうけい》・高所作業車《こうしょさぎょうしゃ》・フォークリフト資格《しかく》",
   type: 'vocab',
   id_text: "Kualifikasi alat berat",
-  desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》.",
+  desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》. フォークリフト: ≥1t技能《ぎのう》講習《こうしゅう》, <1t特別《とくべつ》教育《きょういく》.",
   usage: '高所作業車《こうしょさぎょうしゃ》を運転《うんてん》するには特別教育《とくべつきょういく》が必要《ひつよう》である（diperlukan pendidikan khusus untuk mengoperasikan aerial work platform）',
     _origIndex: 646
   },

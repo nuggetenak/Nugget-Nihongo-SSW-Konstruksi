@@ -304,7 +304,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "水替え《みずかえ》・釜場《かまば》・山砂《やまずな》・水締め《みずしめ》・万棒《まんぼう》（排水《はいすい》・管理《かんり》5語《ご》）",
   type: 'vocab',
   id_text: "5 istilah drainase &",
-  desc: "水替《みずか》え=pompa air di dasar galian. 釜場《かまば》=lubang untuk pompa. 山砂《やまずな》=pasir daratan.",
+  desc: "水替《みずか》え=pompa air di dasar galian. 釜場《かまば》=lubang untuk pompa. 山砂《やまずな》=pasir daratan. 水締《みずじ》め=padatkan tanah urug dengan disiram air. 万棒《まんぼう》=alat perata tanah manual bergagang panjang.",
   usage: '釜場《かまば》に水《みず》を集《あつ》め万棒《まんぼう》で水替え《みずかえ》し、山砂《やまずな》で埋め戻《もど》して水締め《みずしめ》する（kumpulkan air di lubang pompa, sedot, urug dengan pasir gunung, lalu padatkan dengan air）',
     _origIndex: 670
   },
@@ -315,7 +315,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "接続《せつぞく》・配線《はいせん》・離隔《りかく》・絶縁《ぜつえん》・貫通《かんつう》・管路《かんろ》",
   type: "konsep",
   id_text: "6 istilah dasar listrik",
-  desc: "接続《せつぞく》=hubungkan. 配線《はいせん》=pasang kabel. 離隔《りかく》=jarak pisah wajib. 絶縁《ぜつえん》=cegah bocor.",
+  desc: "接続《せつぞく》=hubungkan. 配線《はいせん》=pasang kabel. 離隔《りかく》=jarak pisah wajib. 絶縁《ぜつえん》=cegah bocor. 貫通《かんつう》=menembus dinding/lantai/langit-langit. 管路《かんろ》=jalur pipa/konduit untuk kabel.",
   _origIndex: 685
   },
 {
@@ -335,7 +335,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "配管する《はいかんする》・通線《つうせん》・スラブ配管《すらぶはいかん》・隠ぺい《いんぺい》・露出《ろしゅつ》・伏せる《ふせる》",
   type: "konsep",
   id_text: "6 istilah pemasangan",
-  desc: "配管《はいかん》する=pasang konduit. 通線《つうせん》=masukkan kabel ke konduit. スラブ配管《はいかん》=konduit di slab.",
+  desc: "配管《はいかん》する=pasang konduit. 通線《つうせん》=masukkan kabel ke konduit. スラブ配管《はいかん》=konduit di slab. 隠《いん》ぺい=konduit tersembunyi di dalam struktur. 露出《ろしゅつ》=konduit terlihat di permukaan. 伏《ふ》せる=memasang konduit horizontal di bawah lantai/slab.",
   _origIndex: 687
   },
 {
@@ -345,7 +345,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "感電《かんでん》・漏電《ろうでん》・接地《せっち》（アース）・避雷針《ひらいしん》・避雷器《ひらいき》",
   type: "konsep",
   id_text: "5 istilah keselamatan",
-  desc: "感電《かんでん》=arus ke tubuh. 漏電《ろうでん》=listrik bocor. 接地《せっち》/アース=hubungkan ke tanah cegah感電《かんでん》.",
+  desc: "感電《かんでん》=arus ke tubuh. 漏電《ろうでん》=listrik bocor. 接地《せっち》/アース=hubungkan ke tanah cegah感電《かんでん》. 避雷針《ひらいしん》=batang logam di puncak bangunan untuk menangkap petir. 避雷器《ひらいき》=alat pelindung peralatan listrik dari lonjakan tegangan akibat petir.",
   _origIndex: 688
   },
 {
@@ -355,7 +355,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "短絡《たんらく》・低圧《ていあつ》・高圧《こうあつ》・特別高圧《とくべつこうあつ》・圧着《あっちゃく》・直流《ちょくりゅう》・交流《こうりゅう》",
   type: "konsep",
   id_text: "7 istilah tegangan",
-  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》: >7000V.",
+  desc: "短絡《たんらく》/ショート=hubung singkat. 低圧《ていあつ》: DC≤750V/AC≤600V. 高圧《こうあつ》: 750–7000V. 特別《とくべつ》高圧《こうあつ》: >7000V. 圧着《あっちゃく》=menyambung kabel dengan menekan terminal. 直流《ちょくりゅう》=arus DC (satu arah). 交流《こうりゅう》=arus AC (bolak-balik).",
   _origIndex: 689
   },
 {
@@ -365,7 +365,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "点滅《てんめつ》・被覆《ひふく》・一次側《いちじがわ》・増し締め《ましじめ》・マーキング・通電《つうでん》",
   type: "konsep",
   id_text: "6 istilah operasi &",
-  desc: "点滅《てんめつ》=nyala-mati. 被覆《ひふく》=isolasi kabel. 一次側《いちじがわ》/二次側《にじがわ》=sisi masuk/keluar.",
+  desc: "点滅《てんめつ》=nyala-mati. 被覆《ひふく》=isolasi kabel. 一次側《いちじがわ》/二次側《にじがわ》=sisi masuk/keluar. 増《ま》し締《じ》め=mengencangkan ulang baut/mur setelah beberapa waktu pemakaian. マーキング=menandai posisi pemasangan. 通電《つうでん》=mengalirkan arus listrik untuk tes.",
   _origIndex: 690
   },
 {
@@ -375,7 +375,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "あたる・かしめる・仕込む《しこむ》・振る《ふる》・競る《せる》・Φ",
   type: "konsep",
   id_text: "6 istilah slang",
-  desc: "あたる=cek dengan alat ukur. かしめる=crimp kabel. 仕込《しこ》む=persiapkan pekerjaan. 振《ふ》る=reroute pipa/kabel.",
+  desc: "あたる=cek dengan alat ukur. かしめる=crimp kabel. 仕込《しこ》む=persiapkan pekerjaan. 振《ふ》る=reroute pipa/kabel. 競《せ》る=posisi dua elemen saling berdekatan/berhimpitan. Φ=simbol diameter (dibaca パイ di lapangan).",
   _origIndex: 691
   },
 {
@@ -396,7 +396,7 @@ export const CARDS_LIFELINE_CH4 = [
   jp: "死水《しにみず》・バリ・逆流《ぎゃくりゅう》・分岐《ぶんき》・伸縮《しんしゅく》・蛇腹《じゃばら》・ライニング",
   type: 'vocab',
   id_text: "7 istilah kondisi &",
-  desc: "死水《しにみず》=air diam lama dalam pipa. バリ=sisa material di tepi. 逆流《ぎゃくりゅう》=aliran berlawanan.",
+  desc: "死水《しにみず》=air diam lama dalam pipa. バリ=sisa material di tepi. 逆流《ぎゃくりゅう》=aliran berlawanan. 分岐《ぶんき》=percabangan pipa. 伸縮《しんしゅく》=bagian yang mengakomodasi pemuaian/penyusutan pipa. 蛇腹《じゃばら》=struktur berlipat fleksibel untuk menyerap gerakan. ライニング=lapisan pelindung di dalam pipa.",
   usage: '死水《しにみず》・逆流《ぎゃくりゅう》・分岐・伸縮・蛇腹《じゃばら》・ライニングなど7語《ななご》で配管《はいかん》の状態《じょうたい》を表現《ひょうげん》する（nyatakan kondisi pipa menggunakan 7 istilah）',
     _origIndex: 693
   },

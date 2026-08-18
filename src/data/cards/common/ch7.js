@@ -116,7 +116,7 @@ export const CARDS_CH7 = [
   jp: "保安設備《ほあんせつび》・誘導員《ゆうどういん》（ほあんせつび・ゆうどういん）",
   type: 'vocab',
   id_text: "Pengaman & pemandu lalu",
-  desc: "Saat bekerja di jalan umum (公道《こうどう》): wajib pasang 囲《かこ》い/柵《さく》/ガード untuk cegah kendaraan masuk.",
+  desc: "Saat bekerja di jalan umum (公道《こうどう》): wajib pasang 囲《かこ》い/柵《さく》/ガード untuk cegah kendaraan masuk. 誘導員《ゆうどういん》=petugas yang mengarahkan lalu lintas kendaraan/pejalan kaki di sekitar area kerja.",
   usage: '保安設備《ほあんせつび》を設置《せっち》して誘導員《ゆうどういん》を配置《はいち》する（pasang perangkat pengaman dan tempatkan petugas pengarah lalu lintas）',
     _origIndex: 591
   },

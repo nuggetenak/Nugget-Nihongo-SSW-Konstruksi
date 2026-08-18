@@ -2994,7 +2994,7 @@ export const CARDS_COMMON = [
   jp: "保安設備《ほあんせつび》・誘導員《ゆうどういん》（ほあんせつび・ゆうどういん）",
   type: 'vocab',
   id_text: "Pengaman & pemandu lalu",
-  desc: "Saat bekerja di jalan umum (公道《こうどう》): wajib pasang 囲《かこ》い/柵《さく》/ガード untuk cegah kendaraan masuk.",
+  desc: "Saat bekerja di jalan umum (公道《こうどう》): wajib pasang 囲《かこ》い/柵《さく》/ガード untuk cegah kendaraan masuk. 誘導員《ゆうどういん》=petugas yang mengarahkan lalu lintas kendaraan/pejalan kaki di sekitar area kerja.",
   usage: '保安設備《ほあんせつび》を設置《せっち》して誘導員《ゆうどういん》を配置《はいち》する（pasang perangkat pengaman dan tempatkan petugas pengarah lalu lintas）',
     _origIndex: 591
   },
@@ -3303,7 +3303,7 @@ export const CARDS_COMMON = [
   jp: "解体工事《かいたいこうじ》（解体《かいたい》ガラ・アスベスト対策《たいさく》）",
   type: "konsep",
   id_text: "Pekerjaan bongkar",
-  desc: "Bongkar bangunan tua: survei アスベスト wajib dulu. 解体《かいたい》ガラ dipilah (beton, besi, berbahaya) per jenis untuk diproses/dibuang. jenis untuk diproses/dibuang.",
+  desc: "Bongkar bangunan tua: survei アスベスト wajib dulu. 解体《かいたい》ガラ dipilah (beton, besi, berbahaya) per jenis untuk diproses/dibuang.",
   _origIndex: 643
   },
   {
@@ -3335,7 +3335,7 @@ export const CARDS_COMMON = [
   jp: "車両系《しゃりょうけい》・高所作業車《こうしょさぎょうしゃ》・フォークリフト資格《しかく》",
   type: 'vocab',
   id_text: "Kualifikasi alat berat",
-  desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》.",
+  desc: "車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》. フォークリフト: ≥1t技能《ぎのう》講習《こうしゅう》, <1t特別《とくべつ》教育《きょういく》.",
   usage: '高所作業車《こうしょさぎょうしゃ》を運転《うんてん》するには特別教育《とくべつきょういく》が必要《ひつよう》である（diperlukan pendidikan khusus untuk mengoperasikan aerial work platform）',
     _origIndex: 646
   },
@@ -3434,7 +3434,7 @@ export const CARDS_COMMON = [
   jp: "逃げ墨《にげずみ》・陸墨《ろくずみ》・立て墨《たてずみ》・地墨《じずみ》・仕上げ墨《しあげずみ》（5種類《しゅるい》の墨《すみ》）",
   type: 'vocab',
   id_text: "5 jenis garis tinta",
-  desc: "逃《に》げ墨《ずみ》=paralel dari referensi. 陸《ろく》墨《ずみ》=referensi ketinggian. 立《た》て墨《ずみ》=garis vertikal.",
+  desc: "逃《に》げ墨《ずみ》=paralel dari referensi. 陸《ろく》墨《ずみ》=referensi ketinggian. 立《た》て墨《ずみ》=garis vertikal. 地墨《じずみ》=garis langsung di permukaan horizontal (lantai). 仕上《しあ》げ墨《ずみ》=garis acuan posisi akhir setelah finishing.",
   usage: '逃《に》げ墨・陸《ろく》墨・立て墨・地墨・仕上げ墨の5種類《ごしゅるい》を識別《しきべつ》する（identifikasi 5 jenis garis tinta dalam pekerjaan konstruksi）',
     _origIndex: 659
   },
@@ -3456,7 +3456,7 @@ export const CARDS_COMMON = [
   jp: "地業《じぎょう》・基礎《きそ》・直接基礎《ちょくせつきそ》（ベタ基礎《きそ》・フーチング）",
   type: 'vocab',
   id_text: "Pekerjaan tanah dasar &",
-  desc: "地業《じぎょう》=lapisan bawah slab pondasi (pasir/kerikil/捨《す》てコン/tiang). ベタ基礎《きそ》=cor seluruh dasar.",
+  desc: "地業《じぎょう》=lapisan bawah slab pondasi (pasir/kerikil/捨《す》てコン/tiang). ベタ基礎《きそ》=cor seluruh dasar. 直接《ちょくせつ》基礎《きそ》=pondasi dangkal langsung di tanah (mencakup ベタ基礎 dan フーチング). フーチング=pelat beton lebar di bawah kolom untuk sebar beban.",
   usage: '地業《じぎょう》を施《ほどこ》してベタ基礎《べたきそ》またはフーチングで基礎《きそ》を作《つく》る（buat pondasi dengan pondasi pelat atau footing di atas pekerjaan tanah dasar）',
     _origIndex: 671
   },
@@ -3467,7 +3467,7 @@ export const CARDS_COMMON = [
   jp: "足場の種類《しゅるい》・作業床《さぎょうゆか》・仮囲い《かりがこい》（仮設《かせつ》工事《こうじ》3語《ご》）",
   type: 'vocab',
   id_text: "Jenis perancah, lantai",
-  desc: "足場《あしば》=lantai sementara di ketinggian (枠組《わくぐ》み/単管《たんかん》/くさび). 作業床《さぎょうゆか》=lantai perancah.",
+  desc: "足場《あしば》=lantai sementara di ketinggian (枠組《わくぐ》み/単管《たんかん》/くさび). 作業床《さぎょうゆか》=lantai perancah. 仮囲《かりがこ》い=pagar sementara di sekeliling area proyek.",
   usage: '枠組み・単管・くさびの足場《あしば》を安全《あんぜん》のために作業床《さぎょうゆか》と仮囲い《かりがこい》と組《く》み合《あ》わせる（kombinasikan scaffold dan lantai kerja serta pagar sementara untuk keselamatan）',
     _origIndex: 673
   },
@@ -3478,7 +3478,7 @@ export const CARDS_COMMON = [
   jp: "打ち込み《うちこみ》・打ち重ね《うちかさね》・コールドジョイント・打ち継ぎ《うちつぎ》",
   type: 'vocab',
   id_text: "Pengecoran berlapis",
-  desc: "打《う》ち重《かさ》ね=cor di atas beton BELUM keras (<25°C→150mnt, ≥25°C→120mnt). Terlambat→コールドジョイント.",
+  desc: "打《う》ち込《こ》み=proses awal menuang beton ke bekisting. 打《う》ち重《かさ》ね=cor di atas beton BELUM keras (<25°C→150mnt, ≥25°C→120mnt). Terlambat→コールドジョイント. 打《う》ち継《つ》ぎ=sambungan yang direncanakan antara 2 tahap pengecoran berbeda (beda dari コールドジョイント yang tidak direncanakan).",
   usage: 'コールドジョイントを避《さ》けるため打ち重ね《うちかさね》と打ち継ぎ《うちつぎ》のルールを守《まも》る（patuhi aturan pengecoran berlapis dan construction joint untuk menghindari cold joint）',
     _origIndex: 677
   },
@@ -3489,7 +3489,7 @@ export const CARDS_COMMON = [
   jp: "締固め《しめかため》・タンピング・練り混ぜ《ねりまぜ》・配合《はいごう》",
   type: 'vocab',
   id_text: "4 istilah kualitas",
-  desc: "締《し》め固《しめかた》め=vibrasi beton hilangkan rongga. タンピング=pukul permukaan slab agar padat.",
+  desc: "締《し》め固《かた》め=vibrasi beton hilangkan rongga. タンピング=pukul permukaan slab agar padat. 練《ね》り混《ま》ぜ=mencampur bahan hingga merata. 配合《はいごう》=perbandingan semen, pasir, kerikil, air.",
   usage: '締固め《しめかため》にバイブレータを使《つか》いタンピングで仕上《しあ》げる（gunakan vibrator untuk pemadatan dan tamping untuk finishing）',
     _origIndex: 678
   },
@@ -3500,7 +3500,7 @@ export const CARDS_COMMON = [
   jp: "納まり《おさまり》・取合い《とりあい》・見付け《みつけ》・見え掛かり《みえがかり》・見え隠れ《みえかくれ》",
   type: 'vocab',
   id_text: "5 istilah finishing & visibility",
-  desc: "納《おさ》まり=keseimbangan penempatan. 取《と》り合《とりあ》い=pertemuan 2+ komponen. 見《み》え付《みつ》け=tampak penuh dari depan. 見え掛かり《みえがかり》=tampak dari celah/sudut. 見え隠れ《みえかくれ》=kadang tampak kadang tidak.",
+  desc: "納《おさ》まり=keseimbangan penempatan. 取《と》り合《とりあ》い=pertemuan 2+ komponen. 見付《みつ》け=tampak penuh dari depan. 見え掛かり《みえがかり》=tampak dari celah/sudut. 見え隠れ《みえかくれ》=kadang tampak kadang tidak.",
   usage: '納まり《おさまり》・取合い・見付け・見え掛かり・見え隠れの5語《ごご》を覚《おぼ》える（hafalkan 5 istilah fitting, junction, dan visibility）',
     _origIndex: 679
   },
@@ -3511,7 +3511,7 @@ export const CARDS_COMMON = [
   jp: "通り《とおり》・面一《つらいち》・反り《そり》・起り《むくり》・陸《ろく》・不陸《ふろく》",
   type: 'vocab',
   id_text: "6 istilah kelurusan,",
-  desc: "通《とお》り=kondisi lurus. 面一《つらいち》=dua permukaan rata sejajar. 反《そ》り=cekung. 起《むく》り=cembung.",
+  desc: "通《とお》り=kondisi lurus. 面一《つらいち》=dua permukaan rata sejajar. 反《そ》り=cekung. 起《むく》り=cembung. 陸《ろく》=permukaan rata/datar. 不陸《ふろく》=permukaan bergelombang/tidak rata.",
   usage: '通り・面一・反り・起り・陸・不陸の6語《ろくご》で仕上がりの品質《ひんしつ》を確認《かくにん》する（periksa kualitas finishing menggunakan 6 istilah kelurusan dan permukaan）',
     _origIndex: 680
   },
@@ -3522,7 +3522,7 @@ export const CARDS_COMMON = [
   jp: "目違い《めちがい》・拝む《おがむ》・転び《ころび》・逃げ《にげ》・見切る《みきる》",
   type: 'vocab',
   id_text: "5 istilah cacat &",
-  desc: "目違《めちが》い=sambungan tidak rata. 拝《おが》む=elemen miring. 転《ころ》び=kolom miring dari vertikal.",
+  desc: "目違《めちが》い=sambungan tidak rata. 拝《おが》む=elemen miring. 転《ころ》び=kolom miring dari vertikal. 逃《に》げ=celah kecil yang sengaja disisakan agar komponen tidak saling mengganggu. 見切《みき》る=selesaikan sambungan dua pekerjaan finishing.",
   usage: '目違い・拝む・転び・逃げ・見切るの5語《ごご》で仕上げ《しあげ》の不具合《ふぐあい》を表現《ひょうげん》する（nyatakan cacat finishing menggunakan 5 istilah）',
     _origIndex: 681
   },
@@ -3533,7 +3533,7 @@ export const CARDS_COMMON = [
   jp: "駄目《だめ》・手直し《てなおし》・手戻り《てもどり》・段取り《だんどり》・馴染み《なじみ》",
   type: 'vocab',
   id_text: "5 istilah kondisi",
-  desc: "駄目《だめ》=bagian terlewat saat hampir selesai. 手直《てなお》し=koreksi pekerjaan. 手戻《てもど》り=pengerjaan ulang.",
+  desc: "駄目《だめ》=bagian terlewat saat hampir selesai. 手直《てなお》し=koreksi pekerjaan. 手戻《てもど》り=pengerjaan ulang. 段取《だんど》り=persiapan sebelum mulai kerja. 馴染《なじ》み=kesan menyatu/serasi secara visual antar elemen.",
   usage: '駄目・手直し・手戻り・段取り・馴染みの5語《ごご》で工程《こうてい》の状態《じょうたい》を表現《ひょうげん》する（nyatakan kondisi tahapan pekerjaan menggunakan 5 istilah）',
     _origIndex: 682
   },
@@ -3544,7 +3544,7 @@ export const CARDS_COMMON = [
   jp: "ピッチ・追う《おう》・寸法《すんぽう》・一間《いっけん》・一尺《いっしゃく》・一寸《いっすん》・一坪《ひとつぼ》",
   type: 'vocab',
   id_text: "7 istilah ukuran +",
-  desc: "ピッチ=jarak antar elemen berulang. 追《お》う=ukur dari titik referensi. 寸法《すんぽう》=dimensi panjang.",
+  desc: "ピッチ=jarak antar elemen berulang. 追《お》う=ukur dari titik referensi. 寸法《すんぽう》=dimensi panjang. 一間《いっけん》≈1.818m. 一尺《いっしゃく》≈30.3cm. 一寸《いっすん》≈3.03cm. 一坪《ひとつぼ》≈3.3m².",
   usage: 'ピッチ・追う・一間・一尺・一寸・一坪などの寸法《すんぽう》語《ご》を現場《げんば》で使《つか》う（gunakan istilah ukuran seperti pitch, 1 ken, 1 shaku di lapangan）',
     _origIndex: 683
   },
@@ -3555,7 +3555,7 @@ export const CARDS_COMMON = [
   jp: "5S活動《ごえすかつどう》（整理《せいり》・整頓《せいとん》・清掃《せいそう》・清潔《せいけつ》・しつけ）",
   type: "konsep",
   id_text: "Program 5S",
-  desc: "①整《ととの》え理《せいり》=pisahkan perlu & tidak. ②整《ととの》え頓《せいとん》=tempatkan di tempat ditentukan.",
+  desc: "①整《ととの》え理《せいり》=pisahkan perlu & tidak. ②整《ととの》え頓《せいとん》=tempatkan di tempat ditentukan. ③清掃《せいそう》=bersihkan area kerja. ④清潔《せいけつ》=jaga kebersihan secara konsisten. ⑤しつけ=biasakan ①-④ jadi kebiasaan/disiplin.",
   _origIndex: 696
   },
   {
