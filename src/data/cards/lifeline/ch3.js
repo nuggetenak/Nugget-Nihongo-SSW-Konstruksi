@@ -1,0 +1,226 @@
+// lifeline/ch3.js — lifeline track ch3 cards, reconciled from source/cards-lifeline.js (session 24 split-file/mirror drift fix — see HANDOFF.md)
+// (21 cards)
+export const CARDS_LIFELINE_CH3 = [
+{
+  id: 27,
+  category: "setsubi_kougu",
+  source: "jac-ch3",
+  jp: "ライフライン工事《らいふらいんこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan lifeline",
+  desc: "Pekerjaan utilitas vital: listrik, gas kota, air, drainase, dan telekomunikasi.",
+  _origIndex: 26
+  },
+{
+  id: 29,
+  category: "denki",
+  source: "jac-ch3",
+  jp: "電気工事《でんきこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan listrik",
+  desc: "Listrik: pembangkit → gardu → tiang/kabel tanah → gedung.\nKecelakaan khas: sengatan listrik.",
+  _origIndex: 28
+  },
+{
+  id: 30,
+  category: "haikan",
+  source: "jac-ch3",
+  jp: "都市ガス工事《としがすこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan gas kota",
+  desc: "Aliran gas kota: LNG → tangki → pipa bawah tanah → distribusi ke pabrik/rumah.",
+  _origIndex: 29
+  },
+{
+  id: 31,
+  category: "tsushin",
+  source: "jac-ch3",
+  jp: "通信工事《つうしんこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan telekomunikasi",
+  desc: "Pembangunan jaringan telepon & internet dengan kabel logam atau serat optik.",
+  _origIndex: 31
+  },
+{
+  id: 32,
+  category: "setsubi_kougu",
+  source: "jac-ch3",
+  jp: "空調設備工事《くうちょうせつびこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan sistem AC",
+  desc: "Pemasangan sistem pengatur suhu, kelembapan, dan pemurnian udara dalam ruangan.",
+  _origIndex: 32
+  },
+{
+  id: 33,
+  category: "shoubou",
+  source: "jac-ch3",
+  jp: "消防設備工事《しょうぼうせつびこうじ》",
+  type: "konsep",
+  id_text: "Sistem proteksi kebakaran",
+  desc: "Pemasangan sistem proteksi kebakaran: alarm, sprinkler, dan pompa pemadam.",
+  _origIndex: 33
+  },
+{
+  id: 34,
+  category: "hoon",
+  source: "jac-ch3",
+  jp: "保温保冷工事《ほおんほれいこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan insulasi termal",
+  desc: "Memasang insulasi termal pada pipa & saluran.\n保温《ほおん》=kurangi panas hilang; 保冷《ほれい》=cegah suhu dingin naik.",
+  _origIndex: 34
+  },
+{
+  id: 35,
+  category: "haikan",
+  source: "jac-ch3",
+  jp: "給排水衛生設備工事《きゅうはいすいえいせいせつびこうじ》",
+  type: "konsep",
+  id_text: "Pekerjaan sanitasi air",
+  desc: "Memasang peralatan untuk menjaga kebersihan lingkungan tempat tinggal menggunakan air dan air panas.",
+  _origIndex: 35
+  },
+{
+  id: 54,
+  category: "denki",
+  source: "jac-ch3",
+  jp: "配電盤《はいでんばん》",
+  type: 'vocab',
+  id_text: "Panel distribusi listrik (配電盤)",
+  desc: "Perangkat untuk mencabangkan catu daya dan memasok listrik ke setiap perangkat.",
+  usage: '配電盤《はいでんばん》で各回路《かくかいろ》に電力《でんりょく》を分配《ぶんぱい》する（distribusikan daya ke setiap sirkuit melalui panel distribusi）',
+    _origIndex: 62
+  },
+{
+  id: 87,
+  category: "hoon",
+  source: "jac-ch3",
+  jp: "グラスウール断熱材《ぐらすううるだんねつざい》",
+  type: 'vocab',
+  id_text: "Bahan isolasi wol kaca",
+  desc: "Kaca dilebur jadi serat tipis. Fleksibel, tahan panas, tak mudah terbakar.",
+  usage: 'グラスウール断熱材《ぐらすううるだんねつざい》を屋根《やね》裏《うら》に充填《じゅうてん》する（isi rongga atap dengan insulasi wol kaca）',
+    _origIndex: 95
+  },
+{
+  id: 88,
+  category: "hoon",
+  source: "jac-ch3",
+  jp: "ロックウール断熱材《ろっくううるだんねつざい》",
+  type: 'vocab',
+  id_text: "Bahan isolasi wol batu",
+  desc: "Basalt dilebur jadi serat. Ketahanan api lebih baik dari wol kaca. Juga untuk pengisi tahan api.",
+  usage: 'ロックウール断熱材《ろっくううるだんねつざい》で耐火性能《たいかせいのう》を確保《かくほ》する（pastikan performa tahan api menggunakan insulasi wol batu）',
+    _origIndex: 96
+  },
+{
+  id: 164,
+  category: "denki",
+  source: "jac-ch3",
+  jp: "外線工事《がいせんこうじ》 vs 内線工事《ないせんこうじ》（がいせん・ないせん）",
+  type: 'vocab',
+  id_text: "Instalasi luar vs dalam",
+  desc: "外線《がいせん》=hubung tiang ke gedung. 内線《ないせん》=listrik dalam gedung (grounding, panel, AC).",
+  usage: '外線工事《がいせんこうじ》で架空線《かくうせん》を張《は》り、内線工事《ないせんこうじ》で屋内配線《おくないはいせん》をする（pasang kabel udara di instalasi luar, lakukan pengkabelan dalam di instalasi dalam）',
+    _origIndex: 198
+  },
+{
+  id: 174,
+  category: "haikan",
+  source: "jac-ch3",
+  jp: "冷凍空気調和機器工事の代表機器《れいとうくうきちょうわききこうじだいひょうきき》",
+  type: 'vocab',
+  id_text: "Mesin utama pekerjaan AC",
+  desc: "Peralatan utama AC/refrigerasi: AC split, freezer, kulkas industri, showcase, dan unit transport pendingin.",
+  usage: '冷凍空調工事《れいとうくうちょうこうじ》で圧縮機《あっしゅくき》と膨張弁《ぼうちょうべん》を確認《かくにん》する（periksa kompresor dan katup ekspansi pada pekerjaan AC dan refrigerasi）',
+    _origIndex: 219
+  },
+{
+  id: 175,
+  category: "shoubou",
+  source: "jac-ch3",
+  jp: "消防設備の3分類《しょうぼうせつびのさんぶんるい》（消火《しょうか》・警報《けいほう》・避難《ひなん》）",
+  type: 'vocab',
+  id_text: "3 kategori pemadam K3",
+  desc: "①消火《しょうか》=sprinkler/hidran ②警報《けいほう》=alarm asap ③避難《ひなん》=jalur evakuasi; wajib dipasang dan dirawat.",
+  usage: '消火《しょうか》・警報《けいほう》・避難設備《ひなんせつび》の3分類《さんぶんるい》を理解《りかい》して設置《せっち》する（pasang sistem proteksi kebakaran dengan memahami 3 kategori: pemadam, alarm, dan evakuasi）',
+    _origIndex: 220
+  },
+{
+  id: 176,
+  category: "setsubi_kougu",
+  source: "jac-ch3",
+  jp: "各種炉の種類《かくしゅろのしゅるい》（築炉工事《ちくろこうじ》詳細《しょうさい》）",
+  type: 'vocab',
+  id_text: "Jenis tungku (chikuro)",
+  desc: "Tungku dalam pekerjaan築炉《ちくろ》: incinerator, lebur besi, lebur aluminium, bakar biomassa, dan tungku listrik《でんきろ》untuk lebur logam.",
+  usage: '各種炉《かくしゅろ》（製鉄炉《せいてつろ》・加熱炉《かねつろ》）に適《てき》した耐火物《たいかぶつ》を選《えら》ぶ（pilih material refractory yang sesuai untuk setiap jenis tungku）',
+    _origIndex: 221
+  },
+{
+  id: 179,
+  category: "setsubi_kougu",
+  source: "jac-ch3",
+  jp: "ダクトの3種類《だくとしゅるいはいえんくうちょうはいき》",
+  type: 'vocab',
+  id_text: "3 jenis duct gedung",
+  desc: "排煙《はいえん》duct=buang asap kebakaran; 空調《くうちょう》duct=distribusi udara AC; 排気《はいき》duct=buang panas/bau.",
+  usage: '空調ダクト《くうちょうだくと》・排気ダクト《はいきだくと》・排煙ダクト《はいえんだくと》を系統別《けいとうべつ》に施工《せこう》する（pasang duct sistem AC, exhaust, dan asap secara terpisah per jalur）',
+    _origIndex: 230
+  },
+{
+  id: 409,
+  category: "haikan",
+  source: "jac-ch3",
+  jp: "衛生器具設備《えいせいきぐせつび》",
+  type: 'vocab',
+  id_text: "Peralatan sanitasi gedung",
+  desc: "Peralatan air dalam gedung: keran, toilet, urinoir, wastafel, bak mandi, dan sink.",
+  usage: '衛生器具設備《えいせいきぐせつび》を施工図《せこうず》通《とお》りに設置《せっち》する（pasang fixtures sanitasi sesuai gambar kerja）',
+    _origIndex: 479
+  },
+{
+  id: 550,
+  category: "haikan",
+  source: "jac-ch3",
+  jp: "ウェルポイント工法《こうほう》（地下水《ちかすい》排水《はいすい》・最大《さいだい》10m）",
+  type: 'vocab',
+  id_text: "Well point",
+  desc: "Banyak揚水管《ようすいかん》ditancapkan ke tanah, pompa vakum sedot air via集水管《しゅうすいかん》; efektif maks 10 m.",
+  usage: 'ウェルポイント工法《こうほう》で地下水位《ちかすいい》を下《さ》げて掘削《くっさく》する（turunkan muka air tanah dengan wellpoint sebelum menggali）',
+    _origIndex: 630
+  },
+{
+  id: 552,
+  category: "setsubi_kougu",
+  source: "jac-ch3",
+  jp: "塗装工事の3工法《とそうこうじのさんこうほう》",
+  type: 'vocab',
+  id_text: "3 metode pengecatan",
+  desc: "①はけ塗《ぬ》り = kuas, hasil paling rapi ②ローラー = efisien untuk dinding luar ③エアスプレー = cat dikabut lalu disemprotkan, cocok bentuk rumit.",
+  usage: 'はけ・ローラー・エアスプレーの3工法《さんこうほう》から現場《げんば》に適《てき》した塗装《とそう》方法《ほうほう》を選《えら》ぶ（pilih metode pengecatan yang sesuai dengan kondisi lapangan dari 3 opsi）',
+    _origIndex: 637
+  },
+{
+  id: 558,
+  category: "setsubi_kougu",
+  source: "jac-ch3",
+  jp: "建築板金工事《けんちくばんきんこうじ》のダクト3種《さんしゅ》（排煙《はいえん》・空調《くうちょう》・排気《はいき》）",
+  type: 'vocab',
+  id_text: "Plat logam",
+  desc: "建築《けんちく》板金《ばんきん》工事《こうじ》= proses pelat logam (potong, tekuk, sambung). 3 duct: ①排煙《はいえん》= asap ②空調《くうちょう》= udara dingin/hangat/segar ③排気《はいき》= buang panas/bau dari ruang mesin.",
+  usage: '排煙ダクト《はいえんだくと》・空調ダクト・排気ダクトの板金《ばんきん》工事《こうじ》を担当《たんとう》する（tangani pekerjaan sheet metal untuk duct asap, AC, dan exhaust）',
+    _origIndex: 650
+  },
+{
+  id: 596,
+  category: "haikan",
+  source: "jac-ch3",
+  jp: "配管工事《はいかんこうじ》の概要《がいよう》",
+  type: "konsep",
+  id_text: "Gambaran umum pekerjaan",
+  desc: "Alirkan air/minyak/gas/uap via pipa logam; meliputi給水《きゅうすい》, 排水《はいすい》, 消火《しょうか》, AC冷媒管《れいばいかん》.",
+  _origIndex: 705
+  }
+];

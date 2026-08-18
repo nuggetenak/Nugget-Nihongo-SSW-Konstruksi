@@ -1,23 +1,20 @@
 // ─── data/categories.js — Content Architecture v2 ─────────────────────────────
-// Three-layer model: Common (K) + Track-specific (D/B/L) + Practice
-// See docs/CONTENT-BLUEPRINT.md for full rationale.
+// Two-layer model: Common (K) + Lifeline (L).
+// Doboku/Kenchiku tracks (D/B categories, both still-empty placeholders — "Future Ch.5+
+// content" never arrived) removed session 24 (2026-07-26), scope reduced to Lifeline-only
+// per owner decision. See HANDOFF.md. (Note: the docs/CONTENT-BLUEPRINT.md this comment used
+// to point to doesn't exist in this branch's history either — pre-existing dangling
+// reference, not something new from this edit.)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const CATEGORIES = [
-  { key: 'all', label: 'すべて', color: '#4a5568', emoji: '📚', tracks: ['doboku','kenchiku','lifeline'] },
+  { key: 'all', label: 'すべて', color: '#4a5568', emoji: '📚', tracks: ['lifeline'] },
   // Common
-  { key: 'gaiyou', label: '建設概要・挨拶', color: '#c05621', emoji: '🏛️', tracks: ['doboku','kenchiku','lifeline'], module: 'K1' },
-  { key: 'anzen',  label: '安全衛生',      color: '#22543d', emoji: '🦺', tracks: ['doboku','kenchiku','lifeline'], module: 'K2' },
-  { key: 'hourei', label: '法令・規制',     color: '#285e61', emoji: '⚖️', tracks: ['doboku','kenchiku','lifeline'], module: 'K3' },
-  { key: 'sekou',  label: '施工管理・共通',  color: '#2d3748', emoji: '📋', tracks: ['doboku','kenchiku','lifeline'], module: 'K4' },
-  { key: 'career', label: 'キャリア・雇用',  color: '#553c9a', emoji: '👷', tracks: ['doboku','kenchiku','lifeline'], module: 'K5' },
-  // Sipil
-  { key: 'doboku_doko',   label: '土工事・インフラ', color: '#744210', emoji: '⛏️', tracks: ['doboku'], module: 'D1', placeholder: true, note: 'Future Ch.5+ content' },
-  { key: 'doboku_hoso',   label: '舗装・道路',      color: '#975a16', emoji: '🛣️', tracks: ['doboku'], module: 'D2', placeholder: true, note: 'Future Ch.5+ content' },
-  { key: 'doboku_haisui', label: '排水・基礎・杭',   color: '#2c5282', emoji: '🌊', tracks: ['doboku'], module: 'D3', placeholder: true, note: 'Future Ch.5+ content' },
-  // Bangunan
-  { key: 'kenchiku_kutai',  label: '躯体工事',     color: '#1a365d', emoji: '🏗️', tracks: ['kenchiku'], module: 'B1', placeholder: true, note: 'Future Ch.5+ content' },
-  { key: 'kenchiku_shiage', label: '仕上げ・内装',  color: '#6b46c1', emoji: '🎨', tracks: ['kenchiku'], module: 'B2', placeholder: true, note: 'Future Ch.5+ content' },
+  { key: 'gaiyou', label: '建設概要・挨拶', color: '#c05621', emoji: '🏛️', tracks: ['lifeline'], module: 'K1' },
+  { key: 'anzen',  label: '安全衛生',      color: '#22543d', emoji: '🦺', tracks: ['lifeline'], module: 'K2' },
+  { key: 'hourei', label: '法令・規制',     color: '#285e61', emoji: '⚖️', tracks: ['lifeline'], module: 'K3' },
+  { key: 'sekou',  label: '施工管理・共通',  color: '#2d3748', emoji: '📋', tracks: ['lifeline'], module: 'K4' },
+  { key: 'career', label: 'キャリア・雇用',  color: '#553c9a', emoji: '👷', tracks: ['lifeline'], module: 'K5' },
   // Lifeline
   { key: 'haikan',       label: '配管工事',     color: '#3c366b', emoji: '🔧', tracks: ['lifeline'], module: 'L1' },
   { key: 'denki',        label: '電気工事',     color: '#744210', emoji: '⚡', tracks: ['lifeline'], module: 'L2' },
@@ -26,7 +23,7 @@ export const CATEGORIES = [
   { key: 'hoon',         label: '保温保冷',     color: '#702459', emoji: '🌡️', tracks: ['lifeline'], module: 'L5' },
   { key: 'setsubi_kougu',label: '設備・空調',    color: '#2d3748', emoji: '🔨', tracks: ['lifeline'], module: 'L6' },
   // Meta
-  { key: 'bintang', label: 'Bintang', color: '#b7791f', emoji: '⭐', tracks: ['doboku','kenchiku','lifeline'] },
+  { key: 'bintang', label: 'Bintang', color: '#b7791f', emoji: '⭐', tracks: ['lifeline'] },
 ];
 
 export const getCatInfo = (key) => CATEGORIES.find((c) => c.key === key) || CATEGORIES[0];
@@ -58,7 +55,6 @@ export const SOURCE_META = {
   'vocab-exam': { label: 'Vocab Exam — 250 kosakata ujian', emoji: '🎯', color: '#7c3aed' },
   'vocab-teori': { label: 'Vocab Teori — Kosakata 学科', emoji: '📋', color: '#dc2626' },
   // ── Sumber Tambahan (supplementary — provenance audit) ────────────────────
-  'text3l': { label: 'Teks Ch.3 — Jenis & Prosedur Pekerjaan Konstruksi', emoji: '🏗️', color: '#1a365d' },
   'vocab-supplementary': { label: 'Vocab Supplementary — Kosakata pelengkap', emoji: '📝', color: '#6b7280' },
   'vocab-general': { label: 'Vocab General — Kata umum konstruksi', emoji: '📎', color: '#9ca3af' },
 };
@@ -69,7 +65,7 @@ export const SOURCE_GROUPS = [
   { label: 'PDF Utama JAC', keys: ['jac-ch1','jac-ch2','jac-ch3','jac-ch4','jac-ch5','jac-ch6','jac-ch7'] },
   { label: 'Soal Contoh', keys: ['jac-gakka1','jac-gakka2','jac-jitsugi1','jac-jitsugi2'] },
   { label: 'Kosakata', keys: ['vocab-lifeline','vocab-jac','vocab-core','vocab-exam','vocab-teori'] },
-  { label: 'Sumber Tambahan', keys: ['text3l','vocab-supplementary','vocab-general'] },
+  { label: 'Sumber Tambahan', keys: ['vocab-supplementary','vocab-general'] },
 ];
 
 export const SOURCE_ACCENT = {
@@ -80,7 +76,6 @@ export const SOURCE_ACCENT = {
   'jac-jitsugi1': '#68d391', 'jac-jitsugi2': '#68d391',
   'vocab-lifeline': '#63b3ed', 'vocab-jac': '#93c5fd', 'vocab-core': '#cbd5e0',
   'vocab-exam': '#b794f4', 'vocab-teori': '#f56565',
-  'text3l': '#667eea',
   'vocab-supplementary': '#9ca3af',
   'vocab-general': '#d1d5db',
 };

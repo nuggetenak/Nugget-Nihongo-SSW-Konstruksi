@@ -2,7 +2,7 @@
 
 **Aplikasi belajar ujian SSW Konstruksi Jepang untuk tenaga kerja Indonesia.**
 
-土木 · 建築 · ライフライン設備
+ライフライン設備
 
 🔗 **[Buka Aplikasi](https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/)**
 
@@ -10,11 +10,11 @@
 
 ## Apa Ini?
 
-PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定技能 / SSW) bidang konstruksi Jepang. Dirancang untuk TKI yang bersiap kerja di Jepang sebagai pekerja konstruksi.
+PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定技能 / SSW) bidang konstruksi Jepang, jalur **Lifeline (ライフライン設備)**. Dirancang untuk TKI yang bersiap kerja di Jepang sebagai pekerja konstruksi.
 
 **Fitur utama:**
-- 🃏 **1,443 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
-- ❓ **~974 soal kuis** — JAC 95 · Wayground 579 · CSV 300 · Sipil/Bangunan 90
+- 🃏 **1,438 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
+- ❓ **~1.075 soal kuis** — Wayground 680 · JAC Mockup 300 · JAC Resmi 95
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
 - 🔢 **Angka Kunci** — angka wajib hafal sebelum ujian
@@ -22,12 +22,7 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 - 🌙 **Mode gelap/terang** + offline-first (PWA)
 - 🔊 **Audio bahasa Jepang** via Web Speech API
 
-**3 Jalur Studi:**
-| Jalur | 日本語 | Fokus |
-|-------|-------|-------|
-| Teknik Sipil | 土木 | Pekerjaan tanah, infrastruktur |
-| Bangunan | 建築 | Gedung, bekisting, beton |
-| Lifeline | ライフライン設備 | Listrik, pipa, AC, telekomunikasi |
+**Fokus:** ライフライン設備 (Lifeline) — Listrik, pipa, AC, telekomunikasi. (Jalur Teknik Sipil/土木 dan Bangunan/建築 dihapus — lihat CHANGELOG.)
 
 ---
 
@@ -58,7 +53,7 @@ npm run dev        # dev server → http://localhost:5173/Nugget-Nihongo-SSW-Kon
 npm run dev           # Dev server dengan HMR
 npm run build         # Production build → dist/
 npm run preview       # Preview build lokal
-npm test              # Jalankan semua test (457 tests, 41 files)
+npm test              # Jalankan semua test
 npm run test:watch    # Test mode watch
 npm run lint          # ESLint (0 warnings required)
 npm run lint:fix      # Auto-fix ESLint
@@ -87,20 +82,22 @@ npm run audit:integrity  # Audit integritas data kartu
 
 ```
 src/
-├── App.jsx                  # Root, 3-tab layout
+├── App.jsx                  # Root, 2-tab layout
 ├── contexts/                # AppContext, ProgressContext, SRSContext
-├── data/                    # Flashcard & quiz data (1,443 cards + ~860 questions)
-│   └── source/              # 4 source files (cards-common 879, cards-lifeline 564, doboku/kenchiku stubs)
+├── data/                    # Flashcard & quiz data (1,438 cards + ~1,075 questions)
+│   ├── source/              # cards-common.js (877), cards-lifeline.js (561) — mirror layer
+│   ├── cards/                # split working files (common/, lifeline/) — edit these
+│   └── sets/                 # split quiz-set working files (wayground/, jac-mockup/, jac/)
 ├── srs/                     # FSRS engine (fsrs-core, fsrs-store, fsrs-scheduler)
 ├── storage/                 # localStorage engine, schema v3, migrations
 ├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
 ├── components/              # Shared UI components
-├── modes/                   # 23 mode screens (all React.lazy)
+├── modes/                   # mode screens (all React.lazy)
 │   └── FlashcardMode/       # Decomposed flashcard mode
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 41 test files, 457 tests
+└── tests/                   # test suite
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.

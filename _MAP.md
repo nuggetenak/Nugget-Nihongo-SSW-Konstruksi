@@ -1,31 +1,37 @@
 # 🗺️ _MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-05-09 — v4.22.0: card IDs renumbered (1628→1443 contiguous), storage v4
-> **Version:** v4.22.0 · **Status:** STABLE ✅ — no queued tasks
-> **Blueprint:** `docs/BLUEPRINT-CURRENT.md` ← constraints, schema, known gaps
-> **Archive:** `docs/archive/ARCHIVE-INDEX.md` ← all historical docs
+> **Last updated:** 2026-08-18 — content-dq merged into main (see `HANDOFF.md` and `CHANGELOG.md`
+> for the full merge writeup). This file now describes the unified app again — the
+> content-dq-only caveats that lived here during the branch split no longer apply.
+> **Version:** post-merge (bump pending, see CHANGELOG) · **Status:** app layer updated for
+> content-dq's data (furi removed, Doboku/Kenchiku tracks removed, JAC schema migrated) — see
+> HANDOFF.md CURRENT STATE for the exact commit-by-commit account.
+> **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list (from
+> content-dq)
+> **Archive:** `docs/archive/` ← combined archive from both branches (proposals, TASK-v4.x files,
+> superseded DQ handoffs)
 
 ---
 
-## 1. What This App Is
+## 1. What Is This
 
-A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface in **Indonesian**, content **Japanese↔Indonesian bilingual**. Targets Indonesian construction workers studying for the SSW visa exam.
-
-**Deployment:** GitHub Pages — static standalone PWA. `npm install && npm run build` → deploy `dist/`.
-**Storage:** Pure `localStorage` — **never** `window.storage`, never Supabase, never external auth.
-**Deps:** react 19, react-dom, ts-fsrs v5, lz-string. **Max 4 prod deps — hard constraint.**
+A React PWA study tool for the **JAC SSW Construction exam** (Japan). Interface in Indonesian, content in Japanese with furigana.
 
 ### Branding
 - **Parent:** Nugget Nihongo · **Product:** SSW Konstruksi
-- **Subtitle:** 土木 · 建築 · ライフライン設備
+- **Subtitle:** ライフライン設備 (was 土木・建築・ライフライン設備 — Doboku/Kenchiku dropped
+  session 24 on content-dq, scope reduced to Lifeline-only per owner decision; propagated into
+  the app layer at merge time — see HANDOFF.md)
 
-### 3 Study Tracks
+### Study Track
 | Track | JP | Categories |
-|-------|----|-----------| 
-| Teknik Sipil 🏗️ | 土木 | jenis_kerja, alat_umum + common |
-| Bangunan 🏢 | 建築 | jenis_kerja, alat_umum + common |
+|-------|----|-----------|
 | Lifeline ⚡ | ライフライン・設備 | listrik, pipa, telekomunikasi, isolasi, pemadam + common |
 | **Common** 📋 | 共通 | salam, hukum, keselamatan, karier (all tracks) |
+
+(Teknik Sipil/土木 and Bangunan/建築 tracks removed — both were still 100% AI-generated draft
+content with zero official JAC material; a deliberate scope-reduction call, not data loss. Full
+note in HANDOFF.md / CHANGELOG.md.)
 
 ---
 
@@ -38,7 +44,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 ├── README.md
 ├── HUSKY-SETUP.md                  ← one-time pre-commit hook setup (run locally, not CI)
 ├── index.html
-├── package.json                    ← v4.22.0 · react, react-dom, ts-fsrs, lz-string (4 prod deps)
+├── package.json                    ← react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60%
 ├── eslint.config.js / .prettierrc
@@ -48,153 +54,134 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   └── icons/
 ├── .github/workflows/
 │   ├── ci.yml                      ← lint + test (verbose) + build + output check
-│   └── deploy.yml                  ← validate → merge-cards → bump SW cache → build → pages
+│   └── deploy.yml                  ← validate → build → bump SW cache → build → pages
 ├── docs/
-│   ├── BLUEPRINT-CURRENT.md        ← ACTIVE: constraints, schema, known gaps, phase history
-│   └── archive/                    ← all historical docs, proposals, task files (all executed)
-│       ├── ARCHIVE-INDEX.md        ← index of everything archived
-│       └── tasks/                  ← TASK-v4.20.0 … TASK-v4.21.1 (all DONE)
+│   ├── BLUEPRINT-CURRENT.md        ← constraints, schema, known gaps, phase history (pre-merge)
+│   ├── CARD_CONTENT_SPEC.md        ← canonical data schema/rules/taxonomy (from content-dq)
+│   ├── DATA_ARCH_AUDIT.md          ← frozen point-in-time audit, session 16 (from content-dq)
+│   └── archive/                    ← combined historical docs from both branches
 ├── scripts/
-│   ├── merge-cards.mjs             ← ACTIVE: assembles cards.js from source/ (runs in deploy)
-│   ├── validate-data.mjs           ← ACTIVE: prebuild data validation
-│   ├── audit-integrity.mjs         ← npm run audit:integrity
-│   ├── audit-related-ids.mjs       ← one-shot audit tool (ENG-10)
-│   └── archive/                    ← one-shot CS-01–05 migration scripts (do not re-run)
+│   ├── verify-content.mjs          ← ACTIVE: dependency-free data integrity check (content-dq)
+│   ├── audit-track-consistency.mjs ← ACTIVE: split-file/mirror track drift check (content-dq)
+│   ├── validate-data.mjs           ← prebuild data validation (main, pre-merge)
+│   ├── audit-integrity.mjs / audit-related-ids.mjs
+│   └── archive/                    ← one-shot migration scripts (do not re-run)
 ├── legacy/
-│   └── ssw_flashcards_v87.jsx      ← historical reference; not part of build
+│   ├── ssw_flashcards_v87.jsx      ← historical reference; not part of build
+│   └── unwired-app-code/           ← 3 files added content-dq session 11, never wired to
+│                                       anything on that branch (no App.jsx there to wire into);
+│                                       kept per owner decision, still unwired post-merge — not
+│                                       auto-adopted, would need real integration work first
 └── src/
     ├── App.jsx / main.jsx
     ├── types.js                    ← JSDoc typedefs (Card, SRSState, Tab, ToastItem)
     ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
-    ├── data/
-    │   ├── cards.js                ← CARDS[1443] (assembled by merge-cards.mjs)
-    │   ├── source/                 ← 4 source files: cards-common (879), cards-lifeline (564),
-    │   │                              cards-doboku/kenchiku (empty stubs)
-    │   ├── quiz-sets.js            ← QUIZ_SETS (44 sets): wayground + csv + sipil + bangunan
-    │   ├── jac-teori.js / jac-lifeline.js / jac-official.js
-    │   ├── jac-doboku.js / jac-kenchiku.js   ← empty stubs (future 実技 content)
-    │   ├── wayground-sets.js / csv-sets.js    ← source sets (imported by quiz-sets.js)
+    ├── data/                       ← REPLACED WHOLESALE from content-dq at merge time
+    │   ├── cards.js                ← CARDS[1438], furi-free, assembled from source/
+    │   ├── source/                 ← cards-common.js (877), cards-lifeline.js (561) — mirror
+    │   │                              layer; edit these, then split files, then cards.js
+    │   ├── cards/                  ← split working files: common/ch1-7.js + vocab-jac.js +
+    │   │                              vocab-supplementary.js, lifeline/ch2-6.js + same 2
+    │   ├── sets/                   ← split quiz-set working files
+    │   │   ├── wayground/teori/wt01-10.js, vocab/wtv01-02.js,
+    │   │   │   lifeline/praktik/wgl01-10.js, lifeline/vocab/wglv-{jp,id}-01-03.js
+    │   │   ├── jac-mockup/jml01-06.js, jmt01-06.js
+    │   │   └── jac/jac-teori.js, jac-lifeline.js  ← now the LIVE versions (new schema:
+    │   │       q/hint/opts/opts_id/ans/img/exp) — top-level jac-teori.js/jac-lifeline.js
+    │   │       swapped to re-export these at merge time, old schema retired
+    │   ├── quiz-sets.js            ← QUIZ_SETS = [...WAYGROUND_SETS, ...JAC_MOCKUP_SETS], pure
+    │   │                              aggregator (Doboku/Kenchiku sets removed session 24)
+    │   ├── wayground-sets.js / jac-mockup-sets.js  ← monolith aggregates, rebuilt from sets/
+    │   ├── jac-teori.js / jac-lifeline.js / jac-official.js ← now re-export sets/jac/
     │   ├── angka-kunci.js          ← 29 entries
-    │   ├── confusion-pairs.js      ← 28 pairs
-    │   ├── danger-pairs.js         ← 20 pairs
+    │   ├── confusion-pairs.js      ← 28 pairs (furi retained — not in scope for P12)
+    │   ├── danger-pairs.js         ← 20 pairs (furi retained — not in scope for P12)
     │   ├── categories.js           ← CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT
-    │   └── index.js                ← barrel
+    │   │                              (Doboku/Kenchiku placeholder categories removed)
+    │   └── index.js                ← barrel (Doboku/Kenchiku exports removed)
     ├── srs/                        ← FSRS engine: fsrs-core, fsrs-store, fsrs-scheduler
-    ├── storage/                    ← engine.js (3-doc R/W), schema.js (v3), migrations.js
+    ├── storage/                    ← engine.js (3-doc R/W), schema.js, migrations.js — see §6
     ├── hooks/                      ← useAnswerStreak, useDailyChallenge, useDebounce,
     │                                  useFocusTrap, useQuizKeyboard, useSRS, useSessionTimer,
     │                                  useStableContextValue, useTrackedCards + index.js barrel
     ├── components/                 ← Dashboard, BelajarTab, SayaTab, BottomNav, QuizShell,
     │                                  JpDisplay, Toast, ErrorBoundary, Onboarding, …
-    ├── modes/                      ← 23 modes (all React.lazy); FlashcardMode/ decomposed
-    ├── router/                     ← ModeRouter + modes.js registry
-    ├── utils/                      ← daily-mission, haptic, speak, jp-helpers, quiz-generator,
+    ├── modes/                      ← React.lazy modes; FlashcardMode/ decomposed;
+    │                                  DobokuMode.jsx/KenchikuMode.jsx removed at merge
+    ├── router/                     ← ModeRouter + modes.js registry (doboku/kenchiku
+    │                                  registrations removed)
+    ├── utils/                      ← daily-mission, haptic, speak, jp-helpers (has
+    │                                  extractReadings()/stripFuri() — the furi↔ruby helpers
+    │                                  used to replace card.furi post-P12), quiz-generator,
     │                                  shuffle, wrong-tracker, achievements, daily-challenge,
     │                                  recommend-mode, gist-sync, session-analytics, storage-quota
     ├── styles/                     ← global.css (design tokens + sr-only + View Transitions)
-    └── tests/                      ← 41 test files, 457 tests
+    └── tests/                      ← see CHANGELOG for the post-merge pass/fail count
 ```
 
----
+viewer.html (from content-dq) also lives at repo root — a standalone, no-build HTML tool for
+browsing card/quiz content directly; independent of the React app, kept post-merge as a QA aid.
 
 ---
 
 ## 3. Current Metrics
 
+*(Re-verify via `scripts/verify-content.mjs` for data counts and `npm test` for the test count —
+this table is a snapshot as of the merge, not re-checked on every future commit.)*
+
 | Metric | Value |
 |--------|-------|
-| Version | **4.22.0** |
-| Tests | **457** (41 files) |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
-| Modes | **23** (all React.lazy) |
-| Flashcards | **1,443** |
-| Quiz questions | **~974** (JAC 95 + Wayground 579 + CSV 300 — all in SimulasiMode pool) |
-| Storage schema | **v3** |
+| Flashcards | **1,438** (877 common + 561 lifeline) |
+| Quiz questions | **~1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95) |
+| Study tracks | **1** (Lifeline) + Common (was 3 pre-merge) |
+| Storage schema | see §6 — bumped at merge time for the wayground set-id rename |
 | localStorage docs | **3** (progress, srs, prefs) |
 | CI/CD | ✅ GitHub Actions (auto-deploy) |
 | SW auto-bump | ✅ deploy.yml |
-| CSS modules | ✅ all mode components migrated (FE-01) |
-| Reduced motion | ✅ 7 CSS files covered (FE-02) |
-| A11y | ✅ aria-live, focus trap, sr-only, View Transitions (FE-04, FE-09-C) |
 
 ---
 
-## 4. Phase History (Summary)
-
-All phases complete. See `docs/BLUEPRINT-CURRENT.md` for full deliverable table.
-
-| Version(s) | What Shipped |
-|-----------|-------------|
-| v3.7–4.0.0 | Core app: phases A–G (storage v3, content, daily mission, export, audio, QA) |
-| v4.0.x | CS-01–05: content standardization (split, type, ruby, re-annotation) |
-| v4.1.0 | FE-01–09: CSS modules, a11y, PWA, haptics, design tokens |
-| v4.2–4.9 | 23 modes, Phase 5.1–5.8 feature batches, lz-string compression |
-| v4.10–4.14 | Feature polish: JACMode SRS bridge, GlossaryMode Anki export, JAC topic tags |
-| v4.15–4.17 | Content: JAC audit (23 fixes), C1 text3 +18 cards, C1 pass2 +15 cards |
-| v4.18 | Refactor: 157 doboku/kenchiku cards → common |
-| v4.19.0 | Data layer: JAC split, quiz-sets merge, track fields on all datasets |
-| v4.19.1–4.19.5 | Hygiene: SOURCE_GROUPS fix, track field bugs, CSV pool, SearchMode fix, stale counts |
-| v4.20.0–4.20.15 | P0 bugs, refactors, engines (session-analytics, OVERHAUL-2), storage quota, context memo, useTrackedCards |
-| v4.21.0 | REF-8/REF-9: vocab merge (8→4 source files), absorb sipil/bangunan sets; C1-C9 data-integrity tests |
-| v4.21.1 | OVERHAUL-1: retire usePersistedState; ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary |
-| v4.22.0 | Card ID renumber: 185 gaps removed; IDs contiguous 1–1443; storage schema v4 + remap migration |
-
----
-
-## 5. Key Design Rules (Hard Constraints)
-
-1. **Pure localStorage** — Never `window.storage`, Supabase, external auth
-2. **Max 4 prod deps** — react, react-dom, ts-fsrs, lz-string
-3. **All 23 modes stay React.lazy()** — no reverting lazy-loading
-4. **UI language: Indonesian** — Code comments: English
-5. **Zero network required** — Full offline PWA
-6. **Tests must pass** — `npm test` green before every commit
-7. **Build must succeed** — `npm run build` clean
-8. **Lint clean** — `npm run lint` zero errors/warnings
-
----
-
-## 6. Storage Schema v3
+## 6. Storage Schema
 
 ```js
 DOCS = { progress: 'ssw-progress', srs: 'ssw-srs-data', prefs: 'ssw-prefs' }
 
-progress: { _v:3, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
+progress: { _v, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             wgWrong{}, vocabWrong{}, jacScores{}, wgScores{}, vocabScores{},
-            sipilScores{}, bangunanScores{},
             streakData{}, dailyCount{}, recentCards[],
-            milestoneStreak7, milestoneQuiz70,
-            sessions[],                               // cap 180 (bumped v4.4.0)
-            dailyMission }
+            milestoneStreak7, milestoneQuiz70, sessions[], dailyMission }
+            // dobokuScores{}/kenchikuScores{} retired at merge — Doboku/Kenchiku tracks removed
 
-prefs:    { _v:3, track, theme, onboarded, tutorialFlashcard, lastMode,
+prefs:    { _v, track, theme, onboarded, tutorialFlashcard, lastMode,
             dailyGoal, flashcardHintCount,
             examDate, audioEnabled, studyAnchor, furiganaPolicy,
-            notes: {},                     // D3: personal notes per cardId (v4.4.0)
-            sprintBestTimeline: [] }       // F4: ghost score timeline for Sprint (v4.6.0)
+            notes: {}, sprintBestTimeline: [] }
 
-srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
+srs:      { _v, cards: { [cardId]: { card, history, reviewed_at } } }
 ```
+
+See `src/storage/migrations.js` for the full v1→v(current) chain, including the merge-time
+migration added for the wayground set-id rename (wg/wp → wgl/wglv/wtv) — see CHANGELOG.md for
+the exact version bump.
 
 ---
 
-## 7. Notable Files Added Since v4.0.0
-
-### Data (v4.0.x → v4.21.1)
+### Data (content-dq architecture, adopted wholesale at merge)
 | File | Purpose |
 |------|---------|
-| `src/data/source/` (4 files) | CS-01 split: cards-common.js (879 cards), cards-lifeline.js (564 cards), stubs for doboku/kenchiku; vocab files merged in (REF-8 v4.21.0) |
+| `src/data/source/` (2 files) | cards-common.js (877 cards), cards-lifeline.js (561 cards) —
+  mirror layer; Doboku/Kenchiku stubs deleted session 24 |
 | `src/data/angka-kunci.js` | 29 entries with track, mnemonic, soal fields |
 | `src/data/confusion-pairs.js` | 28 VLT-style confusion pairs (音/字/意) |
 | `src/data/danger-pairs.js` | 20 pairs with confusionType, explanation, track fields |
-| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + CSV_SETS + SIPIL_SETS + BANGUNAN_SETS (44 sets total); getQuizSetsForTrack() helper; sipil/bangunan sets inlined here (REF-9 v4.21.0) |
-| `src/data/jac-teori.js` | 65 学科 questions (tt1+tt2), track:'common' — split from jac-official.js (v4.19.0) |
-| `src/data/jac-lifeline.js` | 30 実技 Lifeline questions (st1+st2), track:'lifeline' (v4.19.0) |
-| `src/data/jac-doboku.js` / `jac-kenchiku.js` | Empty stubs for future 実技 content |
-| `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE, ...]` |
-| `src/data/categories.js` | CATEGORIES, SOURCE_META (incl. text3l/vocab-supplementary/vocab-general), SOURCE_GROUPS (4 groups), SOURCE_ACCENT |
+| `src/data/quiz-sets.js` | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS (pure aggregator) |
+| `src/data/sets/jac/jac-teori.js` | 65 学科 questions, new schema — now the live source |
+| `src/data/sets/jac/jac-lifeline.js` | 30 実技 Lifeline questions, new schema — now live |
+| `src/data/jac-official.js` | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE]` |
+| `src/data/categories.js` | CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT |
 
-### Source/Utils (v4.0.x → v4.21.1)
+### Source/Utils
 | File | Purpose |
 |------|---------|
 | `src/types.js` | JSDoc typedefs (Card, SRSState, Tab, ToastItem) |
@@ -203,19 +190,21 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/utils/daily-challenge.js` | Date-seeded daily challenge from JAC+QUIZ_SETS pool |
 | `src/utils/recommend-mode.js` | Smart mode recommendation engine |
 | `src/utils/gist-sync.js` | GitHub Gist sync helper |
+| `src/utils/jp-helpers.js` | `extractReadings()`/`stripFuri()`/`standardizeFuri()` — ruby↔furi
+  helpers, now the canonical source of card readings post-P12 |
 | `src/hooks/useDebounce.js` | 120ms debounce for search inputs |
 | `src/hooks/useFocusTrap.js` | Tab/Shift+Tab cycle + focus restore |
-| `src/hooks/useTrackedCards.js` | Memoized card filtering by track + prefs (ENG-11 v4.20.15) |
+| `src/hooks/useTrackedCards.js` | Memoized card filtering by track + prefs |
 | `src/hooks/useSessionTimer.js` | Session timing for session-analytics |
-| `src/hooks/useStableContextValue.js` | useMemo wrapper for context stability (REF-10 v4.20.13) |
-| `src/utils/session-analytics.js` | Session duration/accuracy analytics (ENG-1 v4.20.3) |
-| `src/utils/storage-quota.js` | QuotaExceededError detection + user notification (ENG-12 v4.20.12) |
-| `src/storage/card-id-map-v4.js` | Old→new card ID mapping used by v3→v4 storage migration (1443 entries) |
+| `src/hooks/useStableContextValue.js` | useMemo wrapper for context stability |
+| `src/utils/session-analytics.js` | Session duration/accuracy analytics |
+| `src/utils/storage-quota.js` | QuotaExceededError detection + user notification |
+| `src/storage/card-id-map-v4.js` | Old→new card ID mapping used by the v3→v4 storage migration |
 | `src/components/ErrorBoundary.jsx` | Class-based EB + TabError + FlatCardFallback |
 | `src/components/OfflineBanner.jsx` | Fixed offline status banner |
 | `src/components/StudyHeatmap.jsx` | 18-week SVG activity heatmap |
 
-### Modes (v4.2.0 → v4.5.0)
+### Modes
 | File | Purpose |
 |------|---------|
 | `src/modes/ProductionMode.jsx` | ID→JP active recall (text input) |
@@ -224,13 +213,61 @@ srs:      { _v:3, cards: { [cardId]: { card, history, reviewed_at } } }
 | `src/modes/CatatanMode.jsx` | Personal notes/mnemonics per card |
 | `src/modes/QuizProduksiMode.jsx` | JP→ID type-answer production quiz, fuzzy match |
 
+*(DobokuMode.jsx and KenchikuMode.jsx removed at merge — see CHANGELOG.md.)*
+
 ---
 
-## 8. Agent Session Log
+## 7. Agent Session Log
+
+*(content-dq's full session-by-session log — sessions 1-29 covering the entire content-quality
+sprint — carried forward wholesale below, followed by main's own pre-fork history. See
+`docs/archive/` for anything superseded. This merge session's row is added at CHANGELOG.md
+instead of duplicated here, to keep one authoritative changelog rather than two.)*
 
 | Date | Version | Work |
 |------|---------|------|
-| 2026-05-09 | v4.22.0 | Sonnet 4.6: Card IDs renumbered 1–1443 (185 gaps removed, max 1628→1443); storage v4 migration; 457 tests |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (cont'd, 7th and final part) — owner: "Do the administratives and prepare for merging with main, let's continue the work of merging in new chat instead." Began a brief look at main's actual state before being told to stop and defer to the new chat ("we're not doing it right now in this current chat because it's already too long") — kept the 3 facts already found rather than discard them: content-dq and main share NO common git ancestor (git merge-base fails, exit 1 — not a normal feature branch, a plain git merge won't work), main has its own fully independent 450-commit history with a real app scaffold (package.json v4.22.0, vite/vitest/eslint, everything content-dq lacks) and its own separate DATA_QUALITY_HANDOFF_v8/v11/v12.md lineage, and main's last commit is 2026-05-09 — the same day content-dq was created, suggesting main was frozen right when content-dq branched off for focused data work rather than two branches evolving in parallel this whole time (a reading worth confirming, not yet verified). Spot-checked (not exhaustively diffed): main still has furi on every card, still has the doboku/kenchiku tracks content-dq dropped session 24. Wrote this up as a clearly-flagged MERGE PREP entry in HANDOFF.md's CURRENT STATE — explicitly marked as a starting point for the next session's own investigation, not a pre-solved answer. Session 29 closes here: 29 commits total across 7 parts spanning the entire session, all pushed, both verify scripts green throughout. This row added. |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (cont'd, 6th part) — second half of the "Fix all remaining gaps" instruction: fact-check the general-knowledge-provenance cards. Compiled the accurate list from git history (135 distinct ids, correcting the earlier on-the-fly "~107" estimate which forgot to include one of the scope-mismatch batches). Read every card for internal consistency (clean — the scope-mismatch/truncation/corruption sweeps already caught anything wrong with these specific cards along the way) then verified the 6 most specific, independently-checkable numeric/regulatory claims against live web sources rather than trusting domain knowledge alone: 消火器 walking distance (20m/30m), 労働基準法第16条 citation, health checkup frequency + employer funding, 発信機 mounting height/distance (0.8-1.5m/50m — one of the original 13 cards flagged years ago as worth checking, now actually checked), ロックウール heat resistance (±600°C), hearing protection threshold (85dB). All 6 confirmed accurate against official/regulatory sources. No content changes resulted — this was a verification pass with a positive result, not a repair job. HANDOFF.md's CURRENT STATE and board note updated to record the completed verification; this row added. Both halves of the owner's "fix all remaining gaps" instruction are now done: scope-mismatch (previous part, 83 fixes) and this fact-check pass (0 errors found, 6/6 spot-checks accurate). |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (cont'd, 5th part) — owner: "Fix all remaining gaps, yang katamu ~130+ itu sama yang ~107 cards. Yang JAC resmi keep it as it is aja because emang gitu dari sumbernya." Explicit instruction to finish the scope-mismatch sweep the prior part had recommended stopping. Went back and hand-read all 181 distinct candidates the detector could surface across 3 batches (not just a sample), fixing 50 more genuine cases (9+23+17+1) on top of the 33 already fixed, for 83 total. Batch 2's larger 5-7-term summary cards had a notably higher true-positive rate than clean 2-term cards, reversing the earlier hypothesis that they were probably intentionally brief. Found and fixed 12 duplicated-sentence-fragment corruptions and several more redundant-ruby instances along the way, plus one card (1335) that had no real definitions at all. Confirmed via zero-exclusion regeneration: 0 candidates remain unreviewed — genuinely exhaustive, not just stopped. Hit and solved a subtle bug of my own: source files store some multi-line desc fields with a literal backslash-n escape sequence that doesn't match a real newline byte extracted from the loaded module, causing silent match failures until diagnosed (`fa21a12`, `8b80ee5`, `5de7393`, `87d664e`). HANDOFF.md's CURRENT STATE and board note updated to reflect true completion rather than a stopping point; this row added. Sets/jac/ confirmed untouched per owner's own framing ("emang gitu dari sumbernya") — no action needed there, already established policy all session. Next: the ~135-card general-knowledge-provenance fact-check pass (second half of the same owner instruction). |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (cont'd, 4th part) — owner said "Continue" with no further instruction; read as keep-going-with-judgment given the standing trust-your-judgement authorization, picked up the ~40 remaining scope-mismatch candidates flagged in the prior part. Found and fixed a real bug in the detector (never stripped ruby from desc before comparing terms, false-flagging already-fixed cards like 517/530/585). Fixed version found 153 candidates, mostly the term-splitter producing garbage on complex jp structures rather than real gaps — went back to hand-reading raw jp+desc pairs for the ~50 cleanest-looking ones instead of a 5th regex refinement. True-positive rate ~12%: fixed 6 genuine gaps (ids 101, 222, 457, 467, 1213, 1369) plus 3 more corruption instances of the session's recurring redundant-ruby pattern, plus one genuine desc truncation the earlier sweep missed (`71c08dc`). Explicitly recommended stopping the mechanical sweep here rather than continuing — 4 detector-refinement rounds this session each surfaced a new false-positive mechanism rather than converging, ~130+ candidates remain unread across both rounds if this gets picked up properly later. HANDOFF.md's CURRENT STATE and board note updated to match (and self-corrected a str_replace mistake that briefly dropped the CURRENT STATE header — caught immediately via verify-content.mjs, fixed before committing anything); this row added. |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (cont'd, 3rd part) — owner: "fix quiz duplicates & work through scope-mismatch," both flagged-not-fixed from the prior part's audit. Quiz duplicates fully resolved: 9 in-scope pairs (excluding sets/jac/ and the documented jml/jmt/wt06 compilation pattern), 3 of them this session's own wglv-jp-02 headword reconstructions unknowingly duplicating pre-existing content — cross-checked all 120 wglv-jp-01/02/03 questions before picking replacement terms (インジケーター, クランプ, 架空ケーブル, 碍子, 漏電遮断器, a torque-wrench QA question grounded in a live JIS B8607 search, crane-sling and arc-welding qualification questions). One pair turned out not to be a real duplicate (pipe-cutting process vs. tool, just worded similarly in Indonesian) — disambiguated instead of replaced. Found and fixed a genuine data corruption along the way: literal lost-data bytes (U+FFFD) in wt02#3 where マンホール's ホ should be (`b9fe3e7`, `92d783f`). Scope-mismatch: rebuilt the detector with the counting bug fixed, read all 68 candidates by hand rather than trust automation further (a third heuristic refinement still had real false positives on inspection), fixed 27 with confirmed genuine gaps, found 4 more ruby-corruption instances and one genuine content error (wrong 4th item in a list, contradicted by the card's own usage field) along the way, left ~40 larger "summary card" candidates deliberately untouched pending a slower methodology (`decaab2`). HANDOFF.md's CURRENT STATE and the ACTIVE TASKS board note updated to match; this row added. |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (cont'd) — owner: "audit all content quality exhaustively. Fix, enhance, improve anything needed. After that do the P12." Built corpus-wide audit tooling covering ruby integrity, structural validity, dangling-text, scope-mismatch, and near-duplicate detection across all 1438 cards + 1075 questions including sets/jac/ (never swept before) — every heuristic needed 2-4 refinement rounds after early versions threw heavy false-positive rates (kanji-only ruby regexes don't see hiragana/katakana/digits mixed into a compound before 《》; term-counting doesn't know a ruby's own internal / isn't a second term), noting these failure modes for whoever attempts similar checks later. Fixed: 4 stray-space ruby typos + 2 ruby-content corruptions + id=807 reading fix (commit `81ba664`); 83 truncated desc fields in vocab-supplementary — the largest single finding, never covered by P5 since that source has no PDF, same general-knowledge provenance basis as the 13 desc cards (`a90702d`, hit and recovered from a real mistake mid-batch — one completion's nested quotes broke cards.js syntax, caught immediately by the script's own post-write import check, reverted clean via git checkout before anything was committed); id=898 + 14 more dangling id_text the original 9-card list missed, plus 2 desc corruptions found along the way (truncation on 1221, duplicated fragment on 1355); 2 more scope-mismatch cards (1399, 245) after finding a real counting bug in that heuristic. Then P12: verified P1's completeness claim rather than trusting it (found and fixed one real gap, id=162's un-ruby'd header, commit `8da67c8`), then dropped furi from all 1438 cards across all 3 layers with a pre-flight count-match check per file, 0 skips needed (`9c2d2e2`). Characterized but deliberately not fixed: a handful of exact-duplicate quiz questions across different files (different task than the rest of this pass — needs fresh question authoring, not completion of existing content) and ~70 more scope-mismatch candidates (heuristic still too noisy to act on without per-card reading). HANDOFF.md's CURRENT STATE, ACTIVE TASKS (P12 row closed, board noted as otherwise clear), and OD-5 (light note added, not rewritten) updated to match; this row added. |
+| 2026-08-18 | content-dq | Agent Claude: session 29 (new agent chat, owner provided repo+token directly). Verify scripts re-run clean at start (1438/0 unchanged). Closed out the entire session-28 🟡 bucket, 8 content commits: id=468+470 source mistag ch2→ch6 via corpus precedent (`c641e8c`); all 9 dangling id_text completed, 7 from the card's own fields + 2 on owner's exact wording, plus a bonus id=223 desc ruby fix (`cce78ba`, `21fa830`); scope-mismatch cluster (223/517/530/533/585) completed from general knowledge, owner-authorized, same basis as the 13 desc cards, plus caught id=585's id_text disagreeing with its own jp on term count (`042aa84`); wglv-id-02's flagged "malformed opts" card turned out to have 5 issues not 2 — 4 fixed (`0358d3b`), then scoping that further found the "opsi lain"/repeated-question opts_id defect is systemic (16/120 questions across all 3 wglv-id files, two mechanical signatures — pure extraction for repeated-question slots, corpus-cross-checked translation for "opsi lain" slots), all resolved plus 2 more ruby corruptions of the same shape as id=223's and a ダグタイル→ダクタイル typo spread across 5 questions (`af9534f`); wglv-id-02's blank opts[0] resolved via a direct corpus-precedent match in wglv-id-01#27, not a guess; wglv-jp-02 ids 16-24 (9 cards, complete JP-headword loss) all reconstructed — new methodology this session, grounded the harder terms (ターミナルピン, スクレープ) in live web search against actual Sekisui Chemical/Kubota Chemix EF-pipe-joint manuals rather than working from memory alone, since wrong technical vocabulary in real exam-prep content is worse than leaving it flagged (`b026998`). Then a repo-wide hygiene pass (owner-requested, "sekalian deep comprehensive hygiene... i forgot all the terminology hehe"): full-tree audit before touching anything, found `src/components/FilterPopup.jsx`+`src/hooks/useTrackedCards.js`+`src/modes/FocusMode.jsx` had zero references anywhere and import paths (theme.js, ProgressContext.jsx, SprintMode.jsx, *.module.css) that don't exist on this branch — their dependencies did exist in this branch's git history at some point and were removed in an apparently-incomplete earlier scaffold trim; moved (not deleted) to `legacy/unwired-app-code/` with a README explaining the reasoning and a one-line delete command if that's the eventual call. Separately confirmed — and deliberately did NOT touch — `sets/jac/*.js` vs top-level `jac-teori.js`/`jac-lifeline.js`: identical shape to the above at a glance (unwired new-schema copies sitting next to what the app imports) but this one is documented, intentional, merge-time-gated debt, not cruft (`docs/DATA_ARCH_AUDIT.md`, 2026-05-12, §4/§6; P22 reconfirmed it out-of-scope as recently as session 28) — added to HANDOFF's merge-time reconciliation list since the only tracking was a 3-month-old audit doc. README.md's stale card/question counts (1,443/~974, predating the 5-duplicate cleanup and session-24 Doboku/Kenchiku removal) corrected to 1,438/~1,075 (`4fcf60f`). HANDOFF.md's CURRENT STATE header/summary and ACTIVE TASKS' now-empty 🟡 bucket updated to match; this row added. |
+| 2026-08-17 | content-dq | Agent Claude: session 28 (cont'd, part 3) — owner: "Ga perlu aku review, kamu tulis manual aja semuanya" + model switch mid-conversation to Sonnet 5. Hand-authored 4th options for all 419 remaining 3-option questions after the automated pooled-sampling approach (part 2) was reverted for producing junk. Read all 420 questions in full first (dumped to a scratch file) before writing anything. wgl01-10 (200q): matched the corpus's own generic-technical-parameter distractor convention (color/weight/flow-rate/temperature/noise) plus real material/tool near-misses where safely defensible (e.g. 保冷材 vs 保温材). wt01-10+wtv01 (219q, wt01 q5 already 4-opt, correctly skipped): used real adjacent facts/roles/rates (e.g. genuine 1.35倍 overtime rate as a wrong answer to a 1.25倍 question; 衛生管理者/統括安全衛生責任者 as confusable-but-wrong roles) — deliberately avoided any distractor that could itself be a second valid correct answer (rejected 経験の浅さ as a human-error-cause wrong answer since it's true elsewhere in the corpus; used 給料の高さ instead). wt06's heavy verbatim overlap with wt01-05 handled by reusing the same distractor text as each duplicate's twin, not authoring independently. Every option checked programmatically against its question's existing 3 for exact-text duplication before writing (200/200, then 219/219 clean, 0 rejected); round-robin rebalanced in the same pass as the append (not before — appending after a rebalance parks new options at index 3 and creates a fresh bias). wgl → exact 50/50/50/50 (commit `ec82166`); wt+wtv01 → exact 55/55/55/55 (commit `d87926d`). Investigated a suspected wt02 mojibake before touching it — confirmed via raw byte inspection the file is valid UTF-8, was a terminal-display artifact only, nothing fixed. Monolith `wayground-sets.js` regenerated wholesale (commit `8177064`) — final corpus-wide check: 980 questions, 0 at 3 options (was 419), 0 duplicate options within any question, 0 opts/opts_id length mismatches, 0 out-of-range ans, monolith↔split 0 mismatches. Then investigated the two remaining P22 census items instead of blindly acting on them: the 288 "duplicate questions" turned out to be a deliberate cumulative-review/mock-exam-compilation architecture (`jml01-04` are ~1:1 compiled subsets of `wgl06-09`; every `jmt0N` draws from multiple `wt0N` sets; `wt06` itself draws 20 questions from 6 other `wt` sets) — matches the owner's own confirmation that jml/jmt mirror the Prometric exam structure, nothing changed. The 157 thin-`exp` fields turned out to be 140 already-adequate "term = translation" format + 8 already-adequate arrow-chain shorthand, both left alone — but the remaining 9 (`wglv-jp-02` ids 16-24) turned out not to be a length problem at all: they've completely lost their Japanese headword (q/hint/answer/exp all collapsed to the same Indonesian phrase, predating this session, present since the original P16-split commit `3e8cea8`). Not guess-fixed — flagged in HANDOFF's 🟡 registry instead, since reconstructing 9 missing headwords is a different kind of edit than completing truncated-but-present content and 8 of the 9 have no way to disambiguate the correct term from available data. HANDOFF.md's P22 section fully rewritten (was written incrementally across the session and had gone stale — still said "421 remain" after they'd all been done) to reflect final state; `docs/CARD_CONTENT_SPEC.md`'s P22 entry fully rewritten to match, all checkboxes closed; this row added. |
+| 2026-08-17 | content-dq | Agent Claude: session 28 (cont'd, part 2) — owner answered 3 questions in this part: (1) branch content-dq may break `main`, reconciliation is merge-time work by design (unblocks P12); (2) P22 target option count is 4; (3) `jml`=20 vs `jmt`=30 is intentional (mirrors Prometric exam simulation structure). Completed the 13 remaining flagged `desc` cards from general domain knowledge (owner-authorized) + 5 bonus furi/ruby corruption fixes, commit `84519cf`. Scoped and created P22 (quiz quality) as a brand-new task — not previously on any list — with a full census: 45% ans:0 bias overall but concentrated (wgl 60%, wglv 87%, wt/jac-mockup healthy at 16-23%), 657/300 3-opt/4-opt split, 288 duplicate-question groups, 157 thin exp. Did wglv first (worst bias): 4th option sampled from the same-direction answer pool with 4 guards including near-synonym rejection, rebalanced in the same pass, 87%→60/60/60/56, commit `4957188`. Count-equalized every set within its family (+23 questions authored, 0 deleted, new set wtv02 created by splitting wtv01's 22→20+20) after bigram-duplicate-checking all new content against the existing 957 (caught and replaced 3 real duplicates), commit `dbf3da6`. Attempted automated 4th-option generation for the remaining 419 questions via 2 different pooled-distractor-sampling scripts — both failed on manual audit (~8/11 bad on the second, better attempt: category mismatches like a tool offered where an event was asked for) — reverted via git checkout before committing, documented as a "⛔ do not retry" box in HANDOFF with the specific failure mode. Discovered and fixed, separately, a pre-existing 21-of-27-set id/track drift between the monolith `wayground-sets.js` and the split files (owner confirmed no users on main, so renaming was safe) — monolith regenerated wholesale under its own existing ids, commit `1dd5f9b`. HANDOFF.md and CARD_CONTENT_SPEC.md updated after each commit. |
+| 2026-08-17 | content-dq | Agent Claude: session 28 (new agent chat, owner provided repo+token directly — not a continuation of session 27). Verify scripts re-run clean at start (1438/0 unchanged). Owner attached `text7l.pdf` (praktik ch7 — 建設工事の安全: death-accident stats by trade, the 7 accident-type definitions, 安全施工サイクル's 8 steps, 新入者/新規入場者 education requirements, PPE, 熱中症 countermeasures, 緑十字, and the 12 ヒューマンエラー types) in the opening message — the 7th and last of the tracked source PDFs. Scoped P5 to source=jac-ch7 (47 cards, spanning 4 split files — common/ch7.js [35], vocab-supplementary.js [10], vocab-jac.js [1], ch5.js [1] — same multi-file pattern as every prior chapter): 27 already had proper terminal punctuation, 18 fixed, 2 left open (id=530 — シールド面付きヘルメット/安全靴, dangles on "lindungi dari" but the textbook's own definition for this item is only 2 sentences with no hazard list to complete it from, unlike the neighboring 保護メガネ passage which does enumerate hazards; id=624 — 機械設置工事の死亡事故, dangles on "Saat" but the source passage for this item is a single sentence with no elaboration on circumstances). Also caught and fixed 7 bonus furi/jp-ruby corruption bugs distinct from anything previously flagged: the correct headword reading with an unrelated extra reading concatenated onto the end (traceable in each case to content elsewhere on the same card — its own desc, or a later section's text) — ids 309, 519, 529, 621 (furi field only, jp already clean) and 525, 622, 624 (both furi and jp's own ruby affected). Each cross-checked against a clean precedent already in the corpus (the same card's own jp ruby or usage-field ruby, or a sibling card sharing the identical headword) rather than guessed. Separately flagged, not fixed, same non-P5 bucket as session 26's id=585: 517 and 533 (jp lists 2-3 combined terms, desc covers only the first, but the sentence present is complete and correctly punctuated) and id=524's id_text (dangles on a preposition, added to the existing 8-id list from ch4/ch5). Process note: built the full 4-layer checker (adjacent-word / n-gram / raw-substring / paren-balance) from the start this session per ch6's own recommendation, rather than discovering the layers incrementally again; dry-ran all 18 planned desc concatenations against it before writing anything, and separately verified exactly-one-match per fix across all 3 mirror layers (84/84 checks) before applying. One draft caught by the checker before writing: id=625's first draft rewrote part of the existing truncated clause instead of purely appending, rejected by the "does newDesc start with oldDesc" guard, redone as a pure append. verify-content.mjs + audit-track-consistency.mjs both clean after (1438 unchanged, 0 track disagreements). Commit `60dcf1a`. P5 final total: 258/479 — marking P5 done rather than partial, since all 7 source chapters have now been checked against real text; the residual gap is the enumerated flagged-id list (carried in HANDOFF.md's ACTIVE TASKS, not CURRENT STATE narrative, so future sessions can find it without reading session history) plus slack in the original ~479 estimate itself. HANDOFF.md's CURRENT STATE, ACTIVE TASKS (P5 bullet replaced with a residual-flags registry), and PDF intake tracker (retitled from "⏸ Blocked" to "✅ Resolved," all 7 rows now checked) updated to match; `docs/CARD_CONTENT_SPEC.md`'s P5 status blockquote updated and header marked done; this row added (docs commit separate from `60dcf1a`, per RULES). |
+| 2026-08-17 | content-dq | Agent Claude: session 27 (new agent chat, owner provided repo+token directly — not a continuation of session 26). Verify scripts re-run clean at start (1438/0 unchanged). Owner attached `text6l.pdf` (praktik ch6 — 施工に関する知識: pipe processing, refrigeration/AC, insulation, lifeline pipe work, sheet metal, electrical, telecom, furnace, fire equipment) in the opening message — the chapter HANDOFF had specifically called out to prioritize when it arrived. Scoped P5 to source=jac-ch6 (133 cards): 65 already had proper terminal punctuation, 66 fixed, 1 left open (id=1325 — トンネルの4種類/NATM etc. doesn't appear anywhere in text6l.pdf, the topic isn't touched by any of ch6's ten sections; flagged as a likely source mistag, same category as session 25's id=468). Highest truncation rate of any chapter processed so far (68/133 ≈ 51% vs 17-31% for ch1-ch5), matching CARD_CONTENT_SPEC.md's existing note that ch6 was the priority chapter for this issue. Also resolved the long-flagged EF接合 triple (459/612/613) furi corruption — rather than guess, ran a corpus-precedent search across 19+20+35 comparable cards (three different jp-shape categories: romaji-abbrev+ruby+parenthetical-gloss, pure-katakana parenthetical, mixed katakana+kanji parenthetical) and found the earlier "nested brackets are the bug" framing was an overcorrection (8 other cards legitimately nest brackets in furi); the real, narrower issue was that 459's parenthetical is pure katakana (needs no furigana) and 612's kanji already carry inline ruby in `jp` (furi needn't repeat it) — both resolve to furi="EFせつごう" for all three siblings. 613 was separately just corrupted (its furi/jp held the verbatim reading of an unrelated later procedure step, likely a copy/paste bleed during original drafting) — fixed to match. Full evidence trail in commit `5447c94`'s body. Process note: this batch's dry-run surfaced a failure class beyond session 26's missing-space bug — whole-phrase repeats where the natural continuation restated words already present right at the truncation point, invisible to a single-adjacent-word checker; escalated through n-gram (2-3 word) and raw-substring (catches same-word collisions across a glued Japanese/Indonesian token boundary with no space) checks, plus a paren-balance check after id=979 turned out not to be truncated at all (just missing a period after an already-closed paren, would have produced unbalanced parens if treated as a content gap). Applied via a brace-depth + quote-preserving script across every file actually holding jac-ch6 cards — confirmed 7 split files (common/ch5.js, ch6.js, ch7.js, vocab-supplementary.js; lifeline/ch5.js, ch6.js, vocab-jac.js), not just common/ch6.js, same lesson as every prior multi-chapter session. verify-content.mjs + audit-track-consistency.mjs both clean after (1438 unchanged, 0 track disagreements). Commit `5447c94`. P5 running total: 240/479. Remaining: jac-ch7 only (47 cards) — the last chapter. HANDOFF.md's CURRENT STATE, PDF intake tracker, and 🟡 bucket updated to match (EF接合 entry removed, resolved); `docs/CARD_CONTENT_SPEC.md`'s P5 status blockquote and the stale H6 "EF接合 merge" table row (predated P4's actual no-merge decision) both updated; this row added (docs commit separate from `5447c94`, per RULES). |
+| 2026-08-16 | content-dq | Agent Claude: session 26 (new agent chat, owner provided repo+token directly — not a continuation of session 25). Verify scripts re-run clean at start (1438/0 unchanged). Owner attached 2 PDFs in the opening message: `text4.pdf` (teori ch4 — 現場で使われるあいさつ・用語・共同生活上の注意, confirmed by content match against existing jac-ch4-sourced cards, not just filename) and `text5l.pdf` (praktik ch5 — 工具・機械・材料・計測器の知識, cover page states 試験区分(ライフライン・設備) directly). These closed 2 of the PDF intake tracker's 4 remaining ⏸ rows — all 4 teori PDFs are now in, only praktik ch6/ch7 remain outstanding. Scoped P5 to source=jac-ch4 (149 cards) + source=jac-ch5 (216 cards) = 365 checked: 269 already had proper terminal punctuation, 94 genuinely truncated and completed against the actual PDF text, 2 left open (id=93 — けい酸カルシウム保温材 doesn't appear anywhere in text5l.pdf, possibly ch6-sourced content mistagged; id=1190 — サドル's spacing-interval detail isn't stated in the provided text). Fixed 6 small pre-existing ruby/reading bugs found in-passing, all directly verifiable from each card's own jp/furi field (same category as session 25's id=791 and P10's id=31 self-corrections) — ids 111, 220, 221, 236, 238, 253. Flagged but did not touch: id=585 (id_text/jp claim "6 istilah" but desc only ever drafted 3 — pre-existing mismatch, not a P5-truncation issue); 8 id_text fields (131, 223, 242, 245, 411, 591, 1373, 1378) that dangle on a conjunction/preposition, a different shape than P3's already-completed "ends in /" pattern, likely a separate undiscovered instance needing its own pass. Process note reconfirmed: jac-ch4/ch5 cards span 8 split files each (not just common/ch4.js+common/ch5.js) — grepped the whole tree per id rather than assuming, same lesson as session 25's ch3 batch. Process improvement this session: built a dry-run preview script before writing any file, since the first draft's `oldDesc + suffix` concatenations were missing leading spaces and duplicating words at several seams — an automated bad-ending/doubled-word scan over the preview caught all of it before anything touched disk. Applied across every layer (split file → source/ mirror → cards.js) via a brace-depth-aware, quote-preserving script rather than manual per-file edits, given the volume (94 ids × 3 files = 282 lines). verify-content.mjs + audit-track-consistency.mjs both clean after (1438 unchanged, 0 track disagreements). Commit `b00bdf2`. P5 running total: 174/479. HANDOFF.md's CURRENT STATE, PDF intake tracker, and 🟡 bucket updated to match; `docs/CARD_CONTENT_SPEC.md`'s P5 status blockquote updated; this row added (docs commit separate from `b00bdf2`, per RULES — see git log for its hash). |
+| 2026-08-15 | content-dq | Agent Claude: session 25 (new agent chat, repo+token clone — not a continuation of session 24; date corrected from an earlier stale-container-clock reading of 08-04, real time passed within this one session same as session 24 did) — **part 1:** verify scripts clean, no PDF yet, nothing in ACTIVE TASKS actionable; found + fixed doc drift outside the tracked list (README-CONTENT-DQ.md's tree still listed 5 files session 24's `d55ac3c` deleted, plus a missing jac-official.js entry and a stale quiz-sets.js description). Commit `cbb7ff6`. **Part 2:** owner provided the first 2 of 4 teori PDFs (ch1, ch2), explicitly incremental/"one by one" going forward (token-cost concern on their end) — 7-chapter intake tracker added to HANDOFF.md's ⏸ section. Scoped P5 to source=jac-ch1∪jac-ch2 (130 cards): 22 genuinely-truncated cards completed against the actual PDF text, 5 left open (not enough source detail), 1 flagged separately as a likely source mistag (id=468). One own error caught pre-commit (事業主 furigana mis-keyed, corrected). Commit `61c180a`. **Part 3:** 3rd teori PDF (ch3) arrived. Scoped to source=jac-ch3 (183 cards): 56 completed, 4 left open (insufficient PDF detail), 23 initially-flagged candidates turned out already complete (this batch's cards sometimes end in Japanese 。 rather than Latin ., a real second valid convention — learned after initially over-flagging them). Process catches: jac-ch3 cards span 8 split files, not just common/ch3.js (3 are in lifeline/*.js); a find-replace bug affecting fragment-only old-value matches was caught and fixed mid-session. Commit `dca925e`. **Part 4, owner explicitly requested an administrative due-diligence + hygiene pass.** Full corpus-wide re-scan of jac-ch1/2/3 (not a re-read of the earlier triage) surfaced 2 cards (id=1349, 1369) that were correctly analyzed in part 3 but got dropped when that part's fix script was rewritten mid-stream — fixed, commit `1afb7a2`. P5 running total corrected to 80/479 (was mis-reported as 78). Also audited docs/CARD_CONTENT_SPEC.md and this file for other stale numbers while in there: found and annotated 2 frozen pre-DQ-campaign baselines (§0D, §2A — 1,443/692/655/96, correctly historical, just unlabeled as such before now) that could be mistaken for live counts; found and fixed a genuinely live discrepancy in the MERGE PREP CHECKLIST (§11) — items 3/4/9/10 still described `csv-sets.js`/`sets/csv/`/`sets/quiz/` conditionally on "if P16/P17 done," but both are done and `sets/quiz/` doesn't exist anymore after session 24's Doboku/Kenchiku removal, so `quiz-sets.js` needs no separate rebuild step now (it's a pure aggregator); added the missing TrackPicker.jsx/DobokuMode.jsx/KenchikuMode.jsx merge-time item that wasn't in that checklist at all. Added completion annotations to P16/P17's task-definition checkboxes (same convention as P5's) and a Status column to §12's Open Decisions table (the table's own instruction says to keep it updated per batch; it never had been). Added a scope clarifying note to this file's own §3 Current Metrics table (main-branch snapshot, not content-dq live — was ambiguous, not wrong). File syntax of all 8 session-touched card files independently re-confirmed via direct `import()`. verify-content.mjs + audit-track-consistency.mjs clean throughout. |
+| 2026-07-30 | content-dq | Agent Claude: session 24 (cont'd) — owner decision: drop PDF Viewer Mode + Doboku/Kenchiku tracks entirely, scope reduced to Lifeline-only (owner: "lost track of everything," wanted fewer moving parts to hold in mind at once). Both tracks were still 100% AI-generated draft content (90 quiz questions, zero official JAC material) blocked on a PDF that may never arrive — not a data-loss call, a scope call. Deleted: jac-doboku.js/jac-kenchiku.js stubs, source/cards-doboku.js/cards-kenchiku.js stubs, sets/quiz/doboku-01..03.js + kenchiku-01..03.js (6 files, 90 questions). Edited: quiz-sets.js (dropped DOBOKU_SETS/KENCHIKU_SETS + track-mapping), index.js + jac-official.js (dropped JAC_DOBOKU/JAC_KENCHIKU exports), categories.js (dropped 5 placeholder categories, simplified all `tracks` arrays to `['lifeline']`), useTrackedCards.js (JSDoc). Left untouched: every card whose *content* merely mentions 土木/建築 as vocabulary (e.g. "what counts as doboku work" questions) — those are correctly common-track general knowledge, not track-membership bugs. verify-content.mjs + audit-track-consistency.mjs both clean throughout, 1438 cards unchanged (nothing here touches card data, only the track/quiz scaffolding around it). Not touched: `main` branch's TrackPicker.jsx/DobokuMode.jsx/KenchikuMode.jsx — those need the equivalent update at merge time, flagged in HANDOFF.md, out of scope for a content-dq session. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 8, final) — owner requested handoff to a new agent. Enriched HANDOFF.md: added GETTING STARTED section (repo URL, clone command, token-sharing context) so it works as a standalone upload artifact; added detailed P10 investigation notes (61/119 confirmed copy-of-q hints, the context-drift risk found while dictionary-checking, why generation was not attempted) so the next agent does not have to rediscover this. Caught and fixed a dropped section heading from my own edit before committing. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 7) — executed P11. 50 instances of a circular non-explanation ("{term} = bahasa Jepangnya.") replaced with the actual meaning, using opts[ans]/opts_id[ans] already present in the same question object rather than inventing translations. Verified ans wasn't always 0 first (12/50 weren't) before trusting an index-0 shortcut. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 6) — executed P8b (owner: "continue whatever it is until everything's done"). Scoped to q/exp (wglv-jp) + opts (wglv-id) only, not hint, after confirming hint's kanji=meaning-breakdown style was never meant to carry ruby (checked the established P8a-done convention first). Built a whole-repo ruby dictionary (38,754 pairs) for confident lookups; fixed via redundant-dup stripping, round-paren-to-ruby conversion (using the text's own stated reading, not invented), same-question cross-reference, then dictionary lookup at ≥85% confidence. 61 instances across 26 compounds left unresolved on purpose (context-dependent single characters). Caught and fixed an off-by-one in the wayground-sets.js re-splice (missing opening brace before wg12) before committing. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 5) — executed P16 (OD-2: owner confirmed now). Verified the spec's wglv01 direction table was wrong (claimed 100% JP→ID, actual 26 ID→JP/24 JP→ID) before trusting it - corrected in CARD_CONTENT_SPEC.md. Real split: 117 ID→JP + 119 JP→ID = 236, chunked into wglv-jp-01/02/03 + wglv-id-01/02/03 (~39-40 each). Same monolith-drift pattern as P17: wayground-sets.js held stale content under legacy ids wg6/wg7/wg8/wg9/wg11 (not wglv01-05), with at least one confirmed drift (duplicated ruby on wg6 id=4, already fixed in the split file). Rebuilt from the split-file content. Found (not fixed) a malformed-opts data issue in one carried-over question, added to HANDOFF.md's judgment-call bucket. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 4) — executed P6+P13 (OD-1: owner confirmed merge). 226 cards on vocab-lifeline(113)/vocab-general(44)/vocab-teori(18)/vocab-core(13)/vocab-exam(38) reclassified to vocab-supplementary (269→495), across all 3 layers (5 split files + both source/ mirrors + cards.js, 678 total line changes = 226×3). Verify script confirms 0 deprecated values remain, all counts/mirrors still consistent. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 3) — owner answered OD-1 (merge), OD-2 (now), OD-3 (now) via quick tappable choices. Fixed the id=82/83/186/188/201 corruption (verify script now exits 0). Executed P17: sets/csv/→sets/jac-mockup/, ct*/cp*→jmt*/jml*, source unified to 'jac-mockup', titles/ids/export-names per CARD_CONTENT_SPEC.md §1.4. Also updated csv-sets.js→jac-mockup-sets.js (the actual monolith the running app consumes via quiz-sets.js — not just the split files, which was a scope gap the task list didn't make obvious) + quiz-sets.js + index.js + viewer.html + this file + README-CONTENT-DQ.md reference updates. |
+| 2026-07-11 | content-dq | Agent Claude: session 23 (cont'd, part 2) — owner requested a redesign for a multi-agent relay workflow (upload/download one .md per agent handoff). Consolidated SESSION_PROMPT.md + DATA_QUALITY_HANDOFF_v18.md + PROGRESS.md's active checklist into one file, `HANDOFF.md`, always edited in place (no version numbers); all three archived. Added `scripts/verify-content.mjs` — dependency-free, catches syntax corruption and count mismatches without needing the main-branch build pipeline; confirmed it correctly flags the still-open id=82/83/186/188/201 corruption and correctly passes on a fixed test copy. Updated README-CONTENT-DQ.md + this file's own header/tree-comment to point at HANDOFF.md instead of the now-archived files. (Note: this row was briefly overwritten by mistake instead of added as a new row, then restored — same class of editing slip as the ADM10-13 duplication earlier this session, caught the same way, by reviewing the diff before trusting it.) |
+| 2026-07-11 | content-dq | Agent Claude: session 23 ADMIN sync — HANDOFF v17→v18 (10 commits/2 sessions stale); SESSION_PROMPT rewrite; README-CONTENT-DQ.md 3× dangling v16 refs fixed; PROGRESS.md ref bump; this session-log gap (sessions 19–22 were missing — ADM10–13 below were already logged, my mistake initially claiming otherwise) backfilled; v16+v17 archived to docs/archive/; cards.js header comment fixed (1443→1438); found (not fixed) type-field corruption in 5 source/ mirror records — see HANDOFF v18 §1D |
+| 2026-05-18 | content-dq | Sonnet 4.6: session 22 — P14/P15 SELESAI (581 konsep→vocab, 1092 usage added, 100% vocab coverage); P8a item 2 sets/csv/ ruby+hint+opts (0 naked remaining) |
+| 2026-05-16 | content-dq | Sonnet 4.6: session 21 — HANDOFF v16→v17 sync (card count, source counts, known-issues, codebase state, session log 18–20) |
+| 2026-05-16 | content-dq | Sonnet 4.6: session 20 — integrity checks (1,438 IDs, no dups, mirrors ✅); P17 dirty state OPSI B; P8a items 1/3/4/5 done (sets/jac/, sets/quiz/, wayground, wtv01) |
+| 2026-05-15 | content-dq | Sonnet 4.6: session 19 — P0–P5,P7,P9: encoding fixes (id=476,773), 12 nested ruby, 62 jp ruby, 18 katakana ruby, ~140 naked jp parens, 10 naked desc, 52 id_text, 6 metadata, 5 duplicate cards deleted, 26 id_text disambiguated, P5-C 13 symbol fixes, 3 null angka-kunci fixed |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM13 — last pass: C1 file path (773→vocab-supplementary), C2 table row 619 added, SESSION_PROMPT OD-4, hash sync 319f2c8 |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM12 — recheck2: hash 319f2c8, type enum order, dangling v16 refs, §8 P6 ordering warning, _MAP ADM11 entry |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM11 — recheck: commit hash a9f9c94, P8a prereq note, SPEC §8 dependency order warning for P16/P17 |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM10 — CARD_CONTENT_SPEC consolidated (v1.0–v1.6 + DATA_ARCH_AUDIT merged), DATA_QUALITY_HANDOFF v16→v17, PROGRESS.md compacted, SESSION_PROMPT/\_MAP updated, docs/ created |
+| 2026-05-14 | content-dq | Sonnet 4.6: ADM9 — mark v87 comparison done (owner-confirmed), remove from blocked list |
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM8 commit hash sync — ADM7 self-reference fix (3a199f1→e0e689b), session 16→17, ADM1–ADM7→ADM1–ADM8 |
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM7 hygiene audit — data audit all sets/cards/pairs/angka; Part 6 jac-lifeline null fix (29→30); Part 7 confusion-pairs defA/defB schema doc; session 15→16 sync |
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM6 deep hygiene — last commit hash sync (→9ed5e7e), categories.js comment fix (Sipil→Doboku, Bangunan→Kenchiku), SESSION_PROMPT/HANDOFF/PROGRESS session 14→15, ADM6 tracking |
+| 2026-05-12 | content-dq | Sonnet 4.6: ADM5 deep hygiene — last commit hash sync (→9ed5e7e), SIPIL/BANGUNAN→DOBOKU/KENCHIKU in _MAP+HANDOFF, _MAP session log gaps (ADM3/ADM4), PROGRESS ADM3/ADM4/ADM5 retroactive tracking |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM4 hygiene pass 4 — HANDOFF prefix taxonomy + Part 7/8 table fixes + Part 12→14 renumber, SESSION_PROMPT last commit, PROGRESS stale count annotations |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM3 _MAP.md + README-CONTENT-DQ.md hygiene — §0B set prefix locations, §0E text3l crossed out, Part 7/8 table rows, AGENT RULES dangling ref, Part 12→14 renumber |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM2 deep hygiene pass — all stale refs purged (handoff v16, §0B prefix taxonomy, Parts 3–8, session summaries, PROGRESS batch order) |
+| 2026-05-11 | content-dq | Sonnet 4.6: ADM1 admin sync post-sessions-11-12 (source counts, §13A, CODEBASE STATE wayground, _MAP.md storage v3→v4) |
+| 2026-05-10 | content-dq | Sonnet 4.6: W1 wayground taxonomy restructure — 26 sets renamed+reorganized into teori/vocab/lifeline/praktik/lifeline/vocab subfolders |
+| 2026-05-10 | content-dq | Sonnet 4.6: G1 type-based filtering (useTrackedCards, FilterPopup, FocusMode); G2 source fix (id:1184 vocab-supp, id:1233 jac-gakka1) |
+| 2026-05-09 | content-dq | Sonnet 4.6: sessions 1–8 data hygiene — ruby annotation, furi alignment, schema migration, confusion/danger pairs, csv/quiz/wayground audits, card restructure (S1–S4), source cleanup (F1–F3), housekeeping (H1–H11) |
 | 2026-05-09 | v4.21.1 | Sonnet 4.6: OVERHAUL-1 retire usePersistedState (3 sites → useProgress); ENG-4 WaygroundMode engine read; ENG-6 ExportMode richer summary; 457 tests (41 files) |
 | 2026-05-09 | v4.21.0 | Sonnet 4.6: REF-8 merge vocab sources (8→4); REF-9 absorb sipil/bangunan into quiz-sets.js; C1-C9 integrity tests (448 tests, 40 files) |
 | 2026-05-09 | v4.20.15 | Sonnet 4.6: ENG-11 useTrackedCards hook; 6 new tests (439 total, 39 files) |

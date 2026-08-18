@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nugget Nihongo — Content Viewer</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --surface2: #22263a;
+    --border: #2e3250; --accent: #6c8fff; --accent2: #ff6b6b;
+    --green: #4ade80; --yellow: #facc15; --text: #e2e6f3; --muted: #7b82a8;
+    --ruby: #f9a8d4; --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; font-size: 15px; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--surface); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px; padding: 10px 20px; flex-wrap: wrap; }
+  nav h1 { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .tab-group { display: flex; gap: 4px; }
+  .tab { padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: transparent;
+    color: var(--muted); cursor: pointer; font-size: 13px; transition: all .15s; }
+  .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  select, input[type=range] { background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    padding: 5px 10px; border-radius: 6px; font-size: 13px; }
+  .info-bar { margin-left: auto; font-size: 12px; color: var(--muted); }
+
+  /* MAIN */
+  main { max-width: 780px; margin: 0 auto; padding: 24px 16px; }
+  .hidden { display: none !important; }
+
+  /* PROGRESS */
+  .prog { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .prog-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--accent); transition: width .3s; }
+  .prog-label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  /* CARD — FLASHCARD */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; margin-bottom: 16px; cursor: pointer; transition: border-color .2s; }
+  .card:hover { border-color: var(--accent); }
+  .card-jp { font-size: 28px; text-align: center; margin-bottom: 8px; line-height: 1.4; }
+  .card-furi { text-align: center; color: var(--ruby); font-size: 14px; margin-bottom: 20px; }
+  .card-back { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 4px; }
+  .card-id_text { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .card-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .card-usage { margin-top: 10px; font-size: 13px; color: var(--yellow); font-style: italic; }
+  .card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); }
+  .badge.type-konsep { border-color: #6c8fff44; color: var(--accent); }
+  .badge.type-vocab { border-color: #4ade8044; color: var(--green); }
+  .badge.type-hukum { border-color: #facc1544; color: var(--yellow); }
+  .flip-hint { text-align: center; font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+  /* QUIZ CARD */
+  .q-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
+  .q-num { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .q-text { font-size: 18px; margin-bottom: 6px; line-height: 1.5; }
+  .q-hint { font-size: 13px; color: var(--muted); margin-bottom: 16px; font-style: italic; }
+  .opts { display: grid; gap: 8px; }
+  .opt { padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2);
+    cursor: pointer; font-size: 14px; transition: all .15s; display: flex; gap: 10px; align-items: flex-start; }
+  .opt:hover { border-color: var(--accent); }
+  .opt.correct { border-color: var(--green); background: #4ade8011; }
+  .opt.wrong { border-color: var(--accent2); background: #ff6b6b11; }
+  .opt-label { font-size: 11px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 6px; min-width: 22px; text-align: center; color: var(--muted); flex-shrink: 0; }
+  .opt-id { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .exp-block { margin-top: 12px; padding: 12px 14px; background: var(--surface2); border-radius: 8px;
+    font-size: 13px; color: var(--muted); line-height: 1.6; border-left: 3px solid var(--accent); }
+
+  /* NAV BUTTONS */
+  .nav-btns { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .btn { padding: 8px 20px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer; font-size: 14px; transition: all .15s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:disabled { opacity: .3; cursor: default; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ISSUE FLAG */
+  .flag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 2px 8px;
+    border-radius: 4px; margin-left: 6px; }
+  .flag.double-ruby { background: #ff6b6b22; color: var(--accent2); border: 1px solid #ff6b6b44; }
+  .flag.bare-kanji { background: #facc1522; color: var(--yellow); border: 1px solid #facc1544; }
+  .flag.wrong-ruby { background: #f9a8d422; color: var(--ruby); border: 1px solid #f9a8d444; }
+  .flag.no-hint { background: #6c8fff22; color: var(--accent); border: 1px solid #6c8fff44; }
+
+  /* RUBY */
+  ruby rt { font-size: 11px; color: var(--ruby); }
+  .raw-ruby { /* inline 漢字《よみ》 rendered below */ }
+
+  /* STATS BAR */
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 16px; flex: 1; min-width: 100px; }
+  .stat-val { font-size: 22px; font-weight: 700; color: var(--accent); }
+  .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .empty { text-align: center; padding: 60px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<nav>
+  <h1>📖 Content Viewer</h1>
+  <div class="tab-group">
+    <button class="tab active" onclick="switchTab('cards')">Flashcards</button>
+    <button class="tab" onclick="switchTab('csv')">CSV Quiz</button>
+    <button class="tab" onclick="switchTab('wayground')">Wayground</button>
+    <button class="tab" onclick="switchTab('quiz')">Quiz Sets</button>
+    <button class="tab" onclick="switchTab('jac')">JAC Ujian</button>
+  </div>
+  <select id="set-select" onchange="onSetChange()"><option>—</option></select>
+  <span class="info-bar" id="info-bar"></span>
+</nav>
+<main id="main-content"></main>
+
+<!-- Load all data as modules -->
+<script type="module">
+// ── helpers ──────────────────────────────────────────────────────────────
+function rubyRender(str) {
+  if (!str) return '';
+  // 漢字《よみ》 → <ruby>漢字<rt>よみ</rt></ruby>
+  return str.replace(/([\u4e00-\u9fff\u3400-\u4dbf]+)《([^》]+)》/g,
+    (_, k, r) => `<ruby>${k}<rt>${r}</rt></ruby>`);
+}
+
+function hasDoubleRuby(str) {
+  return str && /》《/.test(str);
+}
+function hasBareKanji(str) {
+  if (!str) return false;
+  const stripped = str.replace(/[\u4e00-\u9fff\u3400-\u4dbf]+《[^》]+》/g, '');
+  return /[\u4e00-\u9fff\u3400-\u4dbf]/.test(stripped);
+}
+function hasKanaInRuby(str) {
+  if (!str) return false;
+  const rubies = [...str.matchAll(/《([^》]+)》/g)];
+  return rubies.some(m => /[\u3040-\u309f\u30a0-\u30ff]/.test(m[1]));
+}
+function flags(str, hasHint) {
+  let out = '';
+  if (str && hasDoubleRuby(str)) out += '<span class="flag double-ruby">⚠ double ruby</span>';
+  if (str && hasBareKanji(str))   out += '<span class="flag bare-kanji">⬡ bare kanji</span>';
+  if (hasHint === false)          out += '<span class="flag no-hint">? no hint</span>';
+  return out;
+}
+
+// ── state ─────────────────────────────────────────────────────────────────
+let tab = 'cards', setIdx = 0, itemIdx = 0, revealed = false;
+let DATA = {};
+
+window.switchTab = (t) => {
+  tab = t; itemIdx = 0; setIdx = 0; revealed = false;
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(t) || (t==='csv'&&b.textContent==='CSV Quiz') || (t==='wayground'&&b.textContent==='Wayground') || (t==='jac'&&b.textContent==='JAC Ujian') || (t==='quiz'&&b.textContent==='Quiz Sets')));
+  populateSetSelect(); render();
+};
+
+window.onSetChange = () => {
+  setIdx = +document.getElementById('set-select').value || 0;
+  itemIdx = 0; revealed = false; render();
+};
+
+window.go = (d) => {
+  revealed = false;
+  itemIdx = Math.max(0, Math.min(itemIdx + d, currentItems().length - 1));
+  render();
+};
+window.reveal = () => { revealed = true; render(); };
+
+function currentItems() {
+  if (tab === 'cards') return DATA.cards || [];
+  if (tab === 'csv') return (DATA.csv || [])[setIdx]?.questions || [];
+  if (tab === 'wayground') return (DATA.wayground || [])[setIdx]?.questions || [];
+  if (tab === 'quiz') return (DATA.quiz || [])[setIdx]?.questions || [];
+  if (tab === 'jac') return (DATA.jac || [])[setIdx]?.questions || [];
+  return [];
+}
+
+function populateSetSelect() {
+  const sel = document.getElementById('set-select');
+  if (tab === 'cards') { sel.innerHTML = '<option value="0">All Cards</option>'; return; }
+  const arr = tab === 'csv' ? DATA.csv : tab === 'wayground' ? DATA.wayground : tab === 'quiz' ? DATA.quiz : DATA.jac;
+  if (!arr) { sel.innerHTML = '<option>—</option>'; return; }
+  sel.innerHTML = arr.map((s,i) => `<option value="${i}">${s.id || s.title || 'Set '+i}</option>`).join('');
+  sel.value = setIdx;
+}
+
+// ── render ────────────────────────────────────────────────────────────────
+function render() {
+  const items = currentItems();
+  const el = document.getElementById('main-content');
+  const info = document.getElementById('info-bar');
+  if (!items.length) { el.innerHTML = '<div class="empty">No data loaded yet.<br>Pastikan viewer.html dibuka dari folder yang sama dengan src/data/</div>'; return; }
+
+  info.textContent = `${itemIdx + 1} / ${items.length}`;
+  const prog = `<div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:${((itemIdx+1)/items.length*100).toFixed(1)}%"></div></div><span class="prog-label">${itemIdx+1}/${items.length}</span></div>`;
+  const navBtns = `<div class="nav-btns"><button class="btn" onclick="go(-1)" ${itemIdx===0?'disabled':''}>← Prev</button><span style="color:var(--muted);font-size:13px">${tab.toUpperCase()}</span><button class="btn" onclick="go(1)" ${itemIdx===items.length-1?'disabled':''}>Next →</button></div>`;
+
+  if (tab === 'cards') el.innerHTML = prog + renderCard(items[itemIdx]) + navBtns;
+  else el.innerHTML = prog + renderQ(items[itemIdx]) + navBtns;
+}
+
+function renderCard(c) {
+  if (!c) return '';
+  const back = revealed ? `<div class="card-back">
+    <div class="card-id_text">${c.id_text || ''}</div>
+    <div class="card-desc">${c.desc || ''}</div>
+    ${c.usage ? `<div class="card-usage">${rubyRender(c.usage)}</div>` : ''}
+    <div class="card-meta">
+      <span class="badge type-${c.type||''}">${c.type||'—'}</span>
+      <span class="badge">${c.source||''}</span>
+      <span class="badge">id: ${c.id||''}</span>
+    </div>
+  </div>` : `<div class="flip-hint">[ tap to reveal ]</div>`;
+  return `<div class="card" onclick="reveal()">
+    <div class="card-jp">${rubyRender(c.jp||'')}${flags(c.jp)}</div>
+    <div class="card-furi">${c.furi||''}</div>
+    ${back}
+  </div>`;
+}
+
+function renderQ(q) {
+  if (!q) return '';
+  const optsHtml = (q.opts||[]).map((o,i) => {
+    const id = q.opts_id?.[i] || '';
+    return `<div class="opt" onclick="selectOpt(${i})">
+      <span class="opt-label">${String.fromCharCode(65+i)}</span>
+      <div><div>${rubyRender(o)}${flags(o)}</div>${id?`<div class="opt-id">${id}</div>`:''}</div>
+    </div>`;
+  }).join('');
+  const expHtml = revealed ? `<div class="exp-block">${q.exp||q.explanation||'—'}</div>` : '';
+  return `<div class="q-block">
+    <div class="q-num">Q${(q.id||itemIdx+1)}${flags(q.q, q.hint!=null?true:false)}</div>
+    <div class="q-text">${rubyRender(q.q||q.jp||'')}</div>
+    ${q.hint ? `<div class="q-hint">${q.hint}</div>` : ''}
+    <div class="opts" id="opts-container">${optsHtml}</div>
+    ${expHtml}
+  </div>`;
+}
+
+window.selectOpt = (i) => {
+  revealed = true;
+  const items = currentItems();
+  const q = items[itemIdx];
+  const ans = q.ans ?? q.answer ?? -1;
+  document.querySelectorAll('.opt').forEach((el,j) => {
+    if (j === ans) el.classList.add('correct');
+    else if (j === i && i !== ans) el.classList.add('wrong');
+  });
+  document.getElementById('main-content').innerHTML = document.getElementById('main-content').innerHTML; // re-render with exp
+  render();
+};
+
+// ── data loading ──────────────────────────────────────────────────────────
+async function loadData() {
+  const base = './src/data/';
+  async function loadJS(path) {
+    try {
+      const mod = await import(base + path + '?v=' + Date.now());
+      return mod;
+    } catch(e) {
+      console.warn('Failed to load', path, e.message);
+      return null;
+    }
+  }
+
+  const [cards, csv, wayground, quiz, jacT, jacL] = await Promise.all([
+    loadJS('cards.js'),
+    loadJS('jac-mockup-sets.js'),
+    loadJS('wayground-sets.js'),
+    loadJS('quiz-sets.js'),
+    loadJS('jac-teori.js'),
+    loadJS('jac-lifeline.js'),
+  ]);
+
+  DATA.cards = cards?.CARDS || [];
+
+  // JAC_MOCKUP_SETS: array of sets each with .questions[]
+  const csvRaw = csv?.JAC_MOCKUP_SETS || [];
+  DATA.csv = Object.values(
+    csvRaw.reduce((acc, s) => { const k = s.set||s.id||'?'; if(!acc[k]) acc[k]={id:k,questions:[]}; acc[k].questions.push(s); return acc; }, {})
+  );
+
+  const wgRaw = wayground?.WAYGROUND_SETS || [];
+  DATA.wayground = Object.values(
+    wgRaw.reduce((acc, s) => { const k = s.set||s.id||'?'; if(!acc[k]) acc[k]={id:k,questions:[]}; acc[k].questions.push(s); return acc; }, {})
+  );
+
+  const qRaw = quiz?.QUIZ_SETS || [];
+  DATA.quiz = Object.values(
+    qRaw.reduce((acc, s) => { const k = s.set||s.id||'?'; if(!acc[k]) acc[k]={id:k,questions:[]}; acc[k].questions.push(s); return acc; }, {})
+  );
+
+  const jacRaw = [...(jacT?.JAC_TEORI||[]), ...(jacL?.JAC_LIFELINE||[])];
+  DATA.jac = [
+    { id: 'JAC Teori', questions: jacT?.JAC_TEORI || [] },
+    { id: 'JAC Lifeline', questions: jacL?.JAC_LIFELINE || [] },
+  ];
+
+  populateSetSelect();
+  render();
+}
+
+loadData();
+</script>
+</body>
+</html>

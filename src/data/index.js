@@ -5,17 +5,15 @@
 export { CARDS } from './cards.js';
 
 // JAC Official — split by type
-// jac-official.js is a backward-compat shim: [...JAC_TEORI, ...JAC_LIFELINE, ...]
+// jac-official.js is a backward-compat shim: [...JAC_TEORI, ...JAC_LIFELINE]
 export { JAC_OFFICIAL } from './jac-official.js';
 export { JAC_TEORI } from './jac-teori.js';           // 学科 (common, all tracks)
 export { JAC_LIFELINE } from './jac-lifeline.js';     // 実技 Lifeline
-export { JAC_DOBOKU } from './jac-doboku.js';         // 実技 Doboku (future)
-export { JAC_KENCHIKU } from './jac-kenchiku.js';     // 実技 Kenchiku (future)
 
-// Question sets — wayground + CSV with track field
-// wayground-sets.js + csv-sets.js kept as shims; quiz-sets.js = combined
+// Question sets — wayground + JAC Mockup with track field
+// wayground-sets.js + jac-mockup-sets.js kept as shims; quiz-sets.js = combined
 export { WAYGROUND_SETS } from './wayground-sets.js';
-export { CSV_SETS } from './csv-sets.js';
+export { JAC_MOCKUP_SETS } from './jac-mockup-sets.js';
 export { QUIZ_SETS, getQuizSetsForTrack } from './quiz-sets.js';
 
 // Study aids — with track field
