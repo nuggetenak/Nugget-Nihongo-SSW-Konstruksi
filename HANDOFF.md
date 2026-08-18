@@ -63,6 +63,48 @@ Then: PROTOCOL section below, first.
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
+- **Quiz duplicates + scope-mismatch follow-through (owner-requested same day, "fix quiz
+  duplicates & work through scope-mismatch"). 3 more commits, all pushed:**
+  - **Quiz duplicates, fully resolved.** 9 in-scope exact-duplicate pairs total (`sim >= 0.85`,
+    excluding `sets/jac/` and the documented jml/jmt/wt06 compilation pattern). 3 were this
+    session's own earlier `wglv-jp-02` headword reconstructions (ids 16/17/21) unknowingly
+    duplicating pre-existing sibling content — replaced with fresh terms cross-checked against
+    all 120 questions in `wglv-jp-01/02/03` first: id=16 → インジケーター (EF-fusion indicator),
+    id=17 → クランプ (clamp), id=21 → 架空ケーブル (aerial cable). The other 6: `wgl07#19`
+    (insulation tolerance, dup of `wgl02#17`) → a torque-wrench QA question, grounded in a live
+    web search of JIS B8607 rather than guessing a number; `wt08#8`+`wt08#12` (forklift + risk-
+    assessment, dup of `wt02`) → crane sling (玉掛け) and arc-welding qualification requirements;
+    `wglv-jp-03#5`+`#13` (電柱, 電熱線, dup of `wglv-jp-01`/`02`) → 碍子 (insulator) and 漏電遮断器
+    (earth leakage breaker). One pair (`wglv-id-03#8`/`#29`) turned out NOT to be a real
+    duplicate — "Pemotongan pipa" (cutting, the process) vs "Pemotong pipa" (cutter, the tool)
+    are genuinely different vocab testing different JP terms, just worded confusingly similarly
+    in Indonesian — added "(proses)"/"(alat)" disambiguators instead of replacing either.
+    Bonus, found while reading `wt02` for replacement material: `wt02#3` had a genuine data
+    corruption, literal lost-data bytes (two U+FFFD replacement characters, confirmed at the byte
+    level) where マンホール's ホ should be — fixed against `wt02#2`'s correctly-spelled sibling.
+    Commits `b9fe3e7`, `92d783f`.
+  - **Scope-mismatch: 27 of ~68 candidates fixed.** Rebuilt the detector with the counting bug
+    from the earlier pass fixed (separators inside ruby brackets were inflating term counts).
+    Read all 68 by hand — even the refined "does each term's text literally appear in desc"
+    check still had real false positives on inspection (e.g. id=1328's bridge-types card is
+    fully covered via a "6 jenis jembatan: ..." list that doesn't use "=" per item; id=574
+    genuinely covers 4 of 6 terms in plain prose my substring check mis-flagged as missing).
+    Fixed ids: 166, 186, 188, 191, 192, 193, 195, 196, 201, 203, 225, 229, 230, 239, 378, 381,
+    412, 425, 466, 516, 528, 557, 565, 598, 602, 1385, 1387 — each confirmed by reading `jp`
+    against `desc` directly before writing a completion. Bonus, found while reading these: 4
+    more instances of the "redundant/inserted-character ruby corruption" pattern from earlier
+    this session (ids 192, 201, 203, 230 — e.g. id=230's `転《ころ》び用《てんよう》` was
+    genuinely wrong, not just a ruby-split issue: 転び means "leaning," a different word
+    entirely from 転用/reuse, which is what `jp` and the card's own `usage` field both confirm
+    it should say), and one genuine content error rather than incompleteness — id=1387's ④ item
+    said "塗装仕上げ" (paint finish) but `jp` lists 床 (floor) as the 4th term and the card's own
+    `usage` field says フローリング (flooring), not paint. Left the remaining ~40 candidates
+    (mostly larger 5-7-term "index/summary" cards) deliberately untouched — partial coverage on
+    those is hard to distinguish confidently from intentional summary brevity without a slower,
+    different methodology (checking whether each "missing" term has its own detailed card
+    elsewhere in the corpus) than a straight sweep. Commit `decaab2`.
+  - verify-content.mjs + audit-track-consistency.mjs clean throughout (1438 unchanged, 0/1438
+    track disagreements).
 - **Exhaustive content-quality audit + P12 (owner-requested, session 29, same day as the 🟡-bucket
   work below). 5 more commits, all pushed:**
   - Built corpus-wide audit tooling (kept in `/home/claude/audit` on whatever agent ran this —
@@ -532,12 +574,19 @@ on `main` should treat that as a merge-time TODO to record, not as a reason to s
 | P12 | Drop `furi` from all split files | ✅ **Complete (session 29).** All 1438 cards, all 3 layers. See CURRENT STATE for the pre-check that verified P1 first (found and fixed one real gap, id=162). |
 | **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun to the 🟡 bucket at the time (wglv-jp-02 headword loss), resolved session 29, see CURRENT STATE. |
 
-**Board is otherwise clear of pre-identified tasks.** Two things the session-29 audit found and
-characterized but didn't fix — not urgent, not blocking anything, just not yet turned into a
-proper task with its own write-up: a handful of exact-duplicate quiz questions across different
-files (see CURRENT STATE for the specific ids), and ~70 more scope-mismatch candidates beyond the
-2 already fixed (heuristic has a demonstrated high false-positive rate, needs per-card reading).
-Whoever picks either of these up should scope it properly first, same as every other task above.
+**Board is otherwise clear of pre-identified tasks.** Two things the session-29 audit found —
+status updated same day after the owner asked to act on both:
+- **Quiz duplicates: fully resolved.** All 9 in-scope exact-duplicate pairs (excluding `sets/jac/`,
+  which stays untouched) replaced with fresh, verified content. Full list + reasoning in CURRENT
+  STATE. One near-miss (wglv-id-03#8/#29) turned out not to be a real duplicate — clarified
+  instead of replaced.
+- **Scope-mismatch: 27 of ~68 fixed, ~40 remain deliberately untouched.** The 27 were confirmed by
+  reading each one individually — a term named in `jp`, never defined in `desc`. The remaining ~40
+  are mostly larger 5-7-term "index/summary" cards where partial coverage is hard to distinguish
+  confidently from intentional brevity without a slower, per-term cross-reference against whether
+  each one has its own detailed card elsewhere in the corpus. Whoever picks this back up should
+  treat it as a fresh scoping pass, not a continuation of the same sweep — see CURRENT STATE for
+  the full id list already resolved and the reasoning for stopping where this did.
 
 
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
