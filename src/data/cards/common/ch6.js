@@ -175,7 +175,7 @@ export const CARDS_CH6 = [
   furi: "れえざあしょうしゃき",
   jp: "レーザー照射器《れえざあしょうしゃき》",
   type: 'vocab',
-  id_text: "Alat laser untuk",
+  id_text: "Alat laser untuk pengecekan sudut dan kerataan",
   desc: "Memancarkan cahaya laser menggantikan 墨《すみ》つぼ konvensional; memudahkan pengecekan sudut siku (直角《ちょっかく》) dan kerataan horizontal.",
   usage: 'レーザー照射器《れえざあしょうしゃき》で通り芯《とおりしん》を投影《とうえい》する（proyeksikan garis sumbu menggunakan laser level）',
     _origIndex: 494
@@ -211,7 +211,7 @@ export const CARDS_CH6 = [
   furi: "ぐんてでのねじかこうぜったいきんし",
   jp: "軍手でのねじ加工は絶対禁止《ぐんてでのねじかこうぜったいきんし》",
   type: 'vocab',
-  id_text: "Sarung tangan kain saat",
+  id_text: "Sarung tangan kain saat mengulir dilarang",
   desc: "Menggunakan 軍手《ぐんて》 (sarung tangan kain) saat mengoperasikan mesin ulir sangat berbahaya — tangan bisa tergulung/terjepit ke dalam mesin.",
   usage: '軍手《ぐんて》でのねじ加工《かこう》は巻き込まれ《まきこまれ》の危険《きけん》があるため絶対禁止《ぜったいきんし》だ（pengerjaan ulir menggunakan sarung tangan kain dilarang mutlak karena risiko tergulung）',
     _origIndex: 499
@@ -295,7 +295,7 @@ export const CARDS_CH6 = [
   furi: "きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく",
   jp: "既存埋設管周辺50cm以内は人力掘削《きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく》",
   type: 'vocab',
-  id_text: "Radius 50 cm dari",
+  id_text: "Radius 50 cm dari utilitas existing wajib gali manual",
   desc: "Dalam radius 50 cm dari utilitas yang sudah ada wajib beralih ke penggalian manual (人力《じんりき》).",
   usage: '既存埋設管《きそんまいせつかん》の周辺《しゅうへん》50cm以内《いない》は人力《じんりき》で掘削《くっさく》する（gali secara manual dalam radius 50 cm dari pipa existing bawah tanah）',
     _origIndex: 533
@@ -319,7 +319,7 @@ export const CARDS_CH6 = [
   furi: "りゅうかすいそのうど",
   jp: "硫化水素濃度《りゅうかすいそのうど》",
   type: 'vocab',
-  id_text: "Batas konsentrasi H₂S di",
+  id_text: "Batas konsentrasi H₂S sebelum masuk manhole",
   desc: "Sebelum masuk manhole: O₂ harus ≥18% DAN H₂S ≤10 ppm.",
   usage: '硫化水素濃度《りゅうかすいそのうど》が10ppmを超《こ》えたら即時退避《そくじたいひ》する（evakuasi segera jika konsentrasi H₂S melebihi 10 ppm）',
     _origIndex: 535

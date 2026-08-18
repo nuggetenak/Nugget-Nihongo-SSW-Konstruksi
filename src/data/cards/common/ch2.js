@@ -516,7 +516,7 @@ export const CARDS_CH2 = [
   furi: "かいこせいげんしょうびょうりょうようちゅうわかいこきんし",
   jp: "解雇制限《かいこせいげんしょうびょうりょうようちゅうわかいこきんし》",
   type: "hukum",
-  id_text: "Dilarang pecat saat",
+  id_text: "Dilarang pecat saat sakit/cedera kerja",
   desc: "Pekerja yang sakit/cedera karena kerja tidak boleh dipecat selama pengobatan + 30 hari setelahnya.",
   _origIndex: 162
   },

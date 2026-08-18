@@ -269,10 +269,10 @@ export const CARDS_VOCAB_JAC = [
   id: 807,
   category: "sekou",
   source: "vocab-jac",
-  furi: "くったい",
-  jp: "躯体《くったい》",
+  furi: "くたい",
+  jp: "躯体《くたい》",
   type: "vocab",
-  id_text: "Struktur utama bangunan (くったい)",
+  id_text: "Struktur utama bangunan (くたい)",
   desc: "Rangka pokok bangunan: fondasi, kolom, balok, dinding, lantai.\nSemua elemen",
   usage: '躯体《くたい》工事《こうじ》が完了《かんりょう》してから内装《ないそう》・設備工事《せつびこうじ》を進《すす》める（lanjutkan pekerjaan interior dan MEP setelah struktur utama selesai）',
     _origIndex: 928

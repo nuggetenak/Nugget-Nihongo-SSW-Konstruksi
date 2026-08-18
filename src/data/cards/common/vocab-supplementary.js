@@ -1016,7 +1016,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ざいりょうはんにゅう",
   jp: "材料搬入《ざいりょうはんにゅう》",
   type: "vocab",
-  id_text: "Pengiriman material ke",
+  id_text: "Pengiriman material ke lokasi proyek",
   desc: "Proses penerimaan material di site dengan mencocokkan jumlah dan nomor produk",
   usage: '材料搬入《ざいりょうはんにゅう》の日程《にってい》と数量《すうりょう》を事前《じぜん》に調整《ちょうせい》する（atur jadwal dan jumlah pengiriman material terlebih dahulu）',
     _origIndex: 1316
@@ -1028,7 +1028,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "ひきわたし",
   jp: "引渡し《ひきわたし》",
   type: "vocab",
-  id_text: "Serah terima bangunan ke",
+  id_text: "Serah terima bangunan ke pemilik",
   desc: "Penyerahan kunci dan dokumen bangunan kepada pemilik setelah inspeksi akhir",
   usage: "引渡《ひきわた》しを行《おこな》う（melakukan serah terima）",
   _origIndex: 1319
@@ -1255,8 +1255,8 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "みだしなみ",
   jp: "身だしなみ《みだしなみ》",
   type: "vocab",
-  id_text: "Kerapian penampilan di",
-  desc: "Penampilan profesional di site: seragam bersih, helm terpasang benar, sepatu",
+  id_text: "Kerapian penampilan di lokasi kerja",
+  desc: "Penampilan profesional di site: seragam bersih, helm terpasang benar, sepatu safety.",
   usage: '建設現場《けんせつげんば》では身だしなみ《みだしなみ》を整えて清潔《せいけつ》な作業着《さぎょうぎ》を着用《ちゃくよう》する（kenakan seragam kerja yang bersih dan berpenampilan rapi di lokasi konstruksi）',
     _origIndex: 1377
   },

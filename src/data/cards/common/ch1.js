@@ -317,7 +317,7 @@ export const CARDS_CH1 = [
   furi: "いったいかん",
   jp: "一体感《いったいかん》",
   type: "konsep",
-  id_text: "Rasa kesatuan tim di",
+  id_text: "Rasa kesatuan tim di lokasi proyek",
   desc: "Rasa kesatuan yang terbentuk dari pekerja berbagai bidang yang bekerja sama.",
   _origIndex: 583
   },

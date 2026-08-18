@@ -1400,7 +1400,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   furi: "そうにゅうそんしつ",
   jp: "挿入損失《そうにゅうそんしつ》",
   type: "vocab",
-  id_text: "Rugi sisip pada",
+  id_text: "Rugi sisip pada konektor atau sambungan",
   desc: "Kehilangan daya saat sinyal melewati konektor atau sambungan fusion.",
   usage: '挿入損失《そうにゅうそんしつ》をOTDRで測定《そくてい》して規定値《きていち》以内《いない》を確認《かくにん》する（ukur rugi sisip menggunakan OTDR dan konfirmasi nilainya dalam batas yang ditentukan）',
     _origIndex: 1183

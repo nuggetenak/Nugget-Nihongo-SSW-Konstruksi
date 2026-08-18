@@ -1592,7 +1592,7 @@ export const CARDS_LIFELINE_CH5 = [
   furi: "こうあつ・ていあつ",
   jp: "高圧《こうあつ》・低圧《ていあつ》",
   type: "vocab",
-  id_text: "Tegangan tinggi dan",
+  id_text: "Tegangan tinggi dan rendah",
   desc: "Klasifikasi tegangan listrik. 高圧《こうあつ》: di atas 600V. 低圧《ていあつ》: 600V ke bawah.",
   usage: '低圧《ていあつ》（600V以下《いか》）と高圧《こうあつ》（600Vを超える《こえる》）で使用できる工具《こうぐ》が異《こと》なる（perkakas yang dapat digunakan berbeda antara tegangan rendah ≤600V dan tegangan tinggi >600V）',
     _origIndex: 1026

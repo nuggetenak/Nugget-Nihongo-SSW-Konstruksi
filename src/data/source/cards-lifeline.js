@@ -2714,7 +2714,7 @@ export const CARDS_LIFELINE = [
   furi: "どかぶり",
   jp: "土被り《どかぶり》",
   type: 'vocab',
-  id_text: "Kedalaman tutup tanah di",
+  id_text: "Kedalaman tutup tanah di atas pipa",
   desc: "Jarak permukaan jalan ke bagian atas管《かん》路《かんろ》; berdasarkan道《みち》路《どうろ》法施行《おこな》う令《ほうしこうれい》: minimal 0.8m di jalan raya, 0.6m di trotoar.",
   usage: '土被り《どかぶり》が規定《きてい》深度《しんど》を満《み》たすか確認《かくにん》する（periksa apakah kedalaman penutup tanah memenuhi kedalaman yang ditetapkan）',
     _origIndex: 552
@@ -4788,7 +4788,7 @@ export const CARDS_LIFELINE = [
   furi: "そうにゅうそんしつ",
   jp: "挿入損失《そうにゅうそんしつ》",
   type: "vocab",
-  id_text: "Rugi sisip pada",
+  id_text: "Rugi sisip pada konektor atau sambungan",
   desc: "Kehilangan daya saat sinyal melewati konektor atau sambungan fusion.",
   usage: '挿入損失《そうにゅうそんしつ》をOTDRで測定《そくてい》して規定値《きていち》以内《いない》を確認《かくにん》する（ukur rugi sisip menggunakan OTDR dan konfirmasi nilainya dalam batas yang ditentukan）',
     _origIndex: 1183
@@ -5923,7 +5923,7 @@ export const CARDS_LIFELINE = [
   furi: "こうあつ・ていあつ",
   jp: "高圧《こうあつ》・低圧《ていあつ》",
   type: "vocab",
-  id_text: "Tegangan tinggi dan",
+  id_text: "Tegangan tinggi dan rendah",
   desc: "Klasifikasi tegangan listrik. 高圧《こうあつ》: di atas 600V. 低圧《ていあつ》: 600V ke bawah.",
   usage: '低圧《ていあつ》（600V以下《いか》）と高圧《こうあつ》（600Vを超える《こえる》）で使用できる工具《こうぐ》が異《こと》なる（perkakas yang dapat digunakan berbeda antara tegangan rendah ≤600V dan tegangan tinggi >600V）',
     _origIndex: 1026

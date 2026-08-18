@@ -516,7 +516,7 @@ export const CARDS_LIFELINE_CH6 = [
   furi: "どかぶり",
   jp: "土被り《どかぶり》",
   type: 'vocab',
-  id_text: "Kedalaman tutup tanah di",
+  id_text: "Kedalaman tutup tanah di atas pipa",
   desc: "Jarak permukaan jalan ke bagian atas管《かん》路《かんろ》; berdasarkan道《みち》路《どうろ》法施行《おこな》う令《ほうしこうれい》: minimal 0.8m di jalan raya, 0.6m di trotoar.",
   usage: '土被り《どかぶり》が規定《きてい》深度《しんど》を満《み》たすか確認《かくにん》する（periksa apakah kedalaman penutup tanah memenuhi kedalaman yang ditetapkan）',
     _origIndex: 552

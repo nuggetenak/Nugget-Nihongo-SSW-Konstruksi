@@ -963,7 +963,7 @@ export const CARDS_COMMON = [
   furi: "かいこせいげんしょうびょうりょうようちゅうわかいこきんし",
   jp: "解雇制限《かいこせいげんしょうびょうりょうようちゅうわかいこきんし》",
   type: "hukum",
-  id_text: "Dilarang pecat saat",
+  id_text: "Dilarang pecat saat sakit/cedera kerja",
   desc: "Pekerja yang sakit/cedera karena kerja tidak boleh dipecat selama pengobatan + 30 hari setelahnya.",
   _origIndex: 162
   },
@@ -2738,7 +2738,7 @@ export const CARDS_COMMON = [
   furi: "れえざあしょうしゃき",
   jp: "レーザー照射器《れえざあしょうしゃき》",
   type: 'vocab',
-  id_text: "Alat laser untuk",
+  id_text: "Alat laser untuk pengecekan sudut dan kerataan",
   desc: "Memancarkan cahaya laser menggantikan 墨《すみ》つぼ konvensional; memudahkan pengecekan sudut siku (直角《ちょっかく》) dan kerataan horizontal.",
   usage: 'レーザー照射器《れえざあしょうしゃき》で通り芯《とおりしん》を投影《とうえい》する（proyeksikan garis sumbu menggunakan laser level）',
     _origIndex: 494
@@ -2774,7 +2774,7 @@ export const CARDS_COMMON = [
   furi: "ぐんてでのねじかこうぜったいきんし",
   jp: "軍手でのねじ加工は絶対禁止《ぐんてでのねじかこうぜったいきんし》",
   type: 'vocab',
-  id_text: "Sarung tangan kain saat",
+  id_text: "Sarung tangan kain saat mengulir dilarang",
   desc: "Menggunakan 軍手《ぐんて》 (sarung tangan kain) saat mengoperasikan mesin ulir sangat berbahaya — tangan bisa tergulung/terjepit ke dalam mesin.",
   usage: '軍手《ぐんて》でのねじ加工《かこう》は巻き込まれ《まきこまれ》の危険《きけん》があるため絶対禁止《ぜったいきんし》だ（pengerjaan ulir menggunakan sarung tangan kain dilarang mutlak karena risiko tergulung）',
     _origIndex: 499
@@ -2858,7 +2858,7 @@ export const CARDS_COMMON = [
   furi: "きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく",
   jp: "既存埋設管周辺50cm以内は人力掘削《きそんまいせつかんしゅうへんごじゅっせんちいないはじんりきくっさく》",
   type: 'vocab',
-  id_text: "Radius 50 cm dari",
+  id_text: "Radius 50 cm dari utilitas existing wajib gali manual",
   desc: "Dalam radius 50 cm dari utilitas yang sudah ada wajib beralih ke penggalian manual (人力《じんりき》).",
   usage: '既存埋設管《きそんまいせつかん》の周辺《しゅうへん》50cm以内《いない》は人力《じんりき》で掘削《くっさく》する（gali secara manual dalam radius 50 cm dari pipa existing bawah tanah）',
     _origIndex: 533
@@ -2882,7 +2882,7 @@ export const CARDS_COMMON = [
   furi: "りゅうかすいそのうど",
   jp: "硫化水素濃度《りゅうかすいそのうど》",
   type: 'vocab',
-  id_text: "Batas konsentrasi H₂S di",
+  id_text: "Batas konsentrasi H₂S sebelum masuk manhole",
   desc: "Sebelum masuk manhole: O₂ harus ≥18% DAN H₂S ≤10 ppm.",
   usage: '硫化水素濃度《りゅうかすいそのうど》が10ppmを超《こ》えたら即時退避《そくじたいひ》する（evakuasi segera jika konsentrasi H₂S melebihi 10 ppm）',
     _origIndex: 535
@@ -3191,7 +3191,7 @@ export const CARDS_COMMON = [
   furi: "いったいかん",
   jp: "一体感《いったいかん》",
   type: "konsep",
-  id_text: "Rasa kesatuan tim di",
+  id_text: "Rasa kesatuan tim di lokasi proyek",
   desc: "Rasa kesatuan yang terbentuk dari pekerja berbagai bidang yang bekerja sama.",
   _origIndex: 583
   },
@@ -3343,7 +3343,7 @@ export const CARDS_COMMON = [
   furi: "ほごめがね",
   jp: "保護メガネ《ほごめがね》",
   type: 'vocab',
-  id_text: "Kacamata pelindung dari",
+  id_text: "Kacamata pelindung dari debu dan percikan api",
   desc: "Melindungi mata dari: debu logam/kayu (粉《こな》じん), percikan api las (火花《ひばな》), panas & asap, sinar berbahaya seperti laser.",
   usage: '切断《せつだん》・研削作業《けんさくさぎょう》では保護メガネ《ほごめがね》を着用《ちゃくよう》する（kenakan safety goggles saat pekerjaan pemotongan dan penggerindaan）',
     _origIndex: 597
@@ -5378,7 +5378,7 @@ export const CARDS_COMMON = [
   furi: "ざいりょうはんにゅう",
   jp: "材料搬入《ざいりょうはんにゅう》",
   type: "vocab",
-  id_text: "Pengiriman material ke",
+  id_text: "Pengiriman material ke lokasi proyek",
   desc: "Proses penerimaan material di site dengan mencocokkan jumlah dan nomor produk",
   usage: '材料搬入《ざいりょうはんにゅう》の日程《にってい》と数量《すうりょう》を事前《じぜん》に調整《ちょうせい》する（atur jadwal dan jumlah pengiriman material terlebih dahulu）',
     _origIndex: 1316
@@ -5414,7 +5414,7 @@ export const CARDS_COMMON = [
   furi: "ひきわたし",
   jp: "引渡し《ひきわたし》",
   type: "vocab",
-  id_text: "Serah terima bangunan ke",
+  id_text: "Serah terima bangunan ke pemilik",
   desc: "Penyerahan kunci dan dokumen bangunan kepada pemilik setelah inspeksi akhir",
   usage: "引渡《ひきわた》しを行《おこな》う（melakukan serah terima）",
   _origIndex: 1319
@@ -5653,8 +5653,8 @@ export const CARDS_COMMON = [
   furi: "みだしなみ",
   jp: "身だしなみ《みだしなみ》",
   type: "vocab",
-  id_text: "Kerapian penampilan di",
-  desc: "Penampilan profesional di site: seragam bersih, helm terpasang benar, sepatu",
+  id_text: "Kerapian penampilan di lokasi kerja",
+  desc: "Penampilan profesional di site: seragam bersih, helm terpasang benar, sepatu safety.",
   usage: '建設現場《けんせつげんば》では身だしなみ《みだしなみ》を整えて清潔《せいけつ》な作業着《さぎょうぎ》を着用《ちゃくよう》する（kenakan seragam kerja yang bersih dan berpenampilan rapi di lokasi konstruksi）',
     _origIndex: 1377
   },
@@ -6803,8 +6803,8 @@ export const CARDS_COMMON = [
   furi: "かたわくこうじしほこう",
   jp: "型枠工事《かたわくこうじ》・支保工《しほこう》（かたわく・しほこう）",
   type: 'vocab',
-  id_text: "Pekerjaan bekisting dan",
-  desc: "Cetakan kayu (型《かた》枠《かたわく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah mengeras & cukup kuat, bekisting dilepas.ras & cukup kuat, bekisting dilepas.",
+  id_text: "Pekerjaan bekisting dan penyangga",
+  desc: "Cetakan kayu (型《かた》枠《かたわく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah mengeras & cukup kuat, bekisting dilepas.",
   usage: '型枠《かたわく》を支保工《しほこう》でしっかり支《ささ》える（topang bekisting dengan kuat menggunakan shoring）',
     _origIndex: 1511
   },
@@ -6815,7 +6815,7 @@ export const CARDS_COMMON = [
   furi: "れぢみくすどこんくりいとなまこんあっそう",
   jp: "レディミクスドコンクリート（生《なま》コン）",
   type: 'vocab',
-  id_text: "Ready-mix concrete dan",
+  id_text: "Ready-mix concrete dan pengirimannya",
   desc: "Beton berkualitas dari pabrik (生《なま》コン) dikirim truk molen, lalu dipompa ke bekisting.",
   usage: 'レディミクスドコンクリートをミキサ車《しゃ》で搬入《はんにゅう》する（pasok beton ready-mix menggunakan truk mixer）',
     _origIndex: 1512
@@ -8828,10 +8828,10 @@ export const CARDS_COMMON = [
   id: 807,
   category: "sekou",
   source: "vocab-jac",
-  furi: "くったい",
-  jp: "躯体《くったい》",
+  furi: "くたい",
+  jp: "躯体《くたい》",
   type: "vocab",
-  id_text: "Struktur utama bangunan (くったい)",
+  id_text: "Struktur utama bangunan (くたい)",
   desc: "Rangka pokok bangunan: fondasi, kolom, balok, dinding, lantai.\nSemua elemen",
   usage: '躯体《くたい》工事《こうじ》が完了《かんりょう》してから内装《ないそう》・設備工事《せつびこうじ》を進《すす》める（lanjutkan pekerjaan interior dan MEP setelah struktur utama selesai）',
     _origIndex: 928

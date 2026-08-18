@@ -195,7 +195,7 @@ export const CARDS_CH7 = [
   furi: "ほごめがね",
   jp: "保護メガネ《ほごめがね》",
   type: 'vocab',
-  id_text: "Kacamata pelindung dari",
+  id_text: "Kacamata pelindung dari debu dan percikan api",
   desc: "Melindungi mata dari: debu logam/kayu (粉《こな》じん), percikan api las (火花《ひばな》), panas & asap, sinar berbahaya seperti laser.",
   usage: '切断《せつだん》・研削作業《けんさくさぎょう》では保護メガネ《ほごめがね》を着用《ちゃくよう》する（kenakan safety goggles saat pekerjaan pemotongan dan penggerindaan）',
     _origIndex: 597

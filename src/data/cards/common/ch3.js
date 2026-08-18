@@ -926,8 +926,8 @@ export const CARDS_CH3 = [
   furi: "かたわくこうじ・しほこう",
   jp: "型枠工事《かたわくこうじ》・支保工《しほこう》（かたわく・しほこう）",
   type: 'vocab',
-  id_text: "Pekerjaan bekisting dan",
-  desc: "Cetakan kayu (型《かた》枠《かたわく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah mengeras & cukup kuat, bekisting dilepas.ras & cukup kuat, bekisting dilepas.",
+  id_text: "Pekerjaan bekisting dan penyangga",
+  desc: "Cetakan kayu (型《かた》枠《かたわく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah mengeras & cukup kuat, bekisting dilepas.",
   usage: '型枠《かたわく》を支保工《しほこう》でしっかり支《ささ》える（topang bekisting dengan kuat menggunakan shoring）',
     _origIndex: 1511
   },
@@ -938,7 +938,7 @@ export const CARDS_CH3 = [
   furi: "れぢみくすどこんくりいとなまこんあっそう",
   jp: "レディミクスドコンクリート（生《なま》コン）",
   type: 'vocab',
-  id_text: "Ready-mix concrete dan",
+  id_text: "Ready-mix concrete dan pengirimannya",
   desc: "Beton berkualitas dari pabrik (生《なま》コン) dikirim truk molen, lalu dipompa ke bekisting.",
   usage: 'レディミクスドコンクリートをミキサ車《しゃ》で搬入《はんにゅう》する（pasok beton ready-mix menggunakan truk mixer）',
     _origIndex: 1512
