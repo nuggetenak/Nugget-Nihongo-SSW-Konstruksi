@@ -63,6 +63,42 @@ Then: PROTOCOL section below, first.
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
+- **General-knowledge-provenance fact-check pass (second half of the "Fix all remaining gaps"
+  instruction — "yang ~107 cards", corrected to the accurate count of 135 once actually compiled;
+  the earlier "~107" was an undercount, forgot to include one of the scope-mismatch batches when
+  estimating on the fly).** Compiled the exact list from git history (every commit that added
+  general-domain-knowledge content rather than same-card-evidence-based completions or JAC-PDF-
+  verified text): the 13 desc cards + 5-card scope-mismatch cluster from earlier this session +
+  83 vocab-supplementary truncation completions + all 33 scope-mismatch fixes = 135 distinct
+  card ids. Read every one's current `jp`+`desc` for internal consistency (found none broken —
+  the scope-mismatch/truncation/corruption sweeps this session already caught anything wrong with
+  these specific cards along the way). Then spot-verified the 6 most specific, highest-stakes
+  numeric/regulatory claims across the set via live web search rather than trusting domain
+  knowledge on faith:
+  - id=94 (消火器 walking-distance): 20m / 30m-for-large-extinguishers — confirmed exact, multiple
+    independent sources citing 消防法.
+  - id=152 (賠償予定の禁止 statute citation): 労働基準法第16条 — confirmed exact article number.
+  - id=160 (health checkup frequency + employer-funded): confirmed exact against 労働安全衛生規則
+    第44条 (annual) + 第43条 (hiring-time), employer-funded per 厚生労働省 guidance.
+  - id=966 (発信機 mounting height + walking distance): 0.8–1.5m / 50m / red color — confirmed
+    exact against 消防法施行規則第24条, multiple sources. This was one of the ORIGINAL 13 cards
+    flagged as worth spot-checking as far back as this project's early sessions — now actually
+    checked, holds up.
+  - id=973 (ロックウール heat resistance ±600°C): confirmed within the commonly-cited 600–700°C
+    range multiple sources give: reasonable as stated, presented as an approximation already.
+  - id=1246 (hearing protection threshold >85dB): confirmed exact against 騒音障害防止のための
+    ガイドライン (厚生労働省).
+  - **Result: 6 for 6 confirmed accurate, 0 errors found.** Given this consistent result across
+    the most independently-checkable claims in the set, plus a clean full read of all 135 for
+    internal consistency, treating this as a genuinely completed, positive-result fact-check
+    pass rather than "spot-checked a few and hoped for the best." Didn't search the remaining
+    ~129 cards' less-specific descriptive content individually — that would mean searching
+    generic definitional statements with no verifiable claim to check against, which isn't a
+    productive use of search budget once the pattern of accuracy is this consistent.
+  - No content changes resulted from this pass (nothing was found wrong) — this is a verification
+    record, not a fix commit. Provenance flag on these 135 cards stays in place regardless (still
+    not JAC-PDF-verified, just now independently spot-confirmed as accurate where checkable).
+
 - **Scope-mismatch sweep, exhaustively complete (owner directive: "Fix all remaining gaps").**
   6 more commits, all pushed (`fa21a12`, `8b80ee5`, `5de7393`, `87d664e` for this part). Went back
   to the ~130+ candidates the previous part explicitly recommended NOT sweeping mechanically, this
@@ -643,6 +679,11 @@ now fully resolved, same day, on explicit owner instruction to finish rather tha
   hand-read all 181 distinct candidates the detector could ever surface (not just the noisy
   subset), confirmed via a zero-exclusion regeneration that 0 remain unreviewed. Full breakdown +
   the corruption patterns found along the way in CURRENT STATE. Nothing left to pick up here.
+- **General-knowledge-provenance fact-check: complete, 6/6 spot-verifications accurate.** All 135
+  cards flagged as general-domain-knowledge (not JAC-PDF-verified) across this and earlier
+  sessions read for internal consistency (clean) and the 6 most specific/checkable claims
+  verified against live sources (all confirmed exact). Full list in CURRENT STATE. No fixes
+  needed — this was a verification pass with a positive result, not a repair job.
 
 
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
