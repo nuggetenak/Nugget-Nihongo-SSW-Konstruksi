@@ -63,6 +63,47 @@ Then: PROTOCOL section below, first.
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
+- **🔀 MERGE PREP — read this first if you're the agent picking up the merge task.** Owner's
+  plan: session 29 (this one) closes out here; a **new chat** does the actual `main` merge. Three
+  facts discovered during a brief, deliberately-not-deepened look at `main` — confirm these still
+  hold before relying on them, they were checked once, not re-verified:
+  1. **`content-dq` and `main` have NO common git ancestor.** `git merge-base main content-dq`
+     returns nothing (exit code 1). This is not a normal feature branch — a plain `git merge` will
+     not work sensibly (git has no shared history to 3-way-diff against). Whatever "merge" means
+     here, it's a manual reconciliation/integration of files, not a git merge command. Don't
+     attempt `git merge` expecting normal conflict markers on a shared history.
+  2. **`main` has its own full 450-commit history, completely independent of `content-dq`**, with
+     its own real app scaffold (`package.json` v4.22.0, `src/App.jsx`, `vite`/`vitest`/`eslint`,
+     everything `content-dq` lacks) and its own separate handoff-doc lineage
+     (`DATA_QUALITY_HANDOFF_v8/v11/v12.md` — different naming/versioning than this branch's
+     unified `HANDOFF.md`, don't confuse the two). **`main`'s last commit is 2026-05-09** — the
+     same day `content-dq` was created (`c556f5f`, "Init content-dq branch"). Reasonable reading:
+     `main` was frozen right when `content-dq` branched off to do focused data-only work, and has
+     sat untouched since — not two branches independently evolving in parallel this whole time.
+     Worth confirming this reading is right before assuming it, but it's the more likely one given
+     the exact date match.
+  3. **Spot-checked, not exhaustively diffed:** `main` still has `furi` on every card (never went
+     through this branch's P12), still has `jac-doboku.js`/`jac-kenchiku.js`/
+     `cards-doboku.js`/`cards-kenchiku.js` (the tracks `content-dq` deliberately dropped session 24
+     — scope reduced to Lifeline-only), and presumably still has the old jac-teori/jac-lifeline
+     schema (not independently confirmed on `main`'s side, only confirmed as an issue on
+     `content-dq`'s side in the `sets/jac/` note in ACTIVE TASKS below). **None of this was diffed
+     file-by-file or investigated further — that's the new session's actual job**, not pre-solved
+     here. This entry exists so that work doesn't start from zero, not so it can skip its own
+     verification pass.
+  - Everything else "merge-time" that accumulated across this whole project's life is still in
+    ACTIVE TASKS' 📋 list below (the `furi`-consumer checklist, now actually relevant since P12 is
+    done not hypothetical; the `sets/jac/` schema-swap note) — that list plus this entry together
+    are the fullest picture that exists of what the merge involves. Nothing more was done toward
+    executing it this session; owner was explicit that execution happens in a new chat.
+- **Session 29 closed out here — 29 commits total, all pushed, both verify scripts green on every
+  single one.** In order: the whole session-28 🟡 bucket (8 commits), a hygiene pass (1 commit),
+  an exhaustive content-quality audit + P12 (5 commits), quiz-duplicate resolution (2 commits),
+  scope-mismatch — first partial then, on owner instruction, fully exhaustive (6 commits), a
+  general-knowledge fact-check pass (0 content commits, clean result), plus DOCS commits closing
+  out each phase (7 commits). Full detail for every phase is in the entries above and below this
+  one — not re-summarizing it here, just marking that this is where session 29 ends.
+
 - **General-knowledge-provenance fact-check pass (second half of the "Fix all remaining gaps"
   instruction — "yang ~107 cards", corrected to the accurate count of 135 once actually compiled;
   the earlier "~107" was an undercount, forgot to include one of the scope-mismatch batches when
