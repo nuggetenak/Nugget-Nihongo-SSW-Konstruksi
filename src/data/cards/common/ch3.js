@@ -41,10 +41,10 @@ export const CARDS_CH3 = [
   category: "sekou",
   source: "jac-ch3",
   furi: "ようせつぶんるいゆうせつあっせつろうせつ",
-  jp: "溶接の3分類（融接《ゆうせつ》・圧接《あっせつ》・ろう接《せつ》）",
+  jp: "溶接《ようせつ》の3分類《ぶんるい》（融接《ゆうせつ》・圧接《あっせつ》・ろう接《せつ》）",
   type: 'vocab',
   id_text: "3 kategori pengelasan",
-  desc: "融接《ゆうせつ》=material dilelehkan (arc/gas). 圧接《あっせつ》=dipanaskan+ditekan tanpa cair. ろう接《せつ》=logam pengisi titik-leleh-rendah jadi \"lem\". pengisi titik-leleh-rendah jadi \"lem\".",
+  desc: "融接《ゆうせつ》=material dilelehkan (arc/gas). 圧接《あっせつ》=dipanaskan+ditekan tanpa cair. ろう接《せつ》=logam pengisi titik-leleh-rendah jadi \"lem\".",
   usage: '融接《ゆうせつ》・圧接《あっせつ》・ろう接《ろうせつ》の3種類《さんしゅるい》の溶接《ようせつ》を使い分《つかいわ》ける（bedakan 3 kategori pengelasan: fusion, pressure, dan brazing）',
     _origIndex: 190
   },
