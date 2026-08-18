@@ -140,7 +140,7 @@ export const CARDS_CH4 = [
   jp: "スラブ（構造《こうぞう》スラブ・基礎《きそ》スラブ・フラットスラブ）",
   type: 'vocab',
   id_text: "Slab",
-  desc: "スラブ=pelat datar (lantai, pondasi, dll). 構造《こうぞう》スラブ=menopang bangunan.",
+  desc: "スラブ=pelat datar (lantai, pondasi, dll). 構造《こうぞう》スラブ=menopang bangunan. 基礎《きそ》スラブ=pelat dasar pondasi. フラットスラブ=pelat lantai tanpa balok, ditopang langsung oleh kolom.",
   usage: 'スラブを型枠《かたわく》と配筋《はいきん》で組《く》み立《た》てる（rakit slab menggunakan bekisting dan pembesian）',
     _origIndex: 254
   },
@@ -228,7 +228,7 @@ export const CARDS_CH4 = [
   jp: "面一《つらいち》・不陸《ふろく》・目違い《めちがい》",
   type: 'vocab',
   id_text: "Rata sejajar, tidak rata, tidak sejajar",
-  desc: "面一《つらいち》=dua permukaan dalam satu bidang rata. 不陸《ふろく》=permukaan bergelombang.",
+  desc: "面一《つらいち》=dua permukaan dalam satu bidang rata. 不陸《ふろく》=permukaan bergelombang. 目違《めちが》い=sambungan dua elemen finishing yang permukaannya tidak rata (beda ketinggian).",
   usage: '仕上《しあ》がりが面一《つらいち》になるよう調整《ちょうせい》する（sesuaikan agar finishing rata sejajar）',
     _origIndex: 265
   },
@@ -261,7 +261,7 @@ export const CARDS_CH4 = [
   jp: "一間《いっけん》・一尺《いっしゃく》・一寸《いっすん》・一坪《ひとつぼ》",
   type: 'vocab',
   id_text: "1 ken≈1.8m / 1",
-  desc: "Satuan lama yang masih dipakai: 1間《けん》≈1.818m, 1尺《しゃく》≈30.3cm, 1寸《すん》≈3.03cm.",
+  desc: "Satuan lama yang masih dipakai: 1間《けん》≈1.818m, 1尺《しゃく》≈30.3cm, 1寸《すん》≈3.03cm, 1坪《つぼ》≈3.3m² (luas).",
   usage: '一間《いっけん》（約《やく》1.8m）を基準《きじゅん》に柱《はしら》を配置《はいち》する（atur posisi kolom dengan satuan 1 ken ≈ 1.8 m sebagai acuan）',
     _origIndex: 268
   },
@@ -337,7 +337,7 @@ export const CARDS_CH4 = [
   jp: "見切る《みきる》・見切り材《みきりざい》・馴染み《なじみ》",
   type: 'vocab',
   id_text: "Selesaikan sambungan + bahan trim",
-  desc: "見《み》え切《みき》りる《みきる》=selesaikan sambungan dua pekerjaan finishing.",
+  desc: "見切《みき》る《みきる》=selesaikan sambungan dua pekerjaan finishing. 見切《みき》り材《ざい》=material trim untuk menutup batas antar 2 finishing berbeda. 馴染《なじ》み=kesan menyatu/serasi secara visual antar elemen.",
   usage: '見切り材《みきりざい》で異なる仕上げ《しあげ》の境界《きょうかい》を処理《しょり》する（gunakan trim material untuk menyelesaikan batas antar finishing yang berbeda）',
     _origIndex: 288
   },
@@ -380,7 +380,7 @@ export const CARDS_CH4 = [
   jp: "場所打ち《ばしょうち》・打つ《うつ》／打設する《だせつ》",
   type: 'vocab',
   id_text: "Pengecoran di lokasi",
-  desc: "場所打《ばしょう》ちち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.",
+  desc: "場所打《ばしょう》ち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.",
   usage: '型枠《かたわく》内《ない》に場所打ち《ばしょうち》でコンクリートを打設《だせつ》する（cor beton langsung di tempat ke dalam bekisting）',
     _origIndex: 292
   },
@@ -413,7 +413,7 @@ export const CARDS_CH4 = [
   jp: "配合《はいごう》・練り混ぜ《ねりまぜ》・タンピング",
   type: 'vocab',
   id_text: "Rasio campuran + pengadukan + tamping",
-  desc: "配合《はいごう》=perbandingan semen, pasir, kerikil, air. 練《ね》りり混《ま》ぜぜ《ねりまぜ》=mencampur hingga merata.",
+  desc: "配合《はいごう》=perbandingan semen, pasir, kerikil, air. 練《ね》り混《ま》ぜ《ねりまぜ》=mencampur hingga merata. タンピング=memadatkan permukaan beton segar dengan cara dipukul-pukul ringan.",
   usage: '水セメント比《みずせめんとひ》を守《まも》って配合《はいごう》する（lakukan pencampuran dengan mempertahankan rasio air-semen）',
     _origIndex: 295
   },
@@ -445,7 +445,7 @@ export const CARDS_CH4 = [
   jp: "後片付け《あとかたづけ》・消火確認《しょうかかくにん》",
   type: "konsep",
   id_text: "Beres + cek api",
-  desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》り《だんどり》 untuk esok.",
+  desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》り《だんどり》 untuk esok. 消火《しょうか》確認《かくにん》=pastikan tidak ada api/bara yang tersisa sebelum meninggalkan lokasi.",
   _origIndex: 308
   },
 {
