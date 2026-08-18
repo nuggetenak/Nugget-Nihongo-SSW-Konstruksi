@@ -3,7 +3,7 @@
 > **Last updated:** 2026-08-18 — content-dq merged into main (see `HANDOFF.md` and `CHANGELOG.md`
 > for the full merge writeup). This file now describes the unified app again — the
 > content-dq-only caveats that lived here during the branch split no longer apply.
-> **Version:** post-merge (bump pending, see CHANGELOG) · **Status:** app layer updated for
+> **Version:** v4.23.0 · **Status:** app layer updated for
 > content-dq's data (furi removed, Doboku/Kenchiku tracks removed, JAC schema migrated) — see
 > HANDOFF.md CURRENT STATE for the exact commit-by-commit account.
 > **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list (from
@@ -132,33 +132,35 @@ this table is a snapshot as of the merge, not re-checked on every future commit.
 | Metric | Value |
 |--------|-------|
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) |
+| Modes | **21** (all React.lazy) — was 23, DobokuMode/KenchikuMode removed |
 | Flashcards | **1,438** (877 common + 561 lifeline) |
 | Quiz questions | **~1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95) |
 | Study tracks | **1** (Lifeline) + Common (was 3 pre-merge) |
-| Storage schema | see §6 — bumped at merge time for the wayground set-id rename |
+| Storage schema | **v6** — see §6. v5→v6 added at merge time (Doboku/Kenchiku score fields dropped, wayground/CSV set-id rename remapped where verifiable) |
+| Tests | **435 passing** (39 files) — npm run lint: 0 warnings, npm run build: clean |
 | localStorage docs | **3** (progress, srs, prefs) |
 | CI/CD | ✅ GitHub Actions (auto-deploy) |
 | SW auto-bump | ✅ deploy.yml |
 
 ---
 
-## 6. Storage Schema
+## 6. Storage Schema (v6)
 
 ```js
 DOCS = { progress: 'ssw-progress', srs: 'ssw-srs-data', prefs: 'ssw-prefs' }
 
-progress: { _v, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
+progress: { _v: 6, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
             wgWrong{}, vocabWrong{}, jacScores{}, wgScores{}, vocabScores{},
             streakData{}, dailyCount{}, recentCards[],
             milestoneStreak7, milestoneQuiz70, sessions[], dailyMission }
             // dobokuScores{}/kenchikuScores{} retired at merge — Doboku/Kenchiku tracks removed
 
-prefs:    { _v, track, theme, onboarded, tutorialFlashcard, lastMode,
-            dailyGoal, flashcardHintCount,
-            examDate, audioEnabled, studyAnchor, furiganaPolicy,
-            notes: {}, sprintBestTimeline: [] }
+prefs:    { _v: 6, track, theme, onboarded, tutorialFlashcard, lastMode,
+            dailyGoal, examDate, audioEnabled, studyAnchor, furiganaPolicy,
+            flashcardHintCount, notes: {}, speakOnFlip, quizQuestionCount,
+            sprintBests: {}, dailyChallengeLog: {} }
 
-srs:      { _v, cards: { [cardId]: { card, history, reviewed_at } } }
+srs:      { _v: 6, cards: { [cardId]: { card, history, reviewed_at } } }
 ```
 
 See `src/storage/migrations.js` for the full v1→v(current) chain, including the merge-time

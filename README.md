@@ -92,12 +92,12 @@ src/
 ├── storage/                 # localStorage engine, schema v3, migrations
 ├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
 ├── components/              # Shared UI components
-├── modes/                   # mode screens (all React.lazy)
+├── modes/                   # 21 mode screens (all React.lazy)
 │   └── FlashcardMode/       # Decomposed flashcard mode
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # test suite
+└── tests/                   # 39 test files, 435 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.

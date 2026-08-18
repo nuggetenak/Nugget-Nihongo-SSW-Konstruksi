@@ -1,4 +1,77 @@
-## [4.22.0] - 2026-05-09
+## [4.23.0] - 2026-08-18
+
+### merge(content-dq→main): branch merge — 3.5 months of content-quality work + Doboku/Kenchiku removal + furi→ruby migration
+
+`content-dq` and `main` shared no common git ancestor (content-dq's root commit stripped the
+app layer down to data-only on day one, 2026-05-10) — reconciled as a mechanical file union
+(`git merge --allow-unrelated-histories`) followed by manual code surgery for everything the
+file-level merge couldn't resolve on its own. Full writeup in `_MAP.md`'s session log and
+`HANDOFF.md`.
+
+**Data layer — replaced wholesale from content-dq:**
+- `src/data/` restructured to a split-file architecture (`cards/{common,lifeline}/`,
+  `sets/{wayground,jac-mockup,jac}/`) with `source/` mirrors and `cards.js`/`wayground-sets.js`/
+  `jac-mockup-sets.js` as regenerated aggregates.
+- Card count: 1,443 → 1,438 (5 duplicates removed). Quiz questions: ~974 → ~1,075 (Wayground
+  680 · JAC Mockup 300 · JAC Resmi 95).
+- `furi` field dropped from all 1,438 cards — readings now derived from inline `《》` ruby in
+  `jp` via `extractReadings()` (already existed in `jp-helpers.js`).
+
+**Doboku/Kenchiku tracks removed** (content-dq session 24 decision, propagated into the app
+layer here): both tracks were 100% AI-generated draft content with zero official JAC material.
+Deleted `DobokuMode.jsx`, `KenchikuMode.jsx`, `TrackPicker.jsx` (found to be fully dead code
+during this pass — zero imports anywhere), removed the track-picker step from onboarding
+entirely (single remaining track makes a "choice" meaningless — renumbered the flow from 4
+steps to 3), 33 files touched in total. `dobokuScores`/`kenchikuScores` dropped from storage.
+
+**JAC schema migration:** `jp/hiragana/options/answer/hasPhoto` → `q/hint/opts/opts_id/ans/
+img/exp`. Reading now inline ruby in `q`; `opts_id` cleanly separates per-option Indonesian
+translations (previously embedded inline in the JP option string). `JACMode.jsx`,
+`SimulasiMode.jsx`, `daily-challenge.js` updated.
+
+**furi → ruby migration, 12 files:** every real consumer of the dropped `card.furi` field
+swapped to `extractReadings(card.jp)` — `Onboarding.jsx`, `QuizMode.jsx`, `ProductionMode.jsx`,
+`FlashcardMode/FlipCard.jsx`, `SprintMode.jsx`, `SearchMode.jsx`, `GlossaryMode.jsx`,
+`SumberMode.jsx`, `ReviewMode.jsx`, `CatatanMode.jsx`, `QuizProduksiMode.jsx`, `DengarMode.jsx`.
+`ProductionMode.jsx`'s kana-only answer-matching branch needed more than a rename: the old
+`furi` field concatenated multi-reading cards with no separator, `extractReadings()` joins
+with a display space — fixed by normalizing whitespace before comparing, otherwise correctly-
+typed answers on ~20% of cards (294/1438 have multiple ruby blocks) would have started failing.
+Also fixed two pre-existing bugs found adjacent to this work: `CatatanMode.jsx` and
+`DengarMode.jsx` were rendering raw `card.jp` (ruby brackets included) instead of
+`stripFuri(card.jp)`.
+
+**Storage v5 → v6:**
+- `dobokuScores`/`kenchikuScores` dropped.
+- `wgScores`/`jacScores`/`wgWrong` keys remapped for the wayground/CSV set-id rename, but only
+  where a clean 1:1 correspondence could be verified (teori `wt1-10→wt01-10`, CSV→JAC-mockup
+  `ct/cp→jmt/jml`, 22 sets). Deliberately not remapped: old praktik/vocab set ids — the old
+  monolith had a confirmed set/track drift bug and vocab was genuinely restructured by question
+  direction, not renamed, so no reliable correspondence exists to map from.
+
+**Build pipeline fixes** (found by actually running `npm run build`, not caught by tests/lint):
+`scripts/merge-cards.mjs` had the 2 deleted doboku/kenchiku source files hardcoded — fixing this
+and regenerating `cards.js` also surfaced 10 cards where the committed aggregate had a
+duplicated trailing sentence fragment already fixed in the source files but never propagated
+(content-dq had no regeneration script). `scripts/validate-data.mjs`'s photo-asset check was
+rewritten — it validated against a `public/jac-photos/` directory that has never existed,
+meaning it fired a warning for every photo-linked question unconditionally since it was
+written; now checks that the `photoDesc` text substitute (what the app actually renders) is
+present and substantive instead. `vite.config.js`'s `manualChunks` referenced deleted file
+paths directly (Rollup-only failure, invisible to imports elsewhere).
+
+**Docs:** `HANDOFF.md`, `CARD_CONTENT_SPEC.md`, `DATA_ARCH_AUDIT.md`, `viewer.html` adopted from
+content-dq. `DATA_QUALITY_HANDOFF_v8/v11/v12.md` moved to `docs/archive/` (superseded by
+`HANDOFF.md`, same lineage). `docs/archive/ARCHIVE-INDEX.md` combined from both branches.
+`README.md`/`_MAP.md` rewritten for the merged, single-track reality.
+
+**Tests:** 435 passing (39 files) — up from a real baseline of 23 failures across 7 files
+immediately post-merge (stale set-id references, dead doboku/kenchiku assertions, 2 pre-existing
+`STORAGE_VERSION` hardcodes that already didn't match main's own code before this merge).
+`npm run lint`: 0 warnings (also cleared one pre-existing unused import, predating this merge).
+`npm run build`: clean.
+
+
 
 ### feat(data+storage): card ID renumbering — contiguous 1–1443
 
