@@ -509,7 +509,7 @@ export const CARDS_CH4 = [
   jp: "追う《おう》・寸法《すんぽう》",
   type: "konsep",
   id_text: "Ukur berurutan dari titik referensi",
-  desc: "追《お》いう《おう》=mengukur posisi berurutan dari titik referensi.",
+  desc: "追《お》いう《おう》=mengukur posisi berurutan dari titik referensi. 寸法《すんぽう》=ukuran/dimensi hasil pengukuran.",
   _origIndex: 314
   },
 {
@@ -1186,7 +1186,7 @@ export const CARDS_CH4 = [
   jp: "RC造《あーるしーぞう》・S造《えすぞう》・SRC造《えすあーるしーぞう》・木造《もくぞう》・CB造《しいびいぞう》",
   type: 'vocab',
   id_text: "5 singkatan struktur",
-  desc: "RC造《ぞう》=鉄筋《てっきん》コンクリート. S造《つく》り=鉄骨《てっこつ》. SRC造《つく》り=鉄骨《てっこつ》鉄筋《てっきん》コンクリート.\n木造《もくぞう》=kayu.",
+  desc: "RC造《ぞう》=鉄筋《てっきん》コンクリート. S造《つく》り=鉄骨《てっこつ》. SRC造《つく》り=鉄骨《てっこつ》鉄筋《てっきん》コンクリート.\n木造《もくぞう》=kayu. CB造《しいびいぞう》=blok beton.",
   usage: 'RC造《あーるしーぞう》とSRC造《えすあーるしーぞう》の違《ちが》いを説明《せつめい》する（jelaskan perbedaan antara struktur RC dan SRC）',
     _origIndex: 1555
   }
