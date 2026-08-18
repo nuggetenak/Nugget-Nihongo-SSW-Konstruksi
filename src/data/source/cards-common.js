@@ -323,7 +323,7 @@ export const CARDS_COMMON = [
   jp: "墜落《ついらく》・転落《てんらく》",
   type: 'vocab',
   id_text: "Jatuh dari ketinggian (墜落・転落)",
-  desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total.",
+  desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total. Bedanya: 墜落《ついらく》=jatuh dari ketinggian (misal dari perancah), 転落《てんらく》=jatuh/tergelincir di permukaan datar atau tangga (tidak harus dari ketinggian).",
   usage: '墜落《ついらく》を防《ふせ》ぐために安全帯《あんぜんたい》を着用《ちゃくよう》する（kenakan harness untuk mencegah jatuh dari ketinggian）',
     _origIndex: 109
   },
@@ -1420,7 +1420,7 @@ export const CARDS_COMMON = [
   jp: "反り《そり》 vs 起り《むくり》・陸《ろく》",
   type: 'vocab',
   id_text: "Cekung, cembung, rata",
-  desc: "反《はん》り《そり》=melengkung CEKUNG. 起《お》きり《むくり》=melengkung CEMBUNG.",
+  desc: "反り《そり》=melengkung CEKUNG. 起り《むくり》=melengkung CEMBUNG. 陸《ろく》=permukaan rata/datar (tidak melengkung sama sekali).",
   usage: '反り《そり》のある板《いた》を修正《しゅうせい》してから使用《しよう》する（koreksi papan yang melengkung sebelum digunakan）',
     _origIndex: 286
   },
@@ -1550,7 +1550,7 @@ export const CARDS_COMMON = [
   jp: "後片付け《あとかたづけ》・消火確認《しょうかかくにん》",
   type: "konsep",
   id_text: "Beres + cek api",
-  desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》りり《だんどり》 untuk esok.",
+  desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》り《だんどり》 untuk esok.",
   _origIndex: 308
   },
   {
@@ -1613,7 +1613,7 @@ export const CARDS_COMMON = [
   jp: "ポイ捨て禁止《ぽいすてきんし》・ガムを噛みながらの作業禁止《さぎょうきんし》",
   type: "konsep",
   id_text: "Larangan sampah & permen",
-  desc: "ポイ捨《す》て=buang sampah liar, dilarang.\nPermen karet: risiko ポイ捨《す》てて & bahaya gigit lidah mendadak.",
+  desc: "ポイ捨《す》て=buang sampah liar, dilarang.\nPermen karet: risiko ポイ捨《す》て & bahaya gigit lidah mendadak.",
   _origIndex: 321
   },
   {
@@ -2657,7 +2657,7 @@ export const CARDS_COMMON = [
   jp: "金床《かなとこ》（アンビル）/ 定盤《じょうばん》",
   type: 'vocab',
   id_text: "Anvil / surface plate",
-  desc: "Landasan baja keras untuk membengkokkan plat logam.",
+  desc: "Landasan baja keras untuk membengkokkan plat logam (金床/アンビル). 定盤《じょうばん》=pelat referensi rata presisi untuk cek kerataan komponen — beda fungsi, bukan untuk membengkokkan.",
   usage: '定盤《じょうばん》の上《うえ》で部品《ぶひん》の平面度《へいめんど》を確認《かくにん》する（periksa kerataan komponen di atas surface plate）',
     _origIndex: 537
   },
@@ -5139,7 +5139,7 @@ export const CARDS_COMMON = [
   jp: "行ってきます《いってきます》／行ってらっしゃい《いってらっしゃい》",
   type: "vocab",
   id_text: "Sapaan saat pergi &",
-  desc: "Pasangan sapaan: yang pergi mengucapkan 行《い》ってきます, yang tinggal menjawab",
+  desc: "Pasangan sapaan: yang pergi mengucapkan 行《い》ってきます, yang tinggal menjawab 行《い》ってらっしゃい.",
   usage: '仕事《しごと》に出《で》かけるときは「行《い》ってきます」、見送《みおく》る側《がわ》は「行《い》ってらっしゃい」と言《い》う（ucapkan "Itte kimasu" saat berangkat, dan "Itte rasshai" saat melepas kepergian）',
     _origIndex: 1369
   },

@@ -1129,7 +1129,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "行ってきます《いってきます》／行ってらっしゃい《いってらっしゃい》",
   type: "vocab",
   id_text: "Sapaan saat pergi &",
-  desc: "Pasangan sapaan: yang pergi mengucapkan 行《い》ってきます, yang tinggal menjawab",
+  desc: "Pasangan sapaan: yang pergi mengucapkan 行《い》ってきます, yang tinggal menjawab 行《い》ってらっしゃい.",
   usage: '仕事《しごと》に出《で》かけるときは「行《い》ってきます」、見送《みおく》る側《がわ》は「行《い》ってらっしゃい」と言《い》う（ucapkan "Itte kimasu" saat berangkat, dan "Itte rasshai" saat melepas kepergian）',
     _origIndex: 1369
   },

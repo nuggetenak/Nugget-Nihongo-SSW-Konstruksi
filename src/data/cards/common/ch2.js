@@ -238,7 +238,7 @@ export const CARDS_CH2 = [
   jp: "墜落《ついらく》・転落《てんらく》",
   type: 'vocab',
   id_text: "Jatuh dari ketinggian (墜落・転落)",
-  desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total.",
+  desc: "Penyebab kematian terbanyak di konstruksi. Tahun 2021: 110 kasus dari 288 kematian total. Bedanya: 墜落《ついらく》=jatuh dari ketinggian (misal dari perancah), 転落《てんらく》=jatuh/tergelincir di permukaan datar atau tangga (tidak harus dari ketinggian).",
   usage: '墜落《ついらく》を防《ふせ》ぐために安全帯《あんぜんたい》を着用《ちゃくよう》する（kenakan harness untuk mencegah jatuh dari ketinggian）',
     _origIndex: 109
   },

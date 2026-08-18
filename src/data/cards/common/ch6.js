@@ -314,7 +314,7 @@ export const CARDS_CH6 = [
   jp: "金床《かなとこ》（アンビル）/ 定盤《じょうばん》",
   type: 'vocab',
   id_text: "Anvil / surface plate",
-  desc: "Landasan baja keras untuk membengkokkan plat logam.",
+  desc: "Landasan baja keras untuk membengkokkan plat logam (金床/アンビル). 定盤《じょうばん》=pelat referensi rata presisi untuk cek kerataan komponen — beda fungsi, bukan untuk membengkokkan.",
   usage: '定盤《じょうばん》の上《うえ》で部品《ぶひん》の平面度《へいめんど》を確認《かくにん》する（periksa kerataan komponen di atas surface plate）',
     _origIndex: 537
   },

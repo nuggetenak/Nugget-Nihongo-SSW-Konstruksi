@@ -2324,7 +2324,7 @@ export const CARDS_LIFELINE = [
   jp: "ロックリング / ロックリングホルダ",
   type: 'vocab',
   id_text: "Lock ring & holder",
-  desc: "Saat pipa memanjang maksimum, tonjolan dalam pipa tertahan lock ring sehingga tidak bisa terlepas.",
+  desc: "Saat pipa memanjang maksimum, tonjolan dalam pipa tertahan lock ring sehingga tidak bisa terlepas. ロックリングホルダ=rumah/dudukan tempat lock ring dipasang di dalam fitting.",
   usage: 'ロックリングを溝《みぞ》にはめ込《こ》んで管《かん》を固定《こてい》する（kunci pipa dengan memasukkan lock ring ke alur）',
     _origIndex: 527
   },

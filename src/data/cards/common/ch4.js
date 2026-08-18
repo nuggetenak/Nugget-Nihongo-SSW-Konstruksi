@@ -315,7 +315,7 @@ export const CARDS_CH4 = [
   jp: "反り《そり》 vs 起り《むくり》・陸《ろく》",
   type: 'vocab',
   id_text: "Cekung, cembung, rata",
-  desc: "反《はん》り《そり》=melengkung CEKUNG. 起《お》きり《むくり》=melengkung CEMBUNG.",
+  desc: "反り《そり》=melengkung CEKUNG. 起り《むくり》=melengkung CEMBUNG. 陸《ろく》=permukaan rata/datar (tidak melengkung sama sekali).",
   usage: '反り《そり》のある板《いた》を修正《しゅうせい》してから使用《しよう》する（koreksi papan yang melengkung sebelum digunakan）',
     _origIndex: 286
   },
@@ -445,7 +445,7 @@ export const CARDS_CH4 = [
   jp: "後片付け《あとかたづけ》・消火確認《しょうかかくにん》",
   type: "konsep",
   id_text: "Beres + cek api",
-  desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》りり《だんどり》 untuk esok.",
+  desc: "Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》り《だんどり》 untuk esok.",
   _origIndex: 308
   },
 {
@@ -508,7 +508,7 @@ export const CARDS_CH4 = [
   jp: "ポイ捨て禁止《ぽいすてきんし》・ガムを噛みながらの作業禁止《さぎょうきんし》",
   type: "konsep",
   id_text: "Larangan sampah & permen",
-  desc: "ポイ捨《す》て=buang sampah liar, dilarang.\nPermen karet: risiko ポイ捨《す》てて & bahaya gigit lidah mendadak.",
+  desc: "ポイ捨《す》て=buang sampah liar, dilarang.\nPermen karet: risiko ポイ捨《す》て & bahaya gigit lidah mendadak.",
   _origIndex: 321
   },
 {
