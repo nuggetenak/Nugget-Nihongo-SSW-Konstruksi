@@ -63,6 +63,34 @@ Then: PROTOCOL section below, first.
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
+- **Scope-mismatch round 2 (same-day continuation, unprompted — "Continue" with no other
+  instruction, read as "keep going with judgment" given the standing "trust your judgement"
+  authorization from earlier this session). 1 commit, pushed, commit `71c08dc`:**
+  - Fixed a real bug in the detector itself: it stripped ruby from `jp` before comparing terms,
+    but never stripped ruby from `desc` — so already-fixed cards (id=517/530/585 from earlier
+    this session) got false-flagged again, since their definitions restate each term WITH ruby
+    embedded mid-word and that doesn't literally contain the plain-text term.
+  - Reran with the fix: 153 candidates, most showing garbled term fragments from the splitter
+    itself ("探針棒埋設物確認", "S整理") — the extraction had become the dominant noise source,
+    not real content gaps. Went back to reading raw `jp`+`desc` pairs by hand for the ~50
+    cleanest-looking (2-term) candidates rather than attempt a 5th regex refinement.
+  - **True-positive rate on this batch: 6 genuine of ~50 read (~12%)** — most were synonym pairs
+    (テスター/万用計, トランシット/セオドライト — same instrument, two names) or already
+    adequately covered in flowing prose without literally repeating each term. Fixed the 6
+    genuine ones (ids 101, 222, 457, 467, 1213, 1369) plus 3 more corruption instances of this
+    session's recurring redundant-ruby pattern found along the way (ids 222 ×2, 243, 252), plus
+    id=1213 turned out to have a genuine desc truncation (different bug class, missed by the
+    earlier truncation sweep since it doesn't end on a tracked dangle-word).
+  - **Recommendation, not just a status note: stop mechanically sweeping this category.** ~100
+    candidates remain unread from this round's list, on top of the ~40 already known-remaining
+    from round 1. Given the demonstrated low true-positive rate even on the cleanest subset, and
+    that every detector refinement this session has surfaced a NEW false-positive mechanism
+    rather than converging (4 rounds: term-count via ruby-internal separators, "=" counting,
+    substring-without-stripping-desc-ruby, and now the splitter itself producing garbage on
+    complex jp structures), continuing this as a mechanical sweep has poor odds of finding much
+    more signal for the effort. If this matters enough to finish properly later, it needs full
+    manual reading or a genuinely different verification approach — not another heuristic pass.
+  - verify-content.mjs + audit-track-consistency.mjs clean after (1438 unchanged).
 - **Quiz duplicates + scope-mismatch follow-through (owner-requested same day, "fix quiz
   duplicates & work through scope-mismatch"). 3 more commits, all pushed:**
   - **Quiz duplicates, fully resolved.** 9 in-scope exact-duplicate pairs total (`sim >= 0.85`,
@@ -580,13 +608,17 @@ status updated same day after the owner asked to act on both:
   which stays untouched) replaced with fresh, verified content. Full list + reasoning in CURRENT
   STATE. One near-miss (wglv-id-03#8/#29) turned out not to be a real duplicate — clarified
   instead of replaced.
-- **Scope-mismatch: 27 of ~68 fixed, ~40 remain deliberately untouched.** The 27 were confirmed by
-  reading each one individually — a term named in `jp`, never defined in `desc`. The remaining ~40
-  are mostly larger 5-7-term "index/summary" cards where partial coverage is hard to distinguish
-  confidently from intentional brevity without a slower, per-term cross-reference against whether
-  each one has its own detailed card elsewhere in the corpus. Whoever picks this back up should
-  treat it as a fresh scoping pass, not a continuation of the same sweep — see CURRENT STATE for
-  the full id list already resolved and the reasoning for stopping where this did.
+- **Scope-mismatch: 33 total fixed (27 + 6), then deliberately stopped with a recommendation
+  against continuing.** Round 2 found the round-1 detector had a real bug (never stripped ruby
+  from `desc` before comparing, false-flagging already-fixed cards) and, once fixed, that the
+  candidate pool ballooned to 153 — mostly the term-splitter itself producing garbage on complex
+  `jp` structures, not real gaps. Hand-read ~50 of the cleanest-looking ones: true-positive rate
+  ~12%. Fixed the 6 genuine ones plus 3 more corruption instances found along the way. Full
+  reasoning in CURRENT STATE — the takeaway is that 4 rounds of detector refinement each
+  surfaced a NEW false-positive mechanism rather than converging, so continuing this as a
+  mechanical sweep is a poor bet. ~130+ unread candidates remain across both rounds' lists if
+  anyone wants to pick this up properly later — that needs full manual reading or a different
+  approach, not another heuristic.
 
 
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
