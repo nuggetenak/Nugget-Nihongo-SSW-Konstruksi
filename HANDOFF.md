@@ -120,8 +120,10 @@ update itself.
     what the app actually imports). This is documented, intentional, merge-time-gated technical
     debt, not cruft — `docs/DATA_ARCH_AUDIT.md` (2026-05-12) already found and fully explained
     it, and P22 reconfirmed `sets/jac/` as deliberately out-of-scope as recently as session 28.
-    Added to the merge-time reconciliation list below since the only place this was tracked was
-    a 3-month-old audit doc easy to forget exists.
+    Also documented in `docs/CARD_CONTENT_SPEC.md` §0C ("DQ Copies Orphaned (by design)") —
+    correcting an overclaim in this section's first draft, which said the audit doc was the
+    *only* place this was tracked. Added to the merge-time reconciliation list below anyway,
+    since ACTIVE TASKS is what a new agent actually reads first, not the two reference docs.
   - `README.md`'s card/question counts were stale (1,443 / ~974, predating the 5-duplicate
     cleanup and the session-24 Doboku/Kenchiku removal) — corrected to 1,438 / ~1,075.
 - 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline). Unchanged
