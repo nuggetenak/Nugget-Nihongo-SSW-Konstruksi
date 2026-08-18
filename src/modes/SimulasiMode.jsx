@@ -29,12 +29,12 @@ function fmtTime(sec) { const m = Math.floor(sec / 60); const s = sec % 60; retu
 // Normalize JAC and Wayground+CSV questions to a common shape
 function buildPool() {
   const jacNorm = JAC_OFFICIAL.map((q) => ({
-    jp: q.jp,
-    id_text: q.id_text,
-    options: q.options,
-    answer: q.answer,
-    explanation: q.explanation,
-    hasPhoto: q.hasPhoto,
+    jp: q.q,
+    id_text: q.hint,
+    options: q.opts,
+    answer: q.ans,
+    explanation: q.exp,
+    hasPhoto: !!q.photoDesc,
     photoDesc: q.photoDesc,
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',

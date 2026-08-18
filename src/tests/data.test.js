@@ -3,7 +3,7 @@ import { CARDS } from '../data/cards.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { JAC_TEORI, JAC_LIFELINE } from '../data/index.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
-import { CSV_SETS } from '../data/csv-sets.js';
+import { JAC_MOCKUP_SETS } from '../data/jac-mockup-sets.js';
 import { QUIZ_SETS, getQuizSetsForTrack } from '../data/quiz-sets.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
@@ -31,8 +31,8 @@ describe('CARDS data integrity', () => {
     expect(bad.map((c) => c.id)).toHaveLength(0);
   });
 
-  it('every card has furi field (Phase 1)', () => {
-    const bad = CARDS.filter((c) => c.furi == null);
+  it('no card has a furi field (P12: furi dropped, readings now inline ruby in jp)', () => {
+    const bad = CARDS.filter((c) => 'furi' in c);
     expect(bad.map((c) => c.id)).toHaveLength(0);
   });
 
@@ -80,14 +80,14 @@ describe('JAC_OFFICIAL data integrity', () => {
 
   it('all answers 0-based and in range', () => {
     JAC_OFFICIAL.forEach((q) => {
-      expect(q.answer).toBeGreaterThanOrEqual(0);
-      expect(q.answer).toBeLessThan(q.options.length);
+      expect(q.ans).toBeGreaterThanOrEqual(0);
+      expect(q.ans).toBeLessThan(q.opts.length);
     });
   });
 
   it('every question has 2+ options', () => {
     expect(
-      JAC_OFFICIAL.filter((q) => !Array.isArray(q.options) || q.options.length < 2)
+      JAC_OFFICIAL.filter((q) => !Array.isArray(q.opts) || q.opts.length < 2)
     ).toHaveLength(0);
   });
 
@@ -117,10 +117,16 @@ describe('WAYGROUND_SETS data integrity', () => {
     );
   });
 
-  it('wt1 Q5 removed (Phase 1 duplicate fix)', () => {
-    const wt1 = WAYGROUND_SETS.find((s) => s.id === 'wt1');
-    expect(wt1).toBeDefined();
-    expect(wt1.questions.length).toBeLessThan(20);
+  it('no question has empty text or duplicate options (content-dq regenerated wayground-sets.js wholesale post-P22, superseding the old wt1/wg9/wg11-specific fix checkpoints)', () => {
+    const bad = [];
+    WAYGROUND_SETS.forEach((s) => {
+      s.questions.forEach((q) => {
+        if (!q.q || q.q.trim() === '') bad.push(`${s.id}-q${q.id}: empty question`);
+        const optSet = new Set(q.opts);
+        if (optSet.size !== q.opts.length) bad.push(`${s.id}-q${q.id}: duplicate options`);
+      });
+    });
+    expect(bad).toHaveLength(0);
   });
 
   it('no set has duplicate question IDs', () => {
@@ -130,55 +136,41 @@ describe('WAYGROUND_SETS data integrity', () => {
     });
   });
 
-  it('wg9, wg11 now complete (Phase 12 OCR fix)', () => {
-    const wg9 = WAYGROUND_SETS.find((s) => s.id === 'wg9');
-    const wg11 = WAYGROUND_SETS.find((s) => s.id === 'wg11');
-    expect(wg9).toBeDefined();
-    expect(wg9.questions.length).toBeGreaterThan(10);
-    expect(wg11).toBeDefined();
-    expect(wg11.questions.length).toBeGreaterThan(10);
-    // Verify no placeholder questions remain
-    const placeholders = [...(wg9?.questions ?? []), ...(wg11?.questions ?? [])].filter(
-      (q) => !q.q || q.q.trim() === ''
-    );
-    expect(placeholders).toHaveLength(0);
-  });
-
-  it('all vocab sets (wg*) have non-empty q and opts', () => {
-    WAYGROUND_SETS.filter((s) => s.id.startsWith('wg')).forEach((s) => {
+  it('all vocab sets (wgl/wglv-jp/wglv-id*) have non-empty q and opts', () => {
+    WAYGROUND_SETS.filter((s) => s.id.startsWith('wgl')).forEach((s) => {
       s.questions.forEach((q) => {
         expect(q.q, `${s.id} q${q.id} missing q`).toBeTruthy();
-        expect(q.opts.length, `${s.id} q${q.id} needs 3 opts`).toBeGreaterThanOrEqual(3);
+        expect(q.opts.length, `${s.id} q${q.id} needs 3+ opts`).toBeGreaterThanOrEqual(3);
       });
     });
   });
 });
 
-describe('CSV_SETS data integrity', () => {
-  it('has exactly 12 sets', () => expect(CSV_SETS.length).toBe(12));
+describe('JAC_MOCKUP_SETS data integrity', () => {
+  it('has exactly 12 sets', () => expect(JAC_MOCKUP_SETS.length).toBe(12));
 
   it('total questions equals 300', () => {
-    const total = CSV_SETS.reduce((n, s) => n + s.questions.length, 0);
+    const total = JAC_MOCKUP_SETS.reduce((n, s) => n + s.questions.length, 0);
     expect(total).toBe(300);
   });
 
   it('every set has id, title, non-empty questions', () => {
-    CSV_SETS.forEach((s) => {
+    JAC_MOCKUP_SETS.forEach((s) => {
       expect(s.id).toBeTruthy();
       expect(s.title).toBeTruthy();
       expect(s.questions.length).toBeGreaterThan(0);
     });
   });
 
-  it('set IDs follow ct## or cp## pattern', () => {
-    const valid = /^c[tp]\d{2}$/;
-    CSV_SETS.forEach((s) => {
+  it('set IDs follow jmt## or jml## pattern', () => {
+    const valid = /^jm[tl]\d{2}$/;
+    JAC_MOCKUP_SETS.forEach((s) => {
       expect(valid.test(s.id), `invalid id: ${s.id}`).toBe(true);
     });
   });
 
   it('all ans values 0-based and in range (4-choice A-D)', () => {
-    CSV_SETS.forEach((s) =>
+    JAC_MOCKUP_SETS.forEach((s) =>
       s.questions.forEach((q) => {
         expect(q.ans).toBeGreaterThanOrEqual(0);
         expect(q.ans).toBeLessThanOrEqual(3);
@@ -188,33 +180,33 @@ describe('CSV_SETS data integrity', () => {
   });
 
   it('every question has 4 options', () => {
-    const bad = CSV_SETS.flatMap((s) =>
+    const bad = JAC_MOCKUP_SETS.flatMap((s) =>
       s.questions.filter((q) => q.opts.length !== 4).map((q) => `${s.id}-q${q.id}`)
     );
     expect(bad).toHaveLength(0);
   });
 
   it('no set has duplicate question IDs', () => {
-    CSV_SETS.forEach((s) => {
+    JAC_MOCKUP_SETS.forEach((s) => {
       const ids = s.questions.map((q) => q.id);
       expect(new Set(ids).size, `${s.id} has duplicate q IDs`).toBe(ids.length);
     });
   });
 
-  it('6 teori sets (ct01-ct06) with 30qs each', () => {
-    const teori = CSV_SETS.filter((s) => s.id.startsWith('ct'));
+  it('6 teori sets (jmt01-jmt06) with 30qs each', () => {
+    const teori = JAC_MOCKUP_SETS.filter((s) => s.id.startsWith('jmt'));
     expect(teori.length).toBe(6);
     teori.forEach((s) => expect(s.questions.length).toBe(30));
   });
 
-  it('6 praktik sets (cp01-cp06) with 20qs each', () => {
-    const praktik = CSV_SETS.filter((s) => s.id.startsWith('cp'));
+  it('6 praktik sets (jml01-jml06) with 20qs each', () => {
+    const praktik = JAC_MOCKUP_SETS.filter((s) => s.id.startsWith('jml'));
     expect(praktik.length).toBe(6);
     praktik.forEach((s) => expect(s.questions.length).toBe(20));
   });
 
   it('every question has non-empty q and hint', () => {
-    const bad = CSV_SETS.flatMap((s) =>
+    const bad = JAC_MOCKUP_SETS.flatMap((s) =>
       s.questions.filter((q) => !q.q || !q.hint).map((q) => `${s.id}-q${q.id}`)
     );
     expect(bad).toHaveLength(0);
@@ -290,7 +282,7 @@ describe('CATEGORIES', () => {
 });
 
 describe('getCatsForTrack', () => {
-  const TRACKS = ['doboku', 'kenchiku', 'lifeline'];
+  const TRACKS = ['lifeline'];
 
   it('returns non-empty array for every valid track', () => {
     TRACKS.forEach((t) => {
@@ -328,11 +320,10 @@ describe('getCatsForTrack', () => {
     expect(getCatsForTrack('nonexistent')).toEqual([]);
   });
 
-  it('tracks have category overlap (common categories appear in multiple tracks)', () => {
-    const doboku = new Set(getCatsForTrack('doboku'));
-    const kenchiku = new Set(getCatsForTrack('kenchiku'));
-    const overlap = [...doboku].filter((k) => kenchiku.has(k));
-    expect(overlap.length).toBeGreaterThan(0);
+  it('every card category is covered by the lifeline track (single-track app post Doboku/Kenchiku removal)', () => {
+    const cats = new Set(getCatsForTrack('lifeline'));
+    const uncovered = CARDS.filter((c) => !cats.has(c.category));
+    expect(uncovered.map((c) => c.id)).toHaveLength(0);
   });
 });
 
@@ -369,22 +360,28 @@ describe('JAC_TEORI / JAC_LIFELINE split', () => {
 });
 
 describe('WAYGROUND_SETS track fields', () => {
-  it('wt1-wt10 have track:common', () => {
-    const teori = WAYGROUND_SETS.filter((s) => s.id.startsWith('wt'));
+  it('wt01-wt10 have track:common (excludes wtv, a separate prefix)', () => {
+    const teori = WAYGROUND_SETS.filter((s) => /^wt\d/.test(s.id));
     expect(teori.length).toBe(10);
     expect(teori.every((s) => s.track === 'common')).toBe(true);
   });
 
-  it('wg* sets have track:lifeline', () => {
-    const vocab = WAYGROUND_SETS.filter((s) => s.id.startsWith('wg'));
-    expect(vocab.length).toBeGreaterThan(0);
-    expect(vocab.every((s) => s.track === 'lifeline')).toBe(true);
+  it('wtv* sets have track:common', () => {
+    const vocabTeori = WAYGROUND_SETS.filter((s) => s.id.startsWith('wtv'));
+    expect(vocabTeori.length).toBe(2);
+    expect(vocabTeori.every((s) => s.track === 'common')).toBe(true);
   });
 
-  it('wp* sets have track:lifeline', () => {
-    const praktik = WAYGROUND_SETS.filter((s) => s.id.startsWith('wp'));
-    expect(praktik.length).toBeGreaterThan(0);
+  it('wgl* sets have track:lifeline', () => {
+    const praktik = WAYGROUND_SETS.filter((s) => s.id.startsWith('wgl') && !s.id.startsWith('wglv'));
+    expect(praktik.length).toBe(10);
     expect(praktik.every((s) => s.track === 'lifeline')).toBe(true);
+  });
+
+  it('wglv-* sets have track:lifeline', () => {
+    const vocab = WAYGROUND_SETS.filter((s) => s.id.startsWith('wglv'));
+    expect(vocab.length).toBe(6);
+    expect(vocab.every((s) => s.track === 'lifeline')).toBe(true);
   });
 
   it('every set has a track field', () => {
@@ -392,28 +389,27 @@ describe('WAYGROUND_SETS track fields', () => {
   });
 });
 
-describe('CSV_SETS track fields', () => {
-  it('ct* sets have track:common', () => {
-    const teori = CSV_SETS.filter((s) => s.id.startsWith('ct'));
+describe('JAC_MOCKUP_SETS track fields', () => {
+  it('jmt* sets have track:common', () => {
+    const teori = JAC_MOCKUP_SETS.filter((s) => s.id.startsWith('jmt'));
     expect(teori.length).toBe(6);
     expect(teori.every((s) => s.track === 'common')).toBe(true);
   });
 
-  it('cp* sets have track:lifeline', () => {
-    const praktik = CSV_SETS.filter((s) => s.id.startsWith('cp'));
+  it('jml* sets have track:lifeline', () => {
+    const praktik = JAC_MOCKUP_SETS.filter((s) => s.id.startsWith('jml'));
     expect(praktik.length).toBe(6);
     expect(praktik.every((s) => s.track === 'lifeline')).toBe(true);
   });
 
   it('every set has a track field', () => {
-    expect(CSV_SETS.every((s) => typeof s.track === 'string')).toBe(true);
+    expect(JAC_MOCKUP_SETS.every((s) => typeof s.track === 'string')).toBe(true);
   });
 });
 
 describe('QUIZ_SETS + getQuizSetsForTrack', () => {
-  it('QUIZ_SETS has all 44 sets (26 wayground + 12 csv + 3 sipil + 3 bangunan)', () => {
-    
-    expect(QUIZ_SETS.length).toBe(44);
+  it('QUIZ_SETS has all 40 sets (28 wayground + 12 jac-mockup)', () => {
+    expect(QUIZ_SETS.length).toBe(40);
   });
 
   it('all set IDs are unique', () => {
@@ -429,26 +425,11 @@ describe('QUIZ_SETS + getQuizSetsForTrack', () => {
   it('getQuizSetsForTrack(lifeline) includes lifeline + common sets', () => {
     const sets = getQuizSetsForTrack('lifeline');
     const ids = sets.map((s) => s.id);
-    expect(ids).toContain('wt1');   // common teori
-    expect(ids).toContain('wg1');   // lifeline vocab
-    expect(ids).toContain('ct01');  // csv common teori
-    expect(ids).toContain('cp01');  // csv lifeline praktik
-  });
-
-  it('getQuizSetsForTrack(doboku) includes common + sipil sets', () => {
-    // REF-9: doboku now also includes sipil sets
-    const sets = getQuizSetsForTrack('doboku');
-    expect(sets.some((s) => s.track === 'common')).toBe(true);
-    expect(sets.some((s) => s.id.startsWith('wt'))).toBe(true);
-    expect(sets.some((s) => s.id.startsWith('doboku'))).toBe(true);
-  });
-
-  it('getQuizSetsForTrack(kenchiku) includes common + bangunan sets', () => {
-    // REF-9: kenchiku now also includes bangunan sets
-    const sets = getQuizSetsForTrack('kenchiku');
-    expect(sets.length).toBeGreaterThan(0);
-    expect(sets.some((s) => s.track === 'common')).toBe(true);
-    expect(sets.some((s) => s.id.startsWith('kenchiku'))).toBe(true);
+    expect(ids).toContain('wt01');   // common teori
+    expect(ids).toContain('wgl01');  // lifeline praktik
+    expect(ids).toContain('jmt01');  // jac-mockup common teori
+    expect(ids).toContain('jml01');  // jac-mockup lifeline praktik
+    expect(sets.length).toBe(QUIZ_SETS.length); // single-track app: lifeline sees everything
   });
 });
 
@@ -467,10 +448,9 @@ describe('SOURCE_GROUPS coverage', () => {
     expect(labels).toContain('Sumber Tambahan');
   });
 
-  it('Sumber Tambahan includes text3l, vocab-supplementary, vocab-general', () => {
+  it('Sumber Tambahan includes vocab-supplementary, vocab-general (text3l merged into vocab-supplementary, OD-1)', () => {
     const tambahan = SOURCE_GROUPS.find((g) => g.label === 'Sumber Tambahan');
     expect(tambahan).toBeDefined();
-    expect(tambahan.keys).toContain('text3l');
     expect(tambahan.keys).toContain('vocab-supplementary');
     expect(tambahan.keys).toContain('vocab-general');
   });

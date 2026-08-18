@@ -1,9 +1,10 @@
 // ─── storage/schema.js ───────────────────────────────────────────────────────
-// Storage v3 schema — 3-document localStorage model.
-// All user data lives in progress, srs, or prefs docs (lz-string compressed).
+// 3-document localStorage model. All user data lives in progress, srs, or
+// prefs docs (lz-string compressed). See migrations.js for the full
+// v1→v6 upgrade chain and STORAGE_VERSION history.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const STORAGE_VERSION = 5;
+export const STORAGE_VERSION = 6;
 
 export const DOCS = {
   progress: 'ssw-progress', // known/unknown/starred/scores/streak/daily/recent
@@ -24,8 +25,6 @@ export const DEFAULTS = {
     jacScores: {},      // { [setId]: { correct, total, date } }
     wgScores: {},
     vocabScores: {},
-    dobokuScores: {},   // { [setId]: { correct, total, date } }
-    kenchikuScores: {}, // { [setId]: { correct, total, date } }
     streakData: {},     // { days, lastDate }
     dailyCount: { count: 0, date: '' },
     recentCards: [],    // array of cardIds (max 20)

@@ -19,7 +19,7 @@ function renderDashboard(props = {}) {
 const defaultProps = {
   known: new Set(),
   unknown: new Set(),
-  track: 'doboku',
+  track: 'lifeline',
   onNavigate: vi.fn(),
   onChangeTrack: vi.fn(),
   srs: { dueCount: 0 },
@@ -66,7 +66,7 @@ describe('Dashboard', () => {
     it('calls onChangeTrack when track pill clicked', () => {
       const onChangeTrack = vi.fn();
       renderDashboard({onChangeTrack: onChangeTrack });
-      fireEvent.click(screen.getByText(/土木/));
+      fireEvent.click(screen.getByText(/ライフライン/));
       expect(onChangeTrack).toHaveBeenCalledOnce();
     });
   });
@@ -149,14 +149,9 @@ describe('Dashboard', () => {
   });
 
   describe('track variants', () => {
-    it('renders doboku track', () => {
+    it('falls back to lifeline theme for a removed/unknown track value (e.g. stale localStorage from before the merge)', () => {
       renderDashboard({ track: 'doboku' });
-      expect(screen.getByText(/土木/)).toBeTruthy();
-    });
-
-    it('renders bangunan track', () => {
-      renderDashboard({ track: 'kenchiku' });
-      expect(screen.getByText(/建築/)).toBeTruthy();
+      expect(screen.getByText(/ライフライン/)).toBeTruthy();
     });
 
     it('renders lifeline track', () => {

@@ -15,8 +15,6 @@ import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
 import { todayStr } from '../utils/date.js';
 
 const TRACK_LABELS = {
-  doboku:   '⛏ Teknik Sipil · 土木',
-  kenchiku: '🏗 Bangunan · 建築',
   lifeline: '⚡ Lifeline · ライフライン',
 };
 

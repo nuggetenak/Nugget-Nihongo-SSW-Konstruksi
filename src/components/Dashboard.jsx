@@ -41,7 +41,7 @@ export default function Dashboard({ known, unknown, track, onNavigate, onChangeT
   const pct      = total > 0 ? Math.round((knownN / total) * 100) : 0;
   const dueCount = srs?.dueCount ?? 0;
 
-  const trackInfo   = T.track[track] || T.track.doboku;
+  const trackInfo   = T.track[track] || T.track.lifeline;
   const { streakData, dailyCount, starred } = useProgress();
   const recentIds   = useMemo(() => getRecent(), []);
   const recentCards = useMemo(() => recentIds.map((id) => CARDS.find((c) => c.id === id)).filter(Boolean).slice(0, 3), [recentIds]);

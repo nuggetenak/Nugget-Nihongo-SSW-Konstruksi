@@ -6,11 +6,11 @@ import { QUIZ_SETS } from '../data/quiz-sets.js';
 
 function buildAllQuestions() {
   const jac = JAC_OFFICIAL.map((q) => ({
-    jp: q.jp,
-    id_text: q.id_text,
-    options: q.options,
-    answer: q.answer,
-    explanation: q.explanation,
+    jp: q.q,
+    id_text: q.hint,
+    options: q.opts,
+    answer: q.ans,
+    explanation: q.exp,
   }));
   const way = QUIZ_SETS.flatMap((set) =>
     (set.questions || []).map((q) => ({

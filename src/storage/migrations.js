@@ -280,3 +280,68 @@ export function migrate_v4_to_v5() {
 
   return { progress, srs, prefs };
 }
+
+// ── v5 → v6 migration ────────────────────────────────────────────────────────
+// content-dq/main merge (2026-08-18). Two independent changes bundled into one
+// version bump since they land in the same release:
+//
+// 1. Doboku/Kenchiku tracks removed entirely (session 24 decision, carried into
+//    main at merge time). dobokuScores/kenchikuScores dropped — both tracks were
+//    100% AI-generated draft content with zero real JAC material, so there's no
+//    real practice history being discarded, just dead score-tracking fields.
+//
+// 2. Wayground/CSV quiz-set IDs renamed as part of content-dq's data-quality
+//    work. Remapped where the rename is a *confirmed* 1:1 correspondence:
+//      - Teori:      wt1..wt10        → wt01..wt10
+//      - CSV→JAC-mockup teori: ct01..ct06 → jmt01..jmt06
+//      - CSV→JAC-mockup praktik: cp01..cp06 → jml01..jml06
+//    NOT remapped, deliberately: the old praktik sets (wg2-5/wp1-5) and the old
+//    vocab sets (wg6-9/wg11/wg12). The old wayground-sets.js monolith had a
+//    confirmed 21-of-27-set id/track drift bug (fixed session 28) and the vocab
+//    sets were genuinely restructured by question-direction (P16 split), not
+//    just renamed — there's no reliable 1:1 old-key→new-key correspondence to
+//    map from, and guessing one risks silently attributing a user's score
+//    history to the wrong set, which is worse than leaving the old key inert.
+//    Old wgScores/vocabScores entries under those keys are left in place
+//    un-migrated; they just won't match any current set id going forward.
+
+const WAYGROUND_ID_RENAME = {
+  wt1: 'wt01', wt2: 'wt02', wt3: 'wt03', wt4: 'wt04', wt5: 'wt05',
+  wt6: 'wt06', wt7: 'wt07', wt8: 'wt08', wt9: 'wt09', wt10: 'wt10',
+  ct01: 'jmt01', ct02: 'jmt02', ct03: 'jmt03', ct04: 'jmt04', ct05: 'jmt05', ct06: 'jmt06',
+  cp01: 'jml01', cp02: 'jml02', cp03: 'jml03', cp04: 'jml04', cp05: 'jml05', cp06: 'jml06',
+};
+
+function remapScoreKeys(scores = {}) {
+  const out = {};
+  for (const [key, val] of Object.entries(scores)) {
+    out[WAYGROUND_ID_RENAME[key] ?? key] = val;
+  }
+  return out;
+}
+
+export function hasV5Data() {
+  try {
+    const parsed = safeGetDoc('ssw-progress', null);
+    return parsed?._v === 5;
+  } catch { return false; }
+}
+
+export function migrate_v5_to_v6() {
+  const progress = safeGetDoc('ssw-progress', {});
+  const srs      = safeGetDoc('ssw-srs-data', { _v: 5, cards: {} });
+  const prefs    = safeGetDoc('ssw-prefs', {});
+
+  delete progress.dobokuScores;
+  delete progress.kenchikuScores;
+
+  if (progress.wgScores) progress.wgScores = remapScoreKeys(progress.wgScores);
+  if (progress.jacScores) progress.jacScores = remapScoreKeys(progress.jacScores);
+  if (progress.wgWrong) progress.wgWrong = remapScoreKeys(progress.wgWrong);
+
+  progress._v = 6;
+  srs._v = 6;
+  prefs._v = 6;
+
+  return { progress, srs, prefs };
+}

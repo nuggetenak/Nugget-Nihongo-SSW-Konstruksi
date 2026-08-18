@@ -3,10 +3,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
 import { CARDS } from '../data/cards.js';
-import { QUIZ_SETS, getQuizSetsForTrack } from '../data/quiz-sets.js';
+import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { SOURCE_GROUPS, SOURCE_META } from '../data/categories.js';
-import { JAC_TEORI } from '../data/jac-teori.js';
-import { JAC_LIFELINE } from '../data/jac-lifeline.js';
+import { JAC_TEORI } from '../data/sets/jac/jac-teori.js';
+import { JAC_LIFELINE } from '../data/sets/jac/jac-lifeline.js';
 
 describe('Data Integrity', () => {
   // C1: SOURCE_GROUPS keys in SOURCE_META
@@ -40,8 +40,8 @@ describe('Data Integrity', () => {
   });
 
   // C5: CARDS count matches expected
-  it('C5: CARDS count is 1443', () => {
-    expect(CARDS.length).toBe(1443);
+  it('C5: CARDS count is 1438', () => {
+    expect(CARDS.length).toBe(1438);
   });
 
   // C6: no duplicate card IDs
@@ -60,15 +60,8 @@ describe('Data Integrity', () => {
     expect(bad.map(c => `id:${c.id} ans:${c.ans} opts:${c.opts?.length}`)).toHaveLength(0);
   });
 
-  // C8: getQuizSetsForTrack('doboku') includes sipil sets
-  it('C8: getQuizSetsForTrack doboku includes sipil sets', () => {
-    const sets = getQuizSetsForTrack('doboku');
-    expect(sets.some(s => s.id.startsWith('doboku'))).toBe(true);
-  });
-
-  // C9: getQuizSetsForTrack('kenchiku') includes bangunan sets
-  it('C9: getQuizSetsForTrack kenchiku includes bangunan sets', () => {
-    const sets = getQuizSetsForTrack('kenchiku');
-    expect(sets.some(s => s.id.startsWith('kenchiku'))).toBe(true);
-  });
+  // C8/C9: doboku/kenchiku tracks removed session 24 (content-dq) — see CHANGELOG.md.
+  // getQuizSetsForTrack('doboku'|'kenchiku') is no longer a meaningful call; removed
+  // rather than kept as a "returns empty" test since the tracks themselves are gone,
+  // not just temporarily empty.
 });

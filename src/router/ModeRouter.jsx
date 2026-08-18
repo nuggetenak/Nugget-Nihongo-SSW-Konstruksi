@@ -238,8 +238,6 @@ export default function ModeRouter() {
     wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }) },
     vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab'), audioEnabled },
     simulasi: { onExit: exitMode, onSessionEnd: makeSessionEnd('simulasi'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }) },
-    doboku:   { onExit: exitMode, onSessionEnd: makeSessionEnd('doboku') },
-    kenchiku: { onExit: exitMode, onSessionEnd: makeSessionEnd('kenchiku') },
     glosari:  { onExit: exitMode, track },
     produksi: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('produksi'), audioEnabled },
     mirip:    { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },

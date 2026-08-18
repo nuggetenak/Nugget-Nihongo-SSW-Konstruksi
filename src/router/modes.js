@@ -1,5 +1,6 @@
 // ─── router/modes.js ─────────────────────────────────────────────────────────
-// Single registry for all 23 modes: lazy imports, nav sections, metadata.
+// Single registry for all modes: lazy imports, nav sections, metadata.
+// (Doboku/Kenchiku modes removed — scope reduced to Lifeline-only, see CHANGELOG.md)
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { lazy } from 'react';
@@ -22,8 +23,6 @@ export const MODE_COMPONENTS = {
   sumber: lazy(() => import('../modes/SumberMode.jsx')),
   ekspor: lazy(() => import('../modes/ExportMode.jsx')),
   ulasan: lazy(() => import('../modes/ReviewMode.jsx')),
-  doboku: lazy(() => import('../modes/DobokuMode.jsx')),
-  kenchiku: lazy(() => import('../modes/KenchikuMode.jsx')),
   produksi: lazy(() => import('../modes/ProductionMode.jsx')),
   mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
   dengar: lazy(() => import('../modes/DengarMode.jsx')),
@@ -46,7 +45,7 @@ export const MODE_SECTIONS = {
   ujian: {
     title: '📋 Ujian',
     subtitle: 'Soal ujian asli',
-    modes: ['jac', 'wayground', 'vocab', 'simulasi', 'doboku', 'kenchiku'],
+    modes: ['jac', 'wayground', 'vocab', 'simulasi'],
   },
   ulasan: {
     title: '🔁 Ulasan',
@@ -73,8 +72,6 @@ export const MODE_META = {
   simulasi: { icon: '🎯', label: 'Simulasi',      desc: 'Ujian + timer',                      color: '#ef4444', strand: 'language' },
   angka:    { icon: '🔢', label: 'Angka Kunci',   desc: 'Angka wajib hafal',                  color: '#facc15', strand: 'input'    },
   jebak:    { icon: '⚠️', label: 'Soal Jebak',   desc: 'Istilah mirip',                      color: '#dc2626', strand: 'input'    },
-  doboku:   { icon: '⛏️', label: 'Sipil · 土木',    desc: '45 soal SSW jalur 土木',            color: '#78716c', strand: 'language' },
-  kenchiku: { icon: '🏗️', label: 'Bangunan · 建築', desc: '45 soal SSW jalur 建築',          color: '#0ea5e9', strand: 'language' },
   cari:     { icon: '🔍', label: 'Cari',          desc: 'Pencarian cepat',                    color: '#475569', strand: 'input'    },
   glosari:  { icon: '📖', label: 'Glosari',       desc: 'Kamus terurut',                      color: '#7c3aed', strand: 'input'    },
   sumber:   { icon: '📂', label: 'Sumber',        desc: 'Per PDF sumber',                     color: '#64748b', strand: null       },

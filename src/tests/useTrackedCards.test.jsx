@@ -23,9 +23,9 @@ describe('useTrackedCards', () => {
     expect(result.current.every(c => typeof c.id === 'number')).toBe(true);
   });
 
-  it('returns cards for doboku track', () => {
+  it('returns empty array for a removed track (doboku/kenchiku no longer exist)', () => {
     const { result } = renderHook(() => useTrackedCards({ track: 'doboku' }), { wrapper });
-    expect(result.current.length).toBeGreaterThan(0);
+    expect(result.current).toHaveLength(0);
   });
 
   it('excludeVocab filters out vocab sources', () => {
@@ -57,7 +57,7 @@ describe('useTrackedCards', () => {
   });
 
   it('returns an array of valid card objects', () => {
-    const { result } = renderHook(() => useTrackedCards({ track: 'doboku' }), { wrapper });
+    const { result } = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper });
     const cards = result.current;
     expect(Array.isArray(cards)).toBe(true);
     if (cards.length > 0) {

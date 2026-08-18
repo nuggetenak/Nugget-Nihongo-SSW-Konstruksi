@@ -112,20 +112,6 @@ export const T = {
   wrongBg: 'var(--ssw-wrongBg)',
   wrongBorder: 'var(--ssw-wrongBorder)',
   track: {
-    doboku: {
-      color: '#D97706',
-      bg: 'rgba(217,119,6,0.10)',
-      icon: '🏗️',
-      label: 'Teknik Sipil',
-      jp: '土木',
-    },
-    kenchiku: {
-      color: '#0284C7',
-      bg: 'rgba(2,132,199,0.10)',
-      icon: '🏢',
-      label: 'Bangunan',
-      jp: '建築',
-    },
     lifeline: {
       color: '#059669',
       bg: 'rgba(5,150,105,0.10)',

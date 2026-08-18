@@ -25,7 +25,7 @@ describe('G.2 Flow — export → import cycle', () => {
         { mode: 'kuis', correct: 8, total: 10, date: '2026-05-01', durationMs: 5000 },
       ],
     }));
-    set('prefs', (p) => ({ ...p, track: 'doboku', dailyGoal: 30, examDate: '2026-12-01' }));
+    set('prefs', (p) => ({ ...p, track: 'lifeline', dailyGoal: 30, examDate: '2026-12-01' }));
     set('srs', (s) => ({ ...s, cards: { '42': { state: 2, stability: 1.5 } } }));
 
     // Export
@@ -51,7 +51,7 @@ describe('G.2 Flow — export → import cycle', () => {
     expect(prog.unknown).toEqual([5, 6]);
     expect(prog.starred).toEqual([42]);
     expect(prog.sessions.length).toBe(1);
-    expect(prefs.track).toBe('doboku');
+    expect(prefs.track).toBe('lifeline');
     expect(prefs.dailyGoal).toBe(30);
     expect(prefs.examDate).toBe('2026-12-01');
     expect(srs.cards['42'].state).toBe(2);

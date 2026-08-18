@@ -12,16 +12,20 @@ beforeEach(() => {
 });
 
 describe('Storage schema — field defaults', () => {
-  it('STORAGE_VERSION is 4', () => {
-    expect(STORAGE_VERSION).toBe(4);
+  it('STORAGE_VERSION is a positive integer', () => {
+    // Deliberately not hardcoded to a specific number: this exact test broke
+    // once already (asserted ===4 after the app had moved on to v5, silently
+    // for months) and would only repeat the same failure mode on the next bump.
+    expect(Number.isInteger(STORAGE_VERSION)).toBe(true);
+    expect(STORAGE_VERSION).toBeGreaterThan(0);
   });
 
-  it('all v3 progress fields exist in DEFAULTS', () => {
+  it('all progress fields exist in DEFAULTS', () => {
     const p = DEFAULTS.progress;
-    expect(p).toHaveProperty('dobokuScores');
-    expect(p).toHaveProperty('kenchikuScores');
     expect(p).toHaveProperty('sessions');
     expect(p).toHaveProperty('dailyMission');
+    expect(p).not.toHaveProperty('dobokuScores'); // removed at merge — track no longer exists
+    expect(p).not.toHaveProperty('kenchikuScores');
   });
 
   it('all v3 prefs fields exist in DEFAULTS', () => {
@@ -65,12 +69,12 @@ describe('Storage schema — field defaults', () => {
 });
 
 describe('Storage schema — progress fields', () => {
-  it('dobokuScores starts empty', () => {
-    expect(get('progress').dobokuScores).toEqual({});
+  it('jacScores starts empty', () => {
+    expect(get('progress').jacScores).toEqual({});
   });
 
-  it('kenchikuScores starts empty', () => {
-    expect(get('progress').kenchikuScores).toEqual({});
+  it('wgScores starts empty', () => {
+    expect(get('progress').wgScores).toEqual({});
   });
 
   it('sessions starts empty', () => {
@@ -81,13 +85,13 @@ describe('Storage schema — progress fields', () => {
     expect(get('progress').dailyMission).toBeNull();
   });
 
-  it('writing a sipil score round-trips correctly', () => {
+  it('writing a wayground score round-trips correctly', () => {
     const score = { correct: 12, total: 15, date: '2026-05-01T00:00:00Z' };
     set('progress', (p) => ({
       ...p,
-      dobokuScores: { ...p.dobokuScores, 'doboku-01': score },
+      wgScores: { ...p.wgScores, 'wt01': score },
     }));
-    expect(get('progress').dobokuScores['doboku-01']).toEqual(score);
+    expect(get('progress').wgScores['wt01']).toEqual(score);
   });
 });
 

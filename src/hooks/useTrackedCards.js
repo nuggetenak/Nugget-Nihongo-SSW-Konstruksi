@@ -7,7 +7,7 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 
 /**
  * @param {object} opts
- * @param {string} opts.track - 'doboku' | 'kenchiku' | 'lifeline'
+ * @param {string} opts.track - 'lifeline' (Doboku/Kenchiku tracks removed)
  * @param {boolean} [opts.excludeVocab=false] - exclude cards with VOCAB_SOURCES source
  * @param {string|null} [opts.category=null] - filter to a single category key
  * @param {string|null} [opts.source=null] - filter to a single source key

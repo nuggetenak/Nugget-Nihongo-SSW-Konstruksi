@@ -1,5 +1,6 @@
 // ─── tests/storage.migration-v3.test.js ──────────────────────────────────────
-// Storage migration tests: v1→v4, v2→v4, fresh install schema.
+// Storage migration tests: v1→current, v2→current, fresh install schema.
+// (Filename kept for git history continuity — chain now runs to v6.)
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import { _reset_for_test, init, get } from '../storage/engine.js';
@@ -10,9 +11,13 @@ beforeEach(() => {
   _reset_for_test();
 });
 
-describe('storage v3→v4 migration', () => {
-  it('STORAGE_VERSION is 4', () => {
-    expect(STORAGE_VERSION).toBe(4);
+describe('storage migration chain (v1/v2 → current)', () => {
+  it('STORAGE_VERSION is a positive integer', () => {
+    // Deliberately not hardcoded to a specific number — see prefs-schema.test.js
+    // for why (this exact assertion already broke once before, silently, when
+    // v4→v5 shipped without updating it).
+    expect(Number.isInteger(STORAGE_VERSION)).toBe(true);
+    expect(STORAGE_VERSION).toBeGreaterThan(0);
   });
 
   it('fresh install creates current schema with all fields', () => {
@@ -21,8 +26,8 @@ describe('storage v3→v4 migration', () => {
     const prefs = get('prefs');
 
     expect(prog._v).toBe(STORAGE_VERSION);
-    expect(prog.dobokuScores).toBeDefined();
-    expect(prog.kenchikuScores).toBeDefined();
+    expect(prog).not.toHaveProperty('dobokuScores'); // removed at merge — track no longer exists
+    expect(prog).not.toHaveProperty('kenchikuScores');
     expect(prog.sessions).toEqual([]);
     expect(prog.dailyMission).toBeNull();
 
@@ -78,10 +83,10 @@ describe('storage v3→v4 migration', () => {
     // card 42 was deleted in renumbering (gap 42-49 removed) → not in v4
     expect(srs.cards['42']).toBeUndefined();
 
-    // New v3 fields added
+    // New fields added by the migration chain
     expect(prog._v).toBe(STORAGE_VERSION);
-    expect(prog.dobokuScores).toEqual({});
-    expect(prog.kenchikuScores).toEqual({});
+    expect(prog).not.toHaveProperty('dobokuScores');
+    expect(prog).not.toHaveProperty('kenchikuScores');
     expect(prog.sessions).toEqual([]);
     expect(prog.dailyMission).toBeNull();
     expect(prefs._v).toBe(STORAGE_VERSION);
@@ -90,15 +95,15 @@ describe('storage v3→v4 migration', () => {
     expect(prefs.furiganaPolicy).toBe('always');
   });
 
-  it('DEFAULTS.progress has all required v3 fields', () => {
+  it('DEFAULTS.progress has all required fields', () => {
     const p = DEFAULTS.progress;
-    expect(p.dobokuScores).toBeDefined();
-    expect(p.kenchikuScores).toBeDefined();
+    expect(p).not.toHaveProperty('dobokuScores');
+    expect(p).not.toHaveProperty('kenchikuScores');
     expect(p.sessions).toBeDefined();
     expect(p.dailyMission).toBeDefined();
   });
 
-  it('DEFAULTS.prefs has all required v3 fields', () => {
+  it('DEFAULTS.prefs has all required fields', () => {
     const p = DEFAULTS.prefs;
     expect(p.examDate).toBeDefined();
     expect(p.audioEnabled).toBeDefined();

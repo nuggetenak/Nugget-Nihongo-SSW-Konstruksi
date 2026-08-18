@@ -203,27 +203,6 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
         </div>
       ))}
 
-      <div style={{ marginTop: 8, marginBottom: 8 }}>
-        <div className={S.row} style={{ marginBottom: 8 }}>
-          <span style={{ fontSize: 13 }}>🚧</span>
-          <span style={{ fontSize: 10, fontWeight: 800, color: T.textDim, letterSpacing: 1.8, textTransform: 'uppercase' }}>Segera Hadir</span>
-          <div style={{ flex: 1, height: 1, background: T.border }} />
-        </div>
-        <div className={S.list}>
-          {[{ emoji: '⛏️', label: 'Doboku · Sipil (土木)', sub: '土木施工 — Belum tersedia' },
-            { emoji: '🏗️', label: 'Kenchiku · Bangunan (建築)', sub: '建築施工 — Belum tersedia' }
-          ].map((item) => (
-            <div key={item.label} style={{ padding: '12px 14px 12px 18px', borderRadius: T.r.md, background: T.surface, border: `1px dashed ${T.border}`, opacity: 0.5, position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: T.border }} />
-              <div className={S.rowSpread}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: T.textMuted }}>{item.emoji} {item.label}</span>
-                <span style={{ fontSize: 9, fontWeight: 800, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, borderRadius: T.r.pill, padding: '2px 8px', letterSpacing: 1 }}>COMING SOON</span>
-              </div>
-              <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>{item.sub}</div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

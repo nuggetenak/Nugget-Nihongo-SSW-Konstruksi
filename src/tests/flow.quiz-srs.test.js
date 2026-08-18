@@ -17,14 +17,14 @@ describe('G.2 Flow — quiz session recording', () => {
     const sessions = [
       { mode: 'kuis',  correct: 7, total: 10, durationMs: 5000, date: '2026-05-01T10:00:00Z' },
       { mode: 'jac',   correct: 4, total: 5,  durationMs: 3000, date: '2026-05-01T11:00:00Z' },
-      { mode: 'doboku', correct: 12, total: 15, durationMs: 8000, date: '2026-05-01T12:00:00Z' },
+      { mode: 'wayground', correct: 12, total: 15, durationMs: 8000, date: '2026-05-01T12:00:00Z' },
     ];
     set('progress', (p) => ({ ...p, sessions }));
 
     const stored = get('progress').sessions;
     expect(stored.length).toBe(3);
     expect(stored[0].mode).toBe('kuis');
-    expect(stored[2].mode).toBe('doboku');
+    expect(stored[2].mode).toBe('wayground');
   });
 
   it('sessions are capped at 90 entries', () => {
@@ -42,17 +42,5 @@ describe('G.2 Flow — quiz session recording', () => {
     const after = getMission();
     expect(after.completedAt).not.toBeNull();
     expect(typeof after.completedAt).toBe('number');
-  });
-
-  it('dobokuScores and kenchikuScores can be written and read', () => {
-    set('progress', (p) => ({
-      ...p,
-      dobokuScores: { 'doboku-01': { correct: 12, total: 15, date: '2026-05-01' } },
-      kenchikuScores: { 'kenchiku-01': { correct: 10, total: 15, date: '2026-05-01' } },
-    }));
-
-    const prog = get('progress');
-    expect(prog.dobokuScores['doboku-01'].correct).toBe(12);
-    expect(prog.kenchikuScores['kenchiku-01'].correct).toBe(10);
   });
 });

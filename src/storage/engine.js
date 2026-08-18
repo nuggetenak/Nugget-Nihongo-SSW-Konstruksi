@@ -8,6 +8,7 @@ import {
   hasV1Data, migrate_v1_to_v2, cleanup_v1_keys,
   migrate_v2_to_v3, migrate_v3_to_v4,
   hasV4Data, migrate_v4_to_v5,
+  migrate_v5_to_v6,
 } from './migrations.js';
 import LZString from 'lz-string';
 import { isQuotaError, notifyQuotaExceeded } from '../utils/storage-quota.js';
@@ -66,14 +67,28 @@ export function init() {
   const version = progressRaw?._v ?? 0;
 
   if (version === STORAGE_VERSION) {
-    // Current v3 — load directly
+    // Already current — load directly
     _cache.progress = progressRaw;
     _cache.srs = readDoc(DOCS.srs) ?? { _v: STORAGE_VERSION, cards: {} };
     _cache.prefs = readDoc(DOCS.prefs) ?? { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
 
+  } else if (version === 5) {
+    // v5 → v6: doboku/kenchiku scores dropped, wayground/csv id renames remapped
+    const migrated = migrate_v5_to_v6();
+    _cache.progress = migrated.progress;
+    _cache.srs = migrated.srs;
+    _cache.prefs = migrated.prefs;
+    writeDoc(DOCS.progress, _cache.progress);
+    writeDoc(DOCS.srs, _cache.srs);
+    writeDoc(DOCS.prefs, _cache.prefs);
+
   } else if (version === 4) {
-    // v4 → v5: rename sipilScores→dobokuScores, bangunanScores→kenchikuScores
-    const migrated = migrate_v4_to_v5();
+    // v4 → v5 → v6
+    const migrated45 = migrate_v4_to_v5();
+    writeDoc(DOCS.progress, migrated45.progress);
+    writeDoc(DOCS.srs, migrated45.srs);
+    writeDoc(DOCS.prefs, migrated45.prefs);
+    const migrated = migrate_v5_to_v6();
     _cache.progress = migrated.progress;
     _cache.srs = migrated.srs;
     _cache.prefs = migrated.prefs;
@@ -82,12 +97,16 @@ export function init() {
     writeDoc(DOCS.prefs, _cache.prefs);
 
   } else if (version === 3) {
-    // v3 → v4 → v5: card IDs renumbered, then score key rename
+    // v3 → v4 → v5 → v6
     const migrated34 = migrate_v3_to_v4();
     writeDoc(DOCS.progress, migrated34.progress);
     writeDoc(DOCS.srs, migrated34.srs);
     writeDoc(DOCS.prefs, migrated34.prefs);
-    const migrated = migrate_v4_to_v5();
+    const migrated45 = migrate_v4_to_v5();
+    writeDoc(DOCS.progress, migrated45.progress);
+    writeDoc(DOCS.srs, migrated45.srs);
+    writeDoc(DOCS.prefs, migrated45.prefs);
+    const migrated = migrate_v5_to_v6();
     _cache.progress = migrated.progress;
     _cache.srs = migrated.srs;
     _cache.prefs = migrated.prefs;
@@ -96,7 +115,7 @@ export function init() {
     writeDoc(DOCS.prefs, _cache.prefs);
 
   } else if (version === 2) {
-    // v2 → v3 → v4 → v5 migration chain
+    // v2 → v3 → v4 → v5 → v6 migration chain
     const migrated23 = migrate_v2_to_v3();
     writeDoc(DOCS.progress, migrated23.progress);
     writeDoc(DOCS.srs, migrated23.srs);
@@ -105,7 +124,11 @@ export function init() {
     writeDoc(DOCS.progress, migrated34.progress);
     writeDoc(DOCS.srs, migrated34.srs);
     writeDoc(DOCS.prefs, migrated34.prefs);
-    const migrated = migrate_v4_to_v5();
+    const migrated45 = migrate_v4_to_v5();
+    writeDoc(DOCS.progress, migrated45.progress);
+    writeDoc(DOCS.srs, migrated45.srs);
+    writeDoc(DOCS.prefs, migrated45.prefs);
+    const migrated = migrate_v5_to_v6();
     _cache.progress = migrated.progress;
     _cache.srs = migrated.srs;
     _cache.prefs = migrated.prefs;
@@ -114,7 +137,7 @@ export function init() {
     writeDoc(DOCS.prefs, _cache.prefs);
 
   } else if (hasV1Data()) {
-    // v1 → v2 → v3 chain migration
+    // v1 → v2 → v3 → v4 → v5 → v6 chain migration
     const v2 = migrate_v1_to_v2();
     // Write intermediate v2 docs so migrate_v2_to_v3 can read them
     writeDoc(DOCS.progress, v2.progress);
@@ -129,9 +152,13 @@ export function init() {
     writeDoc(DOCS.srs, migrated34.srs);
     writeDoc(DOCS.prefs, migrated34.prefs);
     const migrated45 = migrate_v4_to_v5();
-    _cache.progress = migrated45.progress;
-    _cache.srs = migrated45.srs;
-    _cache.prefs = migrated45.prefs;
+    writeDoc(DOCS.progress, migrated45.progress);
+    writeDoc(DOCS.srs, migrated45.srs);
+    writeDoc(DOCS.prefs, migrated45.prefs);
+    const migrated56 = migrate_v5_to_v6();
+    _cache.progress = migrated56.progress;
+    _cache.srs = migrated56.srs;
+    _cache.prefs = migrated56.prefs;
     writeDoc(DOCS.progress, _cache.progress);
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
