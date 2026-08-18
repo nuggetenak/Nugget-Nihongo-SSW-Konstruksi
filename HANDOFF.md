@@ -63,7 +63,48 @@ Then: PROTOCOL section below, first.
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
-- **Entire 🟡 bucket from session 28 resolved this session. 8 content commits, all pushed:**
+- **Exhaustive content-quality audit + P12 (owner-requested, session 29, same day as the 🟡-bucket
+  work below). 5 more commits, all pushed:**
+  - Built corpus-wide audit tooling (kept in `/home/claude/audit` on whatever agent ran this —
+    scratch, not committed, per established convention) covering ruby integrity, structural
+    validity, dangling-text, scope-mismatch, and near-duplicate detection across **all** 1,438
+    cards + 1,075 quiz questions, including `sets/jac/` (never swept before). Every heuristic in
+    this pass went through 2-4 rounds of refinement after early versions threw heavy false-positive
+    rates — noting the specific failure modes below since they'll recur if re-attempted naively:
+    kanji-only ruby regexes don't see hiragana/katakana/digits legitimately mixed into a compound
+    before `《》`, and simple term-counting doesn't know a ruby's own internal `/` separator isn't
+    a second term. Commit `81ba664`.
+  - **The big one: 83 truncated `desc` fields in `vocab-supplementary`** (495 cards, the largest
+    single source category) — never covered by P5, since P5 only ever compared cards against real
+    JAC PDF text and vocab-supplementary has no PDF source. Same provenance basis as the 13 desc
+    cards: owner-authorized general domain knowledge, not JAC text. Every completion grounded in
+    the same card's own `usage` field or `jp` meaning where one existed. Commit `a90702d`.
+  - 4 stray-space ruby typos, 2 ruby-content corruptions, id=807's reading fix, id=898 + 14 more
+    dangling `id_text` instances the original 9-card scan missed (found by re-scanning the *whole*
+    corpus instead of trusting a pre-made list), 2 desc corruptions (truncation on 1221, a
+    duplicated sentence fragment on 1355), 2 more scope-mismatch cards (1399, 245). Commits
+    `81ba664`, `5382133`.
+  - **P12 done: `furi` dropped from all 1438 cards**, all 3 layers (19 files). Pre-flight matched
+    furi-count to id-count per file before touching anything — would have skipped and flagged any
+    file where they disagreed, none did. Gated on P1 being genuinely complete, not just marked
+    complete — verified with a (heavily refined) naked-kanji sweep rather than trusting the old
+    note; found and fixed one real gap first (id=162's header phrase had no ruby at all, only its
+    3 sub-terms did — furi was quietly the only place that reading still existed). Commits
+    `8da67c8`, `9c2d2e2`. **`main`'s 6 furi-consumers are now stale — see the merge-time
+    reconciliation list below, unchanged from before, just now actually triggered.**
+  - **Found, characterized, deliberately NOT fixed — needs a real content-authoring pass, not a
+    mechanical one:** a handful of exact-duplicate quiz questions across different files (same
+    question, different distractor sets) — e.g. `wgl02#17`/`wgl07#19` (insulation thickness
+    tolerance), `wglv-jp-01#25`/`wglv-jp-03#5` (電柱), and one *within* `wglv-jp-02` itself (#14/#16,
+    both test "EF socket meaning" with overlapping distractors — #16 is this session's own earlier
+    headword reconstruction, which surfaced the overlap rather than created it). Distinct from the
+    documented jml/jmt/wt06 compilation pattern. Not fixed because a proper fix means authoring a
+    genuinely different replacement question per instance, not completing/correcting existing
+    content — a different kind of task than everything else in this pass.
+  - **Also characterized, not fixed:** ~70 more scope-mismatch candidates beyond the 2 fixed above,
+    from a heuristic with a demonstrated ~50% false-positive rate even after fixing the counting
+    bug — would need per-card reading to resolve responsibly, not a sweep.
+
   - id=468 + id=470 (found the second while investigating the first) — source mistag jac-ch2→
     jac-ch6, corpus-precedent backed (6 sibling flange/duct cards + a near-duplicate already on
     ch6). Commit `c641e8c`.
@@ -488,8 +529,16 @@ on `main` should treat that as a merge-time TODO to record, not as a reason to s
 
 | Task | What | Status |
 |---|---|---|
-| P12 | Drop `furi` from all split files | **Unblocked.** The 6 `main` consumers listed below are now merge-time reconciliation items, not blockers. Still genuinely unstarted — nobody has done it yet. Do P1 first if it isn't fully done (P12 depends on `《》` ruby in `jp` being complete, since `extractReading(c.jp)` is the intended replacement). |
+| P12 | Drop `furi` from all split files | ✅ **Complete (session 29).** All 1438 cards, all 3 layers. See CURRENT STATE for the pre-check that verified P1 first (found and fixed one real gap, id=162). |
 | **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun to the 🟡 bucket at the time (wglv-jp-02 headword loss), resolved session 29, see CURRENT STATE. |
+
+**Board is otherwise clear of pre-identified tasks.** Two things the session-29 audit found and
+characterized but didn't fix — not urgent, not blocking anything, just not yet turned into a
+proper task with its own write-up: a handful of exact-duplicate quiz questions across different
+files (see CURRENT STATE for the specific ids), and ~70 more scope-mismatch candidates beyond the
+2 already fixed (heuristic has a demonstrated high false-positive rate, needs per-card reading).
+Whoever picks either of these up should scope it properly first, same as every other task above.
+
 
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
 Owner: *"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
@@ -680,7 +729,7 @@ tracker, noted here only because this section used to carry that note.)*
 | OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? | ✅ Answered 2026-07-11: now |
 | OD-3 | P17 | jac-mockup rename: now or at merge time? | ✅ Answered 2026-07-11: now — P17 done |
 | OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | ✅ Resolved via execution 2026-07-15 — P10 done (both halves), see CURRENT STATE. "Update" was the reasoned answer, not a coin flip; what had stopped session 23 was the composition method, not this decision. |
-| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components** — that finding still stands. **What it means for P12 has since changed**, though: a *separate* owner decision the same session ("branch content-dq emang cuma buat maintain and fix all the quality... I intended to do so even if it breaks main") made breaking `main` acceptable regardless of this finding, so the 6 consumers are now a merge-time reconciliation checklist, not a blocker. P12 itself is unblocked but still unstarted — see ACTIVE TASKS' 📋 list for the consumer checklist and the P12 row for status. |
+| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components** — that finding still stands. **What it means for P12 has since changed**, though: a *separate* owner decision the same session ("branch content-dq emang cuma buat maintain and fix all the quality... I intended to do so even if it breaks main") made breaking `main` acceptable regardless of this finding, so the 6 consumers are now a merge-time reconciliation checklist, not a blocker. P12 itself is unblocked but still unstarted — see ACTIVE TASKS' 📋 list for the consumer checklist and the P12 row for status. *(Session 29 update: P12 is now done — see CURRENT STATE. Leaving the rest of this entry as originally written rather than rewriting the history.)* |
 
 Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
 
