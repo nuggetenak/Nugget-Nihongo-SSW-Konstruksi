@@ -466,7 +466,7 @@ export const CARDS_CH4 = [
   jp: "追う《おう》・寸法《すんぽう》",
   type: "konsep",
   id_text: "Ukur berurutan dari titik referensi",
-  desc: "追《お》いう《おう》=mengukur posisi berurutan dari titik referensi. 寸法《すんぽう》=ukuran/dimensi hasil pengukuran.",
+  desc: "追《お》う《おう》=mengukur posisi berurutan dari titik referensi. 寸法《すんぽう》=ukuran/dimensi hasil pengukuran.",
   _origIndex: 314
   },
 {
