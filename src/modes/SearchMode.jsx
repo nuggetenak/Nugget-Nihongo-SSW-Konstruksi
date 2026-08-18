@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
@@ -35,7 +35,8 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
   // Copy card text to clipboard.
   const handleCopy = useCallback((c, e) => {
     e.stopPropagation();
-    const text = `${stripFuri(c.jp)}${c.furi ? ` (${c.furi})` : ''} — ${c.id_text}`;
+    const reading = extractReadings(c.jp);
+    const text = `${stripFuri(c.jp)}${reading ? ` (${reading})` : ''} — ${c.id_text}`;
     navigator.clipboard?.writeText(text).then(() => {
       setCopiedId(c.id);
       setTimeout(() => setCopiedId(null), 1500);
@@ -67,7 +68,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
     const q = debouncedQuery.trim().toLowerCase();
     if (q.length < 2) return [];
     return pool.filter((c) => {
-      const haystack = `${c.jp} ${c.furi || ''} ${c.id_text} ${c.desc}`.toLowerCase();
+      const haystack = `${c.jp} ${extractReadings(c.jp) || ''} ${c.id_text} ${c.desc}`.toLowerCase();
       return haystack.includes(q);
     }).slice(0, 30);
   }, [debouncedQuery, pool]);
@@ -174,7 +175,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                   </span>
                 </div>
               </div>
-              {c.furi && <div style={{ fontSize: 11, color: T.textDim, fontFamily: T.fontJP }}>{c.furi}</div>}
+              {extractReadings(c.jp) && <div style={{ fontSize: 11, color: T.textDim, fontFamily: T.fontJP }}>{extractReadings(c.jp)}</div>}
               <div style={{ fontSize: 13, color: T.gold, marginTop: 4 }}>{c.id_text}</div>
               {c.desc && (
                 <div style={{ fontSize: 11, color: T.textMuted, marginTop: 4, lineHeight: 1.5 }}>

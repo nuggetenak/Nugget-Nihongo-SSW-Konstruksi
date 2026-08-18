@@ -7,6 +7,7 @@ import { useRef, useEffect, useState } from 'react';
 import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';
 import { JpFront, DescBlock, parseRubyFragments, renderJPWithRuby } from '../../components/JpDisplay.jsx';
+import { extractReadings } from '../../utils/jp-helpers.js';
 import FC from './flashcard.module.css';
 import S from './FlipCard.module.css';
 
@@ -87,8 +88,6 @@ export default function FlipCard({
           <div className={S.frontContent}>
             <JpFront
               jp={card.jp}
-              furi={card.furi}
-              
               furiganaPolicy={furiganaPolicy}
             />
           </div>
@@ -134,7 +133,7 @@ export default function FlipCard({
 
           <div className={S.backBody}>
             <div className={S.backJp}>{renderJPWithRuby(card.jp, parseRubyFragments(card.jp))}</div>
-            <div className={S.backFuri}>{card.furi}</div>
+            <div className={S.backFuri}>{extractReadings(card.jp)}</div>
             <div className={S.backId}>{card.id_text}</div>
           </div>
 

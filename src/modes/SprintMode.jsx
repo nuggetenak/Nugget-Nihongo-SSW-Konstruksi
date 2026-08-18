@@ -221,7 +221,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
       </div>
       <ProgressBar current={duration - timeLeft} total={duration} color={barColor} />
       <div className={S.cardLg} style={{ marginTop: 20, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <JpFront jp={card.jp} furi={card.furi}
+        <JpFront jp={card.jp}
           furiganaPolicy={furiganaPolicy} />
         {showAnswer && <div style={{ textAlign: 'center', marginTop: 12, fontSize: 14, color: T.gold, fontWeight: 600 }}>{card.id_text}</div>}
       </div>

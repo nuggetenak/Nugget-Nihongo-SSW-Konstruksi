@@ -8,7 +8,7 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
@@ -45,13 +45,13 @@ export default function GlossaryMode({ onExit, track }) {
     } else {
       items = CARDS.filter((c) => c.category === filterCat);
     }
-    return [...items].sort((a, b) => (a.furi || '').toLowerCase().localeCompare((b.furi || '').toLowerCase(), 'ja'));
+    return [...items].sort((a, b) => (extractReadings(a.jp) || '').toLowerCase().localeCompare((extractReadings(b.jp) || '').toLowerCase(), 'ja'));
   }, [filterCat, trackCatKeys, showAllTracks]);
 
   const groups = useMemo(() => {
     const map = {};
     sorted.forEach((c) => {
-      const first = (c.furi || '?')[0];
+      const first = (extractReadings(c.jp) || '?')[0];
       // Use actual first char as key — allows kanji/romaji nav keys.
       if (!map[first]) map[first] = [];
       map[first].push(c);
@@ -114,7 +114,8 @@ export default function GlossaryMode({ onExit, track }) {
     if (cards.length === 0) return;
     // Anki TSV: front\tback\ttags
     const rows = cards.map((c) => {
-      const front = `${stripFuri(c.jp)}${c.furi ? `[${c.furi}]` : ''}`;
+      const cardReading = extractReadings(c.jp);
+      const front = `${stripFuri(c.jp)}${cardReading ? `[${cardReading}]` : ''}`;
       const back = `${c.id_text}${c.desc ? `<br>${c.desc}` : ''}`;
       const tags = `ssw-konstruksi ${c.category}`;
       return `${front}\t${back}\t${tags}`;
@@ -239,6 +240,7 @@ export default function GlossaryMode({ onExit, track }) {
               const isOpen = !compactView || expanded === c.id;
               const catInfo = catMap[c.category];
               const isSelected = selectMode && selected.has(c.id);
+              const reading = extractReadings(c.jp);
               return (
                 <div
                   key={c.id}
@@ -261,9 +263,9 @@ export default function GlossaryMode({ onExit, track }) {
                   </div>
                   {!selectMode && isOpen && (
                     <div className={G.termDetail}>
-                      {c.furi && (
+                      {reading && (
                         <div className={G.termFuriRow}>
-                          <span className={G.termFuri}>{c.furi}</span>
+                          <span className={G.termFuri}>{reading}</span>
                           {/* Audio per entry */}
                           {audioEnabled && (
                             <button
@@ -274,7 +276,7 @@ export default function GlossaryMode({ onExit, track }) {
                           )}
                         </div>
                       )}
-                      {!c.furi && audioEnabled && (
+                      {!reading && audioEnabled && (
                         <div className={G.termFuriRow}>
                           <button
                             onClick={(e) => { e.stopPropagation(); speakJP(stripFuri(c.jp)); }}

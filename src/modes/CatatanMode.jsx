@@ -6,7 +6,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import S from './modes.module.css';
 
@@ -34,11 +34,11 @@ function NoteCard({ card, note, onSave }) {
       <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--ssw-textBright)', marginBottom: 2 }}>
-            {card.jp}
+            {stripFuri(card.jp)}
           </div>
-          {card.furi && (
+          {extractReadings(card.jp) && (
             <div style={{ fontSize: 12, color: 'var(--ssw-textMuted)', marginBottom: 4 }}>
-              {card.furi}
+              {extractReadings(card.jp)}
             </div>
           )}
           <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)' }}>

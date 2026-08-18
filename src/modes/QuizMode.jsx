@@ -5,7 +5,7 @@ import { T } from '../styles/theme.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -65,7 +65,7 @@ export default function QuizMode({ cards, allCards, onExit, onFinish, onRetryWro
     const qs = raw.map((q) => ({
       question: stripFuri(q.card.jp),
       questionSub: furiganaPolicy !== 'hidden'
-        ? (q.card.furi || null)
+        ? extractReadings(q.card.jp)
         : null,
       options: q.options.map((o) => ({ text: o.text, sub: null })),
       correctIdx: q.options.findIndex((o) => o.correct),

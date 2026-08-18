@@ -7,7 +7,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -224,7 +224,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
                 }}>
                   <div style={{ fontSize: 18, fontWeight: 700, fontFamily: 'Noto Sans JP, sans-serif', color: T.text, marginBottom: 4 }}>
                     {stripFuri(r.card.jp)}
-                    {r.card.furi && <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>({r.card.furi})</span>}
+                    {extractReadings(r.card.jp) && <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>({extractReadings(r.card.jp)})</span>}
                   </div>
                   <div style={{ fontSize: 13, color: T.correct, marginBottom: 4 }}>✓ {r.card.id_text}</div>
                   {r.input && (
@@ -286,9 +286,9 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
         <div style={{ fontSize: 28, fontWeight: 700, fontFamily: 'Noto Sans JP, DM Sans, sans-serif', color: T.text, lineHeight: 1.4 }}>
           {stripFuri(card.jp)}
         </div>
-        {card.furi && (
+        {extractReadings(card.jp) && (
           <div style={{ fontSize: 16, color: T.textDim, marginTop: 6, fontFamily: 'Noto Sans JP, sans-serif' }}>
-            {card.furi}
+            {extractReadings(card.jp)}
           </div>
         )}
         {audioEnabled && canSpeak() && (

@@ -5,12 +5,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState } from 'react';
+import { extractReadings, stripFuri } from '../utils/jp-helpers.js';
 import S from './Onboarding.module.css';
 
 // ── Demo card: 安全帯 (safety harness) — universally relevant across all tracks
 const DEMO_CARD = {
-  jp: '安全帯',
-  furi: 'あんぜんたい',
+  jp: '安全帯《あんぜんたい》',
   id_text: 'Tali Pengaman',
   desc: 'APD wajib saat bekerja di ketinggian ≥2m. Dikaitkan ke titik jangkar yang lebih tinggi dari pinggang.',
 };
@@ -77,8 +77,8 @@ function StepDemo({ onNext }) {
           {/* Front */}
           <div className={S.demoFront} aria-hidden={flipped}>
             <span className={S.demoCat}>⛑ keselamatan</span>
-            <span className={S.demoJp}>{DEMO_CARD.jp}</span>
-            <span className={S.demoFuri}>{DEMO_CARD.furi}</span>
+            <span className={S.demoJp}>{stripFuri(DEMO_CARD.jp)}</span>
+            <span className={S.demoFuri}>{extractReadings(DEMO_CARD.jp)}</span>
             {!flipped && (
               <span className={S.demoHint}>👆 Tap untuk balik</span>
             )}
@@ -86,7 +86,7 @@ function StepDemo({ onNext }) {
           {/* Back */}
           <div className={S.demoBack} aria-hidden={!flipped}>
             <span className={S.demoCat}>⛑ keselamatan</span>
-            <span className={S.demoJpSmall}>{DEMO_CARD.jp}</span>
+            <span className={S.demoJpSmall}>{stripFuri(DEMO_CARD.jp)}</span>
             <span className={S.demoIdText}>{DEMO_CARD.id_text}</span>
             <span className={S.demoBackDesc}>{DEMO_CARD.desc}</span>
           </div>

@@ -2,10 +2,9 @@
 // Pre-build data integrity checker. Called by package.json prebuild.
 // Exits 1 if any error found.
 import { CARDS } from '../src/data/cards.js';
-import { JAC_TEORI } from '../src/data/jac-teori.js';
-import { JAC_LIFELINE } from '../src/data/jac-lifeline.js';
+import { JAC_TEORI } from '../src/data/sets/jac/jac-teori.js';
+import { JAC_LIFELINE } from '../src/data/sets/jac/jac-lifeline.js';
 import { ANGKA_KUNCI } from '../src/data/angka-kunci.js';
-import { existsSync } from 'fs';
 
 let errors = 0;
 let warnings = 0;
@@ -29,11 +28,15 @@ for (const q of [...JAC_TEORI, ...JAC_LIFELINE]) {
   }
 }
 
-// 3. hasPhoto without asset
+// 3. Photo-dependent questions need a real photoDesc substitute (the app has no
+//    actual image asset pipeline — public/jac-photos/ was never populated, this
+//    check used to warn on every single photo question, forever, for that reason)
 for (const q of [...JAC_TEORI, ...JAC_LIFELINE]) {
-  if (q.hasPhoto && !existsSync(`public/jac-photos/${q.id}.webp`)) {
-    console.warn(`⚠️  hasPhoto:true but no asset: ${q.id}`);
-    warnings++;
+  if (q.photoDesc !== undefined && q.photoDesc !== null) {
+    if (typeof q.photoDesc !== 'string' || q.photoDesc.trim().length < 10) {
+      console.warn(`⚠️  photoDesc present but too short/empty to substitute for the missing image: ${q.id}`);
+      warnings++;
+    }
   }
 }
 

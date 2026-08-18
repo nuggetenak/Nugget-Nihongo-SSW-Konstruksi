@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo } from '../data/categories.js';
-import { stripFuri, jpFontSize } from '../utils/jp-helpers.js';
+import { stripFuri, jpFontSize, extractReadings } from '../utils/jp-helpers.js';
 import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import { get as storageGet } from '../storage/engine.js';
@@ -250,7 +250,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
       >
         <div className={R.cardFront} style={{ marginBottom: flipped ? 16 : 0 }}>
           <div className={R.cardJp} style={{ fontSize: fs }}>{clean}</div>
-          {currentCard.furi && <div className={R.cardFuri}>{currentCard.furi}</div>}
+          {extractReadings(currentCard.jp) && <div className={R.cardFuri}>{extractReadings(currentCard.jp)}</div>}
         </div>
         {flipped && (
           <div className={R.flipReveal}>

@@ -14,9 +14,9 @@ vi.mock('../components/ProgressBar.jsx', () => ({ default: () => <div data-testi
 vi.mock('./modes.module.css', () => ({ default: new Proxy({}, { get: (_, k) => k }) }));
 
 const SAMPLE_CARDS = [
-  { id: 1, jp: '朝礼', furi: 'ちょれい', id_text: 'Apel pagi', category: 'salam', desc: '' },
-  { id: 2, jp: '安全帯', furi: 'あんぜんたい', id_text: 'Sabuk pengaman', category: 'keselamatan', desc: '' },
-  { id: 3, jp: '足場', furi: 'あしば', id_text: 'Perancah', category: 'alat_umum', desc: '' },
+  { id: 1, jp: '朝礼《ちょれい》', id_text: 'Apel pagi', category: 'salam', desc: '' },
+  { id: 2, jp: '安全帯《あんぜんたい》', id_text: 'Sabuk pengaman', category: 'keselamatan', desc: '' },
+  { id: 3, jp: '足場《あしば》', id_text: 'Perancah', category: 'alat_umum', desc: '' },
 ];
 
 const renderMode = (props = {}) =>
@@ -41,8 +41,8 @@ describe('QuizProduksiMode (B1)', () => {
   it('starts session and shows JP term', () => {
     renderMode();
     fireEvent.click(screen.getByText('Mulai 🔤'));
-    // Should show a Japanese term (one of sample cards' jp stripped)
-    const jpTexts = SAMPLE_CARDS.map((c) => c.jp);
+    // Should show a Japanese term (component renders stripFuri(card.jp))
+    const jpTexts = SAMPLE_CARDS.map((c) => c.jp.replace(/《[^》]*》/g, ''));
     const found = jpTexts.some((jp) => screen.queryByText(jp));
     expect(found).toBe(true);
   });

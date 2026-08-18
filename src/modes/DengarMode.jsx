@@ -7,7 +7,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { shuffle } from '../utils/shuffle.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -267,11 +267,11 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
         {isAnswered && (
           <div style={{ marginTop: 12 }}>
             <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--ssw-textBright)' }}>
-              {currentQ.card.jp}
+              {stripFuri(currentQ.card.jp)}
             </div>
-            {currentQ.card.furi && (
+            {extractReadings(currentQ.card.jp) && (
               <div style={{ fontSize: 14, color: 'var(--ssw-textMuted)', marginTop: 2 }}>
-                {currentQ.card.furi}
+                {extractReadings(currentQ.card.jp)}
               </div>
             )}
           </div>

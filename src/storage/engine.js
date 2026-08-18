@@ -7,7 +7,7 @@ import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
 import {
   hasV1Data, migrate_v1_to_v2, cleanup_v1_keys,
   migrate_v2_to_v3, migrate_v3_to_v4,
-  hasV4Data, migrate_v4_to_v5,
+  migrate_v4_to_v5,
   migrate_v5_to_v6,
 } from './migrations.js';
 import LZString from 'lz-string';

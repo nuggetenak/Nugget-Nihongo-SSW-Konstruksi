@@ -7,7 +7,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -30,8 +30,12 @@ function isCorrect(input, card) {
   if (trimmed === card.jp || trimmed === stripped) return true;
   // Lowercase match (for romaji-ish or capitalization)
   if (norm(trimmed) === norm(card.jp)) return true;
-  // Kana-only match (furi field)
-  if (card.furi && trimmed === card.furi) return true;
+  // Kana-only match (reading extracted from inline 《》 ruby in jp).
+  // extractReadings joins multiple readings with a display space (　); the old
+  // furi field concatenated them with none (confirmed against main's pre-P12
+  // data) — strip whitespace from both sides so either typing convention matches.
+  const reading = extractReadings(card.jp);
+  if (reading && trimmed.replace(/\s/g, '') === reading.replace(/\s/g, '')) return true;
   return false;
 }
 
@@ -220,7 +224,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
                   <div style={{ fontSize: 11, color: T.textDim, marginBottom: 4 }}>{r.card.id_text}</div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: T.text, marginBottom: 4 }}>
                     {stripFuri(r.card.jp)}
-                    {r.card.furi && <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>({r.card.furi})</span>}
+                    {extractReadings(r.card.jp) && <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>({extractReadings(r.card.jp)})</span>}
                   </div>
                   {r.input && (
                     <div style={{ fontSize: 12, color: T.wrong }}>
@@ -362,8 +366,8 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
             <span style={{ fontSize: 20, fontWeight: 700, fontFamily: 'Noto Sans JP, sans-serif', color: T.text }}>
               {stripFuri(card.jp)}
             </span>
-            {card.furi && (
-              <span style={{ fontSize: 13, color: T.textDim, marginLeft: 8 }}>({card.furi})</span>
+            {extractReadings(card.jp) && (
+              <span style={{ fontSize: 13, color: T.textDim, marginLeft: 8 }}>({extractReadings(card.jp)})</span>
             )}
           </div>
 

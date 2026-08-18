@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from '../data/categories.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
@@ -57,7 +57,7 @@ export default function SumberMode({ onExit, onNavigate }) {
               </div>
               {expanded === c.id && (
                 <div style={{ marginTop: 6, fontSize: 11, color: T.textMuted, lineHeight: 1.5 }}>
-                  {c.furi && <div style={{ color: T.textDim, fontFamily: T.fontJP }}>{c.furi}</div>}
+                  {extractReadings(c.jp) && <div style={{ color: T.textDim, fontFamily: T.fontJP }}>{extractReadings(c.jp)}</div>}
                   <div style={{ marginTop: 4 }}>{c.desc}</div>
                 </div>
               )}
