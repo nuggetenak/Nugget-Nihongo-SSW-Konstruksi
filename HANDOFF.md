@@ -59,11 +59,73 @@ Then: PROTOCOL section below, first.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-17 (session 28, new agent chat — owner provided repo+token directly,
+**As of this edit, 2026-08-18 (session 29, new agent chat — owner provided repo+token directly,
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
-- 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline)
+- **Entire 🟡 bucket from session 28 resolved this session. 8 content commits, all pushed:**
+  - id=468 + id=470 (found the second while investigating the first) — source mistag jac-ch2→
+    jac-ch6, corpus-precedent backed (6 sibling flange/duct cards + a near-duplicate already on
+    ch6). Commit `c641e8c`.
+  - All 9 dangling `id_text` (131/223/242/245/411/524/591/1373/1378) completed — 7 sourced
+    directly from the same card's own `desc`/`jp`/`usage` field, 2 (242/591) on owner's exact
+    wording call ("di proyek konstruksi"). Bonus: id=223's `desc` had a ruby corruption
+    (`転《ころ》びび《ころび》`→`転び《ころび》`), fixed from its own `usage` field. Commits
+    `cce78ba`, `21fa830`.
+  - Scope-mismatch cluster (223/517/530/533/585) completed from general construction/safety
+    knowledge, owner-authorized, same provenance basis as the 13 `desc` cards below. ⚠️ Not
+    JAC-source-verified — re-check if ch4/ch7 PDF material ever resurfaces. Also caught id=585's
+    `id_text` disagreeing with its own `jp` on term count (said 4, `jp` lists 6) — corrected.
+    Commit `042aa84`.
+  - wglv-id-02's "malformed opts" card (search: "Membersihkan permukaan fusi") was worse than
+    originally described — a list-merge artifact contaminating 3 fields plus 2 junk `opts_id`
+    slots plus a blank option, not "one merged option + one blank." 4/5 fixed directly; the blank
+    JP term resolved below via corpus precedent. Commit `0358d3b`.
+  - **Found while scoping that same card further: the "opsi lain"/repeated-question `opts_id`
+    defect is systemic, not isolated** — 16 of 120 questions across all 3 `wglv-id-*` files (12
+    "opsi lain" slots + 8 repeated-question slots). Two mechanical signatures: repeated-question
+    slots are pure extraction (the ID phrase is already quoted inside `q`), "opsi lain" slots
+    needed real translation cross-checked against how the same term is already rendered
+    elsewhere in this corpus. All 16 resolved. Also fixed 2 more ruby corruptions of the exact
+    same "redundant full-phrase ruby on a sub-part" shape as id=223 above, and a `ダグタイル`→
+    `ダクタイル` kana typo spread across 5 questions (confirmed against the correctly-spelled
+    form used dozens of times elsewhere). A broad ruby-length heuristic thrown at the rest of
+    the file family came back too noisy to trust (~100 hits, nearly all false positives from
+    mixed kanji/kana runs) — abandoned rather than acted on; a real audit of what's left needs
+    P8b's dictionary-cross-reference approach, not a length heuristic. Commit `af9534f`.
+  - wglv-id-02's blank `opts[0]` ("Fiksasi pipa dan fitting" survived, its JP term didn't)
+    resolved by corpus precedent, not a guess — `wglv-id-01#27` already pairs the identical
+    Indonesian phrase with `管と継手の固定《かんとつぎてのこてい》`.
+  - `wglv-jp-02` ids 16–24 (9 cards, complete JP-headword loss) — all 9 reconstructed. **New
+    methodology this session:** grounded the less-obvious terms in live web search against real
+    Japanese trade/manufacturer documentation (Sekisui Chemical + Kubota Chemix official
+    EF-pipe-joint installation manuals, a water utility's install spec, POLITEC industry-
+    association pages) rather than working from memory alone — this is real SSW exam-prep
+    content, wrong technical vocabulary is worse than leaving it flagged. `ターミナルピン` and
+    `スクレープ` confirmed verbatim against manufacturer documentation, not inferred.
+    `通信工事`/`地中配管` are standard compounds not source-verified beyond general usage —
+    lower-confidence than the rest of this batch, worth a re-check if source material turns up.
+    Commit `b026998`.
+- **Repo hygiene pass (owner-requested, session 29) — commit `4fcf60f`, full reasoning in the
+  commit body.** Full-tree audit before touching anything, two findings:
+  - Moved 3 files with zero references anywhere and import paths that don't resolve on this
+    branch (`FilterPopup.jsx`, `useTrackedCards.js`, `FocusMode.jsx` — depended on `theme.js`/
+    `ProgressContext.jsx`/`SprintMode.jsx`/`*.module.css`, none of which exist here) to
+    `legacy/unwired-app-code/` rather than deleting outright, since their dependencies did once
+    exist on this branch and were removed in an apparently-incomplete earlier scaffold trim —
+    see that folder's own README for the full trail and a one-line delete command if that's the
+    eventual call.
+  - **Did NOT touch `sets/jac/*.js` vs top-level `jac-teori.js`/`jac-lifeline.js`**, despite
+    looking identical in shape to the above at a glance (unwired split files sitting next to
+    what the app actually imports). This is documented, intentional, merge-time-gated technical
+    debt, not cruft — `docs/DATA_ARCH_AUDIT.md` (2026-05-12) already found and fully explained
+    it, and P22 reconfirmed `sets/jac/` as deliberately out-of-scope as recently as session 28.
+    Added to the merge-time reconciliation list below since the only place this was tracked was
+    a 3-month-old audit doc easy to forget exists.
+  - `README.md`'s card/question counts were stale (1,443 / ~974, predating the 5-duplicate
+    cleanup and the session-24 Doboku/Kenchiku removal) — corrected to 1,438 / ~1,075.
+- 1,438 cards total — 97 konsep / 1,244 vocab / 97 hukum (877 common + 561 lifeline). Unchanged
+  this session — no cards added or removed, only field-level content fixes.
 - P0–P5, P7, P9, P14, P15, P8a: all done
 - `type` field corruption (id=82,83,186,188,201): fixed, verify script exits 0
 - **Owner answered OD-1/OD-2/OD-3 (2026-07-11):** OD-1 → merge deprecated sources into
@@ -397,58 +459,22 @@ At merge time each of those six needs `card.furi` swapped for `extractReading(c.
 it failing is the expected signal, not a regression. `SearchMode.jsx` already imports a
 `stripFuri`, so part of the helper may exist already.
 
+**Also merge-time, unrelated to `furi`:** `sets/jac/jac-teori.js` (65q) + `sets/jac/jac-lifeline.js`
+(30q) are the DQ-migrated, new-schema (`q`/`hint`/`opts`/`ans`/`img`/`exp`) working copies —
+`index.js` currently imports the top-level `jac-teori.js`/`jac-lifeline.js` instead, which are
+still on the pre-migration schema (`jp`/`hiragana`/`options`/`answer`/`hasPhoto`). Original
+finding + full field-mapping table: `docs/DATA_ARCH_AUDIT.md` §4/§6 (D1–D3), 2026-05-12 — still
+accurate as of session 29, re-confirmed rather than re-derived. At merge: replace the top-level
+files with the `sets/jac/` versions (same swap pattern as the `wayground`/`jac-mockup` monoliths
+already went through).
+
 ### 🔵 Gated on an owner decision — ask before starting
 *(none right now — OD-5 resolved by investigation, see OPEN DECISIONS.)*
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
-- **P5 is done (session 28)** — full accounting in CURRENT STATE. What's left is the residual
-  registry below: small, specific, don't-guess items. None of these are "P5 work sitting in a
-  queue" anymore; each needs either new source material that may never arrive, or an owner/
-  judgment call. Don't re-open P5 to chase these — they're tracked here precisely because they
-  fall outside what a truncation-fix pass can responsibly touch.
-- **Residual data-quality flags (post-P5):**
-  - ~~`desc` fields that stayed truncated even with their chapter's real PDF in hand~~ — **all 13
-    completed session 28 (part 2), commit see git log.** ⚠️ **Provenance: these 13 were completed
-    from general construction-domain knowledge, NOT from JAC textbook text** — owner explicitly
-    authorized this after the PDF route was exhausted ("lengkapi based from your comprehensive
-    intelligence"). They are the only cards in the corpus not traceable to a source PDF. Ids:
-    93, 94, 152, 160, 410, 530, 624, 957, 966, 1063, 1143, 1190, 1325. If JAC's own wording ever
-    becomes available for these, re-check them first — everything else in the corpus was
-    cross-referenced against real chapter text, these weren't. Specific figures used that would
-    be worth spot-checking against JAC's own phrasing: id=94 (20 m / 30 m walking distance to an
-    extinguisher, 消防法), id=152 (労働基準法 art. 16), id=966 (0.8–1.5 m mounting height, 50 m
-    walking distance). Deliberately NOT invented: id=1190's saddle spacing interval — the
-    sentence was closed on the *relationship* (too wide → たわみ, which the corpus already states
-    at id=782/783/894) rather than by making up a millimetre figure, since that missing number
-    was the actual gap session 26 flagged.
-  - id=468 (source mistag, piping content tagged jac-ch2).
-  - Scope-mismatch pattern — `jp`/`id_text` promises N combined terms, `desc` only ever covers
-    the first, but the sentence present is complete and correctly punctuated so it's not a
-    truncation defect: id=585 (original instance, "6 istilah" vs. 3 drafted), 517, 530, 533
-    (found session 28, same shape).
-  - `id_text` fields that dangle on a conjunction/preposition — different shape than P3's
-    already-done "ends in /" pattern, needs its own pass rather than folding into any single
-    chapter's desc work: 131, 223, 242, 245, 411, 591, 1373, 1378 (ch4/ch5), 524 (ch7, found
-    session 28).
-- **New (P16, session 23):** what was wglv03 id=23 (now inside one of the wglv-id-* files —
-  original numbering doesn't carry over, search by content: q starts "Apa bahasa Jepangnya
-  'Membersihkan permukaan fusi'") has malformed `opts`: one entry looks like two merged options
-  (`"融着面の清掃《...》b) 管の清掃《...》"`) and one empty string. Needs the original source to
-  fix properly — didn't guess-fix it, just carried the malformed data through the split as-is.
-- **New (session 28, part 3, found during P22's thin-`exp` triage): `wglv-jp-02` ids 16–24 (9
-  cards, contiguous) have completely lost their Japanese headword.** `q`, `hint`, the correct
-  answer, and `exp` are all the same Indonesian phrase — e.g. id=16: q="Apa arti dari soket EF?",
-  ans="Soket EF", exp="Soket EF". A tautological question with zero teaching value. Confirmed
-  isolated to exactly this block (scanned all 3 `wglv-jp-*` sets for "question contains zero
-  Japanese characters" — nowhere else). Predates this session (already present at the original
-  P16-split commit `3e8cea8`), so this isn't something introduced by any recent edit. Not
-  guess-fixed: id=16 has real support for "EFソケット" (electrofusion socket — `wgl06` already
-  establishes EF接合 terminology in this exact domain), but the other 8 (17 water-supply
-  polyethylene pipe, 18 terminal pin, 19 "scraping", 20 "cooling", 21 telecom work, 22 underground
-  piping, 23 cable wiring, 24 underground optical cable wiring) each have multiple equally-
-  plausible Japanese candidates with nothing in the data to disambiguate. Needs either the
-  original source material this set was built from, or the owner's own memory of what these 9
-  terms were meant to be.
+*(empty — the whole session-28 bucket was resolved session 29. Full accounting in CURRENT STATE,
+commits `c641e8c` through `b026998`. Nothing currently sits in this bucket; the next 🟡-shaped
+item found during future work starts a fresh list here rather than reopening this one.)*
 
 ### 🟢 Unblocked — owner decision 2026-08-17 (session 28), ready to start
 **Owner clarified the whole branch's contract:** *"branch content-dq emang cuma buat maintain and
@@ -461,7 +487,7 @@ on `main` should treat that as a merge-time TODO to record, not as a reason to s
 | Task | What | Status |
 |---|---|---|
 | P12 | Drop `furi` from all split files | **Unblocked.** The 6 `main` consumers listed below are now merge-time reconciliation items, not blockers. Still genuinely unstarted — nobody has done it yet. Do P1 first if it isn't fully done (P12 depends on `《》` ruby in `jp` being complete, since `extractReading(c.jp)` is the intended replacement). |
-| **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun out to the 🟡 bucket (wglv-jp-02 headword loss). |
+| **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun to the 🟡 bucket at the time (wglv-jp-02 headword loss), resolved session 29, see CURRENT STATE. |
 
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
 Owner: *"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
