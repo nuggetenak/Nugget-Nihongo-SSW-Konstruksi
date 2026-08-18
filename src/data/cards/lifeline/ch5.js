@@ -1485,7 +1485,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "電源《でんげん》",
   type: "vocab",
   id_text: "Sumber daya / power",
-  desc: "Sumber listrik untuk peralatan.\nBukan solusi menaikkan daya jika kabel sudah",
+  desc: "Sumber listrik untuk peralatan.\nBukan solusi menaikkan daya jika kabel sudah terlalu panjang atau tipis.",
   usage: '電源《でんげん》を切《き》ってから作業《さぎょう》する（matikan sumber daya sebelum bekerja）',
     _origIndex: 801
   },
@@ -1509,7 +1509,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "コード",
   type: "vocab",
   id_text: "Kabel / kord (power tool)",
-  desc: "Kabel listrik pada alat bertenaga listrik.\nKabel terasa panas = tanda bahaya →",
+  desc: "Kabel listrik pada alat bertenaga listrik.\nKabel terasa panas = tanda bahaya → segera matikan dan periksa.",
   usage: 'コードが損傷《そんしょう》していないか確認《かくにん》する（periksa apakah kabel tidak rusak）',
     _origIndex: 818
   },
@@ -1605,7 +1605,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "保護テープ《ほごテープ》",
   type: "vocab",
   id_text: "Pita pelindung",
-  desc: "Pita pelindung kabel/pipa dari gesekan atau kerusakan fisik. Berbeda dari",
+  desc: "Pita pelindung kabel/pipa dari gesekan atau kerusakan fisik. Berbeda dari isolasi listrik biasa.",
   usage: '防水《ぼうすい》が必要《ひつよう》な箇所《かしょ》に保護テープ《ほごてーぷ》を巻《ま》いて防水処理《ぼうすいしょり》する（balut area yang membutuhkan proteksi air menggunakan protective tape）',
     _origIndex: 1051
   },
@@ -1665,7 +1665,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "三相《さんそう》",
   type: "vocab",
   id_text: "Tiga fase / three phase",
-  desc: "Sistem listrik untuk motor besar dan peralatan industri menggunakan 200V atau",
+  desc: "Sistem listrik untuk motor besar dan peralatan industri menggunakan 200V atau 400V.",
   usage: '三相《さんそう》（200V）を動力設備《どうりょくせつび》（モーター・エアコン室外機《しつがいき》）に使《つか》う（gunakan tiga fase 200V untuk peralatan daya seperti motor dan unit outdoor AC）',
     _origIndex: 1135
   },
@@ -1689,7 +1689,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "成端《せいたん》",
   type: "vocab",
   id_text: "Terminasi ujung kabel",
-  desc: "Pekerjaan pengakhiran ujung kabel; untuk fiber meliputi pemasangan konektor dan",
+  desc: "Pekerjaan pengakhiran ujung kabel; untuk fiber meliputi pemasangan konektor dan pengujian.",
   usage: "成端《せいたん》作業《さぎょう》を行《おこな》う（melaksanakan pekerjaan terminasi kabel）",
   _origIndex: 1193
   },
@@ -1713,7 +1713,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "電柱《でんちゅう》",
   type: "vocab",
   id_text: "Tiang listrik / utility",
-  desc: "Tiang untuk membentangkan kabel udara.\nCek utilitas bawah tanah sebelum",
+  desc: "Tiang untuk membentangkan kabel udara.\nCek utilitas bawah tanah sebelum menggali di dekat tiang.",
   usage: '電柱《でんちゅう》に架空線《かくうせん》を張《は》る（memasang kabel udara pada tiang listrik）',
     _origIndex: 973
   },
@@ -1785,7 +1785,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "高圧《こうあつ》",
   type: "vocab",
   id_text: "Tegangan tinggi",
-  desc: "Tegangan AC di atas 600V hingga 7000V. Digunakan di panel penerima pabrik dan",
+  desc: "Tegangan AC di atas 600V hingga 7000V. Digunakan di panel penerima pabrik dan gedung besar.",
   usage: '高圧《こうあつ》（600Vを超える《こえる》）設備《せつび》の作業《さぎょう》は有資格者《ゆうしかくしゃ》のみ行《おこな》う（hanya orang yang memiliki kualifikasi yang dapat mengerjakan instalasi tegangan tinggi >600V）',
     _origIndex: 1142
   },
@@ -1857,7 +1857,7 @@ export const CARDS_LIFELINE_CH5 = [
   jp: "通信キャビネット《つうしんきゃびねっと》",
   type: "vocab",
   id_text: "Kabinet perangkat",
-  desc: "Kabinet tertutup untuk perangkat telekomunikasi.\nPermasangan luar ruangan:",
+  desc: "Kabinet tertutup untuk perangkat telekomunikasi.\nPemasangan luar ruangan: harus tahan cuaca dan terkunci.",
   usage: '通信キャビネット《つうしんきゃびねっと》に機器《きき》・電源《でんげん》・ケーブルを収納《しゅうのう》して整理《せいり》する（simpan peralatan, catu daya, dan kabel secara teratur di dalam kabinet telekomunikasi）',
     _origIndex: 1188
   },

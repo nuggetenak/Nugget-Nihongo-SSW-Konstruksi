@@ -333,7 +333,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "酸素欠乏《さんそけつぼう》",
   type: "vocab",
   id_text: "Kekurangan oksigen (konsep)",
-  desc: "Kondisi kadar oksigen rendah di ruang tertutup.\nWaspadai 酸素欠乏《さんそけつぼう》saat",
+  desc: "Kondisi kadar oksigen rendah di ruang tertutup.\nWaspadai 酸素欠乏《さんそけつぼう》saat masuk ruang tertutup/manhole.",
   usage: '酸素欠乏《さんそけつぼう》の恐れ《おそれ》のある空間《くうかん》に入《はい》る前《まえ》は測定《そくてい》をする（lakukan pengukuran sebelum memasuki ruang yang berisiko kekurangan oksigen）',
     _origIndex: 951
   },
@@ -799,7 +799,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "躯体《くたい》",
   type: 'vocab',
   id_text: "Struktur utama bangunan (くたい)",
-  desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》,",
+  desc: "Bagian struktural bangunan: 基礎《きそ》+柱《はしら》+梁《はり》+壁面《へきめん》+床《ゆか》.\nBUKAN: 内装仕上《ないそうしあ》げ, 建具《たてぐ》, 設備《せつび》配管配線《はいかんはいせん》.",
   usage: '躯体《くたい》が完成《かんせい》してから内装《ないそう》工事《こうじ》を始《はじ》める（mulai pekerjaan interior setelah struktur utama selesai）',
     _origIndex: 1560
   },

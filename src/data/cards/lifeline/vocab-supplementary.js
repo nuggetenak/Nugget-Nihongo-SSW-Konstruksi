@@ -129,7 +129,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "地中管《ちちゅうかん》",
   type: "vocab",
   id_text: "Pipa bawah tanah",
-  desc: "Pipa yang ditanam di bawah permukaan tanah; perlu perhatian kedalaman untuk",
+  desc: "Pipa yang ditanam di bawah permukaan tanah; perlu perhatian kedalaman untuk menghindari kerusakan akibat beban di atasnya.",
   usage: '地中管《ちちゅうかん》の埋設《まいせつ》深度《しんど》を図面《ずめん》で確認《かくにん》する（periksa kedalaman penanaman pipa bawah tanah pada gambar）',
     _origIndex: 982
   },
@@ -369,7 +369,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "管と継手の挿入《そうにゅう》・固定《こてい》",
   type: "vocab",
   id_text: "Pasang & kencangkan",
-  desc: "Proses memasukkan pipa ke fitting lalu memfiksasi sambungan hingga tidak",
+  desc: "Proses memasukkan pipa ke fitting lalu memfiksasi sambungan hingga tidak bergeser atau bocor.",
   usage: '管《かん》と継手《つぎて》を正しく挿入《そうにゅう》して止《と》め金具《かなぐ》で固定《こてい》する（masukkan pipa dan fitting dengan benar lalu kencangkan dengan penjepit）',
     _origIndex: 1043
   },
@@ -381,7 +381,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "地上管《ちじょうかん》",
   type: "vocab",
   id_text: "Pipa di atas tanah",
-  desc: "Pipa yang dipasang di permukaan tanah; perlu pelindung anti-UV dan",
+  desc: "Pipa yang dipasang di permukaan tanah; perlu pelindung anti-UV dan penopang berkala.",
   usage: '地上管《ちじょうかん》は支持金具《しじかなぐ》で一定《いってい》間隔《かんかく》で固定《こてい》する（kencangkan pipa di atas tanah dengan hanger pada jarak tetap）',
     _origIndex: 1044
   },
@@ -393,7 +393,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "冷却器《れいきゃくき》",
   type: "vocab",
   id_text: "Alat pendingin",
-  desc: "Perangkat untuk mendinginkan fluida atau udara; perlu dicek kapasitas dan",
+  desc: "Perangkat untuk mendinginkan fluida atau udara; perlu dicek kapasitas dan kebersihan sirip pendingin secara berkala.",
   usage: '冷却器《れいきゃくき》のフィンを清掃《せいそう》して熱交換《ねつこうかん》効率《こうりつ》を維持《いじ》する（bersihkan fin pada alat pendingin untuk mempertahankan efisiensi pertukaran panas）',
     _origIndex: 1045
   },
@@ -465,7 +465,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "吸気ファン《きゅうきファン》",
   type: "vocab",
   id_text: "Kipas isap (intake fan)",
-  desc: "Kipas yang menarik udara segar dari luar ke dalam ruangan; kebalikan dari",
+  desc: "Kipas yang menarik udara segar dari luar ke dalam ruangan; kebalikan dari 排気《はいき》ファン (exhaust fan).",
   usage: '吸気ファン《きゅうきふぁん》で外気《がいき》を取り込《とりこ》んで換気《かんき》する（masukkan udara luar untuk ventilasi menggunakan intake fan）',
     _origIndex: 1054
   },
@@ -585,7 +585,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "定温式感知器《ていおんしきかんちき》",
   type: "vocab",
   id_text: "Detektor suhu tetap",
-  desc: "Detektor yang aktif saat suhu mencapai batas tertentu; cocok untuk dapur atau",
+  desc: "Detektor yang aktif saat suhu mencapai batas tertentu; cocok untuk dapur atau area berdebu/berasap.",
   usage: '定温式感知器《ていおんしきかんちき》が設定温度《せっていおんど》に達《たっ》して作動《さどう》する（detektor suhu tetap aktif saat mencapai suhu yang ditentukan）',
     _origIndex: 1080
   },
@@ -729,7 +729,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "粉末消火器《ふんまつしょうかき》",
   type: "vocab",
   id_text: "Pemadam bubuk kering",
-  desc: "Tabung pemadam portabel berisi bubuk kering; efektif untuk kebakaran kelas A,",
+  desc: "Tabung pemadam portabel berisi bubuk kering; efektif untuk kebakaran kelas A, B, dan C.",
   usage: '粉末消火器《ふんまつしょうかき》を電気火災《でんきかさい》や油火災《あぶらかさい》に使用《しよう》する（gunakan alat pemadam bubuk untuk kebakaran listrik dan minyak）',
     _origIndex: 1097
   },
@@ -765,7 +765,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ビーズ法ポリスチレンフォーム《びーずほうぽりすちれんふぉーむ》",
   type: "vocab",
   id_text: "EPS / styrofoam bead",
-  desc: "Insulasi dari butiran polistirena yang dipanaskan dalam cetakan; ringan dan",
+  desc: "Insulasi dari butiran polistirena yang dipanaskan dalam cetakan; ringan dan murah, namun kurang tahan panas.",
   usage: 'ビーズ法EPS（発泡スチロール）を床下《ゆかした》断熱《だんねつ》に使用《しよう》する（gunakan EPS beads method untuk insulasi bawah lantai）',
     _origIndex: 1102
   },
@@ -825,7 +825,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "亜鉛鉄線《あえんてっせん》",
   type: "vocab",
   id_text: "Kawat besi galvanis",
-  desc: "Kawat besi berlapis seng untuk mengikat lapisan insulasi pipa agar tidak",
+  desc: "Kawat besi berlapis seng untuk mengikat lapisan insulasi pipa agar tidak lepas atau kendur.",
   usage: "亜鉛鉄線《あえんてっせん》で巻《ま》き縛《しば》る（mengikat dengan kawat galvanis）",
   _origIndex: 1114
   },
@@ -957,7 +957,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "変圧器《へんあつき》",
   type: "vocab",
   id_text: "Transformator / trafo",
-  desc: "Perangkat yang mengubah tegangan tinggi ke rendah untuk menyuplai daya ke",
+  desc: "Perangkat yang mengubah tegangan tinggi ke rendah untuk menyuplai daya ke peralatan umum.",
   usage: '変圧器《へんあつき》で6600Vを100/200Vに降圧《こうあつ》して一般設備《いっぱんせつび》に供給《きょうきゅう》する（turunkan tegangan 6600V ke 100/200V menggunakan transformator untuk disalurkan ke instalasi umum）',
     _origIndex: 1127
   },
@@ -969,7 +969,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ジャンクションボックス",
   type: "vocab",
   id_text: "Kotak sambungan",
-  desc: "Kotak tempat percabangan dan sambungan kabel dilakukan, lalu ditutup untuk",
+  desc: "Kotak tempat percabangan dan sambungan kabel dilakukan, lalu ditutup untuk keamanan dan kerapian.",
   usage: 'ジャンクションボックスで電線《でんせん》を分岐《ぶんき》して接続《せつぞく》する（percabangkan dan sambungkan kabel di dalam junction box）',
     _origIndex: 1128
   },
@@ -1017,7 +1017,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "分岐回路《ぶんきかいろ》",
   type: "vocab",
   id_text: "Sirkuit cabang / branch",
-  desc: "Sirkuit individual yang mendistribusikan daya dari panel ke stop kontak atau",
+  desc: "Sirkuit individual yang mendistribusikan daya dari panel ke stop kontak atau lampu.",
   usage: '幹線《かんせん》から分岐回路《ぶんきかいろ》に分《わ》けてコンセントや照明《しょうめい》に供給《きょうきゅう》する（distribusikan dari kabel utama ke sirkuit cabang untuk stopkontak dan lampu）',
     _origIndex: 1133
   },
@@ -1077,7 +1077,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "アースクランプ",
   type: "vocab",
   id_text: "Klem grounding",
-  desc: "Penjepit yang menghubungkan kabel bumi ke batang grounding secara kuat dan",
+  desc: "Penjepit yang menghubungkan kabel bumi ke batang grounding secara kuat dan tahan korosi.",
   usage: 'アースクランプで接地線《せっちせん》をアース端子《たんし》にしっかり固定《こてい》する（kencangkan kabel grounding pada terminal earth menggunakan earth clamp）',
     _origIndex: 1145
   },
@@ -1209,7 +1209,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "レデューサー",
   type: "vocab",
   id_text: "Reducer / fitting beda",
-  desc: "Digunakan untuk menyambung pipa berbeda diameter; tersedia tipe konsentrik dan",
+  desc: "Digunakan untuk menyambung pipa berbeda diameter; tersedia tipe konsentrik dan eksentrik.",
   usage: 'レデューサーで口径《こうけい》が異《こと》なる配管《はいかん》を接続《せつぞく》する（sambungkan pipa dengan diameter berbeda menggunakan reducer）',
     _origIndex: 1160
   },
@@ -1245,7 +1245,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "吊りバンド《つりバンド》",
   type: "vocab",
   id_text: "Pipe hanger band",
-  desc: "Digantung dari pelat beton lewat baut gantung untuk menopang pipa horizontal di",
+  desc: "Digantung dari pelat beton lewat baut gantung untuk menopang pipa horizontal di bawah plafon.",
   usage: '吊りバンド《つりバンド》で天井《てんじょう》から配管《はいかん》を吊《つ》り下《さ》げる（gantungkan pipa dari langit-langit menggunakan pipe hanger band）',
     _origIndex: 1163
   },
@@ -1281,7 +1281,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "通気管《つうきかん》",
   type: "vocab",
   id_text: "Vent pipe / pipa",
-  desc: "Menstabilkan tekanan udara dalam pipa drainase agar air dalam trap tidak",
+  desc: "Menstabilkan tekanan udara dalam pipa drainase agar air dalam trap tidak terhisap keluar (efek sifon).",
   usage: '排水立管《はいすいたてかん》に通気管《つうきかん》を接続《せつぞく》して悪臭《あくしゅう》の逆流《ぎゃくりゅう》を防《ふせ》ぐ（hubungkan vent pipe ke pipa tegak drainase untuk mencegah bau busuk mengalir balik）',
     _origIndex: 1166
   },
@@ -1305,7 +1305,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "管支持金具《かんしじかなぐ》",
   type: "vocab",
   id_text: "Dudukan penopang pipa",
-  desc: "Bracket penopang pipa; jarak antar bracket ditentukan oleh diameter dan",
+  desc: "Bracket penopang pipa; jarak antar bracket ditentukan oleh diameter dan material pipa.",
   usage: '管支持金具《かんしじかなぐ》で適切《てきせつ》な間隔《かんかく》ごとに配管《はいかん》を固定《こてい》する（kencangkan pipa pada jarak yang sesuai menggunakan dudukan penopang pipa）',
     _origIndex: 1173
   },
@@ -1377,7 +1377,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "STコネクタ",
   type: "vocab",
   id_text: "Konektor fiber optik ST",
-  desc: "Konektor fiber yang dikunci dengan memutar seperti bayonet; dahulu umum di",
+  desc: "Konektor fiber yang dikunci dengan memutar seperti bayonet; dahulu umum di jaringan LAN dan telekomunikasi.",
   usage: 'STコネクタで古い光ファイバー《ひかりふぁいばあ》設備《せつび》を接続《せつぞく》する（hubungkan peralatan serat optik lama menggunakan konektor ST）',
     _origIndex: 1181
   },
@@ -1389,7 +1389,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "反射損失《はんしゃそんしつ》",
   type: "vocab",
   id_text: "Rugi daya akibat",
-  desc: "Nilai refleksi tinggi pada sambungan konektor; terlihat sebagai lonjakan pada",
+  desc: "Nilai refleksi tinggi pada sambungan konektor; terlihat sebagai lonjakan pada hasil pengukuran OTDR.",
   usage: '反射損失《はんしゃそんしつ》を低減《ていげん》するためにコネクタを正しく研磨《けんま》する（lakukan pemolesan konektor dengan benar untuk mengurangi rugi refleksi）',
     _origIndex: 1182
   },
@@ -1437,7 +1437,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "STPケーブル",
   type: "vocab",
   id_text: "Kabel twisted pair",
-  desc: "STP memiliki pelindung yang memblokir gangguan elektromagnetik, cocok untuk",
+  desc: "STP memiliki pelindung yang memblokir gangguan elektromagnetik, cocok untuk lingkungan dengan interferensi tinggi.",
   usage: 'STPケーブルでノイズ《のいず》の多《おお》い環境《かんきょう》に対応《たいおう》した配線《はいせん》をする（lakukan pengkabelan di lingkungan yang banyak gangguan menggunakan kabel STP）',
     _origIndex: 1186
   },
@@ -1449,7 +1449,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "IDF（中間《ちゅうかん》配線《はいせん》盤《ばん》）",
   type: "vocab",
   id_text: "Panel distribusi kabel",
-  desc: "Di gedung besar, kabel trunk dari MDF didistribusikan via IDF ke terminal di",
+  desc: "Di gedung besar, kabel trunk dari MDF didistribusikan via IDF ke terminal di setiap lantai.",
   usage: 'IDF（中間配線盤《ちゅうかんはいせんばん》）でMDFと各フロア《かくふろあ》間《かん》の配線《はいせん》を中継《ちゅうけい》する（relai kabel antara MDF dan setiap lantai menggunakan IDF）',
     _origIndex: 1189
   },
@@ -1461,7 +1461,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "接地端子盤《せっちたんしばん》",
   type: "vocab",
   id_text: "Panel terminal grounding",
-  desc: "Kabel grounding semua perangkat komunikasi dikumpulkan di sini untuk",
+  desc: "Kabel grounding semua perangkat komunikasi dikumpulkan di sini untuk manajemen terpusat.",
   usage: '接地端子盤《せっちたんしばん》で通信機器《つうしんきき》の接地《せっち》を一括《いっかつ》管理《かんり》する（kelola grounding peralatan telekomunikasi secara terpusat menggunakan panel terminal grounding）',
     _origIndex: 1190
   },
@@ -1473,7 +1473,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "端子台《たんしだい》",
   type: "vocab",
   id_text: "Terminal block / blok",
-  desc: "Beberapa kabel dikencangkan dengan sekrup pada blok ini untuk membagi dan",
+  desc: "Beberapa kabel dikencangkan dengan sekrup pada blok ini untuk membagi dan menyambung banyak kabel.",
   usage: '端子台《たんしだい》で電線《でんせん》をねじ止めして確実《かくじつ》に接続《せつぞく》する（sambungkan kabel secara andal menggunakan terminal block dengan cara dikencangkan）',
     _origIndex: 1192
   },
@@ -1485,7 +1485,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "心線対照《しんせんたいしょう》",
   type: "vocab",
   id_text: "Identifikasi pasangan",
-  desc: "Pemeriksaan untuk memastikan inti mana dalam kabel multi-core yang terhubung ke",
+  desc: "Pemeriksaan untuk memastikan inti mana dalam kabel multi-core yang terhubung ke terminal yang benar di ujung lainnya.",
   usage: '心線対照《しんせんたいしょう》試験《しけん》でケーブルのペア番号《ばんごう》を確認《かくにん》する（konfirmasi nomor pasang kabel melalui uji identifikasi pair）',
     _origIndex: 1194
   },
@@ -1497,7 +1497,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "光ケーブルの曲げ半径《ひかりけーぶるのまげはんけい》",
   type: "vocab",
   id_text: "Radius tikungan minimum",
-  desc: "Jika radius tikungan lebih kecil dari nilai minimum, rugi cahaya melonjak dan",
+  desc: "Jika radius tikungan lebih kecil dari nilai minimum, rugi cahaya melonjak dan serat bisa patah.",
   usage: '光ケーブルの曲げ半径《まげはんけい》を最小値《さいしょうち》以上《いじょう》に保《たも》って損失《そんしつ》増加《ぞうか》を防《ふせ》ぐ（jaga radius tikungan kabel optik di atas nilai minimum untuk mencegah peningkatan rugi）',
     _origIndex: 1195
   },
@@ -1557,7 +1557,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "フリーアクセスフロア",
   type: "vocab",
   id_text: "Raised access floor",
-  desc: "Struktur lantai ganda yang memungkinkan kabel listrik dan LAN diatur bebas di",
+  desc: "Struktur lantai ganda yang memungkinkan kabel listrik dan LAN diatur bebas di bawah lantai tanpa bongkar permanen.",
   usage: 'フリーアクセスフロアの床下《ゆかした》にケーブルを敷設《ふせつ》して将来《しょうらい》の変更《へんこう》に対応《たいおう》する（pasang kabel di bawah raised floor untuk mengakomodasi perubahan di masa depan）',
     _origIndex: 1254
   },
@@ -1581,7 +1581,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "パイプバイス",
   type: "vocab",
   id_text: "Ragum pipa / pipe vise",
-  desc: "Alat penjepit pipa baja sebelum proses threading; cegah pipa bergeser saat",
+  desc: "Alat penjepit pipa baja sebelum proses threading; cegah pipa bergeser saat pemotongan atau pengetapan ulir.",
   usage: "パイプバイスで固定《こてい》する（menjepit dengan pipe vise）",
   _origIndex: 1278
   },

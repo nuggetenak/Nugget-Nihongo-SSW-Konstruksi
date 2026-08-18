@@ -105,7 +105,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "漏電《ろうでん》",
   type: "vocab",
   id_text: "Kebocoran listrik",
-  desc: "Arus listrik bocor ke luar jalur yang seharusnya → penyebab sengatan dan",
+  desc: "Arus listrik bocor ke luar jalur yang seharusnya → penyebab sengatan dan kebakaran.",
   usage: '漏電《ろうでん》をブレーカーで遮断《しゃだん》する（memutus kebocoran listrik dengan breaker）',
     _origIndex: 948
   },
@@ -129,7 +129,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "室外機《しつがいき》",
   type: "vocab",
   id_text: "Unit luar AC / outdoor",
-  desc: "Berisi kompresor dan kondenser; membuang panas ke luar.\nLokasi pemasangan harus",
+  desc: "Berisi kompresor dan kondenser; membuang panas ke luar.\nLokasi pemasangan harus punya sirkulasi udara baik.",
   usage: '室外機《しつがいき》（アウトドアユニット）を屋外《おくがい》に設置《せっち》して冷媒管《れいばいかん》と電線《でんせん》を接続《せつぞく》する（pasang unit outdoor AC di luar dan hubungkan pipa refrigeran serta kabel）',
     _origIndex: 1406
   },
@@ -225,7 +225,7 @@ export const CARDS_VOCAB_JAC = [
   jp: "短絡《たんらく》",
   type: 'vocab',
   id_text: "Hubungan arus pendek",
-  desc: "2 kabel bersentuhan TANPA melalui beban. Berbeda dari 漏電《ろうでん》 (bocor) & 感電《かんでん》 (sengatan). Bisa",
+  desc: "2 kabel bersentuhan TANPA melalui beban. Berbeda dari 漏電《ろうでん》 (bocor) & 感電《かんでん》 (sengatan). Bisa menyebabkan percikan api atau kebakaran.",
   usage: '短絡《たんらく》が発生《はっせい》しないよう配線《はいせん》の絶縁《ぜつえん》を確認《かくにん》する（periksa insulasi pengkabelan untuk mencegah terjadinya korsleting）',
     _origIndex: 63
   },

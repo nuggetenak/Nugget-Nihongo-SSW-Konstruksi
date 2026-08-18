@@ -1015,7 +1015,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "材料《ざいりょう》",
   type: "vocab",
   id_text: "Material / bahan",
-  desc: "Bahan yang digunakan dalam konstruksi.\nWarna material sering muncul sebagai",
+  desc: "Bahan yang digunakan dalam konstruksi.\nWarna material sering muncul sebagai pengecoh soal ujian.",
   usage: '保温《ほおん》工事《こうじ》で使用《しよう》する材料《ざいりょう》の仕様書《しようしょ》を事前《じぜん》に確認《かくにん》する（periksa spesifikasi material yang digunakan dalam pekerjaan insulasi terlebih dahulu）',
     _origIndex: 817
   },
@@ -1375,7 +1375,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "風管《ふうかん》",
   type: "vocab",
   id_text: "Duct / saluran udara",
-  desc: "Saluran untuk mengalirkan udara dalam sistem HVAC; terbuat dari logam atau",
+  desc: "Saluran untuk mengalirkan udara dalam sistem HVAC; terbuat dari logam atau bahan non-logam seperti fiberglass.",
   usage: '空調の風管《ふうかん》（ダクト）を断熱《だんねつ》して空調《くうちょう》効率《こうりつ》を高《たか》める（tingkatkan efisiensi AC dengan mengisolasi duct）',
     _origIndex: 1029
   },
@@ -1657,7 +1657,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "防火ダンパー《ぼうかだんぱー》",
   type: "vocab",
   id_text: "Fire damper",
-  desc: "Dipasang di titik duct yang menembus dinding tahan api.\nMenutup otomatis saat",
+  desc: "Dipasang di titik duct yang menembus dinding tahan api.\nMenutup otomatis saat mendeteksi panas/asap.",
   usage: '防火ダンパーが火災《かさい》時《じ》に自動閉鎖《じどうへいさ》してダクト経路《けいろ》からの延焼《えんしょう》を防《ふせ》ぐ（fire damper menutup otomatis saat kebakaran untuk mencegah perambatan melalui jalur duct）',
     _origIndex: 1088
   },
@@ -1717,7 +1717,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "ロックウール",
   type: "vocab",
   id_text: "Rock wool / wol batu",
-  desc: "Insulasi dari basalt/terak; tahan panas hingga ±600°C. Lebih berat tapi lebih",
+  desc: "Insulasi dari basalt/terak; tahan panas hingga ±600°C. Lebih berat tapi lebih tahan api dibanding glass wool.",
   usage: 'ロックウールを高温《こうおん》配管《はいかん》の保温《ほおん》に使用《しよう》する（gunakan rock wool untuk insulasi pipa suhu tinggi）',
     _origIndex: 1101
   },
@@ -1741,7 +1741,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "パーライト保温材《ぱーらいとほおんざい》",
   type: "vocab",
   id_text: "Perlite insulation",
-  desc: "Insulasi dari obsidian/batu vulkanik yang dipanaskan hingga mengembang. Untuk",
+  desc: "Insulasi dari obsidian/batu vulkanik yang dipanaskan hingga mengembang. Untuk pipa bertekanan tinggi & suhu tinggi.",
   usage: 'パーライト保温材《ほおんざい》を高温蒸気管《こうおんじょうきかん》の保温《ほおん》に使用《しよう》する（gunakan insulasi perlit untuk pipa uap suhu tinggi）',
     _origIndex: 1106
   },
@@ -1813,7 +1813,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "フランジ接合《フランジせつごう》",
   type: "vocab",
   id_text: "Sambungan flange",
-  desc: "Sambungan baut-mur dengan gasket penyekat; mudah dibongkar-pasang untuk",
+  desc: "Sambungan baut-mur dengan gasket penyekat; mudah dibongkar-pasang untuk perawatan.",
   usage: 'フランジ接合《せつごう》でポンプや機器《きき》を配管《はいかん》に取《と》り付《つ》ける（pasang pompa dan peralatan pada pipa menggunakan flange joint）',
     _origIndex: 1156
   },
@@ -1825,7 +1825,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "ソケット接合《ソケットせつごう》",
   type: "vocab",
   id_text: "Sambungan soket",
-  desc: "Sambungan pipa PVC dengan lem. Oleskan merata lalu masukkan pipa cepat sebelum",
+  desc: "Sambungan pipa PVC dengan lem. Oleskan merata lalu masukkan pipa cepat sebelum lem mengering.",
   usage: 'ソケット接合《せつごう》で塩《えん》ビ管《かん》を素早《すばや》く接続《せつぞく》する（sambungkan pipa PVC dengan cepat menggunakan socket joint）',
     _origIndex: 1157
   },
@@ -1957,7 +1957,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "水圧試験《すいあつしけん》",
   type: "vocab",
   id_text: "Uji tekanan hidraulik",
-  desc: "Uji kebocoran pipa setelah pemasangan selesai. Tekanan uji sesuai nilai yang",
+  desc: "Uji kebocoran pipa setelah pemasangan selesai. Tekanan uji sesuai nilai yang ditentukan dalam spesifikasi.",
   usage: "水圧《すいあつ》試験《しけん》を実施《じっし》する（melakukan uji tekanan hidraulik）",
   _origIndex: 1344
   },
@@ -2005,7 +2005,7 @@ export const CARDS_LIFELINE_CH6 = [
   jp: "バルブ",
   type: "vocab",
   id_text: "Katup / valve",
-  desc: "Mengatur buka/tutup aliran. Jenis: gate (全開《ぜんかい》/全閉《ぜんへい》), ball (cepat),",
+  desc: "Mengatur buka/tutup aliran. Jenis: gate (全開《ぜんかい》/全閉《ぜんへい》), ball (cepat), check (satu arah).",
   usage: 'バルブを閉《し》めて流体《りゅうたい》の流れ《ながれ》を制御《せいぎょ》する（kendalikan aliran fluida dengan menutup katup）',
     _origIndex: 1349
   }

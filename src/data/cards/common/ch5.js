@@ -1196,7 +1196,7 @@ export const CARDS_CH5 = [
   jp: "施工《せこう》",
   type: "vocab",
   id_text: "Pelaksanaan konstruksi",
-  desc: "Pelaksanaan pekerjaan konstruksi di lapangan.\nKata dasar: 施工《せこう》前《せこうまえ》,",
+  desc: "Pelaksanaan pekerjaan konstruksi di lapangan.\nKata dasar: 施工前《せこうまえ》, 施工中《せこうちゅう》, 施工後《せこうご》(sebelum, saat, dan setelah konstruksi).",
   usage: "施工《せこう》する（melaksanakan konstruksi）",
   _origIndex: 894
   },

@@ -733,7 +733,7 @@ export const CARDS_CH4 = [
   furi: "おさまり・とりあい・みつけ・みえがかり・みえかくれ",
   jp: "納まり《おさまり》・取合い《とりあい》・見付け《みつけ》・見え掛かり《みえがかり》・見え隠れ《みえかくれ》",
   type: 'vocab',
-  id_text: "5 istilah finishing &",
+  id_text: "5 istilah finishing & visibility",
   desc: "納《おさ》まり=keseimbangan penempatan. 取《と》り合《とりあ》い=pertemuan 2+ komponen. 見《み》え付《みつ》け=tampak penuh dari depan. 見え掛かり《みえがかり》=tampak dari celah/sudut. 見え隠れ《みえかくれ》=kadang tampak kadang tidak.",
   usage: '納まり《おさまり》・取合い・見付け・見え掛かり・見え隠れの5語《ごご》を覚《おぼ》える（hafalkan 5 istilah fitting, junction, dan visibility）',
     _origIndex: 679

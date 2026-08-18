@@ -33,7 +33,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "圧力試験《あつりょくしけん》",
   type: "vocab",
   id_text: "Uji tekanan pipa",
-  desc: "Pengujian ketahanan pipa dengan tekanan di atas tekanan kerja normal untuk",
+  desc: "Pengujian ketahanan pipa dengan tekanan di atas tekanan kerja normal untuk memastikan tidak ada kebocoran.",
   usage: "圧力試験《あつりょくしけん》を行《おこな》う（melakukan uji tekanan）",
   _origIndex: 775
   },
@@ -45,7 +45,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ガス漏れ試験《がすもれしけん》",
   type: "vocab",
   id_text: "Uji kebocoran gas",
-  desc: "Wajib dilakukan setiap kali menyambung pipa gas, menggunakan air sabun atau",
+  desc: "Wajib dilakukan setiap kali menyambung pipa gas, menggunakan air sabun atau alat deteksi gas.",
   usage: "ガス漏れ《もれ》試験《しけん》をする（melakukan uji kebocoran gas）",
   _origIndex: 776
   },
@@ -81,7 +81,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "施工方法《せこうほうほう》",
   type: "vocab",
   id_text: "Metode konstruksi",
-  desc: "Cara dan prosedur pelaksanaan pekerjaan konstruksi sesuai dokumen desain dan",
+  desc: "Cara dan prosedur pelaksanaan pekerjaan konstruksi sesuai dokumen desain dan spesifikasi teknis.",
   usage: '施工方法《せこうほうほう》を事前《じぜん》に確認《かくにん》する（konfirmasi metode konstruksi sebelumnya）',
     _origIndex: 789
   },
@@ -189,7 +189,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "上がる《あがる》",
   type: "vocab",
   id_text: "Naik / meningkat",
-  desc: "Pengecoh Q14 — minyak pada sambungan pipa refrigeran tidak menaikkan debit,",
+  desc: "Pengecoh Q14 — minyak pada sambungan pipa refrigeran tidak menaikkan debit, melainkan tanda kebocoran refrigeran.",
   usage: '室温《しつおん》が上がる《あがる》前《まえ》に冷房《れいぼう》を入《い》れる（nyalakan AC sebelum suhu ruangan naik terlalu tinggi）',
     _origIndex: 844
   },
@@ -201,7 +201,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "減る《へる》",
   type: "vocab",
   id_text: "Berkurang / menurun",
-  desc: "Pengecoh Q17 — jarak saddle terlalu lebar tidak mengurangi kebisingan,",
+  desc: "Pengecoh Q17 — jarak saddle terlalu lebar tidak mengurangi kebisingan, melainkan memengaruhi dukungan pipa.",
   usage: '圧力《あつりょく》が減る《へる》場合《ばあい》は漏《も》れを疑《うたが》う（curigai adanya kebocoran jika tekanan berkurang）',
     _origIndex: 846
   },
@@ -213,7 +213,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "変わる《かわる》",
   type: "vocab",
   id_text: "Berubah",
-  desc: "Pengecoh Q20 — kemiringan pipa kurang tidak menyebabkan warna berubah,",
+  desc: "Pengecoh Q20 — kemiringan pipa kurang tidak menyebabkan warna berubah, melainkan menyebabkan genangan air.",
   usage: '季節《きせつ》で温度《おんど》が変わる《かわる》ため保温材《ほおんざい》の種類《しゅるい》を選《えら》ぶ（pilih jenis insulasi yang sesuai karena suhu berubah mengikuti musim）',
     _origIndex: 848
   },
@@ -249,7 +249,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "施工時《せこうじ》",
   type: "vocab",
   id_text: "Saat konstruksi",
-  desc: "Merujuk pada periode pelaksanaan pekerjaan konstruksi. Posisi pipa dicatat di",
+  desc: "Merujuk pada periode pelaksanaan pekerjaan konstruksi. Posisi pipa dicatat di gambar as-built.",
   usage: '施工時《せこうじ》の気温《きおん》が低い《ひくい》場合《ばあい》は接着剤《せっちゃくざい》の乾燥《かんそう》時間《じかん》を延ばす（perpanjang waktu pengeringan adhesif jika suhu saat pemasangan rendah）',
     _origIndex: 868
   },
@@ -609,7 +609,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "クラック",
   type: "vocab",
   id_text: "Retak / retakan beton",
-  desc: "Retakan pada beton akibat penyusutan pengeringan, beban berlebih, atau",
+  desc: "Retakan pada beton akibat penyusutan pengeringan, beban berlebih, atau pergerakan tanah.",
   usage: 'クラックが発生《はっせい》した場合《ばあい》はエポキシ注入《ちゅうにゅう》や左官補修《さかんほしゅう》で修繕《しゅうぜん》する（perbaiki retakan dengan injeksi epoxy atau plesteran）',
     _origIndex: 1243
   },
@@ -621,7 +621,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ALCパネル",
   type: "vocab",
   id_text: "Panel beton ringan",
-  desc: "Panel beton ringan otoklaf: insulasi panas baik, tahan api, dipakai untuk",
+  desc: "Panel beton ringan otoklaf: insulasi panas baik, tahan api, dipakai untuk dinding luar dan partisi.",
   usage: 'ALCパネルを軽量《けいりょう》外壁《がいへき》・間仕切り《まじきり》に使《つか》って施工《せこう》の効率化《こうりつか》をはかる（gunakan panel ALC untuk dinding luar ringan dan partisi untuk meningkatkan efisiensi）',
     _origIndex: 1255
   },
@@ -789,7 +789,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "エアコンプレッサー",
   type: "vocab",
   id_text: "Kompresor udara",
-  desc: "Sumber udara bertekanan untuk alat tembak paku, pembersihan debu, dan",
+  desc: "Sumber udara bertekanan untuk alat tembak paku, pembersihan debu, dan pengecatan semprot.",
   usage: 'エアコンプレッサーで圧縮空気《あっしゅくくうき》を作《つく》って工具《こうぐ》や清掃《せいそう》に使用《しよう》する（hasilkan udara bertekanan menggunakan air compressor untuk perkakas dan pembersihan）',
     _origIndex: 1291
   },
@@ -825,7 +825,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ジグソー",
   type: "vocab",
   id_text: "Jigsaw / gergaji listrik",
-  desc: "Gergaji listrik untuk memotong bentuk melengkung atau pola kompleks pada kayu,",
+  desc: "Gergaji listrik untuk memotong bentuk melengkung atau pola kompleks pada kayu, logam tipis, atau plastik.",
   usage: 'ジグソーで曲線《きょくせん》やサークルカットを板材《いたざい》に行《おこな》う（lakukan pemotongan kurva dan lingkaran pada kayu menggunakan jigsaw）',
     _origIndex: 1294
   },
@@ -861,7 +861,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "施工計画書《せこうけいかくしょ》",
   type: "vocab",
   id_text: "Dokumen rencana",
-  desc: "Dokumen pra-konstruksi yang diserahkan ke pengawas, mencakup metode, jadwal,",
+  desc: "Dokumen pra-konstruksi yang diserahkan ke pengawas, mencakup metode, jadwal, dan tenaga kerja.",
   usage: '施工計画書《せこうけいかくしょ》を元請け《もとうけ》に提出《ていしゅつ》して承認《しょうにん》を得る（ajukan dokumen rencana pelaksanaan ke kontraktor utama untuk mendapat persetujuan）',
     _origIndex: 1300
   },
@@ -945,7 +945,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "共通仮設《きょうつうかせつ》",
   type: "vocab",
   id_text: "Pekerjaan sementara bersama",
-  desc: "Fasilitas sementara yang dipakai semua pihak di proyek (kantor, toilet,",
+  desc: "Fasilitas sementara yang dipakai semua pihak di proyek (kantor, toilet, gudang).",
   usage: '共通仮設《きょうつうかせつ》（仮設事務所《かせつじむしょ》・仮設トイレ）を全工区《ぜんこうく》で共有《きょうゆう》する（bagikan pekerjaan sementara bersama seperti kantor lapangan dan toilet untuk seluruh zona kerja）',
     _origIndex: 1309
   },
@@ -981,7 +981,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "施工図《せこうず》",
   type: "vocab",
   id_text: "Gambar kerja lapangan",
-  desc: "Gambar detail yang dibuat kontraktor dari dokumen desain untuk digunakan di",
+  desc: "Gambar detail yang dibuat kontraktor dari dokumen desain untuk digunakan di lapangan saat pelaksanaan.",
   usage: '施工図《せこうず》で実際《じっさい》の施工方法《せこうほうほう》と寸法《すんぽう》を確認《かくにん》する（periksa metode dan dimensi pelaksanaan aktual melalui shop drawing）',
     _origIndex: 1313
   },
@@ -1005,7 +1005,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "工事日報《こうじにっぽう》",
   type: "vocab",
   id_text: "Laporan harian konstruksi",
-  desc: "Laporan harian yang mencatat jenis pekerjaan, jumlah tenaga kerja, cuaca, dan",
+  desc: "Laporan harian yang mencatat jenis pekerjaan, jumlah tenaga kerja, cuaca, dan progres pekerjaan.",
   usage: '工事日報《こうじにっぽう》に当日《とうじつ》の作業《さぎょう》内容《ないよう》と進捗《しんちょく》を記録《きろく》する（catat pekerjaan dan kemajuan hari itu dalam laporan harian konstruksi）',
     _origIndex: 1315
   },
@@ -1053,7 +1053,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "品質管理計画書《ひんしつかんりけいかくしょ》",
   type: "vocab",
   id_text: "Rencana manajemen",
-  desc: "Dokumen yang menetapkan item inspeksi, frekuensi, penanggung jawab, dan",
+  desc: "Dokumen yang menetapkan item inspeksi, frekuensi, penanggung jawab, dan standar penerimaan.",
   usage: '品質管理計画書《ひんしつかんりけいかくしょ》に検査《けんさ》項目《こうもく》・頻度《ひんど》・基準《きじゅん》を定める（tentukan item pemeriksaan, frekuensi, dan standar dalam rencana manajemen kualitas）',
     _origIndex: 1322
   },
@@ -1363,7 +1363,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "液状化《えきじょうか》",
   type: "vocab",
   id_text: "Likuefaksi tanah",
-  desc: "Tanah berpasir jenuh air berperilaku seperti cairan saat gempa.\nStruktur di",
+  desc: "Tanah berpasir jenuh air berperilaku seperti cairan saat gempa.\nStruktur di atasnya bisa ambles atau miring.",
   usage: '液状化《えきじょうか》のリスクが高《たか》い地盤《じばん》では杭基礎《くいきそ》を採用《さいよう》する（terapkan pondasi tiang pada tanah yang berisiko tinggi mengalami likuefaksi）',
     _origIndex: 1499
   },
@@ -1411,7 +1411,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "スペーサー",
   type: "vocab",
   id_text: "Penyangga tulangan",
-  desc: "Benda kecil dari mortar atau plastik yang diletakkan di bawah tulangan untuk",
+  desc: "Benda kecil dari mortar atau plastik yang diletakkan di bawah tulangan untuk menjaga selimut beton (cover).",
   usage: "スペーサーを敷《し》く（meletakkan beton tahu）",
   _origIndex: 1563
   },
@@ -1459,7 +1459,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "鉄筋探査機《てっきんたんさき》",
   type: "vocab",
   id_text: "Alat deteksi tulangan",
-  desc: "Alat yang menggunakan gelombang elektromagnetik untuk mendeteksi posisi dan",
+  desc: "Alat yang menggunakan gelombang elektromagnetik untuk mendeteksi posisi dan kedalaman tulangan dalam beton.",
   usage: "鉄筋探査機《てっきんたんさき》で調査《ちょうさ》する（menginspeksi dengan rebar detector）",
   _origIndex: 1567
   },
@@ -1507,7 +1507,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "天井下地《てんじょうしたじ》",
   type: "vocab",
   id_text: "Rangka substrat plafon",
-  desc: "Rangka plafon terdiri dari penggantung (野縁受《のぶちう》け) dan besi furring (野縁《のぶち》),",
+  desc: "Rangka plafon terdiri dari penggantung (野縁受《のぶちう》け) dan besi furring (野縁《のぶち》), serta hanger dari pelat lantai atas.",
   usage: "天井下地《てんじょうしたじ》を組《く》む（memasang rangka plafon）",
   _origIndex: 1571
   },
@@ -1531,7 +1531,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "下地処理《したじしょり》",
   type: "vocab",
   id_text: "Persiapan substrat",
-  desc: "Pembersihan substrat dari kotoran, cat lama, dan karat sebelum pengecatan atau",
+  desc: "Pembersihan substrat dari kotoran, cat lama, dan karat sebelum pengecatan atau pelapisan lainnya.",
   usage: "下地処理《したじしょり》する（melakukan surface preparation）",
   _origIndex: 1573
   },
@@ -1555,7 +1555,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "ランナー",
   type: "vocab",
   id_text: "Runner / rel horizontal",
-  desc: "Profil baja berbentuk U yang dipasang di lantai dan plafon sebagai landasan dan",
+  desc: "Profil baja berbentuk U yang dipasang di lantai dan plafon sebagai landasan dan pemandu pemasangan stud.",
   usage: "ランナーを固定《こてい》する（memasang runner）",
   _origIndex: 1575
   },
@@ -1615,7 +1615,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "劣化《れっか》",
   type: "vocab",
   id_text: "Degradasi material",
-  desc: "Penurunan kualitas material seiring waktu karena faktor lingkungan seperti UV,",
+  desc: "Penurunan kualitas material seiring waktu karena faktor lingkungan seperti UV, kelembaban, dan suhu ekstrem.",
   usage: "劣化《れっか》する（mengalami degradasi）",
   _origIndex: 768
   },
@@ -1663,7 +1663,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "直後《ちょくご》",
   type: "vocab",
   id_text: "Segera setelah",
-  desc: "Menyatakan waktu yang sangat dekat setelah suatu kejadian. Lebih langsung dari",
+  desc: "Menyatakan waktu yang sangat dekat setelah suatu kejadian. Lebih langsung dari 後《ご》 yang lebih umum.",
   usage: '作業終了《さぎょうしゅうりょう》直後《ちょくご》に片付《かたづ》ける（bersihkan segera setelah pekerjaan selesai）',
     _origIndex: 810
   },
@@ -1699,7 +1699,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "音《おと》",
   type: "vocab",
   id_text: "Suara / bunyi",
-  desc: "Pengecoh Q16 — inspeksi wajib setelah pengelasan bukan pemeriksaan suara,",
+  desc: "Pengecoh Q16 — inspeksi wajib setelah pengelasan bukan pemeriksaan suara, melainkan pemeriksaan visual dan penetrant test.",
   usage: '機器《きき》から異常《いじょう》な音《おと》がしたら運転《うんてん》を止《と》めて点検《てんけん》する（hentikan operasi dan periksa jika terdengar suara tidak normal dari peralatan）',
     _origIndex: 845
   },
@@ -1711,7 +1711,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "裸《はだか》",
   type: "vocab",
   id_text: "Tanpa pelindung",
-  desc: "Pengecoh Q1 — mengubur pipa tanpa pelindung apapun adalah cara terburuk di",
+  desc: "Pengecoh Q1 — mengubur pipa tanpa pelindung apapun adalah cara terburuk di antara metode penguburan pipa.",
   usage: '裸《はだか》の電線《でんせん》は危険《きけん》なので必《かなら》ず絶縁《ぜつえん》処理《しょり》をする（kabel tanpa insulasi berbahaya, selalu lakukan perlindungan insulasi）',
     _origIndex: 850
   },
@@ -1735,7 +1735,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "計算《けいさん》",
   type: "vocab",
   id_text: "Perhitungan / kalkulasi",
-  desc: "Pengecoh Q8 — sebelum mengoperasikan pipa gas bukan waktunya menghitung debit,",
+  desc: "Pengecoh Q8 — sebelum mengoperasikan pipa gas bukan waktunya menghitung debit, melainkan waktunya memeriksa tekanan.",
   usage: '配管《はいかん》の圧力損失《あつりょくそんしつ》を計算《けいさん》してポンプの能力《のうりょく》を選定《せんてい》する（hitung pressure drop pada pipa untuk memilih kapasitas pompa yang sesuai）',
     _origIndex: 853
   },
@@ -1771,7 +1771,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "竣工《しゅんこう》",
   type: "vocab",
   id_text: "Selesai konstruksi",
-  desc: "Penyelesaian seluruh pekerjaan konstruksi. Setelah lulus inspeksi akhir,",
+  desc: "Penyelesaian seluruh pekerjaan konstruksi. Setelah lulus inspeksi akhir, dilakukan serah terima ke pemilik.",
   usage: "竣工《しゅんこう》する（menyelesaikan konstruksi）",
   _origIndex: 919
   },
@@ -1950,7 +1950,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "耳栓《みみせん》",
   type: "vocab",
   id_text: "Penyumbat telinga",
-  desc: "Wajib pakai pelindung telinga di lingkungan kebisingan >85 dB (gerinda,",
+  desc: "Wajib pakai pelindung telinga di lingkungan kebisingan >85 dB (gerinda, kompresor, dll).",
   usage: '騒音《そうおん》レベルが85dBを超《こ》える作業《さぎょう》では耳栓《みみせん》を使用《しよう》する（gunakan earplug saat level kebisingan melebihi 85 dB）',
     _origIndex: 1402
   },
@@ -2070,7 +2070,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "解体《かいたい》",
   type: "vocab",
   id_text: "Pembongkaran / demolisi",
-  desc: "Pekerjaan membongkar bangunan yang sudah ada.\nWaspadai asbes saat",
+  desc: "Pekerjaan membongkar bangunan yang sudah ada.\nWaspadai asbes saat membongkar bangunan lama.",
   usage: '解体《かいたい》工事《こうじ》ではアスベストの有無《うむ》を事前《じぜん》に確認《かくにん》する（periksa ada tidaknya asbes sebelum melakukan pekerjaan pembongkaran）',
     _origIndex: 963
   },
@@ -2130,7 +2130,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "災害《さいがい》",
   type: "vocab",
   id_text: "Kecelakaan / bencana",
-  desc: "Kecelakaan atau bencana di tempat kerja.\n3 terbesar di konstruksi: jatuh,",
+  desc: "Kecelakaan atau bencana di tempat kerja.\n3 terbesar di konstruksi: jatuh, tertimpa benda, dan terjepit mesin.",
   usage: '労働《ろうどう》災害《さいがい》が発生《はっせい》したら直《ただ》ちに報告《ほうこく》する（laporkan segera jika terjadi kecelakaan kerja）',
     _origIndex: 975
   },
@@ -3349,7 +3349,7 @@ export const CARDS_VOCAB_SUPPLEMENTARY = [
   jp: "起こる《おこる》",
   type: "vocab",
   id_text: "Terjadi / timbul",
-  desc: "起《お》きこる = terjadi (intransitif); 起《お》きこす = menyebabkan (transitif).\nPola soal:",
+  desc: "起《お》きこる = terjadi (intransitif); 起《お》きこす = menyebabkan (transitif).\nPola soal: subjek + が + 起こる (terjadi dengan sendirinya) vs subjek + が + 起こす (menyebabkan terjadinya).",
   usage: "事故《じこ》が起《お》こる（kecelakaan terjadi）",
   _origIndex: 886
   },
