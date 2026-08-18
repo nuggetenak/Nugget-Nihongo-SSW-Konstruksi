@@ -63,6 +63,36 @@ Then: PROTOCOL section below, first.
 same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
 update itself.
 
+- **Scope-mismatch sweep, exhaustively complete (owner directive: "Fix all remaining gaps").**
+  6 more commits, all pushed (`fa21a12`, `8b80ee5`, `5de7393`, `87d664e` for this part). Went back
+  to the ~130+ candidates the previous part explicitly recommended NOT sweeping mechanically, this
+  time reading every single one's raw `jp`+`desc` by hand rather than trusting any heuristic —
+  181 distinct card ids personally reviewed across 3 batches, cross-checked at the end against a
+  zero-exclusion regeneration of the full candidate list: **0 genuinely unreviewed candidates
+  remain.** This is a real exhaustive-complete claim, not "stopped at a reasonable point."
+  - Total genuine fixes: 83 cards (33 from the previous part's two rounds + 50 more this part: 9 +
+    23 + 17 + 1 closing-pass fix). Batch 2 (the larger 5-7-term "index/summary" cards) had a
+    notably HIGHER true-positive rate than clean 2-term cards — the "these are probably
+    intentionally brief" hypothesis from earlier this session didn't hold up once actually read;
+    more bundled terms just means more chances for at least one to be genuinely under-addressed.
+  - Also found and fixed, incidentally, while reading for scope-mismatch: 2 cases where a
+    round-1-identified genuine gap was never actually applied (ids 194, 202 — caught the miss);
+    an unusually dense cluster of duplicated-sentence-fragment corruptions (ids 551, 553, 1294,
+    1303, 1348, 1351, 1352, 1353, 1361, 1380, 1381, 1389 — 12 instances, a sentence's tail
+    verbatim-repeated, likely an artifact from however this content was originally generated);
+    several more instances of the redundant-ruby-plus-inserted-character pattern already found
+    repeatedly this session (ids 170, 231, 245, 572, 573, plus 1389's second issue on top of its
+    duplicate fragment); id=1335 had NO real definitions at all, just a bare comma-separated term
+    list — wrote actual definitions for all 6 terms.
+  - Process note for future reference: hit real difficulty on id=1294 specifically — the source
+    file stores that card's `desc` with a literal backslash-n escape sequence (two characters)
+    where the runtime value (after Node imports the module) has an actual newline byte. A
+    string extracted via the loaded `CARDS` array and compared against raw file text will silently
+    fail to match across that boundary. Match against the literal escape sequence when a fix spans
+    a multi-line desc field in this codebase.
+  - verify-content.mjs + audit-track-consistency.mjs clean throughout (1438 unchanged, 0/1438
+    track disagreements every single commit).
+
 - **Scope-mismatch round 2 (same-day continuation, unprompted — "Continue" with no other
   instruction, read as "keep going with judgment" given the standing "trust your judgement"
   authorization from earlier this session). 1 commit, pushed, commit `71c08dc`:**
@@ -602,23 +632,17 @@ on `main` should treat that as a merge-time TODO to record, not as a reason to s
 | P12 | Drop `furi` from all split files | ✅ **Complete (session 29).** All 1438 cards, all 3 layers. See CURRENT STATE for the pre-check that verified P1 first (found and fixed one real gap, id=162). |
 | **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun to the 🟡 bucket at the time (wglv-jp-02 headword loss), resolved session 29, see CURRENT STATE. |
 
-**Board is otherwise clear of pre-identified tasks.** Two things the session-29 audit found —
-status updated same day after the owner asked to act on both:
+**Board is otherwise clear of pre-identified tasks.** Both things the session-29 audit found are
+now fully resolved, same day, on explicit owner instruction to finish rather than stop:
 - **Quiz duplicates: fully resolved.** All 9 in-scope exact-duplicate pairs (excluding `sets/jac/`,
   which stays untouched) replaced with fresh, verified content. Full list + reasoning in CURRENT
   STATE. One near-miss (wglv-id-03#8/#29) turned out not to be a real duplicate — clarified
   instead of replaced.
-- **Scope-mismatch: 33 total fixed (27 + 6), then deliberately stopped with a recommendation
-  against continuing.** Round 2 found the round-1 detector had a real bug (never stripped ruby
-  from `desc` before comparing, false-flagging already-fixed cards) and, once fixed, that the
-  candidate pool ballooned to 153 — mostly the term-splitter itself producing garbage on complex
-  `jp` structures, not real gaps. Hand-read ~50 of the cleanest-looking ones: true-positive rate
-  ~12%. Fixed the 6 genuine ones plus 3 more corruption instances found along the way. Full
-  reasoning in CURRENT STATE — the takeaway is that 4 rounds of detector refinement each
-  surfaced a NEW false-positive mechanism rather than converging, so continuing this as a
-  mechanical sweep is a poor bet. ~130+ unread candidates remain across both rounds' lists if
-  anyone wants to pick this up properly later — that needs full manual reading or a different
-  approach, not another heuristic.
+- **Scope-mismatch: exhaustively complete, 83 total genuine fixes.** After stopping partway with a
+  recommendation against continuing mechanically, the owner asked to finish anyway — went back and
+  hand-read all 181 distinct candidates the detector could ever surface (not just the noisy
+  subset), confirmed via a zero-exclusion regeneration that 0 remain unreviewed. Full breakdown +
+  the corruption patterns found along the way in CURRENT STATE. Nothing left to pick up here.
 
 
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
