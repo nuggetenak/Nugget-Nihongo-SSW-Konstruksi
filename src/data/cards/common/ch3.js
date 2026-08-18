@@ -73,7 +73,7 @@ export const CARDS_CH3 = [
   jp: "資格の3種類《しかくのさんしゅるい》：国家免許《こっかめんきょ》・技能講習《ぎのうこうしゅう》・特別教育《とくべつきょういく》",
   type: 'vocab',
   id_text: "3 tingkat kualifikasi K3",
-  desc: "①国家《こっか》免許《めんきょ》=lisensi negara. ②技能《ぎのう》講習《こうしゅう》修了《しゅうりょう》証《しょう》=lulus pelatihan terdaftar.",
+  desc: "①国家《こっか》免許《めんきょ》=lisensi negara. ②技能《ぎのう》講習《こうしゅう》修了《しゅうりょう》証《しょう》=lulus pelatihan terdaftar. ③特別《とくべつ》教育《きょういく》=pelatihan singkat wajib perusahaan untuk pekerjaan berisiko tertentu.",
   usage: '国家免許《こっかめんきょ》・技能講習《ぎのうこうしゅう》・特別教育《とくべつきょういく》の3種類《しゅるい》の資格区分《しかくくぶん》を覚《おぼ》える（hafalkan 3 kategori kualifikasi: izin nasional, pelatihan teknis, dan pendidikan khusus）',
     _origIndex: 200
   },
@@ -322,7 +322,7 @@ export const CARDS_CH3 = [
   jp: "溶接《ようせつ》・酸欠《さんけつ》・発破《はっぱ》・足場の資格区分《しかくくぶん》",
   type: 'vocab',
   id_text: "Kualifikasi las/O₂",
-  desc: "ガス溶接《ようせつ》者《もの》=技能《ぎのう》講習《こうしゅう》. アーク溶接《ようせつ》者《もの》=特《とく》別《とくべつ》教育《きょういく》.",
+  desc: "ガス溶接《ようせつ》者《もの》=技能《ぎのう》講習《こうしゅう》. アーク溶接《ようせつ》者《もの》=特《とく》別《とくべつ》教育《きょういく》. 酸欠《さんけつ》作業《さぎょう》主任者《しゅにんしゃ》=wajib untuk kerja di ruang tertutup. 発破《はっぱ》技士《ぎし》=wajib untuk kerja peledakan. 足場《あしば》の組立《くみたて》等《とう》作業《さぎょう》主任者《しゅにんしゃ》=wajib untuk perancah tinggi.",
   usage: '溶接《ようせつ》・発破《はっぱ》・足場組立《あしばくみたて》には各《かく》資格《しかく》区分《くぶん》がある（terdapat kategori kualifikasi terpisah untuk pengelasan, peledakan, dan pemasangan perancah）',
     _origIndex: 647
   },
@@ -1100,7 +1100,7 @@ export const CARDS_CH3 = [
   jp: "左官工事《さかんこうじ》（研《と》ぎ出《だ》し・洗《あら》い出《だ》し・漆喰《しっくい》）",
   type: 'vocab',
   id_text: "Plester + 2 teknik",
-  desc: "左官《さかん》工事《こうじ》=oles 壁土《かべつち》/モルタル/漆喰《しっくい》 pakai こて.",
+  desc: "左官《さかん》工事《こうじ》=oles 壁土《かべつち》/モルタル/漆喰《しっくい》 pakai こて. 研《と》ぎ出《だ》し=finishing dipoles hingga mengkilap (mirip terrazzo). 洗《あら》い出《だ》し=finishing disemprot air agar agregat kerikil terlihat di permukaan.",
   usage: '研《と》ぎ出し・洗い出し・漆喰《しっくい》塗りの3技法《さんぎほう》で左官仕上げ《さかんしあげ》をする（lakukan finishing plester dengan 3 teknik: poles, cuci, dan plester kapur）',
     _origIndex: 1541
   },

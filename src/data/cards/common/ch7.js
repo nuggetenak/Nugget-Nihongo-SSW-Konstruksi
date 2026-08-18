@@ -72,7 +72,7 @@ export const CARDS_CH7 = [
   jp: "激突され《げきとつされ》/ はさまれ・巻き込まれ《まきこまれ》",
   type: 'vocab',
   id_text: "Tertabrak + terjepit/terlibas",
-  desc: "激突《げきとつ》され = tertabrak kendaraan berat atau bucket crane saat berputar.",
+  desc: "激突《げきとつ》され = tertabrak kendaraan berat atau bucket crane saat berputar. はさまれ = terjepit di antara dua benda. 巻《ま》き込《こ》まれ = tertarik masuk ke mesin berputar.",
   usage: '重機《じゅうき》の旋回《せんかい》範囲《はんい》内《ない》に立《た》ち入《い》らない（jangan memasuki area putar alat berat）',
     _origIndex: 586
   },
@@ -190,7 +190,7 @@ export const CARDS_CH7 = [
   jp: "保護マスク《ほごますく》・じん肺《じんぱい》（ほごますく・じんぱい）",
   type: 'vocab',
   id_text: "Masker debu",
-  desc: "じん肺《はい》 = kerusakan paru akibat debu logam/batu jangka panjang saat las busur atau potong batu.",
+  desc: "保護《ほご》マスク = masker pelindung dari debu logam/batu. じん肺《はい》 = kerusakan paru akibat debu logam/batu jangka panjang saat las busur atau potong batu.",
   usage: '粉塵《ふんじん》が出《で》る作業《さぎょう》では保護マスク《ほごますく》を着用《ちゃくよう》してじん肺《じんぱい》を防《ふせ》ぐ（kenakan masker pelindung saat ada debu untuk mencegah pneumoconiosis）',
     _origIndex: 598
   },

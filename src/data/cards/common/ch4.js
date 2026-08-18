@@ -52,7 +52,7 @@ export const CARDS_CH4 = [
   jp: "立て墨《たてずみ》・仕上げ墨《しあげずみ》",
   type: 'vocab',
   id_text: "Garis vertikal / Garis",
-  desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom.",
+  desc: "立《た》てて墨《たてずみ》=garis vertikal di dinding/kolom. 仕上《しあ》げ墨《ずみ》=garis acuan posisi akhir setelah material finishing dipasang.",
   usage: '壁《かべ》に立《た》て墨《たてずみ》を引《ひ》く（membuat garis vertikal di dinding）',
     _origIndex: 241
   },
@@ -74,7 +74,7 @@ export const CARDS_CH4 = [
   jp: "矩を振る《かねをふる》・墨付け《すみつけ》",
   type: 'vocab',
   id_text: "Buat sudut 90° + markah garis",
-  desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》しし《すみだし》.",
+  desc: "矩《かね》を振《ふ》りる=membuat garis sudut 90° saat 墨出《すみだ》し. 墨付《すみつ》け=menandai garis potong pada material berdasarkan 墨出し.",
   usage: '矩《かね》を振《ふ》って直角《ちょっかく》を出《だ》す（membuat sudut siku-siku dengan menggunakan try square）',
     _origIndex: 243
   },
@@ -107,7 +107,7 @@ export const CARDS_CH4 = [
   jp: "擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》",
   type: 'vocab',
   id_text: "Dinding penahan + turap sheet pile",
-  desc: "擁壁《ようへき》=dinding penahan tanah. 矢板《やいた》=papan penahan tanah.",
+  desc: "擁壁《ようへき》=dinding penahan tanah. 矢板《やいた》=papan penahan tanah. 鋼矢板《こうやいた》=矢板 dari baja, lebih kuat, bisa dicabut & dipakai ulang.",
   usage: '擁壁《ようへき》・矢板《やいた》・鋼矢板《こうやいた》で崩壊《ほうかい》を防《ふせ》ぐ（cegah longsoran menggunakan tembok penahan, sheet pile kayu, dan sheet pile baja）',
     _origIndex: 250
   },
@@ -118,7 +118,7 @@ export const CARDS_CH4 = [
   jp: "釜場《かまば》・水替え《みずかえ》・万棒《まんぼう》",
   type: 'vocab',
   id_text: "Lubang pompa / pemompaan",
-  desc: "釜場《かまば》=lubang di dasar galian untuk pompa. 水替《みずか》ええ《みずかえ》=pompa air menggenang.",
+  desc: "釜場《かまば》=lubang di dasar galian untuk pompa. 水替《みずか》え《みずかえ》=pompa air menggenang. 万棒《まんぼう》=alat perata tanah manual bergagang panjang.",
   usage: '釜場《かまば》に水《みず》を集《あつ》めて万棒《まんぼう》で水替え《みずかえ》をする（kumpulkan air di lubang pompa dan sedot menggunakan pompa）',
     _origIndex: 252
   },
@@ -129,7 +129,7 @@ export const CARDS_CH4 = [
   jp: "地業《じぎょう》・ベタ基礎《べたきそ》・フーチング・杭基礎《くいきそ》",
   type: 'vocab',
   id_text: "Pekerjaan pondasi / 3",
-  desc: "地業《じぎょう》=pekerjaan di bawah slab pondasi. ベタ基礎《きそ》=cor seluruh dasar.",
+  desc: "地業《じぎょう》=pekerjaan di bawah slab pondasi. ベタ基礎《きそ》=cor seluruh dasar. フーチング=pelat beton lebar di bawah kolom untuk sebar beban. 杭基礎《くいきそ》=pondasi tiang pancang untuk tanah lunak.",
   usage: '地業《じぎょう》を施《ほどこ》した上《うえ》にベタ基礎《べたきそ》を打《う》つ（cor pondasi pelat di atas pekerjaan tanah dasar）',
     _origIndex: 253
   },
@@ -151,7 +151,7 @@ export const CARDS_CH4 = [
   jp: "足場の種類《あしばのしゅるい》：枠組み《わくぐみ》・単管《たんかん》・くさび",
   type: 'vocab',
   id_text: "Jenis perancah",
-  desc: "枠組《わくぐ》み=rangka prefabrikasi. 単管《たんかん》=pipa tunggal, fleksibel.",
+  desc: "枠組《わくぐ》み=rangka prefabrikasi. 単管《たんかん》=pipa tunggal, fleksibel. くさび=perancah sistem pasak/wedge, cepat dipasang-lepas.",
   usage: '枠組み足場《わくぐみあしば》・単管足場《たんかんあしば》・くさび足場《あしば》の特徴《とくちょう》を理解《りかい》する（pahami karakteristik scaffold jenis frame, single pipe, dan wedge）',
     _origIndex: 256
   },
@@ -162,7 +162,7 @@ export const CARDS_CH4 = [
   jp: "作業床《さぎょうゆか》・仮囲い《かりがこい》",
   type: 'vocab',
   id_text: "Lantai kerja + pagar sementara",
-  desc: "作業床《さぎょうゆか》=lantai dari papan tempat pekerja berdiri di perancah.",
+  desc: "作業床《さぎょうゆか》=lantai dari papan tempat pekerja berdiri di perancah. 仮囲《かりがこ》い=pagar sementara di sekeliling area proyek.",
   usage: '作業床《さぎょうゆか》に隙間《すきま》がないか確認《かくにん》してから作業《さぎょう》する（periksa tidak ada celah di lantai kerja sebelum mulai bekerja）',
     _origIndex: 257
   },
@@ -217,7 +217,7 @@ export const CARDS_CH4 = [
   jp: "納まり《おさまり》・取合い《とりあい》",
   type: 'vocab',
   id_text: "Kerapian + antarmuka pemasangan",
-  desc: "納《おさ》めまり《おさまり》=keserasian tata letak elemen.",
+  desc: "納《おさ》まり《おさまり》=keserasian tata letak elemen. 取合《とりあ》い=titik pertemuan dua elemen/pekerjaan berbeda.",
   usage: '納《おさ》まりを確認《かくにん》してから取《と》り付《つ》ける（periksa kerapian pemasangan sebelum dipasang）',
     _origIndex: 264
   },
@@ -239,7 +239,7 @@ export const CARDS_CH4 = [
   jp: "駄目《だめ》・手直し《てなおし》・手戻り《てもどり》・段取り《だんどり》",
   type: 'vocab',
   id_text: "Sisa pekerjaan / koreksi",
-  desc: "駄目《だめ》=pekerjaan terlewat saat hampir finishing. 手直《てなお》しし《てなおし》=koreksi sebagian.",
+  desc: "駄目《だめ》=pekerjaan terlewat saat hampir finishing. 手直《てなお》し《てなおし》=koreksi sebagian. 手戻《てもど》り=pengerjaan ulang akibat kesalahan besar. 段取《だんど》り=persiapan sebelum mulai kerja.",
   usage: '駄目《だめ》を翌日《よくじつ》までに手直し《てなおし》する（selesaikan pekerjaan sisa sebelum keesokan hari）',
     _origIndex: 266
   },
@@ -348,7 +348,7 @@ export const CARDS_CH4 = [
   jp: "ベタ・ふかし《ふかす》",
   type: 'vocab',
   id_text: "Tutup seluruh permukaan",
-  desc: "ベタ=menutupi seluruh permukaan tanpa celah (contoh: ベタ塗《ぬ》り).",
+  desc: "ベタ=menutupi seluruh permukaan tanpa celah (contoh: ベタ塗《ぬ》り). ふかし=menambah ketebalan dinding untuk menyembunyikan pipa/saluran di dalamnya.",
   usage: 'ふかして下地《したじ》を均一《きんいつ》にしてから仕上げ《しあげ》る（ratakan landasan dengan lapisan penutup sebelum finishing）',
     _origIndex: 289
   },
@@ -391,7 +391,7 @@ export const CARDS_CH4 = [
   jp: "ノロ・アンコ",
   type: 'vocab',
   id_text: "Adukan encer + filler (noro/anko)",
-  desc: "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting.",
+  desc: "ノロ=campuran semen+air sangat encer; juga bocoran beton dari celah bekisting. アンコ=material pengisi celah/rongga (misalnya di antara lapisan bekisting).",
   usage: 'ノロを水《みず》で薄《うす》めてはいけない（jangan encerkan slurry beton dengan air）',
     _origIndex: 293
   },
@@ -402,7 +402,7 @@ export const CARDS_CH4 = [
   jp: "転用《てんよう》・釘仕舞《くぎじまい》",
   type: 'vocab',
   id_text: "Pakai ulang bekisting + rapikan paku",
-  desc: "転《ころ》び用《てんよう》=memakai kembali bekisting di lokasi berbeda untuk hemat biaya.",
+  desc: "転用《てんよう》=memakai kembali bekisting di lokasi berbeda untuk hemat biaya. 釘仕舞《くぎしまい》=memastikan kepala paku tidak menonjol keluar permukaan.",
   usage: '型枠《かたわく》を転用《てんよう》して次《つぎ》の箇所《かしょ》に使《つか》う（gunakan kembali bekisting untuk area berikutnya）',
     _origIndex: 294
   },
@@ -424,7 +424,7 @@ export const CARDS_CH4 = [
   jp: "バリ・バリ取り《ばりばりとり》",
   type: 'vocab',
   id_text: "Gerinda sisa pemotongan",
-  desc: "バリ=tonjolan sisa material di tepi logam/plastik akibat pemotongan.",
+  desc: "バリ=tonjolan sisa material di tepi logam/plastik akibat pemotongan. バリ取《と》り=proses menghilangkan バリ dari tepi material.",
   usage: 'バリ取り《ばりとり》をしてから寸法《すんぽう》を確認《かくにん》する（hilangkan gerinda lalu periksa dimensinya）',
     _origIndex: 304
   },
@@ -595,7 +595,7 @@ export const CARDS_CH4 = [
   jp: "墨出し《すみだし》・基準墨《きじゅんずみ》・通り芯《とおりしん》",
   type: 'vocab',
   id_text: "3 istilah dasar garis",
-  desc: "墨出《すみだ》し=menarik garis referensi konstruksi. 基準《きじゅん》墨《ずみ》=garis referensi utama bangunan.",
+  desc: "墨出《すみだ》し=menarik garis referensi konstruksi. 基準《きじゅん》墨《ずみ》=garis referensi utama bangunan. 通《とお》り芯《しん》=garis referensi utama yang melalui pusat kolom/dinding di seluruh bangunan.",
   usage: '墨出し《すみだし》・基準墨《きじゅんずみ》・通り芯《とおりしん》の3語《さんご》をセットで覚《おぼ》える（hafalkan 3 istilah dasar sumidashi sebagai satu set）',
     _origIndex: 658
   },

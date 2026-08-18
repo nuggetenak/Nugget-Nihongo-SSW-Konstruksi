@@ -656,7 +656,7 @@ export const CARDS_CH5 = [
   jp: "やすり（金属《きんぞく》用《よう》/ 木工《もっこう》用《よう》）+ ワイヤーブラシ",
   type: 'vocab',
   id_text: "Kikir + Wire brush",
-  desc: "やすり = kikir mengamplas logam atau kayu, berbagai jenis sesuai material.",
+  desc: "やすり = kikir mengamplas logam atau kayu, berbagai jenis sesuai material. ワイヤーブラシ = sikat kawat untuk membersihkan karat/kotoran dari logam.",
   usage: 'やすりでバリを取《と》って仕上《しあ》げる（hilangkan gerinda dan haluskan menggunakan kikir）',
     _origIndex: 448
   },
@@ -689,7 +689,7 @@ export const CARDS_CH5 = [
   jp: "ウェス・バケツ・ひしゃく",
   type: 'vocab',
   id_text: "Kain lap oli / Ember",
-  desc: "ウェス = kain mengelap oli atau bahan kimia.",
+  desc: "ウェス = kain mengelap oli atau bahan kimia. バケツ = ember untuk menampung air/adukan. ひしゃく = gayung/centong untuk menuang cairan.",
   usage: 'ウェスで油《あぶら》を拭《ふ》き取《と》る（menyeka minyak dengan kain lap）',
     _origIndex: 451
   },
@@ -799,7 +799,7 @@ export const CARDS_CH5 = [
   jp: "ボルト・ナット・ワッシャー",
   type: 'vocab',
   id_text: "Bolt + nut + washer",
-  desc: "ボルト (おねじ) + ナット (めねじ) = sepasang pengunci.",
+  desc: "ボルト (おねじ) + ナット (めねじ) = sepasang pengunci. ワッシャー = cincin pipih pelindung permukaan, dipasang di antara ボルト/ナット dan material.",
   usage: 'ボルトとナットにワッシャーを挟《はさ》んで締結《ていけつ》する（pasang washer di antara baut dan mur lalu kencangkan）',
     _origIndex: 482
   },
@@ -810,7 +810,7 @@ export const CARDS_CH5 = [
   jp: "レベル（水準《すいじゅん》測量機《そくりょうき》）/ レーザーレベル",
   type: 'vocab',
   id_text: "Alat ukur ketinggian",
-  desc: "レベル=alat survei ketinggian, dipasang di tripod, diatur manual. Versi otomatis: オートレベル.",
+  desc: "レベル=alat survei ketinggian, dipasang di tripod, diatur manual. Versi otomatis: オートレベル. レーザーレベル=versi modern, memancarkan garis laser untuk cek ketinggian tanpa perlu dibaca lewat lensa.",
   usage: 'レーザーレベルで床《ゆか》の高《たか》さを確認《かくにん》する（periksa ketinggian lantai menggunakan laser level）',
     _origIndex: 708
   },
@@ -843,7 +843,7 @@ export const CARDS_CH5 = [
   jp: "ブラシ（汚《よご》れ落《お》とし）・スポンジ",
   type: 'vocab',
   id_text: "Sikat pembersih / Spons",
-  desc: "ブラシ=sikat untuk menggosok kotoran; membersihkan sisa adukan (ノロ) yang meluap saat pasang batu.",
+  desc: "ブラシ=sikat untuk menggosok kotoran; membersihkan sisa adukan (ノロ) yang meluap saat pasang batu. スポンジ=spons untuk mengelap permukaan basah.",
   usage: 'ブラシで配管《はいかん》の表面《ひょうめん》の錆《さび》を落《お》とす（hilangkan karat pada permukaan pipa menggunakan sikat）',
     _origIndex: 712
   },

@@ -171,7 +171,7 @@ export const CARDS_CH6 = [
   jp: "基準墨《きじゅんずみ》・親墨《おやずみ》",
   type: 'vocab',
   id_text: "3 jenis sumidashi",
-  desc: "①基準《きじゅん》墨《すみ》 = acuan posisi, ketinggian, dan通《とお》り芯《しん》.",
+  desc: "①基準《きじゅん》墨《すみ》 = acuan posisi, ketinggian, dan通《とお》り芯《しん》. ②親墨《おやずみ》 = garis acuan utama, sumber semua garis referensi lainnya.",
   usage: '親墨《おやずみ》・基準墨《きじゅんずみ》・逃げ墨《にげずみ》の3種類《さんしゅるい》の墨《すみ》を理解《りかい》する（pahami 3 jenis garis sumidashi: garis induk, garis referensi, dan garis offset）',
     _origIndex: 495
   },
@@ -303,7 +303,7 @@ export const CARDS_CH6 = [
   jp: "ケガキ針 / デバイダ《けがきはりでばいだ》（けがきばり / デバイダ）",
   type: 'vocab',
   id_text: "Jarum garis / jangka",
-  desc: "ケガキ針《はり》 = jarum untuk menggambar garis tanda pada plat logam (gunakan bersama penggaris logam).",
+  desc: "ケガキ針《はり》 = jarum untuk menggambar garis tanda pada plat logam (gunakan bersama penggaris logam). デバイダ = jangka/kompas logam untuk mengukur dan menandai jarak pada plat.",
   usage: 'ケガキ針《けがきはり》で金属板《きんぞくばん》に切断線《せつだんせん》を引《ひ》く（gambарkan garis potong pada pelat logam menggunakan scriber）',
     _origIndex: 536
   },
