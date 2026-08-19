@@ -28,27 +28,66 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Welcome ── */
-.heroEmoji {
-  font-size: 64px;
+.heroLogo {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
   margin-bottom: 20px;
   filter: drop-shadow(0 4px 20px rgba(245, 158, 11, 0.35));
   animation: scaleIn 0.4s ease both;
 }
 
+/* Construction-site line art. Amber fills read fine on both themes, but the
+   #92400E line work is close to the dark theme's background, so it gets a
+   brightness lift there rather than shipping a second asset — this app is
+   offline-first and a duplicate illustration is dead weight on a slow link. */
+.heroArt {
+  display: block;
+  width: 100%;
+  max-width: 430px;
+  height: auto;
+  margin: 18px auto 0;
+  opacity: 0.95;
+  animation: scaleIn 0.5s ease both;
+}
+
+[data-theme='dark'] .heroArt {
+  filter: brightness(1.55) saturate(0.9);
+}
+
+/* Short viewports: the CTA matters more than the decoration. */
+@media (max-height: 720px) {
+  .heroArt {
+    display: none;
+  }
+}
+
 @keyframes scaleIn {
-  from { transform: scale(0.80); opacity: 0; }
-  to   { transform: scale(1);    opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .heroTitle {
   font-size: 24px;
   font-weight: 800;
-  background: linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B);
+  background: linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -137,7 +176,10 @@
   background: var(--ssw-surface);
   cursor: pointer;
   text-align: left;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
   font-family: inherit;
   position: relative;
 }
@@ -335,7 +377,9 @@
   background: var(--ssw-surface);
   cursor: pointer;
   font-family: inherit;
-  transition: transform 0.1s ease, border-color 0.15s ease;
+  transition:
+    transform 0.1s ease,
+    border-color 0.15s ease;
 }
 
 .demoBtn:active,
@@ -379,7 +423,10 @@
   background: var(--ssw-surface);
   cursor: pointer;
   font-family: inherit;
-  transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.12s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
   gap: 2px;
 }
 
@@ -389,7 +436,7 @@
 
 .goalCard[data-active='true'] {
   border-color: var(--ssw-amber);
-  background: rgba(245, 158, 11, 0.10);
+  background: rgba(245, 158, 11, 0.1);
   transform: scale(1.02);
 }
 
@@ -431,14 +478,16 @@
   padding: 14px;
   border-radius: 14px;
   border: none;
-  background: linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B);
+  background: linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b);
   color: #fff;
   font-family: inherit;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
-  transition: transform 0.1s ease, opacity 0.15s ease;
+  transition:
+    transform 0.1s ease,
+    opacity 0.15s ease;
   margin-top: auto;
 }
 
@@ -475,8 +524,10 @@
   width: 7px;
   height: 7px;
   border-radius: 99px;
-  background: rgba(245, 158, 11, 0.20);
-  transition: width 0.3s ease, background 0.3s ease;
+  background: rgba(245, 158, 11, 0.2);
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
 }
 
 .dot[data-active='true'] {

@@ -97,7 +97,7 @@ panah, helm, alat` (`.png`, 512×512, transparent).
 
 ---
 
-## 3. App logo / PWA icon
+## 3. App logo / PWA icon — ALREADY EXISTS, DO NOT REGENERATE
 
 Needs to work at 48px on an Android home screen and survive maskable-icon
 cropping, so keep the mark well inside the safe area.
@@ -205,8 +205,16 @@ adapts to dark mode for free. The filled two-tone badges cannot — their colour
 is baked in and will not respond to the theme. If badges ever need to work in
 dark mode, regenerate them as single-colour line art.
 
-Still to generate: **section 3 (logo)** and **section 5 (onboarding
-illustration)**.
+**Section 5 (onboarding illustration) is done** — installed at
+`public/illustrations/onboarding-hero.png` (1024px, ~52KB). Line colour came
+back `#8F2E01` and was snapped to `#92400E` during processing. It is filled
+line art, so it cannot be masked; dark mode gets a CSS brightness lift instead
+of a second asset, which would be dead weight on a slow connection.
+
+**Section 3 (logo) is NOT needed.** The app already ships a hard-hat logo at
+`public/icons/icon-*.png`, wired into `index.html` as favicon and
+apple-touch-icon. It is now also used on the onboarding screen. Do not
+regenerate it — section 3 below is retained only for reference.
 
 ---
 

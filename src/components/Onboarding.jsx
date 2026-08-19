@@ -27,18 +27,33 @@ const GOAL_OPTIONS = [
 function StepWelcome({ onNext }) {
   return (
     <div className={S.step} data-step="welcome">
-      <div className={S.heroEmoji} aria-hidden="true">⚡</div>
+      <img
+        className={S.heroLogo}
+        src={`${import.meta.env.BASE_URL}icons/icon-192x192.png`}
+        alt=""
+        aria-hidden="true"
+        width="72"
+        height="72"
+      />
       <h1 className={S.heroTitle}>Selamat Datang!</h1>
       <div className={S.heroSub}>SSW Konstruksi · by Nugget Nihongo</div>
       <p className={S.heroDesc}>
-        Aplikasi belajar untuk ujian SSW Konstruksi Jepang jalur Lifeline
-        (ライフライン設備). 1.438 flashcard, kuis, dan simulasi ujian — semua
-        dalam Bahasa Indonesia.
+        Aplikasi belajar untuk ujian SSW Konstruksi Jepang jalur Lifeline (ライフライン設備). 1.438
+        flashcard, kuis, dan simulasi ujian — semua dalam Bahasa Indonesia.
       </p>
       <div className={S.badges}>
         <span className={S.badge}>⚡ Lifeline</span>
         <span className={S.badge}>📋 Common</span>
       </div>
+      {/* Fills the large empty gap between the badges and the CTA. Decorative,
+          so it is hidden from assistive tech and dropped on short viewports
+          where the CTA needs the room. */}
+      <img
+        className={S.heroArt}
+        src={`${import.meta.env.BASE_URL}illustrations/onboarding-hero.png`}
+        alt=""
+        aria-hidden="true"
+      />
       <button className={S.ctaPrimary} onClick={onNext}>
         Mulai →
       </button>
@@ -60,9 +75,7 @@ function StepDemo({ onNext }) {
     <div className={S.step} data-step="demo">
       <div className={S.stepEyebrow}>Langkah 1 dari 2</div>
       <h2 className={S.stepTitle}>Coba Balik Kartu Ini</h2>
-      <p className={S.stepDesc}>
-        Tap kartu di bawah untuk melihat artinya.
-      </p>
+      <p className={S.stepDesc}>Tap kartu di bawah untuk melihat artinya.</p>
 
       {/* Mini flashcard */}
       <div
@@ -79,9 +92,7 @@ function StepDemo({ onNext }) {
             <span className={S.demoCat}>⛑ keselamatan</span>
             <span className={S.demoJp}>{stripFuri(DEMO_CARD.jp)}</span>
             <span className={S.demoFuri}>{extractReadings(DEMO_CARD.jp)}</span>
-            {!flipped && (
-              <span className={S.demoHint}>👆 Tap untuk balik</span>
-            )}
+            {!flipped && <span className={S.demoHint}>👆 Tap untuk balik</span>}
           </div>
           {/* Back */}
           <div className={S.demoBack} aria-hidden={!flipped}>
@@ -132,11 +143,11 @@ function StepGoal({ onComplete }) {
   return (
     <div className={S.step} data-step="goal">
       <div className={S.stepEyebrow}>Langkah 2 dari 2</div>
-      <div className={S.goalHero} aria-hidden="true">🎯</div>
+      <div className={S.goalHero} aria-hidden="true">
+        🎯
+      </div>
       <h2 className={S.stepTitle}>Target Harian</h2>
-      <p className={S.stepDesc}>
-        Berapa kartu yang ingin kamu pelajari setiap hari?
-      </p>
+      <p className={S.stepDesc}>Berapa kartu yang ingin kamu pelajari setiap hari?</p>
 
       <div className={S.goalGrid} role="group" aria-label="Pilih target harian">
         {GOAL_OPTIONS.map((o) => (
@@ -183,20 +194,15 @@ export default function Onboarding({ onComplete }) {
     <div className={S.wrap}>
       <div className={S.inner}>
         {step === 'welcome' && <StepWelcome onNext={() => setStep('demo')} />}
-        {step === 'demo'    && <StepDemo onNext={() => setStep('goal')} />}
-        {step === 'goal'    && <StepGoal onComplete={handleGoalDone} />}
+        {step === 'demo' && <StepDemo onNext={() => setStep('goal')} />}
+        {step === 'goal' && <StepGoal onComplete={handleGoalDone} />}
       </div>
 
       {/* Dot indicator (skip welcome) */}
       {step !== 'welcome' && (
         <div className={S.dots} role="presentation">
           {['demo', 'goal'].map((s) => (
-            <div
-              key={s}
-              className={S.dot}
-              data-active={String(step === s)}
-              aria-hidden="true"
-            />
+            <div key={s} className={S.dot} data-active={String(step === s)} aria-hidden="true" />
           ))}
         </div>
       )}
