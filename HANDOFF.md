@@ -1,5 +1,28 @@
 # HANDOFF.md — SSW Konstruksi · content-dq
 
+> ## 🟢 MERGED INTO MAIN — 2026-08-18 (commit `151a45e`)
+> **content-dq's mission is complete.** This document records its 3.5-month content-quality
+> sprint (sessions 1–29) and the branch merge that closed it out. Both are done — verified via
+> `npm test` (435/435), `npm run lint` (0 warnings), `npm run build` (clean), plus content-dq's
+> own `verify-content.mjs`/`audit-track-consistency.mjs` (both clean). Full merge writeup:
+> `CHANGELOG.md` [4.23.0], `_MAP.md` session log.
+>
+> **If you're a new agent starting fresh work (e.g. a frontend overhaul):** the GETTING STARTED
+> and PROTOCOL sections immediately below describe the *content-dq* workflow specifically —
+> clone content-dq, never touch main, etc. That workflow is retired. You're almost certainly
+> starting on `main` instead, which now has everything (content-dq's data + the original app).
+> Read this file for background/history, but don't follow GETTING STARTED/PROTOCOL's literal
+> instructions — check CURRENT STATE's top entry (the merge-completion one) for what's actually
+> true today, and treat everything below it as history, not a live task queue. The `content-dq`
+> branch itself still exists on the remote (nothing deleted it) but has no further role — every
+> commit on it is already reachable from `main` via the merge.
+>
+> **What's NOT decided yet:** whether this file continues as the relay doc for whatever comes
+> next, gets retired to `docs/archive/`, or gets replaced by something new — that's the owner's
+> call, to be made in whatever chat picks up the next phase of work.
+
+---
+
 **This is the relay baton.** One file, always edited in place — no more `_v17`/`_v18` filenames.
 Owner uploads this file to a new agent chat, agent works, agent overwrites this file with the
 updated state, owner downloads it and hands it to the next agent. Repeat.
@@ -20,6 +43,10 @@ from the clone. Don't duplicate their content into this file; link to them.
 
 ## GETTING STARTED (new agent, new chat, no other context)
 
+> ⚠️ **Historical — describes the now-completed content-dq workflow.** See the banner at the
+> top of this file. If you're starting new work today, you almost certainly want `main`, not
+> `content-dq`.
+
 ```
 Repo:   https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi
 Branch: content-dq  (NOT main — never push to main)
@@ -35,6 +62,12 @@ Then: PROTOCOL section below, first.
 ---
 
 ## ⚡ PROTOCOL — READ THIS PART EVEN IF YOU SKIP EVERYTHING ELSE
+
+> ⚠️ **Historical — this was content-dq's protocol.** Retired along with the branch's mission
+> (see banner at top). Kept here as a record of the workflow that made 29 sessions of
+> multi-agent relay work without shared memory actually hold together — genuinely worth reading
+> before designing whatever process the next phase of work uses, just don't follow step 4 below
+> literally.
 
 **On start, before touching anything:**
 1. Clone the repo, checkout `content-dq`.
@@ -52,19 +85,62 @@ Then: PROTOCOL section below, first.
 2. Update PROGRESS checkboxes in the ACTIVE TASKS section below (this file now owns that list).
 3. Check your own edits are internally consistent with the rest of this file — don't leave a
    stale reference to something you just changed.
-4. Commit, push to `content-dq`. Never `main`.
+4. Commit, push to `content-dq`. (Historical instruction — content-dq is merged; there's no
+   more content-dq-specific work to push there. New work goes on `main`.)
 5. Overwrite this file in place with the new state. Don't create `HANDOFF_v2.md`.
 
 ---
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-18 (session 29, new agent chat — owner provided repo+token directly,
-same protocol as prior sessions).** Verify before trusting past this point — this line doesn't
-update itself.
+**As of this edit, 2026-08-18 (merge-execution session, new agent chat, directly following
+session 29's handoff — owner provided repo+token directly, same protocol as prior sessions).**
+Verify before trusting past this point — this line doesn't update itself.
 
-- **🔀 MERGE PREP — read this first if you're the agent picking up the merge task.** Owner's
-  plan: session 29 (this one) closes out here; a **new chat** does the actual `main` merge. Three
+- **🟢 MERGE COMPLETE — `content-dq` → `main`, 2026-08-18 (new chat, following directly from
+  session 29's MERGE PREP entry below).** Pushed as commit `151a45e` on `main`. All 3 facts in
+  the old MERGE PREP entry (kept below, struck through in spirit not in fact — still worth
+  reading for the reasoning trail) held up under actual investigation, with corrections:
+  no common ancestor confirmed (`git merge-base` exit 1); `main`'s independence confirmed, but
+  refined — `content-dq`'s root commit (`c556f5f`) didn't just *lack* the app scaffold, it
+  *deleted* main's entire app layer in one commit (248 files, -53,216/+381 lines) down to
+  data+docs+viewer, so this was never two apps evolving in parallel; the "spot-checked, not
+  diffed" claims about `main` still having `furi`/doboku/kenchiku/old-JAC-schema all confirmed
+  true, and the real blast radius was bigger than flagged in every case (furi: 7 files named →
+  33 actual; Doboku/Kenchiku: 3 files named → 33 actual).
+
+  **Strategy:** not a git merge in the conflict-resolution sense. `git merge
+  --allow-unrelated-histories` used as a mechanical bootstrap on a safety branch (never touched
+  `main` directly until everything was green) — cleanly auto-unioned 326 non-overlapping files,
+  conflicts only on the 14 that existed on both sides. Those 14 resolved (10 data files took
+  content-dq's version wholesale, 3 docs hand-merged combining both histories, 1 pair
+  byte-identical/no-op). Then application-layer surgery: furi→`extractReadings()` swap across
+  12 real consumers (caught a real answer-matching bug in `ProductionMode.jsx` along the way —
+  see CHANGELOG [4.23.0]), full Doboku/Kenchiku removal across 33 files including onboarding UX
+  (cut the track-picker step entirely rather than leave a 1-option choice), JAC schema
+  migration, storage v5→v6 migration (deliberately incomplete — praktik/vocab set-id remapping
+  skipped, no reliable old→new correspondence exists there, see migrations.js comments), and 4
+  build-pipeline script fixes found only by actually running `npm run build` (not caught by
+  tests/lint — regenerating `cards.js` also fixed 10 pre-existing duplicate-fragment bugs that
+  existed in the committed aggregate but not the source files, since content-dq had no
+  regeneration script of its own).
+
+  **Final state, independently re-verified before push, not just trusted from earlier in the
+  session:** `npm test` 435/435 (39 files), `npm run lint` 0 warnings, `npm run build` clean,
+  `verify-content.mjs`/`audit-track-consistency.mjs` both clean, `git fetch` + `rev-parse`
+  confirmed `origin/main` matches the intended commit hash exactly post-push.
+
+  **`content-dq` branch:** still exists on the remote, not deleted. Every commit on it is
+  reachable from `main` via the merge, so nothing is lost either way — deleting it is a safe,
+  purely-cosmetic cleanup step whenever the owner wants to, not a data-preservation concern.
+
+  **Not done, deliberately out of scope for this session:** the `npm run format` check surfaced
+  161 files with formatting drift (`prettier --check`) — but this predates the merge entirely,
+  including files `content-dq` never touched, so it's pre-existing app-wide debt, not a merge
+  artifact. Worth knowing about for whoever does the frontend overhaul, not fixed here.
+- **🔀 MERGE PREP (historical — see MERGE COMPLETE entry above; this entry is what the merge
+  started from, kept for the reasoning trail).** Owner's plan at the time: session 29 (that one)
+  closes out here; a **new chat** does the actual `main` merge. Three
   facts discovered during a brief, deliberately-not-deepened look at `main` — confirm these still
   hold before relying on them, they were checked once, not re-verified:
   1. **`content-dq` and `main` have NO common git ancestor.** `git merge-base main content-dq`
@@ -654,10 +730,25 @@ update itself.
 
 ## ACTIVE TASKS
 
+**Status as of 2026-08-18: empty.** All four buckets below are resolved/complete — the merge-time
+reconciliation list (done via the actual merge), 🔵/🟡 (already empty as of session 29), 🟢 (P12
+and P22, both complete). There is currently nothing queued here. The next phase of work (a
+planned frontend overhaul, per the owner) hasn't been scoped yet — whatever chat picks that up
+starts a fresh task list rather than looking for one here.
+
 Everything below is either gated or genuinely unstarted. Nothing here is a "just pick the first
 one" list — check the gate before starting.
 
-### 📋 Merge-time reconciliation list — NOT blockers (owner decision, session 28)
+### ✅ Merge-time reconciliation list — DONE (completed 2026-08-18, see MERGE COMPLETE entry above)
+
+*(Kept collapsed/historical below — this was an open checklist through session 29, now fully
+executed as part of the content-dq→main merge. Real scope during execution turned out larger
+than scoped here: furi had 33 real file references, not the 7 listed; Doboku/Kenchiku had 33,
+not the 3 mentioned elsewhere. Full detail: `CHANGELOG.md` [4.23.0], `_MAP.md` session log.)*
+
+<details>
+<summary>Original list, as it stood through session 29 (click to expand)</summary>
+
 **These used to be filed as blockers for P12. They aren't.** Owner has explicitly accepted that
 content-dq may break `main` and that reconfiguring `main` is merge-time work. Keeping the list
 because it's the reconciliation checklist someone will need at merge — it took a session to
@@ -687,6 +778,8 @@ finding + full field-mapping table: `docs/DATA_ARCH_AUDIT.md` §4/§6 (D1–D3),
 accurate as of session 29, re-confirmed rather than re-derived. At merge: replace the top-level
 files with the `sets/jac/` versions (same swap pattern as the `wayground`/`jac-mockup` monoliths
 already went through).
+
+</details>
 
 ### 🔵 Gated on an owner decision — ask before starting
 *(none right now — OD-5 resolved by investigation, see OPEN DECISIONS.)*
