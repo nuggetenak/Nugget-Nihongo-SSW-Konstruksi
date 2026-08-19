@@ -100,10 +100,11 @@ Then: PROTOCOL section below, first.
 2026-08-18 merge close-out below — owner provided repo+token directly, same protocol).**
 Verify before trusting past this point — this line doesn't update itself.
 
-- **🟡 UI OVERHAUL IN PROGRESS — branch `feat/ui-overhaul`, 7 commits, NOT merged to `main`.**
-  `main` is untouched and still at the post-merge state described further down. The branch is
-  pushed to origin. Every commit was verified green before pushing: `npm test` 435/435,
-  `npm run lint` 0 warnings, `npm run build` clean.
+- **🟡 UI OVERHAUL IN PROGRESS — branch `feat/ui-overhaul`, 13 commits (10 feat/style/docs +
+  3 new below), NOT merged to `main`.** `main` is untouched and still at the post-merge state
+  described further down. The branch is pushed to origin. Every commit was verified green
+  before pushing: `npm test` 435/435, `npm run lint` 0 warnings, `npm run build` clean (the
+  `data-cards` 661KB chunk warning is the known, deliberately-deferred issue below, not new).
 
   **Direction (owner-approved before any code was written):** keep and evolve this app's own
   amber identity rather than aligning with the main Nugget Nihongo app; go fully adaptive
@@ -133,8 +134,30 @@ Verify before trusting past this point — this line doesn't update itself.
   7. Prettier drift cleared repo-wide (was 237 files). **Kept as its own commit** so the UI
      work stays reviewable — mixed in it was a 249-file diff. Confirmed cosmetic: the built
      `data-cards` chunk has an identical content hash before and after.
+  8. StatsMode, BelajarTab, and SayaTab redesigned for wide screens (the three items this
+     entry used to list under "NOT done"). All three reuse Glossary's `auto-fit` + `minmax()`
+     row-container technique rather than introducing a new pattern:
+     - `StatsMode`: readiness ring + overview card now pair in a shared row (`.summaryRow`)
+       instead of each stretching alone; the heatmap card sizes to its fixed-width SVG
+       (`.heatmapCard`, `width: fit-content`) instead of stretching and leaving the calendar
+       pinned to the left edge.
+     - `BelajarTab`: `.compactGrid` went from a hardcoded 2 columns to `auto-fit` + `minmax`;
+       compact width renders identically, wider screens get more columns (latihan's 8 tiles
+       go from 4 rows to 2 at wide).
+     - `SayaTab`: `Section` now wraps its children in `.sectionBody`, a grid that flows `.row`
+       items into columns and routes everything else (`:not(.row)` — inline-edit forms, the
+       destructive reset row, Daily Challenge, Achievements) to a full-width span
+       automatically, no per-child JSX bookkeeping needed. The achievements badge grid moved
+       off a hardcoded 4 columns onto the same `auto-fit` technique.
 
   **Decisions worth not re-litigating:**
+  - **Grid tracks are capped (`minmax(min, 380px)` etc.), not `1fr`, for fixed-size centered
+    content** — a ring, a stat number, a badge icon+label. `1fr` is still correct for rows
+    shaped like `justify-content: space-between` (Glossary's term rows, SayaTab's settings
+    rows) since that content genuinely uses extra width by spreading label/value apart. A
+    track's `max` in `minmax()` is a hard ceiling regardless of leftover container space, so
+    this is a real fork in the pattern, not an inconsistency — check which shape you're
+    looking at before "fixing" one to match the other.
   - **Icons render as CSS masks, not `<img>`.** The art is single-colour line work on
     transparency, so its alpha IS the shape; masking with `background: currentColor` means the
     theme drives colour and dark mode still works. It also made the generator's palette drift
@@ -161,20 +184,27 @@ Verify before trusting past this point — this line doesn't update itself.
     applied inline in `App.jsx` and each screen had to remember it. `AppShell` owns it now.
   - Flashcard "Reset" (erases all progress) sat in a uniform grid one tap from a star filter at
     identical visual weight. Now separated and styled as destructive.
+  - `SayaTab.module.css` was 536 lines and contained a complete, stale first stylesheet (lines
+    1–247, headed "v3.0 — UI Upgrade Round 2") entirely shadowed by a second, refined one
+    below it. Confirmed via diff and by checking which half the JSX actually depends on (only
+    the second half defines `.installCard`, which the JSX uses). Cascade is per-property, not
+    per-block, so a handful of first-half-only declarations were still live even though the
+    rest of that block was fully overridden by the second: `progressCard` box-shadow and its
+    `::before` gradient line, `progressInfo` z-index, `progressKnown` font-family/line-height,
+    `progressStreak` border, `pageTitle` font-family/line-height. Removed the dead block and
+    folded the still-live properties into the surviving rules — zero visual change confirmed
+    property-by-property, file is now 312 lines. Also gave `.progressCard` a `max-width: 560px`
+    so the hero card at the top of the page doesn't stretch to the full 1180px column with
+    nothing to pair it with.
 
   **NOT done — pick up here:**
   - **10 modes still render placeholder icon shapes.** A ready-to-paste prompt for the second
     sprite sheet is in `docs/ASSET-PROMPTS.md` section 4b. Activating them is one line each in
-    the `ASSETS` map in `Icon.jsx`; the `MODE_META.ui` mapping already exists.
+    the `ASSETS` map in `Icon.jsx`; the `MODE_META.ui` mapping already exists. Owner is
+    generating this art externally — not an agent task until handed off.
   - **`data-cards` chunk is 661KB (191KB gzipped)** and warns on every build. Undercuts the
     offline-first goal on slow connections. Deliberately left for its own branch — it's a build
     concern, not UI.
-  - Belajar/Saya tab interiors were unpinned and now fill the shell, but their internal layouts
-    were not redesigned for wide screens — they're single columns in a wide space. Glossary
-    shows the pattern that works: `auto-fit` + `minmax()` on the row container, no media query.
-  - **StatsMode at full width** has a small readiness ring floating in a very wide card, and a
-    left-aligned heatmap in a wide box. Cosmetic, not broken — it needs a layout rethink rather
-    than a width tweak, so it was left alone deliberately.
   - Desktop dashboard has vertical dead space; needs more content, not a layout change.
   - The branch has never been merged. Review the Prettier commit separately from the rest.
 
