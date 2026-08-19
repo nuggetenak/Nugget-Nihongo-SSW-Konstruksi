@@ -18,6 +18,7 @@ import FlipCard from './FlipCard.jsx';
 import RatingRow from './RatingRow.jsx';
 import ToolStrip from './ToolStrip.jsx';
 import FilterBar from './FilterBar.jsx';
+import Icon from '../../components/Icon.jsx';
 
 export default function FlashcardMode({
   cards,
@@ -63,6 +64,11 @@ export default function FlashcardMode({
   const confirmTimer = useRef(null);
   // Read-only mode — browse without FSRS rating.
   const [readOnly, setReadOnly] = useState(false);
+  // Search starts collapsed. It was permanently on screen, costing a row above
+  // the card every session while being used only occasionally. Opens
+  // automatically when a filter is already active, so a restored session never
+  // hides why the deck looks smaller than expected.
+  const [searchOpen, setSearchOpen] = useState(() => Boolean(search));
 
   // furiganaPolicy — wired to FlipCard → JpFront.
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
@@ -246,64 +252,55 @@ export default function FlashcardMode({
         </div>
       )}
 
-      {/* Header */}
-      <div className={S.modeHeader} style={{ marginBottom: 6 }}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
-          ← Kartu
+      {/* Header — back, progress, position and search on a single row. This
+          previously took three rows: header, progress bar, then a stat strip
+          repeating numbers already shown on the dashboard. */}
+      <div className={FC.topBar}>
+        <button className={FC.backBtn} onClick={onExit} aria-label="Kembali">
+          ←
         </button>
-        <div className={S.row} style={{ fontSize: 12 }}>
-          {srsInfo && (
-            <span
-              className={S.pill}
-              style={{ background: `${srsInfo.strength.color}15`, color: srsInfo.strength.color }}
-            >
-              {srsInfo.strength.label}
-            </span>
-          )}
-          <span style={{ color: T.textDim, fontVariantNumeric: 'tabular-nums' }}>
-            {safeIdx + 1}/{displayCards.length}
-          </span>
+
+        <div className={FC.railWrap}>
+          <ProgressBar current={knownInView} total={displayCards.length} color={T.correct} />
         </div>
-      </div>
 
-      <ProgressBar current={knownInView} total={displayCards.length} color={T.correct} />
-
-      {/* Stats mini */}
-      <div className={S.statRow} style={{ marginTop: 8 }}>
-        {[
-          { label: 'Hafal', val: knownInView, color: T.correct, bg: T.correctBg },
-          { label: 'Belum', val: unknownInView, color: T.wrong, bg: T.wrongBg },
-          {
-            label: 'Sisa',
-            val: displayCards.length - knownInView - unknownInView,
-            color: T.gold,
-            bg: 'rgba(251,191,36,0.08)',
-          },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className={S.statCell}
-            style={{ background: stat.bg, border: `1px solid ${stat.color}22` }}
+        {srsInfo && (
+          <span
+            className={FC.srsPill}
+            style={{ background: `${srsInfo.strength.color}15`, color: srsInfo.strength.color }}
           >
-            <div className={S.statVal} style={{ color: stat.color }}>
-              {stat.val}
-            </div>
-            <div className={S.statLabel}>{stat.label}</div>
-          </div>
-        ))}
+            {srsInfo.strength.label}
+          </span>
+        )}
+
+        <span className={FC.counter}>
+          {safeIdx + 1}/{displayCards.length}
+        </span>
+
+        <button
+          className={FC.iconBtn}
+          onClick={() => setSearchOpen((o) => !o)}
+          aria-label={searchOpen ? 'Tutup pencarian' : 'Cari kartu'}
+          aria-expanded={searchOpen}
+          data-active={searchOpen || Boolean(search)}
+        >
+          <Icon name="cari" size={17} />
+        </button>
       </div>
 
-      {/* Filter bar */}
-      <FilterBar
-        search={search}
-        onSearch={(v) => {
-          setSearch(v);
-          sessionStorage.setItem('ssw-fc-search', v);
-          setIdx(0);
-        }}
-        isStarred={isStarred}
-        onToggleStar={() => onToggleStar(card?.id)}
-      />
+      {/* Filter bar — collapsed by default */}
+      {searchOpen && (
+        <FilterBar
+          search={search}
+          onSearch={(v) => {
+            setSearch(v);
+            sessionStorage.setItem('ssw-fc-search', v);
+            setIdx(0);
+          }}
+          isStarred={isStarred}
+          onToggleStar={() => onToggleStar(card?.id)}
+        />
+      )}
 
       {/* 3D Flip Card — wrapped in ErrorBoundary for old WebView fallback */}
       <ErrorBoundary fallback={<FlatCardFallback card={card} />}>
@@ -380,24 +377,23 @@ export default function FlashcardMode({
         </div>
       )}
 
-      {/* Nav row */}
-      <div className={FC.navRow} style={{ marginTop: 10 }}>
+      {/* Nav row — arrows only. The flip button was redundant (tapping the card
+          flips it, Space does on a keyboard) but the arrows are NOT: swipe does
+          not exist with a mouse, and desktop is now a supported size. */}
+      <div className={FC.navRow}>
         <button
           onClick={() => go(-1)}
           disabled={safeIdx === 0}
           className={FC.navBtn}
-          style={{ opacity: safeIdx === 0 ? 0.4 : 1 }}
+          aria-label="Kartu sebelumnya"
         >
           ← Prev
-        </button>
-        <button onClick={flip} className={FC.navFlip}>
-          {flipped ? '🔄 Balik' : '👁️ Lihat'}
         </button>
         <button
           onClick={() => go(1)}
           disabled={safeIdx >= displayCards.length - 1}
           className={FC.navBtn}
-          style={{ opacity: safeIdx >= displayCards.length - 1 ? 0.4 : 1 }}
+          aria-label="Kartu berikutnya"
         >
           Next →
         </button>

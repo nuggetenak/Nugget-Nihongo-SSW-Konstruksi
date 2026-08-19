@@ -48,6 +48,12 @@
   margin-bottom: 12px;
 }
 
+/* NOTE: the card deliberately does NOT stretch to fill leftover space. Its
+   height is driven by a ResizeObserver in FlipCard that measures the back
+   face, so the card keeps one height across the flip and does not jump when
+   the answer is longer than the prompt. Forcing flex growth here fights that
+   and only opens a gap inside the card. */
+
 /* ── RatingRow subcomponent ────────────────────────────────────────────────── */
 .ratingWrap {
   animation: slideUp 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
@@ -263,4 +269,107 @@
   :global(.fc-card) {
     transition: none;
   }
+}
+
+/* ── Compact header (UI overhaul) ─────────────────────────────────────────
+   Back, progress, SRS state, position and search on one row. Replaces three
+   stacked rows so the card itself gets the vertical space it deserves. */
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+.backBtn {
+  width: var(--tap-min);
+  height: var(--tap-min);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+  border: 1px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-textMuted);
+  font-family: inherit;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.backBtn:hover {
+  background: var(--ssw-surfaceHover);
+  color: var(--ssw-text);
+}
+
+.railWrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.srsPill {
+  flex-shrink: 0;
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-bold);
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.counter {
+  flex-shrink: 0;
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-textDim);
+  font-variant-numeric: tabular-nums;
+}
+
+.iconBtn {
+  width: var(--tap-min);
+  height: var(--tap-min);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+  border: 1px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-textDim);
+  cursor: pointer;
+}
+
+.iconBtn[data-active='true'] {
+  color: var(--ssw-amber);
+  border-color: var(--ssw-borderActive);
+  background: var(--ssw-surfaceActive);
+}
+
+/* Nav arrows — secondary now that tapping the card is the primary flip. */
+.navRow {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.navBtn {
+  flex: 1;
+  min-height: var(--tap-min);
+  border-radius: var(--r-md);
+  border: 1px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-textMuted);
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+}
+
+.navBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.navBtn:not(:disabled):hover {
+  background: var(--ssw-surfaceHover);
+  color: var(--ssw-text);
 }
