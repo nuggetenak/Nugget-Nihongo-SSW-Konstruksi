@@ -41,7 +41,7 @@ function Section({ title, children }) {
   return (
     <div>
       <div className={s.sectionLabel}>{title}</div>
-      {children}
+      <div className={s.sectionBody}>{children}</div>
     </div>
   );
 }
@@ -327,14 +327,7 @@ export default function SayaTab() {
 
       {/* Achievement Badges */}
       <Section title={`🏅 Pencapaian (${unlockedCount}/${achievements.length})`}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 8,
-            padding: '8px 0',
-          }}
-        >
+        <div className={s.achievementGrid}>
           {achievements.map((a) => (
             <div
               key={a.id}
