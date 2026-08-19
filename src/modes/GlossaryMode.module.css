@@ -232,3 +232,31 @@
   border-radius: var(--r-pill);
   padding: 1px 6px;
 }
+
+/* ── Wide-screen columns ──────────────────────────────────────────────────
+   At full shell width a term row put the Japanese on the left and the
+   Indonesian gloss ~900px away on the right, so pairing them meant crossing
+   the whole screen. Flowing rows into columns keeps each row a comfortable
+   reading width and uses the space instead of stretching one row across it.
+
+   auto-fit + minmax rather than a media query: the column count follows the
+   container, so this needs no breakpoint and cannot drift out of sync with
+   the ones in global.css. Below ~2x the minimum it collapses to one column
+   on its own, which is the correct phone layout. */
+.contentWrap > [data-letter] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  column-gap: var(--sp-4);
+  align-content: start;
+}
+
+/* The letter heading introduces the whole group, so it spans every column. */
+.contentWrap > [data-letter] > .letterHeader {
+  grid-column: 1 / -1;
+}
+
+/* An expanded row is taller than its neighbours; starting rows at the top of
+   their track stops a long entry stretching the ones beside it. */
+.contentWrap > [data-letter] > .termRow {
+  align-self: start;
+}
