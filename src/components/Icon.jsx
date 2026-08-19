@@ -16,10 +16,33 @@ const BASE = `${import.meta.env.BASE_URL}icons/ui/`;
 
 /**
  * Real asset filenames, relative to public/icons/ui/.
- * Empty until generated art lands — add entries here to activate them.
+ * Add an entry here to activate it; unlisted names keep their placeholder.
+ * Art is single-colour line work — rendered via CSS mask, so it inherits
+ * `currentColor` and still adapts to light/dark theme.
  * @type {Record<string, string>}
  */
-export const ASSETS = {};
+export const ASSETS = {
+  home: 'home.png',
+  belajar: 'belajar.png',
+  saya: 'saya.png',
+  kartu: 'kartu.png',
+  kuis: 'kuis.png',
+  sprint: 'sprint.png',
+  jac: 'jac.png',
+  simulasi: 'simulasi.png',
+  ujian: 'ujian.png',
+  bintang: 'bintang.png',
+  catatan: 'catatan.png',
+  suara: 'suara.png',
+  cari: 'cari.png',
+  more: 'more.png',
+  api: 'api.png',
+  target: 'target.png',
+  kalender: 'kalender.png',
+  panah: 'panah.png',
+  helm: 'helm.png',
+  alat: 'alat.png',
+};
 
 // Placeholder geometry. Each entry is a minimal shape that reads as a
 // distinct silhouette at 20px — enough to tell icons apart while building,
@@ -121,15 +144,30 @@ export default function Icon({ name, size = 20, label, className }) {
 
   const asset = ASSETS[name];
   if (asset) {
+    // Rendered as a CSS mask, not an <img>: the generated art is single-colour
+    // line work on transparency, so its alpha channel IS the shape. Masking
+    // means colour comes from `currentColor` — icons still respond to the
+    // theme (light/dark) exactly like the placeholders did, and the art's own
+    // baked-in colour is irrelevant. Swapping to <img> would freeze them.
+    const url = `url("${BASE}${asset}")`;
     return (
-      <img
-        src={`${BASE}${asset}`}
-        width={size}
-        height={size}
-        alt={label ?? ''}
+      <span
         className={className}
-        style={{ display: 'block', objectFit: 'contain' }}
-        {...(label ? {} : { 'aria-hidden': 'true' })}
+        style={{
+          display: 'block',
+          width: size,
+          height: size,
+          backgroundColor: 'currentColor',
+          WebkitMaskImage: url,
+          maskImage: url,
+          WebkitMaskRepeat: 'no-repeat',
+          maskRepeat: 'no-repeat',
+          WebkitMaskPosition: 'center',
+          maskPosition: 'center',
+          WebkitMaskSize: 'contain',
+          maskSize: 'contain',
+        }}
+        {...a11y}
       />
     );
   }

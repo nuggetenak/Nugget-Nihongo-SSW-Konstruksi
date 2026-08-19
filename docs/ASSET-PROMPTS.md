@@ -184,7 +184,33 @@ no signage lettering.
 
 ---
 
-## 6. Activating an asset
+## 6. Status — what has landed
+
+Sections 2 and 4 are **done**. Sheets were generated, sliced, and installed:
+
+- 20 UI icons → `public/icons/ui/` (128px, greyscale+alpha, ~7KB each)
+- 14 badges → `public/icons/badges/` (160px, ~3.5KB each)
+
+Two notes from processing them, useful for the remaining sections:
+
+**The generator drifted off-palette** — icons came back `#FF9100` and badges
+`#8C3202` against the specified `#F59E0B` / `#92400E`. Expect this; it is not
+worth re-rolling. Icons were immune because they render as CSS masks (colour
+comes from `currentColor`, the art's own colour is discarded). Badges were
+remapped to exact palette values during slicing.
+
+**Ask for line art, not filled art, wherever possible.** Single-colour line work
+on transparency can be used as a mask, which means it inherits the theme and
+adapts to dark mode for free. The filled two-tone badges cannot — their colour
+is baked in and will not respond to the theme. If badges ever need to work in
+dark mode, regenerate them as single-colour line art.
+
+Still to generate: **section 3 (logo)** and **section 5 (onboarding
+illustration)**.
+
+---
+
+## 7. Activating an asset
 
 Drop the file in `public/icons/ui/`, then add one line to `ASSETS` in
 `src/components/Icon.jsx`:
