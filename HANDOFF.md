@@ -13,8 +13,8 @@
 > clone content-dq, never touch main, etc. That workflow is retired. You're almost certainly
 > starting on `main` instead, which now has everything (content-dq's data + the original app).
 > Read this file for background/history, but don't follow GETTING STARTED/PROTOCOL's literal
-> instructions — check CURRENT STATE's top entry (the merge-completion one) for what's actually
-> true today, and treat everything below it as history, not a live task queue. The `content-dq`
+> instructions — check CURRENT STATE's top entry (the UI-overhaul one, 2026-08-19) for
+> what's actually true today, and treat everything below it as history, not a live task queue. The `content-dq`
 > branch itself still exists on the remote (nothing deleted it) but has no further role — every
 > commit on it is already reachable from `main` via the merge.
 >
@@ -95,6 +95,84 @@ Then: PROTOCOL section below, first.
 ---
 
 ## CURRENT STATE
+
+**As of this edit, 2026-08-19 (frontend/UI overhaul session, new agent chat, following the
+2026-08-18 merge close-out below — owner provided repo+token directly, same protocol).**
+Verify before trusting past this point — this line doesn't update itself.
+
+- **🟡 UI OVERHAUL IN PROGRESS — branch `feat/ui-overhaul`, 7 commits, NOT merged to `main`.**
+  `main` is untouched and still at the post-merge state described further down. The branch is
+  pushed to origin. Every commit was verified green before pushing: `npm test` 435/435,
+  `npm run lint` 0 warnings, `npm run build` clean.
+
+  **Direction (owner-approved before any code was written):** keep and evolve this app's own
+  amber identity rather than aligning with the main Nugget Nihongo app; go fully adaptive
+  across device sizes, not just "stop wasting space on desktop". Palette is the one locked
+  constraint — everything else was left to agent judgement. The signature device is a
+  **hazard rail**: a diagonal amber/near-black stripe borrowed from real construction signage,
+  used ONLY to mark time-sensitive or active state (exam countdown, daily mission, active nav
+  item). It stays meaningful because nothing else uses it — don't decorate with it.
+
+  **What shipped, in dependency order:**
+  1. `AppShell` — single owner of responsive layout for every screen. Bottom nav <1040px, side
+     nav above. `chrome` prop ('tabs' | 'mode') decides which navigation is offered.
+  2. All 21 mode screens routed through it. **This was the biggest gap:** `App.jsx` returned
+     early for modes, so they bypassed the shell entirely and stayed a 480px column on desktop
+     long after the tabs had gone responsive.
+  3. Width is now a **responsive token**, not a per-file decision. 19 stylesheets set their own
+     `max-width`; rather than patch each, `--max-w` is redefined at breakpoints in `global.css`
+     and every screen inherits it. `--overlay-max-w` (fixed 480px) split out for dialogs,
+     toasts, popups, bottom nav. Per-mode width lives in `MODE_META.width`, defaulting to a
+     reading column.
+  4. Icons unified. `MODE_META.ui` names the vector icon per mode — no component keeps its own
+     mode→icon list. 20 generated icons in `public/icons/ui/`, 14 badges in
+     `public/icons/badges/`, onboarding art in `public/illustrations/`.
+  5. Dashboard, onboarding, and the flashcard screen redesigned.
+  6. a11y sweep: added an `h1` (there was none), one global `:focus-visible` ring (there was
+     one rule in the entire app), `--tap-min` 44px token, reduced-motion safety net.
+  7. Prettier drift cleared repo-wide (was 237 files). **Kept as its own commit** so the UI
+     work stays reviewable — mixed in it was a 249-file diff. Confirmed cosmetic: the built
+     `data-cards` chunk has an identical content hash before and after.
+
+  **Decisions worth not re-litigating:**
+  - **Icons render as CSS masks, not `<img>`.** The art is single-colour line work on
+    transparency, so its alpha IS the shape; masking with `background: currentColor` means the
+    theme drives colour and dark mode still works. It also made the generator's palette drift
+    (#FF9100 vs the specified #F59E0B) irrelevant. Switching to `<img>` would silently freeze
+    them and break dark mode.
+  - **The flashcard does NOT stretch to fill space.** Its height comes from a ResizeObserver in
+    `FlipCard.jsx` measuring the back face, so the card holds one height across the flip.
+    Forcing flex growth opens a gap _inside_ the card. This was tried and reverted; there is a
+    comment in `flashcard.module.css` saying so.
+  - **Prev/Next arrows stayed** on the flashcard screen. The original concept dropped them for
+    swipe — a mobile-only assumption. Swipe doesn't exist with a mouse and desktop is now
+    supported. The redundant "Lihat/Balik" button was removed instead.
+  - **Badge→achievement mapping is explicit per achievement id**, not by array position, so
+    reordering `achievements.js` can't silently shuffle the art.
+
+  **Incidental fixes found along the way (not asked for):**
+  - `sw.js` `CACHE_VERSION` was `4.21.1` against a `4.23.0` `package.json` — two releases stale
+    despite the file's own instruction to bump per deploy. Returning users would have been
+    served stale assets. Now `4.23.0`. **Bump this again before any deploy.**
+  - `package-lock.json` version was out of sync with `package.json` (4.22.0 vs 4.23.0).
+  - The app logo already existed at `public/icons/icon-*.png` but was used nowhere in the UI;
+    onboarding showed a generic ⚡ emoji. Now uses the real logo. No new logo art is needed.
+  - Content sat under the floating bottom nav on several screens because the safe padding was
+    applied inline in `App.jsx` and each screen had to remember it. `AppShell` owns it now.
+  - Flashcard "Reset" (erases all progress) sat in a uniform grid one tap from a star filter at
+    identical visual weight. Now separated and styled as destructive.
+
+  **NOT done — pick up here:**
+  - **10 modes still render placeholder icon shapes.** A ready-to-paste prompt for the second
+    sprite sheet is in `docs/ASSET-PROMPTS.md` section 4b. Activating them is one line each in
+    the `ASSETS` map in `Icon.jsx`; the `MODE_META.ui` mapping already exists.
+  - **`data-cards` chunk is 661KB (191KB gzipped)** and warns on every build. Undercuts the
+    offline-first goal on slow connections. Deliberately left for its own branch — it's a build
+    concern, not UI.
+  - Belajar/Saya tab interiors were unpinned and now fill the shell, but their internal layouts
+    were not redesigned for wide screens — they're single columns in a wide space.
+  - Desktop dashboard has vertical dead space; needs more content, not a layout change.
+  - The branch has never been merged. Review the Prettier commit separately from the rest.
 
 **As of this edit, 2026-08-18 (merge-execution session, new agent chat, directly following
 session 29's handoff — owner provided repo+token directly, same protocol as prior sessions).**

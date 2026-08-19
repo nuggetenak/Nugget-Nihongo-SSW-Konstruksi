@@ -1,7 +1,14 @@
 // ─── FlashcardMode/ToolStrip.jsx ────────────────────────────────────────────
-// Sort / filter-belum / reset / star filter tool strip.
+// Secondary controls for the flashcard screen.
+//
+// Split into two groups on purpose. Every control used to sit in one uniform
+// 5-button grid, which put "Reset" — which erases all progress — one tap away
+// from a star filter, at identical visual weight. It has a two-tap confirm,
+// but nothing about it *looked* destructive. View controls are now a row of
+// their own; reset is separated, demoted, and styled as the hazard it is.
 // ─────────────────────────────────────────────────────────────────────────────
 import { T } from '../../styles/theme.js';
+import Icon from '../../components/Icon.jsx';
 import FC from './flashcard.module.css';
 
 export default function ToolStrip({
@@ -20,16 +27,22 @@ export default function ToolStrip({
   readOnly,
   onToggleReadOnly,
 }) {
-  const tools = [
+  const sortLabel =
+    sortMode === 'original' ? 'Urut' : sortMode === 'shuffle' ? 'Acak' : 'Prioritas';
+
+  // Non-destructive: they only change what you see or how you rate.
+  const viewTools = [
     {
-      emoji: sortMode === 'original' ? '⏮' : sortMode === 'shuffle' ? '🔀' : '🎯',
-      label: sortMode === 'original' ? 'Urut' : sortMode === 'shuffle' ? 'Acak' : 'Prioritas',
+      ui: 'tukar',
+      label: sortLabel,
+      aria: `Urutan kartu: ${sortLabel}. Ketuk untuk ganti`,
       active: sortMode !== 'priority',
       onClick: onCycleSort,
     },
     {
-      emoji: '❌',
+      ui: 'peringatan',
       label: unknownInView > 0 ? `${unknownInView}` : 'Belum',
+      aria: `Saring kartu belum hafal${unknownInView > 0 ? ` (${unknownInView} kartu)` : ''}`,
       active: reviewBelum,
       border: T.wrongBorder,
       bg: T.wrongBg,
@@ -37,17 +50,9 @@ export default function ToolStrip({
       onClick: onToggleBelum,
     },
     {
-      emoji: '🔄',
-      label: confirmReset ? 'Yakin?' : 'Reset',
-      active: confirmReset,
-      border: T.wrongBorder,
-      bg: T.wrongBg,
-      color: T.wrong,
-      onClick: onReset,
-    },
-    {
-      emoji: '⭐',
+      ui: 'bintang',
       label: starredCount > 0 ? `${starredCount}` : 'Bintang',
+      aria: `Saring kartu berbintang${starredCount > 0 ? ` (${starredCount} kartu)` : ''}`,
       active: starFilterActive,
       border: `${T.gold}80`,
       bg: 'rgba(251,191,36,0.12)',
@@ -55,8 +60,11 @@ export default function ToolStrip({
       onClick: onToggleStarFilter,
     },
     {
-      emoji: readOnly ? '👁' : '📝',
+      ui: readOnly ? 'belajar' : 'tulis',
       label: readOnly ? 'Baca' : 'Rating',
+      aria: readOnly
+        ? 'Mode baca aktif. Ketuk untuk menilai kartu'
+        : 'Mode rating aktif. Ketuk untuk hanya membaca',
       active: readOnly,
       border: 'rgba(99,102,241,0.4)',
       bg: 'rgba(99,102,241,0.1)',
@@ -68,22 +76,40 @@ export default function ToolStrip({
   return (
     <>
       <div className={FC.toolGrid}>
-        {tools.map((btn, i) => (
+        {viewTools.map((btn) => (
           <button
-            key={i}
+            key={btn.label + btn.ui}
             className={FC.toolBtn}
             onClick={btn.onClick}
+            aria-label={btn.aria}
+            aria-pressed={btn.active}
             style={{
               border: `1px solid ${btn.active ? btn.border || T.borderActive : T.border}`,
               background: btn.active ? btn.bg || T.surfaceActive : T.surface,
               color: btn.active ? btn.color || T.amber : T.textMuted,
             }}
           >
-            <span>{btn.emoji}</span>
+            <Icon name={btn.ui} size={18} />
             <span>{btn.label}</span>
           </button>
         ))}
       </div>
+
+      {/* Destructive — separated so it cannot be mistaken for a view filter. */}
+      <button
+        className={FC.resetBtn}
+        onClick={onReset}
+        data-confirming={confirmReset}
+        aria-label={
+          confirmReset
+            ? 'Ketuk sekali lagi untuk menghapus semua progres'
+            : 'Reset semua progres belajar'
+        }
+      >
+        <Icon name="ulang" size={15} />
+        {confirmReset ? 'Ketuk lagi untuk hapus semua progres' : 'Reset progres'}
+      </button>
+
       {flipped && !rated && (
         <div className={FC.kbHint} style={{ color: T.textFaint }}>
           Keyboard: 1 Lagi · 2 Susah · 3 Oke · 4 Mudah

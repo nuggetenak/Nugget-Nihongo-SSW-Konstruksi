@@ -373,3 +373,39 @@
   background: var(--ssw-surfaceHover);
   color: var(--ssw-text);
 }
+
+/* Reset — destructive, so it is deliberately NOT in the tool grid. Quieter
+   than a filter at rest, unmistakably a hazard once armed. */
+.resetBtn {
+  width: 100%;
+  min-height: var(--tap-min);
+  margin-top: var(--sp-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  border-radius: var(--r-md);
+  border: 1px dashed var(--ssw-border);
+  background: transparent;
+  color: var(--ssw-textFaint);
+  font-family: inherit;
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semi);
+  cursor: pointer;
+  transition:
+    color var(--t-fast) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth);
+}
+
+.resetBtn:hover {
+  color: var(--ssw-wrong);
+  border-color: var(--ssw-wrongBorder);
+}
+
+.resetBtn[data-confirming='true'] {
+  border-style: solid;
+  border-color: var(--ssw-wrongBorder);
+  background: var(--ssw-wrongBg);
+  color: var(--ssw-wrong);
+  font-weight: var(--fw-bold);
+}
