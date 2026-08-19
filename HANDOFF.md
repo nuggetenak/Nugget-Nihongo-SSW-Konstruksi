@@ -1,5 +1,26 @@
 # HANDOFF.md — SSW Konstruksi · content-dq
 
+> ## 🟢 THIS BRANCH IS MERGED — retired 2026-08-18
+> **content-dq's mission is complete.** Everything on this branch (29 sessions, 3.5 months of
+> content-quality work) is merged into `main` as of commit `151a45e` (`main`'s own HANDOFF.md has
+> the closing writeup — MERGE COMPLETE entry, top of CURRENT STATE). Every commit here is
+> reachable from `main`'s history via that merge, so nothing on this branch is at risk even
+> though it hasn't been deleted.
+>
+> **If you're a new agent reading this file on `content-dq`:** don't. Go to `main` instead —
+> it has this branch's data layer *and* the original app, already reconciled. There's no reason
+> to check out or continue work on `content-dq` specifically; it was a working branch for a
+> mission that's now done, not an ongoing parallel track. If a new session ends up here anyway
+> (e.g. an old bookmark, a stale clone instruction), redirect to `main` rather than picking up
+> where this file's GETTING STARTED/PROTOCOL sections below describe.
+>
+> The rest of this file is preserved as-is below — genuinely useful history (the multi-agent
+> relay protocol that made 29 sessions hold together without shared memory, the full P1–P22 task
+> log, the reasoning behind every data decision) even though its instructions are no longer
+> live ones to follow.
+
+---
+
 **This is the relay baton.** One file, always edited in place — no more `_v17`/`_v18` filenames.
 Owner uploads this file to a new agent chat, agent works, agent overwrites this file with the
 updated state, owner downloads it and hands it to the next agent. Repeat.
