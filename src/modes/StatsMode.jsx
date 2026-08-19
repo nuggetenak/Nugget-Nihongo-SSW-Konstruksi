@@ -88,81 +88,90 @@ export default function StatsMode({
         📊 Statistik
       </h2>
 
-      {/* Exam Readiness Score */}
-      <div
-        className={`${S.cardLg} ${ST.overviewCard}`}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 10,
-          paddingBottom: 20,
-        }}
-      >
+      {/* Exam Readiness Score + Overview — paired at wide widths, see .summaryRow */}
+      <div className={ST.summaryRow}>
         <div
+          className={`${S.cardLg} ${ST.overviewCard}`}
           style={{
-            fontSize: 13,
-            fontWeight: 700,
-            letterSpacing: 1,
-            color: T.textDim,
-            textTransform: 'uppercase',
-            marginBottom: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 10,
+            paddingBottom: 20,
           }}
         >
-          Kesiapan Ujian
-        </div>
-        {/* Render ProgressRing with dynamic color via CSS var override */}
-        <div style={{ '--ssw-ringColor': ringColor, position: 'relative' }}>
-          <svg
-            width={140}
-            height={140}
+          <div
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              transform: 'rotate(-90deg)',
-              zIndex: 2,
+              fontSize: 13,
+              fontWeight: 700,
+              letterSpacing: 1,
+              color: T.textDim,
+              textTransform: 'uppercase',
+              marginBottom: 4,
             }}
           >
-            <circle
-              cx={70}
-              cy={70}
-              r={60}
-              fill="none"
-              stroke={ringColor}
-              strokeWidth={10}
-              strokeLinecap="round"
-              strokeDasharray={2 * Math.PI * 60}
-              strokeDashoffset={2 * Math.PI * 60 * (1 - readiness / 100)}
-              style={{ transition: 'stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1), stroke 0.5s' }}
+            Kesiapan Ujian
+          </div>
+          {/* Render ProgressRing with dynamic color via CSS var override */}
+          <div style={{ '--ssw-ringColor': ringColor, position: 'relative' }}>
+            <svg
+              width={140}
+              height={140}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                transform: 'rotate(-90deg)',
+                zIndex: 2,
+              }}
+            >
+              <circle
+                cx={70}
+                cy={70}
+                r={60}
+                fill="none"
+                stroke={ringColor}
+                strokeWidth={10}
+                strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 60}
+                strokeDashoffset={2 * Math.PI * 60 * (1 - readiness / 100)}
+                style={{
+                  transition: 'stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1), stroke 0.5s',
+                }}
+              />
+            </svg>
+            <ProgressRing
+              current={readiness}
+              total={100}
+              size={140}
+              stroke={10}
+              label={readinessLabel}
             />
-          </svg>
-          <ProgressRing
-            current={readiness}
-            total={100}
-            size={140}
-            stroke={10}
-            label={readinessLabel}
-          />
+          </div>
+          <div style={{ fontSize: 13, color: ringColor, fontWeight: 700, marginTop: 2 }}>
+            {readinessLabel}
+          </div>
         </div>
-        <div style={{ fontSize: 13, color: ringColor, fontWeight: 700, marginTop: 2 }}>
-          {readinessLabel}
-        </div>
-      </div>
 
-      {/* Overview */}
-      <div className={`${S.cardLg} ${ST.overviewCard}`}>
-        <div className={ST.overviewPct} style={{ color: T.gold }}>
-          {pct}%
-        </div>
-        <div className={ST.overviewSub}>kartu sudah dihafal</div>
-        <ProgressBar current={knownN} total={total} color={T.correct} />
-        <div
-          style={{ display: 'flex', justifyContent: 'space-around', marginTop: 14, fontSize: 12 }}
-        >
-          <span className={ST.overviewKnown}>✅ {knownN} hafal</span>
-          <span className={ST.overviewUnknown}>❌ {unknownN} belum</span>
-          <span className={ST.overviewUntouched}>⬜ {untouched} belum dicek</span>
+        {/* Overview */}
+        <div className={`${S.cardLg} ${ST.overviewCard}`}>
+          <div className={ST.overviewPct} style={{ color: T.gold }}>
+            {pct}%
+          </div>
+          <div className={ST.overviewSub}>kartu sudah dihafal</div>
+          <ProgressBar current={knownN} total={total} color={T.correct} />
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              marginTop: 14,
+              fontSize: 12,
+            }}
+          >
+            <span className={ST.overviewKnown}>✅ {knownN} hafal</span>
+            <span className={ST.overviewUnknown}>❌ {unknownN} belum</span>
+            <span className={ST.overviewUntouched}>⬜ {untouched} belum dicek</span>
+          </div>
         </div>
       </div>
 
@@ -219,7 +228,7 @@ export default function StatsMode({
       )}
 
       <div className={S.sectionLabel}>📅 Kalender Belajar</div>
-      <div className={`${S.cardLg}`} style={{ overflowX: 'auto', paddingBottom: 8 }}>
+      <div className={`${S.cardLg} ${ST.heatmapCard}`}>
         <StudyHeatmap sessions={sessions} />
       </div>
 

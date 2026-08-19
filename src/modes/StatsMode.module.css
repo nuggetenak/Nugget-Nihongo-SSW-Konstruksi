@@ -1,5 +1,21 @@
 /* ─── StatsMode.module.css ───────────────────────────────────────────────────── */
 
+/* ── Wide-screen summary pairing ──────────────────────────────────────────
+   The readiness ring and the overview card were each a single item stretched
+   to the full page width — at the wide breakpoint that left a 140px ring
+   floating in a ~1100px card. auto-fit + minmax (Glossary's technique: no
+   media query, column count follows the container) lets them sit side by
+   side once there's room for both, collapsing to one column below that.
+   Unlike Glossary's rows, these hold fixed-size centered content rather than
+   space-between text, so the max is a finite cap, not 1fr — content that
+   doesn't get more useful by stretching shouldn't stretch just because the
+   container can. */
+.summaryRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 380px));
+  column-gap: var(--sp-4);
+}
+
 /* ── Overview card ── */
 .overviewCard {
   margin-bottom: 20px;
@@ -71,6 +87,20 @@
   font-size: var(--fs-caption);
   color: var(--ssw-gold);
   font-weight: 600;
+}
+
+/* ── Calendar heatmap ─────────────────────────────────────────────────────
+   The heatmap SVG has a fixed intrinsic width (column count × cell size);
+   the card around it used to stretch to the page's full width regardless,
+   pinning the calendar to the left edge of mostly empty space. Sizing the
+   card to its content — rather than capping it at some other width — is the
+   difference between a rethink and a width tweak: the box now IS the
+   widget, not a wide container the widget happens to sit inside. */
+.heatmapCard {
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px;
 }
 
 /* ── Activity chart ── */
