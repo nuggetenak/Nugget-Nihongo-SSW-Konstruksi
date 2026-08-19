@@ -184,6 +184,44 @@ no signage lettering.
 
 ---
 
+## 4b. Second icon sheet — 10 modes still on placeholders
+
+The first sheet covered navigation and common actions. Ten study modes are
+still rendering geometric placeholders. Same shared style block, same rules.
+
+```
+Generate ONE image: a 5 x 2 grid of 10 flat vector icons on a transparent
+background. Even spacing, each icon in its own equal cell, all optically the
+same size and stroke weight.
+
+[PASTE SHARED STYLE BLOCK]
+
+All icons in amber #F59E0B, stroke only.
+
+Grid contents, left to right, top to bottom:
+ 1  two curved arrows forming a circle — refresh / repeat
+ 2  graduation cap, front-on
+ 3  a grid of four squares — a number pad
+ 4  warning triangle with an exclamation mark
+ 5  a file folder, closed, viewed front-on
+ 6  bar chart with three bars of different heights on a baseline
+ 7  downward arrow into an open tray — save / export
+ 8  a pencil drawing a line, diagonal
+ 9  two horizontal arrows pointing opposite ways, stacked — swap
+10  a keyboard: wide rounded rectangle with small key marks
+
+Each icon must be distinguishable from the other 9 in silhouette.
+```
+
+**Filenames after slicing** -> `ulang, wisuda, angka, peringatan, arsip,
+statistik, simpan, tulis, tukar, ketik` (`.png`, 512x512, transparent).
+
+Activate them the same way: drop into `public/icons/ui/`, add one line each to
+the `ASSETS` map in `src/components/Icon.jsx`. The mode-to-icon mapping already
+exists in `MODE_META` (the `ui` key), so nothing else needs touching.
+
+---
+
 ## 6. Status — what has landed
 
 Sections 2 and 4 are **done**. Sheets were generated, sliced, and installed:
