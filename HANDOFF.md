@@ -170,7 +170,11 @@ Verify before trusting past this point — this line doesn't update itself.
     offline-first goal on slow connections. Deliberately left for its own branch — it's a build
     concern, not UI.
   - Belajar/Saya tab interiors were unpinned and now fill the shell, but their internal layouts
-    were not redesigned for wide screens — they're single columns in a wide space.
+    were not redesigned for wide screens — they're single columns in a wide space. Glossary
+    shows the pattern that works: `auto-fit` + `minmax()` on the row container, no media query.
+  - **StatsMode at full width** has a small readiness ring floating in a very wide card, and a
+    left-aligned heatmap in a wide box. Cosmetic, not broken — it needs a layout rethink rather
+    than a width tweak, so it was left alone deliberately.
   - Desktop dashboard has vertical dead space; needs more content, not a layout change.
   - The branch has never been merged. Review the Prettier commit separately from the rest.
 
