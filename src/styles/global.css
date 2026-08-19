@@ -39,8 +39,19 @@
   --fw-heavy: 800;
   --fw-black: 900;
 
-  /* Max content width */
+  /* ── Width tokens ──
+     --max-w        content column. Widens at the breakpoints defined at the
+                    bottom of this file, so screens never need their own
+                    max-width or their own media queries.
+     --overlay-max-w dialogs, toasts, popups, the floating bottom nav. Stays
+                    phone-width at every size — a 1180px confirm dialog is
+                    not an improvement. */
   --max-w: 480px;
+  --overlay-max-w: 480px;
+
+  /* Minimum interactive target. WCAG 2.5.8 asks 24px, 2.5.5 asks 44px; this
+     app is used one-handed on phones, often outdoors, so it targets 44. */
+  --tap-min: 44px;
 
   /* ── Responsive layout (UI overhaul) ──
      Breakpoints are documented here but must be written literally in @media
@@ -48,7 +59,6 @@
        compact : < 700px   phone      → bottom nav, single column
        medium  : 700-1039  tablet     → bottom nav, wider column, 2-col grids
        wide    : >= 1040   desktop    → side nav, 2-col dashboard            */
-  --shell-max-w: 1180px; /* outer bound of the wide layout            */
   --reading-max-w: 620px; /* single-column content on medium screens   */
   --sidenav-w: 236px;
   --gutter-compact: 16px;
@@ -351,5 +361,43 @@ body {
   .badge {
     animation: none;
     transition: none;
+  }
+}
+
+/* ── Responsive width ──────────────────────────────────────────────────────
+   The ONLY place the content column's width changes. Defined here so no
+   component has to know a breakpoint to lay itself out correctly. Screens that
+   set max-width: var(--max-w) widen automatically along with the shell.
+   (Kept in sync with the nav-placement breakpoints in AppShell.module.css.) */
+@media (min-width: 700px) {
+  :root {
+    --max-w: 620px;
+  }
+}
+
+@media (min-width: 1040px) {
+  :root {
+    --max-w: 1180px;
+  }
+}
+
+/* ── Focus ────────────────────────────────────────────────────────────────
+   One ring for every interactive element. Desktop support made keyboard
+   navigation a real path, and the app previously had a single focus-visible
+   rule in total. :focus-visible keeps it off for mouse/touch users. */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--ssw-amber);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

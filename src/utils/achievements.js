@@ -6,20 +6,118 @@ import { HALF_DECK_THRESHOLD, TOTAL_CARDS } from './constants.js';
 import { getAvgAccuracy } from './session-analytics.js';
 
 export const ACHIEVEMENTS = [
-  { id: 'first_10',       icon: '🌱', label: 'Langkah Pertama',  desc: '10 kartu hafal',                  check: (s) => s.known >= 10 },
-  { id: 'first_100',      icon: '🏗️', label: 'Pondasi Kuat',     desc: '100 kartu hafal',                 check: (s) => s.known >= 100 },
-  { id: 'half_deck',      icon: '💪', label: 'Setengah Jalan',   desc: `${HALF_DECK_THRESHOLD}+ kartu hafal`,  check: (s) => s.known >= HALF_DECK_THRESHOLD },
-  { id: 'full_deck',      icon: '🏆', label: 'Nugget Pro',       desc: `Semua ${TOTAL_CARDS} kartu hafal`,     check: (s) => s.known >= TOTAL_CARDS },
-  { id: 'week_streak',    icon: '🔥', label: 'Pekerja Keras',    desc: '7 hari berturut-turut',           check: (s) => s.streak >= 7 },
-  { id: 'month_streak',   icon: '🌟', label: 'Konsisten',        desc: '30 hari berturut-turut',          check: (s) => s.streak >= 30 },
-  { id: 'perfect_sprint', icon: '⚡', label: 'Kilat',            desc: 'Sprint tanpa salah (≥10 kartu)',  check: (s) => s.perfectSprint },
-  { id: 'lulus_simulasi', icon: '🎓', label: 'Siap Ujian',       desc: 'Simulasi ≥65%',                   check: (s) => s.bestSimScore >= 65 },
-  { id: 'sim_75',         icon: '🎯', label: 'Sangat Siap',      desc: 'Simulasi ≥75%',                   check: (s) => s.bestSimScore >= 75 },
-  { id: 'jac_master',     icon: '📋', label: 'JAC Master',       desc: 'Semua set JAC ≥80%',              check: (s) => s.jacMastery },
-  { id: 'srs_100',        icon: '🌿', label: 'SRS Pemula',       desc: '100 kartu SRS matang',            check: (s) => s.matureSRS >= 100 },
-  { id: 'srs_500',        icon: '🌳', label: 'SRS Veteran',      desc: '500 kartu SRS matang',            check: (s) => s.matureSRS >= 500 },
-  { id: 'quiz_70',        icon: '✨', label: 'Akurat',           desc: 'Akurasi kuis rata-rata ≥70%',     check: (s) => s.avgQuizAcc >= 70 },
-  { id: 'sessions_50',    icon: '📚', label: 'Rajin Belajar',    desc: '50 sesi belajar',                 check: (s) => s.totalSessions >= 50 },
+  {
+    id: 'first_10',
+    icon: '🌱',
+    badge: 'badge-01.png',
+    label: 'Langkah Pertama',
+    desc: '10 kartu hafal',
+    check: (s) => s.known >= 10,
+  },
+  {
+    id: 'first_100',
+    icon: '🏗️',
+    badge: 'badge-02.png',
+    label: 'Pondasi Kuat',
+    desc: '100 kartu hafal',
+    check: (s) => s.known >= 100,
+  },
+  {
+    id: 'half_deck',
+    icon: '💪',
+    badge: 'badge-03.png',
+    label: 'Setengah Jalan',
+    desc: `${HALF_DECK_THRESHOLD}+ kartu hafal`,
+    check: (s) => s.known >= HALF_DECK_THRESHOLD,
+  },
+  {
+    id: 'full_deck',
+    icon: '🏆',
+    badge: 'badge-14.png',
+    label: 'Nugget Pro',
+    desc: `Semua ${TOTAL_CARDS} kartu hafal`,
+    check: (s) => s.known >= TOTAL_CARDS,
+  },
+  {
+    id: 'week_streak',
+    icon: '🔥',
+    badge: 'badge-05.png',
+    label: 'Pekerja Keras',
+    desc: '7 hari berturut-turut',
+    check: (s) => s.streak >= 7,
+  },
+  {
+    id: 'month_streak',
+    icon: '🌟',
+    badge: 'badge-06.png',
+    label: 'Konsisten',
+    desc: '30 hari berturut-turut',
+    check: (s) => s.streak >= 30,
+  },
+  {
+    id: 'perfect_sprint',
+    icon: '⚡',
+    badge: 'badge-07.png',
+    label: 'Kilat',
+    desc: 'Sprint tanpa salah (≥10 kartu)',
+    check: (s) => s.perfectSprint,
+  },
+  {
+    id: 'lulus_simulasi',
+    icon: '🎓',
+    badge: 'badge-08.png',
+    label: 'Siap Ujian',
+    desc: 'Simulasi ≥65%',
+    check: (s) => s.bestSimScore >= 65,
+  },
+  {
+    id: 'sim_75',
+    icon: '🎯',
+    badge: 'badge-09.png',
+    label: 'Sangat Siap',
+    desc: 'Simulasi ≥75%',
+    check: (s) => s.bestSimScore >= 75,
+  },
+  {
+    id: 'jac_master',
+    icon: '📋',
+    badge: 'badge-10.png',
+    label: 'JAC Master',
+    desc: 'Semua set JAC ≥80%',
+    check: (s) => s.jacMastery,
+  },
+  {
+    id: 'srs_100',
+    icon: '🌿',
+    badge: 'badge-11.png',
+    label: 'SRS Pemula',
+    desc: '100 kartu SRS matang',
+    check: (s) => s.matureSRS >= 100,
+  },
+  {
+    id: 'srs_500',
+    icon: '🌳',
+    badge: 'badge-12.png',
+    label: 'SRS Veteran',
+    desc: '500 kartu SRS matang',
+    check: (s) => s.matureSRS >= 500,
+  },
+  {
+    id: 'quiz_70',
+    icon: '✨',
+    badge: 'badge-13.png',
+    label: 'Akurat',
+    desc: 'Akurasi kuis rata-rata ≥70%',
+    check: (s) => s.avgQuizAcc >= 70,
+  },
+  {
+    id: 'sessions_50',
+    icon: '📚',
+    badge: 'badge-04.png',
+    label: 'Rajin Belajar',
+    desc: '50 sesi belajar',
+    check: (s) => s.totalSessions >= 50,
+  },
 ];
 
 /**
@@ -34,22 +132,35 @@ export function buildAchievementState({ known, streakData, sessions = [], srs, j
 
   // Best simulasi score from sessions
   const simSessions = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
-  const bestSimScore = simSessions.length > 0
-    ? Math.max(...simSessions.map((s) => Math.round((s.correct / s.total) * 100)))
-    : 0;
+  const bestSimScore =
+    simSessions.length > 0
+      ? Math.max(...simSessions.map((s) => Math.round((s.correct / s.total) * 100)))
+      : 0;
 
   // Perfect sprint: any sprint session with 0 wrong (correct === total, total >= 10)
-  const perfectSprint = sessions.some((s) => s.mode === 'sprint' && s.total >= 10 && s.correct === s.total);
+  const perfectSprint = sessions.some(
+    (s) => s.mode === 'sprint' && s.total >= 10 && s.correct === s.total
+  );
 
   // JAC mastery: all JAC set scores ≥80%
   const jacEntries = Object.values(jacScores);
-  const jacMastery = jacEntries.length >= 4 &&
+  const jacMastery =
+    jacEntries.length >= 4 &&
     jacEntries.every((s) => s.total > 0 && (s.correct / s.total) * 100 >= 80);
 
   // Average quiz accuracy across all scored quiz modes.
   const avgQuizAcc = getAvgAccuracy(sessions) ?? 0;
 
-  return { known: knownN, streak, matureSRS, totalSessions, bestSimScore, perfectSprint, jacMastery, avgQuizAcc };
+  return {
+    known: knownN,
+    streak,
+    matureSRS,
+    totalSessions,
+    bestSimScore,
+    perfectSprint,
+    jacMastery,
+    avgQuizAcc,
+  };
 }
 
 /**

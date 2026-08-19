@@ -30,28 +30,35 @@
   margin-top: 4px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 }
 /* Top gradient line */
 .progressCard::before {
   content: '';
   position: absolute;
-  top: 0; left: 20%; right: 20%;
+  top: 0;
+  left: 20%;
+  right: 20%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.30), transparent);
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.3), transparent);
   pointer-events: none;
 }
 /* Glow orb */
 .progressCard::after {
   content: '';
   position: absolute;
-  right: -20px; bottom: -20px;
-  width: 90px; height: 90px;
+  right: -20px;
+  bottom: -20px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
-.progressInfo { flex: 1; z-index: 1; }
+.progressInfo {
+  flex: 1;
+  z-index: 1;
+}
 .progressKnown {
   font-family: 'Syne', 'DM Sans', sans-serif;
   font-size: var(--fs-title);
@@ -61,16 +68,20 @@
   letter-spacing: -0.5px;
   line-height: 1;
 }
-.progressDetail { font-size: var(--fs-caption); color: var(--ssw-textDim); margin-bottom: 6px; }
+.progressDetail {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+  margin-bottom: 6px;
+}
 .progressStreak {
   font-size: var(--fs-small);
   font-weight: 800;
   color: var(--ssw-amber);
   display: inline-block;
-  background: rgba(245,158,11,0.10);
+  background: rgba(245, 158, 11, 0.1);
   padding: 3px 10px;
   border-radius: var(--r-pill);
-  border: 1px solid rgba(245,158,11,0.18);
+  border: 1px solid rgba(245, 158, 11, 0.18);
 }
 
 /* ── Section heading ── */
@@ -101,14 +112,20 @@
   border-bottom: 1px solid var(--ssw-border);
   transition: opacity 0.15s;
 }
-.row[data-clickable='true'] { cursor: pointer; }
-.row[data-clickable='true']:active { opacity: 0.6; }
+.row[data-clickable='true'] {
+  cursor: pointer;
+}
+.row[data-clickable='true']:active {
+  opacity: 0.6;
+}
 .rowLabel {
   font-size: var(--fs-body);
   font-weight: 600;
   color: var(--ssw-text);
 }
-.rowLabel[data-danger='true'] { color: var(--ssw-wrong); }
+.rowLabel[data-danger='true'] {
+  color: var(--ssw-wrong);
+}
 .rowSub {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
@@ -137,15 +154,23 @@
   cursor: pointer;
   transition: opacity 0.15s;
 }
-.resetRow:active { opacity: 0.7; }
+.resetRow:active {
+  opacity: 0.7;
+}
 .resetLabel {
   font-size: var(--fs-body);
   font-weight: 600;
   color: var(--ssw-textDim);
   transition: color 0.2s;
 }
-.resetLabel[data-active='true'] { color: var(--ssw-wrong); }
-.resetSub { font-size: var(--fs-small); color: var(--ssw-textFaint); margin-top: 2px; }
+.resetLabel[data-active='true'] {
+  color: var(--ssw-wrong);
+}
+.resetSub {
+  font-size: var(--fs-small);
+  color: var(--ssw-textFaint);
+  margin-top: 2px;
+}
 
 /* ── Inline edit ── */
 .inlineEdit {
@@ -253,13 +278,17 @@
 .progressCard::after {
   content: '';
   position: absolute;
-  right: -16px; bottom: -16px;
-  width: 70px; height: 70px;
+  right: -16px;
+  bottom: -16px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.09) 0%, transparent 70%);
   pointer-events: none;
 }
-.progressInfo { flex: 1; }
+.progressInfo {
+  flex: 1;
+}
 .progressKnown {
   font-size: var(--fs-title);
   font-weight: 800;
@@ -267,13 +296,17 @@
   margin-bottom: 4px;
   letter-spacing: -0.3px;
 }
-.progressDetail { font-size: var(--fs-caption); color: var(--ssw-textDim); margin-bottom: 4px; }
+.progressDetail {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+  margin-bottom: 4px;
+}
 .progressStreak {
   font-size: var(--fs-small);
   font-weight: 700;
   color: var(--ssw-amber);
   display: inline-block;
-  background: rgba(245,158,11,0.10);
+  background: rgba(245, 158, 11, 0.1);
   padding: 2px 8px;
   border-radius: var(--r-pill);
 }
@@ -317,7 +350,9 @@
   font-weight: 600;
   color: var(--ssw-text);
 }
-.rowLabel[data-danger='true'] { color: var(--ssw-wrong); }
+.rowLabel[data-danger='true'] {
+  color: var(--ssw-wrong);
+}
 .rowSub {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
@@ -346,15 +381,23 @@
   cursor: pointer;
   transition: opacity 0.15s;
 }
-.resetRow:active { opacity: 0.7; }
+.resetRow:active {
+  opacity: 0.7;
+}
 .resetLabel {
   font-size: var(--fs-body);
   font-weight: 600;
   color: var(--ssw-textDim);
   transition: color 0.2s;
 }
-.resetLabel[data-active='true'] { color: var(--ssw-wrong); }
-.resetSub { font-size: var(--fs-small); color: var(--ssw-textFaint); margin-top: 2px; }
+.resetLabel[data-active='true'] {
+  color: var(--ssw-wrong);
+}
+.resetSub {
+  font-size: var(--fs-small);
+  color: var(--ssw-textFaint);
+  margin-top: 2px;
+}
 
 /* ── Inline edit ── */
 .inlineEdit {
@@ -421,7 +464,6 @@
   cursor: pointer;
 }
 
-
 /* ── PWA Install Card (FE-08-A) ── */
 .installCard {
   width: 100%;
@@ -435,24 +477,54 @@
   cursor: pointer;
   font-family: inherit;
   margin: 12px 0 4px;
-  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.10);
-  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.1);
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
   position: relative;
   overflow: hidden;
 }
 .installCard::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.4), transparent);
 }
-.installCard:active { opacity: 0.75; transform: scale(0.99); }
-.installIcon { font-size: 22px; flex-shrink: 0; }
-.installBody { flex: 1; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
-.installLabel { font-size: var(--fs-body); font-weight: 800; color: var(--ssw-amber); line-height: 1.2; }
-.installSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
-.installArrow { font-size: 22px; color: var(--ssw-amber); flex-shrink: 0; opacity: 0.7; }
+.installCard:active {
+  opacity: 0.75;
+  transform: scale(0.99);
+}
+.installIcon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.installBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.installLabel {
+  font-size: var(--fs-body);
+  font-weight: 800;
+  color: var(--ssw-amber);
+  line-height: 1.2;
+}
+.installSub {
+  font-size: var(--fs-small);
+  color: var(--ssw-textDim);
+  margin-top: 2px;
+}
+.installArrow {
+  font-size: 22px;
+  color: var(--ssw-amber);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
 
 /* ── Footer ── */
 .footer {

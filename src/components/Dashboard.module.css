@@ -72,6 +72,9 @@
   font-family: inherit;
   font-size: var(--fs-micro);
   font-weight: var(--fw-black);
+  /* min-height meets the 44px touch target guidance; padding alone left it
+     at 28px, which is a hard target on a phone in work gloves. */
+  min-height: var(--tap-min);
   padding: 6px 11px;
   border-radius: var(--r-pill);
   cursor: pointer;
@@ -79,8 +82,8 @@
 }
 
 .themeBtn {
-  width: 36px;
-  height: 36px;
+  width: var(--tap-min);
+  height: var(--tap-min);
   border-radius: var(--r-md);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);

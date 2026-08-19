@@ -11,6 +11,7 @@ import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
 import { recommendMode } from '../utils/recommend-mode.js';
+import { MODE_META } from '../router/modes.js';
 
 const getRecent = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
 
@@ -18,7 +19,12 @@ function getQuickStart(srs, examDate) {
   const sessions = storageGet('progress')?.sessions ?? [];
   const streak = storageGet('progress')?.streakData?.days ?? 0;
   const rec = recommendMode({ srsState: srs, sessions, streak, examDate });
-  return { icon: rec.icon, label: rec.label, desc: rec.reason, mode: rec.mode };
+  return {
+    ui: MODE_META[rec.mode]?.ui ?? 'panah',
+    label: rec.label,
+    desc: rec.reason,
+    mode: rec.mode,
+  };
 }
 
 function getCountdownTier(daysLeft) {
@@ -28,12 +34,14 @@ function getCountdownTier(daysLeft) {
   return 'info';
 }
 
-const QUICK_MODES = [
-  { key: 'kartu', icon: 'kartu', label: 'Kartu' },
-  { key: 'kuis', icon: 'kuis', label: 'Kuis' },
-  { key: 'sprint', icon: 'sprint', label: 'Sprint' },
-  { key: 'jac', icon: 'jac', label: 'JAC' },
-];
+// Which modes appear as quick tiles. Only the keys live here — label and icon
+// are read from MODE_META so this never drifts out of sync with the registry.
+const QUICK_MODE_KEYS = ['kartu', 'kuis', 'sprint', 'jac'];
+const QUICK_MODES = QUICK_MODE_KEYS.map((key) => ({
+  key,
+  ui: MODE_META[key]?.ui ?? 'more',
+  label: MODE_META[key]?.short ?? MODE_META[key]?.label ?? key,
+}));
 
 export default function Dashboard({
   known,
@@ -94,13 +102,13 @@ export default function Dashboard({
       {/* ── Header ── */}
       <header className={s.header}>
         <div className={s.brand}>
-          <div className={s.brandName}>SSW Konstruksi</div>
+          <h1 className={s.brandName}>SSW Konstruksi</h1>
           <div className={s.brandSub}>by Nugget Nihongo</div>
         </div>
         {/* Wide screens: the side nav already carries the brand, so the header
             switches to a page title instead of repeating it. Both stay in the
             DOM — visibility is CSS-only — so screen readers and tests see them. */}
-        <div className={s.pageTitle}>
+        <div className={s.pageTitle} aria-hidden="true">
           <div className={s.pageTitleName}>Beranda</div>
           <div className={s.pageTitleSub}>
             {streakData.days >= 2
@@ -175,7 +183,9 @@ export default function Dashboard({
 
           {/* ── Primary CTA ── */}
           <button className={s.cta} onClick={() => onNavigate(qs.mode)}>
-            <span className={s.ctaIcon}>{qs.icon}</span>
+            <span className={s.ctaIcon}>
+              <Icon name={qs.ui} size={20} />
+            </span>
             <span className={s.ctaBody}>
               <span className={s.ctaLabel}>{qs.label}</span>
               <span className={s.ctaDesc}>{qs.desc}</span>
@@ -229,7 +239,7 @@ export default function Dashboard({
             {QUICK_MODES.map((m) => (
               <button key={m.key} className={s.quickTile} onClick={() => onNavigate(m.key)}>
                 <span className={s.quickIcon}>
-                  <Icon name={m.icon} size={22} />
+                  <Icon name={m.ui} size={22} />
                 </span>
                 <span className={s.quickLabel}>{m.label}</span>
               </button>

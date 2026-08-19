@@ -1,7 +1,11 @@
-/* AppShell.module.css — responsive frame
-   compact  <700px    phone   : bottom nav, single column
-   medium   700-1039  tablet  : bottom nav, wider reading column
-   wide     >=1040    desktop : side nav column, no bottom nav          */
+/* AppShell.module.css — the single owner of responsive layout.
+   Breakpoints live HERE and, where unavoidable, in Dashboard's own two-column
+   rule. Component stylesheets must not repeat them or set their own max-width;
+   width is a shell concern, not a screen concern.
+
+     compact  <700px    phone   : bottom nav, single column
+     medium   700-1039  tablet  : bottom nav, wider reading column
+     wide     >=1040    desktop : side nav column, no bottom nav          */
 
 .shell {
   display: flex;
@@ -9,7 +13,6 @@
   width: 100%;
 }
 
-/* Side nav is hidden below the wide breakpoint. */
 .sideSlot {
   display: none;
 }
@@ -25,21 +28,31 @@
   width: 100%;
   max-width: var(--max-w);
   padding: 0 var(--gutter-compact);
-  /* The overlap fix: reserve the floating nav's footprint here, once, rather
-     than per-screen. Zeroed at the wide breakpoint where nav is a column. */
+}
+
+/* Reserve the floating nav's footprint once, here, rather than per-screen —
+   forgetting it per-screen is what put content under the nav before. */
+.content[data-nav-safe='true'] {
   padding-bottom: var(--nav-safe);
 }
 
-/* ── medium: tablets keep the bottom nav but earn a wider column ── */
+.content[data-nav-safe='false'] {
+  padding-bottom: var(--sp-6);
+}
+
+/* Reading-width screens (glossary, notes, long prose) stay narrow even on
+   desktop, where full-width body text becomes hard to scan. */
+.content[data-width='reading'] {
+  max-width: var(--reading-max-w);
+}
+
 @media (min-width: 700px) {
   .content {
-    max-width: var(--reading-max-w);
     padding-left: var(--gutter-medium);
     padding-right: var(--gutter-medium);
   }
 }
 
-/* ── wide: side nav takes over, bottom nav retires ── */
 @media (min-width: 1040px) {
   .sideSlot {
     display: block;
@@ -54,7 +67,6 @@
   }
 
   .content {
-    max-width: var(--shell-max-w);
     padding: 0 var(--gutter-wide);
     padding-bottom: var(--sp-6);
   }

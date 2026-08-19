@@ -130,6 +130,69 @@ const SHAPES = {
     </>
   ),
   panah: <path d="M4 10h11m-4-4 4 4-4 4" />,
+  // ── Modes not covered by the first generated sheet ──
+  // Distinct silhouettes so every mode stays tellable apart while the second
+  // sheet is pending. Prompts: docs/ASSET-PROMPTS.md section 4b.
+  ulang: (
+    <>
+      <path d="M16 6.5A7 7 0 1 0 17 10" />
+      <path d="M16 3v4h-4" />
+    </>
+  ),
+  wisuda: (
+    <>
+      <path d="M10 4 2.5 7.5 10 11l7.5-3.5z" />
+      <path d="M5.5 9.2v4c0 1.2 2 2.3 4.5 2.3s4.5-1.1 4.5-2.3v-4" />
+    </>
+  ),
+  angka: (
+    <>
+      <rect x="3.5" y="3.5" width="13" height="13" rx="2" />
+      <path d="M3.5 8h13M3.5 12h13M8 3.5v13M12.5 3.5v13" />
+    </>
+  ),
+  peringatan: (
+    <>
+      <path d="M10 3.2 18 16.5H2z" />
+      <path d="M10 8v3.2M10 13.8v.01" />
+    </>
+  ),
+  arsip: (
+    <path d="M2.8 6.2a1.5 1.5 0 0 1 1.5-1.5h3l1.6 1.9h6.4a1.5 1.5 0 0 1 1.5 1.5v6.2a1.5 1.5 0 0 1-1.5 1.5H4.3a1.5 1.5 0 0 1-1.5-1.5z" />
+  ),
+  statistik: (
+    <>
+      <path d="M3 17h14" />
+      <rect x="4.5" y="10" width="3" height="5" />
+      <rect x="9" y="6" width="3" height="9" />
+      <rect x="13.5" y="12" width="3" height="3" />
+    </>
+  ),
+  simpan: (
+    <>
+      <path d="M10 3v8" />
+      <path d="M6.8 8 10 11.2 13.2 8" />
+      <path d="M3.5 13v2.5a1.5 1.5 0 0 0 1.5 1.5h10a1.5 1.5 0 0 0 1.5-1.5V13" />
+    </>
+  ),
+  tulis: (
+    <>
+      <path d="M3 17h14" />
+      <path d="M13.2 3.6a1.7 1.7 0 0 1 2.4 2.4L7.7 13.9l-3.2.8.8-3.2z" />
+    </>
+  ),
+  tukar: (
+    <>
+      <path d="M3.5 7h11M12 4.5 14.5 7 12 9.5" />
+      <path d="M16.5 13h-11M8 10.5 5.5 13 8 15.5" />
+    </>
+  ),
+  ketik: (
+    <>
+      <rect x="2.5" y="6" width="15" height="9" rx="1.6" />
+      <path d="M5.5 9h.01M8 9h.01M10.5 9h.01M13 9h.01M6.5 12h7" />
+    </>
+  ),
 };
 
 /**

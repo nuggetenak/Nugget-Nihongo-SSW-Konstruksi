@@ -14,7 +14,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: var(--max-w, 480px);
+  max-width: var(--overlay-max-w);
   z-index: 201;
   background: var(--ssw-bg);
   border-radius: var(--r-xl) var(--r-xl) 0 0;

@@ -66,18 +66,29 @@
   font-family: 'DM Sans', system-ui, sans-serif;
   text-align: left;
   margin-bottom: 8px;
-  transition: background 0.15s, transform 0.14s, box-shadow 0.15s;
+  transition:
+    background 0.15s,
+    transform 0.14s,
+    box-shadow 0.15s;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
 }
 /* Subtle gradient top */
 .featuredCard::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.25) 40%, rgba(245,158,11,0.25) 60%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.25) 40%,
+    rgba(245, 158, 11, 0.25) 60%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
@@ -85,10 +96,11 @@
   background: var(--ssw-surfaceActive);
   transform: scale(0.978);
   border-color: var(--ssw-borderHover);
-  box-shadow: 0 0 0 rgba(0,0,0,0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .featuredIcon {
+  color: var(--ssw-amber);
   width: 52px;
   height: 52px;
   border-radius: var(--r-lg);
@@ -97,7 +109,7 @@
   justify-content: center;
   font-size: 26px;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
 }
 
 .featuredBody {
@@ -125,7 +137,9 @@
   flex-shrink: 0;
   opacity: 0.55;
   line-height: 1;
-  transition: transform 0.2s ease, opacity 0.2s;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s;
 }
 .featuredCard:hover .featuredArrow {
   transform: translateX(2px);
@@ -180,7 +194,10 @@
   display: flex;
   flex-direction: column;
   gap: 7px;
-  transition: background 0.15s, transform 0.14s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    transform 0.14s,
+    border-color 0.15s;
   position: relative;
   min-height: 92px;
   overflow: hidden;
@@ -189,9 +206,11 @@
 .compactCard::after {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 32px;
-  background: linear-gradient(0deg, rgba(245,158,11,0.035) 0%, transparent 100%);
+  background: linear-gradient(0deg, rgba(245, 158, 11, 0.035) 0%, transparent 100%);
   pointer-events: none;
   border-radius: 0 0 var(--r-xl) var(--r-xl);
 }
@@ -203,6 +222,7 @@
 }
 
 .compactIcon {
+  color: var(--ssw-amber);
   width: 36px;
   height: 36px;
   border-radius: 10px;

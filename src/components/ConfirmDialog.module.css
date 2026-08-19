@@ -14,7 +14,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: var(--max-w, 480px);
+  max-width: var(--overlay-max-w);
   z-index: 401;
   background: var(--ssw-bg);
   border-radius: var(--r-xl) var(--r-xl) 0 0;
@@ -57,7 +57,9 @@
   cursor: pointer;
   transition: background var(--t-fast);
 }
-.btnCancel:active { background: var(--ssw-surfaceActive); }
+.btnCancel:active {
+  background: var(--ssw-surfaceActive);
+}
 
 .btnConfirm {
   flex: 1;
@@ -70,6 +72,11 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  transition: opacity var(--t-fast), transform var(--t-fast);
+  transition:
+    opacity var(--t-fast),
+    transform var(--t-fast);
 }
-.btnConfirm:active { opacity: 0.85; transform: scale(0.97); }
+.btnConfirm:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}

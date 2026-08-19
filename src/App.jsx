@@ -16,6 +16,7 @@ import Dashboard from './components/Dashboard.jsx';
 import BelajarTab from './components/BelajarTab.jsx';
 import SayaTab from './components/SayaTab.jsx';
 import ModeRouter from './router/ModeRouter.jsx';
+import { MODE_META } from './router/modes.js';
 
 // ── Main ──────────────────────────────────────────────────────────────────
 export default function App() {
@@ -70,11 +71,21 @@ export default function App() {
     });
   }, [toast]);
 
-  // Active mode takes full screen
+  // Active mode. Routed through AppShell too — modes previously returned early
+  // and bypassed the shell entirely, which is why they stayed a 480px column on
+  // desktop while the tabs had already gone responsive.
   if (mode)
     return (
       <main id="main-content">
-        <ModeRouter />
+        <AppShell
+          tab={tab}
+          onTabChange={goTab}
+          dueBadge={srs.dueCount}
+          chrome="mode"
+          width={MODE_META[mode]?.width ?? 'reading'}
+        >
+          <ModeRouter />
+        </AppShell>
       </main>
     );
 

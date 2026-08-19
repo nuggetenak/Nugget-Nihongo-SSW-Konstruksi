@@ -3,16 +3,21 @@
 // remaining modes = compact 2-col grid. Color-coded per section.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import Icon from './Icon.jsx';
 import s from './BelajarTab.module.css';
 import { MODE_META, MODE_SECTIONS } from '../router/modes.js';
 
 // ── Unified amber palette for all sections ────────────────────────────────────
 const SECTION_META = {
   pelajari: { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
-  latihan:  { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
-  ujian:    { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
-  ulasan:   { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
-  alat:     { color: 'var(--ssw-textDim)', bg: 'rgba(245,158,11,0.05)', border: 'rgba(245,158,11,0.10)' },
+  latihan: { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  ujian: { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  ulasan: { color: '#F59E0B', bg: 'rgba(245,158,11,0.10)', border: 'rgba(245,158,11,0.18)' },
+  alat: {
+    color: 'var(--ssw-textDim)',
+    bg: 'rgba(245,158,11,0.05)',
+    border: 'rgba(245,158,11,0.10)',
+  },
 };
 
 function SectionHeader({ sectionKey, title }) {
@@ -46,7 +51,7 @@ function FeaturedCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
         className={s.featuredIcon}
         style={{ background: sm.bg, border: `1px solid ${sm.border}` }}
       >
-        {m.icon}
+        <Icon name={m.ui} size={24} />
       </span>
       <div className={s.featuredBody}>
         <div className={s.featuredLabel}>{m.label}</div>
@@ -57,7 +62,9 @@ function FeaturedCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
           {badge > 99 ? '99+' : badge}
         </span>
       )}
-      <span className={s.featuredArrow} style={{ color: sm.color }}>›</span>
+      <span className={s.featuredArrow} style={{ color: sm.color }}>
+        ›
+      </span>
     </button>
   );
 }
@@ -79,7 +86,9 @@ function CompactCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
           {badge > 99 ? '99+' : badge}
         </span>
       )}
-      <span className={s.compactIcon} style={{ background: sm.bg }}>{m.icon}</span>
+      <span className={s.compactIcon} style={{ background: sm.bg }}>
+        <Icon name={m.ui} size={20} />
+      </span>
       <div className={s.compactLabel}>{m.label}</div>
       <div className={s.compactDesc}>{m.desc}</div>
     </button>
