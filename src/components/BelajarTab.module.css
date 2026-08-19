@@ -162,25 +162,38 @@
   animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ── Compact 2-col grid ── */
+/* ── Compact tile grid ─────────────────────────────────────────────────────
+   Was a hardcoded 2-column grid; at the wide breakpoint that made each tile
+   ~500px+ for content that needs about 180px. auto-fit + minmax (Glossary's
+   technique) adds columns as space allows instead — no media query, and
+   compact width still resolves to exactly 2 columns at the same size as
+   before. The max is capped, not 1fr: these tiles hold vertically-stacked
+   icon/label/desc content that doesn't get more useful by stretching wider,
+   only by getting company. */
 .compactGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
   gap: 8px;
   margin-bottom: 2px;
 }
 
-/* Lone last card fills full row */
-.compactGrid > *:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-}
+/* "Lone card fills the row" only means something for a fixed 2-column grid —
+   at 3+ columns, nth-child(odd) no longer lines up with "alone in its row",
+   so this stays scoped to the compact width it was designed for. Above that,
+   a lone trailing card just renders at normal tile size, which needs no
+   special case. */
+@media (max-width: 699px) {
+  .compactGrid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 
-/* When spanning full row: go horizontal */
-.compactCard:last-child:nth-child(odd) {
-  flex-direction: row;
-  align-items: center;
-  min-height: 0;
-  gap: 12px;
+  /* When spanning full row: go horizontal */
+  .compactCard:last-child:nth-child(odd) {
+    flex-direction: row;
+    align-items: center;
+    min-height: 0;
+    gap: 12px;
+  }
 }
 
 .compactCard {
