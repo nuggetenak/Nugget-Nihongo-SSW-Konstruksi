@@ -1,0 +1,118 @@
+/* SideNav.module.css — wide-screen navigation column */
+
+.side {
+  width: var(--sidenav-w);
+  flex-shrink: 0;
+  background: var(--ssw-bgAlt);
+  border-right: 1px solid var(--ssw-border);
+  padding: var(--sp-6) 14px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.brand {
+  padding: 0 11px var(--sp-5);
+}
+
+.brandName {
+  font-size: 18px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  color: var(--ssw-amberDark);
+  line-height: var(--lh-tight);
+}
+
+.brandSub {
+  font-size: var(--fs-nano);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ssw-textFaint);
+  margin-top: 2px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px;
+  border: none;
+  background: none;
+  border-radius: var(--r-md);
+  font-family: inherit;
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-textDim);
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  transition:
+    background var(--t-base) var(--ease-smooth),
+    color var(--t-base) var(--ease-smooth);
+}
+
+.item:hover {
+  background: var(--ssw-surfaceHover);
+  color: var(--ssw-text);
+}
+
+.item[data-active='true'] {
+  background: var(--ssw-surfaceActive);
+  color: var(--ssw-amberDark);
+}
+
+/* Hazard rail marks the active destination — same language as urgency cards. */
+.item[data-active='true']::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 9px;
+  bottom: 9px;
+  width: 5px;
+  border-radius: 0 3px 3px 0;
+  background: var(--hazard);
+}
+
+.itemLabel {
+  flex: 1;
+}
+
+.badge {
+  background: var(--ssw-amber);
+  color: var(--ssw-bg);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-black);
+  min-width: 19px;
+  height: 19px;
+  border-radius: var(--r-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.foot {
+  margin-top: auto;
+  padding: var(--sp-3) 11px 0;
+  border-top: 1px solid var(--ssw-border);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--ssw-textFaint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}

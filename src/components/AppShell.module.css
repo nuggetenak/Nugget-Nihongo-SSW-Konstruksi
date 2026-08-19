@@ -1,0 +1,61 @@
+/* AppShell.module.css — responsive frame
+   compact  <700px    phone   : bottom nav, single column
+   medium   700-1039  tablet  : bottom nav, wider reading column
+   wide     >=1040    desktop : side nav column, no bottom nav          */
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Side nav is hidden below the wide breakpoint. */
+.sideSlot {
+  display: none;
+}
+
+.contentCol {
+  flex: 1;
+  min-width: 0; /* lets long JP strings wrap instead of stretching the column */
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 0 var(--gutter-compact);
+  /* The overlap fix: reserve the floating nav's footprint here, once, rather
+     than per-screen. Zeroed at the wide breakpoint where nav is a column. */
+  padding-bottom: var(--nav-safe);
+}
+
+/* ── medium: tablets keep the bottom nav but earn a wider column ── */
+@media (min-width: 700px) {
+  .content {
+    max-width: var(--reading-max-w);
+    padding-left: var(--gutter-medium);
+    padding-right: var(--gutter-medium);
+  }
+}
+
+/* ── wide: side nav takes over, bottom nav retires ── */
+@media (min-width: 1040px) {
+  .sideSlot {
+    display: block;
+  }
+
+  .bottomSlot {
+    display: none;
+  }
+
+  .contentCol {
+    justify-content: flex-start;
+  }
+
+  .content {
+    max-width: var(--shell-max-w);
+    padding: 0 var(--gutter-wide);
+    padding-bottom: var(--sp-6);
+  }
+}

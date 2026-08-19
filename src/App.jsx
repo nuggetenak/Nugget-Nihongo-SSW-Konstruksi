@@ -2,9 +2,7 @@
 // Root. 3-tab layout: Beranda / Belajar / Saya.
 // ─────────────────────────────────────────────────────────────────────────────
 
-
 import { useEffect } from 'react';
-import { T } from './styles/theme.js';
 import { useApp } from './contexts/AppContext.jsx';
 import { useProgress } from './contexts/ProgressContext.jsx';
 import { useSRSContext } from './contexts/SRSContext.jsx';
@@ -13,7 +11,7 @@ import { setQuotaHandler } from './utils/storage-quota.js';
 import ErrorBoundary, { TabError } from './components/ErrorBoundary.jsx';
 import OfflineBanner from './components/OfflineBanner.jsx';
 import Onboarding from './components/Onboarding.jsx';
-import BottomNav from './components/BottomNav.jsx';
+import AppShell from './components/AppShell.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import BelajarTab from './components/BelajarTab.jsx';
 import SayaTab from './components/SayaTab.jsx';
@@ -21,7 +19,19 @@ import ModeRouter from './router/ModeRouter.jsx';
 
 // ── Main ──────────────────────────────────────────────────────────────────
 export default function App() {
-  const { track, setTrack, isDark, toggleTheme, onboarded, completeOnboarding, tab, mode, goMode, goTab, toast } = useApp();
+  const {
+    track,
+    setTrack,
+    isDark,
+    toggleTheme,
+    onboarded,
+    completeOnboarding,
+    tab,
+    mode,
+    goMode,
+    goTab,
+    toast,
+  } = useApp();
   const { known, unknown, toastQueue, clearToast } = useProgress();
   const srs = useSRSContext();
 
@@ -53,12 +63,20 @@ export default function App() {
   // Register quota error handler — shows toast if localStorage write fails.
   useEffect(() => {
     setQuotaHandler(() => {
-      toast.show('💾 Penyimpanan penuh. Backup data di menu Pengaturan sebelum data hilang.', { duration: 8000, type: 'error' });
+      toast.show('💾 Penyimpanan penuh. Backup data di menu Pengaturan sebelum data hilang.', {
+        duration: 8000,
+        type: 'error',
+      });
     });
   }, [toast]);
 
   // Active mode takes full screen
-  if (mode) return <main id="main-content"><ModeRouter /></main>;
+  if (mode)
+    return (
+      <main id="main-content">
+        <ModeRouter />
+      </main>
+    );
 
   // First-run: interactive onboarding handles Welcome + Track + Demo + Goal.
   if (!onboarded) return <Onboarding onComplete={completeOnboarding} />;
@@ -69,26 +87,35 @@ export default function App() {
   const belajarBadges = { ulasan: srs.dueCount };
 
   return (
-    <main id="main-content" style={{ paddingBottom: T.navH + 36 }}>
+    <main id="main-content">
       <OfflineBanner />
 
-      {tab === 'home' && (
-        <ErrorBoundary fallback={<TabError tab="Beranda" />}>
-          <Dashboard known={known} unknown={unknown} track={track} onNavigate={goMode} onChangeTrack={() => setTrack(null)} srs={srs} isDark={isDark} onToggleTheme={toggleTheme} />
-        </ErrorBoundary>
-      )}
-      {tab === 'belajar' && (
-        <ErrorBoundary fallback={<TabError tab="Belajar" />}>
-          <BelajarTab onSelect={goMode} badges={belajarBadges} />
-        </ErrorBoundary>
-      )}
-      {tab === 'saya' && (
-        <ErrorBoundary fallback={<TabError tab="Saya" />}>
-          <SayaTab />
-        </ErrorBoundary>
-      )}
-
-      <BottomNav active={tab} onChange={goTab} dueBadge={srs.dueCount} />
+      <AppShell tab={tab} onTabChange={goTab} dueBadge={srs.dueCount}>
+        {tab === 'home' && (
+          <ErrorBoundary fallback={<TabError tab="Beranda" />}>
+            <Dashboard
+              known={known}
+              unknown={unknown}
+              track={track}
+              onNavigate={goMode}
+              onChangeTrack={() => setTrack(null)}
+              srs={srs}
+              isDark={isDark}
+              onToggleTheme={toggleTheme}
+            />
+          </ErrorBoundary>
+        )}
+        {tab === 'belajar' && (
+          <ErrorBoundary fallback={<TabError tab="Belajar" />}>
+            <BelajarTab onSelect={goMode} badges={belajarBadges} />
+          </ErrorBoundary>
+        )}
+        {tab === 'saya' && (
+          <ErrorBoundary fallback={<TabError tab="Saya" />}>
+            <SayaTab />
+          </ErrorBoundary>
+        )}
+      </AppShell>
     </main>
   );
 }

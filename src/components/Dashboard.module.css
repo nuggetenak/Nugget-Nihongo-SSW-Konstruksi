@@ -1,528 +1,527 @@
-/* ─── Dashboard.module.css v5.0 — UI/UX Upgrade ──────────────────────────────── */
+/* Dashboard.module.css — home tab / status board */
 
 .container {
-  padding: 0 16px 32px;
-  max-width: var(--max-w);
-  margin: 0 auto;
-  animation: fadeIn 0.32s ease;
+  padding-top: var(--sp-6);
+  animation: fadeIn var(--t-base) var(--ease-smooth);
 }
 
-/* ─── Header ─────────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Header ── */
 .header {
-  padding: 20px 0 16px;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
-  position: relative;
-  overflow: visible;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
 }
-
-/* Subtle dot-grid texture */
-.header::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -16px; right: -16px; bottom: 0;
-  background-image:
-    radial-gradient(circle, rgba(180,83,9,0.10) 1px, transparent 1px);
-  background-size: 18px 18px;
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-/* Large decorative kanji backdrop */
-.header::after {
-  content: '建';
-  position: absolute;
-  right: 80px;
-  top: -4px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 80px;
-  font-weight: 900;
-  color: var(--ssw-amber);
-  opacity: 0.055;
-  pointer-events: none;
-  line-height: 1;
-  user-select: none;
-}
-
-.brand { position: relative; z-index: 1; }
 
 .brandName {
-  font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  background: var(--accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
+  font-size: var(--fs-title);
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  color: var(--ssw-amberDark);
+  line-height: var(--lh-tight);
 }
 
 .brandSub {
   font-size: var(--fs-nano);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ssw-textFaint);
+  margin-top: 2px;
+}
+
+.pageTitle {
+  display: none;
+}
+
+.pageTitleName {
+  font-size: 24px;
+  font-weight: var(--fw-black);
+  letter-spacing: -0.025em;
+  line-height: var(--lh-tight);
+  color: var(--ssw-textBright);
+}
+
+.pageTitleSub {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semi);
   color: var(--ssw-textDim);
   margin-top: 3px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
 }
 
 .headerRight {
   display: flex;
-  gap: 7px;
   align-items: center;
-  position: relative;
-  z-index: 1;
+  gap: var(--sp-2);
+  flex-shrink: 0;
 }
 
 .trackPill {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-size: var(--fs-small);
-  font-weight: 700;
-  padding: 6px 12px;
+  font-family: inherit;
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-black);
+  padding: 6px 11px;
   border-radius: var(--r-pill);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: opacity var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
-  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
 }
-.trackPill:active { transform: scale(0.93); opacity: 0.85; }
 
 .themeBtn {
-  font-size: 15px;
-  width: 36px; height: 36px;
-  border-radius: var(--r-pill);
-  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
   background: var(--ssw-surface);
-  border: 1px solid var(--ssw-borderLight);
-  color: var(--ssw-text);
-  display: flex; align-items: center; justify-content: center;
-  transition: background var(--t-fast), transform var(--t-fast);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-.themeBtn:active { transform: scale(0.88); }
-
-/* ─── Streak hero ───────────────────────────────────────────────────────────── */
-.streakHero {
+  border: 1px solid var(--ssw-border);
+  font-size: 15px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 18px 14px 20px;
-  border-radius: var(--r-xl);
-  background: rgba(245,158,11,0.07);
-  border: 1px solid rgba(245,158,11,0.24);
-  margin-bottom: 12px;
-  animation: slideDown 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-/* Left accent bar */
-.streakHero::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0; width: 4px;
-  background: linear-gradient(180deg, #FBBF24 0%, #B45309 100%);
-  border-radius: 4px 0 0 4px;
-}
-/* Glow orb */
-.streakHero::after {
-  content: '';
-  position: absolute;
-  right: -20px; top: -20px;
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.18) 0%, transparent 70%);
-  pointer-events: none;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.streakEmoji {
-  font-size: 28px;
-  flex-shrink: 0;
-  animation: floatUp 3s ease-in-out infinite;
+/* ── Column layout ── */
+.cols {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
-@keyframes floatUp {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-3px); }
+
+.colMain,
+.colSide {
+  min-width: 0;
+}
+
+/* ── Hazard rail (signature) ──
+   Left stripe = time-sensitive. Tier only changes copy urgency, not the
+   stripe itself, so the marker stays a single consistent signal.          */
+.rail,
+.railBtn,
+.missionDone {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--ssw-bgAlt);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-lg);
+  padding: 13px 15px 13px calc(var(--rail-w) + 12px);
+  overflow: hidden;
+  margin-bottom: var(--sp-3);
+  font-family: inherit;
+}
+
+.rail::before,
+.railBtn::before,
+.missionDone::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--rail-w);
+  background: var(--hazard);
+}
+
+/* Past the critical threshold the stripe animates slowly — motion draws the
+   eye without adding another colour. Disabled under reduced-motion. */
+.rail[data-tier='critical']::before,
+.rail[data-tier='today']::before {
+  background-size: 17px 17px;
+  animation: crawl 2.4s linear infinite;
+}
+
+@keyframes crawl {
+  to {
+    background-position: 17px 0;
+  }
+}
+
+.railBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  cursor: pointer;
+}
+
+.railBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.railEyebrow {
+  display: block;
+  font-size: var(--fs-nano);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ssw-amber);
+  margin-bottom: 2px;
+}
+
+.railTitle {
+  display: block;
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-heavy);
+  letter-spacing: -0.01em;
+  color: var(--ssw-amberDark);
+  line-height: var(--lh-tight);
+}
+
+.railSub {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  margin-top: 3px;
+  line-height: var(--lh-normal);
+}
+
+.railArrow {
+  color: var(--ssw-amber);
+  flex-shrink: 0;
+  display: flex;
+}
+
+.missionDone {
+  opacity: 0.72;
+}
+
+/* ── Progress meter ── */
+.statBlock {
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-3);
+}
+
+.statTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.statBig {
+  font-size: var(--fs-title);
+  font-weight: var(--fw-black);
+  letter-spacing: -0.03em;
+  line-height: var(--lh-tight);
+  color: var(--ssw-textBright);
+}
+
+.statSub {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+  margin-top: 2px;
+}
+
+.statPct {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-black);
+  color: var(--ssw-amber);
+  flex-shrink: 0;
+}
+
+.meter {
+  height: 9px;
+  border-radius: var(--r-pill);
+  background: var(--ssw-surfaceActive);
+  overflow: hidden;
+  display: flex;
+}
+
+.meterKnown {
+  background: linear-gradient(90deg, var(--ssw-amberDark), var(--ssw-amber));
+  transition: width var(--t-slow) var(--ease-smooth);
+}
+
+.meterUnknown {
+  background: var(--ssw-wrongBorder);
+  transition: width var(--t-slow) var(--ease-smooth);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-2);
+}
+
+.lg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-medium);
+  color: var(--ssw-textDim);
+}
+
+.dotKnown,
+.dotUnknown,
+.dotRest {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+.dotKnown {
+  background: var(--ssw-amberDark);
+}
+.dotUnknown {
+  background: var(--ssw-wrongBorder);
+}
+.dotRest {
+  background: var(--ssw-surfaceActive);
+}
+
+/* ── Primary CTA ── */
+.cta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--accent);
+  border: none;
+  border-radius: var(--r-xl);
+  padding: 15px var(--sp-4);
+  color: #fff;
+  box-shadow: var(--shadow-amber);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  margin-bottom: var(--sp-3);
+  transition: transform var(--t-fast) var(--ease-smooth);
+}
+
+.cta:active {
+  transform: scale(0.985);
+}
+
+.ctaIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.ctaBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.ctaLabel {
+  display: block;
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-heavy);
+  letter-spacing: -0.01em;
+}
+
+.ctaDesc {
+  display: block;
+  font-size: var(--fs-micro);
+  opacity: 0.88;
+  margin-top: 2px;
+  line-height: var(--lh-normal);
+}
+
+.ctaArrow {
+  flex-shrink: 0;
+  opacity: 0.9;
+  display: flex;
+}
+
+/* ── Streak ── */
+.streak {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-3);
+}
+
+.streakIcon {
+  font-size: 22px;
+  flex-shrink: 0;
 }
 
 .streakDays {
-  font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: var(--fs-subtitle);
-  font-weight: 800;
-  color: var(--ssw-amber);
-  letter-spacing: -0.3px;
-}
-.streakSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
-
-/* ─── Exam Countdown ────────────────────────────────────────────────────────── */
-.countdownCard {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 13px 18px 13px 20px;
-  border-radius: var(--r-xl);
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-  animation: slideDown 0.3s ease;
-}
-
-.countdownCard[data-tier='info'] {
-  background: rgba(59,130,246,0.07);
-  border: 1px solid rgba(59,130,246,0.22);
-}
-.countdownCard[data-tier='warning'] {
-  background: rgba(245,158,11,0.07);
-  border: 1px solid rgba(245,158,11,0.26);
-}
-.countdownCard[data-tier='critical'] {
-  background: rgba(239,68,68,0.07);
-  border: 1px solid rgba(239,68,68,0.25);
-}
-.countdownCard[data-tier='today'] {
-  background: rgba(239,68,68,0.10);
-  border: 1px solid rgba(239,68,68,0.40);
-}
-
-.countdownCard::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0; width: 4px;
-  border-radius: 4px 0 0 4px;
-}
-.countdownCard[data-tier='info']::before     { background: #3B82F6; }
-.countdownCard[data-tier='warning']::before  { background: #F59E0B; }
-.countdownCard[data-tier='critical']::before { background: #EF4444; }
-.countdownCard[data-tier='today']::before    { background: #EF4444; }
-
-.countdownIcon { font-size: 22px; flex-shrink: 0; }
-.countdownDays {
   font-size: var(--fs-body);
-  font-weight: 800;
-  letter-spacing: -0.1px;
-}
-.countdownDays[data-tier='info']     { color: #3B82F6; }
-.countdownDays[data-tier='warning']  { color: var(--ssw-amber); }
-.countdownDays[data-tier='critical'] { color: #EF4444; }
-.countdownDays[data-tier='today']    { color: #EF4444; }
-.countdownSub { font-size: var(--fs-small); color: var(--ssw-textDim); margin-top: 2px; }
-
-/* ─── Progress ring card ────────────────────────────────────────────────────── */
-.ringCard {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 20px;
-  border-radius: var(--r-xl);
-  background: var(--ssw-surface);
-  border: 1px solid var(--ssw-border);
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-}
-/* Top-left glow */
-.ringCard::before {
-  content: '';
-  position: absolute;
-  left: -10px; top: -10px;
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.09) 0%, transparent 70%);
-  pointer-events: none;
-}
-/* Bottom-right accent */
-.ringCard::after {
-  content: '';
-  position: absolute;
-  right: -20px; bottom: -20px;
-  width: 90px; height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
-  pointer-events: none;
+  font-weight: var(--fw-heavy);
+  color: var(--ssw-amberDark);
 }
 
-.ringInfo { flex: 1; z-index: 1; }
-
-.ringKnown {
-  font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--ssw-textBright);
-  margin-bottom: 3px;
-  letter-spacing: -0.4px;
-  line-height: 1;
-}
-.ringDetail {
-  font-size: var(--fs-small);
-  color: var(--ssw-textDim);
-  margin-bottom: 6px;
-}
-.ringPct {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: var(--fs-small);
-  font-weight: 800;
-  color: var(--ssw-bg);
-  background: var(--ssw-amber);
-  padding: 3px 9px;
-  border-radius: var(--r-pill);
-  margin-bottom: 4px;
-}
-.ringStreak {
-  display: inline-block;
-  font-size: var(--fs-small);
-  font-weight: 700;
-  color: var(--ssw-amber);
-  background: rgba(245,158,11,0.10);
-  padding: 2px 8px;
-  border-radius: var(--r-pill);
-}
-.ringDaily {
-  font-size: var(--fs-small);
-  color: var(--ssw-textDim);
-  margin-top: 3px;
+.streakSub {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  margin-top: 1px;
 }
 
-/* ─── Primary CTA ───────────────────────────────────────────────────────────── */
-.cta {
-  width: 100%;
-  padding: 18px 20px;
-  margin-bottom: 10px;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  border-radius: var(--r-xl);
-  cursor: pointer;
-  background: var(--accent);
-  border: none;
-  color: #FFF8E7;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  box-shadow:
-    0 6px 28px rgba(180,83,9,0.32),
-    0 2px 8px rgba(180,83,9,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.12);
-  transition: transform var(--t-base) var(--ease-smooth), box-shadow var(--t-base) var(--ease-smooth);
-  position: relative;
-  overflow: hidden;
-}
-/* Shine overlay */
-.cta::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 55%);
-  pointer-events: none;
-}
-/* Shimmer sweep */
-.cta::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255,255,255,0.12) 50%,
-    transparent 70%
-  );
-  background-size: 200% 100%;
-  animation: ctaShimmer 3.5s ease infinite;
-  pointer-events: none;
-}
-.cta:active {
-  transform: scale(0.982) translateY(1px);
-  box-shadow: var(--shadow-amber);
-}
-.ctaIcon { font-size: 28px; flex-shrink: 0; position: relative; z-index: 1; }
-.ctaBody { flex: 1; position: relative; z-index: 1; }
-.ctaLabel {
-  font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: var(--fs-subtitle);
-  font-weight: 800;
-  letter-spacing: -0.2px;
-  line-height: 1.2;
-}
-.ctaDesc { font-size: var(--fs-caption); opacity: 0.75; margin-top: 3px; }
-.ctaArrow {
-  font-size: 22px;
-  opacity: 0.7;
-  font-weight: 800;
-  position: relative;
-  z-index: 1;
-  transition: transform var(--t-base) var(--ease-smooth);
-}
-.cta:hover .ctaArrow { transform: translateX(2px); }
-
-/* ─── Daily Mission card ─────────────────────────────────────────────────────── */
-.missionCard {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  border-radius: var(--r-xl);
-  cursor: pointer;
-  background: transparent;
-  border: 1.5px dashed var(--ssw-borderActive);
-  color: var(--ssw-text);
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  transition: background var(--t-fast), transform var(--t-fast), border-color var(--t-fast);
-  position: relative;
-  overflow: hidden;
-}
-.missionCard::after {
-  content: '';
-  position: absolute;
-  right: -10px; top: -10px;
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
-  pointer-events: none;
-}
-.missionCard:active {
-  background: var(--ssw-surfaceActive);
-  transform: scale(0.98);
-  border-color: var(--ssw-amber);
-}
-.missionDone {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  border-radius: var(--r-xl);
-  background: transparent;
-  border: 1px solid var(--ssw-border);
-  color: var(--ssw-text);
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  opacity: 0.50;
-}
-.missionIcon { font-size: 24px; flex-shrink: 0; }
-.missionBody { flex: 1; }
-.missionEyebrow {
+/* ── Section labels ── */
+.secLabel {
   font-size: var(--fs-nano);
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  color: var(--ssw-amber);
-  margin-bottom: 3px;
+  font-weight: var(--fw-black);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ssw-textFaint);
+  margin: var(--sp-5) 0 var(--sp-2);
 }
-.missionLabel { font-size: var(--fs-body); font-weight: 700; }
-.missionArrow { font-size: 18px; color: var(--ssw-amber); opacity: 0.85; }
 
-/* ─── Quick grid ─────────────────────────────────────────────────────────────── */
+/* ── Quick grid ── */
 .quickGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: var(--sp-2);
 }
 
 .quickTile {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  padding: 14px 4px 12px;
-  border-radius: var(--r-xl);
-  cursor: pointer;
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
-  color: var(--ssw-text);
-  text-align: center;
+  border-radius: var(--r-lg);
+  padding: var(--sp-3) 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
-  transition: background var(--t-fast), transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
-  position: relative;
-  overflow: hidden;
+  gap: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ssw-textMuted);
+  transition:
+    background var(--t-fast) var(--ease-smooth),
+    transform var(--t-fast) var(--ease-smooth);
 }
-.quickTile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(245,158,11,0.04) 0%, transparent 60%);
-  pointer-events: none;
+
+.quickTile:hover {
+  background: var(--ssw-surfaceHover);
 }
+
 .quickTile:active {
-  background: var(--ssw-surfaceActive);
-  border-color: var(--ssw-borderHover);
-  transform: scale(0.91);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+  transform: scale(0.96);
 }
 
-.quickIcon { font-size: 22px; }
+.quickIcon {
+  color: var(--ssw-amber);
+  display: flex;
+}
+
 .quickLabel {
-  font-size: var(--fs-nano);
-  font-weight: 700;
-  color: var(--ssw-textDim);
-  letter-spacing: 0.3px;
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-bold);
 }
 
-/* ─── Recent cards ───────────────────────────────────────────────────────────── */
-.recentHeader {
-  font-size: var(--fs-nano);
-  font-weight: 800;
-  letter-spacing: 1.3px;
-  text-transform: uppercase;
-  color: var(--ssw-textDim);
-  margin-bottom: 10px;
+.starredBtn {
+  width: 100%;
+  margin-top: var(--sp-2);
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-.recentHeader::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--ssw-border);
-}
-
-.recentList { display: flex; flex-direction: column; gap: 5px; }
-
-.recentCard {
-  padding: 11px 14px;
-  border-radius: var(--r-lg);
+  justify-content: center;
+  gap: var(--sp-2);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-3);
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-gold);
+  cursor: pointer;
+}
+
+/* ── Recent ── */
+.recentList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recentCard {
   display: flex;
   align-items: center;
-  gap: 12px;
-  transition: background var(--t-fast);
+  justify-content: space-between;
+  gap: var(--sp-3);
+  background: var(--ssw-surface);
+  border-radius: var(--r-md);
+  padding: 10px 13px;
 }
-.recentCard:last-child { border-color: transparent; background: transparent; }
 
 .recentJp {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: var(--fs-subtitle);
-  font-weight: 700;
-  color: var(--ssw-textBright);
-  flex-shrink: 0;
-}
-.recentId {
-  font-size: var(--fs-small);
-  color: var(--ssw-textDim);
-  flex: 1;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semi);
+  color: var(--ssw-text);
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* ── Reduced motion ── */
+.recentId {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textFaint);
+  flex-shrink: 0;
+}
+
+/* ── Wide: two columns ── */
+@media (min-width: 1040px) {
+  .cols {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--sp-5);
+    align-items: start;
+  }
+
+  .secLabel:first-child,
+  .colSide > .secLabel:first-child {
+    margin-top: 0;
+  }
+
+  .statBig {
+    font-size: 26px;
+  }
+
+  /* Side nav owns the brand at this width — avoid showing it twice. */
+  .brand {
+    display: none;
+  }
+
+  .pageTitle {
+    display: block;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .container,
-  .streakHero,
-  .streakEmoji,
-  .countdownCard,
-  .cta::after,
-  .cta,
-  .trackPill,
-  .themeBtn,
-  .quickTile,
-  .missionCard {
+  .container {
     animation: none;
+  }
+  .rail[data-tier='critical']::before,
+  .rail[data-tier='today']::before {
+    animation: none;
+  }
+  .meterKnown,
+  .meterUnknown,
+  .cta,
+  .quickTile {
     transition: none;
   }
 }
