@@ -13,17 +13,17 @@ Proyek sudah sangat mature — 10 phase UX overhaul selesai, SRS engine hidup, P
 
 **Tapi ada utang arsitektur yang makin besar:**
 
-| Metrik | Nilai | Masalah |
-|--------|-------|---------|
-| Inline styles | **822** | Naik dari 767 di v87 — refactor justru menambah |
-| localStorage keys | **20+ pola distinct** | Fragmentasi, no migration, no schema version |
-| App.jsx | **668 baris** | God component: state, routing, filtering, UI semua di sini |
-| Data files total | **7.798 baris** | csv-sets.js alone = 3.998 baris |
-| ErrorBoundary | **0** | 18 lazy imports tanpa error handling |
-| Component tests | **0** | 111 test = data integrity + utils only |
-| CI/CD | **0** | No GitHub Actions, no auto-deploy |
-| Mode definitions | **duplikat** | BELAJAR_MODES di App.jsx ≠ MODE_META di Dashboard.jsx |
-| SRS init | O(n) localStorage scan | `Object.keys(localStorage).filter(...)` on every cold start |
+| Metrik            | Nilai                  | Masalah                                                     |
+| ----------------- | ---------------------- | ----------------------------------------------------------- |
+| Inline styles     | **822**                | Naik dari 767 di v87 — refactor justru menambah             |
+| localStorage keys | **20+ pola distinct**  | Fragmentasi, no migration, no schema version                |
+| App.jsx           | **668 baris**          | God component: state, routing, filtering, UI semua di sini  |
+| Data files total  | **7.798 baris**        | csv-sets.js alone = 3.998 baris                             |
+| ErrorBoundary     | **0**                  | 18 lazy imports tanpa error handling                        |
+| Component tests   | **0**                  | 111 test = data integrity + utils only                      |
+| CI/CD             | **0**                  | No GitHub Actions, no auto-deploy                           |
+| Mode definitions  | **duplikat**           | BELAJAR_MODES di App.jsx ≠ MODE_META di Dashboard.jsx       |
+| SRS init          | O(n) localStorage scan | `Object.keys(localStorage).filter(...)` on every cold start |
 
 **Proposal ini fokus pada hal-hal yang BUKAN konten** — murni arsitektur, performa, developer experience. Konten (kartu baru, soal baru, cross-check JAC) dikerjakan agent lain.
 
@@ -49,6 +49,7 @@ ssw-milestone-quiz70, ssw-milestone-streak5  → achievement flags
 ```
 
 **Masalah konkret:**
+
 1. **SRS = 1438 localStorage keys.** `initStore()` melakukan `Object.keys(localStorage).filter(k => k.startsWith('ssw-srs-'))` — ini O(n) scan semua keys di storage. Pada device murah (target user: HP Android budget), ini bisa 200-500ms blocking.
 2. **No schema version.** Jika format berubah (misalnya SRS card entry berubah field), tidak ada migration path — data user rusak silently.
 3. **Export/Import fragile.** ExportMode harus tahu SEMUA key patterns, kalau ada yang tertinggal = data loss.
@@ -72,9 +73,9 @@ src/storage/
 export const STORAGE_VERSION = 2;
 
 export const STORAGE_KEYS = {
-  PROGRESS: 'ssw-progress',   // Semua progress data (known, unknown, starred, wrong counts, scores)
-  SRS:      'ssw-srs-data',   // Semua SRS card entries dalam 1 object
-  PREFS:    'ssw-prefs',      // UI preferences (track, theme, onboarded, tutorial flags)
+  PROGRESS: 'ssw-progress', // Semua progress data (known, unknown, starred, wrong counts, scores)
+  SRS: 'ssw-srs-data', // Semua SRS card entries dalam 1 object
+  PREFS: 'ssw-prefs', // UI preferences (track, theme, onboarded, tutorial flags)
 };
 ```
 
@@ -88,7 +89,9 @@ export function init() {
     try {
       const raw = localStorage.getItem(storageKey);
       _cache[key.toLowerCase()] = raw ? JSON.parse(raw) : getDefaults(key);
-    } catch { _cache[key.toLowerCase()] = getDefaults(key); }
+    } catch {
+      _cache[key.toLowerCase()] = getDefaults(key);
+    }
   }
   // Run migrations if version mismatch
   migrateIfNeeded(_cache);
@@ -106,6 +109,7 @@ function scheduleSave(docKey) {
 ```
 
 **Progress document structure:**
+
 ```js
 {
   _v: 2,
@@ -131,6 +135,7 @@ function scheduleSave(docKey) {
 ```
 
 **SRS document structure:**
+
 ```js
 {
   _v: 2,
@@ -143,6 +148,7 @@ function scheduleSave(docKey) {
 ```
 
 **Prefs document structure:**
+
 ```js
 {
   _v: 2,
@@ -177,19 +183,20 @@ export function migrateIfNeeded(cache) {
 
 ### 1.4 Manfaat
 
-| Aspek | Sebelum | Sesudah |
-|-------|---------|---------|
-| localStorage reads on init | ~1450+ | **3** |
-| Cold start (budget Android) | 200-500ms | **<20ms** |
-| Export/Import | Manual enumerate 20+ key patterns | **3 JSON docs, guaranteed complete** |
-| Schema changes | Silent data corruption | **Versioned migrations** |
-| New quiz set → new storage | New key pattern needed | **Nested under existing doc** |
+| Aspek                       | Sebelum                           | Sesudah                              |
+| --------------------------- | --------------------------------- | ------------------------------------ |
+| localStorage reads on init  | ~1450+                            | **3**                                |
+| Cold start (budget Android) | 200-500ms                         | **<20ms**                            |
+| Export/Import               | Manual enumerate 20+ key patterns | **3 JSON docs, guaranteed complete** |
+| Schema changes              | Silent data corruption            | **Versioned migrations**             |
+| New quiz set → new storage  | New key pattern needed            | **Nested under existing doc**        |
 
 ### 1.5 Prioritas: 🔴 HIGH — Foundation untuk semua perbaikan lain
 
 ### 1.6 Backward Compatibility
 
 Migration v1 harus:
+
 1. Detect old-format keys (`ssw-known`, `ssw-srs-*`, etc.)
 2. Read and pack into new 3-document format
 3. Write new documents
@@ -203,6 +210,7 @@ Migration v1 harus:
 ### 2.1 Masalah
 
 `App.jsx` = 668 baris melakukan terlalu banyak:
+
 - State management (known, unknown, starred, track, mode, tab, vocabMode, activeCats, etc.)
 - Card filtering logic
 - Mode routing (manual `modeMap` object with 17 entries)
@@ -214,6 +222,7 @@ Migration v1 harus:
 - Milestone detection
 
 Ini berarti:
+
 - Setiap edit di App.jsx = re-read 668 baris oleh agent → token mahal
 - Sulit di-test — no unit testable logic
 - Props drilling: `known`, `unknown`, `starred`, `srs`, `onExit` passed ke semua modes
@@ -233,6 +242,7 @@ src/
 ```
 
 **Sebelum (App.jsx 668 baris):**
+
 ```jsx
 // State
 const [known, setKnown] = usePersistedState('ssw-known', []);
@@ -246,6 +256,7 @@ const [starred, setStarred] = usePersistedState('ssw-starred', []);
 ```
 
 **Sesudah (App.jsx ~150 baris):**
+
 ```jsx
 import { ProgressProvider } from './contexts/ProgressContext';
 import { SRSProvider } from './contexts/SRSContext';
@@ -282,6 +293,7 @@ function AppShell() {
 ```
 
 **ProgressContext.jsx:**
+
 ```jsx
 const ProgressContext = createContext();
 export function ProgressProvider({ children }) {
@@ -295,17 +307,24 @@ export const useProgress = () => useContext(ProgressContext);
 ```
 
 **modes.js — Single Source of Truth:**
+
 ```js
 // ELIMINASI duplikasi antara App.jsx BELAJAR_MODES dan Dashboard.jsx MODE_META
 export const ALL_MODES = {
   ulasan: {
-    icon: '🔁', label: 'Ulasan SRS', desc: 'Kartu jatuh tempo hari ini',
-    tab: 'belajar', time: null,
+    icon: '🔁',
+    label: 'Ulasan SRS',
+    desc: 'Kartu jatuh tempo hari ini',
+    tab: 'belajar',
+    time: null,
     component: () => import('../modes/ReviewMode.jsx'),
   },
   kartu: {
-    icon: '🃏', label: 'Kartu', desc: 'Flashcard interaktif',
-    tab: 'belajar', time: '~10 mnt',
+    icon: '🃏',
+    label: 'Kartu',
+    desc: 'Flashcard interaktif',
+    tab: 'belajar',
+    time: '~10 mnt',
     component: () => import('../modes/FlashcardMode.jsx'),
   },
   // ... semua 17 modes
@@ -342,7 +361,9 @@ export default function ModeRouter({ mode }) {
 // ErrorBoundary — saat ini NOL di seluruh app
 class ErrorBoundary extends React.Component {
   state = { error: null };
-  static getDerivedStateFromError(e) { return { error: e }; }
+  static getDerivedStateFromError(e) {
+    return { error: e };
+  }
   render() {
     if (this.state.error) return this.props.fallback;
     return this.props.children;
@@ -352,13 +373,13 @@ class ErrorBoundary extends React.Component {
 
 ### 2.4 Manfaat
 
-| Aspek | Sebelum | Sesudah |
-|-------|---------|---------|
-| App.jsx size | 668 baris | **~150 baris** |
-| Props drilling depth | 3-4 levels | **0 (context)** |
-| Mode definitions | Duplicated (App + Dashboard) | **1 source of truth** |
-| Error recovery | Crash = white screen | **Graceful fallback per mode** |
-| Agent edit cost | Re-read 668 lines | **Edit 1 small file** |
+| Aspek                | Sebelum                      | Sesudah                        |
+| -------------------- | ---------------------------- | ------------------------------ |
+| App.jsx size         | 668 baris                    | **~150 baris**                 |
+| Props drilling depth | 3-4 levels                   | **0 (context)**                |
+| Mode definitions     | Duplicated (App + Dashboard) | **1 source of truth**          |
+| Error recovery       | Crash = white screen         | **Graceful fallback per mode** |
+| Agent edit cost      | Re-read 668 lines            | **Edit 1 small file**          |
 
 ### 2.5 Prioritas: 🔴 HIGH
 
@@ -369,6 +390,7 @@ class ErrorBoundary extends React.Component {
 ### 3.1 Masalah: 822 Inline Styles (naik dari 767!)
 
 Contoh tipikal saat ini:
+
 ```jsx
 <div style={{
   padding: '12px 16px', borderRadius: T.r.md,
@@ -379,6 +401,7 @@ Contoh tipikal saat ini:
 ```
 
 Ini buruk karena:
+
 - **Tidak cacheable oleh browser** — setiap render = new style object allocation
 - **Tidak hover/focus/media-query aware** — harus pakai onMouseEnter/Leave
 - **Tidak searchable** — "dimana semua padding 12px?" → impossible
@@ -387,12 +410,12 @@ Ini buruk karena:
 
 ### 3.2 Opsi Solusi
 
-| Opsi | Pros | Cons | Verdict |
-|------|------|------|---------|
-| **CSS Modules** | Zero runtime, browser caching, standard CSS | Need .module.css files per component, no dynamic theming | ⭐ Best for this project |
-| **Tailwind CSS** | Utility-first, great DX, small bundle | Build step dependency, learning curve, class string noise | Good alternative |
-| **Vanilla Extract** | Type-safe CSS-in-JS, zero runtime | Complex setup, TS dependency | Overkill |
-| **Styled Components** | Dynamic theming, familiar syntax | Runtime cost, bundle size | Wrong trade-off for mobile-first |
+| Opsi                  | Pros                                        | Cons                                                      | Verdict                          |
+| --------------------- | ------------------------------------------- | --------------------------------------------------------- | -------------------------------- |
+| **CSS Modules**       | Zero runtime, browser caching, standard CSS | Need .module.css files per component, no dynamic theming  | ⭐ Best for this project         |
+| **Tailwind CSS**      | Utility-first, great DX, small bundle       | Build step dependency, learning curve, class string noise | Good alternative                 |
+| **Vanilla Extract**   | Type-safe CSS-in-JS, zero runtime           | Complex setup, TS dependency                              | Overkill                         |
+| **Styled Components** | Dynamic theming, familiar syntax            | Runtime cost, bundle size                                 | Wrong trade-off for mobile-first |
 
 ### 3.3 Recommendation: CSS Modules + Design Token CSS Variables (Already Have!)
 
@@ -414,11 +437,13 @@ Ini buruk karena:
 }
 
 .card:hover {
-  background: var(--ssw-surfaceHover);  /* IMPOSSIBLE with inline styles! */
+  background: var(--ssw-surfaceHover); /* IMPOSSIBLE with inline styles! */
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card { animation: none; }  /* Already handled globally but now per-component too */
+  .card {
+    animation: none;
+  } /* Already handled globally but now per-component too */
 }
 ```
 
@@ -433,6 +458,7 @@ import s from './FlashcardMode.module.css';
 ### 3.4 Implementation Plan
 
 Phase ini bisa dilakukan **per-file, incrementally**:
+
 1. Start with shared components (QuizShell, ResultScreen, OptionButton, ProgressBar)
 2. Then modes from smallest to largest
 3. App.jsx last (depends on context extraction in Pilar 2)
@@ -473,20 +499,23 @@ src/data/
 ```js
 // cards-loader.js
 const trackModules = {
-  doboku: () => Promise.all([
-    import('./cards-common.js'),
-    import('./cards-doboku.js'),
-  ]).then(([c, d]) => [...c.CARDS, ...d.CARDS]),
+  doboku: () =>
+    Promise.all([import('./cards-common.js'), import('./cards-doboku.js')]).then(([c, d]) => [
+      ...c.CARDS,
+      ...d.CARDS,
+    ]),
 
-  kenchiku: () => Promise.all([
-    import('./cards-common.js'),
-    import('./cards-kenchiku.js'),
-  ]).then(([c, k]) => [...c.CARDS, ...k.CARDS]),
+  kenchiku: () =>
+    Promise.all([import('./cards-common.js'), import('./cards-kenchiku.js')]).then(([c, k]) => [
+      ...c.CARDS,
+      ...k.CARDS,
+    ]),
 
-  lifeline: () => Promise.all([
-    import('./cards-common.js'),
-    import('./cards-lifeline.js'),
-  ]).then(([c, l]) => [...c.CARDS, ...l.CARDS]),
+  lifeline: () =>
+    Promise.all([import('./cards-common.js'), import('./cards-lifeline.js')]).then(([c, l]) => [
+      ...c.CARDS,
+      ...l.CARDS,
+    ]),
 };
 
 export async function loadCardsForTrack(track) {
@@ -509,7 +538,7 @@ import { CSV_SETS } from '../data/csv-sets.js';
 const VocabMode = () => {
   const [sets, setSets] = useState(null);
   useEffect(() => {
-    import('../data/csv-sets.js').then(m => setSets(m.CSV_SETS));
+    import('../data/csv-sets.js').then((m) => setSets(m.CSV_SETS));
   }, []);
   if (!sets) return <Loading />;
   // ...
@@ -521,6 +550,7 @@ Tapi ini sudah otomatis terjadi karena `React.lazy()` — Vite code-splits mode 
 ### 4.4 Barrel Export Anti-Pattern
 
 `src/data/index.js` saat ini re-exports SEMUA data:
+
 ```js
 export { CARDS } from './cards.js';
 export { CSV_SETS } from './csv-sets.js';
@@ -530,17 +560,18 @@ export { CSV_SETS } from './csv-sets.js';
 **Masalah:** Siapapun yang `import { CARDS } from '../data'` juga pulls in CSV_SETS tree karena barrel. Vite tree-shaking **tidak** menghapus re-exported modules dalam barrel di semua kasus.
 
 **Solusi:** Hapus barrel untuk data files. Import langsung:
+
 ```js
-import { CARDS } from '../data/cards.js';  // Not from '../data'
+import { CARDS } from '../data/cards.js'; // Not from '../data'
 ```
 
 ### 4.5 Estimasi Impact
 
-| Metrik | Sebelum | Sesudah |
-|--------|---------|---------|
-| Initial JS parse (semua data) | ~400KB | **~150KB** (common + 1 track) |
-| Time to interactive (3G) | ~3.5s | **~2.0s** |
-| Unused data downloaded | ~60% | **~0%** |
+| Metrik                        | Sebelum | Sesudah                       |
+| ----------------------------- | ------- | ----------------------------- |
+| Initial JS parse (semua data) | ~400KB  | **~150KB** (common + 1 track) |
+| Time to interactive (3G)      | ~3.5s   | **~2.0s**                     |
+| Unused data downloaded        | ~60%    | **~0%**                       |
 
 ### 4.6 Prioritas: 🟡 MEDIUM — sangat impactful untuk target user (HP budget, jaringan lambat)
 
@@ -553,6 +584,7 @@ import { CARDS } from '../data/cards.js';  // Not from '../data'
 18 mode di-lazy-load tapi **tidak ada ErrorBoundary**. Jika 1 mode crash (misalnya data corrupt, atau edge case di SRS calculation), seluruh app white-screens.
 
 Skenario real:
+
 - User punya SRS data corrupt dari export lama → ReviewMode crash → app mati
 - csv-sets.js punya typo di 1 soal → VocabMode crash → app mati
 - Network timeout saat lazy-load → blank screen, no retry
@@ -619,6 +651,7 @@ function validateProgress(data) {
 ```
 
 **Yang TIDAK di-test:**
+
 - ❌ Semua 12 komponen (`Dashboard`, `QuizShell`, `ResultScreen`, etc.)
 - ❌ Semua 18 mode
 - ❌ Storage engine (read/write/migration)
@@ -646,6 +679,7 @@ function validateProgress(data) {
 ### 6.3 Concrete Test Additions
 
 **Storage engine tests (baru, ~30 tests):**
+
 ```js
 describe('StorageEngine', () => {
   it('initializes with defaults on empty localStorage');
@@ -660,6 +694,7 @@ describe('StorageEngine', () => {
 ```
 
 **Component tests (baru, ~20 tests):**
+
 ```js
 describe('QuizShell', () => {
   it('renders question and options');
@@ -677,6 +712,7 @@ describe('Dashboard', () => {
 ```
 
 **E2E smoke tests (Playwright, ~5 tests):**
+
 ```js
 test('full study flow', async ({ page }) => {
   await page.goto('/');
@@ -771,6 +807,7 @@ jobs:
 **Problem:** `CACHE_VERSION` in `sw.js` must be manually bumped. Forgotten bumps = users stuck on old version.
 
 **Solution:** Vite plugin or build script that injects git hash:
+
 ```js
 // vite.config.js
 {
@@ -784,21 +821,23 @@ jobs:
         let sw = fs.readFileSync(swPath, 'utf-8');
         sw = sw.replace(/CACHE_VERSION = '[^']*'/, `CACHE_VERSION = 'ssw-${hash}'`);
         fs.writeFileSync(swPath, sw);
-      }
-    }
-  ]
+      },
+    },
+  ];
 }
 ```
 
 ### 8.4 Accessibility Quick Wins
 
 Saat ini:
+
 - ❌ Buttons tanpa `aria-label` (emoji-only buttons)
 - ❌ Focus management saat mode switch (keyboard users lost)
 - ❌ No `role="alert"` pada toast notifications
 - ❌ Color contrast issues di beberapa `textDim` values
 
 Quick fixes:
+
 ```jsx
 <button aria-label="Kembali ke menu" onClick={onExit}>←</button>
 <div role="alert" aria-live="polite">{toastMessage}</div>
@@ -807,10 +846,11 @@ Quick fixes:
 ### 8.5 Bundle Analysis
 
 Add `rollup-plugin-visualizer` untuk track bundle size over time:
+
 ```js
 // vite.config.js
 import { visualizer } from 'rollup-plugin-visualizer';
-plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
+plugins: [react(), visualizer({ filename: 'dist/stats.html' })];
 ```
 
 ### 8.6 Prioritas: 🟢 LOW — quality of life, do when convenient
@@ -820,6 +860,7 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 ## 9. 🗺️ Roadmap Eksekusi
 
 ### Phase A: Storage Foundation (1 session)
+
 > **Prerequisite untuk Phase B-D**
 
 1. Build `src/storage/` engine (3 files)
@@ -829,6 +870,7 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 5. Test migration with real data (export current → clear → import → verify)
 
 ### Phase B: App Decomposition (1-2 sessions)
+
 > **Depends on Phase A**
 
 1. Extract `ProgressContext`, `SRSContext`, `AppContext`
@@ -839,6 +881,7 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 6. Verify all 18 modes still work
 
 ### Phase C: CSS Modules Migration (2-3 sessions)
+
 > **Independent — can parallel with B**
 
 1. Start with shared components (6 files)
@@ -847,6 +890,7 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 4. Verify dark/light theming still works
 
 ### Phase D: Data Splitting (1 session)
+
 > **Depends on Phase B (context provides data)**
 
 1. Split cards.js per track
@@ -855,6 +899,7 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 4. Verify lazy loading works per track
 
 ### Phase E: CI/CD + DX (1 session)
+
 > **Independent**
 
 1. GitHub Actions CI (lint + test + build)
@@ -863,6 +908,7 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 4. Pre-commit hooks (optional)
 
 ### Phase F: Testing Expansion (ongoing)
+
 > **After Phase A-B stabilize**
 
 1. Component tests for QuizShell, Dashboard, ResultScreen
@@ -873,15 +919,15 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 
 ## 10. Estimasi Total
 
-| Phase | Sessions | Lines Changed | Risk |
-|-------|----------|---------------|------|
-| A — Storage | 1 | ~600 new, ~400 edit | Medium (migration) |
-| B — Decomposition | 1-2 | ~800 new, ~500 delete | Medium (refactor) |
-| C — CSS Modules | 2-3 | ~2000 edit | Low (cosmetic) |
-| D — Data Split | 1 | ~200 new, ~100 edit | Low |
-| E — CI/CD | 1 | ~100 new (config) | Low |
-| F — Testing | ongoing | ~500+ new | Low |
-| **Total** | **7-10 sessions** | **~4000+ lines** | |
+| Phase             | Sessions          | Lines Changed         | Risk               |
+| ----------------- | ----------------- | --------------------- | ------------------ |
+| A — Storage       | 1                 | ~600 new, ~400 edit   | Medium (migration) |
+| B — Decomposition | 1-2               | ~800 new, ~500 delete | Medium (refactor)  |
+| C — CSS Modules   | 2-3               | ~2000 edit            | Low (cosmetic)     |
+| D — Data Split    | 1                 | ~200 new, ~100 edit   | Low                |
+| E — CI/CD         | 1                 | ~100 new (config)     | Low                |
+| F — Testing       | ongoing           | ~500+ new             | Low                |
+| **Total**         | **7-10 sessions** | **~4000+ lines**      |                    |
 
 ---
 
@@ -912,4 +958,4 @@ plugins: [react(), visualizer({ filename: 'dist/stats.html' })]
 
 ---
 
-*Proposal ini dihasilkan dari audit exhaustive 19.646 baris source code, 20+ localStorage key patterns, 822 inline style instances, dan seluruh dokumentasi proyek. Setiap pilar bisa dieksekusi independen — tapi Phase A (Storage) adalah foundation yang membuka Phase B dan D.*
+_Proposal ini dihasilkan dari audit exhaustive 19.646 baris source code, 20+ localStorage key patterns, 822 inline style instances, dan seluruh dokumentasi proyek. Setiap pilar bisa dieksekusi independen — tapi Phase A (Storage) adalah foundation yang membuka Phase B dan D._

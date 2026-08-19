@@ -38,7 +38,9 @@ const sortedIds = [...ids].sort((a, b) => a - b);
 for (let i = 0; i < sortedIds.length; i++) {
   const expected = i + 1;
   if (sortedIds[i] !== expected) {
-    warnings.push(`Card id sequence is not contiguous at position ${i + 1}: got ${sortedIds[i]}, expected ${expected}`);
+    warnings.push(
+      `Card id sequence is not contiguous at position ${i + 1}: got ${sortedIds[i]}, expected ${expected}`
+    );
     break;
   }
 }
@@ -49,7 +51,8 @@ for (const src of VOCAB_SOURCES) {
 
 for (const group of SOURCE_GROUPS) {
   for (const key of group.keys) {
-    if (!sourceKeys.has(key)) issues.push(`SOURCE_GROUPS (${group.label}) references unknown source: ${key}`);
+    if (!sourceKeys.has(key))
+      issues.push(`SOURCE_GROUPS (${group.label}) references unknown source: ${key}`);
   }
 }
 

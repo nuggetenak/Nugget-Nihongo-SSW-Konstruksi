@@ -47,9 +47,11 @@ describe('storage migration chain (v1/v2 → current)', () => {
       starred: [],
       quizWrong: { 10: 2 },
       wrongCounts: {},
-      wgWrong: {}, vocabWrong: {},
+      wgWrong: {},
+      vocabWrong: {},
       jacScores: { 'set-1': { correct: 8, total: 10 } },
-      wgScores: {}, vocabScores: {},
+      wgScores: {},
+      vocabScores: {},
       streakData: { days: 5, lastDate: '2026-04-30' },
       dailyCount: { count: 3, date: '2026-04-30' },
       recentCards: [1, 2],
@@ -58,10 +60,14 @@ describe('storage migration chain (v1/v2 → current)', () => {
     };
     const v2Prefs = {
       _v: 2,
-      track: 'doboku', theme: 'dark', onboarded: true,
-      tutorialFlashcard: false, lastMode: 'kuis', dailyGoal: 30,
+      track: 'doboku',
+      theme: 'dark',
+      onboarded: true,
+      tutorialFlashcard: false,
+      lastMode: 'kuis',
+      dailyGoal: 30,
     };
-    const v2Srs = { _v: 2, cards: { '42': { state: 1 } } };
+    const v2Srs = { _v: 2, cards: { 42: { state: 1 } } };
 
     localStorage.setItem('ssw-progress', JSON.stringify(v2Progress));
     localStorage.setItem('ssw-prefs', JSON.stringify(v2Prefs));

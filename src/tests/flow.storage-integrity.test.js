@@ -21,9 +21,9 @@ describe('storage integrity — complete v3 schema', () => {
     expect(Array.isArray(p.starred)).toBe(true);
     expect(typeof p.quizWrong).toBe('object');
     expect(typeof p.jacScores).toBe('object');
-    expect(p).not.toHaveProperty('dobokuScores');    // removed at merge — track no longer exists
+    expect(p).not.toHaveProperty('dobokuScores'); // removed at merge — track no longer exists
     expect(p).not.toHaveProperty('kenchikuScores');
-    expect(Array.isArray(p.sessions)).toBe(true);    // Phase C
+    expect(Array.isArray(p.sessions)).toBe(true); // Phase C
     expect(p.dailyMission === null || typeof p.dailyMission === 'object').toBe(true); // Phase C
     expect(typeof p.milestoneStreak7).toBe('boolean');
     expect(typeof p.milestoneQuiz70).toBe('boolean');
@@ -32,10 +32,10 @@ describe('storage integrity — complete v3 schema', () => {
   it('all required prefs fields present and correct types', () => {
     const p = get('prefs');
     expect(p._v).toBe(STORAGE_VERSION);
-    expect(p.examDate === null || typeof p.examDate === 'string').toBe(true);  // Phase F
-    expect(typeof p.audioEnabled).toBe('boolean');    // Phase F
+    expect(p.examDate === null || typeof p.examDate === 'string').toBe(true); // Phase F
+    expect(typeof p.audioEnabled).toBe('boolean'); // Phase F
     expect(p.studyAnchor === null || typeof p.studyAnchor === 'string').toBe(true); // Phase C
-    expect(typeof p.furiganaPolicy).toBe('string');   // Phase E
+    expect(typeof p.furiganaPolicy).toBe('string'); // Phase E
     expect(typeof p.dailyGoal).toBe('number');
     expect(typeof p.onboarded).toBe('boolean');
   });
@@ -59,8 +59,6 @@ describe('storage integrity — complete v3 schema', () => {
     const p = get('progress');
     const d = DEFAULTS.progress;
     // Spot-check structural equivalence
-    expect(Object.keys(p).sort()).toEqual(
-      expect.arrayContaining(Object.keys(d))
-    );
+    expect(Object.keys(p).sort()).toEqual(expect.arrayContaining(Object.keys(d)));
   });
 });

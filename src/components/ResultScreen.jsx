@@ -29,18 +29,18 @@ export default function ResultScreen({
 }) {
   ensureShake();
 
-  const pct        = total > 0 ? Math.round((correct / total) * 100) : 0;
-  const grade      = getGrade(pct);
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const grade = getGrade(pct);
   const wrongCount = total - correct;
-  const path       = pct >= 70 ? 'celebrate' : pct < 50 ? 'encourage' : 'neutral';
+  const path = pct >= 70 ? 'celebrate' : pct < 50 ? 'encourage' : 'neutral';
 
-  const weaknessTip = path === 'encourage' && wrongCount > 0
-    ? `Kamu salah ${wrongCount} soal. Coba pelajari kartunya lagi, lalu kuis ulang.`
-    : null;
+  const weaknessTip =
+    path === 'encourage' && wrongCount > 0
+      ? `Kamu salah ${wrongCount} soal. Coba pelajari kartunya lagi, lalu kuis ulang.`
+      : null;
 
   return (
     <div className={s.container}>
-
       {/* Grade hero */}
       <div className={s.hero} data-path={path}>
         {path === 'celebrate' && <div className={s.stars} aria-hidden="true" />}
@@ -67,19 +67,31 @@ export default function ResultScreen({
 
       {/* Actions */}
       <div className={s.actions}>
-        <button className={s.btnPrimary} onClick={onRestart}>🔄 Ulang</button>
+        <button className={s.btnPrimary} onClick={onRestart}>
+          🔄 Ulang
+        </button>
         {onRetryWrong && wrongCount > 0 && (
           <button className={s.btnWrong} onClick={onRetryWrong}>
             ❌ Latih {wrongCount} salah
           </button>
         )}
         {onAddToSRS && (srsWrongCount ?? wrongCount) > 0 && (
-          <button className={s.btnWrong} style={{ background: 'rgba(99,102,241,0.12)', borderColor: 'rgba(99,102,241,0.35)', color: '#818cf8' }} onClick={onAddToSRS}>
+          <button
+            className={s.btnWrong}
+            style={{
+              background: 'rgba(99,102,241,0.12)',
+              borderColor: 'rgba(99,102,241,0.35)',
+              color: '#818cf8',
+            }}
+            onClick={onAddToSRS}
+          >
             🧠 Tambah ke Ulasan SRS
           </button>
         )}
       </div>
-      <button className={s.btnBack} onClick={onExit}>← Kembali</button>
+      <button className={s.btnBack} onClick={onExit}>
+        ← Kembali
+      </button>
 
       {/* Wrong answer review */}
       {review.length > 0 && (
@@ -87,13 +99,18 @@ export default function ResultScreen({
           <div className={s.reviewHeader}>Jawaban Salah ({review.length})</div>
           <div className={s.reviewList}>
             {review.map((r, i) => (
-              <div key={i} className={s.reviewItem} style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
+              <div
+                key={i}
+                className={s.reviewItem}
+                style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
+              >
                 <div className={s.reviewQ}>{r.question}</div>
                 <div className={s.reviewWrong}>✗ {r.userAnswer}</div>
                 <div className={s.reviewCorrect}>✓ {r.correctAnswer}</div>
                 {r.explanation && (
                   <div className={s.reviewExpl}>
-                    💡 {r.explanation.slice(0, 180)}{r.explanation.length > 180 ? '…' : ''}
+                    💡 {r.explanation.slice(0, 180)}
+                    {r.explanation.length > 180 ? '…' : ''}
                   </div>
                 )}
               </div>

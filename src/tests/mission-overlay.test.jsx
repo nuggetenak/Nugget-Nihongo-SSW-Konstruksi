@@ -32,7 +32,9 @@ describe('C.3 MissionCompleteOverlay', () => {
 
     expect(onDone).not.toHaveBeenCalled();
 
-    act(() => { vi.advanceTimersByTime(3000); });
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
 
     expect(onDone).toHaveBeenCalledTimes(1);
   });
@@ -41,7 +43,9 @@ describe('C.3 MissionCompleteOverlay', () => {
     const { container } = render(<MissionCompleteOverlay onDone={() => {}} />);
     expect(container.querySelector('[role="status"]')).toBeTruthy();
 
-    act(() => { vi.advanceTimersByTime(3000); });
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
 
     expect(container.querySelector('[role="status"]')).toBeNull();
   });

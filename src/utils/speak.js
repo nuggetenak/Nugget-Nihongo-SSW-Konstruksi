@@ -9,9 +9,9 @@ let _playCount = 0;
 
 // Three parameter variants to create perceptual variation (HVPT-lite)
 const HVPT_PARAMS = [
-  { rate: 0.70, pitch: 0.85 }, // slow, lower pitch
-  { rate: 0.80, pitch: 1.00 }, // natural rate
-  { rate: 0.90, pitch: 1.15 }, // natural pace, higher pitch
+  { rate: 0.7, pitch: 0.85 }, // slow, lower pitch
+  { rate: 0.8, pitch: 1.0 }, // natural rate
+  { rate: 0.9, pitch: 1.15 }, // natural pace, higher pitch
 ];
 
 /** Returns true if Web Speech API is available. */
@@ -38,10 +38,10 @@ export function speakJP(text, opts = {}) {
       ? { rate: opts.rate, pitch: opts.pitch ?? 1.0 }
       : HVPT_PARAMS[_playCount++ % HVPT_PARAMS.length];
 
-  const utt   = new window.SpeechSynthesisUtterance(text);
-  utt.lang    = 'ja-JP';
-  utt.rate    = params.rate;
-  utt.pitch   = params.pitch;
+  const utt = new window.SpeechSynthesisUtterance(text);
+  utt.lang = 'ja-JP';
+  utt.rate = params.rate;
+  utt.pitch = params.pitch;
   window.speechSynthesis.speak(utt);
 }
 

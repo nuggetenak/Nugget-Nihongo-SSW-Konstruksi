@@ -10,18 +10,18 @@ import { MODE_META } from '../router/modes.js';
 
 // Four Strands mapping (Nation 2007) — strand derives from MODE_META.
 const MISSION_TYPES = [
-  { mode: 'ulasan',   label: 'Ulasan SRS',       icon: '🔁', priority: 5 },
-  { mode: 'kartu',    label: 'Pelajari Kartu',    icon: '🃏', priority: 3 },
-  { mode: 'kuis',     label: 'Kuis 10 Soal',      icon: '❓', priority: 3 },
-  { mode: 'sprint',   label: 'Sprint 60 Detik',   icon: '⚡', priority: 2 },
-  { mode: 'jac',      label: 'Latihan JAC',       icon: '📋', priority: 2 },
-  { mode: 'fokus',    label: 'Fokus Kelemahan',   icon: '🎯', priority: 4 },
-  { mode: 'angka',    label: 'Angka Kunci',        icon: '🔢', priority: 3 },
-  { mode: 'jebak',    label: 'Soal Jebak',         icon: '⚠️', priority: 3 },
-  { mode: 'produksi', label: 'Latihan Produksi',  icon: '✍️', priority: 3 },
-  { mode: 'kuisprod', label: 'Kuis Produksi',      icon: '🔤', priority: 2 },
-  { mode: 'mirip',    label: 'Kata Mirip',         icon: '🔀', priority: 2 },
-  { mode: 'dengar',   label: 'Dengarkan',          icon: '🎧', priority: 2 },
+  { mode: 'ulasan', label: 'Ulasan SRS', icon: '🔁', priority: 5 },
+  { mode: 'kartu', label: 'Pelajari Kartu', icon: '🃏', priority: 3 },
+  { mode: 'kuis', label: 'Kuis 10 Soal', icon: '❓', priority: 3 },
+  { mode: 'sprint', label: 'Sprint 60 Detik', icon: '⚡', priority: 2 },
+  { mode: 'jac', label: 'Latihan JAC', icon: '📋', priority: 2 },
+  { mode: 'fokus', label: 'Fokus Kelemahan', icon: '🎯', priority: 4 },
+  { mode: 'angka', label: 'Angka Kunci', icon: '🔢', priority: 3 },
+  { mode: 'jebak', label: 'Soal Jebak', icon: '⚠️', priority: 3 },
+  { mode: 'produksi', label: 'Latihan Produksi', icon: '✍️', priority: 3 },
+  { mode: 'kuisprod', label: 'Kuis Produksi', icon: '🔤', priority: 2 },
+  { mode: 'mirip', label: 'Kata Mirip', icon: '🔀', priority: 2 },
+  { mode: 'dengar', label: 'Dengarkan', icon: '🎧', priority: 2 },
 ].map((m) => ({ ...m, strand: MODE_META[m.mode]?.strand ?? null }));
 
 export function generateDailyMission() {
@@ -71,9 +71,7 @@ export function generateDailyMission() {
 export function completeMission() {
   storageSet('progress', (p) => ({
     ...p,
-    dailyMission: p.dailyMission
-      ? { ...p.dailyMission, completedAt: Date.now() }
-      : null,
+    dailyMission: p.dailyMission ? { ...p.dailyMission, completedAt: Date.now() } : null,
   }));
 }
 

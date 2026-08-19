@@ -76,7 +76,10 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
     if (phase !== 'prompt' || !card) return;
     const correct = isCorrect(input, card);
     if (correct) haptic.correct();
-    else { haptic.wrong(); recordWrong(card.id); }
+    else {
+      haptic.wrong();
+      recordWrong(card.id);
+    }
 
     if (audioEnabled && canSpeak()) {
       speakJP(stripFuri(card.jp));
@@ -114,10 +117,16 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
   useEffect(() => {
     const handler = (e) => {
       if (phase === 'prompt') {
-        if (e.key === 'Enter') { e.preventDefault(); handleSubmit(); }
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleSubmit();
+        }
         if (e.key === 'Escape') handleSkip();
       } else {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleNext(); }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleNext();
+        }
       }
     };
     window.addEventListener('keydown', handler);
@@ -131,8 +140,12 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
     const showSummary = doneCount > 0;
 
     const pillStyle = (on) => ({
-      fontFamily: 'inherit', padding: '7px 16px', fontSize: 13,
-      borderRadius: T.r.pill, cursor: 'pointer', fontWeight: on ? 700 : 400,
+      fontFamily: 'inherit',
+      padding: '7px 16px',
+      fontSize: 13,
+      borderRadius: T.r.pill,
+      cursor: 'pointer',
+      fontWeight: on ? 700 : 400,
       background: on ? T.surfaceActive : T.surface,
       border: `1px solid ${on ? T.borderActive : T.border}`,
       color: on ? T.amber : T.textMuted,
@@ -140,17 +153,29 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
 
     return (
       <div className={S.pageFade} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
-        <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+        <button className={S.btnBack} onClick={onExit}>
+          ← Kembali
+        </button>
 
-        <h2 className={S.pageTitle} style={{ fontSize: 20 }}>✍️ Produksi Aktif</h2>
+        <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
+          ✍️ Produksi Aktif
+        </h2>
         <p className={S.pageSub} style={{ marginBottom: 20 }}>
           Lihat terjemahan Indonesia → ketik jawaban Jepang (kanji/kana).
         </p>
 
         {showSummary && (
-          <div className={S.card} style={{ marginBottom: 20, background: T.correctBg, border: `1px solid ${T.correctBorder}` }}>
+          <div
+            className={S.card}
+            style={{
+              marginBottom: 20,
+              background: T.correctBg,
+              border: `1px solid ${T.correctBorder}`,
+            }}
+          >
             <div style={{ fontSize: 13, fontWeight: 700, color: T.correct }}>
-              Sesi terakhir: {correctCount}/{doneCount} benar ({doneCount > 0 ? Math.round((correctCount / doneCount) * 100) : 0}%)
+              Sesi terakhir: {correctCount}/{doneCount} benar (
+              {doneCount > 0 ? Math.round((correctCount / doneCount) * 100) : 0}%)
             </div>
           </div>
         )}
@@ -158,7 +183,9 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
           {QUIZ_COUNTS.map((n) => (
-            <button key={n} onClick={() => setCount(n)} style={pillStyle(count === n)}>{n}</button>
+            <button key={n} onClick={() => setCount(n)} style={pillStyle(count === n)}>
+              {n}
+            </button>
           ))}
           <button onClick={() => setCount(cards.length)} style={pillStyle(count === cards.length)}>
             Semua ({cards.length})
@@ -168,10 +195,16 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
         <div className={S.card} style={{ marginBottom: 24, fontSize: 12, color: T.textMuted }}>
           <div style={{ marginBottom: 6, fontWeight: 600, color: T.text }}>💡 Cara main</div>
           <div>Prompt bahasa Indonesia tampil → ketik Jepang (kanji, kana, atau kombinasi).</div>
-          <div style={{ marginTop: 4 }}>Enter = kirim jawaban · Esc = skip · spasi (setelah reveal) = lanjut</div>
+          <div style={{ marginTop: 4 }}>
+            Enter = kirim jawaban · Esc = skip · spasi (setelah reveal) = lanjut
+          </div>
         </div>
 
-        <button className={S.btnPrimary} style={{ fontSize: 15, padding: '15px' }} onClick={startSession}>
+        <button
+          className={S.btnPrimary}
+          style={{ fontSize: 15, padding: '15px' }}
+          onClick={startSession}
+        >
           Mulai ✍️
         </button>
       </div>
@@ -187,19 +220,27 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
 
     return (
       <div className={S.pageScroll} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
-        <div style={{
-          background: T.surface,
-          border: `1px solid ${T.border}`,
-          borderRadius: 16,
-          padding: '24px 20px',
-          textAlign: 'center',
-          marginBottom: 20,
-          animation: 'popIn 0.35s var(--ease-spring) both',
-        }}>
+        <div
+          style={{
+            background: T.surface,
+            border: `1px solid ${T.border}`,
+            borderRadius: 16,
+            padding: '24px 20px',
+            textAlign: 'center',
+            marginBottom: 20,
+            animation: 'popIn 0.35s var(--ease-spring) both',
+          }}
+        >
           <div style={{ fontSize: 48, marginBottom: 8 }}>
             {pct >= 80 ? '🎉' : pct >= 60 ? '📝' : '💪'}
           </div>
-          <div style={{ fontSize: 40, fontWeight: 900, color: pct >= 80 ? T.correct : pct >= 60 ? T.amber : T.wrong }}>
+          <div
+            style={{
+              fontSize: 40,
+              fontWeight: 900,
+              color: pct >= 80 ? T.correct : pct >= 60 ? T.amber : T.wrong,
+            }}
+          >
             {pct}%
           </div>
           <div style={{ fontSize: 15, color: T.textMuted, marginTop: 4 }}>
@@ -208,8 +249,12 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
         </div>
 
         <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-          <button className={S.btnPrimary} style={{ flex: 1 }} onClick={startSession}>🔄 Ulang</button>
-          <button className={S.btnSecondary} style={{ flex: 1 }} onClick={onExit}>← Menu</button>
+          <button className={S.btnPrimary} style={{ flex: 1 }} onClick={startSession}>
+            🔄 Ulang
+          </button>
+          <button className={S.btnSecondary} style={{ flex: 1 }} onClick={onExit}>
+            ← Menu
+          </button>
         </div>
 
         {wrongList.length > 0 && (
@@ -217,23 +262,32 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
             <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
             <div className={S.list} style={{ gap: 8 }}>
               {wrongList.map((r, i) => (
-                <div key={i} className={S.card} style={{
-                  animation: `slideUp 0.25s ease ${i * 0.04}s both`,
-                  borderLeft: `3px solid ${T.wrong}`,
-                }}>
-                  <div style={{ fontSize: 11, color: T.textDim, marginBottom: 4 }}>{r.card.id_text}</div>
+                <div
+                  key={i}
+                  className={S.card}
+                  style={{
+                    animation: `slideUp 0.25s ease ${i * 0.04}s both`,
+                    borderLeft: `3px solid ${T.wrong}`,
+                  }}
+                >
+                  <div style={{ fontSize: 11, color: T.textDim, marginBottom: 4 }}>
+                    {r.card.id_text}
+                  </div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: T.text, marginBottom: 4 }}>
                     {stripFuri(r.card.jp)}
-                    {extractReadings(r.card.jp) && <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>({extractReadings(r.card.jp)})</span>}
+                    {extractReadings(r.card.jp) && (
+                      <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>
+                        ({extractReadings(r.card.jp)})
+                      </span>
+                    )}
                   </div>
                   {r.input && (
                     <div style={{ fontSize: 12, color: T.wrong }}>
-                      ✗ kamu: <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>{r.input}</span>
+                      ✗ kamu:{' '}
+                      <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>{r.input}</span>
                     </div>
                   )}
-                  {r.skipped && (
-                    <div style={{ fontSize: 12, color: T.textFaint }}>⏭ dilewati</div>
-                  )}
+                  {r.skipped && <div style={{ fontSize: 12, color: T.textFaint }}>⏭ dilewati</div>}
                 </div>
               ))}
             </div>
@@ -249,8 +303,21 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
 
   return (
     <div className={S.pageScroll} style={{ padding: 'var(--sp-4)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={() => { setStarted(false); }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 12,
+        }}
+      >
+        <button
+          className={S.btnBack}
+          style={{ marginBottom: 0 }}
+          onClick={() => {
+            setStarted(false);
+          }}
+        >
           ← Produksi
         </button>
         <div style={{ fontSize: 12, color: T.textDim }}>
@@ -270,16 +337,26 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
       />
 
       {/* Prompt card — Indonesian → user types Japanese */}
-      <div style={{
-        background: T.surface,
-        border: `1px solid ${T.border}`,
-        borderRadius: 16,
-        padding: '28px 20px',
-        textAlign: 'center',
-        margin: '16px 0',
-        animation: 'scaleIn 0.2s var(--ease-smooth)',
-      }}>
-        <div style={{ fontSize: 11, color: T.textFaint, marginBottom: 8, letterSpacing: 1, textTransform: 'uppercase' }}>
+      <div
+        style={{
+          background: T.surface,
+          border: `1px solid ${T.border}`,
+          borderRadius: 16,
+          padding: '28px 20px',
+          textAlign: 'center',
+          margin: '16px 0',
+          animation: 'scaleIn 0.2s var(--ease-smooth)',
+        }}
+      >
+        <div
+          style={{
+            fontSize: 11,
+            color: T.textFaint,
+            marginBottom: 8,
+            letterSpacing: 1,
+            textTransform: 'uppercase',
+          }}
+        >
           bahasa indonesia
         </div>
         <div style={{ fontSize: 22, fontWeight: 700, color: T.text, lineHeight: 1.4 }}>
@@ -313,8 +390,12 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
                 outline: 'none',
                 boxSizing: 'border-box',
               }}
-              onFocus={(e) => { e.target.style.borderColor = T.borderActive; }}
-              onBlur={(e) => { e.target.style.borderColor = T.border; }}
+              onFocus={(e) => {
+                e.target.style.borderColor = T.borderActive;
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = T.border;
+              }}
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
@@ -341,33 +422,49 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
         </>
       ) : (
         /* Reveal panel */
-        <div style={{
-          border: `1.5px solid ${answerCorrect ? T.correctBorder : T.wrongBorder}`,
-          borderRadius: 12,
-          background: answerCorrect ? T.correctBg : T.wrongBg,
-          padding: '16px',
-          marginBottom: 12,
-          animation: 'scaleIn 0.18s var(--ease-smooth)',
-        }}>
+        <div
+          style={{
+            border: `1.5px solid ${answerCorrect ? T.correctBorder : T.wrongBorder}`,
+            borderRadius: 12,
+            background: answerCorrect ? T.correctBg : T.wrongBg,
+            padding: '16px',
+            marginBottom: 12,
+            animation: 'scaleIn 0.18s var(--ease-smooth)',
+          }}
+        >
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-            <span style={{ fontSize: 16, fontWeight: 700, color: answerCorrect ? T.correct : T.wrong }}>
+            <span
+              style={{ fontSize: 16, fontWeight: 700, color: answerCorrect ? T.correct : T.wrong }}
+            >
               {answerCorrect ? '✓ Benar!' : '✗ Kurang tepat'}
             </span>
           </div>
 
           {!answerCorrect && lastResult?.input && (
             <div style={{ fontSize: 13, color: T.wrong, marginBottom: 6 }}>
-              Kamu: <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>{lastResult.input || '(dilewati)'}</span>
+              Kamu:{' '}
+              <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>
+                {lastResult.input || '(dilewati)'}
+              </span>
             </div>
           )}
 
           <div style={{ marginBottom: 6 }}>
             <span style={{ fontSize: 11, color: T.textDim }}>Jawaban: </span>
-            <span style={{ fontSize: 20, fontWeight: 700, fontFamily: 'Noto Sans JP, sans-serif', color: T.text }}>
+            <span
+              style={{
+                fontSize: 20,
+                fontWeight: 700,
+                fontFamily: 'Noto Sans JP, sans-serif',
+                color: T.text,
+              }}
+            >
               {stripFuri(card.jp)}
             </span>
             {extractReadings(card.jp) && (
-              <span style={{ fontSize: 13, color: T.textDim, marginLeft: 8 }}>({extractReadings(card.jp)})</span>
+              <span style={{ fontSize: 13, color: T.textDim, marginLeft: 8 }}>
+                ({extractReadings(card.jp)})
+              </span>
             )}
           </div>
 
@@ -381,8 +478,13 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
             <button
               onClick={() => speakJP(stripFuri(card.jp))}
               style={{
-                marginTop: 8, background: 'none', border: 'none',
-                fontSize: 12, color: T.amber, cursor: 'pointer', padding: '4px 0',
+                marginTop: 8,
+                background: 'none',
+                border: 'none',
+                fontSize: 12,
+                color: T.amber,
+                cursor: 'pointer',
+                padding: '4px 0',
               }}
             >
               🔊 Dengarkan

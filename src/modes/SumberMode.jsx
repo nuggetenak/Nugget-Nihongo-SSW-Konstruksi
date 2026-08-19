@@ -20,44 +20,131 @@ export default function SumberMode({ onExit, onNavigate }) {
     const color = SOURCE_ACCENT[activeSrc] || T.gold;
     return (
       <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
-        <button className={S.btnBack} onClick={() => setActiveSrc(null)}>← Sumber</button>
-        <h2 className={S.pageTitle} style={{ fontSize: 16 }}>{meta.emoji} {meta.label}</h2>
-        <p className={S.pageSub} style={{ fontSize: 12 }}>{srcCards.length} kartu</p>
+        <button className={S.btnBack} onClick={() => setActiveSrc(null)}>
+          ← Sumber
+        </button>
+        <h2 className={S.pageTitle} style={{ fontSize: 16 }}>
+          {meta.emoji} {meta.label}
+        </h2>
+        <p className={S.pageSub} style={{ fontSize: 12 }}>
+          {srcCards.length} kartu
+        </p>
         {/* Quick-launch actions per source */}
         {onNavigate && (
           <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
             <button
               onClick={() => onNavigate('kartu', { filterIds: srcIds })}
-              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
-            >🃏 Kartu</button>
+              style={{
+                flex: 1,
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 700,
+                padding: '9px 10px',
+                borderRadius: T.r.md,
+                border: `1px solid ${color}40`,
+                background: `${color}12`,
+                color,
+                cursor: 'pointer',
+              }}
+            >
+              🃏 Kartu
+            </button>
             <button
               onClick={() => onNavigate('sprint', { filterIds: srcIds })}
-              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
-            >⚡ Sprint</button>
+              style={{
+                flex: 1,
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 700,
+                padding: '9px 10px',
+                borderRadius: T.r.md,
+                border: `1px solid ${color}40`,
+                background: `${color}12`,
+                color,
+                cursor: 'pointer',
+              }}
+            >
+              ⚡ Sprint
+            </button>
             <button
               onClick={() => onNavigate('kuis', { filterIds: srcIds })}
-              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
-            >❓ Kuis</button>
+              style={{
+                flex: 1,
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 700,
+                padding: '9px 10px',
+                borderRadius: T.r.md,
+                border: `1px solid ${color}40`,
+                background: `${color}12`,
+                color,
+                cursor: 'pointer',
+              }}
+            >
+              ❓ Kuis
+            </button>
             <button
               onClick={() => onNavigate('produksi', { filterIds: srcIds })}
-              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
-            >✍️ Produksi</button>
+              style={{
+                flex: 1,
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 700,
+                padding: '9px 10px',
+                borderRadius: T.r.md,
+                border: `1px solid ${color}40`,
+                background: `${color}12`,
+                color,
+                cursor: 'pointer',
+              }}
+            >
+              ✍️ Produksi
+            </button>
             <button
               onClick={() => onNavigate('kuisprod', { filterIds: srcIds })}
-              style={{ flex: 1, fontFamily: 'inherit', fontSize: 12, fontWeight: 700, padding: '9px 10px', borderRadius: T.r.md, border: `1px solid ${color}40`, background: `${color}12`, color, cursor: 'pointer' }}
-            >🔤 Kuis Prod</button>
+              style={{
+                flex: 1,
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 700,
+                padding: '9px 10px',
+                borderRadius: T.r.md,
+                border: `1px solid ${color}40`,
+                background: `${color}12`,
+                color,
+                cursor: 'pointer',
+              }}
+            >
+              🔤 Kuis Prod
+            </button>
           </div>
         )}
         <div className={S.list} style={{ gap: 6 }}>
           {srcCards.map((c) => (
-            <div key={c.id} onClick={() => setExpanded(expanded === c.id ? null : c.id)} style={{ padding: '10px 12px', borderRadius: T.r.md, cursor: 'pointer', background: T.surface, borderLeft: `3px solid ${color}` }}>
+            <div
+              key={c.id}
+              onClick={() => setExpanded(expanded === c.id ? null : c.id)}
+              style={{
+                padding: '10px 12px',
+                borderRadius: T.r.md,
+                cursor: 'pointer',
+                background: T.surface,
+                borderLeft: `3px solid ${color}`,
+              }}
+            >
               <div className={S.rowSpread}>
                 <span style={{ fontFamily: T.fontJP, fontSize: 13 }}>{stripFuri(c.jp)}</span>
-                <span style={{ fontSize: 12, color: T.textMuted, flexShrink: 0, marginLeft: 8 }}>{c.id_text}</span>
+                <span style={{ fontSize: 12, color: T.textMuted, flexShrink: 0, marginLeft: 8 }}>
+                  {c.id_text}
+                </span>
               </div>
               {expanded === c.id && (
                 <div style={{ marginTop: 6, fontSize: 11, color: T.textMuted, lineHeight: 1.5 }}>
-                  {extractReadings(c.jp) && <div style={{ color: T.textDim, fontFamily: T.fontJP }}>{extractReadings(c.jp)}</div>}
+                  {extractReadings(c.jp) && (
+                    <div style={{ color: T.textDim, fontFamily: T.fontJP }}>
+                      {extractReadings(c.jp)}
+                    </div>
+                  )}
                   <div style={{ marginTop: 4 }}>{c.desc}</div>
                 </div>
               )}
@@ -70,7 +157,8 @@ export default function SumberMode({ onExit, onNavigate }) {
 
   // Compute per-source stats for picker
   const srcStats = {};
-  let minPct = 101, weakestKey = null;
+  let minPct = 101,
+    weakestKey = null;
   for (const g of SOURCE_GROUPS) {
     for (const key of g.keys) {
       const cards = CARDS.filter((c) => c.source === key);
@@ -78,13 +166,18 @@ export default function SumberMode({ onExit, onNavigate }) {
       const knownCount = cards.filter((c) => known.has(c.id)).length;
       const pct = Math.round((knownCount / cards.length) * 100);
       srcStats[key] = { total: cards.length, knownCount, pct };
-      if (pct < minPct) { minPct = pct; weakestKey = key; }
+      if (pct < minPct) {
+        minPct = pct;
+        weakestKey = key;
+      }
     }
   }
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <button className={S.btnBack} onClick={onExit}>
+        ← Kembali
+      </button>
       <h2 className={S.pageTitle}>📂 Sumber</h2>
       <p className={S.pageSub}>Jelajahi kartu berdasarkan sumber PDF/CSV</p>
       {SOURCE_GROUPS.map((g) => (
@@ -98,20 +191,68 @@ export default function SumberMode({ onExit, onNavigate }) {
               const stat = srcStats[key];
               const isWeakest = key === weakestKey;
               return (
-                <button key={key} className={S.btnItem} onClick={() => setActiveSrc(key)} style={{ borderLeft: `3px solid ${color}`, paddingBottom: stat ? 10 : undefined }}>
+                <button
+                  key={key}
+                  className={S.btnItem}
+                  onClick={() => setActiveSrc(key)}
+                  style={{ borderLeft: `3px solid ${color}`, paddingBottom: stat ? 10 : undefined }}
+                >
                   <div className={S.rowSpread} style={{ marginBottom: stat ? 6 : 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <span>{meta.emoji} {meta.label}</span>
-                      {isWeakest && <span style={{ fontSize: 9, fontWeight: 700, background: 'rgba(220,38,38,0.1)', color: T.wrong, border: `1px solid rgba(220,38,38,0.25)`, borderRadius: 99, padding: '1px 6px' }}>Terlemah</span>}
+                      <span>
+                        {meta.emoji} {meta.label}
+                      </span>
+                      {isWeakest && (
+                        <span
+                          style={{
+                            fontSize: 9,
+                            fontWeight: 700,
+                            background: 'rgba(220,38,38,0.1)',
+                            color: T.wrong,
+                            border: `1px solid rgba(220,38,38,0.25)`,
+                            borderRadius: 99,
+                            padding: '1px 6px',
+                          }}
+                        >
+                          Terlemah
+                        </span>
+                      )}
                     </div>
                     <span style={{ fontSize: 12, color: T.textDim }}>{stat?.total ?? 0} kartu</span>
                   </div>
                   {stat && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <div style={{ flex: 1, height: 4, background: T.border, borderRadius: 99, overflow: 'hidden' }}>
-                        <div style={{ width: `${stat.pct}%`, height: '100%', background: stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong, borderRadius: 99, transition: 'width 0.4s ease' }} />
+                      <div
+                        style={{
+                          flex: 1,
+                          height: 4,
+                          background: T.border,
+                          borderRadius: 99,
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: `${stat.pct}%`,
+                            height: '100%',
+                            background:
+                              stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong,
+                            borderRadius: 99,
+                            transition: 'width 0.4s ease',
+                          }}
+                        />
                       </div>
-                      <span style={{ fontSize: 10, fontWeight: 700, color: stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong, minWidth: 32, textAlign: 'right' }}>{stat.pct}%</span>
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          color: stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong,
+                          minWidth: 32,
+                          textAlign: 'right',
+                        }}
+                      >
+                        {stat.pct}%
+                      </span>
                     </div>
                   )}
                 </button>

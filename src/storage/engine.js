@@ -5,8 +5,11 @@
 
 import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
 import {
-  hasV1Data, migrate_v1_to_v2, cleanup_v1_keys,
-  migrate_v2_to_v3, migrate_v3_to_v4,
+  hasV1Data,
+  migrate_v1_to_v2,
+  cleanup_v1_keys,
+  migrate_v2_to_v3,
+  migrate_v3_to_v4,
   migrate_v4_to_v5,
   migrate_v5_to_v6,
 } from './migrations.js';
@@ -70,8 +73,10 @@ export function init() {
     // Already current — load directly
     _cache.progress = progressRaw;
     _cache.srs = readDoc(DOCS.srs) ?? { _v: STORAGE_VERSION, cards: {} };
-    _cache.prefs = readDoc(DOCS.prefs) ?? { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
-
+    _cache.prefs = readDoc(DOCS.prefs) ?? {
+      ...JSON.parse(JSON.stringify(DEFAULTS.prefs)),
+      _v: STORAGE_VERSION,
+    };
   } else if (version === 5) {
     // v5 → v6: doboku/kenchiku scores dropped, wayground/csv id renames remapped
     const migrated = migrate_v5_to_v6();
@@ -81,7 +86,6 @@ export function init() {
     writeDoc(DOCS.progress, _cache.progress);
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
-
   } else if (version === 4) {
     // v4 → v5 → v6
     const migrated45 = migrate_v4_to_v5();
@@ -95,7 +99,6 @@ export function init() {
     writeDoc(DOCS.progress, _cache.progress);
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
-
   } else if (version === 3) {
     // v3 → v4 → v5 → v6
     const migrated34 = migrate_v3_to_v4();
@@ -113,7 +116,6 @@ export function init() {
     writeDoc(DOCS.progress, _cache.progress);
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
-
   } else if (version === 2) {
     // v2 → v3 → v4 → v5 → v6 migration chain
     const migrated23 = migrate_v2_to_v3();
@@ -135,7 +137,6 @@ export function init() {
     writeDoc(DOCS.progress, _cache.progress);
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
-
   } else if (hasV1Data()) {
     // v1 → v2 → v3 → v4 → v5 → v6 chain migration
     const v2 = migrate_v1_to_v2();
@@ -163,7 +164,6 @@ export function init() {
     writeDoc(DOCS.srs, _cache.srs);
     writeDoc(DOCS.prefs, _cache.prefs);
     cleanup_v1_keys();
-
   } else {
     // Fresh install — write v3 defaults
     const d = freshDefaults();
@@ -189,9 +189,7 @@ export function get(doc) {
 export function set(doc, updater) {
   if (!_initialized) init();
   const current = _cache[doc] ?? JSON.parse(JSON.stringify(DEFAULTS[doc]));
-  const next = typeof updater === 'function'
-    ? updater(current)
-    : { ...current, ...updater };
+  const next = typeof updater === 'function' ? updater(current) : { ...current, ...updater };
   _cache[doc] = next;
   writeDoc(DOCS[doc], next);
   return next;
@@ -265,17 +263,18 @@ export function _reset_for_test() {
 // Validate a snapshot before importing. Returns { ok, reason, summary }.
 export function validateSnapshot(snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return { ok: false, reason: 'not_object' };
-  if (!snapshot.progress || !snapshot.srs || !snapshot.prefs) return { ok: false, reason: 'missing_docs' };
+  if (!snapshot.progress || !snapshot.srs || !snapshot.prefs)
+    return { ok: false, reason: 'missing_docs' };
   if (!Array.isArray(snapshot.progress.known)) return { ok: false, reason: 'invalid_known' };
   if (typeof snapshot.srs.cards !== 'object') return { ok: false, reason: 'invalid_srs' };
   return {
     ok: true,
     summary: {
-      known:    snapshot.progress.known.length,
-      unknown:  (snapshot.progress.unknown ?? []).length,
+      known: snapshot.progress.known.length,
+      unknown: (snapshot.progress.unknown ?? []).length,
       srsCards: Object.keys(snapshot.srs.cards).length,
       sessions: (snapshot.progress.sessions ?? []).length,
-      version:  snapshot._storage_version ?? snapshot.progress._v ?? 'unknown',
+      version: snapshot._storage_version ?? snapshot.progress._v ?? 'unknown',
       migrated: (snapshot._storage_version ?? snapshot.progress._v ?? 0) < STORAGE_VERSION,
     },
   };
@@ -293,7 +292,9 @@ export function importAllSafe(snapshot) {
     importAll(snapshot);
   } catch (err) {
     // Rollback on failure
-    try { importAll(backup); } catch {}
+    try {
+      importAll(backup);
+    } catch {}
     throw err;
   }
   return validation.summary;

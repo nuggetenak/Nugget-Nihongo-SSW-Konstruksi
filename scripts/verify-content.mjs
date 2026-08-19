@@ -40,7 +40,10 @@ const DATA_ROOT = path.join(REPO_ROOT, 'src', 'data');
 
 let failures = 0;
 const log = (...a) => console.log(...a);
-const fail = (...a) => { failures++; console.log('❌', ...a); };
+const fail = (...a) => {
+  failures++;
+  console.log('❌', ...a);
+};
 const ok = (...a) => console.log('✅', ...a);
 
 /** Recursively list .js files under a directory. */
@@ -69,7 +72,11 @@ function listJsFiles(dir) {
 function loadDataModule(filePath) {
   const src = fs.readFileSync(filePath, 'utf8');
   if (/^\s*import\s/m.test(src) || /^\s*export\s*\{/m.test(src)) {
-    return { skipped: true, reason: 'uses import/re-export syntax (barrel or shim file) — not a leaf data file, verify manually if edited' };
+    return {
+      skipped: true,
+      reason:
+        'uses import/re-export syntax (barrel or shim file) — not a leaf data file, verify manually if edited',
+    };
   }
   const transformed = src.replace(/^export\s+const\s+/gm, 'module.exports.');
   const tmpFile = path.join(os.tmpdir(), `verify-${crypto.randomBytes(6).toString('hex')}.cjs`);
@@ -106,8 +113,12 @@ for (const f of allFiles) {
   }
 }
 log(`   (${skipCount} barrel/shim file(s) skipped — see function comment above)`);
-if (parseFailCount === 0) ok(`all ${allFiles.length - skipCount} checked leaf files under src/data/ parse cleanly`);
-else fail(`${parseFailCount} of ${allFiles.length - skipCount} checked files under src/data/ FAILED to parse`);
+if (parseFailCount === 0)
+  ok(`all ${allFiles.length - skipCount} checked leaf files under src/data/ parse cleanly`);
+else
+  fail(
+    `${parseFailCount} of ${allFiles.length - skipCount} checked files under src/data/ FAILED to parse`
+  );
 
 log(`\n=== PART 2: cards.js — count + type breakdown + duplicate IDs ===\n`);
 const cardsPath = path.join(DATA_ROOT, 'cards.js');
@@ -164,7 +175,10 @@ if (fs.existsSync(cardsDir)) {
   for (const f of listJsFiles(cardsDir)) {
     const res = loadDataModule(f);
     if (res.skipped) continue;
-    if (!res.ok) { splitOk = false; continue; }
+    if (!res.ok) {
+      splitOk = false;
+      continue;
+    }
     const arr = firstArrayExport(res.exports);
     if (arr) splitTotal += arr.value.length;
   }
@@ -172,10 +186,14 @@ if (fs.existsSync(cardsDir)) {
 }
 
 if (cardsTotal !== null) {
-  if (sourceOk && sourceTotal === cardsTotal) ok(`source/ mirror total (${sourceTotal}) matches cards.js (${cardsTotal})`);
-  else if (sourceOk) fail(`source/ mirror total (${sourceTotal}) DOES NOT MATCH cards.js (${cardsTotal})`);
-  if (splitOk && splitTotal === cardsTotal) ok(`split-files total (${splitTotal}) matches cards.js (${cardsTotal})`);
-  else if (splitOk) fail(`split-files total (${splitTotal}) DOES NOT MATCH cards.js (${cardsTotal})`);
+  if (sourceOk && sourceTotal === cardsTotal)
+    ok(`source/ mirror total (${sourceTotal}) matches cards.js (${cardsTotal})`);
+  else if (sourceOk)
+    fail(`source/ mirror total (${sourceTotal}) DOES NOT MATCH cards.js (${cardsTotal})`);
+  if (splitOk && splitTotal === cardsTotal)
+    ok(`split-files total (${splitTotal}) matches cards.js (${cardsTotal})`);
+  else if (splitOk)
+    fail(`split-files total (${splitTotal}) DOES NOT MATCH cards.js (${cardsTotal})`);
 }
 
 log(`\n=== RESULT ===\n`);

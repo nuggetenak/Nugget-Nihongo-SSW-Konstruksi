@@ -71,41 +71,61 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
     haptic.tap();
   };
 
-  const handleSelect = useCallback((optIdx) => {
-    if (selected !== null) return;
-    setSelected(optIdx);
-    const isCorrect = optIdx === currentQ.correctIdx;
-    haptic[isCorrect ? 'correct' : 'wrong']();
-    setResults((r) => [...r, { card: currentQ.card, isCorrect }]);
-    // Record wrong answer in shared wrong-tracker pool.
-    if (!isCorrect) {
-      const cardId = currentQ.card.id;
-      if (cardId) recordWrong(cardId);
-    }
-
-    // Advance after 1.5s
-    setTimeout(() => {
-      if (idx + 1 < questions.length) {
-        setIdx((i) => i + 1);
-        setSelected(null);
-      } else {
-        // Done — fire session
-        const newResults = [...results, { card: currentQ.card, isCorrect }];
-        if (!sessionFired && onSessionEnd) {
-          const correct = newResults.filter((r) => r.isCorrect).length;
-          onSessionEnd({ mode: 'dengar', correct, total: newResults.length, durationMs: getDurationMs() });
-          setSessionFired(true);
-        }
-        setIdx(questions.length); // trigger done state
+  const handleSelect = useCallback(
+    (optIdx) => {
+      if (selected !== null) return;
+      setSelected(optIdx);
+      const isCorrect = optIdx === currentQ.correctIdx;
+      haptic[isCorrect ? 'correct' : 'wrong']();
+      setResults((r) => [...r, { card: currentQ.card, isCorrect }]);
+      // Record wrong answer in shared wrong-tracker pool.
+      if (!isCorrect) {
+        const cardId = currentQ.card.id;
+        if (cardId) recordWrong(cardId);
       }
-    }, 1500);
-  }, [selected, currentQ, idx, questions.length, results, sessionFired, onSessionEnd, recordWrong, getDurationMs]);
+
+      // Advance after 1.5s
+      setTimeout(() => {
+        if (idx + 1 < questions.length) {
+          setIdx((i) => i + 1);
+          setSelected(null);
+        } else {
+          // Done — fire session
+          const newResults = [...results, { card: currentQ.card, isCorrect }];
+          if (!sessionFired && onSessionEnd) {
+            const correct = newResults.filter((r) => r.isCorrect).length;
+            onSessionEnd({
+              mode: 'dengar',
+              correct,
+              total: newResults.length,
+              durationMs: getDurationMs(),
+            });
+            setSessionFired(true);
+          }
+          setIdx(questions.length); // trigger done state
+        }
+      }, 1500);
+    },
+    [
+      selected,
+      currentQ,
+      idx,
+      questions.length,
+      results,
+      sessionFired,
+      onSessionEnd,
+      recordWrong,
+      getDurationMs,
+    ]
+  );
 
   // ── Settings screen ──────────────────────────────────────────────────────
   if (!started) {
     return (
       <div className={S.page}>
-        <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+        <button className={S.btnBack} onClick={onExit}>
+          ← Kembali
+        </button>
         <div style={{ marginBottom: 24 }}>
           <div style={{ fontSize: 28, marginBottom: 4 }}>🎧</div>
           <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--ssw-textBright)' }}>
@@ -115,18 +135,33 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
           </div>
           {!hasAudio && (
-            <div style={{
-              marginTop: 12, padding: '10px 14px',
-              background: 'var(--ssw-wrongBg)', border: '1px solid var(--ssw-wrongBorder)',
-              borderRadius: 10, fontSize: 13, color: 'var(--ssw-wrong)',
-            }}>
+            <div
+              style={{
+                marginTop: 12,
+                padding: '10px 14px',
+                background: 'var(--ssw-wrongBg)',
+                border: '1px solid var(--ssw-wrongBorder)',
+                borderRadius: 10,
+                fontSize: 13,
+                color: 'var(--ssw-wrong)',
+              }}
+            >
               ⚠️ Browser ini tidak mendukung Web Speech API. Mode Dengarkan membutuhkan audio.
             </div>
           )}
         </div>
 
         <div style={{ marginBottom: 20 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--ssw-textMuted)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: 'var(--ssw-textMuted)',
+              marginBottom: 8,
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+            }}
+          >
             Jumlah Soal
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
@@ -135,8 +170,13 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
                 key={n}
                 onClick={() => setCount(n)}
                 style={{
-                  flex: 1, padding: '10px 0', borderRadius: 10, fontFamily: 'inherit',
-                  fontSize: 15, fontWeight: count === n ? 700 : 400, cursor: 'pointer',
+                  flex: 1,
+                  padding: '10px 0',
+                  borderRadius: 10,
+                  fontFamily: 'inherit',
+                  fontSize: 15,
+                  fontWeight: count === n ? 700 : 400,
+                  cursor: 'pointer',
                   border: `2px solid ${count === n ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
                   background: count === n ? 'rgba(245,158,11,0.12)' : 'var(--ssw-surface)',
                   color: count === n ? 'var(--ssw-amber)' : 'var(--ssw-textMuted)',
@@ -149,23 +189,36 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
           </div>
         </div>
 
-        <div style={{
-          padding: '14px 16px', background: 'var(--ssw-surface)',
-          borderRadius: 12, marginBottom: 24, fontSize: 13, color: 'var(--ssw-textMuted)', lineHeight: 1.6,
-        }}>
-          <strong style={{ color: 'var(--ssw-textBright)' }}>Cara main:</strong>{' '}
-          Tekan 🔊 untuk mendengar kata Jepang. Pilih terjemahan yang benar. Kartu bergerak otomatis setelah {1.5} detik.
+        <div
+          style={{
+            padding: '14px 16px',
+            background: 'var(--ssw-surface)',
+            borderRadius: 12,
+            marginBottom: 24,
+            fontSize: 13,
+            color: 'var(--ssw-textMuted)',
+            lineHeight: 1.6,
+          }}
+        >
+          <strong style={{ color: 'var(--ssw-textBright)' }}>Cara main:</strong> Tekan 🔊 untuk
+          mendengar kata Jepang. Pilih terjemahan yang benar. Kartu bergerak otomatis setelah {1.5}{' '}
+          detik.
         </div>
 
         <button
           onClick={start}
           disabled={!hasAudio}
           style={{
-            width: '100%', padding: '14px', borderRadius: 12,
+            width: '100%',
+            padding: '14px',
+            borderRadius: 12,
             background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
             color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
-            fontFamily: 'inherit', fontSize: 16, fontWeight: 700,
-            border: 'none', cursor: hasAudio ? 'pointer' : 'not-allowed',
+            fontFamily: 'inherit',
+            fontSize: 16,
+            fontWeight: 700,
+            border: 'none',
+            cursor: hasAudio ? 'pointer' : 'not-allowed',
           }}
         >
           Mulai Latihan
@@ -178,30 +231,45 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
   if (idx >= questions.length && results.length > 0) {
     const correct = results.filter((r) => r.isCorrect).length;
     const pct = Math.round((correct / results.length) * 100);
-    const color = pct >= 80 ? 'var(--ssw-correct)' : pct >= 60 ? 'var(--ssw-amber)' : 'var(--ssw-wrong)';
+    const color =
+      pct >= 80 ? 'var(--ssw-correct)' : pct >= 60 ? 'var(--ssw-amber)' : 'var(--ssw-wrong)';
 
     return (
       <div className={S.pageCenter}>
         <div style={{ fontSize: 48, marginBottom: 8 }}>
           {pct >= 80 ? '🏆' : pct >= 60 ? '🎯' : '💪'}
         </div>
-        <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--ssw-textBright)', marginBottom: 4 }}>
+        <div
+          style={{ fontSize: 22, fontWeight: 800, color: 'var(--ssw-textBright)', marginBottom: 4 }}
+        >
           Sesi Selesai
         </div>
-        <div style={{ fontSize: 36, fontWeight: 800, color, marginBottom: 4 }}>
-          {pct}%
-        </div>
+        <div style={{ fontSize: 36, fontWeight: 800, color, marginBottom: 4 }}>{pct}%</div>
         <div style={{ fontSize: 14, color: 'var(--ssw-textMuted)', marginBottom: 24 }}>
           {correct} benar dari {results.length} soal
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 320, margin: '0 auto' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+            maxWidth: 320,
+            margin: '0 auto',
+          }}
+        >
           <button
             onClick={start}
             style={{
-              padding: '13px', borderRadius: 12, background: 'var(--ssw-amber)',
-              color: '#fff', fontFamily: 'inherit', fontSize: 15, fontWeight: 700,
-              border: 'none', cursor: 'pointer',
+              padding: '13px',
+              borderRadius: 12,
+              background: 'var(--ssw-amber)',
+              color: '#fff',
+              fontFamily: 'inherit',
+              fontSize: 15,
+              fontWeight: 700,
+              border: 'none',
+              cursor: 'pointer',
             }}
           >
             🔄 Ulangi
@@ -209,9 +277,15 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
           <button
             onClick={onExit}
             style={{
-              padding: '13px', borderRadius: 12, background: 'var(--ssw-surface)',
-              color: 'var(--ssw-textMuted)', fontFamily: 'inherit', fontSize: 15, fontWeight: 600,
-              border: '1px solid var(--ssw-border)', cursor: 'pointer',
+              padding: '13px',
+              borderRadius: 12,
+              background: 'var(--ssw-surface)',
+              color: 'var(--ssw-textMuted)',
+              fontFamily: 'inherit',
+              fontSize: 15,
+              fontWeight: 600,
+              border: '1px solid var(--ssw-border)',
+              cursor: 'pointer',
             }}
           >
             ← Kembali
@@ -228,13 +302,20 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <button className={S.btnBack} onClick={onExit}>
+        ← Kembali
+      </button>
       <ProgressBar value={idx} max={questions.length} />
 
-      <div style={{
-        textAlign: 'center', padding: '32px 16px 24px',
-        background: 'var(--ssw-surface)', borderRadius: 16, marginBottom: 20,
-      }}>
+      <div
+        style={{
+          textAlign: 'center',
+          padding: '32px 16px 24px',
+          background: 'var(--ssw-surface)',
+          borderRadius: 16,
+          marginBottom: 20,
+        }}
+      >
         <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)', marginBottom: 12 }}>
           {idx + 1} / {questions.length}
         </div>
@@ -245,10 +326,16 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
           disabled={isAnswered}
           aria-label="Putar audio"
           style={{
-            width: 80, height: 80, borderRadius: '50%',
+            width: 80,
+            height: 80,
+            borderRadius: '50%',
             background: isAnswered ? 'var(--ssw-surface)' : 'var(--ssw-amber)',
-            border: 'none', cursor: isAnswered ? 'default' : 'pointer',
-            fontSize: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            border: 'none',
+            cursor: isAnswered ? 'default' : 'pointer',
+            fontSize: 32,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             boxShadow: isAnswered ? 'none' : '0 4px 16px rgba(245,158,11,0.35)',
             transition: 'all 0.2s',
           }}
@@ -256,10 +343,15 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
           🔊
         </button>
 
-        <div style={{
-          marginTop: 16, fontSize: 13, color: 'var(--ssw-textMuted)',
-          opacity: isAnswered ? 0 : 1, transition: 'opacity 0.2s',
-        }}>
+        <div
+          style={{
+            marginTop: 16,
+            fontSize: 13,
+            color: 'var(--ssw-textMuted)',
+            opacity: isAnswered ? 0 : 1,
+            transition: 'opacity 0.2s',
+          }}
+        >
           Tekan untuk mendengar kata Jepang
         </div>
 
@@ -284,8 +376,15 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
           let border = 'var(--ssw-border)';
           let color = 'var(--ssw-text)';
           if (isAnswered) {
-            if (opt.isCorrect) { bg = 'var(--ssw-correctBg)'; border = 'var(--ssw-correctBorder)'; color = 'var(--ssw-correct)'; }
-            else if (i === selected && !opt.isCorrect) { bg = 'var(--ssw-wrongBg)'; border = 'var(--ssw-wrongBorder)'; color = 'var(--ssw-wrong)'; }
+            if (opt.isCorrect) {
+              bg = 'var(--ssw-correctBg)';
+              border = 'var(--ssw-correctBorder)';
+              color = 'var(--ssw-correct)';
+            } else if (i === selected && !opt.isCorrect) {
+              bg = 'var(--ssw-wrongBg)';
+              border = 'var(--ssw-wrongBorder)';
+              color = 'var(--ssw-wrong)';
+            }
           }
           return (
             <button
@@ -293,10 +392,18 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
               onClick={() => handleSelect(i)}
               disabled={isAnswered}
               style={{
-                width: '100%', padding: '14px 16px', textAlign: 'left',
-                borderRadius: 12, background: bg, border: `2px solid ${border}`,
-                color, fontFamily: 'inherit', fontSize: 15, cursor: isAnswered ? 'default' : 'pointer',
-                transition: 'all 0.15s', fontWeight: 500,
+                width: '100%',
+                padding: '14px 16px',
+                textAlign: 'left',
+                borderRadius: 12,
+                background: bg,
+                border: `2px solid ${border}`,
+                color,
+                fontFamily: 'inherit',
+                fontSize: 15,
+                cursor: isAnswered ? 'default' : 'pointer',
+                transition: 'all 0.15s',
+                fontWeight: 500,
               }}
             >
               {opt.text}

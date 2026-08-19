@@ -30,9 +30,9 @@ export default defineConfig({
       exclude: ['src/tests/**', 'src/data/**'],
       // G.1: Coverage thresholds
       thresholds: {
-        lines:     70,
+        lines: 70,
         functions: 70,
-        branches:  60,
+        branches: 60,
       },
     },
   },

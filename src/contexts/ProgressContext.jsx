@@ -30,100 +30,123 @@ export function ProgressProvider({ children }) {
   }, []);
 
   // ── Known / Unknown ───────────────────────────────────────────────────
-  const handleMark = useCallback((id, type) => {
-    const dateStr = todayStr();
-    setProg((prev) => {
-      const knownSet = new Set(Array.isArray(prev.known) ? prev.known : []);
-      const unknownSet = new Set(Array.isArray(prev.unknown) ? prev.unknown : []);
+  const handleMark = useCallback(
+    (id, type) => {
+      const dateStr = todayStr();
+      setProg((prev) => {
+        const knownSet = new Set(Array.isArray(prev.known) ? prev.known : []);
+        const unknownSet = new Set(Array.isArray(prev.unknown) ? prev.unknown : []);
 
-      if (type === 'known') {
-        knownSet.add(id);
-        unknownSet.delete(id);
-      } else {
-        unknownSet.add(id);
-        knownSet.delete(id);
-      }
+        if (type === 'known') {
+          knownSet.add(id);
+          unknownSet.delete(id);
+        } else {
+          unknownSet.add(id);
+          knownSet.delete(id);
+        }
 
-      // Streak
-      const streak = prev.streakData ?? {};
-      const newDays = streak.lastDate === dateStr
-        ? (streak.days ?? 0)
-        : streak.lastDate === prevDayStr()
-          ? (streak.days ?? 0) + 1
-          : 1;
-      const streakData = { days: newDays, lastDate: dateStr };
+        // Streak
+        const streak = prev.streakData ?? {};
+        const newDays =
+          streak.lastDate === dateStr
+            ? (streak.days ?? 0)
+            : streak.lastDate === prevDayStr()
+              ? (streak.days ?? 0) + 1
+              : 1;
+        const streakData = { days: newDays, lastDate: dateStr };
 
-      // Daily count
-      const dc = prev.dailyCount ?? { count: 0, date: '' };
-      const dailyCount = dc.date === dateStr
-        ? { count: dc.count + 1, date: dateStr }
-        : { count: 1, date: dateStr };
+        // Daily count
+        const dc = prev.dailyCount ?? { count: 0, date: '' };
+        const dailyCount =
+          dc.date === dateStr
+            ? { count: dc.count + 1, date: dateStr }
+            : { count: 1, date: dateStr };
 
-      // Recent cards (max 20, newest first)
-      const recentCards = id
-        ? [id, ...(prev.recentCards ?? []).filter((x) => x !== id)].slice(0, 20)
-        : prev.recentCards ?? [];
+        // Recent cards (max 20, newest first)
+        const recentCards = id
+          ? [id, ...(prev.recentCards ?? []).filter((x) => x !== id)].slice(0, 20)
+          : (prev.recentCards ?? []);
 
-      // Milestone: streak7 — queue toast when first achieved
-      const milestoneStreak7 = prev.milestoneStreak7 || newDays >= 7;
-      if (!prev.milestoneStreak7 && milestoneStreak7) {
-        // Queue outside setState (setTimeout avoids calling setState within setState)
-        setTimeout(() => setToastQueue((q) => [
-          ...q,
-          { msg: '🔥 7 hari berturut-turut! Konsistensi = kunci sukses.', duration: 4000 },
-        ]), 0);
-      }
+        // Milestone: streak7 — queue toast when first achieved
+        const milestoneStreak7 = prev.milestoneStreak7 || newDays >= 7;
+        if (!prev.milestoneStreak7 && milestoneStreak7) {
+          // Queue outside setState (setTimeout avoids calling setState within setState)
+          setTimeout(
+            () =>
+              setToastQueue((q) => [
+                ...q,
+                { msg: '🔥 7 hari berturut-turut! Konsistensi = kunci sukses.', duration: 4000 },
+              ]),
+            0
+          );
+        }
 
-      return {
-        ...prev,
-        known: [...knownSet],
-        unknown: [...unknownSet],
-        streakData,
-        dailyCount,
-        recentCards,
-        milestoneStreak7,
-      };
-    });
-  }, [setProg]);
+        return {
+          ...prev,
+          known: [...knownSet],
+          unknown: [...unknownSet],
+          streakData,
+          dailyCount,
+          recentCards,
+          milestoneStreak7,
+        };
+      });
+    },
+    [setProg]
+  );
 
   // ── Starred ───────────────────────────────────────────────────────────
-  const toggleStar = useCallback((id) => {
-    if (!id) return;
-    setProg((prev) => {
-      const s = new Set(Array.isArray(prev.starred) ? prev.starred : []);
-      if (s.has(id)) s.delete(id); else s.add(id);
-      return { ...prev, starred: [...s] };
-    });
-  }, [setProg]);
+  const toggleStar = useCallback(
+    (id) => {
+      if (!id) return;
+      setProg((prev) => {
+        const s = new Set(Array.isArray(prev.starred) ? prev.starred : []);
+        if (s.has(id)) s.delete(id);
+        else s.add(id);
+        return { ...prev, starred: [...s] };
+      });
+    },
+    [setProg]
+  );
 
   // ── Quiz wrong tracking ───────────────────────────────────────────────
   // recordWrong writes to progress.quizWrong (in-engine, lz-string compressed, exportable).
-  const recordWrong = useCallback((cardId) => {
-    setProg((prev) => {
-      const qw = { ...(prev.quizWrong ?? {}) };
-      qw[cardId] = makeWrongEntry(qw[cardId]);
-      return { ...prev, quizWrong: qw };
-    });
-  }, [setProg]);
+  const recordWrong = useCallback(
+    (cardId) => {
+      setProg((prev) => {
+        const qw = { ...(prev.quizWrong ?? {}) };
+        qw[cardId] = makeWrongEntry(qw[cardId]);
+        return { ...prev, quizWrong: qw };
+      });
+    },
+    [setProg]
+  );
 
   // ── Scores ────────────────────────────────────────────────────────────
-  const saveScore = useCallback((type, setId, scoreData) => {
-    const key = type === 'jac' ? 'jacScores' : type === 'wg' ? 'wgScores' : 'vocabScores';
-    setProg((prev) => ({
-      ...prev,
-      [key]: { ...(prev[key] ?? {}), [setId]: scoreData },
-    }));
-  }, [setProg]);
+  const saveScore = useCallback(
+    (type, setId, scoreData) => {
+      const key = type === 'jac' ? 'jacScores' : type === 'wg' ? 'wgScores' : 'vocabScores';
+      setProg((prev) => ({
+        ...prev,
+        [key]: { ...(prev[key] ?? {}), [setId]: scoreData },
+      }));
+    },
+    [setProg]
+  );
 
   // ── Milestone setters ─────────────────────────────────────────────────
   const setMilestoneQuiz70 = useCallback(() => {
     setProg((prev) => {
       // Queue toast on first achievement only.
       if (!prev.milestoneQuiz70) {
-        setTimeout(() => setToastQueue((q) => [
-          ...q,
-          { msg: '🎉 Luar biasa! Nilai kuis ≥70% untuk pertama kali!', duration: 4000 },
-        ]), 0);
+        setTimeout(
+          () =>
+            setToastQueue((q) => [
+              ...q,
+              { msg: '🎉 Luar biasa! Nilai kuis ≥70% untuk pertama kali!', duration: 4000 },
+            ]),
+          0
+        );
       }
       return { ...prev, milestoneQuiz70: true };
     });
@@ -135,15 +158,18 @@ export function ProgressProvider({ children }) {
   }, []);
 
   // ── Session tracking ────────────────────────────────────────────────────
-  const recordSession = useCallback(({ mode, correct, total, durationMs }) => {
-    setProg((prev) => {
-      const sessions = [
-        ...(prev.sessions ?? []),
-        { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
-      ].slice(-SESSIONS_CAP); // keep last SESSIONS_CAP sessions (~6 months for heatmap)
-      return { ...prev, sessions };
-    });
-  }, [setProg]);
+  const recordSession = useCallback(
+    ({ mode, correct, total, durationMs }) => {
+      setProg((prev) => {
+        const sessions = [
+          ...(prev.sessions ?? []),
+          { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
+        ].slice(-SESSIONS_CAP); // keep last SESSIONS_CAP sessions (~6 months for heatmap)
+        return { ...prev, sessions };
+      });
+    },
+    [setProg]
+  );
 
   const ctx = useMemo(() => {
     const knownArr = Array.isArray(prog.known) ? prog.known : [];
@@ -180,8 +206,15 @@ export function ProgressProvider({ children }) {
       setMilestoneQuiz70,
     };
   }, [
-    prog, toastQueue, clearToast,
-    recordSession, handleMark, toggleStar, recordWrong, saveScore, setMilestoneQuiz70,
+    prog,
+    toastQueue,
+    clearToast,
+    recordSession,
+    handleMark,
+    toggleStar,
+    recordWrong,
+    saveScore,
+    setMilestoneQuiz70,
   ]);
 
   return <ProgressCtx.Provider value={ctx}>{children}</ProgressCtx.Provider>;
@@ -192,4 +225,3 @@ export function useProgress() {
   if (!ctx) throw new Error('useProgress must be used within ProgressProvider');
   return ctx;
 }
-

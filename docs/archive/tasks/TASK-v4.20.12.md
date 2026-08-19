@@ -1,7 +1,9 @@
 # TASK v4.20.12 — STORAGE-1: Quota Detection + Recovery (ENG-12)
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.9 DONE
 
 ## Goal
+
 `localStorage.setItem` in `engine.js` silently swallows `QuotaExceededError`. Add detection, user toast, and recovery path.
 
 ---
@@ -22,8 +24,8 @@ export function setQuotaHandler(fn) {
 export function isQuotaError(err) {
   return (
     err?.name === 'QuotaExceededError' ||
-    err?.code === 22 ||        // Chrome/Safari
-    err?.code === 1014          // Firefox NS_ERROR_DOM_QUOTA_REACHED
+    err?.code === 22 || // Chrome/Safari
+    err?.code === 1014 // Firefox NS_ERROR_DOM_QUOTA_REACHED
   );
 }
 
@@ -42,7 +44,9 @@ export async function estimateStorageUsage() {
         quotaMB: ((est.quota || 0) / 1024 / 1024).toFixed(0),
         pct: est.quota ? ((est.usage / est.quota) * 100).toFixed(1) : null,
       };
-    } catch { return null; }
+    } catch {
+      return null;
+    }
   }
   return null;
 }
@@ -53,6 +57,7 @@ export async function estimateStorageUsage() {
 ## Step 2 — Update `src/storage/engine.js`
 
 Find `writeDoc` function (~line 32):
+
 ```js
 function writeDoc(docKey, data) {
   try {
@@ -63,6 +68,7 @@ function writeDoc(docKey, data) {
 ```
 
 Replace with:
+
 ```js
 import { isQuotaError, notifyQuotaExceeded } from '../utils/storage-quota.js';
 
@@ -87,11 +93,13 @@ function writeDoc(docKey, data) {
 ## Step 3 — Wire handler in `src/App.jsx`
 
 In `App.jsx`, add to the imports:
+
 ```js
 import { setQuotaHandler } from './utils/storage-quota.js';
 ```
 
 In the component body, add a `useEffect`:
+
 ```js
 useEffect(() => {
   setQuotaHandler(() => {
@@ -103,6 +111,7 @@ useEffect(() => {
 ```
 
 **Simpler approach** — if `toast` is available via context in App.jsx:
+
 ```js
 const { toast } = useApp();
 useEffect(() => {
@@ -119,18 +128,26 @@ Use whichever pattern fits App.jsx's structure (check how toast is currently use
 ## Step 4 — Update `src/utils/index.js` barrel
 
 Add export:
+
 ```js
-export { setQuotaHandler, isQuotaError, notifyQuotaExceeded, estimateStorageUsage } from './storage-quota.js';
+export {
+  setQuotaHandler,
+  isQuotaError,
+  notifyQuotaExceeded,
+  estimateStorageUsage,
+} from './storage-quota.js';
 ```
 
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build` — success
 4. Bump → `4.20.12`
 5. Prepend CHANGELOG:
+
 ```
 ## [4.20.12] - [DATE]
 
@@ -140,9 +157,11 @@ export { setQuotaHandler, isQuotaError, notifyQuotaExceeded, estimateStorageUsag
 - App.jsx: registers quota handler → toast on write failure
 - utils/index.js: barrel updated
 ```
+
 6. Update `_MAP.md` + push
 
 ## Done when
+
 - [ ] storage-quota.js created
 - [ ] engine.js writeDoc handles quota explicitly + calls notifyQuotaExceeded
 - [ ] App.jsx registers quota handler

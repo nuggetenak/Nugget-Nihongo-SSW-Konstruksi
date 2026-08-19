@@ -26,7 +26,9 @@ export function ConfirmProvider({ children }) {
           <div className={S.backdrop} onClick={() => answer(false)} />
           <div className={S.sheet} role="dialog" aria-modal="true" aria-labelledby="confirm-msg">
             <div className={S.handle} />
-            <div className={S.message} id="confirm-msg">{state.message}</div>
+            <div className={S.message} id="confirm-msg">
+              {state.message}
+            </div>
             <div className={S.actions}>
               <button className={S.btnCancel} onClick={() => answer(false)}>
                 {state.cancelLabel}

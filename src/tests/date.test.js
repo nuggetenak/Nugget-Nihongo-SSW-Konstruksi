@@ -10,7 +10,7 @@ describe('date.js — local timezone helpers', () => {
 
   it('prevDayStr returns day before todayStr', () => {
     const today = new Date(todayStr());
-    const prev  = new Date(prevDayStr());
+    const prev = new Date(prevDayStr());
     const diffMs = today.getTime() - prev.getTime();
     expect(diffMs).toBe(86400000); // exactly 1 day
   });

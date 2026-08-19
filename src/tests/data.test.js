@@ -7,7 +7,13 @@ import { JAC_MOCKUP_SETS } from '../data/jac-mockup-sets.js';
 import { QUIZ_SETS, getQuizSetsForTrack } from '../data/quiz-sets.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
-import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES, SOURCE_GROUPS, SOURCE_META } from '../data/categories.js';
+import {
+  CATEGORIES,
+  getCatsForTrack,
+  VOCAB_SOURCES,
+  SOURCE_GROUPS,
+  SOURCE_META,
+} from '../data/categories.js';
 
 describe('CARDS data integrity', () => {
   it('has at least 1400 cards', () => expect(CARDS.length).toBeGreaterThanOrEqual(1400));
@@ -62,16 +68,12 @@ describe('CARDS data integrity', () => {
   });
 
   it('no card has romaji field (CS-02)', () => {
-    expect(
-      CARDS.filter((c) => 'romaji' in c).map((c) => c.id)
-    ).toHaveLength(0);
+    expect(CARDS.filter((c) => 'romaji' in c).map((c) => c.id)).toHaveLength(0);
   });
 
   it('every card has type field (CS-02)', () => {
     const VALID_TYPES = ['vocab', 'konsep', 'hukum'];
-    expect(
-      CARDS.filter((c) => !VALID_TYPES.includes(c.type)).map((c) => c.id)
-    ).toHaveLength(0);
+    expect(CARDS.filter((c) => !VALID_TYPES.includes(c.type)).map((c) => c.id)).toHaveLength(0);
   });
 });
 
@@ -86,9 +88,7 @@ describe('JAC_OFFICIAL data integrity', () => {
   });
 
   it('every question has 2+ options', () => {
-    expect(
-      JAC_OFFICIAL.filter((q) => !Array.isArray(q.opts) || q.opts.length < 2)
-    ).toHaveLength(0);
+    expect(JAC_OFFICIAL.filter((q) => !Array.isArray(q.opts) || q.opts.length < 2)).toHaveLength(0);
   });
 
   it('all sets are tt1/tt2/st1/st2', () => {
@@ -250,7 +250,9 @@ describe('DANGER_PAIRS', () => {
   it('every entry has confusionType (D2)', () => {
     const VALID_TYPES = ['makna', 'kata', 'angka', 'prosedur'];
     DANGER_PAIRS.forEach((d, i) => {
-      expect(VALID_TYPES, `entry ${i} invalid confusionType: ${d.confusionType}`).toContain(d.confusionType);
+      expect(VALID_TYPES, `entry ${i} invalid confusionType: ${d.confusionType}`).toContain(
+        d.confusionType
+      );
     });
   });
 
@@ -373,7 +375,9 @@ describe('WAYGROUND_SETS track fields', () => {
   });
 
   it('wgl* sets have track:lifeline', () => {
-    const praktik = WAYGROUND_SETS.filter((s) => s.id.startsWith('wgl') && !s.id.startsWith('wglv'));
+    const praktik = WAYGROUND_SETS.filter(
+      (s) => s.id.startsWith('wgl') && !s.id.startsWith('wglv')
+    );
     expect(praktik.length).toBe(10);
     expect(praktik.every((s) => s.track === 'lifeline')).toBe(true);
   });
@@ -425,10 +429,10 @@ describe('QUIZ_SETS + getQuizSetsForTrack', () => {
   it('getQuizSetsForTrack(lifeline) includes lifeline + common sets', () => {
     const sets = getQuizSetsForTrack('lifeline');
     const ids = sets.map((s) => s.id);
-    expect(ids).toContain('wt01');   // common teori
-    expect(ids).toContain('wgl01');  // lifeline praktik
-    expect(ids).toContain('jmt01');  // jac-mockup common teori
-    expect(ids).toContain('jml01');  // jac-mockup lifeline praktik
+    expect(ids).toContain('wt01'); // common teori
+    expect(ids).toContain('wgl01'); // lifeline praktik
+    expect(ids).toContain('jmt01'); // jac-mockup common teori
+    expect(ids).toContain('jml01'); // jac-mockup lifeline praktik
     expect(sets.length).toBe(QUIZ_SETS.length); // single-track app: lifeline sees everything
   });
 });

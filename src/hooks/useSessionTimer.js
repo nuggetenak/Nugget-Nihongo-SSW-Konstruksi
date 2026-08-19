@@ -6,6 +6,8 @@ export function useSessionTimer() {
   const startRef = useRef(Date.now());
   return {
     getDurationMs: () => Date.now() - startRef.current,
-    reset: () => { startRef.current = Date.now(); },
+    reset: () => {
+      startRef.current = Date.now();
+    },
   };
 }

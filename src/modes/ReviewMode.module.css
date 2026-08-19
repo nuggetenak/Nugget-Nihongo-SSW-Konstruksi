@@ -26,7 +26,7 @@
   padding: 28px 20px 24px;
   border-radius: var(--r-xxl);
   border: 1px solid var(--ssw-border);
-  background: linear-gradient(160deg, rgba(245,158,11,0.06) 0%, transparent 100%);
+  background: linear-gradient(160deg, rgba(245, 158, 11, 0.06) 0%, transparent 100%);
   width: 100%;
   margin-bottom: 16px;
   position: relative;
@@ -36,10 +36,12 @@
 .doneHero::before {
   content: '';
   position: absolute;
-  top: -40px; right: -40px;
-  width: 140px; height: 140px;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,158,11,0.12), transparent);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.12), transparent);
   pointer-events: none;
 }
 
@@ -80,7 +82,9 @@
   transition: transform var(--t-fast);
 }
 
-.doneMiniCard:active { transform: scale(0.96); }
+.doneMiniCard:active {
+  transform: scale(0.96);
+}
 
 .doneMiniIcon {
   font-size: 16px;

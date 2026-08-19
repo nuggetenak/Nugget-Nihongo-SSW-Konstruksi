@@ -12,18 +12,18 @@
 
 Nugget memberikan full creative freedom. Keempat open question di-resolve sebagai berikut:
 
-| # | Question | Decision | Rationale |
-|---|----------|----------|-----------|
-| 1 | Storage migration | **Auto-migrate** — zero user disruption | Junior user tidak tahu export/import. Data harus preserved silently. |
-| 2 | Styling approach | **CSS Modules** — zero runtime overhead | Target device = HP Android budget. No Tailwind build dependency. CSS variables sudah ada di theme.js. |
-| 3 | CI/CD | **GitHub Actions auto-deploy** on push to main | Multi-agent workflow butuh safety net. Auto SW cache versioning eliminasi stale cache risk. |
-| 4 | Testing depth | **Unit + Component first**, E2E later | Playwright E2E butuh headless browser setup yang berat. Component tests dengan React Testing Library lebih actionable sekarang. |
+| #   | Question          | Decision                                       | Rationale                                                                                                                       |
+| --- | ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Storage migration | **Auto-migrate** — zero user disruption        | Junior user tidak tahu export/import. Data harus preserved silently.                                                            |
+| 2   | Styling approach  | **CSS Modules** — zero runtime overhead        | Target device = HP Android budget. No Tailwind build dependency. CSS variables sudah ada di theme.js.                           |
+| 3   | CI/CD             | **GitHub Actions auto-deploy** on push to main | Multi-agent workflow butuh safety net. Auto SW cache versioning eliminasi stale cache risk.                                     |
+| 4   | Testing depth     | **Unit + Component first**, E2E later          | Playwright E2E butuh headless browser setup yang berat. Component tests dengan React Testing Library lebih actionable sekarang. |
 
 ---
 
 ## PART I: ARCHITECTURE REFACTOR
 
-*(Full detail ada di `docs/REFACTOR-PROPOSAL-v2.md` — di bawah ini ringkasan + update)*
+_(Full detail ada di `docs/REFACTOR-PROPOSAL-v2.md` — di bawah ini ringkasan + update)_
 
 ### A1. Storage Engine (3-Document Model)
 
@@ -40,6 +40,7 @@ src/storage/
 ```
 
 Migration v1→v2 WAJIB:
+
 1. Detect old keys → read → pack into 3 documents
 2. Write new format
 3. Delete old keys
@@ -50,6 +51,7 @@ Migration v1→v2 WAJIB:
 **Current:** 668-line god component.
 
 **Target:** ~150 lines. Extract to:
+
 - `src/contexts/ProgressContext.jsx` — known/unknown/starred/wrongCounts/scores
 - `src/contexts/SRSContext.jsx` — useSRS wrapper, provides via context
 - `src/contexts/AppContext.jsx` — track, theme, navigation, toast
@@ -100,22 +102,23 @@ Add: storage engine tests (~30), component tests (~20), hook tests (~10).
 
 **Design principles:**
 
-| # | Principle | Meaning |
-|---|-----------|---------|
-| P1 | **Mobile-first, mobile-only** | Design untuk layar 360-412px. Jangan design untuk desktop lalu shrink. |
-| P2 | **Thumb-zone aware** | Primary actions di bottom 1/3 layar. Exit/back di top-left. |
-| P3 | **Instant feedback** | Setiap tap harus ada respons visual dalam <100ms. |
-| P4 | **Reduce cognitive load** | Junior user overwhelmed oleh 18 modes. Guide them, don't dump options. |
-| P5 | **Japanese text is king** | JP text harus BESAR dan jelas. Furigana harus selalu terlihat. |
-| P6 | **Progress = motivation** | Gamification yang bermakna. Streaks, milestones, visual progress. |
-| P7 | **Error-proof** | Impossible to lose data. Impossible to get stuck. Always a way back. |
-| P8 | **Offline-first** | App harus 100% functional tanpa internet setelah first load. |
+| #   | Principle                     | Meaning                                                                |
+| --- | ----------------------------- | ---------------------------------------------------------------------- |
+| P1  | **Mobile-first, mobile-only** | Design untuk layar 360-412px. Jangan design untuk desktop lalu shrink. |
+| P2  | **Thumb-zone aware**          | Primary actions di bottom 1/3 layar. Exit/back di top-left.            |
+| P3  | **Instant feedback**          | Setiap tap harus ada respons visual dalam <100ms.                      |
+| P4  | **Reduce cognitive load**     | Junior user overwhelmed oleh 18 modes. Guide them, don't dump options. |
+| P5  | **Japanese text is king**     | JP text harus BESAR dan jelas. Furigana harus selalu terlihat.         |
+| P6  | **Progress = motivation**     | Gamification yang bermakna. Streaks, milestones, visual progress.      |
+| P7  | **Error-proof**               | Impossible to lose data. Impossible to get stuck. Always a way back.   |
+| P8  | **Offline-first**             | App harus 100% functional tanpa internet setelah first load.           |
 
 ---
 
 ### B1. Information Architecture — Restructured Navigation
 
 **Current 4-tab structure:**
+
 ```
 🏠 Beranda  |  📚 Belajar  |  ✍️ Ujian  |  ⋯ Lainnya
 ```
@@ -123,11 +126,13 @@ Add: storage engine tests (~30), component tests (~20), hook tests (~10).
 **Problem:** "Belajar" vs "Ujian" distinction is confusing — kuis ada di Belajar, soal JAC ada di Ujian, tapi keduanya = quiz format. Junior user tidak tahu harus mulai dari mana.
 
 **Proposed 3-tab structure:**
+
 ```
 🏠 Beranda  |  📖 Belajar  |  👤 Saya
 ```
 
 **Rationale:**
+
 - **Beranda** = Dashboard (unchanged, hero CTA + quick stats)
 - **Belajar** = ALL study modes in one scrollable page, organized by intent:
   - 📝 **Pelajari** (learn new): Kartu, Glosari
@@ -137,6 +142,7 @@ Add: storage engine tests (~30), component tests (~20), hook tests (~10).
 - **Saya** = Personal: Stats, Progress, Export/Import, Settings (track, theme), Sumber
 
 **Why 3 tabs, not 4:**
+
 - Fewer tabs = larger touch targets in bottom nav
 - "Lainnya" (⋯) is a UX anti-pattern — it's where features go to die
 - Settings/Stats/Export are personal data → "Saya" tab is intuitive
@@ -206,12 +212,12 @@ export const MODE_SECTIONS = {
   position: relative;
 }
 
-.tab[data-active="true"] {
+.tab[data-active='true'] {
   color: var(--ssw-amber);
 }
 
 /* Active indicator — pill shape, not just a line */
-.tab[data-active="true"]::before {
+.tab[data-active='true']::before {
   content: '';
   position: absolute;
   top: 0;
@@ -276,6 +282,7 @@ Step 4: Goal Setting (NEW)
 ### B3. Dashboard — Emotional, Not Just Informational
 
 **Current dashboard sections (top to bottom):**
+
 1. Header (brand + track badge + theme toggle)
 2. Stats bar (Total / Hafal / Belum / Sisa)
 3. Progress bar + streak + daily count
@@ -334,6 +341,7 @@ Step 4: Goal Setting (NEW)
 ```
 
 **Key changes:**
+
 1. **Circular progress ring** replaces both the 4-box stats bar AND the linear progress bar. One visual = all info. The ring is satisfying to watch fill up.
 2. **Streak hero** — emotional, prominent when active. Hidden when 0.
 3. **Primary CTA** — always above the fold. ONE button. Smart logic decides what to show.
@@ -354,20 +362,34 @@ function ProgressRing({ current, total, size = 140, stroke = 8 }) {
     <div className={s.ringContainer}>
       <svg width={size} height={size} className={s.ring}>
         {/* Track */}
-        <circle cx={size/2} cy={size/2} r={radius}
-          fill="none" stroke="var(--ssw-border)" strokeWidth={stroke} />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="var(--ssw-border)"
+          strokeWidth={stroke}
+        />
         {/* Progress */}
-        <circle cx={size/2} cy={size/2} r={radius}
-          fill="none" stroke="var(--ssw-amber)" strokeWidth={stroke}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="var(--ssw-amber)"
+          strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          transform={`rotate(-90 ${size/2} ${size/2})`}
-          style={{ transition: 'stroke-dashoffset 0.8s ease' }} />
+          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          style={{ transition: 'stroke-dashoffset 0.8s ease' }}
+        />
       </svg>
       <div className={s.ringCenter}>
         <div className={s.ringPct}>{Math.round(pct)}%</div>
-        <div className={s.ringSub}>{current}/{total}</div>
+        <div className={s.ringSub}>
+          {current}/{total}
+        </div>
       </div>
     </div>
   );
@@ -381,6 +403,7 @@ function ProgressRing({ current, total, size = 140, stroke = 8 }) {
 This is where users spend 80% of their time. It must be perfect.
 
 **Current issues:**
+
 - Card flip is instant (no animation) — feels cheap
 - JP text can be small on compound terms
 - FSRS 4-button rating appears only on long-press (hidden feature!)
@@ -451,16 +474,17 @@ This is where users spend 80% of their time. It must be perfect.
 **Key design decisions:**
 
 1. **Card flip animation** — 3D rotateY with perspective. Not just show/hide.
+
    ```css
    .card {
      perspective: 1000px;
      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
    }
-   .card[data-flipped="true"] {
+   .card[data-flipped='true'] {
      transform: rotateY(180deg);
    }
    .cardBack {
-     transform: rotateY(180deg);  /* Pre-rotated so it reads correctly when flipped */
+     transform: rotateY(180deg); /* Pre-rotated so it reads correctly when flipped */
    }
    ```
 
@@ -469,12 +493,13 @@ This is where users spend 80% of their time. It must be perfect.
 3. **Remove binary ✅/❌ buttons** — FSRS rating IS the mark. Rating 1 (Lagi) = mark as unknown. Rating 3-4 = mark as known. No need for two separate systems.
 
 4. **Swipe feedback** — card tilts slightly in swipe direction with spring physics:
+
    ```css
-   .card[data-swiping="left"] {
+   .card[data-swiping='left'] {
      transform: translateX(-30px) rotate(-3deg);
      opacity: 0.85;
    }
-   .card[data-swiping="right"] {
+   .card[data-swiping='right'] {
      transform: translateX(30px) rotate(3deg);
      opacity: 0.85;
    }
@@ -538,6 +563,7 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 ```
 
 **Post-answer reveal improvements:**
+
 - ALL options show both JP AND Indonesian after answering (currently only some modes do this)
 - Correct answer: green left border + ✓ icon
 - User's wrong answer: red left border + ✗ icon
@@ -546,15 +572,15 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 
 **Mode-specific flavors:**
 
-| Mode | Accent Color | Header Extra | Special |
-|------|-------------|-------------|---------|
-| Kuis | amber (default) | Count selector | Lemah mode toggle |
-| JAC Official | `#dc2626` (red) | Set name badge | Photo warning ⚠ |
-| Wayground | `#0284C7` (blue) | Set name + emoji | Score history badge |
-| CSV Vocab | `#7c3aed` (purple) | Set name | Hint always shown |
-| Simulasi | `#dc2626` (red) | BIG countdown timer | Auto-finish on time-up |
-| Angka Kunci | `#059669` (green) | — | Number-focused layout |
-| Soal Jebak | `#ea580c` (orange) | ⚠ badge | Side-by-side comparison after |
+| Mode         | Accent Color       | Header Extra        | Special                       |
+| ------------ | ------------------ | ------------------- | ----------------------------- |
+| Kuis         | amber (default)    | Count selector      | Lemah mode toggle             |
+| JAC Official | `#dc2626` (red)    | Set name badge      | Photo warning ⚠               |
+| Wayground    | `#0284C7` (blue)   | Set name + emoji    | Score history badge           |
+| CSV Vocab    | `#7c3aed` (purple) | Set name            | Hint always shown             |
+| Simulasi     | `#dc2626` (red)    | BIG countdown timer | Auto-finish on time-up        |
+| Angka Kunci  | `#059669` (green)  | —                   | Number-focused layout         |
+| Soal Jebak   | `#ea580c` (orange) | ⚠ badge             | Side-by-side comparison after |
 
 ---
 
@@ -565,6 +591,7 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 **Redesigned — two distinct emotional paths:**
 
 **Path A: Score ≥ 70% — CELEBRATE**
+
 ```
 ┌─────────────────────────────────────┐
 │                                     │
@@ -601,6 +628,7 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 ```
 
 **Path B: Score < 50% — ENCOURAGE (no shame)**
+
 ```
 ┌─────────────────────────────────────┐
 │                                     │
@@ -627,6 +655,7 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 ```
 
 **Key additions:**
+
 1. **Score history mini-chart** — shows improvement over time. "You're getting better" is more motivating than a single number.
 2. **Weakness analysis** — identify which CATEGORY the user struggles with, suggest specific flashcard review.
 3. **Animated grade** — scaleIn + sparkle for high scores. Gentle fadeIn for low scores (no dramatic failure animation).
@@ -635,22 +664,22 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 
 ### B7. Micro-interactions & Animation Spec
 
-| Interaction | Animation | Duration | Easing |
-|-------------|-----------|----------|--------|
-| Page enter | fadeIn + translateY(12px→0) | 250ms | ease-out |
-| Card flip | rotateY(0→180deg) with perspective | 400ms | cubic-bezier(0.4,0,0.2,1) |
-| Card swipe | translateX + rotate(±3deg) | spring | — |
-| Button tap | scale(1→0.95→1) | 120ms | ease |
-| Option select (correct) | border-color + bg pulse green | 300ms | ease |
-| Option select (wrong) | border-color + subtle shake(2px) | 300ms + 200ms | ease + linear |
-| Toast appear | translateY(20px→0) + opacity | 250ms | ease-out |
-| Toast dismiss | translateY(0→20px) + opacity | 200ms | ease-in |
-| Progress ring fill | stroke-dashoffset | 800ms | ease-in-out |
-| Streak counter increment | scaleIn + number roll | 400ms | spring |
-| Mode tile tap | scale(0.97) + shadow deepen | 100ms | ease |
-| Bottom nav switch | active indicator slide | 200ms | ease-in-out |
-| Explanation reveal | maxHeight(0→auto) + opacity | 300ms | ease-out |
-| FSRS button press | scale(0.9→1.05→1) + ripple | 200ms | spring |
+| Interaction              | Animation                          | Duration      | Easing                    |
+| ------------------------ | ---------------------------------- | ------------- | ------------------------- |
+| Page enter               | fadeIn + translateY(12px→0)        | 250ms         | ease-out                  |
+| Card flip                | rotateY(0→180deg) with perspective | 400ms         | cubic-bezier(0.4,0,0.2,1) |
+| Card swipe               | translateX + rotate(±3deg)         | spring        | —                         |
+| Button tap               | scale(1→0.95→1)                    | 120ms         | ease                      |
+| Option select (correct)  | border-color + bg pulse green      | 300ms         | ease                      |
+| Option select (wrong)    | border-color + subtle shake(2px)   | 300ms + 200ms | ease + linear             |
+| Toast appear             | translateY(20px→0) + opacity       | 250ms         | ease-out                  |
+| Toast dismiss            | translateY(0→20px) + opacity       | 200ms         | ease-in                   |
+| Progress ring fill       | stroke-dashoffset                  | 800ms         | ease-in-out               |
+| Streak counter increment | scaleIn + number roll              | 400ms         | spring                    |
+| Mode tile tap            | scale(0.97) + shadow deepen        | 100ms         | ease                      |
+| Bottom nav switch        | active indicator slide             | 200ms         | ease-in-out               |
+| Explanation reveal       | maxHeight(0→auto) + opacity        | 300ms         | ease-out                  |
+| FSRS button press        | scale(0.9→1.05→1) + ripple         | 200ms         | spring                    |
 
 **prefers-reduced-motion:** All animations → `duration: 0.01ms`. Already partially implemented but needs to cover ALL of the above.
 
@@ -660,21 +689,21 @@ All quiz-type modes (Kuis, JAC, Wayground, CSV Vocab, Angka, Jebak, Simulasi) sh
 
 ```css
 /* Font sizes — designed for 360px mobile viewport */
---fs-hero: 32px;       /* Result screen percentage */
+--fs-hero: 32px; /* Result screen percentage */
 --fs-jp-primary: 28px; /* Flashcard front JP text */
---fs-jp-back: 20px;    /* Flashcard back JP text */
---fs-title: 17px;      /* Section titles, header brand */
---fs-subtitle: 15px;   /* Mode labels, CTA text */
---fs-body: 13px;       /* Descriptions, explanations */
---fs-caption: 12px;    /* Hints, translations, secondary info */
---fs-small: 11px;      /* Timestamps, counts, muted info */
---fs-micro: 10px;      /* Labels, badges, section headers */
---fs-nano: 9px;        /* Fine print, targets, footnotes */
+--fs-jp-back: 20px; /* Flashcard back JP text */
+--fs-title: 17px; /* Section titles, header brand */
+--fs-subtitle: 15px; /* Mode labels, CTA text */
+--fs-body: 13px; /* Descriptions, explanations */
+--fs-caption: 12px; /* Hints, translations, secondary info */
+--fs-small: 11px; /* Timestamps, counts, muted info */
+--fs-micro: 10px; /* Labels, badges, section headers */
+--fs-nano: 9px; /* Fine print, targets, footnotes */
 
 /* Line heights */
---lh-tight: 1.2;      /* Headings, single-line */
---lh-normal: 1.5;     /* Body text */
---lh-relaxed: 1.75;   /* Japanese text (needs room for furigana) */
+--lh-tight: 1.2; /* Headings, single-line */
+--lh-normal: 1.5; /* Body text */
+--lh-relaxed: 1.75; /* Japanese text (needs room for furigana) */
 
 /* Font stacks */
 --font-ui: 'DM Sans', system-ui, sans-serif;
@@ -697,18 +726,18 @@ Current theme is solid. Add semantic color tokens:
 ```css
 /* Status colors — used across all modes */
 --color-success: #16a34a;
---color-success-bg: rgba(22, 163, 74, 0.10);
---color-success-border: rgba(22, 163, 74, 0.30);
+--color-success-bg: rgba(22, 163, 74, 0.1);
+--color-success-border: rgba(22, 163, 74, 0.3);
 
 --color-error: #dc2626;
---color-error-bg: rgba(220, 38, 38, 0.10);
---color-error-border: rgba(220, 38, 38, 0.30);
+--color-error-bg: rgba(220, 38, 38, 0.1);
+--color-error-border: rgba(220, 38, 38, 0.3);
 
 --color-warning: #f59e0b;
---color-warning-bg: rgba(245, 158, 11, 0.10);
+--color-warning-bg: rgba(245, 158, 11, 0.1);
 
 --color-info: #3b82f6;
---color-info-bg: rgba(59, 130, 246, 0.10);
+--color-info-bg: rgba(59, 130, 246, 0.1);
 
 /* SRS-specific colors */
 --srs-again: #f87171;
@@ -748,6 +777,7 @@ Current theme is solid. Add semantic color tokens:
 ```
 
 Skeleton shimmer animation:
+
 ```css
 .skeleton {
   background: linear-gradient(
@@ -764,13 +794,13 @@ Skeleton shimmer animation:
 
 **Empty states — helpful, not sad:**
 
-| State | Illustration | Message | CTA |
-|-------|-------------|---------|-----|
-| No due cards (SRS) | 🎉 | "Tidak ada kartu jatuh tempo. Kamu up to date!" | "Pelajari kartu baru →" |
-| No wrong answers (Focus) | 💯 | "Belum ada jawaban salah. Terus belajar!" | "Coba Kuis →" |
-| Search no results | 🔍 | "Tidak ditemukan untuk '{query}'" | "Coba kata kunci lain" |
-| No starred cards | ⭐ | "Belum ada kartu favorit. Tap ★ di Kartu untuk menandai." | "Buka Kartu →" |
-| No progress yet | 🌱 | "Mulai perjalananmu! Buka kartu pertamamu." | "Mulai →" |
+| State                    | Illustration | Message                                                   | CTA                     |
+| ------------------------ | ------------ | --------------------------------------------------------- | ----------------------- |
+| No due cards (SRS)       | 🎉           | "Tidak ada kartu jatuh tempo. Kamu up to date!"           | "Pelajari kartu baru →" |
+| No wrong answers (Focus) | 💯           | "Belum ada jawaban salah. Terus belajar!"                 | "Coba Kuis →"           |
+| Search no results        | 🔍           | "Tidak ditemukan untuk '{query}'"                         | "Coba kata kunci lain"  |
+| No starred cards         | ⭐           | "Belum ada kartu favorit. Tap ★ di Kartu untuk menandai." | "Buka Kartu →"          |
+| No progress yet          | 🌱           | "Mulai perjalananmu! Buka kartu pertamamu."               | "Mulai →"               |
 
 ---
 
@@ -811,6 +841,7 @@ Skeleton shimmer animation:
 ```
 
 **Reset Semua Data** requires:
+
 1. First tap → "Yakin? Semua progress akan hilang."
 2. 3-second countdown → "Reset (3... 2... 1...)"
 3. Second tap during countdown → executes reset
@@ -820,22 +851,23 @@ Skeleton shimmer animation:
 
 ### B12. Accessibility Checklist
 
-| Item | Current | Target |
-|------|---------|--------|
-| Button aria-labels | ❌ Missing on emoji-only buttons | ✅ All buttons labeled |
-| Focus indicators | ❌ None visible | ✅ 2px amber outline on :focus-visible |
-| Toast announcements | ❌ No aria-live | ✅ role="alert" aria-live="polite" |
-| Color contrast | ⚠ textDim fails 4.5:1 | ✅ All text ≥ 4.5:1 in both themes |
-| Focus management | ❌ Lost on mode switch | ✅ Focus moves to mode header on enter |
-| Skip to content | ❌ None | ✅ Skip nav link for keyboard users |
-| Touch targets | ⚠ Some < 44px | ✅ All interactive ≥ 44×44px |
-| Screen reader flow | ❌ Not tested | ✅ Landmark regions, heading hierarchy |
+| Item                | Current                          | Target                                 |
+| ------------------- | -------------------------------- | -------------------------------------- |
+| Button aria-labels  | ❌ Missing on emoji-only buttons | ✅ All buttons labeled                 |
+| Focus indicators    | ❌ None visible                  | ✅ 2px amber outline on :focus-visible |
+| Toast announcements | ❌ No aria-live                  | ✅ role="alert" aria-live="polite"     |
+| Color contrast      | ⚠ textDim fails 4.5:1            | ✅ All text ≥ 4.5:1 in both themes     |
+| Focus management    | ❌ Lost on mode switch           | ✅ Focus moves to mode header on enter |
+| Skip to content     | ❌ None                          | ✅ Skip nav link for keyboard users    |
+| Touch targets       | ⚠ Some < 44px                    | ✅ All interactive ≥ 44×44px           |
+| Screen reader flow  | ❌ Not tested                    | ✅ Landmark regions, heading hierarchy |
 
 ---
 
 ## PART III: EXECUTION ROADMAP
 
 ### Phase 1: Foundation (2 sessions)
+
 > Storage engine + Context extraction + ErrorBoundary
 
 1. Build `src/storage/` engine with v1→v2 migration
@@ -847,6 +879,7 @@ Skeleton shimmer animation:
 7. Verify all 18 modes still work
 
 ### Phase 2: Navigation Restructure (1 session)
+
 > 3-tab layout + Belajar sections + Saya tab
 
 1. Restructure BottomNav to 3 tabs
@@ -855,6 +888,7 @@ Skeleton shimmer animation:
 4. Move stats/export/sumber into Saya
 
 ### Phase 3: Dashboard Redesign (1 session)
+
 > Progress ring + streak hero + smart CTA
 
 1. Build ProgressRing component
@@ -863,6 +897,7 @@ Skeleton shimmer animation:
 4. Smart Quick Start logic
 
 ### Phase 4: Flashcard Overhaul (2 sessions)
+
 > 3D flip + always-visible FSRS + swipe feedback
 
 1. CSS-based 3D card flip animation
@@ -872,6 +907,7 @@ Skeleton shimmer animation:
 5. "Tap untuk balik" contextual hint
 
 ### Phase 5: Quiz Shell Polish (1-2 sessions)
+
 > Post-answer reveal + mode flavors + explanation animation
 
 1. All options show JP+ID after answer
@@ -881,6 +917,7 @@ Skeleton shimmer animation:
 5. Score history mini-chart on ResultScreen
 
 ### Phase 6: CSS Modules Migration (2-3 sessions)
+
 > 822 inline styles → 0
 
 1. Convert shared components first
@@ -889,6 +926,7 @@ Skeleton shimmer animation:
 4. Verify dark/light theming
 
 ### Phase 7: Onboarding Redesign (1 session)
+
 > Interactive onboarding + goal setting
 
 1. Merge track picker into onboarding flow
@@ -897,6 +935,7 @@ Skeleton shimmer animation:
 4. Remove old 4-slide Onboarding
 
 ### Phase 8: Empty States + Loading + a11y (1 session)
+
 > Skeleton loading + empty states + accessibility
 
 1. Build skeleton components
@@ -905,6 +944,7 @@ Skeleton shimmer animation:
 4. Color contrast audit + fix
 
 ### Phase 9: CI/CD + DX (1 session)
+
 > GitHub Actions + auto-deploy + testing expansion
 
 1. CI pipeline (lint + test + build)
@@ -913,6 +953,7 @@ Skeleton shimmer animation:
 4. Bundle visualizer
 
 ### Phase 10: QA + Release (1 session)
+
 > Full regression test + deploy
 
 1. Test all 18 modes
@@ -928,17 +969,17 @@ Skeleton shimmer animation:
 
 ## Appendix: File Changes Summary
 
-| Area | Files Added | Files Modified | Files Deleted |
-|------|------------|----------------|---------------|
-| Storage | 4 (engine, schema, migrations, index) | ~15 (all storage consumers) | 0 |
-| Contexts | 3 (Progress, SRS, App) | 1 (App.jsx) | 0 |
-| Router | 2 (ModeRouter, modes.js) | 1 (App.jsx) | 0 |
-| CSS Modules | ~30 (.module.css files) | ~30 (all JSX files) | 0 |
-| Components | 3 (ProgressRing, ErrorFallback, Skeleton) | ~12 | 0 |
-| Navigation | 0 | 3 (BottomNav, Dashboard, App) | 0 |
-| CI/CD | 2 (.github/workflows/) | 1 (vite.config.js) | 0 |
-| Tests | 3+ (storage, component, hook tests) | 0 | 0 |
+| Area        | Files Added                               | Files Modified                | Files Deleted |
+| ----------- | ----------------------------------------- | ----------------------------- | ------------- |
+| Storage     | 4 (engine, schema, migrations, index)     | ~15 (all storage consumers)   | 0             |
+| Contexts    | 3 (Progress, SRS, App)                    | 1 (App.jsx)                   | 0             |
+| Router      | 2 (ModeRouter, modes.js)                  | 1 (App.jsx)                   | 0             |
+| CSS Modules | ~30 (.module.css files)                   | ~30 (all JSX files)           | 0             |
+| Components  | 3 (ProgressRing, ErrorFallback, Skeleton) | ~12                           | 0             |
+| Navigation  | 0                                         | 3 (BottomNav, Dashboard, App) | 0             |
+| CI/CD       | 2 (.github/workflows/)                    | 1 (vite.config.js)            | 0             |
+| Tests       | 3+ (storage, component, hook tests)       | 0                             | 0             |
 
 ---
 
-*Dokumen ini adalah master blueprint. Agent Sonnet harus membaca ini + `_MAP.md` sebelum memulai. Semua design decisions sudah final — tidak perlu tanya Nugget lagi kecuali ada blocking issue.*
+_Dokumen ini adalah master blueprint. Agent Sonnet harus membaca ini + `_MAP.md` sebelum memulai. Semua design decisions sudah final — tidak perlu tanya Nugget lagi kecuali ada blocking issue._

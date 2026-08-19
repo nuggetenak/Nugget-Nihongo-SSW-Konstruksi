@@ -9,6 +9,7 @@ file-level merge couldn't resolve on its own. Full writeup in `_MAP.md`'s sessio
 `HANDOFF.md`.
 
 **Data layer — replaced wholesale from content-dq:**
+
 - `src/data/` restructured to a split-file architecture (`cards/{common,lifeline}/`,
   `sets/{wayground,jac-mockup,jac}/`) with `source/` mirrors and `cards.js`/`wayground-sets.js`/
   `jac-mockup-sets.js` as regenerated aggregates.
@@ -42,6 +43,7 @@ Also fixed two pre-existing bugs found adjacent to this work: `CatatanMode.jsx` 
 `stripFuri(card.jp)`.
 
 **Storage v5 → v6:**
+
 - `dobokuScores`/`kenchikuScores` dropped.
 - `wgScores`/`jacScores`/`wgWrong` keys remapped for the wayground/CSV set-id rename, but only
   where a clean 1:1 correspondence could be verified (teori `wt1-10→wt01-10`, CSV→JAC-mockup
@@ -71,17 +73,17 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 `npm run lint`: 0 warnings (also cleared one pre-existing unused import, predating this merge).
 `npm run build`: clean.
 
-
-
 ### feat(data+storage): card ID renumbering — contiguous 1–1443
 
 **Card IDs renumbered:**
+
 - All 1,443 cards now have contiguous IDs 1–1443 (was 1–1628 with 185 gaps)
 - Source files updated: cards-common.js (879 cards), cards-lifeline.js (564 cards)
 - Cross-references updated: 73 JAC `related_card_id` refs, 24 `angka-kunci.js` kartu refs
 - `scripts/renumber-cards.mjs`: one-shot script that built the mapping and rewrote all files
 
 **Storage schema v4:**
+
 - `STORAGE_VERSION` bumped 3 → 4
 - `src/storage/card-id-map-v4.js`: old→new ID mapping (1443 entries)
 - `migrate_v3_to_v4()`: remaps SRS card keys, known/unknown/starred arrays, quizWrong/wrongCounts
@@ -95,6 +97,7 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 ### refactor(hooks) + fix(WaygroundMode) + feat(ExportMode): OVERHAUL-1 + ENG-4 + ENG-6
 
 **OVERHAUL-1 — Retire usePersistedState.js:**
+
 - `usePersistedState.js` deleted; removed from `hooks/index.js`
 - `QuizMode.jsx`: replaced `usePersistedState('ssw-quiz-wrong', {})` with `useProgress().quizWrong` + `recordWrong`
 - `DangerMode.jsx`: replaced `setDangerWrong(...)` with `useProgress().recordWrong(key)`
@@ -102,10 +105,12 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 - All quizWrong writes now flow through engine (lz-string compressed, exportable)
 
 **ENG-4 — WaygroundMode legacy read fix:**
+
 - `getSetWrongCount(setId)` migrated from `loadFromStorage('ssw-wg-wrong-${setId}')` to `get('progress')?.wgWrong` prefix scan
 - `loadFromStorage` import removed from WaygroundMode
 
 **ENG-6 — ExportMode richer summary:**
+
 - `readSummary()` now includes: `quizWrong`, `wgWrong`, `jacScores`, `wgScores` counts
 - Export stats display shows "Salah Kuis" and "Skor JAC" tiles
 
@@ -113,16 +118,17 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 
 ## [4.21.0] - 2026-05-09
 
-
 ### refactor(data): data layer consolidation (REF-8 + REF-9 + C1-C9)
 
 **REF-8 — Merge vocab source files (8 → 4 source files):**
+
 - cards-common-vocab.js (233 cards) merged into cards-common.js → 879 total
 - cards-lifeline-vocab.js (120 cards) merged into cards-lifeline.js → 564 total
 - cards-doboku-vocab.js + cards-kenchiku-vocab.js (both empty stubs) deleted
 - scripts/merge-cards.mjs inputs updated; count 1443 verified
 
 **REF-9 — Absorb sipil/bangunan sets into quiz-sets.js:**
+
 - SIPIL_SETS + BANGUNAN_SETS inlined into quiz-sets.js with track:'doboku'/'kenchiku'
 - sipil-sets.js + bangunan-sets.js deleted
 - SipilMode + BangunanMode use getQuizSetsForTrack() instead of direct imports
@@ -131,10 +137,11 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 - Total QUIZ_SETS: 38 → 44 (+ 3 sipil + 3 bangunan)
 
 **Tests C1-C9 — data-integrity.test.js:**
+
 - C1: SOURCE_GROUPS keys in SOURCE_META
 - C2: related_card_id refs valid
 - C3: every QUIZ_SET has track field
-- C4: no _origIndex in CARDS
+- C4: no \_origIndex in CARDS
 - C5: CARDS count = 1443
 - C6: no duplicate card IDs
 - C7: quiz answer index in bounds
@@ -142,7 +149,6 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 - 448 total tests, 40 files
 
 ## [4.20.15] - 2026-05-09
-
 
 ### feat: useTrackedCards hook (ENG-11)
 
@@ -152,7 +158,6 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 - Existing sites (SearchMode, GlossaryMode, ModeRouter) deferred — all have showAllTracks or null-track conditional; don't force-fit per task spec
 
 ## [4.20.14] - 2026-05-09
-
 
 ### perf: JpDisplay memoization (REF-11)
 
@@ -237,7 +242,7 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 - REF-3: VocabMode — vocabWrong writes via storage engine; WaygroundMode — wgWrong writes via engine
 - N20+REF-3b: JACMode, WaygroundMode, VocabMode — score writes via ProgressContext.saveScore (not raw usePersistedState)
 - N11: schema.js — sprintBests: {} added to DEFAULTS.prefs
-- R3: FocusMode — dead _unknown prop removed; ModeRouter — unknown removed from fokus props
+- R3: FocusMode — dead \_unknown prop removed; ModeRouter — unknown removed from fokus props
 
 ## [4.20.5] - 2026-05-09
 
@@ -311,11 +316,13 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 ### fix: stale counts + daily-challenge CSV pool + vite chunk (Agent Sonnet 4.6)
 
 **Bug fixes:**
+
 - `Onboarding.jsx`: card count `1.438` → `1.443` (2 occurrences — welcome copy + goal-days calculation).
 - `index.html`: OG meta description `1.438 kartu flashcard` → `1.443`.
 - `daily-challenge.js`: used `WAYGROUND_SETS` directly (same missing-CSV bug as SimulasiMode). Changed to `QUIZ_SETS` — daily question pool now includes all 300 CSV questions.
 
 **Build:**
+
 - `vite.config.js`: `manualChunks` updated — `data-jac` chunk now includes `jac-teori.js` + `jac-lifeline.js`; `data-wayground` chunk includes `quiz-sets.js`.
 
 ---
@@ -325,11 +332,13 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 ### fix: SearchMode wrongCount bug + barrel/schema hygiene (Agent Sonnet 4.6)
 
 **Bug fixes:**
+
 - `SearchMode.jsx`: `wrongCount` was reading raw `quizWrong[id]` value — displays `[object Object]× salah` when the entry is a wrongEntry object. Fixed by wrapping with `getWrongCount()`. Added import.
 - `utils/index.js`: stale `STORAGE_KEYS` re-export removed (STORAGE_KEYS was deleted in v3 migration A.7 TD-03); `removeFromStorage` was exported from wrong-tracker.js but missing from barrel — added.
 - `utils/index.js`: `standardizeFuri` was exported from jp-helpers.js but missing from barrel — added.
 
 **Code quality:**
+
 - `storage/schema.js`: `quizWrong` comment corrected from `{ [cardId]: count }` to `{ [cardId]: wrongEntry }` (backward-compat: plain int also accepted); prefs DEFAULTS comment alignment fixed; `sprintBest/sprintBestTimeline` note added.
 - `contexts/ProgressContext.jsx`: indentation bug in ctx object fixed (misaligned comment); `recordWrong` clarifying comment added (legacy in-doc counter; out-of-docs tracking via wrong-tracker.js + ssw-quiz-wrong is the primary path).
 
@@ -340,13 +349,15 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 ### test + docs: data integrity tests + blueprint sync (Agent Sonnet 4.6)
 
 **Tests added to `data.test.js` (+24 tests → 411 total):**
+
 - `JAC_TEORI / JAC_LIFELINE split` (8 tests): count, track fields, set keys, topic field presence
-- `WAYGROUND_SETS track fields` (4 tests): wt*=common, wg*=lifeline, wp*=lifeline, all sets have track
+- `WAYGROUND_SETS track fields` (4 tests): wt*=common, wg*=lifeline, wp\*=lifeline, all sets have track
 - `CSV_SETS track fields` (3 tests): ct*=common, cp*=lifeline, all sets have track
 - `QUIZ_SETS + getQuizSetsForTrack` (6 tests): total 38 sets, unique IDs, track present, per-track filter
 - `SOURCE_GROUPS coverage` (3 tests): all keys in SOURCE_META, Sumber Tambahan group, text3l/vocab-supplementary/vocab-general
 
 **docs/BLUEPRINT-CURRENT.md synced to v4.19.2:**
+
 - Version: 4.19.0 → 4.19.2
 - Quiz questions: ~860 → ~974
 - Tests: 387 → 411
@@ -358,10 +369,12 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 ### fix: track field bugs + SimulasiMode CSV gap (Agent Sonnet 4.6)
 
 **Bug fixes — track field data:**
+
 - `wayground-sets.js`: wt1–wt10 (Teori sets) were tagged `track:"lifeline"` — should be `track:"common"`. Fixed. Teori sets now visible to doboku/kenchiku track users in WaygroundMode.
 - `csv-sets.js`: All 12 CSV sets (ct01–ct06, cp01–cp06) had no `track` field → invisible to `getQuizSetsForTrack()` and WaygroundMode. Added: ct* `track:'common'`, cp* `track:'lifeline'`.
 
 **Bug fix — SimulasiMode exam pool:**
+
 - `SimulasiMode.jsx` was importing `WAYGROUND_SETS` directly, missing all 300 CSV questions. Changed to `QUIZ_SETS` from `quiz-sets.js`. Exam pool now includes JAC (95q) + Wayground (579q) + CSV (300q) = ~974 questions total.
 
 ---
@@ -371,16 +384,19 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 ### chore: C1 closure + hygiene pass (Agent Sonnet 4.6)
 
 **C1 text4 audit — content complete:**
+
 - Scanned text4.pdf (JAC Ch.4 — construction site greetings, layout terms, earthwork, foundation, concrete, building structure, electrical, lifeline, 5S, ほうれんそう)
 - Result: 100% of Ch.4 terminology pre-exists in card DB — no new cards needed
 - C1 fully closed: text3l +18 (v4.16.0) + pass2 +15 (v4.17.0) + text4 audit (0 new)
 
 **categories.js fix (SumberMode coverage gap):**
+
 - Moved supplementary SOURCE_META entries (`text3l`, `vocab-supplementary`, `vocab-general`) from mutation-style to inline in main object
 - Added "Sumber Tambahan" group to SOURCE_GROUPS → SumberMode now shows all 3 supplementary sources (text3l: 25 cards, vocab-supplementary: 271 cards, vocab-general: 44 cards)
 - Added SOURCE_ACCENT entries for `text3l`, `vocab-supplementary`, `vocab-general`
 
 **Docs:**
+
 - `BLUEPRINT-CURRENT.md` — status updated: NO OPEN ITEMS
 - `_MAP.md` — log entry added
 - `docs/archive/ARCHIVE-INDEX.md` — stale text4l reference removed
@@ -394,24 +410,28 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 **Structure overhaul** — semua data file kini punya `track` field; JAC split by type; wayground+csv merged.
 
 **JAC Official split:**
+
 - `jac-teori.js` — 学科 tt1+tt2, 65qs, `track:'common'` (sama untuk semua 3 track)
 - `jac-lifeline.js` — 実技 st1+st2 Lifeline, 30qs, `track:'lifeline'`
 - `jac-doboku.js` / `jac-kenchiku.js` — empty stubs, siap diisi dari PDF
 - `jac-official.js` → backward-compat shim (`[...JAC_TEORI, ...JAC_LIFELINE, ...]`)
 
 **Question sets merged:**
+
 - `quiz-sets.js` — single source of truth = WAYGROUND_SETS + CSV_SETS
 - `getQuizSetsForTrack(track)` helper function
 - wayground wt1–wt10 → `track:'common'`; wg*/wp* → `track:'lifeline'`
 - CSV sets → `track:'lifeline'`
 
 **Study aids — track field added:**
+
 - `danger-pairs.js` — common: 12 pairs, lifeline: 8 pairs (per-pair track field)
 - `angka-kunci.js` — common: 22 entries, lifeline: 7 entries (per-entry track field)
 
 **Components updated — filter by current track:**
+
 - WaygroundMode: imports QUIZ_SETS, filters `track === 'common' || track === currentTrack`
-- VocabMode: wg* sets filtered by track
+- VocabMode: wg\* sets filtered by track
 - DangerMode: PAIRS = DANGER_PAIRS filtered by track
 - AngkaMode: ANGKA = ANGKA_KUNCI filtered by track
 
@@ -427,32 +447,32 @@ immediately post-merge (stale set-id references, dead doboku/kenchiku assertions
 
 > Full entry-by-entry history is in git log. Summary below.
 
-| Version | Date | Summary |
-|---------|------|---------|
-| 4.18.0 | 2026-05-08 | refactor: 157 doboku+kenchiku cards → common; source files emptied for Ch.5+ |
-| 4.17.0 | 2026-05-08 | C1-pass2: +15 common cards (1457–1471) from text1l/text2/text3 |
-| 4.16.0 | 2026-05-08 | C1: +18 lifeline cards (1439–1456) from text3.pdf (source text3l) |
-| 4.15.1 | 2026-05-08 | JAC audit: 6 furi fixes jac-ch1 (KY/CCUS); admin docs |
-| 4.15.0 | 2026-05-08 | JAC audit text2.pdf: 17 furi/desc fixes jac-ch2 |
-| 4.14.0 | 2026-05-08 | J4: topic field all 95 JAC qs (8 topics); J2: JACMode topic filter |
-| 4.13.0 | 2026-05-08 | G3: GlossaryMode mini-deck export → Anki TSV |
-| 4.12.0 | 2026-05-08 | Q3 difficulty detail; F2/F3 FocusMode; D1 explanation field; G4/W5/AK2/E3/K6 |
-| 4.11.0 | 2026-05-08 | StatsMode BUG fix; D2/D3 DangerMode; AK1/AK3 AngkaMode; G2 compact; K5 add-SRS |
-| 4.10.0 | 2026-05-08 | J1 JACMode→SRS; K2 read-only toggle; SB3 SumberMode actions; Q5 category filter |
-| 4.9.0  | 2026-05-08 | R3/R4/R5 ReviewMode; W1/W4 WaygroundMode; Q4 quiz count; SR4 badges; ST4 week |
-| 4.8.2  | 2026-05-08 | SR3 search copy-to-clipboard; SIM5 pace hint |
-| 4.8.1  | 2026-05-08 | D1-WT: DengarMode wrong-tracker writes to shared quizWrong pool |
-| 4.8.0  | 2026-05-08 | SR1 search history; G1 glossary audio; SB1/SB2 sumber progress; W3/R2/J3 |
-| 4.7.0  | 2026-05-08 | W2: WaygroundMode per-set Ulang Salah mode |
-| 4.6.0  | 2026-05-08 | E2 Gist sync; F4 Sprint ghost score; ST3 quiz accuracy per category |
-| 4.5.0  | 2026-05-08 | B1: QuizProduksiMode (JP→ID type-answer, fuzzy match) |
-| 4.4.0  | 2026-05-08 | Phase 5.5: DengarMode, CatatanMode, breadcrumb nav, sessions cap→180 |
-| 4.3.1  | 2026-05-08 | Phase 5.3–5.4: B2 Sprint, SIM3/SIM4, F1 achievements, F2 daily challenge, ST1 heatmap, A2 recommend, E4 lz-string |
-| 4.3.0  | 2026-05-07 | Phase 5.1: SIM1 pause, BUG-06 JAC+Wayground pool, ST2 Exam Readiness |
-| 4.2.0  | 2026-05-07 | BottomNav/Toast test fix; ProductionMode; ConfusionMode |
-| 4.1.0  | 2026-05-07 | FE-01–09: CSS modules, a11y, error boundaries, offline banner, haptics, PWA |
-| 4.0.2  | 2026-05-04 | post-Codex: furigana, ReviewMode session, ruby rendering, stale branch cleanup |
-| 4.0.0  | 2026-05-02 | Phase F+G: exam countdown, audio, QA release |
-| 3.9.0  | 2026-05-02 | Phase D+E: export hardening, FlashcardMode decomposition |
-| 3.8.0  | 2026-05-02 | Phase B+C: sipil/bangunan content, daily mission, session analytics |
-| 3.7.0  | 2026-05-02 | Phase A: bug fixes, storage v3 migration, debt cleanup |
+| Version | Date       | Summary                                                                                                           |
+| ------- | ---------- | ----------------------------------------------------------------------------------------------------------------- |
+| 4.18.0  | 2026-05-08 | refactor: 157 doboku+kenchiku cards → common; source files emptied for Ch.5+                                      |
+| 4.17.0  | 2026-05-08 | C1-pass2: +15 common cards (1457–1471) from text1l/text2/text3                                                    |
+| 4.16.0  | 2026-05-08 | C1: +18 lifeline cards (1439–1456) from text3.pdf (source text3l)                                                 |
+| 4.15.1  | 2026-05-08 | JAC audit: 6 furi fixes jac-ch1 (KY/CCUS); admin docs                                                             |
+| 4.15.0  | 2026-05-08 | JAC audit text2.pdf: 17 furi/desc fixes jac-ch2                                                                   |
+| 4.14.0  | 2026-05-08 | J4: topic field all 95 JAC qs (8 topics); J2: JACMode topic filter                                                |
+| 4.13.0  | 2026-05-08 | G3: GlossaryMode mini-deck export → Anki TSV                                                                      |
+| 4.12.0  | 2026-05-08 | Q3 difficulty detail; F2/F3 FocusMode; D1 explanation field; G4/W5/AK2/E3/K6                                      |
+| 4.11.0  | 2026-05-08 | StatsMode BUG fix; D2/D3 DangerMode; AK1/AK3 AngkaMode; G2 compact; K5 add-SRS                                    |
+| 4.10.0  | 2026-05-08 | J1 JACMode→SRS; K2 read-only toggle; SB3 SumberMode actions; Q5 category filter                                   |
+| 4.9.0   | 2026-05-08 | R3/R4/R5 ReviewMode; W1/W4 WaygroundMode; Q4 quiz count; SR4 badges; ST4 week                                     |
+| 4.8.2   | 2026-05-08 | SR3 search copy-to-clipboard; SIM5 pace hint                                                                      |
+| 4.8.1   | 2026-05-08 | D1-WT: DengarMode wrong-tracker writes to shared quizWrong pool                                                   |
+| 4.8.0   | 2026-05-08 | SR1 search history; G1 glossary audio; SB1/SB2 sumber progress; W3/R2/J3                                          |
+| 4.7.0   | 2026-05-08 | W2: WaygroundMode per-set Ulang Salah mode                                                                        |
+| 4.6.0   | 2026-05-08 | E2 Gist sync; F4 Sprint ghost score; ST3 quiz accuracy per category                                               |
+| 4.5.0   | 2026-05-08 | B1: QuizProduksiMode (JP→ID type-answer, fuzzy match)                                                             |
+| 4.4.0   | 2026-05-08 | Phase 5.5: DengarMode, CatatanMode, breadcrumb nav, sessions cap→180                                              |
+| 4.3.1   | 2026-05-08 | Phase 5.3–5.4: B2 Sprint, SIM3/SIM4, F1 achievements, F2 daily challenge, ST1 heatmap, A2 recommend, E4 lz-string |
+| 4.3.0   | 2026-05-07 | Phase 5.1: SIM1 pause, BUG-06 JAC+Wayground pool, ST2 Exam Readiness                                              |
+| 4.2.0   | 2026-05-07 | BottomNav/Toast test fix; ProductionMode; ConfusionMode                                                           |
+| 4.1.0   | 2026-05-07 | FE-01–09: CSS modules, a11y, error boundaries, offline banner, haptics, PWA                                       |
+| 4.0.2   | 2026-05-04 | post-Codex: furigana, ReviewMode session, ruby rendering, stale branch cleanup                                    |
+| 4.0.0   | 2026-05-02 | Phase F+G: exam countdown, audio, QA release                                                                      |
+| 3.9.0   | 2026-05-02 | Phase D+E: export hardening, FlashcardMode decomposition                                                          |
+| 3.8.0   | 2026-05-02 | Phase B+C: sipil/bangunan content, daily mission, session analytics                                               |
+| 3.7.0   | 2026-05-02 | Phase A: bug fixes, storage v3 migration, debt cleanup                                                            |

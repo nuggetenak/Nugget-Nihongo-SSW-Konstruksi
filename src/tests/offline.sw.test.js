@@ -45,7 +45,7 @@ describe('Service Worker structure', () => {
 
   it('uses network-first strategy for navigation', () => {
     // Network-first implies it tries network, falls back to cache
-    expect(sw).toMatch(/network.*first|Network-First|fetch\(.*catch/si);
+    expect(sw).toMatch(/network.*first|Network-First|fetch\(.*catch/is);
   });
 
   it('calls skipWaiting on install', () => {

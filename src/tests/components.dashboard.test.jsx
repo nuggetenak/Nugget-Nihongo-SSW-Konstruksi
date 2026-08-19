@@ -46,26 +46,26 @@ describe('Dashboard', () => {
     });
 
     it('renders theme toggle button', () => {
-      renderDashboard({isDark: true });
+      renderDashboard({ isDark: true });
       // Dark mode shows sun icon
       expect(screen.getByText('☀️')).toBeTruthy();
     });
 
     it('shows moon icon in light mode', () => {
-      renderDashboard({isDark: false });
+      renderDashboard({ isDark: false });
       expect(screen.getByText('🌙')).toBeTruthy();
     });
 
     it('calls onToggleTheme when theme button clicked', () => {
       const onToggleTheme = vi.fn();
-      renderDashboard({onToggleTheme: onToggleTheme });
+      renderDashboard({ onToggleTheme: onToggleTheme });
       fireEvent.click(screen.getByText('☀️'));
       expect(onToggleTheme).toHaveBeenCalledOnce();
     });
 
     it('calls onChangeTrack when track pill clicked', () => {
       const onChangeTrack = vi.fn();
-      renderDashboard({onChangeTrack: onChangeTrack });
+      renderDashboard({ onChangeTrack: onChangeTrack });
       fireEvent.click(screen.getByText(/ライフライン/));
       expect(onChangeTrack).toHaveBeenCalledOnce();
     });
@@ -73,17 +73,17 @@ describe('Dashboard', () => {
 
   describe('progress ring', () => {
     it('shows 0 kartu hafal when known is empty', () => {
-      renderDashboard({known: new Set() });
+      renderDashboard({ known: new Set() });
       expect(screen.getByText('0 kartu hafal')).toBeTruthy();
     });
 
     it('shows correct count when known has cards', () => {
-      renderDashboard({known: new Set([1, 2, 3, 4, 5]) });
+      renderDashboard({ known: new Set([1, 2, 3, 4, 5]) });
       expect(screen.getByText('5 kartu hafal')).toBeTruthy();
     });
 
     it('shows unknown count in detail text', () => {
-      renderDashboard({unknown: new Set([10, 11, 12]) });
+      renderDashboard({ unknown: new Set([10, 11, 12]) });
       expect(screen.getByText(/3 belum/)).toBeTruthy();
     });
   });
@@ -127,14 +127,14 @@ describe('Dashboard', () => {
 
     it('navigates to correct mode when quick tile clicked', () => {
       const onNavigate = vi.fn();
-      renderDashboard({onNavigate: onNavigate });
+      renderDashboard({ onNavigate: onNavigate });
       fireEvent.click(screen.getByText('Kuis'));
       expect(onNavigate).toHaveBeenCalledWith('kuis');
     });
 
     it('navigates to sprint mode', () => {
       const onNavigate = vi.fn();
-      renderDashboard({onNavigate: onNavigate });
+      renderDashboard({ onNavigate: onNavigate });
       fireEvent.click(screen.getByText('Sprint'));
       expect(onNavigate).toHaveBeenCalledWith('sprint');
     });

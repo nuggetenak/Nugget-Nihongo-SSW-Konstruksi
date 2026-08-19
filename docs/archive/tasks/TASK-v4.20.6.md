@@ -1,4 +1,5 @@
 # TASK v4.20.6 — N3, N7, N16, REF-3, N20, REF-3b, N11, R3
+
 **Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.5 DONE
 
 ## Goal: Wrong-answer + score writes via storage engine (A1/A2 interim fixes)
@@ -13,7 +14,7 @@ ProductionMode tracks `results` but never writes wrong answers anywhere. Find wh
 
 ```js
 // FIND the "wrong answer" branch (something like):
-setResults(prev => [...prev, { cardId, correct: false }]);
+setResults((prev) => [...prev, { cardId, correct: false }]);
 
 // ADD immediately after:
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -75,6 +76,7 @@ Commit: `fix(QuizProduksiMode): N16 — wrong answers via ProgressContext.record
 ## Step 4 — REF-3: VocabMode + WaygroundMode — wrong writes via engine
 
 **VocabMode.jsx** — find `usePersistedState('ssw-vocab-wrong-${activeSet}', {})`:
+
 ```js
 // FIND:
 const [vocabWrong, setVocabWrong] = usePersistedState(`ssw-vocab-wrong-${activeSet}`, {});
@@ -89,6 +91,7 @@ storageSet('progress', (p) => ({ ...p, vocabWrong: updated }));
 ```
 
 **WaygroundMode.jsx** — same pattern for `ssw-wg-wrong-${activeSet}`:
+
 ```js
 // FIND:
 const [wgWrong, setWgWrong] = usePersistedState(`ssw-wg-wrong-${activeSet}`, {});
@@ -109,6 +112,7 @@ Commit: `fix(VocabMode/WaygroundMode): REF-3 — wrong writes via storage engine
 **Files:** JACMode.jsx, WaygroundMode.jsx, VocabMode.jsx
 
 All three use `usePersistedState` for score tracking:
+
 - JACMode: `ssw-jac-scores`
 - WaygroundMode: `ssw-wg-scores`
 - VocabMode: `ssw-vocab-scores`
@@ -116,6 +120,7 @@ All three use `usePersistedState` for score tracking:
 All three have a `ProgressContext.saveScore(type, setId, data)` already available. Check ModeRouter — it passes `saveScore` as a prop to these modes.
 
 **For each file:**
+
 ```js
 // FIND:
 const [jacScores, setJacScores] = usePersistedState('ssw-jac-scores', {}); // or wg/vocab variant
@@ -173,17 +178,19 @@ Commit: `fix(FocusMode): R3 — remove dead _unknown prop from component + ModeR
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build`
-4. Bump → `4.20.6`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.6`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] ProductionMode calls recordWrong (N3)
 - [ ] JACMode wrongCounts via engine (N7)
 - [ ] QuizProduksiMode via recordWrong (N16)
 - [ ] VocabMode + WaygroundMode wrong via engine (REF-3)
 - [ ] All 3 modes scores via saveScore (N20+REF-3b)
 - [ ] sprintBests in DEFAULTS.prefs (N11)
-- [ ] FocusMode _unknown removed (R3)
+- [ ] FocusMode \_unknown removed (R3)
 - [ ] All tests pass; version 4.20.6

@@ -4,13 +4,7 @@
 // ENG-6: engine exportAll includes quizWrong + wgWrong in progress doc
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
-import {
-  _reset_for_test,
-  init,
-  get,
-  set as engineSet,
-  exportAll,
-} from '../storage/engine.js';
+import { _reset_for_test, init, get, set as engineSet, exportAll } from '../storage/engine.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 
 beforeEach(() => {
@@ -132,7 +126,7 @@ describe('ENG-6 — exportAll captures quizWrong + wgWrong', () => {
     engineSet('progress', (p) => ({
       ...p,
       jacScores: { 'set-jac-1': { score: 8, total: 10, pct: 80 } },
-      wgScores:  { 'wt001': { correct: 5, total: 10 } },
+      wgScores: { wt001: { correct: 5, total: 10 } },
     }));
     const snap = exportAll();
     expect(snap.progress.jacScores['set-jac-1'].pct).toBe(80);
@@ -145,7 +139,7 @@ describe('ENG-6 — exportAll captures quizWrong + wgWrong', () => {
     engineSet('progress', (p) => ({
       ...p,
       quizWrong: { 'jac-ch2-005': makeWrongEntry(undefined) },
-      wgWrong:   { 'wt001-q3': makeWrongEntry(undefined) },
+      wgWrong: { 'wt001-q3': makeWrongEntry(undefined) },
     }));
     const snap = exportAll();
     _reset_for_test();

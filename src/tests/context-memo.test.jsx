@@ -35,9 +35,7 @@ describe('ProgressContext memoization', () => {
     const initialCount = renderCount;
 
     // Re-render provider with same props — context value should be stable
-    rerender(
-      createElement(ProgressProvider, null, createElement(Consumer, null))
-    );
+    rerender(createElement(ProgressProvider, null, createElement(Consumer, null)));
 
     // Consumer should re-render at most once (from rerender itself).
     // With memoized ctx, React bails out when value reference is stable.
@@ -57,15 +55,27 @@ describe('ProgressContext memoization', () => {
     }
 
     const { rerender } = render(
-      createElement(ProgressProvider, null,
-        createElement(Capture, { onCtx: (c) => { capturedCtx1 = c; } })
+      createElement(
+        ProgressProvider,
+        null,
+        createElement(Capture, {
+          onCtx: (c) => {
+            capturedCtx1 = c;
+          },
+        })
       )
     );
 
     // Re-render with different onCtx callback (simulates parent re-render)
     rerender(
-      createElement(ProgressProvider, null,
-        createElement(Capture, { onCtx: (c) => { capturedCtx2 = c; } })
+      createElement(
+        ProgressProvider,
+        null,
+        createElement(Capture, {
+          onCtx: (c) => {
+            capturedCtx2 = c;
+          },
+        })
       )
     );
 
@@ -78,12 +88,17 @@ describe('ProgressContext memoization', () => {
   });
 
   it('ctx value updates when state changes via action', () => {
-
     const getCtx = () => {
       let ctx;
       render(
-        createElement(ProgressProvider, null,
-          createElement(CaptureCtx, { onCtx: (c) => { ctx = c; } })
+        createElement(
+          ProgressProvider,
+          null,
+          createElement(CaptureCtx, {
+            onCtx: (c) => {
+              ctx = c;
+            },
+          })
         )
       );
       return () => ctx;

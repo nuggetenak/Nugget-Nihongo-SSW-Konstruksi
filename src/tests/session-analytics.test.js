@@ -1,8 +1,18 @@
 import { describe, it, expect } from 'vitest';
-import { getAvgAccuracy, getBestSimScore, hasPerfectSprint, calcReadiness } from '../utils/session-analytics.js';
+import {
+  getAvgAccuracy,
+  getBestSimScore,
+  hasPerfectSprint,
+  calcReadiness,
+} from '../utils/session-analytics.js';
 
-const makeSess = (mode, correct, total, date = new Date().toISOString()) =>
-  ({ mode, correct, total, date, durationMs: 0 });
+const makeSess = (mode, correct, total, date = new Date().toISOString()) => ({
+  mode,
+  correct,
+  total,
+  date,
+  durationMs: 0,
+});
 
 describe('session-analytics', () => {
   describe('getAvgAccuracy', () => {
@@ -57,8 +67,11 @@ describe('session-analytics', () => {
       expect(r).toBe(0);
     });
     it('returns 0–100', () => {
-      const r = calcReadiness({ srs: { stats: { total: 100, mature: 50, review: 20 } },
-        sessions: [makeSess('kuis', 8, 10)], streakData: { current: 7 } });
+      const r = calcReadiness({
+        srs: { stats: { total: 100, mature: 50, review: 20 } },
+        sessions: [makeSess('kuis', 8, 10)],
+        streakData: { current: 7 },
+      });
       expect(r).toBeGreaterThanOrEqual(0);
       expect(r).toBeLessThanOrEqual(100);
     });

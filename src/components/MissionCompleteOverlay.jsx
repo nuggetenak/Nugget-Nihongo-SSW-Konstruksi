@@ -8,13 +8,19 @@ export default function MissionCompleteOverlay({ onDone, result }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => { setVisible(false); onDone?.(); }, 3000);
+    const t = setTimeout(() => {
+      setVisible(false);
+      onDone?.();
+    }, 3000);
     return () => clearTimeout(t);
   }, [onDone]);
 
   if (!visible) return null;
 
-  const handleTap = () => { setVisible(false); onDone?.(); };
+  const handleTap = () => {
+    setVisible(false);
+    onDone?.();
+  };
 
   return (
     <div
@@ -40,7 +46,9 @@ export default function MissionCompleteOverlay({ onDone, result }) {
         </div>
         <div style={{ fontSize: 22, fontWeight: 800, marginTop: 10 }}>Misi Selesai!</div>
         {result?.label && (
-          <div style={{ fontSize: 14, marginTop: 6, opacity: 0.9, fontWeight: 600 }}>{result.label}</div>
+          <div style={{ fontSize: 14, marginTop: 6, opacity: 0.9, fontWeight: 600 }}>
+            {result.label}
+          </div>
         )}
         {result?.total > 0 && (
           <div style={{ fontSize: 13, marginTop: 4, opacity: 0.75 }}>

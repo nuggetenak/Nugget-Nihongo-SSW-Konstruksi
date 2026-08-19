@@ -27,7 +27,7 @@ export function SRSProvider({ children }) {
   const stableSrs = useMemo(
     () => srs,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [srs.dueCount, srs.review, srs.getDue, srs.getInfo, srs.previewFor],
+    [srs.dueCount, srs.review, srs.getDue, srs.getInfo, srs.previewFor]
   );
 
   return <SRSCtx.Provider value={stableSrs}>{children}</SRSCtx.Provider>;

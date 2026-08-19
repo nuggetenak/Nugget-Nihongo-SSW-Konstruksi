@@ -10,12 +10,7 @@ import QuizShell from '../components/QuizShell.jsx';
 const makeQ = (overrides = {}) => ({
   question: '足場とは？',
   questionSub: 'Apa itu perancah?',
-  options: [
-    { text: 'Perancah' },
-    { text: 'Fondasi' },
-    { text: 'Dinding' },
-    { text: 'Atap' },
-  ],
+  options: [{ text: 'Perancah' }, { text: 'Fondasi' }, { text: 'Dinding' }, { text: 'Atap' }],
   correctIdx: 0,
   explanation: 'Perancah adalah struktur sementara untuk bekerja di ketinggian.',
   ...overrides,
@@ -65,12 +60,20 @@ describe('QuizShell', () => {
     });
 
     it('does not show hint when showHint=false and hint is provided', () => {
-      render(<QuizShell {...defaultProps} questions={[makeQ({ hint: 'Ini hint' })]} showHint={false} />);
+      render(
+        <QuizShell {...defaultProps} questions={[makeQ({ hint: 'Ini hint' })]} showHint={false} />
+      );
       expect(screen.queryByText(/Ini hint/)).toBeNull();
     });
 
     it('shows hint when showHint=true', () => {
-      render(<QuizShell {...defaultProps} questions={[makeQ({ hint: 'Petunjuk penting' })]} showHint={true} />);
+      render(
+        <QuizShell
+          {...defaultProps}
+          questions={[makeQ({ hint: 'Petunjuk penting' })]}
+          showHint={true}
+        />
+      );
       expect(screen.getByText(/Petunjuk penting/)).toBeTruthy();
     });
   });
@@ -119,8 +122,16 @@ describe('QuizShell', () => {
 
   describe('multi-question flow', () => {
     const twoQuestions = [
-      makeQ({ question: 'Q1?', options: [{ text: 'A1' }, { text: 'B1' }, { text: 'C1' }, { text: 'D1' }], correctIdx: 0 }),
-      makeQ({ question: 'Q2?', options: [{ text: 'A2' }, { text: 'B2' }, { text: 'C2' }, { text: 'D2' }], correctIdx: 1 }),
+      makeQ({
+        question: 'Q1?',
+        options: [{ text: 'A1' }, { text: 'B1' }, { text: 'C1' }, { text: 'D1' }],
+        correctIdx: 0,
+      }),
+      makeQ({
+        question: 'Q2?',
+        options: [{ text: 'A2' }, { text: 'B2' }, { text: 'C2' }, { text: 'D2' }],
+        correctIdx: 1,
+      }),
     ];
 
     it('shows Lanjut → on non-last question', () => {
@@ -159,9 +170,7 @@ describe('QuizShell', () => {
       render(<QuizShell {...defaultProps} onFinish={onFinish} />);
       fireEvent.click(screen.getByText('Perancah')); // correct
       fireEvent.click(screen.getByText(/Lihat Hasil/));
-      expect(onFinish).toHaveBeenCalledWith(
-        expect.objectContaining({ correct: 1, total: 1 })
-      );
+      expect(onFinish).toHaveBeenCalledWith(expect.objectContaining({ correct: 1, total: 1 }));
     });
 
     it('calls onExit when ← Kembali is clicked on ResultScreen', () => {

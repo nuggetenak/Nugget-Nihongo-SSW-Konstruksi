@@ -13,25 +13,25 @@ The modular rewrite (Phase 1–5) migrated the **architecture** (15 separate mod
 
 ### Evidence: Line-count comparison
 
-| Mode | v87 lines | Current lines | % retained | Verdict |
-|------|-----------|--------------|------------|---------|
-| FlashcardMode | 247 | 409 | 165%* | *Bigger but MISSING 12 features (see below)* |
-| QuizMode | 317 | 140 | 44% | Gutted — delegated to generic QuizShell |
-| JACMode | 1183 | 160 | 14% | Severely gutted |
-| WaygroundMode | 450 | 179 | 40% | Missing result screen, score, restart |
-| SimulasiMode | 384 | 125 | 33% | Missing timer, result, score |
-| DangerMode | 216 | 114 | 53% | Halved |
-| AngkaMode | 233 | 97 | 42% | Halved |
-| StatsMode | 143 | 207 | 145%* | *Enhanced (has SRS stats)* |
-| GlossaryMode | 200 | 128 | 64% | Missing A-Z nav |
-| SprintMode | 124 | 248 | 200%* | *Properly migrated + enhanced* |
-| FocusMode | 124 | 123 | 99% | OK |
-| SumberMode | 209 | 144 | 69% | Simplified |
-| ExportMode | 93 | 308 | 331%* | *Enhanced (JSON import/export)* |
-| SearchMode | 90 | 116 | 129%* | *Slightly enhanced* |
-| **JpFront** | 75 | 54 | 72% | Missing 4 smart layouts |
-| **DescBlock** | 97 | 15 | 15% | Severely gutted |
-| **App (main)** | 680+ | 560 | ~80% | Missing starred, filter popup, last-mode |
+| Mode           | v87 lines | Current lines | % retained | Verdict                                      |
+| -------------- | --------- | ------------- | ---------- | -------------------------------------------- |
+| FlashcardMode  | 247       | 409           | 165%\*     | _Bigger but MISSING 12 features (see below)_ |
+| QuizMode       | 317       | 140           | 44%        | Gutted — delegated to generic QuizShell      |
+| JACMode        | 1183      | 160           | 14%        | Severely gutted                              |
+| WaygroundMode  | 450       | 179           | 40%        | Missing result screen, score, restart        |
+| SimulasiMode   | 384       | 125           | 33%        | Missing timer, result, score                 |
+| DangerMode     | 216       | 114           | 53%        | Halved                                       |
+| AngkaMode      | 233       | 97            | 42%        | Halved                                       |
+| StatsMode      | 143       | 207           | 145%\*     | _Enhanced (has SRS stats)_                   |
+| GlossaryMode   | 200       | 128           | 64%        | Missing A-Z nav                              |
+| SprintMode     | 124       | 248           | 200%\*     | _Properly migrated + enhanced_               |
+| FocusMode      | 124       | 123           | 99%        | OK                                           |
+| SumberMode     | 209       | 144           | 69%        | Simplified                                   |
+| ExportMode     | 93        | 308           | 331%\*     | _Enhanced (JSON import/export)_              |
+| SearchMode     | 90        | 116           | 129%\*     | _Slightly enhanced_                          |
+| **JpFront**    | 75        | 54            | 72%        | Missing 4 smart layouts                      |
+| **DescBlock**  | 97        | 15            | 15%        | Severely gutted                              |
+| **App (main)** | 680+      | 560           | ~80%       | Missing starred, filter popup, last-mode     |
 
 **\*Bigger ≠ better** — FlashcardMode grew because it added FSRS 4-button rating but lost 12 other features.
 
@@ -41,90 +41,90 @@ The modular rewrite (Phase 1–5) migrated the **architecture** (15 separate mod
 
 ### FlashcardMode — 12 missing features
 
-| # | Feature | v87 has | Current has | Impact |
-|---|---------|---------|-------------|--------|
-| 1 | **Search bar** (JP/romaji/ID filter) | ✅ `search` state + input | ❌ | High — can't find specific cards |
-| 2 | **Star/favorite** (⭐ per card) | ✅ `starred` Set + `toggleStar()` | ❌ | High — can't bookmark hard cards |
-| 3 | **Tools row** (Prioritas/Urut/Reset/Review❌) | ✅ 4-button row | ❌ | High — can't control card order |
-| 4 | **Stats row** (Total/Hafal/Belum/Sisa boxes) | ✅ 4 colored stat boxes | ❌ | Medium — progress not visible in-mode |
-| 5 | **Category pill on card** (top-left badge) | ✅ `catInfo.emoji + label` | ❌ Only shows after flip | High — no context before flipping |
-| 6 | **Card # indicator** (#N corner) | ✅ Position number | ❌ | Low |
-| 7 | **Smart DescBlock** (①②③ lists, 【brackets】, footnotes) | ✅ 97-line parser | ❌ Only line-split | High — descriptions render flat/ugly |
-| 8 | **Smart JpFront** (vs, ・, ：, → layouts) | ✅ 75-line component | ❌ Only plain text | High — compound terms unreadable |
-| 9 | **Reset confirm dialog** (2-tap safety) | ✅ `confirmReset` + 3s timeout | ❌ | Medium — accidental resets |
-| 10 | **"Review Belum" filter** (show only ❌ cards) | ✅ `unknownCards` filter button | ❌ | High — can't review mistakes |
-| 11 | **Status border** (green/red/neutral by known state) | ✅ Dynamic `statusBorder` | ❌ Has SRS border instead | Medium |
-| 12 | **Flip gradient** (bg changes to category color) | ✅ `catInfo.color` gradient on flip | ❌ Static surface bg | Medium — less visual feedback |
+| #   | Feature                                                  | v87 has                             | Current has               | Impact                                |
+| --- | -------------------------------------------------------- | ----------------------------------- | ------------------------- | ------------------------------------- |
+| 1   | **Search bar** (JP/romaji/ID filter)                     | ✅ `search` state + input           | ❌                        | High — can't find specific cards      |
+| 2   | **Star/favorite** (⭐ per card)                          | ✅ `starred` Set + `toggleStar()`   | ❌                        | High — can't bookmark hard cards      |
+| 3   | **Tools row** (Prioritas/Urut/Reset/Review❌)            | ✅ 4-button row                     | ❌                        | High — can't control card order       |
+| 4   | **Stats row** (Total/Hafal/Belum/Sisa boxes)             | ✅ 4 colored stat boxes             | ❌                        | Medium — progress not visible in-mode |
+| 5   | **Category pill on card** (top-left badge)               | ✅ `catInfo.emoji + label`          | ❌ Only shows after flip  | High — no context before flipping     |
+| 6   | **Card # indicator** (#N corner)                         | ✅ Position number                  | ❌                        | Low                                   |
+| 7   | **Smart DescBlock** (①②③ lists, 【brackets】, footnotes) | ✅ 97-line parser                   | ❌ Only line-split        | High — descriptions render flat/ugly  |
+| 8   | **Smart JpFront** (vs, ・, ：, → layouts)                | ✅ 75-line component                | ❌ Only plain text        | High — compound terms unreadable      |
+| 9   | **Reset confirm dialog** (2-tap safety)                  | ✅ `confirmReset` + 3s timeout      | ❌                        | Medium — accidental resets            |
+| 10  | **"Review Belum" filter** (show only ❌ cards)           | ✅ `unknownCards` filter button     | ❌                        | High — can't review mistakes          |
+| 11  | **Status border** (green/red/neutral by known state)     | ✅ Dynamic `statusBorder`           | ❌ Has SRS border instead | Medium                                |
+| 12  | **Flip gradient** (bg changes to category color)         | ✅ `catInfo.color` gradient on flip | ❌ Static surface bg      | Medium — less visual feedback         |
 
 **Current HAS but v87 doesn't:** FSRS 4-button rating ✅, SRS strength badge ✅, swipe gestures ✅, interval preview ✅
 
 ### QuizMode — 9 missing features
 
-| # | Feature | v87 has | Current has |
-|---|---------|---------|-------------|
-| 1 | **Quiz count selector** (10/20/30/All) | ✅ Button row | ❌ Hardcoded `Math.min(15, cards.length)` |
-| 2 | **Lemah mode** (focus on wrong-history cards) | ✅ `lemahMode` + `lemahCards` | ❌ |
-| 3 | **Streak display** (current + max) | ✅ In-quiz UI | ❌ QuizShell has it but not surfaced well |
-| 4 | **Anti-repeat** (`seenPoolRef` across restarts) | ✅ Prevents same card twice | ❌ |
-| 5 | **Settings panel** (in-quiz toggle) | ✅ `showSettings` gear icon | ❌ Settings only on pre-start screen |
-| 6 | **Auto-next configurable** (1s/1.5s/2s) | ✅ | ❌ Hardcoded 2s in QuizShell |
-| 7 | **JpFront smart rendering** on question card | ✅ | ❌ Plain text |
-| 8 | **After-answer reveal** (all options show JP+romaji+ID) | ✅ | ❌ Only color change |
-| 9 | **Wrong answer review** (end screen with details) | ✅ | ⚠️ QuizShell has basic ResultScreen |
+| #   | Feature                                                 | v87 has                       | Current has                               |
+| --- | ------------------------------------------------------- | ----------------------------- | ----------------------------------------- |
+| 1   | **Quiz count selector** (10/20/30/All)                  | ✅ Button row                 | ❌ Hardcoded `Math.min(15, cards.length)` |
+| 2   | **Lemah mode** (focus on wrong-history cards)           | ✅ `lemahMode` + `lemahCards` | ❌                                        |
+| 3   | **Streak display** (current + max)                      | ✅ In-quiz UI                 | ❌ QuizShell has it but not surfaced well |
+| 4   | **Anti-repeat** (`seenPoolRef` across restarts)         | ✅ Prevents same card twice   | ❌                                        |
+| 5   | **Settings panel** (in-quiz toggle)                     | ✅ `showSettings` gear icon   | ❌ Settings only on pre-start screen      |
+| 6   | **Auto-next configurable** (1s/1.5s/2s)                 | ✅                            | ❌ Hardcoded 2s in QuizShell              |
+| 7   | **JpFront smart rendering** on question card            | ✅                            | ❌ Plain text                             |
+| 8   | **After-answer reveal** (all options show JP+romaji+ID) | ✅                            | ❌ Only color change                      |
+| 9   | **Wrong answer review** (end screen with details)       | ✅                            | ⚠️ QuizShell has basic ResultScreen       |
 
 ### JACMode — 5 missing features
 
-| # | Feature | v87 has | Current has |
-|---|---------|---------|-------------|
-| 1 | **Chapter detail view** (browse questions per chapter) | ✅ Full navigation | ❌ Just set picker → quiz |
-| 2 | **Score tracking per chapter** | ✅ | ❌ |
-| 3 | **showHira toggle** (furigana on/off for questions AND options) | ✅ Applies to options too | ⚠️ Partial — `showFuri` exists |
-| 4 | **Result review** (wrong answers with explanations) | ✅ | ⚠️ Via QuizShell |
-| 5 | **Auto-advance delay** | ✅ Configurable | ❌ Hardcoded |
+| #   | Feature                                                         | v87 has                   | Current has                    |
+| --- | --------------------------------------------------------------- | ------------------------- | ------------------------------ |
+| 1   | **Chapter detail view** (browse questions per chapter)          | ✅ Full navigation        | ❌ Just set picker → quiz      |
+| 2   | **Score tracking per chapter**                                  | ✅                        | ❌                             |
+| 3   | **showHira toggle** (furigana on/off for questions AND options) | ✅ Applies to options too | ⚠️ Partial — `showFuri` exists |
+| 4   | **Result review** (wrong answers with explanations)             | ✅                        | ⚠️ Via QuizShell               |
+| 5   | **Auto-advance delay**                                          | ✅ Configurable           | ❌ Hardcoded                   |
 
 ### WaygroundMode — 4 missing features
 
-| # | Feature | v87 has | Current has |
-|---|---------|---------|-------------|
-| 1 | **WaygroundQuizMode** (dedicated quiz UI) | ✅ Separate component | ❌ Uses generic QuizShell |
-| 2 | **WaygroundResult** (score + maxStreak + review) | ✅ 73-line component | ❌ Generic ResultScreen |
-| 3 | **Score + maxStreak** tracking per set | ✅ | ❌ |
-| 4 | **Restart with same set** | ✅ | ❌ |
+| #   | Feature                                          | v87 has               | Current has               |
+| --- | ------------------------------------------------ | --------------------- | ------------------------- |
+| 1   | **WaygroundQuizMode** (dedicated quiz UI)        | ✅ Separate component | ❌ Uses generic QuizShell |
+| 2   | **WaygroundResult** (score + maxStreak + review) | ✅ 73-line component  | ❌ Generic ResultScreen   |
+| 3   | **Score + maxStreak** tracking per set           | ✅                    | ❌                        |
+| 4   | **Restart with same set**                        | ✅                    | ❌                        |
 
 ### SimulasiMode — 5 missing features
 
-| # | Feature | v87 has | Current has |
-|---|---------|---------|-------------|
-| 1 | **Countdown timer** (visual display) | ✅ `timeLeft` + `countdown` | ❌ Timer prop exists but no UI |
-| 2 | **Time-up auto-finish** | ✅ | ❌ |
-| 3 | **Score tracking** | ✅ | ❌ |
-| 4 | **Result screen** (pass/fail + score) | ✅ | ❌ |
-| 5 | **Wrong answer review** | ✅ | ❌ |
+| #   | Feature                               | v87 has                     | Current has                    |
+| --- | ------------------------------------- | --------------------------- | ------------------------------ |
+| 1   | **Countdown timer** (visual display)  | ✅ `timeLeft` + `countdown` | ❌ Timer prop exists but no UI |
+| 2   | **Time-up auto-finish**               | ✅                          | ❌                             |
+| 3   | **Score tracking**                    | ✅                          | ❌                             |
+| 4   | **Result screen** (pass/fail + score) | ✅                          | ❌                             |
+| 5   | **Wrong answer review**               | ✅                          | ❌                             |
 
 ### JpFront / JpDisplay — 4 missing layouts
 
-| # | Pattern | v87 renders as | Current renders as |
-|---|---------|----------------|-------------------|
-| 1 | `A vs B` | Stacked with VS divider | Plain text "A vs B" |
-| 2 | `A・B・C` | Stacked with HR dividers | Plain text "A・B・C" |
-| 3 | `Title：Subtitle` | Title + divider + subtitle | Plain text |
-| 4 | `A → B → C` | Stacked with ↓ arrows | Plain text |
+| #   | Pattern           | v87 renders as             | Current renders as   |
+| --- | ----------------- | -------------------------- | -------------------- |
+| 1   | `A vs B`          | Stacked with VS divider    | Plain text "A vs B"  |
+| 2   | `A・B・C`         | Stacked with HR dividers   | Plain text "A・B・C" |
+| 3   | `Title：Subtitle` | Title + divider + subtitle | Plain text           |
+| 4   | `A → B → C`       | Stacked with ↓ arrows      | Plain text           |
 
 ### DescBlock — 3 missing render modes
 
-| # | Pattern | v87 renders as | Current renders as |
-|---|---------|----------------|-------------------|
-| 1 | `①②③` numbered items | Parsed into styled list with orange numbers | Plain text with line breaks |
-| 2 | `【keyword】` brackets | Parsed into labeled segments with colored badges | Plain text |
-| 3 | `(Sumber: ...)` footnotes | Extracted as faint italic footer | Inline text |
+| #   | Pattern                   | v87 renders as                                   | Current renders as          |
+| --- | ------------------------- | ------------------------------------------------ | --------------------------- |
+| 1   | `①②③` numbered items      | Parsed into styled list with orange numbers      | Plain text with line breaks |
+| 2   | `【keyword】` brackets    | Parsed into labeled segments with colored badges | Plain text                  |
+| 3   | `(Sumber: ...)` footnotes | Extracted as faint italic footer                 | Inline text                 |
 
 ### App-level — 3 missing features
 
-| # | Feature | v87 has | Current has |
-|---|---------|---------|-------------|
-| 1 | **Starred cards system** (localStorage persist) | ✅ `starred` Set + auto-save | ❌ |
-| 2 | **Category filter popup** (3-col grid, emoji, count, "Terapkan" button) | ✅ `filterOpen` + grid | ❌ Only pills row |
-| 3 | **Last-mode persistence** (resume on reload) | ✅ `ssw-last-mode` | ❌ Always starts at home |
+| #   | Feature                                                                 | v87 has                      | Current has              |
+| --- | ----------------------------------------------------------------------- | ---------------------------- | ------------------------ |
+| 1   | **Starred cards system** (localStorage persist)                         | ✅ `starred` Set + auto-save | ❌                       |
+| 2   | **Category filter popup** (3-col grid, emoji, count, "Terapkan" button) | ✅ `filterOpen` + grid       | ❌ Only pills row        |
+| 3   | **Last-mode persistence** (resume on reload)                            | ✅ `ssw-last-mode`           | ❌ Always starts at home |
 
 ---
 
@@ -150,27 +150,35 @@ These are things the current modular app has that v87/v90 does NOT:
 ## 🎯 Design Principles
 
 ### P1. Mobile-first, thumb-zone
+
 Primary actions in bottom 60% of screen. Tap targets ≥ 44×44px.
 
 ### P2. Indonesian-first, JP always visible
+
 Body text Indonesian. JP terms always show kanji + romaji.
 
 ### P3. Show progress everywhere
+
 Every screen has at least one progress indicator.
 
 ### P4. One primary action per screen
+
 Clear "what should I do" — visually dominant.
 
 ### P5. Forgive misclicks
+
 Reset/clear require confirm. Mark actions have undo.
 
 ### P6. Calm, not noisy
+
 One animation at a time. High contrast but warm.
 
 ### P7. Beginner-first defaults
+
 Konsep first, quiz starts at 10, SRS defaults to "Oke".
 
 ### P8. Respect data + battery
+
 No autoplay. Lazy-load. Cache aggressively.
 
 ---
@@ -182,9 +190,11 @@ No autoplay. Lazy-load. Cache aggressively.
 **Goal:** Restore JpFront and DescBlock to v87 feature parity.
 
 **Files to edit:**
+
 - `src/components/JpDisplay.jsx`
 
 **Tasks:**
+
 1. **JpFront** — port v87's smart layout logic:
    - `A vs B` → stacked with VS divider
    - `A・B・C` → stacked with HR dividers
@@ -200,6 +210,7 @@ No autoplay. Lazy-load. Cache aggressively.
    - Use `T.*` tokens
 
 **Acceptance:**
+
 - A card with `朝礼 vs 夕礼` renders stacked
 - A card with `ほうき・ちりとり・ブロアー` renders stacked with dividers
 - A card desc with `①安全 ②注意 ③危険` renders as colored numbered list
@@ -214,10 +225,12 @@ No autoplay. Lazy-load. Cache aggressively.
 **Goal:** Restore 12 missing features from v87 while keeping FSRS.
 
 **File to edit:**
+
 - `src/modes/FlashcardMode.jsx`
 - `src/App.jsx` (for starred state)
 
 **Tasks:**
+
 1. **Search bar** — add `search` state + input field above card. Filter `displayCards` by JP/romaji/ID.
 2. **Star system** — add `starred` Set to App.jsx state, persist to localStorage `ssw-starred`. Pass to FlashcardMode. Add ⭐/☆ toggle button next to search.
 3. **Category pill on card** — show `cat.emoji + cat.label` badge at card top-left (not just after flip).
@@ -238,12 +251,14 @@ No autoplay. Lazy-load. Cache aggressively.
 **Keep existing:** FSRS 4-button rating, swipe gestures, SRS badge, keyboard shortcuts.
 
 **FSRS + Binary mark coexistence:**
+
 - `✓ Sudah hafal` → FSRS rating 3 (Good)
 - `✗ Belum hafal` → FSRS rating 1 (Again)
 - Long-press ✓ → shows full 4-button FSRS rating
 - This replaces the current always-visible 4-button grid (which is intimidating for beginners)
 
 **Acceptance:**
+
 - Search filters cards by JP/romaji/ID in real-time
 - Star persists across sessions (localStorage)
 - Tools row all functional
@@ -257,11 +272,13 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 3 — QuizMode Feature Restore (2 sessions)
 
 **Files to edit:**
+
 - `src/modes/QuizMode.jsx`
 - `src/components/QuizShell.jsx`
 - `src/components/OptionButton.jsx`
 
 **Tasks:**
+
 1. **Quiz count selector** — button row: 10 / 20 / 30 / All. Default 10.
 2. **Lemah mode toggle** — `lemahMode` switch. Shows `⚠ Fokus Lemah (N)` when wrong-history cards exist.
 3. **Anti-repeat** — `seenPoolRef` tracks card IDs across quiz restarts within session. Only repeats when pool exhausted.
@@ -278,6 +295,7 @@ No autoplay. Lazy-load. Cache aggressively.
 9. **Result screen enhancement** — wrong answers show: question JP + romaji + ID + user's wrong pick + correct answer.
 
 **Acceptance:**
+
 - Quiz count buttons work (10/20/30/All)
 - Lemah mode filters to previously-wrong cards
 - After answering, all 4 options show JP + romaji context
@@ -290,23 +308,27 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 4 — JACMode + WaygroundMode + SimulasiMode Restore (2 sessions)
 
 **Files to edit:**
+
 - `src/modes/JACMode.jsx`
 - `src/modes/WaygroundMode.jsx`
 - `src/modes/SimulasiMode.jsx`
 
 **Tasks (JACMode):**
+
 1. Add score tracking per set (persisted `ssw-jac-scores`)
 2. showHira toggle applies to options too (not just question)
 3. Enhance result review to show wrong answers with explanation
 4. Add auto-advance delay option
 
 **Tasks (WaygroundMode):**
+
 1. Restore score + maxStreak tracking per set
 2. Add dedicated result screen (score / maxStreak / restart / review wrong)
 3. "Restart with same set" button
 4. Show last score on set picker cards
 
 **Tasks (SimulasiMode):**
+
 1. Implement real countdown timer UI (big visible clock)
 2. Auto-finish when time runs out
 3. Score tracking + pass/fail threshold (60% = lulus)
@@ -315,6 +337,7 @@ No autoplay. Lazy-load. Cache aggressively.
 6. Add pre-exam screen with instructions
 
 **Acceptance:**
+
 - JAC shows score history per set on picker
 - Wayground shows maxStreak + restart option
 - Simulasi timer counts down visually, auto-finishes, shows pass/fail
@@ -324,20 +347,24 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 5 — DangerMode + AngkaMode Polish (1 session)
 
 **Files to edit:**
+
 - `src/modes/DangerMode.jsx`
 - `src/modes/AngkaMode.jsx`
 
 **Tasks (DangerMode):**
+
 1. After answer: show side-by-side comparison of confused pair
 2. Highlight differentiating kanji/character
 3. "Explain the difference" section after reveal
 
 **Tasks (AngkaMode):**
+
 1. Group by category (waktu / dosis / panjang / etc)
 2. Add flashcard-style browse mode (not just quiz)
 3. "Wajib hafal sebelum ujian" badge
 
 **Acceptance:**
+
 - DangerMode shows pair comparison after answer
 - AngkaMode lets user browse by category, not just quiz
 
@@ -346,11 +373,13 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 6 — Category Filter Popup + Star System + App UX (2 sessions)
 
 **Files to edit:**
+
 - `src/App.jsx`
 - `src/components/Dashboard.jsx`
 - New file: `src/components/FilterPopup.jsx`
 
 **Tasks:**
+
 1. **Category filter popup** — replace pills row with "Filter ▼" button that opens a 3-column grid:
    - Each cell: emoji + JP label + count
    - "すべて" row at top with total
@@ -370,6 +399,7 @@ No autoplay. Lazy-load. Cache aggressively.
    - Show card count per segment
 
 **Acceptance:**
+
 - Filter popup opens/closes with animation
 - Grid shows correct counts per category × track
 - Star button on FlashcardMode persists across sessions
@@ -381,9 +411,11 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 7 — Dashboard Overhaul (2 sessions)
 
 **File to edit:**
+
 - `src/components/Dashboard.jsx`
 
 **Tasks:**
+
 1. **Quick Start card** — large CTA card at top:
    - Smart logic: show SRS due → flashcard → quiz → JAC → simulasi based on progress
    - Gradient bg, big icon, prominent button
@@ -395,6 +427,7 @@ No autoplay. Lazy-load. Cache aggressively.
 7. **Daily progress bar** — track cards reviewed today (`ssw-daily-count` + reset at midnight)
 
 **Acceptance:**
+
 - Quick Start shows different CTA based on user state
 - Stats bar shows accurate live numbers
 - Recently studied updates after FlashcardMode mark
@@ -407,6 +440,7 @@ No autoplay. Lazy-load. Cache aggressively.
 **Files to edit:** all mode files + components
 
 **Tasks:**
+
 1. **Empty states** for every mode — designed with icon + title + desc + CTA:
    - ReviewMode 0 due: "🎉 Semua kartu sudah terulang! Datang lagi besok."
    - FocusMode no weak cards: "✨ Belum ada kartu lemah. Lanjutkan kuis dulu."
@@ -430,6 +464,7 @@ No autoplay. Lazy-load. Cache aggressively.
    - Simulasi: ~30 mnt
 
 **Acceptance:**
+
 - Every mode has a designed empty state (not blank screen)
 - Card flip is smooth 3D rotation
 - Toast appears on mark actions with working Undo
@@ -441,6 +476,7 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 9 — Beginner UX Features (1 session)
 
 **Tasks:**
+
 1. **First-time tooltip** in FlashcardMode:
    - "Ketuk kartu untuk balik"
    - "Geser kiri-kanan untuk navigasi"
@@ -459,6 +495,7 @@ No autoplay. Lazy-load. Cache aggressively.
    - 7-day streak: toast "🔥 Seminggu berturut-turut!"
 
 **Acceptance:**
+
 - Tutorial shows once per mode, never again
 - Help tooltips accessible and correct
 - Starter pack visible only for brand-new users
@@ -469,14 +506,16 @@ No autoplay. Lazy-load. Cache aggressively.
 ### Phase 10 — QA + Performance + Release (1 session)
 
 **Tasks:**
+
 1. Cross-device testing (small Android, large Android, iOS Safari)
 2. Lighthouse: PWA 100, Performance ≥ 85, Accessibility ≥ 90
 3. Bundle size review (< 800KB gzip initial)
 4. All tests pass + new tests for restored features
-5. CHANGELOG + README + _MAP.md updated to v3.0.0
+5. CHANGELOG + README + \_MAP.md updated to v3.0.0
 6. Clean up `legacy/` folder (optional, Nugget's call)
 
 **Acceptance:**
+
 - Works on Android Chrome 90+, iOS Safari 14+
 - All 72+ tests pass
 - Lint clean, format clean
@@ -486,19 +525,19 @@ No autoplay. Lazy-load. Cache aggressively.
 
 ## 📊 Session Estimates
 
-| Phase | Focus | Sessions |
-|-------|-------|----------|
-| 1 | Smart Text (JpFront + DescBlock) | 1 |
-| 2 | FlashcardMode restore | 2 |
-| 3 | QuizMode restore | 2 |
-| 4 | JAC + Wayground + Simulasi restore | 2 |
-| 5 | DangerMode + AngkaMode | 1 |
-| 6 | Filter popup + Star + App UX | 2 |
-| 7 | Dashboard overhaul | 2 |
-| 8 | Visual polish + empty states | 2 |
-| 9 | Beginner UX | 1 |
-| 10 | QA + release | 1 |
-| **TOTAL** | | **16** |
+| Phase     | Focus                              | Sessions |
+| --------- | ---------------------------------- | -------- |
+| 1         | Smart Text (JpFront + DescBlock)   | 1        |
+| 2         | FlashcardMode restore              | 2        |
+| 3         | QuizMode restore                   | 2        |
+| 4         | JAC + Wayground + Simulasi restore | 2        |
+| 5         | DangerMode + AngkaMode             | 1        |
+| 6         | Filter popup + Star + App UX       | 2        |
+| 7         | Dashboard overhaul                 | 2        |
+| 8         | Visual polish + empty states       | 2        |
+| 9         | Beginner UX                        | 1        |
+| 10        | QA + release                       | 1        |
+| **TOTAL** |                                    | **16**   |
 
 ---
 
@@ -584,4 +623,4 @@ Main App:       lines 6900–7389
 
 ---
 
-*End of UX Overhaul Proposal · v2 · 2026-04-28 · Crispy*
+_End of UX Overhaul Proposal · v2 · 2026-04-28 · Crispy_

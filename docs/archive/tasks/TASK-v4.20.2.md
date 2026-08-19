@@ -1,4 +1,5 @@
 # TASK v4.20.2 — ENG-2: Constants + N15, N19, B5, B1
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.1 DONE
 
 ---
@@ -10,14 +11,20 @@
 // Single source of truth for shared constants.
 // Import from here — never hardcode these values in component files.
 
-export const TOTAL_CARDS             = 1443;
-export const HALF_DECK_THRESHOLD     = Math.ceil(TOTAL_CARDS / 2); // 722
-export const FULL_DECK_THRESHOLD     = TOTAL_CARDS;
+export const TOTAL_CARDS = 1443;
+export const HALF_DECK_THRESHOLD = Math.ceil(TOTAL_CARDS / 2); // 722
+export const FULL_DECK_THRESHOLD = TOTAL_CARDS;
 
 /** All modes whose sessions contribute to quiz accuracy scoring. */
 export const SCORED_QUIZ_MODES = [
-  'kuis', 'jac', 'wayground',
-  'simulasi', 'sipil', 'bangunan', 'vocab', 'kuisprod',
+  'kuis',
+  'jac',
+  'wayground',
+  'simulasi',
+  'sipil',
+  'bangunan',
+  'vocab',
+  'kuisprod',
 ];
 
 /** FSRS card considered "mature" at this interval (days). */
@@ -31,10 +38,17 @@ export const DAILY_CHALLENGE_KEY = 'ssw-daily-challenge';
 ```
 
 Add to `src/utils/index.js` barrel:
+
 ```js
-export { TOTAL_CARDS, HALF_DECK_THRESHOLD, FULL_DECK_THRESHOLD,
-         SCORED_QUIZ_MODES, SRS_MATURE_DAYS, SESSIONS_CAP,
-         DAILY_CHALLENGE_KEY } from './constants.js';
+export {
+  TOTAL_CARDS,
+  HALF_DECK_THRESHOLD,
+  FULL_DECK_THRESHOLD,
+  SCORED_QUIZ_MODES,
+  SRS_MATURE_DAYS,
+  SESSIONS_CAP,
+  DAILY_CHALLENGE_KEY,
+} from './constants.js';
 ```
 
 Commit: `feat(utils): ENG-2 create constants.js — shared constants (TOTAL_CARDS, SCORED_QUIZ_MODES, etc.)`
@@ -117,11 +131,13 @@ Commit: `fix(achievements): B1 — half_deck threshold 705→722, full_deck 1410
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build`
 4. Bump → `4.20.2`
 5. Prepend CHANGELOG:
+
 ```
 ## [4.20.2] - [DATE]
 
@@ -133,9 +149,11 @@ Commit: `fix(achievements): B1 — half_deck threshold 705→722, full_deck 1410
 - B5 (P1): StatsMode calcReadiness — spurious ×100 removed; readiness now 0–100 correctly
 - B1 (P1): achievements half_deck/full_deck thresholds updated to HALF_DECK_THRESHOLD/TOTAL_CARDS
 ```
+
 6. Update `_MAP.md` + push
 
 ## Done when
+
 - [ ] constants.js created
 - [ ] utils/index.js barrel updated
 - [ ] ProgressContext uses SESSIONS_CAP

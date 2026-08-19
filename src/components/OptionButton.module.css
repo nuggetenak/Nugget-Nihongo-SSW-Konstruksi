@@ -29,21 +29,23 @@
 /* Hover subtle lift */
 .btn:not(:disabled):hover {
   border-color: var(--ssw-borderHover);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .btn:not(:disabled):active {
   transform: scale(0.986) translateY(1px);
 }
 
-.btn:disabled { cursor: default; }
+.btn:disabled {
+  cursor: default;
+}
 
 /* State variants */
 .btn[data-state='correct'] {
   background: var(--ssw-correctBg);
   border-color: var(--ssw-correctBorder);
   animation: correctFlash 0.5s ease;
-  box-shadow: 0 0 0 0 rgba(22,163,74,0);
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
 }
 
 .btn[data-state='wrong'] {
@@ -60,7 +62,9 @@
 .btn[data-state='correct']::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 3px;
   background: var(--ssw-correct);
   border-radius: 3px 0 0 3px;
@@ -71,7 +75,9 @@
 .btn[data-state='wrong']::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 3px;
   background: var(--ssw-wrong);
   border-radius: 3px 0 0 3px;
@@ -83,7 +89,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(22,163,74,0.07) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(22, 163, 74, 0.07) 50%, transparent 100%);
   pointer-events: none;
 }
 
@@ -99,7 +105,11 @@
   font-size: var(--fs-small);
   font-weight: 800;
   margin-top: 1px;
-  transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.22s;
+  transition:
+    background 0.22s,
+    color 0.22s,
+    border-color 0.22s,
+    transform 0.22s;
 
   /* default */
   background: rgba(245, 158, 11, 0.06);
@@ -121,7 +131,9 @@
   color: var(--ssw-wrong);
 }
 
-.text { flex: 1; }
+.text {
+  flex: 1;
+}
 
 .sub {
   display: block;

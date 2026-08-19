@@ -1,7 +1,9 @@
 # TASK v4.20.7 — ENG-5: useDailyChallenge hook
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.6 DONE
 
 ## Goal
+
 Fix N5: daily challenge answer uses `sessionStorage` — lost on tab close/refresh. Move to storage engine.
 
 ---
@@ -59,6 +61,7 @@ export function useDailyChallenge() {
 ```
 
 Add to `src/hooks/index.js`:
+
 ```js
 export { useDailyChallenge } from './useDailyChallenge.js';
 ```
@@ -87,7 +90,11 @@ const handleChallengeAnswer = (idx) => {
 
 // REPLACE WITH:
 import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
-const { question: challenge, answered: challengeAnswered, submit: submitChallenge } = useDailyChallenge();
+const {
+  question: challenge,
+  answered: challengeAnswered,
+  submit: submitChallenge,
+} = useDailyChallenge();
 
 // Replace handleChallengeAnswer calls with submitChallenge(selectedIdx, correctIdx)
 // Remove the getDailyChallenge direct call (now inside the hook)
@@ -99,12 +106,14 @@ Commit: `refactor(SayaTab): use useDailyChallenge hook — removes sessionStorag
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build`
-4. Bump → `4.20.7`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.7`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] dailyChallengeLog in DEFAULTS.prefs
 - [ ] useDailyChallenge.js created
 - [ ] hooks/index.js updated

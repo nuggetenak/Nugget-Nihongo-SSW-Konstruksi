@@ -7,12 +7,12 @@
 
 ## Results Summary
 
-| Classification | Cards | % | Source tag |
-|---------------|-------|---|------------|
-| ✅ Verified — term exists in JAC text | 889 | 63% | `jac-ch1`–`jac-ch7`, `vocab-*` (verified subset) |
-| 🟡 Synthesized — JAC-derived compound study cards | 206 | 15% | `jac-ch1`–`jac-ch7` (compound terms) |
-| 🔧 Supplementary — valid construction terms, not in JAC textbook | 270 | 19% | `vocab-supplementary` |
-| 📎 General — common words, not construction-specific | 45 | 3% | `vocab-general` |
+| Classification                                                   | Cards | %   | Source tag                                       |
+| ---------------------------------------------------------------- | ----- | --- | ------------------------------------------------ |
+| ✅ Verified — term exists in JAC text                            | 889   | 63% | `jac-ch1`–`jac-ch7`, `vocab-*` (verified subset) |
+| 🟡 Synthesized — JAC-derived compound study cards                | 206   | 15% | `jac-ch1`–`jac-ch7` (compound terms)             |
+| 🔧 Supplementary — valid construction terms, not in JAC textbook | 270   | 19% | `vocab-supplementary`                            |
+| 📎 General — common words, not construction-specific             | 45    | 3%  | `vocab-general`                                  |
 
 ## Fixes Applied
 

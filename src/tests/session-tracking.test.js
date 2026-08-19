@@ -2,8 +2,8 @@
 // Phase C: Session recording in ProgressContext.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, act } from "@testing-library/react";
-import { createElement } from "react";
+import { render, act } from '@testing-library/react';
+import { createElement } from 'react';
 import { _reset_for_test } from '../storage/engine.js';
 import { ProgressProvider, useProgress } from '../contexts/ProgressContext.jsx';
 
@@ -21,8 +21,14 @@ function CaptureCtx({ onCtx }) {
 function renderProgress() {
   let ctx;
   render(
-    createElement(ProgressProvider, null,
-      createElement(CaptureCtx, { onCtx: (c) => { ctx = c; } })
+    createElement(
+      ProgressProvider,
+      null,
+      createElement(CaptureCtx, {
+        onCtx: (c) => {
+          ctx = c;
+        },
+      })
     )
   );
   return () => ctx;

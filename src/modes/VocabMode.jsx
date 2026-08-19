@@ -16,7 +16,8 @@ const MIX_ALL_ID = '__vocab_mix__';
 export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
   const VOCAB_SETS = useMemo(
-    () => QUIZ_SETS.filter((s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)),
+    () =>
+      QUIZ_SETS.filter((s) => s.id.startsWith('wg') && (s.track === 'common' || s.track === track)),
     [track]
   );
   const totalSoal = VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0);
@@ -36,13 +37,17 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
 
   const questions = useMemo(() => {
     if (!activeSet) return [];
-    const qs = activeSet === MIX_ALL_ID
-      ? shuffle(VOCAB_SETS.flatMap((s) => s.questions.map((q) => ({ ...q, _set: s.id }))))
-      : shuffle(setDef?.questions ?? []);
+    const qs =
+      activeSet === MIX_ALL_ID
+        ? shuffle(VOCAB_SETS.flatMap((s) => s.questions.map((q) => ({ ...q, _set: s.id }))))
+        : shuffle(setDef?.questions ?? []);
     return qs.map((q) => ({
       question: showFuri ? standardizeFuri(q.q) : stripFuri(q.q),
       hint: showHint ? q.hint : null,
-      options: q.opts.map((opt, i) => ({ text: showFuri ? standardizeFuri(opt) : stripFuri(opt), sub: q.opts_id?.[i] || null })),
+      options: q.opts.map((opt, i) => ({
+        text: showFuri ? standardizeFuri(opt) : stripFuri(opt),
+        sub: q.opts_id?.[i] || null,
+      })),
       correctIdx: q.ans,
       explanation: q.exp,
       _qId: `${activeSet}-${q.id}`,
@@ -51,25 +56,31 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
 
   const [_wrongCounts, setWrongCounts] = useState(() => get('progress')?.vocabWrong ?? {});
 
-  const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
-    if (!isCorrect && activeSet) {
-      const qId = questions[qIdx]?._qId;
-      if (qId) {
-        setWrongCounts((prev) => {
-          const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
-          storageSet('progress', (p) => ({ ...p, vocabWrong: updated }));
-          return updated;
-        });
+  const handleAnswer = useCallback(
+    (qIdx, _selIdx, isCorrect) => {
+      if (!isCorrect && activeSet) {
+        const qId = questions[qIdx]?._qId;
+        if (qId) {
+          setWrongCounts((prev) => {
+            const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
+            storageSet('progress', (p) => ({ ...p, vocabWrong: updated }));
+            return updated;
+          });
+        }
       }
-    }
-  }, [questions, activeSet]);
+    },
+    [questions, activeSet]
+  );
 
-  const handleFinish = useCallback(({ correct, total, maxStreak, durationMs = 0 }) => {
-    if (!activeSet) return;
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    saveScore('vocab', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
-    onSessionEnd?.({ correct, total, durationMs });
-  }, [activeSet, saveScore, onSessionEnd]);
+  const handleFinish = useCallback(
+    ({ correct, total, maxStreak, durationMs = 0 }) => {
+      if (!activeSet) return;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+      saveScore('vocab', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
+      onSessionEnd?.({ correct, total, durationMs });
+    },
+    [activeSet, saveScore, onSessionEnd]
+  );
 
   if (activeSet) {
     return (
@@ -88,15 +99,41 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <button className={S.btnBack} onClick={onExit}>
+        ← Kembali
+      </button>
       <h2 className={S.pageTitle}>Kosakata · Vocab Drill</h2>
-      <p className={S.pageSub}>{totalSoal} soal dalam {VOCAB_SETS.length} set · 語彙JP↔ID</p>
+      <p className={S.pageSub}>
+        {totalSoal} soal dalam {VOCAB_SETS.length} set · 語彙JP↔ID
+      </p>
 
       <div className={S.row} style={{ marginBottom: 20 }}>
-        {[{ label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
-          { label: `💡 ${showHint ? 'ON' : 'OFF'}`, active: showHint, onClick: () => setShowHint((f) => !f) }
+        {[
+          {
+            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
+            active: showFuri,
+            onClick: () => setShowFuri((f) => !f),
+          },
+          {
+            label: `💡 ${showHint ? 'ON' : 'OFF'}`,
+            active: showHint,
+            onClick: () => setShowHint((f) => !f),
+          },
         ].map((btn) => (
-          <button key={btn.label} onClick={btn.onClick} style={{ fontFamily: 'inherit', fontSize: 11, padding: '6px 12px', borderRadius: T.r.pill, cursor: 'pointer', background: btn.active ? 'rgba(167,139,250,0.15)' : T.surface, border: `1px solid ${btn.active ? 'rgba(167,139,250,0.4)' : T.border}`, color: btn.active ? '#a78bfa' : T.textMuted }}>
+          <button
+            key={btn.label}
+            onClick={btn.onClick}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 11,
+              padding: '6px 12px',
+              borderRadius: T.r.pill,
+              cursor: 'pointer',
+              background: btn.active ? 'rgba(167,139,250,0.15)' : T.surface,
+              border: `1px solid ${btn.active ? 'rgba(167,139,250,0.4)' : T.border}`,
+              color: btn.active ? '#a78bfa' : T.textMuted,
+            }}
+          >
             {btn.label}
           </button>
         ))}
@@ -105,11 +142,20 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
       <button
         className={S.btnItem}
         onClick={() => setActiveSet(MIX_ALL_ID)}
-        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, background: 'linear-gradient(135deg,rgba(109,40,217,0.15),rgba(167,139,250,0.1))', border: '1px solid rgba(167,139,250,0.35)' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 20,
+          background: 'linear-gradient(135deg,rgba(109,40,217,0.15),rgba(167,139,250,0.1))',
+          border: '1px solid rgba(167,139,250,0.35)',
+        }}
       >
         <div>
           <div style={{ fontSize: 14, fontWeight: 700 }}>🔀 Mix All Vocab</div>
-          <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>Semua {totalSoal} soal diacak — latihan komprehensif</div>
+          <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>
+            Semua {totalSoal} soal diacak — latihan komprehensif
+          </div>
         </div>
         <span style={{ fontSize: 11, color: '#a78bfa', fontWeight: 700 }}>{totalSoal}q →</span>
       </button>
@@ -117,24 +163,83 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
       <div style={{ marginBottom: 8 }}>
         <div className={S.row} style={{ marginBottom: 10 }}>
           <span style={{ fontSize: 13 }}>📖</span>
-          <span style={{ fontSize: 10, fontWeight: 800, color: '#60a5fa', letterSpacing: 1.8, textTransform: 'uppercase' }}>Per Set</span>
-          <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg,rgba(96,165,250,0.3),transparent)' }} />
-          <span className={S.pill} style={{ fontSize: 10, color: T.textDim, background: T.surface, border: `1px solid ${T.border}`, fontWeight: 700 }}>{VOCAB_SETS.length} set</span>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: '#60a5fa',
+              letterSpacing: 1.8,
+              textTransform: 'uppercase',
+            }}
+          >
+            Per Set
+          </span>
+          <div
+            style={{
+              flex: 1,
+              height: 1,
+              background: 'linear-gradient(90deg,rgba(96,165,250,0.3),transparent)',
+            }}
+          />
+          <span
+            className={S.pill}
+            style={{
+              fontSize: 10,
+              color: T.textDim,
+              background: T.surface,
+              border: `1px solid ${T.border}`,
+              fontWeight: 700,
+            }}
+          >
+            {VOCAB_SETS.length} set
+          </span>
         </div>
         <div className={S.list}>
           {VOCAB_SETS.map((s) => {
             const saved = scores[s.id];
             return (
-              <button key={s.id} className={S.btnItem} onClick={() => setActiveSet(s.id)} style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || '#60a5fa' }} />
+              <button
+                key={s.id}
+                className={S.btnItem}
+                onClick={() => setActiveSet(s.id)}
+                style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden' }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: 4,
+                    background: s.color || '#60a5fa',
+                  }}
+                />
                 <div className={S.rowSpread}>
-                  <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700 }}>
+                    {s.emoji} {s.title}
+                  </span>
                   <div className={S.row} style={{ gap: 8 }}>
-                    {saved && <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>{saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}</span>}
+                    {saved && (
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
+                        }}
+                      >
+                        {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
+                      </span>
+                    )}
                     <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
                   </div>
                 </div>
-                {s.subtitle && <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>{s.subtitle}</div>}
+                {s.subtitle && (
+                  <div
+                    style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
+                  >
+                    {s.subtitle}
+                  </div>
+                )}
               </button>
             );
           })}

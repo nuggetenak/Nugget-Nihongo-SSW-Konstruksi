@@ -15,8 +15,8 @@ describe('G.2 Flow — quiz session recording', () => {
   it('sessions array grows when recordSession is called multiple times', () => {
     // Simulate 3 quiz sessions via direct storage manipulation
     const sessions = [
-      { mode: 'kuis',  correct: 7, total: 10, durationMs: 5000, date: '2026-05-01T10:00:00Z' },
-      { mode: 'jac',   correct: 4, total: 5,  durationMs: 3000, date: '2026-05-01T11:00:00Z' },
+      { mode: 'kuis', correct: 7, total: 10, durationMs: 5000, date: '2026-05-01T10:00:00Z' },
+      { mode: 'jac', correct: 4, total: 5, durationMs: 3000, date: '2026-05-01T11:00:00Z' },
       { mode: 'wayground', correct: 12, total: 15, durationMs: 8000, date: '2026-05-01T12:00:00Z' },
     ];
     set('progress', (p) => ({ ...p, sessions }));
@@ -29,7 +29,11 @@ describe('G.2 Flow — quiz session recording', () => {
 
   it('sessions are capped at 90 entries', () => {
     const sessions = Array.from({ length: 100 }, (_, i) => ({
-      mode: 'kartu', correct: i, total: 10, durationMs: 1000, date: new Date().toISOString(),
+      mode: 'kartu',
+      correct: i,
+      total: 10,
+      durationMs: 1000,
+      date: new Date().toISOString(),
     }));
     set('progress', (p) => ({ ...p, sessions: sessions.slice(-90) }));
     expect(get('progress').sessions.length).toBe(90);

@@ -1,4 +1,5 @@
 # TASK v4.20.8 — F1, F2, F4, R1, R2, N10
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.7 DONE
 
 ---
@@ -16,12 +17,20 @@ const { starred } = useProgress();
 const { goMode } = useApp();
 
 // In render, somewhere near the quick-action buttons:
-{starred.size > 0 && (
-  <button onClick={() => goMode('kuis', { filterIds: [...starred] })}
-    style={{ /* use existing button style */ }}>
-    ⭐ Kuis Bintang ({starred.size})
-  </button>
-)}
+{
+  starred.size > 0 && (
+    <button
+      onClick={() => goMode('kuis', { filterIds: [...starred] })}
+      style={
+        {
+          /* use existing button style */
+        }
+      }
+    >
+      ⭐ Kuis Bintang ({starred.size})
+    </button>
+  );
+}
 ```
 
 Commit: `feat(Dashboard): F1 — starred-cards quiz button`
@@ -89,7 +98,7 @@ Commit: `fix(ReviewMode): R1 — remove _lastResult dead state (never read)`
 
 ```js
 // FIND (stale useMemo with empty deps):
-const streak     = useMemo(() => getStreak(), []);     // ❌ freezes at mount
+const streak = useMemo(() => getStreak(), []); // ❌ freezes at mount
 const dailyCount = useMemo(() => getDailyCount(), []); // ❌ freezes at mount
 
 // CHANGE TO (consume from ProgressContext — already subscribed to state changes):
@@ -122,12 +131,12 @@ const currentBest = durationBests.score;
 const ghostTimeline = durationBests.timeline;
 
 // When saving:
-storageSet('prefs', p => ({
+storageSet('prefs', (p) => ({
   ...p,
   sprintBests: {
     ...(p.sprintBests ?? {}),
-    [key]: { score: newScore, timeline: newTimeline }
-  }
+    [key]: { score: newScore, timeline: newTimeline },
+  },
 }));
 ```
 
@@ -138,16 +147,18 @@ Commit: `fix(SprintMode): N10 — sprintBests scoped by duration key`
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build`
-4. Bump → `4.20.8`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.8`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] Starred-cards quiz button in Dashboard (F1)
 - [ ] SumberMode has produksi/kuisprod buttons (F2)
 - [ ] ExportMode shows migration toast (F4)
-- [ ] ReviewMode _lastResult removed (R1)
+- [ ] ReviewMode \_lastResult removed (R1)
 - [ ] Dashboard streak/dailyCount from ProgressContext (R2)
 - [ ] SprintMode bests keyed by duration (N10)
 - [ ] All tests pass; version 4.20.8

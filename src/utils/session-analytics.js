@@ -21,18 +21,14 @@ export function getAvgAccuracy(sessions, n = null) {
  */
 export function getBestSimScore(sessions) {
   const sims = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
-  return sims.length
-    ? Math.max(...sims.map((s) => Math.round((s.correct / s.total) * 100)))
-    : 0;
+  return sims.length ? Math.max(...sims.map((s) => Math.round((s.correct / s.total) * 100))) : 0;
 }
 
 /**
  * True if any sprint session had 0 wrong and >= minCards.
  */
 export function hasPerfectSprint(sessions, minCards = 10) {
-  return sessions.some(
-    (s) => s.mode === 'sprint' && s.total >= minCards && s.correct === s.total
-  );
+  return sessions.some((s) => s.mode === 'sprint' && s.total >= minCards && s.correct === s.total);
 }
 
 /**

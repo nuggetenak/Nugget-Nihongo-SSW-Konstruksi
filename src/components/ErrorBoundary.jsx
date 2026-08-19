@@ -13,9 +13,15 @@ export function TabError({ tab }) {
       </div>
       <button
         onClick={() => window.location.reload()}
-        style={{ fontFamily: 'inherit', padding: '10px 24px', borderRadius: 12,
-          background: 'var(--ssw-surface)', border: '1px solid var(--ssw-border)',
-          cursor: 'pointer', fontSize: 13 }}
+        style={{
+          fontFamily: 'inherit',
+          padding: '10px 24px',
+          borderRadius: 12,
+          background: 'var(--ssw-surface)',
+          border: '1px solid var(--ssw-border)',
+          cursor: 'pointer',
+          fontSize: 13,
+        }}
       >
         Muat ulang
       </button>
@@ -26,9 +32,19 @@ export function TabError({ tab }) {
 // ── Flat card fallback for FlipCard (old WebView without 3D CSS) ──────────────
 export function FlatCardFallback({ card }) {
   return (
-    <div style={{ padding: 24, textAlign: 'center', background: 'var(--ssw-surface)',
-      borderRadius: 16, border: '1px solid var(--ssw-border)', minHeight: 180,
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+    <div
+      style={{
+        padding: 24,
+        textAlign: 'center',
+        background: 'var(--ssw-surface)',
+        borderRadius: 16,
+        border: '1px solid var(--ssw-border)',
+        minHeight: 180,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
       <div style={{ fontSize: 28, fontWeight: 700 }}>{card?.jp}</div>
       <div style={{ marginTop: 8, opacity: 0.7, fontSize: 15 }}>{card?.id_text}</div>
@@ -69,9 +85,15 @@ export default class ErrorBoundary extends Component {
           </div>
           <button
             onClick={() => this.setState({ error: null })}
-            style={{ fontFamily: 'inherit', padding: '10px 24px', borderRadius: 12,
-              background: 'var(--ssw-surface)', border: '1px solid var(--ssw-border)',
-              cursor: 'pointer', fontSize: 13 }}
+            style={{
+              fontFamily: 'inherit',
+              padding: '10px 24px',
+              borderRadius: 12,
+              background: 'var(--ssw-surface)',
+              border: '1px solid var(--ssw-border)',
+              cursor: 'pointer',
+              fontSize: 13,
+            }}
           >
             Coba lagi
           </button>

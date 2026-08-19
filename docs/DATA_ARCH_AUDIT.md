@@ -1,4 +1,5 @@
 # Data Architecture Audit — content-dq branch
+
 **Date:** 2026-05-12 | **Last commit:** `d2ca97d` | **Auditor:** READ ONLY, zero edits
 
 ---
@@ -6,6 +7,7 @@
 ## 1. CARD FILES
 
 ### 1A. `src/data/cards.js` — Exported (auto-generated, working consumer)
+
 - **Total:** 1,443 cards ✅ (header says 1443, matches actual count)
 - **No `_origIndex` field** — stripped correctly by merge script ✅
 
@@ -49,31 +51,33 @@ Cards are consistent with handoff state. No discrepancy on source counts.
 ---
 
 ### 1B. `src/data/source/` — Source files (edit targets on `main`)
-| File | Cards | Notes |
-|---|---|---|
-| `cards-common.js` | 879 | Double-quote strings (intentional, do not change) |
-| `cards-lifeline.js` | 564 | Double-quote strings (intentional) |
-| `cards-doboku.js` | 0 | Stub — 4 lines total |
-| `cards-kenchiku.js` | 0 | Stub — 4 lines total |
-| **TOTAL** | **1,443** | ✅ matches |
+
+| File                | Cards     | Notes                                             |
+| ------------------- | --------- | ------------------------------------------------- |
+| `cards-common.js`   | 879       | Double-quote strings (intentional, do not change) |
+| `cards-lifeline.js` | 564       | Double-quote strings (intentional)                |
+| `cards-doboku.js`   | 0         | Stub — 4 lines total                              |
+| `cards-kenchiku.js` | 0         | Stub — 4 lines total                              |
+| **TOTAL**           | **1,443** | ✅ matches                                        |
 
 ---
 
 ### 1C. `src/data/cards/` — Split card files (working source of truth on `content-dq`)
-| File | Cards | Source filter |
-|---|---|---|
-| `common/ch1.js` | 28 | jac-ch1 |
-| `common/ch2.js` | 75 | jac-ch2 |
-| `common/ch3.js` | 131 | jac-ch3 |
-| `common/ch4.js` | 140 | jac-ch4 |
-| `common/vocab-jac.js` | 67 | vocab-jac + jac-gakka1/2 |
-| `common/vocab-supplementary.js` | 247 | supplementary |
-| `lifeline/ch5.js` | 278 | jac-ch5 |
-| `lifeline/ch6.js` | 204 | jac-ch6 |
-| `lifeline/ch7.js` | 56 | jac-ch7 |
-| `lifeline/vocab-jac.js` | 42 | vocab-jac + jac-jitsugi1/2 |
-| `lifeline/vocab-supplementary.js` | 175 | supplementary |
-| **TOTAL** | **1,443** | ✅ |
+
+| File                              | Cards     | Source filter              |
+| --------------------------------- | --------- | -------------------------- |
+| `common/ch1.js`                   | 28        | jac-ch1                    |
+| `common/ch2.js`                   | 75        | jac-ch2                    |
+| `common/ch3.js`                   | 131       | jac-ch3                    |
+| `common/ch4.js`                   | 140       | jac-ch4                    |
+| `common/vocab-jac.js`             | 67        | vocab-jac + jac-gakka1/2   |
+| `common/vocab-supplementary.js`   | 247       | supplementary              |
+| `lifeline/ch5.js`                 | 278       | jac-ch5                    |
+| `lifeline/ch6.js`                 | 204       | jac-ch6                    |
+| `lifeline/ch7.js`                 | 56        | jac-ch7                    |
+| `lifeline/vocab-jac.js`           | 42        | vocab-jac + jac-jitsugi1/2 |
+| `lifeline/vocab-supplementary.js` | 175       | supplementary              |
+| **TOTAL**                         | **1,443** | ✅                         |
 
 All split files retain `_origIndex` (intentional — stripped at merge time) ✅
 
@@ -82,27 +86,29 @@ All split files retain `_origIndex` (intentional — stripped at merge time) ✅
 ## 2. QUESTION SETS (`src/data/sets/`)
 
 ### 2A. CSV Sets — `sets/csv/` (12 files, 300qs total)
-| File | Questions | Track |
-|---|---|---|
-| ct01.js | 30 | common |
-| ct02.js | 30 | common |
-| ct03.js | 30 | common |
-| ct04.js | 30 | common |
-| ct05.js | 30 | common |
-| ct06.js | 30 | common |
-| cp01.js | 20 | lifeline |
-| cp02.js | 20 | lifeline |
-| cp03.js | 20 | lifeline |
-| cp04.js | 20 | lifeline |
-| cp05.js | 20 | lifeline |
-| cp06.js | 20 | lifeline |
-| **TOTAL** | **300** | ct=common, cp=lifeline |
+
+| File      | Questions | Track                  |
+| --------- | --------- | ---------------------- |
+| ct01.js   | 30        | common                 |
+| ct02.js   | 30        | common                 |
+| ct03.js   | 30        | common                 |
+| ct04.js   | 30        | common                 |
+| ct05.js   | 30        | common                 |
+| ct06.js   | 30        | common                 |
+| cp01.js   | 20        | lifeline               |
+| cp02.js   | 20        | lifeline               |
+| cp03.js   | 20        | lifeline               |
+| cp04.js   | 20        | lifeline               |
+| cp05.js   | 20        | lifeline               |
+| cp06.js   | 20        | lifeline               |
+| **TOTAL** | **300**   | ct=common, cp=lifeline |
 
 Schema: unified (`q/hint/opts/opts_id/ans/img/exp`), double ruby fixed ✅, exp stubs replaced ✅
 
 ---
 
 ### 2B. Wayground Sets — `sets/wayground/` (26 files, 657qs total)
+
 **Teori (common):** `teori/` folder
 | File | Qs |
 |---|---|
@@ -137,11 +143,12 @@ All files use new ID taxonomy (wt/wgl/wglv/wtv) — old wg/wp IDs gone ✅
 ---
 
 ### 2C. JAC Sets — `sets/jac/` (2 files, 95qs)
-| File | Qs | Track |
-|---|---|---|
-| jac-teori.js | 65 | common |
-| jac-lifeline.js | 30 | lifeline |
-| **TOTAL** | **95** | ✅ |
+
+| File            | Qs     | Track    |
+| --------------- | ------ | -------- |
+| jac-teori.js    | 65     | common   |
+| jac-lifeline.js | 30     | lifeline |
+| **TOTAL**       | **95** | ✅       |
 
 Schema: unified (q/hint/opts/opts_id/ans/img/exp), `hasPhoto` removed → `img: null` ✅
 `related_card_id`: all 65 teori + 30 lifeline = 95/95 filled ✅
@@ -149,15 +156,16 @@ Schema: unified (q/hint/opts/opts_id/ans/img/exp), `hasPhoto` removed → `img: 
 ---
 
 ### 2D. Quiz Sets — `sets/quiz/` (6 files, 90qs)
-| File | Qs | Track |
-|---|---|---|
-| doboku-01.js | 15 | doboku |
-| doboku-02.js | 15 | doboku |
-| doboku-03.js | 15 | doboku |
-| kenchiku-01.js | 15 | kenchiku |
-| kenchiku-02.js | 15 | kenchiku |
-| kenchiku-03.js | 15 | kenchiku |
-| **TOTAL** | **90** | ✅ |
+
+| File           | Qs     | Track    |
+| -------------- | ------ | -------- |
+| doboku-01.js   | 15     | doboku   |
+| doboku-02.js   | 15     | doboku   |
+| doboku-03.js   | 15     | doboku   |
+| kenchiku-01.js | 15     | kenchiku |
+| kenchiku-02.js | 15     | kenchiku |
+| kenchiku-03.js | 15     | kenchiku |
+| **TOTAL**      | **90** | ✅       |
 
 Per-question `id: N` (1-indexed) present ✅, `track` field present ✅
 ⚠️ Content is AI-generated (no real JAC PDF) — treat as draft/placeholder.
@@ -178,6 +186,7 @@ Per-question `id: N` (1-indexed) present ✅, `track` field present ✅
 ## 3. STUDY AIDS (`src/data/`)
 
 ### 3A. `confusion-pairs.js`
+
 - **28 entries** — each identified by `type:` field
 - **Fields:** `type, label, termA, furiA, defA, termB, furiB, defB, tip, tip_id`
 - Ruby on `termA`/`termB`: ✅ done
@@ -186,6 +195,7 @@ Per-question `id: N` (1-indexed) present ✅, `track` field present ✅
 - **Missing `track` field** on all 28 — open, no task assigned (not a regression)
 
 ### 3B. `danger-pairs.js`
+
 - **20 entries** — each identified by `term:` field
 - **Fields:** `term, furi, confusionType, explanation, track, traps, correct`
 - Ruby on `term`: ✅ 17/20 (3 pure kana/romaji skipped, intentional)
@@ -193,6 +203,7 @@ Per-question `id: N` (1-indexed) present ✅, `track` field present ✅
 - `track`: ✅ all 20 present
 
 ### 3C. `angka-kunci.js`
+
 - **29 entries** (soal field count = 29 data entries; first entry also has soal in comment header, total grep shows 30 — the extra is the comment line, not a data issue)
 - **Fields:** `angka, konteks, track, kartu, mnemonic, soal`
 - `soal` ruby: ✅ done
@@ -203,37 +214,37 @@ Per-question `id: N` (1-indexed) present ✅, `track` field present ✅
 
 ## 4. MONOLITHIC vs SPLIT — SOURCE OF TRUTH
 
-| File | Status | Working copy |
-|---|---|---|
-| `src/data/cards.js` | ✅ Auto-generated, current | Generated from `source/` by merge script |
-| `src/data/cards/**/*.js` | ✅ **Working source of truth** (content-dq) | Edit these for DQ |
-| `src/data/source/cards-common.js` | ✅ Source (879 cards) | Edit on `main`, run merge |
-| `src/data/source/cards-lifeline.js` | ✅ Source (564 cards) | Edit on `main`, run merge |
-| `src/data/sets/csv/*.js` | ✅ **Working source of truth** | Split files, DQ complete |
-| `src/data/csv-sets.js` | ⚠️ **Legacy monolithic — DO NOT USE** | Still has old corruption; 300qs in old schema |
-| `src/data/sets/wayground/**/*.js` | ✅ **Working source of truth** | Renamed, reorganized (W1) |
-| `src/data/wayground-sets.js` | ⚠️ **Legacy monolithic — DO NOT USE** | Old IDs (wt1 not wt01), pre-W1 state |
-| `src/data/sets/quiz/*.js` | ✅ **Working source of truth** | DQ complete |
-| `src/data/quiz-sets.js` | ⚠️ **Legacy — imports monolithics, has inline DOBOKU/KENCHIKU_SETS** | Not updated for W1 |
-| `src/data/sets/jac/jac-teori.js` | ✅ **DQ working copy** | New schema |
-| `src/data/jac-teori.js` | ⚠️ **OLD SCHEMA** | Has `options:/answer:/hasPhoto:`, not `opts:/ans:/img:` |
-| `src/data/sets/jac/jac-lifeline.js` | ✅ **DQ working copy** | New schema |
-| `src/data/jac-lifeline.js` | ⚠️ **OLD SCHEMA** | Same issue as jac-teori |
-| `src/data/jac-official.js` | Shim — imports from top-level jac-*.js | Will need update at merge |
-| `src/data/jac-doboku.js` | Stub — `JAC_DOBOKU = []` | Blocked (no PDF) |
-| `src/data/jac-kenchiku.js` | Stub — `JAC_KENCHIKU = []` | Blocked (no PDF) |
+| File                                | Status                                                               | Working copy                                            |
+| ----------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------- |
+| `src/data/cards.js`                 | ✅ Auto-generated, current                                           | Generated from `source/` by merge script                |
+| `src/data/cards/**/*.js`            | ✅ **Working source of truth** (content-dq)                          | Edit these for DQ                                       |
+| `src/data/source/cards-common.js`   | ✅ Source (879 cards)                                                | Edit on `main`, run merge                               |
+| `src/data/source/cards-lifeline.js` | ✅ Source (564 cards)                                                | Edit on `main`, run merge                               |
+| `src/data/sets/csv/*.js`            | ✅ **Working source of truth**                                       | Split files, DQ complete                                |
+| `src/data/csv-sets.js`              | ⚠️ **Legacy monolithic — DO NOT USE**                                | Still has old corruption; 300qs in old schema           |
+| `src/data/sets/wayground/**/*.js`   | ✅ **Working source of truth**                                       | Renamed, reorganized (W1)                               |
+| `src/data/wayground-sets.js`        | ⚠️ **Legacy monolithic — DO NOT USE**                                | Old IDs (wt1 not wt01), pre-W1 state                    |
+| `src/data/sets/quiz/*.js`           | ✅ **Working source of truth**                                       | DQ complete                                             |
+| `src/data/quiz-sets.js`             | ⚠️ **Legacy — imports monolithics, has inline DOBOKU/KENCHIKU_SETS** | Not updated for W1                                      |
+| `src/data/sets/jac/jac-teori.js`    | ✅ **DQ working copy**                                               | New schema                                              |
+| `src/data/jac-teori.js`             | ⚠️ **OLD SCHEMA**                                                    | Has `options:/answer:/hasPhoto:`, not `opts:/ans:/img:` |
+| `src/data/sets/jac/jac-lifeline.js` | ✅ **DQ working copy**                                               | New schema                                              |
+| `src/data/jac-lifeline.js`          | ⚠️ **OLD SCHEMA**                                                    | Same issue as jac-teori                                 |
+| `src/data/jac-official.js`          | Shim — imports from top-level jac-\*.js                              | Will need update at merge                               |
+| `src/data/jac-doboku.js`            | Stub — `JAC_DOBOKU = []`                                             | Blocked (no PDF)                                        |
+| `src/data/jac-kenchiku.js`          | Stub — `JAC_KENCHIKU = []`                                           | Blocked (no PDF)                                        |
 
 ### ⚠️ NEW DISCREPANCY FOUND — Not in Handoff v16
 
 **`src/data/jac-teori.js` (top-level) vs `src/data/sets/jac/jac-teori.js` are NOT identical and use different schemas:**
 
-| Field | `sets/jac/jac-teori.js` (DQ copy) | `jac-teori.js` (top-level) |
-|---|---|---|
-| Question text | `q:` | `jp:` + `hiragana:` |
-| Hint | `hint:` | `id_text:` |
-| Options | `opts:` (array, separate) | `options:` (combined JP+ID strings) |
-| Answer | `ans:` | `answer:` |
-| Photo flag | `img: null` | `hasPhoto: false` |
+| Field         | `sets/jac/jac-teori.js` (DQ copy) | `jac-teori.js` (top-level)          |
+| ------------- | --------------------------------- | ----------------------------------- |
+| Question text | `q:`                              | `jp:` + `hiragana:`                 |
+| Hint          | `hint:`                           | `id_text:`                          |
+| Options       | `opts:` (array, separate)         | `options:` (combined JP+ID strings) |
+| Answer        | `ans:`                            | `answer:`                           |
+| Photo flag    | `img: null`                       | `hasPhoto: false`                   |
 
 **`index.js` imports FROM `jac-teori.js` (top-level) — the OLD SCHEMA version.**
 The DQ-migrated `sets/jac/jac-teori.js` is NOT wired into the export chain.
@@ -270,14 +281,14 @@ CATEGORIES etc.    ← categories.js ✅
 
 ## 6. DISCREPANCY SUMMARY
 
-| # | Item | Handoff Says | Actual | Severity |
-|---|---|---|---|---|
-| D1 | `sets/jac/jac-teori.js` not wired to app | (not documented) | Orphaned — old schema in production | **HIGH** |
-| D2 | `sets/jac/jac-lifeline.js` not wired to app | (not documented) | Same — DQ version not consumed | **HIGH** |
-| D3 | `jac-teori.js` (top-level) schema | Handoff says "schema migrated ✅" | Top-level still uses OLD schema (`options:`, `hasPhoto:`) | **HIGH** |
-| D4 | App consumes legacy monolithics | Handoff says split files = working source | split files not in export chain | **MEDIUM** (expected pre-merge) |
-| D5 | `angka-kunci` entry count | Handoff says 29 | 29 ✅ (soal comment line caused grep confusion) | None |
-| D6 | `wayground-sets.js` IDs | Handoff says "legacy, do not use" | wt1/wt2 (not wt01/wt02) IDs — confirms legacy | Expected |
+| #   | Item                                        | Handoff Says                              | Actual                                                    | Severity                        |
+| --- | ------------------------------------------- | ----------------------------------------- | --------------------------------------------------------- | ------------------------------- |
+| D1  | `sets/jac/jac-teori.js` not wired to app    | (not documented)                          | Orphaned — old schema in production                       | **HIGH**                        |
+| D2  | `sets/jac/jac-lifeline.js` not wired to app | (not documented)                          | Same — DQ version not consumed                            | **HIGH**                        |
+| D3  | `jac-teori.js` (top-level) schema           | Handoff says "schema migrated ✅"         | Top-level still uses OLD schema (`options:`, `hasPhoto:`) | **HIGH**                        |
+| D4  | App consumes legacy monolithics             | Handoff says split files = working source | split files not in export chain                           | **MEDIUM** (expected pre-merge) |
+| D5  | `angka-kunci` entry count                   | Handoff says 29                           | 29 ✅ (soal comment line caused grep confusion)           | None                            |
+| D6  | `wayground-sets.js` IDs                     | Handoff says "legacy, do not use"         | wt1/wt2 (not wt01/wt02) IDs — confirms legacy             | Expected                        |
 
 **D1/D2/D3 note:** Handoff v16 states P16 = "schema migrated ✅" for both jac files. This is true for `sets/jac/*.js` (the DQ working copies). But the top-level `jac-teori.js` and `jac-lifeline.js` — which are what `index.js` actually imports — still have the pre-migration schema. This was apparently an intentional design: DQ branch migrated the schema in the `sets/jac/` copies but did not overwrite the top-level files. **At main-merge time, the top-level files must be replaced with the DQ copies.**
 
@@ -294,4 +305,4 @@ CATEGORIES etc.    ← categories.js ✅
 
 ---
 
-*Audit complete — no files modified. All counts verified from actual file contents.*
+_Audit complete — no files modified. All counts verified from actual file contents._

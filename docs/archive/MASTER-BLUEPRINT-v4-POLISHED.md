@@ -26,7 +26,7 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 
 ## 🔍 Sonnet 4.6 Audit Notes (Pre-Blueprint)
 
-*(Unchanged from v4 — see MASTER-BLUEPRINT-v4.md §Audit Notes)*
+_(Unchanged from v4 — see MASTER-BLUEPRINT-v4.md §Audit Notes)_
 
 ---
 
@@ -46,6 +46,7 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 11. [Phase 17 — QA, SW Auto-bump, Release v4.0](#11-phase-17--qa-sw-auto-bump-release-v40)
 12. [Non-Goals (Explicitly Out of Scope)](#12-non-goals-explicitly-out-of-scope)
 13. [File-by-File Verdict (Verified)](#13-file-by-file-verdict-verified)
+
 - [Appendix A — Phase Summary Table](#appendix-a--phase-summary-table)
 - [Appendix B — Key Corpus Citations for SSW Konstruksi](#appendix-b--key-corpus-citations-for-ssw-konstruksi)
 
@@ -53,7 +54,7 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 
 ## 0. Research Foundation
 
-> *Why does SSW Konstruksi make the design choices it does? This section grounds each major decision in the Nugget Nihongo corpus (~743 peer-reviewed citations) and SECTION8-PWA-v3 (~145 citations).*
+> _Why does SSW Konstruksi make the design choices it does? This section grounds each major decision in the Nugget Nihongo corpus (~743 peer-reviewed citations) and SECTION8-PWA-v3 (~145 citations)._
 
 ### 0.1 — Why FSRS (not SM-2, not Leitner)
 
@@ -89,7 +90,7 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 
 **Design implication:** The Daily Mission (Phase 13) is designed as **need-supporting** gamification — it provides competence feedback (you studied X cards today) and autonomy (user can dismiss or choose a different mode). It does **not** punish non-completion, does not create scarcity, does not compare users socially. This is the correct design per corpus evidence.
 
-**Deci, Koestner & Ryan (1999)** meta-analysis (101 experiments): extrinsic rewards for interesting tasks undermine intrinsic motivation. The corpus is clear: the goal is to make the *activity itself* feel rewarding, not to layer external rewards on top.
+**Deci, Koestner & Ryan (1999)** meta-analysis (101 experiments): extrinsic rewards for interesting tasks undermine intrinsic motivation. The corpus is clear: the goal is to make the _activity itself_ feel rewarding, not to layer external rewards on top.
 
 ### 0.4 — Why Malu-Aware Design
 
@@ -119,12 +120,12 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 
 **Current strand mapping for SSW Konstruksi:**
 
-| Strand | Platform Feature | Status |
-|---|---|---|
-| Meaning-focused input | Example sentences in FlashcardMode back; JpDisplay | ✅ Present |
-| Meaning-focused output | ID→JP production format (planned), SprintMode | ⚠️ Partial |
-| Language-focused learning | SRS review, QuizMode, JACMode, WaygroundMode | ✅ Strong |
-| Fluency development | SprintMode (timed), DangerMode, SimulasiMode | ✅ Present |
+| Strand                    | Platform Feature                                   | Status     |
+| ------------------------- | -------------------------------------------------- | ---------- |
+| Meaning-focused input     | Example sentences in FlashcardMode back; JpDisplay | ✅ Present |
+| Meaning-focused output    | ID→JP production format (planned), SprintMode      | ⚠️ Partial |
+| Language-focused learning | SRS review, QuizMode, JACMode, WaygroundMode       | ✅ Strong  |
+| Fluency development       | SprintMode (timed), DangerMode, SimulasiMode       | ✅ Present |
 
 **Implication for Phase 13 (Daily Mission):** The mission engine should not always recommend the same strand. If a user has done QuizMode (language-focused) every day for a week, the mission should consider recommending FlashcardMode (meaning-focused input) or SprintMode (fluency) to maintain strand balance. Add `prog.sessions[].mode` tracking enables this.
 
@@ -132,54 +133,57 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 
 ## 1. Architecture Health — Actual State
 
-*(Unchanged from v4)*
+_(Unchanged from v4)_
 
 ### 1.1 Stack (verified)
 
-| Layer | Tech | Status |
-|---|---|---|
-| UI | React 19 + Vite 6 | ✅ |
-| SRS | ts-fsrs v5 (3-layer wrapper) | ✅ |
-| Storage | localStorage, 3-document model, v2 schema | ✅ |
-| Styling | CSS Modules (16 files) + theme.js tokens | ✅ |
-| Testing | Vitest 4.1.5 — 223 tests, 10 files | ✅ |
-| Lint | ESLint flat config v10 | ✅ |
-| CI/CD | GitHub Actions (ci.yml + deploy.yml) | ✅ |
-| PWA | Manual SW, CACHE_VERSION bump, cache-first/network-first | ✅ (manual bump = risk) |
+| Layer   | Tech                                                     | Status                  |
+| ------- | -------------------------------------------------------- | ----------------------- |
+| UI      | React 19 + Vite 6                                        | ✅                      |
+| SRS     | ts-fsrs v5 (3-layer wrapper)                             | ✅                      |
+| Storage | localStorage, 3-document model, v2 schema                | ✅                      |
+| Styling | CSS Modules (16 files) + theme.js tokens                 | ✅                      |
+| Testing | Vitest 4.1.5 — 223 tests, 10 files                       | ✅                      |
+| Lint    | ESLint flat config v10                                   | ✅                      |
+| CI/CD   | GitHub Actions (ci.yml + deploy.yml)                     | ✅                      |
+| PWA     | Manual SW, CACHE_VERSION bump, cache-first/network-first | ✅ (manual bump = risk) |
 
 ### 1.2 Dependency count: **3 prod** (react, react-dom, ts-fsrs) — target: keep ≤5
 
 ### 1.3 Actual Health Scorecard
 
-| Dimension | Score | Basis |
-|---|:---:|---|
-| Architecture | **A−** | 3-doc + 3-context + lazy modes = correct. Minus: Dashboard reads storage directly bypassing context; dead exports from Dashboard |
-| SRS Engine | **A** | Clean 3-layer separation (core/store/scheduler). Calibration hooks ready |
-| CSS / Styling | **B+** | 16 CSS modules. 487 justified inline remain. FLIP_STYLE injection = anti-pattern |
-| A11y | **B+** | 46 aria attrs, WCAG AA contrast. Missing: skip-nav, focus sentinel, keyboard-only path |
-| Performance | **A−** | Lazy modes + manual chunks. `csv-sets.js` (3998 lines) loaded per VocabMode lazy chunk — acceptable |
-| Offline / PWA | **A−** | Cache strategy correct. Manual `CACHE_VERSION` bump = stale cache risk |
-| Tests | **B+** | 223 tests, mostly unit + component. Missing: flow tests (onboarding→quiz→SRS write-back) |
-| DX | **A** | Clean scripts, ESLint, audit:integrity, bundle visualizer |
-| Content | **C+** | Lifeline track full. Sipil & Bangunan = stubs. User-facing gap |
-| Export/Import | **B−** | Two incompatible export paths. `ExportMode` uses raw format; `SayaTab` uses engine format |
-| Analytics | **D** | Streak + daily count exist. No time-on-card, no accuracy curve, no session metrics |
+| Dimension     | Score  | Basis                                                                                                                            |
+| ------------- | :----: | -------------------------------------------------------------------------------------------------------------------------------- |
+| Architecture  | **A−** | 3-doc + 3-context + lazy modes = correct. Minus: Dashboard reads storage directly bypassing context; dead exports from Dashboard |
+| SRS Engine    | **A**  | Clean 3-layer separation (core/store/scheduler). Calibration hooks ready                                                         |
+| CSS / Styling | **B+** | 16 CSS modules. 487 justified inline remain. FLIP_STYLE injection = anti-pattern                                                 |
+| A11y          | **B+** | 46 aria attrs, WCAG AA contrast. Missing: skip-nav, focus sentinel, keyboard-only path                                           |
+| Performance   | **A−** | Lazy modes + manual chunks. `csv-sets.js` (3998 lines) loaded per VocabMode lazy chunk — acceptable                              |
+| Offline / PWA | **A−** | Cache strategy correct. Manual `CACHE_VERSION` bump = stale cache risk                                                           |
+| Tests         | **B+** | 223 tests, mostly unit + component. Missing: flow tests (onboarding→quiz→SRS write-back)                                         |
+| DX            | **A**  | Clean scripts, ESLint, audit:integrity, bundle visualizer                                                                        |
+| Content       | **C+** | Lifeline track full. Sipil & Bangunan = stubs. User-facing gap                                                                   |
+| Export/Import | **B−** | Two incompatible export paths. `ExportMode` uses raw format; `SayaTab` uses engine format                                        |
+| Analytics     | **D**  | Streak + daily count exist. No time-on-card, no accuracy curve, no session metrics                                               |
 
 ---
 
 ## 2. Confirmed Bugs (Fix Before Phase 11)
 
 ### BUG-01 — Dashboard streak/count stale after quiz session
+
 **File:** `src/components/Dashboard.jsx` lines 66–68
 **Root cause:** `useMemo(() => getStreak(), [])` — empty deps. Reads storage once at mount. When user plays quiz and returns to Dashboard tab without unmounting, streak and dailyCount do not update.
 **Fix:** Dashboard should consume `streakData` and `dailyCount` from `ProgressContext` (already available), not read storage directly. Remove the 3 dead functions `recordStudyDay`, `incrementDailyCount`, `pushRecentCard` from Dashboard exports.
 
 ### BUG-02 — `_seenPool` module-scope hidden global state
+
 **File:** `src/modes/QuizMode.jsx` line 3
 **Root cause:** `const _seenPool = new Set()` at module level. Not reset on HMR. If user exits and re-enters QuizMode in same session without triggering `onExit`, pool carries over and distorts "unseen first" logic.
 **Fix:** Move to `useRef` inside the component, initialize to `new Set()`. Reset on `cards` prop change.
 
 ### BUG-03 — `_newKnownSize` reserved but unused, milestone toast incomplete
+
 **File:** `src/contexts/ProgressContext.jsx` line 63
 **Root cause:** `const _newKnownSize = knownSet.size; // reserved for milestone toast` — dead code. `milestoneQuiz70` is set via `setMilestoneQuiz70()` but no UI consumes it and no trigger fires for `milestoneStreak7` toast.
 **Fix:** Wire milestone toasts in `App.jsx` (check on `prog` change → fire `toast.show`) or remove dead milestone code entirely. Recommendation: keep data fields, add toast triggers in `App.jsx` using `useEffect` watching `prog.milestoneStreak7`.
@@ -189,27 +193,35 @@ All code-level specifications, bug fixes, and file verdicts are **unchanged** fr
 ## 3. Technical Debt Register
 
 ### TD-01 — ExportMode uses incompatible export format (HIGH)
+
 `ExportMode.jsx` calls custom `collectProgressData()` + `exportSRSSnapshot()` (raw localStorage keys). `SayaTab` calls `engine.exportAll()` (3-doc format). The two output schemas are different — a file from ExportMode cannot be reliably imported by SayaTab's `importAll()`. **ExportMode should be deleted and its UI merged into SayaTab.**
 
 ### TD-02 — Dead exports from Dashboard.jsx (MEDIUM)
+
 `recordStudyDay`, `incrementDailyCount`, `pushRecentCard` exported from `Dashboard.jsx` but `ProgressContext.handleMark` already handles all three. These exports are not imported anywhere. Remove them.
 
 ### TD-03 — wrong-tracker.js: `STORAGE_KEYS` references v1 key names (MEDIUM)
+
 `wrong-tracker.js` still exports `STORAGE_KEYS` with `'ssw-known'`, `'ssw-quiz-wrong'` etc. — v1 keys that no longer exist in v2 schema. Remove dead exports: `STORAGE_KEYS`, `loadFromStorage`, `saveToStorage`, `removeFromStorage`.
 
 ### TD-04 — `useStreak` naming ambiguity (LOW-MEDIUM)
+
 `useStreak` hook = correct-answer streak (in-session, not persisted). `streakData` in ProgressContext = study-day streak (persisted). Rename `useStreak` → `useAnswerStreak`.
 
 ### TD-05 — FLIP_STYLE injected to document.head (LOW)
+
 `FlashcardMode.jsx` injects a `<style>` tag at runtime on mount. Move to `global.css` under a scoped `.fc-scene` selector.
 
 ### TD-06 — SW CACHE_VERSION manual bump (MEDIUM)
+
 `public/sw.js` line 10: `const CACHE_VERSION = 'ssw-v2026-04-28'`. **Research grounding:** GSMA Intelligence (2023) documents variable connectivity for Indonesian users — stale cache directly blocks learning. Auto-bump via CI is a market-access fix, not just a DX nicety.
 
 ### TD-07 — `data/index.js` barrel re-export (LOW)
+
 Leave unless it causes circular import issues (it doesn't currently).
 
 ### TD-08 — Legacy arrays in `modes.js` (LOW)
+
 `BELAJAR_MODES`, `UJIAN_MODES`, `LAINNYA_MODES` — unused. Safe to remove after verification.
 
 ---
@@ -218,21 +230,23 @@ Leave unless it causes circular import issues (it doesn't currently).
 
 ### 4.1 North Star
 
-*From "polished SSW flashcard app" → "adaptive SSW learning platform that knows when you're weak and what to study next."*
+_From "polished SSW flashcard app" → "adaptive SSW learning platform that knows when you're weak and what to study next."_
 
 **Research grounding:** The corpus identifies three structural barriers for Indonesian SSW candidates studying Japanese:
+
 1. **Content gap** — general JLPT materials don't cover construction-specific vocabulary (Kamata & Tanaka 2021)
 2. **Motivation friction** — "what do I study today?" decision fatigue is a documented dropout cause in self-directed L2 learning (Ushioda 2011 — autonomy support; Ryan & Deci 2000 — SDT)
 3. **Progress invisibility** — learners cannot see their trajectory, leading to motivation collapse (Van Roy & Zaman 2018 — need for competence feedback)
 
 Three features directly address these barriers:
+
 1. **Phase 12** → Content completeness (Sipil & Bangunan)
 2. **Phase 13** → Daily Mission removes decision friction
 3. **Phase 13** → Session analytics + StatsMode extension makes progress visible
 
 ### 4.2 Hard Constraints (Non-Negotiable)
 
-- **No backend / cloud sync** — localStorage only. Export/import is the sync mechanism. *Research basis: malu-aware privacy design (§0.4)*
+- **No backend / cloud sync** — localStorage only. Export/import is the sync mechanism. _Research basis: malu-aware privacy design (§0.4)_
 - **No new prod dependencies** — stay at 3 prod deps (react, react-dom, ts-fsrs). New features use Web APIs.
 - **No breaking storage migration without versioned migration path** — `STORAGE_VERSION` bump to 3 must come with `migrate_v2_to_v3()` in `migrations.js`.
 - **All audio via Web Speech API only** — no audio file bundle (avoids 45MB+ asset overhead).
@@ -257,29 +271,35 @@ Three features directly address these barriers:
 **Test target:** 223 → ~250 tests
 
 ### 11.1 Fix BUG-01 (Dashboard stale data)
+
 - `Dashboard.jsx`: remove `useMemo([])` blocks for streak/dailyCount/recentCards
 - Import and consume `useProgress()` → destructure `streakData`, `dailyCount`, `recentCards`
 - Remove exported `recordStudyDay`, `incrementDailyCount`, `pushRecentCard` functions
 - Remove direct `storageGet`/`storageSet` from Dashboard entirely
 
-### 11.2 Fix BUG-02 (_seenPool)
+### 11.2 Fix BUG-02 (\_seenPool)
+
 - `QuizMode.jsx`: move `_seenPool` to `useRef(new Set())` inside component
 - Add `useEffect(() => { seenPool.current.clear(); }, [cards])` to reset on card set change
 
 ### 11.3 Fix BUG-03 (milestone toast)
+
 - `App.jsx`: add `useEffect` watching `prog` — when `milestoneStreak7` transitions false→true, fire `toast.show('🔥 7 hari streak!')`. Same for milestoneQuiz70.
 - Remove `_newKnownSize` dead variable from ProgressContext
 
 ### 11.4 Consolidate wrong-tracker (TD-01, TD-03)
+
 - Delete `ExportMode.jsx` — its functionality already exists better in `SayaTab`
 - Remove `src/modes/ekspor` from `MODE_COMPONENTS` and `MODE_META` in `modes.js`
 - Remove dead exports from `wrong-tracker.js`: `STORAGE_KEYS`, `loadFromStorage`, `saveToStorage`, `removeFromStorage`
 - Keep: `getWrongCount`, `getWrongTime`, `makeWrongEntry`
 
 ### 11.5 Remove dead Dashboard exports (TD-02)
+
 Already covered by 11.1.
 
 ### 11.6 STORAGE_VERSION 2 → 3 (schema hardening)
+
 - Add `examDate: null` to `DEFAULTS.prefs` (needed for Phase 16)
 - Add `dailyMission: null` to `DEFAULTS.progress` (needed for Phase 13)
 - Add `sessions: []` to `DEFAULTS.progress` (needed for Phase 13 analytics)
@@ -288,18 +308,21 @@ Already covered by 11.1.
 - Update `init()` in `engine.js` to handle v2→v3 migration path
 
 ### 11.7 Rename useStreak → useAnswerStreak (TD-04)
+
 - Rename `src/hooks/useStreak.js` → `src/hooks/useAnswerStreak.js`
 - Update all imports (QuizShell, hooks/index.js)
 - Export as `useAnswerStreak`
 
 ### 11.8 Remove legacy nav arrays (TD-08)
+
 - Grep confirms `BELAJAR_MODES`, `UJIAN_MODES`, `LAINNYA_MODES` are unused
 - Remove from `modes.js`
 
 ### 11.9 Tests to add
+
 - `migrations.v2-to-v3.test.js` — verify all v2 fields survive, new fields initialized
 - `dashboard.staleness.test.jsx` — mount Dashboard, trigger handleMark via context, verify re-render
-- `quiz.seenpool.test.jsx` — verify _seenPool resets on cards prop change
+- `quiz.seenpool.test.jsx` — verify \_seenPool resets on cards prop change
 
 ---
 
@@ -312,15 +335,18 @@ Already covered by 11.1.
 ### 12.1 Content strategy
 
 JAC Official has 95 questions across 4 sets (st1, st2, tt1, tt2). Most are 設備/lifeline-focused. For Sipil and Bangunan, content must come from:
+
 - Filtering JAC `実技` questions relevant to 土木/建築 domains
 - A new `src/data/sipil-sets.js` using the same question schema as `wayground-sets.js`
 - A new `src/data/bangunan-sets.js` with the same schema
 
 **Domain vocabulary guidance (from corpus §VS):**
+
 - 土木 (Sipil/Civil engineering): 掘削, 土留め, 切梁, 法面, 盛土, 転圧, 舗装, 排水, 測量, 地盤改良
 - 建築 (Bangunan/Building construction): 基礎, 躯体, 型枠, 鉄筋, コンクリート, 防水, 断熱, 仕上げ, 内装, 外壁
 
 **Schema reference** (from `wayground-sets.js`):
+
 ```js
 {
   id: 'wt1', title: 'Set Title', emoji: '📝', color: '#f97316',
@@ -332,21 +358,26 @@ JAC Official has 95 questions across 4 sets (st1, st2, tt1, tt2). Most are 設�
 ```
 
 ### 12.2 SipilMode.jsx — full replacement
+
 Replace stub with `WaygroundMode`-style implementation:
+
 - Reads from `sipil-sets.js`
 - Full quiz flow using `QuizShell`
 - Score persistence to `progress.sipilScores` (add to schema in Phase 11)
 
 ### 12.3 BangunanMode.jsx — full replacement
+
 Same pattern as SipilMode, reads `bangunan-sets.js`.
 
 ### 12.4 Update MODE_META
+
 ```js
 sipil:    { icon: '⛏️', label: 'Sipil · 土木',    desc: 'Soal teknis 土木施工' },
 bangunan: { icon: '🏗️', label: 'Bangunan · 建築',  desc: 'Soal teknis 建築施工' },
 ```
 
 ### 12.5 Tests to add
+
 - `data.sipil.test.js` — verify schema, answer indices in range, no empty questions
 - `data.bangunan.test.js` — same
 
@@ -356,6 +387,7 @@ bangunan: { icon: '🏗️', label: 'Bangunan · 建築',  desc: 'Soal teknis �
 
 **Goal:** User never has to think "what do I open today?" — the app tells them.
 **Research grounding:**
+
 - **SDT (Ryan & Deci 2000):** Autonomy-supportive design — the mission provides a recommendation, not a mandate. User can dismiss or choose differently. This satisfies the autonomy need while reducing decision fatigue.
 - **Nation (2007) — Four Strands:** Mission engine should rotate across strands to maintain balance. If user has done only language-focused learning (quiz/SRS) for 3+ sessions, mission should recommend meaning-focused input (flashcard reading) or fluency (sprint).
 - **Nicholson (2015) — Meaningful Gamification:** Mission counts, streaks, and completion indicators must connect directly to the user's stated goal (exam preparation). A "5 cards due" prompt is meaningful because it directly reduces the user's SRS debt. An arbitrary "earn 100 gems" prompt is not.
@@ -379,13 +411,14 @@ export function generateDailyMission(prog, srsStats, prefs) {
 ```
 
 **Strand balance check (addition from corpus §0.6):**
+
 ```js
 function detectStrandImbalance(sessions) {
   const recent = sessions.slice(-3);
   if (recent.length < 3) return null;
-  const modes = recent.map(s => s.mode);
+  const modes = recent.map((s) => s.mode);
   const quizModes = ['kuis', 'jac', 'wayground', 'sipil', 'bangunan'];
-  const allQuiz = modes.every(m => quizModes.includes(m));
+  const allQuiz = modes.every((m) => quizModes.includes(m));
   if (allQuiz) return 'kartu'; // suggest flashcard (meaning-focused input)
   return null;
 }
@@ -412,9 +445,9 @@ Location: `Dashboard.jsx` — replace the static "quick action" CTA with a dynam
 ```js
 // Schema (added to progress doc in Phase 11):
 sessions: [
-  { date: '2026-05-01', mode: 'kuis', correct: 8, total: 10, durationMs: 142000 }
+  { date: '2026-05-01', mode: 'kuis', correct: 8, total: 10, durationMs: 142000 },
   // max 90 entries (3 months), FIFO eviction
-]
+];
 ```
 
 `QuizShell` already has `onFinish({ correct, total })`. Add `startTime` ref on mount, compute `durationMs = Date.now() - startTime` in `onFinish`, pass back.
@@ -422,6 +455,7 @@ sessions: [
 ### 13.4 StatsMode extension
 
 Add session accuracy chart (last 14 days, bar chart):
+
 - X axis: date
 - Y axis: % correct
 - Rendered as pure HTML/CSS bars (no chart library — stay zero-dep)
@@ -434,6 +468,7 @@ Add session accuracy chart (last 14 days, bar chart):
 - No upload, no network. Purely for "show me my retention curve" in StatsMode v2
 
 ### 13.6 Tests to add
+
 - `daily-mission.test.js` — all 5 priority branches including strand imbalance
 - `session-tracking.test.js` — verify session written on quiz finish, max 90 eviction
 
@@ -451,11 +486,13 @@ Already handled. This phase focuses on making SayaTab's export/import excellent.
 ### 14.2 Export UI improvements in SayaTab
 
 **Export:**
+
 - Show data summary before download: "Ekspor berisi: X kartu hafal, Y kartu SRS, Z sesi"
 - File name includes version: `ssw-progress-v3-2026-05-01.json`
 - Toast confirms with summary
 
 **Import:**
+
 - Show diff before applying: "File ini berisi X kartu hafal (kamu saat ini: Y). Lanjutkan?"
 - Version check: if `snapshot._storage_version < STORAGE_VERSION`, run migration before import
 - Validate schema before applying (already throws on missing docs, add field validation)
@@ -473,6 +510,7 @@ export function validateSnapshot(snapshot) {
 ```
 
 ### 14.4 Tests to add
+
 - `import.validation.test.js` — valid snapshot, missing docs, wrong types, old version
 - `import.rollback.test.js` — verify state unchanged after failed import
 
@@ -500,17 +538,35 @@ src/modes/FlashcardMode/
 Move `FLIP_STYLE` constant to `src/styles/global.css`:
 
 ```css
-.fc-scene { perspective: 1200px; }
+.fc-scene {
+  perspective: 1200px;
+}
 .fc-card {
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
-.fc-card.is-flipped { transform: rotateY(180deg); }
-.fc-face { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-.fc-face--back { transform: rotateY(180deg); }
-@keyframes fcHintFade { 0%, 70% { opacity: 1; } 100% { opacity: 0; pointer-events: none; } }
+.fc-card.is-flipped {
+  transform: rotateY(180deg);
+}
+.fc-face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.fc-face--back {
+  transform: rotateY(180deg);
+}
+@keyframes fcHintFade {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
 ```
 
 Remove `ensureStyle()` and `FLIP_STYLE` from `FlashcardMode/index.jsx`.
@@ -518,6 +574,7 @@ Remove `ensureStyle()` and `FLIP_STYLE` from `FlashcardMode/index.jsx`.
 Note: tilt transform on card (`rotateY + translateX + rotate`) stays inline — it's runtime-computed from `swipeDelta`.
 
 ### 15.3 Tests to add
+
 - `flashcard.flip.test.jsx` — card flips on tap/space, FSRS rating row appears after flip
 - `flashcard.filter.test.jsx` — search filters correctly, star filter shows only starred
 
@@ -528,10 +585,12 @@ Note: tilt transform on card (`rotateY + translateX + rotate`) stays inline — 
 **Goal:** User can set exam date → app shows days remaining + adjusts Daily Mission urgency. Audio via Web Speech API for JP terms.
 
 **Research grounding (exam countdown):**
+
 - SSW construction exam (特定技能評価試験 建設分野) has fixed date windows published by JAC (一般社団法人建設技能人材機構). Indonesian candidates must pass within a specific registration window. A countdown to their specific exam date — not a generic "daily goal" — directly connects practice to real exam stakes.
 - **Urgency multiplier < 14 days:** Based on spaced repetition theory (Bahrick et al. 1993 — spacing effect), the last 2 weeks before an exam are the highest-leverage review window. Daily Mission urgency escalation reflects this scientifically.
 
 **Research grounding (audio):**
+
 - **Oral practice and phonological recoding:** The corpus §8 (MALL cluster) documents that pronunciation feedback is a documented gap in text-only vocabulary apps. Haristiani & Rifa'I (2020) — Indonesian learners specifically cite inability to practice pronunciation as a barrier.
 - **Web Speech API feasibility:** Available in Chrome 33+, Safari 14.5+, Firefox 49+. Indonesian Android (88.7% of market) = Chrome-dominant. `ja-JP` voice available on all modern Android devices. No external dependency, no bundle cost.
 - **Malu-aware audio:** Audio is opt-in, private (device speaker or headphones). No recording of user voice in v4 (speaking practice deferred — would require recording + evaluation, which has privacy implications).
@@ -541,6 +600,7 @@ Note: tilt transform on card (`rotateY + translateX + rotate`) stays inline — 
 **Storage:** `prefs.examDate: null` (added in Phase 11 schema v3)
 
 **UI location:** `SayaTab.jsx` — new "Ujian" section:
+
 ```
 ┌──────────────────────────────────────┐
 │ 🎯 Target Ujian                       │
@@ -559,9 +619,12 @@ Note: tilt transform on card (`rotateY + translateX + rotate`) stays inline — 
 ### 16.2 Audio — Web Speech API (hybrid)
 
 **Implementation:** `src/utils/speak.js`
+
 ```js
 let _synth = null;
-function getSynth() { return _synth ??= window.speechSynthesis; }
+function getSynth() {
+  return (_synth ??= window.speechSynthesis);
+}
 
 export function speakJP(text, { rate = 0.8, pitch = 1.0 } = {}) {
   if (!window.speechSynthesis) return;
@@ -579,6 +642,7 @@ export function canSpeak() {
 ```
 
 **UI integration:**
+
 - `FlashcardMode` front face: 🔊 button next to JP term (appears only if `canSpeak()`)
 - `ReviewMode` card front: same
 - `JpDisplay.jsx`: optional `onSpeak` prop → shows 🔊 icon
@@ -586,6 +650,7 @@ export function canSpeak() {
 **Prefs:** `prefs.audioEnabled: true` — toggle in SayaTab settings
 
 ### 16.3 Tests to add
+
 - `exam-countdown.test.js` — daysLeft calculation, urgency multiplier at <14 days
 - `speak.test.js` — canSpeak() returns false in jsdom; speakJP no-ops gracefully
 
@@ -598,6 +663,7 @@ export function canSpeak() {
 ### 17.1 SW CACHE_VERSION auto-bump (TD-06)
 
 In `deploy.yml`, before building:
+
 ```yaml
 - name: Bump SW cache version
   run: |
@@ -610,6 +676,7 @@ In `deploy.yml`, before building:
 ### 17.2 Coverage thresholds
 
 Add to `vitest.config.js`:
+
 ```js
 coverage: {
   provider: 'v8',
@@ -620,12 +687,14 @@ coverage: {
 ### 17.3 Flow tests (integration)
 
 Tests that span multiple components/contexts:
+
 - `flow.onboarding.test.jsx` — full onboarding 4 steps → completeOnboarding called with correct payload
 - `flow.quiz-srs.test.jsx` — start quiz → answer wrong → SRS card written → progress.quizWrong updated
 - `flow.flashcard-star.test.jsx` — star card → exit mode → re-enter → card still starred
 - `flow.export-import.test.js` — exportAll → importAll → verify all 3 docs match
 
 ### 17.4 Release checklist
+
 - [ ] All Phase 11–16 tests passing (target: ~350 tests)
 - [ ] Lint: 0 errors, 0 warnings
 - [ ] Build: clean, bundle visualizer reviewed (no chunk > 200KB gzip)
@@ -639,226 +708,232 @@ Tests that span multiple components/contexts:
 
 ## 12. Non-Goals (Explicitly Out of Scope)
 
-| Feature | Decision | Research basis | Revisit |
-|---|---|---|---|
-| Cloud sync / backend | ❌ Out. localStorage + export/import only | Malu-aware privacy design (Markus & Kitayama 1991) | v5 |
-| i18n extraction | ❌ Out. ID strings hardcoded | Single-language app, overhead not justified | v5 |
-| LLM Coach | ❌ Out. Offline-first constraint | Zero-latency, fully offline requirement | v5 |
-| Pre-baked audio files | ❌ Out. Web Speech API sufficient | Web Speech covers 88.7% Android market; bundle cost unjustified | v5 |
-| Leaderboard / social | ❌ Out. No backend | Mekler et al. (2017) — leaderboards harm intrinsic motivation | Never unless requirements change |
-| Playwright / E2E | ❌ Out. Manual QA covers device-specific behavior | — | v5 |
-| New prod dependencies | ❌ Hard constraint. Max 3 prod deps | — | — |
-| `vitest/ui` dev dep | ✅ Fine to add as dev dep only | — | Phase 17 |
-| Speaking practice (recording) | ❌ Out. Privacy implications | Malu/face-concern; requires user voice data | v5 |
+| Feature                       | Decision                                          | Research basis                                                  | Revisit                          |
+| ----------------------------- | ------------------------------------------------- | --------------------------------------------------------------- | -------------------------------- |
+| Cloud sync / backend          | ❌ Out. localStorage + export/import only         | Malu-aware privacy design (Markus & Kitayama 1991)              | v5                               |
+| i18n extraction               | ❌ Out. ID strings hardcoded                      | Single-language app, overhead not justified                     | v5                               |
+| LLM Coach                     | ❌ Out. Offline-first constraint                  | Zero-latency, fully offline requirement                         | v5                               |
+| Pre-baked audio files         | ❌ Out. Web Speech API sufficient                 | Web Speech covers 88.7% Android market; bundle cost unjustified | v5                               |
+| Leaderboard / social          | ❌ Out. No backend                                | Mekler et al. (2017) — leaderboards harm intrinsic motivation   | Never unless requirements change |
+| Playwright / E2E              | ❌ Out. Manual QA covers device-specific behavior | —                                                               | v5                               |
+| New prod dependencies         | ❌ Hard constraint. Max 3 prod deps               | —                                                               | —                                |
+| `vitest/ui` dev dep           | ✅ Fine to add as dev dep only                    | —                                                               | Phase 17                         |
+| Speaking practice (recording) | ❌ Out. Privacy implications                      | Malu/face-concern; requires user voice data                     | v5                               |
 
 ---
 
 ## 13. File-by-File Verdict (Verified)
 
-*(Unchanged from v4 — all line counts and verdicts from direct source read on 2026-05-01.)*
+_(Unchanged from v4 — all line counts and verdicts from direct source read on 2026-05-01.)_
 
 ### Root & Config
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `package.json` | — | ✅ lean, 3 prod deps | 17: add vitest coverage |
-| `vite.config.js` | — | ✅ manual chunks correct | — |
-| `eslint.config.js` | — | ✅ flat config v10 | — |
-| `vitest.config.js` | — | ✅ | 17: add coverage thresholds |
-| `public/sw.js` | — | ⚠️ CACHE_VERSION manual | 17: auto-bump via CI |
-| `CHANGELOG.md` | — | ✅ | — |
-| `_MAP.md` | — | ✅ excellent agent doc | Update each phase |
+| File               | LOC | Verdict                  | Phase                       |
+| ------------------ | --- | ------------------------ | --------------------------- |
+| `package.json`     | —   | ✅ lean, 3 prod deps     | 17: add vitest coverage     |
+| `vite.config.js`   | —   | ✅ manual chunks correct | —                           |
+| `eslint.config.js` | —   | ✅ flat config v10       | —                           |
+| `vitest.config.js` | —   | ✅                       | 17: add coverage thresholds |
+| `public/sw.js`     | —   | ⚠️ CACHE_VERSION manual  | 17: auto-bump via CI        |
+| `CHANGELOG.md`     | —   | ✅                       | —                           |
+| `_MAP.md`          | —   | ✅ excellent agent doc   | Update each phase           |
 
 ### `src/storage/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `engine.js` | 156 | ✅ solid, clean API | 11: add v2→v3 migration path |
-| `schema.js` | 45 | ✅ | 11: STORAGE_VERSION 3, add examDate/dailyMission/sessions |
-| `migrations.js` | 143 | ✅ v1→v2 working | 11: add migrate_v2_to_v3() |
+| File            | LOC | Verdict             | Phase                                                     |
+| --------------- | --- | ------------------- | --------------------------------------------------------- |
+| `engine.js`     | 156 | ✅ solid, clean API | 11: add v2→v3 migration path                              |
+| `schema.js`     | 45  | ✅                  | 11: STORAGE_VERSION 3, add examDate/dailyMission/sessions |
+| `migrations.js` | 143 | ✅ v1→v2 working    | 11: add migrate_v2_to_v3()                                |
 
 ### `src/contexts/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `AppContext.jsx` | 111 | ✅ | — |
-| `ProgressContext.jsx` | 161 | ⚠️ _newKnownSize dead var | 11: remove, wire milestones |
-| `SRSContext.jsx` | 32 | ✅ thin, correct | — |
+| File                  | LOC | Verdict                    | Phase                       |
+| --------------------- | --- | -------------------------- | --------------------------- |
+| `AppContext.jsx`      | 111 | ✅                         | —                           |
+| `ProgressContext.jsx` | 161 | ⚠️ \_newKnownSize dead var | 11: remove, wire milestones |
+| `SRSContext.jsx`      | 32  | ✅ thin, correct           | —                           |
 
 ### `src/srs/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `fsrs-core.js` | 204 | ✅ clean, calibration hook comments present | 13: no change needed |
-| `fsrs-store.js` | 57 | ✅ thin wrapper | — |
-| `fsrs-scheduler.js` | 149 | ✅ | 13: add getOverdueRatio() for Daily Mission |
-| `index.js` | 38 | ✅ barrel | — |
+| File                | LOC | Verdict                                     | Phase                                       |
+| ------------------- | --- | ------------------------------------------- | ------------------------------------------- |
+| `fsrs-core.js`      | 204 | ✅ clean, calibration hook comments present | 13: no change needed                        |
+| `fsrs-store.js`     | 57  | ✅ thin wrapper                             | —                                           |
+| `fsrs-scheduler.js` | 149 | ✅                                          | 13: add getOverdueRatio() for Daily Mission |
+| `index.js`          | 38  | ✅ barrel                                   | —                                           |
 
 ### `src/hooks/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `useStreak.js` | 35 | ⚠️ naming ambiguity | 11: rename → useAnswerStreak |
-| `useSRS.js` | 55 | ✅ | — |
-| `usePersistedState.js` | 26 | ⚠️ legacy, bypasses engine | Deprecate after Phase 11 confirms nothing uses it for new fields |
-| `useQuizKeyboard.js` | 45 | ✅ | — |
+| File                   | LOC | Verdict                    | Phase                                                            |
+| ---------------------- | --- | -------------------------- | ---------------------------------------------------------------- |
+| `useStreak.js`         | 35  | ⚠️ naming ambiguity        | 11: rename → useAnswerStreak                                     |
+| `useSRS.js`            | 55  | ✅                         | —                                                                |
+| `usePersistedState.js` | 26  | ⚠️ legacy, bypasses engine | Deprecate after Phase 11 confirms nothing uses it for new fields |
+| `useQuizKeyboard.js`   | 45  | ✅                         | —                                                                |
 
 ### `src/utils/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `quiz-generator.js` | 50 | ✅ | — |
-| `jp-helpers.js` | 66 | ✅ | — |
-| `wrong-tracker.js` | 55 | ⚠️ dead exports | 11: remove dead exports |
-| `shuffle.js` | 9 | ✅ | — |
-| `speak.js` | — | 🆕 new file | 16: create |
-| `daily-mission.js` | — | 🆕 new file | 13: create |
+| File                | LOC | Verdict         | Phase                   |
+| ------------------- | --- | --------------- | ----------------------- |
+| `quiz-generator.js` | 50  | ✅              | —                       |
+| `jp-helpers.js`     | 66  | ✅              | —                       |
+| `wrong-tracker.js`  | 55  | ⚠️ dead exports | 11: remove dead exports |
+| `shuffle.js`        | 9   | ✅              | —                       |
+| `speak.js`          | —   | 🆕 new file     | 16: create              |
+| `daily-mission.js`  | —   | 🆕 new file     | 13: create              |
 
 ### `src/components/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `Dashboard.jsx` | 165 | 🔴 useMemo([]) BUG-01, dead exports | 11 |
-| `BelajarTab.jsx` | 60 | ✅ | — |
-| `SayaTab.jsx` | 169 | ⚠️ import handler — verify complete | 14: export/import UI + 16: exam countdown |
-| `Onboarding.jsx` | 310 | ✅ 4-step, complete | — |
-| `QuizShell.jsx` | 171 | ✅ | 13: add startTime for session tracking |
-| `ResultScreen.jsx` | 94 | ✅ | — |
-| `OptionButton.jsx` | 32 | ✅ | — |
-| `ProgressBar.jsx` | 30 | ✅ aria added | — |
-| `ProgressRing.jsx` | 55 | ✅ aria-hidden | — |
-| `JpDisplay.jsx` | 207 | ✅ | 16: add onSpeak prop |
-| `FilterPopup.jsx` | 140 | ✅ | — |
-| `EmptyState.jsx` | 92 | ✅ | — |
-| `ConfirmDialog.jsx` | 49 | ✅ | — |
-| `Toast.jsx` | 68 | ✅ | — |
-| `Skeleton.jsx` | 72 | ✅ | — |
-| `TrackPicker.jsx` | 114 | ✅ | — |
+| File                | LOC | Verdict                             | Phase                                     |
+| ------------------- | --- | ----------------------------------- | ----------------------------------------- |
+| `Dashboard.jsx`     | 165 | 🔴 useMemo([]) BUG-01, dead exports | 11                                        |
+| `BelajarTab.jsx`    | 60  | ✅                                  | —                                         |
+| `SayaTab.jsx`       | 169 | ⚠️ import handler — verify complete | 14: export/import UI + 16: exam countdown |
+| `Onboarding.jsx`    | 310 | ✅ 4-step, complete                 | —                                         |
+| `QuizShell.jsx`     | 171 | ✅                                  | 13: add startTime for session tracking    |
+| `ResultScreen.jsx`  | 94  | ✅                                  | —                                         |
+| `OptionButton.jsx`  | 32  | ✅                                  | —                                         |
+| `ProgressBar.jsx`   | 30  | ✅ aria added                       | —                                         |
+| `ProgressRing.jsx`  | 55  | ✅ aria-hidden                      | —                                         |
+| `JpDisplay.jsx`     | 207 | ✅                                  | 16: add onSpeak prop                      |
+| `FilterPopup.jsx`   | 140 | ✅                                  | —                                         |
+| `EmptyState.jsx`    | 92  | ✅                                  | —                                         |
+| `ConfirmDialog.jsx` | 49  | ✅                                  | —                                         |
+| `Toast.jsx`         | 68  | ✅                                  | —                                         |
+| `Skeleton.jsx`      | 72  | ✅                                  | —                                         |
+| `TrackPicker.jsx`   | 114 | ✅                                  | —                                         |
 
 ### `src/modes/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `FlashcardMode.jsx` | 447 | ⚠️ FLIP_STYLE injection, large | 15: decompose |
-| `ReviewMode.jsx` | 190 | ✅ | — |
-| `QuizMode.jsx` | 161 | 🔴 BUG-02 _seenPool | 11 |
-| `JACMode.jsx` | 116 | ✅ | — |
-| `WaygroundMode.jsx` | 123 | ✅ | — |
-| `VocabMode.jsx` | 133 | ✅ | — |
-| `SimulasiMode.jsx` | 192 | ✅ | — |
-| `AngkaMode.jsx` | 225 | ⚠️ panel+quiz in one file | Consider split in Phase 15 |
-| `DangerMode.jsx` | 215 | ⚠️ same pattern | Consider split in Phase 15 |
-| `SprintMode.jsx` | 104 | ✅ | — |
-| `FocusMode.jsx` | 78 | ✅ | 13: use session data for better weakness detection |
-| `StatsMode.jsx` | 95 | ⚠️ extend | 13: session accuracy chart + strand breakdown |
-| `SearchMode.jsx` | 84 | ✅ | — |
-| `GlossaryMode.jsx` | 138 | ✅ | — |
-| `SumberMode.jsx` | 69 | ✅ | — |
-| `ExportMode.jsx` | 149 | 🔴 delete — duplicate + incompatible format | 11 |
-| `SipilMode.jsx` | 68 | 🔴 stub | 12 |
-| `BangunanMode.jsx` | 70 | 🔴 stub | 12 |
+| File                | LOC | Verdict                                     | Phase                                              |
+| ------------------- | --- | ------------------------------------------- | -------------------------------------------------- |
+| `FlashcardMode.jsx` | 447 | ⚠️ FLIP_STYLE injection, large              | 15: decompose                                      |
+| `ReviewMode.jsx`    | 190 | ✅                                          | —                                                  |
+| `QuizMode.jsx`      | 161 | 🔴 BUG-02 \_seenPool                        | 11                                                 |
+| `JACMode.jsx`       | 116 | ✅                                          | —                                                  |
+| `WaygroundMode.jsx` | 123 | ✅                                          | —                                                  |
+| `VocabMode.jsx`     | 133 | ✅                                          | —                                                  |
+| `SimulasiMode.jsx`  | 192 | ✅                                          | —                                                  |
+| `AngkaMode.jsx`     | 225 | ⚠️ panel+quiz in one file                   | Consider split in Phase 15                         |
+| `DangerMode.jsx`    | 215 | ⚠️ same pattern                             | Consider split in Phase 15                         |
+| `SprintMode.jsx`    | 104 | ✅                                          | —                                                  |
+| `FocusMode.jsx`     | 78  | ✅                                          | 13: use session data for better weakness detection |
+| `StatsMode.jsx`     | 95  | ⚠️ extend                                   | 13: session accuracy chart + strand breakdown      |
+| `SearchMode.jsx`    | 84  | ✅                                          | —                                                  |
+| `GlossaryMode.jsx`  | 138 | ✅                                          | —                                                  |
+| `SumberMode.jsx`    | 69  | ✅                                          | —                                                  |
+| `ExportMode.jsx`    | 149 | 🔴 delete — duplicate + incompatible format | 11                                                 |
+| `SipilMode.jsx`     | 68  | 🔴 stub                                     | 12                                                 |
+| `BangunanMode.jsx`  | 70  | 🔴 stub                                     | 12                                                 |
 
 ### `src/data/`
 
-| File | LOC | Verdict | Phase |
-|---|---|---|---|
-| `cards.js` | 1599 | ✅ | — |
-| `categories.js` | 143 | ✅ | — |
-| `jac-official.js` | 975 | ✅ 95 questions, 4 sets | 12: use as base for Sipil/Bangunan |
-| `wayground-sets.js` | 860 | ✅ | — |
-| `csv-sets.js` | 3998 | ✅ loaded per lazy chunk | — |
-| `angka-kunci.js` | 40 | ✅ | — |
-| `danger-pairs.js` | 152 | ✅ | — |
-| `index.js` | 31 | ✅ barrel | — |
-| `sipil-sets.js` | — | 🆕 new file | 12: create |
-| `bangunan-sets.js` | — | 🆕 new file | 12: create |
+| File                | LOC  | Verdict                  | Phase                              |
+| ------------------- | ---- | ------------------------ | ---------------------------------- |
+| `cards.js`          | 1599 | ✅                       | —                                  |
+| `categories.js`     | 143  | ✅                       | —                                  |
+| `jac-official.js`   | 975  | ✅ 95 questions, 4 sets  | 12: use as base for Sipil/Bangunan |
+| `wayground-sets.js` | 860  | ✅                       | —                                  |
+| `csv-sets.js`       | 3998 | ✅ loaded per lazy chunk | —                                  |
+| `angka-kunci.js`    | 40   | ✅                       | —                                  |
+| `danger-pairs.js`   | 152  | ✅                       | —                                  |
+| `index.js`          | 31   | ✅ barrel                | —                                  |
+| `sipil-sets.js`     | —    | 🆕 new file              | 12: create                         |
+| `bangunan-sets.js`  | —    | 🆕 new file              | 12: create                         |
 
 ### `src/tests/` (223 tests, 10 files)
 
-| File | Verdict |
-|---|---|
-| `data.test.js` | ✅ 42 tests |
-| `storage.test.js` | ✅ 27 tests |
-| `components.quizshell.test.jsx` | ✅ 21 tests |
-| `scheduler.test.js` | ✅ 24 tests |
-| `components.dashboard.test.jsx` | ✅ 20 tests (BUG-01 fix will need update here) |
-| `components.resultscreen.test.jsx` | ✅ 18 tests |
-| `utils.test.js` | ✅ 32 tests |
-| `offline.sw.test.js` | ✅ 14 tests |
-| `srs.test.js` | ✅ 16 tests |
-| `quiz.test.js` | ✅ 9 tests |
+| File                               | Verdict                                        |
+| ---------------------------------- | ---------------------------------------------- |
+| `data.test.js`                     | ✅ 42 tests                                    |
+| `storage.test.js`                  | ✅ 27 tests                                    |
+| `components.quizshell.test.jsx`    | ✅ 21 tests                                    |
+| `scheduler.test.js`                | ✅ 24 tests                                    |
+| `components.dashboard.test.jsx`    | ✅ 20 tests (BUG-01 fix will need update here) |
+| `components.resultscreen.test.jsx` | ✅ 18 tests                                    |
+| `utils.test.js`                    | ✅ 32 tests                                    |
+| `offline.sw.test.js`               | ✅ 14 tests                                    |
+| `srs.test.js`                      | ✅ 16 tests                                    |
+| `quiz.test.js`                     | ✅ 9 tests                                     |
 
 ---
 
 ## Appendix A — Phase Summary Table
 
-| Phase | Name | Bugs Fixed | Features | Est. Tests Added |
-|---|---|---|---|---|
-| 11 | Bug Fixes & Storage Hardening | BUG-01, BUG-02, BUG-03 + 5 TD | None | +27 |
-| 12 | Content: Sipil & Bangunan | — | 2 full modes | +20 |
-| 13 | Adaptive Learning | — | Daily Mission, sessions, StatsMode+ | +25 |
-| 14 | Export/Import Refinement | TD-01 | Export diff, import validation, rollback | +20 |
-| 15 | FlashcardMode Decomposition | TD-05 | Refactor only | +15 |
-| 16 | Exam Countdown + Audio | — | examDate UI, Web Speech | +15 |
-| 17 | QA + Release v4.0 | — | Flow tests, SW auto-bump, coverage | +30 |
-| **Total** | | | | **~350 tests** |
+| Phase     | Name                          | Bugs Fixed                    | Features                                 | Est. Tests Added |
+| --------- | ----------------------------- | ----------------------------- | ---------------------------------------- | ---------------- |
+| 11        | Bug Fixes & Storage Hardening | BUG-01, BUG-02, BUG-03 + 5 TD | None                                     | +27              |
+| 12        | Content: Sipil & Bangunan     | —                             | 2 full modes                             | +20              |
+| 13        | Adaptive Learning             | —                             | Daily Mission, sessions, StatsMode+      | +25              |
+| 14        | Export/Import Refinement      | TD-01                         | Export diff, import validation, rollback | +20              |
+| 15        | FlashcardMode Decomposition   | TD-05                         | Refactor only                            | +15              |
+| 16        | Exam Countdown + Audio        | —                             | examDate UI, Web Speech                  | +15              |
+| 17        | QA + Release v4.0             | —                             | Flow tests, SW auto-bump, coverage       | +30              |
+| **Total** |                               |                               |                                          | **~350 tests**   |
 
 ---
 
 ## Appendix B — Key Corpus Citations for SSW Konstruksi
 
-> *Extracted from Nugget Nihongo Research Foundation (743 citations) and SECTION8-PWA-v3 (~145 citations). Most relevant to SSW Konstruksi's design decisions.*
+> _Extracted from Nugget Nihongo Research Foundation (743 citations) and SECTION8-PWA-v3 (~145 citations). Most relevant to SSW Konstruksi's design decisions._
 
 ### SRS & Retrieval Practice
-- **Kim & Webb (2022)** — meta-analysis, 48 L2 experiments (N=3,411): spaced practice > massed practice for retention. *Justifies FSRS architecture.*
-- **Adesope et al. (2017)** — meta-analysis, 217 studies: retrieval practice > restudying (g=0.61). *Justifies active recall in all quiz modes.*
-- **Rowland (2014)** — testing effect meta-analysis: g=0.50, grows with retention interval. *Justifies long-interval FSRS scheduling.*
-- **Bahrick et al. (1993)** — spacing effect in foreign vocabulary maintenance. *Justifies Phase 16 urgency multiplier in final 2 weeks before exam.*
-- **Ye et al. (2022) / Su et al. (2023)** — FSRS algorithm validation (KDD/IEEE TKDE). *Basis for FSRS choice over SM-2.*
+
+- **Kim & Webb (2022)** — meta-analysis, 48 L2 experiments (N=3,411): spaced practice > massed practice for retention. _Justifies FSRS architecture._
+- **Adesope et al. (2017)** — meta-analysis, 217 studies: retrieval practice > restudying (g=0.61). _Justifies active recall in all quiz modes._
+- **Rowland (2014)** — testing effect meta-analysis: g=0.50, grows with retention interval. _Justifies long-interval FSRS scheduling._
+- **Bahrick et al. (1993)** — spacing effect in foreign vocabulary maintenance. _Justifies Phase 16 urgency multiplier in final 2 weeks before exam._
+- **Ye et al. (2022) / Su et al. (2023)** — FSRS algorithm validation (KDD/IEEE TKDE). _Basis for FSRS choice over SM-2._
 
 ### PWA & Mobile Design
-- **Japan Foundation (2023)** — 732,914 Indonesian Japanese learners; 183,000 self-study/community = addressable market. *Justifies platform investment.*
-- **APJII (2023)** — 95.4% Indonesian internet via smartphone. *Justifies mobile-first PWA architecture.*
-- **Haristiani & Rifa'I (2020)** — 78% Indonesian Japanese learners smartphone-exclusive. *Only study specific to our target population.*
-- **StatCounter (2024)** — 88.7% Android market share in Indonesia. *Justifies PWA-first distribution.*
-- **GSMA Intelligence (2023)** — variable 4G coverage, ~30% users on unreliable connections. *Justifies aggressive offline-first SW caching and Phase 17 auto-bump.*
-- **Firtman (2023)** — iOS 16.4+ enables Web Push for PWAs. *Resolves historical iOS PWA limitation.*
+
+- **Japan Foundation (2023)** — 732,914 Indonesian Japanese learners; 183,000 self-study/community = addressable market. _Justifies platform investment._
+- **APJII (2023)** — 95.4% Indonesian internet via smartphone. _Justifies mobile-first PWA architecture._
+- **Haristiani & Rifa'I (2020)** — 78% Indonesian Japanese learners smartphone-exclusive. _Only study specific to our target population._
+- **StatCounter (2024)** — 88.7% Android market share in Indonesia. _Justifies PWA-first distribution._
+- **GSMA Intelligence (2023)** — variable 4G coverage, ~30% users on unreliable connections. _Justifies aggressive offline-first SW caching and Phase 17 auto-bump._
+- **Firtman (2023)** — iOS 16.4+ enables Web Push for PWAs. _Resolves historical iOS PWA limitation._
 
 ### Gamification & Motivation
-- **Ryan & Deci (2000)** — Self-Determination Theory: intrinsic motivation requires autonomy, competence, relatedness. *Framework for Daily Mission design (Phase 13).*
-- **Mekler et al. (2017)** — individual gamification elements don't improve intrinsic motivation in educational contexts. *Justifies no badge inflation.*
-- **Hanus & Fox (2015)** — leaderboards decrease intrinsic motivation over 16 weeks. *Justifies no leaderboard, ever.*
-- **Van Roy & Zaman (2018)** — need-supporting gamification improves motivation over time. *Framework for milestone toast design (Phase 11).*
-- **Nicholson (2015)** — meaningful gamification must connect to learner's actual goals. *Justifies mission framing around exam preparation, not arbitrary points.*
-- **Deci, Koestner & Ryan (1999)** — extrinsic rewards undermine intrinsic motivation for interesting tasks. *Justifies no point/coin economy.*
+
+- **Ryan & Deci (2000)** — Self-Determination Theory: intrinsic motivation requires autonomy, competence, relatedness. _Framework for Daily Mission design (Phase 13)._
+- **Mekler et al. (2017)** — individual gamification elements don't improve intrinsic motivation in educational contexts. _Justifies no badge inflation._
+- **Hanus & Fox (2015)** — leaderboards decrease intrinsic motivation over 16 weeks. _Justifies no leaderboard, ever._
+- **Van Roy & Zaman (2018)** — need-supporting gamification improves motivation over time. _Framework for milestone toast design (Phase 11)._
+- **Nicholson (2015)** — meaningful gamification must connect to learner's actual goals. _Justifies mission framing around exam preparation, not arbitrary points._
+- **Deci, Koestner & Ryan (1999)** — extrinsic rewards undermine intrinsic motivation for interesting tasks. _Justifies no point/coin economy._
 
 ### Indonesian Learner Psychology
-- **Markus & Kitayama (1991)** — interdependent self-construal; Hofstede IDV=14 for Indonesia. *Basis for malu-aware design.*
-- **Horwitz, Horwitz & Cope (1986)** — foreign language anxiety: fear of negative evaluation, communication apprehension. *Justifies private progress, no public scoring.*
-- **Ushioda (2011)** — autonomy support in L2 motivation. *Basis for dismissable Daily Mission.*
+
+- **Markus & Kitayama (1991)** — interdependent self-construal; Hofstede IDV=14 for Indonesia. _Basis for malu-aware design._
+- **Horwitz, Horwitz & Cope (1986)** — foreign language anxiety: fear of negative evaluation, communication apprehension. _Justifies private progress, no public scoring._
+- **Ushioda (2011)** — autonomy support in L2 motivation. _Basis for dismissable Daily Mission._
 
 ### SSW / Vocational Context
-- **Ministry of Health, Labour and Welfare, Japan (2019)** — SSW system overview: JLPT N4 minimum, sector-specific skills test separate from JLPT. *Justifies construction-specific content (Phase 12) alongside JLPT cards.*
-- **Immigration Services Agency of Japan (2023)** — construction sector = top 3 SSW destination. *Confirms market demand for Sipil/Bangunan modes.*
-- **Kamata & Tanaka (2021)** — construction/care Japanese: vocabulary, scene, and discourse demands distinct from general JLPT. *Justifies domain-specific content, not just general vocabulary.*
-- **Noyama (2012)** — N4 passers still report communication difficulties in work settings; functional target = N3. *Justifies exam countdown urgency escalation at N3-level card completion.*
+
+- **Ministry of Health, Labour and Welfare, Japan (2019)** — SSW system overview: JLPT N4 minimum, sector-specific skills test separate from JLPT. _Justifies construction-specific content (Phase 12) alongside JLPT cards._
+- **Immigration Services Agency of Japan (2023)** — construction sector = top 3 SSW destination. _Confirms market demand for Sipil/Bangunan modes._
+- **Kamata & Tanaka (2021)** — construction/care Japanese: vocabulary, scene, and discourse demands distinct from general JLPT. _Justifies domain-specific content, not just general vocabulary._
+- **Noyama (2012)** — N4 passers still report communication difficulties in work settings; functional target = N3. _Justifies exam countdown urgency escalation at N3-level card completion._
 
 ### Pedagogy & Nation's Four Strands
-- **Nation (2007)** — Four Strands: effective course balances meaning-focused input, meaning-focused output, language-focused learning, fluency development. *Basis for Phase 13 strand balance detection in Daily Mission.*
-- **Pienemann (1998) / Di Biase & Kawaguchi (2002)** — Processability Theory: PT stage sequencing for Japanese morphosyntax. *Framework for grammar card ordering (future N4+ content).*
-- **Krashen (1982)** — Comprehensible Input (i+1). *Basis for difficulty scaling in quiz modes.*
+
+- **Nation (2007)** — Four Strands: effective course balances meaning-focused input, meaning-focused output, language-focused learning, fluency development. _Basis for Phase 13 strand balance detection in Daily Mission._
+- **Pienemann (1998) / Di Biase & Kawaguchi (2002)** — Processability Theory: PT stage sequencing for Japanese morphosyntax. _Framework for grammar card ordering (future N4+ content)._
+- **Krashen (1982)** — Comprehensible Input (i+1). _Basis for difficulty scaling in quiz modes._
 
 ---
 
 ## Appendix C — Research-Driven Design Upgrades (Post-Corpus Read)
 
-> *Improvements to v4 blueprint based on deeper corpus reading. Each upgrade is grounded in specific evidence not present in the original v4. These are recommendations for implementation agents — not scope changes to existing phases.*
+> _Improvements to v4 blueprint based on deeper corpus reading. Each upgrade is grounded in specific evidence not present in the original v4. These are recommendations for implementation agents — not scope changes to existing phases._
 
 ---
 
 ### C-01 — Semantic Set Rule for Card Introduction Order (Phase 12 + future content)
 
-**Research basis:** Tinkham (1997) [CA-48] and Waring (1997) [CA-50] — semantic clustering *hurts* acquisition at beginner/intermediate levels. Erten & Tekin (2008) [CA-12] confirm: presenting new words in semantically related sets (e.g. all construction tools in one session) increases inter-item interference and reduces retention compared to semantically unrelated sets.
+**Research basis:** Tinkham (1997) [CA-48] and Waring (1997) [CA-50] — semantic clustering _hurts_ acquisition at beginner/intermediate levels. Erten & Tekin (2008) [CA-12] confirm: presenting new words in semantically related sets (e.g. all construction tools in one session) increases inter-item interference and reduces retention compared to semantically unrelated sets.
 
 **Current state:** `cards.js` presents vocabulary without enforced semantic set limits. In FlashcardMode, category filters can show the user 50+ semantically related cards in a row (e.g. all 機材/equipment cards at once).
 
@@ -866,6 +941,7 @@ Tests that span multiple components/contexts:
 When authoring `sipil-sets.js` and `bangunan-sets.js`, **interleave semantic fields** within each set — never more than 3 consecutive cards from the same semantic cluster (e.g. tools, safety equipment, structural elements). Each question set should sample across semantic domains.
 
 **Implementation note for `quiz-generator.js`:**
+
 ```js
 // Add semantic interleaving to quiz generation:
 // After shuffling, check if 3+ consecutive cards share same `sub_category`
@@ -880,14 +956,16 @@ function semanticInterleave(cards, maxConsecutive = 3) { ... }
 ### C-02 — Explicit Corrective Feedback on Back Cards (Phase 12 + content quality)
 
 **Research basis:**
-- Lyster & Ranta (1997) [EA-14] — six feedback types; *recasts* (showing the correct form without explanation) are the most frequent in classrooms but have the **lowest learner uptake**. The standard Anki back card (correct answer displayed) is functionally equivalent to a recast.
+
+- Lyster & Ranta (1997) [EA-14] — six feedback types; _recasts_ (showing the correct form without explanation) are the most frequent in classrooms but have the **lowest learner uptake**. The standard Anki back card (correct answer displayed) is functionally equivalent to a recast.
 - Li (2010) [EA-16] meta-analysis (33 studies) — explicit corrective feedback significantly outperforms implicit CF for complex rule-governed features. Japanese particles, keigo, and aspect markers are rule-governed features.
 - Ellis et al. (2006) [EA-17] — explicit CF produces metalinguistic knowledge gains; implicit CF produces marginal procedural gains.
-- Han & Selinker (1999) [EA-13] — *error resistance*: knowing the は/が rule does not prevent incorrect production. Sustained contextualized practice is necessary, not just rule exposure.
+- Han & Selinker (1999) [EA-13] — _error resistance_: knowing the は/が rule does not prevent incorrect production. Sustained contextualized practice is necessary, not just rule exposure.
 
 **Current state:** `ResultScreen.jsx` shows correct answer after wrong response (`wrongAnswer → correctAnswer`). This is a recast. No metalinguistic explanation is shown.
 
 **Proposed upgrade (Phase 12 + future content):**
+
 - All `sipil-sets.js` and `bangunan-sets.js` questions must include an `exp` (explanation) field — not optional.
 - Explanation format: **why** the answer is correct + **common mistake** pattern for Indonesian speakers.
   ```
@@ -902,9 +980,10 @@ function semanticInterleave(cards, maxConsecutive = 3) { ... }
 ### C-03 — FocusMode Upgrade: Interference-Specific Targeting (Phase 13)
 
 **Research basis:**
+
 - I-JAS corpus data (cited in corpus §5.5) — confirms に/で confusion as the **most persistent** Indonesian learner error for Japanese particles. は/が distinction is the most cognitively complex.
 - Corpus §5.5 documents seven systematic interference points specific to Indonesian speakers: SVO→SOV word order, particle omission, verb conjugation, mora timing, pitch accent, writing system, keigo.
-- Nassaji (2016) [EA-20] — CF type × feature type × learner readiness interaction: the *same* learner needs different feedback types for different error types.
+- Nassaji (2016) [EA-20] — CF type × feature type × learner readiness interaction: the _same_ learner needs different feedback types for different error types.
 
 **Current state:** `FocusMode.jsx` (78 lines) shows cards from the user's `quizWrong` pool — effectively a random sample of their mistakes.
 
@@ -936,6 +1015,7 @@ const grouped = wrongCards.reduce((acc, card) => {
 ### C-04 — Onboarding Placement: VLT-Style Initial Assessment (Phase 11 / future)
 
 **Research basis:**
+
 - Corpus §CA.2 — Onboarding currently uses a "simplified VLT-style placement." Gap 6 (Assessment Architecture) is flagged HIGH in the research foundation.
 - Nation's Vocabulary Levels Test (VLT) — the most validated vocabulary placement instrument for L2 learners. Not requiring learners to know all items at a level — just representative samples.
 - Curriculum Blueprint §2.8 — level promotion logic defined: N5 exit requires 80% known rate on N5 core vocabulary set.
@@ -944,6 +1024,7 @@ const grouped = wrongCards.reduce((acc, card) => {
 
 **Proposed upgrade (add to Phase 11 or defer to Phase 18):**
 Add an optional 10-question "warm-up placement" step after track selection:
+
 - 10 cards sampled from 5 JLPT levels (2 from N5, 2 from N4, 2 from N3, 2 from N2, 2 from N1)
 - User marks each: "Tau" / "Tidak tau" (binary — not a quiz, no pressure)
 - System infers approximate entry level from response pattern
@@ -958,11 +1039,13 @@ Add an optional 10-question "warm-up placement" step after track selection:
 ### C-05 — Session Length Awareness in Daily Mission (Phase 13)
 
 **Research basis:**
+
 - Nakata (2015) [SR-04] — equal spacing schedules produce better long-term retention than expanding spacing for L2 vocabulary. For short daily sessions, distributed practice over many days > massed practice in few sessions.
 - GSMA Intelligence (2023) — Indonesian users average 12.7 GB/month mobile data, commute-heavy usage patterns. Short, frequent sessions (commute learning) are structurally likely for this user population.
 - Corpus §8.10 — Indonesian learners predominantly access via smartphone during commute/break periods. Optimal session design: 5–15 minutes.
 
 **Proposed upgrade for `daily-mission.js`:**
+
 ```js
 // Add session duration awareness to mission generation:
 export function generateDailyMission(prog, srsStats, prefs) {
@@ -974,9 +1057,11 @@ export function generateDailyMission(prog, srsStats, prefs) {
   // If avg session < 5 min → user is a micro-learner → recommend smaller card counts
   // If avg session > 20 min → user has long sessions → recommend more comprehensive mode
   const missionScale = avgDurationMs
-    ? avgDurationMs < 5 * 60000 ? 'micro'    // ≤5 min
-    : avgDurationMs < 15 * 60000 ? 'standard' // 5–15 min
-    : 'extended'                               // >15 min
+    ? avgDurationMs < 5 * 60000
+      ? 'micro' // ≤5 min
+      : avgDurationMs < 15 * 60000
+        ? 'standard' // 5–15 min
+        : 'extended' // >15 min
     : 'standard';
 
   // Micro-learner mission: 5 SRS cards > 10 quiz > "kartu mode 10 kartu saja"
@@ -992,6 +1077,7 @@ export function generateDailyMission(prog, srsStats, prefs) {
 ### C-06 — Confusion Pair Mode: The Most Pedagogically Distinctive Feature (v5 proposal)
 
 **Research basis:**
+
 - Corpus §5.5 — seven systematic interference points for Indonesian speakers. に/で confusion and は/が distinction are the two highest-priority targets.
 - Lyster (2004) [EA-18] — prompts (eliciting learner self-repair) are superior to recasts for morphosyntactic targets. In SRS terms: **forced-choice between confusable items** (e.g. "に or で?" presented together) is the closest approximation to a prompt.
 - Brunmair & Richter (2019) [CI-01] — interleaving related-but-distinct items produces significantly better discrimination learning than blocked practice.
@@ -1000,8 +1086,9 @@ export function generateDailyMission(prog, srsStats, prefs) {
 **Current state:** No dedicated confusion pair mode exists. Confusion pairs appear incidentally in quiz options (the distractor generation in `quiz-generator.js` uses random cards as distractors, not semantically related confusables).
 
 **Proposed v5 feature — `ConfusionMode.jsx`:**
+
 - 4-card sets: present a Japanese term, 4 options are all grammatically plausible (constructed from confusion pair database, not random)
-- Example: "彼女は図書館___本を読んだ。" → options: に / で / へ / を
+- Example: "彼女は図書館\_\_\_本を読んだ。" → options: に / で / へ / を
 - Wrong answer shows explicit metalinguistic explanation (C-02 applies here too)
 - Confusion pair database: start with the 7 documented Indonesian interference points → ~50 confusion pair sets
 - Score tracked separately (not mixed with quiz wrong pool)
@@ -1009,9 +1096,11 @@ export function generateDailyMission(prog, srsStats, prefs) {
 **Why not Phase 11–17:** Requires a new `confusion-pairs.js` data file with ~50 authored pairs. Content creation bottleneck. Defer to v5 but document the design now so the data structure is anticipated in the schema.
 
 **Schema preparation (add in Phase 11):**
+
 ```js
 // Add to DEFAULTS.progress in schema.js:
-confusionScores: {}  // { pairId: { attempts: N, correct: N, lastDate: ISO } }
+confusionScores: {
+} // { pairId: { attempts: N, correct: N, lastDate: ISO } }
 ```
 
 ---
@@ -1019,14 +1108,16 @@ confusionScores: {}  // { pairId: { attempts: N, correct: N, lastDate: ISO } }
 ### C-07 — Audio Rate Calibration for Indonesian Learners (Phase 16 refinement)
 
 **Research basis:**
+
 - Corpus §8.10 — Indonesian is a syllable-timed language; Japanese is mora-timed. This is one of the seven documented interference points. Pitch accent and mora timing are both challenging for Indonesian speakers.
 - Web Speech API `rate` parameter: 0.8 (recommended in Phase 16 spec) is appropriate. Research suggests: for mora-timing acquisition, **0.7 rate** is better for beginners (Haristiani & Rifa'I 2020 — slow speech rate aids phonological processing in beginner MALL studies).
 
 **Proposed refinement to `speak.js`:**
+
 ```js
 // Rate calibration by user level (from prefs.level or onboarding result):
 const SPEAK_RATES = {
-  beginner: 0.7,   // mora timing needs to be salient
+  beginner: 0.7, // mora timing needs to be salient
   intermediate: 0.8,
   advanced: 0.9,
 };
@@ -1045,19 +1136,19 @@ export function speakJP(text, { level = 'beginner', pitch = 1.0 } = {}) {
 
 **Source:** `docs/project/VISION.md` (nugget-san, March 2026) — the project compass document.
 
-The VISION.md establishes the "jaw drop moment" bar: *"Anjir? Serius ini semua gratis?? Selengkap dan semudah ini?"*
+The VISION.md establishes the "jaw drop moment" bar: _"Anjir? Serius ini semua gratis?? Selengkap dan semudah ini?"_
 
 **Assessment of current v4 against VISION.md principles:**
 
-| Principle | v4 Status | Gap |
-|---|---|---|
-| Gratis selamanya | ✅ No paywall, no ads | None |
-| Accessible semua umur | ⚠️ A11y score B+ | Skip-nav missing (Phase 11 touch) |
-| Offline-first | ✅ SW + cache-first | Manual bump risk → Phase 17 fixes |
-| Tidak overwhelming | ✅ Single-focus modes | Dashboard CTA is currently vague without Daily Mission |
-| Konten yang jujur | ⚠️ Sipil/Bangunan show "Coming Soon" | ✅ Honest — Phase 12 fills these |
+| Principle             | v4 Status                            | Gap                                                    |
+| --------------------- | ------------------------------------ | ------------------------------------------------------ |
+| Gratis selamanya      | ✅ No paywall, no ads                | None                                                   |
+| Accessible semua umur | ⚠️ A11y score B+                     | Skip-nav missing (Phase 11 touch)                      |
+| Offline-first         | ✅ SW + cache-first                  | Manual bump risk → Phase 17 fixes                      |
+| Tidak overwhelming    | ✅ Single-focus modes                | Dashboard CTA is currently vague without Daily Mission |
+| Konten yang jujur     | ⚠️ Sipil/Bangunan show "Coming Soon" | ✅ Honest — Phase 12 fills these                       |
 
-**One gap not covered in v4:** VISION.md principle 5 — *"Kalau belum siap, jangan ditampilkan dulu"* (if not ready, don't show it). This applies to **`VocabMode`**: `csv-sets.js` (3,998 lines) loads many sets, some of which may be sparse or incomplete. **Recommendation:** Add a `status: 'active' | 'beta' | 'coming_soon'` field to each set in `csv-sets.js`. Only render `active` sets by default; `beta` sets visible behind a "🧪 Beta" chip; `coming_soon` hidden entirely. This respects the VISION principle of honest UI.
+**One gap not covered in v4:** VISION.md principle 5 — _"Kalau belum siap, jangan ditampilkan dulu"_ (if not ready, don't show it). This applies to **`VocabMode`**: `csv-sets.js` (3,998 lines) loads many sets, some of which may be sparse or incomplete. **Recommendation:** Add a `status: 'active' | 'beta' | 'coming_soon'` field to each set in `csv-sets.js`. Only render `active` sets by default; `beta` sets visible behind a "🧪 Beta" chip; `coming_soon` hidden entirely. This respects the VISION principle of honest UI.
 
 ---
 
@@ -1070,11 +1161,13 @@ The Nugget Nihongo (main platform) runs a named multi-agent system: Crispy (Proj
 **Recommendation for SSW Konstruksi agent governance (v5 consideration):**
 
 SSW Konstruksi has outgrown solo agent work. Phase 11–17 involves:
+
 - Bug fixes (needs QA verification)
 - Content authoring for Sipil/Bangunan (needs domain review)
 - Data integrity checks (needs audit scripts)
 
 Consider adopting a simplified 3-role model from the Nugget Nihongo system:
+
 - **Implementor** (Sonnet/Codex): code, content, tests
 - **QA** (Crunchy pattern): runs `audit:integrity`, `npm test`, lint — issues verdict
 - **Director** (Nugget-san): final approval, priority decisions
@@ -1085,7 +1178,7 @@ The existing `scripts/audit-integrity.mjs` already plays the QA role for data. P
 
 ## Appendix D — Scope Gaps Not in v4 (Corpus-Identified)
 
-> *Issues found in corpus that are outside v4 scope but should be documented for v5 planning.*
+> _Issues found in corpus that are outside v4 scope but should be documented for v5 planning._
 
 ### D-01 — L3 Acquisition Dynamics (Gap 5 from corpus)
 
@@ -1115,17 +1208,19 @@ Currently SSW Konstruksi presents kanji as part of vocabulary cards without dedi
 
 ## Appendix E — Agent Trail & Session Log
 
-> *Transparency log for handoff agents. Maintained per Nugget Nihongo corpus governance conventions.*
+> _Transparency log for handoff agents. Maintained per Nugget Nihongo corpus governance conventions._
 
 ### Session: 2026-05-01 — Agent Sonnet 4.6
 
 **Agent identity:** Claude Sonnet 4.6 (Anthropic) · Operating in claude.ai
 **Session type:** Blueprint research polish + corpus deep-read
 **Repos accessed:**
+
 - `nuggetenak/Nugget-Nihongo-SSW-Konstruksi` (token: ghp_Apo...) — read + write
 - `nuggetenak/nugget-nihongo` (token: ghp_tnQ...) — read-only, `develop` branch
 
 **Files read from corpus (`nugget-nihongo/develop`):**
+
 - `docs/NUGGET-NIHONGO-RESEARCH-FOUNDATION.md` (743 citations, ~2,500 lines) — full scan
 - `docs/corpus/SECTION8-PWA-v3-FULL-RECOVERED.md` (~145 citations, PWA platform research)
 - `docs/curriculum/NUGGET-NIHONGO-CURRICULUM-BLUEPRINT-v1.md` (~500 lines) — full read
@@ -1138,21 +1233,25 @@ Currently SSW Konstruksi presents kanji as part of vocabulary cards without dedi
 - `SPEC-GRAMMAR-IRODORI-A2.md` — partial read
 
 **Files written to `Nugget-Nihongo-SSW-Konstruksi`:**
+
 - `docs/MASTER-BLUEPRINT-v4-POLISHED.md` — created (856 lines → 1,150+ lines after this session)
 
 **Key decisions made this session:**
+
 1. Preserved all v4 code specs unchanged — only added evidence layer
 2. Added C-01 through C-09 improvement proposals based on corpus evidence not in original v4
 3. Added D-01 through D-03 v5 scope gaps
 4. Documented agent trail in Appendix E (this section)
 
 **What I did NOT do (scope discipline):**
+
 - Did not modify MASTER-BLUEPRINT-v4.md (original) — polished version is a separate file
 - Did not write any implementation code — blueprint only
 - Did not access the Supabase schema or workers in the corpus repo — out of scope for SSW Konstruksi (SSW uses localStorage only)
 - Did not read all 109 MD files in the corpus — prioritized research foundation, curriculum, vision, PWA evidence
 
 **Confidence assessment:**
+
 - C-01 (semantic interleave): HIGH — multiple corpus citations, clear implementation path
 - C-02 (explicit CF on back cards): HIGH — Li 2010 meta-analysis is strong evidence
 - C-03 (FocusMode interference targeting): MEDIUM — requires `interference_type` tagging work
@@ -1164,6 +1263,7 @@ Currently SSW Konstruksi presents kanji as part of vocabulary cards without dedi
 - C-09 (governance): LOW urgency — solo project, governance overhead may exceed benefit
 
 **Handoff note for next agent:**
+
 - Phase 11 is the right starting point — BUG-01/02/03 must ship before any Phase 12+ work
 - C-01 and C-02 are the highest-ROI improvements to incorporate into Phase 12 content authoring
 - C-05 is a 20-line addition to Phase 13 daily-mission.js — trivial to include
@@ -1172,7 +1272,7 @@ Currently SSW Konstruksi presents kanji as part of vocabulary cards without dedi
 
 ---
 
-*Blueprint v4 (research-polished, second pass) — Agent Sonnet 4.6 · 2026-05-01*
-*Corpus read: Nugget Nihongo Research Foundation (743 citations) + SECTION8-PWA-v3 (~145 citations) + Curriculum Blueprint v1 + VISION.md + ROADMAP.md*
-*Word count delta: +295 lines (Appendix C, D, E)*
-*All Phase 11–17 code specifications remain unchanged from MASTER-BLUEPRINT-v4.md (commit aa041a3).*
+_Blueprint v4 (research-polished, second pass) — Agent Sonnet 4.6 · 2026-05-01_
+_Corpus read: Nugget Nihongo Research Foundation (743 citations) + SECTION8-PWA-v3 (~145 citations) + Curriculum Blueprint v1 + VISION.md + ROADMAP.md_
+_Word count delta: +295 lines (Appendix C, D, E)_
+_All Phase 11–17 code specifications remain unchanged from MASTER-BLUEPRINT-v4.md (commit aa041a3)._

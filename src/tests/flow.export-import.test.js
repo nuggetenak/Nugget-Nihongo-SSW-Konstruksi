@@ -21,12 +21,10 @@ describe('G.2 Flow — export → import cycle', () => {
       starred: [42],
       quizWrong: { 5: { count: 3, lastWrong: 12345 } },
       streakData: { days: 5, lastDate: '2026-04-30' },
-      sessions: [
-        { mode: 'kuis', correct: 8, total: 10, date: '2026-05-01', durationMs: 5000 },
-      ],
+      sessions: [{ mode: 'kuis', correct: 8, total: 10, date: '2026-05-01', durationMs: 5000 }],
     }));
     set('prefs', (p) => ({ ...p, track: 'lifeline', dailyGoal: 30, examDate: '2026-12-01' }));
-    set('srs', (s) => ({ ...s, cards: { '42': { state: 2, stability: 1.5 } } }));
+    set('srs', (s) => ({ ...s, cards: { 42: { state: 2, stability: 1.5 } } }));
 
     // Export
     const snap = exportAll();
@@ -43,9 +41,9 @@ describe('G.2 Flow — export → import cycle', () => {
     expect(summary.srsCards).toBe(1);
 
     // Verify all docs restored
-    const prog  = get('progress');
+    const prog = get('progress');
     const prefs = get('prefs');
-    const srs   = get('srs');
+    const srs = get('srs');
 
     expect(prog.known).toEqual([1, 2, 3, 42, 99]);
     expect(prog.unknown).toEqual([5, 6]);

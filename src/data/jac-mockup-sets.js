@@ -1292,7 +1292,12 @@ export const JAC_MOCKUP_SETS = [
         id: 27,
         q: '建設業《けんせつぎょう》で「施工体制台帳《せこうたいせいだいちょう》」を作成《さくせい》する義務《ぎむ》があるのはどれか。',
         hint: "Di industri konstruksi, siapa yang berkewajiban membuat 'buku catatan sistem pelaksanaan' (施工体制台帳)?",
-        opts: ['設計事務所《せっけいじむしょ》', '下請負業者《したうけおいぎょうしゃ》', '発注者', '特定建設業許可を持つ元請業者'],
+        opts: [
+          '設計事務所《せっけいじむしょ》',
+          '下請負業者《したうけおいぎょうしゃ》',
+          '発注者',
+          '特定建設業許可を持つ元請業者',
+        ],
         opts_id: [
           'Kantor arsitek',
           'Subkontraktor',
@@ -2460,7 +2465,12 @@ export const JAC_MOCKUP_SETS = [
         id: 17,
         q: '朝礼《ちょうれい》の「KY活動《かつどう》」の目標《もくひょう》は？',
         hint: 'Tujuan kegiatan KY di apel pagi adalah?',
-        opts: ['挨拶だけ', '作業を早く終わらせる', '危険を予測し対策を立てる', '休憩《きゅうけい》を取る'],
+        opts: [
+          '挨拶だけ',
+          '作業を早く終わらせる',
+          '危険を予測し対策を立てる',
+          '休憩《きゅうけい》を取る',
+        ],
         opts_id: [
           'Hanya sapaan',
           'Menyelesaikan kerja cepat',
@@ -2764,7 +2774,12 @@ export const JAC_MOCKUP_SETS = [
         id: 10,
         q: 'ヘルメットのあごひもを必ず締《し》める理由《りゆう》は？',
         hint: 'Alasan mengikat tali dagu helm adalah?',
-        opts: ['墜落防止', '汗を吸うため', '見た目《め》を良くするため', 'ヘルメットが飛ばないため'],
+        opts: [
+          '墜落防止',
+          '汗を吸うため',
+          '見た目《め》を良くするため',
+          'ヘルメットが飛ばないため',
+        ],
         opts_id: [
           'Pencegahan jatuh',
           'Menyerap keringat',

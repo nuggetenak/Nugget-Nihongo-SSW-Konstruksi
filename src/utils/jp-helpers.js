@@ -101,9 +101,14 @@ export function parseDescStructure(desc = '', maxLines = 0) {
     let label = null;
     for (const p of parts) {
       const lm = p.match(/^【([^】]+)】$/);
-      if (lm) { label = lm[1]; }
-      else if (label !== null) { items.push({ label, body: p.trim() }); label = null; }
-      else { intro += p; }
+      if (lm) {
+        label = lm[1];
+      } else if (label !== null) {
+        items.push({ label, body: p.trim() });
+        label = null;
+      } else {
+        intro += p;
+      }
     }
     return { branch: 'brackets', intro: intro.trim(), items, src };
   }
@@ -124,18 +129,31 @@ export function parseDescStructure(desc = '', maxLines = 0) {
           if (cur) items.push(cur);
           cur = { num: t, body: '' };
           lastIdx = tIdx;
-        } else { if (cur) cur.body += t; else intro += t; }
-      } else if (cur) { cur.body += t; }
-      else { intro += t; }
+        } else {
+          if (cur) cur.body += t;
+          else intro += t;
+        }
+      } else if (cur) {
+        cur.body += t;
+      } else {
+        intro += t;
+      }
     }
     if (cur) items.push(cur);
     return { branch: 'circled', intro: intro.trim(), items, src };
   }
 
   // Branch C: plain
-  const applyMax = (text) => maxLines
-    ? text.split(/\n|\\n/).filter(Boolean).slice(0, maxLines).join('\n')
-    : text;
-  const lines = applyMax(main).split(/\n|\\n/).filter(Boolean);
+  const applyMax = (text) =>
+    maxLines
+      ? text
+          .split(/\n|\\n/)
+          .filter(Boolean)
+          .slice(0, maxLines)
+          .join('\n')
+      : text;
+  const lines = applyMax(main)
+    .split(/\n|\\n/)
+    .filter(Boolean);
   return { branch: 'plain', lines, src };
 }

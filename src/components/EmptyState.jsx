@@ -15,11 +15,11 @@ import S from './EmptyState.module.css';
 export default function EmptyState({ icon = '📭', title, desc, ctaLabel, onCta, style = {} }) {
   return (
     <div className={S.wrap} style={style} role="status" aria-live="polite">
-      <div className={S.icon} aria-hidden="true">{icon}</div>
+      <div className={S.icon} aria-hidden="true">
+        {icon}
+      </div>
       <div className={S.title}>{title}</div>
-      {desc && (
-        <div className={`${S.desc}${onCta ? '' : ' ' + S.descNoBtn}`}>{desc}</div>
-      )}
+      {desc && <div className={`${S.desc}${onCta ? '' : ' ' + S.descNoBtn}`}>{desc}</div>}
       {onCta && (
         <button className={S.cta} onClick={onCta} aria-label={ctaLabel}>
           {ctaLabel}

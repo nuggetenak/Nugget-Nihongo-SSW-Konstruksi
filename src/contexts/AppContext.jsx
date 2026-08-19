@@ -31,7 +31,9 @@ export function AppProvider({ children }) {
   }, [prefs.theme]);
 
   // Apply on mount
-  useEffect(() => { applyTheme(prefs.theme === 'dark'); }, []); // eslint-disable-line
+  useEffect(() => {
+    applyTheme(prefs.theme === 'dark');
+  }, []); // eslint-disable-line
 
   const toggleTheme = useCallback(() => {
     setPref('theme', prefs.theme === 'dark' ? 'light' : 'dark');
@@ -45,13 +47,16 @@ export function AppProvider({ children }) {
 
   // goMode(key) — navigate to mode
   // goMode(key, params) — navigate with extra params (e.g. { filterIds: [...] })
-  const goMode = useCallback((m, params = null) => {
-    setModeHistory((h) => mode ? [...h.slice(-2), mode] : h); // push current before navigating
-    setMode(m);
-    setModeParams(params);
-    setPref('lastMode', m);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [mode, setPref]);
+  const goMode = useCallback(
+    (m, params = null) => {
+      setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
+      setMode(m);
+      setModeParams(params);
+      setPref('lastMode', m);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    },
+    [mode, setPref]
+  );
 
   const exitMode = useCallback(() => {
     setModeHistory([]);
@@ -63,7 +68,10 @@ export function AppProvider({ children }) {
 
   // Go back one mode in history.
   const goBack = useCallback(() => {
-    if (modeHistory.length === 0) { exitMode(); return; }
+    if (modeHistory.length === 0) {
+      exitMode();
+      return;
+    }
     const prev = modeHistory[modeHistory.length - 1];
     setModeHistory((h) => h.slice(0, -1));
     setMode(prev);
@@ -72,23 +80,32 @@ export function AppProvider({ children }) {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [modeHistory, exitMode, setPref]);
 
-  const goTab = useCallback((t) => {
-    setTab(t);
-    setModeHistory([]);
-    setMode(null);
-    setPref('lastMode', null);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [setPref]);
+  const goTab = useCallback(
+    (t) => {
+      setTab(t);
+      setModeHistory([]);
+      setMode(null);
+      setPref('lastMode', null);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    },
+    [setPref]
+  );
 
   // ── Track ──
-  const setTrack = useCallback((t) => {
-    setPref('track', t);
-  }, [setPref]);
+  const setTrack = useCallback(
+    (t) => {
+      setPref('track', t);
+    },
+    [setPref]
+  );
 
   // ── Daily Goal ──
-  const setDailyGoal = useCallback((g) => {
-    setPref('dailyGoal', g);
-  }, [setPref]);
+  const setDailyGoal = useCallback(
+    (g) => {
+      setPref('dailyGoal', g);
+    },
+    [setPref]
+  );
 
   // ── Onboarded ──
   // Accepts optional { track, dailyGoal } from new interactive onboarding.
@@ -97,7 +114,7 @@ export function AppProvider({ children }) {
       const next = {
         ...prev,
         onboarded: true,
-        ...(payload?.track     && { track: payload.track }),
+        ...(payload?.track && { track: payload.track }),
         ...(payload?.dailyGoal && { dailyGoal: payload.dailyGoal }),
       };
       storageSet('prefs', next);
@@ -105,29 +122,51 @@ export function AppProvider({ children }) {
     });
   }, []);
 
-  const ctx = useMemo(() => ({
-    // Prefs
-    track: prefs.track,
-    setTrack,
-    isDark: prefs.theme === 'dark',
-    toggleTheme,
-    onboarded: prefs.onboarded,
-    completeOnboarding,
-    dailyGoal: prefs.dailyGoal ?? 20,
-    setDailyGoal,
-    setPref,
-    prefs,
-    // Navigation
-    tab, setTab,
-    mode, modeParams, goMode, exitMode, goTab,
-    modeHistory, goBack,
-    // Toast
-    toast,
-  }), [
-    prefs, tab, setTab, mode, modeParams, goMode, exitMode, goTab,
-    modeHistory, goBack, setTrack, toggleTheme, completeOnboarding,
-    setDailyGoal, setPref, toast,
-  ]);
+  const ctx = useMemo(
+    () => ({
+      // Prefs
+      track: prefs.track,
+      setTrack,
+      isDark: prefs.theme === 'dark',
+      toggleTheme,
+      onboarded: prefs.onboarded,
+      completeOnboarding,
+      dailyGoal: prefs.dailyGoal ?? 20,
+      setDailyGoal,
+      setPref,
+      prefs,
+      // Navigation
+      tab,
+      setTab,
+      mode,
+      modeParams,
+      goMode,
+      exitMode,
+      goTab,
+      modeHistory,
+      goBack,
+      // Toast
+      toast,
+    }),
+    [
+      prefs,
+      tab,
+      setTab,
+      mode,
+      modeParams,
+      goMode,
+      exitMode,
+      goTab,
+      modeHistory,
+      goBack,
+      setTrack,
+      toggleTheme,
+      completeOnboarding,
+      setDailyGoal,
+      setPref,
+      toast,
+    ]
+  );
 
   return <AppCtx.Provider value={ctx}>{children}</AppCtx.Provider>;
 }

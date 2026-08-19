@@ -33,7 +33,11 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
   const ruby = showFuri ? parsedRuby : [];
   const hasRubyInText = parsedRuby.length > 0;
   const showReadingRow = !!reading && !hasRubyInText;
-  const hintLabel = isTapMode ? (showFuri ? '👆 Ketuk untuk sembunyikan furigana' : '👆 Ketuk untuk tampilkan furigana') : null;
+  const hintLabel = isTapMode
+    ? showFuri
+      ? '👆 Ketuk untuk sembunyikan furigana'
+      : '👆 Ketuk untuk tampilkan furigana'
+    : null;
   const wrapInteractive = (content) => {
     if (!isTapMode) return content;
     return (
@@ -50,7 +54,6 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
     );
   };
 
-
   const jpStyle = (fs, extra = {}) => ({
     lineHeight: 1.4,
     textAlign: 'center',
@@ -64,26 +67,37 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
 
   // ── A vs B ────────────────────────────────────────────────────────────────
   if (jpBranch === 'vs') {
-    const parts = clean.split(/\s*vs\s*/i).map((p) => p.trim()).filter(Boolean);
+    const parts = clean
+      .split(/\s*vs\s*/i)
+      .map((p) => p.trim())
+      .filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-    return wrapInteractive(<div className={S.jpWrap}>
+    return wrapInteractive(
+      <div className={S.jpWrap}>
         {parts.map((p, i) => (
           <div key={i} className={S.jpWrap}>
             {i > 0 && (
-              <div className={S.vsLabel} style={{ fontSize: Math.round(fs * 0.5) }}>VS</div>
+              <div className={S.vsLabel} style={{ fontSize: Math.round(fs * 0.5) }}>
+                VS
+              </div>
             )}
             <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
         {_ReadingRow(reading, showReadingRow)}
-      </div>);
+      </div>
+    );
   }
 
   // ── A・B・C ───────────────────────────────────────────────────────────────
   if (jpBranch === 'bullet') {
-    const parts = clean.split('・').map((p) => p.trim()).filter(Boolean);
+    const parts = clean
+      .split('・')
+      .map((p) => p.trim())
+      .filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-    return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
+    return wrapInteractive(
+      <div className={`${S.jpWrap} ${S.jpWrapTight}`}>
         {parts.map((p, i) => (
           <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
             {i > 0 && <div className={S.hr} />}
@@ -91,7 +105,8 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
           </div>
         ))}
         {_ReadingRow(reading, showReadingRow)}
-      </div>);
+      </div>
+    );
   }
 
   // ── Title：Subtitle ───────────────────────────────────────────────────────
@@ -99,19 +114,27 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
     const colonIdx = clean.indexOf('：');
     const title = clean.slice(0, colonIdx).trim();
     const sub = clean.slice(colonIdx + 1).trim();
-    return wrapInteractive(<div className={S.jpWrap}>
+    return wrapInteractive(
+      <div className={S.jpWrap}>
         <span style={jpStyle(jpFontSize(title))}>{renderJPWithRuby(title, ruby)}</span>
         <div className={`${S.hr} ${S.hrHover}`} />
-        <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>{renderJPWithRuby(sub, ruby)}</span>
+        <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>
+          {renderJPWithRuby(sub, ruby)}
+        </span>
         {_ReadingRow(reading, showReadingRow)}
-      </div>);
+      </div>
+    );
   }
 
   // ── A → B → C ────────────────────────────────────────────────────────────
   if (jpBranch === 'arrow') {
-    const parts = clean.split('→').map((p) => p.trim()).filter(Boolean);
+    const parts = clean
+      .split('→')
+      .map((p) => p.trim())
+      .filter(Boolean);
     const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
-    return wrapInteractive(<div className={`${S.jpWrap} ${S.jpWrapTight}`}>
+    return wrapInteractive(
+      <div className={`${S.jpWrap} ${S.jpWrapTight}`}>
         {parts.map((p, i) => (
           <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
             {i > 0 && <span className={S.arrowDown}>↓</span>}
@@ -119,20 +142,28 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
           </div>
         ))}
         {_ReadingRow(reading, showReadingRow)}
-      </div>);
+      </div>
+    );
   }
 
   // ── Plain ─────────────────────────────────────────────────────────────────
   const fs = jpFontSize(clean);
-  const plainContent = hasRubyInText
-    ? renderJPWithRuby(clean, ruby)
-    : (showFuri && reading)
-      ? <ruby className={S.ruby}>{clean}<rt>{reading}</rt></ruby>
-      : clean;
-  return wrapInteractive(<div style={{ textAlign: 'center' }}>
+  const plainContent = hasRubyInText ? (
+    renderJPWithRuby(clean, ruby)
+  ) : showFuri && reading ? (
+    <ruby className={S.ruby}>
+      {clean}
+      <rt>{reading}</rt>
+    </ruby>
+  ) : (
+    clean
+  );
+  return wrapInteractive(
+    <div style={{ textAlign: 'center' }}>
       <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{plainContent}</span>
       {!hasRubyInText && !(showFuri && reading) && _ReadingRow(reading, showReadingRow)}
-    </div>);
+    </div>
+  );
 }
 
 export function parseRubyFragments(jp = '') {
@@ -158,7 +189,7 @@ export function renderJPWithRuby(text, rubyFragments) {
       <ruby key={`rb-${key++}`} className={S.ruby}>
         {frag.base}
         <rt>{frag.reading}</rt>
-      </ruby>,
+      </ruby>
     );
     // Advance past base AND strip the 《reading》 marker that follows it.
     const afterBase = rest.slice(idx + frag.base.length);
@@ -174,7 +205,11 @@ function _ReadingRow(reading, show = true) {
   if (!show || !reading) return null;
   return (
     <div className={S.readingRow}>
-      {reading && <div className={S.furi} style={{ fontFamily: T.fontJP }}>{reading}</div>}
+      {reading && (
+        <div className={S.furi} style={{ fontFamily: T.fontJP }}>
+          {reading}
+        </div>
+      )}
     </div>
   );
 }
@@ -197,7 +232,9 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
         {parsed.items.map((item, i) => (
           <div key={i} className={S.listRow}>
             <span className={S.labelChip}>【{item.label}】</span>
-            <span className={S.body}>{renderJPWithRuby(item.body, parseRubyFragments(item.body))}</span>
+            <span className={S.body}>
+              {renderJPWithRuby(item.body, parseRubyFragments(item.body))}
+            </span>
           </div>
         ))}
         {footnote}
@@ -216,7 +253,9 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
         {parsed.items.map((item, i) => (
           <div key={i} className={`${S.listRow} ${S.listRowTight}`}>
             <span className={S.numLabel}>{item.num}</span>
-            <span className={S.body}>{renderJPWithRuby(item.body.trim(), parseRubyFragments(item.body.trim()))}</span>
+            <span className={S.body}>
+              {renderJPWithRuby(item.body.trim(), parseRubyFragments(item.body.trim()))}
+            </span>
           </div>
         ))}
         {footnote}
@@ -228,7 +267,11 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
   return (
     <div className={S.descBlock}>
       {parsed.lines.map((line, i) => (
-        <p key={i} className={S.plainPara} style={{ marginBottom: i < parsed.lines.length - 1 ? 5 : 0, opacity: 0.92 }}>
+        <p
+          key={i}
+          className={S.plainPara}
+          style={{ marginBottom: i < parsed.lines.length - 1 ? 5 : 0, opacity: 0.92 }}
+        >
           {renderJPWithRuby(line, parseRubyFragments(line))}
         </p>
       ))}

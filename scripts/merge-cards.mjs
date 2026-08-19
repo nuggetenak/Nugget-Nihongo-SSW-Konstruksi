@@ -8,13 +8,13 @@ import { writeFileSync, existsSync } from 'fs';
 import { pathToFileURL } from 'url';
 import path from 'path';
 
-const ROOT   = process.cwd();
+const ROOT = process.cwd();
 const SOURCE = path.join(ROOT, 'src', 'data', 'source');
 const OUTPUT = path.join(ROOT, 'src', 'data', 'cards.js');
 
 const SOURCES = [
-  { file: 'cards-common.js',    name: 'CARDS_COMMON' },    // common + vocab merged
-  { file: 'cards-lifeline.js', name: 'CARDS_LIFELINE' },  // lifeline + vocab merged
+  { file: 'cards-common.js', name: 'CARDS_COMMON' }, // common + vocab merged
+  { file: 'cards-lifeline.js', name: 'CARDS_LIFELINE' }, // lifeline + vocab merged
   // cards-doboku.js / cards-kenchiku.js removed at merge time (2026-08-18) —
   // Doboku/Kenchiku tracks dropped session 24, see CHANGELOG.md.
 ];
@@ -43,7 +43,7 @@ for (const { file, name } of SOURCES) {
 }
 
 // Restore original order using _origIndex, then strip it before output
-const hasIndex = allCards.every(c => typeof c._origIndex === 'number');
+const hasIndex = allCards.every((c) => typeof c._origIndex === 'number');
 if (hasIndex) {
   allCards.sort((a, b) => a._origIndex - b._origIndex);
 }
@@ -67,6 +67,10 @@ const header = [
   `export const CARDS = [`,
 ].join('\n');
 
-writeFileSync(OUTPUT, header + '\n' + outputCards.map(serializeCard).join(',\n') + '\n];\n', 'utf8');
+writeFileSync(
+  OUTPUT,
+  header + '\n' + outputCards.map(serializeCard).join(',\n') + '\n];\n',
+  'utf8'
+);
 
 console.log(`\n✅ Merged ${outputCards.length} cards → src/data/cards.js`);

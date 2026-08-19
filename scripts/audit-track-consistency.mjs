@@ -60,7 +60,9 @@ const setAnd = (a, b) => [...a].filter((x) => b.has(x)).sort((x, y) => x - y);
 
 console.log('=== AUDIT: mirror vs split-file track agreement ===\n');
 console.log(`common mirror:   ${commonMirror.size}   |  common split files:   ${commonSplit.size}`);
-console.log(`lifeline mirror: ${lifelineMirror.size}   |  lifeline split files: ${lifelineSplit.size}\n`);
+console.log(
+  `lifeline mirror: ${lifelineMirror.size}   |  lifeline split files: ${lifelineSplit.size}\n`
+);
 
 const mirrorCommonSplitLifeline = setAnd(commonMirror, lifelineSplit);
 const mirrorLifelineSplitCommon = setAnd(lifelineMirror, commonSplit);
@@ -79,14 +81,22 @@ const missingFromMirror = [
   ...setDiff(lifelineSplit, new Set([...commonMirror, ...lifelineMirror])),
 ];
 
-console.log(`\nin a mirror but in NEITHER split folder (structural gap): ${missingFromSplit.length}`);
+console.log(
+  `\nin a mirror but in NEITHER split folder (structural gap): ${missingFromSplit.length}`
+);
 if (missingFromSplit.length) console.log(missingFromSplit.join(', '));
-console.log(`in a split folder but in NEITHER mirror (structural gap): ${missingFromMirror.length}`);
+console.log(
+  `in a split folder but in NEITHER mirror (structural gap): ${missingFromMirror.length}`
+);
 if (missingFromMirror.length) console.log(missingFromMirror.join(', '));
 
 const totalMismatch = mirrorCommonSplitLifeline.length + mirrorLifelineSplitCommon.length;
-console.log(`\n=== RESULT: ${totalMismatch} of ${commonMirror.size + lifelineMirror.size} cards ` +
-  `disagree between mirror and split-file track ===`);
-console.log(totalMismatch > 0
-  ? '⚠️  Non-zero. See HANDOFF.md for status/decision on whether and how to reconcile.'
-  : '✅ Clean.');
+console.log(
+  `\n=== RESULT: ${totalMismatch} of ${commonMirror.size + lifelineMirror.size} cards ` +
+    `disagree between mirror and split-file track ===`
+);
+console.log(
+  totalMismatch > 0
+    ? '⚠️  Non-zero. See HANDOFF.md for status/decision on whether and how to reconcile.'
+    : '✅ Clean.'
+);

@@ -1,7 +1,9 @@
 # TASK v4.20.14 — PERF-2: JpDisplay Memoization (REF-11)
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.13 DONE
 
 ## Goal
+
 `JpDisplay.DescBlock` calls `parseRubyFragments()` on every render for every line/item. Memoize it.
 
 ---
@@ -33,15 +35,20 @@ export function parseDescStructure(desc = '', maxLines = 0) {
     let label = null;
     for (const p of parts) {
       const lm = p.match(/^【([^】]+)】$/);
-      if (lm) { label = lm[1]; }
-      else if (label !== null) { items.push({ label, body: p.trim() }); label = null; }
-      else { intro += p; }
+      if (lm) {
+        label = lm[1];
+      } else if (label !== null) {
+        items.push({ label, body: p.trim() });
+        label = null;
+      } else {
+        intro += p;
+      }
     }
     return { branch: 'brackets', intro: intro.trim(), items, src };
   }
 
   // Branch B: ①②③
-  const hasCircled = [...CIRCLED].some(c => main.includes(c));
+  const hasCircled = [...CIRCLED].some((c) => main.includes(c));
   if (hasCircled) {
     const CIDX = Object.fromEntries([...CIRCLED].map((c, i) => [c, i + 1]));
     const tokens = main.split(new RegExp(`(${[...CIRCLED].join('|')})`));
@@ -56,19 +63,32 @@ export function parseDescStructure(desc = '', maxLines = 0) {
           if (cur) items.push(cur);
           cur = { num: t, body: '' };
           lastIdx = tIdx;
-        } else { if (cur) cur.body += t; else intro += t; }
-      } else if (cur) { cur.body += t; }
-      else { intro += t; }
+        } else {
+          if (cur) cur.body += t;
+          else intro += t;
+        }
+      } else if (cur) {
+        cur.body += t;
+      } else {
+        intro += t;
+      }
     }
     if (cur) items.push(cur);
     return { branch: 'circled', intro: intro.trim(), items, src };
   }
 
   // Branch C: plain
-  const applyMax = (text) => maxLines
-    ? text.split(/\n|\\n/).filter(Boolean).slice(0, maxLines).join('\n')
-    : text;
-  const lines = applyMax(main).split(/\n|\\n/).filter(Boolean);
+  const applyMax = (text) =>
+    maxLines
+      ? text
+          .split(/\n|\\n/)
+          .filter(Boolean)
+          .slice(0, maxLines)
+          .join('\n')
+      : text;
+  const lines = applyMax(main)
+    .split(/\n|\\n/)
+    .filter(Boolean);
   return { branch: 'plain', lines, src };
 }
 ```
@@ -79,6 +99,7 @@ export function parseDescStructure(desc = '', maxLines = 0) {
 
 1. Add `useMemo` to the React imports at the top
 2. Add import for `parseDescStructure`:
+
 ```js
 import { stripFuri, extractReadings, jpFontSize, parseDescStructure } from '../utils/jp-helpers.js';
 ```
@@ -103,7 +124,9 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
         {parsed.items.map((item, i) => (
           <div key={i} className={S.listRow}>
             <span className={S.labelChip}>【{item.label}】</span>
-            <span className={S.body}>{renderJPWithRuby(item.body, parseRubyFragments(item.body))}</span>
+            <span className={S.body}>
+              {renderJPWithRuby(item.body, parseRubyFragments(item.body))}
+            </span>
           </div>
         ))}
         {footnote}
@@ -122,7 +145,9 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
         {parsed.items.map((item, i) => (
           <div key={i} className={`${S.listRow} ${S.listRowTight}`}>
             <span className={S.numLabel}>{item.num}</span>
-            <span className={S.body}>{renderJPWithRuby(item.body.trim(), parseRubyFragments(item.body.trim()))}</span>
+            <span className={S.body}>
+              {renderJPWithRuby(item.body.trim(), parseRubyFragments(item.body.trim()))}
+            </span>
           </div>
         ))}
         {footnote}
@@ -134,7 +159,11 @@ export function DescBlock({ desc = '', maxLines = 0 }) {
   return (
     <div className={S.descBlock}>
       {parsed.lines.map((line, i) => (
-        <p key={i} className={S.plainPara} style={{ marginBottom: i < parsed.lines.length - 1 ? 5 : 0, opacity: 0.92 }}>
+        <p
+          key={i}
+          className={S.plainPara}
+          style={{ marginBottom: i < parsed.lines.length - 1 ? 5 : 0, opacity: 0.92 }}
+        >
           {renderJPWithRuby(line, parseRubyFragments(line))}
         </p>
       ))}
@@ -177,12 +206,14 @@ If this refactor is too invasive, skip Step 3 and only do Steps 1-2. The DescBlo
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build`
-4. Bump → `4.20.14`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.14`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] parseDescStructure extracted to jp-helpers.js
 - [ ] DescBlock uses useMemo([desc, maxLines])
 - [ ] JpFront branch detection memoized (optional but preferred)

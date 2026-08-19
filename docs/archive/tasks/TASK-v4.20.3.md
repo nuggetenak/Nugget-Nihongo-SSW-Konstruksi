@@ -1,7 +1,9 @@
 # TASK v4.20.3 — ENG-1: session-analytics.js + ENG-7: Tests
+
 **Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.2 DONE
 
 ## Goal
+
 Create `session-analytics.js` to fix the same narrow quiz filter bug appearing in 3 separate files.
 
 **Root problem:** B3, N2, N4 are all independently hardcoding `['kuis','jac','wayground']` as the quiz session filter. This misses Simulasi, Sipil, Bangunan, Vocab, KuisProd modes. `calcReadiness`, `avgAcc`, and `avgQuizAcc` achievement all undercount users' accuracy.
@@ -35,18 +37,14 @@ export function getAvgAccuracy(sessions, n = null) {
  */
 export function getBestSimScore(sessions) {
   const sims = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
-  return sims.length
-    ? Math.max(...sims.map((s) => Math.round((s.correct / s.total) * 100)))
-    : 0;
+  return sims.length ? Math.max(...sims.map((s) => Math.round((s.correct / s.total) * 100))) : 0;
 }
 
 /**
  * True if any sprint session had 0 wrong and >= minCards.
  */
 export function hasPerfectSprint(sessions, minCards = 10) {
-  return sessions.some(
-    (s) => s.mode === 'sprint' && s.total >= minCards && s.correct === s.total
-  );
+  return sessions.some((s) => s.mode === 'sprint' && s.total >= minCards && s.correct === s.total);
 }
 
 /**
@@ -90,8 +88,15 @@ export function calcReadiness({ srs, sessions, streakData }) {
 ```
 
 Add to `src/utils/index.js` barrel:
+
 ```js
-export { getAvgAccuracy, getBestSimScore, hasPerfectSprint, getStrandCounts, calcReadiness } from './session-analytics.js';
+export {
+  getAvgAccuracy,
+  getBestSimScore,
+  hasPerfectSprint,
+  getStrandCounts,
+  calcReadiness,
+} from './session-analytics.js';
 ```
 
 Commit: `feat(utils): ENG-1 session-analytics.js — shared session math; fixes B3/N2/N4`
@@ -112,10 +117,10 @@ import { calcReadiness } from '../utils/session-analytics.js';
 // OR replace the local implementation with the imported call.
 
 // Find the narrow filter (same pattern as N2/N4 — ['kuis','jac','wayground']):
-const quizSessions = sessions.filter(s => ['kuis','jac','wayground'].includes(s.mode));
+const quizSessions = sessions.filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode));
 // CHANGE TO:
 import { SCORED_QUIZ_MODES } from '../utils/constants.js';
-const quizSessions = sessions.filter(s => SCORED_QUIZ_MODES.includes(s.mode));
+const quizSessions = sessions.filter((s) => SCORED_QUIZ_MODES.includes(s.mode));
 ```
 
 Commit: `fix(StatsMode): B3 — replace narrow quiz filter + local calcReadiness with session-analytics.js`
@@ -147,9 +152,10 @@ Commit: `fix(recommend-mode): N2 — use getAvgAccuracy from session-analytics.j
 **File:** `src/utils/achievements.js`
 
 Same pattern — find the narrow filter and avgQuizAcc computation:
+
 ```js
 // FIND:
-sessions.filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode) && s.total > 0)
+sessions.filter((s) => ['kuis', 'jac', 'wayground'].includes(s.mode) && s.total > 0);
 
 // CHANGE TO:
 import { getAvgAccuracy } from './session-analytics.js';
@@ -164,10 +170,20 @@ Commit: `fix(achievements): N4 — use getAvgAccuracy; quiz_70 now fires for all
 
 ```js
 import { describe, it, expect } from 'vitest';
-import { getAvgAccuracy, getBestSimScore, hasPerfectSprint, calcReadiness } from '../utils/session-analytics.js';
+import {
+  getAvgAccuracy,
+  getBestSimScore,
+  hasPerfectSprint,
+  calcReadiness,
+} from '../utils/session-analytics.js';
 
-const makeSess = (mode, correct, total, date = new Date().toISOString()) =>
-  ({ mode, correct, total, date, durationMs: 0 });
+const makeSess = (mode, correct, total, date = new Date().toISOString()) => ({
+  mode,
+  correct,
+  total,
+  date,
+  durationMs: 0,
+});
 
 describe('session-analytics', () => {
   describe('getAvgAccuracy', () => {
@@ -222,8 +238,11 @@ describe('session-analytics', () => {
       expect(r).toBe(0);
     });
     it('returns 0–100', () => {
-      const r = calcReadiness({ srs: { stats: { total: 100, mature: 50, review: 20 } },
-        sessions: [makeSess('kuis', 8, 10)], streakData: { current: 7 } });
+      const r = calcReadiness({
+        srs: { stats: { total: 100, mature: 50, review: 20 } },
+        sessions: [makeSess('kuis', 8, 10)],
+        streakData: { current: 7 },
+      });
       expect(r).toBeGreaterThanOrEqual(0);
       expect(r).toBeLessThanOrEqual(100);
     });
@@ -236,12 +255,14 @@ Commit: `test(session-analytics): ENG-7 — 13 tests for session-analytics.js`
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass (13 new tests)
 3. `npm run build`
-4. Bump → `4.20.3`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.3`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] session-analytics.js created (5 exports)
 - [ ] utils/index.js updated
 - [ ] StatsMode uses getAvgAccuracy/calcReadiness (B3)

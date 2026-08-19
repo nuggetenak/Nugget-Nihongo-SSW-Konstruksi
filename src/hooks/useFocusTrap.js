@@ -35,7 +35,7 @@ export function useFocusTrap(ref, active) {
       const focusable = getFocusable();
       if (!focusable.length) return;
       const firstEl = focusable[0];
-      const lastEl  = focusable[focusable.length - 1];
+      const lastEl = focusable[focusable.length - 1];
 
       if (e.shiftKey) {
         // Shift+Tab: wrap from first → last

@@ -28,15 +28,15 @@ v5 was a research-enrichment pass — it added §0.7–§0.12 evidence layers an
 
 **Phase mapping (old → new):**
 
-| Old | New | Name |
-|-----|-----|------|
+| Old      | New         | Name                                  |
+| -------- | ----------- | ------------------------------------- |
 | Phase 11 | **Phase A** | Bug Fixes + Storage v3 + Debt Cleanup |
-| Phase 12 | **Phase B** | Content: Sipil & Bangunan |
-| Phase 13 | **Phase C** | Daily Mission + Session Analytics |
-| Phase 14 | **Phase D** | Export/Import Hardening |
-| Phase 15 | **Phase E** | FlashcardMode Decomposition |
-| Phase 16 | **Phase F** | Exam Countdown + Audio |
-| Phase 17 | **Phase G** | QA + Polish + Release v4.0 |
+| Phase 12 | **Phase B** | Content: Sipil & Bangunan             |
+| Phase 13 | **Phase C** | Daily Mission + Session Analytics     |
+| Phase 14 | **Phase D** | Export/Import Hardening               |
+| Phase 15 | **Phase E** | FlashcardMode Decomposition           |
+| Phase 16 | **Phase F** | Exam Countdown + Audio                |
+| Phase 17 | **Phase G** | QA + Polish + Release v4.0            |
 
 ---
 
@@ -62,16 +62,16 @@ v5 was a research-enrichment pass — it added §0.7–§0.12 evidence layers an
 
 ### 0.1 Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | React 19.1 |
-| Build | Vite 6.3 |
-| SRS Engine | ts-fsrs 5.3 |
-| Storage | Pure localStorage (3-document model, v2 schema) |
-| Hosting | GitHub Pages (static) |
-| CI/CD | GitHub Actions (lint → test → build → deploy) |
-| Tests | Vitest 4.1, @testing-library/react 16 |
-| PWA | Custom service worker + manifest |
+| Layer      | Technology                                      |
+| ---------- | ----------------------------------------------- |
+| Framework  | React 19.1                                      |
+| Build      | Vite 6.3                                        |
+| SRS Engine | ts-fsrs 5.3                                     |
+| Storage    | Pure localStorage (3-document model, v2 schema) |
+| Hosting    | GitHub Pages (static)                           |
+| CI/CD      | GitHub Actions (lint → test → build → deploy)   |
+| Tests      | Vitest 4.1, @testing-library/react 16           |
+| PWA        | Custom service worker + manifest                |
 
 **Prod deps: 3** (react, react-dom, ts-fsrs) — Hard constraint: keep ≤ 5.
 
@@ -163,18 +163,18 @@ src/
 
 ### 0.3 Metrics
 
-| Metric | Current Value |
-|--------|-------------|
-| Total source lines | ~15,978 |
-| Tests | **223 passing** (10 files) |
-| Prod dependencies | 3 |
-| Modes | 18 (all lazy-loaded) |
-| Flashcards | 1,438 |
-| Quiz questions | ~770 (JAC + Wayground + CSV) |
-| CSS Module files | 16 |
-| localStorage documents | 3 (progress, srs, prefs) |
-| CI/CD | ✅ GitHub Actions (auto-deploy) |
-| SW auto-bump | ✅ Already in deploy.yml |
+| Metric                 | Current Value                   |
+| ---------------------- | ------------------------------- |
+| Total source lines     | ~15,978                         |
+| Tests                  | **223 passing** (10 files)      |
+| Prod dependencies      | 3                               |
+| Modes                  | 18 (all lazy-loaded)            |
+| Flashcards             | 1,438                           |
+| Quiz questions         | ~770 (JAC + Wayground + CSV)    |
+| CSS Module files       | 16                              |
+| localStorage documents | 3 (progress, srs, prefs)        |
+| CI/CD                  | ✅ GitHub Actions (auto-deploy) |
+| SW auto-bump           | ✅ Already in deploy.yml        |
 
 ### 0.4 Confirmed Bugs (Still Open)
 
@@ -200,23 +200,24 @@ When a user gets 5+ consecutive wrong answers in any quiz, no supportive message
 
 ### 0.5 Technical Debt Register (Still Open)
 
-| ID | Issue | Severity | Fix Phase |
-|----|-------|----------|-----------|
-| TD-01 | ExportMode uses v1 key format, incompatible with v2 storage | HIGH | A |
-| TD-02 | Dead exports from Dashboard.jsx (recordStudyDay, etc.) | MEDIUM | A |
-| TD-03 | wrong-tracker.js references v1 key names | MEDIUM | A |
-| TD-04 | `useStreak` should be `useAnswerStreak` (naming clarity) | LOW | A |
-| TD-05 | FLIP_STYLE injected to `<head>` via JS (should be CSS) | LOW | E |
-| TD-07 | `data/index.js` barrel re-export adds indirection | LOW | G |
-| TD-08 | Legacy nav arrays in `modes.js` (BELAJAR_MODES, etc.) | LOW | A |
-| TD-09 | Card `desc` field: missing SSW workplace context | MEDIUM | B |
-| TD-10 | Furigana always-visible regardless of user level | LOW | E |
+| ID    | Issue                                                       | Severity | Fix Phase |
+| ----- | ----------------------------------------------------------- | -------- | --------- |
+| TD-01 | ExportMode uses v1 key format, incompatible with v2 storage | HIGH     | A         |
+| TD-02 | Dead exports from Dashboard.jsx (recordStudyDay, etc.)      | MEDIUM   | A         |
+| TD-03 | wrong-tracker.js references v1 key names                    | MEDIUM   | A         |
+| TD-04 | `useStreak` should be `useAnswerStreak` (naming clarity)    | LOW      | A         |
+| TD-05 | FLIP_STYLE injected to `<head>` via JS (should be CSS)      | LOW      | E         |
+| TD-07 | `data/index.js` barrel re-export adds indirection           | LOW      | G         |
+| TD-08 | Legacy nav arrays in `modes.js` (BELAJAR_MODES, etc.)       | LOW      | A         |
+| TD-09 | Card `desc` field: missing SSW workplace context            | MEDIUM   | B         |
+| TD-10 | Furigana always-visible regardless of user level            | LOW      | E         |
 
 **TD-06 (SW auto-bump) — ALREADY RESOLVED.** Present in `deploy.yml`. Removed from debt register.
 
 ### 0.6 Data Schemas (Current)
 
 #### CARDS entry (cards.js)
+
 ```js
 {
   id: 42,
@@ -231,6 +232,7 @@ When a user gets 5+ consecutive wrong answers in any quiz, no supportive message
 ```
 
 #### Question Set entry (csv-sets.js / wayground-sets.js / jac-official.js)
+
 ```js
 {
   id: "set-id",
@@ -253,6 +255,7 @@ When a user gets 5+ consecutive wrong answers in any quiz, no supportive message
 ```
 
 #### Storage v2 Schema (schema.js)
+
 ```js
 STORAGE_VERSION = 2;
 
@@ -264,21 +267,33 @@ DOCS = {
 
 DEFAULTS.progress = {
   _v: 2,
-  known: [], unknown: [], starred: [],
-  quizWrong: {}, wrongCounts: {},
-  wgWrong: {}, vocabWrong: {},
-  jacScores: {}, wgScores: {}, vocabScores: {},
-  streakData: {}, dailyCount: { count: 0, date: '' },
+  known: [],
+  unknown: [],
+  starred: [],
+  quizWrong: {},
+  wrongCounts: {},
+  wgWrong: {},
+  vocabWrong: {},
+  jacScores: {},
+  wgScores: {},
+  vocabScores: {},
+  streakData: {},
+  dailyCount: { count: 0, date: '' },
   recentCards: [],
-  milestoneStreak7: false, milestoneQuiz70: false,
+  milestoneStreak7: false,
+  milestoneQuiz70: false,
 };
 
 DEFAULTS.srs = { _v: 2, cards: {} };
 
 DEFAULTS.prefs = {
   _v: 2,
-  track: null, theme: 'light', onboarded: false,
-  tutorialFlashcard: false, lastMode: null, dailyGoal: 20,
+  track: null,
+  theme: 'light',
+  onboarded: false,
+  tutorialFlashcard: false,
+  lastMode: null,
+  dailyGoal: 20,
 };
 ```
 
@@ -313,17 +328,19 @@ DEFAULTS.prefs = {
 
 ---
 
-### A.1 — Fix BUG-02: _seenPool module-scope → useRef
+### A.1 — Fix BUG-02: \_seenPool module-scope → useRef
 
 **File:** `src/modes/QuizMode.jsx`
 
 **Current (broken):**
+
 ```js
 // Line 3 — module scope, persists across mode entries
 const _seenPool = new Set();
 ```
 
 **Replace with:**
+
 ```js
 // Remove line 3 entirely. Add inside component:
 import { useState, useCallback, useMemo, useRef } from 'react';
@@ -334,12 +351,14 @@ export default function QuizMode({ cards, onExit }) {
 ```
 
 **All references to `_seenPool` → `seenPool.current`:**
+
 - Line 31: `_seenPool.has(c.id)` → `seenPool.current.has(c.id)`
 - Line 34: `_seenPool.clear()` → `seenPool.current.clear()`
 - Line 35: `_seenPool.add(c.id)` → `seenPool.current.add(c.id)`
 - Line 153: `_seenPool.clear()` → `seenPool.current.clear()`
 
 **Test:** `src/tests/quiz.seenpool.test.jsx`
+
 ```js
 import { describe, it, expect } from 'vitest';
 // Verify that QuizMode does not export or use module-scope _seenPool.
@@ -353,6 +372,7 @@ import { describe, it, expect } from 'vitest';
 **File:** `src/components/Dashboard.jsx`
 
 Delete these three exported functions (lines 19–38) entirely:
+
 - `export function recordStudyDay()` — dead, never imported
 - `export function incrementDailyCount()` — dead, never imported
 - `export function pushRecentCard()` — dead, never imported
@@ -372,6 +392,7 @@ The context already tracks `milestoneStreak7` and `milestoneQuiz70` but never fi
 **Changes:**
 
 1. Import toast from AppContext:
+
 ```js
 // At top of ProgressProvider:
 import { useApp } from './AppContext.jsx'; // ← if circular, pass toast as prop instead
@@ -380,6 +401,7 @@ import { useApp } from './AppContext.jsx'; // ← if circular, pass toast as pro
 2. **Alternative (avoid circular deps):** Accept `toast` as a prop to ProgressProvider, or use a callback ref pattern.
 
 **Recommended approach:** Add a `useEffect` in `App.jsx` that watches milestone flags:
+
 ```js
 // In App.jsx, after const { known, unknown } = useProgress():
 const progress = useProgress();
@@ -404,6 +426,7 @@ return { ...nextState, _pendingMilestones: result.newMilestones };
 ```
 
 **In FlashcardMode or wherever handleMark is called:**
+
 ```js
 const handleKnown = (id) => {
   handleMark(id, 'known');
@@ -421,11 +444,19 @@ const [toastQueue, setToastQueue] = useState([]);
 // Inside handleMark's setProg callback, after computing milestoneStreak7:
 if (milestoneStreak7 && !prev.milestoneStreak7) {
   // Can't call toast here (inside setState). Use queue pattern:
-  setTimeout(() => setToastQueue(q => [...q, { msg: '🔥 7 hari berturut-turut! Konsistensi = kunci sukses.', duration: 4000 }]), 0);
+  setTimeout(
+    () =>
+      setToastQueue((q) => [
+        ...q,
+        { msg: '🔥 7 hari berturut-turut! Konsistensi = kunci sukses.', duration: 4000 },
+      ]),
+    0
+  );
 }
 ```
 
 Expose `toastQueue` + `clearToast` from context. In `App.jsx`:
+
 ```js
 const { toastQueue, clearToast } = useProgress();
 const { toast } = useApp();
@@ -440,6 +471,7 @@ useEffect(() => {
 ```
 
 **Tests:** 3 tests
+
 - Milestone streak7 triggers when streakData.days transitions from 6→7
 - Milestone quiz70 triggers on first 70%+ quiz result
 - No double-trigger on subsequent renders
@@ -478,8 +510,10 @@ export function useStreak() {
   }, []);
 
   const reset = useCallback(() => {
-    setStreak(0); setMaxStreak(0);
-    setWrongStreak(0); setMaxWrongStreak(0);
+    setStreak(0);
+    setMaxStreak(0);
+    setWrongStreak(0);
+    setMaxWrongStreak(0);
   }, []);
 
   return { streak, maxStreak, wrongStreak, maxWrongStreak, recordAnswer, reset };
@@ -489,6 +523,7 @@ export function useStreak() {
 **File:** `src/components/QuizShell.jsx`
 
 After `onFinish` call, check `maxWrongStreak`:
+
 ```js
 // In the useEffect that fires on phase === 'finished':
 useEffect(() => {
@@ -504,11 +539,14 @@ useEffect(() => {
 ```js
 // When onFinish fires with maxWrongStreak >= 5:
 if (result.maxWrongStreak >= 5) {
-  toast.show('Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪', { duration: 4000 });
+  toast.show('Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪', {
+    duration: 4000,
+  });
 }
 ```
 
 **Tests:** 2 tests
+
 - Toast appears when 5+ consecutive wrong
 - Toast does NOT appear when < 5 consecutive wrong
 
@@ -519,10 +557,12 @@ if (result.maxWrongStreak >= 5) {
 **File:** `src/hooks/useStreak.js` → rename to `src/hooks/useAnswerStreak.js`
 
 Update all imports (grep to find them):
+
 - `src/components/QuizShell.jsx`
 - `src/hooks/index.js`
 
 **Also update the export name:**
+
 ```js
 export function useAnswerStreak() { ... }
 ```
@@ -539,19 +579,25 @@ export const STORAGE_VERSION = 3;
 export const DEFAULTS = {
   progress: {
     _v: 3,
-    known: [], unknown: [], starred: [],
-    quizWrong: {}, wrongCounts: {},
-    wgWrong: {}, vocabWrong: {},
-    jacScores: {}, wgScores: {}, vocabScores: {},
-    sipilScores: {},      // ← NEW Phase B
-    bangunanScores: {},   // ← NEW Phase B
+    known: [],
+    unknown: [],
+    starred: [],
+    quizWrong: {},
+    wrongCounts: {},
+    wgWrong: {},
+    vocabWrong: {},
+    jacScores: {},
+    wgScores: {},
+    vocabScores: {},
+    sipilScores: {}, // ← NEW Phase B
+    bangunanScores: {}, // ← NEW Phase B
     streakData: {},
     dailyCount: { count: 0, date: '' },
     recentCards: [],
     milestoneStreak7: false,
     milestoneQuiz70: false,
-    sessions: [],         // ← NEW Phase C: { mode, correct, total, date, durationMs }
-    dailyMission: null,   // ← NEW Phase C: { date, mode, target, completedAt }
+    sessions: [], // ← NEW Phase C: { mode, correct, total, date, durationMs }
+    dailyMission: null, // ← NEW Phase C: { date, mode, target, completedAt }
   },
   srs: {
     _v: 3,
@@ -565,9 +611,9 @@ export const DEFAULTS = {
     tutorialFlashcard: false,
     lastMode: null,
     dailyGoal: 20,
-    examDate: null,          // ← NEW Phase F: ISO date string
-    audioEnabled: true,      // ← NEW Phase F
-    studyAnchor: null,       // ← NEW Phase C: 'morning' | 'lunch' | 'evening'
+    examDate: null, // ← NEW Phase F: ISO date string
+    audioEnabled: true, // ← NEW Phase F
+    studyAnchor: null, // ← NEW Phase C: 'morning' | 'lunch' | 'evening'
     furiganaPolicy: 'always', // ← NEW Phase E: 'always' | 'tap' | 'hidden'
   },
 };
@@ -581,7 +627,9 @@ export function hasV2Data() {
     const raw = localStorage.getItem('ssw-progress');
     const parsed = raw ? JSON.parse(raw) : null;
     return parsed?._v === 2;
-  } catch { return false; }
+  } catch {
+    return false;
+  }
 }
 
 export function migrate_v2_to_v3() {
@@ -612,7 +660,7 @@ export function migrate_v2_to_v3() {
 
 ```js
 import { hasV1Data, migrate_v1_to_v2, cleanup_v1_keys } from './migrations.js';
-import { hasV2Data, migrate_v2_to_v3 } from './migrations.js';  // ← ADD
+import { hasV2Data, migrate_v2_to_v3 } from './migrations.js'; // ← ADD
 
 // In init():
 if (isV2) {
@@ -676,6 +724,7 @@ export function init() {
 ```
 
 **Tests:** 5 tests
+
 - Fresh install creates v3 schema
 - v2 data migrates to v3 (new fields present, old data preserved)
 - v1 data migrates through v2 to v3
@@ -719,6 +768,7 @@ ExportMode currently uses its own export format that doesn't match the v2 (soon 
 **Option 1 (recommended):** Delete ExportMode entirely. Move export/import to SayaTab (Phase D handles the full implementation). For now, just ensure ExportMode calls `engine.exportAll()` and `engine.importAll()`.
 
 **Option 2 (minimal fix):** Replace ExportMode's custom logic with:
+
 ```js
 import { exportAll, importAll } from '../storage/engine.js';
 
@@ -729,7 +779,7 @@ const handleExport = () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `ssw-progress-v${data._storage_version}-${new Date().toISOString().slice(0,10)}.json`;
+  a.download = `ssw-progress-v${data._storage_version}-${new Date().toISOString().slice(0, 10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
 };
@@ -742,6 +792,7 @@ const handleExport = () => {
 **File:** `src/router/modes.js`
 
 Delete these (lines near bottom):
+
 ```js
 // DELETE:
 export const BELAJAR_MODES = ...
@@ -761,18 +812,19 @@ export const LAINNYA_MODES = ...
 
 Replace generic encouragement strings:
 
-| Context | Current | New |
-|---------|---------|-----|
-| Path B (< 50%) | `"Jangan Menyerah!"` (generic) | `"Belum. Tapi kamu sudah tahu apa yang perlu dipelajari."` |
-| Path encourage emoji | `'💪'` | `'🌱'` |
+| Context              | Current                        | New                                                        |
+| -------------------- | ------------------------------ | ---------------------------------------------------------- |
+| Path B (< 50%)       | `"Jangan Menyerah!"` (generic) | `"Belum. Tapi kamu sudah tahu apa yang perlu dipelajari."` |
+| Path encourage emoji | `'💪'`                         | `'🌱'`                                                     |
 
 Find in `ResultScreen.jsx`:
+
 ```js
 // Change the path label:
 // Old:
-path === 'encourage' ? '💪' : grade.emoji
+path === 'encourage' ? '💪' : grade.emoji;
 // New:
-path === 'encourage' ? '🌱' : grade.emoji
+path === 'encourage' ? '🌱' : grade.emoji;
 ```
 
 In `theme.js` or wherever `getGrade` is defined, update the label for low grades to use growth-mindset language. Or change it directly in ResultScreen where grade.label is shown:
@@ -791,15 +843,15 @@ This is a zero-risk string change. No architecture impact.
 
 ### A.TESTS — Phase A Test Summary
 
-| Test File | Tests | Description |
-|-----------|-------|-------------|
-| `quiz.seenpool.test.jsx` | 3 | useRef-based seen pool |
-| `storage.migration-v3.test.js` | 5 | v2→v3, v1→v3, fresh install |
-| `milestone.toast.test.jsx` | 3 | streak7, quiz70, no double-fire |
-| `anxiety.toast.test.jsx` | 2 | wrongStreak ≥5, wrongStreak <5 |
-| `wrongtracker.test.js` | 3 | v3-compatible read/write |
-| **Total new** | **~16** | |
-| **Running total** | **~239** | |
+| Test File                      | Tests    | Description                     |
+| ------------------------------ | -------- | ------------------------------- |
+| `quiz.seenpool.test.jsx`       | 3        | useRef-based seen pool          |
+| `storage.migration-v3.test.js` | 5        | v2→v3, v1→v3, fresh install     |
+| `milestone.toast.test.jsx`     | 3        | streak7, quiz70, no double-fire |
+| `anxiety.toast.test.jsx`       | 2        | wrongStreak ≥5, wrongStreak <5  |
+| `wrongtracker.test.js`         | 3        | v3-compatible read/write        |
+| **Total new**                  | **~16**  |                                 |
+| **Running total**              | **~239** |                                 |
 
 ### A.DONE — Phase A Completion Checklist
 
@@ -840,16 +892,17 @@ This is a zero-risk string change. No architecture impact.
 
 **Content source:** Official JAC PDFs from `https://global.jac-skill.or.jp/indonesia/examination/documents.php`. The seed data in `docs/seeds/sipil-sets-seed.js` is a placeholder — **rebuild from these JAC PDFs before shipping:**
 
-| PDF | Content | Priority |
-|-----|---------|----------|
-| `ctextd.pdf` | Compressed textbook Sipil (JP) | ★★★ — primary term/concept source |
-| `ctextd_id.pdf` | Compressed textbook Sipil (Indonesian) | ★★★ — translations + context |
-| `st_sample_d.pdf` | Sample praktek questions Sipil | ★★★ — exact exam format reference |
-| `st_sample2_d.pdf` | Sample praktek questions Sipil 2 | ★★★ |
-| `tt_sample.pdf` | Sample teori questions (shared) | ★★ — safety/general section |
-| `text5d–7d.pdf` | Full praktek chapters | ★★ — deep content + photos for B.7 |
+| PDF                | Content                                | Priority                           |
+| ------------------ | -------------------------------------- | ---------------------------------- |
+| `ctextd.pdf`       | Compressed textbook Sipil (JP)         | ★★★ — primary term/concept source  |
+| `ctextd_id.pdf`    | Compressed textbook Sipil (Indonesian) | ★★★ — translations + context       |
+| `st_sample_d.pdf`  | Sample praktek questions Sipil         | ★★★ — exact exam format reference  |
+| `st_sample2_d.pdf` | Sample praktek questions Sipil 2       | ★★★                                |
+| `tt_sample.pdf`    | Sample teori questions (shared)        | ★★ — safety/general section        |
+| `text5d–7d.pdf`    | Full praktek chapters                  | ★★ — deep content + photos for B.7 |
 
 **JAC exam format notes** (observed from sample PDFs):
+
 - Every question has full furigana in parentheses: `掘削（くっさく）`
 - Many questions are photo-based: "写真の工具は何か" → needs `img` field (see B.7)
 - Questions tend to be direct and simple: "Xとは何か", "Xの目的は？"
@@ -876,15 +929,15 @@ export const SIPIL_SETS = [
           'Ada tidaknya utilitas bawah tanah',
           'Prakiraan cuaca',
           'Usia pekerja',
-          'Menu makan siang'
+          'Menu makan siang',
         ],
         ans: 0,
         exp: 'Sebelum menggali, WAJIB cek utilitas bawah tanah (gas, listrik, air) untuk mencegah kecelakaan. Atasan akan tanya: 地下埋設物の確認はしましたか？',
         cat: 'jenis_kerja',
-        desc: 'Pengecekan utilitas bawah tanah sebelum penggalian. Sebagai pekerja SSW: ini prosedur K3 wajib sebelum excavator mulai kerja — diatur UU Keselamatan Kerja Jepang.'
+        desc: 'Pengecekan utilitas bawah tanah sebelum penggalian. Sebagai pekerja SSW: ini prosedur K3 wajib sebelum excavator mulai kerja — diatur UU Keselamatan Kerja Jepang.',
       },
       // ... more questions (minimum 15 per set, target 3 sets = 45+ questions)
-    ]
+    ],
   },
   // sipil-02, sipil-03 ...
 ];
@@ -918,19 +971,14 @@ export const BANGUNAN_SETS = [
       {
         q: 'コンクリートのスランプ試験で測るものは？',
         opts: ['軟らかさ（流動性）', '強度', '温度', '色'],
-        opts_id: [
-          'Kelunakan (flowability)',
-          'Kekuatan',
-          'Suhu',
-          'Warna'
-        ],
+        opts_id: ['Kelunakan (flowability)', 'Kekuatan', 'Suhu', 'Warna'],
         ans: 0,
         exp: 'Slump test mengukur konsistensi/flowability beton segar, bukan kekuatan. Kekuatan diukur setelah curing. Di lapangan atasan akan bilang: スランプ値を確認してください。',
         cat: 'jenis_kerja',
-        desc: 'Uji slump beton. Sebagai pekerja SSW bangunan: kamu akan lihat mandor cek ini setiap mixer truck datang — nilai slump yang salah = beton ditolak.'
+        desc: 'Uji slump beton. Sebagai pekerja SSW bangunan: kamu akan lihat mandor cek ini setiap mixer truck datang — nilai slump yang salah = beton ditolak.',
       },
       // ... minimum 15 questions per set
-    ]
+    ],
   },
 ];
 ```
@@ -942,6 +990,7 @@ export const BANGUNAN_SETS = [
 **File:** `src/data/index.js`
 
 Add:
+
 ```js
 export { SIPIL_SETS } from './sipil-sets.js';
 export { BANGUNAN_SETS } from './bangunan-sets.js';
@@ -1007,7 +1056,9 @@ export default function SipilMode({ onExit }) {
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <button className={S.btnBack} onClick={onExit}>
+        ← Kembali
+      </button>
       <h2 className={S.pageTitle}>⛏️ Sipil · 土木</h2>
       <p className={S.pageSub}>Soal SSW Konstruksi jalur 土木</p>
 
@@ -1015,18 +1066,17 @@ export default function SipilMode({ onExit }) {
         {SIPIL_SETS.map((set) => {
           const score = scores[set.id];
           return (
-            <button
-              key={set.id}
-              className={S.listItem}
-              onClick={() => setSelectedSet(set)}
-            >
+            <button key={set.id} className={S.listItem} onClick={() => setSelectedSet(set)}>
               <span style={{ fontSize: 24 }}>{set.emoji}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 14, fontWeight: 700 }}>{set.title}</div>
-                <div style={{ fontSize: 11, color: T.textDim }}>{set.subtitle} · {set.questions.length} soal</div>
+                <div style={{ fontSize: 11, color: T.textDim }}>
+                  {set.subtitle} · {set.questions.length} soal
+                </div>
                 {score && (
                   <div style={{ fontSize: 10, color: T.textMuted, marginTop: 2 }}>
-                    Terakhir: {score.correct}/{score.total} ({Math.round(score.correct/score.total*100)}%)
+                    Terakhir: {score.correct}/{score.total} (
+                    {Math.round((score.correct / score.total) * 100)}%)
                   </div>
                 )}
               </div>
@@ -1090,6 +1140,7 @@ public/
 ```
 
 **Image specs:**
+
 - Format: WebP (best size/quality ratio, supported on all target browsers)
 - Max dimensions: 600×400px (adequate for mobile quiz display)
 - Max file size: 80KB per image (target ~30-50KB)
@@ -1131,27 +1182,31 @@ The `renderExtra` prop already exists for injecting extra content per question. 
   onFinish={handleFinish}
   title={`Sipil — ${selectedSet.title}`}
   showHint
-  renderExtra={(q) => q.img ? (
-    <div style={{
-      margin: '12px 0',
-      borderRadius: 8,
-      overflow: 'hidden',
-      border: `1px solid ${T.border}`,
-    }}>
-      <img
-        src={`${import.meta.env.BASE_URL}images/${q.img}`}
-        alt="Foto soal"
-        loading="lazy"
+  renderExtra={(q) =>
+    q.img ? (
+      <div
         style={{
-          width: '100%',
-          maxHeight: 240,
-          objectFit: 'contain',
-          background: T.surface,
-          display: 'block',
+          margin: '12px 0',
+          borderRadius: 8,
+          overflow: 'hidden',
+          border: `1px solid ${T.border}`,
         }}
-      />
-    </div>
-  ) : null}
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}images/${q.img}`}
+          alt="Foto soal"
+          loading="lazy"
+          style={{
+            width: '100%',
+            maxHeight: 240,
+            objectFit: 'contain',
+            background: T.surface,
+            display: 'block',
+          }}
+        />
+      </div>
+    ) : null
+  }
 />
 ```
 
@@ -1167,13 +1222,15 @@ export default function QuestionImage({ src }) {
   if (!src) return null;
   const basePath = import.meta.env.BASE_URL;
   return (
-    <div style={{
-      margin: '12px 0',
-      borderRadius: 8,
-      overflow: 'hidden',
-      border: `1px solid ${T.border}`,
-      background: T.surface,
-    }}>
+    <div
+      style={{
+        margin: '12px 0',
+        borderRadius: 8,
+        overflow: 'hidden',
+        border: `1px solid ${T.border}`,
+        background: T.surface,
+      }}
+    >
       <img
         src={`${basePath}images/${src}`}
         alt="Foto soal"
@@ -1184,7 +1241,9 @@ export default function QuestionImage({ src }) {
           objectFit: 'contain',
           display: 'block',
         }}
-        onError={(e) => { e.target.style.display = 'none'; }}
+        onError={(e) => {
+          e.target.style.display = 'none';
+        }}
       />
     </div>
   );
@@ -1212,12 +1271,14 @@ const IMAGE_URLS = [
 // In fetch handler, for /images/* requests, use cache-first strategy:
 if (event.request.url.includes('/images/')) {
   event.respondWith(
-    caches.match(event.request).then(cached =>
-      cached || fetch(event.request).then(response => {
-        const clone = response.clone();
-        caches.open(CACHE_VERSION).then(cache => cache.put(event.request, clone));
-        return response;
-      })
+    caches.match(event.request).then(
+      (cached) =>
+        cached ||
+        fetch(event.request).then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_VERSION).then((cache) => cache.put(event.request, clone));
+          return response;
+        })
     )
   );
 }
@@ -1255,6 +1316,7 @@ if (event.request.url.includes('/images/')) {
 #### B.7.6 — Fallback for missing images
 
 `QuestionImage.jsx` has `onError` handler that hides the `<img>` on load failure. This means:
+
 - Questions with `img` field but missing file → gracefully degrade to text-only
 - Questions without `img` field → no change
 - Offline + image not yet cached → text-only, no broken image icon
@@ -1263,14 +1325,14 @@ if (event.request.url.includes('/images/')) {
 
 ### B.TESTS — Phase B Test Summary
 
-| Test File | Tests | Description |
-|-----------|-------|-------------|
-| `sipil-data.test.js` | 8 | Schema validation: all questions have q/opts/ans/exp/cat, ans in range, unique IDs |
-| `bangunan-data.test.js` | 8 | Same as above |
-| `sipil-mode.test.jsx` | 5 | Renders set list, opens quiz, saves score |
-| `bangunan-mode.test.jsx` | 4 | Renders set list, opens quiz |
-| `question-image.test.jsx` | 3 | Renders image when src provided, hides on error, null when no src |
-| **Total new** | **~28** | |
+| Test File                 | Tests   | Description                                                                        |
+| ------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `sipil-data.test.js`      | 8       | Schema validation: all questions have q/opts/ans/exp/cat, ans in range, unique IDs |
+| `bangunan-data.test.js`   | 8       | Same as above                                                                      |
+| `sipil-mode.test.jsx`     | 5       | Renders set list, opens quiz, saves score                                          |
+| `bangunan-mode.test.jsx`  | 4       | Renders set list, opens quiz                                                       |
+| `question-image.test.jsx` | 3       | Renders image when src provided, hides on error, null when no src                  |
+| **Total new**             | **~28** |                                                                                    |
 
 ### B.DONE — Phase B Completion Checklist
 
@@ -1322,12 +1384,12 @@ import { get, set as storageSet } from '../storage/engine.js';
 import { getDueCardIds } from '../srs/fsrs-scheduler.js';
 
 const MISSION_TYPES = [
-  { mode: 'ulasan',  label: 'Ulasan SRS',       icon: '🔁', priority: 5, strand: 'fluency'   },
-  { mode: 'kartu',   label: 'Pelajari Kartu',    icon: '🃏', priority: 3, strand: 'input'     },
-  { mode: 'kuis',    label: 'Kuis 10 Soal',      icon: '❓', priority: 3, strand: 'language'  },
-  { mode: 'sprint',  label: 'Sprint 60 Detik',   icon: '⚡', priority: 2, strand: 'output'    },
-  { mode: 'jac',     label: 'Latihan JAC',       icon: '📋', priority: 2, strand: 'language'  },
-  { mode: 'fokus',   label: 'Fokus Kelemahan',   icon: '🎯', priority: 4, strand: 'language'  },
+  { mode: 'ulasan', label: 'Ulasan SRS', icon: '🔁', priority: 5, strand: 'fluency' },
+  { mode: 'kartu', label: 'Pelajari Kartu', icon: '🃏', priority: 3, strand: 'input' },
+  { mode: 'kuis', label: 'Kuis 10 Soal', icon: '❓', priority: 3, strand: 'language' },
+  { mode: 'sprint', label: 'Sprint 60 Detik', icon: '⚡', priority: 2, strand: 'output' },
+  { mode: 'jac', label: 'Latihan JAC', icon: '📋', priority: 2, strand: 'language' },
+  { mode: 'fokus', label: 'Fokus Kelemahan', icon: '🎯', priority: 4, strand: 'language' },
 ];
 
 export function generateDailyMission() {
@@ -1344,14 +1406,14 @@ export function generateDailyMission() {
   // 3. Rotate through strands to maintain Four Strands balance
   const dueCount = getDueCardIds().length;
   const sessions = progress.sessions ?? [];
-  const recentSessions = sessions.filter(s =>
-    new Date(s.date) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+  const recentSessions = sessions.filter(
+    (s) => new Date(s.date) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
   );
 
   // Count strand usage in last 7 days
   const strandCounts = { input: 0, output: 0, fluency: 0, language: 0 };
-  recentSessions.forEach(s => {
-    const mt = MISSION_TYPES.find(m => m.mode === s.mode);
+  recentSessions.forEach((s) => {
+    const mt = MISSION_TYPES.find((m) => m.mode === s.mode);
     if (mt) strandCounts[mt.strand]++;
   });
 
@@ -1361,18 +1423,17 @@ export function generateDailyMission() {
     selectedMode = 'ulasan';
   } else {
     // Find underrepresented strand
-    const minStrand = Object.entries(strandCounts)
-      .sort((a, b) => a[1] - b[1])[0][0];
+    const minStrand = Object.entries(strandCounts).sort((a, b) => a[1] - b[1])[0][0];
 
-    const candidates = MISSION_TYPES.filter(m => m.strand === minStrand);
+    const candidates = MISSION_TYPES.filter((m) => m.strand === minStrand);
     selectedMode = candidates[Math.floor(Math.random() * candidates.length)]?.mode || 'kartu';
   }
 
   const mission = {
     date: today,
     mode: selectedMode,
-    label: MISSION_TYPES.find(m => m.mode === selectedMode)?.label || 'Belajar',
-    icon: MISSION_TYPES.find(m => m.mode === selectedMode)?.icon || '📖',
+    label: MISSION_TYPES.find((m) => m.mode === selectedMode)?.label || 'Belajar',
+    icon: MISSION_TYPES.find((m) => m.mode === selectedMode)?.icon || '📖',
     completedAt: null,
   };
 
@@ -1383,9 +1444,7 @@ export function generateDailyMission() {
 export function completeMission() {
   storageSet('progress', (p) => ({
     ...p,
-    dailyMission: p.dailyMission
-      ? { ...p.dailyMission, completedAt: Date.now() }
-      : null,
+    dailyMission: p.dailyMission ? { ...p.dailyMission, completedAt: Date.now() } : null,
   }));
 }
 
@@ -1408,32 +1467,37 @@ import { generateDailyMission, completeMission, getMission } from '../utils/dail
 
 // Inside component, before return:
 const mission = useMemo(() => generateDailyMission(), []);
-const missionDone = mission?.completedAt &&
+const missionDone =
+  mission?.completedAt &&
   new Date(mission.completedAt).toDateString() === new Date().toDateString();
 
 // In JSX, before quickStart card:
-{mission && !missionDone && (
-  <button
-    className={s.missionCard}
-    onClick={() => onNavigate(mission.mode)}
-    aria-label={`Misi hari ini: ${mission.label}`}
-  >
-    <span style={{ fontSize: 28 }}>{mission.icon}</span>
-    <div>
-      <div style={{ fontSize: 13, fontWeight: 700 }}>Misi Hari Ini</div>
-      <div style={{ fontSize: 11, color: T.textDim }}>{mission.label}</div>
-    </div>
-    <span style={{ fontSize: 11, fontWeight: 700, color: T.accent }}>Mulai →</span>
-  </button>
-)}
+{
+  mission && !missionDone && (
+    <button
+      className={s.missionCard}
+      onClick={() => onNavigate(mission.mode)}
+      aria-label={`Misi hari ini: ${mission.label}`}
+    >
+      <span style={{ fontSize: 28 }}>{mission.icon}</span>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 700 }}>Misi Hari Ini</div>
+        <div style={{ fontSize: 11, color: T.textDim }}>{mission.label}</div>
+      </div>
+      <span style={{ fontSize: 11, fontWeight: 700, color: T.accent }}>Mulai →</span>
+    </button>
+  );
+}
 
-{missionDone && (
-  <div className={s.missionDone}>
-    <span>✅</span>
-    <span style={{ fontSize: 13, fontWeight: 700 }}>Misi Selesai!</span>
-    <span style={{ fontSize: 11, color: T.textDim }}>Kembali besok 🌙</span>
-  </div>
-)}
+{
+  missionDone && (
+    <div className={s.missionDone}>
+      <span>✅</span>
+      <span style={{ fontSize: 13, fontWeight: 700 }}>Misi Selesai!</span>
+      <span style={{ fontSize: 11, color: T.textDim }}>Kembali besok 🌙</span>
+    </div>
+  );
+}
 ```
 
 Add corresponding CSS classes to `Dashboard.module.css`.
@@ -1462,12 +1526,18 @@ export default function MissionCompleteOverlay() {
   if (!visible) return null;
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 9999,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'rgba(0,0,0,0.5)',
-      animation: 'fadeOut 1.5s ease forwards',
-    }}>
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'rgba(0,0,0,0.5)',
+        animation: 'fadeOut 1.5s ease forwards',
+      }}
+    >
       <div style={{ textAlign: 'center', color: '#fff' }}>
         <div style={{ fontSize: 64 }}>🎉</div>
         <div style={{ fontSize: 24, fontWeight: 800, marginTop: 8 }}>Misi Selesai!</div>
@@ -1486,19 +1556,25 @@ Record session summaries to `progress.sessions` (capped at 90 entries):
 **File:** `src/contexts/ProgressContext.jsx` — Add `recordSession`:
 
 ```js
-const recordSession = useCallback(({ mode, correct, total, durationMs }) => {
-  setProg((prev) => {
-    const sessions = [...(prev.sessions ?? []), {
-      mode,
-      correct,
-      total,
-      durationMs,
-      date: new Date().toISOString(),
-    }].slice(-90); // keep last 90
+const recordSession = useCallback(
+  ({ mode, correct, total, durationMs }) => {
+    setProg((prev) => {
+      const sessions = [
+        ...(prev.sessions ?? []),
+        {
+          mode,
+          correct,
+          total,
+          durationMs,
+          date: new Date().toISOString(),
+        },
+      ].slice(-90); // keep last 90
 
-    return { ...prev, sessions };
-  });
-}, [setProg]);
+      return { ...prev, sessions };
+    });
+  },
+  [setProg]
+);
 ```
 
 Expose `recordSession` from context. Call it from QuizShell's `onFinish`, from FlashcardMode on exit, etc.
@@ -1512,10 +1588,10 @@ Add to StatsMode: sessions-per-week chart, strand balance visualization, daily c
 ```jsx
 // In StatsMode.jsx — add a "Riwayat Belajar" section:
 const sessions = get('progress')?.sessions ?? [];
-const last7 = sessions.filter(s => new Date(s.date) > new Date(Date.now() - 7*86400000));
+const last7 = sessions.filter((s) => new Date(s.date) > new Date(Date.now() - 7 * 86400000));
 const byDay = {};
-last7.forEach(s => {
-  const d = s.date.slice(0,10);
+last7.forEach((s) => {
+  const d = s.date.slice(0, 10);
   byDay[d] = (byDay[d] || 0) + 1;
 });
 ```
@@ -1527,6 +1603,7 @@ last7.forEach(s => {
 **File:** `src/components/SayaTab.jsx`
 
 Add a "Waktu Belajar" picker:
+
 ```jsx
 <div className={s.settingRow}>
   <div className={s.settingLabel}>Waktu Belajar</div>
@@ -1544,6 +1621,7 @@ Add a "Waktu Belajar" picker:
 ```
 
 Dashboard shows contextual greeting based on anchor:
+
 ```js
 const anchorTexts = {
   morning: 'Selamat pagi! Ada 5 menit untuk belajar? ☀️',
@@ -1557,14 +1635,14 @@ const anchorText = prefs.studyAnchor ? anchorTexts[prefs.studyAnchor] : null;
 
 ### C.TESTS — Phase C Test Summary
 
-| Test File | Tests | Description |
-|-----------|-------|-------------|
-| `daily-mission.test.js` | 10 | Generate, deduplicate by date, priority branches, strand balance |
-| `session-tracking.test.js` | 5 | Record, cap at 90, correct schema |
-| `mission-overlay.test.jsx` | 3 | Renders, fades after 1.5s |
-| `stats-sessions.test.jsx` | 5 | Weekly chart data, strand counts |
-| `habit-anchor.test.jsx` | 5 | Prefs saved, Dashboard text changes |
-| **Total new** | **~28** | |
+| Test File                  | Tests   | Description                                                      |
+| -------------------------- | ------- | ---------------------------------------------------------------- |
+| `daily-mission.test.js`    | 10      | Generate, deduplicate by date, priority branches, strand balance |
+| `session-tracking.test.js` | 5       | Record, cap at 90, correct schema                                |
+| `mission-overlay.test.jsx` | 3       | Renders, fades after 1.5s                                        |
+| `stats-sessions.test.jsx`  | 5       | Weekly chart data, strand counts                                 |
+| `habit-anchor.test.jsx`    | 5       | Prefs saved, Dashboard text changes                              |
+| **Total new**              | **~28** |                                                                  |
 
 ### C.DONE — Phase C Completion Checklist
 
@@ -1594,7 +1672,8 @@ const anchorText = prefs.studyAnchor ? anchorTexts[prefs.studyAnchor] : null;
 ```js
 export function validateSnapshot(snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return { ok: false, reason: 'not_object' };
-  if (!snapshot.progress || !snapshot.srs || !snapshot.prefs) return { ok: false, reason: 'missing_docs' };
+  if (!snapshot.progress || !snapshot.srs || !snapshot.prefs)
+    return { ok: false, reason: 'missing_docs' };
   if (!Array.isArray(snapshot.progress.known)) return { ok: false, reason: 'invalid_known' };
   if (typeof snapshot.srs.cards !== 'object') return { ok: false, reason: 'invalid_srs' };
 
@@ -1638,13 +1717,13 @@ Show data summary before export, show diff before import, use ConfirmDialog for 
 
 ### D.TESTS
 
-| Test | Description |
-|------|-------------|
-| Valid snapshot passes validation | |
-| Missing docs fails validation | |
-| Invalid types fail validation | |
-| Import rollback restores state on error | |
-| Exported file imports cleanly | |
+| Test                                    | Description |
+| --------------------------------------- | ----------- |
+| Valid snapshot passes validation        |             |
+| Missing docs fails validation           |             |
+| Invalid types fail validation           |             |
+| Import rollback restores state on error |             |
+| Exported file imports cleanly           |             |
 
 ---
 
@@ -1672,22 +1751,34 @@ Move `FLIP_STYLE` to `src/styles/global.css`:
 
 ```css
 /* Flashcard 3D flip */
-.fc-scene { perspective: 1200px; }
+.fc-scene {
+  perspective: 1200px;
+}
 .fc-card {
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
-.fc-card.is-flipped { transform: rotateY(180deg); }
+.fc-card.is-flipped {
+  transform: rotateY(180deg);
+}
 .fc-face {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-.fc-face--back { transform: rotateY(180deg); }
+.fc-face--back {
+  transform: rotateY(180deg);
+}
 @keyframes fcHintFade {
-  0%, 70% { opacity: 1; }
-  100% { opacity: 0; pointer-events: none; }
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 ```
 
@@ -1699,8 +1790,7 @@ Add `furiganaPolicy` prop to `JpDisplay.jsx`:
 
 ```jsx
 export function JpFront({ text, furi, romaji, furiganaPolicy = 'always', ...props }) {
-  const showFuri = furiganaPolicy === 'always' ||
-    (furiganaPolicy === 'tap' && tapped);
+  const showFuri = furiganaPolicy === 'always' || (furiganaPolicy === 'tap' && tapped);
 
   // ...existing render, but conditionally hide furigana
 }
@@ -1725,6 +1815,7 @@ Wire it to `prefs.furiganaPolicy` from storage. Default is `'always'` — correc
 ### F.1 — Exam Countdown
 
 **SayaTab:** Date picker with `<input type="date">`:
+
 ```jsx
 <input
   type="date"
@@ -1734,17 +1825,20 @@ Wire it to `prefs.furiganaPolicy` from storage. Default is `'always'` — correc
 ```
 
 **Dashboard:** If examDate set and < 30 days away, show countdown:
+
 ```jsx
 const daysLeft = prefs.examDate
   ? Math.ceil((new Date(prefs.examDate) - new Date()) / 86400000)
   : null;
 
-{daysLeft !== null && daysLeft <= 30 && daysLeft > 0 && (
-  <div className={s.countdown}>
-    🎯 {daysLeft} hari lagi
-    {daysLeft <= 14 && ' — masa kritis ulasan!'}
-  </div>
-)}
+{
+  daysLeft !== null && daysLeft <= 30 && daysLeft > 0 && (
+    <div className={s.countdown}>
+      🎯 {daysLeft} hari lagi
+      {daysLeft <= 14 && ' — masa kritis ulasan!'}
+    </div>
+  );
+}
 ```
 
 **Daily Mission urgency:** If daysLeft < 14, bias mission toward `ulasan` and `fokus`.
@@ -1758,17 +1852,15 @@ let _playCount = 0;
 
 // HVPT-inspired variation (Logan et al. 1991)
 const HVPT_PARAMS = [
-  { rate: 0.70, pitch: 0.85 },  // slow, lower
-  { rate: 0.80, pitch: 1.0  },  // standard
-  { rate: 0.90, pitch: 1.15 },  // natural pace, higher
+  { rate: 0.7, pitch: 0.85 }, // slow, lower
+  { rate: 0.8, pitch: 1.0 }, // standard
+  { rate: 0.9, pitch: 1.15 }, // natural pace, higher
 ];
 
 export function speakJP(text, { rate, pitch } = {}) {
   if (!canSpeak()) return;
   window.speechSynthesis.cancel();
-  const params = (rate !== undefined)
-    ? { rate, pitch: pitch ?? 1.0 }
-    : HVPT_PARAMS[_playCount++ % 3];
+  const params = rate !== undefined ? { rate, pitch: pitch ?? 1.0 } : HVPT_PARAMS[_playCount++ % 3];
 
   const utt = new SpeechSynthesisUtterance(text);
   utt.lang = 'ja-JP';
@@ -1783,6 +1875,7 @@ export function canSpeak() {
 ```
 
 **Integration:**
+
 - `JpDisplay.jsx`: Add 🔊 button if `canSpeak()` returns true
 - `FlashcardMode`: Card front shows 🔊 next to JP term
 - `ReviewMode`: Same
@@ -1833,9 +1926,10 @@ tests/
   flow.daily-mission.test.jsx   — generate → complete → overlay shown
 ```
 
-### G.3 — Update _MAP.md
+### G.3 — Update \_MAP.md
 
 Fix stale references:
+
 - Change blueprint reference from v3 to v6
 - Update test count
 - Update metrics table
@@ -1881,19 +1975,19 @@ Either keep it (low impact) or remove it and update all imports to use direct pa
 
 > All research from v5 §0.1–§0.12 is valid and carried forward. This is the condensed design-obligation version.
 
-| Research Area | Key Finding | Design Obligation | Phase |
-|---------------|-------------|-------------------|-------|
-| FSRS (§0.1) | Spaced repetition g=0.72 | ts-fsrs stays, review queue central | All |
-| PWA (§0.2) | 88.7% Indonesian Android, variable connectivity | Offline-first, SW auto-bump | All |
-| No Dark Patterns (§0.3) | Leaderboards harm; need-supporting only | No social comparison, no punishment | All |
-| Malu/FLCA (§0.4, §0.9) | r=−.33 anxiety–performance; face concern | Private progress, anxiety-reduction toasts | A |
-| SSW Content (§0.5) | Sipil/Bangunan is highest-impact gap | Phase B is high priority | B |
-| Four Strands (§0.6) | Input/output/fluency/language-focused | Daily Mission rotates strands | C |
-| LSP Framework (§0.7) | Every question → TSA traceable | LSP filter on Phase B content | B |
-| Andragogy (§0.8) | "Why does this matter NOW?" on every card | desc field = workplace context | B |
-| Output Hypothesis (§0.10) | Production practice is distinct mechanism | SprintMode preserved; future ProduksiMode | — |
-| Gamification/Habit (§0.11) | Novelty decays; habit loop is long-term | Mission complete overlay; study anchor | C |
-| Furigana Policy (§0.12) | Expertise reversal effect | Level-differentiated furigana (default: always) | E |
+| Research Area              | Key Finding                                     | Design Obligation                               | Phase |
+| -------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----- |
+| FSRS (§0.1)                | Spaced repetition g=0.72                        | ts-fsrs stays, review queue central             | All   |
+| PWA (§0.2)                 | 88.7% Indonesian Android, variable connectivity | Offline-first, SW auto-bump                     | All   |
+| No Dark Patterns (§0.3)    | Leaderboards harm; need-supporting only         | No social comparison, no punishment             | All   |
+| Malu/FLCA (§0.4, §0.9)     | r=−.33 anxiety–performance; face concern        | Private progress, anxiety-reduction toasts      | A     |
+| SSW Content (§0.5)         | Sipil/Bangunan is highest-impact gap            | Phase B is high priority                        | B     |
+| Four Strands (§0.6)        | Input/output/fluency/language-focused           | Daily Mission rotates strands                   | C     |
+| LSP Framework (§0.7)       | Every question → TSA traceable                  | LSP filter on Phase B content                   | B     |
+| Andragogy (§0.8)           | "Why does this matter NOW?" on every card       | desc field = workplace context                  | B     |
+| Output Hypothesis (§0.10)  | Production practice is distinct mechanism       | SprintMode preserved; future ProduksiMode       | —     |
+| Gamification/Habit (§0.11) | Novelty decays; habit loop is long-term         | Mission complete overlay; study anchor          | C     |
+| Furigana Policy (§0.12)    | Expertise reversal effect                       | Level-differentiated furigana (default: always) | E     |
 
 ---
 
@@ -1960,6 +2054,7 @@ Either keep it (low impact) or remove it and update all imports to use direct pa
 **Session type:** Blueprint v6 — full audit + rewrite for agent executability
 
 **What I audited:**
+
 - Read `docs/MASTER-BLUEPRINT-v5.md` (718 lines) — full
 - Read `docs/archive/MASTER-BLUEPRINT-v4-POLISHED.md` — Phase specs
 - Read all source files: `App.jsx`, `QuizShell.jsx`, `ResultScreen.jsx`, `Dashboard.jsx`, `ProgressContext.jsx`, `AppContext.jsx`, `SayaTab.jsx`, `QuizMode.jsx`, `FlashcardMode.jsx`, `SprintMode.jsx`, `SipilMode.jsx`, `BangunanMode.jsx`, `JpDisplay.jsx`, storage layer, hooks, utils, router, data files
@@ -1967,13 +2062,15 @@ Either keep it (low impact) or remove it and update all imports to use direct pa
 - Verified all bug and debt items against actual code
 
 **Stale items corrected:**
+
 1. TD-06 (SW auto-bump) — already in deploy.yml. Removed from scope.
 2. CI/CD — already exists. Removed from scope.
-3. Test count — 223 (v5 said 111 in _MAP.md metrics). Corrected.
-4. _MAP.md blueprint reference — still says v3 in some places. Phase G corrects.
+3. Test count — 223 (v5 said 111 in \_MAP.md metrics). Corrected.
+4. \_MAP.md blueprint reference — still says v3 in some places. Phase G corrects.
 5. v5 "Phase 11–17 unchanged from v4-POLISHED" — inlined everything for self-containment.
 
 **Structural changes from v5:**
+
 1. Phase renaming: 11→A, 12→B, 13→C, 14→D, 15→E, 16→F, 17→G
 2. All code specs inline — no cross-references
 3. Pre-flight + done checklists per phase
@@ -1981,6 +2078,7 @@ Either keep it (low impact) or remove it and update all imports to use direct pa
 5. Research condensed to obligation table (full text in v5 §0)
 
 **What is intentionally NOT in v6:**
+
 - C-10 (Type-answer production mode) — remains Phase 18 / v5+
 - C-14 (Signaling for sentence questions) — low priority, can be done opportunistically
 - D-04 (Full HVPT) — partial implementation via speak.js rate/pitch cycling
@@ -1991,6 +2089,6 @@ Either keep it (low impact) or remove it and update all imports to use direct pa
 
 ---
 
-*Blueprint v6 (agent-executable) — Agent Opus 4.6 (Crunchy) · 2026-05-01*
-*Audit basis: live codebase at commit HEAD, 223 tests passing, all source files read*
-*Supersedes: v5, v4-POLISHED, v4, v3*
+_Blueprint v6 (agent-executable) — Agent Opus 4.6 (Crunchy) · 2026-05-01_
+_Audit basis: live codebase at commit HEAD, 223 tests passing, all source files read_
+_Supersedes: v5, v4-POLISHED, v4, v3_

@@ -123,7 +123,7 @@
   flex-shrink: 0;
   white-space: nowrap;
   line-height: var(--lh-relaxed);
-  background: rgba(180, 83, 9, 0.10);
+  background: rgba(180, 83, 9, 0.1);
   border: 1px solid rgba(180, 83, 9, 0.25);
   border-radius: 5px;
   padding: 0px 5px;

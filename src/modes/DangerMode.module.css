@@ -37,7 +37,7 @@
 
 .accordionBtn.open {
   border-radius: var(--r-md) var(--r-md) 0 0;
-  background: rgba(220, 38, 38, 0.10);
+  background: rgba(220, 38, 38, 0.1);
   border-color: rgba(220, 38, 38, 0.35);
 }
 

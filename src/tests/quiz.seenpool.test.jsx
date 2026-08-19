@@ -6,10 +6,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-const quizModeSource = readFileSync(
-  resolve(__dirname, '../modes/QuizMode.jsx'),
-  'utf-8'
-);
+const quizModeSource = readFileSync(resolve(__dirname, '../modes/QuizMode.jsx'), 'utf-8');
 
 describe('A.1 BUG-02 — seenPool scope fix', () => {
   it('does NOT declare _seenPool at module scope', () => {

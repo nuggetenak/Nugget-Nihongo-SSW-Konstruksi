@@ -3,8 +3,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
-  _reset_for_test, init, get, set,
-  exportAll, importAll, validateSnapshot, importAllSafe,
+  _reset_for_test,
+  init,
+  get,
+  set,
+  exportAll,
+  importAll,
+  validateSnapshot,
+  importAllSafe,
 } from '../storage/engine.js';
 
 beforeEach(() => {
@@ -17,19 +23,40 @@ const makeValidSnapshot = (overrides = {}) => ({
   _storage_version: 3,
   exported_at: new Date().toISOString(),
   progress: {
-    _v: 3, known: [1, 2, 3], unknown: [4], starred: [],
-    quizWrong: {}, wrongCounts: {}, wgWrong: {}, vocabWrong: {},
-    jacScores: {}, wgScores: {}, vocabScores: {},
-    dobokuScores: {}, kenchikuScores: {},
-    streakData: {}, dailyCount: { count: 0, date: '' },
-    recentCards: [], milestoneStreak7: false, milestoneQuiz70: false,
-    sessions: [], dailyMission: null,
+    _v: 3,
+    known: [1, 2, 3],
+    unknown: [4],
+    starred: [],
+    quizWrong: {},
+    wrongCounts: {},
+    wgWrong: {},
+    vocabWrong: {},
+    jacScores: {},
+    wgScores: {},
+    vocabScores: {},
+    dobokuScores: {},
+    kenchikuScores: {},
+    streakData: {},
+    dailyCount: { count: 0, date: '' },
+    recentCards: [],
+    milestoneStreak7: false,
+    milestoneQuiz70: false,
+    sessions: [],
+    dailyMission: null,
   },
-  srs: { _v: 3, cards: { '10': { state: 1 } } },
+  srs: { _v: 3, cards: { 10: { state: 1 } } },
   prefs: {
-    _v: 3, track: 'doboku', theme: 'light', onboarded: true,
-    tutorialFlashcard: false, lastMode: null, dailyGoal: 20,
-    examDate: null, audioEnabled: true, studyAnchor: null, furiganaPolicy: 'always',
+    _v: 3,
+    track: 'doboku',
+    theme: 'light',
+    onboarded: true,
+    tutorialFlashcard: false,
+    lastMode: null,
+    dailyGoal: 20,
+    examDate: null,
+    audioEnabled: true,
+    studyAnchor: null,
+    furiganaPolicy: 'always',
   },
   ...overrides,
 });
@@ -112,10 +139,10 @@ describe('Phase D — importAllSafe', () => {
   it('exported snapshot can be re-imported cleanly', () => {
     set('progress', (p) => ({ ...p, known: [5, 6, 7] }));
     const snap = exportAll();
-    
+
     // Reset to empty
     set('progress', (p) => ({ ...p, known: [] }));
-    
+
     importAllSafe(snap);
     expect(get('progress').known).toEqual([5, 6, 7]);
   });

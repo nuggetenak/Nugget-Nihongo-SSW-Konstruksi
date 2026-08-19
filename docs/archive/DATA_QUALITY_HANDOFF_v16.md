@@ -1,4 +1,5 @@
 # SSW Konstruksi — Data Quality Handoff v16
+
 **Updated:** May 2026 — session 17 (ADM8: commit hash sync, self-reference fix ADM7)
 **Supersedes:** v1–v14 (this is the canonical single-source handoff)
 **Scope:** ALL content files — cards + soal + pairs + angka
@@ -10,56 +11,61 @@
 ## PART 0 — NAMING CONVENTION CANONICAL SPEC
 
 ### 0A. Track Values (code/data canonical)
-| Track | Meaning | Indonesian | Japanese |
-|---|---|---|---|
-| `common` | All tracks (Teori) | — | 学科 |
-| `lifeline` | ライフライン設備 | — | 実技 Lifeline |
-| `doboku` | 土木 | Sipil | 土木 |
-| `kenchiku` | 建築 | Bangunan | 建築 |
+
+| Track      | Meaning            | Indonesian | Japanese      |
+| ---------- | ------------------ | ---------- | ------------- |
+| `common`   | All tracks (Teori) | —          | 学科          |
+| `lifeline` | ライフライン設備   | —          | 実技 Lifeline |
+| `doboku`   | 土木               | Sipil      | 土木          |
+| `kenchiku` | 建築               | Bangunan   | 建築          |
 
 **Rule:** `track` field values are always the romaji column. Never `sipil`, never `bangunan`, never `gakka`.
 
 ### 0B. Set ID Prefix Taxonomy
-| Prefix | Meaning | Location |
-|---|---|---|
-| `wt{nn}` | Wayground Teori (common) | `sets/wayground/teori/` |
-| `wtv{nn}` | Wayground Vocab (common) | `sets/wayground/vocab/` |
-| `wgl{nn}` | Wayground Lifeline Praktik | `sets/wayground/lifeline/praktik/` |
-| `wglv{nn}` | Wayground Lifeline Vocab | `sets/wayground/lifeline/vocab/` |
-| `wgd{nn}` | Wayground Doboku Praktik (future) | `sets/wayground/doboku/praktik/` |
-| `wgdv{nn}` | Wayground Doboku Vocab (future) | `sets/wayground/doboku/vocab/` |
-| `wgk{nn}` | Wayground Kenchiku Praktik (future) | `sets/wayground/kenchiku/praktik/` |
-| `wgkv{nn}` | Wayground Kenchiku Vocab (future) | `sets/wayground/kenchiku/vocab/` |
-| `ct{n}` | CSV Teori | `sets/csv/ct*.js` |
-| `cp{n}` | CSV Praktik | `sets/csv/cp*.js` |
-| `doboku-{n}` | Quiz Doboku | `sets/quiz/doboku-*.js` |
-| `kenchiku-{n}` | Quiz Kenchiku | `sets/quiz/kenchiku-*.js` |
-| `tt{n}_q{nn}` | JAC Teori question ID | `jac-teori.js` |
-| `st{n}_q{nn}` | JAC Lifeline question ID | `jac-lifeline.js` |
+
+| Prefix         | Meaning                             | Location                           |
+| -------------- | ----------------------------------- | ---------------------------------- |
+| `wt{nn}`       | Wayground Teori (common)            | `sets/wayground/teori/`            |
+| `wtv{nn}`      | Wayground Vocab (common)            | `sets/wayground/vocab/`            |
+| `wgl{nn}`      | Wayground Lifeline Praktik          | `sets/wayground/lifeline/praktik/` |
+| `wglv{nn}`     | Wayground Lifeline Vocab            | `sets/wayground/lifeline/vocab/`   |
+| `wgd{nn}`      | Wayground Doboku Praktik (future)   | `sets/wayground/doboku/praktik/`   |
+| `wgdv{nn}`     | Wayground Doboku Vocab (future)     | `sets/wayground/doboku/vocab/`     |
+| `wgk{nn}`      | Wayground Kenchiku Praktik (future) | `sets/wayground/kenchiku/praktik/` |
+| `wgkv{nn}`     | Wayground Kenchiku Vocab (future)   | `sets/wayground/kenchiku/vocab/`   |
+| `ct{n}`        | CSV Teori                           | `sets/csv/ct*.js`                  |
+| `cp{n}`        | CSV Praktik                         | `sets/csv/cp*.js`                  |
+| `doboku-{n}`   | Quiz Doboku                         | `sets/quiz/doboku-*.js`            |
+| `kenchiku-{n}` | Quiz Kenchiku                       | `sets/quiz/kenchiku-*.js`          |
+| `tt{n}_q{nn}`  | JAC Teori question ID               | `jac-teori.js`                     |
+| `st{n}_q{nn}`  | JAC Lifeline question ID            | `jac-lifeline.js`                  |
 
 > Old IDs (`wg{n}`, `wp{n}`) fully retired by W1 (session 12). See §3A for rename map.
 
 **Future JAC doboku/kenchiku IDs:** use `dt{n}_q{nn}` / `kt{n}_q{nn}`.
 
 ### 0C. File Naming
-| Domain | File | Export |
-|---|---|---|
-| JAC Teori | `jac-teori.js` | `JAC_TEORI` |
-| JAC Lifeline | `jac-lifeline.js` | `JAC_LIFELINE` |
-| JAC Doboku (stub) | `jac-doboku.js` | `JAC_DOBOKU` |
-| JAC Kenchiku (stub) | `jac-kenchiku.js` | `JAC_KENCHIKU` |
-| Shim | `jac-official.js` | `JAC_OFFICIAL` |
-| Cards (common+LL) | `cards-common.js`, `cards-lifeline.js` | (merged) |
-| Cards (future) | `cards-doboku.js`, `cards-kenchiku.js` | (stubs) |
+
+| Domain              | File                                   | Export         |
+| ------------------- | -------------------------------------- | -------------- |
+| JAC Teori           | `jac-teori.js`                         | `JAC_TEORI`    |
+| JAC Lifeline        | `jac-lifeline.js`                      | `JAC_LIFELINE` |
+| JAC Doboku (stub)   | `jac-doboku.js`                        | `JAC_DOBOKU`   |
+| JAC Kenchiku (stub) | `jac-kenchiku.js`                      | `JAC_KENCHIKU` |
+| Shim                | `jac-official.js`                      | `JAC_OFFICIAL` |
+| Cards (common+LL)   | `cards-common.js`, `cards-lifeline.js` | (merged)       |
+| Cards (future)      | `cards-doboku.js`, `cards-kenchiku.js` | (stubs)        |
 
 ### 0D. Quote Style
-| File(s) | Style |
-|---|---|
+
+| File(s)        | Style                         |
+| -------------- | ----------------------------- |
 | All data files | single-quote `'` ✅ canonical |
 
 > **Note:** `cards-common.js` and `cards-lifeline.js` still use double-quote strings — known inconsistency. Do NOT bulk-requote.
 
 ### 0E. `source` Field Values on Cards
+
 From JAC PDF: `jac-ch1` through `jac-ch7`
 From JAC sample exams: `jac-gakka1`, `jac-gakka2`, `jac-jitsugi1`, `jac-jitsugi2`
 Vocab: `vocab-core`, `vocab-exam`, `vocab-jac`, `vocab-lifeline`, `vocab-teori`, `vocab-general`, `vocab-supplementary`
@@ -78,6 +84,7 @@ New cards from JAC Doboku sample exams → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`
 ## PART 1 — CARDS (`src/data/source/`)
 
 ### Card Schema (complete, canonical)
+
 ```js
 {
   id,           // numeric
@@ -92,26 +99,27 @@ New cards from JAC Doboku sample exams → `jac-gakka-d{n}` / `jac-jitsugi-d{n}`
   _origIndex,   // [SOURCE ONLY — see §1G] stripped by merge script — do not edit
 }
 ```
+
 `quote` field: **DELETED** in v7. Zero remaining in both source files.
 
 ### 1E. `type` Enum — Definitions (VERIFIED session 6)
 
-| Value | Common | Lifeline | Definition |
-|---|---|---|---|
-| `konsep` | ✅ 406 | ✅ 286 | Conceptual/procedural knowledge — not a law, not pure vocab |
-| `vocab` | ✅ 377 | ✅ 278 | Vocabulary term — Japanese term + Indonesian gloss, may have desc |
-| `hukum` | ✅ 96 | ❌ 0 | Law, regulation, or legal provision — common track only |
+| Value    | Common | Lifeline | Definition                                                        |
+| -------- | ------ | -------- | ----------------------------------------------------------------- |
+| `konsep` | ✅ 406 | ✅ 286   | Conceptual/procedural knowledge — not a law, not pure vocab       |
+| `vocab`  | ✅ 377 | ✅ 278   | Vocabulary term — Japanese term + Indonesian gloss, may have desc |
+| `hukum`  | ✅ 96  | ❌ 0     | Law, regulation, or legal provision — common track only           |
 
 **No anomalies found.** Lifeline correctly has zero `hukum` cards — all legal content is in common.  
 Future doboku/kenchiku cards: use same three values. `hukum` is valid for track-specific regulations.
 
 ### 1F. `usage` Field Policy (VERIFIED session 6)
 
-| File | Cards with `usage` | Cards without |
-|---|---|---|
-| `cards-common.js` | 123 | 756 |
-| `cards-lifeline.js` | 30 | 534 |
-| **TOTAL** | **153** | **1,290** |
+| File                | Cards with `usage` | Cards without |
+| ------------------- | ------------------ | ------------- |
+| `cards-common.js`   | 123                | 756           |
+| `cards-lifeline.js` | 30                 | 534           |
+| **TOTAL**           | **153**            | **1,290**     |
 
 **Policy (owner decision):** `usage` is **optional**. Absent = no usage example available.  
 **Rule:** Do NOT null-fill missing `usage`. Do NOT bulk-add. Leave absent cards as-is.  
@@ -121,48 +129,52 @@ When adding new cards (doboku/kenchiku), include `usage` only if a natural examp
 
 `_origIndex` exists in **source files only** (`src/data/source/cards-*.js`) and **split card files** (`src/data/cards/**/*.js`). It does **NOT** appear in the exported `src/data/cards.js`.
 
-| File | `_origIndex` present |
-|---|---|
-| `src/data/source/cards-common.js` | ✅ 879 (intentional) |
-| `src/data/source/cards-lifeline.js` | ✅ 564 (intentional) |
-| `src/data/cards/**/*.js` (split files) | ✅ 1,443 (intentional) |
-| `src/data/cards.js` (exported) | **0** — stripped by merge script ✅ |
+| File                                   | `_origIndex` present                |
+| -------------------------------------- | ----------------------------------- |
+| `src/data/source/cards-common.js`      | ✅ 879 (intentional)                |
+| `src/data/source/cards-lifeline.js`    | ✅ 564 (intentional)                |
+| `src/data/cards/**/*.js` (split files) | ✅ 1,443 (intentional)              |
+| `src/data/cards.js` (exported)         | **0** — stripped by merge script ✅ |
 
 **Rule:** Do NOT strip `_origIndex` from source or split files. It is a merge-time artifact used to preserve original ordering. The merge script (`scripts/merge-cards.mjs`) strips it automatically when generating `cards.js`.  
 **On `content-dq` branch:** `_origIndex` is retained in split files. It will be stripped when reassembled into `cards.js` at main-merge time.
 
 ### 1A. Current `jp` Ruby Status
-| File | Total | Has 《》 ruby | Maru（kanji）remaining | Bare kanji | Pure kana/romaji |
-|---|---|---|---|---|---|
-| `cards-common.js` | 879 | ~762 | ~44 (kanji-in-maru, kept) | 0 | ~73 |
-| `cards-lifeline.js` | 564 | ~452 | ~21 (kanji-in-maru, kept) | 0 | ~91 |
-| **TOTAL** | **1,443** | **~1,214** | **~65** | **0** | **~164** |
+
+| File                | Total     | Has 《》 ruby | Maru（kanji）remaining    | Bare kanji | Pure kana/romaji |
+| ------------------- | --------- | ------------- | ------------------------- | ---------- | ---------------- |
+| `cards-common.js`   | 879       | ~762          | ~44 (kanji-in-maru, kept) | 0          | ~73              |
+| `cards-lifeline.js` | 564       | ~452          | ~21 (kanji-in-maru, kept) | 0          | ~91              |
+| **TOTAL**           | **1,443** | **~1,214**    | **~65**                   | **0**      | **~164**         |
 
 ### 1B. `furi` Typos — FIXED in v7
-| id | Was | Fixed to |
-|---|---|---|
+
+| id  | Was                            | Fixed to                            |
+| --- | ------------------------------ | ----------------------------------- |
 | 532 | `ねちゅうしょうのしょうじょう` | `ねっちゅうしょうのしょうじょう` ✅ |
-| 230 | `てにょうくぎじまい` | `てんようくぎじまい` ✅ |
+| 230 | `てにょうくぎじまい`           | `てんようくぎじまい` ✅             |
 
 ### 1C. Multi-Part `furi` — ✅ DONE (P7, session owner)
+
 Furi separators aligned on 213 cards (152 fixed, 5 romaji-only accepted, remainder kana-only). No remaining mismatches.
 
 ### 1D. Ruby Format Rules (canonical)
+
 ```js
 // Full compound — annotate entire reading, NEVER suffix-only
-"呼水装置《こすいそうち》"   // ✅
-"呼水装置《そうち》"         // ❌
+'呼水装置《こすいそうち》'; // ✅
+'呼水装置《そうち》'; // ❌
 
 // Multi-part — separator preserved, ruby per segment
-"加湿器《かしつき》 vs 除湿器《じょしつき》"
+'加湿器《かしつき》 vs 除湿器《じょしつき》';
 
 // Mixed JP/katakana — only kanji compounds get ruby
-"ディスクグラインダー 高速型《がた》 vs 低速型《がた》"
+'ディスクグラインダー 高速型《がた》 vs 低速型《がた》';
 
 // Maru retained for non-reading content (synonyms, abbrevs, explanations)
-"危険予知活動（KY活動）"   // ✅ keep
-"アスベスト（石綿）"       // ✅ keep
-"時間外労働（残業）"        // ✅ keep
+'危険予知活動（KY活動）'; // ✅ keep
+'アスベスト（石綿）'; // ✅ keep
+'時間外労働（残業）'; // ✅ keep
 ```
 
 ---
@@ -170,6 +182,7 @@ Furi separators aligned on 213 cards (152 fixed, 5 romaji-only accepted, remaind
 ## PART 2 — SCHEMA STATUS
 
 ### Unified Question Schema (canonical — all JAC sets use this)
+
 ```js
 {
   id,       // string ID e.g. 'tt1_q01', 'st1_q01', 'kt1_q01', 'dt1_q01'
@@ -187,7 +200,9 @@ Furi separators aligned on 213 cards (152 fixed, 5 romaji-only accepted, remaind
 > **`img` field:** All JAC sets (teori, lifeline, doboku, kenchiku) have photo-based questions. Use `img: null` as placeholder — populate filename when assets are ready. `hasPhoto` boolean is **deprecated** — replaced by `img`.
 
 ### JAC Exam Session Pairing
+
 Each track has 2 exam sessions. Default pairing (teori shared across all tracks):
+
 ```
 Lifeline:  Teori Set 1 (tt1) + Lifeline Set 1 (st1)
            Teori Set 2 (tt2) + Lifeline Set 2 (st2)
@@ -196,15 +211,17 @@ Kenchiku:  Teori Set 1 (tt1) + Kenchiku Set 1 (kt1)
 Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
            Teori Set 2 (tt2) + Doboku Set 2 (dt2)
 ```
+
 `jac-teori.js` is shared — same 65 qs used by all 3 tracks.
 
 ### ID Conventions
-| File | Question ID format |
-|---|---|
-| `jac-teori.js` | `tt{n}_q{nn}` |
-| `jac-lifeline.js` | `st{n}_q{nn}` |
-| `jac-kenchiku.js` | `kt{n}_q{nn}` |
-| `jac-doboku.js` | `dt{n}_q{nn}` |
+
+| File              | Question ID format |
+| ----------------- | ------------------ |
+| `jac-teori.js`    | `tt{n}_q{nn}`      |
+| `jac-lifeline.js` | `st{n}_q{nn}`      |
+| `jac-kenchiku.js` | `kt{n}_q{nn}`      |
+| `jac-doboku.js`   | `dt{n}_q{nn}`      |
 
 ---
 
@@ -242,16 +259,16 @@ Doboku:    Teori Set 1 (tt1) + Doboku Set 1 (dt1)
 
 Folder structure under `src/data/sets/wayground/`:
 
-| Folder | IDs | Track | Notes |
-|---|---|---|---|
-| `teori/` | wt01–wt10 | common | Shared all tracks |
-| `vocab/` | wtv01–... | common | Shared all tracks |
-| `lifeline/praktik/` | wgl01–wgl10 | lifeline | wgl01–05 quizizz, wgl06–10 original |
-| `lifeline/vocab/` | wglv01–wglv05 | lifeline | |
-| `doboku/praktik/` | wgd01–... | doboku | future |
-| `doboku/vocab/` | wgdv01–... | doboku | future |
-| `kenchiku/praktik/` | wgk01–... | kenchiku | future |
-| `kenchiku/vocab/` | wgkv01–... | kenchiku | future |
+| Folder              | IDs           | Track    | Notes                               |
+| ------------------- | ------------- | -------- | ----------------------------------- |
+| `teori/`            | wt01–wt10     | common   | Shared all tracks                   |
+| `vocab/`            | wtv01–...     | common   | Shared all tracks                   |
+| `lifeline/praktik/` | wgl01–wgl10   | lifeline | wgl01–05 quizizz, wgl06–10 original |
+| `lifeline/vocab/`   | wglv01–wglv05 | lifeline |                                     |
+| `doboku/praktik/`   | wgd01–...     | doboku   | future                              |
+| `doboku/vocab/`     | wgdv01–...    | doboku   | future                              |
+| `kenchiku/praktik/` | wgk01–...     | kenchiku | future                              |
+| `kenchiku/vocab/`   | wgkv01–...    | kenchiku | future                              |
 
 **W1 ID rename map:**
 | Old | New | Category |
@@ -269,12 +286,13 @@ Folder structure under `src/data/sets/wayground/`:
 ## PART 4 — CSV SETS (`csv-sets.js`, 12 sets, 300 qs)
 
 ### Ruby Status — ✅ COMPLETE (split files)
-| Field | Status |
-|---|---|
-| `q` ruby | ✅ DONE — double ruby removed (P11-FIX-A), wrong 《》 reverted (P11-FIX-B) |
-| `opts` ruby | ✅ DONE — 198 bare opts annotated (P11-C) |
-| `hint` | ✅ all present |
-| `exp` | ✅ DONE — "modul JAC" stubs replaced (P15) |
+
+| Field       | Status                                                                     |
+| ----------- | -------------------------------------------------------------------------- |
+| `q` ruby    | ✅ DONE — double ruby removed (P11-FIX-A), wrong 《》 reverted (P11-FIX-B) |
+| `opts` ruby | ✅ DONE — 198 bare opts annotated (P11-C)                                  |
+| `hint`      | ✅ all present                                                             |
+| `exp`       | ✅ DONE — "modul JAC" stubs replaced (P15)                                 |
 
 > **Note:** Monolithic `csv-sets.js` still shows original state — working copy is `sets/csv/*.js`. Monolithic will be replaced at main-merge time.
 
@@ -285,15 +303,16 @@ Folder structure under `src/data/sets/wayground/`:
 Set IDs: `doboku-01`, `doboku-02`, `doboku-03`, `kenchiku-01`, `kenchiku-02`, `kenchiku-03`.
 
 ### Schema Status — ✅ COMPLETE (P13-struct + P13-content)
-| Field | Status |
-|---|---|
-| `q` ruby | ✅ DONE |
-| `opts` ruby | ✅ DONE |
-| `hint` | ✅ DONE — all 90 filled |
-| `id` per question | ✅ DONE — 1-indexed per set |
-| `exp` quality | ✅ avg 154 chars — good |
-| `cat`, `desc` | ✅ present (extra fields — keep until DC-1/DC-2 migration) |
-| `track` | ✅ DONE (H11) — all 6 files have track field |
+
+| Field             | Status                                                     |
+| ----------------- | ---------------------------------------------------------- |
+| `q` ruby          | ✅ DONE                                                    |
+| `opts` ruby       | ✅ DONE                                                    |
+| `hint`            | ✅ DONE — all 90 filled                                    |
+| `id` per question | ✅ DONE — 1-indexed per set                                |
+| `exp` quality     | ✅ avg 154 chars — good                                    |
+| `cat`, `desc`     | ✅ present (extra fields — keep until DC-1/DC-2 migration) |
+| `track`           | ✅ DONE (H11) — all 6 files have track field               |
 
 > ⚠️ Content is AI-generated (no real JAC PDF). Treat as draft/placeholder — see §12B.
 
@@ -301,10 +320,10 @@ Set IDs: `doboku-01`, `doboku-02`, `doboku-03`, `kenchiku-01`, `kenchiku-02`, `k
 
 ## PART 6 — JAC_TEORI + JAC_LIFELINE (95 qs)
 
-| File | qs | `related_card_id` filled | null |
-|---|---|---|---|
-| `jac-teori.js` | 65 | **65** ✅ | 0 (P18 done) |
-| `jac-lifeline.js` | 30 | **30** ✅ | 0 |
+| File              | qs  | `related_card_id` filled | null         |
+| ----------------- | --- | ------------------------ | ------------ |
+| `jac-teori.js`    | 65  | **65** ✅                | 0 (P18 done) |
+| `jac-lifeline.js` | 30  | **30** ✅                | 0            |
 
 Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: null` on all qs.
 
@@ -314,35 +333,35 @@ Schema migration complete (P16). `hasPhoto` deprecated → replaced by `img: nul
 
 Actual schema fields per entry: `type`, `label`, `termA`, `furiA`, `defA`, `termB`, `furiB`, `defB`, `tip`, `tip_id`
 
-| Field | Status |
-|---|---|
-| `termA` / `termB` ruby | ✅ DONE v8 |
-| `furiA` / `furiB` | ✅ present |
-| `defA` / `defB` | ✅ present — Indonesian definitions (28/28) |
-| `tip` / `tip_id` | ✅ DONE (P17) — 0 null remaining |
-| `track` field | missing on all 28 — OPEN (no task assigned) |
+| Field                  | Status                                      |
+| ---------------------- | ------------------------------------------- |
+| `termA` / `termB` ruby | ✅ DONE v8                                  |
+| `furiA` / `furiB`      | ✅ present                                  |
+| `defA` / `defB`        | ✅ present — Indonesian definitions (28/28) |
+| `tip` / `tip_id`       | ✅ DONE (P17) — 0 null remaining            |
+| `track` field          | missing on all 28 — OPEN (no task assigned) |
 
 ---
 
 ## PART 8 — DANGER_PAIRS (20 entries)
 
-| Field | Status |
-|---|---|
-| `term` ruby | ✅ DONE v8 — 17/20 (3 pure kana/romaji skipped) |
-| `furi` | ✅ all 20 |
-| `track` | ✅ all 20 |
-| `traps[]` + `explanation` ruby | ✅ DONE (P19) |
+| Field                          | Status                                          |
+| ------------------------------ | ----------------------------------------------- |
+| `term` ruby                    | ✅ DONE v8 — 17/20 (3 pure kana/romaji skipped) |
+| `furi`                         | ✅ all 20                                       |
+| `track`                        | ✅ all 20                                       |
+| `traps[]` + `explanation` ruby | ✅ DONE (P19)                                   |
 
 ---
 
 ## PART 9 — ANGKA_KUNCI (29 entries)
 
-| Field | Status |
-|---|---|
-| `soal` ruby | ✅ DONE v8 — all 29 |
-| `kartu` (numeric card ID) | 24/29 filled ✅ |
-| `mnemonic` | ✅ all 29 |
-| `track` | ✅ all 29 |
+| Field                     | Status              |
+| ------------------------- | ------------------- |
+| `soal` ruby               | ✅ DONE v8 — all 29 |
+| `kartu` (numeric card ID) | 24/29 filled ✅     |
+| `mnemonic`                | ✅ all 29           |
+| `track`                   | ✅ all 29           |
 
 > `kartu` is a **number** (card id), NOT a string field named `kartu_id`.
 
@@ -351,59 +370,63 @@ Actual schema fields per entry: `type`, `label`, `termA`, `furiA`, `defA`, `term
 ## MASTER EXECUTION ORDER (v12)
 
 ### 🔴 Corruption fixes — DONE
-| Task | File | Scope | Status |
-|---|---|---|---|
-| **P11-FIX-A** | `sets/csv/*.js` | Remove double ruby from 39 q lines | ✅ DONE (split files) |
-| **P11-FIX-B** | `sets/csv/*.js` | Revert 26 wrong 《》 → （） (synonyms/abbrevs) | ✅ DONE (split files) |
-| **P12-FIX** | `sets/wayground/**/*.js` | Remove double ruby from 217 lines | ✅ DONE (split files) |
+
+| Task          | File                     | Scope                                          | Status                |
+| ------------- | ------------------------ | ---------------------------------------------- | --------------------- |
+| **P11-FIX-A** | `sets/csv/*.js`          | Remove double ruby from 39 q lines             | ✅ DONE (split files) |
+| **P11-FIX-B** | `sets/csv/*.js`          | Revert 26 wrong 《》 → （） (synonyms/abbrevs) | ✅ DONE (split files) |
+| **P12-FIX**   | `sets/wayground/**/*.js` | Remove double ruby from 217 lines              | ✅ DONE (split files) |
 
 > **Note:** Monolithic `csv-sets.js` and `wayground-sets.js` still show corruption — these are legacy originals, intentionally not edited on `content-dq`. Split files in `src/data/sets/` are the working source of truth. Monolithics will be replaced at main-merge time.
 
 ### 🟡 Content tasks — DONE
-| Task | File | Scope | Status |
-|---|---|---|---|
-| **P11-C** | `sets/csv/*.js` | Annotate 198 bare opts lines | ✅ DONE (split files) |
-| **P13-content** | `sets/quiz/*.js` | Ruby for 90 q + ~360 opts + 90 hints | ✅ DONE |
-| **P15** | `sets/csv/*.js` | Replace ~40 "modul JAC" exp stubs | ✅ DONE |
-| **P7** | `src/data/cards/**/*.js` | Align furi separators — 152 fixed, 5 romaji-only accepted | ✅ DONE |
-| **P18** | `sets/jac/jac-teori.js` | Fill 21 null `related_card_id` — 0 null remaining | ✅ DONE |
+
+| Task            | File                     | Scope                                                     | Status                |
+| --------------- | ------------------------ | --------------------------------------------------------- | --------------------- |
+| **P11-C**       | `sets/csv/*.js`          | Annotate 198 bare opts lines                              | ✅ DONE (split files) |
+| **P13-content** | `sets/quiz/*.js`         | Ruby for 90 q + ~360 opts + 90 hints                      | ✅ DONE               |
+| **P15**         | `sets/csv/*.js`          | Replace ~40 "modul JAC" exp stubs                         | ✅ DONE               |
+| **P7**          | `src/data/cards/**/*.js` | Align furi separators — 152 fixed, 5 romaji-only accepted | ✅ DONE               |
+| **P18**         | `sets/jac/jac-teori.js`  | Fill 21 null `related_card_id` — 0 null remaining         | ✅ DONE               |
 
 ### 🔵 Agent tasks — DONE
-| Task | File | Scope | Status |
-|---|---|---|---|
-| **P13-struct** | `sets/quiz/*.js` | Add `id` (1-indexed per set) to all 90 qs | ✅ DONE |
-| **P14** | `sets/wayground/**/*.js` | Expand ~28 stub `exp` fields | ✅ DONE |
-| **P16** | `sets/jac/jac-teori.js`, `sets/jac/jac-lifeline.js` | Schema migration — 95 qs | ✅ DONE |
-| **P17** | `confusion-pairs.js` | Add `tip_id` field to 28 entries — 0 null remaining | ✅ DONE |
-| **P19** | `danger-pairs.js` | Audit `traps`/`explanation` ruby | ✅ DONE |
-| **P21** | stubs | Populate `jac-doboku.js` + `jac-kenchiku.js` — **jitsugi** (praktik bergambar) soal per track, bukan teori. Schema sama: `q/hint/opts/opts_id/ans/img/exp`. `img: null` semua dulu. Source: PDF jitsugi doboku/kenchiku. | ⏸ DEFERRED — blocked, belum ada PDF |
+
+| Task           | File                                                | Scope                                                                                                                                                                                                                    | Status                              |
+| -------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------- |
+| **P13-struct** | `sets/quiz/*.js`                                    | Add `id` (1-indexed per set) to all 90 qs                                                                                                                                                                                | ✅ DONE                             |
+| **P14**        | `sets/wayground/**/*.js`                            | Expand ~28 stub `exp` fields                                                                                                                                                                                             | ✅ DONE                             |
+| **P16**        | `sets/jac/jac-teori.js`, `sets/jac/jac-lifeline.js` | Schema migration — 95 qs                                                                                                                                                                                                 | ✅ DONE                             |
+| **P17**        | `confusion-pairs.js`                                | Add `tip_id` field to 28 entries — 0 null remaining                                                                                                                                                                      | ✅ DONE                             |
+| **P19**        | `danger-pairs.js`                                   | Audit `traps`/`explanation` ruby                                                                                                                                                                                         | ✅ DONE                             |
+| **P21**        | stubs                                               | Populate `jac-doboku.js` + `jac-kenchiku.js` — **jitsugi** (praktik bergambar) soal per track, bukan teori. Schema sama: `q/hint/opts/opts_id/ans/img/exp`. `img: null` semua dulu. Source: PDF jitsugi doboku/kenchiku. | ⏸ DEFERRED — blocked, belum ada PDF |
 
 ### ✅ Done
-| Task | Notes |
-|---|---|
-| H9 | Fix orphaned duplicate opts lines in ct01.js + ct02.js — both exit clean |
-| H10 | wg12 `track: "lifeline"` → `"common"` |
-| H11 | Add `track` field to 6 quiz split files (doboku-01/02/03, kenchiku-01/02/03) |
-| S1 | Split gakka.js: 8→common/vocab-jac.js (67), 9→lifeline/vocab-jac.js (23), deleted |
-| S2 | Merge jitsugi.js (19) → lifeline/vocab-jac.js (42 total), deleted |
-| S3 | Migrate vocab-common.js (114) → common/vocab-supplementary.js (247 total), deleted |
-| S4 | Redistribute vocab-lifeline.js (235) by category: ch5(278)/ch6(204)/ch7(56)/vocab-supp(175), deleted |
-| P0–P0d | UI fixes, wg renames, quote removal |
-| P1 | Delete all `quote` fields (590 removed) |
-| P2 | Fix 4 malformed jp-ruby cards (ids 293,476,489,491) |
-| P3 | Fix 2 furi typos (ids 532, 230) |
-| P4 | 220 maru→ruby conversions (119 maru retained — correct) |
-| P5 | 1,020 bare-kanji jp fields annotated |
-| P6 | 153 multi-part jp fields annotated per-segment |
-| P7b | Add CONFUSION_PAIRS to index.js |
-| P7c | Rename wg10→wp5; fix titles |
-| P7d | Standardize quote style in jac-* |
-| P8 | Ruby on termA/termB in confusion-pairs (28 pairs) |
-| P9 | Ruby on term in danger-pairs (17/20; 3 kana/romaji skipped) |
-| P10 | Ruby on soal in angka-kunci (29 items) |
-| P11 (q only) | csv-sets.js q lines annotated — **but corrupted, needs P11-FIX-A/B first** |
-| P12 (coverage) | wayground-sets.js bare kanji cleared — **but corrupted, needs P12-FIX first** |
-| P20 | Rename sipil→doboku, bangunan→kenchiku |
+
+| Task           | Notes                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------- |
+| H9             | Fix orphaned duplicate opts lines in ct01.js + ct02.js — both exit clean                             |
+| H10            | wg12 `track: "lifeline"` → `"common"`                                                                |
+| H11            | Add `track` field to 6 quiz split files (doboku-01/02/03, kenchiku-01/02/03)                         |
+| S1             | Split gakka.js: 8→common/vocab-jac.js (67), 9→lifeline/vocab-jac.js (23), deleted                    |
+| S2             | Merge jitsugi.js (19) → lifeline/vocab-jac.js (42 total), deleted                                    |
+| S3             | Migrate vocab-common.js (114) → common/vocab-supplementary.js (247 total), deleted                   |
+| S4             | Redistribute vocab-lifeline.js (235) by category: ch5(278)/ch6(204)/ch7(56)/vocab-supp(175), deleted |
+| P0–P0d         | UI fixes, wg renames, quote removal                                                                  |
+| P1             | Delete all `quote` fields (590 removed)                                                              |
+| P2             | Fix 4 malformed jp-ruby cards (ids 293,476,489,491)                                                  |
+| P3             | Fix 2 furi typos (ids 532, 230)                                                                      |
+| P4             | 220 maru→ruby conversions (119 maru retained — correct)                                              |
+| P5             | 1,020 bare-kanji jp fields annotated                                                                 |
+| P6             | 153 multi-part jp fields annotated per-segment                                                       |
+| P7b            | Add CONFUSION_PAIRS to index.js                                                                      |
+| P7c            | Rename wg10→wp5; fix titles                                                                          |
+| P7d            | Standardize quote style in jac-\*                                                                    |
+| P8             | Ruby on termA/termB in confusion-pairs (28 pairs)                                                    |
+| P9             | Ruby on term in danger-pairs (17/20; 3 kana/romaji skipped)                                          |
+| P10            | Ruby on soal in angka-kunci (29 items)                                                               |
+| P11 (q only)   | csv-sets.js q lines annotated — **but corrupted, needs P11-FIX-A/B first**                           |
+| P12 (coverage) | wayground-sets.js bare kanji cleared — **but corrupted, needs P12-FIX first**                        |
+| P20            | Rename sipil→doboku, bangunan→kenchiku                                                               |
 
 ---
 
@@ -429,31 +452,31 @@ Actual schema fields per entry: `type`, `label`, `termA`, `furiA`, `defA`, `term
 
 > **`content-dq` branch note:** Split files in `src/data/sets/` and `src/data/cards/` are the **working source of truth**. Monolithic files (`csv-sets.js`, `wayground-sets.js`, `quiz-sets.js`) are legacy originals retained for reference — intentionally not edited on this branch. They will be replaced at main-merge time by reassembling from split files.
 
-| File | Last changed | Notes |
-|---|---|---|
-| `src/storage/schema.js` | main only | ⚠️ Not on content-dq. Per CHANGELOG v4.22.0: STORAGE_VERSION = 4 |
-| `src/storage/engine.js` | main only | ⚠️ Not on content-dq |
-| `src/data/source/cards-common.js` | v10 (P6) | 879 cards, jp ruby complete |
-| `src/data/source/cards-lifeline.js` | v10 (P6) | 564 cards, jp ruby complete |
-| `src/data/source/cards-doboku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
-| `src/data/source/cards-kenchiku.js` | stub | 0 cards — empty, ready for Ch.5+ content |
-| `src/data/cards.js` | session 11 (G2) | 1,443 cards — source counts updated (vocab-teori:18, vocab-supp:272, jac-gakka1:6) |
-| `src/data/cards/**/*.js` | session 11 (G2) | Split files — restructure complete ✅, source counts updated ✅ |
-| `src/data/confusion-pairs.js` | session 6 (P17) | 28 pairs, termA/B ruby done, tip_id filled ✅ |
-| `src/data/danger-pairs.js` | session 6 (P19) | 20 items, term + traps + explanation ruby done ✅ |
-| `src/data/angka-kunci.js` | v8 (P10) | 29 items, soal ruby done ✅ |
-| `src/data/sets/csv/*.js` | session 9 (H9) | Double ruby fixed, wrong 《》 reverted, opts annotated ✅. ct01.js + ct02.js syntax errors fixed ✅ |
-| `src/data/sets/wayground/**/*.js` | session 12 (W1) | Renamed + reorganized into teori/vocab/lifeline/praktik/lifeline/vocab/ subfolders ✅ |
-| `src/data/sets/quiz/*.js` | session 9 (H11) | id field added, hints filled, ruby done ✅. track field added to all 6 files ✅ |
-| `src/data/sets/jac/jac-teori.js` | session 6 (P16/P18) | Schema migrated, related_card_id complete ✅ |
-| `src/data/sets/jac/jac-lifeline.js` | session 6 (P16) | Schema migrated ✅ |
-| `src/hooks/useTrackedCards.js` | session 11 (G1) | type-based filtering: `c.type === 'vocab'` ✅ |
-| `src/components/FilterPopup.jsx` | session 11 (G1) | type-based filtering ✅ |
-| `src/modes/FocusMode.jsx` | session 11 (G1) | type-based filtering ✅ |
-| `src/data/csv-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/csv/` |
-| `src/data/wayground-sets.js` | v11 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/wayground/` |
-| `src/data/jac-doboku.js` | stub | empty `JAC_DOBOKU = []` — awaiting PDF |
-| `src/data/jac-kenchiku.js` | stub | empty `JAC_KENCHIKU = []` — awaiting PDF |
+| File                                | Last changed        | Notes                                                                                               |
+| ----------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------- |
+| `src/storage/schema.js`             | main only           | ⚠️ Not on content-dq. Per CHANGELOG v4.22.0: STORAGE_VERSION = 4                                    |
+| `src/storage/engine.js`             | main only           | ⚠️ Not on content-dq                                                                                |
+| `src/data/source/cards-common.js`   | v10 (P6)            | 879 cards, jp ruby complete                                                                         |
+| `src/data/source/cards-lifeline.js` | v10 (P6)            | 564 cards, jp ruby complete                                                                         |
+| `src/data/source/cards-doboku.js`   | stub                | 0 cards — empty, ready for Ch.5+ content                                                            |
+| `src/data/source/cards-kenchiku.js` | stub                | 0 cards — empty, ready for Ch.5+ content                                                            |
+| `src/data/cards.js`                 | session 11 (G2)     | 1,443 cards — source counts updated (vocab-teori:18, vocab-supp:272, jac-gakka1:6)                  |
+| `src/data/cards/**/*.js`            | session 11 (G2)     | Split files — restructure complete ✅, source counts updated ✅                                     |
+| `src/data/confusion-pairs.js`       | session 6 (P17)     | 28 pairs, termA/B ruby done, tip_id filled ✅                                                       |
+| `src/data/danger-pairs.js`          | session 6 (P19)     | 20 items, term + traps + explanation ruby done ✅                                                   |
+| `src/data/angka-kunci.js`           | v8 (P10)            | 29 items, soal ruby done ✅                                                                         |
+| `src/data/sets/csv/*.js`            | session 9 (H9)      | Double ruby fixed, wrong 《》 reverted, opts annotated ✅. ct01.js + ct02.js syntax errors fixed ✅ |
+| `src/data/sets/wayground/**/*.js`   | session 12 (W1)     | Renamed + reorganized into teori/vocab/lifeline/praktik/lifeline/vocab/ subfolders ✅               |
+| `src/data/sets/quiz/*.js`           | session 9 (H11)     | id field added, hints filled, ruby done ✅. track field added to all 6 files ✅                     |
+| `src/data/sets/jac/jac-teori.js`    | session 6 (P16/P18) | Schema migrated, related_card_id complete ✅                                                        |
+| `src/data/sets/jac/jac-lifeline.js` | session 6 (P16)     | Schema migrated ✅                                                                                  |
+| `src/hooks/useTrackedCards.js`      | session 11 (G1)     | type-based filtering: `c.type === 'vocab'` ✅                                                       |
+| `src/components/FilterPopup.jsx`    | session 11 (G1)     | type-based filtering ✅                                                                             |
+| `src/modes/FocusMode.jsx`           | session 11 (G1)     | type-based filtering ✅                                                                             |
+| `src/data/csv-sets.js`              | v11                 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/csv/`                             |
+| `src/data/wayground-sets.js`        | v11                 | ⚠️ Legacy monolithic — corrupted, do not use. Working copy: `sets/wayground/`                       |
+| `src/data/jac-doboku.js`            | stub                | empty `JAC_DOBOKU = []` — awaiting PDF                                                              |
+| `src/data/jac-kenchiku.js`          | stub                | empty `JAC_KENCHIKU = []` — awaiting PDF                                                            |
 
 ---
 
@@ -464,6 +487,7 @@ All content files have been split into granular files for isolated DQ work.
 **Card restructure (S1–S4) complete** — deprecated files deleted, 1,443 cards redistributed. ✅
 
 ### 10A. Question Sets — current state ✅
+
 ```
 src/data/sets/
   csv/          cp01.js–cp06.js  (lifeline, 20qs each)
@@ -514,6 +538,7 @@ src/data/cards/
 ### 10D. Card taxonomy — canonical rules (locked this session)
 
 **Two orthogonal dimensions:**
+
 ```
 Dimension 1 — CHAPTER (source field): where in the textbook
   jac-ch1..ch4  → common/ folder
@@ -538,10 +563,12 @@ Chapter and category are **orthogonal** — the same category (e.g. `haikan`) ap
 **Rule:** Never put a card in `chN.js` unless its `source` is `jac-chN`. Cards from other sources that belong to the same domain go to vocab-supplementary.
 
 ### 10E. Split file export naming
+
 - Sets: `export const SET_CP01 = {...}` (set object with questions array inside)
 - Cards: `export const CARDS_CH1 = [...]` (card array)
 
 ### 10F. Monolithic originals (reference only — do not edit)
+
 `src/data/csv-sets.js`, `src/data/wayground-sets.js`, `src/data/quiz-sets.js`,
 `src/data/source/cards-common.js`, `src/data/source/cards-lifeline.js`
 
@@ -550,7 +577,9 @@ Chapter and category are **orthogonal** — the same category (e.g. `haikan`) ap
 ## PART 14 — FUTURE DEVELOPMENT NOTES
 
 ### 14A. Agent task scope per split file (DQ)
+
 Each split file is self-contained. Work one file at a time:
+
 1. Clone branch, open target file
 2. Apply DQ fixes (ruby, opts, hints, exp stubs)
 3. Verify, commit, push
@@ -563,16 +592,19 @@ Each split file is self-contained. Work one file at a time:
 **When:** After S1–S4 card restructure is complete and verified on `content-dq`.
 
 **What to build:**
+
 - **Chapter filter** — FilterBar dropdown: "Semua bab" / "Bab 5" / "Bab 6" / "Bab 7" (powered by `source: jac-chN`)
 - **Type filter** — Toggle: "Semua" / "Vocab saja" / "Konsep saja" (powered by `type: 'vocab'|'konsep'|'hukum'`)
 - Both filters should compose with existing category filter
 
 **Files to touch:**
+
 - `src/modes/FlashcardMode/FilterBar.jsx` — add filter controls
 - `src/modes/FlashcardMode/index.jsx` — add filter state + apply to `displayCards`
 - `src/router/ModeRouter.jsx` — no change needed (filters are in-mode, not at card-load level)
 
 **Data already ready:**
+
 - `source` field: `jac-ch5` / `jac-ch6` / `jac-ch7` on all chapter cards ✅
 - `type` field: `konsep` / `vocab` / `hukum` on all cards ✅
 - After S1–S4: chapter cards will be in clean `chN.js` files and source will be authoritative
@@ -584,27 +616,28 @@ Each split file is self-contained. Work one file at a time:
 ## PART 11 — DOBOKU/KENCHIKU PRE-EXPANSION STATE (session 6 audit)
 
 ### 11A. Category Stubs — VERIFIED ✅
+
 `src/data/categories.js` already defines doboku/kenchiku track categories with `placeholder: true`.
 
-| Key | Label | Module | Track | Status |
-|---|---|---|---|---|
-| `doboku_doko` | 土工事・インフラ | D1 | `doboku` | stub ✅ |
-| `doboku_hoso` | 舗装・道路 | D2 | `doboku` | stub ✅ |
-| `doboku_haisui` | 排水・基礎・杭 | D3 | `doboku` | stub ✅ |
-| `kenchiku_kutai` | 躯体工事 | B1 | `kenchiku` | stub ✅ |
-| `kenchiku_shiage` | 仕上げ・内装 | B2 | `kenchiku` | stub ✅ |
+| Key               | Label            | Module | Track      | Status  |
+| ----------------- | ---------------- | ------ | ---------- | ------- |
+| `doboku_doko`     | 土工事・インフラ | D1     | `doboku`   | stub ✅ |
+| `doboku_hoso`     | 舗装・道路       | D2     | `doboku`   | stub ✅ |
+| `doboku_haisui`   | 排水・基礎・杭   | D3     | `doboku`   | stub ✅ |
+| `kenchiku_kutai`  | 躯体工事         | B1     | `kenchiku` | stub ✅ |
+| `kenchiku_shiage` | 仕上げ・内装     | B2     | `kenchiku` | stub ✅ |
 
 All marked `placeholder: true, note: 'Future Ch.5+ content'`. Do NOT remove `placeholder` until content is populated.  
 **Rule:** When adding doboku/kenchiku cards, assign to these category keys. Do NOT invent new category keys without owner approval.
 
 ### 11B. File Locations — VERIFIED ✅
 
-| File | Location | Notes |
-|---|---|---|
-| `jac-doboku.js` | `src/data/jac-doboku.js` | TOP-LEVEL — not in `sets/jac/` |
-| `jac-kenchiku.js` | `src/data/jac-kenchiku.js` | TOP-LEVEL — not in `sets/jac/` |
-| `cards-doboku.js` | `src/data/source/cards-doboku.js` | Source stub — 0 cards |
-| `cards-kenchiku.js` | `src/data/source/cards-kenchiku.js` | Source stub — 0 cards |
+| File                | Location                            | Notes                          |
+| ------------------- | ----------------------------------- | ------------------------------ |
+| `jac-doboku.js`     | `src/data/jac-doboku.js`            | TOP-LEVEL — not in `sets/jac/` |
+| `jac-kenchiku.js`   | `src/data/jac-kenchiku.js`          | TOP-LEVEL — not in `sets/jac/` |
+| `cards-doboku.js`   | `src/data/source/cards-doboku.js`   | Source stub — 0 cards          |
+| `cards-kenchiku.js` | `src/data/source/cards-kenchiku.js` | Source stub — 0 cards          |
 
 `src/data/sets/jac/` only contains `jac-teori.js` and `jac-lifeline.js` (split DQ copies). Doboku/kenchiku stubs do NOT go in `sets/jac/`.
 
@@ -652,21 +685,22 @@ All 1,443 cards audited against **11 JAC PDFs** (7 textbook + 4 soal ujian lifel
 | `jac-jitsugi2` | st_sample2_l.pdf | 実技 lifeline 追加サンプル問題 |
 
 **Fixes shipped:**
+
 - F1: `text3l` (25 cards) → `jac-ch3` — confirmed in text3.pdf
 - F2: 120 single-match cards → correct `jac-chN` via PDF trace
 - F3: `text3l` removed from `categories.js` (SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT)
 
 **Remaining legacy labels — INTENTIONAL, DO NOT CHANGE:**
 
-| Label | Count | Nature |
-|---|---|---|
-| `vocab-supplementary` | **272** | External — technical vocab not in any JAC PDF |
-| `vocab-lifeline` | 113 | Cross-chapter + external lifeline terms |
-| `vocab-jac` | 49 | Cross-chapter JAC terms (appear in both textbook + exam PDFs) |
-| `vocab-general` | 44 | External — general construction vocab |
-| `vocab-exam` | 38 | Cross-chapter exam-prep terms |
-| `vocab-teori` | **18** | Cross-chapter theory terms (2 moved to vocab-supplementary/jac-gakka1 in G2) |
-| `vocab-core` | 13 | Cross-chapter core terms |
+| Label                 | Count   | Nature                                                                       |
+| --------------------- | ------- | ---------------------------------------------------------------------------- |
+| `vocab-supplementary` | **272** | External — technical vocab not in any JAC PDF                                |
+| `vocab-lifeline`      | 113     | Cross-chapter + external lifeline terms                                      |
+| `vocab-jac`           | 49      | Cross-chapter JAC terms (appear in both textbook + exam PDFs)                |
+| `vocab-general`       | 44      | External — general construction vocab                                        |
+| `vocab-exam`          | 38      | Cross-chapter exam-prep terms                                                |
+| `vocab-teori`         | **18**  | Cross-chapter theory terms (2 moved to vocab-supplementary/jac-gakka1 in G2) |
+| `vocab-core`          | 13      | Cross-chapter core terms                                                     |
 
 These labels are pedagogically meaningful and displayed to users via `SOURCE_META`. Multi-match terms cannot be attributed to a single chapter — keeping labels is correct.
 
@@ -675,6 +709,7 @@ These labels are pedagogically meaningful and displayed to users via `SOURCE_MET
 **Owner confirmed (session 10):** No JAC PDFs exist for doboku or kenchiku tracks. The 2 seed sets (DOBOKU_SETS and KENCHIKU_SETS in `quiz-sets.js`, renamed from SIPIL_SETS/BANGUNAN_SETS by P20) were generated by Claude Opus with no reference to real JAC materials.
 
 **Implications:**
+
 - P21 (`jac-doboku.js` + `jac-kenchiku.js`) remains **BLOCKED** — no source PDF
 - AI-generated quiz sets should be treated as draft/placeholder content
 - When real doboku/kenchiku PDFs arrive, those sets will need full audit against source
@@ -685,6 +720,7 @@ These labels are pedagogically meaningful and displayed to users via `SOURCE_MET
 **Owner decision:** Add a new mode for reading JAC textbook PDFs inside the app.
 
 **Spec:**
+
 - Fetch PDFs directly from official JAC URLs (internet required — accepted)
 - 7 PDFs: text1l through text7l (Japanese)
 - Future: +7 PDFs Indonesian translation (owner will supply)
@@ -713,11 +749,13 @@ Agent must NOT guess or hardcode URLs. Wait for owner to provide.
 ~~Problem 2~~ **FIXED** — 6 hukum cards di VOCAB_SOURCES: 2 source-fixed (G2), 4 vocab-teori retained (cross-chapter confirmed)
 
 **G1 (session 11):** 3 files diupdate:
+
 1. `useTrackedCards.js`: `VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
 2. `FilterPopup.jsx`: `isVocab = VOCAB_SOURCES.includes(c.source)` → `c.type === 'vocab'`
 3. `FocusMode.jsx`: filter inline → `c.type !== 'vocab'`
 
 **G2 (session 11):** Source fixes:
+
 - id:1184 `vocab-teori` → `vocab-supplementary` (no JAC PDF match)
 - id:1233 `vocab-teori` → `jac-gakka1` (single-match tt_sample.pdf)
 - id:1167, 1168, 1169, 1237 — `vocab-teori` RETAINED (cross-chapter confirmed, 2–3 PDFs each)
@@ -732,7 +770,7 @@ Comparison selesai dikerjakan di branch main oleh owner. Semua fitur gap sudah d
 
 **Commit:** `24a5f58` | **Cards:** 1,443 | Source counts: vocab-supplementary:271, vocab-teori:20, jac-gakka1:5 (pre-G2)
 
-Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-generated (P21 BLOCKED); Opsi A = APPROVED; PDF Viewer spec APPROVED tapi URL BLOCKED.
+Keputusan dikonfirmasi: vocab-\* labels DIPERTAHANKAN; doboku/kenchiku = AI-generated (P21 BLOCKED); Opsi A = APPROVED; PDF Viewer spec APPROVED tapi URL BLOCKED.
 
 ---
 
@@ -743,11 +781,13 @@ Keputusan dikonfirmasi: vocab-* labels DIPERTAHANKAN; doboku/kenchiku = AI-gener
 **Cards:** 1,443 total (tidak berubah)
 
 **Type field — VERIFIED:**
+
 ```
 vocab: 655   konsep: 692   hukum: 96
 ```
 
 **Source field — post F1+F2+F3+G2 (AKTUAL, verified dari cards.js):**
+
 ```
 jac-ch1:  28   jac-ch2:  99   jac-ch3: 183
 jac-ch4: 150   jac-ch5: 217   jac-ch6: 134   jac-ch7:  48
@@ -756,18 +796,22 @@ jac-jitsugi1: 13  jac-jitsugi2: 15
 vocab-supplementary: 272  vocab-lifeline: 113  vocab-jac: 49
 vocab-general: 44  vocab-exam: 38  vocab-teori: 18  vocab-core: 13
 ```
+
 `text3l` = 0
 
 **Selesai di session 11 (G1+G2):**
+
 - App logic: source-based → type-based filtering (useTrackedCards, FilterPopup, FocusMode)
 - Source fix: id:1184 vocab-teori → vocab-supplementary; id:1233 vocab-teori → jac-gakka1
 
 **Selesai di session 12 (W1):**
+
 - Wayground taxonomy restructure: 26 sets di-rename dan dipindah ke subfolders
 - Old: `wt1–wt10`, `wg1–wg9`, `wg11`, `wg12`, `wp1–wp5` (flat in `sets/wayground/`)
 - New: `wt01–wt10` (teori/), `wtv01` (vocab/), `wgl01–wgl10` (lifeline/praktik/), `wglv01–wglv05` (lifeline/vocab/)
 - ⚠️ W1 = breaking change: storage migration required at main-merge time
 
 **Tasks open (semua blocked):**
+
 1. [ ] PDF Viewer — tunggu URL JAC dari owner (BLOCKED)
 2. [ ] P21 (jac-doboku + jac-kenchiku) — tunggu PDF JAC (BLOCKED)

@@ -63,7 +63,9 @@ class ErrorBoundary extends Component {
             gap: 12,
           }}
         >
-          <div style={{ fontSize: 40 }} aria-hidden="true">⚠️</div>
+          <div style={{ fontSize: 40 }} aria-hidden="true">
+            ⚠️
+          </div>
           <div style={{ fontSize: 15, fontWeight: 700, color: T.text }}>
             Mode ini mengalami error
           </div>
@@ -131,7 +133,17 @@ function FocusSentinel() {
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
   const { mode, modeParams, exitMode, goMode, track, modeHistory, goBack } = useApp();
-  const { known, unknown, starred, quizWrong, toggleStar, handleMark, recordSession, streakData, sessions } = useProgress();
+  const {
+    known,
+    unknown,
+    starred,
+    quizWrong,
+    toggleStar,
+    handleMark,
+    recordSession,
+    streakData,
+    sessions,
+  } = useProgress();
   const srs = useSRSContext();
   const [showMissionOverlay, setShowMissionOverlay] = useState(false);
   const [missionResult, setMissionResult] = useState(null);
@@ -169,31 +181,35 @@ export default function ModeRouter() {
   if (!ModeComponent) return null;
 
   // Wrap onFinish to also record session + check mission completion.
-  const makeFinishHandler = (modeName, extra) => ({ correct = 0, total = 0, durationMs = 0, maxStreak = 0, maxWrongStreak = 0 } = {}) => {
-    recordSession({ mode: modeName, correct, total, durationMs });
+  const makeFinishHandler =
+    (modeName, extra) =>
+    ({ correct = 0, total = 0, durationMs = 0, maxStreak = 0, maxWrongStreak = 0 } = {}) => {
+      recordSession({ mode: modeName, correct, total, durationMs });
 
-    // C.3: Check if this mode matches the daily mission
-    const mission = getMission();
-    if (mission && mission.mode === modeName && !isMissionDoneToday()) {
-      completeMission();
-      setMissionResult({ label: mission.label, icon: mission.icon, correct, total });
-      setShowMissionOverlay(true);
-    }
+      // C.3: Check if this mode matches the daily mission
+      const mission = getMission();
+      if (mission && mission.mode === modeName && !isMissionDoneToday()) {
+        completeMission();
+        setMissionResult({ label: mission.label, icon: mission.icon, correct, total });
+        setShowMissionOverlay(true);
+      }
 
-    extra?.({ correct, total, maxStreak, maxWrongStreak });
-  };
+      extra?.({ correct, total, maxStreak, maxWrongStreak });
+    };
 
   // sessionEnd: lightweight version for modes that manage their own score state.
   // Passed as onSessionEnd prop — modes call it from their existing handleFinish.
-  const makeSessionEnd = (modeName) => ({ correct = 0, total = 0, durationMs = 0 } = {}) => {
-    recordSession({ mode: modeName, correct, total, durationMs });
-    const mission = getMission();
-    if (mission && mission.mode === modeName && !isMissionDoneToday()) {
-      completeMission();
-      setMissionResult({ label: mission.label, icon: mission.icon, correct, total });
-      setShowMissionOverlay(true);
-    }
-  };
+  const makeSessionEnd =
+    (modeName) =>
+    ({ correct = 0, total = 0, durationMs = 0 } = {}) => {
+      recordSession({ mode: modeName, correct, total, durationMs });
+      const mission = getMission();
+      if (mission && mission.mode === modeName && !isMissionDoneToday()) {
+        completeMission();
+        setMissionResult({ label: mission.label, icon: mission.icon, correct, total });
+        setShowMissionOverlay(true);
+      }
+    };
 
   // Build filtered cards for modes that need them
   const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
@@ -219,7 +235,7 @@ export default function ModeRouter() {
       filterIds: modeParams?.filterIds ?? null,
     },
     ulasan: { srs, onExit: exitMode, onSessionEnd: makeSessionEnd('ulasan') },
-    kuis:   {
+    kuis: {
       cards: filteredCards,
       allCards: CARDS,
       onExit: exitMode,
@@ -228,23 +244,56 @@ export default function ModeRouter() {
       audioEnabled,
       filterIds: modeParams?.filterIds ?? null,
     },
-    sprint:   { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('sprint'), filterIds: modeParams?.filterIds ?? null },
-    fokus:    { known, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
-    stats:    { known, unknown, quizWrong, srs, streakData, sessions, onExit: exitMode },
-    angka:    { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
-    jebak:    { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },
-    cari:     { onExit: exitMode, track, starred, toggleStar },
-    jac:      { onExit: exitMode, onSessionEnd: makeSessionEnd('jac'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }), audioEnabled },
-    wayground:{ onExit: exitMode, onSessionEnd: makeSessionEnd('wayground'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }) },
-    vocab:    { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab'), audioEnabled },
-    simulasi: { onExit: exitMode, onSessionEnd: makeSessionEnd('simulasi'), onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }) },
-    glosari:  { onExit: exitMode, track },
-    produksi: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('produksi'), audioEnabled },
-    mirip:    { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },
-    dengar:   { cards: filteredCards, allCards: CARDS, onExit: exitMode, onSessionEnd: makeSessionEnd('dengar') },
-    catatan:  { cards: filteredCards, onExit: exitMode },
-    kuisprod: { cards: filteredCards, onExit: exitMode, onSessionEnd: makeSessionEnd('kuisprod'), audioEnabled },
-    sumber:   { onExit: exitMode, onNavigate: goMode },
+    sprint: {
+      cards: filteredCards,
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('sprint'),
+      filterIds: modeParams?.filterIds ?? null,
+    },
+    fokus: { known, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
+    stats: { known, unknown, quizWrong, srs, streakData, sessions, onExit: exitMode },
+    angka: { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
+    jebak: { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },
+    cari: { onExit: exitMode, track, starred, toggleStar },
+    jac: {
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('jac'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
+      audioEnabled,
+    },
+    wayground: {
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('wayground'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
+    },
+    vocab: { onExit: exitMode, onSessionEnd: makeSessionEnd('vocab'), audioEnabled },
+    simulasi: {
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('simulasi'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
+    },
+    glosari: { onExit: exitMode, track },
+    produksi: {
+      cards: filteredCards,
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('produksi'),
+      audioEnabled,
+    },
+    mirip: { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },
+    dengar: {
+      cards: filteredCards,
+      allCards: CARDS,
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('dengar'),
+    },
+    catatan: { cards: filteredCards, onExit: exitMode },
+    kuisprod: {
+      cards: filteredCards,
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('kuisprod'),
+      audioEnabled,
+    },
+    sumber: { onExit: exitMode, onNavigate: goMode },
   };
 
   const props = modeProps[mode] ?? { onExit: exitMode };
@@ -257,18 +306,30 @@ export default function ModeRouter() {
     <ErrorBoundary onExit={exitMode}>
       <FocusSentinel />
       {breadcrumbMeta && (
-        <div style={{
-          position: 'sticky', top: 0, zIndex: 'var(--z-banner, 30)',
-          background: 'var(--ssw-navBg)', borderBottom: '1px solid var(--ssw-border)',
-          padding: '6px 16px',
-        }}>
+        <div
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 'var(--z-banner, 30)',
+            background: 'var(--ssw-navBg)',
+            borderBottom: '1px solid var(--ssw-border)',
+            padding: '6px 16px',
+          }}
+        >
           <button
             onClick={goBack}
             aria-label={`Kembali ke ${breadcrumbMeta.label}`}
             style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontFamily: 'inherit', fontSize: 12, fontWeight: 600,
-              color: 'var(--ssw-amber)', display: 'inline-flex', alignItems: 'center', gap: 4,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+              fontSize: 12,
+              fontWeight: 600,
+              color: 'var(--ssw-amber)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
               padding: '4px 0',
             }}
           >
@@ -280,7 +341,13 @@ export default function ModeRouter() {
         <ModeComponent {...props} />
       </Suspense>
       {showMissionOverlay && (
-        <MissionCompleteOverlay result={missionResult} onDone={() => { setShowMissionOverlay(false); setMissionResult(null); }} />
+        <MissionCompleteOverlay
+          result={missionResult}
+          onDone={() => {
+            setShowMissionOverlay(false);
+            setMissionResult(null);
+          }}
+        />
       )}
     </ErrorBoundary>
   );

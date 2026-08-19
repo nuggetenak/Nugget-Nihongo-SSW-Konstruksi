@@ -12,12 +12,30 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
     <div className={FC.filterBar}>
       {isCatFilter ? (
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 12, color: T.amber, fontWeight: 700, padding: '6px 10px', background: `${T.amber}15`, borderRadius: 99, border: `1px solid ${T.amber}40` }}>
+          <span
+            style={{
+              fontSize: 12,
+              color: T.amber,
+              fontWeight: 700,
+              padding: '6px 10px',
+              background: `${T.amber}15`,
+              borderRadius: 99,
+              border: `1px solid ${T.amber}40`,
+            }}
+          >
             🏷 Kategori: {catKey}
           </span>
           <button
             onClick={() => onSearch('')}
-            style={{ fontFamily: 'inherit', fontSize: 11, color: T.textDim, background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px 6px' }}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 11,
+              color: T.textDim,
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '4px 6px',
+            }}
             aria-label="Hapus filter kategori"
           >
             ✕ Hapus filter

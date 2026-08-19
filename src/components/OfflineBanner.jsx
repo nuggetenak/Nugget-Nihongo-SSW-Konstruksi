@@ -6,7 +6,7 @@ export default function OfflineBanner() {
   const [online, setOnline] = useState(navigator.onLine);
 
   useEffect(() => {
-    const on  = () => setOnline(true);
+    const on = () => setOnline(true);
     const off = () => setOnline(false);
     window.addEventListener('online', on);
     window.addEventListener('offline', off);

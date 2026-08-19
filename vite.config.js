@@ -9,13 +9,14 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     // Bundle visualizer — generates stats.html on build (only in non-CI)
-    mode !== 'test' && visualizer({
-      filename: 'dist/stats.html',
-      open: false,
-      gzipSize: true,
-      brotliSize: true,
-      title: 'SSW Konstruksi — Bundle Analysis',
-    }),
+    mode !== 'test' &&
+      visualizer({
+        filename: 'dist/stats.html',
+        open: false,
+        gzipSize: true,
+        brotliSize: true,
+        title: 'SSW Konstruksi — Bundle Analysis',
+      }),
   ].filter(Boolean),
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
@@ -36,7 +37,11 @@ export default defineConfig(({ mode }) => ({
           'vendor-fsrs': ['ts-fsrs'],
           // Heavy data files — loaded in parallel with main chunk
           'data-cards': ['./src/data/cards.js'],
-          'data-jac': ['./src/data/jac-official.js', './src/data/sets/jac/jac-teori.js', './src/data/sets/jac/jac-lifeline.js'],
+          'data-jac': [
+            './src/data/jac-official.js',
+            './src/data/sets/jac/jac-teori.js',
+            './src/data/sets/jac/jac-lifeline.js',
+          ],
           'data-wayground': ['./src/data/wayground-sets.js', './src/data/quiz-sets.js'],
           'data-jac-mockup': ['./src/data/jac-mockup-sets.js'],
           // SRS layer — shared across ReviewMode + FlashcardMode

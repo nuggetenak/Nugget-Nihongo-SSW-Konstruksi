@@ -11,8 +11,8 @@ export function setQuotaHandler(fn) {
 export function isQuotaError(err) {
   return (
     err?.name === 'QuotaExceededError' ||
-    err?.code === 22 ||        // Chrome/Safari
-    err?.code === 1014          // Firefox NS_ERROR_DOM_QUOTA_REACHED
+    err?.code === 22 || // Chrome/Safari
+    err?.code === 1014 // Firefox NS_ERROR_DOM_QUOTA_REACHED
   );
 }
 
@@ -32,7 +32,9 @@ export async function estimateStorageUsage() {
         quotaMB: ((est.quota || 0) / 1024 / 1024).toFixed(0),
         pct: est.quota ? ((est.usage / est.quota) * 100).toFixed(1) : null,
       };
-    } catch { return null; }
+    } catch {
+      return null;
+    }
   }
   return null;
 }

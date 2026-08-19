@@ -1,4 +1,5 @@
 # TASK v4.20.5 — B4, N6 (14 sites), OVERHAUL-2, N8/REF-5, N14, N22
+
 **Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.4 DONE
 
 ---
@@ -15,12 +16,15 @@ export function useSessionTimer() {
   const startRef = useRef(Date.now());
   return {
     getDurationMs: () => Date.now() - startRef.current,
-    reset: () => { startRef.current = Date.now(); },
+    reset: () => {
+      startRef.current = Date.now();
+    },
   };
 }
 ```
 
 Add to `src/hooks/index.js`:
+
 ```js
 export { useSessionTimer } from './useSessionTimer.js';
 ```
@@ -36,6 +40,7 @@ Commit: `feat(hooks): OVERHAUL-2 useSessionTimer — centralized session duratio
 ### 2a — `src/router/ModeRouter.jsx`
 
 Find `makeSessionEnd`:
+
 ```js
 // FIND:
 const makeSessionEnd = (modeName) => ({ correct = 0, total = 0 } = {}) => {
@@ -49,6 +54,7 @@ const makeSessionEnd = (modeName) => ({ correct = 0, total = 0, durationMs = 0 }
 ```
 
 Find `makeFinishHandler` (used for kuis mode):
+
 ```js
 // FIND:
 const makeFinishHandler = (modeName, extra) => ({ correct = 0, total = 0, ...rest } = {}) => {
@@ -66,6 +72,7 @@ Commit: `fix(ModeRouter): N6/N17 — both handlers accept + forward durationMs`
 ### 2b — `src/components/QuizShell.jsx`
 
 Add session start time tracking:
+
 ```js
 import { useRef } from 'react'; // add if not imported
 // Inside component:
@@ -75,8 +82,13 @@ const startTimeRef = useRef(Date.now());
 // FIND:
 onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak });
 // CHANGE TO:
-onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak,
-  durationMs: Date.now() - startTimeRef.current });
+onFinish?.({
+  correct,
+  total: results.length,
+  maxStreak,
+  maxWrongStreak,
+  durationMs: Date.now() - startTimeRef.current,
+});
 ```
 
 Commit: `fix(QuizShell): N6 — track startTime; pass durationMs to onFinish`
@@ -86,6 +98,7 @@ Commit: `fix(QuizShell): N6 — track startTime; pass durationMs to onFinish`
 **Files:** JACMode.jsx, VocabMode.jsx, WaygroundMode.jsx, SipilMode.jsx, BangunanMode.jsx
 
 For each, find the `handleFinish` callback passed to QuizShell:
+
 ```js
 // FIND (example from JACMode):
 const handleFinish = useCallback(({ correct, total }) => {
@@ -105,12 +118,14 @@ Commit: `fix(modes): N6 — QuizShell modes forward durationMs from handleFinish
 **Files:** SprintMode.jsx, SimulasiMode.jsx, ConfusionMode.jsx, ProductionMode.jsx, DangerMode.jsx, AngkaMode.jsx, ReviewMode.jsx, QuizProduksiMode.jsx, DengarMode.jsx
 
 For each, add at component top:
+
 ```js
 import { useSessionTimer } from '../hooks/useSessionTimer.js'; // add if not present
 const { getDurationMs } = useSessionTimer();
 ```
 
 Then find where `onSessionEnd` is called and add `durationMs`:
+
 ```js
 // BEFORE:
 onSessionEnd?.({ correct, total });
@@ -214,12 +229,14 @@ Commit: `fix(recommend-mode): B4 — add maintenance-phase rotation for output/l
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass
 3. `npm run build`
-4. Bump → `4.20.5`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.5`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] useSessionTimer.js created
 - [ ] ModeRouter both handlers accept durationMs
 - [ ] QuizShell passes durationMs to onFinish

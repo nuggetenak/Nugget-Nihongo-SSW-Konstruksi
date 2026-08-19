@@ -9,7 +9,13 @@
 import S from './Skeleton.module.css';
 
 // ── Base shimmer block ──────────────────────────────────────────────────────
-export default function Skeleton({ width = '100%', height = 16, radius = 6, style = {}, className = '' }) {
+export default function Skeleton({
+  width = '100%',
+  height = 16,
+  radius = 6,
+  style = {},
+  className = '',
+}) {
   return (
     <div
       className={`${S.shimmer} ${className}`}

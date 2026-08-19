@@ -1,7 +1,9 @@
 # TASK v4.20.9 — DB-2, DB-3, DB-4, DB-5, ENG-9, ENG-10
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.8 DONE (or can be parallel)
 
 ## Goal
+
 Fix 4 data file bugs, add pre-build data validator, add audit script.
 
 ---
@@ -25,6 +27,7 @@ Commit: `fix(wayground-sets): DB-5 update header — 12 set → 26 sets / 659 qu
 ## Step 2 — DB-3: Fix sipil/bangunan seed headers (5 min)
 
 **File:** `src/data/sipil-sets.js` — replace lines 1-5:
+
 ```js
 // BEFORE:
 // ─── docs/seeds/sipil-sets-seed.js ────
@@ -38,6 +41,7 @@ Commit: `fix(wayground-sets): DB-5 update header — 12 set → 26 sets / 659 qu
 ```
 
 **File:** `src/data/bangunan-sets.js` — same pattern:
+
 ```js
 // AFTER:
 // ─── data/bangunan-sets.js ────────────────────────────────────────────────────
@@ -52,12 +56,14 @@ Commit: `fix(data): DB-3 remove SEED DATA headers from sipil-sets + bangunan-set
 ## Step 3 — DB-4: Fix empty source file stale header comments (5 min)
 
 **Files:** All 4 files in `src/data/source/`:
+
 - `cards-doboku.js`
 - `cards-kenchiku.js`
 - `cards-doboku-vocab.js`
 - `cards-kenchiku-vocab.js`
 
 For each file, find and update the header comment:
+
 ```js
 // BEFORE (varies per file):
 // Cards: 58   (or 77, 9, 13)
@@ -84,7 +90,7 @@ import { CARDS } from '../src/data/cards.js';
 import { JAC_TEORI } from '../src/data/jac-teori.js';
 import { JAC_LIFELINE } from '../src/data/jac-lifeline.js';
 
-const cardIds = new Set(CARDS.map(c => c.id));
+const cardIds = new Set(CARDS.map((c) => c.id));
 const broken = [];
 
 for (const q of [...JAC_TEORI, ...JAC_LIFELINE]) {
@@ -95,11 +101,13 @@ for (const q of [...JAC_TEORI, ...JAC_LIFELINE]) {
 
 if (broken.length) {
   console.log(`❌ ${broken.length} broken related_card_id refs (set to null in data):`);
-  broken.forEach(b => console.log(`  ${b.qId} → card ${b.badRef}`));
+  broken.forEach((b) => console.log(`  ${b.qId} → card ${b.badRef}`));
   console.log('\nFix: set these related_card_id values to null in jac-teori.js / jac-lifeline.js');
   process.exit(1);
 }
-console.log(`✅ All related_card_id refs valid (${[...JAC_TEORI, ...JAC_LIFELINE].length} questions checked).`);
+console.log(
+  `✅ All related_card_id refs valid (${[...JAC_TEORI, ...JAC_LIFELINE].length} questions checked).`
+);
 ```
 
 **Run it now:** `node scripts/audit-related-ids.mjs`
@@ -120,8 +128,7 @@ Commit: `feat(scripts): ENG-10 audit-related-ids.mjs + fix DB-2 broken refs`
 
 ```js
 // FIND this pattern:
-const cardIds = wrongQIds
-  .map((qId) => JAC_OFFICIAL.find((q) => q.id === qId)?.related_card_id)
+const cardIds = wrongQIds.map((qId) => JAC_OFFICIAL.find((q) => q.id === qId)?.related_card_id);
 
 // CHANGE TO:
 const cardIds = wrongQIds
@@ -149,7 +156,7 @@ import { existsSync } from 'fs';
 
 let errors = 0;
 let warnings = 0;
-const cardIds = new Set(CARDS.map(c => c.id));
+const cardIds = new Set(CARDS.map((c) => c.id));
 
 // 1. Duplicate card IDs
 const seen = new Set();
@@ -186,7 +193,7 @@ for (const a of ANGKA_KUNCI) {
 }
 
 // 5. Quiz answer index validity (ans < opts.length) — spot check CARDS type:quiz
-const quizCards = CARDS.filter(c => c.type === 'quiz' && c.ans !== undefined && c.opts);
+const quizCards = CARDS.filter((c) => c.type === 'quiz' && c.ans !== undefined && c.opts);
 for (const c of quizCards) {
   if (c.ans >= c.opts.length) {
     console.error(`❌ Card ${c.id}: ans=${c.ans} >= opts.length=${c.opts.length}`);
@@ -198,10 +205,13 @@ if (errors > 0) {
   console.error(`\n${errors} error(s), ${warnings} warning(s). Fix before build.`);
   process.exit(1);
 }
-console.log(`✅ Data validation passed. ${warnings > 0 ? warnings + ' warning(s).' : ''} Cards: ${CARDS.length}`);
+console.log(
+  `✅ Data validation passed. ${warnings > 0 ? warnings + ' warning(s).' : ''} Cards: ${CARDS.length}`
+);
 ```
 
 **Wire into package.json** — add `prebuild` script:
+
 ```json
 "scripts": {
   "prebuild": "node scripts/merge-cards.mjs && node scripts/validate-data.mjs",
@@ -223,6 +233,7 @@ Commit: `feat(scripts): ENG-9 validate-data.mjs + prebuild hook`
 3. `npm run build` — success (prebuild runs validate-data)
 4. Bump `package.json` → `4.20.9`
 5. Prepend to `CHANGELOG.md`:
+
 ```
 ## [4.20.9] - [DATE]
 
@@ -235,10 +246,12 @@ Commit: `feat(scripts): ENG-9 validate-data.mjs + prebuild hook`
 - ENG-9: scripts/validate-data.mjs — pre-build data integrity checker (prebuild hook)
 - ENG-10: scripts/audit-related-ids.mjs — one-shot cross-ref script; patched 19 broken refs
 ```
+
 6. Update `_MAP.md` version line → `v4.20.9` + add log entry
 7. Push all commits
 
 ## Done when
+
 - [ ] DB-5 wayground header fixed
 - [ ] DB-3 sipil/bangunan headers fixed
 - [ ] DB-4 empty source headers updated

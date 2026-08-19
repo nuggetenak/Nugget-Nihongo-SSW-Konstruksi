@@ -1,7 +1,9 @@
 # TASK v4.20.13 — PERF-1: Context Memoization (REF-10 + ENG-13)
+
 **Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.12 DONE
 
 ## Goal
+
 All 3 context Providers rebuild `value={}` fresh every render → all 23 mode consumers re-render unnecessarily. Fix with `useMemo`.
 
 ---
@@ -29,6 +31,7 @@ export function useStableContextValue(buildFn, deps) {
 ```
 
 Add to `src/hooks/index.js`:
+
 ```js
 export { useStableContextValue } from './useStableContextValue.js';
 ```
@@ -48,17 +51,30 @@ import { useState, useCallback, useMemo } from 'react';
 
 // BEFORE:
 const ctx = {
-  mode, setMode, goTab, modeHistory, goBack, toast, // ...all fields
+  mode,
+  setMode,
+  goTab,
+  modeHistory,
+  goBack,
+  toast, // ...all fields
 };
 
 // AFTER — add module-level constants for stable empty defaults:
 const EMPTY_ARR = [];
 
 // inside the component:
-const ctx = useMemo(() => ({
-  mode, setMode, goTab, modeHistory, goBack, toast,
-  // ...all fields — list ALL of them
-}), [mode, setMode, goTab, modeHistory, goBack, toast]); // list all deps
+const ctx = useMemo(
+  () => ({
+    mode,
+    setMode,
+    goTab,
+    modeHistory,
+    goBack,
+    toast,
+    // ...all fields — list ALL of them
+  }),
+  [mode, setMode, goTab, modeHistory, goBack, toast]
+); // list all deps
 ```
 
 **Important:** Every value in the ctx object must appear in the deps array. Run `npm run lint` after — ESLint `react-hooks/exhaustive-deps` will catch any missing deps.
@@ -79,38 +95,50 @@ const EMPTY_OBJ = Object.freeze({});
 const EMPTY_ARR = Object.freeze([]);
 
 // Inside provider, replace ctx construction:
-const ctx = useMemo(() => ({
-  known: knownSet,
-  unknown: unknownSet,
-  starred: starredSet,
-  quizWrong: prog.quizWrong ?? EMPTY_OBJ,
-  jacScores: prog.jacScores ?? EMPTY_OBJ,
-  wgScores: prog.wgScores ?? EMPTY_OBJ,
-  vocabScores: prog.vocabScores ?? EMPTY_OBJ,
-  wgWrong: prog.wgWrong ?? EMPTY_OBJ,
-  vocabWrong: prog.vocabWrong ?? EMPTY_OBJ,
-  streakData: prog.streakData ?? EMPTY_OBJ,
-  dailyCount: prog.dailyCount ?? { count: 0, date: '' },
-  recentCards: prog.recentCards ?? EMPTY_ARR,
-  milestoneStreak7: prog.milestoneStreak7 ?? false,
-  milestoneQuiz70: prog.milestoneQuiz70 ?? false,
-  toastQueue,
-  clearToast,
-  sessions: prog.sessions ?? EMPTY_ARR,
-  recordSession,
-  handleMark,
-  toggleStar,
-  recordWrong,
-  saveScore,
-  setMilestoneQuiz70,
-}), [
-  knownSet, unknownSet, starredSet, prog,
-  toastQueue, clearToast,
-  recordSession, handleMark, toggleStar, recordWrong, saveScore, setMilestoneQuiz70,
-]);
+const ctx = useMemo(
+  () => ({
+    known: knownSet,
+    unknown: unknownSet,
+    starred: starredSet,
+    quizWrong: prog.quizWrong ?? EMPTY_OBJ,
+    jacScores: prog.jacScores ?? EMPTY_OBJ,
+    wgScores: prog.wgScores ?? EMPTY_OBJ,
+    vocabScores: prog.vocabScores ?? EMPTY_OBJ,
+    wgWrong: prog.wgWrong ?? EMPTY_OBJ,
+    vocabWrong: prog.vocabWrong ?? EMPTY_OBJ,
+    streakData: prog.streakData ?? EMPTY_OBJ,
+    dailyCount: prog.dailyCount ?? { count: 0, date: '' },
+    recentCards: prog.recentCards ?? EMPTY_ARR,
+    milestoneStreak7: prog.milestoneStreak7 ?? false,
+    milestoneQuiz70: prog.milestoneQuiz70 ?? false,
+    toastQueue,
+    clearToast,
+    sessions: prog.sessions ?? EMPTY_ARR,
+    recordSession,
+    handleMark,
+    toggleStar,
+    recordWrong,
+    saveScore,
+    setMilestoneQuiz70,
+  }),
+  [
+    knownSet,
+    unknownSet,
+    starredSet,
+    prog,
+    toastQueue,
+    clearToast,
+    recordSession,
+    handleMark,
+    toggleStar,
+    recordWrong,
+    saveScore,
+    setMilestoneQuiz70,
+  ]
+);
 ```
 
-**Note on `prog`:** `prog` is the whole progress object from state. If it changes reference on every write, the memo still re-runs — but that's correct behavior (something actually changed). The key win is preventing re-renders when *unrelated* state updates (toast, streak, etc.) fire.
+**Note on `prog`:** `prog` is the whole progress object from state. If it changes reference on every write, the memo still re-runs — but that's correct behavior (something actually changed). The key win is preventing re-renders when _unrelated_ state updates (toast, streak, etc.) fire.
 
 Commit: `perf(ProgressContext): REF-10 memoize context value — prevents unnecessary re-renders in 23 modes`
 
@@ -121,6 +149,7 @@ Commit: `perf(ProgressContext): REF-10 memoize context value — prevents unnece
 This one is simpler — `srs` comes from `useSRS(trackCardIds)` which returns a fresh object.
 
 Check if `useSRS` already returns a stable ref. If not:
+
 ```js
 import { useMemo } from 'react';
 
@@ -140,6 +169,7 @@ Commit: `perf(SRSContext): REF-10 memoize SRS context value`
 ## Step 5 — Verify: Write render-count test
 
 Create `src/tests/context-memo.test.jsx`:
+
 ```jsx
 import { describe, it, expect, vi } from 'vitest';
 import { render } from '@testing-library/react';
@@ -154,11 +184,17 @@ describe('ProgressContext memoization', () => {
       return null;
     }
     const { rerender } = render(
-      <ProgressProvider><Consumer /></ProgressProvider>
+      <ProgressProvider>
+        <Consumer />
+      </ProgressProvider>
     );
     const initialCount = renderCount;
     // Re-render provider with same props (simulates toast tick or unrelated update)
-    rerender(<ProgressProvider><Consumer /></ProgressProvider>);
+    rerender(
+      <ProgressProvider>
+        <Consumer />
+      </ProgressProvider>
+    );
     // Consumer should NOT have re-rendered extra times
     expect(renderCount).toBe(initialCount + 1); // only +1 from rerender itself
   });
@@ -170,12 +206,14 @@ This is a best-effort test — the exact behavior depends on implementation. Adj
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings (exhaustive-deps must pass)
 2. `npm test -- --run` — all pass
 3. `npm run build`
-4. Bump → `4.20.13`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.13`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] useStableContextValue.js created
 - [ ] AppContext ctx memoized
 - [ ] ProgressContext ctx memoized (with EMPTY_OBJ/ARR constants)

@@ -6,7 +6,12 @@
 import { useRef, useEffect, useState } from 'react';
 import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';
-import { JpFront, DescBlock, parseRubyFragments, renderJPWithRuby } from '../../components/JpDisplay.jsx';
+import {
+  JpFront,
+  DescBlock,
+  parseRubyFragments,
+  renderJPWithRuby,
+} from '../../components/JpDisplay.jsx';
 import { extractReadings } from '../../utils/jp-helpers.js';
 import FC from './flashcard.module.css';
 import S from './FlipCard.module.css';
@@ -38,7 +43,9 @@ export default function FlipCard({
   // Measure back face so the card container expands to fit whichever face is taller.
   const backRef = useRef(null);
   const [backH, setBackH] = useState(0);
-  useEffect(() => { setBackH(0); }, [card.id]);
+  useEffect(() => {
+    setBackH(0);
+  }, [card.id]);
   useEffect(() => {
     if (!backRef.current) return;
     const ro = new ResizeObserver(([e]) => {
@@ -70,14 +77,28 @@ export default function FlipCard({
         {/* ── FRONT ─────────────────────────────────────────────────────── */}
         <div
           className={`fc-face ${S.front}`}
-          onClick={() => { haptic.flip(); onFlip(); }}
+          onClick={() => {
+            haptic.flip();
+            onFlip();
+          }}
           style={{ border: `1.5px solid ${borderColor}`, pointerEvents: flipped ? 'none' : 'auto' }}
         >
           {cat && (
             <span
               className={S.catBadgeFront}
-              style={{ background: `${catColor}22`, color: catColor, cursor: onCatFilter ? 'pointer' : 'default' }}
-              onClick={onCatFilter ? (e) => { e.stopPropagation(); onCatFilter(cat.key); } : undefined}
+              style={{
+                background: `${catColor}22`,
+                color: catColor,
+                cursor: onCatFilter ? 'pointer' : 'default',
+              }}
+              onClick={
+                onCatFilter
+                  ? (e) => {
+                      e.stopPropagation();
+                      onCatFilter(cat.key);
+                    }
+                  : undefined
+              }
               title={onCatFilter ? `Filter: ${cat.label}` : undefined}
             >
               {cat.emoji} {cat.label}
@@ -86,15 +107,13 @@ export default function FlipCard({
           <div className={S.cardNum}>#{safeIdx + 1}</div>
 
           <div className={S.frontContent}>
-            <JpFront
-              jp={card.jp}
-              furiganaPolicy={furiganaPolicy}
-            />
+            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
 
           {srsInfo && (
             <div className={S.srsInfo} style={{ bottom: showHint ? 26 : 10 }}>
-              {srsInfo.strength.label}{srsInfo.interval > 0 ? ` · ${Math.round(srsInfo.interval)}j lagi` : ''}
+              {srsInfo.strength.label}
+              {srsInfo.interval > 0 ? ` · ${Math.round(srsInfo.interval)}j lagi` : ''}
             </div>
           )}
 
@@ -142,7 +161,10 @@ export default function FlipCard({
               {!showDesc ? (
                 <button
                   className={S.backDescBtn}
-                  onClick={(e) => { e.stopPropagation(); onShowDesc(); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onShowDesc();
+                  }}
                 >
                   📖 Lihat penjelasan
                 </button>
@@ -153,7 +175,6 @@ export default function FlipCard({
               )}
             </div>
           )}
-
         </div>
       </div>
     </div>

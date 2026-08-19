@@ -13,7 +13,7 @@
   top: 0;
   left: 0;
   transform: rotate(-90deg);
-  filter: drop-shadow(0 0 6px rgba(245,158,11,0.25));
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.25));
 }
 
 .track {

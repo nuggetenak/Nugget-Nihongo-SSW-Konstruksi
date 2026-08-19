@@ -4,7 +4,9 @@ import { JpFront } from '../components/JpDisplay.jsx';
 
 describe('JpFront ruby furigana rendering', () => {
   it('renders ruby/rt when jp has inline furigana markers', () => {
-    const { container } = render(<JpFront jp="鉄筋《てっきん》コンクリート" furiganaPolicy="always" />);
+    const { container } = render(
+      <JpFront jp="鉄筋《てっきん》コンクリート" furiganaPolicy="always" />
+    );
     const ruby = container.querySelector('ruby');
     const rt = container.querySelector('rt');
 
@@ -22,7 +24,9 @@ describe('JpFront ruby furigana rendering', () => {
   });
 
   it('tap policy reveals and hides furigana interactively', () => {
-    const { container } = render(<JpFront jp="鉄筋《てっきん》コンクリート" furiganaPolicy="tap" />);
+    const { container } = render(
+      <JpFront jp="鉄筋《てっきん》コンクリート" furiganaPolicy="tap" />
+    );
     const toggle = screen.getByRole('button', { name: 'Toggle furigana' });
 
     expect(container.querySelector('ruby')).toBeNull();

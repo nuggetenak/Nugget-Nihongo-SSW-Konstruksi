@@ -1,4 +1,5 @@
 # 🎯 TASK-MASTER.md — v4.20 Implementation Plan
+
 **Base:** v4.19.5 | **Completed through:** v4.21.1 ✅ ALL DONE | **Proposal:** UPGRADE-PROPOSAL-v4.20.md (pass 14)
 
 > **Status: All 19 tasks COMPLETE.** No pending work in this queue.
@@ -19,26 +20,26 @@
 
 ## Version Queue
 
-| Version | Task File | Status | Effort | Items |
-|---------|-----------|--------|--------|-------|
-| v4.20.0 | TASK-v4.20.0.md | **DONE** | Low | X1, X2 — P0 critical bugs |
-| v4.20.1 | TASK-v4.20.1.md | **DONE** ✅ | Low | REF-6, N13, N9, N18, ENG-8 |
-| v4.20.2 | TASK-v4.20.2.md | **DONE** ✅ | Low | ENG-2, N15, N19, B5, B1 |
-| v4.20.3 | TASK-v4.20.3.md | **DONE** ✅ | Medium | ENG-1, ENG-7, B3, N2, N4 |
-| v4.20.4 | TASK-v4.20.4.md | **DONE** ✅ | Medium | ENG-3, B2, F3, REF-4 |
-| v4.20.5 | TASK-v4.20.5.md | **DONE** ✅ | Medium | B4, N6/OVERHAUL-2, N8/REF-5, N14, N22 |
-| v4.20.6 | TASK-v4.20.6.md | **DONE** ✅ | Medium | N3, N7, N16, REF-3, N20, REF-3b, N11, R3, N23, OVERHAUL-3 |
-| v4.20.7 | TASK-v4.20.7.md | ~~DONE~~ ✅ | Low | ENG-5 |
-| v4.20.8 | TASK-v4.20.8.md | ~~DONE~~ ✅ | Low | F1, F2, F4, R1, R2, N10 |
-| v4.20.9 | TASK-v4.20.9.md | ~~DONE~~ ✅ | Low | DB-2,3,4,5, ENG-9, ENG-10 |
-| v4.20.10 | TASK-v4.20.10.md | ~~DONE~~ ✅ | Medium | DB-1, DB-6, DB-7, DB-8 |
-| v4.20.11 | TASK-v4.20.11.md | ~~DONE~~ ✅ | Low | N24, N25 |
-| v4.20.12 | TASK-v4.20.12.md | **DONE** ✅ | Low | STORAGE-1, ENG-12 |
-| v4.20.13 | TASK-v4.20.13.md | **DONE** ✅ | Medium | PERF-1, REF-10, ENG-13 |
-| v4.20.14 | TASK-v4.20.14.md | **DONE** ✅ | Low | PERF-2, REF-11 |
-| v4.20.15 | TASK-v4.20.15.md | **DONE** ✅ | Medium | ENG-11, migrate ~15 card-filter sites |
-| v4.21.0 | TASK-v4.21.0.md | **DONE** ✅ | Medium | REF-8, REF-9, Tests C1-C7 |
-| v4.21.1 | TASK-v4.21.1.md | **DONE** ✅ | High | OVERHAUL-1 — v4.21.0 done |
+| Version  | Task File        | Status      | Effort | Items                                                     |
+| -------- | ---------------- | ----------- | ------ | --------------------------------------------------------- |
+| v4.20.0  | TASK-v4.20.0.md  | **DONE**    | Low    | X1, X2 — P0 critical bugs                                 |
+| v4.20.1  | TASK-v4.20.1.md  | **DONE** ✅ | Low    | REF-6, N13, N9, N18, ENG-8                                |
+| v4.20.2  | TASK-v4.20.2.md  | **DONE** ✅ | Low    | ENG-2, N15, N19, B5, B1                                   |
+| v4.20.3  | TASK-v4.20.3.md  | **DONE** ✅ | Medium | ENG-1, ENG-7, B3, N2, N4                                  |
+| v4.20.4  | TASK-v4.20.4.md  | **DONE** ✅ | Medium | ENG-3, B2, F3, REF-4                                      |
+| v4.20.5  | TASK-v4.20.5.md  | **DONE** ✅ | Medium | B4, N6/OVERHAUL-2, N8/REF-5, N14, N22                     |
+| v4.20.6  | TASK-v4.20.6.md  | **DONE** ✅ | Medium | N3, N7, N16, REF-3, N20, REF-3b, N11, R3, N23, OVERHAUL-3 |
+| v4.20.7  | TASK-v4.20.7.md  | ~~DONE~~ ✅ | Low    | ENG-5                                                     |
+| v4.20.8  | TASK-v4.20.8.md  | ~~DONE~~ ✅ | Low    | F1, F2, F4, R1, R2, N10                                   |
+| v4.20.9  | TASK-v4.20.9.md  | ~~DONE~~ ✅ | Low    | DB-2,3,4,5, ENG-9, ENG-10                                 |
+| v4.20.10 | TASK-v4.20.10.md | ~~DONE~~ ✅ | Medium | DB-1, DB-6, DB-7, DB-8                                    |
+| v4.20.11 | TASK-v4.20.11.md | ~~DONE~~ ✅ | Low    | N24, N25                                                  |
+| v4.20.12 | TASK-v4.20.12.md | **DONE** ✅ | Low    | STORAGE-1, ENG-12                                         |
+| v4.20.13 | TASK-v4.20.13.md | **DONE** ✅ | Medium | PERF-1, REF-10, ENG-13                                    |
+| v4.20.14 | TASK-v4.20.14.md | **DONE** ✅ | Low    | PERF-2, REF-11                                            |
+| v4.20.15 | TASK-v4.20.15.md | **DONE** ✅ | Medium | ENG-11, migrate ~15 card-filter sites                     |
+| v4.21.0  | TASK-v4.21.0.md  | **DONE** ✅ | Medium | REF-8, REF-9, Tests C1-C7                                 |
+| v4.21.1  | TASK-v4.21.1.md  | **DONE** ✅ | High   | OVERHAUL-1 — v4.21.0 done                                 |
 
 > **BLOCKED** = has dependency. Do not start until prerequisite is DONE.
 
@@ -62,6 +63,7 @@ scope: mode name, file name, or item ID
 ```
 
 Examples:
+
 - `fix(VocabMode): X1 — [description]`
 - `feat(engine): ENG-12 storage-quota detection + recovery`
 - `perf(ProgressContext): REF-10 memoize context value`
@@ -78,4 +80,3 @@ Examples:
 5. Update `CHANGELOG.md` (prepend entry)
 6. Update `_MAP.md` (version line + log entry)
 7. Push all commits
-

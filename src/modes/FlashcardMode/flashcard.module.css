@@ -33,8 +33,14 @@
 
 /* Hint fade animation */
 @keyframes :global(fcHintFade) {
-  0%, 70% { opacity: 1; }
-  100% { opacity: 0; pointer-events: none; }
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 /* ── FlipCard subcomponent ─────────────────────────────────────────────────── */
@@ -72,7 +78,9 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  transition: transform var(--t-fast) var(--ease-spring), box-shadow var(--t-fast);
+  transition:
+    transform var(--t-fast) var(--ease-spring),
+    box-shadow var(--t-fast);
   position: relative;
   overflow: hidden;
 }
@@ -81,15 +89,17 @@
 .ratingBtn::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 40%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 100%);
   pointer-events: none;
   border-radius: var(--r-lg) var(--r-lg) 0 0;
 }
 
 .ratingBtn:active {
-  transform: scale(0.90) translateY(2px);
+  transform: scale(0.9) translateY(2px);
   box-shadow: none !important;
 }
 
@@ -107,7 +117,7 @@
 
 .ratingInterval {
   font-size: 9px;
-  opacity: 0.70;
+  opacity: 0.7;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -141,10 +151,14 @@
   flex-direction: column;
   align-items: center;
   gap: 3px;
-  transition: transform var(--t-fast) var(--ease-smooth), opacity var(--t-fast);
+  transition:
+    transform var(--t-fast) var(--ease-smooth),
+    opacity var(--t-fast);
   letter-spacing: 0.1px;
 }
-.toolBtn:active { transform: scale(0.90); }
+.toolBtn:active {
+  transform: scale(0.9);
+}
 
 /* ── FilterBar subcomponent ────────────────────────────────────────────────── */
 .filterBar {
@@ -166,7 +180,9 @@
   color: var(--ssw-text);
   transition: border-color var(--t-fast);
 }
-.filterInput:focus { border-color: var(--ssw-borderActive); }
+.filterInput:focus {
+  border-color: var(--ssw-borderActive);
+}
 
 .filterStarBtn {
   font-family: inherit;
@@ -195,9 +211,13 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   color: var(--ssw-textMuted);
-  transition: background var(--t-fast), transform var(--t-fast);
+  transition:
+    background var(--t-fast),
+    transform var(--t-fast);
 }
-.navBtn:active { transform: scale(0.95); }
+.navBtn:active {
+  transform: scale(0.95);
+}
 
 .navFlip {
   font-family: 'DM Sans', system-ui, sans-serif;
@@ -208,13 +228,15 @@
   cursor: pointer;
   background: var(--accent);
   border: none;
-  color: #FFF8E7;
+  color: #fff8e7;
   box-shadow: var(--shadow-amber);
-  transition: transform var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    transform var(--t-fast),
+    box-shadow var(--t-fast);
 }
 .navFlip:active {
   transform: scale(0.95);
-  box-shadow: 0 1px 4px rgba(180,83,9,0.15);
+  box-shadow: 0 1px 4px rgba(180, 83, 9, 0.15);
 }
 
 /* ── Keyboard hint ─────────────────────────────────────────────────────────── */

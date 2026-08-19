@@ -2,7 +2,15 @@
 // Additional tests for storage v3 schema fields, prefs edge cases.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
-import { _reset_for_test, init, get, set, exportAll, importAllSafe, validateSnapshot } from '../storage/engine.js';
+import {
+  _reset_for_test,
+  init,
+  get,
+  set,
+  exportAll,
+  importAllSafe,
+  validateSnapshot,
+} from '../storage/engine.js';
 import { STORAGE_VERSION, DEFAULTS } from '../storage/schema.js';
 
 beforeEach(() => {
@@ -89,7 +97,7 @@ describe('Storage schema — progress fields', () => {
     const score = { correct: 12, total: 15, date: '2026-05-01T00:00:00Z' };
     set('progress', (p) => ({
       ...p,
-      wgScores: { ...p.wgScores, 'wt01': score },
+      wgScores: { ...p.wgScores, wt01: score },
     }));
     expect(get('progress').wgScores['wt01']).toEqual(score);
   });

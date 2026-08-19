@@ -38,5 +38,16 @@ export function useTrackedCards({
       if (starredOnly && !starred.has(c.id)) return false;
       return true;
     });
-  }, [track, excludeVocab, category, source, knownOnly, unknownOnly, starredOnly, known, unknown, starred]);
+  }, [
+    track,
+    excludeVocab,
+    category,
+    source,
+    knownOnly,
+    unknownOnly,
+    starredOnly,
+    known,
+    unknown,
+    starred,
+  ]);
 }

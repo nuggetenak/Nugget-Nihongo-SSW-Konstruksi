@@ -6,16 +6,26 @@ import QuizProduksiMode from '../modes/QuizProduksiMode.jsx';
 
 vi.mock('../styles/theme.js', () => ({ T: new Proxy({}, { get: (_, k) => k }) }));
 vi.mock('../utils/speak.js', () => ({ speakJP: vi.fn(), canSpeak: () => false }));
-vi.mock('../utils/haptic.js', () => ({ haptic: { correct: vi.fn(), wrong: vi.fn(), tap: vi.fn() } }));
+vi.mock('../utils/haptic.js', () => ({
+  haptic: { correct: vi.fn(), wrong: vi.fn(), tap: vi.fn() },
+}));
 vi.mock('../contexts/ProgressContext.jsx', () => ({
   useProgress: () => ({ recordWrong: vi.fn() }),
 }));
-vi.mock('../components/ProgressBar.jsx', () => ({ default: () => <div data-testid="progress-bar" /> }));
+vi.mock('../components/ProgressBar.jsx', () => ({
+  default: () => <div data-testid="progress-bar" />,
+}));
 vi.mock('./modes.module.css', () => ({ default: new Proxy({}, { get: (_, k) => k }) }));
 
 const SAMPLE_CARDS = [
   { id: 1, jp: '朝礼《ちょれい》', id_text: 'Apel pagi', category: 'salam', desc: '' },
-  { id: 2, jp: '安全帯《あんぜんたい》', id_text: 'Sabuk pengaman', category: 'keselamatan', desc: '' },
+  {
+    id: 2,
+    jp: '安全帯《あんぜんたい》',
+    id_text: 'Sabuk pengaman',
+    category: 'keselamatan',
+    desc: '',
+  },
   { id: 3, jp: '足場《あしば》', id_text: 'Perancah', category: 'alat_umum', desc: '' },
 ];
 
@@ -23,7 +33,9 @@ const renderMode = (props = {}) =>
   render(<QuizProduksiMode cards={SAMPLE_CARDS} onExit={vi.fn()} {...props} />);
 
 describe('QuizProduksiMode (B1)', () => {
-  beforeEach(() => { vi.clearAllMocks(); });
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   it('renders start screen with title', () => {
     renderMode();
@@ -58,7 +70,9 @@ describe('QuizProduksiMode (B1)', () => {
     fireEvent.click(screen.getByText('Mulai 🔤'));
     const kirimBtn = screen.getByText('Kirim →');
     expect(kirimBtn.disabled).toBe(true);
-    fireEvent.change(screen.getByPlaceholderText('Ketik terjemahan Indonesia...'), { target: { value: 'test' } });
+    fireEvent.change(screen.getByPlaceholderText('Ketik terjemahan Indonesia...'), {
+      target: { value: 'test' },
+    });
     expect(kirimBtn.disabled).toBe(false);
   });
 

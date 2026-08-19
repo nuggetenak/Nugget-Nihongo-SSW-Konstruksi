@@ -27,8 +27,14 @@ function CaptureCtx({ onCtx }) {
 function renderProgress() {
   let ctx;
   render(
-    createElement(ProgressProvider, null,
-      createElement(CaptureCtx, { onCtx: (c) => { ctx = c; } })
+    createElement(
+      ProgressProvider,
+      null,
+      createElement(CaptureCtx, {
+        onCtx: (c) => {
+          ctx = c;
+        },
+      })
     )
   );
   return () => ctx;
@@ -49,7 +55,9 @@ describe('A.3 Milestone toasts', () => {
     // To test: check that milestoneStreak7 is the trigger condition.
     // Since all calls happen "today", streak stays at 1 (not 7) in a single test session.
     // Instead we test that clearToast removes items from queue.
-    act(() => { getCtx().clearToast(0); }); // no-op on empty
+    act(() => {
+      getCtx().clearToast(0);
+    }); // no-op on empty
     expect(getCtx().toastQueue).toEqual([]);
   });
 
@@ -60,7 +68,9 @@ describe('A.3 Milestone toasts', () => {
       // setMilestoneQuiz70 queues a toast via setTimeout
       getCtx().setMilestoneQuiz70();
     });
-    act(() => { vi.runAllTimers(); });
+    act(() => {
+      vi.runAllTimers();
+    });
     expect(getCtx().toastQueue.length).toBeGreaterThanOrEqual(0); // queue or already cleared
     // clearToast is callable without error
     expect(() => getCtx().clearToast(0)).not.toThrow();

@@ -19,13 +19,15 @@ const DURATIONS = [
   { key: '120', label: '2 menit', value: 120 },
 ];
 
-function getDurationBests(key) { return storageGet('prefs')?.sprintBests?.[key] ?? { score: 0, timeline: [] }; }
+function getDurationBests(key) {
+  return storageGet('prefs')?.sprintBests?.[key] ?? { score: 0, timeline: [] };
+}
 function saveDurationBests(key, score, timeline) {
   storageSet('prefs', (p) => ({
     ...p,
     sprintBests: {
       ...(p.sprintBests ?? {}),
-      [key]: { score: Math.max((p.sprintBests?.[key]?.score ?? 0), score), timeline },
+      [key]: { score: Math.max(p.sprintBests?.[key]?.score ?? 0, score), timeline },
     },
   }));
 }
@@ -56,8 +58,9 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     const catKeys = new Set(baseCards.map((c) => c.category));
     return [
       { key: 'all', label: 'Semua Kategori', emoji: '📚' },
-      ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key))
-        .map((c) => ({ key: c.key, label: c.label, emoji: c.emoji })),
+      ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key)).map(
+        (c) => ({ key: c.key, label: c.label, emoji: c.emoji })
+      ),
     ];
   }, [baseCards]);
 
@@ -66,21 +69,37 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     return baseCards.filter((c) => c.category === selectedCat);
   }, [baseCards, selectedCat]);
 
-  useEffect(() => { setOrder(shuffle(filteredCards)); }, [filteredCards]);
+  useEffect(() => {
+    setOrder(shuffle(filteredCards));
+  }, [filteredCards]);
 
-  const fireSessionEnd = useCallback((c, w) => {
-    if (sessionEndFired.current) return;
-    sessionEndFired.current = true;
-    onSessionEnd?.({ correct: c, total: c + w, durationMs: getDurationMs() });
-    const key = selectedDuration;
-    const prev = getDurationBests(key).score;
-    const finalTimeline = [...currentTimeline.current, { t: DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60, score: c }];
-    if (c > prev) { saveDurationBests(key, c, finalTimeline); setPersonalBest(c); setNewBest(true); }
-  }, [onSessionEnd, selectedDuration, getDurationMs]);
+  const fireSessionEnd = useCallback(
+    (c, w) => {
+      if (sessionEndFired.current) return;
+      sessionEndFired.current = true;
+      onSessionEnd?.({ correct: c, total: c + w, durationMs: getDurationMs() });
+      const key = selectedDuration;
+      const prev = getDurationBests(key).score;
+      const finalTimeline = [
+        ...currentTimeline.current,
+        { t: DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60, score: c },
+      ];
+      if (c > prev) {
+        saveDurationBests(key, c, finalTimeline);
+        setPersonalBest(c);
+        setNewBest(true);
+      }
+    },
+    [onSessionEnd, selectedDuration, getDurationMs]
+  );
 
   useEffect(() => {
     if (phase !== 'playing') return;
-    if (timeLeft <= 0) { setPhase('done'); fireSessionEnd(correct, wrong); return; }
+    if (timeLeft <= 0) {
+      setPhase('done');
+      fireSessionEnd(correct, wrong);
+      return;
+    }
 
     // Record ghost timeline point every 5 seconds.
     const duration = DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60;
@@ -99,8 +118,14 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   }, [timeLeft, phase, correct, wrong, fireSessionEnd, ghostTimeline, selectedDuration]);
 
   const card = order[idx];
-  const next = () => { setShowAnswer(false); setIdx((i) => (i + 1) % order.length); };
-  const handleKnow = () => { setCorrect((c) => c + 1); next(); };
+  const next = () => {
+    setShowAnswer(false);
+    setIdx((i) => (i + 1) % order.length);
+  };
+  const handleKnow = () => {
+    setCorrect((c) => c + 1);
+    next();
+  };
   const handleDontKnow = () => {
     setWrong((w) => w + 1);
     // Record wrong answer to quiz wrong-tracker.
@@ -112,12 +137,18 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
         return { ...p, quizWrong: qw };
       });
     }
-    setShowAnswer(true); setTimeout(next, 1200);
+    setShowAnswer(true);
+    setTimeout(next, 1200);
   };
   const duration = DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60;
   const startSprint = () => {
-    setPhase('playing'); setIdx(0); setCorrect(0); setWrong(0);
-    setTimeLeft(duration); setNewBest(false); setGhostScore(0);
+    setPhase('playing');
+    setIdx(0);
+    setCorrect(0);
+    setWrong(0);
+    setTimeLeft(duration);
+    setNewBest(false);
+    setGhostScore(0);
     sessionEndFired.current = false;
     currentTimeline.current = [];
     setOrder(shuffle(filteredCards));
@@ -127,25 +158,47 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     const pb = personalBest;
     return (
       <div className={S.page}>
-        <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+        <button className={S.btnBack} onClick={onExit}>
+          ← Kembali
+        </button>
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <div style={{ fontSize: 48, marginBottom: 8 }}>⚡</div>
-          <h2 className={S.pageTitle} style={{ fontSize: 20 }}>Sprint Mode</h2>
+          <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
+            Sprint Mode
+          </h2>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
-          {pb > 0 && <div style={{ fontSize: 12, color: T.gold, fontWeight: 700, marginBottom: 8 }}>🏆 Rekor: {pb} benar</div>}
+          {pb > 0 && (
+            <div style={{ fontSize: 12, color: T.gold, fontWeight: 700, marginBottom: 8 }}>
+              🏆 Rekor: {pb} benar
+            </div>
+          )}
         </div>
 
         {/* Duration picker */}
         <div className={S.sectionLabel}>Durasi</div>
         <div className={S.row} style={{ gap: 8, marginBottom: 16 }}>
           {DURATIONS.map((d) => (
-            <button key={d.key} onClick={() => {
-              setSelectedDuration(d.key);
-              const bests = getDurationBests(d.key);
-              setPersonalBest(bests.score);
-              setGhostTimeline(bests.timeline);
-            }}
-              style={{ flex: 1, padding: '10px 6px', fontFamily: 'inherit', fontSize: 12, fontWeight: 700, borderRadius: T.r.md, cursor: 'pointer', border: `1px solid ${selectedDuration === d.key ? T.amber : T.border}`, background: selectedDuration === d.key ? 'rgba(245,158,11,0.12)' : T.surface, color: selectedDuration === d.key ? T.amber : T.text }}>
+            <button
+              key={d.key}
+              onClick={() => {
+                setSelectedDuration(d.key);
+                const bests = getDurationBests(d.key);
+                setPersonalBest(bests.score);
+                setGhostTimeline(bests.timeline);
+              }}
+              style={{
+                flex: 1,
+                padding: '10px 6px',
+                fontFamily: 'inherit',
+                fontSize: 12,
+                fontWeight: 700,
+                borderRadius: T.r.md,
+                cursor: 'pointer',
+                border: `1px solid ${selectedDuration === d.key ? T.amber : T.border}`,
+                background: selectedDuration === d.key ? 'rgba(245,158,11,0.12)' : T.surface,
+                color: selectedDuration === d.key ? T.amber : T.text,
+              }}
+            >
               {d.label}
             </button>
           ))}
@@ -157,12 +210,25 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             <div className={S.sectionLabel}>Kategori</div>
             <div className={S.list} style={{ maxHeight: 200, overflowY: 'auto', marginBottom: 16 }}>
               {availableCats.map((c) => (
-                <button key={c.key} onClick={() => setSelectedCat(c.key)} className={S.btnItem}
-                  style={{ display: 'flex', alignItems: 'center', gap: 10, background: selectedCat === c.key ? 'rgba(245,158,11,0.10)' : T.surface, border: `1px solid ${selectedCat === c.key ? `${T.amber}66` : T.border}`, color: selectedCat === c.key ? T.amber : T.text }}>
+                <button
+                  key={c.key}
+                  onClick={() => setSelectedCat(c.key)}
+                  className={S.btnItem}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    background: selectedCat === c.key ? 'rgba(245,158,11,0.10)' : T.surface,
+                    border: `1px solid ${selectedCat === c.key ? `${T.amber}66` : T.border}`,
+                    color: selectedCat === c.key ? T.amber : T.text,
+                  }}
+                >
                   <span>{c.emoji}</span>
                   <span style={{ fontSize: 13 }}>{c.label}</span>
                   <span style={{ marginLeft: 'auto', fontSize: 11, color: T.textDim }}>
-                    {c.key === 'all' ? `${baseCards.length} kartu` : `${baseCards.filter((cd) => cd.category === c.key).length} kartu`}
+                    {c.key === 'all'
+                      ? `${baseCards.length} kartu`
+                      : `${baseCards.filter((cd) => cd.category === c.key).length} kartu`}
                   </span>
                 </button>
               ))}
@@ -170,7 +236,11 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           </>
         )}
 
-        <button className={S.btnPrimary} style={{ width: '100%', padding: '14px', fontSize: 15 }} onClick={startSprint}>
+        <button
+          className={S.btnPrimary}
+          style={{ width: '100%', padding: '14px', fontSize: 15 }}
+          onClick={startSprint}
+        >
           Mulai ⚡
         </button>
       </div>
@@ -183,14 +253,42 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     return (
       <div className={S.page} style={{ textAlign: 'center' }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>⚡</div>
-        {newBest && <div style={{ fontSize: 13, color: T.gold, fontWeight: 800, marginBottom: 8 }}>🏆 Rekor baru!</div>}
-        <div style={{ fontSize: 36, fontWeight: 800, color: T.gold, marginBottom: 2 }}>{correct}</div>
-        <div style={{ fontSize: 12, color: T.textMuted, marginBottom: 4 }}>benar dari {total} kartu · {pct}%</div>
-        {!newBest && personalBest > 0 && <div style={{ fontSize: 11, color: T.textDim, marginBottom: 16 }}>🏆 Rekor: {personalBest}</div>}
-        {newBest && <div style={{ fontSize: 11, color: T.textDim, marginBottom: 16 }}>Rekor sebelumnya terlampaui!</div>}
+        {newBest && (
+          <div style={{ fontSize: 13, color: T.gold, fontWeight: 800, marginBottom: 8 }}>
+            🏆 Rekor baru!
+          </div>
+        )}
+        <div style={{ fontSize: 36, fontWeight: 800, color: T.gold, marginBottom: 2 }}>
+          {correct}
+        </div>
+        <div style={{ fontSize: 12, color: T.textMuted, marginBottom: 4 }}>
+          benar dari {total} kartu · {pct}%
+        </div>
+        {!newBest && personalBest > 0 && (
+          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 16 }}>
+            🏆 Rekor: {personalBest}
+          </div>
+        )}
+        {newBest && (
+          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 16 }}>
+            Rekor sebelumnya terlampaui!
+          </div>
+        )}
         <div className={S.row} style={{ gap: 8 }}>
-          <button className={S.btnPrimary} style={{ fontSize: 13, padding: '12px' }} onClick={startSprint}>🔄 Ulang</button>
-          <button className={S.btnSecondary} style={{ flex: 1, padding: '12px', borderRadius: T.r.md }} onClick={onExit}>← Kembali</button>
+          <button
+            className={S.btnPrimary}
+            style={{ fontSize: 13, padding: '12px' }}
+            onClick={startSprint}
+          >
+            🔄 Ulang
+          </button>
+          <button
+            className={S.btnSecondary}
+            style={{ flex: 1, padding: '12px', borderRadius: T.r.md }}
+            onClick={onExit}
+          >
+            ← Kembali
+          </button>
         </div>
       </div>
     );
@@ -201,34 +299,108 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
 
   // Escalating visual urgency as time runs out.
-  const isWarning  = timeLeft <= 30 && timeLeft > 10;
-  const isUrgent   = timeLeft <= 10;
+  const isWarning = timeLeft <= 30 && timeLeft > 10;
+  const isUrgent = timeLeft <= 10;
   const timerColor = isUrgent ? T.wrong : isWarning ? T.amber : T.gold;
-  const barColor   = isUrgent ? T.wrong : isWarning ? T.amber : T.amber;
+  const barColor = isUrgent ? T.wrong : isWarning ? T.amber : T.amber;
 
   return (
     <div className={S.page} style={{ padding: '16px 16px 24px' }}>
       <div className={S.rowSpread} style={{ marginBottom: 10 }}>
-        <span style={{ fontSize: 20, fontWeight: 800, color: timerColor, animation: isUrgent ? 'pulse 0.8s ease infinite' : 'none' }}>⏱ {timeLeft}s</span>
+        <span
+          style={{
+            fontSize: 20,
+            fontWeight: 800,
+            color: timerColor,
+            animation: isUrgent ? 'pulse 0.8s ease infinite' : 'none',
+          }}
+        >
+          ⏱ {timeLeft}s
+        </span>
         <div style={{ textAlign: 'right' }}>
-          <span style={{ fontSize: 13, color: T.textMuted }}>✅ {correct} · ❌ {wrong}</span>
+          <span style={{ fontSize: 13, color: T.textMuted }}>
+            ✅ {correct} · ❌ {wrong}
+          </span>
           {ghostTimeline.length > 0 && (
-            <div style={{ fontSize: 11, color: correct > ghostScore ? T.correct : T.textFaint, marginTop: 2 }}>
-              👻 {ghostScore} {correct > ghostScore ? '↑ unggul!' : correct === ghostScore ? '= sejajar' : `↓ -${ghostScore - correct}`}
+            <div
+              style={{
+                fontSize: 11,
+                color: correct > ghostScore ? T.correct : T.textFaint,
+                marginTop: 2,
+              }}
+            >
+              👻 {ghostScore}{' '}
+              {correct > ghostScore
+                ? '↑ unggul!'
+                : correct === ghostScore
+                  ? '= sejajar'
+                  : `↓ -${ghostScore - correct}`}
             </div>
           )}
         </div>
       </div>
       <ProgressBar current={duration - timeLeft} total={duration} color={barColor} />
-      <div className={S.cardLg} style={{ marginTop: 20, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <JpFront jp={card.jp}
-          furiganaPolicy={furiganaPolicy} />
-        {showAnswer && <div style={{ textAlign: 'center', marginTop: 12, fontSize: 14, color: T.gold, fontWeight: 600 }}>{card.id_text}</div>}
+      <div
+        className={S.cardLg}
+        style={{
+          marginTop: 20,
+          minHeight: 180,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
+        {showAnswer && (
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: 12,
+              fontSize: 14,
+              color: T.gold,
+              fontWeight: 600,
+            }}
+          >
+            {card.id_text}
+          </div>
+        )}
       </div>
       {!showAnswer && (
         <div className={S.row} style={{ marginTop: 16 }}>
-          <button style={{ flex: 1, padding: '14px', fontSize: 14, fontWeight: 600, fontFamily: 'inherit', borderRadius: T.r.md, cursor: 'pointer', background: T.wrongBg, border: `1px solid ${T.wrongBorder}`, color: T.wrong }} onClick={handleDontKnow}>Tidak tahu</button>
-          <button style={{ flex: 1, padding: '14px', fontSize: 14, fontWeight: 600, fontFamily: 'inherit', borderRadius: T.r.md, cursor: 'pointer', background: T.correctBg, border: `1px solid ${T.correctBorder}`, color: T.correct }} onClick={handleKnow}>Tahu! ✓</button>
+          <button
+            style={{
+              flex: 1,
+              padding: '14px',
+              fontSize: 14,
+              fontWeight: 600,
+              fontFamily: 'inherit',
+              borderRadius: T.r.md,
+              cursor: 'pointer',
+              background: T.wrongBg,
+              border: `1px solid ${T.wrongBorder}`,
+              color: T.wrong,
+            }}
+            onClick={handleDontKnow}
+          >
+            Tidak tahu
+          </button>
+          <button
+            style={{
+              flex: 1,
+              padding: '14px',
+              fontSize: 14,
+              fontWeight: 600,
+              fontFamily: 'inherit',
+              borderRadius: T.r.md,
+              cursor: 'pointer',
+              background: T.correctBg,
+              border: `1px solid ${T.correctBorder}`,
+              color: T.correct,
+            }}
+            onClick={handleKnow}
+          >
+            Tahu! ✓
+          </button>
         </div>
       )}
     </div>

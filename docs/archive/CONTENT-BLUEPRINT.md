@@ -47,14 +47,14 @@ from general knowledge — not extracted from JAC official PDFs.
 
 ### Content inventory (honest audit)
 
-| Content | Count | Source | Actually about |
-|---------|-------|--------|---------------|
-| Flashcards | 1438 | JAC textbook Ch.1–7 + vocab | ~80% lifeline/MEP |
-| JAC Official quiz | ~95 | st_sample_l.pdf, tt_sample.pdf | Lifeline praktek + shared teori |
-| Wayground quiz | 659 | Wayground/external | Mostly lifeline + general |
-| CSV quiz | 300 | CSV batch | Mixed lifeline + general |
-| Sipil quiz | 45 | Seed data (Crunchy) | Generic sipil (not from JAC PDF) |
-| Bangunan quiz | 45 | Seed data (Crunchy) | Generic bangunan (not from JAC PDF) |
+| Content           | Count | Source                         | Actually about                      |
+| ----------------- | ----- | ------------------------------ | ----------------------------------- |
+| Flashcards        | 1438  | JAC textbook Ch.1–7 + vocab    | ~80% lifeline/MEP                   |
+| JAC Official quiz | ~95   | st_sample_l.pdf, tt_sample.pdf | Lifeline praktek + shared teori     |
+| Wayground quiz    | 659   | Wayground/external             | Mostly lifeline + general           |
+| CSV quiz          | 300   | CSV batch                      | Mixed lifeline + general            |
+| Sipil quiz        | 45    | Seed data (Crunchy)            | Generic sipil (not from JAC PDF)    |
+| Bangunan quiz     | 45    | Seed data (Crunchy)            | Generic bangunan (not from JAC PDF) |
 
 **Bottom line: this is a lifeline app pretending to have 3 tracks.**
 
@@ -263,6 +263,7 @@ BelajarTab (after content overhaul)
 The 1438 existing cards need honest re-categorization.
 
 **Method:** Script-assisted audit. For each card, check:
+
 1. Is this term used ONLY in lifeline/MEP? → tag lifeline-only
 2. Is this term used across ALL construction? → tag common
 3. Is this term sipil-specific? → tag sipil (rare in current data)
@@ -270,29 +271,30 @@ The 1438 existing cards need honest re-categorization.
 
 **Expected outcome after re-tag:**
 
-| New category | Estimated cards | Source |
-|-------------|----------------|--------|
-| K1 概要・挨拶 | ~40 | existing salam |
-| K2 安全衛生 | ~172 | existing keselamatan |
-| K3 法令 | ~91 | existing hukum |
-| K4 施工管理 | ~80 | split from jenis_kerja + alat_umum |
-| K5 キャリア | ~146 | existing karier |
-| L1 配管 | ~200 | existing pipa |
-| L2 電気 | ~154 | existing listrik |
-| L3 通信 | ~65 | existing telekomunikasi |
-| L4 消防 | ~40 | existing pemadam |
-| L5 保温保冷 | ~45 | existing isolasi |
-| L6 設備工具 | ~165 | split from alat_umum + jenis_kerja |
-| **Common** | **~529** | |
-| **Lifeline** | **~669** | |
-| **Sipil** | **~0** | ← THE GAP |
-| **Bangunan** | **~0** | ← THE GAP |
+| New category  | Estimated cards | Source                             |
+| ------------- | --------------- | ---------------------------------- |
+| K1 概要・挨拶 | ~40             | existing salam                     |
+| K2 安全衛生   | ~172            | existing keselamatan               |
+| K3 法令       | ~91             | existing hukum                     |
+| K4 施工管理   | ~80             | split from jenis_kerja + alat_umum |
+| K5 キャリア   | ~146            | existing karier                    |
+| L1 配管       | ~200            | existing pipa                      |
+| L2 電気       | ~154            | existing listrik                   |
+| L3 通信       | ~65             | existing telekomunikasi            |
+| L4 消防       | ~40             | existing pemadam                   |
+| L5 保温保冷   | ~45             | existing isolasi                   |
+| L6 設備工具   | ~165            | split from alat_umum + jenis_kerja |
+| **Common**    | **~529**        |                                    |
+| **Lifeline**  | **~669**        |                                    |
+| **Sipil**     | **~0**          | ← THE GAP                          |
+| **Bangunan**  | **~0**          | ← THE GAP                          |
 
 This re-tag is ZERO new content. Just honest labels on existing data.
 
 ### Phase C-2: Extract Sipil Content from JAC PDFs
 
 **Input PDFs needed (upload from JAC site):**
+
 1. `ctextd_id.pdf` — Compressed sipil textbook (Indonesian) ★★★
 2. `ctextd.pdf` — Compressed sipil textbook (Japanese) ★★★
 3. `st_sample_d.pdf` — Sipil praktek sample 1 ★★★
@@ -300,6 +302,7 @@ This re-tag is ZERO new content. Just honest labels on existing data.
 5. `text5d.pdf`–`text7d.pdf` — Full chapters (for images) ★★
 
 **Output:**
+
 - `src/data/cards-sipil.js` — ~300 new flashcards (D1–D5)
 - `src/data/sipil-sets.js` — REWRITE with JAC-sourced questions
 - `public/images/sipil/` — tool/machine photos extracted from PDFs
@@ -345,6 +348,7 @@ JAC PDF concept: 掘削（くっさく）
 ### Phase C-3: Extract Bangunan Content from JAC PDFs
 
 Same workflow as C-2 but with:
+
 - `ctextk_id.pdf`, `ctextk.pdf`, `st_sample_k.pdf`, `st_sample2_k.pdf`
 - Output: `cards-bangunan.js` (~300 cards), rewritten `bangunan-sets.js`
 
@@ -367,10 +371,12 @@ encounter this and what happens if I get it wrong?"**
 #### 4b. Indonesian Speaker Error Prediction
 
 For every quiz question's `exp` field, include:
+
 - WHY the correct answer is correct
 - The most common wrong answer for Indonesians specifically, and WHY
 
 Example patterns:
+
 - 養生 → Indonesian speakers think "rest/recovery" (medical meaning).
   In construction = curing/protection.
 - 手元 → think "in hand" literally. In construction = helper worker.
@@ -392,6 +398,7 @@ This serves double duty: exam format familiarity + reading practice.
 JAC exam is ~40% photo-based: "写真の工具は何か" (what tool is this?).
 
 For every tool/machine concept:
+
 1. Extract or source a clear photo
 2. Create a 写真-type question with `img` field
 3. Create a companion text-based question for the same concept
@@ -401,6 +408,7 @@ This means each tool concept has 2 questions: visual recognition + text knowledg
 #### 4e. Difficulty Sequencing Within Modules
 
 Each module (D1, D2, etc.) orders questions by:
+
 1. **Recognition** — "Xとは何か" (what is X?)
 2. **Function** — "Xの目的は？" (purpose of X?)
 3. **Procedure** — "Xの前に確認することは？" (what to check before X?)
@@ -437,32 +445,68 @@ needed anywhere.
 
 export const CATEGORIES = [
   // ── Common (everyone) ──
-  { key: 'gaiyou',       label: '建設概要',    emoji: '🏛️',  tracks: ['doboku','kenchiku','lifeline'], module: 'K1' },
-  { key: 'anzen',        label: '安全衛生',    emoji: '🦺',  tracks: ['doboku','kenchiku','lifeline'], module: 'K2' },
-  { key: 'hourei',       label: '法令',       emoji: '⚖️',  tracks: ['doboku','kenchiku','lifeline'], module: 'K3' },
-  { key: 'sekou',        label: '施工管理',    emoji: '📋',  tracks: ['doboku','kenchiku','lifeline'], module: 'K4' },
-  { key: 'career',       label: 'キャリア',    emoji: '👷',  tracks: ['doboku','kenchiku','lifeline'], module: 'K5' },
+  {
+    key: 'gaiyou',
+    label: '建設概要',
+    emoji: '🏛️',
+    tracks: ['doboku', 'kenchiku', 'lifeline'],
+    module: 'K1',
+  },
+  {
+    key: 'anzen',
+    label: '安全衛生',
+    emoji: '🦺',
+    tracks: ['doboku', 'kenchiku', 'lifeline'],
+    module: 'K2',
+  },
+  {
+    key: 'hourei',
+    label: '法令',
+    emoji: '⚖️',
+    tracks: ['doboku', 'kenchiku', 'lifeline'],
+    module: 'K3',
+  },
+  {
+    key: 'sekou',
+    label: '施工管理',
+    emoji: '📋',
+    tracks: ['doboku', 'kenchiku', 'lifeline'],
+    module: 'K4',
+  },
+  {
+    key: 'career',
+    label: 'キャリア',
+    emoji: '👷',
+    tracks: ['doboku', 'kenchiku', 'lifeline'],
+    module: 'K5',
+  },
 
   // ── Sipil only ──
-  { key: 'doboku_doko',  label: '土工事',     emoji: '⛏️',  tracks: ['doboku'], module: 'D1' },
-  { key: 'doboku_hoso',  label: '舗装・道路',  emoji: '🛣️',  tracks: ['doboku'], module: 'D2' },
-  { key: 'doboku_haisui',label: '排水・基礎',  emoji: '🌊',  tracks: ['doboku'], module: 'D3' },
-  { key: 'doboku_kikai', label: '土木機械',    emoji: '🚜',  tracks: ['doboku'], module: 'D4' },
-  { key: 'doboku_zairyo',label: '土木材料・工具',emoji: '🔩', tracks: ['doboku'], module: 'D5' },
+  { key: 'doboku_doko', label: '土工事', emoji: '⛏️', tracks: ['doboku'], module: 'D1' },
+  { key: 'doboku_hoso', label: '舗装・道路', emoji: '🛣️', tracks: ['doboku'], module: 'D2' },
+  { key: 'doboku_haisui', label: '排水・基礎', emoji: '🌊', tracks: ['doboku'], module: 'D3' },
+  { key: 'doboku_kikai', label: '土木機械', emoji: '🚜', tracks: ['doboku'], module: 'D4' },
+  { key: 'doboku_zairyo', label: '土木材料・工具', emoji: '🔩', tracks: ['doboku'], module: 'D5' },
 
   // ── Bangunan only ──
-  { key: 'kenchiku_kutai',  label: '躯体工事',     emoji: '🏗️',  tracks: ['kenchiku'], module: 'B1' },
-  { key: 'kenchiku_shiage', label: '仕上げ工事',    emoji: '🎨',  tracks: ['kenchiku'], module: 'B2' },
-  { key: 'kenchiku_setsubi',label: '設備・内装',    emoji: '🚿',  tracks: ['kenchiku'], module: 'B3' },
-  { key: 'kenchiku_kikai',  label: '建築機械',     emoji: '🏗️',  tracks: ['kenchiku'], module: 'B4' },
-  { key: 'kenchiku_zairyo', label: '建築材料・工具', emoji: '🪚', tracks: ['kenchiku'], module: 'B5' },
+  { key: 'kenchiku_kutai', label: '躯体工事', emoji: '🏗️', tracks: ['kenchiku'], module: 'B1' },
+  { key: 'kenchiku_shiage', label: '仕上げ工事', emoji: '🎨', tracks: ['kenchiku'], module: 'B2' },
+  { key: 'kenchiku_setsubi', label: '設備・内装', emoji: '🚿', tracks: ['kenchiku'], module: 'B3' },
+  { key: 'kenchiku_kikai', label: '建築機械', emoji: '🏗️', tracks: ['kenchiku'], module: 'B4' },
+  {
+    key: 'kenchiku_zairyo',
+    label: '建築材料・工具',
+    emoji: '🪚',
+    tracks: ['kenchiku'],
+    module: 'B5',
+  },
 
   // ── Lifeline only (EXISTING content, rename categories) ──
-  { key: 'haikan',    label: '配管工事',    emoji: '🔧',  tracks: ['lifeline'], module: 'L1' },
-  { key: 'denki',     label: '電気工事',    emoji: '⚡',  tracks: ['lifeline'], module: 'L2' },
-  { key: 'tsushin',   label: '通信工事',    emoji: '📡',  tracks: ['lifeline'], module: 'L3' },
-  { key: 'shoubou',   label: '消防設備',    emoji: '🔥',  tracks: ['lifeline'], module: 'L4' },
-  { key: 'hoon',      label: '保温保冷',    emoji: '🌡️',  tracks: ['lifeline'], module: 'L5' },
+  { key: 'haikan', label: '配管工事', emoji: '🔧', tracks: ['lifeline'], module: 'L1' },
+  { key: 'denki', label: '電気工事', emoji: '⚡', tracks: ['lifeline'], module: 'L2' },
+  { key: 'tsushin', label: '通信工事', emoji: '📡', tracks: ['lifeline'], module: 'L3' },
+  { key: 'shoubou', label: '消防設備', emoji: '🔥', tracks: ['lifeline'], module: 'L4' },
+  { key: 'hoon', label: '保温保冷', emoji: '🌡️', tracks: ['lifeline'], module: 'L5' },
   { key: 'setsubi_kougu', label: '設備工具', emoji: '🔨', tracks: ['lifeline'], module: 'L6' },
 ];
 ```
@@ -506,6 +550,7 @@ isolasi       → hoon
 For `jenis_kerja` and `alat_umum`: needs per-card audit.
 
 Write a migration script: `scripts/migrate-categories.js`
+
 - Read cards.js
 - For simple renames (salam→gaiyou etc.), bulk replace
 - For jenis_kerja/alat_umum, use a lookup table mapping card IDs to new categories
@@ -521,9 +566,11 @@ Lifeline layer (L1–L6, ~669 cards) shows only for lifeline track.
 ### Step 2: Upload JAC sipil PDFs → extract sipil content
 
 Need from user:
+
 - `ctextd_id.pdf` + `ctextd.pdf` + `st_sample_d.pdf` + `st_sample2_d.pdf`
 
 Agent produces:
+
 - ~300 new flashcards appended to cards.js with D1–D5 categories
 - Rewritten sipil-sets.js with JAC-sourced quiz questions
 - Extracted images in public/images/sipil/
@@ -537,12 +584,14 @@ Same as Step 2 but for bangunan.
 Need: `tt_sample.pdf` + `tt_sample2.pdf`
 
 Agent produces:
+
 - `jac-teori.js` — shared theory quiz questions for all tracks
 
 ### Step 5: Curate pass
 
 Run every card and question through the Content Authoring Standard
 (already in MASTER-BLUEPRINT-v6.md Appendix):
+
 - F0: JAC source traceability
 - F1: TSA justification
 - F2: Objective needs check
@@ -556,20 +605,20 @@ Run every card and question through the Content Authoring Standard
 
 ## 6. Target Content Inventory (After All Steps)
 
-| Layer | Flashcards | Quiz Questions | Total |
-|-------|-----------|---------------|-------|
-| K Common | ~530 | ~100 (teori) | ~630 |
-| D Sipil | ~300 | ~80 | ~380 |
-| B Bangunan | ~300 | ~80 | ~380 |
-| L Lifeline | ~670 | ~500 (existing) | ~1170 |
-| **Grand total** | **~1800** | **~760** | **~2560** |
+| Layer           | Flashcards | Quiz Questions  | Total     |
+| --------------- | ---------- | --------------- | --------- |
+| K Common        | ~530       | ~100 (teori)    | ~630      |
+| D Sipil         | ~300       | ~80             | ~380      |
+| B Bangunan      | ~300       | ~80             | ~380      |
+| L Lifeline      | ~670       | ~500 (existing) | ~1170     |
+| **Grand total** | **~1800**  | **~760**        | **~2560** |
 
 **Per track experience:**
 
-| Track | Flashcards available | Quiz questions |
-|-------|---------------------|---------------|
-| Sipil user | 530 (K) + 300 (D) = **830** | 100 + 80 = **180** |
-| Bangunan user | 530 (K) + 300 (B) = **830** | 100 + 80 = **180** |
+| Track         | Flashcards available         | Quiz questions      |
+| ------------- | ---------------------------- | ------------------- |
+| Sipil user    | 530 (K) + 300 (D) = **830**  | 100 + 80 = **180**  |
+| Bangunan user | 530 (K) + 300 (B) = **830**  | 100 + 80 = **180**  |
 | Lifeline user | 530 (K) + 670 (L) = **1200** | 100 + 500 = **600** |
 
 Lifeline users get the richest experience (because content already
@@ -631,5 +680,5 @@ each PDF upload session produces one Step's worth of content.
 
 ---
 
-*Content Blueprint — Crunchy (Opus 4.6) · 2026-05-02*
-*Audit basis: 1438 cards, 95 JAC questions, 659 Wayground questions, 300 CSV questions*
+_Content Blueprint — Crunchy (Opus 4.6) · 2026-05-02_
+_Audit basis: 1438 cards, 95 JAC questions, 659 Wayground questions, 300 CSV questions_

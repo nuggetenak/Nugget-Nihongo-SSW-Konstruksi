@@ -31,28 +31,36 @@ export default function ToolStrip({
       emoji: '❌',
       label: unknownInView > 0 ? `${unknownInView}` : 'Belum',
       active: reviewBelum,
-      border: T.wrongBorder, bg: T.wrongBg, color: T.wrong,
+      border: T.wrongBorder,
+      bg: T.wrongBg,
+      color: T.wrong,
       onClick: onToggleBelum,
     },
     {
       emoji: '🔄',
       label: confirmReset ? 'Yakin?' : 'Reset',
       active: confirmReset,
-      border: T.wrongBorder, bg: T.wrongBg, color: T.wrong,
+      border: T.wrongBorder,
+      bg: T.wrongBg,
+      color: T.wrong,
       onClick: onReset,
     },
     {
       emoji: '⭐',
       label: starredCount > 0 ? `${starredCount}` : 'Bintang',
       active: starFilterActive,
-      border: `${T.gold}80`, bg: 'rgba(251,191,36,0.12)', color: T.gold,
+      border: `${T.gold}80`,
+      bg: 'rgba(251,191,36,0.12)',
+      color: T.gold,
       onClick: onToggleStarFilter,
     },
     {
       emoji: readOnly ? '👁' : '📝',
       label: readOnly ? 'Baca' : 'Rating',
       active: readOnly,
-      border: 'rgba(99,102,241,0.4)', bg: 'rgba(99,102,241,0.1)', color: '#818cf8',
+      border: 'rgba(99,102,241,0.4)',
+      bg: 'rgba(99,102,241,0.1)',
+      color: '#818cf8',
       onClick: onToggleReadOnly,
     },
   ];
@@ -66,9 +74,9 @@ export default function ToolStrip({
             className={FC.toolBtn}
             onClick={btn.onClick}
             style={{
-              border: `1px solid ${btn.active ? (btn.border || T.borderActive) : T.border}`,
-              background: btn.active ? (btn.bg || T.surfaceActive) : T.surface,
-              color: btn.active ? (btn.color || T.amber) : T.textMuted,
+              border: `1px solid ${btn.active ? btn.border || T.borderActive : T.border}`,
+              background: btn.active ? btn.bg || T.surfaceActive : T.surface,
+              color: btn.active ? btn.color || T.amber : T.textMuted,
             }}
           >
             <span>{btn.emoji}</span>

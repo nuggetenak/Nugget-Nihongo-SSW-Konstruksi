@@ -134,18 +134,31 @@ export function migrate_v1_to_v2() {
 // Remove all v1 keys from localStorage after successful migration
 export function cleanup_v1_keys() {
   const V1_EXACT = [
-    'ssw-known', 'ssw-unknown', 'ssw-starred',
-    'ssw-quiz-wrong', 'ssw-wrong-counts',
-    'ssw-jac-scores', 'ssw-wg-scores', 'ssw-vocab-scores',
-    'ssw-study-streak', 'ssw-daily-count', 'ssw-recent',
-    'ssw-milestone-streak7', 'ssw-milestone-quiz70',
-    'ssw-track', 'ssw-theme', 'ssw-onboarded',
-    'ssw-tutorial-flashcard', 'ssw-last-mode',
+    'ssw-known',
+    'ssw-unknown',
+    'ssw-starred',
+    'ssw-quiz-wrong',
+    'ssw-wrong-counts',
+    'ssw-jac-scores',
+    'ssw-wg-scores',
+    'ssw-vocab-scores',
+    'ssw-study-streak',
+    'ssw-daily-count',
+    'ssw-recent',
+    'ssw-milestone-streak7',
+    'ssw-milestone-quiz70',
+    'ssw-track',
+    'ssw-theme',
+    'ssw-onboarded',
+    'ssw-tutorial-flashcard',
+    'ssw-last-mode',
   ];
   const V1_PREFIXES = ['ssw-srs-', 'ssw-wg-wrong-', 'ssw-vocab-wrong-'];
 
   for (const key of V1_EXACT) {
-    try { localStorage.removeItem(key); } catch {}
+    try {
+      localStorage.removeItem(key);
+    } catch {}
   }
   // v2 doc keys that must NOT be deleted
   const V2_DOCS = ['ssw-progress', 'ssw-srs-data', 'ssw-prefs'];
@@ -167,7 +180,9 @@ export function hasV2Data() {
   try {
     const parsed = safeGetDoc('ssw-progress', null);
     return parsed?._v === 2;
-  } catch { return false; }
+  } catch {
+    return false;
+  }
 }
 
 export function migrate_v2_to_v3() {
@@ -177,18 +192,18 @@ export function migrate_v2_to_v3() {
 
   // Bump version and add new progress fields
   progress._v = 3;
-  progress.dobokuScores   = progress.dobokuScores   ?? {};
+  progress.dobokuScores = progress.dobokuScores ?? {};
   progress.kenchikuScores = progress.kenchikuScores ?? {};
-  progress.sessions       = progress.sessions       ?? [];
-  progress.dailyMission   = progress.dailyMission   ?? null;
+  progress.sessions = progress.sessions ?? [];
+  progress.dailyMission = progress.dailyMission ?? null;
 
   srs._v = 3;
 
   // Bump version and add new prefs fields
   prefs._v = 3;
-  prefs.examDate       = prefs.examDate       ?? null;
-  prefs.audioEnabled   = prefs.audioEnabled   ?? true;
-  prefs.studyAnchor    = prefs.studyAnchor    ?? null;
+  prefs.examDate = prefs.examDate ?? null;
+  prefs.audioEnabled = prefs.audioEnabled ?? true;
+  prefs.studyAnchor = prefs.studyAnchor ?? null;
   prefs.furiganaPolicy = prefs.furiganaPolicy ?? 'always';
 
   return { progress, srs, prefs };
@@ -204,13 +219,15 @@ export function hasV3Data() {
   try {
     const parsed = safeGetDoc('ssw-progress', null);
     return parsed?._v === 3;
-  } catch { return false; }
+  } catch {
+    return false;
+  }
 }
 
 export function migrate_v3_to_v4() {
   const progress = safeGetDoc('ssw-progress', {});
-  const srs      = safeGetDoc('ssw-srs-data', { _v: 3, cards: {} });
-  const prefs    = safeGetDoc('ssw-prefs', {});
+  const srs = safeGetDoc('ssw-srs-data', { _v: 3, cards: {} });
+  const prefs = safeGetDoc('ssw-prefs', {});
 
   const remap = (id) => {
     const n = CARD_ID_MAP[String(id)];
@@ -260,16 +277,18 @@ export function hasV4Data() {
   try {
     const parsed = safeGetDoc('ssw-progress', null);
     return parsed?._v === 4;
-  } catch { return false; }
+  } catch {
+    return false;
+  }
 }
 
 export function migrate_v4_to_v5() {
   const progress = safeGetDoc('ssw-progress', {});
-  const srs      = safeGetDoc('ssw-srs-data', { _v: 4, cards: {} });
-  const prefs    = safeGetDoc('ssw-prefs', {});
+  const srs = safeGetDoc('ssw-srs-data', { _v: 4, cards: {} });
+  const prefs = safeGetDoc('ssw-prefs', {});
 
   // Rename score keys
-  progress.dobokuScores   = progress.sipilScores    ?? {};
+  progress.dobokuScores = progress.sipilScores ?? {};
   progress.kenchikuScores = progress.bangunanScores ?? {};
   delete progress.sipilScores;
   delete progress.bangunanScores;
@@ -306,10 +325,28 @@ export function migrate_v4_to_v5() {
 //    un-migrated; they just won't match any current set id going forward.
 
 const WAYGROUND_ID_RENAME = {
-  wt1: 'wt01', wt2: 'wt02', wt3: 'wt03', wt4: 'wt04', wt5: 'wt05',
-  wt6: 'wt06', wt7: 'wt07', wt8: 'wt08', wt9: 'wt09', wt10: 'wt10',
-  ct01: 'jmt01', ct02: 'jmt02', ct03: 'jmt03', ct04: 'jmt04', ct05: 'jmt05', ct06: 'jmt06',
-  cp01: 'jml01', cp02: 'jml02', cp03: 'jml03', cp04: 'jml04', cp05: 'jml05', cp06: 'jml06',
+  wt1: 'wt01',
+  wt2: 'wt02',
+  wt3: 'wt03',
+  wt4: 'wt04',
+  wt5: 'wt05',
+  wt6: 'wt06',
+  wt7: 'wt07',
+  wt8: 'wt08',
+  wt9: 'wt09',
+  wt10: 'wt10',
+  ct01: 'jmt01',
+  ct02: 'jmt02',
+  ct03: 'jmt03',
+  ct04: 'jmt04',
+  ct05: 'jmt05',
+  ct06: 'jmt06',
+  cp01: 'jml01',
+  cp02: 'jml02',
+  cp03: 'jml03',
+  cp04: 'jml04',
+  cp05: 'jml05',
+  cp06: 'jml06',
 };
 
 function remapScoreKeys(scores = {}) {
@@ -324,13 +361,15 @@ export function hasV5Data() {
   try {
     const parsed = safeGetDoc('ssw-progress', null);
     return parsed?._v === 5;
-  } catch { return false; }
+  } catch {
+    return false;
+  }
 }
 
 export function migrate_v5_to_v6() {
   const progress = safeGetDoc('ssw-progress', {});
-  const srs      = safeGetDoc('ssw-srs-data', { _v: 5, cards: {} });
-  const prefs    = safeGetDoc('ssw-prefs', {});
+  const srs = safeGetDoc('ssw-srs-data', { _v: 5, cards: {} });
+  const prefs = safeGetDoc('ssw-prefs', {});
 
   delete progress.dobokuScores;
   delete progress.kenchikuScores;

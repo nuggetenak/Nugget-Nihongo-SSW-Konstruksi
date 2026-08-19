@@ -43,7 +43,10 @@ export default function QuizShell({
 
   useEffect(() => {
     if (timer <= 0 || phase !== 'playing') return;
-    if (timeLeft <= 0) { setPhase('finished'); return; }
+    if (timeLeft <= 0) {
+      setPhase('finished');
+      return;
+    }
     const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
     return () => clearTimeout(t);
   }, [timeLeft, timer, phase]);
@@ -72,11 +75,21 @@ export default function QuizShell({
 
   const handleNext = useCallback(() => {
     if (selected === null) return;
-    if (isLast) { setPhase('finished'); }
-    else { setQIdx((i) => i + 1); setSelected(null); }
+    if (isLast) {
+      setPhase('finished');
+    } else {
+      setQIdx((i) => i + 1);
+      setSelected(null);
+    }
   }, [selected, isLast]);
 
-  useQuizKeyboard({ onSelect: handleSelect, onNext: handleNext, selected, phase, optCount: q?.options?.length || 4 });
+  useQuizKeyboard({
+    onSelect: handleSelect,
+    onNext: handleNext,
+    selected,
+    phase,
+    optCount: q?.options?.length || 4,
+  });
 
   useEffect(() => {
     if (selected === null || phase !== 'playing') return;
@@ -86,23 +99,31 @@ export default function QuizShell({
   }, [selected, phase, handleNext, autoNextDelay]);
 
   const handleRestart = () => {
-    setQIdx(0); setSelected(null); setResults([]); setPhase('playing');
-    setTimeLeft(timer); resetStreak();
+    setQIdx(0);
+    setSelected(null);
+    setResults([]);
+    setPhase('playing');
+    setTimeLeft(timer);
+    resetStreak();
   };
 
   useEffect(() => {
     if (phase === 'finished') {
       const correct = results.filter((r) => r.isCorrect).length;
-      onFinish?.({ correct, total: results.length, maxStreak, maxWrongStreak,
-        durationMs: getDurationMs() });
+      onFinish?.({
+        correct,
+        total: results.length,
+        maxStreak,
+        maxWrongStreak,
+        durationMs: getDurationMs(),
+      });
 
       // Anxiety-reduction toast — fires when >=5 consecutive wrong answers.
       // Normalizes struggle as expected for new material (Young 1991, Zhang 2019).
       if (maxWrongStreak >= 5) {
-        toast.show(
-          'Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪',
-          { duration: 4000 }
-        );
+        toast.show('Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪', {
+          duration: 4000,
+        });
       }
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -121,8 +142,8 @@ export default function QuizShell({
           wrongCardIds.length > 0 && onRetryWrong
             ? () => onRetryWrong(wrongCardIds)
             : wrongCardIds.length > 0
-            ? handleRestart
-            : undefined
+              ? handleRestart
+              : undefined
         }
         onAddToSRS={onAddToSRS}
         srsWrongCount={results.filter((r) => !r.isCorrect).length}
@@ -133,9 +154,8 @@ export default function QuizShell({
   if (!q) return null;
 
   const correct = results.filter((r) => r.isCorrect).length;
-  const fmtTime = timer > 0
-    ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`
-    : null;
+  const fmtTime =
+    timer > 0 ? `${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}` : null;
 
   return (
     <div className={S.wrap}>
@@ -144,7 +164,9 @@ export default function QuizShell({
         Soal {qIdx + 1} dari {questions.length}
       </div>
       <div className={S.header}>
-        <button className={S.btnBack} onClick={onExit}>← {title}</button>
+        <button className={S.btnBack} onClick={onExit}>
+          ← {title}
+        </button>
         <div className={S.meta} aria-live="polite" aria-atomic="true">
           {fmtTime && (
             <span
@@ -155,8 +177,17 @@ export default function QuizShell({
               ⏱ {fmtTime}
             </span>
           )}
-          <span className={S.score} aria-label={`Skor ${correct} benar dari ${qIdx + (selected !== null ? 1 : 0)} soal`}>{correct}/{qIdx + (selected !== null ? 1 : 0)}</span>
-          {streak > 1 && <span className={S.streak} aria-label={`Streak ${streak}`}>🔥{streak}</span>}
+          <span
+            className={S.score}
+            aria-label={`Skor ${correct} benar dari ${qIdx + (selected !== null ? 1 : 0)} soal`}
+          >
+            {correct}/{qIdx + (selected !== null ? 1 : 0)}
+          </span>
+          {streak > 1 && (
+            <span className={S.streak} aria-label={`Streak ${streak}`}>
+              🔥{streak}
+            </span>
+          )}
         </div>
       </div>
 
@@ -167,25 +198,40 @@ export default function QuizShell({
       />
 
       <div className={S.counterRow}>
-        <span className={S.counter}>{qIdx + 1} / {questions.length}</span>
+        <span className={S.counter}>
+          {qIdx + 1} / {questions.length}
+        </span>
         {audioEnabled && canSpeak() && (
           <button
             className={S.btnAudio}
             onClick={() => speakJP(stripFuri(q.question))}
             aria-label="Putar audio"
-          >🔊 Dengar</button>
+          >
+            🔊 Dengar
+          </button>
         )}
       </div>
 
       <div className={S.questionCard}>
-        <div className={S.questionText} style={{ fontFamily: T.fontJP }}>{q.question}</div>
+        <div className={S.questionText} style={{ fontFamily: T.fontJP }}>
+          {q.question}
+        </div>
         {q.questionSub && <div className={S.questionSub}>{q.questionSub}</div>}
         {showHint && q.hint && <div className={S.hint}>💡 {q.hint}</div>}
         {q.hasPhoto && (
-          <div style={{ background: 'rgba(234,179,8,0.12)', border: '1px solid rgba(234,179,8,0.4)',
-                        borderRadius: 8, padding: '6px 12px', marginBottom: 8, fontSize: 12, color: '#ca8a04' }}>
-            📷 Soal ini aslinya menggunakan foto/diagram dari buku JAC.
-            Keterangan: {q.photoDesc || 'Lihat buku ujian JAC.'}
+          <div
+            style={{
+              background: 'rgba(234,179,8,0.12)',
+              border: '1px solid rgba(234,179,8,0.4)',
+              borderRadius: 8,
+              padding: '6px 12px',
+              marginBottom: 8,
+              fontSize: 12,
+              color: '#ca8a04',
+            }}
+          >
+            📷 Soal ini aslinya menggunakan foto/diagram dari buku JAC. Keterangan:{' '}
+            {q.photoDesc || 'Lihat buku ujian JAC.'}
           </div>
         )}
         {renderExtra?.(q)}
@@ -205,9 +251,7 @@ export default function QuizShell({
         ))}
       </div>
 
-      <div className={S.kbHint}>
-        Keyboard: 1–4 pilih · Space/→ lanjut · Esc kembali
-      </div>
+      <div className={S.kbHint}>Keyboard: 1–4 pilih · Space/→ lanjut · Esc kembali</div>
 
       {selected !== null && q.explanation && (
         <div className={S.explanation}>💡 {q.explanation}</div>

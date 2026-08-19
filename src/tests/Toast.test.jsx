@@ -21,8 +21,12 @@ function setup(message, opts) {
 }
 
 describe('Toast', () => {
-  beforeEach(() => { vi.useFakeTimers(); });
-  afterEach(() => { vi.useRealTimers(); });
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
 
   it('renders with message text after show()', () => {
     setup('Berhasil disimpan');
@@ -34,7 +38,9 @@ describe('Toast', () => {
     setup('Sementara', { duration: 2000 });
     fireEvent.click(screen.getByRole('button', { name: 'show' }));
     expect(screen.getByText('Sementara')).toBeTruthy();
-    act(() => { vi.advanceTimersByTime(2001); });
+    act(() => {
+      vi.advanceTimersByTime(2001);
+    });
     expect(screen.queryByText('Sementara')).toBeNull();
   });
 
@@ -66,7 +72,11 @@ describe('Toast', () => {
         </>
       );
     }
-    render(<ToastProvider><MultiTrigger /></ToastProvider>);
+    render(
+      <ToastProvider>
+        <MultiTrigger />
+      </ToastProvider>
+    );
     fireEvent.click(screen.getByRole('button', { name: 'a' }));
     fireEvent.click(screen.getByRole('button', { name: 'b' }));
     // Both A and B visible (slice(-1) keeps last 2, but show pushes A then B)

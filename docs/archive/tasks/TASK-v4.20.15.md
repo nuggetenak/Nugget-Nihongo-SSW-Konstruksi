@@ -1,7 +1,9 @@
 # TASK v4.20.15 — ENG-11: useTrackedCards Hook + Migrate Sites
+
 **Status:** DONE ✅ | **Effort:** Medium | **Depends on:** v4.20.14 DONE
 
 ## Goal
+
 Create `hooks/useTrackedCards.js` and replace ~15 repeated filter-cards patterns across modes.
 
 ---
@@ -50,11 +52,23 @@ export function useTrackedCards({
       if (starredOnly && !starred.has(c.id)) return false;
       return true;
     });
-  }, [track, excludeVocab, category, source, knownOnly, unknownOnly, starredOnly, known, unknown, starred]);
+  }, [
+    track,
+    excludeVocab,
+    category,
+    source,
+    knownOnly,
+    unknownOnly,
+    starredOnly,
+    known,
+    unknown,
+    starred,
+  ]);
 }
 ```
 
 Add to `src/hooks/index.js`:
+
 ```js
 export { useTrackedCards } from './useTrackedCards.js';
 ```
@@ -64,6 +78,7 @@ export { useTrackedCards } from './useTrackedCards.js';
 ## Step 2 — Find migration sites
 
 Run this to find all sites to migrate:
+
 ```bash
 grep -rn "getCatsForTrack\|CARDS\.filter\|trackCats" src/modes/ src/components/ --include="*.jsx" --include="*.js" | grep -v ".test."
 ```
@@ -71,34 +86,34 @@ grep -rn "getCatsForTrack\|CARDS\.filter\|trackCats" src/modes/ src/components/ 
 For each site: replace the local `useMemo` filter block with `useTrackedCards({ track, ...options })`.
 
 **Common migration pattern:**
+
 ```js
 // BEFORE (typical site):
 const trackCats = useMemo(() => getCatsForTrack(track), [track]);
-const cards = useMemo(() =>
-  CARDS.filter((c) => trackCats.includes(c.category)),
-[trackCats]);
+const cards = useMemo(() => CARDS.filter((c) => trackCats.includes(c.category)), [trackCats]);
 
 // AFTER:
 const cards = useTrackedCards({ track });
 ```
 
 **Site with excludeVocab:**
+
 ```js
 // BEFORE:
-const cards = useMemo(() =>
-  CARDS.filter(c => trackCats.includes(c.category) && !VOCAB_SOURCES.includes(c.source))
-, [trackCats]);
+const cards = useMemo(
+  () => CARDS.filter((c) => trackCats.includes(c.category) && !VOCAB_SOURCES.includes(c.source)),
+  [trackCats]
+);
 
 // AFTER:
 const cards = useTrackedCards({ track, excludeVocab: true });
 ```
 
 **Site with known/unknown:**
+
 ```js
 // BEFORE:
-const unknownCards = useMemo(() =>
-  allCards.filter(c => !known.has(c.id))
-, [allCards, known]);
+const unknownCards = useMemo(() => allCards.filter((c) => !known.has(c.id)), [allCards, known]);
 
 // AFTER:
 const unknownCards = useTrackedCards({ track, unknownOnly: true });
@@ -124,17 +139,23 @@ describe('useTrackedCards', () => {
   it('returns cards for lifeline track', () => {
     const { result } = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper });
     expect(result.current.length).toBeGreaterThan(0);
-    expect(result.current.every(c => typeof c.id === 'number')).toBe(true);
+    expect(result.current.every((c) => typeof c.id === 'number')).toBe(true);
   });
 
   it('excludeVocab filters out vocab sources', () => {
-    const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result.current;
-    const noVocab = renderHook(() => useTrackedCards({ track: 'lifeline', excludeVocab: true }), { wrapper }).result.current;
+    const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result
+      .current;
+    const noVocab = renderHook(() => useTrackedCards({ track: 'lifeline', excludeVocab: true }), {
+      wrapper,
+    }).result.current;
     expect(noVocab.length).toBeLessThanOrEqual(all.length);
   });
 
   it('returns empty array for category with no cards', () => {
-    const { result } = renderHook(() => useTrackedCards({ track: 'lifeline', category: 'nonexistent' }), { wrapper });
+    const { result } = renderHook(
+      () => useTrackedCards({ track: 'lifeline', category: 'nonexistent' }),
+      { wrapper }
+    );
     expect(result.current).toHaveLength(0);
   });
 });
@@ -143,12 +164,14 @@ describe('useTrackedCards', () => {
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass (add new tests)
 3. `npm run build`
-4. Bump → `4.20.15`, update CHANGELOG + _MAP.md, push
+4. Bump → `4.20.15`, update CHANGELOG + \_MAP.md, push
 
 ## Done when
+
 - [ ] useTrackedCards.js created
 - [ ] hooks/index.js updated
 - [ ] Sites migrated (at least the clean-pattern ones)

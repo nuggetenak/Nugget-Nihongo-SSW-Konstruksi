@@ -25,34 +25,75 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
 
   // Best sim score
   const simSessions = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
-  const bestSim = simSessions.length > 0
-    ? Math.max(...simSessions.map((s) => Math.round((s.correct / s.total) * 100)))
-    : 0;
+  const bestSim =
+    simSessions.length > 0
+      ? Math.max(...simSessions.map((s) => Math.round((s.correct / s.total) * 100)))
+      : 0;
 
   // Rules (ordered by priority)
   if (daysUntilExam !== null && daysUntilExam <= 7 && daysUntilExam >= 0) {
-    return { mode: 'simulasi', icon: '🎯', label: 'Simulasi Ujian', reason: `${daysUntilExam} hari menuju ujian — saatnya simulasi!` };
+    return {
+      mode: 'simulasi',
+      icon: '🎯',
+      label: 'Simulasi Ujian',
+      reason: `${daysUntilExam} hari menuju ujian — saatnya simulasi!`,
+    };
   }
   if (dueCount >= 20) {
-    return { mode: 'ulasan', icon: '🔁', label: 'Ulasan SRS', reason: `${dueCount} kartu jatuh tempo — prioritaskan ulasan dulu` };
+    return {
+      mode: 'ulasan',
+      icon: '🔁',
+      label: 'Ulasan SRS',
+      reason: `${dueCount} kartu jatuh tempo — prioritaskan ulasan dulu`,
+    };
   }
   if (streak === 0) {
-    return { mode: 'kartu', icon: '🃏', label: 'Mode Kartu', reason: 'Mulai hari ini dengan review kartu singkat' };
+    return {
+      mode: 'kartu',
+      icon: '🃏',
+      label: 'Mode Kartu',
+      reason: 'Mulai hari ini dengan review kartu singkat',
+    };
   }
   if (avgAcc !== null && avgAcc < 60) {
-    return { mode: 'sprint', icon: '⚡', label: 'Sprint Mode', reason: `Akurasi kuis ${Math.round(avgAcc)}% — sprint dulu untuk membangun kecepatan` };
+    return {
+      mode: 'sprint',
+      icon: '⚡',
+      label: 'Sprint Mode',
+      reason: `Akurasi kuis ${Math.round(avgAcc)}% — sprint dulu untuk membangun kecepatan`,
+    };
   }
   if (daysUntilExam !== null && daysUntilExam <= 30) {
     if (bestSim < 65) {
-      return { mode: 'simulasi', icon: '📝', label: 'Simulasi Ujian', reason: `Skor simulasi ${bestSim}% — perlu latihan lebih sebelum ujian` };
+      return {
+        mode: 'simulasi',
+        icon: '📝',
+        label: 'Simulasi Ujian',
+        reason: `Skor simulasi ${bestSim}% — perlu latihan lebih sebelum ujian`,
+      };
     }
-    return { mode: 'jac', icon: '📋', label: 'Soal JAC', reason: 'Perkuat dengan soal resmi JAC sebelum ujian' };
+    return {
+      mode: 'jac',
+      icon: '📋',
+      label: 'Soal JAC',
+      reason: 'Perkuat dengan soal resmi JAC sebelum ujian',
+    };
   }
   if (matureCount < 100) {
-    return { mode: 'ulasan', icon: '🌱', label: 'Ulasan SRS', reason: 'Kembangkan kartu SRS matang untuk fondasi yang kuat' };
+    return {
+      mode: 'ulasan',
+      icon: '🌱',
+      label: 'Ulasan SRS',
+      reason: 'Kembangkan kartu SRS matang untuk fondasi yang kuat',
+    };
   }
   if (dueCount > 0) {
-    return { mode: 'ulasan', icon: '🔁', label: 'Ulasan SRS', reason: `${dueCount} kartu siap diulang` };
+    return {
+      mode: 'ulasan',
+      icon: '🔁',
+      label: 'Ulasan SRS',
+      reason: `${dueCount} kartu siap diulang`,
+    };
   }
   if (matureCount > 300 && avgAcc !== null && avgAcc > 70) {
     const dayIdx = Math.floor(Date.now() / 86400000) % 3;
@@ -65,5 +106,10 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
       reason: 'Kuasaan kosakata sudah baik — variasikan latihan',
     };
   }
-  return { mode: 'kuis', icon: '❓', label: 'Mode Kuis', reason: 'Uji kemampuanmu dengan kuis baru hari ini' };
+  return {
+    mode: 'kuis',
+    icon: '❓',
+    label: 'Mode Kuis',
+    reason: 'Uji kemampuanmu dengan kuis baru hari ini',
+  };
 }

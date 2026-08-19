@@ -1,7 +1,9 @@
 # TASK v4.20.1 — REF-6: UTC Date Fix + ENG-8: Date Tests
+
 **Status:** DONE ✅ | **Effort:** Low | **Depends on:** v4.20.0 DONE
 
 ## Goal
+
 Create `src/utils/date.js` with local-timezone date helpers. Fix 6 UTC date bugs across 5 files. Create date tests.
 
 **Why this matters:** Indonesian users (WIB = UTC+7) studying before 07:00 local time hit UTC midnight boundary. Streak falsely resets, daily missions reset mid-day. P1 streak bug.
@@ -43,6 +45,7 @@ Commit: `feat(utils): REF-6 create date.js — local-timezone date helpers`
 **File:** `src/contexts/ProgressContext.jsx`
 
 Find line 15 (module-level):
+
 ```js
 // FIND:
 const today = () => new Date().toISOString().slice(0, 10); // ❌ UTC
@@ -53,6 +56,7 @@ import { todayStr, prevDayStr } from '../utils/date.js';
 ```
 
 Find line 202 (getPrevDate function):
+
 ```js
 // FIND:
 function getPrevDate() {
@@ -75,6 +79,7 @@ Commit: `fix(ProgressContext): N13 — replace UTC today()/getPrevDate() with lo
 ## Step 3 — Fix N9: `daily-challenge.js` + `daily-mission.js`
 
 **File:** `src/utils/daily-challenge.js` — find `todayStr` export:
+
 ```js
 // FIND (something like):
 export function todayStr() {
@@ -86,6 +91,7 @@ export { todayStr } from './date.js'; // backward compat re-export
 ```
 
 **File:** `src/utils/daily-mission.js` — find UTC date usage (around line 22):
+
 ```js
 // FIND (something like):
 const today = new Date().toISOString().slice(0, 10); // ❌ UTC
@@ -113,6 +119,7 @@ const key = d.toLocaleDateString('sv'); // ✅ local date for grid
 ```
 
 Also find where session dates are looked up in the grid (usually something like `sess.date.slice(0,10)`):
+
 ```js
 // FIND (session → grid mapping):
 const dateKey = sess.date?.slice(0, 10); // or similar UTC extraction
@@ -128,6 +135,7 @@ Commit: `fix(StudyHeatmap): N18 — grid keys use local timezone (isoToLocalDate
 ## Step 5 — Fix Dashboard.jsx UTC dates (R2 companion)
 
 **File:** `src/components/Dashboard.jsx` lines 11, 13 — find any `toISOString().slice(0,10)` or inline `today` function:
+
 ```js
 // FIND and replace with todayStr() import from date.js
 import { todayStr } from '../utils/date.js';
@@ -152,7 +160,7 @@ describe('date.js — local timezone helpers', () => {
 
   it('prevDayStr returns day before todayStr', () => {
     const today = new Date(todayStr());
-    const prev  = new Date(prevDayStr());
+    const prev = new Date(prevDayStr());
     const diffMs = today.getTime() - prev.getTime();
     expect(diffMs).toBe(86400000); // exactly 1 day
   });
@@ -177,11 +185,13 @@ Commit: `test(date): ENG-8 — date.test.js for local timezone helpers`
 ---
 
 ## Final Steps
+
 1. `npm run lint` — 0 warnings
 2. `npm test -- --run` — all pass (date.test.js should have 5 passing tests)
 3. `npm run build`
 4. Bump → `4.20.1`
 5. Prepend CHANGELOG:
+
 ```
 ## [4.20.1] - [DATE]
 
@@ -194,9 +204,11 @@ Commit: `test(date): ENG-8 — date.test.js for local timezone helpers`
 - Dashboard.jsx: UTC date references fixed
 - ENG-8: src/tests/date.test.js (5 tests)
 ```
+
 6. Update `_MAP.md` version + log entry; push
 
 ## Done when
+
 - [ ] date.js created with 3 exports
 - [ ] ProgressContext: today() + getPrevDate() removed, replaced with todayStr()/prevDayStr()
 - [ ] daily-challenge.js re-exports todayStr from date.js

@@ -12,10 +12,34 @@ import S from './modes.module.css';
 
 // TEORI_PRAKTIK now computed inside component using track (see below)
 const GROUPS = [
-  { label: 'Teori', icon: '📋', color: '#f97316', prefix: 'wt', desc: 'Pengetahuan & konsep teknis' },
-  { label: 'Praktik', icon: '🛠️', color: '#4ade80', prefix: 'wp', desc: 'Prosedur & aplikasi lapangan' },
-  { label: 'CSV Teori', icon: '📚', color: '#f59e0b', prefix: 'ct', desc: 'Materi teori tambahan (CSV)' },
-  { label: 'CSV Praktik', icon: '🔧', color: '#34d399', prefix: 'cp', desc: 'Latihan praktik tambahan (CSV)' },
+  {
+    label: 'Teori',
+    icon: '📋',
+    color: '#f97316',
+    prefix: 'wt',
+    desc: 'Pengetahuan & konsep teknis',
+  },
+  {
+    label: 'Praktik',
+    icon: '🛠️',
+    color: '#4ade80',
+    prefix: 'wp',
+    desc: 'Prosedur & aplikasi lapangan',
+  },
+  {
+    label: 'CSV Teori',
+    icon: '📚',
+    color: '#f59e0b',
+    prefix: 'ct',
+    desc: 'Materi teori tambahan (CSV)',
+  },
+  {
+    label: 'CSV Praktik',
+    icon: '🔧',
+    color: '#34d399',
+    prefix: 'cp',
+    desc: 'Latihan praktik tambahan (CSV)',
+  },
 ];
 
 // Load wrong count for a set from engine (progress.wgWrong keyed as `${setId}-${q.id}`).
@@ -56,31 +80,43 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
     return shuffle(pool).map((q) => ({
       question: showFuri ? standardizeFuri(q.q) : stripFuri(q.q),
       hint: showHint ? q.hint : null,
-      options: q.opts.map((opt, i) => ({ text: showFuri ? standardizeFuri(opt) : stripFuri(opt), sub: q.opts_id?.[i] || null })),
-      correctIdx: q.ans, explanation: q.exp, _qId: `${set.id}-${q.id}`,
+      options: q.opts.map((opt, i) => ({
+        text: showFuri ? standardizeFuri(opt) : stripFuri(opt),
+        sub: q.opts_id?.[i] || null,
+      })),
+      correctIdx: q.ans,
+      explanation: q.exp,
+      _qId: `${set.id}-${q.id}`,
     }));
   }, [set, showFuri, showHint, lemahMode, wrongCounts]);
 
-  const handleAnswer = useCallback((qIdx, _selIdx, isCorrect) => {
-    if (!isCorrect && set) {
-      const qId = questions[qIdx]?._qId;
-      if (qId) {
-        setWrongCounts((prev) => {
-          const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
-          storageSet('progress', (p) => ({ ...p, wgWrong: updated }));
-          return updated;
-        });
+  const handleAnswer = useCallback(
+    (qIdx, _selIdx, isCorrect) => {
+      if (!isCorrect && set) {
+        const qId = questions[qIdx]?._qId;
+        if (qId) {
+          setWrongCounts((prev) => {
+            const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
+            storageSet('progress', (p) => ({ ...p, wgWrong: updated }));
+            return updated;
+          });
+        }
       }
-    }
-  }, [questions, set]);
+    },
+    [questions, set]
+  );
 
-  const handleFinish = useCallback(({ correct, total, maxStreak, durationMs = 0 }) => {
-    if (!activeSet) return;
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    // Only update score for full set runs, not lemah-mode runs
-    if (!lemahMode) saveScore('wg', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
-    onSessionEnd?.({ correct, total, durationMs });
-  }, [activeSet, lemahMode, saveScore, onSessionEnd]);
+  const handleFinish = useCallback(
+    ({ correct, total, maxStreak, durationMs = 0 }) => {
+      if (!activeSet) return;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+      // Only update score for full set runs, not lemah-mode runs
+      if (!lemahMode)
+        saveScore('wg', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
+      onSessionEnd?.({ correct, total, durationMs });
+    },
+    [activeSet, lemahMode, saveScore, onSessionEnd]
+  );
 
   const handleExit = useCallback(() => {
     setActiveSet(null);
@@ -88,20 +124,46 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   }, []);
 
   if (activeSet) {
-    const title = lemahMode ? `⚠ ${set?.title || ''} · Salah` : (set?.title || '');
-    return <QuizShell questions={questions} onExit={handleExit} title={title} onAnswer={handleAnswer} onFinish={handleFinish} showHint={showHint} accentColor={set?.color || T.amber} />;
+    const title = lemahMode ? `⚠ ${set?.title || ''} · Salah` : set?.title || '';
+    return (
+      <QuizShell
+        questions={questions}
+        onExit={handleExit}
+        title={title}
+        onAnswer={handleAnswer}
+        onFinish={handleFinish}
+        showHint={showHint}
+        accentColor={set?.color || T.amber}
+      />
+    );
   }
 
   const totalSoal = TEORI_PRAKTIK.reduce((n, s) => n + s.questions.length, 0);
-  const groups = GROUPS.map((g) => ({ ...g, sets: TEORI_PRAKTIK.filter((s) => s.id.startsWith(g.prefix)) })).filter((g) => g.sets.length > 0);
+  const groups = GROUPS.map((g) => ({
+    ...g,
+    sets: TEORI_PRAKTIK.filter((s) => s.id.startsWith(g.prefix)),
+  })).filter((g) => g.sets.length > 0);
 
-  const pillStyle = (active) => ({ fontFamily: 'inherit', fontSize: 11, padding: '6px 12px', borderRadius: T.r.pill, cursor: 'pointer', background: active ? 'rgba(251,191,36,0.15)' : T.surface, border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`, color: active ? T.gold : T.textMuted });
+  const pillStyle = (active) => ({
+    fontFamily: 'inherit',
+    fontSize: 11,
+    padding: '6px 12px',
+    borderRadius: T.r.pill,
+    cursor: 'pointer',
+    background: active ? 'rgba(251,191,36,0.15)' : T.surface,
+    border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`,
+    color: active ? T.gold : T.textMuted,
+  });
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+      <button className={S.btnBack} onClick={onExit}>
+        ← Kembali
+      </button>
       <h2 className={S.pageTitle}>Soal Teknis · Lifeline</h2>
-      <p className={S.pageSub}>{totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik</p>
+      <p className={S.pageSub}>
+        {totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik
+      </p>
 
       {/* W5: Suggested order — show recommended next set */}
       {(() => {
@@ -118,15 +180,44 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
         const savedPct = wgScores[suggested.id]?.pct;
         return (
           <button
-            onClick={() => { setLemahMode(false); setActiveSet(suggested.id); }}
-            style={{ width: '100%', textAlign: 'left', fontFamily: 'inherit', cursor: 'pointer', background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.25)', borderRadius: 12, padding: '10px 14px', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}
+            onClick={() => {
+              setLemahMode(false);
+              setActiveSet(suggested.id);
+            }}
+            style={{
+              width: '100%',
+              textAlign: 'left',
+              fontFamily: 'inherit',
+              cursor: 'pointer',
+              background: 'rgba(251,191,36,0.06)',
+              border: '1px solid rgba(251,191,36,0.25)',
+              borderRadius: 12,
+              padding: '10px 14px',
+              marginBottom: 12,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+            }}
           >
             <span style={{ fontSize: 20 }}>⭐</span>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--ssw-amber)', marginBottom: 2 }}>DISARANKAN BERIKUTNYA</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ssw-text)' }}>{suggested.emoji || '📄'} {suggested.title}</div>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: 'var(--ssw-amber)',
+                  marginBottom: 2,
+                }}
+              >
+                DISARANKAN BERIKUTNYA
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ssw-text)' }}>
+                {suggested.emoji || '📄'} {suggested.title}
+              </div>
               <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginTop: 1 }}>
-                {isUntouched ? 'Belum pernah dikerjakan' : `Skor terakhir: ${savedPct}% — perlu diperbaiki`}
+                {isUntouched
+                  ? 'Belum pernah dikerjakan'
+                  : `Skor terakhir: ${savedPct}% — perlu diperbaiki`}
               </div>
             </div>
             <span style={{ fontSize: 12, color: 'var(--ssw-textDim)' }}>→</span>
@@ -142,30 +233,99 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
         const totalQ = scored.reduce((a, s) => a + (wgScores[s.id]?.total ?? 0), 0);
         const overallPct = totalQ > 0 ? Math.round((totalCorrect / totalQ) * 100) : 0;
         return (
-          <div style={{ background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.2)', borderRadius: 10, padding: '10px 14px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div
+            style={{
+              background: 'rgba(251,191,36,0.07)',
+              border: '1px solid rgba(251,191,36,0.2)',
+              borderRadius: 10,
+              padding: '10px 14px',
+              marginBottom: 16,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <div>
-              <div style={{ fontSize: 11, color: 'var(--c-text-dim)', fontWeight: 700 }}>TOTAL SEMUA SET</div>
-              <div style={{ fontSize: 11, color: 'var(--c-text-muted)', marginTop: 2 }}>{scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ} benar</div>
+              <div style={{ fontSize: 11, color: 'var(--c-text-dim)', fontWeight: 700 }}>
+                TOTAL SEMUA SET
+              </div>
+              <div style={{ fontSize: 11, color: 'var(--c-text-muted)', marginTop: 2 }}>
+                {scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ}{' '}
+                benar
+              </div>
             </div>
-            <div style={{ fontSize: 24, fontWeight: 800, color: overallPct >= 70 ? 'var(--c-correct)' : overallPct >= 50 ? 'var(--c-amber)' : 'var(--c-wrong)' }}>{overallPct}%</div>
+            <div
+              style={{
+                fontSize: 24,
+                fontWeight: 800,
+                color:
+                  overallPct >= 70
+                    ? 'var(--c-correct)'
+                    : overallPct >= 50
+                      ? 'var(--c-amber)'
+                      : 'var(--c-wrong)',
+              }}
+            >
+              {overallPct}%
+            </div>
           </div>
         );
       })()}
 
       <div className={S.row} style={{ marginBottom: 20 }}>
-        {[{ label: `ふり ${showFuri ? 'ON' : 'OFF'}`, active: showFuri, onClick: () => setShowFuri((f) => !f) },
-          { label: `💡 ${showHint ? 'ON' : 'OFF'}`, active: showHint, onClick: () => setShowHint((f) => !f) }
-        ].map((btn) => <button key={btn.label} onClick={btn.onClick} style={pillStyle(btn.active)}>{btn.label}</button>)}
+        {[
+          {
+            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
+            active: showFuri,
+            onClick: () => setShowFuri((f) => !f),
+          },
+          {
+            label: `💡 ${showHint ? 'ON' : 'OFF'}`,
+            active: showHint,
+            onClick: () => setShowHint((f) => !f),
+          },
+        ].map((btn) => (
+          <button key={btn.label} onClick={btn.onClick} style={pillStyle(btn.active)}>
+            {btn.label}
+          </button>
+        ))}
       </div>
 
       {groups.map((g) => (
         <div key={g.label} style={{ marginBottom: 20 }}>
           <div className={S.row} style={{ marginBottom: 8 }}>
             <span style={{ fontSize: 13 }}>{g.icon}</span>
-            <span style={{ fontSize: 10, fontWeight: 800, color: g.color, letterSpacing: 1.8, textTransform: 'uppercase' }}>{g.label}</span>
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 800,
+                color: g.color,
+                letterSpacing: 1.8,
+                textTransform: 'uppercase',
+              }}
+            >
+              {g.label}
+            </span>
             {g.desc && <span style={{ fontSize: 10, color: 'var(--c-text-dim)' }}>— {g.desc}</span>}
-            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${g.color}30,transparent)` }} />
-            <span className={S.pill} style={{ fontSize: 10, color: 'var(--c-text-dim)', background: 'var(--c-surface)', border: `1px solid var(--c-border)`, fontWeight: 700 }}>{g.sets.length} set</span>
+            <div
+              style={{
+                flex: 1,
+                height: 1,
+                background: `linear-gradient(90deg,${g.color}30,transparent)`,
+              }}
+            />
+            <span
+              className={S.pill}
+              style={{
+                fontSize: 10,
+                color: 'var(--c-text-dim)',
+                background: 'var(--c-surface)',
+                border: `1px solid var(--c-border)`,
+                fontWeight: 700,
+              }}
+            >
+              {g.sets.length} set
+            </span>
           </div>
           <div className={S.list}>
             {g.sets.map((s) => {
@@ -173,25 +333,103 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
               const wrongCount = getSetWrongCount(s.id);
               return (
                 <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                  <button className={S.btnItem} onClick={() => { setLemahMode(false); setActiveSet(s.id); }} style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden', borderBottomLeftRadius: wrongCount > 0 ? 0 : undefined, borderBottomRightRadius: wrongCount > 0 ? 0 : undefined }}>
-                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: s.color || g.color }} />
+                  <button
+                    className={S.btnItem}
+                    onClick={() => {
+                      setLemahMode(false);
+                      setActiveSet(s.id);
+                    }}
+                    style={{
+                      paddingLeft: 18,
+                      position: 'relative',
+                      overflow: 'hidden',
+                      borderBottomLeftRadius: wrongCount > 0 ? 0 : undefined,
+                      borderBottomRightRadius: wrongCount > 0 ? 0 : undefined,
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        width: 4,
+                        background: s.color || g.color,
+                      }}
+                    />
                     <div className={S.rowSpread}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{ fontSize: 13, fontWeight: 700 }}>{s.emoji} {s.title}</span>
-                        {!saved && <span style={{ fontSize: 9, fontWeight: 700, background: `${T.amber}15`, color: T.amber, border: `1px solid ${T.amber}30`, borderRadius: 99, padding: '1px 6px' }}>Baru</span>}
+                        <span style={{ fontSize: 13, fontWeight: 700 }}>
+                          {s.emoji} {s.title}
+                        </span>
+                        {!saved && (
+                          <span
+                            style={{
+                              fontSize: 9,
+                              fontWeight: 700,
+                              background: `${T.amber}15`,
+                              color: T.amber,
+                              border: `1px solid ${T.amber}30`,
+                              borderRadius: 99,
+                              padding: '1px 6px',
+                            }}
+                          >
+                            Baru
+                          </span>
+                        )}
                       </div>
                       <div className={S.row} style={{ gap: 8 }}>
-                        {saved && <span style={{ fontSize: 11, fontWeight: 700, color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong }}>{saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}</span>}
-                        <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                        {saved && (
+                          <span
+                            style={{
+                              fontSize: 11,
+                              fontWeight: 700,
+                              color:
+                                saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
+                            }}
+                          >
+                            {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
+                          </span>
+                        )}
+                        <span style={{ fontSize: 11, color: T.textDim }}>
+                          {s.questions.length}q
+                        </span>
                       </div>
                     </div>
-                    {s.subtitle && <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>{s.subtitle}</div>}
+                    {s.subtitle && (
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: T.textDim,
+                          marginTop: 4,
+                          fontFamily: T.fontJP,
+                        }}
+                      >
+                        {s.subtitle}
+                      </div>
+                    )}
                   </button>
                   {/* W2: Ulang Salah sub-button — only shows if this set has wrong answers */}
                   {wrongCount > 0 && (
                     <button
-                      onClick={() => { setLemahMode(true); setActiveSet(s.id); }}
-                      style={{ fontFamily: 'inherit', fontSize: 11, padding: '6px 18px', textAlign: 'left', cursor: 'pointer', background: 'rgba(220,38,38,0.06)', border: `1px solid rgba(220,38,38,0.2)`, borderTop: 'none', borderBottomLeftRadius: T.r.md, borderBottomRightRadius: T.r.md, color: T.wrong, fontWeight: 600 }}
+                      onClick={() => {
+                        setLemahMode(true);
+                        setActiveSet(s.id);
+                      }}
+                      style={{
+                        fontFamily: 'inherit',
+                        fontSize: 11,
+                        padding: '6px 18px',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        background: 'rgba(220,38,38,0.06)',
+                        border: `1px solid rgba(220,38,38,0.2)`,
+                        borderTop: 'none',
+                        borderBottomLeftRadius: T.r.md,
+                        borderBottomRightRadius: T.r.md,
+                        color: T.wrong,
+                        fontWeight: 600,
+                      }}
                     >
                       ⚠ Ulang {wrongCount} salah
                     </button>
@@ -202,7 +440,6 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
           </div>
         </div>
       ))}
-
     </div>
   );
 }

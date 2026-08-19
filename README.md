@@ -13,6 +13,7 @@
 PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定技能 / SSW) bidang konstruksi Jepang, jalur **Lifeline (ライフライン設備)**. Dirancang untuk TKI yang bersiap kerja di Jepang sebagai pekerja konstruksi.
 
 **Fitur utama:**
+
 - 🃏 **1,438 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
 - ❓ **~1.075 soal kuis** — Wayground 680 · JAC Mockup 300 · JAC Resmi 95
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
@@ -37,10 +38,12 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 ## Development
 
 ### Prasyarat
+
 - Node.js 22+
 - npm
 
 ### Setup
+
 ```bash
 git clone https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi.git
 cd Nugget-Nihongo-SSW-Konstruksi
@@ -49,6 +52,7 @@ npm run dev        # dev server → http://localhost:5173/Nugget-Nihongo-SSW-Kon
 ```
 
 ### Perintah
+
 ```bash
 npm run dev           # Dev server dengan HMR
 npm run build         # Production build → dist/
@@ -63,16 +67,17 @@ npm run audit:integrity  # Audit integritas data kartu
 ```
 
 ### Stack
-| Layer | Teknologi |
-|-------|-----------|
-| Framework | React 19 |
-| Build | Vite 6 + @vitejs/plugin-react |
-| SRS Engine | ts-fsrs 5.3 |
-| Storage | Pure localStorage (schema v3) |
-| Tests | Vitest 4 + @testing-library/react |
-| Styling | CSS Modules + CSS custom properties |
-| CI/CD | GitHub Actions → GitHub Pages |
-| PWA | Custom service worker + Web App Manifest |
+
+| Layer      | Teknologi                                |
+| ---------- | ---------------------------------------- |
+| Framework  | React 19                                 |
+| Build      | Vite 6 + @vitejs/plugin-react            |
+| SRS Engine | ts-fsrs 5.3                              |
+| Storage    | Pure localStorage (schema v3)            |
+| Tests      | Vitest 4 + @testing-library/react        |
+| Styling    | CSS Modules + CSS custom properties      |
+| CI/CD      | GitHub Actions → GitHub Pages            |
+| PWA        | Custom service worker + Web App Manifest |
 
 **Prod dependencies: 4** (react, react-dom, ts-fsrs, lz-string) — hard constraint.
 
@@ -108,11 +113,11 @@ Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
 
 3 dokumen localStorage terpisah:
 
-| Key | Isi |
-|-----|-----|
-| `ssw-progress` | known/unknown cards, quiz scores, streak, sessions, daily mission |
-| `ssw-srs-data` | FSRS card states (stability, difficulty, interval, due date) |
-| `ssw-prefs` | track, theme, furiganaPolicy, audioEnabled, examDate, goalHarian, notes (catatan per kartu), sprintBestTimeline |
+| Key            | Isi                                                                                                             |
+| -------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ssw-progress` | known/unknown cards, quiz scores, streak, sessions, daily mission                                               |
+| `ssw-srs-data` | FSRS card states (stability, difficulty, interval, due date)                                                    |
+| `ssw-prefs`    | track, theme, furiganaPolicy, audioEnabled, examDate, goalHarian, notes (catatan per kartu), sprintBestTimeline |
 
 Export/import tersedia di tab **Saya** → fitur backup & restore.
 
@@ -121,6 +126,7 @@ Export/import tersedia di tab **Saya** → fitur backup & restore.
 ## CI/CD
 
 Setiap push ke `main` → GitHub Actions menjalankan:
+
 1. **Lint** (`npm run lint` — zero warnings)
 2. **Test** (`npm test -- --run`)
 3. **Build** (`npm run build`)

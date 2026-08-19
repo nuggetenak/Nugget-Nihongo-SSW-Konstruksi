@@ -74,6 +74,7 @@ README-CONTENT-DQ.md             ← This file
 ## Merge plan (when all tasks done)
 
 Agent on `main` will:
+
 1. Copy all `src/data/` files from `content-dq` → `main`
 2. Update any renamed file imports in `src/modes/`, `src/components/`, etc.
 3. **W1 storage migration:** Wayground set IDs renamed (wg/wp → wgl/wglv/wtv). Bump `STORAGE_VERSION` (currently 4 → 5) and add migration in `migrations.js` to remap stored wgScores keys.

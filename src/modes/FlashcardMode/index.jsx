@@ -14,29 +14,35 @@ import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.
 import S from '../modes.module.css';
 import FC from './flashcard.module.css';
 
-import FlipCard   from './FlipCard.jsx';
-import RatingRow  from './RatingRow.jsx';
-import ToolStrip  from './ToolStrip.jsx';
-import FilterBar  from './FilterBar.jsx';
+import FlipCard from './FlipCard.jsx';
+import RatingRow from './RatingRow.jsx';
+import ToolStrip from './ToolStrip.jsx';
+import FilterBar from './FilterBar.jsx';
 
 export default function FlashcardMode({
-  cards, known, unknown, onMark, onExit, srs,
-  starred = new Set(), onToggleStar = () => {},
+  cards,
+  known,
+  unknown,
+  onMark,
+  onExit,
+  srs,
+  starred = new Set(),
+  onToggleStar = () => {},
   filterIds = null,
 }) {
   // If filterIds provided (wrong-card bridge), scope cards to that set.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
-  const [order, setOrder]           = useState([]);
-  const [idx, setIdx]               = useState(0);
-  const [flipped, setFlipped]       = useState(false);
-  const [showDesc, setShowDesc]     = useState(false);
-  const [rated, setRated]           = useState(false);
-  const toast                        = useToast();
+  const [order, setOrder] = useState([]);
+  const [idx, setIdx] = useState(0);
+  const [flipped, setFlipped] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
+  const [rated, setRated] = useState(false);
+  const toast = useToast();
 
   // Hint: show "Tap untuk balik" until 3 flips lifetime
   const [hintCount, setHintCount] = useState(() => storageGet('prefs')?.flashcardHintCount ?? 0);
-  const showHint  = hintCount < 3 && !flipped;
-  const bumpHint  = useCallback(() => {
+  const showHint = hintCount < 3 && !flipped;
+  const bumpHint = useCallback(() => {
     if (hintCount >= 3) return;
     const next = hintCount + 1;
     setHintCount(next);
@@ -48,63 +54,78 @@ export default function FlashcardMode({
   const [swipeDelta, setSwipeDelta] = useState(0);
 
   // Filter/sort — persists across mode switches via sessionStorage.
-  const [search, setSearch]             = useState(() => sessionStorage.getItem('ssw-fc-search') ?? '');
-  const [sortMode, setSortMode]         = useState(() => sessionStorage.getItem('ssw-fc-sort') ?? 'priority');
-  const [reviewBelum, setReviewBelum]   = useState(false);
+  const [search, setSearch] = useState(() => sessionStorage.getItem('ssw-fc-search') ?? '');
+  const [sortMode, setSortMode] = useState(
+    () => sessionStorage.getItem('ssw-fc-sort') ?? 'priority'
+  );
+  const [reviewBelum, setReviewBelum] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
-  const confirmTimer                     = useRef(null);
+  const confirmTimer = useRef(null);
   // Read-only mode — browse without FSRS rating.
-  const [readOnly, setReadOnly]         = useState(false);
+  const [readOnly, setReadOnly] = useState(false);
 
   // furiganaPolicy — wired to FlipCard → JpFront.
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
 
-  const rebuildOrder = useCallback((mode) => {
-    const base = reviewBelum ? baseCards.filter((c) => unknown.has(c.id)) : baseCards;
-    if (mode === 'original') return base;
-    if (mode === 'shuffle')  return shuffle([...base]);
-    const u = base.filter((c) => unknown.has(c.id));
-    const t = base.filter((c) => !known.has(c.id) && !unknown.has(c.id));
-    const k = base.filter((c) => known.has(c.id));
-    return [...shuffle(u), ...shuffle(t), ...shuffle(k)];
-  }, [baseCards, known, unknown, reviewBelum]);
+  const rebuildOrder = useCallback(
+    (mode) => {
+      const base = reviewBelum ? baseCards.filter((c) => unknown.has(c.id)) : baseCards;
+      if (mode === 'original') return base;
+      if (mode === 'shuffle') return shuffle([...base]);
+      const u = base.filter((c) => unknown.has(c.id));
+      const t = base.filter((c) => !known.has(c.id) && !unknown.has(c.id));
+      const k = base.filter((c) => known.has(c.id));
+      return [...shuffle(u), ...shuffle(t), ...shuffle(k)];
+    },
+    [baseCards, known, unknown, reviewBelum]
+  );
 
   useEffect(() => {
     setOrder(rebuildOrder(sortMode));
-    setIdx(0); setFlipped(false); setShowDesc(false); setRated(false);
+    setIdx(0);
+    setFlipped(false);
+    setShowDesc(false);
+    setRated(false);
   }, [baseCards, known, unknown, rebuildOrder, sortMode, reviewBelum]);
 
-  const displayCards = search === '__starred__'
-    ? order.filter((c) => starred.has(c.id))
-    : search.startsWith('__cat:')
-      ? order.filter((c) => c.category === search.slice(6))
-      : search.trim()
-      ? order.filter((c) => {
-          const q = search.toLowerCase();
-          return (c.jp     || '').toLowerCase().includes(q) ||
-                 
-                 (c.id_text|| '').toLowerCase().includes(q);
-        })
-      : order;
+  const displayCards =
+    search === '__starred__'
+      ? order.filter((c) => starred.has(c.id))
+      : search.startsWith('__cat:')
+        ? order.filter((c) => c.category === search.slice(6))
+        : search.trim()
+          ? order.filter((c) => {
+              const q = search.toLowerCase();
+              return (
+                (c.jp || '').toLowerCase().includes(q) ||
+                (c.id_text || '').toLowerCase().includes(q)
+              );
+            })
+          : order;
 
-  const safeIdx   = Math.min(idx, Math.max(0, displayCards.length - 1));
-  const card      = displayCards[safeIdx];
-  const cat       = card ? getCatInfo(card.category) : null;
-  const isKnown   = card && known.has(card.id);
+  const safeIdx = Math.min(idx, Math.max(0, displayCards.length - 1));
+  const card = displayCards[safeIdx];
+  const cat = card ? getCatInfo(card.category) : null;
+  const isKnown = card && known.has(card.id);
   const isUnknown = card && unknown.has(card.id);
   const isStarred = card && starred.has(card.id);
 
-  const knownInView   = displayCards.filter((c) => known.has(c.id)).length;
+  const knownInView = displayCards.filter((c) => known.has(c.id)).length;
   const unknownInView = displayCards.filter((c) => unknown.has(c.id)).length;
 
-  const srsInfo     = srs?.ready && card ? srs.getInfo(card.id)      : null;
-  const srsPreviews = srs?.ready && card ? srs.previewFor(card.id)   : {};
+  const srsInfo = srs?.ready && card ? srs.getInfo(card.id) : null;
+  const srsPreviews = srs?.ready && card ? srs.previewFor(card.id) : {};
 
-  const go = useCallback((dir) => {
-    setSwipeDelta(0);
-    setIdx((i) => Math.max(0, Math.min(displayCards.length - 1, i + dir)));
-    setFlipped(false); setShowDesc(false); setRated(false);
-  }, [displayCards.length]);
+  const go = useCallback(
+    (dir) => {
+      setSwipeDelta(0);
+      setIdx((i) => Math.max(0, Math.min(displayCards.length - 1, i + dir)));
+      setFlipped(false);
+      setShowDesc(false);
+      setRated(false);
+    },
+    [displayCards.length]
+  );
 
   const flip = useCallback(() => {
     if (!flipped) bumpHint();
@@ -112,17 +133,20 @@ export default function FlashcardMode({
     setShowDesc(false);
   }, [flipped, bumpHint]);
 
-  const handleRate = useCallback((rating) => {
-    if (!card || rated) return;
-    if (srs?.ready) {
-      const result = srs.review(card.id, rating);
-      onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
-    } else {
-      onMark?.(card.id, rating >= 2 ? 'known' : 'unknown');
-    }
-    setRated(true);
-    setTimeout(() => go(1), 400);
-  }, [card, rated, srs, onMark, go]);
+  const handleRate = useCallback(
+    (rating) => {
+      if (!card || rated) return;
+      if (srs?.ready) {
+        const result = srs.review(card.id, rating);
+        onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
+      } else {
+        onMark?.(card.id, rating >= 2 ? 'known' : 'unknown');
+      }
+      setRated(true);
+      setTimeout(() => go(1), 400);
+    },
+    [card, rated, srs, onMark, go]
+  );
 
   const handleReset = useCallback(() => {
     if (confirmReset) {
@@ -130,7 +154,9 @@ export default function FlashcardMode({
       onMark?.('__RESET__', 'reset');
       setConfirmReset(false);
       setOrder(rebuildOrder(sortMode));
-      setIdx(0); setFlipped(false); setRated(false);
+      setIdx(0);
+      setFlipped(false);
+      setRated(false);
       toast.show('Progres direset');
     } else {
       setConfirmReset(true);
@@ -140,9 +166,19 @@ export default function FlashcardMode({
 
   useEffect(() => {
     const h = (e) => {
-      if (e.key === 'ArrowLeft')  { go(-1); return; }
-      if (e.key === 'ArrowRight') { go(1);  return; }
-      if (e.key === ' ')          { e.preventDefault(); flip(); return; }
+      if (e.key === 'ArrowLeft') {
+        go(-1);
+        return;
+      }
+      if (e.key === 'ArrowRight') {
+        go(1);
+        return;
+      }
+      if (e.key === ' ') {
+        e.preventDefault();
+        flip();
+        return;
+      }
       if (flipped && !rated) {
         if (e.key === '1') handleRate(1);
         if (e.key === '2') handleRate(2);
@@ -158,13 +194,29 @@ export default function FlashcardMode({
   if (!card || displayCards.length === 0) {
     return (
       <div className={S.pageCenter}>
-        <button onClick={onExit} className={S.btnBack} style={{ display: 'inline-block', marginBottom: 24 }}>← Kembali</button>
+        <button
+          onClick={onExit}
+          className={S.btnBack}
+          style={{ display: 'inline-block', marginBottom: 24 }}
+        >
+          ← Kembali
+        </button>
         <div className={S.emptyIcon}>{search ? '🔍' : reviewBelum ? '🎉' : '📭'}</div>
         <div className={S.emptyTitle}>
-          {search ? `Tidak ada hasil untuk "${search}"` : reviewBelum ? 'Tidak ada kartu belum hafal!' : 'Tidak ada kartu'}
+          {search
+            ? `Tidak ada hasil untuk "${search}"`
+            : reviewBelum
+              ? 'Tidak ada kartu belum hafal!'
+              : 'Tidak ada kartu'}
         </div>
         {(search || reviewBelum) && (
-          <button onClick={() => { setSearch(''); setReviewBelum(false); }} className={S.btnSecondary}>
+          <button
+            onClick={() => {
+              setSearch('');
+              setReviewBelum(false);
+            }}
+            className={S.btnSecondary}
+          >
             Reset filter
           </button>
         )}
@@ -176,24 +228,41 @@ export default function FlashcardMode({
 
   return (
     <div className={S.fcWrapper}>
-
       {/* Wrong-card bridge banner */}
       {filterIds && (
-        <div style={{ background: 'rgba(248,113,113,0.10)', border: '1px solid rgba(248,113,113,0.3)', borderRadius: 8, padding: '8px 12px', marginBottom: 8, fontSize: 12, color: '#f87171', textAlign: 'center' }}>
+        <div
+          style={{
+            background: 'rgba(248,113,113,0.10)',
+            border: '1px solid rgba(248,113,113,0.3)',
+            borderRadius: 8,
+            padding: '8px 12px',
+            marginBottom: 8,
+            fontSize: 12,
+            color: '#f87171',
+            textAlign: 'center',
+          }}
+        >
           ❌ Latihan kartu salah · {baseCards.length} kartu
         </div>
       )}
 
       {/* Header */}
       <div className={S.modeHeader} style={{ marginBottom: 6 }}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>← Kartu</button>
+        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
+          ← Kartu
+        </button>
         <div className={S.row} style={{ fontSize: 12 }}>
           {srsInfo && (
-            <span className={S.pill} style={{ background: `${srsInfo.strength.color}15`, color: srsInfo.strength.color }}>
+            <span
+              className={S.pill}
+              style={{ background: `${srsInfo.strength.color}15`, color: srsInfo.strength.color }}
+            >
               {srsInfo.strength.label}
             </span>
           )}
-          <span style={{ color: T.textDim, fontVariantNumeric: 'tabular-nums' }}>{safeIdx + 1}/{displayCards.length}</span>
+          <span style={{ color: T.textDim, fontVariantNumeric: 'tabular-nums' }}>
+            {safeIdx + 1}/{displayCards.length}
+          </span>
         </div>
       </div>
 
@@ -202,12 +271,23 @@ export default function FlashcardMode({
       {/* Stats mini */}
       <div className={S.statRow} style={{ marginTop: 8 }}>
         {[
-          { label: 'Hafal', val: knownInView,   color: T.correct, bg: T.correctBg },
-          { label: 'Belum', val: unknownInView,  color: T.wrong,   bg: T.wrongBg },
-          { label: 'Sisa',  val: displayCards.length - knownInView - unknownInView, color: T.gold, bg: 'rgba(251,191,36,0.08)' },
+          { label: 'Hafal', val: knownInView, color: T.correct, bg: T.correctBg },
+          { label: 'Belum', val: unknownInView, color: T.wrong, bg: T.wrongBg },
+          {
+            label: 'Sisa',
+            val: displayCards.length - knownInView - unknownInView,
+            color: T.gold,
+            bg: 'rgba(251,191,36,0.08)',
+          },
         ].map((stat) => (
-          <div key={stat.label} className={S.statCell} style={{ background: stat.bg, border: `1px solid ${stat.color}22` }}>
-            <div className={S.statVal} style={{ color: stat.color }}>{stat.val}</div>
+          <div
+            key={stat.label}
+            className={S.statCell}
+            style={{ background: stat.bg, border: `1px solid ${stat.color}22` }}
+          >
+            <div className={S.statVal} style={{ color: stat.color }}>
+              {stat.val}
+            </div>
             <div className={S.statLabel}>{stat.label}</div>
           </div>
         ))}
@@ -216,7 +296,11 @@ export default function FlashcardMode({
       {/* Filter bar */}
       <FilterBar
         search={search}
-        onSearch={(v) => { setSearch(v); sessionStorage.setItem('ssw-fc-search', v); setIdx(0); }}
+        onSearch={(v) => {
+          setSearch(v);
+          sessionStorage.setItem('ssw-fc-search', v);
+          setIdx(0);
+        }}
         isStarred={isStarred}
         onToggleStar={() => onToggleStar(card?.id)}
       />
@@ -237,7 +321,11 @@ export default function FlashcardMode({
           showHint={showHint}
           borderColor={borderColor}
           swipeDelta={swipeDelta}
-          onCatFilter={(key) => { setSearch(`__cat:${key}`); sessionStorage.setItem('ssw-fc-search', `__cat:${key}`); setIdx(0); }}
+          onCatFilter={(key) => {
+            setSearch(`__cat:${key}`);
+            sessionStorage.setItem('ssw-fc-search', `__cat:${key}`);
+            setIdx(0);
+          }}
           onTouchStart={(e) => {
             setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
           }}
@@ -247,15 +335,23 @@ export default function FlashcardMode({
             setSwipeDelta(Math.max(-1, Math.min(1, dx)));
           }}
           onTouchEnd={(e) => {
-            if (touchStart === null) { setSwipeDelta(0); return; }
+            if (touchStart === null) {
+              setSwipeDelta(0);
+              return;
+            }
             const dx = e.changedTouches[0].clientX - touchStart.x;
             const dy = e.changedTouches[0].clientY - touchStart.y;
-            setSwipeDelta(0); setTouchStart(null);
+            setSwipeDelta(0);
+            setTouchStart(null);
             // If flipped and not yet rated — swipe to rate.
             if (flipped && !rated) {
-              if (dy < -60 && Math.abs(dy) > Math.abs(dx)) { handleRate(4); return; } // swipe up = Easy
+              if (dy < -60 && Math.abs(dy) > Math.abs(dx)) {
+                handleRate(4);
+                return;
+              } // swipe up = Easy
               if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
-                handleRate(dx < 0 ? 1 : 3); return; // left=Again, right=Good
+                handleRate(dx < 0 ? 1 : 3);
+                return; // left=Again, right=Good
               }
             }
             // Not flipped or small swipe — navigate cards
@@ -266,17 +362,20 @@ export default function FlashcardMode({
 
       {/* FSRS rating row — hidden in read-only mode */}
       {!readOnly && (
-        <RatingRow
-          flipped={flipped}
-          rated={rated}
-          srsPreviews={srsPreviews}
-          onRate={handleRate}
-        />
+        <RatingRow flipped={flipped} rated={rated} srsPreviews={srsPreviews} onRate={handleRate} />
       )}
 
       {/* Swipe hint — shown when flipped and not yet rated */}
       {!readOnly && flipped && !rated && (
-        <div style={{ textAlign: 'center', fontSize: 11, color: T.textFaint, marginTop: 4, letterSpacing: 0.3 }}>
+        <div
+          style={{
+            textAlign: 'center',
+            fontSize: 11,
+            color: T.textFaint,
+            marginTop: 4,
+            letterSpacing: 0.3,
+          }}
+        >
           ← Lagi · Oke → · ↑ Mudah
         </div>
       )}
@@ -284,32 +383,58 @@ export default function FlashcardMode({
       {/* Nav row */}
       <div className={FC.navRow} style={{ marginTop: 10 }}>
         <button
-          onClick={() => go(-1)} disabled={safeIdx === 0}
+          onClick={() => go(-1)}
+          disabled={safeIdx === 0}
           className={FC.navBtn}
           style={{ opacity: safeIdx === 0 ? 0.4 : 1 }}
-        >← Prev</button>
+        >
+          ← Prev
+        </button>
+        <button onClick={flip} className={FC.navFlip}>
+          {flipped ? '🔄 Balik' : '👁️ Lihat'}
+        </button>
         <button
-          onClick={flip}
-          className={FC.navFlip}
-        >{flipped ? '🔄 Balik' : '👁️ Lihat'}</button>
-        <button
-          onClick={() => go(1)} disabled={safeIdx >= displayCards.length - 1}
+          onClick={() => go(1)}
+          disabled={safeIdx >= displayCards.length - 1}
           className={FC.navBtn}
           style={{ opacity: safeIdx >= displayCards.length - 1 ? 0.4 : 1 }}
-        >Next →</button>
+        >
+          Next →
+        </button>
       </div>
 
       {/* Manual SRS enqueue for known cards not yet in SRS */}
       {isKnown && srs?.ready && !srsInfo && (
         <button
-          onClick={() => { srs.review(card.id, 1); }}
-          style={{ fontFamily: 'inherit', width: '100%', padding: '8px 12px', marginTop: 4, borderRadius: 8,
-            background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)',
-            color: '#22c55e', fontSize: 12, cursor: 'pointer' }}
-        >＋ Tambah ke Ulasan SRS</button>
+          onClick={() => {
+            srs.review(card.id, 1);
+          }}
+          style={{
+            fontFamily: 'inherit',
+            width: '100%',
+            padding: '8px 12px',
+            marginTop: 4,
+            borderRadius: 8,
+            background: 'rgba(34,197,94,0.08)',
+            border: '1px solid rgba(34,197,94,0.3)',
+            color: '#22c55e',
+            fontSize: 12,
+            cursor: 'pointer',
+          }}
+        >
+          ＋ Tambah ke Ulasan SRS
+        </button>
       )}
       {isKnown && srs?.ready && srsInfo && (
-        <div style={{ textAlign: 'center', fontSize: 11, color: '#22c55e', marginTop: 4, opacity: 0.7 }}>
+        <div
+          style={{
+            textAlign: 'center',
+            fontSize: 11,
+            color: '#22c55e',
+            marginTop: 4,
+            opacity: 0.7,
+          }}
+        >
           ✓ Sudah di SRS
         </div>
       )}
@@ -317,21 +442,32 @@ export default function FlashcardMode({
       {/* Tool strip */}
       <ToolStrip
         sortMode={sortMode}
-        onCycleSort={() => setSortMode((m) => { const next = m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority'; sessionStorage.setItem('ssw-fc-sort', next); return next; })}
+        onCycleSort={() =>
+          setSortMode((m) => {
+            const next = m === 'priority' ? 'original' : m === 'original' ? 'shuffle' : 'priority';
+            sessionStorage.setItem('ssw-fc-sort', next);
+            return next;
+          })
+        }
         reviewBelum={reviewBelum}
-        onToggleBelum={() => { setReviewBelum((r) => !r); setIdx(0); }}
+        onToggleBelum={() => {
+          setReviewBelum((r) => !r);
+          setIdx(0);
+        }}
         unknownInView={unknownInView}
         confirmReset={confirmReset}
         onReset={handleReset}
         starredCount={starred.size}
         starFilterActive={search === '__starred__'}
-        onToggleStarFilter={() => { setSearch(search === '__starred__' ? '' : '__starred__'); setIdx(0); }}
+        onToggleStarFilter={() => {
+          setSearch(search === '__starred__' ? '' : '__starred__');
+          setIdx(0);
+        }}
         flipped={flipped}
         rated={rated}
         readOnly={readOnly}
         onToggleReadOnly={() => setReadOnly((r) => !r)}
       />
-
     </div>
   );
 }

@@ -7,13 +7,13 @@ import { haptic } from '../utils/haptic.js';
 import s from './OptionButton.module.css';
 
 export default function OptionButton({ idx, text, selected, isCorrect, onSelect, subText }) {
-  const answered   = selected !== null;
+  const answered = selected !== null;
   const isSelected = selected === idx;
 
   // Three visual states: correct · wrong · dim (answered but neither)
-  const btnState   = !answered ? null : isCorrect ? 'correct' : isSelected ? 'wrong' : 'dim';
+  const btnState = !answered ? null : isCorrect ? 'correct' : isSelected ? 'wrong' : 'dim';
   const badgeState = !answered ? null : isCorrect ? 'correct' : isSelected ? 'wrong' : null;
-  const badgeText  = answered && isCorrect ? '✓' : answered && isSelected ? '✗' : idx + 1;
+  const badgeText = answered && isCorrect ? '✓' : answered && isSelected ? '✗' : idx + 1;
 
   const handleClick = () => {
     if (answered) return;
@@ -21,16 +21,11 @@ export default function OptionButton({ idx, text, selected, isCorrect, onSelect,
     // Fire haptic on selection — actual correct/wrong state fires after parent re-renders
     // so we read isCorrect at the time of click (the option the user tapped)
     if (isCorrect) haptic.correct();
-    else           haptic.wrong();
+    else haptic.wrong();
   };
 
   return (
-    <button
-      className={s.btn}
-      data-state={btnState}
-      onClick={handleClick}
-      disabled={answered}
-    >
+    <button className={s.btn} data-state={btnState} onClick={handleClick} disabled={answered}>
       <span className={s.badge} data-state={badgeState}>
         {badgeText}
       </span>

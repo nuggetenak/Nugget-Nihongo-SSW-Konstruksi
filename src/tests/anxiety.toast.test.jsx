@@ -8,16 +8,10 @@ import QuizShell from '../components/QuizShell.jsx';
 const makeQuestion = (id, correctIdx = 0) => ({
   question: `質問${id}`,
   questionSub: null,
-  options: [
-    { text: '正解' },
-    { text: '不正解A' },
-    { text: '不正解B' },
-    { text: '不正解C' },
-  ],
+  options: [{ text: '正解' }, { text: '不正解A' }, { text: '不正解B' }, { text: '不正解C' }],
   correctIdx,
   explanation: '解説テキスト',
 });
-
 
 describe('anxiety-reduction toast', () => {
   beforeEach(() => {
@@ -34,7 +28,9 @@ describe('anxiety-reduction toast', () => {
       wrongStreak++;
       maxWrongStreak = Math.max(maxWrongStreak, wrongStreak);
     };
-    const recordTrue = () => { wrongStreak = 0; };
+    const recordTrue = () => {
+      wrongStreak = 0;
+    };
 
     // 5 wrong in a row
     for (let i = 0; i < 5; i++) recordFalse();
@@ -50,14 +46,20 @@ describe('anxiety-reduction toast', () => {
     // 4 wrong in a row → below threshold
     let maxWrong = 0;
     let streak = 0;
-    for (let i = 0; i < 4; i++) { streak++; maxWrong = Math.max(maxWrong, streak); }
+    for (let i = 0; i < 4; i++) {
+      streak++;
+      maxWrong = Math.max(maxWrong, streak);
+    }
     expect(maxWrong < 5).toBe(true);
   });
 
   it('maxWrongStreak >= 5 meets anxiety toast threshold', () => {
     let maxWrong = 0;
     let streak = 0;
-    for (let i = 0; i < 5; i++) { streak++; maxWrong = Math.max(maxWrong, streak); }
+    for (let i = 0; i < 5; i++) {
+      streak++;
+      maxWrong = Math.max(maxWrong, streak);
+    }
     expect(maxWrong >= 5).toBe(true);
   });
 });

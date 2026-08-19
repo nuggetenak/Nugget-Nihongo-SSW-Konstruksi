@@ -6,9 +6,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GIST_FILENAME = 'ssw-konstruksi-progress.json';
-const GIST_DESC     = 'SSW Konstruksi — Progress Backup (auto-generated)';
-const PAT_KEY       = 'ssw-gist-pat';
-const GIST_ID_KEY   = 'ssw-gist-id';
+const GIST_DESC = 'SSW Konstruksi — Progress Backup (auto-generated)';
+const PAT_KEY = 'ssw-gist-pat';
+const GIST_ID_KEY = 'ssw-gist-id';
 
 // ── Token management ─────────────────────────────────────────────────────────
 

@@ -20,7 +20,7 @@ describe('useTrackedCards', () => {
   it('returns cards for lifeline track', () => {
     const { result } = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper });
     expect(result.current.length).toBeGreaterThan(0);
-    expect(result.current.every(c => typeof c.id === 'number')).toBe(true);
+    expect(result.current.every((c) => typeof c.id === 'number')).toBe(true);
   });
 
   it('returns empty array for a removed track (doboku/kenchiku no longer exist)', () => {
@@ -29,14 +29,20 @@ describe('useTrackedCards', () => {
   });
 
   it('excludeVocab filters out vocab sources', () => {
-    const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result.current;
-    const noVocab = renderHook(() => useTrackedCards({ track: 'lifeline', excludeVocab: true }), { wrapper }).result.current;
+    const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result
+      .current;
+    const noVocab = renderHook(() => useTrackedCards({ track: 'lifeline', excludeVocab: true }), {
+      wrapper,
+    }).result.current;
     expect(noVocab.length).toBeLessThanOrEqual(all.length);
-    expect(noVocab.every(c => !VOCAB_SOURCES.includes(c.source))).toBe(true);
+    expect(noVocab.every((c) => !VOCAB_SOURCES.includes(c.source))).toBe(true);
   });
 
   it('returns empty array for category with no cards', () => {
-    const { result } = renderHook(() => useTrackedCards({ track: 'lifeline', category: 'nonexistent' }), { wrapper });
+    const { result } = renderHook(
+      () => useTrackedCards({ track: 'lifeline', category: 'nonexistent' }),
+      { wrapper }
+    );
     expect(result.current).toHaveLength(0);
   });
 
@@ -47,13 +53,16 @@ describe('useTrackedCards', () => {
 
   it('source filter narrows results', () => {
     // Get all lifeline cards to find a valid source
-    const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result.current;
+    const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result
+      .current;
     if (all.length === 0) return; // guard: no cards in env
     const validSource = all[0].source;
-    const bySource = renderHook(() => useTrackedCards({ track: 'lifeline', source: validSource }), { wrapper }).result.current;
+    const bySource = renderHook(() => useTrackedCards({ track: 'lifeline', source: validSource }), {
+      wrapper,
+    }).result.current;
     expect(bySource.length).toBeGreaterThan(0);
     expect(bySource.length).toBeLessThanOrEqual(all.length);
-    expect(bySource.every(c => c.source === validSource)).toBe(true);
+    expect(bySource.every((c) => c.source === validSource)).toBe(true);
   });
 
   it('returns an array of valid card objects', () => {

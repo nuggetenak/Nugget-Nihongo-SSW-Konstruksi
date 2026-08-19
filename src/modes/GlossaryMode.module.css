@@ -88,7 +88,9 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
-.azNav::-webkit-scrollbar { display: none; }
+.azNav::-webkit-scrollbar {
+  display: none;
+}
 
 /* azBtn — active bg/border/color/fontWeight are dynamic, kept inline */
 .azBtn {

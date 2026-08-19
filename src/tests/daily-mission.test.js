@@ -3,7 +3,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { _reset_for_test, init, set } from '../storage/engine.js';
-import { generateDailyMission, completeMission, getMission, isMissionDoneToday } from '../utils/daily-mission.js';
+import {
+  generateDailyMission,
+  completeMission,
+  getMission,
+  isMissionDoneToday,
+} from '../utils/daily-mission.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -57,7 +62,20 @@ describe('Phase C — Daily Mission', () => {
   it('when SRS due count = 0 and no sessions, mode is not ulasan by force', () => {
     // With no due cards the engine picks by strand balance — just verify it returns a valid mode
     const m = generateDailyMission();
-    const validModes = ['ulasan', 'kartu', 'kuis', 'sprint', 'jac', 'fokus', 'angka', 'jebak', 'produksi', 'kuisprod', 'mirip', 'dengar'];
+    const validModes = [
+      'ulasan',
+      'kartu',
+      'kuis',
+      'sprint',
+      'jac',
+      'fokus',
+      'angka',
+      'jebak',
+      'produksi',
+      'kuisprod',
+      'mirip',
+      'dengar',
+    ];
     expect(validModes).toContain(m.mode);
   });
 

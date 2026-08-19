@@ -1,6 +1,7 @@
 # HANDOFF.md — SSW Konstruksi · content-dq
 
 > ## 🟢 MERGED INTO MAIN — 2026-08-18 (commit `151a45e`)
+>
 > **content-dq's mission is complete.** This document records its 3.5-month content-quality
 > sprint (sessions 1–29) and the branch merge that closed it out. Both are done — verified via
 > `npm test` (435/435), `npm run lint` (0 warnings), `npm run build` (clean), plus content-dq's
@@ -8,7 +9,7 @@
 > `CHANGELOG.md` [4.23.0], `_MAP.md` session log.
 >
 > **If you're a new agent starting fresh work (e.g. a frontend overhaul):** the GETTING STARTED
-> and PROTOCOL sections immediately below describe the *content-dq* workflow specifically —
+> and PROTOCOL sections immediately below describe the _content-dq_ workflow specifically —
 > clone content-dq, never touch main, etc. That workflow is retired. You're almost certainly
 > starting on `main` instead, which now has everything (content-dq's data + the original app).
 > Read this file for background/history, but don't follow GETTING STARTED/PROTOCOL's literal
@@ -70,6 +71,7 @@ Then: PROTOCOL section below, first.
 > literally.
 
 **On start, before touching anything:**
+
 1. Clone the repo, checkout `content-dq`.
 2. Run `node scripts/verify-content.mjs`. It's dependency-free, no `npm install` needed.
 3. Compare its output against the CURRENT STATE section below. If they disagree, trust the
@@ -78,6 +80,7 @@ Then: PROTOCOL section below, first.
    gated on an owner decision or external material — check before starting, not after.
 
 **Before you write the updated HANDOFF.md to hand off:**
+
 1. Run `node scripts/verify-content.mjs` again. Don't hand-carry-forward the numbers you started
    with — re-derive them. This is the single change that would have caught the biggest problem
    found in session 23 (a corrupted `type` field that sat undetected across a full session
@@ -102,15 +105,15 @@ Verify before trusting past this point — this line doesn't update itself.
   the old MERGE PREP entry (kept below, struck through in spirit not in fact — still worth
   reading for the reasoning trail) held up under actual investigation, with corrections:
   no common ancestor confirmed (`git merge-base` exit 1); `main`'s independence confirmed, but
-  refined — `content-dq`'s root commit (`c556f5f`) didn't just *lack* the app scaffold, it
-  *deleted* main's entire app layer in one commit (248 files, -53,216/+381 lines) down to
+  refined — `content-dq`'s root commit (`c556f5f`) didn't just _lack_ the app scaffold, it
+  _deleted_ main's entire app layer in one commit (248 files, -53,216/+381 lines) down to
   data+docs+viewer, so this was never two apps evolving in parallel; the "spot-checked, not
   diffed" claims about `main` still having `furi`/doboku/kenchiku/old-JAC-schema all confirmed
   true, and the real blast radius was bigger than flagged in every case (furi: 7 files named →
   33 actual; Doboku/Kenchiku: 3 files named → 33 actual).
 
   **Strategy:** not a git merge in the conflict-resolution sense. `git merge
-  --allow-unrelated-histories` used as a mechanical bootstrap on a safety branch (never touched
+--allow-unrelated-histories` used as a mechanical bootstrap on a safety branch (never touched
   `main` directly until everything was green) — cleanly auto-unioned 326 non-overlapping files,
   conflicts only on the 14 that existed on both sides. Those 14 resolved (10 data files took
   content-dq's version wholesale, 3 docs hand-merged combining both histories, 1 pair
@@ -138,6 +141,7 @@ Verify before trusting past this point — this line doesn't update itself.
   161 files with formatting drift (`prettier --check`) — but this predates the merge entirely,
   including files `content-dq` never touched, so it's pre-existing app-wide debt, not a merge
   artifact. Worth knowing about for whoever does the frontend overhaul, not fixed here.
+
 - **🔀 MERGE PREP (historical — see MERGE COMPLETE entry above; this entry is what the merge
   started from, kept for the reasoning trail).** Owner's plan at the time: session 29 (that one)
   closes out here; a **new chat** does the actual `main` merge. Three
@@ -333,7 +337,7 @@ Verify before trusting past this point — this line doesn't update itself.
     cards: owner-authorized general domain knowledge, not JAC text. Every completion grounded in
     the same card's own `usage` field or `jp` meaning where one existed. Commit `a90702d`.
   - 4 stray-space ruby typos, 2 ruby-content corruptions, id=807's reading fix, id=898 + 14 more
-    dangling `id_text` instances the original 9-card scan missed (found by re-scanning the *whole*
+    dangling `id_text` instances the original 9-card scan missed (found by re-scanning the _whole_
     corpus instead of trusting a pre-made list), 2 desc corruptions (truncation on 1221, a
     duplicated sentence fragment on 1355), 2 more scope-mismatch cards (1399, 245). Commits
     `81ba664`, `5382133`.
@@ -348,7 +352,7 @@ Verify before trusting past this point — this line doesn't update itself.
   - **Found, characterized, deliberately NOT fixed — needs a real content-authoring pass, not a
     mechanical one:** a handful of exact-duplicate quiz questions across different files (same
     question, different distractor sets) — e.g. `wgl02#17`/`wgl07#19` (insulation thickness
-    tolerance), `wglv-jp-01#25`/`wglv-jp-03#5` (電柱), and one *within* `wglv-jp-02` itself (#14/#16,
+    tolerance), `wglv-jp-01#25`/`wglv-jp-03#5` (電柱), and one _within_ `wglv-jp-02` itself (#14/#16,
     both test "EF socket meaning" with overlapping distractors — #16 is this session's own earlier
     headword reconstruction, which surfaced the overlap rather than created it). Distinct from the
     documented jml/jmt/wt06 compilation pattern. Not fixed because a proper fix means authoring a
@@ -400,6 +404,7 @@ Verify before trusting past this point — this line doesn't update itself.
     `通信工事`/`地中配管` are standard compounds not source-verified beyond general usage —
     lower-confidence than the rest of this batch, worth a re-check if source material turns up.
     Commit `b026998`.
+
 - **Repo hygiene pass (owner-requested, session 29) — commit `4fcf60f`, full reasoning in the
   commit body.** Full-tree audit before touching anything, two findings:
   - Moved 3 files with zero references anywhere and import paths that don't resolve on this
@@ -416,7 +421,7 @@ Verify before trusting past this point — this line doesn't update itself.
     it, and P22 reconfirmed `sets/jac/` as deliberately out-of-scope as recently as session 28.
     Also documented in `docs/CARD_CONTENT_SPEC.md` §0C ("DQ Copies Orphaned (by design)") —
     correcting an overclaim in this section's first draft, which said the audit doc was the
-    *only* place this was tracked. Added to the merge-time reconciliation list below anyway,
+    _only_ place this was tracked. Added to the merge-time reconciliation list below anyway,
     since ACTIVE TASKS is what a new agent actually reads first, not the two reference docs.
   - `README.md`'s card/question counts were stale (1,443 / ~974, predating the 5-duplicate
     cleanup and the session-24 Doboku/Kenchiku removal) — corrected to 1,438 / ~1,075.
@@ -431,7 +436,7 @@ Verify before trusting past this point — this line doesn't update itself.
 - **P6 + P13 done:** the 226 cards on `vocab-lifeline`/`vocab-general`/`vocab-teori`/
   `vocab-core`/`vocab-exam` → `vocab-supplementary`. That source is now 495 (was 269). All 5
   deprecated values confirmed at 0 remaining across all 3 layers (split/mirror/cards.js).
-- **P16 done.** Same monolith-drift pattern as P17: `wayground-sets.js` held a *stale* copy of
+- **P16 done.** Same monolith-drift pattern as P17: `wayground-sets.js` held a _stale_ copy of
   this content under legacy ids `wg6/wg7/wg8/wg9/wg11` (not `wglv01-05` — different ids entirely,
   and at least one confirmed content diff vs. the split files, a duplicated ruby annotation on
   wg6/id=4 that was already fixed in wglv01.js but never propagated). Rebuilt from the (correct)
@@ -508,7 +513,7 @@ Verify before trusting past this point — this line doesn't update itself.
   the same file showed the correct pattern directly. Commit `8766231`.
 - **Split-file/mirror track drift, done (session 24).** Executed the fix diagnosed earlier this
   session (commit `e530fd7`) — all 316 mismatches reconciled, `node
-  scripts/audit-track-consistency.mjs` now reports 0/1438. String-aware brace-depth parser
+scripts/audit-track-consistency.mjs` now reports 0/1438. String-aware brace-depth parser
   moved each card's object verbatim (not reformatted) to the split-file folder its mirror +
   `category` already agreed on. 6 new files created (common/ch5.js, ch6.js, ch7.js;
   lifeline/ch2.js, ch3.js, ch4.js), 2 existing ones gained cards (common/vocab-jac.js,
@@ -534,7 +539,7 @@ Verify before trusting past this point — this line doesn't update itself.
     `docs/CARD_CONTENT_SPEC.md` updated to match; `docs/DATA_ARCH_AUDIT.md` left alone (it's a
     dated point-in-time snapshot, not a living doc — same reason `docs/archive/` stays
     untouched).
-  - Deliberately NOT touched: any card whose *content* mentions 土木/建築 as vocabulary (e.g.
+  - Deliberately NOT touched: any card whose _content_ mentions 土木/建築 as vocabulary (e.g.
     "which of these counts as doboku work" general-knowledge questions) — those are correctly
     common-track material a lifeline learner should still know, not a track-membership bug.
     Confirmed incidental before leaving them alone, not assumed.
@@ -559,7 +564,7 @@ Verify before trusting past this point — this line doesn't update itself.
     mentions are correctly-phrased historical notes, not stale refs) but missed this file. Also
     corrected `quiz-sets.js`'s description (no longer has its own working-copy folder — that
     folder's gone, it's a pure aggregator now: `QUIZ_SETS = [...WAYGROUND_SETS,
-    ...JAC_MOCKUP_SETS]`, confirmed by reading the file) and added `jac-official.js` to the tree
+...JAC_MOCKUP_SETS]`, confirmed by reading the file) and added `jac-official.js` to the tree
     (a pre-existing 4-line backward-compat shim, already documented in
     `_MAP.md`/`CHANGELOG.md`/`DATA_ARCH_AUDIT.md`, never listed here). Every file the corrected
     tree names now checked against the real filesystem — clean match either direction. No
@@ -578,7 +583,7 @@ Verify before trusting past this point — this line doesn't update itself.
     and corrected one own error pre-commit: a mis-keyed furigana reading (事業主 as じぎょうしゃ,
     should be じぎょうぬし per the card's own jp/furi fields — this project's existing data was
     right, the draft fix was wrong). Also flagged but did **not** touch: id=468 (`category:
-    "haikan"`, piping-technique content) is tagged `source: "jac-ch2"` despite ch2 being pure
+"haikan"`, piping-technique content) is tagged `source: "jac-ch2"` despite ch2 being pure
     law content with nothing resembling this topic — smells like a source mistag, not something
     P5-style completion can resolve; needs an owner look, not guessed at. verify-content.mjs +
     audit-track-consistency.mjs both re-run clean after (1438 unchanged, no adds/removes/moves).
@@ -741,10 +746,10 @@ one" list — check the gate before starting.
 
 ### ✅ Merge-time reconciliation list — DONE (completed 2026-08-18, see MERGE COMPLETE entry above)
 
-*(Kept collapsed/historical below — this was an open checklist through session 29, now fully
+_(Kept collapsed/historical below — this was an open checklist through session 29, now fully
 executed as part of the content-dq→main merge. Real scope during execution turned out larger
 than scoped here: furi had 33 real file references, not the 7 listed; Doboku/Kenchiku had 33,
-not the 3 mentioned elsewhere. Full detail: `CHANGELOG.md` [4.23.0], `_MAP.md` session log.)*
+not the 3 mentioned elsewhere. Full detail: `CHANGELOG.md` [4.23.0], `_MAP.md` session log.)_
 
 <details>
 <summary>Original list, as it stood through session 29 (click to expand)</summary>
@@ -754,19 +759,19 @@ content-dq may break `main` and that reconfiguring `main` is merge-time work. Ke
 because it's the reconciliation checklist someone will need at merge — it took a session to
 compile and shouldn't have to be rediscovered. `main` reads `card.furi` in at least these places:
 
-| Consumer on `main` | What breaks if `furi` is dropped |
-|---|---|
-| `src/tests/data.test.js:34` | Test literally named *"every card has furi field (Phase 1)"*, asserts `CARDS.filter(c => c.furi == null)` is empty. Dropping furi fails CI immediately. |
-| `src/modes/GlossaryMode.jsx:48,54` | Sorts the whole glossary by `furi` **and** groups entries by `furi[0]` for the A-Z jump nav. Without furi every card falls into a single `'?'` bucket — the mode's primary navigation stops working. |
-| `src/modes/ProductionMode.jsx:34` | `if (card.furi && trimmed === card.furi) return true` — the kana reading is an **accepted correct answer**. Dropping furi silently starts marking correct answers wrong. |
-| `src/modes/FlashcardMode/FlipCard.jsx:90,137` | Renders `furi` on the card back and passes it to `JpDisplay`. |
-| `src/modes/SearchMode.jsx:38,70,177` | Search haystack, result label, and the reading line under each hit. |
-| `src/modes/QuizMode.jsx:68` | `q.card.furi` feeds the quiz prompt's reading. |
-| `src/modes/ConfusionMode.jsx`, `src/components/Onboarding.jsx` | Also reference furi (not audited line-by-line — the six above are already disqualifying). |
+| Consumer on `main`                                             | What breaks if `furi` is dropped                                                                                                                                                                     |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/tests/data.test.js:34`                                    | Test literally named _"every card has furi field (Phase 1)"_, asserts `CARDS.filter(c => c.furi == null)` is empty. Dropping furi fails CI immediately.                                              |
+| `src/modes/GlossaryMode.jsx:48,54`                             | Sorts the whole glossary by `furi` **and** groups entries by `furi[0]` for the A-Z jump nav. Without furi every card falls into a single `'?'` bucket — the mode's primary navigation stops working. |
+| `src/modes/ProductionMode.jsx:34`                              | `if (card.furi && trimmed === card.furi) return true` — the kana reading is an **accepted correct answer**. Dropping furi silently starts marking correct answers wrong.                             |
+| `src/modes/FlashcardMode/FlipCard.jsx:90,137`                  | Renders `furi` on the card back and passes it to `JpDisplay`.                                                                                                                                        |
+| `src/modes/SearchMode.jsx:38,70,177`                           | Search haystack, result label, and the reading line under each hit.                                                                                                                                  |
+| `src/modes/QuizMode.jsx:68`                                    | `q.card.furi` feeds the quiz prompt's reading.                                                                                                                                                       |
+| `src/modes/ConfusionMode.jsx`, `src/components/Onboarding.jsx` | Also reference furi (not audited line-by-line — the six above are already disqualifying).                                                                                                            |
 
 At merge time each of those six needs `card.furi` swapped for `extractReading(c.jp)` off the
 `《》` ruby (that's what P1 exists to guarantee), and `data.test.js`'s "every card has furi field
-(Phase 1)" test needs deleting or rewriting — the test encodes the *old* invariant on purpose, so
+(Phase 1)" test needs deleting or rewriting — the test encodes the _old_ invariant on purpose, so
 it failing is the expected signal, not a regression. `SearchMode.jsx` already imports a
 `stripFuri`, so part of the helper may exist already.
 
@@ -782,28 +787,32 @@ already went through).
 </details>
 
 ### 🔵 Gated on an owner decision — ask before starting
-*(none right now — OD-5 resolved by investigation, see OPEN DECISIONS.)*
+
+_(none right now — OD-5 resolved by investigation, see OPEN DECISIONS.)_
 
 ### 🟡 Needs human/AGENT-12 judgment — not gated on owner, but not mechanical either
-*(empty — the whole session-28 bucket was resolved session 29. Full accounting in CURRENT STATE,
+
+_(empty — the whole session-28 bucket was resolved session 29. Full accounting in CURRENT STATE,
 commits `c641e8c` through `b026998`. Nothing currently sits in this bucket; the next 🟡-shaped
-item found during future work starts a fresh list here rather than reopening this one.)*
+item found during future work starts a fresh list here rather than reopening this one.)_
 
 ### 🟢 Unblocked — owner decision 2026-08-17 (session 28), ready to start
-**Owner clarified the whole branch's contract:** *"branch content-dq emang cuma buat maintain and
+
+**Owner clarified the whole branch's contract:** _"branch content-dq emang cuma buat maintain and
 fix all the quality of the content. I intended to do so even if it breaks main branch, because
-emang nanti pas merge ke main harus reconfig & readjust semuanya."* That settles the question the
+emang nanti pas merge ke main harus reconfig & readjust semuanya."_ That settles the question the
 P12 writeup below was stuck on. **Breaking `main` is expected and accepted here; reconciliation is
 merge-time work by design.** Don't re-litigate this — a future agent finding `card.furi` consumers
 on `main` should treat that as a merge-time TODO to record, not as a reason to stop.
 
-| Task | What | Status |
-|---|---|---|
-| P12 | Drop `furi` from all split files | ✅ **Complete (session 29).** All 1438 cards, all 3 layers. See CURRENT STATE for the pre-check that verified P1 first (found and fixed one real gap, id=162). |
+| Task    | What                                                                     | Status                                                                                                                                                                                                                        |
+| ------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P12     | Drop `furi` from all split files                                         | ✅ **Complete (session 29).** All 1438 cards, all 3 layers. See CURRENT STATE for the pre-check that verified P1 first (found and fixed one real gap, id=162).                                                                |
 | **P22** | Quiz set equalization + question/option quality uplift, all non-JAC sets | ✅ **Complete (session 28).** Owner-requested 2026-08-17, not a pre-existing item. Full writeup below — 1 residual flag spun to the 🟡 bucket at the time (wglv-jp-02 headword loss), resolved session 29, see CURRENT STATE. |
 
 **Board is otherwise clear of pre-identified tasks.** Both things the session-29 audit found are
 now fully resolved, same day, on explicit owner instruction to finish rather than stop:
+
 - **Quiz duplicates: fully resolved.** All 9 in-scope exact-duplicate pairs (excluding `sets/jac/`,
   which stays untouched) replaced with fresh, verified content. Full list + reasoning in CURRENT
   STATE. One near-miss (wglv-id-03#8/#29) turned out not to be a real duplicate — clarified
@@ -819,10 +828,10 @@ now fully resolved, same day, on explicit owner instruction to finish rather tha
   verified against live sources (all confirmed exact). Full list in CURRENT STATE. No fixes
   needed — this was a verification pass with a positive result, not a repair job.
 
-
 #### P22 — Quiz quality (NEW, owner-requested session 28) — ✅ COMPLETE
-Owner: *"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
-jumlah soal merata, kualitas soal & opsi jawabannya juga ditingkatkan."* This was **not** on the
+
+Owner: _"before merging with main, aku pengen semua quiz (selain yang resmi dari JAC) itu semuanya
+jumlah soal merata, kualitas soal & opsi jawabannya juga ditingkatkan."_ This was **not** on the
 task list in any form — P8a/P8b/P10/P11 each touched quiz sets, but all four were narrow
 defect-fixes on `wglv` only (ruby, empty `opts_id`, circular `exp`). Scope was all non-JAC sets —
 `wayground/**` + `jac-mockup/**`. `sets/jac/` (jac-teori 65q, jac-lifeline 30q) was **out of
@@ -830,16 +839,17 @@ scope** throughout and was never touched.
 
 **Final state: every one of the 5 original findings is resolved.**
 
-| Finding (original census) | Resolution |
-|---|---|
-| `ans:0` on 432/957 = 45%, concentrated in `wgl`/`wglv` | ✅ Fixed. All non-JAC questions now 4-option and rebalanced; see below. |
-| 657 questions at 3 options, 300 at 4 | ✅ Fixed. **0 questions left at 3 options** (was 419 after wglv's 236 were done first). |
-| Question counts uneven across sets in a family | ✅ Fixed. +23 authored (nothing deleted): `wt01` 19→20, `wglv-id-01/02/03`+`wglv-jp-03` 39→40 each, `wtv01` 22→20 + new `wtv02` (20, 2 moved + 18 authored). `jml`=20 vs `jmt`=30 confirmed correct-as-is by owner (mirrors Prometric exam structure) — **do not equalize this**. |
-| 288 duplicate-question groups (556q) | ✅ Investigated, **not a defect** — see below. |
-| 157 `exp` fields under 40 chars | ✅ Investigated, **mostly not a defect** — see below, but turned up a real separate bug. |
+| Finding (original census)                              | Resolution                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ans:0` on 432/957 = 45%, concentrated in `wgl`/`wglv` | ✅ Fixed. All non-JAC questions now 4-option and rebalanced; see below.                                                                                                                                                                                                           |
+| 657 questions at 3 options, 300 at 4                   | ✅ Fixed. **0 questions left at 3 options** (was 419 after wglv's 236 were done first).                                                                                                                                                                                           |
+| Question counts uneven across sets in a family         | ✅ Fixed. +23 authored (nothing deleted): `wt01` 19→20, `wglv-id-01/02/03`+`wglv-jp-03` 39→40 each, `wtv01` 22→20 + new `wtv02` (20, 2 moved + 18 authored). `jml`=20 vs `jmt`=30 confirmed correct-as-is by owner (mirrors Prometric exam structure) — **do not equalize this**. |
+| 288 duplicate-question groups (556q)                   | ✅ Investigated, **not a defect** — see below.                                                                                                                                                                                                                                    |
+| 157 `exp` fields under 40 chars                        | ✅ Investigated, **mostly not a defect** — see below, but turned up a real separate bug.                                                                                                                                                                                          |
 
 **Option-count + rebalance work, in the order it happened:**
-1. `wglv-*` (236q): 4th option *sampled* from the same-direction answer pool (each a real term
+
+1. `wglv-*` (236q): 4th option _sampled_ from the same-direction answer pool (each a real term
    already correct elsewhere, with 4 guards including a near-synonym block), rebalanced
    round-robin in the same pass as the append (rebalancing first would park every new option at
    index 3 and create a fresh tell — do this in one pass, always). 206/236 at position 0 →
@@ -862,7 +872,7 @@ scope** throughout and was never touched.
 3. Monolith `wayground-sets.js` fully regenerated (not hand-patched) from the split files after
    both chunks landed. Commit `8177064`.
 
-**Final corpus-wide check (980 questions, all of `wayground/**` + `jac-mockup/**`):** 0 at 3
+**Final corpus-wide check (980 questions, all of `wayground/**`+`jac-mockup/**`):** 0 at 3
 options (was 419), 0 duplicate options within any single question, 0 `opts`/`opts_id` length
 mismatches, 0 out-of-range `ans` indices, monolith↔split cross-check 0 mismatches. Answer-position
 distribution 240/255/252/233 (~24–26% each) — not perfectly flat only because `jac-mockup`'s own
@@ -872,7 +882,7 @@ every family P22 actually touched is individually at exact or near-exact even sp
 **Duplicate-question investigation — resolved as NOT a defect, nothing changed.** Traced which
 sets share which questions. `jml01–04` turned out to be near-1:1 compiled subsets of `wgl06–09`
 (18–20/20 questions each, already 4-opt before this session touched `wgl`), `jml05` mixes from
-`wgl02–04`, and every `jmt0N` draws 20–30 questions spread across *multiple* `wt0N` sets. `wt06`
+`wgl02–04`, and every `jmt0N` draws 20–30 questions spread across _multiple_ `wt0N` sets. `wt06`
 does the same thing one level down: 20 questions pulled from 6 different earlier `wt` sets (2 from
 wt01, 5 from wt02, 5 from wt03, 3 from wt05, 4 from wt04, 1 from wt08). This is a
 cumulative-review / mock-exam-compilation architecture — matches the owner's own confirmation that
@@ -900,6 +910,7 @@ than fixing 1 of 9 and silently leaving 8 broken. **Needs owner input or new sou
 does the owner remember/have a source for what these 9 terms should be?
 
 ### ✅ Resolved (session 28): monolith ↔ split-file set-id drift
+
 Was 21 of 27 sets disagreeing. Owner confirmed `main` and the live site have no users but himself,
 which removed the reason to be careful (set ids are plausibly the key for saved study progress, so
 renaming risked orphaning history). `src/data/wayground-sets.js` is now **regenerated wholesale
@@ -910,14 +921,15 @@ Set order preserved so app ordering doesn't shift. 0 id diffs, 0 track diffs, 28
 questions. **If you change a set, edit the split file and regenerate — don't touch the monolith.**
 
 ### ⛔ Do not retry: pooled distractor generation for concept questions
+
 Attempted and reverted in session 28. The wglv approach (sample a real term from the corpus answer
 pool) **does not transfer** to `wgl`/`wt`/`wtv01`. Vocabulary options are interchangeable members of
 one semantic space; concept options are claims written for one specific question, and no
 substitutable pool exists. Two rankings were tried and both failed:
 
-1. *Rank by similarity to the question stem* → surface matches with no meaning. A question
+1. _Rank by similarity to the question stem_ → surface matches with no meaning. A question
    containing 最大 got the option `最大値`.
-2. *Rank by shape match to the question's own options* (length + ending), plus quantity-class,
+2. _Rank by shape match to the question's own options_ (length + ending), plus quantity-class,
    stem-echo and near-duplicate filters → better, but an 11-sample audit spread across all 21 files
    still found ~8 bad: `15A以下` offered as a **millimetre** tolerance; `ノイズを増やす` as a property
    of a socket fitting; `ハンマー` in a fill-in-the-blank reading 「＿＿を塗って」; `ダムを造る` as a
@@ -949,21 +961,22 @@ is already fine; (3) cross-set duplicate triage (288); (4) thin-`exp` expansion 
 `jac-mockup` and `wtv02` need none of this. 419 questions still at 3 options.
 
 ### ✅ Resolved (session 28) — PDF intake tracker, kept for the record
+
 All 7 source PDFs arrived and were processed (owner sent them incrementally across sessions
 25-28, not as one batch — token cost was an explicit concern on their end, session 25). Nothing
 is waiting on external material anymore for P5 specifically. Table kept here as a record of what
 each chapter covers, in case a future task needs to know which PDF a given `source: "jac-chN"`
 card traces back to.
 
-| # | Chapter | JAC content covers | Status | Filename |
-|---|---------|---------------------|--------|----------|
-| 1 | teori ch1 | 日本の現場で大切にしていること (teamwork, 施工体制, CCUS, あいさつ, 朝礼) | ✅ received session 25 | `text1l.pdf` |
-| 2 | teori ch2 | 働く上で守らなければならない法令 (labor law + 15 other laws) | ✅ received session 25 | `text2.pdf` |
-| 3 | teori ch3 | 建設工事の種類と業務 (construction work types/trades — largest teori chapter, 183 cards) | ✅ received session 25 | `text3.pdf` |
-| 4 | teori ch4 | 現場で使われるあいさつ・用語・共同生活上の注意 (site terminology, shared-living notes) | ✅ received session 26 | `text4.pdf` |
-| 5 | praktik ch5 | Lifeline jitsugi (216 cards — largest single chapter) | ✅ received session 26 | `text5l.pdf` |
-| 6 | praktik ch6 | Lifeline jitsugi (133 cards — highest truncation rate of any chapter, 51%) | ✅ received session 27 | `text6l.pdf` |
-| 7 | praktik ch7 | 建設工事の安全 — death-accident stats, 7 accident-type defs, safety cycle, PPE, heatstroke, 12 ヒューマンエラー types (47 cards) | ✅ received session 28 | `text7l.pdf` |
+| #   | Chapter     | JAC content covers                                                                                                               | Status                 | Filename     |
+| --- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ------------ |
+| 1   | teori ch1   | 日本の現場で大切にしていること (teamwork, 施工体制, CCUS, あいさつ, 朝礼)                                                        | ✅ received session 25 | `text1l.pdf` |
+| 2   | teori ch2   | 働く上で守らなければならない法令 (labor law + 15 other laws)                                                                     | ✅ received session 25 | `text2.pdf`  |
+| 3   | teori ch3   | 建設工事の種類と業務 (construction work types/trades — largest teori chapter, 183 cards)                                         | ✅ received session 25 | `text3.pdf`  |
+| 4   | teori ch4   | 現場で使われるあいさつ・用語・共同生活上の注意 (site terminology, shared-living notes)                                           | ✅ received session 26 | `text4.pdf`  |
+| 5   | praktik ch5 | Lifeline jitsugi (216 cards — largest single chapter)                                                                            | ✅ received session 26 | `text5l.pdf` |
+| 6   | praktik ch6 | Lifeline jitsugi (133 cards — highest truncation rate of any chapter, 51%)                                                       | ✅ received session 27 | `text6l.pdf` |
+| 7   | praktik ch7 | 建設工事の安全 — death-accident stats, 7 accident-type defs, safety cycle, PPE, heatstroke, 12 ヒューマンエラー types (47 cards) | ✅ received session 28 | `text7l.pdf` |
 
 **Reusable methodology, if a future task needs to cross-reference corpus text against a source
 PDF again** (not just P5 — this generalizes): filter by the relevant `source` value, grep the
@@ -990,26 +1003,26 @@ files: mostly `common/ch3.js`, but also `common/vocab-supplementary.js` and — 
 `lifeline/ch3.js`, `lifeline/ch5.js`, `lifeline/ch6.js` (content originally drawn from ch3's
 text, filed under lifeline-track vocab because that's what the term is actually used for in
 practice). ch4/ch5 (session 26) and ch6 (session 27) held the same pattern each time — 7-8 files,
-not 1, including `vocab-supplementary.js` and at least one lifeline/*.js file that doesn't match
+not 1, including `vocab-supplementary.js` and at least one lifeline/\*.js file that doesn't match
 the chapter number. Grep the whole `src/data/cards/` tree for each id before assuming its
 split-file location, don't stop at wherever the majority happen to be. Same goes for the source/
 mirror: both `cards-common.js` and `cards-lifeline.js` may need the same fix.
 
-*(P21 and PDF Viewer Mode themselves no longer exist — dropped session 24 along with the
+_(P21 and PDF Viewer Mode themselves no longer exist — dropped session 24 along with the
 Doboku/Kenchiku tracks. See the scope-reduction entry in CURRENT STATE — unrelated to this
-tracker, noted here only because this section used to carry that note.)*
+tracker, noted here only because this section used to carry that note.)_
 
 ---
 
 ## OPEN DECISIONS
 
-| ID | Blocks | Question | Status |
-|----|--------|----------|--------|
-| OD-1 | P6, P13 | Source labels: retain legacy vs merge into `vocab-supplementary`? | ✅ Answered 2026-07-11: merge |
-| OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time? | ✅ Answered 2026-07-11: now |
-| OD-3 | P17 | jac-mockup rename: now or at merge time? | ✅ Answered 2026-07-11: now — P17 done |
-| OD-4 | P10 | wglv02/03 hint: update to an ID-language clue, or keep as-is? | ✅ Resolved via execution 2026-07-15 — P10 done (both halves), see CURRENT STATE. "Update" was the reasoned answer, not a coin flip; what had stopped session 23 was the composition method, not this decision. |
-| OD-5 | P12 | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components** — that finding still stands. **What it means for P12 has since changed**, though: a *separate* owner decision the same session ("branch content-dq emang cuma buat maintain and fix all the quality... I intended to do so even if it breaks main") made breaking `main` acceptable regardless of this finding, so the 6 consumers are now a merge-time reconciliation checklist, not a blocker. P12 itself is unblocked but still unstarted — see ACTIVE TASKS' 📋 list for the consumer checklist and the P12 row for status. *(Session 29 update: P12 is now done — see CURRENT STATE. Leaving the rest of this entry as originally written rather than rewriting the history.)* |
+| ID   | Blocks             | Question                                                                                       | Status                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---- | ------------------ | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OD-1 | P6, P13            | Source labels: retain legacy vs merge into `vocab-supplementary`?                              | ✅ Answered 2026-07-11: merge                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| OD-2 | P16, P8b, P10, P11 | wglv split: do it now or at merge time?                                                        | ✅ Answered 2026-07-11: now                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| OD-3 | P17                | jac-mockup rename: now or at merge time?                                                       | ✅ Answered 2026-07-11: now — P17 done                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| OD-4 | P10                | wglv02/03 hint: update to an ID-language clue, or keep as-is?                                  | ✅ Resolved via execution 2026-07-15 — P10 done (both halves), see CURRENT STATE. "Update" was the reasoned answer, not a coin flip; what had stopped session 23 was the composition method, not this decision.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| OD-5 | P12                | Separate SSW Flashcards repo: does it consume `card.furi`? (affects whether it's safe to drop) | ✅ **Resolved 2026-08-17 (session 28) — by investigation, not by owner.** The question turned out to be aimed at the wrong codebase. Checked the two archived snapshot repos (`Nugget-Nihongo-SSW-Konstruksi-v87`, `SSW-KONSTRUKSI-v85`): neither reads `card.furi` — their only `.furi` reads are `item.furi` from the separate `DANGER_PAIRS` structure, plus one `c.furi` in SearchMode. But **`main` of this repo reads `card.furi` in at least 6 mode components** — that finding still stands. **What it means for P12 has since changed**, though: a _separate_ owner decision the same session ("branch content-dq emang cuma buat maintain and fix all the quality... I intended to do so even if it breaks main") made breaking `main` acceptable regardless of this finding, so the 6 consumers are now a merge-time reconciliation checklist, not a blocker. P12 itself is unblocked but still unstarted — see ACTIVE TASKS' 📋 list for the consumer checklist and the P12 row for status. _(Session 29 update: P12 is now done — see CURRENT STATE. Leaving the rest of this entry as originally written rather than rewriting the history.)_ |
 
 Full rationale for each: `docs/CARD_CONTENT_SPEC.md` §12.
 

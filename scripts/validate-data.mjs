@@ -8,7 +8,7 @@ import { ANGKA_KUNCI } from '../src/data/angka-kunci.js';
 
 let errors = 0;
 let warnings = 0;
-const cardIds = new Set(CARDS.map(c => c.id));
+const cardIds = new Set(CARDS.map((c) => c.id));
 
 // 1. Duplicate card IDs
 const seen = new Set();
@@ -34,7 +34,9 @@ for (const q of [...JAC_TEORI, ...JAC_LIFELINE]) {
 for (const q of [...JAC_TEORI, ...JAC_LIFELINE]) {
   if (q.photoDesc !== undefined && q.photoDesc !== null) {
     if (typeof q.photoDesc !== 'string' || q.photoDesc.trim().length < 10) {
-      console.warn(`⚠️  photoDesc present but too short/empty to substitute for the missing image: ${q.id}`);
+      console.warn(
+        `⚠️  photoDesc present but too short/empty to substitute for the missing image: ${q.id}`
+      );
       warnings++;
     }
   }
@@ -49,7 +51,7 @@ for (const a of ANGKA_KUNCI) {
 }
 
 // 5. Quiz answer index validity (ans < opts.length) — spot check CARDS type:quiz
-const quizCards = CARDS.filter(c => c.type === 'quiz' && c.ans !== undefined && c.opts);
+const quizCards = CARDS.filter((c) => c.type === 'quiz' && c.ans !== undefined && c.opts);
 for (const c of quizCards) {
   if (c.ans >= c.opts.length) {
     console.error(`❌ Card ${c.id}: ans=${c.ans} >= opts.length=${c.opts.length}`);
@@ -61,4 +63,6 @@ if (errors > 0) {
   console.error(`\n${errors} error(s), ${warnings} warning(s). Fix before build.`);
   process.exit(1);
 }
-console.log(`✅ Data validation passed. ${warnings > 0 ? warnings + ' warning(s).' : ''} Cards: ${CARDS.length}`);
+console.log(
+  `✅ Data validation passed. ${warnings > 0 ? warnings + ' warning(s).' : ''} Cards: ${CARDS.length}`
+);

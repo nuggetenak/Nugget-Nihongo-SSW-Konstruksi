@@ -29,7 +29,7 @@ export default function GlossaryMode({ onExit, track }) {
   const sectionRefs = useRef({});
   const observerRef = useRef(null);
 
-  const trackCatKeys = useMemo(() => track ? new Set(getCatsForTrack(track)) : null, [track]);
+  const trackCatKeys = useMemo(() => (track ? new Set(getCatsForTrack(track)) : null), [track]);
   const visibleCats = useMemo(() => {
     const base = CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang');
     if (!trackCatKeys || showAllTracks) return base;
@@ -39,13 +39,16 @@ export default function GlossaryMode({ onExit, track }) {
   const sorted = useMemo(() => {
     let items;
     if (filterCat === 'all') {
-      items = trackCatKeys && !showAllTracks
-        ? CARDS.filter((c) => trackCatKeys.has(c.category))
-        : CARDS;
+      items =
+        trackCatKeys && !showAllTracks ? CARDS.filter((c) => trackCatKeys.has(c.category)) : CARDS;
     } else {
       items = CARDS.filter((c) => c.category === filterCat);
     }
-    return [...items].sort((a, b) => (extractReadings(a.jp) || '').toLowerCase().localeCompare((extractReadings(b.jp) || '').toLowerCase(), 'ja'));
+    return [...items].sort((a, b) =>
+      (extractReadings(a.jp) || '')
+        .toLowerCase()
+        .localeCompare((extractReadings(b.jp) || '').toLowerCase(), 'ja')
+    );
   }, [filterCat, trackCatKeys, showAllTracks]);
 
   const groups = useMemo(() => {
@@ -58,43 +61,68 @@ export default function GlossaryMode({ onExit, track }) {
     });
     // Sort: hiragana/katakana first (by unicode order), then others alphabetically
     const entries = Object.entries(map);
-    const kana = entries.filter(([k]) => /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(k));
-    const other = entries.filter(([k]) => !/^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(k)).sort(([a], [b]) => a.localeCompare(b));
+    const kana = entries.filter(([k]) =>
+      /^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(k)
+    );
+    const other = entries
+      .filter(([k]) => !/^[\u3041-\u3096\u30A1-\u30FA\u30FC\uFF66-\uFF9F]/.test(k))
+      .sort(([a], [b]) => a.localeCompare(b));
     return [...kana, ...other];
   }, [sorted]);
 
   const letters = useMemo(() => groups.map(([l]) => l), [groups]);
 
-  useEffect(() => { setExpanded(null); if (letters.length > 0) setActiveLetter(letters[0]); }, [filterCat, letters]);
+  useEffect(() => {
+    setExpanded(null);
+    if (letters.length > 0) setActiveLetter(letters[0]);
+  }, [filterCat, letters]);
 
   // IntersectionObserver — logic unchanged, data-letter attribute pattern kept
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible.length > 0) {
           const letter = visible[0].target.dataset.letter;
           setActiveLetter(letter);
           const navEl = navRef.current;
           const pill = navEl?.querySelector(`[data-nav="${letter}"]`);
-          if (pill && navEl) navEl.scrollTo({ left: pill.offsetLeft - navEl.offsetWidth / 2 + pill.offsetWidth / 2, behavior: 'smooth' });
+          if (pill && navEl)
+            navEl.scrollTo({
+              left: pill.offsetLeft - navEl.offsetWidth / 2 + pill.offsetWidth / 2,
+              behavior: 'smooth',
+            });
         }
       },
       { threshold: 0.05, rootMargin: '-10% 0px -75% 0px' }
     );
-    groups.forEach(([letter]) => { const el = sectionRefs.current[letter]; if (el) observerRef.current.observe(el); });
+    groups.forEach(([letter]) => {
+      const el = sectionRefs.current[letter];
+      if (el) observerRef.current.observe(el);
+    });
     return () => observerRef.current?.disconnect();
   }, [groups]);
 
   function jumpTo(letter) {
     const el = sectionRefs.current[letter];
-    if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 52, behavior: 'smooth' }); setActiveLetter(letter); }
+    if (el) {
+      window.scrollTo({
+        top: el.getBoundingClientRect().top + window.scrollY - 52,
+        behavior: 'smooth',
+      });
+      setActiveLetter(letter);
+    }
   }
 
   // Toggle select mode.
   function toggleSelectMode() {
-    setSelectMode((v) => { if (v) setSelected(new Set()); return !v; });
+    setSelectMode((v) => {
+      if (v) setSelected(new Set());
+      return !v;
+    });
     setExportDone(false);
   }
 
@@ -103,7 +131,8 @@ export default function GlossaryMode({ onExit, track }) {
     e.stopPropagation();
     setSelected((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id); else next.add(id);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   }
@@ -139,12 +168,20 @@ export default function GlossaryMode({ onExit, track }) {
     setSelected(new Set(sorted.map((c) => c.id)));
   }
 
-  const catMap = useMemo(() => { const m = {}; CATEGORIES.forEach((c) => { m[c.key] = c; }); return m; }, []);
+  const catMap = useMemo(() => {
+    const m = {};
+    CATEGORIES.forEach((c) => {
+      m[c.key] = c;
+    });
+    return m;
+  }, []);
 
   return (
     <div className={G.outerWrap}>
       <div className={G.header}>
-        <button className={S.btnBack} style={{ padding: 0 }} onClick={onExit}>← Kembali</button>
+        <button className={S.btnBack} style={{ padding: 0 }} onClick={onExit}>
+          ← Kembali
+        </button>
         <div className={`${S.row} ${G.titleRow}`}>
           <h2 className={G.title}>📖 Glosari</h2>
           <span className={`${S.pill} ${G.countPill}`}>{sorted.length} istilah</span>
@@ -152,25 +189,44 @@ export default function GlossaryMode({ onExit, track }) {
         <div className={G.metaRow}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <p className={G.metaText}>{groups.length} huruf · diurutkan あいうえお</p>
-            <button onClick={() => setCompactView((v) => !v)}
-              style={{ fontFamily: 'inherit', fontSize: 11, padding: '2px 8px', borderRadius: 99, cursor: 'pointer',
+            <button
+              onClick={() => setCompactView((v) => !v)}
+              style={{
+                fontFamily: 'inherit',
+                fontSize: 11,
+                padding: '2px 8px',
+                borderRadius: 99,
+                cursor: 'pointer',
                 background: compactView ? T.surface : 'rgba(251,191,36,0.15)',
                 border: `1px solid ${compactView ? T.border : 'rgba(251,191,36,0.35)'}`,
-                color: compactView ? T.textMuted : T.gold }}>
+                color: compactView ? T.textMuted : T.gold,
+              }}
+            >
               {compactView ? '≡ Kompak' : '⊞ Lebar'}
             </button>
             {/* Select mode toggle */}
-            <button onClick={toggleSelectMode}
-              style={{ fontFamily: 'inherit', fontSize: 11, padding: '2px 8px', borderRadius: 99, cursor: 'pointer',
+            <button
+              onClick={toggleSelectMode}
+              style={{
+                fontFamily: 'inherit',
+                fontSize: 11,
+                padding: '2px 8px',
+                borderRadius: 99,
+                cursor: 'pointer',
                 background: selectMode ? 'rgba(99,102,241,0.15)' : T.surface,
                 border: `1px solid ${selectMode ? 'rgba(99,102,241,0.45)' : T.border}`,
-                color: selectMode ? '#818cf8' : T.textMuted }}>
+                color: selectMode ? '#818cf8' : T.textMuted,
+              }}
+            >
               {selectMode ? `✕ Batal (${selected.size})` : '☑ Pilih'}
             </button>
           </div>
           {trackCatKeys && (
             <button
-              onClick={() => { setShowAllTracks((v) => !v); setFilterCat('all'); }}
+              onClick={() => {
+                setShowAllTracks((v) => !v);
+                setFilterCat('all');
+              }}
               className={G.trackToggle}
               style={{
                 background: showAllTracks ? 'rgba(251,191,36,0.15)' : T.surface,
@@ -185,7 +241,10 @@ export default function GlossaryMode({ onExit, track }) {
         <div className={G.filterRow}>
           {[{ key: 'all', label: 'Semua', emoji: '📋' }, ...visibleCats].map((c) => {
             const active = filterCat === c.key;
-            const count = c.key === 'all' ? sorted.length : CARDS.filter((card) => card.category === c.key).length;
+            const count =
+              c.key === 'all'
+                ? sorted.length
+                : CARDS.filter((card) => card.category === c.key).length;
             return (
               <button
                 key={c.key}
@@ -231,7 +290,13 @@ export default function GlossaryMode({ onExit, track }) {
       <div className={G.contentWrap}>
         {groups.map(([letter, items]) => (
           /* data-letter attribute kept for IntersectionObserver */
-          <div key={letter} data-letter={letter} ref={(el) => { sectionRefs.current[letter] = el; }}>
+          <div
+            key={letter}
+            data-letter={letter}
+            ref={(el) => {
+              sectionRefs.current[letter] = el;
+            }}
+          >
             <div className={G.letterHeader}>
               <span className={G.letterLabel}>{letter}</span>
               <span className={G.letterCount}>{items.length}</span>
@@ -244,15 +309,32 @@ export default function GlossaryMode({ onExit, track }) {
               return (
                 <div
                   key={c.id}
-                  onClick={selectMode ? (e) => toggleCard(c.id, e) : () => setExpanded(isOpen ? null : c.id)}
+                  onClick={
+                    selectMode
+                      ? (e) => toggleCard(c.id, e)
+                      : () => setExpanded(isOpen ? null : c.id)
+                  }
                   className={G.termRow}
-                  style={{ background: isSelected ? 'rgba(99,102,241,0.12)' : isOpen ? T.surface : 'transparent',
-                    borderLeft: isSelected ? '2px solid #818cf8' : '2px solid transparent' }}
+                  style={{
+                    background: isSelected
+                      ? 'rgba(99,102,241,0.12)'
+                      : isOpen
+                        ? T.surface
+                        : 'transparent',
+                    borderLeft: isSelected ? '2px solid #818cf8' : '2px solid transparent',
+                  }}
                 >
                   <div className={G.termMain}>
                     <div className={G.termLeft}>
                       {selectMode && (
-                        <span style={{ fontSize: 16, lineHeight: 1, marginRight: 4, color: isSelected ? '#818cf8' : T.border }}>
+                        <span
+                          style={{
+                            fontSize: 16,
+                            lineHeight: 1,
+                            marginRight: 4,
+                            color: isSelected ? '#818cf8' : T.border,
+                          }}
+                        >
                           {isSelected ? '☑' : '☐'}
                         </span>
                       )}
@@ -269,20 +351,48 @@ export default function GlossaryMode({ onExit, track }) {
                           {/* Audio per entry */}
                           {audioEnabled && (
                             <button
-                              onClick={(e) => { e.stopPropagation(); speakJP(stripFuri(c.jp)); }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                speakJP(stripFuri(c.jp));
+                              }}
                               aria-label="Putar audio"
-                              style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: '0 4px', lineHeight: 1, color: T.textMuted }}
-                            >🔊</button>
+                              style={{
+                                fontFamily: 'inherit',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontSize: 14,
+                                padding: '0 4px',
+                                lineHeight: 1,
+                                color: T.textMuted,
+                              }}
+                            >
+                              🔊
+                            </button>
                           )}
                         </div>
                       )}
                       {!reading && audioEnabled && (
                         <div className={G.termFuriRow}>
                           <button
-                            onClick={(e) => { e.stopPropagation(); speakJP(stripFuri(c.jp)); }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              speakJP(stripFuri(c.jp));
+                            }}
                             aria-label="Putar audio"
-                            style={{ fontFamily: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: 14, padding: '0 4px', lineHeight: 1, color: T.textMuted }}
-                          >🔊</button>
+                            style={{
+                              fontFamily: 'inherit',
+                              background: 'none',
+                              border: 'none',
+                              cursor: 'pointer',
+                              fontSize: 14,
+                              padding: '0 4px',
+                              lineHeight: 1,
+                              color: T.textMuted,
+                            }}
+                          >
+                            🔊
+                          </button>
                         </div>
                       )}
                       <p className={G.termDesc}>{c.desc}</p>
@@ -302,14 +412,35 @@ export default function GlossaryMode({ onExit, track }) {
 
       {/* Export mini deck footer */}
       {selectMode && (
-        <div style={{
-          position: 'fixed', bottom: 56, left: 0, right: 0, zIndex: 40,
-          background: T.bg, borderTop: `1px solid ${T.border}`,
-          padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8,
-        }}>
-          <button onClick={selectAll}
-            style={{ fontFamily: 'inherit', fontSize: 12, padding: '6px 12px', borderRadius: 8, cursor: 'pointer',
-              background: T.surface, border: `1px solid ${T.border}`, color: T.textMuted, flexShrink: 0 }}>
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 56,
+            left: 0,
+            right: 0,
+            zIndex: 40,
+            background: T.bg,
+            borderTop: `1px solid ${T.border}`,
+            padding: '10px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+          }}
+        >
+          <button
+            onClick={selectAll}
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 12,
+              padding: '6px 12px',
+              borderRadius: 8,
+              cursor: 'pointer',
+              background: T.surface,
+              border: `1px solid ${T.border}`,
+              color: T.textMuted,
+              flexShrink: 0,
+            }}
+          >
             Semua ({sorted.length})
           </button>
           <div style={{ flex: 1, fontSize: 12, color: T.textMuted }}>
@@ -318,11 +449,23 @@ export default function GlossaryMode({ onExit, track }) {
           <button
             onClick={exportMiniDeck}
             disabled={selected.size === 0}
-            style={{ fontFamily: 'inherit', fontSize: 12, padding: '6px 14px', borderRadius: 8, cursor: selected.size === 0 ? 'not-allowed' : 'pointer',
-              background: exportDone ? 'rgba(34,197,94,0.15)' : selected.size > 0 ? 'rgba(99,102,241,0.15)' : T.surface,
+            style={{
+              fontFamily: 'inherit',
+              fontSize: 12,
+              padding: '6px 14px',
+              borderRadius: 8,
+              cursor: selected.size === 0 ? 'not-allowed' : 'pointer',
+              background: exportDone
+                ? 'rgba(34,197,94,0.15)'
+                : selected.size > 0
+                  ? 'rgba(99,102,241,0.15)'
+                  : T.surface,
               border: `1px solid ${exportDone ? 'rgba(34,197,94,0.45)' : selected.size > 0 ? 'rgba(99,102,241,0.45)' : T.border}`,
               color: exportDone ? '#4ade80' : selected.size > 0 ? '#818cf8' : T.border,
-              fontWeight: 600, flexShrink: 0 }}>
+              fontWeight: 600,
+              flexShrink: 0,
+            }}
+          >
             {exportDone ? '✓ Diunduh' : '⬇ Ekspor Anki'}
           </button>
         </div>

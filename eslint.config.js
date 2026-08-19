@@ -34,13 +34,19 @@ export default [
       'react-hooks/purity': 'off',
 
       // Quality
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' }],
+      'no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrors: 'none' },
+      ],
       'no-console': 'warn',
       'no-debugger': 'error',
       'prefer-const': 'warn',
       'no-var': 'error',
-      'no-empty': ['error', { allowEmptyCatch: true }],    // allow empty catch blocks
-      'no-irregular-whitespace': ['error', { skipStrings: true, skipComments: true, skipTemplates: true }],
+      'no-empty': ['error', { allowEmptyCatch: true }], // allow empty catch blocks
+      'no-irregular-whitespace': [
+        'error',
+        { skipStrings: true, skipComments: true, skipTemplates: true },
+      ],
     },
   },
 

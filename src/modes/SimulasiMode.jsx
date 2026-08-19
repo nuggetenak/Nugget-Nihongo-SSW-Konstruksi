@@ -17,14 +17,53 @@ import S from './modes.module.css';
 import SM from './SimulasiMode.module.css';
 
 const PASS_PCT = 65;
-const RED_BTN = { fontFamily: 'inherit', borderRadius: T.r.md, border: 'none', background: 'linear-gradient(135deg,#7f1d1d,#dc2626)', color: '#fff', cursor: 'pointer', fontWeight: 700, fontSize: 13 };
+const RED_BTN = {
+  fontFamily: 'inherit',
+  borderRadius: T.r.md,
+  border: 'none',
+  background: 'linear-gradient(135deg,#7f1d1d,#dc2626)',
+  color: '#fff',
+  cursor: 'pointer',
+  fontWeight: 700,
+  fontSize: 13,
+};
 const PRESETS = [
-  { key: 'quick', emoji: '⚡', label: 'Latihan Cepat', sub: '15 soal · 15 menit', count: 15, time: 15 * 60 },
-  { key: 'half',  emoji: '📝', label: 'Setengah Ujian', sub: '25 soal · 25 menit', count: 25, time: 25 * 60 },
-  { key: 'full',  emoji: '🎯', label: 'Ujian Penuh',    sub: 'semua soal · 45 menit', count: 0, time: 45 * 60 },
+  {
+    key: 'quick',
+    emoji: '⚡',
+    label: 'Latihan Cepat',
+    sub: '15 soal · 15 menit',
+    count: 15,
+    time: 15 * 60,
+  },
+  {
+    key: 'half',
+    emoji: '📝',
+    label: 'Setengah Ujian',
+    sub: '25 soal · 25 menit',
+    count: 25,
+    time: 25 * 60,
+  },
+  {
+    key: 'full',
+    emoji: '🎯',
+    label: 'Ujian Penuh',
+    sub: 'semua soal · 45 menit',
+    count: 0,
+    time: 45 * 60,
+  },
 ];
-const INSTRUCTIONS = ['📋 Pilih satu jawaban yang paling tepat', '⏱ Timer berjalan — jangan sampai habis', '🚫 Soal otomatis lanjut setelah kamu jawab', `✅ ${PASS_PCT}% ke atas = LULUS`];
-function fmtTime(sec) { const m = Math.floor(sec / 60); const s = sec % 60; return `${m}:${String(s).padStart(2, '0')}`; }
+const INSTRUCTIONS = [
+  '📋 Pilih satu jawaban yang paling tepat',
+  '⏱ Timer berjalan — jangan sampai habis',
+  '🚫 Soal otomatis lanjut setelah kamu jawab',
+  `✅ ${PASS_PCT}% ke atas = LULUS`,
+];
+function fmtTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
 
 // Normalize JAC and Wayground+CSV questions to a common shape
 function buildPool() {
@@ -77,7 +116,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     const items = config.count > 0 ? pool.slice(0, config.count) : pool;
     return items.map((q) => {
       const shuffledOpts = shuffle(q.options.map((text, origIdx) => ({ text, origIdx })));
-      return { jp: q.jp, id_text: q.id_text, opts: shuffledOpts, correctIdx: shuffledOpts.findIndex((o) => o.origIdx === q.answer), explanation: q.explanation, hasPhoto: q.hasPhoto, photoDesc: q.photoDesc, _source: q._source, _setLabel: q._setLabel };
+      return {
+        jp: q.jp,
+        id_text: q.id_text,
+        opts: shuffledOpts,
+        correctIdx: shuffledOpts.findIndex((o) => o.origIdx === q.answer),
+        explanation: q.explanation,
+        hasPhoto: q.hasPhoto,
+        photoDesc: q.photoDesc,
+        _source: q._source,
+        _setLabel: q._setLabel,
+      };
     });
   }, [phase, seed, config.count]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -86,20 +135,40 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
 
   // Auto-pause on tab/app hide
   useEffect(() => {
-    const handleVisibility = () => { if (document.hidden && phase === 'playing') setPaused(true); };
+    const handleVisibility = () => {
+      if (document.hidden && phase === 'playing') setPaused(true);
+    };
     document.addEventListener('visibilitychange', handleVisibility);
     return () => document.removeEventListener('visibilitychange', handleVisibility);
   }, [phase]);
 
   useEffect(() => {
-    if (phase !== 'playing' || paused) { clearInterval(timerRef.current); return; }
-    timerRef.current = setInterval(() => { setTimeLeft((t) => { if (t <= 1) { clearInterval(timerRef.current); setPhase('result'); return 0; } return t - 1; }); }, 1000);
+    if (phase !== 'playing' || paused) {
+      clearInterval(timerRef.current);
+      return;
+    }
+    timerRef.current = setInterval(() => {
+      setTimeLeft((t) => {
+        if (t <= 1) {
+          clearInterval(timerRef.current);
+          setPhase('result');
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
     return () => clearInterval(timerRef.current);
   }, [phase, seed, paused]);
 
   useEffect(() => {
     if (selected === null || phase !== 'playing') return;
-    const t = setTimeout(() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }, 1500);
+    const t = setTimeout(() => {
+      if (isLast) setPhase('result');
+      else {
+        setQIdx((i) => i + 1);
+        setSelected(null);
+      }
+    }, 1500);
     return () => clearTimeout(t);
   }, [selected, phase, isLast]);
 
@@ -110,14 +179,38 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleStart = useCallback(() => { setSeed((s) => s + 1); setQIdx(0); setSelected(null); setResults([]); setTimeLeft(config.time); setPaused(false); setPhase('playing'); }, [config.time]);
+  const handleStart = useCallback(() => {
+    setSeed((s) => s + 1);
+    setQIdx(0);
+    setSelected(null);
+    setResults([]);
+    setTimeLeft(config.time);
+    setPaused(false);
+    setPhase('playing');
+  }, [config.time]);
 
-  const handleSelect = useCallback((optArrayIdx) => {
-    if (selected !== null || phase !== 'playing' || paused || !q) return;
-    setSelected(optArrayIdx);
-    const isCorrect = optArrayIdx === q.correctIdx;
-    setResults((r) => [...r, { isCorrect, jp: q.jp, id_text: q.id_text, opts: q.opts, correctIdx: q.correctIdx, userIdx: optArrayIdx, explanation: q.explanation, _source: q._source, _setLabel: q._setLabel }]);
-  }, [selected, phase, paused, q]);
+  const handleSelect = useCallback(
+    (optArrayIdx) => {
+      if (selected !== null || phase !== 'playing' || paused || !q) return;
+      setSelected(optArrayIdx);
+      const isCorrect = optArrayIdx === q.correctIdx;
+      setResults((r) => [
+        ...r,
+        {
+          isCorrect,
+          jp: q.jp,
+          id_text: q.id_text,
+          opts: q.opts,
+          correctIdx: q.correctIdx,
+          userIdx: optArrayIdx,
+          explanation: q.explanation,
+          _source: q._source,
+          _setLabel: q._setLabel,
+        },
+      ]);
+    },
+    [selected, phase, paused, q]
+  );
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
 
@@ -125,14 +218,20 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   if (phase === 'start') {
     return (
       <div className={S.page}>
-        <button className={S.btnBack} onClick={onExit}>← Kembali</button>
+        <button className={S.btnBack} onClick={onExit}>
+          ← Kembali
+        </button>
         <div className={SM.startHero}>
           <div className={SM.startHeroEmoji}>🎯</div>
           <h2 className={`${S.pageTitle} ${SM.startTitle}`}>Simulasi Ujian</h2>
           <p className={S.pageSub}>Format ujian SSW Konstruksi dengan timer</p>
         </div>
         <div className={`${S.card} ${SM.instructionsCard}`}>
-          {INSTRUCTIONS.map((inst, i) => <div key={i} className={SM.instructionLine}>{inst}</div>)}
+          {INSTRUCTIONS.map((inst, i) => (
+            <div key={i} className={SM.instructionLine}>
+              {inst}
+            </div>
+          ))}
         </div>
         <div className={S.sectionLabel}>Mode Simulasi</div>
         <div className={`${S.list} ${SM.presetList}`}>
@@ -142,7 +241,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               className={S.btnItem}
               onClick={() => setPreset(p.key)}
               style={{
-                display: 'flex', alignItems: 'center', gap: 12,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
                 background: preset === p.key ? 'rgba(239,68,68,0.10)' : T.surface,
                 border: `1px solid ${preset === p.key ? 'rgba(239,68,68,0.4)' : T.border}`,
                 color: preset === p.key ? '#ef4444' : T.text,
@@ -151,12 +252,28 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               <span className={SM.presetEmoji}>{p.emoji}</span>
               <div>
                 <div className={SM.presetLabel}>{p.label}</div>
-                <div className={SM.presetSub} style={{ color: preset === p.key ? 'rgba(239,68,68,0.7)' : T.textDim }}>{p.sub}</div>
+                <div
+                  className={SM.presetSub}
+                  style={{ color: preset === p.key ? 'rgba(239,68,68,0.7)' : T.textDim }}
+                >
+                  {p.sub}
+                </div>
               </div>
             </button>
           ))}
         </div>
-        <button style={{ ...RED_BTN, width: '100%', padding: '14px', fontSize: 15, boxShadow: '0 4px 16px rgba(220,38,38,0.3)' }} onClick={handleStart}>Mulai Simulasi 🎯</button>
+        <button
+          style={{
+            ...RED_BTN,
+            width: '100%',
+            padding: '14px',
+            fontSize: 15,
+            boxShadow: '0 4px 16px rgba(220,38,38,0.3)',
+          }}
+          onClick={handleStart}
+        >
+          Mulai Simulasi 🎯
+        </button>
       </div>
     );
   }
@@ -178,51 +295,96 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           }}
         >
           <div className={SM.lulusIcon}>{lulus ? '✅' : '❌'}</div>
-          <div className={SM.lulusStatus} style={{ color: lulus ? T.correct : T.wrong }}>{lulus ? 'LULUS' : 'BELUM LULUS'}</div>
-          <div className={SM.lulusPct} style={{ color: lulus ? T.correct : T.wrong }}>{pct}%</div>
-          <div className={SM.lulusSub}>{correct} / {total} benar · batas lulus {PASS_PCT}%</div>
+          <div className={SM.lulusStatus} style={{ color: lulus ? T.correct : T.wrong }}>
+            {lulus ? 'LULUS' : 'BELUM LULUS'}
+          </div>
+          <div className={SM.lulusPct} style={{ color: lulus ? T.correct : T.wrong }}>
+            {pct}%
+          </div>
+          <div className={SM.lulusSub}>
+            {correct} / {total} benar · batas lulus {PASS_PCT}%
+          </div>
           <div className={SM.progressTrack}>
-            <div style={{ height: '100%', width: `${pct}%`, background: lulus ? 'linear-gradient(90deg,#16a34a80,#16a34a)' : 'linear-gradient(90deg,#dc262680,#dc2626)', borderRadius: 99, transition: 'width 0.8s ease' }} />
+            <div
+              style={{
+                height: '100%',
+                width: `${pct}%`,
+                background: lulus
+                  ? 'linear-gradient(90deg,#16a34a80,#16a34a)'
+                  : 'linear-gradient(90deg,#dc262680,#dc2626)',
+                borderRadius: 99,
+                transition: 'width 0.8s ease',
+              }}
+            />
           </div>
         </div>
         <div className={`${S.row} ${SM.resultActions}`}>
-          <button style={{ ...RED_BTN, flex: 1, padding: '12px' }} onClick={handleStart}>🔄 Ulang</button>
+          <button style={{ ...RED_BTN, flex: 1, padding: '12px' }} onClick={handleStart}>
+            🔄 Ulang
+          </button>
           {wrongList.length > 0 && onRetryWrong && (
-            <button style={{ ...RED_BTN, flex: 1, padding: '12px', background: 'linear-gradient(135deg,#1e3a5f,#2563eb)' }} onClick={() => onRetryWrong(wrongList.map((_, i) => i))}>
+            <button
+              style={{
+                ...RED_BTN,
+                flex: 1,
+                padding: '12px',
+                background: 'linear-gradient(135deg,#1e3a5f,#2563eb)',
+              }}
+              onClick={() => onRetryWrong(wrongList.map((_, i) => i))}
+            >
               📚 Latih {wrongList.length} Salah
             </button>
           )}
-          <button className={`${S.btnSecondary} ${SM.kembaliBtn}`} onClick={onExit}>← Kembali</button>
+          <button className={`${S.btnSecondary} ${SM.kembaliBtn}`} onClick={onExit}>
+            ← Kembali
+          </button>
         </div>
 
         {/* Breakdown per source */}
-        {results.length > 0 && (() => {
-          const bySource = {};
-          results.forEach((r) => {
-            const key = r._setLabel || r._source || 'Lainnya';
-            if (!bySource[key]) bySource[key] = { correct: 0, total: 0 };
-            bySource[key].total++;
-            if (r.isCorrect) bySource[key].correct++;
-          });
-          const entries = Object.entries(bySource).sort((a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total);
-          return (
-            <>
-              <div className={S.sectionLabel}>Breakdown per Set</div>
-              <div className={S.list} style={{ gap: 6 }}>
-                {entries.map(([label, stat]) => {
-                  const pct = Math.round((stat.correct / stat.total) * 100);
-                  const color = pct >= 75 ? T.correct : pct >= 50 ? T.gold : T.wrong;
-                  return (
-                    <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: T.surface, borderRadius: T.r.md, border: `1px solid ${T.border}`, fontSize: 12 }}>
-                      <span style={{ color: T.textMuted, flex: 1 }}>{label}</span>
-                      <span style={{ color, fontWeight: 700, minWidth: 60, textAlign: 'right' }}>{pct}% ({stat.correct}/{stat.total})</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </>
-          );
-        })()}
+        {results.length > 0 &&
+          (() => {
+            const bySource = {};
+            results.forEach((r) => {
+              const key = r._setLabel || r._source || 'Lainnya';
+              if (!bySource[key]) bySource[key] = { correct: 0, total: 0 };
+              bySource[key].total++;
+              if (r.isCorrect) bySource[key].correct++;
+            });
+            const entries = Object.entries(bySource).sort(
+              (a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total
+            );
+            return (
+              <>
+                <div className={S.sectionLabel}>Breakdown per Set</div>
+                <div className={S.list} style={{ gap: 6 }}>
+                  {entries.map(([label, stat]) => {
+                    const pct = Math.round((stat.correct / stat.total) * 100);
+                    const color = pct >= 75 ? T.correct : pct >= 50 ? T.gold : T.wrong;
+                    return (
+                      <div
+                        key={label}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '8px 12px',
+                          background: T.surface,
+                          borderRadius: T.r.md,
+                          border: `1px solid ${T.border}`,
+                          fontSize: 12,
+                        }}
+                      >
+                        <span style={{ color: T.textMuted, flex: 1 }}>{label}</span>
+                        <span style={{ color, fontWeight: 700, minWidth: 60, textAlign: 'right' }}>
+                          {pct}% ({stat.correct}/{stat.total})
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            );
+          })()}
         {wrongList.length > 0 && (
           <>
             <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
@@ -231,12 +393,21 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 const correctOpt = r.opts[r.correctIdx];
                 const userOpt = r.opts[r.userIdx];
                 return (
-                  <div key={i} className={SM.reviewItem} style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}>
+                  <div
+                    key={i}
+                    className={SM.reviewItem}
+                    style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
+                  >
                     <div className={SM.reviewJp}>{stripFuri(r.jp)}</div>
                     <div className={SM.reviewIdText}>{r.id_text}</div>
                     <div className={SM.reviewWrong}>✗ {stripFuri(userOpt?.text || '—')}</div>
                     <div className={SM.reviewCorrect}>✓ {stripFuri(correctOpt?.text || '—')}</div>
-                    {r.explanation && <div className={SM.reviewExpl}>💡 {r.explanation.slice(0, 160)}{r.explanation.length > 160 ? '…' : ''}</div>}
+                    {r.explanation && (
+                      <div className={SM.reviewExpl}>
+                        💡 {r.explanation.slice(0, 160)}
+                        {r.explanation.length > 160 ? '…' : ''}
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -252,12 +423,21 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   return (
     <div className={`${S.pageScroll} ${SM.quizPage}`}>
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>✕ Keluar</button>
+        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
+          ✕ Keluar
+        </button>
         <div className={S.row} style={{ gap: 10 }}>
           {/* Pause button */}
           <button
             onClick={() => setPaused((p) => !p)}
-            style={{ ...RED_BTN, padding: '6px 12px', fontSize: 14, background: paused ? 'linear-gradient(135deg,#1e3a5f,#2563eb)' : 'linear-gradient(135deg,#7f1d1d,#dc2626)' }}
+            style={{
+              ...RED_BTN,
+              padding: '6px 12px',
+              fontSize: 14,
+              background: paused
+                ? 'linear-gradient(135deg,#1e3a5f,#2563eb)'
+                : 'linear-gradient(135deg,#7f1d1d,#dc2626)',
+            }}
             aria-label={paused ? 'Lanjutkan' : 'Jeda'}
           >
             {paused ? '▶' : '⏸'}
@@ -270,19 +450,31 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               animation: isUrgent ? 'pulse 0.8s ease infinite' : 'none',
             }}
           >
-            <div className={SM.timerLabel} style={{ color: isUrgent ? T.wrong : T.textDim }}>WAKTU</div>
-            <div className={SM.timerValue} style={{ color: isUrgent ? T.wrong : T.text }}>{fmtTime(timeLeft)}</div>
+            <div className={SM.timerLabel} style={{ color: isUrgent ? T.wrong : T.textDim }}>
+              WAKTU
+            </div>
+            <div className={SM.timerValue} style={{ color: isUrgent ? T.wrong : T.text }}>
+              {fmtTime(timeLeft)}
+            </div>
             {/* Pace hint — soal/menit needed to finish on time */}
-            {timeLeft > 0 && (() => {
-              const remaining = questions.length - qIdx - (selected !== null ? 1 : 0);
-              const minsLeft = timeLeft / 60;
-              const needed = minsLeft > 0 ? (remaining / minsLeft).toFixed(1) : '—';
-              return (
-                <div style={{ fontSize: 9, color: isUrgent ? T.wrong : T.textFaint, marginTop: 2, letterSpacing: 0.2 }}>
-                  {needed} soal/mnt
-                </div>
-              );
-            })()}
+            {timeLeft > 0 &&
+              (() => {
+                const remaining = questions.length - qIdx - (selected !== null ? 1 : 0);
+                const minsLeft = timeLeft / 60;
+                const needed = minsLeft > 0 ? (remaining / minsLeft).toFixed(1) : '—';
+                return (
+                  <div
+                    style={{
+                      fontSize: 9,
+                      color: isUrgent ? T.wrong : T.textFaint,
+                      marginTop: 2,
+                      letterSpacing: 0.2,
+                    }}
+                  >
+                    {needed} soal/mnt
+                  </div>
+                );
+              })()}
           </div>
           <div className={SM.scoreMini}>
             <div className={SM.scoreCorrect}>✓ {results.filter((r) => r.isCorrect).length}</div>
@@ -290,17 +482,35 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           </div>
         </div>
       </div>
-      <ProgressBar current={qIdx + (selected !== null ? 1 : 0)} total={questions.length} color="#ef4444" />
-      <div className={S.counter}>Soal {qIdx + 1} / {questions.length}</div>
+      <ProgressBar
+        current={qIdx + (selected !== null ? 1 : 0)}
+        total={questions.length}
+        color="#ef4444"
+      />
+      <div className={S.counter}>
+        Soal {qIdx + 1} / {questions.length}
+      </div>
 
       <div className={`${S.cardLg} ${SM.questionCard}`}>
         <div className={SM.questionJp}>{q.jp}</div>
         {q.id_text && <div className={SM.questionSub}>{q.id_text}</div>}
-        {q.hasPhoto && <div className={SM.photoHint}>📷 {q.photoDesc || 'Soal asli pakai foto'}</div>}
+        {q.hasPhoto && (
+          <div className={SM.photoHint}>📷 {q.photoDesc || 'Soal asli pakai foto'}</div>
+        )}
       </div>
 
       <div className={S.list}>
-        {q.opts.map((opt, i) => <OptionButton key={i} idx={i} text={opt.text} subText={null} selected={selected} isCorrect={i === q.correctIdx} onSelect={handleSelect} />)}
+        {q.opts.map((opt, i) => (
+          <OptionButton
+            key={i}
+            idx={i}
+            text={opt.text}
+            subText={null}
+            selected={selected}
+            isCorrect={i === q.correctIdx}
+            onSelect={handleSelect}
+          />
+        ))}
       </div>
 
       {selected !== null && q.explanation && (
@@ -308,7 +518,22 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       )}
 
       {selected !== null && (
-        <button style={{ ...RED_BTN, width: '100%', marginTop: 12, padding: '13px', animation: 'fadeIn 0.15s ease' }} onClick={() => { if (isLast) setPhase('result'); else { setQIdx((i) => i + 1); setSelected(null); } }}>
+        <button
+          style={{
+            ...RED_BTN,
+            width: '100%',
+            marginTop: 12,
+            padding: '13px',
+            animation: 'fadeIn 0.15s ease',
+          }}
+          onClick={() => {
+            if (isLast) setPhase('result');
+            else {
+              setQIdx((i) => i + 1);
+              setSelected(null);
+            }
+          }}
+        >
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
       )}
@@ -317,7 +542,18 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       {paused && (
         <div
           onClick={() => setPaused(false)}
-          style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(0,0,0,0.72)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12, cursor: 'pointer' }}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 50,
+            background: 'rgba(0,0,0,0.72)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            gap: 12,
+            cursor: 'pointer',
+          }}
         >
           <div style={{ fontSize: 48 }}>⏸</div>
           <div style={{ color: '#fff', fontSize: 20, fontWeight: 700 }}>Dijeda</div>
