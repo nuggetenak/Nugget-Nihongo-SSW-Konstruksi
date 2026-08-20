@@ -13,31 +13,22 @@
 > (session-by-session).
 >
 > **This file now holds only live state.** CURRENT STATE's top entry is what's actually true
-> today. When it's superseded, it moves to `docs/archive/` rather than accumulating here — add
-> a row to `_MAP.md` § Agent Session Log pointing at it, then delete it from this file.
+> today. When it's superseded, it moves to `docs/archive/` rather than accumulating here — see
+> `docs/AGENT_WORKFLOW.md` §3 for the retirement steps.
 
 ---
 
-**This is the relay baton.** One file, always edited in place — no more `_v17`/`_v18` filenames,
-and no letting finished entries pile up either (see banner above: completed work moves to
-`docs/archive/`, not left in CURRENT STATE). Owner uploads this file to a new agent chat, agent
-works, agent overwrites this file with the updated state, owner downloads it and hands it to the
-next agent. Repeat.
+**Read `docs/AGENT_WORKFLOW.md` first, always** — clone/read/verify order, token handling,
+branch discipline, commit conventions, close-out steps, all of it. Not repeated here; this file
+is state, that file is process, and keeping the same thing written in two places is exactly the
+failure this repo's docs have already hit once (session 23: `SESSION_PROMPT.md` +
+`DATA_QUALITY_HANDOFF_vNN.md` + `PROGRESS.md`'s checklist drifted out of sync with each other and
+with reality, all archived, replaced by one file each for state and process).
 
-This file replaced `SESSION_PROMPT.md` + the versioned `DATA_QUALITY_HANDOFF_vNN.md` +
-`PROGRESS.md`'s active-checklist role on 2026-07-11 (session 23) — all three archived to
-`docs/archive/`, superseded by this file. Reason: those three drifted out of sync with each
-other and with the actual repo state (by 10 commits / 2 sessions, at the point this was written)
-because keeping N documents in sync by hand, across many separate agent sessions with no shared
-memory, doesn't hold up. One file is easier to keep honest than four.
-
-`_MAP.md` (architecture + detailed session-by-session log), `docs/CARD_CONTENT_SPEC.md`
-(schema/rules/taxonomy), `docs/DESIGN_SPEC.md` (palette/type/icon system), `docs/LAYOUT_SPEC.md`
-(breakpoints/responsive patterns), `docs/COMPONENT_SPEC.md` (code conventions), and
-`docs/PWA_RELEASE_SPEC.md` (offline architecture/deploy checklist) are **not** folded in here —
-they're stable reference material that doesn't change every session, and they live in the repo,
-not in what gets uploaded. Read them from the clone. Don't duplicate their content into this
-file; link to them.
+`_MAP.md`, `docs/CARD_CONTENT_SPEC.md`, `docs/DESIGN_SPEC.md`, `docs/LAYOUT_SPEC.md`,
+`docs/COMPONENT_SPEC.md`, `docs/PWA_RELEASE_SPEC.md` — stable reference material, full list with
+what each covers in `docs/AGENT_WORKFLOW.md` §4. Read them from the clone; don't duplicate their
+content into this file.
 
 ---
 
@@ -181,6 +172,9 @@ content-dq-specific and archived with it. Still worth reading if a future sessio
 
 ## REFERENCE (stable — read from the repo, not reproduced here)
 
+- `docs/AGENT_WORKFLOW.md` — **read this first, every session.** Process, not state: clone/read
+  order, token handling, branch discipline, commit conventions, close-out steps, the minimal
+  kickoff template
 - `docs/CARD_CONTENT_SPEC.md` — schema, ruby rules, taxonomy, full task rationale, Open Decisions detail
 - `docs/DESIGN_SPEC.md` — palette, typography, icon rendering technique, hazard-rail motif
 - `docs/LAYOUT_SPEC.md` — breakpoints, `--max-w`/`--overlay-max-w` tokens, the auto-fit/minmax
