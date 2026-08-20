@@ -15,10 +15,11 @@
     "lint:fix": "eslint src --fix",
     "format": "prettier --write src --ignore-path .prettierignore",
     "format:check": "prettier --check src --ignore-path .prettierignore",
-    "validate": "npm run lint && npm run test && npm run build",
+    "validate": "npm run lint && npm run test && npm run audit:css-vars && npm run build",
     "audit:baseline": "npm run build",
     "audit:integrity": "node scripts/audit-integrity.mjs",
-    "audit:full": "npm run audit:integrity && npm run build",
+    "audit:css-vars": "node scripts/audit-css-vars.mjs",
+    "audit:full": "npm run audit:integrity && npm run audit:css-vars && npm run build",
     "prebuild": "node scripts/merge-cards.mjs && node scripts/validate-data.mjs"
   },
   "dependencies": {

@@ -639,9 +639,9 @@ function TypeQuizView({ onBack, onSessionEnd }) {
             ? isCorrect
               ? 'rgba(34,197,94,0.1)'
               : 'rgba(239,68,68,0.1)'
-            : 'var(--color-surface)',
-          border: `1.5px solid ${checked ? (isCorrect ? '#22c55e' : '#ef4444') : 'var(--color-border)'}`,
-          color: 'var(--color-text)',
+            : T.surface,
+          border: `1.5px solid ${checked ? (isCorrect ? '#22c55e' : '#ef4444') : T.border}`,
+          color: T.text,
           width: '100%',
           boxSizing: 'border-box',
           marginBottom: 8,

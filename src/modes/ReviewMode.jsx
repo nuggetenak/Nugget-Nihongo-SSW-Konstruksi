@@ -254,7 +254,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
             title="Lewati (S)"
             style={{
               fontSize: 11,
-              color: 'var(--c-text-dim)',
+              color: T.textDim,
               background: 'none',
               border: 'none',
               cursor: 'pointer',

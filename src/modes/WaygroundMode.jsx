@@ -246,10 +246,10 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
             }}
           >
             <div>
-              <div style={{ fontSize: 11, color: 'var(--c-text-dim)', fontWeight: 700 }}>
+              <div style={{ fontSize: 11, color: T.textDim, fontWeight: 700 }}>
                 TOTAL SEMUA SET
               </div>
-              <div style={{ fontSize: 11, color: 'var(--c-text-muted)', marginTop: 2 }}>
+              <div style={{ fontSize: 11, color: T.textMuted, marginTop: 2 }}>
                 {scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ}{' '}
                 benar
               </div>
@@ -258,12 +258,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
               style={{
                 fontSize: 24,
                 fontWeight: 800,
-                color:
-                  overallPct >= 70
-                    ? 'var(--c-correct)'
-                    : overallPct >= 50
-                      ? 'var(--c-amber)'
-                      : 'var(--c-wrong)',
+                color: overallPct >= 70 ? T.correct : overallPct >= 50 ? T.amber : T.wrong,
               }}
             >
               {overallPct}%
@@ -306,7 +301,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
             >
               {g.label}
             </span>
-            {g.desc && <span style={{ fontSize: 10, color: 'var(--c-text-dim)' }}>— {g.desc}</span>}
+            {g.desc && <span style={{ fontSize: 10, color: T.textDim }}>— {g.desc}</span>}
             <div
               style={{
                 flex: 1,
@@ -318,9 +313,9 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
               className={S.pill}
               style={{
                 fontSize: 10,
-                color: 'var(--c-text-dim)',
-                background: 'var(--c-surface)',
-                border: `1px solid var(--c-border)`,
+                color: T.textDim,
+                background: T.surface,
+                border: `1px solid ${T.border}`,
                 fontWeight: 700,
               }}
             >
