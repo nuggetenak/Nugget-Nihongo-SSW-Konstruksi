@@ -111,8 +111,101 @@
   color: var(--ssw-textFaint);
 }
 
+/* ── Mode sections (item 13) ── */
+.modeSections {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--ssw-border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* This column scrolls internally once the full registry is open — .side
+     itself is height:100dvh with no overflow, and letting 21 modes push the
+     tabs or .foot out of view would be worse than a scrollbar here. */
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.sectionGroup {
+  border-radius: var(--r-md);
+}
+
+.sectionSummary {
+  padding: 8px 11px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  color: var(--ssw-textDim);
+  cursor: pointer;
+  border-radius: var(--r-md);
+  list-style: revert;
+}
+
+.sectionSummary:hover {
+  background: var(--ssw-surfaceHover);
+  color: var(--ssw-text);
+}
+
+.modeList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px 0 6px 14px;
+}
+
+.modeItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px;
+  border: none;
+  background: none;
+  border-radius: var(--r-sm);
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--ssw-textDim);
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  transition:
+    background var(--t-base) var(--ease-smooth),
+    color var(--t-base) var(--ease-smooth);
+}
+
+.modeItem:hover {
+  background: var(--ssw-surfaceHover);
+  color: var(--ssw-text);
+}
+
+.modeItem[data-active='true'] {
+  background: var(--ssw-surfaceActive);
+  color: var(--ssw-amberDark);
+  font-weight: var(--fw-bold);
+}
+
+/* Same hazard-rail device as .item[data-active] marks the active tab, scaled
+   to this nesting level — the stripe sits at this item's own edge rather
+   than bleeding out to .side's outer edge the way the top-level one does. */
+.modeItem[data-active='true']::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: var(--hazard);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .item {
+    transition: none;
+  }
+
+  .modeItem {
     transition: none;
   }
 }

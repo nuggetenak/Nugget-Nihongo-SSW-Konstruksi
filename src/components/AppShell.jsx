@@ -30,6 +30,8 @@ export default function AppShell({
   dueBadge = 0,
   chrome = 'tabs',
   width = 'default',
+  mode,
+  onSelectMode,
   children,
 }) {
   const showBottomNav = chrome === 'tabs';
@@ -55,7 +57,13 @@ export default function AppShell({
       <OfflineBanner />
 
       <div className={s.sideSlot}>
-        <SideNav active={tab} onChange={onTabChange} dueBadge={dueBadge} />
+        <SideNav
+          active={tab}
+          onChange={onTabChange}
+          dueBadge={dueBadge}
+          mode={mode}
+          onSelectMode={onSelectMode}
+        />
       </div>
 
       <div className={s.contentCol}>

@@ -82,6 +82,8 @@ export default function App() {
           dueBadge={srs.dueCount}
           chrome="mode"
           width={MODE_META[mode]?.width ?? 'reading'}
+          mode={mode}
+          onSelectMode={goMode}
         >
           <ModeRouter />
         </AppShell>
@@ -98,7 +100,7 @@ export default function App() {
 
   return (
     <main id="main-content" tabIndex={-1}>
-      <AppShell tab={tab} onTabChange={goTab} dueBadge={srs.dueCount}>
+      <AppShell tab={tab} onTabChange={goTab} dueBadge={srs.dueCount} onSelectMode={goMode}>
         {tab === 'home' && (
           <ErrorBoundary fallback={<TabError tab="Beranda" />}>
             <Dashboard
