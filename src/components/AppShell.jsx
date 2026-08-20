@@ -21,6 +21,7 @@
 import { useEffect } from 'react';
 import BottomNav from './BottomNav.jsx';
 import SideNav from './SideNav.jsx';
+import OfflineBanner from './OfflineBanner.jsx';
 import s from './AppShell.module.css';
 
 export default function AppShell({
@@ -51,6 +52,8 @@ export default function AppShell({
 
   return (
     <div className={s.shell} data-chrome={chrome}>
+      <OfflineBanner />
+
       <div className={s.sideSlot}>
         <SideNav active={tab} onChange={onTabChange} dueBadge={dueBadge} />
       </div>
