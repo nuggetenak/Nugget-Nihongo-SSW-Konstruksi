@@ -81,7 +81,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
                 VS
               </div>
             )}
-            <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
+            <span lang="ja" style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
         {_ReadingRow(reading, showReadingRow)}
@@ -101,7 +101,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
         {parts.map((p, i) => (
           <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
             {i > 0 && <div className={S.hr} />}
-            <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
+            <span lang="ja" style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
         {_ReadingRow(reading, showReadingRow)}
@@ -116,9 +116,9 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
     const sub = clean.slice(colonIdx + 1).trim();
     return wrapInteractive(
       <div className={S.jpWrap}>
-        <span style={jpStyle(jpFontSize(title))}>{renderJPWithRuby(title, ruby)}</span>
+        <span lang="ja" style={jpStyle(jpFontSize(title))}>{renderJPWithRuby(title, ruby)}</span>
         <div className={`${S.hr} ${S.hrHover}`} />
-        <span style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>
+        <span lang="ja" style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>
           {renderJPWithRuby(sub, ruby)}
         </span>
         {_ReadingRow(reading, showReadingRow)}
@@ -138,7 +138,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
         {parts.map((p, i) => (
           <div key={i} className={`${S.jpWrap} ${S.jpWrapTight}`}>
             {i > 0 && <span className={S.arrowDown}>↓</span>}
-            <span style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
+            <span lang="ja" style={jpStyle(fs)}>{renderJPWithRuby(p, ruby)}</span>
           </div>
         ))}
         {_ReadingRow(reading, showReadingRow)}
@@ -153,14 +153,16 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
   ) : showFuri && reading ? (
     <ruby className={S.ruby}>
       {clean}
+      <rp>(</rp>
       <rt>{reading}</rt>
+      <rp>)</rp>
     </ruby>
   ) : (
     clean
   );
   return wrapInteractive(
     <div style={{ textAlign: 'center' }}>
-      <span style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{plainContent}</span>
+      <span lang="ja" style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{plainContent}</span>
       {!hasRubyInText && !(showFuri && reading) && _ReadingRow(reading, showReadingRow)}
     </div>
   );
@@ -188,7 +190,9 @@ export function renderJPWithRuby(text, rubyFragments) {
     nodes.push(
       <ruby key={`rb-${key++}`} className={S.ruby}>
         {frag.base}
+        <rp>(</rp>
         <rt>{frag.reading}</rt>
+        <rp>)</rp>
       </ruby>
     );
     // Advance past base AND strip the 《reading》 marker that follows it.
@@ -206,7 +210,7 @@ function _ReadingRow(reading, show = true) {
   return (
     <div className={S.readingRow}>
       {reading && (
-        <div className={S.furi} style={{ fontFamily: T.fontJP }}>
+        <div className={S.furi} lang="ja" style={{ fontFamily: T.fontJP }}>
           {reading}
         </div>
       )}

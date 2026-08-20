@@ -46,7 +46,7 @@ export function FlatCardFallback({ card }) {
         justifyContent: 'center',
       }}
     >
-      <div style={{ fontSize: 28, fontWeight: 700 }}>{card?.jp}</div>
+      <div lang="ja" style={{ fontSize: 28, fontWeight: 700 }}>{card?.jp}</div>
       <div style={{ marginTop: 8, opacity: 0.7, fontSize: 15 }}>{card?.id_text}</div>
     </div>
   );

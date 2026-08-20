@@ -69,6 +69,10 @@
   line-height: 1;
 }
 
+.ruby rp {
+  display: none;
+}
+
 .ruby rt {
   font-size: 0.44em;
   color: var(--ssw-amber);
