@@ -146,6 +146,18 @@
   padding: 13px 0;
   border-bottom: 1px solid var(--ssw-border);
   transition: opacity 0.15s;
+  /* Row[onClick] renders as <button>; these reset UA button chrome so it's
+     visually identical to the <div> it used to always be. Harmless on the
+     non-clickable <div> variant, which doesn't get these defaults anyway. */
+  width: 100%;
+  margin: 0;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
 }
 .row[data-clickable='true'] {
   cursor: pointer;

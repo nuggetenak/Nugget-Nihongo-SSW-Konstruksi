@@ -121,14 +121,21 @@ export default function SumberMode({ onExit, onNavigate }) {
         )}
         <div className={S.list} style={{ gap: 6 }}>
           {srcCards.map((c) => (
-            <div
+            <button
+              type="button"
               key={c.id}
               onClick={() => setExpanded(expanded === c.id ? null : c.id)}
+              aria-expanded={expanded === c.id}
               style={{
+                width: '100%',
+                margin: 0,
+                font: 'inherit',
+                textAlign: 'left',
                 padding: '10px 12px',
                 borderRadius: T.r.md,
                 cursor: 'pointer',
                 background: T.surface,
+                border: 'none',
                 borderLeft: `3px solid ${color}`,
               }}
             >
@@ -148,7 +155,7 @@ export default function SumberMode({ onExit, onNavigate }) {
                   <div style={{ marginTop: 4 }}>{c.desc}</div>
                 </div>
               )}
-            </div>
+            </button>
           ))}
         </div>
       </div>

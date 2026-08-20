@@ -82,6 +82,8 @@
 
 .catBadgeFront {
   composes: catBadge;
+  border: none;
+  font: inherit;
 }
 
 .catBadgeBack {

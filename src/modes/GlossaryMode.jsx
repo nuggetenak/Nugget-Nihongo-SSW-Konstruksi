@@ -314,6 +314,15 @@ export default function GlossaryMode({ onExit, track }) {
                       ? (e) => toggleCard(c.id, e)
                       : () => setExpanded(isOpen ? null : c.id)
                   }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key !== 'Enter' && e.key !== ' ') return;
+                    e.preventDefault();
+                    if (selectMode) toggleCard(c.id, e);
+                    else setExpanded(isOpen ? null : c.id);
+                  }}
+                  aria-expanded={!selectMode ? isOpen : undefined}
                   className={G.termRow}
                   style={{
                     background: isSelected

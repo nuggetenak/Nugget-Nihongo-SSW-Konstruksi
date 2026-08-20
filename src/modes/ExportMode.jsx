@@ -384,9 +384,11 @@ export default function ExportMode({ onExit }) {
           </div>
         </div>
       ) : (
-        <div
+        <button
+          type="button"
           style={{
             width: '100%',
+            margin: 0,
             padding: '14px',
             marginBottom: 20,
             fontFamily: 'inherit',
@@ -403,7 +405,7 @@ export default function ExportMode({ onExit }) {
           onClick={() => fileRef.current?.click()}
         >
           {importing ? '⏳ Memuat...' : '📥 Impor dari File'}
-        </div>
+        </button>
       )}
       <input
         ref={fileRef}

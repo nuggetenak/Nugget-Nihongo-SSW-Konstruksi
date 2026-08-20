@@ -57,6 +57,13 @@ export default function FlipCard({
     return () => ro.disconnect();
   }, [card.id, showDesc]);
 
+  // Category badge is independently clickable when onCatFilter exists (filters
+  // by category, distinct from the outer card-flip action) -- a real <button>
+  // in that case; a plain <span> when it's just a label. Valid to nest a real
+  // button here since its ancestor (the front face) is role="button" on a
+  // <div>, not an actual <button> element.
+  const BadgeTag = onCatFilter ? 'button' : 'span';
+
   return (
     <div
       className={`fc-scene ${FC.scene}`}
@@ -81,10 +88,22 @@ export default function FlipCard({
             haptic.flip();
             onFlip();
           }}
+          role="button"
+          tabIndex={flipped ? -1 : 0}
+          aria-label={flipped ? undefined : 'Balik kartu'}
+          onKeyDown={(e) => {
+            if (flipped) return;
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            haptic.flip();
+            onFlip();
+          }}
           style={{ border: `1.5px solid ${borderColor}`, pointerEvents: flipped ? 'none' : 'auto' }}
         >
           {cat && (
-            <span
+            <BadgeTag
+              type={onCatFilter ? 'button' : undefined}
+              tabIndex={onCatFilter && !flipped ? 0 : -1}
               className={S.catBadgeFront}
               style={{
                 background: `${catColor}22`,
@@ -102,7 +121,7 @@ export default function FlipCard({
               title={onCatFilter ? `Filter: ${cat.label}` : undefined}
             >
               {cat.emoji} {cat.label}
-            </span>
+            </BadgeTag>
           )}
           <div className={S.cardNum}>#{safeIdx + 1}</div>
 

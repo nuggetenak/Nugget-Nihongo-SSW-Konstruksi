@@ -19,8 +19,14 @@ const TRACK_LABELS = {
 };
 
 function Row({ label, value, sub, onClick, danger = false }) {
+  const Tag = onClick ? 'button' : 'div';
   return (
-    <div className={s.row} data-clickable={!!onClick} onClick={onClick}>
+    <Tag
+      type={onClick ? 'button' : undefined}
+      className={s.row}
+      data-clickable={!!onClick}
+      onClick={onClick}
+    >
       <div>
         <div className={s.rowLabel} data-danger={danger}>
           {label}
@@ -33,7 +39,7 @@ function Row({ label, value, sub, onClick, danger = false }) {
           {onClick && <span className={s.rowChevron}>›</span>}
         </div>
       )}
-    </div>
+    </Tag>
   );
 }
 

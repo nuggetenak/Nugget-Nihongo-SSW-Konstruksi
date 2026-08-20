@@ -540,12 +540,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
 
       {/* Pause overlay */}
       {paused && (
-        <div
+        <button
+          type="button"
           onClick={() => setPaused(false)}
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 'var(--z-overlay)',
+            width: '100%',
+            margin: 0,
+            border: 'none',
+            font: 'inherit',
             background: 'rgba(0,0,0,0.72)',
             display: 'flex',
             alignItems: 'center',
@@ -558,7 +563,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           <div style={{ fontSize: 48 }}>⏸</div>
           <div style={{ color: '#fff', fontSize: 20, fontWeight: 700 }}>Dijeda</div>
           <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14 }}>Ketuk untuk lanjut</div>
-        </div>
+        </button>
       )}
     </div>
   );
