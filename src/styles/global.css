@@ -259,13 +259,6 @@ body {
   border-radius: var(--r-pill);
 }
 
-/* ── Focus visible ── */
-:focus-visible {
-  outline: 2px solid var(--ssw-amber);
-  outline-offset: 2px;
-  border-radius: var(--r-sm);
-}
-
 /* ── Mission Complete Overlay (C.3) ── */
 @keyframes missionFadeOut {
   0%,
@@ -367,27 +360,6 @@ body {
 }
 
 /* FE-03 token audit: all items resolved — see CHANGELOG */
-
-/* ── Reduced motion ── */
-@media (prefers-reduced-motion: reduce) {
-  .hero[data-path='celebrate'],
-  .streakEmoji,
-  .cta::after,
-  .heroEmoji[data-path='celebrate'],
-  .heroEmoji[data-path='encourage'],
-  .heroEmoji[data-path='neutral'],
-  .heroPct[data-shake='true'],
-  .stars::before,
-  .stars::after,
-  .container,
-  .streakHero,
-  .countdownCard,
-  .btnNext,
-  .badge {
-    animation: none;
-    transition: none;
-  }
-}
 
 /* ── Responsive width ──────────────────────────────────────────────────────
    The ONLY place the content column's width changes. Defined here so no
