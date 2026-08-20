@@ -28,7 +28,7 @@ export default function Skeleton({
 // ── Flashcard front skeleton ────────────────────────────────────────────────
 Skeleton.Card = function SkeletonCard() {
   return (
-    <div className={S.card} aria-hidden="true" aria-label="Memuat kartu...">
+    <div className={S.card} aria-hidden="true">
       {/* Category pill */}
       <Skeleton width="80px" height={18} radius={99} style={{ marginBottom: 24 }} />
       {/* JP text */}

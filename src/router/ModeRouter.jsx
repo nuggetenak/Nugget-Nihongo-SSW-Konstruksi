@@ -20,12 +20,7 @@ import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 // ── Loading fallback — skeleton, not spinner ───────────────────────────────
 function ModeLoader() {
   return (
-    <div
-      style={{ padding: 'var(--sp-5)', maxWidth: 'var(--max-w)', margin: '0 auto' }}
-      role="status"
-      aria-label="Memuat mode..."
-      aria-live="polite"
-    >
+    <div role="status" aria-label="Memuat mode..." aria-live="polite">
       <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'center' }}>
         <Skeleton width="80px" height={16} />
         <Skeleton width="60px" height={16} style={{ marginLeft: 'auto' }} />

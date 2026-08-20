@@ -122,7 +122,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
   // ─── LOADING ───────────────────────────────────────────────────────────────
   if (queue === null) {
     return (
-      <div className={R.skeleton}>
+      <div className={R.skeleton} role="status" aria-label="Memuat kartu..." aria-live="polite">
         <Skeleton width="60px" height={14} style={{ marginBottom: 16 }} />
         <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
         <Skeleton.Card />
