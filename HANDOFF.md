@@ -136,16 +136,44 @@ doesn't update itself.
     so the hero card at the top of the page doesn't stretch to the full 1180px column with
     nothing to pair it with.
 
-  **NOT done — pick up here:**
-  - **10 modes still render placeholder icon shapes.** A ready-to-paste prompt for the second
-    sprite sheet is in `docs/ASSET-PROMPTS.md` section 4b. Activating them is one line each in
-    the `ASSETS` map in `Icon.jsx`; the `MODE_META.ui` mapping already exists. Owner is
-    generating this art externally — not an agent task until handed off.
-  - **`data-cards` chunk is 661KB (191KB gzipped)** and warns on every build. Undercuts the
-    offline-first goal on slow connections. Deliberately left for its own branch — it's a build
-    concern, not UI.
-  - Desktop dashboard has vertical dead space; needs more content, not a layout change.
-  - The branch has never been merged. Review the Prettier commit separately from the rest.
+  **NOT done — pick up here: → `docs/UI_UX_PLAN.md`**
+
+  All four items that used to be listed here have moved into that document (2026-08-20 drafting
+  session, docs-only, no application code touched). It is the work queue now — read it rather
+  than this list:
+
+  - Dashboard vertical dead space → plan item 12, with a diagnosis (five of the dashboard's
+    eight blocks are conditional, so a new user sees four) and candidate content.
+  - 10 placeholder mode icons → plan item 26, **visibility only.** Still owner-owned, still
+    external art generation, no solution drafted. The ten keys are enumerated there.
+  - `data-cards` 661KB chunk → plan item 27, **visibility only.** Still a build concern for its
+    own branch, no solution drafted. Re-verified at 661.05KB / 191.32KB gzipped.
+  - Branch unmerged, review the Prettier commit (`f2fa439`, 237 files) separately → plan item 29.
+
+  The plan adds 21 further UI/UX proposals beyond those four, in four priority bands, each with
+  evidence, a fit-to-existing-system note, and acceptance criteria. Two items are flagged
+  🔶 **needing an owner decision before execution** — item 9 (measured contrast failures:
+  `--ssw-textFaint` is 2.89:1 in light theme and is what colours the bottom nav's inactive
+  labels; amber-as-text is 2.11:1, which also affects the focus ring — any fix touches the token
+  table DESIGN_SPEC calls locked) and item 10 (no `pushState`/`popstate` anywhere, so Android's
+  hardware back button exits the PWA from any screen — fixing it is a navigation-architecture
+  change).
+
+  Also newly found and recorded in that plan, none of it previously tracked: the toast stack is
+  mispositioned at every breakpoint except one, `viewport-fit=cover` is set with zero
+  `safe-area-inset` usage anywhere in `src/`, `global.css` carries a reduced-motion block that
+  cannot match anything (CSS Modules hashes the class names it targets — confirmed against build
+  output) and two conflicting `:focus-visible` rules, `ModeRouter` references a `--z-banner`
+  token that does not exist, and `EmptyState.jsx` / `FilterPopup.jsx` / `useConfirm` /
+  `useFocusTrap` all have zero consumers while the behaviour they implement is hand-rolled
+  elsewhere. Baseline re-verified during drafting: `npm test` 435/435, `npm run lint` 0 warnings,
+  `npm run build` clean apart from the known `data-cards` warning.
+
+  Separately flagged for the owner, not actioned: `docs/BLUEPRINT-CURRENT.md` sits live in
+  `docs/` but is badly stale (claims storage v3, 23 modes, 1,443 cards, 457 tests against an
+  actual v6, 21, 1,438, 435) and isn't listed in `docs/AGENT_WORKFLOW.md` §4, so nothing points
+  at it and nothing keeps it honest. Likely belongs in `docs/archive/` — see `docs/UI_UX_PLAN.md`
+  §7's closing note.
 
 ---
 
@@ -181,6 +209,10 @@ content-dq-specific and archived with it. Still worth reading if a future sessio
   responsive pattern
 - `docs/COMPONENT_SPEC.md` — CSS Modules conventions, shared primitives, component patterns
 - `docs/PWA_RELEASE_SPEC.md` — offline architecture, `CACHE_VERSION` discipline, deploy checklist
+- `docs/UI_UX_PLAN.md` — **not stable reference; a work queue.** 29 prioritised UI/UX items
+  drafted 2026-08-20, carrying everything that used to sit in CURRENT STATE's NOT-done list.
+  Unlike the `*_SPEC.md` files above, this one is meant to shrink and eventually be retired to
+  `docs/archive/` once its bands are closed — see `docs/AGENT_WORKFLOW.md` §3
 - `_MAP.md` — architecture map + full session-by-session history log
 - `docs/archive/` — superseded docs, including this file's predecessors (`SESSION_PROMPT.md`,
   `PROGRESS.md`, `DATA_QUALITY_HANDOFF_v16/v17/v18.md`), `HANDOFF-content-dq-era.md` (the
