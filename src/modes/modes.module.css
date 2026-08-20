@@ -41,7 +41,8 @@
   border: none;
   cursor: pointer;
   margin-bottom: 16px;
-  padding: 7px 10px 7px 0;
+  padding: 10px 10px 10px 6px;
+  min-height: var(--tap-min);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -135,8 +136,8 @@
 /* ── Buttons ── */
 .btnIcon {
   font-family: inherit;
-  width: 40px;
-  height: 40px;
+  width: var(--tap-min);
+  height: var(--tap-min);
   border-radius: var(--r-md);
   border: 1px solid var(--ssw-border);
   background: var(--ssw-surface);
@@ -164,10 +165,10 @@
   border-radius: var(--r-xl);
   border: none;
   background: var(--ssw-amber);
-  color: #1a0a00;
+  color: var(--ssw-onAmber);
   cursor: pointer;
   box-shadow:
-    0 4px 20px rgba(245, 158, 11, 0.3),
+    var(--shadow-amber),
     var(--ssw-shadowGlow);
   letter-spacing: -0.1px;
   transition:
@@ -466,7 +467,7 @@
   cursor: pointer;
   border: none;
   background: var(--ssw-amber);
-  color: #1a0a00;
+  color: var(--ssw-onAmber);
   box-shadow: var(--ssw-shadowGlow);
   transition: transform 0.12s;
 }
