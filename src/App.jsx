@@ -9,7 +9,6 @@ import { useSRSContext } from './contexts/SRSContext.jsx';
 import { setQuotaHandler } from './utils/storage-quota.js';
 
 import ErrorBoundary, { TabError } from './components/ErrorBoundary.jsx';
-import OfflineBanner from './components/OfflineBanner.jsx';
 import Onboarding from './components/Onboarding.jsx';
 import AppShell from './components/AppShell.jsx';
 import Dashboard from './components/Dashboard.jsx';
@@ -76,7 +75,7 @@ export default function App() {
   // desktop while the tabs had already gone responsive.
   if (mode)
     return (
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <AppShell
           tab={tab}
           onTabChange={goTab}
@@ -98,9 +97,7 @@ export default function App() {
   const belajarBadges = { ulasan: srs.dueCount };
 
   return (
-    <main id="main-content">
-      <OfflineBanner />
-
+    <main id="main-content" tabIndex={-1}>
       <AppShell tab={tab} onTabChange={goTab} dueBadge={srs.dueCount}>
         {tab === 'home' && (
           <ErrorBoundary fallback={<TabError tab="Beranda" />}>
