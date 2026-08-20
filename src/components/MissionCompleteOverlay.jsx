@@ -31,7 +31,7 @@ export default function MissionCompleteOverlay({ onDone, result }) {
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 9999,
+        zIndex: 'var(--z-celebration)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

@@ -418,7 +418,7 @@ export default function GlossaryMode({ onExit, track }) {
             bottom: 56,
             left: 0,
             right: 0,
-            zIndex: 40,
+            zIndex: 'var(--z-sticky)',
             background: T.bg,
             borderTop: `1px solid ${T.border}`,
             padding: '10px 16px',

@@ -7,7 +7,7 @@
   transform: translateX(-50%);
   width: calc(100% - 32px);
   max-width: calc(var(--overlay-max-w) - 32px);
-  z-index: 300;
+  z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
   gap: 6px;

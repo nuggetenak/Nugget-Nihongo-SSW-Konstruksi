@@ -102,12 +102,20 @@
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
   --shadow-amber: 0 4px 20px rgba(245, 158, 11, 0.28);
 
-  /* ── Z-index scale ── */
+  /* ── Z-index scale ──
+     --z-modal sits above --z-toast deliberately: a confirm dialog is a
+     blocking decision the user must resolve, a toast is a transient,
+     ignorable notification — if both are present, the modal should win.
+     --z-celebration is the one intentional "above literally everything"
+     tier, for MissionCompleteOverlay's full-screen takeover moment. */
   --z-base: 1;
   --z-sticky: 10;
+  --z-banner: 30;
   --z-nav: 100;
   --z-overlay: 200;
   --z-toast: 300;
+  --z-modal: 400;
+  --z-celebration: 500;
 
   /* ── Transition presets ── */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);

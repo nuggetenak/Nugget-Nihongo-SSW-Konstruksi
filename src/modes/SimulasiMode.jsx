@@ -545,7 +545,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: 50,
+            zIndex: 'var(--z-overlay)',
             background: 'rgba(0,0,0,0.72)',
             display: 'flex',
             alignItems: 'center',

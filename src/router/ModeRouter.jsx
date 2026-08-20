@@ -305,7 +305,7 @@ export default function ModeRouter() {
           style={{
             position: 'sticky',
             top: 0,
-            zIndex: 'var(--z-banner, 30)',
+            zIndex: 'var(--z-banner)',
             background: 'var(--ssw-navBg)',
             borderBottom: '1px solid var(--ssw-border)',
             padding: '6px 16px',
