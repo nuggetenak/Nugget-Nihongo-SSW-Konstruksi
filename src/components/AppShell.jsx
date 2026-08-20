@@ -18,6 +18,7 @@
 //            and losing all navigation would be disorienting.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { useEffect } from 'react';
 import BottomNav from './BottomNav.jsx';
 import SideNav from './SideNav.jsx';
 import s from './AppShell.module.css';
@@ -31,6 +32,22 @@ export default function AppShell({
   children,
 }) {
   const showBottomNav = chrome === 'tabs';
+
+  // Toast's stack renders outside .shell (ToastProvider wraps everything in
+  // main.jsx), so a custom property set on .shell can't cascade to it — they're
+  // siblings, not ancestor/descendant. Mirror the signal onto <html> instead,
+  // the one true shared ancestor, matching the existing applyTheme() pattern
+  // in styles/theme.js of writing custom properties directly from JS rather
+  // than inventing a second mechanism. Only the boolean travels through JS;
+  // the desktop breakpoint override stays in CSS (global.css), so this needs
+  // no resize listener — consistent with this file's own header comment that
+  // nav placement is decided by media query, not JS width detection.
+  useEffect(() => {
+    document.documentElement.dataset.bottomNavChrome = String(showBottomNav);
+    return () => {
+      delete document.documentElement.dataset.bottomNavChrome;
+    };
+  }, [showBottomNav]);
 
   return (
     <div className={s.shell} data-chrome={chrome}>

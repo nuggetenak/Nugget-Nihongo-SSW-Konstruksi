@@ -69,6 +69,15 @@
      Consumed via .content padding-bottom; set to 0 once side nav takes over. */
   --nav-safe: calc(var(--nav-h) + 36px);
 
+  /* Toast stack's bottom offset. Safe default clears nothing (no floating nav
+     to clear); AppShell mirrors whether the bottom pill is mounted onto
+     html[data-bottom-nav-chrome] (see AppShell.jsx — ToastProvider renders
+     outside .shell, so this can't just be a var() on the shell itself). The
+     76px figure (nav-h + sp-3) matches what this was hardcoded to before it
+     became conditional, so the one case that was already correct — tabs
+     chrome, phone width — keeps its exact prior position. */
+  --toast-offset: var(--sp-4);
+
   /* ── Hazard rail (signature) ──
      Diagonal amber/near-black stripe from real construction site signage.
      Used ONLY to mark time-sensitive or active state — never decoration. */
@@ -106,6 +115,14 @@
   --t-fast: 120ms;
   --t-base: 200ms;
   --t-slow: 350ms;
+}
+
+/* Elevated when AppShell reports the floating bottom pill is mounted (phone/
+   tablet, chrome='tabs'). Restored to the plain default at the desktop
+   breakpoint below, where the pill is display:none and the side nav takes
+   over — matching AppShell.module.css's own 1040px cutover exactly. */
+:root[data-bottom-nav-chrome='true'] {
+  --toast-offset: calc(var(--nav-h) + var(--sp-3));
 }
 
 /* ── Base reset ── */
@@ -378,6 +395,13 @@ body {
 @media (min-width: 1040px) {
   :root {
     --max-w: 1180px;
+  }
+
+  /* Bottom pill is display:none up here (AppShell.module.css) regardless of
+     chrome — side nav has taken over — so the toast stack no longer needs to
+     clear it, even on tabs screens where the attribute is still 'true'. */
+  :root[data-bottom-nav-chrome='true'] {
+    --toast-offset: var(--sp-4);
   }
 }
 

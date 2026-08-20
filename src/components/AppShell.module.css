@@ -70,4 +70,16 @@
     padding: 0 var(--gutter-wide);
     padding-bottom: var(--sp-6);
   }
+
+  /* .content[data-nav-safe='true'] (one class + one attribute selector) is
+     MORE specific than the plain .content rule directly above, so without
+     this, tabs screens keep reserving var(--nav-safe) (~100px) down here even
+     though .bottomSlot is display:none at this width and there's no pill left
+     to clear. Found while wiring item 1's toast offset through this same
+     file, not itemized in UI_UX_PLAN.md — noted in HANDOFF instead, since it
+     bears directly on item 12's "dashboard vertical dead space" diagnosis:
+     part of that dead space on the three tab screens was this. */
+  .content[data-nav-safe='true'] {
+    padding-bottom: var(--sp-6);
+  }
 }

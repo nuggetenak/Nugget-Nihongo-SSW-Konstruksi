@@ -2,6 +2,7 @@
 
 .stack {
   position: fixed;
+  bottom: var(--toast-offset, var(--sp-4));
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);

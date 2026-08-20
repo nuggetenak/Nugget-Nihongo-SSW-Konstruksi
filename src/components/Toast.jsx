@@ -1,9 +1,11 @@
 // ─── Toast.jsx ────────────────────────────────────────────────────────────────
-// Note: stack bottom offset is prop-driven (T.navH + 12) — kept inline.
 // Swipe-left dismiss, type prop (default|success|error|warning),
 //          and type-aware aria-live (assertive for errors, polite for others).
+// Stack bottom offset lives in Toast.module.css as --toast-offset, set
+// conditionally by AppShell + global.css (item 1, 2026-08-20) — previously a
+// hardcoded inline T.navH + 12, which put the stack 76px above nothing on
+// desktop and on every mode screen (chrome='mode' has no bottom pill).
 import { createContext, useContext, useState, useCallback, useRef } from 'react';
-import { T } from '../styles/theme.js';
 import S from './Toast.module.css';
 
 const ToastCtx = createContext(null);
@@ -29,7 +31,7 @@ export function ToastProvider({ children }) {
   return (
     <ToastCtx.Provider value={{ show, dismiss }}>
       {children}
-      <div className={S.stack} style={{ bottom: T.navH + 12 }} aria-atomic="false">
+      <div className={S.stack} aria-atomic="false">
         {toasts.map((t) => (
           <ToastItem key={t.id} toast={t} onDismiss={dismiss} />
         ))}
