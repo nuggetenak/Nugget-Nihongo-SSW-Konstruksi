@@ -375,6 +375,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
           <div style={{ position: 'relative', marginBottom: 12 }}>
             <input
               ref={inputRef}
+              aria-label="Jawaban"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ketik Jepang di sini... (kanji/kana)"

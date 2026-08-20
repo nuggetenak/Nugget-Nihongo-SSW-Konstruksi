@@ -625,6 +625,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
 
       <input
         ref={inputRef}
+        aria-label="Jawaban"
         autoFocus
         value={input}
         onChange={(e) => setInput(e.target.value)}

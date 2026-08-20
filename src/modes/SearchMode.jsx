@@ -111,6 +111,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
 
       <input
         type="text"
+        aria-label="Cari kartu"
         value={query}
         onChange={(e) => handleQueryChange(e.target.value)}
         onBlur={handleQueryBlur}

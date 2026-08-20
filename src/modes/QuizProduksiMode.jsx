@@ -403,6 +403,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
           <div style={{ position: 'relative', marginBottom: 12 }}>
             <input
               ref={inputRef}
+              aria-label="Jawaban"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ketik terjemahan Indonesia..."

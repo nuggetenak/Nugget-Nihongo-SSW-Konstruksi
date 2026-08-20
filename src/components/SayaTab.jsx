@@ -388,9 +388,12 @@ export default function SayaTab() {
         <Row label="Tema" value={isDark ? '🌙 Gelap' : '☀️ Terang'} onClick={toggleTheme} />
         {editingGoal ? (
           <div className={s.inlineEdit}>
-            <div className={s.inlineEditLabel}>Target kartu per hari (1–200)</div>
+            <label className={s.inlineEditLabel} htmlFor="saya-daily-goal">
+              Target kartu per hari (1–200)
+            </label>
             <div className={s.inlineEditRow}>
               <input
+                id="saya-daily-goal"
                 type="number"
                 min="1"
                 max="200"
@@ -441,9 +444,12 @@ export default function SayaTab() {
         )}
         {editingExam ? (
           <div className={s.inlineEdit}>
-            <div className={s.inlineEditLabel}>Tanggal ujian</div>
+            <label className={s.inlineEditLabel} htmlFor="saya-exam-date">
+              Tanggal ujian
+            </label>
             <div className={s.inlineEditRow}>
               <input
+                id="saya-exam-date"
                 type="date"
                 value={examDraft}
                 onChange={(e) => setExamDraft(e.target.value)}

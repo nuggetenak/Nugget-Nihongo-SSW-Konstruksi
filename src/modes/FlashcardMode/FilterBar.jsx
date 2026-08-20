@@ -43,6 +43,7 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
         </div>
       ) : (
         <input
+          aria-label="Cari kartu"
           value={search}
           onChange={(e) => onSearch(e.target.value)}
           placeholder="🔍 Cari JP / ID..."

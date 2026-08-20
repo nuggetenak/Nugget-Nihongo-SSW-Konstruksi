@@ -460,10 +460,14 @@ export default function ExportMode({ onExit }) {
             <strong>api.github.com</strong>.
           </div>
 
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}>
+          <label
+            htmlFor="export-gist-pat"
+            style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}
+          >
             GitHub Personal Access Token (scope: gist)
-          </div>
+          </label>
           <input
+            id="export-gist-pat"
             type="password"
             value={gistPat}
             onChange={(e) => setGistPat(e.target.value)}
@@ -482,10 +486,14 @@ export default function ExportMode({ onExit }) {
             }}
           />
 
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}>
+          <label
+            htmlFor="export-gist-id"
+            style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}
+          >
             Gist ID (isi otomatis setelah push pertama)
-          </div>
+          </label>
           <input
+            id="export-gist-id"
             type="text"
             value={gistId}
             onChange={(e) => setGistId(e.target.value)}

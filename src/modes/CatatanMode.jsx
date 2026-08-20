@@ -93,6 +93,7 @@ function NoteCard({ card, note, onSave }) {
       {editing && (
         <div style={{ marginTop: 10 }}>
           <textarea
+            aria-label="Catatan pribadi"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             placeholder="Tambah catatan, mnemonik, atau konteks pribadi..."
@@ -239,6 +240,7 @@ export default function CatatanMode({ cards, onExit }) {
       {/* Search */}
       <input
         type="search"
+        aria-label="Cari catatan"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Cari kartu atau catatan..."

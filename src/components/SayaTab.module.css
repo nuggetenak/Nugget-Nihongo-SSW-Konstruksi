@@ -216,6 +216,7 @@
   margin: 4px 0 8px;
 }
 .inlineEditLabel {
+  display: block;
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
   margin-bottom: 8px;
