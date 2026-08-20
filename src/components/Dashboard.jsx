@@ -107,9 +107,13 @@ export default function Dashboard({
         </div>
         {/* Wide screens: the side nav already carries the brand, so the header
             switches to a page title instead of repeating it. Both stay in the
-            DOM — visibility is CSS-only — so screen readers and tests see them. */}
-        <div className={s.pageTitle} aria-hidden="true">
-          <div className={s.pageTitleName}>Beranda</div>
+            DOM; display:none (in the 1040px breakpoint below) already excludes
+            whichever one isn't shown from the accessibility tree on its own —
+            no aria-hidden needed, and one was previously fighting that by
+            hardcoding the wide-screen title out of the tree even once CSS
+            made it the visible one. */}
+        <div className={s.pageTitle}>
+          <h1 className={s.pageTitleName}>Beranda</h1>
           <div className={s.pageTitleSub}>
             {streakData.days >= 2
               ? `Selamat datang kembali — ${streakData.days} hari berturut-turut`

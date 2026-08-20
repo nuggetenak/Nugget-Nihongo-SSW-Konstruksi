@@ -198,7 +198,7 @@ export default function SayaTab() {
 
   return (
     <div className={s.container}>
-      <div className={s.pageTitle}>Saya</div>
+      <h1 className={s.pageTitle}>Saya</h1>
 
       {/* PWA install prompt */}
       {installPrompt && !installed && (

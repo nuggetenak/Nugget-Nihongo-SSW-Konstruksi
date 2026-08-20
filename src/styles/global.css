@@ -78,6 +78,15 @@
      chrome, phone width — keeps its exact prior position. */
   --toast-offset: var(--sp-4);
 
+  /* ModeHeader (item 11) sticks at top:0 within its scroll container. When
+     OfflineBanner (item 7) is visible it's position:fixed at the true
+     viewport top with a higher z-index, so without this offset it would sit
+     on top of the header's sticky trail instead of stacking above it. 36px
+     covers the banner's own box (8px+8px padding + ~12px caption text ≈ 32px,
+     rounded up for safe clearance) — see OfflineBanner.jsx for the JS side
+     that sets the attribute this reads. */
+  --mode-header-top: 0px;
+
   /* ── Hazard rail (signature) ──
      Diagonal amber/near-black stripe from real construction site signage.
      Used ONLY to mark time-sensitive or active state — never decoration. */
@@ -131,6 +140,10 @@
    over — matching AppShell.module.css's own 1040px cutover exactly. */
 :root[data-bottom-nav-chrome='true'] {
   --toast-offset: calc(var(--nav-h) + var(--sp-3) + env(safe-area-inset-bottom, 0px));
+}
+
+:root[data-offline-banner-visible='true'] {
+  --mode-header-top: 36px;
 }
 
 /* ── Base reset ── */

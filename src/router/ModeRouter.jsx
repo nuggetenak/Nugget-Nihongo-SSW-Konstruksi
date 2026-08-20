@@ -13,8 +13,9 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import { getMission, completeMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import { get as storageGet } from '../storage/engine.js';
-import { MODE_COMPONENTS, MODE_META } from './modes.js';
+import { MODE_COMPONENTS } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
+import ModeHeader from '../components/ModeHeader.jsx';
 import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 
 // ── Loading fallback — skeleton, not spinner ───────────────────────────────
@@ -293,45 +294,10 @@ export default function ModeRouter() {
 
   const props = modeProps[mode] ?? { onExit: exitMode };
 
-  // Breadcrumb — show "← Kembali ke [Mode]" if there's navigation history.
-  const breadcrumbMode = modeHistory.length > 0 ? modeHistory[modeHistory.length - 1] : null;
-  const breadcrumbMeta = breadcrumbMode ? MODE_META[breadcrumbMode] : null;
-
   return (
     <ErrorBoundary onExit={exitMode}>
       <FocusSentinel />
-      {breadcrumbMeta && (
-        <div
-          style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 'var(--z-banner)',
-            background: 'var(--ssw-navBg)',
-            borderBottom: '1px solid var(--ssw-border)',
-            padding: '6px 16px',
-          }}
-        >
-          <button
-            onClick={goBack}
-            aria-label={`Kembali ke ${breadcrumbMeta.label}`}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-              fontSize: 12,
-              fontWeight: 600,
-              color: 'var(--ssw-amber)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4,
-              padding: '4px 0',
-            }}
-          >
-            ← {breadcrumbMeta.icon} {breadcrumbMeta.label}
-          </button>
-        </div>
-      )}
+      <ModeHeader mode={mode} modeHistory={modeHistory} onBack={goBack} />
       <Suspense fallback={<ModeLoader />}>
         <ModeComponent {...props} />
       </Suspense>

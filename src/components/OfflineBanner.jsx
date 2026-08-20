@@ -16,6 +16,17 @@ export default function OfflineBanner() {
     };
   }, []);
 
+  // Mirrors this banner's visibility onto <html> so anything else that's
+  // fixed/sticky at the top (ModeHeader's trail) can offset below it instead
+  // of overlapping — same JS-writes-a-signal pattern as AppShell's
+  // data-bottom-nav-chrome, consumed in global.css.
+  useEffect(() => {
+    document.documentElement.dataset.offlineBannerVisible = String(!online);
+    return () => {
+      delete document.documentElement.dataset.offlineBannerVisible;
+    };
+  }, [online]);
+
   if (online) return null;
 
   return (

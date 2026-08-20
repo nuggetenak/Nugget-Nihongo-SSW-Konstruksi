@@ -1,0 +1,73 @@
+/* ─── ModeHeader.module.css ──────────────────────────────────────────────── */
+
+.header {
+  position: sticky;
+  top: var(--mode-header-top);
+  z-index: var(--z-banner);
+  background: var(--ssw-navBg);
+  border-bottom: 1px solid var(--ssw-border);
+  padding: 8px 16px;
+  margin: 0 0 16px;
+}
+
+/* ── Trail ── */
+.trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+/* Hidden on phones — a 3-deep trail doesn't fit a 320px screen and isn't
+   worth the wrap. Shown from 700px, matching the shell's own tablet
+   breakpoint (AppShell.module.css). display:contents unwraps this group so
+   its children lay out directly in .trail's flex row, not as a nested box. */
+.earlier {
+  display: none;
+}
+@media (min-width: 700px) {
+  .earlier {
+    display: contents;
+  }
+}
+
+.crumb {
+  display: inline-flex;
+  align-items: center;
+}
+
+.trailBtn {
+  font-family: inherit;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ssw-amber);
+  padding: 6px 2px;
+  letter-spacing: 0.2px;
+}
+
+.sep {
+  font-size: var(--fs-small);
+  color: var(--ssw-textFaint);
+  margin: 0 4px;
+  line-height: 1;
+}
+
+/* ── Current mode identity ── */
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Syne', 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--ssw-textBright);
+  margin: 0;
+}
+
+.titleIcon {
+  flex-shrink: 0;
+}

@@ -99,7 +99,7 @@ function CompactCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
 export default function BelajarTab({ onSelect, badges = {} }) {
   return (
     <div className={s.container}>
-      <div className={s.pageTitle}>Belajar</div>
+      <h1 className={s.pageTitle}>Belajar</h1>
 
       {Object.entries(MODE_SECTIONS).map(([key, section]) => {
         const [featured, ...rest] = section.modes;

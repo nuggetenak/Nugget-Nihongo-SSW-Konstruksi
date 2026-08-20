@@ -66,19 +66,37 @@ export function AppProvider({ children }) {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [setPref]);
 
-  // Go back one mode in history.
-  const goBack = useCallback(() => {
-    if (modeHistory.length === 0) {
-      exitMode();
-      return;
-    }
-    const prev = modeHistory[modeHistory.length - 1];
-    setModeHistory((h) => h.slice(0, -1));
-    setMode(prev);
-    setModeParams(null);
-    setPref('lastMode', prev);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [modeHistory, exitMode, setPref]);
+  // Go back one mode in history, or jump directly to a specific ancestor
+  // still in the stack (truncates history to everything before it). Called
+  // with no argument, pops exactly one level — the original behaviour.
+  const goBack = useCallback(
+    (targetMode) => {
+      if (modeHistory.length === 0) {
+        exitMode();
+        return;
+      }
+      if (targetMode) {
+        const idx = modeHistory.lastIndexOf(targetMode);
+        if (idx !== -1) {
+          setMode(targetMode);
+          setModeHistory(modeHistory.slice(0, idx));
+          setModeParams(null);
+          setPref('lastMode', targetMode);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          return;
+        }
+        // targetMode not found in history — fall through to the default
+        // pop-one behaviour rather than doing nothing.
+      }
+      const prev = modeHistory[modeHistory.length - 1];
+      setModeHistory((h) => h.slice(0, -1));
+      setMode(prev);
+      setModeParams(null);
+      setPref('lastMode', prev);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    },
+    [modeHistory, exitMode, setPref]
+  );
 
   const goTab = useCallback(
     (t) => {
