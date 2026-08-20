@@ -107,6 +107,7 @@ export default function App() {
               track={track}
               onNavigate={goMode}
               onChangeTrack={() => setTrack(null)}
+              onGoTab={goTab}
               srs={srs}
               isDark={isDark}
               onToggleTheme={toggleTheme}

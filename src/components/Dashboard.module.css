@@ -381,6 +381,48 @@
   margin-top: 1px;
 }
 
+/* ── Hint (item 12: empty-state prompts for new users) ──
+   Same shape as .streak — plain surface/border box, not the hazard rail.
+   These are invitations ("set this up"), not time-sensitive alerts. Used as
+   a <button> for the two that navigate somewhere, so it needs UA
+   button-chrome resets a <div> never did (see item 33's Row for the same
+   pattern). */
+.hint {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  margin: 0 0 var(--sp-3);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-3) var(--sp-4);
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.hintIcon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--ssw-amber);
+}
+
+.hintTitle {
+  display: block;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-heavy);
+  color: var(--ssw-text);
+}
+
+.hintSub {
+  display: block;
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  margin-top: 1px;
+}
+
 /* ── Section labels ── */
 .secLabel {
   font-size: var(--fs-nano);

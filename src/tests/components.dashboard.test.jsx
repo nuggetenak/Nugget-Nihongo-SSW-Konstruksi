@@ -141,10 +141,33 @@ describe('Dashboard', () => {
   });
 
   describe('streak hero', () => {
-    it('does not show streak hero when streak < 2', () => {
+    it('shows the real streak count once streak >= 2', () => {
       renderDashboard();
-      // No "hari berturut-turut" text
-      expect(screen.queryByText(/hari berturut-turut/)).toBeNull();
+      expect(screen.queryByText(/hari berturut-turut!/)).toBeNull();
+    });
+
+    it('shows a start-a-streak prompt instead of nothing when streak < 2', () => {
+      // Item 12: this slot used to render nothing at all below 2 days —
+      // one of five conditional Dashboard blocks a brand-new user saw none
+      // of. Now always shows one of the two states.
+      renderDashboard();
+      expect(screen.getByText('Mulai streak-mu')).toBeTruthy();
+    });
+  });
+
+  describe('empty-state prompts (item 12)', () => {
+    it('shows a set-exam-date prompt when no exam date is set, and it navigates to Saya', () => {
+      const onGoTab = vi.fn();
+      renderDashboard({ onGoTab });
+      const prompt = screen.getByText('Belum atur tanggal ujian');
+      expect(prompt).toBeTruthy();
+      fireEvent.click(prompt);
+      expect(onGoTab).toHaveBeenCalledWith('saya');
+    });
+
+    it('shows a nothing-recent prompt when recentCards is empty', () => {
+      renderDashboard();
+      expect(screen.getByText('Belum ada kartu dipelajari')).toBeTruthy();
     });
   });
 

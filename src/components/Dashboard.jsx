@@ -49,6 +49,7 @@ export default function Dashboard({
   track,
   onNavigate,
   onChangeTrack,
+  onGoTab,
   srs,
   isDark,
   onToggleTheme,
@@ -155,6 +156,19 @@ export default function Dashboard({
               </div>
             </div>
           )}
+          {!showCountdown && !examDate && (
+            <button className={s.hint} onClick={() => onGoTab?.('saya')}>
+              <span className={s.hintIcon} aria-hidden="true">
+                <Icon name="kalender" size={20} />
+              </span>
+              <span>
+                <span className={s.hintTitle}>Belum atur tanggal ujian</span>
+                <span className={s.hintSub}>
+                  Atur di tab Saya supaya hitung mundur muncul di sini
+                </span>
+              </span>
+            </button>
+          )}
 
           {/* ── Progress meter ── */}
           <section className={s.statBlock} aria-label="Progres belajar">
@@ -200,7 +214,7 @@ export default function Dashboard({
           </button>
 
           {/* ── Streak ── */}
-          {streakData.days >= 2 && (
+          {streakData.days >= 2 ? (
             <div className={s.streak}>
               <span className={s.streakIcon} aria-hidden="true">
                 🔥
@@ -211,6 +225,20 @@ export default function Dashboard({
                   {dailyCount.count > 0
                     ? `+${dailyCount.count} kartu hari ini`
                     : 'Jaga streakmu — belajar hari ini'}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className={s.streak}>
+              <span className={s.streakIcon} aria-hidden="true">
+                🔥
+              </span>
+              <div>
+                <div className={s.streakDays}>Mulai streak-mu</div>
+                <div className={s.streakSub}>
+                  {dailyCount.count > 0
+                    ? `+${dailyCount.count} kartu hari ini — lanjutkan besok`
+                    : 'Belajar hari ini untuk mulai streak'}
                 </div>
               </div>
             </div>
@@ -261,7 +289,7 @@ export default function Dashboard({
           )}
 
           {/* ── Recent ── */}
-          {recentCards.length > 0 && (
+          {recentCards.length > 0 ? (
             <>
               <h2 className={s.secLabel}>Terakhir dipelajari</h2>
               <ul className={s.recentList}>
@@ -272,6 +300,19 @@ export default function Dashboard({
                   </li>
                 ))}
               </ul>
+            </>
+          ) : (
+            <>
+              <h2 className={s.secLabel}>Terakhir dipelajari</h2>
+              <button className={s.hint} onClick={() => onNavigate('kartu')}>
+                <span className={s.hintIcon} aria-hidden="true">
+                  <Icon name="belajar" size={20} />
+                </span>
+                <span>
+                  <span className={s.hintTitle}>Belum ada kartu dipelajari</span>
+                  <span className={s.hintSub}>Mulai dari mode Kartu di tab Belajar</span>
+                </span>
+              </button>
             </>
           )}
         </div>
