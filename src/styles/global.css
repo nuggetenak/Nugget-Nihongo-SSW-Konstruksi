@@ -67,7 +67,7 @@
 
   /* Space reserved so fixed bottom nav never covers the last row of content.
      Consumed via .content padding-bottom; set to 0 once side nav takes over. */
-  --nav-safe: calc(var(--nav-h) + 36px);
+  --nav-safe: calc(var(--nav-h) + 36px + env(safe-area-inset-bottom, 0px));
 
   /* Toast stack's bottom offset. Safe default clears nothing (no floating nav
      to clear); AppShell mirrors whether the bottom pill is mounted onto
@@ -122,7 +122,7 @@
    breakpoint below, where the pill is display:none and the side nav takes
    over — matching AppShell.module.css's own 1040px cutover exactly. */
 :root[data-bottom-nav-chrome='true'] {
-  --toast-offset: calc(var(--nav-h) + var(--sp-3));
+  --toast-offset: calc(var(--nav-h) + var(--sp-3) + env(safe-area-inset-bottom, 0px));
 }
 
 /* ── Base reset ── */
