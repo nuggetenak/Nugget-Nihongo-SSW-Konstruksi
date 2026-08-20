@@ -6,6 +6,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../../styles/theme.js';
 import { shuffle } from '../../utils/shuffle.js';
+import { isTypingTarget } from '../../utils/keyboard.js';
 import { getCatInfo } from '../../data/categories.js';
 import { useToast } from '../../components/Toast.jsx';
 import { get as storageGet, set as storageSet } from '../../storage/engine.js';
@@ -172,6 +173,7 @@ export default function FlashcardMode({
 
   useEffect(() => {
     const h = (e) => {
+      if (isTypingTarget(e)) return;
       if (e.key === 'ArrowLeft') {
         go(-1);
         return;

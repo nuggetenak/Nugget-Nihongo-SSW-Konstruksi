@@ -27,3 +27,4 @@ export {
   calcReadiness,
 } from './session-analytics.js';
 export { setQuotaHandler, isQuotaError, notifyQuotaExceeded } from './storage-quota.js';
+export { isTypingTarget } from './keyboard.js';
