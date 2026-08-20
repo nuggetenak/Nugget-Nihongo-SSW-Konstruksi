@@ -1,5 +1,38 @@
 # 🏗️ SSW Konstruksi — Blueprint Current (v4.21.1)
 
+> ## 🗄️ ARCHIVED 2026-08-20 — HISTORICAL, DO NOT FOLLOW
+>
+> This sat live in `docs/` long after it stopped being true. It describes `main` as it was on
+> **2026-05-09**, before the content-dq merge and before `feat/ui-overhaul`. Its own header still
+> says "Blueprint Current," which is exactly why it was easy to keep reading as live.
+>
+> **Every headline number in it is wrong now.** Verified 2026-08-20 against the repo:
+>
+> | This doc says | Actually | Changed by |
+> | --- | --- | --- |
+> | Storage schema v3 | **v6** | migrations through the content-dq merge — see `_MAP.md` §6 |
+> | 23 modes | **21** | Doboku/Kenchiku removed, content-dq session 24 |
+> | 1,443 flashcards | **1,438** | 5-duplicate cleanup, content-dq |
+> | 457 tests | **435** (39 files) | scope reduction |
+> | Version 4.22.0 | **4.23.0** | `package.json` |
+>
+> It also documents sipil/bangunan (Doboku/Kenchiku) tracks at length — those were **removed
+> entirely**; scope is Lifeline + Common only. Its "Known Gaps" and "Remaining Open Items"
+> sections describe a task board that no longer exists.
+>
+> **Nothing live was lost by archiving it.** Its one section with ongoing value, "Hard Constraints
+> (Do Not Break)," is already covered elsewhere and more accurately: the 4-dependency ceiling and
+> offline-first requirement in `docs/PWA_RELEASE_SPEC.md` §1, the test/lint/build gates in
+> `docs/AGENT_WORKFLOW.md` §2, and "21 modes, all React.lazy" plus "interface in Indonesian,
+> content in Japanese" in `_MAP.md` §1 and §3.
+>
+> Live docs are listed in `docs/AGENT_WORKFLOW.md` §4. This file was never in that table — nothing
+> pointed at it and nothing kept it honest, which is how it drifted this far. Kept here in full
+> rather than deleted because `ARCHIVE-INDEX.md` has three rows whose "superseded by" column points
+> at it, and because the phase history below is a genuine record of how the app got here.
+
+---
+
 > **Status:** v4.22.0 STABLE ✅
 > **Version:** 4.22.0
 > **Last updated:** 2026-05-09 (v4.22.0: card ID renumbering, storage v4)

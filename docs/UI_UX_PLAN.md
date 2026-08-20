@@ -1,13 +1,26 @@
 # UI/UX Plan — SSW Konstruksi
 
-Drafted 2026-08-20 on `feat/ui-overhaul`. **Drafting session only — no application code was
-written or changed.** Every claim below was checked against the code at commit `2169bfc`, not
-taken from documentation.
+Drafted 2026-08-20 on `feat/ui-overhaul` across two drafting passes. **Drafting only — no
+application code was written or changed in either pass.** Every claim below was checked against
+the code, the build output, or a throwaway reproduction, not taken from documentation.
 
 This is a work queue for a later execution session, probably a different model with no memory of
 this one. It is written for that reader: file paths are absolute from the repo root, findings
 carry the evidence that produced them, and every item states what "done" looks like so completion
 is checkable rather than judged.
+
+**42 items in four priority bands**, plus four in §7 that are listed for visibility only. Items
+1–29 came from the first pass, 30–42 from a second exhaustive audit on the same day. The second
+pass went looking specifically for defects that are invisible to the existing safety net — things
+that pass `npm test`, `npm run lint`, and `npm run build` and still ship broken. It found several
+(undefined CSS variables that silently void a declaration, a key handler that eats its own search
+box, an entire settings screen unreachable by keyboard), which is worth knowing when weighing how
+much to trust a green pipeline on UI work here.
+
+Where the audit checked a suspicion and found **no** problem, the item says so explicitly. Those
+notes are load-bearing: they exist so a later session doesn't "fix" something that is already
+correct. `toLocaleDateString('sv')` in `src/utils/date.js` is the clearest example — it looks like
+a locale bug and is not one.
 
 ---
 
@@ -84,33 +97,53 @@ with it. (`docs/DESIGN_SPEC.md` §1.)
 
 ## 2. Priority summary
 
-| # | Item | Band | Size | Note |
-| --- | --- | --- | --- | --- |
-| 1 | Toast stack is mispositioned at most breakpoints | P0 | S | Verified bug |
-| 2 | Safe-area insets missing under `viewport-fit=cover` | P0 | S | Verified bug, iOS |
-| 3 | `100vh` in AppShell on a mobile-first app | P0 | S | Verified bug |
-| 4 | Z-index scale exists but is bypassed everywhere | P0 | S | Verified, incl. a non-existent token |
-| 5 | Dead reduced-motion block + duplicate focus ring | P0 | S | Verified dead code |
-| 6 | Two competing "update available" prompts | P0 | S | Verified duplicate |
-| 7 | Offline banner never renders inside a mode | P0 | S | Verified gap |
-| 8 | `role="application"` on `#root` | P0 | S | Verified a11y regression |
-| 9 | Low-contrast text tokens | P0 | M | 🔶 Measured; touches token table |
-| 10 | Browser history / hardware back button | P1 | L | 🔶 Architecture change |
-| 11 | Mode header: promote the breadcrumb to a real component | P1 | M | Expands existing partial work |
-| 12 | Dashboard vertical dead space | P1 | M | From HANDOFF NOT-done |
-| 13 | Side nav is three items in a full-height column | P1 | M | Desktop density |
-| 14 | Adopt `EmptyState` — it has zero consumers | P2 | M | Verified dead component |
-| 15 | Adopt `ConfirmDialog` + `useFocusTrap` for destructive actions | P2 | M | Verified dead component |
-| 16 | Define toast semantics and stop losing messages | P2 | M | Depends on item 1 |
-| 17 | Loading and skeleton consistency | P2 | M | |
-| 18 | Decide `FilterPopup`'s fate | P2 | S | Verified dead component |
-| 19 | Error and recovery states | P2 | M | |
-| 20 | Global keyboard layer + discoverable shortcuts | P3 | M | Desktop reach |
-| 21 | Motion and haptics consistency pass | P3 | M | |
-| 22 | Wide-breakpoint density and typography | P3 | M | |
-| 23 | Landscape and one-handed reach | P3 | M | |
-| 24 | Onboarding and first-run continuity | P3 | M | |
-| 25 | Offline legibility — say what works without a connection | P3 | S | |
+Ordered by band, then by item number — the same order as the body sections, so the two can't drift
+apart. **Item numbers are stable IDs in discovery order, not execution order.** They are referenced
+from `HANDOFF.md` and from each other, so don't renumber them; if an item is dropped, strike it and
+leave the number retired. For dependency-aware ordering, see §8.
+
+Pass column: `1` = first drafting pass, `2` = second audit pass (2026-08-20).
+
+| # | Item | Band | Size | Pass | Note |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Toast stack is mispositioned at most breakpoints | P0 | S | 1 | Blocks 16 |
+| 2 | Safe-area insets missing under `viewport-fit=cover` | P0 | S | 1 | iOS home indicator |
+| 3 | `100vh` in AppShell on a mobile-first app | P0 | S | 1 | |
+| 4 | Z-index scale exists but is bypassed everywhere | P0 | S | 1 | Blocks 7, 11, 15 |
+| 5 | Dead reduced-motion block + duplicate focus ring | P0 | S | 1 | Verified dead code |
+| 6 | Two competing "update available" prompts | P0 | S | 1 | See also 37 |
+| 7 | Offline banner never renders inside a mode | P0 | S | 1 | Needs 4 |
+| 8 | `role="application"` on `#root` | P0 | S | 1 | Disables SR browse mode |
+| 9 | Low-contrast text tokens | P0 | M | 1 | 🔶 Measured; touches token table |
+| 30 | Eleven CSS custom properties referenced but never defined | P0 | S | 2 | Silent; breaks score colours |
+| 31 | FlashcardMode's key handler hijacks its own search box | P0 | S | 2 | Verified empirically; blocks 20 |
+| 32 | Not one input in the app has an accessible name | P0 | M | 2 | Zero `<label>` app-wide |
+| 33 | Core interactions are on `<div>`s keyboards can't reach | P0 | M | 2 | Incl. the `Row` primitive |
+| 34 | Japanese content is not marked as Japanese | P0 | S | 2 | Compounds with 39 |
+| 35 | No `<h1>` on any mode screen, or on Belajar/Saya | P0 | S | 2 | Mostly solved by 11 |
+| 36 | Button primitives below the app's own touch minimum | P0 | M | 2 | `.btnBack`, `.btnIcon` |
+| 10 | Browser history / hardware back button | P1 | L | 1 | 🔶 Architecture change |
+| 11 | Mode header: promote the breadcrumb to a real component | P1 | M | 1 | Needs 4; also fixes most of 35 |
+| 12 | Dashboard vertical dead space | P1 | M | 1 | From HANDOFF NOT-done |
+| 13 | Side nav is three items in a full-height column | P1 | M | 1 | Desktop density |
+| 37 | SW replaces itself mid-session against lazy chunks | P1 | M | 2 | 🔶 Behaviour change; see 6, 38 |
+| 38 | Error states: untokenized, and a retry that can't work | P1 | M | 2 | Concrete half of 19 |
+| 14 | Adopt `EmptyState` — it has zero consumers | P2 | M | 1 | Also serves 12 |
+| 15 | Adopt `ConfirmDialog` + `useFocusTrap` | P2 | M | 1 | Needs 4; serves 10, 33 |
+| 16 | Define toast semantics and stop losing messages | P2 | M | 1 | Needs 1 |
+| 17 | Loading and skeleton consistency | P2 | M | 1 | Pairs with 41 |
+| 18 | Decide `FilterPopup`'s fate | P2 | S | 1 | Verified dead component |
+| 19 | Error and recovery states | P2 | M | 1 | Needs 16's conventions |
+| 39 | Japanese text falls back to a font never loaded | P2 | S | 2 | Pairs with 34 |
+| 40 | Correct/wrong colours bypass the semantic tokens | P2 | S | 2 | |
+| 41 | The mode loader is a different width than its mode | P2 | S | 2 | Pairs with 17 |
+| 42 | Number formatting is inconsistent | P2 | S | 2 | |
+| 20 | Global keyboard layer + discoverable shortcuts | P3 | M | 1 | Needs 31 first |
+| 21 | Motion and haptics consistency pass | P3 | M | 1 | |
+| 22 | Wide-breakpoint density and typography | P3 | M | 1 | |
+| 23 | Landscape and one-handed reach | P3 | M | 1 | Needs 2 |
+| 24 | Onboarding and first-run continuity | P3 | M | 1 | Feeds 12 |
+| 25 | Offline legibility — say what works without a connection | P3 | S | 1 | Needs 7 |
 
 Items 26–29 are **listed for visibility only** in §7 — do not draft or execute solutions for them
 from this document.
@@ -423,6 +456,260 @@ whatever `theme.js` ends up saying.
 
 ---
 
+---
+
+_Items 30–36 below were added by the second audit pass (2026-08-20). They are P0 for the same
+reason as items 1–8: shipped behaviour that is measurably wrong. Several are accessibility defects
+that also break ordinary mouse-and-touch use, so they are not "a11y polish" — they are bugs._
+
+### ☐ 30. Eleven CSS custom properties are referenced but never defined — `S`
+
+**What.** Fourteen `var(--…)` names are used in `src/` and defined nowhere. Eleven of those uses
+have **no fallback**, so the whole declaration is invalid at computed-value time and the property
+silently unsets. Define them, or repoint them at the tokens that already exist.
+
+**Why.** Verified by diffing every `var()` reference in `src/` against the 92 tokens actually
+defined in `global.css` plus `theme.js`. Two abandoned naming schemes and two typos:
+
+| Undefined token | Sites | Effect |
+| --- | --- | --- |
+| `--c-correct` / `--c-amber` / `--c-wrong` | `WaygroundMode.jsx:263,265,266` | **The overall-score percentage loses its colour coding entirely.** It is meant to read green ≥70%, amber ≥50%, red below. `color` is inherited, so all three branches render identically. |
+| `--c-text-dim` | `WaygroundMode.jsx:249,309,321`, `ReviewMode.jsx:257` | Labels inherit instead of dimming — visual hierarchy collapses |
+| `--c-text-muted` | `WaygroundMode.jsx:252` | Same |
+| `--c-surface` / `--c-border` | `WaygroundMode.jsx:322,323` | `background` transparent; `border` shorthand invalid, so **no border renders at all** |
+| `--color-surface` / `--color-border` / `--color-text` | `AngkaMode.jsx:642,643,644` | Same shape — the unanswered-state option box loses fill and border |
+| `--fw-semibold` | `JpDisplay.module.css:75` | Typo — the real token is `--fw-semi`. Font weight inherits. |
+
+The remaining three (`--font-jp`, `--ssw-accentSoft`, `--z-banner`) do have fallbacks and are
+less severe; `--z-banner` is item 4 and `--font-jp` is item 39.
+
+`--c-*` and `--color-*` are two dead naming schemes from before the `--ssw-*` convention settled.
+Nothing defines them and nothing ever will — every one has an exact live equivalent
+(`--ssw-correct`, `--ssw-amber`, `--ssw-wrong`, `--ssw-textDim`, `--ssw-textMuted`,
+`--ssw-surface`, `--ssw-border`, `--ssw-text`).
+
+**How it fits.** Pure repointing — no new tokens, no design decisions. `docs/DESIGN_SPEC.md` §2
+already names the correct token for every case. Do **not** define `--c-*`/`--color-*` aliases; that
+would make two parallel naming schemes permanent, which is the opposite of one-source-of-truth.
+
+**Worth adding as a guard:** this class of bug is invisible in review, in tests, and in the build —
+CSS with an undefined `var()` is valid CSS. A tiny script comparing `var()` references against
+defined tokens would catch the next one, and could run alongside the existing
+`scripts/validate-data.mjs` in `prebuild`. That's the only reason this keeps happening.
+
+**Done when.** Every `var()` reference in `src/` resolves to a defined token; WaygroundMode's score
+is colour-coded again; a check exists so the next dead token is caught mechanically.
+
+---
+
+### ☐ 31. FlashcardMode's global key handler hijacks its own search box — `S`
+
+**What.** `src/modes/FlashcardMode/index.jsx:173-197` registers a `window` keydown listener binding
+Space, ArrowLeft, ArrowRight, and 1–4. `FilterBar` (`FilterBar.jsx:45`) renders a search input in
+the same tree. The listener has no check for whether focus is in a field.
+
+**Why.** Typing in the flashcard search box is broken in the flagship mode:
+
+- **Space is swallowed.** The handler calls `e.preventDefault()`, so the character is never
+  inserted — and the card flips instead. Multi-word searches are impossible.
+- **Arrow keys navigate cards** instead of moving the text cursor, so the query can't be edited.
+- **1/2/3/4 rate the card** when it's flipped, instead of typing digits.
+
+Verified empirically, not just by reading: a scratch test reproducing the exact pattern confirmed
+`fireEvent.keyDown` returns `false` (preventDefault fired) while the flip counter incremented. The
+scratch file was deleted after; no test was added, since this is a drafting document and the fix
+should land with its own regression test.
+
+**Scope — checked, and narrower than it first looked.** `ProductionMode` and `QuizProduksiMode`
+bind only Enter/Escape while their input is active, which is intended. `AngkaMode` has two separate
+components in one file with separate `phase` state; the digit-mapping handler and the typing input
+never render together. **FlashcardMode is the only mode actually affected.**
+
+**How it fits.** One guard at the top of the handler — bail when the event target is an input,
+textarea, or contenteditable. No global keydown handler anywhere in `src/` does this today
+(verified: zero references to `tagName`, `activeElement`, or `isContentEditable` outside
+`useFocusTrap`), so the guard belongs in a small shared helper rather than pasted per-mode —
+especially since **item 20 proposes adding an app-level keyboard layer**, which would multiply this
+bug across every screen if the pattern isn't fixed first.
+
+**Sequencing.** Do this before item 20, not after.
+
+**Done when.** Every word of a multi-word query can be typed into the flashcard search box; arrows
+move the caret while the field is focused; a regression test covers it.
+
+---
+
+### ☐ 32. Not one input in the app has an accessible name — `M`
+
+**What.** Twelve `<input>`/`<textarea>` elements across nine files. **Zero `<label>` elements and
+zero `htmlFor` attributes exist in the entire codebase.** Nine inputs rely on `placeholder` alone;
+three have nothing at all.
+
+**Why.** A `placeholder` is not an accessible name: screen readers announce it inconsistently, and
+it disappears the moment the user types, so anyone who loses their place has no way to recover what
+the field was for. For the three with nothing, assistive tech announces only "edit text."
+
+The three with no name at all are worth noting because **the fix is free** — they already have
+visible label text sitting right next to them, just not associated:
+
+| Site | Visible text already present | Missing |
+| --- | --- | --- |
+| `SayaTab.jsx:393` | `<div class="inlineEditLabel">Target kartu per hari (1–200)</div>` | association |
+| `SayaTab.jsx:446` | `<div class="inlineEditLabel">Tanggal ujian</div>` | association |
+| `ExportMode.jsx:408` | hidden file input — see item 33 for the real problem there | — |
+
+**How it fits.** No visual change anywhere. Two mechanical patterns:
+
+- Where visible label text already exists (`SayaTab`'s inline edits), give it an `id` and add
+  `aria-labelledby`, or convert the `div` to a `<label htmlFor>`. Prefer the real `<label>` — it
+  also makes the label text click-to-focus, which is a genuine usability gain on a phone.
+- Where the design is placeholder-only by intent (search boxes), add `aria-label` alongside; keep
+  the placeholder as the visible hint.
+
+`docs/COMPONENT_SPEC.md` §2 has no form primitive today. If item 14's `EmptyState` adoption shows
+the value of shared primitives, a small `Field` wrapper (label + input + optional hint) is the
+natural follow-on and would make this class of defect structurally impossible. Worth proposing, not
+worth blocking this fix on.
+
+**Done when.** Every input has an accessible name; the two SayaTab labels are real `<label>`
+elements; no new visual difference.
+
+---
+
+### ☐ 33. Core interactions are on `<div>`s that keyboards can't reach — `M`
+
+**What.** Ten non-interactive elements carry `onClick` with no `role` and no `tabIndex` (measured
+with a JSX-aware scan, not a grep). Several are primary interactions.
+
+**Why.** Ranked by what it costs the user:
+
+| Site | What it is | Consequence |
+| --- | --- | --- |
+| `SayaTab.jsx:23` | **the `Row` primitive itself** | `docs/COMPONENT_SPEC.md` §5 documents `Row` as a reusable pattern. Every settings row — theme, daily goal, exam date, export, import — is keyboard-unreachable. That is the whole Saya screen. |
+| `SayaTab.jsx:562` | the reset row | **Erasing all progress** is not keyboard-reachable — and see item 15, its confirmation is a bespoke timed tap |
+| `ExportMode.jsx:387` | "📥 Impor dari File" trigger | A keyboard user **cannot restore a backup.** On an app with no backend and localStorage-only persistence, this is the recovery path |
+| `GlossaryMode.jsx:310` | every term row | Glossary is unusable by keyboard |
+| `SumberMode.jsx:124` | every source card | Same |
+| `FlashcardMode/FlipCard.jsx:78,87` | the card face | Flip works via the window Space handler, but the card is never focusable, so nothing announces it as interactive |
+| `SimulasiMode.jsx:543` | pause overlay | Can't be dismissed by keyboard |
+| `ConfirmDialog.jsx:26`, `FilterPopup.jsx:83` | modal backdrops | Conventional; acceptable **once Escape works** — which is item 15 |
+
+Note this is not only a screen-reader concern. `<div onClick>` gives no `:focus-visible` ring
+(item 5's ring targets `button, a, input, select, textarea, [tabindex]`), no Enter/Space
+activation, and no disabled semantics.
+
+**How it fits.** Almost all of these should simply be `<button type="button">` with the existing
+class. `Row` is the high-leverage one — fixing the primitive fixes every consumer at once, and
+`docs/COMPONENT_SPEC.md` §5 already frames it as a shared pattern, so the spec needs a one-line
+update rather than a rethink. Two cautions:
+
+- A `<button>` inside a grid item inherits button defaults — reset `background`, `border`,
+  `font`, and `text-align: left` so `Row`'s `space-between` layout is unchanged. This is Variant A
+  content (`docs/LAYOUT_SPEC.md` §3), so the row must keep stretching.
+- `Row` renders only when `onClick` is present in some call sites; keep the non-clickable variant a
+  `div` rather than a disabled button, so static rows aren't announced as controls.
+
+**Done when.** Every interaction reachable by mouse is reachable by keyboard; the focus ring shows
+on all of them; `Row`'s visual output is unchanged.
+
+---
+
+### ☐ 34. Japanese content is not marked as Japanese — `S`
+
+**What.** `index.html` sets `<html lang="id">`, correctly. **No element anywhere in `src/` sets
+`lang`** — zero occurrences. Every Japanese term, reading, and example sentence is therefore
+declared to be Indonesian.
+
+**Why.** This is the content the entire app exists to teach.
+
+- A screen reader reads 現場 with an Indonesian voice and Indonesian letter-to-sound rules. The
+  output is not Japanese and not intelligible.
+- Browsers use `lang` to pick CJK glyph variants. Several Han characters render differently in
+  Japanese and Chinese typefaces, and the font stack falls back to generic `serif` in some places
+  (item 39) — where it does, an unmarked page can select a non-Japanese glyph form for a character
+  a learner is trying to memorise the shape of.
+
+The app already knows the content is Japanese: `src/utils/speak.js:42` sets `utt.lang = 'ja-JP'`
+for text-to-speech. Only the markup doesn't say so.
+
+**How it fits.** `JpDisplay` is the single component that renders Japanese (`<ruby>`/`<rt>` at
+`JpDisplay.jsx:154,189`), so `lang="ja"` on its root covers most of the app in one edit. Sweep the
+remaining direct `{card.jp}` renders — `ErrorBoundary.jsx`'s `FlatCardFallback` is one — and
+prefer routing them through `JpDisplay` where practical, which is the one-source-of-truth move
+anyway.
+
+Consider `<rp>` fallback parentheses around `<rt>` at the same time; cheap, and it degrades ruby
+gracefully in any renderer without ruby support.
+
+**Done when.** Japanese text carries `lang="ja"`; TTS and markup agree; no visual change.
+
+---
+
+### ☐ 35. No `<h1>` on any mode screen, or on Belajar or Saya — `S`
+
+**What.** The app has exactly two `<h1>`s: `Dashboard.jsx:105` ("SSW Konstruksi") and
+`Onboarding.jsx:38`. Everything else starts at `<h2>` (22 of them) or uses a `div`.
+
+**Why.** `App.jsx` returns early for modes, so when a mode is open Dashboard isn't mounted and its
+`h1` is gone with it — every one of the 21 mode screens is a page whose highest heading is `h2`,
+with no `h1` above it. Heading navigation is one of the main ways screen-reader users move around,
+and here it lands on a mid-level heading with no page title.
+
+Two more gaps in the same family:
+
+- `BelajarTab.jsx:102` and `SayaTab.jsx:195` render their titles as `<div className={s.pageTitle}>`
+  — visually titles, semantically nothing. Two of the three top-level tabs have no heading at all.
+- `Dashboard.jsx:111` marks the visible "Beranda" page title `aria-hidden="true"` while the `h1`
+  it replaces on wide screens is hidden by CSS. So on desktop the text a sighted user sees is
+  hidden from assistive tech, and the text assistive tech reads is invisible. Both are reasonable
+  in isolation; together they're inverted.
+
+Four modes have no heading whatsoever: `CatatanMode`, `DengarMode`, `SearchMode` (and
+`FlashcardMode.jsx`, which is only a lazy-entry shim and correctly has none — its real screen is
+`FlashcardMode/index.jsx`).
+
+**How it fits.** **Item 11 fixes most of this for free.** A `ModeHeader` rendering the mode's label
+from `MODE_META` as an `<h1>` gives all 21 mode screens a correct page title and a correct heading
+root in one component, and the existing `h2`s below it become properly nested. That is a good
+reason to sequence item 11 early. Remaining work here is then small: promote the two tab titles
+from `div` to `h1`, and reconcile Dashboard's aria-hidden inversion.
+
+**Done when.** Every screen has exactly one `h1` naming that screen; heading levels descend without
+gaps; the visible title and the announced title are the same string.
+
+---
+
+### ☐ 36. Shared button primitives are below the app's own touch-target minimum — `M`
+
+**What.** `global.css` defines `--tap-min: 44px` with a comment justifying it specifically for this
+audience ("used one-handed on phones, often outdoors"). It is referenced in **two stylesheets** —
+`Dashboard.module.css` and `flashcard.module.css`. The shared primitives in
+`src/modes/modes.module.css` that `docs/COMPONENT_SPEC.md` §2 tells every screen to reuse don't
+use it, and two fall short:
+
+| Primitive | Actual | vs `--tap-min` |
+| --- | --- | --- |
+| `.btnIcon` | `width: 40px; height: 40px` | 40 < 44 |
+| `.btnBack` | `font-size: var(--fs-caption)` (12px) + `padding: 7px 10px 7px 0` → ≈32px tall, and `padding-left: 0` so the hit area hugs the glyph | well under |
+| `.btnPrimary` | `padding: 15px` + 13px text → ≈48px | fine |
+
+`.btnBack` is the primary escape hatch on every mode screen, and it is the smallest target in the
+set. On a phone, outdoors, one-handed, that is the wrong thing to make hard to hit.
+
+**Two off-token values in `.btnPrimary` worth fixing in the same pass:** `color: #1a0a00` is a raw
+hex (`docs/DESIGN_SPEC.md` §2: components reference `var(--ssw-*)`, never raw hex — this one won't
+adapt if the amber ever changes), and its `box-shadow: 0 4px 20px rgba(245,158,11,0.3)` is a
+near-duplicate of the existing `--shadow-amber` (`0 4px 20px rgba(245,158,11,0.28)`).
+
+**How it fits.** Raise `.btnIcon` to `var(--tap-min)` and give `.btnBack` symmetric padding plus a
+`min-height`. Keep the *visual* size where it is if the design calls for it — padding and a
+transparent hit area do the job without making the glyph bigger, which is the standard way to hit
+44px without redesigning. Then sweep the remaining stylesheets for interactive elements under 44px
+rather than treating `--tap-min` as decorative.
+
+**Done when.** No interactive element is smaller than `--tap-min` in either dimension; the token is
+used where it applies; `.btnPrimary` carries no raw hex and no duplicated shadow.
+
 ## 4. P1 — Navigation and orientation
 
 Where the user is, how they got there, how they leave. The breadcrumb work started on this branch
@@ -615,6 +902,100 @@ the column doesn't overflow at a 1040px-tall viewport; the bottom nav at narrowe
 untouched.
 
 ---
+
+---
+
+_Items 37–38 added by the second audit pass (2026-08-20)._
+
+### 🔶 37. The service worker replaces itself mid-session, and every mode is a lazy chunk — `M` — needs owner decision
+
+**What.** `public/sw.js` calls `self.skipWaiting()` on install (line 28) and `self.clients.claim()`
+on activate (line 42), then deletes every cache not in `ALL_CACHES` (lines 35–41). Meanwhile all 21
+modes are `React.lazy` and Vite emits content-hashed chunk filenames. Decide whether an update
+should take over a live session at all.
+
+**Why.** Two consequences, one cosmetic and one not.
+
+**The cosmetic one:** the update prompt is misleading. Item 6 treats the two competing
+notifications as a duplication problem, and it is — but the deeper issue is that by the time either
+one appears, `skipWaiting` + `clients.claim` have **already** made the new worker active and
+claimed the page. "Perbarui" isn't a choice about whether to update; the update happened. The
+button only reloads.
+
+**The one that matters:** a user studying while a deploy lands now has an old JS bundle running
+against a new cache, with the old caches deleted. Navigating to a mode whose chunk hasn't loaded
+yet triggers a dynamic import of a hashed filename that no longer exists in the cache **or** on the
+server (a Pages deploy replaces the asset directory). The import rejects. On a fully lazy-loaded
+app that's a hard failure on the next navigation, and it lands on exactly the users who keep the
+app open — the committed daily ones.
+
+`ModeRouter` does wrap `<Suspense>` in an `ErrorBoundary`, so this surfaces as the error fallback
+rather than a white screen. But see item 38: that fallback's "Coba lagi" only clears React state
+and re-attempts the same dead import, so it fails again immediately.
+
+**Why this is a judgment call.** `skipWaiting` is a deliberate trade — it exists so users get fixes
+fast without waiting for every tab to close, which for an offline-first app with a stale-cache
+history (`docs/PWA_RELEASE_SPEC.md` §2) is a defensible default. Removing it means updates land
+later; keeping it means accepting mid-session swaps. Reasonable people land differently, so this
+needs the owner, not an executing session. Three routes:
+
+1. **Wait for the user.** Drop `skipWaiting`; let the new worker stay `waiting`; have the toast's
+   action post `SKIP_WAITING` and only then reload. The prompt becomes truthful and no session is
+   swapped underneath. Most correct, most work.
+2. **Keep `skipWaiting`, stop deleting the old cache immediately.** Retain the previous
+   `CACHE_VERSION`'s static cache for one generation so in-flight lazy imports still resolve.
+   Cheapest real mitigation; costs some storage.
+3. **Keep current behaviour, handle the failure.** Catch dynamic-import rejection and force a
+   reload rather than showing a retry that can't work. Doesn't prevent the interruption but stops
+   it being a dead end. Pairs with item 38 and is worth doing regardless of 1 or 2.
+
+**Note for whoever executes:** touching `sw.js` means bumping `CACHE_VERSION`
+(`docs/PWA_RELEASE_SPEC.md` §2), and `src/tests/offline.sw.test.js` covers this file.
+
+**Done when.** The owner has chosen; the update prompt describes what actually happens; a deploy
+during an open session cannot leave the app in a state where the only recovery is a manual refresh.
+
+---
+
+### ☐ 38. Error states: untokenized, unexplained, and a retry that can't work — `M`
+
+**What.** `src/components/ErrorBoundary.jsx` provides three fallbacks — `TabError`,
+`FlatCardFallback`, and the generic boundary. All three are built from inline styles, and the
+generic one's recovery action is ineffective for the most likely real failure.
+
+**Why.** Item 19 proposes reviewing error *paths*; this is the concrete state of the *components*
+those paths land on:
+
+- **"Coba lagi" mostly can't work.** It calls `this.setState({ error: null })`, which re-renders the
+  same subtree. For a stale lazy-chunk import (item 37 — the most likely production error here),
+  React retries the same failed import and throws again immediately. The user gets a button that
+  visibly does nothing. `TabError` gets this right with `window.location.reload()`; the generic
+  boundary doesn't.
+- **The raw error message is shown to the user:** `{this.state.error?.message ?? 'Unknown error'}`.
+  For the chunk case that renders as `Failed to fetch dynamically imported module: https://…` — an
+  English stack-level string in front of an Indonesian construction worker. Useful in a console,
+  not in the UI.
+- **Every value is hardcoded.** `padding: 32`, `fontSize: 32/13/12`, `borderRadius: 12`,
+  `opacity: 0.6` — none from `--sp-*`, `--fs-*`, or `--r-*`. `docs/COMPONENT_SPEC.md` §6 puts
+  reusable, themed, hover-capable UI in a module; these are all three, and the buttons have no
+  hover or active state at all.
+- **Two different looks for one concept.** `TabError` and the generic fallback present the same
+  class of event differently, so a user hitting both sees two unrelated designs.
+
+**How it fits.** `EmptyState` is already the app's icon + title + explanation + one-action shape and
+is already themed — item 19 proposes reusing it for errors and this is the concrete version of
+that. Give `ErrorBoundary` a real CSS module, express the three fallbacks as one component with a
+variant, and:
+
+- Recovery action is **reload**, not state-clear, unless the boundary is given a retry callback that
+  actually re-fetches something.
+- Show plain Indonesian; keep the technical message behind a collapsed "Detail teknis" for anyone
+  reporting a bug, and keep the existing `console.error` in `componentDidCatch` for diagnostics.
+- Offer the export path where progress could be at risk, per item 15's reasoning.
+
+**Done when.** One error presentation, tokenized and themed; the recovery action works for chunk
+failures; the user-facing copy is Indonesian and actionable; no inline styles left in
+`ErrorBoundary.jsx`.
 
 ## 5. P2 — Consistency and feedback
 
@@ -830,6 +1211,117 @@ crash or is explicitly acknowledged as lost.
 
 ---
 
+---
+
+_Items 39–42 added by the second audit pass (2026-08-20)._
+
+### ☐ 39. Japanese text falls back to a font the app never loads — `S`
+
+**What.** `AngkaMode.module.css:152,202` and `SimulasiMode.module.css:112,227` set
+`font-family: var(--font-jp, 'Noto Serif JP', serif)`. `--font-jp` is defined nowhere, and
+**`Noto Serif JP` is not loaded** — `index.html` requests DM Sans, Noto Sans **JP**, and Syne. So
+the chain falls all the way through to generic `serif`.
+
+**Why.** These four rules cover `.questionJp` and `.reviewJp` in the exam-simulation mode and the
+related-card Japanese in Angka — Japanese exam content rendered in whatever serif the device
+happens to have, next to identical content elsewhere in Noto Sans JP. On Android that fallback
+varies by vendor and may have no Japanese coverage at all, in which case the user gets tofu boxes
+or Chinese glyph forms for the characters they're studying. Compounds directly with item 34: no
+`lang="ja"` means the browser has no signal to prefer a Japanese face when it does have a choice.
+
+**How it fits.** Two options, and the second is probably right:
+
+1. Define `--font-jp` in `global.css` as the loaded stack (`'Noto Sans JP', system-ui, sans-serif`)
+   and keep the four call sites. Adds a token that duplicates what `body` already sets.
+2. Delete the four `font-family` declarations. Japanese already inherits `'DM Sans', 'Noto Sans JP',
+   system-ui` from `body`, and DM Sans has no CJK coverage so Japanese characters resolve to Noto
+   Sans JP automatically. Fewer moving parts.
+
+Pick 2 unless a deliberate serif treatment for exam questions is wanted — in which case that's a
+design decision for `docs/DESIGN_SPEC.md` §3 and the font has to actually be loaded, which costs
+a webfont request against the offline-first budget.
+
+**Done when.** Japanese renders in the same loaded family everywhere; no `var()` in the app points
+at an unloaded font.
+
+---
+
+### ☐ 40. Correct/wrong colours bypass the semantic tokens — `S`
+
+**What.** `--ssw-correct` (`#16a34a`) and `--ssw-wrong` (`#dc2626`) exist, theme-swap, and have
+matching `…Bg`/`…Border` variants. Several modes use different greens and reds instead.
+
+**Why.** `AngkaMode.jsx:643,663` uses `#22c55e`/`#ef4444`; `AngkaMode.jsx:595,596` uses
+`#F87171`/`#4ADE80`; `SimulasiMode.jsx:313,314` uses `#16a34a`/`#dc2626` as raw literals rather than
+tokens. So "correct" is at least three different greens depending on which mode you're in — and
+`AngkaMode`'s results list uses a *fourth* pair. Correct/wrong is the most semantically loaded
+colour signal in a study app; it should be the most consistent thing in it, and a learner
+skim-reading results shouldn't have to recalibrate per screen.
+
+Raw literals also don't theme-swap. `AngkaMode.jsx:227,592,668` uses `#9CA3AF` for secondary text,
+which sits at roughly 2.3:1 on the light background — a contrast failure of the same kind as item 9
+but self-inflicted rather than inherited from the palette.
+
+**How it fits.** Mechanical substitution to `var(--ssw-correct)` / `var(--ssw-wrong)` and the muted
+text tokens. Genuine per-mode accents (`ANGKA_COLOR`, `MODE_META.color`, the category colour map)
+are a different thing and should stay — they're data, not theme. The line is: **semantic state uses
+tokens; identity accents may be literals.** Worth writing into `docs/DESIGN_SPEC.md` §2, since the
+existing "never raw hex" rule reads as absolute and clearly isn't being applied that way.
+
+Scope for sizing: 113 raw hex literals total (86 in JSX, 27 in `.module.css`), but most are
+legitimate accents or white-on-accent text. The correct/wrong and muted-grey cases are the ones
+that matter.
+
+**Done when.** One green and one red for correct/wrong app-wide, both theme-aware; no raw grey used
+as body text; the accent-vs-semantic distinction is documented.
+
+---
+
+### ☐ 41. The mode loader is a different width than the mode it loads — `S`
+
+**What.** `ModeRouter.jsx`'s `ModeLoader` hardcodes `maxWidth: 'var(--max-w)'` inline. But
+`App.jsx` passes `MODE_META[mode]?.width ?? 'reading'` to `AppShell`, and most modes are `reading`
+(620px) rather than full `--max-w` (1180px at desktop).
+
+**Why.** The skeleton renders at up to 1180px, then the real mode mounts at 620px and everything
+snaps inward. On the slow connections this app is built for, the loader is on screen long enough
+for that jump to be the first thing the user sees. It's also redundant — `AppShell`'s `.content`
+already applies the correct max-width, so the inline one only ever fights it.
+
+**How it fits.** Delete the inline `maxWidth` and `margin` and let the shell own width, which is
+what `docs/LAYOUT_SPEC.md` §2 says: "A screen sets `max-width: var(--max-w)` once and never needs
+its own media query" — and a screen inside `AppShell` doesn't even need that. Pairs naturally with
+item 17, which reshapes the loader per mode anyway.
+
+Also here: `Skeleton.Card` sets both `aria-hidden="true"` and `aria-label` — the label is
+unreachable while the element is hidden. `ModeLoader` already has a `role="status"` wrapper with
+its own label, so drop the per-block labels rather than adding more.
+
+**Done when.** No width change when a mode replaces its skeleton; loader width comes only from the
+shell; one loading announcement per transition.
+
+---
+
+### ☐ 42. Number formatting is inconsistent — `S`
+
+**What.** Card counts use `toLocaleString('id-ID')` in three places (`Dashboard.jsx:160,179`,
+`SideNav.jsx:50`) and render raw everywhere else — including `Dashboard.jsx`'s own
+`{knownN} kartu hafal` two lines above a formatted one. So the same corpus shows as "1.438" and
+"1438" on the same screen.
+
+**Why.** Small, but it's the sort of thing that reads as unfinished, and Indonesian uses `.` as the
+thousands separator so an unformatted four-digit number looks wrong rather than merely plain.
+
+**Not a bug:** `toLocaleDateString('sv')` in `src/utils/date.js` and `StudyHeatmap.jsx` is the
+standard trick for an ISO `YYYY-MM-DD` key and is correct — leave it alone. Checked precisely so a
+later session doesn't "fix" it.
+
+**How it fits.** A tiny `formatCount()` in `src/utils/` (there is no formatting helper today) used
+everywhere a corpus-scale number is displayed. Small numbers — a streak of 5, a score of 7/10 —
+don't need it and shouldn't get it.
+
+**Done when.** Counts in the thousands format consistently; `date.js` untouched.
+
 ## 6. P3 — Reach and polish
 
 Worth doing, not worth blocking on. Roughly in value order within the band.
@@ -1012,45 +1504,87 @@ they already are.
   repo-wide") touches 237 files and was deliberately kept as its own commit so the UI work stays
   reviewable — review it separately from the rest. Process item, carried from HANDOFF.
 
-**Also noticed this session, not in any list, not UI:** `docs/BLUEPRINT-CURRENT.md` is live in
-`docs/` but badly stale — it self-describes as v4.21.1/v4.22.0 and claims storage schema v3, 23
-modes, 1,443 cards, and 457 tests, against an actual v4.23.0 with storage v6, 21 modes, 1,438 cards,
-and 435 tests. It is also absent from `docs/AGENT_WORKFLOW.md` §4's table of where things live, so
-nothing points at it and nothing keeps it honest. This is the same shape as the stale docs already
-retired in session 23 and 2026-08-19. It probably belongs in `docs/archive/` — flagged for the
-owner, not actioned here, since retiring a doc during a drafting session is exactly the kind of
-unasked-for scope change `docs/AGENT_WORKFLOW.md` §2 says to flag first.
+**Resolved 2026-08-20 — no longer pending.** The first pass flagged `docs/BLUEPRINT-CURRENT.md`
+as live-but-stale and left it for the owner. The owner said to fix it along the way, so it has been
+archived to `docs/archive/BLUEPRINT-CURRENT.md` with a provenance header carrying the full drift
+table (it claimed storage v3 / 23 modes / 1,443 cards / 457 tests against an actual v6 / 21 /
+1,438 / 435, and documented the removed Doboku/Kenchiku tracks at length). Nothing live was lost —
+its one section with ongoing value, "Hard Constraints (Do Not Break)," is already covered more
+accurately by `docs/PWA_RELEASE_SPEC.md` §1, `docs/AGENT_WORKFLOW.md` §2, and `_MAP.md` §1/§3.
+`docs/archive/ARCHIVE-INDEX.md` gained a row, and three "superseded by" pointers that aimed at the
+old live path were retargeted. `_MAP.md`'s `docs/` tree was stale in the same way — still listing
+`DATA_ARCH_AUDIT.md` as live and omitting every spec doc added since — and was corrected in the
+same commit.
+
+Recorded here rather than deleted because it is the second time a doc has drifted this way while
+sitting outside `docs/AGENT_WORKFLOW.md` §4's table. The pattern is the point: **a doc nothing
+points at is a doc nothing keeps honest.** If this plan is still live in three months and §4 still
+doesn't mention it, that is the same failure starting again.
 
 ---
 
 ## 8. Suggested execution sequencing
 
-Not a schedule — a dependency order. Batching by band keeps commits reviewable and keeps
-verification honest.
+Not a schedule — a dependency order. Batching keeps commits reviewable and keeps verification
+honest. Where an item blocks another, it is called out; everything else inside a batch is
+independent and can be split or grouped freely.
 
-**Batch 1 — P0 mechanical (items 1–8).** All small, all independent, all verified. One commit per
-item or two or three grouped by file. Nothing here needs a design decision, and several unblock P1.
-Item 4 before items 7 and 11 (they need `--z-banner`). Item 1 before item 16.
+**Batch 0 — the silent-defect fixes (items 30, 31, 41).** Do these first, before anything else,
+even though 41 is nominally P2. Reason: all three are cases where the app renders something wrong
+while every check passes, and two of them will otherwise be *reintroduced* by later work in this
+plan — item 20 would spread item 31's missing focus guard across every screen, and item 17 would
+build a nicer skeleton on top of item 41's wrong width. Small, mechanical, no design decisions.
+Item 30 should land with the token-reference guard script described in its entry; without that,
+this is a fix rather than a fix plus a floor.
 
-**Batch 2 — item 9 (contrast).** Blocked on an owner decision between the three routes. Don't roll
-it into Batch 1; it changes visual output and deserves its own reviewable diff.
+**Batch 1 — P0 mechanical (items 1–8, 34, 35, 36).** All small, all verified, no design decisions.
+One commit per item, or group by file where they overlap. Ordering constraints inside the batch:
+item 4 before items 7 and 11 (they need `--z-banner`); item 1 before item 16. Item 35 is cheaper
+after item 11, so it can also slip to Batch 4 — decide when you get there rather than doing the
+work twice.
 
-**Batch 3 — item 10 (history).** Blocked on an owner decision. Its own branch. Largest single item
-in this plan; do not batch it with anything.
+**Batch 2 — the accessibility structural fixes (items 32, 33).** Bigger than Batch 1 and touching
+many files, but mechanical and low-risk: no visual output should change. Worth its own reviewable
+diff precisely because "no visual change" is the acceptance criterion — mixed into a batch that
+does change visuals, nobody can verify it. Item 33's `Row` fix is the high-leverage piece; do it
+first and confirm SayaTab looks byte-identical before touching the rest.
 
-**Batch 4 — P1 layout (items 11, 12, 13).** Item 11 first — the mode header is the piece other
-navigation work coordinates with. Then 12 and 13, which are independent of each other.
+**Batch 3 — item 9 (contrast).** Blocked on an owner decision between the three routes. Don't roll
+it into an earlier batch; it changes visual output everywhere and deserves an isolated diff.
 
-**Batch 5 — P2 adoption (items 14, 15, 18, then 16, 17, 19).** 14/15/18 are adoption of existing
-components and mostly mechanical. 16 depends on item 1. 19 depends on the conventions from 16.
+**Batch 4 — item 10 (history).** Blocked on an owner decision. Its own branch. Largest single item
+in this plan; do not batch it with anything. Item 15 should land first if a mid-quiz back-guard is
+in scope.
 
-**Batch 6 — P3.** Pick by value as time allows; nothing in P3 blocks anything else.
+**Batch 5 — item 37 (service worker).** Blocked on an owner decision. Keep separate from Batch 4
+even though both are navigation-adjacent: this one touches `sw.js`, needs a `CACHE_VERSION` bump,
+and is the one change in this plan that can break the offline path for existing installs if it goes
+wrong. Item 6 either folds into this or lands just before it — decide together, since 37 determines
+what the prompt in 6 should honestly say.
+
+**Batch 6 — P1 layout (items 11, 12, 13).** Item 11 first: the mode header is what other navigation
+work coordinates with, and it resolves most of item 35 as a side effect. Then 12 and 13, which are
+independent of each other. Item 14 is worth pulling forward into this batch — the empty-state pass
+is most of the perceived improvement in item 12 and tells you how much real dead space is left.
+
+**Batch 7 — P2 adoption and consistency (items 14, 15, 18, 38, 39, 40, 42, then 16, 17, 19).**
+14/15/18 are adoption of components that already exist. 38/39/40/42 are small and independent.
+16 needs item 1; 17 pairs with the already-done 41; 19 needs the conventions established in 16, so
+it goes last.
+
+**Batch 8 — P3.** Pick by value as time allows. Nothing in P3 blocks anything else, but item 20
+must not start before item 31.
 
 **Every batch:** `npm test` / `npm run lint` / `npm run build` before starting and again before
 committing — `docs/AGENT_WORKFLOW.md` §2. Baseline as of this drafting session, re-verified rather
 than taken from docs: **435/435 tests passing (39 files), lint 0 warnings, build clean** apart from
 the known `data-cards` warning. If a number differs when you start, find out why before changing
 anything.
+
+**A note on tests.** Several items here are regressions that the existing 435 tests did not catch
+and would not catch again — item 31 in particular is a plain functional bug in the most-used mode.
+Where an item describes a reproducible defect, land a regression test with the fix. Item 31's entry
+describes the exact reproduction that was used to confirm it.
 
 ---
 
@@ -1075,6 +1609,16 @@ logic and data — so these are manual, and worth actually doing rather than ass
 - [ ] **Tests, lint, build** — before and after, not just after.
 - [ ] **`CACHE_VERSION`** bumped in `public/sw.js` if anything shipped-facing changed
       (`docs/PWA_RELEASE_SPEC.md` §2). It has been missed before.
+- [ ] **Every `var()` in the diff resolves.** Added by the second pass, because eleven undefined
+      tokens shipped without anything noticing (item 30). An undefined `var()` with no fallback is
+      valid CSS that silently voids its declaration — lint, tests, and build all pass.
+- [ ] **Typing works.** If the screen has a text field and any global key handler, type a
+      multi-word phrase into it and confirm every character lands (item 31).
+- [ ] **Tab to every control you can click.** If the mouse can reach it, the keyboard must
+      (item 33). Watch for `<div onClick>`.
+- [ ] **Real device once per band.** The emulator won't show you the iOS home-indicator overlap
+      (item 2), a vendor CJK font fallback (item 39), or how a 44px target actually feels
+      (item 36).
 
 ---
 
@@ -1095,9 +1639,19 @@ source of truth per concept, and a spec that lags the code is worse than no spec
 | 21 | `docs/DESIGN_SPEC.md` §4 | Motion and haptic rules |
 | 22 | `docs/DESIGN_SPEC.md` §3 | Responsive type scale |
 | 23 | `docs/DESIGN_SPEC.md` | Reach principle |
+| 30 | `docs/COMPONENT_SPEC.md` | Note that `--c-*` / `--color-*` are dead schemes; `--ssw-*` only |
+| 32 | `docs/COMPONENT_SPEC.md` §2 | A `Field` primitive, if one is introduced |
+| 33 | `docs/COMPONENT_SPEC.md` §5 | `Row` is a `<button>`, not a `<div>` |
+| 34 | `docs/CARD_CONTENT_SPEC.md` | `lang="ja"` on rendered Japanese |
+| 36 | `docs/DESIGN_SPEC.md` §2 | `--tap-min` applies to the shared button primitives |
+| 37 | `docs/PWA_RELEASE_SPEC.md` §2 | Update/activation strategy, whichever route is chosen |
+| 39 | `docs/DESIGN_SPEC.md` §3 | Which font family Japanese uses, and that it must be loaded |
+| 40 | `docs/DESIGN_SPEC.md` §2 | Semantic state uses tokens; identity accents may be literals |
 
 ---
 
-_Drafted against `feat/ui-overhaul` @ `2169bfc`, 2026-08-20. Every "verified" claim in this document
-was checked against the code or the build output during drafting, not carried over from another
-doc. Findings age — re-check before acting._
+_Drafted against `feat/ui-overhaul` @ `2169bfc`, 2026-08-20, across two passes on the same day.
+Every "verified" claim was checked against the code, the build output in `dist/`, or a throwaway
+reproduction — not carried over from another doc. No application code was written or changed in
+either pass; `src/` was confirmed untouched before committing. Findings age — re-check before
+acting, and treat a line number as a hint about where to look rather than a guarantee._

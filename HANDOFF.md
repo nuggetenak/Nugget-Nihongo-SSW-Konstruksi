@@ -150,30 +150,68 @@ doesn't update itself.
     own branch, no solution drafted. Re-verified at 661.05KB / 191.32KB gzipped.
   - Branch unmerged, review the Prettier commit (`f2fa439`, 237 files) separately → plan item 29.
 
-  The plan adds 21 further UI/UX proposals beyond those four, in four priority bands, each with
-  evidence, a fit-to-existing-system note, and acceptance criteria. Two items are flagged
-  🔶 **needing an owner decision before execution** — item 9 (measured contrast failures:
-  `--ssw-textFaint` is 2.89:1 in light theme and is what colours the bottom nav's inactive
-  labels; amber-as-text is 2.11:1, which also affects the focus ring — any fix touches the token
-  table DESIGN_SPEC calls locked) and item 10 (no `pushState`/`popstate` anywhere, so Android's
-  hardware back button exits the PWA from any screen — fixing it is a navigation-architecture
-  change).
+  The plan now holds **42 numbered proposals** across four priority bands, each with evidence, a
+  fit-to-existing-system note, and acceptance criteria, plus a dependency-ordered batch plan.
+  Items 1–29 came from the first drafting pass; **items 30–42 came from a second exhaustive audit
+  the same day**, which went looking specifically for defects that pass `npm test`, `npm run
+  lint`, and `npm run build` and still ship broken. It found enough of them to be worth
+  distrusting a green pipeline on UI work here:
 
-  Also newly found and recorded in that plan, none of it previously tracked: the toast stack is
-  mispositioned at every breakpoint except one, `viewport-fit=cover` is set with zero
-  `safe-area-inset` usage anywhere in `src/`, `global.css` carries a reduced-motion block that
-  cannot match anything (CSS Modules hashes the class names it targets — confirmed against build
-  output) and two conflicting `:focus-visible` rules, `ModeRouter` references a `--z-banner`
-  token that does not exist, and `EmptyState.jsx` / `FilterPopup.jsx` / `useConfirm` /
-  `useFocusTrap` all have zero consumers while the behaviour they implement is hand-rolled
-  elsewhere. Baseline re-verified during drafting: `npm test` 435/435, `npm run lint` 0 warnings,
-  `npm run build` clean apart from the known `data-cards` warning.
+  - **11 CSS custom properties are referenced but defined nowhere, with no fallback** (plan item
+    30). An undefined `var()` is valid CSS that silently voids its whole declaration. The worst
+    case: WaygroundMode's overall-score percentage is meant to render green ≥70% / amber ≥50% /
+    red below, and all three branches point at dead tokens, so **the colour coding does nothing**.
+    AngkaMode's option boxes lose fill and border the same way. Two abandoned naming schemes
+    (`--c-*`, `--color-*`) plus a `--fw-semibold` typo for `--fw-semi`.
+  - **FlashcardMode's window keydown handler hijacks its own search box** (item 31). Space is
+    swallowed and flips the card; arrows navigate cards instead of moving the caret. Multi-word
+    search is impossible in the most-used mode. Confirmed with a throwaway reproduction, since
+    reading alone wasn't proof. Checked the three other candidate modes — they're fine.
+  - **Zero `<label>` elements and zero `htmlFor` in the whole codebase** (item 32); none of the 12
+    inputs has an accessible name.
+  - **`SayaTab`'s `Row` — the primitive COMPONENT_SPEC §5 documents as reusable — is a
+    `<div onClick>`** (item 33), so the entire settings screen is keyboard-unreachable, including
+    erase-all-progress and the "Impor dari File" restore path.
+  - **No `lang="ja"` anywhere** (item 34), so every Japanese term is declared Indonesian to screen
+    readers and to the browser's CJK glyph selection. `speak.js` already sets `ja-JP` for TTS.
+  - **No `<h1>` on any of the 21 mode screens**, or on Belajar/Saya (item 35). Item 11's
+    `ModeHeader` resolves most of it as a side effect — a reason to sequence 11 early.
+  - `.btnIcon` is 40px and `.btnBack` ≈32px against the app's own justified `--tap-min: 44px`,
+    which is referenced in only 2 of ~30 stylesheets (item 36).
+  - `--font-jp` falls back to `Noto Serif JP`, **which the app never loads** — Japanese exam
+    content in SimulasiMode drops to generic serif (item 39).
 
-  Separately flagged for the owner, not actioned: `docs/BLUEPRINT-CURRENT.md` sits live in
-  `docs/` but is badly stale (claims storage v3, 23 modes, 1,443 cards, 457 tests against an
-  actual v6, 21, 1,438, 435) and isn't listed in `docs/AGENT_WORKFLOW.md` §4, so nothing points
-  at it and nothing keeps it honest. Likely belongs in `docs/archive/` — see `docs/UI_UX_PLAN.md`
-  §7's closing note.
+  **Three items are flagged 🔶 needing an owner decision before execution:**
+  - **Item 9** — measured contrast failures. `--ssw-textFaint` is 2.89:1 in light theme and is
+    what colours the bottom nav's inactive labels; amber-as-text is 2.11:1, which also affects
+    the focus ring. Any fix touches the token table DESIGN_SPEC calls locked. Three routes given.
+  - **Item 10** — no `pushState`/`popstate` anywhere, so Android's hardware back button exits the
+    PWA from any screen, mid-quiz included. Fixing it is a navigation-architecture change.
+  - **Item 37 (new)** — `sw.js` calls `skipWaiting()` + `clients.claim()` and deletes old caches,
+    while all 21 modes are `React.lazy` with content-hashed chunks. A deploy during an open
+    session can leave stale imports that exist neither in cache nor on the server, and
+    `ErrorBoundary`'s "Coba lagi" only clears React state, so it retries the same dead import
+    forever. Three routes given; all touch `sw.js` and need a `CACHE_VERSION` bump.
+
+  The audit also recorded several suspicions that turned out **not** to be bugs, so a later
+  session doesn't "fix" them: `toLocaleDateString('sv')` is the correct ISO-key trick;
+  AngkaMode's digit shortcuts and its typing input live in two components that never co-render;
+  ProductionMode and QuizProduksiMode bind only Enter/Escape while their field is focused.
+
+  Baseline re-verified during both passes: `npm test` 435/435 (39 files), `npm run lint` 0
+  warnings, `npm run build` clean apart from the known `data-cards` warning. `src/` confirmed
+  untouched before committing.
+
+  **Done this session (was flagged for you last time):** `docs/BLUEPRINT-CURRENT.md` has been
+  archived to `docs/archive/` with a provenance header carrying the full drift table — it claimed
+  storage v3 / 23 modes / 1,443 cards / 457 tests against an actual v6 / 21 / 1,438 / 435, and
+  described the removed Doboku/Kenchiku tracks at length. Checked first that nothing live was
+  lost: its one still-useful section, "Hard Constraints (Do Not Break)," is already covered more
+  accurately in `docs/PWA_RELEASE_SPEC.md` §1, `docs/AGENT_WORKFLOW.md` §2, and `_MAP.md` §1/§3.
+  `ARCHIVE-INDEX.md` gained a row and had three stale "superseded by" pointers retargeted.
+  `_MAP.md`'s `docs/` tree turned out to be stale in the same way — it still listed
+  `DATA_ARCH_AUDIT.md` as live (archived 2026-08-19) and omitted every spec doc added since — so
+  it was corrected to match the directory.
 
 ---
 

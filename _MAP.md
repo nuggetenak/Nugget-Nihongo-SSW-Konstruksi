@@ -58,9 +58,14 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── ci.yml                      ← lint + test (verbose) + build + output check
 │   └── deploy.yml                  ← validate → build → bump SW cache → build → pages
 ├── docs/
-│   ├── BLUEPRINT-CURRENT.md        ← constraints, schema, known gaps, phase history (pre-merge)
+│   ├── AGENT_WORKFLOW.md           ← PROCESS: read first every session (clone/verify/branch/close-out)
 │   ├── CARD_CONTENT_SPEC.md        ← canonical data schema/rules/taxonomy (from content-dq)
-│   ├── DATA_ARCH_AUDIT.md          ← frozen point-in-time audit, session 16 (from content-dq)
+│   ├── DESIGN_SPEC.md              ← palette, type, icon system, hazard-rail motif
+│   ├── LAYOUT_SPEC.md              ← breakpoints, width tokens, auto-fit/minmax pattern
+│   ├── COMPONENT_SPEC.md           ← CSS Modules conventions, shared primitives
+│   ├── PWA_RELEASE_SPEC.md         ← offline architecture, CACHE_VERSION, deploy checklist
+│   ├── UI_UX_PLAN.md               ← WORK QUEUE (not a spec): prioritised UI/UX items, retires when done
+│   ├── ASSET-PROMPTS.md            ← generation prompts for icon/badge/illustration art
 │   └── archive/                    ← combined historical docs from both branches
 ├── scripts/
 │   ├── verify-content.mjs          ← ACTIVE: dependency-free data integrity check (content-dq)

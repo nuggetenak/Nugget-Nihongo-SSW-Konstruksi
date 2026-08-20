@@ -81,10 +81,18 @@ briefly when actually pushing, then strip again right after.
 | `docs/LAYOUT_SPEC.md`          | Breakpoints, width tokens, the auto-fit/minmax pattern    |
 | `docs/COMPONENT_SPEC.md`       | CSS Modules conventions, shared primitives, component patterns |
 | `docs/PWA_RELEASE_SPEC.md`     | Offline architecture, `CACHE_VERSION` discipline, deploy checklist |
+| `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
+| `docs/UI_UX_PLAN.md`           | **Work queue, not a spec** — prioritised UI/UX items; shrinks as they land, retires to `docs/archive/` when empty |
 | `docs/archive/`                | Superseded/completed material, full text preserved        |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
 
 Don't duplicate any of this into `HANDOFF.md` or here — link to it.
+
+**Every live doc belongs in this table.** Two docs have now drifted badly while sitting in `docs/`
+without a row here — `DATA_ARCH_AUDIT.md` (archived 2026-08-19) and `BLUEPRINT-CURRENT.md`
+(archived 2026-08-20, by which point every headline number in it was wrong). A doc nothing points
+at is a doc nothing keeps honest. If you add a doc, add its row; if you find a doc with no row,
+that is a signal to check whether it is still true.
 
 ## 5. Minimal kickoff
 
