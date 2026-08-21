@@ -118,3 +118,15 @@ Single owner of responsive layout for every screen (`src/components/AppShell.jsx
 below 1040px, side nav at/above it. `chrome` prop (`'tabs' | 'mode'`) decides which navigation is
 offered. Owns the bottom-nav safe-area padding too — screens don't need to remember it
 individually.
+
+**SideNav** (`src/components/SideNav.jsx`) is more than the 3 top-level tabs (item 13, 2026-08-20):
+beneath them it renders the full mode registry, grouped by the existing `MODE_SECTIONS` (from
+`src/router/modes.js` — the same registry `docs/COMPONENT_SPEC.md` §3 already establishes as the
+single source of truth for mode metadata, not a new mapping). Native `<details>`/`<summary>` per
+section, no custom JS expand/collapse state. `AppShell` passes `mode` and `onSelectMode` through so
+the side nav can mark the active mode and navigate directly to one — both props are optional
+(`BottomNav` doesn't take them; narrower screens don't get this secondary list at all, matching
+`--sidenav-w`'s own width budget). The section containing the active mode auto-opens; nothing is
+forced open when no mode is active. `.modeSections` scrolls internally (`overflow-y: auto` +
+`min-height: 0` — the standard fix for flexbox's `min-height: auto` default defeating `overflow`
+in a bounded column) rather than pushing the tabs or the footer off-screen when expanded.

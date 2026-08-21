@@ -34,16 +34,16 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-19 (frontend/UI overhaul session, new agent chat — owner provided
-repo+token directly, same protocol).** The 2026-08-18 merge close-out entry that used to follow
-this one is archived — see banner above. Verify before trusting past this point — this line
-doesn't update itself.
+**As of this edit, 2026-08-20 (same branch, continuous session spanning drafting + execution —
+owner provided repo+token directly, same protocol).** The 2026-08-18 merge close-out entry that
+used to follow this one is archived — see banner above. Verify before trusting past this point —
+this line doesn't update itself.
 
-- **🟡 UI OVERHAUL IN PROGRESS — branch `feat/ui-overhaul`, 13 commits (10 feat/style/docs +
-  3 new below), NOT merged to `main`.** `main` is untouched and still at the post-merge state
-  described further down. The branch is pushed to origin. Every commit was verified green
-  before pushing: `npm test` 435/435, `npm run lint` 0 warnings, `npm run build` clean (the
-  `data-cards` 661KB chunk warning is the known, deliberately-deferred issue below, not new).
+- **🟡 UI OVERHAUL IN PROGRESS — branch `feat/ui-overhaul`, 37 commits ahead of `main`, NOT
+  merged.** `main` is untouched and still at the post-merge state described further down. The
+  branch is pushed to origin. Every commit was verified green before pushing: `npm test`
+  449/449 (41 files), `npm run lint` 0 warnings, `npm run build` clean (the `data-cards` 661KB
+  chunk warning is the known, deliberately-deferred issue below, not new).
 
   **Direction (owner-approved before any code was written):** keep and evolve this app's own
   amber identity rather than aligning with the main Nugget Nihongo app; go fully adaptive
@@ -136,71 +136,52 @@ doesn't update itself.
     so the hero card at the top of the page doesn't stretch to the full 1180px column with
     nothing to pair it with.
 
-  **NOT done — pick up here: → `docs/UI_UX_PLAN.md`**
+  **EXECUTION IN PROGRESS against `docs/UI_UX_PLAN.md` — 19 of 38 actionable items shipped,
+  same day as drafting (2026-08-20).** Batches 0–2 (all P0 mechanical + accessibility items: 1–8,
+  30–36, 41) and Batch 6 (P1 layout: 11, 12, 13) are done — each item its own commit, each commit
+  verified green before pushing (`npm test` / `npm run lint` / `npm run build`, plus
+  `npm run audit:css-vars`, the new guard item 30 added). Every commit message carries the
+  specific evidence and reasoning for that item; this entry is a summary, not a replacement for
+  reading them. Current test count: **449/449 (41 files)**, up from 435 at the start of this
+  phase — regression tests landed alongside several fixes (item 31's keyboard-hijack fix, item
+  12's new dashboard prompts, item 13's new side-nav section).
 
-  All four items that used to be listed here have moved into that document (2026-08-20 drafting
-  session, docs-only, no application code touched). It is the work queue now — read it rather
-  than this list:
+  **Three items are blocked on an owner decision, untouched:**
+  - **Item 9** — contrast. `--ssw-textFaint` is 2.89:1 in light theme, colours the bottom nav's
+    inactive labels; amber-as-text is 2.11:1, also the focus ring. Three routes in the plan.
+  - **Item 10** — browser history. No `pushState`/`popstate`, Android back button exits the PWA
+    from any screen. Sized as its own branch/session — the largest single item in the plan.
+  - **Item 37** — service worker. `skipWaiting()`+`clients.claim()` against 21 lazy chunks can
+    strand an open session on a deploy. Three routes, all touch `sw.js`, need a `CACHE_VERSION`
+    bump whichever is chosen.
 
-  - Dashboard vertical dead space → plan item 12, with a diagnosis (five of the dashboard's
-    eight blocks are conditional, so a new user sees four) and candidate content.
-  - 10 placeholder mode icons → plan item 26, **visibility only.** Still owner-owned, still
-    external art generation, no solution drafted. The ten keys are enumerated there.
-  - `data-cards` 661KB chunk → plan item 27, **visibility only.** Still a build concern for its
-    own branch, no solution drafted. Re-verified at 661.05KB / 191.32KB gzipped.
-  - Branch unmerged, review the Prettier commit (`f2fa439`, 237 files) separately → plan item 29.
+  **20 items remain unstarted** — Batch 7 (P2 adoption/consistency: 14, 15, 16, 17, 18, 19, 38,
+  39, 40, 42) and Batch 8 (P3 reach/polish: 20–25). See `docs/UI_UX_PLAN.md` §8 for the batch
+  order and §2's priority table for full status (☑/🔶/☐ per item).
 
-  The plan now holds **42 numbered proposals** across four priority bands, each with evidence, a
-  fit-to-existing-system note, and acceptance criteria, plus a dependency-ordered batch plan.
-  Items 1–29 came from the first drafting pass; **items 30–42 came from a second exhaustive audit
-  the same day**, which went looking specifically for defects that pass `npm test`, `npm run
-  lint`, and `npm run build` and still ship broken. It found enough of them to be worth
-  distrusting a green pipeline on UI work here:
+  **Two things found and fixed during execution that weren't itemized in the plan:**
+  - `AppShell.module.css`: `.content[data-nav-safe='true']` was out-specificity-ing the desktop
+    media query's intended `--sp-6`, so the three tab screens reserved ~100px of dead bottom
+    padding at desktop width for a bottom-nav pill that's `display:none` there. Found while
+    wiring item 1's toast-offset fix through this exact file; fixed in the same commit. Directly
+    relevant to item 12's "dashboard vertical dead space" diagnosis — part of that dead space was
+    this, not just conditional content.
+  - `Dashboard.jsx`'s "Beranda" title carried a hardcoded `aria-hidden="true"` regardless of
+    breakpoint, while CSS already correctly swapped which of two page titles was *visually* shown
+    at 1040px. Screen readers stayed stuck announcing the mobile-only branding text even at
+    desktop width, where sighted users see something else — visible and announced text were
+    different strings. Found and fixed while doing item 11/35's heading work.
 
-  - **11 CSS custom properties are referenced but defined nowhere, with no fallback** (plan item
-    30). An undefined `var()` is valid CSS that silently voids its whole declaration. The worst
-    case: WaygroundMode's overall-score percentage is meant to render green ≥70% / amber ≥50% /
-    red below, and all three branches point at dead tokens, so **the colour coding does nothing**.
-    AngkaMode's option boxes lose fill and border the same way. Two abandoned naming schemes
-    (`--c-*`, `--color-*`) plus a `--fw-semibold` typo for `--fw-semi`.
-  - **FlashcardMode's window keydown handler hijacks its own search box** (item 31). Space is
-    swallowed and flips the card; arrows navigate cards instead of moving the caret. Multi-word
-    search is impossible in the most-used mode. Confirmed with a throwaway reproduction, since
-    reading alone wasn't proof. Checked the three other candidate modes — they're fine.
-  - **Zero `<label>` elements and zero `htmlFor` in the whole codebase** (item 32); none of the 12
-    inputs has an accessible name.
-  - **`SayaTab`'s `Row` — the primitive COMPONENT_SPEC §5 documents as reusable — is a
-    `<div onClick>`** (item 33), so the entire settings screen is keyboard-unreachable, including
-    erase-all-progress and the "Impor dari File" restore path.
-  - **No `lang="ja"` anywhere** (item 34), so every Japanese term is declared Indonesian to screen
-    readers and to the browser's CJK glyph selection. `speak.js` already sets `ja-JP` for TTS.
-  - **No `<h1>` on any of the 21 mode screens**, or on Belajar/Saya (item 35). Item 11's
-    `ModeHeader` resolves most of it as a side effect — a reason to sequence 11 early.
-  - `.btnIcon` is 40px and `.btnBack` ≈32px against the app's own justified `--tap-min: 44px`,
-    which is referenced in only 2 of ~30 stylesheets (item 36).
-  - `--font-jp` falls back to `Noto Serif JP`, **which the app never loads** — Japanese exam
-    content in SimulasiMode drops to generic serif (item 39).
-
-  **Three items are flagged 🔶 needing an owner decision before execution:**
-  - **Item 9** — measured contrast failures. `--ssw-textFaint` is 2.89:1 in light theme and is
-    what colours the bottom nav's inactive labels; amber-as-text is 2.11:1, which also affects
-    the focus ring. Any fix touches the token table DESIGN_SPEC calls locked. Three routes given.
-  - **Item 10** — no `pushState`/`popstate` anywhere, so Android's hardware back button exits the
-    PWA from any screen, mid-quiz included. Fixing it is a navigation-architecture change.
-  - **Item 37 (new)** — `sw.js` calls `skipWaiting()` + `clients.claim()` and deletes old caches,
-    while all 21 modes are `React.lazy` with content-hashed chunks. A deploy during an open
-    session can leave stale imports that exist neither in cache nor on the server, and
-    `ErrorBoundary`'s "Coba lagi" only clears React state, so it retries the same dead import
-    forever. Three routes given; all touch `sw.js` and need a `CACHE_VERSION` bump.
-
-  The audit also recorded several suspicions that turned out **not** to be bugs, so a later
-  session doesn't "fix" them: `toLocaleDateString('sv')` is the correct ISO-key trick;
-  AngkaMode's digit shortcuts and its typing input live in two components that never co-render;
-  ProductionMode and QuizProduksiMode bind only Enter/Escape while their field is focused.
-
-  Baseline re-verified during both passes: `npm test` 435/435 (39 files), `npm run lint` 0
-  warnings, `npm run build` clean apart from the known `data-cards` warning. `src/` confirmed
-  untouched before committing.
+  **Spec docs updated to match, in a follow-up pass after realizing it hadn't happened per-item as
+  the plan's own §10 requires:** `docs/DESIGN_SPEC.md` gained the z-index scale (item 4) and
+  `--tap-min` documentation (item 36) — neither existed in any spec before. `docs/COMPONENT_SPEC.md`
+  gained a note that `Row` renders as a real `<button>` when clickable (item 33), a warning that
+  `--c-*`/`--color-*` are dead token schemes (item 30), and two new sections — §7 for `ModeHeader`
+  as a shared primitive (item 11), §8 for `JpDisplay`'s `lang="ja"` handling (item 34).
+  `docs/LAYOUT_SPEC.md` §4 documents SideNav's expanded role (item 13). `docs/CARD_CONTENT_SPEC.md`
+  §6 gained a short cross-reference to COMPONENT_SPEC §8 — recalibrated from the plan's original
+  suggestion of putting the full rendering detail there, since that document turned out to be
+  purely about data-encoding conventions once actually read, not rendering.
 
   **Done this session (was flagged for you last time):** `docs/BLUEPRINT-CURRENT.md` has been
   archived to `docs/archive/` with a provenance header carrying the full drift table — it claimed

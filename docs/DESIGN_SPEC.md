@@ -25,6 +25,16 @@ construction signage.
 Used **only** to mark time-sensitive or active state — exam countdown, daily mission, the active
 nav item. It stays meaningful because nothing else uses it. Don't reach for it as decoration.
 
+**Touch targets.** `--tap-min: 44px` (`global.css`). Used one-handed on phones, often outdoors —
+this is a real constraint, not a nice-to-have. Applies to every interactive element, including the
+shared primitives in `modes.module.css` (`.btnIcon`, `.btnBack`), not just screen-specific buttons.
+Where matching the visible glyph size isn't possible without a redesign, grow the tap zone with
+padding or `min-height` rather than the visible element — the app's own `--tap-min` comment already
+said this; item 36 (2026-08-20) was the first pass that actually checked the shared primitives
+against it. Dense secondary-navigation controls (e.g. an A-Z jump index with dozens of targets in a
+scrolling strip) are a reasonable, deliberate exception — WCAG 2.5.8 (AA) asks for 24px, `--tap-min`
+is this app's own stricter 2.5.5-equivalent target, not a hard floor for every control everywhere.
+
 ## 2. Colour
 
 Dual-theme (light default + dark), toggled by swapping a full set of CSS custom properties on
@@ -85,6 +95,21 @@ relaxed 1.75.
 
 Use these, not new one-off values — a new spacing/radius number that isn't on this scale is a
 signal to double back and pick the nearest token rather than inventing one.
+
+**Z-index scale** (`global.css`) — every deliberate app-chrome stacking decision routes through
+this, not a raw number:
+
+```css
+--z-base: 1        --z-sticky: 10      --z-banner: 30      --z-nav: 100
+--z-overlay: 200    --z-toast: 300      --z-modal: 400      --z-celebration: 500
+```
+
+`--z-modal` sits above `--z-toast` deliberately: a confirm dialog is a decision the user must
+resolve, a toast is transient and ignorable, so the modal wins if both are on screen at once.
+`--z-celebration` is the one intentional "above literally everything" tier — used exactly once, for
+the full-screen mission-complete takeover. Local stacking contexts (e.g. `z-index: 1` inside a card
+to lift one face above another) are relative to a parent, not app chrome, and stay off this scale —
+tokenizing those would be noise.
 
 ## 5. Icon system
 

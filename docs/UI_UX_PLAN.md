@@ -1,7 +1,15 @@
 # UI/UX Plan — SSW Konstruksi
 
-Drafted 2026-08-20 on `feat/ui-overhaul` across two drafting passes. **Drafting only — no
-application code was written or changed in either pass.** Every claim below was checked against
+> **Execution status as of 2026-08-20 (same day as drafting): 19 of 38 actionable items shipped.**
+> Batches 0–2 (all P0 mechanical + accessibility items) and Batch 6 (P1 layout: 11, 12, 13) are
+> done, verified, committed, and pushed to `feat/ui-overhaul`. Done items are marked `☑` below and
+> retain their full write-up — nothing was deleted — since the write-up is now the record of what
+> shipped and why, not just a proposal. The three 🔶 judgment calls (9, 10, 37) are untouched,
+> waiting on an owner decision. Batches 7–8 (20 items) are unstarted. See each commit on
+> `feat/ui-overhaul` for the exact diff and verification output per item; see `HANDOFF.md` for the
+> running summary.
+
+Drafted 2026-08-20 on `feat/ui-overhaul` across two drafting passes. Every claim was checked against
 the code, the build output, or a throwaway reproduction, not taken from documentation.
 
 This is a work queue for a later execution session, probably a different model with no memory of
@@ -106,26 +114,26 @@ Pass column: `1` = first drafting pass, `2` = second audit pass (2026-08-20).
 
 | # | Item | Band | Size | Pass | Note |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Toast stack is mispositioned at most breakpoints | P0 | S | 1 | Blocks 16 |
-| 2 | Safe-area insets missing under `viewport-fit=cover` | P0 | S | 1 | iOS home indicator |
-| 3 | `100vh` in AppShell on a mobile-first app | P0 | S | 1 | |
-| 4 | Z-index scale exists but is bypassed everywhere | P0 | S | 1 | Blocks 7, 11, 15 |
-| 5 | Dead reduced-motion block + duplicate focus ring | P0 | S | 1 | Verified dead code |
-| 6 | Two competing "update available" prompts | P0 | S | 1 | See also 37 |
-| 7 | Offline banner never renders inside a mode | P0 | S | 1 | Needs 4 |
-| 8 | `role="application"` on `#root` | P0 | S | 1 | Disables SR browse mode |
+| 1 | Toast stack is mispositioned at most breakpoints | P0 | S | 1 | ☑ shipped; Blocks 16  |
+| 2 | Safe-area insets missing under `viewport-fit=cover` | P0 | S | 1 | ☑ shipped; iOS home indicator  |
+| 3 | `100vh` in AppShell on a mobile-first app | P0 | S | 1 | ☑ shipped  |
+| 4 | Z-index scale exists but is bypassed everywhere | P0 | S | 1 | ☑ shipped; Blocks 7, 11, 15  |
+| 5 | Dead reduced-motion block + duplicate focus ring | P0 | S | 1 | ☑ shipped; Verified dead code  |
+| 6 | Two competing "update available" prompts | P0 | S | 1 | ☑ shipped; See also 37  |
+| 7 | Offline banner never renders inside a mode | P0 | S | 1 | ☑ shipped; Needs 4  |
+| 8 | `role="application"` on `#root` | P0 | S | 1 | ☑ shipped; Disables SR browse mode  |
 | 9 | Low-contrast text tokens | P0 | M | 1 | 🔶 Measured; touches token table |
-| 30 | Eleven CSS custom properties referenced but never defined | P0 | S | 2 | Silent; breaks score colours |
-| 31 | FlashcardMode's key handler hijacks its own search box | P0 | S | 2 | Verified empirically; blocks 20 |
-| 32 | Not one input in the app has an accessible name | P0 | M | 2 | Zero `<label>` app-wide |
-| 33 | Core interactions are on `<div>`s keyboards can't reach | P0 | M | 2 | Incl. the `Row` primitive |
-| 34 | Japanese content is not marked as Japanese | P0 | S | 2 | Compounds with 39 |
-| 35 | No `<h1>` on any mode screen, or on Belajar/Saya | P0 | S | 2 | Mostly solved by 11 |
-| 36 | Button primitives below the app's own touch minimum | P0 | M | 2 | `.btnBack`, `.btnIcon` |
+| 30 | Eleven CSS custom properties referenced but never defined | P0 | S | 2 | ☑ shipped; Silent; breaks score colours  |
+| 31 | FlashcardMode's key handler hijacks its own search box | P0 | S | 2 | ☑ shipped; Verified empirically; blocks 20  |
+| 32 | Not one input in the app has an accessible name | P0 | M | 2 | ☑ shipped; Zero `<label>` app-wide  |
+| 33 | Core interactions are on `<div>`s keyboards can't reach | P0 | M | 2 | ☑ shipped; Incl. the `Row` primitive  |
+| 34 | Japanese content is not marked as Japanese | P0 | S | 2 | ☑ shipped; Compounds with 39  |
+| 35 | No `<h1>` on any mode screen, or on Belajar/Saya | P0 | S | 2 | ☑ shipped; Mostly solved by 11  |
+| 36 | Button primitives below the app's own touch minimum | P0 | M | 2 | ☑ shipped; `.btnBack`, `.btnIcon`  |
 | 10 | Browser history / hardware back button | P1 | L | 1 | 🔶 Architecture change |
-| 11 | Mode header: promote the breadcrumb to a real component | P1 | M | 1 | Needs 4; also fixes most of 35 |
-| 12 | Dashboard vertical dead space | P1 | M | 1 | From HANDOFF NOT-done |
-| 13 | Side nav is three items in a full-height column | P1 | M | 1 | Desktop density |
+| 11 | Mode header: promote the breadcrumb to a real component | P1 | M | 1 | ☑ shipped; Needs 4; also fixes most of 35  |
+| 12 | Dashboard vertical dead space | P1 | M | 1 | ☑ shipped; From HANDOFF NOT-done  |
+| 13 | Side nav is three items in a full-height column | P1 | M | 1 | ☑ shipped; Desktop density  |
 | 37 | SW replaces itself mid-session against lazy chunks | P1 | M | 2 | 🔶 Behaviour change; see 6, 38 |
 | 38 | Error states: untokenized, and a retry that can't work | P1 | M | 2 | Concrete half of 19 |
 | 14 | Adopt `EmptyState` — it has zero consumers | P2 | M | 1 | Also serves 12 |
@@ -136,7 +144,7 @@ Pass column: `1` = first drafting pass, `2` = second audit pass (2026-08-20).
 | 19 | Error and recovery states | P2 | M | 1 | Needs 16's conventions |
 | 39 | Japanese text falls back to a font never loaded | P2 | S | 2 | Pairs with 34 |
 | 40 | Correct/wrong colours bypass the semantic tokens | P2 | S | 2 | |
-| 41 | The mode loader is a different width than its mode | P2 | S | 2 | Pairs with 17 |
+| 41 | The mode loader is a different width than its mode | P2 | S | 2 | ☑ shipped; Pairs with 17  |
 | 42 | Number formatting is inconsistent | P2 | S | 2 | |
 | 20 | Global keyboard layer + discoverable shortcuts | P3 | M | 1 | Needs 31 first |
 | 21 | Motion and haptics consistency pass | P3 | M | 1 | |
@@ -156,7 +164,7 @@ Shipped UI that is measurably wrong. These are small, mostly isolated, and sever
 later items — fixing them first avoids building on a crooked foundation. A P1 item that depends on
 a P0 item says so.
 
-### ☐ 1. Toast stack is mispositioned at most breakpoints — `S`
+### ☑ 1. Toast stack is mispositioned at most breakpoints — `S`
 
 **What.** `src/components/Toast.jsx` positions the toast stack with an inline
 `style={{ bottom: T.navH + 12 }}` — a constant 76px, applied unconditionally. Move that offset
@@ -195,7 +203,7 @@ unchanged from today. No inline positioning left in `Toast.jsx`. `src/tests/Toas
 
 ---
 
-### ☐ 2. Safe-area insets missing under `viewport-fit=cover` — `S`
+### ☑ 2. Safe-area insets missing under `viewport-fit=cover` — `S`
 
 **What.** `index.html` sets `viewport-fit=cover` on the viewport meta. Nothing in `src/` uses
 `env(safe-area-inset-*)` — zero occurrences across the whole tree. Add insets to the fixed-position
@@ -225,7 +233,7 @@ content sits under it; on a non-notched viewport, rendering is byte-identical to
 
 ---
 
-### ☐ 3. `100vh` in AppShell on a mobile-first app — `S`
+### ☑ 3. `100vh` in AppShell on a mobile-first app — `S`
 
 **What.** `src/components/AppShell.module.css` `.shell` sets `min-height: 100vh`. Change to
 `100dvh`.
@@ -246,7 +254,7 @@ height with no dead scroll at the bottom.
 
 ---
 
-### ☐ 4. Z-index scale exists but is bypassed everywhere — `S`
+### ☑ 4. Z-index scale exists but is bypassed everywhere — `S`
 
 **What.** `src/styles/global.css` defines a five-step scale — `--z-base: 1`, `--z-sticky: 10`,
 `--z-nav: 100`, `--z-overlay: 200`, `--z-toast: 300`. Almost nothing uses it. Route every
@@ -289,7 +297,7 @@ exists; the dialog-vs-toast ordering is a recorded decision, not a leftover.
 
 ---
 
-### ☐ 5. Dead reduced-motion block + duplicate focus ring — `S`
+### ☑ 5. Dead reduced-motion block + duplicate focus ring — `S`
 
 **What.** Two independent pieces of dead or conflicting CSS in `src/styles/global.css`.
 
@@ -326,7 +334,7 @@ already describes the surviving rule.
 
 ---
 
-### ☐ 6. Two competing "update available" prompts — `S`
+### ☑ 6. Two competing "update available" prompts — `S`
 
 **What.** The app has two independent new-version notifications. Keep one.
 
@@ -355,7 +363,7 @@ overflowing at 320px; `src/tests/offline.sw.test.js` still passes.
 
 ---
 
-### ☐ 7. Offline banner never renders inside a mode — `S`
+### ☑ 7. Offline banner never renders inside a mode — `S`
 
 **What.** `src/App.jsx` renders `<OfflineBanner />` only in the tabs branch. The mode branch
 returns early, before it.
@@ -375,7 +383,7 @@ Check the stacking against `--z-nav` and `--z-banner` once item 4 lands.
 
 ---
 
-### ☐ 8. `role="application"` on `#root` — `S`
+### ☑ 8. `role="application"` on `#root` — `S`
 
 **What.** `index.html` has `<div id="root" role="application" aria-label="SSW Konstruksi">`. Remove
 the role, keep the label or move it to the `<main>`.
@@ -462,7 +470,7 @@ _Items 30–36 below were added by the second audit pass (2026-08-20). They are 
 reason as items 1–8: shipped behaviour that is measurably wrong. Several are accessibility defects
 that also break ordinary mouse-and-touch use, so they are not "a11y polish" — they are bugs._
 
-### ☐ 30. Eleven CSS custom properties are referenced but never defined — `S`
+### ☑ 30. Eleven CSS custom properties are referenced but never defined — `S`
 
 **What.** Fourteen `var(--…)` names are used in `src/` and defined nowhere. Eleven of those uses
 have **no fallback**, so the whole declaration is invalid at computed-value time and the property
@@ -502,7 +510,7 @@ is colour-coded again; a check exists so the next dead token is caught mechanica
 
 ---
 
-### ☐ 31. FlashcardMode's global key handler hijacks its own search box — `S`
+### ☑ 31. FlashcardMode's global key handler hijacks its own search box — `S`
 
 **What.** `src/modes/FlashcardMode/index.jsx:173-197` registers a `window` keydown listener binding
 Space, ArrowLeft, ArrowRight, and 1–4. `FilterBar` (`FilterBar.jsx:45`) renders a search input in
@@ -539,7 +547,7 @@ move the caret while the field is focused; a regression test covers it.
 
 ---
 
-### ☐ 32. Not one input in the app has an accessible name — `M`
+### ☑ 32. Not one input in the app has an accessible name — `M`
 
 **What.** Twelve `<input>`/`<textarea>` elements across nine files. **Zero `<label>` elements and
 zero `htmlFor` attributes exist in the entire codebase.** Nine inputs rely on `placeholder` alone;
@@ -576,7 +584,7 @@ elements; no new visual difference.
 
 ---
 
-### ☐ 33. Core interactions are on `<div>`s that keyboards can't reach — `M`
+### ☑ 33. Core interactions are on `<div>`s that keyboards can't reach — `M`
 
 **What.** Ten non-interactive elements carry `onClick` with no `role` and no `tabIndex` (measured
 with a JSX-aware scan, not a grep). Several are primary interactions.
@@ -614,7 +622,7 @@ on all of them; `Row`'s visual output is unchanged.
 
 ---
 
-### ☐ 34. Japanese content is not marked as Japanese — `S`
+### ☑ 34. Japanese content is not marked as Japanese — `S`
 
 **What.** `index.html` sets `<html lang="id">`, correctly. **No element anywhere in `src/` sets
 `lang`** — zero occurrences. Every Japanese term, reading, and example sentence is therefore
@@ -645,7 +653,7 @@ gracefully in any renderer without ruby support.
 
 ---
 
-### ☐ 35. No `<h1>` on any mode screen, or on Belajar or Saya — `S`
+### ☑ 35. No `<h1>` on any mode screen, or on Belajar or Saya — `S`
 
 **What.** The app has exactly two `<h1>`s: `Dashboard.jsx:105` ("SSW Konstruksi") and
 `Onboarding.jsx:38`. Everything else starts at `<h2>` (22 of them) or uses a `div`.
@@ -679,7 +687,7 @@ gaps; the visible title and the announced title are the same string.
 
 ---
 
-### ☐ 36. Shared button primitives are below the app's own touch-target minimum — `M`
+### ☑ 36. Shared button primitives are below the app's own touch-target minimum — `M`
 
 **What.** `global.css` defines `--tap-min: 44px` with a comment justifying it specifically for this
 audience ("used one-handed on phones, often outdoors"). It is referenced in **two stylesheets** —
@@ -759,7 +767,7 @@ reload behaviour is deliberate rather than incidental.
 
 ---
 
-### ☐ 11. Mode header: promote the breadcrumb to a real component — `M`
+### ☑ 11. Mode header: promote the breadcrumb to a real component — `M`
 
 **What.** `src/router/ModeRouter.jsx` lines 301–339 render a sticky back-link built entirely from
 inline styles. Extract it into a proper `ModeHeader` component with its own CSS module, and widen
@@ -809,7 +817,7 @@ collapses on compact; no inline styles remain in `ModeRouter`'s render; icons co
 
 ---
 
-### ☐ 12. Dashboard vertical dead space — `M`
+### ☑ 12. Dashboard vertical dead space — `M`
 
 **What.** Carried forward from `HANDOFF.md`'s NOT-done list, where it reads: *"Desktop dashboard has
 vertical dead space; needs more content, not a layout change."* That diagnosis holds — this item
@@ -868,7 +876,7 @@ breakpoint was introduced.
 
 ---
 
-### ☐ 13. Side nav is three items in a full-height column — `M`
+### ☑ 13. Side nav is three items in a full-height column — `M`
 
 **What.** `src/components/SideNav.jsx` renders exactly three items — Beranda, Belajar, Saya — in a
 236px column at `height: 100vh`. Below them: a card count and empty space. Use the room.
@@ -1277,7 +1285,7 @@ as body text; the accent-vs-semantic distinction is documented.
 
 ---
 
-### ☐ 41. The mode loader is a different width than the mode it loads — `S`
+### ☑ 41. The mode loader is a different width than the mode it loads — `S`
 
 **What.** `ModeRouter.jsx`'s `ModeLoader` hardcodes `maxWidth: 'var(--max-w)'` inline. But
 `App.jsx` passes `MODE_META[mode]?.width ?? 'reading'` to `AppShell`, and most modes are `reading`

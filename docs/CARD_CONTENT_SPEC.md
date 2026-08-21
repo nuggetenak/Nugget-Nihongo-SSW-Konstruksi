@@ -782,6 +782,16 @@ Tidak berlaku di: `opts` yang sudah ID strings, `opts_id`, `id_text`, `furi` (de
 - Kemunculan ke-2+ dari kanji **sama** dalam kalimat **sama** → boleh skip
 - Kemunculan ke-2+ dalam baris/kalimat **berbeda** → ruby lagi
 
+### Rendering note (bukan bagian dari data schema)
+
+Markup `《》` di atas adalah **data encoding** — bagaimana string disimpan. Rendering-nya (jadi
+`<ruby><rt>` HTML) ada di `JpDisplay.jsx`, bukan di sini. Sejak item 34 (UI_UX_PLAN.md,
+2026-08-20), elemen JP yang dirender diberi `lang="ja"` dan `<rt>` diberi fallback `<rp>(</rp>...
+<rp>)</rp>` — screen reader dan pemilihan glyph CJK browser jadi benar, dan ruby tetap terbaca
+sebagai teks biasa di renderer yang tidak mendukung `<ruby>`. Detail implementasi ada di
+`docs/COMPONENT_SPEC.md` §8; catatan ini di sini murni sebagai penunjuk, karena siapa pun yang
+mengedit encoding ruby di sini kemungkinan juga perlu tahu bagaimana hasilnya dirender.
+
 ---
 
 ## 7. DUPLICATE HANDLING

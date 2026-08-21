@@ -74,6 +74,13 @@ to know it's "special," it just needs a different class name than `.row`.
 </Section>
 ```
 
+`Row` renders as a real `<button>` when `onClick` is present, a plain `<div>` when it isn't (item
+33, 2026-08-20) — a static display row shouldn't be announced as a control, but a clickable one
+needs to be keyboard-reachable, which a bare `<div onClick>` never was. The `.row` class carries UA
+button-chrome resets (`background: none; border: none; width: 100%; font: inherit;` etc.) so both
+render identically regardless of which element they end up as — extend those resets if `.row` ever
+needs new styling, rather than assuming the div-only defaults still apply.
+
 ## 6. Inline styles vs. CSS Module classes
 
 Observed pattern, not a strictly enforced rule — both are used throughout, and the split roughly
@@ -85,3 +92,47 @@ styles can't express those at all). When converting inline styles to a class dur
 (as happened to SayaTab's achievement grid and StatsMode's heatmap wrapper this session), that's
 a reasonable opportunistic cleanup, not a required one — don't go looking for inline styles to
 convert as a task in itself.
+
+**Only `--ssw-*` tokens are real.** `--c-*` and `--color-*` are two abandoned naming schemes from
+before the `--ssw-*` convention settled — nothing defines them, and eleven references shipped
+pointing at them anyway with no fallback, silently voiding the declaration rather than erroring
+(item 30, 2026-08-20; `scripts/audit-css-vars.mjs` now catches this class of bug in `npm run
+validate`). If a `var(--c-...)` or `var(--color-...)` reference is ever found, it's a bug to fix by
+repointing at the matching `--ssw-*` token, not a second scheme to keep alive.
+
+## 7. Mode-level chrome (`ModeHeader`)
+
+`src/components/ModeHeader.jsx`, rendered once by `ModeRouter` above every mode's own content —
+individual modes never render their own page-title header. Always shows the active mode's identity
+(icon from `MODE_META[mode].ui` through `<Icon>`, label as a real `<h1>` — this is the one `<h1>`
+every mode screen has), and a breadcrumb trail when `modeHistory` has depth. Every ancestor in the
+trail is independently clickable via `AppContext`'s `goBack(targetMode)`, which truncates history to
+jump directly to any point in the stack — not just pop one level. On screens under 700px the trail
+collapses to just the immediate parent via a CSS-only `display: contents` toggle (no JS breakpoint
+detection, matching this app's established convention — see `docs/LAYOUT_SPEC.md`).
+
+Modes still supply their own `.btnBack` for "exit this mode entirely" (a different action from the
+trail's "go back one level of mode-to-mode navigation") — the two are not yet consolidated. If a
+future pass migrates `.btnBack` into `ModeHeader`, update this section and confirm the two don't
+both render for the same action.
+
+## 8. Japanese text rendering (`JpDisplay`)
+
+`src/components/JpDisplay.jsx` is the single component that renders Japanese content — its 6
+layout-branch spans and its standalone furigana row all carry `lang="ja"` (item 34, 2026-08-20).
+`<html lang="id">` is correct for the app's own interface language, but nothing inside previously
+told the browser or a screen reader that any *content* was Japanese — `speak.js` already set
+`utt.lang = 'ja-JP'` for text-to-speech, so the gap was markup-only. Matters for two concrete
+things: CJK glyph-variant selection (a handful of Han characters render differently in Japanese vs.
+Chinese typefaces) and correct screen-reader pronunciation.
+
+Both `<ruby>` sites also carry `<rp>(</rp>…<rp>)</rp>` around their `<rt>`, hidden via `.ruby rp {
+display: none }` in normal rendering — degrades to "reading (base)" as plain text in any renderer
+without ruby support, rather than losing the reading entirely. See `docs/CARD_CONTENT_SPEC.md` §6
+for the `《》` data-encoding convention this component parses into `<ruby>` markup — that section
+covers the string format, this one covers what it becomes on screen.
+
+A direct-render fallback exists outside `JpDisplay`: `ErrorBoundary`'s `FlatCardFallback` renders
+`card.jp` raw (old-WebView / no-`ResizeObserver` path). It carries its own `lang="ja"` directly
+rather than routing through `JpDisplay`, since that fallback is deliberately minimal and doesn't
+carry the props (`furi`, `furiganaPolicy`) `JpDisplay` expects.
