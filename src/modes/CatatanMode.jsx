@@ -289,7 +289,7 @@ export default function CatatanMode({ cards, onExit }) {
           style={{
             textAlign: 'center',
             padding: '40px 20px',
-            color: 'var(--ssw-textFaint)',
+            color: 'var(--ssw-textDim)',
             fontSize: 14,
           }}
         >
@@ -305,7 +305,7 @@ export default function CatatanMode({ cards, onExit }) {
               style={{
                 textAlign: 'center',
                 fontSize: 12,
-                color: 'var(--ssw-textFaint)',
+                color: 'var(--ssw-textDim)',
                 paddingTop: 8,
               }}
             >

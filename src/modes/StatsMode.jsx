@@ -365,7 +365,7 @@ export default function StatsMode({
                       style={{
                         fontSize: 10,
                         fontWeight: 700,
-                        color: T.textFaint,
+                        color: T.textDim,
                         background: T.surface,
                         border: `1px solid ${T.border}`,
                         borderRadius: 4,

@@ -59,6 +59,7 @@ Dual-theme (light default + dark), toggled by swapping a full set of CSS custom 
 | `--ssw-borderActive`   | `rgba(180,83,9,.55)`     | `rgba(245,158,11,.40)`      | focused/active border          |
 | `--ssw-amber`          | `#F59E0B`                | `#F59E0B`                   | primary accent (same both)     |
 | `--ssw-amberDark`      | `#92400E`                | `#92400E`                   | deep accent (same both)        |
+| `--ssw-amberText`      | `#92400E`                | `#F59E0B`                   | amber read as text — differs per theme; amber/amberDark each fail 4.5:1 in one theme, this resolves to whichever passes |
 | `--ssw-gold`           | `#FBBF24`                | `#FBBF24`                   | highlight accent (same both)   |
 | `--ssw-correct`        | `#16a34a`                | `#16a34a`                   | correct-answer green           |
 | `--ssw-wrong`          | `#dc2626`                | `#dc2626`                   | wrong-answer red                |
@@ -71,7 +72,10 @@ than duplicating every value here.
 **Static tokens** (don't theme-swap, defined once in `global.css`):
 
 - Accent gradient: `linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b)`
-- Focus ring: `outline: 3px solid var(--ssw-amber)`
+- Focus ring: `outline: 3px solid var(--ssw-amber)` + `box-shadow: 0 0 0 7px var(--ssw-textBright)`
+  (item 9 — amber alone is 2.11:1 on the light bg, under the 3:1 WCAG 1.4.11 floor for a
+  non-text indicator; textBright reads at ~19:1 against effectively any surface in the app,
+  so it forms a reliable contrasting band past the outline regardless of local background)
 
 ## 3. Typography
 

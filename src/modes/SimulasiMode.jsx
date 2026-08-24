@@ -466,7 +466,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                   <div
                     style={{
                       fontSize: 9,
-                      color: isUrgent ? T.wrong : T.textFaint,
+                      color: isUrgent ? T.wrong : T.textDim,
                       marginTop: 2,
                       letterSpacing: 0.2,
                     }}

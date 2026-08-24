@@ -31,6 +31,10 @@ export const THEMES = {
     '--ssw-amber': '#F59E0B',
     '--ssw-onAmber': '#1a0a00',
     '--ssw-amberDark': '#92400E',
+    // item 9: amber read AS TEXT needs a per-theme-correct value — raw amber is 2.11:1 on
+    // the light bg (fails AA); amberDark is 6.96:1 light but only 2.77:1 on the dark bg (also
+    // fails). This resolves to whichever amber tone actually clears 4.5:1 in the active theme.
+    '--ssw-amberText': '#92400E',
     '--ssw-gold': '#FBBF24',
     '--ssw-correct': '#16a34a',
     '--ssw-correctBg': 'rgba(22,163,74,0.10)',
@@ -66,6 +70,9 @@ export const THEMES = {
     '--ssw-amber': '#F59E0B',
     '--ssw-onAmber': '#1a0a00',
     '--ssw-amberDark': '#92400E',
+    // item 9: raw amber already clears 4.5:1 on the dark bg (9.15:1), so amberText is just
+    // amber here — amberDark would be the one that fails in this theme (2.77:1).
+    '--ssw-amberText': '#F59E0B',
     '--ssw-gold': '#FBBF24',
     '--ssw-correct': '#16a34a',
     '--ssw-correctBg': 'rgba(22,163,74,0.10)',
@@ -104,6 +111,7 @@ export const T = {
   amber: 'var(--ssw-amber)',
   onAmber: 'var(--ssw-onAmber)',
   amberDark: 'var(--ssw-amberDark)',
+  amberText: 'var(--ssw-amberText)',
   amberMid: '#B45309',
   gold: 'var(--ssw-gold)',
   accent: 'linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B)',

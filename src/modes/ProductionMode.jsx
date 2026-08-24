@@ -287,7 +287,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
                       <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>{r.input}</span>
                     </div>
                   )}
-                  {r.skipped && <div style={{ fontSize: 12, color: T.textFaint }}>⏭ dilewati</div>}
+                  {r.skipped && <div style={{ fontSize: 12, color: T.textDim }}>⏭ dilewati</div>}
                 </div>
               ))}
             </div>
@@ -351,7 +351,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
         <div
           style={{
             fontSize: 11,
-            color: T.textFaint,
+            color: T.textDim,
             marginBottom: 8,
             letterSpacing: 1,
             textTransform: 'uppercase',

@@ -50,7 +50,7 @@
   letter-spacing: 0.2px;
 }
 .btnBack:active {
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
 }
 
 /* ── Page titles ── */
@@ -320,7 +320,7 @@
 /* ── Score / counter text ── */
 .counter {
   font-size: var(--fs-small);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   margin-top: 8px;
   margin-bottom: 14px;
   font-variant-numeric: tabular-nums;
@@ -425,7 +425,7 @@
   position: absolute;
   bottom: 10px;
   font-size: var(--fs-small);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   animation: fcHintFade 2.5s ease forwards;
 }
 
@@ -536,7 +536,7 @@
   font-size: 56px;
   font-weight: 900;
   line-height: 1;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   font-variant-numeric: tabular-nums;
   letter-spacing: -2px;
 }
@@ -672,7 +672,7 @@
 .topicHeader {
   font-size: var(--fs-subtitle);
   font-weight: 800;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   margin-bottom: 10px;
   border-bottom: 1px solid var(--ssw-border);
   padding-bottom: 6px;

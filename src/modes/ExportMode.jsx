@@ -585,7 +585,7 @@ export default function ExportMode({ onExit }) {
             </div>
           )}
 
-          <div style={{ marginTop: 8, fontSize: 10, color: T.textFaint, lineHeight: 1.5 }}>
+          <div style={{ marginTop: 8, fontSize: 10, color: T.textDim, lineHeight: 1.5 }}>
             Cara buat token: github.com → Settings → Developer settings → Personal access tokens →
             New token → centang <strong>gist</strong>
           </div>

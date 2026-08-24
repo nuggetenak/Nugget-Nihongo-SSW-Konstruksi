@@ -44,7 +44,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   transition: color var(--t-base) var(--ease-smooth);
   position: relative;
   border-radius: var(--r-lg);
@@ -59,7 +59,7 @@
 }
 
 .tab[data-active='true'] {
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   font-weight: 700;
 }
 

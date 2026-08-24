@@ -133,7 +133,7 @@
 .stepEyebrow {
   font-size: 11px;
   font-weight: 600;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -316,7 +316,7 @@
 .demoFuri {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 13px;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   letter-spacing: 1px;
 }
 
@@ -328,7 +328,7 @@
 
 .demoHint {
   font-size: 11px;
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   margin-top: 8px;
 }
 
@@ -443,7 +443,7 @@
 .goalNum {
   font-size: 28px;
   font-weight: 800;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   line-height: 1;
 }
 
@@ -468,7 +468,7 @@
 }
 
 .goalNote strong {
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
 }
 
 /* ── CTA Buttons ── */
@@ -507,7 +507,7 @@
   font-size: 11px;
   background: none;
   border: none;
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   cursor: pointer;
   font-family: inherit;
 }

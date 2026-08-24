@@ -78,7 +78,7 @@
 .allRow[data-active='true'] {
   background: rgba(245, 158, 11, 0.12);
   border: 1.5px solid var(--ssw-amber);
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   font-weight: var(--fw-bold);
 }
 

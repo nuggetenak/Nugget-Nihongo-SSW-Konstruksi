@@ -79,7 +79,7 @@
 .progressStreak {
   font-size: var(--fs-small);
   font-weight: 700;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   display: inline-block;
   background: rgba(245, 158, 11, 0.1);
   padding: 2px 8px;
@@ -215,7 +215,7 @@
 }
 .resetSub {
   font-size: var(--fs-small);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   margin-top: 2px;
 }
 
@@ -332,7 +332,7 @@
 .installLabel {
   font-size: var(--fs-body);
   font-weight: 800;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   line-height: 1.2;
 }
 .installSub {
@@ -342,7 +342,7 @@
 }
 .installArrow {
   font-size: 22px;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   flex-shrink: 0;
   opacity: 0.7;
 }

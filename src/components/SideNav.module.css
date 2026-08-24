@@ -21,7 +21,7 @@
   font-size: 18px;
   font-weight: var(--fw-black);
   letter-spacing: -0.02em;
-  color: var(--ssw-amberDark);
+  color: var(--ssw-amberText);
   line-height: var(--lh-tight);
 }
 
@@ -69,7 +69,7 @@
 
 .item[data-active='true'] {
   background: var(--ssw-surfaceActive);
-  color: var(--ssw-amberDark);
+  color: var(--ssw-amberText);
 }
 
 /* Hazard rail marks the active destination — same language as urgency cards. */
@@ -182,7 +182,7 @@
 
 .modeItem[data-active='true'] {
   background: var(--ssw-surfaceActive);
-  color: var(--ssw-amberDark);
+  color: var(--ssw-amberText);
   font-weight: var(--fw-bold);
 }
 

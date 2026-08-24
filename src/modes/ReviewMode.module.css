@@ -174,7 +174,7 @@
 
 .cardIdxLabel {
   font-size: var(--fs-caption);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
 }
 
 .strengthPill {

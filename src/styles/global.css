@@ -406,6 +406,11 @@ body {
   outline: 3px solid var(--ssw-amber);
   outline-offset: 2px;
   border-radius: var(--r-sm);
+  /* item 9: amber alone is 2.11:1 on the light bg, well under the 3:1 WCAG 1.4.11 floor for
+     a non-text indicator. textBright is ~19:1 in both themes regardless of what's behind the
+     focused element, so a ring in it reads reliably outside the amber outline (5px = past the
+     2px offset + 3px width) without needing to match any specific local background. */
+  box-shadow: 0 0 0 7px var(--ssw-textBright);
 }
 
 @media (prefers-reduced-motion: reduce) {

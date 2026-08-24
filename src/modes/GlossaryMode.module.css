@@ -134,7 +134,7 @@
 
 .letterCount {
   font-size: var(--fs-nano);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-pill);
@@ -209,7 +209,7 @@
 .termFuri {
   font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-size: var(--fs-caption);
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   font-weight: 600;
 }
 
@@ -226,7 +226,7 @@
 
 .termSourcePill {
   font-size: var(--fs-nano);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-pill);

@@ -410,7 +410,7 @@ Tab immediately after activating it and landing inside the content.
 
 ---
 
-### 🔶 9. Low-contrast text tokens — `M` — needs owner decision
+### ☑ 9. Low-contrast text tokens — `M` — needs owner decision
 
 **What.** `--ssw-textFaint` fails WCAG AA, and amber-on-light fails badly wherever it carries text
 or meaning. Measured, not estimated:

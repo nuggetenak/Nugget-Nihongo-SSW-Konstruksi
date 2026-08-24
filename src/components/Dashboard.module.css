@@ -29,7 +29,7 @@
   font-size: var(--fs-title);
   font-weight: var(--fw-black);
   letter-spacing: -0.02em;
-  color: var(--ssw-amberDark);
+  color: var(--ssw-amberText);
   line-height: var(--lh-tight);
 }
 
@@ -170,7 +170,7 @@
   font-weight: var(--fw-black);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   margin-bottom: 2px;
 }
 
@@ -179,7 +179,7 @@
   font-size: var(--fs-subtitle);
   font-weight: var(--fw-heavy);
   letter-spacing: -0.01em;
-  color: var(--ssw-amberDark);
+  color: var(--ssw-amberText);
   line-height: var(--lh-tight);
 }
 
@@ -191,7 +191,7 @@
 }
 
 .railArrow {
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   flex-shrink: 0;
   display: flex;
 }
@@ -234,7 +234,7 @@
 .statPct {
   font-size: var(--fs-caption);
   font-weight: var(--fw-black);
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   flex-shrink: 0;
 }
 
@@ -372,7 +372,7 @@
 .streakDays {
   font-size: var(--fs-body);
   font-weight: var(--fw-heavy);
-  color: var(--ssw-amberDark);
+  color: var(--ssw-amberText);
 }
 
 .streakSub {
@@ -406,7 +406,7 @@
 .hintIcon {
   display: flex;
   flex-shrink: 0;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
 }
 
 .hintTitle {
@@ -429,7 +429,7 @@
   font-weight: var(--fw-black);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   margin: var(--sp-5) 0 var(--sp-2);
 }
 
@@ -466,7 +466,7 @@
 }
 
 .quickIcon {
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   display: flex;
 }
 

@@ -35,7 +35,7 @@
   white-space: nowrap;
 }
 .btnBack:active {
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
 }
 
 /* ── Meta strip (timer · score · streak) ── */
@@ -66,7 +66,7 @@
 .streak {
   font-size: var(--fs-small);
   font-weight: 800;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
 }
 
 /* ── Question counter + audio row ── */
@@ -79,7 +79,7 @@
 
 .counter {
   font-size: var(--fs-small);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   font-variant-numeric: tabular-nums;
 }
 

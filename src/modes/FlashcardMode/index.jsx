@@ -370,7 +370,7 @@ export default function FlashcardMode({
           style={{
             textAlign: 'center',
             fontSize: 11,
-            color: T.textFaint,
+            color: T.textDim,
             marginTop: 4,
             letterSpacing: 0.3,
           }}

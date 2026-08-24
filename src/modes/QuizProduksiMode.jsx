@@ -290,7 +290,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
                     ✓ {r.card.id_text}
                   </div>
                   {r.input && <div style={{ fontSize: 12, color: T.wrong }}>✗ kamu: {r.input}</div>}
-                  {r.skipped && <div style={{ fontSize: 12, color: T.textFaint }}>⏭ dilewati</div>}
+                  {r.skipped && <div style={{ fontSize: 12, color: T.textDim }}>⏭ dilewati</div>}
                 </div>
               ))}
             </div>
@@ -348,7 +348,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
         <div
           style={{
             fontSize: 11,
-            color: T.textFaint,
+            color: T.textDim,
             marginBottom: 8,
             letterSpacing: 1,
             textTransform: 'uppercase',

@@ -43,7 +43,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--ssw-amber);
+  color: var(--ssw-amberText);
   padding: 6px 2px;
   letter-spacing: 0.2px;
 }

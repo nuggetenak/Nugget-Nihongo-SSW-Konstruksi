@@ -325,7 +325,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             <div
               style={{
                 fontSize: 11,
-                color: correct > ghostScore ? T.correct : T.textFaint,
+                color: correct > ghostScore ? T.correct : T.textDim,
                 marginTop: 2,
               }}
             >

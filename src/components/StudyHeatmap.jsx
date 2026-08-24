@@ -63,7 +63,7 @@ export default function StudyHeatmap({ sessions = [] }) {
               x={0}
               y={row * (CELL + GAP) + CELL - 1}
               fontSize={8}
-              fill={T.textFaint}
+              fill={T.textDim}
               dominantBaseline="auto"
             >
               {label}
@@ -98,7 +98,7 @@ export default function StudyHeatmap({ sessions = [] }) {
           alignItems: 'center',
           marginTop: 4,
           fontSize: 9,
-          color: T.textFaint,
+          color: T.textDim,
         }}
       >
         <span>Sedikit</span>

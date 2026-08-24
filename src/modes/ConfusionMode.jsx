@@ -160,7 +160,7 @@ function PanelView({
                     {meta.desc}
                   </span>
                 </div>
-                <span style={{ fontSize: 10, color: T.textFaint }}>詳細 →</span>
+                <span style={{ fontSize: 10, color: T.textDim }}>詳細 →</span>
               </div>
               <div style={{ display: 'flex', gap: 12 }}>
                 <div style={{ flex: 1 }}>
@@ -176,7 +176,7 @@ function PanelView({
                   </div>
                   {pair.furiA && <div style={{ fontSize: 10, color: T.textDim }}>{pair.furiA}</div>}
                 </div>
-                <div style={{ color: T.textFaint, fontSize: 18, alignSelf: 'center' }}>vs</div>
+                <div style={{ color: T.textDim, fontSize: 18, alignSelf: 'center' }}>vs</div>
                 <div style={{ flex: 1, textAlign: 'right' }}>
                   <div
                     style={{
@@ -416,7 +416,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                       }}
                     >
                       <span style={{ fontSize: 16, fontWeight: 700 }}>{p.termA}</span>
-                      <span style={{ color: T.textFaint }}>vs</span>
+                      <span style={{ color: T.textDim }}>vs</span>
                       <span style={{ fontSize: 16, fontWeight: 700 }}>{p.termB}</span>
                     </div>
                     <div style={{ fontSize: 12, color: T.wrong, marginBottom: 4 }}>
@@ -510,7 +510,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
           </div>
           {pair.furiA && <div style={{ fontSize: 11, color: T.textDim }}>{pair.furiA}</div>}
         </div>
-        <div style={{ fontSize: 13, color: T.textFaint, fontWeight: 700 }}>vs</div>
+        <div style={{ fontSize: 13, color: T.textDim, fontWeight: 700 }}>vs</div>
         <div style={{ textAlign: 'center' }}>
           <div
             style={{
@@ -581,7 +581,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                 alignItems: 'flex-start',
               }}
             >
-              <span style={{ fontWeight: 700, minWidth: 18, color: T.textFaint }}>{i + 1})</span>
+              <span style={{ fontWeight: 700, minWidth: 18, color: T.textDim }}>{i + 1})</span>
               <span style={{ flex: 1 }}>{opt.text}</span>
               {showResult && isCorrectOpt && <span>✓</span>}
               {showResult && isWrongPick && <span>✗</span>}
