@@ -4,8 +4,7 @@
 // Focus management — moves focus to #mode-heading on mount.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Component, Suspense, useEffect, useRef, useState } from 'react';
-import { T } from '../styles/theme.js';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { CARDS } from '../data/cards.js';
 import { getCatsForTrack } from '../data/categories.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -16,6 +15,7 @@ import { get as storageGet } from '../storage/engine.js';
 import { MODE_COMPONENTS } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
 import ModeHeader from '../components/ModeHeader.jsx';
+import ErrorBoundary from '../components/ErrorBoundary.jsx';
 import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 
 // ── Loading fallback — skeleton, not spinner ───────────────────────────────
@@ -32,65 +32,6 @@ function ModeLoader() {
   );
 }
 
-// ── Error boundary ─────────────────────────────────────────────────────────
-class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { error };
-  }
-
-  render() {
-    if (this.state.error) {
-      return (
-        <div
-          role="alert"
-          style={{
-            minHeight: '60dvh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 32,
-            textAlign: 'center',
-            gap: 12,
-          }}
-        >
-          <div style={{ fontSize: 40 }} aria-hidden="true">
-            ⚠️
-          </div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: T.text }}>
-            Mode ini mengalami error
-          </div>
-          <div style={{ fontSize: 12, color: T.textDim, maxWidth: 280 }}>
-            {this.state.error?.message ?? 'Terjadi kesalahan yang tidak terduga.'}
-          </div>
-          <button
-            onClick={this.props.onExit}
-            aria-label="Kembali ke menu utama"
-            style={{
-              marginTop: 8,
-              fontFamily: 'inherit',
-              padding: '10px 24px',
-              borderRadius: T.r.md,
-              background: T.surface,
-              border: `1px solid ${T.border}`,
-              color: T.text,
-              fontSize: 13,
-              cursor: 'pointer',
-            }}
-          >
-            ← Kembali ke Menu
-          </button>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
 
 // ── Focus trap helper — moves focus to the skip target on mode entry ────────
 function FocusSentinel() {
@@ -300,7 +241,12 @@ export default function ModeRouter() {
   const props = modeProps[mode] ?? { onExit: exitMode };
 
   return (
-    <ErrorBoundary onExit={exitMode}>
+    <ErrorBoundary
+      title="Mode ini mengalami error"
+      desc="Muat ulang biasanya memperbaikinya. Progresmu tersimpan otomatis."
+      secondaryLabel="← Kembali ke Menu"
+      onSecondary={exitMode}
+    >
       <FocusSentinel />
       <ModeHeader mode={mode} modeHistory={modeHistory} onBack={goBack} />
       <Suspense fallback={<ModeLoader />}>

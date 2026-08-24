@@ -1,0 +1,134 @@
+/* ─── ErrorBoundary.module.css ─────────────────────────────────────────────── */
+/* Same shape/tokens as EmptyState.module.css -- an error is an empty state
+   with a reason attached, not a different visual language (item 38/19). */
+
+.wrap {
+  padding: 32px 24px;
+  text-align: center;
+  max-width: var(--max-w, 480px);
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-black);
+  margin-bottom: 6px;
+  color: var(--ssw-text);
+}
+
+.desc {
+  font-size: var(--fs-body);
+  color: var(--ssw-textMuted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: 20px;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.primary {
+  font-family: inherit;
+  padding: 11px 24px;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  border-radius: var(--r-md);
+  background: var(--ssw-amber);
+  border: none;
+  color: var(--ssw-textBright);
+  cursor: pointer;
+  box-shadow: var(--ssw-shadowGlow);
+  min-height: var(--tap-min);
+}
+
+.secondary {
+  font-family: inherit;
+  padding: 9px 20px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-textMuted);
+  cursor: pointer;
+  min-height: var(--tap-min);
+}
+
+.primary:hover,
+.secondary:hover {
+  filter: brightness(1.05);
+}
+
+.detail {
+  margin-top: 20px;
+  text-align: left;
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+}
+
+.detail summary {
+  cursor: pointer;
+  text-align: center;
+  color: var(--ssw-textDim);
+}
+
+.detailText {
+  margin-top: 8px;
+  padding: 10px;
+  background: var(--ssw-surface);
+  border-radius: var(--r-sm);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+/* ── FlatCardFallback: a degraded card render, not an error -- stays its
+   own card shape rather than the full-page wrap above ── */
+.flatCard {
+  padding: 24px;
+  text-align: center;
+  background: var(--ssw-surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--ssw-border);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flatCardJp {
+  font-size: 28px;
+  font-weight: var(--fw-bold);
+}
+
+.flatCardId {
+  margin-top: 8px;
+  color: var(--ssw-textMuted);
+  font-size: var(--fs-body);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

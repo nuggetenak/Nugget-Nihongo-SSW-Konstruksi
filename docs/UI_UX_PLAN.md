@@ -965,7 +965,7 @@ during an open session cannot leave the app in a state where the only recovery i
 
 ---
 
-### ☐ 38. Error states: untokenized, unexplained, and a retry that can't work — `M`
+### ☑ 38. Error states: untokenized, unexplained, and a retry that can't work — `M`
 
 **What.** `src/components/ErrorBoundary.jsx` provides three fallbacks — `TabError`,
 `FlatCardFallback`, and the generic boundary. All three are built from inline styles, and the
