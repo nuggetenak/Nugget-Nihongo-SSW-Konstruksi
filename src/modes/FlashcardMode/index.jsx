@@ -12,6 +12,7 @@ import { useToast } from '../../components/Toast.jsx';
 import { get as storageGet, set as storageSet } from '../../storage/engine.js';
 import ProgressBar from '../../components/ProgressBar.jsx';
 import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.jsx';
+import EmptyState from '../../components/EmptyState.jsx';
 import S from '../modes.module.css';
 import FC from './flashcard.module.css';
 
@@ -200,6 +201,10 @@ export default function FlashcardMode({
 
   // ── Empty state ──────────────────────────────────────────────────────────
   if (!card || displayCards.length === 0) {
+    const resetFilters = () => {
+      setSearch('');
+      setReviewBelum(false);
+    };
     return (
       <div className={S.pageCenter}>
         <button
@@ -209,24 +214,17 @@ export default function FlashcardMode({
         >
           ← Kembali
         </button>
-        <div className={S.emptyIcon}>{search ? '🔍' : reviewBelum ? '🎉' : '📭'}</div>
-        <div className={S.emptyTitle}>
-          {search
-            ? `Tidak ada hasil untuk "${search}"`
-            : reviewBelum
-              ? 'Tidak ada kartu belum hafal!'
-              : 'Tidak ada kartu'}
-        </div>
-        {(search || reviewBelum) && (
-          <button
-            onClick={() => {
-              setSearch('');
-              setReviewBelum(false);
-            }}
-            className={S.btnSecondary}
-          >
-            Reset filter
-          </button>
+        {search ? (
+          <EmptyState.SearchEmpty query={search} onCta={resetFilters} />
+        ) : reviewBelum ? (
+          <EmptyState
+            icon="🎉"
+            title="Tidak ada kartu belum hafal!"
+            ctaLabel="Reset filter"
+            onCta={resetFilters}
+          />
+        ) : (
+          <EmptyState icon="📭" title="Tidak ada kartu" />
         )}
       </div>
     );

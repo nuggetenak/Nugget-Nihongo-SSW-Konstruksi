@@ -4,6 +4,7 @@ import { CARDS } from '../data/cards.js';
 import { CATEGORIES, VOCAB_SOURCES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import SprintMode from './SprintMode.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd }) {
@@ -135,20 +136,13 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
       )}
 
       {catStats.length === 0 && (
-        <div className={S.emptyInMode}>
-          <div className={S.emptyIcon}>✨</div>
-          <div className={S.emptyTitle}>Belum ada kartu lemah</div>
-          <div className={S.emptyDesc}>
-            Lanjutkan kuis dulu, lalu kembali ke sini untuk latihan intensif.
-          </div>
-          <button
-            className={S.btnPrimary}
-            style={{ width: 'auto', padding: '11px 24px' }}
-            onClick={onExit}
-          >
-            Mulai Kuis →
-          </button>
-        </div>
+        <EmptyState
+          icon="✨"
+          title="Belum ada kartu lemah"
+          desc="Lanjutkan kuis dulu, lalu kembali ke sini untuk latihan intensif."
+          ctaLabel="Mulai Kuis →"
+          onCta={onExit}
+        />
       )}
 
       <div className={S.list}>

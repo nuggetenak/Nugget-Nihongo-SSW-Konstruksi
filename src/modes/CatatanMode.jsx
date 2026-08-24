@@ -8,6 +8,7 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { useDebounce } from '../hooks/useDebounce.js';
+import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 function NoteCard({ card, note, onSave }) {
@@ -285,16 +286,11 @@ export default function CatatanMode({ cards, onExit }) {
 
       {/* Card list */}
       {filtered.length === 0 ? (
-        <div
-          style={{
-            textAlign: 'center',
-            padding: '40px 20px',
-            color: 'var(--ssw-textDim)',
-            fontSize: 14,
-          }}
-        >
-          {query ? 'Tidak ada kartu yang cocok.' : 'Belum ada catatan.'}
-        </div>
+        query ? (
+          <EmptyState.SearchEmpty query={query} />
+        ) : (
+          <EmptyState.NoNotes />
+        )
       ) : (
         <>
           {filtered.map((card) => (

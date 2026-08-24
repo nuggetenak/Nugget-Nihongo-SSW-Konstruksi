@@ -333,33 +333,6 @@
   gap: 8px;
 }
 
-/* ── Empty state ── */
-.emptyInMode {
-  padding: 48px 0;
-  text-align: center;
-  animation: fadeIn 0.3s ease;
-}
-
-.emptyIcon {
-  font-size: 48px;
-  margin-bottom: 14px;
-}
-
-.emptyTitle {
-  font-size: var(--fs-subtitle);
-  font-weight: 800;
-  margin-bottom: 8px;
-  color: var(--ssw-textBright);
-  letter-spacing: -0.2px;
-}
-
-.emptyDesc {
-  font-size: var(--fs-body);
-  color: var(--ssw-textMuted);
-  line-height: var(--lh-relaxed);
-  margin-bottom: 24px;
-}
-
 /* ── Flashcard-specific ── */
 .fcWrapper {
   /* Width and bottom safe-space belong to AppShell; the 100px bottom padding

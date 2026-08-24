@@ -16,12 +16,13 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import Skeleton from '../components/Skeleton.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 import R from './ReviewMode.module.css';
 
 const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 
-export default function ReviewMode({ srs, onExit, onSessionEnd }) {
+export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -141,23 +142,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd }) {
           <button className={`${S.btnBack} ${R.emptyBack}`} onClick={onExit}>
             ← Kembali
           </button>
-          <div
-            className={`${S.emptyInMode}`}
-            style={{ padding: '48px 24px', animation: 'scaleIn 0.3s ease' }}
-          >
-            <div className={S.emptyIcon}>🎉</div>
-            <div className={S.emptyTitle}>Semua kartu sudah terulang!</div>
-            <div className={S.emptyDesc}>
-              Tidak ada yang jatuh tempo hari ini. Datang lagi besok untuk sesi ulasan berikutnya.
-            </div>
-            <button
-              className={S.btnPrimary}
-              style={{ width: 'auto', padding: '12px 24px', fontSize: 13 }}
-              onClick={onExit}
-            >
-              Kembali ke Dashboard
-            </button>
-          </div>
+          <EmptyState.NoReviews onCta={onGoKartu} />
         </div>
       );
     }

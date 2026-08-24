@@ -6,6 +6,7 @@ import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import { get as storageGet } from '../storage/engine.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
+import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 const HISTORY_KEY = 'ssw-search-history';
@@ -166,22 +167,20 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
       )}
 
       {debouncedQuery.length < 2 && (
-        <div className={S.emptyInMode}>
-          <div className={S.emptyIcon}>🔍</div>
-          <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>Cari kosakata</div>
-          <div style={{ fontSize: 12, color: T.textMuted }}>
-            Coba ketik <strong>denki</strong> atau <strong>電気</strong> atau{' '}
-            <strong>listrik</strong>
-          </div>
-        </div>
+        <EmptyState
+          icon="🔍"
+          title="Cari kosakata"
+          desc={
+            <>
+              Coba ketik <strong>denki</strong> atau <strong>電気</strong> atau{' '}
+              <strong>listrik</strong>
+            </>
+          }
+        />
       )}
 
       {debouncedQuery.length >= 2 && results.length === 0 && (
-        <div className={S.emptyInMode}>
-          <div className={S.emptyIcon}>😕</div>
-          <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>Tidak ditemukan</div>
-          <div style={{ fontSize: 12, color: T.textMuted }}>Coba kata lain atau furigana</div>
-        </div>
+        <EmptyState.SearchEmpty query={debouncedQuery} />
       )}
 
       <div className={S.list}>

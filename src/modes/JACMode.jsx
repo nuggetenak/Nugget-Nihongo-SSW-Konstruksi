@@ -9,6 +9,7 @@ import { recordReview } from '../srs/fsrs-scheduler.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 const SETS = [
@@ -142,12 +143,13 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   if (setKey === 'lemah' && filtered.length === 0) {
     return (
       <div className={S.pageCenter}>
-        <div style={{ fontSize: 36, marginBottom: 12 }}>💪</div>
-        <div className={S.emptyTitle}>Belum ada soal lemah</div>
-        <div className={S.emptyDesc}>Kerjakan beberapa soal dulu!</div>
-        <button className={S.btnSecondary} onClick={() => setSetKey(null)}>
-          ← Kembali
-        </button>
+        <EmptyState
+          icon="💪"
+          title="Belum ada soal lemah"
+          desc="Kerjakan beberapa soal dulu!"
+          ctaLabel="← Kembali"
+          onCta={() => setSetKey(null)}
+        />
       </div>
     );
   }

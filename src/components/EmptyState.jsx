@@ -90,3 +90,7 @@ EmptyState.NoProgress = function NoProgress({ onCta }) {
     />
   );
 };
+
+EmptyState.NoNotes = function NoNotes() {
+  return <EmptyState icon="📝" title="Belum ada catatan" />;
+};

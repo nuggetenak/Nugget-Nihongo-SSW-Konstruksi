@@ -230,7 +230,12 @@ export default function ModeRouter() {
       onToggleStar: toggleStar,
       filterIds: modeParams?.filterIds ?? null,
     },
-    ulasan: { srs, onExit: exitMode, onSessionEnd: makeSessionEnd('ulasan') },
+    ulasan: {
+      srs,
+      onExit: exitMode,
+      onSessionEnd: makeSessionEnd('ulasan'),
+      onGoKartu: () => goMode('kartu'),
+    },
     kuis: {
       cards: filteredCards,
       allCards: CARDS,
