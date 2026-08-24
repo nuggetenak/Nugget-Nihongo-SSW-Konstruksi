@@ -120,9 +120,13 @@ export default function QuizShell({
 
       // Anxiety-reduction toast — fires when >=5 consecutive wrong answers.
       // Normalizes struggle as expected for new material (Young 1991, Zhang 2019).
+      // priority: true (item 16) -- this message is specifically designed to land
+      // at a moment of frustration; it shouldn't lose that moment to a routine
+      // toast (a save confirmation, a quota warning) that happened to queue first.
       if (maxWrongStreak >= 5) {
         toast.show('Banyak salah? Wajar — artinya materi ini masih baru. Coba mode Kartu dulu 💪', {
           duration: 4000,
+          priority: true,
         });
       }
     }

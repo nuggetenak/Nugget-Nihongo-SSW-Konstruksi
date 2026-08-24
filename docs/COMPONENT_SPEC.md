@@ -136,3 +136,47 @@ A direct-render fallback exists outside `JpDisplay`: `ErrorBoundary`'s `FlatCard
 `card.jp` raw (old-WebView / no-`ResizeObserver` path). It carries its own `lang="ja"` directly
 rather than routing through `JpDisplay`, since that fallback is deliberately minimal and doesn't
 carry the props (`furi`, `furiganaPolicy`) `JpDisplay` expects.
+
+## 9. Feedback level: toast vs. inline vs. dialog vs. banner (item 16, 2026-08-24)
+
+Four different ways this app tells the user something happened, and the rule for which one a new
+call site should reach for:
+
+- **Toast** (`useToast`, `src/components/Toast.jsx`) — transient acknowledgement the user doesn't
+  need to act on. A save happened, a milestone landed, an update is available. Self-dismisses;
+  losing it costs nothing since it wasn't the only record of the thing it announced. Never the
+  right vehicle for something that loses data if missed — see storage-quota below.
+- **Inline** — feedback tied to a specific control: field validation, a per-card correct/wrong
+  flash, a button's own pending/success state. Appears at the point of interaction, not stacked
+  elsewhere on screen, and doesn't compete with unrelated toasts for the same few seconds of
+  attention.
+- **Dialog** (`useConfirm` / `ConfirmDialog`) — anything requiring a decision before proceeding.
+  Blocks until answered; the only one of the four that does.
+- **Banner** — persistent state that stays true until it isn't: offline, a storage-quota warning
+  still in effect, anything the user should be able to check back on rather than catch in a 3.5s
+  window.
+
+**Errors that lose data are never toast-only.** A storage-quota failure (`setQuotaHandler` in
+`App.jsx`) was toasting an 8-second warning — a data-loss event given a self-dismissing,
+easy-to-miss vehicle. Item 19 moves this to a banner/dialog; flagged here so a future toast call
+site doesn't reintroduce the same mismatch for a different data-loss case.
+
+**Toast internals** (`Toast.jsx`, reworked this item — was: silently discarding whatever didn't
+fit past 2 concurrent, timers that outlived their toast, `role="status"` fighting an `aria-live`
+override to `"assertive"`):
+
+- Concurrent display caps at `MAX_VISIBLE` (2); anything past that queues and appears as a slot
+  frees up, rather than being discarded. `show(msg, { priority: true })` jumps the queue —
+  useful when two toasts land close together and one matters more (the anxiety-reduction message
+  from `useAnswerStreak` and a quota warning racing for the same slot, for instance).
+- Each toast owns its auto-dismiss timer via its own effect (mount → set, pause/unmount/id-or-
+  duration-change → clear) rather than a hand-tracked timer map — pausing on hover/focus is just
+  toggling a state value the effect already depends on, and cleanup on unmount is automatic
+  rather than another thing to remember.
+- `role="alert"` (implicit assertive) for `type: "error"`, `role="status"` (implicit polite) for
+  everything else, no explicit `aria-live` on either — the previous code set an explicit
+  `aria-live` that sometimes contradicted the role's own implicit one, which is ambiguous across
+  screen readers. Don't add `aria-live` back without removing the role, or the other way around.
+- `Escape` dismisses the frontmost (most recently shown) toast, guarded by the same
+  `isTypingTarget` check item 31 introduced for the first global key handler — reused, not
+  reimplemented (`src/utils/keyboard.js`).

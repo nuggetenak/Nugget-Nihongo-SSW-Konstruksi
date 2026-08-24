@@ -1090,7 +1090,7 @@ the trigger; destructive messages name what will be lost; no timing-based double
 
 ---
 
-### ☐ 16. Define toast semantics and stop losing messages — `M`
+### ☑ 16. Define toast semantics and stop losing messages — `M`
 
 **What.** `ToastProvider` is used from several places with no shared convention about when a toast is
 the right vehicle, and its queue silently drops messages. Write the convention down; fix the queue.
