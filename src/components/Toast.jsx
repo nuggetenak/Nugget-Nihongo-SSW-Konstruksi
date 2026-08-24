@@ -19,9 +19,9 @@ export function ToastProvider({ children }) {
   }, []);
 
   const show = useCallback(
-    (message, { undo, duration = 3500, type = 'default' } = {}) => {
+    (message, { undo, actionLabel = 'Batalkan', duration = 3500, type = 'default' } = {}) => {
       const id = ++nextId.current;
-      setToasts((ts) => [...ts.slice(-1), { id, message, undo, type }]);
+      setToasts((ts) => [...ts.slice(-1), { id, message, undo, actionLabel, type }]);
       setTimeout(() => dismiss(id), duration);
       return id;
     },
@@ -74,9 +74,9 @@ function ToastItem({ toast: t, onDismiss }) {
             t.undo();
             onDismiss(t.id);
           }}
-          aria-label="Batalkan aksi terakhir"
+          aria-label={t.actionLabel}
         >
-          Batalkan
+          {t.actionLabel}
         </button>
       )}
       <button className={S.btnClose} onClick={() => onDismiss(t.id)} aria-label="Tutup notifikasi">

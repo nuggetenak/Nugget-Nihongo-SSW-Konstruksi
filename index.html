@@ -119,10 +119,11 @@
     </style>
 
     <!-- Service Worker registration — inline to register before any JS loads.
-         Update UI lives entirely in App.jsx's SW_UPDATED listener (a themed,
-         dismissible toast) — this used to also build its own raw DOM banner
-         here, which meant two competing update notifications could show at
-         once. See UI_UX_PLAN.md item 6. -->
+         Update UI lives entirely in App.jsx's registration-watching effect (a
+         themed, dismissible toast) — this used to also build its own raw DOM
+         banner here, which meant two competing update notifications could show
+         at once. See UI_UX_PLAN.md item 6. As of item 37, the new worker waits
+         for the user to accept before taking over (see App.jsx + sw.js). -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {

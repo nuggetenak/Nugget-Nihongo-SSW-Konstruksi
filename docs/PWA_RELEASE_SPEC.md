@@ -38,6 +38,21 @@ hypothetical: at the start of `feat/ui-overhaul`, `CACHE_VERSION` was found at `
 when it's stale; the app just quietly keeps serving old assets to existing users while working
 fine for anyone installing fresh.
 
+**Update/activation strategy (item 37).** The worker no longer calls `self.skipWaiting()` on
+install — a newly-installed worker sits in the `waiting` state instead of taking over
+immediately. `App.jsx` watches the registration (`updatefound` → the installing worker's
+`statechange` → `'installed'`, gated on `navigator.serviceWorker.controller` already existing so
+a first-ever install doesn't trigger an "update available" prompt) and shows a toast; only if the
+user accepts does the client `postMessage({ type: 'SKIP_WAITING' })` to the waiting worker, which
+is the only thing that calls `self.skipWaiting()` (`sw.js`'s `message` handler). A
+`controllerchange` listener reloads once the new worker actually takes control. This means an
+open study session keeps running on the JS bundle it started with — and that bundle's lazy chunks
+stay resolvable, since `activate` doesn't delete the previous version's cache until the user has
+chosen to move to the new one. Chosen over the alternative of keeping `skipWaiting` and instead
+delaying cache deletion by one generation: this route removes the mid-session interruption
+entirely rather than mitigating its blast radius, at the cost of updates landing only when a
+session ends or the user opts in.
+
 ## 3. Storage
 
 Single source of truth: `_MAP.md` §6, "Storage Schema" — schema version, document shape, and

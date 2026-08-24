@@ -44,20 +44,49 @@ export default function App() {
     }
   }, [toastQueue, toast, clearToast]);
 
-  // Listen for SW_UPDATED message from service worker and offer reload.
+  // Watch for a new service worker finishing install and prompt before it
+  // takes over — see UI_UX_PLAN.md item 37. The worker itself no longer calls
+  // skipWaiting on install (sw.js), so it sits in `waiting` until the user
+  // accepts here; only then do we post SKIP_WAITING and reload.
   useEffect(() => {
     if (!('serviceWorker' in navigator)) return;
-    const handler = (e) => {
-      if (e.data?.type === 'SW_UPDATED') {
-        toast.show('🔄 Update tersedia', {
-          undo: () => window.location.reload(),
-          duration: 10000,
-          type: 'default',
-        });
-      }
+    let cancelled = false;
+
+    const promptUpdate = (worker) => {
+      if (cancelled) return;
+      cancelled = true; // one prompt per detected update is enough
+      toast.show('🔄 Update tersedia', {
+        undo: () => worker.postMessage({ type: 'SKIP_WAITING' }),
+        actionLabel: 'Perbarui',
+        duration: 10000,
+        type: 'default',
+      });
     };
-    navigator.serviceWorker.addEventListener('message', handler);
-    return () => navigator.serviceWorker.removeEventListener('message', handler);
+
+    const watch = (reg) => {
+      if (!reg) return;
+      // A worker may already be waiting by the time this effect runs (e.g.
+      // it finished installing while this tab was in the background).
+      if (reg.waiting && navigator.serviceWorker.controller) {
+        promptUpdate(reg.waiting);
+      }
+      reg.addEventListener('updatefound', () => {
+        const installing = reg.installing;
+        if (!installing) return;
+        installing.addEventListener('statechange', () => {
+          // controller already set = this isn't the first-ever install, so an
+          // 'installed' worker here means a real update is ready.
+          if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+            promptUpdate(installing);
+          }
+        });
+      });
+    };
+
+    navigator.serviceWorker.getRegistration().then(watch);
+    const onControllerChange = () => window.location.reload();
+    navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
+    return () => navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
   }, [toast]);
 
   // Register quota error handler — shows toast if localStorage write fails.

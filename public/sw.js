@@ -25,8 +25,21 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_STATIC)
       .then(cache => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting()) // activate immediately
+    // Deliberately no immediate self-activation call here — see UI_UX_PLAN.md
+    // item 37. A new worker now stays in the `waiting` state so an open
+    // session keeps running on the JS bundle it started with (its lazy
+    // chunks still resolve). The client prompts the user and only tells this
+    // worker to take over once they choose to update (see the message
+    // listener below).
   );
+});
+
+// ── Message ────────────────────────────────────────────────────────────────
+// The client posts this after the user accepts the update toast.
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 // ── Activate ───────────────────────────────────────────────────────────────
@@ -39,13 +52,7 @@ self.addEventListener('activate', (event) => {
           .filter(key => !ALL_CACHES.includes(key))
           .map(key => caches.delete(key))
       ))
-      .then(() => self.clients.claim()) // take control immediately
-      .then(() => {
-        // FE-08-B: Notify all open windows that a new SW has activated.
-        return self.clients.matchAll({ type: 'window' }).then((all) =>
-          all.forEach((client) => client.postMessage({ type: 'SW_UPDATED' }))
-        );
-      })
+      .then(() => self.clients.claim()) // take control immediately once activated
   );
 });
 

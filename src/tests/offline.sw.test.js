@@ -48,8 +48,15 @@ describe('Service Worker structure', () => {
     expect(sw).toMatch(/network.*first|Network-First|fetch\(.*catch/is);
   });
 
-  it('calls skipWaiting on install', () => {
-    expect(sw).toContain('skipWaiting');
+  it('does not call skipWaiting unconditionally on install', () => {
+    // item 37: a new worker must stay `waiting`, not activate itself.
+    const installBlock = sw.match(/self\.addEventListener\('install'[\s\S]*?\n\}\);/)?.[0] ?? '';
+    expect(installBlock).not.toContain('skipWaiting');
+  });
+
+  it('only calls skipWaiting in response to a SKIP_WAITING message', () => {
+    expect(sw).toContain("addEventListener('message'");
+    expect(sw).toMatch(/SKIP_WAITING[\s\S]*?self\.skipWaiting\(\)/);
   });
 
   it('calls clients.claim on activate', () => {

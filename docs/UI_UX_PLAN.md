@@ -915,7 +915,7 @@ untouched.
 
 _Items 37–38 added by the second audit pass (2026-08-20)._
 
-### 🔶 37. The service worker replaces itself mid-session, and every mode is a lazy chunk — `M` — needs owner decision
+### ☑ 37. The service worker replaces itself mid-session, and every mode is a lazy chunk — `M` — needs owner decision
 
 **What.** `public/sw.js` calls `self.skipWaiting()` on install (line 28) and `self.clients.claim()`
 on activate (line 42), then deletes every cache not in `ALL_CACHES` (lines 35–41). Meanwhile all 21
