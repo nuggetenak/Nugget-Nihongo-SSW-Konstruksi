@@ -3,7 +3,7 @@
 // Reads/writes via storage engine (prefs doc).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { applyTheme } from '../styles/theme.js';
 import { useToast } from '../components/Toast.jsx';
@@ -108,6 +108,82 @@ export function AppProvider({ children }) {
     },
     [setPref]
   );
+
+  // ── Browser / hardware back button (item 10, scoped route) ──
+  // Hash-based (#/tab/x, #/mode/y) -- avoids the subpath + SW HTML-shell
+  // Network-First strategy (docs/PWA_RELEASE_SPEC.md §2); works offline
+  // unchanged. This state stays the source of truth for rendering; browser
+  // history mirrors it rather than replacing it -- smaller surface for the
+  // scoped route than deriving would be.
+  //
+  // Deliberately coarse: only the tab-level <-> mode-area boundary pushes a
+  // real entry. Moving between modes while already inside the mode area
+  // (goMode to another mode, goBack to an ancestor) replaces in place, so
+  // one hardware back always exits the mode area as a single step rather
+  // than retracing every in-mode move -- that finer-grained retracing is
+  // ModeHeader's job (item 11), already shipped. This matches what the fix
+  // is actually for (back exiting the whole app mid-quiz), without taking on
+  // a fully derived history stack, which the plan flags as separate scope.
+  //
+  // Known gap, accepted for this pass: exiting a mode via an in-app control
+  // (not the hardware back button) doesn't pop the pushed entry -- it
+  // replaces, matching every other in-mode-area transition. The next
+  // hardware back then lands on an unchanged screen before a second press
+  // reaches the real previous one. Popping programmatically here would need
+  // a way to tell "this state update came from our own history.back() call"
+  // apart from "the user pressed back", which the popstate event alone
+  // doesn't carry -- not solved in this pass.
+  //
+  // Also not handled: an in-quiz confirm-before-discard guard. That's item
+  // 15's ConfirmDialog, which doesn't exist yet -- owner chose to land the
+  // back-button fix now rather than sequence after it.
+  const prevModeRef = useRef(mode);
+  const isPopRef = useRef(false);
+
+  useEffect(() => {
+    const enteringModeArea = prevModeRef.current === null && mode !== null;
+    prevModeRef.current = mode;
+
+    if (isPopRef.current) {
+      isPopRef.current = false; // browser already moved; state is already in sync
+      return;
+    }
+
+    const state = mode ? { tab, mode, modeHistory } : { tab, mode: null };
+    const url = mode ? `#/mode/${mode}` : `#/tab/${tab}`;
+    if (enteringModeArea) {
+      history.pushState(state, '', url);
+    } else {
+      history.replaceState(state, '', url);
+    }
+    // modeHistory intentionally omitted: it never changes without mode also
+    // changing (every setModeHistory call site also calls setMode), so it's
+    // always fresh here via closure without needing to be a dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab, mode]);
+
+  useEffect(() => {
+    const onPopState = (e) => {
+      isPopRef.current = true;
+      const state = e.state;
+      if (state?.mode) {
+        setTab(state.tab);
+        setMode(state.mode);
+        setModeHistory(state.modeHistory ?? []);
+        setPref('lastMode', state.mode);
+      } else {
+        // Either a tab-level entry, or popped past everything this app
+        // pushed (state is null) -- either way, land at the tab level.
+        setTab(state?.tab ?? 'home');
+        setMode(null);
+        setModeHistory([]);
+        setPref('lastMode', null);
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, [setPref]);
 
   // ── Track ──
   const setTrack = useCallback(

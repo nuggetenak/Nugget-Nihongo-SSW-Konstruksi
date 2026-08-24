@@ -723,7 +723,7 @@ used where it applies; `.btnPrimary` carries no raw hex and no duplicated shadow
 Where the user is, how they got there, how they leave. The breadcrumb work started on this branch
 is real but partial; these items finish the thought.
 
-### 🔶 10. Browser history / hardware back button — `L` — needs owner decision
+### ☑ 10. Browser history / hardware back button — `L` — needs owner decision
 
 **What.** Navigation is pure React state — `tab`, `mode`, `modeHistory` in
 `src/contexts/AppContext.jsx`. There is no `history.pushState` or `popstate` handling anywhere in
