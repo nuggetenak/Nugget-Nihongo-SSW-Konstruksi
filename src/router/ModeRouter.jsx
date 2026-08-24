@@ -243,7 +243,7 @@ export default function ModeRouter() {
   return (
     <ErrorBoundary
       title="Mode ini mengalami error"
-      desc="Muat ulang biasanya memperbaikinya. Progresmu tersimpan otomatis."
+      desc="Muat ulang biasanya memperbaikinya. Jawaban yang belum selesai di sesi ini mungkin tidak tersimpan."
       secondaryLabel="← Kembali ke Menu"
       onSecondary={exitMode}
     >

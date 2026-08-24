@@ -19,22 +19,67 @@ import { isQuotaError, notifyQuotaExceeded } from '../utils/storage-quota.js';
 // ── In-memory cache ────────────────────────────────────────────────────────
 let _cache = { progress: null, srs: null, prefs: null };
 let _initialized = false;
+// item 19: which doc(s), if any, failed to parse at init and got reset to
+// defaults. Read via getCorruptionWarning() once React has mounted -- init()
+// itself runs before that (main.jsx calls it pre-render), so there's no
+// listener to call synchronously the way notifyQuotaExceeded has one.
+let _corruption = [];
 
 // ── Low-level ─────────────────────────────────────────────────────────────
+// Returns { ok: true, data } | { ok: false, corrupt: boolean }. corrupt is
+// true only when the key existed and had content that failed to parse --
+// distinct from a genuinely missing key, which is the normal fresh-install
+// case and not an error at all. Callers that only care about "do I have
+// data" can still treat both as absent; init() cares about the difference so
+// it doesn't destroy a corrupt document the same silent way it skips past a
+// merely-missing one.
 function readDoc(docKey) {
+  let raw;
   try {
-    const raw = localStorage.getItem(docKey);
-    if (!raw) return null;
-    // Try lz-string decompression; fall back to plain JSON for old data.
-    try {
-      const decompressed = LZString.decompressFromUTF16(raw);
-      if (decompressed) return JSON.parse(decompressed);
-    } catch {}
-    return JSON.parse(raw);
+    raw = localStorage.getItem(docKey);
   } catch {
-    return null;
+    return { ok: false, corrupt: false };
+  }
+  if (!raw) return { ok: false, corrupt: false };
+  try {
+    const decompressed = LZString.decompressFromUTF16(raw);
+    if (decompressed) return { ok: true, data: JSON.parse(decompressed) };
+  } catch {
+    // fall through to plain-JSON attempt below (pre-compression data)
+  }
+  try {
+    return { ok: true, data: JSON.parse(raw) };
+  } catch {
+    return { ok: false, corrupt: true, raw };
   }
 }
+
+// Preserves the unreadable bytes under a side key instead of letting init()
+// overwrite them with fresh defaults and lose them for good -- there's
+// nothing the app can automatically recover, but there's a real difference
+// between "gone" and "sitting in localStorage under a different key in case
+// a support conversation ever wants to look at it".
+function quarantineCorruptDoc(docKey, raw) {
+  const backupKey = `${docKey}_corrupt_${Date.now()}`;
+  try {
+    localStorage.setItem(backupKey, raw);
+  } catch {
+    // Quota's the only realistic failure here (raw's already proven to be
+    // valid string data, just not valid JSON) -- if even this fails, the
+    // corruption warning below still fires without a preserved backup key,
+    // which is strictly better than the silent-overwrite status quo.
+  }
+  _corruption.push({ doc: docKey, backupKey });
+}
+
+/** item 19: non-empty when init() had to reset a doc that existed but
+ *  wouldn't parse, rather than a doc that was simply never written. Read
+ *  this once, after mount -- it reflects what happened at this app-load's
+ *  init() call, not an ongoing stream of events like the quota handler. */
+export function getCorruptionWarning() {
+  return _corruption;
+}
+
 
 function writeDoc(docKey, data) {
   try {
@@ -66,17 +111,22 @@ function freshDefaults() {
 export function init() {
   if (_initialized) return;
 
-  const progressRaw = readDoc(DOCS.progress);
+  const progressResult = readDoc(DOCS.progress);
+  if (progressResult.corrupt) quarantineCorruptDoc(DOCS.progress, progressResult.raw);
+  const progressRaw = progressResult.ok ? progressResult.data : null;
   const version = progressRaw?._v ?? 0;
 
   if (version === STORAGE_VERSION) {
     // Already current — load directly
     _cache.progress = progressRaw;
-    _cache.srs = readDoc(DOCS.srs) ?? { _v: STORAGE_VERSION, cards: {} };
-    _cache.prefs = readDoc(DOCS.prefs) ?? {
-      ...JSON.parse(JSON.stringify(DEFAULTS.prefs)),
-      _v: STORAGE_VERSION,
-    };
+    const srsResult = readDoc(DOCS.srs);
+    if (srsResult.corrupt) quarantineCorruptDoc(DOCS.srs, srsResult.raw);
+    _cache.srs = srsResult.ok ? srsResult.data : { _v: STORAGE_VERSION, cards: {} };
+    const prefsResult = readDoc(DOCS.prefs);
+    if (prefsResult.corrupt) quarantineCorruptDoc(DOCS.prefs, prefsResult.raw);
+    _cache.prefs = prefsResult.ok
+      ? prefsResult.data
+      : { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
   } else if (version === 5) {
     // v5 → v6: doboku/kenchiku scores dropped, wayground/csv id renames remapped
     const migrated = migrate_v5_to_v6();
@@ -257,6 +307,7 @@ export function importAll(snapshot) {
 export function _reset_for_test() {
   _cache = { progress: null, srs: null, prefs: null };
   _initialized = false;
+  _corruption = [];
 }
 
 // ── Snapshot validation ──────────────────────────────────────────────────────

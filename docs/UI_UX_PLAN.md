@@ -1189,7 +1189,7 @@ way. Don't leave it ambiguous a third time.
 
 ---
 
-### ☐ 19. Error and recovery states — `M`
+### ☑ 19. Error and recovery states — `M`
 
 **What.** Review what a user actually sees when something fails, and make the recovery paths real.
 

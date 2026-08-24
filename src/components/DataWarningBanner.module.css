@@ -1,0 +1,66 @@
+/* ─── DataWarningBanner.module.css ─────────────────────────────────────────── */
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-overlay, 200);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(220, 38, 38, 0.95);
+  color: #fff;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.25s var(--ease-smooth, ease);
+}
+
+.msg {
+  flex: 1;
+  min-width: 0;
+}
+
+.action {
+  flex-shrink: 0;
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--r-sm);
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.close {
+  flex-shrink: 0;
+  font-family: inherit;
+  background: none;
+  border: none;
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner {
+    animation: none;
+  }
+}

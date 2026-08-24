@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import BottomNav from './BottomNav.jsx';
 import SideNav from './SideNav.jsx';
 import OfflineBanner from './OfflineBanner.jsx';
+import DataWarningBanner from './DataWarningBanner.jsx';
 import s from './AppShell.module.css';
 
 export default function AppShell({
@@ -55,6 +56,7 @@ export default function AppShell({
   return (
     <div className={s.shell} data-chrome={chrome}>
       <OfflineBanner />
+      <DataWarningBanner />
 
       <div className={s.sideSlot}>
         <SideNav

@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import { useApp } from './contexts/AppContext.jsx';
 import { useProgress } from './contexts/ProgressContext.jsx';
 import { useSRSContext } from './contexts/SRSContext.jsx';
-import { setQuotaHandler } from './utils/storage-quota.js';
 
 import ErrorBoundary, { TabError } from './components/ErrorBoundary.jsx';
 import Onboarding from './components/Onboarding.jsx';
@@ -89,15 +88,10 @@ export default function App() {
     return () => navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
   }, [toast]);
 
-  // Register quota error handler — shows toast if localStorage write fails.
-  useEffect(() => {
-    setQuotaHandler(() => {
-      toast.show('💾 Penyimpanan penuh. Backup data di menu Pengaturan sebelum data hilang.', {
-        duration: 8000,
-        type: 'error',
-      });
-    });
-  }, [toast]);
+  // Storage-quota warnings moved to DataWarningBanner (item 19) -- a
+  // data-loss-risk event doesn't belong on a self-dismissing toast (item
+  // 16's own convention). Rendered unconditionally in AppShell, so it's
+  // always the single place quotaHandler gets registered.
 
   // Active mode. Routed through AppShell too — modes previously returned early
   // and bypassed the shell entirely, which is why they stayed a 480px column on
