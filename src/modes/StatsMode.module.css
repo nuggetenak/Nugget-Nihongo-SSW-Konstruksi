@@ -187,10 +187,6 @@
   font-size: var(--fs-caption);
 }
 
-.wrongJp {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
-}
-
 .wrongCount {
   color: var(--ssw-wrong);
   font-weight: 600;

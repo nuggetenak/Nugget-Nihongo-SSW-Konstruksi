@@ -42,7 +42,6 @@
 }
 
 .termJp {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-weight: 700;
   font-size: var(--fs-subtitle);
 }
@@ -146,7 +145,6 @@
 }
 
 .questionTerm {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-size: 22px;
   font-weight: 700;
   line-height: 1.4;
@@ -283,7 +281,6 @@
 }
 
 .reviewItemHeaderJp {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-weight: 700;
   font-size: 14px;
 }

@@ -109,7 +109,6 @@
 
 .questionJp {
   font-size: var(--fs-subtitle);
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   line-height: 1.75;
   font-weight: 500;
 }
@@ -224,7 +223,6 @@
 
 .reviewJp {
   font-size: var(--fs-body);
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   margin-bottom: 4px;
   line-height: 1.6;
 }

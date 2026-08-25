@@ -199,7 +199,6 @@
 
 .cardJp {
   font-weight: 700;
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   line-height: 1.4;
   /* font-size: dynamic (jpFontSize()), kept inline */
 }
@@ -207,7 +206,6 @@
 .cardFuri {
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   margin-top: 4px;
 }
 

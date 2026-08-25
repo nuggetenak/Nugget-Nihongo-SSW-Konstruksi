@@ -1223,7 +1223,7 @@ crash or is explicitly acknowledged as lost.
 
 _Items 39–42 added by the second audit pass (2026-08-20)._
 
-### ☐ 39. Japanese text falls back to a font the app never loads — `S`
+### ☑ 39. Japanese text falls back to a font the app never loads — `S`
 
 **What.** `AngkaMode.module.css:152,202` and `SimulasiMode.module.css:112,227` set
 `font-family: var(--font-jp, 'Noto Serif JP', serif)`. `--font-jp` is defined nowhere, and

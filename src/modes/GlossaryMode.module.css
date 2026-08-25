@@ -95,7 +95,6 @@
 /* azBtn — active bg/border/color/fontWeight are dynamic, kept inline */
 .azBtn {
   flex-shrink: 0;
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-size: var(--fs-caption);
   min-width: 28px;
   height: 28px;
@@ -125,7 +124,6 @@
 }
 
 .letterLabel {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-size: var(--fs-subtitle);
   font-weight: 900;
   color: var(--ssw-gold);
@@ -171,7 +169,6 @@
 }
 
 .termJp {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-size: 14px;
   font-weight: 600;
   color: var(--ssw-text);
@@ -207,7 +204,6 @@
 }
 
 .termFuri {
-  font-family: var(--font-jp, 'Noto Serif JP', serif);
   font-size: var(--fs-caption);
   color: var(--ssw-amberText);
   font-weight: 600;
