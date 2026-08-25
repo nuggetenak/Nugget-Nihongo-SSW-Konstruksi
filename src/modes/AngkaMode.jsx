@@ -8,6 +8,8 @@ import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
 import { haptic } from '../utils/haptic.js';
 import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -123,6 +125,8 @@ export default function AngkaMode({ onExit, onSessionEnd }) {
 
 function PanelView({ onExit, onStartQuiz }) {
   // onStartQuiz(mode)
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [expanded, setExpanded] = useState(null);
   const groups = useMemo(() => buildGroups(), []);
 
@@ -239,7 +243,9 @@ function PanelView({ onExit, onStartQuiz }) {
                       {relCard && (
                         <div className={A.relatedCard}>
                           <div className={A.relatedCardId}>KARTU #{relCard.id}</div>
-                          <div className={A.relatedCardJp}>{relCard.jp}</div>
+                          <div className={A.relatedCardJp}>
+                            <JpFront jp={relCard.jp} furiganaPolicy={furiganaPolicy} />
+                          </div>
                           <div className={A.relatedCardId_text}>{relCard.id_text}</div>
                         </div>
                       )}

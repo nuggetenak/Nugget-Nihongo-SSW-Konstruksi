@@ -45,7 +45,7 @@ This is the single highest-leverage theme in the plan. Items 43–47 and 52 all 
 
 ## 2. P0 — Furigana is inconsistent in a way that actively hurts learning
 
-### ☐ 43. `furiganaPolicy` is honoured in 3 places out of ~18 — `M`
+### ☑ 43. `furiganaPolicy` is honoured in 3 places out of ~18 — `M`
 
 **Verified.** `grep -rn "furiganaPolicy" src/` returns real consumers in exactly:
 `FlashcardMode` → `FlipCard` → `JpFront`, `SprintMode` → `JpFront`, and `QuizMode` (partially —

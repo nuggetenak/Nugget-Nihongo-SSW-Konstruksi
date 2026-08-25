@@ -15,6 +15,7 @@ import { buildAchievementState, evaluateAchievements } from '../utils/achievemen
 import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
 import { todayStr } from '../utils/date.js';
 import { formatCount } from '../utils/format.js';
+import { JpFront } from './JpDisplay.jsx';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
@@ -67,6 +68,7 @@ export default function SayaTab() {
     setPref,
     prefs,
   } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const confirm = useConfirm();
   const { known, unknown, streakData, sessions, jacScores } = useProgress();
   const srs = useSRSContext();
@@ -238,7 +240,7 @@ export default function SayaTab() {
                   {dcAnswered.correct ? '✅ Benar!' : '❌ Salah'}
                 </div>
                 <div style={{ fontSize: 12, color: 'var(--ssw-textMuted)', lineHeight: 1.5 }}>
-                  {dailyChallengeQ.jp}
+                  <JpFront jp={dailyChallengeQ.jp} furiganaPolicy={furiganaPolicy} />
                 </div>
                 {dailyChallengeQ.explanation && (
                   <div
@@ -265,7 +267,7 @@ export default function SayaTab() {
                     color: 'var(--ssw-text)',
                   }}
                 >
-                  {dailyChallengeQ.jp}
+                  <JpFront jp={dailyChallengeQ.jp} furiganaPolicy={furiganaPolicy} />
                 </div>
                 {dailyChallengeQ.id_text && (
                   <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginBottom: 10 }}>

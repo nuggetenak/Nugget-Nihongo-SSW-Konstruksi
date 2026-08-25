@@ -12,10 +12,14 @@ import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { get as storageGet } from '../storage/engine.js';
 import { formatCount } from '../utils/format.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
 export default function GlossaryMode({ onExit, track }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [filterCat, setFilterCat] = useState('all');
   const [showAllTracks, setShowAllTracks] = useState(false);
   const [expanded, setExpanded] = useState(null);
@@ -306,7 +310,6 @@ export default function GlossaryMode({ onExit, track }) {
               const isOpen = !compactView || expanded === c.id;
               const catInfo = catMap[c.category];
               const isSelected = selectMode && selected.has(c.id);
-              const reading = extractReadings(c.jp);
               return (
                 <div
                   key={c.id}
@@ -349,40 +352,13 @@ export default function GlossaryMode({ onExit, track }) {
                         </span>
                       )}
                       {catInfo && <span className={G.termCatEmoji}>{catInfo.emoji}</span>}
-                      <span className={G.termJp}>{stripFuri(c.jp)}</span>
+                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
                     </div>
                     <span className={G.termId}>{c.id_text}</span>
                   </div>
                   {!selectMode && isOpen && (
                     <div className={G.termDetail}>
-                      {reading && (
-                        <div className={G.termFuriRow}>
-                          <span className={G.termFuri}>{reading}</span>
-                          {/* Audio per entry */}
-                          {audioEnabled && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                speakJP(stripFuri(c.jp));
-                              }}
-                              aria-label="Putar audio"
-                              style={{
-                                fontFamily: 'inherit',
-                                background: 'none',
-                                border: 'none',
-                                cursor: 'pointer',
-                                fontSize: 14,
-                                padding: '0 4px',
-                                lineHeight: 1,
-                                color: T.textMuted,
-                              }}
-                            >
-                              🔊
-                            </button>
-                          )}
-                        </div>
-                      )}
-                      {!reading && audioEnabled && (
+                      {audioEnabled && (
                         <div className={G.termFuriRow}>
                           <button
                             onClick={(e) => {

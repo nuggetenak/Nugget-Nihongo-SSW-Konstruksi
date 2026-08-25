@@ -3,7 +3,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
-import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -59,7 +59,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   const [activeSet, setActiveSet] = useState(null);
   // 'Lemah' mode — only wrong questions for the active set.
   const [lemahMode, setLemahMode] = useState(false);
-  const [showFuri, setShowFuri] = useState(true);
+
   const [showHint, setShowHint] = useState(true);
   const { saveScore, wgScores } = useProgress();
 
@@ -78,17 +78,17 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
       });
     }
     return shuffle(pool).map((q) => ({
-      question: showFuri ? standardizeFuri(q.q) : stripFuri(q.q),
+      question: q.q,
       hint: showHint ? q.hint : null,
       options: q.opts.map((opt, i) => ({
-        text: showFuri ? standardizeFuri(opt) : stripFuri(opt),
+        text: stripFuri(opt),
         sub: q.opts_id?.[i] || null,
       })),
       correctIdx: q.ans,
       explanation: q.exp,
       _qId: `${set.id}-${q.id}`,
     }));
-  }, [set, showFuri, showHint, lemahMode, wrongCounts]);
+  }, [set, showHint, lemahMode, wrongCounts]);
 
   const handleAnswer = useCallback(
     (qIdx, _selIdx, isCorrect) => {
@@ -269,11 +269,6 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
 
       <div className={S.row} style={{ marginBottom: 20 }}>
         {[
-          {
-            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
-            active: showFuri,
-            onClick: () => setShowFuri((f) => !f),
-          },
           {
             label: `💡 ${showHint ? 'ON' : 'OFF'}`,
             active: showHint,

@@ -6,12 +6,15 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { useDebounce } from '../hooks/useDebounce.js';
+import { JpFront } from '../components/JpDisplay.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
 function NoteCard({ card, note, onSave }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(note || '');
 
@@ -38,21 +41,9 @@ function NoteCard({ card, note, onSave }) {
     >
       <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div
-            style={{
-              fontSize: 18,
-              fontWeight: 700,
-              color: 'var(--ssw-textBright)',
-              marginBottom: 2,
-            }}
-          >
-            {stripFuri(card.jp)}
+          <div style={{ marginBottom: 2 }}>
+            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
-          {extractReadings(card.jp) && (
-            <div style={{ fontSize: 12, color: 'var(--ssw-textMuted)', marginBottom: 4 }}>
-              {extractReadings(card.jp)}
-            </div>
-          )}
           <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)' }}>{card.id_text}</div>
         </div>
         <button

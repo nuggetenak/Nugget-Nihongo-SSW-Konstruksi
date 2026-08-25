@@ -7,9 +7,11 @@ import { shuffle } from '../utils/shuffle.js';
 import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { useApp } from '../contexts/AppContext.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import S from './modes.module.css';
 import D from './DangerMode.module.css';
 
@@ -36,6 +38,8 @@ export default function DangerMode({ onExit, onSessionEnd }) {
 }
 
 function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [expanded, setExpanded] = useState(null);
   const filtered =
     filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
@@ -99,7 +103,9 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span className={D.termJp}>{pair.term}</span>
+                    <div className={D.termJp}>
+                      <JpFront jp={pair.term} furiganaPolicy={furiganaPolicy} />
+                    </div>
                     {cl && (
                       <span
                         style={{
@@ -115,7 +121,6 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                       </span>
                     )}
                   </div>
-                  {pair.furi && <span className={D.termFuri}>{pair.furi}</span>}
                 </div>
                 <span className={D.chevron}>{isOpen ? '▲' : '▼'}</span>
               </button>
@@ -172,6 +177,8 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
 
 function QuizView({ onBack, onSessionEnd, filterType }) {
   const { recordWrong } = useProgress();
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const buildFilteredItems = () => {
     const pool = filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
     return shuffle(pool).map((pair) => {
@@ -303,8 +310,9 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
                     style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
                   >
                     <div className={D.reviewItemHeader}>
-                      <span className={D.reviewItemHeaderJp}>{p.term}</span>
-                      {p.furi && <span className={D.reviewItemHeaderFuri}>{p.furi}</span>}
+                      <div className={D.reviewItemHeaderJp}>
+                        <JpFront jp={p.term} furiganaPolicy={furiganaPolicy} />
+                      </div>
                     </div>
                     <div className={D.reviewItemBody}>
                       <div className={D.reviewWrongText}>✗ {pickedText}</div>
@@ -347,8 +355,9 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
 
       <div className={`${S.cardLg} ${D.questionCard}`}>
         <div className={D.questionHint}>⚠️ Jangan tertukar! Pilih arti yang BENAR</div>
-        <div className={D.questionTerm}>{pair.term}</div>
-        {pair.furi && <div className={D.questionFuri}>{pair.furi}</div>}
+        <div className={D.questionTerm}>
+          <JpFront jp={pair.term} furiganaPolicy={furiganaPolicy} />
+        </div>
       </div>
 
       <div className={S.list}>

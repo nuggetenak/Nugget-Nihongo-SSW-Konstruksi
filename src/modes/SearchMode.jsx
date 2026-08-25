@@ -4,9 +4,11 @@ import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import { get as storageGet } from '../storage/engine.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { formatCount } from '../utils/format.js';
+import { JpFront } from '../components/JpDisplay.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
@@ -27,6 +29,8 @@ function saveHistory(term) {
 }
 
 export default function SearchMode({ onExit, track, starred, toggleStar }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [query, setQuery] = useState('');
   const [copiedId, setCopiedId] = useState(null); // copy feedback per card
   const debouncedQuery = useDebounce(query, 120);
@@ -194,8 +198,8 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
           return (
             <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
               <div className={S.rowSpread} style={{ alignItems: 'flex-start' }}>
-                <div style={{ fontFamily: T.fontJP, fontSize: 15, fontWeight: 600 }}>
-                  {stripFuri(c.jp)}
+                <div style={{ fontSize: 15, fontWeight: 600 }}>
+                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   {toggleStar && (

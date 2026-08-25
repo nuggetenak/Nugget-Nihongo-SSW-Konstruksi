@@ -9,6 +9,7 @@ import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { JpFront } from './JpDisplay.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
@@ -35,7 +36,7 @@ export default function QuizShell({
   const [phase, setPhase] = useState('playing');
   const [timeLeft, setTimeLeft] = useState(timer);
   const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
-  const { toast } = useApp();
+  const { toast, prefs } = useApp();
   const { getDurationMs } = useSessionTimer();
 
   const q = questions[qIdx];
@@ -217,8 +218,8 @@ export default function QuizShell({
       </div>
 
       <div className={S.questionCard}>
-        <div className={S.questionText} style={{ fontFamily: T.fontJP }}>
-          {q.question}
+        <div className={S.questionText}>
+          <JpFront jp={q.question} furiganaPolicy={prefs?.furiganaPolicy ?? 'always'} />
         </div>
         {q.questionSub && <div className={S.questionSub}>{q.questionSub}</div>}
         {showHint && q.hint && <div className={S.hint}>💡 {q.hint}</div>}

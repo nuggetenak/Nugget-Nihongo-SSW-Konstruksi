@@ -3,7 +3,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
-import { stripFuri, standardizeFuri } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -29,7 +29,7 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
     color: '#a78bfa',
   };
   const [activeSet, setActiveSet] = useState(null);
-  const [showFuri, setShowFuri] = useState(true);
+
   const [showHint, setShowHint] = useState(true);
   const { saveScore, vocabScores: scores } = useProgress();
 
@@ -42,17 +42,17 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
         ? shuffle(VOCAB_SETS.flatMap((s) => s.questions.map((q) => ({ ...q, _set: s.id }))))
         : shuffle(setDef?.questions ?? []);
     return qs.map((q) => ({
-      question: showFuri ? standardizeFuri(q.q) : stripFuri(q.q),
+      question: q.q,
       hint: showHint ? q.hint : null,
       options: q.opts.map((opt, i) => ({
-        text: showFuri ? standardizeFuri(opt) : stripFuri(opt),
+        text: stripFuri(opt),
         sub: q.opts_id?.[i] || null,
       })),
       correctIdx: q.ans,
       explanation: q.exp,
       _qId: `${activeSet}-${q.id}`,
     }));
-  }, [activeSet, setDef, showFuri, showHint, VOCAB_SETS]);
+  }, [activeSet, setDef, showHint, VOCAB_SETS]);
 
   const [_wrongCounts, setWrongCounts] = useState(() => get('progress')?.vocabWrong ?? {});
 
@@ -109,11 +109,6 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
 
       <div className={S.row} style={{ marginBottom: 20 }}>
         {[
-          {
-            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
-            active: showFuri,
-            onClick: () => setShowFuri((f) => !f),
-          },
           {
             label: `💡 ${showHint ? 'ON' : 'OFF'}`,
             active: showHint,

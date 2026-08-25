@@ -137,6 +137,56 @@ A direct-render fallback exists outside `JpDisplay`: `ErrorBoundary`'s `FlatCard
 rather than routing through `JpDisplay`, since that fallback is deliberately minimal and doesn't
 carry the props (`furi`, `furiganaPolicy`) `JpDisplay` expects.
 
+### 8.1 `furiganaPolicy` adoption (item 43, 2026-08-26)
+
+`JpFront` (the named export from `JpDisplay.jsx` used for headword-style rendering) already
+implemented all three `furiganaPolicy` values (`'always'|'tap'|'hidden'`) correctly — the gap was
+never in `JpFront` itself, it was that most Japanese-rendering surfaces never called it. Verified
+via `grep -rn "furiganaPolicy" src/`: 3 real consumers before this item (`FlashcardMode`→`FlipCard`,
+`SprintMode`, and `QuizMode` partially — see below). The plan's own audit named 15 more
+(`ReviewMode`, `JACMode`, `VocabMode`, `WaygroundMode`, `SimulasiMode`, `ConfusionMode`,
+`DangerMode`, `AngkaMode`, `DengarMode`, `ProductionMode`, `QuizProduksiMode`, `GlossaryMode`,
+`SearchMode`, `CatatanMode`, `SumberMode`), 14 of which are fixed by this item (`ReviewMode` is
+item 44 — same fix, its own commit, see §8.2). **Two more turned up in a final verification sweep
+that weren't in the plan's list at all**, because they're in `src/components/` rather than
+`src/modes/` and the audit was mode-scoped: `Dashboard.jsx`'s "recently studied" widget and
+`SayaTab.jsx`'s daily-challenge question, both rendering raw `card.jp` with zero processing —
+arguably the two most-seen instances of the bug in the app, on the home tab and the settings tab.
+
+**Two decisions made during the sweep, not just bug fixes:**
+
+- **Answer options vs. prompts/review.** Quiz answer options stay stripped
+  (`stripFuri`, not `JpFront`) — furigana on the options of a "read this kanji" question gives
+  away which option is correct. This does *not* apply to prompts/headwords (nothing to give
+  away — the reading isn't the thing being tested) or to any post-answer review/results screen
+  (`ProductionMode`, `QuizProduksiMode`, `SimulasiMode`'s review list, `ConfusionMode`'s wrong-list)
+  — once the question is graded there's no answer left to protect, and seeing the reading while
+  reviewing a mistake is the point. Checked per mode rather than applied as a blanket rule, per
+  the plan's own instruction.
+- **Compact inline labels stay stripped, not ruby.** `JpFront` computes its own font size from
+  text length (`jpFontSize()` in `jp-helpers.js`) and can't be sized down by a caller — there's no
+  size-override prop. A handful of sites are dense inline labels (`ConfusionMode`'s wrong-pair
+  summary rows, ~11px, term inline with `= definition`) where `JpFront`'s minimum computed size
+  and block-ish layout would break a tight row. Those use `stripFuri` (fixes the raw-markup bug,
+  correct either way since policy) — no ruby, no `useApp` policy read needed since there's no
+  reading being shown at all to gate.
+
+**Retired, not just fixed:** `JACMode`, `VocabMode`, and `WaygroundMode` each had their own local
+`showFuri` toggle (`useState(true)`, its own "ふり ON/OFF" pill button), completely disconnected
+from the `furiganaPolicy` Settings toggle. Setting the global policy to `'hidden'` for drilling
+didn't hide anything in these three specifically — the local toggle silently overrode it. Removed
+all three; furigana visibility is one global setting now, not four.
+
+**`QuizMode`'s specific bug** (it "honoured" policy but collapsed `'tap'` into `'always'`,
+`furiganaPolicy !== 'hidden'` treating both the same) turned out to be architectural, not local:
+`QuizMode` pre-stripped the question and passed a separately-extracted reading as `questionSub`,
+a second, shallower implementation of exactly the "detached reading" pattern this item exists to
+retire — and `QuizShell` (the shared shell behind `QuizMode`/`JACMode`/`VocabMode`/`WaygroundMode`)
+rendered `question`/`questionSub` as plain text with no ruby at all. Fixed at the `QuizShell`
+level: it now renders `q.question` via `JpFront` directly, reading `furiganaPolicy` itself via
+`useApp()`. `questionSub` wasn't removed — `JACMode` overloads it for an unrelated "show official
+question ID" hint toggle, which stays.
+
 ## 9. Feedback level: toast vs. inline vs. dialog vs. banner (item 16, 2026-08-24)
 
 Four different ways this app tells the user something happened, and the rule for which one a new

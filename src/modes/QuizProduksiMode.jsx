@@ -7,10 +7,12 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import HowToPlayCard from '../components/HowToPlayCard.jsx';
@@ -40,6 +42,8 @@ function isCorrect(input, card) {
 }
 
 export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEnabled = false }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
   const [count, setCount] = useState(10);
   const [queue, setQueue] = useState([]);
@@ -268,21 +272,8 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
                     borderLeft: `3px solid ${T.wrong}`,
                   }}
                 >
-                  <div
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 700,
-                      fontFamily: 'Noto Sans JP, sans-serif',
-                      color: T.text,
-                      marginBottom: 4,
-                    }}
-                  >
-                    {stripFuri(r.card.jp)}
-                    {extractReadings(r.card.jp) && (
-                      <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>
-                        ({extractReadings(r.card.jp)})
-                      </span>
-                    )}
+                  <div style={{ marginBottom: 4 }}>
+                    <JpFront jp={r.card.jp} furiganaPolicy={furiganaPolicy} />
                   </div>
                   <div style={{ fontSize: 13, color: T.correct, marginBottom: 4 }}>
                     ✓ {r.card.id_text}
@@ -354,29 +345,7 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
         >
           bahasa jepang
         </div>
-        <div
-          style={{
-            fontSize: 28,
-            fontWeight: 700,
-            fontFamily: 'Noto Sans JP, DM Sans, sans-serif',
-            color: T.text,
-            lineHeight: 1.4,
-          }}
-        >
-          {stripFuri(card.jp)}
-        </div>
-        {extractReadings(card.jp) && (
-          <div
-            style={{
-              fontSize: 16,
-              color: T.textDim,
-              marginTop: 6,
-              fontFamily: 'Noto Sans JP, sans-serif',
-            }}
-          >
-            {extractReadings(card.jp)}
-          </div>
-        )}
+        <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
         {audioEnabled && canSpeak() && (
           <button
             onClick={() => speakJP(stripFuri(card.jp))}

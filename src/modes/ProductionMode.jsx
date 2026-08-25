@@ -6,8 +6,10 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { useApp } from '../contexts/AppContext.jsx';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -52,6 +54,8 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
   const inputRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
   const { recordWrong } = useProgress();
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
 
   const startSession = () => {
     const q = shuffle(cards).slice(0, count);
@@ -271,13 +275,8 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
                   <div style={{ fontSize: 11, color: T.textDim, marginBottom: 4 }}>
                     {r.card.id_text}
                   </div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: T.text, marginBottom: 4 }}>
-                    {stripFuri(r.card.jp)}
-                    {extractReadings(r.card.jp) && (
-                      <span style={{ fontSize: 12, color: T.textDim, marginLeft: 6 }}>
-                        ({extractReadings(r.card.jp)})
-                      </span>
-                    )}
+                  <div style={{ marginBottom: 4 }}>
+                    <JpFront jp={r.card.jp} furiganaPolicy={furiganaPolicy} />
                   </div>
                   {r.input && (
                     <div style={{ fontSize: 12, color: T.wrong }}>
@@ -450,21 +449,7 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
 
           <div style={{ marginBottom: 6 }}>
             <span style={{ fontSize: 11, color: T.textDim }}>Jawaban: </span>
-            <span
-              style={{
-                fontSize: 20,
-                fontWeight: 700,
-                fontFamily: 'Noto Sans JP, sans-serif',
-                color: T.text,
-              }}
-            >
-              {stripFuri(card.jp)}
-            </span>
-            {extractReadings(card.jp) && (
-              <span style={{ fontSize: 13, color: T.textDim, marginLeft: 8 }}>
-                ({extractReadings(card.jp)})
-              </span>
-            )}
+            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
 
           {card.desc && (

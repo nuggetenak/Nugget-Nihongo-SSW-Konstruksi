@@ -4,12 +4,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useMemo } from 'react';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { useApp } from '../contexts/AppContext.jsx';
 import { generateDailyMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
+import { JpFront } from './JpDisplay.jsx';
 import { recommendMode } from '../utils/recommend-mode.js';
 import { formatCount } from '../utils/format.js';
 import { MODE_META } from '../router/modes.js';
@@ -55,6 +57,8 @@ export default function Dashboard({
   isDark,
   onToggleTheme,
 }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const total = CARDS.length;
   const knownN = known.size;
   const unknownN = unknown.size;
@@ -296,7 +300,9 @@ export default function Dashboard({
               <ul className={s.recentList}>
                 {recentCards.map((c) => (
                   <li key={c.id} className={s.recentCard}>
-                    <span className={s.recentJp}>{c.jp}</span>
+                    <span className={s.recentJp}>
+                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
+                    </span>
                     <span className={s.recentId}>{c.id_text}</span>
                   </li>
                 ))}

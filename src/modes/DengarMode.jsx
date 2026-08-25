@@ -7,7 +7,8 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { shuffle } from '../utils/shuffle.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -41,7 +42,8 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
   const speakCountRef = useRef(0);
   const { getDurationMs } = useSessionTimer();
   const { recordWrong } = useProgress();
-  const { toast } = useApp();
+  const { toast, prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const online = useOnlineStatus();
 
   const hasAudio = canSpeak();
@@ -398,14 +400,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
         {/* Reveal after answer */}
         {isAnswered && (
           <div style={{ marginTop: 12 }}>
-            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--ssw-textBright)' }}>
-              {stripFuri(currentQ.card.jp)}
-            </div>
-            {extractReadings(currentQ.card.jp) && (
-              <div style={{ fontSize: 14, color: 'var(--ssw-textMuted)', marginTop: 2 }}>
-                {extractReadings(currentQ.card.jp)}
-              </div>
-            )}
+            <JpFront jp={currentQ.card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
         )}
       </div>

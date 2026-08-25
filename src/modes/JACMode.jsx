@@ -3,7 +3,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { recordReview } from '../srs/fsrs-scheduler.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -48,7 +48,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const { saveScore, jacScores } = useProgress();
   const [setKey, setSetKey] = useState(null);
   const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wrongCounts ?? {});
-  const [showFuri, setShowFuri] = useState(true);
+
   const [showID, setShowID] = useState(true);
   const [autoDelay, setAutoDelay] = useState(2000);
   // Track wrong question IDs during session for SRS add-to-queue.
@@ -73,13 +73,12 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
   const questions = useMemo(
     () =>
       filtered.map((q) => {
-        const reading = showFuri ? extractReadings(q.q) : null;
         const hasPhoto = !!q.photoDesc;
         return {
-          question: showFuri ? q.q : stripFuri(q.q),
-          questionSub: showID ? q.hint : reading || null,
+          question: q.q,
+          questionSub: showID ? q.hint : null,
           options: q.opts.map((opt, i) => ({
-            text: showFuri ? opt : stripFuri(opt),
+            text: stripFuri(opt),
             sub: q.opts_id?.[i] || null,
           })),
           correctIdx: q.ans,
@@ -90,7 +89,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
           _qId: q.id,
         };
       }),
-    [filtered, showFuri, showID]
+    [filtered, showID]
   );
 
   const handleAnswer = useCallback(
@@ -201,11 +200,6 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
 
       <div className={S.row} style={{ marginBottom: 16, flexWrap: 'wrap' }}>
         {[
-          {
-            label: `ふり ${showFuri ? 'ON' : 'OFF'}`,
-            active: showFuri,
-            onClick: () => setShowFuri((f) => !f),
-          },
           {
             label: `ID ${showID ? 'ON' : 'OFF'}`,
             active: showID,

@@ -6,9 +6,12 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { haptic } from '../utils/haptic.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -76,6 +79,8 @@ function PanelView({
   onStartQuiz,
   onOpenDetail,
 }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const types = ['all', '音', '字', '意'];
   const typeCount = (t) => (t === 'all' ? pairs.length : pairs.filter((p) => p.type === t).length);
 
@@ -168,13 +173,11 @@ function PanelView({
                     style={{
                       fontSize: 16,
                       fontWeight: 700,
-                      fontFamily: 'Noto Sans JP, sans-serif',
                       color: T.text,
                     }}
                   >
-                    {pair.termA}
+                    <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} />
                   </div>
-                  {pair.furiA && <div style={{ fontSize: 10, color: T.textDim }}>{pair.furiA}</div>}
                 </div>
                 <div style={{ color: T.textDim, fontSize: 18, alignSelf: 'center' }}>vs</div>
                 <div style={{ flex: 1, textAlign: 'right' }}>
@@ -182,13 +185,11 @@ function PanelView({
                     style={{
                       fontSize: 16,
                       fontWeight: 700,
-                      fontFamily: 'Noto Sans JP, sans-serif',
                       color: T.text,
                     }}
                   >
-                    {pair.termB}
+                    <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} />
                   </div>
-                  {pair.furiB && <div style={{ fontSize: 10, color: T.textDim }}>{pair.furiB}</div>}
                 </div>
               </div>
             </button>
@@ -201,6 +202,8 @@ function PanelView({
 
 // ── Detail view ───────────────────────────────────────────────────────────────
 function DetailView({ pair, onBack }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const meta = TYPE_LABEL[pair.type] ?? {};
   return (
     <div className={S.pageFade} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
@@ -231,15 +234,11 @@ function DetailView({ pair, onBack }) {
           style={{
             fontSize: 24,
             fontWeight: 800,
-            fontFamily: 'Noto Sans JP, sans-serif',
             marginBottom: 4,
           }}
         >
-          {pair.termA}
+          <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} />
         </div>
-        {pair.furiA && (
-          <div style={{ fontSize: 12, color: T.textDim, marginBottom: 8 }}>{pair.furiA}</div>
-        )}
         <div style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{pair.defA}</div>
       </div>
 
@@ -252,15 +251,11 @@ function DetailView({ pair, onBack }) {
           style={{
             fontSize: 24,
             fontWeight: 800,
-            fontFamily: 'Noto Sans JP, sans-serif',
             marginBottom: 4,
           }}
         >
-          {pair.termB}
+          <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} />
         </div>
-        {pair.furiB && (
-          <div style={{ fontSize: 12, color: T.textDim, marginBottom: 8 }}>{pair.furiB}</div>
-        )}
         <div style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{pair.defB}</div>
       </div>
 
@@ -282,6 +277,8 @@ function DetailView({ pair, onBack }) {
 
 // ── Quiz ──────────────────────────────────────────────────────────────────────
 function QuizView({ pairs, onBack, onSessionEnd }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [questions] = useState(() => buildQuestions(pairs));
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -412,18 +409,22 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                         display: 'flex',
                         gap: 8,
                         marginBottom: 8,
-                        fontFamily: 'Noto Sans JP, sans-serif',
+                        alignItems: 'center',
                       }}
                     >
-                      <span style={{ fontSize: 16, fontWeight: 700 }}>{p.termA}</span>
+                      <div style={{ fontSize: 16, fontWeight: 700 }}>
+                        <JpFront jp={p.termA} furiganaPolicy={furiganaPolicy} />
+                      </div>
                       <span style={{ color: T.textDim }}>vs</span>
-                      <span style={{ fontSize: 16, fontWeight: 700 }}>{p.termB}</span>
+                      <div style={{ fontSize: 16, fontWeight: 700 }}>
+                        <JpFront jp={p.termB} furiganaPolicy={furiganaPolicy} />
+                      </div>
                     </div>
                     <div style={{ fontSize: 12, color: T.wrong, marginBottom: 4 }}>
                       ✗ dipilih: {pickedText}
                     </div>
                     <div style={{ fontSize: 12, color: T.correct }}>
-                      ✓ {p.termA} = {p.defA}
+                      ✓ {stripFuri(p.termA)} = {p.defA}
                     </div>
                     {p.tip && (
                       <div
@@ -502,13 +503,11 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
             style={{
               fontSize: 20,
               fontWeight: 800,
-              fontFamily: 'Noto Sans JP, sans-serif',
               color: T.amber,
             }}
           >
-            {pair.termA}
+            <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} />
           </div>
-          {pair.furiA && <div style={{ fontSize: 11, color: T.textDim }}>{pair.furiA}</div>}
         </div>
         <div style={{ fontSize: 13, color: T.textDim, fontWeight: 700 }}>vs</div>
         <div style={{ textAlign: 'center' }}>
@@ -516,13 +515,11 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
             style={{
               fontSize: 20,
               fontWeight: 800,
-              fontFamily: 'Noto Sans JP, sans-serif',
               color: T.text,
             }}
           >
-            {pair.termB}
+            <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} />
           </div>
-          {pair.furiB && <div style={{ fontSize: 11, color: T.textDim }}>{pair.furiB}</div>}
         </div>
       </div>
 
@@ -537,7 +534,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
         }}
       >
         ❓ Pilih arti yang benar untuk{' '}
-        <span style={{ color: T.amber, fontFamily: 'Noto Sans JP, sans-serif' }}>{pair.termA}</span>
+        <span style={{ color: T.amber }}>{stripFuri(pair.termA)}</span>
       </div>
 
       {/* Options */}
@@ -601,11 +598,15 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
           }}
         >
           <div style={{ marginBottom: 8 }}>
-            <span style={{ fontSize: 11, color: T.amber, fontWeight: 700 }}>{pair.termA}</span>
+            <span style={{ fontSize: 11, color: T.amber, fontWeight: 700 }}>
+              {stripFuri(pair.termA)}
+            </span>
             <span style={{ fontSize: 11, color: T.textDim }}> = {pair.defA}</span>
           </div>
           <div style={{ marginBottom: pair.tip ? 10 : 0 }}>
-            <span style={{ fontSize: 11, color: T.textMuted, fontWeight: 700 }}>{pair.termB}</span>
+            <span style={{ fontSize: 11, color: T.textMuted, fontWeight: 700 }}>
+              {stripFuri(pair.termB)}
+            </span>
             <span style={{ fontSize: 11, color: T.textDim }}> = {pair.defB}</span>
           </div>
           {pair.tip && (

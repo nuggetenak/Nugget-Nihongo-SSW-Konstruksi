@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from '../data/categories.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
 export default function SumberMode({ onExit, onNavigate }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [activeSrc, setActiveSrc] = useState(null);
   const [expanded, setExpanded] = useState(null);
 
@@ -140,18 +143,15 @@ export default function SumberMode({ onExit, onNavigate }) {
               }}
             >
               <div className={S.rowSpread}>
-                <span style={{ fontFamily: T.fontJP, fontSize: 13 }}>{stripFuri(c.jp)}</span>
+                <span style={{ fontSize: 13 }}>
+                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
+                </span>
                 <span style={{ fontSize: 12, color: T.textMuted, flexShrink: 0, marginLeft: 8 }}>
                   {c.id_text}
                 </span>
               </div>
               {expanded === c.id && (
                 <div style={{ marginTop: 6, fontSize: 11, color: T.textMuted, lineHeight: 1.5 }}>
-                  {extractReadings(c.jp) && (
-                    <div style={{ color: T.textDim, fontFamily: T.fontJP }}>
-                      {extractReadings(c.jp)}
-                    </div>
-                  )}
                   <div style={{ marginTop: 4 }}>{c.desc}</div>
                 </div>
               )}

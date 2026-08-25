@@ -7,7 +7,8 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { haptic } from '../utils/haptic.js';
@@ -98,6 +99,8 @@ function buildPool() {
 }
 
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [phase, setPhase] = useState('start');
   const [preset, setPreset] = useState('quick');
   const [seed, setSeed] = useState(0);
@@ -401,10 +404,16 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     className={SM.reviewItem}
                     style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
                   >
-                    <div className={SM.reviewJp}>{stripFuri(r.jp)}</div>
+                    <div className={SM.reviewJp}>
+                      <JpFront jp={r.jp} furiganaPolicy={furiganaPolicy} />
+                    </div>
                     <div className={SM.reviewIdText}>{r.id_text}</div>
-                    <div className={SM.reviewWrong}>✗ {stripFuri(userOpt?.text || '—')}</div>
-                    <div className={SM.reviewCorrect}>✓ {stripFuri(correctOpt?.text || '—')}</div>
+                    <div className={SM.reviewWrong}>
+                      ✗ <JpFront jp={userOpt?.text || '—'} furiganaPolicy={furiganaPolicy} />
+                    </div>
+                    <div className={SM.reviewCorrect}>
+                      ✓ <JpFront jp={correctOpt?.text || '—'} furiganaPolicy={furiganaPolicy} />
+                    </div>
                     {r.explanation && (
                       <div className={SM.reviewExpl}>
                         💡 {r.explanation.slice(0, 160)}
@@ -495,7 +504,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       </div>
 
       <div className={`${S.cardLg} ${SM.questionCard}`}>
-        <div className={SM.questionJp}>{q.jp}</div>
+        <div className={SM.questionJp}>
+          <JpFront jp={q.jp} furiganaPolicy={furiganaPolicy} />
+        </div>
         {q.id_text && <div className={SM.questionSub}>{q.id_text}</div>}
         {q.hasPhoto && (
           <div className={SM.photoHint}>📷 {q.photoDesc || 'Soal asli pakai foto'}</div>
