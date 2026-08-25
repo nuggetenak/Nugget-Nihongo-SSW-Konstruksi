@@ -3,14 +3,14 @@
 import { useState } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
-import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
+import { CATEGORIES, getCatsForTrack, VOCAB_SOURCES } from '../data/categories.js';
 import S from './FilterPopup.module.css';
 
 function buildCounts(track, vocabMode) {
   const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
   const counts = {};
   CARDS.forEach((c) => {
-    const isVocab = c.type === 'vocab';
+    const isVocab = VOCAB_SOURCES.includes(c.source);
     if (vocabMode !== isVocab) return;
     if (trackCatKeys && !trackCatKeys.has(c.category)) return;
     counts[c.category] = (counts[c.category] || 0) + 1;
@@ -19,7 +19,15 @@ function buildCounts(track, vocabMode) {
   return counts;
 }
 
-export default function FilterPopup({ isOpen, onClose, track, vocabMode, activeCats, onApply, starredCount = 0 }) {
+export default function FilterPopup({
+  isOpen,
+  onClose,
+  track,
+  vocabMode,
+  activeCats,
+  onApply,
+  starredCount = 0,
+}) {
   if (!isOpen) return null;
   return (
     <FilterPopupInner
@@ -65,7 +73,10 @@ function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, star
 
   const pendingCatCount = pendingCats.has('all') ? 0 : pendingCats.size;
 
-  const handleApply = () => { onApply(pendingCats); onClose(); };
+  const handleApply = () => {
+    onApply(pendingCats);
+    onClose();
+  };
 
   return (
     <>
@@ -74,7 +85,9 @@ function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, star
         <div className={S.handle} />
         <div className={S.titleRow}>
           <span className={S.titleText}>Filter Kategori</span>
-          <button className={S.btnClose} onClick={onClose} aria-label="Tutup filter">✕</button>
+          <button className={S.btnClose} onClick={onClose} aria-label="Tutup filter">
+            ✕
+          </button>
         </div>
 
         <div className={S.scroll}>
@@ -101,29 +114,37 @@ function FilterPopupInner({ onClose, track, vocabMode, activeCats, onApply, star
               >
                 <span className={S.cellEmoji}>⭐</span>
                 <span className={S.cellLabel}>Bintang</span>
-                <span className={S.cellCount} style={{ color: T.gold }}>{starredCount}</span>
+                <span className={S.cellCount} style={{ color: T.gold }}>
+                  {starredCount}
+                </span>
               </button>
             )}
-            {visibleCats.filter((c) => c.key !== 'bintang').map((cat) => {
-              const active = pendingCats.has(cat.key);
-              const cnt = counts[cat.key] || 0;
-              return (
-                <button
-                  key={cat.key}
-                  className={S.cell}
-                  onClick={() => togglePending(cat.key)}
-                  style={{
-                    background: active ? `${cat.color}18` : T.surface,
-                    border: `1.5px solid ${active ? cat.color + '60' : T.border}`,
-                    opacity: cnt === 0 ? 0.4 : 1,
-                  }}
-                >
-                  <span className={S.cellEmoji}>{cat.emoji}</span>
-                  <span className={S.cellLabel} style={{ fontFamily: T.fontJP }}>{cat.label}</span>
-                  <span className={S.cellCount} style={{ color: active ? cat.color : T.textDim }}>{cnt}</span>
-                </button>
-              );
-            })}
+            {visibleCats
+              .filter((c) => c.key !== 'bintang')
+              .map((cat) => {
+                const active = pendingCats.has(cat.key);
+                const cnt = counts[cat.key] || 0;
+                return (
+                  <button
+                    key={cat.key}
+                    className={S.cell}
+                    onClick={() => togglePending(cat.key)}
+                    style={{
+                      background: active ? `${cat.color}18` : T.surface,
+                      border: `1.5px solid ${active ? cat.color + '60' : T.border}`,
+                      opacity: cnt === 0 ? 0.4 : 1,
+                    }}
+                  >
+                    <span className={S.cellEmoji}>{cat.emoji}</span>
+                    <span className={S.cellLabel} style={{ fontFamily: T.fontJP }}>
+                      {cat.label}
+                    </span>
+                    <span className={S.cellCount} style={{ color: active ? cat.color : T.textDim }}>
+                      {cnt}
+                    </span>
+                  </button>
+                );
+              })}
           </div>
         </div>
 

@@ -6,6 +6,20 @@ Moved here 2026-08-18 during a repo hygiene pass, out of `src/`.
 ways in the future."* Not a temporary holding spot pending cleanup — settled. No need to
 re-litigate this or suggest deleting it in a future session.
 
+**Update (item 18, 2026-08-24):** `FilterPopup.jsx` here was replaced with the current `main`/
+`feat/ui-overhaul` version, which had diverged from this snapshot (`VOCAB_SOURCES.includes(c.source)`
+replacing an older `c.type === 'vocab'` check, plus formatting) — the copy here was stale relative
+to the schema the rest of the app now uses. Its `.module.css` was added alongside it (the original
+move only carried the `.jsx`). It was still a genuine zero-consumer file on `feat/ui-overhaul`
+too — not a `content-dq`-only artifact like its two companions turned out to be (see below) — so
+`src/components/FilterPopup.jsx` and `.module.css` were removed from there rather than left
+ambiguous a third time (`docs/UI_UX_PLAN.md` item 18). It stays functionally interesting (a real
+category-picker grid with live counts, not a duplicate of `FlashcardMode/FilterBar.jsx`'s search
+input), but wiring it up would need `FlashcardMode`'s filtering to grow beyond its current
+single-category search-string convention (`__cat:${key}`) to a real multi-category set — a small
+filtering-state change, not a drop-in, so out of scope for this item. If a future session wants to
+wire this in, start there.
+
 ## What this is
 
 Three React files (`FilterPopup.jsx`, `useTrackedCards.js`, `FocusMode.jsx`) that were sitting
@@ -34,3 +48,9 @@ delete later if not.
 If you're reading this and wondering whether these are meant to be live app code: they belong
 on `main` (where `theme.js` etc. presumably do exist), not here — but the owner has decided to
 keep this copy on `content-dq` regardless, so leave it in place.
+
+**Confirmed, not just presumed (2026-08-24):** on `feat/ui-overhaul`, `useTrackedCards.js` and
+`FocusMode.jsx` are both live, imported, exercised-by-tests code — genuinely orphaned only from
+`content-dq`'s narrower, data-focused checkout, not orphaned in the real app. `FilterPopup.jsx`
+is the one file of the three that really was (and still is, elsewhere) unwired everywhere — see
+the item-18 update above.

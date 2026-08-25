@@ -1168,7 +1168,7 @@ content replaces a skeleton; one loading announcement per transition, not severa
 
 ---
 
-### ☐ 18. Decide `FilterPopup`'s fate — `S`
+### ☑ 18. Decide `FilterPopup`'s fate — `S`
 
 **What.** `src/components/FilterPopup.jsx` + `.module.css` have zero consumers. Either wire it up or
 archive it.
