@@ -290,8 +290,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         <div
           className={SM.lulusBanner}
           style={{
-            background: lulus ? 'rgba(22,163,74,0.08)' : 'rgba(220,38,38,0.08)',
-            border: `2px solid ${lulus ? 'rgba(22,163,74,0.35)' : 'rgba(220,38,38,0.35)'}`,
+            background: lulus ? T.correctBg : T.wrongBg,
+            border: `2px solid ${lulus ? T.correctBorder : T.wrongBorder}`,
           }}
         >
           <div className={SM.lulusIcon}>{lulus ? '✅' : '❌'}</div>
@@ -310,8 +310,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 height: '100%',
                 width: `${pct}%`,
                 background: lulus
-                  ? 'linear-gradient(90deg,#16a34a80,#16a34a)'
-                  : 'linear-gradient(90deg,#dc262680,#dc2626)',
+                  ? 'linear-gradient(90deg,rgba(22,163,74,0.5),var(--ssw-correct))'
+                  : 'linear-gradient(90deg,rgba(220,38,38,0.5),var(--ssw-wrong))',
                 borderRadius: 99,
                 transition: 'width 0.8s ease',
               }}

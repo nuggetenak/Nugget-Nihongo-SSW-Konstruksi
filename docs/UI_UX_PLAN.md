@@ -1254,7 +1254,7 @@ at an unloaded font.
 
 ---
 
-### ☐ 40. Correct/wrong colours bypass the semantic tokens — `S`
+### ☑ 40. Correct/wrong colours bypass the semantic tokens — `S`
 
 **What.** `--ssw-correct` (`#16a34a`) and `--ssw-wrong` (`#dc2626`) exist, theme-swap, and have
 matching `…Bg`/`…Border` variants. Several modes use different greens and reds instead.

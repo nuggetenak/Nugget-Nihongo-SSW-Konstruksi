@@ -224,7 +224,7 @@ function PanelView({ onExit, onStartQuiz }) {
                         <div
                           style={{
                             fontSize: 11,
-                            color: '#9CA3AF',
+                            color: T.textDim,
                             background: 'rgba(0,0,0,0.15)',
                             borderRadius: 6,
                             padding: '6px 8px',
@@ -583,17 +583,17 @@ function TypeQuizView({ onBack, onSessionEnd }) {
               <div
                 key={i}
                 style={{
-                  background: 'rgba(239,68,68,0.08)',
-                  border: '1px solid rgba(239,68,68,0.2)',
+                  background: 'var(--ssw-wrongBg)',
+                  border: '1px solid var(--ssw-wrongBorder)',
                   borderRadius: 8,
                   padding: '8px 12px',
                 }}
               >
-                <div style={{ fontSize: 11, color: '#9CA3AF', marginBottom: 2 }}>
+                <div style={{ fontSize: 11, color: T.textDim, marginBottom: 2 }}>
                   {r.item.konteks}
                 </div>
-                <div style={{ fontSize: 12, color: '#F87171' }}>✗ Kamu: {r.userInput}</div>
-                <div style={{ fontSize: 13, color: '#4ADE80', fontWeight: 700 }}>
+                <div style={{ fontSize: 12, color: T.wrong }}>✗ Kamu: {r.userInput}</div>
+                <div style={{ fontSize: 13, color: T.correct, fontWeight: 700 }}>
                   ✓ Benar: {r.item.angka}
                 </div>
               </div>
@@ -638,10 +638,10 @@ function TypeQuizView({ onBack, onSessionEnd }) {
           borderRadius: 8,
           background: checked
             ? isCorrect
-              ? 'rgba(34,197,94,0.1)'
-              : 'rgba(239,68,68,0.1)'
+              ? T.correctBg
+              : T.wrongBg
             : T.surface,
-          border: `1.5px solid ${checked ? (isCorrect ? '#22c55e' : '#ef4444') : T.border}`,
+          border: `1.5px solid ${checked ? (isCorrect ? T.correct : T.wrong) : T.border}`,
           color: T.text,
           width: '100%',
           boxSizing: 'border-box',
@@ -656,17 +656,17 @@ function TypeQuizView({ onBack, onSessionEnd }) {
             padding: '10px 14px',
             borderRadius: 8,
             marginBottom: 8,
-            background: isCorrect ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
-            border: `1px solid ${isCorrect ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}`,
+            background: isCorrect ? T.correctBg : T.wrongBg,
+            border: `1px solid ${isCorrect ? T.correctBorder : T.wrongBorder}`,
           }}
         >
           <div
-            style={{ fontWeight: 700, color: isCorrect ? '#22c55e' : '#ef4444', marginBottom: 4 }}
+            style={{ fontWeight: 700, color: isCorrect ? T.correct : T.wrong, marginBottom: 4 }}
           >
             {isCorrect ? '✓ Benar!' : `✗ Jawaban: ${item.angka}`}
           </div>
           {item.mnemonic && (
-            <div style={{ fontSize: 11, color: '#9CA3AF', lineHeight: 1.5 }}>
+            <div style={{ fontSize: 11, color: T.textDim, lineHeight: 1.5 }}>
               💡 {item.mnemonic}
             </div>
           )}

@@ -41,6 +41,21 @@ Dual-theme (light default + dark), toggled by swapping a full set of CSS custom 
 `document.documentElement` (`src/styles/theme.js`, `applyTheme(isDark)`). Components reference
 `var(--ssw-*)`, never raw hex — that's what makes the toggle work everywhere at once.
 
+**Except: identity accents may be literals; semantic state must be tokens (item 40).** That
+"never raw hex" line reads as absolute and isn't applied that way in practice, nor should it be.
+The line that actually matters: a colour carrying *meaning the user needs to read correctly*
+(correct/wrong, pass/fail — the same signal reused for a destructive-vs-safe distinction would
+count too) must be `var(--ssw-correct)`/`var(--ssw-wrong)` or their `Bg`/`Border` pairs, full
+stop, in every mode, because a learner skim-reading results shouldn't have to recalibrate what
+green means between screens. A colour that's just *decoration or data* — a topic taxonomy
+(`JACMode`'s eight category colours, `ConfusionMode`'s 音/字/意 confusion-type palette), a
+mode's own visual identity (`SimulasiMode`'s exam-red buttons, distinct from `--ssw-wrong` even
+though it happens to also be red), a per-set accent (`MODE_META.color`) — can stay a literal,
+because there's nothing to get inconsistent: nobody is relying on that specific red meaning
+"wrong" the way they rely on it meaning "this is the exam-timer mode." When in doubt: if the
+colour is answering "is this a good or bad outcome," it's semantic. If it's answering "which
+category/mode/set is this," it's identity.
+
 | Token                 | Light                    | Dark                       | Use                          |
 | ---------------------- | ------------------------ | --------------------------- | ----------------------------- |
 | `--ssw-bg`             | `#FFFDF5`                | `#0D0B08`                   | page background                |

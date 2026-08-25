@@ -241,13 +241,13 @@ export default function FlashcardMode({
       {filterIds && (
         <div
           style={{
-            background: 'rgba(248,113,113,0.10)',
-            border: '1px solid rgba(248,113,113,0.3)',
+            background: T.wrongBg,
+            border: `1px solid ${T.wrongBorder}`,
             borderRadius: 8,
             padding: '8px 12px',
             marginBottom: 8,
             fontSize: 12,
-            color: '#f87171',
+            color: T.wrong,
             textAlign: 'center',
           }}
         >
@@ -414,9 +414,9 @@ export default function FlashcardMode({
             padding: '8px 12px',
             marginTop: 4,
             borderRadius: 8,
-            background: 'rgba(34,197,94,0.08)',
-            border: '1px solid rgba(34,197,94,0.3)',
-            color: '#22c55e',
+            background: T.correctBg,
+            border: `1px solid ${T.correctBorder}`,
+            color: T.correct,
             fontSize: 12,
             cursor: 'pointer',
           }}
@@ -429,7 +429,7 @@ export default function FlashcardMode({
           style={{
             textAlign: 'center',
             fontSize: 11,
-            color: '#22c55e',
+            color: T.correct,
             marginTop: 4,
             opacity: 0.7,
           }}
