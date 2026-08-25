@@ -1010,7 +1010,7 @@ failures; the user-facing copy is Indonesian and actionable; no inline styles le
 The app tells the user what happened in several different voices, and three well-built shared
 components have no consumers at all. This band is mostly adoption, not construction.
 
-### ☐ 14. Adopt `EmptyState` — it has zero consumers — `M`
+### ☑ 14. Adopt `EmptyState` — it has zero consumers — `M`
 
 **What.** `src/components/EmptyState.jsx` is a finished component with five named presets —
 `NoReviews`, `NoWrong`, `SearchEmpty`, `NoStarred`, `NoProgress` — each with icon, title, Indonesian
