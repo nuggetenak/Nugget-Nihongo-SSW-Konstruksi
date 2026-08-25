@@ -1,35 +1,6 @@
 /* ─── ConfirmDialog.module.css ─────────────────────────────────────────────── */
-
-.backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: var(--z-modal);
-  animation: fadeIn 0.15s ease;
-}
-
-.sheet {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--overlay-max-w);
-  z-index: calc(var(--z-modal) + 1);
-  background: var(--ssw-bg);
-  border-radius: var(--r-xl) var(--r-xl) 0 0;
-  padding: 24px 20px 36px;
-  box-shadow: var(--ssw-shadowLg);
-  animation: slideUp 0.25s ease;
-}
-
-.handle {
-  width: 36px;
-  height: 4px;
-  background: var(--ssw-border);
-  border-radius: var(--r-pill);
-  margin: 0 auto 20px;
-}
+/* Backdrop/sheet/handle shell moved to Sheet.module.css (item 20) -- this file
+   now holds only ConfirmDialog's own content styling. */
 
 .message {
   font-size: var(--fs-subtitle);

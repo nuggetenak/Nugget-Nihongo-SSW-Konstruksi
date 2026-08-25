@@ -1,0 +1,64 @@
+/* ─── ShortcutSheet.module.css ──────────────────────────────────────────────── */
+
+.title {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-black);
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--ssw-text);
+}
+
+.section {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ssw-textDim);
+  margin: 16px 0 8px;
+}
+.section:first-of-type {
+  margin-top: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.keys {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.kbd {
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-bottom-width: 2px;
+  border-radius: var(--r-sm);
+  padding: 3px 8px;
+  color: var(--ssw-text);
+  min-width: 22px;
+  text-align: center;
+}
+
+.desc {
+  font-size: var(--fs-small);
+  color: var(--ssw-textMuted);
+  text-align: right;
+}
+
+.note {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ssw-border);
+  font-size: var(--fs-caption);
+  color: var(--ssw-textDim);
+  text-align: center;
+}

@@ -1334,7 +1334,7 @@ don't need it and shouldn't get it.
 
 Worth doing, not worth blocking on. Roughly in value order within the band.
 
-### ☐ 20. Global keyboard layer + discoverable shortcuts — `M`
+### ☑ 20. Global keyboard layer + discoverable shortcuts — `M`
 
 **What.** Keyboard support exists per-mode: `useQuizKeyboard` (1/2/3/4 or a/b/c/d to select, Enter or
 Space to advance) plus local `keydown` handlers in nine files. There is no app-level layer and no

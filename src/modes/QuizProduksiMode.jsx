@@ -13,6 +13,7 @@ import { haptic } from '../utils/haptic.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import HowToPlayCard from '../components/HowToPlayCard.jsx';
 import S from './modes.module.css';
 
 const QUIZ_COUNTS = [10, 20, 30];
@@ -192,13 +193,10 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
           </button>
         </div>
 
-        <div className={S.card} style={{ marginBottom: 24, fontSize: 12, color: T.textMuted }}>
-          <div style={{ marginBottom: 6, fontWeight: 600, color: T.text }}>💡 Cara main</div>
-          <div>Istilah Jepang tampil → ketik terjemahan bahasa Indonesia.</div>
-          <div style={{ marginTop: 4 }}>
-            Enter = kirim · Esc = lewati · Pencocokan fleksibel (huruf besar/kecil diabaikan)
-          </div>
-        </div>
+        <HowToPlayCard
+          explanation="Istilah Jepang tampil → ketik terjemahan bahasa Indonesia."
+          keyboardHint="Enter = kirim · Esc = lewati · Pencocokan fleksibel (huruf besar/kecil diabaikan)"
+        />
 
         <button
           className={S.btnPrimary}

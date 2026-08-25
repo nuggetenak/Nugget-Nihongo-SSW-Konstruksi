@@ -12,6 +12,7 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import HowToPlayCard from '../components/HowToPlayCard.jsx';
 import S from './modes.module.css';
 
 const QUIZ_COUNTS = [10, 20, 30];
@@ -192,13 +193,10 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
           </button>
         </div>
 
-        <div className={S.card} style={{ marginBottom: 24, fontSize: 12, color: T.textMuted }}>
-          <div style={{ marginBottom: 6, fontWeight: 600, color: T.text }}>💡 Cara main</div>
-          <div>Prompt bahasa Indonesia tampil → ketik Jepang (kanji, kana, atau kombinasi).</div>
-          <div style={{ marginTop: 4 }}>
-            Enter = kirim jawaban · Esc = skip · spasi (setelah reveal) = lanjut
-          </div>
-        </div>
+        <HowToPlayCard
+          explanation="Prompt bahasa Indonesia tampil → ketik Jepang (kanji, kana, atau kombinasi)."
+          keyboardHint="Enter = kirim jawaban · Esc = skip · spasi (setelah reveal) = lanjut"
+        />
 
         <button
           className={S.btnPrimary}

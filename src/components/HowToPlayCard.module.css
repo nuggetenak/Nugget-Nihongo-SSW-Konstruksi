@@ -1,0 +1,25 @@
+/* ─── HowToPlayCard.module.css ─────────────────────────────────────────────── */
+
+.title {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--ssw-text);
+}
+
+.explanation {
+  color: var(--ssw-textMuted);
+}
+
+/* item 20: shown only where a physical keyboard is plausible. A phone user
+   was being told about Enter/Esc/Space shortcuts they have no way to press. */
+.kbLine {
+  display: none;
+  margin-top: 4px;
+  color: var(--ssw-textMuted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kbLine {
+    display: block;
+  }
+}
