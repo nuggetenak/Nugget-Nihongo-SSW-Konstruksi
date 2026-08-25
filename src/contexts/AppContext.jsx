@@ -210,6 +210,13 @@ export function AppProvider({ children }) {
         onboarded: true,
         ...(payload?.track && { track: payload.track }),
         ...(payload?.dailyGoal && { dailyGoal: payload.dailyGoal }),
+        // item 24: only overwrite if the step actually set one -- undefined
+        // (the re-entry path, which doesn't touch exam date at all) must
+        // leave whatever's already stored alone, same as track/dailyGoal
+        // above; explicit null (the user reached the step and skipped it)
+        // is a deliberate "still don't know", not "no opinion", so it does
+        // overwrite a stale prior value.
+        ...(payload?.examDate !== undefined && { examDate: payload.examDate }),
       };
       storageSet('prefs', next);
       return next;

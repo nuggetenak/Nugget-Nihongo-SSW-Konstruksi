@@ -471,6 +471,39 @@
   color: var(--ssw-amberText);
 }
 
+/* item 24: exam-date step's input — Onboarding didn't have an inline-edit
+   input pattern before this (SayaTab's .inlineEdit is a different module,
+   different visual language for a settings page, not this onboarding flow's
+   centered-card look). */
+.inlineEdit {
+  width: 100%;
+  max-width: 280px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.inlineEditLabel {
+  display: block;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-textMuted);
+  margin-bottom: 6px;
+}
+
+.inlineInput {
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--fs-body);
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-text);
+}
+.inlineInput:focus-visible {
+  border-color: var(--ssw-amber);
+}
+
 /* ── CTA Buttons ── */
 .ctaPrimary {
   width: 100%;

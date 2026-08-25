@@ -1,7 +1,9 @@
 // ─── components/Onboarding.jsx ───────────────────────────────────────────────
-// Phase 7: Interactive 4-step onboarding.
-// Step 1: Welcome · Step 2: Track Picker (merged) · Step 3: Mini flashcard demo
-// Step 4: Daily goal setter → calls onComplete({ track, dailyGoal })
+// Step 1: Welcome · Step 2: Mini flashcard demo · Step 3: Exam date (item 24,
+// skippable) · Step 4: Daily goal setter → calls onComplete({ track,
+// dailyGoal, examDate }).
+// Track is not a step — content-dq narrowed scope to a single track
+// (Lifeline), so onComplete always sends 'lifeline'; nothing left to pick.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState } from 'react';
@@ -142,7 +144,7 @@ function StepGoal({ onComplete }) {
 
   return (
     <div className={S.step} data-step="goal">
-      <div className={S.stepEyebrow}>Langkah 2 dari 2</div>
+      <div className={S.stepEyebrow}>Langkah 3 dari 3</div>
       <div className={S.goalHero} aria-hidden="true">
         🎯
       </div>
@@ -177,31 +179,91 @@ function StepGoal({ onComplete }) {
   );
 }
 
+// item 24: skippable — not everyone has a booked exam date. Dashboard
+// already prompts for this later if skipped (item 12's hintTitle/hintSub
+// block, "Belum atur tanggal ujian") — this step just means fewer new users
+// land on a dashboard with the countdown, the single strongest motivational
+// device in the app (per the plan's own framing), silently missing.
+function StepExamDate({ onNext }) {
+  const [date, setDate] = useState('');
+
+  return (
+    <div className={S.step} data-step="examdate">
+      <div className={S.stepEyebrow}>Langkah 2 dari 3</div>
+      <div className={S.goalHero} aria-hidden="true">
+        📅
+      </div>
+      <h2 className={S.stepTitle}>Kapan Ujianmu?</h2>
+      <p className={S.stepDesc}>
+        Hitung mundur akan muncul di Beranda. Belum tahu tanggalnya? Lewati saja — bisa diatur
+        kapan pun nanti di menu Saya.
+      </p>
+
+      <div className={S.inlineEdit} style={{ marginTop: 8 }}>
+        <label className={S.inlineEditLabel} htmlFor="onboarding-exam-date">
+          Tanggal ujian
+        </label>
+        <input
+          id="onboarding-exam-date"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className={S.inlineInput}
+        />
+      </div>
+
+      <button className={S.ctaPrimary} onClick={() => onNext(date || null)} style={{ marginTop: 16 }}>
+        {date ? 'Lanjut →' : 'Lewati →'}
+      </button>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function Onboarding({ onComplete }) {
-  // steps: 'welcome' | 'demo' | 'goal'
-  const [step, setStep] = useState('welcome');
+// item 24: startStep lets a caller jump into the sequence rather than always
+// replaying it from the top — App.jsx uses this for the track-reset re-entry
+// (onboarded stays true, only track goes null; see the second <Onboarding>
+// call site there). Track itself no longer has a picker step here — the
+// content-dq merge narrowed scope to a single track, so there's nothing left
+// to ask about it — which made re-showing Welcome + the flashcard Demo for a
+// one-field settings change the actual bug worth fixing, not a step to
+// preserve. _stepIdx below was scaffolded for this in an earlier pass
+// (comment: "kept for future progress indicator") and went unused until now.
+export default function Onboarding({ onComplete, startStep = 'welcome' }) {
+  // steps: 'welcome' | 'demo' | 'examdate' | 'goal'
+  const [step, setStep] = useState(startStep);
+  // undefined = this run never reached/touched the exam-date step (the
+  // startStep='goal' re-entry skips it entirely) -> completeOnboarding must
+  // leave whatever's already stored alone. null = the step was reached and
+  // explicitly skipped -> a real "still don't know", which does overwrite.
+  const [examDate, setExamDate] = useState(undefined);
 
-  const STEP_ORDER = ['welcome', 'demo', 'goal'];
+  const STEP_ORDER = ['welcome', 'demo', 'examdate', 'goal'];
   const _stepIdx = STEP_ORDER.indexOf(step); // kept for future progress indicator
 
+  function handleExamDateDone(date) {
+    setExamDate(date);
+    setStep('goal');
+  }
+
   function handleGoalDone(goal) {
-    onComplete({ track: 'lifeline', dailyGoal: goal });
+    onComplete({ track: 'lifeline', dailyGoal: goal, examDate });
   }
 
   return (
     <div className={S.wrap}>
       <div className={S.inner}>
         {step === 'welcome' && <StepWelcome onNext={() => setStep('demo')} />}
-        {step === 'demo' && <StepDemo onNext={() => setStep('goal')} />}
+        {step === 'demo' && <StepDemo onNext={() => setStep('examdate')} />}
+        {step === 'examdate' && <StepExamDate onNext={handleExamDateDone} />}
         {step === 'goal' && <StepGoal onComplete={handleGoalDone} />}
       </div>
 
       {/* Dot indicator (skip welcome) */}
       {step !== 'welcome' && (
         <div className={S.dots} role="presentation">
-          {['demo', 'goal'].map((s) => (
+          {['demo', 'examdate', 'goal'].map((s) => (
             <div key={s} className={S.dot} data-active={String(step === s)} aria-hidden="true" />
           ))}
         </div>

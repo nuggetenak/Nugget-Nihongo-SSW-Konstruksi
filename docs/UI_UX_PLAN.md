@@ -1435,7 +1435,7 @@ alternative.
 
 ---
 
-### ☐ 24. Onboarding and first-run continuity — `M`
+### ☑ 24. Onboarding and first-run continuity — `M`
 
 **What.** Review what happens after onboarding completes, and close the gaps it leaves open.
 

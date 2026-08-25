@@ -117,7 +117,10 @@ export default function App() {
   if (!onboarded) return <Onboarding onComplete={completeOnboarding} />;
 
   // Edge case: onboarded but track cleared (e.g. user reset track from Saya).
-  if (!track) return <Onboarding onComplete={completeOnboarding} />;
+  // startStep='goal' -- track itself has no picker step (single-track scope,
+  // see Onboarding.jsx), so replaying Welcome + the flashcard Demo for what
+  // is really a one-field settings confirmation was the actual bug (item 24).
+  if (!track) return <Onboarding onComplete={completeOnboarding} startStep="goal" />;
 
   const belajarBadges = { ulasan: srs.dueCount };
 
