@@ -355,7 +355,7 @@ nothing is visibly broken — worth doing when already touching these files, not
 
 ---
 
-### ☐ 65. `ReviewMode` is a flip-card surface with none of `FlashcardMode`'s gestures — `S`
+### ☑ 65. `ReviewMode` is a flip-card surface with none of `FlashcardMode`'s gestures — `S`
 
 **Verified**: `ReviewMode` has its own `flipped` state and flip interaction (`:28`, `:109`) — it
 is structurally the same card-flipping surface as `FlashcardMode`. But `grep -rln "onTouchStart"`

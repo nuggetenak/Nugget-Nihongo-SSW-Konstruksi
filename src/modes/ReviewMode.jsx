@@ -30,6 +30,8 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [swipeDelta, setSwipeDelta] = useState(0);
   const [done, setDone] = useState(false);
   const [intervals, setIntervals] = useState({});
   const [sessionCorrect, setSessionCorrect] = useState(0);
@@ -300,6 +302,39 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
             setFlipped(true);
           }
         }}
+        onTouchStart={(e) => {
+          setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+        }}
+        onTouchMove={(e) => {
+          if (touchStart === null) return;
+          const dx = (e.touches[0].clientX - touchStart.x) / 120;
+          setSwipeDelta(Math.max(-1, Math.min(1, dx)));
+        }}
+        onTouchEnd={(e) => {
+          if (touchStart === null) {
+            setSwipeDelta(0);
+            return;
+          }
+          const dx = e.changedTouches[0].clientX - touchStart.x;
+          const dy = e.changedTouches[0].clientY - touchStart.y;
+          setSwipeDelta(0);
+          setTouchStart(null);
+          if (flipped) {
+            // Swipe to rate -- same mapping as FlashcardMode's post-flip swipe.
+            if (dy < -60 && Math.abs(dy) > Math.abs(dx)) {
+              handleRate(4);
+              return;
+            } // up = Easy
+            if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+              handleRate(dx < 0 ? 1 : 3); // left = Again, right = Good
+              return;
+            }
+          } else if (Math.abs(dx) > 60 || Math.abs(dy) > 60) {
+            // No free navigation to map to pre-flip (unlike FlashcardMode's
+            // deck browsing) -- swipe reveals the card instead, same as tap.
+            setFlipped(true);
+          }
+        }}
         aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? clean : ''}`}
         className={R.card}
         style={{
@@ -309,6 +344,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
           border: `1.5px solid ${flipped ? T.borderActive : T.border}`,
           minHeight: 220,
           cursor: flipped ? 'default' : 'pointer',
+          transform: `translateX(${swipeDelta * 24}px) rotate(${swipeDelta * 4}deg)`,
         }}
       >
         <div className={R.cardFront} style={{ marginBottom: flipped ? 16 : 0 }}>
