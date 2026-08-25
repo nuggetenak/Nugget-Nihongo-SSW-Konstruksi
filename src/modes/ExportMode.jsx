@@ -14,6 +14,7 @@ import {
   pullFromGist,
   findExistingGist,
 } from '../utils/gist-sync.js';
+import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import S from './modes.module.css';
 
 function readSummary() {
@@ -49,6 +50,7 @@ export default function ExportMode({ onExit }) {
   const [gistId, setGistId] = useState(() => loadGistId());
   const [gistStatus, setGistStatus] = useState(null);
   const [gistBusy, setGistBusy] = useState(false);
+  const online = useOnlineStatus();
   const [showGist, setShowGist] = useState(false);
 
   const handleExport = () => {
@@ -128,6 +130,10 @@ export default function ExportMode({ onExit }) {
 
   // Gist handlers.
   const handleGistPush = async () => {
+    if (!online) {
+      setGistStatus({ type: 'err', msg: '📶 Offline — sinkronisasi Gist butuh koneksi internet.' });
+      return;
+    }
     if (!gistPat.trim()) {
       setGistStatus({ type: 'err', msg: '❌ Masukkan GitHub Token terlebih dahulu.' });
       return;
@@ -153,6 +159,10 @@ export default function ExportMode({ onExit }) {
   };
 
   const handleGistPull = async () => {
+    if (!online) {
+      setGistStatus({ type: 'err', msg: '📶 Offline — sinkronisasi Gist butuh koneksi internet.' });
+      return;
+    }
     if (!gistPat.trim()) {
       setGistStatus({ type: 'err', msg: '❌ Masukkan GitHub Token terlebih dahulu.' });
       return;
@@ -462,6 +472,23 @@ export default function ExportMode({ onExit }) {
             <strong>api.github.com</strong>.
           </div>
 
+          {!online && (
+            <div
+              style={{
+                fontSize: 11,
+                color: T.wrong,
+                background: T.wrongBg,
+                border: `1px solid ${T.wrongBorder}`,
+                borderRadius: 8,
+                padding: '8px 10px',
+                marginBottom: 10,
+              }}
+            >
+              📶 Offline sekarang — Push/Pull butuh koneksi internet. Semua fitur lain (kartu,
+              kuis, ekspor/impor file lokal) tetap jalan seperti biasa.
+            </div>
+          )}
+
           <label
             htmlFor="export-gist-pat"
             style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}
@@ -536,7 +563,8 @@ export default function ExportMode({ onExit }) {
             </button>
             <button
               onClick={handleGistPush}
-              disabled={gistBusy || !gistPat.trim()}
+              disabled={gistBusy || !gistPat.trim() || !online}
+              title={online ? undefined : 'Butuh koneksi internet'}
               style={{
                 padding: '9px 6px',
                 fontFamily: 'inherit',
@@ -546,14 +574,16 @@ export default function ExportMode({ onExit }) {
                 border: `1px solid ${T.correctBorder}`,
                 background: T.correctBg,
                 color: T.correct,
-                cursor: 'pointer',
+                cursor: online ? 'pointer' : 'not-allowed',
+                opacity: online ? 1 : 0.5,
               }}
             >
               {gistBusy ? '⏳' : '⬆ Push'}
             </button>
             <button
               onClick={handleGistPull}
-              disabled={gistBusy || !gistPat.trim()}
+              disabled={gistBusy || !gistPat.trim() || !online}
+              title={online ? undefined : 'Butuh koneksi internet'}
               style={{
                 padding: '9px 6px',
                 fontFamily: 'inherit',
@@ -563,7 +593,8 @@ export default function ExportMode({ onExit }) {
                 border: `1px solid ${T.borderActive}`,
                 background: T.surfaceActive,
                 color: T.amber,
-                cursor: 'pointer',
+                cursor: online ? 'pointer' : 'not-allowed',
+                opacity: online ? 1 : 0.5,
               }}
             >
               {gistBusy ? '⏳' : '⬇ Pull'}

@@ -95,4 +95,19 @@ describe('Phase F — speak.js', () => {
     delete globalThis.speechSynthesis;
     delete globalThis.SpeechSynthesisUtterance;
   });
+
+  it('onError (item 25) fires when speechSynthesis is unavailable, instead of failing silently', () => {
+    // jsdom has no speechSynthesis, so canSpeak() is false and this hits the
+    // early-return path -- the exact "no way to know it happened" case item
+    // 25 exists to fix.
+    let caught = null;
+    speakJP('テスト', { onError: (e) => (caught = e) });
+    expect(caught).toBeInstanceOf(Error);
+  });
+
+  it('speakJP without onError still behaves exactly as before (backward compatible)', () => {
+    // canSpeak() is false in jsdom either way, so this just confirms the
+    // old two-arg call shape (no onError in opts) still doesn't throw.
+    expect(() => speakJP('テスト', { rate: 0.8 })).not.toThrow();
+  });
 });

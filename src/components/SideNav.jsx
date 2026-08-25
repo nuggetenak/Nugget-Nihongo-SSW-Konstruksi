@@ -103,7 +103,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
         </div>
       )}
 
-      <div className={s.foot}>{formatCount(CARDS.length)} kartu · siap offline</div>
+      <div className={s.foot}>{formatCount(CARDS.length)} kartu · konten siap offline</div>
     </nav>
   );
 }

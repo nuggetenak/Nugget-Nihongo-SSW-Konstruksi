@@ -26,10 +26,17 @@ export function canSpeak() {
 /**
  * Speak Japanese text aloud.
  * @param {string} text  — Japanese text to speak
- * @param {{ rate?: number, pitch?: number }} opts — override params (skips HVPT cycling)
+ * @param {{ rate?: number, pitch?: number, onError?: (e) => void }} opts — override params
+ *   (skips HVPT cycling); onError (item 25) fires on a real synthesis failure — e.g. no
+ *   offline-capable ja-JP voice — so a caller can tell the user rather than stay silent. There's
+ *   no reliable way to predict this in advance (voice.localService exists on some browsers but
+ *   isn't consistently supported), so this reports an actual failure instead of guessing one.
  */
 export function speakJP(text, opts = {}) {
-  if (!canSpeak()) return;
+  if (!canSpeak()) {
+    opts.onError?.(new Error('speechSynthesis not supported'));
+    return;
+  }
   // Cancel any current speech before starting
   window.speechSynthesis.cancel();
 
@@ -42,6 +49,9 @@ export function speakJP(text, opts = {}) {
   utt.lang = 'ja-JP';
   utt.rate = params.rate;
   utt.pitch = params.pitch;
+  if (opts.onError) {
+    utt.onerror = (e) => opts.onError(e);
+  }
   window.speechSynthesis.speak(utt);
 }
 

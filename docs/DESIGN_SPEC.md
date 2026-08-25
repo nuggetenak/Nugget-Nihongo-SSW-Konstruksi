@@ -257,3 +257,45 @@ Two-tier, defined in `src/components/Icon.jsx`:
   because the mask technique discards the art's own colour. Badges were remapped to exact
   palette values by hand during slicing — filled art can't be masked, so if badges ever need to
   adapt to theme, they'd need regenerating as line art, not just reprocessing.
+
+## 6. Offline-dependent affordances (item 25, 2026-08-25)
+
+Almost everything in this app is genuinely local — cards, SRS, quizzes, all of it. Two things
+aren't: the Web Speech API (`src/utils/speak.js`) may depend on a network voice depending on the
+platform, and `src/utils/gist-sync.js` needs the network outright. Before this item, both could
+fail with no explanation — a card in `DengarMode` that just never made a sound, a Gist push that
+surfaced only a raw fetch error.
+
+**The rule:** an offline-dependent control reads `useOnlineStatus()` (`src/hooks/useOnlineStatus.js`
+— one shared hook now; `OfflineBanner.jsx` used to have this state inline with no other consumer)
+and says what's unavailable and why, rather than failing without explanation. Two different
+shapes depending on whether the failure is *predictable* or not:
+
+- **Deterministic (gist-sync):** a network request either has a network or it doesn't — checked
+  before attempting, not caught after. `ExportMode`'s Gist buttons disable with a `title` tooltip
+  and a persistent inline explanation while offline, and the handler itself also checks first
+  (defense in depth against a race between the check and the click).
+- **Not reliably predictable (speech synthesis):** whether a given voice works offline depends on
+  whether the OS/browser has a local voice installed for that language — there's no standardised,
+  reliably-supported way to know this in advance (`SpeechSynthesisVoice.localService` exists on
+  some browsers but isn't consistent enough to gate a UI on). Guessing wrong in either direction
+  is worse than not guessing: a false "this won't work" hides audio that would have played fine: a
+  false "this will work" is the exact silent-failure this item exists to fix. `speakJP()` instead
+  takes an `onError` callback wired to the utterance's real `onerror` event — report an actual
+  failure when one happens, don't predict one. `DengarMode` pairs this with an honest, hedged
+  offline note ("audio usually still works if your device has an offline Japanese voice") rather
+  than a hard warning, and a toast (once per session, not once per failed card) if a real failure
+  fires.
+
+**Scope, stated rather than left implicit:** `speakJP()` is called from six files; only
+`DengarMode` got the toast-on-failure treatment. It's the plan's own named example and the one
+mode where audio is the exercise itself — you're blocked without it, not just missing a
+supplementary tap-to-hear affordance the way a flashcard's speaker icon is. The other five
+(`QuizShell`, `ProductionMode`, `GlossaryMode`, `ReviewMode`, `QuizProduksiMode`) still call
+`speakJP()` exactly as before — no `onError`, so a failure there is exactly as silent as it was
+before this item. A reasonable follow-up if silent audio failure turns out to matter in those
+modes too, not a gap discovered and left unmentioned.
+
+`SideNav`'s footer ("kartu · siap offline") was the one specific claim the plan named — narrowed
+to "konten siap offline" so it reads as a claim about the card content specifically, not the
+whole app's every feature.

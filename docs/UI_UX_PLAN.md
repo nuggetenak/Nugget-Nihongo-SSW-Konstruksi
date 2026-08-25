@@ -1460,7 +1460,7 @@ resetting a track doesn't replay Welcome and Demo.
 
 ---
 
-### ☐ 25. Offline legibility — say what works without a connection — `S`
+### ☑ 25. Offline legibility — say what works without a connection — `S`
 
 **What.** The offline banner says "Mode offline — semua data tersimpan lokal." True, and reassuring,
 but it doesn't say what still works.

@@ -10,6 +10,8 @@ import { haptic } from '../utils/haptic.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 
@@ -39,8 +41,26 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
   const speakCountRef = useRef(0);
   const { getDurationMs } = useSessionTimer();
   const { recordWrong } = useProgress();
+  const { toast } = useApp();
+  const online = useOnlineStatus();
 
   const hasAudio = canSpeak();
+
+  // item 25: a synthesis failure (e.g. no offline-capable ja-JP voice) used
+  // to fail silently -- the card just never made a sound, with nothing to
+  // tell a listening-comprehension-mode user whether that was expected or
+  // broken. One toast, not one per failed attempt in a row.
+  const warnedRef = useRef(false);
+  const handleSpeakError = useCallback(() => {
+    if (warnedRef.current) return;
+    warnedRef.current = true;
+    toast.show(
+      online
+        ? '🔇 Audio gagal diputar. Coba lagi atau lanjutkan tanpa suara.'
+        : '📶 Audio tidak tersedia offline di perangkat ini.',
+      { type: 'error', duration: 5000 }
+    );
+  }, [toast, online]);
 
   const start = () => {
     const qs = buildQuestions(cards, count, allCards || cards);
@@ -50,6 +70,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
     setResults([]);
     setSessionFired(false);
     speakCountRef.current = 0;
+    warnedRef.current = false;
     setStarted(true);
   };
 
@@ -60,14 +81,17 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
     if (!started || !currentQ || selected !== null) return;
     speakCountRef.current = 0;
     if (hasAudio) {
-      setTimeout(() => speakJP(stripFuri(currentQ.card.jp)), 300);
+      setTimeout(
+        () => speakJP(stripFuri(currentQ.card.jp), { onError: handleSpeakError }),
+        300
+      );
     }
   }, [idx, started]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSpeak = () => {
     if (!currentQ) return;
     speakCountRef.current += 1;
-    speakJP(stripFuri(currentQ.card.jp));
+    speakJP(stripFuri(currentQ.card.jp), { onError: handleSpeakError });
     haptic.tap();
   };
 
@@ -147,6 +171,22 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
               }}
             >
               ⚠️ Browser ini tidak mendukung Web Speech API. Mode Dengarkan membutuhkan audio.
+            </div>
+          )}
+          {hasAudio && !online && (
+            <div
+              style={{
+                marginTop: 12,
+                padding: '10px 14px',
+                background: 'var(--ssw-surface)',
+                border: '1px solid var(--ssw-border)',
+                borderRadius: 10,
+                fontSize: 13,
+                color: 'var(--ssw-textMuted)',
+              }}
+            >
+              📶 Kamu sedang offline. Audio biasanya tetap jalan jika perangkatmu punya suara
+              Jepang offline — kalau tidak terdengar, itu sebabnya.
             </div>
           )}
         </div>
