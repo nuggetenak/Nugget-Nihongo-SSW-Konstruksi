@@ -39,6 +39,21 @@
   color: var(--ssw-text);
 }
 
+.btnAlternative {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 12px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  font-family: inherit;
+  border-radius: var(--r-md);
+  background: transparent;
+  border: 1px dashed var(--ssw-borderHover);
+  color: var(--ssw-amberText);
+  cursor: pointer;
+}
+
 .actions {
   display: flex;
   gap: 10px;

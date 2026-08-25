@@ -5,10 +5,11 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import s from './SayaTab.module.css';
 import { CARDS } from '../data/cards.js';
-import { exportAll, importAllSafe, resetAll } from '../storage/engine.js';
+import { exportAll, importAllSafe, resetAll, get as storageGet } from '../storage/engine.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
+import { useConfirm } from './ConfirmDialog.jsx';
 import ProgressRing from './ProgressRing.jsx';
 import { buildAchievementState, evaluateAchievements } from '../utils/achievements.js';
 import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
@@ -65,6 +66,7 @@ export default function SayaTab() {
     setPref,
     prefs,
   } = useApp();
+  const confirm = useConfirm();
   const { known, unknown, streakData, sessions, jacScores } = useProgress();
   const srs = useSRSContext();
 
@@ -119,36 +121,6 @@ export default function SayaTab() {
     setInstallPrompt(null);
   }, [installPrompt]);
 
-  // Reset state machine: idle → confirm → countdown → ready
-  const [resetStep, setResetStep] = useState(0);
-  const [countdown, setCountdown] = useState(3);
-
-  const handleResetTap = useCallback(() => {
-    if (resetStep === 0) {
-      setResetStep(1);
-      return;
-    }
-    if (resetStep === 1) {
-      setResetStep(2);
-      setCountdown(3);
-      let n = 3;
-      const iv = setInterval(() => {
-        n -= 1;
-        setCountdown(n);
-        if (n <= 0) {
-          clearInterval(iv);
-          setResetStep(3);
-        }
-      }, 1000);
-      return;
-    }
-    if (resetStep === 3) {
-      resetAll();
-      setResetStep(0);
-      toast.show('🗑️ Semua data telah direset');
-    }
-  }, [resetStep, toast]);
-
   const handleExport = useCallback(() => {
     try {
       const blob = new Blob([JSON.stringify(exportAll(), null, 2)], { type: 'application/json' });
@@ -163,6 +135,32 @@ export default function SayaTab() {
       toast.show('❌ Gagal ekspor');
     }
   }, [toast]);
+
+  // item 15: was a tap→confirm→3s-countdown→tap machine (four renders of one
+  // button, easy to mis-tap through without reading any of them). One real
+  // dialog instead, with the actual numbers at stake and export offered as
+  // the alternative to proceeding, per the plan's "last line of defence"
+  // framing for an app whose data lives only in localStorage.
+  const handleReset = useCallback(async () => {
+    const notesCount = Object.keys(storageGet('prefs')?.notes ?? {}).filter(
+      (id) => storageGet('prefs')?.notes?.[id]
+    ).length;
+    const parts = [];
+    if (known.size > 0) parts.push(`${known.size} kartu hafal`);
+    if (streakData?.days > 0) parts.push(`${streakData.days} hari streak`);
+    if (notesCount > 0) parts.push(`${notesCount} catatan`);
+    const lossLine = parts.length > 0 ? `${parts.join(', ')} akan hilang, dan k` : 'K';
+
+    const ok = await confirm(
+      `${lossLine}amu akan mulai dari awal lagi (termasuk pengaturan awal). Ini tidak bisa dibatalkan.`,
+      'Reset semua',
+      'Batal',
+      { label: 'Cadangkan data dulu →', onClick: handleExport }
+    );
+    if (!ok) return;
+    resetAll();
+    toast.show('🗑️ Semua data telah direset');
+  }, [confirm, known, streakData, handleExport, toast]);
 
   const handleImport = useCallback(() => {
     const input = document.createElement('input');
@@ -186,15 +184,6 @@ export default function SayaTab() {
     };
     input.click();
   }, [toast]);
-
-  const resetLabel =
-    resetStep === 0
-      ? '🗑️ Reset Semua Data'
-      : resetStep === 1
-        ? '⚠️ Yakin? Tap lagi untuk konfirmasi'
-        : resetStep === 2
-          ? `Tunggu… (${countdown}s)`
-          : '💥 Tap untuk konfirmasi reset';
 
   return (
     <div className={s.container}>
@@ -571,14 +560,12 @@ export default function SayaTab() {
       <Section title="Data">
         <Row label="💾 Ekspor Progress" sub="Unduh file JSON cadangan" onClick={handleExport} />
         <Row label="📥 Impor Progress" sub="Pulihkan dari file JSON" onClick={handleImport} />
-        <div className={s.resetRow} onClick={handleResetTap}>
-          <div className={s.resetLabel} data-active={resetStep > 0}>
-            {resetLabel}
-          </div>
-          {resetStep === 0 && (
-            <div className={s.resetSub}>Hapus semua progress — tidak bisa dibatalkan</div>
-          )}
-        </div>
+        <Row
+          label="🗑️ Reset Semua Data"
+          sub="Hapus semua progress — tidak bisa dibatalkan"
+          onClick={handleReset}
+          danger
+        />
       </Section>
 
       <Section title="Info">

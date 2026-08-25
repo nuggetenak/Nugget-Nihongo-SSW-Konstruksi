@@ -3,12 +3,14 @@
 // Decomposed from a single file into 5 sub-components; zero behavioral change.
 // furiganaPolicy prop wired to JpDisplay (default: 'always').
 // ─────────────────────────────────────────────────────────────────────────────
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { T } from '../../styles/theme.js';
 import { shuffle } from '../../utils/shuffle.js';
 import { isTypingTarget } from '../../utils/keyboard.js';
 import { getCatInfo } from '../../data/categories.js';
 import { useToast } from '../../components/Toast.jsx';
+import { useConfirm } from '../../components/ConfirmDialog.jsx';
+import { useApp } from '../../contexts/AppContext.jsx';
 import { get as storageGet, set as storageSet } from '../../storage/engine.js';
 import ProgressBar from '../../components/ProgressBar.jsx';
 import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.jsx';
@@ -27,6 +29,7 @@ export default function FlashcardMode({
   known,
   unknown,
   onMark,
+  onResetProgress,
   onExit,
   srs,
   starred = new Set(),
@@ -41,6 +44,8 @@ export default function FlashcardMode({
   const [showDesc, setShowDesc] = useState(false);
   const [rated, setRated] = useState(false);
   const toast = useToast();
+  const confirm = useConfirm();
+  const { goMode } = useApp();
 
   // Hint: show "Tap untuk balik" until 3 flips lifetime
   const [hintCount, setHintCount] = useState(() => storageGet('prefs')?.flashcardHintCount ?? 0);
@@ -62,8 +67,6 @@ export default function FlashcardMode({
     () => sessionStorage.getItem('ssw-fc-sort') ?? 'priority'
   );
   const [reviewBelum, setReviewBelum] = useState(false);
-  const [confirmReset, setConfirmReset] = useState(false);
-  const confirmTimer = useRef(null);
   // Read-only mode — browse without FSRS rating.
   const [readOnly, setReadOnly] = useState(false);
   // Search starts collapsed. It was permanently on screen, costing a row above
@@ -156,21 +159,21 @@ export default function FlashcardMode({
     [card, rated, srs, onMark, go]
   );
 
-  const handleReset = useCallback(() => {
-    if (confirmReset) {
-      clearTimeout(confirmTimer.current);
-      onMark?.('__RESET__', 'reset');
-      setConfirmReset(false);
-      setOrder(rebuildOrder(sortMode));
-      setIdx(0);
-      setFlipped(false);
-      setRated(false);
-      toast.show('Progres direset');
-    } else {
-      setConfirmReset(true);
-      confirmTimer.current = setTimeout(() => setConfirmReset(false), 3000);
-    }
-  }, [confirmReset, onMark, rebuildOrder, sortMode, toast]);
+  const handleReset = useCallback(async () => {
+    const ok = await confirm(
+      `${unknown.size + known.size > 0 ? `${known.size} kartu hafal akan direset. ` : ''}Ini tidak bisa dibatalkan.`,
+      'Reset',
+      'Batal',
+      { label: 'Cadangkan data dulu →', onClick: () => goMode('ekspor') }
+    );
+    if (!ok) return;
+    onResetProgress?.();
+    setOrder(rebuildOrder(sortMode));
+    setIdx(0);
+    setFlipped(false);
+    setRated(false);
+    toast.show('Progres direset');
+  }, [confirm, known, unknown, onResetProgress, rebuildOrder, sortMode, toast, goMode]);
 
   useEffect(() => {
     const h = (e) => {
@@ -451,7 +454,6 @@ export default function FlashcardMode({
           setIdx(0);
         }}
         unknownInView={unknownInView}
-        confirmReset={confirmReset}
         onReset={handleReset}
         starredCount={starred.size}
         starFilterActive={search === '__starred__'}

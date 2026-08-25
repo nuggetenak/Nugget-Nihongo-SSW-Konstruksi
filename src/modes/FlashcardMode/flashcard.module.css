@@ -401,11 +401,3 @@
   color: var(--ssw-wrong);
   border-color: var(--ssw-wrongBorder);
 }
-
-.resetBtn[data-confirming='true'] {
-  border-style: solid;
-  border-color: var(--ssw-wrongBorder);
-  background: var(--ssw-wrongBg);
-  color: var(--ssw-wrong);
-  font-weight: var(--fw-bold);
-}

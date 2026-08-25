@@ -17,7 +17,6 @@ export default function ToolStrip({
   reviewBelum,
   onToggleBelum,
   unknownInView,
-  confirmReset,
   onReset,
   starredCount,
   starFilterActive,
@@ -95,19 +94,12 @@ export default function ToolStrip({
         ))}
       </div>
 
-      {/* Destructive — separated so it cannot be mistaken for a view filter. */}
-      <button
-        className={FC.resetBtn}
-        onClick={onReset}
-        data-confirming={confirmReset}
-        aria-label={
-          confirmReset
-            ? 'Ketuk sekali lagi untuk menghapus semua progres'
-            : 'Reset semua progres belajar'
-        }
-      >
+      {/* Destructive — separated so it cannot be mistaken for a view filter.
+          Confirmation is now a real dialog (item 15) rather than a two-tap
+          timer, so this button has one steady state. */}
+      <button className={FC.resetBtn} onClick={onReset} aria-label="Reset semua progres belajar">
         <Icon name="ulang" size={15} />
-        {confirmReset ? 'Ketuk lagi untuk hapus semua progres' : 'Reset progres'}
+        Reset progres
       </button>
 
       {flipped && !rated && (

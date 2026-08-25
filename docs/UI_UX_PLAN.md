@@ -1048,7 +1048,7 @@ action; `EmptyState.jsx` has real consumers.
 
 ---
 
-### ☐ 15. Adopt `ConfirmDialog` + `useFocusTrap` for destructive actions — `M`
+### ☑ 15. Adopt `ConfirmDialog` + `useFocusTrap` for destructive actions — `M`
 
 **What.** `ConfirmProvider` is mounted in `src/main.jsx` and `useConfirm` has **zero consumers**.
 `src/hooks/useFocusTrap.js` also has zero consumers. Meanwhile destructive confirmation is

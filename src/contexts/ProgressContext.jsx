@@ -109,6 +109,20 @@ export function ProgressProvider({ children }) {
     [setProg]
   );
 
+  // ── Reset known/unknown marks ────────────────────────────────────────
+  // item 15: FlashcardMode's reset button was calling handleMark('__RESET__',
+  // 'reset') — handleMark has no special case for that id, so it just added
+  // the literal string '__RESET__' to the unknown set. The button's own label
+  // ("Ketuk lagi untuk hapus semua progres") promised an actual reset; found
+  // while migrating this control's confirmation, fixed alongside it rather
+  // than shipping a more convincing confirmation dialog in front of a button
+  // that didn't do what it said. Scoped to known/unknown specifically (not
+  // starred, streak, or session history) — those are separate concerns this
+  // control was never about.
+  const resetKnownUnknown = useCallback(() => {
+    setProg((prev) => ({ ...prev, known: [], unknown: [] }));
+  }, [setProg]);
+
   // ── Quiz wrong tracking ───────────────────────────────────────────────
   // recordWrong writes to progress.quizWrong (in-engine, lz-string compressed, exportable).
   const recordWrong = useCallback(
@@ -201,6 +215,7 @@ export function ProgressProvider({ children }) {
       // Actions
       handleMark,
       toggleStar,
+      resetKnownUnknown,
       recordWrong,
       saveScore,
       setMilestoneQuiz70,
@@ -212,6 +227,7 @@ export function ProgressProvider({ children }) {
     recordSession,
     handleMark,
     toggleStar,
+    resetKnownUnknown,
     recordWrong,
     saveScore,
     setMilestoneQuiz70,

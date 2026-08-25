@@ -195,30 +195,6 @@
   line-height: 1;
 }
 
-/* ── Reset row ── */
-.resetRow {
-  padding: 13px 0;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-.resetRow:active {
-  opacity: 0.7;
-}
-.resetLabel {
-  font-size: var(--fs-body);
-  font-weight: 600;
-  color: var(--ssw-textDim);
-  transition: color 0.2s;
-}
-.resetLabel[data-active='true'] {
-  color: var(--ssw-wrong);
-}
-.resetSub {
-  font-size: var(--fs-small);
-  color: var(--ssw-textDim);
-  margin-top: 2px;
-}
-
 /* ── Inline edit ── */
 .inlineEdit {
   padding: 12px 14px 14px;

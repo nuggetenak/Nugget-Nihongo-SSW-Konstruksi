@@ -12,6 +12,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ToastProvider } from '../components/Toast.jsx';
+import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
+import { AppProvider } from '../contexts/AppContext.jsx';
 import { _reset_for_test, init } from '../storage/engine.js';
 import FlashcardMode from '../modes/FlashcardMode/index.jsx';
 
@@ -23,15 +25,20 @@ const CARDS = [
 function setup() {
   const utils = render(
     <ToastProvider>
-      <FlashcardMode
-        cards={CARDS}
-        known={new Set()}
-        unknown={new Set()}
-        onMark={() => {}}
-        onExit={() => {}}
-        starred={new Set()}
-        onToggleStar={() => {}}
-      />
+      <ConfirmProvider>
+        <AppProvider>
+          <FlashcardMode
+            cards={CARDS}
+            known={new Set()}
+            unknown={new Set()}
+            onMark={() => {}}
+            onResetProgress={() => {}}
+            onExit={() => {}}
+            starred={new Set()}
+            onToggleStar={() => {}}
+          />
+        </AppProvider>
+      </ConfirmProvider>
     </ToastProvider>
   );
   // FilterBar (and its search input) is collapsed behind the "Cari kartu"
