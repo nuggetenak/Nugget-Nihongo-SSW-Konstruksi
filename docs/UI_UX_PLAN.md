@@ -21,7 +21,8 @@ existed, a duplicate implementation nobody had counted). Assume this plan will d
 way. **Re-verify before implementing.**
 
 **Priorities.** `P0` learner-blocking or data-losing · `P1` real friction, hit often ·
-`P2` polish and consistency · `P3` speculative / new capability.
+`P2` polish and consistency · `P3` new capability. All 23 items are owner-approved to build
+(the five in §6 were approved 2026-08-25); priority is about *order*, not permission.
 **Sizes.** `S` under an hour · `M` a session · `L` its own session, possibly more.
 
 ---
@@ -417,41 +418,64 @@ likewise still defined and unused (archived item 21) — a first call site is a 
 
 ---
 
-## 6. P2/P3 — Proposals, not findings
+## 6. P2/P3 — Approved enhancements (owner-approved 2026-08-25)
 
-Explicitly speculative. Each is a suggestion the owner should accept or reject before any code is
-written — none of these is a bug, and building the wrong one is worse than building none.
+**All five approved by the owner** in one go, on the general principle that they improve the
+project. Recording that as-stated, plus one honest caveat: a blanket yes is an approval of the
+*idea*, and three of these still have a genuinely open **implementation-shape** question that the
+proposal deliberately left unanswered. Those aren't reasons to delay — they're the first decision
+each item needs, flagged so they get made rather than guessed at mid-build.
 
-### ☐ 56. Exam-readiness estimate on the dashboard — `M` — `P2`
+**Item 59 is the one to think hardest about, and it should not be built blind.** See its entry.
+
+### ☐ 56. Exam-readiness estimate on the dashboard — `M` — `P2` — approved
 `StatsMode` already computes `calcReadiness`, and the dashboard already shows an exam countdown
 (items 12/24). Putting a *readiness* signal next to the *countdown* answers the question a
-candidate actually has — "am I on track?" — rather than just "how long is left?". Risk to weigh:
-a confident-looking number that's wrong is demotivating; consider a band ("kurang / cukup / siap")
-over a false-precision percentage.
+candidate actually has — "am I on track?" — rather than just "how long is left?".
 
-### ☐ 57. Weak-category drilling from the results screen — `S` — `P2`
+**Open decision:** a confident-looking number that's wrong is actively demotivating for someone
+whose visa depends on this exam. Strong recommendation: a band (`kurang siap` / `cukup` / `siap`)
+over a false-precision percentage. Whoever builds this should also sanity-check what
+`calcReadiness` actually measures before surfacing it as a headline — it was written for a stats
+page, where being approximate is fine, not for a dashboard promise.
+
+### ☐ 57. Weak-category drilling from the results screen — `S` — `P2` — approved
 Retry-wrong exists but is flat — it retries *these specific* wrong cards. `FocusMode` already
-computes per-category weakness. Offering "12 wrong in 電気設備 — drill that category" turns one
-bad session into a targeted next session. Small because both halves already exist.
+computes per-category weakness. Offering "12 salah di 電気設備 — latih kategori itu" turns one bad
+session into a targeted next session. Small because both halves already exist; pairs naturally
+with item 46, which is already touching every results screen.
 
-### ☐ 58. Answer-timing per question — `M` — `P3`
-`useSessionTimer` measures whole sessions. Per-question timing would surface *hesitation* —
-cards answered correctly but slowly are exactly the ones FSRS should see again sooner, and are
-invisible today. Feeds SRS quality and a "slow but correct" review list. Verify against `ts-fsrs`'s
-actual rating model before committing — this may be better expressed as a rating adjustment than
-new state.
+### ☐ 58. Answer-timing per question — `M` — `P3` — approved
+`useSessionTimer` measures whole sessions. Per-question timing surfaces *hesitation* — cards
+answered correctly but slowly are exactly the ones FSRS should see again sooner, and are invisible
+today.
 
-### ☐ 59. Offline-capable audio via pre-generated clips — `L` — `P3`
-Item 25 made speech failure *legible*; it can't make it *work*. A construction worker studying on
-a train with no local ja-JP voice has no audio at all. Pre-generating clips for high-value cards
-would fix it properly — but weigh hard against the offline-first bundle budget (the app is
-already flagged for a 661 kB data chunk) and the 4-dependency ceiling. Possibly scoped to the
-~200 JAC-official terms rather than all 1,438.
+**Open decision, unchanged by approval:** verify against `ts-fsrs`'s actual rating model first.
+This may be better expressed as an adjustment to the rating already being sent than as a new
+stored field — the latter means a storage-schema change (v7) and a migration, which is a much
+bigger commitment than the item's `M` size implies. Decide which before writing code.
 
-### ☐ 60. Typed-answer leniency is invisible — `S` — `P2`
+### ☐ 59. Offline-capable audio via pre-generated clips — `L` — `P3` — approved, **measure first**
+Item 25 made speech failure *legible*; it can't make it *work*. A worker studying on a train with
+no local ja-JP voice has no audio at all. Pre-generated clips fix it properly.
+
+**This is the one approval worth a second look, because it can make the app worse for the exact
+user it's for.** The constraint isn't bureaucratic: this is an offline-first PWA for cheap phones
+on metered connections, already carrying a flagged 661 kB data chunk. Audio clips for 1,438 cards
+would dwarf everything else in the bundle. And it **compounds with item 61** — self-hosted fonts
+add payload too, and nobody is currently tracking the total.
+
+Before building: measure the current install footprint, then decide a **budget** the combined
+61 + 59 work has to fit inside. Likely landing point is a subset — the ~200 JAC-official terms
+rather than all 1,438 — and possibly on-demand download rather than precache, so the user opts in
+rather than paying for it at install. If the measurement says the budget can't hold it, *that is a
+legitimate outcome* and the approval doesn't override it; report back rather than shipping bloat.
+
+### ☐ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
 `QuizProduksiMode` advertises "pencocokan fleksibel (huruf besar/kecil diabaikan)" but a learner
-who types a *nearly* right answer is just told they're wrong. Showing the diff ("kamu: *keselamaton* · benar: *keselamatan*") turns a typo into a spelling lesson. Check what the matcher
-actually tolerates before writing copy that promises more than it delivers.
+who types a *nearly* right answer is just told they're wrong. Showing the diff
+("kamu: *keselamaton* · benar: *keselamatan*") turns a typo into a spelling lesson.
+Check what the matcher actually tolerates before writing copy that promises more than it delivers.
 
 ---
 
@@ -545,6 +569,13 @@ and a build-step decision before code, so read it before scheduling.
 **Batch D (bigger calls):** 47 → 48 — needs decisions, not just execution. Get owner input on
 the mode-shape table and on deferred-feedback before starting.
 
-**Batch E (carried-over):** 51 → 54 → 52 → 64 — as capacity allows.
+**Batch E (carried-over + polish):** 51 → 54 → 52 → 64 — as capacity allows.
 
-**Anytime:** 56–60 are proposals; none should start without an explicit yes.
+**Batch F (approved enhancements):** 57 → 60 → 56 → 58 → 59, roughly cheapest-first. 57 is nearly
+free if done *during* Batch B, since item 46 is already rewriting every results screen — do it
+there rather than as a separate pass. 60 is self-contained. 56 and 58 each need their open
+decision made first (see their entries). **59 is last on purpose** — it needs item 61 done and the
+combined payload measured before it can be scoped honestly.
+
+**Nothing is unapproved any more.** Every item in this plan is cleared to build; what varies is
+whether the *shape* is settled (most) or still needs a decision (56, 58, 59).
