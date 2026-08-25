@@ -14,6 +14,7 @@ import ProgressRing from './ProgressRing.jsx';
 import { buildAchievementState, evaluateAchievements } from '../utils/achievements.js';
 import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
 import { todayStr } from '../utils/date.js';
+import { formatCount } from '../utils/format.js';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
@@ -572,10 +573,10 @@ export default function SayaTab() {
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
         <Row
           label="ℹ️ Tentang Aplikasi"
-          sub={`${total} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v${__APP_VERSION__}`}
+          sub={`${formatCount(total)} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v${__APP_VERSION__}`}
           onClick={() =>
             toast.show(
-              `SSW Konstruksi v${__APP_VERSION__} · ${total} kartu · FSRS · by Nugget Nihongo 🏗️`
+              `SSW Konstruksi v${__APP_VERSION__} · ${formatCount(total)} kartu · FSRS · by Nugget Nihongo 🏗️`
             )
           }
         />

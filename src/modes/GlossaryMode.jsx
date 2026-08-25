@@ -11,6 +11,7 @@ import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { get as storageGet } from '../storage/engine.js';
+import { formatCount } from '../utils/format.js';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
@@ -184,7 +185,7 @@ export default function GlossaryMode({ onExit, track }) {
         </button>
         <div className={`${S.row} ${G.titleRow}`}>
           <h2 className={G.title}>📖 Glosari</h2>
-          <span className={`${S.pill} ${G.countPill}`}>{sorted.length} istilah</span>
+          <span className={`${S.pill} ${G.countPill}`}>{formatCount(sorted.length)} istilah</span>
         </div>
         <div className={G.metaRow}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

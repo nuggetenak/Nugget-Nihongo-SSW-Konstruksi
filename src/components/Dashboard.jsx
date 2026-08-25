@@ -11,6 +11,7 @@ import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
 import { recommendMode } from '../utils/recommend-mode.js';
+import { formatCount } from '../utils/format.js';
 import { MODE_META } from '../router/modes.js';
 
 const getRecent = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
@@ -174,8 +175,8 @@ export default function Dashboard({
           <section className={s.statBlock} aria-label="Progres belajar">
             <div className={s.statTop}>
               <div>
-                <div className={s.statBig}>{knownN} kartu hafal</div>
-                <div className={s.statSub}>dari {total.toLocaleString('id-ID')} kartu</div>
+                <div className={s.statBig}>{formatCount(knownN)} kartu hafal</div>
+                <div className={s.statSub}>dari {formatCount(total)} kartu</div>
               </div>
               <div className={s.statPct}>{pct}%</div>
             </div>
@@ -186,15 +187,15 @@ export default function Dashboard({
             <div className={s.legend}>
               <span className={s.lg}>
                 <i className={s.dotKnown} />
-                {knownN} hafal
+                {formatCount(knownN)} hafal
               </span>
               <span className={s.lg}>
                 <i className={s.dotUnknown} />
-                {unknownN} belum
+                {formatCount(unknownN)} belum
               </span>
               <span className={s.lg}>
                 <i className={s.dotRest} />
-                {restN.toLocaleString('id-ID')} sisa
+                {formatCount(restN)} sisa
               </span>
             </div>
           </section>

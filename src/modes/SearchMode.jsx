@@ -6,6 +6,7 @@ import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import { get as storageGet } from '../storage/engine.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
+import { formatCount } from '../utils/format.js';
 import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
 
@@ -162,7 +163,8 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
 
       {debouncedQuery.length >= 2 && (
         <div className={S.searchMeta}>
-          {results.length} hasil {results.length >= 30 && '(maks 30)'} · dari {pool.length} kartu
+          {results.length} hasil {results.length >= 30 && '(maks 30)'} · dari{' '}
+          {formatCount(pool.length)} kartu
         </div>
       )}
 

@@ -1,5 +1,6 @@
 // ─── Utils Barrel Export ─────────────────────────────────────────────────────
 export { shuffle } from './shuffle.js';
+export { formatCount } from './format.js';
 export {
   stripFuri,
   extractReadings,

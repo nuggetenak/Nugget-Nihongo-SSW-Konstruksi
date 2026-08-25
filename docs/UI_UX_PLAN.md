@@ -1310,7 +1310,7 @@ shell; one loading announcement per transition.
 
 ---
 
-### ☐ 42. Number formatting is inconsistent — `S`
+### ☑ 42. Number formatting is inconsistent — `S`
 
 **What.** Card counts use `toLocaleString('id-ID')` in three places (`Dashboard.jsx:160,179`,
 `SideNav.jsx:50`) and render raw everywhere else — including `Dashboard.jsx`'s own

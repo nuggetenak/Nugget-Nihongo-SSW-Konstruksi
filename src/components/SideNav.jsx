@@ -20,6 +20,7 @@
 import Icon from './Icon.jsx';
 import { CARDS } from '../data/cards.js';
 import { MODE_SECTIONS, MODE_META } from '../router/modes.js';
+import { formatCount } from '../utils/format.js';
 import s from './SideNav.module.css';
 
 const TABS = [
@@ -102,7 +103,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
         </div>
       )}
 
-      <div className={s.foot}>{CARDS.length.toLocaleString('id-ID')} kartu · siap offline</div>
+      <div className={s.foot}>{formatCount(CARDS.length)} kartu · siap offline</div>
     </nav>
   );
 }
