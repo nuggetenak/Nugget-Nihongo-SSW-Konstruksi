@@ -34,171 +34,71 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-25.** Verify before trusting past this point — this line doesn't
+**As of this edit, 2026-08-26.** Verify before trusting past this point — this line doesn't
 update itself.
 
-- **🟢 UI OVERHAUL PLAN COMPLETE — branch `feat/ui-overhaul`, ~58 commits ahead of `main`, still
-  NOT merged.** `main` is untouched and still at the post-merge state described further down.
-  All 38 actionable items of the overhaul plan shipped; that plan is archived at
-  `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`. Verified green before every push: `npm test`
-  **546/546** (56 files), `npm run lint` 0 warnings, `npm run build` clean (the `data-cards`
-  661KB chunk warning is the known, deliberately-deferred issue below, not new).
-
-  **Merge decision is the owner's and hasn't been made.** The branch is feature-complete against
-  its plan, not merged. `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump
+- **Branch `feat/ui-overhaul`, still NOT merged to `main`** — that remains the owner's call.
+  `main` is untouched. `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump
   (`docs/PWA_RELEASE_SPEC.md` §5) — deliberately not done during branch work.
 
-  **A new plan is live at `docs/UI_UX_PLAN.md` (items 43+), written 2026-08-25 from a fresh
-  audit — no work started on it.** Headline findings: `furiganaPolicy` honoured in 3 JP surfaces
-  out of ~18 (flashcard shows readings, SRS review and every quiz mode don't); 8 quiz modes have
-  zero `aria-live`; `ResultScreen` has exactly 1 consumer while 8 modes hand-roll their finish
-  screen; `SimulasiMode` is forward-only, which trains the wrong exam technique. Numbering starts
-  at 43 so "item 15" in git history unambiguously means the archived plan.
+- **The 38-item overhaul (2026-08-25) is old news now — full narrative retired to
+  `docs/archive/HANDOFF-ui-overhaul-38-items.md`.** Condensed pointer: `_MAP.md` § Agent
+  Session Log, 2026-08-25 row. Still true and worth keeping in mind: the amber identity is
+  locked, the hazard rail is reserved for time-sensitive/active state only, the flashcard's
+  height comes from a `ResizeObserver` in `FlipCard.jsx` and does not stretch (tried, reverted,
+  documented in `flashcard.module.css`), icons render as CSS masks not `<img>`.
 
-  **Historical note (2026-08-20), kept because the direction still governs:**
+- **🟢 Batch A of the new plan (`docs/UI_UX_PLAN.md`) done — items 43, 44, 65, 3 commits
+  (`1419c2c`, `bfc678d`, `f650d55`), each verified via `npm run validate` before and after.
+  546/546 tests throughout, zero regressions.** This was the "ReviewMode is the poorer
+  relation of FlashcardMode" set — furigana policy, ruby rendering, swipe gestures — done as
+  one pass over one file, per the plan's own §10 suggested order.
 
-  **Direction (owner-approved before any code was written):** keep and evolve this app's own
-  amber identity rather than aligning with the main Nugget Nihongo app; go fully adaptive
-  across device sizes, not just "stop wasting space on desktop". Palette is the one locked
-  constraint — everything else was left to agent judgement. The signature device is a
-  **hazard rail**: a diagonal amber/near-black stripe borrowed from real construction signage,
-  used ONLY to mark time-sensitive or active state (exam countdown, daily mission, active nav
-  item). It stays meaningful because nothing else uses it — don't decorate with it.
+  **Item 43** brought `furiganaPolicy` from 3 real consumers to every Japanese-rendering
+  surface. The plan named 15 non-compliant modes (14 fixed here, `ReviewMode` is item 44);
+  **2 more turned up in final verification that the plan's mode-scoped audit never caught**,
+  because they live in `src/components/`: `Dashboard.jsx`'s "recently studied" widget and
+  `SayaTab.jsx`'s daily-challenge question — both rendering raw `jp` with zero processing,
+  arguably the two most-seen instances of the bug in the whole app (home tab, settings tab).
+  Retired 3 local `showFuri` toggles (`JACMode`/`VocabMode`/`WaygroundMode`) that silently
+  overrode the global policy — setting `'hidden'` to drill didn't hide anything in those
+  three specifically until this fix. `QuizMode`'s named bug ("`'tap'` treated identically to
+  `'always'`") turned out architectural: fixed at the shared `QuizShell` level (also used by
+  `JACMode`/`VocabMode`/`WaygroundMode`), which was rendering plain text with no ruby at all
+  regardless of policy. Two decisions documented in `docs/COMPONENT_SPEC.md` §8.1 rather than
+  left implicit: answer options stay stripped (giveaway risk) but prompts and post-answer
+  review screens don't (nothing left to protect once graded); a handful of dense inline
+  labels stay stripped too, since `JpFront` computes its own font size with no override prop
+  and its minimum size breaks tight rows.
 
-  **What shipped, in dependency order:**
-  1. `AppShell` — single owner of responsive layout for every screen. Bottom nav <1040px, side
-     nav above. `chrome` prop ('tabs' | 'mode') decides which navigation is offered.
-  2. All 21 mode screens routed through it. **This was the biggest gap:** `App.jsx` returned
-     early for modes, so they bypassed the shell entirely and stayed a 480px column on desktop
-     long after the tabs had gone responsive.
-  3. Width is now a **responsive token**, not a per-file decision. 19 stylesheets set their own
-     `max-width`; rather than patch each, `--max-w` is redefined at breakpoints in `global.css`
-     and every screen inherits it. `--overlay-max-w` (fixed 480px) split out for dialogs,
-     toasts, popups, bottom nav. Per-mode width lives in `MODE_META.width`, defaulting to a
-     reading column.
-  4. Icons unified. `MODE_META.ui` names the vector icon per mode — no component keeps its own
-     mode→icon list. 20 generated icons in `public/icons/ui/`, 14 badges in
-     `public/icons/badges/`, onboarding art in `public/illustrations/`.
-  5. Dashboard, onboarding, and the flashcard screen redesigned.
-  6. a11y sweep: added an `h1` (there was none), one global `:focus-visible` ring (there was
-     one rule in the entire app), `--tap-min` 44px token, reduced-motion safety net.
-  7. Prettier drift cleared repo-wide (was 237 files). **Kept as its own commit** so the UI
-     work stays reviewable — mixed in it was a 249-file diff. Confirmed cosmetic: the built
-     `data-cards` chunk has an identical content hash before and after.
-  8. StatsMode, BelajarTab, and SayaTab redesigned for wide screens (the three items this
-     entry used to list under "NOT done"). All three reuse Glossary's `auto-fit` + `minmax()`
-     row-container technique rather than introducing a new pattern:
-     - `StatsMode`: readiness ring + overview card now pair in a shared row (`.summaryRow`)
-       instead of each stretching alone; the heatmap card sizes to its fixed-width SVG
-       (`.heatmapCard`, `width: fit-content`) instead of stretching and leaving the calendar
-       pinned to the left edge.
-     - `BelajarTab`: `.compactGrid` went from a hardcoded 2 columns to `auto-fit` + `minmax`;
-       compact width renders identically, wider screens get more columns (latihan's 8 tiles
-       go from 4 rows to 2 at wide).
-     - `SayaTab`: `Section` now wraps its children in `.sectionBody`, a grid that flows `.row`
-       items into columns and routes everything else (`:not(.row)` — inline-edit forms, the
-       destructive reset row, Daily Challenge, Achievements) to a full-width span
-       automatically, no per-child JSX bookkeeping needed. The achievements badge grid moved
-       off a hardcoded 4 columns onto the same `auto-fit` technique.
+  **Item 44**: `ReviewMode` adopted `JpFront` the same way — same fix, own commit since it's
+  the specific thing the owner remembered. Bonus fix, same underlying bug: `ReviewMode`'s
+  *and* `FlipCard`'s (the reference component) pre-flip `aria-label`s were both building
+  their accessible name from raw, unstripped `jp`, so a screen reader announced literal
+  `《reading》` markup. Both fixed.
 
-  **Decisions worth not re-litigating:**
-  - **Grid tracks are capped (`minmax(min, 380px)` etc.), not `1fr`, for fixed-size centered
-    content** — a ring, a stat number, a badge icon+label. `1fr` is still correct for rows
-    shaped like `justify-content: space-between` (Glossary's term rows, SayaTab's settings
-    rows) since that content genuinely uses extra width by spreading label/value apart. A
-    track's `max` in `minmax()` is a hard ceiling regardless of leftover container space, so
-    this is a real fork in the pattern, not an inconsistency — check which shape you're
-    looking at before "fixing" one to match the other.
-  - **Icons render as CSS masks, not `<img>`.** The art is single-colour line work on
-    transparency, so its alpha IS the shape; masking with `background: currentColor` means the
-    theme drives colour and dark mode still works. It also made the generator's palette drift
-    (#FF9100 vs the specified #F59E0B) irrelevant. Switching to `<img>` would silently freeze
-    them and break dark mode.
-  - **The flashcard does NOT stretch to fill space.** Its height comes from a ResizeObserver in
-    `FlipCard.jsx` measuring the back face, so the card holds one height across the flip.
-    Forcing flex growth opens a gap _inside_ the card. This was tried and reverted; there is a
-    comment in `flashcard.module.css` saying so.
-  - **Prev/Next arrows stayed** on the flashcard screen. The original concept dropped them for
-    swipe — a mobile-only assumption. Swipe doesn't exist with a mouse and desktop is now
-    supported. The redundant "Lihat/Balik" button was removed instead.
-  - **Badge→achievement mapping is explicit per achievement id**, not by array position, so
-    reordering `achievements.js` can't silently shuffle the art.
+  **Item 65**: swipe ported from `FlashcardMode/index.jsx` to `ReviewMode` — read the actual
+  handler rather than assuming its shape first. Post-flip swipe maps directly to an FSRS
+  rating (up/left/right = Easy/Again/Good, same 60px/÷120 thresholds, same live drag-tilt
+  feedback), not just "reveal" as assumed going in. Pre-flip has no 1:1 port — `FlashcardMode`
+  swipes to navigate a free-browsing deck, `ReviewMode`'s FSRS queue has no "previous" concept
+  — so pre-flip swipe maps to flip instead. Deliberately not extracted into a shared hook
+  (the source is inline in a working, tested, out-of-scope file; duplicating the ~15 lines
+  felt safer than refactoring something nobody asked to touch). Scoped to flip-card surfaces
+  only, per the plan's own note that swipe next to tappable quiz options invites mis-fires.
 
-  **Incidental fixes found along the way (not asked for):**
-  - `sw.js` `CACHE_VERSION` was `4.21.1` against a `4.23.0` `package.json` — two releases stale
-    despite the file's own instruction to bump per deploy. Returning users would have been
-    served stale assets. Now `4.23.0`. **Bump this again before any deploy.**
-  - `package-lock.json` version was out of sync with `package.json` (4.22.0 vs 4.23.0).
-  - The app logo already existed at `public/icons/icon-*.png` but was used nowhere in the UI;
-    onboarding showed a generic ⚡ emoji. Now uses the real logo. No new logo art is needed.
-  - Content sat under the floating bottom nav on several screens because the safe padding was
-    applied inline in `App.jsx` and each screen had to remember it. `AppShell` owns it now.
-  - Flashcard "Reset" (erases all progress) sat in a uniform grid one tap from a star filter at
-    identical visual weight. Now separated and styled as destructive.
-  - `SayaTab.module.css` was 536 lines and contained a complete, stale first stylesheet (lines
-    1–247, headed "v3.0 — UI Upgrade Round 2") entirely shadowed by a second, refined one
-    below it. Confirmed via diff and by checking which half the JSX actually depends on (only
-    the second half defines `.installCard`, which the JSX uses). Cascade is per-property, not
-    per-block, so a handful of first-half-only declarations were still live even though the
-    rest of that block was fully overridden by the second: `progressCard` box-shadow and its
-    `::before` gradient line, `progressInfo` z-index, `progressKnown` font-family/line-height,
-    `progressStreak` border, `pageTitle` font-family/line-height. Removed the dead block and
-    folded the still-live properties into the surviving rules — zero visual change confirmed
-    property-by-property, file is now 312 lines. Also gave `.progressCard` a `max-width: 560px`
-    so the hero card at the top of the page doesn't stretch to the full 1180px column with
-    nothing to pair it with.
+  **Noticed, not fixed, still true:** `standardizeFuri()` in `jp-helpers.js` is dead code now
+  (its last 3 call sites were `VocabMode`/`WaygroundMode`'s retired toggles) — small cleanup
+  candidate, not urgent. `--ssw-accentSoft` has an undefined-token fallback in
+  `AngkaMode.module.css:225` and `DangerMode.module.css:222` (pre-existing, `audit:css-vars`
+  flags it as non-blocking, neither file was touched by this batch). No new tests were added
+  for the policy threading itself — existing 546 tests all still pass unmodified, which is
+  real but partial coverage. Dedicated `furiganaPolicy` coverage, especially `QuizShell`'s
+  `'tap'` path, would be a reasonable small follow-up whenever a session has room for it.
 
-  **EXECUTION COMPLETE (2026-08-25) — all 38 actionable items shipped**, each its own commit,
-  each verified green before pushing (`npm test` / `npm run lint` / `npm run audit:css-vars` /
-  `npm run build`). Final count **546/546 (56 files)**, up from 435 when the overhaul started.
-  Every commit message carries that item's specific evidence and reasoning — this entry is a
-  summary, not a replacement for reading them. The plan itself, with all its per-item "how it
-  fits" reasoning and its record of routes deliberately not taken, is preserved at
-  `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`.
-
-  Items 9, 10 and 37 (the three that were blocked on an owner decision) were resolved by the
-  owner on 2026-08-24 — restrict-usage for contrast, wait-for-user for the service worker, and
-  a scoped now-not-later for browser history — then shipped.
-
-  **Five deferrals were carried forward into the new plan rather than dropped:** the `rem`
-  conversion, `correctFlash`/`wrongShake` parity across hand-rolled modes, incremental mid-quiz
-  persistence, the in-app-exit history gap, and `FilterPopup` wiring. They are items 50–55 in
-  `docs/UI_UX_PLAN.md`, each with its original reason recorded.
-
-  **Two things found and fixed during execution that weren't itemized in the plan:**
-  - `AppShell.module.css`: `.content[data-nav-safe='true']` was out-specificity-ing the desktop
-    media query's intended `--sp-6`, so the three tab screens reserved ~100px of dead bottom
-    padding at desktop width for a bottom-nav pill that's `display:none` there. Found while
-    wiring item 1's toast-offset fix through this exact file; fixed in the same commit. Directly
-    relevant to item 12's "dashboard vertical dead space" diagnosis — part of that dead space was
-    this, not just conditional content.
-  - `Dashboard.jsx`'s "Beranda" title carried a hardcoded `aria-hidden="true"` regardless of
-    breakpoint, while CSS already correctly swapped which of two page titles was *visually* shown
-    at 1040px. Screen readers stayed stuck announcing the mobile-only branding text even at
-    desktop width, where sighted users see something else — visible and announced text were
-    different strings. Found and fixed while doing item 11/35's heading work.
-
-  **Spec docs updated to match, in a follow-up pass after realizing it hadn't happened per-item as
-  the plan's own §10 requires:** `docs/DESIGN_SPEC.md` gained the z-index scale (item 4) and
-  `--tap-min` documentation (item 36) — neither existed in any spec before. `docs/COMPONENT_SPEC.md`
-  gained a note that `Row` renders as a real `<button>` when clickable (item 33), a warning that
-  `--c-*`/`--color-*` are dead token schemes (item 30), and two new sections — §7 for `ModeHeader`
-  as a shared primitive (item 11), §8 for `JpDisplay`'s `lang="ja"` handling (item 34).
-  `docs/LAYOUT_SPEC.md` §4 documents SideNav's expanded role (item 13). `docs/CARD_CONTENT_SPEC.md`
-  §6 gained a short cross-reference to COMPONENT_SPEC §8 — recalibrated from the plan's original
-  suggestion of putting the full rendering detail there, since that document turned out to be
-  purely about data-encoding conventions once actually read, not rendering.
-
-  **Done this session (was flagged for you last time):** `docs/BLUEPRINT-CURRENT.md` has been
-  archived to `docs/archive/` with a provenance header carrying the full drift table — it claimed
-  storage v3 / 23 modes / 1,443 cards / 457 tests against an actual v6 / 21 / 1,438 / 435, and
-  described the removed Doboku/Kenchiku tracks at length. Checked first that nothing live was
-  lost: its one still-useful section, "Hard Constraints (Do Not Break)," is already covered more
-  accurately in `docs/PWA_RELEASE_SPEC.md` §1, `docs/AGENT_WORKFLOW.md` §2, and `_MAP.md` §1/§3.
-  `ARCHIVE-INDEX.md` gained a row and had three stale "superseded by" pointers retargeted.
-  `_MAP.md`'s `docs/` tree turned out to be stale in the same way — it still listed
-  `DATA_ARCH_AUDIT.md` as live (archived 2026-08-19) and omitted every spec doc added since — so
-  it was corrected to match the directory.
+  **Next up: Batch B** per the plan's own §10 — items 45 (a11y announcements) → 46
+  (`ResultScreen` adoption) → 49 (shared quiz counts), with 50 and 63 folded in since the
+  plan flags them as touching the same files. Nothing started.
 
 ---
 
