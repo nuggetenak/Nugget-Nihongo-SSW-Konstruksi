@@ -12,14 +12,19 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import { getMission, completeMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import { get as storageGet } from '../storage/engine.js';
-import { MODE_COMPONENTS } from './modes.js';
+import { MODE_COMPONENTS, MODE_META } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
 import ModeHeader from '../components/ModeHeader.jsx';
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
 import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 
 // ── Loading fallback — skeleton, not spinner ───────────────────────────────
-function ModeLoader() {
+// Shape follows MODE_META[mode].skeleton (item 17) so a quiz-shaped
+// destination doesn't flash a flashcard-shaped loader before swapping to its
+// real, differently-proportioned content. One aria-label on the wrapper is
+// the single loading announcement for the whole fallback — the individual
+// shimmer blocks are aria-hidden, not separately labelled.
+export function ModeLoader({ shape = 'card' }) {
   return (
     <div role="status" aria-label="Memuat mode..." aria-live="polite">
       <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'center' }}>
@@ -27,7 +32,36 @@ function ModeLoader() {
         <Skeleton width="60px" height={16} style={{ marginLeft: 'auto' }} />
       </div>
       <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
-      <Skeleton.Card />
+      {shape === 'quiz' && (
+        <>
+          <Skeleton width="90%" height={20} style={{ marginBottom: 20 }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <Skeleton.QuizOption />
+            <Skeleton.QuizOption />
+            <Skeleton.QuizOption />
+            <Skeleton.QuizOption />
+          </div>
+        </>
+      )}
+      {shape === 'list' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <Skeleton.Row />
+          <Skeleton.Row />
+          <Skeleton.Row />
+          <Skeleton.Row />
+        </div>
+      )}
+      {shape === 'stat' && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+          <Skeleton.Stat />
+          <Skeleton.Stat />
+          <Skeleton.Stat />
+          <Skeleton.Stat />
+          <Skeleton.Stat />
+          <Skeleton.Stat />
+        </div>
+      )}
+      {shape === 'card' && <Skeleton.Card />}
     </div>
   );
 }
@@ -251,7 +285,7 @@ export default function ModeRouter() {
     >
       <FocusSentinel />
       <ModeHeader mode={mode} modeHistory={modeHistory} onBack={goBack} />
-      <Suspense fallback={<ModeLoader />}>
+      <Suspense fallback={<ModeLoader shape={MODE_META[mode]?.skeleton ?? 'card'} />}>
         <ModeComponent {...props} />
       </Suspense>
       {showMissionOverlay && (

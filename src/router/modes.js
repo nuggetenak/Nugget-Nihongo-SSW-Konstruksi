@@ -66,6 +66,15 @@ export const MODE_SECTIONS = {
 //                monitor put the Japanese term in the middle of an empty field.
 //   'default' -> uses the full responsive shell width. For dense, scannable
 //                screens (tables, long lists) that genuinely benefit.
+// `skeleton` — Suspense-fallback shape while this mode's chunk loads (item
+//   17), consumed by ModeRouter's ModeLoader. One generic loader used to
+//   cover a flashcard, a stats dashboard, and a glossary alike; on a slow
+//   connection (the design assumption) that's on screen long enough for the
+//   mismatch to register as a layout jump when real content lands.
+//   'card' (default) -> a single card face, like the destination screen
+//   'quiz'  -> a question row + a few answer-option rows
+//   'list'  -> a few scrollable rows (search results, glossary, notes)
+//   'stat'  -> a small grid of numbers, like a stats dashboard
 export const MODE_META = {
   ulasan: {
     icon: '🔁',
@@ -90,6 +99,7 @@ export const MODE_META = {
     desc: 'Kuis otomatis 3 level',
     color: '#f59e0b',
     strand: 'language',
+    skeleton: 'quiz',
   },
   sprint: {
     icon: '⚡',
@@ -98,6 +108,7 @@ export const MODE_META = {
     desc: 'Drill kecepatan 60 detik',
     color: '#a78bfa',
     strand: 'output',
+    skeleton: 'quiz',
   },
   fokus: {
     icon: '🎯',
@@ -106,6 +117,7 @@ export const MODE_META = {
     desc: 'Latih kelemahan',
     color: '#f97316',
     strand: 'input',
+    skeleton: 'quiz',
   },
   jac: {
     icon: '📋',
@@ -115,6 +127,7 @@ export const MODE_META = {
     desc: 'Soal contoh ujian resmi',
     color: '#6366f1',
     strand: 'language',
+    skeleton: 'quiz',
   },
   wayground: {
     icon: '🎓',
@@ -124,6 +137,7 @@ export const MODE_META = {
     desc: '579 soal teori & praktik',
     color: '#fb923c',
     strand: 'language',
+    skeleton: 'quiz',
   },
   vocab: {
     icon: '📖',
@@ -132,6 +146,7 @@ export const MODE_META = {
     desc: '380 soal vocab JP↔ID',
     color: '#0891b2',
     strand: 'input',
+    skeleton: 'quiz',
   },
   simulasi: {
     icon: '🎯',
@@ -140,6 +155,7 @@ export const MODE_META = {
     desc: 'Ujian + timer',
     color: '#ef4444',
     strand: 'language',
+    skeleton: 'quiz',
   },
   angka: {
     icon: '🔢',
@@ -148,6 +164,7 @@ export const MODE_META = {
     desc: 'Angka wajib hafal',
     color: '#facc15',
     strand: 'input',
+    skeleton: 'quiz',
   },
   jebak: {
     icon: '⚠️',
@@ -156,6 +173,7 @@ export const MODE_META = {
     desc: 'Istilah mirip',
     color: '#dc2626',
     strand: 'input',
+    skeleton: 'quiz',
   },
   cari: {
     icon: '🔍',
@@ -165,6 +183,7 @@ export const MODE_META = {
     desc: 'Pencarian cepat',
     color: '#475569',
     strand: 'input',
+    skeleton: 'list',
   },
   glosari: {
     icon: '📖',
@@ -174,6 +193,7 @@ export const MODE_META = {
     desc: 'Kamus terurut',
     color: '#7c3aed',
     strand: 'input',
+    skeleton: 'list',
   },
   sumber: {
     icon: '📂',
@@ -183,6 +203,7 @@ export const MODE_META = {
     desc: 'Per PDF sumber',
     color: '#64748b',
     strand: null,
+    skeleton: 'list',
   },
   stats: {
     icon: '📊',
@@ -192,6 +213,7 @@ export const MODE_META = {
     desc: 'Progress & kelemahan',
     color: '#2dd4bf',
     strand: null,
+    skeleton: 'stat',
   },
   ekspor: {
     icon: '💾',
@@ -200,6 +222,7 @@ export const MODE_META = {
     desc: 'Simpan & pulihkan progress',
     color: '#94a3b8',
     strand: null,
+    skeleton: 'list',
   },
   produksi: {
     icon: '✍️',
@@ -216,6 +239,7 @@ export const MODE_META = {
     desc: 'VLT: pasang istilah yang serupa',
     color: '#f472b6',
     strand: 'language',
+    skeleton: 'quiz',
   },
   dengar: {
     icon: '🎧',
@@ -224,6 +248,7 @@ export const MODE_META = {
     desc: 'Dengar JP → pilih terjemahan',
     color: '#e879f9',
     strand: 'language',
+    skeleton: 'quiz',
   },
   catatan: {
     icon: '📓',
@@ -232,6 +257,7 @@ export const MODE_META = {
     desc: 'Catatan & mnemonik pribadi',
     color: '#84cc16',
     strand: 'input',
+    skeleton: 'list',
   },
   kuisprod: {
     icon: '🔤',

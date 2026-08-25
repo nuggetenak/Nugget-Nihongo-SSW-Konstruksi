@@ -1138,7 +1138,7 @@ call sites match it.
 
 ---
 
-### ☐ 17. Loading and skeleton consistency — `M`
+### ☑ 17. Loading and skeleton consistency — `M`
 
 **What.** `src/components/Skeleton.jsx` provides `Skeleton`, `.Card`, `.QuizOption`, `.Stat`,
 `.Row`. Only `ModeRouter` and `ReviewMode` import it. Apply it consistently to the lazy-loading
