@@ -103,6 +103,42 @@ subtitle 15px, body 13px, caption 12px, small 11px, micro 10px, nano 9px. Weight
 medium 500, semi 600, bold 700, heavy 800, black 900. Line heights: tight 1.2, normal 1.5,
 relaxed 1.75.
 
+**Wide breakpoint (≥1040px) reads larger, not just wider (item 22).** The overhaul solved width
+comprehensively (`--max-w` widens, grids reflow) but not density — 13px body text at arm's length
+from a monitor reads small, and hero type sized to anchor a phone screen is modest on a desktop
+dashboard. Inside the same `@media (min-width: 1040px)` block that already redefines `--max-w`:
+hero 36px, jp-primary 30px, jp-back 22px, title 18px, subtitle 16px, body 14px, caption 13px,
+small 12px. Micro/nano stay at 10px/9px — badge and fine-print scale, not reading scale, more
+likely to sit in a fixed-dimension container where even 1px risks overflow, and less central to
+what "wide-screen reading comfort" is actually about. Compact and medium are unchanged; every
+consumer of these tokens gets the wide values for free, no per-component edits, same mechanism
+`--max-w` already proved.
+
+`jpFontSize()` (`src/utils/jp-helpers.js`) needed its own fix, not just the tokens above — it's a
+length-based ladder that drives `JpDisplay`'s actual rendered size via an inline style, and never
+read `--fs-jp-primary`/`--fs-jp-back` to begin with. Since `JpDisplay` is the primary JP rendering
+path in this app, bumping only the CSS tokens would have had no visible effect on most real card
+content. Gained the same 1040px check (`window.matchMedia`, duplicating the breakpoint number
+since JS can't read a media query out of a stylesheet — if `min-width: 1040px` above ever moves,
+this needs to move with it) and a wide ladder matching the static bump per rung (28→30 same delta
+as jp-primary, 20→22 same as jp-back, and so on) so the two scales move together rather than
+drifting into two different answers for "how much bigger is wide." Ruby annotations
+(`.ruby rt`, `JpDisplay.module.css`) are sized in `em` relative to their parent JP text, so they
+scale proportionally with both of the above automatically — no separate ruby-specific fix needed,
+verified by reading the actual rule rather than assumed.
+
+**The `rem` question — deferred, not resolved.** Every `--fs-*` token is `px`, so none of them
+respond to a user's browser/OS font-size preference; `rem` would fix that. Deferred rather than
+done this item, for three reasons rather than only "out of time": it's a genuinely cross-cutting
+change touching every one of the ~89 stylesheets that reference these tokens, not a contained one;
+this app is closer to an installed, app-shell PWA than a flowing content document, where the
+primary benefit of `rem` (respecting a user's base font-size setting) matters less than it would
+for a reading-heavy website — pinch-zoom already covers the mobile case regardless of px-vs-rem,
+since it's a viewport-level zoom rather than a font-size preference; and the interaction with JP
+typography this item already had to be careful with (ruby sized in `em`, `jpFontSize()`'s own
+ladder) means a `rem` pass would need the same care multiplied across every consumer, not a
+mechanical find-and-replace. A real future item, not a dropped one.
+
 ## 4. Spacing, radii, shadow, motion
 
 ```css

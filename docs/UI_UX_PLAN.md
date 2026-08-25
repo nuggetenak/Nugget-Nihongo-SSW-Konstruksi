@@ -1382,7 +1382,7 @@ respect a user preference if one is added.
 
 ---
 
-### ☐ 22. Wide-breakpoint density and typography — `M`
+### ☑ 22. Wide-breakpoint density and typography — `M`
 
 **What.** The type scale is fixed in px across all three breakpoints. Review whether 1180px should
 read the same as 480px.

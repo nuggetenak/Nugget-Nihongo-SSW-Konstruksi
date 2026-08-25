@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, extractReadings, hasJapanese, jpFontSize } from '../utils/jp-helpers.js';
 import {
@@ -112,6 +112,36 @@ describe('jpFontSize', () => {
 
   it('returns a number', () => {
     expect(typeof jpFontSize('テスト')).toBe('number');
+  });
+
+  describe('wide breakpoint (item 22)', () => {
+    const realMatchMedia = window.matchMedia;
+    afterEach(() => {
+      window.matchMedia = realMatchMedia;
+    });
+
+    it('returns larger sizes at >=1040px than at compact/medium, same rung for rung', () => {
+      window.matchMedia = (q) => ({ matches: q.includes('1040') });
+      const wideShort = jpFontSize('OK');
+      const wideLong = jpFontSize('これはとても長い日本語のテキストです');
+
+      window.matchMedia = () => ({ matches: false });
+      const compactShort = jpFontSize('OK');
+      const compactLong = jpFontSize('これはとても長い日本語のテキストです');
+
+      expect(wideShort).toBeGreaterThan(compactShort);
+      expect(wideLong).toBeGreaterThan(compactLong);
+    });
+
+    it('checks the same 1040px breakpoint global.css uses, not a different number', () => {
+      const seenQueries = [];
+      window.matchMedia = (q) => {
+        seenQueries.push(q);
+        return { matches: false };
+      };
+      jpFontSize('テスト');
+      expect(seenQueries.some((q) => q.includes('1040px'))).toBe(true);
+    });
   });
 });
 

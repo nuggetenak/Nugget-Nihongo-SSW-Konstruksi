@@ -69,14 +69,31 @@ export function hasJapanese(s = '') {
  * Calculate appropriate font size for Japanese text based on length.
  * Returns a number (px) suitable for inline style fontSize.
  */
+// item 22: length-based ladder, unrelated to (and not reading) the
+// --fs-jp-primary/--fs-jp-back CSS tokens -- JpDisplay is the primary JP
+// rendering path in this app and drives its font-size from this function's
+// return value via an inline style, not from those custom properties
+// directly. Bumping the tokens alone (global.css's 1040px block) would have
+// had no visible effect on most real card content. Wide-breakpoint ladder
+// mirrors the same per-rung bump chosen for the static tokens (28->30 matches
+// --fs-jp-primary, 20->22 matches --fs-jp-back, etc.) so the two scales stay
+// in step with each other rather than drifting into two different "how much
+// bigger is wide" answers. Checks the same 1040px breakpoint global.css
+// uses -- can't literally share the media query from JS, so the number is
+// duplicated; if that breakpoint ever moves, this needs to move with it.
+function isWideBreakpoint() {
+  return typeof window !== 'undefined' && !!window.matchMedia?.('(min-width: 1040px)').matches;
+}
+
 export function jpFontSize(text = '') {
   const len = text.length;
-  if (len <= 4) return 28;
-  if (len <= 8) return 24;
-  if (len <= 14) return 20;
-  if (len <= 20) return 17;
-  if (len <= 30) return 15;
-  return 13;
+  const wide = isWideBreakpoint();
+  if (len <= 4) return wide ? 30 : 28;
+  if (len <= 8) return wide ? 26 : 24;
+  if (len <= 14) return wide ? 22 : 20;
+  if (len <= 20) return wide ? 18 : 17;
+  if (len <= 30) return wide ? 16 : 15;
+  return wide ? 14 : 13;
 }
 
 /**
