@@ -236,7 +236,7 @@ either works everywhere or is removed.
 
 ---
 
-## 4. P1 — Offline asset integrity (audit wave 2, 2026-08-25)
+## 4. P1 — Offline asset integrity, plus one gesture gap (audit waves 2–3)
 
 Wave 1 audited *screens*. This wave audited *assets* — what the app actually needs fetched, and
 what happens when it can't fetch. Both items below came out of the owner's question "what if we
@@ -354,6 +354,23 @@ nothing is visibly broken — worth doing when already touching these files, not
 
 ---
 
+### ☐ 65. `ReviewMode` is a flip-card surface with none of `FlashcardMode`'s gestures — `S`
+
+**Verified**: `ReviewMode` has its own `flipped` state and flip interaction (`:28`, `:109`) — it
+is structurally the same card-flipping surface as `FlashcardMode`. But `grep -rln "onTouchStart"`
+returns only `FlashcardMode/index.jsx`, `FlipCard.jsx`, and `Toast.jsx`. So swipe-to-navigate
+exists on flashcards and nowhere else.
+
+Same complaint as items 43/44 from a different angle: the **SRS review mode is the one a learner
+uses daily and longest**, and it's consistently the poorer relation of the flashcard mode it
+mirrors — no ruby, no swipe, different furigana treatment. Worth fixing as a set rather than
+three separate errands.
+
+**Care needed:** swipe is *not* automatically right for quiz modes — a horizontal drag next to
+tappable answer options invites mis-fires. Scope this to the flip-card surfaces only.
+
+---
+
 ## 5. P1 — Carried forward from the completed plan
 
 These were **deliberately deferred with reasons** in the archived plan, not missed. Reasons
@@ -465,10 +482,35 @@ first grep looked alarming and the actual code was fine — that gap between "gr
 - **Service worker font handling** — the SW *does* cache-first Google Fonts into `CACHE_FONTS`.
   Reading only that code suggests fonts are fully handled offline; item 61 exists because the
   gap is the *first* load and eviction, not the caching strategy itself.
+- **Form inputs (wave 3)** — a grep for `<input` without a nearby label looked like eight
+  unlabelled fields. All checked individually and all fine: attributes simply sit on the line
+  *after* the tag, so `ProductionMode` (`aria-label="Jawaban"`), `FilterBar`
+  (`aria-label="Cari kartu"`) and the rest are correctly labelled. `ExportMode:420` is a hidden
+  `type="file"` input triggered by a properly-labelled button — the standard pattern, not a gap.
+- **Missing Japanese headwords (wave 3)** — `HANDOFF.md` carries an open owner question about
+  ~9 cards that lost their JP headwords. Checked `src/data/cards.js` directly: **1,438 `jp`
+  fields, 0 empty**. That file is clean. The flagged set (`wglv-jp-02`) is wayground quiz data,
+  a different file — so the question is still genuinely open, just not where a UI audit would
+  find it. It's a content issue, not a UI/UX one; leaving it in `HANDOFF.md` where it belongs.
+- **PWA manifest** — complete (`name`, `short_name`, `description`, `lang`, `dir`, `start_url`,
+  `scope`, `display`, `display_override`, `orientation`, colours). Not a gap.
 
 ---
 
-## 8. Spec docs this plan may require updating
+## 8. Audit status
+
+**Closed after three waves.** Wave 1 audited screens and interaction (items 43–49, 56–60), wave 2
+audited assets and offline integrity (61–64), wave 3 audited gestures, forms, data integrity and
+the manifest (65 — and four disproven findings above).
+
+Wave 3 returned mostly clean, which is itself the useful result: one real finding out of five
+leads. The plan is considered **complete as a starting queue** — not because nothing else exists,
+but because the return per pass has clearly dropped, and further auditing without implementing is
+less valuable than starting Batch A. Re-audit after the P0/P1 items land, not before.
+
+---
+
+## 9. Spec docs this plan may require updating
 
 Per the archived plan's §10 convention — update the spec **in the same commit** as the item.
 
@@ -485,10 +527,12 @@ Per the archived plan's §10 convention — update the spec **in the same commit
 
 ---
 
-## 9. Suggested order
+## 10. Suggested order
 
-**Batch A (P0, highest value):** 43 → 44 — furigana consistency. Self-contained, immediately
-visible to the learner, and the owner-flagged issue.
+**Batch A (P0, highest value):** 43 → 44 → 65 — the SRS-review parity set. `ReviewMode` is the
+mode a learner uses daily and longest, and is currently the poorer relation of `FlashcardMode` in
+three separate ways (no ruby, detached readings, no swipe). Fixing them together is one pass over
+one file instead of three. Self-contained and immediately visible.
 
 **Batch B (quiz core):** 45 → 46 → 49 — accessibility parity, shared results screen, shared
 constants. All the same files; doing them in one sitting avoids three passes over eight modes.
