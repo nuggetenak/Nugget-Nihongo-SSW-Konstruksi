@@ -198,15 +198,8 @@
 }
 
 .cardJp {
-  font-weight: 700;
-  line-height: 1.4;
-  /* font-size: dynamic (jpFontSize()), kept inline */
-}
-
-.cardFuri {
-  font-size: var(--fs-caption);
-  color: var(--ssw-textMuted);
-  margin-top: 4px;
+  /* text styling (weight, line-height, font-size) now owned by JpFront --
+     this class is a layout wrapper only */
 }
 
 /* Flip reveal section */

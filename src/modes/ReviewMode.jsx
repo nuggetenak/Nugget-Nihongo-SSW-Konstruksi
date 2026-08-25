@@ -8,10 +8,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo } from '../data/categories.js';
-import { stripFuri, jpFontSize, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import { get as storageGet } from '../storage/engine.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from '../components/JpDisplay.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -23,6 +25,8 @@ import R from './ReviewMode.module.css';
 const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 
 export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -215,7 +219,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   if (!currentCard) return null;
   const cat = getCatInfo(currentCard.category);
   const clean = stripFuri(currentCard.jp);
-  const fs = jpFontSize(clean);
   const info = srs.getInfo(currentId);
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false && canSpeak();
   const remaining = queue.length - idx - 1;
@@ -297,7 +300,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
             setFlipped(true);
           }
         }}
-        aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? currentCard.jp : ''}`}
+        aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? clean : ''}`}
         className={R.card}
         style={{
           padding: flipped ? '22px 18px' : '36px 20px',
@@ -309,12 +312,9 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
         }}
       >
         <div className={R.cardFront} style={{ marginBottom: flipped ? 16 : 0 }}>
-          <div className={R.cardJp} style={{ fontSize: fs }}>
-            {clean}
+          <div className={R.cardJp}>
+            <JpFront jp={currentCard.jp} furiganaPolicy={furiganaPolicy} />
           </div>
-          {extractReadings(currentCard.jp) && (
-            <div className={R.cardFuri}>{extractReadings(currentCard.jp)}</div>
-          )}
         </div>
         {flipped && (
           <div className={R.flipReveal}>

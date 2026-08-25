@@ -12,7 +12,7 @@ import {
   parseRubyFragments,
   renderJPWithRuby,
 } from '../../components/JpDisplay.jsx';
-import { extractReadings } from '../../utils/jp-helpers.js';
+import { extractReadings, stripFuri } from '../../utils/jp-helpers.js';
 import FC from './flashcard.module.css';
 import S from './FlipCard.module.css';
 
@@ -70,7 +70,7 @@ export default function FlipCard({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      aria-label={flipped ? `Kartu balik: ${card.id_text}` : `Kartu depan: ${card.jp}`}
+      aria-label={flipped ? `Kartu balik: ${card.id_text}` : `Kartu depan: ${stripFuri(card.jp)}`}
       aria-live="polite"
       aria-atomic="true"
     >

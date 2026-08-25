@@ -80,7 +80,7 @@ works in `QuizMode`.
 
 ---
 
-### ☐ 44. `ReviewMode` renders furigana as a detached line, not ruby — `S`
+### ☑ 44. `ReviewMode` renders furigana as a detached line, not ruby — `S`
 
 **Verified** (`ReviewMode.jsx:217`, `:315`): it calls `stripFuri(card.jp)` for the headword and
 then separately renders `extractReadings(card.jp)` as a plain `.cardFuri` line underneath.

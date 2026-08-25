@@ -187,6 +187,16 @@ level: it now renders `q.question` via `JpFront` directly, reading `furiganaPoli
 `useApp()`. `questionSub` wasn't removed — `JACMode` overloads it for an unrelated "show official
 question ID" hint toggle, which stays.
 
+**`ReviewMode` (item 44, 2026-08-26):** the last of the 3-out-of-18 gap. Same fix as §8.1 — it
+called `stripFuri()` for the headword and separately rendered `extractReadings()` as a detached
+`.cardFuri` line underneath (now removed), so a card looked structurally different in daily SRS
+review than everywhere else, and on multi-kanji compounds there was no way to tell which reading
+belonged to which character. Now renders via `JpFront` like every other surface. Also fixed:
+`ReviewMode`'s (and `FlipCard`'s — same bug in the reference component, caught during item 43's
+verification sweep) pre-flip `aria-label` was building its accessible name from the raw,
+un-stripped `jp` string, so a screen reader announced literal `《reading》` markup syntax instead
+of the word. Both now use `stripFuri()`'s output for the label.
+
 ## 9. Feedback level: toast vs. inline vs. dialog vs. banner (item 16, 2026-08-24)
 
 Four different ways this app tells the user something happened, and the rule for which one a new
