@@ -34,16 +34,28 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-20 (same branch, continuous session spanning drafting + execution —
-owner provided repo+token directly, same protocol).** The 2026-08-18 merge close-out entry that
-used to follow this one is archived — see banner above. Verify before trusting past this point —
-this line doesn't update itself.
+**As of this edit, 2026-08-25.** Verify before trusting past this point — this line doesn't
+update itself.
 
-- **🟡 UI OVERHAUL IN PROGRESS — branch `feat/ui-overhaul`, 37 commits ahead of `main`, NOT
-  merged.** `main` is untouched and still at the post-merge state described further down. The
-  branch is pushed to origin. Every commit was verified green before pushing: `npm test`
-  449/449 (41 files), `npm run lint` 0 warnings, `npm run build` clean (the `data-cards` 661KB
-  chunk warning is the known, deliberately-deferred issue below, not new).
+- **🟢 UI OVERHAUL PLAN COMPLETE — branch `feat/ui-overhaul`, ~58 commits ahead of `main`, still
+  NOT merged.** `main` is untouched and still at the post-merge state described further down.
+  All 38 actionable items of the overhaul plan shipped; that plan is archived at
+  `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`. Verified green before every push: `npm test`
+  **546/546** (56 files), `npm run lint` 0 warnings, `npm run build` clean (the `data-cards`
+  661KB chunk warning is the known, deliberately-deferred issue below, not new).
+
+  **Merge decision is the owner's and hasn't been made.** The branch is feature-complete against
+  its plan, not merged. `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump
+  (`docs/PWA_RELEASE_SPEC.md` §5) — deliberately not done during branch work.
+
+  **A new plan is live at `docs/UI_UX_PLAN.md` (items 43+), written 2026-08-25 from a fresh
+  audit — no work started on it.** Headline findings: `furiganaPolicy` honoured in 3 JP surfaces
+  out of ~18 (flashcard shows readings, SRS review and every quiz mode don't); 8 quiz modes have
+  zero `aria-live`; `ResultScreen` has exactly 1 consumer while 8 modes hand-roll their finish
+  screen; `SimulasiMode` is forward-only, which trains the wrong exam technique. Numbering starts
+  at 43 so "item 15" in git history unambiguously means the archived plan.
+
+  **Historical note (2026-08-20), kept because the direction still governs:**
 
   **Direction (owner-approved before any code was written):** keep and evolve this app's own
   amber identity rather than aligning with the main Nugget Nihongo app; go fully adaptive
@@ -136,28 +148,22 @@ this line doesn't update itself.
     so the hero card at the top of the page doesn't stretch to the full 1180px column with
     nothing to pair it with.
 
-  **EXECUTION IN PROGRESS against `docs/UI_UX_PLAN.md` — 19 of 38 actionable items shipped,
-  same day as drafting (2026-08-20).** Batches 0–2 (all P0 mechanical + accessibility items: 1–8,
-  30–36, 41) and Batch 6 (P1 layout: 11, 12, 13) are done — each item its own commit, each commit
-  verified green before pushing (`npm test` / `npm run lint` / `npm run build`, plus
-  `npm run audit:css-vars`, the new guard item 30 added). Every commit message carries the
-  specific evidence and reasoning for that item; this entry is a summary, not a replacement for
-  reading them. Current test count: **449/449 (41 files)**, up from 435 at the start of this
-  phase — regression tests landed alongside several fixes (item 31's keyboard-hijack fix, item
-  12's new dashboard prompts, item 13's new side-nav section).
+  **EXECUTION COMPLETE (2026-08-25) — all 38 actionable items shipped**, each its own commit,
+  each verified green before pushing (`npm test` / `npm run lint` / `npm run audit:css-vars` /
+  `npm run build`). Final count **546/546 (56 files)**, up from 435 when the overhaul started.
+  Every commit message carries that item's specific evidence and reasoning — this entry is a
+  summary, not a replacement for reading them. The plan itself, with all its per-item "how it
+  fits" reasoning and its record of routes deliberately not taken, is preserved at
+  `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`.
 
-  **Three items are blocked on an owner decision, untouched:**
-  - **Item 9** — contrast. `--ssw-textFaint` is 2.89:1 in light theme, colours the bottom nav's
-    inactive labels; amber-as-text is 2.11:1, also the focus ring. Three routes in the plan.
-  - **Item 10** — browser history. No `pushState`/`popstate`, Android back button exits the PWA
-    from any screen. Sized as its own branch/session — the largest single item in the plan.
-  - **Item 37** — service worker. `skipWaiting()`+`clients.claim()` against 21 lazy chunks can
-    strand an open session on a deploy. Three routes, all touch `sw.js`, need a `CACHE_VERSION`
-    bump whichever is chosen.
+  Items 9, 10 and 37 (the three that were blocked on an owner decision) were resolved by the
+  owner on 2026-08-24 — restrict-usage for contrast, wait-for-user for the service worker, and
+  a scoped now-not-later for browser history — then shipped.
 
-  **20 items remain unstarted** — Batch 7 (P2 adoption/consistency: 14, 15, 16, 17, 18, 19, 38,
-  39, 40, 42) and Batch 8 (P3 reach/polish: 20–25). See `docs/UI_UX_PLAN.md` §8 for the batch
-  order and §2's priority table for full status (☑/🔶/☐ per item).
+  **Five deferrals were carried forward into the new plan rather than dropped:** the `rem`
+  conversion, `correctFlash`/`wrongShake` parity across hand-rolled modes, incremental mid-quiz
+  persistence, the in-app-exit history gap, and `FilterPopup` wiring. They are items 50–55 in
+  `docs/UI_UX_PLAN.md`, each with its original reason recorded.
 
   **Two things found and fixed during execution that weren't itemized in the plan:**
   - `AppShell.module.css`: `.content[data-nav-safe='true']` was out-specificity-ing the desktop
@@ -228,10 +234,12 @@ content-dq-specific and archived with it. Still worth reading if a future sessio
   responsive pattern
 - `docs/COMPONENT_SPEC.md` — CSS Modules conventions, shared primitives, component patterns
 - `docs/PWA_RELEASE_SPEC.md` — offline architecture, `CACHE_VERSION` discipline, deploy checklist
-- `docs/UI_UX_PLAN.md` — **not stable reference; a work queue.** 29 prioritised UI/UX items
-  drafted 2026-08-20, carrying everything that used to sit in CURRENT STATE's NOT-done list.
-  Unlike the `*_SPEC.md` files above, this one is meant to shrink and eventually be retired to
-  `docs/archive/` once its bands are closed — see `docs/AGENT_WORKFLOW.md` §3
+- `docs/UI_UX_PLAN.md` — **not stable reference; a work queue.** Current plan: **items 43+**,
+  drafted 2026-08-25 from a fresh audit of quiz/exam surfaces and furigana consistency, plus five
+  deferrals carried over from its predecessor. Nothing started. Unlike the `*_SPEC.md` files
+  above, this is meant to shrink and retire to `docs/archive/` once empty — see
+  `docs/AGENT_WORKFLOW.md` §3. Its predecessor (items 1–42, all shipped) is already archived
+  there; numbering deliberately doesn't restart, so item references in git history stay unique
 - `_MAP.md` — architecture map + full session-by-session history log
 - `docs/archive/` — superseded docs, including this file's predecessors (`SESSION_PROMPT.md`,
   `PROGRESS.md`, `DATA_QUALITY_HANDOFF_v16/v17/v18.md`), `HANDOFF-content-dq-era.md` (the
