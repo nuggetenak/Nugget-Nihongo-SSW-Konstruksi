@@ -1,5 +1,6 @@
 // ─── ConfirmDialog.jsx ────────────────────────────────────────────────────────
 import { createContext, useContext, useState, useCallback } from 'react';
+import { haptic } from '../utils/haptic.js';
 import Sheet from './Sheet.jsx';
 import S from './ConfirmDialog.module.css';
 
@@ -18,6 +19,11 @@ export function ConfirmProvider({ children }) {
   );
 
   const answer = (ok) => {
+    // item 21: haptic on destructive-confirm, per the documented rule (§4) --
+    // this dialog is used exclusively for destructive actions in this app
+    // (btnConfirm is hardcoded var(--ssw-wrong), never a neutral affirmative),
+    // so only the confirming tap buzzes, not cancel.
+    if (ok) haptic.wrong();
     state?.resolve(ok);
     setState(null);
   };

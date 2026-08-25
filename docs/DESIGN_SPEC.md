@@ -130,6 +130,45 @@ the full-screen mission-complete takeover. Local stacking contexts (e.g. `z-inde
 to lift one face above another) are relative to a parent, not app chrome, and stay off this scale —
 tokenizing those would be noise.
 
+**Motion and haptics (item 21, 2026-08-25).** Fourteen keyframes exist in `global.css` and
+`src/utils/haptic.js` defines five vibration patterns; neither had a stated rule for when each
+applies, which meant identical actions felt different depending on which mode you were in.
+
+*Timing:* `--t-fast` for state changes (a button's pressed state, a toggle), `--t-base` for
+entrances (a card sliding up, a screen fading in), `--t-slow` reserved for celebration (the mission-
+complete takeover). `correctFlash`/`wrongShake` are answer-feedback animations specifically — don't
+reach for them for anything else just because they're already defined.
+
+*Haptics:* `haptic.correct()` / `haptic.wrong()` on every answer-commit, app-wide — regardless of
+whether the mode renders its answer UI through the shared `OptionButton` or hand-rolls its own.
+Audited before writing this rule rather than assumed: `AngkaMode`, `DangerMode`, and `SimulasiMode`
+all hand-roll their own option buttons and had no haptic import at all — not a different pattern
+from the rest of the app, no pattern. Fixed to match `OptionButton`/`ConfusionMode`/`ProductionMode`/
+`QuizProduksiMode`/`DengarMode`, which already had this right. `haptic.tap()` is for neutral
+interaction feedback with no correct/wrong dimension (a rating tap in `RatingRow`, the audio-replay
+button in `DengarMode`). `haptic.flip()` is `FlipCard`'s own thing — a physical-feeling response to
+the flip gesture, not answer feedback, kept distinct on purpose. `haptic.wrong()` again on
+`ConfirmDialog`'s confirm button specifically (destructive-confirm) — reused rather than inventing a
+sixth pattern for a single call site; it wasn't wired to anything before this item, since
+`ConfirmDialog`'s own focus-trap work (item 15) didn't touch haptics. `haptic.success()` remains
+defined and unused — no per-mode inconsistency to reconcile (nothing calls it anywhere to be
+inconsistent with), and picking a first call site for it (milestone toasts? quiz completion?) is a
+product decision this item's audit-and-reconcile scope doesn't cover. Flagging rather than guessing.
+
+*Known gap, not reconciled this pass:* `correctFlash`/`wrongShake` — the visual counterpart to the
+haptic fix above — are wired into `OptionButton.module.css` only. The same seven hand-rolled modes
+that were missing haptics are also missing this animation on their own answer UI; each has bespoke
+option-button styling, so bringing all seven in line is a real per-file CSS pass, not a mechanical
+substitution like the haptic fix was. Scoped out of this item rather than done partially or rushed;
+a reasonable follow-up if the owner wants full visual parity, not just tactile.
+
+*JS-driven motion needs its own `prefers-reduced-motion` check* — a CSS rule can't reach an API
+called from JS. `BottomNav`'s View Transitions crossfade (`document.startViewTransition`) was the
+one instance of this in the app and had no such check; fixed (`window.matchMedia`). Worth
+remembering for any future JS-invoked animation (the Web Animations API, anything using
+`requestAnimationFrame` to drive motion) — the global catch-all in `global.css` only stops
+CSS-property-driven animation and transition, nothing invoked imperatively.
+
 ## 5. Icon system
 
 Two-tier, defined in `src/components/Icon.jsx`:

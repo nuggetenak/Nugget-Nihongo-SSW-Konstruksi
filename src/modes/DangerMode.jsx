@@ -7,6 +7,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
 import { getGrade } from '../styles/theme.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -199,6 +200,8 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
       if (selected !== null || phase !== 'playing') return;
       setSelected(idx);
       const isCorrect = idx === item.correctIdx;
+      if (isCorrect) haptic.correct();
+      else haptic.wrong();
       if (!isCorrect) {
         const key = `danger-${item.pair.term}`;
         recordWrong(key);

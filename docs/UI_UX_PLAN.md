@@ -1359,7 +1359,7 @@ phones show no keyboard hints.
 
 ---
 
-### ☐ 21. Motion and haptics consistency pass — `M`
+### ☑ 21. Motion and haptics consistency pass — `M`
 
 **What.** `global.css` defines nine keyframe animations and two easing tokens; `src/utils/haptic.js`
 is used in seven files. Neither has a stated rule for when it applies.

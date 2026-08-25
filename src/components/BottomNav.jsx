@@ -12,8 +12,12 @@ const TABS = [
 
 export default function BottomNav({ active, onChange, dueBadge = 0 }) {
   // View Transitions API — crossfade between tabs (progressive enhancement).
+  // item 21: this is JS-invoked, not a CSS animation/transition property, so
+  // global.css's prefers-reduced-motion catch-all can't reach it — needs its
+  // own check, same as the plan warns any JS-driven motion will.
   const handleTabChange = (newTab) => {
-    if (document.startViewTransition) {
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (document.startViewTransition && !reduceMotion) {
       document.startViewTransition(() => onChange(newTab));
     } else {
       onChange(newTab);

@@ -5,6 +5,7 @@ import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
+import { haptic } from '../utils/haptic.js';
 import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -273,6 +274,8 @@ function QuizView({ onBack, onSessionEnd }) {
       if (selected !== null || phase !== 'playing') return;
       setSelected(idx);
       const isCorrect = idx === item.correctIdx;
+      if (isCorrect) haptic.correct();
+      else haptic.wrong();
       const ns = isCorrect ? streak + 1 : 0;
       setStreak(ns);
       setMaxStreak((m) => Math.max(m, ns));

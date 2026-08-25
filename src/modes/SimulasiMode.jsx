@@ -10,6 +10,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
+import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import OptionButton from '../components/OptionButton.jsx';
@@ -194,6 +195,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       if (selected !== null || phase !== 'playing' || paused || !q) return;
       setSelected(optArrayIdx);
       const isCorrect = optArrayIdx === q.correctIdx;
+      if (isCorrect) haptic.correct();
+      else haptic.wrong();
       setResults((r) => [
         ...r,
         {
