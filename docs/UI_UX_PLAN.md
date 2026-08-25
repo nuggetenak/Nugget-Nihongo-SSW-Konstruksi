@@ -236,7 +236,125 @@ either works everywhere or is removed.
 
 ---
 
-## 4. P1 — Carried forward from the completed plan
+## 4. P1 — Offline asset integrity (audit wave 2, 2026-08-25)
+
+Wave 1 audited *screens*. This wave audited *assets* — what the app actually needs fetched, and
+what happens when it can't fetch. Both items below came out of the owner's question "what if we
+provide the fonts in the repo?", which turned out to be a better instinct than it looked.
+
+### ☐ 61. Fonts come from a third-party CDN the app can't guarantee — `M`
+
+**How it works today, verified** (`index.html:62–65`, `public/sw.js` fetch handler): all three
+families — DM Sans, Noto Sans JP, Syne — load from `fonts.googleapis.com` / `fonts.gstatic.com`.
+The service worker *does* handle them: cross-origin font requests hit a **cache-first** strategy
+into a dedicated `CACHE_FONTS`.
+
+**So offline works — but only after one successful online load.** That's the part worth being
+precise about, because it's easy to read the SW code and conclude "fonts are handled, we're fine".
+The failure cases that remain:
+
+- **First run on a blocked or captive network.** Install the PWA on site WiFi that blocks external
+  CDNs and the fonts never populate — the app runs indefinitely on system fallbacks. This is a
+  plausible scenario for the actual audience, not a hypothetical.
+- **Cache eviction.** `CACHE_FONTS` is evictable under storage pressure independently of the rest.
+  A cheap phone under pressure can silently lose fonts a returning user already had.
+- **Two extra origins on the critical path.** DNS + TLS to `googleapis` and `gstatic` before text
+  can render properly. `display=swap` prevents invisible text but guarantees a visible reflow
+  (FOUT) on every cold load — on 3G that's noticeable.
+
+**On the cookie question, directly: no — never cookies.** Cookies cap around 4KB, are text-only,
+and are sent with every single request; putting a font in one isn't possible or desirable. Font
+binaries live in two places: the browser's ordinary **HTTP cache** (opaque, evictable, not
+controllable) and the **Cache Storage API** — which is what the service worker uses, and the only
+one this app has actual control over. Self-hosting moves fonts from "cached if the CDN was
+reachable once" into "precached deliberately, same as any other app asset".
+
+**The real design constraint, and why this isn't a five-minute change.** Noto Sans JP is a CJK
+font — the full family is several megabytes. Google Fonts only gets away with serving it because
+it slices the font by `unicode-range` into dozens of subsets and the browser downloads only the
+slices it needs. **Naively self-hosting one big `.woff2` would balloon the offline payload**, in an
+app already carrying a flagged 661 kB data chunk and holding a hard 4-dependency line.
+
+**But this app is an unusually good fit for solving that properly:** the corpus is *fixed and
+known* — 1,438 cards, shipped in-repo, not user-generated. The exact set of glyphs the app can
+ever need is computable at build time. Subsetting Noto Sans JP to precisely that set (plus kana,
+punctuation, and the Latin/Indonesian range for DM Sans and Syne) should land far below the naive
+size, and unlike the CDN's generic slicing it would be exact.
+
+**How it fits.** Build-step subsetting, output to `public/fonts/`, `@font-face` with local `src`,
+drop the two `preconnect`s and the CDN `<link>`, add the files to `PRECACHE_URLS` (see item 62 —
+these two want doing together), and delete the now-dead Google Fonts branch from the SW fetch
+handler. Verify the tooling doesn't breach the dependency ceiling — a build-time devDependency is
+fine, a runtime one is not.
+
+**Care needed:** confirm licensing permits redistribution in-repo before committing binaries. All
+three families are SIL Open Font License, which does permit it, but check rather than assume, and
+include the license file alongside the fonts.
+
+**Done when.** No external font request on any load; fonts precached with the rest of the shell;
+measured payload delta recorded in the commit; `DESIGN_SPEC.md` §3 updated with the subsetting
+approach so a future session doesn't "fix" it back to a CDN.
+
+---
+
+### ☐ 62. `PRECACHE_URLS` has 2 entries; 21 lazy chunks aren't among them — `M`
+
+**Verified** (`public/sw.js:18–21`): `PRECACHE_URLS = [BASE + '/', BASE + '/index.html']`. That's
+it. Everything else — the main bundle, CSS, the icon sprite, and **every one of the 21
+lazy-loaded mode chunks** — is cached only opportunistically, when the fetch handler happens to
+see a request for it.
+
+**The consequence:** a learner who installs the app, lands on the dashboard, and then goes offline
+can open only the modes they had already visited *while online*. Everything else fails on a dead
+dynamic import. The app tells them, in `SideNav`'s footer, "konten siap offline" — item 25
+narrowed that copy to say *konten*, which is honest about the card data, but the modes that
+display it aren't guaranteed to be there.
+
+This is the same failure item 37 was about (a stale chunk stranding a session), from the opposite
+direction: not a *changed* chunk, an *absent* one. Item 38's error boundary will catch it and
+offer a reload, but a reload offline can't fix it either.
+
+**How it fits.** Vite emits a manifest at build time; generate `PRECACHE_URLS` from it rather than
+hand-listing (hand-listing hashed filenames guarantees drift). Weigh precaching *all* mode chunks
+against install cost on a metered connection — a reasonable middle path is precaching the shell
+plus the handful of high-traffic modes (`kartu`, `ulasan`, `kuis`) and leaving rarely-used ones
+opportunistic, which is a product call worth surfacing rather than deciding silently.
+
+Pairs naturally with item 61 — same file, same "what's guaranteed offline" question, one
+`CACHE_VERSION` bump between them.
+
+**Done when.** A fresh install that goes offline immediately can still open the core study modes;
+the precache list is generated, not hand-maintained; `PWA_RELEASE_SPEC.md` §2 documents what is
+and isn't guaranteed.
+
+---
+
+### ☐ 63. `GlossaryMode`'s A–Z jump bar is a 28×28px tap target — `S`
+
+**Verified** (`GlossaryMode.module.css:96–100`): `.azBtn` sets `min-width: 28px; height: 28px`
+explicitly. The project's own `--tap-min` token exists for this and isn't used here. 28px against
+a 44px guideline, on a control that is *by design* a row of small adjacent targets — the shape
+most likely to be mis-tapped, on a construction worker's phone, possibly with gloves.
+
+Narrow, real, and cheap. See §6 for why this is the *only* tap-target item.
+
+---
+
+### ☐ 64. `--ssw-onAmber` exists; 21 sites hardcode `#fff` instead — `S` — `P2`
+
+A token for "text sitting on a saturated brand surface" is defined in `theme.js` and mostly
+unused; `color: #fff` appears 21 times across `OfflineBanner`, `DataWarningBanner`,
+`ConfirmDialog`, `Dashboard`, `BelajarTab`, `Onboarding`, `MissionCompleteOverlay`.
+
+**Not a dark-mode bug** — checked, and every one of those sits on a fixed-colour background (the
+red warning banner, an amber gradient, a dark overlay) that is identical in both themes, so white
+stays correct. It's the same *class* of inconsistency item 40 addressed for correct/wrong: a
+semantic token exists and isn't the single source of truth. Low priority precisely because
+nothing is visibly broken — worth doing when already touching these files, not as its own errand.
+
+---
+
+## 5. P1 — Carried forward from the completed plan
 
 These were **deliberately deferred with reasons** in the archived plan, not missed. Reasons
 summarised; full context in `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`.
@@ -282,7 +400,7 @@ likewise still defined and unused (archived item 21) — a first call site is a 
 
 ---
 
-## 5. P2/P3 — Proposals, not findings
+## 6. P2/P3 — Proposals, not findings
 
 Explicitly speculative. Each is a suggestion the owner should accept or reject before any code is
 written — none of these is a bug, and building the wrong one is worse than building none.
@@ -320,9 +438,11 @@ actually tolerates before writing copy that promises more than it delivers.
 
 ---
 
-## 6. Checked — not bugs
+## 7. Checked — not bugs
 
-Recorded so these aren't re-investigated:
+Recorded so these aren't re-investigated. Several came out of wave 2 specifically because the
+first grep looked alarming and the actual code was fine — that gap between "grep count" and
+"real problem" is the thing worth writing down.
 
 - **`QuizShell` a11y** — correct. `sr-only` assertive region for answers, polite for progress.
   It's the model for item 45, not a target.
@@ -334,10 +454,21 @@ Recorded so these aren't re-investigated:
   Not a `ResultScreen` adoption target without extending that component first.
 - **`stripFuri` on quiz answer options** — plausibly deliberate (prevents giving away readings).
   Item 43 should confirm and document rather than "fix".
+- **Tap targets generally** — 12 stylesheets declare button classes without referencing
+  `--tap-min`, which reads like a systemic failure and isn't. Spot-measured the real ones:
+  `OptionButton .btn` is 14px padding + 13px/1.75 text ≈ **51px**; `ResultScreen .btnWrong`
+  ≈ **53px**. Both comfortably over 44px via padding alone. **Only `GlossaryMode`'s `.azBtn` sets
+  an explicit undersized height** — hence item 63 is one narrow item, not a sweep. Don't re-run
+  this as a blanket audit; measure before believing the token's absence means anything.
+- **Hardcoded `#fff` and dark mode** — 21 occurrences, all on fixed-colour backgrounds identical
+  in both themes. Not a theming bug. Tokenisation nit only; item 64.
+- **Service worker font handling** — the SW *does* cache-first Google Fonts into `CACHE_FONTS`.
+  Reading only that code suggests fonts are fully handled offline; item 61 exists because the
+  gap is the *first* load and eviction, not the caching strategy itself.
 
 ---
 
-## 7. Spec docs this plan may require updating
+## 8. Spec docs this plan may require updating
 
 Per the archived plan's §10 convention — update the spec **in the same commit** as the item.
 
@@ -349,21 +480,27 @@ Per the archived plan's §10 convention — update the spec **in the same commit
 | 49 | `constants.js` + spec | Shared quiz counts |
 | 50 | `DESIGN_SPEC.md` §4 | Closes the gap that item 21 explicitly recorded as open |
 | 53 | `DESIGN_SPEC.md` §3 | Replaces the recorded `rem` deferral |
+| 61 | `DESIGN_SPEC.md` §3 | Self-hosted + subset fonts; why not a CDN (so it isn't reverted) |
+| 61, 62 | `PWA_RELEASE_SPEC.md` §2 | What is actually guaranteed offline vs opportunistically cached |
 
 ---
 
-## 8. Suggested order
+## 9. Suggested order
 
 **Batch A (P0, highest value):** 43 → 44 — furigana consistency. Self-contained, immediately
 visible to the learner, and the owner-flagged issue.
 
 **Batch B (quiz core):** 45 → 46 → 49 — accessibility parity, shared results screen, shared
 constants. All the same files; doing them in one sitting avoids three passes over eight modes.
-50 folds in naturally here.
+50 folds in naturally here, and 63 is a one-liner to sweep up while nearby.
 
-**Batch C (bigger calls):** 47 → 48 — needs decisions, not just execution. Get owner input on
+**Batch C (offline integrity):** 61 → 62 — same file, same question, one `CACHE_VERSION` bump
+between them. Independent of A and B, so it can run in either order. 61 needs a licensing check
+and a build-step decision before code, so read it before scheduling.
+
+**Batch D (bigger calls):** 47 → 48 — needs decisions, not just execution. Get owner input on
 the mode-shape table and on deferred-feedback before starting.
 
-**Batch D (carried-over):** 51 → 54 → 52 — as capacity allows.
+**Batch E (carried-over):** 51 → 54 → 52 → 64 — as capacity allows.
 
 **Anytime:** 56–60 are proposals; none should start without an explicit yes.
