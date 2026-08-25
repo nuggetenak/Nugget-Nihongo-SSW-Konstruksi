@@ -205,6 +205,32 @@ remembering for any future JS-invoked animation (the Web Animations API, anythin
 `requestAnimationFrame` to drive motion) — the global catch-all in `global.css` only stops
 CSS-property-driven animation and transition, nothing invoked imperatively.
 
+**Landscape and reach (item 23, 2026-08-25).** Two related mobile-ergonomics rules, not yet stated
+anywhere before this.
+
+*Landscape is a height problem, not an orientation one.* `@media (max-height: 480px)`, not
+`(orientation: landscape)` — a height query also catches a small phone held normally, and correctly
+leaves a tall tablet alone even if some tablet somewhere reports landscape. Measured before
+touching anything, per the plan's own instruction: a landscape phone is roughly 360px tall; `.page`
+padding (24px), `ModeHeader` (padding + margin), and `FlipCard`'s 230px `min-height` alone summed
+past that before `RatingRow` was even counted — this wasn't a hypothetical, the card was already
+overflowing on paper. Compressed all three (`FlipCard.module.css`, `modes.module.css`'s `.page`,
+`ModeHeader.module.css`) at that breakpoint. Each override is appended after the rule it overrides
+in its file, not placed earlier — a media query earlier in a stylesheet than the base rule it's
+meant to override loses that rule in source order once the query matches, since both have equal
+specificity and CSS resolves ties by position, not by which one has a condition attached.
+
+*Reach: destructive/rare controls may live in the top third; frequent ones belong in the lower
+half where a thumb reaches one-handed.* `FlashcardMode` already follows this (bottom-anchored
+rating row) without ever stating it; stated now so it's a rule future modes can be checked against,
+not a pattern only visible by example. The one clear top-third *frequent* control in the app is
+`ModeHeader`'s back button (item 11) — but it already has two reach-free alternatives that satisfy
+the underlying need without requiring the reach at all: the hardware/gesture back button (item 10)
+and `Escape` (item 20's keyboard layer). The principle is about a *frequent action having some
+alternative to reaching the top third*, not about every top-positioned control needing to physically
+move — a back button with a working hardware-back equivalent already satisfies that without
+relocating anything.
+
 ## 5. Icon system
 
 Two-tier, defined in `src/components/Icon.jsx`:

@@ -71,3 +71,14 @@
 .titleIcon {
   flex-shrink: 0;
 }
+
+/* item 23: same landscape-height constraint as FlipCard.module.css -- see
+   that file's comment for the measurement. .header's own rule sets both
+   padding and margin-bottom; appended at end of file so this wins the
+   cascade on equal specificity. */
+@media (max-height: 480px) {
+  .header {
+    padding: 4px 16px;
+    margin-bottom: 8px;
+  }
+}

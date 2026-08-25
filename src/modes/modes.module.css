@@ -680,3 +680,12 @@
   font-size: var(--fs-caption);
   color: var(--ssw-textDim);
 }
+
+/* item 23: same landscape-height constraint as FlipCard.module.css — see
+   that file's comment for the measurement. Appended at end of file so it
+   wins the cascade over .page's own rule above on equal specificity. */
+@media (max-height: 480px) {
+  .page {
+    padding: 12px 16px;
+  }
+}

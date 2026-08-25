@@ -1408,7 +1408,7 @@ are pixel-identical to today; the rem question is either done or explicitly defe
 
 ---
 
-### ☐ 23. Landscape and one-handed reach — `M`
+### ☑ 23. Landscape and one-handed reach — `M`
 
 **What.** Two related mobile-ergonomics gaps: nothing handles landscape orientation, and primary
 actions sit at the top of tall screens.

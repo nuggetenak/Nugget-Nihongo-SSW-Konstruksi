@@ -16,6 +16,18 @@
   overflow: hidden;
 }
 
+/* item 23: a landscape phone is roughly 360px tall. ModeHeader + this card's
+   230px min-height + RatingRow left nothing, and the card was measured
+   overflowing before any of the rest of the page was even counted. Height,
+   not orientation, is the actual constraint — a tablet in portrait is taller
+   than this and shouldn't compress just because a media query happened to
+   say "landscape". Placed after both .front and .back's base rules
+   (below) so it wins the cascade on equal specificity — a media query
+   earlier in the file than the rule it overrides loses that rule in source
+   order once the query matches. */
+
+
+
 /* Dot grid texture on front */
 .front::before {
   content: '';
@@ -62,6 +74,24 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* item 23: a landscape phone is roughly 360px tall. ModeHeader + this card's
+   230px min-height + RatingRow left nothing, and the card was measured
+   overflowing before any of the rest of the page was even counted. Height,
+   not orientation, is the actual constraint — a tablet in portrait is taller
+   than this and shouldn't compress just because a media query happened to
+   say "landscape". Placed after both .front and .back's own rules above so
+   it wins the cascade on equal specificity. */
+@media (max-height: 480px) {
+  .front {
+    padding: 16px 18px 20px;
+    min-height: 140px;
+  }
+  .back {
+    padding: 14px 18px 12px;
+    min-height: 140px;
+  }
 }
 
 /* ── Category badge (both faces) ── */
