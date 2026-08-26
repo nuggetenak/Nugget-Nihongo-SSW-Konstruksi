@@ -41,65 +41,62 @@ update itself.
   `main` is untouched. `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump
   (`docs/PWA_RELEASE_SPEC.md` §5) — deliberately not done during branch work.
 
-- **The 38-item overhaul (2026-08-25) is old news now — full narrative retired to
-  `docs/archive/HANDOFF-ui-overhaul-38-items.md`.** Condensed pointer: `_MAP.md` § Agent
-  Session Log, 2026-08-25 row. Still true and worth keeping in mind: the amber identity is
-  locked, the hazard rail is reserved for time-sensitive/active state only, the flashcard's
-  height comes from a `ResizeObserver` in `FlipCard.jsx` and does not stretch (tried, reverted,
-  documented in `flashcard.module.css`), icons render as CSS masks not `<img>`.
+- **The 38-item overhaul (2026-08-25) is old news — full narrative in
+  `docs/archive/HANDOFF-ui-overhaul-38-items.md`.** Still true and worth keeping in mind: amber
+  identity locked, hazard rail reserved for time-sensitive/active state only, flashcard height
+  from `FlipCard.jsx`'s `ResizeObserver` (does not stretch, don't re-litigate), icons as CSS
+  masks not `<img>`.
 
-- **🟢 Batch A of the new plan (`docs/UI_UX_PLAN.md`) done — items 43, 44, 65, 3 commits
-  (`1419c2c`, `bfc678d`, `f650d55`), each verified via `npm run validate` before and after.
-  546/546 tests throughout, zero regressions.** This was the "ReviewMode is the poorer
-  relation of FlashcardMode" set — furigana policy, ruby rendering, swipe gestures — done as
-  one pass over one file, per the plan's own §10 suggested order.
+- **🟢 Batch A + Batch B of the new plan (`docs/UI_UX_PLAN.md`) both done — items 43, 44, 65,
+  45, 46, 57, 49, 50, 63. 9 commits total this session** (`1419c2c` `bfc678d` `f650d55` `e4d91dd`
+  `9de2834` `3d8a47b` `97e39a0` `cc939de`, plus the `0ada7fe` docs close-out between batches),
+  each verified via `npm run validate` before and after. **562/562 tests, up from 546 at the
+  start of this session. Nothing pushed to origin yet — all 9 commits are local.**
 
-  **Item 43** brought `furiganaPolicy` from 3 real consumers to every Japanese-rendering
-  surface. The plan named 15 non-compliant modes (14 fixed here, `ReviewMode` is item 44);
-  **2 more turned up in final verification that the plan's mode-scoped audit never caught**,
-  because they live in `src/components/`: `Dashboard.jsx`'s "recently studied" widget and
-  `SayaTab.jsx`'s daily-challenge question — both rendering raw `jp` with zero processing,
-  arguably the two most-seen instances of the bug in the whole app (home tab, settings tab).
-  Retired 3 local `showFuri` toggles (`JACMode`/`VocabMode`/`WaygroundMode`) that silently
-  overrode the global policy — setting `'hidden'` to drill didn't hide anything in those
-  three specifically until this fix. `QuizMode`'s named bug ("`'tap'` treated identically to
-  `'always'`") turned out architectural: fixed at the shared `QuizShell` level (also used by
-  `JACMode`/`VocabMode`/`WaygroundMode`), which was rendering plain text with no ruby at all
-  regardless of policy. Two decisions documented in `docs/COMPONENT_SPEC.md` §8.1 rather than
-  left implicit: answer options stay stripped (giveaway risk) but prompts and post-answer
-  review screens don't (nothing left to protect once graded); a handful of dense inline
-  labels stay stripped too, since `JpFront` computes its own font size with no override prop
-  and its minimum size breaks tight rows.
+  **Batch A** (ReviewMode/FlashcardMode parity: furigana policy, true ruby, swipe gestures) —
+  full detail in commits `1419c2c`/`bfc678d`/`f650d55` and `_MAP.md`'s session log; not
+  re-summarized here to avoid a third copy of the same reasoning.
 
-  **Item 44**: `ReviewMode` adopted `JpFront` the same way — same fix, own commit since it's
-  the specific thing the owner remembered. Bonus fix, same underlying bug: `ReviewMode`'s
-  *and* `FlipCard`'s (the reference component) pre-flip `aria-label`s were both building
-  their accessible name from raw, unstripped `jp`, so a screen reader announced literal
-  `《reading》` markup. Both fixed.
+  **Batch B** (quiz core, per the plan's own §10: "45 → 46 → 49, same files, one sitting; 50
+  folds in naturally; 63 is a one-liner to sweep up while nearby"):
 
-  **Item 65**: swipe ported from `FlashcardMode/index.jsx` to `ReviewMode` — read the actual
-  handler rather than assuming its shape first. Post-flip swipe maps directly to an FSRS
-  rating (up/left/right = Easy/Again/Good, same 60px/÷120 thresholds, same live drag-tilt
-  feedback), not just "reveal" as assumed going in. Pre-flip has no 1:1 port — `FlashcardMode`
-  swipes to navigate a free-browsing deck, `ReviewMode`'s FSRS queue has no "previous" concept
-  — so pre-flip swipe maps to flip instead. Deliberately not extracted into a shared hook
-  (the source is inline in a working, tested, out-of-scope file; duplicating the ~15 lines
-  felt safer than refactoring something nobody asked to touch). Scoped to flip-card surfaces
-  only, per the plan's own note that swipe next to tappable quiz options invites mis-fires.
+  - **Item 45**: screen-reader outcome announcements. The plan's premise was wrong, verified
+    before building anything — `QuizShell` didn't already have this (its two `aria-live`
+    regions are progress and timer, neither announces correct/wrong), so this wasn't an
+    extraction, it was new everywhere, including the four modes the plan called compliant. New
+    `QuizAnnouncer.jsx`. `SprintMode` deliberately excluded (self-assessment, no graded answer).
+  - **Item 46 + 57** (combined, per the plan's own recommendation): `ResultScreen` adopted by 6
+    more modes (`AngkaMode`, `DangerMode`, `ConfusionMode`, `DengarMode`, `ProductionMode`,
+    `QuizProduksiMode`). `SimulasiMode`/`SprintMode` deliberately excluded, documented at each
+    call site. Found and fixed a real regression from item 43 along the way — `ResultScreen`'s
+    review section was showing raw `《reading》` markup since the `QuizShell` question field
+    changed from stripped to raw. Fixed `VocabMode`'s missing `onRetryWrong` (root cause was
+    `ModeRouter.jsx`, not `VocabMode.jsx`). New `session-weakness.js` for item 57's drill
+    suggestion — opt-in, silently absent where a mode's data doesn't map to `CATEGORIES`
+    (verified per mode rather than assumed).
+  - **Item 49**: `QUIZ_COUNTS` deduplicated (`src/utils/constants.js`). Verified the plan's own
+    "check whether this actually works" ask and found a real bug: `prefs.quizQuestionCount` was
+    only read/written by `QuizMode` — the other three modes reset to 10 every session
+    regardless of what was picked. Fixed at all four.
+  - **Item 50**: `correctFlash`/`wrongShake` reach 4 modes, not the "eight" the plan (or even
+    `DESIGN_SPEC.md`'s own item-21 note, which said "seven") claimed — checked each mode's
+    actual shape rather than trusting either number. `SimulasiMode` already had it (uses
+    `OptionButton` directly), `ProductionMode`/`QuizProduksiMode` are free-text with a
+    differently-animated reveal panel, `SprintMode`'s colors are static not reactive.
+  - **Item 63**: `GlossaryMode`'s A-Z bar, 28px → `--tap-min` (44px). One-liner, exactly as
+    described.
 
-  **Noticed, not fixed, still true:** `standardizeFuri()` in `jp-helpers.js` is dead code now
-  (its last 3 call sites were `VocabMode`/`WaygroundMode`'s retired toggles) — small cleanup
-  candidate, not urgent. `--ssw-accentSoft` has an undefined-token fallback in
-  `AngkaMode.module.css:225` and `DangerMode.module.css:222` (pre-existing, `audit:css-vars`
-  flags it as non-blocking, neither file was touched by this batch). No new tests were added
-  for the policy threading itself — existing 546 tests all still pass unmodified, which is
-  real but partial coverage. Dedicated `furiganaPolicy` coverage, especially `QuizShell`'s
-  `'tap'` path, would be a reasonable small follow-up whenever a session has room for it.
+  **Noticed, not fixed, still true:** `standardizeFuri()` in `jp-helpers.js` is dead code
+  (item 43's retired toggles were its last callers). The 2 pre-existing `--ssw-accentSoft`
+  css-vars warnings (`AngkaMode.module.css:225`, `DangerMode.module.css:222`) are still there,
+  confirmed unrelated to anything touched this session. No new automated tests for item 45's
+  policy-threading equivalent — outcome announcement — beyond `QuizAnnouncer`'s own unit tests;
+  nothing exercises it through an actual mode yet.
 
-  **Next up: Batch B** per the plan's own §10 — items 45 (a11y announcements) → 46
-  (`ResultScreen` adoption) → 49 (shared quiz counts), with 50 and 63 folded in since the
-  plan flags them as touching the same files. Nothing started.
-
+  **Next up: Batch C or D** per the plan's own §10 — **C** (61 → 62, offline asset integrity,
+  independent of A/B, 61 needs a licensing check before code) or **D** (47 → 48, needs owner
+  decisions on the mode-shape table and deferred-feedback before starting — not a session to
+  just start executing). Owner's call which.
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
