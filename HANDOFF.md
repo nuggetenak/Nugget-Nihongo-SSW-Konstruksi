@@ -37,66 +37,65 @@ content into this file.
 **As of this edit, 2026-08-26.** Verify before trusting past this point — this line doesn't
 update itself.
 
-- **Branch `feat/ui-overhaul`, still NOT merged to `main`** — that remains the owner's call.
-  `main` is untouched. `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump
-  (`docs/PWA_RELEASE_SPEC.md` §5) — deliberately not done during branch work.
+- **Branch `feat/ui-overhaul`, still NOT merged to `main`** — owner's call. `main` untouched.
+  `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump — deliberately not done
+  during branch work, per the standing rule, even though items 61/62 touched this file heavily.
 
-- **The 38-item overhaul (2026-08-25) is old news — full narrative in
-  `docs/archive/HANDOFF-ui-overhaul-38-items.md`.** Still true and worth keeping in mind: amber
-  identity locked, hazard rail reserved for time-sensitive/active state only, flashcard height
-  from `FlipCard.jsx`'s `ResizeObserver` (does not stretch, don't re-litigate), icons as CSS
-  masks not `<img>`.
+- **🟢 Batches A, B, C of the new plan all done — items 43,44,65 / 45,46,57,49,50,63 /
+  61,62. 12 commits total this session, 562/562 tests, zero regressions.** Older two batches'
+  full detail: commits + `_MAP.md`'s session log (not re-summarized here each time — see that
+  log's own 2026-08-26 rows).
 
-- **🟢 Batch A + Batch B of the new plan (`docs/UI_UX_PLAN.md`) both done — items 43, 44, 65,
-  45, 46, 57, 49, 50, 63. 9 commits total this session** (`1419c2c` `bfc678d` `f650d55` `e4d91dd`
-  `9de2834` `3d8a47b` `97e39a0` `cc939de`, plus the `0ada7fe` docs close-out between batches),
-  each verified via `npm run validate` before and after. **562/562 tests, up from 546 at the
-  start of this session. Nothing pushed to origin yet — all 9 commits are local.**
+  **Batch C (`61`+`62`, combined per the plan's own "these two want doing together"):**
+  self-hosted, subsetted fonts replacing the Google Fonts CDN, plus generated (not
+  hand-written) `PRECACHE_URLS`. The heaviest single item this session — genuine build
+  infrastructure, not a JSX/CSS fix, so it got a correspondingly heavier verification pass:
 
-  **Batch A** (ReviewMode/FlashcardMode parity: furigana policy, true ruby, swipe gestures) —
-  full detail in commits `1419c2c`/`bfc678d`/`f650d55` and `_MAP.md`'s session log; not
-  re-summarized here to avoid a third copy of the same reasoning.
+  - Licensing (the plan's own "check rather than assume" ask): confirmed SIL OFL 1.1 for all
+    three families against each project's own repo and the fonts' own embedded copyright
+    metadata, not assumed from "most Google Fonts are OFL."
+  - Character-set extraction needed two corrections before it was trustworthy: scoping to
+    `cards.js` alone missed real content in `confusion-pairs.js`/`danger-pairs.js`/
+    `angka-kunci.js`/the JAC and Wayground sets (990 chars found → 1,327 once broadened);
+    classifying by Unicode block instead of by which field a character came from put Greek
+    letters used in real construction/electrical notation (Φ, inside actual `jp` fields) in
+    the wrong font's subset.
+  - Found, not fixed (flagged in `DESIGN_SPEC.md` §3): 70 wayground data files use Kangxi
+    Radical codepoints instead of the correct CJK ideographs for a few characters (visually
+    identical, semantically wrong); one card has a Cyrillic а/р typo in Indonesian text.
+  - Final check was subset-vs-source-font coverage, not a blind "does my list match" — catches
+    real subsetting bugs without false-flagging glyphs (mostly emoji) no plain text webfont
+    ever had. Result: **zero characters dropped**, both variable weight axes intact.
+  - **1.44 MB total, a 92% reduction vs. naively self-hosting the full unsubsetted families
+    (18.11 MB)** — confirms the plan's own hypothesis that this app's fixed corpus is a good
+    fit for exact subsetting.
+  - New `scripts/generate-precache.mjs`, runs as `postbuild`, reads Vite's real manifest
+    (`manifest: true` added to `vite.config.js`). Precache scope decided per the plan's own
+    suggested middle path (surfaced, not silently picked): shell + the 3 highest-traffic modes
+    (`kartu`/`ulasan`/`kuis`) + their full dependency chains + the 6 font files = 38 entries.
+    Not all 21 modes — traded against install size for the metered-connection audience.
 
-  **Batch B** (quiz core, per the plan's own §10: "45 → 46 → 49, same files, one sitting; 50
-  folds in naturally; 63 is a one-liner to sweep up while nearby"):
+  **Noticed, not fixed, still true:** `standardizeFuri()` still dead code. The 2 pre-existing
+  `--ssw-accentSoft` css-vars warnings, still there, still unrelated. No automated test for
+  `generate-precache.mjs` itself (would need to mock Vite's build system or run real builds in
+  the test suite) — verified manually via an actual clean build + file-existence check instead,
+  documented as a known gap in `PWA_RELEASE_SPEC.md` §2 rather than left silent.
 
-  - **Item 45**: screen-reader outcome announcements. The plan's premise was wrong, verified
-    before building anything — `QuizShell` didn't already have this (its two `aria-live`
-    regions are progress and timer, neither announces correct/wrong), so this wasn't an
-    extraction, it was new everywhere, including the four modes the plan called compliant. New
-    `QuizAnnouncer.jsx`. `SprintMode` deliberately excluded (self-assessment, no graded answer).
-  - **Item 46 + 57** (combined, per the plan's own recommendation): `ResultScreen` adopted by 6
-    more modes (`AngkaMode`, `DangerMode`, `ConfusionMode`, `DengarMode`, `ProductionMode`,
-    `QuizProduksiMode`). `SimulasiMode`/`SprintMode` deliberately excluded, documented at each
-    call site. Found and fixed a real regression from item 43 along the way — `ResultScreen`'s
-    review section was showing raw `《reading》` markup since the `QuizShell` question field
-    changed from stripped to raw. Fixed `VocabMode`'s missing `onRetryWrong` (root cause was
-    `ModeRouter.jsx`, not `VocabMode.jsx`). New `session-weakness.js` for item 57's drill
-    suggestion — opt-in, silently absent where a mode's data doesn't map to `CATEGORIES`
-    (verified per mode rather than assumed).
-  - **Item 49**: `QUIZ_COUNTS` deduplicated (`src/utils/constants.js`). Verified the plan's own
-    "check whether this actually works" ask and found a real bug: `prefs.quizQuestionCount` was
-    only read/written by `QuizMode` — the other three modes reset to 10 every session
-    regardless of what was picked. Fixed at all four.
-  - **Item 50**: `correctFlash`/`wrongShake` reach 4 modes, not the "eight" the plan (or even
-    `DESIGN_SPEC.md`'s own item-21 note, which said "seven") claimed — checked each mode's
-    actual shape rather than trusting either number. `SimulasiMode` already had it (uses
-    `OptionButton` directly), `ProductionMode`/`QuizProduksiMode` are free-text with a
-    differently-animated reveal panel, `SprintMode`'s colors are static not reactive.
-  - **Item 63**: `GlossaryMode`'s A-Z bar, 28px → `--tap-min` (44px). One-liner, exactly as
-    described.
+- **🟡 Batch D (items 47, 48) — investigated, NOT executed. Needs owner decisions the plan
+  itself flags as needed before code, not something to guess and build.** Full context and the
+  specific questions are in this session's chat, not repeated here — summary: item 47 wants an
+  actual mode-shape → feature definition (what should `pause`/`keyboard`/`SRS-rating` mean for
+  each mode shape, not just what each mode currently happens to have); item 48 wants
+  `SimulasiMode` redesigned from immediate-advance to free-navigate-then-submit, which the plan
+  itself says interacts with item 51 (not yet built) — building 48 first would make the
+  already-tracked mid-session-loss problem worse until 51 also lands, so the sequencing itself
+  is part of what needs deciding. Re-verified the feature matrix against current code before
+  presenting this (it drifted since the plan was written — this session's own Batch B work gave
+  `DengarMode`/`ProductionMode`/`QuizProduksiMode` real `cardId` linkage that item 47's original
+  audit didn't have).
 
-  **Noticed, not fixed, still true:** `standardizeFuri()` in `jp-helpers.js` is dead code
-  (item 43's retired toggles were its last callers). The 2 pre-existing `--ssw-accentSoft`
-  css-vars warnings (`AngkaMode.module.css:225`, `DangerMode.module.css:222`) are still there,
-  confirmed unrelated to anything touched this session. No new automated tests for item 45's
-  policy-threading equivalent — outcome announcement — beyond `QuizAnnouncer`'s own unit tests;
-  nothing exercises it through an actual mode yet.
-
-  **Next up: Batch C or D** per the plan's own §10 — **C** (61 → 62, offline asset integrity,
-  independent of A/B, 61 needs a licensing check before code) or **D** (47 → 48, needs owner
-  decisions on the mode-shape table and deferred-feedback before starting — not a session to
-  just start executing). Owner's call which.
+  **Next up:** whichever of 47/48 the owner has direction on, or Batch E/F (carried-over polish
+  / approved enhancements) if D stays parked. Nothing in D started in code.
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
