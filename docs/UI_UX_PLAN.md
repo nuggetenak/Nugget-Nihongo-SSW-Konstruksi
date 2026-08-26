@@ -404,7 +404,7 @@ solved then. Low user impact; listed so it isn't rediscovered as new.
 font-size preference. Touches ~89 stylesheets and interacts with `em`-based ruby and
 `jpFontSize()`'s own ladder. Genuine accessibility win for older users; genuinely large.
 
-### ☐ 54. `speakJP()`'s `onError` is wired in one of six call sites — `S`
+### ☑ 54. `speakJP()`'s `onError` is wired in one of six call sites — `S`
 *(archived item 25's stated scope)* Only `DengarMode` reports a synthesis failure. The other five
 (`QuizShell`, `ProductionMode`, `GlossaryMode`, `ReviewMode`, `QuizProduksiMode`) still fail
 silently. Lower stakes there (audio is supplementary, not the exercise), which is why it was

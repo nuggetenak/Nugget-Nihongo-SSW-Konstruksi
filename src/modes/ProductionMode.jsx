@@ -7,6 +7,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { JpFront } from '../components/JpDisplay.jsx';
@@ -51,6 +52,7 @@ export default function ProductionMode({
   audioEnabled = false,
 }) {
   const { prefs, setPref } = useApp();
+  const handleSpeakError = useSpeakErrorHandler();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
   const [count, setCount] = useState(() => prefs?.quizQuestionCount ?? 10);
@@ -94,12 +96,12 @@ export default function ProductionMode({
     }
 
     if (audioEnabled && canSpeak()) {
-      speakJP(stripFuri(card.jp));
+      speakJP(stripFuri(card.jp), { onError: handleSpeakError });
     }
 
     setResults((r) => [...r, { card, input: input.trim(), correct }]);
     setPhase('revealed');
-  }, [phase, card, input, audioEnabled, recordWrong]);
+  }, [phase, card, input, audioEnabled, recordWrong, handleSpeakError]);
 
   const handleNext = useCallback(() => {
     if (isLast) {
@@ -430,7 +432,7 @@ export default function ProductionMode({
 
           {audioEnabled && canSpeak() && (
             <button
-              onClick={() => speakJP(stripFuri(card.jp))}
+              onClick={() => speakJP(stripFuri(card.jp), { onError: handleSpeakError })}
               style={{
                 marginTop: 8,
                 background: 'none',

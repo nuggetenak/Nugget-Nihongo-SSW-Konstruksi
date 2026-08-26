@@ -13,6 +13,7 @@ import { fmtInterval } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
 import { get as storageGet } from '../storage/engine.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -26,6 +27,7 @@ const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 
 export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const { prefs } = useApp();
+  const handleSpeakError = useSpeakErrorHandler();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
@@ -68,7 +70,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     const audioEnabled = prefs.audioEnabled !== false;
     const speakOnFlip = prefs.speakOnFlip === true;
     if (!audioEnabled || !currentCard || !canSpeak() || speakOnFlip) return;
-    const t = setTimeout(() => speakJP(stripFuri(currentCard.jp)), 300);
+    const t = setTimeout(() => speakJP(stripFuri(currentCard.jp), { onError: handleSpeakError }), 300);
     return () => clearTimeout(t);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -78,7 +80,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     const audioEnabled = prefs.audioEnabled !== false;
     const speakOnFlip = prefs.speakOnFlip === true;
     if (!audioEnabled || !flipped || !currentCard || !canSpeak() || !speakOnFlip) return;
-    speakJP(stripFuri(currentCard.jp));
+    speakJP(stripFuri(currentCard.jp), { onError: handleSpeakError });
   }, [flipped]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Skip card without rating — advance to next without SRS review.
@@ -233,7 +235,11 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {audioEnabled && (
-            <button onClick={() => speakJP(clean)} aria-label="Putar audio" className={R.audioBtn}>
+            <button
+              onClick={() => speakJP(clean, { onError: handleSpeakError })}
+              aria-label="Putar audio"
+              className={R.audioBtn}
+            >
               🔊
             </button>
           )}

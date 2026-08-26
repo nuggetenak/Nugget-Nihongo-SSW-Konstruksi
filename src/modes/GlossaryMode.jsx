@@ -13,12 +13,14 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import { get as storageGet } from '../storage/engine.js';
 import { formatCount } from '../utils/format.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
 export default function GlossaryMode({ onExit, track }) {
   const { prefs } = useApp();
+  const handleSpeakError = useSpeakErrorHandler();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [filterCat, setFilterCat] = useState('all');
   const [showAllTracks, setShowAllTracks] = useState(false);
@@ -363,7 +365,7 @@ export default function GlossaryMode({ onExit, track }) {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              speakJP(stripFuri(c.jp));
+                              speakJP(stripFuri(c.jp), { onError: handleSpeakError });
                             }}
                             aria-label="Putar audio"
                             style={{

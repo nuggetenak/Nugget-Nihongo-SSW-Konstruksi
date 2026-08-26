@@ -12,6 +12,7 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -50,6 +51,7 @@ export default function QuizProduksiMode({
   audioEnabled = false,
 }) {
   const { prefs, setPref } = useApp();
+  const handleSpeakError = useSpeakErrorHandler();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
   const [count, setCount] = useState(() => prefs?.quizQuestionCount ?? 10);
@@ -94,12 +96,12 @@ export default function QuizProduksiMode({
     }
 
     if (audioEnabled && canSpeak()) {
-      speakJP(stripFuri(card.jp));
+      speakJP(stripFuri(card.jp), { onError: handleSpeakError });
     }
 
     setResults((r) => [...r, { card, input: input.trim(), correct }]);
     setPhase('revealed');
-  }, [phase, card, input, audioEnabled, recordWrong]);
+  }, [phase, card, input, audioEnabled, recordWrong, handleSpeakError]);
 
   const handleNext = useCallback(() => {
     if (isLast) {
@@ -323,7 +325,7 @@ export default function QuizProduksiMode({
         <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
         {audioEnabled && canSpeak() && (
           <button
-            onClick={() => speakJP(stripFuri(card.jp))}
+            onClick={() => speakJP(stripFuri(card.jp), { onError: handleSpeakError })}
             style={{
               marginTop: 10,
               background: 'none',

@@ -16,6 +16,7 @@ import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
 import QuizAnnouncer from './QuizAnnouncer.jsx';
 import { saveQuizSnapshot, clearQuizSnapshot } from '../utils/quiz-persistence.js';
+import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import S from './QuizShell.module.css';
 
 export default function QuizShell({
@@ -44,6 +45,7 @@ export default function QuizShell({
   const [timeLeft, setTimeLeft] = useState(timer);
   const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
   const { toast, prefs } = useApp();
+  const handleSpeakError = useSpeakErrorHandler();
   const { getDurationMs } = useSessionTimer();
 
   const q = questions[qIdx];
@@ -240,7 +242,7 @@ export default function QuizShell({
         {audioEnabled && canSpeak() && (
           <button
             className={S.btnAudio}
-            onClick={() => speakJP(stripFuri(q.question))}
+            onClick={() => speakJP(stripFuri(q.question), { onError: handleSpeakError })}
             aria-label="Putar audio"
           >
             🔊 Dengar
