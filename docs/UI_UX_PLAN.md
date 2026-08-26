@@ -330,7 +330,7 @@ and isn't guaranteed.
 
 ---
 
-### ☐ 63. `GlossaryMode`'s A–Z jump bar is a 28×28px tap target — `S`
+### ☑ 63. `GlossaryMode`'s A–Z jump bar is a 28×28px tap target — `S`
 
 **Verified** (`GlossaryMode.module.css:96–100`): `.azBtn` sets `min-width: 28px; height: 28px`
 explicitly. The project's own `--tap-min` token exists for this and isn't used here. 28px against
