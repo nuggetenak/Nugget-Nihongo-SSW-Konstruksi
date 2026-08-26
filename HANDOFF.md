@@ -39,63 +39,68 @@ update itself.
 
 - **Branch `feat/ui-overhaul`, still NOT merged to `main`** — owner's call. `main` untouched.
   `CACHE_VERSION` in `public/sw.js` still needs its pre-deploy bump — deliberately not done
-  during branch work, per the standing rule, even though items 61/62 touched this file heavily.
+  during branch work, including through items 61/62 which touched that file heavily.
 
-- **🟢 Batches A, B, C of the new plan all done — items 43,44,65 / 45,46,57,49,50,63 /
-  61,62. 12 commits total this session, 562/562 tests, zero regressions.** Older two batches'
-  full detail: commits + `_MAP.md`'s session log (not re-summarized here each time — see that
-  log's own 2026-08-26 rows).
+- **The 38-item overhaul (2026-08-25) is old news — full narrative in
+  `docs/archive/HANDOFF-ui-overhaul-38-items.md`.** Still true: amber identity locked, hazard
+  rail reserved for time-sensitive/active state only, flashcard height from `FlipCard.jsx`'s
+  `ResizeObserver` (don't re-litigate), icons as CSS masks not `<img>`.
 
-  **Batch C (`61`+`62`, combined per the plan's own "these two want doing together"):**
-  self-hosted, subsetted fonts replacing the Google Fonts CDN, plus generated (not
-  hand-written) `PRECACHE_URLS`. The heaviest single item this session — genuine build
-  infrastructure, not a JSX/CSS fix, so it got a correspondingly heavier verification pass:
+- **🟢 Batches A through E of the new plan (`docs/UI_UX_PLAN.md`) all done — items 43, 44, 65,
+  45, 46, 57, 49, 50, 63, 47, 48, 51, 52, 54, 64. 21 commits total this session, 581/581 tests
+  (up from 546 at the start), zero regressions.** Only Batch F remains (60, 56, 58, 59 — 57
+  already shipped in Batch B).
 
-  - Licensing (the plan's own "check rather than assume" ask): confirmed SIL OFL 1.1 for all
-    three families against each project's own repo and the fonts' own embedded copyright
-    metadata, not assumed from "most Google Fonts are OFL."
-  - Character-set extraction needed two corrections before it was trustworthy: scoping to
-    `cards.js` alone missed real content in `confusion-pairs.js`/`danger-pairs.js`/
-    `angka-kunci.js`/the JAC and Wayground sets (990 chars found → 1,327 once broadened);
-    classifying by Unicode block instead of by which field a character came from put Greek
-    letters used in real construction/electrical notation (Φ, inside actual `jp` fields) in
-    the wrong font's subset.
-  - Found, not fixed (flagged in `DESIGN_SPEC.md` §3): 70 wayground data files use Kangxi
-    Radical codepoints instead of the correct CJK ideographs for a few characters (visually
-    identical, semantically wrong); one card has a Cyrillic а/р typo in Indonesian text.
-  - Final check was subset-vs-source-font coverage, not a blind "does my list match" — catches
-    real subsetting bugs without false-flagging glyphs (mostly emoji) no plain text webfont
-    ever had. Result: **zero characters dropped**, both variable weight axes intact.
-  - **1.44 MB total, a 92% reduction vs. naively self-hosting the full unsubsetted families
-    (18.11 MB)** — confirms the plan's own hypothesis that this app's fixed corpus is a good
-    fit for exact subsetting.
-  - New `scripts/generate-precache.mjs`, runs as `postbuild`, reads Vite's real manifest
-    (`manifest: true` added to `vite.config.js`). Precache scope decided per the plan's own
-    suggested middle path (surfaced, not silently picked): shell + the 3 highest-traffic modes
-    (`kartu`/`ulasan`/`kuis`) + their full dependency chains + the 6 font files = 38 entries.
-    Not all 21 modes — traded against install size for the metered-connection audience.
+  **Batches A–C** (43,44,65 / 45,46,57,49,50,63 / 61,62): full detail in their own commits and
+  `_MAP.md`'s earlier rows for this date — not re-summarized again here.
 
-  **Noticed, not fixed, still true:** `standardizeFuri()` still dead code. The 2 pre-existing
-  `--ssw-accentSoft` css-vars warnings, still there, still unrelated. No automated test for
-  `generate-precache.mjs` itself (would need to mock Vite's build system or run real builds in
-  the test suite) — verified manually via an actual clean build + file-existence check instead,
-  documented as a known gap in `PWA_RELEASE_SPEC.md` §2 rather than left silent.
+  **Batch D** (47 → 48) — the owner explicitly delegated both decisions ("do the judgment
+  call") rather than this staying blocked. Item 47: defined a mode-shape → feature matrix
+  (`COMPONENT_SPEC.md` §12) rather than chasing per-mode parity; closed one gap
+  (`DengarMode`'s missing keyboard support). Item 48: `SimulasiMode` redesigned from
+  immediate-advance to free-navigate-then-submit, matching a real exam. Reconsidered the
+  plan's own "interacts with item 51, decide the order" caution rather than just repeating it —
+  split "deferred scoring" into deferred-*saving* (still genuinely risky, still item 51's job)
+  and deferred-*feedback-display* (not risky, buildable now), so this didn't need to wait after
+  all. Scoring extracted to a pure, tested function (`simulasi-scoring.js`) since a subtle bug
+  there wouldn't just look wrong, it would misstate someone's real exam readiness.
 
-- **🟡 Batch D (items 47, 48) — investigated, NOT executed. Needs owner decisions the plan
-  itself flags as needed before code, not something to guess and build.** Full context and the
-  specific questions are in this session's chat, not repeated here — summary: item 47 wants an
-  actual mode-shape → feature definition (what should `pause`/`keyboard`/`SRS-rating` mean for
-  each mode shape, not just what each mode currently happens to have); item 48 wants
-  `SimulasiMode` redesigned from immediate-advance to free-navigate-then-submit, which the plan
-  itself says interacts with item 51 (not yet built) — building 48 first would make the
-  already-tracked mid-session-loss problem worse until 51 also lands, so the sequencing itself
-  is part of what needs deciding. Re-verified the feature matrix against current code before
-  presenting this (it drifted since the plan was written — this session's own Batch B work gave
-  `DengarMode`/`ProductionMode`/`QuizProduksiMode` real `cardId` linkage that item 47's original
-  audit didn't have).
+  **Batch E** (51 → 54 → 52 → 64, no decisions needed per the plan) — the batch that found the
+  most real, unplanned complexity:
+  - **51**: mid-quiz persistence. New `quiz-persistence.js` (moved out of `src/hooks/` once I
+    noticed it wasn't actually a hook — no `useState`/`useEffect` inside). `QuizMode` is the
+    reference implementation, not full coverage — a resume needs the *exact question set*
+    restored, not just progress markers against a freshly re-randomized quiz, and getting that
+    right took real care even once. `JACMode`/`VocabMode`/`WaygroundMode` + hand-rolled modes
+    are a documented same-pattern follow-up, not attempted here.
+  - **54**: `speakJP` onError wired at the 5 missing call sites via a new shared hook,
+    extracted from `DengarMode`'s existing pattern. Deliberately did NOT refactor `DengarMode`
+    onto it (it has a session-reset nuance the shared hook doesn't expose) — touching
+    already-correct code for a cosmetic win wasn't worth the risk.
+  - **52**: in-app exit now pops the history entry. The plan's stated blocker turned out
+    already solved (`isPopRef`) — just never used to *initiate* a pop, only to react to one.
+    **Caught a real regression via the full test suite, not review**: the first design made the
+    visible state update depend on `history.back()`'s async popstate, which broke an existing,
+    unrelated test (`global-keyboard.test.jsx`). Redesigned so the direct state change always
+    happens synchronously; popping the browser entry is now purely additive. Also fixed a
+    pre-existing bug found along the way: `modeParams` was never cleared on any popstate, not
+    even the original hardware-back path.
+  - **64**: the plan's "21 sites" turned out to be genuinely overstated — verified count is 1
+    real fix, 11 correctly-already-white, 2 on an amber-*gradient* (deliberately not touched —
+    the token's dark value likely has poor contrast against the gradient's darker stop, would
+    need its own check), 1 unrelated finding flagged separately.
 
-  **Next up:** whichever of 47/48 the owner has direction on, or Batch E/F (carried-over polish
-  / approved enhancements) if D stays parked. Nothing in D started in code.
+  **Noticed, not fixed, still open:** `Onboarding.module.css`'s active track-label turns text
+  white without the background actually changing for that state (item 64's tangent). The
+  amber-gradient contrast question (`Dashboard`/`Onboarding`) is unresolved, not just deferred
+  silently. Item 52's async history.back()/replaceState interaction is reasoned through as safe
+  but not verified on a real device — worth a first real-device check before merge.
+
+  **Next up: Batch F** (60 → 56 → 58 → 59, per the plan's own suggested order) — 56 and 58 each
+  have their own open decision (a band vs. percentage for 56, already effectively pre-decided by
+  the plan's own strong recommendation; an FSRS-rating-model question for 58, genuinely open).
+  59 is explicitly gated on measuring the combined 61+59 payload first, and the plan is clear
+  that "the budget can't hold it" is a legitimate outcome, not a failure to work around.
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
