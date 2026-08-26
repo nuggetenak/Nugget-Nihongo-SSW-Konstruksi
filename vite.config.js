@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    manifest: true,
     rollupOptions: {
       output: {
         manualChunks: {

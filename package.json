@@ -20,7 +20,8 @@
     "audit:integrity": "node scripts/audit-integrity.mjs",
     "audit:css-vars": "node scripts/audit-css-vars.mjs",
     "audit:full": "npm run audit:integrity && npm run audit:css-vars && npm run build",
-    "prebuild": "node scripts/merge-cards.mjs && node scripts/validate-data.mjs"
+    "prebuild": "node scripts/merge-cards.mjs && node scripts/validate-data.mjs",
+    "postbuild": "node scripts/generate-precache.mjs"
   },
   "dependencies": {
     "lz-string": "^1.5.0",

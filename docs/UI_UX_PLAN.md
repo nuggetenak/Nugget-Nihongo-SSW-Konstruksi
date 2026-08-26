@@ -243,7 +243,7 @@ Wave 1 audited *screens*. This wave audited *assets* — what the app actually n
 what happens when it can't fetch. Both items below came out of the owner's question "what if we
 provide the fonts in the repo?", which turned out to be a better instinct than it looked.
 
-### ☐ 61. Fonts come from a third-party CDN the app can't guarantee — `M`
+### ☑ 61. Fonts come from a third-party CDN the app can't guarantee — `M`
 
 **How it works today, verified** (`index.html:62–65`, `public/sw.js` fetch handler): all three
 families — DM Sans, Noto Sans JP, Syne — load from `fonts.googleapis.com` / `fonts.gstatic.com`.
@@ -298,7 +298,7 @@ approach so a future session doesn't "fix" it back to a CDN.
 
 ---
 
-### ☐ 62. `PRECACHE_URLS` has 2 entries; 21 lazy chunks aren't among them — `M`
+### ☑ 62. `PRECACHE_URLS` has 2 entries; 21 lazy chunks aren't among them — `M`
 
 **Verified** (`public/sw.js:18–21`): `PRECACHE_URLS = [BASE + '/', BASE + '/index.html']`. That's
 it. Everything else — the main bundle, CSS, the icon sprite, and **every one of the 21

@@ -139,6 +139,59 @@ typography this item already had to be careful with (ruby sized in `em`, `jpFont
 ladder) means a `rem` pass would need the same care multiplied across every consumer, not a
 mechanical find-and-replace. A real future item, not a dropped one.
 
+**Self-hosted, subsetted fonts (item 61, 2026-08-26).** All three families used to load from
+`fonts.googleapis.com`/`fonts.gstatic.com`. Verified before changing anything: all three (DM Sans,
+Noto Sans JP, Syne) are SIL Open Font License 1.1, confirmed against each project's own repository
+and the copyright notice embedded in the font files themselves (not assumed from "most Google
+Fonts are OFL") — OFL explicitly permits subsetting under its MODIFICATION clause. Attribution and
+the full license text: `public/fonts/LICENSE.txt`.
+
+**Why self-host at all, and why this app is a good fit for it.** A CDN font only reaches the cache
+after one successful online load — first run on a network that blocks external CDNs, or ordinary
+`CACHE_FONTS` eviction under storage pressure, means the app falls back to system fonts
+indefinitely. Naively self-hosting the full families would have made this worse, not better: Noto
+Sans JP's full glyph set alone is multiple megabytes, and Google Fonts only avoids shipping all of
+it by slicing dynamically per request. But this app's Japanese content is fixed and known — 1,438
+cards, shipped in-repo — so the exact glyph set it can ever need is computable, unlike a
+general-purpose site.
+
+**How the subset was built, and verified — not just assumed to work.** Every `.js` export in
+`src/data/` was walked (not just `cards.js` — the first pass, scoped to just that file, would have
+missed real content in `confusion-pairs.js`/`danger-pairs.js`/`angka-kunci.js`/the JAC and Wayground
+sets, caught by broadening the scan and finding 1,327 unique JP-range characters where `cards.js`
+alone only had 990). Refined to a second pass classifying by *which field* a character came from
+(`jp` vs. everything else) rather than only its Unicode block, after the first pass's block-based
+split put Greek letters used for real construction/electrical notation (Φ for pipe diameter, seen
+inside actual `jp` field content) into the wrong font's subset. Padded with a safety margin (full
+hiragana/katakana, CJK punctuation, halfwidth/fullwidth forms, circled numbers) as insurance
+against the regex-based literal extraction missing something built via string interpolation. Two
+unrelated, pre-existing data bugs turned up during this process and are *not* fixed here (out of
+scope for a font item) but are flagged: 70 files in `src/data/sets/wayground/` use Kangxi Radical
+codepoints (e.g. `⽅`, U+2F8D) instead of the correct CJK ideograph (`方`, U+65B9) for a handful of
+characters — visually near-identical, semantically wrong; and one card's `usage` field has a
+Cyrillic а/р typo'd into "gamb**а****р**kan" (should be Latin). Both codepoint ranges are covered in
+the font subset regardless, so the existing bugs still render correctly rather than as missing-
+glyph boxes — fixing the underlying data is a separate, small future item.
+
+Final verification was against each *source* font's own actual coverage, not a blind character-
+count check: comparing subsetted-font coverage to source-font coverage catches only genuine
+subsetting bugs, not "this font never had emoji glyphs anyway" false positives (regular text
+webfonts don't ship color emoji; those already render via OS-level fallback, unchanged by this
+item). Result: **zero characters dropped by subsetting** across all four Noto Sans JP weights, DM
+Sans, and Syne. Both DM Sans's and Syne's variable weight axes survived subsetting intact.
+
+**Payload**: 1.44 MB total across all 6 files (4 Noto Sans JP weights + DM Sans + Syne, all woff2),
+precached at install (see PWA_RELEASE_SPEC.md §2) rather than fetched opportunistically. Compared
+against naively self-hosting the full, unsubsetted source families (18.11 MB) — a 92% reduction,
+confirming the plan's own hypothesis that this corpus is a good fit for exact subsetting rather
+than generic CDN slicing.
+
+Build process: `scripts/generate-precache.mjs`, run via `postbuild` — see item 62 below, done
+together since both touch the same "what's guaranteed offline" question. Regeneration process (if
+the corpus grows enough to need it) is documented at the top of that script and in
+`public/fonts/LICENSE.txt`; not wired as a live build step since it depends on `fonttools`
+(Python), a one-time/occasional regeneration tool rather than a JS-toolchain runtime dependency.
+
 ## 4. Spacing, radii, shadow, motion
 
 ```css

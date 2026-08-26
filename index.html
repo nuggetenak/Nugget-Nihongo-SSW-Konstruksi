@@ -58,13 +58,56 @@
       href="/Nugget-Nihongo-SSW-Konstruksi/icons/icon-180x180.png"
     />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900&family=Noto+Sans+JP:wght@400;500;700;900&family=Syne:wght@700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts: self-hosted, subsetted to this app's actual character set
+         (item 61, 2026-08-26). See public/fonts/LICENSE.txt for the SIL OFL
+         attribution this requires, and docs/DESIGN_SPEC.md §3 for how the
+         subset was built and verified. -->
+    <style>
+      @font-face {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 100 1000;
+        font-display: swap;
+        src: url('/Nugget-Nihongo-SSW-Konstruksi/fonts/DMSans.woff2') format('woff2-variations'),
+          url('/Nugget-Nihongo-SSW-Konstruksi/fonts/DMSans.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Syne';
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url('/Nugget-Nihongo-SSW-Konstruksi/fonts/Syne.woff2') format('woff2-variations'),
+          url('/Nugget-Nihongo-SSW-Konstruksi/fonts/Syne.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/Nugget-Nihongo-SSW-Konstruksi/fonts/NotoSansJP-Regular.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('/Nugget-Nihongo-SSW-Konstruksi/fonts/NotoSansJP-Medium.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/Nugget-Nihongo-SSW-Konstruksi/fonts/NotoSansJP-Bold.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url('/Nugget-Nihongo-SSW-Konstruksi/fonts/NotoSansJP-Black.woff2') format('woff2');
+      }
+    </style>
 
     <style>
       *,

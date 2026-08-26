@@ -1,7 +1,6 @@
 // ─── sw.js — SSW Konstruksi Service Worker ────────────────────────────────────
 // Strategy:
 //   Static assets (JS, CSS, fonts, icons) → Cache-First
-//   Google Fonts → Cache-First (separate cache, longer TTL)
 //   Everything else → Network-First with cache fallback
 //
 // Cache versioning: bump CACHE_VERSION on every deploy to force SW update.
@@ -9,8 +8,7 @@
 
 const CACHE_VERSION = 'ssw-v4.23.0';
 const CACHE_STATIC    = `${CACHE_VERSION}-static`;
-const CACHE_FONTS     = `${CACHE_VERSION}-fonts`;
-const ALL_CACHES      = [CACHE_STATIC, CACHE_FONTS];
+const ALL_CACHES      = [CACHE_STATIC];
 
 const BASE = '/Nugget-Nihongo-SSW-Konstruksi';
 
@@ -64,12 +62,9 @@ self.addEventListener('fetch', (event) => {
   // Only handle GET requests
   if (request.method !== 'GET') return;
 
-  // Google Fonts → Cache-First (long TTL, rarely changes)
-  if (url.origin === 'https://fonts.googleapis.com' ||
-      url.origin === 'https://fonts.gstatic.com') {
-    event.respondWith(cacheFirst(request, CACHE_FONTS));
-    return;
-  }
+  // Google Fonts CDN retired (item 61, 2026-08-26) -- fonts are self-hosted
+  // and same-origin now, so they're already covered by the same-origin
+  // cache-first branch below. No cross-origin font handling needed.
 
   // Same-origin static assets → Cache-First
   if (url.origin === self.location.origin) {
