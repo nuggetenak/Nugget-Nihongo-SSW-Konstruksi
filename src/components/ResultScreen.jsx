@@ -4,6 +4,9 @@
 
 import s from './ResultScreen.module.css';
 import { getGrade } from '../styles/theme.js';
+import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from './JpDisplay.jsx';
+import { findWeakestCategory } from '../utils/session-weakness.js';
 
 // rsShake animation — injected once (not worth a CSS module import just for this)
 const SHAKE_CSS = `@keyframes rsShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}`;
@@ -25,14 +28,21 @@ export default function ResultScreen({
   onRetryWrong,
   onAddToSRS,
   srsWrongCount,
+  onDrillCategory,
   onExit,
 }) {
+  const { prefs } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   ensureShake();
 
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
   const grade = getGrade(pct);
   const wrongCount = total - correct;
   const path = pct >= 70 ? 'celebrate' : pct < 50 ? 'encourage' : 'neutral';
+
+  const weakCategory = onDrillCategory
+    ? findWeakestCategory(review.map((r) => ({ category: r.category, cardId: r._cardId })))
+    : null;
 
   const weaknessTip =
     path === 'encourage' && wrongCount > 0
@@ -64,6 +74,19 @@ export default function ResultScreen({
 
       {/* Weakness tip */}
       {weaknessTip && <div className={s.tip}>💡 {weaknessTip}</div>}
+      {weakCategory && (
+        <div className={s.tip}>
+          {weakCategory.emoji} {weakCategory.count} salah di {weakCategory.label} — latih
+          kategori itu?
+          <button
+            className={s.btnWrong}
+            style={{ marginTop: 8 }}
+            onClick={() => onDrillCategory(weakCategory.key)}
+          >
+            Latih {weakCategory.label}
+          </button>
+        </div>
+      )}
 
       {/* Actions */}
       <div className={s.actions}>
@@ -104,7 +127,9 @@ export default function ResultScreen({
                 className={s.reviewItem}
                 style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
               >
-                <div className={s.reviewQ}>{r.question}</div>
+                <div className={s.reviewQ}>
+                  <JpFront jp={r.question} furiganaPolicy={furiganaPolicy} />
+                </div>
                 <div className={s.reviewWrong}>✗ {r.userAnswer}</div>
                 <div className={s.reviewCorrect}>✓ {r.correctAnswer}</div>
                 {r.explanation && (

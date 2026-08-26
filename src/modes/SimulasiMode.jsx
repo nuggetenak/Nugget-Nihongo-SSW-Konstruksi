@@ -286,6 +286,11 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   }
 
   // ─── RESULT ───────────────────────────────────────────────────────────────
+  // Item 46: deliberately not using ResultScreen here. This is a pass/fail exam
+  // simulation against a 65% threshold (PASS_PCT), not a generic quiz score --
+  // the lulus/tidak-lulus banner and full sequential answer review below are
+  // the whole point of "Simulasi" and don't fit ResultScreen's shape. Plan's
+  // own note: "leave Simulasi out and say so" rather than force-fit it.
   if (phase === 'result') {
     const correct = results.filter((r) => r.isCorrect).length;
     const total = results.length;

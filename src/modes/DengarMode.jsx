@@ -15,6 +15,7 @@ import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import ResultScreen from '../components/ResultScreen.jsx';
 import S from './modes.module.css';
 
 const QUIZ_COUNTS = [10, 20, 30];
@@ -32,7 +33,7 @@ function buildQuestions(cards, count, allCards) {
   });
 }
 
-export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
+export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRetryWrong }) {
   const [started, setStarted] = useState(false);
   const [count, setCount] = useState(10);
   const [questions, setQuestions] = useState([]);
@@ -104,7 +105,15 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
       setSelected(optIdx);
       const isCorrect = optIdx === currentQ.correctIdx;
       haptic[isCorrect ? 'correct' : 'wrong']();
-      setResults((r) => [...r, { card: currentQ.card, isCorrect }]);
+      setResults((r) => [
+        ...r,
+        {
+          card: currentQ.card,
+          isCorrect,
+          pickedText: currentQ.opts[optIdx]?.text || '',
+          correctText: currentQ.opts[currentQ.correctIdx]?.text || '',
+        },
+      ]);
       // Record wrong answer in shared wrong-tracker pool.
       if (!isCorrect) {
         const cardId = currentQ.card.id;
@@ -273,68 +282,32 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
   // ── Done screen ───────────────────────────────────────────────────────────
   if (idx >= questions.length && results.length > 0) {
     const correct = results.filter((r) => r.isCorrect).length;
-    const pct = Math.round((correct / results.length) * 100);
-    const color =
-      pct >= 80 ? 'var(--ssw-correct)' : pct >= 60 ? 'var(--ssw-amber)' : 'var(--ssw-wrong)';
+    const wrongList = results.filter((r) => !r.isCorrect);
+    const wrongCardIds = wrongList.map((r) => r.card.id).filter(Boolean);
 
     return (
-      <div className={S.pageCenter}>
-        <div style={{ fontSize: 48, marginBottom: 8 }}>
-          {pct >= 80 ? '🏆' : pct >= 60 ? '🎯' : '💪'}
-        </div>
-        <div
-          style={{ fontSize: 22, fontWeight: 800, color: 'var(--ssw-textBright)', marginBottom: 4 }}
-        >
-          Sesi Selesai
-        </div>
-        <div style={{ fontSize: 36, fontWeight: 800, color, marginBottom: 4 }}>{pct}%</div>
-        <div style={{ fontSize: 14, color: 'var(--ssw-textMuted)', marginBottom: 24 }}>
-          {correct} benar dari {results.length} soal
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 10,
-            maxWidth: 320,
-            margin: '0 auto',
-          }}
-        >
-          <button
-            onClick={start}
-            style={{
-              padding: '13px',
-              borderRadius: 12,
-              background: 'var(--ssw-amber)',
-              color: '#fff',
-              fontFamily: 'inherit',
-              fontSize: 15,
-              fontWeight: 700,
-              border: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            🔄 Ulangi
-          </button>
-          <button
-            onClick={onExit}
-            style={{
-              padding: '13px',
-              borderRadius: 12,
-              background: 'var(--ssw-surface)',
-              color: 'var(--ssw-textMuted)',
-              fontFamily: 'inherit',
-              fontSize: 15,
-              fontWeight: 600,
-              border: '1px solid var(--ssw-border)',
-              cursor: 'pointer',
-            }}
-          >
-            ← Kembali
-          </button>
-        </div>
-      </div>
+      <ResultScreen
+        correct={correct}
+        total={results.length}
+        review={wrongList.map((r) => ({
+          question: r.card.jp,
+          userAnswer: r.pickedText,
+          correctAnswer: r.correctText,
+          category: r.card.category,
+          _cardId: r.card.id,
+        }))}
+        onRestart={start}
+        onRetryWrong={onRetryWrong ? () => onRetryWrong(wrongCardIds) : undefined}
+        onDrillCategory={
+          onRetryWrong
+            ? (catKey) =>
+                onRetryWrong(
+                  wrongList.filter((r) => r.card.category === catKey).map((r) => r.card.id)
+                )
+            : undefined
+        }
+        onExit={onExit}
+      />
     );
   }
 

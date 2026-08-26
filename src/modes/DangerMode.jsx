@@ -5,12 +5,12 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
-import { getGrade } from '../styles/theme.js';
+import ProgressBar from '../components/ProgressBar.jsx';
+import ResultScreen from '../components/ResultScreen.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
-import ProgressBar from '../components/ProgressBar.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import S from './modes.module.css';
@@ -274,58 +274,20 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
   if (phase === 'result') {
     const correct = results.filter((r) => r.isCorrect).length;
     const total = results.length;
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    const grade = getGrade(pct);
     const wrongList = results.filter((r) => !r.isCorrect);
     return (
-      <div className={`${S.page} ${D.resultPage}`}>
-        <div className={D.resultCard}>
-          <div className={D.resultEmoji}>{grade.emoji}</div>
-          <div className={D.resultPct} style={{ color: grade.color }}>
-            {pct}%
-          </div>
-          <div className={D.resultLabel}>{grade.label}</div>
-          <div className={D.resultSub}>
-            {correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}
-          </div>
-        </div>
-        <div className={`${S.row} ${D.resultActions}`}>
-          <button className={`${S.btnPrimary} ${D.ulangBtn}`} onClick={restart}>
-            🔄 Ulang
-          </button>
-          <button className={`${S.btnSecondary} ${D.panelBtn}`} onClick={onBack}>
-            📋 Panel
-          </button>
-        </div>
-        {wrongList.length > 0 && (
-          <>
-            <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
-            <div className={S.list} style={{ gap: 10 }}>
-              {wrongList.map((r, i) => {
-                const p = r.item.pair;
-                const pickedText = r.item.opts[r.picked]?.text;
-                return (
-                  <div
-                    key={i}
-                    className={D.reviewItem}
-                    style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
-                  >
-                    <div className={D.reviewItemHeader}>
-                      <div className={D.reviewItemHeaderJp}>
-                        <JpFront jp={p.term} furiganaPolicy={furiganaPolicy} />
-                      </div>
-                    </div>
-                    <div className={D.reviewItemBody}>
-                      <div className={D.reviewWrongText}>✗ {pickedText}</div>
-                      <div className={D.reviewCorrectText}>✓ {p.correct}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </div>
+      <ResultScreen
+        correct={correct}
+        total={total}
+        maxStreak={maxStreak}
+        review={wrongList.map((r) => ({
+          question: r.item.pair.term,
+          userAnswer: r.item.opts[r.picked]?.text || '',
+          correctAnswer: r.item.pair.correct,
+        }))}
+        onRestart={restart}
+        onExit={onBack}
+      />
     );
   }
 

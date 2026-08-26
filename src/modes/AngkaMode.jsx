@@ -7,12 +7,12 @@ import { shuffle } from '../utils/shuffle.js';
 import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
 import { haptic } from '../utils/haptic.js';
 import { CARDS } from '../data/cards.js';
-import { getGrade } from '../styles/theme.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import ResultScreen from '../components/ResultScreen.jsx';
 import S from './modes.module.css';
 import A from './AngkaMode.module.css';
 
@@ -343,48 +343,20 @@ function QuizView({ onBack, onSessionEnd }) {
   if (phase === 'result') {
     const correct = results.filter((r) => r.isCorrect).length;
     const total = results.length;
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    const grade = getGrade(pct);
     const wrongList = results.filter((r) => !r.isCorrect);
     return (
-      <div className={`${S.page} ${A.resultPage}`}>
-        <div className={A.resultCard}>
-          <div className={A.resultEmoji}>{grade.emoji}</div>
-          <div className={A.resultPct} style={{ color: grade.color }}>
-            {pct}%
-          </div>
-          <div className={A.resultLabel}>{grade.label}</div>
-          <div className={A.resultSub}>
-            {correct}/{total} benar{maxStreak > 1 ? ` · 🔥 ${maxStreak} streak` : ''}
-          </div>
-        </div>
-        <div className={`${S.row} ${A.resultActions}`}>
-          <button className={`${S.btnPrimary} ${A.ulangBtn}`} onClick={restart}>
-            🔄 Ulang
-          </button>
-          <button className={`${S.btnSecondary} ${A.daftarBtn}`} onClick={onBack}>
-            📋 Daftar
-          </button>
-        </div>
-        {wrongList.length > 0 && (
-          <>
-            <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
-            <div className={S.list}>
-              {wrongList.map((r, i) => (
-                <div
-                  key={i}
-                  className={A.reviewItem}
-                  style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
-                >
-                  <div className={A.reviewKonteks}>{r.item.item.konteks}</div>
-                  <div className={A.reviewWrong}>✗ {r.item.opts[r.picked]?.text}</div>
-                  <div className={A.reviewCorrect}>✓ {r.item.item.angka}</div>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+      <ResultScreen
+        correct={correct}
+        total={total}
+        maxStreak={maxStreak}
+        review={wrongList.map((r) => ({
+          question: r.item.item.konteks,
+          userAnswer: r.item.opts[r.picked]?.text || '',
+          correctAnswer: r.item.item.angka,
+        }))}
+        onRestart={restart}
+        onExit={onBack}
+      />
     );
   }
 
@@ -570,50 +542,20 @@ function TypeQuizView({ onBack, onSessionEnd }) {
 
   if (phase === 'result') {
     const correct = results.filter((r) => r.correct).length;
-    const pct = Math.round((correct / results.length) * 100);
-    const grade = getGrade(pct);
     return (
-      <div className={`${S.page} ${A.resultPage}`}>
-        <div className={A.resultCard}>
-          <div className={A.resultEmoji}>{grade.emoji}</div>
-          <div className={A.resultPct} style={{ color: grade.color }}>
-            {pct}%
-          </div>
-          <div className={A.resultLabel}>{grade.label}</div>
-          <div className={A.resultSub}>
-            {correct}/{results.length} benar
-          </div>
-        </div>
-        <div className={`${S.row} ${A.resultActions}`}>
-          <button className={`${S.btnPrimary} ${A.ulangBtn}`} onClick={onBack}>
-            🔄 Kembali
-          </button>
-        </div>
-        <div className={S.sectionLabel}>Review</div>
-        <div className={S.list} style={{ gap: 8 }}>
-          {results
-            .filter((r) => !r.correct)
-            .map((r, i) => (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--ssw-wrongBg)',
-                  border: '1px solid var(--ssw-wrongBorder)',
-                  borderRadius: 8,
-                  padding: '8px 12px',
-                }}
-              >
-                <div style={{ fontSize: 11, color: T.textDim, marginBottom: 2 }}>
-                  {r.item.konteks}
-                </div>
-                <div style={{ fontSize: 12, color: T.wrong }}>✗ Kamu: {r.userInput}</div>
-                <div style={{ fontSize: 13, color: T.correct, fontWeight: 700 }}>
-                  ✓ Benar: {r.item.angka}
-                </div>
-              </div>
-            ))}
-        </div>
-      </div>
+      <ResultScreen
+        correct={correct}
+        total={results.length}
+        review={results
+          .filter((r) => !r.correct)
+          .map((r) => ({
+            question: r.item.konteks,
+            userAnswer: r.userInput,
+            correctAnswer: r.item.angka,
+          }))}
+        onRestart={onBack}
+        onExit={onBack}
+      />
     );
   }
 

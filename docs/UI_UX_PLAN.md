@@ -129,7 +129,7 @@ shared component.
 
 ---
 
-### ☐ 46. `ResultScreen` has one consumer; 8 modes hand-roll their finish screen — `M`
+### ☑ 46. `ResultScreen` has one consumer; 8 modes hand-roll their finish screen — `M`
 
 **Verified**: `grep -rln "ResultScreen"` → only `QuizShell.jsx`. `ResultScreen` already offers
 score, max streak, restart, **retry-wrong**, **add-wrong-to-SRS**, and exit.
@@ -439,7 +439,7 @@ over a false-precision percentage. Whoever builds this should also sanity-check 
 `calcReadiness` actually measures before surfacing it as a headline — it was written for a stats
 page, where being approximate is fine, not for a dashboard promise.
 
-### ☐ 57. Weak-category drilling from the results screen — `S` — `P2` — approved
+### ☑ 57. Weak-category drilling from the results screen — `S` — `P2` — approved
 Retry-wrong exists but is flat — it retries *these specific* wrong cards. `FocusMode` already
 computes per-category weakness. Offering "12 salah di 電気設備 — latih kategori itu" turns one bad
 session into a targeted next session. Small because both halves already exist; pairs naturally

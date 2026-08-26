@@ -8,11 +8,11 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
-import { getGrade } from '../styles/theme.js';
-import { haptic } from '../utils/haptic.js';
-import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
+import ResultScreen from '../components/ResultScreen.jsx';
+import { haptic } from '../utils/haptic.js';
+import { useApp } from '../contexts/AppContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -346,101 +346,30 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
   if (phase === 'result') {
     const correct = results.filter((r) => r.isCorrect).length;
     const total = results.length;
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-    const grade = getGrade(pct);
     const wrongList = results.filter((r) => !r.isCorrect);
 
     return (
-      <div className={S.pageScroll} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
-        <div
-          style={{
-            background: T.surface,
-            border: `1px solid ${T.border}`,
-            borderRadius: 16,
-            padding: '24px 20px',
-            textAlign: 'center',
-            marginBottom: 20,
-            animation: 'popIn 0.35s var(--ease-spring) both',
-          }}
-        >
-          <div style={{ fontSize: 48, marginBottom: 8 }}>{grade.emoji}</div>
-          <div style={{ fontSize: 40, fontWeight: 900, color: grade.color }}>{pct}%</div>
-          <div style={{ fontSize: 15, color: T.textMuted, marginTop: 4 }}>
-            {correct}/{total} benar · Kata Mirip
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-          <button
-            className={S.btnPrimary}
-            style={{ flex: 1 }}
-            onClick={() => {
-              setQIdx(0);
-              setSelected(null);
-              setResults([]);
-              setPhase('playing');
-              sessionFired.current = false;
-            }}
-          >
-            🔄 Ulang
-          </button>
-          <button className={S.btnSecondary} style={{ flex: 1 }} onClick={onBack}>
-            📋 Panel
-          </button>
-        </div>
-
-        {wrongList.length > 0 && (
-          <>
-            <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
-            <div className={S.list} style={{ gap: 10 }}>
-              {wrongList.map((r, i) => {
-                const p = r.q.pair;
-                const pickedText = r.q.opts[r.picked]?.text;
-                return (
-                  <div
-                    key={i}
-                    className={S.card}
-                    style={{
-                      animation: `slideUp 0.25s ease ${i * 0.05}s both`,
-                      borderLeft: `3px solid ${T.wrong}`,
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        gap: 8,
-                        marginBottom: 8,
-                        alignItems: 'center',
-                      }}
-                    >
-                      <div style={{ fontSize: 16, fontWeight: 700 }}>
-                        <JpFront jp={p.termA} furiganaPolicy={furiganaPolicy} />
-                      </div>
-                      <span style={{ color: T.textDim }}>vs</span>
-                      <div style={{ fontSize: 16, fontWeight: 700 }}>
-                        <JpFront jp={p.termB} furiganaPolicy={furiganaPolicy} />
-                      </div>
-                    </div>
-                    <div style={{ fontSize: 12, color: T.wrong, marginBottom: 4 }}>
-                      ✗ dipilih: {pickedText}
-                    </div>
-                    <div style={{ fontSize: 12, color: T.correct }}>
-                      ✓ {stripFuri(p.termA)} = {p.defA}
-                    </div>
-                    {p.tip && (
-                      <div
-                        style={{ fontSize: 11, color: T.textDim, marginTop: 6, lineHeight: 1.5 }}
-                      >
-                        💡 {p.tip}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </div>
+      <ResultScreen
+        correct={correct}
+        total={total}
+        review={wrongList.map((r) => {
+          const p = r.q.pair;
+          return {
+            question: `${p.termA} vs ${p.termB}`,
+            userAnswer: r.q.opts[r.picked]?.text || '',
+            correctAnswer: p.defA,
+            explanation: p.tip || '',
+          };
+        })}
+        onRestart={() => {
+          setQIdx(0);
+          setSelected(null);
+          setResults([]);
+          setPhase('playing');
+          sessionFired.current = false;
+        }}
+        onExit={onBack}
+      />
     );
   }
 

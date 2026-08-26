@@ -16,6 +16,7 @@ import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import ResultScreen from '../components/ResultScreen.jsx';
 import HowToPlayCard from '../components/HowToPlayCard.jsx';
 import S from './modes.module.css';
 
@@ -42,7 +43,13 @@ function isCorrect(input, card) {
   );
 }
 
-export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEnabled = false }) {
+export default function QuizProduksiMode({
+  cards,
+  onExit,
+  onSessionEnd,
+  onRetryWrong,
+  audioEnabled = false,
+}) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
@@ -218,75 +225,32 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
   if (!card) {
     const correct = results.filter((r) => r.correct).length;
     const total = results.length;
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     const wrongList = results.filter((r) => !r.correct);
+    const wrongCardIds = wrongList.map((r) => r.card.id).filter(Boolean);
 
     return (
-      <div className={S.pageScroll} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
-        <div
-          style={{
-            background: T.surface,
-            border: `1px solid ${T.border}`,
-            borderRadius: 16,
-            padding: '24px 20px',
-            textAlign: 'center',
-            marginBottom: 20,
-            animation: 'popIn 0.35s var(--ease-spring) both',
-          }}
-        >
-          <div style={{ fontSize: 48, marginBottom: 8 }}>
-            {pct >= 80 ? '🎉' : pct >= 60 ? '📝' : '💪'}
-          </div>
-          <div
-            style={{
-              fontSize: 40,
-              fontWeight: 900,
-              color: pct >= 80 ? T.correct : pct >= 60 ? T.amber : T.wrong,
-            }}
-          >
-            {pct}%
-          </div>
-          <div style={{ fontSize: 15, color: T.textMuted, marginTop: 4 }}>
-            {correct}/{total} benar
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-          <button className={S.btnPrimary} style={{ flex: 1 }} onClick={startSession}>
-            🔄 Ulang
-          </button>
-          <button className={S.btnSecondary} style={{ flex: 1 }} onClick={onExit}>
-            ← Menu
-          </button>
-        </div>
-
-        {wrongList.length > 0 && (
-          <>
-            <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
-            <div className={S.list} style={{ gap: 8 }}>
-              {wrongList.map((r, i) => (
-                <div
-                  key={i}
-                  className={S.card}
-                  style={{
-                    animation: `slideUp 0.25s ease ${i * 0.04}s both`,
-                    borderLeft: `3px solid ${T.wrong}`,
-                  }}
-                >
-                  <div style={{ marginBottom: 4 }}>
-                    <JpFront jp={r.card.jp} furiganaPolicy={furiganaPolicy} />
-                  </div>
-                  <div style={{ fontSize: 13, color: T.correct, marginBottom: 4 }}>
-                    ✓ {r.card.id_text}
-                  </div>
-                  {r.input && <div style={{ fontSize: 12, color: T.wrong }}>✗ kamu: {r.input}</div>}
-                  {r.skipped && <div style={{ fontSize: 12, color: T.textDim }}>⏭ dilewati</div>}
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+      <ResultScreen
+        correct={correct}
+        total={total}
+        review={wrongList.map((r) => ({
+          question: r.card.jp,
+          userAnswer: r.skipped ? '(dilewati)' : r.input,
+          correctAnswer: r.card.id_text,
+          category: r.card.category,
+          _cardId: r.card.id,
+        }))}
+        onRestart={startSession}
+        onRetryWrong={onRetryWrong ? () => onRetryWrong(wrongCardIds) : undefined}
+        onDrillCategory={
+          onRetryWrong
+            ? (catKey) =>
+                onRetryWrong(
+                  wrongList.filter((r) => r.card.category === catKey).map((r) => r.card.id)
+                )
+            : undefined
+        }
+        onExit={onExit}
+      />
     );
   }
 

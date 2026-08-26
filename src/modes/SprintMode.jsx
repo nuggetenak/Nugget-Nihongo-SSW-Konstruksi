@@ -250,6 +250,12 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     );
   }
 
+  // Item 46: deliberately not using ResultScreen here either. Sprint is a
+  // speed drill with ghost-race/best-time framing (newBest, timeline replay),
+  // not a graded quiz -- there's no "wrong answer to review," since
+  // Tahu/Tidak Tahu is self-assessment (see item 45's QuizAnnouncer exclusion
+  // for the same underlying reasoning). Plan's own note: "legitimately
+  // different" alongside SimulasiMode.
   if (phase === 'done') {
     const total = correct + wrong;
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;

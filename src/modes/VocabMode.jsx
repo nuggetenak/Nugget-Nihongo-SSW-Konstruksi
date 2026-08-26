@@ -13,7 +13,7 @@ import S from './modes.module.css';
 // VOCAB_SETS and MIX_ALL computed inside component — track-filtered
 const MIX_ALL_ID = '__vocab_mix__';
 
-export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }) {
+export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track } = useApp();
   const VOCAB_SETS = useMemo(
     () =>
@@ -90,6 +90,7 @@ export default function VocabMode({ onExit, onSessionEnd, audioEnabled = false }
         title={setDef?.title || ''}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
+        onRetryWrong={onRetryWrong}
         showHint={showHint}
         accentColor={setDef?.color || T.amber}
         audioEnabled={audioEnabled}

@@ -9,6 +9,7 @@ import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { CARDS } from '../data/cards.js';
 import { JpFront } from './JpDisplay.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
@@ -153,6 +154,17 @@ export default function QuizShell({
         }
         onAddToSRS={onAddToSRS}
         srsWrongCount={results.filter((r) => !r.isCorrect).length}
+        onDrillCategory={
+          onRetryWrong
+            ? (catKey) =>
+                onRetryWrong(
+                  results
+                    .filter((r) => !r.isCorrect && r._cardId)
+                    .filter((r) => CARDS.find((c) => c.id === r._cardId)?.category === catKey)
+                    .map((r) => r._cardId)
+                )
+            : undefined
+        }
         onExit={onExit}
       />
     );

@@ -261,3 +261,55 @@ override to `"assertive"`):
 - `Escape` dismisses the frontmost (most recently shown) toast, guarded by the same
   `isTypingTarget` check item 31 introduced for the first global key handler — reused, not
   reimplemented (`src/utils/keyboard.js`).
+
+## 10. `ResultScreen` adoption + weak-category drilling (items 46, 57, 2026-08-26)
+
+**Verified**: `grep -rln "ResultScreen"` returned only `QuizShell.jsx` before this item. Eight
+modes hand-rolled their own finish screen instead, most missing retry-wrong and add-to-SRS
+entirely — the two actions that turn a failed session into learning. Now adopted by `AngkaMode`
+(both its multiple-choice and typed-input variants), `DangerMode`, `ConfusionMode`, `DengarMode`,
+`ProductionMode`, `QuizProduksiMode`, in addition to the four already behind `QuizShell`.
+
+**Field mapping isn't literal-copy-the-old-layout.** `review[].question` renders through
+`JpFront` (see §8.1), so it must actually be the Japanese content — for most modes that's
+straightforward (the headword being tested), but `ProductionMode`/`QuizProduksiMode` test in
+*different directions* (kanji→reading vs. kanji→meaning) and needed the mapping worked out per
+mode rather than copied: `question` is always `card.jp`, `correctAnswer` is whichever of
+`card.id_text` / the extracted reading actually represents "what should have been produced,"
+`userAnswer` stays plain text regardless of direction (it's either already-clean option text or
+free-typed input, never re-processed).
+
+**Deliberately not adopted — documented at the call site, not just here** (per the item's own
+"Done when: every mode either uses ResultScreen or has a comment saying what it needs that the
+shared one can't express"): `SimulasiMode` (pass/fail banner against a 65% threshold, full
+sequential answer review — the whole point of an exam simulation) and `SprintMode` (speed/ghost-
+race framing, no graded answer to review — same self-assessment reasoning as §"QuizAnnouncer"
+above).
+
+**Related bug, found and fixed while here, not itemized separately:** item 43 changed
+`QuizShell`'s `q.question` from pre-stripped text to raw `jp` (so the live question could render
+as ruby), but never updated `ResultScreen`'s review section, which still rendered `{r.question}`
+as bare text. The four `QuizShell`-based modes had been showing raw `《reading》` markup in their
+wrong-answer review since that commit. `ResultScreen` now renders `question` through `JpFront`;
+`userAnswer`/`correctAnswer` deliberately stay plain text since they're language-dependent per
+mode (Japanese for the multiple-choice modes, Indonesian `id_text` for the free-text ones) and
+wrapping non-Japanese text in a Japanese-ruby component would be wrong.
+
+**`VocabMode`'s missing `onRetryWrong`**, called out in the plan as a "related, smaller, same
+root" issue: the prop wasn't wired at the `ModeRouter.jsx` level at all (not a `VocabMode.jsx`
+bug — the component had nowhere to forward a prop it never received). Fixed at both ends.
+
+**Item 57 (weak-category drilling), folded into this item per the plan's own §10** ("nearly
+free... do it there rather than as a separate pass"). New: `src/utils/session-weakness.js`,
+`findWeakestCategory(wrongRecords)` — deliberately a new, session-scoped helper rather than
+reusing `FocusMode`'s `catStats`, which answers a different question (all-time weakness vs. this
+session's cluster). Wired into `ResultScreen` as an opt-in `onDrillCategory` prop that computes
+its own suggestion from `review[]`'s `category`/`_cardId` fields — callers don't need to
+pre-compute anything, and the feature silently doesn't appear when a mode's underlying data
+doesn't map to the `CATEGORIES` taxonomy (`AngkaMode`'s numbers, `DangerMode`/`ConfusionMode`'s
+curated pairs — verified via their data files, neither has a `.category` field). Also added to
+`QuizShell`'s existing `ResultScreen` call, where it only ever activates for `QuizMode` — the
+only one of the four `QuizShell`-based modes whose questions carry `_cardId` at all (verified via
+grep; `JACMode`/`VocabMode`/`WaygroundMode` don't set it, which is exactly the open question item
+47 already flags as unresolved for those three — not resolved here, just not blocking `QuizMode`
+from getting the feature).
