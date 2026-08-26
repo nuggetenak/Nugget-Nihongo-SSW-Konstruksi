@@ -155,7 +155,7 @@ the shared one can't express. Retry-wrong and add-to-SRS available wherever they
 
 ---
 
-### ☐ 47. Quiz feature parity: the matrix is arbitrary — `L`
+### ☑ 47. Quiz feature parity: the matrix is arbitrary — `L`
 
 Built by grepping each mode. `Y` = present, `–` = absent. (`kuis`/`jac`/`vocab`/`wayground`
 inherit keyboard/timer/haptic from `QuizShell` + `OptionButton`, shown as inherited.)

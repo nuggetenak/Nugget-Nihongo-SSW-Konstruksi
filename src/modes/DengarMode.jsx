@@ -12,6 +12,7 @@ import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
+import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -43,6 +44,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   const [results, setResults] = useState([]);
   const [sessionFired, setSessionFired] = useState(false);
   const speakCountRef = useRef(0);
+  const advanceTimerRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
   const { recordWrong } = useProgress();
   const online = useOnlineStatus();
@@ -98,6 +100,26 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
     haptic.tap();
   };
 
+  const advance = useCallback(() => {
+    clearTimeout(advanceTimerRef.current);
+    if (idx + 1 < questions.length) {
+      setIdx((i) => i + 1);
+      setSelected(null);
+    } else {
+      if (!sessionFired && onSessionEnd) {
+        const correct = results.filter((r) => r.isCorrect).length;
+        onSessionEnd({
+          mode: 'dengar',
+          correct,
+          total: results.length,
+          durationMs: getDurationMs(),
+        });
+        setSessionFired(true);
+      }
+      setIdx(questions.length); // trigger done state
+    }
+  }, [idx, questions.length, results, sessionFired, onSessionEnd, getDurationMs]);
+
   const handleSelect = useCallback(
     (optIdx) => {
       if (selected !== null) return;
@@ -119,40 +141,18 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
         if (cardId) recordWrong(cardId);
       }
 
-      // Advance after 1.5s
-      setTimeout(() => {
-        if (idx + 1 < questions.length) {
-          setIdx((i) => i + 1);
-          setSelected(null);
-        } else {
-          // Done — fire session
-          const newResults = [...results, { card: currentQ.card, isCorrect }];
-          if (!sessionFired && onSessionEnd) {
-            const correct = newResults.filter((r) => r.isCorrect).length;
-            onSessionEnd({
-              mode: 'dengar',
-              correct,
-              total: newResults.length,
-              durationMs: getDurationMs(),
-            });
-            setSessionFired(true);
-          }
-          setIdx(questions.length); // trigger done state
-        }
-      }, 1500);
+      advanceTimerRef.current = setTimeout(advance, 1500);
     },
-    [
-      selected,
-      currentQ,
-      idx,
-      questions.length,
-      results,
-      sessionFired,
-      onSessionEnd,
-      recordWrong,
-      getDurationMs,
-    ]
+    [selected, currentQ, recordWrong, advance]
   );
+
+  useQuizKeyboard({
+    onSelect: handleSelect,
+    onNext: advance,
+    selected,
+    phase: started && currentQ ? 'playing' : 'not-playing',
+    optCount: currentQ?.opts?.length ?? 4,
+  });
 
   // ── Settings screen ──────────────────────────────────────────────────────
   if (!started) {

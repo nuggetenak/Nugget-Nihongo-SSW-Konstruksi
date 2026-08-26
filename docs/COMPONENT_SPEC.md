@@ -328,3 +328,60 @@ only one of the four `QuizShell`-based modes whose questions carry `_cardId` at 
 grep; `JACMode`/`VocabMode`/`WaygroundMode` don't set it, which is exactly the open question item
 47 already flags as unresolved for those three — not resolved here, just not blocking `QuizMode`
 from getting the feature).
+
+## 12. Mode-shape feature parity (item 47, 2026-08-26)
+
+Owner decision, made explicit here rather than left as an implicit pattern across 12 files. There
+are four quiz *shapes* in this app — not modes, shapes, since several modes share one — and each
+shape gets a defined set of features. A mode not having a feature its shape defines is a bug;
+a mode not having a feature its shape doesn't define is not.
+
+| Feature | Multiple-choice | Free-text | Timed-exam | Speed-drill |
+|---|---|---|---|---|
+| Keyboard (1–4 select, Enter/Space advance) | ✅ | ✅ | ✅ | ❌ |
+| Haptic (correct/wrong) | ✅ | ✅ | ✅ | ❌ |
+| Screen-reader outcome announcement (item 45) | ✅ | ✅ | ✅ | ❌ |
+| Pause | ❌ | ❌ | ✅ | ❌ |
+| `ResultScreen` (item 46) | ✅ | ✅ | ❌ (own results) | ❌ (own results) |
+| SRS / retry-wrong feed | Where `cardId` exists | Where `cardId` exists | Where `cardId` exists | N/A |
+
+**Modes per shape:** multiple-choice = `kuis`/`jac`/`vocab`/`wayground` (via `QuizShell`),
+`AngkaMode`, `DangerMode`, `ConfusionMode`, `DengarMode`. Free-text = `ProductionMode`,
+`QuizProduksiMode`. Timed-exam = `SimulasiMode`. Speed-drill = `SprintMode`. (`ReviewMode` and
+`FlashcardMode` are a different architecture entirely — FSRS-scheduled review and free browsing,
+not a quiz shape — already covered in items 43–45, 65, not revisited here.)
+
+**Reasoning per row**, not just the table: keyboard/haptic/announcement are about a *graded*
+answer — a moment where the app judges right or wrong. Speed-drill's Tahu/Tidak Tahu is
+self-assessment, not a judgment the app makes (same reasoning item 45 already used to exclude it
+from `QuizAnnouncer`, extended consistently here rather than re-litigated per feature). Pause
+belongs to timed-exam specifically because losing your place mid-exam under time pressure is a
+real, disruptive cost that browsing- or drill-shaped modes don't share — and speed-drill's own
+timer is core to its challenge (beat the clock), so pausing it undermines the shape's own point,
+not a gap in it. `ResultScreen` already excludes timed-exam/speed-drill (item 46) for the same
+kind of reason: a pass/fail banner is exam's whole point, ghost-race framing is drill's.
+
+**SRS/retry-wrong is a data question, not a feature-parity one** — this was item 47's own opening
+question ("only JACMode feeds SRS — why not vocab/wayground, which are also card-linked?").
+Checked rather than assumed: `vocab`/`wayground` draw from hand-curated question sets
+(`quiz-sets.js`/`wayground-sets.js`) that were never built with a stable per-question `cardId`
+linking back to `CARDS` — unlike `QuizMode`'s `generateQuiz()`, which builds questions
+programmatically *from* `CARDS` and always has one. Giving `vocab`/`wayground` real linkage would
+mean either manually matching several hundred hand-written questions to `CARDS` entries by content
+(error-prone, and a wrong match is worse than no match) or restructuring how those question sets
+are authored — a data-migration project, not a UI-parity fix, and disproportionate to what this
+item asked for. Left unlinked, documented as a decided exclusion rather than a silent gap.
+
+**Gap actually closed this item:** `DengarMode` was multiple-choice-shaped but missing keyboard
+support — the same shape as `AngkaMode`/`DangerMode`/`ConfusionMode`, all three of which already
+had it, making its absence here an inconsistency rather than a deliberate difference. Fixed,
+reusing the existing `useQuizKeyboard` hook unchanged. Its 1.5s auto-advance-after-answering timer
+was refactored into a named, callable function so keyboard's Enter/Space can skip the wait
+(previously only reachable by waiting it out) — small usability win for someone drilling quickly
+on their phone, in the audience's actual context.
+
+**`SimulasiMode`'s keyboard gap is not fixed here**, deliberately — it's about to be rewritten by
+item 48 (free navigation, deferred scoring), which changes its answering flow enough that wiring
+keyboard support against the current shape would likely need redoing against the new one. Folded
+into that item instead of built twice.
+
