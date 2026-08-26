@@ -6,6 +6,7 @@ import { generateQuiz } from '../utils/quiz-generator.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { shuffle } from '../utils/shuffle.js';
 import { get as storageGet } from '../storage/engine.js';
+import { QUIZ_COUNTS } from '../utils/constants.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
@@ -162,8 +163,8 @@ export default function QuizMode({
 
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
-          {[10, 20, 30, catFilteredCards.length].map((n, i) => {
-            const label = i === 3 ? 'Semua' : String(n);
+          {[...QUIZ_COUNTS, catFilteredCards.length].map((n, i) => {
+            const label = i === QUIZ_COUNTS.length ? 'Semua' : String(n);
             return (
               <button
                 key={n}

@@ -14,3 +14,9 @@ export const SRS_MATURE_DAYS = 21;
 
 /** Max sessions stored in progress.sessions. */
 export const SESSIONS_CAP = 180;
+
+/** Question-count picker options, shared by DengarMode/ProductionMode/
+ *  QuizProduksiMode/QuizMode. QuizMode adds its own dynamic 4th "Semua"
+ *  option (category-filtered deck size) on top of this base rather than
+ *  duplicating it — see QuizMode.jsx for that explicit deviation. */
+export const QUIZ_COUNTS = [10, 20, 30];

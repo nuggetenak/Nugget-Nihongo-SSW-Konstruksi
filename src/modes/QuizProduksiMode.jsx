@@ -18,9 +18,8 @@ import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import HowToPlayCard from '../components/HowToPlayCard.jsx';
+import { QUIZ_COUNTS } from '../utils/constants.js';
 import S from './modes.module.css';
-
-const QUIZ_COUNTS = [10, 20, 30];
 
 // Normalize for fuzzy compare: lowercase, strip punctuation, collapse spaces
 function norm(s = '') {
@@ -50,10 +49,10 @@ export default function QuizProduksiMode({
   onRetryWrong,
   audioEnabled = false,
 }) {
-  const { prefs } = useApp();
+  const { prefs, setPref } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(() => prefs?.quizQuestionCount ?? 10);
   const [queue, setQueue] = useState([]);
   const [idx, setIdx] = useState(0);
   const [input, setInput] = useState('');
@@ -196,7 +195,14 @@ export default function QuizProduksiMode({
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
           {QUIZ_COUNTS.map((n) => (
-            <button key={n} onClick={() => setCount(n)} style={pillStyle(count === n)}>
+            <button
+              key={n}
+              onClick={() => {
+                setCount(n);
+                setPref('quizQuestionCount', n);
+              }}
+              style={pillStyle(count === n)}
+            >
               {n}
             </button>
           ))}

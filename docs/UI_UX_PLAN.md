@@ -221,7 +221,7 @@ deliberately; practice modes are untouched.
 
 ---
 
-### ☐ 49. Question-count options differ per mode with no rationale — `S`
+### ☑ 49. Question-count options differ per mode with no rationale — `S`
 
 `QUIZ_COUNTS = [10, 20, 30]` is defined **three separate times** — `DengarMode.jsx:18`,
 `ProductionMode.jsx:18`, `QuizProduksiMode.jsx:19` — and other modes offer different sets or a

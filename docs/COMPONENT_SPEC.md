@@ -262,7 +262,22 @@ override to `"assertive"`):
   `isTypingTarget` check item 31 introduced for the first global key handler — reused, not
   reimplemented (`src/utils/keyboard.js`).
 
-## 10. `ResultScreen` adoption + weak-category drilling (items 46, 57, 2026-08-26)
+## 10. Shared constants (item 49, 2026-08-26)
+
+`QUIZ_COUNTS = [10, 20, 30]` (`src/utils/constants.js`) is the question-count picker's single
+source of truth — was defined identically in `DengarMode.jsx`, `ProductionMode.jsx`, and
+`QuizProduksiMode.jsx`. `QuizMode.jsx` spreads it plus its own dynamic 4th "Semua" option
+(category-filtered deck size) rather than duplicating the base array — an explicit deviation,
+not a fourth copy.
+
+**Bug found and fixed alongside the dedup, not just a rename:** `prefs.quizQuestionCount` exists
+in the storage schema and is described as persisting the picker choice, but only `QuizMode` ever
+read or wrote it — `DengarMode`/`ProductionMode`/`QuizProduksiMode` reset to a hardcoded 10 every
+session regardless of what the user last picked. Verified via grep before assuming the pref
+worked anywhere. All four modes now read the initial count from `prefs.quizQuestionCount` and
+write back through `useApp()`'s `setPref` on selection.
+
+## 11. `ResultScreen` adoption + weak-category drilling (items 46, 57, 2026-08-26)
 
 **Verified**: `grep -rln "ResultScreen"` returned only `QuizShell.jsx` before this item. Eight
 modes hand-rolled their own finish screen instead, most missing retry-wrong and add-to-SRS

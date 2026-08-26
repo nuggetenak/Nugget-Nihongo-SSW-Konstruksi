@@ -17,9 +17,8 @@ import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import HowToPlayCard from '../components/HowToPlayCard.jsx';
+import { QUIZ_COUNTS } from '../utils/constants.js';
 import S from './modes.module.css';
-
-const QUIZ_COUNTS = [10, 20, 30];
 
 // Normalize: strip furi, trim, lowercase for loose comparison
 function norm(s = '') {
@@ -51,8 +50,10 @@ export default function ProductionMode({
   onRetryWrong,
   audioEnabled = false,
 }) {
+  const { prefs, setPref } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(() => prefs?.quizQuestionCount ?? 10);
   const [queue, setQueue] = useState([]);
   const [idx, setIdx] = useState(0);
   const [input, setInput] = useState('');
@@ -62,8 +63,6 @@ export default function ProductionMode({
   const inputRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
   const { recordWrong } = useProgress();
-  const { prefs } = useApp();
-  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
 
   const startSession = () => {
     const q = shuffle(cards).slice(0, count);
@@ -196,7 +195,14 @@ export default function ProductionMode({
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
           {QUIZ_COUNTS.map((n) => (
-            <button key={n} onClick={() => setCount(n)} style={pillStyle(count === n)}>
+            <button
+              key={n}
+              onClick={() => {
+                setCount(n);
+                setPref('quizQuestionCount', n);
+              }}
+              style={pillStyle(count === n)}
+            >
               {n}
             </button>
           ))}
