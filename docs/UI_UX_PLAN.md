@@ -428,7 +428,7 @@ each item needs, flagged so they get made rather than guessed at mid-build.
 
 **Item 59 is the one to think hardest about, and it should not be built blind.** See its entry.
 
-### ☐ 56. Exam-readiness estimate on the dashboard — `M` — `P2` — approved
+### ☑ 56. Exam-readiness estimate on the dashboard — `M` — `P2` — approved
 `StatsMode` already computes `calcReadiness`, and the dashboard already shows an exam countdown
 (items 12/24). Putting a *readiness* signal next to the *countdown* answers the question a
 candidate actually has — "am I on track?" — rather than just "how long is left?".

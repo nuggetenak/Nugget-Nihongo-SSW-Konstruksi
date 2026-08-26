@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { generateDailyMission, isMissionDoneToday } from '../utils/daily-mission.js';
+import { calcReadinessBand } from '../utils/session-analytics.js';
 import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
@@ -81,6 +82,13 @@ export default function Dashboard({
   const daysLeft = examDate ? Math.ceil((new Date(examDate) - new Date()) / 86400000) : null;
   const showCountdown = daysLeft !== null && daysLeft >= 0 && daysLeft <= 60;
   const tier = showCountdown ? getCountdownTier(daysLeft) : null;
+
+  const readinessBand = useMemo(() => {
+    if (!showCountdown || daysLeft === 0) return null; // too late to act on it today
+    const sessions = storageGet('progress')?.sessions ?? [];
+    const streakData = storageGet('progress')?.streakData ?? {};
+    return calcReadinessBand({ srs, sessions, streakData });
+  }, [showCountdown, daysLeft, srs]);
 
   const qs = getQuickStart(srs, examDate);
   const mission = useMemo(() => {
@@ -159,6 +167,34 @@ export default function Dashboard({
                     ? 'Masa kritis — prioritaskan Ulasan SRS'
                     : 'Jaga konsistensi belajar harian'}
               </div>
+              {readinessBand && (
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    marginTop: 8,
+                    padding: '3px 10px',
+                    borderRadius: 999,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    background:
+                      readinessBand.key === 'siap'
+                        ? 'var(--ssw-correctBg)'
+                        : readinessBand.key === 'cukup'
+                          ? 'rgba(217, 119, 6, 0.15)'
+                          : 'var(--ssw-wrongBg)',
+                    color:
+                      readinessBand.key === 'siap'
+                        ? T.correct
+                        : readinessBand.key === 'cukup'
+                          ? T.gold
+                          : T.wrong,
+                  }}
+                >
+                  {readinessBand.label}
+                </div>
+              )}
             </div>
           )}
           {!showCountdown && !examDate && (

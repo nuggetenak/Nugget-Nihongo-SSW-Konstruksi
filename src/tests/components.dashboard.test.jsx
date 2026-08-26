@@ -6,7 +6,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Dashboard from '../components/Dashboard.jsx';
 import { ProgressProvider } from '../contexts/ProgressContext.jsx';
-import { _reset_for_test, init } from '../storage/engine.js';
+import { _reset_for_test, init, set } from '../storage/engine.js';
 
 function renderDashboard(props = {}) {
   return render(
@@ -180,6 +180,61 @@ describe('Dashboard', () => {
     it('renders lifeline track', () => {
       renderDashboard({ track: 'lifeline' });
       expect(screen.getByText(/ライフライン/)).toBeTruthy();
+    });
+  });
+
+  describe('exam-readiness band (item 56)', () => {
+    const inDays = (n) => new Date(Date.now() + n * 86400000).toISOString();
+
+    it('shows no band when no exam date is set (the default fixture)', () => {
+      renderDashboard();
+      expect(screen.queryByText(/Siap$/)).toBeNull();
+      expect(screen.queryByText('Kurang siap')).toBeNull();
+      expect(screen.queryByText('Cukup siap')).toBeNull();
+    });
+
+    it('shows no band when an exam date is set but there is not enough session history yet', () => {
+      set('prefs', (p) => ({ ...p, examDate: inDays(30) }));
+      set('progress', (p) => ({
+        ...p,
+        sessions: [{ mode: 'kuis', correct: 5, total: 10, date: new Date().toISOString() }],
+      }));
+      renderDashboard();
+      expect(screen.queryByText('Kurang siap')).toBeNull();
+      expect(screen.queryByText('Cukup siap')).toBeNull();
+      expect(screen.queryByText('Siap')).toBeNull();
+    });
+
+    it('shows "Siap" for strong recent performance with an exam date set', () => {
+      set('prefs', (p) => ({ ...p, examDate: inDays(30) }));
+      set('progress', (p) => ({
+        ...p,
+        sessions: Array.from({ length: 6 }, () => ({
+          mode: 'kuis',
+          correct: 10,
+          total: 10,
+          date: new Date().toISOString(),
+        })),
+        streakData: { days: 14 },
+      }));
+      renderDashboard({ srs: { dueCount: 0, stats: { total: 100, mature: 90, review: 5 } } });
+      expect(screen.getByText('Siap')).toBeTruthy();
+    });
+
+    it('shows no band on exam day itself, even with strong data (too late to act on it)', () => {
+      set('prefs', (p) => ({ ...p, examDate: inDays(0) }));
+      set('progress', (p) => ({
+        ...p,
+        sessions: Array.from({ length: 6 }, () => ({
+          mode: 'kuis',
+          correct: 10,
+          total: 10,
+          date: new Date().toISOString(),
+        })),
+        streakData: { days: 14 },
+      }));
+      renderDashboard({ srs: { dueCount: 0, stats: { total: 100, mature: 90, review: 5 } } });
+      expect(screen.queryByText('Siap')).toBeNull();
     });
   });
 });

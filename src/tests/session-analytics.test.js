@@ -4,6 +4,7 @@ import {
   getBestSimScore,
   hasPerfectSprint,
   calcReadiness,
+  calcReadinessBand,
 } from '../utils/session-analytics.js';
 
 const makeSess = (mode, correct, total, date = new Date().toISOString()) => ({
@@ -70,10 +71,67 @@ describe('session-analytics', () => {
       const r = calcReadiness({
         srs: { stats: { total: 100, mature: 50, review: 20 } },
         sessions: [makeSess('kuis', 8, 10)],
-        streakData: { current: 7 },
+        streakData: { days: 7 },
       });
       expect(r).toBeGreaterThanOrEqual(0);
       expect(r).toBeLessThanOrEqual(100);
+    });
+    it('a real streak actually raises the score (regression check for the streakData.current/days field-name bug)', () => {
+      const base = { srs: { stats: {} }, sessions: [] };
+      const noStreak = calcReadiness({ ...base, streakData: { days: 0 } });
+      const withStreak = calcReadiness({ ...base, streakData: { days: 14 } });
+      expect(withStreak).toBeGreaterThan(noStreak);
+      expect(withStreak).toBe(20); // full streak component, capped at 14 days
+    });
+    it('accepts a wrong field name silently rather than crashing, but contributes nothing from it (documents the shape, not a fix)', () => {
+      const r = calcReadiness({
+        srs: { stats: {} },
+        sessions: [],
+        streakData: { current: 14 }, // wrong field -- .days is the real one
+      });
+      expect(r).toBe(0); // silently ignored, not an error -- worth knowing if this shape drifts again
+    });
+  });
+
+  describe('calcReadinessBand', () => {
+    it('returns null when there is not enough scored-session data yet', () => {
+      const band = calcReadinessBand({
+        srs: { stats: {} },
+        sessions: [makeSess('kuis', 5, 5)], // only 1 session, below the minimum
+        streakData: { days: 0 },
+      });
+      expect(band).toBeNull();
+    });
+
+    it('bands a low score as "Kurang siap"', () => {
+      const sessions = Array.from({ length: 6 }, () => makeSess('kuis', 1, 10)); // 10% accuracy
+      const band = calcReadinessBand({ srs: { stats: {} }, sessions, streakData: { days: 0 } });
+      expect(band?.key).toBe('kurang');
+    });
+
+    it('bands a high score as "Siap"', () => {
+      const sessions = Array.from({ length: 6 }, () => makeSess('kuis', 10, 10)); // 100% accuracy
+      const band = calcReadinessBand({
+        srs: { stats: { total: 100, mature: 90, review: 5 } },
+        sessions,
+        streakData: { days: 14 },
+      });
+      expect(band?.key).toBe('siap');
+    });
+
+    it('weights recent sessions, not the all-time average -- early struggling should not permanently cap a since-improved score', () => {
+      const earlyBad = Array.from({ length: 20 }, () => makeSess('kuis', 1, 10)); // 10% accuracy, old
+      const recentGood = Array.from({ length: 10 }, () => makeSess('kuis', 10, 10)); // 100%, recent
+      const sessions = [...earlyBad, ...recentGood];
+      const band = calcReadinessBand({
+        srs: { stats: { total: 100, mature: 80, review: 10 } },
+        sessions,
+        streakData: { days: 10 },
+      });
+      // All-time average here would be roughly (20*10% + 10*100%)/30 ≈ 40%,
+      // pulling the band down to "cukup" or worse despite genuinely strong
+      // recent performance. Recency-weighting should reflect the improvement.
+      expect(band?.key).toBe('siap');
     });
   });
 });

@@ -560,3 +560,39 @@ genuinely different answer would be mostly-red noise, not a lesson. Neither help
 unit-tested directly (same as the existing, similarly-private `isCorrect`/`norm` in both files) —
 the actual algorithmic risk is covered by `typo-diff.js`'s own tests; these are thin, low-risk
 selection logic on top of it.
+
+## 17. Dashboard exam-readiness band (item 56, 2026-08-26)
+
+Not in plan §9's table, added anyway per the same judgment items 51/52/60/65 already used.
+
+**Sanity-checked `calcReadiness` before reusing it, per the plan's own explicit ask** ("sanity-
+check what it actually measures before surfacing it as a headline — it was written for a stats
+page, not a dashboard promise"). Found two real issues, not one design concern:
+
+- **A genuine, unrelated bug**: `calcReadiness` read `streakData?.current`, but the real shape
+  (confirmed against `ProgressContext.jsx` and `StatsMode`'s own correct `streakData?.days` a few
+  lines from its own call to this function) is `{ days, lastDate }` — no `.current` field exists.
+  The streak component (20% of the composite score) has silently contributed **zero** for every
+  existing caller (`StatsMode`, `recommend-mode`), always, regardless of anyone's actual streak.
+  Fixed at the source, not worked around in a new function — this makes `StatsMode`'s existing
+  display more accurate too, not just this item's new use.
+- **A design gap specific to this use case**: the quiz-accuracy component used the *all-time*
+  average, not recent performance. Fine for a stats page (an honest lifetime number), wrong for a
+  dashboard *promise* — someone who struggled early but has since improved substantially would see
+  an artificially low score, exactly the "confident-looking wrong number" the plan was worried
+  about. Added an optional `recentN` parameter to `calcReadiness` rather than a second function
+  duplicating the SRS/streak logic; existing callers don't pass it and are unaffected (verified via
+  the full suite passing unmodified for their tests).
+
+**`calcReadinessBand`**: bands into kurang siap / cukup / siap rather than a percentage — the
+plan's own strong recommendation, adopted rather than re-litigated, since it was already
+well-reasoned. Returns `null` (not a discouraging low band) below a minimum session count — a
+band from 2-3 sessions is noise wearing a label, not an assessment. Shown on the dashboard next to
+the exam countdown per the plan's framing, suppressed on exam day itself (`daysLeft === 0`) so it
+doesn't risk visually contradicting the existing, unconditional "Semangat! Kamu sudah siap 💪"
+send-off message with a data-driven claim on a day when there's nothing left to act on anyway.
+
+10 new tests: the streak-bug regression check (a real streak now measurably raises the score),
+the band thresholds, the minimum-data gate, and specifically a test proving recency-weighting
+actually overcomes a poor all-time average from early sessions — the exact scenario item 56's
+plan text was concerned about, verified rather than assumed fixed.
