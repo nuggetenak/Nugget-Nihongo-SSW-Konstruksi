@@ -455,6 +455,35 @@ This may be better expressed as an adjustment to the rating already being sent t
 stored field — the latter means a storage-schema change (v7) and a migration, which is a much
 bigger commitment than the item's `M` size implies. Decide which before writing code.
 
+**Decision made (2026-08-26): new stored field, not a rating adjustment. Checkbox deliberately
+left unmarked — the decision is made, the migration itself is not built.**
+
+`ts-fsrs`'s `Rating` is a fixed 4-value enum (Again/Hard/Good/Easy, `fsrs-core.js`) with no timing
+input channel at all — confirmed by reading the actual integration, not assumed from general FSRS
+knowledge. There's no way to hand the algorithm "took 8 seconds" directly; the only lever available
+would be silently *changing which of the four discrete ratings gets sent* based on a computed
+timing heuristic.
+
+This codebase already has a directly relevant precedent for adjusting FSRS's inputs, and it argues
+against that path: `INDONESIAN_CALIBRATION` (`fsrs-core.js`) sits explicitly inert
+(`calibrated: false`) until real study data justifies activating it, rather than shipping a
+plausible-sounding heuristic. A hesitation-based rating adjustment would be exactly that kind of
+heuristic — no research backing for what the adjustment formula should be, and a real risk to the
+algorithm's own validity: FSRS's model assumes the rating reflects the learner's genuine
+self-assessed recall quality. Silently downgrading a "Good" to "Hard" because they were slow (a) has
+no principled formula behind it and (b) could feel simply wrong to a learner who knows they got it
+right and pressed accordingly.
+
+New field is the right call, but "just add a field" undersells it — read `migrations.js` before
+assuming so: this codebase's migrations are real, dedicated, per-version data transformations
+(v1 through v6, 386 lines) touching actual users' stored SRS progress. A v7 migration deserves that
+same level of focused care and its own session, not a rushed addition at the tail of a day that has
+already landed 26 commits. Recommended shape for that future session: an *additive*, optional field
+on the review record (not a scored input to FSRS) — e.g. `responseMs` — surfaced back to the
+learner as an informational signal ("you hesitated on this one") rather than fed into the
+algorithm at all, preserving `INDONESIAN_CALIBRATION`'s own standard of not touching FSRS's actual
+behavior without real evidence behind the change.
+
 ### ☐ 59. Offline-capable audio via pre-generated clips — `L` — `P3` — approved, **measure first**
 Item 25 made speech failure *legible*; it can't make it *work*. A worker studying on a train with
 no local ja-JP voice has no audio at all. Pre-generated clips fix it properly.
@@ -470,6 +499,40 @@ Before building: measure the current install footprint, then decide a **budget**
 rather than all 1,438 — and possibly on-demand download rather than precache, so the user opts in
 rather than paying for it at install. If the measurement says the budget can't hold it, *that is a
 legitimate outcome* and the approval doesn't override it; report back rather than shipping bloat.
+
+**Measured (2026-08-26). Checkbox deliberately left unmarked — the measurement is done and
+conclusive, but building this further hit a separate, concrete blocker described below.**
+
+Current real precached install footprint, from the actual built `dist/sw.js` (not estimated):
+**3.29 MB** (1.44 MB fonts from item 61 + 1.85 MB JS/CSS/data bundles, including the eagerly-
+imported `data-cards` chunk).
+
+Per-clip audio size wasn't guessed — generated real Opus-encoded test clips (`ffmpeg`/`libopus`,
+available in this environment) at realistic short-word durations (1–2s, VOIP-optimized 24kbps) to
+measure actual output size rather than assume one. Used white noise as the test signal
+deliberately: it's close to worst-case for compression (incompressible), so this is a conservative
+upper bound — real speech, with its silence gaps between syllables, compresses at least as well if
+not better. Result: **3.1–6.0 KB per clip**, ~5 KB average.
+
+| Scope | Added payload | New total | Increase |
+|---|---|---|---|
+| ~200 JAC-official terms | +0.98 MB | 4.27 MB | +30% |
+| All 1,438 cards | +7.02 MB | 10.31 MB | **+213%** |
+
+**Confirms the plan's own anticipated landing point, with real numbers behind it, not just
+intuition**: the full corpus would more than *triple* the install size for an audience explicitly
+characterized as cheap-phone, metered-connection — not defensible. The ~200-term subset, especially
+as opt-in/on-demand rather than mandatory precache, is a real, fittable scope (+30%, comparable to
+what item 61 itself added).
+
+**Separate, concrete blocker on top of the budget question**: this environment has audio
+*encoding* tooling (`ffmpeg`, `libopus`) but no actual Japanese text-to-speech voice or service —
+the clips measured above are synthetic test signals for sizing purposes only, not usable audio.
+Actually building this item needs either a real ja-JP TTS API (cloud-based — itself worth checking
+against the offline-first constraint this whole item exists to serve, since a build-time TTS
+service is fine, a runtime one would defeat the point) or licensed/recorded human audio for ~200
+terms. Neither is something to source and integrate as a continuation of this session — a genuinely
+separate task, not a shortcut to skip.
 
 ### ☑ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
 `QuizProduksiMode` advertises "pencocokan fleksibel (huruf besar/kecil diabaikan)" but a learner
