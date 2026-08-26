@@ -16,9 +16,8 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
+import { QUIZ_COUNTS } from '../utils/constants.js';
 import S from './modes.module.css';
-
-const QUIZ_COUNTS = [10, 20, 30];
 
 function buildQuestions(cards, count, allCards) {
   const pool = shuffle(cards).slice(0, count);
@@ -34,8 +33,10 @@ function buildQuestions(cards, count, allCards) {
 }
 
 export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRetryWrong }) {
+  const { toast, prefs, setPref } = useApp();
+  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(() => prefs?.quizQuestionCount ?? 10);
   const [questions, setQuestions] = useState([]);
   const [idx, setIdx] = useState(0);
   const [selected, setSelected] = useState(null); // null | index
@@ -44,8 +45,6 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   const speakCountRef = useRef(0);
   const { getDurationMs } = useSessionTimer();
   const { recordWrong } = useProgress();
-  const { toast, prefs } = useApp();
-  const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const online = useOnlineStatus();
 
   const hasAudio = canSpeak();
@@ -220,7 +219,10 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             {QUIZ_COUNTS.map((n) => (
               <button
                 key={n}
-                onClick={() => setCount(n)}
+                onClick={() => {
+                  setCount(n);
+                  setPref('quizQuestionCount', n);
+                }}
                 style={{
                   flex: 1,
                   padding: '10px 0',
@@ -388,15 +390,18 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           let bg = 'var(--ssw-surface)';
           let border = 'var(--ssw-border)';
           let color = 'var(--ssw-text)';
+          let anim = 'none';
           if (isAnswered) {
             if (opt.isCorrect) {
               bg = 'var(--ssw-correctBg)';
               border = 'var(--ssw-correctBorder)';
               color = 'var(--ssw-correct)';
+              anim = 'correctFlash 0.5s ease';
             } else if (i === selected && !opt.isCorrect) {
               bg = 'var(--ssw-wrongBg)';
               border = 'var(--ssw-wrongBorder)';
               color = 'var(--ssw-wrong)';
+              anim = 'wrongShake 0.45s ease';
             }
           }
           return (
@@ -417,6 +422,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 cursor: isAnswered ? 'default' : 'pointer',
                 transition: 'all 0.15s',
                 fontWeight: 500,
+                animation: anim,
               }}
             >
               {opt.text}

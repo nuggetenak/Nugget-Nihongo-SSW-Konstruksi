@@ -191,12 +191,20 @@ defined and unused — no per-mode inconsistency to reconcile (nothing calls it 
 inconsistent with), and picking a first call site for it (milestone toasts? quiz completion?) is a
 product decision this item's audit-and-reconcile scope doesn't cover. Flagging rather than guessing.
 
-*Known gap, not reconciled this pass:* `correctFlash`/`wrongShake` — the visual counterpart to the
-haptic fix above — are wired into `OptionButton.module.css` only. The same seven hand-rolled modes
-that were missing haptics are also missing this animation on their own answer UI; each has bespoke
-option-button styling, so bringing all seven in line is a real per-file CSS pass, not a mechanical
-substitution like the haptic fix was. Scoped out of this item rather than done partially or rushed;
-a reasonable follow-up if the owner wants full visual parity, not just tactile.
+*Closed (item 50, 2026-08-26):* `correctFlash`/`wrongShake` — the visual counterpart to the haptic
+fix above — were wired into `OptionButton.module.css` only. Verified against this exact record
+before starting: the "seven modes" figure above was for *haptics*, which can fire on any answer-
+submission event regardless of UI shape. This animation needs an actual clickable option element
+to apply to, which narrows the real count to four: `AngkaMode`, `DangerMode`, `ConfusionMode`,
+`DengarMode` — genuinely hand-rolled multiple-choice buttons with color-only feedback and no
+animation. Checked and deliberately excluded the rest: `SimulasiMode` already renders through the
+shared `OptionButton` component (gets the animation for free, wasn't actually missing it despite
+being named in the plan's "eight hand-rolled modes" count); `ProductionMode`/`QuizProduksiMode`
+are free-text with a reveal *panel*, not options, and already carry their own `scaleIn` entrance
+animation — a different shape, not a gap; `SprintMode`'s button colors are a static affordance
+("this button means Tahu"), not a reactive correct/wrong state, so there's no reveal moment to
+animate. Each mode's own `animation` property reuses the same two `global.css` keyframes
+`OptionButton` already uses — no new keyframes, no new CSS file.
 
 *JS-driven motion needs its own `prefers-reduced-motion` check* — a CSS rule can't reach an API
 called from JS. `BottomNav`'s View Transitions crossfade (`document.startViewTransition`) was the

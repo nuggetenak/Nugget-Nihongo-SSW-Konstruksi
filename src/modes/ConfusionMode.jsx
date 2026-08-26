@@ -495,6 +495,13 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                       ? T.wrongBg
                       : T.surface,
                 border: `1.5px solid ${!showResult ? T.border : isCorrectOpt ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`,
+                animation: !showResult
+                  ? 'none'
+                  : isCorrectOpt
+                    ? 'correctFlash 0.5s ease'
+                    : isWrongPick
+                      ? 'wrongShake 0.45s ease'
+                      : 'none',
                 color: !showResult
                   ? T.text
                   : isCorrectOpt

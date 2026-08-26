@@ -377,7 +377,7 @@ tappable answer options invites mis-fires. Scope this to the flip-card surfaces 
 These were **deliberately deferred with reasons** in the archived plan, not missed. Reasons
 summarised; full context in `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`.
 
-### ☐ 50. `correctFlash` / `wrongShake` reach only `OptionButton` — `M`
+### ☑ 50. `correctFlash` / `wrongShake` reach only `OptionButton` — `M`
 *(archived item 21's stated deferral)* The haptic half of answer feedback was unified across all
 modes; the **visual** half wasn't. Both animations are defined in `global.css` and consumed only
 by `OptionButton.module.css`, so the eight hand-rolled modes have no answer-feedback animation.
