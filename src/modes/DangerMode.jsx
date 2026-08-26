@@ -12,6 +12,7 @@ import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import S from './modes.module.css';
 import D from './DangerMode.module.css';
 
@@ -333,6 +334,10 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
 
   return (
     <div className={`${S.pageScroll} ${D.quizPage}`}>
+      <QuizAnnouncer
+        isCorrect={selected !== null ? selected === item.correctIdx : null}
+        correctText={opts[item.correctIdx]?.text}
+      />
       <div className={`${S.rowSpread} ${D.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>
           ← Soal Jebak

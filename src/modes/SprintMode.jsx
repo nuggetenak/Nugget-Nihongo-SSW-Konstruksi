@@ -118,6 +118,9 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   }, [timeLeft, phase, correct, wrong, fireSessionEnd, ghostTimeline, selectedDuration]);
 
   const card = order[idx];
+  // Deliberately no QuizAnnouncer here (item 45) -- Tahu/Tidak Tahu is
+  // self-assessment, not a graded answer checked against a selection. The
+  // user's own tap already is the outcome; there's nothing to announce back.
   const next = () => {
     setShowAnswer(false);
     setIdx((i) => (i + 1) % order.length);

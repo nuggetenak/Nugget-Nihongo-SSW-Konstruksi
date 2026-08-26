@@ -101,7 +101,7 @@ thing the owner remembered as "ruby behaviour in other parts still needs adjustm
 
 ## 3. P0/P1 — Quiz and exam consistency
 
-### ☐ 45. Eight quiz modes announce nothing to screen readers — `M`
+### ☑ 45. Eight quiz modes announce nothing to screen readers — `M`
 
 **Verified by count.** `grep -c "aria-live\|sr-only"` per mode:
 

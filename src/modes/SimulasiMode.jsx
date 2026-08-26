@@ -9,6 +9,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { haptic } from '../utils/haptic.js';
@@ -434,6 +435,10 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   if (!q) return null;
   return (
     <div className={`${S.pageScroll} ${SM.quizPage}`}>
+      <QuizAnnouncer
+        isCorrect={selected !== null ? selected === q.correctIdx : null}
+        correctText={q.opts[q.correctIdx]?.text}
+      />
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
           ✕ Keluar

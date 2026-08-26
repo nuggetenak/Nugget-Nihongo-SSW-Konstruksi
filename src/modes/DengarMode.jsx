@@ -9,6 +9,7 @@ import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -344,6 +345,10 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd }) {
 
   return (
     <div className={S.page}>
+      <QuizAnnouncer
+        isCorrect={selected !== null ? selected === currentQ.correctIdx : null}
+        correctText={currentQ.opts[currentQ.correctIdx]?.text}
+      />
       <button className={S.btnBack} onClick={onExit}>
         ← Kembali
       </button>

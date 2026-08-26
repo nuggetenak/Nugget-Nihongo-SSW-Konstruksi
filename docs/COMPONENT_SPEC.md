@@ -197,6 +197,27 @@ verification sweep) pre-flip `aria-label` was building its accessible name from 
 un-stripped `jp` string, so a screen reader announced literal `《reading》` markup syntax instead
 of the word. Both now use `stripFuri()`'s output for the label.
 
+**`QuizAnnouncer` — outcome announcements (item 45, 2026-08-26):** the plan's own audit named
+`QuizShell` as already having a correct/wrong announcement to extract. **Verified wrong** —
+`grep -n "aria-live" src/components/QuizShell.jsx` returns exactly two regions, and neither
+announces an answer's correctness: one is question progress ("Soal X dari Y"), the other wraps
+the timer display. `OptionButton.jsx` has zero `aria-`/`role` attributes. No mode announced
+correct/wrong to a screen reader, including the four `QuizShell`-based modes the plan called
+compliant — this was a new capability, not an extraction of an existing one.
+
+`src/components/QuizAnnouncer.jsx` is the shared fix: takes `isCorrect` (`true`/`false`/`null`)
+and an optional `correctText`, renders one `sr-only` `aria-live="assertive"` region. Rendered
+unconditionally with its text changing between `''`/`'Benar!'`/`'Salah...'` rather than being
+mounted/unmounted, matching how `QuizShell`'s own progress region already behaves — the more
+reliable pattern for consistent announcement across screen readers. Used by `QuizShell` (fixing
+all four modes behind it) and directly by `AngkaMode`, `DangerMode`, `ConfusionMode`,
+`DengarMode`, `SimulasiMode`, `ProductionMode`, `QuizProduksiMode`.
+
+**Not used by `SprintMode`.** Its Tahu/Tidak Tahu buttons are self-assessment — there's no
+correct answer being checked against a selection, so there's nothing for the announcer to
+announce that the user's own tap didn't already convey. Documented inline at the call site,
+not just here, so it reads as a decision and not a gap.
+
 ## 9. Feedback level: toast vs. inline vs. dialog vs. banner (item 16, 2026-08-24)
 
 Four different ways this app tells the user something happened, and the rule for which one a new

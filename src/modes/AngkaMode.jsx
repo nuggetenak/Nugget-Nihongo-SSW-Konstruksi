@@ -10,6 +10,7 @@ import { CARDS } from '../data/cards.js';
 import { getGrade } from '../styles/theme.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -392,6 +393,10 @@ function QuizView({ onBack, onSessionEnd }) {
 
   return (
     <div className={`${S.pageScroll} ${A.quizPage}`}>
+      <QuizAnnouncer
+        isCorrect={selected !== null ? selected === item.correctIdx : null}
+        correctText={opts[item.correctIdx]?.text}
+      />
       <div className={`${S.rowSpread} ${A.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>
           ← Angka Kunci

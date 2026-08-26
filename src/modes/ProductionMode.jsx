@@ -10,6 +10,7 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -300,6 +301,10 @@ export default function ProductionMode({ cards, onExit, onSessionEnd, audioEnabl
 
   return (
     <div className={S.pageScroll} style={{ padding: 'var(--sp-4)' }}>
+      <QuizAnnouncer
+        isCorrect={lastResult ? lastResult.correct : null}
+        correctText={card.id_text}
+      />
       <div
         style={{
           display: 'flex',

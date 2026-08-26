@@ -13,6 +13,7 @@ import { haptic } from '../utils/haptic.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import HowToPlayCard from '../components/HowToPlayCard.jsx';
@@ -295,6 +296,10 @@ export default function QuizProduksiMode({ cards, onExit, onSessionEnd, audioEna
 
   return (
     <div className={S.pageScroll} style={{ padding: 'var(--sp-4)' }}>
+      <QuizAnnouncer
+        isCorrect={lastResult ? lastResult.correct : null}
+        correctText={card.id_text}
+      />
       <div
         style={{
           display: 'flex',

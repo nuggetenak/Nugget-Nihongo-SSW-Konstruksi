@@ -13,6 +13,7 @@ import { JpFront } from './JpDisplay.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
+import QuizAnnouncer from './QuizAnnouncer.jsx';
 import S from './QuizShell.module.css';
 
 export default function QuizShell({
@@ -164,10 +165,14 @@ export default function QuizShell({
 
   return (
     <div className={S.wrap}>
-      {/* Screen reader announcement */}
+      {/* Screen reader announcement — progress */}
       <div className="sr-only" aria-live="assertive" aria-atomic="true">
         Soal {qIdx + 1} dari {questions.length}
       </div>
+      <QuizAnnouncer
+        isCorrect={selected !== null ? selected === q.correctIdx : null}
+        correctText={q.options[q.correctIdx]?.text}
+      />
       <div className={S.header}>
         <button className={S.btnBack} onClick={onExit}>
           ← {title}

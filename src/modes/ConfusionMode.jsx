@@ -12,6 +12,7 @@ import { getGrade } from '../styles/theme.js';
 import { haptic } from '../utils/haptic.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
+import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -448,6 +449,10 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
 
   return (
     <div className={S.pageScroll} style={{ padding: 'var(--sp-4)' }}>
+      <QuizAnnouncer
+        isCorrect={selected !== null ? selected === correctIdx : null}
+        correctText={opts[correctIdx]?.text}
+      />
       <div
         style={{
           display: 'flex',
