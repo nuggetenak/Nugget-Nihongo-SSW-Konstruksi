@@ -360,3 +360,29 @@ modes too, not a gap discovered and left unmentioned.
 `SideNav`'s footer ("kartu · siap offline") was the one specific claim the plan named — narrowed
 to "konten siap offline" so it reads as a claim about the card content specifically, not the
 whole app's every feature.
+
+**`--ssw-onAmber` contrast token (item 64, 2026-08-26).** Plan described 21 sites hardcoding
+`#fff` where this token (`#1a0a00`, for text on flat `--ssw-amber` backgrounds) should be used.
+Verified before fixing anything, rather than trusting the count: found 15 hardcoded `#fff`/`white`
+declarations total in the whole codebase (not 21), and checked each one's actual background —
+
+- **1 genuine match**: `CatatanMode.jsx`'s save button, flat `var(--ssw-amber)` background. Fixed.
+- **11 are correctly white already** — dark overlays (`rgba(0,0,0,0.6-0.72)`), the danger-red
+  `ConfirmDialog`/`DataWarningBanner` variants, a blue `OfflineBanner`, a per-item dynamic-color
+  badge (`BelajarTab`'s `featuredBadge`, background is `sm.color` — varies per mode, not amber-only,
+  so `--ssw-onAmber` would be wrong there specifically even though white is a reasonable universal
+  choice across arbitrary brand colors).
+- **2 are on an amber-derived *gradient*, not the flat token** (`Dashboard.module.css` via
+  `--accent`, `Onboarding.module.css`'s track-selector background) —
+  `linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b)`. Deliberately **not** swapped to
+  `--ssw-onAmber`: that token's very dark value (`#1a0a00`) was designed and presumably checked
+  against the *flat* `#F59E0B`, not this gradient's much darker brown stop (`#92400e`) — dark text
+  on dark brown is poor contrast, so blindly applying the "fix" here risked making it worse, not
+  better. Needs its own check (possibly a second, gradient-aware token) rather than reusing this
+  one on an unverified assumption that "amber-family" is close enough.
+- **1 unrelated finding, not fixed here**: `Onboarding.module.css`'s
+  `.trackCard[data-active='true'] .trackLabel` turns text white on selection, but the card's
+  background (`var(--ssw-surface)`) never changes for the active state — no amber, no dark
+  overlay, nothing that would justify white text specifically. Doesn't look like a contrast bug in
+  practice (worth a screenshot check, not assumed), but the rule itself doesn't parse as intentional
+  either. Flagged for a future small item, out of scope for the token question this item is about.

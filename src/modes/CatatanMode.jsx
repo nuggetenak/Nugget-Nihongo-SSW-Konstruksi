@@ -113,7 +113,7 @@ function NoteCard({ card, note, onSave }) {
                 padding: '9px',
                 borderRadius: 8,
                 background: 'var(--ssw-amber)',
-                color: '#fff',
+                color: 'var(--ssw-onAmber)',
                 fontFamily: 'inherit',
                 fontSize: 13,
                 fontWeight: 700,

@@ -341,7 +341,7 @@ Narrow, real, and cheap. See §6 for why this is the *only* tap-target item.
 
 ---
 
-### ☐ 64. `--ssw-onAmber` exists; 21 sites hardcode `#fff` instead — `S` — `P2`
+### ☑ 64. `--ssw-onAmber` exists; 21 sites hardcode `#fff` instead — `S` — `P2`
 
 A token for "text sitting on a saturated brand surface" is defined in `theme.js` and mostly
 unused; `color: #fff` appears 21 times across `OfflineBanner`, `DataWarningBanner`,
