@@ -15,6 +15,7 @@ import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
 import QuizAnnouncer from './QuizAnnouncer.jsx';
+import { saveQuizSnapshot, clearQuizSnapshot } from '../utils/quiz-persistence.js';
 import S from './QuizShell.module.css';
 
 export default function QuizShell({
@@ -31,10 +32,14 @@ export default function QuizShell({
   accentColor = T.amber,
   autoNextDelay = 2000,
   audioEnabled = false,
+  persistKey = null, // item 51: opt-in, null = no persistence (unchanged default)
+  initialQIdx = 0,
+  initialSelected = null,
+  initialResults = [],
 }) {
-  const [qIdx, setQIdx] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [results, setResults] = useState([]);
+  const [qIdx, setQIdx] = useState(initialQIdx);
+  const [selected, setSelected] = useState(initialSelected);
+  const [results, setResults] = useState(initialResults);
   const [phase, setPhase] = useState('playing');
   const [timeLeft, setTimeLeft] = useState(timer);
   const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
@@ -43,6 +48,15 @@ export default function QuizShell({
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
+
+  useEffect(() => {
+    if (!persistKey) return;
+    if (phase === 'finished') {
+      clearQuizSnapshot(persistKey);
+      return;
+    }
+    saveQuizSnapshot(persistKey, { qIdx, selected, results });
+  }, [persistKey, phase, qIdx, selected, results]);
 
   useEffect(() => {
     if (timer <= 0 || phase !== 'playing') return;

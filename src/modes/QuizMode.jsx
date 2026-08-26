@@ -10,7 +10,11 @@ import { QUIZ_COUNTS } from '../utils/constants.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
+import { saveQuizSnapshot, readQuizSnapshot, clearQuizSnapshot } from '../utils/quiz-persistence.js';
 import S from './modes.module.css';
+
+const PERSIST_KEY = 'ssw-persist-kuis';
+const PERSIST_QUESTIONS_KEY = 'ssw-persist-kuis-questions';
 
 export default function QuizMode({
   cards,
@@ -27,6 +31,17 @@ export default function QuizMode({
   const [autoNextDelay, setAutoNextDelay] = useState(2000);
   const [showSettings, setShowSettings] = useState(false);
   const [started, setStarted] = useState(false);
+  const [resumeData, setResumeData] = useState(() => {
+    // Checked once, at mount, before the user has done anything -- a
+    // resume prompt that appeared mid-session (e.g. after they'd already
+    // chosen to start fresh) would be confusing, not helpful.
+    const progress = readQuizSnapshot(PERSIST_KEY);
+    const savedQuestions = readQuizSnapshot(PERSIST_QUESTIONS_KEY);
+    if (progress && savedQuestions && savedQuestions.length > 0) {
+      return { progress, questions: savedQuestions };
+    }
+    return null;
+  });
   const { quizWrong, recordWrong } = useProgress();
 
   // preventing stale seen-card memory across separate mode sessions.
@@ -82,8 +97,25 @@ export default function QuizMode({
       _cardId: q.card.id,
     }));
     setQuestions(qs);
+    saveQuizSnapshot(PERSIST_QUESTIONS_KEY, qs);
+    setResumeData(null); // fresh session now, not resuming
     setStarted(true);
   };
+
+  const handleResume = useCallback(() => {
+    if (!resumeData) return;
+    setQuestions(resumeData.questions);
+    setStarted(true);
+    // resumeData itself stays set -- QuizShell reads its initial* values
+    // from it below. Cleared only once the session actually finishes or
+    // the user explicitly declines (handleDeclineResume).
+  }, [resumeData]);
+
+  const handleDeclineResume = useCallback(() => {
+    clearQuizSnapshot(PERSIST_KEY);
+    clearQuizSnapshot(PERSIST_QUESTIONS_KEY);
+    setResumeData(null);
+  }, []);
 
   if (!started) {
     const DIFF = [
@@ -156,6 +188,48 @@ export default function QuizMode({
         <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
           Kuis Flashcard
         </h2>
+
+        {resumeData && (
+          <div
+            style={{
+              background: T.surfaceActive,
+              border: `1.5px solid ${T.borderActive}`,
+              borderRadius: T.r.md,
+              padding: '14px 16px',
+              marginBottom: 16,
+            }}
+          >
+            <div style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 4 }}>
+              Lanjutkan kuis sebelumnya?
+            </div>
+            <div style={{ fontSize: 12, color: T.textMuted, marginBottom: 10 }}>
+              Soal {resumeData.progress.qIdx + 1} dari {resumeData.questions.length}, terjawab{' '}
+              {resumeData.progress.results.length}.
+            </div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button
+                style={{
+                  ...pillStyle(true),
+                  flex: 1,
+                  textAlign: 'center',
+                  background: T.amber,
+                  color: '#1c1917',
+                  border: 'none',
+                }}
+                onClick={handleResume}
+              >
+                Lanjutkan
+              </button>
+              <button
+                style={{ ...pillStyle(false), flex: 1, textAlign: 'center' }}
+                onClick={handleDeclineResume}
+              >
+                Mulai Baru
+              </button>
+            </div>
+          </div>
+        )}
+
         <p className={S.pageSub}>
           {catFilteredCards.length} kartu tersedia {lemahMode ? '(mode lemah)' : ''}
           {selectedCat !== 'all' ? ` · ${selectedCat}` : ''}
@@ -303,14 +377,31 @@ export default function QuizMode({
       onExit={() => {
         setStarted(false);
         seenPool.current.clear();
+        // Re-read rather than trust the mount-time resumeData -- QuizShell
+        // has been writing fresh progress throughout, and this needs to
+        // reflect where they actually left off just now, not where they
+        // were the last time this screen was shown.
+        const progress = readQuizSnapshot(PERSIST_KEY);
+        const savedQuestions = readQuizSnapshot(PERSIST_QUESTIONS_KEY);
+        setResumeData(
+          progress && savedQuestions?.length > 0 ? { progress, questions: savedQuestions } : null
+        );
       }}
       title="Kuis"
       onAnswer={handleAnswer}
-      onFinish={onFinish}
+      onFinish={(payload) => {
+        clearQuizSnapshot(PERSIST_QUESTIONS_KEY); // QuizShell only owns PERSIST_KEY
+        setResumeData(null);
+        onFinish?.(payload);
+      }}
       onRetryWrong={onRetryWrong}
       accentColor={T.gold}
       autoNextDelay={autoNextDelay}
       audioEnabled={audioEnabled}
+      persistKey={PERSIST_KEY}
+      initialQIdx={resumeData?.progress?.qIdx ?? 0}
+      initialSelected={resumeData?.progress?.selected ?? null}
+      initialResults={resumeData?.progress?.results ?? []}
     />
   );
 }

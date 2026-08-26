@@ -442,3 +442,41 @@ mismatch is a minor visual imperfection, not a functional one.
 distinct states), tappable to jump directly — the free-navigation equivalent of glancing down a
 paper answer sheet to see what's left. Prev/Next buttons remain for straightforward linear use;
 the navigator is there for the "skip around" case a real exam actually allows.
+
+## 14. Mid-session persistence (item 51, 2026-08-26)
+
+Not in plan §9's doc-update table, added anyway since it meaningfully extends `QuizShell`'s
+contract (new optional props) — same judgment item 65 already used for an undocumented-by-plan
+but still shared-contract-changing addition.
+
+`src/utils/quiz-persistence.js`: `saveQuizSnapshot`/`readQuizSnapshot`/`clearQuizSnapshot`, plain
+functions (not a hook — no `useState`/`useEffect` inside, moved out of `src/hooks/` where it was
+first written, into `src/utils/` where this codebase's own convention actually puts it). Deliberately
+generic — an arbitrary serializable snapshot under a key, nothing shape-specific — since
+`QuizShell`'s `results[]`/`qIdx`/`selected`, `SimulasiMode`'s `answers{}` dict (item 48), and the
+hand-rolled modes' own state are all genuinely different shapes; forcing one canonical structure
+onto all of them would have been a bigger, riskier change than this item asked for. 30-minute
+staleness window — long enough for a real interruption, short enough that a resume prompt for a
+three-day-old abandoned quiz would be confusing rather than helpful.
+
+**`QuizShell` gains four new optional props** (`persistKey`, `initialQIdx`, `initialSelected`,
+`initialResults`), all defaulting to exactly today's behavior. `JACMode`/`VocabMode`/`WaygroundMode`
+don't pass them and are unaffected by this item — verified by running the full suite unmodified,
+not just asserted.
+
+**`QuizMode` is the reference implementation**, not full coverage. A real resume needs the exact
+question set restored, not just progress markers against a freshly re-randomized quiz — showing
+"question 7 of 10, 4 correct" against ten *different* questions than the ones actually answered
+would be worse than no resume feature at all. So `QuizMode` persists its `questions` array under
+its own key alongside `QuizShell`'s own progress snapshot, and restores both together on resume.
+Caught before shipping: exiting mid-quiz, resuming, playing further, then exiting *again* needs to
+re-read the latest snapshot at that second exit — trusting the resume prompt's original mount-time
+data would show a second prompt with stale, outdated progress.
+
+**Deliberately not extended to `JACMode`/`VocabMode`/`WaygroundMode` or the hand-rolled modes in
+this item.** Same underlying pattern would apply, but getting the "exact question set, not just
+progress" subtlety right took real care even once — rolling it out to the other 3 `QuizShell`
+consumers plus ~8 differently-shaped hand-rolled modes in the same pass risked rushing the parts
+that matter (a resume that silently shows the wrong quiz is worse than the crash it's meant to
+protect against). One correct, tested reference implementation now; same-pattern follow-up later,
+not itemized as a new gap since it's the direct, obvious next step from what's here.

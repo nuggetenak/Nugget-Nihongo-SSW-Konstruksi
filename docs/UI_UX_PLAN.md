@@ -384,7 +384,7 @@ by `OptionButton.module.css`, so the eight hand-rolled modes have no answer-feed
 Each has bespoke option styling, so this is a real per-file CSS pass. Natural companion to items
 45–47 — same files, same sitting.
 
-### ☐ 51. A crash or reload mid-quiz loses every answer — `M`
+### ☑ 51. A crash or reload mid-quiz loses every answer — `M`
 *(archived item 19's finding; out of that item's scope)* `QuizShell`'s `results` live in
 `useState` and only persist via `onFinish` at `phase === 'finished'`. Shared by
 `kuis`/`jac`/`vocab`/`wayground`; the hand-rolled modes are the same shape. On a cheap phone with
