@@ -19,6 +19,8 @@ import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import HowToPlayCard from '../components/HowToPlayCard.jsx';
+import TypoDiff from '../components/TypoDiff.jsx';
+import { diffChars } from '../utils/typo-diff.js';
 import { QUIZ_COUNTS } from '../utils/constants.js';
 import S from './modes.module.css';
 
@@ -41,6 +43,24 @@ function isCorrect(input, card) {
   return synonyms.some(
     (syn) => normInput === syn || syn.includes(normInput) || normInput.includes(syn)
   );
+}
+
+/**
+ * Finds which accepted synonym in id_text the user's input was closest to,
+ * and the character diff against it -- for showing a specific, relevant
+ * typo highlight rather than a diff against an arbitrary or combined string.
+ * Case-insensitive, matching isCorrect()'s own case-ignoring comparison --
+ * otherwise a pure case difference would be falsely flagged as a typo.
+ */
+function closestSynonymDiff(input, idText) {
+  const synonyms = idText.split(/[/,]/).map((s) => s.trim());
+  let best = null;
+  for (const syn of synonyms) {
+    const ops = diffChars(input.toLowerCase(), syn.toLowerCase());
+    const dist = ops.filter((o) => o.op !== 'match').length;
+    if (!best || dist < best.dist) best = { syn, ops, dist };
+  }
+  return best;
 }
 
 export default function QuizProduksiMode({
@@ -422,6 +442,22 @@ export default function QuizProduksiMode({
             <span style={{ fontSize: 11, color: T.textDim }}>Jawaban: </span>
             <span style={{ fontSize: 16, fontWeight: 700, color: T.text }}>{card.id_text}</span>
           </div>
+
+          {!answerCorrect &&
+            lastResult?.input &&
+            (() => {
+              const closest = closestSynonymDiff(lastResult.input, card.id_text);
+              // Only worth a "spelling lesson" highlight for a near-miss --
+              // a large edit distance means a genuinely different answer,
+              // where a mostly-red diff would be noise, not help.
+              if (!closest || closest.dist < 1 || closest.dist > 3) return null;
+              return (
+                <div style={{ fontSize: 13, marginBottom: 4 }}>
+                  <span style={{ color: T.textDim }}>Dekat: </span>
+                  <TypoDiff ops={closest.ops} />
+                </div>
+              );
+            })()}
 
           {card.desc && (
             <div style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.5 }}>

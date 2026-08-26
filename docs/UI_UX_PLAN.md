@@ -471,7 +471,7 @@ rather than all 1,438 — and possibly on-demand download rather than precache, 
 rather than paying for it at install. If the measurement says the budget can't hold it, *that is a
 legitimate outcome* and the approval doesn't override it; report back rather than shipping bloat.
 
-### ☐ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
+### ☑ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
 `QuizProduksiMode` advertises "pencocokan fleksibel (huruf besar/kecil diabaikan)" but a learner
 who types a *nearly* right answer is just told they're wrong. Showing the diff
 ("kamu: *keselamaton* · benar: *keselamatan*") turns a typo into a spelling lesson.
@@ -485,8 +485,14 @@ Recorded so these aren't re-investigated. Several came out of wave 2 specificall
 first grep looked alarming and the actual code was fine — that gap between "grep count" and
 "real problem" is the thing worth writing down.
 
-- **`QuizShell` a11y** — correct. `sr-only` assertive region for answers, polite for progress.
-  It's the model for item 45, not a target.
+- **`QuizShell` a11y** — ~~correct. `sr-only` assertive region for answers, polite for progress.
+  It's the model for item 45, not a target.~~ **Corrected (item 60, 2026-08-26): this was wrong.**
+  Item 45's own `grep -n "aria-live"` found exactly 2 regions — question progress and the timer —
+  neither announces correct/wrong. There was no answer-outcome announcement anywhere in the app,
+  including here. Item 45 built `QuizAnnouncer` from scratch rather than extracting an existing
+  pattern. Left the original claim struck through rather than deleted, so a future read of this
+  section's own point ("that gap between grep count and real problem is worth writing down") isn't
+  itself lost — this was the plan documenting its own audit as more thorough than it was.
 - **`OptionButton`** — fully tokenised (`--ssw-correct`/`--ssw-wrong` + Bg/Border), animations
   wired. Item 40 verified this directly.
 - **Immediate feedback in practice modes** — correct pedagogy, *not* an inconsistency with

@@ -11,6 +11,8 @@ import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
 import { JpFront } from '../components/JpDisplay.jsx';
+import TypoDiff from '../components/TypoDiff.jsx';
+import { diffChars } from '../utils/typo-diff.js';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { haptic } from '../utils/haptic.js';
@@ -42,6 +44,24 @@ function isCorrect(input, card) {
   const reading = extractReadings(card.jp);
   if (reading && trimmed.replace(/\s/g, '') === reading.replace(/\s/g, '')) return true;
   return false;
+}
+
+/**
+ * Item 60: unlike QuizProduksiMode's multi-synonym id_text, isCorrect()
+ * accepts two genuinely different targets here (the kanji form, or its kana
+ * reading) -- diffs against whichever the input was actually closer to.
+ */
+function closestAnswerDiff(input, card) {
+  const stripped = stripFuri(card.jp);
+  const reading = extractReadings(card.jp);
+  const candidates = [stripped, reading ? reading.replace(/\s/g, '') : null].filter(Boolean);
+  let best = null;
+  for (const candidate of candidates) {
+    const ops = diffChars(input.trim(), candidate);
+    const dist = ops.filter((o) => o.op !== 'match').length;
+    if (!best || dist < best.dist) best = { candidate, ops, dist };
+  }
+  return best;
 }
 
 export default function ProductionMode({
@@ -423,6 +443,21 @@ export default function ProductionMode({
             <span style={{ fontSize: 11, color: T.textDim }}>Jawaban: </span>
             <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
+
+          {!answerCorrect &&
+            lastResult?.input &&
+            (() => {
+              const closest = closestAnswerDiff(lastResult.input, card);
+              if (!closest || closest.dist < 1 || closest.dist > 3) return null;
+              return (
+                <div style={{ fontSize: 13, marginBottom: 4 }}>
+                  <span style={{ color: T.textDim }}>Dekat: </span>
+                  <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>
+                    <TypoDiff ops={closest.ops} />
+                  </span>
+                </div>
+              );
+            })()}
 
           {card.desc && (
             <div style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.5 }}>

@@ -522,3 +522,41 @@ the current entry's *content*, not its *stack position*, so a pending back-navig
 correctly land one position back regardless of a replace happening in between — but not verifiable
 in jsdom, which doesn't implement real session-history navigation timing. Worth a first real-device
 check before merge, not just trusting the reasoning.
+
+## 16. Typed-answer diff highlighting (item 60, 2026-08-26)
+
+Not in plan §9's table, added anyway per the same judgment items 51/52/65 already used — a new
+shared utility, used across 2 modes.
+
+**Checked the plan's premise before building anything.** "A learner who types a nearly right
+answer is just told they're wrong" turned out not quite true — both `ProductionMode` and
+`QuizProduksiMode` already showed "Kamu: X" / "Jawaban: Y" as separate facts on a wrong answer.
+The real gap was narrower: nothing highlighted *where* the two differed, leaving the learner to
+spot their own typo by eye.
+
+`src/utils/typo-diff.js`, `diffChars(input, answer)` — proper alignment (edit-distance dynamic
+programming), not naive index-by-index comparison. That distinction matters concretely here: a
+single missing or extra letter (an easy, common miss on the audience's actual device — a phone
+keyboard) shifts every character after it under naive comparison, making the entire rest of a
+correctly-known word look wrong. That's not a spelling lesson, it's actively misleading. 9 tests,
+including the plan's own example (isolates to exactly one substitution, not a cascade) and a
+textbook edit-distance check (kitten→sitting = 3) as an algorithm-independent correctness anchor.
+
+`src/components/TypoDiff.jsx` renders the diff with highlighting, kept separate from the algorithm
+so `diffChars` stays independently testable without a DOM.
+
+**Two different "what to diff against" problems, not one** — `QuizProduksiMode`'s `id_text` can
+hold multiple valid synonyms ("Rapat / Pertemuan pagi"), where diffing against the raw combined
+string would be nonsensical; its `closestSynonymDiff` splits and picks the nearest one.
+`ProductionMode` tests a genuinely different thing (JP↔reading, not JP↔meaning — confirmed by
+reading its actual `isCorrect()`, not assumed from the similar file name) — its `closestAnswerDiff`
+picks between the kanji form and its kana reading instead, since `isCorrect()` itself accepts
+either. Both diff case-insensitively where case isn't semantically meaningful (Indonesian text in
+`QuizProduksiMode`) and case-sensitively where it doesn't apply at all (Japanese text in
+`ProductionMode` has no case to normalize).
+
+**Only shown for a near-miss** (edit distance 1–3), not any wrong answer — a highlight against a
+genuinely different answer would be mostly-red noise, not a lesson. Neither helper is exported or
+unit-tested directly (same as the existing, similarly-private `isCorrect`/`norm` in both files) —
+the actual algorithmic risk is covered by `typo-diff.js`'s own tests; these are thin, low-risk
+selection logic on top of it.
