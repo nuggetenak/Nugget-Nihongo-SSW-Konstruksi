@@ -96,8 +96,8 @@
 .azBtn {
   flex-shrink: 0;
   font-size: var(--fs-caption);
-  min-width: 28px;
-  height: 28px;
+  min-width: var(--tap-min);
+  height: var(--tap-min);
   border-radius: var(--r-sm);
   cursor: pointer;
   display: flex;
