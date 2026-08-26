@@ -385,3 +385,60 @@ item 48 (free navigation, deferred scoring), which changes its answering flow en
 keyboard support against the current shape would likely need redoing against the new one. Folded
 into that item instead of built twice.
 
+## 13. Immediate vs. deferred feedback (item 48, 2026-08-26)
+
+`SimulasiMode` redesigned from immediate-advance to free-navigate-then-submit, matching how a real
+JAC/SSW paper exam actually works: skip a hard question, come back to it, change your mind, submit
+whenever you're ready rather than being locked into answering in order.
+
+**The owner delegated the underlying product decision** rather than this staying blocked on further
+back-and-forth (explicit: "do the judgment call") — documented here the same way every other
+judgment call this session has been, not treated as a special case for being bigger.
+
+**Sequencing question resolved, not deferred.** The plan flagged that this interacts with item 51
+(mid-session persistence, not yet built) and said to "decide the order." Reconsidered rather than
+just repeating the original caution: the plan's literal wording was "deferring scoring until
+submit," which sounds like it defers *saving*, and deferred-saving genuinely would make the
+already-tracked mid-session-loss problem worse — more ungraded work sitting in memory before
+becoming durable. But that's not what got built. Each answer is still recorded to the `answers`
+state the moment it's given or changed — nothing about *saving* is deferred, only the *display* of
+correct/wrong. The amount of at-risk, not-yet-persisted work is the same as it always was for this
+mode (and every other mode — none of them have had mid-session persistence, that's what item 51
+is *for*). Splitting "deferred scoring" into "deferred saving" (the risky half, still item 51's job)
+and "deferred feedback display" (the half actually worth building now) meant this didn't need to
+wait.
+
+**What "deferred" actually meant, once traced through:** not just delaying the aggregate score.
+`OptionButton` reveals correct/wrong the instant an option is selected — using it during play would
+have leaked the answer immediately, so `SimulasiMode` moved off the shared component for its
+in-progress question buttons (neutral selected/unselected only; `OptionButton` is unchanged, still
+used by the other 4 multiple-choice modes) and started rendering its own. The old live ✓/✗ score
+tally and the immediate per-question explanation box are both gone for the same reason — an exam
+simulation that tells you how you're doing while you're still taking it isn't simulating anything.
+Also removed: the `QuizAnnouncer` wiring item 45 added here. That was correct under the old
+immediate-feedback design (verified against actual behavior at the time); it stopped being correct
+the moment feedback became deferred, so removing it is a necessary revision of that earlier work,
+not a contradiction of it.
+
+**Scoring extracted into `src/utils/simulasi-scoring.js`, `buildSimulasiResults(questions, answers)`**
+— a pure function, not inlined in the component. This is the one place in the redesign where a
+subtle bug (a stale flag trusted instead of recomputed, an off-by-one against free-navigation
+order, blank treated as "not counted" instead of "wrong") wouldn't just look wrong — it would
+silently misstate someone's actual exam readiness, which matters more here than most UI bugs in
+this app. 7 tests, including one that explicitly recomputes `isCorrect` from indices rather than
+trusting whatever was stored, and one confirming blank questions score as wrong (matching real-exam
+semantics: no credit for a blank, not excused from grading).
+
+**Submit confirms before discarding blanks**, via the existing `useConfirm()` (`ConfirmDialog.jsx`)
+rather than new UI: "N questions unanswered, count as wrong same as a real exam — submit anyway?"
+Worth flagging rather than treating as a clean reuse: that dialog is explicitly documented in its
+own file as being for *destructive* actions (its confirm button is hardcoded to the danger color).
+Submitting an incomplete exam isn't destructive in that sense — nothing is deleted, it's a normal,
+expected exam action. Reused it anyway rather than building new confirmation UI for one call site;
+the message text is written to carry the actual meaning regardless of the button's color, and the
+mismatch is a minor visual imperfection, not a functional one.
+
+**Question navigator**: a compact numbered grid (current/answered/unanswered, three visually
+distinct states), tappable to jump directly — the free-navigation equivalent of glancing down a
+paper answer sheet to see what's left. Prev/Next buttons remain for straightforward linear use;
+the navigator is there for the "skip around" case a real exam actually allows.

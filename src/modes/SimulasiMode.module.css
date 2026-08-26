@@ -93,15 +93,6 @@
   text-align: right;
 }
 
-.scoreCorrect {
-  color: var(--ssw-correct);
-  font-weight: 700;
-}
-
-.scoreWrong {
-  color: var(--ssw-wrong);
-}
-
 .questionCard {
   margin-bottom: 14px;
   animation: fadeIn 0.2s ease;
@@ -128,24 +119,6 @@
   background: rgba(251, 191, 36, 0.06);
   border-radius: var(--r-sm);
   line-height: 1.4;
-}
-
-.explanationBox {
-  margin-top: 12px;
-  padding: 12px 14px;
-  border-radius: var(--r-md);
-  background: rgba(251, 191, 36, 0.05);
-  border: 1px solid rgba(251, 191, 36, 0.12);
-  font-size: var(--fs-caption);
-  line-height: 1.65;
-  color: var(--ssw-textMuted);
-  animation: fadeIn 0.2s ease;
-}
-
-.nextBtn {
-  margin-top: 12px;
-  animation: fadeIn 0.15s ease;
-  /* RED_BTN styles stay inline (red gradient — exam theme) */
 }
 
 /* ── Result screen ── */

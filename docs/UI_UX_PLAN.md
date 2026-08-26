@@ -195,7 +195,7 @@ is either fixed or annotated.
 
 ---
 
-### ☐ 48. `SimulasiMode` doesn't behave like the exam it simulates — `M`
+### ☑ 48. `SimulasiMode` doesn't behave like the exam it simulates — `M`
 
 **Verified** (`SimulasiMode.jsx`): `qIdx` only ever increments (`:169`, `:535`). There is no way
 to go back, skip and return, flag a question for review, or change an answer before submitting.

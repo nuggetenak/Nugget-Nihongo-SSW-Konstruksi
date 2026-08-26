@@ -8,14 +8,14 @@ import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useConfirm } from '../components/ConfirmDialog.jsx';
 import { JpFront } from '../components/JpDisplay.jsx';
-import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { haptic } from '../utils/haptic.js';
+import { buildSimulasiResults } from '../utils/simulasi-scoring.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
-import OptionButton from '../components/OptionButton.jsx';
 import S from './modes.module.css';
 import SM from './SimulasiMode.module.css';
 
@@ -101,13 +101,14 @@ function buildPool() {
 
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const { prefs } = useApp();
+  const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [phase, setPhase] = useState('start');
   const [preset, setPreset] = useState('quick');
   const [seed, setSeed] = useState(0);
   const [qIdx, setQIdx] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [results, setResults] = useState([]);
+  const [answers, setAnswers] = useState({}); // { [qIdx]: { selectedIdx, isCorrect } }
+  const [results, setResults] = useState([]); // built once, at submit (item 48)
   const [timeLeft, setTimeLeft] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
@@ -137,6 +138,26 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
+  const selected = answers[qIdx]?.selectedIdx ?? null;
+  const answeredCount = Object.keys(answers).length;
+
+  const finishExam = useCallback(() => {
+    setResults(buildSimulasiResults(questions, answers));
+    setPhase('result');
+  }, [questions, answers]);
+
+  const handleSubmitClick = useCallback(async () => {
+    const unanswered = questions.length - answeredCount;
+    if (unanswered > 0) {
+      const ok = await confirm(
+        `${unanswered} soal belum dijawab. Soal yang belum dijawab dihitung salah, sama seperti ujian sungguhan.`,
+        'Kumpulkan sekarang',
+        'Kembali'
+      );
+      if (!ok) return;
+    }
+    finishExam();
+  }, [questions.length, answeredCount, confirm, finishExam]);
 
   // Auto-pause on tab/app hide
   useEffect(() => {
@@ -156,26 +177,18 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       setTimeLeft((t) => {
         if (t <= 1) {
           clearInterval(timerRef.current);
-          setPhase('result');
+          finishExam();
           return 0;
         }
         return t - 1;
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [phase, seed, paused]);
+  }, [phase, seed, paused, finishExam]);
 
-  useEffect(() => {
-    if (selected === null || phase !== 'playing') return;
-    const t = setTimeout(() => {
-      if (isLast) setPhase('result');
-      else {
-        setQIdx((i) => i + 1);
-        setSelected(null);
-      }
-    }, 1500);
-    return () => clearTimeout(t);
-  }, [selected, phase, isLast]);
+  // (Item 48: the old auto-advance-1.5s-after-answering effect is gone --
+  // answering no longer implies "done with this question." Navigation is
+  // explicit now: Prev/Next/the question-navigator/Submit.)
 
   useEffect(() => {
     if (phase === 'result' && results.length > 0) {
@@ -187,7 +200,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const handleStart = useCallback(() => {
     setSeed((s) => s + 1);
     setQIdx(0);
-    setSelected(null);
+    setAnswers({});
     setResults([]);
     setTimeLeft(config.time);
     setPaused(false);
@@ -196,27 +209,20 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
 
   const handleSelect = useCallback(
     (optArrayIdx) => {
-      if (selected !== null || phase !== 'playing' || paused || !q) return;
-      setSelected(optArrayIdx);
+      if (phase !== 'playing' || paused || !q) return;
       const isCorrect = optArrayIdx === q.correctIdx;
-      if (isCorrect) haptic.correct();
-      else haptic.wrong();
-      setResults((r) => [
-        ...r,
-        {
-          isCorrect,
-          jp: q.jp,
-          id_text: q.id_text,
-          opts: q.opts,
-          correctIdx: q.correctIdx,
-          userIdx: optArrayIdx,
-          explanation: q.explanation,
-          _source: q._source,
-          _setLabel: q._setLabel,
-        },
-      ]);
+      haptic.tap(); // not .correct()/.wrong() -- that would itself leak the answer
+      setAnswers((prev) => ({ ...prev, [qIdx]: { selectedIdx: optArrayIdx, isCorrect } }));
     },
-    [selected, phase, paused, q]
+    [phase, paused, q, qIdx]
+  );
+
+  const goToQuestion = useCallback(
+    (i) => {
+      if (phase !== 'playing' || paused || i < 0 || i >= questions.length) return;
+      setQIdx(i);
+    },
+    [phase, paused, questions.length]
   );
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
@@ -440,10 +446,6 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   if (!q) return null;
   return (
     <div className={`${S.pageScroll} ${SM.quizPage}`}>
-      <QuizAnnouncer
-        isCorrect={selected !== null ? selected === q.correctIdx : null}
-        correctText={q.opts[q.correctIdx]?.text}
-      />
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
           ✕ Keluar
@@ -481,7 +483,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             {/* Pace hint — soal/menit needed to finish on time */}
             {timeLeft > 0 &&
               (() => {
-                const remaining = questions.length - qIdx - (selected !== null ? 1 : 0);
+                const remaining = questions.length - answeredCount;
                 const minsLeft = timeLeft / 60;
                 const needed = minsLeft > 0 ? (remaining / minsLeft).toFixed(1) : '—';
                 return (
@@ -498,17 +500,19 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 );
               })()}
           </div>
+          {/* Item 48: was a live ✓/✗ score tally -- removed. An exam
+              simulation shouldn't tell you how you're doing mid-exam;
+              that's the entire point of "deferred." Answered-count is
+              progress, not a grade, so it stays. */}
           <div className={SM.scoreMini}>
-            <div className={SM.scoreCorrect}>✓ {results.filter((r) => r.isCorrect).length}</div>
-            <div className={SM.scoreWrong}>✗ {results.filter((r) => !r.isCorrect).length}</div>
+            <div style={{ fontSize: 10, color: T.textDim }}>TERJAWAB</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: T.text }}>
+              {answeredCount}/{questions.length}
+            </div>
           </div>
         </div>
       </div>
-      <ProgressBar
-        current={qIdx + (selected !== null ? 1 : 0)}
-        total={questions.length}
-        color="#ef4444"
-      />
+      <ProgressBar current={answeredCount} total={questions.length} color="#ef4444" />
       <div className={S.counter}>
         Soal {qIdx + 1} / {questions.length}
       </div>
@@ -523,44 +527,128 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         )}
       </div>
 
+      {/* Item 48: neutral option buttons, not the shared OptionButton --
+          that component always reveals correct/wrong on selection, which
+          is exactly what an exam simulation must NOT do. Selecting again
+          changes the answer rather than locking it in, matching a real
+          answer sheet you can erase and re-mark before turning in. */}
       <div className={S.list}>
-        {q.opts.map((opt, i) => (
-          <OptionButton
-            key={i}
-            idx={i}
-            text={opt.text}
-            subText={null}
-            selected={selected}
-            isCorrect={i === q.correctIdx}
-            onSelect={handleSelect}
-          />
-        ))}
+        {q.opts.map((opt, i) => {
+          const isSelected = i === selected;
+          return (
+            <button
+              key={i}
+              onClick={() => handleSelect(i)}
+              aria-pressed={isSelected}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                width: '100%',
+                padding: '13px 16px',
+                textAlign: 'left',
+                borderRadius: 12,
+                background: isSelected ? T.surfaceActive : T.surface,
+                border: `2px solid ${isSelected ? T.amber : T.border}`,
+                color: T.text,
+                fontFamily: 'inherit',
+                fontSize: 14,
+                cursor: 'pointer',
+              }}
+            >
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 22,
+                  height: 22,
+                  borderRadius: '50%',
+                  border: `1.5px solid ${isSelected ? T.amber : T.border}`,
+                  color: isSelected ? T.amber : T.textDim,
+                  fontSize: 12,
+                  fontWeight: 700,
+                  flexShrink: 0,
+                }}
+              >
+                {String.fromCharCode(65 + i)}
+              </span>
+              {opt.text}
+            </button>
+          );
+        })}
       </div>
 
-      {selected !== null && q.explanation && (
-        <div className={SM.explanationBox}>💡 {q.explanation}</div>
-      )}
+      {/* Question navigator — jump anywhere, see answered/unanswered/current
+          at a glance, matching how a paper answer sheet lets you scan and
+          jump to any question, not just step through in order. */}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 6,
+          marginTop: 16,
+          padding: '10px',
+          background: T.surface,
+          border: `1px solid ${T.border}`,
+          borderRadius: 12,
+        }}
+      >
+        {questions.map((_, i) => {
+          const isCurrent = i === qIdx;
+          const isAnswered = answers[i] !== undefined;
+          return (
+            <button
+              key={i}
+              onClick={() => goToQuestion(i)}
+              aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isCurrent ? ', sedang dilihat' : ''}`}
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: 8,
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                background: isCurrent ? T.amber : isAnswered ? T.surfaceActive : T.surface,
+                color: isCurrent ? '#1c1917' : isAnswered ? T.text : T.textDim,
+                border: `1.5px solid ${isCurrent ? T.amber : isAnswered ? T.borderActive : T.border}`,
+              }}
+            >
+              {i + 1}
+            </button>
+          );
+        })}
+      </div>
 
-      {selected !== null && (
+      {/* Prev / Next / Submit — replaces the old single auto-advancing
+          "Lanjut" button. Submit is always available (a real exam lets
+          you turn in early), Prev/Next just move the viewed question. */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
         <button
-          style={{
-            ...RED_BTN,
-            width: '100%',
-            marginTop: 12,
-            padding: '13px',
-            animation: 'fadeIn 0.15s ease',
-          }}
-          onClick={() => {
-            if (isLast) setPhase('result');
-            else {
-              setQIdx((i) => i + 1);
-              setSelected(null);
-            }
-          }}
+          className={S.btnSecondary}
+          style={{ flex: 1 }}
+          onClick={() => goToQuestion(qIdx - 1)}
+          disabled={qIdx === 0}
         >
-          {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
+          ← Sebelumnya
         </button>
-      )}
+        {!isLast && (
+          <button
+            className={S.btnSecondary}
+            style={{ flex: 1 }}
+            onClick={() => goToQuestion(qIdx + 1)}
+          >
+            Selanjutnya →
+          </button>
+        )}
+      </div>
+      <button
+        style={{ ...RED_BTN, width: '100%', marginTop: 8, padding: '13px' }}
+        onClick={handleSubmitClick}
+      >
+        Kumpulkan Ujian
+      </button>
 
       {/* Pause overlay */}
       {paused && (
