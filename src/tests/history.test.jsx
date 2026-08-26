@@ -147,4 +147,86 @@ describe('AppContext — browser history integration', () => {
     expect(getCtx().modeHistory).toEqual(['kartu']);
     expect(getCtx().mode).toBe('kuis');
   });
+
+  // Item 52 (2026-08-26): exiting a mode via an in-app control used to
+  // always replace, never pop, so hardware back afterward needed two
+  // presses. exitMode now pops (in addition to its original direct state
+  // change, unconditionally kept -- see the redesign note on exitMode
+  // itself for why the visible update can't depend on the async pop alone)
+  // when it's confirmed safe (canPopRef).
+  it('exitMode pops the extra history entry (in addition to its always-direct state change) when it was safely pushed by mode-area entry', () => {
+    const getCtx = renderApp();
+    act(() => {
+      getCtx().goMode('kartu');
+    });
+
+    const backSpy = vi.spyOn(history, 'back').mockImplementation(() => {
+      // jsdom doesn't actually navigate on history.back() -- simulate what
+      // a real browser would do: fire the popstate the app is listening for.
+      window.dispatchEvent(new PopStateEvent('popstate', { state: { tab: 'home', mode: null } }));
+    });
+
+    act(() => {
+      getCtx().exitMode();
+    });
+
+    // The real assertion: history.back() was actually attempted. mode being
+    // null is expected either way now (exitMode's direct update guarantees
+    // it synchronously, before this mock's simulated popstate even fires),
+    // so it's a sanity check on the end state, not proof the pop happened.
+    expect(backSpy).toHaveBeenCalledTimes(1);
+    expect(getCtx().mode).toBeNull();
+    backSpy.mockRestore();
+  });
+
+  it('exitMode does not call history.back() when popping was never confirmed safe (the direct state change still happens either way)', () => {
+    const getCtx = renderApp();
+    // Deliberately not entering a mode first -- canPopRef starts false, and
+    // this exercises exitMode being called without the tracked
+    // tab-area -> mode-area push ever having happened.
+    const backSpy = vi.spyOn(history, 'back');
+
+    act(() => {
+      getCtx().exitMode();
+    });
+
+    expect(backSpy).not.toHaveBeenCalled();
+    expect(getCtx().mode).toBeNull();
+    backSpy.mockRestore();
+  });
+
+  it('a real popstate landing outside mode area clears modeParams (found while wiring item 52 -- was stale even for the original hardware-back path, not something this item introduced)', () => {
+    const getCtx = renderApp();
+    act(() => {
+      getCtx().goMode('kartu', { filterIds: ['1', '2'] });
+    });
+    expect(getCtx().modeParams).toEqual({ filterIds: ['1', '2'] });
+
+    act(() => {
+      window.dispatchEvent(new PopStateEvent('popstate', { state: { tab: 'home', mode: null } }));
+    });
+
+    expect(getCtx().modeParams).toBeNull();
+  });
+
+  it('canPopRef is invalidated by a real popstate, so a second exitMode call after one does not pop again', () => {
+    const getCtx = renderApp();
+    act(() => {
+      getCtx().goMode('kartu');
+    });
+    // Simulate the user having already pressed hardware back once --
+    // the browser's position has moved for a reason exitMode didn't
+    // initiate, so it must not assume it's still safe to pop from here.
+    act(() => {
+      window.dispatchEvent(new PopStateEvent('popstate', { state: { tab: 'home', mode: null } }));
+    });
+
+    const backSpy = vi.spyOn(history, 'back');
+    act(() => {
+      getCtx().exitMode();
+    });
+
+    expect(backSpy).not.toHaveBeenCalled();
+    backSpy.mockRestore();
+  });
 });

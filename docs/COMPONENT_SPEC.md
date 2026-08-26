@@ -480,3 +480,45 @@ consumers plus ~8 differently-shaped hand-rolled modes in the same pass risked r
 that matter (a resume that silently shows the wrong quiz is worse than the crash it's meant to
 protect against). One correct, tested reference implementation now; same-pattern follow-up later,
 not itemized as a new gap since it's the direct, obvious next step from what's here.
+
+## 15. In-app exit now pops the history entry, not just the hardware back button (item 52, 2026-08-26)
+
+Not in plan §9's table, added anyway per the same judgment items 51 and 65 already used —
+`exitMode`'s behavior meaningfully changed.
+
+**The plan framed the blocker as needing "a way to tell 'this update came from our own
+`history.back()` call' apart from 'the user pressed back.'`** Verified before assuming that gap
+was real: `isPopRef` (`AppContext.jsx`) already solves exactly that, and has since item 10. It just
+wasn't being used to *initiate* a pop for in-app exits — only to react to one that had already
+happened via the hardware button. The actual missing piece was a way to know it was *safe* to
+call `history.back()` at all — new `canPopRef`, true only while the current top-of-stack entry is
+confirmed to be the one pushed on mode-area entry, cleared by any real `popstate` (the browser's
+position having moved for a reason outside `exitMode`'s own tracking invalidates the assumption).
+`exitMode` never calls `history.back()` unconditionally — only when `canPopRef` says it's safe,
+falling back to the original behavior otherwise, so an uncertain case can't eject the user out of
+the app entirely (no history entry to land on) instead of exiting a mode.
+
+**Found and fixed alongside, not caused by this item**: `onPopState` never cleared `modeParams`,
+so even the *original*, unmodified hardware-back button already left it stale when leaving mode
+area — this item's tests exposed it, not introduced it.
+
+**Caught by the full test suite, not by review — a real regression in the first design.** The
+first version made `exitMode`'s *visible* state update depend on `history.back()` actually
+triggering `popstate`, which isn't synchronous and isn't guaranteed same-tick even in real
+browsers, and doesn't happen automatically at all in jsdom without explicit test-level mocking.
+An existing, unmodified test (`global-keyboard.test.jsx`, "Escape exits the current mode")
+started failing — `mode` never became `null` because nothing in the test simulated the async pop.
+Redesigned: `exitMode` **always** does the original direct, synchronous state update first (so
+nothing depending on `mode` being `null` immediately after calling it can break, matching every
+caller's existing expectation), and *additionally* fires `history.back()` when safe — purely to
+correct the browser's history depth, never something the visible UI waits on. The eventual
+(possibly async) `popstate` this triggers lands on state the direct update already made correct,
+so it's a redundant, idempotent update, not a race.
+
+**Honest limit on verification**: the interaction between the direct update's own
+`history.replaceState()` (fired by the `[tab, mode]` effect reacting to the state change) and the
+separately-in-flight `history.back()` navigation is reasoned through — `replaceState` only changes
+the current entry's *content*, not its *stack position*, so a pending back-navigation should still
+correctly land one position back regardless of a replace happening in between — but not verifiable
+in jsdom, which doesn't implement real session-history navigation timing. Worth a first real-device
+check before merge, not just trusting the reasoning.

@@ -393,7 +393,7 @@ tab reclaim is a genuine and repeatable loss. Item 38's error boundary now tells
 this ("jawaban yang belum selesai mungkin tidak tersimpan") but doesn't fix it.
 Consider: write-through to `sessionStorage` per answer, offer resume on re-entry.
 
-### ☐ 52. In-app mode exit doesn't pop the history entry — `S`
+### ☑ 52. In-app mode exit doesn't pop the history entry — `S`
 *(archived item 10's known gap, documented in `AppContext.jsx`)* Exiting a mode via an in-app
 control replaces rather than pops, so a subsequent hardware-back can need two presses. Needs a
 way to distinguish "our own `history.back()`" from "user pressed back" — the reason it wasn't

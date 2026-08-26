@@ -59,11 +59,30 @@ export function AppProvider({ children }) {
   );
 
   const exitMode = useCallback(() => {
+    // Always the direct, synchronous update -- exactly as before this item,
+    // so nothing that expects `mode` to be null immediately after calling
+    // this breaks. Popping the browser history entry (below) is additive:
+    // it fixes the actual "needs two back-presses" bug without the visible
+    // app state depending on an async popstate round-trip that real
+    // browsers (and jsdom) don't guarantee happens in the same tick.
     setModeHistory([]);
     setMode(null);
     setModeParams(null);
     setPref('lastMode', null);
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    if (canPopRef.current) {
+      // Safe: the current top-of-stack entry is the one we pushed on
+      // mode-area entry, and nothing has happened since to invalidate that.
+      // The [tab, mode] effect above will have already replaceState'd the
+      // current entry to reflect the exit (from the direct update just
+      // above); this pops it, landing one entry further back than that --
+      // exactly where a real hardware back should have gone directly, no
+      // longer needing a second press to get there. The popstate this
+      // triggers lands on state that's already correct, so it's a harmless,
+      // idempotent redundant update, not a race with the direct one above.
+      history.back();
+    }
   }, [setPref]);
 
   // Go back one mode in history, or jump directly to a specific ancestor
@@ -125,20 +144,31 @@ export function AppProvider({ children }) {
   // is actually for (back exiting the whole app mid-quiz), without taking on
   // a fully derived history stack, which the plan flags as separate scope.
   //
-  // Known gap, accepted for this pass: exiting a mode via an in-app control
-  // (not the hardware back button) doesn't pop the pushed entry -- it
-  // replaces, matching every other in-mode-area transition. The next
-  // hardware back then lands on an unchanged screen before a second press
-  // reaches the real previous one. Popping programmatically here would need
-  // a way to tell "this state update came from our own history.back() call"
-  // apart from "the user pressed back", which the popstate event alone
-  // doesn't carry -- not solved in this pass.
+  // Known gap, fixed (item 52, 2026-08-26): exiting a mode via an in-app
+  // control used to always replace rather than pop the pushed entry, so a
+  // subsequent hardware back would land on an unchanged screen before a
+  // second press reached the real previous one. The plan framed this as
+  // needing "a way to tell 'this update came from our own history.back()
+  // call' apart from 'the user pressed back'" -- but isPopRef, right below,
+  // already solves exactly that; it just wasn't being *used* to initiate a
+  // pop, only to react to one that had already happened. canPopRef closes
+  // that gap: true only while we're confident the current top-of-stack entry
+  // is the one *we* pushed on mode-area entry and nothing has happened since
+  // to invalidate that (a real popstate event always clears it, since that
+  // means the browser's position moved for reasons outside our tracking).
+  // exitMode calls history.back() only when canPopRef is true, letting
+  // isPopRef's existing popstate handling take it from there -- never a bare
+  // history.back() call, which could eject the user out of the app entirely
+  // if there were nothing safe behind the current position. Falls back to
+  // the original replace-based exit otherwise, so an uncertain case degrades
+  // to the old "two presses" behavior rather than risking a worse one.
   //
   // Also not handled: an in-quiz confirm-before-discard guard. That's item
   // 15's ConfirmDialog, which doesn't exist yet -- owner chose to land the
   // back-button fix now rather than sequence after it.
   const prevModeRef = useRef(mode);
   const isPopRef = useRef(false);
+  const canPopRef = useRef(false); // item 52: true iff it's safe to history.back()
 
   useEffect(() => {
     const enteringModeArea = prevModeRef.current === null && mode !== null;
@@ -156,6 +186,17 @@ export function AppProvider({ children }) {
     } else {
       history.replaceState(state, '', url);
     }
+    if (enteringModeArea) {
+      // Deliberate ref mutation, not cached state. The rule appears to flag
+      // any ref write conditioned on external state rather than the ref's
+      // own prior value (compare isPopRef's mutation above, gated on
+      // isPopRef.current itself, which doesn't trigger this) -- verified
+      // this isn't masking a real bug via 4 dedicated tests in
+      // history.test.jsx that directly exercise canPopRef's actual runtime
+      // behavior.
+      // eslint-disable-next-line react-hooks/immutability
+      canPopRef.current = true;
+    }
     // modeHistory intentionally omitted: it never changes without mode also
     // changing (every setModeHistory call site also calls setMode), so it's
     // always fresh here via closure without needing to be a dependency.
@@ -165,6 +206,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     const onPopState = (e) => {
       isPopRef.current = true;
+      canPopRef.current = false; // browser position moved; re-earn trust from a fresh pushState
       const state = e.state;
       if (state?.mode) {
         setTab(state.tab);
@@ -177,6 +219,11 @@ export function AppProvider({ children }) {
         setTab(state?.tab ?? 'home');
         setMode(null);
         setModeHistory([]);
+        setModeParams(null); // found while wiring item 52: this was never
+        // cleared here even for a real hardware back -- pre-existing, not
+        // introduced by this item, but this handler is now also what
+        // exitMode's history.back() path relies on, so worth fixing here
+        // rather than leaving a second exit path with the same stale gap.
         setPref('lastMode', null);
       }
       window.scrollTo({ top: 0, behavior: 'instant' });
