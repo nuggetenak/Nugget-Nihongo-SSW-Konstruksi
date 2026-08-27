@@ -15,18 +15,11 @@ const MIX_ALL_ID = '__vocab_mix__';
 
 export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track } = useApp();
-  // 'wg' is shared by two unrelated collections: true vocab drill sets
-  // (wglv-jp-*/wglv-id-*) and JAC-style practice-question sets (wgl01..wgl10,
-  // titled "Praktik Set N"). A plain startsWith('wg') pulled both in under
-  // "Kosakata · Vocab Drill", double-counting the header (16 sets/440 soal
-  // instead of the real 6/240) and mixing full scenario questions into what's
-  // supposed to be vocabulary drilling. Neither WaygroundMode nor any other
-  // mode claims the wgl0* ids (its own TEORI_PRAKTIK explicitly excludes
-  // anything starting with 'wg'), so narrowing this filter without giving
-  // them a section of their own would make 10 real sets unreachable from any
-  // menu. Keeping them on this screen (where they were already being found)
-  // but under their own clearly separate heading fixes the miscount/mislabel
-  // without deleting access — see HANDOFF.md for the fuller note on this.
+  // Scoped to wglv-* specifically, not a plain 'wg' prefix -- that also
+  // matches wgl01..wgl10 (JAC-style "Praktik Set" questions, unrelated to
+  // vocab drilling), which used to get counted/mixed in here by mistake.
+  // Those sets now live in WaygroundMode ("Soal Teknis") instead, grouped
+  // with the rest of its Praktik content -- see that file's GROUPS comment.
   const VOCAB_SETS = useMemo(
     () =>
       QUIZ_SETS.filter(
@@ -34,18 +27,7 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
       ),
     [track]
   );
-  const PRAKTIK_SETS = useMemo(
-    () =>
-      QUIZ_SETS.filter(
-        (s) =>
-          s.id.startsWith('wg') &&
-          !s.id.startsWith('wglv') &&
-          (s.track === 'common' || s.track === track)
-      ),
-    [track]
-  );
   const totalSoal = VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0);
-  const totalPraktikSoal = PRAKTIK_SETS.reduce((n, s) => n + s.questions.length, 0);
   const MIX_ALL = {
     id: MIX_ALL_ID,
     title: `Mix All · ${totalSoal}qs`,
@@ -58,10 +40,7 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
   const [showHint, setShowHint] = useState(true);
   const { saveScore, vocabScores: scores } = useProgress();
 
-  const setDef =
-    activeSet === MIX_ALL_ID
-      ? MIX_ALL
-      : (VOCAB_SETS.find((s) => s.id === activeSet) ?? PRAKTIK_SETS.find((s) => s.id === activeSet));
+  const setDef = activeSet === MIX_ALL_ID ? MIX_ALL : VOCAB_SETS.find((s) => s.id === activeSet);
 
   const questions = useMemo(() => {
     if (!activeSet) return [];
@@ -185,119 +164,90 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
       </button>
 
       <div style={{ marginBottom: 8 }}>
-        <SetListSection
-          icon="📖"
-          label="Per Set"
-          labelColor="#60a5fa"
-          lineColor="rgba(96,165,250,0.3)"
-          sets={VOCAB_SETS}
-          scores={scores}
-          onSelect={setActiveSet}
-        />
-      </div>
-
-      {PRAKTIK_SETS.length > 0 && (
-        <div style={{ marginBottom: 8, marginTop: 28 }}>
-          <p style={{ fontSize: 11, color: T.textDim, marginBottom: 10 }}>
-            Soal latihan bergaya JAC — bukan drill kosakata, tapi ditaruh di sini karena belum
-            punya menu sendiri. {totalPraktikSoal} soal.
-          </p>
-          <SetListSection
-            icon="🛠️"
-            label="Praktik"
-            labelColor="#4ade80"
-            lineColor="rgba(74,222,128,0.3)"
-            sets={PRAKTIK_SETS}
-            scores={scores}
-            onSelect={setActiveSet}
+        <div className={S.row} style={{ marginBottom: 10 }}>
+          <span style={{ fontSize: 13 }}>📖</span>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: '#60a5fa',
+              letterSpacing: 1.8,
+              textTransform: 'uppercase',
+            }}
+          >
+            Per Set
+          </span>
+          <div
+            style={{
+              flex: 1,
+              height: 1,
+              background: 'linear-gradient(90deg,rgba(96,165,250,0.3),transparent)',
+            }}
           />
+          <span
+            className={S.pill}
+            style={{
+              fontSize: 10,
+              color: T.textDim,
+              background: T.surface,
+              border: `1px solid ${T.border}`,
+              fontWeight: 700,
+            }}
+          >
+            {VOCAB_SETS.length} set
+          </span>
         </div>
-      )}
+        <div className={S.list}>
+          {VOCAB_SETS.map((s) => {
+            const saved = scores[s.id];
+            return (
+              <button
+                key={s.id}
+                className={S.btnItem}
+                onClick={() => setActiveSet(s.id)}
+                style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden' }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: 4,
+                    background: s.color || '#60a5fa',
+                  }}
+                />
+                <div className={S.rowSpread}>
+                  <span style={{ fontSize: 13, fontWeight: 700 }}>
+                    {s.emoji} {s.title}
+                  </span>
+                  <div className={S.row} style={{ gap: 8 }}>
+                    {saved && (
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
+                        }}
+                      >
+                        {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
+                      </span>
+                    )}
+                    <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                  </div>
+                </div>
+                {s.subtitle && (
+                  <div
+                    style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
+                  >
+                    {s.subtitle}
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
-  );
-}
-
-// Shared list-section renderer for both the vocab and praktik groups on this
-// screen (see the note above VOCAB_SETS/PRAKTIK_SETS for why they're two
-// groups on one screen rather than two separate menus).
-function SetListSection({ icon, label, labelColor, lineColor, sets, scores, onSelect }) {
-  return (
-    <>
-      <div className={S.row} style={{ marginBottom: 10 }}>
-        <span style={{ fontSize: 13 }}>{icon}</span>
-        <span
-          style={{
-            fontSize: 10,
-            fontWeight: 800,
-            color: labelColor,
-            letterSpacing: 1.8,
-            textTransform: 'uppercase',
-          }}
-        >
-          {label}
-        </span>
-        <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,${lineColor},transparent)` }} />
-        <span
-          className={S.pill}
-          style={{
-            fontSize: 10,
-            color: T.textDim,
-            background: T.surface,
-            border: `1px solid ${T.border}`,
-            fontWeight: 700,
-          }}
-        >
-          {sets.length} set
-        </span>
-      </div>
-      <div className={S.list}>
-        {sets.map((s) => {
-          const saved = scores[s.id];
-          return (
-            <button
-              key={s.id}
-              className={S.btnItem}
-              onClick={() => onSelect(s.id)}
-              style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden' }}
-            >
-              <div
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  bottom: 0,
-                  width: 4,
-                  background: s.color || '#60a5fa',
-                }}
-              />
-              <div className={S.rowSpread}>
-                <span style={{ fontSize: 13, fontWeight: 700 }}>
-                  {s.emoji} {s.title}
-                </span>
-                <div className={S.row} style={{ gap: 8 }}>
-                  {saved && (
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
-                      }}
-                    >
-                      {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
-                    </span>
-                  )}
-                  <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
-                </div>
-              </div>
-              {s.subtitle && (
-                <div style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}>
-                  {s.subtitle}
-                </div>
-              )}
-            </button>
-          );
-        })}
-      </div>
-    </>
   );
 }

@@ -11,6 +11,20 @@ import QuizShell from '../components/QuizShell.jsx';
 import S from './modes.module.css';
 
 // TEORI_PRAKTIK now computed inside component using track (see below)
+// Praktik's `match` (not a plain prefix) exists because the real ids are
+// wgl01..wgl10 -- a simple prefix would miss wgl10 (starts 'wgl1', not
+// 'wgl0'). These sets used to live in VocabMode, wrongly counted as vocab
+// drill purely because their id happened to start with the same 'wg' as
+// the real vocab sets (wglv-*) -- see fix/post-overhaul-bugs' earlier
+// commit. They're JAC-style practice questions, not vocabulary, so they
+// belong here alongside Teori, not there.
+// "CSV Teori"/"CSV Praktik" used prefixes 'ct'/'cp' that haven't existed
+// since session 23 (2026-07-11) renamed those ids to 'jmt'/'jml' -- this
+// array was never updated to match, so the two groups silently rendered
+// nothing while still counting toward this screen's own header total
+// (24 set/540 soal was always right; 12 of those 24 sets were simply
+// unreachable from any group list). Relabeled to match the rename's own
+// naming (source: 'jac-mockup' in the data), not just the prefix fix.
 const GROUPS = [
   {
     label: 'Teori',
@@ -23,22 +37,22 @@ const GROUPS = [
     label: 'Praktik',
     icon: '🛠️',
     color: '#4ade80',
-    prefix: 'wp',
+    match: (id) => id.startsWith('wgl') && !id.startsWith('wglv'),
     desc: 'Prosedur & aplikasi lapangan',
   },
   {
-    label: 'CSV Teori',
+    label: 'JAC Mockup Teori',
     icon: '📚',
     color: '#f59e0b',
-    prefix: 'ct',
-    desc: 'Materi teori tambahan (CSV)',
+    prefix: 'jmt',
+    desc: 'Simulasi soal teori (CSV)',
   },
   {
-    label: 'CSV Praktik',
+    label: 'JAC Mockup Praktik',
     icon: '🔧',
     color: '#34d399',
-    prefix: 'cp',
-    desc: 'Latihan praktik tambahan (CSV)',
+    prefix: 'jml',
+    desc: 'Simulasi soal praktik (CSV)',
   },
 ];
 
@@ -53,8 +67,12 @@ function getSetWrongCount(setId) {
 
 export default function WaygroundMode({ onExit, onSessionEnd }) {
   const { track } = useApp();
+  // Everything except vocab drill's own wglv-* ids -- see the GROUPS
+  // comment above for why wgl0* (Praktik Set) belongs in here now.
   const TEORI_PRAKTIK = QUIZ_SETS.filter(
-    (s) => !s.id.startsWith('wg') && (s.track === 'common' || s.track === track)
+    (s) =>
+      (!s.id.startsWith('wg') || (s.id.startsWith('wgl') && !s.id.startsWith('wglv'))) &&
+      (s.track === 'common' || s.track === track)
   );
   const [activeSet, setActiveSet] = useState(null);
   // 'Lemah' mode — only wrong questions for the active set.
@@ -141,7 +159,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   const totalSoal = TEORI_PRAKTIK.reduce((n, s) => n + s.questions.length, 0);
   const groups = GROUPS.map((g) => ({
     ...g,
-    sets: TEORI_PRAKTIK.filter((s) => s.id.startsWith(g.prefix)),
+    sets: TEORI_PRAKTIK.filter((s) => (g.match ? g.match(s.id) : s.id.startsWith(g.prefix))),
   })).filter((g) => g.sets.length > 0);
 
   const pillStyle = (active) => ({
@@ -160,7 +178,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
       <button className={S.btnBack} onClick={onExit}>
         ← Kembali
       </button>
-      <h2 className={S.pageTitle}>Soal Teknis · Lifeline</h2>
+      <h2 className={S.pageTitle}>Soal Teknis</h2>
       <p className={S.pageSub}>
         {totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik
       </p>
