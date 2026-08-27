@@ -10,7 +10,7 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
-import { JpFront } from './JpDisplay.jsx';
+import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
@@ -254,8 +254,14 @@ export default function QuizShell({
         <div className={S.questionText}>
           <JpFront jp={q.question} furiganaPolicy={prefs?.furiganaPolicy ?? 'always'} />
         </div>
-        {q.questionSub && <div className={S.questionSub}>{q.questionSub}</div>}
-        {showHint && q.hint && <div className={S.hint}>💡 {q.hint}</div>}
+        {q.questionSub && (
+          <div className={S.questionSub}>
+            {renderJPWithRuby(q.questionSub, parseRubyFragments(q.questionSub))}
+          </div>
+        )}
+        {showHint && q.hint && (
+          <div className={S.hint}>💡 {renderJPWithRuby(q.hint, parseRubyFragments(q.hint))}</div>
+        )}
         {q.hasPhoto && (
           <div
             style={{
@@ -292,7 +298,9 @@ export default function QuizShell({
       <div className={S.kbHint}>Keyboard: 1–4 pilih · Space/→ lanjut · Esc kembali</div>
 
       {selected !== null && q.explanation && (
-        <div className={S.explanation}>💡 {q.explanation}</div>
+        <div className={S.explanation}>
+          💡 {renderJPWithRuby(q.explanation, parseRubyFragments(q.explanation))}
+        </div>
       )}
 
       {selected !== null && (
