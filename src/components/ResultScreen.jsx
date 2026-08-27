@@ -6,6 +6,7 @@ import s from './ResultScreen.module.css';
 import { getGrade } from '../styles/theme.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from './JpDisplay.jsx';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { findWeakestCategory } from '../utils/session-weakness.js';
 
 // rsShake animation — injected once (not worth a CSS module import just for this)
@@ -130,14 +131,22 @@ export default function ResultScreen({
                 <div className={s.reviewQ}>
                   <JpFront jp={r.question} furiganaPolicy={furiganaPolicy} />
                 </div>
-                <div className={s.reviewWrong}>✗ {r.userAnswer}</div>
-                <div className={s.reviewCorrect}>✓ {r.correctAnswer}</div>
-                {r.explanation && (
-                  <div className={s.reviewExpl}>
-                    💡 {r.explanation.slice(0, 180)}
-                    {r.explanation.length > 180 ? '…' : ''}
-                  </div>
-                )}
+                <div className={s.reviewWrong}>
+                  ✗ <JpFront jp={r.userAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
+                </div>
+                <div className={s.reviewCorrect}>
+                  ✓ <JpFront jp={r.correctAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
+                </div>
+                {r.explanation &&
+                  (() => {
+                    const clean = stripFuri(r.explanation);
+                    return (
+                      <div className={s.reviewExpl}>
+                        💡 {clean.slice(0, 180)}
+                        {clean.length > 180 ? '…' : ''}
+                      </div>
+                    );
+                  })()}
               </div>
             ))}
           </div>
