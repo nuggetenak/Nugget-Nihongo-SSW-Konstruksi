@@ -37,11 +37,13 @@ content into this file.
 **As of this edit, 2026-08-27.** Verify before trusting past this point — this line doesn't
 update itself.
 
-- **2026-08-27 session (two rounds — screenshots + follow-up in the same conversation): 6 live-
-  site bugs reported total, root-caused against actual code each time (not assumed from this
-  file — see the correction entry right below for why that mattered), fixed on branch
-  `fix/post-overhaul-bugs` off `main`.** Not merged yet — owner's call, same rule as always.
-  Commits have full evidence each; short version, round 1:
+- **2026-08-27 session (two rounds of fixes + a merge, all one conversation): 6 live-site bugs
+  reported total, root-caused against actual code each time (not assumed from this file — see
+  the correction entry right below for why that mattered), fixed on branch
+  `fix/post-overhaul-bugs`, merged to `main` and deployed — owner's explicit call ("merge aja
+  langsung"), fast-forwarded (`31b6bd0`, same convention as the previous feat/ui-overhaul merge:
+  linear history, no merge commit), deploy confirmed via the Actions API before this line was
+  written, not assumed.** Commits have full evidence each; short version, round 1:
   - **Furigana/ruby garbled + inconsistent**: `parseRubyFragments` only ever matched the kanji
     run touching a trailing 《reading》 marker. Phrases with a particle/number in the middle
     (安全確認の8項目 and ~250 others) got the *whole* reading pinned onto just the last 2-4
@@ -95,6 +97,16 @@ update itself.
 
   All six verified against real code before being called bugs or fixed, not assumed from a
   screenshot or a prior report.
+
+  **Round 3: merge.** Owner said "merge aja langsung" after reviewing round 2's summary — no
+  further review requested, so none inserted. Re-ran `npm run validate` one more time on the
+  exact commit about to reach `main` (not just trusted the branch-tip runs from rounds 1-2;
+  merging changes what's actually live, so it's the one point where re-checking costs little and
+  a miss costs the most), confirmed `main` hadn't moved since the branch was cut (still `83bb1cf`,
+  so `--ff-only` applied cleanly, no merge commit needed), pushed, then polled the Actions API
+  until the resulting deploy (`run 33112758755`, commit `31b6bd0`) reported
+  `completed`/`success` — the same verification this session opened by finding *missing* for the
+  previous merge, not skipped this time.
   605/605 tests (up from 600 at the start of this session), lint + build clean throughout.
 
 - **🔴 Correction to what this section used to say:** it claimed `feat/ui-overhaul` was still
@@ -164,12 +176,13 @@ update itself.
   real device. Items 53 (rem conversion) and 55 (FilterPopup) remain excluded, per their own
   plan entries, never in any batch's suggested ordering.
 
-  **Next up:** the 2026-08-27 entry above is the current front of the queue — merge
-  `fix/post-overhaul-bugs` (owner's call, per RULES below; Praktik Set placement is now
-  decided — see round 2 above, no longer an open question), and someone who can verify actual
-  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md`. Otherwise unchanged from
-  before: 53/55 excluded, 58/59 each need their own dedicated session (schema migration;
-  sourcing real TTS audio).
+  **Next up:** `fix/post-overhaul-bugs` is merged and deployed (round 3 above) — nothing left
+  pending from the 2026-08-27 session except content review: someone who can verify actual
+  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent,
+  scoped like items 58/59 below). The now-merged branch itself can be deleted on GitHub whenever
+  convenient; nothing here depends on it still existing. Otherwise unchanged from before: 53/55
+  excluded, 58/59 each need their own dedicated session (schema migration; sourcing real TTS
+  audio).
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
@@ -180,7 +193,10 @@ phase lives in CURRENT STATE's top entry, under "NOT done — pick up here" inst
 
 ## RULES
 
-- Never push to `main`
+- Never push to `main` on your own initiative — merging is the owner's call, always has been.
+  Not a literal absolute: 2026-08-27 round 3 is the concrete example — owner reviewed a summary
+  of the branch, said "merge aja langsung," and that's what authorizes it. Absent that kind of
+  explicit go-ahead in the current conversation, work stays on its branch.
 - Ambiguity → write it down in CURRENT STATE, ask the owner, don't guess and proceed
 - Commit message convention is whatever the active branch is already using — check recent
   `git log` rather than assuming; content-dq used `CONTENT:`/`ADMIN:`/`DOCS:` prefixes,
