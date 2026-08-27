@@ -8,7 +8,13 @@ import S from './JpDisplay.module.css';
 
 // ─── JpFront ──────────────────────────────────────────────────────────────────
 // furiganaPolicy: 'always' | 'tap' | 'hidden'
-export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
+// maxSize: optional px ceiling on the auto-computed size (jpFontSize scales
+// UP for short strings, e.g. 28px for <=4 chars — right for a single hero
+// card, wrong for a dense stacked list, where a handful of short 2-4
+// character answers next to longer ones reads as random/erratic size
+// jumping rather than intentional emphasis). Leave unset for existing
+// single-item contexts; pass e.g. 16 for list rows.
+export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
   const [tapReveal, setTapReveal] = useState(false);
   // policy:
   // always: always show readings/ruby
@@ -20,6 +26,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
   const clean = stripFuri(jp);
   const reading = effectiveFuri || (showFuri ? extractReadings(jp) : null);
   const parsedRuby = useMemo(() => parseRubyFragments(jp), [jp]);
+  const fontSizeFor = (text) => (maxSize ? Math.min(jpFontSize(text), maxSize) : jpFontSize(text));
 
   // Memoize branch detection — avoids re-running string checks on every render.
   const jpBranch = useMemo(() => {
@@ -71,7 +78,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
       .split(/\s*vs\s*/i)
       .map((p) => p.trim())
       .filter(Boolean);
-    const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
+    const fs = fontSizeFor(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return wrapInteractive(
       <div className={S.jpWrap}>
         {parts.map((p, i) => (
@@ -95,7 +102,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
       .split('・')
       .map((p) => p.trim())
       .filter(Boolean);
-    const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
+    const fs = fontSizeFor(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return wrapInteractive(
       <div className={`${S.jpWrap} ${S.jpWrapTight}`}>
         {parts.map((p, i) => (
@@ -116,9 +123,9 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
     const sub = clean.slice(colonIdx + 1).trim();
     return wrapInteractive(
       <div className={S.jpWrap}>
-        <span lang="ja" style={jpStyle(jpFontSize(title))}>{renderJPWithRuby(title, ruby)}</span>
+        <span lang="ja" style={jpStyle(fontSizeFor(title))}>{renderJPWithRuby(title, ruby)}</span>
         <div className={`${S.hr} ${S.hrHover}`} />
-        <span lang="ja" style={jpStyle(jpFontSize(sub), { opacity: 0.88 })}>
+        <span lang="ja" style={jpStyle(fontSizeFor(sub), { opacity: 0.88 })}>
           {renderJPWithRuby(sub, ruby)}
         </span>
         {_ReadingRow(reading, showReadingRow)}
@@ -132,7 +139,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
       .split('→')
       .map((p) => p.trim())
       .filter(Boolean);
-    const fs = jpFontSize(parts.reduce((a, b) => (a.length > b.length ? a : b)));
+    const fs = fontSizeFor(parts.reduce((a, b) => (a.length > b.length ? a : b)));
     return wrapInteractive(
       <div className={`${S.jpWrap} ${S.jpWrapTight}`}>
         {parts.map((p, i) => (
@@ -147,7 +154,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always' }) {
   }
 
   // ── Plain ─────────────────────────────────────────────────────────────────
-  const fs = jpFontSize(clean);
+  const fs = fontSizeFor(clean);
   const plainContent = hasRubyInText ? (
     renderJPWithRuby(clean, ruby)
   ) : showFuri && reading ? (

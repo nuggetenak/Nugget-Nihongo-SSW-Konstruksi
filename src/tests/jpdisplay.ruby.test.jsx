@@ -67,4 +67,33 @@ describe('JpFront ruby furigana rendering', () => {
     expect(rubies[1].textContent).toContain('製');
     expect(rubies[1].textContent).not.toContain('コンクリート');
   });
+
+  // Regression: SimulasiMode's review list stacks many short JpFront answers
+  // (e.g. 2-4 character terms like "任意"/"施工") next to longer ones. Without
+  // a cap, jpFontSize's own length-based staircase sends short strings to its
+  // largest tier (28px on mobile) -- fine for a single hero card, but reads
+  // as random size-jumping once several sit in one scrolled list. maxSize
+  // exists specifically so a dense-list caller can opt into a uniform ceiling
+  // without changing anything for callers that don't pass it.
+  it('maxSize caps the auto-computed font size for a short string', () => {
+    const { container: uncapped } = render(<JpFront jp="任意" furiganaPolicy="hidden" />);
+    const uncappedSpan = uncapped.querySelector('span[lang="ja"]');
+    const uncappedSize = parseInt(uncappedSpan.style.fontSize, 10);
+    expect(uncappedSize).toBeGreaterThan(20); // hits the short-string tier
+
+    const { container: capped } = render(
+      <JpFront jp="任意" furiganaPolicy="hidden" maxSize={15} />
+    );
+    const cappedSpan = capped.querySelector('span[lang="ja"]');
+    expect(parseInt(cappedSpan.style.fontSize, 10)).toBe(15);
+  });
+
+  it('maxSize leaves a string already smaller than the cap untouched', () => {
+    const longText = '安全確認の8項目という長い文字列テスト';
+    const { container } = render(
+      <JpFront jp={longText} furiganaPolicy="hidden" maxSize={30} />
+    );
+    const span = container.querySelector('span[lang="ja"]');
+    expect(parseInt(span.style.fontSize, 10)).toBeLessThan(30);
+  });
 });
