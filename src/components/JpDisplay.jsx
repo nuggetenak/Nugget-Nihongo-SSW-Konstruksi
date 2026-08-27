@@ -178,6 +178,11 @@ export function parseRubyFragments(jp = '') {
   return frags;
 }
 
+// A reading is only plausible for the kanji run it's directly attached to if
+// its length stays roughly in proportion (compound kanji readings run ~1-3
+// kana per character; 4x is already generous headroom).
+const MAX_PLAUSIBLE_KANA_PER_KANJI = 4;
+
 export function renderJPWithRuby(text, rubyFragments) {
   if (!text || !rubyFragments?.length) return text;
   const nodes = [];
@@ -186,10 +191,24 @@ export function renderJPWithRuby(text, rubyFragments) {
   for (const frag of rubyFragments) {
     const idx = rest.indexOf(frag.base);
     if (idx < 0) continue;
-    if (idx > 0) nodes.push(rest.slice(0, idx));
+    const prefix = rest.slice(0, idx);
+    // Guard against malformed source data: some entries annotate a whole
+    // particle/number-interrupted phrase (e.g. "安全確認の8項目") with a single
+    // trailing 《reading》, but the base-matching above only ever captures the
+    // kanji run immediately touching the marker ("項目"). Left alone, that
+    // strands "安全確認の8" as bare unfurigana'd text AND puts the full
+    // 15-character reading as <rt> over a 2-character <rb>, which overflows
+    // its neighbors and looks broken (esp. once the line wraps). When the
+    // reading is implausibly long for just the matched base, fold the
+    // in-between plain text into the ruby span instead — same reading,
+    // correctly positioned over the text it actually belongs to. Rare
+    // one-off audit is tracked in docs/RUBY_MISMATCH_AUDIT.md.
+    const implausible = frag.reading.length > frag.base.length * MAX_PLAUSIBLE_KANA_PER_KANJI;
+    const rubyBase = idx > 0 && implausible ? prefix + frag.base : frag.base;
+    if (!(idx > 0 && implausible) && idx > 0) nodes.push(prefix);
     nodes.push(
       <ruby key={`rb-${key++}`} className={S.ruby}>
-        {frag.base}
+        {rubyBase}
         <rp>(</rp>
         <rt>{frag.reading}</rt>
         <rp>)</rp>
