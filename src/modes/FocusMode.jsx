@@ -160,7 +160,12 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
                 }}
               >
                 {trainedKeys.has(c.key) && (
-                  <span style={{ color: T.correct, marginRight: 4 }}>✓</span>
+                  <span
+                    title="Dilatih sesi ini (belum tentu sudah hafal — lihat skornya di samping)"
+                    style={{ color: T.textDim, marginRight: 4 }}
+                  >
+                    🔁
+                  </span>
                 )}
                 {c.score}%
               </span>
