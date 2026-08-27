@@ -14,7 +14,7 @@ import { RATING_META } from '../srs/fsrs-core.js';
 import { get as storageGet } from '../storage/engine.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -361,7 +361,9 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
         {flipped && (
           <div className={R.flipReveal}>
             <div className={R.flipIdText}>{currentCard.id_text}</div>
-            <div className={R.flipDesc}>{currentCard.desc}</div>
+            <div className={R.flipDesc}>
+              <DescBlock desc={currentCard.desc} />
+            </div>
             <div className={R.flipCatRow}>
               <span
                 className={S.pill}

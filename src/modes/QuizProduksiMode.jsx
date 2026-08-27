@@ -13,7 +13,7 @@ import { haptic } from '../utils/haptic.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -461,7 +461,7 @@ export default function QuizProduksiMode({
 
           {card.desc && (
             <div style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.5 }}>
-              {card.desc}
+              <DescBlock desc={card.desc} />
             </div>
           )}
         </div>

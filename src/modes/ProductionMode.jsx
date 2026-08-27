@@ -10,7 +10,7 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import TypoDiff from '../components/TypoDiff.jsx';
 import { diffChars } from '../utils/typo-diff.js';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
@@ -353,7 +353,7 @@ export default function ProductionMode({
         </div>
         {card.desc && (
           <div style={{ fontSize: 12, color: T.textDim, marginTop: 10, lineHeight: 1.5 }}>
-            {card.desc}
+            <DescBlock desc={card.desc} />
           </div>
         )}
       </div>
@@ -461,7 +461,7 @@ export default function ProductionMode({
 
           {card.desc && (
             <div style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.5 }}>
-              {card.desc}
+              <DescBlock desc={card.desc} />
             </div>
           )}
 

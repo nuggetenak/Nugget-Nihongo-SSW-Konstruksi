@@ -258,12 +258,16 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                 </div>
               )}
               <div style={{ fontSize: 13, color: T.gold, marginTop: 4 }}>{c.id_text}</div>
-              {c.desc && (
-                <div style={{ fontSize: 11, color: T.textMuted, marginTop: 4, lineHeight: 1.5 }}>
-                  {c.desc.slice(0, 100)}
-                  {c.desc.length > 100 ? '…' : ''}
-                </div>
-              )}
+              {c.desc &&
+                (() => {
+                  const clean = stripFuri(c.desc);
+                  return (
+                    <div style={{ fontSize: 11, color: T.textMuted, marginTop: 4, lineHeight: 1.5 }}>
+                      {clean.slice(0, 100)}
+                      {clean.length > 100 ? '…' : ''}
+                    </div>
+                  );
+                })()}
               {/* User accuracy badge */}
               <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
                 {isKnown && (

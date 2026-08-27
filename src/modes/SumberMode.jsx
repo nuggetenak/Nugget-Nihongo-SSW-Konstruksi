@@ -3,7 +3,7 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from '../data/categories.js';
 import { useApp } from '../contexts/AppContext.jsx';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
@@ -152,7 +152,9 @@ export default function SumberMode({ onExit, onNavigate }) {
               </div>
               {expanded === c.id && (
                 <div style={{ marginTop: 6, fontSize: 11, color: T.textMuted, lineHeight: 1.5 }}>
-                  <div style={{ marginTop: 4 }}>{c.desc}</div>
+                  <div style={{ marginTop: 4 }}>
+                    <DescBlock desc={c.desc} />
+                  </div>
                 </div>
               )}
             </button>

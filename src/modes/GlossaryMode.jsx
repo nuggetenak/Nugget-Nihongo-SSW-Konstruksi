@@ -14,7 +14,7 @@ import { get as storageGet } from '../storage/engine.js';
 import { formatCount } from '../utils/format.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
@@ -152,7 +152,7 @@ export default function GlossaryMode({ onExit, track }) {
     const rows = cards.map((c) => {
       const cardReading = extractReadings(c.jp);
       const front = `${stripFuri(c.jp)}${cardReading ? `[${cardReading}]` : ''}`;
-      const back = `${c.id_text}${c.desc ? `<br>${c.desc}` : ''}`;
+      const back = `${c.id_text}${c.desc ? `<br>${stripFuri(c.desc)}` : ''}`;
       const tags = `ssw-konstruksi ${c.category}`;
       return `${front}\t${back}\t${tags}`;
     });
@@ -383,7 +383,9 @@ export default function GlossaryMode({ onExit, track }) {
                           </button>
                         </div>
                       )}
-                      <p className={G.termDesc}>{c.desc}</p>
+                      <div className={G.termDesc}>
+                        <DescBlock desc={c.desc} />
+                      </div>
                       {c.source && (
                         <div className={G.termSourceRow}>
                           <span className={G.termSourcePill}>{c.source}</span>
