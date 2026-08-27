@@ -11,7 +11,7 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, DescBlock, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import S from './modes.module.css';
 import D from './DangerMode.module.css';
@@ -129,14 +129,16 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                 <div className={D.accordionPanel}>
                   <div style={{ marginBottom: 10 }}>
                     <div className={D.correctLabel}>✓ Jawaban Benar</div>
-                    <div className={D.correctBox}>{pair.correct}</div>
+                    <div className={D.correctBox}>
+                      {renderJPWithRuby(pair.correct, parseRubyFragments(pair.correct))}
+                    </div>
                   </div>
                   <div>
                     <div className={D.wrongLabel}>✗ Jebakan Umum</div>
                     <div className={`${S.list} ${D.trapList}`}>
                       {pair.traps.map((trap, ti) => (
                         <div key={ti} className={D.wrongBox}>
-                          {trap}
+                          {renderJPWithRuby(trap, parseRubyFragments(trap))}
                         </div>
                       ))}
                     </div>
@@ -162,7 +164,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                         💡 Kenapa sering tertukar?
                       </div>
                       <div style={{ fontSize: 12, color: 'var(--ssw-text)', lineHeight: 1.6 }}>
-                        {pair.explanation}
+                        <DescBlock desc={pair.explanation} />
                       </div>
                     </div>
                   )}
@@ -375,7 +377,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
               }}
             >
               <span className={D.optionLabel}>{i + 1})</span>
-              <span>{opt.text}</span>
+              <span>{renderJPWithRuby(opt.text, parseRubyFragments(opt.text))}</span>
               {showResult && isCorrect && <span className={D.optionIcon}>✓</span>}
               {showResult && isWrongPick && <span className={D.optionIcon}>✗</span>}
             </button>
@@ -388,14 +390,16 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
           <div className={`${S.sectionLabel} ${D.explanationHeader}`}>Penjelasan Perbedaan</div>
           <div style={{ marginBottom: 8 }}>
             <div className={D.explanationCorrectLabel}>✓ BENAR</div>
-            <div className={D.explanationCorrectBox}>{pair.correct}</div>
+            <div className={D.explanationCorrectBox}>
+              {renderJPWithRuby(pair.correct, parseRubyFragments(pair.correct))}
+            </div>
           </div>
           <div>
             <div className={D.explanationWrongLabel}>✗ JEBAKAN</div>
             <div className={`${S.list} ${D.trapList}`}>
               {pair.traps.map((trap, ti) => (
                 <div key={ti} className={D.wrongBox}>
-                  {trap}
+                  {renderJPWithRuby(trap, parseRubyFragments(trap))}
                 </div>
               ))}
             </div>
@@ -421,7 +425,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
                 💡 Kenapa sering tertukar?
               </div>
               <div style={{ fontSize: 12, color: 'var(--ssw-text)', lineHeight: 1.6 }}>
-                {pair.explanation}
+                <DescBlock desc={pair.explanation} />
               </div>
             </div>
           )}
