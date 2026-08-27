@@ -8,6 +8,7 @@ import { CARDS } from '../data/cards.js';
 import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { calcReadiness } from '../utils/session-analytics.js';
+import { isoToLocalDate } from '../utils/date.js';
 import { MODE_META } from '../router/modes.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ProgressRing from '../components/ProgressRing.jsx';
@@ -241,7 +242,15 @@ export default function StatsMode({
         });
         const byDate = {};
         sessions.forEach((sess) => {
-          const date = sess.date?.slice(0, 10);
+          // isoToLocalDate (already used by StudyHeatmap two sections up, for
+          // this exact sessions array) instead of a raw sess.date?.slice(0,10):
+          // recordSession (ProgressContext.jsx) always writes an ISO string
+          // today, but this crashed the whole mode -- not just this chart --
+          // on any session whose date isn't a string (e.g. a hand-edited or
+          // future-format Impor Progress JSON; validateSnapshot doesn't check
+          // individual session shapes). new Date(...) accepts a number fine,
+          // so this tolerates that instead of throwing.
+          const date = isoToLocalDate(sess.date);
           if (date && byDate[date] === undefined) byDate[date] = [];
           byDate[date]?.push(sess);
         });
