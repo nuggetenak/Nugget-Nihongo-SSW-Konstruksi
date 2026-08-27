@@ -7,9 +7,10 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useConfirm } from '../components/ConfirmDialog.jsx';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { haptic } from '../utils/haptic.js';
@@ -68,6 +69,20 @@ function fmtTime(sec) {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
+// Some quiz sets' hint/id_text field is a mixed ID+JP string with 《reading》
+// segments embedded inline for kanji breakdown (e.g. "安全《あんぜん》=
+// keselamatan, 弁=katup" -- deliberately teaching the reading alongside the
+// meaning), not a plain Indonesian translation. Rendering it as bare text
+// leaves the 《》 markers themselves visible; running the whole string
+// through JpFront is also wrong the other direction (it assumes pure
+// Japanese and forces JP font/centering onto what's mostly Indonesian
+// prose). This mirrors DescBlock's own 'plain' branch -- same fix, without
+// pulling in a block-level component into a single inline hint line.
+function MixedRuby({ text }) {
+  if (!text) return null;
+  return renderJPWithRuby(text, parseRubyFragments(text));
+}
+
 // Normalize JAC and Wayground+CSV questions to a common shape
 function buildPool() {
   const jacNorm = JAC_OFFICIAL.map((q) => ({
@@ -121,7 +136,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     const pool = shuffle(buildPool());
     const items = config.count > 0 ? pool.slice(0, config.count) : pool;
     return items.map((q) => {
-      const shuffledOpts = shuffle(q.options.map((text, origIdx) => ({ text, origIdx })));
+      // Options never render through ruby-aware JpFront here (OptionButton-
+      // style plain text, same convention QuizShell/VocabMode already use for
+      // every other mode's choices — see stripFuri's own call sites) — so the
+      // raw 《reading》 markup needs stripping at the source, same as those,
+      // or it shows up on-screen literally instead of being parsed as ruby.
+      const shuffledOpts = shuffle(
+        q.options.map((text, origIdx) => ({ text: stripFuri(text), origIdx }))
+      );
       return {
         jp: q.jp,
         id_text: q.id_text,
@@ -224,6 +246,18 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     },
     [phase, paused, questions.length]
   );
+
+  const handleExitClick = useCallback(async () => {
+    if (phase === 'playing') {
+      const ok = await confirm(
+        `${answeredCount}/${questions.length} soal sudah dijawab. Keluar sekarang akan menghapus semuanya — progres simulasi tidak tersimpan sebagian.`,
+        'Keluar, hapus progres',
+        'Tetap di sini'
+      );
+      if (!ok) return;
+    }
+    onExit();
+  }, [phase, answeredCount, questions.length, confirm, onExit]);
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
 
@@ -417,21 +451,27 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
                   >
                     <div className={SM.reviewJp}>
-                      <JpFront jp={r.jp} furiganaPolicy={furiganaPolicy} />
+                      <JpFront jp={r.jp} furiganaPolicy={furiganaPolicy} maxSize={17} />
                     </div>
-                    <div className={SM.reviewIdText}>{r.id_text}</div>
+                    <div className={SM.reviewIdText}>
+                      <MixedRuby text={r.id_text} />
+                    </div>
                     <div className={SM.reviewWrong}>
-                      ✗ <JpFront jp={userOpt?.text || '—'} furiganaPolicy={furiganaPolicy} />
+                      ✗ <JpFront jp={userOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
                     </div>
                     <div className={SM.reviewCorrect}>
-                      ✓ <JpFront jp={correctOpt?.text || '—'} furiganaPolicy={furiganaPolicy} />
+                      ✓ <JpFront jp={correctOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
                     </div>
-                    {r.explanation && (
-                      <div className={SM.reviewExpl}>
-                        💡 {r.explanation.slice(0, 160)}
-                        {r.explanation.length > 160 ? '…' : ''}
-                      </div>
-                    )}
+                    {r.explanation &&
+                      (() => {
+                        const clean = stripFuri(r.explanation);
+                        return (
+                          <div className={SM.reviewExpl}>
+                            💡 {clean.slice(0, 160)}
+                            {clean.length > 160 ? '…' : ''}
+                          </div>
+                        );
+                      })()}
                   </div>
                 );
               })}
@@ -447,7 +487,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   return (
     <div className={`${S.pageScroll} ${SM.quizPage}`}>
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
+        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={handleExitClick}>
           ✕ Keluar
         </button>
         <div className={S.row} style={{ gap: 10 }}>
@@ -521,7 +561,11 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         <div className={SM.questionJp}>
           <JpFront jp={q.jp} furiganaPolicy={furiganaPolicy} />
         </div>
-        {q.id_text && <div className={SM.questionSub}>{q.id_text}</div>}
+        {q.id_text && (
+          <div className={SM.questionSub}>
+            <MixedRuby text={q.id_text} />
+          </div>
+        )}
         {q.hasPhoto && (
           <div className={SM.photoHint}>📷 {q.photoDesc || 'Soal asli pakai foto'}</div>
         )}
@@ -650,32 +694,53 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         Kumpulkan Ujian
       </button>
 
-      {/* Pause overlay */}
+      {/* Pause overlay. Also offers Keluar here specifically -- pausing is
+          the natural "step away" moment, so it doubles as the safe exit
+          point rather than making Keluar and Jeda two disconnected buttons
+          with no relationship to each other. */}
       {paused && (
-        <button
-          type="button"
-          onClick={() => setPaused(false)}
+        <div
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 'var(--z-overlay)',
-            width: '100%',
-            margin: 0,
-            border: 'none',
-            font: 'inherit',
             background: 'rgba(0,0,0,0.72)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
             gap: 12,
-            cursor: 'pointer',
           }}
         >
           <div style={{ fontSize: 48 }}>⏸</div>
           <div style={{ color: '#fff', fontSize: 20, fontWeight: 700 }}>Dijeda</div>
-          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14 }}>Ketuk untuk lanjut</div>
-        </button>
+          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, marginBottom: 8 }}>
+            {answeredCount}/{questions.length} soal terjawab · waktu ikut berhenti
+          </div>
+          <button
+            type="button"
+            onClick={() => setPaused(false)}
+            style={{ ...RED_BTN, padding: '13px 32px', fontSize: 15 }}
+          >
+            ▶ Lanjutkan
+          </button>
+          <button
+            type="button"
+            onClick={handleExitClick}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'rgba(255,255,255,0.55)',
+              fontSize: 13,
+              fontFamily: 'inherit',
+              cursor: 'pointer',
+              padding: 8,
+              marginTop: 4,
+            }}
+          >
+            ✕ Keluar dari simulasi
+          </button>
+        </div>
       )}
     </div>
   );
