@@ -72,17 +72,29 @@ Use for anything that doesn't get more useful by stretching — a ring, a stat n
 icon+label, a tile with centered content. **A track's `max` in `minmax()` is a hard ceiling
 regardless of leftover container space** — capping it means extra room just stays as page
 whitespace instead of padding out the content, which is the actual fix (pairing/flowing more
-items, not just making one item's box bigger).
+items, not just making one item's box bigger). This is what motivated the pattern in the first
+place: a single centered ring in a `1fr` (or unconstrained) container just became a *bigger* box
+with the same small ring floating in it — more width wasn't the fix, a ceiling and something to
+pair with was.
 
 ```css
 grid-template-columns: repeat(auto-fit, minmax(260px, 380px));  /* StatsMode summary cards */
-grid-template-columns: repeat(auto-fit, minmax(180px, 240px));  /* BelajarTab compact tiles */
+grid-template-columns: repeat(auto-fit, minmax(120px, 140px));  /* BelajarTab compact tiles */
 grid-template-columns: repeat(auto-fit, minmax(90px, 120px));   /* SayaTab achievement badges */
 ```
 
-Getting this backwards is the original bug: a single centered ring in a `1fr` (or unconstrained)
-container just becomes a *bigger* box with the same small ring floating in it — more width isn't
-the fix, a ceiling and something to pair with is.
+**When both MIN and MAX are fixed lengths (not `1fr`/`auto`), auto-fit picks the column *count* using
+MAX, not MIN** — per spec, tracks are sized at their max for this calculation when the max is
+definite. The min only controls shrinking *after* that count is already fixed; it does not widen
+how many tracks fit. This is easy to get backwards (it was gotten backwards once, here: BelajarTab
+shipped with `minmax(180px, 240px)`, which reads like "as few as 180px" but actually needs
+`2×240px + gap` before a second column can ever appear — no phone in the compact breakpoint has
+that much room, so it silently rendered a single centered 240px column with dead space beside it,
+on every phone, the entire time). **To size a Variant B grid for a specific column count on a
+specific container width, solve for MAX** — `N × MAX + (N-1) × gap ≤ target width` — not MIN.
+StatsMode's 260/380 pair is fine specifically *because* single-column-until-desktop is its stated
+intent (see that file's own comment); it would be the same bug if the intent had been "2 columns
+on phone."
 
 ### Routing non-uniform children with `:not()`
 

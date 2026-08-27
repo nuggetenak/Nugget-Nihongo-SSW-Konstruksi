@@ -172,7 +172,20 @@
    only by getting company. */
 .compactGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
+  /* IMPORTANT, and not obvious from the CSS alone (docs/LAYOUT_SPEC.md's
+     Variant B section is being corrected alongside this fix): when both
+     sides of minmax() are fixed lengths, auto-fit computes how many
+     tracks to create using the MAX, not the MIN -- the min only governs
+     shrinking after that count is already decided. The previous
+     180px/240px pair therefore needed 2*240px+gap=488px before a second
+     column could ever appear, which no phone in the compact breakpoint
+     (<700px) has -- confirmed via Playwright at 360-430px viewports, all
+     silently collapsing to a single 240px column with dead space beside
+     it. 140px as the max keeps 2 columns reliably from ~360px up, and
+     naturally grows to 3 as width approaches the 700px medium breakpoint
+     -- that's auto-fit doing its job, not a bug to fight back to exactly 2.
+  */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 140px));
   gap: 8px;
   margin-bottom: 2px;
 }
@@ -207,6 +220,7 @@
   display: flex;
   flex-direction: column;
   gap: 7px;
+  min-width: 0;
   transition:
     background 0.15s,
     transform 0.14s,
