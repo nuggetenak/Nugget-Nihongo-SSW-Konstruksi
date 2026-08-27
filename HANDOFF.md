@@ -37,10 +37,11 @@ content into this file.
 **As of this edit, 2026-08-27.** Verify before trusting past this point — this line doesn't
 update itself.
 
-- **2026-08-27 session: 4 live-site bugs reported, root-caused against actual code (not
-  assumed from this file — see the correction entry right below for why that mattered), fixed
-  on branch `fix/post-overhaul-bugs` off `main`.** Not merged yet — owner's call, same rule as
-  always. Commits have full evidence each; short version:
+- **2026-08-27 session (two rounds — screenshots + follow-up in the same conversation): 6 live-
+  site bugs reported total, root-caused against actual code each time (not assumed from this
+  file — see the correction entry right below for why that mattered), fixed on branch
+  `fix/post-overhaul-bugs` off `main`.** Not merged yet — owner's call, same rule as always.
+  Commits have full evidence each; short version, round 1:
   - **Furigana/ruby garbled + inconsistent**: `parseRubyFragments` only ever matched the kanji
     run touching a trailing 《reading》 marker. Phrases with a particle/number in the middle
     (安全確認の8項目 and ~250 others) got the *whole* reading pinned onto just the last 2-4
@@ -49,18 +50,52 @@ update itself.
     known ones. 35 of the ~250 data entries also hand/dictionary-verified and corrected
     directly; the rest are logged in `docs/RUBY_MISMATCH_AUDIT.md` rather than guessed at
     (real Japanese-reading-accuracy work, same shape as items 58/59 below — own session).
-  - **Praktik Set (10 sets, ids `wgl01`-`wgl10`) counted/mixed into "Kosakata · Vocab Drill"**:
-    `VocabMode`'s `id.startsWith('wg')` filter doesn't distinguish them from the real vocab
-    sets (`wglv-*`). Split into two labeled sections on the same screen rather than a new mode
-    — **flagged as a product-IA call the owner may want to revisit** (dedicated Praktik mode?).
   - **Sprint's playing phase had no back button** — 'ready'/'done' both did, 'playing' was a
     plain oversight. Added the same back button, no pause feature built (see commit for why).
   - **Fokus screen showed a green ✓ next to 0%** — not a data bug, `trainedKeys` (drilled this
     session) and `known`/score (actual mastery) are intentionally independent signals; the
     checkmark just visually borrowed the "mastered" color. Swapped for a neutral 🔁 + tooltip.
+  - **Praktik Set (10 sets, ids `wgl01`-`wgl10`) counted/mixed into "Kosakata · Vocab Drill"**:
+    `VocabMode`'s `id.startsWith('wg')` filter doesn't distinguish them from the real vocab
+    sets (`wglv-*`). First pass split it into two sections within VocabMode and **flagged the
+    placement as a product-IA call for the owner** rather than deciding unilaterally — round 2
+    below is the owner's answer.
 
-  All four verified against real code before being called bugs, not assumed from a report.
-  602/602 tests (up from 600), lint + build clean throughout.
+  Round 2, same conversation, owner reviewed round 1 and gave three more things:
+  - **Praktik Set → moved into "Soal Teknis" (`WaygroundMode`) instead**, per owner's explicit
+    call, grouped with its existing Teori/Praktik structure (`GROUPS`' Praktik entry now matches
+    `wgl0*` via a `match()` fn, not a plain prefix — `wgl10` doesn't share a string prefix with
+    `wgl01`-`09`). VocabMode reverted to vocab-only. Surfaced a second bug while in there: the
+    same file's "CSV Teori"/"CSV Praktik" groups used prefixes (`ct`/`cp`) that haven't existed
+    since session 23 (2026-07-11) renamed those ids to `jmt`/`jml` — 12 real sets (300
+    questions) were counted in this screen's own header total the entire time but unreachable
+    from any group list on the screen showing that total. Fixed, relabeled to match the rename
+    ("JAC Mockup Teori/Praktik").
+  - **"Soal Teknis · Lifeline" title → "Soal Teknis"** — app's been single-track since
+    Doboku/Kenchiku were dropped, so the suffix was dead weight from before that cut, not a
+    meaningful qualifier. Grepped for the same pattern elsewhere; this was the only mode title
+    carrying it.
+  - **"Layout menu Belajar jelek banget" → `BelajarTab`'s compact-tile grid was never actually
+    2 columns on any phone**, despite the code's own comment saying that was the design
+    (`CompactCard` exists specifically for this). Root cause needed Playwright to actually find
+    (see docs/LAYOUT_SPEC.md's Variant B section, corrected in the same commit): `repeat(auto-
+    fit, minmax(MIN, MAX))` picks column *count* from MAX when MAX is a fixed length, not MIN —
+    180px/240px needed `2×240+gap=488px`, which no phone in the compact breakpoint has, so it
+    silently rendered one centered 240px column the entire time this grid has existed. Fixed to
+    `minmax(120px, 140px)`, verified via Playwright to hold 2 columns from 360px up through the
+    breakpoint ceiling. Checked StatsMode's and SayaTab's own same-pattern grids against the
+    same question while there — both fine, for different reasons documented in that commit, not
+    just left unchecked.
+  - **Bonus, found while Playwright-testing the grid fix, not reported**: `StatsMode` crashed
+    outright (full `ErrorBoundary` catch) on a session with a non-string `date` field. Doesn't
+    happen through normal use (`recordSession` always writes an ISO string) but Impor Progress's
+    `validateSnapshot` doesn't check individual session shapes, so a hand-edited/malformed
+    import is a real path to it. Fixed by reusing `isoToLocalDate` (already used one section
+    above, in `StudyHeatmap`, for the same data) instead of a raw `.slice()` call.
+
+  All six verified against real code before being called bugs or fixed, not assumed from a
+  screenshot or a prior report.
+  605/605 tests (up from 600 at the start of this session), lint + build clean throughout.
 
 - **🔴 Correction to what this section used to say:** it claimed `feat/ui-overhaul` was still
   NOT merged to `main`. That was wrong by the time the 2026-08-27 session started — verified
@@ -130,10 +165,11 @@ update itself.
   plan entries, never in any batch's suggested ordering.
 
   **Next up:** the 2026-08-27 entry above is the current front of the queue — merge
-  `fix/post-overhaul-bugs` (owner's call, per RULES below), decide where Praktik Set belongs
-  long-term, and someone who can verify actual Japanese readings should work through
-  `docs/RUBY_MISMATCH_AUDIT.md`. Otherwise unchanged from before: 53/55 excluded, 58/59 each
-  need their own dedicated session (schema migration; sourcing real TTS audio).
+  `fix/post-overhaul-bugs` (owner's call, per RULES below; Praktik Set placement is now
+  decided — see round 2 above, no longer an open question), and someone who can verify actual
+  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md`. Otherwise unchanged from
+  before: 53/55 excluded, 58/59 each need their own dedicated session (schema migration;
+  sourcing real TTS audio).
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
