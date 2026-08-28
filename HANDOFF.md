@@ -165,6 +165,20 @@ update itself.
     not a mix of more; existing no-category-tagging coverage unchanged). 1 commit (`b4db773`),
     627/627 tests, lint + build clean.
 
+- **2026-08-28, final round this date: the Belajar-menu accordion, implemented.** Owner
+  approved the direction from the Visualizer mockups earlier the same day ("Menu accordion aku
+  udah acc. Implement now."). `BelajarTab.jsx`: featured card per section always stays visible;
+  only the secondary compact-grid items collapse, toggled by tapping the section header.
+  Collapsible derived from `rest.length > 0` (not hardcoded), so Ulasan — the one section with
+  exactly one mode — correctly gets a plain non-interactive header, no chevron, nothing to
+  collapse. Chevron sits in a round bubble background per the owner's specific follow-up on the
+  mockup ("kasih bubble aja biar noticable"). Collapse mechanism is CSS `max-height` +
+  `overflow`, not conditional unmounting, so secondary items stay reachable in the DOM even
+  visually collapsed. Collapsed by default — verified via Playwright (not just asserted) that
+  this delivers what it's for: every section collapsed fits all 5 section headers + featured
+  cards + the bottom nav in a single 390×1000 screen with zero scrolling, down from a
+  multi-screen scroll before. 5 new tests. 1 commit (`6043ad6`), 632/632 tests, lint clean.
+
 - **2026-08-27 session (two rounds of fixes + a merge, all one conversation): 6 live-site bugs
   reported total, root-caused against actual code each time (not assumed from this file — see
   the correction entry right below for why that mattered), fixed on branch
@@ -304,15 +318,13 @@ update itself.
   real device. Items 53 (rem conversion) and 55 (FilterPopup) remain excluded, per their own
   plan entries, never in any batch's suggested ordering.
 
-  **Next up:** everything from 2026-08-28 above (ruby-audit round, Simulasi source split, and
-  JAC Official's set-pairing fix) is committed directly to `main` (owner's call for this whole
-  date) and about to be pushed in the same batch — check `git log origin/main..main` before
-  assuming any of it's live if reading this before that push lands. Once pushed, confirm the
-  deploy the same way 2026-08-27 round 3 did (Actions API, not assumed). The Belajar-menu
-  accordion idea discussed the same day is still just a discussion (Visualizer mockups only) —
-  no code changed for it, don't assume it's pending implementation without the owner confirming
-  a direction first. Otherwise: someone who can verify actual Japanese readings should work
-  through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent, scoped like items 58/59
+  **Next up:** everything from 2026-08-28 above (ruby-audit round, Simulasi source split, JAC
+  Official's set-pairing fix, and the Belajar accordion) is committed directly to `main`
+  (owner's call for this whole date) and about to be pushed in the same batch — check
+  `git log origin/main..main` before assuming any of it's live if reading this before that push
+  lands. Once pushed, confirm the deploy the same way 2026-08-27 round 3 did (Actions API, not
+  assumed). Otherwise: someone who can verify actual Japanese readings should work through
+  `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent, scoped like items 58/59
   below); 53/55 excluded; 58/59 each need their own dedicated session (schema migration;
   sourcing real TTS audio).
 ---
