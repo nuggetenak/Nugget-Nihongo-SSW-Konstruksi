@@ -5,6 +5,7 @@ import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
+import { isVocabId } from '../utils/quiz-classification.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -22,10 +23,7 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
   // Those sets now live in WaygroundMode ("Soal Teknis") instead, grouped
   // with the rest of its Praktik content -- see that file's GROUPS comment.
   const VOCAB_SETS = useMemo(
-    () =>
-      QUIZ_SETS.filter(
-        (s) => s.id.startsWith('wglv') && (s.track === 'common' || s.track === track)
-      ),
+    () => QUIZ_SETS.filter((s) => isVocabId(s.id) && (s.track === 'common' || s.track === track)),
     [track]
   );
   const totalSoal = VOCAB_SETS.reduce((n, s) => n + s.questions.length, 0);

@@ -5,6 +5,13 @@ import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
+import {
+  isWaygroundTeoriId,
+  isWaygroundPraktikId,
+  isJacMockupTeoriId,
+  isJacMockupPraktikId,
+  isVocabId,
+} from '../utils/quiz-classification.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -31,28 +38,28 @@ const GROUPS = [
     label: 'Teori',
     icon: '📋',
     color: '#f97316',
-    prefix: 'wt',
+    match: isWaygroundTeoriId,
     desc: 'Pengetahuan & konsep teknis',
   },
   {
     label: 'Praktik',
     icon: '🛠️',
     color: '#4ade80',
-    match: (id) => id.startsWith('wgl') && !id.startsWith('wglv'),
+    match: isWaygroundPraktikId,
     desc: 'Prosedur & aplikasi lapangan',
   },
   {
     label: 'JAC Mockup Teori',
     icon: '📚',
     color: '#f59e0b',
-    prefix: 'jmt',
+    match: isJacMockupTeoriId,
     desc: 'Simulasi soal teori (CSV)',
   },
   {
     label: 'JAC Mockup Praktik',
     icon: '🔧',
     color: '#34d399',
-    prefix: 'jml',
+    match: isJacMockupPraktikId,
     desc: 'Simulasi soal praktik (CSV)',
   },
 ];
@@ -71,9 +78,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
   const TEORI_PRAKTIK = QUIZ_SETS.filter(
-    (s) =>
-      (!s.id.startsWith('wg') || (s.id.startsWith('wgl') && !s.id.startsWith('wglv'))) &&
-      (s.track === 'common' || s.track === track)
+    (s) => !isVocabId(s.id) && (s.track === 'common' || s.track === track)
   );
   const [activeSet, setActiveSet] = useState(null);
   // 'Lemah' mode — only wrong questions for the active set.
@@ -160,7 +165,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
   const totalSoal = TEORI_PRAKTIK.reduce((n, s) => n + s.questions.length, 0);
   const groups = GROUPS.map((g) => ({
     ...g,
-    sets: TEORI_PRAKTIK.filter((s) => (g.match ? g.match(s.id) : s.id.startsWith(g.prefix))),
+    sets: TEORI_PRAKTIK.filter((s) => g.match(s.id)),
   })).filter((g) => g.sets.length > 0);
 
   const pillStyle = (active) => ({
