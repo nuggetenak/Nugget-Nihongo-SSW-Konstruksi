@@ -135,6 +135,36 @@ update itself.
     assumed.
   - 2 commits (`3f7742d`, `ea5cf73`), 625/625 tests (617 + 8 new), lint + build clean.
 
+- **2026-08-28, continued further (same conversation, same day): JAC Official's real set
+  structure.** Owner asked for an accordion-style rework of the Belajar menu — discussed with
+  the Visualizer tool (mockups, not code) rather than jumping straight to implementation, since
+  it's a real IA change worth agreeing on first: recommended featured items stay always-visible
+  with only the secondary compact-grid items collapsing per section, specifically because
+  hiding daily-driver modes like Kartu/Kuis behind an extra tap would cost real time for
+  returning users, not just look cluttered for new ones. No code changed from this yet — still
+  a design conversation, not implemented.
+  - Owner then asked for `JAC_OFFICIAL`'s internal sampling to use set-pairing too (echoing the
+    Teori & Praktik conversation). **First response was wrong, and corrected mid-conversation
+    rather than silently fixed later**: claimed `JAC_OFFICIAL` had no set structure at all —
+    true of what `buildJacPool()` actually read, false of the underlying data. Owner pushed
+    back with specifics; re-verified directly against `sets/jac/jac-teori.js` and
+    `jac-lifeline.js` (not the flattened `jac-official.js` compat shim, which concatenates both
+    into one array with no grouping preserved downstream) rather than continuing to argue from
+    the wrong premise. Real structure: every question already carries a `set` field —
+    `tt1`/`tt2` (学科/teori, 29 and 36 questions — genuinely uneven, not a data error) or
+    `st1`/`st2` (実技/praktik, 15 each) — just never read by this pool.
+  - **`pickJacSetPair()`**: every simulation start now picks one teori set + one praktik set at
+    random (not exposed as a choice — owner: "biar keliatan kyk random"), takes everything in
+    both. Total is whatever that pair adds up to — 44 or 51, never anything else, since the two
+    praktik sets are equal size and teori is what swings it. "Ujian Penuh"'s label updated from
+    a hardcoded question count (no longer true — that number was the source pool's total, not
+    what an attempt draws) to state the range plainly. Verified live via Playwright, not just
+    by test — a real run showed exactly 51.
+  - 3 new tests (every draw is exactly 44 or 51 across 60 iterations with both totals required
+    to appear; each draw's questions share exactly 2 distinct set labels, confirming one pair
+    not a mix of more; existing no-category-tagging coverage unchanged). 1 commit (`b4db773`),
+    627/627 tests, lint + build clean.
+
 - **2026-08-27 session (two rounds of fixes + a merge, all one conversation): 6 live-site bugs
   reported total, root-caused against actual code each time (not assumed from this file — see
   the correction entry right below for why that mattered), fixed on branch
@@ -274,14 +304,17 @@ update itself.
   real device. Items 53 (rem conversion) and 55 (FilterPopup) remain excluded, per their own
   plan entries, never in any batch's suggested ordering.
 
-  **Next up:** everything from 2026-08-28 above (both the ruby-audit round and the Simulasi
-  source split) is committed directly to `main` (owner's call for this whole date) and about to
-  be pushed in the same batch — check `git log origin/main..main` before assuming any of it's
-  live if reading this before that push lands. Once pushed, confirm the deploy the same way
-  2026-08-27 round 3 did (Actions API, not assumed). Otherwise: someone who can verify actual
-  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent,
-  scoped like items 58/59 below); 53/55 excluded; 58/59 each need their own dedicated session
-  (schema migration; sourcing real TTS audio).
+  **Next up:** everything from 2026-08-28 above (ruby-audit round, Simulasi source split, and
+  JAC Official's set-pairing fix) is committed directly to `main` (owner's call for this whole
+  date) and about to be pushed in the same batch — check `git log origin/main..main` before
+  assuming any of it's live if reading this before that push lands. Once pushed, confirm the
+  deploy the same way 2026-08-27 round 3 did (Actions API, not assumed). The Belajar-menu
+  accordion idea discussed the same day is still just a discussion (Visualizer mockups only) —
+  no code changed for it, don't assume it's pending implementation without the owner confirming
+  a direction first. Otherwise: someone who can verify actual Japanese readings should work
+  through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent, scoped like items 58/59
+  below); 53/55 excluded; 58/59 each need their own dedicated session (schema migration;
+  sourcing real TTS audio).
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
