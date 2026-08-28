@@ -29,6 +29,42 @@
   align-items: center;
   gap: 8px;
   padding: 20px 0 11px;
+  width: 100%;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sectionToggle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ssw-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--ssw-textDim);
+  transition: transform 0.2s ease;
+}
+
+.sectionToggle[data-expanded='true'] {
+  transform: rotate(180deg);
+}
+
+/* ── Collapsible secondary-item wrapper (per section) ── */
+.collapsible {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+
+.collapsible[data-expanded='true'] {
+  max-height: 2000px;
 }
 
 .sectionDot {

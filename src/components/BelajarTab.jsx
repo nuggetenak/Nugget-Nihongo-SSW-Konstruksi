@@ -3,6 +3,7 @@
 // remaining modes = compact 2-col grid. Color-coded per section.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { useState } from 'react';
 import Icon from './Icon.jsx';
 import s from './BelajarTab.module.css';
 import { MODE_META, MODE_SECTIONS } from '../router/modes.js';
@@ -20,18 +21,33 @@ const SECTION_META = {
   },
 };
 
-function SectionHeader({ sectionKey, title }) {
+// Section header doubles as the accordion toggle when there's a secondary
+// (compact-grid) group to collapse. The featured card underneath always
+// stays visible regardless -- collapsing hides only the secondary items,
+// never the primary/most-used mode in a section. Chevron sits in a round
+// "bubble" rather than floating bare, per direct feedback that a plain
+// glyph didn't read as tappable.
+function SectionHeader({ sectionKey, title, expanded, onToggle, collapsible }) {
   const sm = SECTION_META[sectionKey] || SECTION_META.alat;
   // Strip emoji, variation selectors, and leading spaces
   const clean = title
     .replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\uFE0F\uFE0E\u200D\s]+/gu, ' ') // eslint-disable-line no-misleading-character-class
     .trim();
+  const Tag = collapsible ? 'button' : 'div';
   return (
-    <div className={s.sectionHeader}>
+    <Tag
+      className={s.sectionHeader}
+      {...(collapsible ? { type: 'button', onClick: onToggle, 'aria-expanded': expanded } : {})}
+    >
       <span className={s.sectionDot} style={{ background: sm.color }} />
       <span className={s.sectionLabel}>{clean.toUpperCase()}</span>
       <span className={s.sectionLine} />
-    </div>
+      {collapsible && (
+        <span className={s.sectionToggle} data-expanded={expanded} aria-hidden="true">
+          ⌄
+        </span>
+      )}
+    </Tag>
   );
 }
 
@@ -97,15 +113,38 @@ function CompactCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function BelajarTab({ onSelect, badges = {} }) {
+  // Collapsed by default -- the featured card (most-used mode per section)
+  // stays visible either way, so this only hides secondary items, cutting
+  // the tab's default scroll length substantially (LATIHAN alone goes from
+  // 8 always-visible secondary items to 0 until expanded). Local state, not
+  // persisted -- resets on remount, same as any other in-session UI state
+  // in this tab.
+  const [expandedSections, setExpandedSections] = useState(() => new Set());
+  const toggleSection = (key) =>
+    setExpandedSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+
   return (
     <div className={s.container}>
       <h1 className={s.pageTitle}>Belajar</h1>
 
       {Object.entries(MODE_SECTIONS).map(([key, section]) => {
         const [featured, ...rest] = section.modes;
+        const hasSecondary = rest.length > 0;
+        const expanded = expandedSections.has(key);
         return (
           <div key={key} className={s.section}>
-            <SectionHeader sectionKey={key} title={section.title} />
+            <SectionHeader
+              sectionKey={key}
+              title={section.title}
+              collapsible={hasSecondary}
+              expanded={expanded}
+              onToggle={() => toggleSection(key)}
+            />
 
             <FeaturedCard
               modeKey={featured}
@@ -114,17 +153,19 @@ export default function BelajarTab({ onSelect, badges = {} }) {
               badge={badges[featured] ?? 0}
             />
 
-            {rest.length > 0 && (
-              <div className={s.compactGrid}>
-                {rest.map((modeKey) => (
-                  <CompactCard
-                    key={modeKey}
-                    modeKey={modeKey}
-                    sectionKey={key}
-                    onSelect={onSelect}
-                    badge={badges[modeKey] ?? 0}
-                  />
-                ))}
+            {hasSecondary && (
+              <div className={s.collapsible} data-expanded={expanded}>
+                <div className={s.compactGrid}>
+                  {rest.map((modeKey) => (
+                    <CompactCard
+                      key={modeKey}
+                      modeKey={modeKey}
+                      sectionKey={key}
+                      onSelect={onSelect}
+                      badge={badges[modeKey] ?? 0}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </div>
