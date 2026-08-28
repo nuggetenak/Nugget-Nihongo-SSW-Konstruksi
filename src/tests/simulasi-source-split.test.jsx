@@ -105,6 +105,34 @@ describe('buildJacPool — JAC Official stays its own separate, unclassified poo
     expect(pool.every((q) => q._source === 'jac')).toBe(true);
     expect(pool.every((q) => q._category === undefined)).toBe(true);
   });
+
+  // Owner's correction (2026-08-28, after first claiming -- wrongly -- that
+  // JAC_OFFICIAL had no set structure at all): the flattened compat shim
+  // (jac-official.js) hides it, but the real source files tag every
+  // question with set: 'tt1'/'tt2' (学科/teori, 29 and 36 questions) or
+  // 'st1'/'st2' (実技/praktik, 15 each). Request: pick one teori set + one
+  // praktik set at random every start, not shown as an explicit choice,
+  // total is whatever that pair happens to add up to.
+  it('always returns exactly one teori set + one praktik set worth of questions (44 or 51, never anything else)', () => {
+    const seen = new Set();
+    for (let i = 0; i < 60; i++) {
+      const pool = buildJacPool();
+      seen.add(pool.length);
+      expect([44, 51]).toContain(pool.length);
+    }
+    // Over 60 draws, both possible totals should show up -- if this ever
+    // only sees one value, the random pick isn't actually varying.
+    expect(seen.size).toBe(2);
+  });
+
+  it('every draw is internally consistent -- all questions share the same two _setLabel values', () => {
+    const pool = buildJacPool();
+    const labels = new Set(pool.map((q) => q._setLabel));
+    expect(labels.size).toBe(2);
+    for (const label of labels) {
+      expect(label).toMatch(/^(学科|実技) Set [12]$/);
+    }
+  });
 });
 
 describe('SimulasiMode UI — source selector', () => {

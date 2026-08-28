@@ -106,7 +106,12 @@ const JAC_PRESETS = [
     key: 'full',
     emoji: '🎯',
     label: 'Ujian Penuh',
-    sub: `Semua ${JAC_OFFICIAL.length} soal JAC · 45 menit`,
+    // Was "Semua 95 soal JAC" -- no longer true now that this draws from 1
+    // random teori set + 1 random praktik set (see pickJacSetPair) instead
+    // of the full flattened 95. Total varies by which pair gets picked
+    // (44 or 51 -- praktik sets are equal size, so teori is what swings
+    // it), so the label can't state an exact count anymore.
+    sub: '1 set teori + 1 set praktik (44–51 soal) · 45 menit',
     count: 0,
     time: 45 * 60,
   },
@@ -142,9 +147,35 @@ function MixedRuby({ text }) {
   return renderJPWithRuby(text, parseRubyFragments(text));
 }
 
+// JAC_OFFICIAL's own set/setLabel fields (tt1/tt2 = 学科/teori, st1/st2 =
+// 実技/praktik -- see sets/jac/jac-teori.js and jac-lifeline.js) were never
+// used by this pool before; the compat shim (jac-official.js) just
+// concatenates both into one flat 95-question array, and buildJacPool
+// originally pretended that was one undifferentiated pool. It isn't --
+// verified directly against the source files after the owner pointed out
+// the flattened shim was hiding this: 2 teori sets (tt1=29q, tt2=36q,
+// genuinely uneven -- not a rounding artifact) + 2 praktik sets (st1=15q,
+// st2=15q). Owner's request: pick one teori set + one praktik set at
+// random on every start (not shown as a choice -- "biar keliatan kyk
+// random"), take everything in both, let the total be whatever that pair
+// adds up to (44 or 51, since the praktik sets are equal size the total
+// is entirely determined by which teori set gets picked) rather than
+// forcing a fixed count the way the Teori & Praktik pool does.
+function pickJacSetPair() {
+  const bySet = {};
+  for (const q of JAC_OFFICIAL) {
+    (bySet[q.set] ??= []).push(q);
+  }
+  const teoriIds = Object.keys(bySet).filter((id) => id.startsWith('tt'));
+  const praktikIds = Object.keys(bySet).filter((id) => id.startsWith('st'));
+  const teoriId = teoriIds[Math.floor(Math.random() * teoriIds.length)];
+  const praktikId = praktikIds[Math.floor(Math.random() * praktikIds.length)];
+  return [...(bySet[teoriId] || []), ...(bySet[praktikId] || [])];
+}
+
 // Normalize JAC and Wayground+CSV questions to a common shape
 export function buildJacPool() {
-  return JAC_OFFICIAL.map((q) => ({
+  return pickJacSetPair().map((q) => ({
     jp: q.q,
     id_text: q.hint,
     options: q.opts,
