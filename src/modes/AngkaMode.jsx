@@ -8,7 +8,7 @@ import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
 import { haptic } from '../utils/haptic.js';
 import { CARDS } from '../data/cards.js';
 import { useApp } from '../contexts/AppContext.jsx';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -223,7 +223,7 @@ function PanelView({ onExit, onStartQuiz }) {
                           }}
                         >
                           <span style={{ fontWeight: 700, color: g.color }}>問 </span>
-                          {item.soal}
+                          {renderJPWithRuby(item.soal, parseRubyFragments(item.soal))}
                         </div>
                       )}
                       {item.mnemonic && (

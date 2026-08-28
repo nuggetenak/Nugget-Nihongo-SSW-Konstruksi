@@ -15,7 +15,8 @@ import { buildAchievementState, evaluateAchievements } from '../utils/achievemen
 import { useDailyChallenge } from '../hooks/useDailyChallenge.js';
 import { todayStr } from '../utils/date.js';
 import { formatCount } from '../utils/format.js';
-import { JpFront } from './JpDisplay.jsx';
+import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
+import { stripFuri } from '../utils/jp-helpers.js';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
@@ -242,19 +243,23 @@ export default function SayaTab() {
                 <div style={{ fontSize: 12, color: 'var(--ssw-textMuted)', lineHeight: 1.5 }}>
                   <JpFront jp={dailyChallengeQ.jp} furiganaPolicy={furiganaPolicy} />
                 </div>
-                {dailyChallengeQ.explanation && (
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: 'var(--ssw-textDim)',
-                      marginTop: 6,
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    💡 {dailyChallengeQ.explanation.slice(0, 120)}
-                    {dailyChallengeQ.explanation.length > 120 ? '…' : ''}
-                  </div>
-                )}
+                {dailyChallengeQ.explanation &&
+                  (() => {
+                    const clean = stripFuri(dailyChallengeQ.explanation);
+                    return (
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: 'var(--ssw-textDim)',
+                          marginTop: 6,
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        💡 {clean.slice(0, 120)}
+                        {clean.length > 120 ? '…' : ''}
+                      </div>
+                    );
+                  })()}
               </div>
             ) : (
               <div>
@@ -271,7 +276,7 @@ export default function SayaTab() {
                 </div>
                 {dailyChallengeQ.id_text && (
                   <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginBottom: 10 }}>
-                    {dailyChallengeQ.id_text}
+                    {renderJPWithRuby(dailyChallengeQ.id_text, parseRubyFragments(dailyChallengeQ.id_text))}
                   </div>
                 )}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>

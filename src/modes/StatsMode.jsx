@@ -9,6 +9,7 @@ import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { calcReadiness } from '../utils/session-analytics.js';
 import { isoToLocalDate } from '../utils/date.js';
+import { stripFuri } from '../utils/jp-helpers.js';
 import { MODE_META } from '../router/modes.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ProgressRing from '../components/ProgressRing.jsx';
@@ -427,7 +428,7 @@ export default function StatsMode({
               if (!card) return null;
               return (
                 <div key={e.id} className={`${S.rowSpread} ${ST.wrongRow}`}>
-                  <span className={ST.wrongJp}>{card.jp?.slice(0, 20)}</span>
+                  <span className={ST.wrongJp}>{stripFuri(card.jp)?.slice(0, 20)}</span>
                   <span className={ST.wrongCount}>{e.count}× salah</span>
                 </div>
               );

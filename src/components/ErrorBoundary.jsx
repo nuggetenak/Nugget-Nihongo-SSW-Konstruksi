@@ -8,6 +8,7 @@
 // narrower that actually re-fetches.
 import { Component } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
+import { JpFront } from './JpDisplay.jsx';
 import S from './ErrorBoundary.module.css';
 
 function reload() {
@@ -70,10 +71,11 @@ export function TabError({ tab, error }) {
 // Degraded rendering, not a failure -- no recovery action needed, so it keeps
 // its own card shape rather than the full error presentation above.
 export function FlatCardFallback({ card }) {
+  const { prefs } = useApp();
   return (
     <div className={S.flatCard}>
       <div lang="ja" className={S.flatCardJp}>
-        {card?.jp}
+        <JpFront jp={card?.jp} furiganaPolicy={prefs?.furiganaPolicy ?? 'always'} />
       </div>
       <div className={S.flatCardId}>{card?.id_text}</div>
     </div>

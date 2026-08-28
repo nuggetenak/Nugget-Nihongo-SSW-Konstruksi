@@ -4,6 +4,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -240,7 +241,7 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
                   <div
                     style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
                   >
-                    {s.subtitle}
+                    {renderJPWithRuby(s.subtitle, parseRubyFragments(s.subtitle))}
                   </div>
                 )}
               </button>

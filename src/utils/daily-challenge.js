@@ -3,12 +3,17 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
+import { stripFuri } from './jp-helpers.js';
 
 function buildAllQuestions() {
+  // Options render as plain buttons here (SayaTab.jsx), same convention as
+  // every other mode's options (VocabMode etc. strip before handing text to
+  // QuizShell/OptionButton) -- stripped once at the source instead of in the
+  // component, same reasoning as SimulasiMode's own fix.
   const jac = JAC_OFFICIAL.map((q) => ({
     jp: q.q,
     id_text: q.hint,
-    options: q.opts,
+    options: q.opts.map(stripFuri),
     answer: q.ans,
     explanation: q.exp,
   }));
@@ -16,7 +21,7 @@ function buildAllQuestions() {
     (set.questions || []).map((q) => ({
       jp: q.q,
       id_text: q.hint || null,
-      options: q.opts,
+      options: q.opts.map(stripFuri),
       answer: q.ans,
       explanation: q.exp || null,
     }))
