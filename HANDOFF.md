@@ -34,8 +34,63 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-27.** Verify before trusting past this point — this line doesn't
+**As of this edit, 2026-08-28.** Verify before trusting past this point — this line doesn't
 update itself.
+
+- **2026-08-28 (same conversation as 2026-08-27 below, date rolled over mid-session): new
+  screenshots, three more reports (font sizing, ruby still inconsistent elsewhere, Simulasi's
+  exit/pause UX), owner said work directly on `main` this time instead of a branch — done, but
+  every commit still validated before pushing, same discipline as always, just no branch/merge
+  step in between. 7 commits, `cfc39a3`..`ff321c0`.**
+  - **SimulasiMode, three reported issues at once**: (1) review-list font sizing read as random
+    (short answers hitting `jpFontSize`'s largest tier next to longer ones in the same scrolled
+    list) — new `maxSize` prop on `JpFront` (`JpDisplay.jsx`) caps it, applied here first. (2)
+    Options and hint/id_text showing raw `《reading》` — SimulasiMode hand-rolls its own option
+    buttons (item 48) and was never brought in line with how every other mode's options get
+    `stripFuri()`'d; hint/id_text needed the opposite treatment (a new `MixedRuby` helper,
+    `renderJPWithRuby` + `parseRubyFragments`) since some quiz sets' hint field is a deliberate
+    mixed ID+JP kanji-breakdown string, not plain Indonesian — stripping would delete the
+    reading that's the point of that hint style. (3) Keluar exited immediately with no
+    confirmation during the playing phase (a misclick could discard a 45-minute/1075-question
+    attempt) — now confirms via the `useConfirm` hook already in scope for the submit-with-
+    unanswered path; pause overlay rebuilt with explicit Lanjutkan/Keluar buttons instead of a
+    single tap-anywhere-to-resume target, so pausing doubles as the safe-exit moment being asked
+    for.
+  - **The ruby gap in SimulasiMode turned out to be one symptom of a much wider one**: traced
+    the same raw-`《》` pattern through `QuizShell.jsx` (shared by JACMode/VocabMode/
+    WaygroundMode — this is what the reported JAC Official screenshot was), then found
+    `DescBlock` (`JpDisplay.jsx`) — a component that already correctly parses ruby *and* has
+    for a while — was adopted in exactly one place, `FlashcardMode/FlipCard.jsx`. Everywhere
+    else that shows a card's `desc` (ReviewMode, GlossaryMode, ProductionMode ×2,
+    QuizProduksiMode, SumberMode) rendered it raw; SearchMode's truncated preview and
+    GlossaryMode's Anki export got `stripFuri()` instead since DescBlock's line-based
+    truncation doesn't fit a char-based preview. `DangerMode` (`correct`/`traps`/`explanation`
+    /quiz options, 2 view variants each) and `ResultScreen.jsx` (shared by 7 more modes —
+    `userAnswer`/`correctAnswer`/`explanation`) had the identical gap independently.
+  - **Owner asked directly whether the sweep was actually thorough — honest answer at the time
+    was no**, the first pass was targeted at what the screenshots showed, not systematic. Built
+    an actual cross-reference for round 2: every data field carrying embedded readings in any
+    live data file, matched against every render site of that field name in `src/modes` +
+    `src/components`. Found what the field-name-matching first pass couldn't: `AngkaMode.jsx`'s
+    `item.soal` (29/29 entries in `angka-kunci.js` carry readings), `subtitle` in VocabMode +
+    WaygroundMode's set lists, SayaTab's daily challenge (traced to `daily-challenge.js`
+    building its own question shape independently of every other already-fixed path),
+    StatsMode's "Sering Salah" list (`.slice(0, 20)` on a raw string can cut a `《reading》`
+    marker itself in half — worse than just showing it unrendered), and
+    `ErrorBoundary.jsx`'s `FlatCardFallback` (the flashcard fallback for old WebViews without
+    3D CSS — plausibly relevant to this specific audience's device mix, not just a theoretical
+    path). Then went past static analysis, which only matches on field *names* and would miss
+    code that reassigns to a different local variable first: rendered all 21 modes in a real
+    browser (Playwright) with data seeded to trigger review/detail/wrong-answer paths, swept
+    each for literal `《`/`》` in rendered DOM text. All 21 clean. Re-ran the static
+    cross-reference too — zero genuine hits left, only confirmed false positives (CSS class
+    names matching field names as substrings, generic component props always fed hardcoded
+    strings).
+  - **One flaky full-suite test run observed** while verifying (`simulasi-exit-and-options.test
+    .jsx`'s full-sample check) — passed on isolation and on 4 of 5 full-suite runs; looks like
+    test-environment resource contention under full-suite load rather than a logic issue, but
+    noted rather than hidden. Worth a look if it recurs.
+  - 617/617 tests (614 + 3 new this round), lint + build clean throughout, both rounds.
 
 - **2026-08-27 session (two rounds of fixes + a merge, all one conversation): 6 live-site bugs
   reported total, root-caused against actual code each time (not assumed from this file — see
@@ -176,13 +231,13 @@ update itself.
   real device. Items 53 (rem conversion) and 55 (FilterPopup) remain excluded, per their own
   plan entries, never in any batch's suggested ordering.
 
-  **Next up:** `fix/post-overhaul-bugs` is merged and deployed (round 3 above) — nothing left
-  pending from the 2026-08-27 session except content review: someone who can verify actual
-  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent,
-  scoped like items 58/59 below). The now-merged branch itself can be deleted on GitHub whenever
-  convenient; nothing here depends on it still existing. Otherwise unchanged from before: 53/55
-  excluded, 58/59 each need their own dedicated session (schema migration; sourcing real TTS
-  audio).
+  **Next up:** everything from 2026-08-28 above is committed directly to `main` (owner's call
+  for that session) and still needs pushing — check `git log origin/main..main` before assuming
+  it's live; this file being updated doesn't mean the push happened yet. Once pushed, confirm
+  the deploy the same way 2026-08-27 round 3 did (Actions API, not assumed). Otherwise: someone
+  who can verify actual Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md`
+  (210 entries, not urgent, scoped like items 58/59 below); 53/55 excluded; 58/59 each need
+  their own dedicated session (schema migration; sourcing real TTS audio).
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
