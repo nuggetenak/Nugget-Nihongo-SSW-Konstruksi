@@ -92,6 +92,49 @@ update itself.
     noted rather than hidden. Worth a look if it recurs.
   - 617/617 tests (614 + 3 new this round), lint + build clean throughout, both rounds.
 
+- **2026-08-28, continued (same conversation, later): SimulasiMode's question source split.**
+  Owner asked two quick factual questions first ("mockup test tuh di menu yang mana?", "yang
+  simulasi tuh ngambil route soal darimana?") — answered directly from the code (Soal Teknis'
+  new JAC Mockup groups from the session above; `buildPool()` combining `JAC_OFFICIAL` +
+  `QUIZ_SETS` into one undifferentiated 1075-question pool, plus a noted-but-harmless dead
+  `'csv'` tag check that's never matched anything since the same rename that broke
+  WaygroundMode's own grouping earlier this session). Owner's reaction: "itu jadi kacau sih" —
+  and asked for a real restructure across two follow-up messages, the second one revising the
+  first's own "opsi semua" plan mid-thought ("mungkin opsi 'semua' kurang relevan, mending kamu
+  atur ulang aja").
+  - **Extracted `src/utils/quiz-classification.js`** before duplicating WaygroundMode's
+    teori/praktik/vocab id-matching logic into SimulasiMode too — the exact failure mode
+    (matching logic living in one place, second consumer drifts from it) already happened once
+    this session (the ct/cp→jmt/jml rename). WaygroundMode's `GROUPS` and VocabMode's vocab
+    filter both refactored to import from here instead of their own inline prefix checks —
+    mechanical, confirmed via their existing test coverage staying green, not assumed safe.
+  - **SimulasiMode now asks for a source before a preset**: "Teori & Praktik" (default —
+    everything except `JAC_OFFICIAL`, i.e. Wayground + JAC Mockup, sampled at a fixed 60/40
+    teori/praktik ratio the owner specified directly — 30+20=50 for the full exam, scaling
+    clean to 9+6=15 and 15+10=25 for the smaller presets) vs "JAC Official" (`JAC_OFFICIAL`'s
+    own 95 questions, no forced ratio — owner explicitly fine with that: "presentasenya tidak
+    sama 30+20 itu which is fine"). Freshly resampled every time Mulai is pressed (owner:
+    "generate random based on the pool tiap kali mulai") — the existing seed-driven `useMemo`
+    already re-ran on every start, this only changed what it samples.
+  - **Resolves the mockup-menu question from the same conversation without extra surgery**:
+    `jmt*`/`jml*` (JAC Mockup) are already teori/praktik-classified by the shared predicate, so
+    they fall into the "Teori & Praktik" pool automatically — no separate menu needed, argued
+    in the response rather than asked as an open question, since the reasoning follows directly
+    from the restructure already underway.
+  - The old "semua soal" full-pool preset (undifferentiated 1075) is gone — "Ujian Penuh" is
+    now a fixed, composed 50 (30+20), per the owner's own follow-up correction.
+  - `buildJacPool`/`buildQuizSetsPool` and both preset arrays exported by name specifically so
+    the ratio math and classification could be tested directly (8 new tests: the 60/40 math
+    generically across every preset not just spot-checked; every pooled question tagged teori
+    or praktik and nothing else; vocab never appearing; pool composition cross-checked
+    question-by-question against the same set-level predicate WaygroundMode uses, which would
+    catch the two disagreeing, not just each looking right in isolation; JAC pool confirmed
+    untagged; the UI selector itself). Verified visually (Playwright, both source modes) too,
+    not just via tests. Zero changes needed to the *existing* SimulasiMode tests from earlier
+    the same day — "Teori & Praktik" + "quick" are both the defaults those tests already
+    assumed.
+  - 2 commits (`3f7742d`, `ea5cf73`), 625/625 tests (617 + 8 new), lint + build clean.
+
 - **2026-08-27 session (two rounds of fixes + a merge, all one conversation): 6 live-site bugs
   reported total, root-caused against actual code each time (not assumed from this file — see
   the correction entry right below for why that mattered), fixed on branch
@@ -231,13 +274,14 @@ update itself.
   real device. Items 53 (rem conversion) and 55 (FilterPopup) remain excluded, per their own
   plan entries, never in any batch's suggested ordering.
 
-  **Next up:** everything from 2026-08-28 above is committed directly to `main` (owner's call
-  for that session) and still needs pushing — check `git log origin/main..main` before assuming
-  it's live; this file being updated doesn't mean the push happened yet. Once pushed, confirm
-  the deploy the same way 2026-08-27 round 3 did (Actions API, not assumed). Otherwise: someone
-  who can verify actual Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md`
-  (210 entries, not urgent, scoped like items 58/59 below); 53/55 excluded; 58/59 each need
-  their own dedicated session (schema migration; sourcing real TTS audio).
+  **Next up:** everything from 2026-08-28 above (both the ruby-audit round and the Simulasi
+  source split) is committed directly to `main` (owner's call for this whole date) and about to
+  be pushed in the same batch — check `git log origin/main..main` before assuming any of it's
+  live if reading this before that push lands. Once pushed, confirm the deploy the same way
+  2026-08-27 round 3 did (Actions API, not assumed). Otherwise: someone who can verify actual
+  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent,
+  scoped like items 58/59 below); 53/55 excluded; 58/59 each need their own dedicated session
+  (schema migration; sourcing real TTS audio).
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
