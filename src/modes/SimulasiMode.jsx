@@ -13,6 +13,7 @@ import { useConfirm } from '../components/ConfirmDialog.jsx';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
+import { isTeoriId, isPraktikId } from '../utils/quiz-classification.js';
 import { haptic } from '../utils/haptic.js';
 import { buildSimulasiResults } from '../utils/simulasi-scoring.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -31,7 +32,60 @@ const RED_BTN = {
   fontWeight: 700,
   fontSize: 13,
 };
-const PRESETS = [
+// Two independent sources, chosen explicitly rather than always pooled
+// together (owner's request, 2026-08-28): JAC Official's own 95 questions
+// keep their own natural composition (no forced ratio -- there's no
+// teori/praktik split to enforce on a small, fixed, official set), while
+// the Teori & Praktik pool (everything else: Wayground + JAC Mockup,
+// classified via quiz-classification.js so this doesn't duplicate/drift
+// from WaygroundMode's own copy of the same rule) samples a fixed ratio.
+// 60/40 teori/praktik, chosen by the owner directly (30+20=50 for the
+// full exam) -- scales cleanly to the smaller presets with no rounding:
+// 15 -> 9+6, 25 -> 15+10, 50 -> 30+20.
+const MODES = [
+  {
+    key: 'pool',
+    emoji: '📚',
+    label: 'Teori & Praktik',
+    sub: 'Campuran semua sumber (Wayground + JAC Mockup)',
+  },
+  {
+    key: 'jac',
+    emoji: '🏛️',
+    label: 'JAC Official',
+    sub: `Soal resmi dari buku ujian JAC (${JAC_OFFICIAL.length} soal)`,
+  },
+];
+const POOL_PRESETS = [
+  {
+    key: 'quick',
+    emoji: '⚡',
+    label: 'Latihan Cepat',
+    sub: '15 soal (9 teori + 6 praktik) · 15 menit',
+    teori: 9,
+    praktik: 6,
+    time: 15 * 60,
+  },
+  {
+    key: 'half',
+    emoji: '📝',
+    label: 'Setengah Ujian',
+    sub: '25 soal (15 teori + 10 praktik) · 25 menit',
+    teori: 15,
+    praktik: 10,
+    time: 25 * 60,
+  },
+  {
+    key: 'full',
+    emoji: '🎯',
+    label: 'Ujian Penuh',
+    sub: '50 soal (30 teori + 20 praktik) · 45 menit',
+    teori: 30,
+    praktik: 20,
+    time: 45 * 60,
+  },
+];
+const JAC_PRESETS = [
   {
     key: 'quick',
     emoji: '⚡',
@@ -52,11 +106,16 @@ const PRESETS = [
     key: 'full',
     emoji: '🎯',
     label: 'Ujian Penuh',
-    sub: 'semua soal · 45 menit',
+    sub: `Semua ${JAC_OFFICIAL.length} soal JAC · 45 menit`,
     count: 0,
     time: 45 * 60,
   },
 ];
+// Exported for direct testing of the ratio math (POOL_PRESETS) and the
+// JAC-vs-pool split, rather than only probing it indirectly through
+// rendered DOM text.
+export const SIMULASI_POOL_PRESETS = POOL_PRESETS;
+export const SIMULASI_JAC_PRESETS = JAC_PRESETS;
 const INSTRUCTIONS = [
   '📋 Pilih satu jawaban yang paling tepat',
   '⏱ Timer berjalan — jangan sampai habis',
@@ -84,8 +143,8 @@ function MixedRuby({ text }) {
 }
 
 // Normalize JAC and Wayground+CSV questions to a common shape
-function buildPool() {
-  const jacNorm = JAC_OFFICIAL.map((q) => ({
+export function buildJacPool() {
+  return JAC_OFFICIAL.map((q) => ({
     jp: q.q,
     id_text: q.hint,
     options: q.opts,
@@ -96,9 +155,16 @@ function buildPool() {
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',
   }));
+}
 
-  const wayNorm = QUIZ_SETS.flatMap((set) =>
-    (set.questions || []).map((q) => ({
+// _category ('teori'/'praktik'/null) drives the ratio sampling below --
+// null means the set is neither (vocab, wglv-*), so it's naturally excluded
+// from both buckets rather than needing its own separate filter.
+export function buildQuizSetsPool() {
+  return QUIZ_SETS.flatMap((set) => {
+    const category = isTeoriId(set.id) ? 'teori' : isPraktikId(set.id) ? 'praktik' : null;
+    if (!category) return [];
+    return (set.questions || []).map((q) => ({
       jp: q.q,
       id_text: q.hint || null,
       options: q.opts,
@@ -108,10 +174,9 @@ function buildPool() {
       photoDesc: null,
       _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
       _setLabel: set.title || 'Wayground',
-    }))
-  );
-
-  return [...jacNorm, ...wayNorm];
+      _category: category,
+    }));
+  });
 }
 
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
@@ -119,6 +184,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [phase, setPhase] = useState('start');
+  const [mode, setMode] = useState('pool');
   const [preset, setPreset] = useState('quick');
   const [seed, setSeed] = useState(0);
   const [qIdx, setQIdx] = useState(0);
@@ -129,12 +195,31 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const timerRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
 
-  const config = PRESETS.find((p) => p.key === preset) || PRESETS[0];
+  const activePresets = mode === 'jac' ? JAC_PRESETS : POOL_PRESETS;
+  const config = activePresets.find((p) => p.key === preset) || activePresets[0];
 
   const questions = useMemo(() => {
     if (phase !== 'playing') return [];
-    const pool = shuffle(buildPool());
-    const items = config.count > 0 ? pool.slice(0, config.count) : pool;
+    // Freshly sampled every time (seed dependency below) -- not a fixed
+    // pool, per the owner's explicit request: same preset, different
+    // questions on a retry.
+    let items;
+    if (mode === 'jac') {
+      const pool = shuffle(buildJacPool());
+      items = config.count > 0 ? pool.slice(0, config.count) : pool;
+    } else {
+      const pool = buildQuizSetsPool();
+      const teoriPool = shuffle(pool.filter((q) => q._category === 'teori'));
+      const praktikPool = shuffle(pool.filter((q) => q._category === 'praktik'));
+      // Math.min guards a pool ever coming up short of the preset's ask --
+      // not expected (teori alone is ~360+ questions across 18 sets, far
+      // more than the largest preset's 30), but slicing past an array's
+      // length just returns what's there rather than throwing, so this is
+      // a defensive floor, not a fix for a currently-observed shortage.
+      const teoriPick = teoriPool.slice(0, Math.min(config.teori, teoriPool.length));
+      const praktikPick = praktikPool.slice(0, Math.min(config.praktik, praktikPool.length));
+      items = shuffle([...teoriPick, ...praktikPick]);
+    }
     return items.map((q) => {
       // Options never render through ruby-aware JpFront here (OptionButton-
       // style plain text, same convention QuizShell/VocabMode already use for
@@ -156,7 +241,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         _setLabel: q._setLabel,
       };
     });
-  }, [phase, seed, config.count]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, seed, mode, config.count, config.teori, config.praktik]);
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
@@ -280,9 +366,38 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             </div>
           ))}
         </div>
-        <div className={S.sectionLabel}>Mode Simulasi</div>
+        <div className={S.sectionLabel}>Sumber Soal</div>
+        <div className={`${S.list} ${SM.presetList}`} style={{ marginBottom: 20 }}>
+          {MODES.map((m) => (
+            <button
+              key={m.key}
+              className={S.btnItem}
+              onClick={() => setMode(m.key)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                background: mode === m.key ? 'rgba(239,68,68,0.10)' : T.surface,
+                border: `1px solid ${mode === m.key ? 'rgba(239,68,68,0.4)' : T.border}`,
+                color: mode === m.key ? '#ef4444' : T.text,
+              }}
+            >
+              <span className={SM.presetEmoji}>{m.emoji}</span>
+              <div>
+                <div className={SM.presetLabel}>{m.label}</div>
+                <div
+                  className={SM.presetSub}
+                  style={{ color: mode === m.key ? 'rgba(239,68,68,0.7)' : T.textDim }}
+                >
+                  {m.sub}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+        <div className={S.sectionLabel}>Jumlah Soal</div>
         <div className={`${S.list} ${SM.presetList}`}>
-          {PRESETS.map((p) => (
+          {activePresets.map((p) => (
             <button
               key={p.key}
               className={S.btnItem}
