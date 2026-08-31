@@ -56,8 +56,8 @@
 /* ── Page titles ── */
 .pageTitle {
   font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
+  font-size: var(--fs-page-title);
+  font-weight: var(--fw-heavy);
   margin-bottom: 4px;
   margin-top: 0;
   letter-spacing: -0.5px;

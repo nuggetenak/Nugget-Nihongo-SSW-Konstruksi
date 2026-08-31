@@ -37,11 +37,20 @@ describe('wide-breakpoint typography (item 22)', () => {
     expect(baseValue('fs-nano')).toBe(9);
   });
 
+  // fs-page-title: added in the same UI-audit pass that unified BelajarTab's
+  // and Dashboard's page titles onto the value SayaTab and every individual
+  // mode screen (modes.module.css) had already independently converged on
+  // -- not a new design decision, a name for an existing one.
+  it('fs-page-title exists and sits between fs-title and fs-jp-back', () => {
+    expect(baseValue('fs-page-title')).toBe(22);
+  });
+
   it('the 1040px block redefines the reading-scale tokens larger', () => {
     const block = wideBlock();
     expect(block).toMatch(/--fs-hero:\s*36px/);
     expect(block).toMatch(/--fs-jp-primary:\s*30px/);
     expect(block).toMatch(/--fs-jp-back:\s*22px/);
+    expect(block).toMatch(/--fs-page-title:\s*26px/);
     expect(block).toMatch(/--fs-title:\s*18px/);
     expect(block).toMatch(/--fs-subtitle:\s*16px/);
     expect(block).toMatch(/--fs-body:\s*14px/);

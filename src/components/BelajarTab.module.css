@@ -11,10 +11,10 @@
 .pageTitle {
   padding: 20px 0 6px;
   font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: var(--fs-page-title);
+  font-weight: var(--fw-heavy);
   color: var(--ssw-textBright);
-  letter-spacing: -0.6px;
+  letter-spacing: -0.5px;
   line-height: 1;
 }
 

@@ -18,6 +18,7 @@
   --fs-hero: 32px;
   --fs-jp-primary: 28px;
   --fs-jp-back: 20px;
+  --fs-page-title: 22px;
   --fs-title: 17px;
   --fs-subtitle: 15px;
   --fs-body: 13px;
@@ -402,6 +403,7 @@ body {
     --fs-hero: 36px;
     --fs-jp-primary: 30px;
     --fs-jp-back: 22px;
+    --fs-page-title: 26px;
     --fs-title: 18px;
     --fs-subtitle: 16px;
     --fs-body: 14px;
