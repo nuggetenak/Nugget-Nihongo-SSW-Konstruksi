@@ -80,7 +80,6 @@ const KNOWN_UNRENDERABLE_SUBSTRINGS = [
   '丸のこ《まるのこきっくばっく》', // reading appends an unrelated hazard term
   '突き固める《つきかため》', // reading is missing its trailing る
   '左官仕上げ《さかんしあげとぎだしあらいだし》', // reading concatenates 3 technique names
-  '何度か《一般空調《いっぱんくうちょう》用》', // 《》 used as a parenthetical aside, not a reading
 ];
 
 describe('renderJPWithRuby — full-corpus sweep against the real fix', () => {
