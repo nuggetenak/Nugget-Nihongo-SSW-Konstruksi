@@ -179,6 +179,32 @@ update itself.
   cards + the bottom nav in a single 390×1000 screen with zero scrolling, down from a
   multi-screen scroll before. 5 new tests. 1 commit (`6043ad6`), 632/632 tests, lint clean.
 
+- **2026-08-28, one more round: SayaTab overflow + the overdue version bump.** Owner
+  screenshotted the Saya tab needing a manual pinch-zoom-out to use and asked "can you spot
+  the discrepancy?" Chased a real but ultimately unrelated lead first — 94 question texts in
+  `wayground-sets.js` have proper `《》` ruby markers duplicated by adjacent plain-paren
+  readings (e.g. `電動《でんどう》工具《こうぐ》（でんどうこうぐ）...`) — before confirming via
+  direct rendered-HTML inspection (not just source reading) that `JpFront` already handles
+  this cleanly; not the cause, logged as a real-but-harmless content-cleanliness item instead
+  of force-fixing something that wasn't actually broken.
+  - **Real root cause**, found by systematically hiding one top-level section at a time and
+    remeasuring `document.documentElement.scrollWidth`: not section-specific at all — every
+    `.sectionBody` instance (six unrelated sections) measured a consistent 52px over. CSS was
+    `minmax(400px, 1fr)` — wider than this app's entire mobile content column, and since minmax's
+    min is a hard floor (unlike `BelajarTab`'s earlier-that-day `1fr`-max bug, which just failed
+    to *add* a column), this forces every section 52px past the viewport regardless of available
+    space. Fixed to `minmax(300px, 1fr)`, verified clean 360–900px.
+  - **Version**: owner noticed `v4.23.0` hadn't moved despite the entire `feat/ui-overhaul` plan
+    and this whole multi-day bug-fixing stretch landing since. Checked git history rather than
+    guessing at the convention — version bumps used to happen almost every session, and simply
+    stopped after the content-dq merge (2026-08-18) set 4.23.0. Bumped to `5.0.0` (major, per
+    owner's explicit call — combined scope of both work streams is bigger than this project's own
+    historical minor-bump threshold), full `CHANGELOG.md` entry summarizing both streams,
+    `package-lock.json` regenerated via `npm install` per `PWA_RELEASE_SPEC.md`'s own documented
+    drift warning, confirmed live via Playwright ("SSW Konstruksi v5.0.0" actually rendered, not
+    assumed from the source diff).
+  - 2 commits (`8c04169`, `14145bf`), 633/633 tests, lint + build clean.
+
 - **2026-08-27 session (two rounds of fixes + a merge, all one conversation): 6 live-site bugs
   reported total, root-caused against actual code each time (not assumed from this file — see
   the correction entry right below for why that mattered), fixed on branch
@@ -319,14 +345,19 @@ update itself.
   plan entries, never in any batch's suggested ordering.
 
   **Next up:** everything from 2026-08-28 above (ruby-audit round, Simulasi source split, JAC
-  Official's set-pairing fix, and the Belajar accordion) is committed directly to `main`
-  (owner's call for this whole date) and about to be pushed in the same batch — check
-  `git log origin/main..main` before assuming any of it's live if reading this before that push
-  lands. Once pushed, confirm the deploy the same way 2026-08-27 round 3 did (Actions API, not
-  assumed). Otherwise: someone who can verify actual Japanese readings should work through
-  `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent, scoped like items 58/59
-  below); 53/55 excluded; 58/59 each need their own dedicated session (schema migration;
-  sourcing real TTS audio).
+  Official's set-pairing fix, the Belajar accordion, the SayaTab overflow fix, and the v5.0.0
+  bump) is committed directly to `main` (owner's call for this whole date) and about to be
+  pushed in the same batch — check `git log origin/main..main` before assuming any of it's live
+  if reading this before that push lands. Once pushed, confirm the deploy the same way
+  2026-08-27 round 3 did (Actions API, not assumed). Otherwise: someone who can verify actual
+  Japanese readings should work through `docs/RUBY_MISMATCH_AUDIT.md` (210 entries, not urgent,
+  scoped like items 58/59 below), and the 94 duplicate-annotation question texts noted in this
+  date's SayaTab entry above (confirmed harmless currently, but real cleanup work); 53/55
+  excluded; 58/59 each need their own dedicated session (schema migration; sourcing real TTS
+  audio). **Version discipline**: this file's own git-log check found bumps used to happen
+  almost every session before quietly stopping for over a month — worth actually resuming
+  (`npm version patch/minor` + a CHANGELOG.md entry) rather than letting it happen only when
+  asked again.
 ---
 
 _(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
