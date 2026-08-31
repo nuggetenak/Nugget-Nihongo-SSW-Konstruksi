@@ -1,4 +1,73 @@
-## [5.0.0] - 2026-08-28
+## [5.1.0] - 2026-08-31
+
+### Exhaustive UI/UX/typography audit, owner-requested with full authorization
+
+New agent session, owner asked for a thorough, unscoped UI/UX/typography audit ("audit
+super duper exhaustively," blanket approval for anything found, full token budget
+authorized). Full detail in each fix's own commit message and in `docs/DESIGN_SPEC.md`/
+`docs/LAYOUT_SPEC.md`, both updated in place — summarized here, not repeated in full.
+
+**Ruby rendering — the underlying algorithm, not just adoption coverage this time.**
+Prior rounds (2026-08-27/28) fixed *which fields* get run through the ruby renderer and
+verified via a Playwright DOM sweep for literal `《`/`》` characters. That sweep couldn't
+catch two classes of bug in the renderer itself, because neither leaves a literal bracket
+to find: (1) `parseRubyFragments`/`renderJPWithRuby`'s two-step parse-then-reindex design
+silently misplaced a reading onto the wrong occurrence of a repeated kanji base — found by
+mechanically simulating the old algorithm against every string in `src/data`, not
+spot-checking; (2) the regex required kanji touching `《` directly, so the real, common
+alternate data convention of marking a whole conjugated word including its okurigana
+(見切る《みきる》, not 見切《みき》る) was never matched at all — ~870 occurrences across
+`src/data`, silently dropped in some render paths, left as literal bracketed text in
+others. Rewritten as a single forward pass over the source text; a new corpus-wide test
+(`ruby-audit-round3.test.jsx`) renders every real `《`-bearing string in the shipped data
+through the actual function and asserts no unexplained raw bracket survives — surfaced 5
+more pre-existing content-data defects along the way (incomplete/concatenated readings,
+one case of `《》` used as a parenthetical aside), logged rather than papered over.
+
+**Dense-list font-size capping, swept to completion.** `maxSize` (JpFront's opt-in ceiling
+on jpFontSize's upward auto-scaling for short strings) was added 2026-08-28 for the one
+reported case. This pass traced all ~30 live call sites individually and found ~9 more
+dense-list/grid contexts with the identical bug (SearchMode, GlossaryMode, DangerMode's
+accordion, CatatanMode, SumberMode, Dashboard's recent-cards list, ConfusionMode ×3) — two
+of them had an additional latent bug where a wrapping `fontSize` style had never actually
+applied at all, since JpFront always overrides with its own inline size.
+
+**Typography consistency.** New `--fs-page-title` token (22px/26px wide) unifying
+BelajarTab's page title (confirmed via live computed-style measurement to be the actual
+outlier at 24px, not SayaTab/every mode screen's already-matching 22px — Dashboard's own
+h1 shared the same drift but is invisible below the 1040px breakpoint, so this was a
+growing-not-shrinking problem). 52 hardcoded font-sizes that exactly matched an existing
+token mechanically migrated onto it. ReviewMode's SRS rating-emoji was smaller than its
+own text label — a real bug (confirmed by comparing the whole button to FlashcardMode's
+structurally identical widget), not intentional compactness — fixed to match.
+
+**`--fs-*` converted to `rem`**, closing `docs/UI_UX_PLAN.md` item 53 (deferred
+2026-08-26). The original three-reason deferral turned out to describe a much smaller
+change than estimated once actually traced through: ruby's `em` sizing and
+`jpFontSize()`'s JS ladder both compute independently of these specific CSS custom
+properties, and the ~89-file number was a verification surface, not an edit surface, since
+every consumer only ever reads via `var()`. Verified live: pixel-identical output at
+default zoom, and a forced larger root font-size now actually scales these tokens, which
+it structurally could not do before.
+
+**First concrete step on "expand to all devices."** BelajarTab's single-column accordion
+menu was stretching to the full 1180px desktop content column with a growing dead gap
+beside every card, unlike Dashboard and SayaTab, which both genuinely reflow into
+multi-column layouts at the same breakpoint (confirmed live at 375/820/1440px viewports,
+not assumed from source). Given the same `width='reading'` policy every individual mode
+screen already defaults to for this shape of content.
+
+**Docs housekeeping.** HANDOFF.md had grown to 412 lines, well past its own ~190-line
+target — the accumulated 2026-08-27/28 narrative retired to
+`docs/archive/HANDOFF-2026-08-27-28-sessions.md` per the documented retirement procedure,
+`_MAP.md`'s session log condensed to a pointer row. `docs/UI_UX_PLAN.md` gains a new §11
+(items 66-68) for real findings this round didn't fully close out — remaining content-data
+defects, the rest of the mode registry's own "expand to all devices" audit, a longer tail
+of one-off font-sizes not individually checked.
+
+642/642 tests (633 + 9 new), lint clean, build clean throughout.
+
+
 
 ### Major version bump — overdue. Two full work streams since 4.23.0, neither ever recorded here
 
