@@ -120,7 +120,23 @@
    no JSX-side bookkeeping of which children are "special". */
 .sectionBody {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  /* Was minmax(400px, 1fr) -- with a flexible (1fr) max, auto-fit's column
+     COUNT is governed by the MIN (see docs/LAYOUT_SPEC.md's Variant A
+     section, corrected earlier the same day this bug was found), and 400px
+     is wider than this app's entire mobile content column (~348-380px
+     inside --max-w:480px minus padding). That doesn't just fail to reach 2
+     columns the way BelajarTab's analogous bug did -- minmax's min is a
+     hard floor, so the single column that DOES render still gets forced to
+     400px minimum, genuinely overflowing the viewport (confirmed via
+     Playwright: every .sectionBody measured scrollWidth 400 against a
+     348px clientWidth, a consistent 52px overflow, on every section that
+     uses this class -- daily challenge, achievements, SRS, settings, data,
+     info). 300px fits one column on any phone in the compact breakpoint
+     with room to spare, and still reaches 2 columns once the container
+     hits the medium breakpoint (--max-w: 620px -- 2*300+16px gap = 616px,
+     just inside it), so the wider-screen behavior this was clearly meant
+     for is preserved. */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   column-gap: var(--sp-4);
 }
 .sectionBody > :not(.row) {
