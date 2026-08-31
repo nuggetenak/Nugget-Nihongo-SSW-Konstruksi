@@ -42,6 +42,20 @@ const RED_BTN = {
 // 60/40 teori/praktik, chosen by the owner directly (30+20=50 for the
 // full exam) -- scales cleanly to the smaller presets with no rounding:
 // 15 -> 9+6, 25 -> 15+10, 50 -> 30+20.
+//
+// Time budget: 2 minutes per question, matching the real JAC exam's own
+// convention (owner, 2026-08-31 -- corrected from this file's previous
+// ~1 min/question, which had no cited basis). Applied uniformly across
+// every preset rather than only the reported "full" one, since the same
+// per-question rate is presumably the actual exam's rule at any length,
+// not a full-exam-specific number. JAC Official's own "full" preset draws
+// one random teori set + one random praktik set (pickJacSetPair) rather
+// than a fixed count, so its total varies (44-51, see JAC_PRESETS below);
+// SECONDS_PER_QUESTION is exported so the time budget can be recomputed
+// from the actual drawn count once it's known, instead of guessing at a
+// fixed number that's only sometimes right -- see the effect that does
+// this in the component body.
+const SECONDS_PER_QUESTION = 2 * 60;
 const MODES = [
   {
     key: 'pool',
@@ -61,28 +75,28 @@ const POOL_PRESETS = [
     key: 'quick',
     emoji: '⚡',
     label: 'Latihan Cepat',
-    sub: '15 soal (9 teori + 6 praktik) · 15 menit',
+    sub: '15 soal (9 teori + 6 praktik) · 30 menit',
     teori: 9,
     praktik: 6,
-    time: 15 * 60,
+    time: 15 * SECONDS_PER_QUESTION,
   },
   {
     key: 'half',
     emoji: '📝',
     label: 'Setengah Ujian',
-    sub: '25 soal (15 teori + 10 praktik) · 25 menit',
+    sub: '25 soal (15 teori + 10 praktik) · 50 menit',
     teori: 15,
     praktik: 10,
-    time: 25 * 60,
+    time: 25 * SECONDS_PER_QUESTION,
   },
   {
     key: 'full',
     emoji: '🎯',
     label: 'Ujian Penuh',
-    sub: '50 soal (30 teori + 20 praktik) · 45 menit',
+    sub: '50 soal (30 teori + 20 praktik) · 100 menit',
     teori: 30,
     praktik: 20,
-    time: 45 * 60,
+    time: 50 * SECONDS_PER_QUESTION,
   },
 ];
 const JAC_PRESETS = [
@@ -90,17 +104,17 @@ const JAC_PRESETS = [
     key: 'quick',
     emoji: '⚡',
     label: 'Latihan Cepat',
-    sub: '15 soal · 15 menit',
+    sub: '15 soal · 30 menit',
     count: 15,
-    time: 15 * 60,
+    time: 15 * SECONDS_PER_QUESTION,
   },
   {
     key: 'half',
     emoji: '📝',
     label: 'Setengah Ujian',
-    sub: '25 soal · 25 menit',
+    sub: '25 soal · 50 menit',
     count: 25,
-    time: 25 * 60,
+    time: 25 * SECONDS_PER_QUESTION,
   },
   {
     key: 'full',
@@ -110,17 +124,23 @@ const JAC_PRESETS = [
     // random teori set + 1 random praktik set (see pickJacSetPair) instead
     // of the full flattened 95. Total varies by which pair gets picked
     // (44 or 51 -- praktik sets are equal size, so teori is what swings
-    // it), so the label can't state an exact count anymore.
-    sub: '1 set teori + 1 set praktik (44–51 soal) · 45 menit',
+    // it). Time range (88-102 min) is the honest reflection of that same
+    // variability at 2 min/question, not a separate approximation --
+    // 50 * SECONDS_PER_QUESTION below is a *placeholder* only, immediately
+    // corrected once the actual draw's count is known (see the effect in
+    // the component body); it exists so `time` isn't briefly undefined
+    // between selecting this preset and the pool finishing its draw.
+    sub: '1 set teori + 1 set praktik (44–51 soal) · 88–102 menit',
     count: 0,
-    time: 45 * 60,
+    time: 50 * SECONDS_PER_QUESTION,
   },
 ];
-// Exported for direct testing of the ratio math (POOL_PRESETS) and the
-// JAC-vs-pool split, rather than only probing it indirectly through
-// rendered DOM text.
+// Exported for direct testing of the ratio math (POOL_PRESETS), the
+// JAC-vs-pool split, and the time budget (SECONDS_PER_QUESTION), rather
+// than only probing any of it indirectly through rendered DOM text.
 export const SIMULASI_POOL_PRESETS = POOL_PRESETS;
 export const SIMULASI_JAC_PRESETS = JAC_PRESETS;
+export const SIMULASI_SECONDS_PER_QUESTION = SECONDS_PER_QUESTION;
 const INSTRUCTIONS = [
   '📋 Pilih satu jawaban yang paling tepat',
   '⏱ Timer berjalan — jangan sampai habis',
@@ -306,6 +326,19 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     document.addEventListener('visibilitychange', handleVisibility);
     return () => document.removeEventListener('visibilitychange', handleVisibility);
   }, [phase]);
+
+  // JAC Official's "full" preset draws a random set pair (pickJacPool ->
+  // pickJacSetPair) whose total (44 or 51) isn't known until `questions`
+  // itself is computed -- config.time above is only a placeholder for that
+  // one specific preset (see JAC_PRESETS's own comment). Correct timeLeft
+  // here once the real count is in. A no-op for every other preset/mode:
+  // there, questions.length always already equals what config.time was
+  // computed from, so this recomputes the identical value it's replacing.
+  useEffect(() => {
+    if (phase === 'playing' && questions.length > 0) {
+      setTimeLeft(questions.length * SECONDS_PER_QUESTION);
+    }
+  }, [phase, questions]);
 
   useEffect(() => {
     if (phase !== 'playing' || paused) {

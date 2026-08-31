@@ -22,6 +22,7 @@ import SimulasiMode, {
   buildQuizSetsPool,
   SIMULASI_POOL_PRESETS,
   SIMULASI_JAC_PRESETS,
+  SIMULASI_SECONDS_PER_QUESTION,
 } from '../modes/SimulasiMode.jsx';
 import { isTeoriId, isPraktikId, isVocabId } from '../utils/quiz-classification.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -55,6 +56,57 @@ describe('SIMULASI_POOL_PRESETS — the ratio math itself', () => {
     const full = SIMULASI_POOL_PRESETS.find((p) => p.key === 'full');
     expect(full.teori).toBe(30);
     expect(full.praktik).toBe(20);
+  });
+});
+
+// 2026-08-31: owner reported the time budget as 1 min/question (slightly
+// less for the pool "full" preset, 50 questions / 45 min) when the real
+// JAC exam allots 2 min/question -- corrected uniformly across every
+// preset, not only the one they happened to mention, since there's no
+// reason to think the per-question rate is full-exam-specific.
+describe('exam time budget — 2 minutes per question (owner, 2026-08-31)', () => {
+  it('every pool preset spends exactly SECONDS_PER_QUESTION per question', () => {
+    for (const p of SIMULASI_POOL_PRESETS) {
+      const total = p.teori + p.praktik;
+      expect(p.time).toBe(total * SIMULASI_SECONDS_PER_QUESTION);
+      expect(p.sub).toContain(`${p.time / 60} menit`);
+    }
+  });
+
+  it('every fixed-count JAC preset spends exactly SECONDS_PER_QUESTION per question', () => {
+    for (const p of SIMULASI_JAC_PRESETS.filter((p) => p.count > 0)) {
+      expect(p.time).toBe(p.count * SIMULASI_SECONDS_PER_QUESTION);
+      expect(p.sub).toContain(`${p.time / 60} menit`);
+    }
+  });
+
+  it('JAC Official "full" (variable count) states the honest 88-102 minute range, not a single guess', () => {
+    const full = SIMULASI_JAC_PRESETS.find((p) => p.key === 'full');
+    const minMinutes = (44 * SIMULASI_SECONDS_PER_QUESTION) / 60;
+    const maxMinutes = (51 * SIMULASI_SECONDS_PER_QUESTION) / 60;
+    expect(full.sub).toContain(`${minMinutes}–${maxMinutes} menit`);
+  });
+});
+
+describe('SimulasiMode UI — JAC Official "full" preset corrects its placeholder time to the actual draw', () => {
+  it('timer starts within the true 88-102 minute range once questions are drawn, not at the 100-minute placeholder unless that happens to be the actual draw', async () => {
+    renderSimulasi();
+    fireEvent.click(screen.getByText('JAC Official'));
+    fireEvent.click(screen.getByText(/1 set teori \+ 1 set praktik/));
+    const startBtn = await screen.findByText(/Mulai/i);
+    fireEvent.click(startBtn);
+
+    // Timer text renders as MM:SS; parse it back to seconds and confirm
+    // it's an exact multiple of SECONDS_PER_QUESTION in the valid range,
+    // not the static 6000s (100 min) placeholder specifically (that would
+    // only coincidentally be correct if the draw landed on exactly 50).
+    const timerEl = await screen.findByText(/^\d{1,3}:\d{2}$/);
+    const [mm, ss] = timerEl.textContent.split(':').map(Number);
+    const totalSeconds = mm * 60 + ss;
+    expect(totalSeconds % SIMULASI_SECONDS_PER_QUESTION).toBe(0);
+    const impliedCount = totalSeconds / SIMULASI_SECONDS_PER_QUESTION;
+    expect(impliedCount).toBeGreaterThanOrEqual(44);
+    expect(impliedCount).toBeLessThanOrEqual(51);
   });
 });
 
