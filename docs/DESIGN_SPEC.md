@@ -174,6 +174,23 @@ or dropped. Full detail and the exact fix shape: see the function's own doc comm
 `src/tests/ruby-audit-round3.test.jsx`, a corpus-wide sweep that renders every real `《`-bearing
 string in the shipped data through the actual function.
 
+**Round 4, same day.** The round-3 sweep verifies the renderer never produces garbage for any real
+string; it can't verify the renderer produces the *right* output, since it doesn't independently
+know what "right" is for a given string — a different property, and the reason a passing sweep
+still shipped with two more real bugs. Both found by testing live rather than by re-running the
+existing automated checks: (1) a content-data bug — a handful of card `jp` fields had multiple
+terms' readings accidentally concatenated into one marker (root-caused, 26 cards fixed at the data
+source, not papered over in the renderer); (2) kanji+katakana loanword compounds
+(移動式クレーン, 冷却コイル — ordinary vocabulary in this domain) were never matched at all, since
+the trailing-kana group only recognized hiragana. Both `renderJPWithRuby` and `parseRubyFragments`
+now branch by script: hiragana keeps exact-match validation against the reading's tail (reliable,
+since real okurigana readings are phonetic echoes of hiragana already in the text); katakana is
+always kept combined with the kanji as one ruby span using the full reading, since exact-match
+validation is unreliable across scripts (readings are written in hiragana; a katakana chōonpu like
+クレーン's ー doesn't literally appear in its own hiragana transliteration くれえん — same sound,
+different characters, so string comparison isn't the right tool here regardless of how careful the
+implementation is).
+
 **The `rem` question — resolved 2026-08-31, was deferred.** Every `--fs-*` token is now `rem`, not
 `px` — responds to a user's browser/OS font-size preference. The original deferral (item 53, this
 item) gave three reasons: touching ~89 consuming stylesheets; this app caring less about the

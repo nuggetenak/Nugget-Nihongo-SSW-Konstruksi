@@ -57,7 +57,40 @@ update itself.
     content-data defects along the way (incomplete/concatenated readings, one 《》-as-parenthetical
     case) — logged in that test's own allowlist, not fixed here (content work, not rendering).
     Commit `3bbc62e`.
-  - **`maxSize` swept to every remaining dense-list `JpFront` call site** — the 2026-08-28 fix
+  - **Ruby round 4, same day, owner tested live and found more** — round 3's corpus sweep
+    checked whether the renderer produces *garbage output* for every string; it didn't check
+    whether the renderer produces the *right* output, which is a different, harder property a
+    sweep can't verify by itself (it doesn't know what "right" is). Owner's screenshot
+    (ダクトの3種類 showing a completely unrelated reading) forced that distinction and both
+    turned out to be real, separate bugs:
+    - **Content-data bug, not a rendering bug**: the reported card's own `jp` field literally
+      had five readings concatenated into one marker (its own two words' readings, plus three
+      more copied in from its `desc` field's separate terms). Searched systematically rather
+      than patching the one report — 127 cards had a suspiciously long reading; hand-verified
+      every one against its own desc/usage (two automated heuristics were tried first and both
+      produced confident-looking wrong answers — see the commit for why); 26 were genuine bugs,
+      fixed; ~101 were long-but-correct and left alone. **Important scoping note for next time**:
+      restrict this kind of scan to `src/data/source/cards-{common,lifeline}.js` specifically —
+      `src/data/cards.js` is generated (fine to read, but edits there don't stick) and
+      `src/data/cards/lifeline/` is a stale, unimported pre-restructure reference copy that will
+      produce false leads if it's included in a broad `find src/data` sweep. Commit `5d84e9b`.
+    - **Separate, larger rendering bug**: kanji+katakana loanword compounds (移動式クレーン,
+      冷却コイル, 防水カバー — ordinary vocabulary here, not edge cases) were never matched at
+      all — the regex only recognized hiragana as valid trailing okurigana. 871 occurrences, 384
+      unique pairs, silently dropped whenever they shared a string with another, successfully-
+      matched marker. Fixed by keeping kanji+katakana always combined as one ruby span with the
+      untrimmed reading, rather than attempting to split (readings are written in hiragana, so
+      splitting via exact character match against katakana is unreliable — chōonpu doesn't
+      round-trip). Commit `6bc2ebb`.
+    - Same commit also fixes JpFront forcing Japanese typography (CJK font, centering,
+      kanji-density length-scaling) onto non-Japanese content that a few modes' shared
+      ResultScreen slots sometimes carry (Indonesian definitions/translations) — new
+      `isMeaningfullyJapanese()` ratio check in `jp-helpers.js`, found while re-auditing the same
+      render paths, not part of the original report.
+    - **Not yet done**: the Simulasi exam-timing question owner asked about in the same message
+      (100 min / 50 questions model vs. JAC Official's actual 44-51 draw) — separate task, not
+      started as of this row.
+
     only covered the one reported case (SimulasiMode's review list); this pass traced all ~30 live
     call sites and fixed the other ~9 (SearchMode, GlossaryMode, DangerMode's accordion,
     CatatanMode, SumberMode, Dashboard's recent-cards list, ConfusionMode ×3). Promoted the
