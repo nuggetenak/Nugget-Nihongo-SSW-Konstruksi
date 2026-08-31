@@ -399,10 +399,11 @@ control replaces rather than pops, so a subsequent hardware-back can need two pr
 way to distinguish "our own `history.back()`" from "user pressed back" — the reason it wasn't
 solved then. Low user impact; listed so it isn't rediscovered as new.
 
-### ☐ 53. `rem` conversion for the type scale — `L`
-*(archived item 22's deferral)* Every `--fs-*` is `px`, so none respond to a user's OS/browser
-font-size preference. Touches ~89 stylesheets and interacts with `em`-based ruby and
-`jpFontSize()`'s own ladder. Genuine accessibility win for older users; genuinely large.
+### ☑ 53. `rem` conversion for the type scale — `L`
+*(archived item 22's deferral)* **Done 2026-08-31** — see `docs/DESIGN_SPEC.md` §3 for the full
+account of why the original three-reason deferral turned out to be a much smaller change than
+estimated once traced through, not a wrong call reversed. Every `--fs-*` token is `rem`; no
+consuming stylesheet needed touching.
 
 ### ☑ 54. `speakJP()`'s `onError` is wired in one of six call sites — `S`
 *(archived item 25's stated scope)* Only `DengarMode` reports a synthesis failure. The other five
@@ -648,3 +649,46 @@ combined payload measured before it can be scoped honestly.
 
 **Nothing is unapproved any more.** Every item in this plan is cleared to build; what varies is
 whether the *shape* is settled (most) or still needs a decision (56, 58, 59).
+
+---
+
+## 11. New round — 2026-08-31 UI/UX audit
+
+Owner asked for an exhaustive UI/UX/typography audit (ruby rendering, font sizing, general
+consistency), explicitly approving anything found along the way, plus a first pass at the newer
+"expand to all devices" direction. Full detail lives in commit messages, not here (owner's own
+stated preference) — this section is only the forward-looking remainder: real findings that
+didn't get a full fix in that session, so they aren't lost the way this plan's own §0 warns
+about. Numbering continues from 65; this is a new round, not a retroactive edit to 43–65.
+
+### ☐ 66. Content-data defects surfaced by the ruby-renderer rewrite — `M`
+`src/tests/ruby-audit-round3.test.jsx`'s corpus sweep (2026-08-31) found real data problems while
+verifying the renderer fix, distinct from `docs/RUBY_MISMATCH_AUDIT.md`'s existing 210
+reading-accuracy entries: readings missing their own trailing kana (打設する《だせつ》), a reading
+that concatenates more than one term's kana together (丸のこ《まるのこきっくばっく》), and at least
+one 《》 pair used as a parenthetical aside rather than a reading at all
+(何度か《一般空調《いっぱんくうちょう》用》 — note the stray nested 《 inside it too). Also: 25
+occurrences across `jac-mockup-sets.js` where the exact same marker is duplicated back-to-back
+(冷媒《れいばい》《れいばい》) — cosmetically harmless now (the renderer drops the orphaned copy
+rather than showing broken brackets) but still a real duplication worth cleaning at the source.
+The test file's own `KNOWN_UNRENDERABLE_SUBSTRINGS` allowlist is the exact, current list — start
+there rather than re-deriving it.
+
+### ☐ 67. Continue the "expand to all devices" audit past Belajar — `L`
+`docs/LAYOUT_SPEC.md` §5 (new) has the framing: check whether each screen's content actually
+*reflows* at wide widths or just *stretches*. This round checked Dashboard, Belajar (fixed, see
+git log), Saya, GlossaryMode, and FlashcardMode live at 375/820/1440px — all fine except Belajar.
+The other ~20 modes in the registry haven't been checked the same way yet. Do it the same way:
+real screenshots at real widths, not source-reading alone — several of this round's actual
+findings (the width bug included) were invisible from CSS and only showed up live.
+
+### ☐ 68. Remaining off-scale hardcoded font-sizes — `M`
+This round tokenized every hardcoded size that exactly matched an existing `--fs-*` value (52
+instances, mechanical) and fixed the handful of confirmed *inconsistencies* between comparable
+elements (page titles, `ReviewMode`'s rating emoji). What's left is a longer tail of one-off
+14/16/18/20px declarations — mostly icon/emoji sizing where a one-off value is reasonable, but
+not audited item-by-item the way the page-title and rating-emoji cases were. Worth a pass with
+the same method: find the comparable element elsewhere in the app first, and only change a value
+if that comparison actually shows a mismatch — most of these are probably fine as-is.
+
+---

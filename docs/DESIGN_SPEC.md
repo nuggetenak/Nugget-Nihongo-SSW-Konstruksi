@@ -98,21 +98,36 @@ than duplicating every value here.
 - Headings/emphasis (used selectively — `pageTitle`, hero numbers, card titles): `'Syne', 'DM
   Sans', sans-serif`
 
-Scale (`global.css`, all `--fs-*`): hero 32px, jp-primary 28px, jp-back 20px, title 17px,
-subtitle 15px, body 13px, caption 12px, small 11px, micro 10px, nano 9px. Weights: regular 400,
-medium 500, semi 600, bold 700, heavy 800, black 900. Line heights: tight 1.2, normal 1.5,
-relaxed 1.75.
+Scale (`global.css`, all `--fs-*`, rem since 2026-08-31 — see below): hero 32px,
+jp-primary 28px, jp-back 20px, page-title 22px, title 17px, subtitle 15px, body 13px,
+caption 12px, small 11px, micro 10px, nano 9px. Weights: regular 400, medium 500, semi
+600, bold 700, heavy 800, black 900. Line heights: tight 1.2, normal 1.5, relaxed 1.75.
 
-**Wide breakpoint (≥1040px) reads larger, not just wider (item 22).** The overhaul solved width
-comprehensively (`--max-w` widens, grids reflow) but not density — 13px body text at arm's length
-from a monitor reads small, and hero type sized to anchor a phone screen is modest on a desktop
-dashboard. Inside the same `@media (min-width: 1040px)` block that already redefines `--max-w`:
-hero 36px, jp-primary 30px, jp-back 22px, title 18px, subtitle 16px, body 14px, caption 13px,
-small 12px. Micro/nano stay at 10px/9px — badge and fine-print scale, not reading scale, more
-likely to sit in a fixed-dimension container where even 1px risks overflow, and less central to
-what "wide-screen reading comfort" is actually about. Compact and medium are unchanged; every
-consumer of these tokens gets the wide values for free, no per-component edits, same mechanism
-`--max-w` already proved.
+`--fs-page-title` (2026-08-31): the app's actual page-title heading role — BelajarTab,
+SayaTab, Dashboard's (mostly desktop-only, see below) `<h1>`, and every individual mode
+screen via `modes.module.css`'s shared `.pageTitle`. Existed as a de facto convention
+(22px, weight 800) before it existed as a token: SayaTab and every mode screen had
+already independently converged on it, BelajarTab and Dashboard's h1 had drifted to
+24px/900 without anyone deciding they should differ. Named and unified rather than
+introducing a new size — confirmed live (Playwright, computed styles) which value was
+actually the majority before picking one. Dashboard's own instance is `display: none` on
+mobile/tablet (a casual greeting header takes its place there) and only becomes visible
+at the 1040px breakpoint once the side nav takes over the brand slot — so this specific
+mismatch was invisible below desktop width and would only have become a visible problem
+as desktop use grows, which is exactly the direction this app is now headed (see
+`docs/LAYOUT_SPEC.md`'s "expand to all devices" note).
+
+**Wide breakpoint (≥1040px) reads larger, not just wider (item 22).** The overhaul solved
+width comprehensively (`--max-w` widens, grids reflow) but not density — 13px body text at
+arm's length from a monitor reads small, and hero type sized to anchor a phone screen is
+modest on a desktop dashboard. Inside the same `@media (min-width: 1040px)` block that
+already redefines `--max-w`: hero 36px, jp-primary 30px, jp-back 22px, page-title 26px,
+title 18px, subtitle 16px, body 14px, caption 13px, small 12px. Micro/nano stay put —
+badge and fine-print scale, not reading scale, more likely to sit in a fixed-dimension
+container where even 1px risks overflow, and less central to what "wide-screen reading
+comfort" is actually about. Compact and medium are unchanged; every consumer of these
+tokens gets the wide values for free, no per-component edits, same mechanism `--max-w`
+already proved.
 
 `jpFontSize()` (`src/utils/jp-helpers.js`) needed its own fix, not just the tokens above — it's a
 length-based ladder that drives `JpDisplay`'s actual rendered size via an inline style, and never
@@ -125,19 +140,55 @@ as jp-primary, 20→22 same as jp-back, and so on) so the two scales move togeth
 drifting into two different answers for "how much bigger is wide." Ruby annotations
 (`.ruby rt`, `JpDisplay.module.css`) are sized in `em` relative to their parent JP text, so they
 scale proportionally with both of the above automatically — no separate ruby-specific fix needed,
-verified by reading the actual rule rather than assumed.
+verified by reading the actual rule rather than assumed. Ruby's own em-multiplier (0.44, not the
+W3C-documented-default 0.5) is a deliberate, working value tuned for this content's density —
+checked against the spec, left alone rather than "corrected" to match it; a smaller-than-half
+ratio is a normal choice for compound-kanji readings, not a bug.
 
-**The `rem` question — deferred, not resolved.** Every `--fs-*` token is `px`, so none of them
-respond to a user's browser/OS font-size preference; `rem` would fix that. Deferred rather than
-done this item, for three reasons rather than only "out of time": it's a genuinely cross-cutting
-change touching every one of the ~89 stylesheets that reference these tokens, not a contained one;
-this app is closer to an installed, app-shell PWA than a flowing content document, where the
-primary benefit of `rem` (respecting a user's base font-size setting) matters less than it would
-for a reading-heavy website — pinch-zoom already covers the mobile case regardless of px-vs-rem,
-since it's a viewport-level zoom rather than a font-size preference; and the interaction with JP
-typography this item already had to be careful with (ruby sized in `em`, `jpFontSize()`'s own
-ladder) means a `rem` pass would need the same care multiplied across every consumer, not a
-mechanical find-and-replace. A real future item, not a dropped one.
+**`jpFontSize()`'s upward scaling for short strings needs a ceiling in dense lists — `maxSize`
+(`JpFront`, 2026-08-28, swept to every remaining call site 2026-08-31).** 28px on mobile for a
+≤4-character string is right for a single hero card (a flashcard front, a review-mode question) but
+reads as random size-jumping once several `JpFront` instances share a list or grid — a 2-character
+answer hitting the ceiling right next to a 12-character one at a much smaller tier. `maxSize` is an
+opt-in prop precisely because the two contexts need opposite defaults; every `.map()`-rendered list
+and every side-by-side grid pairing in the app now passes it (`JP_LIST_MAX`/`JP_LIST_MAX_SECONDARY`,
+`src/utils/jp-helpers.js`, plus two mode-local constants in `ConfusionMode.jsx` for its two other
+shapes of the same problem) — audited by tracing each of the ~30 live `<JpFront` call sites
+individually, not by pattern-matching class names. Single-item hero contexts (`FlipCard.jsx`,
+`SprintMode.jsx`, `ReviewMode.jsx`'s active-card front, and others) are deliberately left uncapped —
+that's the one case `maxSize` exists to leave alone.
+
+**Ruby rendering (`renderJPWithRuby`, `JpDisplay.jsx`) was rewritten 2026-08-31 — parse-then-
+reindex replaced with a single forward pass.** The old implementation parsed `《reading》` markers
+once against the source string, then re-located each parsed fragment in a (possibly different)
+render-target string via `indexOf`. Whenever a fragment's kanji base repeated earlier in the same
+string as ordinary unmarked text, `indexOf` silently found the wrong, earlier occurrence — audited
+against every string in `src/data`, not just the one reported case, and found genuinely wrong ruby
+placement in real shipped content. The same regex also required kanji touching `《` directly, so
+the (real, common) alternate convention of marking a whole conjugated word including its okurigana
+(見切る《みきる》, ~870 occurrences across `src/data`) was never matched at all — silently dropped
+in some render paths, left as literal bracketed text in others. `renderJPWithRuby` now walks the
+source text once, so a match is always exactly where its own regex match landed; a validated
+trailing-hiragana group splits back into plain okurigana after the ruby rather than being folded in
+or dropped. Full detail and the exact fix shape: see the function's own doc comment and
+`src/tests/ruby-audit-round3.test.jsx`, a corpus-wide sweep that renders every real `《`-bearing
+string in the shipped data through the actual function.
+
+**The `rem` question — resolved 2026-08-31, was deferred.** Every `--fs-*` token is now `rem`, not
+`px` — responds to a user's browser/OS font-size preference. The original deferral (item 53, this
+item) gave three reasons: touching ~89 consuming stylesheets; this app caring less about the
+benefit than a reading-heavy site would, since pinch-zoom already covers the mobile case regardless
+of unit; and needing care around ruby's `em` sizing and `jpFontSize()`'s own ladder. Revisited
+because the third reason's premise didn't hold once actually traced: ruby's `em` computes from its
+parent's *inline* font-size (always a raw px number from `jpFontSize()`, never one of these custom
+properties), and `jpFontSize()` itself is independent JS, so neither interaction touches this change
+at all. The ~89-file number turned out to be a verification surface, not an edit surface — every
+consumer only ever reads `--fs-*` via `var()`, confirmed by grep, so the ~20 lines that define the
+tokens were the entire change. No custom root font-size exists anywhere in this app, so every
+computed value is pixel-identical to before at default settings; verified live (Playwright) that
+forcing a larger root font-size now actually scales these tokens, which it structurally could not do
+before. The app-shell/pinch-zoom reasoning is still true and still a fair tradeoff either way — the
+scope estimate was the thing that changed, not the underlying judgment call.
 
 **Self-hosted, subsetted fonts (item 61, 2026-08-26).** All three families used to load from
 `fonts.googleapis.com`/`fonts.gstatic.com`. Verified before changing anything: all three (DM Sans,

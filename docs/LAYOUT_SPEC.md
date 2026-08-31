@@ -142,3 +142,34 @@ the side nav can mark the active mode and navigate directly to one — both prop
 forced open when no mode is active. `.modeSections` scrolls internally (`overflow-y: auto` +
 `min-height: 0` — the standard fix for flexbox's `min-height: auto` default defeating `overflow`
 in a bounded column) rather than pushing the tabs or the footer off-screen when expanded.
+
+**`width` prop** (`'default' | 'reading'`, `AppShell.jsx`): the other half of the width story
+alongside `--max-w` itself. `'reading'` caps the content column at `--reading-max-w` (620px)
+regardless of how wide `--max-w` has grown at the current breakpoint; `'default'` doesn't cap it at
+all. Every individual mode defaults to `'reading'` (`App.jsx`, `MODE_META[mode]?.width ?? 'reading'`)
+— a small, explicit allowlist of modes with genuinely wide content (grids, side-by-side comparisons)
+opts back out to `'default'`. The three top-level tabs didn't have an equivalent default at all until
+2026-08-31 — `AppShell` fell through to its own `'default'` for all three, which happened to be
+correct for Dashboard and SayaTab (both genuinely reflow into multi-column layouts at the 1040px
+breakpoint — confirmed live, not assumed: SayaTab's achievement grid goes to 8 columns, Dashboard
+splits into its documented 2-column layout) but left BelajarTab's single flowing column of
+section-header-plus-one-featured-card stretching to the full 1180px content column with a growing
+dead gap beside each card. Fixed in `App.jsx` by giving the tab-level shell the same policy
+individual modes already use: `width={tab === 'belajar' ? 'reading' : 'default'}`. If a future tab or
+mode is added, ask the same question this fix answers — does this screen's content actually reflow
+to use extra width, or is it a single column that would just stretch? — rather than assuming either
+default is automatically right.
+
+## 5. Expanding beyond phone-first
+
+This app was built mobile-first and stayed that way through most of its history — every width
+decision above originates from "how does this look on a phone" and widens outward from there. The
+project's own direction is now explicitly broader: supporting tablet and desktop well, not just
+not-broken. The breakpoint system, `--max-w`, the `width` prop, and the auto-fit/minmax pattern in
+§3 already give any screen the tools to do this without inventing something new — what's still real
+work, screen by screen, is checking whether a given screen's content actually *uses* the width it's
+handed (reflows, adds columns, increases density) or just *stretches* into it (single column, same
+shape, more dead space). The Belajar fix directly above is the concrete example of the second case
+found and fixed; auditing the rest of the mode registry the same way (live, at real viewport widths,
+not from source alone — several of this session's real findings did not show up from reading CSS)
+is the natural next slice of this work, not a one-time pass.
