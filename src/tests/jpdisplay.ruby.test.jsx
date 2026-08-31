@@ -169,4 +169,36 @@ describe('JpFront ruby furigana rendering', () => {
     expect(container.textContent).not.toMatch(/《.*》/);
     expect(container.querySelectorAll('ruby')).toHaveLength(2);
   });
+
+  // Regression: kanji+katakana loanword compounds (移動式クレーン, 冷却コイル,
+  // 防水カバー -- ordinary vocabulary in this domain, not edge cases) were
+  // never matched at all, since only trailing *hiragana* was recognized as
+  // possible okurigana. Full-corpus scan found 871 occurrences / 384 unique
+  // (base, reading) pairs of this exact shape. Worse than the plain
+  // okurigana gap: when a katakana-suffixed marker shares a string with
+  // *other*, successfully-matched markers, it fell into gap text and got
+  // silently stripped by the stray-bracket cleanup rather than shown at all.
+  it('renders a kanji+katakana loanword compound as one combined ruby', () => {
+    const { container } = render(
+      <JpFront jp="移動式クレーン《いどうしきくれえん》" furiganaPolicy="always" />
+    );
+    const ruby = container.querySelector('ruby');
+    expect(ruby).toBeTruthy();
+    expect(ruby.firstChild.textContent).toBe('移動式クレーン'); // kanji + katakana kept together
+    expect(container.querySelector('rt')?.textContent).toBe('いどうしきくれえん'); // full reading, untrimmed
+    expect(container.textContent).not.toMatch(/《.*》/);
+  });
+
+  it('does not silently drop a katakana-compound reading when it shares a string with other markers', () => {
+    // Real shape from src/data: a kanji+katakana marker followed later by an
+    // ordinary kanji-only marker in the same sentence.
+    const result = renderJPWithRuby(
+      '光ファイバーケーブル《ひかりふぁいばあけえぶる》を管路《かんろ》に通す'
+    );
+    const html = renderToStaticMarkup(result);
+    expect(html).not.toMatch(/《.*》/);
+    expect(html).toContain('ひかりふぁいばあけえぶる');
+    expect(html).toContain('かんろ');
+    expect((html.match(/<ruby/g) || []).length).toBe(2);
+  });
 });

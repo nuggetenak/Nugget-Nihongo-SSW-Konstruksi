@@ -3,7 +3,7 @@
 // Note: VS label font-size is derived from jp size — justified inline.
 import { T } from '../styles/theme.js';
 import { useMemo, useState } from 'react';
-import { stripFuri, extractReadings, jpFontSize, parseDescStructure } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings, jpFontSize, parseDescStructure, isMeaningfullyJapanese } from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
 // ─── JpFront ──────────────────────────────────────────────────────────────────
@@ -37,6 +37,40 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
     if (c.includes('→')) return 'arrow';
     return 'plain';
   }, [jp]);
+
+  // Some shared slots this component is used in (ResultScreen's userAnswer/
+  // correctAnswer across several modes, primarily) sometimes receive content
+  // that isn't actually Japanese: ConfusionMode's Indonesian definitions,
+  // ProductionMode/QuizProduksiMode's id_text translations, AngkaMode's
+  // mostly-Indonesian konteks sentences. Forcing Japanese-specific typography
+  // (CJK font, center alignment, bold weight, jpFontSize's length-based
+  // auto-scaling meant for kanji-dense strings, not prose sentence length)
+  // onto a full Indonesian sentence looks wrong — found by checking this
+  // component's real callers, not a hypothetical. Bail out to plain,
+  // left-aligned body text before any of the Japanese-specific branching
+  // below; ratio-based (isMeaningfullyJapanese), not hasJapanese()'s plain
+  // presence check, so a mostly-Japanese phrase with an incidental
+  // non-Japanese character still gets full treatment. All hooks above this
+  // point already ran unconditionally, so this early return is safe.
+  if (!isMeaningfullyJapanese(clean)) {
+    return (
+      <div
+        lang="id"
+        style={{
+          textAlign: 'left',
+          fontFamily: "'DM Sans', system-ui, sans-serif",
+          fontWeight: 'var(--fw-medium)',
+          fontSize: maxSize ? `${Math.min(16, maxSize)}px` : 'var(--fs-subtitle)',
+          lineHeight: 1.5,
+          color: T.textBright,
+          wordBreak: 'break-word',
+        }}
+      >
+        {clean}
+      </div>
+    );
+  }
+
   const hasRubyInText = parsedRuby.length > 0;
   const showReadingRow = !!reading && !hasRubyInText;
   const hintLabel = isTapMode
@@ -200,15 +234,20 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
 // long single-word readings).
 const MAX_PLAUSIBLE_KANA_PER_KANJI = 4;
 
-// Kanji run, optionally followed directly by a run of okurigana (trailing
-// hiragana), followed by the 《reading》 marker. The okurigana group is
-// speculative -- both functions below only trust it once the reading is
-// confirmed to actually end with those same characters. This data uses two
-// different conventions for verbs/adjectives: most entries mark just the
-// kanji stem (揚《あ》げる), but a real minority instead mark the whole
-// conjugated word, reading and all (見切る《みきる》 rather than
-// 見切《みき》る) -- both need to resolve to the same rendered result.
-const RUBY_MARKER_SRC = '([一-龯々〆ヵヶ]+)([ぁ-んー]*)《([^》]+)》';
+// Kanji run, optionally followed directly by a run of trailing kana (either
+// real okurigana in hiragana, or the tail of a kanji+katakana loanword
+// compound -- 移動式クレーン, 冷却コイル, 防水カバー and dozens more are
+// completely ordinary vocabulary in this domain, not edge cases), followed
+// by the 《reading》 marker. The trailing-kana group is speculative -- see
+// the two different validation strategies in renderJPWithRuby below, one
+// per script (hiragana vs katakana can't share a check: readings are always
+// written in hiragana, so a katakana suffix never matches the reading's
+// tail by exact string comparison even when it's the correct, intended
+// reading -- くれーん の long-vowel mark ー doesn't literally appear in its
+// own hiragana transliteration くれえん, they're the same sound written two
+// different ways, not the same characters).
+const RUBY_MARKER_SRC = '([一-龯々〆ヵヶ]+)([ぁ-んァ-ヶー]*)《([^》]+)》';
+const KATAKANA_RE = /[\u30A1-\u30FA]/;
 
 // Strip only the CARDS-format pure-reading （reading） parens (this is
 // exactly stripFuri's second step, duplicated rather than imported from it
@@ -236,9 +275,16 @@ export function parseRubyFragments(jp = '') {
   const re = new RegExp(RUBY_MARKER_SRC, 'g');
   let m;
   while ((m = re.exec(jp)) !== null) {
-    const [, base, okuri, reading] = m;
-    if (okuri && !reading.endsWith(okuri)) continue; // gloss/cloze, not a reading
-    frags.push(okuri ? { base, reading: reading.slice(0, reading.length - okuri.length) } : { base, reading });
+    const [, base, trailing, reading] = m;
+    if (!trailing) {
+      frags.push({ base, reading });
+    } else if (KATAKANA_RE.test(trailing)) {
+      // Kanji+katakana compound -- always kept combined (see renderJPWithRuby).
+      frags.push({ base: base + trailing, reading });
+    } else if (reading.endsWith(trailing)) {
+      // Real okurigana, reading confirmed to echo it -- split as before.
+      frags.push({ base, reading: reading.slice(0, reading.length - trailing.length) });
+    } // else: gloss/cloze, not a reading -- no fragment
   }
   return frags;
 }
@@ -270,9 +316,9 @@ export function renderJPWithRuby(text, _legacyFragments) {
   let key = 0;
   let m;
   while ((m = re.exec(cleaned)) !== null) {
-    const [full, kanji, okuri, rawReading] = m;
+    const [full, kanji, trailing, rawReading] = m;
     // A stray 《...》 that doesn't land directly on kanji (+ optional
-    // okurigana) never enters this loop as its own match at all -- it's
+    // trailing kana) never enters this loop as its own match at all -- it's
     // just part of whichever gap surrounds the marker that *did* match. The
     // known real case: a handful of jac-mockup-sets.js entries carry the
     // same marker twice in a row (冷媒《れいばい》《れいばい》), and the
@@ -281,8 +327,9 @@ export function renderJPWithRuby(text, _legacyFragments) {
     // same "when genuinely unrenderable, drop it" rule stripFuri already
     // applies everywhere else in this app.
     const gapBefore = cleaned.slice(lastEnd, m.index).replace(/《[^》]*》/g, '');
+    const trailingIsKatakana = trailing && KATAKANA_RE.test(trailing);
 
-    if (okuri && !rawReading.endsWith(okuri)) {
+    if (trailing && !trailingIsKatakana && !rawReading.endsWith(trailing)) {
       // Trailing hiragana that ISN'T an okurigana echo of this reading —
       // a glossed synonym (ろう付け《ブレージング》) or a fill-in-the-blank
       // cloze marker (《 》), not a phonetic reading. Don't guess: pass the
@@ -298,11 +345,21 @@ export function renderJPWithRuby(text, _legacyFragments) {
     let base = kanji;
     let reading = rawReading;
     let suffix = '';
-    if (okuri) {
-      // Split the okurigana back out so it renders as ordinary text after
-      // the ruby, matching how most of this data writes it the other way.
-      reading = rawReading.slice(0, rawReading.length - okuri.length);
-      suffix = okuri;
+    if (trailingIsKatakana) {
+      // Kanji+katakana loanword compound (移動式クレーン, 冷却コイル, ...).
+      // Keep it combined with the full, untrimmed reading rather than
+      // trying to split like hiragana okurigana -- readings are always
+      // written in hiragana, so even a correct reading essentially never
+      // passes an exact endsWith(trailing) check against the katakana
+      // itself (long-vowel marks and small kana don't round-trip through a
+      // literal character comparison). Not attempting the split is the
+      // reliable choice, not a fallback for lack of a better one.
+      base = kanji + trailing;
+    } else if (trailing) {
+      // Real, validated hiragana okurigana -- split it back out so it
+      // renders as ordinary text after the ruby.
+      reading = rawReading.slice(0, rawReading.length - trailing.length);
+      suffix = trailing;
     }
 
     // See MAX_PLAUSIBLE_KANA_PER_KANJI above: fold an implausibly-long

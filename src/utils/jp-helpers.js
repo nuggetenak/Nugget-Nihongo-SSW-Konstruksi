@@ -66,6 +66,29 @@ export function hasJapanese(s = '') {
 }
 
 /**
+ * Whether text is Japanese *enough* to warrant Japanese-specific typography
+ * (CJK font, center alignment, jpFontSize's length-based auto-scaling) --
+ * ratio-based rather than hasJapanese()'s plain presence check, because
+ * several real call sites hand JpFront content that isn't uniformly one
+ * language: a mostly-Japanese term can carry a short Indonesian aside
+ * (rare), and more commonly, several modes' shared ResultScreen slots
+ * (ConfusionMode's Indonesian definitions, ProductionMode/QuizProduksiMode's
+ * id_text, AngkaMode's mostly-Indonesian konteks sentences) carry an
+ * Indonesian sentence with at most an incidental parenthetical JP term.
+ * hasJapanese() alone would wrongly route the second group into full
+ * Japanese styling over one matching character. 0.4 chosen by checking real
+ * examples of both populations: genuine card.jp content (even
+ * hiragana/particle-heavy natural sentences) sits at 50-100%; the
+ * Indonesian-dominant cases found in the shipped app sit at 0-16%. Plenty
+ * of headroom either side of the boundary, not a knife-edge tuning.
+ */
+export function isMeaningfullyJapanese(s = '', threshold = 0.4) {
+  if (!s) return true; // nothing to disqualify -- let normal handling apply
+  const jpChars = (s.match(/[\u3040-\u9FFF]/g) || []).length;
+  return jpChars / s.length >= threshold;
+}
+
+/**
  * Calculate appropriate font size for Japanese text based on length.
  * Returns a number (px) suitable for inline style fontSize.
  */
