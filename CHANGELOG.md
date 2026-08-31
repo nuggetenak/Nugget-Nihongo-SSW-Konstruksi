@@ -1,4 +1,45 @@
-## [5.1.0] - 2026-08-31
+## [5.2.0] - 2026-08-31
+
+### Owner tested v5.1.0 live, found real gaps -- same-day follow-up
+
+Same session as 5.1.0, continued after the owner tried the shipped build and reported a
+screenshot plus a factual correction, both investigated and fixed the same day.
+
+**Ruby round 4.** Round 3's corpus sweep verifies the renderer never produces garbage for any
+real string; it can't verify the renderer produces the *right* output, since it has no
+independent way to know what "right" is for a given string -- a different property, and the
+reason a passing sweep still shipped with two more real, separate bugs:
+
+- The reported card (ダクトの3種類, "3 duct types") had a content-data bug, not a rendering
+  bug: its `jp` field literally concatenated five readings into one marker -- its own two
+  words' readings, plus three more copied in from its own `desc` field's separate terms.
+  Searched systematically rather than patching only the report: 127 cards had a suspiciously
+  long reading; every one hand-verified against its own desc/usage (two automated shortcuts
+  were tried first and both produced confident-looking wrong answers on close inspection); 26
+  were genuine bugs and are fixed, ~101 were long-but-correct and left untouched.
+- Separately, kanji+katakana loanword compounds (移動式クレーン, 冷却コイル, 防水カバー --
+  ordinary vocabulary in this domain, not edge cases) were never matched by the renderer at
+  all, and silently dropped when they shared a sentence with other, successfully-matched
+  markers. 871 occurrences, 384 unique pairs across the shipped data. Fixed by keeping
+  kanji+katakana always combined as one ruby span with the untrimmed reading, rather than
+  attempting an unreliable cross-script exact-match split.
+- Same pass also stopped JpFront from forcing Japanese typography (CJK font, centering,
+  kanji-density length-scaling) onto non-Japanese content that a few modes' shared
+  ResultScreen slots sometimes carry (Indonesian definitions/translations) -- new
+  `isMeaningfullyJapanese()` ratio check, found while re-auditing the same render paths.
+
+**Simulasi exam timing corrected to the real exam's convention.** Owner: 2 minutes per
+question (100 min for the 50-question full exam), not the roughly 1 min/question the app
+actually shipped with. Applied uniformly to every preset (quick 15->30min, half 25->50min,
+full 50->100min), not only the one specifically mentioned. JAC Official's own "full" preset
+draws a random set-pair at runtime (44 or 51 questions, not a fixed 50) -- its time budget is
+now computed from the actual drawn count once known, rather than a static guess, and its label
+states the honest 88-102 minute range instead of picking one number.
+
+644/648 -> 648/648 tests across this round (11 new: 4 ruby regression + 3 corpus-level +
+4 timing), lint clean, build clean throughout.
+
+
 
 ### Exhaustive UI/UX/typography audit, owner-requested with full authorization
 

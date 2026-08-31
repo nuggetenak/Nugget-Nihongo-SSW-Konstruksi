@@ -87,9 +87,15 @@ update itself.
       ResultScreen slots sometimes carry (Indonesian definitions/translations) — new
       `isMeaningfullyJapanese()` ratio check in `jp-helpers.js`, found while re-auditing the same
       render paths, not part of the original report.
-    - **Not yet done**: the Simulasi exam-timing question owner asked about in the same message
-      (100 min / 50 questions model vs. JAC Official's actual 44-51 draw) — separate task, not
-      started as of this row.
+    - **Simulasi exam-timing fixed too, same message** — owner's real-exam knowledge: 2 min/
+      question (100 min for the 50-question full exam), not the ~1 min/question the app actually
+      shipped with (quick/half were exactly 1:1, full was even slightly under at 0.9). Applied
+      uniformly to every preset. JAC Official's own "full" preset draws a random set-pair at
+      runtime (44 or 51 questions, not a fixed 50) — its time budget is now computed from the
+      actual drawn count via a correction effect once `questions` resolves, rather than a static
+      guess; the preset's own label states the honest 88–102 min range instead of picking one
+      number. Verified live and via a test that drives a real random draw end-to-end. Commit
+      `d4efb09`.
 
     only covered the one reported case (SimulasiMode's review list); this pass traced all ~30 live
     call sites and fixed the other ~9 (SearchMode, GlossaryMode, DangerMode's accordion,
