@@ -168,15 +168,6 @@
   opacity: 0.6;
 }
 
-.termJp {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ssw-text);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .termId {
   font-size: var(--fs-small);
   color: var(--ssw-textMuted);
