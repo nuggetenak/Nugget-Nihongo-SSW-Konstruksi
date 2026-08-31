@@ -13,6 +13,7 @@ import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
 import { JpFront } from './JpDisplay.jsx';
+import { JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { recommendMode } from '../utils/recommend-mode.js';
 import { formatCount } from '../utils/format.js';
 import { MODE_META } from '../router/modes.js';
@@ -337,7 +338,7 @@ export default function Dashboard({
                 {recentCards.map((c) => (
                   <li key={c.id} className={s.recentCard}>
                     <span className={s.recentJp}>
-                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
+                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                     </span>
                     <span className={s.recentId}>{c.id_text}</span>
                   </li>

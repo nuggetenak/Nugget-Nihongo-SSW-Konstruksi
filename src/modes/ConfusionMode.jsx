@@ -6,7 +6,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
@@ -16,6 +16,20 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
+
+// Detail view shows termA/termB as two separate stacked cards, each with its
+// own definition -- not side by side, but still presented as a matched pair
+// a learner is meant to compare, so a 2-character termA hitting jpFontSize's
+// 28px tier next to a 6-character termB at 20px would undercut the point of
+// the comparison. Restores the weight the surrounding fontSize:24 wrapper
+// already signals (JpFront's own inline size otherwise overrides it
+// silently) as a shared ceiling for both cards.
+const CONFUSION_DETAIL_MAX = 24;
+// The quiz screen's own termA/termB pairing is the clearest case of the
+// three in this file: a CSS grid literally places them side by side
+// (1fr auto 1fr, "vs" in the middle column), so any size mismatch is
+// immediately visible in the same row rather than between scrolled cards.
+const CONFUSION_QUIZ_MAX = 20;
 
 const TYPE_LABEL = {
   音: { label: '発音', color: '#7C3AED', bg: 'rgba(124,58,237,0.10)', desc: 'Bunyi mirip' },
@@ -177,7 +191,7 @@ function PanelView({
                       color: T.text,
                     }}
                   >
-                    <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} />
+                    <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                   </div>
                 </div>
                 <div style={{ color: T.textDim, fontSize: 18, alignSelf: 'center' }}>vs</div>
@@ -189,7 +203,7 @@ function PanelView({
                       color: T.text,
                     }}
                   >
-                    <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} />
+                    <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                   </div>
                 </div>
               </div>
@@ -238,7 +252,7 @@ function DetailView({ pair, onBack }) {
             marginBottom: 4,
           }}
         >
-          <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} />
+          <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
         <div style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{pair.defA}</div>
       </div>
@@ -255,7 +269,7 @@ function DetailView({ pair, onBack }) {
             marginBottom: 4,
           }}
         >
-          <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} />
+          <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
         <div style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{pair.defB}</div>
       </div>
@@ -440,7 +454,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
               color: T.amber,
             }}
           >
-            <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} />
+            <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_QUIZ_MAX} />
           </div>
         </div>
         <div style={{ fontSize: 13, color: T.textDim, fontWeight: 700 }}>vs</div>
@@ -452,7 +466,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
               color: T.text,
             }}
           >
-            <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} />
+            <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_QUIZ_MAX} />
           </div>
         </div>
       </div>

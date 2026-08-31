@@ -8,7 +8,7 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings, JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { get as storageGet } from '../storage/engine.js';
 import { formatCount } from '../utils/format.js';
@@ -354,7 +354,7 @@ export default function GlossaryMode({ onExit, track }) {
                         </span>
                       )}
                       {catInfo && <span className={G.termCatEmoji}>{catInfo.emoji}</span>}
-                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
+                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                     </div>
                     <span className={G.termId}>{c.id_text}</span>
                   </div>

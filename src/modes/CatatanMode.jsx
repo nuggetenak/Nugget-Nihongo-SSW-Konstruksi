@@ -6,7 +6,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -42,7 +42,7 @@ function NoteCard({ card, note, onSave }) {
       <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ marginBottom: 2 }}>
-            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
+            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
           </div>
           <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)' }}>{card.id_text}</div>
         </div>

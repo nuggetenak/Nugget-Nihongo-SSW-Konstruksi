@@ -7,7 +7,7 @@
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useConfirm } from '../components/ConfirmDialog.jsx';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
@@ -597,16 +597,16 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
                   >
                     <div className={SM.reviewJp}>
-                      <JpFront jp={r.jp} furiganaPolicy={furiganaPolicy} maxSize={17} />
+                      <JpFront jp={r.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                     </div>
                     <div className={SM.reviewIdText}>
                       <MixedRuby text={r.id_text} />
                     </div>
                     <div className={SM.reviewWrong}>
-                      ✗ <JpFront jp={userOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
+                      ✗ <JpFront jp={userOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                     </div>
                     <div className={SM.reviewCorrect}>
-                      ✓ <JpFront jp={correctOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
+                      ✓ <JpFront jp={correctOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                     </div>
                     {r.explanation &&
                       (() => {

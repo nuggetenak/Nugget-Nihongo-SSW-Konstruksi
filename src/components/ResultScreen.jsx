@@ -6,7 +6,7 @@ import s from './ResultScreen.module.css';
 import { getGrade } from '../styles/theme.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from './JpDisplay.jsx';
-import { stripFuri } from '../utils/jp-helpers.js';
+import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { findWeakestCategory } from '../utils/session-weakness.js';
 
 // rsShake animation — injected once (not worth a CSS module import just for this)
@@ -129,13 +129,13 @@ export default function ResultScreen({
                 style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
               >
                 <div className={s.reviewQ}>
-                  <JpFront jp={r.question} furiganaPolicy={furiganaPolicy} />
+                  <JpFront jp={r.question} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                 </div>
                 <div className={s.reviewWrong}>
-                  ✗ <JpFront jp={r.userAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
+                  ✗ <JpFront jp={r.userAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                 </div>
                 <div className={s.reviewCorrect}>
-                  ✓ <JpFront jp={r.correctAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={15} />
+                  ✓ <JpFront jp={r.correctAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                 </div>
                 {r.explanation &&
                   (() => {

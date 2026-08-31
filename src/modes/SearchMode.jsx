@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
-import { stripFuri, extractReadings } from '../utils/jp-helpers.js';
+import { stripFuri, extractReadings, JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo, getCatsForTrack } from '../data/categories.js';
 import { useDebounce } from '../hooks/useDebounce.js';
@@ -199,7 +199,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
             <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
               <div className={S.rowSpread} style={{ alignItems: 'flex-start' }}>
                 <div style={{ fontSize: 15, fontWeight: 600 }}>
-                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
+                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   {toggleStar && (

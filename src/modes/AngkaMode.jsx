@@ -9,6 +9,7 @@ import { haptic } from '../utils/haptic.js';
 import { CARDS } from '../data/cards.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
+import { JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -245,7 +246,7 @@ function PanelView({ onExit, onStartQuiz }) {
                         <div className={A.relatedCard}>
                           <div className={A.relatedCardId}>KARTU #{relCard.id}</div>
                           <div className={A.relatedCardJp}>
-                            <JpFront jp={relCard.jp} furiganaPolicy={furiganaPolicy} />
+                            <JpFront jp={relCard.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
                           </div>
                           <div className={A.relatedCardId_text}>{relCard.id_text}</div>
                         </div>

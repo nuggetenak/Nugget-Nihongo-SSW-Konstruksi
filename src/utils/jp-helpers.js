@@ -96,6 +96,18 @@ export function jpFontSize(text = '') {
   return wide ? 14 : 13;
 }
 
+// Shared maxSize ceilings for JpFront in a dense list/grid context (many
+// items visible together, where jpFontSize's own upward scaling for short
+// strings reads as random size-jumping rather than intentional emphasis --
+// see JpFront's maxSize doc comment in JpDisplay.jsx). JP_LIST_MAX is for
+// the row's own primary term; JP_LIST_MAX_SECONDARY is for a smaller
+// supporting value within that same row (an answer option, a related-card
+// preview). Originally introduced ad hoc as 17/15 in SimulasiMode's review
+// list and ResultScreen; named here so every later dense-list caller lines
+// up with that precedent instead of picking its own number.
+export const JP_LIST_MAX = 17;
+export const JP_LIST_MAX_SECONDARY = 15;
+
 /**
  * Parse a desc string into a structured object for memoized rendering.
  * @returns {{ branch: 'brackets'|'circled'|'plain', intro: string, items: Array, lines: string[], src: string|null }|null}

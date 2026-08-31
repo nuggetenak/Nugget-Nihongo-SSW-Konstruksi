@@ -4,6 +4,7 @@ import { CARDS } from '../data/cards.js';
 import { SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from '../data/categories.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
+import { JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
@@ -144,7 +145,7 @@ export default function SumberMode({ onExit, onNavigate }) {
             >
               <div className={S.rowSpread}>
                 <span style={{ fontSize: 13 }}>
-                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} />
+                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                 </span>
                 <span style={{ fontSize: 12, color: T.textMuted, flexShrink: 0, marginLeft: 8 }}>
                   {c.id_text}
