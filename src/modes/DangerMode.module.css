@@ -121,7 +121,7 @@
 }
 
 .scoreBadge {
-  font-size: 12px;
+  font-size: var(--fs-caption);
   color: var(--ssw-textDim);
   font-variant-numeric: tabular-nums;
 }

@@ -96,7 +96,7 @@
 }
 
 .heroSub {
-  font-size: 12px;
+  font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
   letter-spacing: 0.5px;
   margin-bottom: 20px;
@@ -122,7 +122,7 @@
 .badge {
   padding: 4px 12px;
   border-radius: 99px;
-  font-size: 11px;
+  font-size: var(--fs-small);
   font-weight: 600;
   background: var(--ssw-surface);
   color: var(--ssw-textMuted);
@@ -131,7 +131,7 @@
 
 /* ── Step header ── */
 .stepEyebrow {
-  font-size: 11px;
+  font-size: var(--fs-small);
   font-weight: 600;
   color: var(--ssw-amberText);
   letter-spacing: 0.8px;
@@ -148,7 +148,7 @@
 }
 
 .stepDesc {
-  font-size: 13px;
+  font-size: var(--fs-body);
   color: var(--ssw-textDim);
   text-align: center;
   line-height: 1.6;
@@ -223,13 +223,13 @@
 }
 
 .trackJp {
-  font-size: 12px;
+  font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
   font-family: 'Noto Sans JP', sans-serif;
 }
 
 .trackDesc {
-  font-size: 11px;
+  font-size: var(--fs-small);
   color: var(--ssw-textDim);
 }
 
@@ -288,7 +288,7 @@
 }
 
 .demoCat {
-  font-size: 10px;
+  font-size: var(--fs-micro);
   color: var(--ssw-textFaint);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -315,19 +315,19 @@
 
 .demoFuri {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 13px;
+  font-size: var(--fs-body);
   color: var(--ssw-amberText);
   letter-spacing: 1px;
 }
 
 .demoRomaji {
-  font-size: 11px;
+  font-size: var(--fs-small);
   color: var(--ssw-textDim);
   letter-spacing: 0.5px;
 }
 
 .demoHint {
-  font-size: 11px;
+  font-size: var(--fs-small);
   color: var(--ssw-textDim);
   margin-top: 8px;
 }
@@ -340,7 +340,7 @@
 }
 
 .demoBackDesc {
-  font-size: 11px;
+  font-size: var(--fs-small);
   line-height: 1.6;
   color: var(--ssw-textDim);
   align-self: flex-start;
@@ -355,7 +355,7 @@
 
 .demoRatingLabel {
   text-align: center;
-  font-size: 12px;
+  font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
   margin: 0 0 10px;
 }
@@ -392,7 +392,7 @@
 }
 
 .demoBtnLabel {
-  font-size: 11px;
+  font-size: var(--fs-small);
   font-weight: 600;
   color: var(--ssw-text);
 }
@@ -448,18 +448,18 @@
 }
 
 .goalLabel {
-  font-size: 12px;
+  font-size: var(--fs-caption);
   font-weight: 600;
   color: var(--ssw-text);
 }
 
 .goalSub {
-  font-size: 10px;
+  font-size: var(--fs-micro);
   color: var(--ssw-textDim);
 }
 
 .goalNote {
-  font-size: 12px;
+  font-size: var(--fs-caption);
   line-height: 1.6;
   color: var(--ssw-textDim);
   text-align: center;
@@ -514,7 +514,7 @@
   background: linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b);
   color: #fff;
   font-family: inherit;
-  font-size: 15px;
+  font-size: var(--fs-subtitle);
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
@@ -537,7 +537,7 @@
 .ctaGhost {
   margin-top: 12px;
   padding: 6px 16px;
-  font-size: 11px;
+  font-size: var(--fs-small);
   background: none;
   border: none;
   color: var(--ssw-textDim);

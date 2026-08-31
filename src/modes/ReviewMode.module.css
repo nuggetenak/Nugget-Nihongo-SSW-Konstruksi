@@ -59,7 +59,7 @@
 }
 
 .doneSub {
-  font-size: 13px;
+  font-size: var(--fs-body);
   color: var(--ssw-textMuted);
   margin-bottom: 0;
   line-height: 1.5;
@@ -114,7 +114,7 @@
 }
 
 .doneRatingLabel {
-  font-size: 10px;
+  font-size: var(--fs-micro);
   font-weight: 800;
   letter-spacing: 1.2px;
   text-transform: uppercase;
@@ -136,7 +136,7 @@
 }
 
 .doneRatingEmoji {
-  font-size: 15px;
+  font-size: var(--fs-subtitle);
   margin-bottom: 3px;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .doneRatingName {
-  font-size: 10px;
+  font-size: var(--fs-micro);
   color: var(--ssw-textDim);
 }
 

@@ -87,7 +87,7 @@
   border-radius: var(--r-md);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
-  font-size: 15px;
+  font-size: var(--fs-subtitle);
   cursor: pointer;
   display: flex;
   align-items: center;

@@ -227,7 +227,7 @@
 /* ── Keyboard hint ── */
 .kbHint {
   text-align: center;
-  font-size: 10px;
+  font-size: var(--fs-micro);
   color: var(--ssw-textFaint);
   margin-top: 8px;
   letter-spacing: 0.3px;
