@@ -11,14 +11,23 @@ import { resolve } from 'path';
 
 const css = readFileSync(resolve(__dirname, '../styles/global.css'), 'utf-8');
 
+// Tokens are rem now (item 53) -- convert back to a px-equivalent for
+// readable assertions ("hero is effectively 32px at default settings")
+// without hardcoding the unit conversion into every expectation below.
+const REM_PX = 16;
+
 function baseValue(token) {
-  const m = css.match(new RegExp(`:root\\s*{[\\s\\S]*?--${token}:\\s*(\\d+)px`));
-  return m ? Number(m[1]) : null;
+  const m = css.match(new RegExp(`:root\\s*{[\\s\\S]*?--${token}:\\s*([\\d.]+)rem`));
+  return m ? Math.round(Number(m[1]) * REM_PX * 1000) / 1000 : null;
 }
 
 function wideBlock() {
   const m = css.match(/@media \(min-width: 1040px\)\s*{\s*:root\s*{([\s\S]*?)}/);
   return m ? m[1] : '';
+}
+
+function remFor(px) {
+  return `${px / REM_PX}rem`.replace(/\./g, '\\.');
 }
 
 describe('wide-breakpoint typography (item 22)', () => {
@@ -47,15 +56,15 @@ describe('wide-breakpoint typography (item 22)', () => {
 
   it('the 1040px block redefines the reading-scale tokens larger', () => {
     const block = wideBlock();
-    expect(block).toMatch(/--fs-hero:\s*36px/);
-    expect(block).toMatch(/--fs-jp-primary:\s*30px/);
-    expect(block).toMatch(/--fs-jp-back:\s*22px/);
-    expect(block).toMatch(/--fs-page-title:\s*26px/);
-    expect(block).toMatch(/--fs-title:\s*18px/);
-    expect(block).toMatch(/--fs-subtitle:\s*16px/);
-    expect(block).toMatch(/--fs-body:\s*14px/);
-    expect(block).toMatch(/--fs-caption:\s*13px/);
-    expect(block).toMatch(/--fs-small:\s*12px/);
+    expect(block).toMatch(new RegExp(`--fs-hero:\\s*${remFor(36)}`));
+    expect(block).toMatch(new RegExp(`--fs-jp-primary:\\s*${remFor(30)}`));
+    expect(block).toMatch(new RegExp(`--fs-jp-back:\\s*${remFor(22)}`));
+    expect(block).toMatch(new RegExp(`--fs-page-title:\\s*${remFor(26)}`));
+    expect(block).toMatch(new RegExp(`--fs-title:\\s*${remFor(18)}`));
+    expect(block).toMatch(new RegExp(`--fs-subtitle:\\s*${remFor(16)}`));
+    expect(block).toMatch(new RegExp(`--fs-body:\\s*${remFor(14)}`));
+    expect(block).toMatch(new RegExp(`--fs-caption:\\s*${remFor(13)}`));
+    expect(block).toMatch(new RegExp(`--fs-small:\\s*${remFor(12)}`));
   });
 
   it('micro/nano are not redefined in the wide block -- deliberately out of scope', () => {
