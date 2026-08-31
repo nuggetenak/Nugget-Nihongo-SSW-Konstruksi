@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { JpFront } from '../components/JpDisplay.jsx';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { JpFront, renderJPWithRuby } from '../components/JpDisplay.jsx';
 
 describe('JpFront ruby furigana rendering', () => {
   it('renders ruby/rt when jp has inline furigana markers', () => {
@@ -95,5 +96,77 @@ describe('JpFront ruby furigana rendering', () => {
     );
     const span = container.querySelector('span[lang="ja"]');
     expect(parseInt(span.style.fontSize, 10)).toBeLessThan(30);
+  });
+
+  // Regression: the old parse-then-reindex implementation parsed fragments
+  // once against the original string, then re-located each one in a second
+  // string via indexOf -- which finds the FIRST occurrence of a repeated
+  // kanji base, not necessarily the one the marker actually belonged to.
+  // Audited against every string in src/data (not just this one report):
+  // 圧着ペンチ appears before the marked 圧着《あっちゃく》, and indexOf put
+  // the ruby on the wrong, unrelated earlier occurrence every time.
+  it('attaches a reading to the kanji its own marker touched, not an earlier bare repeat of the same kanji', () => {
+    const { container } = render(
+      <JpFront
+        jp="圧着ペンチでリングスリーブを圧着《あっちゃく》して電線を接続する"
+        furiganaPolicy="always"
+      />
+    );
+    const rubies = [...container.querySelectorAll('ruby')];
+    expect(rubies).toHaveLength(1);
+    // The ruby'd span is the marked occurrence, not "圧着ペンチ".
+    expect(rubies[0].textContent).toContain('あっちゃく');
+    const rubyBase = rubies[0].firstChild.textContent;
+    expect(rubyBase).toBe('圧着');
+    // "圧着ペンチ" (the earlier, unmarked occurrence) reads as plain text --
+    // container text has it once as bare text and once inside the ruby.
+    expect(container.textContent).toContain('圧着ペンチ');
+  });
+
+  // Regression: this data uses two conventions for verbs/adjectives -- most
+  // entries mark just the kanji stem (揚《あ》げる), but some mark the whole
+  // conjugated word including its okurigana (見切る《みきる》). The old
+  // regex required kanji directly touching 《, so the second form was never
+  // captured at all -- not misplaced, not stripped, just left as literal
+  // "見切る《みきる》" text in the middle of otherwise-clean output.
+  it('splits okurigana folded into the marker back out into ordinary text', () => {
+    const { container } = render(<JpFront jp="見切る《みきる》" furiganaPolicy="always" />);
+    expect(container.querySelector('ruby')).toBeTruthy();
+    expect(container.querySelector('rt')?.textContent).toBe('みき');
+    expect(container.textContent).not.toMatch(/《.*》/);
+    // The okurigana renders as ordinary text right after the ruby, not
+    // inside the <rb>/<rt> pair.
+    expect(container.querySelector('ruby')?.firstChild.textContent).toBe('見切');
+  });
+
+  it('does not confuse a genuine gloss or fill-in-the-blank marker for okurigana', () => {
+    // ろう付け《ブレージング》: katakana gloss, not a phonetic reading for け
+    // -- renderJPWithRuby itself must not split け off as if it were
+    // okurigana (it isn't part of "ブレージング" at all). JpFront still
+    // shows this reasonably via its own separate, pre-existing
+    // extractReadings fallback (a single ruby over the whole word) since
+    // this marker doesn't attach to any specific kanji run; that fallback
+    // is unrelated to this fix, so exercise renderJPWithRuby directly here.
+    const result = renderJPWithRuby('ろう付け《ブレージング》');
+    const html = renderToStaticMarkup(result);
+    expect(html).not.toContain('<rt>ブレージン</rt>'); // け must not be stripped from the reading
+    expect(html).toContain('ろう付け《ブレージング》'); // passed through verbatim, no ruby at all
+
+    // Cloze fill-in-the-blank markers get the same treatment.
+    const cloze = renderJPWithRuby('文章の《 》に入る言葉');
+    expect(renderToStaticMarkup(cloze)).toContain('文章の《 》に入る言葉');
+  });
+
+  // Regression: a handful of jac-mockup-sets.js entries have the same
+  // marker duplicated back-to-back (冷媒《れいばい》《れいばい》) -- real
+  // source data, found by the full test suite while verifying this fix, not
+  // a hypothetical. The orphaned second copy has no kanji of its own to
+  // attach to; it should disappear rather than show as broken raw brackets.
+  it('drops an orphaned duplicate marker instead of leaving it as raw text', () => {
+    const { container } = render(
+      <JpFront jp="冷媒《れいばい》《れいばい》配管《はいかん》" furiganaPolicy="always" />
+    );
+    expect(container.textContent).not.toMatch(/《.*》/);
+    expect(container.querySelectorAll('ruby')).toHaveLength(2);
   });
 });
