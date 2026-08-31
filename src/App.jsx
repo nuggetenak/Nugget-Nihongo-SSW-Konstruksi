@@ -126,7 +126,13 @@ export default function App() {
 
   return (
     <main id="main-content" tabIndex={-1}>
-      <AppShell tab={tab} onTabChange={goTab} dueBadge={srs.dueCount} onSelectMode={goMode}>
+      <AppShell
+        tab={tab}
+        onTabChange={goTab}
+        dueBadge={srs.dueCount}
+        onSelectMode={goMode}
+        width={tab === 'belajar' ? 'reading' : 'default'}
+      >
         {tab === 'home' && (
           <ErrorBoundary fallback={<TabError tab="Beranda" />}>
             <Dashboard
