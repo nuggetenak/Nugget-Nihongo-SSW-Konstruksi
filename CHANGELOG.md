@@ -1,3 +1,118 @@
+## [5.0.0] - 2026-08-28
+
+### Major version bump — overdue. Two full work streams since 4.23.0, neither ever recorded here
+
+`package.json` and this file both sat frozen at 4.23.0 since the content-dq merge
+(2026-08-18) despite two substantial, separate bodies of work landing on `main` after
+it — the version-bump discipline visible throughout this file's own earlier history
+(patch bumps most sessions, minor bumps for real features) simply stopped being followed.
+Caught and corrected on direct request, not found proactively — worth being honest about
+that rather than implying otherwise. Major, not minor: the combined scope (a full UI/UX
+pass touching nearly every screen, plus a live-bug-fixing pass that changed real user-
+facing behavior in Simulasi, Belajar, and Saya) is a bigger jump than this project's own
+historical minor-bump threshold.
+
+### Stream 1 — `feat/ui-overhaul`, merged 2026-08-26 (fast-forward, no merge commit)
+
+61 items total across two plans (38 items 2026-08-25, then 23 more items 43–65
+2026-08-25/26), full detail in `docs/archive/HANDOFF-ui-overhaul-38-items.md` and
+`_MAP.md`'s session log — summarized here, not repeated in full:
+
+- **Furigana/ruby consistency**: true `<ruby>` markup replacing detached reading rows in
+  `ReviewMode`, furigana policy enforcement across ~20 rendering surfaces, `QuizAnnouncer`
+  screen-reader support.
+- **Visual/interaction polish**: swipe gestures, `ResultScreen` adopted by 6 previously
+  hand-rolled modes, shared `QUIZ_COUNTS` constant (fixed a persistence bug in the
+  process), animations, A-Z bar tap targets.
+- **Performance/offline**: self-hosted subsetted fonts (92% size reduction vs. naive
+  self-hosting), manifest-driven `PRECACHE_URLS` (was 2 hand-written entries; now
+  generated from Vite's real build manifest — 38 entries, the 3 highest-traffic modes'
+  full dependency chains plus the shell).
+- **Exam-readiness estimate, weak-category drilling, per-question timing, typed-answer
+  diff display** — approved enhancements shipped as part of the 43–65 plan.
+- 600/600 tests at merge time (up from 546 at the start of the 38-item plan).
+
+### Stream 2 — 2026-08-27/28, live-bug-fixing sessions (this file's most recent work)
+
+Two consecutive days, one continuous set of conversations, triggered by the owner
+testing the just-merged `feat/ui-overhaul` build directly on-device. Full evidence per
+fix in `_MAP.md`'s 2026-08-27 and 2026-08-28 rows and `HANDOFF.md`'s CURRENT STATE —
+summarized here:
+
+**Ruby/furigana — a second pass, systemic this time.** The 38-item plan's furigana work
+fixed the rendering *mechanism*; this pass found the mechanism was still only wired up in
+a fraction of the places that needed it. `parseRubyFragments` didn't handle particle/
+number-interrupted phrases (`安全確認の8項目` and ~250 similar) correctly — fixed at the
+code level (handles the whole class, not just known cases) and for 35 data entries
+verified with high confidence (`docs/RUBY_MISMATCH_AUDIT.md` tracks the 210 that weren't
+confident enough to auto-fix). `DescBlock` — a component that already correctly rendered
+ruby in structured text — turned out to be adopted in exactly one place
+(`FlashcardMode/FlipCard.jsx`); adopted in the 6 other modes that needed it
+(`ReviewMode`, `GlossaryMode`, `ProductionMode` ×2, `QuizProduksiMode`, `SumberMode`).
+`QuizShell` and `ResultScreen` — both shared across most of the app's quiz-style modes —
+had the same raw-render gap in their hint/explanation/answer-review fields, fixed once
+at the shared-component level rather than per-mode. A second, more systematic audit pass
+(triggered by the owner asking directly whether the first pass was actually thorough — it
+wasn't, and that was the honest answer given at the time) found more gaps a field-name
+search alone couldn't: `AngkaMode`'s `item.soal`, `subtitle` on Wayground/JAC Mockup sets,
+the Saya tab's daily-challenge feature (traced to `daily-challenge.js` building its own
+question shape independently of every other already-fixed path), a `StatsMode`
+truncation that could cut a ruby marker in half mid-string, and `ErrorBoundary`'s
+old-WebView flashcard fallback. Verified via Playwright across all 21 modes with data
+seeded to trigger review/detail paths, not just unit tests.
+
+**Bug reports, root-caused against real code rather than assumed:**
+
+- **Praktik Set** (10 sets) was being counted into "Kosakata · Vocab Drill" — moved into
+  "Soal Teknis" (`WaygroundMode`), which surfaced a second bug in the same file: 12 "JAC
+  Mockup" sets (300 questions) were counted in that screen's own header total but
+  unreachable from any group list, since the group-matching prefixes hadn't been updated
+  when those set ids were renamed in an earlier session.
+- **Sprint** had no way to exit or pause mid-round — added both, with the pause overlay
+  itself offering an exit path rather than being a separate, disconnected control.
+- **Fokus** showed a green checkmark next to 0% mastery — not a data bug; a "drilled this
+  session" indicator and actual mastery percentage are intentionally independent signals
+  that happened to share a color, read as contradictory. Recolored, not restructured.
+- **`BelajarTab`'s compact-tile grid** was never actually rendering 2 columns on any
+  phone, despite the code's own comment saying that was the design — root cause needed
+  Playwright to find: `repeat(auto-fit, minmax(min, max))` picks column count from `max`
+  when `max` is a fixed length, not `min`, the opposite of what the fix's first attempt
+  assumed. Same root mechanic (the reverse case — `min` governing count when `max` is
+  `1fr`) caused a second, more severe bug found afterward: `SayaTab`'s settings/stats grid
+  had a 400px minimum column width wider than this app's entire mobile content column,
+  which doesn't just fail to add a column the way `BelajarTab`'s did — it's a hard floor,
+  so every section on the Saya tab was forced 52px wider than the viewport, needing a
+  manual pinch-zoom to use. `docs/LAYOUT_SPEC.md`'s Variant A/B guidance corrected both
+  times so this mechanic doesn't get relearned the hard way a third time.
+- **Simulasi restructured** at the owner's request into two explicit question sources
+  instead of one undifferentiated 1075-question pool: "Teori & Praktik" (Wayground + JAC
+  Mockup, sampled at a fixed 60/40 teori/praktik ratio — 30+20 for the full exam, scaling
+  to 9+6 and 15+10 for smaller presets) and "JAC Official" (its own real internal
+  structure — 2 teori sets, 2 praktik sets, sizes genuinely uneven — discovered mid-
+  conversation after an initial wrong claim that no such structure existed, corrected
+  once the owner pushed back with specifics). Every start resamples fresh rather than
+  drawing from a fixed set.
+- **Belajar tab reworked into an accordion** — featured card per section always visible,
+  secondary items collapse per section (agreed via Visualizer mockups before
+  implementation, not built sight-unseen). Verified via Playwright that every section
+  collapsed now fits the whole tab in a single screen with zero scrolling, down from a
+  multi-screen scroll before.
+
+617 → 632 tests across this stream (605 at the start of 2026-08-27, +7 net through the
+day, +5 more for the accordion) — exact progression per-commit in `_MAP.md`, not
+restated here.
+
+### Known follow-up work, not done here
+
+- `docs/RUBY_MISMATCH_AUDIT.md`: 210 ruby entries flagged but not auto-fixed with
+  confidence — needs a human who can verify actual Japanese readings.
+- 94 question-text entries carry a redundant mixed annotation style (proper `《》` ruby
+  markers duplicated by adjacent plain-paren readings) in `wayground-sets.js` — confirmed
+  **not** an active rendering bug (`stripFuri`'s existing handling already absorbs it
+  safely wherever it's actually used), but a content-authoring cleanliness item worth a
+  future pass. Found incidentally while investigating the `SayaTab` overflow above; that
+  bug turned out to be unrelated (a pure CSS grid issue).
+
 ## [4.23.0] - 2026-08-18
 
 ### merge(content-dq→main): branch merge — 3.5 months of content-quality work + Doboku/Kenchiku removal + furi→ruby migration
