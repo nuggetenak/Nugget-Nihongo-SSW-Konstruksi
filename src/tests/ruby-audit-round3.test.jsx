@@ -67,19 +67,6 @@ const KNOWN_UNRENDERABLE_SUBSTRINGS = [
   '《衛生管理》',
   '《ヒューマンエラー》',
   '《 》', // cloze fill-in-the-blank
-  // The rest of this list is real content-data defects the full sweep
-  // surfaced, not rendering bugs: readings that are incomplete, mashed
-  // together from more than one term, or wrapped in 《》 as a parenthetical
-  // aside rather than a reading at all. Every one of these already fell
-  // back to raw text before this fix too (verified: the old strict
-  // kanji-only regex doesn't touch any of them either, since none has kanji
-  // directly against the marker) -- listed explicitly rather than silently
-  // passed so this sweep documents them for a future content-data pass
-  // instead of hiding them. See docs/RUBY_MISMATCH_AUDIT.md.
-  '打設する《だせつ》', // reading is missing する's own kana
-  '丸のこ《まるのこきっくばっく》', // reading appends an unrelated hazard term
-  '突き固める《つきかため》', // reading is missing its trailing る
-  '左官仕上げ《さかんしあげとぎだしあらいだし》', // reading concatenates 3 technique names
 ];
 
 describe('renderJPWithRuby — full-corpus sweep against the real fix', () => {
@@ -140,5 +127,50 @@ describe('renderJPWithRuby — full-corpus sweep against the real fix', () => {
     expect(soHtml).toContain('よんそう');
     expect(soHtml).toContain('層<rp>'); // 層 is the last character of some ruby's base
     expect(soHtml).not.toMatch(/《.*》/);
+  });
+
+  // docs/UI_UX_PLAN.md item 66: the 4 remaining content-data defects this
+  // sweep's own allowlist had been carrying, fixed at the source
+  // (src/data/source/cards-common.js) rather than left as known-acceptable.
+  // Each fix was cross-checked against that same card's own desc/usage
+  // field, which in 2 of the 4 cases already had the correct form sitting
+  // right there.
+  it('the 4 item-66 content-data fixes render correctly', () => {
+    // 打設《だせつ》する -- marker moved before する (okurigana), matching
+    // how this card's own usage field already wrote it.
+    const dasetsu = [...ALL_STRINGS].find((t) => t.includes('打設'));
+    expect(dasetsu).toBeTruthy();
+    const dasetsuHtml = renderToStaticMarkup(renderJPWithRuby(dasetsu));
+    expect(dasetsuHtml).toContain('だせつ');
+    expect(dasetsuHtml).not.toMatch(/《.*》/);
+
+    // 丸のこ《まるのこ》 -- reading truncated, no longer carrying the
+    // unrelated hazard term (キックバック) appended from this card's desc.
+    const marunoko = [...ALL_STRINGS].find((t) => t.includes('丸のこ'));
+    expect(marunoko).toBeTruthy();
+    const marunokoHtml = renderToStaticMarkup(renderJPWithRuby(marunoko));
+    expect(marunokoHtml).toContain('まる');
+    expect(marunokoHtml).not.toContain('きっくばっく');
+    expect(marunokoHtml).not.toMatch(/《.*》/);
+
+    // 突き固める《つきかためる》 -- reading completed with its own missing
+    // trailing る, letting the existing implausible-fold correctly cover
+    // 突き固 as the ruby base with める as trailing plain text.
+    const tsukikatame = [...ALL_STRINGS].find((t) => t.includes('突き固める'));
+    expect(tsukikatame).toBeTruthy();
+    const tsukikatameHtml = renderToStaticMarkup(renderJPWithRuby(tsukikatame));
+    expect(tsukikatameHtml).toContain('つきかた');
+    expect(tsukikatameHtml).toContain('固<rp>'); // 固 is the last kanji of the ruby base
+    expect(tsukikatameHtml).toContain('める（'); // trailing okurigana renders as plain text
+    expect(tsukikatameHtml).not.toMatch(/《.*》/);
+
+    // 左官仕上げ《さかんしあげ》 -- reading truncated, no longer carrying
+    // two unrelated technique names (研ぎ出し/洗い出し) appended from desc.
+    const sakan = [...ALL_STRINGS].find((t) => t.includes('左官仕上げ《さかんしあげ》'));
+    expect(sakan).toBeTruthy();
+    const sakanHtml = renderToStaticMarkup(renderJPWithRuby(sakan));
+    expect(sakanHtml).toContain('さかんしあ');
+    expect(sakanHtml).not.toContain('とぎだし');
+    expect(sakanHtml).not.toMatch(/《.*》/);
   });
 });
