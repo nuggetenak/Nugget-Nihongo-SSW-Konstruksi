@@ -681,13 +681,22 @@ the way (not stretching, but the same "checked live, not assumed" spirit): title
 rows breaking at narrow widths in ConfusionMode, AngkaMode, DangerMode — see commits `7a73d95`,
 `62484f7`. No further "stretching with dead space" cases found.
 
-### ☐ 68. Remaining off-scale hardcoded font-sizes — `M`
-Not picked up this round — still real, still open, deliberately deprioritized rather than
-forgotten. Every other item in this round had a clear, evidence-backed "this is wrong" signal
-before it got a fix (a screenshot, a DOM measurement, a cross-referenced sibling field); this
-item's own framing from when it was written is "most of these are probably fine as-is," i.e. it
-needs the item-by-item comparison work done *before* it can say which few actually need
-changing, not a fix waiting to be applied. Worth doing with a fresh session's full budget rather
-than a low-confidence pass squeezed in at the end of this one.
+### ☑ 68. Remaining off-scale hardcoded font-sizes — `M`
+**Picked up 2026-09-01, pivoted to something more consequential.** Checked several candidates
+against comparable elements the way the pageTitle/ratingEmoji fixes worked (e.g. ReviewMode's
+`flipIdText` vs FlashcardMode's `backId`) — found genuine differences, but consistently
+multi-property ones (size *and* weight *and* color together) consistent with deliberate
+adaptation to different visual contexts, not the single-property, context-independent mismatch
+`ratingEmoji` was. Left those as-is rather than force a match without real evidence.
+
+While doing that comparison work, found something bigger: 41 of the shared `modes.module.css`'s
+67 rules (61%) were completely dead — zero `.jsx` references anywhere, from entire modes having
+moved to their own dedicated CSS module over this app's history without the old shared rules
+ever being cleaned up. Removed all 41, verified thoroughly (recursive cross-file search, not
+just `src/modes/*.jsx`; caught and corrected one of its own false positives along the way; full
+21-mode screenshot sweep before/after, pixel-identical). Commit `6353ff7` has the full account,
+including an honest note on a one-off phantom-session screenshot during re-verification that
+didn't reproduce across two more full-sequence runs with direct session-data inspection —
+concluded likely Playwright timing variance, not a new bug, recorded rather than hidden.
 
 ---

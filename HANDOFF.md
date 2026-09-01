@@ -59,8 +59,16 @@ this point — this line doesn't update itself.
     collapsed at the source. Item 67 — re-checked the 4 `default`-width modes against real
     content (not empty states) and confirmed SumberMode/SearchMode's single-column layout is
     already using its width correctly (wrapping description text, progress bars) rather than
-    stretching with dead space; nothing further to fix there. Item 68 left open on purpose — see
-    the plan doc's own note on why. Commits `c1cdbea`, `b12219f`.
+    stretching with dead space; nothing further to fix there. Commits `c1cdbea`, `b12219f`.
+  - **Item 68 also picked up, same "continue" — pivoted to something bigger than font-sizes**:
+    comparing candidate font-sizes against equivalent elements (same method as pageTitle/
+    ratingEmoji) surfaced 41 dead rules in the shared `modes.module.css` (61% of the file) —
+    whole sections left behind by modes that moved to their own dedicated CSS module over time.
+    Removed, thoroughly verified (recursive cross-file check, not just `src/modes/*.jsx`; caught
+    and corrected its own false positive along the way; full 21-mode screenshot sweep before/
+    after). Commit `6353ff7` — also has an honest note on a one-off screenshot artifact during
+    re-verification that didn't reproduce on retest (likely Playwright timing, not a real
+    regression — investigated properly rather than assumed either way).
 
 - **2026-08-31: exhaustive UI/UX/typography audit** (new agent chat, owner provided repo+token
   directly, explicit blanket approval up front: "consider everything is approved," full token

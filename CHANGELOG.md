@@ -1,4 +1,32 @@
-## [5.4.0] - 2026-09-01
+## [5.5.0] - 2026-09-01
+
+### Item 68 picked up too -- pivoted from font-sizes to a bigger dead-code finding
+
+Same session, continued once more. Comparing candidate font-sizes against equivalent elements
+elsewhere (the same method that confirmed the earlier pageTitle/ratingEmoji fixes) surfaced
+something more consequential than the font-sizes themselves: 41 of the shared `modes.module.css`
+file's 67 rules -- 61% of it -- had zero references anywhere in the app. Whole sections had gone
+dead wholesale (Stats mode, Review mode, Export mode, Sprint/angka, Simulasi/danger shared,
+Wayground, Sipil/Bangunan/JAC shared, Sumber mode, nearly all of Flashcard-specific, all of
+Glossary/vocab list items) from the same pattern repeated across this app's history: a mode
+moves to its own dedicated CSS module, and the shared rules it used to lean on are never removed.
+
+Removed all 41, verified carefully: a recursive cross-file search rather than just
+`src/modes/*.jsx` (which would have missed subdirectory components), a self-caught false positive
+along the way (a non-word-boundary match that mistook an unrelated inline animation name for a
+live class reference), and a full 21-mode screenshot sweep at both viewports before and after,
+confirming nothing visually changed anywhere the removed rules used to apply.
+
+The font-size comparisons themselves mostly weren't actionable on inspection -- differences found
+(e.g. ReviewMode's flipIdText vs FlashcardMode's backId) were consistently multi-property
+(size+weight+color together), consistent with deliberate adaptation to different visual
+treatments rather than an accidental single-property mismatch. Left as-is rather than forced to
+match without real evidence.
+
+652/652 tests (re-run 3x for confidence, given a one-off screenshot artifact investigated during
+this round that didn't reproduce on retest), lint clean, build clean.
+
+
 
 ### Closing out the leftover items -- owner said "yes please" to picking them back up
 
