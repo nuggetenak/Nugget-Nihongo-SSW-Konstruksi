@@ -112,7 +112,7 @@ function PanelView({
         </div>
         <button
           className={S.btnPrimary}
-          style={{ padding: '10px 18px', fontSize: 13 }}
+          style={{ width: 'auto', padding: '10px 18px', fontSize: 13 }}
           onClick={onStartQuiz}
         >
           🧠 Kuis

@@ -60,6 +60,13 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
 
   useEffect(() => {
     if (!done || !queue) return;
+    // Nothing was actually reviewed -- the queue was empty before the user
+    // did anything, not emptied by finishing it. The render path below
+    // already treats this differently (EmptyState.NoReviews, not the
+    // "session complete" screen); recording a session here would silently
+    // disagree with that, logging a 0/0 session just from opening the tab
+    // with nothing due -- a very common state, not an edge case.
+    if (queue.length === 0) return;
     onSessionEnd?.({ correct: sessionCorrect, total: queue.length, durationMs: getDurationMs() });
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 

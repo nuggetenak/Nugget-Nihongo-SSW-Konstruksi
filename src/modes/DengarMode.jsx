@@ -162,13 +162,12 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           ← Kembali
         </button>
         <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 28, marginBottom: 4 }}>🎧</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--ssw-textBright)' }}>
-            Mode Dengarkan
-          </div>
-          <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)', marginTop: 4 }}>
+          <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
+            🎧 Mode Dengarkan
+          </h2>
+          <p className={S.pageSub} style={{ marginBottom: 0 }}>
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
-          </div>
+          </p>
           {!hasAudio && (
             <div
               style={{
