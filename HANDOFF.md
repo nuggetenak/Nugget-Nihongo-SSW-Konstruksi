@@ -52,6 +52,15 @@ this point — this line doesn't update itself.
   made ConfusionMode's case dramatically worse — caught from a screenshot before keeping it,
   reverted, fixed properly. Every fix in this round was screenshotted before *and* after, not
   trusted from reading the code. Commits `7a73d95`, `62484f7`.
+  - **Same-day follow-up, owner said "yes please" to picking up the leftover items**: closed
+    `docs/UI_UX_PLAN.md` items 66 and 67. Item 66 — the 4 remaining content-data defects, each
+    fixed by cross-checking against that same card's own desc/usage field (2 of 4 already had
+    the correct form sitting right there), plus the 79-occurrence duplicated-marker pattern
+    collapsed at the source. Item 67 — re-checked the 4 `default`-width modes against real
+    content (not empty states) and confirmed SumberMode/SearchMode's single-column layout is
+    already using its width correctly (wrapping description text, progress bars) rather than
+    stretching with dead space; nothing further to fix there. Item 68 left open on purpose — see
+    the plan doc's own note on why. Commits `c1cdbea`, `b12219f`.
 
 - **2026-08-31: exhaustive UI/UX/typography audit** (new agent chat, owner provided repo+token
   directly, explicit blanket approval up front: "consider everything is approved," full token

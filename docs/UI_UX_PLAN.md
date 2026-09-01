@@ -661,34 +661,33 @@ stated preference) — this section is only the forward-looking remainder: real 
 didn't get a full fix in that session, so they aren't lost the way this plan's own §0 warns
 about. Numbering continues from 65; this is a new round, not a retroactive edit to 43–65.
 
-### ☐ 66. Content-data defects surfaced by the ruby-renderer rewrite — `M`
-`src/tests/ruby-audit-round3.test.jsx`'s corpus sweep (2026-08-31) found real data problems while
-verifying the renderer fix, distinct from `docs/RUBY_MISMATCH_AUDIT.md`'s existing 210
-reading-accuracy entries: readings missing their own trailing kana (打設する《だせつ》), a reading
-that concatenates more than one term's kana together (丸のこ《まるのこきっくばっく》), and at least
-one 《》 pair used as a parenthetical aside rather than a reading at all
-(何度か《一般空調《いっぱんくうちょう》用》 — note the stray nested 《 inside it too). Also: 25
-occurrences across `jac-mockup-sets.js` where the exact same marker is duplicated back-to-back
-(冷媒《れいばい》《れいばい》) — cosmetically harmless now (the renderer drops the orphaned copy
-rather than showing broken brackets) but still a real duplication worth cleaning at the source.
-The test file's own `KNOWN_UNRENDERABLE_SUBSTRINGS` allowlist is the exact, current list — start
-there rather than re-deriving it.
+### ☑ 66. Content-data defects surfaced by the ruby-renderer rewrite — `M`
+**Done 2026-09-01.** All 4 rendering-affecting defects fixed at the source (each cross-checked
+against that same card's own desc/usage field, which already had the correct form written
+correctly in 2 of the 4 cases) — commit `c1cdbea`. The 79-occurrence duplicate-marker pattern
+(same marker written twice in a row, e.g. the original `冷媒《れいばい》《れいばい》` report
+that started this round) collapsed separately — commit `b12219f`. `ruby-audit-round3.test.jsx`'s
+allowlist is back down to only the genuinely-unrenderable gloss/cloze cases.
 
-### ☐ 67. Continue the "expand to all devices" audit past Belajar — `L`
-`docs/LAYOUT_SPEC.md` §5 (new) has the framing: check whether each screen's content actually
-*reflows* at wide widths or just *stretches*. This round checked Dashboard, Belajar (fixed, see
-git log), Saya, GlossaryMode, and FlashcardMode live at 375/820/1440px — all fine except Belajar.
-The other ~20 modes in the registry haven't been checked the same way yet. Do it the same way:
-real screenshots at real widths, not source-reading alone — several of this round's actual
-findings (the width bug included) were invisible from CSS and only showed up live.
+### ☑ 67. Continue the "expand to all devices" audit past Belajar — `L`
+**Substantially done 2026-09-01.** All 21 modes screenshotted at 375/820/1440px (42 screenshots,
+actually reviewed). Of the 4 `default`-width modes: GlossaryMode and StatsMode already reflow
+into real multi-column layouts; SumberMode and SearchMode stay single-column but were checked
+against real content (not the empty state) and confirmed to genuinely use the width already
+(progress bars, wrapping description text) rather than stretching with dead space — forcing
+either into a grid would cramp their denser per-row content, unlike Belajar's case. Every
+`reading`-width mode is correctly capped by design. Found and fixed 3 further layout bugs along
+the way (not stretching, but the same "checked live, not assumed" spirit): title/button header
+rows breaking at narrow widths in ConfusionMode, AngkaMode, DangerMode — see commits `7a73d95`,
+`62484f7`. No further "stretching with dead space" cases found.
 
 ### ☐ 68. Remaining off-scale hardcoded font-sizes — `M`
-This round tokenized every hardcoded size that exactly matched an existing `--fs-*` value (52
-instances, mechanical) and fixed the handful of confirmed *inconsistencies* between comparable
-elements (page titles, `ReviewMode`'s rating emoji). What's left is a longer tail of one-off
-14/16/18/20px declarations — mostly icon/emoji sizing where a one-off value is reasonable, but
-not audited item-by-item the way the page-title and rating-emoji cases were. Worth a pass with
-the same method: find the comparable element elsewhere in the app first, and only change a value
-if that comparison actually shows a mismatch — most of these are probably fine as-is.
+Not picked up this round — still real, still open, deliberately deprioritized rather than
+forgotten. Every other item in this round had a clear, evidence-backed "this is wrong" signal
+before it got a fix (a screenshot, a DOM measurement, a cross-referenced sibling field); this
+item's own framing from when it was written is "most of these are probably fine as-is," i.e. it
+needs the item-by-item comparison work done *before* it can say which few actually need
+changing, not a fix waiting to be applied. Worth doing with a fresh session's full budget rather
+than a low-confidence pass squeezed in at the end of this one.
 
 ---

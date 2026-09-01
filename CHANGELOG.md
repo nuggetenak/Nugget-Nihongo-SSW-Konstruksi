@@ -1,4 +1,34 @@
-## [5.3.0] - 2026-09-01
+## [5.4.0] - 2026-09-01
+
+### Closing out the leftover items -- owner said "yes please" to picking them back up
+
+Same session as 5.3.0, continued. Closed both remaining items from `docs/UI_UX_PLAN.md` §11.
+
+**Item 66 (content-data defects), fully closed.** The 4 remaining rendering-affecting readings
+fixed at the source, each cross-checked against that same card's own desc/usage field first (2
+of the 4 already had the correct form written correctly elsewhere in the same card, which is
+what made the wrong one identifiable as wrong): 打設する《だせつ》 (marker repositioned before
+the okurigana), 丸のこ《まるのこきっくばっく》 (unrelated hazard term trimmed off the reading),
+突き固める《つきかため》 (reading completed with its own missing trailing る), 左官仕上げ
+《さかんしあげとぎだしあらいだし》 (two unrelated technique names trimmed off). Also collapsed
+the 79-occurrence duplicated-marker pattern in jac-mockup-sets.js (the exact same marker written
+twice in a row, e.g. the original 冷媒《れいばい》《れいばい》 report that started this whole
+thread) -- cosmetically harmless as of the round-4 rewrite, but real duplication worth cleaning
+rather than leaving for the renderer to quietly paper over indefinitely.
+
+**Item 67 (expand-to-all-devices audit), substantially closed.** Re-checked the 4 `default`-width
+modes against real content rather than empty states -- SumberMode and SearchMode's single-column
+layout confirmed to already use its width correctly (wrapping description text, progress bars),
+not stretching with dead space the way Belajar's case was. No further stretching bugs found
+across the full 21-mode registry.
+
+Item 68 (remaining off-scale font-sizes) left open deliberately -- its own framing needs
+item-by-item comparison work before it can say which few values actually need changing, better
+suited to a fresh session's full budget than a low-confidence pass at the end of this one.
+
+652/652 tests, lint clean, build clean.
+
+
 
 ### "Polish the UI & UX, overhaul anything" -- owner gave full latitude, audited systematically
 
