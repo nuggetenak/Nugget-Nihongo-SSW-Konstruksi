@@ -1,3 +1,33 @@
+## [5.3.0] - 2026-09-01
+
+### "Polish the UI & UX, overhaul anything" -- owner gave full latitude, audited systematically
+
+Same session as 5.2.0, continued into the next calendar day. Screenshotted all 21 modes at
+mobile and desktop (42 screenshots) rather than guessing at what might need polish.
+
+**ReviewMode was logging a phantom session.** Not a visual bug -- opening "Ulasan SRS" with
+zero cards due silently recorded a 0/0 session, inflating streak/weekly-stats/daily-mission
+bookkeeping just from opening the tab. Found while investigating what looked like a broken
+bar chart in Statistik; the chart was rendering correctly the entire time, the session data
+feeding it wasn't. Fixed at the source: the recording effect now requires a genuinely
+non-empty queue, matching the condition the render path (EmptyState.NoReviews) already used.
+
+**DengarMode's settings-screen heading** didn't match the shared styling convention every
+other mode's equivalent screen uses (SprintMode, ProductionMode, FocusMode) -- hand-rolled
+inline styles rendered in the wrong font family and a visibly lighter weight. Fixed to match.
+
+**Three modes' title-and-button header rows broke at narrow widths**: ConfusionMode's title
+wrapped to two lines, AngkaMode's title was actually overlapped by its own button, DangerMode's
+title wrapped. Root cause: a shared button style meant for standalone full-width buttons,
+reused in a row context where it only stayed compact by accident. Fixed with the appropriate
+technique per case (auto-width override for the single-button case; wrap-and-reflow for the
+two-button case) -- and worth noting honestly: the first fix attempted on ConfusionMode made
+it substantially worse before the real cause was found, caught by screenshot rather than
+shipped. Every fix in this round was verified with real before/after screenshots at both
+viewports, not assumed correct from source alone.
+
+651/651 tests (3 new), lint clean, build clean.
+
 ## [5.2.0] - 2026-08-31
 
 ### Owner tested v5.1.0 live, found real gaps -- same-day follow-up

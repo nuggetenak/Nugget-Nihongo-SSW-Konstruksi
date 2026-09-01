@@ -34,8 +34,24 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-08-31.** Verify before trusting past this point — this line doesn't
-update itself.
+**As of this edit, 2026-09-01 (same conversation as 2026-08-31 above, date rolled over
+mid-session — same pattern as 2026-08-27→08-28 further below).** Verify before trusting past
+this point — this line doesn't update itself.
+
+- **2026-09-01: "polish the UI & UX, overhaul anything."** Screenshotted all 21 modes at
+  mobile (390px) and desktop (1440px) — 42 screenshots, actually reviewed, not assumed clean.
+  Found and fixed: **ReviewMode was logging a phantom 0/0 session** just from opening the tab
+  with nothing due (data-integrity bug, not visual — silently inflated streak/stats; found
+  while chasing what looked like a broken Statistik chart, which turned out to be rendering
+  correctly the whole time); **DengarMode's intro heading** used hand-rolled inline styles
+  instead of the shared `pageTitle` convention every other mode's equivalent screen uses;
+  **three modes' title-next-to-button header rows broke** at narrow widths (ConfusionMode
+  wrapped to two lines, AngkaMode's button actually overlapped and covered part of the title,
+  DangerMode wrapped) — root cause was a shared button class with `width: 100%` baked in for a
+  different context. Worth flagging: the first attempted fix (flex:1 on the title wrapper)
+  made ConfusionMode's case dramatically worse — caught from a screenshot before keeping it,
+  reverted, fixed properly. Every fix in this round was screenshotted before *and* after, not
+  trusted from reading the code. Commits `7a73d95`, `62484f7`.
 
 - **2026-08-31: exhaustive UI/UX/typography audit** (new agent chat, owner provided repo+token
   directly, explicit blanket approval up front: "consider everything is approved," full token
