@@ -15,7 +15,7 @@ export const JAC_MOCKUP_SETS = [
     questions: [
       {
         id: 1,
-        q: '保温《ほおん》工事《こうじ》《こうじ》で「シーラント」の役割《やくわり》は？',
+        q: '保温《ほおん》工事《こうじ》で「シーラント」の役割《やくわり》は？',
         hint: 'Peran sealant pada pekerjaan insulasi adalah?',
         opts: [
           '継手部《つぎてぶ》の気密性《きみつせい》を確保《かくほ》する',
@@ -34,7 +34,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の「インサート継手《つぎて》」の特徴《とくちょう》は？',
+        q: '冷媒《れいばい》配管《はいかん》の「インサート継手《つぎて》」の特徴《とくちょう》は？',
         hint: 'Ciri insert joint pada pipa refrigerant adalah?',
         opts: ['挿入して圧着', '溶接不要', 'ねじ式', 'フランジ式'],
         opts_id: ['Dimasukkan lalu dikrim', 'Tanpa las', 'Ulir', 'Flange'],
@@ -66,7 +66,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 5,
-        q: '配管《はいかん》《はいかん》支持具《しじぐ》の間隔《かんかく》は管径《かんけい》によりどう決《き》めるか。',
+        q: '配管《はいかん》支持具《しじぐ》の間隔《かんかく》は管径《かんけい》によりどう決《き》めるか。',
         hint: 'Jarak hanger pipa ditentukan berdasarkan?',
         opts: ['5m固定', '毎10m固定', '管径により1〜3m間隔', '任意'],
         opts_id: ['5m tetap', 'Setiap 10m tetap', '1-3m tergantung diameter', 'Bebas'],
@@ -75,7 +75,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 6,
-        q: 'ポリエチレン管《かん》の接合《せつごう》方法《ほうほう》《ほうほう》として正《ただ》しいものは？',
+        q: 'ポリエチレン管《かん》の接合《せつごう》方法《ほうほう》として正《ただ》しいものは？',
         hint: 'Metode sambungan pipa polietilen yang benar adalah?',
         opts: ['EF接合', 'ろう付け', 'フレアー', 'ガス溶接'],
         opts_id: ['Electrofusion joint', 'Brazing', 'Flare', 'Gas welding'],
@@ -107,7 +107,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 9,
-        q: '配管《はいかん》《はいかん》の水圧試験《すいあつしけん》の目的《もくてき》は？',
+        q: '配管《はいかん》の水圧試験《すいあつしけん》の目的《もくてき》は？',
         hint: 'Tujuan water pressure test pada pipa adalah?',
         opts: ['色を確認する', '漏れを確認する', '強度を測る', '長さを測る'],
         opts_id: ['Mengecek warna', 'Mengecek kebocoran', 'Mengukur kekuatan', 'Mengukur panjang'],
@@ -135,7 +135,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 11,
-        q: '足場《あしば》《あしば》組立《くみたて》《くみたて》時の「水平器《すいへいき》」の使用目的《しようもくてき》は？',
+        q: '足場《あしば》組立《くみたて》時の「水平器《すいへいき》」の使用目的《しようもくてき》は？',
         hint: 'Tujuan penggunaan level saat merakit scaffold adalah?',
         opts: ['角度を測る', '垂直を測る', '水平を確保する', '長さを測る'],
         opts_id: ['Mengukur sudut', 'Mengukur vertikal', 'Menjamin horizontal', 'Mengukur panjang'],
@@ -144,7 +144,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 12,
-        q: '足場《あしば》《あしば》使用《しよう》《しよう》時の「点検簿《てんけんぼ》」の記入義務者《きにゅうぎむしゃ》は？',
+        q: '足場《あしば》使用《しよう》時の「点検簿《てんけんぼ》」の記入義務者《きにゅうぎむしゃ》は？',
         hint: 'Penanggung jawab pengisian buku inspeksi scaffold adalah?',
         opts: ['監督員のみ', '足場組立責任者', '下請けのみ', '作業員全員'],
         opts_id: [
@@ -158,7 +158,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 13,
-        q: '衛生器具《えいせいきぐ》設備《せつび》《せつび》工事《こうじ》《こうじ》で設置《せっち》する設備《せつび》は？',
+        q: '衛生器具《えいせいきぐ》設備《せつび》工事《こうじ》で設置《せっち》する設備《せつび》は？',
         hint: 'Peralatan yang dipasang dalam pekerjaan instalasi sanitary fixture adalah?',
         opts: ['ボイラー', '変電設備', '洗面器・便器', '冷却塔'],
         opts_id: ['Boiler', 'Substation', 'Wash basin & toilet', 'Cooling tower'],
@@ -176,7 +176,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 15,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の「リークテスト」方法《ほうほう》《ほうほう》の一つは？',
+        q: '冷媒《れいばい》配管《はいかん》の「リークテスト」方法《ほうほう》の一つは？',
         hint: 'Salah satu metode leak test pipa refrigerant adalah?',
         opts: ['石鹸水または電子検知器', '真空テスト', '圧力テストのみ', '目視だけ'],
         opts_id: [
@@ -190,7 +190,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 16,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の「フィルタードライヤー」の取《と》り付《つ》け方向《ほうこう》は？',
+        q: '冷媒《れいばい》配管《はいかん》の「フィルタードライヤー」の取《と》り付《つ》け方向《ほうこう》は？',
         hint: 'Arah pemasangan filter dryer pada pipa refrigerant adalah?',
         opts: ['矢印の方向に従う', '逆向き', '任意', '水平《すいへい》'],
         opts_id: ['Ikuti arah panah', 'Terbalik', 'Bebas', 'Horizontal'],
@@ -218,7 +218,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 18,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の「真空引《しんくうびき》き」作業《さぎょう》の目的《もくてき》は？',
+        q: '冷媒《れいばい》配管《はいかん》の「真空引《しんくうびき》き」作業《さぎょう》の目的《もくてき》は？',
         hint: 'Tujuan vacuum drawing pada pipa refrigerant adalah?',
         opts: ['水分と空気を除去する', '色を確認', '漏れを増やす', '圧力を上げる'],
         opts_id: [
@@ -241,7 +241,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 20,
-        q: '配管《はいかん》《はいかん》の「ティー継手《つぎて》」の用途《ようと》は？',
+        q: '配管《はいかん》の「ティー継手《つぎて》」の用途《ようと》は？',
         hint: 'Kegunaan tee joint pada pipa adalah?',
         opts: ['管を塞ぐ', '直径を変える', '管を曲げる', '管を直角に分岐させる'],
         opts_id: [
@@ -343,7 +343,7 @@ export const JAC_MOCKUP_SETS = [
           '休憩《きゅうけい》を取る',
           '危険《きけん》を予測《よそく》し、対策《たいさく》を立てる',
           '作業《さぎょう》を速く終わらせる',
-          '工具《こうぐ》《こうぐ》を片付《かたづ》ける',
+          '工具《こうぐ》を片付《かたづ》ける',
         ],
         opts_id: [
           'Beristirahat',
@@ -483,7 +483,7 @@ export const JAC_MOCKUP_SETS = [
           '建設《けんせつ》コストを削減《さくげん》する',
           '外国人労働者《がいこくじんろうどうしゃ》の数《かず》を制限《せいげん》する',
           '技能者《ぎのうしゃ》の就業履歴《しゅうぎょうりれき》と資格《しかく》を見える化《か》する',
-          '工事《こうじ》《こうじ》の工期《こうき》を短縮《たんしゅく》する',
+          '工事《こうじ》の工期《こうき》を短縮《たんしゅく》する',
         ],
         opts_id: [
           'Mengurangi biaya konstruksi',
@@ -502,7 +502,7 @@ export const JAC_MOCKUP_SETS = [
           '建物《たてもの》の基礎《きそ》コンクリート工事《こうじ》',
           '建物《たてもの》の外壁《がいへき》タイル工事《こうじ》',
           '施工中《せこうちゅう》に使用《しよう》する足場《あしば》の設置《せっち》',
-          '建物《たてもの》の屋根《やね》工事《こうじ》《こうじ》',
+          '建物《たてもの》の屋根《やね》工事《こうじ》',
         ],
         opts_id: [
           'Pekerjaan beton fondasi bangunan',
@@ -627,10 +627,10 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 26,
-        q: '建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》《したうけおいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
+        q: '建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
         hint: 'Penjelasan yang benar tentang subkontraktor (下請負業者《したうけおいぎょうしゃ》) dalam konstruksi adalah?',
         opts: [
-          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
+          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
           '主に設計図《せっけいず》を作成《さくせい》する業者《ぎょうしゃ》',
           '元請《もとうけ》から専門工事《せんもんこうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
           '工事現場《こうじげんば》の安全管理《あんぜんかんり》のみを担当《たんとう》する業者《ぎょうしゃ》',
@@ -728,7 +728,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '配管《はいかん》《はいかん》の「エアー試験《しけん》」の使用圧力基準《しようあつりょくきじゅん》は？',
+        q: '配管《はいかん》の「エアー試験《しけん》」の使用圧力基準《しようあつりょくきじゅん》は？',
         hint: 'Standar tekanan untuk air test (pneumatic test) pada pipa adalah?',
         opts: ['作業圧の1.1倍以下', '作業圧の0.5倍', '常圧', '真空《しんくう》'],
         opts_id: ['Maksimal 1.1× tekanan kerja', '0.5× tekanan kerja', 'Tekanan normal', 'Vakum'],
@@ -746,7 +746,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 4,
-        q: '足場《あしば》《あしば》解体時《かいたいじ》の「落下防止《らっかぼうし》ネット」の設置位置《せっちいち》は？',
+        q: '足場《あしば》解体時《かいたいじ》の「落下防止《らっかぼうし》ネット」の設置位置《せっちいち》は？',
         hint: 'Posisi pemasangan safety net saat pembongkaran scaffold adalah?',
         opts: ['任意', '足場上', '地面直上', '作業面から下方2m以内'],
         opts_id: [
@@ -787,7 +787,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 8,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の絶縁作業《ぜつえんさぎょう》で継手部《つぎてぶ》の処理《しょり》は？',
+        q: '冷媒《れいばい》配管《はいかん》の絶縁作業《ぜつえんさぎょう》で継手部《つぎてぶ》の処理《しょり》は？',
         hint: 'Cara menginsulasi sambungan pipa refrigerant adalah?',
         opts: ['テープで巻く', '放置する', '塗料を塗る', '溶接する'],
         opts_id: ['Dibungkus tape', 'Dibiarkan', 'Dicat', 'Dilas'],
@@ -819,7 +819,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 11,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の施工《せこう》で、銅管《どうかん》の接続《せつぞく》に最も一般的《いっぱんてき》な方法《ほうほう》は？',
+        q: '冷媒《れいばい》配管《はいかん》の施工《せこう》で、銅管《どうかん》の接続《せつぞく》に最も一般的《いっぱんてき》な方法《ほうほう》は？',
         hint: 'Metode paling umum untuk menyambung pipa tembaga refrigeran?',
         opts: ['ガムテープ', '接着剤', 'ろう付け《ブレージング》', 'ネジ止め'],
         opts_id: ['Lakban', 'Lem', 'Brazing', 'Ulir skrup'],
@@ -860,7 +860,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 15,
-        q: '配管《はいかん》《はいかん》の「エンドキャップ」の取《と》り外《はず》し時に注意《ちゅうい》することは？',
+        q: '配管《はいかん》の「エンドキャップ」の取《と》り外《はず》し時に注意《ちゅうい》することは？',
         hint: 'Hal yang diperhatikan saat melepas end cap pipa adalah?',
         opts: ['放置', '内部の異物混入を防ぐ', '切断', '力を強くかける'],
         opts_id: ['Dibiarkan', 'Mencegah masuknya benda asing', 'Memotong', 'Memberi tenaga kuat'],
@@ -869,7 +869,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 16,
-        q: '配管《はいかん》《はいかん》のオーバーレイ溶接前《ようせつまえ》に必要《ひつよう》な処理《しょり》は？',
+        q: '配管《はいかん》のオーバーレイ溶接前《ようせつまえ》に必要《ひつよう》な処理《しょり》は？',
         hint: 'Persiapan sebelum overlay welding pada pipa adalah?',
         opts: ['切断', '曲げ', '塗装', 'ベベル加工と清掃'],
         opts_id: ['Pemotongan', 'Pembengkokan', 'Pengecatan', 'Bevel + pembersihan'],
@@ -915,7 +915,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 20,
-        q: '配管《はいかん》《はいかん》の「フランジボルト」の締《し》め付《つ》け順序《じゅんじょ》は？',
+        q: '配管《はいかん》の「フランジボルト」の締《し》め付《つ》け順序《じゅんじょ》は？',
         hint: 'Urutan pengencangan flange bolt adalah?',
         opts: ['一方から順に', 'ランダム', '対角順《クロス締め》', '時計回り'],
         opts_id: [
@@ -968,9 +968,9 @@ export const JAC_MOCKUP_SETS = [
         hint: "Nilai konstruksi yang memerlukan 'izin konstruksi umum' (一般建設業許可) menurut Construction Business Act adalah?",
         opts: [
           '1件500万円以上《建築工事は1500万円以上》',
-          '1件《けん》100万円《まんえん》以上《いじょう》《いじょう》',
-          '1件《けん》1000万円《まんえん》以上《いじょう》《いじょう》',
-          '1件《けん》3000万円《まんえん》以上《いじょう》《いじょう》',
+          '1件《けん》100万円《まんえん》以上《いじょう》',
+          '1件《けん》1000万円《まんえん》以上《いじょう》',
+          '1件《けん》3000万円《まんえん》以上《いじょう》',
         ],
         opts_id: [
           '500 juta yen atau lebih per kontrak (konstruksi bangunan 1,5 milyar yen)',
@@ -1064,9 +1064,9 @@ export const JAC_MOCKUP_SETS = [
         q: '元請負業者《もとうけおいぎょうしゃ》の説明《せつめい》として正《ただ》しいものはどれか。',
         hint: 'Penjelasan yang benar tentang kontraktor utama (元請負業者) adalah?',
         opts: [
-          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
+          '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
           '元請負業者《もとうけおいぎょうしゃ》から仕事を受ける業者《ぎょうしゃ》',
-          '工事《こうじ》《こうじ》の設計《せっけい》のみを担当《たんとう》する業者《ぎょうしゃ》',
+          '工事《こうじ》の設計《せっけい》のみを担当《たんとう》する業者《ぎょうしゃ》',
           '工事現場《こうじげんば》の清掃《せいそう》を担当《たんとう》する業者《ぎょうしゃ》',
         ],
         opts_id: [
@@ -1097,10 +1097,10 @@ export const JAC_MOCKUP_SETS = [
         q: '建設工事《けんせつこうじ》で使われる「仕様書《しようしょ》」の役割《やくわり》として正《ただ》しいものはどれか。',
         hint: "Peran yang benar dari 'spesifikasi teknis' (仕様書/shiyōsho) dalam konstruksi adalah?",
         opts: [
-          '工事《こうじ》《こうじ》の費用《ひよう》を明細《めいさい》に示す',
+          '工事《こうじ》の費用《ひよう》を明細《めいさい》に示す',
           '作業員《さぎょういん》の名前《なまえ》を記録《きろく》する',
-          '使用《しよう》《しよう》する材料《ざいりょう》・工法《こうほう》・品質基準《ひんしつきじゅん》を定める',
-          '工事《こうじ》《こうじ》の工程表《こうていひょう》を作成《さくせい》する',
+          '使用《しよう》する材料《ざいりょう》・工法《こうほう》・品質基準《ひんしつきじゅん》を定める',
+          '工事《こうじ》の工程表《こうていひょう》を作成《さくせい》する',
         ],
         opts_id: [
           'Merinci biaya konstruksi',
@@ -1148,7 +1148,7 @@ export const JAC_MOCKUP_SETS = [
         q: '建設現場《けんせつげんば》で使用《しよう》する「レーザー墨出《すみだ》し器《き》」の主な用途《ようと》はどれか。',
         hint: "Kegunaan utama 'laser level' (レーザー墨出し器) yang digunakan di site konstruksi adalah?",
         opts: [
-          '配管《はいかん》《はいかん》を切断《せつだん》する',
+          '配管《はいかん》を切断《せつだん》する',
           '溶接《ようせつ》をする',
           '正確《せいかく》な水平《すいへい》・垂直基準線《すいちょくきじゅんせん》を照射《しょうしゃ》する',
           '材料《ざいりょう》の重《おも》さを測る',
@@ -1188,7 +1188,7 @@ export const JAC_MOCKUP_SETS = [
           '建物《たてもの》を横から見た図《ず》',
           '建物《たてもの》を上から見た水平断面図《すいへいだんめんず》',
           '建物《たてもの》の基礎《きそ》を示した図《ず》',
-          '配管《はいかん》《はいかん》の圧力《あつりょく》を示した図《ず》',
+          '配管《はいかん》の圧力《あつりょく》を示した図《ず》',
         ],
         opts_id: [
           'Gambar bangunan dilihat dari samping',
@@ -1201,7 +1201,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 21,
-        q: '5S活動《かつどう》の「安全《あんぜん》《あんぜん》」との関係《かんけい》は？',
+        q: '5S活動《かつどう》の「安全《あんぜん》」との関係《かんけい》は？',
         hint: 'Hubungan 5S dengan keselamatan adalah?',
         opts: ['整理整頓で事故を防ぐ', '躾だけ', '無関係', '清掃のみ'],
         opts_id: [
@@ -1232,10 +1232,10 @@ export const JAC_MOCKUP_SETS = [
         q: '建設現場《けんせつげんば》の「発注者《はっちゅうしゃ》」の役割《やくわり》として正《ただ》しいものはどれか。',
         hint: "Peran yang benar dari 'pemberi proyek' (発注者/hatchūsha) di konstruksi adalah?",
         opts: [
-          '工事《こうじ》《こうじ》を施工《せこう》する',
-          '工事《こうじ》《こうじ》の設計《せっけい》をする',
+          '工事《こうじ》を施工《せこう》する',
+          '工事《こうじ》の設計《せっけい》をする',
           '工事監理《こうじかんり》のみを行う',
-          '工事《こうじ》《こうじ》を依頼《いらい》し費用《ひよう》を支払う',
+          '工事《こうじ》を依頼《いらい》し費用《ひよう》を支払う',
         ],
         opts_id: [
           'Melaksanakan pekerjaan konstruksi',
@@ -1363,7 +1363,7 @@ export const JAC_MOCKUP_SETS = [
     questions: [
       {
         id: 1,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の「サイトグラス」の役割《やくわり》は？',
+        q: '冷媒《れいばい》配管《はいかん》の「サイトグラス」の役割《やくわり》は？',
         hint: 'Peran sight glass pada pipa refrigerant adalah?',
         opts: ['圧力を測る', '漏れ確認', '冷媒の流れと水分を確認', '温度を測る'],
         opts_id: [
@@ -1377,7 +1377,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の「オイルトラップ」の設置位置《せっちいち》は？',
+        q: '冷媒《れいばい》配管《はいかん》の「オイルトラップ」の設置位置《せっちいち》は？',
         hint: 'Posisi pemasangan oil trap pada pipa refrigerant adalah?',
         opts: ['垂直上昇部', '水平配管の最低部', '天井', '任意'],
         opts_id: [
@@ -1418,7 +1418,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 6,
-        q: '足場《あしば》《あしば》の組立《くみたて》時に使用《しよう》する主な安全器具《あんぜんきぐ》は？',
+        q: '足場《あしば》の組立《くみたて》時に使用《しよう》する主な安全器具《あんぜんきぐ》は？',
         hint: 'Alat keselamatan utama saat merakit scaffold adalah?',
         opts: ['手袋', 'フルハーネス', 'ヘルメットのみ', '安全帯《墜落防止》'],
         opts_id: ['Sarung tangan', 'Full harness', 'Hanya helm', 'Safety belt (fall protection)'],
@@ -1555,7 +1555,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 19,
-        q: '冷媒《れいばい》《れいばい》配管《はいかん》《はいかん》の圧力試験《あつりょくしけん》後に必要《ひつよう》な作業《さぎょう》は？',
+        q: '冷媒《れいばい》配管《はいかん》の圧力試験《あつりょくしけん》後に必要《ひつよう》な作業《さぎょう》は？',
         hint: 'Pekerjaan yang diperlukan setelah pressure test pipa refrigerant adalah?',
         opts: ['真空引き', '乾燥窒素パージ', '放置', '水抜きのみ'],
         opts_id: [
@@ -1679,7 +1679,7 @@ export const JAC_MOCKUP_SETS = [
           '断熱性能《だんねつせいのう》を高めるため',
           '騒音《そうおん》を防ぐため',
           '水漏《みずも》れを防ぐため',
-          '配管《はいかん》《はいかん》・ケーブルが防火区画《ぼうかくかく》を貫通《かんつう》する部分《ぶぶん》から火炎《かえん》・煙《けむり》が広がるのを防ぐため',
+          '配管《はいかん》・ケーブルが防火区画《ぼうかくかく》を貫通《かんつう》する部分《ぶぶん》から火炎《かえん》・煙《けむり》が広がるのを防ぐため',
         ],
         opts_id: [
           'Untuk meningkatkan performa insulasi termal',
@@ -1696,7 +1696,7 @@ export const JAC_MOCKUP_SETS = [
         hint: "Apa itu fenomena 'hubungan singkat' (短絡/tanraku) di site konstruksi?",
         opts: [
           '電気《でんき》が地面《じめん》に漏れる現象《げんしょう》',
-          '2本《ほん》以上《いじょう》《いじょう》の電線《でんせん》が負荷《ふか》を通さず接触《せっしょく》する現象《げんしょう》',
+          '2本《ほん》以上《いじょう》の電線《でんせん》が負荷《ふか》を通さず接触《せっしょく》する現象《げんしょう》',
           '電気《でんき》が切れる現象《げんしょう》',
           '電気《でんき》が人体《じんたい》を流れる現象《げんしょう》',
         ],
@@ -2026,7 +2026,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '配管《はいかん》《はいかん》の「フランジ面合《めんあ》わせ」の基準《きじゅん》は？',
+        q: '配管《はいかん》の「フランジ面合《めんあ》わせ」の基準《きじゅん》は？',
         hint: 'Standar alignment muka flange adalah?',
         opts: ['0.5mm以内の平行', '2mm以内', '任意', '1mm以内'],
         opts_id: ['Paralel maksimal 0.5mm', 'Maksimal 2mm', 'Bebas', 'Maksimal 1mm'],
@@ -2049,7 +2049,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 4,
-        q: '銅管《どうかん》の「フレアー加工《かこう》」工具《こうぐ》《こうぐ》の名前《なまえ》は？',
+        q: '銅管《どうかん》の「フレアー加工《かこう》」工具《こうぐ》の名前《なまえ》は？',
         hint: 'Nama alat untuk flare processing pipa tembaga adalah?',
         opts: ['フレアー工具', 'パイプレンチ', 'ねじ切機', 'パイプカッター'],
         opts_id: ['Flaring tool', 'Pipe wrench', 'Threading machine', 'Pipe cutter'],
@@ -2099,7 +2099,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 9,
-        q: '銅管《どうかん》の「キャップillary」継手《つぎて》《つぎて》のろう付《づ》け長《なが》さの目安《めやす》は？',
+        q: '銅管《どうかん》の「キャップillary」継手《つぎて》のろう付《づ》け長《なが》さの目安《めやす》は？',
         hint: 'Panjang brazing untuk capillary fitting pada pipa tembaga adalah?',
         opts: ['5mm', '管径の1.5倍程度', '10mm', '任意'],
         opts_id: ['5mm', 'Sekitar 1.5× diameter pipa', '10mm', 'Bebas'],
@@ -2135,7 +2135,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 13,
-        q: '配管《はいかん》《はいかん》の「水圧試験《すいあつしけん》」時の安全距離《あんぜんきょり》は？',
+        q: '配管《はいかん》の「水圧試験《すいあつしけん》」時の安全距離《あんぜんきょり》は？',
         hint: 'Jarak aman saat water pressure test pada pipa adalah?',
         opts: ['任意', '試験圧の1.5倍以上で作業員を退避', '5m', '1m'],
         opts_id: ['Bebas', 'Evakuasi pekerja minimal 1.5× tekanan uji', '5m', '1m'],
@@ -2199,7 +2199,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 19,
-        q: '配管《はいかん》《はいかん》の「仮支持《かりしじ》」の目的《もくてき》は？',
+        q: '配管《はいかん》の「仮支持《かりしじ》」の目的《もくてき》は？',
         hint: 'Tujuan temporary support pada pipa adalah?',
         opts: ['位置を保持し、応力を防ぐ', '切断', '最終固定', '曲げ'],
         opts_id: [
@@ -2373,7 +2373,7 @@ export const JAC_MOCKUP_SETS = [
         q: '作業開始前《さぎょうかいしまえ》の「リスクアセスメント」の目的《もくてき》は？',
         hint: 'Tujuan risk assessment sebelum mulai kerja adalah?',
         opts: [
-          '工具《こうぐ》《こうぐ》の数《かず》を数える',
+          '工具《こうぐ》の数《かず》を数える',
           '作業《さぎょう》を記録《きろく》する',
           '潜在的《せんざいてき》な危険《きけん》を事前《じぜん》に評価《ひょうか》',
           '休憩時間《きゅうけいじかん》を決める',
@@ -2596,10 +2596,10 @@ export const JAC_MOCKUP_SETS = [
         q: '建設現場の「ツールボックスミーティング《TBM》」とはどういうものか。',
         hint: "Apa itu 'Toolbox Meeting (TBM)' di site konstruksi?",
         opts: [
-          '工具《こうぐ》《こうぐ》の点検《てんけん》を行う会議《かいぎ》',
+          '工具《こうぐ》の点検《てんけん》を行う会議《かいぎ》',
           '作業開始前《さぎょうかいしまえ》に少人数《しょうにんずう》で行う安全確認《あんぜんかくにん》ミーティング',
           '月《がつ》《つき》1回《かい》行う安全委員会《あんぜんいいんかい》の会議《かいぎ》',
-          '工具《こうぐ》《こうぐ》の購入《こうにゅう》を決める会議《かいぎ》',
+          '工具《こうぐ》の購入《こうにゅう》を決める会議《かいぎ》',
         ],
         opts_id: [
           'Rapat untuk memeriksa peralatan',
@@ -2640,7 +2640,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 30,
-        q: '足場《あしば》《あしば》解体時《かいたいじ》の安全確認《あんぜんかくにん》で重要《じゅうよう》なことは？',
+        q: '足場《あしば》解体時《かいたいじ》の安全確認《あんぜんかくにん》で重要《じゅうよう》なことは？',
         hint: 'Hal penting saat konfirmasi keselamatan pembongkaran scaffold adalah?',
         opts: ['休憩', '写真撮影', '部材の落下防止と順序確認', '工具の数だけ確認'],
         opts_id: [
@@ -2666,7 +2666,7 @@ export const JAC_MOCKUP_SETS = [
     questions: [
       {
         id: 1,
-        q: '配管《はいかん》《はいかん》切断後《せつだんご》のバリ取りに使用《しよう》する工具《こうぐ》の名称《めいしょう》は？',
+        q: '配管《はいかん》切断後《せつだんご》のバリ取りに使用《しよう》する工具《こうぐ》の名称《めいしょう》は？',
         hint: 'Nama alat untuk membersihkan burr setelah memotong pipa adalah?',
         opts: ['パイプリーマー', 'トルクレンチ', 'パイプレンチ', 'パイプカッター'],
         opts_id: ['Pipe reamer', 'Torque wrench', 'Pipe wrench', 'Pipe cutter'],
@@ -2675,7 +2675,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '保温材《ほおんざい》の「厚《あつ》《あつ》さ公差《こうさ》」の許容範囲《きょようはんい》は？',
+        q: '保温材《ほおんざい》の「厚《あつ》さ公差《こうさ》」の許容範囲《きょようはんい》は？',
         hint: 'Rentang toleransi ketebalan insulasi adalah?',
         opts: ['±5mm以内', '任意', '±10mm', '±20mm'],
         opts_id: ['Maksimal ±5mm', 'Bebas', '±10mm', '±20mm'],
@@ -2897,7 +2897,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 20,
-        q: '足場《あしば》《あしば》の点検《てんけん》は、一般的《いっぱんてき》にいつ実施《じっし》するか。',
+        q: '足場《あしば》の点検《てんけん》は、一般的《いっぱんてき》にいつ実施《じっし》するか。',
         hint: 'Kapan pemeriksaan scaffolding umumnya dilakukan?',
         opts: ['1年に1回', '作業終了後のみ', '点検不要', '作業開始前・悪天候後・地震後'],
         opts_id: [
@@ -2942,7 +2942,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '足場《あしば》《あしば》組立責任者《くみたてせきにんしゃ》の資格《しかく》として必要《ひつよう》なものは？',
+        q: '足場《あしば》組立責任者《くみたてせきにんしゃ》の資格《しかく》として必要《ひつよう》なものは？',
         hint: 'Kualifikasi yang diperlukan untuk penanggung jawab perakitan scaffold adalah?',
         opts: ['普通作業員', '足場組立等技能講習修了者', 'ヘルメット', '任意'],
         opts_id: ['Pekerja biasa', 'Lulus pelatihan skill merakit scaffold', 'Helm', 'Bebas'],
@@ -3112,8 +3112,8 @@ export const JAC_MOCKUP_SETS = [
         hint: 'Kombinasi yang benar dari 4 pilar manajemen konstruksi (施工管理) adalah?',
         opts: [
           '設計《せっけい》・発注《はっちゅう》・施工《せこう》・検査《けんさ》',
-          '品質《ひんしつ》・工程《こうてい》・安全《あんぜん》《あんぜん》・原価《げんか》',
-          '材料《ざいりょう》・人員《じんいん》・機械《きかい》・工事《こうじ》《こうじ》',
+          '品質《ひんしつ》・工程《こうてい》・安全《あんぜん》・原価《げんか》',
+          '材料《ざいりょう》・人員《じんいん》・機械《きかい》・工事《こうじ》',
           '計画《けいかく》・実施《じっし》・評価《ひょうか》・改善《かいぜん》',
         ],
         opts_id: [
@@ -3234,7 +3234,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 25,
-        q: '建設業法《けんせつぎょうほう》で、元請負業者《もとうけおいぎょうしゃ》が下請負業者《したうけおいぎょうしゃ》《したうけおいぎょうしゃ》に支払う代金《だいきん》の支払期限《しはらいきげん》は？',
+        q: '建設業法《けんせつぎょうほう》で、元請負業者《もとうけおいぎょうしゃ》が下請負業者《したうけおいぎょうしゃ》に支払う代金《だいきん》の支払期限《しはらいきげん》は？',
         hint: 'Batas waktu pembayaran tagihan oleh kontraktor utama kepada subkontraktor menurut UU Konstruksi adalah?',
         opts: ['工事完了後1年以内', '支払わない', '工事完了後50日以内', '任意'],
         opts_id: [
@@ -3285,7 +3285,7 @@ export const JAC_MOCKUP_SETS = [
         hint: 'Tujuan yang benar dari Fire Service Act (消防法) adalah?',
         opts: [
           '消防署員《しょうぼうしょいん》の給与《きゅうよ》を定めること',
-          '火災《かさい》や地震《じしん》の被害《ひがい》を軽減《けいげん》し、安全《あんぜん》《あんぜん》を確保《かくほ》すること',
+          '火災《かさい》や地震《じしん》の被害《ひがい》を軽減《けいげん》し、安全《あんぜん》を確保《かくほ》すること',
           '建物《たてもの》の構造基準《こうぞうきじゅん》を定めること',
           '火災保険《かさいほけん》の料率《りょうりつ》を定めること',
         ],
@@ -3359,7 +3359,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 2,
-        q: '配管《はいかん》《はいかん》の「圧力《あつりょく》《あつりょく》テスト」後の排水方法《はいすいほうほう》は？',
+        q: '配管《はいかん》の「圧力《あつりょく》テスト」後の排水方法《はいすいほうほう》は？',
         hint: 'Cara pembuangan air setelah pressure test pipa adalah?',
         opts: ['適切な排水口へ排出', 'そのまま放置', '蒸発させる', '再利用'],
         opts_id: [
@@ -3373,7 +3373,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 3,
-        q: '作業中《さぎょうちゅう》の「振動工具《しんどうこうぐ》」使用《しよう》《しよう》時のPPEは？',
+        q: '作業中《さぎょうちゅう》の「振動工具《しんどうこうぐ》」使用《しよう》時のPPEは？',
         hint: 'PPE saat menggunakan alat getar adalah?',
         opts: ['耐振動手袋', 'ヘルメット', '安全メガネ', '耳栓'],
         opts_id: ['Anti-vibration gloves', 'Helm', 'Kacamata keselamatan', 'Earplug'],
@@ -3433,7 +3433,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 8,
-        q: '配管《はいかん》《はいかん》の水漏《みずも》れ試験《しけん》で使用《しよう》する圧力《あつりょく》は？',
+        q: '配管《はいかん》の水漏《みずも》れ試験《しけん》で使用《しよう》する圧力《あつりょく》は？',
         hint: 'Tekanan yang digunakan untuk water leak test pada pipa adalah?',
         opts: ['常圧', '作業圧の1.5倍以上', '真空《しんくう》', '0.1 MPaのみ'],
         opts_id: ['Tekanan normal', 'Minimal 1.5× tekanan kerja', 'Vakum', 'Hanya 0.1 MPa'],
@@ -3874,7 +3874,7 @@ export const JAC_MOCKUP_SETS = [
           '建設業者《けんせつぎょうしゃ》の資質《ししつ》を高めること',
           '建設工事《けんせつこうじ》の費用《ひよう》を管理《かんり》すること',
           '労働者《ろうどうしゃ》の権利《けんり》を保護《ほご》すること',
-          '建物《たてもの》の安全《あんぜん》・衛生《えいせい》《えいせい》・防火《ぼうか》のための最低基準《さいていきじゅん》を定めること',
+          '建物《たてもの》の安全《あんぜん》・衛生《えいせい》・防火《ぼうか》のための最低基準《さいていきじゅん》を定めること',
         ],
         opts_id: [
           'Meningkatkan kualitas pelaku usaha konstruksi',
