@@ -61,17 +61,44 @@ export function AppProvider({ children }) {
   const [modeParams, setModeParams] = useState(null);
   const [modeHistory, setModeHistory] = useState([]); // breadcrumb stack (max 3)
 
+  // Declared here, rather than beside registerExitGuard below, because every
+  // navigation callback in this block has to consult it — and the ones that
+  // didn't were the bug (2026-09-04). The guard's own contract below says
+  // "every route out of the mode area awaits it first", but only goBack ever
+  // did: Escape, the hardware back button and the desktop side nav each walked
+  // straight past it and discarded a running 100-minute exam without asking.
+  const exitGuardRef = useRef(null);
+
+  // Run `fn` only if the active mode's exit guard allows it. Stays fully
+  // synchronous when no guard is registered — the overwhelmingly common case,
+  // and what every existing caller (and test) expects of these functions.
+  // Only a mode that actually has something to lose pays the async cost.
+  const runGuarded = useCallback((fn) => {
+    const guard = exitGuardRef.current;
+    if (!guard) {
+      fn();
+      return;
+    }
+    Promise.resolve(guard()).then((ok) => {
+      if (!ok) return;
+      exitGuardRef.current = null;
+      fn();
+    });
+  }, []);
+
   // goMode(key) — navigate to mode
   // goMode(key, params) — navigate with extra params (e.g. { filterIds: [...] })
   const goMode = useCallback(
     (m, params = null) => {
-      setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
-      setMode(m);
-      setModeParams(params);
-      setPref('lastMode', m);
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      runGuarded(() => {
+        setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
+        setMode(m);
+        setModeParams(params);
+        setPref('lastMode', m);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
     },
-    [mode, setPref]
+    [mode, setPref, runGuarded]
   );
 
   // ── Exit guard ──────────────────────────────────────────────────────────
@@ -84,7 +111,18 @@ export function AppProvider({ children }) {
   // way to say "ask me first" — otherwise the header's arrow silently discards a
   // half-finished exam, which is the single most expensive thing this app can
   // throw away.
-  const exitGuardRef = useRef(null);
+  //
+  // "One shared control" turned out to be the flawed half of that premise: the
+  // header's arrow is one control, not the only way out. The routes that also
+  // leave the mode area — and that each ignored this guard until 2026-09-04 —
+  // are goBack (the arrow, the only one that ever honoured it), goTab and
+  // goMode (SideNav stays visible on desktop), requestExitMode (the Escape
+  // shortcut), and the popstate handler (hardware back). All five go through
+  // runGuarded or await the guard directly now. A mode's own exit button is the
+  // deliberate exception: it has already asked, so it calls exitMode directly.
+  //
+  // Still not covered, by design: a reload or a killed tab, which no guard can
+  // intercept usefully. That is what SimulasiMode's session snapshot is for.
   const registerExitGuard = useCallback((fn) => {
     exitGuardRef.current = fn;
     return () => {
@@ -167,20 +205,33 @@ export function AppProvider({ children }) {
 
   const goTab = useCallback(
     (t) => {
-      setTab(t);
-      setModeHistory([]);
-      setMode(null);
-      // The one exit path that wasn't clearing this. exitMode, goBack and the
-      // popstate handler all do; leaving stale params on the context while the
-      // user is on a tab is invisible today only because nothing reads them
-      // outside a mode, which is a property of the current consumers rather
-      // than of this function.
-      setModeParams(null);
-      setPref('lastMode', null);
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      // Guarded: SideNav stays on screen on desktop while a mode is open, so a
+      // tab click was a fourth silent way out of a running exam.
+      runGuarded(() => {
+        setTab(t);
+        setModeHistory([]);
+        setMode(null);
+        // The one exit path that wasn't clearing this. exitMode, goBack and the
+        // popstate handler all do; leaving stale params on the context while the
+        // user is on a tab is invisible today only because nothing reads them
+        // outside a mode, which is a property of the current consumers rather
+        // than of this function.
+        setModeParams(null);
+        setPref('lastMode', null);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
     },
-    [setPref]
+    [setPref, runGuarded]
   );
+
+  // Guarded exit — what a control *outside* the active mode should call when it
+  // means "leave this mode" (the Escape shortcut in GlobalKeyboardLayer is the
+  // only one today). A mode's own exit button keeps calling exitMode directly:
+  // it has already run its own confirmation, and routing it through the guard
+  // would ask the same question twice.
+  const requestExitMode = useCallback(() => {
+    runGuarded(() => exitMode());
+  }, [runGuarded, exitMode]);
 
   // ── Browser / hardware back button (item 10, scoped route) ──
   // Hash-based (#/tab/x, #/mode/y) -- avoids the subpath + SW HTML-shell
@@ -221,6 +272,7 @@ export function AppProvider({ children }) {
   // 15's ConfirmDialog, which doesn't exist yet -- owner chose to land the
   // back-button fix now rather than sequence after it.
   const prevModeRef = useRef(mode);
+  const lastEntryRef = useRef(null);
   const isPopRef = useRef(false);
   const canPopRef = useRef(false); // item 52: true iff it's safe to history.back()
 
@@ -235,6 +287,9 @@ export function AppProvider({ children }) {
 
     const state = mode ? { tab, mode, modeHistory } : { tab, mode: null };
     const url = mode ? `#/mode/${mode}` : `#/tab/${tab}`;
+    // Remembered so a vetoed hardware-back can put the browser back on exactly
+    // the entry it just left — see the guard branch in the popstate handler.
+    lastEntryRef.current = { state, url };
     if (enteringModeArea) {
       history.pushState(state, '', url);
     } else {
@@ -259,6 +314,27 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     const onPopState = (e) => {
+      // The hardware/browser back button was the most expensive of the four
+      // routes out of a mode that ignored the exit guard: on a phone it *is*
+      // the back button, and it threw away a running exam with no prompt.
+      // The browser has already moved by the time this fires, so the veto is
+      // done by putting it back before asking — a "no" then needs no further
+      // history surgery, and a "yes" simply re-applies the press the user made.
+      const guard = exitGuardRef.current;
+      if (guard && lastEntryRef.current) {
+        const { state: prevState, url: prevUrl } = lastEntryRef.current;
+        history.pushState(prevState, '', prevUrl);
+        // Undone by us, and no state change is coming, so the [tab, mode]
+        // effect must not swallow its next real run on a stale isPopRef.
+        isPopRef.current = false;
+        canPopRef.current = true; // top of stack is once again an entry we pushed
+        Promise.resolve(guard()).then((ok) => {
+          if (!ok) return;
+          exitGuardRef.current = null;
+          history.back(); // re-apply it; this handler runs again, now unguarded
+        });
+        return;
+      }
       isPopRef.current = true;
       canPopRef.current = false; // browser position moved; re-earn trust from a fresh pushState
       const state = e.state;
@@ -345,6 +421,7 @@ export function AppProvider({ children }) {
       modeParams,
       goMode,
       exitMode,
+      requestExitMode,
       goTab,
       modeHistory,
       goBack,
@@ -361,6 +438,7 @@ export function AppProvider({ children }) {
       modeParams,
       goMode,
       exitMode,
+      requestExitMode,
       goTab,
       modeHistory,
       goBack,
