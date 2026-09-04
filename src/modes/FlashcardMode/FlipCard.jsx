@@ -77,7 +77,15 @@ export default function FlipCard({
       <div
         className={`fc-card${flipped ? ' is-flipped' : ''}`}
         style={{
-          minHeight: Math.max(230, backH),
+          // Only the back's measurement, never a floor of its own. The floor is
+          // CSS's (see .front/.back in FlipCard.module.css), and .front is the
+          // in-flow face, so the card is already at least that tall. Hardcoding
+          // 230 here silently defeated the landscape override the same
+          // stylesheet sets at max-height:480px: the faces dropped to 140px and
+          // the card stayed at 230, so a 800x400 phone in landscape still
+          // scrolled (599px of document in a 400px viewport) despite the rule
+          // written to stop exactly that.
+          minHeight: backH || undefined,
           transform: `rotateY(${flipped ? 180 : 0}deg) translateX(${cardShiftPx}px) rotate(${cardTiltDeg}deg)`,
         }}
       >
