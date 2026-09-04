@@ -13,12 +13,12 @@
 .summaryRow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 380px));
-  column-gap: var(--sp-4);
+  column-gap: var(--space-16);
 }
 
 /* ── Overview card ── */
 .overviewCard {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
   text-align: center;
 }
 
@@ -32,7 +32,7 @@
 .overviewSub {
   font-size: var(--fs-body);
   color: var(--ssw-textMuted);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-12);
 }
 
 .overviewKnown {
@@ -49,12 +49,12 @@
 
 /* ── Mini stat grid (streak + SRS) ── */
 .miniGrid {
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: var(--space-8);
+  margin-bottom: var(--space-20);
 }
 
 .miniCard {
-  padding: 10px 6px;
+  padding: var(--space-10) var(--space-6);
   border-radius: var(--r-md);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
@@ -79,11 +79,11 @@
 
 /* ── SRS due banner ── */
 .dueBanner {
-  padding: 10px 14px;
+  padding: var(--space-10) var(--space-14);
   border-radius: var(--r-md);
   background: rgba(251, 191, 36, 0.07);
   border: 1px solid rgba(251, 191, 36, 0.3);
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
   font-size: var(--fs-caption);
   color: var(--ssw-gold);
   font-weight: 600;
@@ -100,17 +100,17 @@
   width: fit-content;
   max-width: 100%;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding-bottom: var(--space-8);
 }
 
 /* ── Activity chart ── */
 .chartWrap {
   display: flex;
-  gap: 6px;
+  gap: var(--space-6);
   align-items: flex-end;
   height: 60px;
-  margin-bottom: 20px;
-  padding: 0 4px;
+  margin-bottom: var(--space-20);
+  padding: 0 var(--space-4);
 }
 
 .chartCol {
@@ -118,7 +118,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-4);
 }
 
 .chartCount {
@@ -136,17 +136,17 @@
 
 /* ── Per category ── */
 .catList {
-  gap: 6px;
-  margin-bottom: 20px;
+  gap: var(--space-6);
+  margin-bottom: var(--space-20);
 }
 
 .catItem {
-  padding: 10px 12px;
+  padding: var(--space-10) var(--space-12);
   background: var(--ssw-surface);
   border-radius: var(--r-sm);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-10);
 }
 
 .catEmoji {
@@ -159,29 +159,29 @@
 
 .catRow {
   font-size: var(--fs-caption);
-  margin-bottom: 4px;
+  margin-bottom: var(--space-4);
 }
 
 /* catPct — color is dynamic (≥70% correct, ≥40% gold, else wrong), kept inline */
 
 /* ── Weakest section ── */
 .weakBox {
-  padding: 12px 14px;
+  padding: var(--space-12) var(--space-14);
   background: var(--ssw-wrongBg);
   border-radius: var(--r-md);
   border: 1px solid var(--ssw-wrongBorder);
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
 }
 
 .weakItem {
   font-size: var(--fs-caption);
   color: var(--ssw-wrong);
-  padding: 4px 0;
+  padding: var(--space-4) 0;
 }
 
 /* ── Sering salah ── */
 .wrongRow {
-  padding: 8px 12px;
+  padding: var(--space-8) var(--space-12);
   background: var(--ssw-surface);
   border-radius: var(--r-sm);
   font-size: var(--fs-caption);
@@ -197,5 +197,5 @@
   font-size: var(--fs-micro);
   color: var(--ssw-textDim);
   text-align: center;
-  margin: 6px 0 18px;
+  margin: var(--space-6) 0 var(--space-16);
 }

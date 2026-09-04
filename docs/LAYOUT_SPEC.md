@@ -43,7 +43,7 @@ BelajarTab, SayaTab). No media query — column count is container-driven:
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(MIN, MAX));
-  column-gap: var(--sp-4);
+  column-gap: var(--space-16);
 }
 ```
 

@@ -2,14 +2,14 @@
 
 .btn {
   width: 100%;
-  padding: 14px 14px;
+  padding: var(--space-14) var(--space-14);
   font-size: var(--fs-body);
   line-height: var(--lh-relaxed);
   font-family: 'DM Sans', system-ui, sans-serif;
   border-radius: var(--r-lg);
   text-align: left;
   display: flex;
-  gap: 10px;
+  gap: var(--space-10);
   align-items: flex-start;
   transition:
     background 0.18s ease,
@@ -139,6 +139,6 @@
   display: block;
   font-size: var(--fs-small);
   color: var(--ssw-textMuted);
-  margin-top: 2px;
+  margin-top: var(--space-2);
   font-family: 'DM Sans', system-ui, sans-serif;
 }

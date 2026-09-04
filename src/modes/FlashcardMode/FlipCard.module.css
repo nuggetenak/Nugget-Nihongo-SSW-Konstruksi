@@ -2,7 +2,7 @@
 
 /* ── Front face ── */
 .front {
-  padding: 36px 18px 52px;
+  padding: var(--space-32) var(--space-16) var(--space-48);
   background: var(--ssw-surface);
   border-radius: var(--r-xxl);
   box-shadow: var(--ssw-shadowMd);
@@ -51,7 +51,7 @@
 
 /* ── Back face ── */
 .back {
-  padding: 18px 18px 16px;
+  padding: var(--space-16) var(--space-16) var(--space-16);
   border-radius: var(--r-xxl);
   min-height: 230px;
   display: flex;
@@ -83,11 +83,11 @@
    it wins the cascade on equal specificity. */
 @media (max-height: 480px) {
   .front {
-    padding: 16px 18px 20px;
+    padding: var(--space-16) var(--space-16) var(--space-20);
     min-height: 140px;
   }
   .back {
-    padding: 14px 18px 12px;
+    padding: var(--space-14) var(--space-16) var(--space-12);
     min-height: 140px;
   }
 }
@@ -99,8 +99,8 @@
   left: 14px;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 3px 10px;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-10);
   border-radius: var(--r-pill);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: var(--fs-micro);
@@ -172,7 +172,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-12);
   position: relative;
   z-index: 1;
 }
@@ -194,7 +194,7 @@
   font-weight: 700;
   text-align: center;
   color: rgba(255, 255, 255, 0.88);
-  margin-bottom: 3px;
+  margin-bottom: var(--space-4);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   word-break: break-all;
 }
@@ -203,7 +203,7 @@
   font-size: var(--fs-small);
   text-align: center;
   color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-12);
   letter-spacing: 0.3px;
 }
 
@@ -218,14 +218,14 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   word-break: break-word;
   overflow-wrap: break-word;
-  padding: 0 4px;
+  padding: 0 var(--space-4);
 }
 
 /* ── Desc section (back) ── */
 .backDescArea {
   border-top: 1px solid rgba(255, 255, 255, 0.18);
-  padding-top: 12px;
-  margin-top: 10px;
+  padding-top: var(--space-12);
+  margin-top: var(--space-10);
   position: relative;
   z-index: 1;
 }
@@ -233,7 +233,7 @@
 .backDescBtn {
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-caption);
-  padding: 7px 18px;
+  padding: var(--space-8) var(--space-16);
   border-radius: var(--r-pill);
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.12);
@@ -263,8 +263,8 @@
 /* ── Quote block (mandor quote) ── */
 .quoteBlock {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 10px;
-  margin-top: 10px;
+  padding-top: var(--space-10);
+  margin-top: var(--space-10);
   position: relative;
   z-index: 1;
   text-align: center;
@@ -277,7 +277,7 @@
   letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: var(--space-6);
 }
 
 .quoteText {

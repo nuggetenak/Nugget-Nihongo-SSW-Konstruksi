@@ -1,21 +1,21 @@
 /* ─── GlossaryMode.module.css ────────────────────────────────────────────────── */
 
 /* ── Outer container ── */
+/* Bottom clearance for the floating nav is AppShell's .content, via
+   [data-nav-safe] — this 88px predated that and double-counted it. */
 .outerWrap {
-  padding-bottom: 88px;
+  padding-bottom: var(--space-8);
 }
 
 /* ── Header area ── */
 .header {
-  padding: 16px 16px 10px;
-  max-width: var(--max-w, 480px);
-  margin: 0 auto;
+  padding-block: var(--space-16) var(--space-10);
 }
 
 .titleRow {
   align-items: baseline;
-  gap: 8px;
-  margin-bottom: 2px;
+  gap: var(--space-8);
+  margin-bottom: var(--space-2);
 }
 
 .title {
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: var(--space-6);
 }
 
 .metaText {
@@ -47,20 +47,20 @@
 .filterRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 4px;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 /* filterBtn — active bg/border/color are dynamic, kept inline */
 .filterBtn {
   font-family: inherit;
   font-size: var(--fs-micro);
-  padding: 3px 10px;
+  padding: var(--space-4) var(--space-10);
   border-radius: var(--r-pill);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-4);
   transition: all var(--t-fast);
 }
 
@@ -71,8 +71,8 @@
   z-index: var(--z-sticky); /* --z-sticky=10 is closest token; use +1 override if needed */
   overflow-x: auto;
   display: flex;
-  gap: 2px;
-  padding: 5px 12px;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-12);
   background: var(--ssw-bg);
   border-top: 1px solid var(--ssw-border);
   border-bottom: 1px solid var(--ssw-border);
@@ -99,9 +99,7 @@
 
 /* ── Content area ── */
 .contentWrap {
-  max-width: var(--max-w, 480px);
-  margin: 0 auto;
-  padding: 0 0 8px;
+  padding-bottom: var(--space-8);
 }
 
 /* ── Letter section header ── */
@@ -109,9 +107,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px 5px;
+  padding: var(--space-8) var(--space-16) var(--space-6);
   border-bottom: 1px solid var(--ssw-borderLight);
-  margin-top: 2px;
+  margin-top: var(--space-2);
 }
 
 .letterLabel {
@@ -127,13 +125,13 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-pill);
-  padding: 1px 7px;
+  padding: 1px var(--space-8);
 }
 
 /* ── Term row ── */
 /* termRow bg is dynamic (isOpen ? T.surface : transparent), kept inline */
 .termRow {
-  padding: 9px 16px;
+  padding: var(--space-10) var(--space-16);
   cursor: pointer;
   border-bottom: 1px solid var(--ssw-border);
   transition: background var(--t-fast);
@@ -143,13 +141,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-10);
 }
 
 .termLeft {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-6);
   min-width: 0;
 }
 
@@ -172,8 +170,8 @@
 
 /* ── Expanded term detail ── */
 .termDetail {
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: var(--space-8);
+  padding-top: var(--space-8);
   border-top: 1px solid var(--ssw-border);
   animation: fadeIn 0.15s ease;
 }
@@ -181,8 +179,8 @@
 .termFuriRow {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 6px;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
 }
 
 .termFuri {
@@ -199,7 +197,7 @@
 }
 
 .termSourceRow {
-  margin-top: 6px;
+  margin-top: var(--space-6);
 }
 
 .termSourcePill {
@@ -208,7 +206,7 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-pill);
-  padding: 1px 6px;
+  padding: 1px var(--space-6);
 }
 
 /* ── Wide-screen columns ──────────────────────────────────────────────────
@@ -231,7 +229,7 @@
      wrapper caps the floor at the container's own width and is inert above the
      breakpoint, so the two-column desktop layout is unchanged. */
   grid-template-columns: repeat(auto-fit, minmax(min(430px, 100%), 1fr));
-  column-gap: var(--sp-4);
+  column-gap: var(--space-16);
   align-content: start;
 }
 
@@ -252,8 +250,8 @@
 .loadMore {
   display: block;
   width: calc(100% - 32px);
-  margin: 16px auto 24px;
-  padding: 14px 16px;
+  margin: var(--space-16) auto var(--space-24);
+  padding: var(--space-14) var(--space-16);
   min-height: var(--tap-min);
   font-family: inherit;
   font-size: var(--fs-body);

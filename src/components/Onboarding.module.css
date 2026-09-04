@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   background: var(--ssw-bg);
-  padding-bottom: 32px;
+  padding-bottom: var(--space-32);
 }
 
 .inner {
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 48px 24px 24px;
+  padding: var(--space-48) var(--space-24) var(--space-24);
   animation: fadeIn 0.3s ease both;
 }
 
@@ -43,7 +43,7 @@
   width: 72px;
   height: 72px;
   border-radius: 18px;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
   filter: drop-shadow(0 4px 20px rgba(245, 158, 11, 0.35));
   animation: scaleIn 0.4s ease both;
 }
@@ -57,7 +57,7 @@
   width: 100%;
   max-width: 430px;
   height: auto;
-  margin: 18px auto 0;
+  margin: var(--space-16) auto 0;
   opacity: 0.95;
   animation: scaleIn 0.5s ease both;
 }
@@ -91,7 +91,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-4);
   text-align: center;
 }
 
@@ -99,7 +99,7 @@
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
   letter-spacing: 0.5px;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
 }
 
 .heroDesc {
@@ -108,19 +108,19 @@
   color: var(--ssw-textDim);
   text-align: center;
   max-width: 300px;
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-24);
 }
 
 .badges {
   display: flex;
-  gap: 8px;
+  gap: var(--space-8);
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: var(--space-32);
 }
 
 .badge {
-  padding: 4px 12px;
+  padding: var(--space-4) var(--space-12);
   border-radius: 99px;
   font-size: var(--fs-small);
   font-weight: 600;
@@ -136,14 +136,14 @@
   color: var(--ssw-amberText);
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-8);
 }
 
 .stepTitle {
   font-size: 20px;
   font-weight: 800;
   color: var(--ssw-textBright);
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-8);
   text-align: center;
 }
 
@@ -152,7 +152,7 @@
   color: var(--ssw-textDim);
   text-align: center;
   line-height: 1.6;
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-24);
   max-width: 300px;
 }
 
@@ -161,16 +161,16 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
+  gap: var(--space-10);
+  margin-bottom: var(--space-24);
 }
 
 .trackCard {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
+  gap: var(--space-12);
+  padding: var(--space-14) var(--space-16);
   border-radius: 14px;
   border: 2px solid var(--ssw-border);
   background: var(--ssw-surface);
@@ -207,7 +207,7 @@
 .trackMeta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2);
   flex: 1;
   min-width: 0;
 }
@@ -245,7 +245,7 @@
   width: 100%;
   max-width: 340px;
   perspective: 1000px;
-  margin: 0 auto 20px;
+  margin: 0 auto var(--space-20);
   cursor: pointer;
 }
 
@@ -275,16 +275,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 16px;
-  gap: 4px;
+  padding: var(--space-20) var(--space-16);
+  gap: var(--space-4);
   box-shadow: var(--ssw-shadowMd);
 }
 
 .demoBack {
   transform: rotateY(180deg);
   justify-content: flex-start;
-  padding-top: 16px;
-  gap: 6px;
+  padding-top: var(--space-16);
+  gap: var(--space-6);
 }
 
 .demoCat {
@@ -293,7 +293,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   align-self: flex-start;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-4);
 }
 
 .demoJp {
@@ -329,7 +329,7 @@
 .demoHint {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
-  margin-top: 8px;
+  margin-top: var(--space-8);
 }
 
 .demoIdText {
@@ -357,12 +357,12 @@
   text-align: center;
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
-  margin: 0 0 10px;
+  margin: 0 0 var(--space-10);
 }
 
 .demoButtons {
   display: flex;
-  gap: 10px;
+  gap: var(--space-10);
 }
 
 .demoBtn {
@@ -370,8 +370,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 8px;
+  gap: var(--space-4);
+  padding: var(--space-12) var(--space-8);
   border-radius: 12px;
   border: 2px solid var(--ssw-border);
   background: var(--ssw-surface);
@@ -400,24 +400,24 @@
 /* ── Goal ── */
 .goalHero {
   font-size: 52px;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-16);
   animation: scaleIn 0.4s ease both;
 }
 
 .goalGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: var(--space-10);
   width: 100%;
   max-width: 340px;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
 }
 
 .goalCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 8px;
+  padding: var(--space-16) var(--space-8);
   border-radius: 14px;
   border: 2px solid var(--ssw-border);
   background: var(--ssw-surface);
@@ -427,7 +427,7 @@
     transform 0.12s ease,
     border-color 0.15s ease,
     background 0.15s ease;
-  gap: 2px;
+  gap: var(--space-2);
 }
 
 .goalCard:active {
@@ -464,7 +464,7 @@
   color: var(--ssw-textDim);
   text-align: center;
   max-width: 300px;
-  margin-bottom: 28px;
+  margin-bottom: var(--space-28);
 }
 
 .goalNote strong {
@@ -479,7 +479,7 @@
   width: 100%;
   max-width: 280px;
   text-align: left;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-8);
 }
 
 .inlineEditLabel {
@@ -487,14 +487,14 @@
   font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
   color: var(--ssw-textMuted);
-  margin-bottom: 6px;
+  margin-bottom: var(--space-6);
 }
 
 .inlineInput {
   width: 100%;
   font-family: inherit;
   font-size: var(--fs-body);
-  padding: 12px 14px;
+  padding: var(--space-12) var(--space-14);
   border-radius: var(--r-md);
   border: 1.5px solid var(--ssw-border);
   background: var(--ssw-surface);
@@ -508,7 +508,7 @@
 .ctaPrimary {
   width: 100%;
   max-width: 340px;
-  padding: 14px;
+  padding: var(--space-14);
   border-radius: 14px;
   border: none;
   background: linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b);
@@ -535,8 +535,8 @@
 }
 
 .ctaGhost {
-  margin-top: 12px;
-  padding: 6px 16px;
+  margin-top: var(--space-12);
+  padding: var(--space-6) var(--space-16);
   font-size: var(--fs-small);
   background: none;
   border: none;
@@ -548,8 +548,8 @@
 /* ── Dots ── */
 .dots {
   display: flex;
-  gap: 6px;
-  padding: 16px 0 8px;
+  gap: var(--space-6);
+  padding: var(--space-16) 0 var(--space-8);
   justify-content: center;
 }
 

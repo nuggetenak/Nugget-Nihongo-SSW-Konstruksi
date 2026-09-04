@@ -1,19 +1,17 @@
 /* ─── ResultScreen.module.css v3.0 — UI Upgrade Round 2 ─────────────────────── */
 
 .container {
-  padding: 20px 16px 40px;
-  max-width: var(--max-w);
-  margin: 0 auto;
+  padding-block: var(--space-20) var(--space-40);
   animation: scaleIn 0.3s ease;
 }
 
 /* ── Grade hero ── */
 .hero {
   text-align: center;
-  padding: 36px 20px 28px;
+  padding: var(--space-32) var(--space-20) var(--space-28);
   border-radius: var(--r-xxl);
   border: 1px solid var(--ssw-border);
-  margin-bottom: 14px;
+  margin-bottom: var(--space-14);
   position: relative;
   overflow: hidden;
 }
@@ -72,7 +70,7 @@
 
 .heroEmoji {
   font-size: 60px;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-12);
   display: block;
   line-height: 1;
   position: relative;
@@ -92,7 +90,7 @@
   font-family: 'Syne', 'DM Sans', sans-serif;
   font-size: 64px;
   font-weight: 900;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-4);
   font-variant-numeric: tabular-nums;
   letter-spacing: -2px;
   line-height: 1;
@@ -107,7 +105,7 @@
   font-size: var(--fs-body);
   color: var(--ssw-textMuted);
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-10);
   line-height: 1.45;
   position: relative;
   z-index: 1;
@@ -151,11 +149,11 @@
 
 /* ── Weakness tip ── */
 .tip {
-  padding: 13px 16px;
+  padding: var(--space-14) var(--space-16);
   border-radius: var(--r-xl);
   background: rgba(59, 130, 246, 0.06);
   border: 1px solid rgba(59, 130, 246, 0.16);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-12);
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
   line-height: 1.7;
@@ -164,13 +162,13 @@
 /* ── Actions ── */
 .actions {
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
 }
 
 .btnPrimary {
   flex: 1;
-  padding: 15px 12px;
+  padding: var(--space-16) var(--space-12);
   font-family: 'Syne', 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-body);
   font-weight: 800;
@@ -201,7 +199,7 @@
 
 .btnWrong {
   flex: 1;
-  padding: 15px 12px;
+  padding: var(--space-16) var(--space-12);
   font-size: var(--fs-body);
   font-weight: 700;
   font-family: 'DM Sans', system-ui, sans-serif;
@@ -221,7 +219,7 @@
 
 .btnBack {
   width: 100%;
-  padding: 13px;
+  padding: var(--space-14);
   font-size: var(--fs-caption);
   font-family: 'DM Sans', system-ui, sans-serif;
   border-radius: var(--r-xl);
@@ -229,7 +227,7 @@
   border: 1px solid var(--ssw-border);
   color: var(--ssw-textMuted);
   cursor: pointer;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-24);
   font-weight: 600;
   transition: background var(--t-fast);
 }
@@ -244,10 +242,10 @@
   letter-spacing: 1.3px;
   text-transform: uppercase;
   color: var(--ssw-textDim);
-  margin-bottom: 10px;
+  margin-bottom: var(--space-10);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-8);
 }
 .reviewHeader::after {
   content: '';
@@ -259,11 +257,11 @@
 .reviewList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-8);
 }
 
 .reviewItem {
-  padding: 13px 14px;
+  padding: var(--space-14) var(--space-14);
   border-radius: var(--r-lg);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
@@ -274,14 +272,14 @@
 .reviewQ {
   font-size: var(--fs-body);
   line-height: var(--lh-normal);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-8);
   color: var(--ssw-textBright);
 }
 
 .reviewWrong {
   font-size: var(--fs-caption);
   color: var(--ssw-wrong);
-  margin-bottom: 3px;
+  margin-bottom: var(--space-4);
   font-weight: 600;
 }
 
@@ -296,8 +294,8 @@
   color: var(--ssw-textDim);
   line-height: var(--lh-relaxed);
   border-top: 1px solid var(--ssw-border);
-  padding-top: 8px;
-  margin-top: 8px;
+  padding-top: var(--space-8);
+  margin-top: var(--space-8);
 }
 
 /* ── Reduced motion ── */

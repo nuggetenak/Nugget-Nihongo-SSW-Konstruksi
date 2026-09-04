@@ -319,7 +319,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   const barColor = isUrgent ? T.wrong : isWarning ? T.amber : T.amber;
 
   return (
-    <div className={S.page} style={{ padding: '16px 16px 24px' }}>
+    <div className={`${S.page} ${S.pageTight}`}>
       <div className={S.row} style={{ marginBottom: 10 }}>
         <span
           style={{

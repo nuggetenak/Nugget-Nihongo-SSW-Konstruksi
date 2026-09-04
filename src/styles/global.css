@@ -98,13 +98,16 @@
        wide    : >= 1040   desktop    → side nav, 2-col dashboard            */
   --reading-max-w: 620px; /* single-column content on medium screens   */
   --sidenav-w: 236px;
-  --gutter-compact: 16px;
-  --gutter-medium: 24px;
-  --gutter-wide: 32px;
+  /* Page gutters, in rem for the same reason the spacing scale is: they have
+     to grow with the type, or a reader on Ukuran Teks "Sangat Besar" gets
+     bigger words in the same 16px margin. */
+  --gutter-compact: var(--space-16);
+  --gutter-medium: var(--space-24);
+  --gutter-wide: var(--space-32);
 
   /* Space reserved so fixed bottom nav never covers the last row of content.
      Consumed via .content padding-bottom; set to 0 once side nav takes over. */
-  --nav-safe: calc(var(--nav-h) + 36px + env(safe-area-inset-bottom, 0px));
+  --nav-safe: calc(var(--nav-h) + var(--space-32) + env(safe-area-inset-bottom, 0px));
 
   /* Toast stack's bottom offset. Safe default clears nothing (no floating nav
      to clear); AppShell mirrors whether the bottom pill is mounted onto
@@ -113,7 +116,7 @@
      76px figure (nav-h + sp-3) matches what this was hardcoded to before it
      became conditional, so the one case that was already correct — tabs
      chrome, phone width — keeps its exact prior position. */
-  --toast-offset: var(--sp-4);
+  --toast-offset: var(--space-16);
 
   /* ModeHeader (item 11) sticks at top:0 within its scroll container. When
      OfflineBanner (item 7) is visible it's position:fixed at the true
@@ -121,7 +124,9 @@
      on top of the header's sticky trail instead of stacking above it. 36px
      covers the banner's own box (8px+8px padding + ~12px caption text ≈ 32px,
      rounded up for safe clearance) — see OfflineBanner.jsx for the JS side
-     that sets the attribute this reads. */
+     that sets the attribute this reads. In rem, because the banner's own
+     height is text: at Ukuran Teks "Sangat Besar" a fixed 36px stops clearing
+     it and the banner lands on top of the sticky header. */
   --mode-header-top: 0px;
 
   /* ── Hazard rail (signature) ──
@@ -134,13 +139,49 @@
   /* Accent gradient (static — amber tones) */
   --accent: linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b);
 
-  /* ── Spacing scale ── */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
+  /* ── Spacing scale ──
+     Named for the pixel value each step resolves to at the default root
+     font-size, and written in rem so it doesn't stay there.
+
+     Rebuilt 2026-09-04, replacing `--sp-1`…`--sp-6` (4px…24px, index × 4).
+     Two things were wrong with that scale.
+
+     It was in px, so it did not move with type. Measured on the running app
+     after Ukuran Teks shipped: at "Sangat Besar" body text goes 15px → 18.8px
+     while `--sp-3` stays 12px and `--sp-4` stays 16px — every gap, every
+     padding, every gutter holds still while the text inside it grows. The
+     layout gets *tighter* for exactly the reader who asked for it to get
+     looser, which is the opposite of what the control is for. In rem the
+     whole layout scales with the text, and at 100% every value is unchanged
+     (0.25rem × 16 = 4px), so this is a no-op for the default reader.
+
+     And it only had six steps on a 4px grid, while the CSS underneath it used
+     2px, 6px, 10px and 14px 233 times between them — the app's real grid was
+     2px and the scale couldn't express it, so most spacing was written as raw
+     px and never went through the scale at all (54 token uses vs ~350 literal
+     values). This scale is a 2px grid to 16, 4px to 32, 8px to 64, which
+     covers what the app actually uses.
+
+     102 off-grid values (3, 5, 7, 9, 11, 13, 15, 18, 36, 52) were snapped to
+     the nearest step in the same pass. Ties round up below 16px and down at or
+     above it: the small end of this app measured too tight, and the large end
+     is where vertical dead space accumulates. */
+  --space-2: 0.125rem; /* 2  */
+  --space-4: 0.25rem; /* 4  */
+  --space-6: 0.375rem; /* 6  */
+  --space-8: 0.5rem; /* 8  */
+  --space-10: 0.625rem; /* 10 */
+  --space-12: 0.75rem; /* 12 */
+  --space-14: 0.875rem; /* 14 */
+  --space-16: 1rem; /* 16 */
+  --space-20: 1.25rem; /* 20 */
+  --space-24: 1.5rem; /* 24 */
+  --space-28: 1.75rem; /* 28 */
+  --space-32: 2rem; /* 32 */
+  --space-40: 2.5rem; /* 40 */
+  --space-48: 3rem; /* 48 */
+  --space-56: 3.5rem; /* 56 */
+  --space-64: 4rem; /* 64 */
 
   /* ── Shadow scale ── */
   --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -176,11 +217,11 @@
    breakpoint below, where the pill is display:none and the side nav takes
    over — matching AppShell.module.css's own 1040px cutover exactly. */
 :root[data-bottom-nav-chrome='true'] {
-  --toast-offset: calc(var(--nav-h) + var(--sp-3) + env(safe-area-inset-bottom, 0px));
+  --toast-offset: calc(var(--nav-h) + var(--space-12) + env(safe-area-inset-bottom, 0px));
 }
 
 :root[data-offline-banner-visible='true'] {
-  --mode-header-top: 36px;
+  --mode-header-top: 2.25rem;
 }
 
 /* ── Base reset ── */
@@ -479,7 +520,7 @@ input {
      chrome — side nav has taken over — so the toast stack no longer needs to
      clear it, even on tabs screens where the attribute is still 'true'. */
   :root[data-bottom-nav-chrome='true'] {
-    --toast-offset: var(--sp-4);
+    --toast-offset: var(--space-16);
   }
 }
 

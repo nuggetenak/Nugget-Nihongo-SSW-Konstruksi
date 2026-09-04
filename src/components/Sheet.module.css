@@ -18,7 +18,7 @@
   z-index: calc(var(--z-modal) + 1);
   background: var(--ssw-bg);
   border-radius: var(--r-xl) var(--r-xl) 0 0;
-  padding: 24px 20px 36px;
+  padding: var(--space-24) var(--space-20) var(--space-32);
   box-shadow: var(--ssw-shadowLg);
   animation: slideUp 0.25s ease;
   max-height: 80vh;
@@ -30,5 +30,5 @@
   height: 4px;
   background: var(--ssw-border);
   border-radius: var(--r-pill);
-  margin: 0 auto 20px;
+  margin: 0 auto var(--space-20);
 }

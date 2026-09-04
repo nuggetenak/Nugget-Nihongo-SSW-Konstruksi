@@ -5,7 +5,7 @@
   flex-shrink: 0;
   background: var(--ssw-bgAlt);
   border-right: 1px solid var(--ssw-border);
-  padding: var(--sp-6) 14px;
+  padding: var(--space-24) var(--space-14);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -14,7 +14,7 @@
 }
 
 .brand {
-  padding: 0 11px var(--sp-5);
+  padding: 0 var(--space-12) var(--space-20);
 }
 
 .brandName {
@@ -31,22 +31,22 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ssw-textFaint);
-  margin-top: 2px;
+  margin-top: var(--space-2);
 }
 
 .list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: var(--space-4);
 }
 
 .item {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 11px;
+  gap: var(--space-12);
+  padding: var(--space-12);
   border: none;
   background: none;
   border-radius: var(--r-md);
@@ -99,12 +99,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 5px;
+  padding: 0 var(--space-6);
 }
 
 .foot {
   margin-top: auto;
-  padding: var(--sp-3) 11px 0;
+  padding: var(--space-12) var(--space-12) 0;
   border-top: 1px solid var(--ssw-border);
   font-size: var(--fs-small);
   font-weight: var(--fw-medium);
@@ -113,12 +113,12 @@
 
 /* ── Mode sections (item 13) ── */
 .modeSections {
-  margin-top: var(--sp-4);
-  padding-top: var(--sp-4);
+  margin-top: var(--space-16);
+  padding-top: var(--space-16);
   border-top: 1px solid var(--ssw-border);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-2);
   /* This column scrolls internally once the full registry is open — .side
      itself is height:100dvh with no overflow, and letting 21 modes push the
      tabs or .foot out of view would be worse than a scrollbar here. */
@@ -131,7 +131,7 @@
 }
 
 .sectionSummary {
-  padding: 8px 11px;
+  padding: var(--space-8) var(--space-12);
   font-size: var(--fs-small);
   font-weight: var(--fw-bold);
   letter-spacing: 0.04em;
@@ -151,15 +151,15 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
-  padding: 2px 0 6px 14px;
+  padding: var(--space-2) 0 var(--space-6) var(--space-14);
 }
 
 .modeItem {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 7px 8px;
+  gap: var(--space-10);
+  padding: var(--space-8) var(--space-8);
   border: none;
   background: none;
   border-radius: var(--r-sm);
