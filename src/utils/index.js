@@ -19,6 +19,8 @@ export {
   SCORED_QUIZ_MODES,
   SRS_MATURE_DAYS,
   SESSIONS_CAP,
+  EXAM_PASS_PCT,
+  EXAM_SECONDS_PER_QUESTION,
 } from './constants.js';
 export {
   getAvgAccuracy,

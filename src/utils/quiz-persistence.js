@@ -17,6 +17,13 @@
 const MAX_AGE_MS = 30 * 60 * 1000; // 30 minutes -- long enough for a real
 // interruption (phone call, reload), short enough that a stale prompt
 // days later would just be confusing, not helpful.
+//
+// It is also shorter than a full exam simulation, which is why readQuizSnapshot
+// takes an override: at 2 min/question a 50-question exam runs 100 minutes, so
+// a snapshot written at question 3 is already "stale" by this default long
+// before the exam it belongs to has finished. A caller whose session can
+// legitimately outlive 30 minutes passes its own ceiling -- see
+// SimulasiMode's SNAPSHOT_MAX_AGE_MS.
 
 export function saveQuizSnapshot(key, snapshot) {
   try {
@@ -32,13 +39,16 @@ export function saveQuizSnapshot(key, snapshot) {
  * Returns the saved snapshot if one exists and isn't stale, else null.
  * Does NOT clear it -- call clearQuizSnapshot() explicitly once the caller
  * has decided what to do with it (resumed, or the user declined).
+ *
+ * @param {string} key
+ * @param {number} [maxAgeMs] - staleness ceiling; defaults to MAX_AGE_MS.
  */
-export function readQuizSnapshot(key) {
+export function readQuizSnapshot(key, maxAgeMs = MAX_AGE_MS) {
   try {
     const raw = sessionStorage.getItem(key);
     if (!raw) return null;
     const { snapshot, savedAt } = JSON.parse(raw);
-    if (Date.now() - savedAt > MAX_AGE_MS) {
+    if (Date.now() - savedAt > maxAgeMs) {
       sessionStorage.removeItem(key);
       return null;
     }

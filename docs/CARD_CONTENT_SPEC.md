@@ -46,7 +46,7 @@ DATA_ARCH_AUDIT menyatakan "1 null entry" → **SALAH**. Actual: **5 null entrie
 | `45 jam/bln, 360 jam/thn` | `kartu: 134` — backing card EXISTS ← belum diapply                   |
 | `6 bulan → 10 hari`       | `kartu: 1172` — backing card EXISTS ← belum diapply                  |
 | `< 6mm / ≥ 6mm`           | `kartu: 1347` — backing card EXISTS + soal terpotong ← belum diapply |
-| `90 detik/soal`           | `kartu: null, // exam-meta` — sudah ada comment ✅                   |
+| `2 menit/soal`            | `kartu: null, // exam-meta` — sudah ada comment ✅                   |
 | `65%`                     | `kartu: null, // exam-meta` — sudah ada comment ✅                   |
 
 → **P9 di task list covers semua fix ini.**
@@ -192,7 +192,7 @@ Yang wajib difix: 41 truncated (ending `/`), 13 multi-slash list, 3 id_text beri
 | `45 jam/bln, 360 jam/thn` | `kartu: 134` — card 割増賃金率 cover threshold ini                |
 | `6 bulan → 10 hari`       | `kartu: 1172` — card 有給休暇, exact match                        |
 | `< 6mm / ≥ 6mm`           | `kartu: 1347` — card 軽量鉄骨 vs 重量鉄骨                         |
-| `90 detik/soal`           | `kartu: null, // exam-meta` — strategi ujian, bukan konten teknis |
+| `2 menit/soal`            | `kartu: null, // exam-meta` — strategi ujian, bukan konten teknis |
 | `65%`                     | `kartu: null, // exam-meta` — sama                                |
 
 ---
@@ -909,7 +909,7 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 - [ ] Update `kartu: null` → `kartu: 134` (entry `45 jam/bln`)
 - [ ] Update `kartu: null` → `kartu: 1172` (entry `6 bulan → 10 hari`)
 - [ ] Update `kartu: null` → `kartu: 1347` (entry `< 6mm / ≥ 6mm`)
-- [ ] Tambahkan comment `// exam-meta` pada entry `90 detik/soal` dan `65%` _(sudah ada, verify)_
+- [ ] Tambahkan comment `// exam-meta` pada entry `2 menit/soal` dan `65%` _(sudah ada, verify)_
 - [ ] Lengkapi soal field entry `< 6mm / ≥ 6mm` yang terpotong
 - [ ] Ruby pada 28/29 soal fields
 

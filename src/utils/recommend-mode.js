@@ -3,7 +3,8 @@
 // Returns a recommendation object based on current user state.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { getAvgAccuracy } from './session-analytics.js';
+import { getAvgAccuracy, getBestSimScore } from './session-analytics.js';
+import { EXAM_PASS_PCT } from './constants.js';
 
 /**
  * @param {{ srsState, sessions, streak, examDate }} opts
@@ -23,12 +24,10 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
   // Average quiz accuracy from recent scored sessions (last 10).
   const avgAcc = getAvgAccuracy(sessions, 10);
 
-  // Best sim score
-  const simSessions = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
-  const bestSim =
-    simSessions.length > 0
-      ? Math.max(...simSessions.map((s) => Math.round((s.correct / s.total) * 100)))
-      : 0;
+  // Best sim score. This used to be reimplemented inline, character for
+  // character, right next to the getAvgAccuracy import from the same module
+  // that already exports it -- two copies of one definition of "best".
+  const bestSim = getBestSimScore(sessions);
 
   // Rules (ordered by priority)
   if (daysUntilExam !== null && daysUntilExam <= 7 && daysUntilExam >= 0) {
@@ -64,7 +63,7 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
     };
   }
   if (daysUntilExam !== null && daysUntilExam <= 30) {
-    if (bestSim < 65) {
+    if (bestSim < EXAM_PASS_PCT) {
       return {
         mode: 'simulasi',
         icon: '📝',

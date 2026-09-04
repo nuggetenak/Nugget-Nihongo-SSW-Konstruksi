@@ -2,7 +2,7 @@
 // Achievement badge system. Pure functions — no side effects.
 // Checks are run against a snapshot of user state.
 // ─────────────────────────────────────────────────────────────────────────────
-import { HALF_DECK_THRESHOLD, TOTAL_CARDS } from './constants.js';
+import { HALF_DECK_THRESHOLD, TOTAL_CARDS, EXAM_PASS_PCT } from './constants.js';
 import { getAvgAccuracy, getBestSimScore, hasPerfectSprint } from './session-analytics.js';
 
 export const ACHIEVEMENTS = [
@@ -67,8 +67,8 @@ export const ACHIEVEMENTS = [
     icon: '🎓',
     badge: 'badge-08.png',
     label: 'Siap Ujian',
-    desc: 'Simulasi ≥65%',
-    check: (s) => s.bestSimScore >= 65,
+    desc: `Simulasi ≥${EXAM_PASS_PCT}%`,
+    check: (s) => s.bestSimScore >= EXAM_PASS_PCT,
   },
   {
     id: 'sim_75',
