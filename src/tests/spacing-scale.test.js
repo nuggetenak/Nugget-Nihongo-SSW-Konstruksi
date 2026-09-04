@@ -104,6 +104,29 @@ describe('no px spacing outside the scale', () => {
     expect(offenders).toEqual([]);
   });
 
+  it('no font-size is frozen in px either', () => {
+    // Same rule, same reason: --fs-* is fluid rem, so a px font-size neither
+    // grows with Ukuran Teks nor with the viewport. 101 of them were still
+    // frozen after the type scale was rebuilt (60 in stylesheets, 41 in JSX)
+    // — mostly icons and display numerals, which is exactly the text a reader
+    // who raised their font size wants bigger too.
+    const offenders = [];
+    for (const file of cssFiles) {
+      readFileSync(file, 'utf-8')
+        .split('\n')
+        .forEach((line, i) => {
+          if (/^\s*font-size:\s*\d+px\s*;/.test(line))
+            offenders.push(`${relative(SRC, file)}:${i + 1} ${line.trim()}`);
+        });
+    }
+    for (const file of jsxFiles) {
+      const src = readFileSync(file, 'utf-8');
+      for (const m of src.matchAll(/\bfontSize:\s*(\d+\s*[,}\n]|'\d+px')/g))
+        offenders.push(`${relative(SRC, file)}: ${m[0].trim()}`);
+    }
+    expect(offenders).toEqual([]);
+  });
+
   it('JSX style objects use tokens too', () => {
     // 418 of these were bare numbers and px strings. Fixing only the
     // stylesheets would have left more than half the app's spacing frozen.

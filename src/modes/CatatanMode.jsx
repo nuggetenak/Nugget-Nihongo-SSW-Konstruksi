@@ -58,7 +58,7 @@ function NoteCard({ card, note, onSave }) {
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            fontSize: 18,
+            fontSize: '1.125rem',
             padding: 'var(--space-4)',
             color: note ? 'var(--ssw-amber)' : 'var(--ssw-textFaint)',
           }}
@@ -254,7 +254,7 @@ export default function CatatanMode({ cards }) {
           background: 'var(--ssw-inputBg)',
           border: '2px solid var(--ssw-border)',
           borderRadius: 10,
-          fontSize: 14,
+          fontSize: '0.875rem',
           color: 'var(--ssw-text)',
           fontFamily: 'inherit',
           boxSizing: 'border-box',

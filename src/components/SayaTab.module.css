@@ -207,7 +207,7 @@
 }
 .rowChevron {
   color: var(--ssw-textFaint);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1;
 }
 
@@ -310,7 +310,7 @@
   transform: scale(0.99);
 }
 .installIcon {
-  font-size: 22px;
+  font-size: 1.375rem;
   flex-shrink: 0;
 }
 .installBody {
@@ -332,7 +332,7 @@
   margin-top: var(--space-2);
 }
 .installArrow {
-  font-size: 22px;
+  font-size: 1.375rem;
   color: var(--ssw-amberText);
   flex-shrink: 0;
   opacity: 0.7;

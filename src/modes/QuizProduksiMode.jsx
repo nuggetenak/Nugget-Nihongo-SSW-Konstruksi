@@ -374,7 +374,7 @@ export default function QuizProduksiMode({
               style={{
                 width: '100%',
                 padding: 'var(--space-14) var(--space-16)',
-                fontSize: 16,
+                fontSize: '1rem',
                 fontFamily: 'DM Sans, sans-serif',
                 border: `1.5px solid ${T.border}`,
                 borderRadius: 12,
@@ -432,7 +432,11 @@ export default function QuizProduksiMode({
             }}
           >
             <span
-              style={{ fontSize: 16, fontWeight: 700, color: answerCorrect ? T.correct : T.wrong }}
+              style={{
+                fontSize: '1rem',
+                fontWeight: 700,
+                color: answerCorrect ? T.correct : T.wrong,
+              }}
             >
               {answerCorrect ? '✓ Benar!' : '✗ Kurang tepat'}
             </span>
@@ -448,7 +452,7 @@ export default function QuizProduksiMode({
 
           <div style={{ marginBottom: 'var(--space-4)' }}>
             <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>Jawaban: </span>
-            <span style={{ fontSize: 16, fontWeight: 700, color: T.text }}>{card.id_text}</span>
+            <span style={{ fontSize: '1rem', fontWeight: 700, color: T.text }}>{card.id_text}</span>
           </div>
 
           {!answerCorrect &&

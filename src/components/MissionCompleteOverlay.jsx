@@ -48,7 +48,7 @@ export default function MissionCompleteOverlay({ onDone, result }) {
           userSelect: 'none',
         }}
       >
-        <div style={{ fontSize: 64, lineHeight: 1 }} aria-hidden="true">
+        <div style={{ fontSize: '4rem', lineHeight: 1 }} aria-hidden="true">
           {result?.icon ?? '🎉'}
         </div>
         <div
@@ -61,7 +61,14 @@ export default function MissionCompleteOverlay({ onDone, result }) {
           Misi Selesai!
         </div>
         {result?.label && (
-          <div style={{ fontSize: 14, marginTop: 'var(--space-6)', opacity: 0.9, fontWeight: 600 }}>
+          <div
+            style={{
+              fontSize: '0.875rem',
+              marginTop: 'var(--space-6)',
+              opacity: 0.9,
+              fontWeight: 600,
+            }}
+          >
             {result.label}
           </div>
         )}

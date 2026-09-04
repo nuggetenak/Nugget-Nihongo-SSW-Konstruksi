@@ -87,7 +87,7 @@
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-pill);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--ssw-textMuted);
   padding: var(--space-4) var(--space-10);
   line-height: 1;

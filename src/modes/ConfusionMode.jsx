@@ -21,7 +21,7 @@ import S from './modes.module.css';
 // own definition -- not side by side, but still presented as a matched pair
 // a learner is meant to compare, so a 2-character termA hitting jpFontSize's
 // 28px tier next to a 6-character termB at 20px would undercut the point of
-// the comparison. Restores the weight the surrounding fontSize:24 wrapper
+// the comparison. Restores the weight the surrounding 1.5rem wrapper
 // already signals (JpFront's own inline size otherwise overrides it
 // silently) as a shared ceiling for both cards.
 const CONFUSION_DETAIL_MAX = 24;
@@ -186,7 +186,7 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
                 <div style={{ flex: 1 }}>
                   <div
                     style={{
-                      fontSize: 16,
+                      fontSize: '1rem',
                       fontWeight: 700,
                       color: T.text,
                     }}
@@ -199,11 +199,13 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
                     />
                   </div>
                 </div>
-                <div style={{ color: T.textDim, fontSize: 18, alignSelf: 'center' }}>vs</div>
+                <div style={{ color: T.textDim, fontSize: '1.125rem', alignSelf: 'center' }}>
+                  vs
+                </div>
                 <div style={{ flex: 1, textAlign: 'right' }}>
                   <div
                     style={{
-                      fontSize: 16,
+                      fontSize: '1rem',
                       fontWeight: 700,
                       color: T.text,
                     }}
@@ -260,14 +262,14 @@ function DetailView({ pair, onBack }) {
       >
         <div
           style={{
-            fontSize: 24,
+            fontSize: '1.5rem',
             fontWeight: 800,
             marginBottom: 'var(--space-4)',
           }}
         >
           <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
-        <div style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{pair.defA}</div>
+        <div style={{ fontSize: '0.875rem', color: T.text, lineHeight: 1.6 }}>{pair.defA}</div>
       </div>
 
       {/* Term B */}
@@ -277,14 +279,14 @@ function DetailView({ pair, onBack }) {
       >
         <div
           style={{
-            fontSize: 24,
+            fontSize: '1.5rem',
             fontWeight: 800,
             marginBottom: 'var(--space-4)',
           }}
         >
           <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
-        <div style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>{pair.defB}</div>
+        <div style={{ fontSize: '0.875rem', color: T.text, lineHeight: 1.6 }}>{pair.defB}</div>
       </div>
 
       {/* Tip */}

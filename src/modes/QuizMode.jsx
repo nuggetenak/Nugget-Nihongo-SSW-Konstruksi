@@ -198,7 +198,7 @@ export default function QuizMode({
           >
             <div
               style={{
-                fontSize: 14,
+                fontSize: '0.875rem',
                 fontWeight: 700,
                 color: T.text,
                 marginBottom: 'var(--space-4)',

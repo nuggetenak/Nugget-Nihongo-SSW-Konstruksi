@@ -209,7 +209,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
                         background: 'none',
                         border: 'none',
                         cursor: 'pointer',
-                        fontSize: 16,
+                        fontSize: '1rem',
                         padding: '0 var(--space-2)',
                         lineHeight: 1,
                       }}

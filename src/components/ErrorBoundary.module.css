@@ -9,7 +9,7 @@
 }
 
 .icon {
-  font-size: 40px;
+  font-size: 2.5rem;
   margin-bottom: var(--space-12);
 }
 
@@ -110,7 +110,7 @@
 }
 
 .flatCardJp {
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: var(--fw-bold);
 }
 

@@ -85,7 +85,7 @@
 }
 
 .heroTitle {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 800;
   background: linear-gradient(135deg, #92400e, #b45309 50%, #f59e0b);
   -webkit-background-clip: text;
@@ -103,7 +103,7 @@
 }
 
 .heroDesc {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.7;
   color: var(--ssw-textDim);
   text-align: center;
@@ -140,7 +140,7 @@
 }
 
 .stepTitle {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--ssw-textBright);
   margin: 0 0 var(--space-8);
@@ -199,7 +199,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 1.375rem;
   flex-shrink: 0;
   transition: background 0.15s ease;
 }
@@ -213,7 +213,7 @@
 }
 
 .trackLabel {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--ssw-text);
 }
@@ -234,7 +234,7 @@
 }
 
 .trackCheck {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   color: #fff;
   flex-shrink: 0;
@@ -298,7 +298,7 @@
 
 .demoJp {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 500;
   color: var(--ssw-textBright);
   line-height: 1.2;
@@ -306,7 +306,7 @@
 
 .demoJpSmall {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--ssw-textBright);
   line-height: 1.2;
@@ -333,7 +333,7 @@
 }
 
 .demoIdText {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--ssw-textBright);
   align-self: flex-start;
@@ -388,7 +388,7 @@
 }
 
 .demoBtnEmoji {
-  font-size: 22px;
+  font-size: 1.375rem;
 }
 
 .demoBtnLabel {
@@ -399,7 +399,7 @@
 
 /* ── Goal ── */
 .goalHero {
-  font-size: 52px;
+  font-size: 3.25rem;
   margin-bottom: var(--space-16);
   animation: scaleIn 0.4s ease both;
 }
@@ -441,7 +441,7 @@
 }
 
 .goalNum {
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: 800;
   color: var(--ssw-amberText);
   line-height: 1;

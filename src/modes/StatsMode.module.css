@@ -24,7 +24,7 @@
 
 /* pct number uses Syne font — color is T.gold, kept inline (dynamic T value) */
 .overviewPct {
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 800;
   font-family: 'Syne', 'DM Sans', sans-serif;
 }
@@ -62,12 +62,12 @@
 }
 
 .miniEmoji {
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 /* miniValue — color is dynamic per card (T.gold / T.correct / '#60a5fa'), kept inline */
 .miniValue {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 800;
   font-family: 'Syne', 'DM Sans', sans-serif;
 }
@@ -150,7 +150,7 @@
 }
 
 .catEmoji {
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .catBody {

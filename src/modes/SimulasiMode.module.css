@@ -7,12 +7,12 @@
 }
 
 .startHeroEmoji {
-  font-size: 44px;
+  font-size: 2.75rem;
   margin-bottom: var(--space-8);
 }
 
 .startTitle {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .instructionsCard {
@@ -37,7 +37,7 @@
 }
 
 .presetEmoji {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .presetLabel {
@@ -78,7 +78,7 @@
 }
 
 .timerValue {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
@@ -137,12 +137,12 @@
 }
 
 .lulusIcon {
-  font-size: 52px;
+  font-size: 3.25rem;
   margin-bottom: var(--space-8);
 }
 
 .lulusStatus {
-  font-size: 26px;
+  font-size: 1.625rem;
   font-weight: 900;
   margin-bottom: var(--space-4);
   letter-spacing: 1px;
@@ -151,7 +151,7 @@
 }
 
 .lulusPct {
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: var(--space-4);
   font-variant-numeric: tabular-nums;

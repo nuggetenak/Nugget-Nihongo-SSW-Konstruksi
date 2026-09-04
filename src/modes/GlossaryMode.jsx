@@ -358,7 +358,7 @@ export default function GlossaryMode({ track }) {
                       {selectMode && (
                         <span
                           style={{
-                            fontSize: 16,
+                            fontSize: '1rem',
                             lineHeight: 1,
                             marginRight: 'var(--space-4)',
                             color: isSelected ? '#818cf8' : T.border,
@@ -392,7 +392,7 @@ export default function GlossaryMode({ track }) {
                               background: 'none',
                               border: 'none',
                               cursor: 'pointer',
-                              fontSize: 14,
+                              fontSize: '0.875rem',
                               padding: '0 var(--space-4)',
                               lineHeight: 1,
                               color: T.textMuted,

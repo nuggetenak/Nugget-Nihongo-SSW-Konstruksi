@@ -259,7 +259,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
             color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
             fontFamily: 'inherit',
-            fontSize: 16,
+            fontSize: '1rem',
             fontWeight: 700,
             border: 'none',
             cursor: hasAudio ? 'pointer' : 'not-allowed',

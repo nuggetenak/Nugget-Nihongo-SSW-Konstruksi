@@ -162,7 +162,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     return (
       <div className={S.page}>
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-20)' }}>
-          <div style={{ fontSize: 48, marginBottom: 'var(--space-8)' }}>⚡</div>
+          <div style={{ fontSize: '3rem', marginBottom: 'var(--space-8)' }}>⚡</div>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
           {pb > 0 && (
             <div
@@ -267,7 +267,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     return (
       <div className={S.page} style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: 48, marginBottom: 'var(--space-12)' }}>⚡</div>
+        <div style={{ fontSize: '3rem', marginBottom: 'var(--space-12)' }}>⚡</div>
         {newBest && (
           <div
             style={{
@@ -281,7 +281,12 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           </div>
         )}
         <div
-          style={{ fontSize: 36, fontWeight: 800, color: T.gold, marginBottom: 'var(--space-2)' }}
+          style={{
+            fontSize: '2.25rem',
+            fontWeight: 800,
+            color: T.gold,
+            marginBottom: 'var(--space-2)',
+          }}
         >
           {correct}
         </div>
@@ -399,7 +404,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               textAlign: 'center',
               marginTop: 'var(--space-12)',
-              fontSize: 14,
+              fontSize: '0.875rem',
               color: T.gold,
               fontWeight: 600,
             }}
@@ -414,7 +419,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               flex: 1,
               padding: 'var(--space-14)',
-              fontSize: 14,
+              fontSize: '0.875rem',
               fontWeight: 600,
               fontFamily: 'inherit',
               borderRadius: T.r.md,
@@ -431,7 +436,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               flex: 1,
               padding: 'var(--space-14)',
-              fontSize: 14,
+              fontSize: '0.875rem',
               fontWeight: 600,
               fontFamily: 'inherit',
               borderRadius: T.r.md,
