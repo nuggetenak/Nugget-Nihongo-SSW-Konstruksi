@@ -85,7 +85,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                 fontFamily: 'inherit',
                 padding: '4px 10px',
                 borderRadius: 99,
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 cursor: 'pointer',
                 background: active ? color : 'transparent',
                 color: active ? '#fff' : color,
@@ -120,7 +120,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                     {cl && (
                       <span
                         style={{
-                          fontSize: 10,
+                          fontSize: 'var(--fs-micro)',
                           padding: '1px 6px',
                           borderRadius: 99,
                           background: cl.color + '22',
@@ -165,7 +165,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                     >
                       <div
                         style={{
-                          fontSize: 11,
+                          fontSize: 'var(--fs-small)',
                           fontWeight: 700,
                           color: 'var(--ssw-amber)',
                           marginBottom: 4,
@@ -173,7 +173,13 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                       >
                         💡 Kenapa sering tertukar?
                       </div>
-                      <div style={{ fontSize: 12, color: 'var(--ssw-text)', lineHeight: 1.6 }}>
+                      <div
+                        style={{
+                          fontSize: 'var(--fs-caption)',
+                          color: 'var(--ssw-text)',
+                          lineHeight: 1.6,
+                        }}
+                      >
                         <DescBlock desc={pair.explanation} />
                       </div>
                     </div>
@@ -316,7 +322,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>
           ← Soal Jebak
         </button>
-        <div className={S.row} style={{ fontSize: 12 }}>
+        <div className={S.row} style={{ fontSize: 'var(--fs-caption)' }}>
           <span className={D.scoreBadge}>
             {results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)}
           </span>
@@ -378,7 +384,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
                       : T.textDim,
                 textAlign: 'left',
                 cursor: selected !== null ? 'default' : 'pointer',
-                fontSize: 13,
+                fontSize: 'var(--fs-body)',
                 lineHeight: 1.5,
                 transition: 'all 0.15s',
                 display: 'flex',
@@ -426,7 +432,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
             >
               <div
                 style={{
-                  fontSize: 11,
+                  fontSize: 'var(--fs-small)',
                   fontWeight: 700,
                   color: 'var(--ssw-amber)',
                   marginBottom: 4,
@@ -434,7 +440,9 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
               >
                 💡 Kenapa sering tertukar?
               </div>
-              <div style={{ fontSize: 12, color: 'var(--ssw-text)', lineHeight: 1.6 }}>
+              <div
+                style={{ fontSize: 'var(--fs-caption)', color: 'var(--ssw-text)', lineHeight: 1.6 }}
+              >
                 <DescBlock desc={pair.explanation} />
               </div>
             </div>

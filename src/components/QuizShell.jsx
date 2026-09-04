@@ -270,7 +270,7 @@ export default function QuizShell({
               borderRadius: 8,
               padding: '6px 12px',
               marginBottom: 8,
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               color: '#ca8a04',
             }}
           >

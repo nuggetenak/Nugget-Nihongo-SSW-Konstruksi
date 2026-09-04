@@ -166,12 +166,17 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
         </button>
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <div style={{ fontSize: 48, marginBottom: 8 }}>⚡</div>
-          <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
-            Sprint Mode
-          </h2>
+          <h2 className={S.pageTitle}>Sprint Mode</h2>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
           {pb > 0 && (
-            <div style={{ fontSize: 12, color: T.gold, fontWeight: 700, marginBottom: 8 }}>
+            <div
+              style={{
+                fontSize: 'var(--fs-caption)',
+                color: T.gold,
+                fontWeight: 700,
+                marginBottom: 8,
+              }}
+            >
               🏆 Rekor: {pb} benar
             </div>
           )}
@@ -193,7 +198,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
                 flex: 1,
                 padding: '10px 6px',
                 fontFamily: 'inherit',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 borderRadius: T.r.md,
                 cursor: 'pointer',
@@ -227,8 +232,10 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
                   }}
                 >
                   <span>{c.emoji}</span>
-                  <span style={{ fontSize: 13 }}>{c.label}</span>
-                  <span style={{ marginLeft: 'auto', fontSize: 11, color: T.textDim }}>
+                  <span style={{ fontSize: 'var(--fs-body)' }}>{c.label}</span>
+                  <span
+                    style={{ marginLeft: 'auto', fontSize: 'var(--fs-small)', color: T.textDim }}
+                  >
                     {c.key === 'all'
                       ? `${baseCards.length} kartu`
                       : `${baseCards.filter((cd) => cd.category === c.key).length} kartu`}
@@ -241,7 +248,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
 
         <button
           className={S.btnPrimary}
-          style={{ width: '100%', padding: '14px', fontSize: 15 }}
+          style={{ width: '100%', padding: '14px', fontSize: 'var(--fs-subtitle)' }}
           onClick={startSprint}
         >
           Mulai ⚡
@@ -263,30 +270,32 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
       <div className={S.page} style={{ textAlign: 'center' }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>⚡</div>
         {newBest && (
-          <div style={{ fontSize: 13, color: T.gold, fontWeight: 800, marginBottom: 8 }}>
+          <div
+            style={{ fontSize: 'var(--fs-body)', color: T.gold, fontWeight: 800, marginBottom: 8 }}
+          >
             🏆 Rekor baru!
           </div>
         )}
         <div style={{ fontSize: 36, fontWeight: 800, color: T.gold, marginBottom: 2 }}>
           {correct}
         </div>
-        <div style={{ fontSize: 12, color: T.textMuted, marginBottom: 4 }}>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.textMuted, marginBottom: 4 }}>
           benar dari {total} kartu · {pct}%
         </div>
         {!newBest && personalBest > 0 && (
-          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 16 }}>
+          <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginBottom: 16 }}>
             🏆 Rekor: {personalBest}
           </div>
         )}
         {newBest && (
-          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 16 }}>
+          <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginBottom: 16 }}>
             Rekor sebelumnya terlampaui!
           </div>
         )}
         <div className={S.row} style={{ gap: 8 }}>
           <button
             className={S.btnPrimary}
-            style={{ fontSize: 13, padding: '12px' }}
+            style={{ fontSize: 'var(--fs-body)', padding: '12px' }}
             onClick={startSprint}
           >
             🔄 Ulang
@@ -321,7 +330,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
         </button>
         <span
           style={{
-            fontSize: 20,
+            fontSize: 'var(--fs-jp-back)',
             fontWeight: 800,
             color: timerColor,
             animation: isUrgent ? 'pulse 0.8s ease infinite' : 'none',
@@ -331,13 +340,13 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           ⏱ {timeLeft}s
         </span>
         <div style={{ textAlign: 'right', marginLeft: 'auto' }}>
-          <span style={{ fontSize: 13, color: T.textMuted }}>
+          <span style={{ fontSize: 'var(--fs-body)', color: T.textMuted }}>
             ✅ {correct} · ❌ {wrong}
           </span>
           {ghostTimeline.length > 0 && (
             <div
               style={{
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 color: correct > ghostScore ? T.correct : T.textDim,
                 marginTop: 2,
               }}

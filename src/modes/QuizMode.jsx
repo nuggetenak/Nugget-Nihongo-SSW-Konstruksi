@@ -157,7 +157,7 @@ export default function QuizMode({
     const pillStyle = (on) => ({
       fontFamily: 'inherit',
       padding: '7px 16px',
-      fontSize: 13,
+      fontSize: 'var(--fs-body)',
       borderRadius: T.r.pill,
       cursor: 'pointer',
       fontWeight: on ? 700 : 400,
@@ -175,7 +175,7 @@ export default function QuizMode({
           <button
             style={{
               fontFamily: 'inherit',
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               padding: '5px 12px',
               borderRadius: T.r.pill,
               border: `1px solid ${showSettings ? T.borderActive : T.border}`,
@@ -189,9 +189,7 @@ export default function QuizMode({
           </button>
         </div>
 
-        <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
-          Kuis Flashcard
-        </h2>
+        <h2 className={S.pageTitle}>Kuis Flashcard</h2>
 
         {resumeData && (
           <div
@@ -206,7 +204,7 @@ export default function QuizMode({
             <div style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 4 }}>
               Lanjutkan kuis sebelumnya?
             </div>
-            <div style={{ fontSize: 12, color: T.textMuted, marginBottom: 10 }}>
+            <div style={{ fontSize: 'var(--fs-caption)', color: T.textMuted, marginBottom: 10 }}>
               Soal {resumeData.progress.qIdx + 1} dari {resumeData.questions.length}, terjawab{' '}
               {resumeData.progress.results.length}.
             </div>
@@ -279,11 +277,16 @@ export default function QuizMode({
                 }}
               >
                 <span style={{ fontWeight: 600 }}>{d.label}</span>
-                <span style={{ fontSize: 11, color: T.textDim }}>{d.desc}</span>
+                <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>{d.desc}</span>
               </button>
               {difficulty === d.key && (
                 <div
-                  style={{ fontSize: 11, color: d.color, padding: '4px 12px 8px', lineHeight: 1.5 }}
+                  style={{
+                    fontSize: 'var(--fs-small)',
+                    color: d.color,
+                    padding: '4px 12px 8px',
+                    lineHeight: 1.5,
+                  }}
                 >
                   {d.detail}
                 </div>
@@ -297,8 +300,10 @@ export default function QuizMode({
             {lemahCards.length > 0 && (
               <div className={S.rowSpread} style={{ marginBottom: 12 }}>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: T.text }}>Mode Lemah</div>
-                  <div style={{ fontSize: 11, color: T.textDim }}>
+                  <div style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: T.text }}>
+                    Mode Lemah
+                  </div>
+                  <div style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>
                     Fokus ke {lemahCards.length} kartu yang sering salah
                   </div>
                 </div>
@@ -313,7 +318,7 @@ export default function QuizMode({
                     color: lemahMode ? T.wrong : T.textMuted,
                     cursor: 'pointer',
                     fontWeight: 700,
-                    fontSize: 12,
+                    fontSize: 'var(--fs-caption)',
                   }}
                 >
                   {lemahMode ? '⚠ ON' : 'OFF'}
@@ -321,7 +326,14 @@ export default function QuizMode({
               </div>
             )}
             <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: T.text, marginBottom: 8 }}>
+              <div
+                style={{
+                  fontSize: 'var(--fs-body)',
+                  fontWeight: 600,
+                  color: T.text,
+                  marginBottom: 8,
+                }}
+              >
                 Lanjut otomatis
               </div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -339,7 +351,14 @@ export default function QuizMode({
             {/* Category filter */}
             {availableCats.length > 1 && (
               <div style={{ marginTop: 12 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: T.text, marginBottom: 8 }}>
+                <div
+                  style={{
+                    fontSize: 'var(--fs-body)',
+                    fontWeight: 600,
+                    color: T.text,
+                    marginBottom: 8,
+                  }}
+                >
                   Filter Kategori
                 </div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -352,7 +371,7 @@ export default function QuizMode({
                       <button
                         key={key}
                         onClick={() => setSelectedCat(key)}
-                        style={{ ...pillStyle(selectedCat === key), fontSize: 11 }}
+                        style={{ ...pillStyle(selectedCat === key), fontSize: 'var(--fs-small)' }}
                       >
                         {meta.emoji} {meta.label}
                       </button>
@@ -366,7 +385,7 @@ export default function QuizMode({
 
         <button
           className={S.btnPrimary}
-          style={{ fontSize: 15, padding: '15px' }}
+          style={{ fontSize: 'var(--fs-subtitle)', padding: '15px' }}
           onClick={startQuiz}
         >
           Mulai Kuis 🚀

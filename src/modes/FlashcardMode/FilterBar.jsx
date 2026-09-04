@@ -14,7 +14,7 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
           <span
             style={{
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               color: T.amber,
               fontWeight: 700,
               padding: '6px 10px',
@@ -29,7 +29,7 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
             onClick={() => onSearch('')}
             style={{
               fontFamily: 'inherit',
-              fontSize: 11,
+              fontSize: 'var(--fs-small)',
               color: T.textDim,
               background: 'transparent',
               border: 'none',

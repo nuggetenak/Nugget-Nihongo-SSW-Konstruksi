@@ -200,7 +200,7 @@ export default function GlossaryMode({ onExit, track }) {
               onClick={() => setCompactView((v) => !v)}
               style={{
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 padding: '2px 8px',
                 borderRadius: 99,
                 cursor: 'pointer',
@@ -216,7 +216,7 @@ export default function GlossaryMode({ onExit, track }) {
               onClick={toggleSelectMode}
               style={{
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 padding: '2px 8px',
                 borderRadius: 99,
                 cursor: 'pointer',
@@ -421,7 +421,7 @@ export default function GlossaryMode({ onExit, track }) {
             onClick={selectAll}
             style={{
               fontFamily: 'inherit',
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               padding: '6px 12px',
               borderRadius: 8,
               cursor: 'pointer',
@@ -433,7 +433,7 @@ export default function GlossaryMode({ onExit, track }) {
           >
             Semua ({sorted.length})
           </button>
-          <div style={{ flex: 1, fontSize: 12, color: T.textMuted }}>
+          <div style={{ flex: 1, fontSize: 'var(--fs-caption)', color: T.textMuted }}>
             {selected.size > 0 ? `${selected.size} kartu dipilih` : 'Tap kartu untuk pilih'}
           </div>
           <button
@@ -441,7 +441,7 @@ export default function GlossaryMode({ onExit, track }) {
             disabled={selected.size === 0}
             style={{
               fontFamily: 'inherit',
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               padding: '6px 14px',
               borderRadius: 8,
               cursor: selected.size === 0 ? 'not-allowed' : 'pointer',

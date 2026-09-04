@@ -216,7 +216,7 @@ export default function ExportMode({ onExit }) {
         ← Kembali
       </button>
       <h2 className={S.pageTitle}>💾 Ekspor &amp; Impor</h2>
-      <p className={S.pageSub} style={{ fontSize: 12, color: T.textDim }}>
+      <p className={S.pageSub} style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
         Simpan progress ke file JSON untuk backup atau pindah perangkat.
       </p>
 
@@ -245,11 +245,11 @@ export default function ExportMode({ onExit }) {
             >
               <div style={{ fontSize: 14 }}>{s.icon}</div>
               <div style={{ fontSize: 16, fontWeight: 800, color: T.gold }}>{s.n}</div>
-              <div style={{ fontSize: 9, color: T.textDim }}>{s.label}</div>
+              <div style={{ fontSize: 'var(--fs-nano)', color: T.textDim }}>{s.label}</div>
             </div>
           ))}
         </div>
-        <div style={{ fontSize: 10, color: T.textFaint, marginTop: 10 }}>
+        <div style={{ fontSize: 'var(--fs-micro)', color: T.textFaint, marginTop: 10 }}>
           Schema v{summary.version} · localStorage browser ini
         </div>
       </div>
@@ -300,7 +300,9 @@ export default function ExportMode({ onExit }) {
       >
         🧠 Ekspor Delta SRS Saja
       </button>
-      <p style={{ fontSize: 11, color: T.textDim, marginBottom: 16, lineHeight: 1.5 }}>
+      <p
+        style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginBottom: 16, lineHeight: 1.5 }}
+      >
         Delta SRS = hanya data ulasan (kartu hafal + jadwal SRS) tanpa statistik kuis. Lebih kecil,
         berguna untuk backup rutin harian.
       </p>
@@ -311,7 +313,7 @@ export default function ExportMode({ onExit }) {
           className={S.cardLg}
           style={{ marginBottom: 16, border: `1px solid ${T.gold}55`, background: `${T.gold}08` }}
         >
-          <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 10 }}>
+          <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, marginBottom: 10 }}>
             📥 Pratinjau Data Import
           </div>
           {/* Conflict warning if current data is newer than file. */}
@@ -323,7 +325,7 @@ export default function ExportMode({ onExit }) {
                 borderRadius: T.r.md,
                 background: T.wrongBg,
                 border: `1px solid ${T.wrongBorder}`,
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 color: T.wrong,
                 lineHeight: 1.5,
               }}
@@ -359,7 +361,7 @@ export default function ExportMode({ onExit }) {
                   borderRadius: T.r.md,
                   padding: '8px 10px',
                   border: `1px solid ${T.border}`,
-                  fontSize: 11,
+                  fontSize: 'var(--fs-small)',
                 }}
               >
                 <div style={{ fontWeight: 700, color: T.textDim, marginBottom: 4 }}>
@@ -376,14 +378,14 @@ export default function ExportMode({ onExit }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <button
               className={S.btnPrimary}
-              style={{ background: T.correct, fontSize: 13 }}
+              style={{ background: T.correct, fontSize: 'var(--fs-body)' }}
               onClick={handleConfirmImport}
             >
               ✅ Konfirmasi Import
             </button>
             <button
               className={S.btnSecondary}
-              style={{ fontSize: 13 }}
+              style={{ fontSize: 'var(--fs-body)' }}
               onClick={() => {
                 setPreviewData(null);
                 setStatus(null);
@@ -431,7 +433,7 @@ export default function ExportMode({ onExit }) {
           style={{
             padding: '12px 14px',
             borderRadius: T.r.md,
-            fontSize: 13,
+            fontSize: 'var(--fs-body)',
             lineHeight: 1.5,
             marginBottom: 16,
             background: status.type === 'ok' ? T.correctBg : T.wrongBg,
@@ -451,7 +453,7 @@ export default function ExportMode({ onExit }) {
           padding: '12px',
           marginBottom: 12,
           fontFamily: 'inherit',
-          fontSize: 13,
+          fontSize: 'var(--fs-body)',
           fontWeight: 700,
           borderRadius: T.r.md,
           border: `1px solid ${showGist ? T.borderActive : T.border}`,
@@ -466,7 +468,14 @@ export default function ExportMode({ onExit }) {
 
       {showGist && (
         <div className={S.cardLg} style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 11, color: T.textDim, marginBottom: 10, lineHeight: 1.6 }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-small)',
+              color: T.textDim,
+              marginBottom: 10,
+              lineHeight: 1.6,
+            }}
+          >
             Sync progress antar-perangkat tanpa backend — pakai GitHub Gist pribadi kamu (gratis).
             Token disimpan di perangkat ini saja dan hanya dikirim ke{' '}
             <strong>api.github.com</strong>.
@@ -475,7 +484,7 @@ export default function ExportMode({ onExit }) {
           {!online && (
             <div
               style={{
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 color: T.wrong,
                 background: T.wrongBg,
                 border: `1px solid ${T.wrongBorder}`,
@@ -493,7 +502,7 @@ export default function ExportMode({ onExit }) {
             htmlFor="export-gist-pat"
             style={{
               display: 'block',
-              fontSize: 11,
+              fontSize: 'var(--fs-small)',
               fontWeight: 700,
               color: T.text,
               marginBottom: 4,
@@ -510,7 +519,7 @@ export default function ExportMode({ onExit }) {
             style={{
               width: '100%',
               padding: '10px 12px',
-              fontSize: 13,
+              fontSize: 'var(--fs-body)',
               fontFamily: 'monospace',
               border: `1px solid ${T.border}`,
               borderRadius: T.r.md,
@@ -525,7 +534,7 @@ export default function ExportMode({ onExit }) {
             htmlFor="export-gist-id"
             style={{
               display: 'block',
-              fontSize: 11,
+              fontSize: 'var(--fs-small)',
               fontWeight: 700,
               color: T.text,
               marginBottom: 4,
@@ -542,7 +551,7 @@ export default function ExportMode({ onExit }) {
             style={{
               width: '100%',
               padding: '10px 12px',
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               fontFamily: 'monospace',
               border: `1px solid ${T.border}`,
               borderRadius: T.r.md,
@@ -562,7 +571,7 @@ export default function ExportMode({ onExit }) {
               style={{
                 padding: '9px 6px',
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 fontWeight: 700,
                 borderRadius: T.r.md,
                 border: `1px solid ${T.border}`,
@@ -580,7 +589,7 @@ export default function ExportMode({ onExit }) {
               style={{
                 padding: '9px 6px',
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 fontWeight: 700,
                 borderRadius: T.r.md,
                 border: `1px solid ${T.correctBorder}`,
@@ -599,7 +608,7 @@ export default function ExportMode({ onExit }) {
               style={{
                 padding: '9px 6px',
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 fontWeight: 700,
                 borderRadius: T.r.md,
                 border: `1px solid ${T.borderActive}`,
@@ -616,7 +625,7 @@ export default function ExportMode({ onExit }) {
           {gistStatus && (
             <div
               style={{
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 padding: '8px 10px',
                 borderRadius: T.r.md,
                 background: gistStatus.type === 'ok' ? T.correctBg : T.wrongBg,
@@ -628,7 +637,9 @@ export default function ExportMode({ onExit }) {
             </div>
           )}
 
-          <div style={{ marginTop: 8, fontSize: 10, color: T.textDim, lineHeight: 1.5 }}>
+          <div
+            style={{ marginTop: 8, fontSize: 'var(--fs-micro)', color: T.textDim, lineHeight: 1.5 }}
+          >
             Cara buat token: github.com → Settings → Developer settings → Personal access tokens →
             New token → centang <strong>gist</strong>
           </div>
@@ -636,17 +647,34 @@ export default function ExportMode({ onExit }) {
       )}
 
       <div className={S.cardLg}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: T.textDim, marginBottom: 6 }}>
+        <div
+          style={{
+            fontSize: 'var(--fs-small)',
+            fontWeight: 700,
+            color: T.textDim,
+            marginBottom: 6,
+          }}
+        >
           💡 Isi file ekspor:
         </div>
-        <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: T.textDim, lineHeight: 1.8 }}>
+        <ul
+          style={{
+            margin: 0,
+            paddingLeft: 16,
+            fontSize: 'var(--fs-small)',
+            color: T.textDim,
+            lineHeight: 1.8,
+          }}
+        >
           <li>Kartu hafal / belum hafal / berbintang</li>
           <li>Data SRS per kartu (jadwal ulang, stability, history)</li>
           <li>Riwayat jawaban salah dari kuis</li>
           <li>Riwayat sesi belajar</li>
           <li>Jalur belajar &amp; preferensi (土木 / 建築 / ライフライン)</li>
         </ul>
-        <div style={{ marginTop: 10, fontSize: 11, color: T.textDim, lineHeight: 1.6 }}>
+        <div
+          style={{ marginTop: 10, fontSize: 'var(--fs-small)', color: T.textDim, lineHeight: 1.6 }}
+        >
           ⚠️ Proses import menampilkan pratinjau data sebelum diterapkan. Kalau gagal, data lama
           otomatis dipulihkan.
         </div>

@@ -10,7 +10,7 @@ import H from './HowToPlayCard.module.css';
 
 export default function HowToPlayCard({ explanation, keyboardHint }) {
   return (
-    <div className={S.card} style={{ marginBottom: 24, fontSize: 12 }}>
+    <div className={S.card} style={{ marginBottom: 24, fontSize: 'var(--fs-caption)' }}>
       <div className={H.title}>💡 Cara main</div>
       <div className={H.explanation}>{explanation}</div>
       {keyboardHint && <div className={H.kbLine}>{keyboardHint}</div>}

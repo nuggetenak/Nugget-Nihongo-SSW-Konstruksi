@@ -104,7 +104,7 @@ export default function StatsMode({
         >
           <div
             style={{
-              fontSize: 13,
+              fontSize: 'var(--fs-body)',
               fontWeight: 700,
               letterSpacing: 1,
               color: T.textDim,
@@ -150,7 +150,9 @@ export default function StatsMode({
               label={readinessLabel}
             />
           </div>
-          <div style={{ fontSize: 13, color: ringColor, fontWeight: 700, marginTop: 2 }}>
+          <div
+            style={{ fontSize: 'var(--fs-body)', color: ringColor, fontWeight: 700, marginTop: 2 }}
+          >
             {readinessLabel}
           </div>
         </div>
@@ -167,7 +169,7 @@ export default function StatsMode({
               display: 'flex',
               justifyContent: 'space-around',
               marginTop: 14,
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
             }}
           >
             <span className={ST.overviewKnown}>✅ {knownN} hafal</span>
@@ -338,25 +340,35 @@ export default function StatsMode({
             }}
           >
             <div>
-              <div style={{ fontSize: 10, color: T.textDim, fontWeight: 700 }}>MINGGU LALU</div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: T.textMuted }}>
+              <div style={{ fontSize: 'var(--fs-micro)', color: T.textDim, fontWeight: 700 }}>
+                MINGGU LALU
+              </div>
+              <div
+                style={{ fontSize: 'var(--fs-page-title)', fontWeight: 800, color: T.textMuted }}
+              >
                 {lastWeek.length}
               </div>
-              <div style={{ fontSize: 9, color: T.textDim }}>sesi</div>
+              <div style={{ fontSize: 'var(--fs-nano)', color: T.textDim }}>sesi</div>
             </div>
             <div
               style={{ borderLeft: `1px solid ${T.border}`, borderRight: `1px solid ${T.border}` }}
             >
-              <div style={{ fontSize: 10, color: T.textDim, fontWeight: 700 }}>PERUBAHAN</div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: diffColor }}>
+              <div style={{ fontSize: 'var(--fs-micro)', color: T.textDim, fontWeight: 700 }}>
+                PERUBAHAN
+              </div>
+              <div style={{ fontSize: 'var(--fs-page-title)', fontWeight: 800, color: diffColor }}>
                 {diff === 0 ? '=' : diffLabel}
               </div>
-              <div style={{ fontSize: 9, color: T.textDim }}>sesi</div>
+              <div style={{ fontSize: 'var(--fs-nano)', color: T.textDim }}>sesi</div>
             </div>
             <div>
-              <div style={{ fontSize: 10, color: T.textDim, fontWeight: 700 }}>MINGGU INI</div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: T.amber }}>{thisWeek.length}</div>
-              <div style={{ fontSize: 9, color: T.textDim }}>sesi</div>
+              <div style={{ fontSize: 'var(--fs-micro)', color: T.textDim, fontWeight: 700 }}>
+                MINGGU INI
+              </div>
+              <div style={{ fontSize: 'var(--fs-page-title)', fontWeight: 800, color: T.amber }}>
+                {thisWeek.length}
+              </div>
+              <div style={{ fontSize: 'var(--fs-nano)', color: T.textDim }}>sesi</div>
             </div>
           </div>
         );
@@ -373,7 +385,7 @@ export default function StatsMode({
                   {c.quizAcc !== null && (
                     <span
                       style={{
-                        fontSize: 10,
+                        fontSize: 'var(--fs-micro)',
                         fontWeight: 700,
                         color: T.textDim,
                         background: T.surface,
@@ -397,7 +409,7 @@ export default function StatsMode({
               />
               {/* Wrong answer count if any */}
               {c.catWrongCount > 0 && (
-                <div style={{ fontSize: 10, color: T.wrong, marginTop: 2 }}>
+                <div style={{ fontSize: 'var(--fs-micro)', color: T.wrong, marginTop: 2 }}>
                   {c.catWrongCount}× salah dalam kuis
                 </div>
               )}

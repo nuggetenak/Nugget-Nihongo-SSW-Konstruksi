@@ -44,18 +44,22 @@ export default function MissionCompleteOverlay({ onDone, result }) {
         <div style={{ fontSize: 64, lineHeight: 1 }} aria-hidden="true">
           {result?.icon ?? '🎉'}
         </div>
-        <div style={{ fontSize: 22, fontWeight: 800, marginTop: 10 }}>Misi Selesai!</div>
+        <div style={{ fontSize: 'var(--fs-page-title)', fontWeight: 800, marginTop: 10 }}>
+          Misi Selesai!
+        </div>
         {result?.label && (
           <div style={{ fontSize: 14, marginTop: 6, opacity: 0.9, fontWeight: 600 }}>
             {result.label}
           </div>
         )}
         {result?.total > 0 && (
-          <div style={{ fontSize: 13, marginTop: 4, opacity: 0.75 }}>
+          <div style={{ fontSize: 'var(--fs-body)', marginTop: 4, opacity: 0.75 }}>
             {result.correct}/{result.total} benar
           </div>
         )}
-        <div style={{ fontSize: 11, marginTop: 12, opacity: 0.5 }}>Ketuk untuk tutup</div>
+        <div style={{ fontSize: 'var(--fs-small)', marginTop: 12, opacity: 0.5 }}>
+          Ketuk untuk tutup
+        </div>
       </div>
     </div>
   );

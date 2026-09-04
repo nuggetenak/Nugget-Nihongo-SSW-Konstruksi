@@ -112,7 +112,7 @@ function PanelView({
         </div>
         <button
           className={S.btnPrimary}
-          style={{ width: 'auto', padding: '10px 18px', fontSize: 13 }}
+          style={{ width: 'auto', padding: '10px 18px', fontSize: 'var(--fs-body)' }}
           onClick={onStartQuiz}
         >
           🧠 Kuis
@@ -131,7 +131,7 @@ function PanelView({
               style={{
                 fontFamily: 'inherit',
                 padding: '5px 12px',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 borderRadius: T.r.pill,
                 cursor: 'pointer',
                 fontWeight: active ? 700 : 500,
@@ -169,7 +169,7 @@ function PanelView({
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <span
                     style={{
-                      fontSize: 10,
+                      fontSize: 'var(--fs-micro)',
                       fontWeight: 700,
                       padding: '2px 7px',
                       borderRadius: T.r.pill,
@@ -180,7 +180,7 @@ function PanelView({
                     {meta.desc}
                   </span>
                 </div>
-                <span style={{ fontSize: 10, color: T.textDim }}>詳細 →</span>
+                <span style={{ fontSize: 'var(--fs-micro)', color: T.textDim }}>詳細 →</span>
               </div>
               <div style={{ display: 'flex', gap: 12 }}>
                 <div style={{ flex: 1 }}>
@@ -237,7 +237,7 @@ function DetailView({ pair, onBack }) {
       <div style={{ marginBottom: 4 }}>
         <span
           style={{
-            fontSize: 11,
+            fontSize: 'var(--fs-small)',
             fontWeight: 700,
             padding: '3px 9px',
             borderRadius: T.r.pill,
@@ -288,10 +288,19 @@ function DetailView({ pair, onBack }) {
           className={S.card}
           style={{ background: `rgba(245,158,11,0.08)`, border: `1px solid rgba(245,158,11,0.25)` }}
         >
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.amber, marginBottom: 6 }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-small)',
+              fontWeight: 700,
+              color: T.amber,
+              marginBottom: 6,
+            }}
+          >
             💡 Cara Bedakan
           </div>
-          <div style={{ fontSize: 13, color: T.text, lineHeight: 1.6 }}>{pair.tip}</div>
+          <div style={{ fontSize: 'var(--fs-body)', color: T.text, lineHeight: 1.6 }}>
+            {pair.tip}
+          </div>
         </div>
       )}
     </div>
@@ -415,7 +424,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>
           ← Kata Mirip
         </button>
-        <div style={{ fontSize: 12, color: T.textDim }}>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
           {results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)} ·{' '}
           {qIdx + 1}/{questions.length}
         </div>
@@ -427,7 +436,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
       <div style={{ textAlign: 'center', margin: '12px 0 8px' }}>
         <span
           style={{
-            fontSize: 11,
+            fontSize: 'var(--fs-small)',
             fontWeight: 700,
             padding: '3px 10px',
             borderRadius: T.r.pill,
@@ -457,7 +466,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
         <div style={{ textAlign: 'center' }}>
           <div
             style={{
-              fontSize: 20,
+              fontSize: 'var(--fs-jp-back)',
               fontWeight: 800,
               color: T.amber,
             }}
@@ -465,11 +474,11 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
             <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_QUIZ_MAX} />
           </div>
         </div>
-        <div style={{ fontSize: 13, color: T.textDim, fontWeight: 700 }}>vs</div>
+        <div style={{ fontSize: 'var(--fs-body)', color: T.textDim, fontWeight: 700 }}>vs</div>
         <div style={{ textAlign: 'center' }}>
           <div
             style={{
-              fontSize: 20,
+              fontSize: 'var(--fs-jp-back)',
               fontWeight: 800,
               color: T.text,
             }}
@@ -482,7 +491,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
       {/* Question prompt */}
       <div
         style={{
-          fontSize: 13,
+          fontSize: 'var(--fs-body)',
           color: T.textMuted,
           textAlign: 'center',
           marginBottom: 12,
@@ -533,7 +542,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                       : T.textDim,
                 textAlign: 'left',
                 cursor: showResult ? 'default' : 'pointer',
-                fontSize: 13,
+                fontSize: 'var(--fs-body)',
                 lineHeight: 1.5,
                 transition: 'all var(--t-fast)',
                 display: 'flex',
@@ -561,21 +570,21 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
           }}
         >
           <div style={{ marginBottom: 8 }}>
-            <span style={{ fontSize: 11, color: T.amber, fontWeight: 700 }}>
+            <span style={{ fontSize: 'var(--fs-small)', color: T.amber, fontWeight: 700 }}>
               {stripFuri(pair.termA)}
             </span>
-            <span style={{ fontSize: 11, color: T.textDim }}> = {pair.defA}</span>
+            <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}> = {pair.defA}</span>
           </div>
           <div style={{ marginBottom: pair.tip ? 10 : 0 }}>
-            <span style={{ fontSize: 11, color: T.textMuted, fontWeight: 700 }}>
+            <span style={{ fontSize: 'var(--fs-small)', color: T.textMuted, fontWeight: 700 }}>
               {stripFuri(pair.termB)}
             </span>
-            <span style={{ fontSize: 11, color: T.textDim }}> = {pair.defB}</span>
+            <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}> = {pair.defB}</span>
           </div>
           {pair.tip && (
             <div
               style={{
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 color: T.text,
                 lineHeight: 1.5,
                 borderTop: `1px solid rgba(245,158,11,0.15)`,

@@ -100,7 +100,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
             onClick={() => setShowAllTracks((v) => !v)}
             style={{
               fontFamily: 'inherit',
-              fontSize: 11,
+              fontSize: 'var(--fs-small)',
               padding: '5px 10px',
               borderRadius: 99,
               background: showAllTracks ? T.surface : T.surfaceActive,
@@ -132,7 +132,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
         <div style={{ marginBottom: 12 }}>
           <div
             style={{
-              fontSize: 10,
+              fontSize: 'var(--fs-micro)',
               fontWeight: 700,
               color: T.textMuted,
               letterSpacing: 1.2,
@@ -149,7 +149,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                 onClick={() => applyHistory(h)}
                 style={{
                   fontFamily: 'inherit',
-                  fontSize: 12,
+                  fontSize: 'var(--fs-caption)',
                   padding: '4px 10px',
                   borderRadius: 99,
                   background: T.surface,
@@ -198,7 +198,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
           return (
             <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
               <div className={S.rowSpread} style={{ alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 15, fontWeight: 600 }}>
+                <div style={{ fontSize: 'var(--fs-subtitle)', fontWeight: 600 }}>
                   <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -231,7 +231,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
-                      fontSize: 13,
+                      fontSize: 'var(--fs-body)',
                       padding: '0 2px',
                       lineHeight: 1,
                       color: copiedId === c.id ? T.correct : T.textMuted,
@@ -244,7 +244,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                     style={{
                       background: `${cat.color}22`,
                       color: cat.color,
-                      fontSize: 9,
+                      fontSize: 'var(--fs-nano)',
                       whiteSpace: 'nowrap',
                     }}
                   >
@@ -253,17 +253,26 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                 </div>
               </div>
               {extractReadings(c.jp) && (
-                <div style={{ fontSize: 11, color: T.textDim, fontFamily: T.fontJP }}>
+                <div
+                  style={{ fontSize: 'var(--fs-small)', color: T.textDim, fontFamily: T.fontJP }}
+                >
                   {extractReadings(c.jp)}
                 </div>
               )}
-              <div style={{ fontSize: 13, color: T.gold, marginTop: 4 }}>{c.id_text}</div>
+              <div style={{ fontSize: 'var(--fs-body)', color: T.gold, marginTop: 4 }}>
+                {c.id_text}
+              </div>
               {c.desc &&
                 (() => {
                   const clean = stripFuri(c.desc);
                   return (
                     <div
-                      style={{ fontSize: 11, color: T.textMuted, marginTop: 4, lineHeight: 1.5 }}
+                      style={{
+                        fontSize: 'var(--fs-small)',
+                        color: T.textMuted,
+                        marginTop: 4,
+                        lineHeight: 1.5,
+                      }}
                     >
                       {clean.slice(0, 100)}
                       {clean.length > 100 ? '…' : ''}
@@ -276,7 +285,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                   <span
                     className={S.pill}
                     style={{
-                      fontSize: 9,
+                      fontSize: 'var(--fs-nano)',
                       background: 'rgba(34,197,94,0.1)',
                       color: T.correct,
                       border: '1px solid rgba(34,197,94,0.25)',
@@ -289,7 +298,7 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                   <span
                     className={S.pill}
                     style={{
-                      fontSize: 9,
+                      fontSize: 'var(--fs-nano)',
                       background: 'rgba(220,38,38,0.08)',
                       color: T.wrong,
                       border: '1px solid rgba(220,38,38,0.2)',

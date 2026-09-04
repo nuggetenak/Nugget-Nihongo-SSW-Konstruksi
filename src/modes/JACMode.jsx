@@ -176,7 +176,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
 
   const pillStyle = (active) => ({
     fontFamily: 'inherit',
-    fontSize: 11,
+    fontSize: 'var(--fs-small)',
     padding: '6px 12px',
     borderRadius: T.r.pill,
     cursor: 'pointer',
@@ -221,7 +221,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
               onClick={() => setAutoDelay(d.ms)}
               style={{
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 padding: '5px 10px',
                 borderRadius: T.r.pill,
                 cursor: 'pointer',
@@ -249,7 +249,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
               onClick={() => setTopicFilter(null)}
               style={{
                 fontFamily: 'inherit',
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 padding: '5px 10px',
                 borderRadius: T.r.pill,
                 cursor: 'pointer',
@@ -270,7 +270,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
                 onClick={() => setTopicFilter(isActive ? null : t.key)}
                 style={{
                   fontFamily: 'inherit',
-                  fontSize: 11,
+                  fontSize: 'var(--fs-small)',
                   padding: '5px 10px',
                   borderRadius: T.r.pill,
                   cursor: 'pointer',
@@ -290,7 +290,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
             style={{
               marginTop: 10,
               fontFamily: 'inherit',
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               padding: '8px 16px',
               borderRadius: T.r.md,
               cursor: 'pointer',
@@ -331,7 +331,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
                 {!topicFilter && saved && (
                   <span
                     style={{
-                      fontSize: 11,
+                      fontSize: 'var(--fs-small)',
                       fontWeight: 700,
                       color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
                     }}
@@ -340,9 +340,11 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
                   </span>
                 )}
                 {!topicFilter && saved && saved.bestPct != null && saved.bestPct !== saved.pct && (
-                  <span style={{ fontSize: 10, color: T.textMuted }}>best {saved.bestPct}%</span>
+                  <span style={{ fontSize: 'var(--fs-micro)', color: T.textMuted }}>
+                    best {saved.bestPct}%
+                  </span>
                 )}
-                <span style={{ fontSize: 12, color: T.textDim }}>{cnt} soal</span>
+                <span style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>{cnt} soal</span>
               </div>
             </button>
           );
@@ -361,7 +363,7 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
           }}
         >
           <span>⚠ Lemah</span>
-          <span style={{ fontSize: 12 }}>
+          <span style={{ fontSize: 'var(--fs-caption)' }}>
             {lemahCount > 0 ? `${lemahCount} soal` : 'belum ada'}
           </span>
         </button>

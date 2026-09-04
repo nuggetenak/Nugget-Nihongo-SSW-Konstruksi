@@ -177,7 +177,7 @@ export default function Dashboard({
                     marginTop: 8,
                     padding: '3px 10px',
                     borderRadius: 999,
-                    fontSize: 12,
+                    fontSize: 'var(--fs-caption)',
                     fontWeight: 700,
                     background:
                       readinessBand.key === 'siap'

@@ -44,7 +44,9 @@ function NoteCard({ card, note, onSave }) {
           <div style={{ marginBottom: 2 }}>
             <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
           </div>
-          <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)' }}>{card.id_text}</div>
+          <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)' }}>
+            {card.id_text}
+          </div>
         </div>
         <button
           onClick={() => {
@@ -72,7 +74,7 @@ function NoteCard({ card, note, onSave }) {
             padding: '10px 12px',
             background: 'rgba(245,158,11,0.08)',
             borderRadius: 8,
-            fontSize: 13,
+            fontSize: 'var(--fs-body)',
             color: 'var(--ssw-text)',
             lineHeight: 1.5,
             borderLeft: '3px solid var(--ssw-amber)',
@@ -97,7 +99,7 @@ function NoteCard({ card, note, onSave }) {
               background: 'var(--ssw-inputBg)',
               border: '2px solid var(--ssw-borderLight)',
               borderRadius: 8,
-              fontSize: 13,
+              fontSize: 'var(--fs-body)',
               color: 'var(--ssw-text)',
               fontFamily: 'inherit',
               resize: 'vertical',
@@ -115,7 +117,7 @@ function NoteCard({ card, note, onSave }) {
                 background: 'var(--ssw-amber)',
                 color: 'var(--ssw-onAmber)',
                 fontFamily: 'inherit',
-                fontSize: 13,
+                fontSize: 'var(--fs-body)',
                 fontWeight: 700,
                 border: 'none',
                 cursor: 'pointer',
@@ -132,7 +134,7 @@ function NoteCard({ card, note, onSave }) {
                   background: 'var(--ssw-wrongBg)',
                   color: 'var(--ssw-wrong)',
                   fontFamily: 'inherit',
-                  fontSize: 13,
+                  fontSize: 'var(--fs-body)',
                   fontWeight: 600,
                   border: '1px solid var(--ssw-wrongBorder)',
                   cursor: 'pointer',
@@ -149,7 +151,7 @@ function NoteCard({ card, note, onSave }) {
                 background: 'var(--ssw-surface)',
                 color: 'var(--ssw-textMuted)',
                 fontFamily: 'inherit',
-                fontSize: 13,
+                fontSize: 'var(--fs-body)',
                 border: '1px solid var(--ssw-border)',
                 cursor: 'pointer',
               }}
@@ -220,11 +222,16 @@ export default function CatatanMode({ cards, onExit }) {
 
       <div style={{ marginBottom: 16 }}>
         <div
-          style={{ fontSize: 20, fontWeight: 700, color: 'var(--ssw-textBright)', marginBottom: 2 }}
+          style={{
+            fontSize: 'var(--fs-jp-back)',
+            fontWeight: 700,
+            color: 'var(--ssw-textBright)',
+            marginBottom: 2,
+          }}
         >
           📓 Buku Catatan
         </div>
-        <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)' }}>
+        <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)' }}>
           {noteCount} catatan · {cards.length} kartu total
         </div>
       </div>
@@ -261,7 +268,7 @@ export default function CatatanMode({ cards, onExit }) {
               padding: '6px 14px',
               borderRadius: 99,
               fontFamily: 'inherit',
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               fontWeight: filter === f.key ? 700 : 500,
               cursor: 'pointer',
               border: `2px solid ${filter === f.key ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
@@ -291,7 +298,7 @@ export default function CatatanMode({ cards, onExit }) {
             <div
               style={{
                 textAlign: 'center',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 color: 'var(--ssw-textDim)',
                 paddingTop: 8,
               }}

@@ -30,7 +30,7 @@ const RED_BTN = {
   color: '#fff',
   cursor: 'pointer',
   fontWeight: 700,
-  fontSize: 13,
+  fontSize: 'var(--fs-body)',
 };
 // Two independent sources, chosen explicitly rather than always pooled
 // together (owner's request, 2026-08-28): JAC Official's own 95 questions
@@ -493,7 +493,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             ...RED_BTN,
             width: '100%',
             padding: '14px',
-            fontSize: 15,
+            fontSize: 'var(--fs-subtitle)',
             boxShadow: '0 4px 16px rgba(220,38,38,0.3)',
           }}
           onClick={handleStart}
@@ -602,7 +602,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                           background: T.surface,
                           borderRadius: T.r.md,
                           border: `1px solid ${T.border}`,
-                          fontSize: 12,
+                          fontSize: 'var(--fs-caption)',
                         }}
                       >
                         <span style={{ color: T.textMuted, flex: 1 }}>{label}</span>
@@ -718,7 +718,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 return (
                   <div
                     style={{
-                      fontSize: 9,
+                      fontSize: 'var(--fs-nano)',
                       color: isUrgent ? T.wrong : T.textDim,
                       marginTop: 2,
                       letterSpacing: 0.2,
@@ -734,8 +734,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               that's the entire point of "deferred." Answered-count is
               progress, not a grade, so it stays. */}
           <div className={SM.scoreMini}>
-            <div style={{ fontSize: 10, color: T.textDim }}>TERJAWAB</div>
-            <div style={{ fontSize: 15, fontWeight: 700, color: T.text }}>
+            <div style={{ fontSize: 'var(--fs-micro)', color: T.textDim }}>TERJAWAB</div>
+            <div style={{ fontSize: 'var(--fs-subtitle)', fontWeight: 700, color: T.text }}>
               {answeredCount}/{questions.length}
             </div>
           </div>
@@ -799,7 +799,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                   borderRadius: '50%',
                   border: `1.5px solid ${isSelected ? T.amber : T.border}`,
                   color: isSelected ? T.amber : T.textDim,
-                  fontSize: 12,
+                  fontSize: 'var(--fs-caption)',
                   fontWeight: 700,
                   flexShrink: 0,
                 }}
@@ -839,7 +839,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 width: 30,
                 height: 30,
                 borderRadius: 8,
-                fontSize: 11,
+                fontSize: 'var(--fs-small)',
                 fontWeight: 700,
                 cursor: 'pointer',
                 fontFamily: 'inherit',
@@ -902,14 +902,16 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           }}
         >
           <div style={{ fontSize: 48 }}>⏸</div>
-          <div style={{ color: '#fff', fontSize: 20, fontWeight: 700 }}>Dijeda</div>
+          <div style={{ color: '#fff', fontSize: 'var(--fs-jp-back)', fontWeight: 700 }}>
+            Dijeda
+          </div>
           <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, marginBottom: 8 }}>
             {answeredCount}/{questions.length} soal terjawab · waktu ikut berhenti
           </div>
           <button
             type="button"
             onClick={() => setPaused(false)}
-            style={{ ...RED_BTN, padding: '13px 32px', fontSize: 15 }}
+            style={{ ...RED_BTN, padding: '13px 32px', fontSize: 'var(--fs-subtitle)' }}
           >
             ▶ Lanjutkan
           </button>
@@ -920,7 +922,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               background: 'none',
               border: 'none',
               color: 'rgba(255,255,255,0.55)',
-              fontSize: 13,
+              fontSize: 'var(--fs-body)',
               fontFamily: 'inherit',
               cursor: 'pointer',
               padding: 8,

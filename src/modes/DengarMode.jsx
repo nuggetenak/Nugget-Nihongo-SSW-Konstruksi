@@ -159,9 +159,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           ← Kembali
         </button>
         <div style={{ marginBottom: 24 }}>
-          <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
-            🎧 Mode Dengarkan
-          </h2>
+          <h2 className={S.pageTitle}>🎧 Mode Dengarkan</h2>
           <p className={S.pageSub} style={{ marginBottom: 0 }}>
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
           </p>
@@ -173,7 +171,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 background: 'var(--ssw-wrongBg)',
                 border: '1px solid var(--ssw-wrongBorder)',
                 borderRadius: 10,
-                fontSize: 13,
+                fontSize: 'var(--fs-body)',
                 color: 'var(--ssw-wrong)',
               }}
             >
@@ -188,7 +186,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 background: 'var(--ssw-surface)',
                 border: '1px solid var(--ssw-border)',
                 borderRadius: 10,
-                fontSize: 13,
+                fontSize: 'var(--fs-body)',
                 color: 'var(--ssw-textMuted)',
               }}
             >
@@ -201,7 +199,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
         <div style={{ marginBottom: 20 }}>
           <div
             style={{
-              fontSize: 12,
+              fontSize: 'var(--fs-caption)',
               fontWeight: 600,
               color: 'var(--ssw-textMuted)',
               marginBottom: 8,
@@ -224,7 +222,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                   padding: '10px 0',
                   borderRadius: 10,
                   fontFamily: 'inherit',
-                  fontSize: 15,
+                  fontSize: 'var(--fs-subtitle)',
                   fontWeight: count === n ? 700 : 400,
                   cursor: 'pointer',
                   border: `2px solid ${count === n ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
@@ -245,7 +243,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             background: 'var(--ssw-surface)',
             borderRadius: 12,
             marginBottom: 24,
-            fontSize: 13,
+            fontSize: 'var(--fs-body)',
             color: 'var(--ssw-textMuted)',
             lineHeight: 1.6,
           }}
@@ -334,7 +332,9 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           marginBottom: 20,
         }}
       >
-        <div style={{ fontSize: 13, color: 'var(--ssw-textMuted)', marginBottom: 12 }}>
+        <div
+          style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)', marginBottom: 12 }}
+        >
           {idx + 1} / {questions.length}
         </div>
 
@@ -350,7 +350,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             background: isAnswered ? 'var(--ssw-surface)' : 'var(--ssw-amber)',
             border: 'none',
             cursor: isAnswered ? 'default' : 'pointer',
-            fontSize: 32,
+            fontSize: 'var(--fs-hero)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -364,7 +364,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
         <div
           style={{
             marginTop: 16,
-            fontSize: 13,
+            fontSize: 'var(--fs-body)',
             color: 'var(--ssw-textMuted)',
             opacity: isAnswered ? 0 : 1,
             transition: 'opacity 0.2s',
@@ -414,7 +414,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 border: `2px solid ${border}`,
                 color,
                 fontFamily: 'inherit',
-                fontSize: 15,
+                fontSize: 'var(--fs-subtitle)',
                 cursor: isAnswered ? 'default' : 'pointer',
                 transition: 'all 0.15s',
                 fontWeight: 500,

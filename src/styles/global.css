@@ -177,11 +177,27 @@ body {
   overscroll-behavior: none;
 }
 
-/* ── Shared animations ── */
+/* ── Shared animations ──────────────────────────────────────────────────────
+   Every global keyframe in this app lives here, and only here.
+
+   Until 2026-09-04 they were split across two files: this one, and a <style>
+   block that styles/theme.js built as a JS string and appended to <head> at
+   import time. Six names were defined in BOTH with different values — fadeIn
+   6px vs 8px, slideUp 14 vs 20, slideDown -10 vs -12, scaleIn 0.93 vs 0.92,
+   staggerIn 14 vs 16, and shimmer running in OPPOSITE directions. theme.js is
+   imported after this file and appends to <head>, so its copy won every time
+   and the values written here were dead. Confirmed by reading the live
+   CSSOM in a browser rather than reasoning about import order.
+
+   The values kept below are the ones that were actually rendering, so this
+   consolidation changes no pixels. Ten unreferenced keyframes went with it
+   (fadeInFast, scaleUp, shimmer, ping, ripple, glowPulse, flipIn, toastOut,
+   spin, ctaShimmer) — the global `shimmer` included, since Skeleton.module.css
+   defines its own, which CSS Modules scopes to that file. */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -192,7 +208,7 @@ body {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -203,7 +219,7 @@ body {
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-12px);
   }
   to {
     opacity: 1;
@@ -214,7 +230,7 @@ body {
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.93);
+    transform: scale(0.92);
   }
   to {
     opacity: 1;
@@ -239,30 +255,56 @@ body {
   }
 }
 
-@keyframes shimmer {
-  from {
-    background-position: 200% 0;
-  }
-  to {
-    background-position: -200% 0;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes staggerIn {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Used only from inline styles (SimulasiMode/SprintMode's urgent timer), so it
+   has no stylesheet reference to find it by — it lived in theme.js's injected
+   block and nowhere else. */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Was in theme.js's injected block; no equivalent here. */
+html {
+  transition: background-color 0.25s ease;
+}
+
+button,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+[data-theme='light'] ::placeholder {
+  color: rgba(28, 25, 23, 0.35);
+}
+[data-theme='dark'] ::placeholder {
+  color: rgba(254, 243, 199, 0.3);
 }
 
 /* ── Scrollbar ── */
@@ -287,16 +329,6 @@ body {
   100% {
     opacity: 0;
     pointer-events: none;
-  }
-}
-
-/* ── UI Upgrade v5 additions ── */
-@keyframes ctaShimmer {
-  0% {
-    background-position: 200% center;
-  }
-  100% {
-    background-position: -200% center;
   }
 }
 

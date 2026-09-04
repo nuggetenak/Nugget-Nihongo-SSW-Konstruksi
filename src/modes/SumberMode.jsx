@@ -27,10 +27,14 @@ export default function SumberMode({ onExit, onNavigate }) {
         <button className={S.btnBack} onClick={() => setActiveSrc(null)}>
           ← Sumber
         </button>
-        <h2 className={S.pageTitle} style={{ fontSize: 16 }}>
+        {/* Deliberately smaller than a top-level .pageTitle: this is the
+            drilled-in per-source screen and its labels run long ("JAC Ch.1 —
+            Keselamatan & Salam"). Sized from the scale rather than a loose 16px
+            so it scales with everything else at the wide breakpoint. */}
+        <h2 className={S.pageTitle} style={{ fontSize: 'var(--fs-title)' }}>
           {meta.emoji} {meta.label}
         </h2>
-        <p className={S.pageSub} style={{ fontSize: 12 }}>
+        <p className={S.pageSub} style={{ fontSize: 'var(--fs-caption)' }}>
           {srcCards.length} kartu
         </p>
         {/* Quick-launch actions per source */}
@@ -41,7 +45,7 @@ export default function SumberMode({ onExit, onNavigate }) {
               style={{
                 flex: 1,
                 fontFamily: 'inherit',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 padding: '9px 10px',
                 borderRadius: T.r.md,
@@ -58,7 +62,7 @@ export default function SumberMode({ onExit, onNavigate }) {
               style={{
                 flex: 1,
                 fontFamily: 'inherit',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 padding: '9px 10px',
                 borderRadius: T.r.md,
@@ -75,7 +79,7 @@ export default function SumberMode({ onExit, onNavigate }) {
               style={{
                 flex: 1,
                 fontFamily: 'inherit',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 padding: '9px 10px',
                 borderRadius: T.r.md,
@@ -92,7 +96,7 @@ export default function SumberMode({ onExit, onNavigate }) {
               style={{
                 flex: 1,
                 fontFamily: 'inherit',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 padding: '9px 10px',
                 borderRadius: T.r.md,
@@ -109,7 +113,7 @@ export default function SumberMode({ onExit, onNavigate }) {
               style={{
                 flex: 1,
                 fontFamily: 'inherit',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 padding: '9px 10px',
                 borderRadius: T.r.md,
@@ -144,15 +148,29 @@ export default function SumberMode({ onExit, onNavigate }) {
               }}
             >
               <div className={S.rowSpread}>
-                <span style={{ fontSize: 13 }}>
+                <span style={{ fontSize: 'var(--fs-body)' }}>
                   <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                 </span>
-                <span style={{ fontSize: 12, color: T.textMuted, flexShrink: 0, marginLeft: 8 }}>
+                <span
+                  style={{
+                    fontSize: 'var(--fs-caption)',
+                    color: T.textMuted,
+                    flexShrink: 0,
+                    marginLeft: 8,
+                  }}
+                >
                   {c.id_text}
                 </span>
               </div>
               {expanded === c.id && (
-                <div style={{ marginTop: 6, fontSize: 11, color: T.textMuted, lineHeight: 1.5 }}>
+                <div
+                  style={{
+                    marginTop: 6,
+                    fontSize: 'var(--fs-small)',
+                    color: T.textMuted,
+                    lineHeight: 1.5,
+                  }}
+                >
                   <div style={{ marginTop: 4 }}>
                     <DescBlock desc={c.desc} />
                   </div>
@@ -215,7 +233,7 @@ export default function SumberMode({ onExit, onNavigate }) {
                       {isWeakest && (
                         <span
                           style={{
-                            fontSize: 9,
+                            fontSize: 'var(--fs-nano)',
                             fontWeight: 700,
                             background: 'rgba(220,38,38,0.1)',
                             color: T.wrong,
@@ -228,7 +246,9 @@ export default function SumberMode({ onExit, onNavigate }) {
                         </span>
                       )}
                     </div>
-                    <span style={{ fontSize: 12, color: T.textDim }}>{stat?.total ?? 0} kartu</span>
+                    <span style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
+                      {stat?.total ?? 0} kartu
+                    </span>
                   </div>
                   {stat && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -254,7 +274,7 @@ export default function SumberMode({ onExit, onNavigate }) {
                       </div>
                       <span
                         style={{
-                          fontSize: 10,
+                          fontSize: 'var(--fs-micro)',
                           fontWeight: 700,
                           color: stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong,
                           minWidth: 32,
