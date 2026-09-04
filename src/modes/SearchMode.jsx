@@ -34,7 +34,12 @@ export default function SearchMode({ track, starred, toggleStar }) {
   const [query, setQuery] = useState('');
   const [copiedId, setCopiedId] = useState(null); // copy feedback per card
   const debouncedQuery = useDebounce(query, 120);
-  const [showAllTracks, setShowAllTracks] = useState(false);
+  // showAllTracks removed 2026-09-04. It toggled between "cards in my track" and
+  // "all cards" — but every category in categories.js carries tracks:
+  // ['lifeline'], so getCatsForTrack('lifeline') returns all 11 content
+  // categories and both sides of the toggle produced the identical set. A
+  // control that cannot change what it claims to change, shown in two modes,
+  // left over from when Doboku and Kenchiku existed (removed session 24).
   const [history, setHistory] = useState(() => getHistory());
 
   // User accuracy data — loaded once on mount (static snapshot fine for search).
@@ -73,9 +78,9 @@ export default function SearchMode({ track, starred, toggleStar }) {
   }, []);
 
   const pool = useMemo(() => {
-    if (!trackCatKeys || showAllTracks) return CARDS;
+    if (!trackCatKeys) return CARDS;
     return CARDS.filter((c) => trackCatKeys.has(c.category));
-  }, [trackCatKeys, showAllTracks]);
+  }, [trackCatKeys]);
 
   const results = useMemo(() => {
     const q = debouncedQuery.trim().toLowerCase();
@@ -91,27 +96,6 @@ export default function SearchMode({ track, starred, toggleStar }) {
 
   return (
     <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
-      <div className={S.rowSpread} style={{ marginBottom: 12 }}>
-        {trackCatKeys && (
-          <button
-            onClick={() => setShowAllTracks((v) => !v)}
-            style={{
-              fontFamily: 'inherit',
-              fontSize: 'var(--fs-small)',
-              padding: '5px 10px',
-              borderRadius: 99,
-              background: showAllTracks ? T.surface : T.surfaceActive,
-              border: `1px solid ${showAllTracks ? T.border : T.borderActive}`,
-              color: showAllTracks ? T.textMuted : T.amber,
-              cursor: 'pointer',
-              fontWeight: 600,
-            }}
-          >
-            {showAllTracks ? '🗂 Semua jalur' : '🗂 Jalurku'}
-          </button>
-        )}
-      </div>
-
       <input
         type="text"
         aria-label="Cari kartu"

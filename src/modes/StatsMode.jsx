@@ -263,13 +263,22 @@ export default function StatsMode({
               }, {});
               const topMode = Object.entries(dominant).sort((a, b) => b[1] - a[1])[0]?.[0];
               const color = topMode ? (MODE_META[topMode]?.color ?? T.amber) : T.border;
+              const topLabel = topMode ? (MODE_META[topMode]?.label ?? topMode) : null;
               const label = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'][
                 new Date(d + 'T00:00:00').getDay()
               ];
               const isToday =
                 new Date(d + 'T00:00:00').toDateString() === new Date().toDateString();
               return (
-                <div key={d} className={ST.chartCol}>
+                <div
+                  key={d}
+                  className={ST.chartCol}
+                  aria-label={
+                    topLabel
+                      ? `${label}: ${count} sesi, terbanyak ${topLabel}`
+                      : `${label}: belum ada sesi`
+                  }
+                >
                   <div className={ST.chartCount}>{count > 0 ? count : ''}</div>
                   <div
                     style={{
@@ -281,7 +290,7 @@ export default function StatsMode({
                       opacity: count === 0 ? 0.4 : 1,
                       transition: 'height 0.3s ease',
                     }}
-                    title={`${d}: ${count} sesi`}
+                    title={topLabel ? `${d}: ${count} sesi · ${topLabel}` : `${d}: belum ada sesi`}
                   />
                   <div className={ST.chartLabel} style={{ fontWeight: isToday ? 700 : 400 }}>
                     {label}
@@ -292,6 +301,11 @@ export default function StatsMode({
           </div>
         );
       })()}
+      {/* The bars are coloured by the day's most-used mode -- real information,
+          but it was encoded with no key anywhere on the screen, so seven
+          differently-coloured bars just read as decoration. The title/aria-label
+          above name the mode; this says what the colour means at all. */}
+      <div className={ST.chartCaption}>Warna batang = mode paling sering hari itu</div>
 
       <div className={S.sectionLabel}>Per Kategori</div>
       {/* This week vs last week */}

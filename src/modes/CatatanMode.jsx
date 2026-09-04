@@ -11,6 +11,7 @@ import { useDebounce } from '../hooks/useDebounce.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import S from './modes.module.css';
+import { formatCount } from '../utils/format.js';
 
 function NoteCard({ card, note, onSave }) {
   const { prefs } = useApp();
@@ -242,7 +243,7 @@ export default function CatatanMode({ cards }) {
           📓 Buku Catatan
         </div>
         <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)' }}>
-          {noteCount} catatan · {cards.length} kartu total
+          {noteCount} catatan · {formatCount(cards.length)} kartu total
         </div>
       </div>
 
@@ -264,7 +265,6 @@ export default function CatatanMode({ cards }) {
           fontFamily: 'inherit',
           boxSizing: 'border-box',
           marginBottom: 12,
-          outline: 'none',
         }}
       />
 
@@ -312,7 +312,7 @@ export default function CatatanMode({ cards }) {
               paddingTop: 8,
             }}
           >
-            Menampilkan {visible.length} dari {filtered.length} kartu
+            Menampilkan {visible.length} dari {formatCount(filtered.length)} kartu
           </div>
           {visible.length < filtered.length && (
             <button

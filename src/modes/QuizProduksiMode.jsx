@@ -116,7 +116,7 @@ export default function QuizProduksiMode({
     }
 
     if (audioEnabled && canSpeak()) {
-      speakJP(stripFuri(card.jp), { onError: handleSpeakError });
+      speakJP(stripFuri(card.jp), { onError: () => handleSpeakError({ automatic: true }) });
     }
 
     setResults((r) => [...r, { card, input: input.trim(), correct }]);
@@ -373,7 +373,6 @@ export default function QuizProduksiMode({
                 borderRadius: 12,
                 background: T.surface,
                 color: T.text,
-                outline: 'none',
                 boxSizing: 'border-box',
               }}
               onFocus={(e) => {

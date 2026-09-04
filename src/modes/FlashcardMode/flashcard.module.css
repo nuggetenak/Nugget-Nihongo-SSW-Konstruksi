@@ -180,7 +180,6 @@
   font-size: var(--fs-body);
   padding: 9px 12px;
   border-radius: var(--r-lg);
-  outline: none;
   background: var(--ssw-inputBg);
   border: 1.5px solid var(--ssw-border);
   color: var(--ssw-text);

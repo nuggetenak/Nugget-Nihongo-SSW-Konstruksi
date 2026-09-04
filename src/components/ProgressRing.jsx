@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import s from './ProgressRing.module.css';
+import { formatCount } from '../utils/format.js';
 
 export default function ProgressRing({
   current = 0,
@@ -50,7 +51,10 @@ export default function ProgressRing({
           {Math.round(pct)}%
         </div>
         <div className={s.sub} style={{ fontSize: subSize }}>
-          {label ?? `${current}/${total}`}
+          {/* Corpus-scale by every current caller (SayaTab passes known/1438),
+              so it gets the same thousands separator as the numbers around it —
+              the ring read "140/1438" directly beside "1.438 kartu". */}
+          {label ?? `${formatCount(current)}/${formatCount(total)}`}
         </div>
       </div>
     </div>
