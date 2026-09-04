@@ -123,7 +123,13 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
 
   const jpStyle = (fs, extra = {}) => ({
     lineHeight: 1.4,
-    textAlign: 'center',
+    // Centring is a hero-card treatment. In a list row the term shares a line
+    // with a badge and sits above left-aligned neighbours, so a term long enough
+    // to wrap rendered its second line centred under the first — visible on
+    // DangerMode's accordion once the JP sizes went up and more terms started
+    // wrapping. The outer div already honours `compact`; this span was
+    // overriding it.
+    textAlign: compact ? 'inherit' : 'center',
     wordBreak: 'break-word',
     fontFamily: T.fontJP,
     fontWeight: 700,

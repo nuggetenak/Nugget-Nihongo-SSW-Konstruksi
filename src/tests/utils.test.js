@@ -106,14 +106,24 @@ describe('jpFontSize', () => {
     expect(jpFontSize('OK')).toBeGreaterThanOrEqual(24);
   });
 
-  it('returns smaller size for long text', () => {
-    expect(jpFontSize('これはとても長い日本語のテキストです')).toBeLessThanOrEqual(17);
+  it('returns smaller size for long text, but never below the legibility floor', () => {
+    const long = jpFontSize('これはとても長い日本語のテキストです');
+    const short = jpFontSize('OK');
+    expect(long).toBeLessThan(short);
+    // The floor moved 13 -> 17 on 2026-09-04. 13px of CJK is not comparable to
+    // 13px of Latin — a kanji carries far more strokes in the same box — and
+    // this ladder also multiplies into the furigana above it (rt is an em ratio
+    // of this size), which is how furigana came to render at 5.7px.
+    expect(long).toBeGreaterThanOrEqual(17);
   });
 
   it('returns a number', () => {
     expect(typeof jpFontSize('テスト')).toBe('number');
   });
 
+  // The CSS scale is fluid now (typography-scale.test.js), but jpFontSize stays
+  // a JS ladder with a hard breakpoint check: it drives an inline font-size from
+  // string length, which no CSS clamp can express.
   describe('wide breakpoint (item 22)', () => {
     const realMatchMedia = window.matchMedia;
     afterEach(() => {
