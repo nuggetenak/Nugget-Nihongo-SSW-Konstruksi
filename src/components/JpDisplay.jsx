@@ -3,7 +3,13 @@
 // Note: VS label font-size is derived from jp size — justified inline.
 import { T } from '../styles/theme.js';
 import { useMemo, useState } from 'react';
-import { stripFuri, extractReadings, jpFontSize, parseDescStructure, isMeaningfullyJapanese } from '../utils/jp-helpers.js';
+import {
+  stripFuri,
+  extractReadings,
+  jpFontSize,
+  parseDescStructure,
+  isMeaningfullyJapanese,
+} from '../utils/jp-helpers.js';
 import S from './JpDisplay.module.css';
 
 // ─── JpFront ──────────────────────────────────────────────────────────────────
@@ -217,7 +223,9 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
   );
   return wrapInteractive(
     <div style={{ textAlign: 'center' }}>
-      <span lang="ja" style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>{plainContent}</span>
+      <span lang="ja" style={jpStyle(fs, { letterSpacing: clean.length > 15 ? 0 : 2 })}>
+        {plainContent}
+      </span>
       {!hasRubyInText && !(showFuri && reading) && _ReadingRow(reading, showReadingRow)}
     </div>
   );
@@ -234,20 +242,141 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
 // long single-word readings).
 const MAX_PLAUSIBLE_KANA_PER_KANJI = 4;
 
-// Kanji run, optionally followed directly by a run of trailing kana (either
-// real okurigana in hiragana, or the tail of a kanji+katakana loanword
-// compound -- 移動式クレーン, 冷却コイル, 防水カバー and dozens more are
-// completely ordinary vocabulary in this domain, not edge cases), followed
-// by the 《reading》 marker. The trailing-kana group is speculative -- see
-// the two different validation strategies in renderJPWithRuby below, one
-// per script (hiragana vs katakana can't share a check: readings are always
-// written in hiragana, so a katakana suffix never matches the reading's
-// tail by exact string comparison even when it's the correct, intended
-// reading -- くれーん の long-vowel mark ー doesn't literally appear in its
-// own hiragana transliteration くれえん, they're the same sound written two
-// different ways, not the same characters).
+// A kanji run, optionally followed directly by a run of trailing kana (either
+// real okurigana in hiragana, or the tail of a kanji+katakana loanword compound
+// -- 移動式クレーン, 冷却コイル, 防水カバー and dozens more are completely
+// ordinary vocabulary in this domain, not edge cases), then the 《reading》
+// marker. The trailing-kana group is speculative and validated below.
+//
+// What this regex deliberately does NOT try to capture is where the word
+// *starts*. A reading routinely covers text to the left of the kanji it's
+// attached to -- ラジオ体操《らじおたいそう》, 差し込み継手《さしこみつぎて》,
+// 雇用保険の支給要件《こようほけんのしきゅうようけん》 -- and no regex can tell
+// that from ガス溶接《ようせつ》, where the reading covers the kanji only. That
+// question is answered by extendBaseLeft/readingFitsBase above, which check the
+// reading against the candidate word instead of guessing from shape.
 const RUBY_MARKER_SRC = '([一-龯々〆ヵヶ]+)([ぁ-んァ-ヶー]*)《([^》]+)》';
 const KATAKANA_RE = /[\u30A1-\u30FA]/;
+// A reading is kana (with the occasional latin abbreviation). Kanji inside one
+// means the marker is not a reading at all but a parenthetical gloss -- a second,
+// unrelated use of 《》 that jac-mockup-sets.js uses throughout (危険予知活動
+// 《KY活動》, 180度《完全に開く》, 1件500万円以上《建築工事は1500万円以上》).
+// Rendering those as ruby put whole sentences in <rt>, shrunk to annotation size
+// above one kanji. Detected here rather than guessed at: 30 distinct cases, all
+// unambiguous.
+const KANJI_RE = /[\u4E00-\u9FAF]/;
+
+// Katakana and hiragana are the same syllabary in two scripts, so a word and its
+// reading can be compared character for character once both are folded to one.
+const kataToHira = (t) => t.replace(/[ァ-ヶ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
+
+const KANA_RE = /[ぁ-んァ-ヶー]/;
+// Characters a word may be built from. Latin and digits are in deliberately:
+// GX形ダクタイル鋳鉄管《GXがた…》 and N値《Nち》 are real entries, and their
+// readings carry the latin part verbatim, so excluding it would cut the base
+// short at exactly the wrong place.
+const JP_WORD_RE = /[一-龯々〆ヵヶぁ-んァ-ヺーA-Za-z0-9]/;
+const LATIN_RE = /[A-Za-z0-9]/;
+// A vowel-lengthening ー in the base is spelled either ー or a bare vowel in the
+// reading (くれーん / くれえん both occur in this corpus).
+const LONG_VOWEL_MATCHES = 'ーあいうえおアイウエオ';
+
+/**
+ * Can `reading` be the reading of `base`?
+ *
+ * Aligns the two character by character: every kana in `base` must appear in
+ * `reading` at that exact point (kana is written the same in a word and in its
+ * reading, once katakana is folded to hiragana), while every kanji absorbs one
+ * or more kana. Backtracking, because a kanji's length isn't known in advance —
+ * 険 takes けん here and 険 could take just け elsewhere.
+ *
+ * The kana are what make this a real check rather than a guess: they pin the
+ * alignment at fixed points, so ラジオ体操/らじおたいそう aligns and
+ * ヘルメットを着用/ちゃくよう does not. A run of pure kanji would align with
+ * literally any reading of the right length, which is exactly why the caller
+ * refuses to extend across one that adds no kana.
+ */
+function readingFitsBase(base, reading) {
+  const b = kataToHira(base);
+  const r = kataToHira(reading);
+  const memo = new Set();
+  const walk = (i, j) => {
+    if (i === b.length) return j === r.length;
+    if (j >= r.length) return false;
+    const key = i * 1000 + j;
+    if (memo.has(key)) return false;
+    memo.add(key);
+    const ch = b[i];
+    if (ch === 'ー') {
+      // ー is orthography, not a sound: accept whichever vowel the reading
+      // spells the long syllable with. Still consumes exactly one character and
+      // still has to be a vowel — letting it match anything would make it a
+      // wildcard, which is how レーザー墨出し器《すみだしき》 first came out as
+      // ー墨出し器 with ー silently eating the す.
+      return LONG_VOWEL_MATCHES.includes(r[j]) && walk(i + 1, j + 1);
+    }
+    if (LATIN_RE.test(ch)) {
+      return ch.toLowerCase() === (r[j] ?? '').toLowerCase() && walk(i + 1, j + 1);
+    }
+    if (KANA_RE.test(ch)) {
+      return ch === r[j] && walk(i + 1, j + 1);
+    }
+    // Kanji: try every plausible reading length for it, shortest first.
+    for (let take = 1; take <= 4 && j + take <= r.length; take++) {
+      if (walk(i + 1, j + take)) return true;
+    }
+    return false;
+  };
+  return walk(0, 0);
+}
+
+/**
+ * How far left of `kanji` the ruby base really starts.
+ *
+ * Returns the extra text to prepend to the base (''  when the match already has
+ * the whole word). `before` is everything between the previous match and this
+ * one; only its trailing run of Japanese word characters is eligible, so a space,
+ * a comma or a latin token ends the search.
+ *
+ * Only extensions that add at least one kana are considered. Prepending a pure
+ * kanji run would always "fit" — kanji absorb any reading — so allowing it would
+ * turn this into a rule that swallows the preceding word whenever the reading
+ * happened to be long enough. Longest valid extension wins, so 雇用保険の支給要件
+ * beats の支給要件.
+ */
+function extendBaseLeft(before, kanji, trailing, reading, atTextStart = false) {
+  if (!before) return '';
+  // The reading's own length is the natural ceiling: readingFitsBase has to
+  // consume all of it, and no Japanese word is longer than its own reading, so a
+  // base can never legitimately grow past that. Self-limiting, and better than a
+  // fixed number — 12 characters happened to truncate a real 15-character
+  // compound in this corpus.
+  const maxExtension = reading.length;
+  let start = before.length;
+  while (start > 0 && JP_WORD_RE.test(before[start - 1]) && before.length - start < maxExtension) {
+    start--;
+  }
+  const word = before.slice(start);
+  if (!word) return '';
+  const tail = kanji + trailing;
+  for (let i = 0; i < word.length; i++) {
+    const ext = word.slice(i);
+    if (!KANA_RE.test(ext)) continue; // adds no kana — nothing would pin it
+    // A single kana starting mid-word is the one shape that fits by accident:
+    // the す of 示《しめ》す数値《すうち》, the は of 場合《ばあい》は速《はや》,
+    // the と of 趣味《しゅみ》と特技《とくぎ》 — each is okurigana or a particle
+    // belonging to what came before, and each happens to equal the first
+    // character of the next reading. Two kana agreeing by chance doesn't occur
+    // anywhere in this corpus (もう一度言, ねじ接合, せん断力, くさび緊結式足場,
+    // あと施工アンカー are all real prefixes), so the bar is two — except at the
+    // very start of the text, where there is no earlier word for a kana to have
+    // been taken from and ご安全に, お大事に, ご苦労様 are exactly right.
+    const opensTheText = atTextStart && i === 0 && start === 0;
+    if (ext.length === 1 && !opensTheText && !/[一-龯々〆ヵヶA-Za-z0-9]/.test(ext)) continue;
+    if (readingFitsBase(ext + tail, reading)) return ext;
+  }
+  return '';
+}
 
 // Strip only the CARDS-format pure-reading （reading） parens (this is
 // exactly stripFuri's second step, duplicated rather than imported from it
@@ -273,9 +402,25 @@ function stripPureReadingParens(text) {
 export function parseRubyFragments(jp = '') {
   const frags = [];
   const re = new RegExp(RUBY_MARKER_SRC, 'g');
+  let last = 0;
   let m;
   while ((m = re.exec(jp)) !== null) {
-    const [, base, trailing, reading] = m;
+    const [, kanji, trailing, reading] = m;
+    // Gloss, not a reading -- no fragment. Same rule as renderJPWithRuby.
+    if (KANJI_RE.test(reading)) {
+      last = m.index + m[0].length;
+      continue;
+    }
+    const isKatakanaTail = trailing && KATAKANA_RE.test(trailing);
+    const base =
+      extendBaseLeft(
+        jp.slice(last, m.index),
+        kanji,
+        isKatakanaTail ? trailing : '',
+        reading,
+        last === 0
+      ) + kanji;
+    last = m.index + m[0].length;
     if (!trailing) {
       frags.push({ base, reading });
     } else if (KATAKANA_RE.test(trailing)) {
@@ -329,20 +474,35 @@ export function renderJPWithRuby(text, _legacyFragments) {
     const gapBefore = cleaned.slice(lastEnd, m.index).replace(/《[^》]*》/g, '');
     const trailingIsKatakana = trailing && KATAKANA_RE.test(trailing);
 
-    if (trailing && !trailingIsKatakana && !rawReading.endsWith(trailing)) {
-      // Trailing hiragana that ISN'T an okurigana echo of this reading —
-      // a glossed synonym (ろう付け《ブレージング》) or a fill-in-the-blank
-      // cloze marker (《 》), not a phonetic reading. Don't guess: pass the
-      // whole thing through untouched, exactly as if the regex had never
-      // matched here (its pre-existing behaviour for every case like this).
+    // A reading carrying kanji is a parenthetical gloss, not furigana — see
+    // KANJI_RE. Pass the whole match through as literal text, which is exactly
+    // how the source wrote it and how it reads correctly on screen.
+    const isGloss =
+      KANJI_RE.test(rawReading) ||
+      (trailing && !trailingIsKatakana && !rawReading.endsWith(trailing));
+
+    if (isGloss) {
+      // Either a kanji-bearing gloss, or trailing hiragana that ISN'T an
+      // okurigana echo of this reading — a glossed synonym
+      // (ろう付け《ブレージング》) or a fill-in-the-blank cloze marker (《 》),
+      // not a phonetic reading. Don't guess: pass the whole thing through
+      // untouched, exactly as if the regex had never matched here.
       if (gapBefore) nodes.push(gapBefore);
       nodes.push(full);
       lastEnd = m.index + full.length;
       continue;
     }
 
-    let gap = gapBefore;
-    let base = kanji;
+    // Extend the base left through whatever the reading proves belongs to it.
+    const ext = extendBaseLeft(
+      gapBefore,
+      kanji,
+      trailingIsKatakana ? trailing : '',
+      rawReading,
+      lastEnd === 0
+    );
+    let gap = ext ? gapBefore.slice(0, gapBefore.length - ext.length) : gapBefore;
+    let base = ext + kanji;
     let reading = rawReading;
     let suffix = '';
     if (trailingIsKatakana) {
@@ -354,7 +514,7 @@ export function renderJPWithRuby(text, _legacyFragments) {
       // itself (long-vowel marks and small kana don't round-trip through a
       // literal character comparison). Not attempting the split is the
       // reliable choice, not a fallback for lack of a better one.
-      base = kanji + trailing;
+      base += trailing;
     } else if (trailing) {
       // Real, validated hiragana okurigana -- split it back out so it
       // renders as ordinary text after the ruby.
@@ -362,9 +522,12 @@ export function renderJPWithRuby(text, _legacyFragments) {
       suffix = trailing;
     }
 
-    // See MAX_PLAUSIBLE_KANA_PER_KANJI above: fold an implausibly-long
-    // reading's preceding gap text into the ruby base instead of stranding
-    // it bare next to a disproportionate <rt>.
+    // Last resort. extendBaseLeft handles every case it can *prove*; this
+    // catches what's left -- a reading so out of proportion to its base that
+    // stranding the gap text beside a disproportionate <rt> is certainly worse
+    // than folding it in, even without proof. Kept deliberately as the fallback
+    // rather than the rule: it is a length heuristic, and a length heuristic
+    // cannot tell 差し込み継手《さしこみつぎて》 from ガス溶接《ようせつ》.
     if (reading.length >= base.length * MAX_PLAUSIBLE_KANA_PER_KANJI && gap) {
       base = gap + base;
       gap = '';

@@ -51,20 +51,29 @@ const ALL_STRINGS = collectStrings([
   WAYGROUND_SETS,
 ]);
 
-// Markers that legitimately can't become <ruby> and are expected to survive
-// as literal bracketed text in the output -- glosses (a katakana synonym
-// annotated onto a kanji+okurigana word, e.g. ろう付け《ブレージング》) and
-// fill-in-the-blank cloze markers (《 》). Both fail the same check
-// (reading doesn't end with the okurigana touching it) and both already
-// rendered as raw brackets before this fix -- unchanged, not a regression.
-// Listed explicitly (rather than just asserting "some raw brackets are OK")
-// so a *new*, unexpected raw-bracket string fails the sweep instead of
-// silently joining this list.
+// Markers that legitimately can't become <ruby> and are expected to survive as
+// literal bracketed text in the output. Two shapes, and the difference matters:
+//
+//   1. RULE-BASED (isExpectedGloss below). A marker whose content contains kanji
+//      is never a furigana reading -- furigana is kana. It's the *other* use of
+//      《》 in this corpus: an ordinary parenthetical (危険予知活動《KY活動》,
+//      180度《完全に開く》). jac-mockup-sets.js uses that convention throughout,
+//      30 distinct cases. Expressed as a rule rather than a list because it is
+//      one: enumerating 30 substrings here would have to be re-enumerated the
+//      next time a question is written in the same house style.
+//   2. ENUMERATED (KNOWN_UNRENDERABLE_SUBSTRINGS). Kana-only markers that still
+//      aren't readings -- a katakana synonym glossed onto a kanji+okurigana word
+//      (ろう付け《ブレージング》) and the fill-in-the-blank cloze marker (《 》).
+//      These stay an explicit list precisely because no rule separates them from
+//      a real reading, so a *new* one has to be looked at by a person rather
+//      than silently absorbed.
+const KANJI_RE = /[\u4E00-\u9FAF]/;
+const isExpectedGloss = (html) =>
+  [...html.matchAll(/《([^》]*)》/g)].every((m) => KANJI_RE.test(m[1]));
+
 const KNOWN_UNRENDERABLE_SUBSTRINGS = [
   '《ブレージング》',
   '《ブレイジング》',
-  '《矢板など》',
-  '《衛生管理》',
   '《ヒューマンエラー》',
   '《 》', // cloze fill-in-the-blank
 ];
@@ -82,7 +91,8 @@ describe('renderJPWithRuby — full-corpus sweep against the real fix', () => {
     for (const text of ALL_STRINGS) {
       const html = renderToStaticMarkup(renderJPWithRuby(text));
       if (!html.includes('《')) continue;
-      const isKnown = KNOWN_UNRENDERABLE_SUBSTRINGS.some((s) => html.includes(s));
+      const isKnown =
+        KNOWN_UNRENDERABLE_SUBSTRINGS.some((s) => html.includes(s)) || isExpectedGloss(html);
       if (!isKnown) unexpected.push({ text, html });
     }
     if (unexpected.length) {
@@ -99,6 +109,71 @@ describe('renderJPWithRuby — full-corpus sweep against the real fix', () => {
       // Every <ruby> that opens must close, every <rt> that opens must close.
       expect((html.match(/<ruby/g) || []).length).toBe((html.match(/<\/ruby>/g) || []).length);
       expect((html.match(/<rt>/g) || []).length).toBe((html.match(/<\/rt>/g) || []).length);
+    }
+  });
+
+  // ── Round 5 (2026-09-04) — two classes the sweep above structurally cannot
+  // see, because both produce well-formed markup and only the *content* of the
+  // annotation is wrong. Asserted directly instead.
+
+  it.each([
+    // Reading covers text left of the kanji it is attached to -> that text is
+    // part of the base. Three scripts, so all three matcher branches are live.
+    ['ラジオ体操《らじおたいそう》', 'ラジオ体操', 'らじおたいそう'],
+    ['差し込み継手《さしこみつぎて》', '差し込み継手', 'さしこみつぎて'],
+    [
+      'GX形ダクタイル鋳鉄管《GXがたダクタイルちゅうてつかん》',
+      'GX形ダクタイル鋳鉄管',
+      'GXがたダクタイルちゅうてつかん',
+    ],
+    [
+      '足場組立て作業主任者《あしばくみたてさぎょうしゅにんしゃ》',
+      '足場組立て作業主任者',
+      'あしばくみたてさぎょうしゅにんしゃ',
+    ],
+    // Trailing に is validated okurigana, so it splits back out after the ruby —
+    // the honorific ご is still folded in at the front.
+    ['ご安全に《ごあんぜんに》', 'ご安全', 'ごあんぜん'],
+  ])('%s puts the whole word in the ruby base', (input, base, reading) => {
+    const html = renderToStaticMarkup(renderJPWithRuby(input));
+    expect(html).toContain(`>${base}<`);
+    expect(html).toContain(`<rt>${reading}</rt>`);
+  });
+
+  it.each([
+    // The other half of the same rule. Each of these has text before the kanji
+    // that the reading does NOT account for, so it has to stay outside the ruby
+    // -- which is why the base is decided by matching the reading rather than by
+    // any rule about shape or length.
+    ['ガス溶接《ようせつ》', 'ガス'],
+    ['ヘルメットを着用《ちゃくよう》', 'ヘルメットを'],
+    ['青い矢印が指《さ》し示《しめ》す設備', 'し'],
+  ])('%s leaves text the reading does not cover outside the ruby', (input, outside) => {
+    const html = renderToStaticMarkup(renderJPWithRuby(input));
+    expect(html).toContain(`${outside}<ruby`);
+  });
+
+  it('never folds non-Japanese prose into a ruby base', () => {
+    // The previous fallback folded ALL preceding text into the base whenever the
+    // reading looked disproportionate, which on a bilingual description meant a
+    // sentence of Indonesian ended up inside <ruby> with furigana over it. 89
+    // strings in the corpus did this.
+    const text = 'Digantung saat dipakai, dan 立てかけ式《たてかけしき》';
+    const html = renderToStaticMarkup(renderJPWithRuby(text));
+    expect(html).toContain('>立てかけ式<');
+    expect(html).not.toMatch(/<ruby[^>]*>[^<]*[A-Za-z]/);
+  });
+
+  it('never puts kanji in an <rt> — a kanji-bearing marker is a gloss, not a reading', () => {
+    // 危険予知活動《KY活動》, 180度《完全に開く》, 1件500万円以上《建築工事は
+    // 1500万円以上》 and 27 more were rendering whole phrases as furigana above a
+    // single kanji. Swept corpus-wide rather than spot-checked: the rule is
+    // absolute, so the assertion should be too.
+    for (const text of ALL_STRINGS) {
+      const html = renderToStaticMarkup(renderJPWithRuby(text));
+      for (const m of html.matchAll(/<rt>([^<]*)<\/rt>/g)) {
+        expect(KANJI_RE.test(m[1]), `kanji in <rt> for: ${text}`).toBe(false);
+      }
     }
   });
 
