@@ -121,6 +121,18 @@ content into this file.
   - **`57aca37` — 418 inline spacing declarations** in JSX style objects moved onto the tokens.
     Fixing only the stylesheets would have left more than half the app's spacing frozen against
     Ukuran Teks.
+  - **`1817d7f` — the flip card's height floor was a phone constant, in two places.** 230px in
+    CSS and again in JSX; the card sat 230px tall in an ~800px scene on a tablet, and the JSX copy
+    had been silently defeating the `max-height: 480px` landscape rule since item 23 wrote it.
+  - **`94900de` + `c79365b` — 180 ruby readings scoped to their own term.** Found from a tablet
+    screenshot taken for the layout work: a card rendered タイル張り工事 with a reading three
+    times too long, and a browser spreads a too-wide `<rt>` across its base, so the Japanese came
+    apart into spaced characters. 147 were split words whose second marker repeated the first's
+    reading (`給湯《きゅうとう》管《きゅうとうかん》`) — mechanical to detect, so fixed and
+    guarded in `audit-data-text.mjs`, whose existing pooled check keys on whitespace and could
+    never have seen them. 33 were card titles with several terms' readings run together, each
+    re-annotated by hand from the card's own fields. Corpus-wide, readings that cannot align to
+    the text before them fell from 283 to 122; among card titles, 32 to 3.
 
 - **Open items for the next session: `docs/UI_UX_PLAN.md` §12.** Two of them are decisions for the
   owner, not execution.

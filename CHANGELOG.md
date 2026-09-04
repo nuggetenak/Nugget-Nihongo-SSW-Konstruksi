@@ -171,6 +171,26 @@ flash on load, persisted in prefs.
 
 ### Content
 
+**180 ruby readings scoped to the term they actually belong to.** Found from a
+screenshot taken for the layout work, not from the data: a flashcard rendered
+タイル張り工事 with a reading three times too long, and a browser spreads a
+too-wide `<rt>` evenly across its base — so the Japanese itself came apart into
+spaced-out characters. Two classes underneath it:
+
+- **147 split words whose second half carried the whole word's reading** —
+  `給湯《きゅうとう》管《きゅうとうかん》`, `型《かた》枠《かたわく》`,
+  `通信《つうしん》ケーブル《つうしんケーブル》`. Mechanical to detect (the
+  second reading starts with the first one in full) and so fixed and guarded
+  mechanically; `audit-data-text.mjs` grows the rule, whose existing pooled
+  check keyed on whitespace and could never have seen these.
+- **33 card titles with several terms' readings run together**, sometimes
+  including readings for terms that only appear in the card's notes. No rule
+  says which part belongs to which term, so each was re-annotated by hand from
+  the card's own fields.
+
+Corpus-wide, kana readings that cannot align to any suffix of the text before
+them fell from 283 to 122; among card titles, from 32 to 3.
+
 - 13 pooled ruby readings split per term — `免振 vs 制振 vs 耐震《めんしん vs せいしん vs たいしん》`
   attached three terms' readings to the last term, so DangerMode's accordion showed raw 《》
   mid-title. Each fix derived from the entry's own sibling fields.
