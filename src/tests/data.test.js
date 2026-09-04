@@ -452,10 +452,25 @@ describe('SOURCE_GROUPS coverage', () => {
     expect(labels).toContain('Sumber Tambahan');
   });
 
-  it('Sumber Tambahan includes vocab-supplementary, vocab-general (text3l merged into vocab-supplementary, OD-1)', () => {
+  it('Sumber Tambahan includes vocab-supplementary (text3l merged into vocab-supplementary, OD-1)', () => {
     const tambahan = SOURCE_GROUPS.find((g) => g.label === 'Sumber Tambahan');
     expect(tambahan).toBeDefined();
     expect(tambahan.keys).toContain('vocab-supplementary');
-    expect(tambahan.keys).toContain('vocab-general');
+    // vocab-general was dropped 2026-09-04 -- declared here and in SOURCE_META
+    // but carried by zero cards, so SumberMode rendered it as a permanent
+    // "0 kartu" row. See the registry-rot guard below, which is the general
+    // form of this assertion.
+  });
+
+  it('every source in SOURCE_META is carried by at least one card', () => {
+    // The rot this catches is invisible from the code -- a source only stops
+    // being real when the last card using it is deleted, which happens in a data
+    // file nowhere near this registry. Five entries had gone dead this way
+    // (vocab-lifeline/core/exam/teori/general, orphaned by the session-24 scope
+    // reduction) and each showed on screen as an empty, un-openable row.
+    const used = new Set(CARDS.map((c) => c.source));
+    Object.keys(SOURCE_META).forEach((key) => {
+      expect(used.has(key), `SOURCE_META source "${key}" is used by 0 cards`).toBe(true);
+    });
   });
 });

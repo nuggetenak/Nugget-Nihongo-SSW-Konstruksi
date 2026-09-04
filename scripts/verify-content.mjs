@@ -12,8 +12,10 @@
  * WHAT IT DOES (no npm install needed, just `node scripts/verify-content.mjs`):
  *   1. Parse-checks every .js file under src/data/ — reports any file that isn't valid JS
  *   2. Deep-analyzes cards.js + source/cards-*.js: total count, type breakdown, duplicate IDs
- *   3. Cross-checks cards.js total against source/ mirrors and against the split files under
- *      src/data/cards/ — flags any mismatch
+ *   3. Cross-checks cards.js against source/ — totals AND field-by-field content, so a
+ *      cards.js that was never regenerated after a source/ edit is caught rather than
+ *      passing on a matching count (the split-file layer this used to also check was
+ *      deleted 2026-09-04; it was unimported and had drifted in 70 cards)
  *   4. Exits 1 if anything is broken, 0 if clean — safe to treat as a pass/fail gate
  *
  * HOW: each target file is transformed (`export const X` -> `module.exports.X`) and loaded via
@@ -124,12 +126,14 @@ log(`\n=== PART 2: cards.js — count + type breakdown + duplicate IDs ===\n`);
 const cardsPath = path.join(DATA_ROOT, 'cards.js');
 const cardsRes = loadDataModule(cardsPath);
 let cardsTotal = null;
+let cardsArr = null;
 if (cardsRes.ok) {
   const arr = firstArrayExport(cardsRes.exports);
   if (!arr) {
     fail('cards.js loaded but no array export found');
   } else {
     const cards = arr.value;
+    cardsArr = cards;
     cardsTotal = cards.length;
     const byType = {};
     for (const c of cards) byType[c.type] = (byType[c.type] || 0) + 1;
@@ -145,7 +149,7 @@ if (cardsRes.ok) {
   fail(`cards.js FAILED TO PARSE: ${cardsRes.error} — cannot run count/type checks`);
 }
 
-log(`\n=== PART 3: source/ mirrors vs cards.js vs split files — cross-check totals ===\n`);
+log(`\n=== PART 3: source/ mirrors vs cards.js — cross-check totals ===\n`);
 const sourceDir = path.join(DATA_ROOT, 'source');
 let sourceTotal = 0;
 let sourceOk = true;
@@ -168,32 +172,59 @@ if (fs.existsSync(sourceDir)) {
   if (sourceOk) log(`   source/ total: ${sourceTotal}`);
 }
 
-const cardsDir = path.join(DATA_ROOT, 'cards');
-let splitTotal = 0;
-let splitOk = true;
-if (fs.existsSync(cardsDir)) {
-  for (const f of listJsFiles(cardsDir)) {
-    const res = loadDataModule(f);
-    if (res.skipped) continue;
-    if (!res.ok) {
-      splitOk = false;
-      continue;
-    }
-    const arr = firstArrayExport(res.exports);
-    if (arr) splitTotal += arr.value.length;
-  }
-  log(`   split files (src/data/cards/**) total: ${splitTotal}`);
-}
-
 if (cardsTotal !== null) {
   if (sourceOk && sourceTotal === cardsTotal)
     ok(`source/ mirror total (${sourceTotal}) matches cards.js (${cardsTotal})`);
   else if (sourceOk)
     fail(`source/ mirror total (${sourceTotal}) DOES NOT MATCH cards.js (${cardsTotal})`);
-  if (splitOk && splitTotal === cardsTotal)
-    ok(`split-files total (${splitTotal}) matches cards.js (${cardsTotal})`);
-  else if (splitOk)
-    fail(`split-files total (${splitTotal}) DOES NOT MATCH cards.js (${cardsTotal})`);
+}
+
+// Part 3b: is cards.js actually up to date with source/?
+//
+// The totals above are necessary and nowhere near sufficient: cards.js is
+// GENERATED from source/, so the two agreeing on a count says almost nothing.
+// This script reported "✅ Clean. Numbers above are freshly derived — safe to
+// copy into HANDOFF.md as-is" for months while the split-file layer it also
+// checked had drifted from the mirrors in 70 cards' actual content, because
+// every check here compared counts and none compared content. That layer is gone
+// (2026-09-04, see CHANGELOG); this replaces its check with the one that
+// matters, on the generated file that ships.
+//
+// Field-by-field rather than a re-run of merge-cards.mjs: the point is to name
+// which card drifted, not just that something did.
+log(`\n=== PART 3b: is cards.js regenerated from the current source/? ===\n`);
+if (cardsArr && sourceOk) {
+  const byId = new Map(cardsArr.map((c) => [c.id, c]));
+  const drifted = [];
+  let sourceCount = 0;
+  for (const f of listJsFiles(sourceDir)) {
+    const res = loadDataModule(f);
+    if (res.skipped || !res.ok) continue;
+    const arr = firstArrayExport(res.exports);
+    if (!arr) continue;
+    for (const src of arr.value) {
+      sourceCount++;
+      const built = byId.get(src.id);
+      if (!built) {
+        drifted.push(`card ${src.id} is in source/ but missing from cards.js`);
+        continue;
+      }
+      // _origIndex is a merge artifact that merge-cards.mjs strips on output.
+      const { _origIndex, ...fields } = src;
+      for (const [k, v] of Object.entries(fields)) {
+        if (JSON.stringify(built[k]) !== JSON.stringify(v)) {
+          drifted.push(`card ${src.id}.${k} differs between source/ and cards.js`);
+        }
+      }
+    }
+  }
+  if (drifted.length === 0) {
+    ok(`cards.js matches source/ field for field (${sourceCount} cards compared)`);
+  } else {
+    for (const d of drifted.slice(0, 20)) fail(d);
+    if (drifted.length > 20) fail(`...and ${drifted.length - 20} more`);
+    fail(`cards.js is stale — run \`node scripts/merge-cards.mjs\``);
+  }
 }
 
 log(`\n=== RESULT ===\n`);
