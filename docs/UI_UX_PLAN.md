@@ -823,7 +823,7 @@ measured at several content lengths rather than eyeballed at one.
 
 ---
 
-## 7. Feature-parity audit across the whole Belajar tab (2026-09-04)
+## 13. Feature-parity audit across the whole Belajar tab (2026-09-04)
 
 Prompted by "kasih opsi kategori di menu kartu, sekalian analisa gap fitur menu kartu vs menu
 lain" — then widened, on request, to every menu the Belajar tab lists.
@@ -902,9 +902,23 @@ And `pillStyle(on)` — identical body — is copied at `QuizMode.jsx:157`, `Pro
 variants in `DangerMode.jsx:79-101`, `ConfusionMode.jsx:126-148`, `CatatanMode.jsx:274-291`,
 `SprintMode.jsx:184-208`. `modes.module.css` already has `.pill` (`:272`) that none of them use.
 
-### ☐ 78. Simulasi loses the entire exam on reload — `M` — `P1`
+### ☑ 78. Simulasi loses the entire exam on reload — `M` — `P1` — **done 2026-09-04**
 
-**Most urgent item in this section.** Item 51 (☑) gave `QuizShell` session persistence, but behind
+**Shipped.** `SimulasiMode` now snapshots to `sessionStorage` on every answer, page change and
+pause (`ssw-simulasi-progress` + `ssw-simulasi-questions`), and offers the exam back on the start
+screen. The drawn question list is saved with it: both sources shuffle, and the options inside each
+question are shuffled too, so restoring "question 7, answer B" against a fresh draw would restore
+the position into a different exam. The deadline is stored absolute, so a reload three minutes
+later comes back with three fewer minutes rather than a refilled clock — and an exam whose time ran
+out while the tab was closed resumes straight into its own scoring. `readQuizSnapshot` grew an
+optional staleness ceiling for this: its 30-minute default is shorter than the 100-minute exam it
+was being asked to hold.
+
+`jac`, `wayground` and `vocab` now pass `persistKey` too, through a shared `useQuizResume` hook
+and a shared `ResumePrompt` component rather than a fourth copy of QuizMode's inline version. Doing
+that turned up item 85 below, which was the more serious bug of the two.
+
+**Original finding:** Item 51 (☑) gave `QuizShell` session persistence, but behind
 an opt-in `persistKey` prop (`QuizShell.jsx:36`, `:55`) — and only `kuis` passes it
 (`QuizMode.jsx:442`). `wayground`, `vocab` and `jac` call the same shell without it, so the
 capability exists and is switched off.
@@ -965,3 +979,293 @@ one-component-with-a-direction-prop candidate in the codebase.
   `SprintMode.jsx:259`. Don't "fix" it into using one.
 - `glosari`, `cari`, `catatan`, `stats`, `ekspor`, `sumber` get no `onSessionEnd` and shouldn't —
   all are reading or tooling surfaces, not study sessions.
+
+---
+
+## 14. Exam family audit — `simulasi`, `jac`, `wayground`, `vocab` (2026-09-04)
+
+Requested: "analisa mode simulasi dan mode lain yang berhubungan dengannya — jangan berasumsi
+apa pun, list semua gap dan fitur yang belum ada." Scope is the whole Ujian section plus the
+machinery those four modes share: `QuizShell`, `ResultScreen`, `quiz-persistence`,
+`quiz-classification`, `simulasi-scoring`, `session-analytics`, `recommend-mode`, `achievements`,
+and the prop map in `ModeRouter`.
+
+Every finding below was read out of the code, and the numbers were measured rather than estimated
+(the measuring scripts are one-off, run against `src/data/` directly). Owner decisions taken during
+this session: **2 minutes per question is the correct exam rate** (which made `angka-kunci`'s
+90-second entry the wrong one), and **fix everything that is clearly a bug**, which is what items
+82–92 record.
+
+### Where the exam family stood
+
+| | `simulasi` | `jac` | `wayground` | `vocab` |
+|---|---|---|---|---|
+| Shell | bespoke | `QuizShell` | `QuizShell` | `QuizShell` |
+| Survives reload | no → **yes** | no → **yes** | no → **yes** | no → **yes** |
+| Retry-wrong → kartu | wrong ids → **fixed** | dead → **fixed** | never wired | impossible (no data) |
+| Wrong answers recorded | **no** (item 93) | `wrongCounts` | `wgWrong` | `vocabWrong` |
+| Wrong-only replay | no | ⚠ Lemah | ⚠ Ulang N | **no** (item 79) |
+| Keyboard | **none** (item 95) | 1–4 · Space · Esc | same | same |
+| Auto-advance control | n/a | 4 options | **locked 2 s** (item 80) | **locked 2 s** (item 80) |
+| Audio | no | yes | **no** | yes |
+| Score history | **none** (item 94) | `jacScores` | `wgScores` | `vocabScores` |
+
+---
+
+### ☑ 82. The exit guard was honoured by one of five routes out of a mode — `M` — `P0` — **fixed**
+
+`AppContext`'s own comment: "every route out of the mode area awaits it first and aborts if it
+returns false." Only `goBack` — the header's back arrow — ever did.
+
+- **Escape** (`GlobalKeyboardLayer.jsx:50`) called `exitMode()` directly, and `exitMode` *clears*
+  the guard on its way out. One keypress discarded a 100-minute exam with no prompt.
+- **The hardware/browser back button**: the `popstate` handler never looked at the guard. On a
+  phone this *is* the back button, which makes it the most expensive of the five.
+- **`goTab` and `goMode`**: `SideNav` stays on screen on desktop while a mode is open, so a click
+  on any tab or any other mode left silently.
+
+Fixed by hoisting `exitGuardRef` above the navigation callbacks and routing all of them through one
+`runGuarded` helper, which stays fully synchronous when no guard is registered — the common case,
+and what existing callers and tests expect. `popstate` is the interesting one: the browser has
+already moved by the time it fires, so the veto re-pushes the entry the app was parked on before
+asking, and an allow re-applies the press with `history.back()`. A mode's own exit button keeps
+calling `exitMode` directly: it has already asked, and routing it through the guard would ask the
+same question twice. Pinned by `tests/exit-guard-routes.test.jsx` (8 tests). Verified in Chromium:
+Escape and browser-back both raise the confirmation and leave the exam on screen.
+
+A reload still cannot be intercepted usefully, which is what item 78's snapshot is for.
+
+### ☑ 83. Every answer restarted the exam clock — `S` — `P0` — **fixed**
+
+The countdown was a counter decremented by a `setInterval` whose effect listed `finishExam` in its
+dependencies — and `finishExam` depends on `answers`. So **every single answer tore the interval
+down and started a fresh one**, discarding that second's elapsed time. Fifty answers bought roughly
+fifty free seconds; changing answers bought more; a fast run through the paper could stall the
+clock almost entirely. The same effect meant a backgrounded tab lost whatever the browser's timer
+throttling did not fire.
+
+Now a deadline: `deadlineRef` holds the wall-clock instant the exam ends and each tick derives the
+remainder from it, so it cannot drift, cannot be gamed by answering, survives throttling, and is
+the one number a resumed exam needs. Pausing freezes the remainder and resuming re-derives the
+deadline from it. `tests/simulasi-timer.test.jsx` pins all three.
+
+### ☑ 84. "Latih N Salah" sent you to unrelated flashcards — `S` — `P0` — **fixed**
+
+`SimulasiMode.jsx:572` passed `wrongList.map((_, i) => i)` — *positions in the wrong-answer list* —
+to a prop that `ModeRouter` turns into `goMode('kartu', { filterIds: ids })`, matched against card
+ids. Card ids run 1..1443, so one wrong answer sent you to an empty deck (id 0 matches nothing) and
+twenty sent you to cards 1..19: real flashcards, none of them related to anything you got wrong.
+
+The fix needed data, not just arithmetic: `buildJacPool` was dropping `related_card_id`, which
+**all 95** JAC_OFFICIAL questions carry. It now flows through as `_cardId`. No question in
+`QUIZ_SETS` has one (checked: 0 of 980), so a pure Teori & Praktik exam has nothing to offer here
+and the button hides rather than lying.
+
+### ☑ 85. Answering re-drew the live question list — `M` — `P0` — **fixed**
+
+Found while wiring item 78 into `jac` and `wayground`, and the worst thing in this audit.
+
+In both modes the question list was a `useMemo` whose dependency array included the wrong-answer
+tally those same modes write to on every wrong answer (`WaygroundMode.jsx:115`,
+`JACMode.jsx:71`). Answering wrongly recomputed the memo, re-ran `shuffle()`, and **replaced the
+question on screen with a different one** — while `QuizShell` was still showing the ✓/✗ badges and
+the explanation belonging to the question just answered. Reproduced before fixing; the probe's own
+output: `5S活動の最初の「整理」とは何をするか？` became `KY活動の4ステップで最初に行うことは？` on the
+answer click. In JAC's ⚠ Lemah mode it is worse still — the list is *filtered* by that tally, so a
+wrong answer grows the list you are working through.
+
+Both modes now draw their list once, into state, when a set is opened. That is also what makes a
+session restorable, so the two fixes are the same change. `tests/quiz-list-stability.test.jsx`.
+
+### ☑ 86. Retry-wrong was dead in three of the four exam modes — `S` — `P1` — **fixed**
+
+`QuizShell` can only offer "Latih N salah" (and `ResultScreen`'s "Latih ⟨kategori⟩") when its
+results carry `_cardId`. `JACMode`, `WaygroundMode` and `VocabMode` all set `_qId` and never
+`_cardId`, so the button never rendered — while the prop map handed `jac` and `vocab` a working
+`onRetryWrong`, and `WaygroundMode` never forwarded the prop to the shell at all. From the prop map
+alone all three read as having the feature.
+
+`jac` now works (its data has the links). `wayground` and `vocab` cannot until their questions get
+card links — a content job, item 96 — so their dead wiring is removed and says why, rather than
+looking like a feature that works.
+
+### ☑ 87. 22.6% of full exams contained the same question twice — `S` — `P1` — **fixed**
+
+`QUIZ_SETS` holds 740 teori/praktik questions but only **688 distinct** ones: 41 teori and 9
+praktik questions appear in two sets each, mostly where a Wayground set and a JAC-Mockup set cover
+the same ground (the KY活動 four-step questions live in `wt01`, `wt06`, `jmt01` and `jmt02`).
+`buildQuizSetsPool` did not deduplicate, so sampling 30+20 drew a repeat in **22.6%** of full
+exams — 6.2% at 25 questions, 2.1% at 15 (measured over 20 000 simulated draws each). A repeated
+question is the most obviously "not a real exam" thing this mode can do.
+
+Deduplicated by question text at pool build. Deliberately **not** applied to `buildJacPool`: 学科
+Set 1 and 実技 Set 1 share exactly one question, but the owner's rule for JAC Official is "take
+everything in both sets" (2026-08-28) and its 44/51 totals are a stated contract — official content
+repeating across two official sets is the book's own doing.
+
+### ☑ 88. The app contradicted itself about how long the exam is — `S` — `P1` — **fixed**
+
+`data/angka-kunci.js` taught, as a memorisable exam fact, **"90 detik/soal — Estimasi waktu
+Prometric (50 soal ÷ 75 mnt)"**. `SimulasiMode.jsx:59` used **2 minutes per question** (50 questions
+= 100 minutes), with a comment claiming that matched the real JAC convention. Both described the
+same exam and disagreed by 33%, and one of them was being drilled into users as a number to
+memorise.
+
+Owner ruled 2 min/question correct, so the `angka-kunci` entry was the wrong one and is now
+`2 menit/soal`. The rate lives in `utils/constants.js` as `EXAM_SECONDS_PER_QUESTION` so the mode
+and the data that teaches the number cannot drift apart again. `docs/CARD_CONTENT_SPEC.md` follows
+the rename.
+
+### ☑ 89. The instructions card described behaviour removed in item 48 — `XS` — `P2` — **fixed**
+
+"🚫 Soal otomatis lanjut setelah kamu jawab" — item 48 removed auto-advance, and navigation has
+been explicit ever since. The one card whose job is to state the rules was the last thing still
+describing the old ones. Replaced with what the mode actually does, including that blanks count as
+wrong (which it enforces, and never said up front).
+
+### ☑ 90. Session durations accumulated across replays — `S` — `P2` — **fixed**
+
+`useSessionTimer` measures from component mount and **nothing in the app ever called its
+`reset()`**. So a second run via 🔄 Ulang reported its own duration plus the first run's plus the
+time spent on the results screen in between — inflating study minutes and the heatmap for exactly
+the users who replay, which the button exists to encourage. `QuizShell.handleRestart` now resets it.
+`SimulasiMode` no longer uses the hook at all: its duration is `budget − remaining`, which is the
+exam's own elapsed time and excludes both the preset-picking and any pauses.
+
+### ☑ 91. One rule, three copies — `XS` — `P2` — **fixed**
+
+The 65% pass mark existed as a bare `65` in `SimulasiMode` (the LULUS banner), `achievements.js`
+(the "Siap Ujian" badge) and `recommend-mode.js` (the "needs more practice" gate) — three copies
+that must agree, and the failure mode is a badge saying *Siap Ujian* while the exam screen says
+*BELUM LULUS*. Now `EXAM_PASS_PCT`. Separately, `recommend-mode.js` reimplemented `getBestSimScore`
+inline, character for character, directly beside its own import of `getAvgAccuracy` from the module
+that exports it.
+
+### ☑ 92. The results breakdown had no meaningful sample sizes — `S` — `P2` — **fixed**
+
+"Breakdown per Set" on a 50-question pool exam is ~34 buckets of one or two questions each, which
+says nothing about anything. The axis the exam is actually sampled on — 30 teori / 20 praktik —
+was available and thrown away: `buildQuizSetsPool` tagged every question `_category`, and the
+question mapper dropped it. Carried through now, with a teori/praktik breakdown above the per-set
+one (and the row markup extracted rather than copied for the second list).
+
+---
+
+### ☐ 93. A wrong answer in the exam teaches the app nothing — `S` — `P1`
+
+`simulasi` writes to no wrong-tracker at all — not `quizWrong`, not `wrongCounts`, not `wgWrong`,
+not `vocabWrong`. Every other quiz mode records its mistakes, and three surfaces read them: JAC's
+⚠ Lemah, Wayground's ⚠ Ulang N, and `FokusMode`'s weakest-category drill. So the single longest,
+most diagnostic session in the app — 50 questions under time pressure — is also the only one whose
+mistakes leave no trace once the results screen is closed.
+
+Needs a decision on *where* they go before it can be built: `simulasi` draws from two pools with
+two different id spaces (JAC question ids like `tt1_q01`, and `QUIZ_SETS` questions whose ids are
+only unique within their set), so this is not a one-line write.
+
+### ☐ 94. The exam keeps no history of itself — `S` — `P2`
+
+`jac`, `wayground` and `vocab` each call `saveScore` and show past scores and personal bests on
+their own start screens. `simulasi` never calls it, so there is no attempt history, no best score,
+no "last time you got 58%" — for the one mode where a trend is the entire point of taking it twice.
+
+Blocked on a related trap: `saveScore`'s key mapping is
+`type === 'jac' ? 'jacScores' : type === 'wg' ? 'wgScores' : 'vocabScores'`
+(`ProgressContext.jsx:156`) — any unrecognised type silently writes into `vocabScores`. No current
+caller does, but adding a `sim` type without touching that ternary would corrupt vocab's scores
+rather than fail.
+
+### ☐ 95. `simulasi` has no keyboard support and thin screen-reader support — `M` — `P2`
+
+`QuizShell` gives every other quiz mode `useQuizKeyboard` (1–4 to answer, Space/→ to advance, Esc
+to leave), an `aria-live` "Soal X dari Y", and `QuizAnnouncer` for answer feedback. `simulasi`
+builds its own playing screen and has none of it: no shortcuts at all, and no live region, so the
+question counter and the countdown change silently.
+
+Its question navigator compounds this: one button per question, in document order **before** the
+Prev/Next row and the Kumpulkan button. On a 51-question JAC exam a keyboard or switch user tabs
+through 51 buttons to reach "submit". Needs a design call (reorder, or a skip link), which is why
+it is not in the fixed list above.
+
+### ☐ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2`
+
+0 of 980 questions in `QUIZ_SETS` carry a `related_card_id`; all 95 in `JAC_OFFICIAL` do. That gap
+is what makes retry-wrong impossible in `wayground` and `vocab` (item 86), keeps `ResultScreen`'s
+"Latih ⟨kategori⟩" dark there, and blocks any SRS bridge from those modes. It is a content task —
+980 links, presumably semi-automatable from the question text against the card corpus — not a code
+one, and it should be sized honestly before anyone starts.
+
+### ☐ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1`
+
+`recordSession` stores `{mode, correct, total, durationMs, date}` and nothing else, so a 15-question
+Latihan Cepat and a 50-question Ujian Penuh are both just `mode: 'simulasi'`. `getBestSimScore`
+takes the max percentage across them, and two things consume it: the **"Siap Ujian" badge** and the
+readiness advice on the dashboard ("Skor simulasi X% — perlu latihan lebih sebelum ujian").
+
+So the exam-readiness signal this app exists to produce can be earned on a 15-question practice
+run — the shortest, easiest thing in the section. Fixing it means recording the preset alongside
+the session, which is a `progress.sessions` shape change and therefore a storage-version decision.
+
+### ☐ 98. JAC Official's short presets have no teori/praktik ratio — `S` — `P2`
+
+The Teori & Praktik pool samples an exact 60/40 (9+6, 15+10, 30+20). JAC Official draws one random
+teori set + one random praktik set and then, for Latihan Cepat and Setengah Ujian, takes a plain
+shuffled slice — so the composition is whatever chance gives. Measured over 20 000 draws of the
+15-question preset: **0 to 11 praktik questions**, mean 4.8, and 0.11% of runs contain no praktik
+question at all. Either that variance is intended (it is a random draw from an official book) or
+the same ratio rule should apply; the code states no view. Owner's "biar keliatan kyk random"
+covers the *set pair*, not the slice within it.
+
+### ☐ 99. The exam cannot show the pictures the exam has — `S` — `P3`
+
+12 of the 95 JAC questions carry a `photoDesc`, and both `simulasi` and `QuizShell` render it as
+text ("📷 Soal asli pakai foto"). Reading a description of a diagram is not answering a question
+about a diagram, and these are 実技 questions where the picture is often the question. Nothing to
+fix in code until the images exist; worth recording as a known fidelity limit, and as a reason not
+to read a praktik sub-score too confidently.
+
+### ☐ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3`
+
+Explanations are truncated at 160 characters with no way to expand (`ResultScreen` does the same at
+180). Correct answers cannot be reviewed at all, so a lucky guess is indistinguishable from
+knowledge. And review entries carry no question number, so an item cannot be matched back to the
+navigator. Small, but this screen is the entire payload of a 100-minute session.
+
+### ☐ 101. No way to flag a question and come back to it — `S` — `P3`
+
+The navigator distinguishes answered from unanswered, which is most of the way there. Real exams —
+including the Prometric delivery this simulates — let you mark a question you want to revisit,
+which is exactly the behaviour a 100-minute paper rewards. `answers` is already a dict keyed by
+index, so a parallel `flagged` set is the whole feature.
+
+### ☐ 102. Small honesty gaps in the exam family's labels — `XS` — `P3`
+
+- The source picker says "JAC Official — Soal resmi dari buku ujian JAC (95 soal)", but no preset
+  ever draws from all 95: every start picks one teori + one praktik set (44 or 51).
+- `MODE_META.simulasi.desc` is `'Ujian + timer'` while its section siblings derive real counts from
+  the data (`MODE_COUNTS`), which exists precisely because hand-written counts had gone stale.
+- `wayground` (740 questions, the largest bank in the app) and `vocab` are absent from
+  `MISSION_TYPES` in `daily-mission.js` with no stated reason, while `kuisprod` and `mirip` are in.
+  `simulasi`'s absence is self-evident; theirs is not.
+
+---
+
+### Checked, not a bug
+
+- **`progress.wrongCounts` holds two id spaces.** `schema.js` documents it as `{ [cardId]: count }`
+  and the v1 migration folds a legacy card-keyed map into it, while `JACMode` writes JAC question
+  ids into the same object. No collision: JAC ids are strings (`tt1_q01`), card ids are numbers, and
+  `lemahCount` only ever looks up JAC ids. The schema comment is now inaccurate; the behaviour is
+  fine.
+- **`simulasi` does not use `ResultScreen`.** Deliberate (item 46): a pass/fail banner against a
+  threshold is not a generic score screen.
+- **Deferred scoring and neutral option buttons.** Deliberate (item 48) — an exam simulation must
+  not reveal correctness mid-exam, and `haptic.tap()` is used rather than `.correct()`/`.wrong()`
+  precisely because the haptic would leak the answer.
+- **Pausing has no time limit.** Offered on purpose, and the clock genuinely stops; someone who
+  wants to cheat a practice exam does not need the pause button to do it.
+- **`simulasi` receives no `audioEnabled`.** Correct for an exam, though item 76 still stands: no
+  rule says which modes get it, which is why `dengar` — built entirely on audio — also does not.
+- **Furigana on the question but never on the options.** `JpFront` honours `furiganaPolicy` for the
+  question stem while options always go through `stripFuri`, in every mode. Inconsistent, but it is
+  the whole app's convention, not this family's bug — and options render as plain text everywhere.

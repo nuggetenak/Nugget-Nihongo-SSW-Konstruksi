@@ -36,6 +36,42 @@ content into this file.
 
 **As of 2026-09-04.** Verify before trusting past this point — this line doesn't update itself.
 
+- **2026-09-04: "analyze the simulasi mode and other modes related to it. do not assume
+  anything, list all gaps and also additional missing features."** Branch
+  `claude/menu-kartu-kategori-gap-1onln7` (continued). Owner chose "fix everything that is clearly
+  a bug" over analysis-only, and settled a factual contradiction the audit turned up (see below).
+  The audit itself is `docs/UI_UX_PLAN.md` §14 — items 82–102 plus a "checked, not a bug" list;
+  reasoning per fix is in the commit messages.
+
+  - **Four P0s, three of which silently destroyed work.** (1) The exit guard was honoured by
+    exactly one of the five routes out of a mode — Escape, the hardware back button and the
+    desktop side nav each discarded a running 100-minute exam with no prompt, despite
+    `AppContext`'s own comment claiming "every route out of the mode area awaits it first".
+    (2) The exam clock was a counter whose interval was torn down and restarted by *every answer*,
+    because its effect depended on `finishExam` which depends on `answers`; it is a wall-clock
+    deadline now. (3) "Latih N Salah" passed positions in the wrong-answer list as card ids, so it
+    navigated to unrelated flashcards (`buildJacPool` was dropping the `related_card_id` that all
+    95 JAC questions carry). (4) Found while wiring persistence: in `jac` and `wayground` the live
+    question list was a memo keyed on the wrong-answer tally those modes write to on every wrong
+    answer, so **answering re-shuffled the list and swapped the question on screen** while the
+    feedback for the previous one was still displayed. Reproduced before fixing.
+  - **Item 78 closed.** `simulasi` snapshots to sessionStorage (progress + the drawn question list,
+    with an absolute deadline so a reload does not refill the clock), and `jac`/`wayground`/`vocab`
+    now pass `persistKey` through a shared `useQuizResume` + `ResumePrompt` rather than a fourth
+    copy of QuizMode's inline version.
+  - **Owner decision — the exam is 2 min/question.** `data/angka-kunci.js` was teaching
+    "90 detik/soal (50 soal ÷ 75 mnt)" as a memorisable fact while `SimulasiMode` used 2 min; owner
+    ruled the mode right, so the data entry was wrong and is corrected. The rate and the 65% pass
+    mark both live in `utils/constants.js` now — 65 had three copies that had to agree.
+  - **Still open, written up not built**: items 93–102 — chiefly that `simulasi` records its wrong
+    answers nowhere (93), keeps no attempt history (94), has no keyboard support (95), and that
+    `getBestSimScore` cannot tell a 15-question practice run from a 50-question exam, which is what
+    the "Siap Ujian" badge and the readiness advice are computed from (97).
+  - Verified: `npm run validate` clean (768 tests, up from 745; five audits; build), plus driving
+    the real app in Chromium at 390×844 — Escape and browser-back both raise the confirmation, a
+    reload offers the exam back at "3/15 soal terjawab · sisa waktu 29:55", and the clock keeps
+    running across the reload.
+
 - **2026-09-04: "buat menu kartu bisa kasih opsi pilihan kategori, sama analisa gap feature
   menu kartu dan menu yang lain"** (widened mid-session to "analisa juga menu lainnya di tab
   belajar", plus "aku pengen kyk versi legacy v87 yang bisa bolak balik kartu"). Branch
@@ -62,9 +98,7 @@ content into this file.
     now persists once a card has been seen rather than vanishing on every flip-back.
   - **`docs/UI_UX_PLAN.md` §7 — feature-parity audit of all 21 modes in the Belajar tab**, items
     75–81, none built. `ModeRouter.jsx`'s prop map is the authority for what a mode can even do.
-    **Item 78 is the one to take first**: `simulasi` is a timed 40–60 question mock exam with zero
-    persistence, that registers an exit guard — so it knows the loss is expensive and guards only
-    the in-app back button, not a reload or crash.
+    Item 78 was flagged as the one to take first, and was taken first — see the entry above.
 
 - **2026-09-04: "analyze comprehensively and exhaustively; fix all gaps, inconsistencies,
   discrepancies; upgrade the UI & UX."** Branch `claude/analysis-ui-polish-cxnj2d`, PR #8 (draft).
