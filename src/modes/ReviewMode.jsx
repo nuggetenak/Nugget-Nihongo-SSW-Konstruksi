@@ -351,7 +351,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
         aria-label={flipped ? undefined : `Balik kartu: ${currentCard ? clean : ''}`}
         className={R.card}
         style={{
-          padding: flipped ? '22px 18px' : '36px 20px',
+          padding: flipped ? 'var(--space-24) var(--space-16)' : 'var(--space-32) var(--space-20)',
           background: T.surface,
           borderRadius: T.r.xxl,
           border: `1.5px solid ${flipped ? T.borderActive : T.border}`,

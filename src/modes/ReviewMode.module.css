@@ -152,8 +152,14 @@
 }
 
 /* ── Card quiz page ── */
+/* Vertical rhythm only — the horizontal gutter is AppShell's .content, and
+   this was setting it a second time (see modes.module.css's page wrappers).
+   Flex column so the card below can claim the height the shell reserves. */
 .quizPage {
-  padding: var(--space-12) var(--space-16) var(--space-32);
+  padding-block: var(--space-12) var(--space-32);
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .quizHeader {
@@ -182,12 +188,23 @@
   margin-bottom: var(--space-2);
 }
 
-/* Card wrapper — border-color conditional on flip, kept inline */
+/* Card wrapper — border-color conditional on flip, kept inline.
+
+   This card GROWS into the free space, where FlashcardMode's is centred inside
+   a growing scene instead — a deliberate difference, not drift. FlipCard has
+   two faces and the back one is absolutely positioned with no bottom edge, so
+   stretching the card there would leave the back shorter than the front
+   (UI_UX_PLAN.md item 74). This card has one face and its content is already
+   centred, so it can simply fill, which puts the Japanese on a bigger stage
+   and the rating buttons at the bottom where the thumb is. Before this,
+   Ulasan — the mode this app's own plan calls the one a learner uses daily and
+   longest — left ~400px empty under a 220px card on a 390x844 phone. */
 .card {
   margin-top: var(--space-10);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1 0 auto;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
