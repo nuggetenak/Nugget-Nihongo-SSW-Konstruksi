@@ -720,7 +720,7 @@ export const CARDS_COMMON = [
     jp: '通勤災害《つうきんさいがい》 vs 業務災害《ぎょうむさいがい》',
     type: 'hukum',
     id_text: 'Kecelakaan perjalanan vs',
-    desc: '通《つう》勤《つうきん》災害《さいがい》: kecelakaan saat perjalanan rumah↔kerja. 業務《ぎょうむ》災害《さいがい》: akibat pekerjaan.',
+    desc: '通《つう》勤《きん》災害《さいがい》: kecelakaan saat perjalanan rumah↔kerja. 業務《ぎょうむ》災害《さいがい》: akibat pekerjaan.',
     _origIndex: 143,
   },
   {
@@ -1016,7 +1016,7 @@ export const CARDS_COMMON = [
     jp: '玉掛け《たまがけ》',
     type: 'vocab',
     id_text: 'Rigging crane',
-    desc: '玉掛《たまが》け=ikat beban ke kait crane. ≥1t wajib 技能《ぎのう》講習《こうしゅう》. <1t cukup 特《とく》別《とくべつ》教育《きょういく》.',
+    desc: '玉掛《たまが》け=ikat beban ke kait crane. ≥1t wajib 技能《ぎのう》講習《こうしゅう》. <1t cukup 特《とく》別《べつ》教育《きょういく》.',
     usage:
       '玉掛け《たまがけ》の角度《かくど》を60度《ど》以下《いか》に保《たも》つ（jaga sudut rigging di bawah 60 derajat）',
     _origIndex: 199,
@@ -1094,7 +1094,7 @@ export const CARDS_COMMON = [
     jp: '車両系建設機械の資格境界《しゃりょうけいけんせつきかいしかくきょうかい》',
     type: 'hukum',
     id_text: 'Alat berat',
-    desc: '機体重《かさ》ね量《きたいじゅうりょう》 ≥3t → 技能講習《ぎのうこうしゅう》. <3t → 特《とく》別教育《とくべつきょういく》.',
+    desc: '機体重《かさ》ね量《きたいじゅうりょう》 ≥3t → 技能講習《ぎのうこうしゅう》. <3t → 特《とく》別教育《べつきょういく》.',
     _origIndex: 217,
   },
   {
@@ -1146,7 +1146,7 @@ export const CARDS_COMMON = [
     jp: '工事担任者《こうじたんにんしゃ》・電気通信主任技術者《でんきつうしんしゅにんぎじゅつしゃ》',
     type: 'hukum',
     id_text: 'Lisensi telekomunikasi',
-    desc: '①工事担任者《こうじたんにんしゃ》 dan ②電気通《つう》信主任技術者《でんきつうしんしゅにんぎじゅつしゃ》=lisensi wajib, bukan 特《とく》別教育《とくべつきょういく》.',
+    desc: '①工事担任者《こうじたんにんしゃ》 dan ②電気通《つう》信主任技術者《でんきつうしんしゅにんぎじゅつしゃ》=lisensi wajib, bukan 特《とく》別教育《べつきょういく》.',
     _origIndex: 233,
   },
   {
@@ -1156,7 +1156,7 @@ export const CARDS_COMMON = [
     jp: 'ゴンドラ操作《ごんどらそうさ》',
     type: 'hukum',
     id_text: 'Gondola gedung tinggi →',
-    desc: 'ゴンドラ=platform gantung untuk dinding luar gedung tinggi → wajib 特《とく》別教育《とくべつきょういく》.',
+    desc: 'ゴンドラ=platform gantung untuk dinding luar gedung tinggi → wajib 特《とく》別教育《べつきょういく》.',
     _origIndex: 234,
   },
   {
@@ -1176,7 +1176,7 @@ export const CARDS_COMMON = [
     jp: '石綿《いしわた》（アスベスト）取り扱い作業者《とりあつかいさぎょうしゃ》',
     type: 'hukum',
     id_text: 'Pekerja asbes bongkar',
-    desc: 'Pembongkaran bangunan lama mengandung 石綿《いしわた》 (asbes) → wajib 特《とく》別教育《とくべつきょういく》修了者《しゅうりょうしゃ》.',
+    desc: 'Pembongkaran bangunan lama mengandung 石綿《いしわた》 (asbes) → wajib 特《とく》別教育《べつきょういく》修了者《しゅうりょうしゃ》.',
     _origIndex: 236,
   },
   {
@@ -1267,7 +1267,7 @@ export const CARDS_COMMON = [
     jp: '釜場《かまば》・水替え《みずかえ》・万棒《まんぼう》',
     type: 'vocab',
     id_text: 'Lubang pompa / pemompaan',
-    desc: '釜場《かまば》=lubang di dasar galian untuk pompa. 水替《みずか》え《みずかえ》=pompa air menggenang. 万棒《まんぼう》=alat perata tanah manual bergagang panjang.',
+    desc: '釜場《かまば》=lubang di dasar galian untuk pompa. 水替《みずか》え=pompa air menggenang. 万棒《まんぼう》=alat perata tanah manual bergagang panjang.',
     usage:
       '釜場《かまば》に水《みず》を集《あつ》めて万棒《まんぼう》で水替え《みずかえ》をする（kumpulkan air di lubang pompa dan sedot menggunakan pompa）',
     _origIndex: 252,
@@ -1375,7 +1375,7 @@ export const CARDS_COMMON = [
     jp: '納まり《おさまり》・取合い《とりあい》',
     type: 'vocab',
     id_text: 'Kerapian + antarmuka pemasangan',
-    desc: '納《おさ》まり《おさまり》=keserasian tata letak elemen. 取合《とりあ》い=titik pertemuan dua elemen/pekerjaan berbeda.',
+    desc: '納《おさ》まり=keserasian tata letak elemen. 取合《とりあ》い=titik pertemuan dua elemen/pekerjaan berbeda.',
     usage:
       '納《おさ》まりを確認《かくにん》してから取《と》り付《つ》ける（periksa kerapian pemasangan sebelum dipasang）',
     _origIndex: 264,
@@ -1399,7 +1399,7 @@ export const CARDS_COMMON = [
     jp: '駄目《だめ》・手直し《てなおし》・手戻り《てもどり》・段取り《だんどり》',
     type: 'vocab',
     id_text: 'Sisa pekerjaan / koreksi',
-    desc: '駄目《だめ》=pekerjaan terlewat saat hampir finishing. 手直《てなお》し《てなおし》=koreksi sebagian. 手戻《てもど》り=pengerjaan ulang akibat kesalahan besar. 段取《だんど》り=persiapan sebelum mulai kerja.',
+    desc: '駄目《だめ》=pekerjaan terlewat saat hampir finishing. 手直《てなお》し=koreksi sebagian. 手戻《てもど》り=pengerjaan ulang akibat kesalahan besar. 段取《だんど》り=persiapan sebelum mulai kerja.',
     usage:
       '駄目《だめ》を翌日《よくじつ》までに手直し《てなおし》する（selesaikan pekerjaan sisa sebelum keesokan hari）',
     _origIndex: 266,
@@ -1505,7 +1505,7 @@ export const CARDS_COMMON = [
     jp: '見切る《みきる》・見切《みき》り材《ざい》・馴染み《なじみ》',
     type: 'vocab',
     id_text: 'Selesaikan sambungan + bahan trim',
-    desc: '見切《みき》る《みきる》=selesaikan sambungan dua pekerjaan finishing. 見切《みき》り材《ざい》=material trim untuk menutup batas antar 2 finishing berbeda. 馴染《なじ》み=kesan menyatu/serasi secara visual antar elemen.',
+    desc: '見切《みき》る=selesaikan sambungan dua pekerjaan finishing. 見切《みき》り材《ざい》=material trim untuk menutup batas antar 2 finishing berbeda. 馴染《なじ》み=kesan menyatu/serasi secara visual antar elemen.',
     usage:
       '見切《みき》り材《ざい》で異なる仕上げ《しあげ》の境界《きょうかい》を処理《しょり》する（gunakan trim material untuk menyelesaikan batas antar finishing yang berbeda）',
     _origIndex: 288,
@@ -1551,7 +1551,7 @@ export const CARDS_COMMON = [
     jp: '場所打ち《ばしょうち》・打つ《うつ》／打設《だせつ》する',
     type: 'vocab',
     id_text: 'Pengecoran di lokasi',
-    desc: '場所打《ばしょう》ち《ばしょうち》=beton dicor langsung di lokasi, bukan precast.',
+    desc: '場所打《ばしょう》ち=beton dicor langsung di lokasi, bukan precast.',
     usage:
       '型枠《かたわく》内《ない》に場所打ち《ばしょうち》でコンクリートを打設《だせつ》する（cor beton langsung di tempat ke dalam bekisting）',
     _origIndex: 292,
@@ -1610,7 +1610,7 @@ export const CARDS_COMMON = [
     jp: '服装の注意《ふくそうのちゅうい》4項目《こうもく》',
     type: 'konsep',
     id_text: '4 pantangan pakaian di proyek konstruksi',
-    desc: '①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《そでまくりきんし》 ④ポケット手禁止《てきんし》.',
+    desc: '①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《きんし》 ④ポケット手禁止《てきんし》.',
     _origIndex: 307,
   },
   {
@@ -1620,7 +1620,7 @@ export const CARDS_COMMON = [
     jp: '後片付け《あとかたづけ》・消火確認《しょうかかくにん》',
     type: 'konsep',
     id_text: 'Beres + cek api',
-    desc: 'Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》り《だんどり》 untuk esok. 消火《しょうか》確認《かくにん》=pastikan tidak ada api/bara yang tersisa sebelum meninggalkan lokasi.',
+    desc: 'Setelah kerja WAJIB beres-beres dengan mindset mempersiapkan 段取《だんど》り untuk esok. 消火《しょうか》確認《かくにん》=pastikan tidak ada api/bara yang tersisa sebelum meninggalkan lokasi.',
     _origIndex: 308,
   },
   {
@@ -3224,7 +3224,7 @@ export const CARDS_COMMON = [
     jp: 'フルハーネス義務高さ《ふるはあねすぎむたかさ》',
     type: 'vocab',
     id_text: 'Wajib full harness',
-    desc: '2022年《ねん》1月《ねんいちがつ》施行《しこう》: ketinggian >6.75m → semua sektor wajib full harness.',
+    desc: '2022年《ねん》1月《いちがつ》施行《しこう》: ketinggian >6.75m → semua sektor wajib full harness.',
     usage:
       'フルハーネス義務高さ《ふるはあねすぎむたかさ》（5m以上《いじょう》）では必《かなら》ずフルハーネスを着用《ちゃくよう》する（kenakan full harness wajib di atas ketinggian 5m）',
     _origIndex: 596,
@@ -3510,7 +3510,7 @@ export const CARDS_COMMON = [
     jp: 'クレーン・移動式クレーン《いどうしきくれえん》・玉掛け資格《たまかけしかく》',
     type: 'vocab',
     id_text: 'Kualifikasi crane &',
-    desc: 'クレーン: ≥5t免許《めんきょ》, 1〜5t技能《ぎのう》講習《こうしゅう》, <1t特《とく》別《とくべつ》教育《きょういく》. 玉掛《たまか》け: ≥1t技能《ぎのう》講習《こうしゅう》.',
+    desc: 'クレーン: ≥5t免許《めんきょ》, 1〜5t技能《ぎのう》講習《こうしゅう》, <1t特《とく》別《べつ》教育《きょういく》. 玉掛《たまか》け: ≥1t技能《ぎのう》講習《こうしゅう》.',
     usage:
       '玉掛け《たまがけ》資格《しかく》なしにクレーンの吊《つ》り作業《さぎょう》をしてはいけない（dilarang melakukan rigging crane tanpa kualifikasi yang sesuai）',
     _origIndex: 645,
@@ -3522,7 +3522,7 @@ export const CARDS_COMMON = [
     jp: '車両系《しゃりょうけい》・高所作業車《こうしょさぎょうしゃ》・フォークリフト資格《しかく》',
     type: 'vocab',
     id_text: 'Kualifikasi alat berat',
-    desc: '車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《とくべつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》. フォークリフト: ≥1t技能《ぎのう》講習《こうしゅう》, <1t特別《とくべつ》教育《きょういく》.',
+    desc: '車両《しゃりょう》系《けい》: ≥3t技能《ぎのう》講習《こうしゅう》, <3t特《とく》別《べつ》教育《きょういく》. 高所《こうしょ》作業車《さぎょうしゃ》: 10m以上《いじょう》→技能《ぎのう》講習《こうしゅう》, 10m未満《みまん》→特別《とくべつ》教育《きょういく》. フォークリフト: ≥1t技能《ぎのう》講習《こうしゅう》, <1t特別《とくべつ》教育《きょういく》.',
     usage:
       '高所作業車《こうしょさぎょうしゃ》を運転《うんてん》するには特別教育《とくべつきょういく》が必要《ひつよう》である（diperlukan pendidikan khusus untuk mengoperasikan aerial work platform）',
     _origIndex: 646,
@@ -3534,7 +3534,7 @@ export const CARDS_COMMON = [
     jp: '溶接《ようせつ》・酸欠《さんけつ》・発破《はっぱ》・足場の資格区分《しかくくぶん》',
     type: 'vocab',
     id_text: 'Kualifikasi las/O₂',
-    desc: 'ガス溶接《ようせつ》者《もの》=技能《ぎのう》講習《こうしゅう》. アーク溶接《ようせつ》者《もの》=特《とく》別《とくべつ》教育《きょういく》. 酸欠《さんけつ》作業《さぎょう》主任者《しゅにんしゃ》=wajib untuk kerja di ruang tertutup. 発破《はっぱ》技士《ぎし》=wajib untuk kerja peledakan. 足場《あしば》の組立《くみたて》等《とう》作業《さぎょう》主任者《しゅにんしゃ》=wajib untuk perancah tinggi.',
+    desc: 'ガス溶接《ようせつ》者《もの》=技能《ぎのう》講習《こうしゅう》. アーク溶接《ようせつ》者《もの》=特《とく》別《べつ》教育《きょういく》. 酸欠《さんけつ》作業《さぎょう》主任者《しゅにんしゃ》=wajib untuk kerja di ruang tertutup. 発破《はっぱ》技士《ぎし》=wajib untuk kerja peledakan. 足場《あしば》の組立《くみたて》等《とう》作業《さぎょう》主任者《しゅにんしゃ》=wajib untuk perancah tinggi.',
     usage:
       '溶接《ようせつ》・発破《はっぱ》・足場組立《あしばくみたて》には各《かく》資格《しかく》区分《くぶん》がある（terdapat kategori kualifikasi terpisah untuk pengelasan, peledakan, dan pemasangan perancah）',
     _origIndex: 647,
@@ -3792,7 +3792,7 @@ export const CARDS_COMMON = [
     jp: '後片付け《あとかたずけ》（作業《さぎょう》終了《しゅうりょう》後《ご》の義務《ぎむ》・火《ひ》の確認《かくにん》）',
     type: 'konsep',
     id_text: 'Beres (kewajiban setelah kerja)',
-    desc: 'Setelah selesai bekerja WAJIB 後《あと》片付《あとかたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan api, pastikan benar-benar padam sebelum pulang.',
+    desc: 'Setelah selesai bekerja WAJIB 後《あと》片付《かたづ》け. Lakukan seolah 段取《だんど》り untuk esok hari. Jika gunakan api, pastikan benar-benar padam sebelum pulang.',
     _origIndex: 700,
   },
   {
@@ -3880,7 +3880,7 @@ export const CARDS_COMMON = [
     jp: '外国人労働者の死亡災害《がいこくじんろうどうしゃのしぼうさいがい》',
     type: 'konsep',
     id_text: 'Kecelakaan fatal TKA',
-    desc: 'Data 厚生労働省《こうせいろうどうしょう》 令和《れいわ》2・3年《ねん》度《ねんど》: kematian 外国人《がいこくじん》労働者《ろうどうしゃ》 terbanyak di sektor konstruksi《けんせつぎょう》, lebih tinggi dari manufaktur dan sektor lain.',
+    desc: 'Data 厚生労働省《こうせいろうどうしょう》 令和《れいわ》2・3年《ねん》度《ど》: kematian 外国人《がいこくじん》労働者《ろうどうしゃ》 terbanyak di sektor konstruksi《けんせつぎょう》, lebih tinggi dari manufaktur dan sektor lain.',
     _origIndex: 732,
   },
   {
@@ -6208,7 +6208,7 @@ export const CARDS_COMMON = [
     jp: '杭間さらい《くいまさらい》・段跳ね《だんばね》',
     type: 'vocab',
     id_text: 'Tiang: ratakan & angkat',
-    desc: '杭《くい》間《くいま》さらい=ratakan tanah di antara tiang saat 床付《とこづ》け.\n段跳《だんは》ね=angkat tanah bertahap ke atas saat galian dalam, untuk buang tanah keluar (排土).',
+    desc: '杭《くい》間《ま》さらい=ratakan tanah di antara tiang saat 床付《とこづ》け.\n段跳《だんは》ね=angkat tanah bertahap ke atas saat galian dalam, untuk buang tanah keluar (排土).',
     usage:
       '杭間《くいかん》の余掘り土《よぼりど》を杭間さらい《くいまさらい》でさらってから段跳ね《だんばね》で杭《くい》を揚《あ》げる（ratakan tanah antar tiang lalu angkat tiang dengan jack）',
     _origIndex: 1476,
@@ -6625,7 +6625,7 @@ export const CARDS_COMMON = [
     jp: '型枠工事《かたわくこうじ》・支保工《しほこう》（かたわく・しほこう）',
     type: 'vocab',
     id_text: 'Pekerjaan bekisting dan penyangga',
-    desc: 'Cetakan kayu (型《かた》枠《かたわく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah mengeras & cukup kuat, bekisting dilepas.',
+    desc: 'Cetakan kayu (型《かた》枠《わく》) melingkupi tulangan, diperkuat pipa baja luar (支保工《しほこう》).\nSetelah mengeras & cukup kuat, bekisting dilepas.',
     usage:
       '型枠《かたわく》を支保工《しほこう》でしっかり支《ささ》える（topang bekisting dengan kuat menggunakan shoring）',
     _origIndex: 1511,
@@ -6959,7 +6959,7 @@ export const CARDS_COMMON = [
     jp: '型枠工事と支保工《かたわくこうじとしほこう》（かたわく大工《だいく》）',
     type: 'vocab',
     id_text: 'Bekisting & perancah',
-    desc: 'Cetakan kayu dibuat 型《かた》枠大工《かたわくだいく》. Beton cair → tekanan besar → perkuat 支保工《しほこう》.\nSetelah mengeras, bekisting dibongkar & dipakai ulang di lantai atas.ras, bekisting dibongkar & dipakai ulang di lantai atas.',
+    desc: 'Cetakan kayu dibuat 型《かた》枠大工《わくだいく》. Beton cair → tekanan besar → perkuat 支保工《しほこう》.\nSetelah mengeras, bekisting dibongkar & dipakai ulang di lantai atas.ras, bekisting dibongkar & dipakai ulang di lantai atas.',
     usage:
       '型枠工事《かたわくこうじ》と支保工《しほこう》をセットで施工《せこう》する（pasang bekisting bersama shoring sebagai satu kesatuan pekerjaan）',
     _origIndex: 1539,
@@ -7103,7 +7103,7 @@ export const CARDS_COMMON = [
     jp: '杭基礎《くいきそ》・スラブ・杭地業《くいじぎょう》・基礎免振《きそめんしん》',
     type: 'vocab',
     id_text: '4 istilah pondasi tiang,',
-    desc: '杭《くい》基礎《くいきそ》=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan.\n杭《くい》地業《くいじぎょう》=pekerjaan persiapan pondasi tiang (cor beton/baja pracetak). 基礎免振《きそめんしん》=peredam gaya gempa antara tanah dan fondasi.',
+    desc: '杭《くい》基礎《きそ》=pondasi tiang untuk tanah lemah. スラブ=bagian datar bangunan.\n杭《くい》地業《じぎょう》=pekerjaan persiapan pondasi tiang (cor beton/baja pracetak). 基礎免振《きそめんしん》=peredam gaya gempa antara tanah dan fondasi.',
     usage:
       '杭基礎《くいきそ》の上《うえ》にスラブと基礎免振《きそめんしん》を組《く》む（rakit slab dan isolasi seismik di atas pondasi tiang）',
     _origIndex: 1551,
@@ -7199,7 +7199,7 @@ export const CARDS_COMMON = [
     jp: 'コンクリート打設工事《コンクリートだせつこうじ》',
     type: 'vocab',
     id_text: 'Pekerjaan pengecoran',
-    desc: 'Menuangkan beton cair (生《なま》コン) ke bekisting (型《かた》枠《かたわく》).\nAlur: muat → pompa → tuang → padatkan',
+    desc: 'Menuangkan beton cair (生《なま》コン) ke bekisting (型《かた》枠《わく》).\nAlur: muat → pompa → tuang → padatkan',
     usage:
       'コンクリート打設工事《だせつこうじ》で型枠《かたわく》・配筋《はいきん》・打設《だせつ》・養生《ようじょう》を順番《じゅんばん》に行《おこな》う（lakukan pengecoran secara berurutan: bekisting, pembesian, pengecoran, dan curing）',
     _origIndex: 1559,

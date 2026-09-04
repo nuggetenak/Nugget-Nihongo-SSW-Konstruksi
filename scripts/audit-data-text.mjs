@@ -44,6 +44,26 @@ const MARKER = /《([^》]*)》/g;
 const HAS_KANA = /[ぁ-んァ-ヶ]/;
 const POOLED = /\s/;
 
+// The second shape of the same defect, and the one that had no whitespace to
+// catch it on (2026-09-04). A word gets split across two markers and the second
+// one carries the WHOLE word's reading instead of its own part:
+//
+//   給湯《きゅうとう》管《きゅうとうかん》     ← きゅうとうかん over one 管
+//   型《かた》枠《かたわく》
+//   保温材《ほおんざい》の切断《ほおんざいのせつだん》
+//   通信《つうしん》ケーブル《つうしんケーブル》   ← reading repeats its own base
+//
+// Found from a screenshot, not from the data: a flashcard rendered
+// タイル張り工事 with a reading three times too long, and a browser spreads a
+// too-wide <rt> across its base, so the Japanese itself came apart into spaced
+// characters. 147 occurrences across cards and quiz sets, all fixed in the same
+// pass. The tell is exact and needs no judgement: two markers with nothing but
+// word characters between them, where the second reading STARTS WITH the first
+// one in full. Nothing legitimate does that — a real second reading starts
+// where the first left off.
+const kataToHira = (t) => t.replace(/[ァ-ヶ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
+const ADJACENT_PAIR = /《([^》]+)》([一-龯々〆ヵヶぁ-んァ-ヺーA-Za-z0-9]{1,12})《([^》]+)》/g;
+
 function walk(dir, out = []) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
@@ -74,7 +94,7 @@ const LOOKALIKE = [
   [/[\u0400-\u04FF]/g, 'Cyrillic character — Latin look-alike typo'],
 ];
 
-const findings = { unbalanced: [], empty: [], pooled: [], lookalike: [] };
+const findings = { unbalanced: [], empty: [], pooled: [], carriedOver: [], lookalike: [] };
 
 for (const file of walk(DATA)) {
   const rel = path.relative(ROOT, file);
@@ -90,6 +110,16 @@ for (const file of walk(DATA)) {
           marker: `${JSON.stringify(m[0])} (U+${m[0].codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}) — ${why}`,
         });
       }
+    }
+
+    for (const m of line.matchAll(ADJACENT_PAIR)) {
+      const [, r1, between, r2] = m;
+      const h1 = kataToHira(r1);
+      const h2 = kataToHira(r2);
+      // Two characters of overlap can happen by chance; a whole reading cannot.
+      if (h1.length < 2 || h2.length <= h1.length || !h2.startsWith(h1)) continue;
+      if (/[一-龯]/.test(r1) || /[一-龯]/.test(r2)) continue; // glosses, not readings
+      findings.carriedOver.push({ at, marker: `《${r1}》${between}《${r2}》` });
     }
 
     const opens = (line.match(/《/g) || []).length;
@@ -119,6 +149,8 @@ const LABELS = {
   unbalanced: 'Unbalanced 《》 on one line',
   empty: 'Empty marker (not the documented 《 》 cloze)',
   pooled: 'Pooled reading — one marker carrying several terms’ readings',
+  carriedOver:
+    'Carried-over reading — a split word whose second marker repeats the first’s reading',
   lookalike: 'Look-alike codepoint (renders right, is the wrong character)',
 };
 
