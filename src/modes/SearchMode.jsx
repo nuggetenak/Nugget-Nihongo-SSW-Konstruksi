@@ -104,6 +104,11 @@ export default function SearchMode({ track, starred, toggleStar }) {
         onBlur={handleQueryBlur}
         placeholder="Cari kartu... (JP, furigana, atau Indonesia)"
         autoFocus
+        // Declares the intent to ModeRouter's mode-change focus effect, which
+        // otherwise moves focus to the mode's <h1>. Without it the right thing
+        // still happened, but only by timing: the effect fired before this lazy
+        // chunk had mounted, so React's autoFocus won by arriving second.
+        data-autofocus
         className={S.searchInput}
         style={{ width: '100%', marginBottom: 16 }}
       />

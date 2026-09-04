@@ -96,7 +96,12 @@ export default function ModeHeader({ mode, modeHistory, onBack }) {
               <Crumb modeKey={immediateParent} onBack={onBack} />
             </nav>
           )}
-          <h1 className={S.title}>
+          {/* tabIndex={-1} so ModeRouter can move focus here on every mode
+              change — not reachable by Tab, only programmatically. id is what
+              that effect queries; it kept the name the removed FocusSentinel
+              used so index.html's skip link and anything else pointing at it
+              still resolve. */}
+          <h1 className={S.title} id="mode-heading" tabIndex={-1}>
             <Icon name={meta.ui} size={20} className={S.titleIcon} />
             <span className={S.titleText}>{meta.label}</span>
           </h1>

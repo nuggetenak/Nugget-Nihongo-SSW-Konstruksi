@@ -1,10 +1,10 @@
 // ─── router/ModeRouter.jsx ────────────────────────────────────────────────────
 // Renders the active mode wrapped in Suspense + ErrorBoundary.
 // Reads mode from AppContext, passes correct props to each mode.
-// Focus management — moves focus to #mode-heading on mount.
+// Focus management — moves focus to the mode's own <h1> on every mode change.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { CARDS } from '../data/cards.js';
 import { getCatsForTrack } from '../data/categories.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -66,40 +66,6 @@ export function ModeLoader({ shape = 'card' }) {
   );
 }
 
-// ── Focus trap helper — moves focus to the skip target on mode entry ────────
-function FocusSentinel() {
-  const ref = useRef(null);
-  useEffect(() => {
-    // Small delay: let Suspense resolve before moving focus
-    const t = setTimeout(() => {
-      if (ref.current) {
-        ref.current.focus({ preventScroll: false });
-      }
-    }, 80);
-    return () => clearTimeout(t);
-  }, []);
-
-  return (
-    // Invisible focus target — picked up by screen readers as region start
-    <div
-      ref={ref}
-      id="mode-heading"
-      tabIndex={-1}
-      aria-live="polite"
-      style={{
-        position: 'absolute',
-        width: 1,
-        height: 1,
-        overflow: 'hidden',
-        clip: 'rect(0 0 0 0)',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      Mode aktif
-    </div>
-  );
-}
-
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
   const { mode, modeParams, exitMode, goMode, track, modeHistory, goBack } = useApp();
@@ -136,15 +102,41 @@ export default function ModeRouter() {
     const saved = scrollCache.current.get(mode) ?? 0;
     window.scrollTo(0, saved);
 
-    // Focus first interactive element after render
+    // Move focus to the new screen's heading — the standard SPA route-change
+    // pattern: a screen reader announces the new context, and a keyboard user's
+    // next Tab starts from the top of the new screen rather than wherever the
+    // old one left them.
+    //
+    // This used to select `[data-autofocus], main h1, main button:not([disabled])`
+    // and take the first match in DOCUMENT order — which is neither the
+    // data-autofocus element (nothing in the app has ever set that attribute)
+    // nor the h1. `<main id="main-content">` wraps the whole shell, side nav
+    // included, so on desktop the first enabled button in it is SideNav's
+    // "Beranda", and entering any mode moved focus to an unrelated nav item; on
+    // a phone it landed on the header's own back button, i.e. "leave this mode".
+    // Neither was visible until the focus ring was repaired earlier today, at
+    // which point it became obvious in a screenshot.
+    //
+    // It also raced a second mechanism: a FocusSentinel component focused a
+    // hidden aria-live div at 80ms and this overwrote it at 100ms. That
+    // component is gone; ModeHeader's h1 carries tabIndex={-1} and is the one
+    // target.
     const t = setTimeout(() => {
-      const target = document.querySelector(
-        '[data-autofocus], main h1, main button:not([disabled])'
-      );
-      target?.focus({ preventScroll: true });
+      document.querySelector('[data-autofocus], #mode-heading')?.focus({ preventScroll: true });
     }, 100);
     return () => clearTimeout(t);
   }, [mode]);
+
+  // Build filtered cards for modes that need them. Memoised on `track` alone —
+  // it walks all 1438 cards, and this component re-renders on every progress
+  // change (it consumes known/unknown/starred), so without this it re-filtered
+  // the whole corpus on every card mark and handed a fresh array identity to
+  // half the modes each time.
+  const filteredCards = useMemo(() => {
+    const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
+    if (!trackCatKeys) return CARDS;
+    return CARDS.filter((c) => trackCatKeys.has(c.category));
+  }, [track]);
 
   if (!mode) return null;
 
@@ -181,14 +173,6 @@ export default function ModeRouter() {
         setShowMissionOverlay(true);
       }
     };
-
-  // Build filtered cards for modes that need them
-  const trackCatKeys = track ? new Set(getCatsForTrack(track)) : null;
-
-  const filteredCards = CARDS.filter((c) => {
-    if (trackCatKeys && !trackCatKeys.has(c.category)) return false;
-    return true;
-  });
 
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
@@ -291,7 +275,6 @@ export default function ModeRouter() {
       secondaryLabel="← Kembali ke Menu"
       onSecondary={exitMode}
     >
-      <FocusSentinel />
       <ModeHeader mode={mode} modeHistory={modeHistory} onBack={goBack} />
       <Suspense fallback={<ModeLoader shape={MODE_META[mode]?.skeleton ?? 'card'} />}>
         <ModeComponent {...props} />
