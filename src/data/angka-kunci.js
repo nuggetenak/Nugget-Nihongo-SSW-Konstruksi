@@ -239,13 +239,13 @@ export const ANGKA_KUNCI = [
     soal: '保温材《ほおんざい》の線収縮率《せんしゅうしゅくりつ》（最大許容値《さいだいきょようち》）は何%以下か？ → 2%以下',
   },
   {
-    angka: '90 detik/soal',
-    konteks: 'Estimasi waktu Prometric (50 soal ÷ 75 mnt)',
+    angka: '2 menit/soal',
+    konteks: 'Waktu per soal ujian (50 soal ≈ 100 menit)',
     track: 'common',
     kartu: null,
     /* exam meta rule — no flashcard linked (intentional) */ mnemonic:
-      '75 menit ÷ 50 soal = 1.5 menit = 90 detik per soal. "Satu setengah menit per soal ujian"',
-    soal: '試験時間《しけんじかん》75分・50問の場合、1問あたりに使える時間は？ → 約90秒（1分30秒）',
+      '2 menit per soal. 50 soal × 2 = 100 menit. "Dua menit per soal ujian"',
+    soal: '試験《しけん》で1問《もん》あたりに使える時間《じかん》の目安《めやす》は？ → 約2分《ふん》（120秒《びょう》）',
   },
   {
     angka: '65%',

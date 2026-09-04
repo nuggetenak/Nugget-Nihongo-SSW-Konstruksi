@@ -4,7 +4,7 @@
 // Note: progress fill gradient conditional on pass/fail — justified inline.
 // Note: red gradient buttons (exam theme) — justified inline (not amber).
 // Note: pause overlay bg — justified inline (full-screen dim).
-import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
@@ -17,12 +17,23 @@ import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { isTeoriId, isPraktikId } from '../utils/quiz-classification.js';
 import { haptic } from '../utils/haptic.js';
 import { buildSimulasiResults } from '../utils/simulasi-scoring.js';
-import { useSessionTimer } from '../hooks/useSessionTimer.js';
+import { EXAM_PASS_PCT, EXAM_SECONDS_PER_QUESTION } from '../utils/constants.js';
+import {
+  saveQuizSnapshot,
+  readQuizSnapshot,
+  clearQuizSnapshot,
+} from '../utils/quiz-persistence.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
 import SM from './SimulasiMode.module.css';
 
-const PASS_PCT = 65;
+// Both of these describe the real exam, and both had a second copy elsewhere
+// that could drift from this one: PASS_PCT was repeated as a bare 65 in
+// achievements.js and recommend-mode.js, and the per-question time budget
+// contradicted data/angka-kunci.js, which taught 90 s/question as a
+// memorisable fact. They live in utils/constants.js now; the angka-kunci
+// entry was the wrong one and has been corrected to 2 min (owner, 2026-09-04).
+const PASS_PCT = EXAM_PASS_PCT;
 const RED_BTN = {
   fontFamily: 'inherit',
   borderRadius: T.r.md,
@@ -56,7 +67,7 @@ const RED_BTN = {
 // from the actual drawn count once it's known, instead of guessing at a
 // fixed number that's only sometimes right -- see the effect that does
 // this in the component body.
-const SECONDS_PER_QUESTION = 2 * 60;
+const SECONDS_PER_QUESTION = EXAM_SECONDS_PER_QUESTION;
 const MODES = [
   {
     key: 'pool',
@@ -142,12 +153,59 @@ const JAC_PRESETS = [
 export const SIMULASI_POOL_PRESETS = POOL_PRESETS;
 export const SIMULASI_JAC_PRESETS = JAC_PRESETS;
 export const SIMULASI_SECONDS_PER_QUESTION = SECONDS_PER_QUESTION;
+// The third line used to read "🚫 Soal otomatis lanjut setelah kamu jawab",
+// which item 48 made false when it removed auto-advance: navigation has been
+// explicit (Prev/Next/navigator/Kumpulkan) ever since, and answers can be
+// changed until you submit. The card that tells you the rules was the one
+// thing still describing the old behaviour.
 const INSTRUCTIONS = [
   '📋 Pilih satu jawaban yang paling tepat',
   '⏱ Timer berjalan — jangan sampai habis',
-  '🚫 Soal otomatis lanjut setelah kamu jawab',
+  '↔️ Bebas pindah soal & ganti jawaban sebelum dikumpulkan',
+  '⬜ Soal kosong dihitung salah',
   `✅ ${PASS_PCT}% ke atas = LULUS`,
 ];
+// One row per bucket: "label ..... 72% (13/18)". Extracted when the results
+// screen gained a second breakdown (teori/praktik alongside per-set) so the
+// row markup exists once rather than twice.
+function BreakdownList({ label, entries }) {
+  if (entries.length === 0) return null;
+  return (
+    <>
+      <div className={S.sectionLabel}>{label}</div>
+      <div className={S.list} style={{ gap: 'var(--space-6)' }}>
+        {entries.map(([rowLabel, stat]) => {
+          const pct = Math.round((stat.correct / stat.total) * 100);
+          const color = pct >= 75 ? T.correct : pct >= 50 ? T.gold : T.wrong;
+          return (
+            <div key={rowLabel} className={SM.breakdownRow}>
+              <span style={{ color: T.textMuted, flex: 1 }}>{rowLabel}</span>
+              <span style={{ color, fontWeight: 700, minWidth: 60, textAlign: 'right' }}>
+                {pct}% ({stat.correct}/{stat.total})
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+// Tally results into [[label, {correct,total}], ...], worst ratio first.
+function tallyBy(results, keyOf) {
+  const buckets = {};
+  results.forEach((r) => {
+    const key = keyOf(r);
+    if (key == null) return;
+    if (!buckets[key]) buckets[key] = { correct: 0, total: 0 };
+    buckets[key].total++;
+    if (r.isCorrect) buckets[key].correct++;
+  });
+  return Object.entries(buckets).sort(
+    (a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total
+  );
+}
+
 function fmtTime(sec) {
   const m = Math.floor(sec / 60);
   const s = sec % 60;
@@ -206,6 +264,11 @@ export function buildJacPool() {
     photoDesc: q.photoDesc,
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',
+    // Every one of JAC_OFFICIAL's 95 questions carries a related_card_id, and
+    // this mapper was dropping all 95 of them -- which is why the results
+    // screen's "Latih N Salah" had no card ids to send anywhere and shipped
+    // sending array *indexes* instead (see the results screen below).
+    _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
   }));
 }
 
@@ -213,21 +276,105 @@ export function buildJacPool() {
 // null means the set is neither (vocab, wglv-*), so it's naturally excluded
 // from both buckets rather than needing its own separate filter.
 export function buildQuizSetsPool() {
+  // Deduplicated by question text. 740 questions across 34 sets contain only
+  // 688 distinct ones: 41 teori questions and 9 praktik questions appear in
+  // two sets each, mostly where a Wayground set and a JAC-Mockup set cover the
+  // same ground (the KY活動 4-step questions live in wt01, wt06, jmt01 and
+  // jmt02). Sampling 30+20 from the raw pool therefore drew the same question
+  // twice in 22.6% of full exams (measured over 20 000 simulated draws; 6.2% at
+  // 25 questions, 2.1% at 15) -- a repeat is the most obviously "not a real
+  // exam" thing this mode could do, and one Set here removes it for good.
+  //
+  // Deliberately NOT applied to buildJacPool: 学科 Set 1 and 実技 Set 1 share
+  // exactly one question, but the owner's rule for JAC Official is "take
+  // everything in both sets" (2026-08-28), and its 44/51 totals are a stated
+  // contract. Official content repeating itself across two official sets is
+  // the book's own doing, not an import artefact.
+  const seen = new Set();
   return QUIZ_SETS.flatMap((set) => {
     const category = isTeoriId(set.id) ? 'teori' : isPraktikId(set.id) ? 'praktik' : null;
     if (!category) return [];
-    return (set.questions || []).map((q) => ({
-      jp: q.q,
-      id_text: q.hint || null,
-      options: q.opts,
-      answer: q.ans,
-      explanation: q.exp || null,
-      hasPhoto: false,
-      photoDesc: null,
-      _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
-      _setLabel: set.title || 'Wayground',
-      _category: category,
-    }));
+    return (set.questions || []).flatMap((q) => {
+      if (seen.has(q.q)) return [];
+      seen.add(q.q);
+      return [
+        {
+          jp: q.q,
+          id_text: q.hint || null,
+          options: q.opts,
+          answer: q.ans,
+          explanation: q.exp || null,
+          hasPhoto: false,
+          photoDesc: null,
+          _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
+          _setLabel: set.title || 'Wayground',
+          _category: category,
+          // No question in QUIZ_SETS has a related card id (checked: 0 of 980),
+          // so a wrong answer from this pool has no flashcard to send you to.
+          // Explicit rather than absent, so the results screen's retry button
+          // can filter on it instead of guessing.
+          _cardId: null,
+        },
+      ];
+    });
+  });
+}
+
+// Snapshot keys. Two of them, matching QuizMode's convention (item 51): the
+// drawn questions are written once per exam and the progress many times, so
+// they don't belong in one blob that gets rewritten on every answer.
+const PERSIST_KEY = 'ssw-simulasi-progress';
+const PERSIST_QUESTIONS_KEY = 'ssw-simulasi-questions';
+// quiz-persistence's own 30-minute default is shorter than the thing being
+// persisted: a full exam runs 100 minutes, and JAC Official's full preset up
+// to 102. Six hours is "the same sitting, generously" -- sessionStorage is
+// already cleared when the tab closes, so this only decides how long a
+// backgrounded tab may nap before its exam stops being offered back.
+const SNAPSHOT_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+
+// Draw one exam. Pulled out of the component (it used to be a useMemo keyed on
+// a `seed` counter) because an exam now has to be restorable: the questions are
+// state you can save and load, not a value derived from render inputs.
+function drawExam(mode, config) {
+  let items;
+  if (mode === 'jac') {
+    const pool = shuffle(buildJacPool());
+    items = config.count > 0 ? pool.slice(0, config.count) : pool;
+  } else {
+    const pool = buildQuizSetsPool();
+    const teoriPool = shuffle(pool.filter((q) => q._category === 'teori'));
+    const praktikPool = shuffle(pool.filter((q) => q._category === 'praktik'));
+    // Math.min guards a pool ever coming up short of the preset's ask --
+    // not expected (teori alone is 377 deduplicated questions, far more than
+    // the largest preset's 30), but slicing past an array's length just
+    // returns what's there rather than throwing, so this is a defensive
+    // floor, not a fix for a currently-observed shortage.
+    const teoriPick = teoriPool.slice(0, Math.min(config.teori, teoriPool.length));
+    const praktikPick = praktikPool.slice(0, Math.min(config.praktik, praktikPool.length));
+    items = shuffle([...teoriPick, ...praktikPick]);
+  }
+  return items.map((q) => {
+    // Options never render through ruby-aware JpFront here (OptionButton-
+    // style plain text, same convention QuizShell/VocabMode already use for
+    // every other mode's choices — see stripFuri's own call sites) — so the
+    // raw 《reading》 markup needs stripping at the source, same as those,
+    // or it shows up on-screen literally instead of being parsed as ruby.
+    const shuffledOpts = shuffle(
+      q.options.map((text, origIdx) => ({ text: stripFuri(text), origIdx }))
+    );
+    return {
+      jp: q.jp,
+      id_text: q.id_text,
+      opts: shuffledOpts,
+      correctIdx: shuffledOpts.findIndex((o) => o.origIdx === q.answer),
+      explanation: q.explanation,
+      hasPhoto: q.hasPhoto,
+      photoDesc: q.photoDesc,
+      _source: q._source,
+      _setLabel: q._setLabel,
+      _category: q._category ?? null,
+      _cardId: q._cardId ?? null,
+    };
   });
 }
 
@@ -238,73 +385,61 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const [phase, setPhase] = useState('start');
   const [mode, setMode] = useState('pool');
   const [preset, setPreset] = useState('quick');
-  const [seed, setSeed] = useState(0);
+  const [questions, setQuestions] = useState([]);
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState({}); // { [qIdx]: { selectedIdx, isCorrect } }
   const [results, setResults] = useState([]); // built once, at submit (item 48)
   const [timeLeft, setTimeLeft] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
-  const { getDurationMs } = useSessionTimer();
+  // The exam ends at a wall-clock instant, not after N ticks of an interval.
+  // The old counter decremented on a setInterval whose effect depended on
+  // finishExam -- which depends on `answers` -- so every single answer tore the
+  // interval down and started a fresh one, throwing away that second's elapsed
+  // time. Fifty answers bought roughly fifty free seconds, and a fast run
+  // through the paper could stall the clock almost completely. A deadline can't
+  // be gamed that way, survives the browser throttling timers in a backgrounded
+  // tab, and is the one number a resumed exam needs to restore.
+  const deadlineRef = useRef(0);
+  const frozenLeftRef = useRef(0); // seconds remaining, while paused
+  const finishRef = useRef(null);
 
   const activePresets = mode === 'jac' ? JAC_PRESETS : POOL_PRESETS;
   const config = activePresets.find((p) => p.key === preset) || activePresets[0];
 
-  const questions = useMemo(() => {
-    if (phase !== 'playing') return [];
-    // Freshly sampled every time (seed dependency below) -- not a fixed
-    // pool, per the owner's explicit request: same preset, different
-    // questions on a retry.
-    let items;
-    if (mode === 'jac') {
-      const pool = shuffle(buildJacPool());
-      items = config.count > 0 ? pool.slice(0, config.count) : pool;
-    } else {
-      const pool = buildQuizSetsPool();
-      const teoriPool = shuffle(pool.filter((q) => q._category === 'teori'));
-      const praktikPool = shuffle(pool.filter((q) => q._category === 'praktik'));
-      // Math.min guards a pool ever coming up short of the preset's ask --
-      // not expected (teori alone is ~360+ questions across 18 sets, far
-      // more than the largest preset's 30), but slicing past an array's
-      // length just returns what's there rather than throwing, so this is
-      // a defensive floor, not a fix for a currently-observed shortage.
-      const teoriPick = teoriPool.slice(0, Math.min(config.teori, teoriPool.length));
-      const praktikPick = praktikPool.slice(0, Math.min(config.praktik, praktikPool.length));
-      items = shuffle([...teoriPick, ...praktikPick]);
-    }
-    return items.map((q) => {
-      // Options never render through ruby-aware JpFront here (OptionButton-
-      // style plain text, same convention QuizShell/VocabMode already use for
-      // every other mode's choices — see stripFuri's own call sites) — so the
-      // raw 《reading》 markup needs stripping at the source, same as those,
-      // or it shows up on-screen literally instead of being parsed as ruby.
-      const shuffledOpts = shuffle(
-        q.options.map((text, origIdx) => ({ text: stripFuri(text), origIdx }))
-      );
-      return {
-        jp: q.jp,
-        id_text: q.id_text,
-        opts: shuffledOpts,
-        correctIdx: shuffledOpts.findIndex((o) => o.origIdx === q.answer),
-        explanation: q.explanation,
-        hasPhoto: q.hasPhoto,
-        photoDesc: q.photoDesc,
-        _source: q._source,
-        _setLabel: q._setLabel,
-      };
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, seed, mode, config.count, config.teori, config.praktik]);
+  // A snapshot found at mount, offered as "resume?" on the start screen. Read
+  // once, in the initialiser, so a save written later in this same session
+  // can't make the prompt reappear mid-exam.
+  const [resumeData, setResumeData] = useState(() => {
+    const progress = readQuizSnapshot(PERSIST_KEY, SNAPSHOT_MAX_AGE_MS);
+    const saved = readQuizSnapshot(PERSIST_QUESTIONS_KEY, SNAPSHOT_MAX_AGE_MS);
+    if (!progress || !Array.isArray(saved) || saved.length === 0) return null;
+    return { progress, questions: saved };
+  });
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
   const selected = answers[qIdx]?.selectedIdx ?? null;
   const answeredCount = Object.keys(answers).length;
+  const budgetSec = questions.length * SECONDS_PER_QUESTION;
+
+  const clearSnapshot = useCallback(() => {
+    clearQuizSnapshot(PERSIST_KEY);
+    clearQuizSnapshot(PERSIST_QUESTIONS_KEY);
+  }, []);
 
   const finishExam = useCallback(() => {
     setResults(buildSimulasiResults(questions, answers));
     setPhase('result');
-  }, [questions, answers]);
+    clearSnapshot();
+  }, [questions, answers, clearSnapshot]);
+
+  // Kept in a ref so the ticking effect below never has to list finishExam as a
+  // dependency -- that dependency is exactly what used to restart the timer on
+  // every answer.
+  useEffect(() => {
+    finishRef.current = finishExam;
+  }, [finishExam]);
 
   const handleSubmitClick = useCallback(async () => {
     const unanswered = questions.length - answeredCount;
@@ -319,66 +454,133 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     finishExam();
   }, [questions.length, answeredCount, confirm, finishExam]);
 
-  // Auto-pause on tab/app hide
+  const pauseExam = useCallback(() => {
+    frozenLeftRef.current = Math.max(0, Math.round((deadlineRef.current - Date.now()) / 1000));
+    setPaused(true);
+  }, []);
+
+  const resumeExam = useCallback(() => {
+    deadlineRef.current = Date.now() + frozenLeftRef.current * 1000;
+    setPaused(false);
+  }, []);
+
+  // Auto-pause on tab/app hide. Guarded on !paused: pausing an already-paused
+  // exam would re-freeze from a deadline that stopped moving, zeroing the clock.
   useEffect(() => {
     const handleVisibility = () => {
-      if (document.hidden && phase === 'playing') setPaused(true);
+      if (document.hidden && phase === 'playing' && !paused) pauseExam();
     };
     document.addEventListener('visibilitychange', handleVisibility);
     return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, [phase]);
-
-  // JAC Official's "full" preset draws a random set pair (pickJacPool ->
-  // pickJacSetPair) whose total (44 or 51) isn't known until `questions`
-  // itself is computed -- config.time above is only a placeholder for that
-  // one specific preset (see JAC_PRESETS's own comment). Correct timeLeft
-  // here once the real count is in. A no-op for every other preset/mode:
-  // there, questions.length always already equals what config.time was
-  // computed from, so this recomputes the identical value it's replacing.
-  useEffect(() => {
-    if (phase === 'playing' && questions.length > 0) {
-      setTimeLeft(questions.length * SECONDS_PER_QUESTION);
-    }
-  }, [phase, questions]);
+  }, [phase, paused, pauseExam]);
 
   useEffect(() => {
     if (phase !== 'playing' || paused) {
       clearInterval(timerRef.current);
       return;
     }
-    timerRef.current = setInterval(() => {
-      setTimeLeft((t) => {
-        if (t <= 1) {
-          clearInterval(timerRef.current);
-          finishExam();
-          return 0;
-        }
-        return t - 1;
-      });
-    }, 1000);
+    const tick = () => {
+      const left = Math.max(0, Math.round((deadlineRef.current - Date.now()) / 1000));
+      setTimeLeft(left);
+      if (left <= 0) {
+        clearInterval(timerRef.current);
+        finishRef.current?.();
+      }
+    };
+    tick(); // don't wait a second to show a restored or freshly-set clock
+    timerRef.current = setInterval(tick, 1000);
     return () => clearInterval(timerRef.current);
-  }, [phase, seed, paused, finishExam]);
+  }, [phase, paused]);
 
-  // (Item 48: the old auto-advance-1.5s-after-answering effect is gone --
-  // answering no longer implies "done with this question." Navigation is
-  // explicit now: Prev/Next/the question-navigator/Submit.)
+  // Snapshot (item 78). Written on the state that actually changes -- the
+  // viewed question, the answer sheet, the pause -- not on the clock, which
+  // would mean rewriting the whole exam to sessionStorage once a second. The
+  // deadline is stored absolute, so a reload three minutes later comes back
+  // with three fewer minutes rather than a refilled clock.
+  useEffect(() => {
+    if (phase !== 'playing' || questions.length === 0) return;
+    saveQuizSnapshot(PERSIST_KEY, {
+      mode,
+      preset,
+      qIdx,
+      answers,
+      paused,
+      deadlineAt: deadlineRef.current,
+      frozenLeft: frozenLeftRef.current,
+    });
+  }, [phase, questions.length, mode, preset, qIdx, answers, paused]);
 
   useEffect(() => {
     if (phase === 'result' && results.length > 0) {
       const correct = results.filter((r) => r.isCorrect).length;
-      onSessionEnd?.({ correct, total: results.length, durationMs: getDurationMs() });
+      // Elapsed exam time, not wall-clock-since-mount. useSessionTimer measures
+      // from when the component mounted and is never reset, so it counted the
+      // time spent choosing a preset, every pause, and -- on a second attempt
+      // via 🔄 Ulang -- the whole first exam as well. The budget minus what is
+      // left on the clock is the exam's own elapsed time, and pausing extends
+      // the deadline rather than the elapsed time, so a break doesn't inflate
+      // the study minutes this reports.
+      const durationMs = Math.max(0, (budgetSec - timeLeft) * 1000);
+      onSessionEnd?.({ correct, total: results.length, durationMs });
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleStart = useCallback(() => {
-    setSeed((s) => s + 1);
+  const startExam = useCallback((drawn, remainingSec, startPaused = false) => {
+    // The drawn list is written once, here. It cannot be re-derived on a
+    // reload: both sources shuffle, and the options within each question are
+    // shuffled too, so restoring "question 7, answer B" against a fresh draw
+    // would restore the position into a different exam.
+    saveQuizSnapshot(PERSIST_QUESTIONS_KEY, drawn);
+    setQuestions(drawn);
     setQIdx(0);
     setAnswers({});
     setResults([]);
-    setTimeLeft(config.time);
-    setPaused(false);
+    deadlineRef.current = Date.now() + remainingSec * 1000;
+    frozenLeftRef.current = remainingSec;
+    setTimeLeft(remainingSec);
+    setPaused(startPaused);
     setPhase('playing');
-  }, [config.time]);
+  }, []);
+
+  const handleStart = useCallback(() => {
+    const drawn = drawExam(mode, config);
+    setResumeData(null); // a fresh exam replaces whatever was saved
+    clearSnapshot();
+    // The budget follows the actual draw. JAC Official's "full" preset picks a
+    // random set pair whose total is 44 or 51, so its config.time is only a
+    // placeholder; every other preset draws exactly what it asked for, and this
+    // recomputes the identical number for them.
+    startExam(drawn, drawn.length * SECONDS_PER_QUESTION);
+  }, [mode, config, clearSnapshot, startExam]);
+
+  const handleResume = useCallback(() => {
+    if (!resumeData) return;
+    const { progress, questions: saved } = resumeData;
+    setResumeData(null);
+    setMode(progress.mode ?? 'pool');
+    setPreset(progress.preset ?? 'quick');
+    setQuestions(saved);
+    setQIdx(Math.min(progress.qIdx ?? 0, saved.length - 1));
+    setAnswers(progress.answers ?? {});
+    setResults([]);
+    const wasPaused = !!progress.paused;
+    const left = wasPaused
+      ? Math.max(0, progress.frozenLeft ?? 0)
+      : Math.max(0, Math.round(((progress.deadlineAt ?? 0) - Date.now()) / 1000));
+    deadlineRef.current = Date.now() + left * 1000;
+    frozenLeftRef.current = left;
+    setTimeLeft(left);
+    setPaused(wasPaused);
+    setPhase('playing');
+    // left === 0 needs no special case: the ticking effect's first tick sees a
+    // dead clock and submits the restored answer sheet, which is what running
+    // out of time away from the tab should mean.
+  }, [resumeData]);
+
+  const handleDiscardResume = useCallback(() => {
+    clearSnapshot();
+    setResumeData(null);
+  }, [clearSnapshot]);
 
   const handleSelect = useCallback(
     (optArrayIdx) => {
@@ -401,15 +603,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   // Shared by this mode's own exit controls and by ModeHeader's back arrow, via
   // the exit guard below — the header owns the only back control on the screen
   // now, so the confirmation has to live somewhere both can reach.
-  const confirmDiscard = useCallback(
-    () =>
-      confirm(
-        `${answeredCount}/${questions.length} soal sudah dijawab. Keluar sekarang akan menghapus semuanya — progres simulasi tidak tersimpan sebagian.`,
-        'Keluar, hapus progres',
-        'Tetap di sini'
-      ),
-    [answeredCount, questions.length, confirm]
-  );
+  const confirmDiscard = useCallback(async () => {
+    const ok = await confirm(
+      `${answeredCount}/${questions.length} soal sudah dijawab. Keluar sekarang akan menghapus semuanya — progres simulasi tidak tersimpan sebagian.`,
+      'Keluar, hapus progres',
+      'Tetap di sini'
+    );
+    // Leaving on purpose has to take the snapshot with it, or the exam the user
+    // just chose to throw away would be offered back on the next visit.
+    if (ok) clearSnapshot();
+    return ok;
+  }, [answeredCount, questions.length, confirm, clearSnapshot]);
 
   // Only while an exam is actually running: there is nothing to lose on the
   // start screen or once results are on screen, and a confirmation with no
@@ -431,6 +635,48 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           <div className={SM.startHeroEmoji}>🎯</div>
           <p className={S.pageSub}>Format ujian SSW Konstruksi dengan timer</p>
         </div>
+        {resumeData &&
+          (() => {
+            // A saved exam is worth more than a preset choice, so it sits above
+            // everything else on this screen. The remaining time is recomputed
+            // from the stored deadline rather than shown as saved -- an exam
+            // whose clock ran out while the tab was closed says so, and
+            // "Lanjutkan" then submits the answer sheet it did have.
+            const answered = Object.keys(resumeData.progress.answers ?? {}).length;
+            const total = resumeData.questions.length;
+            const left = resumeData.progress.paused
+              ? Math.max(0, resumeData.progress.frozenLeft ?? 0)
+              : Math.max(
+                  0,
+                  Math.round(((resumeData.progress.deadlineAt ?? 0) - Date.now()) / 1000)
+                );
+            return (
+              <div className={SM.resumeCard}>
+                <div className={SM.resumeTitle}>Lanjutkan simulasi sebelumnya?</div>
+                <div className={SM.resumeSub}>
+                  {answered}/{total} soal terjawab ·{' '}
+                  {left > 0
+                    ? `sisa waktu ${fmtTime(left)}`
+                    : 'waktu sudah habis — akan langsung dinilai'}
+                </div>
+                <div className={`${S.row} ${SM.resumeActions}`}>
+                  <button
+                    style={{ ...RED_BTN, flex: 1, padding: 'var(--space-10)' }}
+                    onClick={handleResume}
+                  >
+                    ▶ Lanjutkan
+                  </button>
+                  <button
+                    className={S.btnSecondary}
+                    style={{ flex: 1 }}
+                    onClick={handleDiscardResume}
+                  >
+                    Mulai Baru
+                  </button>
+                </div>
+              </div>
+            );
+          })()}
         <div className={`${S.card} ${SM.instructionsCard}`}>
           {INSTRUCTIONS.map((inst, i) => (
             <div key={i} className={SM.instructionLine}>
@@ -524,6 +770,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     const lulus = pct >= PASS_PCT;
     const wrongList = results.filter((r) => !r.isCorrect);
+    // The cards behind the wrong answers, deduplicated. This button used to
+    // pass `wrongList.map((_, i) => i)` -- positions in the wrong-answer list,
+    // handed to ModeRouter as `filterIds` and matched against card ids. Card
+    // ids run 1..1443, so one wrong answer sent you to an empty deck (id 0
+    // matches nothing) and twenty sent you to cards 1..19: real flashcards,
+    // none of them the ones you got wrong. Only JAC Official questions carry a
+    // related_card_id at all, so a pure Teori & Praktik exam legitimately has
+    // nothing to offer here and the button stays hidden rather than lying.
+    const wrongCardIds = [
+      ...new Set(wrongList.map((r) => r._cardId).filter((id) => typeof id === 'number')),
+    ];
     return (
       <div className={`${S.page} ${SM.resultPage}`}>
         <div
@@ -561,7 +818,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           <button style={{ ...RED_BTN, flex: 1, padding: 'var(--space-12)' }} onClick={handleStart}>
             🔄 Ulang
           </button>
-          {wrongList.length > 0 && onRetryWrong && (
+          {wrongCardIds.length > 0 && onRetryWrong && (
             <button
               style={{
                 ...RED_BTN,
@@ -569,9 +826,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 padding: 'var(--space-12)',
                 background: 'linear-gradient(135deg,#1e3a5f,#2563eb)',
               }}
-              onClick={() => onRetryWrong(wrongList.map((_, i) => i))}
+              onClick={() => onRetryWrong(wrongCardIds)}
             >
-              📚 Latih {wrongList.length} Salah
+              📚 Latih {wrongCardIds.length} Kartu
             </button>
           )}
           <button className={`${S.btnSecondary} ${SM.kembaliBtn}`} onClick={onExit}>
@@ -579,51 +836,24 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           </button>
         </div>
 
-        {/* Breakdown per source */}
-        {results.length > 0 &&
-          (() => {
-            const bySource = {};
-            results.forEach((r) => {
-              const key = r._setLabel || r._source || 'Lainnya';
-              if (!bySource[key]) bySource[key] = { correct: 0, total: 0 };
-              bySource[key].total++;
-              if (r.isCorrect) bySource[key].correct++;
-            });
-            const entries = Object.entries(bySource).sort(
-              (a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total
-            );
-            return (
-              <>
-                <div className={S.sectionLabel}>Breakdown per Set</div>
-                <div className={S.list} style={{ gap: 'var(--space-6)' }}>
-                  {entries.map(([label, stat]) => {
-                    const pct = Math.round((stat.correct / stat.total) * 100);
-                    const color = pct >= 75 ? T.correct : pct >= 50 ? T.gold : T.wrong;
-                    return (
-                      <div
-                        key={label}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          padding: 'var(--space-8) var(--space-12)',
-                          background: T.surface,
-                          borderRadius: T.r.md,
-                          border: `1px solid ${T.border}`,
-                          fontSize: 'var(--fs-caption)',
-                        }}
-                      >
-                        <span style={{ color: T.textMuted, flex: 1 }}>{label}</span>
-                        <span style={{ color, fontWeight: 700, minWidth: 60, textAlign: 'right' }}>
-                          {pct}% ({stat.correct}/{stat.total})
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            );
-          })()}
+        {/* Breakdown. Teori/praktik first: on a 50-question pool exam the
+            per-set rows are ~34 buckets of one or two questions each, which
+            says nothing about anything, while the teori/praktik split is the
+            axis the exam is actually sampled on (30/20) and the one the real
+            exam is graded on. _category is null for JAC Official, whose own
+            sets are the meaningful grouping, so that source shows per-set
+            only -- and its two rows are 学科 vs 実技 anyway. */}
+        <BreakdownList
+          label="Breakdown Teori / Praktik"
+          entries={tallyBy(results, (r) =>
+            r._category === 'teori' ? '📋 Teori' : r._category === 'praktik' ? '🛠️ Praktik' : null
+          )}
+        />
+        <BreakdownList
+          label="Breakdown per Set"
+          entries={tallyBy(results, (r) => r._setLabel || r._source || 'Lainnya')}
+        />
+
         {wrongList.length > 0 && (
           <>
             <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
@@ -697,7 +927,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         <div className={S.row} style={{ gap: 'var(--space-10)' }}>
           {/* Pause button */}
           <button
-            onClick={() => setPaused((p) => !p)}
+            onClick={() => (paused ? resumeExam() : pauseExam())}
             style={{
               ...RED_BTN,
               padding: 'var(--space-6) var(--space-12)',
@@ -936,7 +1166,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           </div>
           <button
             type="button"
-            onClick={() => setPaused(false)}
+            onClick={resumeExam}
             style={{
               ...RED_BTN,
               padding: 'var(--space-14) var(--space-32)',

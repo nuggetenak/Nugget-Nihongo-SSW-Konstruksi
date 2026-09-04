@@ -13,7 +13,7 @@
  * real exam treats a blank: no credit, not "not counted."
  *
  * @param {Array} questions - each with { jp, id_text, opts, correctIdx,
- *   explanation, _source, _setLabel }
+ *   explanation, _source, _setLabel, _category, _cardId }
  * @param {Object} answers - { [questionIndex]: { selectedIdx, isCorrect } }
  * @returns {Array} one entry per question, in question order (not answer
  *   order -- important, since free navigation means these can differ)
@@ -31,6 +31,14 @@ export function buildSimulasiResults(questions, answers) {
       explanation: question.explanation,
       _source: question._source,
       _setLabel: question._setLabel,
+      // Carried so the results screen can break down teori vs praktik (the
+      // only breakdown with meaningful sample sizes on a 50-question draw
+      // spread across ~34 sets) and can send genuinely-wrong questions to
+      // their linked flashcards. Both are null for sources that don't have
+      // them -- JAC Official questions have no teori/praktik tagging, and
+      // no Wayground/JAC-Mockup question has a related card.
+      _category: question._category ?? null,
+      _cardId: question._cardId ?? null,
     };
   });
 }

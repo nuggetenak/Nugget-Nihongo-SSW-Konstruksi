@@ -226,3 +226,38 @@
   border-top: 1px solid var(--ssw-border);
   padding-top: var(--space-6);
 }
+
+/* Resume prompt (item 78) — a saved exam offered back on the start screen. */
+.resumeCard {
+  background: var(--ssw-surfaceActive);
+  border: 1.5px solid rgba(239, 68, 68, 0.4);
+  border-radius: var(--r-md);
+  padding: var(--space-14) var(--space-16);
+  margin-bottom: var(--space-20);
+}
+.resumeTitle {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-text);
+  margin-bottom: var(--space-4);
+}
+.resumeSub {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  margin-bottom: var(--space-10);
+}
+.resumeActions {
+  gap: var(--space-8);
+}
+
+/* One breakdown row on the results screen (BreakdownList). */
+.breakdownRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-8) var(--space-12);
+  background: var(--ssw-surface);
+  border-radius: var(--r-md);
+  border: 1px solid var(--ssw-border);
+  font-size: var(--fs-caption);
+}
