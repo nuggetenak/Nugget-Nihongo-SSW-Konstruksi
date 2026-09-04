@@ -128,27 +128,35 @@ export const SOURCE_META = {
   'jac-jitsugi1': { label: 'Soal Contoh 実技 Set 1', emoji: '🔧', color: '#22543d' },
   'jac-jitsugi2': { label: 'Soal Contoh 実技 Set 2', emoji: '🔧', color: '#22543d' },
   // ── Kosakata (vocab source files) ─────────────────────────────────────────
-  'vocab-lifeline': { label: 'Vocab — Kosakata 設備実技', emoji: '📖', color: '#0369a1' },
+  // vocab-lifeline / vocab-core / vocab-exam / vocab-teori / vocab-general were
+  // removed 2026-09-04: all five were declared here but carried by zero cards,
+  // left behind when the Doboku/Kenchiku scope reduction (session 24) took their
+  // content with it. SumberMode renders one row per SOURCE_GROUPS key, so each
+  // one showed up on screen as a permanent, un-openable "0 kartu" row — five of
+  // the seventeen rows on that screen were dead. `scripts/audit-integrity.mjs`
+  // now fails on a zero-card source so this can't silently come back.
   'vocab-jac': { label: 'Vocab JAC — Kosakata soal JAC', emoji: '📝', color: '#1d4ed8' },
-  'vocab-core': { label: 'Vocab Core — Kosakata inti', emoji: '🏛️', color: '#2d3748' },
-  'vocab-exam': { label: 'Vocab Exam — 250 kosakata ujian', emoji: '🎯', color: '#7c3aed' },
-  'vocab-teori': { label: 'Vocab Teori — Kosakata 学科', emoji: '📋', color: '#dc2626' },
   // ── Sumber Tambahan (supplementary — provenance audit) ────────────────────
   'vocab-supplementary': {
     label: 'Vocab Supplementary — Kosakata pelengkap',
     emoji: '📝',
     color: '#6b7280',
   },
-  'vocab-general': { label: 'Vocab General — Kata umum konstruksi', emoji: '📎', color: '#9ca3af' },
 };
 
-export const VOCAB_SOURCES = [
-  'vocab-lifeline',
-  'vocab-jac',
-  'vocab-core',
-  'vocab-exam',
-  'vocab-teori',
-];
+// Source files that are pure vocabulary lists rather than chapter content.
+// Consumed by `excludeVocab` (useTrackedCards) and FocusMode's weakness ranking.
+//
+// Four of the five former entries were zero-card leftovers and are gone (see
+// SOURCE_META above). What's left is genuinely one source — and that is worth
+// noticing rather than tidying away: `vocab-supplementary` (494 cards, by far the
+// largest vocab pool in the corpus) is NOT in this list, so `excludeVocab`
+// currently removes 49 cards where the name implies ~543. Deliberately left
+// as-is: SOURCE_GROUPS files it under "Sumber Tambahan" rather than "Kosakata",
+// so both readings are defensible, and adding it would silently move every
+// category score on FocusMode's weakness screen. Logged as an open decision in
+// docs/UI_UX_PLAN.md rather than changed on this pass.
+export const VOCAB_SOURCES = ['vocab-jac'];
 
 export const SOURCE_GROUPS = [
   {
@@ -156,11 +164,8 @@ export const SOURCE_GROUPS = [
     keys: ['jac-ch1', 'jac-ch2', 'jac-ch3', 'jac-ch4', 'jac-ch5', 'jac-ch6', 'jac-ch7'],
   },
   { label: 'Soal Contoh', keys: ['jac-gakka1', 'jac-gakka2', 'jac-jitsugi1', 'jac-jitsugi2'] },
-  {
-    label: 'Kosakata',
-    keys: ['vocab-lifeline', 'vocab-jac', 'vocab-core', 'vocab-exam', 'vocab-teori'],
-  },
-  { label: 'Sumber Tambahan', keys: ['vocab-supplementary', 'vocab-general'] },
+  { label: 'Kosakata', keys: ['vocab-jac'] },
+  { label: 'Sumber Tambahan', keys: ['vocab-supplementary'] },
 ];
 
 export const SOURCE_ACCENT = {
@@ -175,11 +180,6 @@ export const SOURCE_ACCENT = {
   'jac-gakka2': '#fc8181',
   'jac-jitsugi1': '#68d391',
   'jac-jitsugi2': '#68d391',
-  'vocab-lifeline': '#63b3ed',
   'vocab-jac': '#93c5fd',
-  'vocab-core': '#cbd5e0',
-  'vocab-exam': '#b794f4',
-  'vocab-teori': '#f56565',
   'vocab-supplementary': '#9ca3af',
-  'vocab-general': '#d1d5db',
 };

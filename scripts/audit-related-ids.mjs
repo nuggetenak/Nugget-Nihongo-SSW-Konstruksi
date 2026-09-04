@@ -2,9 +2,15 @@
 // Cross-ref script: validates related_card_id in JAC data against current CARDS.
 // Run: node scripts/audit-related-ids.mjs
 // If errors: patch jac-teori.js + jac-lifeline.js to set broken refs → null
+//
+// Import paths corrected 2026-09-04: both files moved to src/data/sets/jac/ at
+// the 2026-08-18 merge and this script was never updated, so every run since has
+// died with ERR_MODULE_NOT_FOUND instead of auditing anything. It isn't wired
+// into any npm script, which is how that went unnoticed — `npm run audit:full`
+// now includes it.
 import { CARDS } from '../src/data/cards.js';
-import { JAC_TEORI } from '../src/data/jac-teori.js';
-import { JAC_LIFELINE } from '../src/data/jac-lifeline.js';
+import { JAC_TEORI } from '../src/data/sets/jac/jac-teori.js';
+import { JAC_LIFELINE } from '../src/data/sets/jac/jac-lifeline.js';
 
 const cardIds = new Set(CARDS.map((c) => c.id));
 const broken = [];

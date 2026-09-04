@@ -158,9 +158,9 @@ export const DANGER_PAIRS = [
       '押土《おしど》 = mendorong (horizontal, blade). 転圧《てんあつ》 = memadatkan dengan tekanan putar (roller). 掘削《くっさく》 = menggali (vertical, bucket). Tiga alat, tiga arah gerak: horizontal / vertikal berputar / vertikal ke bawah.',
   },
   {
-    term: 'CD管 vs PF管《CDかん vs PFかん》',
+    term: 'CD管《シーディーかん》 vs PF管《ピーエフかん》',
     track: 'lifeline',
-    furi: 'CDかん vs PFかん',
+    furi: 'シーディーかん・ピーエフかん',
     confusionType: 'prosedur',
     correct:
       'CD管 = khusus dalam BETON (oranye, fleksibel); PF管 = instalasi umum (tidak boleh dalam beton)',
@@ -192,9 +192,9 @@ export const DANGER_PAIRS = [
       'Tembaga (銅《どう》) lunak — 金ノコ《きんのこ》/grinder membuat serpihan dan ujung tidak rata sehingga sambungan bocor. パイプカッター berputar mengikuti lingkaran pipa sehingga potongan sempurna tegak lurus dan rapat.',
   },
   {
-    term: '免振 vs 制振 vs 耐震《めんしん vs せいしん vs たいしん》',
+    term: '免振《めんしん》 vs 制振《せいしん》 vs 耐震《たいしん》',
     track: 'common',
-    furi: 'めんしん vs せいしん vs たいしん',
+    furi: 'めんしん・せいしん・たいしん',
     confusionType: 'kata',
     correct: '免振 = isolator di fondasi; 制振 = damper dalam bangunan; 耐震 = struktur diperkuat',
     traps: [
@@ -205,9 +205,9 @@ export const DANGER_PAIRS = [
       '免振 (mensin) = hindari — isolator karet memutus getaran sebelum masuk bangunan. 制振 (seishin) = kendalikan — damper menyerap energi di dalam. 耐震 (taishin) = tahan — struktur sendiri diperkuat. Tiga strategi berbeda: hindari → serap → tahan.',
   },
   {
-    term: '治水 vs 利水《ちすい vs りすい》',
+    term: '治水《ちすい》 vs 利水《りすい》',
     track: 'common',
-    furi: 'ちすい vs りすい',
+    furi: 'ちすい・りすい',
     confusionType: 'kata',
     correct: '治水 = cegah/kendalikan banjir; 利水 = manfaatkan air (irigasi/PLTA)',
     traps: [
@@ -218,9 +218,9 @@ export const DANGER_PAIRS = [
       '治 (osaeru = menekan/mengendalikan) vs 利 (ri = keuntungan/manfaat). 治水《ちすい》 = kendalikan air dari bencana. 利水《りすい》 = ambil manfaat dari air. Bendungan bisa punya kedua fungsi tapi tujuan rancangnya beda.',
   },
   {
-    term: '圧着ペンチ 赤 vs 黄《あっちゃくペンチ あか vs き》',
+    term: '圧着《あっちゃく》ペンチ 赤《あか》 vs 黄《き》',
     track: 'lifeline',
-    furi: 'あっちゃくペンチ あか vs き',
+    furi: 'あっちゃくペンチ あか・き',
     confusionType: 'angka',
     correct: '赤 (merah) = untuk 圧着端子; 黄 (kuning) = untuk リングスリーブ',
     traps: [
@@ -231,9 +231,9 @@ export const DANGER_PAIRS = [
       'Warna berbeda = standar JIS berbeda = ukuran dies berbeda. Merah (赤《あか》) untuk terminal kabel berinsulasi (圧着端子《あっちゃくたんし》). Kuning (黄《き》) untuk ring sleeve sambungan kabel (リングスリーブ). Pakai yang salah = sambungan tidak kuat = bahaya kebakaran.',
   },
   {
-    term: '軍手 + ねじ切り機《ぐんて + ねじきりき》',
+    term: '軍手《ぐんて》 + ねじ切り機《ねじきりき》',
     track: 'lifeline',
-    furi: 'ぐんて + ねじきりき',
+    furi: 'ぐんて・ねじきりき',
     confusionType: 'prosedur',
     correct: 'DILARANG KERAS memakai sarung tangan kain (軍手) saat pakai mesin ulir',
     traps: [

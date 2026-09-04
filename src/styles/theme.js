@@ -36,6 +36,12 @@ export const THEMES = {
     // fails). This resolves to whichever amber tone actually clears 4.5:1 in the active theme.
     '--ssw-amberText': '#92400E',
     '--ssw-gold': '#FBBF24',
+    // Mirrors T.accentSoft below. Both AngkaMode and DangerMode ask for this in
+    // CSS -- `var(--ssw-accentSoft, var(--ssw-surface))` -- and until 2026-09-04
+    // nothing defined it, so both silently rendered the flat surface fallback
+    // instead of the soft amber wash they were written for. The value existed
+    // the whole time, as a JS-only entry in T; only CSS couldn't reach it.
+    '--ssw-accentSoft': 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(251,191,36,0.08))',
     '--ssw-correct': '#16a34a',
     '--ssw-correctBg': 'rgba(22,163,74,0.10)',
     '--ssw-correctBorder': 'rgba(22,163,74,0.35)',
@@ -74,6 +80,7 @@ export const THEMES = {
     // amber here — amberDark would be the one that fails in this theme (2.77:1).
     '--ssw-amberText': '#F59E0B',
     '--ssw-gold': '#FBBF24',
+    '--ssw-accentSoft': 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(251,191,36,0.08))',
     '--ssw-correct': '#16a34a',
     '--ssw-correctBg': 'rgba(22,163,74,0.10)',
     '--ssw-correctBorder': 'rgba(22,163,74,0.35)',
@@ -115,7 +122,7 @@ export const T = {
   amberMid: '#B45309',
   gold: 'var(--ssw-gold)',
   accent: 'linear-gradient(135deg, #92400E, #B45309 50%, #F59E0B)',
-  accentSoft: 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(251,191,36,0.08))',
+  accentSoft: 'var(--ssw-accentSoft)',
   correct: 'var(--ssw-correct)',
   correctBg: 'var(--ssw-correctBg)',
   correctBorder: 'var(--ssw-correctBorder)',
@@ -141,10 +148,12 @@ export const T = {
   sp: [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64],
   r: { xs: 6, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, pill: 99 },
   font: "'DM Sans','Noto Sans JP',system-ui,sans-serif",
-
   fontJP: "'Noto Sans JP','DM Sans',sans-serif",
-  maxW: 480,
-  navH: 64,
+  // T.maxW / T.navH removed 2026-09-04: unreferenced, and actively misleading if
+  // they had been used -- --max-w is responsive (480/620/1180px by breakpoint,
+  // global.css) so a component reading a frozen 480 would have pinned itself to
+  // phone width on a desktop monitor, the exact bug the responsive shell exists
+  // to prevent. --nav-h/--max-w in CSS are the only definitions.
 };
 
 export const GRADES = [
