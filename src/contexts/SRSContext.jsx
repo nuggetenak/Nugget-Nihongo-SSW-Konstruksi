@@ -20,17 +20,14 @@ export function SRSProvider({ children }) {
     return CARDS.filter((c) => catKeys.has(c.category)).map((c) => c.id);
   }, [track]);
 
+  // useSRS returns a memoised object keyed on its own store revision, so there
+  // is nothing left to re-memoise here. This used to rebuild the value from a
+  // hand-listed subset of srs's keys that left `stats` out, which meant a review
+  // that changed the stats without changing the due count handed consumers the
+  // previous render's numbers. See useSRS for the fix.
   const srs = useSRS(trackCardIds);
 
-  // Memoize context value — only rebuilds when dueCount changes.
-  // Callbacks (review, getDue, getInfo, previewFor) are stable useCallback refs.
-  const stableSrs = useMemo(
-    () => srs,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [srs.dueCount, srs.review, srs.getDue, srs.getInfo, srs.previewFor]
-  );
-
-  return <SRSCtx.Provider value={stableSrs}>{children}</SRSCtx.Provider>;
+  return <SRSCtx.Provider value={srs}>{children}</SRSCtx.Provider>;
 }
 
 export function useSRSContext() {

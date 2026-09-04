@@ -3,7 +3,7 @@
 // Checks are run against a snapshot of user state.
 // ─────────────────────────────────────────────────────────────────────────────
 import { HALF_DECK_THRESHOLD, TOTAL_CARDS } from './constants.js';
-import { getAvgAccuracy } from './session-analytics.js';
+import { getAvgAccuracy, getBestSimScore, hasPerfectSprint } from './session-analytics.js';
 
 export const ACHIEVEMENTS = [
   {
@@ -130,17 +130,13 @@ export function buildAchievementState({ known, streakData, sessions = [], srs, j
   const matureSRS = srs?.stats?.mature ?? 0;
   const totalSessions = sessions.length;
 
-  // Best simulasi score from sessions
-  const simSessions = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
-  const bestSimScore =
-    simSessions.length > 0
-      ? Math.max(...simSessions.map((s) => Math.round((s.correct / s.total) * 100)))
-      : 0;
-
-  // Perfect sprint: any sprint session with 0 wrong (correct === total, total >= 10)
-  const perfectSprint = sessions.some(
-    (s) => s.mode === 'sprint' && s.total >= 10 && s.correct === s.total
-  );
+  // Both of these had a second, identical implementation inline here while
+  // session-analytics.js — already imported for getAvgAccuracy, one line up —
+  // exported them. Two copies of a scoring rule is one copy too many: whichever
+  // gets updated, the other silently disagrees, and both feed user-visible
+  // badges. Now the shared ones.
+  const bestSimScore = getBestSimScore(sessions);
+  const perfectSprint = hasPerfectSprint(sessions);
 
   // JAC mastery: all JAC set scores ≥80%
   const jacEntries = Object.values(jacScores);
