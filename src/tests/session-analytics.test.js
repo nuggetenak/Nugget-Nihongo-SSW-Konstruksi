@@ -135,3 +135,29 @@ describe('session-analytics', () => {
     });
   });
 });
+
+// ─── SRS component of the readiness score (2026-09-04) ───────────────────────
+describe('calcReadiness — SRS component counts every card in review', () => {
+  const sessions = [];
+
+  it('counts young cards, not only mature ones', () => {
+    // `srs.stats.review` never existed — getSRSStats returns
+    // { total, new, learning, young, mature, due } — so this component silently
+    // counted mature cards only, and its own comment ("mature+review") described
+    // an intent the code never had. In FSRS terms young and mature are both the
+    // Review state, split by SRS_MATURE_DAYS.
+    const allYoung = { stats: { total: 100, new: 0, learning: 0, young: 100, mature: 0, due: 0 } };
+    const allMature = { stats: { total: 100, new: 0, learning: 0, young: 0, mature: 100, due: 0 } };
+    const streakData = {};
+    expect(calcReadiness({ srs: allYoung, sessions, streakData })).toBe(
+      calcReadiness({ srs: allMature, sessions, streakData })
+    );
+    // 40 of 100 points come from the SRS component; nothing else scores here.
+    expect(calcReadiness({ srs: allYoung, sessions, streakData })).toBe(40);
+  });
+
+  it('a deck that has never been reviewed still scores 0 on the SRS component', () => {
+    const allNew = { stats: { total: 100, new: 100, learning: 0, young: 0, mature: 0, due: 0 } };
+    expect(calcReadiness({ srs: allNew, sessions, streakData: {} })).toBe(0);
+  });
+});

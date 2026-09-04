@@ -130,6 +130,12 @@ export function AppProvider({ children }) {
       setTab(t);
       setModeHistory([]);
       setMode(null);
+      // The one exit path that wasn't clearing this. exitMode, goBack and the
+      // popstate handler all do; leaving stale params on the context while the
+      // user is on a tab is invisible today only because nothing reads them
+      // outside a mode, which is a property of the current consumers rather
+      // than of this function.
+      setModeParams(null);
       setPref('lastMode', null);
       window.scrollTo({ top: 0, behavior: 'instant' });
     },

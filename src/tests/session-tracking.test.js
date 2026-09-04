@@ -85,3 +85,52 @@ describe('Phase C — Session Tracking', () => {
     expect(modes).toContain('jac');
   });
 });
+
+// ─── Streak from sessions (2026-09-04) ───────────────────────────────────────
+// Before this, handleMark was the only thing in the app that advanced
+// streakData or dailyCount, so a learner who did SRS reviews or quizzes every
+// day and never opened FlashcardMode showed a streak of 0. See advanceStudyDay
+// in ProgressContext.jsx.
+describe('study streak counts sessions, not just flashcard marks', () => {
+  const today = () => new Date().toLocaleDateString('sv');
+
+  it('a finished session starts the streak', () => {
+    const getCtx = renderProgress();
+    expect(getCtx().streakData.days ?? 0).toBe(0);
+    act(() => {
+      getCtx().recordSession({ mode: 'ulasan', correct: 8, total: 10, durationMs: 1000 });
+    });
+    expect(getCtx().streakData).toEqual({ days: 1, lastDate: today() });
+  });
+
+  it('a second session the same day does not double-count the streak', () => {
+    const getCtx = renderProgress();
+    act(() => {
+      getCtx().recordSession({ mode: 'kuis', correct: 5, total: 10, durationMs: 1000 });
+      getCtx().recordSession({ mode: 'jac', correct: 5, total: 10, durationMs: 1000 });
+    });
+    expect(getCtx().streakData.days).toBe(1);
+  });
+
+  it('an empty session does not advance the streak', () => {
+    // This app has shipped a phantom 0/0 session before (ReviewMode logged one
+    // just for opening the tab with nothing due). A streak that can be advanced
+    // by opening a screen is worth less than one that cannot.
+    const getCtx = renderProgress();
+    act(() => {
+      getCtx().recordSession({ mode: 'ulasan', correct: 0, total: 0, durationMs: 0 });
+    });
+    expect(getCtx().sessions.length).toBe(1);
+    expect(getCtx().streakData.days ?? 0).toBe(0);
+  });
+
+  it('a session keeps dailyCount meaning "cards", not "sessions"', () => {
+    const getCtx = renderProgress();
+    act(() => {
+      getCtx().handleMark(1, 'known');
+      getCtx().recordSession({ mode: 'kuis', correct: 9, total: 10, durationMs: 1000 });
+    });
+    // One card marked, one session finished -> "+1 kartu hari ini", not +2.
+    expect(getCtx().dailyCount).toEqual({ count: 1, date: today() });
+  });
+});

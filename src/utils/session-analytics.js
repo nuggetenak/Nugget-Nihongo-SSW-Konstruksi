@@ -69,10 +69,20 @@ export function calcReadiness({ srs, sessions, streakData }, recentN = null) {
   // silently been 0 for every caller, always, regardless of actual streak.
   const streak = streakData?.days ?? 0;
 
-  // SRS component (0–40): ratio of mature+review cards
+  // SRS component (0–40): ratio of cards in the review state.
+  //
+  // Second dead-key bug in this same function (the first was streakData.current,
+  // fixed for item 56 and noted below). `srs.stats.review` has never existed —
+  // getSRSStats returns { total, new, learning, young, mature, due } — so this
+  // silently counted only mature cards, and its own comment saying
+  // "mature+review" was describing an intent the code never implemented. `young`
+  // is what that comment meant: in FSRS terms young and mature are both the
+  // Review state, split by SRS_MATURE_DAYS. A learner with 300 cards in review
+  // but none yet past 21 days scored 0 on a component meant to reward exactly
+  // that progress.
   const total = srs?.stats?.total ?? 0;
-  const mature = (srs?.stats?.mature ?? 0) + (srs?.stats?.review ?? 0);
-  const srsScore = total > 0 ? (mature / total) * 40 : 0;
+  const inReview = (srs?.stats?.mature ?? 0) + (srs?.stats?.young ?? 0);
+  const srsScore = total > 0 ? (inReview / total) * 40 : 0;
 
   // Quiz component (0–40): average accuracy (recent-N if requested)
   const quizScore = avgAcc !== null ? (avgAcc / 100) * 40 : 0;

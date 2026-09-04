@@ -12,6 +12,43 @@ import { makeWrongEntry } from '../utils/wrong-tracker.js';
 
 const ProgressCtx = createContext(null);
 
+// Advances the daily streak and today's activity count for `prev`, returning the
+// fields to merge in. `counts` is how much today's tally grows: 1 for a single
+// card mark, 0 for a finished session — that keeps the streak alive without
+// inflating a counter the UI labels "kartu hari ini".
+//
+// Lifted out of handleMark 2026-09-04, because handleMark was the ONLY caller
+// that existed. Marking a flashcard known/unknown was the sole action in the
+// whole app that counted as studying: a learner who did SRS reviews every
+// morning for a month, or nothing but quizzes and mock exams, kept a streak of
+// 0 throughout. ReviewMode is the mode this app's own plan calls "the one a
+// learner uses daily and longest". The streak feeds the Dashboard headline, the
+// week_streak/month_streak achievements, and 20 of the 100 points in the
+// readiness score, so one missing call site was wrong in four visible places.
+export function advanceStudyDay(prev, counts, queueToast) {
+  const dateStr = todayStr();
+  const streak = prev.streakData ?? {};
+  const days =
+    streak.lastDate === dateStr
+      ? (streak.days ?? 0)
+      : streak.lastDate === prevDayStr()
+        ? (streak.days ?? 0) + 1
+        : 1;
+
+  const dc = prev.dailyCount ?? { count: 0, date: '' };
+  const dailyCount =
+    dc.date === dateStr
+      ? { count: dc.count + counts, date: dateStr }
+      : { count: counts, date: dateStr };
+
+  const milestoneStreak7 = prev.milestoneStreak7 || days >= 7;
+  if (!prev.milestoneStreak7 && milestoneStreak7) {
+    queueToast('🔥 7 hari berturut-turut! Konsistensi = kunci sukses.');
+  }
+
+  return { streakData: { days, lastDate: dateStr }, dailyCount, milestoneStreak7 };
+}
+
 // Module-level stable defaults — prevent empty object/array recreation each render
 const EMPTY_OBJ = Object.freeze({});
 const EMPTY_ARR = Object.freeze([]);
@@ -20,6 +57,13 @@ export function ProgressProvider({ children }) {
   const [prog, setProgState] = useState(() => get('progress'));
   // Queue of milestone toast messages consumed by App.jsx.
   const [toastQueue, setToastQueue] = useState([]);
+
+  // Queued out of band: these fire from inside a setProg updater, and calling
+  // setState during another component's state update is exactly what React
+  // warns about. Stable identity so the callbacks below don't re-create.
+  const queueToast = useCallback((msg, duration = 4000) => {
+    setTimeout(() => setToastQueue((q) => [...q, { msg, duration }]), 0);
+  }, []);
 
   const setProg = useCallback((updater) => {
     setProgState((prev) => {
@@ -32,7 +76,6 @@ export function ProgressProvider({ children }) {
   // ── Known / Unknown ───────────────────────────────────────────────────
   const handleMark = useCallback(
     (id, type) => {
-      const dateStr = todayStr();
       setProg((prev) => {
         const knownSet = new Set(Array.isArray(prev.known) ? prev.known : []);
         const unknownSet = new Set(Array.isArray(prev.unknown) ? prev.unknown : []);
@@ -45,41 +88,12 @@ export function ProgressProvider({ children }) {
           knownSet.delete(id);
         }
 
-        // Streak
-        const streak = prev.streakData ?? {};
-        const newDays =
-          streak.lastDate === dateStr
-            ? (streak.days ?? 0)
-            : streak.lastDate === prevDayStr()
-              ? (streak.days ?? 0) + 1
-              : 1;
-        const streakData = { days: newDays, lastDate: dateStr };
-
-        // Daily count
-        const dc = prev.dailyCount ?? { count: 0, date: '' };
-        const dailyCount =
-          dc.date === dateStr
-            ? { count: dc.count + 1, date: dateStr }
-            : { count: 1, date: dateStr };
+        const { streakData, dailyCount, milestoneStreak7 } = advanceStudyDay(prev, 1, queueToast);
 
         // Recent cards (max 20, newest first)
         const recentCards = id
           ? [id, ...(prev.recentCards ?? []).filter((x) => x !== id)].slice(0, 20)
           : (prev.recentCards ?? []);
-
-        // Milestone: streak7 — queue toast when first achieved
-        const milestoneStreak7 = prev.milestoneStreak7 || newDays >= 7;
-        if (!prev.milestoneStreak7 && milestoneStreak7) {
-          // Queue outside setState (setTimeout avoids calling setState within setState)
-          setTimeout(
-            () =>
-              setToastQueue((q) => [
-                ...q,
-                { msg: '🔥 7 hari berturut-turut! Konsistensi = kunci sukses.', duration: 4000 },
-              ]),
-            0
-          );
-        }
 
         return {
           ...prev,
@@ -92,7 +106,7 @@ export function ProgressProvider({ children }) {
         };
       });
     },
-    [setProg]
+    [setProg, queueToast]
   );
 
   // ── Starred ───────────────────────────────────────────────────────────
@@ -153,18 +167,11 @@ export function ProgressProvider({ children }) {
     setProg((prev) => {
       // Queue toast on first achievement only.
       if (!prev.milestoneQuiz70) {
-        setTimeout(
-          () =>
-            setToastQueue((q) => [
-              ...q,
-              { msg: '🎉 Luar biasa! Nilai kuis ≥70% untuk pertama kali!', duration: 4000 },
-            ]),
-          0
-        );
+        queueToast('🎉 Luar biasa! Nilai kuis ≥70% untuk pertama kali!');
       }
       return { ...prev, milestoneQuiz70: true };
     });
-  }, [setProg]);
+  }, [setProg, queueToast]);
 
   // Remove first toast from queue (called by App.jsx after displaying).
   const clearToast = useCallback((idx) => {
@@ -179,10 +186,21 @@ export function ProgressProvider({ children }) {
           ...(prev.sessions ?? []),
           { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
         ].slice(-SESSIONS_CAP); // keep last SESSIONS_CAP sessions (~6 months for heatmap)
-        return { ...prev, sessions };
+        // Finishing a session is studying, so it keeps the streak alive — see
+        // advanceStudyDay. counts=0 deliberately: dailyCount is rendered as
+        // "+N kartu hari ini", and a finished quiz is one session, not one card.
+        // The streak is the part that was wrong; the counter's meaning was not.
+        //
+        // total > 0 gates it. A session where nothing was answered isn't
+        // studying, and this app has shipped a phantom 0/0 session before
+        // (ReviewMode logged one just for opening the tab with nothing due,
+        // fixed 2026-09-01) — a streak that can be advanced by opening a screen
+        // is worth less than one that can't.
+        const studied = (total ?? 0) > 0;
+        return { ...prev, sessions, ...(studied ? advanceStudyDay(prev, 0, queueToast) : null) };
       });
     },
-    [setProg]
+    [setProg, queueToast]
   );
 
   const ctx = useMemo(() => {
