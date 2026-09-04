@@ -14,6 +14,7 @@ import {
 } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { applyTheme } from '../styles/theme.js';
+import { applyTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
 import { useToast } from '../components/Toast.jsx';
 
 const _noopToast = { show: () => {}, hide: () => {} };
@@ -37,6 +38,13 @@ export function AppProvider({ children }) {
   useEffect(() => {
     applyTheme(prefs.theme === 'dark');
   }, [prefs.theme]);
+
+  // ── Text scale ──
+  // main.jsx applies the stored value pre-paint; this keeps it in step when the
+  // reader changes it in Saya.
+  useEffect(() => {
+    applyTextScale(prefs.textScale ?? DEFAULT_TEXT_SCALE);
+  }, [prefs.textScale]);
 
   // Apply on mount
   useEffect(() => {
@@ -326,6 +334,7 @@ export function AppProvider({ children }) {
       onboarded: prefs.onboarded,
       completeOnboarding,
       dailyGoal: prefs.dailyGoal ?? 20,
+      textScale: prefs.textScale ?? DEFAULT_TEXT_SCALE,
       setDailyGoal,
       setPref,
       prefs,

@@ -49,6 +49,7 @@ export const DEFAULTS = {
     audioEnabled: true, // Web Speech API toggle
     studyAnchor: null, // 'morning' | 'lunch' | 'evening'
     furiganaPolicy: 'always', // 'always' | 'tap' | 'hidden'
+    textScale: 'normal', // 'kecil' | 'normal' | 'besar' | 'sangat-besar' — see utils/text-scale.js
     flashcardHintCount: 0, // resets on resetAll()
     notes: {}, // personal notes per card { [cardId]: string }
     speakOnFlip: false, // speak on card flip instead of advance
