@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
@@ -16,6 +16,8 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
+import ResumePrompt from '../components/ResumePrompt.jsx';
+import { useQuizResume } from '../hooks/useQuizResume.js';
 import S from './modes.module.css';
 
 // TEORI_PRAKTIK now computed inside component using track (see below)
@@ -73,6 +75,37 @@ function getSetWrongCount(setId) {
     .filter(([, v]) => getWrongCount(v) > 0).length;
 }
 
+// Build the question list for a set, once. Deliberately a plain function and
+// not a useMemo in the component: as a memo its dependency list had to include
+// `wrongCounts`, which this mode writes to on every wrong answer -- so
+// answering wrongly recomputed the memo, re-ran shuffle(), and swapped the
+// question under the user mid-session while QuizShell was still showing the
+// ✓/✗ and explanation for the one they had just answered. Reproduced directly
+// (see tests/quiz-list-stability.test.jsx). Drawing once, into state, is both
+// the fix and what makes a session restorable.
+function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
+  if (!set) return [];
+  let pool = set.questions;
+  // Filter to wrong-only when in lemah mode.
+  if (lemahMode) {
+    pool = pool.filter((q) => {
+      const qId = `${set.id}-${q.id}`;
+      return getWrongCount(wrongCounts[qId]) > 0;
+    });
+  }
+  return shuffle(pool).map((q) => ({
+    question: q.q,
+    hint: showHint ? q.hint : null,
+    options: q.opts.map((opt, i) => ({
+      text: stripFuri(opt),
+      sub: q.opts_id?.[i] || null,
+    })),
+    correctIdx: q.ans,
+    explanation: q.exp,
+    _qId: `${set.id}-${q.id}`,
+  }));
+}
+
 export default function WaygroundMode({ onSessionEnd }) {
   const { track } = useApp();
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
@@ -83,6 +116,7 @@ export default function WaygroundMode({ onSessionEnd }) {
   const [activeSet, setActiveSet] = useState(null);
   // 'Lemah' mode — only wrong questions for the active set.
   const [lemahMode, setLemahMode] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   const [showHint, setShowHint] = useState(true);
   const { saveScore, wgScores } = useProgress();
@@ -91,28 +125,34 @@ export default function WaygroundMode({ onSessionEnd }) {
 
   const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wgWrong ?? {});
 
-  const questions = useMemo(() => {
-    if (!set) return [];
-    let pool = set.questions;
-    // Filter to wrong-only when in lemah mode.
-    if (lemahMode) {
-      pool = pool.filter((q) => {
-        const qId = `${set.id}-${q.id}`;
-        return getWrongCount(wrongCounts[qId]) > 0;
-      });
-    }
-    return shuffle(pool).map((q) => ({
-      question: q.q,
-      hint: showHint ? q.hint : null,
-      options: q.opts.map((opt, i) => ({
-        text: stripFuri(opt),
-        sub: q.opts_id?.[i] || null,
-      })),
-      correctIdx: q.ans,
-      explanation: q.exp,
-      _qId: `${set.id}-${q.id}`,
-    }));
-  }, [set, showHint, lemahMode, wrongCounts]);
+  const { resumeData, progressKey, beginSession, clear, dismiss } = useQuizResume('ssw-wayground');
+  const [restored, setRestored] = useState(null);
+
+  // The one way into a session, so freezing the list and snapshotting it can't
+  // be forgotten at one of the three call sites that start one.
+  const openSet = useCallback(
+    (setId, lemah = false) => {
+      const target = TEORI_PRAKTIK.find((s) => s.id === setId);
+      const drawn = buildQuestions(target, { lemahMode: lemah, showHint, wrongCounts });
+      setQuestions(drawn);
+      setLemahMode(lemah);
+      setActiveSet(setId);
+      setRestored(null);
+      clear();
+      beginSession(drawn, { setId, lemah, showHint });
+    },
+    [TEORI_PRAKTIK, showHint, wrongCounts, clear, beginSession]
+  );
+
+  const handleResume = useCallback(() => {
+    if (!resumeData) return;
+    const { meta, questions: saved, progress } = resumeData;
+    setQuestions(saved);
+    setLemahMode(!!meta?.lemah);
+    setActiveSet(meta?.setId ?? null);
+    setRestored(progress);
+    dismiss();
+  }, [resumeData, dismiss]);
 
   const handleAnswer = useCallback(
     (qIdx, _selIdx, isCorrect) => {
@@ -132,6 +172,7 @@ export default function WaygroundMode({ onSessionEnd }) {
 
   const handleFinish = useCallback(
     ({ correct, total, maxStreak, durationMs = 0 }) => {
+      clear(); // QuizShell clears its own progress key; the question list is ours
       if (!activeSet) return;
       const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
       // Only update score for full set runs, not lemah-mode runs
@@ -139,12 +180,14 @@ export default function WaygroundMode({ onSessionEnd }) {
         saveScore('wg', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
       onSessionEnd?.({ correct, total, durationMs });
     },
-    [activeSet, lemahMode, saveScore, onSessionEnd]
+    [activeSet, lemahMode, saveScore, onSessionEnd, clear]
   );
 
   const handleExit = useCallback(() => {
     setActiveSet(null);
     setLemahMode(false);
+    setQuestions([]);
+    setRestored(null);
   }, []);
 
   if (activeSet) {
@@ -158,6 +201,10 @@ export default function WaygroundMode({ onSessionEnd }) {
         onFinish={handleFinish}
         showHint={showHint}
         accentColor={set?.color || T.amber}
+        persistKey={progressKey}
+        initialQIdx={restored?.qIdx ?? 0}
+        initialSelected={restored?.selected ?? null}
+        initialResults={restored?.results ?? []}
       />
     );
   }
@@ -185,6 +232,15 @@ export default function WaygroundMode({ onSessionEnd }) {
         {totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik
       </p>
 
+      {resumeData && (
+        <ResumePrompt
+          title="Lanjutkan set sebelumnya?"
+          detail={`Soal ${(resumeData.progress.qIdx ?? 0) + 1} dari ${resumeData.questions.length}, terjawab ${resumeData.progress.results?.length ?? 0}.`}
+          onResume={handleResume}
+          onDiscard={clear}
+        />
+      )}
+
       {/* W5: Suggested order — show recommended next set */}
       {(() => {
         // Untouched sets first, then sets with lowest score
@@ -200,10 +256,7 @@ export default function WaygroundMode({ onSessionEnd }) {
         const savedPct = wgScores[suggested.id]?.pct;
         return (
           <button
-            onClick={() => {
-              setLemahMode(false);
-              setActiveSet(suggested.id);
-            }}
+            onClick={() => openSet(suggested.id)}
             style={{
               width: '100%',
               textAlign: 'left',
@@ -357,10 +410,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                 <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                   <button
                     className={S.btnItem}
-                    onClick={() => {
-                      setLemahMode(false);
-                      setActiveSet(s.id);
-                    }}
+                    onClick={() => openSet(s.id)}
                     style={{
                       paddingLeft: 'var(--space-16)',
                       position: 'relative',
@@ -434,10 +484,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                   {/* W2: Ulang Salah sub-button — only shows if this set has wrong answers */}
                   {wrongCount > 0 && (
                     <button
-                      onClick={() => {
-                        setLemahMode(true);
-                        setActiveSet(s.id);
-                      }}
+                      onClick={() => openSet(s.id, true)}
                       style={{
                         fontFamily: 'inherit',
                         fontSize: 'var(--fs-small)',

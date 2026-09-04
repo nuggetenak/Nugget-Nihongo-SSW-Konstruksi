@@ -10,12 +10,14 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
+import ResumePrompt from '../components/ResumePrompt.jsx';
+import { useQuizResume } from '../hooks/useQuizResume.js';
 import S from './modes.module.css';
 
 // VOCAB_SETS and MIX_ALL computed inside component — track-filtered
 const MIX_ALL_ID = '__vocab_mix__';
 
-export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
+export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
   // Scoped to wglv-* specifically, not a plain 'wg' prefix -- that also
   // matches wgl01..wgl10 (JAC-style "Praktik Set" questions, unrelated to
@@ -35,30 +37,57 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
     color: '#a78bfa',
   };
   const [activeSet, setActiveSet] = useState(null);
+  const [questions, setQuestions] = useState([]);
 
   const [showHint, setShowHint] = useState(true);
   const { saveScore, vocabScores: scores } = useProgress();
 
   const setDef = activeSet === MIX_ALL_ID ? MIX_ALL : VOCAB_SETS.find((s) => s.id === activeSet);
 
-  const questions = useMemo(() => {
-    if (!activeSet) return [];
-    const qs =
-      activeSet === MIX_ALL_ID
-        ? shuffle(VOCAB_SETS.flatMap((s) => s.questions.map((q) => ({ ...q, _set: s.id }))))
-        : shuffle(setDef?.questions ?? []);
-    return qs.map((q) => ({
-      question: q.q,
-      hint: showHint ? q.hint : null,
-      options: q.opts.map((opt, i) => ({
-        text: stripFuri(opt),
-        sub: q.opts_id?.[i] || null,
-      })),
-      correctIdx: q.ans,
-      explanation: q.exp,
-      _qId: `${activeSet}-${q.id}`,
-    }));
-  }, [activeSet, setDef, showHint, VOCAB_SETS]);
+  const { resumeData, progressKey, beginSession, clear, dismiss } = useQuizResume('ssw-vocab');
+  const [restored, setRestored] = useState(null);
+
+  // Drawn once when a set is opened and held in state. This mode's memo did not
+  // have WaygroundMode's re-shuffle bug (its wrong-count state was never a
+  // dependency), but a resumable session needs the exact list it started with:
+  // restoring "question 7 of 40" against a re-shuffled 40 is the wrong question.
+  const openSet = useCallback(
+    (setId) => {
+      const def = setId === MIX_ALL_ID ? MIX_ALL : VOCAB_SETS.find((x) => x.id === setId);
+      const qs =
+        setId === MIX_ALL_ID
+          ? shuffle(VOCAB_SETS.flatMap((x) => x.questions.map((q) => ({ ...q, _set: x.id }))))
+          : shuffle(def?.questions ?? []);
+      const drawn = qs.map((q) => ({
+        question: q.q,
+        hint: showHint ? q.hint : null,
+        options: q.opts.map((opt, i) => ({
+          text: stripFuri(opt),
+          sub: q.opts_id?.[i] || null,
+        })),
+        correctIdx: q.ans,
+        explanation: q.exp,
+        _qId: `${setId}-${q.id}`,
+      }));
+      setQuestions(drawn);
+      setActiveSet(setId);
+      setRestored(null);
+      clear();
+      beginSession(drawn, { setId });
+    },
+    // MIX_ALL is rebuilt every render but only its id and questions are read,
+    // both of which are derived from VOCAB_SETS.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [VOCAB_SETS, showHint, clear, beginSession]
+  );
+
+  const handleResume = useCallback(() => {
+    if (!resumeData) return;
+    setQuestions(resumeData.questions);
+    setActiveSet(resumeData.meta?.setId ?? null);
+    setRestored(resumeData.progress);
+    dismiss();
+  }, [resumeData, dismiss]);
 
   const [_wrongCounts, setWrongCounts] = useState(() => get('progress')?.vocabWrong ?? {});
 
@@ -80,26 +109,40 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
 
   const handleFinish = useCallback(
     ({ correct, total, maxStreak, durationMs = 0 }) => {
+      clear(); // QuizShell clears its own progress key; the question list is ours
       if (!activeSet) return;
       const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
       saveScore('vocab', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
       onSessionEnd?.({ correct, total, durationMs });
     },
-    [activeSet, saveScore, onSessionEnd]
+    [activeSet, saveScore, onSessionEnd, clear]
   );
 
   if (activeSet) {
     return (
       <QuizShell
         questions={questions}
-        onExit={() => setActiveSet(null)}
+        onExit={() => {
+          setActiveSet(null);
+          setQuestions([]);
+          setRestored(null);
+        }}
         title={setDef?.title || ''}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
-        onRetryWrong={onRetryWrong}
+        // No onRetryWrong: QuizShell can only offer that button when its
+        // results carry a _cardId, and not one of QUIZ_SETS' 980 questions has
+        // a related card id (JAC_OFFICIAL's 95 all do -- see JACMode). Passing
+        // the prop looked like the feature worked here; it has never been able
+        // to fire. Restoring it is a content job (linking vocab questions to
+        // cards), not a wiring one.
         showHint={showHint}
         accentColor={setDef?.color || T.amber}
         audioEnabled={audioEnabled}
+        persistKey={progressKey}
+        initialQIdx={restored?.qIdx ?? 0}
+        initialSelected={restored?.selected ?? null}
+        initialResults={restored?.results ?? []}
       />
     );
   }
@@ -109,6 +152,15 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
       <p className={S.pageSub}>
         {totalSoal} soal dalam {VOCAB_SETS.length} set · 語彙JP↔ID
       </p>
+
+      {resumeData && (
+        <ResumePrompt
+          title="Lanjutkan set vocab sebelumnya?"
+          detail={`Soal ${(resumeData.progress.qIdx ?? 0) + 1} dari ${resumeData.questions.length}, terjawab ${resumeData.progress.results?.length ?? 0}.`}
+          onResume={handleResume}
+          onDiscard={clear}
+        />
+      )}
 
       <div className={S.row} style={{ marginBottom: 'var(--space-20)' }}>
         {[
@@ -139,7 +191,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
 
       <button
         className={S.btnItem}
-        onClick={() => setActiveSet(MIX_ALL_ID)}
+        onClick={() => openSet(MIX_ALL_ID)}
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -203,7 +255,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
               <button
                 key={s.id}
                 className={S.btnItem}
-                onClick={() => setActiveSet(s.id)}
+                onClick={() => openSet(s.id)}
                 style={{ paddingLeft: 'var(--space-16)', position: 'relative', overflow: 'hidden' }}
               >
                 <div

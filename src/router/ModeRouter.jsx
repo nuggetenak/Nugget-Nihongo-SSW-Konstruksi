@@ -225,18 +225,24 @@ export default function ModeRouter() {
     angka: { onSessionEnd: makeSessionEnd('angka') },
     jebak: { onSessionEnd: makeSessionEnd('jebak') },
     cari: { track, starred, toggleStar },
+    // jac keeps onRetryWrong and now actually reaches it: every JAC_OFFICIAL
+    // question has a related_card_id, which JACMode passes through as _cardId.
     jac: {
       onSessionEnd: makeSessionEnd('jac'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
+    // wayground and vocab deliberately get no onRetryWrong: their questions
+    // come from QUIZ_SETS, where no question carries a related card id, so
+    // QuizShell can never assemble a deck to send anywhere. WaygroundMode
+    // never forwarded the prop to QuizShell at all, and VocabMode forwarded a
+    // prop that could not fire -- both read as a working feature from the
+    // prop map alone, which is why it sat unnoticed.
     wayground: {
       onSessionEnd: makeSessionEnd('wayground'),
-      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     vocab: {
       onSessionEnd: makeSessionEnd('vocab'),
-      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
     simulasi: {

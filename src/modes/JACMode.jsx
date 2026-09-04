@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
@@ -10,6 +10,8 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
 import EmptyState from '../components/EmptyState.jsx';
+import ResumePrompt from '../components/ResumePrompt.jsx';
+import { useQuizResume } from '../hooks/useQuizResume.js';
 import S from './modes.module.css';
 
 const SETS = [
@@ -43,7 +45,47 @@ const DELAYS = [
   { ms: 0, label: 'Manual' },
 ];
 
-export default function JACMode({ onSessionEnd, audioEnabled = false }) {
+function mapQuestions(list, withID) {
+  return list.map((q) => {
+    const hasPhoto = !!q.photoDesc;
+    return {
+      question: q.q,
+      questionSub: withID ? q.hint : null,
+      options: q.opts.map((opt, i) => ({
+        text: stripFuri(opt),
+        sub: q.opts_id?.[i] || null,
+      })),
+      correctIdx: q.ans,
+      explanation: q.exp,
+      hint: hasPhoto ? `📷 ${q.photoDesc || 'Soal ini aslinya pakai foto'}` : null,
+      hasPhoto,
+      photoDesc: q.photoDesc ?? null,
+      _qId: q.id,
+      // QuizShell's "Latih N salah" and "Latih <kategori>" both key off
+      // _cardId, and this mode only ever set _qId -- so both buttons were dead
+      // on every JAC session despite ModeRouter handing it a working
+      // onRetryWrong, and despite all 95 questions carrying a related_card_id
+      // that handleAddToSRS was already using.
+      _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
+    };
+  });
+}
+
+function buildQuestions(key, { wrongCounts, topicFilter, showID }) {
+  if (!key) return [];
+  if (key === 'lemah') {
+    const weak = JAC_OFFICIAL.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).sort(
+      (a, b) => getWrongCount(wrongCounts[b.id]) - getWrongCount(wrongCounts[a.id])
+    );
+    return mapQuestions(weak, showID);
+  }
+  let pool = JAC_OFFICIAL;
+  if (key !== 'all') pool = pool.filter((q) => q.set === key);
+  if (topicFilter) pool = pool.filter((q) => q.topic === topicFilter);
+  return mapQuestions(shuffle(pool), showID);
+}
+
+export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { toast } = useApp();
   const { saveScore, jacScores } = useProgress();
   const [setKey, setSetKey] = useState(null);
@@ -58,60 +100,55 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
 
   const lemahCount = JAC_OFFICIAL.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).length;
 
-  const filtered = useMemo(() => {
-    if (!setKey) return [];
-    let pool = JAC_OFFICIAL;
-    if (setKey === 'lemah')
-      return [...pool]
-        .filter((q) => getWrongCount(wrongCounts[q.id]) > 0)
-        .sort((a, b) => getWrongCount(wrongCounts[b.id]) - getWrongCount(wrongCounts[a.id]));
-    if (setKey !== 'all') pool = pool.filter((q) => q.set === setKey);
-    if (topicFilter) pool = pool.filter((q) => q.topic === topicFilter);
-    return shuffle(pool);
-  }, [setKey, wrongCounts, topicFilter]);
+  const { resumeData, progressKey, beginSession, clear, dismiss } = useQuizResume('ssw-jac');
+  const [questions, setQuestions] = useState([]);
+  const [restored, setRestored] = useState(null);
 
-  const questions = useMemo(
-    () =>
-      filtered.map((q) => {
-        const hasPhoto = !!q.photoDesc;
-        return {
-          question: q.q,
-          questionSub: showID ? q.hint : null,
-          options: q.opts.map((opt, i) => ({
-            text: stripFuri(opt),
-            sub: q.opts_id?.[i] || null,
-          })),
-          correctIdx: q.ans,
-          explanation: q.exp,
-          hint: hasPhoto ? `📷 ${q.photoDesc || 'Soal ini aslinya pakai foto'}` : null,
-          hasPhoto,
-          photoDesc: q.photoDesc ?? null,
-          _qId: q.id,
-        };
-      }),
-    [filtered, showID]
+  // Freezing the drawn list in state, rather than deriving it from a useMemo
+  // keyed on wrongCounts, is what stops a wrong answer from re-running shuffle()
+  // and swapping the question under the user mid-session -- same fix and same
+  // reproduction as WaygroundMode's.
+  const openSet = useCallback(
+    (key) => {
+      const drawn = buildQuestions(key, { wrongCounts, topicFilter, showID });
+      setQuestions(drawn);
+      setSetKey(key);
+      setRestored(null);
+      clear();
+      beginSession(drawn, { setKey: key });
+    },
+    [wrongCounts, topicFilter, showID, clear, beginSession]
   );
+
+  const handleResume = useCallback(() => {
+    if (!resumeData) return;
+    setQuestions(resumeData.questions);
+    setSetKey(resumeData.meta?.setKey ?? 'all');
+    setRestored(resumeData.progress);
+    dismiss();
+  }, [resumeData, dismiss]);
 
   const handleAnswer = useCallback(
     (qIdx, _selIdx, isCorrect) => {
       if (!isCorrect) {
-        const q = filtered[qIdx];
-        if (q?.id) {
+        const qId = questions[qIdx]?._qId;
+        if (qId) {
           setWrongCounts((prev) => {
-            const updated = { ...prev, [q.id]: makeWrongEntry(prev[q.id]) };
+            const updated = { ...prev, [qId]: makeWrongEntry(prev[qId]) };
             storageSet('progress', (p) => ({ ...p, wrongCounts: updated }));
             return updated;
           });
+          // Collect wrong question IDs for SRS add.
+          if (!wrongQIds.includes(qId)) setWrongQIds((prev) => [...prev, qId]);
         }
-        // Collect wrong question IDs for SRS add.
-        if (q?.id && !wrongQIds.includes(q.id)) setWrongQIds((prev) => [...prev, q.id]);
       }
     },
-    [filtered, setWrongCounts, wrongQIds]
+    [questions, setWrongCounts, wrongQIds]
   );
 
   const handleFinish = useCallback(
     ({ correct, total, durationMs = 0 }) => {
+      clear(); // QuizShell clears its own progress key; the question list is ours
       if (!setKey) return;
       const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
       const prev = jacScores[setKey];
@@ -124,7 +161,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
       });
       onSessionEnd?.({ correct, total, durationMs });
     },
-    [setKey, saveScore, jacScores, onSessionEnd]
+    [setKey, saveScore, jacScores, onSessionEnd, clear]
   );
 
   // Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now).
@@ -139,7 +176,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
     toast.show(`✅ ${unique.length} kartu ditambahkan ke Ulasan SRS`, { duration: 3000 });
   }, [wrongQIds, toast]);
 
-  if (setKey === 'lemah' && filtered.length === 0) {
+  if (setKey === 'lemah' && questions.length === 0) {
     return (
       <div className={S.pageCenter}>
         <EmptyState
@@ -159,6 +196,8 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
         questions={questions}
         onExit={() => {
           setSetKey(null);
+          setQuestions([]);
+          setRestored(null);
           setWrongQIds([]);
           setSrsAdded(0);
         }}
@@ -166,10 +205,15 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
         onAnswer={handleAnswer}
         onFinish={handleFinish}
         onAddToSRS={wrongQIds.length > 0 ? handleAddToSRS : undefined}
+        onRetryWrong={onRetryWrong}
         showHint={true}
         accentColor="#ef4444"
         autoNextDelay={autoDelay}
         audioEnabled={audioEnabled}
+        persistKey={progressKey}
+        initialQIdx={restored?.qIdx ?? 0}
+        initialSelected={restored?.selected ?? null}
+        initialResults={restored?.results ?? []}
       />
     );
   }
@@ -193,6 +237,15 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
   return (
     <div className={S.page}>
       <p className={S.pageSub}>{JAC_OFFICIAL.length} soal dari contoh ujian resmi</p>
+
+      {resumeData && (
+        <ResumePrompt
+          title="Lanjutkan sesi JAC sebelumnya?"
+          detail={`Soal ${(resumeData.progress.qIdx ?? 0) + 1} dari ${resumeData.questions.length}, terjawab ${resumeData.progress.results?.length ?? 0}.`}
+          onResume={handleResume}
+          onDiscard={clear}
+        />
+      )}
 
       <div className={S.row} style={{ marginBottom: 'var(--space-16)', flexWrap: 'wrap' }}>
         {[
@@ -296,7 +349,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
               width: '100%',
               fontWeight: 700,
             }}
-            onClick={() => setSetKey('all')}
+            onClick={() => openSet('all')}
           >
             🎯 Simulasi: {topicInfo?.label} ({topicCount(topicFilter)} soal)
           </button>
@@ -311,7 +364,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
             <button
               key={s.key}
               className={S.btnItem}
-              onClick={() => cnt > 0 && setSetKey(s.key)}
+              onClick={() => cnt > 0 && openSet(s.key)}
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -347,7 +400,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
         })}
         <button
           className={S.btnItem}
-          onClick={() => lemahCount > 0 && setSetKey('lemah')}
+          onClick={() => lemahCount > 0 && openSet('lemah')}
           style={{
             display: 'flex',
             justifyContent: 'space-between',
