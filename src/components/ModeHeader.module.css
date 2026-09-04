@@ -99,13 +99,24 @@
   line-height: 1;
 }
 
-/* ── Current mode identity ── */
+/* ── Current mode identity ──
+   This is the page title now that the modes no longer render their own <h2>,
+   so it carries the weight and tracking those had — but at --fs-title, not
+   --fs-page-title, and that is a correction (2026-09-04).
+
+   At --fs-page-title (26px on a phone) the label simply did not fit: measured
+   across all 21 modes, 11 of 21 titles were ellipsised at 320px and 3 at
+   390px — "Ekspor & Impor" wanted 308px of a 188px box. A page title the
+   reader cannot read is worse than a smaller one, and worse still at Ukuran
+   Teks "Sangat Besar", where 26px becomes 32.5px and the box does not grow.
+   This is sticky chrome rather than content: --fs-title (19-21.5px) is still
+   by some way the largest thing in the band. */
 .title {
   display: flex;
   align-items: center;
   gap: var(--space-8);
   font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: var(--fs-page-title);
+  font-size: var(--fs-title);
   font-weight: var(--fw-heavy);
   letter-spacing: -0.5px;
   color: var(--ssw-textBright);
@@ -113,15 +124,20 @@
   min-width: 0;
 }
 
-/* This is the page title now that the modes no longer render their own <h2>,
-   so it takes --fs-page-title and the .pageTitle weight/tracking those had.
-   Truncates rather than wraps: the header is sticky, and a two-line title
-   would push every mode's content down by a whole row on the narrowest
-   screens — the exact cost this consolidation set out to remove. */
+/* Wraps to a second line rather than truncating, but only when it has to.
+   The earlier rule here was nowrap + ellipsis, on the reasoning that a sticky
+   two-line header pushes every mode's content down a row; that reasoning
+   holds, which is why the size came down first — at --fs-title nothing wraps
+   at 390px and only the longest labels wrap at 320px. The clamp keeps a
+   runaway label (or a much larger Ukuran Teks) from turning the header into a
+   paragraph. */
 .titleText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: var(--lh-tight);
 }
 
 .titleIcon {
