@@ -769,18 +769,31 @@ to 26 and 20px to 19, and item 68's judgment holds — don't force a match witho
 element wants the neighbouring token's size. Each is individually decidable, and they are trivial
 to find (`rem` outside a `var()` in a `font-size`).
 
-### ☐ 73. Setup screens still leave 250–330px under their primary button — `S` — **design call**
+### ☐ 73. The setup screens are the last of the vertical dead space — `S` — **design call**
 
-`.content` is a flex column in mode chrome now and a screen can claim the leftover height with
-`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). FlashcardMode uses it; nothing else does. The setup screens
-— QuizMode, Kuis Produksi, Sprint, Simulasi and friends — still stack their options and then their
-"Mulai" button in the top two-thirds of a phone, leaving 250–330px empty below.
+`.content` is a flex column in mode chrome now and a screen claims the leftover height with
+`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). Kartu and Ulasan use it. A census of all 21 modes at
+390×844, measured on the running app, says what is left:
 
-Not fixed here because it is not a defect the way FlashcardMode's was. There the *content* was
-adrift in the space; here the question is whether the CTA should be bottom-anchored, which is a
-deliberate design position (bottom-anchored = thumb-reachable and consistent with the app's bottom
-nav; top-stacked = the button sits directly under the choice it confirms). Whichever way it goes it
-should go the same way on all of them, which is what makes it one decision rather than six.
+| screen | empty below the content |
+| --- | --- |
+| Cari | 429px — but that is an empty result list waiting for a query, not a layout defect |
+| Dengarkan | 382px |
+| Produksi | 353px |
+| Kuis Produksi | 353px |
+| Kuis | 232px |
+| Sprint | 203px |
+| JAC Official | 63px |
+| Kartu, Ulasan | 24px (the page's own bottom padding) |
+
+Everything else scrolls. So the open question is exactly one shape: the five setup screens that
+stack their options and then a "Mulai" button in the top two-thirds of the phone.
+
+Not fixed here because it is not a defect the way Kartu's and Ulasan's were. There the *content*
+was adrift in the space; here the question is whether the CTA should be bottom-anchored, which is a
+design position (bottom-anchored = thumb-reachable and consistent with the app's bottom nav;
+top-stacked = the button sits directly under the choice it confirms). Whichever way it goes it
+should go the same way on all five, which is what makes it one decision rather than five.
 
 ### ☐ 74. The flip card cannot grow to fill its scene — `M`
 
