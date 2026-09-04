@@ -53,9 +53,7 @@ describe('Onboarding — exam-date step (item 24)', () => {
 
   it('setting a date changes the button label and carries the date through to onComplete', () => {
     let payload;
-    render(
-      createElement(Onboarding, { onComplete: (p) => (payload = p), startStep: 'examdate' })
-    );
+    render(createElement(Onboarding, { onComplete: (p) => (payload = p), startStep: 'examdate' }));
     fireEvent.change(screen.getByLabelText('Tanggal ujian'), {
       target: { value: '2026-12-01' },
     });
@@ -68,9 +66,7 @@ describe('Onboarding — exam-date step (item 24)', () => {
 
   it('skipping sends examDate: null through to onComplete, not undefined', () => {
     let payload;
-    render(
-      createElement(Onboarding, { onComplete: (p) => (payload = p), startStep: 'examdate' })
-    );
+    render(createElement(Onboarding, { onComplete: (p) => (payload = p), startStep: 'examdate' }));
     fireEvent.click(screen.getByText('Lewati →'));
     fireEvent.click(screen.getByText('20 kartu'));
     fireEvent.click(screen.getByText('Mulai Belajar 🚀'));

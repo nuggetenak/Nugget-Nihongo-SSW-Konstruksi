@@ -85,7 +85,8 @@ export default function App() {
     navigator.serviceWorker.getRegistration().then(watch);
     const onControllerChange = () => window.location.reload();
     navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
-    return () => navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
+    return () =>
+      navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
   }, [toast]);
 
   // Storage-quota warnings moved to DataWarningBanner (item 19) -- a

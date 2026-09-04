@@ -262,7 +262,9 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
                 (() => {
                   const clean = stripFuri(c.desc);
                   return (
-                    <div style={{ fontSize: 11, color: T.textMuted, marginTop: 4, lineHeight: 1.5 }}>
+                    <div
+                      style={{ fontSize: 11, color: T.textMuted, marginTop: 4, lineHeight: 1.5 }}
+                    >
                       {clean.slice(0, 100)}
                       {clean.length > 100 ? '…' : ''}
                     </div>

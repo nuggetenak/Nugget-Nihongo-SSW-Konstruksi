@@ -276,7 +276,10 @@ export default function SayaTab() {
                 </div>
                 {dailyChallengeQ.id_text && (
                   <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginBottom: 10 }}>
-                    {renderJPWithRuby(dailyChallengeQ.id_text, parseRubyFragments(dailyChallengeQ.id_text))}
+                    {renderJPWithRuby(
+                      dailyChallengeQ.id_text,
+                      parseRubyFragments(dailyChallengeQ.id_text)
+                    )}
                   </div>
                 )}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>

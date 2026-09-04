@@ -25,9 +25,7 @@ beforeEach(() => {
 
 describe('ErrorBoundary', () => {
   it('renders a fallback instead of crashing when a child throws', () => {
-    render(
-      createElement(ErrorBoundary, { title: 'Terjadi kesalahan' }, createElement(Boom))
-    );
+    render(createElement(ErrorBoundary, { title: 'Terjadi kesalahan' }, createElement(Boom)));
     expect(screen.getByRole('alert')).toBeInTheDocument();
     expect(screen.getByText('Terjadi kesalahan')).toBeInTheDocument();
   });

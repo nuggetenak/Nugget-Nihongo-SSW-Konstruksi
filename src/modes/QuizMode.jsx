@@ -10,7 +10,11 @@ import { QUIZ_COUNTS } from '../utils/constants.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
-import { saveQuizSnapshot, readQuizSnapshot, clearQuizSnapshot } from '../utils/quiz-persistence.js';
+import {
+  saveQuizSnapshot,
+  readQuizSnapshot,
+  clearQuizSnapshot,
+} from '../utils/quiz-persistence.js';
 import S from './modes.module.css';
 
 const PERSIST_KEY = 'ssw-persist-kuis';

@@ -77,7 +77,10 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     const audioEnabled = prefs.audioEnabled !== false;
     const speakOnFlip = prefs.speakOnFlip === true;
     if (!audioEnabled || !currentCard || !canSpeak() || speakOnFlip) return;
-    const t = setTimeout(() => speakJP(stripFuri(currentCard.jp), { onError: handleSpeakError }), 300);
+    const t = setTimeout(
+      () => speakJP(stripFuri(currentCard.jp), { onError: handleSpeakError }),
+      300
+    );
     return () => clearTimeout(t);
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
 

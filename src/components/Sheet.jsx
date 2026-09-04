@@ -23,7 +23,13 @@ export default function Sheet({ onClose, labelledBy, role = 'dialog', children }
   return (
     <>
       <div className={S.backdrop} onClick={onClose} />
-      <div ref={sheetRef} className={S.sheet} role={role} aria-modal="true" aria-labelledby={labelledBy}>
+      <div
+        ref={sheetRef}
+        className={S.sheet}
+        role={role}
+        aria-modal="true"
+        aria-labelledby={labelledBy}
+      >
         <div className={S.handle} />
         {children}
       </div>

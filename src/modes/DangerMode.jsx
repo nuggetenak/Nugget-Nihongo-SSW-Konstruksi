@@ -11,7 +11,12 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
-import { JpFront, DescBlock, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
+import {
+  JpFront,
+  DescBlock,
+  renderJPWithRuby,
+  parseRubyFragments,
+} from '../components/JpDisplay.jsx';
 import { JP_LIST_MAX } from '../utils/jp-helpers.js';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import S from './modes.module.css';
@@ -106,7 +111,11 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     <div className={D.termJp}>
-                      <JpFront jp={pair.term} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                      <JpFront
+                        jp={pair.term}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX}
+                      />
                     </div>
                     {cl && (
                       <span

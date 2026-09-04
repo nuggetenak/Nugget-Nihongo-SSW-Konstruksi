@@ -195,8 +195,8 @@ function StepExamDate({ onNext }) {
       </div>
       <h2 className={S.stepTitle}>Kapan Ujianmu?</h2>
       <p className={S.stepDesc}>
-        Hitung mundur akan muncul di Beranda. Belum tahu tanggalnya? Lewati saja — bisa diatur
-        kapan pun nanti di menu Saya.
+        Hitung mundur akan muncul di Beranda. Belum tahu tanggalnya? Lewati saja — bisa diatur kapan
+        pun nanti di menu Saya.
       </p>
 
       <div className={S.inlineEdit} style={{ marginTop: 8 }}>
@@ -212,7 +212,11 @@ function StepExamDate({ onNext }) {
         />
       </div>
 
-      <button className={S.ctaPrimary} onClick={() => onNext(date || null)} style={{ marginTop: 16 }}>
+      <button
+        className={S.ctaPrimary}
+        onClick={() => onNext(date || null)}
+        style={{ marginTop: 16 }}
+      >
         {date ? 'Lanjut →' : 'Lewati →'}
       </button>
     </div>

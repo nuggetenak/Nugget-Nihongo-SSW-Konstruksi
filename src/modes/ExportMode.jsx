@@ -484,14 +484,20 @@ export default function ExportMode({ onExit }) {
                 marginBottom: 10,
               }}
             >
-              📶 Offline sekarang — Push/Pull butuh koneksi internet. Semua fitur lain (kartu,
-              kuis, ekspor/impor file lokal) tetap jalan seperti biasa.
+              📶 Offline sekarang — Push/Pull butuh koneksi internet. Semua fitur lain (kartu, kuis,
+              ekspor/impor file lokal) tetap jalan seperti biasa.
             </div>
           )}
 
           <label
             htmlFor="export-gist-pat"
-            style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}
+            style={{
+              display: 'block',
+              fontSize: 11,
+              fontWeight: 700,
+              color: T.text,
+              marginBottom: 4,
+            }}
           >
             GitHub Personal Access Token (scope: gist)
           </label>
@@ -517,7 +523,13 @@ export default function ExportMode({ onExit }) {
 
           <label
             htmlFor="export-gist-id"
-            style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.text, marginBottom: 4 }}
+            style={{
+              display: 'block',
+              fontSize: 11,
+              fontWeight: 700,
+              color: T.text,
+              marginBottom: 4,
+            }}
           >
             Gist ID (isi otomatis setelah push pertama)
           </label>

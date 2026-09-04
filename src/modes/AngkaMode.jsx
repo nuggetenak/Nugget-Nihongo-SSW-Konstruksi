@@ -246,7 +246,11 @@ function PanelView({ onExit, onStartQuiz }) {
                         <div className={A.relatedCard}>
                           <div className={A.relatedCardId}>KARTU #{relCard.id}</div>
                           <div className={A.relatedCardJp}>
-                            <JpFront jp={relCard.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                            <JpFront
+                              jp={relCard.jp}
+                              furiganaPolicy={furiganaPolicy}
+                              maxSize={JP_LIST_MAX_SECONDARY}
+                            />
                           </div>
                           <div className={A.relatedCardId_text}>{relCard.id_text}</div>
                         </div>
@@ -600,11 +604,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
           fontSize: 16,
           padding: '12px 14px',
           borderRadius: 8,
-          background: checked
-            ? isCorrect
-              ? T.correctBg
-              : T.wrongBg
-            : T.surface,
+          background: checked ? (isCorrect ? T.correctBg : T.wrongBg) : T.surface,
           border: `1.5px solid ${checked ? (isCorrect ? T.correct : T.wrong) : T.border}`,
           color: T.text,
           width: '100%',
@@ -624,9 +624,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
             border: `1px solid ${isCorrect ? T.correctBorder : T.wrongBorder}`,
           }}
         >
-          <div
-            style={{ fontWeight: 700, color: isCorrect ? T.correct : T.wrong, marginBottom: 4 }}
-          >
+          <div style={{ fontWeight: 700, color: isCorrect ? T.correct : T.wrong, marginBottom: 4 }}>
             {isCorrect ? '✓ Benar!' : `✗ Jawaban: ${item.angka}`}
           </div>
           {item.mnemonic && (

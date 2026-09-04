@@ -3,7 +3,15 @@
 // Reads/writes via storage engine (prefs doc).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
 import { applyTheme } from '../styles/theme.js';
 import { useToast } from '../components/Toast.jsx';

@@ -80,7 +80,6 @@ export function getCorruptionWarning() {
   return _corruption;
 }
 
-
 function writeDoc(docKey, data) {
   try {
     // Compress before writing.

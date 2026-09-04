@@ -86,10 +86,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
     if (!started || !currentQ || selected !== null) return;
     speakCountRef.current = 0;
     if (hasAudio) {
-      setTimeout(
-        () => speakJP(stripFuri(currentQ.card.jp), { onError: handleSpeakError }),
-        300
-      );
+      setTimeout(() => speakJP(stripFuri(currentQ.card.jp), { onError: handleSpeakError }), 300);
     }
   }, [idx, started]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -195,8 +192,8 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 color: 'var(--ssw-textMuted)',
               }}
             >
-              📶 Kamu sedang offline. Audio biasanya tetap jalan jika perangkatmu punya suara
-              Jepang offline — kalau tidak terdengar, itu sebabnya.
+              📶 Kamu sedang offline. Audio biasanya tetap jalan jika perangkatmu punya suara Jepang
+              offline — kalau tidak terdengar, itu sebabnya.
             </div>
           )}
         </div>

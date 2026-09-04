@@ -270,9 +270,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
             }}
           >
             <div>
-              <div style={{ fontSize: 11, color: T.textDim, fontWeight: 700 }}>
-                TOTAL SEMUA SET
-              </div>
+              <div style={{ fontSize: 11, color: T.textDim, fontWeight: 700 }}>TOTAL SEMUA SET</div>
               <div style={{ fontSize: 11, color: T.textMuted, marginTop: 2 }}>
                 {scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ}{' '}
                 benar

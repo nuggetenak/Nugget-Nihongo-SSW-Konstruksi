@@ -14,10 +14,7 @@ export default function TypoDiff({ ops }) {
         }
         if (o.op === 'sub') {
           return (
-            <span
-              key={i}
-              style={{ color: T.wrong, textDecoration: 'underline', fontWeight: 700 }}
-            >
+            <span key={i} style={{ color: T.wrong, textDecoration: 'underline', fontWeight: 700 }}>
               {o.to}
             </span>
           );

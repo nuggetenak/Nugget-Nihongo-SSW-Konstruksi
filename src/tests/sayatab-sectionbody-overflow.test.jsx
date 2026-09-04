@@ -22,7 +22,7 @@ import { resolve } from 'path';
 const root = resolve(__dirname, '..');
 
 describe('SayaTab.module.css — .sectionBody grid minimum stays mobile-safe', () => {
-  it('minmax min is well under this app\'s narrowest mobile content width (~296px at a 360px viewport)', () => {
+  it("minmax min is well under this app's narrowest mobile content width (~296px at a 360px viewport)", () => {
     const css = readFileSync(resolve(root, 'components/SayaTab.module.css'), 'utf8');
     const match = css.match(/\.sectionBody\s*{[^}]*minmax\((\d+)px,\s*1fr\)/s);
     expect(match).toBeTruthy();

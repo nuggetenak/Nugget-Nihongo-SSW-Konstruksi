@@ -50,7 +50,10 @@ describe('MODE_META skeleton coverage', () => {
 
   it('every entry in MODE_COMPONENTS has a matching MODE_META entry (no silently-unstyled mode)', () => {
     for (const key of Object.keys(MODE_COMPONENTS)) {
-      expect(MODE_META[key], `${key} is registered as a component but has no MODE_META entry`).toBeDefined();
+      expect(
+        MODE_META[key],
+        `${key} is registered as a component but has no MODE_META entry`
+      ).toBeDefined();
     }
   });
 });

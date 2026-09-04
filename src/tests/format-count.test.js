@@ -37,7 +37,7 @@ describe('formatCount', () => {
   });
 });
 
-describe('no raw toLocaleString(\'id-ID\') outside the shared helper (item 42)', () => {
+describe("no raw toLocaleString('id-ID') outside the shared helper (item 42)", () => {
   it('every id-ID thousands-formatting call goes through formatCount, not a local toLocaleString', () => {
     const offenders = findSourceFiles(root)
       .filter((f) => f !== resolve(root, 'utils/format.js'))
@@ -45,7 +45,7 @@ describe('no raw toLocaleString(\'id-ID\') outside the shared helper (item 42)',
     expect(offenders).toEqual([]);
   });
 
-  it('the ISO-date toLocaleDateString(\'sv\') trick is untouched -- not the same thing, not this item\'s scope', () => {
+  it("the ISO-date toLocaleDateString('sv') trick is untouched -- not the same thing, not this item's scope", () => {
     const dateUtil = readFileSync(resolve(root, 'utils/date.js'), 'utf-8');
     expect(dateUtil).toMatch(/toLocaleDateString\('sv'\)/);
   });
