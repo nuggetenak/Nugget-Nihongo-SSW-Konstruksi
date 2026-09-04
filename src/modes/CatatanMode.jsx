@@ -232,16 +232,10 @@ export default function CatatanMode({ cards }) {
   return (
     <div className={S.pageScroll}>
       <div style={{ marginBottom: 16 }}>
-        <div
-          style={{
-            fontSize: 'var(--fs-jp-back)',
-            fontWeight: 700,
-            color: 'var(--ssw-textBright)',
-            marginBottom: 2,
-          }}
-        >
-          📓 Buku Catatan
-        </div>
+        {/* No title here — ModeHeader renders "Buku Catatan" as the page <h1>.
+            This one was written as a plain styled div rather than .pageTitle,
+            which is why the sweep that removed the other 16 duplicates missed
+            it. The count line below is the part that carries information. */}
         <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)' }}>
           {noteCount} catatan · {formatCount(cards.length)} kartu total
         </div>

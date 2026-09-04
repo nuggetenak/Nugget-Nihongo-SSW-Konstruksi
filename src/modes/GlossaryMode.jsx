@@ -218,8 +218,9 @@ export default function GlossaryMode({ track }) {
   return (
     <div className={G.outerWrap}>
       <div className={G.header}>
+        {/* Same as CatatanMode: the title lives in ModeHeader now. The count
+            pill stays — it's the only place the filtered total is shown. */}
         <div className={`${S.row} ${G.titleRow}`}>
-          <h2 className={G.title}>📖 Glosari</h2>
           <span className={`${S.pill} ${G.countPill}`}>{formatCount(sorted.length)} istilah</span>
         </div>
         <div className={G.metaRow}>

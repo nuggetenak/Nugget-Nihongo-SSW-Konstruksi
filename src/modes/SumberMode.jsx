@@ -226,9 +226,27 @@ export default function SumberMode({ onNavigate }) {
                   onClick={() => setActiveSrc(key)}
                   style={{ borderLeft: `3px solid ${color}`, paddingBottom: stat ? 10 : undefined }}
                 >
-                  <div className={S.rowSpread} style={{ marginBottom: stat ? 6 : 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <span>
+                  {/* The label wraps on a phone once it is long enough ("Vocab
+                      JAC — Kosakata soal JAC"), and this row had no min-width:0
+                      and no shrink rules — so the flex items kept their content
+                      width, the Terlemah badge sat on top of the second line of
+                      the title, and "49 kartu" broke across two lines beside it.
+                      min-width:0 lets the title actually wrap inside its track;
+                      the badge and the count refuse to shrink or break. */}
+                  <div
+                    className={S.rowSpread}
+                    style={{ marginBottom: stat ? 6 : 0, alignItems: 'flex-start', gap: 8 }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        minWidth: 0,
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      <span style={{ minWidth: 0 }}>
                         {meta.emoji} {meta.label}
                       </span>
                       {isWeakest && (
@@ -241,13 +259,21 @@ export default function SumberMode({ onNavigate }) {
                             border: `1px solid rgba(220,38,38,0.25)`,
                             borderRadius: 99,
                             padding: '1px 6px',
+                            flexShrink: 0,
                           }}
                         >
                           Terlemah
                         </span>
                       )}
                     </div>
-                    <span style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
+                    <span
+                      style={{
+                        fontSize: 'var(--fs-caption)',
+                        color: T.textDim,
+                        flexShrink: 0,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
                       {stat?.total ?? 0} kartu
                     </span>
                   </div>
