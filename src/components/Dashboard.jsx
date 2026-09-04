@@ -173,9 +173,9 @@ export default function Dashboard({
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: 6,
-                    marginTop: 8,
-                    padding: '3px 10px',
+                    gap: 'var(--space-6)',
+                    marginTop: 'var(--space-8)',
+                    padding: 'var(--space-4) var(--space-10)',
                     borderRadius: 999,
                     fontSize: 'var(--fs-caption)',
                     fontWeight: 700,

@@ -61,7 +61,14 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
           🧠 Drill ({filtered.length})
         </button>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 'var(--space-6)',
+          marginBottom: 'var(--space-12)',
+        }}
+      >
         {[
           ['all', 'Semua', '#6B7280'],
           ...Object.entries(CONFUSION_LABELS).map(([k, v]) => [k, v.label, v.color]),
@@ -78,7 +85,7 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
               }}
               style={{
                 fontFamily: 'inherit',
-                padding: '4px 10px',
+                padding: 'var(--space-4) var(--space-10)',
                 borderRadius: 99,
                 fontSize: 'var(--fs-small)',
                 cursor: 'pointer',
@@ -103,8 +110,8 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
                 onClick={() => setExpanded(isOpen ? null : i)}
                 className={`${D.accordionBtn}${isOpen ? ` ${D.open}` : ''}`}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
                     <div className={D.termJp}>
                       <JpFront
                         jp={pair.term}
@@ -117,7 +124,7 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
                       <span
                         style={{
                           fontSize: 'var(--fs-micro)',
-                          padding: '1px 6px',
+                          padding: '1px var(--space-6)',
                           borderRadius: 99,
                           background: cl.color + '22',
                           color: cl.color,
@@ -133,7 +140,7 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
               </button>
               {isOpen && (
                 <div className={D.accordionPanel}>
-                  <div style={{ marginBottom: 10 }}>
+                  <div style={{ marginBottom: 'var(--space-10)' }}>
                     <div className={D.correctLabel}>✓ Jawaban Benar</div>
                     <div className={D.correctBox}>
                       {renderJPWithRuby(pair.correct, parseRubyFragments(pair.correct))}
@@ -152,8 +159,8 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
                   {pair.explanation && (
                     <div
                       style={{
-                        marginTop: 10,
-                        padding: '10px 12px',
+                        marginTop: 'var(--space-10)',
+                        padding: 'var(--space-10) var(--space-12)',
                         background: 'var(--ssw-surfaceActive)',
                         borderRadius: 10,
                         borderLeft: '3px solid var(--ssw-amber)',
@@ -164,7 +171,7 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
                           fontSize: 'var(--fs-small)',
                           fontWeight: 700,
                           color: 'var(--ssw-amber)',
-                          marginBottom: 4,
+                          marginBottom: 'var(--space-4)',
                         }}
                       >
                         💡 Kenapa sering tertukar?
@@ -354,7 +361,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
               disabled={selected !== null}
               style={{
                 fontFamily: 'inherit',
-                padding: '12px 14px',
+                padding: 'var(--space-12) var(--space-14)',
                 borderRadius: T.r.md,
                 background: !showResult
                   ? T.surface
@@ -384,7 +391,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
                 lineHeight: 1.5,
                 transition: 'all 0.15s',
                 display: 'flex',
-                gap: 8,
+                gap: 'var(--space-8)',
                 alignItems: 'flex-start',
               }}
             >
@@ -400,7 +407,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
       {selected !== null && (
         <div className={`${S.card} ${D.explanationCard}`}>
           <div className={`${S.sectionLabel} ${D.explanationHeader}`}>Penjelasan Perbedaan</div>
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ marginBottom: 'var(--space-8)' }}>
             <div className={D.explanationCorrectLabel}>✓ BENAR</div>
             <div className={D.explanationCorrectBox}>
               {renderJPWithRuby(pair.correct, parseRubyFragments(pair.correct))}
@@ -419,8 +426,8 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
           {pair.explanation && (
             <div
               style={{
-                marginTop: 10,
-                padding: '10px 12px',
+                marginTop: 'var(--space-10)',
+                padding: 'var(--space-10) var(--space-12)',
                 background: 'var(--ssw-surfaceActive)',
                 borderRadius: 10,
                 borderLeft: '3px solid var(--ssw-amber)',
@@ -431,7 +438,7 @@ function QuizView({ onBack, onSessionEnd, filterType }) {
                   fontSize: 'var(--fs-small)',
                   fontWeight: 700,
                   color: 'var(--ssw-amber)',
-                  marginBottom: 4,
+                  marginBottom: 'var(--space-4)',
                 }}
               >
                 💡 Kenapa sering tertukar?

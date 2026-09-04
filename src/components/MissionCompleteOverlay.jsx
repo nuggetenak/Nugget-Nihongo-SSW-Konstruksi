@@ -40,24 +40,37 @@ export default function MissionCompleteOverlay({ onDone, result }) {
         animation: 'missionFadeOut 3s ease forwards',
       }}
     >
-      <div style={{ textAlign: 'center', color: '#fff', padding: '0 32px', userSelect: 'none' }}>
+      <div
+        style={{
+          textAlign: 'center',
+          color: '#fff',
+          padding: '0 var(--space-32)',
+          userSelect: 'none',
+        }}
+      >
         <div style={{ fontSize: 64, lineHeight: 1 }} aria-hidden="true">
           {result?.icon ?? '🎉'}
         </div>
-        <div style={{ fontSize: 'var(--fs-page-title)', fontWeight: 800, marginTop: 10 }}>
+        <div
+          style={{
+            fontSize: 'var(--fs-page-title)',
+            fontWeight: 800,
+            marginTop: 'var(--space-10)',
+          }}
+        >
           Misi Selesai!
         </div>
         {result?.label && (
-          <div style={{ fontSize: 14, marginTop: 6, opacity: 0.9, fontWeight: 600 }}>
+          <div style={{ fontSize: 14, marginTop: 'var(--space-6)', opacity: 0.9, fontWeight: 600 }}>
             {result.label}
           </div>
         )}
         {result?.total > 0 && (
-          <div style={{ fontSize: 'var(--fs-body)', marginTop: 4, opacity: 0.75 }}>
+          <div style={{ fontSize: 'var(--fs-body)', marginTop: 'var(--space-4)', opacity: 0.75 }}>
             {result.correct}/{result.total} benar
           </div>
         )}
-        <div style={{ fontSize: 'var(--fs-small)', marginTop: 12, opacity: 0.5 }}>
+        <div style={{ fontSize: 'var(--fs-small)', marginTop: 'var(--space-12)', opacity: 0.5 }}>
           Ketuk untuk tutup
         </div>
       </div>

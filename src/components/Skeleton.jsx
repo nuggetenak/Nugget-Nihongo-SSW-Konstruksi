@@ -30,11 +30,11 @@ Skeleton.Card = function SkeletonCard() {
   return (
     <div className={S.card} aria-hidden="true">
       {/* Category pill */}
-      <Skeleton width="80px" height={18} radius={99} style={{ marginBottom: 24 }} />
+      <Skeleton width="80px" height={18} radius={99} style={{ marginBottom: 'var(--space-24)' }} />
       {/* JP text */}
-      <Skeleton width="100px" height={44} radius={8} style={{ marginBottom: 10 }} />
+      <Skeleton width="100px" height={44} radius={8} style={{ marginBottom: 'var(--space-10)' }} />
       {/* Furigana */}
-      <Skeleton width="80px" height={14} radius={6} style={{ marginBottom: 6 }} />
+      <Skeleton width="80px" height={14} radius={6} style={{ marginBottom: 'var(--space-6)' }} />
       {/* Romaji */}
       <Skeleton width="70px" height={12} radius={6} />
     </div>
@@ -46,7 +46,7 @@ Skeleton.QuizOption = function SkeletonQuizOption() {
   return (
     <div className={S.quizOption} aria-hidden="true">
       <Skeleton width="24px" height={24} radius={6} style={{ flexShrink: 0 }} />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
         <Skeleton width="70%" height={14} />
         <Skeleton width="50%" height={12} />
       </div>
@@ -58,7 +58,7 @@ Skeleton.QuizOption = function SkeletonQuizOption() {
 Skeleton.Stat = function SkeletonStat() {
   return (
     <div className={S.stat} aria-hidden="true">
-      <Skeleton width="40px" height={28} radius={6} style={{ margin: '0 auto 4px' }} />
+      <Skeleton width="40px" height={28} radius={6} style={{ margin: '0 auto var(--space-4)' }} />
       <Skeleton width="50px" height={11} radius={4} style={{ margin: '0 auto' }} />
     </div>
   );
@@ -69,7 +69,7 @@ Skeleton.Row = function SkeletonRow({ lines = 2 }) {
   return (
     <div className={S.row} aria-hidden="true">
       <Skeleton width="36px" height={36} radius={10} style={{ flexShrink: 0 }} />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
         {lines >= 1 && <Skeleton width="60%" height={13} />}
         {lines >= 2 && <Skeleton width="40%" height={11} />}
       </div>

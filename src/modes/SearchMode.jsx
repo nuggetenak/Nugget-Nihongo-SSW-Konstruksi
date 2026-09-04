@@ -110,12 +110,12 @@ export default function SearchMode({ track, starred, toggleStar }) {
         // chunk had mounted, so React's autoFocus won by arriving second.
         data-autofocus
         className={S.searchInput}
-        style={{ width: '100%', marginBottom: 16 }}
+        style={{ width: '100%', marginBottom: 'var(--space-16)' }}
       />
 
       {/* Search history — show when input empty */}
       {debouncedQuery.length < 2 && history.length > 0 && (
-        <div style={{ marginBottom: 12 }}>
+        <div style={{ marginBottom: 'var(--space-12)' }}>
           <div
             style={{
               fontSize: 'var(--fs-micro)',
@@ -123,12 +123,12 @@ export default function SearchMode({ track, starred, toggleStar }) {
               color: T.textMuted,
               letterSpacing: 1.2,
               textTransform: 'uppercase',
-              marginBottom: 6,
+              marginBottom: 'var(--space-6)',
             }}
           >
             Pencarian terakhir
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-6)' }}>
             {history.map((h) => (
               <button
                 key={h}
@@ -136,7 +136,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
                 style={{
                   fontFamily: 'inherit',
                   fontSize: 'var(--fs-caption)',
-                  padding: '4px 10px',
+                  padding: 'var(--space-4) var(--space-10)',
                   borderRadius: 99,
                   background: T.surface,
                   border: `1px solid ${T.border}`,
@@ -182,7 +182,11 @@ export default function SearchMode({ track, starred, toggleStar }) {
           const wrongCount = getWrongCount(progressData?.quizWrong?.[c.id]);
           const isKnown = (progressData?.known ?? []).includes(c.id);
           return (
-            <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
+            <div
+              key={c.id}
+              className={S.card}
+              style={{ padding: 'var(--space-12) var(--space-14)' }}
+            >
               <div className={S.rowSpread} style={{ alignItems: 'flex-start' }}>
                 <div style={{ fontSize: 'var(--fs-subtitle)', fontWeight: 600 }}>
                   <JpFront
@@ -192,7 +196,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
                     compact
                   />
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
                   {toggleStar && (
                     <button
                       onClick={(e) => {
@@ -206,7 +210,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
                         border: 'none',
                         cursor: 'pointer',
                         fontSize: 16,
-                        padding: '0 2px',
+                        padding: '0 var(--space-2)',
                         lineHeight: 1,
                       }}
                     >
@@ -223,7 +227,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
                       border: 'none',
                       cursor: 'pointer',
                       fontSize: 'var(--fs-body)',
-                      padding: '0 2px',
+                      padding: '0 var(--space-2)',
                       lineHeight: 1,
                       color: copiedId === c.id ? T.correct : T.textMuted,
                     }}
@@ -250,7 +254,9 @@ export default function SearchMode({ track, starred, toggleStar }) {
                   {extractReadings(c.jp)}
                 </div>
               )}
-              <div style={{ fontSize: 'var(--fs-body)', color: T.gold, marginTop: 4 }}>
+              <div
+                style={{ fontSize: 'var(--fs-body)', color: T.gold, marginTop: 'var(--space-4)' }}
+              >
                 {c.id_text}
               </div>
               {c.desc &&
@@ -261,7 +267,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
                       style={{
                         fontSize: 'var(--fs-small)',
                         color: T.textMuted,
-                        marginTop: 4,
+                        marginTop: 'var(--space-4)',
                         lineHeight: 1.5,
                       }}
                     >
@@ -271,7 +277,14 @@ export default function SearchMode({ track, starred, toggleStar }) {
                   );
                 })()}
               {/* User accuracy badge */}
-              <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 'var(--space-6)',
+                  marginTop: 'var(--space-6)',
+                  flexWrap: 'wrap',
+                }}
+              >
                 {isKnown && (
                   <span
                     className={S.pill}

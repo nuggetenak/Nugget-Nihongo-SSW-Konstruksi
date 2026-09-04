@@ -175,7 +175,7 @@ export default function ProductionMode({
 
     const pillStyle = (on) => ({
       fontFamily: 'inherit',
-      padding: '7px 16px',
+      padding: 'var(--space-8) var(--space-16)',
       fontSize: 'var(--fs-body)',
       borderRadius: T.r.pill,
       cursor: 'pointer',
@@ -187,7 +187,7 @@ export default function ProductionMode({
 
     return (
       <div className={S.pageFade} style={{ padding: 'var(--space-20) var(--space-16)' }}>
-        <p className={S.pageSub} style={{ marginBottom: 20 }}>
+        <p className={S.pageSub} style={{ marginBottom: 'var(--space-20)' }}>
           Lihat terjemahan Indonesia → ketik jawaban Jepang (kanji/kana).
         </p>
 
@@ -195,7 +195,7 @@ export default function ProductionMode({
           <div
             className={S.card}
             style={{
-              marginBottom: 20,
+              marginBottom: 'var(--space-20)',
               background: T.correctBg,
               border: `1px solid ${T.correctBorder}`,
             }}
@@ -208,7 +208,14 @@ export default function ProductionMode({
         )}
 
         <div className={S.sectionLabel}>Jumlah Soal</div>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 'var(--space-8)',
+            marginBottom: 'var(--space-24)',
+            flexWrap: 'wrap',
+          }}
+        >
           {QUIZ_COUNTS.map((n) => (
             <button
               key={n}
@@ -233,7 +240,7 @@ export default function ProductionMode({
 
         <button
           className={S.btnPrimary}
-          style={{ fontSize: 'var(--fs-subtitle)', padding: '15px' }}
+          style={{ fontSize: 'var(--fs-subtitle)', padding: 'var(--space-16)' }}
           onClick={startSession}
         >
           Mulai ✍️
@@ -290,7 +297,7 @@ export default function ProductionMode({
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 12,
+          marginBottom: 'var(--space-12)',
         }}
       >
         <button
@@ -305,7 +312,7 @@ export default function ProductionMode({
         <div style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
           {idx + 1} / {queue.length}
           {results.length > 0 && (
-            <span style={{ marginLeft: 8, color: T.correct, fontWeight: 700 }}>
+            <span style={{ marginLeft: 'var(--space-8)', color: T.correct, fontWeight: 700 }}>
               {results.filter((r) => r.correct).length} ✓
             </span>
           )}
@@ -324,9 +331,9 @@ export default function ProductionMode({
           background: T.surface,
           border: `1px solid ${T.border}`,
           borderRadius: 16,
-          padding: '28px 20px',
+          padding: 'var(--space-28) var(--space-20)',
           textAlign: 'center',
-          margin: '16px 0',
+          margin: 'var(--space-16) 0',
           animation: 'scaleIn 0.2s var(--ease-smooth)',
         }}
       >
@@ -334,7 +341,7 @@ export default function ProductionMode({
           style={{
             fontSize: 'var(--fs-small)',
             color: T.textDim,
-            marginBottom: 8,
+            marginBottom: 'var(--space-8)',
             letterSpacing: 1,
             textTransform: 'uppercase',
           }}
@@ -356,7 +363,7 @@ export default function ProductionMode({
             style={{
               fontSize: 'var(--fs-caption)',
               color: T.textDim,
-              marginTop: 10,
+              marginTop: 'var(--space-10)',
               lineHeight: 1.5,
             }}
           >
@@ -368,7 +375,7 @@ export default function ProductionMode({
       {/* Input area */}
       {phase === 'prompt' ? (
         <>
-          <div style={{ position: 'relative', marginBottom: 12 }}>
+          <div style={{ position: 'relative', marginBottom: 'var(--space-12)' }}>
             <input
               ref={inputRef}
               aria-label="Jawaban"
@@ -377,7 +384,7 @@ export default function ProductionMode({
               placeholder="Ketik Jepang di sini... (kanji/kana)"
               style={{
                 width: '100%',
-                padding: '14px 16px',
+                padding: 'var(--space-14) var(--space-16)',
                 fontSize: 'var(--fs-jp-back)',
                 fontFamily: 'Noto Sans JP, DM Sans, sans-serif',
                 border: `1.5px solid ${T.border}`,
@@ -398,7 +405,7 @@ export default function ProductionMode({
               spellCheck={false}
             />
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 'var(--space-8)' }}>
             <button
               className={S.btnPrimary}
               style={{ flex: 2 }}
@@ -423,12 +430,19 @@ export default function ProductionMode({
             border: `1.5px solid ${answerCorrect ? T.correctBorder : T.wrongBorder}`,
             borderRadius: 12,
             background: answerCorrect ? T.correctBg : T.wrongBg,
-            padding: '16px',
-            marginBottom: 12,
+            padding: 'var(--space-16)',
+            marginBottom: 'var(--space-12)',
             animation: 'scaleIn 0.18s var(--ease-smooth)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              gap: 'var(--space-8)',
+              marginBottom: 'var(--space-8)',
+            }}
+          >
             <span
               style={{ fontSize: 16, fontWeight: 700, color: answerCorrect ? T.correct : T.wrong }}
             >
@@ -437,7 +451,9 @@ export default function ProductionMode({
           </div>
 
           {!answerCorrect && lastResult?.input && (
-            <div style={{ fontSize: 'var(--fs-body)', color: T.wrong, marginBottom: 6 }}>
+            <div
+              style={{ fontSize: 'var(--fs-body)', color: T.wrong, marginBottom: 'var(--space-6)' }}
+            >
               Kamu:{' '}
               <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>
                 {lastResult.input || '(dilewati)'}
@@ -445,7 +461,7 @@ export default function ProductionMode({
             </div>
           )}
 
-          <div style={{ marginBottom: 6 }}>
+          <div style={{ marginBottom: 'var(--space-6)' }}>
             <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>Jawaban: </span>
             <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
@@ -456,7 +472,7 @@ export default function ProductionMode({
               const closest = closestAnswerDiff(lastResult.input, card);
               if (!closest || closest.dist < 1 || closest.dist > 3) return null;
               return (
-                <div style={{ fontSize: 'var(--fs-body)', marginBottom: 4 }}>
+                <div style={{ fontSize: 'var(--fs-body)', marginBottom: 'var(--space-4)' }}>
                   <span style={{ color: T.textDim }}>Dekat: </span>
                   <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>
                     <TypoDiff ops={closest.ops} />
@@ -470,7 +486,7 @@ export default function ProductionMode({
               style={{
                 fontSize: 'var(--fs-caption)',
                 color: T.textDim,
-                marginTop: 8,
+                marginTop: 'var(--space-8)',
                 lineHeight: 1.5,
               }}
             >
@@ -482,13 +498,13 @@ export default function ProductionMode({
             <button
               onClick={() => speakJP(stripFuri(card.jp), { onError: handleSpeakError })}
               style={{
-                marginTop: 8,
+                marginTop: 'var(--space-8)',
                 background: 'none',
                 border: 'none',
                 fontSize: 'var(--fs-caption)',
                 color: T.amber,
                 cursor: 'pointer',
-                padding: '4px 0',
+                padding: 'var(--space-4) 0',
               }}
             >
               🔊 Dengarkan

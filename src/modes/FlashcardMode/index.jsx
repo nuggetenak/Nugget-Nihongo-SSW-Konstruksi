@@ -236,8 +236,8 @@ export default function FlashcardMode({
             background: T.wrongBg,
             border: `1px solid ${T.wrongBorder}`,
             borderRadius: 8,
-            padding: '8px 12px',
-            marginBottom: 8,
+            padding: 'var(--space-8) var(--space-12)',
+            marginBottom: 'var(--space-8)',
             fontSize: 'var(--fs-caption)',
             color: T.wrong,
             textAlign: 'center',
@@ -364,7 +364,7 @@ export default function FlashcardMode({
             textAlign: 'center',
             fontSize: 'var(--fs-small)',
             color: T.textDim,
-            marginTop: 4,
+            marginTop: 'var(--space-4)',
             letterSpacing: 0.3,
           }}
         >
@@ -403,8 +403,8 @@ export default function FlashcardMode({
           style={{
             fontFamily: 'inherit',
             width: '100%',
-            padding: '8px 12px',
-            marginTop: 4,
+            padding: 'var(--space-8) var(--space-12)',
+            marginTop: 'var(--space-4)',
             borderRadius: 8,
             background: T.correctBg,
             border: `1px solid ${T.correctBorder}`,
@@ -422,7 +422,7 @@ export default function FlashcardMode({
             textAlign: 'center',
             fontSize: 'var(--fs-small)',
             color: T.correct,
-            marginTop: 4,
+            marginTop: 'var(--space-4)',
             opacity: 0.7,
           }}
         >

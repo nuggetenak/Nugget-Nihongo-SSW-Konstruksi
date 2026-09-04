@@ -155,15 +155,15 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   if (!started) {
     return (
       <div className={S.page}>
-        <div style={{ marginBottom: 24 }}>
+        <div style={{ marginBottom: 'var(--space-24)' }}>
           <p className={S.pageSub} style={{ marginBottom: 0 }}>
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
           </p>
           {!hasAudio && (
             <div
               style={{
-                marginTop: 12,
-                padding: '10px 14px',
+                marginTop: 'var(--space-12)',
+                padding: 'var(--space-10) var(--space-14)',
                 background: 'var(--ssw-wrongBg)',
                 border: '1px solid var(--ssw-wrongBorder)',
                 borderRadius: 10,
@@ -177,8 +177,8 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           {hasAudio && !online && (
             <div
               style={{
-                marginTop: 12,
-                padding: '10px 14px',
+                marginTop: 'var(--space-12)',
+                padding: 'var(--space-10) var(--space-14)',
                 background: 'var(--ssw-surface)',
                 border: '1px solid var(--ssw-border)',
                 borderRadius: 10,
@@ -192,20 +192,20 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           )}
         </div>
 
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 'var(--space-20)' }}>
           <div
             style={{
               fontSize: 'var(--fs-caption)',
               fontWeight: 600,
               color: 'var(--ssw-textMuted)',
-              marginBottom: 8,
+              marginBottom: 'var(--space-8)',
               textTransform: 'uppercase',
               letterSpacing: 0.5,
             }}
           >
             Jumlah Soal
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 'var(--space-8)' }}>
             {QUIZ_COUNTS.map((n) => (
               <button
                 key={n}
@@ -215,7 +215,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 }}
                 style={{
                   flex: 1,
-                  padding: '10px 0',
+                  padding: 'var(--space-10) 0',
                   borderRadius: 10,
                   fontFamily: 'inherit',
                   fontSize: 'var(--fs-subtitle)',
@@ -235,10 +235,10 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
 
         <div
           style={{
-            padding: '14px 16px',
+            padding: 'var(--space-14) var(--space-16)',
             background: 'var(--ssw-surface)',
             borderRadius: 12,
-            marginBottom: 24,
+            marginBottom: 'var(--space-24)',
             fontSize: 'var(--fs-body)',
             color: 'var(--ssw-textMuted)',
             lineHeight: 1.6,
@@ -254,7 +254,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           disabled={!hasAudio}
           style={{
             width: '100%',
-            padding: '14px',
+            padding: 'var(--space-14)',
             borderRadius: 12,
             background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
             color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
@@ -319,14 +319,18 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
       <div
         style={{
           textAlign: 'center',
-          padding: '32px 16px 24px',
+          padding: 'var(--space-32) var(--space-16) var(--space-24)',
           background: 'var(--ssw-surface)',
           borderRadius: 16,
-          marginBottom: 20,
+          marginBottom: 'var(--space-20)',
         }}
       >
         <div
-          style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)', marginBottom: 12 }}
+          style={{
+            fontSize: 'var(--fs-body)',
+            color: 'var(--ssw-textMuted)',
+            marginBottom: 'var(--space-12)',
+          }}
         >
           {idx + 1} / {questions.length}
         </div>
@@ -356,7 +360,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
 
         <div
           style={{
-            marginTop: 16,
+            marginTop: 'var(--space-16)',
             fontSize: 'var(--fs-body)',
             color: 'var(--ssw-textMuted)',
             opacity: isAnswered ? 0 : 1,
@@ -368,13 +372,13 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
 
         {/* Reveal after answer */}
         {isAnswered && (
-          <div style={{ marginTop: 12 }}>
+          <div style={{ marginTop: 'var(--space-12)' }}>
             <JpFront jp={currentQ.card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
         )}
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-10)' }}>
         {currentQ.opts.map((opt, i) => {
           let bg = 'var(--ssw-surface)';
           let border = 'var(--ssw-border)';
@@ -400,7 +404,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
               disabled={isAnswered}
               style={{
                 width: '100%',
-                padding: '14px 16px',
+                padding: 'var(--space-14) var(--space-16)',
                 textAlign: 'left',
                 borderRadius: 12,
                 background: bg,

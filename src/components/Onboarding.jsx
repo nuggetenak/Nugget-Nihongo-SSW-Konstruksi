@@ -199,7 +199,7 @@ function StepExamDate({ onNext }) {
         pun nanti di menu Saya.
       </p>
 
-      <div className={S.inlineEdit} style={{ marginTop: 8 }}>
+      <div className={S.inlineEdit} style={{ marginTop: 'var(--space-8)' }}>
         <label className={S.inlineEditLabel} htmlFor="onboarding-exam-date">
           Tanggal ujian
         </label>
@@ -215,7 +215,7 @@ function StepExamDate({ onNext }) {
       <button
         className={S.ctaPrimary}
         onClick={() => onNext(date || null)}
-        style={{ marginTop: 16 }}
+        style={{ marginTop: 'var(--space-16)' }}
       >
         {date ? 'Lanjut →' : 'Lewati →'}
       </button>

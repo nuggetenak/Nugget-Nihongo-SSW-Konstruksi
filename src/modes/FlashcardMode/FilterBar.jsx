@@ -11,13 +11,13 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
   return (
     <div className={FC.filterBar}>
       {isCatFilter ? (
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 'var(--space-8)' }}>
           <span
             style={{
               fontSize: 'var(--fs-caption)',
               color: T.amber,
               fontWeight: 700,
-              padding: '6px 10px',
+              padding: 'var(--space-6) var(--space-10)',
               background: `${T.amber}15`,
               borderRadius: 99,
               border: `1px solid ${T.amber}40`,
@@ -34,7 +34,7 @@ export default function FilterBar({ search, onSearch, isStarred, onToggleStar })
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              padding: '4px 6px',
+              padding: 'var(--space-4) var(--space-6)',
             }}
             aria-label="Hapus filter kategori"
           >
