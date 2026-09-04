@@ -30,7 +30,6 @@ export default function FlashcardMode({
   unknown,
   onMark,
   onResetProgress,
-  onExit,
   srs,
   starred = new Set(),
   onToggleStar = () => {},
@@ -210,13 +209,6 @@ export default function FlashcardMode({
     };
     return (
       <div className={S.pageCenter}>
-        <button
-          onClick={onExit}
-          className={S.btnBack}
-          style={{ display: 'inline-block', marginBottom: 24 }}
-        >
-          ← Kembali
-        </button>
         {search ? (
           <EmptyState.SearchEmpty query={search} onCta={resetFilters} />
         ) : reviewBelum ? (
@@ -255,14 +247,14 @@ export default function FlashcardMode({
         </div>
       )}
 
-      {/* Header — back, progress, position and search on a single row. This
-          previously took three rows: header, progress bar, then a stat strip
-          repeating numbers already shown on the dashboard. */}
+      {/* Progress, position and search on a single row. This previously took
+          three rows: header, progress bar, then a stat strip repeating numbers
+          already shown on the dashboard. Its own back button came out
+          2026-09-04 when ModeHeader took over that job for all 21 modes — this
+          was the only one of the 27 in the app rendered as a bare circular
+          icon, which is exactly the sort of per-mode divergence consolidating
+          it was meant to end. The row gets the space back. */}
       <div className={FC.topBar}>
-        <button className={FC.backBtn} onClick={onExit} aria-label="Kembali">
-          ←
-        </button>
-
         <div className={FC.railWrap}>
           <ProgressBar current={knownInView} total={displayCards.length} color={T.correct} />
         </div>

@@ -43,7 +43,7 @@ const DELAYS = [
   { ms: 0, label: 'Manual' },
 ];
 
-export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) {
+export default function JACMode({ onSessionEnd, audioEnabled = false }) {
   const { toast } = useApp();
   const { saveScore, jacScores } = useProgress();
   const [setKey, setSetKey] = useState(null);
@@ -192,10 +192,6 @@ export default function JACMode({ onExit, onSessionEnd, audioEnabled = false }) 
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle}>Soal JAC Official</h2>
       <p className={S.pageSub}>{JAC_OFFICIAL.length} soal dari contoh ujian resmi</p>
 
       <div className={S.row} style={{ marginBottom: 16, flexWrap: 'wrap' }}>

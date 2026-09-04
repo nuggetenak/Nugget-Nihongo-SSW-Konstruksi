@@ -187,11 +187,6 @@ export default function ProductionMode({
 
     return (
       <div className={S.pageFade} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
-        <button className={S.btnBack} onClick={onExit}>
-          ← Kembali
-        </button>
-
-        <h2 className={S.pageTitle}>✍️ Produksi Aktif</h2>
         <p className={S.pageSub} style={{ marginBottom: 20 }}>
           Lihat terjemahan Indonesia → ketik jawaban Jepang (kanji/kana).
         </p>

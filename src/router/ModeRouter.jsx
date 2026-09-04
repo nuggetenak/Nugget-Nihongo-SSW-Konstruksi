@@ -228,23 +228,20 @@ export default function ModeRouter() {
       filterIds: modeParams?.filterIds ?? null,
     },
     fokus: { known, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
-    stats: { known, unknown, quizWrong, srs, streakData, sessions, onExit: exitMode },
-    angka: { onExit: exitMode, onSessionEnd: makeSessionEnd('angka') },
-    jebak: { onExit: exitMode, onSessionEnd: makeSessionEnd('jebak') },
-    cari: { onExit: exitMode, track, starred, toggleStar },
+    stats: { known, unknown, quizWrong, srs, streakData, sessions },
+    angka: { onSessionEnd: makeSessionEnd('angka') },
+    jebak: { onSessionEnd: makeSessionEnd('jebak') },
+    cari: { track, starred, toggleStar },
     jac: {
-      onExit: exitMode,
       onSessionEnd: makeSessionEnd('jac'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
     wayground: {
-      onExit: exitMode,
       onSessionEnd: makeSessionEnd('wayground'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     vocab: {
-      onExit: exitMode,
       onSessionEnd: makeSessionEnd('vocab'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
@@ -254,7 +251,7 @@ export default function ModeRouter() {
       onSessionEnd: makeSessionEnd('simulasi'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
-    glosari: { onExit: exitMode, track },
+    glosari: { track },
     produksi: {
       cards: filteredCards,
       onExit: exitMode,
@@ -262,7 +259,7 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
-    mirip: { onExit: exitMode, onSessionEnd: makeSessionEnd('mirip') },
+    mirip: { onSessionEnd: makeSessionEnd('mirip') },
     dengar: {
       cards: filteredCards,
       allCards: CARDS,
@@ -270,7 +267,7 @@ export default function ModeRouter() {
       onSessionEnd: makeSessionEnd('dengar'),
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
-    catatan: { cards: filteredCards, onExit: exitMode },
+    catatan: { cards: filteredCards },
     kuisprod: {
       cards: filteredCards,
       onExit: exitMode,
@@ -278,10 +275,14 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
-    sumber: { onExit: exitMode, onNavigate: goMode },
+    sumber: { onNavigate: goMode },
   };
 
-  const props = modeProps[mode] ?? { onExit: exitMode };
+  // ModeHeader owns the back control for every mode now (2026-09-04), so most
+  // modes no longer take onExit at all. The ones still listed below use it for
+  // something a header arrow can't be: a results screen's primary "done"
+  // button, or an exit that has to run a confirmation first.
+  const props = modeProps[mode] ?? {};
 
   return (
     <ErrorBoundary

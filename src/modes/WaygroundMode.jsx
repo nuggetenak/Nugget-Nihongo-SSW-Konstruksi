@@ -73,7 +73,7 @@ function getSetWrongCount(setId) {
     .filter(([, v]) => getWrongCount(v) > 0).length;
 }
 
-export default function WaygroundMode({ onExit, onSessionEnd }) {
+export default function WaygroundMode({ onSessionEnd }) {
   const { track } = useApp();
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
@@ -181,10 +181,6 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle}>Soal Teknis</h2>
       <p className={S.pageSub}>
         {totalSoal} soal dalam {TEORI_PRAKTIK.length} set · Teori &amp; Praktik
       </p>

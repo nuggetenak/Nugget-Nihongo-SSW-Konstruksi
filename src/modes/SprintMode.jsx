@@ -161,12 +161,8 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     const pb = personalBest;
     return (
       <div className={S.page}>
-        <button className={S.btnBack} onClick={onExit}>
-          ← Kembali
-        </button>
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <div style={{ fontSize: 48, marginBottom: 8 }}>⚡</div>
-          <h2 className={S.pageTitle}>Sprint Mode</h2>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
           {pb > 0 && (
             <div
@@ -325,9 +321,6 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   return (
     <div className={S.page} style={{ padding: '16px 16px 24px' }}>
       <div className={S.row} style={{ marginBottom: 10 }}>
-        <button className={S.btnBack} onClick={onExit} style={{ padding: 0 }}>
-          ← Kembali
-        </button>
         <span
           style={{
             fontSize: 'var(--fs-jp-back)',

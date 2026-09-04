@@ -37,9 +37,13 @@ describe('QuizProduksiMode (B1)', () => {
     vi.clearAllMocks();
   });
 
-  it('renders start screen with title', () => {
+  it('renders the start screen', () => {
+    // The mode's own <h2> title came out 2026-09-04: ModeHeader renders the
+    // mode's name as the page <h1> for all 21 modes, and every one of them was
+    // repeating it one line further down. What identifies this screen is its
+    // instruction line and its start button, both of which are its own.
     renderMode();
-    expect(screen.getByText('🔤 Kuis Produksi')).toBeTruthy();
+    expect(screen.getByText(/ketik terjemahan Indonesia/i)).toBeTruthy();
     expect(screen.getByText('Mulai 🔤')).toBeTruthy();
   });
 
@@ -82,10 +86,12 @@ describe('QuizProduksiMode (B1)', () => {
     expect(screen.getByText('Lewati ⏭')).toBeTruthy();
   });
 
-  it('calls onExit when back button clicked', () => {
-    const onExit = vi.fn();
-    renderMode({ onExit });
-    fireEvent.click(screen.getByText('← Kembali'));
-    expect(onExit).toHaveBeenCalled();
+  it('renders no back control of its own — ModeHeader owns that now', () => {
+    // Same change as above. Leaving the mode is the shared header's job, so a
+    // second control here would be the duplication that consolidation removed.
+    // The assertion is kept (rather than deleted) so re-adding one is a visible
+    // decision rather than a quiet drift back.
+    renderMode();
+    expect(screen.queryByText('← Kembali')).toBeNull();
   });
 });

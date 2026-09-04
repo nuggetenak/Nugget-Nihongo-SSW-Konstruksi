@@ -66,6 +66,28 @@ export function AppProvider({ children }) {
     [mode, setPref]
   );
 
+  // ── Exit guard ──────────────────────────────────────────────────────────
+  // A mode with unsaved in-progress state registers a predicate here; every
+  // route out of the mode area awaits it first and aborts if it returns false.
+  //
+  // Needed as of 2026-09-04, when the back control moved into ModeHeader. Before
+  // that each mode drew its own, so SimulasiMode could route its button through
+  // a "you'll lose this exam" confirmation. One shared control means one shared
+  // way to say "ask me first" — otherwise the header's arrow silently discards a
+  // half-finished exam, which is the single most expensive thing this app can
+  // throw away.
+  const exitGuardRef = useRef(null);
+  const registerExitGuard = useCallback((fn) => {
+    exitGuardRef.current = fn;
+    return () => {
+      if (exitGuardRef.current === fn) exitGuardRef.current = null;
+    };
+  }, []);
+
+  const clearExitGuard = useCallback(() => {
+    exitGuardRef.current = null;
+  }, []);
+
   const exitMode = useCallback(() => {
     // Always the direct, synchronous update -- exactly as before this item,
     // so nothing that expects `mode` to be null immediately after calling
@@ -76,6 +98,7 @@ export function AppProvider({ children }) {
     setModeHistory([]);
     setMode(null);
     setModeParams(null);
+    exitGuardRef.current = null; // leaving the mode area retires its guard
     setPref('lastMode', null);
     window.scrollTo({ top: 0, behavior: 'instant' });
 
@@ -97,7 +120,16 @@ export function AppProvider({ children }) {
   // still in the stack (truncates history to everything before it). Called
   // with no argument, pops exactly one level — the original behaviour.
   const goBack = useCallback(
-    (targetMode) => {
+    async (targetMode) => {
+      // Ask the active mode first — see registerExitGuard. Awaited, because the
+      // guard is a confirmation dialog; a mode with nothing to lose registers
+      // nothing and this costs a single null check.
+      const guard = exitGuardRef.current;
+      if (guard) {
+        const ok = await guard();
+        if (!ok) return;
+        exitGuardRef.current = null;
+      }
       if (modeHistory.length === 0) {
         exitMode();
         return;
@@ -307,6 +339,8 @@ export function AppProvider({ children }) {
       goTab,
       modeHistory,
       goBack,
+      registerExitGuard,
+      clearExitGuard,
       // Toast
       toast,
     }),
@@ -321,6 +355,8 @@ export function AppProvider({ children }) {
       goTab,
       modeHistory,
       goBack,
+      registerExitGuard,
+      clearExitGuard,
       setTrack,
       toggleTheme,
       completeOnboarding,

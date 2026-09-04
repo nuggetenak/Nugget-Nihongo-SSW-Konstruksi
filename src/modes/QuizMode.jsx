@@ -23,7 +23,6 @@ const PERSIST_QUESTIONS_KEY = 'ssw-persist-kuis-questions';
 export default function QuizMode({
   cards,
   allCards,
-  onExit,
   onFinish,
   onRetryWrong,
   audioEnabled = false,
@@ -169,9 +168,6 @@ export default function QuizMode({
     return (
       <div className={S.pageFade} style={{ padding: '24px 16px' }}>
         <div className={S.rowSpread} style={{ marginBottom: 16 }}>
-          <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
-            ← Kembali
-          </button>
           <button
             style={{
               fontFamily: 'inherit',
@@ -188,8 +184,6 @@ export default function QuizMode({
             ⚙ {showSettings ? 'Tutup' : 'Pengaturan'}
           </button>
         </div>
-
-        <h2 className={S.pageTitle}>Kuis Flashcard</h2>
 
         {resumeData && (
           <div

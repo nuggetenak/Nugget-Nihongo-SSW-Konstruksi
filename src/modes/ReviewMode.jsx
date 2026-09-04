@@ -157,9 +157,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     if (total === 0) {
       return (
         <div className={S.page} style={{ paddingTop: 0 }}>
-          <button className={`${S.btnBack} ${R.emptyBack}`} onClick={onExit}>
-            ← Kembali
-          </button>
           <EmptyState.NoReviews onCta={onGoKartu} />
         </div>
       );
@@ -240,9 +237,6 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   return (
     <div className={`${S.pageScroll} ${R.quizPage}`}>
       <div className={`${S.rowSpread} ${R.quizHeader}`}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
-          ← Keluar
-        </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {audioEnabled && (
             <button

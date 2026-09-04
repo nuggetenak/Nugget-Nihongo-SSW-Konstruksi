@@ -19,7 +19,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
-import { AppProvider } from '../contexts/AppContext.jsx';
+import { AppProvider, useApp } from '../contexts/AppContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import SimulasiMode from '../modes/SimulasiMode.jsx';
 
@@ -83,10 +83,52 @@ describe('SimulasiMode — exit confirmation during an active simulation', () =>
     expect(onExit).toHaveBeenCalledTimes(1);
   });
 
-  it('exiting from the start screen (nothing to lose yet) needs no confirmation', () => {
-    const onExit = renderSimulasi();
-    fireEvent.click(screen.getByText('← Kembali'));
-    expect(onExit).toHaveBeenCalledTimes(1);
+  // ── The header's back arrow is guarded too (2026-09-04) ──────────────────
+  // SimulasiMode no longer draws its own top-level back button: ModeHeader
+  // renders the one back control for all 21 modes. That control has to respect
+  // the same confirmation, or the header's arrow becomes a silent way to throw
+  // away a 100-minute exam. SimulasiMode registers its confirmation as an exit
+  // guard (useExitGuard) while, and only while, an exam is running.
+  it('registers an exit guard while playing, and none on the start screen', async () => {
+    let app;
+    function CaptureApp() {
+      app = useApp();
+      return null;
+    }
+    render(
+      createElement(
+        ToastProvider,
+        null,
+        createElement(
+          ConfirmProvider,
+          null,
+          createElement(
+            AppProvider,
+            null,
+            createElement(CaptureApp),
+            createElement(SimulasiMode, {
+              onExit: vi.fn(),
+              onSessionEnd: vi.fn(),
+              onRetryWrong: vi.fn(),
+            })
+          )
+        )
+      )
+    );
+
+    // Start screen: nothing to lose, so goBack must not be intercepted. A
+    // confirmation with no stakes is the kind people learn to dismiss unread.
+    await act(async () => {
+      app.goBack();
+    });
+    expect(screen.queryByText('Tetap di sini')).toBeNull();
+
+    // Playing: the same goBack now has to raise the confirmation.
+    fireEvent.click(screen.getByText('Mulai Simulasi 🎯'));
+    await act(async () => {
+      app.goBack();
+    });
+    expect(await screen.findByText('Tetap di sini')).toBeTruthy();
   });
 
   it('pausing offers an explicit exit path alongside resume, not just a dismiss-to-resume overlay', async () => {
@@ -125,10 +167,21 @@ describe('SimulasiMode — option text never shows raw 《reading》 markup', ()
     fireEvent.click(screen.getByText('Mulai Simulasi 🎯'));
     // 'quick' preset (default) = 15 questions; run through all of them via
     // the navigator so this doesn't depend on which 15 got shuffled in.
+    //
+    // The assertion is "no READING survives", not "no 《》 survives" (2026-09-04).
+    // 《》 has a second, unrelated use in this corpus: an ordinary parenthetical,
+    // used throughout jac-mockup-sets.js — 危険予知活動《KY活動》, 180度《完全に開く》.
+    // Those are meant to be read as written, and a kanji-bearing marker is never
+    // a reading, since furigana is kana. This test passed before only because
+    // the renderer was converting them into <ruby> with a whole phrase in the
+    // <rt>; now they pass through as the text they are. Which questions the
+    // shuffle draws decides whether one is on screen at all, so asserting on the
+    // old blanket rule failed roughly one run in twenty rather than never.
+    const READING_MARKER = /《[ぁ-んァ-ヶー\s]+》/;
     for (let i = 0; i < 15; i++) {
       const nav = screen.queryByLabelText(new RegExp(`^Soal ${i + 1},`));
       if (nav) fireEvent.click(nav);
-      expect(document.body.textContent).not.toMatch(/《.*》/);
+      expect(document.body.textContent).not.toMatch(READING_MARKER);
     }
   });
 });

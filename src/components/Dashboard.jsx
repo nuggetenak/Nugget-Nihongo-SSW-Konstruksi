@@ -338,7 +338,12 @@ export default function Dashboard({
                 {recentCards.map((c) => (
                   <li key={c.id} className={s.recentCard}>
                     <span className={s.recentJp}>
-                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                      <JpFront
+                        jp={c.jp}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX}
+                        compact
+                      />
                     </span>
                     <span className={s.recentId}>{c.id_text}</span>
                   </li>

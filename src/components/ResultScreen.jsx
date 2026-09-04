@@ -129,7 +129,12 @@ export default function ResultScreen({
                 style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
               >
                 <div className={s.reviewQ}>
-                  <JpFront jp={r.question} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                  <JpFront
+                    jp={r.question}
+                    furiganaPolicy={furiganaPolicy}
+                    maxSize={JP_LIST_MAX}
+                    compact
+                  />
                 </div>
                 <div className={s.reviewWrong}>
                   ✗{' '}
@@ -137,6 +142,7 @@ export default function ResultScreen({
                     jp={r.userAnswer || '—'}
                     furiganaPolicy={furiganaPolicy}
                     maxSize={JP_LIST_MAX_SECONDARY}
+                    compact
                   />
                 </div>
                 <div className={s.reviewCorrect}>
@@ -145,6 +151,7 @@ export default function ResultScreen({
                     jp={r.correctAnswer || '—'}
                     furiganaPolicy={furiganaPolicy}
                     maxSize={JP_LIST_MAX_SECONDARY}
+                    compact
                   />
                 </div>
                 {r.explanation &&

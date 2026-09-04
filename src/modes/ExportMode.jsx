@@ -38,7 +38,7 @@ function readSummary() {
   }
 }
 
-export default function ExportMode({ onExit }) {
+export default function ExportMode() {
   const [summary, setSummary] = useState(() => readSummary());
   const [status, setStatus] = useState(null);
   const [importing, setImport] = useState(false);
@@ -212,10 +212,6 @@ export default function ExportMode({ onExit }) {
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle}>💾 Ekspor &amp; Impor</h2>
       <p className={S.pageSub} style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
         Simpan progress ke file JSON untuk backup atau pindah perangkat.
       </p>

@@ -29,12 +29,11 @@ const CONFUSION_LABELS = {
   prosedur: { label: 'Prosedur/Aturan', color: '#059669' },
 };
 
-export default function DangerMode({ onExit, onSessionEnd }) {
+export default function DangerMode({ onSessionEnd }) {
   const [view, setView] = useState('panel');
   const [filterType, setFilterType] = useState('all');
   return view === 'panel' ? (
     <PanelView
-      onExit={onExit}
       onStartQuiz={() => setView('quiz')}
       filterType={filterType}
       setFilterType={setFilterType}
@@ -44,7 +43,7 @@ export default function DangerMode({ onExit, onSessionEnd }) {
   );
 }
 
-function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
+function PanelView({ onStartQuiz, filterType, setFilterType }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [expanded, setExpanded] = useState(null);
@@ -52,12 +51,8 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
     filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
       <div className={`${S.rowSpread} ${D.headerRow}`}>
         <div>
-          <h2 className={S.pageTitle}>⚠️ Soal Jebak</h2>
           <p className={`${S.pageSub} ${D.pageSub}`}>
             {PAIRS.length} istilah yang sering salah di ujian
           </p>
@@ -115,6 +110,7 @@ function PanelView({ onExit, onStartQuiz, filterType, setFilterType }) {
                         jp={pair.term}
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX}
+                        compact
                       />
                     </div>
                     {cl && (

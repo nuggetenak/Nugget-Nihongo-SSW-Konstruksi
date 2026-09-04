@@ -187,11 +187,6 @@ export default function QuizProduksiMode({
 
     return (
       <div className={S.pageFade} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
-        <button className={S.btnBack} onClick={onExit}>
-          ← Kembali
-        </button>
-
-        <h2 className={S.pageTitle}>🔤 Kuis Produksi</h2>
         <p className={S.pageSub} style={{ marginBottom: 20 }}>
           Lihat istilah Jepang → ketik terjemahan Indonesia kamu.
         </p>

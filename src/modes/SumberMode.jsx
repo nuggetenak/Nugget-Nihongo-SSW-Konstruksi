@@ -8,7 +8,7 @@ import { JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { get as storageGet } from '../storage/engine.js';
 import S from './modes.module.css';
 
-export default function SumberMode({ onExit, onNavigate }) {
+export default function SumberMode({ onNavigate }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [activeSrc, setActiveSrc] = useState(null);
@@ -149,7 +149,12 @@ export default function SumberMode({ onExit, onNavigate }) {
             >
               <div className={S.rowSpread}>
                 <span style={{ fontSize: 'var(--fs-body)' }}>
-                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                  <JpFront
+                    jp={c.jp}
+                    furiganaPolicy={furiganaPolicy}
+                    maxSize={JP_LIST_MAX}
+                    compact
+                  />
                 </span>
                 <span
                   style={{
@@ -203,10 +208,6 @@ export default function SumberMode({ onExit, onNavigate }) {
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle}>📂 Sumber</h2>
       <p className={S.pageSub}>Jelajahi kartu berdasarkan sumber PDF/CSV</p>
       {SOURCE_GROUPS.map((g) => (
         <div key={g.label} style={{ marginBottom: 20 }}>

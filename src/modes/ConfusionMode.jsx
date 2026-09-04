@@ -50,7 +50,7 @@ function buildQuestions(pairs) {
   });
 }
 
-export default function ConfusionMode({ onExit, onSessionEnd }) {
+export default function ConfusionMode({ onSessionEnd }) {
   const [view, setView] = useState('panel'); // 'panel' | 'quiz' | 'detail'
   const [selectedPair, setSelectedPair] = useState(null);
   const [filterType, setFilterType] = useState('all');
@@ -74,7 +74,6 @@ export default function ConfusionMode({ onExit, onSessionEnd }) {
       filtered={filtered}
       filterType={filterType}
       onFilterChange={setFilterType}
-      onExit={onExit}
       onStartQuiz={() => setView('quiz')}
       onOpenDetail={(pair) => {
         setSelectedPair(pair);
@@ -85,15 +84,7 @@ export default function ConfusionMode({ onExit, onSessionEnd }) {
 }
 
 // ── Panel ─────────────────────────────────────────────────────────────────────
-function PanelView({
-  pairs,
-  filtered,
-  filterType,
-  onFilterChange,
-  onExit,
-  onStartQuiz,
-  onOpenDetail,
-}) {
+function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, onOpenDetail }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const types = ['all', '音', '字', '意'];
@@ -101,13 +92,8 @@ function PanelView({
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-
       <div className={S.rowSpread} style={{ marginBottom: 4, alignItems: 'flex-start' }}>
         <div>
-          <h2 className={S.pageTitle}>🔀 Kata Mirip</h2>
           <p className={S.pageSub}>{pairs.length} pasang kata yang sering tertukar di ujian</p>
         </div>
         <button
@@ -195,6 +181,7 @@ function PanelView({
                       jp={pair.termA}
                       furiganaPolicy={furiganaPolicy}
                       maxSize={JP_LIST_MAX_SECONDARY}
+                      compact
                     />
                   </div>
                 </div>
@@ -211,6 +198,7 @@ function PanelView({
                       jp={pair.termB}
                       furiganaPolicy={furiganaPolicy}
                       maxSize={JP_LIST_MAX_SECONDARY}
+                      compact
                     />
                   </div>
                 </div>

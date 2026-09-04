@@ -10,6 +10,50 @@
   margin: 0 0 16px;
 }
 
+/* Back control + identity share one row, so the header stays a single band of
+   chrome rather than growing a second line. */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.backBtn {
+  flex-shrink: 0;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-title);
+  line-height: 1;
+  color: var(--ssw-textMuted);
+  background: none;
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  /* Pulled left so the arrow's optical edge lines up with the content column
+     below it, rather than the button's own padded box. */
+  margin-left: -10px;
+  transition:
+    background var(--t-fast) var(--ease-smooth),
+    color var(--t-fast) var(--ease-smooth);
+}
+
+.backBtn:hover {
+  background: var(--ssw-surfaceHover);
+  color: var(--ssw-textBright);
+}
+
+.backBtn:active {
+  background: var(--ssw-surfaceActive);
+  color: var(--ssw-amberText);
+}
+
+.identity {
+  min-width: 0; /* lets .titleText ellipsise instead of pushing the row wider */
+}
+
 /* ── Trail ── */
 .trail {
   display: flex;
@@ -61,11 +105,23 @@
   align-items: center;
   gap: 8px;
   font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: var(--fs-title);
-  font-weight: 800;
-  letter-spacing: -0.3px;
+  font-size: var(--fs-page-title);
+  font-weight: var(--fw-heavy);
+  letter-spacing: -0.5px;
   color: var(--ssw-textBright);
   margin: 0;
+  min-width: 0;
+}
+
+/* This is the page title now that the modes no longer render their own <h2>,
+   so it takes --fs-page-title and the .pageTitle weight/tracking those had.
+   Truncates rather than wraps: the header is sticky, and a two-line title
+   would push every mode's content down by a whole row on the narrowest
+   screens — the exact cost this consolidation set out to remove. */
+.titleText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .titleIcon {
