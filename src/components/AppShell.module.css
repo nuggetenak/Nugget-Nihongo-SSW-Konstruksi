@@ -37,13 +37,32 @@
 }
 
 .content[data-nav-safe='false'] {
-  padding-bottom: var(--sp-6);
+  padding-bottom: var(--space-24);
 }
 
 /* Reading-width screens (glossary, notes, long prose) stay narrow even on
    desktop, where full-width body text becomes hard to scan. */
 .content[data-width='reading'] {
   max-width: var(--reading-max-w);
+}
+
+/* .content is already as tall as the shell (it's a stretched flex item of
+   .contentCol, which is min-height:100dvh) — but a mode rendered inside it is
+   a plain block, so it can't reach that height and every mode short of a full
+   screen leaves the space below it empty. Measured on FlashcardMode, the
+   app's primary screen: 284px of nothing under the last control on a 390x844
+   phone, 334px on a 1440x900 desktop.
+
+   Making .content a column here lets a mode opt in with flex-grow (see
+   .fcWrapper in modes.module.css); modes that don't set it keep their
+   auto height and are unaffected. Scoped to mode chrome deliberately — the
+   three tab screens have their own scroll behaviour and don't need it, and
+   in mode chrome .content has exactly two children (ModeHeader and the mode),
+   neither with a vertical margin, so nothing changes for the 20 modes that
+   don't opt in. */
+.shell[data-chrome='mode'] .content {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 700px) {
@@ -68,7 +87,7 @@
 
   .content {
     padding: 0 var(--gutter-wide);
-    padding-bottom: var(--sp-6);
+    padding-bottom: var(--space-24);
   }
 
   /* .content[data-nav-safe='true'] (one class + one attribute selector) is
@@ -80,6 +99,6 @@
      bears directly on item 12's "dashboard vertical dead space" diagnosis:
      part of that dead space on the three tab screens was this. */
   .content[data-nav-safe='true'] {
-    padding-bottom: var(--sp-6);
+    padding-bottom: var(--space-24);
   }
 }

@@ -217,7 +217,7 @@ function DetailView({ pair, onBack }) {
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const meta = TYPE_LABEL[pair.type] ?? {};
   return (
-    <div className={S.pageFade} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
+    <div className={S.pageFade} style={{ padding: 'var(--space-20) var(--space-16)' }}>
       <button className={S.btnBack} onClick={onBack}>
         ← Kata Mirip
       </button>
@@ -396,7 +396,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
   const showResult = selected !== null;
 
   return (
-    <div className={S.pageScroll} style={{ padding: 'var(--sp-4)' }}>
+    <div className={S.pageScroll} style={{ padding: 'var(--space-16)' }}>
       <QuizAnnouncer
         isCorrect={selected !== null ? selected === correctIdx : null}
         correctText={opts[correctIdx]?.text}

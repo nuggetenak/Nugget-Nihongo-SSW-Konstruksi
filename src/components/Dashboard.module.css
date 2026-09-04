@@ -1,7 +1,7 @@
 /* Dashboard.module.css — home tab / status board */
 
 .container {
-  padding-top: var(--sp-6);
+  padding-top: var(--space-24);
   animation: fadeIn var(--t-base) var(--ease-smooth);
 }
 
@@ -21,8 +21,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-5);
+  gap: var(--space-12);
+  margin-bottom: var(--space-20);
 }
 
 .brandName {
@@ -39,7 +39,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ssw-textFaint);
-  margin-top: 2px;
+  margin-top: var(--space-2);
 }
 
 .pageTitle {
@@ -58,13 +58,13 @@
   font-size: var(--fs-caption);
   font-weight: var(--fw-semi);
   color: var(--ssw-textDim);
-  margin-top: 3px;
+  margin-top: var(--space-4);
 }
 
 .headerRight {
   display: flex;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--space-8);
   flex-shrink: 0;
 }
 
@@ -75,7 +75,7 @@
   /* min-height meets the 44px touch target guidance; padding alone left it
      at 28px, which is a hard target on a phone in work gloves. */
   min-height: var(--tap-min);
-  padding: 6px 11px;
+  padding: var(--space-6) var(--space-12);
   border-radius: var(--r-pill);
   cursor: pointer;
   white-space: nowrap;
@@ -120,9 +120,9 @@
   background: var(--ssw-bgAlt);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-lg);
-  padding: 13px 15px 13px calc(var(--rail-w) + 12px);
+  padding: var(--space-14) var(--space-16) var(--space-14) calc(var(--rail-w) + var(--space-12));
   overflow: hidden;
-  margin-bottom: var(--sp-3);
+  margin-bottom: var(--space-12);
   font-family: inherit;
 }
 
@@ -155,7 +155,7 @@
 .railBtn {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--space-12);
   cursor: pointer;
 }
 
@@ -171,7 +171,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ssw-amberText);
-  margin-bottom: 2px;
+  margin-bottom: var(--space-2);
 }
 
 .railTitle {
@@ -186,7 +186,7 @@
 .railSub {
   font-size: var(--fs-caption);
   color: var(--ssw-textMuted);
-  margin-top: 3px;
+  margin-top: var(--space-4);
   line-height: var(--lh-normal);
 }
 
@@ -205,16 +205,16 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-xl);
-  padding: var(--sp-4);
-  margin-bottom: var(--sp-3);
+  padding: var(--space-16);
+  margin-bottom: var(--space-12);
 }
 
 .statTop {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-3);
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
 }
 
 .statBig {
@@ -228,7 +228,7 @@
 .statSub {
   font-size: var(--fs-caption);
   color: var(--ssw-textDim);
-  margin-top: 2px;
+  margin-top: var(--space-2);
 }
 
 .statPct {
@@ -259,14 +259,14 @@
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-3);
-  margin-top: var(--sp-2);
+  gap: var(--space-12);
+  margin-top: var(--space-8);
 }
 
 .lg {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-6);
   font-size: var(--fs-micro);
   font-weight: var(--fw-medium);
   color: var(--ssw-textDim);
@@ -296,17 +296,17 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--space-12);
   background: var(--accent);
   border: none;
   border-radius: var(--r-xl);
-  padding: 15px var(--sp-4);
+  padding: var(--space-16) var(--space-16);
   color: #fff;
   box-shadow: var(--shadow-amber);
   cursor: pointer;
   text-align: left;
   font-family: inherit;
-  margin-bottom: var(--sp-3);
+  margin-bottom: var(--space-12);
   transition: transform var(--t-fast) var(--ease-smooth);
 }
 
@@ -342,7 +342,7 @@
   display: block;
   font-size: var(--fs-micro);
   opacity: 0.88;
-  margin-top: 2px;
+  margin-top: var(--space-2);
   line-height: var(--lh-normal);
 }
 
@@ -356,12 +356,12 @@
 .streak {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--space-12);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-lg);
-  padding: var(--sp-3) var(--sp-4);
-  margin-bottom: var(--sp-3);
+  padding: var(--space-12) var(--space-16);
+  margin-bottom: var(--space-12);
 }
 
 .streakIcon {
@@ -390,13 +390,13 @@
 .hint {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--space-12);
   width: 100%;
-  margin: 0 0 var(--sp-3);
+  margin: 0 0 var(--space-12);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-lg);
-  padding: var(--sp-3) var(--sp-4);
+  padding: var(--space-12) var(--space-16);
   font: inherit;
   text-align: left;
   color: inherit;
@@ -430,25 +430,25 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ssw-textDim);
-  margin: var(--sp-5) 0 var(--sp-2);
+  margin: var(--space-20) 0 var(--space-8);
 }
 
 /* ── Quick grid ── */
 .quickGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--sp-2);
+  gap: var(--space-8);
 }
 
 .quickTile {
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-lg);
-  padding: var(--sp-3) 4px;
+  padding: var(--space-12) var(--space-4);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-6);
   cursor: pointer;
   font-family: inherit;
   color: var(--ssw-textMuted);
@@ -477,15 +477,15 @@
 
 .starredBtn {
   width: 100%;
-  margin-top: var(--sp-2);
+  margin-top: var(--space-8);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-2);
+  gap: var(--space-8);
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   border-radius: var(--r-lg);
-  padding: var(--sp-3);
+  padding: var(--space-12);
   font-family: inherit;
   font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
@@ -498,17 +498,17 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-6);
 }
 
 .recentCard {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--sp-3);
+  gap: var(--space-12);
   background: var(--ssw-surface);
   border-radius: var(--r-md);
-  padding: 10px 13px;
+  padding: var(--space-10) var(--space-14);
 }
 
 .recentJp {
@@ -532,7 +532,7 @@
   .cols {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
-    gap: var(--sp-5);
+    gap: var(--space-20);
     align-items: start;
   }
 

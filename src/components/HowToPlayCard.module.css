@@ -1,7 +1,7 @@
 /* ─── HowToPlayCard.module.css ─────────────────────────────────────────────── */
 
 .title {
-  margin-bottom: 6px;
+  margin-bottom: var(--space-6);
   font-weight: 600;
   color: var(--ssw-text);
 }
@@ -14,7 +14,7 @@
    was being told about Enter/Esc/Space shortcuts they have no way to press. */
 .kbLine {
   display: none;
-  margin-top: 4px;
+  margin-top: var(--space-4);
   color: var(--ssw-textMuted);
 }
 

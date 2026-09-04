@@ -332,7 +332,7 @@ the corpus grows enough to need it) is documented at the top of that script and 
 ## 4. Spacing, radii, shadow, motion
 
 ```css
---sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;  --sp-5: 20px;  --sp-6: 24px;
+--space-4: 4px;   --space-8: 8px;   --space-12: 12px;  --space-16: 16px;  --space-20: 20px;  --space-24: 24px;
 --r-xs: 6px;   --r-sm: 8px;   --r-md: 12px;  --r-lg: 16px;  --r-xl: 20px;  --r-xxl: 24px;  --r-pill: 99px;
 --shadow-xs / -sm / -lg / -amber   (see global.css for exact values)
 --ease-spring / --ease-smooth      --t-fast: 120ms  --t-base: 200ms  --t-slow: 350ms

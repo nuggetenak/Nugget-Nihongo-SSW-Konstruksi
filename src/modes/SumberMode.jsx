@@ -23,7 +23,7 @@ export default function SumberMode({ onNavigate }) {
     const meta = SOURCE_META[activeSrc] || { label: activeSrc, emoji: '📄' };
     const color = SOURCE_ACCENT[activeSrc] || T.gold;
     return (
-      <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
+      <div className={`${S.page} ${S.pageTight}`}>
         <button className={S.btnBack} onClick={() => setActiveSrc(null)}>
           ← Sumber
         </button>

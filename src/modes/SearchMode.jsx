@@ -95,7 +95,7 @@ export default function SearchMode({ track, starred, toggleStar }) {
   }, [debouncedQuery, pool]);
 
   return (
-    <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
+    <div className={`${S.page} ${S.pageTight}`}>
       <input
         type="text"
         aria-label="Cari kartu"

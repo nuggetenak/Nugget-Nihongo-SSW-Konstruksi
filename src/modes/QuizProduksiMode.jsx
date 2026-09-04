@@ -186,7 +186,7 @@ export default function QuizProduksiMode({
     const showSummary = doneCount > 0;
 
     return (
-      <div className={S.pageFade} style={{ padding: 'var(--sp-5) var(--sp-4)' }}>
+      <div className={S.pageFade} style={{ padding: 'var(--space-20) var(--space-16)' }}>
         <p className={S.pageSub} style={{ marginBottom: 20 }}>
           Lihat istilah Jepang → ketik terjemahan Indonesia kamu.
         </p>
@@ -280,7 +280,7 @@ export default function QuizProduksiMode({
   const answerCorrect = lastResult?.correct ?? false;
 
   return (
-    <div className={S.pageScroll} style={{ padding: 'var(--sp-4)' }}>
+    <div className={S.pageScroll} style={{ padding: 'var(--space-16)' }}>
       <QuizAnnouncer
         isCorrect={lastResult ? lastResult.correct : null}
         correctText={card.id_text}

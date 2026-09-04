@@ -45,7 +45,7 @@
 
 .sub {
   color: var(--ssw-textDim);
-  margin-top: 4px;
+  margin-top: var(--space-4);
   line-height: 1.2;
   font-size: var(--fs-small);
 }

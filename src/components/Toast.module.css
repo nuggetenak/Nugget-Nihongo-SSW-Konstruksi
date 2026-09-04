@@ -2,7 +2,7 @@
 
 .stack {
   position: fixed;
-  bottom: var(--toast-offset, var(--sp-4));
+  bottom: var(--toast-offset, var(--space-16));
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
@@ -10,15 +10,15 @@
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-6);
   pointer-events: none;
 }
 
 .toast {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 13px 16px;
+  gap: var(--space-10);
+  padding: var(--space-14) var(--space-16);
   border-radius: var(--r-xl);
   background: var(--ssw-text);
   color: var(--ssw-bg);
@@ -48,7 +48,7 @@
   border: none;
   color: var(--ssw-gold);
   cursor: pointer;
-  padding: 0 4px;
+  padding: 0 var(--space-4);
   flex-shrink: 0;
 }
 
@@ -60,7 +60,7 @@
   color: inherit;
   opacity: 0.45;
   cursor: pointer;
-  padding: 0 2px;
+  padding: 0 var(--space-2);
   flex-shrink: 0;
 }
 

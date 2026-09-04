@@ -6,8 +6,8 @@
   z-index: var(--z-banner);
   background: var(--ssw-navBg);
   border-bottom: 1px solid var(--ssw-border);
-  padding: 8px 16px;
-  margin: 0 0 16px;
+  padding: var(--space-8) var(--space-16);
+  margin: 0 0 var(--space-16);
 }
 
 /* Back control + identity share one row, so the header stays a single band of
@@ -15,7 +15,7 @@
 .bar {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-6);
 }
 
 .backBtn {
@@ -59,7 +59,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 2px;
+  margin-bottom: var(--space-2);
 }
 
 /* Hidden on phones — a 3-deep trail doesn't fit a 320px screen and isn't
@@ -88,14 +88,14 @@
   border: none;
   cursor: pointer;
   color: var(--ssw-amberText);
-  padding: 6px 2px;
+  padding: var(--space-6) var(--space-2);
   letter-spacing: 0.2px;
 }
 
 .sep {
   font-size: var(--fs-small);
   color: var(--ssw-textFaint);
-  margin: 0 4px;
+  margin: 0 var(--space-4);
   line-height: 1;
 }
 
@@ -103,7 +103,7 @@
 .title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-8);
   font-family: 'Syne', 'DM Sans', sans-serif;
   font-size: var(--fs-page-title);
   font-weight: var(--fw-heavy);
@@ -134,7 +134,7 @@
    cascade on equal specificity. */
 @media (max-height: 480px) {
   .header {
-    padding: 4px 16px;
-    margin-bottom: 8px;
+    padding: var(--space-4) var(--space-16);
+    margin-bottom: var(--space-8);
   }
 }

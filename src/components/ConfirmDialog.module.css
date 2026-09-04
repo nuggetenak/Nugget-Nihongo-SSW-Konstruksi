@@ -5,7 +5,7 @@
 .message {
   font-size: var(--fs-subtitle);
   font-weight: var(--fw-bold);
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
   text-align: center;
   color: var(--ssw-text);
 }
@@ -13,8 +13,8 @@
 .btnAlternative {
   display: block;
   width: 100%;
-  padding: 11px;
-  margin-bottom: 12px;
+  padding: var(--space-12);
+  margin-bottom: var(--space-12);
   font-size: var(--fs-small);
   font-weight: var(--fw-bold);
   font-family: inherit;
@@ -27,12 +27,12 @@
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: var(--space-10);
 }
 
 .btnCancel {
   flex: 1;
-  padding: 15px;
+  padding: var(--space-16);
   font-size: var(--fs-body);
   font-weight: var(--fw-bold);
   font-family: inherit;
@@ -49,7 +49,7 @@
 
 .btnConfirm {
   flex: 1;
-  padding: 15px;
+  padding: var(--space-16);
   font-size: var(--fs-body);
   font-weight: var(--fw-bold);
   font-family: inherit;
