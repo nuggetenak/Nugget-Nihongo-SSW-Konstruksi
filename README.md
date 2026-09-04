@@ -103,7 +103,7 @@ src/
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 72 test files, 719 tests
+└── tests/                   # 73 test files, 727 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.

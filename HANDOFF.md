@@ -125,7 +125,7 @@ content into this file.
 - **Open items for the next session: `docs/UI_UX_PLAN.md` §12.** Two of them are decisions for the
   owner, not execution.
 
-- **Verification**: `npm run validate` clean — format, lint, **719 tests**, five audits, build.
+- **Verification**: `npm run validate` clean — format, lint, **727 tests**, five audits, build.
   Every UI change screenshotted at 390/820/1440px in both themes, before and after; the layout and
   typography work additionally swept for horizontal overflow and unreachable nav at all three
   viewports at both Normal and Sangat Besar text size.
