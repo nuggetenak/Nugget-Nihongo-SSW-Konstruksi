@@ -74,6 +74,22 @@ hypothetical: at the start of `feat/ui-overhaul`, `CACHE_VERSION` was found at `
 when it's stale; the app just quietly keeps serving old assets to existing users while working
 fine for anyone installing fresh.
 
+> **`.github/workflows/deploy.yml` has done this automatically since before 2026-09-04** — a
+> "Bump SW cache version" step rewrites the constant to a UTC timestamp (`v20260904T…`) right
+> before `npm run build`. Corrected here 2026-09-04: this doc still described the bump as a manual
+> release step *and* said it should match `package.json`, neither of which has been true. Two
+> things follow.
+>
+> **The value committed in `public/sw.js` never ships**, so it is documentation, not configuration.
+> Keep it equal to `package.json`'s version anyway — it is the only signal a reader gets about
+> which release a local `npm run build`/`npm run preview` corresponds to, and it had drifted to
+> `4.23.0` against a `6.0.0` package, which reads exactly like the stale-cache bug this section
+> warns about while being harmless.
+>
+> **A timestamp is the right scheme for the deployed value**, better than the version: uniqueness
+> per deploy is the property that matters, and two deploys of the same version (a hotfix rebuild, a
+> re-run of a failed job) would otherwise collide.
+
 **Update/activation strategy (item 37).** The worker no longer calls `self.skipWaiting()` on
 install — a newly-installed worker sits in the `waiting` state instead of taking over
 immediately. `App.jsx` watches the registration (`updatefound` → the installing worker's
@@ -109,12 +125,12 @@ accurate.
 
 Before merging to `main` and actually deploying (not just before pushing a feature branch):
 
-1. `npm test` — 435/435 (or current count) passing
-2. `npm run lint` — 0 warnings
-3. `npm run build` — clean, check the chunk-size warning list hasn't grown
-4. **Bump `CACHE_VERSION` in `public/sw.js`** to match the new `package.json` version — see §2,
-   this is the step that's been missed before
-5. `package-lock.json` version in sync with `package.json` (has also drifted before)
-
-None of this is deploy-specific tooling this repo currently runs automatically — treat it as a
-manual checklist until/unless that changes.
+1. **`npm run validate`** — format:check, lint, test (672 at the time of writing), all five audits
+   in `scripts/`, then build. One command; running the pieces individually is how `format:check`
+   came to be failing on 33 files and `audit-integrity.mjs` came to report 2876 phantom issues on
+   every run. CI runs only lint/test/build, so `validate` is the stricter gate and the one to use.
+2. Check the build's chunk-size warning list hasn't grown.
+3. **`CACHE_VERSION` in `public/sw.js`** set to the new `package.json` version. The deploy workflow
+   overwrites it with a timestamp anyway (see §2) — this keeps the committed value honest about
+   which release it belongs to, it is not what invalidates the cache.
+4. `package-lock.json` version in sync with `package.json` (has drifted before).

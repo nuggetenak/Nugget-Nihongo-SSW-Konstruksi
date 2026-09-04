@@ -1,3 +1,158 @@
+## [6.0.0] - 2026-09-04
+
+Exhaustive audit of the whole repo, then the fixes. Major version because the data layout changed
+(three unimported mirror layers deleted) and every mode screen's chrome was restructured. Nothing
+in a user's saved progress is affected — storage schema stays v6.
+
+Every finding below was measured against the running app or the real data. Where a doc's claim
+disagreed with the repo, the repo won and the doc was corrected.
+
+### Ruby rendering — three bugs the corpus sweep structurally could not see
+
+`ruby-audit-round3.test.jsx` renders every 《》-bearing string through the real renderer and asserts
+no unexplained raw bracket survives. That answers "does the renderer produce garbage?" It cannot
+answer "does it produce the RIGHT annotation?" — its own header says so. All three of these produce
+well-formed markup and are visibly wrong on screen:
+
+1. **A reading covering text left of its kanji.** `ラジオ体操《らじおたいそう》` annotated only 体操
+   with the whole word's reading — and because a browser distributes a too-wide `<rt>` across its
+   base, 5 kana over 2 kanji rendered as "体 操". **349 strings** across every script:
+   差し込み継手, 足場組立て作業主任者, 管の切断, GX形ダクタイル鋳鉄管, グラスウール保温材.
+2. **Kanji-bearing glosses rendered as furigana.** 《》 has a second, unrelated use in this corpus —
+   an ordinary parenthetical, used throughout jac-mockup-sets.js: `危険予知活動《KY活動》`,
+   `180度《完全に開く》`, `1件500万円以上《建築工事は1500万円以上》`. Those became `<rt>`, so whole
+   sentences rendered at annotation size above a single kanji. **31 occurrences.**
+3. **Indonesian prose folded into ruby bases.** The old fallback folded all preceding text into the
+   base whenever a reading looked disproportionate, which on this app's bilingual descriptions
+   produced ruby like "(digantung saat dipakai), dan 立てかけ式" with furigana over the lot. **89
+   strings.**
+
+Where a base starts is now decided by matching the reading against the candidate word, not guessed
+from shape or length. Verified by rendering all 6,000 corpus strings before and after and reading
+every one of the 261 distinct base changes; no reading changed, only bases moved. One known false
+positive is recorded in the commit rather than hidden.
+
+### Three dead data mirror layers retired
+
+src/data held four copies of the card corpus and three of the quiz sets. Measured, not assumed:
+
+| layer | state | imported by |
+|---|---|---|
+| `src/data/cards/**` | 1438 cards, **70 drifted** | nothing |
+| `src/data/sets/wayground/**` | in sync | nothing |
+| `src/data/sets/jac-mockup/**` | **all 12 sets drifted** | nothing |
+| `src/data/sets/jac/**` | live | `jac-official.js` |
+
+The drift is precisely the last two sessions' own fixes, applied to the live files only — the
+expected outcome of maintaining four copies by hand. Worse than dead: `wayground-sets.js` and
+`jac-mockup-sets.js` both carried headers reading "regenerated from the authoritative split files
+… do not hand-edit", and **no such regeneration script has ever existed in this repo**; README
+described `src/data/cards/` as the layer to edit while `merge-cards.mjs` reads only
+`src/data/source/`; HANDOFF warned future sessions that one of these folders "will produce false
+leads". 56 files / 1.7 MB deleted, recoverable from git history. `docs/AGENT_WORKFLOW.md` §4a is now
+the single map of where to edit what.
+
+### The audits that should have caught it
+
+- `audit-integrity.mjs` demanded a `furi` field the schema dropped when readings moved inline into
+  `jp` — **2876 phantom issues and exit 1 on every run**. An audit that always fails is an audit
+  nobody runs, which is how five zero-card sources survived in `SOURCE_META`, each rendering as a
+  permanent, un-openable "0 kartu" row in SumberMode. Rewritten; registry-rot check added.
+- `audit-related-ids.mjs` imported two files that moved at the 2026-08-18 merge — **every run since
+  has died with ERR_MODULE_NOT_FOUND**. It was in no npm script, which is why nobody noticed.
+- `verify-content.mjs` compared only counts. All four layers held 1438 cards, so it printed
+  "✅ Clean … safe to copy into HANDOFF.md as-is" while 70 of those cards differed in content. Now
+  compares `cards.js` against `source/` field by field and names the drifted card.
+- `audit-track-consistency.mjs` deleted with the layer it existed to audit.
+- New `audit-data-text.mjs`: pooled ruby readings, malformed markers, and look-alike codepoints.
+- **`npm run validate` now actually gates**: format:check (33 files had drifted out of prettier
+  format), lint, test, all five audits, build. CI runs lint/test/build only, so nothing had ever
+  run format:check or four of the five audits.
+
+### State bugs
+
+- **The study streak only counted flashcard marks.** `handleMark` was the only thing in the app
+  touching `streakData` or `dailyCount`, so a learner doing SRS reviews every morning for a month —
+  or nothing but quizzes and mock exams — had a streak of 0 throughout. It feeds the Dashboard
+  headline, the week/month streak achievements, and 20 of the 100 points in the readiness score: one
+  missing call site, wrong in four visible places. Sessions now advance it, gated on `total > 0` so
+  a phantom 0/0 session can't.
+- `calcReadiness` read `srs.stats.review`, **a key that has never existed** (`getSRSStats` returns
+  total/new/learning/young/mature/due), so the SRS component counted mature cards only while its
+  comment said "mature+review". Second dead-key bug found in this one function.
+- `SRSContext` memoised its provider value from a hand-listed key subset that **omitted `stats`** —
+  any review changing the stats without changing the due count served consumers the previous
+  render's numbers.
+- `goTab` never cleared `modeParams`, unlike every other exit path.
+- `buildAchievementState` had inline copies of two scoring helpers it was already importing a third
+  from.
+
+### Design system
+
+Keyframes lived in **two files with six conflicting definitions** — fadeIn 6px vs 8px, slideUp 14
+vs 20, scaleIn 0.93 vs 0.92, and `shimmer` running in **opposite directions** — and `theme.js`'s
+JS-injected `<style>` block silently won every one, making the values in global.css dead.
+Confirmed by reading the live CSSOM in a browser rather than reasoning about import order.
+Consolidated into global.css at the values that were actually rendering, so no pixels moved; ten
+unreferenced keyframes and a dead `.ssw-stagger` helper dropped; `--ssw-accentSoft` defined, which
+two stylesheets had been asking for and silently falling back from since it never existed.
+
+**254 of 297 inline `fontSize: <px>` in JSX migrated onto the `--fs-*` tokens.** DESIGN_SPEC §3
+claimed of the px→rem conversion that "every consumer only ever reads `--fs-*` via var(), confirmed
+by grep" — that grep can only have covered stylesheets, so the whole point of the conversion reached
+the shell and missed nearly every mode screen, which was also frozen at phone sizes on desktop. The
+spec is corrected in place rather than quietly rewritten.
+
+### UI
+
+- **One mode header.** 20 of 21 modes rendered their own name a second time under the shared
+  header, and drew one of **27 different back buttons**. ModeHeader is now the whole header: back
+  control, breadcrumb, `<h1>`. Comes with an exit guard (`useExitGuard`) so the single shared arrow
+  cannot silently discard a half-finished exam — SimulasiMode registers its confirmation while, and
+  only while, one is running.
+- **Two modes rendered the entire deck.** Buku Catatan at 19,264 DOM nodes / 134,599px; Glosari at
+  18,329 / 82,128px. Now 714 / 4,095px and 1,642 / 6,105px, rendering incrementally, with Glosari's
+  A–Z jump verified still landing correctly.
+- **The app's one horizontal overflow**, found by sweeping 24 screens × 3 viewports: Glosari's
+  `minmax(430px, 1fr)` is a hard floor, so at a 390px viewport its rows stayed 430px and pushed the
+  document to 446px. Its own regression test was scoped to one selector in one file and is now
+  general across every auto-fit grid.
+- **`JpFront` gained `compact`** for list contexts: the stacked, centred hero treatment for
+  vs/・/：/→ terms was leaking into scrolling lists, where **15% of cards** contain one of those
+  separators and became 3–5 line centred blocks among single-line neighbours.
+- **Seven declarations across five files were switching off the app's only focus indicator**, all on
+  text inputs — the controls where a keyboard user most needs it. And the indicator itself was drawn
+  so the outline's own offset gap was solid near-black, reading as a heavy black frame; on an input
+  the amber was never visible at all.
+- **Autoplay TTS failures no longer raise an error toast.** On a phone with no ja-JP voice — ordinary
+  on the handsets this app targets — opening ReviewMode produced an error about a feature the
+  learner never invoked, every session. Deliberate taps on a speaker button still warn.
+- **A control that could not change anything, shown in two modes.** SearchMode's and GlossaryMode's
+  "Semua jalur / Jalurku" toggle: every category carries `tracks: ['lifeline']`, so both sides
+  produced the identical set.
+
+### Content
+
+- 13 pooled ruby readings split per term — `免振 vs 制振 vs 耐震《めんしん vs せいしん vs たいしん》`
+  attached three terms' readings to the last term, so DangerMode's accordion showed raw 《》
+  mid-title. Each fix derived from the entry's own sibling fields.
+- 21 Kangxi Radical codepoints (`⽅` U+2F45 for `方` U+65B9) and one Cyrillic а/р typo'd into a Latin
+  word — both flagged as out of scope by the 2026-08-26 font work and still live until now. They
+  render identically to the right character, so nothing on screen ever revealed them, and they sat
+  in quiz data, which `audit-integrity.mjs` never reads.
+- Two stale question counts in the mode registry, now derived from the data: Wayground claimed 579
+  soal against a real 740, Kosakata claimed 380 against a real 240 — and Kosakata's own screen had
+  been printing 240 all along, so the menu and the mode disagreed within one session.
+- "3 jalur" and a footer reading 土木 · 建築 · ライフライン設備 in the Saya tab, and index.html's
+  og:description advertising 1.443 cards against a real 1,438.
+
+### Verification
+
+`npm run validate` clean: format, lint, **672 tests** (up from 652), five audits, build. Every UI
+change screenshotted at 390/820/1440px in both themes, before and after.
+
+Open items, including two decisions for the owner: `docs/UI_UX_PLAN.md` §12.
+
 ## [5.5.0] - 2026-09-01
 
 ### Item 68 picked up too -- pivoted from font-sizes to a bigger dead-code finding

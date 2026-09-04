@@ -2796,7 +2796,7 @@ export const CARDS_COMMON = [
     id_text: 'Jarum garis / jangka',
     desc: 'ケガキ針《はり》 = jarum untuk menggambar garis tanda pada plat logam (gunakan bersama penggaris logam). デバイダ = jangka/kompas logam untuk mengukur dan menandai jarak pada plat.',
     usage:
-      'ケガキ針《はり》で金属板《きんぞくばん》に切断線《せつだんせん》を引《ひ》く（gambарkan garis potong pada pelat logam menggunakan scriber）',
+      'ケガキ針《はり》で金属板《きんぞくばん》に切断線《せつだんせん》を引《ひ》く（gambarkan garis potong pada pelat logam menggunakan scriber）',
     _origIndex: 536,
   },
   {

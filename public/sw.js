@@ -6,7 +6,14 @@
 // Cache versioning: bump CACHE_VERSION on every deploy to force SW update.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = 'ssw-v4.23.0';
+// Kept equal to package.json's version. NOT what invalidates the cache in
+// production: .github/workflows/deploy.yml rewrites this to a UTC timestamp
+// immediately before the build, so the committed value never ships. It is the
+// only signal a reader gets about which release a local build corresponds to,
+// and it had drifted to 4.23.0 against a 6.0.0 package — which reads exactly
+// like the stale-cache bug docs/PWA_RELEASE_SPEC.md §2 warns about, while being
+// harmless. See that section for why a timestamp is the right deployed scheme.
+const CACHE_VERSION = 'ssw-v6.0.0';
 const CACHE_STATIC    = `${CACHE_VERSION}-static`;
 const ALL_CACHES      = [CACHE_STATIC];
 
