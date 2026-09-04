@@ -111,14 +111,24 @@ function isWideBreakpoint() {
 export function jpFontSize(text = '') {
   const len = text.length;
   const wide = isWideBreakpoint();
-  if (len <= 4) return wide ? 30 : 28;
-  if (len <= 8) return wide ? 26 : 24;
-  if (len <= 14) return wide ? 22 : 20;
-  if (len <= 20) return wide ? 18 : 17;
-  if (len <= 30) return wide ? 16 : 15;
-  return wide ? 14 : 13;
+  if (len <= 4) return wide ? 34 : 30;
+  if (len <= 8) return wide ? 30 : 27;
+  if (len <= 14) return wide ? 25 : 23;
+  if (len <= 20) return wide ? 21 : 20;
+  if (len <= 30) return wide ? 19 : 18;
+  return wide ? 18 : 17;
 }
 
+// Raised across the board 2026-09-04, along with the ladder above. The old
+// floor was 13px, and 13px of CJK is not comparable to 13px of Latin — a kanji
+// carries far more strokes in the same box, so it needs more size for the same
+// legibility, and this app's readers are looking at it on cheap phones,
+// outdoors. The floor is now 17px, and the ceilings below moved with it so a
+// list row's term doesn't end up smaller than the body text beside it. 19/17
+// rather than the 21/19 first tried: at 21 a long term in an accordion row that
+// also carries a category badge wrapped to three lines, which costs more
+// legibility than the extra 2px buys.
+//
 // Shared maxSize ceilings for JpFront in a dense list/grid context (many
 // items visible together, where jpFontSize's own upward scaling for short
 // strings reads as random size-jumping rather than intentional emphasis --
@@ -128,8 +138,8 @@ export function jpFontSize(text = '') {
 // preview). Originally introduced ad hoc as 17/15 in SimulasiMode's review
 // list and ResultScreen; named here so every later dense-list caller lines
 // up with that precedent instead of picking its own number.
-export const JP_LIST_MAX = 17;
-export const JP_LIST_MAX_SECONDARY = 15;
+export const JP_LIST_MAX = 19;
+export const JP_LIST_MAX_SECONDARY = 17;
 
 /**
  * Parse a desc string into a structured object for memoized rendering.

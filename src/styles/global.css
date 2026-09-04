@@ -14,28 +14,59 @@
   /* Nav height */
   --nav-h: 64px;
 
-  /* Typography scale
-     rem, not px (item 53) -- responds to a user's OS/browser text-size
-     preference. 16px root = 1rem throughout; nothing in this app sets a
-     custom root font-size (html only sets text-size-adjust), so these are
-     exactly the same computed pixel sizes as before at default settings,
-     just no longer deaf to that one setting. */
-  --fs-hero: 2rem; /* 32px */
-  --fs-jp-primary: 1.75rem; /* 28px */
-  --fs-jp-back: 1.25rem; /* 20px */
-  --fs-page-title: 1.375rem; /* 22px */
-  --fs-title: 1.0625rem; /* 17px */
-  --fs-subtitle: 0.9375rem; /* 15px */
-  --fs-body: 0.8125rem; /* 13px */
-  --fs-caption: 0.75rem; /* 12px */
-  --fs-small: 0.6875rem; /* 11px */
-  --fs-micro: 0.625rem; /* 10px */
-  --fs-nano: 0.5625rem; /* 9px */
+  /* ── Typography scale ──────────────────────────────────────────────────
+     Fluid: each token interpolates from its phone size at 390px to its
+     desktop size at 1280px, then holds. Rebuilt 2026-09-04 — the previous
+     scale (32/28/22/20/17/15/13/12/11/10/9, with a hard jump at one
+     breakpoint) had two problems a census of the running app made concrete.
 
-  /* Line heights */
+     A walk of every rendered text node across all 24 screens found **85% of
+     the app's visible text at 13px or smaller**: 29% at 11px, 20% at 13px,
+     14% at 12px, 8% at 10px, 4% at 9px. For an audience reading Japanese on
+     cheap phones, outdoors, that is the app's largest usability problem and
+     it was invisible from the code — no single rule looks wrong, the sizes
+     just accumulate at the bottom. Every reading-scale tier moved up; the
+     badge/fine-print tiers moved least, since they sit in fixed-dimension
+     containers.
+
+     The old scale also had no ratio: five steps (9/10/11/12/13) inside 4px,
+     then a gap to 17, then to 22. Those five were indistinguishable in use
+     and gave false precision. This is a ~1.11 ratio at the bottom widening
+     to ~1.2 at display sizes.
+
+     `rem + vw`, never bare `vw`: the rem term is what keeps these responsive
+     to a reader's font-size preference (item 53's whole point, and now
+     exposed in-app as Ukuran Teks). A pure-vw preferred value would silently
+     undo that.
+
+     Computed values — token: 390px / 700px / 1040px / 1440px */
+  --fs-nano: clamp(0.625rem, 0.5976rem + 0.1124vw, 0.6875rem); /* 10 11 */
+  --fs-micro: clamp(0.6875rem, 0.6464rem + 0.1685vw, 0.7813rem); /* 11 12.5 */
+  --fs-small: clamp(0.8125rem, 0.7714rem + 0.1685vw, 0.9063rem); /* 13 14.5 */
+  --fs-caption: clamp(0.875rem, 0.8339rem + 0.1685vw, 0.9688rem); /* 14 15.5 */
+  --fs-body: clamp(0.9375rem, 0.8827rem + 0.2247vw, 1.0625rem); /* 15 17 */
+  --fs-subtitle: clamp(1.0625rem, 1.0077rem + 0.2247vw, 1.1875rem); /* 17 19 */
+  --fs-title: clamp(1.1875rem, 1.119rem + 0.2809vw, 1.3438rem); /* 19 21.5 */
+  --fs-jp-back: clamp(1.375rem, 1.2928rem + 0.3371vw, 1.5625rem); /* 22 25 */
+  --fs-page-title: clamp(1.625rem, 1.4881rem + 0.5618vw, 1.9375rem); /* 26 31 */
+  --fs-jp-primary: clamp(1.875rem, 1.7381rem + 0.5618vw, 2.1875rem); /* 30 35 */
+  --fs-hero: clamp(2.25rem, 2.0035rem + 1.0112vw, 2.8125rem); /* 36 45 */
+
+  /* Line heights. --lh-snug is new (2026-09-04): 1.2 is right for a single
+     display line and too tight for a two-line heading, which is what most
+     page titles become on a phone once the type got bigger. */
   --lh-tight: 1.2;
+  --lh-snug: 1.35;
   --lh-normal: 1.5;
   --lh-relaxed: 1.75;
+
+  /* Tracking. Display type set large wants negative tracking; small caps-y
+     labels want positive. Both were being written as one-off letter-spacing
+     values in a dozen places. */
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.04em;
+  --ls-label: 0.08em;
 
   /* Font weights */
   --fw-regular: 400;
@@ -397,6 +428,17 @@ input {
   animation-duration: 150ms;
 }
 
+/* Japanese line-breaking. Browsers default to `line-break: auto`, which allows
+   a long-vowel mark (ー) or a small kana (っ ゃ ゅ ょ) to start a line — wrong by
+   Japanese convention (kinsoku shori) and newly visible once the JP type scale
+   went up and long terms began wrapping: ラッキングカバー was breaking as
+   "ラッキングカバ / ー". `strict` applies the full rule set. Scoped to lang="ja",
+   which JpDisplay already sets on every JP span. */
+[lang='ja'] {
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+
 /* ── Accessibility utility ── */
 .sr-only {
   position: absolute;
@@ -426,26 +468,11 @@ input {
 @media (min-width: 1040px) {
   :root {
     --max-w: 1180px;
-    /* item 22: width was solved comprehensively (--max-w widens, grids
-       reflow) but density wasn't -- 13px body text at arm's length from a
-       monitor reads small, and hero type sized to anchor a phone screen is
-       modest on a desktop dashboard. Conservative bump, reading-scale
-       tokens only (title through hero) -- micro/nano stay put, since
-       they're badge/fine-print scale, not reading scale, and more likely to
-       sit in a fixed-dimension container where even 1px could overflow.
-       JP sizes included: ruby annotations are sized in em (.ruby rt,
-       JpDisplay.module.css) relative to their parent JP text, so bumping
-       the base JP size scales the furigana with it rather than leaving it
-       behind -- both improve together, not just the kanji. */
-    --fs-hero: 2.25rem; /* 36px */
-    --fs-jp-primary: 1.875rem; /* 30px */
-    --fs-jp-back: 1.375rem; /* 22px */
-    --fs-page-title: 1.625rem; /* 26px */
-    --fs-title: 1.125rem; /* 18px */
-    --fs-subtitle: 1rem; /* 16px */
-    --fs-body: 0.875rem; /* 14px */
-    --fs-caption: 0.8125rem; /* 13px */
-    --fs-small: 0.75rem; /* 12px */
+    /* The --fs-* tokens are fluid now (see the scale at the top of this
+       file), so they no longer need a per-breakpoint block here — they
+       interpolate continuously from 390px to 1280px instead of stepping once
+       at 1040px. item 22's reasoning still holds and is now applied at every
+       width in between, not just past this one line. */
   }
 
   /* Bottom pill is display:none up here (AppShell.module.css) regardless of
@@ -460,7 +487,14 @@ input {
    One ring for every interactive element. Desktop support made keyboard
    navigation a real path, and the app previously had a single focus-visible
    rule in total. :focus-visible keeps it off for mouse/touch users. */
-:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+/* [tabindex="-1"] excluded: an element with a negative tabindex is never
+   reachable by keyboard, so any focus landing on it is programmatic — here,
+   ModeRouter moving focus to the mode's <h1> on every mode change so a screen
+   reader announces the new screen. Chrome still matches :focus-visible on those,
+   which drew a full focus ring around every mode title on arrival. The ring is
+   for telling a keyboard user where they are; on a heading nobody tabbed to it
+   is just noise. */
+:where(button, a, input, select, textarea, [tabindex]):not([tabindex='-1']):focus-visible {
   outline: 3px solid var(--ssw-amber);
   outline-offset: 2px;
   border-radius: var(--r-sm);

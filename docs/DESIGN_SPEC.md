@@ -98,10 +98,64 @@ than duplicating every value here.
 - Headings/emphasis (used selectively — `pageTitle`, hero numbers, card titles): `'Syne', 'DM
   Sans', sans-serif`
 
-Scale (`global.css`, all `--fs-*`, rem since 2026-08-31 — see below): hero 32px,
-jp-primary 28px, jp-back 20px, page-title 22px, title 17px, subtitle 15px, body 13px,
-caption 12px, small 11px, micro 10px, nano 9px. Weights: regular 400, medium 500, semi
-600, bold 700, heavy 800, black 900. Line heights: tight 1.2, normal 1.5, relaxed 1.75.
+**Scale rebuilt 2026-09-04 — fluid, and materially larger.** Each `--fs-*` token is a
+`clamp()` interpolating from its phone size at 390px to its desktop size at 1280px, then
+holding. There is no per-breakpoint redefinition any more; the step at 1040px is gone.
+
+| token | 390px | 700px | 1040px | 1440px |
+|---|---|---|---|---|
+| `--fs-nano` | 10 | 10.3 | 10.7 | 11 |
+| `--fs-micro` | 11 | 11.5 | 12.1 | 12.5 |
+| `--fs-small` | 13 | 13.5 | 14.1 | 14.5 |
+| `--fs-caption` | 14 | 14.5 | 15.1 | 15.5 |
+| `--fs-body` | 15 | 15.7 | 16.5 | 17 |
+| `--fs-subtitle` | 17 | 17.7 | 18.5 | 19 |
+| `--fs-title` | 19 | 19.9 | 20.8 | 21.5 |
+| `--fs-jp-back` | 22 | 23 | 24.2 | 25 |
+| `--fs-page-title` | 26 | 27.7 | 29.7 | 31 |
+| `--fs-jp-primary` | 30 | 31.7 | 33.7 | 35 |
+| `--fs-hero` | 36 | 39.1 | 42.6 | 45 |
+
+**Why.** A census of every rendered text node across all 24 screens of the running app
+found **85% of visible text at 13px or smaller**: 29% at 11px, 20% at 13px, 14% at 12px,
+8% at 10px, 4% at 9px, **9% at 7px and 0.2% at 5px**. For an audience reading Japanese on
+cheap phones, often outdoors, that was the app's largest usability problem — and it was
+invisible from the code, because no single declaration looks wrong. The sizes simply
+accumulated at the bottom of a scale that had no ratio: five steps (9/10/11/12/13) inside
+4px, then a gap to 17, then to 22. After the rebuild the same census reads **50.6% at
+≤13px, with nothing below 10px at all**.
+
+The reading-scale tiers moved most; nano/micro moved least, since they sit in
+fixed-dimension containers (badges, pills) where a bump risks overflow.
+
+**`rem + vw`, never bare `vw`.** The preferred term of every clamp carries a rem
+component. That is what keeps the scale responsive to a reader's font-size preference —
+item 53's whole point, and now driven in-app by Saya → Ukuran Teks. A pure-vw preferred
+value would silently undo it. `typography-scale.test.js` asserts this per token.
+
+Weights: regular 400, medium 500, semi 600, bold 700, heavy 800, black 900. Line heights:
+tight 1.2, **snug 1.35** (new — 1.2 is right for one display line and too tight for the
+two-line headings phone-width page titles became), normal 1.5, relaxed 1.75. Tracking
+tokens `--ls-tight` / `--ls-normal` / `--ls-wide` / `--ls-label` replace the one-off
+`letter-spacing` values that had accumulated.
+
+### Furigana — the number this was really about
+
+`.ruby rt` is `max(0.5em, 0.6875rem)`: the browser-default ratio, with an **11px absolute
+floor**.
+
+It was a flat `0.44em`, and `jpFontSize`'s floor for a long string was 13px — so
+`0.44 × 13 = 5.7px`. Neither number looks wrong alone; they live in different files and
+nobody multiplied them. Furigana is the reading a learner who cannot yet read the kanji
+depends on, so this was the worst instance of the general problem above. `jpFontSize`'s
+ladder was raised alongside it (floor 13 → 17; 13px of CJK is not comparable to 13px of
+Latin, since a kanji carries far more strokes in the same box), and `JP_LIST_MAX` /
+`JP_LIST_MAX_SECONDARY` went 17/15 → 19/17 so a list row's term isn't smaller than the
+body text beside it.
+
+`[lang='ja']` also gets `line-break: strict` — Japanese kinsoku shori, so a long-vowel
+mark or small kana can't start a line. Not needed before, because terms rarely wrapped at
+the old sizes; ラッキングカバー was breaking as "ラッキングカバ / ー" at the new ones.
 
 `--fs-page-title` (2026-08-31): the app's actual page-title heading role — BelajarTab,
 SayaTab, Dashboard's (mostly desktop-only, see below) `<h1>`, and every individual mode

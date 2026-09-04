@@ -73,11 +73,29 @@
   display: none;
 }
 
+/* Furigana. The size here is the app's most consequential typographic number:
+   it is the reading a learner who cannot yet read the kanji depends on, and a
+   census of every rendered text node across all 24 screens found it landing at
+   5–7px — 9% of the app's visible text at 7px, 0.2% at 5px.
+
+   The arithmetic: rt was a flat 0.44em of its base, and jpFontSize's floor for a
+   long string was 13px (15/17 in lists), so 0.44 x 13 = 5.7px. Nothing in the
+   CSS looks wrong; the two numbers were set in different files and never
+   multiplied together.
+
+   Three changes. 0.5em is the browser/W3C default ratio, and the 0.44 it
+   replaces was tuned for density on a hero flashcard — a reasonable call there,
+   and the wrong one applied uniformly. max() puts an absolute floor under it so
+   no base size can push furigana below 11px again. And the base itself moved up
+   (jpFontSize in jp-helpers.js), which is the other half of the fix. */
 .ruby rt {
-  font-size: 0.44em;
+  font-size: max(0.5em, 0.6875rem);
   color: var(--ssw-amberText);
   font-weight: var(--fw-semi);
-  letter-spacing: 0.02em;
+  letter-spacing: var(--ls-wide);
+  /* Ruby sits in a fixed-height band above its base; without this a taller rt
+     starts clipping its own ascenders. */
+  line-height: var(--lh-tight);
 }
 
 .readingRow {
