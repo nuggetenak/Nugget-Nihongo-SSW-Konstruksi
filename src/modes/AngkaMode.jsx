@@ -606,7 +606,6 @@ function TypeQuizView({ onBack, onSessionEnd }) {
           width: '100%',
           boxSizing: 'border-box',
           marginBottom: 8,
-          outline: 'none',
         }}
       />
 

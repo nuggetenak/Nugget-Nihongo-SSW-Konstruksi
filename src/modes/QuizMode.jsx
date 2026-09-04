@@ -16,6 +16,7 @@ import {
   clearQuizSnapshot,
 } from '../utils/quiz-persistence.js';
 import S from './modes.module.css';
+import { formatCount } from '../utils/format.js';
 
 const PERSIST_KEY = 'ssw-persist-kuis';
 const PERSIST_QUESTIONS_KEY = 'ssw-persist-kuis-questions';
@@ -227,7 +228,7 @@ export default function QuizMode({
         )}
 
         <p className={S.pageSub}>
-          {catFilteredCards.length} kartu tersedia {lemahMode ? '(mode lemah)' : ''}
+          {formatCount(catFilteredCards.length)} kartu tersedia {lemahMode ? '(mode lemah)' : ''}
           {selectedCat !== 'all' ? ` · ${selectedCat}` : ''}
         </p>
 

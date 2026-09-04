@@ -2,7 +2,6 @@
 // Note: IntersectionObserver logic unchanged. data-nav / data-letter attributes kept.
 // Note: azBtn active bg/border/color/fontWeight are dynamic (isActive), kept inline.
 // Note: filterBtn active bg/border/color are dynamic, kept inline.
-// Note: trackToggle bg/border/color are dynamic (showAllTracks), kept inline.
 // Note: termRow bg is dynamic (isOpen), kept inline.
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { T } from '../styles/theme.js';
@@ -29,7 +28,12 @@ export default function GlossaryMode({ track }) {
   const handleSpeakError = useSpeakErrorHandler();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [filterCat, setFilterCat] = useState('all');
-  const [showAllTracks, setShowAllTracks] = useState(false);
+  // showAllTracks removed 2026-09-04. It toggled between "cards in my track" and
+  // "all cards" — but every category in categories.js carries tracks:
+  // ['lifeline'], so getCatsForTrack('lifeline') returns all 11 content
+  // categories and both sides of the toggle produced the identical set. A
+  // control that cannot change what it claims to change, shown in two modes,
+  // left over from when Doboku and Kenchiku existed (removed session 24).
   const [expanded, setExpanded] = useState(null);
   const [activeLetter, setActiveLetter] = useState(null);
   const [compactView, setCompactView] = useState(true); // true=click-to-expand; false=always-show-all
@@ -45,15 +49,14 @@ export default function GlossaryMode({ track }) {
   const trackCatKeys = useMemo(() => (track ? new Set(getCatsForTrack(track)) : null), [track]);
   const visibleCats = useMemo(() => {
     const base = CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang');
-    if (!trackCatKeys || showAllTracks) return base;
+    if (!trackCatKeys) return base;
     return base.filter((c) => trackCatKeys.has(c.key));
-  }, [trackCatKeys, showAllTracks]);
+  }, [trackCatKeys]);
 
   const sorted = useMemo(() => {
     let items;
     if (filterCat === 'all') {
-      items =
-        trackCatKeys && !showAllTracks ? CARDS.filter((c) => trackCatKeys.has(c.category)) : CARDS;
+      items = trackCatKeys ? CARDS.filter((c) => trackCatKeys.has(c.category)) : CARDS;
     } else {
       items = CARDS.filter((c) => c.category === filterCat);
     }
@@ -62,7 +65,7 @@ export default function GlossaryMode({ track }) {
         .toLowerCase()
         .localeCompare((extractReadings(b.jp) || '').toLowerCase(), 'ja')
     );
-  }, [filterCat, trackCatKeys, showAllTracks]);
+  }, [filterCat, trackCatKeys]);
 
   const groups = useMemo(() => {
     const map = {};
@@ -254,22 +257,6 @@ export default function GlossaryMode({ track }) {
               {selectMode ? `✕ Batal (${selected.size})` : '☑ Pilih'}
             </button>
           </div>
-          {trackCatKeys && (
-            <button
-              onClick={() => {
-                setShowAllTracks((v) => !v);
-                setFilterCat('all');
-              }}
-              className={G.trackToggle}
-              style={{
-                background: showAllTracks ? 'rgba(251,191,36,0.15)' : T.surface,
-                border: `1px solid ${showAllTracks ? 'rgba(251,191,36,0.35)' : T.border}`,
-                color: showAllTracks ? T.gold : T.textDim,
-              }}
-            >
-              {showAllTracks ? '🗂 Semua jalur' : '🗂 Jalurku'}
-            </button>
-          )}
         </div>
         <div className={G.filterRow}>
           {[{ key: 'all', label: 'Semua', emoji: '📋' }, ...visibleCats].map((c) => {

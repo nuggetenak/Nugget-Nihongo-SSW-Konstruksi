@@ -44,15 +44,6 @@
   margin: 0;
 }
 
-/* trackToggle — active bg/border/color are dynamic, kept inline */
-.trackToggle {
-  font-family: inherit;
-  font-size: var(--fs-micro);
-  padding: 3px 10px;
-  border-radius: var(--r-pill);
-  cursor: pointer;
-}
-
 .filterRow {
   display: flex;
   flex-wrap: wrap;

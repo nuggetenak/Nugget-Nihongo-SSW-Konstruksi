@@ -78,7 +78,10 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     const speakOnFlip = prefs.speakOnFlip === true;
     if (!audioEnabled || !currentCard || !canSpeak() || speakOnFlip) return;
     const t = setTimeout(
-      () => speakJP(stripFuri(currentCard.jp), { onError: handleSpeakError }),
+      () =>
+        speakJP(stripFuri(currentCard.jp), {
+          onError: () => handleSpeakError({ automatic: true }),
+        }),
       300
     );
     return () => clearTimeout(t);
@@ -90,7 +93,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     const audioEnabled = prefs.audioEnabled !== false;
     const speakOnFlip = prefs.speakOnFlip === true;
     if (!audioEnabled || !flipped || !currentCard || !canSpeak() || !speakOnFlip) return;
-    speakJP(stripFuri(currentCard.jp), { onError: handleSpeakError });
+    speakJP(stripFuri(currentCard.jp), { onError: () => handleSpeakError({ automatic: true }) });
   }, [flipped]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Skip card without rating — advance to next without SRS review.

@@ -467,8 +467,18 @@ input {
   /* item 9: amber alone is 2.11:1 on the light bg, well under the 3:1 WCAG 1.4.11 floor for
      a non-text indicator. textBright is ~19:1 in both themes regardless of what's behind the
      focused element, so a ring in it reads reliably outside the amber outline (5px = past the
-     2px offset + 3px width) without needing to match any specific local background. */
-  box-shadow: 0 0 0 7px var(--ssw-textBright);
+     2px offset + 3px width) without needing to match any specific local background.
+
+     Two shadows, not one (2026-09-04). A single 7px spread fills 0–7px, and the outline only
+     paints over 2–5px — so the outline's own OFFSET GAP was solid near-black too, and the
+     indicator read as a heavy black frame with an amber line through it rather than as a ring.
+     Obvious on a full-width input (SearchMode autofocuses one on entry, so it was the first
+     thing on screen); subtle enough on a small button to have gone unnoticed. The first shadow
+     paints that gap in the page background instead, leaving textBright as the 2px outer edge it
+     was always meant to be. Same geometry, same contrast, a third of the black. */
+  box-shadow:
+    0 0 0 2px var(--ssw-bg),
+    0 0 0 7px var(--ssw-textBright);
 }
 
 @media (prefers-reduced-motion: reduce) {

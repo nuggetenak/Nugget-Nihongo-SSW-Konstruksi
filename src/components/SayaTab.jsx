@@ -388,9 +388,9 @@ export default function SayaTab() {
       </Section>
 
       <Section title="SRS">
-        <Row label="Matang" value={mature} sub="Interval ≥ 21 hari" />
-        <Row label="Muda" value={young} sub="Interval < 21 hari" />
-        <Row label="Baru" value={newCards} sub="Belum pernah diulang" />
+        <Row label="Matang" value={formatCount(mature)} sub="Interval ≥ 21 hari" />
+        <Row label="Muda" value={formatCount(young)} sub="Interval < 21 hari" />
+        <Row label="Baru" value={formatCount(newCards)} sub="Belum pernah diulang" />
         {srs.dueCount > 0 && (
           <Row label="Jatuh tempo hari ini" value={srs.dueCount} sub="Siap diulang sekarang" />
         )}
@@ -595,7 +595,10 @@ export default function SayaTab() {
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
         <Row
           label="ℹ️ Tentang Aplikasi"
-          sub={`${formatCount(total)} kartu · 3 jalur · FSRS SRS · SSW Konstruksi v${__APP_VERSION__}`}
+          // Was "3 jalur". Doboku and Kenchiku were dropped in session 24 --
+          // this app has been single-track (Lifeline) since, and the line sat in
+          // the About row telling every user otherwise.
+          sub={`${formatCount(total)} kartu · Lifeline · FSRS SRS · SSW Konstruksi v${__APP_VERSION__}`}
           onClick={() =>
             toast.show(
               `SSW Konstruksi v${__APP_VERSION__} · ${formatCount(total)} kartu · FSRS · by Nugget Nihongo 🏗️`
@@ -609,7 +612,9 @@ export default function SayaTab() {
         <br />
         by Nugget Nihongo
         <br />
-        土木 · 建築 · ライフライン設備
+        {/* Was 土木 · 建築 · ライフライン設備 -- the first two are the removed
+            tracks. The app's own footer advertised content it doesn't have. */}
+        ライフライン設備
       </div>
     </div>
   );

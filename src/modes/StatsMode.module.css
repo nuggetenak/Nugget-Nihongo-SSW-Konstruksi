@@ -191,3 +191,11 @@
   color: var(--ssw-wrong);
   font-weight: 600;
 }
+
+/* Explains the week chart's colour encoding — see StatsMode.jsx. */
+.chartCaption {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  text-align: center;
+  margin: 6px 0 18px;
+}
