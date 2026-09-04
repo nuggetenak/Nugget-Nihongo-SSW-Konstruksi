@@ -442,7 +442,7 @@ function QuizView({ onBack, onSessionEnd }) {
                       : T.textDim,
                 textAlign: 'left',
                 cursor: selected !== null ? 'default' : 'pointer',
-                fontSize: 14,
+                fontSize: '0.875rem',
                 fontWeight: 700,
                 fontVariantNumeric: 'tabular-nums',
                 transition: 'all 0.15s',
@@ -597,7 +597,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
         placeholder="Ketik jawaban..."
         style={{
           fontFamily: 'inherit',
-          fontSize: 16,
+          fontSize: '1rem',
           padding: 'var(--space-12) var(--space-14)',
           borderRadius: 8,
           background: checked ? (isCorrect ? T.correctBg : T.wrongBg) : T.surface,

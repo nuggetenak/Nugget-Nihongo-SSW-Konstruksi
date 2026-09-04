@@ -119,7 +119,7 @@
 }
 
 .ratingEmoji {
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1;
 }
 
@@ -203,7 +203,7 @@
   padding: var(--space-10) var(--space-12);
   border-radius: var(--r-lg);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
   flex-shrink: 0;
 }
 

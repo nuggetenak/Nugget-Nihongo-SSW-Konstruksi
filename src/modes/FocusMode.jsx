@@ -72,7 +72,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
           >
             🎯 Latihan fokus untuk:
           </div>
-          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 'var(--space-4)' }}>
+          <div style={{ fontSize: '1.125rem', fontWeight: 800, marginBottom: 'var(--space-4)' }}>
             {cat.emoji} {cat.label}
           </div>
           <div
@@ -125,7 +125,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
             gap: 'var(--space-10)',
           }}
         >
-          <span style={{ fontSize: 18 }}>💪</span>
+          <span style={{ fontSize: '1.125rem' }}>💪</span>
           <div>
             <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: T.correct }}>
               {trainedKeys.size} dari {catStats.length} kategori dilatih sesi ini
@@ -153,7 +153,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
         {catStats.map((c) => (
           <button key={c.key} className={S.btnItem} onClick={() => setActiveCat(c.key)}>
             <div className={S.rowSpreadMb}>
-              <span style={{ fontSize: 14 }}>
+              <span style={{ fontSize: '0.875rem' }}>
                 {c.emoji} {c.label}
               </span>
               <span

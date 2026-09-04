@@ -701,7 +701,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             style={{
               ...RED_BTN,
               padding: 'var(--space-6) var(--space-12)',
-              fontSize: 14,
+              fontSize: '0.875rem',
               background: paused
                 ? 'linear-gradient(135deg,#1e3a5f,#2563eb)'
                 : 'linear-gradient(135deg,#7f1d1d,#dc2626)',
@@ -800,7 +800,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 border: `2px solid ${isSelected ? T.amber : T.border}`,
                 color: T.text,
                 fontFamily: 'inherit',
-                fontSize: 14,
+                fontSize: '0.875rem',
                 cursor: 'pointer',
               }}
             >
@@ -921,14 +921,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             gap: 'var(--space-12)',
           }}
         >
-          <div style={{ fontSize: 48 }}>⏸</div>
+          <div style={{ fontSize: '3rem' }}>⏸</div>
           <div style={{ color: '#fff', fontSize: 'var(--fs-jp-back)', fontWeight: 700 }}>
             Dijeda
           </div>
           <div
             style={{
               color: 'rgba(255,255,255,0.65)',
-              fontSize: 14,
+              fontSize: '0.875rem',
               marginBottom: 'var(--space-8)',
             }}
           >

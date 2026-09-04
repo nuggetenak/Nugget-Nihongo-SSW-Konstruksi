@@ -206,7 +206,7 @@ them fell from 283 to 122; among card titles, from 32 to 3.
 
 ### Verification
 
-`npm run validate` clean: format, lint, **727 tests** (up from 652), five audits, build. Every UI
+`npm run validate` clean: format, lint, **728 tests** (up from 652), five audits, build. Every UI
 change screenshotted at 390/820/1440px in both themes, before and after. The typography and layout
 work additionally swept all 24 screens × 3 viewports for horizontal overflow and unreachable nav at
 both Normal and Sangat Besar text size — clean at both.

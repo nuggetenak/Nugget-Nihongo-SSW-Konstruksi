@@ -286,7 +286,7 @@ export default function WaygroundMode({ onSessionEnd }) {
             </div>
             <div
               style={{
-                fontSize: 24,
+                fontSize: '1.5rem',
                 fontWeight: 800,
                 color: overallPct >= 70 ? T.correct : overallPct >= 50 ? T.amber : T.wrong,
               }}

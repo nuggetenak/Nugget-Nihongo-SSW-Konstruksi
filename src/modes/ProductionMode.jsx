@@ -444,7 +444,11 @@ export default function ProductionMode({
             }}
           >
             <span
-              style={{ fontSize: 16, fontWeight: 700, color: answerCorrect ? T.correct : T.wrong }}
+              style={{
+                fontSize: '1rem',
+                fontWeight: 700,
+                color: answerCorrect ? T.correct : T.wrong,
+              }}
             >
               {answerCorrect ? '✓ Benar!' : '✗ Kurang tepat'}
             </span>

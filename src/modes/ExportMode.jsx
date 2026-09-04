@@ -239,8 +239,8 @@ export default function ExportMode() {
                 border: `1px solid ${T.border}`,
               }}
             >
-              <div style={{ fontSize: 14 }}>{s.icon}</div>
-              <div style={{ fontSize: 16, fontWeight: 800, color: T.gold }}>{s.n}</div>
+              <div style={{ fontSize: '0.875rem' }}>{s.icon}</div>
+              <div style={{ fontSize: '1rem', fontWeight: 800, color: T.gold }}>{s.n}</div>
               <div style={{ fontSize: 'var(--fs-nano)', color: T.textDim }}>{s.label}</div>
             </div>
           ))}
@@ -295,7 +295,7 @@ export default function ExportMode() {
           background: T.surface,
           color: T.textMuted,
           cursor: 'pointer',
-          fontSize: 14,
+          fontSize: '0.875rem',
           fontWeight: 600,
           marginBottom: 'var(--space-10)',
         }}
@@ -422,7 +422,7 @@ export default function ExportMode() {
             padding: 'var(--space-14)',
             marginBottom: 'var(--space-20)',
             fontFamily: 'inherit',
-            fontSize: 14,
+            fontSize: '0.875rem',
             fontWeight: 700,
             borderRadius: T.r.md,
             border: `1px dashed ${T.borderLight}`,

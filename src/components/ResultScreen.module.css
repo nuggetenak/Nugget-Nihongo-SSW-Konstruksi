@@ -69,7 +69,7 @@
 }
 
 .heroEmoji {
-  font-size: 60px;
+  font-size: 3.75rem;
   margin-bottom: var(--space-12);
   display: block;
   line-height: 1;
@@ -88,7 +88,7 @@
 
 .heroPct {
   font-family: 'Syne', 'DM Sans', sans-serif;
-  font-size: 64px;
+  font-size: 4rem;
   font-weight: 900;
   margin-bottom: var(--space-4);
   font-variant-numeric: tabular-nums;
