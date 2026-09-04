@@ -46,7 +46,7 @@ export default function QuizShell({
   const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
   const { toast, prefs } = useApp();
   const handleSpeakError = useSpeakErrorHandler();
-  const { getDurationMs } = useSessionTimer();
+  const { getDurationMs, reset: resetSessionTimer } = useSessionTimer();
 
   const q = questions[qIdx];
   const isLast = qIdx === questions.length - 1;
@@ -124,6 +124,12 @@ export default function QuizShell({
     setPhase('playing');
     setTimeLeft(timer);
     resetStreak();
+    // useSessionTimer measures from mount and nothing in the app ever called
+    // its reset(), so a second run through 🔄 Ulang reported its own duration
+    // plus the first run's plus the time spent reading the results screen in
+    // between -- inflating study minutes and the heatmap for anyone who
+    // replays a set, which this button exists to encourage.
+    resetSessionTimer();
   };
 
   useEffect(() => {
