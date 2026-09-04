@@ -139,13 +139,13 @@ function PanelView({ onStartQuiz }) {
             {ANGKA.length} angka WAJIB hafal sebelum ujian
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 6 }}>
+        <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
           <button className={`${S.btnPrimary} ${A.kuisBtn}`} onClick={() => onStartQuiz('pilihan')}>
             🧠 Pilihan
           </button>
           <button
             className={S.btnSecondary}
-            style={{ padding: '8px 12px', fontSize: 'var(--fs-caption)' }}
+            style={{ padding: 'var(--space-8) var(--space-12)', fontSize: 'var(--fs-caption)' }}
             onClick={() => onStartQuiz('ketik')}
           >
             ⌨️ Ketik
@@ -212,8 +212,8 @@ function PanelView({ onStartQuiz }) {
                             color: 'var(--ssw-textDim)',
                             background: 'rgba(0,0,0,0.12)',
                             borderRadius: 6,
-                            padding: '7px 10px',
-                            marginTop: 6,
+                            padding: 'var(--space-8) var(--space-10)',
+                            marginTop: 'var(--space-6)',
                             lineHeight: 1.6,
                             borderLeft: `3px solid ${g.color}50`,
                           }}
@@ -229,8 +229,8 @@ function PanelView({ onStartQuiz }) {
                             color: T.textDim,
                             background: 'rgba(0,0,0,0.15)',
                             borderRadius: 6,
-                            padding: '6px 8px',
-                            marginTop: 6,
+                            padding: 'var(--space-6) var(--space-8)',
+                            marginTop: 'var(--space-6)',
                             lineHeight: 1.5,
                           }}
                         >
@@ -416,7 +416,7 @@ function QuizView({ onBack, onSessionEnd }) {
               disabled={selected !== null}
               style={{
                 fontFamily: 'inherit',
-                padding: '12px 14px',
+                padding: 'var(--space-12) var(--space-14)',
                 borderRadius: T.r.md,
                 background: !showResult
                   ? T.surface
@@ -598,28 +598,34 @@ function TypeQuizView({ onBack, onSessionEnd }) {
         style={{
           fontFamily: 'inherit',
           fontSize: 16,
-          padding: '12px 14px',
+          padding: 'var(--space-12) var(--space-14)',
           borderRadius: 8,
           background: checked ? (isCorrect ? T.correctBg : T.wrongBg) : T.surface,
           border: `1.5px solid ${checked ? (isCorrect ? T.correct : T.wrong) : T.border}`,
           color: T.text,
           width: '100%',
           boxSizing: 'border-box',
-          marginBottom: 8,
+          marginBottom: 'var(--space-8)',
         }}
       />
 
       {checked && (
         <div
           style={{
-            padding: '10px 14px',
+            padding: 'var(--space-10) var(--space-14)',
             borderRadius: 8,
-            marginBottom: 8,
+            marginBottom: 'var(--space-8)',
             background: isCorrect ? T.correctBg : T.wrongBg,
             border: `1px solid ${isCorrect ? T.correctBorder : T.wrongBorder}`,
           }}
         >
-          <div style={{ fontWeight: 700, color: isCorrect ? T.correct : T.wrong, marginBottom: 4 }}>
+          <div
+            style={{
+              fontWeight: 700,
+              color: isCorrect ? T.correct : T.wrong,
+              marginBottom: 'var(--space-4)',
+            }}
+          >
             {isCorrect ? '✓ Benar!' : `✗ Jawaban: ${item.angka}`}
           </div>
           {item.mnemonic && (

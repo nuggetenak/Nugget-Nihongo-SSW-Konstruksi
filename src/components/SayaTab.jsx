@@ -224,7 +224,7 @@ export default function SayaTab() {
         <Section title={`🗓️ Soal Hari Ini · ${today}`}>
           <div
             style={{
-              padding: '12px 14px',
+              padding: 'var(--space-12) var(--space-14)',
               background: 'var(--ssw-surface)',
               borderRadius: 12,
               border: '1px solid var(--ssw-border)',
@@ -237,7 +237,7 @@ export default function SayaTab() {
                     fontSize: 'var(--fs-body)',
                     color: dcAnswered.correct ? 'var(--ssw-correct)' : 'var(--ssw-wrong)',
                     fontWeight: 700,
-                    marginBottom: 6,
+                    marginBottom: 'var(--space-6)',
                   }}
                 >
                   {dcAnswered.correct ? '✅ Benar!' : '❌ Salah'}
@@ -259,7 +259,7 @@ export default function SayaTab() {
                         style={{
                           fontSize: 'var(--fs-small)',
                           color: 'var(--ssw-textDim)',
-                          marginTop: 6,
+                          marginTop: 'var(--space-6)',
                           lineHeight: 1.5,
                         }}
                       >
@@ -275,7 +275,7 @@ export default function SayaTab() {
                   style={{
                     fontSize: 'var(--fs-body)',
                     fontWeight: 600,
-                    marginBottom: 10,
+                    marginBottom: 'var(--space-10)',
                     lineHeight: 1.5,
                     color: 'var(--ssw-text)',
                   }}
@@ -287,7 +287,7 @@ export default function SayaTab() {
                     style={{
                       fontSize: 'var(--fs-small)',
                       color: 'var(--ssw-textDim)',
-                      marginBottom: 10,
+                      marginBottom: 'var(--space-10)',
                     }}
                   >
                     {renderJPWithRuby(
@@ -296,7 +296,7 @@ export default function SayaTab() {
                     )}
                   </div>
                 )}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
                   {dailyChallengeQ.options.map((opt, i) => (
                     <button
                       key={i}
@@ -310,7 +310,7 @@ export default function SayaTab() {
                       }}
                       disabled={dcAnswered !== null}
                       style={{
-                        padding: '8px 12px',
+                        padding: 'var(--space-8) var(--space-12)',
                         fontSize: 'var(--fs-caption)',
                         fontFamily: 'inherit',
                         borderRadius: 8,
@@ -356,8 +356,8 @@ export default function SayaTab() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: 4,
-                padding: '10px 4px',
+                gap: 'var(--space-4)',
+                padding: 'var(--space-10) var(--space-4)',
                 borderRadius: 10,
                 border: `1px solid ${a.unlocked ? 'var(--ssw-borderLight)' : 'var(--ssw-border)'}`,
                 background: a.unlocked ? 'var(--ssw-surfaceHover)' : 'var(--ssw-surface)',

@@ -439,7 +439,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           ))}
         </div>
         <div className={S.sectionLabel}>Sumber Soal</div>
-        <div className={`${S.list} ${SM.presetList}`} style={{ marginBottom: 20 }}>
+        <div className={`${S.list} ${SM.presetList}`} style={{ marginBottom: 'var(--space-20)' }}>
           {MODES.map((m) => (
             <button
               key={m.key}
@@ -448,7 +448,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 12,
+                gap: 'var(--space-12)',
                 background: mode === m.key ? 'rgba(239,68,68,0.10)' : T.surface,
                 border: `1px solid ${mode === m.key ? 'rgba(239,68,68,0.4)' : T.border}`,
                 color: mode === m.key ? '#ef4444' : T.text,
@@ -477,7 +477,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 12,
+                gap: 'var(--space-12)',
                 background: preset === p.key ? 'rgba(239,68,68,0.10)' : T.surface,
                 border: `1px solid ${preset === p.key ? 'rgba(239,68,68,0.4)' : T.border}`,
                 color: preset === p.key ? '#ef4444' : T.text,
@@ -500,7 +500,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           style={{
             ...RED_BTN,
             width: '100%',
-            padding: '14px',
+            padding: 'var(--space-14)',
             fontSize: 'var(--fs-subtitle)',
             boxShadow: '0 4px 16px rgba(220,38,38,0.3)',
           }}
@@ -558,7 +558,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           </div>
         </div>
         <div className={`${S.row} ${SM.resultActions}`}>
-          <button style={{ ...RED_BTN, flex: 1, padding: '12px' }} onClick={handleStart}>
+          <button style={{ ...RED_BTN, flex: 1, padding: 'var(--space-12)' }} onClick={handleStart}>
             🔄 Ulang
           </button>
           {wrongList.length > 0 && onRetryWrong && (
@@ -566,7 +566,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               style={{
                 ...RED_BTN,
                 flex: 1,
-                padding: '12px',
+                padding: 'var(--space-12)',
                 background: 'linear-gradient(135deg,#1e3a5f,#2563eb)',
               }}
               onClick={() => onRetryWrong(wrongList.map((_, i) => i))}
@@ -595,7 +595,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             return (
               <>
                 <div className={S.sectionLabel}>Breakdown per Set</div>
-                <div className={S.list} style={{ gap: 6 }}>
+                <div className={S.list} style={{ gap: 'var(--space-6)' }}>
                   {entries.map(([label, stat]) => {
                     const pct = Math.round((stat.correct / stat.total) * 100);
                     const color = pct >= 75 ? T.correct : pct >= 50 ? T.gold : T.wrong;
@@ -606,7 +606,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
-                          padding: '8px 12px',
+                          padding: 'var(--space-8) var(--space-12)',
                           background: T.surface,
                           borderRadius: T.r.md,
                           border: `1px solid ${T.border}`,
@@ -694,13 +694,13 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={handleExitClick}>
           ✕ Keluar
         </button>
-        <div className={S.row} style={{ gap: 10 }}>
+        <div className={S.row} style={{ gap: 'var(--space-10)' }}>
           {/* Pause button */}
           <button
             onClick={() => setPaused((p) => !p)}
             style={{
               ...RED_BTN,
-              padding: '6px 12px',
+              padding: 'var(--space-6) var(--space-12)',
               fontSize: 14,
               background: paused
                 ? 'linear-gradient(135deg,#1e3a5f,#2563eb)'
@@ -735,7 +735,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     style={{
                       fontSize: 'var(--fs-nano)',
                       color: isUrgent ? T.wrong : T.textDim,
-                      marginTop: 2,
+                      marginTop: 'var(--space-2)',
                       letterSpacing: 0.2,
                     }}
                   >
@@ -791,9 +791,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 10,
+                gap: 'var(--space-10)',
                 width: '100%',
-                padding: '13px 16px',
+                padding: 'var(--space-14) var(--space-16)',
                 textAlign: 'left',
                 borderRadius: 12,
                 background: isSelected ? T.surfaceActive : T.surface,
@@ -834,9 +834,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: 6,
-          marginTop: 16,
-          padding: '10px',
+          gap: 'var(--space-6)',
+          marginTop: 'var(--space-16)',
+          padding: 'var(--space-10)',
           background: T.surface,
           border: `1px solid ${T.border}`,
           borderRadius: 12,
@@ -872,7 +872,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       {/* Prev / Next / Submit — replaces the old single auto-advancing
           "Lanjut" button. Submit is always available (a real exam lets
           you turn in early), Prev/Next just move the viewed question. */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+      <div style={{ display: 'flex', gap: 'var(--space-8)', marginTop: 'var(--space-12)' }}>
         <button
           className={S.btnSecondary}
           style={{ flex: 1 }}
@@ -892,7 +892,12 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         )}
       </div>
       <button
-        style={{ ...RED_BTN, width: '100%', marginTop: 8, padding: '13px' }}
+        style={{
+          ...RED_BTN,
+          width: '100%',
+          marginTop: 'var(--space-8)',
+          padding: 'var(--space-14)',
+        }}
         onClick={handleSubmitClick}
       >
         Kumpulkan Ujian
@@ -913,20 +918,30 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            gap: 12,
+            gap: 'var(--space-12)',
           }}
         >
           <div style={{ fontSize: 48 }}>⏸</div>
           <div style={{ color: '#fff', fontSize: 'var(--fs-jp-back)', fontWeight: 700 }}>
             Dijeda
           </div>
-          <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, marginBottom: 8 }}>
+          <div
+            style={{
+              color: 'rgba(255,255,255,0.65)',
+              fontSize: 14,
+              marginBottom: 'var(--space-8)',
+            }}
+          >
             {answeredCount}/{questions.length} soal terjawab · waktu ikut berhenti
           </div>
           <button
             type="button"
             onClick={() => setPaused(false)}
-            style={{ ...RED_BTN, padding: '13px 32px', fontSize: 'var(--fs-subtitle)' }}
+            style={{
+              ...RED_BTN,
+              padding: 'var(--space-14) var(--space-32)',
+              fontSize: 'var(--fs-subtitle)',
+            }}
           >
             ▶ Lanjutkan
           </button>
@@ -940,8 +955,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               fontSize: 'var(--fs-body)',
               fontFamily: 'inherit',
               cursor: 'pointer',
-              padding: 8,
-              marginTop: 4,
+              padding: 'var(--space-8)',
+              marginTop: 'var(--space-4)',
             }}
           >
             ✕ Keluar dari simulasi

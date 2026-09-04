@@ -90,8 +90,8 @@ export default function StatsMode({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: 10,
-            paddingBottom: 20,
+            gap: 'var(--space-10)',
+            paddingBottom: 'var(--space-20)',
           }}
         >
           <div
@@ -101,7 +101,7 @@ export default function StatsMode({
               letterSpacing: 1,
               color: T.textDim,
               textTransform: 'uppercase',
-              marginBottom: 4,
+              marginBottom: 'var(--space-4)',
             }}
           >
             Kesiapan Ujian
@@ -143,7 +143,12 @@ export default function StatsMode({
             />
           </div>
           <div
-            style={{ fontSize: 'var(--fs-body)', color: ringColor, fontWeight: 700, marginTop: 2 }}
+            style={{
+              fontSize: 'var(--fs-body)',
+              color: ringColor,
+              fontWeight: 700,
+              marginTop: 'var(--space-2)',
+            }}
           >
             {readinessLabel}
           </div>
@@ -160,7 +165,7 @@ export default function StatsMode({
             style={{
               display: 'flex',
               justifyContent: 'space-around',
-              marginTop: 14,
+              marginTop: 'var(--space-14)',
               fontSize: 'var(--fs-caption)',
             }}
           >
@@ -337,11 +342,11 @@ export default function StatsMode({
               background: T.surface,
               border: `1px solid ${T.border}`,
               borderRadius: 10,
-              padding: '10px 14px',
-              marginBottom: 16,
+              padding: 'var(--space-10) var(--space-14)',
+              marginBottom: 'var(--space-16)',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr 1fr',
-              gap: 8,
+              gap: 'var(--space-8)',
               textAlign: 'center',
             }}
           >
@@ -386,7 +391,7 @@ export default function StatsMode({
             <div className={ST.catBody}>
               <div className={`${S.rowSpread} ${ST.catRow}`}>
                 <span>{c.label}</span>
-                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 'var(--space-8)', alignItems: 'center' }}>
                   {/* Quiz accuracy badge */}
                   {c.quizAcc !== null && (
                     <span
@@ -397,7 +402,7 @@ export default function StatsMode({
                         background: T.surface,
                         border: `1px solid ${T.border}`,
                         borderRadius: 4,
-                        padding: '1px 5px',
+                        padding: '1px var(--space-6)',
                       }}
                     >
                       🎯 {c.quizAcc}%
@@ -415,7 +420,13 @@ export default function StatsMode({
               />
               {/* Wrong answer count if any */}
               {c.catWrongCount > 0 && (
-                <div style={{ fontSize: 'var(--fs-micro)', color: T.wrong, marginTop: 2 }}>
+                <div
+                  style={{
+                    fontSize: 'var(--fs-micro)',
+                    color: T.wrong,
+                    marginTop: 'var(--space-2)',
+                  }}
+                >
                   {c.catWrongCount}× salah dalam kuis
                 </div>
               )}
@@ -440,7 +451,7 @@ export default function StatsMode({
       {wrongEntries.length > 0 && (
         <>
           <div className={S.sectionLabel}>Sering Salah</div>
-          <div className={`${S.list}`} style={{ gap: 4 }}>
+          <div className={`${S.list}`} style={{ gap: 'var(--space-4)' }}>
             {wrongEntries.map((e) => {
               const card = CARDS.find((c) => c.id === e.id);
               if (!card) return null;

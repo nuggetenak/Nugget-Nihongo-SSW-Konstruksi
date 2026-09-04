@@ -53,7 +53,7 @@ export default function StudyHeatmap({ sessions = [] }) {
   }
 
   return (
-    <div style={{ overflowX: 'auto', paddingBottom: 4 }}>
+    <div style={{ overflowX: 'auto', paddingBottom: 'var(--space-4)' }}>
       <svg width={svgW} height={svgH} style={{ display: 'block' }}>
         {/* Day labels */}
         {DAY_LABELS.map((label, row) =>
@@ -94,9 +94,9 @@ export default function StudyHeatmap({ sessions = [] }) {
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          gap: 4,
+          gap: 'var(--space-4)',
           alignItems: 'center',
-          marginTop: 4,
+          marginTop: 'var(--space-4)',
           fontSize: 'var(--fs-nano)',
           color: T.textDim,
         }}

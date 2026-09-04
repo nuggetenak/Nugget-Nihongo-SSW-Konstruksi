@@ -156,7 +156,7 @@ export default function QuizMode({
 
     const pillStyle = (on) => ({
       fontFamily: 'inherit',
-      padding: '7px 16px',
+      padding: 'var(--space-8) var(--space-16)',
       fontSize: 'var(--fs-body)',
       borderRadius: T.r.pill,
       cursor: 'pointer',
@@ -167,13 +167,13 @@ export default function QuizMode({
     });
 
     return (
-      <div className={S.pageFade} style={{ padding: '24px 16px' }}>
-        <div className={S.rowSpread} style={{ marginBottom: 16 }}>
+      <div className={S.pageFade} style={{ padding: 'var(--space-24) var(--space-16)' }}>
+        <div className={S.rowSpread} style={{ marginBottom: 'var(--space-16)' }}>
           <button
             style={{
               fontFamily: 'inherit',
               fontSize: 'var(--fs-caption)',
-              padding: '5px 12px',
+              padding: 'var(--space-6) var(--space-12)',
               borderRadius: T.r.pill,
               border: `1px solid ${showSettings ? T.borderActive : T.border}`,
               background: showSettings ? T.surfaceActive : T.surface,
@@ -192,18 +192,31 @@ export default function QuizMode({
               background: T.surfaceActive,
               border: `1.5px solid ${T.borderActive}`,
               borderRadius: T.r.md,
-              padding: '14px 16px',
-              marginBottom: 16,
+              padding: 'var(--space-14) var(--space-16)',
+              marginBottom: 'var(--space-16)',
             }}
           >
-            <div style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 4 }}>
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 700,
+                color: T.text,
+                marginBottom: 'var(--space-4)',
+              }}
+            >
               Lanjutkan kuis sebelumnya?
             </div>
-            <div style={{ fontSize: 'var(--fs-caption)', color: T.textMuted, marginBottom: 10 }}>
+            <div
+              style={{
+                fontSize: 'var(--fs-caption)',
+                color: T.textMuted,
+                marginBottom: 'var(--space-10)',
+              }}
+            >
               Soal {resumeData.progress.qIdx + 1} dari {resumeData.questions.length}, terjawab{' '}
               {resumeData.progress.results.length}.
             </div>
-            <div style={{ display: 'flex', gap: 8 }}>
+            <div style={{ display: 'flex', gap: 'var(--space-8)' }}>
               <button
                 style={{
                   ...pillStyle(true),
@@ -233,7 +246,14 @@ export default function QuizMode({
         </p>
 
         <div className={S.sectionLabel}>Jumlah Soal</div>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 'var(--space-8)',
+            marginBottom: 'var(--space-20)',
+            flexWrap: 'wrap',
+          }}
+        >
           {[...QUIZ_COUNTS, catFilteredCards.length].map((n, i) => {
             const label = i === QUIZ_COUNTS.length ? 'Semua' : String(n);
             return (
@@ -256,7 +276,7 @@ export default function QuizMode({
         </div>
 
         <div className={S.sectionLabel}>Tingkat Kesulitan</div>
-        <div className={S.list} style={{ marginBottom: 20 }}>
+        <div className={S.list} style={{ marginBottom: 'var(--space-20)' }}>
           {DIFF.map((d) => (
             <div key={d.key}>
               <button
@@ -279,7 +299,7 @@ export default function QuizMode({
                   style={{
                     fontSize: 'var(--fs-small)',
                     color: d.color,
-                    padding: '4px 12px 8px',
+                    padding: 'var(--space-4) var(--space-12) var(--space-8)',
                     lineHeight: 1.5,
                   }}
                 >
@@ -291,9 +311,12 @@ export default function QuizMode({
         </div>
 
         {showSettings && (
-          <div className={S.card} style={{ marginBottom: 20, animation: 'fadeIn 0.15s ease' }}>
+          <div
+            className={S.card}
+            style={{ marginBottom: 'var(--space-20)', animation: 'fadeIn 0.15s ease' }}
+          >
             {lemahCards.length > 0 && (
-              <div className={S.rowSpread} style={{ marginBottom: 12 }}>
+              <div className={S.rowSpread} style={{ marginBottom: 'var(--space-12)' }}>
                 <div>
                   <div style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: T.text }}>
                     Mode Lemah
@@ -306,7 +329,7 @@ export default function QuizMode({
                   onClick={() => setLemahMode((l) => !l)}
                   style={{
                     fontFamily: 'inherit',
-                    padding: '6px 14px',
+                    padding: 'var(--space-6) var(--space-14)',
                     borderRadius: T.r.pill,
                     border: `1px solid ${lemahMode ? T.wrongBorder : T.border}`,
                     background: lemahMode ? T.wrongBg : T.surface,
@@ -326,12 +349,12 @@ export default function QuizMode({
                   fontSize: 'var(--fs-body)',
                   fontWeight: 600,
                   color: T.text,
-                  marginBottom: 8,
+                  marginBottom: 'var(--space-8)',
                 }}
               >
                 Lanjut otomatis
               </div>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
                 {DELAYS.map((d) => (
                   <button
                     key={d.v}
@@ -345,18 +368,18 @@ export default function QuizMode({
             </div>
             {/* Category filter */}
             {availableCats.length > 1 && (
-              <div style={{ marginTop: 12 }}>
+              <div style={{ marginTop: 'var(--space-12)' }}>
                 <div
                   style={{
                     fontSize: 'var(--fs-body)',
                     fontWeight: 600,
                     color: T.text,
-                    marginBottom: 8,
+                    marginBottom: 'var(--space-8)',
                   }}
                 >
                   Filter Kategori
                 </div>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
                   {availableCats.map((key) => {
                     const meta =
                       key === 'all'
@@ -380,7 +403,7 @@ export default function QuizMode({
 
         <button
           className={S.btnPrimary}
-          style={{ fontSize: 'var(--fs-subtitle)', padding: '15px' }}
+          style={{ fontSize: 'var(--fs-subtitle)', padding: 'var(--space-16)' }}
           onClick={startQuiz}
         >
           Mulai Kuis 🚀

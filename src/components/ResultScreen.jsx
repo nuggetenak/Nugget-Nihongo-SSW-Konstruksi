@@ -81,7 +81,7 @@ export default function ResultScreen({
           itu?
           <button
             className={s.btnWrong}
-            style={{ marginTop: 8 }}
+            style={{ marginTop: 'var(--space-8)' }}
             onClick={() => onDrillCategory(weakCategory.key)}
           >
             Latih {weakCategory.label}

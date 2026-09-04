@@ -268,8 +268,8 @@ export default function QuizShell({
               background: 'rgba(234,179,8,0.12)',
               border: '1px solid rgba(234,179,8,0.4)',
               borderRadius: 8,
-              padding: '6px 12px',
-              marginBottom: 8,
+              padding: 'var(--space-6) var(--space-12)',
+              marginBottom: 'var(--space-8)',
               fontSize: 'var(--fs-caption)',
               color: '#ca8a04',
             }}

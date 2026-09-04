@@ -27,15 +27,22 @@ import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 export function ModeLoader({ shape = 'card' }) {
   return (
     <div role="status" aria-label="Memuat mode..." aria-live="polite">
-      <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--space-10)',
+          marginBottom: 'var(--space-16)',
+          alignItems: 'center',
+        }}
+      >
         <Skeleton width="80px" height={16} />
         <Skeleton width="60px" height={16} style={{ marginLeft: 'auto' }} />
       </div>
-      <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
+      <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 'var(--space-24)' }} />
       {shape === 'quiz' && (
         <>
-          <Skeleton width="90%" height={20} style={{ marginBottom: 20 }} />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Skeleton width="90%" height={20} style={{ marginBottom: 'var(--space-20)' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-10)' }}>
             <Skeleton.QuizOption />
             <Skeleton.QuizOption />
             <Skeleton.QuizOption />
@@ -44,7 +51,7 @@ export function ModeLoader({ shape = 'card' }) {
         </>
       )}
       {shape === 'list' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-12)' }}>
           <Skeleton.Row />
           <Skeleton.Row />
           <Skeleton.Row />
@@ -52,7 +59,9 @@ export function ModeLoader({ shape = 'card' }) {
         </div>
       )}
       {shape === 'stat' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <div
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-12)' }}
+        >
           <Skeleton.Stat />
           <Skeleton.Stat />
           <Skeleton.Stat />

@@ -161,8 +161,8 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     const pb = personalBest;
     return (
       <div className={S.page}>
-        <div style={{ textAlign: 'center', marginBottom: 20 }}>
-          <div style={{ fontSize: 48, marginBottom: 8 }}>⚡</div>
+        <div style={{ textAlign: 'center', marginBottom: 'var(--space-20)' }}>
+          <div style={{ fontSize: 48, marginBottom: 'var(--space-8)' }}>⚡</div>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
           {pb > 0 && (
             <div
@@ -170,7 +170,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
                 fontSize: 'var(--fs-caption)',
                 color: T.gold,
                 fontWeight: 700,
-                marginBottom: 8,
+                marginBottom: 'var(--space-8)',
               }}
             >
               🏆 Rekor: {pb} benar
@@ -180,7 +180,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
 
         {/* Duration picker */}
         <div className={S.sectionLabel}>Durasi</div>
-        <div className={S.row} style={{ gap: 8, marginBottom: 16 }}>
+        <div className={S.row} style={{ gap: 'var(--space-8)', marginBottom: 'var(--space-16)' }}>
           {DURATIONS.map((d) => (
             <button
               key={d.key}
@@ -192,7 +192,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
               }}
               style={{
                 flex: 1,
-                padding: '10px 6px',
+                padding: 'var(--space-10) var(--space-6)',
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
@@ -212,7 +212,10 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
         {availableCats.length > 1 && (
           <>
             <div className={S.sectionLabel}>Kategori</div>
-            <div className={S.list} style={{ maxHeight: 200, overflowY: 'auto', marginBottom: 16 }}>
+            <div
+              className={S.list}
+              style={{ maxHeight: 200, overflowY: 'auto', marginBottom: 'var(--space-16)' }}
+            >
               {availableCats.map((c) => (
                 <button
                   key={c.key}
@@ -221,7 +224,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 10,
+                    gap: 'var(--space-10)',
                     background: selectedCat === c.key ? 'rgba(245,158,11,0.10)' : T.surface,
                     border: `1px solid ${selectedCat === c.key ? `${T.amber}66` : T.border}`,
                     color: selectedCat === c.key ? T.amber : T.text,
@@ -244,7 +247,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
 
         <button
           className={S.btnPrimary}
-          style={{ width: '100%', padding: '14px', fontSize: 'var(--fs-subtitle)' }}
+          style={{ width: '100%', padding: 'var(--space-14)', fontSize: 'var(--fs-subtitle)' }}
           onClick={startSprint}
         >
           Mulai ⚡
@@ -264,41 +267,66 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     return (
       <div className={S.page} style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: 48, marginBottom: 12 }}>⚡</div>
+        <div style={{ fontSize: 48, marginBottom: 'var(--space-12)' }}>⚡</div>
         {newBest && (
           <div
-            style={{ fontSize: 'var(--fs-body)', color: T.gold, fontWeight: 800, marginBottom: 8 }}
+            style={{
+              fontSize: 'var(--fs-body)',
+              color: T.gold,
+              fontWeight: 800,
+              marginBottom: 'var(--space-8)',
+            }}
           >
             🏆 Rekor baru!
           </div>
         )}
-        <div style={{ fontSize: 36, fontWeight: 800, color: T.gold, marginBottom: 2 }}>
+        <div
+          style={{ fontSize: 36, fontWeight: 800, color: T.gold, marginBottom: 'var(--space-2)' }}
+        >
           {correct}
         </div>
-        <div style={{ fontSize: 'var(--fs-caption)', color: T.textMuted, marginBottom: 4 }}>
+        <div
+          style={{
+            fontSize: 'var(--fs-caption)',
+            color: T.textMuted,
+            marginBottom: 'var(--space-4)',
+          }}
+        >
           benar dari {total} kartu · {pct}%
         </div>
         {!newBest && personalBest > 0 && (
-          <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginBottom: 16 }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-small)',
+              color: T.textDim,
+              marginBottom: 'var(--space-16)',
+            }}
+          >
             🏆 Rekor: {personalBest}
           </div>
         )}
         {newBest && (
-          <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginBottom: 16 }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-small)',
+              color: T.textDim,
+              marginBottom: 'var(--space-16)',
+            }}
+          >
             Rekor sebelumnya terlampaui!
           </div>
         )}
-        <div className={S.row} style={{ gap: 8 }}>
+        <div className={S.row} style={{ gap: 'var(--space-8)' }}>
           <button
             className={S.btnPrimary}
-            style={{ fontSize: 'var(--fs-body)', padding: '12px' }}
+            style={{ fontSize: 'var(--fs-body)', padding: 'var(--space-12)' }}
             onClick={startSprint}
           >
             🔄 Ulang
           </button>
           <button
             className={S.btnSecondary}
-            style={{ flex: 1, padding: '12px', borderRadius: T.r.md }}
+            style={{ flex: 1, padding: 'var(--space-12)', borderRadius: T.r.md }}
             onClick={onExit}
           >
             ← Kembali
@@ -320,14 +348,14 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
 
   return (
     <div className={`${S.page} ${S.pageTight}`}>
-      <div className={S.row} style={{ marginBottom: 10 }}>
+      <div className={S.row} style={{ marginBottom: 'var(--space-10)' }}>
         <span
           style={{
             fontSize: 'var(--fs-jp-back)',
             fontWeight: 800,
             color: timerColor,
             animation: isUrgent ? 'pulse 0.8s ease infinite' : 'none',
-            marginLeft: 16,
+            marginLeft: 'var(--space-16)',
           }}
         >
           ⏱ {timeLeft}s
@@ -341,7 +369,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
               style={{
                 fontSize: 'var(--fs-small)',
                 color: correct > ghostScore ? T.correct : T.textDim,
-                marginTop: 2,
+                marginTop: 'var(--space-2)',
               }}
             >
               👻 {ghostScore}{' '}
@@ -358,7 +386,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
       <div
         className={S.cardLg}
         style={{
-          marginTop: 20,
+          marginTop: 'var(--space-20)',
           minHeight: 180,
           display: 'flex',
           flexDirection: 'column',
@@ -370,7 +398,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           <div
             style={{
               textAlign: 'center',
-              marginTop: 12,
+              marginTop: 'var(--space-12)',
               fontSize: 14,
               color: T.gold,
               fontWeight: 600,
@@ -381,11 +409,11 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
         )}
       </div>
       {!showAnswer && (
-        <div className={S.row} style={{ marginTop: 16 }}>
+        <div className={S.row} style={{ marginTop: 'var(--space-16)' }}>
           <button
             style={{
               flex: 1,
-              padding: '14px',
+              padding: 'var(--space-14)',
               fontSize: 14,
               fontWeight: 600,
               fontFamily: 'inherit',
@@ -402,7 +430,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           <button
             style={{
               flex: 1,
-              padding: '14px',
+              padding: 'var(--space-14)',
               fontSize: 14,
               fontWeight: 600,
               fontFamily: 'inherit',

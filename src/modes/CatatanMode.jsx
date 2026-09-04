@@ -33,16 +33,16 @@ function NoteCard({ card, note, onSave }) {
   return (
     <div
       style={{
-        padding: '14px 16px',
+        padding: 'var(--space-14) var(--space-16)',
         background: 'var(--ssw-surface)',
         borderRadius: 12,
         border: `1px solid ${note ? 'var(--ssw-borderLight)' : 'var(--ssw-border)'}`,
-        marginBottom: 10,
+        marginBottom: 'var(--space-10)',
       }}
     >
-      <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', gap: 'var(--space-10)', alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ marginBottom: 2 }}>
+          <div style={{ marginBottom: 'var(--space-2)' }}>
             <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} compact />
           </div>
           <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)' }}>
@@ -59,7 +59,7 @@ function NoteCard({ card, note, onSave }) {
             border: 'none',
             cursor: 'pointer',
             fontSize: 18,
-            padding: '4px',
+            padding: 'var(--space-4)',
             color: note ? 'var(--ssw-amber)' : 'var(--ssw-textFaint)',
           }}
           aria-label={editing ? 'Tutup catatan' : 'Edit catatan'}
@@ -71,8 +71,8 @@ function NoteCard({ card, note, onSave }) {
       {note && !editing && (
         <div
           style={{
-            marginTop: 10,
-            padding: '10px 12px',
+            marginTop: 'var(--space-10)',
+            padding: 'var(--space-10) var(--space-12)',
             background: 'rgba(245,158,11,0.08)',
             borderRadius: 8,
             fontSize: 'var(--fs-body)',
@@ -86,7 +86,7 @@ function NoteCard({ card, note, onSave }) {
       )}
 
       {editing && (
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 'var(--space-10)' }}>
           <textarea
             aria-label="Catatan pribadi"
             value={draft}
@@ -96,7 +96,7 @@ function NoteCard({ card, note, onSave }) {
             rows={3}
             style={{
               width: '100%',
-              padding: '10px 12px',
+              padding: 'var(--space-10) var(--space-12)',
               background: 'var(--ssw-inputBg)',
               border: '2px solid var(--ssw-borderLight)',
               borderRadius: 8,
@@ -108,12 +108,12 @@ function NoteCard({ card, note, onSave }) {
               boxSizing: 'border-box',
             }}
           />
-          <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+          <div style={{ display: 'flex', gap: 'var(--space-8)', marginTop: 'var(--space-8)' }}>
             <button
               onClick={handleSave}
               style={{
                 flex: 1,
-                padding: '9px',
+                padding: 'var(--space-10)',
                 borderRadius: 8,
                 background: 'var(--ssw-amber)',
                 color: 'var(--ssw-onAmber)',
@@ -130,7 +130,7 @@ function NoteCard({ card, note, onSave }) {
               <button
                 onClick={handleDelete}
                 style={{
-                  padding: '9px 16px',
+                  padding: 'var(--space-10) var(--space-16)',
                   borderRadius: 8,
                   background: 'var(--ssw-wrongBg)',
                   color: 'var(--ssw-wrong)',
@@ -147,7 +147,7 @@ function NoteCard({ card, note, onSave }) {
             <button
               onClick={() => setEditing(false)}
               style={{
-                padding: '9px 16px',
+                padding: 'var(--space-10) var(--space-16)',
                 borderRadius: 8,
                 background: 'var(--ssw-surface)',
                 color: 'var(--ssw-textMuted)',
@@ -231,7 +231,7 @@ export default function CatatanMode({ cards }) {
 
   return (
     <div className={S.pageScroll}>
-      <div style={{ marginBottom: 16 }}>
+      <div style={{ marginBottom: 'var(--space-16)' }}>
         {/* No title here — ModeHeader renders "Buku Catatan" as the page <h1>.
             This one was written as a plain styled div rather than .pageTitle,
             which is why the sweep that removed the other 16 duplicates missed
@@ -250,7 +250,7 @@ export default function CatatanMode({ cards }) {
         placeholder="Cari kartu atau catatan..."
         style={{
           width: '100%',
-          padding: '10px 14px',
+          padding: 'var(--space-10) var(--space-14)',
           background: 'var(--ssw-inputBg)',
           border: '2px solid var(--ssw-border)',
           borderRadius: 10,
@@ -258,18 +258,25 @@ export default function CatatanMode({ cards }) {
           color: 'var(--ssw-text)',
           fontFamily: 'inherit',
           boxSizing: 'border-box',
-          marginBottom: 12,
+          marginBottom: 'var(--space-12)',
         }}
       />
 
       {/* Filter pills */}
-      <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--space-6)',
+          marginBottom: 'var(--space-16)',
+          flexWrap: 'wrap',
+        }}
+      >
         {filters.map((f) => (
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
             style={{
-              padding: '6px 14px',
+              padding: 'var(--space-6) var(--space-14)',
               borderRadius: 99,
               fontFamily: 'inherit',
               fontSize: 'var(--fs-caption)',
@@ -303,7 +310,7 @@ export default function CatatanMode({ cards }) {
               textAlign: 'center',
               fontSize: 'var(--fs-caption)',
               color: 'var(--ssw-textDim)',
-              paddingTop: 8,
+              paddingTop: 'var(--space-8)',
             }}
           >
             Menampilkan {visible.length} dari {formatCount(filtered.length)} kartu

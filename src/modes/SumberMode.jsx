@@ -39,7 +39,7 @@ export default function SumberMode({ onNavigate }) {
         </p>
         {/* Quick-launch actions per source */}
         {onNavigate && (
-          <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
+          <div style={{ display: 'flex', gap: 'var(--space-8)', marginBottom: 'var(--space-14)' }}>
             <button
               onClick={() => onNavigate('kartu', { filterIds: srcIds })}
               style={{
@@ -47,7 +47,7 @@ export default function SumberMode({ onNavigate }) {
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
-                padding: '9px 10px',
+                padding: 'var(--space-10) var(--space-10)',
                 borderRadius: T.r.md,
                 border: `1px solid ${color}40`,
                 background: `${color}12`,
@@ -64,7 +64,7 @@ export default function SumberMode({ onNavigate }) {
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
-                padding: '9px 10px',
+                padding: 'var(--space-10) var(--space-10)',
                 borderRadius: T.r.md,
                 border: `1px solid ${color}40`,
                 background: `${color}12`,
@@ -81,7 +81,7 @@ export default function SumberMode({ onNavigate }) {
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
-                padding: '9px 10px',
+                padding: 'var(--space-10) var(--space-10)',
                 borderRadius: T.r.md,
                 border: `1px solid ${color}40`,
                 background: `${color}12`,
@@ -98,7 +98,7 @@ export default function SumberMode({ onNavigate }) {
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
-                padding: '9px 10px',
+                padding: 'var(--space-10) var(--space-10)',
                 borderRadius: T.r.md,
                 border: `1px solid ${color}40`,
                 background: `${color}12`,
@@ -115,7 +115,7 @@ export default function SumberMode({ onNavigate }) {
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
-                padding: '9px 10px',
+                padding: 'var(--space-10) var(--space-10)',
                 borderRadius: T.r.md,
                 border: `1px solid ${color}40`,
                 background: `${color}12`,
@@ -127,7 +127,7 @@ export default function SumberMode({ onNavigate }) {
             </button>
           </div>
         )}
-        <div className={S.list} style={{ gap: 6 }}>
+        <div className={S.list} style={{ gap: 'var(--space-6)' }}>
           {srcCards.map((c) => (
             <button
               type="button"
@@ -139,7 +139,7 @@ export default function SumberMode({ onNavigate }) {
                 margin: 0,
                 font: 'inherit',
                 textAlign: 'left',
-                padding: '10px 12px',
+                padding: 'var(--space-10) var(--space-12)',
                 borderRadius: T.r.md,
                 cursor: 'pointer',
                 background: T.surface,
@@ -161,7 +161,7 @@ export default function SumberMode({ onNavigate }) {
                     fontSize: 'var(--fs-caption)',
                     color: T.textMuted,
                     flexShrink: 0,
-                    marginLeft: 8,
+                    marginLeft: 'var(--space-8)',
                   }}
                 >
                   {c.id_text}
@@ -170,13 +170,13 @@ export default function SumberMode({ onNavigate }) {
               {expanded === c.id && (
                 <div
                   style={{
-                    marginTop: 6,
+                    marginTop: 'var(--space-6)',
                     fontSize: 'var(--fs-small)',
                     color: T.textMuted,
                     lineHeight: 1.5,
                   }}
                 >
-                  <div style={{ marginTop: 4 }}>
+                  <div style={{ marginTop: 'var(--space-4)' }}>
                     <DescBlock desc={c.desc} />
                   </div>
                 </div>
@@ -210,9 +210,9 @@ export default function SumberMode({ onNavigate }) {
     <div className={S.page}>
       <p className={S.pageSub}>Jelajahi kartu berdasarkan sumber PDF/CSV</p>
       {SOURCE_GROUPS.map((g) => (
-        <div key={g.label} style={{ marginBottom: 20 }}>
+        <div key={g.label} style={{ marginBottom: 'var(--space-20)' }}>
           <div className={S.sectionLabel}>{g.label}</div>
-          <div className={S.list} style={{ gap: 6 }}>
+          <div className={S.list} style={{ gap: 'var(--space-6)' }}>
             {g.keys.map((key) => {
               const meta = SOURCE_META[key];
               if (!meta) return null;
@@ -235,13 +235,17 @@ export default function SumberMode({ onNavigate }) {
                       the badge and the count refuse to shrink or break. */}
                   <div
                     className={S.rowSpread}
-                    style={{ marginBottom: stat ? 6 : 0, alignItems: 'flex-start', gap: 8 }}
+                    style={{
+                      marginBottom: stat ? 6 : 0,
+                      alignItems: 'flex-start',
+                      gap: 'var(--space-8)',
+                    }}
                   >
                     <div
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 6,
+                        gap: 'var(--space-6)',
                         minWidth: 0,
                         flexWrap: 'wrap',
                       }}
@@ -258,7 +262,7 @@ export default function SumberMode({ onNavigate }) {
                             color: T.wrong,
                             border: `1px solid rgba(220,38,38,0.25)`,
                             borderRadius: 99,
-                            padding: '1px 6px',
+                            padding: '1px var(--space-6)',
                             flexShrink: 0,
                           }}
                         >
@@ -278,7 +282,7 @@ export default function SumberMode({ onNavigate }) {
                     </span>
                   </div>
                   {stat && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
                       <div
                         style={{
                           flex: 1,

@@ -177,7 +177,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
   const pillStyle = (active) => ({
     fontFamily: 'inherit',
     fontSize: 'var(--fs-small)',
-    padding: '6px 12px',
+    padding: 'var(--space-6) var(--space-12)',
     borderRadius: T.r.pill,
     cursor: 'pointer',
     background: active ? 'rgba(251,191,36,0.15)' : T.surface,
@@ -194,7 +194,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
     <div className={S.page}>
       <p className={S.pageSub}>{JAC_OFFICIAL.length} soal dari contoh ujian resmi</p>
 
-      <div className={S.row} style={{ marginBottom: 16, flexWrap: 'wrap' }}>
+      <div className={S.row} style={{ marginBottom: 'var(--space-16)', flexWrap: 'wrap' }}>
         {[
           {
             label: `ID ${showID ? 'ON' : 'OFF'}`,
@@ -208,9 +208,9 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
         ))}
       </div>
 
-      <div style={{ marginBottom: 20 }}>
+      <div style={{ marginBottom: 'var(--space-20)' }}>
         <div className={S.sectionLabel}>Lanjut otomatis</div>
-        <div className={S.row} style={{ gap: 6 }}>
+        <div className={S.row} style={{ gap: 'var(--space-6)' }}>
           {DELAYS.map((d) => (
             <button
               key={d.ms}
@@ -218,7 +218,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
               style={{
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-small)',
-                padding: '5px 10px',
+                padding: 'var(--space-6) var(--space-10)',
                 borderRadius: T.r.pill,
                 cursor: 'pointer',
                 background: autoDelay === d.ms ? 'rgba(245,158,11,0.15)' : T.surface,
@@ -234,19 +234,19 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
       </div>
 
       {/* Topic filter */}
-      <div style={{ marginBottom: 20 }}>
+      <div style={{ marginBottom: 'var(--space-20)' }}>
         <div className={S.sectionLabel}>
           Filter Topik{' '}
           {topicFilter && <span style={{ color: T.textMuted, fontWeight: 400 }}>— aktif</span>}
         </div>
-        <div className={S.row} style={{ gap: 6, flexWrap: 'wrap' }}>
+        <div className={S.row} style={{ gap: 'var(--space-6)', flexWrap: 'wrap' }}>
           {topicFilter && (
             <button
               onClick={() => setTopicFilter(null)}
               style={{
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-small)',
-                padding: '5px 10px',
+                padding: 'var(--space-6) var(--space-10)',
                 borderRadius: T.r.pill,
                 cursor: 'pointer',
                 background: 'rgba(239,68,68,0.1)',
@@ -267,7 +267,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
                 style={{
                   fontFamily: 'inherit',
                   fontSize: 'var(--fs-small)',
-                  padding: '5px 10px',
+                  padding: 'var(--space-6) var(--space-10)',
                   borderRadius: T.r.pill,
                   cursor: 'pointer',
                   background: isActive ? `${t.color}22` : T.surface,
@@ -284,10 +284,10 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
         {topicFilter && (
           <button
             style={{
-              marginTop: 10,
+              marginTop: 'var(--space-10)',
               fontFamily: 'inherit',
               fontSize: 'var(--fs-caption)',
-              padding: '8px 16px',
+              padding: 'var(--space-8) var(--space-16)',
               borderRadius: T.r.md,
               cursor: 'pointer',
               background: topicInfo ? `${topicInfo.color}18` : T.surface,
@@ -323,7 +323,7 @@ export default function JACMode({ onSessionEnd, audioEnabled = false }) {
               <span>
                 {s.icon} {s.label}
               </span>
-              <div className={S.row} style={{ gap: 8 }}>
+              <div className={S.row} style={{ gap: 'var(--space-8)' }}>
                 {!topicFilter && saved && (
                   <span
                     style={{

@@ -59,14 +59,20 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
             background: 'var(--ssw-surface)',
             border: '1px solid var(--ssw-border)',
             borderRadius: 16,
-            padding: '20px 18px',
-            marginBottom: 16,
+            padding: 'var(--space-20) var(--space-16)',
+            marginBottom: 'var(--space-16)',
           }}
         >
-          <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textDim)', marginBottom: 6 }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-body)',
+              color: 'var(--ssw-textDim)',
+              marginBottom: 'var(--space-6)',
+            }}
+          >
             🎯 Latihan fokus untuk:
           </div>
-          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>
+          <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 'var(--space-4)' }}>
             {cat.emoji} {cat.label}
           </div>
           <div
@@ -74,7 +80,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
               fontSize: 'var(--fs-body)',
               color: cat.score >= 70 ? T.correct : cat.score >= 40 ? T.gold : T.wrong,
               fontWeight: 700,
-              marginBottom: 8,
+              marginBottom: 'var(--space-8)',
             }}
           >
             Akurasi: {cat.score}% · {cat.known}/{cat.total} hafal
@@ -112,11 +118,11 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
             background: 'var(--ssw-surface)',
             border: '1px solid var(--ssw-border)',
             borderRadius: 12,
-            padding: '10px 14px',
-            marginBottom: 16,
+            padding: 'var(--space-10) var(--space-14)',
+            marginBottom: 'var(--space-16)',
             display: 'flex',
             alignItems: 'center',
-            gap: 10,
+            gap: 'var(--space-10)',
           }}
         >
           <span style={{ fontSize: 18 }}>💪</span>
@@ -160,7 +166,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
                 {trainedKeys.has(c.key) && (
                   <span
                     title="Dilatih sesi ini (belum tentu sudah hafal — lihat skornya di samping)"
-                    style={{ color: T.textDim, marginRight: 4 }}
+                    style={{ color: T.textDim, marginRight: 'var(--space-4)' }}
                   >
                     🔁
                   </span>
@@ -177,7 +183,9 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
                 }}
               />
             </div>
-            <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 4 }}>
+            <div
+              style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 'var(--space-4)' }}
+            >
               {c.known}/{c.total} hafal {c.wrong > 0 && `· ${c.wrong} sering salah`}
             </div>
           </button>

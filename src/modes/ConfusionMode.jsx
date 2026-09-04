@@ -92,13 +92,20 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
 
   return (
     <div className={S.page}>
-      <div className={S.rowSpread} style={{ marginBottom: 4, alignItems: 'flex-start' }}>
+      <div
+        className={S.rowSpread}
+        style={{ marginBottom: 'var(--space-4)', alignItems: 'flex-start' }}
+      >
         <div>
           <p className={S.pageSub}>{pairs.length} pasang kata yang sering tertukar di ujian</p>
         </div>
         <button
           className={S.btnPrimary}
-          style={{ width: 'auto', padding: '10px 18px', fontSize: 'var(--fs-body)' }}
+          style={{
+            width: 'auto',
+            padding: 'var(--space-10) var(--space-16)',
+            fontSize: 'var(--fs-body)',
+          }}
           onClick={onStartQuiz}
         >
           🧠 Kuis
@@ -106,7 +113,14 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
       </div>
 
       {/* Filter chips */}
-      <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--space-6)',
+          marginBottom: 'var(--space-16)',
+          flexWrap: 'wrap',
+        }}
+      >
         {types.map((t) => {
           const meta = TYPE_LABEL[t] ?? { label: 'Semua', color: T.amber, bg: T.surface, desc: '' };
           const active = filterType === t;
@@ -116,7 +130,7 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
               onClick={() => onFilterChange(t)}
               style={{
                 fontFamily: 'inherit',
-                padding: '5px 12px',
+                padding: 'var(--space-6) var(--space-12)',
                 fontSize: 'var(--fs-caption)',
                 borderRadius: T.r.pill,
                 cursor: 'pointer',
@@ -149,15 +163,15 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginBottom: 6,
+                  marginBottom: 'var(--space-6)',
                 }}
               >
-                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 'var(--space-8)', alignItems: 'center' }}>
                   <span
                     style={{
                       fontSize: 'var(--fs-micro)',
                       fontWeight: 700,
-                      padding: '2px 7px',
+                      padding: 'var(--space-2) var(--space-8)',
                       borderRadius: T.r.pill,
                       background: meta.bg,
                       color: meta.color,
@@ -168,7 +182,7 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
                 </div>
                 <span style={{ fontSize: 'var(--fs-micro)', color: T.textDim }}>詳細 →</span>
               </div>
-              <div style={{ display: 'flex', gap: 12 }}>
+              <div style={{ display: 'flex', gap: 'var(--space-12)' }}>
                 <div style={{ flex: 1 }}>
                   <div
                     style={{
@@ -222,17 +236,17 @@ function DetailView({ pair, onBack }) {
         ← Kata Mirip
       </button>
 
-      <div style={{ marginBottom: 4 }}>
+      <div style={{ marginBottom: 'var(--space-4)' }}>
         <span
           style={{
             fontSize: 'var(--fs-small)',
             fontWeight: 700,
-            padding: '3px 9px',
+            padding: 'var(--space-4) var(--space-10)',
             borderRadius: T.r.pill,
             background: meta.bg,
             color: meta.color,
             display: 'inline-block',
-            marginBottom: 12,
+            marginBottom: 'var(--space-12)',
           }}
         >
           {meta.desc}
@@ -240,12 +254,15 @@ function DetailView({ pair, onBack }) {
       </div>
 
       {/* Term A */}
-      <div className={S.card} style={{ marginBottom: 12, borderLeft: `3px solid ${T.amber}` }}>
+      <div
+        className={S.card}
+        style={{ marginBottom: 'var(--space-12)', borderLeft: `3px solid ${T.amber}` }}
+      >
         <div
           style={{
             fontSize: 24,
             fontWeight: 800,
-            marginBottom: 4,
+            marginBottom: 'var(--space-4)',
           }}
         >
           <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
@@ -256,13 +273,13 @@ function DetailView({ pair, onBack }) {
       {/* Term B */}
       <div
         className={S.card}
-        style={{ marginBottom: 12, borderLeft: `3px solid ${T.borderActive}` }}
+        style={{ marginBottom: 'var(--space-12)', borderLeft: `3px solid ${T.borderActive}` }}
       >
         <div
           style={{
             fontSize: 24,
             fontWeight: 800,
-            marginBottom: 4,
+            marginBottom: 'var(--space-4)',
           }}
         >
           <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
@@ -281,7 +298,7 @@ function DetailView({ pair, onBack }) {
               fontSize: 'var(--fs-small)',
               fontWeight: 700,
               color: T.amber,
-              marginBottom: 6,
+              marginBottom: 'var(--space-6)',
             }}
           >
             💡 Cara Bedakan
@@ -406,7 +423,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 12,
+          marginBottom: 'var(--space-12)',
         }}
       >
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>
@@ -421,12 +438,12 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
       <ProgressBar current={qIdx + (showResult ? 1 : 0)} total={questions.length} color={T.amber} />
 
       {/* Type badge */}
-      <div style={{ textAlign: 'center', margin: '12px 0 8px' }}>
+      <div style={{ textAlign: 'center', margin: 'var(--space-12) 0 var(--space-8)' }}>
         <span
           style={{
             fontSize: 'var(--fs-small)',
             fontWeight: 700,
-            padding: '3px 10px',
+            padding: 'var(--space-4) var(--space-10)',
             borderRadius: T.r.pill,
             background: meta.bg,
             color: meta.color,
@@ -441,13 +458,13 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr auto 1fr',
-          gap: 8,
+          gap: 'var(--space-8)',
           alignItems: 'center',
           background: T.surface,
           border: `1px solid ${T.border}`,
           borderRadius: 14,
-          padding: '16px 14px',
-          marginBottom: 16,
+          padding: 'var(--space-16) var(--space-14)',
+          marginBottom: 'var(--space-16)',
           animation: 'scaleIn 0.2s var(--ease-smooth)',
         }}
       >
@@ -482,7 +499,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
           fontSize: 'var(--fs-body)',
           color: T.textMuted,
           textAlign: 'center',
-          marginBottom: 12,
+          marginBottom: 'var(--space-12)',
           fontWeight: 600,
         }}
       >
@@ -491,7 +508,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
       </div>
 
       {/* Options */}
-      <div className={S.list} style={{ gap: 10, marginBottom: 16 }}>
+      <div className={S.list} style={{ gap: 'var(--space-10)', marginBottom: 'var(--space-16)' }}>
         {opts.map((opt, i) => {
           const isSelected = selected === i;
           const isCorrectOpt = opt.isA; // term A's definition is the correct answer
@@ -504,7 +521,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
               disabled={showResult}
               style={{
                 fontFamily: 'inherit',
-                padding: '14px 16px',
+                padding: 'var(--space-14) var(--space-16)',
                 borderRadius: 12,
                 background: !showResult
                   ? T.surface
@@ -534,7 +551,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                 lineHeight: 1.5,
                 transition: 'all var(--t-fast)',
                 display: 'flex',
-                gap: 8,
+                gap: 'var(--space-8)',
                 alignItems: 'flex-start',
               }}
             >
@@ -557,7 +574,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
             animation: 'slideUp 0.2s var(--ease-smooth)',
           }}
         >
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ marginBottom: 'var(--space-8)' }}>
             <span style={{ fontSize: 'var(--fs-small)', color: T.amber, fontWeight: 700 }}>
               {stripFuri(pair.termA)}
             </span>
@@ -576,7 +593,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
                 color: T.text,
                 lineHeight: 1.5,
                 borderTop: `1px solid rgba(245,158,11,0.15)`,
-                paddingTop: 8,
+                paddingTop: 'var(--space-8)',
               }}
             >
               💡 {pair.tip}
@@ -588,7 +605,7 @@ function QuizView({ pairs, onBack, onSessionEnd }) {
       {showResult && (
         <button
           className={S.btnPrimary}
-          style={{ marginTop: 12 }}
+          style={{ marginTop: 'var(--space-12)' }}
           onClick={() => {
             if (isLast) setPhase('result');
             else {

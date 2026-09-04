@@ -110,7 +110,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
         {totalSoal} soal dalam {VOCAB_SETS.length} set · 語彙JP↔ID
       </p>
 
-      <div className={S.row} style={{ marginBottom: 20 }}>
+      <div className={S.row} style={{ marginBottom: 'var(--space-20)' }}>
         {[
           {
             label: `💡 ${showHint ? 'ON' : 'OFF'}`,
@@ -124,7 +124,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
             style={{
               fontFamily: 'inherit',
               fontSize: 'var(--fs-small)',
-              padding: '6px 12px',
+              padding: 'var(--space-6) var(--space-12)',
               borderRadius: T.r.pill,
               cursor: 'pointer',
               background: btn.active ? 'rgba(167,139,250,0.15)' : T.surface,
@@ -144,14 +144,16 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 20,
+          marginBottom: 'var(--space-20)',
           background: 'linear-gradient(135deg,rgba(109,40,217,0.15),rgba(167,139,250,0.1))',
           border: '1px solid rgba(167,139,250,0.35)',
         }}
       >
         <div>
           <div style={{ fontSize: 14, fontWeight: 700 }}>🔀 Mix All Vocab</div>
-          <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 2 }}>
+          <div
+            style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 'var(--space-2)' }}
+          >
             Semua {totalSoal} soal diacak — latihan komprehensif
           </div>
         </div>
@@ -160,8 +162,8 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
         </span>
       </button>
 
-      <div style={{ marginBottom: 8 }}>
-        <div className={S.row} style={{ marginBottom: 10 }}>
+      <div style={{ marginBottom: 'var(--space-8)' }}>
+        <div className={S.row} style={{ marginBottom: 'var(--space-10)' }}>
           <span style={{ fontSize: 'var(--fs-body)' }}>📖</span>
           <span
             style={{
@@ -202,7 +204,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
                 key={s.id}
                 className={S.btnItem}
                 onClick={() => setActiveSet(s.id)}
-                style={{ paddingLeft: 18, position: 'relative', overflow: 'hidden' }}
+                style={{ paddingLeft: 'var(--space-16)', position: 'relative', overflow: 'hidden' }}
               >
                 <div
                   style={{
@@ -218,7 +220,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
                   <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700 }}>
                     {s.emoji} {s.title}
                   </span>
-                  <div className={S.row} style={{ gap: 8 }}>
+                  <div className={S.row} style={{ gap: 'var(--space-8)' }}>
                     {saved && (
                       <span
                         style={{
@@ -240,7 +242,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
                     style={{
                       fontSize: 'var(--fs-small)',
                       color: T.textDim,
-                      marginTop: 4,
+                      marginTop: 'var(--space-4)',
                       fontFamily: T.fontJP,
                     }}
                   >

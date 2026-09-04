@@ -171,7 +171,7 @@ export default function WaygroundMode({ onSessionEnd }) {
   const pillStyle = (active) => ({
     fontFamily: 'inherit',
     fontSize: 'var(--fs-small)',
-    padding: '6px 12px',
+    padding: 'var(--space-6) var(--space-12)',
     borderRadius: T.r.pill,
     cursor: 'pointer',
     background: active ? 'rgba(251,191,36,0.15)' : T.surface,
@@ -212,11 +212,11 @@ export default function WaygroundMode({ onSessionEnd }) {
               background: 'rgba(251,191,36,0.06)',
               border: '1px solid rgba(251,191,36,0.25)',
               borderRadius: 12,
-              padding: '10px 14px',
-              marginBottom: 12,
+              padding: 'var(--space-10) var(--space-14)',
+              marginBottom: 'var(--space-12)',
               display: 'flex',
               alignItems: 'center',
-              gap: 10,
+              gap: 'var(--space-10)',
             }}
           >
             <span style={{ fontSize: 'var(--fs-jp-back)' }}>⭐</span>
@@ -226,7 +226,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                   fontSize: 'var(--fs-small)',
                   fontWeight: 700,
                   color: 'var(--ssw-amber)',
-                  marginBottom: 2,
+                  marginBottom: 'var(--space-2)',
                 }}
               >
                 DISARANKAN BERIKUTNYA
@@ -262,8 +262,8 @@ export default function WaygroundMode({ onSessionEnd }) {
               background: 'rgba(251,191,36,0.07)',
               border: '1px solid rgba(251,191,36,0.2)',
               borderRadius: 10,
-              padding: '10px 14px',
-              marginBottom: 16,
+              padding: 'var(--space-10) var(--space-14)',
+              marginBottom: 'var(--space-16)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -273,7 +273,13 @@ export default function WaygroundMode({ onSessionEnd }) {
               <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, fontWeight: 700 }}>
                 TOTAL SEMUA SET
               </div>
-              <div style={{ fontSize: 'var(--fs-small)', color: T.textMuted, marginTop: 2 }}>
+              <div
+                style={{
+                  fontSize: 'var(--fs-small)',
+                  color: T.textMuted,
+                  marginTop: 'var(--space-2)',
+                }}
+              >
                 {scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ}{' '}
                 benar
               </div>
@@ -291,7 +297,7 @@ export default function WaygroundMode({ onSessionEnd }) {
         );
       })()}
 
-      <div className={S.row} style={{ marginBottom: 20 }}>
+      <div className={S.row} style={{ marginBottom: 'var(--space-20)' }}>
         {[
           {
             label: `💡 ${showHint ? 'ON' : 'OFF'}`,
@@ -306,8 +312,8 @@ export default function WaygroundMode({ onSessionEnd }) {
       </div>
 
       {groups.map((g) => (
-        <div key={g.label} style={{ marginBottom: 20 }}>
-          <div className={S.row} style={{ marginBottom: 8 }}>
+        <div key={g.label} style={{ marginBottom: 'var(--space-20)' }}>
+          <div className={S.row} style={{ marginBottom: 'var(--space-8)' }}>
             <span style={{ fontSize: 'var(--fs-body)' }}>{g.icon}</span>
             <span
               style={{
@@ -356,7 +362,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                       setActiveSet(s.id);
                     }}
                     style={{
-                      paddingLeft: 18,
+                      paddingLeft: 'var(--space-16)',
                       position: 'relative',
                       overflow: 'hidden',
                       borderBottomLeftRadius: wrongCount > 0 ? 0 : undefined,
@@ -374,7 +380,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                       }}
                     />
                     <div className={S.rowSpread}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
                         <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700 }}>
                           {s.emoji} {s.title}
                         </span>
@@ -387,14 +393,14 @@ export default function WaygroundMode({ onSessionEnd }) {
                               color: T.amber,
                               border: `1px solid ${T.amber}30`,
                               borderRadius: 99,
-                              padding: '1px 6px',
+                              padding: '1px var(--space-6)',
                             }}
                           >
                             Baru
                           </span>
                         )}
                       </div>
-                      <div className={S.row} style={{ gap: 8 }}>
+                      <div className={S.row} style={{ gap: 'var(--space-8)' }}>
                         {saved && (
                           <span
                             style={{
@@ -417,7 +423,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                         style={{
                           fontSize: 'var(--fs-small)',
                           color: T.textDim,
-                          marginTop: 4,
+                          marginTop: 'var(--space-4)',
                           fontFamily: T.fontJP,
                         }}
                       >
@@ -435,7 +441,7 @@ export default function WaygroundMode({ onSessionEnd }) {
                       style={{
                         fontFamily: 'inherit',
                         fontSize: 'var(--fs-small)',
-                        padding: '6px 18px',
+                        padding: 'var(--space-6) var(--space-16)',
                         textAlign: 'left',
                         cursor: 'pointer',
                         background: 'rgba(220,38,38,0.06)',

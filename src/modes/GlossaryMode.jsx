@@ -224,14 +224,14 @@ export default function GlossaryMode({ track }) {
           <span className={`${S.pill} ${G.countPill}`}>{formatCount(sorted.length)} istilah</span>
         </div>
         <div className={G.metaRow}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-8)' }}>
             <p className={G.metaText}>{groups.length} huruf · diurutkan あいうえお</p>
             <button
               onClick={() => setCompactView((v) => !v)}
               style={{
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-small)',
-                padding: '2px 8px',
+                padding: 'var(--space-2) var(--space-8)',
                 borderRadius: 99,
                 cursor: 'pointer',
                 background: compactView ? T.surface : 'rgba(251,191,36,0.15)',
@@ -247,7 +247,7 @@ export default function GlossaryMode({ track }) {
               style={{
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-small)',
-                padding: '2px 8px',
+                padding: 'var(--space-2) var(--space-8)',
                 borderRadius: 99,
                 cursor: 'pointer',
                 background: selectMode ? 'rgba(99,102,241,0.15)' : T.surface,
@@ -360,7 +360,7 @@ export default function GlossaryMode({ track }) {
                           style={{
                             fontSize: 16,
                             lineHeight: 1,
-                            marginRight: 4,
+                            marginRight: 'var(--space-4)',
                             color: isSelected ? '#818cf8' : T.border,
                           }}
                         >
@@ -393,7 +393,7 @@ export default function GlossaryMode({ track }) {
                               border: 'none',
                               cursor: 'pointer',
                               fontSize: 14,
-                              padding: '0 4px',
+                              padding: '0 var(--space-4)',
                               lineHeight: 1,
                               color: T.textMuted,
                             }}
@@ -439,10 +439,10 @@ export default function GlossaryMode({ track }) {
             zIndex: 'var(--z-sticky)',
             background: T.bg,
             borderTop: `1px solid ${T.border}`,
-            padding: '10px 16px',
+            padding: 'var(--space-10) var(--space-16)',
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
+            gap: 'var(--space-8)',
           }}
         >
           <button
@@ -450,7 +450,7 @@ export default function GlossaryMode({ track }) {
             style={{
               fontFamily: 'inherit',
               fontSize: 'var(--fs-caption)',
-              padding: '6px 12px',
+              padding: 'var(--space-6) var(--space-12)',
               borderRadius: 8,
               cursor: 'pointer',
               background: T.surface,
@@ -470,7 +470,7 @@ export default function GlossaryMode({ track }) {
             style={{
               fontFamily: 'inherit',
               fontSize: 'var(--fs-caption)',
-              padding: '6px 14px',
+              padding: 'var(--space-6) var(--space-14)',
               borderRadius: 8,
               cursor: selected.size === 0 ? 'not-allowed' : 'pointer',
               background: exportDone

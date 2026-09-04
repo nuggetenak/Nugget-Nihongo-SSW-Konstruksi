@@ -145,8 +145,8 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   if (queue === null) {
     return (
       <div className={R.skeleton} role="status" aria-label="Memuat kartu..." aria-live="polite">
-        <Skeleton width="60px" height={14} style={{ marginBottom: 16 }} />
-        <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 24 }} />
+        <Skeleton width="60px" height={14} style={{ marginBottom: 'var(--space-16)' }} />
+        <Skeleton width="100%" height={4} radius={99} style={{ marginBottom: 'var(--space-24)' }} />
         <Skeleton.Card />
       </div>
     );
@@ -240,7 +240,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   return (
     <div className={`${S.pageScroll} ${R.quizPage}`}>
       <div className={`${S.rowSpread} ${R.quizHeader}`}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-8)' }}>
           {audioEnabled && (
             <button
               onClick={() => speakJP(clean, { onError: handleSpeakError })}
@@ -261,7 +261,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              padding: '4px 6px',
+              padding: 'var(--space-4) var(--space-6)',
             }}
           >
             Lewati
