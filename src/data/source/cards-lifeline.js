@@ -884,7 +884,7 @@ export const CARDS_LIFELINE = [
     jp: '架空配線《かくうはいせん》 vs 埋設配線《まいせつはいせん》',
     type: 'vocab',
     id_text: 'Kabel aerial vs ditanam',
-    desc: '架空配線《かくうはいせん》=kabel via tiang; 埋設《まいせつ》=kabel ditanam via 3 cara: 管《かん》路式《かんろしき》, 直接埋設《ちょくせつまいせつ》, とう道《とうどう》(terowongan).',
+    desc: '架空配線《かくうはいせん》=kabel via tiang; 埋設《まいせつ》=kabel ditanam via 3 cara: 管《かん》路式《ろしき》, 直接埋設《ちょくせつまいせつ》, とう道《とうどう》(terowongan).',
     usage:
       '架空配線《かくうはいせん》と埋設配線《まいせつはいせん》を使い分《つかいわ》ける（pilih kabel udara atau kabel tanam sesuai kondisi）',
     _origIndex: 272,
@@ -2010,7 +2010,7 @@ export const CARDS_LIFELINE = [
     jp: '盤《ばん》',
     type: 'vocab',
     id_text: 'Panel listrik (盤 — generik)',
-    desc: 'Panel berisi breaker: 自立盤《じりつばん》= berdiri lantai; 壁掛《かべか》けけ盤《かべかけばん》= di dinding.',
+    desc: 'Panel berisi breaker: 自立盤《じりつばん》= berdiri lantai; 壁掛《かべか》け盤《ばん》= di dinding.',
     usage:
       '盤《ばん》に回路《かいろ》ごとにブレーカーを取《と》り付《つ》ける（pasang breaker per sirkuit pada panel listrik）',
     _origIndex: 457,
@@ -2690,7 +2690,7 @@ export const CARDS_LIFELINE = [
     jp: '土被り《どかぶり》',
     type: 'vocab',
     id_text: 'Kedalaman tutup tanah di atas pipa',
-    desc: 'Jarak permukaan jalan ke bagian atas管《かん》路《かんろ》; berdasarkan道《みち》路《どうろ》法施行《おこな》う令《ほうしこうれい》: minimal 0.8m di jalan raya, 0.6m di trotoar.',
+    desc: 'Jarak permukaan jalan ke bagian atas管《かん》路《ろ》; berdasarkan道《みち》路《どうろ》法施行《おこな》う令《ほうしこうれい》: minimal 0.8m di jalan raya, 0.6m di trotoar.',
     usage:
       '土被り《どかぶり》が規定《きてい》深度《しんど》を満《み》たすか確認《かくにん》する（periksa apakah kedalaman penutup tanah memenuhi kedalaman yang ditetapkan）',
     _origIndex: 552,
@@ -2864,7 +2864,7 @@ export const CARDS_LIFELINE = [
     jp: '埋設《まいせつ》（3方式《ほうしき》）・架空配線《かくうはいせん》',
     type: 'konsep',
     id_text: '3 cara tanam kabel +',
-    desc: '埋設《まいせつ》3方式《ほうしき》: ①管《かん》路式《かんろしき》=kubur pipa lalu masukkan kabel. ②直接埋設式《ちょくせつまいせつしき》=pakai kabel tanam langsung. ③とう道《とうどう》=lewat terowongan. 架空配線《かくうはいせん》=kabel lewat tiang listrik.',
+    desc: '埋設《まいせつ》3方式《ほうしき》: ①管《かん》路式《ろしき》=kubur pipa lalu masukkan kabel. ②直接埋設式《ちょくせつまいせつしき》=pakai kabel tanam langsung. ③とう道《とうどう》=lewat terowongan. 架空配線《かくうはいせん》=kabel lewat tiang listrik.',
     _origIndex: 686,
   },
   {
@@ -5964,7 +5964,7 @@ export const CARDS_LIFELINE = [
     jp: '光ケーブル地中配線《ひかりケーブルちちゅうはいせん》',
     type: 'vocab',
     id_text: 'Kabel optik bawah tanah',
-    desc: 'Pemasangan kabel serat optik di dalam tanah melalui 管《かん》路《かんろ》 atau hand hole, dengan panjang kabel ekstra agar tidak putus saat bencana.',
+    desc: 'Pemasangan kabel serat optik di dalam tanah melalui 管《かん》路《ろ》 atau hand hole, dengan panjang kabel ekstra agar tidak putus saat bencana.',
     usage:
       '光ケーブル《ひかりけーぶる》を地中《ちちゅう》に配線《はいせん》する（memasang kabel optik di bawah tanah）',
     _origIndex: 1074,
