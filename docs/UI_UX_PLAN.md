@@ -753,13 +753,21 @@ and 4 are arguably single terms (`パワー・ハラスメント`, `ロックア
 on script would get about half of them wrong, which is worse than the current consistent behaviour.
 Fixing this properly means marking the intent in the data, not guessing it at render time.
 
-### ☐ 72. 43 inline font sizes remain off the type scale — `S`
+### ☐ 72. 101 font sizes are off the type scale (no longer frozen, still not on it) — `S`
 
 254 of 297 inline `fontSize: <px>` values matched a `--fs-*` token exactly and were migrated
-(2026-09-04). The remaining 43 are 14, 16, 18, 24, 36, 48 and 64px — sizes with no token. Same
-judgment as item 68: don't force a match without evidence that the element wants the neighbouring
-token's size. They are now the *only* inline sizes left in the app, so they are trivial to find,
-and each one is a small, individually-decidable question rather than a sweep.
+(2026-09-04). What was left — 41 in JSX and, once the scale was rebuilt, 60 more in stylesheets —
+matched no token: 14, 16, 18, 20, 22, 24, 26, 28, 32, 36, 40, 44, 48, 52, 58, 60, 64px.
+
+Half of this is now closed. They were **frozen**, which was a real defect: a px font-size follows
+neither the viewport nor Ukuran Teks, so at "Sangat Besar" the text around a display numeral, an
+empty-state emoji or an Onboarding heading grew 25% while the thing itself held still. All 101 are
+rem now, at the value they already had, and `spacing-scale.test.js` keeps them that way.
+
+What stays open is the original question: should any of them be a token? Snapping would move 24px
+to 26 and 20px to 19, and item 68's judgment holds — don't force a match without evidence the
+element wants the neighbouring token's size. Each is individually decidable, and they are trivial
+to find (`rem` outside a `var()` in a `font-size`).
 
 ### ☐ 73. Setup screens still leave 250–330px under their primary button — `S` — **design call**
 
