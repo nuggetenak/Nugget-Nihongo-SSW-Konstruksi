@@ -90,13 +90,24 @@
   /* border-radius, background, border: set inline (dynamic group color) */
 }
 
-/* angka value — color is dynamic per group, kept inline */
+/* angka value — color is dynamic per group, kept inline.
+
+   Named for a number, but the field holds phrases: ">6jam → 45 mnt, >8jam →
+   1 jam" is a real entry. With flex-shrink: 0 that took 323px of a 350px row,
+   squeezed the context text to zero and pushed the chevron 14px off a 390px
+   screen — measured at Ukuran Teks "Sangat Besar", where the same string is
+   17.5px instead of 14. It was already within ~30px of overflowing at the
+   default size; the text control only made it visible.
+
+   Shrinks and wraps now, with the 4rem floor keeping the numeric column
+   aligned for the short entries it was designed around (in rem, so the column
+   grows with the text like everything else). */
 .angkaValue {
   font-size: 0.875rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
-  flex-shrink: 0;
-  min-width: 64px;
+  min-width: 4rem;
+  overflow-wrap: anywhere;
 }
 
 .konteksText {
