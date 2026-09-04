@@ -25,7 +25,7 @@ function isDialogOpen() {
 }
 
 export default function GlobalKeyboardLayer() {
-  const { mode, exitMode, goTab } = useApp();
+  const { mode, requestExitMode, goTab } = useApp();
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const closeSheet = useCallback(() => setSheetOpen(false), []);
@@ -44,7 +44,11 @@ export default function GlobalKeyboardLayer() {
         return;
       }
       if (e.key === 'Escape') {
-        if (mode !== null) exitMode();
+        // requestExitMode, not exitMode: this shortcut fires from outside the
+        // active mode, so it has to ask the mode's exit guard first. Calling
+        // exitMode directly is what let one Escape keypress discard a running
+        // 100-minute exam with no confirmation.
+        if (mode !== null) requestExitMode();
         return;
       }
       if (mode === null && TAB_KEYS[e.key]) {
@@ -53,7 +57,7 @@ export default function GlobalKeyboardLayer() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mode, exitMode, goTab]);
+  }, [mode, requestExitMode, goTab]);
 
   if (!sheetOpen) return null;
   return <ShortcutSheet onClose={closeSheet} />;
