@@ -66,8 +66,11 @@ briefly when actually pushing, then strip again right after.
    only ever grows stops getting read in full, which defeats the point of having one. (This is
    also why this file itself should stay short — if it starts accumulating session-specific
    content, that content belongs in `HANDOFF.md` or `_MAP.md` instead.)
-3. Tests/lint/build clean **before pushing**, not just before committing — check again if any
-   time passed between the two.
+3. `npm run validate` clean **before pushing**, not just before committing — check again if any
+   time passed between the two. That is format:check, lint, test, the five audits, and build.
+   Running the pieces individually is how `format:check` came to be failing on 33 files and
+   `audit-integrity.mjs` came to report 2876 phantom issues on every run for weeks: neither was
+   part of any gate.
 4. Commit, push.
 
 ## 4. Where things live — don't ask for these to be pasted, read them from the clone
@@ -93,6 +96,24 @@ without a row here — `DATA_ARCH_AUDIT.md` (archived 2026-08-19) and `BLUEPRINT
 (archived 2026-08-20, by which point every headline number in it was wrong). A doc nothing points
 at is a doc nothing keeps honest. If you add a doc, add its row; if you find a doc with no row,
 that is a signal to check whether it is still true.
+
+## 4a. The data layer — where to edit
+
+One place per kind of content. This table exists because for months there were four copies of the
+card corpus and three of the quiz sets, two of them silently stale, none imported by the app, and
+two carrying headers instructing maintainers to edit them and run a regeneration script that did
+not exist (all removed 2026-09-04 — see CHANGELOG).
+
+| Content | Edit | Generated |
+|---|---|---|
+| Flashcards | `src/data/source/cards-{common,lifeline}.js` | `src/data/cards.js` via `scripts/merge-cards.mjs` (runs in `prebuild`) |
+| Wayground sets | `src/data/wayground-sets.js` | — it IS the source |
+| JAC Mockup sets | `src/data/jac-mockup-sets.js` | — it IS the source |
+| JAC Official | `src/data/sets/jac/jac-{teori,lifeline}.js` | `jac-official.js` is a two-line shim |
+| Angka / Danger / Confusion | their own file in `src/data/` | — |
+
+After editing `src/data/source/`, run `node scripts/merge-cards.mjs`. `npm run audit:content` fails
+if you forget — it compares `cards.js` against `source/` field by field, not just by count.
 
 ## 5. Minimal kickoff
 

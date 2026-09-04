@@ -700,3 +700,64 @@ didn't reproduce across two more full-sequence runs with direct session-data ins
 concluded likely Playwright timing variance, not a new bug, recorded rather than hidden.
 
 ---
+
+## 12. New round — 2026-09-04 exhaustive audit
+
+Owner asked for an exhaustive analysis, every gap/inconsistency/discrepancy fixed, and a UI/UX
+upgrade, with explicit permission to overhaul anything. Most of what that pass found was fixed in
+the same session (see `HANDOFF.md`'s CURRENT STATE for the commit map). This section is only the
+remainder: things that turned up, are real, and were deliberately **not** closed — either because
+they need an owner decision, or because they are genuinely separate scope.
+
+Numbering continues from 68.
+
+### ☐ 69. `VOCAB_SOURCES` excludes 49 cards where its name implies ~543 — `S` — **needs a decision**
+
+`excludeVocab` (`useTrackedCards`) and FocusMode's weakness ranking both filter out cards whose
+source is in `VOCAB_SOURCES`. After the five zero-card entries were removed (2026-09-04) that list
+is exactly one source: `vocab-jac`, 49 cards. `vocab-supplementary` — 494 cards, by far the largest
+vocab pool in the corpus — is **not** in it.
+
+Both readings are defensible, which is why this wasn't just changed: `SOURCE_GROUPS` files
+`vocab-supplementary` under "Sumber Tambahan" rather than "Kosakata", so its exclusion may be
+deliberate; but the constant is named VOCAB_SOURCES and both consumers use it to mean "not chapter
+content". Adding it would silently move **every category score on FocusMode's weakness screen**,
+which is a user-visible change to a ranking, not a refactor.
+
+Owner call: should `vocab-supplementary` count as vocab for the purpose of "which category am I
+weakest in"?
+
+### ☐ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S`
+
+Item 56 argued the case and acted on it: a false-precision readiness number is actively
+demotivating for someone whose visa depends on this exam, so `calcReadinessBand` returns
+kurang/cukup/siap and returns `null` below 5 scored sessions rather than guessing. The Dashboard
+uses it. **StatsMode still renders "45%" in a big ring**, from `calcReadiness` directly — the same
+underlying number item 56 decided not to show. One screen believes the argument and the other
+doesn't.
+
+Not changed here because it is item 56's own decision to extend, not a defect to fix, and the ring
+is StatsMode's main visual anchor — replacing a percentage with a band is a layout question as much
+as a copy one.
+
+### ☐ 71. `《・》`-separated terms stack vertically in every context — `M`
+
+`JpFront`'s `bullet` branch splits on `・` and stacks the parts. In list rows that is now handled
+(`compact`, 2026-09-04), but the underlying split is still wrong for a class of entries: `・` is
+also a *word-internal* separator in katakana loanwords, so `パワー・ハラスメント（パワハラ）` is
+rendered as two stacked terms rather than one word.
+
+Deliberately not "fixed" with a katakana heuristic: of the 8 all-katakana `・` entries in the
+corpus, 4 are genuine lists (`ボルト・ナット・ワッシャー` = bolt, nut, washer; `タップ・ダイス`)
+and 4 are arguably single terms (`パワー・ハラスメント`, `ロックアウト・タグアウト`). A rule keyed
+on script would get about half of them wrong, which is worse than the current consistent behaviour.
+Fixing this properly means marking the intent in the data, not guessing it at render time.
+
+### ☐ 72. 43 inline font sizes remain off the type scale — `S`
+
+254 of 297 inline `fontSize: <px>` values matched a `--fs-*` token exactly and were migrated
+(2026-09-04). The remaining 43 are 14, 16, 18, 24, 36, 48 and 64px — sizes with no token. Same
+judgment as item 68: don't force a match without evidence that the element wants the neighbouring
+token's size. They are now the *only* inline sizes left in the app, so they are trivial to find,
+and each one is a small, individually-decidable question rather than a sweep.
+

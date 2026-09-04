@@ -34,148 +34,73 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of this edit, 2026-09-01 (same conversation as 2026-08-31 above, date rolled over
-mid-session — same pattern as 2026-08-27→08-28 further below).** Verify before trusting past
-this point — this line doesn't update itself.
+**As of 2026-09-04.** Verify before trusting past this point — this line doesn't update itself.
 
-- **2026-09-01: "polish the UI & UX, overhaul anything."** Screenshotted all 21 modes at
-  mobile (390px) and desktop (1440px) — 42 screenshots, actually reviewed, not assumed clean.
-  Found and fixed: **ReviewMode was logging a phantom 0/0 session** just from opening the tab
-  with nothing due (data-integrity bug, not visual — silently inflated streak/stats; found
-  while chasing what looked like a broken Statistik chart, which turned out to be rendering
-  correctly the whole time); **DengarMode's intro heading** used hand-rolled inline styles
-  instead of the shared `pageTitle` convention every other mode's equivalent screen uses;
-  **three modes' title-next-to-button header rows broke** at narrow widths (ConfusionMode
-  wrapped to two lines, AngkaMode's button actually overlapped and covered part of the title,
-  DangerMode wrapped) — root cause was a shared button class with `width: 100%` baked in for a
-  different context. Worth flagging: the first attempted fix (flex:1 on the title wrapper)
-  made ConfusionMode's case dramatically worse — caught from a screenshot before keeping it,
-  reverted, fixed properly. Every fix in this round was screenshotted before *and* after, not
-  trusted from reading the code. Commits `7a73d95`, `62484f7`.
-  - **Same-day follow-up, owner said "yes please" to picking up the leftover items**: closed
-    `docs/UI_UX_PLAN.md` items 66 and 67. Item 66 — the 4 remaining content-data defects, each
-    fixed by cross-checking against that same card's own desc/usage field (2 of 4 already had
-    the correct form sitting right there), plus the 79-occurrence duplicated-marker pattern
-    collapsed at the source. Item 67 — re-checked the 4 `default`-width modes against real
-    content (not empty states) and confirmed SumberMode/SearchMode's single-column layout is
-    already using its width correctly (wrapping description text, progress bars) rather than
-    stretching with dead space; nothing further to fix there. Commits `c1cdbea`, `b12219f`.
-  - **Item 68 also picked up, same "continue" — pivoted to something bigger than font-sizes**:
-    comparing candidate font-sizes against equivalent elements (same method as pageTitle/
-    ratingEmoji) surfaced 41 dead rules in the shared `modes.module.css` (61% of the file) —
-    whole sections left behind by modes that moved to their own dedicated CSS module over time.
-    Removed, thoroughly verified (recursive cross-file check, not just `src/modes/*.jsx`; caught
-    and corrected its own false positive along the way; full 21-mode screenshot sweep before/
-    after). Commit `6353ff7` — also has an honest note on a one-off screenshot artifact during
-    re-verification that didn't reproduce on retest (likely Playwright timing, not a real
-    regression — investigated properly rather than assumed either way).
+- **2026-09-04: "analyze comprehensively and exhaustively; fix all gaps, inconsistencies,
+  discrepancies; upgrade the UI & UX."** Branch `claude/analysis-ui-polish-cxnj2d`, PR #8 (draft).
+  Full reasoning lives in the commit messages, one per theme — this is a map to them, not a
+  restatement. Everything below was measured against the running app or the real data; where a
+  doc's claim disagreed with the repo, the repo won and the doc was corrected.
 
-- **2026-08-31: exhaustive UI/UX/typography audit** (new agent chat, owner provided repo+token
-  directly, explicit blanket approval up front: "consider everything is approved," full token
-  budget authorized for "super duper exhaustive" auditing, work done directly on `main` per
-  owner's explicit instruction — same pattern as 2026-08-27/28, not a deviation from branch
-  discipline). Full reasoning for every item below is in its own commit message (owner's stated
-  preference: short chat replies, detail in commits) — this entry is a map to the commits, not a
-  restatement of them.
+  - **`64f016d` — three ruby rendering bugs the corpus sweep structurally could not see.**
+    `ruby-audit-round3.test.jsx` asks "does the renderer produce garbage?"; it cannot ask "does it
+    produce the *right* annotation?", and all three of these produce well-formed markup:
+    (1) a reading covering text left of its kanji — `ラジオ体操《らじおたいそう》` annotated only
+    体操, and a browser spreads the too-wide `<rt>` so it rendered as "体 操" (**349 strings**);
+    (2) kanji-bearing parentheticals rendered as furigana — `危険予知活動《KY活動》`, whole
+    sentences at annotation size above one kanji (**31**); (3) Indonesian prose folded into ruby
+    bases by the old length-based fallback (**89**). Where a base starts is now *matched* against
+    the reading rather than guessed. Verified by rendering all 6,000 corpus strings before and
+    after and reading every one of the 261 distinct base changes; one known false positive is
+    recorded in the commit rather than hidden.
+  - **`907a902` — three dead data mirror layers retired, and the audits that missed them.**
+    `src/data/cards/**` (70 cards drifted), `src/data/sets/wayground/**`, `src/data/sets/jac-mockup/**`
+    (all 12 sets drifted): none imported by anything, two silently stale with the last two
+    sessions' own fixes, and two live files carrying headers telling maintainers to edit the split
+    copies and run a regeneration script **that has never existed in this repo**. 56 files / 1.7 MB
+    deleted. `audit-integrity.mjs` had been reporting 2876 phantom issues every run (it demanded a
+    `furi` field the schema dropped) — which is how 5 zero-card sources survived in `SOURCE_META`,
+    each an "0 kartu" row in SumberMode; `audit-related-ids.mjs` had been dying with
+    ERR_MODULE_NOT_FOUND since August; `verify-content.mjs` compared only counts, printed "✅ Clean
+    … safe to copy into HANDOFF.md as-is" over 70 drifted cards, and now compares field by field.
+    New `audit-data-text.mjs`. **`npm run validate` now actually gates**: format:check, lint, test,
+    all five audits, build.
+  - **`aa5d610` — four state bugs.** The study streak only counted flashcard marks, so a learner
+    doing SRS reviews daily had a streak of 0 (it feeds the Dashboard headline, two achievements
+    and 20 of 100 readiness points); `calcReadiness` read `srs.stats.review`, a key that has never
+    existed; `SRSContext` memoised its value from a key list omitting `stats`; `goTab` never
+    cleared `modeParams`.
+  - **`ff45009` — design system.** Keyframes lived in two files with **six conflicting
+    definitions** (`shimmer` ran in opposite directions) and `theme.js`'s JS-injected copy silently
+    won; consolidated at the values that were actually rendering. **254 of 297 inline `fontSize:
+    <px>` in JSX** migrated onto the `--fs-*` tokens — `DESIGN_SPEC` §3's claim that "every
+    consumer reads `--fs-*` via var(), confirmed by grep" was only ever true of stylesheets, and is
+    now corrected in place.
+  - **`29f61ae` — one mode header, and lists a phone can render.** 20 of 21 modes rendered their
+    name twice and drew one of 27 different back buttons; ModeHeader is now the whole header, with
+    an exit guard (`useExitGuard`) so the shared arrow can't silently discard a half-finished exam.
+    Buku Catatan went from 19,264 DOM nodes / 134,599px to 714 / 4,095px, Glosari from 18,329 /
+    82,128px to 1,642 / 6,105px. The app's one horizontal overflow fixed (`minmax(430px, 1fr)` is a
+    hard floor).
+  - **`fb96a5f` — a11y and copy.** **Seven declarations across five files were switching off the
+    app's only focus indicator**, all on text inputs; and the indicator itself was drawn so that
+    the outline's offset gap was solid near-black, reading as a heavy frame. Autoplay TTS failures
+    no longer raise an error toast (a phone with no ja-JP voice got one on every ReviewMode entry).
+    A track toggle that could not change anything, shown in two modes, removed. "3 jalur" and a
+    footer naming two removed tracks, corrected.
+  - **Content**: 13 pooled ruby readings split per term; 21 Kangxi Radical codepoints and one
+    Cyrillic typo fixed — both flagged as out-of-scope by the 2026-08-26 font work and still live
+    until now, both now guarded by `audit-data-text.mjs`.
 
-  - **Ruby rendering rewritten** (`renderJPWithRuby`, `JpDisplay.jsx`) — the old parse-then-
-    reindex implementation silently misplaced furigana whenever a kanji base repeated earlier in
-    the same string as plain text (found by mechanically simulating the algorithm against every
-    string in `src/data`, not spot-checking), and never matched the "whole conjugated word
-    including okurigana" marker convention at all (見切る《みきる》 vs. the more common
-    揚《あ》げる — ~870 real occurrences, silently dropped in some render paths, shown as raw
-    `《》` in others). Rewritten as a single forward pass; a corpus-wide sweep
-    (`ruby-audit-round3.test.jsx`) renders every real `《`-bearing string in the shipped data
-    through the actual function and asserts no unexplained raw bracket survives. Surfaced 5 more
-    content-data defects along the way (incomplete/concatenated readings, one 《》-as-parenthetical
-    case) — logged in that test's own allowlist, not fixed here (content work, not rendering).
-    Commit `3bbc62e`.
-  - **Ruby round 4, same day, owner tested live and found more** — round 3's corpus sweep
-    checked whether the renderer produces *garbage output* for every string; it didn't check
-    whether the renderer produces the *right* output, which is a different, harder property a
-    sweep can't verify by itself (it doesn't know what "right" is). Owner's screenshot
-    (ダクトの3種類 showing a completely unrelated reading) forced that distinction and both
-    turned out to be real, separate bugs:
-    - **Content-data bug, not a rendering bug**: the reported card's own `jp` field literally
-      had five readings concatenated into one marker (its own two words' readings, plus three
-      more copied in from its `desc` field's separate terms). Searched systematically rather
-      than patching the one report — 127 cards had a suspiciously long reading; hand-verified
-      every one against its own desc/usage (two automated heuristics were tried first and both
-      produced confident-looking wrong answers — see the commit for why); 26 were genuine bugs,
-      fixed; ~101 were long-but-correct and left alone. **Important scoping note for next time**:
-      restrict this kind of scan to `src/data/source/cards-{common,lifeline}.js` specifically —
-      `src/data/cards.js` is generated (fine to read, but edits there don't stick) and
-      `src/data/cards/lifeline/` is a stale, unimported pre-restructure reference copy that will
-      produce false leads if it's included in a broad `find src/data` sweep. Commit `5d84e9b`.
-    - **Separate, larger rendering bug**: kanji+katakana loanword compounds (移動式クレーン,
-      冷却コイル, 防水カバー — ordinary vocabulary here, not edge cases) were never matched at
-      all — the regex only recognized hiragana as valid trailing okurigana. 871 occurrences, 384
-      unique pairs, silently dropped whenever they shared a string with another, successfully-
-      matched marker. Fixed by keeping kanji+katakana always combined as one ruby span with the
-      untrimmed reading, rather than attempting to split (readings are written in hiragana, so
-      splitting via exact character match against katakana is unreliable — chōonpu doesn't
-      round-trip). Commit `6bc2ebb`.
-    - Same commit also fixes JpFront forcing Japanese typography (CJK font, centering,
-      kanji-density length-scaling) onto non-Japanese content that a few modes' shared
-      ResultScreen slots sometimes carry (Indonesian definitions/translations) — new
-      `isMeaningfullyJapanese()` ratio check in `jp-helpers.js`, found while re-auditing the same
-      render paths, not part of the original report.
-    - **Simulasi exam-timing fixed too, same message** — owner's real-exam knowledge: 2 min/
-      question (100 min for the 50-question full exam), not the ~1 min/question the app actually
-      shipped with (quick/half were exactly 1:1, full was even slightly under at 0.9). Applied
-      uniformly to every preset. JAC Official's own "full" preset draws a random set-pair at
-      runtime (44 or 51 questions, not a fixed 50) — its time budget is now computed from the
-      actual drawn count via a correction effect once `questions` resolves, rather than a static
-      guess; the preset's own label states the honest 88–102 min range instead of picking one
-      number. Verified live and via a test that drives a real random draw end-to-end. Commit
-      `d4efb09`.
+- **Open items for the next session: `docs/UI_UX_PLAN.md` §12.** Two of them are decisions for the
+  owner, not execution.
 
-    only covered the one reported case (SimulasiMode's review list); this pass traced all ~30 live
-    call sites and fixed the other ~9 (SearchMode, GlossaryMode, DangerMode's accordion,
-    CatatanMode, SumberMode, Dashboard's recent-cards list, ConfusionMode ×3). Promoted the
-    working 17/15 values to named constants (`JP_LIST_MAX`/`JP_LIST_MAX_SECONDARY`,
-    `jp-helpers.js`). Commit `f16c9f7`.
-  - **Typography consistency**: new `--fs-page-title` token (22px/26px wide) unifying BelajarTab
-    (was 24px, the actual outlier — confirmed live via Playwright which value was the real
-    majority before picking one) with SayaTab/every mode screen's already-matching 22px; 52
-    hardcoded sizes that exactly matched an existing token mechanically migrated onto it;
-    ReviewMode's rating-emoji was smaller than its own text label (real bug — confirmed by
-    comparing the whole button to FlashcardMode's identical widget, not assumed), fixed. Commits
-    `1f31af8`, `51a414b`, `c260df3`.
-  - **`--fs-*` converted to `rem`** — closes `docs/UI_UX_PLAN.md` item 53, deferred since
-    2026-08-26 as "touches ~89 files, interacts with ruby's `em` sizing and `jpFontSize()`'s JS
-    ladder." Both interaction concerns turned out not to apply to this specific change once
-    traced through (ruby's `em` computes from an inline px style, never from these tokens;
-    `jpFontSize()` is independent JS) and the 89-file number was a verification surface, not an
-    edit surface — every consumer only reads via `var()`. Verified live: default-zoom output is
-    pixel-identical to before, forcing a larger root font-size now actually scales these tokens
-    (couldn't before). Commit `d398244`.
-  - **Belajar's desktop layout fixed** — first real "expand to all devices" finding: Belajar's
-    single-column accordion menu was stretching to the full 1180px content column at the 1040px+
-    breakpoint with a growing dead gap beside every card, unlike Dashboard/Saya which both
-    genuinely reflow (confirmed live at 375/820/1440px, not assumed). Given `width='reading'`,
-    the same policy every individual mode already defaults to for this shape of content. Commit
-    `14a7712`.
-  - **Docs**: `docs/DESIGN_SPEC.md` §3 (typography) rewritten to match everything above;
-    `docs/LAYOUT_SPEC.md` gets a new §5 framing the "expand to all devices" direction and
-    documents the `width` prop; `docs/UI_UX_PLAN.md` item 53 closed, new §11 (items 66-68) for
-    what this round found but didn't fully close out — **read that section before starting a
-    follow-up session**, it's the actual "what's next" list.
-  - **HANDOFF.md housekeeping** (this file, same pass): the accumulated 2026-08-27/28 narrative
-    (330 lines) retired to `docs/archive/HANDOFF-2026-08-27-28-sessions.md` per
-    `docs/AGENT_WORKFLOW.md` §3 — this file had grown well past its own ~190-line target.
-    `_MAP.md`'s Agent Session Log gets one terse pointer row instead, matching that log's own
-    older, more compact convention rather than the verbose style recent rows had drifted into.
-  - **Not yet pushed to origin as of this row being written** — check `git log origin/main..main`
-    before assuming any of this is live. Confirm the resulting deploy via the Actions API once
-    pushed, same discipline as every prior session, not assumed from a successful push.
-  - Test count and validate status: see the last commit's own message for the exact number
-    (checked before every commit, this file doesn't duplicate a number that goes stale the moment
-    the next session adds a test).
+- **Verification**: `npm run validate` clean — format, lint, **672 tests**, five audits, build.
+  Every UI change screenshotted at 390/820/1440px in both themes, before and after.
 
-_(ACTIVE TASKS and OPEN DECISIONS — content-dq's task tracker and decision log, both fully
-resolved — archived to `docs/archive/HANDOFF-content-dq-era.md`. Pending work for the current
-phase lives in `docs/UI_UX_PLAN.md` §11 (items 66-68) instead of here.)_
+_(The 2026-08-31 / 09-01 entry this replaces is archived verbatim to
+`docs/archive/HANDOFF-2026-08-31-09-01-ui-typography.md`, with a note on the one claim in it a
+later session had to correct.)_
 
 ---
 
@@ -190,10 +115,11 @@ phase lives in `docs/UI_UX_PLAN.md` §11 (items 66-68) instead of here.)_
   `git log` rather than assuming; content-dq used `CONTENT:`/`ADMIN:`/`DOCS:` prefixes,
   `feat/ui-overhaul` uses conventional-commits style (`feat(ui):`, `docs:`)
 
-_(The rest of this section — `src/data/` editing rules, `verify-content.mjs` /
-`audit-track-consistency.mjs`, mirror-edit steps, the data-file quote-style rule — was
-content-dq-specific and archived with it. Still worth reading if a future session touches
-`src/data/` again: `docs/archive/HANDOFF-content-dq-era.md`.)_
+_(The rest of this section — `src/data/` editing rules, mirror-edit steps, the data-file
+quote-style rule — was content-dq-specific and archived with it: `docs/archive/HANDOFF-content-dq-era.md`.
+Note that its mirror-edit steps are now **historical only**: the mirror layers they describe were
+deleted 2026-09-04 and `docs/AGENT_WORKFLOW.md` §4a is the live map of where to edit what.
+`audit-track-consistency.mjs` went with them.)_
 
 ---
 
@@ -209,8 +135,9 @@ content-dq-specific and archived with it. Still worth reading if a future sessio
 - `docs/COMPONENT_SPEC.md` — CSS Modules conventions, shared primitives, component patterns
 - `docs/PWA_RELEASE_SPEC.md` — offline architecture, `CACHE_VERSION` discipline, deploy checklist
 - `docs/UI_UX_PLAN.md` — **not stable reference; a work queue.** Items 43–65 (drafted
-  2026-08-25) closed out 2026-08-26/28; a new round, items 66-68, added 2026-08-31 — see
-  CURRENT STATE above, don't trust this bullet's own age over that. Unlike the `*_SPEC.md`
+  2026-08-25) closed out 2026-08-26/28; items 66–68 added 2026-08-31 and closed 2026-09-01;
+  §12 (items 69–72) added 2026-09-04 — see CURRENT STATE above, don't trust this bullet's own
+  age over that. Unlike the `*_SPEC.md`
   files above, this is meant to shrink and retire to `docs/archive/` once empty — see
   `docs/AGENT_WORKFLOW.md` §3. Its predecessor (items 1–42, all shipped) is already archived
   there; numbering deliberately doesn't restart, so item references in git history stay unique

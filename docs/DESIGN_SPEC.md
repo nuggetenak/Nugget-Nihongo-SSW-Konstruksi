@@ -201,7 +201,17 @@ parent's *inline* font-size (always a raw px number from `jpFontSize()`, never o
 properties), and `jpFontSize()` itself is independent JS, so neither interaction touches this change
 at all. The ~89-file number turned out to be a verification surface, not an edit surface — every
 consumer only ever reads `--fs-*` via `var()`, confirmed by grep, so the ~20 lines that define the
-tokens were the entire change. No custom root font-size exists anywhere in this app, so every
+tokens were the entire change.
+
+> **Corrected 2026-09-04.** That grep can only have covered stylesheets. 297 inline
+> `fontSize: <px>` values lived in JSX across 28 files and none of them read a token, so the whole
+> point of this conversion — text that responds to a reader's OS font-size setting — reached the
+> shell and missed nearly every mode screen; the same text was also frozen at phone sizes on
+> desktop while everything around it grew at the 1040px breakpoint. 254 of the 297 matched a token
+> exactly and are now migrated. The 43 that don't (14, 16, 18, 24, 36, 48, 64px) are left alone,
+> same judgment as item 68 — and are now the only inline sizes in the app, which makes them easy to
+> find. **When checking a claim like "every consumer uses the token", grep the JSX too**: in this
+> app, inline `style={{}}` is where most of the type lives. No custom root font-size exists anywhere in this app, so every
 computed value is pixel-identical to before at default settings; verified live (Playwright) that
 forcing a larger root font-size now actually scales these tokens, which it structurally could not do
 before. The app-shell/pinch-zoom reasoning is still true and still a fair tradeoff either way — the
@@ -233,13 +243,18 @@ split put Greek letters used for real construction/electrical notation (Φ for p
 inside actual `jp` field content) into the wrong font's subset. Padded with a safety margin (full
 hiragana/katakana, CJK punctuation, halfwidth/fullwidth forms, circled numbers) as insurance
 against the regex-based literal extraction missing something built via string interpolation. Two
-unrelated, pre-existing data bugs turned up during this process and are *not* fixed here (out of
-scope for a font item) but are flagged: 70 files in `src/data/sets/wayground/` use Kangxi Radical
-codepoints (e.g. `⽅`, U+2F8D) instead of the correct CJK ideograph (`方`, U+65B9) for a handful of
-characters — visually near-identical, semantically wrong; and one card's `usage` field has a
-Cyrillic а/р typo'd into "gamb**а****р**kan" (should be Latin). Both codepoint ranges are covered in
-the font subset regardless, so the existing bugs still render correctly rather than as missing-
-glyph boxes — fixing the underlying data is a separate, small future item.
+unrelated, pre-existing data bugs turned up during this process and were *not* fixed there (out of
+scope for a font item) but were flagged: Kangxi Radical codepoints (e.g. `⽅`, U+2F45) instead of
+the correct CJK ideograph (`方`, U+65B9) for a handful of characters — visually near-identical,
+semantically wrong; and one card's `usage` field with a Cyrillic а/р typo'd into
+"gamb**а****р**kan" (should be Latin).
+
+**Both fixed 2026-09-04.** 21 Kangxi occurrences (`⽅`/`⾓`/`⾯`/`⽳`) in `wayground-sets.js` and the
+one Cyrillic pair. They had survived because search, sort and every audit treat the look-alike and
+the real character as unrelated while the screen shows no difference at all — and because they sat
+in quiz data, which `audit-integrity.mjs` never reads (it only walks the CARDS corpus).
+`scripts/audit-data-text.mjs` now scans every file under `src/data/` for both codepoint ranges, so
+the class can't return; verified by reintroducing one and watching it fail.
 
 Final verification was against each *source* font's own actual coverage, not a blind character-
 count check: comparing subsetted-font coverage to source-font coverage catches only genuine
