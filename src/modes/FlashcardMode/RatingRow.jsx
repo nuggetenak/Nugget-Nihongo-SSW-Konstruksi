@@ -1,5 +1,13 @@
 // ─── FlashcardMode/RatingRow.jsx ────────────────────────────────────────────
-// FSRS 4-button rating row — shown after card is flipped.
+// FSRS 4-button rating row — shown once this card has been flipped at least
+// once, not only while the back happens to be facing.
+//
+// It used to key off `flipped`, which was fine while flipping back was
+// impossible. Now that a card can be turned over freely, keying off `flipped`
+// would yank the four buttons off screen every time someone flipped back to
+// re-check the Japanese, and bounce the page height with them. `seen` resets
+// when the card changes, so the row still can't be used before reading the
+// answer — it just stops disappearing mid-decision.
 // haptic.tap() on rating button tap.
 // ─────────────────────────────────────────────────────────────────────────────
 import { haptic } from '../../utils/haptic.js';
@@ -16,8 +24,8 @@ function fmtInterval(d) {
   return `${Math.round(d / 30)}bln`;
 }
 
-export default function RatingRow({ flipped, rated, srsPreviews, onRate }) {
-  if (!flipped) return null;
+export default function RatingRow({ seen, rated, srsPreviews, onRate }) {
+  if (!seen) return null;
 
   if (rated) {
     return (

@@ -15,6 +15,7 @@ import { get as storageGet, set as storageSet } from '../../storage/engine.js';
 import ProgressBar from '../../components/ProgressBar.jsx';
 import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.jsx';
 import EmptyState from '../../components/EmptyState.jsx';
+import FilterPopup from '../../components/FilterPopup.jsx';
 import S from '../modes.module.css';
 import FC from './flashcard.module.css';
 
@@ -23,6 +24,39 @@ import RatingRow from './RatingRow.jsx';
 import ToolStrip from './ToolStrip.jsx';
 import FilterBar from './FilterBar.jsx';
 import Icon from '../../components/Icon.jsx';
+
+const SEARCH_KEY = 'ssw-fc-search';
+const CATS_KEY = 'ssw-fc-cats';
+
+// Filters used to be one string carrying three unrelated things: free text,
+// '__cat:<key>' for a single category, and '__starred__'. That made them
+// mutually exclusive (you could not search inside a category) and made the
+// category filter reachable only by tapping the badge of a card that already
+// happened to be on screen. Categories are a real Set now — 'all' and
+// 'bintang' are exclusive sentinels, everything else multi-selects — and text
+// composes with them.
+//
+// This still reads the old string, because a tab open across the upgrade would
+// otherwise take "__cat:haikan" as a literal query and show an empty deck with
+// nothing explaining why.
+function readInitialFilters() {
+  const rawSearch = sessionStorage.getItem(SEARCH_KEY) ?? '';
+  const rawCats = sessionStorage.getItem(CATS_KEY);
+  if (rawCats !== null) {
+    try {
+      const parsed = JSON.parse(rawCats);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return { search: rawSearch, cats: new Set(parsed) };
+      }
+    } catch {
+      // Unparseable — fall through to the defaults rather than trapping the
+      // user in a mode that throws on entry.
+    }
+  }
+  if (rawSearch === '__starred__') return { search: '', cats: new Set(['bintang']) };
+  if (rawSearch.startsWith('__cat:')) return { search: '', cats: new Set([rawSearch.slice(6)]) };
+  return { search: rawSearch, cats: new Set(['all']) };
+}
 
 export default function FlashcardMode({
   cards,
@@ -42,6 +76,10 @@ export default function FlashcardMode({
   const [flipped, setFlipped] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
   const [rated, setRated] = useState(false);
+  // True once the current card has been turned over at least once. Drives the
+  // rating row and the number shortcuts, so they survive flipping back to the
+  // front to re-check the Japanese — see RatingRow's header.
+  const [seen, setSeen] = useState(false);
   const toast = useToast();
   const confirm = useConfirm();
   const { goMode } = useApp();
@@ -61,7 +99,9 @@ export default function FlashcardMode({
   const [swipeDelta, setSwipeDelta] = useState(0);
 
   // Filter/sort — persists across mode switches via sessionStorage.
-  const [search, setSearch] = useState(() => sessionStorage.getItem('ssw-fc-search') ?? '');
+  const [search, setSearch] = useState(() => readInitialFilters().search);
+  const [catFilter, setCatFilter] = useState(() => readInitialFilters().cats);
+  const [filterOpen, setFilterOpen] = useState(false);
   const [sortMode, setSortMode] = useState(
     () => sessionStorage.getItem('ssw-fc-sort') ?? 'priority'
   );
@@ -71,11 +111,49 @@ export default function FlashcardMode({
   // Search starts collapsed. It was permanently on screen, costing a row above
   // the card every session while being used only occasionally. Opens
   // automatically when a filter is already active, so a restored session never
-  // hides why the deck looks smaller than expected.
-  const [searchOpen, setSearchOpen] = useState(() => Boolean(search));
+  // hides why the deck looks smaller than expected — a category filter counts,
+  // which is why applyCats opens it too.
+  const [searchOpen, setSearchOpen] = useState(() => {
+    const { search: s, cats } = readInitialFilters();
+    return Boolean(s) || !cats.has('all');
+  });
 
   // furiganaPolicy — wired to FlipCard → JpFront.
   const furiganaPolicy = storageGet('prefs')?.furiganaPolicy ?? 'always';
+
+  // Any filter change lands on a fresh card, so the card-local view state has
+  // to go with it — otherwise the rating row, which now outlives a flip-back,
+  // would still be up for a card the user has not seen.
+  const resetCardView = useCallback(() => {
+    setIdx(0);
+    setFlipped(false);
+    setShowDesc(false);
+    setRated(false);
+    setSeen(false);
+  }, []);
+
+  const applySearch = useCallback(
+    (v) => {
+      setSearch(v);
+      sessionStorage.setItem(SEARCH_KEY, v);
+      resetCardView();
+    },
+    [resetCardView]
+  );
+
+  const applyCats = useCallback(
+    (next) => {
+      setCatFilter(next);
+      sessionStorage.setItem(CATS_KEY, JSON.stringify([...next]));
+      // Reveal the bar rather than force-rendering it around `searchOpen`: two
+      // sources of truth for one row gave the toggle button and the search
+      // input the same accessible name ("Cari kartu") whenever a category
+      // filter held the bar open against a collapsed toggle.
+      if (!next.has('all')) setSearchOpen(true);
+      resetCardView();
+    },
+    [resetCardView]
+  );
 
   const rebuildOrder = useCallback(
     (mode) => {
@@ -96,22 +174,23 @@ export default function FlashcardMode({
     setFlipped(false);
     setShowDesc(false);
     setRated(false);
+    setSeen(false);
   }, [baseCards, known, unknown, rebuildOrder, sortMode, reviewBelum]);
 
-  const displayCards =
-    search === '__starred__'
-      ? order.filter((c) => starred.has(c.id))
-      : search.startsWith('__cat:')
-        ? order.filter((c) => c.category === search.slice(6))
-        : search.trim()
-          ? order.filter((c) => {
-              const q = search.toLowerCase();
-              return (
-                (c.jp || '').toLowerCase().includes(q) ||
-                (c.id_text || '').toLowerCase().includes(q)
-              );
-            })
-          : order;
+  // Category and text now stack instead of overriding each other.
+  const catFiltered = catFilter.has('bintang')
+    ? order.filter((c) => starred.has(c.id))
+    : catFilter.has('all')
+      ? order
+      : order.filter((c) => catFilter.has(c.category));
+  const query = search.trim().toLowerCase();
+  const displayCards = query
+    ? catFiltered.filter(
+        (c) =>
+          (c.jp || '').toLowerCase().includes(query) ||
+          (c.id_text || '').toLowerCase().includes(query)
+      )
+    : catFiltered;
 
   const safeIdx = Math.min(idx, Math.max(0, displayCards.length - 1));
   const card = displayCards[safeIdx];
@@ -133,12 +212,16 @@ export default function FlashcardMode({
       setFlipped(false);
       setShowDesc(false);
       setRated(false);
+      setSeen(false);
     },
     [displayCards.length]
   );
 
   const flip = useCallback(() => {
-    if (!flipped) bumpHint();
+    if (!flipped) {
+      bumpHint();
+      setSeen(true);
+    }
     setFlipped((f) => !f);
     setShowDesc(false);
   }, [flipped, bumpHint]);
@@ -171,6 +254,7 @@ export default function FlashcardMode({
     setIdx(0);
     setFlipped(false);
     setRated(false);
+    setSeen(false);
     toast.show('Progres direset');
   }, [confirm, known, unknown, onResetProgress, rebuildOrder, sortMode, toast, goMode]);
 
@@ -190,7 +274,10 @@ export default function FlashcardMode({
         flip();
         return;
       }
-      if (flipped && !rated) {
+      // Keyed off `seen`, matching the rating row: the buttons stay on screen
+      // when the card is flipped back to the front, so the shortcuts have to
+      // stay live with them.
+      if (seen && !rated) {
         if (e.key === '1') handleRate(1);
         if (e.key === '2') handleRate(2);
         if (e.key === '3') handleRate(3);
@@ -199,17 +286,24 @@ export default function FlashcardMode({
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [go, flip, flipped, rated, handleRate]);
+  }, [go, flip, seen, rated, handleRate]);
+
+  const hasCatFilter = !catFilter.has('all');
 
   // ── Empty state ──────────────────────────────────────────────────────────
   if (!card || displayCards.length === 0) {
     const resetFilters = () => {
       setSearch('');
+      setCatFilter(new Set(['all']));
       setReviewBelum(false);
+      // Clearing React state alone left the filter in sessionStorage, so a
+      // "reset" filter came back on the next reload.
+      sessionStorage.removeItem(SEARCH_KEY);
+      sessionStorage.removeItem(CATS_KEY);
     };
     return (
       <div className={S.pageCenter}>
-        {search ? (
+        {search || hasCatFilter ? (
           <EmptyState.SearchEmpty query={search} onCta={resetFilters} />
         ) : reviewBelum ? (
           <EmptyState
@@ -272,6 +366,20 @@ export default function FlashcardMode({
           {safeIdx + 1}/{displayCards.length}
         </span>
 
+        {/* Category filter. Until now the only way to narrow the deck by
+            category was to tap the badge on a card of that category — which
+            means finding one first, in a 1438-card deck, to filter a deck of
+            1438 cards. */}
+        <button
+          className={FC.iconBtn}
+          onClick={() => setFilterOpen(true)}
+          aria-label="Filter kategori"
+          aria-haspopup="dialog"
+          data-active={hasCatFilter}
+        >
+          <Icon name="arsip" size={17} />
+        </button>
+
         <button
           className={FC.iconBtn}
           onClick={() => setSearchOpen((o) => !o)}
@@ -283,15 +391,24 @@ export default function FlashcardMode({
         </button>
       </div>
 
-      {/* Filter bar — collapsed by default */}
+      <FilterPopup
+        isOpen={filterOpen}
+        onClose={() => setFilterOpen(false)}
+        cards={baseCards}
+        activeCats={catFilter}
+        onApply={applyCats}
+        starredCount={starred.size}
+      />
+
+      {/* Filter bar — collapsed by default; applying a category opens it, so
+          the deck is never quietly smaller than it looks. */}
       {searchOpen && (
         <FilterBar
           search={search}
-          onSearch={(v) => {
-            setSearch(v);
-            sessionStorage.setItem('ssw-fc-search', v);
-            setIdx(0);
-          }}
+          onSearch={applySearch}
+          catFilter={catFilter}
+          onClearCats={() => applyCats(new Set(['all']))}
+          matchCount={displayCards.length}
           isStarred={isStarred}
           onToggleStar={() => onToggleStar(card?.id)}
         />
@@ -313,11 +430,7 @@ export default function FlashcardMode({
           showHint={showHint}
           borderColor={borderColor}
           swipeDelta={swipeDelta}
-          onCatFilter={(key) => {
-            setSearch(`__cat:${key}`);
-            sessionStorage.setItem('ssw-fc-search', `__cat:${key}`);
-            setIdx(0);
-          }}
+          onCatFilter={(key) => applyCats(new Set([key]))}
           onTouchStart={(e) => {
             setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
           }}
@@ -335,30 +448,28 @@ export default function FlashcardMode({
             const dy = e.changedTouches[0].clientY - touchStart.y;
             setSwipeDelta(0);
             setTouchStart(null);
-            // If flipped and not yet rated — swipe to rate.
-            if (flipped && !rated) {
-              if (dy < -60 && Math.abs(dy) > Math.abs(dx)) {
-                handleRate(4);
-                return;
-              } // swipe up = Easy
-              if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
-                handleRate(dx < 0 ? 1 : 3);
-                return; // left=Again, right=Good
-              }
+            // v87 semantics: horizontal always moves between cards, up always
+            // flips. These used to mean "rate this card" once it was face-up
+            // (left=Again, right=Good, up=Easy), so swiping back to the
+            // previous card stopped working the moment you flipped one over —
+            // and a swipe meant to navigate silently scheduled an SRS review
+            // instead. Rating is the four buttons' job.
+            if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+              go(dx > 0 ? -1 : 1);
+              return;
             }
-            // Not flipped or small swipe — navigate cards
-            if (!flipped && Math.abs(dx) > 60) go(dx > 0 ? -1 : 1);
+            if (dy < -60 && Math.abs(dy) > Math.abs(dx)) flip();
           }}
         />
       </ErrorBoundary>
 
       {/* FSRS rating row — hidden in read-only mode */}
       {!readOnly && (
-        <RatingRow flipped={flipped} rated={rated} srsPreviews={srsPreviews} onRate={handleRate} />
+        <RatingRow seen={seen} rated={rated} srsPreviews={srsPreviews} onRate={handleRate} />
       )}
 
-      {/* Swipe hint — shown when flipped and not yet rated */}
-      {!readOnly && flipped && !rated && (
+      {/* Gesture hint — describes navigation now, not rating */}
+      {seen && !rated && (
         <div
           style={{
             textAlign: 'center',
@@ -368,13 +479,16 @@ export default function FlashcardMode({
             letterSpacing: 0.3,
           }}
         >
-          ← Lagi · Oke → · ↑ Mudah
+          ← → ganti kartu · ↑ balik kartu
         </div>
       )}
 
-      {/* Nav row — arrows only. The flip button was redundant (tapping the card
-          flips it, Space does on a keyboard) but the arrows are NOT: swipe does
-          not exist with a mouse, and desktop is now a supported size. */}
+      {/* Nav row. The flip button was removed 2026-09-04 as redundant with
+          tapping the card — true of the front face, false of the back, which
+          carried no handler at all. On a touch screen that made a flipped card
+          impossible to turn back over. It is back, and the back face is
+          tappable too (FlipCard.jsx). The arrows are separately necessary:
+          swipe does not exist with a mouse, and desktop is a supported size. */}
       <div className={FC.navRow}>
         <button
           onClick={() => go(-1)}
@@ -383,6 +497,12 @@ export default function FlashcardMode({
           aria-label="Kartu sebelumnya"
         >
           ← Prev
+        </button>
+        {/* No aria-label: the visible text already names the action, and
+            duplicating "Balik kartu" here would give the page two controls with
+            that name — the card face itself carries it. */}
+        <button onClick={flip} className={FC.navFlip} aria-pressed={flipped}>
+          {flipped ? '🔄 Balik' : '👁 Lihat'}
         </button>
         <button
           onClick={() => go(1)}
@@ -448,12 +568,11 @@ export default function FlashcardMode({
         unknownInView={unknownInView}
         onReset={handleReset}
         starredCount={starred.size}
-        starFilterActive={search === '__starred__'}
-        onToggleStarFilter={() => {
-          setSearch(search === '__starred__' ? '' : '__starred__');
-          setIdx(0);
-        }}
-        flipped={flipped}
+        starFilterActive={catFilter.has('bintang')}
+        onToggleStarFilter={() =>
+          applyCats(catFilter.has('bintang') ? new Set(['all']) : new Set(['bintang']))
+        }
+        seen={seen}
         rated={rated}
         readOnly={readOnly}
         onToggleReadOnly={() => setReadOnly((r) => !r)}

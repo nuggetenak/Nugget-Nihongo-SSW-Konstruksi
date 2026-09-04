@@ -6,6 +6,21 @@ Moved here 2026-08-18 during a repo hygiene pass, out of `src/`.
 ways in the future."* Not a temporary holding spot pending cleanup — settled. No need to
 re-litigate this or suggest deleting it in a future session.
 
+**Update (item 55, 2026-09-04): `FilterPopup.jsx` and `.module.css` are gone from here — they
+graduated to `src/components/`.** The blocker recorded below ("wiring this up would need
+`FlashcardMode`'s filtering to grow beyond its current single-category search-string convention
+(`__cat:${key}`) to a real multi-category set — a small filtering-state change, not a drop-in")
+was exactly right, and that state change is what item 55 did. Two things changed on the way in:
+the sheet chrome now comes from `Sheet.jsx` (focus trap + Escape, which this never had), and
+counts are computed from the deck passed in rather than the global `CARDS`, so a deck scoped by
+`filterIds` reports its own numbers.
+
+Removed rather than left here as a second copy. The owner decision below stands and is not being
+re-litigated — it is about **unwired** code, and this file stopped being unwired. Keeping an
+aging duplicate of a live component is the failure mode this repo has already paid for once (four
+copies of the card corpus, two silently stale; see `CHANGELOG.md` 2026-09-04). The other two files
+here are untouched.
+
 **Update (item 18, 2026-08-24):** `FilterPopup.jsx` here was replaced with the current `main`/
 `feat/ui-overhaul` version, which had diverged from this snapshot (`VOCAB_SOURCES.includes(c.source)`
 replacing an older `c.type === 'vocab'` check, plus formatting) — the copy here was stale relative

@@ -176,11 +176,38 @@
 }
 
 /* ── FilterBar subcomponent ────────────────────────────────────────────────── */
+/* Wraps so the category summary drops onto its own line under the search box
+   rather than squeezing it — the two are independent filters now, so both are
+   on screen at once. */
 .filterBar {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-8);
   margin-top: var(--space-10);
   margin-bottom: var(--space-12);
+}
+
+.filterCatRow {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.filterCatChip {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  padding: var(--space-6) var(--space-10);
+  border-radius: var(--r-pill);
+}
+
+.filterCatClear {
+  font-family: inherit;
+  font-size: var(--fs-micro);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-4) var(--space-6);
 }
 
 .filterInput {
@@ -205,52 +232,6 @@
   cursor: pointer;
   font-size: 0.875rem;
   flex-shrink: 0;
-}
-
-/* ── Nav row ───────────────────────────────────────────────────────────────── */
-.navRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--space-8);
-  margin-top: var(--space-10);
-}
-
-.navBtn {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  padding: var(--space-14) var(--space-8);
-  border-radius: var(--r-lg);
-  font-size: var(--fs-body);
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--ssw-surface);
-  border: 1px solid var(--ssw-border);
-  color: var(--ssw-textMuted);
-  transition:
-    background var(--t-fast),
-    transform var(--t-fast);
-}
-.navBtn:active {
-  transform: scale(0.95);
-}
-
-.navFlip {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  padding: var(--space-14) var(--space-8);
-  border-radius: var(--r-lg);
-  font-size: var(--fs-body);
-  font-weight: 800;
-  cursor: pointer;
-  background: var(--accent);
-  border: none;
-  color: #fff8e7;
-  box-shadow: var(--shadow-amber);
-  transition:
-    transform var(--t-fast),
-    box-shadow var(--t-fast);
-}
-.navFlip:active {
-  transform: scale(0.95);
-  box-shadow: 0 1px 4px rgba(180, 83, 9, 0.15);
 }
 
 /* ── Keyboard hint ─────────────────────────────────────────────────────────── */
@@ -352,7 +333,12 @@
   background: var(--ssw-surfaceActive);
 }
 
-/* Nav arrows — secondary now that tapping the card is the primary flip. */
+/* Prev · Flip · Next. A duplicate set of .navRow/.navBtn rules sat above this
+   one (a 3-column grid from when this row had three buttons) plus a .navFlip
+   nothing rendered — dead since the flip button was removed 2026-09-04, and
+   silently overridden by the rules below anyway. Removed rather than revived:
+   the flex row takes three children without changing, and .navFlip is
+   rewritten below on the --ssw-* tokens the rest of this file uses. */
 .navRow {
   display: flex;
   gap: var(--space-8);
@@ -380,6 +366,29 @@
 .navBtn:not(:disabled):hover {
   background: var(--ssw-surfaceHover);
   color: var(--ssw-text);
+}
+
+/* The flip button. Tapping the card still flips it — this exists because on a
+   touch screen that was the ONLY way, and it stopped working the moment the
+   card was face-down (the back carried no handler). A visible control also
+   makes "you can turn this back over" discoverable, which a bare tap target
+   never was. */
+.navFlip {
+  flex: 1;
+  min-height: var(--tap-min);
+  border-radius: var(--r-md);
+  border: none;
+  background: var(--ssw-amber);
+  color: var(--ssw-onAmber);
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-black);
+  cursor: pointer;
+  transition: transform var(--t-fast);
+}
+
+.navFlip:active {
+  transform: scale(0.95);
 }
 
 /* Reset — destructive, so it is deliberately NOT in the tool grid. Quieter

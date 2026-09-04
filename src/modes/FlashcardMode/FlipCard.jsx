@@ -158,9 +158,28 @@ export default function FlipCard({
         </div>
 
         {/* ── BACK ──────────────────────────────────────────────────────── */}
+        {/* The back is tappable exactly like the front. It wasn't, and that was
+            the whole reason a flipped card could not be turned back over on a
+            touch screen: the front goes pointerEvents:none once flipped, and
+            the back carried no handler at all, so the only way back was Space
+            on a physical keyboard. */}
         <div
           ref={backRef}
           className={`fc-face fc-face--back ${S.back}`}
+          onClick={() => {
+            haptic.flip();
+            onFlip();
+          }}
+          role="button"
+          tabIndex={flipped ? 0 : -1}
+          aria-label={flipped ? 'Balik kartu' : undefined}
+          onKeyDown={(e) => {
+            if (!flipped) return;
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            haptic.flip();
+            onFlip();
+          }}
           style={{
             background: `linear-gradient(145deg, ${catColor}dd 0%, ${catColor}88 100%)`,
             border: `1.5px solid ${catColor}88`,
@@ -183,8 +202,11 @@ export default function FlipCard({
             <div className={S.backId}>{card.id_text}</div>
           </div>
 
+          {/* Stops the description area from flipping the card out from under
+              someone who is reading it. The button below already guarded
+              itself; the expanded text that replaces it did not. */}
           {card.desc && (
-            <div className={S.backDescArea}>
+            <div className={S.backDescArea} onClick={(e) => e.stopPropagation()}>
               {!showDesc ? (
                 <button
                   className={S.backDescBtn}

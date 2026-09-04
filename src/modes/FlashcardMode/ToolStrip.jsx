@@ -21,7 +21,7 @@ export default function ToolStrip({
   starredCount,
   starFilterActive,
   onToggleStarFilter,
-  flipped,
+  seen,
   rated,
   readOnly,
   onToggleReadOnly,
@@ -102,7 +102,9 @@ export default function ToolStrip({
         Reset progres
       </button>
 
-      {flipped && !rated && (
+      {/* Tracks the rating row: the shortcut hint is useless when the buttons
+          it describes aren't there, and misleading when they are and it isn't. */}
+      {seen && !rated && (
         <div className={FC.kbHint} style={{ color: T.textFaint }}>
           Keyboard: 1 Lagi · 2 Susah · 3 Oke · 4 Mudah
         </div>
