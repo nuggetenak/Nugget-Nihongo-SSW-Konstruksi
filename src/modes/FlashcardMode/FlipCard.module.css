@@ -1,12 +1,29 @@
 /* ─── FlipCard.module.css v2.0 — UI Upgrade Round 2 ─────────────────────────── */
 
+/* Both faces share a floor, and it follows the viewport (2026-09-04).
+
+   A flat 230px was sized for a phone. Once .scene started growing into the
+   height AppShell reserves (see modes.module.css .fcWrapper), that made the
+   card visibly adrift on anything taller: on an 820x1180 tablet a 230px card
+   sat in an ~800px scene with 280px of air above and below it.
+
+   It has to be on BOTH faces, not on .fc-card: the back is absolutely
+   positioned with no bottom edge, so it takes its height from its content, and
+   the ResizeObserver in FlipCard.jsx sizes the card from that measurement. A
+   floor on the card alone would leave the back face shorter than the front and
+   the card would visibly change height on the flip — the exact thing that
+   observer exists to prevent. A floor on each face is measured identically by
+   it, so the two stay equal.
+
+   The 480px-tall landscape override at the bottom of this file still wins:
+   same specificity, later in source order. */
 /* ── Front face ── */
 .front {
   padding: var(--space-32) var(--space-16) var(--space-48);
   background: var(--ssw-surface);
   border-radius: var(--r-xxl);
   box-shadow: var(--ssw-shadowMd);
-  min-height: 230px;
+  min-height: clamp(230px, 34vh, 400px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +70,7 @@
 .back {
   padding: var(--space-16) var(--space-16) var(--space-16);
   border-radius: var(--r-xxl);
-  min-height: 230px;
+  min-height: clamp(230px, 34vh, 400px);
   display: flex;
   flex-direction: column;
   position: absolute;
