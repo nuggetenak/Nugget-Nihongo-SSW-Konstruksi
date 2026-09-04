@@ -411,11 +411,23 @@ consuming stylesheet needed touching.
 silently. Lower stakes there (audio is supplementary, not the exercise), which is why it was
 scoped out — revisit if silent audio failure turns out to matter.
 
-### ☐ 55. `FilterPopup` is archived but the capability is still missing — `M`
+### ☑ 55. `FilterPopup` is archived but the capability is still missing — `M`
 *(archived item 18)* A real category-picker with live counts, unwired because `FlashcardMode`'s
 filter state is a single `__cat:` search string, not a multi-category set. Lives at
 `legacy/unwired-app-code/`. Wiring it needs that state change first. `haptic.success()` is
 likewise still defined and unused (archived item 21) — a first call site is a product decision.
+
+**Done 2026-09-04.** The state change came first, exactly as this entry predicted. `search` no
+longer carries three unrelated filters; categories are a `Set` (`'all'`/`'bintang'` as exclusive
+sentinels, everything else multi-select) that *composes* with the text query instead of replacing
+it, and old `__cat:`/`__starred__` values still in sessionStorage migrate on read. `FilterPopup`
+moved to `src/components/` on top of `Sheet` (the focus trap and Escape-to-close it never had),
+and counts from the deck it is handed rather than the global `CARDS` — so a `filterIds` deck
+launched from `SumberMode` reports its own numbers instead of 1438. Entry point is a folder button
+in the flashcard top bar: until now the only way to filter by category was to tap the badge on a
+card of that category, i.e. find one first, inside the 1438-card deck you were trying to narrow.
+`haptic.success()` is still unused — that half of this entry is unchanged, and still a product
+decision.
 
 ---
 
@@ -808,3 +820,148 @@ renders shorter than the front. Fixing that means reworking a 3D flip whose two 
 size independently — small in diff, easy to get subtly wrong, and worth doing with the card
 measured at several content lengths rather than eyeballed at one.
 
+
+---
+
+## 7. Feature-parity audit across the whole Belajar tab (2026-09-04)
+
+Prompted by "kasih opsi kategori di menu kartu, sekalian analisa gap fitur menu kartu vs menu
+lain" — then widened, on request, to every menu the Belajar tab lists.
+
+Method, so a future session can re-run this rather than trust it: the tab
+(`BelajarTab.jsx:135-173`) renders `MODE_SECTIONS` verbatim, so the mode list is the registry's.
+Each mode's own file was read for its options; the **prop map at `ModeRouter.jsx:188-269` is the
+authority** for the "session" and "audio" columns, because a mode cannot use a capability it is
+never handed. Every claim below was checked against code, not inferred from these docs.
+
+| Section | Mode | Category filter | Count option | Wrong-only | Session recorded | Audio | Resume |
+|---|---|---|---|---|---|---|---|
+| Pelajari | `kartu` | ☑ *(item 55)* | — | "Belum" (from `unknown`) | **no** | **not passed** | — |
+| | `glosari` | Y chips | — | — | n/a read | reads `audioEnabled` itself | — |
+| | `cari` | — (text) | — | — | n/a read | — | history 5 |
+| | `catatan` | — | — | `ada`/`belum` pills | n/a read | — | — |
+| Latihan | `kuis` | Y (⚙ panel) | `QUIZ_COUNTS`+All | Y Mode Lemah | Y | Y | **Y — only one** |
+| | `sprint` | Y list+counts | duration 30/60/120 | — | Y | — | — |
+| | `fokus` | Y weakest-first | inherits Sprint | implicit | Y | — | — |
+| | `angka` | — | **—** | — | Y | — | — |
+| | `jebak` | type, not category | **—** | — | Y | — | — |
+| | `mirip` | type, not category | **—** | — | Y | — | — |
+| | `produksi` | **—** | `QUIZ_COUNTS`+All | — | Y | Y | — |
+| | `kuisprod` | **—** | `QUIZ_COUNTS`+All | — | Y | Y | — |
+| | `dengar` | **—** | `QUIZ_COUNTS` | — | Y | **not passed** | — |
+| Ujian | `jac` | topic (8) | per-set | Y ⚠ Lemah | Y | Y | — |
+| | `wayground` | — (per set) | per-set | Y Ulang N | Y | — | — |
+| | `vocab` | — (per set) | per-set | **—** | Y | Y | — |
+| | `simulasi` | source+preset | preset | — | Y | — | **no** |
+| Ulasan | `ulasan` | — (SRS queue) | due today | n/a | Y | Y | — |
+| Alat | `stats`/`ekspor`/`sumber` | n/a | n/a | n/a | n/a | n/a | n/a |
+
+### ☐ 75. `kartu` is the only content mode absent from its own statistics — `S` — `P1`
+
+Across the whole prop map, **every** study mode is handed `onSessionEnd` or `onFinish` except
+`kartu` (`ModeRouter.jsx:189-200`), which gets neither. So `progress.sessions` — what `StatsMode`,
+`session-analytics.js` and the heatmap read — has never seen a minute of flashcard study. The
+streak still advances (via `handleMark` → `advanceStudyDay`), so nothing is lost; the most-opened
+mode in the app simply does not appear on its own stats page.
+
+Needs a shape decision first: `kartu` has no session boundary — when is it "done"? Per N cards
+rated, or on mode exit. Don't guess.
+
+### ☐ 76. `audioEnabled` is distributed with no rule, and `speakOnFlip` is dead in Kartu — `M` — `P1`
+
+Three findings, one root cause: nothing owns the question "which modes speak?".
+
+1. **The listening mode is not handed the audio setting.** `dengar` is absent from the
+   `audioEnabled` recipients (`ModeRouter.jsx:255-262`), and `DengarMode.jsx` never reads
+   `prefs.audioEnabled` — only `canSpeak()` (`:52`). Meanwhile two *typing* modes (`produksi`,
+   `kuisprod`) do get it. Turning audio off in Saya therefore does not silence the one mode built
+   entirely on audio. This needs a decision rather than a patch: it may well be correct for Dengar
+   to ignore the setting (obeying it makes the mode useless) — in which case the setting should
+   say so.
+2. **`prefs.speakOnFlip` does nothing in Kartu.** `SayaTab.jsx:541` labels it
+   **"👆 Saat balik kartu"**. Its only reader is `ReviewMode.jsx:78,94`. `kartu` receives no
+   `audioEnabled` and never calls `speakJP()`.
+3. Receiving it: `kuis`, `jac`, `vocab`, `produksi`, `kuisprod`. Not: `kartu`, `sprint`,
+   `wayground`, `dengar`, `angka`, `jebak`, `mirip`, `simulasi`.
+
+### ☐ 77. Three differently-shaped category pickers, plus five copies of `pillStyle` — `M` — `P2`
+
+Straight continuation of §1's through-line. Category selection is written three times:
+
+| Where | Shape | Shows counts? |
+|---|---|---|
+| `QuizMode.jsx:64-70, 370-400` | chips, `['all', ...keys]` — raw key for non-`all` | no |
+| `SprintMode.jsx:57-70, 212-246` | list rows, `{key,label,emoji}` objects | yes |
+| `GlossaryMode.jsx:50-54, 262-285` | emoji chips from `getCatsForTrack` | active one only |
+
+`FilterPopup` (item 55) is now a fourth — but a shared component in `src/components/`, which is
+the direction the other three should collapse toward rather than another local variant.
+
+And `pillStyle(on)` — identical body — is copied at `QuizMode.jsx:157`, `ProductionMode.jsx:176`,
+`QuizProduksiMode.jsx:170`, `JACMode.jsx:177`, `WaygroundMode.jsx:171`, plus fully-inline chip
+variants in `DangerMode.jsx:79-101`, `ConfusionMode.jsx:126-148`, `CatatanMode.jsx:274-291`,
+`SprintMode.jsx:184-208`. `modes.module.css` already has `.pill` (`:272`) that none of them use.
+
+### ☐ 78. Simulasi loses the entire exam on reload — `M` — `P1`
+
+**Most urgent item in this section.** Item 51 (☑) gave `QuizShell` session persistence, but behind
+an opt-in `persistKey` prop (`QuizShell.jsx:36`, `:55`) — and only `kuis` passes it
+(`QuizMode.jsx:442`). `wayground`, `vocab` and `jac` call the same shell without it, so the
+capability exists and is switched off.
+
+`simulasi` is the worst case: it does not use `QuizShell` at all, and `SimulasiMode.jsx` touches
+storage zero times (no `storageGet`/`storageSet`/`sessionStorage`) — for a **timed 40–60 question
+mock exam** that goes to the trouble of registering
+`useExitGuard(phase === 'playing' ? confirmDiscard : null)` (`:417`), the only mode in the app
+that does. So it knows this session is expensive to lose, and guards only the in-app back button —
+not a reload, a crash, or the OS reclaiming the tab on the cheap Android phones this is designed
+for.
+
+### ☐ 79. "Wrong-only" and "retry wrong" are both inconsistent, in different ways — `S` — `P2`
+
+Pre-session wrong-only filters exist in `kuis` (`QuizMode.jsx:34,318-345`), `jac`
+(`JACMode.jsx:348-365`), `wayground` (`WaygroundMode.jsx:434-458`). Absent from `vocab`,
+`produksi`, `kuisprod`, `dengar`, `angka`, `mirip` — though `vocab` writes `progress.vocabWrong`
+exactly as `wayground` writes `wgWrong`.
+
+The post-session `onRetryWrong` bridge is lopsided differently: handed to `kuis`, `jac`,
+`wayground`, `vocab`, `simulasi`, `produksi`, `kuisprod`, `dengar` — **not** to `sprint`, `angka`,
+`jebak`, `mirip` (`ModeRouter.jsx:216-269`), all four of which record wrong answers
+(`SprintMode.jsx:137-142`, and `recordWrong` in the others). The mistakes are stored; there is no
+route back to them from the results screen.
+
+`kartu` has the same idea under another name and another data source — the "Belum" button
+(`ToolStrip.jsx:41-50`) reads `unknown`, not `quizWrong`.
+
+### ☐ 80. Count and auto-advance options are distributed arbitrarily — `S` — `P2`
+
+- `QUIZ_COUNTS = [10,20,30]` (`utils/constants.js:22`) is used by `kuis`, `dengar`, `produksi`,
+  `kuisprod`. `angka`, `jebak` and `mirip` have **no length control at all** — always the whole
+  shuffled pool, with no way to take a short session. (`kartu` likewise; see item 75, which has to
+  define "a flashcard session" first.)
+- **Auto-advance delay**: exposed by `kuis` (`QuizMode.jsx:35,362`) and `jac` (`JACMode.jsx:171`).
+  `wayground` (`:153-161`) and `vocab` (`:93-103`) call the same `QuizShell` **without**
+  `autoNextDelay`, so they are pinned to its 2000 ms default (`QuizShell.jsx:34`). Same screen,
+  same shell; the control is present in two of the four and absent in the others.
+
+Check against item 49 (☑, "Question-count options differ per mode with no rationale") before
+building — some of this may be leftover scope, some may be regression.
+
+### ☐ 81. `produksi` and `kuisprod` are ~500-line twins — `M` — `P2`
+
+`ProductionMode.jsx` (531 lines) and `QuizProduksiMode.jsx` (500) share the start screen, the
+`pillStyle` copy (`:176` / `:170`), `HowToPlayCard`, the count picker (`:219-234` in both) and the
+state shape (`started/count/queue/idx/input/phase/results/sessionFired`, `:77-84` / `:76-83`).
+They differ in exactly two places: direction (ID→JP vs JP→ID) and `isCorrect` (`:32-47` matching
+JP/stripFuri/kana vs `:37-46` matching `id_text` synonyms). The clearest
+one-component-with-a-direction-prop candidate in the codebase.
+
+### Checked, not a bug
+
+- No mode exposes a JP↔ID direction toggle; direction is chosen by *which mode you open*. That is
+  consistent design, not a gap — and item 81 does not change it, only the code behind it.
+- Shuffle is unconditional everywhere and does not need to become an option.
+- `sprint` deliberately does not use `ResultScreen`, with the reasoning recorded in
+  `SprintMode.jsx:259`. Don't "fix" it into using one.
+- `glosari`, `cari`, `catatan`, `stats`, `ekspor`, `sumber` get no `onSessionEnd` and shouldn't —
+  all are reading or tooling surfaces, not study sessions.

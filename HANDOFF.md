@@ -36,6 +36,36 @@ content into this file.
 
 **As of 2026-09-04.** Verify before trusting past this point — this line doesn't update itself.
 
+- **2026-09-04: "buat menu kartu bisa kasih opsi pilihan kategori, sama analisa gap feature
+  menu kartu dan menu yang lain"** (widened mid-session to "analisa juga menu lainnya di tab
+  belajar", plus "aku pengen kyk versi legacy v87 yang bisa bolak balik kartu"). Branch
+  `claude/menu-kartu-kategori-gap-1onln7`. Three things landed; reasoning is in the commit
+  messages, this is a map to them.
+
+  - **Category picker in `kartu` — `docs/UI_UX_PLAN.md` item 55 closed.** `FilterPopup` had sat
+    unwired in `legacy/unwired-app-code/` since 2026-08-18 waiting on exactly one thing: the
+    mode's filter state was a single `search` string doing three unrelated jobs (free text,
+    `__cat:<key>` for one category, `__starred__`), so the three were mutually exclusive and a
+    category could never be reached except by tapping the badge of a card already on screen —
+    inside the 1438-card deck you were trying to narrow. Categories are a `Set` now, composing
+    with the text query; old sessionStorage values migrate on read. `FilterPopup` graduated to
+    `src/components/` on top of `Sheet` (focus trap + Escape it never had) and counts from the
+    deck it is handed, so a `filterIds` deck from `SumberMode` no longer reports 1438. Its
+    `legacy/` copy is deleted rather than left to age — see that README.
+  - **A flipped card could not be turned back over on a touch screen.** Not a feature request, a
+    regression: the front face carried the flip handler and went `pointerEvents:none` once
+    flipped, the back face carried none, and the `🔄 Balik` button had been removed 2026-09-04 as
+    "redundant with tapping the card" — true of the front, false of the back. Space on a physical
+    keyboard was the only way back. Restored to v87 semantics: both faces tappable, flip button
+    back, horizontal swipe *always* navigates and up flips (swipes used to silently rate and
+    auto-advance a face-up card, which is what made "go back" unreachable), and the rating row
+    now persists once a card has been seen rather than vanishing on every flip-back.
+  - **`docs/UI_UX_PLAN.md` §7 — feature-parity audit of all 21 modes in the Belajar tab**, items
+    75–81, none built. `ModeRouter.jsx`'s prop map is the authority for what a mode can even do.
+    **Item 78 is the one to take first**: `simulasi` is a timed 40–60 question mock exam with zero
+    persistence, that registers an exit guard — so it knows the loss is expensive and guards only
+    the in-app back button, not a reload or crash.
+
 - **2026-09-04: "analyze comprehensively and exhaustively; fix all gaps, inconsistencies,
   discrepancies; upgrade the UI & UX."** Branch `claude/analysis-ui-polish-cxnj2d`, PR #8 (draft).
   Full reasoning lives in the commit messages, one per theme — this is a map to them, not a
