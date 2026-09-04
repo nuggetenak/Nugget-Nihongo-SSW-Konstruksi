@@ -17,6 +17,7 @@ import { todayStr } from '../utils/date.js';
 import { formatCount } from '../utils/format.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import { stripFuri } from '../utils/jp-helpers.js';
+import { getTextScale, nextTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
@@ -70,6 +71,7 @@ export default function SayaTab() {
     prefs,
   } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
+  const textScale = getTextScale(prefs?.textScale ?? DEFAULT_TEXT_SCALE);
   const confirm = useConfirm();
   const { known, unknown, streakData, sessions, jacScores } = useProgress();
   const srs = useSRSContext();
@@ -549,6 +551,20 @@ export default function SayaTab() {
             }}
           />
         )}
+        <Row
+          label="🔠 Ukuran Teks"
+          value={`${textScale.emoji} ${textScale.label}`}
+          sub={
+            textScale.key === 'normal'
+              ? 'Ketuk untuk perbesar semua tulisan di aplikasi'
+              : `Semua tulisan ${textScale.pct}% dari ukuran normal`
+          }
+          onClick={() => {
+            const next = nextTextScale(textScale.key);
+            setPref('textScale', next);
+            toast.show(`🔠 Ukuran teks: ${getTextScale(next).label}`);
+          }}
+        />
         <Row
           label="ふ Furigana di Kartu"
           value={
