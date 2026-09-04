@@ -48,7 +48,12 @@ function Crumb({ modeKey, onBack }) {
         type="button"
         className={S.trailBtn}
         onClick={() => onBack(modeKey)}
-        aria-label={`Kembali ke ${crumbMeta.label}`}
+        // "Ke", not "Kembali ke". With history, the back arrow above is also
+        // labelled for the immediate parent, and two buttons sharing an
+        // accessible name while doing different things (pop one level vs jump to
+        // a named point in the stack) is exactly what a screen reader user
+        // cannot tell apart. The arrow goes back; a crumb goes TO somewhere.
+        aria-label={`Ke ${crumbMeta.label}`}
       >
         {crumbMeta.short ?? crumbMeta.label}
       </button>
