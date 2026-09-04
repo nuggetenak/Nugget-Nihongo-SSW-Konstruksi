@@ -28,7 +28,7 @@ function saveHistory(term) {
   sessionStorage.setItem(HISTORY_KEY, JSON.stringify([term, ...prev].slice(0, MAX_HISTORY)));
 }
 
-export default function SearchMode({ onExit, track, starred, toggleStar }) {
+export default function SearchMode({ track, starred, toggleStar }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [query, setQuery] = useState('');
@@ -92,9 +92,6 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
   return (
     <div className={S.page} style={{ paddingTop: 16, paddingBottom: 24 }}>
       <div className={S.rowSpread} style={{ marginBottom: 12 }}>
-        <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onExit}>
-          ← Kembali
-        </button>
         {trackCatKeys && (
           <button
             onClick={() => setShowAllTracks((v) => !v)}
@@ -199,7 +196,12 @@ export default function SearchMode({ onExit, track, starred, toggleStar }) {
             <div key={c.id} className={S.card} style={{ padding: '12px 14px' }}>
               <div className={S.rowSpread} style={{ alignItems: 'flex-start' }}>
                 <div style={{ fontSize: 'var(--fs-subtitle)', fontWeight: 600 }}>
-                  <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                  <JpFront
+                    jp={c.jp}
+                    furiganaPolicy={furiganaPolicy}
+                    maxSize={JP_LIST_MAX}
+                    compact
+                  />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                   {toggleStar && (

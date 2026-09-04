@@ -15,7 +15,7 @@ import S from './modes.module.css';
 // VOCAB_SETS and MIX_ALL computed inside component — track-filtered
 const MIX_ALL_ID = '__vocab_mix__';
 
-export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEnabled = false }) {
+export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track } = useApp();
   // Scoped to wglv-* specifically, not a plain 'wg' prefix -- that also
   // matches wgl01..wgl10 (JAC-style "Praktik Set" questions, unrelated to
@@ -106,10 +106,6 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle}>Kosakata · Vocab Drill</h2>
       <p className={S.pageSub}>
         {totalSoal} soal dalam {VOCAB_SETS.length} set · 語彙JP↔ID
       </p>

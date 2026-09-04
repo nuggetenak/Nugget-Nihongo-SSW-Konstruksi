@@ -107,13 +107,12 @@ function buildQuizItems() {
   });
 }
 
-export default function AngkaMode({ onExit, onSessionEnd }) {
+export default function AngkaMode({ onSessionEnd }) {
   const [view, setView] = useState('panel');
   const [quizMode, setQuizMode] = useState('pilihan'); // 'pilihan' or 'ketik'
   if (view === 'panel')
     return (
       <PanelView
-        onExit={onExit}
         onStartQuiz={(mode) => {
           setQuizMode(mode);
           setView('quiz');
@@ -125,7 +124,7 @@ export default function AngkaMode({ onExit, onSessionEnd }) {
   return <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
 }
 
-function PanelView({ onExit, onStartQuiz }) {
+function PanelView({ onStartQuiz }) {
   // onStartQuiz(mode)
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
@@ -134,12 +133,8 @@ function PanelView({ onExit, onStartQuiz }) {
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
       <div className={`${S.rowSpread} ${A.headerRow}`}>
         <div>
-          <h2 className={S.pageTitle}>🔢 Angka Kunci</h2>
           <p className={`${S.pageSub} ${A.pageSub}`}>
             {ANGKA.length} angka WAJIB hafal sebelum ujian
           </p>
@@ -250,6 +245,7 @@ function PanelView({ onExit, onStartQuiz }) {
                               jp={relCard.jp}
                               furiganaPolicy={furiganaPolicy}
                               maxSize={JP_LIST_MAX_SECONDARY}
+                              compact
                             />
                           </div>
                           <div className={A.relatedCardId_text}>{relCard.id_text}</div>

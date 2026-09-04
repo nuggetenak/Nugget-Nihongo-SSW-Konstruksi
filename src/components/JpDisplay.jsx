@@ -20,7 +20,24 @@ import S from './JpDisplay.module.css';
 // character answers next to longer ones reads as random/erratic size
 // jumping rather than intentional emphasis). Leave unset for existing
 // single-item contexts; pass e.g. 16 for list rows.
-export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
+/**
+ * `compact` (2026-09-04) — render on one line, aligned with its container,
+ * instead of the stacked hero treatment.
+ *
+ * The vs / ・ / ： / → branches below split a term into parts and stack them
+ * vertically, centred, with a big "VS" between. That is right for a flashcard
+ * front, where a comparison IS the card. In a scrollable list it is not: 215 of
+ * 1438 cards (15%) contain one of those separators, so in SearchMode,
+ * GlossaryMode, SumberMode, CatatanMode and DangerMode's accordion every seventh
+ * row silently became a 3–5 line centred block among single-line left-aligned
+ * neighbours. 免振 vs 制振 vs 耐震 took five lines in a row sized for one.
+ *
+ * Exactly the same shape of problem as `maxSize` (2026-08-28): a treatment
+ * tuned for a single hero card leaking into dense lists, where the two contexts
+ * want opposite defaults. Opt-in for the same reason — the hero case is the one
+ * that must not change.
+ */
+export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, compact = false }) {
   const [tapReveal, setTapReveal] = useState(false);
   // policy:
   // always: always show readings/ruby
@@ -35,14 +52,18 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize }) {
   const fontSizeFor = (text) => (maxSize ? Math.min(jpFontSize(text), maxSize) : jpFontSize(text));
 
   // Memoize branch detection — avoids re-running string checks on every render.
+  // `compact` collapses every multi-part branch to 'plain', which renders the
+  // whole string as one line with its separators intact — the way it reads in a
+  // list row.
   const jpBranch = useMemo(() => {
+    if (compact) return 'plain';
     const c = stripFuri(jp);
     if (/\s*vs\s*/i.test(c)) return 'vs';
     if (c.includes('・') && !c.includes('：') && c.split('・').length >= 2) return 'bullet';
     if (c.includes('：')) return 'colon';
     if (c.includes('→')) return 'arrow';
     return 'plain';
-  }, [jp]);
+  }, [jp, compact]);
 
   // Some shared slots this component is used in (ResultScreen's userAnswer/
   // correctAnswer across several modes, primarily) sometimes receive content

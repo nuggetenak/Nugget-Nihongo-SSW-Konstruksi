@@ -3,7 +3,7 @@
 // Notes stored in localStorage (prefs doc: notes: { [cardId]: string }).
 // Constructivism: personal meaning-making is stronger than generic definitions.
 // ─────────────────────────────────────────────────────────────────────────────
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
 import { stripFuri, JP_LIST_MAX } from '../utils/jp-helpers.js';
@@ -42,7 +42,7 @@ function NoteCard({ card, note, onSave }) {
       <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ marginBottom: 2 }}>
-            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+            <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} compact />
           </div>
           <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textMuted)' }}>
             {card.id_text}
@@ -165,7 +165,11 @@ function NoteCard({ card, note, onSave }) {
   );
 }
 
-export default function CatatanMode({ cards, onExit }) {
+// Cards rendered per page. Comfortably more than one phone screen, so the
+// button is reached by deliberate scrolling rather than immediately.
+const PAGE = 40;
+
+export default function CatatanMode({ cards }) {
   const { toast } = useApp();
 
   // Notes stored in prefs doc: notes: { [cardId]: string }
@@ -206,6 +210,16 @@ export default function CatatanMode({ cards, onExit }) {
     return pool;
   }, [cards, filter, debouncedQuery, notes]);
 
+  // Render the list incrementally. Measured before changing anything: the
+  // unfiltered list mounted 19,264 DOM nodes and a 134,599px page — a 134-metre
+  // scroll on a phone, for a screen whose actual job is "find the card I want to
+  // annotate". Filtering and searching still run over the full deck; only the
+  // rendering is windowed, so a search never misses a match that happens to sit
+  // past the window.
+  const [limit, setLimit] = useState(PAGE);
+  useEffect(() => setLimit(PAGE), [filter, debouncedQuery]);
+  const visible = useMemo(() => filtered.slice(0, limit), [filtered, limit]);
+
   const noteCount = Object.keys(notes).filter((id) => cards.some((c) => c.id === id)).length;
 
   const filters = [
@@ -216,10 +230,6 @@ export default function CatatanMode({ cards, onExit }) {
 
   return (
     <div className={S.pageScroll}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-
       <div style={{ marginBottom: 16 }}>
         <div
           style={{
@@ -291,20 +301,27 @@ export default function CatatanMode({ cards, onExit }) {
         )
       ) : (
         <>
-          {filtered.map((card) => (
+          {visible.map((card) => (
             <NoteCard key={card.id} card={card} note={notes[card.id] || ''} onSave={handleSave} />
           ))}
-          {filtered.length < (filter === 'semua' ? cards.length : filtered.length) && (
-            <div
-              style={{
-                textAlign: 'center',
-                fontSize: 'var(--fs-caption)',
-                color: 'var(--ssw-textDim)',
-                paddingTop: 8,
-              }}
+          <div
+            style={{
+              textAlign: 'center',
+              fontSize: 'var(--fs-caption)',
+              color: 'var(--ssw-textDim)',
+              paddingTop: 8,
+            }}
+          >
+            Menampilkan {visible.length} dari {filtered.length} kartu
+          </div>
+          {visible.length < filtered.length && (
+            <button
+              type="button"
+              className={S.btnSecondary}
+              onClick={() => setLimit((n) => n + PAGE)}
             >
-              Menampilkan {filtered.length} kartu
-            </div>
+              Muat {Math.min(PAGE, filtered.length - visible.length)} kartu lagi
+            </button>
           )}
         </>
       )}

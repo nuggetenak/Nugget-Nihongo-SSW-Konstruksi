@@ -24,7 +24,6 @@ export default function StatsMode({
   srs,
   streakData,
   sessions = [],
-  onExit,
 }) {
   const total = CARDS.length;
   const knownN = known.size;
@@ -83,13 +82,6 @@ export default function StatsMode({
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle} style={{ marginBottom: 16 }}>
-        📊 Statistik
-      </h2>
-
       {/* Exam Readiness Score + Overview — paired at wide widths, see .summaryRow */}
       <div className={ST.summaryRow}>
         <div

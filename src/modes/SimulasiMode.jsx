@@ -10,6 +10,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useConfirm } from '../components/ConfirmDialog.jsx';
+import { useExitGuard } from '../hooks/useExitGuard.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import { JAC_OFFICIAL } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
@@ -397,17 +398,28 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     [phase, paused, questions.length]
   );
 
-  const handleExitClick = useCallback(async () => {
-    if (phase === 'playing') {
-      const ok = await confirm(
+  // Shared by this mode's own exit controls and by ModeHeader's back arrow, via
+  // the exit guard below — the header owns the only back control on the screen
+  // now, so the confirmation has to live somewhere both can reach.
+  const confirmDiscard = useCallback(
+    () =>
+      confirm(
         `${answeredCount}/${questions.length} soal sudah dijawab. Keluar sekarang akan menghapus semuanya — progres simulasi tidak tersimpan sebagian.`,
         'Keluar, hapus progres',
         'Tetap di sini'
-      );
-      if (!ok) return;
-    }
+      ),
+    [answeredCount, questions.length, confirm]
+  );
+
+  // Only while an exam is actually running: there is nothing to lose on the
+  // start screen or once results are on screen, and a confirmation with no
+  // stakes is the kind of dialog people learn to dismiss without reading.
+  useExitGuard(phase === 'playing' ? confirmDiscard : null);
+
+  const handleExitClick = useCallback(async () => {
+    if (phase === 'playing' && !(await confirmDiscard())) return;
     onExit();
-  }, [phase, answeredCount, questions.length, confirm, onExit]);
+  }, [phase, confirmDiscard, onExit]);
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
 
@@ -415,12 +427,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   if (phase === 'start') {
     return (
       <div className={S.page}>
-        <button className={S.btnBack} onClick={onExit}>
-          ← Kembali
-        </button>
         <div className={SM.startHero}>
           <div className={SM.startHeroEmoji}>🎯</div>
-          <h2 className={`${S.pageTitle} ${SM.startTitle}`}>Simulasi Ujian</h2>
           <p className={S.pageSub}>Format ujian SSW Konstruksi dengan timer</p>
         </div>
         <div className={`${S.card} ${SM.instructionsCard}`}>
@@ -630,7 +638,12 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
                   >
                     <div className={SM.reviewJp}>
-                      <JpFront jp={r.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                      <JpFront
+                        jp={r.jp}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX}
+                        compact
+                      />
                     </div>
                     <div className={SM.reviewIdText}>
                       <MixedRuby text={r.id_text} />
@@ -641,6 +654,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                         jp={userOpt?.text || '—'}
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX_SECONDARY}
+                        compact
                       />
                     </div>
                     <div className={SM.reviewCorrect}>
@@ -649,6 +663,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                         jp={correctOpt?.text || '—'}
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX_SECONDARY}
+                        compact
                       />
                     </div>
                     {r.explanation &&

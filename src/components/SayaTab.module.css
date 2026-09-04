@@ -136,7 +136,9 @@
      hits the medium breakpoint (--max-w: 620px -- 2*300+16px gap = 616px,
      just inside it), so the wider-screen behavior this was clearly meant
      for is preserved. */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* Same min() guard as GlossaryMode's grid — 300px clears a 390px viewport but
+     not a 320px one, and the failure mode is document-wide horizontal scroll. */
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   column-gap: var(--sp-4);
 }
 .sectionBody > :not(.row) {

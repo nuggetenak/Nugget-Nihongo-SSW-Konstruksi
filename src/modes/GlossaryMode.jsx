@@ -18,7 +18,13 @@ import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
-export default function GlossaryMode({ onExit, track }) {
+// How many letter groups render at once. Six covers roughly the first 200
+// entries — more than a phone screen's worth of scrolling before the button is
+// even reached — while keeping the DOM to a fraction of the 18,329 nodes the
+// full list used to mount.
+const GROUP_PAGE = 6;
+
+export default function GlossaryMode({ track }) {
   const { prefs } = useApp();
   const handleSpeakError = useSpeakErrorHandler();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
@@ -79,8 +85,19 @@ export default function GlossaryMode({ onExit, track }) {
 
   const letters = useMemo(() => groups.map(([l]) => l), [groups]);
 
+  // Render letter groups incrementally. Measured before changing anything: the
+  // full glossary put 18,329 DOM nodes and an 82,000px page on screen at once,
+  // ~1.5s to enter on a desktop CPU — on the cheap Android phones this app is
+  // built for, several seconds and a lot of memory, for a list nobody scrolls
+  // end to end. Groups rather than rows, so the A–Z strip's jump targets stay
+  // intact; jumpTo below extends the window to cover its target first, so every
+  // letter is still one tap away and the interaction is unchanged.
+  const [groupLimit, setGroupLimit] = useState(GROUP_PAGE);
+  const visibleGroups = useMemo(() => groups.slice(0, groupLimit), [groups, groupLimit]);
+
   useEffect(() => {
     setExpanded(null);
+    setGroupLimit(GROUP_PAGE);
     if (letters.length > 0) setActiveLetter(letters[0]);
   }, [filterCat, letters]);
 
@@ -106,21 +123,33 @@ export default function GlossaryMode({ onExit, track }) {
       },
       { threshold: 0.05, rootMargin: '-10% 0px -75% 0px' }
     );
-    groups.forEach(([letter]) => {
+    visibleGroups.forEach(([letter]) => {
       const el = sectionRefs.current[letter];
       if (el) observerRef.current.observe(el);
     });
     return () => observerRef.current?.disconnect();
-  }, [groups]);
+  }, [visibleGroups]);
 
   function jumpTo(letter) {
+    setActiveLetter(letter);
+    const idx = letters.indexOf(letter);
+    if (idx >= groupLimit) {
+      // Target isn't rendered yet — extend the window past it, then scroll on
+      // the next frame once it's in the DOM. 'auto' rather than 'smooth' here:
+      // smooth-scrolling to an element that appeared this frame lands short.
+      setGroupLimit(idx + 1);
+      requestAnimationFrame(() => {
+        const el = sectionRefs.current[letter];
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 52 });
+      });
+      return;
+    }
     const el = sectionRefs.current[letter];
     if (el) {
       window.scrollTo({
         top: el.getBoundingClientRect().top + window.scrollY - 52,
         behavior: 'smooth',
       });
-      setActiveLetter(letter);
     }
   }
 
@@ -186,9 +215,6 @@ export default function GlossaryMode({ onExit, track }) {
   return (
     <div className={G.outerWrap}>
       <div className={G.header}>
-        <button className={S.btnBack} style={{ padding: 0 }} onClick={onExit}>
-          ← Kembali
-        </button>
         <div className={`${S.row} ${G.titleRow}`}>
           <h2 className={G.title}>📖 Glosari</h2>
           <span className={`${S.pill} ${G.countPill}`}>{formatCount(sorted.length)} istilah</span>
@@ -295,7 +321,7 @@ export default function GlossaryMode({ onExit, track }) {
       </div>
 
       <div className={G.contentWrap}>
-        {groups.map(([letter, items]) => (
+        {visibleGroups.map(([letter, items]) => (
           /* data-letter attribute kept for IntersectionObserver */
           <div
             key={letter}
@@ -354,7 +380,12 @@ export default function GlossaryMode({ onExit, track }) {
                         </span>
                       )}
                       {catInfo && <span className={G.termCatEmoji}>{catInfo.emoji}</span>}
-                      <JpFront jp={c.jp} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
+                      <JpFront
+                        jp={c.jp}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX}
+                        compact
+                      />
                     </div>
                     <span className={G.termId}>{c.id_text}</span>
                   </div>
@@ -398,6 +429,15 @@ export default function GlossaryMode({ onExit, track }) {
             })}
           </div>
         ))}
+        {groupLimit < groups.length && (
+          <button
+            type="button"
+            className={G.loadMore}
+            onClick={() => setGroupLimit((n) => n + GROUP_PAGE)}
+          >
+            Tampilkan huruf berikutnya ({groups.length - groupLimit} tersisa)
+          </button>
+        )}
       </div>
 
       {/* Export mini deck footer */}

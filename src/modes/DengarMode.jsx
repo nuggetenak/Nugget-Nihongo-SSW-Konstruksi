@@ -155,11 +155,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   if (!started) {
     return (
       <div className={S.page}>
-        <button className={S.btnBack} onClick={onExit}>
-          ← Kembali
-        </button>
         <div style={{ marginBottom: 24 }}>
-          <h2 className={S.pageTitle}>🎧 Mode Dengarkan</h2>
           <p className={S.pageSub} style={{ marginBottom: 0 }}>
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
           </p>
@@ -318,9 +314,6 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
         isCorrect={selected !== null ? selected === currentQ.correctIdx : null}
         correctText={currentQ.opts[currentQ.correctIdx]?.text}
       />
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
       <ProgressBar value={idx} max={questions.length} />
 
       <div

@@ -6,3 +6,4 @@ export { useFocusTrap } from './useFocusTrap.js';
 export { useSessionTimer } from './useSessionTimer.js';
 export { useDailyChallenge } from './useDailyChallenge.js';
 export { useTrackedCards } from './useTrackedCards.js';
+export { useExitGuard } from './useExitGuard.js';

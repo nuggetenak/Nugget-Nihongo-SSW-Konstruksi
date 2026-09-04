@@ -101,10 +101,6 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
 
   return (
     <div className={S.page}>
-      <button className={S.btnBack} onClick={onExit}>
-        ← Kembali
-      </button>
-      <h2 className={S.pageTitle}>🎯 Mode Fokus</h2>
       <p className={S.pageSub}>
         Latih kategori terlemahmu. Kategori diurutkan dari yang paling lemah.
       </p>

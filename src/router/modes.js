@@ -4,6 +4,25 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { lazy } from 'react';
+import { QUIZ_SETS } from '../data/quiz-sets.js';
+import { isVocabId } from '../utils/quiz-classification.js';
+
+// Question counts shown in the menu, derived rather than typed.
+//
+// Both numbers here were hand-written and both were wrong: wayground claimed 579
+// against a real 740, vocab claimed 380 against a real 240. They went stale when
+// the jac-mockup sets were folded into WaygroundMode and the vocab drill was
+// re-scoped to wglv-* ids only -- a content change nothing connected back to the
+// two strings describing it. Counted from the same QUIZ_SETS/isVocabId split the
+// two modes themselves use, so the menu and the mode can no longer disagree.
+//
+// Track-independent on purpose: this is a single-track app (every category is
+// tracks: ['lifeline']), and a menu label is not the place to imply otherwise.
+const countQuestions = (sets) => sets.reduce((n, s) => n + s.questions.length, 0);
+const MODE_COUNTS = {
+  wayground: countQuestions(QUIZ_SETS.filter((s) => !isVocabId(s.id))),
+  vocab: countQuestions(QUIZ_SETS.filter((s) => isVocabId(s.id))),
+};
 
 // ── Lazy imports ──────────────────────────────────────────────────────────
 export const MODE_COMPONENTS = {
@@ -134,7 +153,11 @@ export const MODE_META = {
     ui: 'wisuda',
     label: 'Soal Teknis',
     short: 'Teknis',
-    desc: '579 soal teori & praktik',
+    // Was '579 soal teori & praktik' -- the mode actually serves 740 (every
+    // non-vocab set for this track, jac-mockup included). Wrong on the Belajar
+    // menu and the side nav since the jac-mockup sets moved in here. Derived
+    // from the data now, so it can't drift again; see MODE_COUNTS below.
+    desc: `${MODE_COUNTS.wayground} soal teori & praktik`,
     color: '#fb923c',
     strand: 'language',
     skeleton: 'quiz',
@@ -143,7 +166,10 @@ export const MODE_META = {
     icon: '📖',
     ui: 'belajar',
     label: 'Kosakata',
-    desc: '380 soal vocab JP↔ID',
+    // Was '380 soal vocab JP↔ID'; the real figure is 240, and the mode's own
+    // screen has been printing 240 all along -- the menu and the mode disagreed
+    // with each other in the same session.
+    desc: `${MODE_COUNTS.vocab} soal vocab JP↔ID`,
     color: '#0891b2',
     strand: 'input',
     skeleton: 'quiz',
@@ -218,7 +244,10 @@ export const MODE_META = {
   ekspor: {
     icon: '💾',
     ui: 'simpan',
-    label: 'Ekspor',
+    // 'Ekspor & Impor' -- the mode's own heading said this, and now that
+    // ModeHeader is the only title on the screen the label has to carry it.
+    label: 'Ekspor & Impor',
+    short: 'Ekspor',
     desc: 'Simpan & pulihkan progress',
     color: '#94a3b8',
     strand: null,

@@ -232,7 +232,14 @@
    on its own, which is the correct phone layout. */
 .contentWrap > [data-letter] {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  /* min(430px, 100%) rather than a bare 430px: minmax's lower bound is a hard
+     floor, so on any viewport narrower than 430px the track stayed 430px wide
+     and pushed the whole document sideways — measured at 390px, where the body
+     scrolled to 446px. Every row in the glossary was affected, which is what
+     made it the one screen in the app with horizontal overflow. The min()
+     wrapper caps the floor at the container's own width and is inert above the
+     breakpoint, so the two-column desktop layout is unchanged. */
+  grid-template-columns: repeat(auto-fit, minmax(min(430px, 100%), 1fr));
   column-gap: var(--sp-4);
   align-content: start;
 }
@@ -246,4 +253,28 @@
    their track stops a long entry stretching the ones beside it. */
 .contentWrap > [data-letter] > .termRow {
   align-self: start;
+}
+
+/* Load-more affordance for the incremental letter groups. Full-width and
+   clearly a control, so the end of the rendered range never reads as the end of
+   the glossary. */
+.loadMore {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 16px auto 24px;
+  padding: 14px 16px;
+  min-height: var(--tap-min);
+  font-family: inherit;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+  color: var(--ssw-amberText);
+  background: var(--ssw-surface);
+  border: 1px dashed var(--ssw-borderLight);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease-smooth);
+}
+
+.loadMore:hover {
+  background: var(--ssw-surfaceHover);
 }
