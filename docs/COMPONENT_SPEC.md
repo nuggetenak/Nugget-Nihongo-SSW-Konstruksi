@@ -111,10 +111,21 @@ jump directly to any point in the stack — not just pop one level. On screens u
 collapses to just the immediate parent via a CSS-only `display: contents` toggle (no JS breakpoint
 detection, matching this app's established convention — see `docs/LAYOUT_SPEC.md`).
 
-Modes still supply their own `.btnBack` for "exit this mode entirely" (a different action from the
-trail's "go back one level of mode-to-mode navigation") — the two are not yet consolidated. If a
-future pass migrates `.btnBack` into `ModeHeader`, update this section and confirm the two don't
-both render for the same action.
+It also owns **the** back control (2026-09-04). Leaving a mode used to be each mode's own job, and
+each did it differently: a circular icon button in FlashcardMode, `← Keluar` in ReviewMode,
+`← Kembali` in 25 other places, some sticky, most scrolling away with the content — and on a phone,
+where AppShell hides the bottom nav in mode chrome, that per-mode button was the only way out. It
+calls `goBack()`, which pops one level of mode-to-mode history if there is any and falls through to
+`exitMode()` when there isn't, so a single affordance covers both.
+
+Modes still supply their own `.btnBack`, but only for navigation _inside_ a mode — leaving a
+running quiz for its own setup screen, closing a source detail. That is a different action from
+"leave this mode", and the two no longer render for the same one.
+
+The `<h1>` is set in `--fs-title`, not `--fs-page-title`. It is sticky chrome sharing a row with
+the back button and the trail, not content in the body column: at page-title size, 11 of the 21
+mode labels were ellipsised at 320px and 3 at 390px (see `DESIGN_SPEC.md` §3). It wraps to at most
+two lines as a backstop for a very large Ukuran Teks setting.
 
 ## 8. Japanese text rendering (`JpDisplay`)
 

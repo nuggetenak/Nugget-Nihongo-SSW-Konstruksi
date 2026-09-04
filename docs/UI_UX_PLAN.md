@@ -761,3 +761,29 @@ judgment as item 68: don't force a match without evidence that the element wants
 token's size. They are now the *only* inline sizes left in the app, so they are trivial to find,
 and each one is a small, individually-decidable question rather than a sweep.
 
+### ☐ 73. Setup screens still leave 250–330px under their primary button — `S` — **design call**
+
+`.content` is a flex column in mode chrome now and a screen can claim the leftover height with
+`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). FlashcardMode uses it; nothing else does. The setup screens
+— QuizMode, Kuis Produksi, Sprint, Simulasi and friends — still stack their options and then their
+"Mulai" button in the top two-thirds of a phone, leaving 250–330px empty below.
+
+Not fixed here because it is not a defect the way FlashcardMode's was. There the *content* was
+adrift in the space; here the question is whether the CTA should be bottom-anchored, which is a
+deliberate design position (bottom-anchored = thumb-reachable and consistent with the app's bottom
+nav; top-stacked = the button sits directly under the choice it confirms). Whichever way it goes it
+should go the same way on all of them, which is what makes it one decision rather than six.
+
+### ☐ 74. The flip card cannot grow to fill its scene — `M`
+
+`.scene` now grows and centres the card in the slack, but the card itself stays at
+`max(230px, measured back-face height)`. Letting it stretch would use that space for the Japanese
+instead of leaving it as air — and it would not reintroduce the flip-jump the ResizeObserver exists
+to prevent, since both faces would take the same stretched height.
+
+The blocker is `.back`, which is `position: absolute` with `top/left/right` and no `bottom`, so it
+is content-height regardless of how tall the card gets: stretch the card today and the back face
+renders shorter than the front. Fixing that means reworking a 3D flip whose two faces currently
+size independently — small in diff, easy to get subtly wrong, and worth doing with the card
+measured at several content lengths rather than eyeballed at one.
+

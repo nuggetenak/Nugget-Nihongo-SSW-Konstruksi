@@ -131,6 +131,44 @@ spec is corrected in place rather than quietly rewritten.
   "Semua jalur / Jalurku" toggle: every category carries `tracks: ['lifeline']`, so both sides
   produced the identical set.
 
+### Typography
+
+**85% of the app's visible text was 13px or smaller.** A Playwright census of every rendered text
+node across all 24 screens: 29% at 11px, 20% at 13, 14% at 12, 8% at 10, 4% at 9 — and 9% at 7px,
+0.2% at 5px. The 5–7px was furigana: `.ruby rt` was `0.44em` of `jpFontSize`'s 13px floor, two
+numbers in two files nobody had multiplied. For an audience reading Japanese on cheap phones,
+outdoors, that was the app's largest usability problem, and it was invisible from the code — no
+single rule looks wrong, the sizes just accumulate at the bottom. The old scale also had five steps
+(9/10/11/12/13) inside 4px, then a gap to 17, then to 22: indistinguishable in use, and false
+precision.
+
+Rebuilt as fluid `clamp(rem + vw)` on a ~1.11 → 1.2 ratio, each token interpolating from its phone
+size at 390px to its desktop size at 1280px. `rem + vw`, never bare `vw` — the rem term is what
+keeps the scale responsive to a reader's own font-size preference. After: 50.6% at ≤13px, nothing
+below 10px.
+
+**New: Ukuran Teks** (Saya tab) — four steps, 90/100/112/125%, applied pre-paint so there is no
+flash on load, persisted in prefs.
+
+### Layout
+
+- **Spacing did not move with the type.** Measured once Ukuran Teks existed: at "Sangat Besar" body
+  text goes 15px → 18.8px while `--sp-3` stays 12px and `--sp-4` stays 16px, so every gap, padding
+  and gutter holds still and the layout gets *tighter* for exactly the reader who asked for it to
+  get looser. The scale is now `--space-2`…`--space-64` in rem — renamed rather than redefined, so
+  a missed call site fails `audit:css-vars` instead of silently mis-sizing. 520 values moved onto
+  it (102 in CSS, 418 in JSX style objects), 140 of them off-grid and snapped to the nearest step.
+- **Width had two owners.** `AppShell.module.css` states in its own header that component
+  stylesheets must not set their own max-width; ten of them did, along with their own 16px gutter
+  *inside* `.content`, which had already applied both. A mode screen got 326px of a 390px phone
+  where the tab screens got 358px.
+- **A mode could not reach the height the shell reserved for it.** `.content` is viewport-tall, but
+  a mode inside it is a plain block, so everything short of a full screen packed against the top —
+  284px of empty space under FlashcardMode's last control at 390×844, 334px at 1440×900, which also
+  put the primary controls out of thumb reach. Now 40px at both.
+- **11 of 21 mode titles were ellipsised** at 320px, 3 at 390px, because sticky chrome had been
+  given the display-size page-title token.
+
 ### Content
 
 - 13 pooled ruby readings split per term — `免振 vs 制振 vs 耐震《めんしん vs せいしん vs たいしん》`
@@ -148,8 +186,10 @@ spec is corrected in place rather than quietly rewritten.
 
 ### Verification
 
-`npm run validate` clean: format, lint, **672 tests** (up from 652), five audits, build. Every UI
-change screenshotted at 390/820/1440px in both themes, before and after.
+`npm run validate` clean: format, lint, **719 tests** (up from 652), five audits, build. Every UI
+change screenshotted at 390/820/1440px in both themes, before and after. The typography and layout
+work additionally swept all 24 screens × 3 viewports for horizontal overflow and unreachable nav at
+both Normal and Sangat Besar text size — clean at both.
 
 Open items, including two decisions for the owner: `docs/UI_UX_PLAN.md` §12.
 

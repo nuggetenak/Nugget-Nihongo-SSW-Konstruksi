@@ -92,11 +92,43 @@ content into this file.
     Cyrillic typo fixed — both flagged as out-of-scope by the 2026-08-26 font work and still live
     until now, both now guarded by `audit-data-text.mjs`.
 
+- **2026-09-04, second half: "overhaul the layouts & font typography; you can add new features."**
+  Same branch and PR. All of it measured on the running app first.
+
+  - **`38eb58d` — the type scale rebuilt.** A Playwright walk of every rendered text node across
+    all 24 screens found **85% of the app's visible text at 13px or smaller**: 29% at 11px, 20% at
+    13, 14% at 12, 8% at 10, 4% at 9 — and **9% at 7px, 0.2% at 5px**. The 5–7px was furigana:
+    `.ruby rt` was `0.44em` of `jpFontSize`'s 13px floor, two numbers in two files that nobody had
+    multiplied together. No single rule looked wrong; the sizes only accumulate. The scale is now
+    fluid `clamp(rem + vw)` on a ~1.11→1.2 ratio (the rem term is what keeps it responsive to a
+    reader's font-size preference — a pure-vw preferred value silently defeats that). After:
+    **50.6% at ≤13px and nothing below 10px**.
+  - **`95eb1b3` — Ukuran Teks, a reader-facing control for the whole scale.** Four steps
+    (90/100/112/125%) in Saya, applied pre-paint in `main.jsx` so there is no flash, persisted in
+    prefs. New feature, not a fix: the audience reads Japanese on cheap phones, outdoors.
+  - **`ac69cf6` — spacing that scales with the text, and one owner for width.** Ukuran Teks made a
+    latent bug visible: the spacing scale was px, so at "Sangat Besar" body text went 15px → 18.8px
+    while `--sp-3` stayed 12px — the layout got *tighter* for exactly the reader who asked for it
+    to get looser. Rebuilt as `--space-2`…`--space-64` in rem (renamed, not redefined, so a missed
+    call site fails `audit:css-vars` instead of silently mis-sizing). Ten stylesheets were also
+    repeating the max-width and gutter that `AppShell`'s `.content` had already applied, against
+    that file's own stated rule — costing a mode screen 32px of a 390px phone. And `.content` is a
+    flex column in mode chrome now, so a mode can claim the height the shell already reserves:
+    FlashcardMode's dead space went **284px → 40px** on mobile, **334px → 40px** on desktop.
+  - **`fc5ce55` — the mode title was ellipsised on 11 of 21 screens** at 320px, 3 at 390px
+    ("Ekspor & Impor" wanted 308px of a 188px box). Cause: giving sticky chrome `--fs-page-title`.
+    Now `--fs-title`, still the largest thing in the band, 0 truncated at either width.
+  - **`57aca37` — 418 inline spacing declarations** in JSX style objects moved onto the tokens.
+    Fixing only the stylesheets would have left more than half the app's spacing frozen against
+    Ukuran Teks.
+
 - **Open items for the next session: `docs/UI_UX_PLAN.md` §12.** Two of them are decisions for the
   owner, not execution.
 
-- **Verification**: `npm run validate` clean — format, lint, **672 tests**, five audits, build.
-  Every UI change screenshotted at 390/820/1440px in both themes, before and after.
+- **Verification**: `npm run validate` clean — format, lint, **719 tests**, five audits, build.
+  Every UI change screenshotted at 390/820/1440px in both themes, before and after; the layout and
+  typography work additionally swept for horizontal overflow and unreachable nav at all three
+  viewports at both Normal and Sangat Besar text size.
 
 _(The 2026-08-31 / 09-01 entry this replaces is archived verbatim to
 `docs/archive/HANDOFF-2026-08-31-09-01-ui-typography.md`, with a note on the one claim in it a

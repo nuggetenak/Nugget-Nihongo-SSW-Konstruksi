@@ -21,6 +21,7 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 - 🔢 **Angka Kunci** — angka wajib hafal sebelum ujian
 - 📊 **Statistik** per kategori + heatmap aktivitas 18 minggu + Exam Readiness Score
 - 🌙 **Mode gelap/terang** + offline-first (PWA)
+- 🔠 **Ukuran teks** 4 tingkat (90–125%) — seluruh tata letak ikut membesar, bukan hurufnya saja
 - 🔊 **Audio bahasa Jepang** via Web Speech API
 
 **Fokus:** ライフライン設備 (Lifeline) — Listrik, pipa, AC, telekomunikasi. (Jalur Teknik Sipil/土木 dan Bangunan/建築 dihapus — lihat CHANGELOG.)
@@ -102,7 +103,7 @@ src/
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 70 test files, 672 tests
+└── tests/                   # 72 test files, 719 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
@@ -117,7 +118,7 @@ Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
 | -------------- | --------------------------------------------------------------------------------------------------------------- |
 | `ssw-progress` | known/unknown cards, quiz scores, streak, sessions, daily mission                                               |
 | `ssw-srs-data` | FSRS card states (stability, difficulty, interval, due date)                                                    |
-| `ssw-prefs`    | track, theme, furiganaPolicy, audioEnabled, examDate, goalHarian, notes (catatan per kartu), sprintBestTimeline |
+| `ssw-prefs`    | track, theme, textScale, furiganaPolicy, audioEnabled, examDate, goalHarian, notes (catatan per kartu), sprintBestTimeline |
 
 Export/import tersedia di tab **Saya** → fitur backup & restore.
 
