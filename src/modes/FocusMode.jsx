@@ -63,7 +63,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
             marginBottom: 16,
           }}
         >
-          <div style={{ fontSize: 13, color: 'var(--ssw-textDim)', marginBottom: 6 }}>
+          <div style={{ fontSize: 'var(--fs-body)', color: 'var(--ssw-textDim)', marginBottom: 6 }}>
             🎯 Latihan fokus untuk:
           </div>
           <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>
@@ -71,7 +71,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
           </div>
           <div
             style={{
-              fontSize: 13,
+              fontSize: 'var(--fs-body)',
               color: cat.score >= 70 ? T.correct : cat.score >= 40 ? T.gold : T.wrong,
               fontWeight: 700,
               marginBottom: 8,
@@ -80,7 +80,9 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
             Akurasi: {cat.score}% · {cat.known}/{cat.total} hafal
             {cat.wrong > 0 ? ` · ${cat.wrong} sering salah` : ''}
           </div>
-          <div style={{ fontSize: 12, color: 'var(--ssw-textDim)', lineHeight: 1.5 }}>
+          <div
+            style={{ fontSize: 'var(--fs-caption)', color: 'var(--ssw-textDim)', lineHeight: 1.5 }}
+          >
             {cat.score < 40
               ? 'Kategori ini paling lemah — banyak kartu yang belum hafal. Sprint fokus akan memperkuat ingatan cepat.'
               : cat.score < 70
@@ -123,10 +125,10 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
         >
           <span style={{ fontSize: 18 }}>💪</span>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: T.correct }}>
+            <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: T.correct }}>
               {trainedKeys.size} dari {catStats.length} kategori dilatih sesi ini
             </div>
-            <div style={{ fontSize: 11, color: 'var(--ssw-textDim)' }}>
+            <div style={{ fontSize: 'var(--fs-small)', color: 'var(--ssw-textDim)' }}>
               {catStats.filter((c) => !trainedKeys.has(c.key)).length > 0
                 ? `Berikutnya: ${catStats.find((c) => !trainedKeys.has(c.key))?.emoji} ${catStats.find((c) => !trainedKeys.has(c.key))?.label}`
                 : 'Semua kategori sudah dilatih! 🎉'}
@@ -154,7 +156,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
               </span>
               <span
                 style={{
-                  fontSize: 12,
+                  fontSize: 'var(--fs-caption)',
                   fontWeight: 700,
                   color: c.score >= 70 ? T.correct : c.score >= 40 ? T.gold : T.wrong,
                 }}
@@ -179,7 +181,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
                 }}
               />
             </div>
-            <div style={{ fontSize: 11, color: T.textDim, marginTop: 4 }}>
+            <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 4 }}>
               {c.known}/{c.total} hafal {c.wrong > 0 && `· ${c.wrong} sering salah`}
             </div>
           </button>

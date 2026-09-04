@@ -176,7 +176,7 @@ export default function ProductionMode({
     const pillStyle = (on) => ({
       fontFamily: 'inherit',
       padding: '7px 16px',
-      fontSize: 13,
+      fontSize: 'var(--fs-body)',
       borderRadius: T.r.pill,
       cursor: 'pointer',
       fontWeight: on ? 700 : 400,
@@ -191,9 +191,7 @@ export default function ProductionMode({
           ← Kembali
         </button>
 
-        <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
-          ✍️ Produksi Aktif
-        </h2>
+        <h2 className={S.pageTitle}>✍️ Produksi Aktif</h2>
         <p className={S.pageSub} style={{ marginBottom: 20 }}>
           Lihat terjemahan Indonesia → ketik jawaban Jepang (kanji/kana).
         </p>
@@ -207,7 +205,7 @@ export default function ProductionMode({
               border: `1px solid ${T.correctBorder}`,
             }}
           >
-            <div style={{ fontSize: 13, fontWeight: 700, color: T.correct }}>
+            <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: T.correct }}>
               Sesi terakhir: {correctCount}/{doneCount} benar (
               {doneCount > 0 ? Math.round((correctCount / doneCount) * 100) : 0}%)
             </div>
@@ -240,7 +238,7 @@ export default function ProductionMode({
 
         <button
           className={S.btnPrimary}
-          style={{ fontSize: 15, padding: '15px' }}
+          style={{ fontSize: 'var(--fs-subtitle)', padding: '15px' }}
           onClick={startSession}
         >
           Mulai ✍️
@@ -309,7 +307,7 @@ export default function ProductionMode({
         >
           ← Produksi
         </button>
-        <div style={{ fontSize: 12, color: T.textDim }}>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
           {idx + 1} / {queue.length}
           {results.length > 0 && (
             <span style={{ marginLeft: 8, color: T.correct, fontWeight: 700 }}>
@@ -339,7 +337,7 @@ export default function ProductionMode({
       >
         <div
           style={{
-            fontSize: 11,
+            fontSize: 'var(--fs-small)',
             color: T.textDim,
             marginBottom: 8,
             letterSpacing: 1,
@@ -348,11 +346,25 @@ export default function ProductionMode({
         >
           bahasa indonesia
         </div>
-        <div style={{ fontSize: 22, fontWeight: 700, color: T.text, lineHeight: 1.4 }}>
+        <div
+          style={{
+            fontSize: 'var(--fs-page-title)',
+            fontWeight: 700,
+            color: T.text,
+            lineHeight: 1.4,
+          }}
+        >
           {card.id_text}
         </div>
         {card.desc && (
-          <div style={{ fontSize: 12, color: T.textDim, marginTop: 10, lineHeight: 1.5 }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-caption)',
+              color: T.textDim,
+              marginTop: 10,
+              lineHeight: 1.5,
+            }}
+          >
             <DescBlock desc={card.desc} />
           </div>
         )}
@@ -371,7 +383,7 @@ export default function ProductionMode({
               style={{
                 width: '100%',
                 padding: '14px 16px',
-                fontSize: 20,
+                fontSize: 'var(--fs-jp-back)',
                 fontFamily: 'Noto Sans JP, DM Sans, sans-serif',
                 border: `1.5px solid ${T.border}`,
                 borderRadius: 12,
@@ -403,7 +415,7 @@ export default function ProductionMode({
             </button>
             <button
               className={S.btnSecondary}
-              style={{ flex: 1, fontSize: 12 }}
+              style={{ flex: 1, fontSize: 'var(--fs-caption)' }}
               onClick={handleSkip}
             >
               Lewati ⏭
@@ -431,7 +443,7 @@ export default function ProductionMode({
           </div>
 
           {!answerCorrect && lastResult?.input && (
-            <div style={{ fontSize: 13, color: T.wrong, marginBottom: 6 }}>
+            <div style={{ fontSize: 'var(--fs-body)', color: T.wrong, marginBottom: 6 }}>
               Kamu:{' '}
               <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>
                 {lastResult.input || '(dilewati)'}
@@ -440,7 +452,7 @@ export default function ProductionMode({
           )}
 
           <div style={{ marginBottom: 6 }}>
-            <span style={{ fontSize: 11, color: T.textDim }}>Jawaban: </span>
+            <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>Jawaban: </span>
             <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />
           </div>
 
@@ -450,7 +462,7 @@ export default function ProductionMode({
               const closest = closestAnswerDiff(lastResult.input, card);
               if (!closest || closest.dist < 1 || closest.dist > 3) return null;
               return (
-                <div style={{ fontSize: 13, marginBottom: 4 }}>
+                <div style={{ fontSize: 'var(--fs-body)', marginBottom: 4 }}>
                   <span style={{ color: T.textDim }}>Dekat: </span>
                   <span style={{ fontFamily: 'Noto Sans JP, sans-serif' }}>
                     <TypoDiff ops={closest.ops} />
@@ -460,7 +472,14 @@ export default function ProductionMode({
             })()}
 
           {card.desc && (
-            <div style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.5 }}>
+            <div
+              style={{
+                fontSize: 'var(--fs-caption)',
+                color: T.textDim,
+                marginTop: 8,
+                lineHeight: 1.5,
+              }}
+            >
               <DescBlock desc={card.desc} />
             </div>
           )}
@@ -472,7 +491,7 @@ export default function ProductionMode({
                 marginTop: 8,
                 background: 'none',
                 border: 'none',
-                fontSize: 12,
+                fontSize: 'var(--fs-caption)',
                 color: T.amber,
                 cursor: 'pointer',
                 padding: '4px 0',
@@ -485,7 +504,11 @@ export default function ProductionMode({
       )}
 
       {phase === 'revealed' && (
-        <button className={S.btnPrimary} style={{ fontSize: 15 }} onClick={handleNext}>
+        <button
+          className={S.btnPrimary}
+          style={{ fontSize: 'var(--fs-subtitle)' }}
+          onClick={handleNext}
+        >
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
       )}

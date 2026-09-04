@@ -97,7 +97,7 @@ export default function StudyHeatmap({ sessions = [] }) {
           gap: 4,
           alignItems: 'center',
           marginTop: 4,
-          fontSize: 9,
+          fontSize: 'var(--fs-nano)',
           color: T.textDim,
         }}
       >

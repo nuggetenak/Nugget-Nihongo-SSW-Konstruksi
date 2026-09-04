@@ -232,7 +232,7 @@ export default function SayaTab() {
               <div>
                 <div
                   style={{
-                    fontSize: 13,
+                    fontSize: 'var(--fs-body)',
                     color: dcAnswered.correct ? 'var(--ssw-correct)' : 'var(--ssw-wrong)',
                     fontWeight: 700,
                     marginBottom: 6,
@@ -240,7 +240,13 @@ export default function SayaTab() {
                 >
                   {dcAnswered.correct ? '✅ Benar!' : '❌ Salah'}
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--ssw-textMuted)', lineHeight: 1.5 }}>
+                <div
+                  style={{
+                    fontSize: 'var(--fs-caption)',
+                    color: 'var(--ssw-textMuted)',
+                    lineHeight: 1.5,
+                  }}
+                >
                   <JpFront jp={dailyChallengeQ.jp} furiganaPolicy={furiganaPolicy} />
                 </div>
                 {dailyChallengeQ.explanation &&
@@ -249,7 +255,7 @@ export default function SayaTab() {
                     return (
                       <div
                         style={{
-                          fontSize: 11,
+                          fontSize: 'var(--fs-small)',
                           color: 'var(--ssw-textDim)',
                           marginTop: 6,
                           lineHeight: 1.5,
@@ -265,7 +271,7 @@ export default function SayaTab() {
               <div>
                 <div
                   style={{
-                    fontSize: 13,
+                    fontSize: 'var(--fs-body)',
                     fontWeight: 600,
                     marginBottom: 10,
                     lineHeight: 1.5,
@@ -275,7 +281,13 @@ export default function SayaTab() {
                   <JpFront jp={dailyChallengeQ.jp} furiganaPolicy={furiganaPolicy} />
                 </div>
                 {dailyChallengeQ.id_text && (
-                  <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginBottom: 10 }}>
+                  <div
+                    style={{
+                      fontSize: 'var(--fs-small)',
+                      color: 'var(--ssw-textDim)',
+                      marginBottom: 10,
+                    }}
+                  >
                     {renderJPWithRuby(
                       dailyChallengeQ.id_text,
                       parseRubyFragments(dailyChallengeQ.id_text)
@@ -297,7 +309,7 @@ export default function SayaTab() {
                       disabled={dcAnswered !== null}
                       style={{
                         padding: '8px 12px',
-                        fontSize: 12,
+                        fontSize: 'var(--fs-caption)',
                         fontFamily: 'inherit',
                         borderRadius: 8,
                         cursor: dcAnswered !== null ? 'default' : 'pointer',
@@ -362,7 +374,7 @@ export default function SayaTab() {
               />
               <div
                 style={{
-                  fontSize: 9,
+                  fontSize: 'var(--fs-nano)',
                   color: a.unlocked ? 'var(--ssw-textMuted)' : 'var(--ssw-textFaint)',
                   lineHeight: 1.3,
                   fontWeight: a.unlocked ? 700 : 400,

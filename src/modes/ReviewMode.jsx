@@ -259,7 +259,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
             aria-label="Lewati kartu ini (S)"
             title="Lewati (S)"
             style={{
-              fontSize: 11,
+              fontSize: 'var(--fs-small)',
               color: T.textDim,
               background: 'none',
               border: 'none',
@@ -282,7 +282,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
         <span
           className={S.pill}
           style={{
-            fontSize: 10,
+            fontSize: 'var(--fs-micro)',
             background: `${info.strength.color}15`,
             color: info.strength.color,
             border: `1px solid ${info.strength.color}30`,
@@ -295,7 +295,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
           <span
             className={S.pill}
             style={{
-              fontSize: 10,
+              fontSize: 'var(--fs-micro)',
               background: T.surface,
               color: T.textMuted,
               border: `1px solid ${T.border}`,
@@ -378,7 +378,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
               <span
                 className={S.pill}
                 style={{
-                  fontSize: 10,
+                  fontSize: 'var(--fs-micro)',
                   background: `${cat.color}15`,
                   color: cat.color,
                   border: `1px solid ${cat.color}33`,

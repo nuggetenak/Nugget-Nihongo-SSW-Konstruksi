@@ -170,7 +170,7 @@ export default function QuizProduksiMode({
   const pillStyle = (on) => ({
     fontFamily: 'inherit',
     padding: '7px 16px',
-    fontSize: 13,
+    fontSize: 'var(--fs-body)',
     borderRadius: T.r.pill,
     cursor: 'pointer',
     fontWeight: on ? 700 : 400,
@@ -191,9 +191,7 @@ export default function QuizProduksiMode({
           ← Kembali
         </button>
 
-        <h2 className={S.pageTitle} style={{ fontSize: 20 }}>
-          🔤 Kuis Produksi
-        </h2>
+        <h2 className={S.pageTitle}>🔤 Kuis Produksi</h2>
         <p className={S.pageSub} style={{ marginBottom: 20 }}>
           Lihat istilah Jepang → ketik terjemahan Indonesia kamu.
         </p>
@@ -207,7 +205,7 @@ export default function QuizProduksiMode({
               border: `1px solid ${T.correctBorder}`,
             }}
           >
-            <div style={{ fontSize: 13, fontWeight: 700, color: T.correct }}>
+            <div style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: T.correct }}>
               Sesi terakhir: {correctCount}/{doneCount} benar (
               {doneCount > 0 ? Math.round((correctCount / doneCount) * 100) : 0}%)
             </div>
@@ -240,7 +238,7 @@ export default function QuizProduksiMode({
 
         <button
           className={S.btnPrimary}
-          style={{ fontSize: 15, padding: '15px' }}
+          style={{ fontSize: 'var(--fs-subtitle)', padding: '15px' }}
           onClick={startSession}
         >
           Mulai 🔤
@@ -303,7 +301,7 @@ export default function QuizProduksiMode({
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={() => setStarted(false)}>
           ← Kuis Prod.
         </button>
-        <div style={{ fontSize: 12, color: T.textDim }}>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.textDim }}>
           {idx + 1} / {queue.length}
           {results.length > 0 && (
             <span style={{ marginLeft: 8, color: T.correct, fontWeight: 700 }}>
@@ -333,7 +331,7 @@ export default function QuizProduksiMode({
       >
         <div
           style={{
-            fontSize: 11,
+            fontSize: 'var(--fs-small)',
             color: T.textDim,
             marginBottom: 8,
             letterSpacing: 1,
@@ -350,7 +348,7 @@ export default function QuizProduksiMode({
               marginTop: 10,
               background: 'none',
               border: 'none',
-              fontSize: 13,
+              fontSize: 'var(--fs-body)',
               color: T.amber,
               cursor: 'pointer',
               padding: '4px 0',
@@ -405,7 +403,7 @@ export default function QuizProduksiMode({
             </button>
             <button
               className={S.btnSecondary}
-              style={{ flex: 1, fontSize: 12 }}
+              style={{ flex: 1, fontSize: 'var(--fs-caption)' }}
               onClick={handleSkip}
             >
               Lewati ⏭
@@ -433,13 +431,13 @@ export default function QuizProduksiMode({
           </div>
 
           {!answerCorrect && lastResult?.input && (
-            <div style={{ fontSize: 13, color: T.wrong, marginBottom: 6 }}>
+            <div style={{ fontSize: 'var(--fs-body)', color: T.wrong, marginBottom: 6 }}>
               Kamu: {lastResult.input || '(dilewati)'}
             </div>
           )}
 
           <div style={{ marginBottom: 4 }}>
-            <span style={{ fontSize: 11, color: T.textDim }}>Jawaban: </span>
+            <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>Jawaban: </span>
             <span style={{ fontSize: 16, fontWeight: 700, color: T.text }}>{card.id_text}</span>
           </div>
 
@@ -452,7 +450,7 @@ export default function QuizProduksiMode({
               // where a mostly-red diff would be noise, not help.
               if (!closest || closest.dist < 1 || closest.dist > 3) return null;
               return (
-                <div style={{ fontSize: 13, marginBottom: 4 }}>
+                <div style={{ fontSize: 'var(--fs-body)', marginBottom: 4 }}>
                   <span style={{ color: T.textDim }}>Dekat: </span>
                   <TypoDiff ops={closest.ops} />
                 </div>
@@ -460,7 +458,14 @@ export default function QuizProduksiMode({
             })()}
 
           {card.desc && (
-            <div style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.5 }}>
+            <div
+              style={{
+                fontSize: 'var(--fs-caption)',
+                color: T.textDim,
+                marginTop: 8,
+                lineHeight: 1.5,
+              }}
+            >
               <DescBlock desc={card.desc} />
             </div>
           )}
@@ -468,7 +473,11 @@ export default function QuizProduksiMode({
       )}
 
       {phase === 'revealed' && (
-        <button className={S.btnPrimary} style={{ fontSize: 15 }} onClick={handleNext}>
+        <button
+          className={S.btnPrimary}
+          style={{ fontSize: 'var(--fs-subtitle)' }}
+          onClick={handleNext}
+        >
           {isLast ? 'Lihat Hasil →' : 'Lanjut →'}
         </button>
       )}

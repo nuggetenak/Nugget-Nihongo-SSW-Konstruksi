@@ -170,7 +170,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
 
   const pillStyle = (active) => ({
     fontFamily: 'inherit',
-    fontSize: 11,
+    fontSize: 'var(--fs-small)',
     padding: '6px 12px',
     borderRadius: T.r.pill,
     cursor: 'pointer',
@@ -223,11 +223,11 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
               gap: 10,
             }}
           >
-            <span style={{ fontSize: 20 }}>⭐</span>
+            <span style={{ fontSize: 'var(--fs-jp-back)' }}>⭐</span>
             <div style={{ flex: 1 }}>
               <div
                 style={{
-                  fontSize: 11,
+                  fontSize: 'var(--fs-small)',
                   fontWeight: 700,
                   color: 'var(--ssw-amber)',
                   marginBottom: 2,
@@ -235,16 +235,20 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
               >
                 DISARANKAN BERIKUTNYA
               </div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ssw-text)' }}>
+              <div
+                style={{ fontSize: 'var(--fs-body)', fontWeight: 700, color: 'var(--ssw-text)' }}
+              >
                 {suggested.emoji || '📄'} {suggested.title}
               </div>
-              <div style={{ fontSize: 11, color: 'var(--ssw-textDim)', marginTop: 1 }}>
+              <div
+                style={{ fontSize: 'var(--fs-small)', color: 'var(--ssw-textDim)', marginTop: 1 }}
+              >
                 {isUntouched
                   ? 'Belum pernah dikerjakan'
                   : `Skor terakhir: ${savedPct}% — perlu diperbaiki`}
               </div>
             </div>
-            <span style={{ fontSize: 12, color: 'var(--ssw-textDim)' }}>→</span>
+            <span style={{ fontSize: 'var(--fs-caption)', color: 'var(--ssw-textDim)' }}>→</span>
           </button>
         );
       })()}
@@ -270,8 +274,10 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
             }}
           >
             <div>
-              <div style={{ fontSize: 11, color: T.textDim, fontWeight: 700 }}>TOTAL SEMUA SET</div>
-              <div style={{ fontSize: 11, color: T.textMuted, marginTop: 2 }}>
+              <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, fontWeight: 700 }}>
+                TOTAL SEMUA SET
+              </div>
+              <div style={{ fontSize: 'var(--fs-small)', color: T.textMuted, marginTop: 2 }}>
                 {scored.length}/{TEORI_PRAKTIK.length} set dikerjakan · {totalCorrect}/{totalQ}{' '}
                 benar
               </div>
@@ -306,10 +312,10 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
       {groups.map((g) => (
         <div key={g.label} style={{ marginBottom: 20 }}>
           <div className={S.row} style={{ marginBottom: 8 }}>
-            <span style={{ fontSize: 13 }}>{g.icon}</span>
+            <span style={{ fontSize: 'var(--fs-body)' }}>{g.icon}</span>
             <span
               style={{
-                fontSize: 10,
+                fontSize: 'var(--fs-micro)',
                 fontWeight: 800,
                 color: g.color,
                 letterSpacing: 1.8,
@@ -318,7 +324,9 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
             >
               {g.label}
             </span>
-            {g.desc && <span style={{ fontSize: 10, color: T.textDim }}>— {g.desc}</span>}
+            {g.desc && (
+              <span style={{ fontSize: 'var(--fs-micro)', color: T.textDim }}>— {g.desc}</span>
+            )}
             <div
               style={{
                 flex: 1,
@@ -329,7 +337,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
             <span
               className={S.pill}
               style={{
-                fontSize: 10,
+                fontSize: 'var(--fs-micro)',
                 color: T.textDim,
                 background: T.surface,
                 border: `1px solid ${T.border}`,
@@ -371,13 +379,13 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
                     />
                     <div className={S.rowSpread}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{ fontSize: 13, fontWeight: 700 }}>
+                        <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700 }}>
                           {s.emoji} {s.title}
                         </span>
                         {!saved && (
                           <span
                             style={{
-                              fontSize: 9,
+                              fontSize: 'var(--fs-nano)',
                               fontWeight: 700,
                               background: `${T.amber}15`,
                               color: T.amber,
@@ -394,7 +402,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
                         {saved && (
                           <span
                             style={{
-                              fontSize: 11,
+                              fontSize: 'var(--fs-small)',
                               fontWeight: 700,
                               color:
                                 saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
@@ -403,7 +411,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
                             {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
                           </span>
                         )}
-                        <span style={{ fontSize: 11, color: T.textDim }}>
+                        <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>
                           {s.questions.length}q
                         </span>
                       </div>
@@ -411,7 +419,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
                     {s.subtitle && (
                       <div
                         style={{
-                          fontSize: 11,
+                          fontSize: 'var(--fs-small)',
                           color: T.textDim,
                           marginTop: 4,
                           fontFamily: T.fontJP,
@@ -430,7 +438,7 @@ export default function WaygroundMode({ onExit, onSessionEnd }) {
                       }}
                       style={{
                         fontFamily: 'inherit',
-                        fontSize: 11,
+                        fontSize: 'var(--fs-small)',
                         padding: '6px 18px',
                         textAlign: 'left',
                         cursor: 'pointer',

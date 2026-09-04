@@ -127,7 +127,7 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
             onClick={btn.onClick}
             style={{
               fontFamily: 'inherit',
-              fontSize: 11,
+              fontSize: 'var(--fs-small)',
               padding: '6px 12px',
               borderRadius: T.r.pill,
               cursor: 'pointer',
@@ -155,19 +155,21 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
       >
         <div>
           <div style={{ fontSize: 14, fontWeight: 700 }}>🔀 Mix All Vocab</div>
-          <div style={{ fontSize: 11, color: T.textDim, marginTop: 2 }}>
+          <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 2 }}>
             Semua {totalSoal} soal diacak — latihan komprehensif
           </div>
         </div>
-        <span style={{ fontSize: 11, color: '#a78bfa', fontWeight: 700 }}>{totalSoal}q →</span>
+        <span style={{ fontSize: 'var(--fs-small)', color: '#a78bfa', fontWeight: 700 }}>
+          {totalSoal}q →
+        </span>
       </button>
 
       <div style={{ marginBottom: 8 }}>
         <div className={S.row} style={{ marginBottom: 10 }}>
-          <span style={{ fontSize: 13 }}>📖</span>
+          <span style={{ fontSize: 'var(--fs-body)' }}>📖</span>
           <span
             style={{
-              fontSize: 10,
+              fontSize: 'var(--fs-micro)',
               fontWeight: 800,
               color: '#60a5fa',
               letterSpacing: 1.8,
@@ -186,7 +188,7 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
           <span
             className={S.pill}
             style={{
-              fontSize: 10,
+              fontSize: 'var(--fs-micro)',
               color: T.textDim,
               background: T.surface,
               border: `1px solid ${T.border}`,
@@ -217,14 +219,14 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
                   }}
                 />
                 <div className={S.rowSpread}>
-                  <span style={{ fontSize: 13, fontWeight: 700 }}>
+                  <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700 }}>
                     {s.emoji} {s.title}
                   </span>
                   <div className={S.row} style={{ gap: 8 }}>
                     {saved && (
                       <span
                         style={{
-                          fontSize: 11,
+                          fontSize: 'var(--fs-small)',
                           fontWeight: 700,
                           color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
                         }}
@@ -232,12 +234,19 @@ export default function VocabMode({ onExit, onSessionEnd, onRetryWrong, audioEna
                         {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
                       </span>
                     )}
-                    <span style={{ fontSize: 11, color: T.textDim }}>{s.questions.length}q</span>
+                    <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>
+                      {s.questions.length}q
+                    </span>
                   </div>
                 </div>
                 {s.subtitle && (
                   <div
-                    style={{ fontSize: 11, color: T.textDim, marginTop: 4, fontFamily: T.fontJP }}
+                    style={{
+                      fontSize: 'var(--fs-small)',
+                      color: T.textDim,
+                      marginTop: 4,
+                      fontFamily: T.fontJP,
+                    }}
                   >
                     {renderJPWithRuby(s.subtitle, parseRubyFragments(s.subtitle))}
                   </div>

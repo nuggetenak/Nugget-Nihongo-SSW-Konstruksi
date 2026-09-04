@@ -150,7 +150,7 @@ function PanelView({ onExit, onStartQuiz }) {
           </button>
           <button
             className={S.btnSecondary}
-            style={{ padding: '8px 12px', fontSize: 12 }}
+            style={{ padding: '8px 12px', fontSize: 'var(--fs-caption)' }}
             onClick={() => onStartQuiz('ketik')}
           >
             ⌨️ Ketik
@@ -213,7 +213,7 @@ function PanelView({ onExit, onStartQuiz }) {
                       {item.soal && (
                         <div
                           style={{
-                            fontSize: 11,
+                            fontSize: 'var(--fs-small)',
                             color: 'var(--ssw-textDim)',
                             background: 'rgba(0,0,0,0.12)',
                             borderRadius: 6,
@@ -230,7 +230,7 @@ function PanelView({ onExit, onStartQuiz }) {
                       {item.mnemonic && (
                         <div
                           style={{
-                            fontSize: 11,
+                            fontSize: 'var(--fs-small)',
                             color: T.textDim,
                             background: 'rgba(0,0,0,0.15)',
                             borderRadius: 6,
@@ -378,7 +378,7 @@ function QuizView({ onBack, onSessionEnd }) {
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={onBack}>
           ← Angka Kunci
         </button>
-        <div className={S.row} style={{ fontSize: 12 }}>
+        <div className={S.row} style={{ fontSize: 'var(--fs-caption)' }}>
           <span className={A.scoreBadge}>
             {results.filter((r) => r.isCorrect).length}/{qIdx + (selected !== null ? 1 : 0)}
           </span>
@@ -628,7 +628,7 @@ function TypeQuizView({ onBack, onSessionEnd }) {
             {isCorrect ? '✓ Benar!' : `✗ Jawaban: ${item.angka}`}
           </div>
           {item.mnemonic && (
-            <div style={{ fontSize: 11, color: T.textDim, lineHeight: 1.5 }}>
+            <div style={{ fontSize: 'var(--fs-small)', color: T.textDim, lineHeight: 1.5 }}>
               💡 {item.mnemonic}
             </div>
           )}
