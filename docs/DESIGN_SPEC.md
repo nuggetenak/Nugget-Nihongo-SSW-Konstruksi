@@ -159,7 +159,12 @@ the old sizes; ラッキングカバー was breaking as "ラッキングカバ /
 
 `--fs-page-title` (2026-08-31): the app's actual page-title heading role — BelajarTab,
 SayaTab, Dashboard's (mostly desktop-only, see below) `<h1>`, and every individual mode
-screen via `modes.module.css`'s shared `.pageTitle`. Existed as a de facto convention
+screen via `modes.module.css`'s shared `.pageTitle`. **Not** `ModeHeader`'s `<h1>`, which
+took over the mode page-title role in the 2026-09-04 consolidation and uses `--fs-title`
+instead: it is a sticky band sharing a row with a back button and a breadcrumb, and at
+page-title size 11 of the 21 mode labels were cut off at 320px ("Ekspor & Impor" asked for
+308px of a 188px box) and 3 still were at 390px. Measured across all 21 modes, both
+widths, before and after. Existed as a de facto convention
 (22px, weight 800) before it existed as a token: SayaTab and every mode screen had
 already independently converged on it, BelajarTab and Dashboard's h1 had drifted to
 24px/900 without anyone deciding they should differ. Named and unified rather than
@@ -332,7 +337,9 @@ the corpus grows enough to need it) is documented at the top of that script and 
 ## 4. Spacing, radii, shadow, motion
 
 ```css
---space-4: 4px;   --space-8: 8px;   --space-12: 12px;  --space-16: 16px;  --space-20: 20px;  --space-24: 24px;
+/* Spacing — in rem, named for the px each step resolves to at the default root size. */
+--space-2   --space-4   --space-6   --space-8   --space-10  --space-12  --space-14  --space-16
+--space-20  --space-24  --space-28  --space-32  --space-40  --space-48  --space-56  --space-64
 --r-xs: 6px;   --r-sm: 8px;   --r-md: 12px;  --r-lg: 16px;  --r-xl: 20px;  --r-xxl: 24px;  --r-pill: 99px;
 --shadow-xs / -sm / -lg / -amber   (see global.css for exact values)
 --ease-spring / --ease-smooth      --t-fast: 120ms  --t-base: 200ms  --t-slow: 350ms
@@ -340,6 +347,21 @@ the corpus grows enough to need it) is documented at the top of that script and 
 
 Use these, not new one-off values — a new spacing/radius number that isn't on this scale is a
 signal to double back and pick the nearest token rather than inventing one.
+
+**Spacing is rem on purpose, and that is not cosmetic.** The Ukuran Teks control (§3) scales the
+root font-size, so rem spacing grows with the text and px spacing does not. Before this was fixed,
+"Sangat Besar" took body text from 15px to 18.8px while every gap, padding and gutter stayed
+exactly where it was — the layout got _tighter_ for the one reader who had asked for it to get
+looser. A px value in a `padding`, `margin` or `gap` is therefore a bug, not a style preference;
+`--tap-min`, border widths, radii and `--nav-h` stay px deliberately, because those are physical or
+decorative dimensions rather than rhythm.
+
+The scale is a 2px grid to 16, 4px to 32, 8px to 64. That shape came from counting what the app
+actually used: the previous six-step 4px scale (`--sp-1`…`--sp-6`) had no name for 2, 6, 10 or 14,
+which appeared 233 times between them, so most spacing bypassed the scale entirely (54 token uses
+against ~350 literals). This applies to JSX `style={{ }}` objects as much as to stylesheets — 418
+of them were bare numbers and px strings until 2026-09-04. "Dynamic/per-instance values stay
+inline" means colors, widths and transforms; spacing was never on that list.
 
 **Z-index scale** (`global.css`) — every deliberate app-chrome stacking decision routes through
 this, not a raw number:
