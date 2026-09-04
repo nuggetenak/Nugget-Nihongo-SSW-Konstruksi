@@ -44,7 +44,11 @@ function renderHarness(props = {}) {
       createElement(
         ConfirmProvider,
         null,
-        createElement(AppProvider, null, createElement(Harness, { onCtx: (c) => (ctx = c), ...props }))
+        createElement(
+          AppProvider,
+          null,
+          createElement(Harness, { onCtx: (c) => (ctx = c), ...props })
+        )
       )
     )
   );

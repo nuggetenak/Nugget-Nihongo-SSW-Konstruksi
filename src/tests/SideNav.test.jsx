@@ -24,9 +24,7 @@ describe('SideNav', () => {
   });
 
   it('renders mode sections grouped by MODE_SECTIONS when onSelectMode is passed', () => {
-    render(
-      <SideNav active="belajar" onChange={() => {}} dueBadge={0} onSelectMode={() => {}} />
-    );
+    render(<SideNav active="belajar" onChange={() => {}} dueBadge={0} onSelectMode={() => {}} />);
     expect(screen.getByText('📝 Pelajari')).toBeTruthy();
     expect(screen.getByText('🧪 Latihan')).toBeTruthy();
     expect(screen.getByText('Kartu')).toBeTruthy();
@@ -55,7 +53,7 @@ describe('SideNav', () => {
     expect(kartuButton.getAttribute('aria-current')).toBe('page');
   });
 
-  it("auto-opens the section containing the active mode", () => {
+  it('auto-opens the section containing the active mode', () => {
     render(
       <SideNav
         active="belajar"

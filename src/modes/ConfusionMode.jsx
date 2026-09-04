@@ -191,7 +191,11 @@ function PanelView({
                       color: T.text,
                     }}
                   >
-                    <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                    <JpFront
+                      jp={pair.termA}
+                      furiganaPolicy={furiganaPolicy}
+                      maxSize={JP_LIST_MAX_SECONDARY}
+                    />
                   </div>
                 </div>
                 <div style={{ color: T.textDim, fontSize: 18, alignSelf: 'center' }}>vs</div>
@@ -203,7 +207,11 @@ function PanelView({
                       color: T.text,
                     }}
                   >
-                    <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                    <JpFront
+                      jp={pair.termB}
+                      furiganaPolicy={furiganaPolicy}
+                      maxSize={JP_LIST_MAX_SECONDARY}
+                    />
                   </div>
                 </div>
               </div>

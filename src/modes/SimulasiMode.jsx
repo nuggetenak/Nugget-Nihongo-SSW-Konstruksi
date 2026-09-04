@@ -636,10 +636,20 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                       <MixedRuby text={r.id_text} />
                     </div>
                     <div className={SM.reviewWrong}>
-                      ✗ <JpFront jp={userOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                      ✗{' '}
+                      <JpFront
+                        jp={userOpt?.text || '—'}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX_SECONDARY}
+                      />
                     </div>
                     <div className={SM.reviewCorrect}>
-                      ✓ <JpFront jp={correctOpt?.text || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                      ✓{' '}
+                      <JpFront
+                        jp={correctOpt?.text || '—'}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX_SECONDARY}
+                      />
                     </div>
                     {r.explanation &&
                       (() => {

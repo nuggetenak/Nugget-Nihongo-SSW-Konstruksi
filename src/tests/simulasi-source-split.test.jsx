@@ -38,7 +38,11 @@ function renderSimulasi() {
         createElement(
           AppProvider,
           null,
-          createElement(SimulasiMode, { onExit: vi.fn(), onSessionEnd: vi.fn(), onRetryWrong: vi.fn() })
+          createElement(SimulasiMode, {
+            onExit: vi.fn(),
+            onSessionEnd: vi.fn(),
+            onRetryWrong: vi.fn(),
+          })
         )
       )
     )

@@ -7,12 +7,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { createElement } from 'react';
-import {
-  init,
-  get,
-  _reset_for_test,
-  getCorruptionWarning,
-} from '../storage/engine.js';
+import { init, get, _reset_for_test, getCorruptionWarning } from '../storage/engine.js';
 import { notifyQuotaExceeded } from '../utils/storage-quota.js';
 import DataWarningBanner from '../components/DataWarningBanner.jsx';
 import { AppProvider } from '../contexts/AppContext.jsx';

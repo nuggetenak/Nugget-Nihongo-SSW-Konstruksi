@@ -26,8 +26,6 @@
    earlier in the file than the rule it overrides loses that rule in source
    order once the query matches. */
 
-
-
 /* Dot grid texture on front */
 .front::before {
   content: '';

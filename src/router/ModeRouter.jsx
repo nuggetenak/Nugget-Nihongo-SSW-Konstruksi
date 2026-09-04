@@ -66,7 +66,6 @@ export function ModeLoader({ shape = 'card' }) {
   );
 }
 
-
 // ── Focus trap helper — moves focus to the skip target on mode entry ────────
 function FocusSentinel() {
   const ref = useRef(null);

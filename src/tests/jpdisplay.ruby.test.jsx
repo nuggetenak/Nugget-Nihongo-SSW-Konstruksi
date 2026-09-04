@@ -91,9 +91,7 @@ describe('JpFront ruby furigana rendering', () => {
 
   it('maxSize leaves a string already smaller than the cap untouched', () => {
     const longText = '安全確認の8項目という長い文字列テスト';
-    const { container } = render(
-      <JpFront jp={longText} furiganaPolicy="hidden" maxSize={30} />
-    );
+    const { container } = render(<JpFront jp={longText} furiganaPolicy="hidden" maxSize={30} />);
     const span = container.querySelector('span[lang="ja"]');
     expect(parseInt(span.style.fontSize, 10)).toBeLessThan(30);
   });

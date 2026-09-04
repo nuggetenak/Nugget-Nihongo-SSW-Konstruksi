@@ -77,8 +77,8 @@ export default function ResultScreen({
       {weaknessTip && <div className={s.tip}>💡 {weaknessTip}</div>}
       {weakCategory && (
         <div className={s.tip}>
-          {weakCategory.emoji} {weakCategory.count} salah di {weakCategory.label} — latih
-          kategori itu?
+          {weakCategory.emoji} {weakCategory.count} salah di {weakCategory.label} — latih kategori
+          itu?
           <button
             className={s.btnWrong}
             style={{ marginTop: 8 }}
@@ -132,10 +132,20 @@ export default function ResultScreen({
                   <JpFront jp={r.question} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX} />
                 </div>
                 <div className={s.reviewWrong}>
-                  ✗ <JpFront jp={r.userAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                  ✗{' '}
+                  <JpFront
+                    jp={r.userAnswer || '—'}
+                    furiganaPolicy={furiganaPolicy}
+                    maxSize={JP_LIST_MAX_SECONDARY}
+                  />
                 </div>
                 <div className={s.reviewCorrect}>
-                  ✓ <JpFront jp={r.correctAnswer || '—'} furiganaPolicy={furiganaPolicy} maxSize={JP_LIST_MAX_SECONDARY} />
+                  ✓{' '}
+                  <JpFront
+                    jp={r.correctAnswer || '—'}
+                    furiganaPolicy={furiganaPolicy}
+                    maxSize={JP_LIST_MAX_SECONDARY}
+                  />
                 </div>
                 {r.explanation &&
                   (() => {

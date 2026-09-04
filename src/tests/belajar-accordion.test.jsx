@@ -38,7 +38,10 @@ describe('BelajarTab — accordion', () => {
     const ulasanSection = Object.entries(MODE_SECTIONS).find(([, s]) => s.modes.length === 1);
     expect(ulasanSection).toBeTruthy();
     const [, section] = ulasanSection;
-    const label = section.title.replace(/[^\p{L}\s]/gu, '').trim().toUpperCase();
+    const label = section.title
+      .replace(/[^\p{L}\s]/gu, '')
+      .trim()
+      .toUpperCase();
     const header = screen.getByText(label);
     expect(header.closest('button')).toBeNull(); // plain div, not a toggle button
   });
