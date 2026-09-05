@@ -1,3 +1,26 @@
+> **ARCHIVED 2026-09-05.** Historical — do not use as instructions.
+>
+> This was the working guide for the `content-dq` branch, which **merged into `main` on
+> 2026-08-18** (`151a45e`). Everything below describes that branch's checkout, not this repo:
+>
+> - The **merge plan** at the bottom was executed in full on 2026-08-18. Its step 4 ("verify 457
+>   tests pass (41 files)") is a 2026-05 figure; the suite is 768 tests in 79 files as of
+>   2026-09-05.
+> - The `sets/wayground/**`, `sets/jac-mockup/**` and `src/data/cards/**` split-file layers this
+>   file tells you to edit **no longer exist** — all three were unimported mirror layers, two of
+>   them silently stale, deleted 2026-09-04 (see `CHANGELOG.md` [6.0.0]). `sets/jac/` is the only
+>   surviving `sets/` subfolder.
+> - The "LEGACY MONOLITHIC — DO NOT EDIT" warnings on `wayground-sets.js` and
+>   `jac-mockup-sets.js` are now **exactly backwards**: those two files *are* the source. The
+>   regeneration script their old headers referred to never existed in this repo.
+> - `scripts/` is no longer `main`-only, and `merge-cards.mjs` means card sources are not
+>   hand-mirrored any more.
+>
+> **Live equivalents:** `docs/AGENT_WORKFLOW.md` §4a (where to edit what), §4 (where docs live),
+> `HANDOFF.md` (state), `_MAP.md` (architecture).
+
+---
+
 # SSW Konstruksi — Content DQ Branch
 
 **Branch:** `content-dq`

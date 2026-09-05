@@ -37,6 +37,10 @@ wire this in, start there.
 
 ## What this is
 
+_(Two files now — `useTrackedCards.js` and `FocusMode.jsx`. `FilterPopup.jsx` left in 2026-09-04's
+item 55; see the update at the top of this file. The original text is kept as written below,
+because it explains why all three were moved here in the first place.)_
+
 Three React files (`FilterPopup.jsx`, `useTrackedCards.js`, `FocusMode.jsx`) that were sitting
 in `src/components/`, `src/hooks/`, `src/modes/` with **zero references anywhere** in this
 branch's tracked code or docs, and import paths that don't resolve on `content-dq`:

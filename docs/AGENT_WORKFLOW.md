@@ -66,12 +66,23 @@ briefly when actually pushing, then strip again right after.
    only ever grows stops getting read in full, which defeats the point of having one. (This is
    also why this file itself should stay short — if it starts accumulating session-specific
    content, that content belongs in `HANDOFF.md` or `_MAP.md` instead.)
-3. `npm run validate` clean **before pushing**, not just before committing — check again if any
+3. **Update `CHANGELOG.md` and the version, if anything shipped.** This is the step that gets
+   skipped: ten commits reached `main` after `CHANGELOG.md` was last touched on 2026-09-04 — six
+   of them substantive, including a category picker and four P0 exam bugs — with no release note,
+   because two sessions in a row closed out by updating `HANDOFF.md` and `docs/UI_UX_PLAN.md` and
+   stopping there. If a user would notice it, it needs an entry. Bump
+   `package.json`'s version in the same commit, **and `public/sw.js`'s `CACHE_VERSION` with it** —
+   that file's own comment says the two are kept equal, and it had already drifted 4.23.0 vs 6.0.0
+   once.
+4. **Re-derive any number you carried into a doc.** Test counts, card counts, mode counts: run
+   `npm test` and `npm run audit:full` and copy the output, don't copy the previous doc. Two
+   different wrong test counts sat in `README.md` at the same time.
+5. `npm run validate` clean **before pushing**, not just before committing — check again if any
    time passed between the two. That is format:check, lint, test, the five audits, and build.
    Running the pieces individually is how `format:check` came to be failing on 33 files and
    `audit-integrity.mjs` came to report 2876 phantom issues on every run for weeks: neither was
    part of any gate.
-4. Commit, push.
+6. Commit, push.
 
 ## 4. Where things live — don't ask for these to be pasted, read them from the clone
 
@@ -79,6 +90,7 @@ briefly when actually pushing, then strip again right after.
 | ----------------------------- | -------------------------------------------------------- |
 | `HANDOFF.md`                  | Current live state only — read every session             |
 | `_MAP.md`                      | Architecture + full session-by-session history log       |
+| `README.md`                    | Public-facing: what the app is, dev setup, commands, CI  |
 | `docs/CARD_CONTENT_SPEC.md`    | Card data schema, taxonomy, ruby rules                    |
 | `docs/DESIGN_SPEC.md`          | Palette, typography, icon system, hazard-rail motif       |
 | `docs/LAYOUT_SPEC.md`          | Breakpoints, width tokens, the auto-fit/minmax pattern    |
@@ -86,16 +98,29 @@ briefly when actually pushing, then strip again right after.
 | `docs/PWA_RELEASE_SPEC.md`     | Offline architecture, `CACHE_VERSION` discipline, deploy checklist |
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
 | `docs/UI_UX_PLAN.md`           | **Work queue, not a spec** — prioritised UI/UX items; shrinks as they land, retires to `docs/archive/` when empty |
-| `docs/archive/`                | Superseded/completed material, full text preserved        |
+| `docs/RUBY_MISMATCH_AUDIT.md`  | **Frozen finding list, not a spec** — readings not scoped to their own base; retires when the list is empty |
+| `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md` |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
+| `HUSKY-SETUP.md`               | One-time local pre-commit hook setup — not committed, not CI |
+| `scripts/archive/README.md`    | Which one-shot migration scripts exist and why not to re-run them |
+| `legacy/unwired-app-code/README.md` | Why unwired code is kept there — settled owner decision, don't re-litigate |
 
 Don't duplicate any of this into `HANDOFF.md` or here — link to it.
 
-**Every live doc belongs in this table.** Two docs have now drifted badly while sitting in `docs/`
-without a row here — `DATA_ARCH_AUDIT.md` (archived 2026-08-19) and `BLUEPRINT-CURRENT.md`
-(archived 2026-08-20, by which point every headline number in it was wrong). A doc nothing points
-at is a doc nothing keeps honest. If you add a doc, add its row; if you find a doc with no row,
-that is a signal to check whether it is still true.
+**Every live doc belongs in this table.** Two docs drifted badly while sitting in `docs/` without a
+row here — `DATA_ARCH_AUDIT.md` (archived 2026-08-19) and `BLUEPRINT-CURRENT.md` (archived
+2026-08-20, by which point every headline number in it was wrong). It happened a third time:
+`RUBY_MISMATCH_AUDIT.md` sat in `docs/` unrowed from 2026-08-27 until 2026-09-05, and in that time
+the renderer behaviour its central "these are not currently visually broken" claim rested on was
+replaced (6.0.0), while 38 of its 182 findings were quietly fixed by other work. A doc nothing
+points at is a doc nothing keeps honest. If you add a doc, add its row; if you find a doc with no
+row, that is a signal to check whether it is still true.
+
+**The same applies to numbers.** `README.md` carried two different test counts in two sections and
+neither matched `npm test`; `_MAP.md` described itself as three minor versions behind. Any headline
+figure in a doc — test count, card count, mode count, version — is a claim with an expiry date. If
+you touch a doc, re-derive its numbers (`npm test`, `npm run audit:full`) rather than copying them
+forward.
 
 ## 4a. The data layer — where to edit
 

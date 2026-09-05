@@ -1,20 +1,17 @@
 # HANDOFF.md — SSW Konstruksi
 
-> ## 🟢 content-dq merged into main — 2026-08-18 (commit `151a45e`)
+> **This file holds only live state.** CURRENT STATE's top entry is what's actually true today.
+> When an entry's work is finished or merged, it moves to `docs/archive/` rather than
+> accumulating here — see `docs/AGENT_WORKFLOW.md` §3 for the retirement steps, and
+> `docs/archive/ARCHIVE-INDEX.md` for what has already moved.
 >
-> content-dq's 3.5-month content-quality sprint (sessions 1–29) is done and merged, verified via
-> `npm test` (435/435), `npm run lint` (0 warnings), `npm run build` (clean), plus content-dq's
-> own `verify-content.mjs`/`audit-track-consistency.mjs` (both clean).
->
-> **Retired 2026-08-19:** the GETTING STARTED/PROTOCOL sections that used to sit here
-> (content-dq's own workflow) and the full merge-execution writeup that used to be CURRENT
-> STATE's second entry are both archived verbatim to `docs/archive/HANDOFF-content-dq-era.md`.
-> Condensed versions: `CHANGELOG.md` `[4.23.0]` (what shipped), `_MAP.md` § Agent Session Log
-> (session-by-session).
->
-> **This file now holds only live state.** CURRENT STATE's top entry is what's actually true
-> today. When it's superseded, it moves to `docs/archive/` rather than accumulating here — see
-> `docs/AGENT_WORKFLOW.md` §3 for the retirement steps.
+> Everything up to and including the 6.0.0 release entry has been retired; the two 2026-09-04
+> entries below are kept because they are the most recent session's work. The retired lineage,
+> newest first:
+> `HANDOFF-2026-09-04-audit-and-ui.md` (the 6.0.0 audit + the layout/typography overhaul),
+> `HANDOFF-2026-08-31-09-01-ui-typography.md`, `HANDOFF-2026-08-27-28-sessions.md`,
+> `HANDOFF-ui-overhaul-38-items.md`, `HANDOFF-content-dq-era.md` (the 3.5-month content-quality
+> sprint, sessions 1–29, merged into `main` 2026-08-18 as `151a45e`).
 
 ---
 
@@ -34,7 +31,36 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of 2026-09-04.** Verify before trusting past this point — this line doesn't update itself.
+**As of 2026-09-05.** Verify before trusting past this point — this line doesn't update itself.
+At that date: version **6.1.0**, **768 tests in 79 files**, `npm run validate` clean, `main` at
+`6344ca6` and both entries below merged into it.
+
+- **2026-09-05: "audit administrative and governance docs; fix all discrepancies; compact and do
+  deep comprehensive housekeeping."** Branch `claude/admin-governance-docs-audit-qpmndo`. No
+  content or app-behaviour change except one broken tool; everything else is docs. What the audit
+  found, and what was done about it, is `CHANGELOG.md` `[6.1.0]` § "Administrative and governance
+  docs" — not restated here. The parts that change how a future session should work:
+
+  - **`CHANGELOG.md` had not been touched since `e92b912`, and ten commits landed after it** —
+    six substantive, including a new feature (the kartu category picker) and four P0 fixes to the
+    exam modes, all on `main`, none of them in any release note. Written up as **6.1.0**;
+    `package.json` and `public/sw.js`'s `CACHE_VERSION` bumped to match (the SW's own comment
+    requires them equal). The convention that produced the gap is worth naming: two sessions in a
+    row closed out by updating `HANDOFF.md` and `UI_UX_PLAN.md` but not `CHANGELOG.md`.
+    `docs/AGENT_WORKFLOW.md` §3's close-out list now says so explicitly.
+  - **`docs/AGENT_WORKFLOW.md` §4's own rule was being broken by three live docs.** Rows added for
+    `RUBY_MISMATCH_AUDIT.md`, `README.md`, `HUSKY-SETUP.md` and the two nested READMEs, plus a new
+    paragraph applying the same rule to headline *numbers*, which is what actually went wrong here.
+  - **`README-CONTENT-DQ.md` archived.** It described a branch merged 2026-08-18, told readers to
+    edit split-file layers deleted 2026-09-04, and carried a merge plan already executed.
+  - **`docs/RUBY_MISMATCH_AUDIT.md` re-measured.** Its central claim — that its 182 findings were
+    "NOT currently visually broken" because a renderer fallback folded the in-between text into the
+    ruby base — described behaviour **6.0.0 deleted**. 38 of the 182 have since been fixed by other
+    work; **144 remain** and now render with the reading over only the kanji run touching the
+    marker. Re-scoped, not rewritten.
+  - **`viewer.html`'s JAC Ujian tab had been silently empty since the 2026-08-18 merge**, importing
+    two top-level files that moved to `src/data/sets/jac/`. Its loader swallows import failures, so
+    it showed an empty tab rather than an error. Fixed.
 
 - **2026-09-04: "analyze the simulasi mode and other modes related to it. do not assume
   anything, list all gaps and also additional missing features."** Branch
@@ -96,119 +122,11 @@ content into this file.
     back, horizontal swipe *always* navigates and up flips (swipes used to silently rate and
     auto-advance a face-up card, which is what made "go back" unreachable), and the rating row
     now persists once a card has been seen rather than vanishing on every flip-back.
-  - **`docs/UI_UX_PLAN.md` §7 — feature-parity audit of all 21 modes in the Belajar tab**, items
+  - **`docs/UI_UX_PLAN.md` §13 — feature-parity audit of all 21 modes in the Belajar tab**, items
     75–81, none built. `ModeRouter.jsx`'s prop map is the authority for what a mode can even do.
     Item 78 was flagged as the one to take first, and was taken first — see the entry above.
 
-- **2026-09-04: "analyze comprehensively and exhaustively; fix all gaps, inconsistencies,
-  discrepancies; upgrade the UI & UX."** Branch `claude/analysis-ui-polish-cxnj2d`, PR #8 (draft).
-  Full reasoning lives in the commit messages, one per theme — this is a map to them, not a
-  restatement. Everything below was measured against the running app or the real data; where a
-  doc's claim disagreed with the repo, the repo won and the doc was corrected.
-
-  - **`64f016d` — three ruby rendering bugs the corpus sweep structurally could not see.**
-    `ruby-audit-round3.test.jsx` asks "does the renderer produce garbage?"; it cannot ask "does it
-    produce the *right* annotation?", and all three of these produce well-formed markup:
-    (1) a reading covering text left of its kanji — `ラジオ体操《らじおたいそう》` annotated only
-    体操, and a browser spreads the too-wide `<rt>` so it rendered as "体 操" (**349 strings**);
-    (2) kanji-bearing parentheticals rendered as furigana — `危険予知活動《KY活動》`, whole
-    sentences at annotation size above one kanji (**31**); (3) Indonesian prose folded into ruby
-    bases by the old length-based fallback (**89**). Where a base starts is now *matched* against
-    the reading rather than guessed. Verified by rendering all 6,000 corpus strings before and
-    after and reading every one of the 261 distinct base changes; one known false positive is
-    recorded in the commit rather than hidden.
-  - **`907a902` — three dead data mirror layers retired, and the audits that missed them.**
-    `src/data/cards/**` (70 cards drifted), `src/data/sets/wayground/**`, `src/data/sets/jac-mockup/**`
-    (all 12 sets drifted): none imported by anything, two silently stale with the last two
-    sessions' own fixes, and two live files carrying headers telling maintainers to edit the split
-    copies and run a regeneration script **that has never existed in this repo**. 56 files / 1.7 MB
-    deleted. `audit-integrity.mjs` had been reporting 2876 phantom issues every run (it demanded a
-    `furi` field the schema dropped) — which is how 5 zero-card sources survived in `SOURCE_META`,
-    each an "0 kartu" row in SumberMode; `audit-related-ids.mjs` had been dying with
-    ERR_MODULE_NOT_FOUND since August; `verify-content.mjs` compared only counts, printed "✅ Clean
-    … safe to copy into HANDOFF.md as-is" over 70 drifted cards, and now compares field by field.
-    New `audit-data-text.mjs`. **`npm run validate` now actually gates**: format:check, lint, test,
-    all five audits, build.
-  - **`aa5d610` — four state bugs.** The study streak only counted flashcard marks, so a learner
-    doing SRS reviews daily had a streak of 0 (it feeds the Dashboard headline, two achievements
-    and 20 of 100 readiness points); `calcReadiness` read `srs.stats.review`, a key that has never
-    existed; `SRSContext` memoised its value from a key list omitting `stats`; `goTab` never
-    cleared `modeParams`.
-  - **`ff45009` — design system.** Keyframes lived in two files with **six conflicting
-    definitions** (`shimmer` ran in opposite directions) and `theme.js`'s JS-injected copy silently
-    won; consolidated at the values that were actually rendering. **254 of 297 inline `fontSize:
-    <px>` in JSX** migrated onto the `--fs-*` tokens — `DESIGN_SPEC` §3's claim that "every
-    consumer reads `--fs-*` via var(), confirmed by grep" was only ever true of stylesheets, and is
-    now corrected in place.
-  - **`29f61ae` — one mode header, and lists a phone can render.** 20 of 21 modes rendered their
-    name twice and drew one of 27 different back buttons; ModeHeader is now the whole header, with
-    an exit guard (`useExitGuard`) so the shared arrow can't silently discard a half-finished exam.
-    Buku Catatan went from 19,264 DOM nodes / 134,599px to 714 / 4,095px, Glosari from 18,329 /
-    82,128px to 1,642 / 6,105px. The app's one horizontal overflow fixed (`minmax(430px, 1fr)` is a
-    hard floor).
-  - **`fb96a5f` — a11y and copy.** **Seven declarations across five files were switching off the
-    app's only focus indicator**, all on text inputs; and the indicator itself was drawn so that
-    the outline's offset gap was solid near-black, reading as a heavy frame. Autoplay TTS failures
-    no longer raise an error toast (a phone with no ja-JP voice got one on every ReviewMode entry).
-    A track toggle that could not change anything, shown in two modes, removed. "3 jalur" and a
-    footer naming two removed tracks, corrected.
-  - **Content**: 13 pooled ruby readings split per term; 21 Kangxi Radical codepoints and one
-    Cyrillic typo fixed — both flagged as out-of-scope by the 2026-08-26 font work and still live
-    until now, both now guarded by `audit-data-text.mjs`.
-
-- **2026-09-04, second half: "overhaul the layouts & font typography; you can add new features."**
-  Same branch and PR. All of it measured on the running app first.
-
-  - **`38eb58d` — the type scale rebuilt.** A Playwright walk of every rendered text node across
-    all 24 screens found **85% of the app's visible text at 13px or smaller**: 29% at 11px, 20% at
-    13, 14% at 12, 8% at 10, 4% at 9 — and **9% at 7px, 0.2% at 5px**. The 5–7px was furigana:
-    `.ruby rt` was `0.44em` of `jpFontSize`'s 13px floor, two numbers in two files that nobody had
-    multiplied together. No single rule looked wrong; the sizes only accumulate. The scale is now
-    fluid `clamp(rem + vw)` on a ~1.11→1.2 ratio (the rem term is what keeps it responsive to a
-    reader's font-size preference — a pure-vw preferred value silently defeats that). After:
-    **50.6% at ≤13px and nothing below 10px**.
-  - **`95eb1b3` — Ukuran Teks, a reader-facing control for the whole scale.** Four steps
-    (90/100/112/125%) in Saya, applied pre-paint in `main.jsx` so there is no flash, persisted in
-    prefs. New feature, not a fix: the audience reads Japanese on cheap phones, outdoors.
-  - **`ac69cf6` — spacing that scales with the text, and one owner for width.** Ukuran Teks made a
-    latent bug visible: the spacing scale was px, so at "Sangat Besar" body text went 15px → 18.8px
-    while `--sp-3` stayed 12px — the layout got *tighter* for exactly the reader who asked for it
-    to get looser. Rebuilt as `--space-2`…`--space-64` in rem (renamed, not redefined, so a missed
-    call site fails `audit:css-vars` instead of silently mis-sizing). Ten stylesheets were also
-    repeating the max-width and gutter that `AppShell`'s `.content` had already applied, against
-    that file's own stated rule — costing a mode screen 32px of a 390px phone. And `.content` is a
-    flex column in mode chrome now, so a mode can claim the height the shell already reserves:
-    FlashcardMode's dead space went **284px → 40px** on mobile, **334px → 40px** on desktop.
-  - **`fc5ce55` — the mode title was ellipsised on 11 of 21 screens** at 320px, 3 at 390px
-    ("Ekspor & Impor" wanted 308px of a 188px box). Cause: giving sticky chrome `--fs-page-title`.
-    Now `--fs-title`, still the largest thing in the band, 0 truncated at either width.
-  - **`57aca37` — 418 inline spacing declarations** in JSX style objects moved onto the tokens.
-    Fixing only the stylesheets would have left more than half the app's spacing frozen against
-    Ukuran Teks.
-  - **`1817d7f` — the flip card's height floor was a phone constant, in two places.** 230px in
-    CSS and again in JSX; the card sat 230px tall in an ~800px scene on a tablet, and the JSX copy
-    had been silently defeating the `max-height: 480px` landscape rule since item 23 wrote it.
-  - **`94900de` + `c79365b` — 180 ruby readings scoped to their own term.** Found from a tablet
-    screenshot taken for the layout work: a card rendered タイル張り工事 with a reading three
-    times too long, and a browser spreads a too-wide `<rt>` across its base, so the Japanese came
-    apart into spaced characters. 147 were split words whose second marker repeated the first's
-    reading (`給湯《きゅうとう》管《きゅうとうかん》`) — mechanical to detect, so fixed and
-    guarded in `audit-data-text.mjs`, whose existing pooled check keys on whitespace and could
-    never have seen them. 33 were card titles with several terms' readings run together, each
-    re-annotated by hand from the card's own fields. Corpus-wide, readings that cannot align to
-    the text before them fell from 283 to 122; among card titles, 32 to 3.
-
-- **Open items for the next session: `docs/UI_UX_PLAN.md` §12.** Two of them are decisions for the
-  owner, not execution.
-
-- **Verification**: `npm run validate` clean — format, lint, **728 tests**, five audits, build.
-  Every UI change screenshotted at 390/820/1440px in both themes, before and after; the layout and
-  typography work additionally swept for horizontal overflow and unreachable nav at all three
-  viewports at both Normal and Sangat Besar text size.
-
-_(The 2026-08-31 / 09-01 entry this replaces is archived verbatim to
-`docs/archive/HANDOFF-2026-08-31-09-01-ui-typography.md`, with a note on the one claim in it a
-later session had to correct.)_
+_(The three entries this file used to carry above these are archived — see the note at the top.)_
 
 ---
 
@@ -220,8 +138,13 @@ later session had to correct.)_
   explicit go-ahead in the current conversation, work stays on its branch.
 - Ambiguity → write it down in CURRENT STATE, ask the owner, don't guess and proceed
 - Commit message convention is whatever the active branch is already using — check recent
-  `git log` rather than assuming; content-dq used `CONTENT:`/`ADMIN:`/`DOCS:` prefixes,
-  `feat/ui-overhaul` uses conventional-commits style (`feat(ui):`, `docs:`)
+  `git log` rather than assuming. Everything since `feat/ui-overhaul` uses conventional-commits
+  style (`feat(ui):`, `fix(simulasi):`, `docs:`, `chore:`), and that is what `main` carries now;
+  the `CONTENT:`/`ADMIN:`/`DOCS:` prefixes are content-dq-era and no longer in use.
+- **Close-out is four files, not two.** `HANDOFF.md` (state) and `docs/UI_UX_PLAN.md` (the queue)
+  get updated every session; `CHANGELOG.md` and the version in `package.json` + `public/sw.js`
+  get skipped, and did for three sessions running — 24 shipped commits with no release note. If
+  a session put anything on `main` that a user would notice, it needs a CHANGELOG entry.
 
 _(The rest of this section — `src/data/` editing rules, mirror-edit steps, the data-file
 quote-style rule — was content-dq-specific and archived with it: `docs/archive/HANDOFF-content-dq-era.md`.
@@ -242,19 +165,25 @@ deleted 2026-09-04 and `docs/AGENT_WORKFLOW.md` §4a is the live map of where to
   responsive pattern
 - `docs/COMPONENT_SPEC.md` — CSS Modules conventions, shared primitives, component patterns
 - `docs/PWA_RELEASE_SPEC.md` — offline architecture, `CACHE_VERSION` discipline, deploy checklist
-- `docs/UI_UX_PLAN.md` — **not stable reference; a work queue.** Items 43–65 (drafted
-  2026-08-25) closed out 2026-08-26/28; items 66–68 added 2026-08-31 and closed 2026-09-01;
-  §12 (items 69–72) added 2026-09-04 — see CURRENT STATE above, don't trust this bullet's own
-  age over that. Unlike the `*_SPEC.md`
-  files above, this is meant to shrink and retire to `docs/archive/` once empty — see
-  `docs/AGENT_WORKFLOW.md` §3. Its predecessor (items 1–42, all shipped) is already archived
-  there; numbering deliberately doesn't restart, so item references in git history stay unique
+- `docs/UI_UX_PLAN.md` — **not stable reference; a work queue**, and the one place open items
+  live. Closed rounds: items 43–65 (drafted 2026-08-25, closed 2026-08-26/28), 66–68 (added
+  2026-08-31, closed 2026-09-01). **Still open, as of 2026-09-05:**
+  - §12 (2026-09-04 exhaustive audit) — 69, 70, 71, 72, 73, 74. 69 and 73 are owner decisions.
+  - §13 (Belajar-tab feature parity) — 75, 76, 77, 79, 80, 81. 78 done.
+  - §14 (exam family) — 93–102. 82–92 done.
+  - §6 carried enhancements — 58, 59. 59 is gated on measuring the payload first.
+
+  Unlike the `*_SPEC.md` files above, this is meant to shrink and retire to `docs/archive/` once
+  empty — see `docs/AGENT_WORKFLOW.md` §3. Its predecessor (items 1–42, all shipped) is already
+  archived there; numbering deliberately doesn't restart, so item references in git history stay
+  unique.
+- `docs/RUBY_MISMATCH_AUDIT.md` — **also a work queue, not a spec.** 144 readings (of an original
+  182) still annotate only the kanji run touching the marker rather than the phrase the reading was
+  written for. Needs a session with someone who can confirm actual Japanese readings; see item
+  58/59 for the same shape of "real, scoped, non-urgent" work.
 - `_MAP.md` — architecture map + full session-by-session history log
-- `docs/archive/` — superseded docs, including this file's predecessors (`SESSION_PROMPT.md`,
-  `PROGRESS.md`, `DATA_QUALITY_HANDOFF_v16/v17/v18.md`), `HANDOFF-content-dq-era.md` (the
-  retired GETTING STARTED/PROTOCOL sections + the full 2026-08-18 merge entry + the fully
-  resolved ACTIVE TASKS/OPEN DECISIONS content, all pulled out of this file 2026-08-19),
-  `HANDOFF-2026-08-27-28-sessions.md` (the post-overhaul bug-fix rounds + SimulasiMode/Belajar
-  work, pulled out 2026-08-31), and `DATA_ARCH_AUDIT.md` (frozen point-in-time audit, session
-  16 — moved here 2026-08-19, was sitting in `docs/` already marked "historical, not live")
-- `README-CONTENT-DQ.md` — what's actually present on this branch vs `main`-only
+- `docs/archive/` — every superseded doc, **indexed in `docs/archive/ARCHIVE-INDEX.md`** — read
+  the index rather than the folder listing. It includes this file's own predecessors
+  (`SESSION_PROMPT.md`, `PROGRESS.md`, `DATA_QUALITY_HANDOFF_v8`–`v18`), the five retired
+  CURRENT STATE entries, `DATA_ARCH_AUDIT.md`, and `README-CONTENT-DQ.md` (archived 2026-09-05 —
+  it described the `content-dq` checkout, a branch merged 2026-08-18)

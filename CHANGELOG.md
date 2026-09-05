@@ -1,3 +1,226 @@
+## [6.1.0] - 2026-09-05
+
+Two sessions of work that reached `main` without a release note, plus the audit that found the
+gap. Minor version, not patch: `kartu` gains a category picker, and four P0 fixes change how the
+exam modes behave.
+
+### The gap itself
+
+`CHANGELOG.md` was last touched at `e92b912` on 2026-09-04, and ten commits landed on `main`
+after it — six of them substantive, including a new feature and four P0 bug fixes. Every one of
+those sessions closed out by updating `HANDOFF.md` and `docs/UI_UX_PLAN.md`, and stopped there.
+`docs/AGENT_WORKFLOW.md` §3 now names the release note and the version bump as explicit close-out
+steps, because "update the handoff" had quietly come to mean "we're done".
+
+`package.json` and `public/sw.js`'s `CACHE_VERSION` are bumped together here. That file's own
+comment says the two are kept equal, and they had already drifted once (4.23.0 against a 6.0.0
+package) — harmless in production, since `deploy.yml` rewrites the value to a UTC timestamp before
+every build, but it reads exactly like the stale-cache bug `docs/PWA_RELEASE_SPEC.md` §2 warns
+about.
+
+### Kartu — a category picker, and a card you can turn back over
+
+- **Opening Kartu dropped you on card 1 of 1438 with no way to narrow it.** `ModeRouter` filters
+  only by `track`, and every category carries `tracks: ['lifeline']`, so every category was always
+  in the deck. `FilterPopup` — a real category grid with live counts — had sat unwired in
+  `legacy/unwired-app-code/` since 2026-08-18, blocked on one thing: the mode's filter state was a
+  single `search` string doing three unrelated jobs (free text, `__cat:<key>` for exactly one
+  category, `__starred__`), so the three were mutually exclusive and a category could only be
+  reached by tapping the badge on a card already on screen — inside the deck you were trying to
+  narrow. Categories are a `Set` now, composing with the text query; old sessionStorage values
+  migrate on read. `FilterPopup` graduated to `src/components/` on top of `Sheet` (focus trap and
+  Escape, which it never had) and counts from the deck it is handed, so a `filterIds` deck from
+  SumberMode no longer reports 1438. Closes `docs/UI_UX_PLAN.md` item 55.
+- **A flipped card could not be turned back over on a touch screen.** A regression, not a missing
+  feature: the front face carried the flip handler and went `pointerEvents: none` once flipped, the
+  back face carried none, and the 🔄 Balik button had been removed earlier the same day as
+  "redundant with tapping the card" — true of the front, false of the back. Space on a physical
+  keyboard was the only way back, which is no help to the audience this app is for. Restored to v87
+  semantics: both faces tappable, flip button back, horizontal swipe always navigates and up flips
+  (swipes used to silently rate and auto-advance a face-up card, which is what made "go back"
+  unreachable), and the rating row persists once a card has been seen rather than vanishing on
+  every flip-back.
+
+### The exam family — four P0s, three of which silently destroyed work
+
+- **The exit guard was honoured by one of five routes out of a mode.** `AppContext`'s own comment
+  claimed "every route out of the mode area awaits it first and aborts if it returns false"; only
+  the header's back arrow ever did. Escape (`GlobalKeyboardLayer` called `exitMode()` directly,
+  which clears the guard on its way past), the hardware/browser back button (the `popstate` handler
+  never looked at the guard at all — and on a phone that *is* the back button), and `goTab`/`goMode`
+  from the desktop side nav, which stays on screen while a mode is open, each discarded a running
+  100-minute exam with no prompt.
+- **Every answer restarted the exam clock.** The countdown was a counter decremented by a
+  `setInterval` whose effect listed `finishExam` in its dependencies — and `finishExam` depends on
+  `answers`. Each answer therefore tore the interval down and started a fresh one, discarding the
+  second in progress: fifty answers bought roughly fifty free seconds, changing answers bought
+  more, and a fast run could stall the clock almost entirely. It is a wall-clock deadline now, so
+  the remainder is derived rather than accumulated — it cannot drift, cannot be gamed by answering,
+  and survives a backgrounded tab's timer throttling.
+- **"Latih N Salah" navigated to unrelated flashcards.** It passed `wrongList.map((_, i) => i)` —
+  positions in the wrong-answer list — to a prop that takes card ids. One wrong answer sent you to
+  an empty deck; twenty sent you to cards 1–19, all real, none related to anything you got wrong.
+  The fix was data, not arithmetic: `buildJacPool` was dropping the `related_card_id` that all 95
+  JAC Official questions carry.
+- **Answering re-drew the live question list underneath the reader.** In `wayground` and `jac` the
+  question list was a `useMemo` whose dependency array included the wrong-answer tally those same
+  modes write to on every wrong answer. Answering wrongly recomputed the memo, re-ran `shuffle()`,
+  and replaced the question on screen — while QuizShell was still showing the badge and explanation
+  for the question just answered. Reproduced before fixing (`5S活動の最初の…` became `KY活動の4…` on
+  the answer click). JAC's Lemah mode was worse: the list is filtered by that tally, so a wrong
+  answer grew the list you were working through. Both modes draw their list once now, into state,
+  through a single `openSet` — which is also what makes a session restorable, so the two fixes are
+  one change.
+
+### An exam that survives a reload
+
+Closes `docs/UI_UX_PLAN.md` item 78.
+
+- `simulasi` snapshots progress **and the drawn question list** to sessionStorage. The list cannot
+  be re-derived: both sources shuffle, and the options inside each question shuffle too, so
+  restoring "question 7, answer B" against a fresh draw restores a position into a different exam.
+  The deadline is stored absolute, so a reload three minutes later comes back with three fewer
+  minutes, and an exam whose time ran out while the tab was closed resumes straight into its own
+  scoring with no special case. Leaving on purpose clears the snapshot.
+- `jac`, `wayground` and `vocab` pass `persistKey` through a shared `useQuizResume` + `ResumePrompt`
+  rather than a fourth copy of QuizMode's inline prompt. QuizShell has been able to snapshot since
+  item 51; only QuizMode had ever opted in.
+- `readQuizSnapshot` grew an optional staleness ceiling, because its 30-minute default is shorter
+  than the exam it was being asked to hold.
+
+### Exam correctness, smaller
+
+- **The app contradicted itself about how long the exam is.** `angka-kunci.js` taught "90 detik/soal
+  (50 soal ÷ 75 mnt)" as a fact to memorise while `SimulasiMode` used 2 min/question — a 33%
+  disagreement about the same exam, in an app whose whole purpose is exam prep. Owner ruled the mode
+  correct, so the data entry was the wrong one and is corrected. The rate and the 65% pass mark both
+  live in `utils/constants.js` now; 65 had three copies that had to agree, and the failure mode is a
+  badge reading "Siap Ujian" beside an exam screen reading "BELUM LULUS".
+- **22.6% of full exams contained the same question twice.** The pool held 740 questions but 688
+  distinct ones — 41 teori and 9 praktik appear in two sets each, mostly where a Wayground set and a
+  JAC-Mockup set cover the same ground. Measured over 20,000 simulated draws per preset (6.2% at 25
+  questions, 2.1% at 15). Deduplicated at pool build. Deliberately **not** applied to
+  `buildJacPool`: 学科 Set 1 and 実技 Set 1 share one question, but "take everything in both sets"
+  is the owner's stated rule for that source and 44/51 is a stated contract.
+- **Retry-wrong was dead in three of the four exam modes**, for a reason none of them stated:
+  QuizShell can only offer "Latih N salah" when its results carry a `_cardId`, and all three set
+  only `_qId`. `jac` works now. `wayground` and `vocab` cannot — **no `QUIZ_SETS` question has a
+  card link, 0 of 980** — so their dead wiring is removed and says why, instead of reading as a
+  working feature from the prop map.
+- **Session durations accumulated across replays.** `useSessionTimer` measures from mount and
+  nothing had ever called its `reset()`, so a second run through the Ulang button reported its own
+  duration plus the first run's plus the time spent reading the results screen in between —
+  inflating study minutes for exactly the users who replay, which that button exists to encourage.
+- The Simulasi instructions card still promised "Soal otomatis lanjut setelah kamu jawab", which
+  item 48 made false, and never mentioned that blanks count as wrong although it enforces exactly
+  that. The results breakdown grouped a 50-question exam into ~34 buckets of one or two questions,
+  while the axis it is actually sampled on (30 teori / 20 praktik) was tagged in the pool and thrown
+  away by the question mapper.
+- `recommend-mode` reimplemented `getBestSimScore` inline, next to its own import of
+  `getAvgAccuracy` from the module that exports it.
+
+### Layout and typography, recorded late
+
+These three landed after the 6.0.0 entry was written and belong here rather than folded backwards
+into it.
+
+- **101 font sizes were still frozen in px** — 60 in stylesheets, 41 in JSX style objects — left
+  behind by the type-scale rebuild because they matched no token exactly. A px font-size grows with
+  neither the viewport nor Ukuran Teks, so at "Sangat Besar" the surrounding text grows 25% around
+  a number, icon or heading that does not move; and these were not marginal text but the empty-state
+  emoji, the display numerals on Statistik and the Dashboard, and the Onboarding headings. All 101
+  are rem now at the value they already had, so nothing moves at the default. Deliberately rem
+  rather than snapped to the nearest `--fs-*` token — that question is `docs/UI_UX_PLAN.md` item 72
+  and stays open; being *frozen* was the defect and it is closed. `spacing-scale.test.js` gained the
+  matching tripwire.
+- **`ulasan` left ~400px empty under a 220px card** on a 390×844 phone — the mode this app's own
+  plan calls the one a learner uses daily and longest, with its rating buttons in the middle of the
+  screen instead of under the thumb. The card fills its scene now; having a single face (unlike
+  `FlipCard`) it can simply stretch, which also means it no longer changes height on the flip at
+  all. Two more found by the same sweep: `.quizPage` was repeating `.content`'s gutter, and two
+  frozen px paddings were hidden from the spacing tripwire.
+- **A field named for a number held phrases and pushed the row off screen.** AngkaMode's
+  `.angkaValue` is styled as a fixed numeric column — `tabular-nums`, 64px floor, `flex-shrink: 0` —
+  but ">6jam → 45 mnt, >8jam → 1 jam" is a real entry. With shrink disabled it took 323px of a 350px
+  row, squeezed the context text beside it to zero width, and pushed the chevron 14px past the right
+  edge of a 390px screen. It shrinks and wraps now; the floor stays, as `4rem` so it grows with the
+  text.
+
+### Administrative and governance docs
+
+An audit of every administrative and governance doc against the repo, on the same rule 6.0.0 used:
+where a doc's claim disagreed with the repo, the repo won.
+
+- **`README.md` carried two different test counts, neither correct** — 672 in the stack table and
+  728 in the project tree, against a measured **768 in 79 files**. Its CI section was a numbered
+  list broken in half by a paragraph inserted between items 3 and 4, and it listed two localStorage
+  pref keys that do not exist (`goalHarian`, `sprintBestTimeline`; the real ones are `dailyGoal` and
+  `sprintBests`). It also had no pointer to the governance docs at all — a reader arriving at the
+  repo could not find `AGENT_WORKFLOW.md` from it. Added.
+- **`_MAP.md` was three minor versions behind and structurally broken.** It described itself as
+  v4.23.0 with 435 tests in 39 files; listed `src/data/cards/**`, `src/data/sets/wayground/**` and
+  `src/data/sets/jac-mockup/**` plus `audit-track-consistency.mjs`, all deleted 2026-09-04; pointed
+  at `src/hooks/useStableContextValue.js` and top-level `jac-teori.js`/`jac-lifeline.js`, none of
+  which exist; was missing §4 and §5 entirely, with Data/Source-Utils/Modes left as `###` blocks
+  orphaned under Storage Schema; had two table rows split across lines so they rendered as garbage;
+  and showed 5 of 21 modes. Renumbered 1–6, retreed against the actual filesystem, metrics
+  re-derived, and the mode table is now the full roster taken from `router/modes.js`.
+- **`docs/AGENT_WORKFLOW.md` §4 states "every live doc belongs in this table" and three live docs
+  had no row** — `RUBY_MISMATCH_AUDIT.md`, `README.md`, `HUSKY-SETUP.md`, plus the two nested
+  READMEs. Rows added, and the rule extended to headline *numbers*, which is what actually drifted.
+  §3 gained the CHANGELOG/version close-out step and a re-derive-your-numbers step.
+- **`docs/RUBY_MISMATCH_AUDIT.md` told readers its findings were not visually broken, on the
+  strength of behaviour 6.0.0 deleted.** Its central claim rested on the JpDisplay fallback that
+  folded in-between plain text into the ruby base — the same fallback removed above for producing
+  three classes of wrong annotation. Re-measured: **38 of the 182 rows were fixed by the 2026-09-04
+  content pass** (struck through, not deleted, so a re-run of the original scan can be compared),
+  **144 remain**, and those now render as the too-wide `<rt>` this file was written about.
+- **`docs/CARD_CONTENT_SPEC.md` read as an open queue for work that finished on 2026-08-18.** Its
+  §8 checkboxes were never ticked, so a fresh reader met a "🔴 BLOCKING" P0 list for a completed
+  campaign; §0C described a JAC file layout the merge replaced; §11's merge checklist had been
+  executed; §12's decisions were all resolved. A status map at the top now says which sections are
+  live (§3–§7, §10 — schema, taxonomy, ruby rules, QC) and which are history, with banners in place.
+  §11's step 8 turned out never to have been done — see `viewer.html` below.
+- **`README-CONTENT-DQ.md` archived.** A working guide for the `content-dq` branch, which merged
+  2026-08-18. It instructed readers to edit split-file layers deleted 2026-09-04, carried
+  "LEGACY MONOLITHIC — DO NOT EDIT" warnings on the two files that *are* now the source, and ended
+  with a merge plan already executed.
+- **`docs/archive/ARCHIVE-INDEX.md` was missing five files** archived between 2026-08-19 and
+  2026-09-04, and miscounted the task files (18 files covering 19 tasks, not 19 files). Backfilled,
+  with a new section for post-merge retirements.
+- **`scripts/archive/README.md` listed 2 of the 9 active scripts** and said `split-cards.mjs`
+  produced 8 source files (2 survive). Rewritten with every active script, what runs it, and the
+  reason it matters: `audit-related-ids.mjs` died on every invocation from August until 2026-09-04
+  precisely because no npm script called it.
+- **`HANDOFF.md` compacted.** The 6.0.0 entry and the layout/typography entry are archived to
+  `docs/archive/HANDOFF-2026-09-04-audit-and-ui.md` per §3, leaving live state only. Its "open items
+  → §12" pointer was stale (open work spans §12, §13 and §14, plus items 58 and 59), and one entry
+  cited `docs/UI_UX_PLAN.md` §7 for the Belajar audit that is §13.
+- **`docs/UI_UX_PLAN.md`** §8/§9/§10 declare the plan "closed after three waves"; they describe the
+  2026-08-25 round only, and three further rounds have appended since. Scoped in place, and the
+  front matter now says where the open items actually are.
+
+### viewer.html
+
+The standalone content browser had two dead spots, both from schema changes it was never updated
+for. **Its JAC Ujian tab had been empty since the 2026-08-18 merge** — it imports
+`src/data/jac-teori.js` and `jac-lifeline.js`, which moved to `src/data/sets/jac/`, and its loader
+catches a failed import and returns `null`, so it rendered an empty tab rather than an error. And
+it printed `c.furi || ''` into a dedicated element for a field the schema dropped in P12; readings
+have lived inline in `jp` as 《》 markers since, which its own `rubyRender()` already draws. That
+was step 8 of `CARD_CONTENT_SPEC.md`'s merge checklist, never carried out.
+
+### Verification
+
+`npm run validate` clean: format, lint, **768 tests** (79 files, up from 728), five audits, build.
+The exam work was additionally driven in Chromium at 390×844: Escape and browser-back both raise
+the confirmation, and a reload offers the exam back at "3/15 soal terjawab · sisa waktu 29:55" with
+the clock still running down. Every count in this entry and in the docs it describes was re-derived
+from the repo on 2026-09-05, not carried forward.
+
+Open items, including three that are owner decisions: `docs/UI_UX_PLAN.md` §12–§14, plus items 58
+and 59, plus the 144 rows in `docs/RUBY_MISMATCH_AUDIT.md`.
+
 ## [6.0.0] - 2026-09-04
 
 Exhaustive audit of the whole repo, then the fixes. Major version because the data layout changed

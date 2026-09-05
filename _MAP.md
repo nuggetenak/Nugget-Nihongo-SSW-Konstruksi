@@ -1,15 +1,12 @@
 # 🗺️ \_MAP.md — SSW Konstruksi · Agent Orientation
 
-> **Last updated:** 2026-08-18 — content-dq merged into main (see `HANDOFF.md` and `CHANGELOG.md`
-> for the full merge writeup). This file now describes the unified app again — the
-> content-dq-only caveats that lived here during the branch split no longer apply.
-> **Version:** v4.23.0 · **Status:** app layer updated for
-> content-dq's data (furi removed, Doboku/Kenchiku tracks removed, JAC schema migrated) — see
-> HANDOFF.md CURRENT STATE for the exact commit-by-commit account.
-> **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical schema, ruby rules, task list (from
-> content-dq)
-> **Archive:** `docs/archive/` ← combined archive from both branches (proposals, TASK-v4.x files,
-> superseded DQ handoffs)
+> **Last updated:** 2026-09-05 — administrative/governance docs audit. Every number and every
+> path in this file was re-derived from the repo on that date (`npm test`, `npm run audit:full`,
+> a walk of the actual tree), not carried over.
+> **Version:** v6.1.0 · **Status:** live, single-track (Lifeline), storage schema v6.
+> **Process:** `docs/AGENT_WORKFLOW.md` ← read first every session. **State:** `HANDOFF.md`.
+> **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical card schema, ruby rules, taxonomy.
+> **Archive:** `docs/archive/` ← superseded docs, indexed in `docs/archive/ARCHIVE-INDEX.md`.
 
 ---
 
@@ -42,116 +39,110 @@ note in HANDOFF.md / CHANGELOG.md.)
 ```
 Nugget-Nihongo-SSW-Konstruksi/
 ├── _MAP.md                         ← YOU ARE HERE
-├── CHANGELOG.md
-├── README.md
+├── HANDOFF.md                      ← live state (read after AGENT_WORKFLOW)
+├── CHANGELOG.md                    ← versioned release notes
+├── README.md                       ← app + dev-setup README
 ├── HUSKY-SETUP.md                  ← one-time pre-commit hook setup (run locally, not CI)
 ├── index.html
+├── viewer.html                     ← standalone no-build content browser (QA aid, no npm needed)
 ├── package.json                    ← react, react-dom, ts-fsrs, lz-string (4 prod deps)
 ├── vite.config.js                  ← base: /Nugget-Nihongo-SSW-Konstruksi/ · alias @→src
 ├── vitest.config.js                ← coverage thresholds 70%/60%
-├── eslint.config.js / .prettierrc
+├── eslint.config.js / .prettierrc / .prettierignore / .npmrc
 ├── public/
 │   ├── manifest.webmanifest        ← PWA manifest
 │   ├── sw.js                       ← cache-first SW; SW_UPDATED postMessage on activate
-│   └── icons/
+│   ├── fonts/                      ← self-hosted subsets: NotoSansJP ×4, DMSans, Syne (item 61)
+│   └── icons/ · illustrations/ · images/
 ├── .github/workflows/
 │   ├── ci.yml                      ← lint + test (verbose) + build + output check
-│   └── deploy.yml                  ← validate → build → bump SW cache → build → pages
+│   └── deploy.yml                  ← lint/test → merge-cards → bump SW cache → build → pages
 ├── docs/
 │   ├── AGENT_WORKFLOW.md           ← PROCESS: read first every session (clone/verify/branch/close-out)
-│   ├── CARD_CONTENT_SPEC.md        ← canonical data schema/rules/taxonomy (from content-dq)
-│   ├── DESIGN_SPEC.md              ← palette, type, icon system, hazard-rail motif
+│   ├── CARD_CONTENT_SPEC.md        ← canonical card schema/rules/taxonomy
+│   ├── DESIGN_SPEC.md              ← palette, type scale, icon system, hazard-rail motif
 │   ├── LAYOUT_SPEC.md              ← breakpoints, width tokens, auto-fit/minmax pattern
 │   ├── COMPONENT_SPEC.md           ← CSS Modules conventions, shared primitives
 │   ├── PWA_RELEASE_SPEC.md         ← offline architecture, CACHE_VERSION, deploy checklist
-│   ├── UI_UX_PLAN.md               ← WORK QUEUE (not a spec): prioritised UI/UX items, retires when done
+│   ├── UI_UX_PLAN.md               ← WORK QUEUE (not a spec): open items live in §12–§14
+│   ├── RUBY_MISMATCH_AUDIT.md      ← frozen finding list: readings not scoped to their own base
 │   ├── ASSET-PROMPTS.md            ← generation prompts for icon/badge/illustration art
-│   └── archive/                    ← combined historical docs from both branches
+│   └── archive/                    ← superseded docs; see ARCHIVE-INDEX.md
 ├── scripts/
-│   ├── verify-content.mjs          ← ACTIVE: dependency-free data integrity check (content-dq)
-│   ├── audit-track-consistency.mjs ← ACTIVE: split-file/mirror track drift check (content-dq)
-│   ├── validate-data.mjs           ← prebuild data validation (main, pre-merge)
-│   ├── audit-integrity.mjs / audit-related-ids.mjs
-│   └── archive/                    ← one-shot migration scripts (do not re-run)
+│   ├── merge-cards.mjs             ← source/ → cards.js (runs in `prebuild`)
+│   ├── validate-data.mjs           ← prebuild data validation
+│   ├── generate-precache.mjs       ← postbuild: writes the real PRECACHE_URLS into dist/sw.js
+│   ├── verify-content.mjs          ← audit:content — cards.js vs source/, field by field
+│   ├── audit-integrity.mjs         ← audit:integrity — schema + SOURCE_META registry rot
+│   ├── audit-css-vars.mjs          ← audit:css-vars — every var() has a definition
+│   ├── audit-data-text.mjs         ← audit:text — ruby markers + look-alike codepoints
+│   ├── audit-related-ids.mjs       ← audit:related-ids — related_card_id refs resolve
+│   ├── renumber-cards.mjs          ← one-off id renumbering helper
+│   └── archive/                    ← one-shot migration scripts (do not re-run) + README
 ├── legacy/
 │   ├── ssw_flashcards_v87.jsx      ← historical reference; not part of build
-│   └── unwired-app-code/           ← 3 files added content-dq session 11, never wired to
-│                                       anything on that branch (no App.jsx there to wire into);
-│                                       kept per owner decision, still unwired post-merge — not
-│                                       auto-adopted, would need real integration work first
+│   └── unwired-app-code/           ← 2 files kept per owner decision (see that README)
 └── src/
-    ├── App.jsx / main.jsx
+    ├── App.jsx / main.jsx          ← main.jsx applies the text scale pre-paint
     ├── types.js                    ← JSDoc typedefs (Card, SRSState, Tab, ToastItem)
     ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
-    ├── data/                       ← REPLACED WHOLESALE from content-dq at merge time
-    │   ├── cards.js                ← CARDS[1438], furi-free, assembled from source/
-    │   ├── source/                 ← cards-common.js (877), cards-lifeline.js (561) — mirror
-    │   │                              layer; edit these, then split files, then cards.js
-    │   ├── cards/                  ← split working files: common/ch1-7.js + vocab-jac.js +
-    │   │                              vocab-supplementary.js, lifeline/ch2-6.js + same 2
-    │   ├── sets/                   ← split quiz-set working files
-    │   │   ├── wayground/teori/wt01-10.js, vocab/wtv01-02.js,
-    │   │   │   lifeline/praktik/wgl01-10.js, lifeline/vocab/wglv-{jp,id}-01-03.js
-    │   │   ├── jac-mockup/jml01-06.js, jmt01-06.js
-    │   │   └── jac/jac-teori.js, jac-lifeline.js  ← now the LIVE versions (new schema:
-    │   │       q/hint/opts/opts_id/ans/img/exp) — top-level jac-teori.js/jac-lifeline.js
-    │   │       swapped to re-export these at merge time, old schema retired
-    │   ├── quiz-sets.js            ← QUIZ_SETS = [...WAYGROUND_SETS, ...JAC_MOCKUP_SETS], pure
-    │   │                              aggregator (Doboku/Kenchiku sets removed session 24)
-    │   ├── wayground-sets.js / jac-mockup-sets.js  ← monolith aggregates, rebuilt from sets/
-    │   ├── jac-teori.js / jac-lifeline.js / jac-official.js ← now re-export sets/jac/
-    │   ├── angka-kunci.js          ← 29 entries
-    │   ├── confusion-pairs.js      ← 28 pairs (furi retained — not in scope for P12)
-    │   ├── danger-pairs.js         ← 20 pairs (furi retained — not in scope for P12)
+    ├── data/                       ← ONE source per kind of content — see AGENT_WORKFLOW §4a
+    │   ├── source/                 ← cards-common.js (877), cards-lifeline.js (561) — EDIT HERE
+    │   ├── cards.js                ← CARDS[1438], generated by merge-cards.mjs — do not edit
+    │   ├── sets/jac/               ← jac-teori.js (65), jac-lifeline.js (30) — the only sets/ dir
+    │   ├── jac-official.js         ← two-line shim: [...JAC_TEORI, ...JAC_LIFELINE]
+    │   ├── wayground-sets.js       ← 28 sets / 680 questions — IS the source
+    │   ├── jac-mockup-sets.js      ← 12 sets / 300 questions — IS the source
+    │   ├── quiz-sets.js            ← QUIZ_SETS = [...WAYGROUND_SETS, ...JAC_MOCKUP_SETS]
+    │   ├── angka-kunci.js · confusion-pairs.js · danger-pairs.js
     │   ├── categories.js           ← CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT
-    │   │                              (Doboku/Kenchiku placeholder categories removed)
-    │   └── index.js                ← barrel (Doboku/Kenchiku exports removed)
-    ├── srs/                        ← FSRS engine: fsrs-core, fsrs-store, fsrs-scheduler
-    ├── storage/                    ← engine.js (3-doc R/W), schema.js, migrations.js — see §6
+    │   └── index.js                ← barrel
+    ├── srs/                        ← FSRS engine: fsrs-core, fsrs-scheduler, fsrs-store
+    ├── storage/                    ← engine.js (3-doc R/W), schema.js, migrations.js — see §4
     ├── hooks/                      ← useAnswerStreak, useDailyChallenge, useDebounce,
-    │                                  useFocusTrap, useQuizKeyboard, useSRS, useSessionTimer,
-    │                                  useStableContextValue, useTrackedCards + index.js barrel
-    ├── components/                 ← Dashboard, BelajarTab, SayaTab, BottomNav, QuizShell,
-    │                                  JpDisplay, Toast, ErrorBoundary, Onboarding, …
-    ├── modes/                      ← React.lazy modes; FlashcardMode/ decomposed;
-    │                                  DobokuMode.jsx/KenchikuMode.jsx removed at merge
-    ├── router/                     ← ModeRouter + modes.js registry (doboku/kenchiku
-    │                                  registrations removed)
-    ├── utils/                      ← daily-mission, haptic, speak, jp-helpers (has
-    │                                  extractReadings()/stripFuri() — the furi↔ruby helpers
-    │                                  used to replace card.furi post-P12), quiz-generator,
-    │                                  shuffle, wrong-tracker, achievements, daily-challenge,
-    │                                  recommend-mode, gist-sync, session-analytics, storage-quota
-    ├── styles/                     ← global.css (design tokens + sr-only + View Transitions)
-    └── tests/                      ← see CHANGELOG for the post-merge pass/fail count
+    │                                  useExitGuard, useFocusTrap, useOnlineStatus,
+    │                                  useQuizKeyboard, useQuizResume, useSRS, useSessionTimer,
+    │                                  useSpeakErrorHandler, useTrackedCards + index.js barrel
+    ├── components/                 ← AppShell, ModeHeader, Dashboard, BelajarTab, SayaTab,
+    │                                  BottomNav, SideNav, QuizShell, ResultScreen, ResumePrompt,
+    │                                  Sheet, FilterPopup, JpDisplay, Toast, ErrorBoundary, …
+    ├── modes/                      ← 21 React.lazy mode screens; FlashcardMode/ decomposed
+    ├── router/                     ← ModeRouter.jsx + modes.js (the mode registry)
+    ├── utils/                      ← constants, daily-mission, haptic, speak, jp-helpers,
+    │                                  quiz-generator, quiz-persistence, simulasi-scoring,
+    │                                  text-scale, typo-diff, shuffle, wrong-tracker, …
+    ├── styles/                     ← global.css (design tokens), theme.js
+    └── tests/                      ← 79 files, 768 tests
 ```
 
-viewer.html (from content-dq) also lives at repo root — a standalone, no-build HTML tool for
-browsing card/quiz content directly; independent of the React app, kept post-merge as a QA aid.
+`viewer.html` at repo root is a standalone, no-build HTML tool for browsing card/quiz content
+directly; independent of the React app, kept as a QA aid.
 
 ---
 
 ## 3. Current Metrics
 
-_(Re-verify via `scripts/verify-content.mjs` for data counts and `npm test` for the test count —
-this table is a snapshot as of the merge, not re-checked on every future commit.)_
+_(Re-derived 2026-09-05. Re-verify with `npm run audit:full` for data counts and `npm test` for
+the test count — this table is a snapshot, not something that updates itself.)_
 
-| Metric            | Value                                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string)                                                                                             |
-| Modes             | **21** (all React.lazy) — was 23, DobokuMode/KenchikuMode removed                                                                        |
-| Flashcards        | **1,438** (877 common + 561 lifeline)                                                                                                    |
-| Quiz questions    | **~1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95)                                                                               |
-| Study tracks      | **1** (Lifeline) + Common (was 3 pre-merge)                                                                                              |
-| Storage schema    | **v6** — see §6. v5→v6 added at merge time (Doboku/Kenchiku score fields dropped, wayground/CSV set-id rename remapped where verifiable) |
-| Tests             | **435 passing** (39 files) — npm run lint: 0 warnings, npm run build: clean                                                              |
-| localStorage docs | **3** (progress, srs, prefs)                                                                                                             |
-| CI/CD             | ✅ GitHub Actions (auto-deploy)                                                                                                          |
-| SW auto-bump      | ✅ deploy.yml                                                                                                                            |
+| Metric            | Value                                                                             |
+| ----------------- | --------------------------------------------------------------------------------- |
+| Version           | **6.1.0** (`package.json`; `public/sw.js` `CACHE_VERSION` is kept equal to it)     |
+| Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) — hard constraint                     |
+| Modes             | **21** (all React.lazy) — was 23, DobokuMode/KenchikuMode removed                  |
+| Flashcards        | **1,438** (877 common + 561 lifeline; 1,244 vocab · 97 hukum · 97 konsep)          |
+| Quiz questions    | **1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95)                          |
+| Study tracks      | **1** (Lifeline) + Common (was 3 pre-merge)                                        |
+| Storage schema    | **v6** — see §4                                                                    |
+| Tests             | **768 passing** (79 files) · lint 0 warnings · `npm run validate` clean            |
+| Audit scripts     | **5** (`npm run audit:full`) — integrity, css-vars, text, content, related-ids     |
+| localStorage docs | **3** (progress, srs, prefs)                                                       |
+| CI/CD             | ✅ GitHub Actions → GitHub Pages (`ci.yml` + `deploy.yml`)                         |
+| SW auto-bump      | ✅ `deploy.yml` rewrites `CACHE_VERSION` to a UTC timestamp before the build       |
 
 ---
 
-## 6. Storage Schema (v6)
+## 4. Storage Schema (v6)
 
 ```js
 DOCS = { progress: 'ssw-progress', srs: 'ssw-srs-data', prefs: 'ssw-prefs' }
@@ -164,8 +155,8 @@ progress: { _v: 6, known[], unknown[], starred[], quizWrong{}, wrongCounts{},
 
 prefs:    { _v: 6, track, theme, onboarded, tutorialFlashcard, lastMode,
             dailyGoal, examDate, audioEnabled, studyAnchor, furiganaPolicy,
-            flashcardHintCount, notes: {}, speakOnFlip, quizQuestionCount,
-            sprintBests: {}, dailyChallengeLog: {} }
+            textScale, flashcardHintCount, notes: {}, speakOnFlip,
+            quizQuestionCount, sprintBests: {}, dailyChallengeLog: {} }
 
 srs:      { _v: 6, cards: { [cardId]: { card, history, reviewed_at } } }
 ```
@@ -176,20 +167,24 @@ the exact version bump.
 
 ---
 
-### Data (content-dq architecture, adopted wholesale at merge)
+## 5. Key Files
 
-| File                                                   | Purpose                                                        |
-| ------------------------------------------------------ | -------------------------------------------------------------- |
-| `src/data/source/` (2 files)                           | cards-common.js (877 cards), cards-lifeline.js (561 cards) —   |
-| mirror layer; Doboku/Kenchiku stubs deleted session 24 |
-| `src/data/angka-kunci.js`                              | 29 entries with track, mnemonic, soal fields                   |
-| `src/data/confusion-pairs.js`                          | 28 VLT-style confusion pairs (音/字/意)                        |
-| `src/data/danger-pairs.js`                             | 20 pairs with confusionType, explanation, track fields         |
-| `src/data/quiz-sets.js`                                | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS (pure aggregator) |
-| `src/data/sets/jac/jac-teori.js`                       | 65 学科 questions, new schema — now the live source            |
-| `src/data/sets/jac/jac-lifeline.js`                    | 30 実技 Lifeline questions, new schema — now live              |
-| `src/data/jac-official.js`                             | Backward-compat shim: `[...JAC_TEORI, ...JAC_LIFELINE]`        |
-| `src/data/categories.js`                               | CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT          |
+### Data — one source per kind of content (`docs/AGENT_WORKFLOW.md` §4a is the live map)
+
+| File                                | Purpose                                                              |
+| ----------------------------------- | -------------------------------------------------------------------- |
+| `src/data/source/` (2 files)        | cards-common.js (877), cards-lifeline.js (561) — **the card source** |
+| `src/data/cards.js`                 | CARDS[1438] — generated by `merge-cards.mjs`, never hand-edited      |
+| `src/data/wayground-sets.js`        | 28 sets / 680 questions — is itself the source                       |
+| `src/data/jac-mockup-sets.js`       | 12 sets / 300 questions — is itself the source                       |
+| `src/data/quiz-sets.js`             | QUIZ_SETS = WAYGROUND_SETS + JAC_MOCKUP_SETS (pure aggregator)       |
+| `src/data/sets/jac/jac-teori.js`    | 65 学科 questions — the live JAC Official teori source               |
+| `src/data/sets/jac/jac-lifeline.js` | 30 実技 Lifeline questions — the live JAC Official praktik source    |
+| `src/data/jac-official.js`          | Two-line shim: `[...JAC_TEORI, ...JAC_LIFELINE]` (95)                |
+| `src/data/angka-kunci.js`           | 29 entries with track, mnemonic, soal fields                         |
+| `src/data/confusion-pairs.js`       | 28 VLT-style confusion pairs (音/字/意)                              |
+| `src/data/danger-pairs.js`          | 20 pairs with confusionType, explanation, track fields               |
+| `src/data/categories.js`            | CATEGORIES, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT                |
 
 ### Source/Utils
 
@@ -201,13 +196,16 @@ the exact version bump.
 | `src/utils/daily-challenge.js`                              | Date-seeded daily challenge from JAC+QUIZ_SETS pool               |
 | `src/utils/recommend-mode.js`                               | Smart mode recommendation engine                                  |
 | `src/utils/gist-sync.js`                                    | GitHub Gist sync helper                                           |
-| `src/utils/jp-helpers.js`                                   | `extractReadings()`/`stripFuri()`/`standardizeFuri()` — ruby↔furi |
-| helpers, now the canonical source of card readings post-P12 |
+| `src/utils/jp-helpers.js`                                   | `extractReadings()`/`stripFuri()`/`standardizeFuri()`/`parseDescStructure()` — the canonical source of card readings since `furi` was dropped |
+| `src/utils/constants.js`                                    | Rules with more than one consumer: `TOTAL_CARDS` 1438, `EXAM_PASS_PCT` 65, `EXAM_SECONDS_PER_QUESTION` 120, `QUIZ_COUNTS`, `SESSIONS_CAP` |
+| `src/utils/quiz-persistence.js`                             | sessionStorage snapshot/restore behind `useQuizResume`            |
+| `src/utils/simulasi-scoring.js`                             | `buildSimulasiResults()` — pure scorer; a blank counts as wrong    |
 | `src/hooks/useDebounce.js`                                  | 120ms debounce for search inputs                                  |
 | `src/hooks/useFocusTrap.js`                                 | Tab/Shift+Tab cycle + focus restore                               |
 | `src/hooks/useTrackedCards.js`                              | Memoized card filtering by track + prefs                          |
 | `src/hooks/useSessionTimer.js`                              | Session timing for session-analytics                              |
-| `src/hooks/useStableContextValue.js`                        | useMemo wrapper for context stability                             |
+| `src/hooks/useExitGuard.js`                                 | One confirmation for every route out of a mode (Escape, hardware back, side nav, header arrow) |
+| `src/hooks/useQuizResume.js`                                | Resume-an-interrupted-run prompt, shared by jac/wayground/vocab (simulasi has its own snapshot) |
 | `src/utils/session-analytics.js`                            | Session duration/accuracy analytics                               |
 | `src/utils/storage-quota.js`                                | QuotaExceededError detection + user notification                  |
 | `src/utils/text-scale.js`                                   | Ukuran Teks — the 4 root font-size steps behind the whole type scale |
@@ -215,22 +213,46 @@ the exact version bump.
 | `src/components/ErrorBoundary.jsx`                          | Class-based EB + TabError + FlatCardFallback                      |
 | `src/components/OfflineBanner.jsx`                          | Fixed offline status banner                                       |
 | `src/components/StudyHeatmap.jsx`                           | 18-week SVG activity heatmap                                      |
+| `src/components/ModeHeader.jsx`                             | The whole header band for all 21 modes, exit guard included       |
+| `src/components/AppShell.jsx`                               | The one owner of page max-width and gutters — stylesheets must not repeat them |
+| `src/components/FilterPopup.jsx`                            | Multi-category picker on `Sheet` (graduated from `legacy/` 2026-09-04) |
 
-### Modes
+### Modes — all 21
 
-| File                             | Purpose                                        |
-| -------------------------------- | ---------------------------------------------- |
-| `src/modes/ProductionMode.jsx`   | ID→JP active recall (text input)               |
-| `src/modes/ConfusionMode.jsx`    | 28 confusion pairs VLT-style                   |
-| `src/modes/DengarMode.jsx`       | Audio-first listening comprehension quiz       |
-| `src/modes/CatatanMode.jsx`      | Personal notes/mnemonics per card              |
-| `src/modes/QuizProduksiMode.jsx` | JP→ID type-answer production quiz, fuzzy match |
+`src/router/modes.js` is the registry and the authority: lazy import, nav section, icon, label,
+description, colour, strand, layout width and Suspense skeleton, all in one place. This table is a
+readable copy of it (derived 2026-09-05); if the two ever disagree, the registry is right.
+`ModeRouter.jsx`'s prop map is the authority for what a mode can actually *do*.
+
+| id | Label | What it is | Section | File |
+| --- | --- | --- | --- | --- |
+| `ulasan` | 🔁 Ulasan SRS | Kartu jatuh tempo hari ini | 🔁 Ulasan | `ReviewMode.jsx` |
+| `kartu` | 🃏 Kartu | Flashcard interaktif | 📝 Pelajari | `FlashcardMode.jsx` |
+| `glosari` | 📖 Glosari | Kamus terurut | 📝 Pelajari | `GlossaryMode.jsx` |
+| `cari` | 🔍 Cari | Pencarian cepat | 📝 Pelajari | `SearchMode.jsx` |
+| `catatan` | 📓 Buku Catatan | Catatan & mnemonik pribadi | 📝 Pelajari | `CatatanMode.jsx` |
+| `kuis` | ❓ Kuis | Kuis otomatis 3 level | 🧪 Latihan | `QuizMode.jsx` |
+| `sprint` | ⚡ Sprint | Drill kecepatan 60 detik | 🧪 Latihan | `SprintMode.jsx` |
+| `fokus` | 🎯 Fokus | Latih kelemahan | 🧪 Latihan | `FocusMode.jsx` |
+| `angka` | 🔢 Angka Kunci | Angka wajib hafal | 🧪 Latihan | `AngkaMode.jsx` |
+| `jebak` | ⚠️ Soal Jebak | Istilah mirip | 🧪 Latihan | `DangerMode.jsx` |
+| `produksi` | ✍️ Produksi | ID→JP: ketik jawaban Jepang | 🧪 Latihan | `ProductionMode.jsx` |
+| `mirip` | 🔀 Kata Mirip | VLT: pasang istilah yang serupa | 🧪 Latihan | `ConfusionMode.jsx` |
+| `dengar` | 🎧 Dengarkan | Dengar JP → pilih terjemahan | 🧪 Latihan | `DengarMode.jsx` |
+| `kuisprod` | 🔤 Kuis Produksi | JP → ketik terjemahan Indonesia | 🧪 Latihan | `QuizProduksiMode.jsx` |
+| `jac` | 📋 JAC Official | Soal contoh ujian resmi | 📋 Ujian | `JACMode.jsx` |
+| `wayground` | 🎓 Soal Teknis | _N_ soal teori & praktik (count derived from `QUIZ_SETS`) | 📋 Ujian | `WaygroundMode.jsx` |
+| `vocab` | 📖 Kosakata | _N_ soal vocab JP↔ID (count derived from `QUIZ_SETS`) | 📋 Ujian | `VocabMode.jsx` |
+| `simulasi` | 🎯 Simulasi | Ujian + timer | 📋 Ujian | `SimulasiMode.jsx` |
+| `stats` | 📊 Statistik | Progress & kelemahan | 🛠️ Alat | `StatsMode.jsx` |
+| `ekspor` | 💾 Ekspor & Impor | Simpan & pulihkan progress | 🛠️ Alat | `ExportMode.jsx` |
+| `sumber` | 📂 Sumber | Per PDF sumber | 🛠️ Alat | `SumberMode.jsx` |
 
 _(DobokuMode.jsx and KenchikuMode.jsx removed at merge — see CHANGELOG.md.)_
 
 ---
 
-## 7. Agent Session Log
+## 6. Agent Session Log
 
 _(content-dq's full session-by-session log — sessions 1-29 covering the entire content-quality
 sprint — carried forward wholesale below, followed by main's own pre-fork history. See
@@ -239,6 +261,8 @@ instead of duplicated here, to keep one authoritative changelog rather than two.
 
 | Date          | Version        | Work                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ------------- | -------------- | ---------------------------------------------------------------------------------------------------------
+| 2026-09-05    | 6.1.0 | Agent Claude: administrative & governance docs audit (branch `claude/admin-governance-docs-audit-qpmndo`). Every headline number in the admin docs re-derived from the repo rather than carried over, and the gaps closed: `README.md` claimed 672 tests in one section and 728 in another against a real **768 (79 files)**; `_MAP.md` still described itself as v4.23.0 with 435 tests, listed three data mirror layers and an audit script deleted 2026-09-04, pointed at `src/hooks/useStableContextValue.js` and two top-level JAC files that no longer exist, was missing §4 and §5 entirely (Data/Source-Utils/Modes were `###` blocks orphaned under Storage Schema), and showed 5 of 21 modes — now renumbered 1–6, retreed, and carrying the full mode roster derived from `router/modes.js`. `CHANGELOG.md` had not been touched since `e92b912` while ten commits landed on `main` after it, six of them substantive (the kartu category picker, the four exam-family P0s, the exam-persistence work, two layout fixes and the last 101 frozen font sizes) — written up as 6.1.0 and the version bumped in `package.json` and `public/sw.js`, which the SW's own comment requires to stay equal. `docs/AGENT_WORKFLOW.md` §4's own rule ("every live doc belongs in this table") was violated by three live docs; rows added. `docs/archive/ARCHIVE-INDEX.md` was missing five files archived since 2026-08-18 and miscounted the task files. `README-CONTENT-DQ.md` — a branch guide for a branch merged 2026-08-18, describing folders deleted 2026-09-04 and a merge plan already executed — archived. `docs/RUBY_MISMATCH_AUDIT.md` told readers its 182 findings were "NOT currently visually broken" on the strength of a renderer fallback that 6.0.0 removed; re-measured (144 of 182 still live) and re-scoped. `scripts/archive/README.md` claimed 8 source files (2) and listed 2 of 9 active scripts. `viewer.html`'s JAC Ujian tab had been silently empty since the 2026-08-18 merge moved the two files it imports — fixed. Content and code untouched otherwise; `npm run validate` clean. |
+| 2026-09-04    | 6.1.0 | Agent Claude: continuation on `claude/menu-kartu-kategori-gap-1onln7` — the Belajar-tab and exam-family rounds that landed after 6.0.0 was tagged (all folded into the 6.1.0 entry above). Category picker in `kartu` (item 55: `FilterPopup` graduated out of `legacy/`, filter state grew from a single overloaded `search` string to a category `Set` composing with free text); a flipped card made turnable again on a touch screen (both faces tappable, flip button restored, swipe semantics returned to v87); feature-parity audit of all 21 Belajar modes (`docs/UI_UX_PLAN.md` §13, items 75–81); then the exam family (§14, items 82–102) — four P0s, three of which silently destroyed work: the exit guard honoured by one of five routes out of a mode, an exam clock torn down and restarted by every answer, "Latih N Salah" navigating to unrelated flashcards, and a live question list memoised on the wrong-answer tally so answering re-drew the list under the reader. Item 78 closed: `simulasi` snapshots to sessionStorage on an absolute deadline, and jac/wayground/vocab share one `useQuizResume`. Owner decision recorded: the exam is 2 min/question, so `angka-kunci.js`'s "90 detik/soal" was the wrong side of the contradiction; that rate and the 65% pass mark now live in `utils/constants.js`. |
 | 2026-09-04    | 6.0.0 | Agent Claude: exhaustive audit + UI/UX overhaul (branch `claude/analysis-ui-polish-cxnj2d`, PR #8). Three ruby renderer bugs the corpus sweep structurally can't see (reading covering text left of its kanji — 349 strings; kanji-bearing glosses rendered as furigana — 31; Indonesian prose folded into ruby bases — 89); three unimported data mirror layers deleted, two of them silently stale with the previous sessions' own fixes (56 files, 1.7 MB) and two carrying headers pointing at a regeneration script that never existed; `audit-integrity.mjs` (2876 phantom issues every run) and `audit-related-ids.mjs` (ERR_MODULE_NOT_FOUND since August) repaired, `verify-content.mjs` taught to compare content rather than counts, `audit-data-text.mjs` added, `npm run validate` turned into a real gate; study streak counted only flashcard marks; `srs.stats.review` never existed; SRSContext served stale `stats`; keyframes deduplicated out of theme.js's JS-injected `<style>` (six conflicting definitions, its copy silently winning); 254 inline font sizes migrated onto the type scale; ModeHeader became the only header for all 21 modes (they were each drawing a duplicate title and one of 27 back buttons) with an exit guard so the shared arrow can't discard a running exam; Catatan 19,264→714 DOM nodes and Glosari 18,329→1,642; the app's one horizontal overflow; seven `outline: none` declarations that disabled the focus indicator on text inputs; autoplay TTS error toasts; a track toggle that couldn't change anything. **Second half, same conversation — "overhaul the layouts & font typography; you can add new features":** a census of every rendered text node across all 24 screens found 85% of the app's text at 13px or smaller and 9% at 7px (furigana, from `.ruby rt`'s 0.44em multiplied against `jpFontSize`'s 13px floor — two numbers in two files nobody had multiplied), so the type scale was rebuilt as fluid `clamp(rem + vw)` on a real ratio (after: 50.6% at ≤13px, nothing below 10px); new Ukuran Teks control in Saya (4 steps, applied pre-paint, persisted); which then made a latent bug measurable — the spacing scale was px, so at "Sangat Besar" body text grew 25% while every gap held still and the layout got tighter for the reader who asked for it to get looser, now `--space-2`…`--space-64` in rem with 520 values (102 CSS, 418 JSX) moved onto it; ten stylesheets repeating the max-width and gutter `.content` had already applied, costing a mode screen 32px of a 390px phone; FlashcardMode's 284px of dead space under its last control (334px on desktop) → 40px, by letting a mode claim the height the shell already reserved; 11 of 21 mode titles ellipsised at 320px, from giving sticky chrome the display-size title token. Swept for overflow and unreachable nav at 3 viewports × 2 text sizes, clean. Full reasoning in the commit messages; open items and two owner decisions in `docs/UI_UX_PLAN.md` §12. |
 | 2026-08-31    | 5.1.0 | Agent Claude: exhaustive UI/UX/typography audit (new agent chat, owner provided repo+token directly, explicit blanket approval for anything found). Ruby renderer rewritten (parse-then-reindex → single forward pass) — fixed real repeated-base misplacement and ~870 silently-dropped/raw-shown okurigana-convention markers across `src/data`, corpus-wide regression sweep added (`ruby-audit-round3.test.jsx`). `maxSize` swept to every remaining dense-list `JpFront` site (~9 files). Unified page titles onto a new `--fs-page-title` token (Belajar was the real outlier at 24px, not the majority). Converted the whole `--fs-*` scale to `rem` (item 53, previously deferred — turned out to be a ~20-line change, not an 89-file one). Fixed Belajar's desktop layout stretching to the full 1180px column uncapped. Full detail in commit messages (owner's own stated preference over long docs) and `docs/DESIGN_SPEC.md`/`docs/LAYOUT_SPEC.md`, both updated in place. Superseded 2026-08-27/28 entries retired to `docs/archive/HANDOFF-2026-08-27-28-sessions.md` in the same pass. See `docs/UI_UX_PLAN.md` §11 for what this round found but didn't fully close out. |
 | 2026-08-27/28 | 5.0.0 | Agent Claude: post-`feat/ui-overhaul` bug-fix rounds (furigana fold-threshold + `renderJPWithRuby` prefix bug, Praktik Set / VocabMode mis-tagging, Sprint back button, Fokus mastery-badge mix-up, BelajarTab 2-col grid, StatsMode crash, SayaTab overflow) merged to `main`; SimulasiMode question-source split (JAC Official vs ratio-sampled Teori\&Praktik pool) + real set-pairing; Belajar-menu accordion implemented; self-hosted subsetted fonts; version bump 4.23.0→5.0.0. Full narrative retired to `docs/archive/HANDOFF-2026-08-27-28-sessions.md` (2026-08-31) — read that file for the actual reasoning, not this row. |
