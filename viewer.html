@@ -132,17 +132,14 @@
       .card:hover {
         border-color: var(--accent);
       }
+      /* No .card-furi rule: the `furi` field was dropped from the card schema (P12) and
+         readings live inline in `jp` as 《reading》 markers, which rubyRender() draws. The
+         element that used this rendered empty from the merge until 2026-09-05. */
       .card-jp {
         font-size: 28px;
         text-align: center;
-        margin-bottom: 8px;
-        line-height: 1.4;
-      }
-      .card-furi {
-        text-align: center;
-        color: var(--ruby);
-        font-size: 14px;
         margin-bottom: 20px;
+        line-height: 1.4;
       }
       .card-back {
         border-top: 1px solid var(--border);
@@ -543,7 +540,6 @@
           : `<div class="flip-hint">[ tap to reveal ]</div>`;
         return `<div class="card" onclick="reveal()">
     <div class="card-jp">${rubyRender(c.jp || '')}${flags(c.jp)}</div>
-    <div class="card-furi">${c.furi || ''}</div>
     ${back}
   </div>`;
       }
@@ -603,8 +599,11 @@
           loadJS('jac-mockup-sets.js'),
           loadJS('wayground-sets.js'),
           loadJS('quiz-sets.js'),
-          loadJS('jac-teori.js'),
-          loadJS('jac-lifeline.js'),
+          // The two JAC Official files moved to sets/jac/ at the 2026-08-18 merge; this
+          // still pointed at the old top-level paths, and loadJS() swallows a failed
+          // import, so the JAC Ujian tab had been silently empty ever since. (2026-09-05)
+          loadJS('sets/jac/jac-teori.js'),
+          loadJS('sets/jac/jac-lifeline.js'),
         ]);
 
         DATA.cards = cards?.CARDS || [];

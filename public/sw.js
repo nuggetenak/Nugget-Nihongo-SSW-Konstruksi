@@ -13,7 +13,9 @@
 // and it had drifted to 4.23.0 against a 6.0.0 package — which reads exactly
 // like the stale-cache bug docs/PWA_RELEASE_SPEC.md §2 warns about, while being
 // harmless. See that section for why a timestamp is the right deployed scheme.
-const CACHE_VERSION = 'ssw-v6.0.0';
+// Bump this in the same commit as package.json's version, every time; it is a
+// close-out step in docs/AGENT_WORKFLOW.md §3 because it was missed once already.
+const CACHE_VERSION = 'ssw-v6.1.0';
 const CACHE_STATIC    = `${CACHE_VERSION}-static`;
 const ALL_CACHES      = [CACHE_STATIC];
 

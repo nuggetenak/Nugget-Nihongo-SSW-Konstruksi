@@ -1,7 +1,24 @@
 # SSW Flashcard — Card Content Spec (Consolidated)
 
-**Branch:** content-dq | **Version:** v1.6-consolidated | **Status:** CANONICAL
-**Last reconciled:** 2026-05-14 (session 18 — ADM10: merged v1.0–v1.6 + DATA_ARCH_AUDIT)
+**Version:** v1.6-consolidated | **Status:** CANONICAL for §3–§7 and §10 (schema, field specs,
+taxonomy, ruby rules, duplicate handling, QC checklist) — those are live and still the authority.
+**Last reconciled:** 2026-09-05.
+
+> **Half of this file is finished history, and it is not marked as such inline.** Written on the
+> `content-dq` branch, which merged into `main` on 2026-08-18. Read it with this map:
+>
+> | Section | Status |
+> | ------- | ------ |
+> | §0 Branch State Audit | **Historical.** A point-in-time audit of `content-dq` as it stood 2026-05-14. §0C in particular describes a JAC file layout that no longer exists — see the note in that section. |
+> | §1 Keputusan Arsitektur, §2 Audit Findings | **Historical** — the decisions were taken and the findings addressed. §2A's counts are a pre-campaign baseline, as its own note says. |
+> | §3–§7, §10 | **Live and canonical.** Schema, per-field spec, taxonomy, ruby rules, duplicate handling, QC checklist. |
+> | §8 DQ Task List | **Complete.** Every P0–P17 item shipped by session 29 (2026-08-18). Its checkboxes were never ticked, so it reads as if P0 were still blocking. It is not. |
+> | §9 PDF Mapping Task | **Partly done, and superseded.** The seven materi PDFs (rows 1–7) were intaken incrementally across sessions 25–29 and their cards landed. The four soal-latihan mapping tasks (rows 8–11) have no record of ever being run, and no `PDF_MAPPING_*.md` output exists in the repo. `docs/UI_UX_PLAN.md` item 96 is the live version of that question: JAC questions carry `related_card_id`, `QUIZ_SETS` questions carry nothing. |
+> | §11 Merge Prep Checklist | **Executed 2026-08-18.** Do not run it again. |
+> | §12 Open Decisions | **All five resolved**, as the Status column says. |
+>
+> Live equivalents for the historical parts: `docs/AGENT_WORKFLOW.md` §4a (where to edit what),
+> `HANDOFF.md` (state), `CHANGELOG.md` (what shipped when).
 
 ---
 
@@ -61,6 +78,13 @@ DATA_ARCH_AUDIT menyatakan "1 null entry" → **SALAH**. Actual: **5 null entrie
 | `src/data/sets/jac/jac-lifeline.js` (DQ copy) | NEW schema                           | ❌ Tidak — orphaned  |
 
 **By design** — DQ branch tidak overwrite top-level files. At merge: top-level files harus diganti dengan versi DQ. Lihat §11 Merge Prep.
+
+> **Done, and the table above is now wrong as a description of the repo (noted 2026-09-05).** The
+> merge (2026-08-18) did exactly what §11 step 1 says: `src/data/sets/jac/jac-teori.js` and
+> `jac-lifeline.js` became the live source, and the two top-level files were replaced by a
+> two-line shim, `src/data/jac-official.js`. **There are no top-level `jac-teori.js` /
+> `jac-lifeline.js` files any more** — the "OLD schema" rows describe files that no longer exist,
+> and the "orphaned" rows describe the files the app now imports.
 
 ### 0D. Split File Counts — Verified ✅ (original audit baseline, see note)
 
@@ -566,6 +590,7 @@ Tidak di-maintain. Drop at merge time. Lihat §1.1.
 - Tidak boleh ada encoding corruption
 
 **Panjang sehat:**
+
 | type | min | ideal | max |
 |------|-----|-------|-----|
 | konsep | 60 | 80–120 | 200 |
@@ -813,6 +838,13 @@ Lihat §2A H6. Process: ambil desc lebih lengkap → delete yang lain → update
 
 ## 8. DQ TASK LIST
 
+> **COMPLETE — every item below shipped, finishing with session 29 on 2026-08-18.** The `[ ]`
+> checkboxes were never ticked as work landed, so this section still reads like an open queue with
+> a blocking P0. It is not one; treat it as a record of what was done and why. Several paths in it
+> (`cards/lifeline/ch6.js`, `cards/lifeline/vocab-supplementary.js`, `sets/wayground/**`,
+> `sets/jac-mockup/**`) point into mirror layers deleted on 2026-09-04 — see `CHANGELOG.md`
+> [6.0.0] and `docs/AGENT_WORKFLOW.md` §4a for where that content lives now.
+
 _Dependency order: P0 → P1 → P2 → P3 → P4 → P5 → P9 → P7 → P16 → P17 → P8a → P8b → P10 → P11 → P6⚠️ → P12(merge) → P13 → P14 → P15_
 
 > **Note untuk agent:** (1) P16 dan P17 tercantum di bagian bawah §8 ini karena blocked oleh OD-2/OD-3, tapi dalam urutan eksekusi mereka harus selesai **sebelum** P8a item 2 (P17) dan P8b/P10/P11 (P16). (2) P6 tercantum antara P5 dan P7 secara numerik, tapi dalam urutan eksekusi P6 datang **setelah P11** dan hanya jika OD-1 sudah dikonfirmasi. Ikuti dependency order di atas, bukan urutan fisik dalam dokumen ini.
@@ -1055,6 +1087,11 @@ decision. See HANDOFF.md.)
 
 ## 9. PDF MAPPING TASK
 
+> **Rows 1–7 done** (sessions 25–29, one PDF at a time on the owner's request). **Rows 8–11 were
+> never run** and produced no `PDF_MAPPING_*.md` output; the live successor is
+> `docs/UI_UX_PLAN.md` item 96 — "`QUIZ_SETS` questions have no link to the cards that teach
+> them", where the 95 JAC Official questions are the ones that *do* carry `related_card_id`.
+
 **11 PDF:** Setiap PDF = satu task terpisah untuk agen.
 
 | #     | PDF                       | Type   | Track    | Source output                         |
@@ -1158,6 +1195,12 @@ kartu: [ ] ID valid di cards.js
 
 ## 11. MERGE PREP CHECKLIST
 
+> **EXECUTED 2026-08-18 (`151a45e`). Do not run again.** Kept for the reasoning behind each step.
+> Two steps are worth knowing about because their outcome is still visible: step 1 is why
+> `src/data/jac-official.js` is a two-line shim (see the §0C note), and step 8 (`viewer.html`:
+> `c.furi||''` → the inline reading) was **not** done at merge time — `viewer.html` rendered an
+> empty element for it until 2026-09-05.
+
 Agent di `main` saat merge dari content-dq:
 
 1. **Replace** `src/data/jac-teori.js` dan `jac-lifeline.js` (top-level) dengan versi `sets/jac/` — new schema (`q/hint/opts/ans/img/exp`)
@@ -1188,6 +1231,10 @@ Agent di `main` saat merge dari content-dq:
 
 ## 12. OPEN DECISIONS
 
+> **All five resolved** — the Status column below is current. Nothing here is waiting on the owner.
+> Open decisions for *current* work live in `docs/UI_UX_PLAN.md` (items 69 and 73 as of
+> 2026-09-05), not here.
+
 Butuh konfirmasi owner sebelum task terkait dikerjakan.
 
 | ID   | Issue                                                                     | Options                                                                                         | Blocks        | Status                                                                                                                                                                                                                                                |
@@ -1200,4 +1247,7 @@ Butuh konfirmasi owner sebelum task terkait dikerjakan.
 
 ---
 
-_Single source of truth untuk content-dq DQ work. Update setelah setiap batch P0–P17 selesai._
+_Was the single source of truth for content-dq's DQ work; that campaign closed 2026-08-18.
+Still canonical for §3–§7 and §10 — the card schema, taxonomy, ruby rules and QC checklist the
+app is written against. Update those sections when the schema changes; leave the historical
+sections as written._

@@ -6,6 +6,13 @@
 >
 > **Numbering starts at 43** deliberately — so "item 15" in a commit message unambiguously
 > means the archived plan, and nothing here collides with git history.
+>
+> **Where the open work is (re-checked 2026-09-05).** §0–§10 are the original 2026-08-25 round
+> (43–65 plus the §6 enhancements 56–60); everything there is closed except **58** and **59**.
+> Later rounds append rather than renumber: **§11** 66–68 (all closed), **§12** 69–74 (all open;
+> 69 and 73 need an owner decision), **§13** 75–81 (78 closed, rest open), **§14** 82–102 (82–92
+> closed, 93–102 open). Sections 8, 9 and 10 below describe the *first* round only and are not
+> re-scoped by later ones — read them that way.
 
 ## 0. How this plan was built, and what that means for trusting it
 
@@ -603,7 +610,11 @@ first grep looked alarming and the actual code was fine — that gap between "gr
 
 ---
 
-## 8. Audit status
+## 8. Audit status — the 2026-08-25 round only
+
+_(Scope note, 2026-09-05: this section closes out **items 43–65** and nothing else. Three further
+audit rounds ran after it and appended §11–§14; "the plan is considered complete" below means that
+first queue, not this file. §9 and §10 are scoped the same way.)_
 
 **Closed after three waves.** Wave 1 audited screens and interaction (items 43–49, 56–60), wave 2
 audited assets and offline integrity (61–64), wave 3 audited gestures, forms, data integrity and
@@ -619,6 +630,7 @@ less valuable than starting Batch A. Re-audit after the P0/P1 items land, not be
 ## 9. Spec docs this plan may require updating
 
 Per the archived plan's §10 convention — update the spec **in the same commit** as the item.
+_(Items 43–65 only; the later rounds record their own spec impact in their commit messages.)_
 
 | Item | Doc | What |
 |---|---|---|
@@ -633,7 +645,10 @@ Per the archived plan's §10 convention — update the spec **in the same commit
 
 ---
 
-## 10. Suggested order
+## 10. Suggested order — items 43–65
+
+_(All batches below are done except **58** and **59** in Batch F. Later rounds set their own
+order; §14 states its own.)_
 
 **Batch A (P0, highest value):** 43 → 44 → 65 — the SRS-review parity set. `ReviewMode` is the
 mode a learner uses daily and longest, and is currently the poorer relation of `FlashcardMode` in

@@ -8,6 +8,11 @@ Merged 2026-08-18 from `main`'s pre-merge archive (proposals, blueprints, audits
 app-side project history) and `content-dq`'s archive (superseded data-quality handoff docs).
 Previously two separate `docs/archive/` folders on two branches with no common ancestor; now one.
 
+**This index must list every file in this folder.** Five files were archived between 2026-08-19
+and 2026-09-04 without a row here, which is the same failure the folder exists to prevent — an
+archive nobody can navigate is a pile. Backfilled 2026-09-05; if you archive something, add its
+row in the same commit.
+
 ---
 
 ## App / architecture history (from `main`)
@@ -17,7 +22,7 @@ Previously two separate `docs/archive/` folders on two branches with no common a
 | `UI_UX_PLAN-2026-08-overhaul.md`                                | Work queue       | The `feat/ui-overhaul` work queue (items 1–42, 38 actionable). **All shipped**, completed 2026-08-25 at 546 tests. Kept in full for its per-item reasoning — including routes deliberately *not* taken, and five deferrals carried into the successor plan. | `docs/UI_UX_PLAN.md` (items 43+)        |
 | `UPGRADE-PROPOSAL-v4.20.md`                                     | Proposal         | v4.20 upgrade proposal (pass 14) — all 19 items fully implemented through v4.21.1.                                            | Implemented                             |
 | `tasks/TASK-MASTER.md`                                          | Task plan        | Master task list for v4.20.0–v4.21.1 (19 tasks). All DONE.                                                                    | Implemented                             |
-| `tasks/TASK-v4.20.0 … TASK-v4.21.1`                             | Task files       | 19 individual task files — each self-contained, executed in order.                                                            | Implemented                             |
+| `tasks/TASK-v4.20.0 … TASK-v4.21.1`                             | Task files       | **18** individual task files (v4.20.0–v4.20.15, v4.21.0, v4.21.1), each self-contained and executed in order. Corrected 2026-09-05: this row said 19, matching `TASK-MASTER.md`'s "19 tasks" — but that count is the proposal's 19 items, spread across 18 version files. | Implemented                             |
 | `BLUEPRINT-CURRENT.md`                                          | Blueprint        | `main`'s project blueprint as of 2026-05-09 — constraints, storage v3 schema, phase history, known gaps. **Archived 2026-08-20:** sat live in `docs/` while every headline number went stale (v3 vs v6 storage, 23 vs 21 modes, 457 vs 435 tests) and while describing the removed Doboku/Kenchiku tracks. See its own header for the full drift table. | Live docs per `docs/AGENT_WORKFLOW.md` §4 |
 | `SSW_UPGRADE_PROPOSAL_v1.md`                                    | Audit/Proposal   | Full audit of all 15 modes (v3 of doc, hygiene passes ×3). 71 findings, 11 bugs — all resolved by v4.14.0. **NO OPEN ITEMS.** | `BLUEPRINT-CURRENT.md` (also archived)  |
 | `MASTER-BLUEPRINT-v6.md`                                        | Blueprint        | Agent-executable spec for Phases A–G (Opus 4.6 / Crunchy, 2026-05-01). **All phases complete.**                               | `BLUEPRINT-CURRENT.md` (also archived)  |
@@ -36,6 +41,24 @@ Previously two separate `docs/archive/` folders on two branches with no common a
 
 **Seeds (deleted):** `docs/seeds/sipil-sets-seed.js` and `bangunan-sets-seed.js` were deleted in
 hygiene pass 3 (2026-05-09), pre-dating the full Doboku/Kenchiku removal (session 24, content-dq).
+
+---
+
+## Retired live docs (2026-08-19 onward)
+
+Docs archived *after* the merge, under `docs/AGENT_WORKFLOW.md` §3's retirement rule: when an
+entry's work is finished or merged, the full text moves here with a provenance header, a pointer
+row goes into `_MAP.md`'s Agent Session Log, and it is deleted from the live file.
+
+| File | Type | Summary | Archived |
+| ---- | ---- | ------- | -------- |
+| `HANDOFF-content-dq-era.md` | Handoff sections | The GETTING STARTED/PROTOCOL sections and the full 2026-08-18 merge-execution writeup, pulled out of `HANDOFF.md`. Its mirror-edit steps are **historical only** — the mirror layers they describe were deleted 2026-09-04; `docs/AGENT_WORKFLOW.md` §4a is the live map. | 2026-08-19 |
+| `DATA_ARCH_AUDIT.md` | Audit | Frozen point-in-time data-architecture audit (session 16). Was sitting live in `docs/` already marked "historical, not live" — the case that prompted §4's "every live doc belongs in the table" rule. | 2026-08-19 |
+| `HANDOFF-ui-overhaul-38-items.md` | Handoff entry | The `feat/ui-overhaul` era CURRENT STATE entry — all 38 actionable items of the 2026-08 overhaul plan. | 2026-08-20 |
+| `HANDOFF-2026-08-27-28-sessions.md` | Handoff entry | The post-overhaul bug-fix rounds plus the SimulasiMode/Belajar work. | 2026-08-31 |
+| `HANDOFF-2026-08-31-09-01-ui-typography.md` | Handoff entry | The 2026-08-31/09-01 UI + typography sessions, with a note on the one claim in it a later session had to correct. | 2026-09-04 |
+| `HANDOFF-2026-09-04-audit-and-ui.md` | Handoff entry | The 6.0.0 exhaustive audit and the layout/typography overhaul that followed it, same day. Condensed versions: `CHANGELOG.md` [6.0.0] and [6.1.0], `_MAP.md` § Agent Session Log. | 2026-09-05 |
+| `README-CONTENT-DQ.md` | Branch guide | The `content-dq` working guide. That branch merged 2026-08-18; the split-file layers it tells you to edit were deleted 2026-09-04, and its merge plan was executed in full. See its own header for the drift list. | 2026-09-05 |
 
 ---
 
@@ -74,4 +97,5 @@ Current single source of truth: `../../HANDOFF.md` (repo root).
 
 ---
 
-_Last updated: 2026-08-18 — content-dq/main merge, archives combined._
+_Last updated: 2026-09-05 — backfilled the six post-merge archivals and `README-CONTENT-DQ.md`;
+corrected the task-file count (18 files, 19 tasks)._
