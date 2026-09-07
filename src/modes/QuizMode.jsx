@@ -2,6 +2,7 @@
 // seenPool is a useRef — resets on unmount, preventing cross-session repetition.
 import { useState, useCallback, useRef, useMemo } from 'react';
 import { T } from '../styles/theme.js';
+import { pillStyle as sharedPill } from '../styles/pill.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { shuffle } from '../utils/shuffle.js';
@@ -154,17 +155,7 @@ export default function QuizMode({
       { v: 0, l: 'Manual' },
     ];
 
-    const pillStyle = (on) => ({
-      fontFamily: 'inherit',
-      padding: 'var(--space-8) var(--space-16)',
-      fontSize: 'var(--fs-body)',
-      borderRadius: T.r.pill,
-      cursor: 'pointer',
-      fontWeight: on ? 700 : 400,
-      background: on ? T.surfaceActive : T.surface,
-      border: `1px solid ${on ? T.borderActive : T.border}`,
-      color: on ? T.amber : T.textMuted,
-    });
+    const pillStyle = (on) => sharedPill(on, 'md');
 
     return (
       <div className={S.pageFade} style={{ padding: 'var(--space-24) var(--space-16)' }}>

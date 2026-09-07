@@ -269,14 +269,6 @@
 }
 
 /* ── Tag / pill ── */
-.pill {
-  font-size: var(--fs-micro);
-  padding: var(--space-2) var(--space-8);
-  border-radius: var(--r-pill);
-  font-weight: 700;
-  /* bg/color set inline */
-}
-
 /* ── Score / counter text ── */
 .counter {
   font-size: var(--fs-small);

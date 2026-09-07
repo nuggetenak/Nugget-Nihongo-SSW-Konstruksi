@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
+import { pillStyle } from '../styles/pill.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
@@ -214,17 +215,6 @@ export default function WaygroundMode({ onSessionEnd }) {
     ...g,
     sets: TEORI_PRAKTIK.filter((s) => g.match(s.id)),
   })).filter((g) => g.sets.length > 0);
-
-  const pillStyle = (active) => ({
-    fontFamily: 'inherit',
-    fontSize: 'var(--fs-small)',
-    padding: 'var(--space-6) var(--space-12)',
-    borderRadius: T.r.pill,
-    cursor: 'pointer',
-    background: active ? 'rgba(251,191,36,0.15)' : T.surface,
-    border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`,
-    color: active ? T.gold : T.textMuted,
-  });
 
   return (
     <div className={S.page}>
