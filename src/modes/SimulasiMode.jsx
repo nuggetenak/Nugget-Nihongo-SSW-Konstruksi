@@ -9,6 +9,7 @@ import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useConfirm } from '../components/ConfirmDialog.jsx';
 import { useExitGuard } from '../hooks/useExitGuard.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
@@ -17,6 +18,7 @@ import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { isTeoriId, isPraktikId } from '../utils/quiz-classification.js';
 import { haptic } from '../utils/haptic.js';
 import { buildSimulasiResults } from '../utils/simulasi-scoring.js';
+import { recordSimulasiMistakes } from '../utils/simulasi-mistakes.js';
 import {
   EXAM_PASS_PCT,
   EXAM_SECONDS_PER_QUESTION,
@@ -284,6 +286,11 @@ export function buildJacPool() {
     photoDesc: q.photoDesc,
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',
+    // Item 93: the id this question is already tracked under everywhere else.
+    // JACMode writes these into progress.wrongCounts and reads them back as its
+    // "⚠ Lemah" set, so a mistake made here lands where a mistake made there
+    // already lands, rather than in a third namespace nothing reads.
+    _wrongKey: q.id,
     // Every one of JAC_OFFICIAL's 95 questions carries a related_card_id, and
     // this mapper was dropping all 95 of them -- which is why the results
     // screen's "Latih N Salah" had no card ids to send anywhere and shipped
@@ -329,6 +336,10 @@ export function buildQuizSetsPool() {
           _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
           _setLabel: set.title || 'Wayground',
           _category: category,
+          // Item 93: the key WaygroundMode writes into progress.wgWrong and
+          // reads back as its per-set "⚠ Ulang N salah". Same question, same
+          // key, whichever mode you met it in.
+          _wrongKey: `${set.id}-${q.id}`,
           // No question in QUIZ_SETS has a related card id (checked: 0 of 980),
           // so a wrong answer from this pool has no flashcard to send you to.
           // Explicit rather than absent, so the results screen's retry button
@@ -394,12 +405,21 @@ function drawExam(mode, config) {
       _setLabel: q._setLabel,
       _category: q._category ?? null,
       _cardId: q._cardId ?? null,
+      _wrongKey: q._wrongKey ?? null,
     };
   });
 }
 
+/**
+ * Item 94: what a simulasi attempt is filed under. Per source *and* preset,
+ * because "58% last time" only means anything against the same exam — a
+ * 15-question Latihan Cepat and a 44-question JAC pair are not comparable runs.
+ */
+const simScoreKey = (mode, preset) => `${mode}-${preset}`;
+
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const { prefs } = useApp();
+  const { saveScore, simScores, recordWrong } = useProgress();
   const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [phase, setPhase] = useState('start');
@@ -463,10 +483,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   }, []);
 
   const finishExam = useCallback(() => {
-    setResults(buildSimulasiResults(questions, answers, flagged));
+    const built = buildSimulasiResults(questions, answers, flagged);
+    setResults(built);
+    // Item 93. At submit, not per answer: item 48 requires that nothing reveals
+    // correctness until the paper is handed in, and a store written mid-exam is
+    // a store that could be read mid-exam.
+    recordSimulasiMistakes(built, recordWrong);
     setPhase('result');
     clearSnapshot();
-  }, [questions, answers, flagged, clearSnapshot]);
+  }, [questions, answers, flagged, recordWrong, clearSnapshot]);
 
   // Kept in a ref so the ticking effect below never has to list finishExam as a
   // dependency -- that dependency is exactly what used to restart the timer on
@@ -566,6 +591,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       // the study minutes this reports.
       const durationMs = Math.max(0, (budgetSec - timeLeft) * 1000);
       onSessionEnd?.({ correct, total: results.length, durationMs });
+      // Item 94: the one mode where a trend is the whole reason to take it
+      // twice was the only one keeping no history of itself.
+      const pct = results.length > 0 ? Math.round((correct / results.length) * 100) : 0;
+      saveScore('sim', simScoreKey(mode, preset), {
+        score: correct,
+        total: results.length,
+        pct,
+        date: Date.now(),
+      });
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -772,32 +806,50 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         </div>
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div className={`${S.list} ${SM.presetList}`}>
-          {activePresets.map((p) => (
-            <button
-              key={p.key}
-              className={S.btnItem}
-              onClick={() => setPreset(p.key)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'var(--space-12)',
-                background: preset === p.key ? 'rgba(239,68,68,0.10)' : T.surface,
-                border: `1px solid ${preset === p.key ? 'rgba(239,68,68,0.4)' : T.border}`,
-                color: preset === p.key ? '#ef4444' : T.text,
-              }}
-            >
-              <span className={SM.presetEmoji}>{p.emoji}</span>
-              <div>
-                <div className={SM.presetLabel}>{p.label}</div>
-                <div
-                  className={SM.presetSub}
-                  style={{ color: preset === p.key ? 'rgba(239,68,68,0.7)' : T.textDim }}
-                >
-                  {p.sub}
+          {activePresets.map((p) => {
+            // Item 94: the last attempt at *this* exam, shown where the exam is
+            // chosen — the same thing jac, wayground and vocab do on their own
+            // start screens, and the one screen that had never done it.
+            const last = simScores?.[simScoreKey(mode, p.key)];
+            return (
+              <button
+                key={p.key}
+                className={S.btnItem}
+                onClick={() => setPreset(p.key)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-12)',
+                  background: preset === p.key ? 'rgba(239,68,68,0.10)' : T.surface,
+                  border: `1px solid ${preset === p.key ? 'rgba(239,68,68,0.4)' : T.border}`,
+                  color: preset === p.key ? '#ef4444' : T.text,
+                }}
+              >
+                <span className={SM.presetEmoji}>{p.emoji}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className={SM.presetLabel}>{p.label}</div>
+                  <div
+                    className={SM.presetSub}
+                    style={{ color: preset === p.key ? 'rgba(239,68,68,0.7)' : T.textDim }}
+                  >
+                    {p.sub}
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+                {last && (
+                  <span
+                    style={{
+                      fontSize: 'var(--fs-small)',
+                      fontWeight: 700,
+                      flexShrink: 0,
+                      color: last.pct >= PASS_PCT ? T.correct : T.wrong,
+                    }}
+                  >
+                    {last.pct}%
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
         <button
           style={{

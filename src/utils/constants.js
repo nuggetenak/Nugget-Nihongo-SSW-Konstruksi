@@ -94,3 +94,19 @@ export const EXAM_FULL_QUESTIONS = EXAM_FULL_TEORI + EXAM_FULL_PRAKTIK;
  *  menu, the preset labels and the timer cannot quote three different budgets
  *  for the same exam. */
 export const examMinutes = (n) => (n * EXAM_SECONDS_PER_QUESTION) / 60;
+
+/** Shortest simulasi run that may count as an exam-readiness signal.
+ *
+ *  Item 97: `getBestSimScore` took the max percentage across every simulasi
+ *  session regardless of length, and two things consume it — the "Siap Ujian"
+ *  achievement and the dashboard's readiness advice. So the signal this app
+ *  exists to produce could be earned on Latihan Cepat: 15 questions, the
+ *  shortest and easiest thing in the section.
+ *
+ *  The item expected this to need the preset recorded alongside the session and
+ *  therefore a storage-version decision. It does not: `recordSession` has
+ *  stored `total` all along, and the *length* is what matters here, not which
+ *  preset produced it. Derived at 80% of the full exam rather than typed, so
+ *  both full presets clear it comfortably (50, and JAC's 44-51) and both short
+ *  ones (15, 25) miss it by a wide margin. */
+export const EXAM_READINESS_MIN_QUESTIONS = Math.round(EXAM_FULL_QUESTIONS * 0.8);

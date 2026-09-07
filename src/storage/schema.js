@@ -25,6 +25,10 @@ export const DEFAULTS = {
     jacScores: {}, // { [setId]: { correct, total, date } }
     wgScores: {},
     vocabScores: {},
+    // Item 94: per-preset simulasi history, keyed `${source}-${preset}` (e.g.
+    // 'pool-full', 'jac-quick'). Additive — an install without the key reads as
+    // {} everywhere, so no migration and STORAGE_VERSION stays where it is.
+    simScores: {},
     streakData: {}, // { days, lastDate }
     dailyCount: { count: 0, date: '' },
     recentCards: [], // array of cardIds (max 20)

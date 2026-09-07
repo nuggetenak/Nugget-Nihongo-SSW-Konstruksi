@@ -50,6 +50,9 @@ export function buildSimulasiResults(questions, answers, flagged) {
       // no Wayground/JAC-Mockup question has a related card.
       _category: question._category ?? null,
       _cardId: question._cardId ?? null,
+      // Item 93: how this question is identified in the store its own source
+      // already uses — see recordSimulasiMistakes.
+      _wrongKey: question._wrongKey ?? null,
     };
   });
 }

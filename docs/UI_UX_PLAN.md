@@ -1385,7 +1385,7 @@ one (and the row markup extracted rather than copied for the second list).
 
 ---
 
-### ☐ 93. A wrong answer in the exam teaches the app nothing — `S` — `P1`
+### ☑ 93. A wrong answer in the exam teaches the app nothing — `S` — `P1` — **fixed 2026-09-07**
 
 `simulasi` writes to no wrong-tracker at all — not `quizWrong`, not `wrongCounts`, not `wgWrong`,
 not `vocabWrong`. Every other quiz mode records its mistakes, and three surfaces read them: JAC's
@@ -1397,7 +1397,24 @@ Needs a decision on *where* they go before it can be built: `simulasi` draws fro
 two different id spaces (JAC question ids like `tt1_q01`, and `QUIZ_SETS` questions whose ids are
 only unique within their set), so this is not a one-line write.
 
-### ☐ 94. The exam keeps no history of itself — `S` — `P2`
+**The decision: not a third id space — each source's own.** A mistake is filed where a mistake in
+that question's home mode is already filed, so the surfaces that read those stores pick it up
+without knowing `simulasi` exists.
+
+| source | store | key | who reads it back |
+|---|---|---|---|
+| JAC | `progress.wrongCounts` | `tt1_q01` | JAC's ⚠ Lemah |
+| pool | `progress.wgWrong` | `${setId}-${q.id}` | Wayground's per-set ⚠ Ulang N |
+| either, when it has one | `progress.quizWrong` via `recordWrong` | card id | FokusMode's weakest-category drill |
+
+The third row is JAC-only today: all 95 JAC questions carry a `related_card_id` and none of the 980
+`QUIZ_SETS` questions do (item 96), so it widens on its own the moment that item lands rather than
+needing to be revisited.
+
+Written **once at submit**, not per answer — item 48 requires that nothing reveals correctness until
+the paper is handed in, and a store written mid-exam is a store that could be read mid-exam.
+
+### ☑ 94. The exam keeps no history of itself — `S` — `P2` — **fixed 2026-09-07**
 
 `jac`, `wayground` and `vocab` each call `saveScore` and show past scores and personal bests on
 their own start screens. `simulasi` never calls it, so there is no attempt history, no best score,
@@ -1408,6 +1425,18 @@ Blocked on a related trap: `saveScore`'s key mapping is
 (`ProgressContext.jsx:156`) — any unrecognised type silently writes into `vocabScores`. No current
 caller does, but adding a `sim` type without touching that ternary would corrupt vocab's scores
 rather than fail.
+
+**The trap first.** The ternary is a lookup with an explicit reject now, so an unknown type is a
+no-op instead of a write into whichever store happened to be the last branch. That had to come
+first, since this item's own fix is exactly the input that would have sprung it.
+
+Attempts are filed per **source and preset** (`pool-full`, `jac-quick`, …), because "58% last time"
+only means something against the same exam — a 15-question Latihan Cepat and a 44-question JAC pair
+are not comparable runs. The last score for each shows on the preset button where that exam is
+chosen, which is what `jac`, `wayground` and `vocab` have always done on their own start screens.
+
+`progress.simScores` is additive: an install without the key reads as `{}` everywhere, so there is
+no migration and `STORAGE_VERSION` stays at 6.
 
 ### ☐ 95. `simulasi` has no keyboard support and thin screen-reader support — `M` — `P2`
 
@@ -1429,7 +1458,7 @@ is what makes retry-wrong impossible in `wayground` and `vocab` (item 86), keeps
 980 links, presumably semi-automatable from the question text against the card corpus — not a code
 one, and it should be sized honestly before anyone starts.
 
-### ☐ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1`
+### ☑ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1` — **fixed 2026-09-07**
 
 `recordSession` stores `{mode, correct, total, durationMs, date}` and nothing else, so a 15-question
 Latihan Cepat and a 50-question Ujian Penuh are both just `mode: 'simulasi'`. `getBestSimScore`
@@ -1439,6 +1468,20 @@ readiness advice on the dashboard ("Skor simulasi X% — perlu latihan lebih seb
 So the exam-readiness signal this app exists to produce can be earned on a 15-question practice
 run — the shortest, easiest thing in the section. Fixing it means recording the preset alongside
 the session, which is a `progress.sessions` shape change and therefore a storage-version decision.
+
+**It does not, and that is the useful finding.** `recordSession` has stored `total` all along, and
+the *length* is what this is about — not which preset produced it. `getBestSimScore` now ignores
+runs shorter than `EXAM_READINESS_MIN_QUESTIONS`, derived as 80% of the full exam (40): both full
+presets clear it comfortably (50, and JAC's 44–51) and both short ones miss it by a wide margin.
+No shape change, no migration, no storage-version decision.
+
+Deliberately not a second "best short-run score" beside it — a second number invites the same
+misreading one level down. A short practice run is practice.
+
+**This leaves item 58 alone in wanting v7.** The three items were grouped as one migration; two of
+them turned out not to need one. 58 is the only one that genuinely changes a stored record's shape,
+and its own decision note already says a v7 migration deserves its own session rather than the tail
+of a large branch. It stays open on that basis, not for lack of a decision.
 
 ### ☐ 98. JAC Official's short presets have no teori/praktik ratio — `S` — `P2`
 

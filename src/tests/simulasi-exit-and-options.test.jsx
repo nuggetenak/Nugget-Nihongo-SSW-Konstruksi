@@ -20,6 +20,7 @@ import { resolve } from 'path';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
 import { AppProvider, useApp } from '../contexts/AppContext.jsx';
+import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import SimulasiMode from '../modes/SimulasiMode.jsx';
 
@@ -36,7 +37,11 @@ function renderSimulasi(onExit = vi.fn()) {
         createElement(
           AppProvider,
           null,
-          createElement(SimulasiMode, { onExit, onSessionEnd: vi.fn(), onRetryWrong: vi.fn() })
+          createElement(
+            ProgressProvider,
+            null,
+            createElement(SimulasiMode, { onExit, onSessionEnd: vi.fn(), onRetryWrong: vi.fn() })
+          )
         )
       )
     )
@@ -106,11 +111,15 @@ describe('SimulasiMode — exit confirmation during an active simulation', () =>
             AppProvider,
             null,
             createElement(CaptureApp),
-            createElement(SimulasiMode, {
-              onExit: vi.fn(),
-              onSessionEnd: vi.fn(),
-              onRetryWrong: vi.fn(),
-            })
+            createElement(
+              ProgressProvider,
+              null,
+              createElement(SimulasiMode, {
+                onExit: vi.fn(),
+                onSessionEnd: vi.fn(),
+                onRetryWrong: vi.fn(),
+              })
+            )
           )
         )
       )

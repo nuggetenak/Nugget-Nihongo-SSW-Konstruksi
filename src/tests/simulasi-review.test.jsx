@@ -17,6 +17,7 @@ import { createElement } from 'react';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
 import { AppProvider } from '../contexts/AppContext.jsx';
+import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import SimulasiMode from '../modes/SimulasiMode.jsx';
 import { buildSimulasiResults } from '../utils/simulasi-scoring.js';
@@ -30,7 +31,11 @@ function renderSim(props = {}) {
       createElement(
         ConfirmProvider,
         null,
-        createElement(AppProvider, null, createElement(SimulasiMode, all))
+        createElement(
+          AppProvider,
+          null,
+          createElement(ProgressProvider, null, createElement(SimulasiMode, all))
+        )
       )
     )
   );

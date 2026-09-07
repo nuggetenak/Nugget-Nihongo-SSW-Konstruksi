@@ -17,6 +17,7 @@ import { createElement } from 'react';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
 import { AppProvider } from '../contexts/AppContext.jsx';
+import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import SimulasiMode, {
   buildJacPool,
   buildQuizSetsPool,
@@ -38,11 +39,15 @@ function renderSimulasi() {
         createElement(
           AppProvider,
           null,
-          createElement(SimulasiMode, {
-            onExit: vi.fn(),
-            onSessionEnd: vi.fn(),
-            onRetryWrong: vi.fn(),
-          })
+          createElement(
+            ProgressProvider,
+            null,
+            createElement(SimulasiMode, {
+              onExit: vi.fn(),
+              onSessionEnd: vi.fn(),
+              onRetryWrong: vi.fn(),
+            })
+          )
         )
       )
     )

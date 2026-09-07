@@ -41,9 +41,27 @@ describe('session-analytics', () => {
     it('returns 0 for no simulasi sessions', () => {
       expect(getBestSimScore([makeSess('kuis', 8, 10)])).toBe(0);
     });
-    it('returns max simulasi score', () => {
-      const s = [makeSess('simulasi', 7, 10), makeSess('simulasi', 9, 10)];
+    it('returns max simulasi score across exam-length runs', () => {
+      const s = [makeSess('simulasi', 35, 50), makeSess('simulasi', 45, 50)];
       expect(getBestSimScore(s)).toBe(90);
+    });
+
+    // Item 97: the "Siap Ujian" achievement and the dashboard's readiness
+    // advice both read this number, and both could be earned on Latihan Cepat
+    // — 15 questions, the shortest thing in the section. A readiness claim has
+    // to be made against something exam-length.
+    it('ignores a short practice run, however well it went', () => {
+      expect(getBestSimScore([makeSess('simulasi', 15, 15)])).toBe(0);
+      expect(getBestSimScore([makeSess('simulasi', 25, 25)])).toBe(0);
+    });
+    it('counts a JAC full pair, whose length varies with the draw', () => {
+      // pickJacSetPair gives 44 or 51, so the threshold has to sit below 44.
+      expect(getBestSimScore([makeSess('simulasi', 22, 44)])).toBe(50);
+      expect(getBestSimScore([makeSess('simulasi', 26, 51)])).toBe(51);
+    });
+    it('a long run counts even when a short one scored higher', () => {
+      const s = [makeSess('simulasi', 15, 15), makeSess('simulasi', 30, 50)];
+      expect(getBestSimScore(s)).toBe(60);
     });
   });
 

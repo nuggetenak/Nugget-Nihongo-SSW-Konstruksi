@@ -10,6 +10,9 @@ import { todayStr, prevDayStr } from '../utils/date.js';
 import { SESSIONS_CAP } from '../utils/constants.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 
+/** Item 94: which store each `saveScore` type writes to. See saveScore below. */
+const SCORE_KEYS = { jac: 'jacScores', wg: 'wgScores', vocab: 'vocabScores', sim: 'simScores' };
+
 const ProgressCtx = createContext(null);
 
 // Advances the daily streak and today's activity count for `prev`, returning the
@@ -151,9 +154,18 @@ export function ProgressProvider({ children }) {
   );
 
   // ── Scores ────────────────────────────────────────────────────────────
+  //
+  // Item 94 named the trap here before it bit anyone: this was a ternary whose
+  // final branch was `vocabScores`, so *any* unrecognised type wrote into vocab
+  // rather than failing. Adding `sim` without noticing would have quietly
+  // corrupted a different mode's history. A lookup with an explicit reject
+  // cannot do that: an unknown type is a bug in the caller, and it says so.
   const saveScore = useCallback(
     (type, setId, scoreData) => {
-      const key = type === 'jac' ? 'jacScores' : type === 'wg' ? 'wgScores' : 'vocabScores';
+      // Silent no-op rather than a silent *write to the wrong store*: an
+      // unknown type is a caller bug, and the test below is what catches it.
+      const key = SCORE_KEYS[type];
+      if (!key) return;
       setProg((prev) => ({
         ...prev,
         [key]: { ...(prev[key] ?? {}), [setId]: scoreData },
@@ -217,6 +229,7 @@ export function ProgressProvider({ children }) {
       jacScores: prog.jacScores ?? EMPTY_OBJ,
       wgScores: prog.wgScores ?? EMPTY_OBJ,
       vocabScores: prog.vocabScores ?? EMPTY_OBJ,
+      simScores: prog.simScores ?? EMPTY_OBJ,
       wgWrong: prog.wgWrong ?? EMPTY_OBJ,
       vocabWrong: prog.vocabWrong ?? EMPTY_OBJ,
       // Progress
