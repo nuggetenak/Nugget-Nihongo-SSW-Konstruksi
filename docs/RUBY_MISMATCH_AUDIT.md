@@ -1,12 +1,35 @@
 # Ruby Mismatch Audit
 
-> **Status re-measured 2026-09-05. 144 of the original 182 findings are still live** (84 in
-> `cards-common.js`, 60 in `cards-lifeline.js`); 38 were fixed by other work in the meantime and
-> are struck through in the table below. **The mitigation this file originally described no longer
-> exists** — see "What changed" immediately below before acting on anything here.
+> **Status re-measured 2026-09-07, against the parser rather than the list. 42 fragments
+> still render a reading wider than its base can hold**, down from 103.
+>
+> Two things moved it. The multi-vocabulary split rewrote `jp` on ~200 cards and merged others
+> away, which resolved 16 of this file's rows as a side effect. Then the whole digit- and
+> latin-prefixed class was rewritten: `36協定《さぶろくきょうてい》` became `三六協定`, and
+> `CD管《しいぢいかん》` became `CD管《かん》` — the letters are read as letters, so the reading
+> should only ever have covered the kanji.
+>
+> **The count is now enforced, not just recorded.** `src/tests/ruby-scope.test.js` measures it
+> through `parseRubyFragments` itself and holds a budget of 42 that may fall but never rise, which
+> is the check `audit-data-text` cannot make: a too-wide reading is still well-formed data.
+>
+> **The mitigation this file originally described no longer exists** — see "What changed"
+> immediately below before acting on anything here.
 >
 > This is a work queue, not a spec: it retires to `docs/archive/` when the list is empty
 > (`docs/AGENT_WORKFLOW.md` §3, §4).
+
+## What is left
+
+The 42 that remain are the ones the parser is right to refuse and a script cannot settle: a
+pure-kanji prefix gives `extendBaseLeft` nothing to anchor on (it will not swallow a preceding
+word on a guess), and deciding where the base really starts needs someone who can confirm the
+reading. Nothing here should be auto-fixed — the original audit already tried that, and these are
+precisely the residue it could not verify.
+
+The rows below are the 2026-09-05 snapshot and are **no longer one-to-one with the data**: some
+phrases no longer exist, and the digit/latin class is fixed. Re-derive from the test before
+working the list.
 
 Generated 2026-08-27 while investigating a live ruby-rendering bug report (garbled furigana on
 wrap, e.g. the "安全確認の8項目" card). Full story and the code-level fix: see the commit that
