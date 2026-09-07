@@ -22,11 +22,4 @@ export { ANGKA_KUNCI } from './angka-kunci.js';
 export { DANGER_PAIRS } from './danger-pairs.js';
 export { CONFUSION_PAIRS } from './confusion-pairs.js';
 
-export {
-  CATEGORIES,
-  getCatInfo,
-  SOURCE_META,
-  VOCAB_SOURCES,
-  SOURCE_GROUPS,
-  SOURCE_ACCENT,
-} from './categories.js';
+export { CATEGORIES, getCatInfo, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from './categories.js';
