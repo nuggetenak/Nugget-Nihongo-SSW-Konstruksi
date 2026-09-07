@@ -4,7 +4,7 @@
 // v1→v6 upgrade chain and STORAGE_VERSION history.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const STORAGE_VERSION = 6;
+export const STORAGE_VERSION = 7;
 
 export const DOCS = {
   progress: 'ssw-progress', // known/unknown/starred/scores/streak/daily/recent

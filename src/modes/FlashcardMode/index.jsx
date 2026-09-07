@@ -100,6 +100,10 @@ export default function FlashcardMode({
   const sessionTimer = useSessionTimer();
   const ratedCountRef = useRef(0);
   const knownCountRef = useRef(0);
+  // Item 58: when the answer became visible on the current card. A ref, not
+  // state — nothing renders from it, and as state it would re-render the card
+  // on every flip for a number only the rating reads.
+  const seenAtRef = useRef(null);
   // True once the current card has been turned over at least once. Drives the
   // rating row and the number shortcuts, so they survive flipping back to the
   // front to re-check the Japanese — see RatingRow's header.
@@ -237,6 +241,7 @@ export default function FlashcardMode({
       setShowDesc(false);
       setRated(false);
       setSeen(false);
+      seenAtRef.current = null; // item 58: a new card, a new clock
     },
     [displayCards.length]
   );
@@ -245,6 +250,7 @@ export default function FlashcardMode({
     if (!flipped) {
       bumpHint();
       setSeen(true);
+      if (seenAtRef.current === null) seenAtRef.current = Date.now();
     }
     setFlipped((f) => !f);
     setShowDesc(false);
@@ -263,7 +269,11 @@ export default function FlashcardMode({
     (rating) => {
       if (!card || rated) return;
       if (srs?.ready) {
-        const result = srs.review(card.id, rating);
+        // Item 58: how long this card was on screen before it was rated. Timed
+        // from the flip, not from arrival — the clock a learner experiences
+        // starts when they can see the answer to judge themselves against.
+        const responseMs = seenAtRef.current ? Date.now() - seenAtRef.current : null;
+        const result = srs.review(card.id, rating, { responseMs });
         onMark?.(card.id, result.isKnown ? 'known' : 'unknown');
       } else {
         onMark?.(card.id, rating >= 2 ? 'known' : 'unknown');

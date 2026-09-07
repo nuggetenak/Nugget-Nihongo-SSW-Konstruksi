@@ -464,7 +464,7 @@ computes per-category weakness. Offering "12 salah di 電気設備 — latih kat
 session into a targeted next session. Small because both halves already exist; pairs naturally
 with item 46, which is already touching every results screen.
 
-### ☐ 58. Answer-timing per question — `M` — `P3` — approved
+### ☑ 58. Answer-timing per question — `M` — `P3` — approved — **done 2026-09-07 (7.1.0)**
 `useSessionTimer` measures whole sessions. Per-question timing surfaces *hesitation* — cards
 answered correctly but slowly are exactly the ones FSRS should see again sooner, and are invisible
 today.
@@ -502,6 +502,35 @@ on the review record (not a scored input to FSRS) — e.g. `responseMs` — surf
 learner as an informational signal ("you hesitated on this one") rather than fed into the
 algorithm at all, preserving `INDONESIAN_CALIBRATION`'s own standard of not touching FSRS's actual
 behavior without real evidence behind the change.
+
+**Built 2026-09-07, exactly to that shape.** `responseMs` is an optional field on each SRS history
+entry (`recordReview`), timed from the flip rather than from the card's arrival — the clock the
+learner experiences starts when the answer is visible to judge themselves against — and cleared per
+card so nothing carries over. Absent, not `null`, when nothing measured it: an entry without the
+field is either pre-v7 or was never on screen long enough to time, and "absent" is what the readers
+key off instead of special-casing a null at every call site.
+
+Storage went to **v7**. The migration transforms no data — every existing entry simply has no
+`responseMs`, which already reads as "not measured", and back-filling a number would be inventing
+one. What the bump buys is that an entry without the field is unambiguously *old* rather than
+*missing*. Adding it also replaced `init()`'s five copy-pasted migration ladders with a registry
+keyed by the version being migrated from; `storage.migration-chain.test.js` now walks v1–v6 to
+current, which nothing had ever tested above v2.
+
+The learner-facing half is **"Sempat Ragu"** in StatsMode: cards rated *Oke* or *Mudah* that took
+far longer than that learner's own median timed review. Two rules keep it from becoming the
+heuristic this item rejected — the baseline is the learner's own median rather than a constant
+("slow" in month one is not slow in month six), and the list stays empty below 20 timed reviews
+rather than being confidently wrong on five. Every row shows its own ratio so the claim can be
+checked rather than trusted. It changes no scheduling: `recordReview` returns the same interval for
+the same rating whether the answer took one second or forty-five, and there is a test that says so.
+
+**Found while building it, fixed here:** `init()` treated a document stamped *newer* than the
+current build as an unrecognised version and fell through to the fresh-install branch, writing
+defaults over the whole study history. That is what a user got by opening an older install after a
+newer one — routine for a PWA, where an offline device can sit on a cached build for weeks. Such a
+document is now loaded as-is, and `set()`'s spread carries fields this build has never heard of
+through a write untouched.
 
 ### ☐ 59. Offline-capable audio via pre-generated clips — `L` — `P3` — approved, **measure first**
 Item 25 made speech failure *legible*; it can't make it *work*. A worker studying on a train with
