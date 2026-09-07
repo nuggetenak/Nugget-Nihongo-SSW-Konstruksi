@@ -1098,7 +1098,7 @@ that does. So it knows this session is expensive to lose, and guards only the in
 not a reload, a crash, or the OS reclaiming the tab on the cheap Android phones this is designed
 for.
 
-### ☐ 79. "Wrong-only" and "retry wrong" are both inconsistent, in different ways — `S` — `P2`
+### ☑ 79. "Wrong-only" and "retry wrong" are both inconsistent, in different ways — `S` — `P2` — **fixed 2026-09-07**
 
 Pre-session wrong-only filters exist in `kuis` (`QuizMode.jsx:34,318-345`), `jac`
 (`JACMode.jsx:348-365`), `wayground` (`WaygroundMode.jsx:434-458`). Absent from `vocab`,
@@ -1114,7 +1114,44 @@ route back to them from the results screen.
 `kartu` has the same idea under another name and another data source — the "Belum" button
 (`ToolStrip.jsx:41-50`) reads `unknown`, not `quizWrong`.
 
-### ☐ 80. Count and auto-advance options are distributed arbitrarily — `S` — `P2`
+**Two of this item's premises were wrong, and finding that out is what made the rest decidable.**
+It says `sprint`, `angka`, `jebak` and `mirip` "all four record wrong answers". Read against the
+code: `sprint` writes real card ids into `progress.quizWrong` (`:137-142`, correct), `jebak` writes
+`danger-${term}` *strings*, and **`angka` and `mirip` record nothing at all** — no `recordWrong`, no
+tracker write, anywhere in either file.
+
+So the question is not "who is missing the bridge" but "who can have one that is honest":
+
+| mode | wrong answers keyed by | verdict |
+|---|---|---|
+| `sprint` | card id | **wired** — exact |
+| `angka` | nothing, but every `ANGKA_KUNCI` entry carries `kartu` | **wired** from that field — 27 of 29 point at a live card |
+| `jebak` | `danger-${term}` | **not wired** — see below |
+| `mirip` | nothing | **not wired** — see below |
+
+`jebak` and `mirip` have no card link at all, so a bridge there means inferring the card by matching
+the pair's Japanese against the corpus. Measured: **10 of 20** `DANGER_PAIRS` terms and **16 of 28**
+`CONFUSION_PAIRS` resolve. A button that says "practise the 6 you got wrong" and opens 3 is the
+exact bug this file already records `SimulasiMode`'s `filterIds` as having been. The fix is a
+`related_card_id` on the pair data — the same shape item 96 asks for on `QUIZ_SETS` — so it belongs
+there, not in a guess here.
+
+**`ResultScreen` now counts cards, not questions.** Its retry button labelled itself `wrongCount`,
+which is only the same number when every missed question has a card behind it. It takes an optional
+`retryWrongCount`, exactly as `srsWrongCount` already did for the button beside it, and hides itself
+when that resolves to zero.
+
+**The pre-session filter, same treatment.** `vocab` writes `progress.vocabWrong` keyed
+`${setId}-${q.id}` — byte-for-byte the shape `wayground` writes to `wgWrong`, which has had
+"⚠ Ulang N salah" per set all along. It has the same sub-button now, and skips `saveScore` on a
+wrong-only run for the same reason `wayground` does. `dengar` records into the shared `quizWrong`
+by card id, so `kuis`'s "Mode Lemah" toggle ported directly. `angka` and `mirip` get nothing to
+filter on, because they store nothing.
+
+Distractors in both wrong-only paths still come from the full deck: a narrower session should be
+shorter, not easier.
+
+### ☑ 80. Count and auto-advance options are distributed arbitrarily — `S` — `P2` — **fixed 2026-09-07**
 
 - `QUIZ_COUNTS = [10,20,30]` (`utils/constants.js:22`) is used by `kuis` and `dengar`.
   `angka`, `jebak` and `mirip` have **no length control at all** — always the whole
@@ -1127,6 +1164,27 @@ route back to them from the results screen.
 
 Check against item 49 (☑, "Question-count options differ per mode with no rationale") before
 building — some of this may be leftover scope, some may be regression.
+
+**Leftover scope, both halves — item 49 consolidated the constant and stopped there.**
+
+**Length.** `angka`, `jebak` and `mirip` have a picker now, through one shared
+`SessionLengthPicker` rather than a fourth, fifth and sixth local copy. It reads and writes the same
+`prefs.quizQuestionCount` `kuis` and `dengar` already used, so a learner who prefers 20 gets 20 in
+every mode that asks instead of 10 again in each. Two details that were wrong before and are not
+now: the picker only offers counts the pool can actually give (30 of 20 questions is "all of them"
+under another name), and **"Semua" is a sentinel (`QUIZ_COUNT_ALL`) rather than the deck's own
+size** — `QuizMode` used to persist "Semua" as `catFilteredCards.length`, so the number arrived in
+the next mode as a fixed count that meant nothing there. That closes item 49's own open question
+about whether `prefs.quizQuestionCount` "actually works everywhere".
+
+**Auto-advance.** One `AUTO_NEXT_DELAYS` list replaces two of different shapes (`{ms,label}` in
+JACMode, `{v,l}` in QuizMode), and the choice is now a **preference**, not a per-session setting.
+That is what reaches `wayground` and `vocab`: they render the identical `QuizShell` from a set list
+with nowhere to put a picker, so they read what was set where a panel does exist. Read once per
+mount — changing pacing under someone already answering is worse than not offering it.
+
+`kartu`'s absence from the length picker stays deliberate: a flashcard deck has no question count,
+and item 75 settled what a flashcard session is instead.
 
 ### ☑ 81. `produksi` and `kuisprod` are ~500-line twins — `M` — `P2` — **dropped 2026-09-07**
 

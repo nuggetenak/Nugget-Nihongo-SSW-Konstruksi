@@ -32,12 +32,23 @@ function saveDurationBests(key, score, timeline) {
   }));
 }
 
-export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = null }) {
+export default function SprintMode({
+  cards,
+  onExit,
+  onSessionEnd,
+  onRetryWrong,
+  filterIds = null,
+}) {
   const [phase, setPhase] = useState('ready');
   const [order, setOrder] = useState([]);
   const [idx, setIdx] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [wrong, setWrong] = useState(0);
+  // Item 79: Sprint already wrote every "Tidak Tahu" into progress.quizWrong
+  // keyed by real card id — it was the one mode in the item's list where the
+  // ids are exact rather than inferred — and then offered no way back to them.
+  // Kept for this run only; the persistent tally is the wrong-tracker's job.
+  const [wrongIds, setWrongIds] = useState([]);
   const [timeLeft, setTimeLeft] = useState(60);
   const [showAnswer, setShowAnswer] = useState(false);
   const [newBest, setNewBest] = useState(false);
@@ -134,6 +145,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     // Record wrong answer to quiz wrong-tracker.
     const cardId = order[idx]?.id;
     if (cardId) {
+      setWrongIds((ids) => (ids.includes(cardId) ? ids : [...ids, cardId]));
       storageSet('progress', (p) => {
         const qw = { ...(p?.quizWrong ?? {}) };
         qw[cardId] = makeWrongEntry(qw[cardId]);
@@ -149,6 +161,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     setIdx(0);
     setCorrect(0);
     setWrong(0);
+    setWrongIds([]);
     setTimeLeft(duration);
     setNewBest(false);
     setGhostScore(0);
@@ -323,7 +336,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             Rekor sebelumnya terlampaui!
           </div>
         )}
-        <div className={S.row} style={{ gap: 'var(--space-8)' }}>
+        <div className={S.row} style={{ gap: 'var(--space-8)', flexWrap: 'wrap' }}>
           <button
             className={S.btnPrimary}
             style={{ fontSize: 'var(--fs-body)', padding: 'var(--space-12)' }}
@@ -331,6 +344,18 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           >
             🔄 Ulang
           </button>
+          {/* Item 79. Not on ResultScreen — item 46 kept Sprint off that screen
+              on purpose — but the bridge itself is the same one every other
+              scored mode has, and the ids behind it are exact. */}
+          {onRetryWrong && wrongIds.length > 0 && (
+            <button
+              className={S.btnSecondary}
+              style={{ padding: 'var(--space-12)', borderRadius: T.r.md }}
+              onClick={() => onRetryWrong(wrongIds)}
+            >
+              ❌ Latih {wrongIds.length} salah
+            </button>
+          )}
           <button
             className={S.btnSecondary}
             style={{ flex: 1, padding: 'var(--space-12)', borderRadius: T.r.md }}

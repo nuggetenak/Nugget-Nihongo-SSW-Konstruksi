@@ -28,6 +28,13 @@ export default function ResultScreen({
   review = [],
   onRestart,
   onRetryWrong,
+  // Item 79: how many cards the retry button will actually open. It used to
+  // label itself with `wrongCount` — the number of questions missed — which is
+  // only the same number when every missed question has a card behind it. A
+  // button that says "practise the 6 you got wrong" and opens 3 is the same
+  // class of bug as SimulasiMode's `filterIds` once was. `srsWrongCount` above
+  // already existed for exactly this reason on the other button.
+  retryWrongCount,
   onAddToSRS,
   srsWrongCount,
   onDrillCategory,
@@ -95,9 +102,9 @@ export default function ResultScreen({
         <button className={s.btnPrimary} onClick={onRestart}>
           🔄 Ulang
         </button>
-        {onRetryWrong && wrongCount > 0 && (
+        {onRetryWrong && (retryWrongCount ?? wrongCount) > 0 && (
           <button className={s.btnWrong} onClick={onRetryWrong}>
-            ❌ Latih {wrongCount} salah
+            ❌ Latih {retryWrongCount ?? wrongCount} salah
           </button>
         )}
         {onAddToSRS && (srsWrongCount ?? wrongCount) > 0 && (

@@ -53,7 +53,8 @@ export const DEFAULTS = {
     flashcardHintCount: 0, // resets on resetAll()
     notes: {}, // personal notes per card { [cardId]: string }
     speakOnFlip: false, // speak on card flip instead of advance
-    quizQuestionCount: 10, // persist quiz question count
+    quizQuestionCount: 10, // persist quiz question count (0 = Semua, item 80)
+    autoNextDelay: 2000, // ms before auto-advancing past a revealed answer (0 = manual)
     sprintBests: {}, // per-duration personal bests { [durationKey]: { score, timeline } }
     dailyChallengeLog: {}, // { [YYYY-MM-DD]: { selected: number, correct: boolean } }
   },

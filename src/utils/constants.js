@@ -15,11 +15,47 @@ export const SRS_MATURE_DAYS = 21;
 /** Max sessions stored in progress.sessions. */
 export const SESSIONS_CAP = 180;
 
-/** Question-count picker options, shared by DengarMode/QuizMode. QuizMode adds
- *  its own dynamic 4th "Semua" option (category-filtered deck size) on top of
- *  this base rather than duplicating it — see QuizMode.jsx for that explicit
- *  deviation. */
+/** Question-count picker options, shared by every mode that offers a length.
+ *
+ *  Item 80: `kuis` and `dengar` had this; `angka`, `jebak` and `mirip` had no
+ *  length control at all — always the whole shuffled pool, with no way to take
+ *  a short session on the way to work. They have one now, through
+ *  `SessionLengthPicker`, and it reads and writes the same
+ *  `prefs.quizQuestionCount` the other two already used, so the choice follows
+ *  the learner between modes instead of resetting to 10 in each. */
 export const QUIZ_COUNTS = [10, 20, 30];
+
+/** `prefs.quizQuestionCount` sentinel for "Semua" — the whole available pool.
+ *
+ *  QuizMode already offered "Semua" by storing the deck's own size, which meant
+ *  the number persisted from one mode was a fixed count in the next, and a
+ *  meaningless one at that (71 questions, because that is how many confusion
+ *  pairs there are). A sentinel says what was actually chosen. */
+export const QUIZ_COUNT_ALL = 0;
+
+/**
+ * How many questions to draw, given the stored preference and what is available.
+ * `QUIZ_COUNT_ALL` and any value past the pool both mean "all of it".
+ */
+export const resolveQuizCount = (pref, total) =>
+  pref === QUIZ_COUNT_ALL || pref == null || pref > total ? total : pref;
+
+/** Auto-advance delays after an answer is revealed, in ms.
+ *
+ *  Item 80: this was two arrays of different shapes (`{ms,label}` in JACMode,
+ *  `{v,l}` in QuizMode) offered by two of the four modes that share QuizShell —
+ *  `wayground` and `vocab` render the identical screen and were pinned to the
+ *  shell's 2000 ms default with no way to change it. One list now, and the
+ *  choice is a preference rather than a per-session setting, so setting it
+ *  where the options panel exists applies it to the modes that have no panel to
+ *  put it on. */
+export const AUTO_NEXT_DELAYS = [
+  { ms: 1000, label: '1 dtk' },
+  { ms: 1500, label: '1,5 dtk' },
+  { ms: 2000, label: '2 dtk' },
+  { ms: 0, label: 'Manual' },
+];
+export const AUTO_NEXT_DEFAULT_MS = 2000;
 
 /** Pass threshold for the exam simulation, as a percentage.
  *

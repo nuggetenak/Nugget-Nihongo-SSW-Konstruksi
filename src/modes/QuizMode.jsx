@@ -7,7 +7,13 @@ import { generateQuiz } from '../utils/quiz-generator.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { shuffle } from '../utils/shuffle.js';
 import { get as storageGet } from '../storage/engine.js';
-import { QUIZ_COUNTS } from '../utils/constants.js';
+import {
+  QUIZ_COUNTS,
+  QUIZ_COUNT_ALL,
+  AUTO_NEXT_DELAYS,
+  resolveQuizCount,
+} from '../utils/constants.js';
+import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
@@ -31,9 +37,17 @@ export default function QuizMode({
   filterIds = null,
 }) {
   const [difficulty, setDifficulty] = useState('medium');
-  const [quizCount, setQuizCount] = useState(() => storageGet('prefs')?.quizQuestionCount ?? 10);
+  // Item 80: "Semua" used to persist the deck's own size, so the number carried
+  // into another mode as a fixed count that meant nothing there. It is the
+  // QUIZ_COUNT_ALL sentinel now, resolved against whatever this session's pool
+  // actually holds.
+  const [quizCountPref, setQuizCountPref] = useState(
+    () => storageGet('prefs')?.quizQuestionCount ?? 10
+  );
   const [lemahMode, setLemahMode] = useState(false);
-  const [autoNextDelay, setAutoNextDelay] = useState(2000);
+  // Item 80: a preference, not a per-session choice — `wayground` and `vocab`
+  // render the same QuizShell from a screen with nowhere to put this picker.
+  const [autoNextDelay, setAutoNextDelay] = useState(storedAutoNextDelay);
   const [showSettings, setShowSettings] = useState(false);
   const [started, setStarted] = useState(false);
   const [resumeData, setResumeData] = useState(() => {
@@ -84,6 +98,7 @@ export default function QuizMode({
 
   const startQuiz = () => {
     // Compute questions here (not in useMemo) to avoid ref-in-render lint error
+    const quizCount = resolveQuizCount(quizCountPref, catFilteredCards.length);
     const unseen = catFilteredCards.filter((c) => !seenPool.current.has(c.id));
     let pool;
     if (unseen.length >= quizCount) {
@@ -148,13 +163,6 @@ export default function QuizMode({
         color: T.wrong,
       },
     ];
-    const DELAYS = [
-      { v: 1000, l: '1 dtk' },
-      { v: 1500, l: '1.5 dtk' },
-      { v: 2000, l: '2 dtk' },
-      { v: 0, l: 'Manual' },
-    ];
-
     const pillStyle = (on) => sharedPill(on, 'md');
 
     return (
@@ -248,20 +256,20 @@ export default function QuizMode({
             flexWrap: 'wrap',
           }}
         >
-          {[...QUIZ_COUNTS, catFilteredCards.length].map((n, i) => {
-            const label = i === QUIZ_COUNTS.length ? 'Semua' : String(n);
+          {[...QUIZ_COUNTS, QUIZ_COUNT_ALL].map((n) => {
+            const label = n === QUIZ_COUNT_ALL ? `Semua (${catFilteredCards.length})` : String(n);
             return (
               <button
                 key={n}
                 onClick={() => {
-                  setQuizCount(n);
+                  setQuizCountPref(n);
                   // Persist count choice.
                   import('../storage/engine.js').then(({ set: storageSet }) => {
                     const prefs = storageGet('prefs') ?? {};
                     storageSet('prefs', { ...prefs, quizQuestionCount: n });
                   });
                 }}
-                style={pillStyle(quizCount === n)}
+                style={pillStyle(quizCountPref === n)}
               >
                 {label}
               </button>
@@ -349,13 +357,16 @@ export default function QuizMode({
                 Lanjut otomatis
               </div>
               <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
-                {DELAYS.map((d) => (
+                {AUTO_NEXT_DELAYS.map((d) => (
                   <button
-                    key={d.v}
-                    onClick={() => setAutoNextDelay(d.v)}
-                    style={pillStyle(autoNextDelay === d.v)}
+                    key={d.ms}
+                    onClick={() => {
+                      setAutoNextDelay(d.ms);
+                      saveAutoNextDelay(d.ms);
+                    }}
+                    style={pillStyle(autoNextDelay === d.ms)}
                   >
-                    {d.l}
+                    {d.label}
                   </button>
                 ))}
               </div>

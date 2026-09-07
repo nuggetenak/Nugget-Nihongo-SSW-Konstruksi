@@ -242,11 +242,19 @@ export default function ModeRouter() {
       cards: filteredCards,
       onExit: exitMode,
       onSessionEnd: makeSessionEnd('sprint'),
+      // Item 79: it recorded every "Tidak Tahu" into progress.quizWrong by card
+      // id and then offered no route back to those cards.
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       filterIds: modeParams?.filterIds ?? null,
     },
     fokus: { known, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
     stats: { known, unknown, quizWrong, srs, streakData, sessions },
-    angka: { onSessionEnd: makeSessionEnd('angka') },
+    // Item 79: every ANGKA_KUNCI entry carries an explicit `kartu` id, so this
+    // bridge is exact rather than inferred from matching Japanese strings.
+    angka: {
+      onSessionEnd: makeSessionEnd('angka'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
+    },
     jebak: { onSessionEnd: makeSessionEnd('jebak') },
     cari: { track, starred, toggleStar },
     // jac keeps onRetryWrong and now actually reaches it: every JAC_OFFICIAL

@@ -14,6 +14,7 @@ import {
   isVocabId,
 } from '../utils/quiz-classification.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { storedAutoNextDelay } from '../utils/auto-next.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
@@ -109,6 +110,12 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
 
 export default function WaygroundMode({ onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
+  // Item 80: this mode's screen is a set list with no options panel, so there is
+  // nowhere to put a delay picker. It obeys the preference set where a panel
+  // does exist (Kuis, JAC) rather than staying pinned to QuizShell's 2000 ms
+  // default with no way out. Read once per mount: changing it mid-session would
+  // move the pacing under someone already answering.
+  const [autoNextDelay] = useState(storedAutoNextDelay);
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
   const TEORI_PRAKTIK = QUIZ_SETS.filter(
@@ -202,6 +209,7 @@ export default function WaygroundMode({ onSessionEnd, audioEnabled = false }) {
         onFinish={handleFinish}
         showHint={showHint}
         accentColor={set?.color || T.amber}
+        autoNextDelay={autoNextDelay}
         audioEnabled={audioEnabled}
         persistKey={progressKey}
         initialQIdx={restored?.qIdx ?? 0}

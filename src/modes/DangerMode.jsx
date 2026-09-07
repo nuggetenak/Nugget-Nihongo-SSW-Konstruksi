@@ -11,6 +11,7 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
+import SessionLengthPicker, { storedQuizCount } from '../components/SessionLengthPicker.jsx';
 import {
   JpFront,
   DescBlock,
@@ -32,23 +33,40 @@ const CONFUSION_LABELS = {
 export default function DangerMode({ onSessionEnd }) {
   const [view, setView] = useState('panel');
   const [filterType, setFilterType] = useState('all');
+  // Item 80: the drill was always the whole filtered pool. The chosen length is
+  // read once here rather than inside QuizView, so changing the type filter
+  // does not silently re-draw a session already in progress.
+  const [limit, setLimit] = useState(null);
   return view === 'panel' ? (
     <PanelView
       onStartQuiz={() => setView('quiz')}
       filterType={filterType}
       setFilterType={setFilterType}
+      limit={limit}
+      setLimit={setLimit}
     />
   ) : (
-    <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} filterType={filterType} />
+    <QuizView
+      onBack={() => setView('panel')}
+      onSessionEnd={onSessionEnd}
+      filterType={filterType}
+      limit={limit}
+    />
   );
 }
 
-function PanelView({ onStartQuiz, filterType, setFilterType }) {
+function PanelView({ onStartQuiz, filterType, setFilterType, limit, setLimit }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [expanded, setExpanded] = useState(null);
   const filtered =
     filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
+  // Resolved against the *filtered* pool, so "Semua" means all of what the
+  // current filter actually offers rather than all of PAIRS.
+  const count = limit ?? storedQuizCount(filtered.length);
+  useEffect(() => {
+    if (limit === null) setLimit(count);
+  }, [limit, count, setLimit]);
   return (
     <div className={S.page}>
       <div className={`${S.rowSpread} ${D.headerRow}`}>
@@ -58,7 +76,7 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
           </p>
         </div>
         <button className={`${S.btnPrimary} ${D.drillBtn}`} onClick={onStartQuiz}>
-          🧠 Drill ({filtered.length})
+          🧠 Drill ({Math.min(count, filtered.length)})
         </button>
       </div>
       <div
@@ -100,6 +118,7 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
           );
         })}
       </div>
+      <SessionLengthPicker total={filtered.length} value={count} onChange={setLimit} />
       <div className={S.list}>
         {filtered.map((pair, i) => {
           const isOpen = expanded === i;
@@ -197,19 +216,21 @@ function PanelView({ onStartQuiz, filterType, setFilterType }) {
   );
 }
 
-function QuizView({ onBack, onSessionEnd, filterType }) {
+function QuizView({ onBack, onSessionEnd, filterType, limit }) {
   const { recordWrong } = useProgress();
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const buildFilteredItems = () => {
     const pool = filterType === 'all' ? PAIRS : PAIRS.filter((p) => p.confusionType === filterType);
-    return shuffle(pool).map((pair) => {
-      const allOpts = shuffle([
-        { text: pair.correct, isCorrect: true },
-        ...pair.traps.map((t) => ({ text: t, isCorrect: false })),
-      ]);
-      return { pair, opts: allOpts, correctIdx: allOpts.findIndex((o) => o.isCorrect) };
-    });
+    return shuffle(pool)
+      .slice(0, limit ?? pool.length)
+      .map((pair) => {
+        const allOpts = shuffle([
+          { text: pair.correct, isCorrect: true },
+          ...pair.traps.map((t) => ({ text: t, isCorrect: false })),
+        ]);
+        return { pair, opts: allOpts, correctIdx: allOpts.findIndex((o) => o.isCorrect) };
+      });
   };
   const [items, setItems] = useState(() => buildFilteredItems());
   const [qIdx, setQIdx] = useState(0);
