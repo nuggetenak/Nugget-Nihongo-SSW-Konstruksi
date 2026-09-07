@@ -261,3 +261,42 @@
   border: 1px solid var(--ssw-border);
   font-size: var(--fs-caption);
 }
+
+/* ── Item 95: keyboard and screen-reader affordances ───────────────────────── */
+
+/* Visually hidden until focused, then a real link at the top of the navigator.
+   The alternative — moving 51 navigator buttons to the end of the document —
+   would fix the tab order by breaking the reading order. */
+.skipLink {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.skipLink:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  clip: auto;
+  display: block;
+  margin-top: var(--space-16);
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--r-md);
+  background: var(--ssw-surface);
+  border: 2px solid var(--ssw-amber);
+  color: var(--ssw-amberText);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.kbHint {
+  text-align: center;
+  font-size: var(--fs-micro);
+  color: var(--ssw-textFaint);
+  margin-top: var(--space-8);
+  letter-spacing: 0.3px;
+}

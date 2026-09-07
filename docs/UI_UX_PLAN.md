@@ -1438,7 +1438,7 @@ chosen, which is what `jac`, `wayground` and `vocab` have always done on their o
 `progress.simScores` is additive: an install without the key reads as `{}` everywhere, so there is
 no migration and `STORAGE_VERSION` stays at 6.
 
-### ☐ 95. `simulasi` has no keyboard support and thin screen-reader support — `M` — `P2`
+### ☑ 95. `simulasi` has no keyboard support and thin screen-reader support — `M` — `P2` — **fixed 2026-09-07**
 
 `QuizShell` gives every other quiz mode `useQuizKeyboard` (1–4 to answer, Space/→ to advance, Esc
 to leave), an `aria-live` "Soal X dari Y", and `QuizAnnouncer` for answer feedback. `simulasi`
@@ -1449,6 +1449,21 @@ Its question navigator compounds this: one button per question, in document orde
 Prev/Next row and the Kumpulkan button. On a 51-question JAC exam a keyboard or switch user tabs
 through 51 buttons to reach "submit". Needs a design call (reorder, or a skip link), which is why
 it is not in the fixed list above.
+
+**Skip link, not a reorder.** The navigator sits under the options because that is where it belongs
+visually; moving 51 buttons to the end of the document to fix a tab order would trade a keyboard
+problem for a reading-order one. A visually-hidden link ahead of it — "Lewati daftar soal →
+Kumpulkan Ujian" — appears on focus and jumps straight to submit.
+
+**Shortcuts: same keys as everywhere else, this mode's rules.** Deliberately not `useQuizKeyboard`
+itself: that hook only fires while `selected === null` and advances on Space, and both are wrong for
+a paper you can re-mark and navigate freely until you hand it in (item 48). So: **1–4** pick (and
+re-pick), **← →** move between questions, **F** flags the one you are reading. Suppressed while
+paused, and behind `isTypingTarget`.
+
+**A polite live region**, not an assertive one: this screen counts down a clock, and an assertive
+region would interrupt a reader mid-question every time it ticked. It announces which question is
+showing, and whether it is answered and flagged.
 
 ### ☐ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2`
 
@@ -1483,7 +1498,7 @@ them turned out not to need one. 58 is the only one that genuinely changes a sto
 and its own decision note already says a v7 migration deserves its own session rather than the tail
 of a large branch. It stays open on that basis, not for lack of a decision.
 
-### ☐ 98. JAC Official's short presets have no teori/praktik ratio — `S` — `P2`
+### ☑ 98. JAC Official's short presets have no teori/praktik ratio — `S` — `P2` — **fixed 2026-09-07**
 
 The Teori & Praktik pool samples an exact 60/40 (9+6, 15+10, 30+20). JAC Official draws one random
 teori set + one random praktik set and then, for Latihan Cepat and Setengah Ujian, takes a plain
@@ -1492,6 +1507,27 @@ shuffled slice — so the composition is whatever chance gives. Measured over 20
 question at all. Either that variance is intended (it is a random draw from an official book) or
 the same ratio rule should apply; the code states no view. Owner's "biar keliatan kyk random"
 covers the *set pair*, not the slice within it.
+
+**The variance is not intended, and the fix is not the pool's 60/40 either.** A mock exam whose
+practical half can vanish entirely is not a mock exam — but this source's whole premise is "the
+official book", and its full preset already takes the book's own mix (29 or 36 teori to 15
+praktik). So a short run is **that** mix, smaller: sampled in proportion to the pair it drew, not
+forced to a ratio the book does not have. The owner's "biar keliatan kyk random" governs which pair
+is drawn, and still does — nothing in this change chooses the pair.
+
+Re-measured the same way, 20 000 draws each:
+
+| preset | praktik before | praktik after |
+|---|---|---|
+| Latihan Cepat (15) | 0–11, mean 4.78, none in 0.10% of runs | **4–5**, mean 4.50, never none |
+| Setengah Ujian (25) | 2–14, mean 7.95 | **7–9**, mean 7.99 |
+
+The remaining spread is which pair came up (15/44 vs 15/51), not chance within it.
+
+**Side effect worth naming:** the mapper now carries `_category` for JAC questions. The tagging was
+always in the data (`tt*` = 学科, `st*` = 実技) and in `SimulasiMode`'s own comments — only the
+mapper had never passed it through, which is also why the results screen's teori/praktik breakdown
+silently rendered nothing for this source. It works there now too.
 
 ### ☐ 99. The exam cannot show the pictures the exam has — `S` — `P3`
 

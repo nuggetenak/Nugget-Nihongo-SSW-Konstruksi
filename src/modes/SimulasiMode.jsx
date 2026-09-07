@@ -7,6 +7,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
+import { isTypingTarget } from '../utils/keyboard.js';
 import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -286,6 +287,12 @@ export function buildJacPool() {
     photoDesc: q.photoDesc,
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',
+    // Item 98: tt1/tt2 are 学科 (teori) and st1/st2 are 実技 (praktik) — stated
+    // in this file's own pickJacSetPair comment and in the source files, just
+    // never carried through the mapper. With it, the short presets can sample
+    // in proportion (below) and the results screen's teori/praktik breakdown
+    // works for this source too instead of silently rendering nothing.
+    _category: String(q.set).startsWith('st') ? 'praktik' : 'teori',
     // Item 93: the id this question is already tracked under everywhere else.
     // JACMode writes these into progress.wrongCounts and reads them back as its
     // "⚠ Lemah" set, so a mistake made here lands where a mistake made there
@@ -366,11 +373,39 @@ const SNAPSHOT_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 // Draw one exam. Pulled out of the component (it used to be a useMemo keyed on
 // a `seed` counter) because an exam now has to be restorable: the questions are
 // state you can save and load, not a value derived from render inputs.
-function drawExam(mode, config) {
+export function drawExam(mode, config) {
   let items;
   if (mode === 'jac') {
-    const pool = shuffle(buildJacPool());
-    items = config.count > 0 ? pool.slice(0, config.count) : pool;
+    const pool = buildJacPool();
+    if (config.count > 0) {
+      // Item 98: this was a plain shuffled slice, so the composition of a
+      // 15-question Latihan Cepat was whatever chance gave — measured over
+      // 20 000 draws: 0 to 11 praktik questions, and 0.11% of runs with none at
+      // all. A mock exam whose practical half can vanish is not a mock exam.
+      //
+      // Sampled in proportion to the pair it drew, rather than forced to the
+      // Teori & Praktik pool's 60/40: this source's premise is "the official
+      // book", the full preset already takes the book's own mix (29 or 36 teori
+      // to 15 praktik), and a short run should be that same mix, smaller. The
+      // owner's "biar keliatan kyk random" governs which pair is drawn — it
+      // still does; nothing here chooses the pair.
+      const teori = shuffle(pool.filter((q) => q._category === 'teori'));
+      const praktik = shuffle(pool.filter((q) => q._category === 'praktik'));
+      const nTeori = Math.round((config.count * teori.length) / (pool.length || 1));
+      const take = [
+        ...teori.slice(0, Math.min(nTeori, teori.length)),
+        ...praktik.slice(0, Math.min(config.count - nTeori, praktik.length)),
+      ];
+      // If either half came up short, top up from whatever is left rather than
+      // handing back a slice narrower than the preset promised.
+      if (take.length < config.count) {
+        const used = new Set(take);
+        take.push(...pool.filter((q) => !used.has(q)).slice(0, config.count - take.length));
+      }
+      items = shuffle(take);
+    } else {
+      items = shuffle(pool);
+    }
   } else {
     const pool = buildQuizSetsPool();
     const teoriPool = shuffle(pool.filter((q) => q._category === 'teori'));
@@ -715,6 +750,32 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     if (phase === 'playing' && !(await confirmDiscard())) return;
     onExit();
   }, [phase, confirmDiscard, onExit]);
+
+  // Item 95: `simulasi` builds its own playing screen, so it never got
+  // QuizShell's `useQuizKeyboard` — no shortcuts at all, on the one screen a
+  // learner sits in front of for a hundred minutes. Not the shared hook,
+  // though: that one locks an answer (it only fires while `selected === null`)
+  // and advances on Space, both of which are wrong for a paper you can re-mark
+  // and navigate freely until you hand it in (item 48). Same keys, this mode's
+  // rules.
+  useEffect(() => {
+    if (phase !== 'playing' || paused) return;
+    const handler = (e) => {
+      if (isTypingTarget(e.target)) return;
+      const opts = q?.opts?.length ?? 0;
+      const MAP = { 1: 0, 2: 1, 3: 2, 4: 3, a: 0, b: 1, c: 2, d: 3 };
+      const k = e.key.toLowerCase();
+      if (MAP[k] !== undefined && MAP[k] < opts) {
+        handleSelect(MAP[k]); // re-markable, unlike the shared hook
+        return;
+      }
+      if (e.key === 'ArrowRight') goToQuestion(qIdx + 1);
+      else if (e.key === 'ArrowLeft') goToQuestion(qIdx - 1);
+      else if (k === 'f') toggleFlag();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [phase, paused, q, qIdx, handleSelect, goToQuestion, toggleFlag]);
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
 
@@ -1068,6 +1129,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   if (!q) return null;
   return (
     <div className={`${S.pageScroll} ${SM.quizPage}`}>
+      {/* Item 95: QuizShell gives every other quiz mode a live region, and this
+          screen — which changes question and counts down a clock — had none, so
+          both moved silently. Polite, not assertive: the countdown must not
+          interrupt someone reading the question. */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        Soal {qIdx + 1} dari {questions.length}
+        {isFlagged ? ', ditandai' : ''}
+        {selected !== null ? ', sudah dijawab' : ''}
+      </div>
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={handleExitClick}>
           ✕ Keluar
@@ -1251,6 +1321,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         })}
       </div>
 
+      {/* Item 95: the navigator is one button per question, in document order,
+          ahead of Prev/Next and Kumpulkan — so on a 51-question JAC exam a
+          keyboard or switch user tabbed through 51 buttons to reach "submit".
+          A skip link rather than a reorder: the navigator sits under the
+          options because that is where it belongs visually, and moving 51
+          buttons to the end of the document to fix a tab order would trade a
+          keyboard problem for a reading-order one. */}
+      <a href="#simulasi-kumpulkan" className={SM.skipLink}>
+        Lewati daftar soal → Kumpulkan Ujian
+      </a>
+
       {/* Question navigator — jump anywhere, see answered/unanswered/current
           at a glance, matching how a paper answer sheet lets you scan and
           jump to any question, not just step through in order. */}
@@ -1343,10 +1424,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           marginTop: 'var(--space-8)',
           padding: 'var(--space-14)',
         }}
+        id="simulasi-kumpulkan"
         onClick={handleSubmitClick}
       >
         Kumpulkan Ujian
       </button>
+
+      {/* Same shape of hint QuizShell shows, for the same reason: shortcuts
+          nobody knows about are shortcuts nobody uses. */}
+      <div className={SM.kbHint}>Keyboard: 1–4 pilih · ← → pindah soal · F tandai</div>
 
       {/* Pause overlay. Also offers Keluar here specifically -- pausing is
           the natural "step away" moment, so it doubles as the safe exit

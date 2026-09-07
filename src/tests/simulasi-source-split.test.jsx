@@ -159,12 +159,23 @@ describe('buildQuizSetsPool — teori/praktik classification excludes vocab', ()
   });
 });
 
-describe('buildJacPool — JAC Official stays its own separate, unclassified pool', () => {
-  it('draws only from JAC_OFFICIAL, with no teori/praktik tagging', () => {
+describe('buildJacPool — JAC Official stays its own separate pool', () => {
+  it('draws only from JAC_OFFICIAL, and tags each question by its set', () => {
+    // Item 98 changed the second half of this: the tagging was in the data
+    // (tt* = 学科/teori, st* = 実技/praktik) and in SimulasiMode's own comments,
+    // and only the mapper had never carried it through. Without it the short
+    // presets could not sample in proportion — measured at 0 to 11 practical
+    // questions in a 15-question exam — and the results screen's teori/praktik
+    // breakdown rendered nothing for this source. The pools stay separate;
+    // only this source's questions are now labelled the way its sets already
+    // labelled them.
     const pool = buildJacPool();
     expect(pool.length).toBeGreaterThan(0);
     expect(pool.every((q) => q._source === 'jac')).toBe(true);
-    expect(pool.every((q) => q._category === undefined)).toBe(true);
+    expect(pool.every((q) => q._category === 'teori' || q._category === 'praktik')).toBe(true);
+    // The pair is always one of each, never two of the same kind.
+    expect(pool.some((q) => q._category === 'teori')).toBe(true);
+    expect(pool.some((q) => q._category === 'praktik')).toBe(true);
   });
 
   // Owner's correction (2026-08-28, after first claiming -- wrongly -- that
