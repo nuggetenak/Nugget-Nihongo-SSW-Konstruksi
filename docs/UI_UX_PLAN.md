@@ -753,7 +753,7 @@ which is a user-visible change to a ranking, not a refactor.
 Owner call: should `vocab-supplementary` count as vocab for the purpose of "which category am I
 weakest in"?
 
-### ☐ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S`
+### ☑ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S` — **fixed 2026-09-07**
 
 Item 56 argued the case and acted on it: a false-precision readiness number is actively
 demotivating for someone whose visa depends on this exam, so `calcReadinessBand` returns
@@ -765,6 +765,18 @@ doesn't.
 Not changed here because it is item 56's own decision to extend, not a defect to fix, and the ring
 is StatsMode's main visual anchor — replacing a percentage with a band is a layout question as much
 as a copy one.
+
+**Extended, and the layout question answered.** `ProgressRing` gained a `centerText` prop, so a
+caller can keep the arc without the number — the arc was never the objection; "45%" was. StatsMode
+now puts `readinessBand.label` where the percentage was and drops the duplicated label that used to
+sit under the ring, replacing it with one line of advice keyed to the band (or, below 5 scored
+sessions, "Selesaikan minimal 5 kuis supaya penilaian kesiapan bisa dihitung." over an empty `—`
+ring).
+
+The label is taken from `readinessBand.label` verbatim rather than re-worded here, so the two
+screens cannot drift apart in copy the way they drifted apart in precision.
+`src/tests/stats-readiness-band.test.jsx` holds both halves: the band label appears, and no bare
+percentage appears anywhere inside the readiness card.
 
 ### ☑ 71. `《・》`-separated terms stack vertically in every context — `M` — **fixed 2026-09-07**
 
