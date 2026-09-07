@@ -17,6 +17,7 @@ import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
+import CategoryPicker from '../components/CategoryPicker.jsx';
 import {
   saveQuizSnapshot,
   readQuizSnapshot,
@@ -77,9 +78,15 @@ export default function QuizMode({
 
   // Category filter.
   const [selectedCat, setSelectedCat] = useState('all');
+  // Shaped for CategoryPicker, which owns the `all` entry — this used to be a
+  // list of bare keys with the meta looked up again at render time.
   const availableCats = useMemo(() => {
     const catKeys = new Set(baseCards.map((c) => c.category));
-    return ['all', ...[...catKeys]];
+    return CATEGORIES.filter((c) => c.key !== 'all' && catKeys.has(c.key)).map((c) => ({
+      key: c.key,
+      label: c.label,
+      emoji: c.emoji,
+    }));
   }, [baseCards]);
   const catFilteredCards =
     selectedCat === 'all' ? activeCards : activeCards.filter((c) => c.category === selectedCat);
@@ -371,38 +378,15 @@ export default function QuizMode({
                 ))}
               </div>
             </div>
-            {/* Category filter */}
-            {availableCats.length > 1 && (
-              <div style={{ marginTop: 'var(--space-12)' }}>
-                <div
-                  style={{
-                    fontSize: 'var(--fs-body)',
-                    fontWeight: 600,
-                    color: T.text,
-                    marginBottom: 'var(--space-8)',
-                  }}
-                >
-                  Filter Kategori
-                </div>
-                <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
-                  {availableCats.map((key) => {
-                    const meta =
-                      key === 'all'
-                        ? { label: 'Semua', emoji: '📚' }
-                        : CATEGORIES.find((c) => c.key === key) || { label: key, emoji: '📁' };
-                    return (
-                      <button
-                        key={key}
-                        onClick={() => setSelectedCat(key)}
-                        style={{ ...pillStyle(selectedCat === key), fontSize: 'var(--fs-small)' }}
-                      >
-                        {meta.emoji} {meta.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+            {/* Item 77: was a third hand-rolled copy of the same picker. */}
+            <div style={{ marginTop: 'var(--space-12)' }}>
+              <CategoryPicker
+                cats={availableCats}
+                value={selectedCat}
+                onChange={setSelectedCat}
+                label="Filter Kategori"
+              />
+            </div>
           </div>
         )}
 

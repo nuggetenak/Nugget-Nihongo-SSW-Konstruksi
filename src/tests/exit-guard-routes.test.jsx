@@ -124,6 +124,12 @@ describe('exit guard — every route out of the mode area', () => {
     // Allowing re-applies the press via history.back(); jsdom fires the
     // resulting popstate asynchronously, so drive it directly here — the point
     // under test is that the guard resolved true and cleared itself.
+    //
+    // Flush first: the guard's own promise resolves on a microtask, and
+    // dispatching the second popstate before it has means asserting on a guard
+    // that has not decided yet. Observed failing once under a loaded full-suite
+    // run and passing in isolation, which is that race and not a defect.
+    await act(async () => {});
     await act(async () => {
       window.dispatchEvent(
         new PopStateEvent('popstate', { state: { tab: 'belajar', mode: null } })

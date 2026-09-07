@@ -8,6 +8,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
+import CategoryPicker, { countByCategory } from '../components/CategoryPicker.jsx';
 import { CATEGORIES } from '../data/categories.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -65,14 +66,13 @@ export default function SprintMode({
   // Available categories from the cards prop.
   // Scope to filterIds if launched from SumberMode.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+  // Item 77: the `all` row moved into CategoryPicker, which owns it for all
+  // three callers rather than each of them re-inventing it.
   const availableCats = useMemo(() => {
     const catKeys = new Set(baseCards.map((c) => c.category));
-    return [
-      { key: 'all', label: 'Semua Kategori', emoji: '📚' },
-      ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key)).map(
-        (c) => ({ key: c.key, label: c.label, emoji: c.emoji })
-      ),
-    ];
+    return CATEGORIES.filter(
+      (c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key)
+    ).map((c) => ({ key: c.key, label: c.label, emoji: c.emoji }));
   }, [baseCards]);
 
   const filteredCards = useMemo(() => {
@@ -221,42 +221,18 @@ export default function SprintMode({
           ))}
         </div>
 
-        {/* Category picker */}
-        {availableCats.length > 1 && (
-          <>
-            <div className={S.sectionLabel}>Kategori</div>
-            <div
-              className={S.list}
-              style={{ maxHeight: 200, overflowY: 'auto', marginBottom: 'var(--space-16)' }}
-            >
-              {availableCats.map((c) => (
-                <button
-                  key={c.key}
-                  onClick={() => setSelectedCat(c.key)}
-                  className={S.btnItem}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--space-10)',
-                    background: selectedCat === c.key ? 'rgba(245,158,11,0.10)' : T.surface,
-                    border: `1px solid ${selectedCat === c.key ? `${T.amber}66` : T.border}`,
-                    color: selectedCat === c.key ? T.amber : T.text,
-                  }}
-                >
-                  <span>{c.emoji}</span>
-                  <span style={{ fontSize: 'var(--fs-body)' }}>{c.label}</span>
-                  <span
-                    style={{ marginLeft: 'auto', fontSize: 'var(--fs-small)', color: T.textDim }}
-                  >
-                    {c.key === 'all'
-                      ? `${baseCards.length} kartu`
-                      : `${baseCards.filter((cd) => cd.category === c.key).length} kartu`}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+        {/* Item 77: was the second of three hand-rolled copies. */}
+        <CategoryPicker
+          cats={availableCats}
+          value={selectedCat}
+          onChange={setSelectedCat}
+          variant="rows"
+          label="Kategori"
+          counts={countByCategory(baseCards)}
+          countSuffix="kartu"
+          allOption={{ label: 'Semua Kategori', emoji: '📚' }}
+          maxHeight={200}
+        />
 
         <div className={S.setupCta}>
           <button

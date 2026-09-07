@@ -1044,7 +1044,7 @@ What the rule changed:
 the pref has always said what it governs. `kartu` is deliberately not wired to it: Ulasan speaks on
 its own because the queue moves for you, and Kartu you drive yourself.
 
-### ☐ 77. Three differently-shaped category pickers — `M` — `P2` — **half closed 2026-09-07**
+### ☑ 77. Three differently-shaped category pickers — `M` — `P2` — **fixed 2026-09-07**
 
 Straight continuation of §1's through-line. Category selection is written three times:
 
@@ -1073,8 +1073,31 @@ the primary control on its setup screen and are meant to be bigger than a filter
 The unused `.pill` class this item pointed at is removed rather than adopted — the active state is
 dynamic and token-driven, which is why the inline form won.
 
-**What stays open** is the original heading: the three category pickers are still three shapes,
-and `FilterPopup` is still a fourth.
+**The other half, later the same day.** One `CategoryPicker` with a variant, because the three
+differences were presentation and everything underneath was the same: the same
+`['all', ...categories]` list, the same `all` pseudo-category re-invented three times, the same
+active styling written out by hand.
+
+| caller | variant | what it passes |
+|---|---|---|
+| `QuizMode` | `pills` | nothing but the list — it never showed counts |
+| `SprintMode` | `rows` | `countByCategory(baseCards)` + `countSuffix="kartu"`, `maxHeight` |
+| `GlossaryMode` | `compact` | its own counts, because "Semua" there means *what the current search matched* |
+
+That last column is why counts are a prop rather than derived: deriving them would have quietly
+overruled the one caller whose "Semua" is not the size of the corpus.
+
+**`FilterPopup` is deliberately not what they collapsed into**, which is the part of this item that
+needed a decision rather than a refactor. It is a multi-select modal sheet over the flashcard deck
+(item 55); these are single-select controls sitting inline on a setup screen. Folding an inline
+one-tap filter into a modal would cost a tap and a focus trap on three screens to reuse a component
+that does a different job. Four *shapes* was the defect; four *kinds of control* was not.
+
+Two small things fell out of doing it: the emoji-only chips in Glosari now carry an accessible name
+(an emoji is not a label), and all three mark their selection with `aria-pressed` rather than colour
+alone. The "only one category, don't show a picker" guard is also now one rule instead of three —
+two of the callers were testing a list that already contained `all`, so their thresholds differed by
+one.
 
 ### ☑ 78. Simulasi loses the entire exam on reload — `M` — `P1` — **done 2026-09-04**
 
