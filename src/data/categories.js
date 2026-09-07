@@ -144,19 +144,33 @@ export const SOURCE_META = {
   },
 };
 
-// Source files that are pure vocabulary lists rather than chapter content.
-// Consumed by `excludeVocab` (useTrackedCards) and FocusMode's weakness ranking.
+// VOCAB_SOURCES is gone (item 69, 2026-09-07). It listed "source files that are
+// pure vocabulary lists rather than chapter content", and the question left open
+// was whether `vocab-supplementary` (the largest vocab pool in the corpus)
+// belonged in it. Measuring first turned the question around:
 //
-// Four of the five former entries were zero-card leftovers and are gone (see
-// SOURCE_META above). What's left is genuinely one source — and that is worth
-// noticing rather than tidying away: `vocab-supplementary` (494 cards, by far the
-// largest vocab pool in the corpus) is NOT in this list, so `excludeVocab`
-// currently removes 49 cards where the name implies ~543. Deliberately left
-// as-is: SOURCE_GROUPS files it under "Sumber Tambahan" rather than "Kosakata",
-// so both readings are defensible, and adding it would silently move every
-// category score on FocusMode's weakness screen. Logged as an open decision in
-// docs/UI_UX_PLAN.md rather than changed on this pass.
-export const VOCAB_SOURCES = ['vocab-jac'];
+//   * Its only live consumer was FocusMode's weakness ranking. `excludeVocab`
+//     in useTrackedCards read it too, but no component ever passed that option —
+//     only its own test did.
+//   * Excluding cards there makes the ranking *less* truthful, not more: a
+//     category's weakness is its unlearned cards, whichever file they arrived
+//     in, and FocusMode hands `catCards` straight to the drill — so an excluded
+//     card is one the weakness path can never show you.
+//   * Adding `vocab-supplementary` would have made that worse and unevenly: it
+//     is 6% of `hourei` but 58% of `career`, 56% of `hoon`, 48% of `gaiyou`.
+//     That does not shift the ranking, it restructures it.
+//   * And the distinction it drew no longer exists. The 7.0.0 split made one
+//     card one term across the whole corpus, 87% of which is now `type: 'vocab'`;
+//     "chapter content" and "vocabulary list" stopped being different shapes.
+//
+// So the answer to "should vocab-supplementary count?" is yes — and so should
+// `vocab-jac`, whose exclusion was the real anomaly at 40 cards (2.5% of the
+// corpus): too small to shape a ranking, big enough to make one wrong.
+//
+// Category scores drop slightly everywhere as a result, because the denominator
+// now includes cards that were quietly not counted. That is the honest number,
+// and it is the same reasoning as item 97's: this app should not tell someone
+// they are further along than they are.
 
 export const SOURCE_GROUPS = [
   {

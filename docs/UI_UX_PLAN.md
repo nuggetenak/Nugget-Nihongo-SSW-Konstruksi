@@ -744,7 +744,7 @@ they need an owner decision, or because they are genuinely separate scope.
 
 Numbering continues from 68.
 
-### ☐ 69. `VOCAB_SOURCES` excludes 49 cards where its name implies ~543 — `S` — **needs a decision**
+### ☑ 69. `VOCAB_SOURCES` excludes 49 cards where its name implies ~543 — `S` — **decided 2026-09-07**
 
 `excludeVocab` (`useTrackedCards`) and FocusMode's weakness ranking both filter out cards whose
 source is in `VOCAB_SOURCES`. After the five zero-card entries were removed (2026-09-04) that list
@@ -766,6 +766,34 @@ already explains the discrepancy deliberately, and adding `vocab-supplementary` 
 category score on FocusMode's weakness screen at once — a user-visible change to a ranking, made
 without anyone asking for it. It is one line in `VOCAB_SOURCES` whenever the answer is the other
 one.
+
+**Owner handed the decision back. Measuring first turned the question around, so the answer is
+neither of the two on offer: the exclusion is gone entirely.**
+
+Four things, in the order they changed my mind:
+
+1. **Its only live consumer was FocusMode's weakness ranking.** `excludeVocab` in `useTrackedCards`
+   read it too — but no component ever passed that option. Only its own test did.
+2. **Excluding cards there makes the ranking less truthful, not more.** A category's weakness is
+   its unlearned cards, whichever file they arrived in; and FocusMode hands `catCards` straight to
+   the drill, so an excluded card is one the weakness path can never show you.
+3. **Adding `vocab-supplementary` would have been worse, and unevenly so.** It is 6% of `hourei`
+   but **58% of `career`, 56% of `hoon`, 48% of `gaiyou`**. That does not shift the ranking; it
+   restructures it, and shrinks three categories to a third of their real size.
+4. **The distinction stopped existing.** 7.0.0 made one card one term across the whole corpus, 87%
+   of which is now `type: 'vocab'`. "Chapter content" and "vocabulary list" are no longer different
+   shapes of thing.
+
+So: yes, `vocab-supplementary` should count — and so should `vocab-jac`, whose exclusion was the
+real anomaly. At 40 cards (2.5% of the corpus) it was too small to shape a ranking and big enough
+to make one wrong. `VOCAB_SOURCES` and the unused `excludeVocab` option are both removed.
+
+**Category scores drop slightly everywhere**, because the denominator now includes cards that were
+quietly not counted. That is the honest number, and it is item 97's reasoning again: this app should
+not tell someone they are further along than they are.
+
+`data.test.js`'s `VOCAB_SOURCES` assertion is replaced by a wider one — every card source in the
+corpus uses a canonical name — since that is what it was really protecting.
 
 ### ☑ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S` — **fixed 2026-09-07**
 
@@ -1771,16 +1799,41 @@ six real values are `wayground-teori`, `-jac`, `-quizizz`, `-lifeline-vocab`, `-
 `jac-mockup`. That branch was dead, which is precisely how the official/practice distinction stayed
 invisible: nothing carried it.
 
-### ☐ 107. Listening is one speed — `M` — `P2`
+### ☑ 107. Listening is one speed — `M` — `P2` — **fixed 2026-09-07**
 
 `dengar` speaks at one rate. Real instructions arrive fast, clipped, and over noise. Graded levels
 (clear → natural → supervisor-pace) would make it train comprehension rather than word recognition.
 
-### ☐ 108. Backup is invisible until it matters — `S` — `P2`
+**Three levels — Jelas / Alami / Cepat — and each is a *band of three rates*, not one.** That is the
+part worth stating, because the obvious implementation is wrong: passing `speakJP` an explicit
+`rate` disables the HVPT cycling the wrapper exists for. That cycling is not decoration — it is
+Logan et al. (1991), varied rate and pitch helping a learner place phoneme boundaries — and grading
+the difficulty must not cost it. So a level shifts the band and keeps the variation inside it.
+
+`Alami` **is** the old `HVPT_PARAMS`, unchanged, and is the default, so a session nobody has
+reconfigured sounds exactly as it did before. The choice persists as `prefs.listeningSpeed`, because
+a comfortable pace is a property of the learner rather than of one sitting; absent, it reads as
+`alami`, so this is additive and `STORAGE_VERSION` is untouched.
+
+### ☑ 108. Backup is invisible until it matters — `S` — `P2` — **fixed 2026-09-07**
 
 Progress is local-only and there is no sync. The learner should be told that plainly, with the date
 of their last backup, rather than finding out when they change phones. `ekspor` already does the
 work; it is the surfacing that is missing.
+
+**A first row in Saya → Data, above the export it is asking for**, and **three** states rather than
+two:
+
+| state | reads | why separate |
+|---|---|---|
+| never | ⚠️ Belum pernah | carries the whole warning: local-only, and a new phone loses it |
+| stale (≥30 days) | ⚠️ 47 hari lalu | "backed up once, eight months ago" is closer to never than to safe, and must not wear the same tick |
+| ok | ✅ kemarin | says the local-only fact without the alarm |
+
+All three paths that make a backup record one — export from Saya, export from Ekspor, and the Gist
+push, which is arguably the most important since it is the only one that leaves the device.
+`prefs.lastBackupAt` is additive: absent means "never", which is the truthful answer for anyone who
+has not exported, so no migration.
 
 ### Not filed
 

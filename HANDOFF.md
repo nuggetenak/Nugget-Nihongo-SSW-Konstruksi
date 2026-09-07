@@ -32,10 +32,8 @@ content into this file.
 ## CURRENT STATE
 
 **As of 2026-09-07.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.0.0**, **1,626 cards**, **19 modes**, **867 tests in 90 files**,
-`npm run validate` clean. The 7.0.0 entry below is on branch
-`claude/remove-modes-split-vocab-cards-5r2qfe` (PR #12), not yet merged; everything under it is on
-`main`.
+At that date: version **7.0.0**, **1,626 cards**, **19 modes**, `npm run validate` clean, and
+everything below merged into `main` (7.0.0 as PR #12, `200e48a`).
 
 - **2026-09-07: "hapus mode produksi & kuis produksi · pecah kartu multi-kosakata · kerjakan
   antrean docs."** Branch `claude/remove-modes-split-vocab-cards-5r2qfe`. Full write-up is

@@ -7,13 +7,7 @@ import { JAC_MOCKUP_SETS } from '../data/jac-mockup-sets.js';
 import { QUIZ_SETS, getQuizSetsForTrack } from '../data/quiz-sets.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
-import {
-  CATEGORIES,
-  getCatsForTrack,
-  VOCAB_SOURCES,
-  SOURCE_GROUPS,
-  SOURCE_META,
-} from '../data/categories.js';
+import { CATEGORIES, getCatsForTrack, SOURCE_GROUPS, SOURCE_META } from '../data/categories.js';
 
 describe('CARDS data integrity', () => {
   it('has at least 1400 cards', () => expect(CARDS.length).toBeGreaterThanOrEqual(1400));
@@ -277,9 +271,15 @@ describe('CATEGORIES', () => {
     });
   });
 
-  it('VOCAB_SOURCES use canonical names', () => {
-    const OLD = ['lifeline4', 'vocab_jac', 'vocab_core', 'vocab_exam', 'vocab_teori'];
-    VOCAB_SOURCES.forEach((s) => expect(OLD).not.toContain(s));
+  // Item 69 retired VOCAB_SOURCES. What that constant was really protecting is
+  // that source keys use the canonical hyphenated names, so assert that against
+  // every source in the corpus rather than against a list that no longer exists
+  // — a wider check than the one it replaces.
+  it('every card source uses a canonical name, not a legacy underscore one', () => {
+    const LEGACY = ['lifeline4', 'vocab_jac', 'vocab_core', 'vocab_exam', 'vocab_teori'];
+    const sources = new Set(CARDS.map((c) => c.source));
+    LEGACY.forEach((old) => expect([...sources]).not.toContain(old));
+    sources.forEach((s) => expect(s, `"${s}" is not in SOURCE_META`).toBeTruthy());
   });
 });
 

@@ -109,7 +109,11 @@ describe('DengarMode — a real speech failure surfaces a toast, not silence (it
   // canSpeak -> true and speakJP -> synchronously fails tests that
   // specific path directly instead.
   async function renderDengarWithFailingAudio() {
-    vi.doMock('../utils/speak.js', () => ({
+    // Partial mock: the module also exports the graded listening bands (item
+    // 107) that DengarMode's speed picker renders from, and a total mock would
+    // fail on their absence rather than on the thing under test.
+    vi.doMock('../utils/speak.js', async (importOriginal) => ({
+      ...(await importOriginal()),
       canSpeak: () => true,
       speakJP: (text, opts) => opts?.onError?.(new Error('mock synthesis failure')),
       stopSpeech: () => {},

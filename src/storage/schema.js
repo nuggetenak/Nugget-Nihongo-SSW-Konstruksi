@@ -59,6 +59,14 @@ export const DEFAULTS = {
     speakOnFlip: false, // speak on card flip instead of advance
     quizQuestionCount: 10, // persist quiz question count (0 = Semua, item 80)
     autoNextDelay: 2000, // ms before auto-advancing past a revealed answer (0 = manual)
+    // Item 108: epoch ms of the last successful export or Gist push. Absent
+    // means "never backed up", which is the truthful answer for anyone who has
+    // not — so this is additive and needs no migration.
+    lastBackupAt: null,
+    // Item 107: which graded listening band `dengar` speaks at — 'jelas' |
+    // 'alami' | 'cepat'. Absent falls back to 'alami', which is the behaviour
+    // that existed before, so this is additive too.
+    listeningSpeed: 'alami',
     sprintBests: {}, // per-duration personal bests { [durationKey]: { score, timeline } }
     dailyChallengeLog: {}, // { [YYYY-MM-DD]: { selected: number, correct: boolean } }
   },

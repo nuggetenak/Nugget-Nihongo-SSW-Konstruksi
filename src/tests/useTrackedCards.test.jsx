@@ -7,7 +7,6 @@ import { createElement } from 'react';
 import { _reset_for_test } from '../storage/engine.js';
 import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { useTrackedCards } from '../hooks/useTrackedCards.js';
-import { VOCAB_SOURCES } from '../data/categories.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -28,14 +27,18 @@ describe('useTrackedCards', () => {
     expect(result.current).toHaveLength(0);
   });
 
-  it('excludeVocab filters out vocab sources', () => {
+  // Item 69: `excludeVocab` is gone. It was an option no component ever passed,
+  // over a distinction — "vocabulary list" against "chapter content" — that
+  // stopped existing when 7.0.0 made one card one term. An unknown option must
+  // be ignored rather than silently narrowing the deck.
+  it('ignores an option it does not have, rather than filtering on it', () => {
     const all = renderHook(() => useTrackedCards({ track: 'lifeline' }), { wrapper }).result
       .current;
-    const noVocab = renderHook(() => useTrackedCards({ track: 'lifeline', excludeVocab: true }), {
-      wrapper,
-    }).result.current;
-    expect(noVocab.length).toBeLessThanOrEqual(all.length);
-    expect(noVocab.every((c) => !VOCAB_SOURCES.includes(c.source))).toBe(true);
+    const withDeadOption = renderHook(
+      () => useTrackedCards({ track: 'lifeline', excludeVocab: true }),
+      { wrapper }
+    ).result.current;
+    expect(withDeadOption).toHaveLength(all.length);
   });
 
   it('returns empty array for category with no cards', () => {

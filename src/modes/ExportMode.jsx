@@ -5,6 +5,7 @@
 import { useState, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { exportAll, importAllSafe, validateSnapshot } from '../storage/engine.js';
+import { markBackedUp } from '../utils/backup-state.js';
 import {
   saveToken,
   loadToken,
@@ -66,6 +67,7 @@ export default function ExportMode() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      markBackedUp(); // item 108
       setStatus({
         type: 'ok',
         msg: `✅ Berhasil! ${summary.known} hafal + ${summary.srsCount} kartu SRS disimpan.`,
@@ -150,6 +152,9 @@ export default function ExportMode() {
       const result = await pushToGist(gistPat, data, targetId);
       saveGistId(result.id);
       setGistId(result.id);
+      // Item 108: a Gist push is a backup — arguably the better kind, since it
+      // is the only one that leaves the device — so it counts as one.
+      markBackedUp();
       setGistStatus({ type: 'ok', msg: `✅ Tersimpan ke Gist! (${result.id.slice(0, 8)}…)` });
     } catch (e) {
       setGistStatus({ type: 'err', msg: `❌ ${e.message}` });
