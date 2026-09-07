@@ -553,6 +553,13 @@ service is fine, a runtime one would defeat the point) or licensed/recorded huma
 terms. Neither is something to source and integrate as a continuation of this session — a genuinely
 separate task, not a shortcut to skip.
 
+**Re-checked 2026-09-07, still blocked, and now for a corpus 13% larger.** No speech synthesiser is
+installed in this environment (`espeak`, `espeak-ng`, `festival`, `flite`, `pico2wave` all absent),
+so the clips still cannot be produced at all — the blocker is the same one, not a sizing question.
+The split raised the deck from 1,438 cards to 1,626, so the full-corpus figure quoted above is now
+optimistic by roughly that ratio; the scoped ~200-term JAC subset is unchanged in size and remains
+the only version worth costing. Restating the block rather than pretending to close it.
+
 ### ☑ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
 `QuizProduksiMode` advertises "pencocokan fleksibel (huruf besar/kecil diabaikan)" but a learner
 who types a *nearly* right answer is just told they're wrong. Showing the diff
@@ -1590,6 +1597,16 @@ text ("📷 Soal asli pakai foto"). Reading a description of a diagram is not an
 about a diagram, and these are 実技 questions where the picture is often the question. Nothing to
 fix in code until the images exist; worth recording as a known fidelity limit, and as a reason not
 to read a praktik sub-score too confidently.
+
+**Re-checked 2026-09-07: still 12 questions, still no images.** No JAC question carries any image
+field at all (`photo`, `image`, `img` — none exist), and `public/images/` holds the three
+category-illustration directories and nothing exam-related. Confirmed rather than assumed, because
+"blocked on assets" is the kind of status that quietly stops being true.
+
+One thing did change around it: item 98 gave JAC questions a `_category`, so a praktik sub-score now
+*exists* for this source where before it silently rendered nothing. That makes the caveat above
+sharper rather than softer — the number is real now, and 12 of the questions behind it are being
+answered from a text description of a picture.
 
 ### ☑ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3` — **fixed 2026-09-07**
 
