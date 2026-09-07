@@ -25,42 +25,59 @@ function fmtInterval(d) {
 }
 
 export default function RatingRow({ seen, rated, srsPreviews, onRate }) {
-  if (!seen) return null;
-
-  if (rated) {
-    return (
-      <div className={FC.ratedConfirm} style={{ color: T.textDim }}>
-        ✓ Dinilai — melanjutkan…
-      </div>
-    );
-  }
+  // The row's footprint is reserved in all three states rather than mounted and
+  // unmounted (item 74). It used to return null before the first flip and a
+  // one-line confirmation after rating, so the block below the card changed
+  // height twice per card. That was survivable while the card was a fixed
+  // height and only the air around it moved — but the card fills the scene now,
+  // so anything that resizes the scene resizes the card, and the four buttons
+  // arriving on the first flip would have shrunk the card mid-flip: the very
+  // jump the retired ResizeObserver existed to prevent, by another route.
+  //
+  // The grid is always what sets the height (it is the tallest state); the
+  // other two states sit over it.
+  const showButtons = seen && !rated;
 
   return (
-    <div className={FC.ratingWrap}>
-      <div className={FC.ratingLabel} style={{ color: T.textDim }}>
-        Seberapa hafal kamu?
-      </div>
-      <div className={FC.ratingGrid}>
-        {[1, 2, 3, 4].map((r) => {
-          const m = RATING_META[r];
-          const interval = srsPreviews?.[r];
-          return (
-            <button
-              key={r}
-              className={FC.ratingBtn}
-              onClick={() => {
-                haptic.tap();
-                onRate(r);
-              }}
-              aria-label={`Nilai ${m.id}${interval != null ? ` — ulang dalam ${fmtInterval(interval)}` : ''}`}
-              style={{ background: m.bg, border: `1.5px solid ${m.border}`, color: m.color }}
-            >
-              <span className={FC.ratingEmoji}>{m.emoji}</span>
-              <span className={FC.ratingId}>{m.id}</span>
-              <span className={FC.ratingInterval}>{fmtInterval(interval)}</span>
-            </button>
-          );
-        })}
+    <div className={FC.ratingWrap} style={{ position: 'relative' }}>
+      {!showButtons && (
+        <div className={FC.ratingOverlay} style={{ color: T.textDim }}>
+          {rated ? '✓ Dinilai — melanjutkan…' : 'Balik kartu dulu untuk menilai'}
+        </div>
+      )}
+      <div
+        style={{ visibility: showButtons ? 'visible' : 'hidden' }}
+        aria-hidden={showButtons ? undefined : true}
+      >
+        <div className={FC.ratingLabel} style={{ color: T.textDim }}>
+          Seberapa hafal kamu?
+        </div>
+        <div className={FC.ratingGrid}>
+          {[1, 2, 3, 4].map((r) => {
+            const m = RATING_META[r];
+            const interval = srsPreviews?.[r];
+            return (
+              <button
+                key={r}
+                className={FC.ratingBtn}
+                // Hidden means unreachable, not merely invisible: a disabled
+                // button is skipped by the tab order and ignored by a click that
+                // lands on the reserved-but-empty space.
+                disabled={!showButtons}
+                onClick={() => {
+                  haptic.tap();
+                  onRate(r);
+                }}
+                aria-label={`Nilai ${m.id}${interval != null ? ` — ulang dalam ${fmtInterval(interval)}` : ''}`}
+                style={{ background: m.bg, border: `1.5px solid ${m.border}`, color: m.color }}
+              >
+                <span className={FC.ratingEmoji}>{m.emoji}</span>
+                <span className={FC.ratingId}>{m.id}</span>
+                <span className={FC.ratingInterval}>{fmtInterval(interval)}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

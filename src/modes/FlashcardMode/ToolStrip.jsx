@@ -103,12 +103,17 @@ export default function ToolStrip({
       </button>
 
       {/* Tracks the rating row: the shortcut hint is useless when the buttons
-          it describes aren't there, and misleading when they are and it isn't. */}
-      {seen && !rated && (
-        <div className={FC.kbHint} style={{ color: T.textFaint }}>
-          Keyboard: 1 Lagi · 2 Susah · 3 Oke · 4 Mudah
-        </div>
-      )}
+          it describes aren't there, and misleading when they are and it isn't.
+          Hidden rather than unmounted (item 74) — it is the last thing on the
+          page, so mounting it moved the page's height, and with the card now
+          filling the scene that reached back up and resized the card itself. */}
+      <div
+        className={FC.kbHint}
+        style={{ color: T.textFaint, visibility: seen && !rated ? 'visible' : 'hidden' }}
+        aria-hidden={seen && !rated ? undefined : true}
+      >
+        Keyboard: 1 Lagi · 2 Susah · 3 Oke · 4 Mudah
+      </div>
     </>
   );
 }

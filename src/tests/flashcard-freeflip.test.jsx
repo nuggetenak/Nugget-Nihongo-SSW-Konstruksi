@@ -95,19 +95,26 @@ describe('flashcard — flipping back and forth', () => {
     expect(isFlipped()).toBe(false);
   });
 
+  // Since item 74 the rating row's footprint is reserved from the start rather
+  // than mounted on the first flip -- the card fills the scene now, so a block
+  // appearing below it would resize the card mid-flip. "Not shown" therefore
+  // means aria-hidden and disabled, not absent from the DOM: query by role,
+  // which honours both, rather than by text, which honours neither.
+  const ratingOffered = () => screen.queryAllByRole('button', { name: /^Nilai / }).length > 0;
+
   it('the rating row survives a flip back to the front, and so do the 1-4 shortcuts', () => {
     const marks = [];
     const { isFlipped } = setup({ onMark: (id, state) => marks.push([id, state]) });
 
-    expect(screen.queryByText('Seberapa hafal kamu?')).toBeNull();
+    expect(ratingOffered()).toBe(false);
 
     fireEvent.click(screen.getByLabelText('Balik kartu'));
-    expect(screen.getByText('Seberapa hafal kamu?')).toBeTruthy();
+    expect(ratingOffered()).toBe(true);
 
     fireEvent.click(screen.getByLabelText('Balik kartu'));
     expect(isFlipped()).toBe(false);
     // Still there — it used to vanish the moment the front came back up.
-    expect(screen.getByText('Seberapa hafal kamu?')).toBeTruthy();
+    expect(ratingOffered()).toBe(true);
 
     fireEvent.keyDown(document.body, { key: '3' });
     expect(marks).toEqual([[1, 'known']]);
@@ -116,10 +123,13 @@ describe('flashcard — flipping back and forth', () => {
   it('moving to another card hides the rating row again', () => {
     setup();
     fireEvent.click(screen.getByLabelText('Balik kartu'));
-    expect(screen.getByText('Seberapa hafal kamu?')).toBeTruthy();
+    expect(ratingOffered()).toBe(true);
 
     fireEvent.click(screen.getByLabelText('Kartu berikutnya'));
-    expect(screen.queryByText('Seberapa hafal kamu?')).toBeNull();
+    expect(ratingOffered()).toBe(false);
+    // Hidden, not unmounted: the space it will occupy is still reserved, which
+    // is what stops the card resizing when it comes back.
+    expect(screen.getByText('Seberapa hafal kamu?')).toBeTruthy();
   });
 
   it('reading the description does not flip the card out from under you', () => {

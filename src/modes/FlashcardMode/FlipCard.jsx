@@ -3,7 +3,6 @@
 // Dynamic values (border color, gradient from cat.color) remain inline.
 // haptic.flip() on card tap.
 // ─────────────────────────────────────────────────────────────────────────────
-import { useRef, useEffect, useState } from 'react';
 import { haptic } from '../../utils/haptic.js';
 import { T } from '../../styles/theme.js';
 import {
@@ -40,22 +39,15 @@ export default function FlipCard({
 
   const catColor = cat?.color ?? T.amber;
 
-  // Measure back face so the card container expands to fit whichever face is taller.
-  const backRef = useRef(null);
-  const [backH, setBackH] = useState(0);
-  useEffect(() => {
-    setBackH(0);
-  }, [card.id]);
-  useEffect(() => {
-    if (!backRef.current) return;
-    const ro = new ResizeObserver(([e]) => {
-      // borderBoxSize includes padding; fall back to contentRect for older browsers.
-      const h = e.borderBoxSize?.[0]?.blockSize ?? e.contentRect.height;
-      setBackH(h);
-    });
-    ro.observe(backRef.current);
-    return () => ro.disconnect();
-  }, [card.id, showDesc]);
+  // Item 74: there used to be a ResizeObserver here, measuring the back face so
+  // the card could be given its height and the two faces would not differ
+  // across the flip. `.back` is `bottom: 0` now, so the faces are the same box
+  // by construction and the card is free to fill the scene — which the
+  // measurement had been preventing, since a card sized to the back's *content*
+  // is by definition not a card sized to its container.
+  //
+  // A back longer than the card scrolls inside itself; that is what its own
+  // `overflow: hidden auto` and `overscroll-behavior: contain` were for.
 
   // Category badge is independently clickable when onCatFilter exists (filters
   // by category, distinct from the outer card-flip action) -- a real <button>
@@ -77,15 +69,11 @@ export default function FlipCard({
       <div
         className={`fc-card${flipped ? ' is-flipped' : ''}`}
         style={{
-          // Only the back's measurement, never a floor of its own. The floor is
-          // CSS's (see .front/.back in FlipCard.module.css), and .front is the
-          // in-flow face, so the card is already at least that tall. Hardcoding
-          // 230 here silently defeated the landscape override the same
-          // stylesheet sets at max-height:480px: the faces dropped to 140px and
-          // the card stayed at 230, so a 800x400 phone in landscape still
-          // scrolled (599px of document in a 400px viewport) despite the rule
-          // written to stop exactly that.
-          minHeight: backH || undefined,
+          // No minHeight here on purpose. The floor is CSS's (see .front/.back
+          // in FlipCard.module.css), which keeps the landscape override at
+          // max-height:480px working — a hardcoded 230 here once defeated it,
+          // dropping the faces to 140px while the card stayed at 230 so an
+          // 800x400 phone still scrolled despite the rule written to stop that.
           transform: `rotateY(${flipped ? 180 : 0}deg) translateX(${cardShiftPx}px) rotate(${cardTiltDeg}deg)`,
         }}
       >
@@ -164,7 +152,6 @@ export default function FlipCard({
             the back carried no handler at all, so the only way back was Space
             on a physical keyboard. */}
         <div
-          ref={backRef}
           className={`fc-face fc-face--back ${S.back}`}
           onClick={() => {
             haptic.flip();

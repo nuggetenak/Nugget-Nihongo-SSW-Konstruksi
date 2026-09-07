@@ -468,20 +468,25 @@ export default function FlashcardMode({
         <RatingRow seen={seen} rated={rated} srsPreviews={srsPreviews} onRate={handleRate} />
       )}
 
-      {/* Gesture hint — describes navigation now, not rating */}
-      {seen && !rated && (
-        <div
-          style={{
-            textAlign: 'center',
-            fontSize: 'var(--fs-small)',
-            color: T.textDim,
-            marginTop: 'var(--space-4)',
-            letterSpacing: 0.3,
-          }}
-        >
-          ← → ganti kartu · ↑ balik kartu
-        </div>
-      )}
+      {/* Gesture hint — describes navigation now, not rating.
+
+          Always rendered, only hidden (item 74): it used to mount on the first
+          flip and unmount on rating, which moved everything below it twice per
+          card. Harmless while the card had a height of its own; not harmless
+          now that the card fills whatever the scene has left. */}
+      <div
+        style={{
+          textAlign: 'center',
+          fontSize: 'var(--fs-small)',
+          color: T.textDim,
+          marginTop: 'var(--space-4)',
+          letterSpacing: 0.3,
+          visibility: seen && !rated ? 'visible' : 'hidden',
+        }}
+        aria-hidden={seen && !rated ? undefined : true}
+      >
+        ← → ganti kartu · ↑ balik kartu
+      </div>
 
       {/* Nav row. The flip button was removed 2026-09-04 as redundant with
           tapping the card — true of the front face, false of the back, which

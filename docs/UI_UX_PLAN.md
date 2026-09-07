@@ -842,7 +842,7 @@ design position (bottom-anchored = thumb-reachable and consistent with the app's
 top-stacked = the button sits directly under the choice it confirms). Whichever way it goes it
 should go the same way on all five, which is what makes it one decision rather than five.
 
-### ☐ 74. The flip card cannot grow to fill its scene — `M`
+### ☑ 74. The flip card cannot grow to fill its scene — `M` — **fixed 2026-09-07**
 
 `.scene` now grows and centres the card in the slack, but the card itself stays at
 `max(230px, measured back-face height)`. Letting it stretch would use that space for the Japanese
@@ -854,6 +854,40 @@ is content-height regardless of how tall the card gets: stretch the card today a
 renders shorter than the front. Fixing that means reworking a 3D flip whose two faces currently
 size independently — small in diff, easy to get subtly wrong, and worth doing with the card
 measured at several content lengths rather than eyeballed at one.
+
+**Done, and measured — which is what caught the part that was subtly wrong.**
+
+`.back` gets `bottom: 0`; `.fc-card` becomes a flex column that grows into the scene; `.front`, its
+only in-flow child, grows into the card. With the two faces the same box by construction, the
+ResizeObserver that had been keeping them equal by measurement is gone — and it had to go, because
+a card sized to the back's *content* is by definition not a card sized to its container.
+
+Measured in Chromium against the running app, six cards each, front / back / back-with-description:
+
+| Viewport | Card before | Slack before | Card after | Slack after |
+|---|---|---|---|---|
+| 390×844 phone | 287px | **179px** (25px flipped) | 312px | 0 |
+| 820×1180 tablet | 400px | **401px** (242px flipped) | 642px | 0 |
+| 800×400 landscape | 175–230px, varying per card | 0 | 140px (the item-23 floor) | 0 |
+
+The document never exceeds the viewport on phone or tablet, before or after. Landscape overflows
+either way — that is item 23's known limit, not this change's — but it no longer overflows by a
+*different* amount depending on which face is up (696px → 662px flipped, against 538px → 636px
+front before): a scroll height that stays put is easier to use than one that moves.
+
+**The part the measurement caught.** Once the card fills the scene, anything that resizes the scene
+resizes the card. Three blocks below it mounted on the first flip and unmounted on rating — the
+rating row, the gesture hint, the keyboard hint — which used to move only the air around a
+fixed-height card and now moved the card itself: 466px → 312px on a phone, a visible shrink
+*during* the flip. Exactly the jump the retired observer existed to prevent, arriving by a different
+route. All three are now rendered always and hidden with `visibility` + `aria-hidden`, with the
+rating buttons `disabled` while hidden so "invisible" also means "unreachable". The four-button grid
+is the tallest state and therefore the one that sets the reserved height; "belum dibalik" and
+"✓ Dinilai" sit over it.
+
+Test note: `queryByText` sees an `aria-hidden` node and `queryByRole` does not, so the freeflip
+tests now ask whether the rating buttons are *offered* rather than whether the label is *present* —
+the thing they were always about.
 
 
 ---
