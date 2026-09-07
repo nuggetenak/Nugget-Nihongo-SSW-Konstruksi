@@ -41,8 +41,8 @@ describe('Data Integrity', () => {
   });
 
   // C5: CARDS count matches expected
-  it('C5: CARDS count is 1422', () => {
-    expect(CARDS.length).toBe(1422);
+  it('C5: CARDS count is 1545', () => {
+    expect(CARDS.length).toBe(1545);
   });
 
   // C6: no duplicate card IDs
