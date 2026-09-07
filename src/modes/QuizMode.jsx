@@ -2,14 +2,22 @@
 // seenPool is a useRef — resets on unmount, preventing cross-session repetition.
 import { useState, useCallback, useRef, useMemo } from 'react';
 import { T } from '../styles/theme.js';
+import { pillStyle as sharedPill } from '../styles/pill.js';
 import { generateQuiz } from '../utils/quiz-generator.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import { shuffle } from '../utils/shuffle.js';
 import { get as storageGet } from '../storage/engine.js';
-import { QUIZ_COUNTS } from '../utils/constants.js';
+import {
+  QUIZ_COUNTS,
+  QUIZ_COUNT_ALL,
+  AUTO_NEXT_DELAYS,
+  resolveQuizCount,
+} from '../utils/constants.js';
+import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
+import CategoryPicker from '../components/CategoryPicker.jsx';
 import {
   saveQuizSnapshot,
   readQuizSnapshot,
@@ -30,9 +38,17 @@ export default function QuizMode({
   filterIds = null,
 }) {
   const [difficulty, setDifficulty] = useState('medium');
-  const [quizCount, setQuizCount] = useState(() => storageGet('prefs')?.quizQuestionCount ?? 10);
+  // Item 80: "Semua" used to persist the deck's own size, so the number carried
+  // into another mode as a fixed count that meant nothing there. It is the
+  // QUIZ_COUNT_ALL sentinel now, resolved against whatever this session's pool
+  // actually holds.
+  const [quizCountPref, setQuizCountPref] = useState(
+    () => storageGet('prefs')?.quizQuestionCount ?? 10
+  );
   const [lemahMode, setLemahMode] = useState(false);
-  const [autoNextDelay, setAutoNextDelay] = useState(2000);
+  // Item 80: a preference, not a per-session choice — `wayground` and `vocab`
+  // render the same QuizShell from a screen with nowhere to put this picker.
+  const [autoNextDelay, setAutoNextDelay] = useState(storedAutoNextDelay);
   const [showSettings, setShowSettings] = useState(false);
   const [started, setStarted] = useState(false);
   const [resumeData, setResumeData] = useState(() => {
@@ -62,9 +78,15 @@ export default function QuizMode({
 
   // Category filter.
   const [selectedCat, setSelectedCat] = useState('all');
+  // Shaped for CategoryPicker, which owns the `all` entry — this used to be a
+  // list of bare keys with the meta looked up again at render time.
   const availableCats = useMemo(() => {
     const catKeys = new Set(baseCards.map((c) => c.category));
-    return ['all', ...[...catKeys]];
+    return CATEGORIES.filter((c) => c.key !== 'all' && catKeys.has(c.key)).map((c) => ({
+      key: c.key,
+      label: c.label,
+      emoji: c.emoji,
+    }));
   }, [baseCards]);
   const catFilteredCards =
     selectedCat === 'all' ? activeCards : activeCards.filter((c) => c.category === selectedCat);
@@ -83,6 +105,7 @@ export default function QuizMode({
 
   const startQuiz = () => {
     // Compute questions here (not in useMemo) to avoid ref-in-render lint error
+    const quizCount = resolveQuizCount(quizCountPref, catFilteredCards.length);
     const unseen = catFilteredCards.filter((c) => !seenPool.current.has(c.id));
     let pool;
     if (unseen.length >= quizCount) {
@@ -147,27 +170,13 @@ export default function QuizMode({
         color: T.wrong,
       },
     ];
-    const DELAYS = [
-      { v: 1000, l: '1 dtk' },
-      { v: 1500, l: '1.5 dtk' },
-      { v: 2000, l: '2 dtk' },
-      { v: 0, l: 'Manual' },
-    ];
-
-    const pillStyle = (on) => ({
-      fontFamily: 'inherit',
-      padding: 'var(--space-8) var(--space-16)',
-      fontSize: 'var(--fs-body)',
-      borderRadius: T.r.pill,
-      cursor: 'pointer',
-      fontWeight: on ? 700 : 400,
-      background: on ? T.surfaceActive : T.surface,
-      border: `1px solid ${on ? T.borderActive : T.border}`,
-      color: on ? T.amber : T.textMuted,
-    });
+    const pillStyle = (on) => sharedPill(on, 'md');
 
     return (
-      <div className={S.pageFade} style={{ padding: 'var(--space-24) var(--space-16)' }}>
+      <div
+        className={`${S.pageFade} ${S.setupPage}`}
+        style={{ padding: 'var(--space-24) var(--space-16)' }}
+      >
         <div className={S.rowSpread} style={{ marginBottom: 'var(--space-16)' }}>
           <button
             style={{
@@ -198,7 +207,7 @@ export default function QuizMode({
           >
             <div
               style={{
-                fontSize: '0.875rem',
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 color: T.text,
                 marginBottom: 'var(--space-4)',
@@ -254,20 +263,20 @@ export default function QuizMode({
             flexWrap: 'wrap',
           }}
         >
-          {[...QUIZ_COUNTS, catFilteredCards.length].map((n, i) => {
-            const label = i === QUIZ_COUNTS.length ? 'Semua' : String(n);
+          {[...QUIZ_COUNTS, QUIZ_COUNT_ALL].map((n) => {
+            const label = n === QUIZ_COUNT_ALL ? `Semua (${catFilteredCards.length})` : String(n);
             return (
               <button
                 key={n}
                 onClick={() => {
-                  setQuizCount(n);
+                  setQuizCountPref(n);
                   // Persist count choice.
                   import('../storage/engine.js').then(({ set: storageSet }) => {
                     const prefs = storageGet('prefs') ?? {};
                     storageSet('prefs', { ...prefs, quizQuestionCount: n });
                   });
                 }}
-                style={pillStyle(quizCount === n)}
+                style={pillStyle(quizCountPref === n)}
               >
                 {label}
               </button>
@@ -355,59 +364,41 @@ export default function QuizMode({
                 Lanjut otomatis
               </div>
               <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
-                {DELAYS.map((d) => (
+                {AUTO_NEXT_DELAYS.map((d) => (
                   <button
-                    key={d.v}
-                    onClick={() => setAutoNextDelay(d.v)}
-                    style={pillStyle(autoNextDelay === d.v)}
+                    key={d.ms}
+                    onClick={() => {
+                      setAutoNextDelay(d.ms);
+                      saveAutoNextDelay(d.ms);
+                    }}
+                    style={pillStyle(autoNextDelay === d.ms)}
                   >
-                    {d.l}
+                    {d.label}
                   </button>
                 ))}
               </div>
             </div>
-            {/* Category filter */}
-            {availableCats.length > 1 && (
-              <div style={{ marginTop: 'var(--space-12)' }}>
-                <div
-                  style={{
-                    fontSize: 'var(--fs-body)',
-                    fontWeight: 600,
-                    color: T.text,
-                    marginBottom: 'var(--space-8)',
-                  }}
-                >
-                  Filter Kategori
-                </div>
-                <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
-                  {availableCats.map((key) => {
-                    const meta =
-                      key === 'all'
-                        ? { label: 'Semua', emoji: '📚' }
-                        : CATEGORIES.find((c) => c.key === key) || { label: key, emoji: '📁' };
-                    return (
-                      <button
-                        key={key}
-                        onClick={() => setSelectedCat(key)}
-                        style={{ ...pillStyle(selectedCat === key), fontSize: 'var(--fs-small)' }}
-                      >
-                        {meta.emoji} {meta.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+            {/* Item 77: was a third hand-rolled copy of the same picker. */}
+            <div style={{ marginTop: 'var(--space-12)' }}>
+              <CategoryPicker
+                cats={availableCats}
+                value={selectedCat}
+                onChange={setSelectedCat}
+                label="Filter Kategori"
+              />
+            </div>
           </div>
         )}
 
-        <button
-          className={S.btnPrimary}
-          style={{ fontSize: 'var(--fs-subtitle)', padding: 'var(--space-16)' }}
-          onClick={startQuiz}
-        >
-          Mulai Kuis 🚀
-        </button>
+        <div className={S.setupCta}>
+          <button
+            className={S.btnPrimary}
+            style={{ width: '100%', fontSize: 'var(--fs-subtitle)', padding: 'var(--space-16)' }}
+            onClick={startQuiz}
+          >
+            Mulai Kuis 🚀
+          </button>
+        </div>
       </div>
     );
   }

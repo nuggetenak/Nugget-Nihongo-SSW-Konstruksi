@@ -1,3 +1,123 @@
+## [7.0.0] - 2026-09-07
+
+Major, and for two reasons at once: two modes are gone, and the card corpus changed shape. Owner's
+brief was three things — remove Produksi and Kuis Produksi, split multi-vocabulary cards into one
+card per term, and work through the queue already sitting in the docs.
+
+### Two modes removed
+
+**`produksi` and `kuisprod` are gone.** Both were free-typing modes, and the surface of answers that
+had to be accepted — synonyms, kana against kanji, spacing, abbreviations — is too wide to close
+fairly, so the modes marked the learner wrong more often than they taught. Owner's call: delete
+rather than merge (`docs/UI_UX_PLAN.md` item 81 is closed as *dropped*, not done — the audit had
+proposed folding them into one behind a direction prop).
+
+Latihan is 7 modes now, 19 in total, and every one of them is scored deterministically.
+
+Four files went with them because nothing else used them: `TypoDiff`, `utils/typo-diff.js`,
+`HowToPlayCard` and its stylesheet. Two runtime hazards were *not* just deletions and are worth
+naming, because neither would have failed a test:
+
+- `recommend-mode.js` picked the day's suggestion with `% 3` against a 3-element rotation. Dropping
+  one element left a literal `% 3` over a 2-element array, so one day in three handed `undefined`
+  to `onNavigate`. The modulo is derived from the array now, so the next change to that list cannot
+  reintroduce it.
+- A saved `prefs.lastMode` can name a mode that no longer exists, which `ModeRouter` renders as
+  nothing — a blank screen with no header on boot. Validated against `MODE_COMPONENTS` on read,
+  which closes the class rather than this instance, and needs no storage-version bump.
+
+`progress.sessions[].mode` keeps its historical `"produksi"` rows on purpose. Those sessions did
+happen; rewriting a user's history for a cosmetic label is worse than the label.
+
+### One card, one term
+
+**1,438 cards became 1,626.** Every card in the corpus was swept — twelve agents, twelve shards, no
+sampling — and given a verdict, recorded in full in `docs/CARD_SPLIT_AUDIT.md`: 199 bundles split,
+113 kept with the rule that kept them.
+
+The order mattered more than the splitting. Deduplicating *first* turned 583 raw child slots into
+451 distinct terms, of which 76 already had a card of their own; splitting first would have produced
+around 128 duplicates to clean up afterwards — four separate 路床 cards, three separate とび職
+cards. Card ids are never renumbered (`scripts/audit-integrity.mjs` says why: it would invalidate
+every saved SRS state, note and starred id in every existing install), so a parent keeps its id for
+its first term and the rest are appended.
+
+Six rules kept 113 cards whole, and they are in the audit doc with an example each: `・` inside a
+single katakana loanword (`パワー・ハラスメント`), named concepts whose parts *are* the definition
+(`5S`, `ほうれんそう`), headword-plus-variants in brackets, sentences rather than lists, synonyms for
+one thing, and Japan's own official accident categories (`墜落・転落`).
+
+**One deliberate deviation from the plan, reported rather than buried.** The plan said every vocab
+child would get its own `usage` sentence. 366 of 518 could inherit one that verifiably contains
+their term; for the other 152 the choice was to compose Japanese or to omit the field. Unverified
+Japanese in a certification deck is worse than an absent field, `CARD_CONTENT_SPEC` §4.6 permits
+omission, and coverage still lands near 90% against a 35–50% target. They can be authored on
+request.
+
+### Content defects found while in there
+
+- **118 truncated `desc` fields** finished. 169 of the original 190 came from one import batch
+  (`vocab-supplementary`) cut at about 80 characters mid-sentence. `data-integrity.test.js` C10 now
+  asserts §4.5's closing-mark rule with a budget that may only shrink.
+- **19 truncated `id_text` labels** rewritten; C11 holds §4.4.
+- **41 card ids retired** where a term deduplicated into a card that already existed —
+  `related_card_id` updated with them. Verified against `main`'s corpus card by card: every one of
+  the 41 has its content on a surviving card (`1324 ダム工事の目的：治水 vs 利水`, for instance, is
+  now `1291 治水` and `1700 利水`). Ids are never *renumbered*, which is the rule that protects
+  saved SRS state; a removed id is a different thing, and it leaves an orphaned SRS entry in anyone
+  who had reviewed that card.
+
+  That was known and accepted — `getDueCardIds(whitelist)` filters an orphan out before it can
+  reach `CARD_MAP[currentId]`, so nothing crashes and no migration is needed. **What was not known
+  is that one caller passed no whitelist**: `daily-mission.js` counted orphans, so a due orphan
+  could make "Ulasan SRS" today's mission while the review queue — which `useSRS` does whitelist —
+  had nothing in it. A mission the learner cannot complete. Fixed, with
+  `src/tests/srs-orphans.test.js` holding the rule for every call site.
+- **61 ruby readings** whose marker covered less text than the reading spelled. `36協定《さぶろく
+  きょうてい》` renders the whole reading over `協定` alone, because `extendBaseLeft` needs kana to
+  anchor an extension and a digit gives it none. Two shapes, two fixes: a Latin prefix means the
+  reading should cover only the kanji (`CD管《しいぢいかん》` → `CD管《かん》`), a digit prefix means
+  writing the number in kanji so the base can reach it (`36協定` → `三六協定`).
+  `src/tests/ruby-scope.test.js` measures the rest through the real parser and holds the line at 42.
+
+### The docs queue
+
+Twenty items from `docs/UI_UX_PLAN.md` — 70–77, 79–81, 93–95, 97, 98, 100–102, 106 — each written
+up in the item itself. The ones that change
+behaviour rather than shape:
+
+- **The exam mode joined the app's own bookkeeping.** It recorded its mistakes nowhere (93), kept no
+  history of itself (94), and `getBestSimScore` could not tell a 15-question practice run from a
+  50-question exam — which is what the "Siap Ujian" badge and the dashboard's readiness advice are
+  computed from (97). Mistakes now file into the store their own source already uses, so JAC's
+  ⚠ Lemah and Wayground's ⚠ Ulang N pick them up without knowing `simulasi` exists.
+- **`kartu` records its sessions** (75). Every other study mode was handed `onSessionEnd`; the most
+  opened mode in the app had never appeared on its own statistics page.
+- **Flag a question and come back to it** (101), and review what you got *right* (100) — a lucky
+  guess and knowledge looked identical on the results screen.
+- **The exam screen has a keyboard and a live region** (95), and a skip link past 51 navigator
+  buttons.
+- **JAC Official's short presets have a ratio** (98). A 15-question run could contain anywhere from
+  0 to 11 practical questions, and 0.10% contained none; measured over 20,000 draws before and
+  after.
+- **Questions say where they came from** (106): the official book, a JAC-style mockup, or practice.
+- **Session length and auto-advance are one preference each** (79, 80), reaching the modes whose
+  screens have nowhere to put a picker.
+- **The flip card fills its scene** (74), measured in Chromium: 179px of dead air on a phone and
+  401px on a tablet, both now zero.
+
+Three items are recorded as *decided but not built*, with the reasoning in each: 58 needs a storage
+v7 migration and its own session, 59 is blocked on there being no ja-JP voice anywhere in the
+toolchain, 99 on the exam photographs not existing. 96 is *sized* rather than done — 305 of its 980
+links are derivable with confidence and 675 need a human read, and `npm run derive:quiz-links` is
+the tool that says so.
+
+### Verification
+
+`npm run validate` clean: 867 tests in 90 files, five audits, build. Item 74 and item 73 were
+measured in Chromium against the running app rather than eyeballed, and item 98's before/after
+distributions come from 20,000 simulated draws each.
+
 ## [6.1.0] - 2026-09-05
 
 Two sessions of work that reached `main` without a release note, plus the audit that found the

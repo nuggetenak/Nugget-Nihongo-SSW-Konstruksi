@@ -63,7 +63,7 @@ export default function MissionCompleteOverlay({ onDone, result }) {
         {result?.label && (
           <div
             style={{
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               marginTop: 'var(--space-6)',
               opacity: 0.9,
               fontWeight: 600,

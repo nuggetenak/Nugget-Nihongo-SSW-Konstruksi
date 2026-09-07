@@ -6,6 +6,7 @@
 import { lazy } from 'react';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { isVocabId } from '../utils/quiz-classification.js';
+import { EXAM_FULL_QUESTIONS, examMinutes } from '../utils/constants.js';
 
 // Question counts shown in the menu, derived rather than typed.
 //
@@ -42,11 +43,9 @@ export const MODE_COMPONENTS = {
   sumber: lazy(() => import('../modes/SumberMode.jsx')),
   ekspor: lazy(() => import('../modes/ExportMode.jsx')),
   ulasan: lazy(() => import('../modes/ReviewMode.jsx')),
-  produksi: lazy(() => import('../modes/ProductionMode.jsx')),
   mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
   dengar: lazy(() => import('../modes/DengarMode.jsx')),
   catatan: lazy(() => import('../modes/CatatanMode.jsx')),
-  kuisprod: lazy(() => import('../modes/QuizProduksiMode.jsx')),
 };
 
 // ── Navigation sections ────────────────────────────────────────────────────
@@ -59,7 +58,7 @@ export const MODE_SECTIONS = {
   latihan: {
     title: '🧪 Latihan',
     subtitle: 'Asah kemampuan',
-    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'produksi', 'mirip', 'dengar', 'kuisprod'],
+    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'mirip', 'dengar'],
   },
   ujian: {
     title: '📋 Ujian',
@@ -178,7 +177,13 @@ export const MODE_META = {
     icon: '🎯',
     ui: 'simulasi',
     label: 'Simulasi',
-    desc: 'Ujian + timer',
+    // Item 102b: was 'Ujian + timer', the one description in this section that
+    // named no figure while `jac`, `wayground` and `vocab` all derive theirs.
+    // The mode offers three lengths; the full exam is the one worth advertising,
+    // and its shape lives in constants.js so this and SimulasiMode's own preset
+    // read the same numbers. Shorter runs are described on the setup screen,
+    // where the choice is actually made.
+    desc: `Ujian penuh ${EXAM_FULL_QUESTIONS} soal · ${examMinutes(EXAM_FULL_QUESTIONS)} menit`,
     color: '#ef4444',
     strand: 'language',
     skeleton: 'quiz',
@@ -253,14 +258,6 @@ export const MODE_META = {
     strand: null,
     skeleton: 'list',
   },
-  produksi: {
-    icon: '✍️',
-    ui: 'tulis',
-    label: 'Produksi',
-    desc: 'ID→JP: ketik jawaban Jepang',
-    color: '#34d399',
-    strand: 'output',
-  },
   mirip: {
     icon: '🔀',
     ui: 'tukar',
@@ -287,15 +284,6 @@ export const MODE_META = {
     color: '#84cc16',
     strand: 'input',
     skeleton: 'list',
-  },
-  kuisprod: {
-    icon: '🔤',
-    ui: 'ketik',
-    label: 'Kuis Produksi',
-    short: 'Kuis Prod',
-    desc: 'JP → ketik terjemahan Indonesia',
-    color: '#10b981',
-    strand: 'output',
   },
 };
 

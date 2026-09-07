@@ -15,13 +15,24 @@
  * @param {Array} questions - each with { jp, id_text, opts, correctIdx,
  *   explanation, _source, _setLabel, _category, _cardId }
  * @param {Object} answers - { [questionIndex]: { selectedIdx, isCorrect } }
+ * @param {Set<number>|Array<number>} flagged - question indexes the user marked
+ *   for review (item 101). Optional; an exam with none behaves as before.
  * @returns {Array} one entry per question, in question order (not answer
  *   order -- important, since free navigation means these can differ)
  */
-export function buildSimulasiResults(questions, answers) {
+export function buildSimulasiResults(questions, answers, flagged) {
+  const marked = flagged instanceof Set ? flagged : new Set(flagged ?? []);
   return questions.map((question, i) => {
     const a = answers[i];
     return {
+      // Item 100: the review list carried no question number, so a row could
+      // not be matched back to the navigator you had just been staring at --
+      // "the third one down" is not an identifier. 1-based, because that is
+      // what the navigator and the "Soal 7 / 15" counter both show.
+      number: i + 1,
+      // Item 101: whether it was flagged, so the review can say so. A flag you
+      // can set but never see again teaches nothing.
+      wasFlagged: marked.has(i),
       isCorrect: a ? a.selectedIdx === question.correctIdx : false,
       jp: question.jp,
       id_text: question.id_text,
@@ -39,6 +50,11 @@ export function buildSimulasiResults(questions, answers) {
       // no Wayground/JAC-Mockup question has a related card.
       _category: question._category ?? null,
       _cardId: question._cardId ?? null,
+      // Item 93: how this question is identified in the store its own source
+      // already uses — see recordSimulasiMistakes.
+      _wrongKey: question._wrongKey ?? null,
+      // Item 106: official book / JAC-style mockup / practice.
+      _origin: question._origin ?? 'latihan',
     };
   });
 }

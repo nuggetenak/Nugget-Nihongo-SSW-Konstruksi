@@ -14,7 +14,7 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 
 **Fitur utama:**
 
-- 🃏 **1,438 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
+- 🃏 **1,626 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
 - ❓ **1.075 soal kuis** — Wayground 680 · JAC Mockup 300 · JAC Resmi 95
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
@@ -98,12 +98,12 @@ src/
 ├── storage/                 # localStorage engine, schema v6, migrations
 ├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
 ├── components/              # Shared UI components
-├── modes/                   # 21 mode screens (all React.lazy)
+├── modes/                   # 19 mode screens (all React.lazy)
 │   └── FlashcardMode/       # Decomposed flashcard mode
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 79 test files, 768 tests
+└── tests/                   # 90 test files, 867 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
@@ -145,7 +145,7 @@ Export/import tersedia di tab **Saya** → fitur backup & restore.
 Setiap push ke `main` → GitHub Actions menjalankan:
 
 1. **Lint** (`npm run lint` — zero warnings) — `ci.yml` + `deploy.yml`
-2. **Test** (`npm test` — 768 test) — `ci.yml` + `deploy.yml`
+2. **Test** (`npm test` — 867 test) — `ci.yml` + `deploy.yml`
 3. **Build** (`npm run build`) — `ci.yml`
 4. **Deploy** ke GitHub Pages (otomatis, lewat `deploy.yml`)
 

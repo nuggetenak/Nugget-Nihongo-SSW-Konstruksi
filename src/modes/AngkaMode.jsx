@@ -12,6 +12,7 @@ import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpD
 import { JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
+import SessionLengthPicker, { storedQuizCount } from '../components/SessionLengthPicker.jsx';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import S from './modes.module.css';
@@ -96,23 +97,50 @@ function buildGroups() {
     items: map[g],
   }));
 }
-function buildQuizItems() {
-  return shuffle(ANGKA).map((item) => {
-    const distractors = shuffle(ANGKA.filter((x) => x !== item)).slice(0, 3);
-    const opts = shuffle([
-      { text: item.angka, isCorrect: true },
-      ...distractors.map((d) => ({ text: d.angka, isCorrect: false })),
-    ]);
-    return { item, opts, correctIdx: opts.findIndex((o) => o.isCorrect) };
-  });
+function buildQuizItems(limit) {
+  // Item 80: `limit` is the session length the panel chose; undefined keeps the
+  // old behaviour of drilling all of ANGKA.
+  return shuffle(ANGKA)
+    .slice(0, limit ?? ANGKA.length)
+    .map((item) => {
+      // Distractors come from all of ANGKA, not from the sliced session: a
+      // shorter session should be shorter, not easier.
+      const distractors = shuffle(ANGKA.filter((x) => x !== item)).slice(0, 3);
+      const opts = shuffle([
+        { text: item.angka, isCorrect: true },
+        ...distractors.map((d) => ({ text: d.angka, isCorrect: false })),
+      ]);
+      return { item, opts, correctIdx: opts.findIndex((o) => o.isCorrect) };
+    });
 }
 
-export default function AngkaMode({ onSessionEnd }) {
+/**
+ * Item 79: the bridge from "what you got wrong" back to the cards that teach it.
+ *
+ * Angka is the one of the four modes the item named where this is exact rather
+ * than inferred: every ANGKA_KUNCI entry carries a `kartu` id (27 of 29 point at
+ * a live card), so the ids come from the data instead of from matching Japanese
+ * strings against the corpus. `retryWrongCount` is the count of *cards*, not of
+ * missed questions — the two differ by the two entries with no card, and a
+ * button that promises six and opens four is worse than no button.
+ */
+function retryWrongProps(wrongItems, onRetryWrong) {
+  if (!onRetryWrong) return {};
+  const ids = [
+    ...new Set(wrongItems.map((it) => it?.kartu).filter((id) => typeof id === 'number')),
+  ];
+  return { onRetryWrong: () => onRetryWrong(ids), retryWrongCount: ids.length };
+}
+
+export default function AngkaMode({ onSessionEnd, onRetryWrong }) {
   const [view, setView] = useState('panel');
   const [quizMode, setQuizMode] = useState('pilihan'); // 'pilihan' or 'ketik'
+  const [limit, setLimit] = useState(null);
   if (view === 'panel')
     return (
       <PanelView
+        limit={limit}
+        onLimitChange={setLimit}
         onStartQuiz={(mode) => {
           setQuizMode(mode);
           setView('quiz');
@@ -120,16 +148,34 @@ export default function AngkaMode({ onSessionEnd }) {
       />
     );
   if (quizMode === 'ketik')
-    return <TypeQuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
-  return <QuizView onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />;
+    return (
+      <TypeQuizView
+        onBack={() => setView('panel')}
+        onSessionEnd={onSessionEnd}
+        onRetryWrong={onRetryWrong}
+        limit={limit}
+      />
+    );
+  return (
+    <QuizView
+      onBack={() => setView('panel')}
+      onSessionEnd={onSessionEnd}
+      onRetryWrong={onRetryWrong}
+      limit={limit}
+    />
+  );
 }
 
-function PanelView({ onStartQuiz }) {
+function PanelView({ onStartQuiz, limit, onLimitChange }) {
   // onStartQuiz(mode)
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [expanded, setExpanded] = useState(null);
   const groups = useMemo(() => buildGroups(), []);
+  const count = limit ?? storedQuizCount(ANGKA.length);
+  useEffect(() => {
+    if (limit === null) onLimitChange(count);
+  }, [limit, count, onLimitChange]);
 
   return (
     <div className={S.page}>
@@ -156,6 +202,8 @@ function PanelView({ onStartQuiz }) {
       <div className={A.warningBanner}>
         🚨 Wajib hafal sebelum ujian — sering muncul di soal Prometric SSW!
       </div>
+
+      <SessionLengthPicker total={ANGKA.length} value={count} onChange={onLimitChange} />
 
       {groups.map((g, gi) => (
         <div key={g.label} className={A.groupSection}>
@@ -263,8 +311,8 @@ function PanelView({ onStartQuiz }) {
   );
 }
 
-function QuizView({ onBack, onSessionEnd }) {
-  const [items, setItems] = useState(() => buildQuizItems());
+function QuizView({ onBack, onSessionEnd, onRetryWrong, limit }) {
+  const [items, setItems] = useState(() => buildQuizItems(limit));
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
   const [results, setResults] = useState([]);
@@ -356,6 +404,10 @@ function QuizView({ onBack, onSessionEnd }) {
           correctAnswer: r.item.item.angka,
         }))}
         onRestart={restart}
+        {...retryWrongProps(
+          wrongList.map((r) => r.item.item),
+          onRetryWrong
+        )}
         onExit={onBack}
       />
     );
@@ -442,7 +494,7 @@ function QuizView({ onBack, onSessionEnd }) {
                       : T.textDim,
                 textAlign: 'left',
                 cursor: selected !== null ? 'default' : 'pointer',
-                fontSize: '0.875rem',
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 fontVariantNumeric: 'tabular-nums',
                 transition: 'all 0.15s',
@@ -478,8 +530,8 @@ function QuizView({ onBack, onSessionEnd }) {
 }
 
 // Type-answer quiz — user types the number/value for each konteks.
-function TypeQuizView({ onBack, onSessionEnd }) {
-  const [items] = useState(() => shuffle([...ANGKA]));
+function TypeQuizView({ onBack, onSessionEnd, onRetryWrong, limit }) {
+  const [items] = useState(() => shuffle([...ANGKA]).slice(0, limit ?? ANGKA.length));
   const [qIdx, setQIdx] = useState(0);
   const [input, setInput] = useState('');
   const [checked, setChecked] = useState(false);
@@ -562,6 +614,10 @@ function TypeQuizView({ onBack, onSessionEnd }) {
             correctAnswer: r.item.angka,
           }))}
         onRestart={onBack}
+        {...retryWrongProps(
+          results.filter((r) => !r.correct).map((r) => r.item),
+          onRetryWrong
+        )}
         onExit={onBack}
       />
     );

@@ -25,6 +25,10 @@ export const DEFAULTS = {
     jacScores: {}, // { [setId]: { correct, total, date } }
     wgScores: {},
     vocabScores: {},
+    // Item 94: per-preset simulasi history, keyed `${source}-${preset}` (e.g.
+    // 'pool-full', 'jac-quick'). Additive — an install without the key reads as
+    // {} everywhere, so no migration and STORAGE_VERSION stays where it is.
+    simScores: {},
     streakData: {}, // { days, lastDate }
     dailyCount: { count: 0, date: '' },
     recentCards: [], // array of cardIds (max 20)
@@ -53,7 +57,8 @@ export const DEFAULTS = {
     flashcardHintCount: 0, // resets on resetAll()
     notes: {}, // personal notes per card { [cardId]: string }
     speakOnFlip: false, // speak on card flip instead of advance
-    quizQuestionCount: 10, // persist quiz question count
+    quizQuestionCount: 10, // persist quiz question count (0 = Semua, item 80)
+    autoNextDelay: 2000, // ms before auto-advancing past a revealed answer (0 = manual)
     sprintBests: {}, // per-duration personal bests { [durationKey]: { score, timeline } }
     dailyChallengeLog: {}, // { [YYYY-MM-DD]: { selected: number, correct: boolean } }
   },

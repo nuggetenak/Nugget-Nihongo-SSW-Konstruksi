@@ -8,12 +8,21 @@
   perspective: 1400px;
 }
 
-/* Flip card — animates transform */
+/* Flip card — animates transform.
+
+   A flex column (item 74) so .front, its only in-flow child, can stretch to
+   whatever height the card is given. Before this the card was a plain block:
+   the front sized itself from its content and the card sized itself from the
+   ResizeObserver's measurement of the back, which is why neither could grow
+   into the scene. */
 :global(.fc-card) {
   position: relative;
   transform-style: preserve-3d;
   transition: transform var(--t-slow) var(--ease-spring);
   will-change: transform;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 :global(.fc-card.is-flipped) {
@@ -44,24 +53,26 @@
 }
 
 /* ── FlipCard subcomponent ─────────────────────────────────────────────────── */
-/* The card keeps its own height (see the NOTE below); the SCENE is what grows,
-   so the slack .fcWrapper now claims lands as equal air above and below the
-   card instead of as a gap under the last button. Column direction matters:
-   as a row, .fc-card would shrink-to-fit its text instead of filling the
-   width. */
+/* The scene claims the slack .fcWrapper is given, and the card now fills the
+   scene (item 74) instead of sitting centred in it with air above and below.
+   Column direction matters: as a row, .fc-card would shrink-to-fit its text
+   instead of filling the width.
+
+   `justify-content: center` is gone with the centring it did — a card that
+   fills its parent has nothing left to centre in. */
 .scene {
   margin-bottom: var(--space-12);
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
-/* NOTE: the card deliberately does NOT stretch to fill leftover space. Its
-   height is driven by a ResizeObserver in FlipCard that measures the back
-   face, so the card keeps one height across the flip and does not jump when
-   the answer is longer than the prompt. Forcing flex growth here fights that
-   and only opens a gap inside the card. */
+/* NOTE (superseded, item 74): the card used to be held at the back face's
+   measured height by a ResizeObserver, so that it kept one height across the
+   flip. `.back` is now `bottom: 0` and the two faces are the same box by
+   construction — there is nothing left to measure and nothing left to jump.
+   A back longer than the card scrolls inside itself, which is what its own
+   `overflow: hidden auto` / `overscroll-behavior: contain` were always for. */
 
 /* ── RatingRow subcomponent ────────────────────────────────────────────────── */
 .ratingWrap {
@@ -135,6 +146,21 @@
   opacity: 0.7;
   line-height: 1;
   font-variant-numeric: tabular-nums;
+}
+
+/* Item 74: sits over the reserved (but hidden) rating grid, so "not yet
+   flipped", "rate this card" and "rated" are all the same height and nothing
+   below the card moves when the state changes. */
+.ratingOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  padding: 0 var(--space-16);
 }
 
 .ratedConfirm {
@@ -247,6 +273,7 @@
 @media (prefers-reduced-motion: reduce) {
   .ratingWrap,
   .ratedConfirm,
+  .ratingOverlay,
   .ratingBtn,
   .navFlip,
   .navBtn,

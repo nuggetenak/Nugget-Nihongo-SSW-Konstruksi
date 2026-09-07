@@ -11,13 +11,14 @@ import { stripFuri } from '../utils/jp-helpers.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { getWrongCount } from '../utils/wrong-tracker.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
-import { QUIZ_COUNTS } from '../utils/constants.js';
+import { QUIZ_COUNTS, QUIZ_COUNT_ALL, resolveQuizCount } from '../utils/constants.js';
 import S from './modes.module.css';
 
 function buildQuestions(cards, count, allCards) {
@@ -35,9 +36,20 @@ function buildQuestions(cards, count, allCards) {
 
 export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRetryWrong }) {
   const { toast, prefs, setPref } = useApp();
+  const { quizWrong, recordWrong } = useProgress();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [started, setStarted] = useState(false);
-  const [count, setCount] = useState(() => prefs?.quizQuestionCount ?? 10);
+  // Item 80: 0 is the "Semua" sentinel now, shared with every other mode that
+  // offers a length -- resolved against this deck rather than stored as its size.
+  const [countPref, setCountPref] = useState(() => prefs?.quizQuestionCount ?? 10);
+  // Item 79: Dengar records every wrong answer into the shared quizWrong store
+  // by real card id (see handleSelect below) — the same store Kuis's "Mode
+  // Lemah" reads — and then offered no way to drill only those. The filter was
+  // one of the three the item found missing where the data was already there.
+  const [lemahMode, setLemahMode] = useState(false);
+  const lemahCards = cards.filter((c) => getWrongCount(quizWrong[c.id]) > 0);
+  const deck = lemahMode ? lemahCards : cards;
+  const count = resolveQuizCount(countPref, deck.length);
   const [questions, setQuestions] = useState([]);
   const [idx, setIdx] = useState(0);
   const [selected, setSelected] = useState(null); // null | index
@@ -46,7 +58,6 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   const speakCountRef = useRef(0);
   const advanceTimerRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
-  const { recordWrong } = useProgress();
   const online = useOnlineStatus();
 
   const hasAudio = canSpeak();
@@ -68,7 +79,9 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   }, [toast, online]);
 
   const start = () => {
-    const qs = buildQuestions(cards, count, allCards || cards);
+    // Distractors still come from the whole deck: a wrong-only run should be
+    // narrower, not easier.
+    const qs = buildQuestions(deck, count, allCards || cards);
     setQuestions(qs);
     setIdx(0);
     setSelected(null);
@@ -154,7 +167,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   // ── Settings screen ──────────────────────────────────────────────────────
   if (!started) {
     return (
-      <div className={S.page}>
+      <div className={`${S.page} ${S.setupPage}`}>
         <div style={{ marginBottom: 'var(--space-24)' }}>
           <p className={S.pageSub} style={{ marginBottom: 0 }}>
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
@@ -206,11 +219,11 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             Jumlah Soal
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-8)' }}>
-            {QUIZ_COUNTS.map((n) => (
+            {[...QUIZ_COUNTS.filter((n) => n < deck.length), QUIZ_COUNT_ALL].map((n) => (
               <button
                 key={n}
                 onClick={() => {
-                  setCount(n);
+                  setCountPref(n);
                   setPref('quizQuestionCount', n);
                 }}
                 style={{
@@ -219,15 +232,15 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                   borderRadius: 10,
                   fontFamily: 'inherit',
                   fontSize: 'var(--fs-subtitle)',
-                  fontWeight: count === n ? 700 : 400,
+                  fontWeight: countPref === n ? 700 : 400,
                   cursor: 'pointer',
-                  border: `2px solid ${count === n ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
-                  background: count === n ? 'rgba(245,158,11,0.12)' : 'var(--ssw-surface)',
-                  color: count === n ? 'var(--ssw-amber)' : 'var(--ssw-textMuted)',
+                  border: `2px solid ${countPref === n ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
+                  background: countPref === n ? 'rgba(245,158,11,0.12)' : 'var(--ssw-surface)',
+                  color: countPref === n ? 'var(--ssw-amber)' : 'var(--ssw-textMuted)',
                   transition: 'all 0.15s',
                 }}
               >
-                {n}
+                {n === QUIZ_COUNT_ALL ? 'Semua' : n}
               </button>
             ))}
           </div>
@@ -249,24 +262,58 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           detik.
         </div>
 
-        <button
-          onClick={start}
-          disabled={!hasAudio}
-          style={{
-            width: '100%',
-            padding: 'var(--space-14)',
-            borderRadius: 12,
-            background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
-            color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
-            fontFamily: 'inherit',
-            fontSize: '1rem',
-            fontWeight: 700,
-            border: 'none',
-            cursor: hasAudio ? 'pointer' : 'not-allowed',
-          }}
-        >
-          Mulai Latihan
-        </button>
+        {lemahCards.length > 0 && (
+          <div className={S.rowSpread} style={{ marginBottom: 'var(--space-20)' }}>
+            <div>
+              <div
+                style={{ fontSize: 'var(--fs-body)', fontWeight: 600, color: 'var(--ssw-text)' }}
+              >
+                Mode Lemah
+              </div>
+              <div style={{ fontSize: 'var(--fs-small)', color: 'var(--ssw-textDim)' }}>
+                Fokus ke {lemahCards.length} kartu yang sering salah
+              </div>
+            </div>
+            <button
+              onClick={() => setLemahMode((l) => !l)}
+              aria-pressed={lemahMode}
+              style={{
+                fontFamily: 'inherit',
+                padding: 'var(--space-6) var(--space-14)',
+                borderRadius: 999,
+                border: `1px solid ${lemahMode ? 'var(--ssw-wrongBorder)' : 'var(--ssw-border)'}`,
+                background: lemahMode ? 'var(--ssw-wrongBg)' : 'var(--ssw-surface)',
+                color: lemahMode ? 'var(--ssw-wrong)' : 'var(--ssw-textMuted)',
+                cursor: 'pointer',
+                fontWeight: 700,
+                fontSize: 'var(--fs-caption)',
+              }}
+            >
+              {lemahMode ? '⚠ ON' : 'OFF'}
+            </button>
+          </div>
+        )}
+
+        <div className={S.setupCta}>
+          <button
+            onClick={start}
+            disabled={!hasAudio}
+            style={{
+              width: '100%',
+              padding: 'var(--space-14)',
+              borderRadius: 12,
+              background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
+              color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
+              fontFamily: 'inherit',
+              fontSize: '1rem',
+              fontWeight: 700,
+              border: 'none',
+              cursor: hasAudio ? 'pointer' : 'not-allowed',
+            }}
+          >
+            Mulai Latihan
+          </button>
+        </div>
       </div>
     );
   }

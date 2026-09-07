@@ -7,8 +7,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
+import { isTypingTarget } from '../utils/keyboard.js';
+import { originForSet, originMeta } from '../utils/question-origin.js';
 import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useConfirm } from '../components/ConfirmDialog.jsx';
 import { useExitGuard } from '../hooks/useExitGuard.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
@@ -17,13 +20,22 @@ import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { isTeoriId, isPraktikId } from '../utils/quiz-classification.js';
 import { haptic } from '../utils/haptic.js';
 import { buildSimulasiResults } from '../utils/simulasi-scoring.js';
-import { EXAM_PASS_PCT, EXAM_SECONDS_PER_QUESTION } from '../utils/constants.js';
+import { recordSimulasiMistakes } from '../utils/simulasi-mistakes.js';
+import {
+  EXAM_PASS_PCT,
+  EXAM_SECONDS_PER_QUESTION,
+  EXAM_FULL_TEORI,
+  EXAM_FULL_PRAKTIK,
+  examMinutes,
+} from '../utils/constants.js';
 import {
   saveQuizSnapshot,
   readQuizSnapshot,
   clearQuizSnapshot,
 } from '../utils/quiz-persistence.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import ExplanationText from '../components/ExplanationText.jsx';
+import { pillStyle } from '../styles/pill.js';
 import S from './modes.module.css';
 import SM from './SimulasiMode.module.css';
 
@@ -79,44 +91,45 @@ const MODES = [
     key: 'jac',
     emoji: '🏛️',
     label: 'JAC Official',
-    sub: `Soal resmi dari buku ujian JAC (${JAC_OFFICIAL.length} soal)`,
+    // Item 102a. This read "Soal resmi dari buku ujian JAC (95 soal)", which
+    // sets up an expectation no preset here can meet: every start — quick, half
+    // and full alike — draws from one random teori set plus one random praktik
+    // set (pickJacSetPair, 44 or 51 questions), never the flattened 95. The
+    // bank is 95; the exam never is. This line says the bank and that a run is
+    // a sample of it; the presets below say what each run actually draws, so
+    // the set-pair rule is spelled out once rather than twice on one screen.
+    sub: `Bank resmi ${JAC_OFFICIAL.length} soal · tiap ujian ambil sebagian secara acak`,
   },
 ];
+// Each preset's `sub` is written from its own `teori`/`praktik` rather than
+// typed beside them: "15 soal (9 teori + 6 praktik) · 30 menit" restates three
+// numbers that already sit two lines below it, which is exactly how the menu
+// counts in modes.js went stale twice (see MODE_COUNTS). The full preset's
+// split lives in constants.js because the Belajar menu needs it too and cannot
+// import this lazy chunk.
+const poolPreset = (key, emoji, label, teori, praktik) => {
+  const n = teori + praktik;
+  return {
+    key,
+    emoji,
+    label,
+    sub: `${n} soal (${teori} teori + ${praktik} praktik) · ${examMinutes(n)} menit`,
+    teori,
+    praktik,
+    time: n * SECONDS_PER_QUESTION,
+  };
+};
 const POOL_PRESETS = [
-  {
-    key: 'quick',
-    emoji: '⚡',
-    label: 'Latihan Cepat',
-    sub: '15 soal (9 teori + 6 praktik) · 30 menit',
-    teori: 9,
-    praktik: 6,
-    time: 15 * SECONDS_PER_QUESTION,
-  },
-  {
-    key: 'half',
-    emoji: '📝',
-    label: 'Setengah Ujian',
-    sub: '25 soal (15 teori + 10 praktik) · 50 menit',
-    teori: 15,
-    praktik: 10,
-    time: 25 * SECONDS_PER_QUESTION,
-  },
-  {
-    key: 'full',
-    emoji: '🎯',
-    label: 'Ujian Penuh',
-    sub: '50 soal (30 teori + 20 praktik) · 100 menit',
-    teori: 30,
-    praktik: 20,
-    time: 50 * SECONDS_PER_QUESTION,
-  },
+  poolPreset('quick', '⚡', 'Latihan Cepat', 9, 6),
+  poolPreset('half', '📝', 'Setengah Ujian', 15, 10),
+  poolPreset('full', '🎯', 'Ujian Penuh', EXAM_FULL_TEORI, EXAM_FULL_PRAKTIK),
 ];
 const JAC_PRESETS = [
   {
     key: 'quick',
     emoji: '⚡',
     label: 'Latihan Cepat',
-    sub: '15 soal · 30 menit',
+    sub: `15 soal · ${examMinutes(15)} menit`,
     count: 15,
     time: 15 * SECONDS_PER_QUESTION,
   },
@@ -124,7 +137,7 @@ const JAC_PRESETS = [
     key: 'half',
     emoji: '📝',
     label: 'Setengah Ujian',
-    sub: '25 soal · 50 menit',
+    sub: `25 soal · ${examMinutes(25)} menit`,
     count: 25,
     time: 25 * SECONDS_PER_QUESTION,
   },
@@ -165,6 +178,17 @@ const INSTRUCTIONS = [
   '⬜ Soal kosong dihitung salah',
   `✅ ${PASS_PCT}% ke atas = LULUS`,
 ];
+// Item 100. The review list was wrong-answers-only, which makes a lucky guess
+// indistinguishable from knowledge — and on a flagged question you got right,
+// there was nothing at all to come back to. Three filters rather than a single
+// "show correct too" switch: 🚩 is the one a 100-minute paper is actually
+// reviewed by, and it cuts across both of the others.
+const REVIEW_FILTERS = [
+  { key: 'salah', label: '✗ Salah', pick: (rs) => rs.filter((r) => !r.isCorrect) },
+  { key: 'benar', label: '✓ Benar', pick: (rs) => rs.filter((r) => r.isCorrect) },
+  { key: 'tandai', label: '🚩 Ditandai', pick: (rs) => rs.filter((r) => r.wasFlagged) },
+];
+
 // One row per bucket: "label ..... 72% (13/18)". Extracted when the results
 // screen gained a second breakdown (teori/praktik alongside per-set) so the
 // row markup exists once rather than twice.
@@ -264,6 +288,18 @@ export function buildJacPool() {
     photoDesc: q.photoDesc,
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',
+    // Item 98: tt1/tt2 are 学科 (teori) and st1/st2 are 実技 (praktik) — stated
+    // in this file's own pickJacSetPair comment and in the source files, just
+    // never carried through the mapper. With it, the short presets can sample
+    // in proportion (below) and the results screen's teori/praktik breakdown
+    // works for this source too instead of silently rendering nothing.
+    _category: String(q.set).startsWith('st') ? 'praktik' : 'teori',
+    _origin: 'resmi', // item 106 — this is the book itself
+    // Item 93: the id this question is already tracked under everywhere else.
+    // JACMode writes these into progress.wrongCounts and reads them back as its
+    // "⚠ Lemah" set, so a mistake made here lands where a mistake made there
+    // already lands, rather than in a third namespace nothing reads.
+    _wrongKey: q.id,
     // Every one of JAC_OFFICIAL's 95 questions carries a related_card_id, and
     // this mapper was dropping all 95 of them -- which is why the results
     // screen's "Latih N Salah" had no card ids to send anywhere and shipped
@@ -306,9 +342,18 @@ export function buildQuizSetsPool() {
           explanation: q.exp || null,
           hasPhoto: false,
           photoDesc: null,
-          _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
+          // Item 106: this used to read `set.source?.startsWith('csv') ? 'csv'
+          // : 'wayground'`, and no set's source starts with 'csv' — the branch
+          // was dead, and with it any distinction between JAC-style mockups and
+          // practice material.
+          _source: 'wayground',
+          _origin: originForSet(set.source),
           _setLabel: set.title || 'Wayground',
           _category: category,
+          // Item 93: the key WaygroundMode writes into progress.wgWrong and
+          // reads back as its per-set "⚠ Ulang N salah". Same question, same
+          // key, whichever mode you met it in.
+          _wrongKey: `${set.id}-${q.id}`,
           // No question in QUIZ_SETS has a related card id (checked: 0 of 980),
           // so a wrong answer from this pool has no flashcard to send you to.
           // Explicit rather than absent, so the results screen's retry button
@@ -335,11 +380,39 @@ const SNAPSHOT_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 // Draw one exam. Pulled out of the component (it used to be a useMemo keyed on
 // a `seed` counter) because an exam now has to be restorable: the questions are
 // state you can save and load, not a value derived from render inputs.
-function drawExam(mode, config) {
+export function drawExam(mode, config) {
   let items;
   if (mode === 'jac') {
-    const pool = shuffle(buildJacPool());
-    items = config.count > 0 ? pool.slice(0, config.count) : pool;
+    const pool = buildJacPool();
+    if (config.count > 0) {
+      // Item 98: this was a plain shuffled slice, so the composition of a
+      // 15-question Latihan Cepat was whatever chance gave — measured over
+      // 20 000 draws: 0 to 11 praktik questions, and 0.11% of runs with none at
+      // all. A mock exam whose practical half can vanish is not a mock exam.
+      //
+      // Sampled in proportion to the pair it drew, rather than forced to the
+      // Teori & Praktik pool's 60/40: this source's premise is "the official
+      // book", the full preset already takes the book's own mix (29 or 36 teori
+      // to 15 praktik), and a short run should be that same mix, smaller. The
+      // owner's "biar keliatan kyk random" governs which pair is drawn — it
+      // still does; nothing here chooses the pair.
+      const teori = shuffle(pool.filter((q) => q._category === 'teori'));
+      const praktik = shuffle(pool.filter((q) => q._category === 'praktik'));
+      const nTeori = Math.round((config.count * teori.length) / (pool.length || 1));
+      const take = [
+        ...teori.slice(0, Math.min(nTeori, teori.length)),
+        ...praktik.slice(0, Math.min(config.count - nTeori, praktik.length)),
+      ];
+      // If either half came up short, top up from whatever is left rather than
+      // handing back a slice narrower than the preset promised.
+      if (take.length < config.count) {
+        const used = new Set(take);
+        take.push(...pool.filter((q) => !used.has(q)).slice(0, config.count - take.length));
+      }
+      items = shuffle(take);
+    } else {
+      items = shuffle(pool);
+    }
   } else {
     const pool = buildQuizSetsPool();
     const teoriPool = shuffle(pool.filter((q) => q._category === 'teori'));
@@ -374,12 +447,22 @@ function drawExam(mode, config) {
       _setLabel: q._setLabel,
       _category: q._category ?? null,
       _cardId: q._cardId ?? null,
+      _wrongKey: q._wrongKey ?? null,
+      _origin: q._origin ?? 'latihan',
     };
   });
 }
 
+/**
+ * Item 94: what a simulasi attempt is filed under. Per source *and* preset,
+ * because "58% last time" only means anything against the same exam — a
+ * 15-question Latihan Cepat and a 44-question JAC pair are not comparable runs.
+ */
+const simScoreKey = (mode, preset) => `${mode}-${preset}`;
+
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const { prefs } = useApp();
+  const { saveScore, simScores, recordWrong } = useProgress();
   const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [phase, setPhase] = useState('start');
@@ -388,7 +471,19 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const [questions, setQuestions] = useState([]);
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState({}); // { [qIdx]: { selectedIdx, isCorrect } }
+  // Item 101: the questions you want to come back to, by index. A real exam --
+  // Prometric's delivery included -- lets you mark one and move on rather than
+  // stalling on it, which is the behaviour a 100-minute paper actually rewards.
+  // A Set beside `answers` is the whole feature: flagging is orthogonal to
+  // answering (you can flag an answer you are unsure of, not only a blank).
+  const [flagged, setFlagged] = useState(() => new Set());
   const [results, setResults] = useState([]); // built once, at submit (item 48)
+  // Item 100: the review list showed only wrong answers, so a lucky guess and a
+  // known answer looked identical afterwards -- on a 4-option paper that is a
+  // 25% chance per blank guess, and the whole point of this screen is telling
+  // someone what they actually know. Defaults to 'salah' because that is still
+  // the first thing to read; the other two are one tap away.
+  const [reviewFilter, setReviewFilter] = useState('salah');
   const [timeLeft, setTimeLeft] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
@@ -421,6 +516,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const isLast = qIdx === questions.length - 1;
   const selected = answers[qIdx]?.selectedIdx ?? null;
   const answeredCount = Object.keys(answers).length;
+  const flaggedCount = flagged.size;
+  const isFlagged = flagged.has(qIdx);
   const budgetSec = questions.length * SECONDS_PER_QUESTION;
 
   const clearSnapshot = useCallback(() => {
@@ -429,10 +526,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   }, []);
 
   const finishExam = useCallback(() => {
-    setResults(buildSimulasiResults(questions, answers));
+    const built = buildSimulasiResults(questions, answers, flagged);
+    setResults(built);
+    // Item 93. At submit, not per answer: item 48 requires that nothing reveals
+    // correctness until the paper is handed in, and a store written mid-exam is
+    // a store that could be read mid-exam.
+    recordSimulasiMistakes(built, recordWrong);
     setPhase('result');
     clearSnapshot();
-  }, [questions, answers, clearSnapshot]);
+  }, [questions, answers, flagged, recordWrong, clearSnapshot]);
 
   // Kept in a ref so the ticking effect below never has to list finishExam as a
   // dependency -- that dependency is exactly what used to restart the timer on
@@ -443,16 +545,25 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
 
   const handleSubmitClick = useCallback(async () => {
     const unanswered = questions.length - answeredCount;
+    // A flag is a promise to yourself to come back. Submitting with flags still
+    // set is the one moment that promise can still be kept, so it is worth a
+    // sentence -- but only one dialog: two in a row is how people learn to
+    // dismiss them without reading.
+    const warnings = [];
     if (unanswered > 0) {
-      const ok = await confirm(
-        `${unanswered} soal belum dijawab. Soal yang belum dijawab dihitung salah, sama seperti ujian sungguhan.`,
-        'Kumpulkan sekarang',
-        'Kembali'
+      warnings.push(
+        `${unanswered} soal belum dijawab. Soal yang belum dijawab dihitung salah, sama seperti ujian sungguhan.`
       );
+    }
+    if (flaggedCount > 0) {
+      warnings.push(`${flaggedCount} soal masih ditandai 🚩 untuk ditinjau ulang.`);
+    }
+    if (warnings.length > 0) {
+      const ok = await confirm(warnings.join(' '), 'Kumpulkan sekarang', 'Kembali');
       if (!ok) return;
     }
     finishExam();
-  }, [questions.length, answeredCount, confirm, finishExam]);
+  }, [questions.length, answeredCount, flaggedCount, confirm, finishExam]);
 
   const pauseExam = useCallback(() => {
     frozenLeftRef.current = Math.max(0, Math.round((deadlineRef.current - Date.now()) / 1000));
@@ -504,11 +615,12 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       preset,
       qIdx,
       answers,
+      flagged: [...flagged],
       paused,
       deadlineAt: deadlineRef.current,
       frozenLeft: frozenLeftRef.current,
     });
-  }, [phase, questions.length, mode, preset, qIdx, answers, paused]);
+  }, [phase, questions.length, mode, preset, qIdx, answers, flagged, paused]);
 
   useEffect(() => {
     if (phase === 'result' && results.length > 0) {
@@ -522,6 +634,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       // the study minutes this reports.
       const durationMs = Math.max(0, (budgetSec - timeLeft) * 1000);
       onSessionEnd?.({ correct, total: results.length, durationMs });
+      // Item 94: the one mode where a trend is the whole reason to take it
+      // twice was the only one keeping no history of itself.
+      const pct = results.length > 0 ? Math.round((correct / results.length) * 100) : 0;
+      saveScore('sim', simScoreKey(mode, preset), {
+        score: correct,
+        total: results.length,
+        pct,
+        date: Date.now(),
+      });
     }
   }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -534,6 +655,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     setQuestions(drawn);
     setQIdx(0);
     setAnswers({});
+    setFlagged(new Set());
     setResults([]);
     deadlineRef.current = Date.now() + remainingSec * 1000;
     frozenLeftRef.current = remainingSec;
@@ -562,6 +684,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     setQuestions(saved);
     setQIdx(Math.min(progress.qIdx ?? 0, saved.length - 1));
     setAnswers(progress.answers ?? {});
+    // Stored as an array: sessionStorage holds JSON, and a Set serialises to {}.
+    setFlagged(new Set(progress.flagged ?? []));
     setResults([]);
     const wasPaused = !!progress.paused;
     const left = wasPaused
@@ -591,6 +715,16 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     },
     [phase, paused, q, qIdx]
   );
+
+  const toggleFlag = useCallback(() => {
+    if (phase !== 'playing' || paused) return;
+    haptic.tap();
+    setFlagged((prev) => {
+      const next = new Set(prev);
+      if (!next.delete(qIdx)) next.add(qIdx);
+      return next;
+    });
+  }, [phase, paused, qIdx]);
 
   const goToQuestion = useCallback(
     (i) => {
@@ -624,6 +758,32 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     if (phase === 'playing' && !(await confirmDiscard())) return;
     onExit();
   }, [phase, confirmDiscard, onExit]);
+
+  // Item 95: `simulasi` builds its own playing screen, so it never got
+  // QuizShell's `useQuizKeyboard` — no shortcuts at all, on the one screen a
+  // learner sits in front of for a hundred minutes. Not the shared hook,
+  // though: that one locks an answer (it only fires while `selected === null`)
+  // and advances on Space, both of which are wrong for a paper you can re-mark
+  // and navigate freely until you hand it in (item 48). Same keys, this mode's
+  // rules.
+  useEffect(() => {
+    if (phase !== 'playing' || paused) return;
+    const handler = (e) => {
+      if (isTypingTarget(e.target)) return;
+      const opts = q?.opts?.length ?? 0;
+      const MAP = { 1: 0, 2: 1, 3: 2, 4: 3, a: 0, b: 1, c: 2, d: 3 };
+      const k = e.key.toLowerCase();
+      if (MAP[k] !== undefined && MAP[k] < opts) {
+        handleSelect(MAP[k]); // re-markable, unlike the shared hook
+        return;
+      }
+      if (e.key === 'ArrowRight') goToQuestion(qIdx + 1);
+      else if (e.key === 'ArrowLeft') goToQuestion(qIdx - 1);
+      else if (k === 'f') toggleFlag();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [phase, paused, q, qIdx, handleSelect, goToQuestion, toggleFlag]);
 
   const isUrgent = timeLeft < 60 && timeLeft > 0 && phase === 'playing';
 
@@ -715,32 +875,50 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         </div>
         <div className={S.sectionLabel}>Jumlah Soal</div>
         <div className={`${S.list} ${SM.presetList}`}>
-          {activePresets.map((p) => (
-            <button
-              key={p.key}
-              className={S.btnItem}
-              onClick={() => setPreset(p.key)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'var(--space-12)',
-                background: preset === p.key ? 'rgba(239,68,68,0.10)' : T.surface,
-                border: `1px solid ${preset === p.key ? 'rgba(239,68,68,0.4)' : T.border}`,
-                color: preset === p.key ? '#ef4444' : T.text,
-              }}
-            >
-              <span className={SM.presetEmoji}>{p.emoji}</span>
-              <div>
-                <div className={SM.presetLabel}>{p.label}</div>
-                <div
-                  className={SM.presetSub}
-                  style={{ color: preset === p.key ? 'rgba(239,68,68,0.7)' : T.textDim }}
-                >
-                  {p.sub}
+          {activePresets.map((p) => {
+            // Item 94: the last attempt at *this* exam, shown where the exam is
+            // chosen — the same thing jac, wayground and vocab do on their own
+            // start screens, and the one screen that had never done it.
+            const last = simScores?.[simScoreKey(mode, p.key)];
+            return (
+              <button
+                key={p.key}
+                className={S.btnItem}
+                onClick={() => setPreset(p.key)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-12)',
+                  background: preset === p.key ? 'rgba(239,68,68,0.10)' : T.surface,
+                  border: `1px solid ${preset === p.key ? 'rgba(239,68,68,0.4)' : T.border}`,
+                  color: preset === p.key ? '#ef4444' : T.text,
+                }}
+              >
+                <span className={SM.presetEmoji}>{p.emoji}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className={SM.presetLabel}>{p.label}</div>
+                  <div
+                    className={SM.presetSub}
+                    style={{ color: preset === p.key ? 'rgba(239,68,68,0.7)' : T.textDim }}
+                  >
+                    {p.sub}
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+                {last && (
+                  <span
+                    style={{
+                      fontSize: 'var(--fs-small)',
+                      fontWeight: 700,
+                      flexShrink: 0,
+                      color: last.pct >= PASS_PCT ? T.correct : T.wrong,
+                    }}
+                  >
+                    {last.pct}%
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
         <button
           style={{
@@ -770,6 +948,8 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
     const lulus = pct >= PASS_PCT;
     const wrongList = results.filter((r) => !r.isCorrect);
+    const activeFilter = REVIEW_FILTERS.find((f) => f.key === reviewFilter) ?? REVIEW_FILTERS[0];
+    const reviewList = activeFilter.pick(results);
     // The cards behind the wrong answers, deduplicated. This button used to
     // pass `wrongList.map((_, i) => i)` -- positions in the wrong-answer list,
     // handed to ModeRouter as `filterIds` and matched against card ids. Card
@@ -854,11 +1034,36 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           entries={tallyBy(results, (r) => r._setLabel || r._source || 'Lainnya')}
         />
 
-        {wrongList.length > 0 && (
+        {results.length > 0 && (
           <>
-            <div className={S.sectionLabel}>Review Salah ({wrongList.length})</div>
+            <div className={S.sectionLabel}>Review Jawaban</div>
+            <div
+              className={S.row}
+              style={{ gap: 'var(--space-6)', marginBottom: 'var(--space-10)', flexWrap: 'wrap' }}
+            >
+              {REVIEW_FILTERS.map((f) => {
+                const n = f.pick(results).length;
+                const active = reviewFilter === f.key;
+                return (
+                  <button
+                    key={f.key}
+                    type="button"
+                    onClick={() => setReviewFilter(f.key)}
+                    aria-pressed={active}
+                    disabled={n === 0}
+                    style={{
+                      ...pillStyle(active, 'sm'),
+                      opacity: n === 0 ? 0.4 : 1,
+                      cursor: n === 0 ? 'default' : 'pointer',
+                    }}
+                  >
+                    {f.label} ({n})
+                  </button>
+                );
+              })}
+            </div>
             <div className={S.list}>
-              {wrongList.map((r, i) => {
+              {reviewList.map((r, i) => {
                 const correctOpt = r.opts[r.correctIdx];
                 const userOpt = r.opts[r.userIdx];
                 return (
@@ -867,6 +1072,25 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     className={SM.reviewItem}
                     style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
                   >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 'var(--space-6)',
+                        fontSize: 'var(--fs-micro)',
+                        color: T.textDim,
+                        fontVariantNumeric: 'tabular-nums',
+                      }}
+                    >
+                      <span>Soal {r.number}</span>
+                      <span style={{ color: originMeta(r._origin).color }}>
+                        {originMeta(r._origin).short}
+                      </span>
+                      <span style={{ color: r.isCorrect ? T.correct : T.wrong }}>
+                        {r.isCorrect ? '✓ Benar' : '✗ Salah'}
+                      </span>
+                      {r.wasFlagged && <span style={{ color: T.amber }}>🚩 Ditandai</span>}
+                    </div>
                     <div className={SM.reviewJp}>
                       <JpFront
                         jp={r.jp}
@@ -878,15 +1102,20 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     <div className={SM.reviewIdText}>
                       <MixedRuby text={r.id_text} />
                     </div>
-                    <div className={SM.reviewWrong}>
-                      ✗{' '}
-                      <JpFront
-                        jp={userOpt?.text || '—'}
-                        furiganaPolicy={furiganaPolicy}
-                        maxSize={JP_LIST_MAX_SECONDARY}
-                        compact
-                      />
-                    </div>
+                    {/* A correct row would otherwise print the same option
+                        twice under two ticks. Blanks still show, as "—": not
+                        answering is the answer that was given. */}
+                    {!r.isCorrect && (
+                      <div className={SM.reviewWrong}>
+                        ✗{' '}
+                        <JpFront
+                          jp={userOpt?.text || '—'}
+                          furiganaPolicy={furiganaPolicy}
+                          maxSize={JP_LIST_MAX_SECONDARY}
+                          compact
+                        />
+                      </div>
+                    )}
                     <div className={SM.reviewCorrect}>
                       ✓{' '}
                       <JpFront
@@ -896,16 +1125,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                         compact
                       />
                     </div>
-                    {r.explanation &&
-                      (() => {
-                        const clean = stripFuri(r.explanation);
-                        return (
-                          <div className={SM.reviewExpl}>
-                            💡 {clean.slice(0, 160)}
-                            {clean.length > 160 ? '…' : ''}
-                          </div>
-                        );
-                      })()}
+                    <ExplanationText text={r.explanation} className={SM.reviewExpl} />
                   </div>
                 );
               })}
@@ -920,6 +1140,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   if (!q) return null;
   return (
     <div className={`${S.pageScroll} ${SM.quizPage}`}>
+      {/* Item 95: QuizShell gives every other quiz mode a live region, and this
+          screen — which changes question and counts down a clock — had none, so
+          both moved silently. Polite, not assertive: the countdown must not
+          interrupt someone reading the question. */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        Soal {qIdx + 1} dari {questions.length}
+        {isFlagged ? ', ditandai' : ''}
+        {selected !== null ? ', sudah dijawab' : ''}
+      </div>
       <div className={`${S.rowSpread} ${SM.quizHeader}`}>
         <button className={S.btnBack} style={{ marginBottom: 0 }} onClick={handleExitClick}>
           ✕ Keluar
@@ -931,7 +1160,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             style={{
               ...RED_BTN,
               padding: 'var(--space-6) var(--space-12)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               background: paused
                 ? 'linear-gradient(135deg,#1e3a5f,#2563eb)'
                 : 'linear-gradient(135deg,#7f1d1d,#dc2626)',
@@ -987,11 +1216,68 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         </div>
       </div>
       <ProgressBar current={answeredCount} total={questions.length} color="#ef4444" />
-      <div className={S.counter}>
-        Soal {qIdx + 1} / {questions.length}
+      <div
+        className={S.counter}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 'var(--space-8)',
+        }}
+      >
+        <span>
+          Soal {qIdx + 1} / {questions.length}
+          {flaggedCount > 0 && <span> · {flaggedCount} ditandai</span>}
+        </span>
+        {/* Item 101. Deliberately a toggle on the current question rather than a
+            long-press or swipe on the navigator: the decision to come back is
+            made while reading the question, not while looking at the grid. */}
+        <button
+          type="button"
+          onClick={toggleFlag}
+          aria-pressed={isFlagged}
+          aria-label={
+            isFlagged
+              ? `Hapus tanda tinjau ulang dari soal ${qIdx + 1}`
+              : `Tandai soal ${qIdx + 1} untuk ditinjau ulang`
+          }
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 'var(--space-4)',
+            padding: 'var(--space-4) var(--space-10)',
+            borderRadius: 999,
+            fontSize: 'var(--fs-small)',
+            fontWeight: 700,
+            fontFamily: 'inherit',
+            cursor: 'pointer',
+            background: isFlagged ? 'rgba(245, 158, 11, 0.15)' : T.surface,
+            color: isFlagged ? T.amber : T.textDim,
+            border: `1px solid ${isFlagged ? T.amber : T.border}`,
+          }}
+        >
+          <span aria-hidden="true">🚩</span>
+          {isFlagged ? 'Ditandai' : 'Tandai'}
+        </button>
       </div>
 
       <div className={`${S.cardLg} ${SM.questionCard}`}>
+        {/* Item 106: which bank this question came from, while you are
+            answering it. "This is what the exam asked" and "this is what we
+            wrote to drill you" should not look identical on an exam-prep app. */}
+        {(() => {
+          const om = originMeta(q._origin);
+          return (
+            <div
+              className={SM.originBadge}
+              style={{ color: om.color, borderColor: `${om.color}55` }}
+              title={om.label}
+            >
+              {om.short}
+              {q._setLabel ? ` · ${q._setLabel}` : ''}
+            </div>
+          );
+        })()}
         <div className={SM.questionJp}>
           <JpFront jp={q.jp} furiganaPolicy={furiganaPolicy} />
         </div>
@@ -1009,8 +1295,13 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           that component always reveals correct/wrong on selection, which
           is exactly what an exam simulation must NOT do. Selecting again
           changes the answer rather than locking it in, matching a real
-          answer sheet you can erase and re-mark before turning in. */}
-      <div className={S.list}>
+          answer sheet you can erase and re-mark before turning in.
+
+          Named as a group because it is no longer the only set of toggle
+          buttons on this screen: the review flag (item 101) is a toggle too, so
+          "the pressed buttons" stopped being an unambiguous way to mean "the
+          options" — for a screen reader as much as for a test. */}
+      <div className={S.list} role="group" aria-label="Pilihan jawaban">
         {q.opts.map((opt, i) => {
           const isSelected = i === selected;
           return (
@@ -1030,7 +1321,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 border: `2px solid ${isSelected ? T.amber : T.border}`,
                 color: T.text,
                 fontFamily: 'inherit',
-                fontSize: '0.875rem',
+                fontSize: 'var(--fs-caption)',
                 cursor: 'pointer',
               }}
             >
@@ -1057,6 +1348,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         })}
       </div>
 
+      {/* Item 95: the navigator is one button per question, in document order,
+          ahead of Prev/Next and Kumpulkan — so on a 51-question JAC exam a
+          keyboard or switch user tabbed through 51 buttons to reach "submit".
+          A skip link rather than a reorder: the navigator sits under the
+          options because that is where it belongs visually, and moving 51
+          buttons to the end of the document to fix a tab order would trade a
+          keyboard problem for a reading-order one. */}
+      <a href="#simulasi-kumpulkan" className={SM.skipLink}>
+        Lewati daftar soal → Kumpulkan Ujian
+      </a>
+
       {/* Question navigator — jump anywhere, see answered/unanswered/current
           at a glance, matching how a paper answer sheet lets you scan and
           jump to any question, not just step through in order. */}
@@ -1075,12 +1377,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         {questions.map((_, i) => {
           const isCurrent = i === qIdx;
           const isAnswered = answers[i] !== undefined;
+          const isMarked = flagged.has(i);
           return (
             <button
               key={i}
               onClick={() => goToQuestion(i)}
-              aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isCurrent ? ', sedang dilihat' : ''}`}
+              aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isMarked ? ', ditandai untuk ditinjau ulang' : ''}${isCurrent ? ', sedang dilihat' : ''}`}
               style={{
+                position: 'relative',
                 width: 30,
                 height: 30,
                 borderRadius: 8,
@@ -1094,6 +1398,25 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               }}
             >
               {i + 1}
+              {/* A corner dot, not a colour swap: answered/current already own
+                  the cell's fill and border, and flagging has to be readable on
+                  top of either of them rather than replacing one. The state is
+                  in the aria-label above, so this is decoration. */}
+              {isMarked && (
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute',
+                    top: -3,
+                    right: -3,
+                    width: 9,
+                    height: 9,
+                    borderRadius: '50%',
+                    background: T.amber,
+                    border: `1.5px solid ${T.surface}`,
+                  }}
+                />
+              )}
             </button>
           );
         })}
@@ -1128,10 +1451,15 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           marginTop: 'var(--space-8)',
           padding: 'var(--space-14)',
         }}
+        id="simulasi-kumpulkan"
         onClick={handleSubmitClick}
       >
         Kumpulkan Ujian
       </button>
+
+      {/* Same shape of hint QuizShell shows, for the same reason: shortcuts
+          nobody knows about are shortcuts nobody uses. */}
+      <div className={SM.kbHint}>Keyboard: 1–4 pilih · ← → pindah soal · F tandai</div>
 
       {/* Pause overlay. Also offers Keluar here specifically -- pausing is
           the natural "step away" moment, so it doubles as the safe exit
@@ -1158,7 +1486,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           <div
             style={{
               color: 'rgba(255,255,255,0.65)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               marginBottom: 'var(--space-8)',
             }}
           >

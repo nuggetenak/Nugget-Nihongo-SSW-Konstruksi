@@ -95,8 +95,13 @@ export function recommendMode({ srsState, sessions = [], streak = 0, examDate = 
     };
   }
   if (matureCount > 300 && avgAcc !== null && avgAcc > 70) {
-    const dayIdx = Math.floor(Date.now() / 86400000) % 3;
-    const rotation = ['produksi', 'dengar', 'mirip'];
+    // The modulo is derived from the array, not hardcoded: `produksi` was
+    // dropped from this rotation when the mode was removed, and a literal `% 3`
+    // against a 2-element array handed `undefined` to onNavigate one day in
+    // three. Deriving it means the next change to this list cannot reintroduce
+    // that.
+    const rotation = ['dengar', 'mirip'];
+    const dayIdx = Math.floor(Date.now() / 86400000) % rotation.length;
     const mode = rotation[dayIdx];
     return {
       mode,

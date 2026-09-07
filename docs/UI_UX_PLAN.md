@@ -175,7 +175,6 @@ inherit keyboard/timer/haptic from `QuizShell` + `OptionButton`, shown as inheri
 | sprint | – | Y | – | – | – | – |
 | angka, jebak, mirip | Y | Y | – | – | – | Y |
 | dengar | – | Y | – | – | – | Y |
-| produksi, kuisprod | Y | Y | – | – | – | Y |
 
 ¹ see item 46 — vocab is the odd one out.
 
@@ -554,6 +553,13 @@ service is fine, a runtime one would defeat the point) or licensed/recorded huma
 terms. Neither is something to source and integrate as a continuation of this session — a genuinely
 separate task, not a shortcut to skip.
 
+**Re-checked 2026-09-07, still blocked, and now for a corpus 13% larger.** No speech synthesiser is
+installed in this environment (`espeak`, `espeak-ng`, `festival`, `flite`, `pico2wave` all absent),
+so the clips still cannot be produced at all — the blocker is the same one, not a sizing question.
+The split raised the deck from 1,438 cards to 1,626, so the full-corpus figure quoted above is now
+optimistic by roughly that ratio; the scoped ~200-term JAC subset is unchanged in size and remains
+the only version worth costing. Restating the block rather than pretending to close it.
+
 ### ☑ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
 `QuizProduksiMode` advertises "pencocokan fleksibel (huruf besar/kecil diabaikan)" but a learner
 who types a *nearly* right answer is just told they're wrong. Showing the diff
@@ -721,7 +727,7 @@ While doing that comparison work, found something bigger: 41 of the shared `mode
 moved to their own dedicated CSS module over this app's history without the old shared rules
 ever being cleaned up. Removed all 41, verified thoroughly (recursive cross-file search, not
 just `src/modes/*.jsx`; caught and corrected one of its own false positives along the way; full
-21-mode screenshot sweep before/after, pixel-identical). Commit `6353ff7` has the full account,
+19-mode screenshot sweep before/after, pixel-identical). Commit `6353ff7` has the full account,
 including an honest note on a one-off phantom-session screenshot during re-verification that
 didn't reproduce across two more full-sequence runs with direct session-data inspection —
 concluded likely Playwright timing variance, not a new bug, recorded rather than hidden.
@@ -754,7 +760,14 @@ which is a user-visible change to a ranking, not a refactor.
 Owner call: should `vocab-supplementary` count as vocab for the purpose of "which category am I
 weakest in"?
 
-### ☐ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S`
+**Still the owner's call — but the working assumption is recorded, so the branch that touched
+everything around it did not touch this by accident: leave it as it is.** `categories.js:148-161`
+already explains the discrepancy deliberately, and adding `vocab-supplementary` would move every
+category score on FocusMode's weakness screen at once — a user-visible change to a ranking, made
+without anyone asking for it. It is one line in `VOCAB_SOURCES` whenever the answer is the other
+one.
+
+### ☑ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S` — **fixed 2026-09-07**
 
 Item 56 argued the case and acted on it: a false-precision readiness number is actively
 demotivating for someone whose visa depends on this exam, so `calcReadinessBand` returns
@@ -767,7 +780,19 @@ Not changed here because it is item 56's own decision to extend, not a defect to
 is StatsMode's main visual anchor — replacing a percentage with a band is a layout question as much
 as a copy one.
 
-### ☐ 71. `《・》`-separated terms stack vertically in every context — `M`
+**Extended, and the layout question answered.** `ProgressRing` gained a `centerText` prop, so a
+caller can keep the arc without the number — the arc was never the objection; "45%" was. StatsMode
+now puts `readinessBand.label` where the percentage was and drops the duplicated label that used to
+sit under the ring, replacing it with one line of advice keyed to the band (or, below 5 scored
+sessions, "Selesaikan minimal 5 kuis supaya penilaian kesiapan bisa dihitung." over an empty `—`
+ring).
+
+The label is taken from `readinessBand.label` verbatim rather than re-worded here, so the two
+screens cannot drift apart in copy the way they drifted apart in precision.
+`src/tests/stats-readiness-band.test.jsx` holds both halves: the band label appears, and no bare
+percentage appears anywhere inside the readiness card.
+
+### ☑ 71. `《・》`-separated terms stack vertically in every context — `M` — **fixed 2026-09-07**
 
 `JpFront`'s `bullet` branch splits on `・` and stacks the parts. In list rows that is now handled
 (`compact`, 2026-09-04), but the underlying split is still wrong for a class of entries: `・` is
@@ -780,7 +805,16 @@ and 4 are arguably single terms (`パワー・ハラスメント`, `ロックア
 on script would get about half of them wrong, which is worse than the current consistent behaviour.
 Fixing this properly means marking the intent in the data, not guessing it at render time.
 
-### ☐ 72. 101 font sizes are off the type scale (no longer frozen, still not on it) — `S`
+**Closed by marking the intent in the data, exactly as this item asked.** 199 bundle cards were
+split so that one card carries one term; `・` now survives only where it belongs to a single
+entry. `パワー・ハラスメント` and `ロックアウト・タグアウト` are on the KEEP list in
+`docs/CARD_SPLIT_AUDIT.md` with the rule that kept them, so the render-time branch no longer has
+to guess: the 113 cards that still hold a `・` are the ones that should stack.
+
+`JpFront`'s `bullet`/`vs`/`colon` branches stay. They are now a small, correct population rather
+than a heuristic applied to a mixed one.
+
+### ☑ 72. 101 font sizes are off the type scale (no longer frozen, still not on it) — `S` — **fixed 2026-09-07**
 
 254 of 297 inline `fontSize: <px>` values matched a `--fs-*` token exactly and were migrated
 (2026-09-04). What was left — 41 in JSX and, once the scale was rebuilt, 60 more in stylesheets —
@@ -796,10 +830,29 @@ to 26 and 20px to 19, and item 68's judgment holds — don't force a match witho
 element wants the neighbouring token's size. Each is individually decidable, and they are trivial
 to find (`rem` outside a `var()` in a `font-size`).
 
-### ☐ 73. The setup screens are the last of the vertical dead space — `S` — **design call**
+**Decided, one at a time, and the answer is not one rule but four.** Reading all 97 remaining sites
+in context turned up a class the item had not separated out: values sitting *exactly* on a token's
+floor, which is what a px size becomes when the scale it predates is later made fluid.
+
+| Kind | Verdict | Why |
+|---|---|---|
+| Prose and UI labels already on a token's value | **snapped** — 18 sites, `0.875rem` → `var(--fs-caption)` | Identical at 390px; they now grow with the text around them instead of holding still at 14px |
+| Japanese landing on a JP token | **snapped** — `DangerMode .questionTerm` → `var(--fs-jp-back)` | 1.375rem *is* that token's floor, and the element is exactly what the token was written for |
+| Glyphs — emoji, `✕`, `☆`, `🔊` | **left off-scale** | An ornament in a fixed-size box reads as an icon, not as text; growing it with the reading size overflows the box it centres in |
+| Display numerals — `.heroPct`, `.lulusPct`, `.timerValue`, `.overviewPct`… | **left off-scale** | Sized against their own card, not against body copy |
+
+Everything else — 20px and 24px headings between `--fs-title` and `--fs-page-title`, Japanese
+outside the two JP tokens' ranges — stays, on item 68's judgment: no evidence it wants the
+neighbouring token's size. All of it is still `rem`, so all of it still follows Ukuran Teks, which
+was the half of this item that was a real defect.
+
+`spacing-scale.test.js` now carries the rule and a ratchet at 78: the off-scale population may
+fall, never rise.
+
+### ☑ 73. The setup screens are the last of the vertical dead space — `S` — **design call, taken 2026-09-07**
 
 `.content` is a flex column in mode chrome now and a screen claims the leftover height with
-`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). Kartu and Ulasan use it. A census of all 21 modes at
+`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). Kartu and Ulasan use it. A census of all 19 modes at
 390×844, measured on the running app, says what is left:
 
 | screen | empty below the content |
@@ -822,7 +875,29 @@ design position (bottom-anchored = thumb-reachable and consistent with the app's
 top-stacked = the button sits directly under the choice it confirms). Whichever way it goes it
 should go the same way on all five, which is what makes it one decision rather than five.
 
-### ☐ 74. The flip card cannot grow to fill its scene — `M`
+**Bottom-anchored, on all of them.** Two of the five screens in that census left with `produksi`
+and `kuisprod` in 7.0.0 — the table above is kept as it was measured rather than rewritten, since
+its point is the census, not the current mode list. The three that remain (Dengarkan, Kuis, Sprint)
+now claim the height AppShell reserves and push their "Mulai" to the bottom of it: `.setupPage`
+opts in with `flex: 1 0 auto` exactly as `.fcWrapper` does, and `.setupCta` carries
+`margin-top: auto`.
+
+Anchoring rather than stretching, deliberately: the choices above keep their natural size — nothing
+is inflated to fill a screen — and only the button moves, to where the thumb already is and where
+the app's own bottom nav has trained it to look.
+
+Measured on the running app at 390×844, empty space below the CTA:
+
+| screen | before | after |
+|---|---|---|
+| Dengarkan | 406px | 48px |
+| Kuis | 257px | 48px |
+| Sprint | 227px | 48px |
+
+The remaining 48px is `.content`'s own bottom reserve, and it is now the same on all three — which
+was the part that made this one decision rather than five.
+
+### ☑ 74. The flip card cannot grow to fill its scene — `M` — **fixed 2026-09-07**
 
 `.scene` now grows and centres the card in the slack, but the card itself stays at
 `max(230px, measured back-face height)`. Letting it stretch would use that space for the Japanese
@@ -834,6 +909,40 @@ is content-height regardless of how tall the card gets: stretch the card today a
 renders shorter than the front. Fixing that means reworking a 3D flip whose two faces currently
 size independently — small in diff, easy to get subtly wrong, and worth doing with the card
 measured at several content lengths rather than eyeballed at one.
+
+**Done, and measured — which is what caught the part that was subtly wrong.**
+
+`.back` gets `bottom: 0`; `.fc-card` becomes a flex column that grows into the scene; `.front`, its
+only in-flow child, grows into the card. With the two faces the same box by construction, the
+ResizeObserver that had been keeping them equal by measurement is gone — and it had to go, because
+a card sized to the back's *content* is by definition not a card sized to its container.
+
+Measured in Chromium against the running app, six cards each, front / back / back-with-description:
+
+| Viewport | Card before | Slack before | Card after | Slack after |
+|---|---|---|---|---|
+| 390×844 phone | 287px | **179px** (25px flipped) | 312px | 0 |
+| 820×1180 tablet | 400px | **401px** (242px flipped) | 642px | 0 |
+| 800×400 landscape | 175–230px, varying per card | 0 | 140px (the item-23 floor) | 0 |
+
+The document never exceeds the viewport on phone or tablet, before or after. Landscape overflows
+either way — that is item 23's known limit, not this change's — but it no longer overflows by a
+*different* amount depending on which face is up (696px → 662px flipped, against 538px → 636px
+front before): a scroll height that stays put is easier to use than one that moves.
+
+**The part the measurement caught.** Once the card fills the scene, anything that resizes the scene
+resizes the card. Three blocks below it mounted on the first flip and unmounted on rating — the
+rating row, the gesture hint, the keyboard hint — which used to move only the air around a
+fixed-height card and now moved the card itself: 466px → 312px on a phone, a visible shrink
+*during* the flip. Exactly the jump the retired observer existed to prevent, arriving by a different
+route. All three are now rendered always and hidden with `visibility` + `aria-hidden`, with the
+rating buttons `disabled` while hidden so "invisible" also means "unreachable". The four-button grid
+is the tallest state and therefore the one that sets the reserved height; "belum dibalik" and
+"✓ Dinilai" sit over it.
+
+Test note: `queryByText` sees an `aria-hidden` node and `queryByRole` does not, so the freeflip
+tests now ask whether the rating buttons are *offered* rather than whether the label is *present* —
+the thing they were always about.
 
 
 ---
@@ -861,8 +970,6 @@ never handed. Every claim below was checked against code, not inferred from thes
 | | `angka` | — | **—** | — | Y | — | — |
 | | `jebak` | type, not category | **—** | — | Y | — | — |
 | | `mirip` | type, not category | **—** | — | Y | — | — |
-| | `produksi` | **—** | `QUIZ_COUNTS`+All | — | Y | Y | — |
-| | `kuisprod` | **—** | `QUIZ_COUNTS`+All | — | Y | Y | — |
 | | `dengar` | **—** | `QUIZ_COUNTS` | — | Y | **not passed** | — |
 | Ujian | `jac` | topic (8) | per-set | Y ⚠ Lemah | Y | Y | — |
 | | `wayground` | — (per set) | per-set | Y Ulang N | Y | — | — |
@@ -871,7 +978,7 @@ never handed. Every claim below was checked against code, not inferred from thes
 | Ulasan | `ulasan` | — (SRS queue) | due today | n/a | Y | Y | — |
 | Alat | `stats`/`ekspor`/`sumber` | n/a | n/a | n/a | n/a | n/a | n/a |
 
-### ☐ 75. `kartu` is the only content mode absent from its own statistics — `S` — `P1`
+### ☑ 75. `kartu` is the only content mode absent from its own statistics — `S` — `P1` — **fixed 2026-09-07**
 
 Across the whole prop map, **every** study mode is handed `onSessionEnd` or `onFinish` except
 `kartu` (`ModeRouter.jsx:189-200`), which gets neither. So `progress.sessions` — what `StatsMode`,
@@ -882,24 +989,69 @@ mode in the app simply does not appear on its own stats page.
 Needs a shape decision first: `kartu` has no session boundary — when is it "done"? Per N cards
 rated, or on mode exit. Don't guess.
 
-### ☐ 76. `audioEnabled` is distributed with no rule, and `speakOnFlip` is dead in Kartu — `M` — `P1`
+**On exit, with at least one card rated.** Flashcards have no natural length; the reader decides
+when to stop, and leaving is that decision. Per-N would also cut one sitting into several rows,
+which makes "sessions this week" mean something different here than in every other mode and churns
+`SESSIONS_CAP`'s 180 for no gain.
+
+Fired from an unmount effect rather than from this mode's own exit control, because the header's
+back arrow, a mode switch and a tab switch are all ways out and only one of them goes through the
+mode. A sitting with nothing rated is not recorded at all — opening the deck and reading one card
+is not study to put on a chart.
+
+`correct` is Oke + Mudah, the two ratings FSRS treats as a pass. `kartu` is not in
+`SCORED_QUIZ_MODES`, so this never reaches quiz accuracy or the readiness band; it is there so the
+per-mode breakdown and the heatmap can say something true rather than nothing.
+
+### ☑ 76. `audioEnabled` is distributed with no rule, and `speakOnFlip` is dead in Kartu — `M` — `P1` — **fixed 2026-09-07**
 
 Three findings, one root cause: nothing owns the question "which modes speak?".
 
 1. **The listening mode is not handed the audio setting.** `dengar` is absent from the
    `audioEnabled` recipients (`ModeRouter.jsx:255-262`), and `DengarMode.jsx` never reads
-   `prefs.audioEnabled` — only `canSpeak()` (`:52`). Meanwhile two *typing* modes (`produksi`,
-   `kuisprod`) do get it. Turning audio off in Saya therefore does not silence the one mode built
+   `prefs.audioEnabled` — only `canSpeak()` (`:52`). (The two *typing* modes that also received it,
+   `produksi` and `kuisprod`, were removed in 7.0.0; the gap this item names is unchanged — `dengar`
+   still does not read the pref.) Turning audio off in Saya therefore does not silence the one mode built
    entirely on audio. This needs a decision rather than a patch: it may well be correct for Dengar
    to ignore the setting (obeying it makes the mode useless) — in which case the setting should
    say so.
 2. **`prefs.speakOnFlip` does nothing in Kartu.** `SayaTab.jsx:541` labels it
    **"👆 Saat balik kartu"**. Its only reader is `ReviewMode.jsx:78,94`. `kartu` receives no
    `audioEnabled` and never calls `speakJP()`.
-3. Receiving it: `kuis`, `jac`, `vocab`, `produksi`, `kuisprod`. Not: `kartu`, `sprint`,
+3. Receiving it: `kuis`, `jac`, `vocab`. Not: `kartu`, `sprint`,
    `wayground`, `dengar`, `angka`, `jebak`, `mirip`, `simulasi`.
 
-### ☐ 77. Three differently-shaped category pickers, plus five copies of `pillStyle` — `M` — `P2`
+**The rule, written down at the top of the prop map:** `audioEnabled` is a global mute for audio
+the app *offers*. A mode receives it when it can speak Japanese that it is also showing as text —
+there the sound is an aid, and muting it costs only convenience.
+
+Two exceptions, both deliberate and both now stated where they matter:
+
+- **`dengar` is exempt.** Its task *is* listening; obeying the mute would leave the mode with
+  nothing to do. Finding 1 said this might well be the right answer "in which case the setting
+  should say so" — so the setting says so: its sub-line reads *"Tombol 🔊 di kartu & kuis. Mode
+  Dengarkan tetap bersuara."* rather than the old *"tombol 🔊 di kartu"*, which promised a reach it
+  never had.
+- **`simulasi` is exempt.** An exam does not offer aids (item 48, unchanged).
+
+What the rule changed:
+
+- **`wayground` now receives it.** It renders `QuizShell`, which draws its speaker button behind
+  this exact prop — so the button had never once appeared in the largest question bank in the app.
+  A one-line omission that no rule existed to catch.
+- **`kartu` now receives it, and has a 🔊.** Finding 2's real content: the mode that shows a
+  Japanese term and asks you to recall its meaning had no way to hear it. Manual button only,
+  bottom-left of the front face, `stopPropagation`'d like the category badge — a card that spoke on
+  arrival would answer a reading question before it was asked.
+- **Everything else follows from the rule.** `sprint`, `angka`, `jebak` and `mirip` never call
+  `speakJP`, so there is nothing to mute.
+
+**Finding 2, corrected.** `prefs.speakOnFlip` is not mislabelled: `SayaTab.jsx:540` reads
+**"🔊 Kapan Bicara (Ulasan)"** — the item quoted line 541, which is the *value*, not the label. So
+the pref has always said what it governs. `kartu` is deliberately not wired to it: Ulasan speaks on
+its own because the queue moves for you, and Kartu you drive yourself.
+
+### ☑ 77. Three differently-shaped category pickers — `M` — `P2` — **fixed 2026-09-07**
 
 Straight continuation of §1's through-line. Category selection is written three times:
 
@@ -916,6 +1068,43 @@ And `pillStyle(on)` — identical body — is copied at `QuizMode.jsx:157`, `Pro
 `QuizProduksiMode.jsx:170`, `JACMode.jsx:177`, `WaygroundMode.jsx:171`, plus fully-inline chip
 variants in `DangerMode.jsx:79-101`, `ConfusionMode.jsx:126-148`, `CatatanMode.jsx:274-291`,
 `SprintMode.jsx:184-208`. `modes.module.css` already has `.pill` (`:272`) that none of them use.
+
+**The `pillStyle` half is closed (2026-09-07).** Two of the five copies left with
+`ProductionMode` and `QuizProduksiMode`. The three that remained were not interchangeable, which
+is why reading them side by side mattered: `JACMode` and `WaygroundMode` were byte-for-byte
+identical, while `QuizMode`'s was a larger variant — more padding, body-size text, and the themed
+`surfaceActive`/`borderActive`/`amber` trio instead of hardcoded amber rgba. They are now one
+function with a size (`src/styles/pill.js`), keeping both looks deliberately: QuizMode's pills are
+the primary control on its setup screen and are meant to be bigger than a filter row.
+
+The unused `.pill` class this item pointed at is removed rather than adopted — the active state is
+dynamic and token-driven, which is why the inline form won.
+
+**The other half, later the same day.** One `CategoryPicker` with a variant, because the three
+differences were presentation and everything underneath was the same: the same
+`['all', ...categories]` list, the same `all` pseudo-category re-invented three times, the same
+active styling written out by hand.
+
+| caller | variant | what it passes |
+|---|---|---|
+| `QuizMode` | `pills` | nothing but the list — it never showed counts |
+| `SprintMode` | `rows` | `countByCategory(baseCards)` + `countSuffix="kartu"`, `maxHeight` |
+| `GlossaryMode` | `compact` | its own counts, because "Semua" there means *what the current search matched* |
+
+That last column is why counts are a prop rather than derived: deriving them would have quietly
+overruled the one caller whose "Semua" is not the size of the corpus.
+
+**`FilterPopup` is deliberately not what they collapsed into**, which is the part of this item that
+needed a decision rather than a refactor. It is a multi-select modal sheet over the flashcard deck
+(item 55); these are single-select controls sitting inline on a setup screen. Folding an inline
+one-tap filter into a modal would cost a tap and a focus trap on three screens to reuse a component
+that does a different job. Four *shapes* was the defect; four *kinds of control* was not.
+
+Two small things fell out of doing it: the emoji-only chips in Glosari now carry an accessible name
+(an emoji is not a label), and all three mark their selection with `aria-pressed` rather than colour
+alone. The "only one category, don't show a picker" guard is also now one rule instead of three —
+two of the callers were testing a list that already contained `all`, so their thresholds differed by
+one.
 
 ### ☑ 78. Simulasi loses the entire exam on reload — `M` — `P1` — **done 2026-09-04**
 
@@ -946,15 +1135,15 @@ that does. So it knows this session is expensive to lose, and guards only the in
 not a reload, a crash, or the OS reclaiming the tab on the cheap Android phones this is designed
 for.
 
-### ☐ 79. "Wrong-only" and "retry wrong" are both inconsistent, in different ways — `S` — `P2`
+### ☑ 79. "Wrong-only" and "retry wrong" are both inconsistent, in different ways — `S` — `P2` — **fixed 2026-09-07**
 
 Pre-session wrong-only filters exist in `kuis` (`QuizMode.jsx:34,318-345`), `jac`
 (`JACMode.jsx:348-365`), `wayground` (`WaygroundMode.jsx:434-458`). Absent from `vocab`,
-`produksi`, `kuisprod`, `dengar`, `angka`, `mirip` — though `vocab` writes `progress.vocabWrong`
+`dengar`, `angka`, `mirip` — though `vocab` writes `progress.vocabWrong`
 exactly as `wayground` writes `wgWrong`.
 
 The post-session `onRetryWrong` bridge is lopsided differently: handed to `kuis`, `jac`,
-`wayground`, `vocab`, `simulasi`, `produksi`, `kuisprod`, `dengar` — **not** to `sprint`, `angka`,
+`wayground`, `vocab`, `simulasi`, `dengar` — **not** to `sprint`, `angka`,
 `jebak`, `mirip` (`ModeRouter.jsx:216-269`), all four of which record wrong answers
 (`SprintMode.jsx:137-142`, and `recordWrong` in the others). The mistakes are stored; there is no
 route back to them from the results screen.
@@ -962,10 +1151,47 @@ route back to them from the results screen.
 `kartu` has the same idea under another name and another data source — the "Belum" button
 (`ToolStrip.jsx:41-50`) reads `unknown`, not `quizWrong`.
 
-### ☐ 80. Count and auto-advance options are distributed arbitrarily — `S` — `P2`
+**Two of this item's premises were wrong, and finding that out is what made the rest decidable.**
+It says `sprint`, `angka`, `jebak` and `mirip` "all four record wrong answers". Read against the
+code: `sprint` writes real card ids into `progress.quizWrong` (`:137-142`, correct), `jebak` writes
+`danger-${term}` *strings*, and **`angka` and `mirip` record nothing at all** — no `recordWrong`, no
+tracker write, anywhere in either file.
 
-- `QUIZ_COUNTS = [10,20,30]` (`utils/constants.js:22`) is used by `kuis`, `dengar`, `produksi`,
-  `kuisprod`. `angka`, `jebak` and `mirip` have **no length control at all** — always the whole
+So the question is not "who is missing the bridge" but "who can have one that is honest":
+
+| mode | wrong answers keyed by | verdict |
+|---|---|---|
+| `sprint` | card id | **wired** — exact |
+| `angka` | nothing, but every `ANGKA_KUNCI` entry carries `kartu` | **wired** from that field — 27 of 29 point at a live card |
+| `jebak` | `danger-${term}` | **not wired** — see below |
+| `mirip` | nothing | **not wired** — see below |
+
+`jebak` and `mirip` have no card link at all, so a bridge there means inferring the card by matching
+the pair's Japanese against the corpus. Measured: **10 of 20** `DANGER_PAIRS` terms and **16 of 28**
+`CONFUSION_PAIRS` resolve. A button that says "practise the 6 you got wrong" and opens 3 is the
+exact bug this file already records `SimulasiMode`'s `filterIds` as having been. The fix is a
+`related_card_id` on the pair data — the same shape item 96 asks for on `QUIZ_SETS` — so it belongs
+there, not in a guess here.
+
+**`ResultScreen` now counts cards, not questions.** Its retry button labelled itself `wrongCount`,
+which is only the same number when every missed question has a card behind it. It takes an optional
+`retryWrongCount`, exactly as `srsWrongCount` already did for the button beside it, and hides itself
+when that resolves to zero.
+
+**The pre-session filter, same treatment.** `vocab` writes `progress.vocabWrong` keyed
+`${setId}-${q.id}` — byte-for-byte the shape `wayground` writes to `wgWrong`, which has had
+"⚠ Ulang N salah" per set all along. It has the same sub-button now, and skips `saveScore` on a
+wrong-only run for the same reason `wayground` does. `dengar` records into the shared `quizWrong`
+by card id, so `kuis`'s "Mode Lemah" toggle ported directly. `angka` and `mirip` get nothing to
+filter on, because they store nothing.
+
+Distractors in both wrong-only paths still come from the full deck: a narrower session should be
+shorter, not easier.
+
+### ☑ 80. Count and auto-advance options are distributed arbitrarily — `S` — `P2` — **fixed 2026-09-07**
+
+- `QUIZ_COUNTS = [10,20,30]` (`utils/constants.js:22`) is used by `kuis` and `dengar`.
+  `angka`, `jebak` and `mirip` have **no length control at all** — always the whole
   shuffled pool, with no way to take a short session. (`kartu` likewise; see item 75, which has to
   define "a flashcard session" first.)
 - **Auto-advance delay**: exposed by `kuis` (`QuizMode.jsx:35,362`) and `jac` (`JACMode.jsx:171`).
@@ -976,7 +1202,28 @@ route back to them from the results screen.
 Check against item 49 (☑, "Question-count options differ per mode with no rationale") before
 building — some of this may be leftover scope, some may be regression.
 
-### ☐ 81. `produksi` and `kuisprod` are ~500-line twins — `M` — `P2`
+**Leftover scope, both halves — item 49 consolidated the constant and stopped there.**
+
+**Length.** `angka`, `jebak` and `mirip` have a picker now, through one shared
+`SessionLengthPicker` rather than a fourth, fifth and sixth local copy. It reads and writes the same
+`prefs.quizQuestionCount` `kuis` and `dengar` already used, so a learner who prefers 20 gets 20 in
+every mode that asks instead of 10 again in each. Two details that were wrong before and are not
+now: the picker only offers counts the pool can actually give (30 of 20 questions is "all of them"
+under another name), and **"Semua" is a sentinel (`QUIZ_COUNT_ALL`) rather than the deck's own
+size** — `QuizMode` used to persist "Semua" as `catFilteredCards.length`, so the number arrived in
+the next mode as a fixed count that meant nothing there. That closes item 49's own open question
+about whether `prefs.quizQuestionCount` "actually works everywhere".
+
+**Auto-advance.** One `AUTO_NEXT_DELAYS` list replaces two of different shapes (`{ms,label}` in
+JACMode, `{v,l}` in QuizMode), and the choice is now a **preference**, not a per-session setting.
+That is what reaches `wayground` and `vocab`: they render the identical `QuizShell` from a set list
+with nowhere to put a picker, so they read what was set where a panel does exist. Read once per
+mount — changing pacing under someone already answering is worse than not offering it.
+
+`kartu`'s absence from the length picker stays deliberate: a flashcard deck has no question count,
+and item 75 settled what a flashcard session is instead.
+
+### ☑ 81. `produksi` and `kuisprod` are ~500-line twins — `M` — `P2` — **dropped 2026-09-07**
 
 `ProductionMode.jsx` (531 lines) and `QuizProduksiMode.jsx` (500) share the start screen, the
 `pillStyle` copy (`:176` / `:170`), `HowToPlayCard`, the count picker (`:219-234` in both) and the
@@ -984,6 +1231,15 @@ state shape (`started/count/queue/idx/input/phase/results/sessionFired`, `:77-84
 They differ in exactly two places: direction (ID→JP vs JP→ID) and `isCorrect` (`:32-47` matching
 JP/stripFuri/kana vs `:37-46` matching `id_text` synonyms). The clearest
 one-component-with-a-direction-prop candidate in the codebase.
+
+**Closed as dropped, not done.** This item proposed merging the twins behind a direction prop.
+The owner removed both modes instead (7.0.0): free-text typing has an answer surface — synonyms,
+kana vs kanji, spacing, abbreviations — too wide to grade fairly, and a mode that marks a correct
+answer wrong teaches nothing.
+
+That knowingly reverses the "Checked, not a bug" note below: direction-by-mode was recorded as
+deliberate design, and with these two gone the app has no ID→JP mode at all. The `output` strand
+in `MISSION_TYPES` now contains only `sprint`.
 
 ### Checked, not a bug
 
@@ -1166,7 +1422,7 @@ one (and the row markup extracted rather than copied for the second list).
 
 ---
 
-### ☐ 93. A wrong answer in the exam teaches the app nothing — `S` — `P1`
+### ☑ 93. A wrong answer in the exam teaches the app nothing — `S` — `P1` — **fixed 2026-09-07**
 
 `simulasi` writes to no wrong-tracker at all — not `quizWrong`, not `wrongCounts`, not `wgWrong`,
 not `vocabWrong`. Every other quiz mode records its mistakes, and three surfaces read them: JAC's
@@ -1178,7 +1434,24 @@ Needs a decision on *where* they go before it can be built: `simulasi` draws fro
 two different id spaces (JAC question ids like `tt1_q01`, and `QUIZ_SETS` questions whose ids are
 only unique within their set), so this is not a one-line write.
 
-### ☐ 94. The exam keeps no history of itself — `S` — `P2`
+**The decision: not a third id space — each source's own.** A mistake is filed where a mistake in
+that question's home mode is already filed, so the surfaces that read those stores pick it up
+without knowing `simulasi` exists.
+
+| source | store | key | who reads it back |
+|---|---|---|---|
+| JAC | `progress.wrongCounts` | `tt1_q01` | JAC's ⚠ Lemah |
+| pool | `progress.wgWrong` | `${setId}-${q.id}` | Wayground's per-set ⚠ Ulang N |
+| either, when it has one | `progress.quizWrong` via `recordWrong` | card id | FokusMode's weakest-category drill |
+
+The third row is JAC-only today: all 95 JAC questions carry a `related_card_id` and none of the 980
+`QUIZ_SETS` questions do (item 96), so it widens on its own the moment that item lands rather than
+needing to be revisited.
+
+Written **once at submit**, not per answer — item 48 requires that nothing reveals correctness until
+the paper is handed in, and a store written mid-exam is a store that could be read mid-exam.
+
+### ☑ 94. The exam keeps no history of itself — `S` — `P2` — **fixed 2026-09-07**
 
 `jac`, `wayground` and `vocab` each call `saveScore` and show past scores and personal bests on
 their own start screens. `simulasi` never calls it, so there is no attempt history, no best score,
@@ -1190,7 +1463,19 @@ Blocked on a related trap: `saveScore`'s key mapping is
 caller does, but adding a `sim` type without touching that ternary would corrupt vocab's scores
 rather than fail.
 
-### ☐ 95. `simulasi` has no keyboard support and thin screen-reader support — `M` — `P2`
+**The trap first.** The ternary is a lookup with an explicit reject now, so an unknown type is a
+no-op instead of a write into whichever store happened to be the last branch. That had to come
+first, since this item's own fix is exactly the input that would have sprung it.
+
+Attempts are filed per **source and preset** (`pool-full`, `jac-quick`, …), because "58% last time"
+only means something against the same exam — a 15-question Latihan Cepat and a 44-question JAC pair
+are not comparable runs. The last score for each shows on the preset button where that exam is
+chosen, which is what `jac`, `wayground` and `vocab` have always done on their own start screens.
+
+`progress.simScores` is additive: an install without the key reads as `{}` everywhere, so there is
+no migration and `STORAGE_VERSION` stays at 6.
+
+### ☑ 95. `simulasi` has no keyboard support and thin screen-reader support — `M` — `P2` — **fixed 2026-09-07**
 
 `QuizShell` gives every other quiz mode `useQuizKeyboard` (1–4 to answer, Space/→ to advance, Esc
 to leave), an `aria-live` "Soal X dari Y", and `QuizAnnouncer` for answer feedback. `simulasi`
@@ -1202,6 +1487,21 @@ Prev/Next row and the Kumpulkan button. On a 51-question JAC exam a keyboard or 
 through 51 buttons to reach "submit". Needs a design call (reorder, or a skip link), which is why
 it is not in the fixed list above.
 
+**Skip link, not a reorder.** The navigator sits under the options because that is where it belongs
+visually; moving 51 buttons to the end of the document to fix a tab order would trade a keyboard
+problem for a reading-order one. A visually-hidden link ahead of it — "Lewati daftar soal →
+Kumpulkan Ujian" — appears on focus and jumps straight to submit.
+
+**Shortcuts: same keys as everywhere else, this mode's rules.** Deliberately not `useQuizKeyboard`
+itself: that hook only fires while `selected === null` and advances on Space, and both are wrong for
+a paper you can re-mark and navigate freely until you hand it in (item 48). So: **1–4** pick (and
+re-pick), **← →** move between questions, **F** flags the one you are reading. Suppressed while
+paused, and behind `isTypingTarget`.
+
+**A polite live region**, not an assertive one: this screen counts down a clock, and an assertive
+region would interrupt a reader mid-question every time it ticked. It announces which question is
+showing, and whether it is answered and flagged.
+
 ### ☐ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2`
 
 0 of 980 questions in `QUIZ_SETS` carry a `related_card_id`; all 95 in `JAC_OFFICIAL` do. That gap
@@ -1210,7 +1510,31 @@ is what makes retry-wrong impossible in `wayground` and `vocab` (item 86), keeps
 980 links, presumably semi-automatable from the question text against the card corpus — not a code
 one, and it should be sized honestly before anyone starts.
 
-### ☐ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1`
+**Sized, 2026-09-07 — `npm run derive:quiz-links`.** The tool is committed; the links are not, and
+that is the finding rather than a shortfall. A wrong link is worse than no link: it sends a learner
+to a card that does not teach the answer, and 980 of those judgements folded into a branch this size
+is 980 judgements nobody can check.
+
+Method: card headwords (`jp`, furigana stripped) matched against the question, longest first, so
+鉄骨造 wins over 鉄骨 wherever both appear. 41 headwords are carried by more than one card and are
+skipped entirely — they cannot identify one of them. 1,522 of 1,606 headwords are usable.
+
+| tier | count | share | what it means |
+|---|---|---|---|
+| **high** | 305 | 31.1% | ≥4-character headword in the question stem. Twelve sampled by hand, twelve correct. |
+| **medium** | 221 | 22.6% | 3 characters in the stem, or ≥4 in the correct answer. Probably right; probably is not good enough to ship unread. |
+| **low** | 375 | 38.3% | 2-character match. 安全, 危険, 作業 sit inside longer compounds constantly — 危険 for a question about 危険予知訓練 is not a lie, but it is not the card that teaches the answer. |
+| **none** | 79 | 8.1% | no card headword appears in the question at all. |
+
+**So the honest size is: 305 links can be derived and reviewed cheaply, and 675 need a human read.**
+Not the "semi-automatable" this item hoped for at the high end, and not hopeless either. The 79
+no-match rows are worth reading first for a different reason — a question about something the deck
+does not teach is a content gap, not a linking problem.
+
+Still `☐`, and still its own branch: this item asked to be sized before anyone starts, and that is
+what has been done.
+
+### ☑ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1` — **fixed 2026-09-07**
 
 `recordSession` stores `{mode, correct, total, durationMs, date}` and nothing else, so a 15-question
 Latihan Cepat and a 50-question Ujian Penuh are both just `mode: 'simulasi'`. `getBestSimScore`
@@ -1221,7 +1545,21 @@ So the exam-readiness signal this app exists to produce can be earned on a 15-qu
 run — the shortest, easiest thing in the section. Fixing it means recording the preset alongside
 the session, which is a `progress.sessions` shape change and therefore a storage-version decision.
 
-### ☐ 98. JAC Official's short presets have no teori/praktik ratio — `S` — `P2`
+**It does not, and that is the useful finding.** `recordSession` has stored `total` all along, and
+the *length* is what this is about — not which preset produced it. `getBestSimScore` now ignores
+runs shorter than `EXAM_READINESS_MIN_QUESTIONS`, derived as 80% of the full exam (40): both full
+presets clear it comfortably (50, and JAC's 44–51) and both short ones miss it by a wide margin.
+No shape change, no migration, no storage-version decision.
+
+Deliberately not a second "best short-run score" beside it — a second number invites the same
+misreading one level down. A short practice run is practice.
+
+**This leaves item 58 alone in wanting v7.** The three items were grouped as one migration; two of
+them turned out not to need one. 58 is the only one that genuinely changes a stored record's shape,
+and its own decision note already says a v7 migration deserves its own session rather than the tail
+of a large branch. It stays open on that basis, not for lack of a decision.
+
+### ☑ 98. JAC Official's short presets have no teori/praktik ratio — `S` — `P2` — **fixed 2026-09-07**
 
 The Teori & Praktik pool samples an exact 60/40 (9+6, 15+10, 30+20). JAC Official draws one random
 teori set + one random praktik set and then, for Latihan Cepat and Setengah Ujian, takes a plain
@@ -1231,6 +1569,27 @@ question at all. Either that variance is intended (it is a random draw from an o
 the same ratio rule should apply; the code states no view. Owner's "biar keliatan kyk random"
 covers the *set pair*, not the slice within it.
 
+**The variance is not intended, and the fix is not the pool's 60/40 either.** A mock exam whose
+practical half can vanish entirely is not a mock exam — but this source's whole premise is "the
+official book", and its full preset already takes the book's own mix (29 or 36 teori to 15
+praktik). So a short run is **that** mix, smaller: sampled in proportion to the pair it drew, not
+forced to a ratio the book does not have. The owner's "biar keliatan kyk random" governs which pair
+is drawn, and still does — nothing in this change chooses the pair.
+
+Re-measured the same way, 20 000 draws each:
+
+| preset | praktik before | praktik after |
+|---|---|---|
+| Latihan Cepat (15) | 0–11, mean 4.78, none in 0.10% of runs | **4–5**, mean 4.50, never none |
+| Setengah Ujian (25) | 2–14, mean 7.95 | **7–9**, mean 7.99 |
+
+The remaining spread is which pair came up (15/44 vs 15/51), not chance within it.
+
+**Side effect worth naming:** the mapper now carries `_category` for JAC questions. The tagging was
+always in the data (`tt*` = 学科, `st*` = 実技) and in `SimulasiMode`'s own comments — only the
+mapper had never passed it through, which is also why the results screen's teori/praktik breakdown
+silently rendered nothing for this source. It works there now too.
+
 ### ☐ 99. The exam cannot show the pictures the exam has — `S` — `P3`
 
 12 of the 95 JAC questions carry a `photoDesc`, and both `simulasi` and `QuizShell` render it as
@@ -1239,29 +1598,95 @@ about a diagram, and these are 実技 questions where the picture is often the q
 fix in code until the images exist; worth recording as a known fidelity limit, and as a reason not
 to read a praktik sub-score too confidently.
 
-### ☐ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3`
+**Re-checked 2026-09-07: still 12 questions, still no images.** No JAC question carries any image
+field at all (`photo`, `image`, `img` — none exist), and `public/images/` holds the three
+category-illustration directories and nothing exam-related. Confirmed rather than assumed, because
+"blocked on assets" is the kind of status that quietly stops being true.
+
+One thing did change around it: item 98 gave JAC questions a `_category`, so a praktik sub-score now
+*exists* for this source where before it silently rendered nothing. That makes the caveat above
+sharper rather than softer — the number is real now, and 12 of the questions behind it are being
+answered from a text description of a picture.
+
+### ☑ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3` — **fixed 2026-09-07**
 
 Explanations are truncated at 160 characters with no way to expand (`ResultScreen` does the same at
 180). Correct answers cannot be reviewed at all, so a lucky guess is indistinguishable from
 knowledge. And review entries carry no question number, so an item cannot be matched back to the
 navigator. Small, but this screen is the entire payload of a 100-minute session.
 
-### ☐ 101. No way to flag a question and come back to it — `S` — `P3`
+**All three, plus the flag from item 101.**
+
+- `ExplanationText` (new) keeps the truncation — a wall of full explanations makes a 50-row list
+  unscannable — and adds the way back to the rest: "Selengkapnya" / "Ringkas". Both screens use it,
+  so 160 and 180 are now one default and one caller's override rather than two hand-picked numbers
+  for the same job.
+- The review list gained a filter row: **✗ Salah / ✓ Benar / 🚩 Ditandai**, still defaulting to
+  wrong answers. Three buttons rather than one "show correct too" switch, because 🚩 cuts across
+  both of the others and is what a 100-minute paper is actually reviewed by.
+- `buildSimulasiResults` carries `number` (1-based, matching the navigator and the "Soal 7 / 15"
+  counter) and `wasFlagged`. A correct row no longer prints the same option twice under two ticks.
+
+Not extended to `ResultScreen`'s own list: it has no navigator to match back to and no flags, so
+only the explanation half of this item applies there.
+
+### ☑ 101. No way to flag a question and come back to it — `S` — `P3` — **fixed 2026-09-07**
 
 The navigator distinguishes answered from unanswered, which is most of the way there. Real exams —
 including the Prometric delivery this simulates — let you mark a question you want to revisit,
 which is exactly the behaviour a 100-minute paper rewards. `answers` is already a dict keyed by
 index, so a parallel `flagged` set is the whole feature.
 
-### ☐ 102. Small honesty gaps in the exam family's labels — `XS` — `P3`
+**It was.** A `Set` of question indexes beside `answers`, a 🚩 toggle on the question being read
+(not on the navigator — the decision to come back is made while reading), a corner dot on the
+navigator cell, and the count in the "Soal 7 / 15" line.
+
+Three things the shape of the feature decided rather than the UI:
+
+- Flagging is **orthogonal to answering**. You can flag an answer you are unsure of, not only a
+  blank — which is the case the plain answered/unanswered navigator could never express.
+- It is in the reload snapshot (item 78) beside the answer sheet, stored as an array because
+  `JSON.stringify(new Set())` is `{}`.
+- Submitting with flags still set is the last moment the promise to come back can be kept, so it
+  joins the unanswered warning — in the *same* dialog, since two in a row is how people learn to
+  dismiss them unread.
+
+The flags reach the results screen through `buildSimulasiResults` (item 100's filter row): a flag
+you can set but never see again teaches nothing.
+
+One knock-on: the answer options are now `role="group"` / `aria-label="Pilihan jawaban"`. They were
+previously identified — by a screen reader and by the tests alike — as "the buttons with
+`aria-pressed`", which stopped being unambiguous the moment a second toggle appeared on the screen.
+
+### ☑ 102. Small honesty gaps in the exam family's labels — `XS` — `P3` — **fixed 2026-09-07**
 
 - The source picker says "JAC Official — Soal resmi dari buku ujian JAC (95 soal)", but no preset
   ever draws from all 95: every start picks one teori + one praktik set (44 or 51).
 - `MODE_META.simulasi.desc` is `'Ujian + timer'` while its section siblings derive real counts from
   the data (`MODE_COUNTS`), which exists precisely because hand-written counts had gone stale.
 - `wayground` (740 questions, the largest bank in the app) and `vocab` are absent from
-  `MISSION_TYPES` in `daily-mission.js` with no stated reason, while `kuisprod` and `mirip` are in.
+  `MISSION_TYPES` in `daily-mission.js` with no stated reason, while `mirip` is in.
+  (`kuisprod` was also in, and left with the mode in 7.0.0 — the question about `wayground` and
+  `vocab` is untouched by that.)
   `simulasi`'s absence is self-evident; theirs is not.
+
+**(a)** now reads "Bank resmi 95 soal · tiap ujian ambil sebagian secara acak". The bank is 95; a
+run never is. The set-pair rule stays on the preset line rather than being said twice on one screen.
+
+**(b)** now reads "Ujian penuh 50 soal · 100 menit", derived. The counts lived only inside
+`SimulasiMode`'s `POOL_PRESETS`, which the registry cannot import — `simulasi` is a lazy chunk, and
+a static import there would pull the whole mode into the initial bundle to read three numbers — so
+`EXAM_FULL_TEORI` / `EXAM_FULL_PRAKTIK` / `examMinutes()` moved to `constants.js` and both sides
+read them. Each preset's own `sub` is now written from its own `teori`/`praktik` too: the strings
+restated three numbers that sat two lines below them, which is exactly how `MODE_COUNTS`'s
+predecessors went stale.
+
+**(c)** `wayground` and `vocab` are in, and the list has a stated rule instead of an accidental
+shape: *a mission is one sitting's worth of study you can finish and tick off today.* That admits
+every mode with a strand except `simulasi` (a 100-minute exam is a thing you schedule, not today's
+mission) and the reference surfaces `cari` / `glosari` / `catatan`, which have no end to reach.
+`daily-mission.test.js` asserts the rule against `MODE_META` rather than against a second hand-typed
+list, so the next mode added is either in or deliberately excluded.
 
 ---
 
@@ -1284,3 +1709,82 @@ index, so a parallel `flagged` set is the whole feature.
 - **Furigana on the question but never on the options.** `JpFront` honours `furiganaPolicy` for the
   question stem while options always go through `stripFuri`, in every mode. Inconsistent, but it is
   the whole app's convention, not this family's bug — and options render as plain text everywhere.
+
+---
+
+## 15. Content and product direction (2026-09-07)
+
+Filed, not built. These come from an external gap audit the owner forwarded. Most of that document
+described work already shipped or already numbered here — it cited the wrong repository URL and its
+own footnote admits the client-rendered UI was never inspected, so its claims are inference from
+docs rather than observation. Its §22 asks for one-line mode descriptions that `MODE_META` has
+carried all along, and its §21 proposes the section structure `MODE_SECTIONS` already is.
+
+Six ideas in it are genuinely not covered anywhere, and they are worth keeping.
+
+### ☐ 103. No 現場日本語 — the deck teaches nouns, not instructions — `L` — `P1`
+
+The corpus is overwhelmingly terminology. A worker who knows all 1,626 cards still has not met
+`ここ持ってて`, `終わったら呼んで`, `これ違うよ`, `もう一度お願いします` — the sentences a foreman
+actually says. Categories worth having: instructions, warnings, corrections, reporting, asking
+permission, clarification, handover.
+
+This is the one criticism in that audit with real force, and it is a content project, not a mode.
+
+### ☐ 104. Nothing tests Japanese → action — `M` — `P2`
+
+Every mode asks "what does this word mean?". None asks "what should you do?". Given
+`ホースを巻いて片付けてください`, the tested skill is choosing *coil the hose and put it away* over
+three plausible wrong actions. Closer to what the practical exam measures than recognition is.
+
+### ☐ 105. No scenario mode — `L` — `P2`
+
+A 朝礼 that runs as a sequence: the foreman states today's work, asks for a material, then asks for
+a report — with a question after each. Combines listening, vocabulary, workplace intent and
+reporting in one thread instead of four separate modes.
+
+### ☑ 106. Question source is not labelled — `S` — `P1` — **fixed 2026-09-07**
+
+A learner cannot tell JAC Official from Nugget practice while answering, and that is a trust
+question. **Cheap**: `source` already exists on every card with 13 values, and `SOURCE_META` already
+carries labels — this is a badge, not a data model.
+
+**Built, and it is three tiers rather than two** — the middle one is the whole point:
+
+| tier | what it is | where from |
+|---|---|---|
+| 🏛️ **Resmi** | the official book's own questions | `JAC_OFFICIAL` |
+| 📋 **Mockup** | written in the exam's style, but written by us | `QUIZ_SETS` with `source: 'jac-mockup'` (12 sets) |
+| ✏️ **Latihan** | practice | the six `wayground-*` sources |
+
+Collapsing mockup into "official" would overclaim and into "practice" would undersell; the badge on
+the question card says which, and the results-screen review rows repeat it. `originMeta` falls back
+to **latihan** for anything unrecognised, deliberately: the failure that matters here is an
+unlabelled question reading as official.
+
+Scoped to `simulasi`, because that is the only mode that mixes provenance behind one screen — `jac`,
+`wayground` and `vocab` each name their set in the header already.
+
+**Found while doing it:** `SimulasiMode`'s pool mapper read
+`set.source?.startsWith('csv') ? 'csv' : 'wayground'`, and no set's source starts with `csv` — the
+six real values are `wayground-teori`, `-jac`, `-quizizz`, `-lifeline-vocab`, `-vocab` and
+`jac-mockup`. That branch was dead, which is precisely how the official/practice distinction stayed
+invisible: nothing carried it.
+
+### ☐ 107. Listening is one speed — `M` — `P2`
+
+`dengar` speaks at one rate. Real instructions arrive fast, clipped, and over noise. Graded levels
+(clear → natural → supervisor-pace) would make it train comprehension rather than word recognition.
+
+### ☐ 108. Backup is invisible until it matters — `S` — `P2`
+
+Progress is local-only and there is no sync. The learner should be told that plainly, with the date
+of their last backup, rather than finding out when they change phones. `ekspor` already does the
+work; it is the surfacing that is missing.
+
+### Not filed
+
+The audit's headline proposals — an explicit curriculum, a competency model per knowledge domain,
+and a diagnosis→remediation loop — are each about the size of this entire release. They are a
+direction for the product, and that is the owner's call to make, not a task to be picked up off a
+list.

@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
+import { pillStyle } from '../styles/pill.js';
 import { shuffle } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
@@ -13,6 +14,7 @@ import {
   isVocabId,
 } from '../utils/quiz-classification.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { storedAutoNextDelay } from '../utils/auto-next.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
@@ -106,8 +108,14 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
   }));
 }
 
-export default function WaygroundMode({ onSessionEnd }) {
+export default function WaygroundMode({ onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
+  // Item 80: this mode's screen is a set list with no options panel, so there is
+  // nowhere to put a delay picker. It obeys the preference set where a panel
+  // does exist (Kuis, JAC) rather than staying pinned to QuizShell's 2000 ms
+  // default with no way out. Read once per mount: changing it mid-session would
+  // move the pacing under someone already answering.
+  const [autoNextDelay] = useState(storedAutoNextDelay);
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
   const TEORI_PRAKTIK = QUIZ_SETS.filter(
@@ -201,6 +209,8 @@ export default function WaygroundMode({ onSessionEnd }) {
         onFinish={handleFinish}
         showHint={showHint}
         accentColor={set?.color || T.amber}
+        autoNextDelay={autoNextDelay}
+        audioEnabled={audioEnabled}
         persistKey={progressKey}
         initialQIdx={restored?.qIdx ?? 0}
         initialSelected={restored?.selected ?? null}
@@ -214,17 +224,6 @@ export default function WaygroundMode({ onSessionEnd }) {
     ...g,
     sets: TEORI_PRAKTIK.filter((s) => g.match(s.id)),
   })).filter((g) => g.sets.length > 0);
-
-  const pillStyle = (active) => ({
-    fontFamily: 'inherit',
-    fontSize: 'var(--fs-small)',
-    padding: 'var(--space-6) var(--space-12)',
-    borderRadius: T.r.pill,
-    cursor: 'pointer',
-    background: active ? 'rgba(251,191,36,0.15)' : T.surface,
-    border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`,
-    color: active ? T.gold : T.textMuted,
-  });
 
   return (
     <div className={S.page}>

@@ -103,7 +103,7 @@
 }
 
 .heroDesc {
-  font-size: 0.875rem;
+  font-size: var(--fs-caption);
   line-height: 1.7;
   color: var(--ssw-textDim);
   text-align: center;
@@ -213,7 +213,7 @@
 }
 
 .trackLabel {
-  font-size: 0.875rem;
+  font-size: var(--fs-caption);
   font-weight: 700;
   color: var(--ssw-text);
 }

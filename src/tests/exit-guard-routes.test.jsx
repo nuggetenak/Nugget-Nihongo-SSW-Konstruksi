@@ -9,8 +9,8 @@
 // These tests pin each of those routes to the contract.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, act } from '@testing-library/react';
-import { createElement, useEffect, useRef } from 'react';
+import { render, act, waitFor } from '@testing-library/react';
+import { createElement, useCallback, useEffect, useRef } from 'react';
 import { AppProvider, useApp } from '../contexts/AppContext.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
 import { useExitGuard } from '../hooks/useExitGuard.js';
@@ -32,14 +32,30 @@ function usePublish(app) {
 
 // A mode that refuses to be left, plus one that allows it, so both answers are
 // covered by the same harness.
-function GuardedMode({ allow }) {
-  useExitGuard(() => Promise.resolve(allow));
+//
+// The guard is a `useCallback`, as every real caller's is (`SimulasiMode` hands
+// over `phase === 'playing' ? confirmDiscard : null`). That is not a detail:
+// `useExitGuard` re-registers whenever the callback's *identity* changes, so an
+// inline arrow re-registers on every render — including the render that follows
+// AppContext clearing the ref after a guard said "yes". With an inline arrow the
+// next popstate is guarded all over again and the exit never lands, which is a
+// property of the harness rather than of the app, and it cost a CI failure to
+// notice.
+function GuardedMode({ allow, onAsk }) {
+  // Counted through a callback prop rather than by mutating one: the
+  // react-hooks immutability rule rejects a component writing into its own
+  // props, and it is right to — a prop is the parent's value.
+  const guard = useCallback(() => {
+    onAsk?.();
+    return Promise.resolve(allow);
+  }, [allow, onAsk]);
+  useExitGuard(guard);
   return null;
 }
 
 // Enters the mode exactly once. An effect that re-enters whenever mode !== x
 // would silently undo the very exits these tests are checking for.
-function Harness({ allow, mode = 'simulasi' }) {
+function Harness({ allow, onAsk, mode = 'simulasi' }) {
   const app = useApp();
   usePublish(app);
   const entered = useRef(false);
@@ -48,15 +64,15 @@ function Harness({ allow, mode = 'simulasi' }) {
     entered.current = true;
     app.goMode(mode);
   }, [app, mode]);
-  return app.mode === mode ? createElement(GuardedMode, { allow }) : null;
+  return app.mode === mode ? createElement(GuardedMode, { allow, onAsk }) : null;
 }
 
-async function mount(allow) {
+async function mount(allow, onAsk) {
   render(
     createElement(
       ToastProvider,
       null,
-      createElement(AppProvider, null, createElement(Harness, { allow }))
+      createElement(AppProvider, null, createElement(Harness, { allow, onAsk }))
     )
   );
   await act(async () => {});
@@ -115,21 +131,45 @@ describe('exit guard — every route out of the mode area', () => {
   });
 
   it('the hardware back button leaves when the guard allows it', async () => {
-    await mount(true);
+    // What "leaves" means here needs care, and getting it wrong is what made
+    // this test intermittent enough to fail one CI run and pass the next.
+    //
+    // On an allowed exit AppContext does three things: resolve the guard, clear
+    // it, and call `history.back()` to re-apply the press the user actually
+    // made. The exit itself then arrives on the popstate *that* back causes,
+    // which the browser delivers asynchronously — and in jsdom lands on
+    // whichever entry the fixture's history stack happens to hold, which is not
+    // something this app controls or that this test should assert on. The
+    // earlier version fabricated that second popstate by hand and asserted the
+    // resulting mode; it was really asserting the shape of jsdom's history.
+    //
+    // So assert the app's own three steps, which are race-free and are what the
+    // comment always said was the point: asked once, cleared, press re-applied.
+    const backSpy = vi.spyOn(history, 'back');
+    let asked = 0;
+    const onAsk = () => {
+      asked += 1;
+    };
+    await mount(true, onAsk);
+
     await act(async () => {
       window.dispatchEvent(
         new PopStateEvent('popstate', { state: { tab: 'belajar', mode: null } })
       );
     });
-    // Allowing re-applies the press via history.back(); jsdom fires the
-    // resulting popstate asynchronously, so drive it directly here — the point
-    // under test is that the guard resolved true and cleared itself.
+    await waitFor(() => expect(backSpy).toHaveBeenCalled());
+
+    expect(asked, 'the guard should be consulted exactly once').toBe(1);
+    expect(backSpy, 'the press should be re-applied once').toHaveBeenCalledTimes(1);
+    // Cleared: a second press must not ask again. If the guard were still
+    // registered this would re-enter the guarded branch and consult it twice.
     await act(async () => {
       window.dispatchEvent(
         new PopStateEvent('popstate', { state: { tab: 'belajar', mode: null } })
       );
     });
-    expect(ctx().mode).toBe(null);
+    expect(asked, 'a released guard must not be asked a second time').toBe(1);
+    backSpy.mockRestore();
   });
 
   it('a mode with no guard is unaffected — exits stay synchronous', async () => {

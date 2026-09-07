@@ -7,7 +7,7 @@ import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
-import { calcReadiness } from '../utils/session-analytics.js';
+import { calcReadinessBand } from '../utils/session-analytics.js';
 import { isoToLocalDate } from '../utils/date.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { MODE_META } from '../router/modes.js';
@@ -32,10 +32,34 @@ export default function StatsMode({
   const pct = Math.round((knownN / total) * 100);
   const streak = streakData?.days ?? 0;
 
-  const readiness = calcReadiness({ srs, sessions, streakData });
-  const ringColor = readiness >= 75 ? T.correct : readiness >= 50 ? T.gold : T.wrong;
-  const readinessLabel =
-    readiness >= 75 ? 'Siap Ujian! 🎉' : readiness >= 50 ? 'Hampir Siap' : 'Belum Siap';
+  // Item 70: this screen rendered `calcReadiness` as a bare "45%" while the
+  // Dashboard showed a band from the same number. Item 56 had already decided
+  // against the number — false precision is demotivating for someone whose visa
+  // depends on this exam — so one screen believed the argument and the other
+  // didn't. Both now show the band, and `readinessBand.label` is used verbatim so
+  // the two screens cannot drift apart in wording either.
+  //
+  // The arc stays: it is this screen's visual anchor, and an arc reads as
+  // "roughly this far along" rather than as a measurement. Below 5 scored
+  // sessions `calcReadinessBand` returns null rather than guess, and the ring
+  // says so instead of drawing a number over nothing.
+  const readinessBand = calcReadinessBand({ srs, sessions, streakData });
+  const readiness = readinessBand?.score ?? 0;
+  const ringColor = !readinessBand
+    ? T.textDim
+    : readinessBand.key === 'siap'
+      ? T.correct
+      : readinessBand.key === 'cukup'
+        ? T.gold
+        : T.wrong;
+  const readinessLabel = readinessBand?.label ?? 'Belum cukup data';
+  const readinessHint = !readinessBand
+    ? 'Selesaikan minimal 5 kuis supaya penilaian kesiapan bisa dihitung.'
+    : readinessBand.key === 'siap'
+      ? 'Pertahankan ritme ini sampai hari ujian.'
+      : readinessBand.key === 'cukup'
+        ? 'Sedikit lagi — jaga ulasan harian dan kuis tetap jalan.'
+        : 'Perbanyak Ulasan SRS dan kuis harian dulu.';
 
   // Build quiz accuracy per category from wrong-tracker data.
   // quizWrong { [cardId]: wrongEntry } — cards with wrong entries have known errors
@@ -139,18 +163,20 @@ export default function StatsMode({
               total={100}
               size={140}
               stroke={10}
-              label={readinessLabel}
+              centerText={readinessBand ? readinessBand.label : '—'}
+              label=""
+              ariaLabel={`Kesiapan ujian: ${readinessLabel}`}
             />
           </div>
           <div
             style={{
-              fontSize: 'var(--fs-body)',
-              color: ringColor,
-              fontWeight: 700,
+              fontSize: 'var(--fs-caption)',
+              color: readinessBand ? ringColor : T.textDim,
               marginTop: 'var(--space-2)',
+              maxWidth: '24ch',
             }}
           >
-            {readinessLabel}
+            {readinessHint}
           </div>
         </div>
 

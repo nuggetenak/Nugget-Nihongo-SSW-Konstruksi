@@ -31,9 +31,50 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of 2026-09-05.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **6.1.0**, **768 tests in 79 files**, `npm run validate` clean, `main` at
-`6344ca6` and both entries below merged into it.
+**As of 2026-09-07.** Verify before trusting past this point — this line doesn't update itself.
+At that date: version **7.0.0**, **1,626 cards**, **19 modes**, **867 tests in 90 files**,
+`npm run validate` clean. The 7.0.0 entry below is on branch
+`claude/remove-modes-split-vocab-cards-5r2qfe` (PR #12), not yet merged; everything under it is on
+`main`.
+
+- **2026-09-07: "hapus mode produksi & kuis produksi · pecah kartu multi-kosakata · kerjakan
+  antrean docs."** Branch `claude/remove-modes-split-vocab-cards-5r2qfe`. Full write-up is
+  `CHANGELOG.md` `[7.0.0]`; per-item reasoning is in `docs/UI_UX_PLAN.md` and the commit messages.
+  What a future session most needs to know:
+
+  - **The corpus is 1,626, not 1,438, and one card is one term.** `docs/CARD_SPLIT_AUDIT.md` holds
+    a verdict for every card in the pre-split corpus, including the rule that kept each of the 113
+    that stayed whole. **Card ids were not renumbered** and must not be — a parent keeps its id for
+    its first term, children are appended, and `scripts/audit-integrity.mjs` explains what
+    renumbering would break. `STORAGE_VERSION` is still **6**.
+  - **Deduplicate before splitting, if this ever happens again.** 583 raw child slots collapsed to
+    451 distinct terms; 76 of those already had cards. Splitting first would have created about 128
+    duplicates to clean up afterwards.
+  - **41 card ids were retired**, and every one of them has its content on a surviving card
+    (checked against `main`'s corpus, not assumed). Retiring an id is not the same thing as
+    renumbering — renumbering is what `audit-integrity.mjs` forbids — but it does leave an orphaned
+    SRS entry in anyone who had reviewed that card. Harmless where the caller passes a whitelist of
+    live ids, which is the design; `daily-mission.js` did not, and could therefore set an
+    "Ulasan SRS" mission with an empty review queue behind it. Fixed here.
+    `src/tests/srs-orphans.test.js` now asserts that no call site leaves the whitelist off.
+  - **152 of 518 vocab children have no `usage`**, deliberately, against a plan that said they all
+    would. Only 366 could inherit a sentence that verifiably contains their term, and composing
+    unverified Japanese for a certification deck is worse than omitting the field (§4.6 allows it).
+    Authoring them is a standing offer, not a gap that was missed.
+  - **Two runtime hazards came out of the mode removal, not the deletion itself**: a `% 3` modulo
+    left over a 2-element rotation, and a persisted `prefs.lastMode` naming a mode that no longer
+    exists. Both are fixed at the class level, and `src/tests/removed-mode-safety.test.js` holds
+    them.
+  - **Ten `UI_UX_PLAN` items remain open, each with a stated reason** — none of them for lack of a
+    decision. 58 needs storage v7 and its own session; 59 is blocked because no ja-JP voice exists
+    anywhere in this toolchain (re-verified, not assumed); 69 is an owner call that would move every
+    category score on FocusMode's weakness screen; 96 is *sized* (305 of 980 links derivable,
+    675 needing a human read — `npm run derive:quiz-links`) and wants its own branch; 99 is blocked
+    on the exam photographs not existing; 103–105, 107–108 are product direction filed from an
+    external audit, not defects.
+  - **Measured, not eyeballed**: items 73 and 74 were driven in Chromium against the running app
+    (dead space 179px→0 on a phone, 401px→0 on a tablet), and item 98's before/after distributions
+    come from 20,000 simulated draws each.
 
 - **2026-09-05: "audit administrative and governance docs; fix all discrepancies; compact and do
   deep comprehensive housekeeping."** Branch `claude/admin-governance-docs-audit-qpmndo`. No

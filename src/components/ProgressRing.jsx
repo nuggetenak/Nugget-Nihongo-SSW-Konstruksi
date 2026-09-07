@@ -11,13 +11,19 @@ export default function ProgressRing({
   size = 140,
   stroke = 10,
   label = null,
+  centerText = null,
+  ariaLabel = null,
 }) {
   const pct = total > 0 ? Math.min(100, (current / total) * 100) : 0;
   const radius = (size - stroke) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (pct / 100) * circumference;
 
-  const fontSize = size >= 120 ? 28 : 20;
+  // `centerText` replaces the percentage without changing what the arc draws —
+  // for a caller that wants the shape of the progress but not a number for it
+  // (StatsMode's readiness band, item 70). Words need more room than two digits,
+  // so they get a smaller size and are allowed to wrap.
+  const fontSize = centerText ? (size >= 120 ? 18 : 14) : size >= 120 ? 28 : 20;
   const subSize = size >= 120 ? 12 : 10;
 
   return (
@@ -27,7 +33,9 @@ export default function ProgressRing({
         width={size}
         height={size}
         role="img"
-        aria-label={`Progress: ${Math.round(pct)}% — ${current} dari ${total} kartu hafal`}
+        aria-label={
+          ariaLabel ?? `Progress: ${Math.round(pct)}% — ${current} dari ${total} kartu hafal`
+        }
       >
         <defs>
           <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -47,8 +55,16 @@ export default function ProgressRing({
         />
       </svg>
       <div className={s.center}>
-        <div className={s.pct} style={{ fontSize }}>
-          {Math.round(pct)}%
+        <div
+          className={s.pct}
+          style={{
+            fontSize,
+            ...(centerText
+              ? { letterSpacing: 0, lineHeight: 1.15, maxWidth: size - stroke * 4 }
+              : null),
+          }}
+        >
+          {centerText ?? `${Math.round(pct)}%`}
         </div>
         <div className={s.sub} style={{ fontSize: subSize }}>
           {/* Corpus-scale by every current caller (SayaTab passes known/1438),

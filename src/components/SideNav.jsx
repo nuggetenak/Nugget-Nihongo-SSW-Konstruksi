@@ -8,7 +8,7 @@
 //
 // Below the 3 top-level tabs, the full mode registry (item 13, 2026-08-20):
 // on a desktop-width screen every mode used to require a trip to the Belajar
-// tab. MODE_SECTIONS already groups all 21 modes (Pelajari/Latihan/Ujian/
+// tab. MODE_SECTIONS already groups all 19 modes (Pelajari/Latihan/Ujian/
 // Ulasan/Alat) — this just renders that existing registry instead of adding
 // a new mapping. Native <details>/<summary> for collapse, not custom JS —
 // correct keyboard and AT semantics for free, and the active mode's own
@@ -31,7 +31,7 @@ const TABS = [
 
 // Which MODE_SECTIONS group contains the currently active mode, if any —
 // used to auto-expand that one section rather than showing all 5 collapsed
-// (or all 21 modes flat) regardless of where the user actually is.
+// (or all 19 modes flat) regardless of where the user actually is.
 function activeSectionKey(mode) {
   if (!mode) return null;
   for (const [key, section] of Object.entries(MODE_SECTIONS)) {

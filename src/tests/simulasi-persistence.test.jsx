@@ -16,6 +16,7 @@ import { createElement } from 'react';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
 import { AppProvider } from '../contexts/AppContext.jsx';
+import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import { CARDS } from '../data/cards.js';
 import SimulasiMode from '../modes/SimulasiMode.jsx';
@@ -29,7 +30,11 @@ function renderSim(props = {}) {
       createElement(
         ConfirmProvider,
         null,
-        createElement(AppProvider, null, createElement(SimulasiMode, all))
+        createElement(
+          AppProvider,
+          null,
+          createElement(ProgressProvider, null, createElement(SimulasiMode, all))
+        )
       )
     )
   );
@@ -39,7 +44,11 @@ function renderSim(props = {}) {
 const start = async () => {
   await act(async () => fireEvent.click(screen.getByText('Mulai Simulasi 🎯')));
 };
-const optionButtons = () => [...document.querySelectorAll('button[aria-pressed]')];
+// Scoped to the options group: the review flag (item 101) is a toggle button
+// too, so `button[aria-pressed]` alone no longer means "an answer option".
+const optionButtons = () => [
+  ...screen.getByRole('group', { name: 'Pilihan jawaban' }).querySelectorAll('button'),
+];
 
 beforeEach(() => {
   localStorage.clear();

@@ -1,12 +1,13 @@
 import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
-import { makeWrongEntry } from '../utils/wrong-tracker.js';
+import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import { isVocabId } from '../utils/quiz-classification.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { storedAutoNextDelay } from '../utils/auto-next.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import QuizShell from '../components/QuizShell.jsx';
@@ -17,8 +18,20 @@ import S from './modes.module.css';
 // VOCAB_SETS and MIX_ALL computed inside component — track-filtered
 const MIX_ALL_ID = '__vocab_mix__';
 
+// Item 79: VocabMode writes progress.vocabWrong keyed `${setId}-${q.id}` —
+// byte-for-byte the shape WaygroundMode writes to progress.wgWrong, and
+// WaygroundMode has offered "⚠ Ulang N salah" per set all along. The store was
+// here; the way back into it was not.
+function getSetWrongCount(setId, questions) {
+  const vocabWrong = get('progress')?.vocabWrong ?? {};
+  return questions.filter((q) => getWrongCount(vocabWrong[`${setId}-${q.id}`]) > 0).length;
+}
+
 export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
+  // Item 80: same shell, same shape of screen, same preference — see WaygroundMode.
+  const [autoNextDelay] = useState(storedAutoNextDelay);
+  const [lemahMode, setLemahMode] = useState(false);
   // Scoped to wglv-* specifically, not a plain 'wg' prefix -- that also
   // matches wgl01..wgl10 (JAC-style "Praktik Set" questions, unrelated to
   // vocab drilling), which used to get counted/mixed in here by mistake.
@@ -52,12 +65,19 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
   // dependency), but a resumable session needs the exact list it started with:
   // restoring "question 7 of 40" against a re-shuffled 40 is the wrong question.
   const openSet = useCallback(
-    (setId) => {
+    (setId, lemah = false) => {
       const def = setId === MIX_ALL_ID ? MIX_ALL : VOCAB_SETS.find((x) => x.id === setId);
-      const qs =
+      let pool =
         setId === MIX_ALL_ID
-          ? shuffle(VOCAB_SETS.flatMap((x) => x.questions.map((q) => ({ ...q, _set: x.id }))))
-          : shuffle(def?.questions ?? []);
+          ? VOCAB_SETS.flatMap((x) => x.questions.map((q) => ({ ...q, _set: x.id })))
+          : (def?.questions ?? []);
+      if (lemah) {
+        // The id a question is stored under is the one it was answered under —
+        // for Mix All that is its own set's id, not MIX_ALL_ID.
+        const vocabWrong = get('progress')?.vocabWrong ?? {};
+        pool = pool.filter((q) => getWrongCount(vocabWrong[`${q._set ?? setId}-${q.id}`]) > 0);
+      }
+      const qs = shuffle(pool);
       const drawn = qs.map((q) => ({
         question: q.q,
         hint: showHint ? q.hint : null,
@@ -67,13 +87,14 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         })),
         correctIdx: q.ans,
         explanation: q.exp,
-        _qId: `${setId}-${q.id}`,
+        _qId: `${q._set ?? setId}-${q.id}`,
       }));
       setQuestions(drawn);
       setActiveSet(setId);
+      setLemahMode(lemah);
       setRestored(null);
       clear();
-      beginSession(drawn, { setId });
+      beginSession(drawn, { setId, lemah });
     },
     // MIX_ALL is rebuilt every render but only its id and questions are read,
     // both of which are derived from VOCAB_SETS.
@@ -85,6 +106,7 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
     if (!resumeData) return;
     setQuestions(resumeData.questions);
     setActiveSet(resumeData.meta?.setId ?? null);
+    setLemahMode(!!resumeData.meta?.lemah);
     setRestored(resumeData.progress);
     dismiss();
   }, [resumeData, dismiss]);
@@ -112,10 +134,14 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
       clear(); // QuizShell clears its own progress key; the question list is ours
       if (!activeSet) return;
       const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-      saveScore('vocab', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
+      // A wrong-only run is a re-drill of a subset, so scoring it would
+      // overwrite the set's real result with a number from a different exam —
+      // the same reason WaygroundMode skips saveScore in lemah mode.
+      if (!lemahMode)
+        saveScore('vocab', activeSet, { score: correct, total, pct, maxStreak, date: Date.now() });
       onSessionEnd?.({ correct, total, durationMs });
     },
-    [activeSet, saveScore, onSessionEnd, clear]
+    [activeSet, lemahMode, saveScore, onSessionEnd, clear]
   );
 
   if (activeSet) {
@@ -124,10 +150,11 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         questions={questions}
         onExit={() => {
           setActiveSet(null);
+          setLemahMode(false);
           setQuestions([]);
           setRestored(null);
         }}
-        title={setDef?.title || ''}
+        title={lemahMode ? `⚠ ${setDef?.title || ''} · Salah` : setDef?.title || ''}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
         // No onRetryWrong: QuizShell can only offer that button when its
@@ -138,6 +165,7 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         // cards), not a wiring one.
         showHint={showHint}
         accentColor={setDef?.color || T.amber}
+        autoNextDelay={autoNextDelay}
         audioEnabled={audioEnabled}
         persistKey={progressKey}
         initialQIdx={restored?.qIdx ?? 0}
@@ -202,7 +230,7 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         }}
       >
         <div>
-          <div style={{ fontSize: '0.875rem', fontWeight: 700 }}>🔀 Mix All Vocab</div>
+          <div style={{ fontSize: 'var(--fs-caption)', fontWeight: 700 }}>🔀 Mix All Vocab</div>
           <div
             style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 'var(--space-2)' }}
           >
@@ -251,57 +279,89 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         <div className={S.list}>
           {VOCAB_SETS.map((s) => {
             const saved = scores[s.id];
+            const wrongCount = getSetWrongCount(s.id, s.questions);
             return (
-              <button
-                key={s.id}
-                className={S.btnItem}
-                onClick={() => openSet(s.id)}
-                style={{ paddingLeft: 'var(--space-16)', position: 'relative', overflow: 'hidden' }}
-              >
-                <div
+              <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                <button
+                  className={S.btnItem}
+                  onClick={() => openSet(s.id)}
                   style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: 4,
-                    background: s.color || '#60a5fa',
+                    paddingLeft: 'var(--space-16)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    borderBottomLeftRadius: wrongCount > 0 ? 0 : undefined,
+                    borderBottomRightRadius: wrongCount > 0 ? 0 : undefined,
                   }}
-                />
-                <div className={S.rowSpread}>
-                  <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700 }}>
-                    {s.emoji} {s.title}
-                  </span>
-                  <div className={S.row} style={{ gap: 'var(--space-8)' }}>
-                    {saved && (
-                      <span
-                        style={{
-                          fontSize: 'var(--fs-small)',
-                          fontWeight: 700,
-                          color: saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
-                        }}
-                      >
-                        {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
-                      </span>
-                    )}
-                    <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>
-                      {s.questions.length}q
-                    </span>
-                  </div>
-                </div>
-                {s.subtitle && (
+                >
                   <div
                     style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: 4,
+                      background: s.color || '#60a5fa',
+                    }}
+                  />
+                  <div className={S.rowSpread}>
+                    <span style={{ fontSize: 'var(--fs-body)', fontWeight: 700 }}>
+                      {s.emoji} {s.title}
+                    </span>
+                    <div className={S.row} style={{ gap: 'var(--space-8)' }}>
+                      {saved && (
+                        <span
+                          style={{
+                            fontSize: 'var(--fs-small)',
+                            fontWeight: 700,
+                            color:
+                              saved.pct >= 70 ? T.correct : saved.pct >= 50 ? T.amber : T.wrong,
+                          }}
+                        >
+                          {saved.pct}%{saved.maxStreak > 1 ? ` 🔥${saved.maxStreak}` : ''}
+                        </span>
+                      )}
+                      <span style={{ fontSize: 'var(--fs-small)', color: T.textDim }}>
+                        {s.questions.length}q
+                      </span>
+                    </div>
+                  </div>
+                  {s.subtitle && (
+                    <div
+                      style={{
+                        fontSize: 'var(--fs-small)',
+                        color: T.textDim,
+                        marginTop: 'var(--space-4)',
+                        fontFamily: T.fontJP,
+                      }}
+                    >
+                      {renderJPWithRuby(s.subtitle, parseRubyFragments(s.subtitle))}
+                    </div>
+                  )}
+                </button>
+                {/* Item 79: the same sub-button WaygroundMode has had all along,
+                  over the same shape of store. */}
+                {wrongCount > 0 && (
+                  <button
+                    onClick={() => openSet(s.id, true)}
+                    style={{
+                      fontFamily: 'inherit',
                       fontSize: 'var(--fs-small)',
-                      color: T.textDim,
-                      marginTop: 'var(--space-4)',
-                      fontFamily: T.fontJP,
+                      padding: 'var(--space-6) var(--space-16)',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                      background: 'rgba(220,38,38,0.06)',
+                      border: '1px solid rgba(220,38,38,0.2)',
+                      borderTop: 'none',
+                      borderBottomLeftRadius: T.r.md,
+                      borderBottomRightRadius: T.r.md,
+                      color: T.wrong,
+                      fontWeight: 600,
                     }}
                   >
-                    {renderJPWithRuby(s.subtitle, parseRubyFragments(s.subtitle))}
-                  </div>
+                    ⚠ Ulang {wrongCount} salah
+                  </button>
                 )}
-              </button>
+              </div>
             );
           })}
         </div>

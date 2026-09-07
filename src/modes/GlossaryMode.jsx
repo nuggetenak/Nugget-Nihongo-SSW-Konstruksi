@@ -7,6 +7,7 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { CATEGORIES, getCatsForTrack } from '../data/categories.js';
+import CategoryPicker from '../components/CategoryPicker.jsx';
 import { stripFuri, extractReadings, JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { get as storageGet } from '../storage/engine.js';
@@ -259,29 +260,27 @@ export default function GlossaryMode({ track }) {
             </button>
           </div>
         </div>
+        {/* Item 77: was the third hand-rolled copy. The counts stay this
+            screen's own — "Semua" here means what the current search matched,
+            not the size of the corpus, which is why CategoryPicker takes them
+            rather than deriving them. */}
         <div className={G.filterRow}>
-          {[{ key: 'all', label: 'Semua', emoji: '📋' }, ...visibleCats].map((c) => {
-            const active = filterCat === c.key;
-            const count =
-              c.key === 'all'
-                ? sorted.length
-                : CARDS.filter((card) => card.category === c.key).length;
-            return (
-              <button
-                key={c.key}
-                onClick={() => setFilterCat(c.key)}
-                className={G.filterBtn}
-                style={{
-                  background: active ? 'rgba(251,191,36,0.15)' : T.surface,
-                  border: `1px solid ${active ? 'rgba(251,191,36,0.35)' : T.border}`,
-                  color: active ? T.gold : T.textMuted,
-                }}
-              >
-                <span>{c.emoji}</span>
-                {active && <span style={{ opacity: 0.7 }}>{count}</span>}
-              </button>
-            );
-          })}
+          <CategoryPicker
+            cats={visibleCats}
+            value={filterCat}
+            onChange={setFilterCat}
+            variant="compact"
+            allOption={{ label: 'Semua', emoji: '📋' }}
+            counts={{
+              all: sorted.length,
+              ...Object.fromEntries(
+                visibleCats.map((c) => [
+                  c.key,
+                  CARDS.filter((card) => card.category === c.key).length,
+                ])
+              ),
+            }}
+          />
         </div>
       </div>
 

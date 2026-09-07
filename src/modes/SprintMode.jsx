@@ -8,6 +8,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { JpFront } from '../components/JpDisplay.jsx';
 import { get as storageGet, set as storageSet } from '../storage/engine.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
+import CategoryPicker, { countByCategory } from '../components/CategoryPicker.jsx';
 import { CATEGORIES } from '../data/categories.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
@@ -32,12 +33,23 @@ function saveDurationBests(key, score, timeline) {
   }));
 }
 
-export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = null }) {
+export default function SprintMode({
+  cards,
+  onExit,
+  onSessionEnd,
+  onRetryWrong,
+  filterIds = null,
+}) {
   const [phase, setPhase] = useState('ready');
   const [order, setOrder] = useState([]);
   const [idx, setIdx] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [wrong, setWrong] = useState(0);
+  // Item 79: Sprint already wrote every "Tidak Tahu" into progress.quizWrong
+  // keyed by real card id — it was the one mode in the item's list where the
+  // ids are exact rather than inferred — and then offered no way back to them.
+  // Kept for this run only; the persistent tally is the wrong-tracker's job.
+  const [wrongIds, setWrongIds] = useState([]);
   const [timeLeft, setTimeLeft] = useState(60);
   const [showAnswer, setShowAnswer] = useState(false);
   const [newBest, setNewBest] = useState(false);
@@ -54,14 +66,13 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   // Available categories from the cards prop.
   // Scope to filterIds if launched from SumberMode.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+  // Item 77: the `all` row moved into CategoryPicker, which owns it for all
+  // three callers rather than each of them re-inventing it.
   const availableCats = useMemo(() => {
     const catKeys = new Set(baseCards.map((c) => c.category));
-    return [
-      { key: 'all', label: 'Semua Kategori', emoji: '📚' },
-      ...CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key)).map(
-        (c) => ({ key: c.key, label: c.label, emoji: c.emoji })
-      ),
-    ];
+    return CATEGORIES.filter(
+      (c) => c.key !== 'all' && c.key !== 'bintang' && catKeys.has(c.key)
+    ).map((c) => ({ key: c.key, label: c.label, emoji: c.emoji }));
   }, [baseCards]);
 
   const filteredCards = useMemo(() => {
@@ -134,6 +145,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     // Record wrong answer to quiz wrong-tracker.
     const cardId = order[idx]?.id;
     if (cardId) {
+      setWrongIds((ids) => (ids.includes(cardId) ? ids : [...ids, cardId]));
       storageSet('progress', (p) => {
         const qw = { ...(p?.quizWrong ?? {}) };
         qw[cardId] = makeWrongEntry(qw[cardId]);
@@ -149,6 +161,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
     setIdx(0);
     setCorrect(0);
     setWrong(0);
+    setWrongIds([]);
     setTimeLeft(duration);
     setNewBest(false);
     setGhostScore(0);
@@ -160,7 +173,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   if (phase === 'ready') {
     const pb = personalBest;
     return (
-      <div className={S.page}>
+      <div className={`${S.page} ${S.setupPage}`}>
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-20)' }}>
           <div style={{ fontSize: '3rem', marginBottom: 'var(--space-8)' }}>⚡</div>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
@@ -208,50 +221,28 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           ))}
         </div>
 
-        {/* Category picker */}
-        {availableCats.length > 1 && (
-          <>
-            <div className={S.sectionLabel}>Kategori</div>
-            <div
-              className={S.list}
-              style={{ maxHeight: 200, overflowY: 'auto', marginBottom: 'var(--space-16)' }}
-            >
-              {availableCats.map((c) => (
-                <button
-                  key={c.key}
-                  onClick={() => setSelectedCat(c.key)}
-                  className={S.btnItem}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--space-10)',
-                    background: selectedCat === c.key ? 'rgba(245,158,11,0.10)' : T.surface,
-                    border: `1px solid ${selectedCat === c.key ? `${T.amber}66` : T.border}`,
-                    color: selectedCat === c.key ? T.amber : T.text,
-                  }}
-                >
-                  <span>{c.emoji}</span>
-                  <span style={{ fontSize: 'var(--fs-body)' }}>{c.label}</span>
-                  <span
-                    style={{ marginLeft: 'auto', fontSize: 'var(--fs-small)', color: T.textDim }}
-                  >
-                    {c.key === 'all'
-                      ? `${baseCards.length} kartu`
-                      : `${baseCards.filter((cd) => cd.category === c.key).length} kartu`}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+        {/* Item 77: was the second of three hand-rolled copies. */}
+        <CategoryPicker
+          cats={availableCats}
+          value={selectedCat}
+          onChange={setSelectedCat}
+          variant="rows"
+          label="Kategori"
+          counts={countByCategory(baseCards)}
+          countSuffix="kartu"
+          allOption={{ label: 'Semua Kategori', emoji: '📚' }}
+          maxHeight={200}
+        />
 
-        <button
-          className={S.btnPrimary}
-          style={{ width: '100%', padding: 'var(--space-14)', fontSize: 'var(--fs-subtitle)' }}
-          onClick={startSprint}
-        >
-          Mulai ⚡
-        </button>
+        <div className={S.setupCta}>
+          <button
+            className={S.btnPrimary}
+            style={{ width: '100%', padding: 'var(--space-14)', fontSize: 'var(--fs-subtitle)' }}
+            onClick={startSprint}
+          >
+            Mulai ⚡
+          </button>
+        </div>
       </div>
     );
   }
@@ -321,7 +312,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             Rekor sebelumnya terlampaui!
           </div>
         )}
-        <div className={S.row} style={{ gap: 'var(--space-8)' }}>
+        <div className={S.row} style={{ gap: 'var(--space-8)', flexWrap: 'wrap' }}>
           <button
             className={S.btnPrimary}
             style={{ fontSize: 'var(--fs-body)', padding: 'var(--space-12)' }}
@@ -329,6 +320,18 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           >
             🔄 Ulang
           </button>
+          {/* Item 79. Not on ResultScreen — item 46 kept Sprint off that screen
+              on purpose — but the bridge itself is the same one every other
+              scored mode has, and the ids behind it are exact. */}
+          {onRetryWrong && wrongIds.length > 0 && (
+            <button
+              className={S.btnSecondary}
+              style={{ padding: 'var(--space-12)', borderRadius: T.r.md }}
+              onClick={() => onRetryWrong(wrongIds)}
+            >
+              ❌ Latih {wrongIds.length} salah
+            </button>
+          )}
           <button
             className={S.btnSecondary}
             style={{ flex: 1, padding: 'var(--space-12)', borderRadius: T.r.md }}
@@ -404,7 +407,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               textAlign: 'center',
               marginTop: 'var(--space-12)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               color: T.gold,
               fontWeight: 600,
             }}
@@ -419,7 +422,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               flex: 1,
               padding: 'var(--space-14)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               fontWeight: 600,
               fontFamily: 'inherit',
               borderRadius: T.r.md,
@@ -436,7 +439,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               flex: 1,
               padding: 'var(--space-14)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               fontWeight: 600,
               fontFamily: 'inherit',
               borderRadius: T.r.md,

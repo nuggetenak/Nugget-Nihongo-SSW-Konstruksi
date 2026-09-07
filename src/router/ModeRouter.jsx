@@ -183,6 +183,23 @@ export default function ModeRouter() {
       }
     };
 
+  // Item 76: who gets the audio setting, and why. The distribution had no rule,
+  // so it had drifted -- `wayground` renders QuizShell's speaker button and was
+  // never handed the pref that shows it, while `dengar`, built entirely on
+  // audio, was equally absent for the opposite reason.
+  //
+  // The rule: `audioEnabled` is a global mute for audio the app *offers*. A mode
+  // receives it when it can speak Japanese that it is also showing as text --
+  // there the sound is an aid, and muting it costs only convenience. Two
+  // exceptions, both deliberate:
+  //
+  //   `dengar`   -- its task *is* listening. Obeying the mute would leave the
+  //                 mode with nothing to do, so it is exempt and the setting in
+  //                 Saya says so rather than quietly lying.
+  //   `simulasi` -- an exam does not offer aids (item 48's reasoning, unchanged).
+  //
+  // Every other absence follows from the rule itself: `sprint`, `angka`,
+  // `jebak` and `mirip` never call speakJP, so there is nothing to mute.
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   // Prop map — each mode gets exactly what it needs
@@ -198,6 +215,13 @@ export default function ModeRouter() {
       starred,
       onToggleStar: toggleStar,
       filterIds: modeParams?.filterIds ?? null,
+      // Item 75. The one study mode that recorded nothing. FlashcardMode fires
+      // this on unmount when at least one card was rated -- a flashcard sitting
+      // has no natural length, so leaving is the end of it.
+      onSessionEnd: makeSessionEnd('kartu'),
+      // Item 76: it shows Japanese and asks you to recall its meaning, and had
+      // no way to hear it. Manual button only -- see FlipCard.
+      audioEnabled,
     },
     ulasan: {
       srs,
@@ -218,11 +242,19 @@ export default function ModeRouter() {
       cards: filteredCards,
       onExit: exitMode,
       onSessionEnd: makeSessionEnd('sprint'),
+      // Item 79: it recorded every "Tidak Tahu" into progress.quizWrong by card
+      // id and then offered no route back to those cards.
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       filterIds: modeParams?.filterIds ?? null,
     },
     fokus: { known, quizWrong, onExit: exitMode, onSessionEnd: makeSessionEnd('fokus') },
     stats: { known, unknown, quizWrong, srs, streakData, sessions },
-    angka: { onSessionEnd: makeSessionEnd('angka') },
+    // Item 79: every ANGKA_KUNCI entry carries an explicit `kartu` id, so this
+    // bridge is exact rather than inferred from matching Japanese strings.
+    angka: {
+      onSessionEnd: makeSessionEnd('angka'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
+    },
     jebak: { onSessionEnd: makeSessionEnd('jebak') },
     cari: { track, starred, toggleStar },
     // jac keeps onRetryWrong and now actually reaches it: every JAC_OFFICIAL
@@ -240,6 +272,10 @@ export default function ModeRouter() {
     // prop map alone, which is why it sat unnoticed.
     wayground: {
       onSessionEnd: makeSessionEnd('wayground'),
+      // Item 76: it renders QuizShell, which draws a speaker button behind this
+      // prop -- so the button had simply never appeared in the largest question
+      // bank in the app, on Japanese it shows as text like every other quiz.
+      audioEnabled,
     },
     vocab: {
       onSessionEnd: makeSessionEnd('vocab'),
@@ -251,13 +287,6 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     glosari: { track },
-    produksi: {
-      cards: filteredCards,
-      onExit: exitMode,
-      onSessionEnd: makeSessionEnd('produksi'),
-      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
-      audioEnabled,
-    },
     mirip: { onSessionEnd: makeSessionEnd('mirip') },
     dengar: {
       cards: filteredCards,
@@ -267,13 +296,6 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     catatan: { cards: filteredCards },
-    kuisprod: {
-      cards: filteredCards,
-      onExit: exitMode,
-      onSessionEnd: makeSessionEnd('kuisprod'),
-      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
-      audioEnabled,
-    },
     sumber: { onNavigate: goMode },
   };
 

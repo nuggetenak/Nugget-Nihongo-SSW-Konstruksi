@@ -9,6 +9,7 @@ import { shuffle } from '../utils/shuffle.js';
 import { stripFuri, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
 import { JpFront } from '../components/JpDisplay.jsx';
+import SessionLengthPicker, { storedQuizCount } from '../components/SessionLengthPicker.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import { haptic } from '../utils/haptic.js';
@@ -37,30 +38,40 @@ const TYPE_LABEL = {
   意: { label: '意味', color: '#059669', bg: 'rgba(5,150,105,0.10)', desc: 'Makna mirip' },
 };
 
-function buildQuestions(pairs) {
+function buildQuestions(pairs, limit) {
   // Each pair generates ONE question: show termA and termB, show 2 definitions in shuffled order,
   // user matches Term A → correct def. (Then we reveal both.)
-  return shuffle(pairs).map((pair) => {
-    // Shuffle the definitions so A's def isn't always first
-    const opts = shuffle([
-      { text: pair.defA, isA: true },
-      { text: pair.defB, isA: false },
-    ]);
-    return { pair, opts, correctIdx: opts.findIndex((o) => o.isA) };
-  });
+  // Item 80: `limit` is the session length the panel chose; undefined keeps the
+  // old behaviour of drilling the whole filtered pool.
+  return shuffle(pairs)
+    .slice(0, limit ?? pairs.length)
+    .map((pair) => {
+      // Shuffle the definitions so A's def isn't always first
+      const opts = shuffle([
+        { text: pair.defA, isA: true },
+        { text: pair.defB, isA: false },
+      ]);
+      return { pair, opts, correctIdx: opts.findIndex((o) => o.isA) };
+    });
 }
 
 export default function ConfusionMode({ onSessionEnd }) {
   const [view, setView] = useState('panel'); // 'panel' | 'quiz' | 'detail'
   const [selectedPair, setSelectedPair] = useState(null);
   const [filterType, setFilterType] = useState('all');
+  const [limit, setLimit] = useState(null);
 
   const filtered =
     filterType === 'all' ? CONFUSION_PAIRS : CONFUSION_PAIRS.filter((p) => p.type === filterType);
 
   if (view === 'quiz') {
     return (
-      <QuizView pairs={filtered} onBack={() => setView('panel')} onSessionEnd={onSessionEnd} />
+      <QuizView
+        pairs={filtered}
+        limit={limit}
+        onBack={() => setView('panel')}
+        onSessionEnd={onSessionEnd}
+      />
     );
   }
 
@@ -74,6 +85,8 @@ export default function ConfusionMode({ onSessionEnd }) {
       filtered={filtered}
       filterType={filterType}
       onFilterChange={setFilterType}
+      limit={limit}
+      onLimitChange={setLimit}
       onStartQuiz={() => setView('quiz')}
       onOpenDetail={(pair) => {
         setSelectedPair(pair);
@@ -84,11 +97,24 @@ export default function ConfusionMode({ onSessionEnd }) {
 }
 
 // ── Panel ─────────────────────────────────────────────────────────────────────
-function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, onOpenDetail }) {
+function PanelView({
+  pairs,
+  filtered,
+  filterType,
+  onFilterChange,
+  limit,
+  onLimitChange,
+  onStartQuiz,
+  onOpenDetail,
+}) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const types = ['all', '音', '字', '意'];
   const typeCount = (t) => (t === 'all' ? pairs.length : pairs.filter((p) => p.type === t).length);
+  const count = limit ?? storedQuizCount(filtered.length);
+  useEffect(() => {
+    if (limit === null) onLimitChange(count);
+  }, [limit, count, onLimitChange]);
 
   return (
     <div className={S.page}>
@@ -108,7 +134,7 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
           }}
           onClick={onStartQuiz}
         >
-          🧠 Kuis
+          🧠 Kuis ({Math.min(count, filtered.length)})
         </button>
       </div>
 
@@ -147,6 +173,8 @@ function PanelView({ pairs, filtered, filterType, onFilterChange, onStartQuiz, o
           );
         })}
       </div>
+
+      <SessionLengthPicker total={filtered.length} value={count} onChange={onLimitChange} />
 
       <div className={S.list}>
         {filtered.map((pair, i) => {
@@ -269,7 +297,9 @@ function DetailView({ pair, onBack }) {
         >
           <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
-        <div style={{ fontSize: '0.875rem', color: T.text, lineHeight: 1.6 }}>{pair.defA}</div>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.text, lineHeight: 1.6 }}>
+          {pair.defA}
+        </div>
       </div>
 
       {/* Term B */}
@@ -286,7 +316,9 @@ function DetailView({ pair, onBack }) {
         >
           <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
-        <div style={{ fontSize: '0.875rem', color: T.text, lineHeight: 1.6 }}>{pair.defB}</div>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.text, lineHeight: 1.6 }}>
+          {pair.defB}
+        </div>
       </div>
 
       {/* Tip */}
@@ -315,10 +347,10 @@ function DetailView({ pair, onBack }) {
 }
 
 // ── Quiz ──────────────────────────────────────────────────────────────────────
-function QuizView({ pairs, onBack, onSessionEnd }) {
+function QuizView({ pairs, limit, onBack, onSessionEnd }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
-  const [questions] = useState(() => buildQuestions(pairs));
+  const [questions] = useState(() => buildQuestions(pairs, limit));
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
   const [results, setResults] = useState([]);

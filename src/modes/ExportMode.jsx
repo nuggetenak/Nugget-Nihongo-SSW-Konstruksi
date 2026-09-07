@@ -295,7 +295,7 @@ export default function ExportMode() {
           background: T.surface,
           color: T.textMuted,
           cursor: 'pointer',
-          fontSize: '0.875rem',
+          fontSize: 'var(--fs-caption)',
           fontWeight: 600,
           marginBottom: 'var(--space-10)',
         }}
@@ -422,7 +422,7 @@ export default function ExportMode() {
             padding: 'var(--space-14)',
             marginBottom: 'var(--space-20)',
             fontFamily: 'inherit',
-            fontSize: '0.875rem',
+            fontSize: 'var(--fs-caption)',
             fontWeight: 700,
             borderRadius: T.r.md,
             border: `1px dashed ${T.borderLight}`,

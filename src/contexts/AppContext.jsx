@@ -13,11 +13,15 @@ import {
   useRef,
 } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
+import { MODE_COMPONENTS } from '../router/modes.js';
 import { applyTheme } from '../styles/theme.js';
 import { applyTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
 import { useToast } from '../components/Toast.jsx';
 
 const _noopToast = { show: () => {}, hide: () => {} };
+
+/** A persisted mode id is only usable if the mode still exists. */
+const lastModeOrNull = (m) => (m && Object.hasOwn(MODE_COMPONENTS, m) ? m : null);
 const AppCtx = createContext({ toast: _noopToast });
 
 export function AppProvider({ children }) {
@@ -57,7 +61,13 @@ export function AppProvider({ children }) {
 
   // ── Navigation ──
   const [tab, setTab] = useState('home');
-  const [mode, setMode] = useState(prefs.lastMode ?? null);
+  // `lastMode` is persisted, so it outlives the mode it names. When `produksi`
+  // and `kuisprod` were removed, anyone whose last session was one of them
+  // booted straight into a blank screen: ModeRouter returns null for an
+  // unknown key and ModeHeader has no MODE_META to draw. Validating on read
+  // (rather than migrating the stored value) fixes it for every removal to
+  // come, including installs that upgrade across several versions at once.
+  const [mode, setMode] = useState(() => lastModeOrNull(prefs.lastMode));
   const [modeParams, setModeParams] = useState(null);
   const [modeHistory, setModeHistory] = useState([]); // breadcrumb stack (max 3)
 
@@ -338,11 +348,14 @@ export function AppProvider({ children }) {
       isPopRef.current = true;
       canPopRef.current = false; // browser position moved; re-earn trust from a fresh pushState
       const state = e.state;
-      if (state?.mode) {
+      // Same guard as the initial state above: history entries survive a reload,
+      // so a popstate can carry a mode id that no longer exists.
+      const restored = lastModeOrNull(state?.mode);
+      if (restored) {
         setTab(state.tab);
-        setMode(state.mode);
+        setMode(restored);
         setModeHistory(state.modeHistory ?? []);
-        setPref('lastMode', state.mode);
+        setPref('lastMode', restored);
       } else {
         // Either a tab-level entry, or popped past everything this app
         // pushed (state is null) -- either way, land at the tab level.

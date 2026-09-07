@@ -5,24 +5,45 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { get, set as storageSet } from '../storage/engine.js';
 import { getDueCardIds } from '../srs/fsrs-scheduler.js';
+import { CARDS } from '../data/cards.js';
 import { todayStr } from './date.js';
 import { MODE_META } from '../router/modes.js';
 
+const LIVE_CARD_IDS = CARDS.map((c) => c.id);
+
 // Four Strands mapping (Nation 2007) — strand derives from MODE_META.
+//
+// Membership rule (item 102c — the list previously had none, and the omissions
+// looked arbitrary): a mission is one sitting's worth of study that a person can
+// finish and tick off today. That admits every mode with a strand except two
+// kinds:
+//
+//   `simulasi` — a full exam is 100 minutes. Offering it as "today's mission"
+//                misrepresents what it costs; it is a thing you schedule.
+//   `cari` / `glosari` / `catatan` — reference surfaces. They have no end, so
+//                there is nothing to complete.
+//
+// `wayground` (the largest bank in the app at 740 questions) and `vocab` were
+// missing for no reason anyone had written down, and are in now. `produksi` and
+// `kuisprod` were in and left with the modes in 7.0.0.
 const MISSION_TYPES = [
   { mode: 'ulasan', label: 'Ulasan SRS', icon: '🔁', priority: 5 },
   { mode: 'kartu', label: 'Pelajari Kartu', icon: '🃏', priority: 3 },
   { mode: 'kuis', label: 'Kuis 10 Soal', icon: '❓', priority: 3 },
   { mode: 'sprint', label: 'Sprint 60 Detik', icon: '⚡', priority: 2 },
   { mode: 'jac', label: 'Latihan JAC', icon: '📋', priority: 2 },
+  { mode: 'wayground', label: 'Soal Teknis', icon: '🎓', priority: 2 },
+  { mode: 'vocab', label: 'Kuis Kosakata', icon: '📖', priority: 3 },
   { mode: 'fokus', label: 'Fokus Kelemahan', icon: '🎯', priority: 4 },
   { mode: 'angka', label: 'Angka Kunci', icon: '🔢', priority: 3 },
   { mode: 'jebak', label: 'Soal Jebak', icon: '⚠️', priority: 3 },
-  { mode: 'produksi', label: 'Latihan Produksi', icon: '✍️', priority: 3 },
-  { mode: 'kuisprod', label: 'Kuis Produksi', icon: '🔤', priority: 2 },
   { mode: 'mirip', label: 'Kata Mirip', icon: '🔀', priority: 2 },
   { mode: 'dengar', label: 'Dengarkan', icon: '🎧', priority: 2 },
 ].map((m) => ({ ...m, strand: MODE_META[m.mode]?.strand ?? null }));
+
+/** Exported so a test can assert the membership rule above against MODE_META
+ *  rather than against a second hand-typed list that drifts from this one. */
+export const MISSION_MODES = MISSION_TYPES.map((m) => m.mode);
 
 export function generateDailyMission() {
   const today = todayStr();
@@ -32,7 +53,13 @@ export function generateDailyMission() {
   // Already generated today — return cached
   if (existing?.date === today) return existing;
 
-  const dueCount = getDueCardIds().length;
+  // Scoped to cards that still exist. This was an unfiltered call, and the
+  // multi-vocabulary split made that reachable: 41 card ids were retired when
+  // duplicates merged, so anyone who had reviewed one of them carries an SRS
+  // entry with no card behind it. Unfiltered, a due orphan counted here and
+  // made "Ulasan SRS" today's mission — while the review queue itself, which
+  // useSRS *does* whitelist, had nothing in it. A mission you cannot complete.
+  const dueCount = getDueCardIds(LIVE_CARD_IDS).length;
   const sessions = progress?.sessions ?? [];
 
   // Count strand usage in last 7 days for balance check

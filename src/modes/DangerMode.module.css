@@ -151,7 +151,9 @@
 }
 
 .questionTerm {
-  font-size: 1.375rem;
+  /* Item 72: this is Japanese on a question card, and 1.375rem was exactly the
+     floor of the token written for that — it just predated the token. */
+  font-size: var(--fs-jp-back);
   font-weight: 700;
   line-height: 1.4;
 }

@@ -15,7 +15,7 @@
 // harmless. See that section for why a timestamp is the right deployed scheme.
 // Bump this in the same commit as package.json's version, every time; it is a
 // close-out step in docs/AGENT_WORKFLOW.md §3 because it was missed once already.
-const CACHE_VERSION = 'ssw-v6.1.0';
+const CACHE_VERSION = 'ssw-v7.0.0';
 const CACHE_STATIC    = `${CACHE_VERSION}-static`;
 const ALL_CACHES      = [CACHE_STATIC];
 

@@ -20,6 +20,7 @@ import { resolve } from 'path';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { ToastProvider } from '../components/Toast.jsx';
 import { AppProvider, useApp } from '../contexts/AppContext.jsx';
+import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import SimulasiMode from '../modes/SimulasiMode.jsx';
 
@@ -36,7 +37,11 @@ function renderSimulasi(onExit = vi.fn()) {
         createElement(
           AppProvider,
           null,
-          createElement(SimulasiMode, { onExit, onSessionEnd: vi.fn(), onRetryWrong: vi.fn() })
+          createElement(
+            ProgressProvider,
+            null,
+            createElement(SimulasiMode, { onExit, onSessionEnd: vi.fn(), onRetryWrong: vi.fn() })
+          )
         )
       )
     )
@@ -85,7 +90,7 @@ describe('SimulasiMode — exit confirmation during an active simulation', () =>
 
   // ── The header's back arrow is guarded too (2026-09-04) ──────────────────
   // SimulasiMode no longer draws its own top-level back button: ModeHeader
-  // renders the one back control for all 21 modes. That control has to respect
+  // renders the one back control for all 19 modes. That control has to respect
   // the same confirmation, or the header's arrow becomes a silent way to throw
   // away a 100-minute exam. SimulasiMode registers its confirmation as an exit
   // guard (useExitGuard) while, and only while, an exam is running.
@@ -106,11 +111,15 @@ describe('SimulasiMode — exit confirmation during an active simulation', () =>
             AppProvider,
             null,
             createElement(CaptureApp),
-            createElement(SimulasiMode, {
-              onExit: vi.fn(),
-              onSessionEnd: vi.fn(),
-              onRetryWrong: vi.fn(),
-            })
+            createElement(
+              ProgressProvider,
+              null,
+              createElement(SimulasiMode, {
+                onExit: vi.fn(),
+                onSessionEnd: vi.fn(),
+                onRetryWrong: vi.fn(),
+              })
+            )
           )
         )
       )

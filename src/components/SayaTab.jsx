@@ -529,12 +529,23 @@ export default function SayaTab() {
             }}
           />
         )}
+        {/* Item 76: the sub-line used to promise more than the setting does.
+            It is a mute for audio the app *offers* — the 🔊 buttons in Kartu,
+            Kuis, JAC, Teknis, Kosakata and Ulasan. Mode Dengarkan is exempt,
+            because a listening exercise obeying a global mute is a mode with
+            nothing left to do; saying so here is more honest than either
+            silencing it or leaving the exception undocumented. */}
         <Row
           label="🔊 Audio Bahasa Jepang"
           value={prefs?.audioEnabled !== false ? '✅ Aktif' : '⬜ Mati'}
-          sub="Web Speech API — tombol 🔊 di kartu"
+          sub="Tombol 🔊 di kartu & kuis. Mode Dengarkan tetap bersuara."
           onClick={() => setPref('audioEnabled', !(prefs?.audioEnabled !== false))}
         />
+        {/* Ulasan-only, and its label has always said so — item 76's second
+            finding read the *value* line, not the label. Kartu is deliberately
+            not wired to it: Ulasan speaks on its own because the queue moves for
+            you, while Kartu you drive yourself, and a card that spoke on arrival
+            would answer a reading question before it was asked. */}
         {prefs?.audioEnabled !== false && (
           <Row
             label="🔊 Kapan Bicara (Ulasan)"

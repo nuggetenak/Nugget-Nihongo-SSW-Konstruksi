@@ -116,7 +116,7 @@ export default function BelajarTab({ onSelect, badges = {} }) {
   // Collapsed by default -- the featured card (most-used mode per section)
   // stays visible either way, so this only hides secondary items, cutting
   // the tab's default scroll length substantially (LATIHAN alone goes from
-  // 8 always-visible secondary items to 0 until expanded). Local state, not
+  // 6 always-visible secondary items to 0 until expanded). Local state, not
   // persisted -- resets on remount, same as any other in-session UI state
   // in this tab.
   const [expandedSections, setExpandedSections] = useState(() => new Set());

@@ -1,6 +1,9 @@
 import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
+import { pillStyle } from '../styles/pill.js';
 import { shuffle } from '../utils/shuffle.js';
+import { AUTO_NEXT_DELAYS } from '../utils/constants.js';
+import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
@@ -38,13 +41,6 @@ const SET_COUNT = {
   st1: JAC_OFFICIAL.filter((q) => q.set === 'st1').length,
   st2: JAC_OFFICIAL.filter((q) => q.set === 'st2').length,
 };
-const DELAYS = [
-  { ms: 1000, label: '1s' },
-  { ms: 1500, label: '1.5s' },
-  { ms: 2000, label: '2s' },
-  { ms: 0, label: 'Manual' },
-];
-
 function mapQuestions(list, withID) {
   return list.map((q) => {
     const hasPhoto = !!q.photoDesc;
@@ -92,7 +88,10 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
   const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wrongCounts ?? {});
 
   const [showID, setShowID] = useState(true);
-  const [autoDelay, setAutoDelay] = useState(2000);
+  // Item 80: the choice is a preference now, not a per-session setting -- so
+  // setting it here also applies to `wayground` and `vocab`, which render the
+  // same QuizShell on a screen with nowhere to put a picker.
+  const [autoDelay, setAutoDelay] = useState(storedAutoNextDelay);
   // Track wrong question IDs during session for SRS add-to-queue.
   const [wrongQIds, setWrongQIds] = useState([]);
   const [_srsAdded, setSrsAdded] = useState(0);
@@ -218,17 +217,6 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
     );
   }
 
-  const pillStyle = (active) => ({
-    fontFamily: 'inherit',
-    fontSize: 'var(--fs-small)',
-    padding: 'var(--space-6) var(--space-12)',
-    borderRadius: T.r.pill,
-    cursor: 'pointer',
-    background: active ? 'rgba(251,191,36,0.15)' : T.surface,
-    border: `1px solid ${active ? 'rgba(251,191,36,0.4)' : T.border}`,
-    color: active ? T.gold : T.textMuted,
-  });
-
   const topicInfo = topicFilter ? TOPICS.find((t) => t.key === topicFilter) : null;
   const topicCount = (tKey) => JAC_OFFICIAL.filter((q) => q.topic === tKey).length;
   const setTopicCount = (sKey, tKey) =>
@@ -264,10 +252,13 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
       <div style={{ marginBottom: 'var(--space-20)' }}>
         <div className={S.sectionLabel}>Lanjut otomatis</div>
         <div className={S.row} style={{ gap: 'var(--space-6)' }}>
-          {DELAYS.map((d) => (
+          {AUTO_NEXT_DELAYS.map((d) => (
             <button
               key={d.ms}
-              onClick={() => setAutoDelay(d.ms)}
+              onClick={() => {
+                setAutoDelay(d.ms);
+                saveAutoNextDelay(d.ms);
+              }}
               style={{
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-small)',

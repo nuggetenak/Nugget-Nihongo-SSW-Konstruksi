@@ -1,7 +1,7 @@
 // src/utils/session-analytics.js
 // Shared session analytics — single source of truth for session math.
 
-import { SCORED_QUIZ_MODES } from './constants.js';
+import { SCORED_QUIZ_MODES, EXAM_READINESS_MIN_QUESTIONS } from './constants.js';
 
 /**
  * Average accuracy across all scored quiz sessions.
@@ -17,10 +17,21 @@ export function getAvgAccuracy(sessions, n = null) {
 }
 
 /**
- * Best simulasi score (0–100). Returns 0 if no simulasi sessions.
+ * Best simulasi score (0–100) over exam-length runs. Returns 0 if there are none.
+ *
+ * Item 97: this used to take the max across *every* simulasi session regardless
+ * of length, so the two things that consume it — the "Siap Ujian" achievement
+ * and the dashboard's readiness advice — could both be earned on a 15-question
+ * Latihan Cepat. A readiness claim has to be made against something exam-length
+ * or it is not a readiness claim.
+ *
+ * Deliberately not a *separate* short-run best: a second number would invite the
+ * same misreading one level down. A short practice run is practice.
  */
 export function getBestSimScore(sessions) {
-  const sims = sessions.filter((s) => s.mode === 'simulasi' && s.total > 0);
+  const sims = sessions.filter(
+    (s) => s.mode === 'simulasi' && s.total >= EXAM_READINESS_MIN_QUESTIONS
+  );
   return sims.length ? Math.max(...sims.map((s) => Math.round((s.correct / s.total) * 100))) : 0;
 }
 
