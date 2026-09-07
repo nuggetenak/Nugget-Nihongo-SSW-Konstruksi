@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { isTypingTarget } from '../utils/keyboard.js';
+import { originForSet, originMeta } from '../utils/question-origin.js';
 import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -293,6 +294,7 @@ export function buildJacPool() {
     // in proportion (below) and the results screen's teori/praktik breakdown
     // works for this source too instead of silently rendering nothing.
     _category: String(q.set).startsWith('st') ? 'praktik' : 'teori',
+    _origin: 'resmi', // item 106 — this is the book itself
     // Item 93: the id this question is already tracked under everywhere else.
     // JACMode writes these into progress.wrongCounts and reads them back as its
     // "⚠ Lemah" set, so a mistake made here lands where a mistake made there
@@ -340,7 +342,12 @@ export function buildQuizSetsPool() {
           explanation: q.exp || null,
           hasPhoto: false,
           photoDesc: null,
-          _source: set.source?.startsWith('csv') ? 'csv' : 'wayground',
+          // Item 106: this used to read `set.source?.startsWith('csv') ? 'csv'
+          // : 'wayground'`, and no set's source starts with 'csv' — the branch
+          // was dead, and with it any distinction between JAC-style mockups and
+          // practice material.
+          _source: 'wayground',
+          _origin: originForSet(set.source),
           _setLabel: set.title || 'Wayground',
           _category: category,
           // Item 93: the key WaygroundMode writes into progress.wgWrong and
@@ -441,6 +448,7 @@ export function drawExam(mode, config) {
       _category: q._category ?? null,
       _cardId: q._cardId ?? null,
       _wrongKey: q._wrongKey ?? null,
+      _origin: q._origin ?? 'latihan',
     };
   });
 }
@@ -1075,6 +1083,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                       }}
                     >
                       <span>Soal {r.number}</span>
+                      <span style={{ color: originMeta(r._origin).color }}>
+                        {originMeta(r._origin).short}
+                      </span>
                       <span style={{ color: r.isCorrect ? T.correct : T.wrong }}>
                         {r.isCorrect ? '✓ Benar' : '✗ Salah'}
                       </span>
@@ -1251,6 +1262,22 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
       </div>
 
       <div className={`${S.cardLg} ${SM.questionCard}`}>
+        {/* Item 106: which bank this question came from, while you are
+            answering it. "This is what the exam asked" and "this is what we
+            wrote to drill you" should not look identical on an exam-prep app. */}
+        {(() => {
+          const om = originMeta(q._origin);
+          return (
+            <div
+              className={SM.originBadge}
+              style={{ color: om.color, borderColor: `${om.color}55` }}
+              title={om.label}
+            >
+              {om.short}
+              {q._setLabel ? ` · ${q._setLabel}` : ''}
+            </div>
+          );
+        })()}
         <div className={SM.questionJp}>
           <JpFront jp={q.jp} furiganaPolicy={furiganaPolicy} />
         </div>

@@ -753,6 +753,13 @@ which is a user-visible change to a ranking, not a refactor.
 Owner call: should `vocab-supplementary` count as vocab for the purpose of "which category am I
 weakest in"?
 
+**Still the owner's call — but the working assumption is recorded, so the branch that touched
+everything around it did not touch this by accident: leave it as it is.** `categories.js:148-161`
+already explains the discrepancy deliberately, and adding `vocab-supplementary` would move every
+category score on FocusMode's weakness screen at once — a user-visible change to a ranking, made
+without anyone asking for it. It is one line in `VOCAB_SOURCES` whenever the answer is the other
+one.
+
 ### ☑ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S` — **fixed 2026-09-07**
 
 Item 56 argued the case and acted on it: a false-precision readiness number is actively
@@ -1672,11 +1679,33 @@ A 朝礼 that runs as a sequence: the foreman states today's work, asks for a ma
 a report — with a question after each. Combines listening, vocabulary, workplace intent and
 reporting in one thread instead of four separate modes.
 
-### ☐ 106. Question source is not labelled — `S` — `P1`
+### ☑ 106. Question source is not labelled — `S` — `P1` — **fixed 2026-09-07**
 
 A learner cannot tell JAC Official from Nugget practice while answering, and that is a trust
 question. **Cheap**: `source` already exists on every card with 13 values, and `SOURCE_META` already
 carries labels — this is a badge, not a data model.
+
+**Built, and it is three tiers rather than two** — the middle one is the whole point:
+
+| tier | what it is | where from |
+|---|---|---|
+| 🏛️ **Resmi** | the official book's own questions | `JAC_OFFICIAL` |
+| 📋 **Mockup** | written in the exam's style, but written by us | `QUIZ_SETS` with `source: 'jac-mockup'` (12 sets) |
+| ✏️ **Latihan** | practice | the six `wayground-*` sources |
+
+Collapsing mockup into "official" would overclaim and into "practice" would undersell; the badge on
+the question card says which, and the results-screen review rows repeat it. `originMeta` falls back
+to **latihan** for anything unrecognised, deliberately: the failure that matters here is an
+unlabelled question reading as official.
+
+Scoped to `simulasi`, because that is the only mode that mixes provenance behind one screen — `jac`,
+`wayground` and `vocab` each name their set in the header already.
+
+**Found while doing it:** `SimulasiMode`'s pool mapper read
+`set.source?.startsWith('csv') ? 'csv' : 'wayground'`, and no set's source starts with `csv` — the
+six real values are `wayground-teori`, `-jac`, `-quizizz`, `-lifeline-vocab`, `-vocab` and
+`jac-mockup`. That branch was dead, which is precisely how the official/practice distinction stayed
+invisible: nothing carried it.
 
 ### ☐ 107. Listening is one speed — `M` — `P2`
 

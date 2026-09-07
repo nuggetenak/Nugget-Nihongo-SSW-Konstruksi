@@ -53,6 +53,8 @@ export function buildSimulasiResults(questions, answers, flagged) {
       // Item 93: how this question is identified in the store its own source
       // already uses — see recordSimulasiMistakes.
       _wrongKey: question._wrongKey ?? null,
+      // Item 106: official book / JAC-style mockup / practice.
+      _origin: question._origin ?? 'latihan',
     };
   });
 }

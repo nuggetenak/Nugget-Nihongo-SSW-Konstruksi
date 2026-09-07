@@ -300,3 +300,16 @@
   margin-top: var(--space-8);
   letter-spacing: 0.3px;
 }
+
+/* Item 106: question provenance, shown while answering. Quiet on purpose — it
+   is context for the question, not part of it. */
+.originBadge {
+  display: inline-block;
+  font-size: var(--fs-nano);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 1px var(--space-6);
+  border: 1px solid;
+  border-radius: var(--r-pill);
+  margin-bottom: var(--space-8);
+}
