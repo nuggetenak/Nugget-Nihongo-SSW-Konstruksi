@@ -2,8 +2,8 @@
 // Single source of truth for shared constants.
 // Import from here — never hardcode these values in component files.
 
-export const TOTAL_CARDS = 1438;
-export const HALF_DECK_THRESHOLD = Math.ceil(TOTAL_CARDS / 2); // 719
+export const TOTAL_CARDS = 1422;
+export const HALF_DECK_THRESHOLD = Math.ceil(TOTAL_CARDS / 2); // 711
 export const FULL_DECK_THRESHOLD = TOTAL_CARDS;
 
 /** All modes whose sessions contribute to quiz accuracy scoring. */

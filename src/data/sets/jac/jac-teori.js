@@ -751,7 +751,7 @@ export const JAC_TEORI = [
     ans: 3,
     img: null,
     exp: '躯体《くたい》 = struktur utama bangunan: fondasi + kolom + balok + dinding + lantai. 仕上げ《しあげ》 = finishing, 建具《たてぐ》 = kusen, 屋根《やね》 = atap.',
-    related_card_id: 1404,
+    related_card_id: 807,
     track: 'common',
   },
   {
@@ -1048,7 +1048,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '遣り方《やりかた》 = rangka tiang kayu + papan (水貫《みずぬき》) untuk menentukan posisi & ketinggian. Di sipil disebut 丁張り《ちょうばり》. 水盛り《みずもり》 = hanya untuk cek kerataan. Kartu #152.',
-    related_card_id: 1290,
+    related_card_id: 1334,
     track: 'common',
   },
   {

@@ -1,5 +1,5 @@
 // cards-lifeline.js — lifeline track source cards.
-// Cards: 564  (text1l–text3l + vocab-lifeline merged)
+// Cards: 558  (text1l–text3l + vocab-lifeline merged)
 export const CARDS_LIFELINE = [
   {
     id: 27,
@@ -3606,18 +3606,6 @@ export const CARDS_LIFELINE = [
     _origIndex: 1038,
   },
   {
-    id: 911,
-    category: 'haikan',
-    source: 'vocab-supplementary',
-    jp: '開先加工《かいさきかこう》',
-    type: 'vocab',
-    id_text: 'Bevel preparation',
-    desc: 'Membuat sudut bevel pada ujung pipa agar hasil las bisa penetrasi sempurna.',
-    usage:
-      '溶接前《ようせつまえ》に管端《かんたん》の開先加工《かいさきかこう》（斜め切断《ななめせつだん》）をする（lakukan bevel preparation pada ujung pipa sebelum pengelasan）',
-    _origIndex: 1039,
-  },
-  {
     id: 912,
     category: 'haikan',
     source: 'vocab-supplementary',
@@ -5623,18 +5611,6 @@ export const CARDS_LIFELINE = [
     _origIndex: 948,
   },
   {
-    id: 824,
-    category: 'denki',
-    source: 'vocab-jac',
-    jp: '短絡《たんらく》',
-    type: 'vocab',
-    id_text: 'Korsleting / short',
-    desc: 'Dua kabel bersentuhan langsung tanpa beban → arus sangat besar → bahaya',
-    usage:
-      '短絡《たんらく》が発生《はっせい》しないよう配線《はいせん》を確認《かくにん》する（periksa kabel agar tidak terjadi korsleting）',
-    _origIndex: 949,
-  },
-  {
     id: 845,
     category: 'haikan',
     source: 'vocab-supplementary',
@@ -5836,18 +5812,6 @@ export const CARDS_LIFELINE = [
     usage:
       'アングルフランジを矩形ダクト《くけいだくと》の端部《たんぶ》に取《と》り付《つ》けて接続《せつぞく》する（pasang angle flange pada ujung duct persegi untuk disambung）',
     _origIndex: 1021,
-  },
-  {
-    id: 898,
-    category: 'denki',
-    source: 'vocab-supplementary',
-    jp: '高圧《こうあつ》・低圧《ていあつ》',
-    type: 'vocab',
-    id_text: 'Tegangan tinggi dan rendah',
-    desc: 'Klasifikasi tegangan listrik. 高圧《こうあつ》: di atas 600V. 低圧《ていあつ》: 600V ke bawah.',
-    usage:
-      '低圧《ていあつ》（600V以下《いか》）と高圧《こうあつ》（600Vを超える《こえる》）で使用できる工具《こうぐ》が異《こと》なる（perkakas yang dapat digunakan berbeda antara tegangan rendah ≤600V dan tegangan tinggi >600V）',
-    _origIndex: 1026,
   },
   {
     id: 904,
