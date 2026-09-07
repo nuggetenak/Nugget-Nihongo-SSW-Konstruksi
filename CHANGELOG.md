@@ -60,7 +60,19 @@ request.
   (`vocab-supplementary`) cut at about 80 characters mid-sentence. `data-integrity.test.js` C10 now
   asserts §4.5's closing-mark rule with a budget that may only shrink.
 - **19 truncated `id_text` labels** rewritten; C11 holds §4.4.
-- **16 duplicate cards merged**, `related_card_id` updated with them.
+- **41 card ids retired** where a term deduplicated into a card that already existed —
+  `related_card_id` updated with them. Verified against `main`'s corpus card by card: every one of
+  the 41 has its content on a surviving card (`1324 ダム工事の目的：治水 vs 利水`, for instance, is
+  now `1291 治水` and `1700 利水`). Ids are never *renumbered*, which is the rule that protects
+  saved SRS state; a removed id is a different thing, and it leaves an orphaned SRS entry in anyone
+  who had reviewed that card.
+
+  That was known and accepted — `getDueCardIds(whitelist)` filters an orphan out before it can
+  reach `CARD_MAP[currentId]`, so nothing crashes and no migration is needed. **What was not known
+  is that one caller passed no whitelist**: `daily-mission.js` counted orphans, so a due orphan
+  could make "Ulasan SRS" today's mission while the review queue — which `useSRS` does whitelist —
+  had nothing in it. A mission the learner cannot complete. Fixed, with
+  `src/tests/srs-orphans.test.js` holding the rule for every call site.
 - **61 ruby readings** whose marker covered less text than the reading spelled. `36協定《さぶろく
   きょうてい》` renders the whole reading over `協定` alone, because `extendBaseLeft` needs kana to
   anchor an extension and a digit gives it none. Two shapes, two fixes: a Latin prefix means the
@@ -101,7 +113,7 @@ the tool that says so.
 
 ### Verification
 
-`npm run validate` clean: 863 tests in 89 files, five audits, build. Item 74 and item 73 were
+`npm run validate` clean: 867 tests in 90 files, five audits, build. Item 74 and item 73 were
 measured in Chromium against the running app rather than eyeballed, and item 98's before/after
 distributions come from 20,000 simulated draws each.
 

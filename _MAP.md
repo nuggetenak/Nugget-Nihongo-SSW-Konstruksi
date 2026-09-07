@@ -112,7 +112,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │                                  quiz-generator, quiz-persistence, simulasi-scoring,
     │                                  text-scale, typo-diff, shuffle, wrong-tracker, …
     ├── styles/                     ← global.css (design tokens), theme.js
-    └── tests/                      ← 89 files, 863 tests
+    └── tests/                      ← 90 files, 867 tests
 ```
 
 `viewer.html` at repo root is a standalone, no-build HTML tool for browsing card/quiz content

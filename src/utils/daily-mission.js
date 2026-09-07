@@ -5,8 +5,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { get, set as storageSet } from '../storage/engine.js';
 import { getDueCardIds } from '../srs/fsrs-scheduler.js';
+import { CARDS } from '../data/cards.js';
 import { todayStr } from './date.js';
 import { MODE_META } from '../router/modes.js';
+
+const LIVE_CARD_IDS = CARDS.map((c) => c.id);
 
 // Four Strands mapping (Nation 2007) — strand derives from MODE_META.
 //
@@ -50,7 +53,13 @@ export function generateDailyMission() {
   // Already generated today — return cached
   if (existing?.date === today) return existing;
 
-  const dueCount = getDueCardIds().length;
+  // Scoped to cards that still exist. This was an unfiltered call, and the
+  // multi-vocabulary split made that reachable: 41 card ids were retired when
+  // duplicates merged, so anyone who had reviewed one of them carries an SRS
+  // entry with no card behind it. Unfiltered, a due orphan counted here and
+  // made "Ulasan SRS" today's mission — while the review queue itself, which
+  // useSRS *does* whitelist, had nothing in it. A mission you cannot complete.
+  const dueCount = getDueCardIds(LIVE_CARD_IDS).length;
   const sessions = progress?.sessions ?? [];
 
   // Count strand usage in last 7 days for balance check

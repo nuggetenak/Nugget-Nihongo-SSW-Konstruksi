@@ -32,7 +32,7 @@ content into this file.
 ## CURRENT STATE
 
 **As of 2026-09-07.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.0.0**, **1,626 cards**, **19 modes**, **863 tests in 89 files**,
+At that date: version **7.0.0**, **1,626 cards**, **19 modes**, **867 tests in 90 files**,
 `npm run validate` clean. The 7.0.0 entry below is on branch
 `claude/remove-modes-split-vocab-cards-5r2qfe` (PR #12), not yet merged; everything under it is on
 `main`.
@@ -50,6 +50,13 @@ At that date: version **7.0.0**, **1,626 cards**, **19 modes**, **863 tests in 8
   - **Deduplicate before splitting, if this ever happens again.** 583 raw child slots collapsed to
     451 distinct terms; 76 of those already had cards. Splitting first would have created about 128
     duplicates to clean up afterwards.
+  - **41 card ids were retired**, and every one of them has its content on a surviving card
+    (checked against `main`'s corpus, not assumed). Retiring an id is not the same thing as
+    renumbering — renumbering is what `audit-integrity.mjs` forbids — but it does leave an orphaned
+    SRS entry in anyone who had reviewed that card. Harmless where the caller passes a whitelist of
+    live ids, which is the design; `daily-mission.js` did not, and could therefore set an
+    "Ulasan SRS" mission with an empty review queue behind it. Fixed here.
+    `src/tests/srs-orphans.test.js` now asserts that no call site leaves the whitelist off.
   - **152 of 518 vocab children have no `usage`**, deliberately, against a plan that said they all
     would. Only 366 could inherit a sentence that verifiably contains their term, and composing
     unverified Japanese for a certification deck is worse than omitting the field (§4.6 allows it).
