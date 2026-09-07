@@ -82,7 +82,8 @@ request.
 
 ### The docs queue
 
-Nineteen items from `docs/UI_UX_PLAN.md`, each written up in the item itself. The ones that change
+Twenty items from `docs/UI_UX_PLAN.md` — 70–77, 79–81, 93–95, 97, 98, 100–102, 106 — each written
+up in the item itself. The ones that change
 behaviour rather than shape:
 
 - **The exam mode joined the app's own bookkeeping.** It recorded its mistakes nowhere (93), kept no
