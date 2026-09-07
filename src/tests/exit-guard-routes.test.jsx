@@ -41,18 +41,21 @@ function usePublish(app) {
 // next popstate is guarded all over again and the exit never lands, which is a
 // property of the harness rather than of the app, and it cost a CI failure to
 // notice.
-function GuardedMode({ allow, calls }) {
+function GuardedMode({ allow, onAsk }) {
+  // Counted through a callback prop rather than by mutating one: the
+  // react-hooks immutability rule rejects a component writing into its own
+  // props, and it is right to — a prop is the parent's value.
   const guard = useCallback(() => {
-    if (calls) calls.n += 1;
+    onAsk?.();
     return Promise.resolve(allow);
-  }, [allow, calls]);
+  }, [allow, onAsk]);
   useExitGuard(guard);
   return null;
 }
 
 // Enters the mode exactly once. An effect that re-enters whenever mode !== x
 // would silently undo the very exits these tests are checking for.
-function Harness({ allow, calls, mode = 'simulasi' }) {
+function Harness({ allow, onAsk, mode = 'simulasi' }) {
   const app = useApp();
   usePublish(app);
   const entered = useRef(false);
@@ -61,15 +64,15 @@ function Harness({ allow, calls, mode = 'simulasi' }) {
     entered.current = true;
     app.goMode(mode);
   }, [app, mode]);
-  return app.mode === mode ? createElement(GuardedMode, { allow, calls }) : null;
+  return app.mode === mode ? createElement(GuardedMode, { allow, onAsk }) : null;
 }
 
-async function mount(allow, calls) {
+async function mount(allow, onAsk) {
   render(
     createElement(
       ToastProvider,
       null,
-      createElement(AppProvider, null, createElement(Harness, { allow, calls }))
+      createElement(AppProvider, null, createElement(Harness, { allow, onAsk }))
     )
   );
   await act(async () => {});
@@ -143,8 +146,11 @@ describe('exit guard — every route out of the mode area', () => {
     // So assert the app's own three steps, which are race-free and are what the
     // comment always said was the point: asked once, cleared, press re-applied.
     const backSpy = vi.spyOn(history, 'back');
-    const calls = { n: 0 };
-    await mount(true, calls);
+    let asked = 0;
+    const onAsk = () => {
+      asked += 1;
+    };
+    await mount(true, onAsk);
 
     await act(async () => {
       window.dispatchEvent(
@@ -153,7 +159,7 @@ describe('exit guard — every route out of the mode area', () => {
     });
     await waitFor(() => expect(backSpy).toHaveBeenCalled());
 
-    expect(calls.n, 'the guard should be consulted exactly once').toBe(1);
+    expect(asked, 'the guard should be consulted exactly once').toBe(1);
     expect(backSpy, 'the press should be re-applied once').toHaveBeenCalledTimes(1);
     // Cleared: a second press must not ask again. If the guard were still
     // registered this would re-enter the guarded branch and consult it twice.
@@ -162,7 +168,7 @@ describe('exit guard — every route out of the mode area', () => {
         new PopStateEvent('popstate', { state: { tab: 'belajar', mode: null } })
       );
     });
-    expect(calls.n, 'a released guard must not be asked a second time').toBe(1);
+    expect(asked, 'a released guard must not be asked a second time').toBe(1);
     backSpy.mockRestore();
   });
 
