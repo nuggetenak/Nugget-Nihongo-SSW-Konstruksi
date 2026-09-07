@@ -6,7 +6,8 @@ import s from './ResultScreen.module.css';
 import { getGrade } from '../styles/theme.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront } from './JpDisplay.jsx';
-import { stripFuri, JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
+import { JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
+import ExplanationText from './ExplanationText.jsx';
 import { findWeakestCategory } from '../utils/session-weakness.js';
 
 // rsShake animation — injected once (not worth a CSS module import just for this)
@@ -154,16 +155,7 @@ export default function ResultScreen({
                     compact
                   />
                 </div>
-                {r.explanation &&
-                  (() => {
-                    const clean = stripFuri(r.explanation);
-                    return (
-                      <div className={s.reviewExpl}>
-                        💡 {clean.slice(0, 180)}
-                        {clean.length > 180 ? '…' : ''}
-                      </div>
-                    );
-                  })()}
+                <ExplanationText text={r.explanation} limit={180} className={s.reviewExpl} />
               </div>
             ))}
           </div>

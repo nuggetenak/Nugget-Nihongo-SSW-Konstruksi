@@ -6,6 +6,7 @@
 import { lazy } from 'react';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { isVocabId } from '../utils/quiz-classification.js';
+import { EXAM_FULL_QUESTIONS, examMinutes } from '../utils/constants.js';
 
 // Question counts shown in the menu, derived rather than typed.
 //
@@ -176,7 +177,13 @@ export const MODE_META = {
     icon: '🎯',
     ui: 'simulasi',
     label: 'Simulasi',
-    desc: 'Ujian + timer',
+    // Item 102b: was 'Ujian + timer', the one description in this section that
+    // named no figure while `jac`, `wayground` and `vocab` all derive theirs.
+    // The mode offers three lengths; the full exam is the one worth advertising,
+    // and its shape lives in constants.js so this and SimulasiMode's own preset
+    // read the same numbers. Shorter runs are described on the setup screen,
+    // where the choice is actually made.
+    desc: `Ujian penuh ${EXAM_FULL_QUESTIONS} soal · ${examMinutes(EXAM_FULL_QUESTIONS)} menit`,
     color: '#ef4444',
     strand: 'language',
     skeleton: 'quiz',

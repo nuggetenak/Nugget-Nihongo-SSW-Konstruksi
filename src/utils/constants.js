@@ -40,3 +40,21 @@ export const EXAM_PASS_PCT = 65;
  *  lives here now so the mode and the thing that teaches the number can never
  *  disagree again. */
 export const EXAM_SECONDS_PER_QUESTION = 2 * 60;
+
+/** The full exam's shape: 30 teori + 20 praktik = 50 questions.
+ *
+ *  Item 102b: the Belajar menu described `simulasi` as 'Ujian + timer' while
+ *  every sibling in its section derives a real figure from the data — the
+ *  mechanism that exists because hand-written counts had already gone stale
+ *  twice. The counts themselves lived only inside SimulasiMode's POOL_PRESETS,
+ *  which the registry cannot import: `simulasi` is a lazy chunk, and a static
+ *  import there would pull the whole mode into the initial bundle to read three
+ *  numbers. Both now read them from here instead. */
+export const EXAM_FULL_TEORI = 30;
+export const EXAM_FULL_PRAKTIK = 20;
+export const EXAM_FULL_QUESTIONS = EXAM_FULL_TEORI + EXAM_FULL_PRAKTIK;
+
+/** Minutes a run of `n` questions is given, at the rate above. Exported so the
+ *  menu, the preset labels and the timer cannot quote three different budgets
+ *  for the same exam. */
+export const examMinutes = (n) => (n * EXAM_SECONDS_PER_QUESTION) / 60;

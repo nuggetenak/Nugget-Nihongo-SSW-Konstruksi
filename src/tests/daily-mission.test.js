@@ -8,7 +8,9 @@ import {
   completeMission,
   getMission,
   isMissionDoneToday,
+  MISSION_MODES,
 } from '../utils/daily-mission.js';
+import { MODE_META, MODE_COMPONENTS } from '../router/modes.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -62,19 +64,24 @@ describe('Phase C — Daily Mission', () => {
   it('when SRS due count = 0 and no sessions, mode is not ulasan by force', () => {
     // With no due cards the engine picks by strand balance — just verify it returns a valid mode
     const m = generateDailyMission();
-    const validModes = [
-      'ulasan',
-      'kartu',
-      'kuis',
-      'sprint',
-      'jac',
-      'fokus',
-      'angka',
-      'jebak',
-      'mirip',
-      'dengar',
-    ];
-    expect(validModes).toContain(m.mode);
+    expect(MISSION_MODES).toContain(m.mode);
+  });
+
+  // Item 102c. The list used to be a bare array whose omissions had no stated
+  // reason: `wayground` -- the largest question bank in the app -- and `vocab`
+  // were out while `mirip` was in. It has a rule now, and this is the rule:
+  // every mode with a strand is a mission except a 100-minute exam and the
+  // reference surfaces, which have no end to reach.
+  it('offers every strand-carrying mode except the exam and the reference surfaces', () => {
+    const NOT_A_MISSION = ['simulasi', 'cari', 'glosari', 'catatan'];
+    const expected = Object.entries(MODE_META)
+      .filter(([id, meta]) => meta.strand && !NOT_A_MISSION.includes(id))
+      .map(([id]) => id);
+    expect([...MISSION_MODES].sort()).toEqual([...expected].sort());
+  });
+
+  it('every mission mode still exists as a mode', () => {
+    MISSION_MODES.forEach((m) => expect(MODE_COMPONENTS).toHaveProperty(m));
   });
 
   it('when sessions array is empty, returns a mission with a strand-balanced mode', () => {

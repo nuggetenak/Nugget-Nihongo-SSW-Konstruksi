@@ -1281,21 +1281,57 @@ about a diagram, and these are 実技 questions where the picture is often the q
 fix in code until the images exist; worth recording as a known fidelity limit, and as a reason not
 to read a praktik sub-score too confidently.
 
-### ☐ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3`
+### ☑ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3` — **fixed 2026-09-07**
 
 Explanations are truncated at 160 characters with no way to expand (`ResultScreen` does the same at
 180). Correct answers cannot be reviewed at all, so a lucky guess is indistinguishable from
 knowledge. And review entries carry no question number, so an item cannot be matched back to the
 navigator. Small, but this screen is the entire payload of a 100-minute session.
 
-### ☐ 101. No way to flag a question and come back to it — `S` — `P3`
+**All three, plus the flag from item 101.**
+
+- `ExplanationText` (new) keeps the truncation — a wall of full explanations makes a 50-row list
+  unscannable — and adds the way back to the rest: "Selengkapnya" / "Ringkas". Both screens use it,
+  so 160 and 180 are now one default and one caller's override rather than two hand-picked numbers
+  for the same job.
+- The review list gained a filter row: **✗ Salah / ✓ Benar / 🚩 Ditandai**, still defaulting to
+  wrong answers. Three buttons rather than one "show correct too" switch, because 🚩 cuts across
+  both of the others and is what a 100-minute paper is actually reviewed by.
+- `buildSimulasiResults` carries `number` (1-based, matching the navigator and the "Soal 7 / 15"
+  counter) and `wasFlagged`. A correct row no longer prints the same option twice under two ticks.
+
+Not extended to `ResultScreen`'s own list: it has no navigator to match back to and no flags, so
+only the explanation half of this item applies there.
+
+### ☑ 101. No way to flag a question and come back to it — `S` — `P3` — **fixed 2026-09-07**
 
 The navigator distinguishes answered from unanswered, which is most of the way there. Real exams —
 including the Prometric delivery this simulates — let you mark a question you want to revisit,
 which is exactly the behaviour a 100-minute paper rewards. `answers` is already a dict keyed by
 index, so a parallel `flagged` set is the whole feature.
 
-### ☐ 102. Small honesty gaps in the exam family's labels — `XS` — `P3`
+**It was.** A `Set` of question indexes beside `answers`, a 🚩 toggle on the question being read
+(not on the navigator — the decision to come back is made while reading), a corner dot on the
+navigator cell, and the count in the "Soal 7 / 15" line.
+
+Three things the shape of the feature decided rather than the UI:
+
+- Flagging is **orthogonal to answering**. You can flag an answer you are unsure of, not only a
+  blank — which is the case the plain answered/unanswered navigator could never express.
+- It is in the reload snapshot (item 78) beside the answer sheet, stored as an array because
+  `JSON.stringify(new Set())` is `{}`.
+- Submitting with flags still set is the last moment the promise to come back can be kept, so it
+  joins the unanswered warning — in the *same* dialog, since two in a row is how people learn to
+  dismiss them unread.
+
+The flags reach the results screen through `buildSimulasiResults` (item 100's filter row): a flag
+you can set but never see again teaches nothing.
+
+One knock-on: the answer options are now `role="group"` / `aria-label="Pilihan jawaban"`. They were
+previously identified — by a screen reader and by the tests alike — as "the buttons with
+`aria-pressed`", which stopped being unambiguous the moment a second toggle appeared on the screen.
+
+### ☑ 102. Small honesty gaps in the exam family's labels — `XS` — `P3` — **fixed 2026-09-07**
 
 - The source picker says "JAC Official — Soal resmi dari buku ujian JAC (95 soal)", but no preset
   ever draws from all 95: every start picks one teori + one praktik set (44 or 51).
@@ -1306,6 +1342,24 @@ index, so a parallel `flagged` set is the whole feature.
   (`kuisprod` was also in, and left with the mode in 7.0.0 — the question about `wayground` and
   `vocab` is untouched by that.)
   `simulasi`'s absence is self-evident; theirs is not.
+
+**(a)** now reads "Bank resmi 95 soal · tiap ujian ambil sebagian secara acak". The bank is 95; a
+run never is. The set-pair rule stays on the preset line rather than being said twice on one screen.
+
+**(b)** now reads "Ujian penuh 50 soal · 100 menit", derived. The counts lived only inside
+`SimulasiMode`'s `POOL_PRESETS`, which the registry cannot import — `simulasi` is a lazy chunk, and
+a static import there would pull the whole mode into the initial bundle to read three numbers — so
+`EXAM_FULL_TEORI` / `EXAM_FULL_PRAKTIK` / `examMinutes()` moved to `constants.js` and both sides
+read them. Each preset's own `sub` is now written from its own `teori`/`praktik` too: the strings
+restated three numbers that sat two lines below them, which is exactly how `MODE_COUNTS`'s
+predecessors went stale.
+
+**(c)** `wayground` and `vocab` are in, and the list has a stated rule instead of an accidental
+shape: *a mission is one sitting's worth of study you can finish and tick off today.* That admits
+every mode with a strand except `simulasi` (a 100-minute exam is a thing you schedule, not today's
+mission) and the reference surfaces `cari` / `glosari` / `catatan`, which have no end to reach.
+`daily-mission.test.js` asserts the rule against `MODE_META` rather than against a second hand-typed
+list, so the next mode added is either in or deliberately excluded.
 
 ---
 
