@@ -236,10 +236,8 @@ readable copy of it (derived 2026-09-05); if the two ever disagree, the registry
 | `fokus` | 🎯 Fokus | Latih kelemahan | 🧪 Latihan | `FocusMode.jsx` |
 | `angka` | 🔢 Angka Kunci | Angka wajib hafal | 🧪 Latihan | `AngkaMode.jsx` |
 | `jebak` | ⚠️ Soal Jebak | Istilah mirip | 🧪 Latihan | `DangerMode.jsx` |
-| `produksi` | ✍️ Produksi | ID→JP: ketik jawaban Jepang | 🧪 Latihan | `ProductionMode.jsx` |
 | `mirip` | 🔀 Kata Mirip | VLT: pasang istilah yang serupa | 🧪 Latihan | `ConfusionMode.jsx` |
 | `dengar` | 🎧 Dengarkan | Dengar JP → pilih terjemahan | 🧪 Latihan | `DengarMode.jsx` |
-| `kuisprod` | 🔤 Kuis Produksi | JP → ketik terjemahan Indonesia | 🧪 Latihan | `QuizProduksiMode.jsx` |
 | `jac` | 📋 JAC Official | Soal contoh ujian resmi | 📋 Ujian | `JACMode.jsx` |
 | `wayground` | 🎓 Soal Teknis | _N_ soal teori & praktik (count derived from `QUIZ_SETS`) | 📋 Ujian | `WaygroundMode.jsx` |
 | `vocab` | 📖 Kosakata | _N_ soal vocab JP↔ID (count derived from `QUIZ_SETS`) | 📋 Ujian | `VocabMode.jsx` |
@@ -248,7 +246,9 @@ readable copy of it (derived 2026-09-05); if the two ever disagree, the registry
 | `ekspor` | 💾 Ekspor & Impor | Simpan & pulihkan progress | 🛠️ Alat | `ExportMode.jsx` |
 | `sumber` | 📂 Sumber | Per PDF sumber | 🛠️ Alat | `SumberMode.jsx` |
 
-_(DobokuMode.jsx and KenchikuMode.jsx removed at merge — see CHANGELOG.md.)_
+_(DobokuMode.jsx and KenchikuMode.jsx removed at merge — see CHANGELOG.md.
+ProductionMode.jsx and QuizProduksiMode.jsx removed in 7.0.0: free-text typing had an answer
+surface too wide to grade fairly. 21 modes → 19.)_
 
 ---
 

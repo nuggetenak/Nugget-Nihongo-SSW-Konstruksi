@@ -175,7 +175,6 @@ inherit keyboard/timer/haptic from `QuizShell` + `OptionButton`, shown as inheri
 | sprint | – | Y | – | – | – | – |
 | angka, jebak, mirip | Y | Y | – | – | – | Y |
 | dengar | – | Y | – | – | – | Y |
-| produksi, kuisprod | Y | Y | – | – | – | Y |
 
 ¹ see item 46 — vocab is the odd one out.
 
@@ -721,7 +720,7 @@ While doing that comparison work, found something bigger: 41 of the shared `mode
 moved to their own dedicated CSS module over this app's history without the old shared rules
 ever being cleaned up. Removed all 41, verified thoroughly (recursive cross-file search, not
 just `src/modes/*.jsx`; caught and corrected one of its own false positives along the way; full
-21-mode screenshot sweep before/after, pixel-identical). Commit `6353ff7` has the full account,
+19-mode screenshot sweep before/after, pixel-identical). Commit `6353ff7` has the full account,
 including an honest note on a one-off phantom-session screenshot during re-verification that
 didn't reproduce across two more full-sequence runs with direct session-data inspection —
 concluded likely Playwright timing variance, not a new bug, recorded rather than hidden.
@@ -767,7 +766,7 @@ Not changed here because it is item 56's own decision to extend, not a defect to
 is StatsMode's main visual anchor — replacing a percentage with a band is a layout question as much
 as a copy one.
 
-### ☐ 71. `《・》`-separated terms stack vertically in every context — `M`
+### ☑ 71. `《・》`-separated terms stack vertically in every context — `M` — **fixed 2026-09-07**
 
 `JpFront`'s `bullet` branch splits on `・` and stacks the parts. In list rows that is now handled
 (`compact`, 2026-09-04), but the underlying split is still wrong for a class of entries: `・` is
@@ -779,6 +778,15 @@ corpus, 4 are genuine lists (`ボルト・ナット・ワッシャー` = bolt, n
 and 4 are arguably single terms (`パワー・ハラスメント`, `ロックアウト・タグアウト`). A rule keyed
 on script would get about half of them wrong, which is worse than the current consistent behaviour.
 Fixing this properly means marking the intent in the data, not guessing it at render time.
+
+**Closed by marking the intent in the data, exactly as this item asked.** 199 bundle cards were
+split so that one card carries one term; `・` now survives only where it belongs to a single
+entry. `パワー・ハラスメント` and `ロックアウト・タグアウト` are on the KEEP list in
+`docs/CARD_SPLIT_AUDIT.md` with the rule that kept them, so the render-time branch no longer has
+to guess: the 113 cards that still hold a `・` are the ones that should stack.
+
+`JpFront`'s `bullet`/`vs`/`colon` branches stay. They are now a small, correct population rather
+than a heuristic applied to a mixed one.
 
 ### ☐ 72. 101 font sizes are off the type scale (no longer frozen, still not on it) — `S`
 
@@ -799,7 +807,7 @@ to find (`rem` outside a `var()` in a `font-size`).
 ### ☐ 73. The setup screens are the last of the vertical dead space — `S` — **design call**
 
 `.content` is a flex column in mode chrome now and a screen claims the leftover height with
-`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). Kartu and Ulasan use it. A census of all 21 modes at
+`flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). Kartu and Ulasan use it. A census of all 19 modes at
 390×844, measured on the running app, says what is left:
 
 | screen | empty below the content |
@@ -861,8 +869,6 @@ never handed. Every claim below was checked against code, not inferred from thes
 | | `angka` | — | **—** | — | Y | — | — |
 | | `jebak` | type, not category | **—** | — | Y | — | — |
 | | `mirip` | type, not category | **—** | — | Y | — | — |
-| | `produksi` | **—** | `QUIZ_COUNTS`+All | — | Y | Y | — |
-| | `kuisprod` | **—** | `QUIZ_COUNTS`+All | — | Y | Y | — |
 | | `dengar` | **—** | `QUIZ_COUNTS` | — | Y | **not passed** | — |
 | Ujian | `jac` | topic (8) | per-set | Y ⚠ Lemah | Y | Y | — |
 | | `wayground` | — (per set) | per-set | Y Ulang N | Y | — | — |
@@ -888,18 +894,19 @@ Three findings, one root cause: nothing owns the question "which modes speak?".
 
 1. **The listening mode is not handed the audio setting.** `dengar` is absent from the
    `audioEnabled` recipients (`ModeRouter.jsx:255-262`), and `DengarMode.jsx` never reads
-   `prefs.audioEnabled` — only `canSpeak()` (`:52`). Meanwhile two *typing* modes (`produksi`,
-   `kuisprod`) do get it. Turning audio off in Saya therefore does not silence the one mode built
+   `prefs.audioEnabled` — only `canSpeak()` (`:52`). (The two *typing* modes that also received it,
+   `produksi` and `kuisprod`, were removed in 7.0.0; the gap this item names is unchanged — `dengar`
+   still does not read the pref.) Turning audio off in Saya therefore does not silence the one mode built
    entirely on audio. This needs a decision rather than a patch: it may well be correct for Dengar
    to ignore the setting (obeying it makes the mode useless) — in which case the setting should
    say so.
 2. **`prefs.speakOnFlip` does nothing in Kartu.** `SayaTab.jsx:541` labels it
    **"👆 Saat balik kartu"**. Its only reader is `ReviewMode.jsx:78,94`. `kartu` receives no
    `audioEnabled` and never calls `speakJP()`.
-3. Receiving it: `kuis`, `jac`, `vocab`, `produksi`, `kuisprod`. Not: `kartu`, `sprint`,
+3. Receiving it: `kuis`, `jac`, `vocab`. Not: `kartu`, `sprint`,
    `wayground`, `dengar`, `angka`, `jebak`, `mirip`, `simulasi`.
 
-### ☐ 77. Three differently-shaped category pickers, plus five copies of `pillStyle` — `M` — `P2`
+### ☐ 77. Three differently-shaped category pickers — `M` — `P2` — **half closed 2026-09-07**
 
 Straight continuation of §1's through-line. Category selection is written three times:
 
@@ -916,6 +923,20 @@ And `pillStyle(on)` — identical body — is copied at `QuizMode.jsx:157`, `Pro
 `QuizProduksiMode.jsx:170`, `JACMode.jsx:177`, `WaygroundMode.jsx:171`, plus fully-inline chip
 variants in `DangerMode.jsx:79-101`, `ConfusionMode.jsx:126-148`, `CatatanMode.jsx:274-291`,
 `SprintMode.jsx:184-208`. `modes.module.css` already has `.pill` (`:272`) that none of them use.
+
+**The `pillStyle` half is closed (2026-09-07).** Two of the five copies left with
+`ProductionMode` and `QuizProduksiMode`. The three that remained were not interchangeable, which
+is why reading them side by side mattered: `JACMode` and `WaygroundMode` were byte-for-byte
+identical, while `QuizMode`'s was a larger variant — more padding, body-size text, and the themed
+`surfaceActive`/`borderActive`/`amber` trio instead of hardcoded amber rgba. They are now one
+function with a size (`src/styles/pill.js`), keeping both looks deliberately: QuizMode's pills are
+the primary control on its setup screen and are meant to be bigger than a filter row.
+
+The unused `.pill` class this item pointed at is removed rather than adopted — the active state is
+dynamic and token-driven, which is why the inline form won.
+
+**What stays open** is the original heading: the three category pickers are still three shapes,
+and `FilterPopup` is still a fourth.
 
 ### ☑ 78. Simulasi loses the entire exam on reload — `M` — `P1` — **done 2026-09-04**
 
@@ -950,11 +971,11 @@ for.
 
 Pre-session wrong-only filters exist in `kuis` (`QuizMode.jsx:34,318-345`), `jac`
 (`JACMode.jsx:348-365`), `wayground` (`WaygroundMode.jsx:434-458`). Absent from `vocab`,
-`produksi`, `kuisprod`, `dengar`, `angka`, `mirip` — though `vocab` writes `progress.vocabWrong`
+`dengar`, `angka`, `mirip` — though `vocab` writes `progress.vocabWrong`
 exactly as `wayground` writes `wgWrong`.
 
 The post-session `onRetryWrong` bridge is lopsided differently: handed to `kuis`, `jac`,
-`wayground`, `vocab`, `simulasi`, `produksi`, `kuisprod`, `dengar` — **not** to `sprint`, `angka`,
+`wayground`, `vocab`, `simulasi`, `dengar` — **not** to `sprint`, `angka`,
 `jebak`, `mirip` (`ModeRouter.jsx:216-269`), all four of which record wrong answers
 (`SprintMode.jsx:137-142`, and `recordWrong` in the others). The mistakes are stored; there is no
 route back to them from the results screen.
@@ -964,8 +985,8 @@ route back to them from the results screen.
 
 ### ☐ 80. Count and auto-advance options are distributed arbitrarily — `S` — `P2`
 
-- `QUIZ_COUNTS = [10,20,30]` (`utils/constants.js:22`) is used by `kuis`, `dengar`, `produksi`,
-  `kuisprod`. `angka`, `jebak` and `mirip` have **no length control at all** — always the whole
+- `QUIZ_COUNTS = [10,20,30]` (`utils/constants.js:22`) is used by `kuis` and `dengar`.
+  `angka`, `jebak` and `mirip` have **no length control at all** — always the whole
   shuffled pool, with no way to take a short session. (`kartu` likewise; see item 75, which has to
   define "a flashcard session" first.)
 - **Auto-advance delay**: exposed by `kuis` (`QuizMode.jsx:35,362`) and `jac` (`JACMode.jsx:171`).
@@ -976,7 +997,7 @@ route back to them from the results screen.
 Check against item 49 (☑, "Question-count options differ per mode with no rationale") before
 building — some of this may be leftover scope, some may be regression.
 
-### ☐ 81. `produksi` and `kuisprod` are ~500-line twins — `M` — `P2`
+### ☑ 81. `produksi` and `kuisprod` are ~500-line twins — `M` — `P2` — **dropped 2026-09-07**
 
 `ProductionMode.jsx` (531 lines) and `QuizProduksiMode.jsx` (500) share the start screen, the
 `pillStyle` copy (`:176` / `:170`), `HowToPlayCard`, the count picker (`:219-234` in both) and the
@@ -984,6 +1005,15 @@ state shape (`started/count/queue/idx/input/phase/results/sessionFired`, `:77-84
 They differ in exactly two places: direction (ID→JP vs JP→ID) and `isCorrect` (`:32-47` matching
 JP/stripFuri/kana vs `:37-46` matching `id_text` synonyms). The clearest
 one-component-with-a-direction-prop candidate in the codebase.
+
+**Closed as dropped, not done.** This item proposed merging the twins behind a direction prop.
+The owner removed both modes instead (7.0.0): free-text typing has an answer surface — synonyms,
+kana vs kanji, spacing, abbreviations — too wide to grade fairly, and a mode that marks a correct
+answer wrong teaches nothing.
+
+That knowingly reverses the "Checked, not a bug" note below: direction-by-mode was recorded as
+deliberate design, and with these two gone the app has no ID→JP mode at all. The `output` strand
+in `MISSION_TYPES` now contains only `sprint`.
 
 ### Checked, not a bug
 
@@ -1260,7 +1290,9 @@ index, so a parallel `flagged` set is the whole feature.
 - `MODE_META.simulasi.desc` is `'Ujian + timer'` while its section siblings derive real counts from
   the data (`MODE_COUNTS`), which exists precisely because hand-written counts had gone stale.
 - `wayground` (740 questions, the largest bank in the app) and `vocab` are absent from
-  `MISSION_TYPES` in `daily-mission.js` with no stated reason, while `kuisprod` and `mirip` are in.
+  `MISSION_TYPES` in `daily-mission.js` with no stated reason, while `mirip` is in.
+  (`kuisprod` was also in, and left with the mode in 7.0.0 — the question about `wayground` and
+  `vocab` is untouched by that.)
   `simulasi`'s absence is self-evident; theirs is not.
 
 ---
@@ -1284,3 +1316,60 @@ index, so a parallel `flagged` set is the whole feature.
 - **Furigana on the question but never on the options.** `JpFront` honours `furiganaPolicy` for the
   question stem while options always go through `stripFuri`, in every mode. Inconsistent, but it is
   the whole app's convention, not this family's bug — and options render as plain text everywhere.
+
+---
+
+## 15. Content and product direction (2026-09-07)
+
+Filed, not built. These come from an external gap audit the owner forwarded. Most of that document
+described work already shipped or already numbered here — it cited the wrong repository URL and its
+own footnote admits the client-rendered UI was never inspected, so its claims are inference from
+docs rather than observation. Its §22 asks for one-line mode descriptions that `MODE_META` has
+carried all along, and its §21 proposes the section structure `MODE_SECTIONS` already is.
+
+Six ideas in it are genuinely not covered anywhere, and they are worth keeping.
+
+### ☐ 103. No 現場日本語 — the deck teaches nouns, not instructions — `L` — `P1`
+
+The corpus is overwhelmingly terminology. A worker who knows all 1,626 cards still has not met
+`ここ持ってて`, `終わったら呼んで`, `これ違うよ`, `もう一度お願いします` — the sentences a foreman
+actually says. Categories worth having: instructions, warnings, corrections, reporting, asking
+permission, clarification, handover.
+
+This is the one criticism in that audit with real force, and it is a content project, not a mode.
+
+### ☐ 104. Nothing tests Japanese → action — `M` — `P2`
+
+Every mode asks "what does this word mean?". None asks "what should you do?". Given
+`ホースを巻いて片付けてください`, the tested skill is choosing *coil the hose and put it away* over
+three plausible wrong actions. Closer to what the practical exam measures than recognition is.
+
+### ☐ 105. No scenario mode — `L` — `P2`
+
+A 朝礼 that runs as a sequence: the foreman states today's work, asks for a material, then asks for
+a report — with a question after each. Combines listening, vocabulary, workplace intent and
+reporting in one thread instead of four separate modes.
+
+### ☐ 106. Question source is not labelled — `S` — `P1`
+
+A learner cannot tell JAC Official from Nugget practice while answering, and that is a trust
+question. **Cheap**: `source` already exists on every card with 13 values, and `SOURCE_META` already
+carries labels — this is a badge, not a data model.
+
+### ☐ 107. Listening is one speed — `M` — `P2`
+
+`dengar` speaks at one rate. Real instructions arrive fast, clipped, and over noise. Graded levels
+(clear → natural → supervisor-pace) would make it train comprehension rather than word recognition.
+
+### ☐ 108. Backup is invisible until it matters — `S` — `P2`
+
+Progress is local-only and there is no sync. The learner should be told that plainly, with the date
+of their last backup, rather than finding out when they change phones. `ekspor` already does the
+work; it is the surfacing that is missing.
+
+### Not filed
+
+The audit's headline proposals — an explicit curriculum, a competency model per knowledge domain,
+and a diagnosis→remediation loop — are each about the size of this entire release. They are a
+direction for the product, and that is the owner's call to make, not a task to be picked up off a
+list.

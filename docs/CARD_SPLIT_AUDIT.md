@@ -7,6 +7,32 @@ split list, because it is the part a future pass would otherwise redo from scrat
 
 Derived: 2026-09-07 against 1438 cards.
 
+## Outcome
+
+This table is the decision record, taken against the corpus as it stood at 1,438
+cards. What actually shipped, for anyone reconciling the two:
+
+| | |
+|---|---|
+| Starting corpus | 1,438 |
+| Duplicate cards merged before splitting | −16 |
+| Bundles split, and their children | **1,626** |
+
+The split ran in four passes — a mechanical batch where no Indonesian had to be
+invented, two agent-authored batches, and a hand-written tail after the agent
+budget ran out. Between them, 199 of the 229 SPLIT verdicts were executed.
+
+Three cards keep their bundle deliberately and are reclassified header-only:
+**1308**, **1328** and **1390** name a category in `jp` and list their real items
+only in `desc`, so splitting each means authoring new headwords with new ruby
+rather than cutting a string. 1390 additionally promises "5種の屋根工事" that the
+card never enumerates.
+
+Splitting created 121 duplicate terms of its own — 親墨 came out of three separate
+bundles — which were merged on lowest id, and nine more pairs that differed only
+by a `type` inherited from a recap card. Both are described in the commits that
+made them.
+
 ## Method
 
 Twelve agents over twelve line-shards of `src/data/source/cards-{common,lifeline}.js`,
