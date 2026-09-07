@@ -5042,7 +5042,7 @@ export const CARDS_LIFELINE = [
     jp: '通気設備《つうきせつび》',
     type: 'vocab',
     id_text: 'Sistem ventilasi pipa drainase',
-    desc: '排水管《はいすいかん》内の気圧《きあつ》を安定《あんてい》させ、臭気《しゅうき》の逆流《ぎゃくりゅう》を防ぐ設備。\n排水・通気設備工事《はいすい・つうきせつびこうじ》は給排水衛生設備《きゅうはいすいえいせいせつび》の一部。',
+    desc: '排水管《はいすいかん》内の気圧《きあつ》を安定《あんてい》させ、臭気《しゅうき》の逆流《ぎゃくりゅう》を防ぐ設備。\n排水《はいすい》・通気設備工事《つうきせつびこうじ》は給排水衛生設備《きゅうはいすいえいせいせつび》の一部。',
     usage:
       '排水立管《はいすいたてかん》に通気設備《つうきせつび》を接続《せつぞく》して排水《はいすい》をスムーズにする（hubungkan sistem ventilasi pipa ke pipa tegak drainase untuk memperlancar aliran）',
     _origIndex: 1419,

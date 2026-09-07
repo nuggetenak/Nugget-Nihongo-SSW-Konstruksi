@@ -37,6 +37,61 @@ import S from './JpDisplay.module.css';
  * want opposite defaults. Opt-in for the same reason — the hero case is the one
  * that must not change.
  */
+// ─── Splitting a term that carries its own readings ──────────────────────────
+// The vs / ・ / ： / → branches below split `jp` — the raw string, markers and
+// all — on a separator. A 《reading》 may contain that same separator, and three
+// cards plus four quiz questions in this corpus do exactly that
+// (キャリアアップカード・作業免許《きゃりああっぷかあど・さぎょうめんきょ》,
+// 保温・断熱工事《ほおん・だんねつこうじ》, …). Splitting on the ・ inside the
+// marker cut it in half: the parts came out as 「作業免許《きゃりああっぷかあど」
+// and 「さぎょうめんきょ》」, neither of which is a well-formed marker any more,
+// so renderJPWithRuby left both halves as literal text and the raw 《 》 landed
+// on screen — the bug SimulasiMode's option test kept catching about one run in
+// twelve, depending on whether the shuffle drew one of the four questions.
+//
+// The separators are still real (those terms genuinely are two terms), so the
+// answer is not to stop splitting but to split where the string actually
+// separates: outside the markers. Masking the marker spans first is the whole
+// trick — indices in the mask are indices in the original, so the parts can be
+// sliced straight out of `jp` with their readings intact.
+function maskRubyMarkers(text) {
+  let out = '';
+  let inMarker = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '《') inMarker = true;
+    out += inMarker ? '\u0000' : ch;
+    if (ch === '》') inMarker = false;
+  }
+  return out;
+}
+
+function splitOutsideRuby(text, sep) {
+  const masked = maskRubyMarkers(text);
+  const re =
+    typeof sep === 'string'
+      ? new RegExp(sep.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')
+      : new RegExp(sep.source, sep.flags.includes('g') ? sep.flags : `${sep.flags}g`);
+  const parts = [];
+  let last = 0;
+  let m;
+  while ((m = re.exec(masked)) !== null) {
+    if (m[0].length === 0) {
+      re.lastIndex++;
+      continue;
+    }
+    parts.push(text.slice(last, m.index));
+    last = m.index + m[0].length;
+  }
+  parts.push(text.slice(last));
+  return parts;
+}
+
+// Index of the first `sep` that isn't inside a 《reading》 (-1 if there is none).
+function indexOutsideRuby(text, sep) {
+  return maskRubyMarkers(text).indexOf(sep);
+}
+
 export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, compact = false }) {
   const [tapReveal, setTapReveal] = useState(false);
   // policy:
@@ -142,8 +197,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
 
   // ── A vs B ────────────────────────────────────────────────────────────────
   if (jpBranch === 'vs') {
-    const parts = jp
-      .split(/\s*vs\s*/i)
+    const parts = splitOutsideRuby(jp, /\s*vs\s*/i)
       .map((p) => p.trim())
       .filter(Boolean);
     const strippedParts = parts.map(stripFuri);
@@ -169,8 +223,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
 
   // ── A・B・C ───────────────────────────────────────────────────────────────
   if (jpBranch === 'bullet') {
-    const parts = jp
-      .split('・')
+    const parts = splitOutsideRuby(jp, '・')
       .map((p) => p.trim())
       .filter(Boolean);
     const strippedParts = parts.map(stripFuri);
@@ -192,7 +245,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
 
   // ── Title：Subtitle ───────────────────────────────────────────────────────
   if (jpBranch === 'colon') {
-    const colonIdx = jp.indexOf('：');
+    const colonIdx = indexOutsideRuby(jp, '：');
     const title = jp.slice(0, colonIdx).trim();
     const sub = jp.slice(colonIdx + 1).trim();
     const titleClean = stripFuri(title);
@@ -213,8 +266,7 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
 
   // ── A → B → C ────────────────────────────────────────────────────────────
   if (jpBranch === 'arrow') {
-    const parts = jp
-      .split('→')
+    const parts = splitOutsideRuby(jp, '→')
       .map((p) => p.trim())
       .filter(Boolean);
     const strippedParts = parts.map(stripFuri);

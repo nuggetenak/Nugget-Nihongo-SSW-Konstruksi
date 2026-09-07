@@ -210,9 +210,9 @@ export const JAC_LIFELINE = [
     q: '建設業《けんせつぎょう》における三大災害《さんだいさいがい》のなかで、最《もっと》も多《おお》いのは、どれか。',
     hint: 'Di antara tiga bencana besar konstruksi (三大災害《さんだいさいがい》), mana yang paling banyak terjadi?',
     opts: [
-      '墜落・転落《ついらく・てんらく》',
-      '建設機械・クレーンなど災害《けんせつきかい・クレーンなどさいがい》',
-      '高温・低温の物との接触《こうおん・ていおんのものとのせっしょく》',
+      '墜落《ついらく》・転落《てんらく》',
+      '建設機械《けんせつきかい》・クレーンなど災害《さいがい》',
+      '高温《こうおん》・低温の物との接触《ていおんのものとのせっしょく》',
     ],
     opts_id: [
       'Jatuh dari ketinggian / bergulir',
@@ -221,7 +221,7 @@ export const JAC_LIFELINE = [
     ],
     ans: 0,
     img: null,
-    exp: '墜落・転落《ついらく・てんらく》 (jatuh) adalah penyebab kematian TERBANYAK. 2021: 110 dari 288 total kematian. Opsi 3 BUKAN bagian dari 三大災害《さんだいさいがい》 (③ sebenarnya adalah 崩壊・倒壊《ほうかい・とうかい》). Kartu #127.',
+    exp: '墜落《ついらく》・転落《てんらく》 (jatuh) adalah penyebab kematian TERBANYAK. 2021: 110 dari 288 total kematian. Opsi 3 BUKAN bagian dari 三大災害《さんだいさいがい》 (③ sebenarnya adalah 崩壊《ほうかい》・倒壊《とうかい》). Kartu #127.',
     related_card_id: 123,
     track: 'lifeline',
   },

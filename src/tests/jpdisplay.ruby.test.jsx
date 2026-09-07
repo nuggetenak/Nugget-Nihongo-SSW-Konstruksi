@@ -199,4 +199,43 @@ describe('JpFront ruby furigana rendering', () => {
     expect(html).toContain('かんろ');
     expect((html.match(/<ruby/g) || []).length).toBe(2);
   });
+
+  // ── Separators inside a reading (2026-09-07) ─────────────────────────────
+  // The ・ / vs / ： / → branches split `jp` — markers and all — to stack a
+  // multi-term card. A 《reading》 containing the same separator got cut in
+  // half by that split, leaving two malformed halves that renderJPWithRuby
+  // could not convert, so the bare brackets rendered on screen. Eleven strings
+  // in src/data had one (all since split per term, and audit-data-text.mjs now
+  // rejects the shape) — but a renderer that mangles its input is a bug on its
+  // own terms, and this is the case that proves the split respects markers
+  // rather than the data merely no longer containing any.
+  it('splits a bullet list on separators outside markers, not inside them', () => {
+    const { container } = render(
+      <JpFront jp="保温《ほおん》・断熱工事《ほおん・だんねつこうじ》" furiganaPolicy="always" />
+    );
+    expect(container.textContent).not.toMatch(/《|》/);
+    // Both terms survive as their own stacked part.
+    expect(container.textContent).toContain('保温');
+    expect(container.textContent).toContain('断熱工事');
+  });
+
+  it('finds the ：title split outside markers, not the first ： in the string', () => {
+    // The marker's own ： comes FIRST here, so indexOf would split inside it —
+    // the colon branch uses its own index helper, not the split above, and this
+    // is the ordering that tells the two apart.
+    const { container } = render(
+      <JpFront jp="作業手順《さぎょう：てじゅん》：安全《あんぜん》" furiganaPolicy="always" />
+    );
+    expect(container.textContent).not.toMatch(/《|》/);
+    expect(container.textContent).toContain('安全');
+  });
+
+  it('does not split a vs comparison inside a marker', () => {
+    const { container } = render(
+      <JpFront jp="免振《めんしん》 vs 制振《めんしん vs せいしん》" furiganaPolicy="always" />
+    );
+    expect(container.textContent).not.toMatch(/《|》/);
+    expect(container.textContent).toContain('免振');
+    expect(container.textContent).toContain('制振');
+  });
 });

@@ -44,6 +44,29 @@ const MARKER = /《([^》]*)》/g;
 const HAS_KANA = /[ぁ-んァ-ヶ]/;
 const POOLED = /\s/;
 
+// The separator-without-spaces variant, found 2026-09-07 by a flaky test rather
+// than by this script: 保温・断熱工事《ほおん・だんねつこうじ》,
+// 墜落・転落《ついらく・てんらく》, キャリアアップカード・作業免許
+// 《きゃりああっぷかあど・さぎょうめんきょ》 — eleven of them across cards, JAC
+// sets and Wayground sets, every one a pooled list that the whitespace rule
+// above could not see because nobody put spaces around the ・.
+//
+// Worse than a wrong <rt>: JpFront's ・ / vs / ： / → branches split the raw
+// string on that separator, so a marker containing one got cut in half and the
+// bare 《 》 rendered on screen. The renderer now splits outside markers
+// (splitOutsideRuby), which contains the damage; this rule is what keeps the
+// data itself from drifting back.
+//
+// Hiragana is the discriminator, not the separator alone. A reading is written
+// in hiragana here, always, so ・ inside one is a list of two readings. Katakana
+// glosses (ろう付け《ブレージング》) and latin ones (安全データシート《SDS/MSDS》)
+// carry no hiragana and stay out, which is right — those are glosses, not
+// readings. 、 is deliberately not a separator: the JAC sets annotate a whole
+// option sentence with its whole reading (工場で製作した杭を、現場に運んで打ち込む
+// 工法《こうじょうで…うちこむこうほう》), and that is one reading of one string.
+const HAS_HIRAGANA = /[ぁ-ん]/;
+const POOLED_SEPARATOR = /[・／/]/;
+
 // The second shape of the same defect, and the one that had no whitespace to
 // catch it on (2026-09-04). A word gets split across two markers and the second
 // one carries the WHOLE word's reading instead of its own part:
@@ -138,7 +161,10 @@ for (const file of walk(DATA)) {
       // KANJI_RE in JpDisplay.jsx) — a legitimate second use of 《》 in this
       // corpus, so it is not a finding and must not be tested for pooling.
       if (/[一-龯]/.test(reading)) continue;
-      if (HAS_KANA.test(reading) && POOLED.test(reading)) {
+      if (
+        (HAS_KANA.test(reading) && POOLED.test(reading)) ||
+        (HAS_HIRAGANA.test(reading) && POOLED_SEPARATOR.test(reading))
+      ) {
         findings.pooled.push({ at, marker: m[0] });
       }
     }
