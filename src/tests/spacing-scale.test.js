@@ -127,6 +127,47 @@ describe('no px spacing outside the scale', () => {
     expect(offenders).toEqual([]);
   });
 
+  it('an off-scale font-size is a glyph, a display numeral or Japanese — never prose', () => {
+    // Item 72. The other half of the px→rem migration asked whether the 101
+    // remaining sizes should be *tokens*, not just rem. The answer is not one
+    // rule for all of them, so it is three:
+    //
+    //   prose and UI labels  -> a token, whenever the size already equals one.
+    //                           18 sites sat exactly on --fs-caption's floor
+    //                           and were snapped: identical at 390px, and they
+    //                           now grow with everything around them.
+    //   glyphs (emoji, ✕, ☆) -> off-scale. An ornament in a fixed-size box
+    //                           reads as an icon, not as text, and growing it
+    //                           with the reading size overflows the box.
+    //   display numerals     -> off-scale. Sized against their own card, not
+    //                           against body copy.
+    //   Japanese             -> off-scale unless it lands on --fs-jp-back or
+    //                           --fs-jp-primary; the two JP tokens cover 22-25
+    //                           and 30-35px and most JP here is outside both.
+    //
+    // Item 68's judgment still holds for the rest: do not snap 24px to 26
+    // without evidence the element wants the neighbouring token's size. This is
+    // a ratchet, not a target — the count may fall, never rise.
+    const OFF_SCALE_BUDGET = 78;
+    const found = [];
+    for (const file of cssFiles) {
+      readFileSync(file, 'utf-8')
+        .split('\n')
+        .forEach((line, i) => {
+          if (/^\s*font-size:\s*[\d.]+rem\s*;/.test(line))
+            found.push(`${relative(SRC, file)}:${i + 1} ${line.trim()}`);
+        });
+    }
+    for (const file of jsxFiles) {
+      const src = readFileSync(file, 'utf-8');
+      for (const m of src.matchAll(/\bfontSize:\s*'[\d.]+rem'/g))
+        found.push(`${relative(SRC, file)}: ${m[0].trim()}`);
+    }
+    expect(found.length, `off-scale font sizes:\n${found.join('\n')}`).toBeLessThanOrEqual(
+      OFF_SCALE_BUDGET
+    );
+  });
+
   it('JSX style objects use tokens too', () => {
     // 418 of these were bare numbers and px strings. Fixing only the
     // stylesheets would have left more than half the app's spacing frozen.
@@ -145,6 +186,36 @@ describe('no px spacing outside the scale', () => {
       }
     }
     expect(offenders).toEqual([]);
+  });
+});
+
+describe('the setup screens anchor their CTA (item 73)', () => {
+  // Census at 390x844 on the running app: 406px of nothing below "Mulai" on
+  // Dengarkan, 257px on Kuis, 227px on Sprint. All three read 48px now -- the
+  // page's own bottom reserve -- and, more to the point, the *same* 48px:
+  // whichever way this went, it had to go the same way on all of them, which
+  // is what made it one decision rather than three.
+  const modes = () => readFileSync(resolve(SRC, 'modes/modes.module.css'), 'utf-8');
+
+  it('opts into the reserved height the way .fcWrapper does, not with flex: 1', () => {
+    // `flex: 1` sets flex-basis 0 and lets a short viewport collapse the screen
+    // below its own content; `1 0 auto` only ever grows into free space.
+    expect(modes()).toMatch(/\.setupPage\s*\{[^}]*flex:\s*1 0 auto/s);
+    expect(modes()).toMatch(/\.setupPage\s*\{[^}]*flex-direction:\s*column/s);
+  });
+
+  it('anchors the CTA rather than stretching the choices above it', () => {
+    // margin-top:auto moves one element; stretching would inflate every option
+    // above it to fill a screen it was never sized for.
+    expect(modes()).toMatch(/\.setupCta\s*\{[^}]*margin-top:\s*auto/s);
+  });
+
+  it('all three setup screens use it', () => {
+    for (const file of ['modes/DengarMode.jsx', 'modes/QuizMode.jsx', 'modes/SprintMode.jsx']) {
+      const src = readFileSync(resolve(SRC, file), 'utf-8');
+      expect(src, `${file} does not claim the reserved height`).toMatch(/S\.setupPage/);
+      expect(src, `${file} does not anchor its CTA`).toMatch(/S\.setupCta/);
+    }
   });
 });
 

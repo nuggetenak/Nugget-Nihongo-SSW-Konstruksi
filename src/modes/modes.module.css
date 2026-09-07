@@ -36,6 +36,27 @@
   padding-block: var(--space-24);
 }
 
+/* Item 73: the setup screens. Each stacks its options and then a "Mulai"
+   button in the top two-thirds of the phone, leaving 203-382px of nothing
+   below it on a 390x844 — measured. Same mechanism as .fcWrapper (opt into the
+   height AppShell already reserves, LAYOUT_SPEC §6), with the CTA pushed to
+   the bottom of the column rather than the content stretched to reach it: the
+   choices keep their natural size, and the button they confirm lands where the
+   thumb already is, in line with the app's bottom nav.
+
+   `1 0 auto`, not `1`: grow into free space, never shrink below the content's
+   own height on a short screen — the same reason .fcWrapper spells it out. */
+.setupPage {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.setupCta {
+  margin-top: auto;
+  padding-top: var(--space-16);
+}
+
 .pageScroll {
   padding-block: var(--space-12) var(--space-24);
   animation: fadeIn 0.2s ease;

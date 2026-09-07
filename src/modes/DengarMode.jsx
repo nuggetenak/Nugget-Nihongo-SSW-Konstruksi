@@ -154,7 +154,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   // ── Settings screen ──────────────────────────────────────────────────────
   if (!started) {
     return (
-      <div className={S.page}>
+      <div className={`${S.page} ${S.setupPage}`}>
         <div style={{ marginBottom: 'var(--space-24)' }}>
           <p className={S.pageSub} style={{ marginBottom: 0 }}>
             Dengar 🔊 bahasa Jepang → pilih terjemahan Indonesia
@@ -249,24 +249,26 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           detik.
         </div>
 
-        <button
-          onClick={start}
-          disabled={!hasAudio}
-          style={{
-            width: '100%',
-            padding: 'var(--space-14)',
-            borderRadius: 12,
-            background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
-            color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
-            fontFamily: 'inherit',
-            fontSize: '1rem',
-            fontWeight: 700,
-            border: 'none',
-            cursor: hasAudio ? 'pointer' : 'not-allowed',
-          }}
-        >
-          Mulai Latihan
-        </button>
+        <div className={S.setupCta}>
+          <button
+            onClick={start}
+            disabled={!hasAudio}
+            style={{
+              width: '100%',
+              padding: 'var(--space-14)',
+              borderRadius: 12,
+              background: hasAudio ? 'var(--ssw-amber)' : 'var(--ssw-surface)',
+              color: hasAudio ? '#fff' : 'var(--ssw-textFaint)',
+              fontFamily: 'inherit',
+              fontSize: '1rem',
+              fontWeight: 700,
+              border: 'none',
+              cursor: hasAudio ? 'pointer' : 'not-allowed',
+            }}
+          >
+            Mulai Latihan
+          </button>
+        </div>
       </div>
     );
   }

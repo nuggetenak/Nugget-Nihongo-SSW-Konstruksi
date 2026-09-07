@@ -800,7 +800,7 @@ to guess: the 113 cards that still hold a `・` are the ones that should stack.
 `JpFront`'s `bullet`/`vs`/`colon` branches stay. They are now a small, correct population rather
 than a heuristic applied to a mixed one.
 
-### ☐ 72. 101 font sizes are off the type scale (no longer frozen, still not on it) — `S`
+### ☑ 72. 101 font sizes are off the type scale (no longer frozen, still not on it) — `S` — **fixed 2026-09-07**
 
 254 of 297 inline `fontSize: <px>` values matched a `--fs-*` token exactly and were migrated
 (2026-09-04). What was left — 41 in JSX and, once the scale was rebuilt, 60 more in stylesheets —
@@ -816,7 +816,26 @@ to 26 and 20px to 19, and item 68's judgment holds — don't force a match witho
 element wants the neighbouring token's size. Each is individually decidable, and they are trivial
 to find (`rem` outside a `var()` in a `font-size`).
 
-### ☐ 73. The setup screens are the last of the vertical dead space — `S` — **design call**
+**Decided, one at a time, and the answer is not one rule but four.** Reading all 97 remaining sites
+in context turned up a class the item had not separated out: values sitting *exactly* on a token's
+floor, which is what a px size becomes when the scale it predates is later made fluid.
+
+| Kind | Verdict | Why |
+|---|---|---|
+| Prose and UI labels already on a token's value | **snapped** — 18 sites, `0.875rem` → `var(--fs-caption)` | Identical at 390px; they now grow with the text around them instead of holding still at 14px |
+| Japanese landing on a JP token | **snapped** — `DangerMode .questionTerm` → `var(--fs-jp-back)` | 1.375rem *is* that token's floor, and the element is exactly what the token was written for |
+| Glyphs — emoji, `✕`, `☆`, `🔊` | **left off-scale** | An ornament in a fixed-size box reads as an icon, not as text; growing it with the reading size overflows the box it centres in |
+| Display numerals — `.heroPct`, `.lulusPct`, `.timerValue`, `.overviewPct`… | **left off-scale** | Sized against their own card, not against body copy |
+
+Everything else — 20px and 24px headings between `--fs-title` and `--fs-page-title`, Japanese
+outside the two JP tokens' ranges — stays, on item 68's judgment: no evidence it wants the
+neighbouring token's size. All of it is still `rem`, so all of it still follows Ukuran Teks, which
+was the half of this item that was a real defect.
+
+`spacing-scale.test.js` now carries the rule and a ratchet at 78: the off-scale population may
+fall, never rise.
+
+### ☑ 73. The setup screens are the last of the vertical dead space — `S` — **design call, taken 2026-09-07**
 
 `.content` is a flex column in mode chrome now and a screen claims the leftover height with
 `flex: 1 0 auto` (`LAYOUT_SPEC.md` §6). Kartu and Ulasan use it. A census of all 19 modes at
@@ -841,6 +860,28 @@ was adrift in the space; here the question is whether the CTA should be bottom-a
 design position (bottom-anchored = thumb-reachable and consistent with the app's bottom nav;
 top-stacked = the button sits directly under the choice it confirms). Whichever way it goes it
 should go the same way on all five, which is what makes it one decision rather than five.
+
+**Bottom-anchored, on all of them.** Two of the five screens in that census left with `produksi`
+and `kuisprod` in 7.0.0 — the table above is kept as it was measured rather than rewritten, since
+its point is the census, not the current mode list. The three that remain (Dengarkan, Kuis, Sprint)
+now claim the height AppShell reserves and push their "Mulai" to the bottom of it: `.setupPage`
+opts in with `flex: 1 0 auto` exactly as `.fcWrapper` does, and `.setupCta` carries
+`margin-top: auto`.
+
+Anchoring rather than stretching, deliberately: the choices above keep their natural size — nothing
+is inflated to fill a screen — and only the button moves, to where the thumb already is and where
+the app's own bottom nav has trained it to look.
+
+Measured on the running app at 390×844, empty space below the CTA:
+
+| screen | before | after |
+|---|---|---|
+| Dengarkan | 406px | 48px |
+| Kuis | 257px | 48px |
+| Sprint | 227px | 48px |
+
+The remaining 48px is `.content`'s own bottom reserve, and it is now the same on all three — which
+was the part that made this one decision rather than five.
 
 ### ☑ 74. The flip card cannot grow to fill its scene — `M` — **fixed 2026-09-07**
 

@@ -202,7 +202,7 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         }}
       >
         <div>
-          <div style={{ fontSize: '0.875rem', fontWeight: 700 }}>🔀 Mix All Vocab</div>
+          <div style={{ fontSize: 'var(--fs-caption)', fontWeight: 700 }}>🔀 Mix All Vocab</div>
           <div
             style={{ fontSize: 'var(--fs-small)', color: T.textDim, marginTop: 'var(--space-2)' }}
           >

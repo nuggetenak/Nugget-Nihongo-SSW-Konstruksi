@@ -153,7 +153,7 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
         {catStats.map((c) => (
           <button key={c.key} className={S.btnItem} onClick={() => setActiveCat(c.key)}>
             <div className={S.rowSpreadMb}>
-              <span style={{ fontSize: '0.875rem' }}>
+              <span style={{ fontSize: 'var(--fs-caption)' }}>
                 {c.emoji} {c.label}
               </span>
               <span

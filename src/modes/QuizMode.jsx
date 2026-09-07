@@ -158,7 +158,10 @@ export default function QuizMode({
     const pillStyle = (on) => sharedPill(on, 'md');
 
     return (
-      <div className={S.pageFade} style={{ padding: 'var(--space-24) var(--space-16)' }}>
+      <div
+        className={`${S.pageFade} ${S.setupPage}`}
+        style={{ padding: 'var(--space-24) var(--space-16)' }}
+      >
         <div className={S.rowSpread} style={{ marginBottom: 'var(--space-16)' }}>
           <button
             style={{
@@ -189,7 +192,7 @@ export default function QuizMode({
           >
             <div
               style={{
-                fontSize: '0.875rem',
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 color: T.text,
                 marginBottom: 'var(--space-4)',
@@ -392,13 +395,15 @@ export default function QuizMode({
           </div>
         )}
 
-        <button
-          className={S.btnPrimary}
-          style={{ fontSize: 'var(--fs-subtitle)', padding: 'var(--space-16)' }}
-          onClick={startQuiz}
-        >
-          Mulai Kuis 🚀
-        </button>
+        <div className={S.setupCta}>
+          <button
+            className={S.btnPrimary}
+            style={{ width: '100%', fontSize: 'var(--fs-subtitle)', padding: 'var(--space-16)' }}
+            onClick={startQuiz}
+          >
+            Mulai Kuis 🚀
+          </button>
+        </div>
       </div>
     );
   }

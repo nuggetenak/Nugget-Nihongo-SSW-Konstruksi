@@ -269,7 +269,9 @@ function DetailView({ pair, onBack }) {
         >
           <JpFront jp={pair.termA} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
-        <div style={{ fontSize: '0.875rem', color: T.text, lineHeight: 1.6 }}>{pair.defA}</div>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.text, lineHeight: 1.6 }}>
+          {pair.defA}
+        </div>
       </div>
 
       {/* Term B */}
@@ -286,7 +288,9 @@ function DetailView({ pair, onBack }) {
         >
           <JpFront jp={pair.termB} furiganaPolicy={furiganaPolicy} maxSize={CONFUSION_DETAIL_MAX} />
         </div>
-        <div style={{ fontSize: '0.875rem', color: T.text, lineHeight: 1.6 }}>{pair.defB}</div>
+        <div style={{ fontSize: 'var(--fs-caption)', color: T.text, lineHeight: 1.6 }}>
+          {pair.defB}
+        </div>
       </div>
 
       {/* Tip */}

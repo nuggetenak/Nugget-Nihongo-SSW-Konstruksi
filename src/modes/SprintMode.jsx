@@ -160,7 +160,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
   if (phase === 'ready') {
     const pb = personalBest;
     return (
-      <div className={S.page}>
+      <div className={`${S.page} ${S.setupPage}`}>
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-20)' }}>
           <div style={{ fontSize: '3rem', marginBottom: 'var(--space-8)' }}>⚡</div>
           <p className={S.pageSub}>Jawab sebanyak-banyaknya dalam waktu yang dipilih!</p>
@@ -245,13 +245,15 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
           </>
         )}
 
-        <button
-          className={S.btnPrimary}
-          style={{ width: '100%', padding: 'var(--space-14)', fontSize: 'var(--fs-subtitle)' }}
-          onClick={startSprint}
-        >
-          Mulai ⚡
-        </button>
+        <div className={S.setupCta}>
+          <button
+            className={S.btnPrimary}
+            style={{ width: '100%', padding: 'var(--space-14)', fontSize: 'var(--fs-subtitle)' }}
+            onClick={startSprint}
+          >
+            Mulai ⚡
+          </button>
+        </div>
       </div>
     );
   }
@@ -404,7 +406,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               textAlign: 'center',
               marginTop: 'var(--space-12)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               color: T.gold,
               fontWeight: 600,
             }}
@@ -419,7 +421,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               flex: 1,
               padding: 'var(--space-14)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               fontWeight: 600,
               fontFamily: 'inherit',
               borderRadius: T.r.md,
@@ -436,7 +438,7 @@ export default function SprintMode({ cards, onExit, onSessionEnd, filterIds = nu
             style={{
               flex: 1,
               padding: 'var(--space-14)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               fontWeight: 600,
               fontFamily: 'inherit',
               borderRadius: T.r.md,

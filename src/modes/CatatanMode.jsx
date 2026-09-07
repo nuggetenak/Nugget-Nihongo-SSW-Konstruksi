@@ -254,7 +254,7 @@ export default function CatatanMode({ cards }) {
           background: 'var(--ssw-inputBg)',
           border: '2px solid var(--ssw-border)',
           borderRadius: 10,
-          fontSize: '0.875rem',
+          fontSize: 'var(--fs-caption)',
           color: 'var(--ssw-text)',
           fontFamily: 'inherit',
           boxSizing: 'border-box',

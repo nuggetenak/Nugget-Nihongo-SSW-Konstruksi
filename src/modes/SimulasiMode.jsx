@@ -1027,7 +1027,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             style={{
               ...RED_BTN,
               padding: 'var(--space-6) var(--space-12)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               background: paused
                 ? 'linear-gradient(135deg,#1e3a5f,#2563eb)'
                 : 'linear-gradient(135deg,#7f1d1d,#dc2626)',
@@ -1172,7 +1172,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                 border: `2px solid ${isSelected ? T.amber : T.border}`,
                 color: T.text,
                 fontFamily: 'inherit',
-                fontSize: '0.875rem',
+                fontSize: 'var(--fs-caption)',
                 cursor: 'pointer',
               }}
             >
@@ -1321,7 +1321,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           <div
             style={{
               color: 'rgba(255,255,255,0.65)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--fs-caption)',
               marginBottom: 'var(--space-8)',
             }}
           >

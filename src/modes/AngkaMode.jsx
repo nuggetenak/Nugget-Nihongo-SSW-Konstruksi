@@ -442,7 +442,7 @@ function QuizView({ onBack, onSessionEnd }) {
                       : T.textDim,
                 textAlign: 'left',
                 cursor: selected !== null ? 'default' : 'pointer',
-                fontSize: '0.875rem',
+                fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 fontVariantNumeric: 'tabular-nums',
                 transition: 'all 0.15s',
