@@ -107,7 +107,7 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
   }));
 }
 
-export default function WaygroundMode({ onSessionEnd }) {
+export default function WaygroundMode({ onSessionEnd, audioEnabled = false }) {
   const { track } = useApp();
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
@@ -202,6 +202,7 @@ export default function WaygroundMode({ onSessionEnd }) {
         onFinish={handleFinish}
         showHint={showHint}
         accentColor={set?.color || T.amber}
+        audioEnabled={audioEnabled}
         persistKey={progressKey}
         initialQIdx={restored?.qIdx ?? 0}
         initialSelected={restored?.selected ?? null}

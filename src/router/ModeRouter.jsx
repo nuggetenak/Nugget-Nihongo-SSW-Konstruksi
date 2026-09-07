@@ -183,6 +183,23 @@ export default function ModeRouter() {
       }
     };
 
+  // Item 76: who gets the audio setting, and why. The distribution had no rule,
+  // so it had drifted -- `wayground` renders QuizShell's speaker button and was
+  // never handed the pref that shows it, while `dengar`, built entirely on
+  // audio, was equally absent for the opposite reason.
+  //
+  // The rule: `audioEnabled` is a global mute for audio the app *offers*. A mode
+  // receives it when it can speak Japanese that it is also showing as text --
+  // there the sound is an aid, and muting it costs only convenience. Two
+  // exceptions, both deliberate:
+  //
+  //   `dengar`   -- its task *is* listening. Obeying the mute would leave the
+  //                 mode with nothing to do, so it is exempt and the setting in
+  //                 Saya says so rather than quietly lying.
+  //   `simulasi` -- an exam does not offer aids (item 48's reasoning, unchanged).
+  //
+  // Every other absence follows from the rule itself: `sprint`, `angka`,
+  // `jebak` and `mirip` never call speakJP, so there is nothing to mute.
   const audioEnabled = storageGet('prefs')?.audioEnabled !== false;
 
   // Prop map — each mode gets exactly what it needs
@@ -198,6 +215,13 @@ export default function ModeRouter() {
       starred,
       onToggleStar: toggleStar,
       filterIds: modeParams?.filterIds ?? null,
+      // Item 75. The one study mode that recorded nothing. FlashcardMode fires
+      // this on unmount when at least one card was rated -- a flashcard sitting
+      // has no natural length, so leaving is the end of it.
+      onSessionEnd: makeSessionEnd('kartu'),
+      // Item 76: it shows Japanese and asks you to recall its meaning, and had
+      // no way to hear it. Manual button only -- see FlipCard.
+      audioEnabled,
     },
     ulasan: {
       srs,
@@ -240,6 +264,10 @@ export default function ModeRouter() {
     // prop map alone, which is why it sat unnoticed.
     wayground: {
       onSessionEnd: makeSessionEnd('wayground'),
+      // Item 76: it renders QuizShell, which draws a speaker button behind this
+      // prop -- so the button had simply never appeared in the largest question
+      // bank in the app, on Japanese it shows as text like every other quiz.
+      audioEnabled,
     },
     vocab: {
       onSessionEnd: makeSessionEnd('vocab'),

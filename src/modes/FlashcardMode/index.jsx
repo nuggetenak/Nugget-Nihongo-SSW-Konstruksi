@@ -3,7 +3,7 @@
 // Decomposed from a single file into 5 sub-components; zero behavioral change.
 // furiganaPolicy prop wired to JpDisplay (default: 'always').
 // ─────────────────────────────────────────────────────────────────────────────
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../../styles/theme.js';
 import { shuffle } from '../../utils/shuffle.js';
 import { isTypingTarget } from '../../utils/keyboard.js';
@@ -11,6 +11,10 @@ import { getCatInfo } from '../../data/categories.js';
 import { useToast } from '../../components/Toast.jsx';
 import { useConfirm } from '../../components/ConfirmDialog.jsx';
 import { useApp } from '../../contexts/AppContext.jsx';
+import { useSessionTimer } from '../../hooks/useSessionTimer.js';
+import { useSpeakErrorHandler } from '../../hooks/useSpeakErrorHandler.js';
+import { speakJP, canSpeak } from '../../utils/speak.js';
+import { stripFuri } from '../../utils/jp-helpers.js';
 import { get as storageGet, set as storageSet } from '../../storage/engine.js';
 import ProgressBar from '../../components/ProgressBar.jsx';
 import ErrorBoundary, { FlatCardFallback } from '../../components/ErrorBoundary.jsx';
@@ -68,6 +72,8 @@ export default function FlashcardMode({
   starred = new Set(),
   onToggleStar = () => {},
   filterIds = null,
+  onSessionEnd,
+  audioEnabled = false,
 }) {
   // If filterIds provided (wrong-card bridge), scope cards to that set.
   const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
@@ -76,6 +82,24 @@ export default function FlashcardMode({
   const [flipped, setFlipped] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
   const [rated, setRated] = useState(false);
+
+  // Item 75: `kartu` was the only content mode absent from its own statistics.
+  // Every other study mode is handed onSessionEnd or onFinish; this one got
+  // neither, so progress.sessions — what StatsMode, session-analytics and the
+  // heatmap all read — had never seen a minute of the app's most-opened mode.
+  //
+  // The shape decision the item asked for: a flashcard session ends **when you
+  // leave**, not every N cards. Flashcards have no natural length; the reader
+  // decides when to stop, and leaving is that decision. Slicing one sitting
+  // into fixed-size chunks would also inflate the session count against
+  // SESSIONS_CAP's 180 and make "sessions this week" mean something different
+  // here than everywhere else.
+  //
+  // Counted in refs, not state: the tally is only ever read on the way out, and
+  // as state it would re-render the card on every rating for nothing.
+  const sessionTimer = useSessionTimer();
+  const ratedCountRef = useRef(0);
+  const knownCountRef = useRef(0);
   // True once the current card has been turned over at least once. Drives the
   // rating row and the number shortcuts, so they survive flipping back to the
   // front to re-check the Japanese — see RatingRow's header.
@@ -226,6 +250,15 @@ export default function FlashcardMode({
     setShowDesc(false);
   }, [flipped, bumpHint]);
 
+  // Item 76. Gated on the pref *and* on the platform actually having a voice:
+  // a speaker button that cannot make a sound is worse than no button.
+  const handleSpeakError = useSpeakErrorHandler();
+  const canPlayAudio = audioEnabled && canSpeak();
+  const speakCard = useCallback(() => {
+    if (!card) return;
+    speakJP(stripFuri(card.jp), { onError: handleSpeakError });
+  }, [card, handleSpeakError]);
+
   const handleRate = useCallback(
     (rating) => {
       if (!card || rated) return;
@@ -235,10 +268,36 @@ export default function FlashcardMode({
       } else {
         onMark?.(card.id, rating >= 2 ? 'known' : 'unknown');
       }
+      // `correct` for a flashcard is "did you know it" — Oke and Mudah, the two
+      // ratings FSRS treats as a pass. `kartu` is not in SCORED_QUIZ_MODES, so
+      // this never reaches quiz accuracy or the readiness band; it is here so
+      // the per-mode breakdown can say something truthful rather than nothing.
+      ratedCountRef.current += 1;
+      if (rating >= 3) knownCountRef.current += 1;
       setRated(true);
       setTimeout(() => go(1), 400);
     },
     [card, rated, srs, onMark, go]
+  );
+
+  // Fires on unmount, which is every way out of this mode: the header's back
+  // arrow, a mode switch and a tab switch all unmount it, and only one of those
+  // goes through this component's own controls. A sitting with nothing rated is
+  // not a session and is not recorded.
+  const onSessionEndRef = useRef(onSessionEnd);
+  useEffect(() => {
+    onSessionEndRef.current = onSessionEnd;
+  }, [onSessionEnd]);
+  useEffect(
+    () => () => {
+      if (ratedCountRef.current === 0) return;
+      onSessionEndRef.current?.({
+        correct: knownCountRef.current,
+        total: ratedCountRef.current,
+        durationMs: sessionTimer.getDurationMs(),
+      });
+    },
+    [] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const handleReset = useCallback(async () => {
@@ -431,6 +490,7 @@ export default function FlashcardMode({
           borderColor={borderColor}
           swipeDelta={swipeDelta}
           onCatFilter={(key) => applyCats(new Set([key]))}
+          onSpeak={canPlayAudio ? speakCard : null}
           onTouchStart={(e) => {
             setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
           }}

@@ -32,6 +32,7 @@ export default function FlipCard({
   onTouchMove,
   onTouchEnd,
   onCatFilter,
+  onSpeak,
   furiganaPolicy = 'always',
 }) {
   const cardTiltDeg = swipeDelta * 4;
@@ -120,6 +121,27 @@ export default function FlipCard({
             </BadgeTag>
           )}
           <div className={S.cardNum}>#{safeIdx + 1}</div>
+
+          {/* Item 76: Kartu never called speakJP at all — the one mode that
+              shows a Japanese term and asks you to produce its meaning had no
+              way to hear it. Manual only, and on the front: a card that spoke
+              on arrival would answer a reading question before it was asked.
+              stopPropagation because the whole face is the flip target, the
+              same nesting the category badge above already does. */}
+          {onSpeak && !flipped && (
+            <button
+              type="button"
+              className={S.speakBtn}
+              onClick={(e) => {
+                e.stopPropagation();
+                onSpeak();
+              }}
+              tabIndex={flipped ? -1 : 0}
+              aria-label="Putar audio"
+            >
+              🔊
+            </button>
+          )}
 
           <div className={S.frontContent}>
             <JpFront jp={card.jp} furiganaPolicy={furiganaPolicy} />

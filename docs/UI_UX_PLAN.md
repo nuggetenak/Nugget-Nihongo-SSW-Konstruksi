@@ -964,7 +964,7 @@ never handed. Every claim below was checked against code, not inferred from thes
 | Ulasan | `ulasan` | — (SRS queue) | due today | n/a | Y | Y | — |
 | Alat | `stats`/`ekspor`/`sumber` | n/a | n/a | n/a | n/a | n/a | n/a |
 
-### ☐ 75. `kartu` is the only content mode absent from its own statistics — `S` — `P1`
+### ☑ 75. `kartu` is the only content mode absent from its own statistics — `S` — `P1` — **fixed 2026-09-07**
 
 Across the whole prop map, **every** study mode is handed `onSessionEnd` or `onFinish` except
 `kartu` (`ModeRouter.jsx:189-200`), which gets neither. So `progress.sessions` — what `StatsMode`,
@@ -975,7 +975,21 @@ mode in the app simply does not appear on its own stats page.
 Needs a shape decision first: `kartu` has no session boundary — when is it "done"? Per N cards
 rated, or on mode exit. Don't guess.
 
-### ☐ 76. `audioEnabled` is distributed with no rule, and `speakOnFlip` is dead in Kartu — `M` — `P1`
+**On exit, with at least one card rated.** Flashcards have no natural length; the reader decides
+when to stop, and leaving is that decision. Per-N would also cut one sitting into several rows,
+which makes "sessions this week" mean something different here than in every other mode and churns
+`SESSIONS_CAP`'s 180 for no gain.
+
+Fired from an unmount effect rather than from this mode's own exit control, because the header's
+back arrow, a mode switch and a tab switch are all ways out and only one of them goes through the
+mode. A sitting with nothing rated is not recorded at all — opening the deck and reading one card
+is not study to put on a chart.
+
+`correct` is Oke + Mudah, the two ratings FSRS treats as a pass. `kartu` is not in
+`SCORED_QUIZ_MODES`, so this never reaches quiz accuracy or the readiness band; it is there so the
+per-mode breakdown and the heatmap can say something true rather than nothing.
+
+### ☑ 76. `audioEnabled` is distributed with no rule, and `speakOnFlip` is dead in Kartu — `M` — `P1` — **fixed 2026-09-07**
 
 Three findings, one root cause: nothing owns the question "which modes speak?".
 
@@ -992,6 +1006,36 @@ Three findings, one root cause: nothing owns the question "which modes speak?".
    `audioEnabled` and never calls `speakJP()`.
 3. Receiving it: `kuis`, `jac`, `vocab`. Not: `kartu`, `sprint`,
    `wayground`, `dengar`, `angka`, `jebak`, `mirip`, `simulasi`.
+
+**The rule, written down at the top of the prop map:** `audioEnabled` is a global mute for audio
+the app *offers*. A mode receives it when it can speak Japanese that it is also showing as text —
+there the sound is an aid, and muting it costs only convenience.
+
+Two exceptions, both deliberate and both now stated where they matter:
+
+- **`dengar` is exempt.** Its task *is* listening; obeying the mute would leave the mode with
+  nothing to do. Finding 1 said this might well be the right answer "in which case the setting
+  should say so" — so the setting says so: its sub-line reads *"Tombol 🔊 di kartu & kuis. Mode
+  Dengarkan tetap bersuara."* rather than the old *"tombol 🔊 di kartu"*, which promised a reach it
+  never had.
+- **`simulasi` is exempt.** An exam does not offer aids (item 48, unchanged).
+
+What the rule changed:
+
+- **`wayground` now receives it.** It renders `QuizShell`, which draws its speaker button behind
+  this exact prop — so the button had never once appeared in the largest question bank in the app.
+  A one-line omission that no rule existed to catch.
+- **`kartu` now receives it, and has a 🔊.** Finding 2's real content: the mode that shows a
+  Japanese term and asks you to recall its meaning had no way to hear it. Manual button only,
+  bottom-left of the front face, `stopPropagation`'d like the category badge — a card that spoke on
+  arrival would answer a reading question before it was asked.
+- **Everything else follows from the rule.** `sprint`, `angka`, `jebak` and `mirip` never call
+  `speakJP`, so there is nothing to mute.
+
+**Finding 2, corrected.** `prefs.speakOnFlip` is not mislabelled: `SayaTab.jsx:540` reads
+**"🔊 Kapan Bicara (Ulasan)"** — the item quoted line 541, which is the *value*, not the label. So
+the pref has always said what it governs. `kartu` is deliberately not wired to it: Ulasan speaks on
+its own because the queue moves for you, and Kartu you drive yourself.
 
 ### ☐ 77. Three differently-shaped category pickers — `M` — `P2` — **half closed 2026-09-07**
 
