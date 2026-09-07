@@ -1503,6 +1503,30 @@ is what makes retry-wrong impossible in `wayground` and `vocab` (item 86), keeps
 980 links, presumably semi-automatable from the question text against the card corpus — not a code
 one, and it should be sized honestly before anyone starts.
 
+**Sized, 2026-09-07 — `npm run derive:quiz-links`.** The tool is committed; the links are not, and
+that is the finding rather than a shortfall. A wrong link is worse than no link: it sends a learner
+to a card that does not teach the answer, and 980 of those judgements folded into a branch this size
+is 980 judgements nobody can check.
+
+Method: card headwords (`jp`, furigana stripped) matched against the question, longest first, so
+鉄骨造 wins over 鉄骨 wherever both appear. 41 headwords are carried by more than one card and are
+skipped entirely — they cannot identify one of them. 1,522 of 1,606 headwords are usable.
+
+| tier | count | share | what it means |
+|---|---|---|---|
+| **high** | 305 | 31.1% | ≥4-character headword in the question stem. Twelve sampled by hand, twelve correct. |
+| **medium** | 221 | 22.6% | 3 characters in the stem, or ≥4 in the correct answer. Probably right; probably is not good enough to ship unread. |
+| **low** | 375 | 38.3% | 2-character match. 安全, 危険, 作業 sit inside longer compounds constantly — 危険 for a question about 危険予知訓練 is not a lie, but it is not the card that teaches the answer. |
+| **none** | 79 | 8.1% | no card headword appears in the question at all. |
+
+**So the honest size is: 305 links can be derived and reviewed cheaply, and 675 need a human read.**
+Not the "semi-automatable" this item hoped for at the high end, and not hopeless either. The 79
+no-match rows are worth reading first for a different reason — a question about something the deck
+does not teach is a content gap, not a linking problem.
+
+Still `☐`, and still its own branch: this item asked to be sized before anyone starts, and that is
+what has been done.
+
 ### ☑ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1` — **fixed 2026-09-07**
 
 `recordSession` stores `{mode, correct, total, durationMs, date}` and nothing else, so a 15-question
