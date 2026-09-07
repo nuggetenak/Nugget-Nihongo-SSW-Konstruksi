@@ -251,13 +251,6 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     glosari: { track },
-    produksi: {
-      cards: filteredCards,
-      onExit: exitMode,
-      onSessionEnd: makeSessionEnd('produksi'),
-      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
-      audioEnabled,
-    },
     mirip: { onSessionEnd: makeSessionEnd('mirip') },
     dengar: {
       cards: filteredCards,
@@ -267,13 +260,6 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     catatan: { cards: filteredCards },
-    kuisprod: {
-      cards: filteredCards,
-      onExit: exitMode,
-      onSessionEnd: makeSessionEnd('kuisprod'),
-      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
-      audioEnabled,
-    },
     sumber: { onNavigate: goMode },
   };
 

@@ -91,40 +91,6 @@ export default function SumberMode({ onNavigate }) {
             >
               ❓ Kuis
             </button>
-            <button
-              onClick={() => onNavigate('produksi', { filterIds: srcIds })}
-              style={{
-                flex: 1,
-                fontFamily: 'inherit',
-                fontSize: 'var(--fs-caption)',
-                fontWeight: 700,
-                padding: 'var(--space-10) var(--space-10)',
-                borderRadius: T.r.md,
-                border: `1px solid ${color}40`,
-                background: `${color}12`,
-                color,
-                cursor: 'pointer',
-              }}
-            >
-              ✍️ Produksi
-            </button>
-            <button
-              onClick={() => onNavigate('kuisprod', { filterIds: srcIds })}
-              style={{
-                flex: 1,
-                fontFamily: 'inherit',
-                fontSize: 'var(--fs-caption)',
-                fontWeight: 700,
-                padding: 'var(--space-10) var(--space-10)',
-                borderRadius: T.r.md,
-                border: `1px solid ${color}40`,
-                background: `${color}12`,
-                color,
-                cursor: 'pointer',
-              }}
-            >
-              🔤 Kuis Prod
-            </button>
           </div>
         )}
         <div className={S.list} style={{ gap: 'var(--space-6)' }}>

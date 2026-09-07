@@ -58,7 +58,7 @@
    auto height and are unaffected. Scoped to mode chrome deliberately — the
    three tab screens have their own scroll behaviour and don't need it, and
    in mode chrome .content has exactly two children (ModeHeader and the mode),
-   neither with a vertical margin, so nothing changes for the 20 modes that
+   neither with a vertical margin, so nothing changes for the 18 modes that
    don't opt in. */
 .shell[data-chrome='mode'] .content {
   display: flex;

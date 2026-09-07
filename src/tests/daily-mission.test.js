@@ -71,8 +71,6 @@ describe('Phase C — Daily Mission', () => {
       'fokus',
       'angka',
       'jebak',
-      'produksi',
-      'kuisprod',
       'mirip',
       'dengar',
     ];

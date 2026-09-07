@@ -18,8 +18,6 @@ const MISSION_TYPES = [
   { mode: 'fokus', label: 'Fokus Kelemahan', icon: '🎯', priority: 4 },
   { mode: 'angka', label: 'Angka Kunci', icon: '🔢', priority: 3 },
   { mode: 'jebak', label: 'Soal Jebak', icon: '⚠️', priority: 3 },
-  { mode: 'produksi', label: 'Latihan Produksi', icon: '✍️', priority: 3 },
-  { mode: 'kuisprod', label: 'Kuis Produksi', icon: '🔤', priority: 2 },
   { mode: 'mirip', label: 'Kata Mirip', icon: '🔀', priority: 2 },
   { mode: 'dengar', label: 'Dengarkan', icon: '🎧', priority: 2 },
 ].map((m) => ({ ...m, strand: MODE_META[m.mode]?.strand ?? null }));

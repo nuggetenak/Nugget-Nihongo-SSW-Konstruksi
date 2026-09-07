@@ -22,7 +22,7 @@
 //
 // ── Only for audio the user asked for (2026-09-04) ──────────────────────────
 // Several modes speak automatically on arrival: ReviewMode and DengarMode on
-// each new card, ProductionMode and QuizProduksiMode on start. On a phone with
+// each new card. On a phone with
 // no ja-JP voice installed -- ordinary on the cheap Android handsets this app is
 // built for -- that turned "open Ulasan" into "open Ulasan and get an error
 // toast", every session, about a feature the learner never invoked and may not

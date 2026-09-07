@@ -7,7 +7,7 @@ export const HALF_DECK_THRESHOLD = Math.ceil(TOTAL_CARDS / 2); // 719
 export const FULL_DECK_THRESHOLD = TOTAL_CARDS;
 
 /** All modes whose sessions contribute to quiz accuracy scoring. */
-export const SCORED_QUIZ_MODES = ['kuis', 'jac', 'wayground', 'simulasi', 'vocab', 'kuisprod'];
+export const SCORED_QUIZ_MODES = ['kuis', 'jac', 'wayground', 'simulasi', 'vocab'];
 
 /** FSRS card considered "mature" at this interval (days). */
 export const SRS_MATURE_DAYS = 21;
@@ -15,10 +15,10 @@ export const SRS_MATURE_DAYS = 21;
 /** Max sessions stored in progress.sessions. */
 export const SESSIONS_CAP = 180;
 
-/** Question-count picker options, shared by DengarMode/ProductionMode/
- *  QuizProduksiMode/QuizMode. QuizMode adds its own dynamic 4th "Semua"
- *  option (category-filtered deck size) on top of this base rather than
- *  duplicating it — see QuizMode.jsx for that explicit deviation. */
+/** Question-count picker options, shared by DengarMode/QuizMode. QuizMode adds
+ *  its own dynamic 4th "Semua" option (category-filtered deck size) on top of
+ *  this base rather than duplicating it — see QuizMode.jsx for that explicit
+ *  deviation. */
 export const QUIZ_COUNTS = [10, 20, 30];
 
 /** Pass threshold for the exam simulation, as a percentage.

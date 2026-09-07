@@ -5,13 +5,13 @@
 // and generates the real list, then injects it into the built dist/sw.js in
 // place of the hand-written array in the source file.
 //
-// Scope decision, made explicit rather than silently: NOT precaching all 21
+// Scope decision, made explicit rather than silently: NOT precaching all 19
 // lazy mode chunks (weighs total install size against a metered-connection
 // audience). Precaching the shell + the three highest-traffic modes --
 // kartu (FlashcardMode), ulasan (ReviewMode), kuis (QuizMode) -- per the
 // plan's own suggested middle path (docs/UI_UX_PLAN.md item 62). A fresh
 // install that goes offline immediately can still study, review, and quiz;
-// the other 18 modes remain opportunistically cached on first visit, same
+// the other 16 modes remain opportunistically cached on first visit, same
 // as before.
 //
 // Vite's manifest already flattens each entry's transitive imports (verified

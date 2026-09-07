@@ -68,8 +68,10 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
   // Some shared slots this component is used in (ResultScreen's userAnswer/
   // correctAnswer across several modes, primarily) sometimes receive content
   // that isn't actually Japanese: ConfusionMode's Indonesian definitions,
-  // ProductionMode/QuizProduksiMode's id_text translations, AngkaMode's
-  // mostly-Indonesian konteks sentences. Forcing Japanese-specific typography
+  // AngkaMode's mostly-Indonesian konteks sentences. (The two typing modes
+  // that fed it id_text translations, ProductionMode and QuizProduksiMode,
+  // were removed in 7.0.0 — the guard still earns its keep for the rest.)
+  // Forcing Japanese-specific typography
   // (CJK font, center alignment, bold weight, jpFontSize's length-based
   // auto-scaling meant for kanji-dense strings, not prose sentence length)
   // onto a full Indonesian sentence looks wrong — found by checking this

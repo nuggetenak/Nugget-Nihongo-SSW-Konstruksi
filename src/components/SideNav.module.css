@@ -120,7 +120,7 @@
   flex-direction: column;
   gap: var(--space-2);
   /* This column scrolls internally once the full registry is open — .side
-     itself is height:100dvh with no overflow, and letting 21 modes push the
+     itself is height:100dvh with no overflow, and letting 19 modes push the
      tabs or .foot out of view would be worse than a scrollbar here. */
   overflow-y: auto;
   min-height: 0;

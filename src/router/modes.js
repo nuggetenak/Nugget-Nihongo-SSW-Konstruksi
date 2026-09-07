@@ -42,11 +42,9 @@ export const MODE_COMPONENTS = {
   sumber: lazy(() => import('../modes/SumberMode.jsx')),
   ekspor: lazy(() => import('../modes/ExportMode.jsx')),
   ulasan: lazy(() => import('../modes/ReviewMode.jsx')),
-  produksi: lazy(() => import('../modes/ProductionMode.jsx')),
   mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
   dengar: lazy(() => import('../modes/DengarMode.jsx')),
   catatan: lazy(() => import('../modes/CatatanMode.jsx')),
-  kuisprod: lazy(() => import('../modes/QuizProduksiMode.jsx')),
 };
 
 // ── Navigation sections ────────────────────────────────────────────────────
@@ -59,7 +57,7 @@ export const MODE_SECTIONS = {
   latihan: {
     title: '🧪 Latihan',
     subtitle: 'Asah kemampuan',
-    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'produksi', 'mirip', 'dengar', 'kuisprod'],
+    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'mirip', 'dengar'],
   },
   ujian: {
     title: '📋 Ujian',
@@ -253,14 +251,6 @@ export const MODE_META = {
     strand: null,
     skeleton: 'list',
   },
-  produksi: {
-    icon: '✍️',
-    ui: 'tulis',
-    label: 'Produksi',
-    desc: 'ID→JP: ketik jawaban Jepang',
-    color: '#34d399',
-    strand: 'output',
-  },
   mirip: {
     icon: '🔀',
     ui: 'tukar',
@@ -287,15 +277,6 @@ export const MODE_META = {
     color: '#84cc16',
     strand: 'input',
     skeleton: 'list',
-  },
-  kuisprod: {
-    icon: '🔤',
-    ui: 'ketik',
-    label: 'Kuis Produksi',
-    short: 'Kuis Prod',
-    desc: 'JP → ketik terjemahan Indonesia',
-    color: '#10b981',
-    strand: 'output',
   },
 };
 

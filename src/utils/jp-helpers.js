@@ -72,8 +72,8 @@ export function hasJapanese(s = '') {
  * several real call sites hand JpFront content that isn't uniformly one
  * language: a mostly-Japanese term can carry a short Indonesian aside
  * (rare), and more commonly, several modes' shared ResultScreen slots
- * (ConfusionMode's Indonesian definitions, ProductionMode/QuizProduksiMode's
- * id_text, AngkaMode's mostly-Indonesian konteks sentences) carry an
+ * (ConfusionMode's Indonesian definitions, AngkaMode's mostly-Indonesian
+ * konteks sentences) carry an
  * Indonesian sentence with at most an incidental parenthetical JP term.
  * hasJapanese() alone would wrongly route the second group into full
  * Japanese styling over one matching character. 0.4 chosen by checking real

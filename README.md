@@ -98,7 +98,7 @@ src/
 ├── storage/                 # localStorage engine, schema v6, migrations
 ├── hooks/                   # useAnswerStreak, useDebounce, useFocusTrap, useSRS, …
 ├── components/              # Shared UI components
-├── modes/                   # 21 mode screens (all React.lazy)
+├── modes/                   # 19 mode screens (all React.lazy)
 │   └── FlashcardMode/       # Decomposed flashcard mode
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …

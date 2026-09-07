@@ -85,7 +85,7 @@ describe('SimulasiMode — exit confirmation during an active simulation', () =>
 
   // ── The header's back arrow is guarded too (2026-09-04) ──────────────────
   // SimulasiMode no longer draws its own top-level back button: ModeHeader
-  // renders the one back control for all 21 modes. That control has to respect
+  // renders the one back control for all 19 modes. That control has to respect
   // the same confirmation, or the header's arrow becomes a silent way to throw
   // away a 100-minute exam. SimulasiMode registers its confirmation as an exit
   // guard (useExitGuard) while, and only while, an exam is running.
