@@ -3,6 +3,7 @@
 // remaining modes = compact 2-col grid. Color-coded per section.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { readableOn } from '../utils/contrast.js';
 import { useState } from 'react';
 import Icon from './Icon.jsx';
 import s from './BelajarTab.module.css';
@@ -73,8 +74,16 @@ function FeaturedCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
         <div className={s.featuredLabel}>{m.label}</div>
         <div className={s.featuredDesc}>{m.desc}</div>
       </div>
+      {/* Item 142: the badge's background is one of the 19 mode accent colours,
+          and the CSS pinned its text to #fff. White fails the 3:1 large-text
+          floor on 14 of them and is 1.53:1 on Angka Kunci's #facc15 — a bold
+          numeral you effectively cannot see. No literal can be right for a
+          colour chosen at runtime. */}
       {badge > 0 && (
-        <span className={s.featuredBadge} style={{ background: sm.color }}>
+        <span
+          className={s.featuredBadge}
+          style={{ background: sm.color, color: readableOn(sm.color) }}
+        >
           {badge > 99 ? '99+' : badge}
         </span>
       )}
@@ -98,7 +107,7 @@ function CompactCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
       aria-label={`${m.label}: ${m.desc}`}
     >
       {badge > 0 && (
-        <span className={s.cardBadge} style={{ background: sm.color }}>
+        <span className={s.cardBadge} style={{ background: sm.color, color: readableOn(sm.color) }}>
           {badge > 99 ? '99+' : badge}
         </span>
       )}

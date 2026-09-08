@@ -61,7 +61,9 @@ function resolveEntryFiles(manifest, key, seen) {
 
 function main() {
   if (!fs.existsSync(manifestPath)) {
-    console.error(`Manifest not found at ${manifestPath} -- did the build run with manifest: true?`);
+    console.error(
+      `Manifest not found at ${manifestPath} -- did the build run with manifest: true?`
+    );
     process.exit(1);
   }
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
@@ -83,12 +85,7 @@ function main() {
   const assetUrls = [...files].map((f) => `${BASE}/${f}`);
   const fontUrls = FONT_FILES.map((f) => `${BASE}/fonts/${f}`);
 
-  const precacheUrls = [
-    `${BASE}/`,
-    `${BASE}/index.html`,
-    ...assetUrls,
-    ...fontUrls,
-  ];
+  const precacheUrls = [`${BASE}/`, `${BASE}/index.html`, ...assetUrls, ...fontUrls];
 
   console.log(`Generated PRECACHE_URLS: ${precacheUrls.length} entries`);
   console.log(`  (shell: 2, bundled assets: ${assetUrls.length}, fonts: ${fontUrls.length})`);
@@ -100,7 +97,9 @@ function main() {
   const arrayLiteral = `const PRECACHE_URLS = ${JSON.stringify(precacheUrls, null, 2)};`;
   const pattern = /const PRECACHE_URLS = \[[\s\S]*?\];/;
   if (!pattern.test(swContent)) {
-    console.error('Could not find PRECACHE_URLS declaration in built sw.js -- aborting rather than silently failing to precache.');
+    console.error(
+      'Could not find PRECACHE_URLS declaration in built sw.js -- aborting rather than silently failing to precache.'
+    );
     process.exit(1);
   }
   swContent = swContent.replace(pattern, arrayLiteral);

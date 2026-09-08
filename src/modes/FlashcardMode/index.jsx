@@ -27,6 +27,7 @@ import FlipCard from './FlipCard.jsx';
 import RatingRow from './RatingRow.jsx';
 import ToolStrip from './ToolStrip.jsx';
 import FilterBar from './FilterBar.jsx';
+import { useScopedDeck } from './use-scoped-deck.js';
 import Icon from '../../components/Icon.jsx';
 
 const SEARCH_KEY = 'ssw-fc-search';
@@ -85,8 +86,12 @@ export default function FlashcardMode({
   onSessionEnd,
   audioEnabled = false,
 }) {
-  // If filterIds provided (wrong-card bridge), scope cards to that set.
-  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+  // Scoped to `filterIds` when a caller deep-links a deck (wrong-answer drill,
+  // a source's cards, Terakhir dipelajari). Referentially stable -- see
+  // use-scoped-deck.js, which exists because this being a fresh array each
+  // render put the whole mode in an unbounded re-render loop (item 118).
+  const baseCards = useScopedDeck(cards, filterIds);
+
   const [order, setOrder] = useState([]);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -574,7 +579,13 @@ export default function FlashcardMode({
         ← → ganti kartu · ↑ balik kartu
       </div>
 
-      {/* Nav row. The flip button was removed 2026-09-04 as redundant with
+      {/* Nav row. Labels are Indonesian since 7.3.0 (item 140): these read
+          "← Prev" and "Next →" while their own aria-labels said "Kartu
+          sebelumnya" / "Kartu berikutnya", so a sighted user and a screen
+          reader user were given different languages for the same button, on
+          the app's most-used screen. SimulasiMode had said "← Sebelumnya" /
+          "Selanjutnya →" the whole time.
+          The flip button was removed 2026-09-04 as redundant with
           tapping the card — true of the front face, false of the back, which
           carried no handler at all. On a touch screen that made a flipped card
           impossible to turn back over. It is back, and the back face is
@@ -587,7 +598,7 @@ export default function FlashcardMode({
           className={FC.navBtn}
           aria-label="Kartu sebelumnya"
         >
-          ← Prev
+          ← Sebelumnya
         </button>
         {/* No aria-label: the visible text already names the action, and
             duplicating "Balik kartu" here would give the page two controls with
@@ -601,7 +612,7 @@ export default function FlashcardMode({
           className={FC.navBtn}
           aria-label="Kartu berikutnya"
         >
-          Next →
+          Berikutnya →
         </button>
       </div>
 

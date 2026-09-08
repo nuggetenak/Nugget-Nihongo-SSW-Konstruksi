@@ -1,3 +1,191 @@
+## [7.3.0] - 2026-09-08
+
+The owner reported one bug with a screen recording and approved the rest of the audit backlog. The
+recording turned out to be the most severe defect in the app, and finding its cause exposed a class
+of the same bug elsewhere. 20 filed items are closed; two of the audit's three "not done, not
+clean" rows are now done.
+
+### A filtered deck re-rendered without bound, so the card would not turn over (P0)
+
+Tapping "Lihat" on a card opened from "Terakhir dipelajari" did nothing. Neither did Prev or Next.
+
+`FlashcardMode` computed its deck as a bare expression in the component body:
+
+```js
+const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+```
+
+`.filter()` allocates, so with any `filterIds` that value was a new array on every render. It feeds
+`rebuildOrder`, which feeds the effect that calls `setOrder(rebuildOrder(...))` alongside
+`setFlipped(false)` and `setIdx(0)`. A new array into state is never `Object.is`-equal, so that
+commit re-rendered, which rebuilt the deck, which re-ran the effect. Unbounded, for the life of the
+mode, resetting `flipped` and `idx` before every paint.
+
+It broke **every** filtered deck, not just the reported one: eight modes' "Latih N Salah", Sumber's
+card browse, and Terakhir dipelajari. An unfiltered deck was never affected -- there `baseCards`
+*is* the `cards` prop and the prop is stable -- so the app's default path was the one path that
+could not reproduce it.
+
+**Correcting the previous release's filing.** Item 118 recorded this as "FlashcardMode hangs under
+jsdom when given `filterIds`", guessed at a harness quirk, rated it P2 and moved on. jsdom was
+reporting a live P0 faithfully.
+
+The fix is one memo, extracted to `use-scoped-deck.js` rather than left inline, because the
+invariant cannot be guarded where it lives: rendering the broken component hangs the runner instead
+of failing it. Verified both ways -- an integration test against the broken component was killed at
+90s; the hook test fails in 27ms.
+
+**And the same line was still live in `SprintMode`**, reached from Sumber's "⚡ Sprint" -- worse
+there, because the loop starts at mount, so the setup screen's own buttons never respond.
+`QuizMode` carried it too, harmless only because that file has no effect at all. All three now go
+through the hook, and a test sweeps the whole modes layer for the expression.
+
+### One safety question was taught two different answers (item 115)
+
+`KY活動の4ステップで最後のステップは？` -- JAC Mockup `jmt02` marked 対策を決めて実行する while its
+own explanation named 目標設定, and Wayground `wt01` answers the identical question 目標宣言. The KYT
+rounds are 現状把握 → 本質追究 → 対策樹立 → 目標設定, so countermeasures are round 3 and Wayground is
+right. A learner drilling both banks was taught two answers to one hazard-prediction question and
+marked wrong for the correct one in half of them.
+
+Nothing in the five audits had ever compared a question in one source file against one in another,
+which is why every run stayed green. `audit-question-overlap.mjs` does that now: it normalises away
+furigana, whitespace and brackets, fails on any pair that agrees on the question and disagrees on
+the answer, and carries a ceiling on how much the two banks may overlap at all.
+
+### Nine Japanese terms lost their readings (item 116)
+
+`CD管《かん》` is 33% Japanese characters, under `isMeaningfullyJapanese`'s 0.4 threshold, so `JpFront`
+bailed to plain `lang="id"` body text -- which renders the *stripped* string. It displayed as `CD管`
+with no reading at all: the one part a learner cannot supply (管 = pipe) lost the one thing that
+makes it readable. Also `PC杭`, `PHC杭`, `RC造`, `SRC造`, `PF管`, `CB造`, `土留め ≥ 1.5m`.
+
+The fix is the reading marker, not the threshold: 《》 only ever appears on Japanese text, so it
+cannot fire on the Indonesian sentences the guard exists for, while lowering 0.4 to 0.25 would drag
+them back over the line. The bail-out population goes 28 → 19, and all 19 remaining are pure latin
+acronyms with no kanji.
+
+### One failed request discarded the entire precache (item 130)
+
+`Cache.addAll` is atomic by spec, and install was a bare `cache.addAll(PRECACHE_URLS)` over the ~37
+URLs postbuild writes in, with no catch. One 404 or one dropped connection rejected the whole
+promise and discarded the installation: nothing cached, not even index.html, nothing surfaced. A
+first install on a flaky connection got no offline capability at all instead of the core loop --
+the worst possible failure for an audience defined by unreliable connections. Shell and assets are
+now separate, and the tests execute the install handler rather than string-matching the file, which
+is exactly why this shipped: every string in it was correct.
+
+### Storage told two untruths (items 132, 133)
+
+`readDoc` asked "does this parse?" and never "is this a document?", so a key holding `null`, `[]`,
+`42` or `{}` resolved to version 0 and took the fresh-install branch: overwritten with defaults, no
+quarantine copy, no warning, walking straight past the corruption path that exists for this.
+
+And "Reset Semua Data" rewrote the three managed documents and stopped, so a GitHub Personal Access
+Token and the backup gist id survived a control labelled "Hapus semua progress — tidak bisa
+dibatalkan". For an audience where a borrowed or resold phone is ordinary, that hands the next
+holder write access to the gist.
+
+### A wrong answer now counts wherever you made it (items 127, 128, 129)
+
+Three views of one hole. `ConfusionMode` (656 lines) recorded nothing anywhere. Wayground, Vocab and
+JAC recorded only into their own per-set stores, so a card missed in the largest bank in the app
+never reached Fokus or Stats -- while the identical question missed inside `simulasi` did. And
+`DangerMode` wrote `danger-<term>` string keys into a store every reader treats as card-keyed.
+
+`utils/mistake-bridge.js` is the one route, and `recordWrong` now refuses anything that is not an
+integer card id -- it is the single writer of that document, so it is the one place the id space can
+be held rather than asked for politely.
+
+### The delta backup could not be restored (items 117, 138)
+
+"Ekspor Delta SRS Saja" wrote a file the app answered `missing_docs` to, because the only import
+path ran everything through `validateSnapshot`. The per-card merge that makes a delta meaningful was
+already written and reachable only through a barrel nothing imported. And the dual-device conflict
+warning compared the file against `exportAll().exported_at`, which is generated at call time -- so it
+was true on every import, including restoring your own backup.
+
+### 787 kB left the first page load (item 131)
+
+Two modules pulled the question banks into the initial bundle: the mode registry, to compute two
+menu integers, and the daily challenge, which imported all three banks at module scope and built
+1,075 question objects on import to show one question a day. Measured before and after: the
+modulepreload list drops from 7 chunks to 5. An import-graph test walks static imports from
+`main.jsx` and fails if any heavy data module is reachable.
+
+### CI runs the gate the docs call the gate (items 134, 135)
+
+`format:check` and four of the five data audits were in no CI gate at all -- known, documented in
+`HUSKY-SETUP.md`, still unfixed. Its concrete cost: a direct edit to the generated `src/data/cards.js`
+passed CI and was silently reverted at deploy. Both workflows now run the full set. Coverage measures
+all of `src/` instead of an allowlist of seven safe paths (`src/modes/**` was excluded entirely) and
+its thresholds are a ratchet at today's real numbers, running in CI for the first time.
+
+### The numbers shown to the learner (item 120)
+
+Changing timezone wiped the streak: `advanceStudyDay` fell through to its restart branch for a
+stored date in the *future*, and a worker flying Japan → Jakarta crosses a day boundary backwards in
+minutes. A 30-day streak went to 1. Readiness had no floor, so a negative day count from an imported
+document produced a negative percentage and wound the progress ring past a full circle.
+
+Verified correct and recorded so it is not re-derived: the weights sum to 100, each component maxes
+where it claims, an empty document scores 0 rather than NaN, the band withholds a verdict below five
+scored sessions, and the four SRS buckets genuinely partition the deck with the badge count agreeing
+with the queue ReviewMode draws.
+
+### The 13 modes no test had ever rendered (item 119)
+
+6,009 lines, 56% of the modes layer. Beyond the P0 above: Sprint's countdown restarted on every
+answer, so answering faster than once a second stopped the clock entirely and stored an unbeatable
+personal best. Dengar recorded every auto-advanced session one answer short, so a 9/10 run stored as
+100%. Cari searched raw `jp` while every surface renders the stripped form, so 224 cards could not be
+found by their own displayed text. Buku Catatan reported "0 catatan" while showing them. Angka's
+"Ulang" turned a 10-question session into 29. Fokus showed one category's score under the next
+category's header. Glossary's export silently dropped a selection made across category changes.
+Dengar's progress bar sat at 0% all session. And `QuizShell` rendered `null` for an empty question
+list, above its own back button -- a blank screen with no way out, reachable two ways.
+
+### Smaller, and one correction
+
+The keyboard hint promised keys that do not exist (`1–4` is false for 61 of 95 JAC questions; there
+has never been an ArrowRight handler). GlossaryMode bypassed `prefers-reduced-motion`. FlashcardMode
+showed "← Prev"/"Next →" while its own aria-labels were Indonesian. The toast dismiss button was a
+~22px target. The onboarding screen said "1.438 flashcard" against a real 1.626 -- found by driving
+the built app, not by any test.
+
+**Item 64 stands corrected rather than executed.** It says `--ssw-onAmber` exists and 21 sites
+hardcode `#fff` instead; but that token is `#1a0a00`, an ink for a *light* surface, and most of those
+sites are the blue offline banner and the red confirm button, where white is right and near-black
+would be a regression. The sites that genuinely fail are the ones it did not name: the two Belajar
+badges, whose background is a runtime mode colour. White fails the 3:1 floor on 14 of the 19 accent
+colours and is 1.53:1 on `#facc15`. No literal can be right there, so it is computed.
+
+**Item 139 was also wrong.** I filed six exports as having zero references; four have them.
+`stopSpeech` is the one that mattered: it had zero *call sites* while five surfaces call `speakJP`,
+so nothing in this app had ever cancelled an utterance -- tap the speaker, hit Back, and the phone
+reads on over the next screen. Wired, not deleted.
+
+### Answer length is still a tell, but less of one (item 114)
+
+The correct answer is the longest option 51.1% of the time in Wayground and 70.2% in JAC Mockup,
+against 36.3% in JAC Official -- the real exam's own questions, which is what proves the tell is
+authored. 26 answers ended in a parenthetical their own explanation repeats, and in 17 cases the
+trimmed form is byte-for-byte what the other bank already ships, so the short wording is adopted
+rather than invented. Wayground goes to 48.3% and its ceiling comes down.
+
+**The larger half is deliberately not done.** JAC Mockup is unmoved because none of its answers
+carry a parenthetical: there the tell is that distractors are stubs where answers are sentences.
+Closing that means authoring plausible-but-wrong Japanese for hundreds of questions, and a
+distractor that is accidentally correct is a worse defect than the tell -- this bank has already
+shipped one wrong safety answer. Item 114 stays open with the method written down.
+
+### Storage
+
+`STORAGE_VERSION` stays **7**. `progress.termWrong` and the `updatedAt` stamp are additive keys
+whose absence has a truthful meaning, which is the same rule 7.2.0 used for `lastSeenVersion`. The
+`danger-*` keys already in shipped documents are left alone: they are inert in both readers, and
+clearing them reinterprets stored data, which belongs in a real migration rather than bolted on.
+
 ## [7.2.0] - 2026-09-08
 
 Owner brief was five UI changes plus "check all open threads" and an exhaustive technical audit.

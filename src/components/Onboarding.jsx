@@ -6,6 +6,8 @@
 // (Lifeline), so onComplete always sends 'lifeline'; nothing left to pick.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { CARDS } from '../data/cards.js';
+import { formatCount } from '../utils/format.js';
 import { useState } from 'react';
 import { extractReadings, stripFuri } from '../utils/jp-helpers.js';
 import S from './Onboarding.module.css';
@@ -39,9 +41,15 @@ function StepWelcome({ onNext }) {
       />
       <h1 className={S.heroTitle}>Selamat Datang!</h1>
       <div className={S.heroSub}>SSW Konstruksi · by Nugget Nihongo</div>
+      {/* Counted, not typed. This said "1.438 flashcard" against a real 1.626 --
+          stale since the card split, on the very first screen a new learner
+          sees, and found by driving the built app in a browser rather than by
+          any test. Exactly the headline-number drift AGENT_WORKFLOW §4 warns
+          about, and the same fix the menu counts got: derive it. */}
       <p className={S.heroDesc}>
-        Aplikasi belajar untuk ujian SSW Konstruksi Jepang jalur Lifeline (ライフライン設備). 1.438
-        flashcard, kuis, dan simulasi ujian — semua dalam Bahasa Indonesia.
+        Aplikasi belajar untuk ujian SSW Konstruksi Jepang jalur Lifeline (ライフライン設備).{' '}
+        {formatCount(CARDS.length)} flashcard, kuis, dan simulasi ujian — semua dalam Bahasa
+        Indonesia.
       </p>
       <div className={S.badges}>
         <span className={S.badge}>⚡ Lifeline</span>

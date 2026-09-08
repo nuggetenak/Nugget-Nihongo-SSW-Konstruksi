@@ -75,7 +75,7 @@ npm run audit:full    # 5 audit: integrity, css-vars, text, content, related-ids
 | Build      | Vite 6 + @vitejs/plugin-react            |
 | SRS Engine | ts-fsrs 5.3                              |
 | Storage    | Pure localStorage (schema v7)            |
-| Tests      | Vitest 4 + @testing-library/react (1.017) |
+| Tests      | Vitest 4 + @testing-library/react (1.139) |
 | Styling    | CSS Modules + CSS custom properties      |
 | CI/CD      | GitHub Actions → GitHub Pages            |
 | PWA        | Custom service worker + Web App Manifest |
@@ -103,7 +103,7 @@ src/
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 111 test files, 1.017 tests
+└── tests/                   # 123 test files, 1.139 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
@@ -144,13 +144,17 @@ Export/import tersedia di tab **Saya** → fitur backup & restore.
 
 Setiap push ke `main` → GitHub Actions menjalankan:
 
-1. **Lint** (`npm run lint` — zero warnings) — `ci.yml` + `deploy.yml`
-2. **Test** (`npm test` — 1.017 test) — `ci.yml` + `deploy.yml`
-3. **Build** (`npm run build`) — `ci.yml`
-4. **Deploy** ke GitHub Pages (otomatis, lewat `deploy.yml`)
+1. **Format check** (`npm run format:check`) — `ci.yml` + `deploy.yml`
+2. **Lint** (`npm run lint` — zero warnings, mencakup `scripts/` dan `public/sw.js`) — keduanya
+3. **Test** (`npm test` — 1.139 test) — `ci.yml` + `deploy.yml`
+4. **Audit data** (`npm run audit:full` — enam skrip di `scripts/`) — `ci.yml` + `deploy.yml`
+5. **Coverage** (`npm run test:coverage`, ambang sebagai ratchet) — `ci.yml`
+6. **Build** (`npm run build`) — `ci.yml`
+7. **Deploy** ke GitHub Pages (otomatis, lewat `deploy.yml`)
 
-CI **tidak** menjalankan `format:check` maupun lima skrip audit di `scripts/`. Jadi sebelum
-push, jalankan `npm run validate` — itu yang menutup celahnya.
+Sejak 7.3.0 CI menjalankan seluruh isi `npm run validate` (item 134). Sebelumnya `format:check`
+dan empat dari lima skrip audit tidak berjalan di gate mana pun — dan itulah yang membuat suntingan
+langsung ke `src/data/cards.js` (file hasil generate) lolos CI lalu terhapus diam-diam saat deploy.
 
 Service worker cache version di-bump otomatis di setiap deploy (`deploy.yml` menulis ulang
 `CACHE_VERSION` jadi timestamp UTC sebelum build, jadi nilai yang di-commit tidak pernah

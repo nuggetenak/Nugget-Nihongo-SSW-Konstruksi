@@ -187,6 +187,9 @@
   height: 18px;
   padding: 0 var(--space-4);
   border-radius: var(--r-pill);
+  /* Overridden inline per badge — the background is a runtime mode colour and
+     white is unreadable on most of them (item 142, see utils/contrast.js).
+     Kept as the fallback for the same reason readableOn falls back to white. */
   color: #fff;
   display: flex;
   align-items: center;
@@ -321,6 +324,9 @@
   height: 17px;
   padding: 0 var(--space-4);
   border-radius: var(--r-pill);
+  /* Overridden inline per badge — the background is a runtime mode colour and
+     white is unreadable on most of them (item 142, see utils/contrast.js).
+     Kept as the fallback for the same reason readableOn falls back to white. */
   color: #fff;
   display: flex;
   align-items: center;

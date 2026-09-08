@@ -1,4 +1,20 @@
-name: CI — Lint · Test · Build
+# Runs `npm run validate`, the gate the docs have always called the gate.
+#
+# Item 134: this workflow ran lint -> test -> build, and deploy.yml ran
+# lint -> test, so `format:check` and four of the five data audits were in no
+# gate at all. HUSKY-SETUP.md states that outright and records what it cost
+# (`format:check` failing on 33 files and audit-integrity reporting 2876 phantom
+# issues, both for weeks, unnoticed); the mitigation it relies on instead is a
+# pre-commit hook that is deliberately not a repo dependency, so it guards
+# nobody by default and never guards CI.
+#
+# The concrete chain that gap enables: src/data/cards.js is generated from
+# src/data/source/ and stamped "do not edit directly", but it is tracked in git,
+# so a direct edit commits cleanly and passes tests -- then `prebuild`
+# regenerates it and deploy silently reverts the change. verify-content.mjs
+# exists to catch exactly that, and it lives in `audit:content`, which nothing
+# ran.
+name: CI — Validate (format · lint · test · audit · build)
 
 on:
   push:
@@ -19,11 +35,30 @@ jobs:
 
       - run: npm ci
 
+      # Split into named steps rather than one `npm run validate` call: the
+      # composite passes or fails as a unit, and on a red run the step name is
+      # what tells you which gate went without scrolling a log. The set is
+      # exactly `validate`'s, and format-and-lint.test.js asserts that.
+      - name: Format check
+        run: npm run format:check
+
       - name: Lint (zero warnings)
         run: npm run lint
 
       - name: Tests
         run: npm test -- --run --reporter=verbose
+
+      - name: Data audits
+        run: npm run audit:full
+
+      # Item 135: the thresholds in vitest.config.js were configured and run by
+      # nothing -- not `validate`, not either workflow -- and excluded
+      # src/modes/** entirely, which is more than half the source and where
+      # every P0 in the 2026-09-04 exam audit lived. They cover all of src/ now
+      # and they are a ratchet set at today's real numbers. Kept out of
+      # `validate` so the local loop stays fast; CI is where it has to hold.
+      - name: Coverage thresholds
+        run: npm run test:coverage
 
       - name: Build
         run: npm run build

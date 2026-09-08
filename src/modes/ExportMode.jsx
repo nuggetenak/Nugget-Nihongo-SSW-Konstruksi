@@ -4,7 +4,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useRef } from 'react';
 import { T } from '../styles/theme.js';
-import { exportAll, importAllSafe, validateSnapshot } from '../storage/engine.js';
+import {
+  exportAll,
+  importAllSafe,
+  validateSnapshot,
+  validateDelta,
+  getLastMutatedAt,
+} from '../storage/engine.js';
+import { importSRSDelta, isSRSDelta, DELTA_TYPE } from '../srs/index.js';
 import { markBackedUp } from '../utils/backup-state.js';
 import {
   saveToken,
@@ -86,22 +93,34 @@ export default function ExportMode() {
     setPreviewData(null);
     try {
       const parsed = JSON.parse(await file.text());
-      const validation = validateSnapshot(parsed);
+      // A delta file carries only `srs` + `known` + `starred`, so it can never
+      // satisfy validateSnapshot's all-three-documents rule -- which is exactly
+      // why "Ekspor Delta SRS Saja" produced a file the app rejected with
+      // `missing_docs` (item 117). Branch on the type the exporter stamps.
+      const delta = isSRSDelta(parsed);
+      const validation = delta ? validateDelta(parsed) : validateSnapshot(parsed);
       if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
-      // Detect if current data is newer than file (dual-device conflict).
-      const currentExportedAt = exportAll().exported_at ?? null;
+      // Is what is on this device newer than the file? This compared the file
+      // against `exportAll().exported_at`, which exportAll generates at call
+      // time -- the current clock, never a last-modified time -- so it was true
+      // on every import, including the ordinary restore-my-own-backup case it
+      // was meant to leave alone (item 138). `getLastMutatedAt()` is stamped by
+      // the storage engine on every write and is the real answer. It is null
+      // for documents that predate the stamp, and an unknown is not evidence of
+      // a conflict: a delta never conflicts either, since it merges rather than
+      // replaces.
+      const mutatedAt = getLastMutatedAt();
       const fileExportedAt = parsed.exported_at ?? null;
       const hasConflict =
-        currentExportedAt &&
-        fileExportedAt &&
-        new Date(currentExportedAt) > new Date(fileExportedAt);
+        !delta && !!mutatedAt && !!fileExportedAt && mutatedAt > new Date(fileExportedAt).getTime();
       // Show diff summary for user to confirm
       setPreviewData({
         snapshot: parsed,
+        isDelta: delta,
         incoming: validation.summary,
         hasConflict,
         fileDate: fileExportedAt,
-        currentDate: currentExportedAt,
+        currentDate: mutatedAt ? new Date(mutatedAt).toISOString() : null,
       });
       setStatus({ type: 'preview', msg: null });
     } catch (e) {
@@ -116,6 +135,18 @@ export default function ExportMode() {
   const handleConfirmImport = () => {
     if (!previewData) return;
     try {
+      if (previewData.isDelta) {
+        // Merge, not replace: a delta says what this device knows, never what
+        // it denies, so nothing local is removed by applying one.
+        const applied = importSRSDelta(previewData.snapshot);
+        setSummary(readSummary());
+        setPreviewData(null);
+        setStatus({
+          type: 'ok',
+          msg: `✅ Delta digabung! ${applied.cards} kartu SRS, ${applied.known} hafal. Muat ulang halaman.`,
+        });
+        return;
+      }
       const result = importAllSafe(previewData.snapshot);
       setSummary(readSummary());
       setPreviewData(null);
@@ -269,7 +300,7 @@ export default function ExportMode() {
           try {
             const full = exportAll();
             const delta = {
-              _type: 'ssw-srs-delta',
+              _type: DELTA_TYPE,
               _storage_version: full._storage_version,
               exported_at: new Date().toISOString(),
               srs: full.srs,
@@ -286,6 +317,11 @@ export default function ExportMode() {
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+            // Item 119/F11: this path skipped markBackedUp, whose own comment
+            // says it is "called from every path that makes one" — so a learner
+            // following this button's advice to use it for "backup rutin
+            // harian" was nagged with "⚠️ Belum pernah" in Saya forever.
+            markBackedUp();
             setStatus({ type: 'ok', msg: `✅ Delta SRS disimpan: ${summary.srsCount} kartu SRS.` });
           } catch (e) {
             setStatus({ type: 'err', msg: `❌ Gagal: ${e.message}` });
@@ -367,16 +403,39 @@ export default function ExportMode() {
               marginBottom: 'var(--space-12)',
             }}
           >
-            {[
-              { label: 'Hafal', cur: summary.known, inc: previewData.incoming.known },
-              { label: 'Kartu SRS', cur: summary.srsCount, inc: previewData.incoming.srsCards },
-              { label: 'Sesi', cur: summary.sessions, inc: previewData.incoming.sessions },
-              {
-                label: 'Versi',
-                cur: `v${summary.version}`,
-                inc: `v${previewData.incoming.version}`,
-              },
-            ].map((row, i) => (
+            {/* A delta MERGES, so showing it as `320 → 40` describes the
+                opposite of what the button does (item 119/F7). A careful user
+                reads that as "this wipes almost everything" and cancels a safe
+                restore; a careless one proceeds expecting a full one. The
+                conflict warning is already suppressed for deltas — the numbers
+                needed the same treatment. `Sesi` and `Versi` are dropped
+                entirely: a delta carries neither, and validateDelta reports 0
+                for them because they are absent, not because they are being set
+                to zero. */}
+            {(previewData.isDelta
+              ? [
+                  { label: 'Hafal', cur: summary.known, inc: `+${previewData.incoming.known}` },
+                  {
+                    label: 'Kartu SRS',
+                    cur: summary.srsCount,
+                    inc: `+${previewData.incoming.srsCards}`,
+                  },
+                ]
+              : [
+                  { label: 'Hafal', cur: summary.known, inc: previewData.incoming.known },
+                  {
+                    label: 'Kartu SRS',
+                    cur: summary.srsCount,
+                    inc: previewData.incoming.srsCards,
+                  },
+                  { label: 'Sesi', cur: summary.sessions, inc: previewData.incoming.sessions },
+                  {
+                    label: 'Versi',
+                    cur: `v${summary.version}`,
+                    inc: `v${previewData.incoming.version}`,
+                  },
+                ]
+            ).map((row, i) => (
               <div
                 key={i}
                 style={{

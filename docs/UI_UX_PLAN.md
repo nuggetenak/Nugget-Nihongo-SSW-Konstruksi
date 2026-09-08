@@ -1930,8 +1930,12 @@ accessibility, question data, security, layout and docs. Items 109–113 are the
 requests; 114–133 are what the audit found. Three P0s were pulled into 7.2.0 rather than filed.
 Full reasoning per item is in `CHANGELOG.md` `[7.2.0]` and the commit messages.
 
-**Two areas were NOT audited and are not clean**: a correctness pass on the 13 modes with no tests,
-and the readiness/streak/SRS-bucket arithmetic. Items 119 and 120.
+**Update 2026-09-08 (7.3.0).** Both of those areas are now audited and repaired, and 20 of the items
+below are closed — see `CHANGELOG.md` `[7.3.0]`. The single most important result is that item 118,
+filed here as a P2 jsdom quirk, was the most severe defect in the app: an unbounded render loop that
+made every filtered deck unusable. What is deliberately still open is item 114's second half, which
+is content authoring rather than engineering, and items 139 and 142, both of which are recorded here
+as **filed wrongly** rather than as done.
 
 ### Done in 7.2.0
 
@@ -1950,7 +1954,17 @@ and the readiness/streak/SRS-bucket arithmetic. Items 119 and 120.
 
 ### Open — content
 
-- ☐ **114. The practice banks are guessable by answer length** — `L` — `P1`. The correct answer is
+- ☐ **114. The practice banks are guessable by answer length** — `L` — `P1`. **Half done in 7.3.0.**
+  26 answers ended in a parenthetical their own `exp` already repeats; trimming it (and the matching
+  `opts_id`) drops them below the longest distractor, and in 17 cases the trimmed form is
+  byte-for-byte what the *other* bank already ships, so the short wording is adopted rather than
+  invented. Wayground: **51.1% → 48.3%**, ceiling lowered to 0.49. JAC Mockup is **unmoved at
+  70.2%** — none of its answers carry a parenthetical, and there the tell is that distractors are
+  stubs where answers are sentences (`色`, `任意`, `5m` against `試験圧の1.5倍以上で作業員を退避`).
+  Closing that means authoring plausible-but-wrong Japanese for hundreds of questions, and a
+  distractor that is accidentally correct is a worse defect than the tell — this bank has already
+  shipped one wrong safety answer (item 115). The transform is in
+  `scripts/archive/balance-option-lengths.mjs`. Original measurement below. The correct answer is
   the longest option **51.5%** (Wayground) and **72.0%** (JAC Mockup) of the time; mean answer
   length 11.5 vs 8.3 and 9.9 vs 6.0 characters. A bot that reads nothing and picks the longest
   scores those figures against a 65% pass mark. **Shuffling does not fix this** — it selects by
@@ -1958,13 +1972,13 @@ and the readiness/streak/SRS-bucket arithmetic. Items 119 and 120.
   rewriting distractors to comparable length across 980 questions. JAC Official does not have the
   tell (36.8%, near chance per group), which is the proof it is authored rather than inherent.
   `question-option-shuffle.test.js` holds the current figures as ceilings.
-- ☐ **115. One safety question is taught two different answers** — `XS` — `P1`.
+- ☑ **115. One safety question is taught two different answers** — `XS` — `P1`.
   `KY活動の4ステップで最後のステップは？` — Wayground `wt01` says 目標宣言, JAC Mockup `jmt02` says
   対策を決めて実行する. The KYT rounds are 現状把握 → 本質追究 → 対策樹立 → 目標設定, so Wayground is
   right and `jmt02` is wrong. Found by normalising 980 questions: 253 duplicate groups (520
   questions), 24 disagreeing on the answer, 23 of those mere phrasing variants. Nothing in
   `scripts/` compares questions across the two source files.
-- ☐ **116. 9 Japanese terms render with no furigana, in the wrong font, tagged `lang="id"`** — `S` —
+- ☑ **116. 9 Japanese terms render with no furigana, in the wrong font, tagged `lang="id"`** — `S` —
   `P1`. `CD管《かん》`, `PC杭《ぐい》`, `RC造《ぞう》`, `SRC造《ぞう》`, `PF管《かん》`, `CB造《ぞう》`,
   `PHC杭《ぐい》`, `土留め《どどめ》≥ 1.5m`, `CT / VCT（…）` all sit at 25–33% Japanese characters,
   under `isMeaningfullyJapanese`'s 0.4 threshold, so `JpFront` bails to plain text and **drops the
@@ -1974,81 +1988,93 @@ and the readiness/streak/SRS-bucket arithmetic. Items 119 and 120.
 
 ### Open — correctness
 
-- ☐ **117. The Delta-SRS export produces a file the app cannot import** — `S` — `P1`.
+- ☑ **117. The Delta-SRS export produces a file the app cannot import** — `S` — `P1`.
   `ExportMode.jsx` writes `{ srs, known, starred }` with no `progress`/`prefs`; `validateSnapshot`
   hard-requires all three and returns `missing_docs`. A backup button that does not back up.
   `fsrs-store.js`'s `importSRSSnapshot` — a proper per-card merge — is dead code that would make
   the delta format meaningful.
-- ☐ **118. `FlashcardMode` hangs under jsdom when given `filterIds`** — `S` — `P2`. Pre-existing
+- ☑ **118. `FlashcardMode` hangs under jsdom when given `filterIds`** — `S` — `P2`. Pre-existing
   (verified on `main`). It is why 125 survived: the only prop that renders the banner cannot be set
   in a test.
-- ☐ **119. Deep correctness pass on the 13 modes with zero tests** — `L` — `P1`. 6,009 lines, 56% of
+- ☑ **119. Deep correctness pass on the 13 modes with zero tests** — `L` — `P1`. 6,009 lines, 56% of
   the modes layer, never rendered by any test: `ExportMode` (722), `AngkaMode` (710),
   `ConfusionMode` (656), `DengarMode` (524), `DangerMode` (492), `GlossaryMode` (492),
   `SprintMode` (459), `QuizMode` (439), `VocabMode` (372), `CatatanMode` (331), `SearchMode` (321),
   `SumberMode` (293), `FocusMode` (198). **Not audited.**
-- ☐ **120. Verify the numbers the app shows the learner** — `M` — `P1`. Readiness score, streak and
+- ☑ **120. Verify the numbers the app shows the learner** — `M` — `P1`. Readiness score, streak and
   milestone arithmetic, and whether the four SRS buckets partition the deck. **Not audited**, and
   findings 128–129 say the inputs are already wrong.
-- ☐ **127. `ConfusionMode` records no wrong answers anywhere** — `S` — `P1`. 656 lines, the only
+- ☑ **127. `ConfusionMode` records no wrong answers anywhere** — `S` — `P1`. 656 lines, the only
   quiz mode with no wrong-tracking at all. Same class as item 93, fixed for `simulasi` only.
-- ☐ **128. Wayground, Vocab and JAC never bridge mistakes to the card tracker** — `S` — `P1`. They
+- ☑ **128. Wayground, Vocab and JAC never bridge mistakes to the card tracker** — `S` — `P1`. They
   call `useProgress()` for `saveScore` only. So a card missed in Wayground (680 questions, the
   largest bank) never reaches Fokus or StatsMode's weakness view — while the *same* question missed
   inside `simulasi` does, via `simulasi-mistakes.js`. That file's own comment says the bridge
   "widens on its own the moment item 96 lands"; item 96 landed and nobody widened it.
-- ☐ **129. `DangerMode` writes string keys into the card-id space** — `XS` — `P2`.
+- ☑ **129. `DangerMode` writes string keys into the card-id space** — `XS` — `P2`.
   `recordWrong('danger-<term>')` lands in `progress.quizWrong`, which every reader treats as
   card-keyed; `StatsMode`'s `Number(id)` turns them into `NaN`.
-- ☐ **130. `cache.addAll` discards the entire precache if one request fails** — `S` — `P0` for a
+- ☑ **130. `cache.addAll` discards the entire precache if one request fails** — `S` — `P0` for a
   first install on a flaky connection: `Cache.addAll` is atomic, so nothing is cached, not even the
   shell, and nothing surfaces.
-- ☐ **131. 764 KB of quiz data is in the eager bundle to compute two menu integers** — `S` — `P1`.
+- ☑ **131. 764 KB of quiz data is in the eager bundle to compute two menu integers** — `S` — `P1`.
   `modes.js` imports `QUIZ_SETS` for `MODE_COUNTS`. This plan already fixed the identical pattern
   for `simulasi` (§14) *and* cites `MODE_COUNTS` as the good example six lines earlier.
-- ☐ **132. A document that parses but has no `_v` is silently wiped** — `S` — `P1`. `readDoc`
+- ☑ **132. A document that parses but has no `_v` is silently wiped** — `S` — `P1`. `readDoc`
   checks JSON validity, never shape, so `null`/`{}` falls into the fresh-install branch and
   overwrites — bypassing the corruption quarantine that exists for exactly this.
-- ☐ **133. "Reset Semua Data" leaves the GitHub token behind** — `XS` — `P1` privacy. `resetAll()`
+- ☑ **133. "Reset Semua Data" leaves the GitHub token behind** — `XS` — `P1` privacy. `resetAll()`
   rewrites the three managed docs; `ssw-gist-pat` and `ssw-gist-id` survive a reset that promises
   "hapus semua progress". For an audience where a resold or borrowed phone is ordinary, that is the
   wrong default.
 
 ### Filed, lower priority
 
-- ☐ **134. CI runs neither `format:check` nor `audit:full`** — `XS` — `P1`. Known and documented in
+- ☑ **134. CI runs neither `format:check` nor `audit:full`** — `XS` — `P1`. Known and documented in
   `HUSKY-SETUP.md`; still unfixed, and it is one line of YAML. Its concrete cost: a direct edit to
   the generated `src/data/cards.js` passes CI and is silently reverted at deploy, because
   `verify-content.mjs` — the only check that catches it — is not in any gate.
-- ☐ **135. Coverage thresholds are configured but never enforced** — `XS` — `P2`. 70/70/60 in
+- ☑ **135. Coverage thresholds are configured but never enforced** — `XS` — `P2`. 70/70/60 in
   `vitest.config.js`, but `coverage.include` excludes `src/modes/**` entirely and `test:coverage` is
   in neither `validate` nor CI.
-- ☐ **136. `QuizShell`'s keyboard hint promises keys that do not exist** — `XS` — `P2`. "1–4 pilih"
+- ☑ **136. `QuizShell`'s keyboard hint promises keys that do not exist** — `XS` — `P2`. "1–4 pilih"
   is false for 61 of 95 JAC Official questions (17 have two options, 44 have three), and there is no
   `ArrowRight` handler at all despite "Space/→".
-- ☐ **137. `GlossaryMode` bypasses `prefers-reduced-motion`** — `XS` — `P2`. Two `scrollTo({behavior:
+- ☑ **137. `GlossaryMode` bypasses `prefers-reduced-motion`** — `XS` — `P2`. Two `scrollTo({behavior:
   'smooth'})` calls; an explicit `behavior` overrides the CSS catch-all. `DESIGN_SPEC` §4 claims
   `BottomNav` "was the one instance".
-- ☐ **138. The import conflict warning can never be false** — `XS` — `P2`. It compares the file's
+- ☑ **138. The import conflict warning can never be false** — `XS` — `P2`. It compares the file's
   `exported_at` against `exportAll().exported_at`, which is generated at call time, so every import
   is flagged as a conflict.
-- ☐ **139. Dead code** — `XS` — `P3`. `src/srs/fsrs-store.js` is reachable only through a barrel
-  nothing imports; `stopSpeech`, `ORIGIN_META`, `getWrongTime`, `getLastBackupAt`, `configureFSRS`
-  and `getFSRSConfig` have zero references — the last two being why FSRS runs on stock weights.
-- ☐ **140. Small copy defects** — `XS` — `P3`. `FlashcardMode` shows "← Prev"/"Next →" in English
+- ☑ **139. CORRECTED — this was filed wrongly.** Four of the six have references: `ORIGIN_META` is
+  used by its own module's `originMeta`, and `stopSpeech`, `getWrongTime` and `getLastBackupAt` are
+  covered by tests. I had excluded tests and missed an intra-module use. `stopSpeech` is the one
+  that mattered and deleting it would have been wrong twice over: it had zero *call sites* while
+  five surfaces call `speakJP`, so **nothing in this app had ever cancelled an utterance** — tap the
+  speaker, hit Back, and the phone reads on over the next screen. Wired into `ModeRouter` in 7.3.0.
+  `fsrs-store.js` is no longer barrel-only either: `importSRSDelta` uses it (item 117). Genuinely
+  unreferenced and deliberately kept: `configureFSRS` / `getFSRSConfig`, the only tuning seam FSRS
+  has (see finding 7).
+- ☑ **140. Small copy defects** — `XS` — `P3`. `FlashcardMode` shows "← Prev"/"Next →" in English
   while `SimulasiMode` says "← Sebelumnya"/"Selanjutnya →", and the FlashcardMode `aria-label`s are
   Indonesian — so sighted and screen-reader users get different languages on the same button.
   `JpDisplay.jsx`'s `aria-label="Toggle furigana"` is the app's only English one.
-- ☐ **141. `Toast`'s dismiss button is a ~20–24px tap target** — `XS` — `P3`. Not covered by the
+- ☑ **141. `Toast`'s dismiss button is a ~20–24px tap target** — `XS` — `P3`. Not covered by the
   chip-row exception in `DESIGN_SPEC` §2.
-- ☐ **142. `item 64` is marked done and was not done** — `XS` — `P3`. 19 of its 21 `#fff` sites are
-  unchanged, in exactly the files it names. Spot-checks of items 50, 63 and 65 confirm the ☑ marks
-  are otherwise reliable.
-- ☐ **143. `renumber-cards.mjs` sits in live `scripts/`** — `XS` — `P3`. `scripts/archive/README.md`
+- ☑ **142. CORRECTED — item 64's prescription was wrong, and executing it would have hurt.**
+  `--ssw-onAmber` is `#1a0a00`, an ink for a *light* surface, and most of the `#fff` sites are the
+  blue offline banner, the red data warning and the red confirm button, where white is correct.
+  Measured: white on `#dc2626` is 4.83:1 and the dark ink 4.00:1; on the CTA gradient's dark end the
+  dark ink is 2.72:1, worse than what ships. The sites that genuinely fail are the ones item 64 did
+  not name — BelajarTab's two badges, whose background is a runtime mode colour. White fails the 3:1
+  large-text floor on 14 of the 19 accent colours and is **1.53:1** on Angka Kunci's `#facc15`. No
+  literal can be right for a colour chosen at runtime, so `utils/contrast.js` computes it (7.3.0).
+  Item 64 should be closed as *superseded*, not done.
+- ☑ **143. `renumber-cards.mjs` sits in live `scripts/`** — `XS` — `P3`. `scripts/archive/README.md`
   already lists it among the quarantined destructive transforms, but the file is not there. Low
   risk (wired to nothing, and it imports two deleted source files so it would throw), but the
   filesystem and the README disagree about where the footgun is.
-- ☐ **144. `viewer.html` still swallows import failures** — `XS` — `P3`. 6.1.0 fixed the paths, not
+- ☑ **144. `viewer.html` still swallows import failures** — `XS` — `P3`. 6.1.0 fixed the paths, not
   the `return null` that hid an empty tab for months. Nothing lints it: `lint` and `format:check`
   cover `src` only, leaving `viewer.html`, `index.html`, `public/sw.js` and all 10 `scripts/*.mjs`
   outside every automated check.

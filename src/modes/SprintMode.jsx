@@ -10,6 +10,7 @@ import { get as storageGet, set as storageSet } from '../storage/engine.js';
 import { makeWrongEntry } from '../utils/wrong-tracker.js';
 import CategoryPicker, { countByCategory } from '../components/CategoryPicker.jsx';
 import { CATEGORIES } from '../data/categories.js';
+import { useScopedDeck } from './FlashcardMode/use-scoped-deck.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -65,7 +66,15 @@ export default function SprintMode({
 
   // Available categories from the cards prop.
   // Scope to filterIds if launched from SumberMode.
-  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+  // Item 119/F1. This was `filterIds ? cards.filter(...) : cards` -- the exact
+  // line that put FlashcardMode in an unbounded render loop earlier today, still
+  // live here and reached from Sumber's "⚡ Sprint" button, the app's only call
+  // site that hands this mode a `filterIds`. `.filter()` allocates every render,
+  // `filteredCards` below memoises on it, and the effect under that calls
+  // `setOrder(shuffle(filteredCards))` -- so the loop started at mount, before
+  // the learner pressed anything, and the setup screen's own buttons stopped
+  // responding. Found by two independent audits of the untested modes.
+  const baseCards = useScopedDeck(cards, filterIds);
   // Item 77: the `all` row moved into CategoryPicker, which owns it for all
   // three callers rather than each of them re-inventing it.
   const availableCats = useMemo(() => {
@@ -104,29 +113,58 @@ export default function SprintMode({
     [onSessionEnd, selectedDuration, getDurationMs]
   );
 
+  // The clock, and nothing else. It used to share an effect with the ghost
+  // sampling and the end condition, whose dependency array therefore carried
+  // `correct`, `wrong` and `fireSessionEnd` -- so every tap tore down the
+  // pending one-second timeout and started a fresh one, discarding whatever
+  // fraction of that second had elapsed (item 119/F3). Answering faster than
+  // once a second, which is the pace this mode exists to train, meant the timer
+  // never reached zero: the sprint ran forever, the only way out was the header
+  // arrow, and the inflated score was written to prefs.sprintBests as a personal
+  // best that can never be beaten honestly. `fireSessionEnd` alone re-ran it on
+  // *every* render, because useSessionTimer hands back fresh function identities.
+  //
+  // An interval keyed on `phase` cannot be restarted by scoring.
+  useEffect(() => {
+    if (phase !== 'playing') return;
+    const id = setInterval(() => setTimeLeft((s) => s - 1), 1000);
+    return () => clearInterval(id);
+  }, [phase]);
+
+  // Score is read through refs here so that adding it to the deps -- which is
+  // what broke the clock -- is not required to end the run with the right total.
+  const scoreRef = useRef({ correct: 0, wrong: 0 });
+  useEffect(() => {
+    scoreRef.current = { correct, wrong };
+  }, [correct, wrong]);
+
   useEffect(() => {
     if (phase !== 'playing') return;
     if (timeLeft <= 0) {
       setPhase('done');
-      fireSessionEnd(correct, wrong);
+      fireSessionEnd(scoreRef.current.correct, scoreRef.current.wrong);
       return;
     }
-
     // Record ghost timeline point every 5 seconds.
     const duration = DURATIONS.find((d) => d.key === selectedDuration)?.value ?? 60;
     const elapsed = duration - timeLeft;
     if (elapsed > 0 && elapsed % 5 === 0) {
-      currentTimeline.current = [...currentTimeline.current, { t: elapsed, score: correct }];
+      currentTimeline.current = [
+        ...currentTimeline.current,
+        { t: elapsed, score: scoreRef.current.correct },
+      ];
     }
-    // Update ghost score from saved best timeline.
     if (ghostTimeline.length > 0) {
       const bestPoint = ghostTimeline.filter((p) => p.t <= elapsed).pop();
       if (bestPoint) setGhostScore(bestPoint.score);
     }
-
-    const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
-    return () => clearTimeout(t);
-  }, [timeLeft, phase, correct, wrong, fireSessionEnd, ghostTimeline, selectedDuration]);
+    // Score reaches this through scoreRef on purpose, and `fireSessionEnd` is
+    // left out for the same reason: useSessionTimer hands back a fresh identity
+    // every render, so declaring it here would restore exactly the every-render
+    // re-run that broke the clock. It is guarded by its own sessionEndFired ref,
+    // so a stale identity cannot double-fire the session.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft, phase, selectedDuration, ghostTimeline]);
 
   const card = order[idx];
   // Deliberately no QuizAnnouncer here (item 45) -- Tahu/Tidak Tahu is

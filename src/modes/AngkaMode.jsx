@@ -372,7 +372,11 @@ function QuizView({ onBack, onSessionEnd, onRetryWrong, limit }) {
   }, [selected, phase, isLast, handleSelect]);
 
   const restart = () => {
-    setItems(buildQuizItems());
+    // Item 119/F4: `buildQuizItems()` with no argument slices to the full 29,
+    // so "🔄 Ulang" turned the 10-question session the learner had chosen into a
+    // 29-question one. DangerMode's restart closes over `limit` correctly and is
+    // the version this should have been.
+    setItems(buildQuizItems(limit));
     setQIdx(0);
     setSelected(null);
     setResults([]);

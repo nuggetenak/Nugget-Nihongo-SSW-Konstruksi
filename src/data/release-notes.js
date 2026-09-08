@@ -24,6 +24,24 @@
 
 export const RELEASE_NOTES = [
   {
+    version: '7.3.0',
+    date: '2026-09-08',
+    title: 'Kartu yang tidak mau dibalik, dan banyak perbaikan di belakang layar',
+    changes: [
+      'Perbaikan terpenting: kartu yang dibuka dari "Terakhir dipelajari", dari "Latih Salah", atau dari Sumber Materi tidak mau dibalik — tombol Lihat, Sebelumnya, dan Berikutnya seperti mati. Sekarang sudah normal.',
+      'Satu soal keselamatan tentang 4 langkah KY punya dua jawaban berbeda di dua paket latihan. Jawaban yang salah sudah diperbaiki, dan sekarang ada pemeriksaan otomatis supaya hal ini tidak terjadi lagi.',
+      'Beberapa istilah seperti CD管 dan PC杭 tampil tanpa cara bacanya. Sekarang furigana-nya muncul seperti kartu lain.',
+      'Aplikasi jadi lebih cepat dibuka pertama kali: data soal tidak lagi ikut diunduh sebelum layar pertama tampil.',
+      'Jawaban salah dari Wayground, Vocab, JAC, Kata Mirip, dan Jebakan sekarang ikut terhitung di Fokus dan Statistik. Sebelumnya hanya sebagian yang terhitung.',
+      'Tombol "Ekspor Delta SRS Saja" menghasilkan file yang tadinya tidak bisa dimuat kembali. Sekarang bisa, dan digabung dengan data yang sudah ada, bukan menimpanya.',
+      'Streak tidak lagi hilang saat kamu pindah zona waktu — misalnya pulang dari Jepang ke Indonesia.',
+      'Sprint: penghitung waktunya sempat berhenti kalau kamu menjawab sangat cepat. Sudah diperbaiki.',
+      'Cari sekarang menemukan kartu dari tulisan yang kamu lihat di layar. Sebelumnya ratusan kartu tidak ketemu walau ditulis persis.',
+      'Buku Catatan sempat menulis "0 catatan" padahal catatannya ada. Sekarang jumlahnya benar.',
+      '"Hapus Semua Data" sekarang benar-benar menghapus semuanya, termasuk sambungan cadangan GitHub di HP ini.',
+    ],
+  },
+  {
     version: '7.2.0',
     date: '2026-09-08',
     title: 'Tentang Aplikasi, tema ikut HP, dan perbaikan penyimpanan',

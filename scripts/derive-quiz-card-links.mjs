@@ -60,7 +60,12 @@ for (const set of QUIZ_SETS) {
     const base = { set: set.id, question: q.id, jp: stripFuri(q.q), hint: q.hint ?? null };
     const inStemHigh = findIn(q.q, TIER_HIGH);
     if (inStemHigh) {
-      tiers.high.push({ ...base, head: inStemHigh.head, cardId: inStemHigh.id, cardText: inStemHigh.idText });
+      tiers.high.push({
+        ...base,
+        head: inStemHigh.head,
+        cardId: inStemHigh.id,
+        cardText: inStemHigh.idText,
+      });
       continue;
     }
     const medium = findIn(q.q, TIER_MEDIUM) ?? findIn(q.opts?.[q.ans], TIER_HIGH);
@@ -89,7 +94,9 @@ for (const k of ['high', 'medium', 'low', 'none']) {
 }
 console.log('');
 console.log(`Auto-linkable with confidence  : ${tiers.high.length} (${pct(tiers.high.length)})`);
-console.log(`Needs a human read             : ${tiers.medium.length + tiers.low.length + tiers.none.length}`);
+console.log(
+  `Needs a human read             : ${tiers.medium.length + tiers.low.length + tiers.none.length}`
+);
 
 const outFlag = process.argv.indexOf('--out');
 if (outFlag !== -1 && process.argv[outFlag + 1]) {

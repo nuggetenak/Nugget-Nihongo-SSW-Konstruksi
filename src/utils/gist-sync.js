@@ -5,10 +5,14 @@
 // anywhere except api.github.com with the user's own credentials.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { UNMANAGED_KEYS } from '../storage/schema.js';
+
 const GIST_FILENAME = 'ssw-konstruksi-progress.json';
 const GIST_DESC = 'SSW Konstruksi — Progress Backup (auto-generated)';
-const PAT_KEY = 'ssw-gist-pat';
-const GIST_ID_KEY = 'ssw-gist-id';
+// From the schema, not typed again here: storage/engine.js's resetAll() clears
+// these, and two independent spellings of the same key is how a "reset
+// everything" ends up leaving a credential behind (item 133).
+const [PAT_KEY, GIST_ID_KEY] = UNMANAGED_KEYS;
 
 // ── Token management ─────────────────────────────────────────────────────────
 

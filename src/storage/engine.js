@@ -3,7 +3,7 @@
 // readDoc decompresses transparently; falls back to plain JSON (backward compat).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { STORAGE_VERSION, DOCS, DEFAULTS } from './schema.js';
+import { STORAGE_VERSION, DOCS, DEFAULTS, UNMANAGED_KEYS } from './schema.js';
 import {
   hasV1Data,
   migrate_v1_to_v2,
@@ -44,15 +44,32 @@ function readDoc(docKey) {
   if (!raw) return { ok: false, corrupt: false };
   try {
     const decompressed = LZString.decompressFromUTF16(raw);
-    if (decompressed) return { ok: true, data: JSON.parse(decompressed) };
+    if (decompressed) return classify(JSON.parse(decompressed), raw);
   } catch {
     // fall through to plain-JSON attempt below (pre-compression data)
   }
   try {
-    return { ok: true, data: JSON.parse(raw) };
+    return classify(JSON.parse(raw), raw);
   } catch {
     return { ok: false, corrupt: true, raw };
   }
+}
+
+// Parsing is not the same question as being usable, and readDoc only ever asked
+// the first one (item 132). A document that parsed to `null`, `[]`, `42` or `{}`
+// came back `ok: true`, then `progressRaw?._v ?? 0` resolved it to version 0,
+// which is the fresh-install branch -- so init() overwrote it with defaults. No
+// quarantine copy, no warning, nothing in getCorruptionWarning(): exactly the
+// silent destruction the quarantine path 40 lines below exists to prevent, and
+// reachable by any partial write, a truncated sync, or a hand-edited key.
+//
+// validateSnapshot() further down this same file already does this kind of
+// shape checking for imported files. It just was never applied to the app's own
+// documents on the way in.
+function classify(data, raw) {
+  const usable =
+    !!data && typeof data === 'object' && !Array.isArray(data) && typeof data._v === 'number';
+  return usable ? { ok: true, data } : { ok: false, corrupt: true, raw };
 }
 
 // Preserves the unreadable bytes under a side key instead of letting init()
@@ -213,10 +230,33 @@ export function get(doc) {
 export function set(doc, updater) {
   if (!_initialized) init();
   const current = _cache[doc] ?? JSON.parse(JSON.stringify(DEFAULTS[doc]));
-  const next = typeof updater === 'function' ? updater(current) : { ...current, ...updater };
+  const merged = typeof updater === 'function' ? updater(current) : { ...current, ...updater };
+  // Stamped on every write so the app can answer "is what is on this device
+  // newer than this backup file?" (item 138). It could not before: the import
+  // screen compared the incoming file against `exportAll().exported_at`, which
+  // exportAll *generates* at call time. That is the current clock, not a
+  // last-modified time, so it was always later than any file and the
+  // dual-device conflict warning was true on every single import, including
+  // the ordinary restore-my-own-backup case it was written to leave alone.
+  const next = { ...merged, updatedAt: Date.now() };
   _cache[doc] = next;
   writeDoc(DOCS[doc], next);
   return next;
+}
+
+/**
+ * When this device's data last changed, or null if it never has (a fresh
+ * install, or a user whose documents predate the stamp). Null is a truthful
+ * "no idea", and the import screen treats it as no conflict rather than as a
+ * conflict — an unknown is not evidence of one, and crying wolf is what item
+ * 138 was.
+ */
+export function getLastMutatedAt() {
+  if (!_initialized) init();
+  const stamps = ['progress', 'srs', 'prefs']
+    .map((d) => _cache[d]?.updatedAt)
+    .filter((t) => typeof t === 'number');
+  return stamps.length ? Math.max(...stamps) : null;
 }
 
 // ── SRS-specific hot path (avoids full doc serialize on each review) ───────
@@ -252,6 +292,19 @@ export function resetAll() {
   writeDoc(DOCS.progress, _cache.progress);
   writeDoc(DOCS.srs, _cache.srs);
   writeDoc(DOCS.prefs, _cache.prefs);
+  // The three documents were all this cleared, so a GitHub Personal Access
+  // Token and the id of the user's backup gist survived a control labelled
+  // "Hapus semua progress — tidak bisa dibatalkan" (item 133). Someone resetting
+  // the app before handing the phone on reasonably reads that as everything
+  // being gone; it left a live credential behind. See UNMANAGED_KEYS.
+  for (const key of UNMANAGED_KEYS) {
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // A storage that refuses removeItem is one where nothing was written
+      // either; there is nothing to recover from and nothing to report.
+    }
+  }
 }
 
 export function exportAll() {
@@ -301,6 +354,31 @@ export function validateSnapshot(snapshot) {
       sessions: (snapshot.progress.sessions ?? []).length,
       version: snapshot._storage_version ?? snapshot.progress._v ?? 'unknown',
       migrated: (snapshot._storage_version ?? snapshot.progress._v ?? 0) < STORAGE_VERSION,
+    },
+  };
+}
+
+/**
+ * The delta counterpart to validateSnapshot. A delta file carries `srs` plus
+ * `known`/`starred` and no `progress` or `prefs`, so running it through
+ * validateSnapshot returns `missing_docs` — which is what made
+ * "Ekspor Delta SRS Saja" produce a file the app refused to read (item 117).
+ */
+export function validateDelta(delta) {
+  if (!delta || typeof delta !== 'object') return { ok: false, reason: 'not_object' };
+  if (typeof delta.srs?.cards !== 'object' || delta.srs.cards === null)
+    return { ok: false, reason: 'invalid_srs' };
+  if (delta.known != null && !Array.isArray(delta.known))
+    return { ok: false, reason: 'invalid_known' };
+  return {
+    ok: true,
+    summary: {
+      known: (delta.known ?? []).length,
+      unknown: 0,
+      srsCards: Object.keys(delta.srs.cards).length,
+      sessions: 0,
+      version: delta._storage_version ?? 'unknown',
+      migrated: false,
     },
   };
 }

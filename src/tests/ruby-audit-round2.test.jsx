@@ -13,13 +13,13 @@ import { stripFuri } from '../utils/jp-helpers.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
 
 describe('daily-challenge.js — options stripped at the source', () => {
-  it('every option across a full year of seeded days is free of 《reading》 markers', () => {
+  it('every option across a full year of seeded days is free of 《reading》 markers', async () => {
     // getDailyChallenge is deterministic per date (seeded), so sweep a full
     // year rather than one arbitrary date -- cheap (pure string ops) and
     // deterministic, not flaky like sampling live app state would be.
     for (let d = 1; d <= 365; d++) {
       const date = new Date(2026, 0, d).toISOString().slice(0, 10);
-      const q = getDailyChallenge(date);
+      const q = await getDailyChallenge(date);
       if (!q) continue;
       for (const opt of q.options) {
         expect(opt).not.toMatch(/《.*》/);

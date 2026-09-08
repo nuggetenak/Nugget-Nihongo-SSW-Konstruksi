@@ -81,11 +81,36 @@ export function hasJapanese(s = '') {
  * hiragana/particle-heavy natural sentences) sits at 50-100%; the
  * Indonesian-dominant cases found in the shipped app sit at 0-16%. Plenty
  * of headroom either side of the boundary, not a knife-edge tuning.
+ *
+ * **A 《》 reading marker settles it before the ratio is consulted** (item 116).
+ * The headroom claimed above turned out not to be empty: nine shipped cards sit
+ * at 25-33% and were being routed to plain Indonesian body text --
+ * `CD管《かん》`, `PC杭《ぐい》`, `PHC杭《ぐい》`, `RC造《ぞう》`, `SRC造《ぞう》`,
+ * `PF管《かん》`, `CB造《ぞう》`, `土留め《どどめ》≥ 1.5m`, `CT / VCT（移動用電線）`.
+ * They are <latin abbreviation>+<kanji> construction terms, and the latin half
+ * is what drags the ratio down. The bail-out renders the *stripped* string, so
+ * `CD管《かん》` displayed as `CD管` with no reading at all -- suppressing the one
+ * thing a learner cannot supply for 管 (pipe), 杭 (pile), 造 (construction), and
+ * tagging it `lang="id"` for a screen reader on top.
+ *
+ * The fix is deliberately not a lower threshold: 0.25 would drag the
+ * Indonesian-sentence population it exists to catch back over the line. A
+ * reading marker, by contrast, only ever appears on Japanese text, so keying on
+ * it cannot produce a false positive on an Indonesian sentence. These nine had
+ * been misrendering since the guard was introduced -- not since 7.1.0's ruby
+ * fix shortened their readings, which looks like the cause and is not:
+ * `stripFuri` runs before the ratio, so the reading's length never entered it.
+ *
+ * Takes the ORIGINAL text and strips internally, so the marker is still there
+ * to see. Callers must not pre-strip.
  */
 export function isMeaningfullyJapanese(s = '', threshold = 0.4) {
   if (!s) return true; // nothing to disqualify -- let normal handling apply
-  const jpChars = (s.match(/[\u3040-\u9FFF]/g) || []).length;
-  return jpChars / s.length >= threshold;
+  if (/《[^》]+》/.test(s)) return true; // carries a reading: Japanese by definition
+  const clean = stripFuri(s);
+  if (!clean) return true;
+  const jpChars = (clean.match(/[\u3040-\u9FFF]/g) || []).length;
+  return jpChars / clean.length >= threshold;
 }
 
 /**

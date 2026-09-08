@@ -103,13 +103,18 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   useEffect(() => {
     if (!started || !currentQ || selected !== null) return;
     speakCountRef.current = 0;
-    if (hasAudio) {
-      setTimeout(
-        () => speakJP(stripFuri(currentQ.card.jp), { speed, onError: handleSpeakError }),
-        300
-      );
-    }
+    if (!hasAudio) return;
+    // Cleared on unmount (item 119/F8). ModeRouter cancels speech when the mode
+    // changes, but this fires ~300ms after that cancel, so leaving mid-question
+    // made the phone read Japanese over the Beranda screen.
+    const t = setTimeout(
+      () => speakJP(stripFuri(currentQ.card.jp), { speed, onError: handleSpeakError }),
+      300
+    );
+    return () => clearTimeout(t);
   }, [idx, started]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => () => clearTimeout(advanceTimerRef.current), []);
 
   const handleSpeak = () => {
     if (!currentQ) return;
@@ -118,6 +123,23 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
     haptic.tap();
   };
 
+  // Item 119/F2. `results` used to be read straight out of this closure, and
+  // handleSelect schedules `setTimeout(advance, 1500)` with the `advance` from
+  // the render *before* setResults commits -- so on the last question the
+  // session was recorded one answer short. A 10-question run answered 9/10
+  // stored {correct: 9, total: 9} = 100%, while the results screen correctly
+  // showed 90%; every consumer of progress.sessions (Stats accuracy, the
+  // heatmap, the readiness score, the mission overlay) got the wrong number.
+  // Worse, pressing Enter instead of waiting for the auto-advance took the
+  // current render's closure and stored the right one, so the same session
+  // recorded differently depending on whether the learner waited.
+  //
+  // A ref, because the timeout cannot be given a fresher closure after the fact.
+  const resultsRef = useRef([]);
+  useEffect(() => {
+    resultsRef.current = results;
+  }, [results]);
+
   const advance = useCallback(() => {
     clearTimeout(advanceTimerRef.current);
     if (idx + 1 < questions.length) {
@@ -125,18 +147,18 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
       setSelected(null);
     } else {
       if (!sessionFired && onSessionEnd) {
-        const correct = results.filter((r) => r.isCorrect).length;
+        const done = resultsRef.current;
         onSessionEnd({
           mode: 'dengar',
-          correct,
-          total: results.length,
+          correct: done.filter((r) => r.isCorrect).length,
+          total: done.length,
           durationMs: getDurationMs(),
         });
         setSessionFired(true);
       }
       setIdx(questions.length); // trigger done state
     }
-  }, [idx, questions.length, results, sessionFired, onSessionEnd, getDurationMs]);
+  }, [idx, questions.length, sessionFired, onSessionEnd, getDurationMs]);
 
   const handleSelect = useCallback(
     (optIdx) => {
@@ -410,7 +432,12 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
         isCorrect={selected !== null ? selected === currentQ.correctIdx : null}
         correctText={currentQ.opts[currentQ.correctIdx]?.text}
       />
-      <ProgressBar value={idx} max={questions.length} />
+      {/* Item 119/F6: this passed value/max, and ProgressBar takes
+          current/total — so the bar sat at 0% for the whole quiz and announced
+          "0% selesai" on the last question. Every other caller in the app uses
+          current/total, which is why the shared component never grew a
+          tolerance for the other spelling. */}
+      <ProgressBar current={idx} total={questions.length} />
 
       <div
         style={{

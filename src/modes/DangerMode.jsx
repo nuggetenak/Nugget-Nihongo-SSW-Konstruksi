@@ -8,6 +8,7 @@ import { DANGER_PAIRS as PAIRS } from '../data/danger-pairs.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
+import { recordTermMistake } from '../utils/mistake-bridge.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -253,8 +254,13 @@ function QuizView({ onBack, onSessionEnd, filterType, limit }) {
       if (isCorrect) haptic.correct();
       else haptic.wrong();
       if (!isCorrect) {
-        const key = `danger-${item.pair.term}`;
-        recordWrong(key);
+        // Item 129: this used to be `recordWrong(\`danger-${item.pair.term}\`)`,
+        // putting a string key into progress.quizWrong, which every reader
+        // treats as card-keyed -- inert in FokusMode, a `NaN` property in
+        // StatsMode, and carried in every export since. The bridge sends it to
+        // the card store when the term is a card (about half of DANGER_PAIRS
+        // are) and to progress.termWrong when it is not.
+        recordTermMistake(item.pair.term, recordWrong);
       }
       const ns = isCorrect ? streak + 1 : 0;
       setStreak(ns);

@@ -24,7 +24,7 @@
 //
 // Zero dependencies, same as verify-content.mjs, so it runs in a content-only
 // checkout with no npm install.
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -189,7 +189,9 @@ for (const [key, list] of Object.entries(findings)) {
 }
 
 if (total > 0) {
-  console.log(`\n${total} data-text issue(s) — each one is invisible on screen and wrong underneath.`);
+  console.log(
+    `\n${total} data-text issue(s) — each one is invisible on screen and wrong underneath.`
+  );
   process.exit(1);
 }
 console.log(

@@ -11,7 +11,8 @@
 //    baseline), so there was no *distributional* position leak to close.
 //
 // 2. LENGTH. The correct answer is the single longest option 51.5% of the time
-//    in Wayground and 72.0% in JAC Mockup, because answers are written out and
+//    in Wayground (48.3% after the first balancing pass) and 72.0% in JAC
+//    Mockup, because answers are written out and
 //    distractors are written tersely -- mean 11.5 vs 8.3 characters, and 9.9 vs
 //    6.0. A bot that ignores the question and picks the longest option scores
 //    those same figures, against a 25% baseline and a 65% pass mark.
@@ -89,7 +90,11 @@ describe('length: the known content defect, held at its current level', () => {
     }).length / qs.length;
 
   it('Wayground: correct answer is the longest option no more often than today', () => {
-    expect(longestIsAnswer(WG)).toBeLessThanOrEqual(0.52);
+    // Was 0.52. Lowered 2026-09-08 after the first balancing pass (item 114)
+    // trimmed 26 answers that ended in a parenthetical the explanation already
+    // repeated -- and, in 17 cases, that the *other* bank already shipped in
+    // exactly the short form. Adopted, not invented.
+    expect(longestIsAnswer(WG)).toBeLessThanOrEqual(0.49);
   });
 
   it('JAC Mockup: same ceiling — this bank is the worse of the two', () => {

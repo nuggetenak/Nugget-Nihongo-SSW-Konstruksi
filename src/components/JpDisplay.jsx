@@ -136,7 +136,9 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
   // presence check, so a mostly-Japanese phrase with an incidental
   // non-Japanese character still gets full treatment. All hooks above this
   // point already ran unconditionally, so this early return is safe.
-  if (!isMeaningfullyJapanese(clean)) {
+  // Given `jp`, not `clean`: the guard reads the 《》 reading marker itself, and
+  // stripping first is what hid nine real Japanese terms from it (item 116).
+  if (!isMeaningfullyJapanese(jp)) {
     return (
       <div
         lang="id"
@@ -169,7 +171,10 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
         type="button"
         className={S.tapSurface}
         onClick={() => setTapReveal((v) => !v)}
-        aria-label="Toggle furigana"
+        /* Item 140: this was the app's only English aria-label, against 25+
+           Indonesian ones -- and the visible hint right beside it is already
+           Indonesian. */
+        aria-label="Tampilkan atau sembunyikan furigana"
         aria-pressed={showFuri}
       >
         {content}

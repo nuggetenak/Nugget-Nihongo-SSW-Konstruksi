@@ -17,6 +17,7 @@ import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { CATEGORIES } from '../data/categories.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import QuizShell from '../components/QuizShell.jsx';
+import { useScopedDeck } from './FlashcardMode/use-scoped-deck.js';
 import CategoryPicker from '../components/CategoryPicker.jsx';
 import {
   saveQuizSnapshot,
@@ -68,7 +69,12 @@ export default function QuizMode({
   const seenPool = useRef(new Set());
 
   // Scope cards if filterIds provided (launched from SumberMode).
-  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+  //
+  // Through the hook, not inline. This file has no useEffect, so the inline
+  // version could not loop here the way it did in FlashcardMode and SprintMode
+  // -- but it is the same landmine, one added effect from being the same bug,
+  // and it also costs a wasted `availableCats` recompute on every render.
+  const baseCards = useScopedDeck(cards, filterIds);
 
   const lemahCards = baseCards
     .filter((c) => getWrongCount(quizWrong[c.id]) > 0)

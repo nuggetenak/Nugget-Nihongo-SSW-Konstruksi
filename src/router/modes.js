@@ -4,26 +4,26 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { lazy } from 'react';
-import { QUIZ_SETS } from '../data/quiz-sets.js';
-import { isVocabId } from '../utils/quiz-classification.js';
-import { EXAM_FULL_QUESTIONS, examMinutes } from '../utils/constants.js';
+import {
+  EXAM_FULL_QUESTIONS,
+  examMinutes,
+  QUIZ_QUESTION_COUNTS as MODE_COUNTS,
+} from '../utils/constants.js';
 
-// Question counts shown in the menu, derived rather than typed.
+// Question counts shown in the menu live in constants.js, not here.
 //
-// Both numbers here were hand-written and both were wrong: wayground claimed 579
-// against a real 740, vocab claimed 380 against a real 240. They went stale when
-// the jac-mockup sets were folded into WaygroundMode and the vocab drill was
-// re-scoped to wglv-* ids only -- a content change nothing connected back to the
-// two strings describing it. Counted from the same QUIZ_SETS/isVocabId split the
-// two modes themselves use, so the menu and the mode can no longer disagree.
+// They used to be derived in this file from QUIZ_SETS -- correct in principle,
+// and it fixed two hand-written counts that had gone stale (wayground said 579
+// against a real 740, vocab 380 against 240). The cost was invisible: this
+// module is statically imported by App.jsx and AppContext.jsx, so importing the
+// quiz barrel here put wayground-sets.js (481 kB) and jac-mockup-sets.js
+// (226 kB) on the critical path of every first page view, modulepreloaded from
+// index.html, to compute two integers.
 //
-// Track-independent on purpose: this is a single-track app (every category is
-// tracks: ['lifeline']), and a menu label is not the place to imply otherwise.
-const countQuestions = (sets) => sets.reduce((n, s) => n + s.questions.length, 0);
-const MODE_COUNTS = {
-  wayground: countQuestions(QUIZ_SETS.filter((s) => !isVocabId(s.id))),
-  vocab: countQuestions(QUIZ_SETS.filter((s) => isVocabId(s.id))),
-};
+// Same trap EXAM_FULL_TEORI was pulled out of, same fix. The counts are
+// literals in constants.js and src/tests/mode-counts.test.js re-derives them
+// from the real data and fails on drift -- a test can import 707 kB; a bundle
+// entry cannot.
 
 // ── Lazy imports ──────────────────────────────────────────────────────────
 export const MODE_COMPONENTS = {

@@ -4,6 +4,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
+import EmptyState from './EmptyState.jsx';
 import { useAnswerStreak } from '../hooks/useAnswerStreak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -102,12 +103,13 @@ export default function QuizShell({
     }
   }, [selected, isLast]);
 
+  const optCount = q?.options?.length || 4;
   useQuizKeyboard({
     onSelect: handleSelect,
     onNext: handleNext,
     selected,
     phase,
-    optCount: q?.options?.length || 4,
+    optCount,
   });
 
   useEffect(() => {
@@ -189,6 +191,28 @@ export default function QuizShell({
         }
         onExit={onExit}
       />
+    );
+  }
+  // An empty question list is a caller bug, and returning null made it a dead
+  // end for the learner: the mode area went blank and this early return sits
+  // *above* the shell's own back button, so the only way out was the router
+  // header. Reachable two ways today (item 119/F4 and F6) -- Kuis in Mode Lemah
+  // with a category you have never got wrong, and Vocab's Mix All over an empty
+  // set list. Guarding here closes the class rather than the two instances.
+  if (!questions?.length) {
+    return (
+      <div className={S.wrap}>
+        <div className={S.header}>
+          <button className={S.btnBack} onClick={onExit}>
+            ← {title}
+          </button>
+        </div>
+        <EmptyState
+          icon="📭"
+          title="Tidak ada soal"
+          desc="Belum ada soal yang cocok dengan pilihanmu. Coba ubah filter atau mode."
+        />
+      </div>
     );
   }
   if (!q) return null;
@@ -301,7 +325,16 @@ export default function QuizShell({
         ))}
       </div>
 
-      <div className={S.kbHint}>Keyboard: 1–4 pilih · Space/→ lanjut · Esc kembali</div>
+      {/* Item 136: this read "Keyboard: 1–4 pilih · Space/→ lanjut". Both halves
+          were false. 61 of the 95 JAC Official questions have fewer than four
+          options (17 have two, 44 have three), so "1–4" promised keys that do
+          nothing on 64% of that bank; and useQuizKeyboard advances on Enter and
+          Space only -- there has never been an ArrowRight handler, which is why
+          ShortcutSheet lists ['Enter','Space'] and contradicted this line. The
+          range now comes from the question actually on screen. */}
+      <div className={S.kbHint}>
+        Keyboard: {optCount > 1 ? `1–${optCount}` : '1'} pilih · Enter/Space lanjut · Esc kembali
+      </div>
 
       {selected !== null && q.explanation && (
         <div className={S.explanation}>

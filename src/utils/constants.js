@@ -90,6 +90,28 @@ export const EXAM_FULL_TEORI = 30;
 export const EXAM_FULL_PRAKTIK = 20;
 export const EXAM_FULL_QUESTIONS = EXAM_FULL_TEORI + EXAM_FULL_PRAKTIK;
 
+/** Question counts for the two menu labels that quote them.
+ *
+ *  Item 131, and it is the same trap EXAM_FULL_TEORI above was pulled out of --
+ *  the registry cannot import a data module to read a number without paying for
+ *  the whole module. router/modes.js derived these live from QUIZ_SETS, whose
+ *  barrel pulls wayground-sets.js and jac-mockup-sets.js. modes.js is statically
+ *  imported by App.jsx and AppContext.jsx, so those two chunks -- 481 kB and
+ *  226 kB, both modulepreloaded from index.html -- were on the critical path of
+ *  every first page view, before onboarding rendered, to produce two integers.
+ *
+ *  Deriving counts from data is right; doing it in a module the initial bundle
+ *  depends on is what costs. So they are literals here and
+ *  src/tests/mode-counts.test.js re-derives them from QUIZ_SETS and fails if
+ *  they drift -- a test may import the data freely, a bundle entry may not.
+ *  That guard matters: both numbers were hand-written once before and both went
+ *  stale (wayground said 579 against a real 740, vocab 380 against 240), which
+ *  is why they were made live in the first place. */
+export const QUIZ_QUESTION_COUNTS = {
+  wayground: 740,
+  vocab: 240,
+};
+
 /** Minutes a run of `n` questions is given, at the rate above. Exported so the
  *  menu, the preset labels and the timer cannot quote three different budgets
  *  for the same exam. */

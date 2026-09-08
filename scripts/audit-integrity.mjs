@@ -64,7 +64,8 @@ const usedSources = new Set(CARDS.map((c) => c.source));
 const usedCategories = new Set(CARDS.map((c) => c.category));
 
 for (const key of sourceKeys) {
-  if (!usedSources.has(key)) issues.push(`Source declared in SOURCE_META but used by 0 cards: ${key}`);
+  if (!usedSources.has(key))
+    issues.push(`Source declared in SOURCE_META but used by 0 cards: ${key}`);
 }
 for (const c of CATEGORIES) {
   // 'all' and 'bintang' are UI-only pseudo-categories (a filter-all chip and the

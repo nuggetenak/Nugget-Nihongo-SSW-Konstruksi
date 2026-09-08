@@ -581,15 +581,39 @@
         render();
       };
 
+      // Renders what could not be loaded, at the top of the page, in red. A dev
+      // tool that lies about its own data is worse than one that is down.
+      function showLoadFailures(failures) {
+        const box = document.createElement('div');
+        box.setAttribute('role', 'alert');
+        box.style.cssText =
+          'background:#7f1d1d;color:#fff;padding:12px 16px;font:600 13px/1.5 system-ui;' +
+          'border-bottom:2px solid #ef4444;white-space:pre-wrap';
+        box.textContent =
+          `⚠ ${failures.length} data file(s) failed to load — the tabs below are ` +
+          'incomplete, not empty:\n' +
+          failures.map((f) => `  • ${f.path} — ${f.message}`).join('\n');
+        document.body.prepend(box);
+      }
+
       // ── data loading ──────────────────────────────────────────────────────────
       async function loadData() {
         const base = './src/data/';
+        // Item 144: this returned null on a failed import and logged a
+        // console.warn nobody was watching, so a data file that moved produced
+        // an empty tab rather than an error. That is what hid the JAC Ujian tab
+        // being empty from the 2026-08-18 merge until 2026-09-05. 6.1.0 fixed
+        // the paths and left the swallow in place, so the next move reproduced
+        // it identically. It still returns null -- one missing file should not
+        // take the other five tabs down with it -- but the failure is now
+        // visible in the page itself.
+        const loadFailures = [];
         async function loadJS(path) {
           try {
-            const mod = await import(base + path + '?v=' + Date.now());
-            return mod;
+            return await import(base + path + '?v=' + Date.now());
           } catch (e) {
-            console.warn('Failed to load', path, e.message);
+            console.error('Failed to load', path, e.message);
+            loadFailures.push({ path, message: e.message });
             return null;
           }
         }
@@ -605,6 +629,8 @@
           loadJS('sets/jac/jac-teori.js'),
           loadJS('sets/jac/jac-lifeline.js'),
         ]);
+
+        if (loadFailures.length) showLoadFailures(loadFailures);
 
         DATA.cards = cards?.CARDS || [];
 

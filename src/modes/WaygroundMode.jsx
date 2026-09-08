@@ -139,7 +139,7 @@ export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled
   const [questions, setQuestions] = useState([]);
 
   const [showHint, setShowHint] = useState(true);
-  const { saveScore, wgScores } = useProgress();
+  const { saveScore, wgScores, recordWrong } = useProgress();
 
   const set = TEORI_PRAKTIK.find((s) => s.id === activeSet);
 
@@ -185,9 +185,18 @@ export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled
             return updated;
           });
         }
+        // Item 128: the per-set store above is this mode's own bookkeeping, and
+        // it was the only place a mistake went. So a card missed here never
+        // reached FokusMode's "Latih kelemahan" or StatsMode's weakness view --
+        // while the identical question missed inside simulasi did, because
+        // simulasi-mistakes.js bridges it. The same mistake counted or did not
+        // depending on which screen you made it on. `_cardId` was already being
+        // computed at the draw; nothing read it.
+        const cardId = questions[qIdx]?._cardId;
+        if (typeof cardId === 'number') recordWrong(cardId);
       }
     },
-    [questions, set]
+    [questions, set, recordWrong]
   );
 
   const handleFinish = useCallback(

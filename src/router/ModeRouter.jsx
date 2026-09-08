@@ -12,6 +12,7 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
 import { getMission, completeMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import { get as storageGet } from '../storage/engine.js';
+import { stopSpeech } from '../utils/speak.js';
 import { MODE_COMPONENTS, MODE_META } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
 import ModeHeader from '../components/ModeHeader.jsx';
@@ -135,6 +136,19 @@ export default function ModeRouter() {
     }, 100);
     return () => clearTimeout(t);
   }, [mode]);
+
+  // Stop any speech still running when the mode changes or the router unmounts.
+  //
+  // Item 139 filed `stopSpeech` as dead code with zero references. It has been
+  // written and unit-tested since the audio work and called by nothing, which is
+  // not the same thing: five surfaces call speakJP (Kartu, Ulasan, Glosarium,
+  // QuizShell, Dengar) and *nothing in the app has ever cancelled an utterance*.
+  // Tap the speaker on a long card, hit Back, and the phone keeps reading it
+  // over the next screen. So the fix is wiring the function, not deleting it.
+  //
+  // Here rather than in each mode: it is one rule for every mode, and this is
+  // the component every mode enters and leaves through.
+  useEffect(() => stopSpeech, [mode]);
 
   // Build filtered cards for modes that need them. Memoised on `track` alone —
   // it walks all 1438 cards, and this component re-renders on every progress

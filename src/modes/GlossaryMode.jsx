@@ -15,6 +15,7 @@ import { formatCount } from '../utils/format.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
+import { scrollBehavior } from '../utils/motion.js';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
@@ -121,7 +122,13 @@ export default function GlossaryMode({ track }) {
           if (pill && navEl)
             navEl.scrollTo({
               left: pill.offsetLeft - navEl.offsetWidth / 2 + pill.offsetWidth / 2,
-              behavior: 'smooth',
+              // Item 137: was a literal 'smooth'. An explicit behavior in the
+              // call overrides the CSS scroll-behavior that global.css's
+              // reduced-motion catch-all sets, so this ran regardless of the
+              // OS setting -- and the A-Z bar auto-scrolling under the reader
+              // is the more disorienting of the two for the people who ask for
+              // reduced motion.
+              behavior: scrollBehavior(),
             });
         }
       },
@@ -152,7 +159,7 @@ export default function GlossaryMode({ track }) {
     if (el) {
       window.scrollTo({
         top: el.getBoundingClientRect().top + window.scrollY - 52,
-        behavior: 'smooth',
+        behavior: scrollBehavior(),
       });
     }
   }
@@ -179,7 +186,13 @@ export default function GlossaryMode({ track }) {
 
   // Export selected cards as Anki TSV.
   function exportMiniDeck() {
-    const cards = sorted.filter((c) => selected.has(c.id));
+    // From the whole corpus, not the currently-filtered `sorted` (item 119/F5).
+    // `selected` survives a category change but `sorted` does not, so selecting
+    // ten terms under 安全 and then switching to 資材 left the footer saying
+    // "10 kartu dipilih" with an enabled button that downloaded nothing at all —
+    // or, with a mixed selection, silently exported the three that happened to
+    // be in view. The counter and the file now describe the same set.
+    const cards = CARDS.filter((c) => selected.has(c.id));
     if (cards.length === 0) return;
     // Anki TSV: front\tback\ttags
     const rows = cards.map((c) => {

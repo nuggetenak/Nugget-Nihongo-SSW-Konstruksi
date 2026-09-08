@@ -15,6 +15,25 @@ export const DOCS = {
   prefs: 'ssw-prefs', // track, theme, onboarded, lastMode, dailyGoal
 };
 
+// Keys this app owns that are NOT one of the three managed documents: written
+// with plain localStorage.setItem, outside the engine, uncompressed.
+//
+// They live here so "Reset Semua Data" can actually mean it (item 133).
+// resetAll() rewrote the three documents and nothing else, so a GitHub Personal
+// Access Token and the id of the user's backup gist survived a control whose own
+// label reads "Hapus semua progress — tidak bisa dibatalkan". For an audience
+// where a borrowed, sold or handed-down phone is ordinary, leaving a credential
+// behind after a reset is the wrong default -- the next person to hold the phone
+// gets write access to that gist.
+//
+// gist-sync.js reads its key names from here, so there is one list, and adding a
+// side key without adding it to this list is the mistake this constant exists to
+// prevent.
+export const UNMANAGED_KEYS = [
+  'ssw-gist-pat', // GitHub Personal Access Token, gist scope
+  'ssw-gist-id', // which gist holds this user's backup
+];
+
 export const DEFAULTS = {
   progress: {
     _v: STORAGE_VERSION,
@@ -22,8 +41,17 @@ export const DEFAULTS = {
     unknown: [],
     starred: [],
     quizWrong: {}, // { [cardId]: wrongEntry } — {count, lastWrong} (backward-compat: plain int also accepted)
-    wrongCounts: {}, // { [cardId]: count } — wrong answer tally per card
+    // Keyed by JAC QUESTION id, not card id, despite sitting next to quizWrong
+    // (which is card-keyed). JACMode and simulasi-mistakes.js both write it that
+    // way; the old comment here said "per card" and was simply wrong (item 131).
+    wrongCounts: {}, // { [jacQuestionId]: count } — wrong answer tally per JAC question
     wgWrong: {}, // { [setId]: wrongObj }
+    // Wrong answers on content that has no card: DangerMode's pairs and
+    // ConfusionMode's, keyed by the furigana-stripped term. Separate from
+    // quizWrong on purpose -- DangerMode used to write `danger-<term>` straight
+    // into that card-keyed store (item 129). See utils/mistake-bridge.js.
+    // Additive: absent for existing users, and `?? {}` is the truthful reading.
+    termWrong: {}, // { [term]: wrongEntry }
     vocabWrong: {}, // { [setId]: wrongObj }
     jacScores: {}, // { [setId]: { correct, total, date } }
     wgScores: {},
