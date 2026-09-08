@@ -30,12 +30,20 @@ export function AppProvider({ children }) {
   // ── Prefs (from storage engine) ──
   const [prefs, setPrefsState] = useState(() => get('prefs'));
 
+  // Functional update, deliberately — NOT `{ ...prev, [key]: value }` built from
+  // this component's own state. Eight call sites write `prefs` straight to the
+  // engine without going through here (CatatanMode's notes, SprintMode's
+  // personal bests, useDailyChallenge's log, FlashcardMode's hint count,
+  // SessionLengthPicker/QuizMode's question count, auto-next's delay,
+  // backup-state's timestamp). `prefs` here is seeded once at mount and never
+  // re-synced, so a full snapshot built from it carries a stale copy of every
+  // one of those fields; `engine.set()`'s object branch is `{ ...current,
+  // ...updater }`, so those stale values then overwrite the fresh ones. The
+  // observable bug was: write a note, change any setting, note gone.
+  // Passing the updater through means the engine merges against its own live
+  // cache and we take the merged document back as state.
   const setPref = useCallback((key, value) => {
-    setPrefsState((prev) => {
-      const next = { ...prev, [key]: value };
-      storageSet('prefs', next);
-      return next;
-    });
+    setPrefsState(storageSet('prefs', (p) => ({ ...p, [key]: value })));
   }, []);
 
   // ── Theme ──
@@ -393,10 +401,12 @@ export function AppProvider({ children }) {
 
   // ── Onboarded ──
   // Accepts optional { track, dailyGoal } from new interactive onboarding.
+  // Functional, for the same reason as setPref above: this must not write a
+  // full snapshot assembled from a possibly-stale `prefs` state.
   const completeOnboarding = useCallback((payload) => {
-    setPrefsState((prev) => {
-      const next = {
-        ...prev,
+    setPrefsState(
+      storageSet('prefs', (p) => ({
+        ...p,
         onboarded: true,
         ...(payload?.track && { track: payload.track }),
         ...(payload?.dailyGoal && { dailyGoal: payload.dailyGoal }),
@@ -407,10 +417,8 @@ export function AppProvider({ children }) {
         // is a deliberate "still don't know", not "no opinion", so it does
         // overwrite a stale prior value.
         ...(payload?.examDate !== undefined && { examDate: payload.examDate }),
-      };
-      storageSet('prefs', next);
-      return next;
-    });
+      }))
+    );
   }, []);
 
   const ctx = useMemo(

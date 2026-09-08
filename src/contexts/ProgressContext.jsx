@@ -68,12 +68,22 @@ export function ProgressProvider({ children }) {
     setTimeout(() => setToastQueue((q) => [...q, { msg, duration }]), 0);
   }, []);
 
+  // The updater is forwarded to the engine rather than resolved against this
+  // component's state first. Same defect as AppContext's setPref had: `prog` is
+  // seeded once at mount and never re-synced, while six modules write
+  // `progress` straight to the engine (JACMode, SprintMode, VocabMode,
+  // WaygroundMode, simulasi-mistakes, daily-mission) -- all of them correctly,
+  // with functional updaters against the live cache. Resolving here and handing
+  // `engine.set()` a finished object meant every one of those writes was undone
+  // by the next card the learner rated, because handleMark returns a full
+  // `{ ...prev, ... }` snapshot. Finish a Wayground set, mark one card known,
+  // and the set's wrong answers were gone.
   const setProg = useCallback((updater) => {
-    setProgState((prev) => {
-      const next = typeof updater === 'function' ? updater(prev) : { ...prev, ...updater };
-      storageSet('progress', next);
-      return next;
-    });
+    setProgState(
+      storageSet('progress', (p) =>
+        typeof updater === 'function' ? updater(p) : { ...p, ...updater }
+      )
+    );
   }, []);
 
   // ── Known / Unknown ───────────────────────────────────────────────────
