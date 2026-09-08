@@ -230,10 +230,33 @@ export function get(doc) {
 export function set(doc, updater) {
   if (!_initialized) init();
   const current = _cache[doc] ?? JSON.parse(JSON.stringify(DEFAULTS[doc]));
-  const next = typeof updater === 'function' ? updater(current) : { ...current, ...updater };
+  const merged = typeof updater === 'function' ? updater(current) : { ...current, ...updater };
+  // Stamped on every write so the app can answer "is what is on this device
+  // newer than this backup file?" (item 138). It could not before: the import
+  // screen compared the incoming file against `exportAll().exported_at`, which
+  // exportAll *generates* at call time. That is the current clock, not a
+  // last-modified time, so it was always later than any file and the
+  // dual-device conflict warning was true on every single import, including
+  // the ordinary restore-my-own-backup case it was written to leave alone.
+  const next = { ...merged, updatedAt: Date.now() };
   _cache[doc] = next;
   writeDoc(DOCS[doc], next);
   return next;
+}
+
+/**
+ * When this device's data last changed, or null if it never has (a fresh
+ * install, or a user whose documents predate the stamp). Null is a truthful
+ * "no idea", and the import screen treats it as no conflict rather than as a
+ * conflict — an unknown is not evidence of one, and crying wolf is what item
+ * 138 was.
+ */
+export function getLastMutatedAt() {
+  if (!_initialized) init();
+  const stamps = ['progress', 'srs', 'prefs']
+    .map((d) => _cache[d]?.updatedAt)
+    .filter((t) => typeof t === 'number');
+  return stamps.length ? Math.max(...stamps) : null;
 }
 
 // ── SRS-specific hot path (avoids full doc serialize on each review) ───────
@@ -331,6 +354,31 @@ export function validateSnapshot(snapshot) {
       sessions: (snapshot.progress.sessions ?? []).length,
       version: snapshot._storage_version ?? snapshot.progress._v ?? 'unknown',
       migrated: (snapshot._storage_version ?? snapshot.progress._v ?? 0) < STORAGE_VERSION,
+    },
+  };
+}
+
+/**
+ * The delta counterpart to validateSnapshot. A delta file carries `srs` plus
+ * `known`/`starred` and no `progress` or `prefs`, so running it through
+ * validateSnapshot returns `missing_docs` — which is what made
+ * "Ekspor Delta SRS Saja" produce a file the app refused to read (item 117).
+ */
+export function validateDelta(delta) {
+  if (!delta || typeof delta !== 'object') return { ok: false, reason: 'not_object' };
+  if (typeof delta.srs?.cards !== 'object' || delta.srs.cards === null)
+    return { ok: false, reason: 'invalid_srs' };
+  if (delta.known != null && !Array.isArray(delta.known))
+    return { ok: false, reason: 'invalid_known' };
+  return {
+    ok: true,
+    summary: {
+      known: (delta.known ?? []).length,
+      unknown: 0,
+      srsCards: Object.keys(delta.srs.cards).length,
+      sessions: 0,
+      version: delta._storage_version ?? 'unknown',
+      migrated: false,
     },
   };
 }

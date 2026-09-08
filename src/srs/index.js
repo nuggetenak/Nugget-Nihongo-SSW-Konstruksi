@@ -23,6 +23,9 @@ export {
   saveCard,
   exportSRSSnapshot,
   importSRSSnapshot,
+  importSRSDelta,
+  isSRSDelta,
+  DELTA_TYPE,
 } from './fsrs-store.js';
 
 export {
