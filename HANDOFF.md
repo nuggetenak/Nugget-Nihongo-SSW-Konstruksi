@@ -31,9 +31,45 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of 2026-09-07.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.0.0**, **1,626 cards**, **19 modes**, `npm run validate` clean, and
-everything below merged into `main` (7.0.0 as PR #12, `200e48a`).
+**As of 2026-09-08.** Verify before trusting past this point — this line doesn't update itself.
+At that date: version **7.1.0**, **1,626 cards**, **19 modes**, `STORAGE_VERSION` **7**,
+`npm run validate` clean (99 files, 937 tests). 7.0.0 is merged into `main` (PR #12, `200e48a`);
+7.1.0 is on `claude/remove-modes-split-vocab-cards-5r2qfe` as PR #13.
+
+- **2026-09-08: "proceed to finish all hanging threads."** Same branch, restarted from `main`
+  after PR #12 merged (a merged PR cannot track new work). Full write-up is `CHANGELOG.md`
+  `[7.1.0]`. What a future session most needs to know:
+
+  - **`STORAGE_VERSION` is 7**, and `init()`'s migration chain is a registry keyed by the version
+    being migrated *from*, not five copy-pasted ladders. Adding v8 is one entry plus the function.
+    `storage.migration-chain.test.js` walks every entry point v1–v6 to current and is the reason
+    to keep that shape.
+  - **A document stamped newer than the running build is loaded, not overwritten.** Every version
+    of `init()` before this one wrote fresh defaults over it, destroying the study history of
+    anyone who opened an older install after a newer one — ordinary for a PWA on a device that has
+    been offline. Do not "simplify" that `>=` back to `===`.
+  - **`related_card_id` values in the JAC sets were written in pre-v4 card numbering** and had
+    never been remapped: 23 of 95 were sound. Fixed via `card-id-map-v4.js`, now 94 of 95, with
+    `src/tests/related-card-links.test.js` holding the floor. **The lesson generalises**:
+    `audit-related-ids.mjs` checks that an id *resolves*, which is not the same as checking it is
+    the *right* card, and a corpus can be entirely wrong while every audit passes.
+  - **305 of `QUIZ_SETS`' 980 questions now carry a link**, and the retry-wrong button works in
+    `wayground`, `vocab` and `simulasi` for the first time. The remaining 675 need a human read;
+    `npm run derive:quiz-links` regenerates the tiers. The 79 no-match rows are worth reading
+    first for a different reason — a question about something the deck does not teach is a content
+    gap, not a linking problem.
+  - **Every one of the 1,418 vocab cards has a `usage` sentence.** The 7.0.0 entry below says 152
+    do not; that is no longer true (the real figure at the time this was picked up was 90).
+    `src/tests/vocab-usage.test.js` holds it at 100% — an equality, not a threshold, because
+    anything weaker lets the next batch of split children through bare.
+  - **`JpFront` splits on ・ / vs / ： / → outside `《reading》` markers only.** Eleven strings in
+    the corpus carried a separator inside a reading; splitting on it put raw brackets on screen.
+    Both the renderer and the data are fixed, and `audit:text` now rejects the shape.
+  - **Five `UI_UX_PLAN` items remain open**, none for lack of a decision: 59 (no ja-JP voice
+    exists anywhere in this toolchain), 99 (the exam photographs do not exist), 103–105 (product
+    direction). Item 104 is now `S` rather than `M` — its question bank is the 1,409 verb-final
+    `usage` sentences, already written; item 103's gap is confirmed by the same measurement, since
+    only 3 of 1,418 are in an imperative register.
 
 - **2026-09-07: "hapus mode produksi & kuis produksi · pecah kartu multi-kosakata · kerjakan
   antrean docs."** Branch `claude/remove-modes-split-vocab-cards-5r2qfe`. Full write-up is
@@ -44,7 +80,8 @@ everything below merged into `main` (7.0.0 as PR #12, `200e48a`).
     a verdict for every card in the pre-split corpus, including the rule that kept each of the 113
     that stayed whole. **Card ids were not renumbered** and must not be — a parent keeps its id for
     its first term, children are appended, and `scripts/audit-integrity.mjs` explains what
-    renumbering would break. `STORAGE_VERSION` is still **6**.
+    renumbering would break. (`STORAGE_VERSION` was 6 at 7.0.0; it is **7** as of 7.1.0 — item 58,
+    an additive field, not a renumbering.)
   - **Deduplicate before splitting, if this ever happens again.** 583 raw child slots collapsed to
     451 distinct terms; 76 of those already had cards. Splitting first would have created about 128
     duplicates to clean up afterwards.
@@ -55,21 +92,17 @@ everything below merged into `main` (7.0.0 as PR #12, `200e48a`).
     live ids, which is the design; `daily-mission.js` did not, and could therefore set an
     "Ulasan SRS" mission with an empty review queue behind it. Fixed here.
     `src/tests/srs-orphans.test.js` now asserts that no call site leaves the whitelist off.
-  - **152 of 518 vocab children have no `usage`**, deliberately, against a plan that said they all
-    would. Only 366 could inherit a sentence that verifiably contains their term, and composing
-    unverified Japanese for a certification deck is worse than omitting the field (§4.6 allows it).
-    Authoring them is a standing offer, not a gap that was missed.
+  - ~~**152 of 518 vocab children have no `usage`**~~ — **closed 2026-09-08.** The residue was 90
+    by the time it was picked up, and they are written; the corpus is at 1,418 of 1,418. The
+    caution behind the original decision still stands and is why the sentences follow one fixed
+    shape with full ruby, and why `audit:text` gets to reject them (it rejected one).
   - **Two runtime hazards came out of the mode removal, not the deletion itself**: a `% 3` modulo
     left over a 2-element rotation, and a persisted `prefs.lastMode` naming a mode that no longer
     exists. Both are fixed at the class level, and `src/tests/removed-mode-safety.test.js` holds
     them.
-  - **Ten `UI_UX_PLAN` items remain open, each with a stated reason** — none of them for lack of a
-    decision. 58 needs storage v7 and its own session; 59 is blocked because no ja-JP voice exists
-    anywhere in this toolchain (re-verified, not assumed); 69 is an owner call that would move every
-    category score on FocusMode's weakness screen; 96 is *sized* (305 of 980 links derivable,
-    675 needing a human read — `npm run derive:quiz-links`) and wants its own branch; 99 is blocked
-    on the exam photographs not existing; 103–105, 107–108 are product direction filed from an
-    external audit, not defects.
+  - ~~**Ten `UI_UX_PLAN` items remain open**~~ — **five, as of 7.1.0.** Closed since: 58 (storage
+    v7), 69 (the owner call, decided by measurement), 96 (305 links landed), 107 and 108. Still
+    open: 59, 99, 103–105 — see the 2026-09-08 entry above.
   - **Measured, not eyeballed**: items 73 and 74 were driven in Chromium against the running app
     (dead space 179px→0 on a phone, 401px→0 on a tablet), and item 98's before/after distributions
     come from 20,000 simulated draws each.
