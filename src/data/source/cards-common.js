@@ -1072,7 +1072,7 @@ export const CARDS_COMMON = [
     jp: 'クレーン',
     type: 'vocab',
     id_text: 'Lisensi operator crane (per tonase)',
-    desc: 'Izin mengoperasikan crane jenis tetap (bukan mobile): wajib lisensi negara untuk kapasitas angkat 5 ton ke atas, dan pelatihan keterampilan untuk kapasitas 1-5 ton. Satu rangkaian dengan 移動式クレーン資格《くれえんいどうしきくれえんしかくしきい》、移動式クレーン《いどうしきくれえん》、玉掛け資格《たまかけしかく》.',
+    desc: 'Izin mengoperasikan crane jenis tetap (bukan mobile): wajib lisensi negara untuk kapasitas angkat 5 ton ke atas, dan pelatihan keterampilan untuk kapasitas 1-5 ton. Satu rangkaian dengan 移動式《いどうしき》クレーン資格《しかく》、移動式クレーン《いどうしきくれえん》、玉掛け資格《たまかけしかく》.',
     usage:
       '移動式クレーン《いどうしきくれえん》を操作《そうさ》するには資格《しかく》が必要《ひつよう》である（diperlukan kualifikasi untuk mengoperasikan mobile crane）',
     _origIndex: 215,
@@ -1220,6 +1220,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Pembuatan garis sudut 90 derajat',
     desc: 'Proses menandai garis dengan sudut tepat 90° saat pekerjaan penentuan garis acuan (墨出《すみだ》し), biasanya menggunakan alat siku. Satu rangkaian dengan 墨付け《すみつけ》、壁芯《かべしん》、柱芯《はしらしん》、親墨《おやずみ》.',
+    usage:
+      '基準線《きじゅんせん》から矩《かね》を振《ふ》って直角《ちょっかく》を出《だ》す（tarik garis siku 90 derajat dari garis acuan）',
     _origIndex: 243,
   },
   {
@@ -1516,6 +1518,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Penutupan seluruh permukaan tanpa celah',
     desc: 'Istilah untuk pekerjaan yang menutupi seluruh permukaan secara merata tanpa celah, misalnya pengecatan penuh satu bidang (ベタ塗《ぬ》り) Satu rangkaian dengan ふかし《ふかす》.',
+    usage:
+      '壁一面《かべいちめん》をベタで塗《ぬ》り、塗《ぬ》り残《のこ》しをなくす（cat seluruh bidang dinding rata tanpa celah）',
     _origIndex: 289,
   },
   {
@@ -1777,6 +1781,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Pemotong piringan abrasif',
     desc: 'Mesin potong berputar cepat dengan piringan abrasif untuk memotong logam; piringannya aus dan menipis selama pemakaian. Satu rangkaian dengan チップソー切断機《ちっぷそーせつだんき》.',
+    usage:
+      '高速切断機《こうそくせつだんき》で鋼材《こうざい》を切《き》る前《まえ》に砥石《といし》の摩耗《まもう》を見《み》る（periksa keausan piringan sebelum memotong baja dengan mesin potong abrasif）',
     _origIndex: 364,
   },
   {
@@ -1798,7 +1804,7 @@ export const CARDS_COMMON = [
     jp: 'ランマ',
     type: 'vocab',
     id_text: 'Pemadat dalam (tumbuk kuat)',
-    desc: 'Pemadat dalam (tumbuk kuat) Satu rangkaian dengan バイブロコンパクタ、プレートコ.',
+    desc: 'Pemadat dalam (tumbuk kuat) Satu rangkaian dengan バイブロコンパクタ、プレートコンパクタ.',
     usage:
       'ランマで狭《せま》い箇所《かしょ》の地盤《じばん》を締固《しめかた》める（padatkan tanah di area sempit menggunakan rammer）',
     _origIndex: 366,
@@ -2391,6 +2397,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Rangka landai untuk menopang dan menarik beban berat',
     desc: 'Rangka landai untuk menopang dan menarik beban berat. Satu rangkaian dengan ころ.',
+    usage:
+      '重《おも》い機材《きざい》をそりに載《の》せて引《ひ》っ張《ぱ》る（tarik peralatan berat di atas rangka landai）',
     _origIndex: 453,
   },
   {
@@ -2787,6 +2795,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Paron (landasan tempa logam)',
     desc: 'Landasan baja keras yang digunakan sebagai alas saat menempa atau membengkokkan plat logam dengan palu. Satu rangkaian dengan 定盤《じょうばん》.',
+    usage:
+      '金床《かなとこ》の上《うえ》で鉄板《てっぱん》をハンマーで曲《ま》げる（bengkokkan plat besi dengan palu di atas paron）',
     _origIndex: 537,
   },
   {
@@ -2989,6 +2999,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Seruan keselamatan bersama',
     desc: 'Meneriakkan slogan keselamatan bersama-sama saat apel per jenis pekerjaan agar seluruh tim sepakat pada target hari itu. Satu rangkaian dengan タッチアンドコール.',
+    usage:
+      '朝礼《ちょうれい》の最後《さいご》に全員《ぜんいん》で安全唱和《あんぜんしょうわ》を行《おこな》う（seluruh anggota menyerukan slogan keselamatan bersama di akhir apel pagi）',
     _origIndex: 577,
   },
   {
@@ -3087,6 +3099,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Tertabrak kendaraan berat atau bucket crane saat berputar',
     desc: 'Tertabrak kendaraan berat atau bucket crane saat berputar. Satu rangkaian dengan はさまれ、巻き込まれ《まきこまれ》.',
+    usage:
+      '旋回《せんかい》するバケットに激突《げきとつ》されないよう作業半径《さぎょうはんけい》に入《はい》らない（jangan masuk radius kerja agar tidak tertabrak bucket yang berputar）',
     _origIndex: 586,
   },
   {
@@ -3097,6 +3111,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Zat kimia menyentuh kulit → gangguan kesehatan',
     desc: 'Zat kimia menyentuh kulit → gangguan kesehatan. Satu rangkaian dengan おぼれ、火災《かさい》.',
+    usage:
+      '有害物接触《ゆうがいぶつせっしょく》を防《ふせ》ぐため保護手袋《ほごてぶくろ》を着《つ》ける（pakai sarung tangan pelindung agar zat berbahaya tidak menyentuh kulit）',
     _origIndex: 587,
   },
   {
@@ -3471,6 +3487,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Kualifikasi alat berat beroda',
     desc: 'Kategori alat berat beroda seperti excavator dan buldoser; pengoperasian ≥3 ton wajib pelatihan keterampilan, di bawah 3 ton cukup pendidikan khusus. Satu rangkaian dengan 高所作業車《こうしょさぎょうしゃ》、フォークリフト資格《しかく》.',
+    usage:
+      '三《さん》トン以上《いじょう》の車両系《しゃりょうけい》建設機械《けんせつきかい》は技能講習《ぎのうこうしゅう》が要《い》る（alat berat beroda 3 ton ke atas wajib pelatihan keterampilan）',
     _origIndex: 646,
   },
   {
@@ -3613,6 +3631,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Jenis-jenis rangka perancah',
     desc: 'Tiga jenis rangka perancah untuk kerja di ketinggian, yaitu tipe panel, tipe pipa tunggal, dan tipe kunci baji. Satu rangkaian dengan 作業床《さぎょうゆか》、仮囲い《かりがこい》.',
+    usage:
+      '現場《げんば》に合《あ》う足場《あしば》の種類《しゅるい》を選《えら》んで組《く》み立《た》てる（pilih jenis perancah yang sesuai lokasi lalu pasang）',
     _origIndex: 673,
   },
   {
@@ -5782,6 +5802,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Terowongan metode shield',
     desc: 'Terowongan yang digali dengan mesin shield mulai dari sumur vertikal (立坑《たてこう》) Satu rangkaian dengan セグメント.',
+    usage:
+      '立坑《たてこう》からシールドトンネルを掘《ほ》り進《すす》める（gali terowongan metode shield mulai dari sumur vertikal）',
     _origIndex: 1449,
   },
   {
@@ -6104,6 +6126,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Metode tiang pancang pabrik',
     desc: 'Metode fondasi tiang yang dibuat dan dicetak di pabrik terlebih dahulu, lalu dipancang ke dalam tanah di lokasi proyek. Satu rangkaian dengan 場所打ちコン杭工法《ばしょううちこんくいこうほう》.',
+    usage:
+      '既成杭工法《きせいくいこうほう》で工場製《こうじょうせい》の杭《くい》を打《う》ち込《こ》む（pancang tiang buatan pabrik dengan metode tiang pracetak）',
     _origIndex: 1478,
   },
   {
@@ -6423,6 +6447,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Dinding penahan galian',
     desc: 'Dinding sementara di dalam tanah yang mencegah longsor selama pekerjaan penggalian berlangsung. Satu rangkaian dengan 支保工《しほこう》.',
+    usage:
+      '掘削前《くっさくまえ》に山留《やまど》め工事《こうじ》で土《つち》の崩《くず》れを止《と》める（tahan longsoran tanah dengan dinding penahan sebelum menggali）',
     _origIndex: 1508,
   },
   {
@@ -6433,6 +6459,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Struktur tahan gempa',
     desc: 'Metode memperkuat kolom dan balok agar bangunan mampu menahan langsung guncangan gempa. Satu rangkaian dengan 制振《せいしん》、免振《めんしん》.',
+    usage:
+      '柱《はしら》と梁《はり》を補強《ほきょう》して耐震《たいしん》性能《せいのう》を高《たか》める（perkuat kolom dan balok untuk menaikkan ketahanan gempa）',
     _origIndex: 1509,
   },
   {
@@ -6455,6 +6483,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Pekerjaan bekisting beton',
     desc: 'Memasang cetakan yang melingkupi tulangan sebagai wadah beton, lalu dilepas setelah beton cukup keras. Satu rangkaian dengan 支保工《しほこう》.',
+    usage:
+      '鉄筋《てっきん》の周《まわ》りに型枠《かたわく》を建《た》て込《こ》んでコンクリートを流《なが》す（pasang bekisting mengelilingi tulangan lalu cor beton）',
     _origIndex: 1511,
   },
   {
@@ -6621,6 +6651,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Jenis material kusen dan pintu',
     desc: 'Bahan yang dipakai untuk kusen, pintu, jendela, dan partisi geser (建具《たてぐ》), meliputi kayu, aluminium, resin, baja, dan stainless. Satu rangkaian dengan シャッター、自動ドア《じどうどあ》.',
+    usage:
+      '建具《たてぐ》の材料《ざいりょう》の種類《しゅるい》を用途《ようと》に合《あ》わせて選《えら》ぶ（pilih jenis material kusen sesuai penggunaannya）',
     _origIndex: 1525,
   },
   {
@@ -9791,6 +9823,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Pagar sementara di sekeliling area proyek',
     desc: 'Pagar sementara di sekeliling area proyek. Satu rangkaian dengan 作業床《さぎょうゆか》、足場の種類《しゅるい》.',
+    usage:
+      '工事《こうじ》の前《まえ》に現場《げんば》の周《まわ》りへ仮囲《かりがこ》いを立《た》てる（pasang pagar sementara mengelilingi lokasi sebelum pekerjaan dimulai）',
     _origIndex: 1608,
   },
   {
@@ -9813,6 +9847,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Permukaan bergelombang',
     desc: 'Permukaan bergelombang. Satu rangkaian dengan 面一《つらいち》、目違い《めちがい》.',
+    usage:
+      '床《ゆか》の不陸《ふろく》をモルタルで直《なお》してから仕上《しあ》げる（ratakan permukaan lantai yang bergelombang dengan mortar sebelum finishing）',
     _origIndex: 1610,
   },
   {
@@ -9871,6 +9907,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Tepi bawah elemen',
     desc: 'Tepi bawah elemen. Satu rangkaian dengan 建端《たっぱ》、上端《うわば》.',
+    usage:
+      '梁《はり》の下端《したば》の高《たか》さを図面《ずめん》で確《たし》かめる（cek ketinggian tepi bawah balok pada gambar kerja）',
     _origIndex: 1615,
   },
   {
@@ -9941,6 +9979,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Material pengisi celah/rongga (misalnya di antara lapisan be',
     desc: 'Material pengisi celah/rongga (misalnya di antara lapisan bekisting) Satu rangkaian dengan ノロ、建込み《たてこみ》、転用《てんよう》、パンク、釘仕舞《くぎじまい》.',
+    usage:
+      '型枠《かたわく》の隙間《すきま》にアンコを詰《つ》めて漏《も》れを止《と》める（sumbat celah bekisting dengan material pengisi agar tidak bocor）',
     _origIndex: 1621,
   },
   {
@@ -9951,6 +9991,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Mencampur bahan hingga merata',
     desc: 'Mencampur bahan hingga merata. Satu rangkaian dengan 配合《はいごう》、タンピング、締固め《しめかため》.',
+    usage:
+      'モルタルをむらなく練《ね》り混《ま》ぜてから使《つか》う（gunakan mortar setelah dicampur merata）',
     _origIndex: 1622,
   },
   {
@@ -9973,6 +10015,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Datar, untuk material lunak',
     desc: 'Datar, untuk material lunak. Satu rangkaian dengan 剣スコップ《けんすこっぷ》.',
+    usage:
+      '角《かく》スコップで砂《すな》をならして平《たい》らにする（ratakan pasir dengan sekop datar）',
     _origIndex: 1624,
   },
   {
@@ -9983,6 +10027,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Bergerak dengan rantai, cocok untuk medan tidak rata/tanpa a',
     desc: 'Bergerak dengan rantai, cocok untuk medan tidak rata/tanpa aspal (termasuk salju) Satu rangkaian dengan トラッククレーン.',
+    usage:
+      '舗装《ほそう》のない地面《じめん》ではクローラクレーンを使《つか》う（gunakan crawler crane di tanah tanpa aspal）',
     _origIndex: 1625,
   },
   {
@@ -9993,6 +10039,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Soket+handle menyatu',
     desc: 'Soket+handle menyatu. Satu rangkaian dengan ソケットレンチ、六角レンチ《ろっかくれんち》.',
+    usage:
+      'ボックスレンチでボルトを素早《すばや》く締《し》める（kencangkan baut dengan cepat memakai box wrench）',
     _origIndex: 1626,
   },
   {
@@ -10003,6 +10051,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Batang hex untuk baut berkepala segi enam',
     desc: 'Batang hex untuk baut berkepala segi enam. Satu rangkaian dengan ソケットレンチ、ボックスレンチ.',
+    usage:
+      '六角《ろっかく》レンチでキャップボルトを回《まわ》して締《し》める（putar dan kencangkan baut kepala hex dengan kunci hex）',
     _origIndex: 1627,
   },
   {
@@ -10013,6 +10063,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Lebih kuat untuk beton',
     desc: 'Lebih kuat untuk beton. Satu rangkaian dengan モルタルミキサ.',
+    usage:
+      'コンクリートミキサで生《なま》コンを現場《げんば》で練《ね》る（aduk beton segar di lokasi dengan mixer beton）',
     _origIndex: 1628,
   },
   {
@@ -10023,6 +10075,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Jangka/kompas logam untuk mengukur dan menandai jarak pada p',
     desc: 'Jangka/kompas logam untuk mengukur dan menandai jarak pada plat. Satu rangkaian dengan ケガキ針《ばり》.',
+    usage:
+      'デバイダで鉄板《てっぱん》に等間隔《とうかんかく》の印《しるし》を付《つ》ける（tandai plat besi dengan jarak sama menggunakan jangka logam）',
     _origIndex: 1629,
   },
   {
@@ -10033,6 +10087,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Terjepit di antara dua benda',
     desc: 'Terjepit di antara dua benda. Satu rangkaian dengan 激突され《げきとつされ》、巻き込まれ《まきこまれ》.',
+    usage:
+      '手《て》をはさまれないよう荷《に》と壁《かべ》の間《あいだ》に入《はい》らない（jangan berdiri di antara muatan dan dinding agar tangan tidak terjepit）',
     _origIndex: 1630,
   },
   {
@@ -10043,6 +10099,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Tertarik masuk ke mesin berputar',
     desc: 'Tertarik masuk ke mesin berputar. Satu rangkaian dengan 激突され《げきとつされ》、はさまれ.',
+    usage:
+      '回転《かいてん》する機械《きかい》に巻《ま》き込《こ》まれないよう袖口《そでぐち》を締《し》める（rapatkan ujung lengan baju agar tidak tertarik mesin berputar）',
     _origIndex: 1631,
   },
   {
@@ -10053,6 +10111,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Tenggelam, misalnya jatuh ke kolam atau saluran air saat bek',
     desc: 'Tenggelam, misalnya jatuh ke kolam atau saluran air saat bekerja di dekat air. Satu rangkaian dengan 有害物接触《ゆうがいぶつせっしょく》、火災《かさい》.',
+    usage:
+      '水路《すいろ》の近《ちか》くではおぼれないよう救命胴衣《きゅうめいどうい》を着《き》る（pakai pelampung di dekat saluran air agar tidak tenggelam）',
     _origIndex: 1632,
   },
   {
@@ -10063,6 +10123,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Kebakaran akibat korsleting, bahan mudah terbakar, atau peke',
     desc: 'Kebakaran akibat korsleting, bahan mudah terbakar, atau pekerjaan panas (las, potong) Satu rangkaian dengan 有害物接触《ゆうがいぶつせっしょく》、おぼれ.',
+    usage:
+      '火気《かき》作業《さぎょう》の後《あと》は火災《かさい》が起《お》きないか見回《みまわ》る（patroli setelah pekerjaan panas untuk memastikan tidak terjadi kebakaran）',
     _origIndex: 1633,
   },
   {
@@ -10261,6 +10323,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Turap atau lereng galian runtuh — sering jadi penyebab kecel',
     desc: 'Ungkapan lapangan untuk kondisi lereng galian yang menunjukkan tanda-tanda akan longsor, situasi berbahaya yang harus segera ditangani. Satu rangkaian dengan 地山《じやま》、法面《のりめん》、山留め《やまどめ》.',
+    usage:
+      '山《やま》がくる前《まえ》に作業《さぎょう》を止《と》めて全員《ぜんいん》を退避《たいひ》させる（hentikan pekerjaan dan evakuasi semua orang sebelum lereng galian runtuh）',
     _origIndex: 1650,
   },
   {
@@ -10283,6 +10347,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Pekerjaan persiapan pondasi tiang (cor beton/baja pracetak)',
     desc: 'Pekerjaan persiapan pondasi tiang (cor beton/baja pracetak) Satu rangkaian dengan 杭基礎《くいきそ》、スラブ、基礎免振《きそめんしん》.',
+    usage:
+      '基礎《きそ》の前《まえ》に杭地業《くいじぎょう》で地盤《じばん》を固《かた》める（perkuat tanah dengan pekerjaan tiang sebelum pondasi）',
     _origIndex: 1652,
   },
   {
@@ -10293,6 +10359,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Beton bocor keluar dari celah bekisting akibat sambungan kur',
     desc: 'Beton bocor keluar dari celah bekisting akibat sambungan kurang rapat. Satu rangkaian dengan 建込み《たてこみ》、ノロ、アンコ、転用《てんよう》、釘仕舞《くぎじまい》.',
+    usage:
+      '型枠《かたわく》がパンクしないよう締《し》め付《つ》けを確認《かくにん》する（periksa kekencangan agar bekisting tidak jebol）',
     _origIndex: 1653,
   },
   {
@@ -10349,6 +10417,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Melengkung CEMBUNG',
     desc: 'Melengkung CEMBUNG. Satu rangkaian dengan 反り《そり》、陸《ろく》.',
+    usage:
+      '梁《はり》に少《すこ》し起《むく》りを付《つ》けて垂《た》れを防《ふせ》ぐ（beri sedikit lengkung cembung pada balok agar tidak melendut）',
     _origIndex: 1672,
   },
   {
@@ -10359,6 +10429,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Permukaan rata/datar (tidak melengkung sama sekali)',
     desc: 'Permukaan rata/datar (tidak melengkung sama sekali) Satu rangkaian dengan 反り《そり》、起り《むくり》.',
+    usage:
+      '床《ゆか》が陸《ろく》になっているか水平器《すいへいき》で見《み》る（cek dengan waterpass apakah lantai sudah benar-benar datar）',
     _origIndex: 1673,
   },
   {
@@ -10369,6 +10441,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Lebih sopan, bisa ke siapa saja',
     desc: 'Lebih sopan, bisa ke siapa saja. Satu rangkaian dengan ご苦労《くろう》さま.',
+    usage:
+      '作業《さぎょう》が終《お》わった人《ひと》におつかれさまですと声《こえ》をかける（sapa dengan otsukaresama desu kepada yang selesai bekerja）',
     _origIndex: 1676,
   },
   {
@@ -10415,6 +10489,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Teknisi instalasi jaringan telekomunikasi',
     desc: 'Pemegang lisensi negara untuk pekerjaan pemasangan dan penyambungan jaringan telepon maupun internet ke fasilitas telekomunikasi. Satu rangkaian dengan 電気工事士《でんきこうじし》、消防設備士《しょうぼうせつびし》.',
+    usage:
+      '電話回線《でんわかいせん》の工事《こうじ》には工事担任者《こうじたんにんしゃ》の資格《しかく》が要《い》る（pekerjaan jaringan telepon wajib punya lisensi teknisi instalasi）',
     _origIndex: 1682,
   },
   {
@@ -10453,10 +10529,12 @@ export const CARDS_COMMON = [
     id: 1575,
     category: 'career',
     source: 'jac-ch3',
-    jp: '移動式クレーン資格《くれえんいどうしきくれえんしかくしきい》',
+    jp: '移動式《いどうしき》クレーン資格《しかく》',
     type: 'vocab',
     id_text: 'Lisensi operator mobile crane',
     desc: 'Izin mengoperasikan mobile crane (crane di atas kendaraan) dengan kapasitas angkat 5 ton ke atas, wajib memiliki lisensi negara. Satu rangkaian dengan クレーン.',
+    usage:
+      '移動式《いどうしき》クレーンの資格《しかく》を取《と》ってから運転《うんてん》する（operasikan mobile crane setelah memperoleh lisensinya）',
     _origIndex: 1686,
   },
   {
@@ -10477,6 +10555,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Penandaan garis potong pada material',
     desc: 'Menandai garis potong atau garis kerja pada material berdasarkan hasil 墨出し《すみだし》 (penandaan garis acuan) sebelum dipotong atau dipasang. Satu rangkaian dengan 矩を振る《かねをふる》、壁芯《かべしん》、柱芯《はしらしん》、親墨《おやずみ》.',
+    usage:
+      '墨出《すみだ》しの線《せん》をもとに材料《ざいりょう》へ墨付《すみつ》けをする（tandai garis potong pada material berdasarkan garis acuan）',
     _origIndex: 1688,
   },
   {
@@ -10605,6 +10685,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Rol karet pemadat',
     desc: 'Mesin pemadat dengan roda karet (ban), cocok untuk memadatkan campuran aspal karena tekanannya merata di permukaan. Satu rangkaian dengan ロードローラ、振動《しんどう》ローラ.',
+    usage:
+      'タイヤローラでアスファルトを均一《きんいつ》に締《し》め固《かた》める（padatkan aspal secara merata dengan roller ban karet）',
     _origIndex: 1714,
   },
   {
@@ -10615,6 +10697,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Rol besi bergetar (ukuran kompak)',
     desc: 'Mesin pemadat dengan roda drum besi yang menghasilkan getaran, sehingga efek pemadatannya kuat meski ukurannya lebih kecil dan ringan. Satu rangkaian dengan ロードローラ、タイヤローラ.',
+    usage:
+      '狭《せま》い場所《ばしょ》は振動《しんどう》ローラで転圧《てんあつ》する（padatkan area sempit dengan roller getar）',
     _origIndex: 1715,
   },
   {
@@ -10624,17 +10708,21 @@ export const CARDS_COMMON = [
     jp: 'バイブロコンパクタ',
     type: 'vocab',
     id_text: 'Getaran, jangkauan luas',
-    desc: 'Getaran, jangkauan luas. Satu rangkaian dengan ランマ、プレートコ.',
+    desc: 'Getaran, jangkauan luas. Satu rangkaian dengan ランマ、プレートコンパクタ.',
+    usage:
+      'バイブロコンパクタで広《ひろ》い範囲《はんい》の地面《じめん》を締《し》め固《かた》める（padatkan permukaan tanah area luas dengan vibro compactor）',
     _origIndex: 1721,
   },
   {
     id: 1628,
     category: 'sekou',
     source: 'jac-ch5',
-    jp: 'プレートコ',
+    jp: 'プレートコンパクタ',
     type: 'vocab',
     id_text: 'Pemadat plat permukaan (getaran kecil)',
     desc: 'Mesin pemadat dengan pelat datar berukuran besar untuk meratakan permukaan; getarannya kecil sehingga cocok untuk pekerjaan finishing. Satu rangkaian dengan ランマ、バイブロコンパクタ.',
+    usage:
+      'プレートコンパクタで舗装《ほそう》の下地《したじ》を平《たい》らに締《し》め固《かた》める（padatkan lapisan dasar perkerasan hingga rata dengan plate compactor）',
     _origIndex: 1722,
   },
   {
@@ -10645,6 +10733,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Versi kecil, kencangkan muatan di truk',
     desc: 'Versi kecil, kencangkan muatan di truk. Satu rangkaian dengan チェーンブロック.',
+    usage:
+      'レバーホイストでトラックの荷《に》を締《し》め付《つ》けて固定《こてい》する（ikat dan kencangkan muatan truk dengan lever hoist）',
     _origIndex: 1723,
   },
   {
@@ -10655,6 +10745,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Alat tanpa gigi untuk meratakan aspal',
     desc: 'Alat dengan bilah datar tanpa gigi untuk meratakan atau menarik material seperti aspal, berbeda dari レーキ yang bergigi untuk tanah atau daun. Satu rangkaian dengan レーキ.',
+    usage:
+      'ジョレンで合材《ごうざい》を引《ひ》いて平《たい》らにならす（tarik dan ratakan campuran aspal dengan jorén）',
     _origIndex: 1731,
   },
   {
@@ -10665,6 +10757,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Tang kombinasi serbaguna',
     desc: 'Tang serbaguna untuk menjepit, membengkokkan, atau memotong kawat secara umum; berbeda dari くい切《き》り yang khusus untuk pemotongan presisi. Satu rangkaian dengan くい切《き》り.',
+    usage:
+      'ペンチで針金《はりがね》を曲《ま》げて切《き》る（bengkokkan lalu potong kawat dengan tang kombinasi）',
     _origIndex: 1732,
   },
   {
@@ -10675,6 +10769,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Papan pelindung dari kayu lapis',
     desc: 'Papan kayu lapis (plywood) yang digunakan sebagai pelindung sementara pada lantai atau dinding dari benturan maupun goresan selama pekerjaan berlangsung. Satu rangkaian dengan ブルーシート.',
+    usage:
+      '仕上《しあ》げた床《ゆか》をベニヤで養生《ようじょう》する（lindungi lantai yang sudah selesai dengan papan plywood）',
     _origIndex: 1733,
   },
   {
@@ -10697,6 +10793,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Menara perancah beroda',
     desc: 'Struktur perancah portabel bertingkat dengan roda di bagian bawah, dapat dipindahkan dan dipakai untuk pekerjaan di ketinggian yang lebih tinggi. Satu rangkaian dengan 可搬式作業台《かはんしきさぎょうだい》、脚立《きゃたつ》.',
+    usage:
+      '高《たか》い所《ところ》の作業《さぎょう》はローリングタワーを移動《いどう》させて進《すす》める（kerjakan area tinggi sambil memindahkan menara perancah beroda）',
     _origIndex: 1735,
   },
   {
@@ -10707,6 +10805,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Gergaji piringan berpengisap debu',
     desc: 'Gergaji piringan yang dilengkapi sistem pengisap debu bawaan, sehingga debu potongan langsung tertarik tanpa unit 集塵機《しゅうじんき》 terpisah. Satu rangkaian dengan 集塵機《しゅうじんき》.',
+    usage:
+      '集塵丸《しゅうじんまる》のこで切《き》れば粉《こな》じんが飛《と》び散《ち》らない（debu potongan tidak beterbangan bila memakai gergaji berpengisap debu）',
     _origIndex: 1736,
   },
   {
@@ -10717,6 +10817,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Gergaji piringan listrik',
     desc: 'Gergaji listrik dengan mata pisau bundar untuk memotong kayu, papan, atau plywood; berbeda dari alat pemotong khusus beton dan blok. Satu rangkaian dengan 電動《でんどう》ブロックカッター.',
+    usage:
+      '丸《まる》のこで合板《ごうはん》をまっすぐ切《き》る（potong plywood lurus dengan gergaji piringan listrik）',
     _origIndex: 1737,
   },
   {
@@ -10763,6 +10865,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Hari bersuhu di atas 30°C',
     desc: 'Sebutan untuk hari dengan suhu udara maksimum melebihi 30°C, istilah yang dipakai dalam peringatan cuaca panas di Jepang. Satu rangkaian dengan WBGT、猛暑日《もうしょび》.',
+    usage:
+      '真夏日《まなつび》は水分《すいぶん》と塩分《えんぶん》をこまめに取《と》る（sering minum dan ambil garam pada hari di atas 30 derajat）',
     _origIndex: 1746,
   },
   {
@@ -10773,6 +10877,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Hari bersuhu di atas 35°C',
     desc: 'Sebutan untuk hari dengan suhu udara maksimum melebihi 35°C, kondisi yang meningkatkan risiko heat stroke saat bekerja di luar ruangan. Satu rangkaian dengan WBGT、真夏日《まなつび》.',
+    usage:
+      '猛暑日《もうしょび》は作業時間《さぎょうじかん》を短《みじか》くして休憩《きゅうけい》を増《ふ》やす（persingkat jam kerja dan perbanyak istirahat pada hari di atas 35 derajat）',
     _origIndex: 1747,
   },
   {
@@ -10837,6 +10943,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Crane bergerak sendiri',
     desc: 'Jenis crane yang bisa berpindah sendiri (self-propelled), umum dipakai mengangkat material langsung di lokasi proyek. Satu rangkaian dengan クレーン、玉掛け資格《たまかけしかく》.',
+    usage:
+      '移動式《いどうしき》クレーンでトラックから材料《ざいりょう》を直接《ちょくせつ》降《お》ろす（turunkan material langsung dari truk dengan mobile crane）',
     _origIndex: 1753,
   },
   {
@@ -10871,6 +10979,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Kualifikasi operator forklift',
     desc: 'Izin mengoperasikan forklift; kapasitas angkat ≥1 ton wajib pelatihan keterampilan, di bawah 1 ton cukup pendidikan khusus. Satu rangkaian dengan 車両系《しゃりょうけい》、高所作業車《こうしょさぎょうしゃ》.',
+    usage:
+      '一《いち》トン以上《いじょう》のフォークリフトは資格《しかく》がないと運転《うんてん》できない（forklift 1 ton ke atas tidak boleh dioperasikan tanpa lisensi）',
     _origIndex: 1756,
   },
   {
@@ -10881,6 +10991,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Kondisi kekurangan oksigen',
     desc: 'Kondisi kadar oksigen di udara turun di bawah batas aman, berisiko fatal saat bekerja di ruang tertutup; wajib ada penanggung jawab bersertifikat. Satu rangkaian dengan 溶接《ようせつ》、発破《はっぱ》、足場の資格区分《しかくくぶん》.',
+    usage:
+      '酸欠《さんけつ》の恐《おそ》れがある所《ところ》は入《はい》る前《まえ》に酸素濃度《さんそのうど》を測《はか》る（ukur kadar oksigen sebelum masuk area berisiko kekurangan oksigen）',
     _origIndex: 1757,
   },
   {
@@ -10903,6 +11015,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Kategori kualifikasi perancah',
     desc: 'Klasifikasi izin kerja untuk pemasangan dan pembongkaran perancah; perancah tinggi wajib dipimpin oleh penanggung jawab bersertifikat pelatihan keterampilan. Satu rangkaian dengan 溶接《ようせつ》、酸欠《さんけつ》、発破《はっぱ》.',
+    usage:
+      '足場《あしば》の高《たか》さで必要《ひつよう》な資格《しかく》の区分《くぶん》が変《か》わる（kategori lisensi yang diperlukan berubah menurut tinggi perancah）',
     _origIndex: 1759,
   },
   {
@@ -10937,6 +11051,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Penggaris untuk menarik garis lurus, sekaligus mengukur panj',
     desc: 'Penggaris untuk menarik garis lurus, sekaligus mengukur panjang. Satu rangkaian dengan メジャー.',
+    usage:
+      '定規《じょうぎ》を当《あ》てて材料《ざいりょう》にまっすぐな線《せん》を引《ひ》く（tarik garis lurus pada material dengan penggaris）',
     _origIndex: 1767,
   },
   {
@@ -10947,6 +11063,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Spons untuk mengelap permukaan basah',
     desc: 'Spons untuk mengelap permukaan basah. Satu rangkaian dengan ブラシ.',
+    usage:
+      'スポンジでぬれた面《めん》の水《みず》を拭《ふ》き取《と》る（lap sisa air pada permukaan basah dengan spons）',
     _origIndex: 1768,
   },
   {
@@ -10957,6 +11075,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Penanggung jawab galian terowongan',
     desc: 'Penanggung jawab bersertifikat yang mengawasi pekerjaan penggalian terowongan, termasuk pemasangan rock bolt dan penyemprotan beton (shotcrete) Satu rangkaian dengan 型わく支保工《かたわくしほこう》.',
+    usage:
+      'ずい道等《どうとう》掘削作業主任者《くっさくさぎょうしゅにんしゃ》の指揮《しき》のもとで掘《ほ》り進《すす》める（gali di bawah komando penanggung jawab galian terowongan）',
     _origIndex: 1769,
   },
   {
@@ -11051,6 +11171,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Metode tiang bor cor di tempat',
     desc: 'Metode fondasi tiang dengan cara mengebor lubang di tanah lalu mengecornya dengan beton langsung di tempat. Satu rangkaian dengan 既成杭工法《きせいくいこうほう》.',
+    usage:
+      '場所打《ばしょう》ちコン杭工法《くいこうほう》で穴《あな》を掘《ほ》ってから鉄筋《てっきん》を入《い》れて打設《だせつ》する（bor lubang lalu masukkan tulangan dan cor beton di tempat）',
     _origIndex: 1777,
   },
   {
@@ -11097,6 +11219,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Kedalaman ujung',
     desc: 'Kedalaman ujung. Satu rangkaian dengan 地縄はり《じなわはり》、根切り《ねきり》、素掘り《すぼり》.',
+    usage:
+      '杭《くい》の根入《ねい》れ長《なが》さが図面通《ずめんどお》りか確《たし》かめる（pastikan kedalaman ujung tiang sesuai gambar kerja）',
     _origIndex: 1781,
   },
   {
@@ -11119,6 +11243,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: '6mm — struktur utama gedung',
     desc: '≥6mm — struktur utama gedung. Satu rangkaian dengan 軽量鉄骨《けいりょうてっこつ》.',
+    usage:
+      '重量鉄骨《じゅうりょうてっこつ》はビルの主要《しゅよう》な骨組《ほねぐ》みに使《つか》う（baja berat dipakai untuk rangka utama gedung）',
     _origIndex: 1783,
   },
   {
@@ -11189,6 +11315,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Peredam getaran gempa',
     desc: 'Metode memasang damper pada struktur untuk menyerap dan meredam getaran gempa sehingga guncangan berkurang. Satu rangkaian dengan 耐震《たいしん》、免振《めんしん》.',
+    usage:
+      '制振《せいしん》ダンパーを入《い》れて地震《じしん》の揺《ゆ》れを吸収《きゅうしゅう》する（pasang damper peredam untuk menyerap guncangan gempa）',
     _origIndex: 1789,
   },
   {
@@ -11377,6 +11505,8 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Jaring penadah mendatar',
     desc: 'Jaring yang dibentangkan mendatar di bawah area kerja untuk menadah pekerja atau benda yang jatuh dari atas. Satu rangkaian dengan 垂直養生ネット《すいちょくようじょうねっと》.',
+    usage:
+      '作業《さぎょう》する所《ところ》の下《した》に水平養生《すいへいようじょう》ネットを張《は》る（bentangkan jaring penadah mendatar di bawah area kerja）',
     _origIndex: 1811,
   },
   {

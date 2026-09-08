@@ -1806,17 +1806,49 @@ permission, clarification, handover.
 
 This is the one criticism in that audit with real force, and it is a content project, not a mode.
 
-### ☐ 104. Nothing tests Japanese → action — `M` — `P2`
+**Measured 2026-09-07, and the gap is confirmed rather than assumed.** Every one of the 1,418 vocab
+cards now carries a `usage` sentence, and 1,409 of them are verb-final — they describe an action.
+But only **3 of 1,418** are in an imperative or request form (`〜てください`, `〜ないで`, `〜ましょう`).
+The deck describes work in dictionary form; it does not teach how an instruction is *spoken to you*,
+which is the whole of this item. `ここ持ってて` has no relative anywhere in the corpus.
+
+So this stays a content project and stays open. What the measurement changes is that it can now be
+scoped against something: the register is the gap, not the vocabulary.
+
+### ☐ 104. Nothing tests Japanese → action — `M` — `P2` — **re-sized `S` 2026-09-07: the corpus already exists**
 
 Every mode asks "what does this word mean?". None asks "what should you do?". Given
 `ホースを巻いて片付けてください`, the tested skill is choosing *coil the hose and put it away* over
 three plausible wrong actions. Closer to what the practical exam measures than recognition is.
+
+**This item is much cheaper than its `M` implies, and the reason is worth writing down before anyone
+budgets for it.** The question bank is already written: 1,409 verb-final `usage` sentences, each
+paired with its own Indonesian gloss (the correct answer) and tagged with one of 10 categories (the
+distractor pool). Median Japanese length is 20 characters — one clause, the right size for a stem.
+Nothing new has to be authored; the mode is a selector over data that already passes `audit:text`
+and `audit:content`.
+
+Two honest caveats. The sentences are dictionary-form descriptions, not the imperative register item
+103 is about — so this tests *comprehension of a described action*, which is genuinely what it
+claims, and not *responding to an order*, which is 103's job and should not be conflated with it.
+And distractors drawn from the same category are only as plausible as the category is tight;
+`sekou` holds 511 of the 1,418, so it would need sub-sampling by `source` to avoid pairing a
+scaffolding sentence against a concrete one and calling that a hard choice.
+
+**Deliberately not built here.** The 103–105 group was recorded as product direction, not branch
+work, and this branch already removes two modes; adding a twentieth on my own reading of an audit is
+the owner's call, not mine. The finding is that the call is now a cheap one.
 
 ### ☐ 105. No scenario mode — `L` — `P2`
 
 A 朝礼 that runs as a sequence: the foreman states today's work, asks for a material, then asks for
 a report — with a question after each. Combines listening, vocabulary, workplace intent and
 reporting in one thread instead of four separate modes.
+
+**Blocked on 103, not on effort.** A scenario is authored dialogue in the spoken register, and the
+measurement above says the corpus has 3 sentences in that register. Build 103's content first; this
+mode is a shell around it, and building the shell first would only produce a convincing-looking mode
+with nothing true to say.
 
 ### ☑ 106. Question source is not labelled — `S` — `P1` — **fixed 2026-09-07**
 
