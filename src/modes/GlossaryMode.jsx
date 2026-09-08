@@ -186,7 +186,13 @@ export default function GlossaryMode({ track }) {
 
   // Export selected cards as Anki TSV.
   function exportMiniDeck() {
-    const cards = sorted.filter((c) => selected.has(c.id));
+    // From the whole corpus, not the currently-filtered `sorted` (item 119/F5).
+    // `selected` survives a category change but `sorted` does not, so selecting
+    // ten terms under 安全 and then switching to 資材 left the footer saying
+    // "10 kartu dipilih" with an enabled button that downloaded nothing at all —
+    // or, with a mixed selection, silently exported the three that happened to
+    // be in view. The counter and the file now describe the same set.
+    const cards = CARDS.filter((c) => selected.has(c.id));
     if (cards.length === 0) return;
     // Anki TSV: front\tback\ttags
     const rows = cards.map((c) => {

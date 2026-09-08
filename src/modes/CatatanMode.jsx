@@ -221,7 +221,15 @@ export default function CatatanMode({ cards }) {
   useEffect(() => setLimit(PAGE), [filter, debouncedQuery]);
   const visible = useMemo(() => filtered.slice(0, limit), [filtered, limit]);
 
-  const noteCount = Object.keys(notes).filter((id) => cards.some((c) => c.id === id)).length;
+  // Item 119/F3. This was `cards.some((c) => c.id === id)` -- `Object.keys`
+  // yields strings and `c.id` is a number, so `===` never matched and the count
+  // was permanently 0. The screen whose whole purpose is these notes reported
+  // "0 catatan" and "Ada Catatan (0)" straight after saving one, while SayaTab's
+  // reset dialog counted the same object correctly and said 20. Two screens, two
+  // numbers, one of them zero, on the highest-value data in the app: that reads
+  // as data loss. (The list itself was always right -- `notes[c.id]` coerces.)
+  // Counted the way SayaTab counts it, and no longer O(notes x 1,626) per render.
+  const noteCount = Object.keys(notes).filter((id) => notes[id]).length;
 
   const filters = [
     { key: 'semua', label: 'Semua' },

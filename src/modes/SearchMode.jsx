@@ -87,8 +87,20 @@ export default function SearchMode({ track, starred, toggleStar }) {
     if (q.length < 2) return [];
     return pool
       .filter((c) => {
-        const haystack =
-          `${c.jp} ${extractReadings(c.jp) || ''} ${c.id_text} ${c.desc}`.toLowerCase();
+        // Item 119/F2: this searched `c.jp` raw, which still carries its inline
+        // 《readings》, while every surface in the app -- including this one's own
+        // result rows and its copy button -- renders the stripped form. So the
+        // string the learner sees, copies and retypes was not the string being
+        // searched: 224 of the 1,626 cards returned nothing for their own
+        // displayed text, under an empty state telling them to check their
+        // spelling. CatatanMode's search has always stripped; the two boxes
+        // disagreed. Raw `c.jp` stays in the haystack so today's
+        // kana-with-brackets matches still work -- the stripped form is added,
+        // not substituted. `desc` is guarded because interpolating an undefined
+        // one put the literal string "undefined" into the haystack.
+        const haystack = `${stripFuri(c.jp)} ${c.jp} ${extractReadings(c.jp) || ''} ${c.id_text} ${
+          c.desc ? stripFuri(c.desc) : ''
+        }`.toLowerCase();
         return haystack.includes(q);
       })
       .slice(0, 30);

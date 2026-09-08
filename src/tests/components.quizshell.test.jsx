@@ -184,9 +184,18 @@ describe('QuizShell', () => {
   });
 
   describe('empty/edge cases', () => {
-    it('returns null when questions array is empty', () => {
-      const { container } = render(<QuizShell {...defaultProps} questions={[]} />);
-      expect(container.firstChild).toBeNull();
+    it('offers a way out when the question list is empty', () => {
+      // Was `expect(container.firstChild).toBeNull()`. Returning null made the
+      // mode area blank *above* the shell's own back button, so the learner had
+      // no in-mode exit — reachable from Kuis in Mode Lemah with a category they
+      // have never got wrong, and from Vocab's Mix All over an empty set list
+      // (item 119). An empty question list is still a caller bug; it is just no
+      // longer a dead end.
+      const onExit = vi.fn();
+      render(<QuizShell {...defaultProps} questions={[]} onExit={onExit} />);
+      expect(screen.getByText('Tidak ada soal')).toBeTruthy();
+      fireEvent.click(screen.getByText(/←/));
+      expect(onExit).toHaveBeenCalled();
     });
 
     it('renders without explanation if no explanation provided', () => {

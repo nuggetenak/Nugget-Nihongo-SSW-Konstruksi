@@ -317,6 +317,11 @@ export default function ExportMode() {
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+            // Item 119/F11: this path skipped markBackedUp, whose own comment
+            // says it is "called from every path that makes one" — so a learner
+            // following this button's advice to use it for "backup rutin
+            // harian" was nagged with "⚠️ Belum pernah" in Saya forever.
+            markBackedUp();
             setStatus({ type: 'ok', msg: `✅ Delta SRS disimpan: ${summary.srsCount} kartu SRS.` });
           } catch (e) {
             setStatus({ type: 'err', msg: `❌ Gagal: ${e.message}` });
@@ -398,16 +403,39 @@ export default function ExportMode() {
               marginBottom: 'var(--space-12)',
             }}
           >
-            {[
-              { label: 'Hafal', cur: summary.known, inc: previewData.incoming.known },
-              { label: 'Kartu SRS', cur: summary.srsCount, inc: previewData.incoming.srsCards },
-              { label: 'Sesi', cur: summary.sessions, inc: previewData.incoming.sessions },
-              {
-                label: 'Versi',
-                cur: `v${summary.version}`,
-                inc: `v${previewData.incoming.version}`,
-              },
-            ].map((row, i) => (
+            {/* A delta MERGES, so showing it as `320 → 40` describes the
+                opposite of what the button does (item 119/F7). A careful user
+                reads that as "this wipes almost everything" and cancels a safe
+                restore; a careless one proceeds expecting a full one. The
+                conflict warning is already suppressed for deltas — the numbers
+                needed the same treatment. `Sesi` and `Versi` are dropped
+                entirely: a delta carries neither, and validateDelta reports 0
+                for them because they are absent, not because they are being set
+                to zero. */}
+            {(previewData.isDelta
+              ? [
+                  { label: 'Hafal', cur: summary.known, inc: `+${previewData.incoming.known}` },
+                  {
+                    label: 'Kartu SRS',
+                    cur: summary.srsCount,
+                    inc: `+${previewData.incoming.srsCards}`,
+                  },
+                ]
+              : [
+                  { label: 'Hafal', cur: summary.known, inc: previewData.incoming.known },
+                  {
+                    label: 'Kartu SRS',
+                    cur: summary.srsCount,
+                    inc: previewData.incoming.srsCards,
+                  },
+                  { label: 'Sesi', cur: summary.sessions, inc: previewData.incoming.sessions },
+                  {
+                    label: 'Versi',
+                    cur: `v${summary.version}`,
+                    inc: `v${previewData.incoming.version}`,
+                  },
+                ]
+            ).map((row, i) => (
               <div
                 key={i}
                 style={{

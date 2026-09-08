@@ -353,7 +353,7 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
   const { prefs } = useApp();
   const { recordWrong } = useProgress();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
-  const [questions] = useState(() => buildQuestions(pairs, limit));
+  const [questions, setQuestions] = useState(() => buildQuestions(pairs, limit));
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState(null);
   const [results, setResults] = useState([]);
@@ -444,6 +444,12 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
           };
         })}
         onRestart={() => {
+          // Item 119/F9: the results screen has just shown every correct answer,
+          // and this replayed the identical pairs with the identical shuffled
+          // option positions — so a perfect score was available by tapping
+          // remembered positions, and the drill measured button memory rather
+          // than the terms. Angka and Danger both rebuild; this was the outlier.
+          setQuestions(buildQuestions(pairs, limit));
           setQIdx(0);
           setSelected(null);
           setResults([]);

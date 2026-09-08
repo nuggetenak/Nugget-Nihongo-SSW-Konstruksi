@@ -99,6 +99,12 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
           </div>
         </div>
         <SprintMode
+          /* Item 119/F5: without a key React kept the finished sprint
+             mounted across the auto-advance, so its result panel — "14 benar
+             dari 17 kartu · 79%" — sat under the NEXT category's header, and
+             "🔄 Ulang" then drilled that other category. Keyed, it remounts to
+             a fresh ready screen. */
+          key={activeCat}
           cards={cat.cards}
           onExit={() => setActiveCat(null)}
           onSessionEnd={handleSprintEnd}

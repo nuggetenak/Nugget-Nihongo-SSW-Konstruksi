@@ -4,6 +4,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
+import EmptyState from './EmptyState.jsx';
 import { useAnswerStreak } from '../hooks/useAnswerStreak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import { useApp } from '../contexts/AppContext.jsx';
@@ -190,6 +191,28 @@ export default function QuizShell({
         }
         onExit={onExit}
       />
+    );
+  }
+  // An empty question list is a caller bug, and returning null made it a dead
+  // end for the learner: the mode area went blank and this early return sits
+  // *above* the shell's own back button, so the only way out was the router
+  // header. Reachable two ways today (item 119/F4 and F6) -- Kuis in Mode Lemah
+  // with a category you have never got wrong, and Vocab's Mix All over an empty
+  // set list. Guarding here closes the class rather than the two instances.
+  if (!questions?.length) {
+    return (
+      <div className={S.wrap}>
+        <div className={S.header}>
+          <button className={S.btnBack} onClick={onExit}>
+            ← {title}
+          </button>
+        </div>
+        <EmptyState
+          icon="📭"
+          title="Tidak ada soal"
+          desc="Belum ada soal yang cocok dengan pilihanmu. Coba ubah filter atau mode."
+        />
+      </div>
     );
   }
   if (!q) return null;
