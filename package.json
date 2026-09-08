@@ -21,8 +21,9 @@
     "audit:text": "node scripts/audit-data-text.mjs",
     "audit:content": "node scripts/verify-content.mjs",
     "audit:related-ids": "node scripts/audit-related-ids.mjs",
+    "audit:overlap": "node scripts/audit-question-overlap.mjs",
     "derive:quiz-links": "node scripts/derive-quiz-card-links.mjs",
-    "audit:full": "npm run audit:integrity && npm run audit:css-vars && npm run audit:text && npm run audit:content && npm run audit:related-ids",
+    "audit:full": "npm run audit:integrity && npm run audit:css-vars && npm run audit:text && npm run audit:content && npm run audit:related-ids && npm run audit:overlap",
     "prebuild": "node scripts/merge-cards.mjs && node scripts/validate-data.mjs",
     "postbuild": "node scripts/generate-precache.mjs"
   },
