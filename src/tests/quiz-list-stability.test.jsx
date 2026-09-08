@@ -12,7 +12,10 @@
 //
 // Determinism: Math.random is pinned so the component's shuffle() and this
 // file's own shuffle() draw the same order, which is what lets the test know
-// which option is wrong without guessing at one.
+// which option is wrong without guessing at one. That now includes the option
+// order too -- options are shuffled at the draw point as of the length/position
+// work, so the test applies the same shuffleOptions() permutation to find where
+// the answer landed rather than reading q.ans as a display index.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, fireEvent, act } from '@testing-library/react';
@@ -24,7 +27,7 @@ import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { JAC_OFFICIAL } from '../data/index.js';
-import { shuffle } from '../utils/shuffle.js';
+import { shuffle, shuffleOptions } from '../utils/shuffle.js';
 import WaygroundMode from '../modes/WaygroundMode.jsx';
 import JACMode from '../modes/JACMode.jsx';
 
@@ -66,7 +69,9 @@ describe('answering does not re-draw the question list underneath the user', () 
     const set = QUIZ_SETS.find((s) => backLabel().includes(s.title));
     expect(set, 'could not identify which set opened').toBeTruthy();
     const first = shuffle(set.questions)[0];
-    const wrongIdx = first.ans === 0 ? 1 : 0;
+    // Where the correct option ended up on screen, under the same pinned RNG.
+    const { correctIdx } = shuffleOptions(first.opts, first.ans);
+    const wrongIdx = correctIdx === 0 ? 1 : 0;
 
     const before = questionText();
     expect(before, 'no question rendered — the assertion below would be vacuous').toBeTruthy();

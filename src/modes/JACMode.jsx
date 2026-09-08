@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { pillStyle } from '../styles/pill.js';
-import { shuffle } from '../utils/shuffle.js';
+import { shuffle, shuffleOptions } from '../utils/shuffle.js';
 import { AUTO_NEXT_DELAYS } from '../utils/constants.js';
 import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
@@ -44,14 +44,19 @@ const SET_COUNT = {
 function mapQuestions(list, withID) {
   return list.map((q) => {
     const hasPhoto = !!q.photoDesc;
-    return {
-      question: q.q,
-      questionSub: withID ? q.hint : null,
-      options: q.opts.map((opt, i) => ({
+    // Shuffled at the draw point, once per session -- see shuffleOptions.
+    const { options, correctIdx } = shuffleOptions(
+      q.opts.map((opt, i) => ({
         text: stripFuri(opt),
         sub: q.opts_id?.[i] || null,
       })),
-      correctIdx: q.ans,
+      q.ans
+    );
+    return {
+      question: q.q,
+      questionSub: withID ? q.hint : null,
+      options,
+      correctIdx,
       explanation: q.exp,
       hint: hasPhoto ? `📷 ${q.photoDesc || 'Soal ini aslinya pakai foto'}` : null,
       hasPhoto,
