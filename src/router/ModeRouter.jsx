@@ -307,6 +307,7 @@ export default function ModeRouter() {
     },
     catatan: { cards: filteredCards },
     sumber: { onNavigate: goMode },
+    tentang: { onNavigate: goMode, section: modeParams?.section ?? null },
   };
 
   // ModeHeader owns the back control for every mode now (2026-09-04), so most

@@ -187,6 +187,14 @@ const SHAPES = {
       <path d="M16.5 13h-11M8 10.5 5.5 13 8 15.5" />
     </>
   ),
+  // Placeholder until the second generated sheet lands -- see
+  // docs/ASSET-PROMPTS.md §4b, which has this row.
+  info: (
+    <>
+      <circle cx="10" cy="10" r="7" />
+      <path d="M10 9v4.5M10 6.4v.4" />
+    </>
+  ),
 };
 
 /**

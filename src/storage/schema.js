@@ -66,6 +66,10 @@ export const DEFAULTS = {
     // means "never backed up", which is the truthful answer for anyone who has
     // not — so this is additive and needs no migration.
     lastBackupAt: null,
+    // Which release's notes this reader has seen. Absent for everyone who
+    // installed before 7.2.0 and null on a fresh install -- both truthfully
+    // mean "not seen", so this is additive and needs no migration.
+    lastSeenVersion: null,
     // Item 107: which graded listening band `dengar` speaks at — 'jelas' |
     // 'alami' | 'cepat'. Absent falls back to 'alami', which is the behaviour
     // that existed before, so this is additive too.
