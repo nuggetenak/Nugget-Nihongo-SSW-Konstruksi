@@ -34,6 +34,7 @@ import {
   clearQuizSnapshot,
 } from '../utils/quiz-persistence.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import QuestionPhoto from '../components/QuestionPhoto.jsx';
 import ExplanationText from '../components/ExplanationText.jsx';
 import { pillStyle } from '../styles/pill.js';
 import S from './modes.module.css';
@@ -286,6 +287,7 @@ export function buildJacPool() {
     explanation: q.exp,
     hasPhoto: !!q.photoDesc,
     photoDesc: q.photoDesc,
+    img: q.img ?? null,
     _source: 'jac',
     _setLabel: q.setLabel || 'JAC',
     // Item 98: tt1/tt2 are 学科 (teori) and st1/st2 are 実技 (praktik) — stated
@@ -342,6 +344,7 @@ export function buildQuizSetsPool() {
           explanation: q.exp || null,
           hasPhoto: false,
           photoDesc: null,
+          img: null,
           // Item 106: this used to read `set.source?.startsWith('csv') ? 'csv'
           // : 'wayground'`, and no set's source starts with 'csv' — the branch
           // was dead, and with it any distinction between JAC-style mockups and
@@ -445,6 +448,7 @@ export function drawExam(mode, config) {
       explanation: q.explanation,
       hasPhoto: q.hasPhoto,
       photoDesc: q.photoDesc,
+      img: q.img ?? null,
       _source: q._source,
       _setLabel: q._setLabel,
       _category: q._category ?? null,
@@ -1288,9 +1292,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             <MixedRuby text={q.id_text} />
           </div>
         )}
-        {q.hasPhoto && (
-          <div className={SM.photoHint}>📷 {q.photoDesc || 'Soal asli pakai foto'}</div>
-        )}
+        <QuestionPhoto img={q.img} photoDesc={q.photoDesc} hasPhoto={q.hasPhoto} />
       </div>
 
       {/* Item 48: neutral option buttons, not the shared OptionButton --

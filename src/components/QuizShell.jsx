@@ -15,6 +15,7 @@ import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import OptionButton from './OptionButton.jsx';
 import ResultScreen from './ResultScreen.jsx';
+import QuestionPhoto from './QuestionPhoto.jsx';
 import QuizAnnouncer from './QuizAnnouncer.jsx';
 import { saveQuizSnapshot, clearQuizSnapshot } from '../utils/quiz-persistence.js';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
@@ -292,22 +293,7 @@ export default function QuizShell({
         {showHint && q.hint && (
           <div className={S.hint}>💡 {renderJPWithRuby(q.hint, parseRubyFragments(q.hint))}</div>
         )}
-        {q.hasPhoto && (
-          <div
-            style={{
-              background: 'rgba(234,179,8,0.12)',
-              border: '1px solid rgba(234,179,8,0.4)',
-              borderRadius: 8,
-              padding: 'var(--space-6) var(--space-12)',
-              marginBottom: 'var(--space-8)',
-              fontSize: 'var(--fs-caption)',
-              color: '#ca8a04',
-            }}
-          >
-            📷 Soal ini aslinya menggunakan foto/diagram dari buku JAC. Keterangan:{' '}
-            {q.photoDesc || 'Lihat buku ujian JAC.'}
-          </div>
-        )}
+        <QuestionPhoto img={q.img} photoDesc={q.photoDesc} hasPhoto={q.hasPhoto} />
         {renderExtra?.(q)}
       </div>
 

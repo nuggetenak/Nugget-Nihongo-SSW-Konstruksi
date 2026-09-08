@@ -7,8 +7,11 @@
 > **Numbering starts at 43** deliberately — so "item 15" in a commit message unambiguously
 > means the archived plan, and nothing here collides with git history.
 >
-> **Where the open work is (re-checked 2026-09-05).** §0–§10 are the original 2026-08-25 round
-> (43–65 plus the §6 enhancements 56–60); everything there is closed except **58** and **59**.
+> **Where the open work is (re-checked 2026-09-08).** §0–§10 are the original 2026-08-25 round
+> (43–65 plus the §6 enhancements 56–60), and **that round is now entirely closed**: 58 shipped in
+> 7.1.0 and 59 was dropped by the owner on 2026-09-08. The line above said "except 58 and 59" for
+> a day after 58 landed, which is the drift this file's own §0 warns about — re-check it, don't
+> copy it.
 > Later rounds append rather than renumber: **§11** 66–68 (all closed), **§12** 69–74 (all open;
 > 69 and 73 need an owner decision), **§13** 75–81 (78 closed, rest open), **§14** 82–102 (82–92
 > closed, 93–102 open). Sections 8, 9 and 10 below describe the *first* round only and are not
@@ -445,7 +448,10 @@ project. Recording that as-stated, plus one honest caveat: a blanket yes is an a
 proposal deliberately left unanswered. Those aren't reasons to delay — they're the first decision
 each item needs, flagged so they get made rather than guessed at mid-build.
 
-**Item 59 is the one to think hardest about, and it should not be built blind.** See its entry.
+**Item 59 was the one to think hardest about, and it was not built blind — it was measured twice
+and then dropped by the owner on 2026-09-08.** See its entry for the two measurements, which stay
+on the record, and for why the block was never a budget question. Four of the five in this section
+shipped; that one is closed unbuilt, which the section's opening "blanket yes" always allowed for.
 
 ### ☑ 56. Exam-readiness estimate on the dashboard — `M` — `P2` — approved
 `StatsMode` already computes `calcReadiness`, and the dashboard already shows an exam countdown
@@ -532,7 +538,7 @@ newer one — routine for a PWA, where an offline device can sit on a cached bui
 document is now loaded as-is, and `set()`'s spread carries fields this build has never heard of
 through a write untouched.
 
-### ☐ 59. Offline-capable audio via pre-generated clips — `L` — `P3` — approved, **measure first**
+### ✖ 59. Offline-capable audio via pre-generated clips — `L` — `P3` — **DROPPED 2026-09-08 (owner decision)**
 Item 25 made speech failure *legible*; it can't make it *work*. A worker studying on a train with
 no local ja-JP voice has no audio at all. Pre-generated clips fix it properly.
 
@@ -588,6 +594,34 @@ so the clips still cannot be produced at all — the blocker is the same one, no
 The split raised the deck from 1,438 cards to 1,626, so the full-corpus figure quoted above is now
 optimistic by roughly that ratio; the scoped ~200-term JAC subset is unchanged in size and remains
 the only version worth costing. Restating the block rather than pretending to close it.
+
+**Dropped 2026-09-08, by the owner, and this is where it ends.** The item is not being deferred
+again. Three sessions have now reached the same wall from three directions and the record is worth
+keeping so nobody re-opens it on a hunch:
+
+- The **measurement is settled**, not pending. 3.29 MB precached today; ~5 KB per Opus clip
+  measured against real encodes, not estimated. The full corpus is +213% and was never defensible
+  for a cheap-phone, metered-connection audience. Only the ~200-term subset (+30%) ever fitted.
+- The **blocker is not a budget question and never was.** No ja-JP synthesiser exists in any
+  environment this repo has been built in, so the clips cannot be produced *at all* — a build
+  step that cannot run once is not a build step. What the item actually needs is a cloud TTS
+  contract or licensed human recordings for ~200 terms. That is a procurement decision with a
+  bill attached, not a coding task, and it is not one an agent session can make.
+- The gap it exists to close is **already legible rather than silent**: item 25 made speech
+  failure visible, and item 107 (7.2.0) graded the live `speechSynthesis` path into three speed
+  bands. A learner whose phone has a Japanese voice has audio, and one whose phone does not is
+  told so plainly instead of tapping a dead button.
+
+If the owner ever buys a ja-JP voice, this is a **new item** against the corpus and install
+footprint of that day, not a resumption of this one — both numbers above will be stale by then.
+The two measurements are kept above because they are the expensive part and re-deriving them
+would be waste; the *decision* they informed is closed.
+
+**Consequence for `docs/ASSET-PROMPTS.md` and `PWA_RELEASE_SPEC.md`: none.** Nothing was built, so
+nothing is left behind to remove. Confirmed rather than assumed:
+`grep -rn "\.opus\|\.mp3\|\.ogg\|new Audio(\|<audio" src/ public/` returns nothing at all — no
+clip, no player, no precache entry. The 19 files matching `audioEnabled` are the
+`speechSynthesis` toggle, which is item 25/107's surface and was never this item's.
 
 ### ☑ 60. Typed-answer leniency is invisible — `S` — `P2` — approved
 `QuizProduksiMode` advertises "pencocokan fleksibel (huruf besar/kecil diabaikan)" but a learner
@@ -682,8 +716,8 @@ _(Items 43–65 only; the later rounds record their own spec impact in their com
 
 ## 10. Suggested order — items 43–65
 
-_(All batches below are done except **58** and **59** in Batch F. Later rounds set their own
-order; §14 states its own.)_
+_(Every batch below is closed. 58 shipped in 7.1.0; 59 was dropped 2026-09-08 and its entry says
+why. Later rounds set their own order; §14 states its own.)_
 
 **Batch A (P0, highest value):** 43 → 44 → 65 — the SRS-review parity set. `ReviewMode` is the
 mode a learner uses daily and longest, and is currently the poorer relation of `FlashcardMode` in
@@ -706,11 +740,13 @@ the mode-shape table and on deferred-feedback before starting.
 **Batch F (approved enhancements):** 57 → 60 → 56 → 58 → 59, roughly cheapest-first. 57 is nearly
 free if done *during* Batch B, since item 46 is already rewriting every results screen — do it
 there rather than as a separate pass. 60 is self-contained. 56 and 58 each need their open
-decision made first (see their entries). **59 is last on purpose** — it needs item 61 done and the
-combined payload measured before it can be scoped honestly.
+decision made first (see their entries). **59 was last on purpose** — it needed item 61 done and
+the combined payload measured before it could be scoped honestly. That ordering worked exactly as
+intended: the measurement happened, and it is what closed the item rather than building it.
 
-**Nothing is unapproved any more.** Every item in this plan is cleared to build; what varies is
-whether the *shape* is settled (most) or still needs a decision (56, 58, 59).
+**Nothing was ever unapproved here.** Every item in this round was cleared to build; what varied
+was whether the *shape* was settled (most) or still needed a decision (56, 58, 59). All three of
+those decisions have since been made — 56 and 58 into shipped features, 59 into a drop.
 
 ---
 
@@ -1665,7 +1701,7 @@ always in the data (`tt*` = 学科, `st*` = 実技) and in `SimulasiMode`'s own 
 mapper had never passed it through, which is also why the results screen's teori/praktik breakdown
 silently rendered nothing for this source. It works there now too.
 
-### ☐ 99. The exam cannot show the pictures the exam has — `S` — `P3`
+### ☑ 99. The exam cannot show the pictures the exam has — `S` — `P3` — **fixed 2026-09-08 (7.4.0)**
 
 12 of the 95 JAC questions carry a `photoDesc`, and both `simulasi` and `QuizShell` render it as
 text ("📷 Soal asli pakai foto"). Reading a description of a diagram is not answering a question
@@ -1682,6 +1718,45 @@ One thing did change around it: item 98 gave JAC questions a `_category`, so a p
 *exists* for this source where before it silently rendered nothing. That makes the caveat above
 sharper rather than softer — the number is real now, and 12 of the questions behind it are being
 answered from a text description of a picture.
+
+**Fixed 2026-09-08. The owner supplied the four JAC Official sample-question PDFs and all twelve
+pictures are now in the app**, as `public/images/jac-official/<question id>.webp` — 280.7 KB for
+the set, 720 px long edge, WebP q=78.
+
+**Correct one thing in the re-check above before trusting the rest of it:** "No JAC question carries
+any image field at all (`photo`, `image`, `img` — none exist)" was wrong when it was written. Every
+one of the 95 questions had carried `img: null` since the sets were authored; what was missing was
+a *renderer*, not a field. The grep behind that line must have been for a non-null value. It is the
+exact failure §0 describes — a claim written as a fact and then built on — and it cost this item a
+session, because "the data model needs designing first" is a much bigger-sounding blocker than
+"fill in twelve strings".
+
+**Three things turned up in the doing, and two of them were worse than the item as filed:**
+
+- **Five of the twelve `photoDesc` strings named the correct answer outright** — "…— ini adalah
+  免振装置 (seismic isolator)", "…— ini adalah タッチアンドコール". On those five the substitute
+  was not a degraded question, it was a free mark. They are rewritten to describe what is visible
+  without naming any option, and they are the image's `alt` text now, so the leak would have been
+  to screen-reader users specifically. `jac-question-images.test.js` asserts no option's text
+  appears in any description.
+- **`JACMode` overwrote `hint` with `photoDesc`** on exactly these twelve questions, so they lost
+  their Indonesian gloss, and the same sentence then rendered twice — once as the hint, once in
+  QuizShell's photo box, each prefixed with a 📷 the data already carried ("📷 📷 Foto: …").
+- **The picture is not always the embedded image.** `st1_q10` ("青い矢印が指し示す設備") draws its
+  blue arrow as a vector path over the diagram, and seven of the twelve pages paint white
+  rectangles over labels and photo credits the exam is deliberately hiding. Extracting the embedded
+  raster would have lost the arrow — leaving a question that points at nothing — and *restored* the
+  labels the exam masked. Each asset is a clip render of the page region instead, which is what a
+  candidate actually sees. `scripts/archive/extract-jac-images.py` records the page and xref each
+  one came from.
+
+The caveat this item raised about praktik sub-scores is **withdrawn**: those twelve questions are
+answered from the picture now, so the number means what it says.
+
+Deliberately **not** precached — `jac` is not one of the three high-traffic modes whose chunks are,
+and precaching a mode's images while fetching its code on demand would be incoherent. `sw.js`
+serves same-origin images cache-first, so they persist offline from the first JAC session at zero
+install cost. See `docs/COMPONENT_SPEC.md` §20.
 
 ### ☑ 100. The results screen only shows what you got wrong, and only partly — `S` — `P3` — **fixed 2026-09-07**
 
@@ -2000,10 +2075,13 @@ as **filed wrongly** rather than as done.
   the modes layer, never rendered by any test: `ExportMode` (722), `AngkaMode` (710),
   `ConfusionMode` (656), `DengarMode` (524), `DangerMode` (492), `GlossaryMode` (492),
   `SprintMode` (459), `QuizMode` (439), `VocabMode` (372), `CatatanMode` (331), `SearchMode` (321),
-  `SumberMode` (293), `FocusMode` (198). **Not audited.**
+  `SumberMode` (293), `FocusMode` (198). **Audited and repaired in 7.3.0** — the tick above was
+  earned there, and this line still read "Not audited" a release later. It is the ticked-box-stale-
+  body drift §0 warns about; corrected 2026-09-08.
 - ☑ **120. Verify the numbers the app shows the learner** — `M` — `P1`. Readiness score, streak and
-  milestone arithmetic, and whether the four SRS buckets partition the deck. **Not audited**, and
-  findings 128–129 say the inputs are already wrong.
+  milestone arithmetic, and whether the four SRS buckets partition the deck. **Audited and repaired
+  in 7.3.0** (`120ab6f`: a timezone change no longer wipes the streak, readiness cannot go
+  negative). Same stale-body correction as 119, 2026-09-08.
 - ☑ **127. `ConfusionMode` records no wrong answers anywhere** — `S` — `P1`. 656 lines, the only
   quiz mode with no wrong-tracking at all. Same class as item 93, fixed for `simulasi` only.
 - ☑ **128. Wayground, Vocab and JAC never bridge mistakes to the card tracker** — `S` — `P1`. They

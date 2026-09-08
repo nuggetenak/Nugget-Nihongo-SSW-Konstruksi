@@ -632,3 +632,42 @@ source credits from `SOURCE_GROUPS` + `SOURCE_META`. Neither is retyped as prose
 rule applied to text: the registries already carry a reviewed one-line description of every mode
 and source, so a second copy would drift. `tentang-mode.test.jsx` iterates the registry and asserts
 every mode appears, which means adding a mode updates the guide with no edit to that screen.
+
+## 20. `QuestionPhoto` — the picture half of a question (7.4.0)
+
+Twelve of the 95 JAC Official questions cannot be answered from their text. `写真の道具の名前は
+どれか` asks which of four tools is *in the photo*; `青い矢印が指し示す設備の名前はどれか` asks
+what the *blue arrow* points at. They shipped with `img: null` and a written `photoDesc` standing
+in for the picture — and on five of the twelve that description named the correct answer outright,
+so the substitute was worse than the gap on the questions it covered.
+
+**One component, two call sites.** `QuizShell` (`jac`, `wayground`, `vocab`) and `SimulasiMode`
+each had their own copy of the photo markup, and they disagreed: `QuizShell` rendered an amber box
+with inline styles, `SimulasiMode` a gold one from its own module. Both prefixed a 📷 that the data
+already carried, so the box read "📷 📷 Foto: …". `QuestionPhoto` is now the only place either
+renders, per §6 and §1.
+
+| `img` | `hasPhoto` | renders |
+|---|---|---|
+| set | — | the real `<img>`, with `photoDesc` as its `alt` |
+| unset | `true` | the written-description fallback (how a question enters the bank before its asset does) |
+| unset | falsy | nothing |
+
+**`photoDesc` is alt text now, and that changes what it may say.** A description that names the
+answer hands it to screen-reader users on exactly the questions sighted users have to look at.
+All twelve were rewritten to describe what is visible without naming any option, and
+`jac-question-images.test.js` asserts no option's text appears in any description.
+
+**The frame reserves its height before the image loads** (`aspect-ratio: 4 / 3`, capped at `44vh`).
+Not cosmetic: without it the options row jumps down when the photo arrives, and on a slow
+connection a tap aimed at option 1 lands on option 2. Four of the twelve assets are wider than 4:3
+and letterbox inside the frame rather than resizing the card.
+
+**Asset provenance and why they are not precached** — see `scripts/archive/extract-jac-images.py`,
+which records which page of which JAC PDF each file came from, and why each is a *page render*
+rather than an embedded-image extract (the blue arrow and the exam's own label masking are page
+drawings, not part of the photo). 280.7 KB for all twelve, 720px long edge, WebP q=78. They are
+deliberately absent from `PRECACHE_URLS`: `jac` is not one of the three high-traffic modes whose
+chunks are precached, so precaching its images while its own 8.6 kB of code is fetched on demand
+would be incoherent. `sw.js` serves same-origin images cache-first, so they persist for offline use
+from the learner's first JAC session onward, at zero cost to install size.
