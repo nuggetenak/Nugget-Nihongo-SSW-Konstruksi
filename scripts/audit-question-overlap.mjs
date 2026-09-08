@@ -32,56 +32,26 @@ const MAX_DUPLICATE_GROUPS = 258;
 
 // Pairs whose answers differ only in phrasing -- one bank spells the answer out
 // and the other abbreviates it (安全データシート vs 安全データシートSDS/MSDS).
-// All 23 were read individually on 2026-09-08; none is a teaching conflict, and
+// The list was 23 on 2026-09-08; 17 of those were the *same* answer written long in
+// one bank and short in the other, and balancing option lengths (item 114) trimmed
+// the long form to the short one the other bank already shipped, so those groups
+// stopped disagreeing and their entries came out. Each remaining one was read
+// individually; none is a teaching conflict, and
 // they must NOT be "fixed" into identical strings. Anything not on this list is
 // treated as a real contradiction and fails.
 const REVIEWED_VARIANTS = new Set([
   // KY危険予知活動  |  KY活動
   'jmt01/27 ~ wt01/8',
-  // 清潔に保つ  |  清潔に保つ衛生管理
-  'jmt04/23 ~ wt01/14',
-  // 安全データシート  |  安全データシートSDS/MSDS
-  'jmt01/1 ~ wt02/9 ~ wt06/7',
   // 事業主が全額負担する  |  事業主使用者が全額負担する
   'jmt01/18 ~ wt03/18',
-  // 1件500万円以上  |  1件500万円以上建築工事は1500万円以上
-  'jmt02/3 ~ wt04/3',
   // 現場で働くすべての労働者の安全を管理する  |  現場で働くすべての労働者下請含むの安全を管理する
   'jmt02/9 ~ wt05/4',
-  // 119番  |  119番消防・救急
-  'jmt03/17 ~ wt08/6',
-  // 元請負業者  |  元請負業者現場の施工管理責任者
-  'jmt02/29 ~ wt08/20',
-  // 元請業者  |  元請業者施工管理者
-  'jmt04/11 ~ wt09/1',
   // 維持  |  維持しつけ
   'jmt04/20 ~ wt09/3',
   // 土留めを設置する  |  土留め矢板などを設置する
   'jmt04/22 ~ wt09/4',
-  // 統括安全衛生管理体制  |  統括安全衛生管理体制混在作業における安全管理
-  'jmt06/11 ~ wt10/11',
   // 強い光と飛散物から目を守る  |  強い光アーク光と飛散物から目を守る
   'jml05/6 ~ wgl03/11',
-  // 厚さ計  |  厚さ計ノギスまたは専用ゲージ
-  'jml05/12 ~ wgl03/17',
-  // アルミガラス布  |  アルミガラス布ALGC
-  'jml05/19 ~ wgl04/19',
-  // 75度程度  |  75度程度開き止め金具を確実に
-  'jml02/3 ~ wgl07/3',
-  // 最低部  |  最低部末端
-  'jml02/5 ~ wgl07/5',
-  // ろう付け  |  ろう付けブレージング
-  'jml02/11 ~ wgl07/11',
-  // 2m以内  |  2m以内ショックアブソーバー含む
-  'jml02/14 ~ wgl07/14',
-  // 対角順  |  対角順クロス締め
-  'jml02/20 ~ wgl07/20',
-  // 先芯  |  先芯鉄先・樹脂先
-  'jml03/5 ~ wgl08/5',
-  // 安全帯  |  安全帯墜落防止
-  'jml03/6 ~ wgl08/6',
-  // 断熱材  |  断熱材吹付け
-  'jml04/1 ~ wgl09/1',
 ]);
 
 const norm = (s = '') =>
