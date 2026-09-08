@@ -6,6 +6,7 @@ import { useState, useCallback, useEffect, useMemo } from 'react';
 import s from './SayaTab.module.css';
 import { CARDS } from '../data/cards.js';
 import { exportAll, importAllSafe, resetAll, get as storageGet } from '../storage/engine.js';
+import { loadToken } from '../utils/gist-sync.js';
 import { markBackedUp, describeBackup } from '../utils/backup-state.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -166,9 +167,16 @@ export default function SayaTab() {
     if (streakData?.days > 0) parts.push(`${streakData.days} hari streak`);
     if (notesCount > 0) parts.push(`${notesCount} catatan`);
     const lossLine = parts.length > 0 ? `${parts.join(', ')} akan hilang, dan k` : 'K';
+    // Named separately from the loss line because it is a different kind of
+    // consequence: the gist itself is not deleted, the phone just stops being
+    // able to reach it. resetAll() clears the token either way (item 133) — the
+    // copy is here so the user is told before, not surprised after.
+    const backupLine = loadToken()
+      ? ' Koneksi cadangan GitHub juga diputus dari HP ini (cadangan di GitHub tetap ada).'
+      : '';
 
     const ok = await confirm(
-      `${lossLine}amu akan mulai dari awal lagi (termasuk pengaturan awal). Ini tidak bisa dibatalkan.`,
+      `${lossLine}amu akan mulai dari awal lagi (termasuk pengaturan awal). Ini tidak bisa dibatalkan.${backupLine}`,
       'Reset semua',
       'Batal',
       { label: 'Cadangkan data dulu →', onClick: handleExport }

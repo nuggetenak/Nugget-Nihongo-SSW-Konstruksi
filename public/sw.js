@@ -28,10 +28,44 @@ const PRECACHE_URLS = [
 ];
 
 // ── Install ────────────────────────────────────────────────────────────────
+// The shell is required; everything else is best-effort.
+//
+// This was one `cache.addAll(PRECACHE_URLS)` with no catch, and `Cache.addAll`
+// is atomic by spec: one failed request out of the ~38 the postbuild script
+// writes in here rejects the whole promise, which rejects `waitUntil`, which
+// discards the installation. Nothing was cached — not even `/` or index.html —
+// and nothing surfaced. A first-time user on a flaky connection got zero
+// offline capability instead of the core loop; a returning user silently kept
+// the old worker. For an audience on unreliable connections that was the worst
+// failure mode in the app: it turned a partial network into no app at all.
+//
+// Split in two so a missing font or an icon can no longer cost the shell.
+// SHELL_URLS still uses addAll — if the app's own entry point cannot be
+// cached there is nothing to install and failing loudly is right. The rest go
+// through allSettled, so each one is independent and the failures are named in
+// the console instead of vanishing.
+// Named, not sliced by position: generate-precache.mjs rewrites PRECACHE_URLS
+// wholesale at postbuild, and an index-based split would silently demote the
+// shell to best-effort the day that script reorders its output.
+const SHELL_URLS = [`${BASE}/`, `${BASE}/index.html`];
+const OPTIONAL_URLS = PRECACHE_URLS.filter((url) => !SHELL_URLS.includes(url));
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_STATIC)
-      .then(cache => cache.addAll(PRECACHE_URLS))
+    caches.open(CACHE_STATIC).then(async (cache) => {
+      await cache.addAll(SHELL_URLS);
+      const results = await Promise.allSettled(OPTIONAL_URLS.map((url) => cache.add(url)));
+      const failed = results
+        .map((r, i) => (r.status === 'rejected' ? OPTIONAL_URLS[i] : null))
+        .filter(Boolean);
+      if (failed.length) {
+        console.error(
+          `[sw] ${failed.length}/${OPTIONAL_URLS.length} assets missed the precache; ` +
+            'the app is installed and will fetch them on demand:',
+          failed
+        );
+      }
+    })
     // Deliberately no immediate self-activation call here — see UI_UX_PLAN.md
     // item 37. A new worker now stays in the `waiting` state so an open
     // session keeps running on the JS bundle it started with (its lazy
