@@ -24,10 +24,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Format check
+        run: npm run format:check
       - name: Lint
         run: npm run lint
       - name: Tests
         run: npm test -- --run
+      # Item 134, and this job is where it bites hardest: the build step below
+      # regenerates src/data/cards.js from src/data/source/, so a direct edit to
+      # the generated file is silently reverted at deploy. verify-content.mjs is
+      # the only check that catches it and it lives here, in audit:full, which
+      # nothing ran.
+      - name: Data audits
+        run: npm run audit:full
 
   build:
     needs: validate
