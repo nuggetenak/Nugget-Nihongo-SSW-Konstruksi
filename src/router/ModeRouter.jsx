@@ -215,6 +215,12 @@ export default function ModeRouter() {
       starred,
       onToggleStar: toggleStar,
       filterIds: modeParams?.filterIds ?? null,
+      // Why a filtered deck is filtered. Defaults to 'wrong' so the eight
+      // onRetryWrong call sites below are unchanged and cannot regress; the
+      // banner used to be gated on filterIds alone, which painted "❌ Latihan
+      // kartu salah" over any filtered deck -- including SumberMode's "browse
+      // this PDF's cards", where nothing is wrong at all.
+      filterReason: modeParams?.filterReason ?? 'wrong',
       // Item 75. The one study mode that recorded nothing. FlashcardMode fires
       // this on unmount when at least one card was rated -- a flashcard sitting
       // has no natural length, so leaving is the end of it.

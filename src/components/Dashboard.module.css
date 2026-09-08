@@ -501,24 +501,49 @@
   gap: var(--space-6);
 }
 
+/* A button now, so it needs the UA resets. Treatment copied from .quickTile
+   above rather than invented, and min-height meets the --tap-min floor the rest
+   of the app enforces -- these rows were ~34px. */
 .recentCard {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-12);
+  width: 100%;
+  min-height: var(--tap-min);
   background: var(--ssw-surface);
+  border: none;
   border-radius: var(--r-md);
   padding: var(--space-10) var(--space-14);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease-smooth);
 }
 
+.recentCard:hover {
+  background: var(--ssw-surfaceHover);
+}
+
+.recentCard:active {
+  background: var(--ssw-surfaceActive);
+}
+
+/* Two-line clamp, not nowrap+ellipsis. About 28 cards have a `jp` that is not
+   meaningfully Japanese -- acronyms like "COS（Change Over Switch）" -- and
+   JpFront renders those as plain left-aligned text. The old trio chopped them
+   mid-word, which is what made a recent row unreadable rather than merely
+   abbreviated. */
 .recentJp {
   font-size: var(--fs-caption);
   font-weight: var(--fw-semi);
   color: var(--ssw-text);
   min-width: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .recentId {
