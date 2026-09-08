@@ -25,17 +25,37 @@ export const TEXT_SCALES = [
   { key: 'sangat-besar', label: 'Sangat Besar', pct: 125, emoji: '📢' },
 ];
 
-export const DEFAULT_TEXT_SCALE = 'normal';
+// Owner decision, 2026-09-08: the default is `kecil`, deliberately NOT the
+// 100% no-op. This is worth reading before "restoring" it, because every other
+// artefact in this repo argues the other way and will look like the authority.
+//
+// What it costs, measured: --space-* is rem on purpose (DESIGN_SPEC §4), so 90%
+// shrinks spacing as well as text -- the whole layout gets ~10% denser.
+// --fs-body 15 -> 13.5px, --fs-small 13 -> 11.7px, --fs-micro 11 -> 9.9px, and
+// the furigana floor 11 -> 9.9px. A census of the running app found 85% of its
+// text at <=13px and called that "the app's largest usability problem"; the
+// whole fluid rem scale exists to fix it, and this walks part of it back.
+// --tap-min stays px, so tap targets are unaffected.
+//
+// It ships because the owner asked for it directly, and the control is one tap
+// away in Saya. It is a decision, not drift. `text-scale.test.js` carries the
+// same statement in a test name so a failure says so out loud.
+export const DEFAULT_TEXT_SCALE = 'kecil';
+
+const DEFAULT_INDEX = TEXT_SCALES.findIndex((s) => s.key === DEFAULT_TEXT_SCALE);
 
 export function getTextScale(key) {
-  return TEXT_SCALES.find((s) => s.key === key) ?? TEXT_SCALES[1];
+  // Derived from DEFAULT_TEXT_SCALE, not a literal index: the old `TEXT_SCALES[1]`
+  // encoded the default a second time, so changing it in one place left the
+  // fallback pointing at the old rung.
+  return TEXT_SCALES.find((s) => s.key === key) ?? TEXT_SCALES[DEFAULT_INDEX];
 }
 
 /** Next scale in the cycle — the settings Row pattern this app uses is a
  *  tap-to-advance, not a picker. */
 export function nextTextScale(key) {
   const i = TEXT_SCALES.findIndex((s) => s.key === key);
-  return TEXT_SCALES[(i === -1 ? 1 : i + 1) % TEXT_SCALES.length].key;
+  return TEXT_SCALES[(i === -1 ? DEFAULT_INDEX : i + 1) % TEXT_SCALES.length].key;
 }
 
 /**

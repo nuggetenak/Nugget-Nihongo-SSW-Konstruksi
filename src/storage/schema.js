@@ -4,6 +4,8 @@
 // v1→v6 upgrade chain and STORAGE_VERSION history.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+
 export const STORAGE_VERSION = 7;
 
 export const DOCS = {
@@ -53,7 +55,7 @@ export const DEFAULTS = {
     audioEnabled: true, // Web Speech API toggle
     studyAnchor: null, // 'morning' | 'lunch' | 'evening'
     furiganaPolicy: 'always', // 'always' | 'tap' | 'hidden'
-    textScale: 'normal', // 'kecil' | 'normal' | 'besar' | 'sangat-besar' — see utils/text-scale.js
+    textScale: DEFAULT_TEXT_SCALE, // 'kecil' | 'normal' | 'besar' | 'sangat-besar' — see utils/text-scale.js
     flashcardHintCount: 0, // resets on resetAll()
     notes: {}, // personal notes per card { [cardId]: string }
     speakOnFlip: false, // speak on card flip instead of advance

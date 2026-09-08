@@ -223,10 +223,13 @@
 }
 
 /* ── Keyboard hint ── */
+/* textDim, not textFaint: this is instructional text shown on every quiz
+   question at --fs-micro, which is the app's smallest size. textFaint is the
+   disabled/decorative tier and does not reach 4.5:1 in either theme. */
 .kbHint {
   text-align: center;
   font-size: var(--fs-micro);
-  color: var(--ssw-textFaint);
+  color: var(--ssw-textDim);
   margin-top: var(--space-8);
   letter-spacing: 0.3px;
 }
