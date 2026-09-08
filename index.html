@@ -159,6 +159,28 @@
         height: 100dvh;
         background: #fffdf5;
       }
+
+      /* The stored theme lives in lz-string-compressed localStorage, which
+         cannot be read before paint without shipping a decompressor in <head>.
+         Keying the splash off the OS instead is exactly right for theme:
+         'sistem', right for the common case where an explicit preference agrees
+         with the device, and no worse than before for a deliberate mismatch
+         (OS light + app dark), which still shows one light frame as it always
+         has. main.jsx's applyTheme() takes over the moment it runs.
+
+         Hex literals rather than --ssw-* on purpose: this block paints before
+         global.css and before applyTheme, so no custom property exists yet.
+         Values are THEMES.dark's --ssw-bg and --ssw-text from styles/theme.js;
+         keep them in step by hand. */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0d0b08;
+          color: #fef3c7;
+        }
+        #root:empty::before {
+          background: #0d0b08;
+        }
+      }
     </style>
 
     <!-- Service Worker registration — inline to register before any JS loads.

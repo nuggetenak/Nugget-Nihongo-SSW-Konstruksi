@@ -21,7 +21,7 @@ export default function App() {
   const {
     track,
     setTrack,
-    isDark,
+    theme,
     toggleTheme,
     onboarded,
     completeOnboarding,
@@ -152,7 +152,7 @@ export default function App() {
               onChangeTrack={() => setTrack(null)}
               onGoTab={goTab}
               srs={srs}
-              isDark={isDark}
+              theme={theme}
               onToggleTheme={toggleTheme}
             />
           </ErrorBoundary>

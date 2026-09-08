@@ -15,6 +15,7 @@ import {
 import { get, set as storageSet } from '../storage/engine.js';
 import { MODE_COMPONENTS } from '../router/modes.js';
 import { applyTheme } from '../styles/theme.js';
+import { resolveIsDark, prefersDarkOS, nextTheme, DEFAULT_THEME } from '../utils/theme-mode.js';
 import { applyTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
 import { useToast } from '../components/Toast.jsx';
 
@@ -47,9 +48,35 @@ export function AppProvider({ children }) {
   }, []);
 
   // ── Theme ──
+  // Tracks the device preference so `sistem` repaints when the phone flips at
+  // sunset, rather than only on the next reload. Subscribed unconditionally
+  // rather than only while `sistem` is selected: one listener for the app's
+  // life costs nothing, and it means osDark is already correct the instant
+  // someone switches to `sistem`.
+  const [osDark, setOsDark] = useState(prefersDarkOS);
   useEffect(() => {
-    applyTheme(prefs.theme === 'dark');
-  }, [prefs.theme]);
+    const mql = window.matchMedia?.('(prefers-color-scheme: dark)');
+    if (!mql) return;
+    const onChange = (e) => setOsDark(e.matches);
+    // Both APIs, feature-detected: Safari below 14 and the older WebViews this
+    // app is built for only have addListener, and two test files stub
+    // matchMedia with a bare { matches } object that has neither.
+    if (mql.addEventListener) mql.addEventListener('change', onChange);
+    else if (mql.addListener) mql.addListener(onChange);
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener('change', onChange);
+      else if (mql.removeListener) mql.removeListener(onChange);
+    };
+  }, []);
+
+  const isDark = resolveIsDark(prefs.theme ?? DEFAULT_THEME, osDark);
+
+  // One effect, which also runs on mount -- the separate mount-only applyTheme
+  // that used to sit below was redundant once this depends on the resolved
+  // boolean rather than on prefs.theme.
+  useEffect(() => {
+    applyTheme(isDark);
+  }, [isDark]);
 
   // ── Text scale ──
   // main.jsx applies the stored value pre-paint; this keeps it in step when the
@@ -58,13 +85,11 @@ export function AppProvider({ children }) {
     applyTextScale(prefs.textScale ?? DEFAULT_TEXT_SCALE);
   }, [prefs.textScale]);
 
-  // Apply on mount
-  useEffect(() => {
-    applyTheme(prefs.theme === 'dark');
-  }, []); // eslint-disable-line
-
+  // Cycles Terang -> Gelap -> Ikuti Sistem -> Terang. Still named toggleTheme:
+  // Dashboard's prop and its test both use that name, and renaming buys nothing
+  // this comment does not say.
   const toggleTheme = useCallback(() => {
-    setPref('theme', prefs.theme === 'dark' ? 'light' : 'dark');
+    setPref('theme', nextTheme(prefs.theme ?? DEFAULT_THEME));
   }, [prefs.theme, setPref]);
 
   // ── Navigation ──
@@ -426,7 +451,10 @@ export function AppProvider({ children }) {
       // Prefs
       track: prefs.track,
       setTrack,
-      isDark: prefs.theme === 'dark',
+      isDark,
+      // The raw preference too: a boolean cannot express three states, and the
+      // Dashboard button and the Saya row both need to name the current one.
+      theme: prefs.theme ?? DEFAULT_THEME,
       toggleTheme,
       onboarded: prefs.onboarded,
       completeOnboarding,
@@ -453,6 +481,7 @@ export function AppProvider({ children }) {
     }),
     [
       prefs,
+      isDark,
       tab,
       setTab,
       mode,

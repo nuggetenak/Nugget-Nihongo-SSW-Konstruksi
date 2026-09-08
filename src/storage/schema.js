@@ -5,6 +5,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { DEFAULT_THEME } from '../utils/theme-mode.js';
 
 export const STORAGE_VERSION = 7;
 
@@ -46,7 +47,7 @@ export const DEFAULTS = {
   prefs: {
     _v: STORAGE_VERSION,
     track: null,
-    theme: 'light',
+    theme: DEFAULT_THEME, // 'light' | 'dark' | 'sistem' — see utils/theme-mode.js
     onboarded: false,
     tutorialFlashcard: false,
     lastMode: null,

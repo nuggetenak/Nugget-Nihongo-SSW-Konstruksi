@@ -17,6 +17,7 @@ import { JP_LIST_MAX } from '../utils/jp-helpers.js';
 import { recommendMode } from '../utils/recommend-mode.js';
 import { formatCount } from '../utils/format.js';
 import { MODE_META } from '../router/modes.js';
+import { getThemeMode } from '../utils/theme-mode.js';
 
 const getRecent = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
 
@@ -56,7 +57,7 @@ export default function Dashboard({
   onChangeTrack,
   onGoTab,
   srs,
-  isDark,
+  theme,
   onToggleTheme,
 }) {
   const { prefs } = useApp();
@@ -147,8 +148,14 @@ export default function Dashboard({
           >
             {trackInfo.icon} {trackInfo.jp}
           </button>
-          <button className={s.themeBtn} onClick={onToggleTheme} aria-label="Ganti tema">
-            {isDark ? '☀️' : '🌙'}
+          {/* Three states now, so the glyph comes from the registry and the
+              label names the current one -- "Ganti tema" never said which. */}
+          <button
+            className={s.themeBtn}
+            onClick={onToggleTheme}
+            aria-label={`Tema: ${getThemeMode(theme).label} — ketuk untuk ganti`}
+          >
+            {getThemeMode(theme).emoji}
           </button>
         </div>
       </header>

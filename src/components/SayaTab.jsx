@@ -19,6 +19,7 @@ import { formatCount } from '../utils/format.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { getTextScale, nextTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { getThemeMode, DEFAULT_THEME } from '../utils/theme-mode.js';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
@@ -63,6 +64,7 @@ export default function SayaTab() {
     track,
     setTrack,
     isDark,
+    theme,
     toggleTheme,
     toast,
     goMode,
@@ -412,7 +414,18 @@ export default function SayaTab() {
           sub="Tap untuk ganti"
           onClick={() => setTrack(null)}
         />
-        <Row label="Tema" value={isDark ? '🌙 Gelap' : '☀️ Terang'} onClick={toggleTheme} />
+        <Row
+          label="Tema"
+          value={`${getThemeMode(theme ?? DEFAULT_THEME).emoji} ${getThemeMode(theme ?? DEFAULT_THEME).label}`}
+          // "Ikuti Sistem" alone never tells you which way it resolved, which
+          // is the one thing a reader wants to confirm after choosing it.
+          sub={
+            theme === 'sistem'
+              ? `Mengikuti pengaturan HP — sekarang ${isDark ? 'gelap' : 'terang'}`
+              : 'Ketuk untuk ganti'
+          }
+          onClick={toggleTheme}
+        />
         {editingGoal ? (
           <div className={s.inlineEdit}>
             <label className={s.inlineEditLabel} htmlFor="saya-daily-goal">

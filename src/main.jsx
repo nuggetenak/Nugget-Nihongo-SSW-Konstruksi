@@ -3,6 +3,7 @@ import './styles/global.css';
 import { createRoot } from 'react-dom/client';
 import { init as storageInit, get as storageGet } from './storage/engine.js';
 import { applyTheme } from './styles/theme.js';
+import { resolveIsDark, DEFAULT_THEME } from './utils/theme-mode.js';
 import { applyTextScale, DEFAULT_TEXT_SCALE } from './utils/text-scale.js';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import { ToastProvider } from './components/Toast.jsx';
@@ -20,8 +21,7 @@ storageInit();
 // everything, so applying them in an effect means a visible reflow on every
 // load for anyone who isn't on the defaults.
 const prefs = storageGet('prefs');
-const isDark = (prefs?.theme ?? 'light') === 'dark';
-applyTheme(isDark);
+applyTheme(resolveIsDark(prefs?.theme ?? DEFAULT_THEME));
 applyTextScale(prefs?.textScale ?? DEFAULT_TEXT_SCALE);
 
 // Root boundary, outside the providers deliberately. Every boundary in the app
