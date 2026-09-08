@@ -3,7 +3,7 @@
 > **Last updated:** 2026-09-08 — the 7.1.0 release (storage v7, quiz→card links). Every number and every
 > path in this file was re-derived from the repo on that date (`npm test`, `npm run audit:full`,
 > a walk of the actual tree), not carried over.
-> **Version:** v7.2.0 · **Status:** live, single-track (Lifeline), storage schema v7.
+> **Version:** v7.3.0 · **Status:** live, single-track (Lifeline), storage schema v7.
 > **Process:** `docs/AGENT_WORKFLOW.md` ← read first every session. **State:** `HANDOFF.md`.
 > **DQ Spec:** `docs/CARD_CONTENT_SPEC.md` ← canonical card schema, ruby rules, taxonomy.
 > **Archive:** `docs/archive/` ← superseded docs, indexed in `docs/archive/ARCHIVE-INDEX.md`.
@@ -106,13 +106,13 @@ Nugget-Nihongo-SSW-Konstruksi/
     ├── components/                 ← AppShell, ModeHeader, Dashboard, BelajarTab, SayaTab,
     │                                  BottomNav, SideNav, QuizShell, ResultScreen, ResumePrompt,
     │                                  Sheet, FilterPopup, JpDisplay, Toast, ErrorBoundary, …
-    ├── modes/                      ← 21 React.lazy mode screens; FlashcardMode/ decomposed
+    ├── modes/                      ← 20 React.lazy mode screens; FlashcardMode/ decomposed
     ├── router/                     ← ModeRouter.jsx + modes.js (the mode registry)
     ├── utils/                      ← constants, daily-mission, haptic, speak, jp-helpers,
     │                                  quiz-generator, quiz-persistence, simulasi-scoring,
     │                                  text-scale, typo-diff, shuffle, wrong-tracker, …
     ├── styles/                     ← global.css (design tokens), theme.js
-    └── tests/                      ← 90 files, 867 tests
+    └── tests/                      ← 123 files, 1,139 tests
 ```
 
 `viewer.html` at repo root is a standalone, no-build HTML tool for browsing card/quiz content

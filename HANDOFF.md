@@ -32,9 +32,39 @@ content into this file.
 ## CURRENT STATE
 
 **As of 2026-09-08.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.2.0**, **1,626 cards**, **20 modes**, `STORAGE_VERSION` **7**,
-`npm run validate` clean (111 files, 1,017 tests). 7.1.0 is merged into `main` (PR #13, `59928df`);
-7.2.0 is on `claude/open-threads-ui-improvements-lxb3sy` as PR #14.
+At that date: version **7.3.0**, **1,626 cards**, **20 modes**, `STORAGE_VERSION` **7**,
+`npm run validate` clean (123 files, 1,139 tests). 7.2.0 is merged into `main` (PR #14, `8a707b7`);
+7.3.0 is on `claude/open-threads-ui-improvements-lxb3sy` as PR #15.
+
+- **2026-09-08 (second session): the reported bug, and 20 of the audit's filed items.** Full
+  write-up is `CHANGELOG.md` `[7.3.0]`. What a future session most needs to know:
+
+  - **Never compute a filtered deck inline in a component body.** `cards.filter(...)` allocates a
+    new array every render; if it reaches any effect that sets state, the component re-renders
+    forever. That is what made "Lihat" do nothing on every filtered deck, froze Sprint's setup
+    screen at mount, and — the part worth remembering — **hangs the test runner instead of failing
+    it**, so the regression stalls CI rather than reporting. `useScopedDeck` is the only sanctioned
+    spelling and `untested-modes.test.jsx` sweeps the whole modes layer for the raw expression.
+  - **A jsdom hang is a finding, not a harness quirk.** Item 118 filed exactly this as P2 and
+    guessed at the harness. It was the most severe defect in the app. If a component cannot be
+    rendered under test, that is the bug.
+  - **`recordWrong` only accepts an integer card id.** `progress.quizWrong` is card-keyed and every
+    reader treats it that way. A mistake on content with no card goes through
+    `utils/mistake-bridge.js` to `progress.termWrong`. Do not invent a third id space.
+  - **`router/modes.js` and anything it imports must not reach `src/data/` question banks.** Two
+    modules did, for two menu integers and one daily question, and put 787 kB on the critical path
+    of every first page view. `eager-bundle-graph.test.js` walks the static import graph from
+    `main.jsx` and fails on any of the four heavy data modules.
+  - **CI now runs `format:check` and `audit:full`.** Do not remove them to make a red run green:
+    `verify-content.mjs` is the only check that catches a direct edit to the generated
+    `src/data/cards.js`, which otherwise passes CI and is silently reverted at deploy.
+  - **Coverage thresholds are a ratchet at today's real numbers, over all of `src/`.** Raise them
+    when coverage rises; never lower them.
+  - **Item 114 is half done and the half that is left is authoring, not engineering.** JAC Mockup's
+    tell is untouched at 70.2%. Writing distractors at that scale risks shipping one that is
+    accidentally correct, which is worse than the tell — this bank has already shipped a wrong
+    safety answer (item 115, fixed here). The ceilings in `question-option-shuffle.test.js` hold
+    the line meanwhile.
 
 - **2026-09-08: five UI changes, three P0 fixes, and a 49-finding audit.** Full write-up is
   `CHANGELOG.md` `[7.2.0]`; the audit itself is `docs/UI_UX_PLAN.md` §16. What a future session most

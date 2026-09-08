@@ -449,10 +449,18 @@ animate. Each mode's own `animation` property reuses the same two `global.css` k
 
 *JS-driven motion needs its own `prefers-reduced-motion` check* — a CSS rule can't reach an API
 called from JS. `BottomNav`'s View Transitions crossfade (`document.startViewTransition`) was the
-one instance of this in the app and had no such check; fixed (`window.matchMedia`). Worth
-remembering for any future JS-invoked animation (the Web Animations API, anything using
-`requestAnimationFrame` to drive motion) — the global catch-all in `global.css` only stops
-CSS-property-driven animation and transition, nothing invoked imperatively.
+first instance found and was fixed with `window.matchMedia`.
+
+**It was not the only one, and this paragraph used to say it was (item 137, corrected 7.3.0).**
+`GlossaryMode` had two `scrollTo({ behavior: 'smooth' })` calls. An explicit `behavior` in the call
+overrides the CSS `scroll-behavior` that the `global.css` catch-all sets, so the catch-all could not
+reach them — the same shape as the View Transition, in a form that looks like CSS. Both now go
+through **`src/utils/motion.js`** (`prefersReducedMotion()` / `scrollBehavior()`), which is the only
+sanctioned spelling; `a11y-polish.test.jsx` fails on a literal `behavior: 'smooth'` in either file.
+
+The general rule stands and the correction is the point: any JS-invoked motion needs the check — the
+Web Animations API, `requestAnimationFrame`-driven motion, an explicit `behavior` on a scroll — and
+a claim that the sweep is complete is worth less than the helper that makes the next one cheap.
 
 **Landscape and reach (item 23, 2026-08-25).** Two related mobile-ergonomics rules, not yet stated
 anywhere before this.

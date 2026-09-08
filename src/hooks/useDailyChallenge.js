@@ -14,9 +14,21 @@ export function useDailyChallenge() {
   const [question, setQuestion] = useState(null);
   useEffect(() => {
     let live = true;
-    getDailyChallenge(today).then((q) => {
-      if (live) setQuestion(q);
-    });
+    getDailyChallenge(today)
+      .then((q) => {
+        if (live) setQuestion(q);
+      })
+      // The import can genuinely fail — offline on a first run, or a stale
+      // service-worker cache pointing at a chunk the new deploy no longer
+      // serves. SayaTab renders this card behind a null check, so the honest
+      // outcome is simply no card today rather than an unhandled rejection.
+      //
+      // Caught because of a CI failure, not in spite of one: without this,
+      // every test that unmounts SayaTab before the import settles left a
+      // floating promise, and Vitest reported five EnvironmentTeardownErrors
+      // while all 1,110 tests passed — a red run with a green test count, and a
+      // timing-dependent one, so it would have come and gone.
+      .catch(() => {});
     return () => {
       live = false;
     };

@@ -51,9 +51,21 @@ async function buildAllQuestions() {
   return [...jac, ...way];
 }
 
-/** The whole question pool, fetched and built at most once per session. */
+/**
+ * The whole question pool, fetched and built at most once per session.
+ *
+ * A failed load is not cached. Offline-first means the chunk can genuinely be
+ * missing — a first run on a flaky connection, or a stale service-worker cache
+ * pointing at a hashed filename the new deploy no longer serves — and caching
+ * the rejection would make one bad moment permanent for the rest of the session.
+ */
 export function loadQuestionPool() {
-  if (!_poolPromise) _poolPromise = buildAllQuestions();
+  if (!_poolPromise) {
+    _poolPromise = buildAllQuestions().catch((err) => {
+      _poolPromise = null;
+      throw err;
+    });
+  }
   return _poolPromise;
 }
 

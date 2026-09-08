@@ -138,12 +138,22 @@ not exist (all removed 2026-09-04 — see CHANGELOG).
 | JAC Official | `src/data/sets/jac/jac-{teori,lifeline}.js` | `jac-official.js` is a two-line shim |
 | Angka / Danger / Confusion | their own file in `src/data/` | — |
 | Patch notes (Tentang) | `src/data/release-notes.js` | — it IS the source; hand-written, deliberately not derived from `CHANGELOG.md`. Rules for adding an entry are in the file header, and tests enforce them. |
+| Menu question counts | `src/utils/constants.js` (`QUIZ_QUESTION_COUNTS`) | — literals on purpose: deriving them in `router/modes.js` put 707 kB on the critical path of every first page view (item 131). `src/tests/mode-counts.test.js` re-derives them from the real data and fails on drift. |
 | Tentang prose | `src/data/about-content.js` | — it IS the source. The per-menu guide and the source credits are **not** here: they are generated at render time from `MODE_META` and `SOURCE_META`. |
 
 After editing `src/data/source/`, run `node scripts/merge-cards.mjs`. `npm run audit:content` fails
-if you forget — it compares `cards.js` against `source/` field by field, not just by count. **But
-CI does not run that audit** (see `HUSKY-SETUP.md`), so a direct edit to the generated `cards.js`
-passes CI and is silently reverted at deploy. Run `npm run validate` before pushing.
+if you forget — it compares `cards.js` against `source/` field by field, not just by count. **CI runs
+that audit as of 7.3.0** (item 134); before then it ran in no gate at all, so a direct edit to the
+generated `cards.js` passed CI and was silently reverted at deploy. `npm run validate` before
+pushing is still the rule — CI agreeing with it is the point, not a replacement for it.
+
+**Editing either practice bank also has to keep the two banks consistent.** `npm run audit:overlap`
+compares every question across `wayground-sets.js` and `jac-mockup-sets.js`, normalising away
+furigana, whitespace and brackets, and fails when two questions that ask the same thing carry
+different correct answers. It exists because `KY活動の4ステップで最後のステップは？` shipped with two
+different answers and every audit stayed green, each one only ever looking at a single file. Its
+`REVIEWED_VARIANTS` list is for pairs whose answers differ only in phrasing; add to it with the two
+answers in a comment above the entry, so the judgement can be checked rather than trusted.
 
 Anything under `src/data/` must use `export const`, not `export function` —
 `scripts/verify-content.mjs` parses these files by rewriting `export const ` to CommonJS, and a
