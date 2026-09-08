@@ -15,6 +15,7 @@ import { formatCount } from '../utils/format.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
 import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
+import { scrollBehavior } from '../utils/motion.js';
 import S from './modes.module.css';
 import G from './GlossaryMode.module.css';
 
@@ -121,7 +122,13 @@ export default function GlossaryMode({ track }) {
           if (pill && navEl)
             navEl.scrollTo({
               left: pill.offsetLeft - navEl.offsetWidth / 2 + pill.offsetWidth / 2,
-              behavior: 'smooth',
+              // Item 137: was a literal 'smooth'. An explicit behavior in the
+              // call overrides the CSS scroll-behavior that global.css's
+              // reduced-motion catch-all sets, so this ran regardless of the
+              // OS setting -- and the A-Z bar auto-scrolling under the reader
+              // is the more disorienting of the two for the people who ask for
+              // reduced motion.
+              behavior: scrollBehavior(),
             });
         }
       },
@@ -152,7 +159,7 @@ export default function GlossaryMode({ track }) {
     if (el) {
       window.scrollTo({
         top: el.getBoundingClientRect().top + window.scrollY - 52,
-        behavior: 'smooth',
+        behavior: scrollBehavior(),
       });
     }
   }

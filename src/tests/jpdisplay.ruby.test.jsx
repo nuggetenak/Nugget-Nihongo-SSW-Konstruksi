@@ -12,7 +12,9 @@ describe('JpFront ruby furigana rendering', () => {
     const rt = container.querySelector('rt');
 
     expect(ruby).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Toggle furigana' })).toBeNull();
+    expect(
+      screen.queryByRole('button', { name: 'Tampilkan atau sembunyikan furigana' })
+    ).toBeNull();
     expect(ruby?.textContent).toContain('鉄筋');
     expect(rt?.textContent).toBe('てっきん');
     expect(screen.getByText('コンクリート')).toBeTruthy();
@@ -28,7 +30,7 @@ describe('JpFront ruby furigana rendering', () => {
     const { container } = render(
       <JpFront jp="鉄筋《てっきん》コンクリート" furiganaPolicy="tap" />
     );
-    const toggle = screen.getByRole('button', { name: 'Toggle furigana' });
+    const toggle = screen.getByRole('button', { name: 'Tampilkan atau sembunyikan furigana' });
 
     expect(container.querySelector('ruby')).toBeNull();
     expect(screen.getByText('👆 Ketuk untuk tampilkan furigana')).toBeTruthy();

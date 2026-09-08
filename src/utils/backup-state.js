@@ -21,8 +21,13 @@ const DAY_MS = 86400000;
 
 /** Record that a backup just succeeded. Called from every path that makes one. */
 export function markBackedUp(at = Date.now()) {
-  const prefs = storageGet('prefs') ?? {};
-  storageSet('prefs', { ...prefs, lastBackupAt: at });
+  // Functional, not read-then-write-the-whole-doc. That second shape is what
+  // item 121 fixed in both contexts, where it silently destroyed data; here it
+  // reads the live cache immediately before writing, so it was never actually
+  // stale. It is changed anyway because a reader cannot tell those two cases
+  // apart at a glance, and the next person to copy this line may not be so
+  // lucky about the gap between the read and the write.
+  storageSet('prefs', (p) => ({ ...p, lastBackupAt: at }));
 }
 
 /** Epoch ms of the last successful backup, or null if there has never been one. */

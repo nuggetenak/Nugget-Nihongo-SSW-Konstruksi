@@ -52,6 +52,12 @@
   flex-shrink: 0;
 }
 
+/* Item 141: this was `padding: 0 var(--space-2)` around a bare ✕ at caption
+   size — about 20–24px square. DESIGN_SPEC §2's tap-target exception covers
+   dense chip rows, where 44px would break the row; this is an isolated dismiss
+   control on a bar with room to spare, so it was simply under the floor. Sized
+   with min-width/min-height rather than padding so the glyph stays optically
+   centred and the toast's own height is unaffected. */
 .btnClose {
   font-family: inherit;
   font-size: var(--fs-caption);
@@ -60,7 +66,12 @@
   color: inherit;
   opacity: 0.45;
   cursor: pointer;
-  padding: 0 var(--space-2);
+  padding: 0;
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 

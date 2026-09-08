@@ -579,7 +579,13 @@ export default function FlashcardMode({
         ← → ganti kartu · ↑ balik kartu
       </div>
 
-      {/* Nav row. The flip button was removed 2026-09-04 as redundant with
+      {/* Nav row. Labels are Indonesian since 7.3.0 (item 140): these read
+          "← Prev" and "Next →" while their own aria-labels said "Kartu
+          sebelumnya" / "Kartu berikutnya", so a sighted user and a screen
+          reader user were given different languages for the same button, on
+          the app's most-used screen. SimulasiMode had said "← Sebelumnya" /
+          "Selanjutnya →" the whole time.
+          The flip button was removed 2026-09-04 as redundant with
           tapping the card — true of the front face, false of the back, which
           carried no handler at all. On a touch screen that made a flipped card
           impossible to turn back over. It is back, and the back face is
@@ -592,7 +598,7 @@ export default function FlashcardMode({
           className={FC.navBtn}
           aria-label="Kartu sebelumnya"
         >
-          ← Prev
+          ← Sebelumnya
         </button>
         {/* No aria-label: the visible text already names the action, and
             duplicating "Balik kartu" here would give the page two controls with
@@ -606,7 +612,7 @@ export default function FlashcardMode({
           className={FC.navBtn}
           aria-label="Kartu berikutnya"
         >
-          Next →
+          Berikutnya →
         </button>
       </div>
 

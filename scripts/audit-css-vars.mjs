@@ -66,16 +66,24 @@ for (const file of walk(ROOT)) {
 }
 
 if (withFallback.length) {
-  console.log(`⚠️  ${withFallback.length} var() reference(s) with a fallback point at an undefined token (degrades, doesn't break):`);
+  console.log(
+    `⚠️  ${withFallback.length} var() reference(s) with a fallback point at an undefined token (degrades, doesn't break):`
+  );
   for (const { token, site } of withFallback) console.log(`   ${token}  ${site}`);
 }
 
 if (noFallback.length) {
-  console.error(`\n❌ ${noFallback.length} var() reference(s) with NO fallback point at an undefined token.`);
+  console.error(
+    `\n❌ ${noFallback.length} var() reference(s) with NO fallback point at an undefined token.`
+  );
   console.error('   These silently void their declaration — valid CSS, wrong behaviour.');
   for (const { token, site } of noFallback) console.error(`   ${token}  ${site}`);
-  console.error('\nDefine the token, or point the reference at an existing one (see src/styles/theme.js T.*).');
+  console.error(
+    '\nDefine the token, or point the reference at an existing one (see src/styles/theme.js T.*).'
+  );
   process.exit(1);
 }
 
-console.log(`✅ audit-css-vars: all var() references resolve (${defined.size} tokens defined, checked against ${walk(ROOT).length} files).`);
+console.log(
+  `✅ audit-css-vars: all var() references resolve (${defined.size} tokens defined, checked against ${walk(ROOT).length} files).`
+);

@@ -16,16 +16,13 @@
 // Bump this in the same commit as package.json's version, every time; it is a
 // close-out step in docs/AGENT_WORKFLOW.md §3 because it was missed once already.
 const CACHE_VERSION = 'ssw-v7.2.0';
-const CACHE_STATIC    = `${CACHE_VERSION}-static`;
-const ALL_CACHES      = [CACHE_STATIC];
+const CACHE_STATIC = `${CACHE_VERSION}-static`;
+const ALL_CACHES = [CACHE_STATIC];
 
 const BASE = '/Nugget-Nihongo-SSW-Konstruksi';
 
 // Assets to pre-cache on install (shell)
-const PRECACHE_URLS = [
-  `${BASE}/`,
-  `${BASE}/index.html`,
-];
+const PRECACHE_URLS = [`${BASE}/`, `${BASE}/index.html`];
 
 // ── Install ────────────────────────────────────────────────────────────────
 // The shell is required; everything else is best-effort.
@@ -87,12 +84,13 @@ self.addEventListener('message', (event) => {
 // Delete old caches from previous versions
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(
-        keys
-          .filter(key => !ALL_CACHES.includes(key))
-          .map(key => caches.delete(key))
-      ))
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys.filter((key) => !ALL_CACHES.includes(key)).map((key) => caches.delete(key))
+        )
+      )
       .then(() => self.clients.claim()) // take control immediately once activated
   );
 });
@@ -126,7 +124,7 @@ self.addEventListener('fetch', (event) => {
 
 // ── Cache-First strategy ───────────────────────────────────────────────────
 async function cacheFirst(request, cacheName) {
-  const cache  = await caches.open(cacheName);
+  const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
   if (cached) return cached;
 
@@ -139,8 +137,7 @@ async function cacheFirst(request, cacheName) {
   } catch {
     // Offline and not cached — return a minimal offline response for navigations
     if (request.mode === 'navigate') {
-      const fallback = await cache.match(`${BASE}/`) ||
-                       await cache.match(`${BASE}/index.html`);
+      const fallback = (await cache.match(`${BASE}/`)) || (await cache.match(`${BASE}/index.html`));
       if (fallback) return fallback;
     }
     return new Response('Offline — buka app dulu saat online.', {
@@ -160,9 +157,10 @@ async function networkFirst(request, cacheName) {
     }
     return response;
   } catch {
-    const cached = await cache.match(request) ||
-                   await cache.match(`${BASE}/`) ||
-                   await cache.match(`${BASE}/index.html`);
+    const cached =
+      (await cache.match(request)) ||
+      (await cache.match(`${BASE}/`)) ||
+      (await cache.match(`${BASE}/index.html`));
     if (cached) return cached;
     return new Response('Offline', { status: 503 });
   }

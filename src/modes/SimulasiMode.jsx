@@ -1461,7 +1461,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
 
       {/* Same shape of hint QuizShell shows, for the same reason: shortcuts
           nobody knows about are shortcuts nobody uses. */}
-      <div className={SM.kbHint}>Keyboard: 1–4 pilih · ← → pindah soal · F tandai</div>
+      {/* The range is derived (item 136): this bank mixes JAC Official in, and
+          61 of those 95 questions have fewer than four options. The arrows are
+          real here, unlike QuizShell's -- this mode has its own ArrowLeft/Right
+          handler above. */}
+      <div className={SM.kbHint}>
+        Keyboard: {(q?.opts?.length ?? 4) > 1 ? `1–${q?.opts?.length ?? 4}` : '1'} pilih · ← →
+        pindah soal · F tandai
+      </div>
 
       {/* Pause overlay. Also offers Keluar here specifically -- pausing is
           the natural "step away" moment, so it doubles as the safe exit

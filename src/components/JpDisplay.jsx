@@ -171,7 +171,10 @@ export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, com
         type="button"
         className={S.tapSurface}
         onClick={() => setTapReveal((v) => !v)}
-        aria-label="Toggle furigana"
+        /* Item 140: this was the app's only English aria-label, against 25+
+           Indonesian ones -- and the visible hint right beside it is already
+           Indonesian. */
+        aria-label="Tampilkan atau sembunyikan furigana"
         aria-pressed={showFuri}
       >
         {content}

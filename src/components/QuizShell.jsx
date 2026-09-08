@@ -102,12 +102,13 @@ export default function QuizShell({
     }
   }, [selected, isLast]);
 
+  const optCount = q?.options?.length || 4;
   useQuizKeyboard({
     onSelect: handleSelect,
     onNext: handleNext,
     selected,
     phase,
-    optCount: q?.options?.length || 4,
+    optCount,
   });
 
   useEffect(() => {
@@ -301,7 +302,16 @@ export default function QuizShell({
         ))}
       </div>
 
-      <div className={S.kbHint}>Keyboard: 1–4 pilih · Space/→ lanjut · Esc kembali</div>
+      {/* Item 136: this read "Keyboard: 1–4 pilih · Space/→ lanjut". Both halves
+          were false. 61 of the 95 JAC Official questions have fewer than four
+          options (17 have two, 44 have three), so "1–4" promised keys that do
+          nothing on 64% of that bank; and useQuizKeyboard advances on Enter and
+          Space only -- there has never been an ArrowRight handler, which is why
+          ShortcutSheet lists ['Enter','Space'] and contradicted this line. The
+          range now comes from the question actually on screen. */}
+      <div className={S.kbHint}>
+        Keyboard: {optCount > 1 ? `1–${optCount}` : '1'} pilih · Enter/Space lanjut · Esc kembali
+      </div>
 
       {selected !== null && q.explanation && (
         <div className={S.explanation}>

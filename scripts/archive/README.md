@@ -28,7 +28,7 @@ validate` runs all five audits, and `prebuild`/`postbuild` run the three build-t
 | `audit-data-text.mjs` | `npm run audit:text` | Ruby markers (pooled, carried-over, malformed) + look-alike codepoints |
 | `verify-content.mjs` | `npm run audit:content` | `cards.js` vs `source/`, **field by field** — dependency-free |
 | `audit-related-ids.mjs` | `npm run audit:related-ids` | Every `related_card_id` resolves |
-| `renumber-cards.mjs` | manual | One-off card-id renumbering helper; not in any npm script |
+| `renumber-cards.mjs` | manual | One-off card-id renumbering helper; not in any npm script. Listed here since 2026-08 but only *moved* here 2026-09-08 (item 143) — this README claimed custody of a file that was still sitting in live `scripts/`. It is the one transform the repo forbids outright: `audit-integrity.mjs` records that card ids are deliberately non-contiguous and renumbering would invalidate every user's SRS history. |
 
 A script that is in no npm script is a script nobody runs: `audit-related-ids.mjs` died with
 `ERR_MODULE_NOT_FOUND` on every invocation from the 2026-08-18 merge until 2026-09-04 without
