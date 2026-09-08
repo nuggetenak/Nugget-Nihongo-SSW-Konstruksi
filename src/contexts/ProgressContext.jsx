@@ -154,6 +154,14 @@ export function ProgressProvider({ children }) {
   // recordWrong writes to progress.quizWrong (in-engine, lz-string compressed, exportable).
   const recordWrong = useCallback(
     (cardId) => {
+      // `progress.quizWrong` is keyed by card id and every reader treats it that
+      // way -- FokusMode looks up `quizWrong[c.id]`, StatsMode does `Number(id)`.
+      // DangerMode passed `danger-<term>` here for years (item 129), landing
+      // string keys that are inert in one reader and a `NaN` property in the
+      // other, and riding along in every export forever. This is the one writer,
+      // so it is the one place the id space can actually be held.
+      // utils/mistake-bridge.js is where a non-card mistake belongs.
+      if (typeof cardId !== 'number' || !Number.isInteger(cardId)) return;
       setProg((prev) => {
         const qw = { ...(prev.quizWrong ?? {}) };
         qw[cardId] = makeWrongEntry(qw[cardId]);

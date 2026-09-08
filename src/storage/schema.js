@@ -46,6 +46,12 @@ export const DEFAULTS = {
     // way; the old comment here said "per card" and was simply wrong (item 131).
     wrongCounts: {}, // { [jacQuestionId]: count } — wrong answer tally per JAC question
     wgWrong: {}, // { [setId]: wrongObj }
+    // Wrong answers on content that has no card: DangerMode's pairs and
+    // ConfusionMode's, keyed by the furigana-stripped term. Separate from
+    // quizWrong on purpose -- DangerMode used to write `danger-<term>` straight
+    // into that card-keyed store (item 129). See utils/mistake-bridge.js.
+    // Additive: absent for existing users, and `?? {}` is the truthful reading.
+    termWrong: {}, // { [term]: wrongEntry }
     vocabWrong: {}, // { [setId]: wrongObj }
     jacScores: {}, // { [setId]: { correct, total, date } }
     wgScores: {},

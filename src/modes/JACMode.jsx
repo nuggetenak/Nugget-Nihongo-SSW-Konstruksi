@@ -88,7 +88,7 @@ function buildQuestions(key, { wrongCounts, topicFilter, showID }) {
 
 export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { toast } = useApp();
-  const { saveScore, jacScores } = useProgress();
+  const { saveScore, jacScores, recordWrong } = useProgress();
   const [setKey, setSetKey] = useState(null);
   const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wrongCounts ?? {});
 
@@ -145,9 +145,18 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
           // Collect wrong question IDs for SRS add.
           if (!wrongQIds.includes(qId)) setWrongQIds((prev) => [...prev, qId]);
         }
+        // Item 128: the per-set store above is this mode's own bookkeeping, and
+        // it was the only place a mistake went. So a card missed here never
+        // reached FokusMode's "Latih kelemahan" or StatsMode's weakness view --
+        // while the identical question missed inside simulasi did, because
+        // simulasi-mistakes.js bridges it. The same mistake counted or did not
+        // depending on which screen you made it on. `_cardId` was already being
+        // computed at the draw; nothing read it.
+        const cardId = questions[qIdx]?._cardId;
+        if (typeof cardId === 'number') recordWrong(cardId);
       }
     },
-    [questions, setWrongCounts, wrongQIds]
+    [questions, setWrongCounts, wrongQIds, recordWrong]
   );
 
   const handleFinish = useCallback(

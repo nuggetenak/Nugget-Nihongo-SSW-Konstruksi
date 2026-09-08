@@ -53,7 +53,7 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
   const [questions, setQuestions] = useState([]);
 
   const [showHint, setShowHint] = useState(true);
-  const { saveScore, vocabScores: scores } = useProgress();
+  const { saveScore, vocabScores: scores, recordWrong } = useProgress();
 
   const setDef = activeSet === MIX_ALL_ID ? MIX_ALL : VOCAB_SETS.find((s) => s.id === activeSet);
 
@@ -132,9 +132,18 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
             return updated;
           });
         }
+        // Item 128: the per-set store above is this mode's own bookkeeping, and
+        // it was the only place a mistake went. So a card missed here never
+        // reached FokusMode's "Latih kelemahan" or StatsMode's weakness view --
+        // while the identical question missed inside simulasi did, because
+        // simulasi-mistakes.js bridges it. The same mistake counted or did not
+        // depending on which screen you made it on. `_cardId` was already being
+        // computed at the draw; nothing read it.
+        const cardId = questions[qIdx]?._cardId;
+        if (typeof cardId === 'number') recordWrong(cardId);
       }
     },
-    [questions, activeSet]
+    [questions, activeSet, recordWrong]
   );
 
   const handleFinish = useCallback(

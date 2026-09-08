@@ -14,6 +14,8 @@ import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import { haptic } from '../utils/haptic.js';
 import { useApp } from '../contexts/AppContext.jsx';
+import { useProgress } from '../contexts/ProgressContext.jsx';
+import { recordTermMistake } from '../utils/mistake-bridge.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import S from './modes.module.css';
@@ -349,6 +351,7 @@ function DetailView({ pair, onBack }) {
 // ── Quiz ──────────────────────────────────────────────────────────────────────
 function QuizView({ pairs, limit, onBack, onSessionEnd }) {
   const { prefs } = useApp();
+  const { recordWrong } = useProgress();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [questions] = useState(() => buildQuestions(pairs, limit));
   const [qIdx, setQIdx] = useState(0);
@@ -370,9 +373,18 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
       const isCorrect = idx === correctIdx;
       if (isCorrect) haptic.correct();
       else haptic.wrong();
+      // Item 127: 656 lines, and this mode was the only quiz in the app that
+      // recorded a wrong answer nowhere at all -- no wrong-tracker import, no
+      // useProgress call. Answer every pair wrong and the app learned nothing.
+      // Both terms go in: the question is which definition belongs to which, so
+      // getting it wrong is a mistake about the pair, not about one half of it.
+      if (!isCorrect) {
+        recordTermMistake(pair.termA, recordWrong);
+        recordTermMistake(pair.termB, recordWrong);
+      }
       setResults((r) => [...r, { isCorrect, picked: idx, q }]);
     },
-    [selected, phase, correctIdx, q]
+    [selected, phase, correctIdx, q, pair, recordWrong]
   );
 
   useEffect(() => {
