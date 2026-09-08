@@ -12,7 +12,7 @@ export const JAC_LIFELINE = [
     ans: 2,
     img: null,
     exp: 'ブレーカー (NFB = No-Fuse Breaker) secara otomatis memutus pasokan listrik saat arus berlebih. Kartu #41.',
-    related_card_id: 61,
+    related_card_id: 51,
     track: 'lifeline',
   },
   {
@@ -29,7 +29,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Foto: Pisau lipat dengan bilah melengkung, ujung TUMPUL (bukan lancip). Ciri khas: bilah agak lebar, ujung membulat tumpul untuk melindungi konduktor.',
     exp: '電工ナイフ《でんこうナイフ》 (Pisau listrik) — bilah melengkung dengan ujung TUMPUL, khusus untuk mengupas isolasi kabel. Kartu #104.',
-    related_card_id: 66,
+    related_card_id: 56,
     track: 'lifeline',
   },
   {
@@ -51,7 +51,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Foto: Alat berbentuk C/U kecil dengan roda pemotong di ujung dan pegangan hitam. Berbeda dari kunci pipa yang seperti tang besar.',
     exp: 'パイプカッター — memotong pipa dengan cara roda pemotong mengencang melingkar pipa. Kartu #60.',
-    related_card_id: 88,
+    related_card_id: 78,
     track: 'lifeline',
   },
   {
@@ -73,7 +73,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Foto: Beberapa tiang hidran berwarna silver/perak berdiri di area luar gedung, di antara semak-semak. Terletak di LUAR ruangan.',
     exp: '屋外消火栓設備《おくがいしょうかせんせつび》 — hidran di LUAR gedung, untuk pemadaman awal & mencegah api menyebar (jangkauan lantai 1-2). Kartu #74.',
-    related_card_id: 107,
+    related_card_id: 96,
     track: 'lifeline',
   },
   {
@@ -95,7 +95,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Foto: Alat kecil berbentuk drum/gulungan dengan cangkang logam gelap dan pengait benang. Ada tombol/roda di badan untuk menggulung benang.',
     exp: '墨つぼ《すみつぼ》 — membuat garis lurus panjang dengan benang bercelup tinta. Kartu #106.',
-    related_card_id: 145,
+    related_card_id: 128,
     track: 'lifeline',
   },
   {
@@ -112,7 +112,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Foto: Instrumen survei putih/abu dengan teleskop horizontal, dipasang di atas tripod kayu di lingkungan hutan/outdoor. Bukan transit (yang mengukur sudut vertikal).',
     exp: 'レベル (水準器《すいじゅんき》) — instrumen survei untuk mengukur ketinggian/elevasi, dipasang di tripod. Kartu #94.',
-    related_card_id: 138,
+    related_card_id: 121,
     track: 'lifeline',
   },
   {
@@ -127,7 +127,7 @@ export const JAC_LIFELINE = [
     ans: 1,
     img: null,
     exp: "施工管理《しこうかんり》 bertujuan menyelesaikan pekerjaan dengan KUALITAS (品質《ひんしつ》) yang ditentukan — bukan 'lingkungan'. Kartu #153.",
-    related_card_id: 50,
+    related_card_id: 40,
     track: 'lifeline',
   },
   {
@@ -142,7 +142,7 @@ export const JAC_LIFELINE = [
     ans: 1,
     img: null,
     exp: 'SGP ねじ接合《ねじせつごう》 digunakan untuk ukuran 15A～100A. Di atas 100A → flensa/las. Kartu #114.',
-    related_card_id: 96,
+    related_card_id: 85,
     track: 'lifeline',
   },
   {
@@ -157,7 +157,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: '短絡《たんらく》 = short circuit. Berbeda: 漏電《ろうでん》 = kebocoran arus ke ground, 感電《かんでん》 = listrik mengalir ke tubuh manusia. Kartu #103.',
-    related_card_id: 65,
+    related_card_id: 55,
     track: 'lifeline',
   },
   {
@@ -179,7 +179,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Diagram: Jaringan telekomunikasi dari gedung komunikasi ke rumah. Panah biru menunjuk ke TIANG yang berdiri di atas tanah, di antara gedung dan rumah.',
     exp: '電柱《でんちゅう》 = tiang listrik/telepon. Berbeda dari 管路《かんろ》 (jalur bawah tanah) dan マンホール. Kartu #113.',
-    related_card_id: 77,
+    related_card_id: 67,
     track: 'lifeline',
   },
   {
@@ -199,7 +199,7 @@ export const JAC_LIFELINE = [
     ans: 2,
     img: null,
     exp: '築炉《ちくろ》 = konstruksi tungku menggunakan BAHAN TAHAN API (耐火物《たいかぶつ》). BUKAN 保温材《ほおんざい》 atau 断熱材《だんねつざい》 biasa. Perekat: 耐熱断熱煉瓦用モルタル《たいねつだんねつれんがようモルタル》. Kartu #124.',
-    related_card_id: 39,
+    related_card_id: 37,
     track: 'lifeline',
   },
   {
@@ -222,7 +222,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: '墜落《ついらく》・転落《てんらく》 (jatuh) adalah penyebab kematian TERBANYAK. 2021: 110 dari 288 total kematian. Opsi 3 BUKAN bagian dari 三大災害《さんだいさいがい》 (③ sebenarnya adalah 崩壊《ほうかい》・倒壊《とうかい》). Kartu #127.',
-    related_card_id: 123,
+    related_card_id: 108,
     track: 'lifeline',
   },
   {
@@ -237,7 +237,7 @@ export const JAC_LIFELINE = [
     ans: 2,
     img: null,
     exp: '感電《かんでん》 = sengatan listrik. Listrik mengalir melalui tubuh → kejutan kuat. Kecelakaan khas pekerjaan listrik. Kartu #81.',
-    related_card_id: 81,
+    related_card_id: 581,
     track: 'lifeline',
   },
   {
@@ -256,7 +256,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: '酸素欠乏《さんそけつぼう》 terjadi di ruang TERTUTUP seperti MANHOLE. Kerja di atas tiang atau atap gedung = tidak ada risiko kekurangan oksigen. Kartu #107.',
-    related_card_id: 120,
+    related_card_id: 105,
     track: 'lifeline',
   },
   {
@@ -271,7 +271,7 @@ export const JAC_LIFELINE = [
     ans: 2,
     img: null,
     exp: '土留め《どどめ》 WAJIB jika kedalaman galian ≥1.5m. Angka 1.5m harus dihafalkan. Kartu #108.',
-    related_card_id: 121,
+    related_card_id: 106,
     track: 'lifeline',
   },
   {
@@ -291,7 +291,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: 'Serat optik: 損失《そんしつ》が小《ちい》さい (rugi kecil) ✓, ringan ✓, kapasitas BESAR ✓. Kelemahannya: rentan goresan & tekukan. Kartu #45.',
-    related_card_id: 67,
+    related_card_id: 57,
     track: 'lifeline',
   },
   {
@@ -311,7 +311,7 @@ export const JAC_LIFELINE = [
     ans: 1,
     img: null,
     exp: 'OTDR (Optical Time Domain Reflectometer) = mengukur panjang jalur & titik abnormal serat optik. 光《ひかり》パワーメーター hanya mengukur daya/kekuatan sinyal. Kartu #51.',
-    related_card_id: 73,
+    related_card_id: 63,
     track: 'lifeline',
   },
   {
@@ -331,7 +331,7 @@ export const JAC_LIFELINE = [
     ans: 2,
     img: null,
     exp: "融着接続《ゆうちゃくせつぞく》 = melelehkan/memfusikan ujung serat → sambungan permanen, rugi terkecil. Kata kunci: 'MELELEHKAN ujung serat'. Kartu #109.",
-    related_card_id: 76,
+    related_card_id: 66,
     track: 'lifeline',
   },
   {
@@ -351,7 +351,7 @@ export const JAC_LIFELINE = [
     ans: 3,
     img: null,
     exp: "加湿器《かしつき》 = MENAMBAH kelembapan ke udara kering. 除湿器《じょしつき》 = mengurangi kelembapan. Kata kunci: 'menambah air ke udara kering'. Kartu #115.",
-    related_card_id: 38,
+    related_card_id: 36,
     track: 'lifeline',
   },
   {
@@ -371,7 +371,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: "グラスウール = dari KACA dilebur menjadi serat. ロックウール = dari BATU BASALT. Kata kunci: 'kaca dilelehkan jadi serat'. Kartu #111.",
-    related_card_id: 102,
+    related_card_id: 91,
     track: 'lifeline',
   },
   {
@@ -388,7 +388,7 @@ export const JAC_LIFELINE = [
     photoDesc:
       '📷 Foto: Kereta dorong datar berbentuk platform persegi panjang rendah dengan 4 roda kecil dan pegangan lipat/condong. Dilihat dari atas/sudut.',
     exp: '台車《だいしゃ》 = kereta dorong datar 4 roda untuk mengangkut material berat. Berbeda dari 一輪車《いちりんしゃ》 (gerobak satu roda). Kartu #342 (id di alat_umum).',
-    related_card_id: 149,
+    related_card_id: 132,
     track: 'lifeline',
   },
   {
@@ -403,7 +403,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: 'ラッキングカバー = penutup finishing untuk isolasi pipa LUAR RUANGAN (屋外露出《おくがいろしゅつ》). Untuk dalam ruangan tidak wajib. Kartu #112.',
-    related_card_id: 103,
+    related_card_id: 92,
     track: 'lifeline',
   },
   {
@@ -418,7 +418,7 @@ export const JAC_LIFELINE = [
     ans: 1,
     img: null,
     exp: 'Pipa polietilen (polyethylene) → EF接合《EFせつごう》 (Electro Fusion). SGP (baja) → ねじ接合《ねじせつごう》 (sambungan ulir). Kartu #110.',
-    related_card_id: 95,
+    related_card_id: 84,
     track: 'lifeline',
   },
   {
@@ -436,7 +436,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: '丸《まる》ダクト (round duct) → 差し込み継手工法《さしこみつぎてこうほう》 (selip/insert). 角《かく》ダクト (square duct) → 共板フランジ工法《きょうばんフランジこうほう》. Kartu #126.',
-    related_card_id: 40,
+    related_card_id: 38,
     track: 'lifeline',
   },
   {
@@ -451,7 +451,7 @@ export const JAC_LIFELINE = [
     ans: 1,
     img: null,
     exp: '手掘り《てぼり》 (gali manual) + 探針棒《たんしんぼう》 (batang probe) digunakan BERSAMA untuk memeriksa benda terpendam secara hati-hati sebelum menggali dengan mesin. 穴掘建柱車《あなほりけんちゅうしゃ》 = kendaraan untuk menggali & mendirikan tiang. Kartu #154.',
-    related_card_id: 79,
+    related_card_id: 69,
     track: 'lifeline',
   },
   {
@@ -466,7 +466,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: '管路《かんろ》 = infrastruktur yang menghubungkan manhole - handhole - とう道《とうどう》 - 引上柱《ひきあげちゅう》. Berbeda dari 共同溝《きょうどうこう》 yang merupakan terowongan utilitas besar. Kartu #113.',
-    related_card_id: 77,
+    related_card_id: 67,
     track: 'lifeline',
   },
   {
@@ -481,7 +481,7 @@ export const JAC_LIFELINE = [
     ans: 1,
     img: null,
     exp: '管路《かんろ》 di jalan raya (車道《しゃどう》) → kedalaman tanah harus >0.8m. Angka ini wajib dihafalkan. Kartu #113.',
-    related_card_id: 77,
+    related_card_id: 67,
     track: 'lifeline',
   },
   {
@@ -499,7 +499,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: 'Perekat bata tahan api di konstruksi tungku = 耐熱断熱煉瓦用モルタル《たいねつだんねつれんがようモルタル》 (mortar khusus tahan panas untuk bata tahan api). BUKAN mortar resin biasa. Kartu #124.',
-    related_card_id: 39,
+    related_card_id: 37,
     track: 'lifeline',
   },
   {
@@ -522,7 +522,7 @@ export const JAC_LIFELINE = [
     ans: 2,
     img: null,
     exp: '新入者安全衛生教育《しんにゅうしゃあんぜんえいせいきょういく》 = untuk PEREKRUTAN BARU oleh perusahaan. 新規入場者教育《しんきにゅうじょうしゃきょういく》 = untuk PENDATANG BARU ke lokasi kerja (bisa sudah lama bekerja di perusahaan). Kartu #119.',
-    related_card_id: 122,
+    related_card_id: 107,
     track: 'lifeline',
   },
   {
@@ -545,7 +545,7 @@ export const JAC_LIFELINE = [
     ans: 0,
     img: null,
     exp: 'Pencegahan kelelahan → 適切《てきせつ》な睡眠《すいみん》と食事《しょくじ》 (tidur & makan yang cukup). Kelelahan = penyebab kecelakaan. Kartu #155.',
-    related_card_id: 128,
+    related_card_id: 113,
     track: 'lifeline',
   },
 ];

@@ -12,7 +12,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: 'Kerjasama antar kontraktor spesialis = チームワーク. Tanpa teamwork, alur konstruksi kacau.',
-    related_card_id: 746,
+    related_card_id: 627,
     track: 'common',
   },
   {
@@ -42,7 +42,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: "パワハラ = pelecehan berbasis kekuasaan jabatan. セクハラ = pelecehan seksual. Kata kunci: 'superioritas jabatan + penderitaan fisik/mental'.",
-    related_card_id: 135,
+    related_card_id: 118,
     track: 'common',
   },
   {
@@ -57,7 +57,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: 'Batas jam kerja legal = 8 jam/hari & 40 jam/minggu (UU Standar Ketenagakerjaan). Kartu #9.',
-    related_card_id: 6,
+    related_card_id: 5,
     track: 'common',
   },
   {
@@ -76,7 +76,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '建築基準法《けんちくきじゅんほう》 = menetapkan standar MINIMUM (最低限《さいていげん》の) untuk bangunan. Bukan jaminan mutlak, bukan berlebihan. Kartu #13.',
-    related_card_id: 10,
+    related_card_id: 9,
     track: 'common',
   },
   {
@@ -91,7 +91,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: 'Tujuan 消防法《しょうぼうほう》 = MENGURANGI (軽減《けいげん》) kerugian bencana. Bukan meningkatkan! Kartu #14.',
-    related_card_id: 11,
+    related_card_id: 10,
     track: 'common',
   },
   {
@@ -114,7 +114,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '水道法《すいどうほう》 = bertujuan menyuplai air bersih yang terjangkau (安価《あんか》). Bukan air mahal, bukan air kotor. Kartu #15.',
-    related_card_id: 12,
+    related_card_id: 11,
     track: 'common',
   },
   {
@@ -139,7 +139,7 @@ export const JAC_TEORI = [
     ans: 3,
     img: null,
     exp: '電気事業法《でんきじぎょうほう》 = mengatur konstruksi, pemeliharaan, & keamanan fasilitas listrik. Jangan bingung dengan 電気工事業法《でんきこうじぎょうほう》 (UU kontraktor listrik). Kartu #16.',
-    related_card_id: 13,
+    related_card_id: 12,
     track: 'common',
   },
   {
@@ -158,7 +158,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '建築工事《けんちくこうじ》 = membangun gedung/rumah. Jalan & bendungan = 土木工事《どぼくこうじ》 (sipil). Perbedaan kunci: 建築《けんちく》 = struktur bangunan, 土木《どぼく》 = infrastruktur.',
-    related_card_id: 275,
+    related_card_id: 836,
     track: 'common',
   },
   {
@@ -198,7 +198,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: 'ライフライン工事《ライフラインこうじ》 = pekerjaan jaringan utilitas vital: listrik, gas kota, air, telekomunikasi. Kartu #21.',
-    related_card_id: 28,
+    related_card_id: 27,
     track: 'common',
   },
   {
@@ -345,7 +345,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '電気工事士《でんきこうじし》 = kualifikasi WAJIB untuk pekerjaan listrik. 工事担任者《こうじたんにんしゃ》 = untuk telekomunikasi. 消防設備士《しょうぼうせつびし》 = untuk pemadam. Jangan tertukar!',
-    related_card_id: 241,
+    related_card_id: 180,
     track: 'common',
   },
   {
@@ -360,7 +360,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: 'スプリンクラー (sprinkler) = peralatan pemadam otomatis → dipasang dalam 消防設備工事《しょうぼうせつびこうじ》. Wastafel = sanitasi, AC = AC, tungku = bukan pemadam. Kartu #28.',
-    related_card_id: 35,
+    related_card_id: 33,
     track: 'common',
   },
   {
@@ -375,7 +375,7 @@ export const JAC_TEORI = [
     ans: 3,
     img: null,
     exp: '解体工事《かいたいこうじ》 = pekerjaan pembongkaran → kata kuncinya 壊す《こわす》 (menghancurkan). Bukan membuat, memperbaiki, atau merakit.',
-    related_card_id: 211,
+    related_card_id: 168,
     track: 'common',
   },
   {
@@ -390,7 +390,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: 'Ada pekerjaan konstruksi yang memerlukan 免許《めんきょ》 (lisensi/sertifikasi resmi), seperti pekerjaan listrik, crane, dll. Paspor & kartu tinggal bukan untuk pekerjaan teknis.',
-    related_card_id: 209,
+    related_card_id: 166,
     track: 'common',
   },
   {
@@ -405,7 +405,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '特別教育《とくべつきょういく》 = 2 cara: ①社外《しゃがい》 (eksternal, lembaga luar) dan ②社内《しゃない》 (internal, di dalam perusahaan sendiri). Keduanya sah secara hukum.',
-    related_card_id: 209,
+    related_card_id: 166,
     track: 'common',
   },
   {
@@ -420,7 +420,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: "ご安全《あんぜん》に = sapaan keselamatan khas konstruksi, bermakna 'semoga selamat bekerja'. Diucapkan di awal/akhir kerja. Kartu #678.",
-    related_card_id: 662,
+    related_card_id: 560,
     track: 'common',
   },
   {
@@ -435,7 +435,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: 'お疲れ様《おつかれさま》です = bisa dipakai kapan saja & di mana saja di lingkungan kerja. ご安全《あんぜん》に = khas lokasi konstruksi/berbahaya saja. Kartu #679.',
-    related_card_id: 663,
+    related_card_id: 561,
     track: 'common',
   },
   {
@@ -450,7 +450,7 @@ export const JAC_TEORI = [
     ans: 3,
     img: null,
     exp: '地墨《じずみ》 = garis tinta di permukaan HORIZONTAL (lantai). 立て墨《たてずみ》 = garis vertikal (kolom/dinding). 逃げ墨《にげずみ》 = garis offset/referensi.',
-    related_card_id: 668,
+    related_card_id: 566,
     track: 'common',
   },
   {
@@ -505,7 +505,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '空調《くうちょう》 = Air Conditioning → mengatur suhu & kelembapan. 換気《かんき》 = hanya sirkulasi udara. 排煙《はいえん》 = pembuangan asap darurat. Kartu #27.',
-    related_card_id: 34,
+    related_card_id: 32,
     track: 'common',
   },
   {
@@ -520,7 +520,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: "5S = 整理《せいり》(Seiri) + 整頓《せいとん》(Seiton) + 清掃《せいそう》(Seisou) + 清潔《せいけつ》(Seiketsu) + しつけ(Shitsuke/Disiplin). Semua diawali 'S'. Hafal 5 kata ini!",
-    related_card_id: 134,
+    related_card_id: 117,
     track: 'common',
   },
   {
@@ -543,7 +543,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: 'Helm & harness disimpan di tempat yang SUDAH DITENTUKAN → mudah ditemukan & tidak rusak. Merokok sembarangan & membiarkan sampah = SALAH.',
-    related_card_id: 293,
+    related_card_id: 220,
     track: 'common',
   },
   {
@@ -575,7 +575,7 @@ export const JAC_TEORI = [
     photoDesc:
       '📸 FOTO: Beberapa pekerja berhelm menumpuk tangan di tengah (seperti yel-yel tim olahraga) — ini adalah タッチアンドコール (touch-and-call), konfirmasi komitmen keselamatan kelompok.',
     exp: 'タッチアンドコール = semua anggota tumpuk tangan → teriak bersama → konfirmasi komitmen keselamatan. Berbeda dari KY活動《KYかつどう》 (identifikasi bahaya per titik).',
-    related_card_id: 586,
+    related_card_id: 1777,
     track: 'common',
   },
   {
@@ -590,7 +590,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '労災保険《ろうさいほけん》 = premi 100% ditanggung 事業主《じぎょうぬし》 (pengusaha). Pekerja tidak bayar sama sekali. BERBEDA dari 雇用保険《こようほけん》 yang dibayar bersama. Kartu #19.',
-    related_card_id: 16,
+    related_card_id: 15,
     track: 'common',
   },
   {
@@ -605,7 +605,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '労働安全衛生法《ろうどうあんぜんえいせいほう》 = UU K3 → keselamatan & kesehatan pekerja di tempat kerja. 雇用保険法《こようほけんほう》 = asuransi saat kehilangan pekerjaan. Kartu #10.',
-    related_card_id: 7,
+    related_card_id: 6,
     track: 'common',
   },
   {
@@ -626,7 +626,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '建設業法《けんせつぎょうほう》の目的《もくてき》 = meningkatkan 資質《ししつ》 (kualitas/kompetensi menyeluruh). Bukan hanya 技能《ぎのう》 (skill teknis). 資質《ししつ》 mencakup etika, manajemen, dll. Kartu #12.',
-    related_card_id: 9,
+    related_card_id: 8,
     track: 'common',
   },
   {
@@ -641,7 +641,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '建設《けんせつ》リサイクル法《ほう》 = mengatur daur ulang 廃材《はいざい》 (material sisa konstruksi: beton, kayu, aspal). Bukan polutan udara. Kartu #116.',
-    related_card_id: 18,
+    related_card_id: 17,
     track: 'common',
   },
   {
@@ -656,7 +656,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: 'ガス事業法《ガスじぎょうほう》 = untuk 都市《とし》ガス (gas kota, distribusi lewat pipa/導管《どうかん》). LPガス diatur UU berbeda. Kata kunci: 導管《どうかん》 (pipa) = gas kota. Kartu #118.',
-    related_card_id: 20,
+    related_card_id: 19,
     track: 'common',
   },
   {
@@ -671,7 +671,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '工事担任者《こうじたんにんしゃ》 = kualifikasi untuk pekerjaan TELEKOMUNIKASI. 電気工事士《でんきこうじし》 = untuk pekerjaan LISTRIK. Pasangan jebakan klasik! Kartu #17.',
-    related_card_id: 14,
+    related_card_id: 13,
     track: 'common',
   },
   {
@@ -736,7 +736,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: '山留め《やまどめ》 = mencegah tanah di sisi galian runtuh. Di bidang konstruksi sering disebut 土留め《どどめ》. Wajib jika kedalaman ≥1.5m. Kartu #108.',
-    related_card_id: 121,
+    related_card_id: 106,
     track: 'common',
   },
   {
@@ -776,7 +776,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '都市《とし》ガス工事《こうじ》 = pekerjaan jaringan PIPA (管路《かんろ》) untuk mendistribusikan gas kota. Kabel & panel = pekerjaan listrik. Kartu #24.',
-    related_card_id: 31,
+    related_card_id: 30,
     track: 'common',
   },
   {
@@ -835,7 +835,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: 'Operasi mesin berat = wajib 技能講習《ぎのうこうしゅう》 (pelatihan keterampilan, misal: crane, forklift) + 特別教育《とくべつきょういく》. Bukan manajemen atau teknisi inti.',
-    related_card_id: 209,
+    related_card_id: 166,
     track: 'common',
   },
   {
@@ -875,7 +875,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: "押土《おしど》 = mendorong tanah dengan blade bulldozer. 掘削《くっさく》 = menggali. 運搬《うんぱん》 = mengangkut. Kata kunci: 'mendorong' (押す《おす》) + bulldozer. Kartu #148 (転圧関連《てんあつかんれん》).",
-    related_card_id: 231,
+    related_card_id: 177,
     track: 'common',
   },
   {
@@ -964,7 +964,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: 'Listrik = 外線工事《がいせんこうじ》 (jaringan luar: tiang, kabel udara/bawah tanah) + 内線工事《ないせんこうじ》 (instalasi dalam gedung). Kartu #23.',
-    related_card_id: 30,
+    related_card_id: 29,
     track: 'common',
   },
   {
@@ -979,7 +979,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: 'Telekomunikasi = 有線方式《ゆうせんほうしき》 (kabel, termasuk serat optik) + 無線方式《むせんほうしき》 (nirkabel, gelombang radio). Serat optik masih 有線《ゆうせん》 (berkabel). Kartu #45, #26.',
-    related_card_id: 33,
+    related_card_id: 31,
     track: 'common',
   },
   {
@@ -994,7 +994,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '衛生器具設備《えいせいきぐせつび》 = peralatan sanitasi: toilet/closet, wastafel, bath tub. AC = 空調《くうちょう》. Tangki air panas = perlengkapan pemanas air, bukan sanitasi.',
-    related_card_id: 37,
+    related_card_id: 35,
     track: 'common',
   },
   {
@@ -1009,7 +1009,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: '警報設備《けいほうせつび》 = sistem alarm: detektor asap/panas, bel darurat, siaran darurat. 消火設備《しょうかせつび》 = aktif memadamkan api (sprinkler, hidran). 避難設備《ひなんせつび》 = tangga darurat, tanda evakuasi.',
-    related_card_id: 35,
+    related_card_id: 33,
     track: 'common',
   },
   {
@@ -1029,7 +1029,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: 'Teriakan 危ない《あぶない》！= bahaya mengancam SEGERA. Harus langsung bereaksi, minggir, atau hindari. Kartu #682.',
-    related_card_id: 666,
+    related_card_id: 564,
     track: 'common',
   },
   {
@@ -1078,7 +1078,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '坪《つぼ》 = satuan luas tradisional Jepang ≈ 3.3 m². Masih digunakan dalam properti. 寸《すん》/尺《しゃく》 = satuan PANJANG (bukan luas).',
-    related_card_id: 277,
+    related_card_id: 1583,
     track: 'common',
   },
   {
@@ -1093,7 +1093,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '釘仕舞《くぎじまい》 = mencabut paku dari bekisting yang sudah dibongkar, agar papan bisa dipakai ulang. 打ち込み《うちこみ》 = menancapkan. 釘止め《くぎどめ》 = mengencangkan.',
-    related_card_id: 303,
+    related_card_id: 1434,
     track: 'common',
   },
   {
@@ -1108,7 +1108,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: '絶縁《ぜつえん》 = isolasi listrik — mencegah arus mengalir ke tempat yang tidak diinginkan. Dilakukan dengan karet, plastik, atau bahan dielektrik lainnya.',
-    related_card_id: 280,
+    related_card_id: 207,
     track: 'common',
   },
   {
@@ -1123,7 +1123,7 @@ export const JAC_TEORI = [
     ans: 0,
     img: null,
     exp: '接地《せっち》 = grounding — menghubungkan ke tanah untuk keamanan (jika ada arus bocor, mengalir ke bumi bukan ke manusia). 漏電《ろうでん》 = KEADAAN bocor, bukan tindakan.',
-    related_card_id: 62,
+    related_card_id: 52,
     track: 'common',
   },
   {
@@ -1138,7 +1138,7 @@ export const JAC_TEORI = [
     ans: 1,
     img: null,
     exp: '整頓《せいとん》 = Seiton = meletakkan barang di TEMPAT YANG DITENTUKAN agar mudah ditemukan. 清潔《せいけつ》 = menjaga kebersihan. 掃除《そうじ》 = aktif membersihkan.',
-    related_card_id: 327,
+    related_card_id: 249,
     track: 'common',
   },
   {
@@ -1161,7 +1161,7 @@ export const JAC_TEORI = [
     ans: 2,
     img: null,
     exp: 'Di lokasi konstruksi: lengan HARUS diturunkan ke pergelangan tangan (melindungi dari luka/lecet). Kancing harus terkancing. Lengan pendek = DILARANG karena bahaya.',
-    related_card_id: 316,
+    related_card_id: 242,
     track: 'common',
   },
 ];
