@@ -109,7 +109,15 @@ export default function App() {
           mode={mode}
           onSelectMode={goMode}
         >
-          <ModeRouter />
+          {/* The three tabs below each get a boundary; this branch did not, and
+              it is the most-exercised screen in the app. ModeRouter has one of
+              its own, but it wraps only ModeHeader + Suspense -- everything
+              ModeRouter computes before that return (its hooks, filteredCards,
+              the whole modeProps map) ran outside any boundary, so a throw
+              there unmounted the tree to a blank page mid-study. */}
+          <ErrorBoundary fallback={<TabError tab="Mode belajar" />}>
+            <ModeRouter />
+          </ErrorBoundary>
         </AppShell>
       </main>
     );
