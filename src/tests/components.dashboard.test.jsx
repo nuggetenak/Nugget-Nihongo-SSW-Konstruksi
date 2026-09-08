@@ -23,7 +23,7 @@ const defaultProps = {
   onNavigate: vi.fn(),
   onChangeTrack: vi.fn(),
   srs: { dueCount: 0 },
-  isDark: true,
+  theme: 'dark',
   onToggleTheme: vi.fn(),
 };
 
@@ -45,21 +45,32 @@ describe('Dashboard', () => {
       expect(screen.getByText(/Nugget Nihongo/)).toBeTruthy();
     });
 
-    it('renders theme toggle button', () => {
-      renderDashboard({ isDark: true });
-      // Dark mode shows sun icon
-      expect(screen.getByText('☀️')).toBeTruthy();
+    // The glyph names the mode you are IN, not the one you would switch to.
+    // With two states "switch to" was readable; with three it is not -- the
+    // next mode in the cycle is not guessable from an icon. The aria-label
+    // carries the same name, which is the part a screen reader gets.
+    it('shows the dark glyph while on dark', () => {
+      renderDashboard({ theme: 'dark' });
+      expect(screen.getByText('🌙')).toBeTruthy();
+      expect(screen.getByLabelText(/Tema: Gelap/)).toBeTruthy();
     });
 
-    it('shows moon icon in light mode', () => {
-      renderDashboard({ isDark: false });
-      expect(screen.getByText('🌙')).toBeTruthy();
+    it('shows the light glyph while on light', () => {
+      renderDashboard({ theme: 'light' });
+      expect(screen.getByText('☀️')).toBeTruthy();
+      expect(screen.getByLabelText(/Tema: Terang/)).toBeTruthy();
+    });
+
+    it('shows the follow-system glyph while on sistem', () => {
+      renderDashboard({ theme: 'sistem' });
+      expect(screen.getByText('🖥️')).toBeTruthy();
+      expect(screen.getByLabelText(/Tema: Ikuti Sistem/)).toBeTruthy();
     });
 
     it('calls onToggleTheme when theme button clicked', () => {
       const onToggleTheme = vi.fn();
-      renderDashboard({ onToggleTheme: onToggleTheme });
-      fireEvent.click(screen.getByText('☀️'));
+      renderDashboard({ onToggleTheme: onToggleTheme, theme: 'dark' });
+      fireEvent.click(screen.getByText('🌙'));
       expect(onToggleTheme).toHaveBeenCalledOnce();
     });
 

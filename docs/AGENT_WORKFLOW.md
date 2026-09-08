@@ -98,6 +98,7 @@ briefly when actually pushing, then strip again right after.
 | `docs/PWA_RELEASE_SPEC.md`     | Offline architecture, `CACHE_VERSION` discipline, deploy checklist |
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
 | `docs/UI_UX_PLAN.md`           | **Work queue, not a spec** — prioritised UI/UX items; shrinks as they land, retires to `docs/archive/` when empty |
+| `docs/CARD_SPLIT_AUDIT.md`     | **Frozen finding list, not a spec** — a verdict for every card in the pre-split corpus, including the rule that kept each of the 113 that stayed whole |
 | `docs/RUBY_MISMATCH_AUDIT.md`  | **Frozen finding list, not a spec** — readings not scoped to their own base; retires when the list is empty |
 | `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md` |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
@@ -136,9 +137,17 @@ not exist (all removed 2026-09-04 — see CHANGELOG).
 | JAC Mockup sets | `src/data/jac-mockup-sets.js` | — it IS the source |
 | JAC Official | `src/data/sets/jac/jac-{teori,lifeline}.js` | `jac-official.js` is a two-line shim |
 | Angka / Danger / Confusion | their own file in `src/data/` | — |
+| Patch notes (Tentang) | `src/data/release-notes.js` | — it IS the source; hand-written, deliberately not derived from `CHANGELOG.md`. Rules for adding an entry are in the file header, and tests enforce them. |
+| Tentang prose | `src/data/about-content.js` | — it IS the source. The per-menu guide and the source credits are **not** here: they are generated at render time from `MODE_META` and `SOURCE_META`. |
 
 After editing `src/data/source/`, run `node scripts/merge-cards.mjs`. `npm run audit:content` fails
-if you forget — it compares `cards.js` against `source/` field by field, not just by count.
+if you forget — it compares `cards.js` against `source/` field by field, not just by count. **But
+CI does not run that audit** (see `HUSKY-SETUP.md`), so a direct edit to the generated `cards.js`
+passes CI and is silently reverted at deploy. Run `npm run validate` before pushing.
+
+Anything under `src/data/` must use `export const`, not `export function` —
+`scripts/verify-content.mjs` parses these files by rewriting `export const ` to CommonJS, and a
+function declaration fails that audit.
 
 ## 5. Minimal kickoff
 

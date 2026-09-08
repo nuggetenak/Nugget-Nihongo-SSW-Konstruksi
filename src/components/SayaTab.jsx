@@ -19,6 +19,8 @@ import { formatCount } from '../utils/format.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { getTextScale, nextTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { getThemeMode, DEFAULT_THEME } from '../utils/theme-mode.js';
+import { hasUnseenReleaseNotes } from '../data/release-notes.js';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
@@ -63,6 +65,7 @@ export default function SayaTab() {
     track,
     setTrack,
     isDark,
+    theme,
     toggleTheme,
     toast,
     goMode,
@@ -412,7 +415,18 @@ export default function SayaTab() {
           sub="Tap untuk ganti"
           onClick={() => setTrack(null)}
         />
-        <Row label="Tema" value={isDark ? '🌙 Gelap' : '☀️ Terang'} onClick={toggleTheme} />
+        <Row
+          label="Tema"
+          value={`${getThemeMode(theme ?? DEFAULT_THEME).emoji} ${getThemeMode(theme ?? DEFAULT_THEME).label}`}
+          // "Ikuti Sistem" alone never tells you which way it resolved, which
+          // is the one thing a reader wants to confirm after choosing it.
+          sub={
+            theme === 'sistem'
+              ? `Mengikuti pengaturan HP — sekarang ${isDark ? 'gelap' : 'terang'}`
+              : 'Ketuk untuk ganti'
+          }
+          onClick={toggleTheme}
+        />
         {editingGoal ? (
           <div className={s.inlineEdit}>
             <label className={s.inlineEditLabel} htmlFor="saya-daily-goal">
@@ -638,15 +652,15 @@ export default function SayaTab() {
         <Row label="📂 Sumber Materi" sub="Per PDF sumber" onClick={() => goMode('sumber')} />
         <Row
           label="ℹ️ Tentang Aplikasi"
-          // Was "3 jalur". Doboku and Kenchiku were dropped in session 24 --
-          // this app has been single-track (Lifeline) since, and the line sat in
-          // the About row telling every user otherwise.
-          sub={`${formatCount(total)} kartu · Lifeline · FSRS SRS · SSW Konstruksi v${__APP_VERSION__}`}
-          onClick={() =>
-            toast.show(
-              `SSW Konstruksi v${__APP_VERSION__} · ${formatCount(total)} kartu · FSRS · by Nugget Nihongo 🏗️`
+          value={
+            hasUnseenReleaseNotes(prefs, __APP_VERSION__) ? (
+              <span className={s.rowBadge}>Baru</span>
+            ) : (
+              `v${__APP_VERSION__}`
             )
           }
+          sub={`${formatCount(total)} kartu · Panduan, tanya-jawab & catatan pembaruan`}
+          onClick={() => goMode('tentang', { section: 'baru' })}
         />
       </Section>
 

@@ -13,12 +13,11 @@ import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
 import { JpFront } from './JpDisplay.jsx';
-import { JP_LIST_MAX } from '../utils/jp-helpers.js';
+import { JP_LIST_MAX, stripFuri } from '../utils/jp-helpers.js';
 import { recommendMode } from '../utils/recommend-mode.js';
 import { formatCount } from '../utils/format.js';
 import { MODE_META } from '../router/modes.js';
-
-const getRecent = () => (storageGet('progress')?.recentCards ?? []).slice(0, 5);
+import { getThemeMode } from '../utils/theme-mode.js';
 
 function getQuickStart(srs, examDate) {
   const sessions = storageGet('progress')?.sessions ?? [];
@@ -56,7 +55,7 @@ export default function Dashboard({
   onChangeTrack,
   onGoTab,
   srs,
-  isDark,
+  theme,
   onToggleTheme,
 }) {
   const { prefs } = useApp();
@@ -68,11 +67,13 @@ export default function Dashboard({
   const restN = Math.max(0, total - knownN - unknownN);
 
   const trackInfo = T.track[track] || T.track.lifeline;
-  const { streakData, dailyCount, starred } = useProgress();
-  const recentIds = useMemo(() => getRecent(), []);
+  const { streakData, dailyCount, starred, recentCards: recentIds } = useProgress();
+  // From the context rather than a second storageGet: ProgressContext already
+  // owns recentCards, and two readers of one field is one too many.
   const recentCards = useMemo(
     () =>
-      recentIds
+      (recentIds ?? [])
+        .slice(0, 5)
         .map((id) => CARDS.find((c) => c.id === id))
         .filter(Boolean)
         .slice(0, 3),
@@ -147,8 +148,14 @@ export default function Dashboard({
           >
             {trackInfo.icon} {trackInfo.jp}
           </button>
-          <button className={s.themeBtn} onClick={onToggleTheme} aria-label="Ganti tema">
-            {isDark ? '☀️' : '🌙'}
+          {/* Three states now, so the glyph comes from the registry and the
+              label names the current one -- "Ganti tema" never said which. */}
+          <button
+            className={s.themeBtn}
+            onClick={onToggleTheme}
+            aria-label={`Tema: ${getThemeMode(theme).label} — ketuk untuk ganti`}
+          >
+            {getThemeMode(theme).emoji}
           </button>
         </div>
       </header>
@@ -336,16 +343,29 @@ export default function Dashboard({
               <h2 className={s.secLabel}>Terakhir dipelajari</h2>
               <ul className={s.recentList}>
                 {recentCards.map((c) => (
-                  <li key={c.id} className={s.recentCard}>
-                    <span className={s.recentJp}>
-                      <JpFront
-                        jp={c.jp}
-                        furiganaPolicy={furiganaPolicy}
-                        maxSize={JP_LIST_MAX}
-                        compact
-                      />
-                    </span>
-                    <span className={s.recentId}>{c.id_text}</span>
+                  <li key={c.id}>
+                    {/* A real control, not a styled <li>. Every other tappable
+                      thing on this screen is a <button>; these rows looked
+                      identical and did nothing. */}
+                    <button
+                      className={s.recentCard}
+                      onClick={() =>
+                        onNavigate('kartu', { filterIds: [c.id], filterReason: 'recent' })
+                      }
+                      // stripFuri: the raw jp carries 《reading》 markers, which a
+                      // screen reader would announce as literal bracket syntax.
+                      aria-label={`Buka kartu ${stripFuri(c.jp)} — ${c.id_text}`}
+                    >
+                      <span className={s.recentJp}>
+                        <JpFront
+                          jp={c.jp}
+                          furiganaPolicy={furiganaPolicy}
+                          maxSize={JP_LIST_MAX}
+                          compact
+                        />
+                      </span>
+                      <span className={s.recentId}>{c.id_text}</span>
+                    </button>
                   </li>
                 ))}
               </ul>

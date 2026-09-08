@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { T } from '../styles/theme.js';
 import { pillStyle } from '../styles/pill.js';
-import { shuffle } from '../utils/shuffle.js';
+import { shuffle, shuffleOptions } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
@@ -95,21 +95,29 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
       return getWrongCount(wrongCounts[qId]) > 0;
     });
   }
-  return shuffle(pool).map((q) => ({
-    question: q.q,
-    hint: showHint ? q.hint : null,
-    options: q.opts.map((opt, i) => ({
-      text: stripFuri(opt),
-      sub: q.opts_id?.[i] || null,
-    })),
-    correctIdx: q.ans,
-    explanation: q.exp,
-    // Item 96: QuizShell's "Latih N salah" button can only assemble a deck from
-    // results that carry a card id, and until 2026-09-07 not one of QUIZ_SETS'
-    // 980 questions had one, so the button had never appeared here. 305 do now.
-    _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
-    _qId: `${set.id}-${q.id}`,
-  }));
+  return shuffle(pool).map((q) => {
+    // Options are shuffled here, at the single draw point, not per render --
+    // see shuffleOptions' own note on why source order leaked the answer.
+    const { options, correctIdx } = shuffleOptions(
+      q.opts.map((opt, i) => ({
+        text: stripFuri(opt),
+        sub: q.opts_id?.[i] || null,
+      })),
+      q.ans
+    );
+    return {
+      question: q.q,
+      hint: showHint ? q.hint : null,
+      options,
+      correctIdx,
+      explanation: q.exp,
+      // Item 96: QuizShell's "Latih N salah" button can only assemble a deck from
+      // results that carry a card id, and until 2026-09-07 not one of QUIZ_SETS'
+      // 980 questions had one, so the button had never appeared here. 305 do now.
+      _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
+      _qId: `${set.id}-${q.id}`,
+    };
+  });
 }
 
 export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {

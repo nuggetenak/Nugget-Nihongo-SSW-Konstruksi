@@ -24,16 +24,34 @@ beforeEach(() => {
 });
 
 describe('text scale', () => {
-  it('has a default that is exactly 100% — the no-op', () => {
-    expect(getTextScale(DEFAULT_TEXT_SCALE).pct).toBe(100);
+  // These two were one test, which conflated a real invariant with the value
+  // the default happened to have. They are separate now because only one of
+  // them is allowed to change.
+  it("'normal' is exactly 100% — the rung applyTextScale clears the override against", () => {
+    expect(getTextScale('normal').pct).toBe(100);
   });
 
-  it('offers a smaller option as well as larger ones', () => {
-    // Not only "bigger": the scale rebuild raised every default size, and a
-    // reader who preferred the old density needs a way back.
+  it('ships kecil as the default — owner decision 2026-09-08, deliberately not the 100% no-op', () => {
+    // If this fails, someone "restored" the default without reading
+    // text-scale.js's header. It is a decision, not drift: the header says what
+    // it costs and why it ships anyway.
+    expect(DEFAULT_TEXT_SCALE).toBe('kecil');
+    expect(getTextScale(DEFAULT_TEXT_SCALE).pct).toBe(90);
+  });
+
+  it('offers sizes either side of the 100% rung', () => {
+    // The default now sits at the bottom of the scale, so this is about the
+    // rungs existing, not about an escape hatch from a larger default.
     const pcts = TEXT_SCALES.map((s) => s.pct);
     expect(Math.min(...pcts)).toBeLessThan(100);
     expect(Math.max(...pcts)).toBeGreaterThan(100);
+  });
+
+  it('nextTextScale on an unknown key lands on the default, not a fixed index', () => {
+    // Preserves the pre-existing behaviour (an unrecognised stored value puts
+    // the next tap on the default rung) while sourcing that rung from
+    // DEFAULT_TEXT_SCALE instead of the literal `1` it used to hardcode.
+    expect(nextTextScale('nonsense')).toBe(DEFAULT_TEXT_SCALE);
   });
 
   it('is strictly increasing, so tapping through never repeats a size', () => {
@@ -56,7 +74,9 @@ describe('text scale', () => {
   it('an unknown stored value falls back to the default rather than breaking', () => {
     // prefs come from localStorage, which a user can edit or an old export can
     // carry a since-renamed key in.
-    expect(getTextScale('nonsense').pct).toBe(100);
+    // Asserts the default, not the number the default used to be -- the old
+    // `.pct === 100` said "the default" in its name while pinning 'normal'.
+    expect(getTextScale('nonsense').key).toBe(DEFAULT_TEXT_SCALE);
     expect(() => applyTextScale('nonsense')).not.toThrow();
   });
 

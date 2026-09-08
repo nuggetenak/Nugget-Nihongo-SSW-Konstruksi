@@ -32,9 +32,44 @@ content into this file.
 ## CURRENT STATE
 
 **As of 2026-09-08.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.1.0**, **1,626 cards**, **19 modes**, `STORAGE_VERSION` **7**,
-`npm run validate` clean (99 files, 937 tests). 7.0.0 is merged into `main` (PR #12, `200e48a`);
-7.1.0 is on `claude/remove-modes-split-vocab-cards-5r2qfe` as PR #13.
+At that date: version **7.2.0**, **1,626 cards**, **20 modes**, `STORAGE_VERSION` **7**,
+`npm run validate` clean (111 files, 1,017 tests). 7.1.0 is merged into `main` (PR #13, `59928df`);
+7.2.0 is on `claude/open-threads-ui-improvements-lxb3sy` as PR #14.
+
+- **2026-09-08: five UI changes, three P0 fixes, and a 49-finding audit.** Full write-up is
+  `CHANGELOG.md` `[7.2.0]`; the audit itself is `docs/UI_UX_PLAN.md` §16. What a future session most
+  needs to know:
+
+  - **Neither context may build a document from its own React state.** `setPref` and `setProg`
+    forward the updater to `engine.set()` and take the merged result back. They used to hand over a
+    finished snapshot assembled from state seeded once at mount, which silently overwrote every
+    field written directly by the eight `prefs` and six `progress` writers outside the contexts —
+    personal notes, sprint bests, wrong-answer history. `context-direct-write.test.js` holds it.
+    **Do not "simplify" either back to `setState(prev => …)` with a `storageSet` inside.**
+  - **A changed default is not a migration.** `textScale` → `kecil` and the new `lastSeenVersion`
+    key both reach new installs only, because `init()` loads a current document as-is and
+    `get('prefs')` returns it directly. `STORAGE_VERSION` stays 7 and
+    `defaults-new-install-only.test.js` asserts both directions.
+  - **`kecil` is an owner decision (2026-09-08), not drift.** Every other artefact in the repo
+    argues for a larger default and will look like the authority. `text-scale.js`'s header says what
+    it costs; a test name carries the date and the word "owner".
+  - **Shuffling options did not close the guessable-bank problem, and the release note says so.**
+    The correct answer is the longest option 51.5% (Wayground) and 72.0% (JAC Mockup) of the time; a
+    length-picking bot scores the same and passes the 65% mark. That is a *content* defect —
+    distractors are written tersely — and shuffling positions cannot touch it. Ceilings are recorded
+    in `question-option-shuffle.test.js`. **Filed as UI_UX_PLAN item 114; this is the highest-value
+    content work outstanding.**
+  - **`filterReason` is part of `kartu`'s prop contract**, defaulting to `'wrong'` so the eight
+    retry-wrong bridges are unchanged. Red is reserved for wrong answers again.
+  - **`FlashcardMode` cannot be rendered with `filterIds` under jsdom — it hangs**, on `main` as
+    well as here. That is why the banner spent so long mislabelling a source browse: the one prop
+    that makes the banner appear could not be set in a test. Filed as item 118.
+  - **`vitest.config.js` must mirror `vite.config.js`'s `define`.** It is a standalone config;
+    `__APP_VERSION__` was missing there and nothing caught it because no test had ever rendered
+    `SayaTab`.
+  - **Two audit areas are not done, and are not clean**: a correctness pass on the 13 modes with no
+    tests (6,009 lines), and the readiness/streak/SRS-bucket arithmetic. Both agents died on account
+    rate limits. Items 119 and 120.
 
 - **2026-09-08: "proceed to finish all hanging threads."** Same branch, restarted from `main`
   after PR #12 merged (a merged PR cannot track new work). Full write-up is `CHANGELOG.md`

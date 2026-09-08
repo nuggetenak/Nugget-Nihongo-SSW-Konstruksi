@@ -41,6 +41,7 @@ export const MODE_COMPONENTS = {
   fokus: lazy(() => import('../modes/FocusMode.jsx')),
   glosari: lazy(() => import('../modes/GlossaryMode.jsx')),
   sumber: lazy(() => import('../modes/SumberMode.jsx')),
+  tentang: lazy(() => import('../modes/TentangMode.jsx')),
   ekspor: lazy(() => import('../modes/ExportMode.jsx')),
   ulasan: lazy(() => import('../modes/ReviewMode.jsx')),
   mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
@@ -232,6 +233,20 @@ export const MODE_META = {
     label: 'Sumber',
     width: 'default',
     desc: 'Per PDF sumber',
+    color: '#64748b',
+    strand: null,
+    skeleton: 'list',
+  },
+  // Reached only from Saya -> Info; deliberately absent from MODE_SECTIONS,
+  // because Belajar is the study menu and a help page is not a study mode.
+  // goMode works without section membership. strand: null keeps it out of
+  // MISSION_MODES -- a reference surface is not a daily mission.
+  tentang: {
+    icon: 'ℹ️',
+    ui: 'info',
+    label: 'Tentang Aplikasi',
+    width: 'default',
+    desc: 'Panduan, tanya-jawab & catatan pembaruan',
     color: '#64748b',
     strand: null,
     skeleton: 'list',

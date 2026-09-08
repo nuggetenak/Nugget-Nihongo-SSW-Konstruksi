@@ -62,6 +62,15 @@ function readInitialFilters() {
   return { search: rawSearch, cats: new Set(['all']) };
 }
 
+// Why this deck is filtered, and how to say so. Keyed by ModeRouter's
+// `filterReason`, which defaults to 'wrong' so every existing retry-wrong
+// caller is unchanged.
+export const FILTER_BANNERS = {
+  wrong: { icon: '❌', text: 'Latihan kartu salah', tone: 'wrong' },
+  recent: { icon: '🕘', text: 'Terakhir dipelajari', tone: 'neutral' },
+  sumber: { icon: '📂', text: 'Dari sumber ini', tone: 'neutral' },
+};
+
 export default function FlashcardMode({
   cards,
   known,
@@ -72,6 +81,7 @@ export default function FlashcardMode({
   starred = new Set(),
   onToggleStar = () => {},
   filterIds = null,
+  filterReason = 'wrong',
   onSessionEnd,
   audioEnabled = false,
 }) {
@@ -392,21 +402,27 @@ export default function FlashcardMode({
 
   return (
     <div className={S.fcWrapper}>
-      {/* Wrong-card bridge banner */}
-      {filterIds && (
+      {/* Filtered-deck banner. Red is reserved for a deck of things you got
+          wrong -- DESIGN_SPEC §2's semantic-colour rule. Browsing a source's
+          cards or reopening one you just studied is not a bad outcome, and
+          painting it in --ssw-wrong said it was. */}
+      {filterIds && FILTER_BANNERS[filterReason] && (
         <div
           style={{
-            background: T.wrongBg,
-            border: `1px solid ${T.wrongBorder}`,
+            background: FILTER_BANNERS[filterReason].tone === 'wrong' ? T.wrongBg : T.surface,
+            border: `1px solid ${
+              FILTER_BANNERS[filterReason].tone === 'wrong' ? T.wrongBorder : T.border
+            }`,
             borderRadius: 8,
             padding: 'var(--space-8) var(--space-12)',
             marginBottom: 'var(--space-8)',
             fontSize: 'var(--fs-caption)',
-            color: T.wrong,
+            color: FILTER_BANNERS[filterReason].tone === 'wrong' ? T.wrong : T.textMuted,
             textAlign: 'center',
           }}
         >
-          ❌ Latihan kartu salah · {baseCards.length} kartu
+          {FILTER_BANNERS[filterReason].icon} {FILTER_BANNERS[filterReason].text} ·{' '}
+          {baseCards.length} kartu
         </div>
       )}
 

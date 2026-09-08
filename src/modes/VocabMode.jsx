@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { T } from '../styles/theme.js';
-import { shuffle } from '../utils/shuffle.js';
+import { shuffle, shuffleOptions } from '../utils/shuffle.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
@@ -78,18 +78,25 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
         pool = pool.filter((q) => getWrongCount(vocabWrong[`${q._set ?? setId}-${q.id}`]) > 0);
       }
       const qs = shuffle(pool);
-      const drawn = qs.map((q) => ({
-        question: q.q,
-        hint: showHint ? q.hint : null,
-        options: q.opts.map((opt, i) => ({
-          text: stripFuri(opt),
-          sub: q.opts_id?.[i] || null,
-        })),
-        correctIdx: q.ans,
-        explanation: q.exp,
-        _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
-        _qId: `${q._set ?? setId}-${q.id}`,
-      }));
+      const drawn = qs.map((q) => {
+        // Shuffled at the draw point, once per session -- see shuffleOptions.
+        const { options, correctIdx } = shuffleOptions(
+          q.opts.map((opt, i) => ({
+            text: stripFuri(opt),
+            sub: q.opts_id?.[i] || null,
+          })),
+          q.ans
+        );
+        return {
+          question: q.q,
+          hint: showHint ? q.hint : null,
+          options,
+          correctIdx,
+          explanation: q.exp,
+          _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
+          _qId: `${q._set ?? setId}-${q.id}`,
+        };
+      });
       setQuestions(drawn);
       setActiveSet(setId);
       setLemahMode(lemah);

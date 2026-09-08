@@ -41,7 +41,7 @@ export default function SumberMode({ onNavigate }) {
         {onNavigate && (
           <div style={{ display: 'flex', gap: 'var(--space-8)', marginBottom: 'var(--space-14)' }}>
             <button
-              onClick={() => onNavigate('kartu', { filterIds: srcIds })}
+              onClick={() => onNavigate('kartu', { filterIds: srcIds, filterReason: 'sumber' })}
               style={{
                 flex: 1,
                 fontFamily: 'inherit',

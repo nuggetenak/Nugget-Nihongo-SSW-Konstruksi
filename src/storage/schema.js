@@ -4,6 +4,9 @@
 // v1→v6 upgrade chain and STORAGE_VERSION history.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { DEFAULT_THEME } from '../utils/theme-mode.js';
+
 export const STORAGE_VERSION = 7;
 
 export const DOCS = {
@@ -44,7 +47,7 @@ export const DEFAULTS = {
   prefs: {
     _v: STORAGE_VERSION,
     track: null,
-    theme: 'light',
+    theme: DEFAULT_THEME, // 'light' | 'dark' | 'sistem' — see utils/theme-mode.js
     onboarded: false,
     tutorialFlashcard: false,
     lastMode: null,
@@ -53,7 +56,7 @@ export const DEFAULTS = {
     audioEnabled: true, // Web Speech API toggle
     studyAnchor: null, // 'morning' | 'lunch' | 'evening'
     furiganaPolicy: 'always', // 'always' | 'tap' | 'hidden'
-    textScale: 'normal', // 'kecil' | 'normal' | 'besar' | 'sangat-besar' — see utils/text-scale.js
+    textScale: DEFAULT_TEXT_SCALE, // 'kecil' | 'normal' | 'besar' | 'sangat-besar' — see utils/text-scale.js
     flashcardHintCount: 0, // resets on resetAll()
     notes: {}, // personal notes per card { [cardId]: string }
     speakOnFlip: false, // speak on card flip instead of advance
@@ -63,6 +66,10 @@ export const DEFAULTS = {
     // means "never backed up", which is the truthful answer for anyone who has
     // not — so this is additive and needs no migration.
     lastBackupAt: null,
+    // Which release's notes this reader has seen. Absent for everyone who
+    // installed before 7.2.0 and null on a fresh install -- both truthfully
+    // mean "not seen", so this is additive and needs no migration.
+    lastSeenVersion: null,
     // Item 107: which graded listening band `dengar` speaks at — 'jelas' |
     // 'alami' | 'cepat'. Absent falls back to 'alami', which is the behaviour
     // that existed before, so this is additive too.
