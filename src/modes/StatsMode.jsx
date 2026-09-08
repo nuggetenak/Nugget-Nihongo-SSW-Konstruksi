@@ -44,6 +44,14 @@ export default function StatsMode({
   // sessions `calcReadinessBand` returns null rather than guess, and the ring
   // says so instead of drawing a number over nothing.
   const readinessBand = calcReadinessBand({ srs, sessions, streakData });
+  // Item 58. `hesitation` is derived in useSRS off the same revision counter as
+  // `stats`, so it can never disagree with the numbers above it. Empty until the
+  // learner has HESITATION_MIN_SAMPLES timed reviews -- a median of five reviews
+  // is noise, and a confident-looking list built on noise is worse than none.
+  const hesitation = srs?.hesitation ?? { baselineMs: null, samples: 0, cards: [] };
+  const baselineSeconds = hesitation.baselineMs
+    ? (hesitation.baselineMs / 1000).toFixed(1).replace('.', ',')
+    : null;
   const readiness = readinessBand?.score ?? 0;
   const ringColor = !readinessBand
     ? T.textDim
@@ -470,6 +478,37 @@ export default function StatsMode({
                 {c.emoji} {c.label} — {c.pct}% ({c.known}/{c.total})
               </div>
             ))}
+          </div>
+        </>
+      )}
+
+      {/* ── Sempat Ragu (item 58) ────────────────────────────────────────
+          Cards rated "I knew it" that nonetheless took far longer than this
+          learner's own median. The rating alone cannot show this and session
+          timing averages it away, so without responseMs it is invisible --
+          which is the whole reason storage v7 records it. Deliberately shown
+          and never acted on: the decision record for this item rules out
+          feeding timing back into FSRS's rating, and a list the learner reads
+          is the alternative it proposes. */}
+      {hesitation.cards.length > 0 && (
+        <>
+          <div className={S.sectionLabel}>Sempat Ragu</div>
+          <div className={ST.hesitationNote}>
+            Jawaban benar, tapi jauh lebih lama dari biasanya buat kamu
+            {baselineSeconds ? ` (~${baselineSeconds} detik)` : ''}. Bukan salah — cuma belum
+            otomatis.
+          </div>
+          <div className={S.list} style={{ gap: 'var(--space-4)' }}>
+            {hesitation.cards.map((h) => {
+              const card = CARDS.find((c) => c.id === h.id);
+              if (!card) return null;
+              return (
+                <div key={h.id} className={`${S.rowSpread} ${ST.wrongRow}`}>
+                  <span className={ST.wrongJp}>{stripFuri(card.jp)?.slice(0, 20)}</span>
+                  <span className={ST.hesitationRatio}>{h.ratio.toFixed(1)}× lebih lama</span>
+                </div>
+              );
+            })}
           </div>
         </>
       )}

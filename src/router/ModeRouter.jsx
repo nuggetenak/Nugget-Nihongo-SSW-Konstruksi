@@ -264,14 +264,17 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
-    // wayground and vocab deliberately get no onRetryWrong: their questions
-    // come from QUIZ_SETS, where no question carries a related card id, so
-    // QuizShell can never assemble a deck to send anywhere. WaygroundMode
-    // never forwarded the prop to QuizShell at all, and VocabMode forwarded a
-    // prop that could not fire -- both read as a working feature from the
-    // prop map alone, which is why it sat unnoticed.
+    // wayground and vocab had no onRetryWrong until item 96 (2026-09-07),
+    // because their questions come from QUIZ_SETS and not one of the 980
+    // carried a related card id -- QuizShell could never assemble a deck to
+    // send anywhere. 305 do now. Two other halves of the same feature were also
+    // missing and are fixed with it: WaygroundMode never forwarded the prop to
+    // QuizShell at all, and VocabMode forwarded one that could not fire. All
+    // three read as a working feature from the prop map alone, which is why it
+    // sat unnoticed.
     wayground: {
       onSessionEnd: makeSessionEnd('wayground'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       // Item 76: it renders QuizShell, which draws a speaker button behind this
       // prop -- so the button had simply never appeared in the largest question
       // bank in the app, on Japanese it shows as text like every other quiz.
@@ -279,6 +282,7 @@ export default function ModeRouter() {
     },
     vocab: {
       onSessionEnd: makeSessionEnd('vocab'),
+      onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
       audioEnabled,
     },
     simulasi: {

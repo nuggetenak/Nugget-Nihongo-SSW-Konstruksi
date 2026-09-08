@@ -6,6 +6,7 @@ import { useState, useCallback, useEffect, useMemo } from 'react';
 import s from './SayaTab.module.css';
 import { CARDS } from '../data/cards.js';
 import { exportAll, importAllSafe, resetAll, get as storageGet } from '../storage/engine.js';
+import { markBackedUp, describeBackup } from '../utils/backup-state.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useSRSContext } from '../contexts/SRSContext.jsx';
@@ -127,6 +128,10 @@ export default function SayaTab() {
     setInstallPrompt(null);
   }, [installPrompt]);
 
+  // Item 108: recomputed on export rather than derived at render, so the row
+  // updates the moment a backup succeeds instead of on the next mount.
+  const [backup, setBackup] = useState(() => describeBackup());
+
   const handleExport = useCallback(() => {
     try {
       const blob = new Blob([JSON.stringify(exportAll(), null, 2)], { type: 'application/json' });
@@ -136,6 +141,8 @@ export default function SayaTab() {
       a.download = `ssw-progress-${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
+      markBackedUp();
+      setBackup(describeBackup());
       toast.show('💾 Progress berhasil diekspor');
     } catch {
       toast.show('❌ Gagal ekspor');
@@ -608,6 +615,15 @@ export default function SayaTab() {
       </Section>
 
       <Section title="Data">
+        {/* Item 108: the learner used to find out that progress is local-only at
+            the moment it cost them something — a new phone, a cleared browser.
+            First row in the section, above the export it is asking for. */}
+        <Row
+          label="🛡️ Cadangan Terakhir"
+          value={backup.value}
+          sub={backup.sub}
+          danger={backup.state !== 'ok'}
+        />
         <Row label="💾 Ekspor Progress" sub="Unduh file JSON cadangan" onClick={handleExport} />
         <Row label="📥 Impor Progress" sub="Pulihkan dari file JSON" onClick={handleImport} />
         <Row

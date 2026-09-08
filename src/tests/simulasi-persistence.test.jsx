@@ -134,14 +134,29 @@ describe('SimulasiMode — "Latih N Salah" sends real card ids', () => {
     expect(new Set(ids).size).toBe(ids.length); // deduplicated
   });
 
-  it('hides the button for a pool exam, whose questions have no linked cards', async () => {
-    renderSim();
+  it('sends only the linked questions from a pool exam, never a dead id', async () => {
+    // This used to assert the button was ABSENT here, because not one of
+    // QUIZ_SETS' 980 questions carried a related_card_id. Item 96 landed 305 of
+    // them (2026-09-07), so the button appears for a pool exam now and the
+    // assertion that still means something is the one underneath it: the deck
+    // carries real card ids and nothing else. A dead id sends the learner to a
+    // blank screen, which is what the old "no links at all" state was
+    // protecting against by accident.
+    const onRetryWrong = vi.fn();
+    renderSim({ onRetryWrong });
     await start(); // Teori & Praktik is the default source
     await act(async () => fireEvent.click(screen.getByText('Kumpulkan Ujian')));
     await act(async () => fireEvent.click(await screen.findByText('Kumpulkan sekarang')));
 
     expect(screen.getByText('BELUM LULUS')).toBeTruthy();
-    expect(screen.queryByText(/Latih \d+ Kartu/)).toBeNull();
+    const retry = screen.queryByText(/Latih \d+ Kartu/);
+    if (!retry) return; // a draw with no linked question is legitimate, not a failure
+    await act(async () => fireEvent.click(retry));
+
+    const ids = onRetryWrong.mock.calls[0][0];
+    const known = new Set(CARDS.map((c) => c.id));
+    for (const id of ids) expect(known.has(id), `card ${id} does not exist`).toBe(true);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });
 

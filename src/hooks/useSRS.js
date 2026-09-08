@@ -13,6 +13,8 @@ import {
   previewIntervals,
 } from '../srs/fsrs-scheduler.js';
 import { RATING_META } from '../srs/fsrs-core.js';
+import { getAllCards } from '../srs/fsrs-store.js';
+import { hesitantCards } from '../utils/hesitation.js';
 
 export function useSRS(trackCardIds = []) {
   // initStore() once — in the useState initializer (runs only on first render).
@@ -34,10 +36,15 @@ export function useSRS(trackCardIds = []) {
   // rather than recomputed on every render of a provider that sits near the
   // root — and, more importantly, memoising them here means the returned object
   // can be stable, which is what SRSContext actually needs (see below).
-  const { dueCount, stats } = useMemo(
+  const { dueCount, stats, hesitation } = useMemo(
     () => ({
       dueCount: getDueCardIds(trackCardIds).length,
       stats: getSRSStats(trackCardIds),
+      // Item 58. Derived here rather than in StatsMode so it invalidates on the
+      // same revision counter as everything else the SRS panel shows — the
+      // stats memo below already walks the whole store, so this is one more
+      // pass over data that is being read anyway, not a new cost.
+      hesitation: hesitantCards(getAllCards()),
     }),
     // revision is the dependency that matters: the store is module state, so
     // nothing else here changes when a review is recorded.
@@ -46,8 +53,10 @@ export function useSRS(trackCardIds = []) {
   );
 
   // Record a review — updates store + bumps revision so the memo recomputes
-  const review = useCallback((cardId, rating) => {
-    const result = recordReview(cardId, rating);
+  // `opts` carries item 58's `responseMs` through to the history entry. Passed
+  // as the fourth argument because the third is `now`, which callers do not set.
+  const review = useCallback((cardId, rating, opts) => {
+    const result = recordReview(cardId, rating, new Date(), opts);
     setRevision((n) => n + 1);
     return result;
   }, []);
@@ -70,12 +79,13 @@ export function useSRS(trackCardIds = []) {
       ready: true, // always ready — localStorage is synchronous
       dueCount,
       stats,
+      hesitation,
       review,
       getDue,
       getInfo,
       previewFor,
       RATING_META,
     }),
-    [dueCount, stats, review, getDue, getInfo, previewFor]
+    [dueCount, stats, hesitation, review, getDue, getInfo, previewFor]
   );
 }

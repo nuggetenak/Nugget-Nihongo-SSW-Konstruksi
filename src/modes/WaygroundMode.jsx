@@ -104,11 +104,15 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
     })),
     correctIdx: q.ans,
     explanation: q.exp,
+    // Item 96: QuizShell's "Latih N salah" button can only assemble a deck from
+    // results that carry a card id, and until 2026-09-07 not one of QUIZ_SETS'
+    // 980 questions had one, so the button had never appeared here. 305 do now.
+    _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
     _qId: `${set.id}-${q.id}`,
   }));
 }
 
-export default function WaygroundMode({ onSessionEnd, audioEnabled = false }) {
+export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track } = useApp();
   // Item 80: this mode's screen is a set list with no options panel, so there is
   // nowhere to put a delay picker. It obeys the preference set where a panel
@@ -207,6 +211,10 @@ export default function WaygroundMode({ onSessionEnd, audioEnabled = false }) {
         title={title}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
+        // Item 96: this mode never forwarded the prop to QuizShell at all, so
+        // even a question that carried a card id could not have reached the
+        // button. Both halves were missing; both are here now.
+        onRetryWrong={onRetryWrong}
         showHint={showHint}
         accentColor={set?.color || T.amber}
         autoNextDelay={autoNextDelay}

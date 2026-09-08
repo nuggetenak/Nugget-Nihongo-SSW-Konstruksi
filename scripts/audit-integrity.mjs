@@ -9,7 +9,7 @@
 // Fields are now derived from what the corpus actually carries; see the
 // FIELD_RULES table for the reasoning behind each one.
 import { CARDS } from '../src/data/cards.js';
-import { CATEGORIES, SOURCE_META, SOURCE_GROUPS, VOCAB_SOURCES } from '../src/data/categories.js';
+import { CATEGORIES, SOURCE_META, SOURCE_GROUPS } from '../src/data/categories.js';
 
 const issues = [];
 const warnings = [];
@@ -74,8 +74,12 @@ for (const c of CATEGORIES) {
   }
 }
 
-for (const src of VOCAB_SOURCES) {
-  if (!sourceKeys.has(src)) issues.push(`VOCAB_SOURCES references unknown source: ${src}`);
+// VOCAB_SOURCES was checked here until item 69 retired it. The check that
+// actually mattered — a source key naming something SOURCE_META does not declare
+// — is the reverse of the "declared but unused" loop above, and was never made
+// in this direction. It is now, so the pair is closed both ways.
+for (const src of usedSources) {
+  if (!sourceKeys.has(src)) issues.push(`Card source not declared in SOURCE_META: ${src}`);
 }
 for (const group of SOURCE_GROUPS) {
   for (const key of group.keys) {

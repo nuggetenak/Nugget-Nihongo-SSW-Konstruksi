@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
-import { CATEGORIES, VOCAB_SOURCES } from '../data/categories.js';
+import { CATEGORIES } from '../data/categories.js';
 import { getWrongCount } from '../utils/wrong-tracker.js';
 import SprintMode from './SprintMode.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -15,9 +15,11 @@ export default function FocusMode({ known, quizWrong = {}, onExit, onSessionEnd 
   const catStats = useMemo(() => {
     return CATEGORIES.filter((c) => c.key !== 'all' && c.key !== 'bintang')
       .map((cat) => {
-        const catCards = CARDS.filter(
-          (c) => c.category === cat.key && !VOCAB_SOURCES.includes(c.source)
-        );
+        // Item 69: this used to drop cards whose source was in VOCAB_SOURCES.
+        // A category's weakness is its unlearned cards, whichever file they
+        // arrived in — and these go straight to the drill below, so an excluded
+        // card was one this screen could never offer you.
+        const catCards = CARDS.filter((c) => c.category === cat.key);
         const knownN = catCards.filter((c) => known.has(c.id)).length;
         const wrongN = catCards.filter((c) => getWrongCount(quizWrong[c.id]) > 0).length;
         const score = catCards.length > 0 ? Math.round((knownN / catCards.length) * 100) : 100;

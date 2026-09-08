@@ -5,7 +5,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { shuffle } from '../utils/shuffle.js';
-import { speakJP, canSpeak } from '../utils/speak.js';
+import { speakJP, canSpeak, LISTENING_SPEEDS, LISTENING_SPEED_DEFAULT } from '../utils/speak.js';
+import { pillStyle } from '../styles/pill.js';
 import { haptic } from '../utils/haptic.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { JpFront } from '../components/JpDisplay.jsx';
@@ -47,6 +48,10 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
   // Lemah" reads — and then offered no way to drill only those. The filter was
   // one of the three the item found missing where the data was already there.
   const [lemahMode, setLemahMode] = useState(false);
+  // Item 107: one speed trained word recognition; real instructions arrive fast
+  // and clipped. Persisted, because a learner's comfortable pace is a property
+  // of the learner and not of one session.
+  const [speed, setSpeed] = useState(() => prefs?.listeningSpeed ?? LISTENING_SPEED_DEFAULT);
   const lemahCards = cards.filter((c) => getWrongCount(quizWrong[c.id]) > 0);
   const deck = lemahMode ? lemahCards : cards;
   const count = resolveQuizCount(countPref, deck.length);
@@ -99,14 +104,17 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
     if (!started || !currentQ || selected !== null) return;
     speakCountRef.current = 0;
     if (hasAudio) {
-      setTimeout(() => speakJP(stripFuri(currentQ.card.jp), { onError: handleSpeakError }), 300);
+      setTimeout(
+        () => speakJP(stripFuri(currentQ.card.jp), { speed, onError: handleSpeakError }),
+        300
+      );
     }
   }, [idx, started]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSpeak = () => {
     if (!currentQ) return;
     speakCountRef.current += 1;
-    speakJP(stripFuri(currentQ.card.jp), { onError: handleSpeakError });
+    speakJP(stripFuri(currentQ.card.jp), { speed, onError: handleSpeakError });
     haptic.tap();
   };
 
@@ -260,6 +268,47 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
           <strong style={{ color: 'var(--ssw-textBright)' }}>Cara main:</strong> Tekan 🔊 untuk
           mendengar kata Jepang. Pilih terjemahan yang benar. Kartu bergerak otomatis setelah {1.5}{' '}
           detik.
+        </div>
+
+        {/* Item 107: graded listening. Each level is a band of three rates
+            rather than one, so the HVPT variation the audio wrapper exists for
+            survives the grading — see LISTENING_SPEEDS. */}
+        <div style={{ marginBottom: 'var(--space-20)' }}>
+          <div
+            style={{
+              fontSize: 'var(--fs-caption)',
+              color: 'var(--ssw-textMuted)',
+              marginBottom: 'var(--space-8)',
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+            }}
+          >
+            Kecepatan Bicara
+          </div>
+          <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
+            {Object.entries(LISTENING_SPEEDS).map(([key, meta]) => (
+              <button
+                key={key}
+                onClick={() => {
+                  setSpeed(key);
+                  setPref('listeningSpeed', key);
+                }}
+                aria-pressed={speed === key}
+                style={pillStyle(speed === key)}
+              >
+                {meta.label}
+              </button>
+            ))}
+          </div>
+          <div
+            style={{
+              fontSize: 'var(--fs-small)',
+              color: 'var(--ssw-textDim)',
+              marginTop: 'var(--space-6)',
+            }}
+          >
+            {LISTENING_SPEEDS[speed]?.sub ?? ''}
+          </div>
         </div>
 
         {lemahCards.length > 0 && (

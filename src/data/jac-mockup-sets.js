@@ -63,6 +63,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['300°C', '72°C', '30°C', '150°C'],
         ans: 1,
         exp: 'Fire damper (防火ダンパー/FD) standar untuk AC umum (hunian, perkantoran) menggunakan fusible link (温度ヒューズ) yang melebur pada 72°C. Saat suhu udara yang melewati duct mencapai 72°C → fusible link melebur → damper menutup otomatis → api tidak menyebar lewat duct.',
+        related_card_id: 960,
       },
       {
         id: 5,
@@ -104,6 +105,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Break test setelah vacuum drawing: biarkan sistem dalam kondisi vacuum selama 15-30 menit. Jika tekanan tidak naik = tidak ada kebocoran = OK. Jika tekanan naik = ada kebocoran → cari dan perbaiki sebelum mengisi refrigerant. Ini tahap wajib sebelum charging.',
+        related_card_id: 632,
       },
       {
         id: 9,
@@ -113,6 +115,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Mengecek warna', 'Mengecek kebocoran', 'Mengukur kekuatan', 'Mengukur panjang'],
         ans: 1,
         exp: 'Water pressure test (水圧試験) dilakukan SETELAH pemasangan pipa selesai untuk memastikan tidak ada kebocoran pada sambungan, fitting, dan valve. Tekanan uji = 1.5× tekanan kerja. Durasi: minimum 30 menit tanpa penurunan tekanan. Jika tekanan turun → ada kebocoran.',
+        related_card_id: 1188,
       },
       {
         id: 10,
@@ -132,6 +135,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Grounding (接地《せっち》/アース) = menghubungkan bagian konduktif alat listrik ke bumi (earth). Fungsi utama: mengalirkan arus bocor/fault ke bumi agar tidak mengalir melalui tubuh manusia. Juga menstabilkan tegangan dan melindungi dari sambaran petir. Resistansi grounding standar: <10Ω (umum), <1Ω (sistem presisi).',
+        related_card_id: 685,
       },
       {
         id: 11,
@@ -164,6 +168,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Boiler', 'Substation', 'Wash basin & toilet', 'Cooling tower'],
         ans: 2,
         exp: 'Pekerjaan instalasi sanitary fixture (衛生器具設備工事) memasang: toilet, wastafel, bathtub, shower, bidet, urinal, dan semua fitting yang berhubungan dengan air bersih/kotor untuk penggunaan sanitasi. Bukan AC, bukan listrik umum.',
+        related_card_id: 409,
       },
       {
         id: 14,
@@ -196,6 +201,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Ikuti arah panah', 'Terbalik', 'Bebas', 'Horizontal'],
         ans: 0,
         exp: 'Ikuti panah aliran (modul JAC praktik).',
+        related_card_id: 727,
       },
       {
         id: 17,
@@ -229,6 +235,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Vacuum drawing (真空引き) pada sistem AC/refrigerant: menyedot udara dan uap air dari dalam sistem sebelum pengisian refrigerant. Tujuan: ①Hilangkan uap air (yang bisa membeku di katup ekspansi), ②Hilangkan oksigen (mencegah oksidasi), ③Deteksi kebocoran. Durasi standar: 15-60 menit dengan vacuum pump.',
+        related_card_id: 632,
       },
       {
         id: 19,
@@ -292,6 +299,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Kontraktor utama (元方事業者) dalam sistem manajemen keselamatan wajib: ①Membuat rencana keselamatan bersama, ②Mengkoordinasikan KY seluruh subkontraktor, ③Memastikan semua pekerja mendapat safety education, ④Melakukan patroli keselamatan rutin.',
+        related_card_id: 422,
       },
       {
         id: 3,
@@ -306,6 +314,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: '4 langkah KY: Step 1=identifikasi bahaya, Step 2=tentukan bahaya UTAMA/pokok (本質の危険), Step 3=buat countermeasure, Step 4=komitmen target. Langkah KE-2 adalah menentukan bahaya paling kritis dari semua yang ditemukan.',
+        related_card_id: 509,
       },
       {
         id: 4,
@@ -334,6 +343,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: "4 langkah KY: ①現状把握 (identifikasi bahaya) → ②本質追及 (analisis bahaya utama) → ③対策樹立 (buat countermeasure) → ④目標設定 (tetapkan target). Langkah PERTAMA adalah mengidentifikasi bahaya yang ada = 'bahaya apa yang mengintai kita?'",
+        related_card_id: 509,
       },
       {
         id: 6,
@@ -353,6 +363,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'KY (Kiken Yochi = 危険予知) bertujuan memprediksi bahaya SEBELUM kerja dimulai. Ini sejalan dengan tujuan Industrial Safety & Health Act yaitu mencegah kecelakaan dan penyakit kerja. KY bukan investigasi kecelakaan yang sudah terjadi.',
+        related_card_id: 849,
       },
       {
         id: 7,
@@ -413,6 +424,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Hanya konfirmasi', 'Memasang tag', 'Mulai kerja', 'Memutus sumber energi'],
         ans: 3,
         exp: "Langkah LOTO (Lockout-Tagout/ロックアウト・タグアウト): ①MATIKAN & KUNCI sumber energi (listrik/hidrolik/pneumatik), ②Pasang tag 'DO NOT OPERATE', ③Pastikan energi tersimpan (kapasitor, spring) juga dibuang (zero energy state). Ini mencegah kecelakaan saat maintenance mesin.",
+        related_card_id: 1084,
       },
       {
         id: 12,
@@ -455,6 +467,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['2.0 kali', '1.5 kali', '1.0 kali', '1.25 kali'],
         ans: 3,
         exp: 'Upah lembur minimal 1.25× gaji pokok. Khusus lembur >60 jam/bulan, tarif naik menjadi 1.50×. Lembur di hari libur resmi (法定休日) minimal 1.35×. Ketentuan ini wajib dipatuhi semua perusahaan di Jepang.',
+        related_card_id: 5,
       },
       {
         id: 15,
@@ -474,6 +487,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Bar chart (バーチャート = Gantt chart) = jadwal konstruksi paling umum: sumbu Y (vertikal) = nama pekerjaan, sumbu X (horizontal) = waktu. Setiap pekerjaan = batang horizontal. Mudah dibaca semua orang termasuk pekerja lapangan. Kelemahannya: tidak menunjukkan ketergantungan antar pekerjaan (untuk itu digunakan network diagram/PERT).',
+        related_card_id: 1148,
       },
       {
         id: 16,
@@ -531,6 +545,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: "労災保険 (rōsai hoken / Workers' Accident Compensation Insurance) = asuransi kecelakaan kerja yang SELURUH preminya dibayar oleh PENGUSAHA (事業主). Pekerja tidak membayar premi sama sekali. Jika terjadi kecelakaan/penyakit kerja, biaya medis dan kompensasi dibayar dari asuransi ini. Ini berbeda dari 健康保険 (health insurance) yang dibayar bersama.",
+        related_card_id: 15,
       },
       {
         id: 19,
@@ -545,6 +560,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Level WBGT (暑さ指数): <21°C = ほぼ安全 (hampir aman), 21-25°C = 注意《ちゅうい》 (hati-hati), 25-28°C = 警戒 (waspada), 28-31°C = 厳重警戒 (PERINGATAN KETAT = kurangi aktivitas fisik berat, istirahat lebih sering, minum setiap 15-20 menit), ≥31°C = 危険 (BAHAYA = hentikan pekerjaan berat di luar ruangan). Ukur dengan WBGT meter.',
+        related_card_id: 531,
       },
       {
         id: 20,
@@ -605,6 +621,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Lawyer', 'Skill technician', 'Judicial scrivener', 'Engineer'],
         ans: 1,
         exp: 'Orang yang lulus 技能検定 (uji keterampilan teknis/skill certification) berhak menyebut diri 技能士 (Ginōshi = skilled worker). Ini bukan gelar akademik tapi pengakuan kompetensi teknis resmi dari pemerintah Jepang. Ada berbagai level (1, 2, 特級).',
+        related_card_id: 136,
       },
       {
         id: 25,
@@ -690,6 +707,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '防火区画 (bōka kukaku / fire compartment) = pemisah tahan api yang membagi bangunan menjadi zona-zona untuk mencegah penyebaran api dan asap dari satu area ke area lain. Wajib berdasarkan Building Standards Act untuk bangunan >3 lantai atau >500m². Bahan: beton, pintu tahan api (防火戸), fire damper di duct.',
+        related_card_id: 971,
       },
       {
         id: 30,
@@ -704,6 +722,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Sprinkler (スプリンクラー) = sistem pemadam kebakaran otomatis yang menyemprotkan air saat kepala sprinkler terpapar panas ≥72°C (fusible link melebur). Terdiri dari: jaringan pipa, kepala sprinkler (head), alarm check valve, pompa, tangki air. Wajib untuk bangunan tertentu berdasarkan Fire Service Act (消防法).',
+        related_card_id: 95,
       },
     ],
   },
@@ -784,6 +803,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Kencangkan manual', 'Ikuti nilai yang ditentukan pabrik', 'Maksimal', 'Bebas'],
         ans: 1,
         exp: 'Ikuti spec pabrik agar tidak deformasi (modul JAC perpipaan).',
+        related_card_id: 1045,
       },
       {
         id: 8,
@@ -848,6 +868,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Sebelum menggunakan alat listrik (電動工具), wajib mengukur resistansi isolasi (絶縁抵抗) dengan megger (insulation tester). Nilai normal ≥1 MΩ. Jika di bawah ini = isolasi rusak = risiko sengatan listrik (感電) atau kebakaran. Ini pemeriksaan keselamatan wajib harian.',
+        related_card_id: 1009,
       },
       {
         id: 14,
@@ -866,6 +887,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Dibiarkan', 'Mencegah masuknya benda asing', 'Memotong', 'Memberi tenaga kuat'],
         ans: 1,
         exp: 'Saat melepas end cap pipa: ①Verifikasi tidak ada tekanan tersisa (purge/bleed dahulu), ②Bersihkan ujung pipa dari kotoran/chip, ③Tutup kembali sesegera mungkin untuk mencegah kontaminasi. End cap melindungi ulir/fitting pipa dari kerusakan selama transportasi/penyimpanan.',
+        related_card_id: 904,
       },
       {
         id: 16,
@@ -926,6 +948,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Urutan pengencangan flange bolt: cross-pattern (silang/diagonal), bukan berurutan searah jarum jam. Ini memastikan tekanan gasket merata di seluruh muka flange. Mulai dari torsi ringan (1/3 torsi akhir), lalu 2/3, lalu full torque. Ulang putaran konfirmasi terakhir.',
+        related_card_id: 1192,
       },
     ],
   },
@@ -952,6 +975,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: "Langkah KE-4 dari 4 langkah KY adalah: menetapkan target keselamatan (目標設定) dan berkomitmen bersama dengan 'Touch and Call'. Ini adalah penegasan bersama untuk fokus pada bahaya yang ditemukan. Setelah ini, pekerja siap mulai kerja dengan kesadaran penuh.",
+        related_card_id: 509,
       },
       {
         id: 2,
@@ -980,6 +1004,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Berdasarkan Construction Business Act: izin konstruksi (建設業許可) diperlukan jika nilai satu kontrak ≥500万円 (~35 juta rupiah) untuk pekerjaan khusus, atau ≥1,500万円 untuk konstruksi bangunan umum. Di bawah batas ini = 軽微な建設工事 (pekerjaan konstruksi kecil) yang bisa dilakukan tanpa izin. Ini melindungi konsumen dari kontraktor tidak kompeten.',
+        related_card_id: 8,
       },
       {
         id: 4,
@@ -1012,6 +1037,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Menurunkan biaya', 'Menambah limbah', 'Sukarela', 'Melacak alur limbah'],
         ans: 3,
         exp: "Sistem manifest limbah industri (マニフェスト制度) bertujuan: melacak limbah dari asal (site konstruksi) hingga tujuan akhir (fasilitas pembuangan/daur ulang). Ini memastikan limbah berbahaya tidak dibuang sembarangan. Manifest = 'paspor' limbah yang wajib diisi dan disimpan.",
+        related_card_id: 16,
       },
       {
         id: 7,
@@ -1049,6 +1075,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Labor Safety & Health Act mengatur bahwa 元方事業者 (moto-kata jigyōsha / kontraktor utama) bertanggung jawab atas keselamatan SEMUA pekerja di site, termasuk pekerja subkontraktor. Ini disebut 統括安全衛生管理 (tōkatsu anzen eisei kanri = manajemen K3 terpadu). Pekerja SSW Anda dilindungi oleh tanggung jawab ini.',
+        related_card_id: 6,
       },
       {
         id: 10,
@@ -1058,6 +1085,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['48 jam', '40 jam', '36 jam', '44 jam'],
         ans: 1,
         exp: 'Menurut UU Standar Ketenagakerjaan (Labor Standards Act), waktu kerja resmi adalah 40 jam/minggu (8 jam/hari × 5 hari). Jika melebihi ini, disebut lembur (時間外労働) dan wajib dibayar tarif lebih tinggi. Ini adalah hak dasar semua pekerja di Jepang.',
+        related_card_id: 5,
       },
       {
         id: 11,
@@ -1091,6 +1119,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Risk assessment dilakukan sebelum kerja: Step 1=identifikasi bahaya, Step 2=evaluasi risiko (severity × probability), Step 3=tentukan countermeasure, Step 4=implementasi & evaluasi. Langkah PERTAMA selalu identifikasi bahaya terlebih dahulu.',
+        related_card_id: 1094,
       },
       {
         id: 13,
@@ -1124,6 +1153,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '作業主任者 (sagyō shuninsha) = supervisor bersertifikat yang WAJIB ditunjuk untuk pekerjaan berbahaya. Daftar wajib 作業主任者: ①足場の組立て (scaffolding assembly), ②掘削 >2m (excavation), ③酸素欠乏危険場所 (confined space), ④アーク溶接 (arc welding), dll. Tanpa 作業主任者, pekerjaan ini DILARANG dimulai.',
+        related_card_id: 1085,
       },
       {
         id: 15,
@@ -1133,6 +1163,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Semua pekerja', 'Kontraktor utama', 'Hanya subkontraktor', 'Pengawas'],
         ans: 1,
         exp: 'Penanggung jawab pengelolaan limbah industri di lokasi konstruksi adalah kontraktor UTAMA, meskipun ada banyak subkontraktor. Kontraktor utama tidak bisa melimpahkan tanggung jawab ini ke subkontraktor. Ini sama seperti tanggung jawab keselamatan.',
+        related_card_id: 21,
       },
       {
         id: 16,
@@ -1142,6 +1173,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Langsung masuk', 'Ventilasi', 'Diabaikan', 'Pakai api'],
         ans: 1,
         exp: 'Jika kadar oksigen di manhole/confined space <18%, DILARANG masuk. Langkah: ①Hentikan pekerjaan, ②Ventilasi paksa (forced ventilation) minimal 20 menit, ③Ukur ulang kadar O₂ (standar ≥18%), ④Jika masuk terpaksa, wajib pakai SCBA (respirator O₂ pasokan). Kadar <16% = berbahaya akut, <6% = fatal dalam menit.',
+        related_card_id: 847,
       },
       {
         id: 17,
@@ -1287,6 +1319,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Untuk mendapatkan status tinggal Keterampilan Khusus (特定技能/Tokutei Ginō): ①Lulus uji bahasa Jepang (JLPT N4 atau setara / 日本語能力試験・日本語基礎テスト), ②Lulus uji evaluasi keterampilan bidang (misalnya ujian JAC untuk konstruksi). Tidak harus N1 atau lulusan universitas. Ujian yang Anda ikuti sekarang adalah syarat nomor 2.',
+        related_card_id: 1232,
       },
       {
         id: 27,
@@ -1306,6 +1339,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: '施工体制台帳 = dokumen yang mencatat seluruh kontraktor dan subkontraktor yang terlibat, tanggung jawab masing-masing, dan jadwal pekerjaan. Wajib dibuat oleh 特定建設業 (kontraktor utama berizin khusus) saat nilai subkontrak melebihi batas tertentu. Dokumen ini harus dipajang di site dan bisa diperiksa kapan saja.',
+        related_card_id: 1164,
       },
       {
         id: 28,
@@ -1315,6 +1349,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['2.0 kali', '1.25 kali', '1.0 kali', '1.5 kali'],
         ans: 1,
         exp: 'Kerja malam 22:00–05:00 mendapat tambahan minimal 0.25× gaji pokok (total gaji malam = gaji normal × 1.25). Jika kerja malam + lembur, keduanya dijumlahkan (total bisa 1.50×). Ini disebut warimashi chingin (割増賃金).',
+        related_card_id: 5,
       },
       {
         id: 29,
@@ -1348,6 +1383,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Kontraktor utama (元方事業者/moto kata) bertanggung jawab atas keselamatan SEMUA pekerja di lokasi, termasuk pekerja subkontraktor. Ini diatur dalam Industrial Safety & Health Act (労働安全衛生法). Tanggung jawab ini tidak bisa dilimpahkan.',
+        related_card_id: 6,
       },
     ],
   },
@@ -1406,6 +1442,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Tahan api tinggi', 'Terlalu ringan', 'Mudah menyerap air', 'Konduktif listrik'],
         ans: 0,
         exp: 'Tahan api & suhu tinggi (modul JAC Ch3.2.35).',
+        related_card_id: 973,
       },
       {
         id: 5,
@@ -1543,6 +1580,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Sejak revisi hukum Januari 2022, kerja di ketinggian ≥6.75m (konstruksi ≥5m) WAJIB menggunakan full body harness (フルハーネス型安全帯), bukan belt tunggal. Full harness mendistribusikan beban seluruh tubuh sehingga lebih aman jika jatuh. Ini adalah kewajiban hukum, bukan rekomendasi.',
+        related_card_id: 1090,
       },
       {
         id: 18,
@@ -1552,6 +1590,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Memotong', 'Melebarkan', 'Memotong ulir', 'Membengkokkan pipa'],
         ans: 3,
         exp: 'Membengkokkan copper pipe tanpa kerut (modul alat praktik).',
+        related_card_id: 1123,
       },
       {
         id: 19,
@@ -1566,6 +1605,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Dry nitrogen purge untuk hilangkan moisture (modul JAC praktik).',
+        related_card_id: 661,
       },
       {
         id: 20,
@@ -1575,6 +1615,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Ketinggian >1m', 'Ketinggian >5m', 'Hanya indoor', 'Kerja di tanah'],
         ans: 1,
         exp: 'Full body harness WAJIB digunakan saat bekerja di ketinggian ≥5m (untuk konstruksi) atau ≥6.75m (umum), berlaku sejak Januari 2022. Sebelumnya boleh pakai belt tunggal (一本吊り). Perubahan ini karena full harness terbukti jauh lebih aman — distribusi beban lebih merata.',
+        related_card_id: 1178,
       },
     ],
   },
@@ -1661,6 +1702,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: '雇用保険 (koyō hoken / Employment Insurance) = asuransi yang melindungi pekerja saat kehilangan pekerjaan akibat PHK (解雇), kebangkrutan perusahaan (倒産), atau alasan lain di luar kehendak sendiri. Memberikan tunjangan pengangguran (失業給付) sementara mencari kerja baru. Premi dibayar bersama pengusaha dan pekerja. Berbeda dari 労災保険 (kecelakaan kerja).',
+        related_card_id: 1241,
       },
       {
         id: 7,
@@ -1670,6 +1712,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Pekerja', 'Hanya subkontraktor', 'Sukarela', 'Kontraktor utama'],
         ans: 3,
         exp: 'Penanggung jawab penyusunan 施工体制台帳 (buku catatan sistem pelaksanaan) dan 安全管理計画書 (rencana manajemen keselamatan) adalah kontraktor UTAMA. Dokumen ini menunjukkan struktur tanggung jawab semua pihak di site.',
+        related_card_id: 422,
       },
       {
         id: 8,
@@ -1689,6 +1732,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Pipa, duct, dan kabel yang menembus dinding atau lantai kompartemen tahan api (防火区画) harus ditutup dengan bahan tahan api (耐火充填材/fire-stop material) seperti putty tahan api atau mineral wool. Jika tidak ditutup, celah tersebut menjadi jalur api dan asap menyebar ke kompartemen lain, membatalkan fungsi 防火区画. Ini diatur dalam Building Standards Act.',
+        related_card_id: 971,
       },
       {
         id: 9,
@@ -1764,6 +1808,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Lifeline & 設備工事 (Raifurain setsubi kōji) = instalasi infrastruktur kehidupan: air bersih, listrik, gas, telekomunikasi, internet, AC, sanitasi. Memasang pipa air = lifeline. Apartemen = 建築. Jembatan/bendungan = 土木. Ini adalah kategori ujian SSW untuk spesialisasi Anda.',
+        related_card_id: 28,
       },
       {
         id: 14,
@@ -1778,6 +1823,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Construction Business Act mengatur: kontraktor utama WAJIB membayar tagihan subkontraktor dalam 50 hari setelah menerima hasil pekerjaan (検収後50日以内). Keterlambatan pembayaran membebani subkontraktor kecil yang butuh arus kas. Pelanggaran bisa dikenakan perintah perbaikan dari pemerintah. Subkontraktor berhak menuntut pembayaran tepat waktu.',
+        related_card_id: 8,
       },
       {
         id: 15,
@@ -1819,6 +1865,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Persaingan', 'Kerja sama tim', 'Ketidakpedulian', 'Tidak tertarik'],
         ans: 1,
         exp: 'Untuk melancarkan pekerjaan konstruksi, kerja sama tim (チームワーク/teamwork) antar kontraktor spesialis sangat penting. Setiap spesialis punya jadwal dan area kerja yang saling bergantung. Koordinasi buruk → delay → biaya membengkak → konflik.',
+        related_card_id: 499,
       },
       {
         id: 19,
@@ -1894,6 +1941,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'ガス事業法 (Gasu Jigyō-hō / Gas Business Act) bertujuan: ①Memastikan pasokan gas yang aman dan stabil, ②Memastikan keamanan instalasi gas (保安). Mengatur persyaratan produksi, transmisi, distribusi gas, dan standar keselamatan. Instalasi dan perbaikan pipa gas wajib dilakukan oleh kontraktor berlisensi (ガス工事業者). Kebocoran gas = bahaya ledakan.',
+        related_card_id: 19,
       },
       {
         id: 24,
@@ -1903,6 +1951,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Tidak ada', 'Bebas', '1 hari', '2 hari'],
         ans: 2,
         exp: 'Pengusaha wajib memberikan minimal 1 hari libur per minggu (週1日). Disebut 法定休日 (hōtei kyūjitsu). Jika bekerja di hari ini, pekerja berhak tarif 1.35× gaji pokok. Libur lebih dari 1 hari/minggu disebut 所定休日.',
+        related_card_id: 5,
       },
       {
         id: 25,
@@ -1922,6 +1971,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: '設計図書 (sekkei tosho) = dokumen teknis dasar konstruksi: ①設計図面 (gambar teknis: denah, tampak, potongan, detail), ②仕様書 (spesifikasi material dan metode). Kontraktor WAJIB memahami dan mengikuti sekkei tosho. Dokumen lain (buku pekerja, tagihan) = dokumen administrasi, bukan sekkei tosho.',
+        related_card_id: 1155,
       },
       {
         id: 26,
@@ -1941,6 +1991,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Hook/lanyard HARUS dipasang di anchor point di ATAS kepala (頭上) atau setidaknya setinggi bahu, BUKAN di bawah pinggang. Jika dipasang di bawah pinggang: jarak jatuh bebas lebih panjang → gaya impak lebih besar → risiko cedera lebih tinggi meski tidak sampai lantai. Prinsip: semakin tinggi anchor point, semakin pendek jarak jatuh bebas, semakin aman.',
+        related_card_id: 1090,
       },
       {
         id: 27,
@@ -1983,6 +2034,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Keselamatan forklift saat bergerak: ①Fork dinaikkan 15-30cm dari tanah (tidak terlalu tinggi = stabil, tidak menyapu tanah), ②Fork dimiringkan ke belakang (後傾/kōkei) agar muatan tidak jatuh ke depan, ③Kecepatan maks 8km/jam di dalam, ④Selalu bunyikan klakson di persimpangan, ⑤Pejalan kaki dilarang di jalur forklift. Sertifikat wajib (フォークリフト技能講習修了証).',
+        related_card_id: 316,
       },
       {
         id: 30,
@@ -2002,6 +2054,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '衛生器具設備工事 (eisei kigu setsubi kōji) = pemasangan perlengkapan sanitasi yang berhubungan dengan air bersih dan air kotor: toilet, wastafel (洗面台), bathtub, shower, urinal, bidet, floor drain, dsb. Ini adalah bagian dari 管工事 (pipa & instalasi). Berbeda dari sprinkler (消防設備) atau AC (空調設備).',
+        related_card_id: 409,
       },
     ],
   },
@@ -2023,6 +2076,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Bahan tahan api', 'Insulasi semprot', 'Cat', 'Lem'],
         ans: 1,
         exp: 'Rigid polyurethane foam (硬質ポリウレタンフォーム/硬質ウレタンフォーム) = foam insulasi yang disemprotkan dan mengeras. Digunakan sebagai spray foam insulation untuk menutup celah, insulasi duct bentuk tidak beraturan, atau insulasi dinding cold storage. Nilai R yang sangat baik.',
+        related_card_id: 976,
       },
       {
         id: 2,
@@ -2032,6 +2086,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Paralel maksimal 0.5mm', 'Maksimal 2mm', 'Bebas', 'Maksimal 1mm'],
         ans: 0,
         exp: 'Standar alignment muka flange: maksimal 0.5mm untuk sistem bertekanan tinggi. Alignment yang buruk menyebabkan gasket tidak merata = bocor di tekanan tinggi. Gunakan flange alignment tool atau laser untuk memastikan sebelum pengebolan akhir.',
+        related_card_id: 1192,
       },
       {
         id: 3,
@@ -2069,6 +2124,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Helm keselamatan sebaiknya diperiksa SETIAP kali sebelum dipakai (daily check): cek retak, deformasi, tali dagu, dan suspensi dalam. Helm yang terkena benturan keras (meski tidak retak dari luar) harus SEGERA diganti karena struktur dalam bisa rusak. Umur pakai: 3-5 tahun sejak produksi.',
+        related_card_id: 1243,
       },
       {
         id: 6,
@@ -2105,6 +2161,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['5mm', 'Sekitar 1.5× diameter pipa', '10mm', 'Bebas'],
         ans: 1,
         exp: '1.5× OD untuk kekuatan sambungan (modul JAC praktik).',
+        related_card_id: 904,
       },
       {
         id: 10,
@@ -2132,6 +2189,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Voltmeter', 'Clamp meter', 'Hydrostatic test pump', 'Tester'],
         ans: 2,
         exp: 'Hydrostatic pump (modul JAC st2_sample_l).',
+        related_card_id: 1188,
       },
       {
         id: 13,
@@ -2141,6 +2199,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Bebas', 'Evakuasi pekerja minimal 1.5× tekanan uji', '5m', '1m'],
         ans: 1,
         exp: 'Jauhkan pekerja dari potensi ledakan (modul JAC praktik).',
+        related_card_id: 1188,
       },
       {
         id: 14,
@@ -2164,6 +2223,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Uji kebocoran pipa chilled/hot water dilakukan pada 1.5× tekanan kerja (例: jika tekanan kerja 0.7 MPa → uji pada 1.05 MPa). Durasi: minimal 30 menit tanpa penurunan tekanan. Jika tekanan turun → ada kebocoran → identifikasi dan perbaiki sebelum sistem dioperasikan.',
+        related_card_id: 1040,
       },
       {
         id: 16,
@@ -2219,6 +2279,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Maks 5.0m', 'Maks 2.3m', 'Maks 1.7m', 'Maks 10.0m'],
         ans: 1,
         exp: 'Jarak antar sprinkler head (スプリンクラーヘッド) standar respons (standard response, 72°C): maksimum 2.3m dari titik manapun di langit-langit (coverage radius ≈2.3m). Artinya jarak antar head ≈4.6m atau kurang. Tipe fast-response dan extended-coverage punya coverage berbeda.',
+        related_card_id: 948,
       },
     ],
   },
@@ -2259,6 +2320,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['5 tahun', 'Sukarela', '10 tahun', '1 tahun'],
         ans: 0,
         exp: 'Manifest limbah industri wajib disimpan minimal 5 tahun oleh pengusaha yang mengeluarkan manifest. Tujuan: bisa diperiksa/diaudit oleh pemerintah kapan saja untuk memastikan kepatuhan pembuangan limbah. Tidak menyimpan = pelanggaran hukum.',
+        related_card_id: 16,
       },
       {
         id: 3,
@@ -2287,6 +2349,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Kadar oksigen (酸素濃度) normal = 21%. Di bawah 18% = bahaya (酸素欠乏/sanso ketsubō). Di bawah 16% = berbahaya akut (pusing, jantung berdebar). Di bawah 6% = fatal dalam menit (kehilangan kesadaran). Gejala muncul SANGAT CEPAT tanpa peringatan. WAJIB: ukur O₂ dulu, ventilasi paksa, standby person di luar manhole.',
+        related_card_id: 847,
       },
       {
         id: 5,
@@ -2344,6 +2407,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: '既成杭工法 (kisei kui kōhō / precast pile method) = tiang dibuat di pabrik dengan kualitas terkontrol, kemudian dikirim ke site dan dipancang. Contoh: PHC pile (コンクリート杭), H-pile (H形鋼杭). Keunggulan: kualitas konsisten, cepat. Berbeda dari 現場打ち杭 (cast-in-place) di mana beton dituang langsung di lubang bor site.',
+        related_card_id: 1322,
       },
       {
         id: 8,
@@ -2386,6 +2450,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Tujuan risk assessment sebelum kerja: mengidentifikasi bahaya, mengevaluasi tingkat risiko, dan menetapkan countermeasure SEBELUM insiden terjadi. Ini adalah pendekatan proaktif. Berbeda dengan investigasi kecelakaan yang dilakukan SETELAH kejadian.',
+        related_card_id: 1094,
       },
       {
         id: 11,
@@ -2423,6 +2488,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Pengusaha wajib membuat rencana cuti terencana (計画年休) agar pekerja menggunakan minimal 5 hari cuti per tahun. Ini diwajibkan oleh revisi Labor Standards Act 2019. Pekerja yang tidak dibantu mengambil cuti = pelanggaran hukum.',
+        related_card_id: 1172,
       },
       {
         id: 14,
@@ -2451,6 +2517,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: '建設業法 (Kensetsu-gyō Hō / Construction Business Act) tujuan utamanya: ①Meningkatkan kualitas pelaku usaha konstruksi (資質の向上), ②Memastikan pelaksanaan konstruksi yang tepat (適正施工), ③Melindungi kepentingan pemberi proyek (発注者保護), ④Mendorong perkembangan industri konstruksi yang sehat. Bukan mengatur gaji atau keselamatan saja.',
+        related_card_id: 8,
       },
       {
         id: 16,
@@ -2488,6 +2555,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Hanya lisan', 'Isi pekerjaan, jadwal, & harga', 'Semua sukarela', 'Tidak ada'],
         ans: 1,
         exp: 'Saat membuat kontrak subkontraktor (下請負契約), hal yang WAJIB dicantumkan: ①Deskripsi pekerjaan, ②Jadwal (tanggal mulai & selesai), ③Harga kontrak, ④Metode pembayaran, ⑤Kondisi perubahan (追加変更). Kontrak verbal tidak sah. Ini diatur dalam Construction Business Act.',
+        related_card_id: 8,
       },
       {
         id: 19,
@@ -2507,6 +2575,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '最低賃金 (saitei chingin / minimum wage) di Jepang: ①Ditentukan per prefektur oleh gubernur (tidak sama di seluruh Jepang), ②Kontrak kerja dengan upah di bawah minimum = BATAL DEMI HUKUM, otomatis berlaku upah minimum. ③Berlaku untuk SEMUA pekerja termasuk pekerja asing (pekerja SSW). Jika dibayar di bawah minimum → laporkan ke Labor Standards Office (労働基準監督署).',
+        related_card_id: 5,
       },
       {
         id: 20,
@@ -2576,6 +2645,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Keduanya', 'Cek api', 'Tidak keduanya', 'Merapikan alat'],
         ans: 0,
         exp: 'Hal penting saat konfirmasi keselamatan setelah kerja: ①Padamkan semua api (tanda api, sumber panas), ②Rapikan & kembalikan semua alat, ③Amankan material yang mudah terbakar, ④Laporkan kondisi abnormal ke supervisor. Checklist harus diikuti setiap hari.',
+        related_card_id: 664,
       },
       {
         id: 26,
@@ -2590,6 +2660,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: "'Anzen dai-ichi' (安全第一) = 'Safety First' = keselamatan adalah prioritas utama, melebihi efisiensi atau produktivitas. Dipopulerkan oleh U.S. Steel Corporation (1906) dan diadopsi Jepang. Di Japan, ini bukan slogan tapi prinsip operasi.",
+        related_card_id: 99,
       },
       {
         id: 27,
@@ -2609,6 +2680,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Toolbox Meeting (ツールボックスミーティング/TBM) = rapat keselamatan skala kecil (3-10 orang) yang dilakukan sebelum memulai pekerjaan spesifik, biasanya di area kerja itu sendiri (tidak di kantor). Membahas: bahaya spesifik pekerjaan hari ini, metode kerja aman, pembagian peran. Lebih fokus dan relevan dari apel pagi yang lebih umum. Durasi: 5-15 menit.',
+        related_card_id: 1086,
       },
       {
         id: 28,
@@ -2651,6 +2723,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Keselamatan saat membongkar scaffold: ①Ikuti urutan dari atas ke bawah (jangan loncat urutan), ②Selalu pasang dan gunakan full harness, ③Jangan lempar material ke bawah (turunkan dengan tali), ④Anti-jatuh net harus tetap terpasang hingga selesai, ⑤Bersihkan area di bawah.',
+        related_card_id: 664,
       },
     ],
   },
@@ -2672,6 +2745,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Pipe reamer', 'Torque wrench', 'Pipe wrench', 'Pipe cutter'],
         ans: 0,
         exp: 'Pipe reamer membersihkan burr agar sambungan rapat (modul JAC st_sample2_l).',
+        related_card_id: 906,
       },
       {
         id: 2,
@@ -2709,6 +2783,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Melindungi dari sengatan listrik (modul JAC anzen).',
+        related_card_id: 686,
       },
       {
         id: 5,
@@ -2742,6 +2817,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Kacamata las melindungi dari: ①Radiasi UV/IR (arc eye = photokeratitis, nyeri parah setelah 6-12 jam), ②Percikan logam cair. Shade number kacamata las: MIG/MIG=shade 10-12, TIG=10-12, brazing=4-5. Shade terlalu rendah = mata terluka.',
+        related_card_id: 527,
       },
       {
         id: 7,
@@ -2769,6 +2845,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Socket', 'Sambungan berbentuk cincin di ujung pipa', 'Tee', 'Elbow'],
         ans: 1,
         exp: 'Flange = fitting berbentuk ring yang dipasang di ujung pipa untuk sambungan yang bisa dilepas (removable joint). Dua flange disatukan dengan baut dan gasket di tengahnya. Keunggulan: mudah dilepas untuk perawatan/penggantian komponen. Berbeda dengan socket/press yang permanen.',
+        related_card_id: 1192,
       },
       {
         id: 10,
@@ -2788,6 +2865,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Tali dagu helm (あごひも) WAJIB diikat karena: saat jatuh atau terkena benturan, kepala cenderung terlempar maju → helm akan lepas jika tidak diikat. Helm yang lepas saat insiden = tidak memberikan perlindungan sama sekali. Sanksi keras jika tidak memakai ini di site.',
+        related_card_id: 1243,
       },
       {
         id: 11,
@@ -2853,6 +2931,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'D-ring full harness posisi standar: 2 titik — punggung (dorsal) untuk fall arrest dan dada (sternal) untuk work positioning. Penempatan di punggung atas memastikan distribusi beban merata ke seluruh tubuh saat terjadi fall arrest, mengurangi risiko cedera tulang belakang.',
+        related_card_id: 1178,
       },
       {
         id: 16,
@@ -2939,6 +3018,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '型枠工事 (katawaku kōji) = membuat cetakan (bekisting) dari kayu/baja untuk menampung beton cair saat dituang, kemudian dibongkar setelah beton mengeras. Urutan pekerjaan RC (beton bertulang): 型枠設置 → 鉄筋工事 (penulangan) → コンクリート打設 (pengecoran) → 型枠解体 (bongkar bekisting).',
+        related_card_id: 1355,
       },
       {
         id: 2,
@@ -2962,6 +3042,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Kewajiban mengambil 5 hari cuti tahunan berlaku setelah pekerja memiliki hak cuti. Hak cuti pertama diberikan setelah 6 bulan kerja (10 hari). Kewajiban 5 hari/tahun berlaku mulai saat itu. Tahun ke-2 juga wajib 5 hari.',
+        related_card_id: 1172,
       },
       {
         id: 4,
@@ -2985,6 +3066,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Pekerjaan yang WAJIB mengikuti pendidikan khusus (特別教育): operasi aerial work platform (高所作業車) termasuk di dalamnya. Juga: scaffolding assembly, arc welding, crane operation, forklift, dll. Tanpa pendidikan ini, pengusaha melanggar Industrial Safety & Health Act.',
+        related_card_id: 798,
       },
       {
         id: 6,
@@ -3156,6 +3238,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Pembeda', 'Tingkatkan kesadaran keselamatan', 'Promosi', 'Dekorasi'],
         ans: 1,
         exp: "Memasang bendera/tanda 'Anzen Dai-Ichi' (安全第一) di lokasi konstruksi bertujuan: meningkatkan kesadaran keselamatan pekerja setiap hari. Bendera ini bukan dekorasi tapi pengingat visual bahwa keselamatan adalah prioritas utama. Bagian dari manajemen budaya keselamatan.",
+        related_card_id: 99,
       },
       {
         id: 20,
@@ -3179,6 +3262,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Tujuan akhir KY bukan hanya mengenal bahaya, tapi mewujudkan ZERO ACCIDENT (ゼロ災害). Setiap pagi, melalui KY, pekerja membangun kesadaran bahaya sehingga bisa bertindak sebelum insiden terjadi. KY = pencegahan aktif.',
+        related_card_id: 849,
       },
       {
         id: 22,
@@ -3193,6 +3277,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Pekerja yang akan melakukan pekerjaan berbahaya WAJIB menyelesaikan 特別教育 (tokubetsu kyōiku/special education) terlebih dahulu. Contoh: kerja ketinggian → wajib special ed untuk full harness; grinder → wajib special ed untuk abrasive wheel. Ini hukum, bukan rekomendasi.',
+        related_card_id: 798,
       },
       {
         id: 23,
@@ -3245,6 +3330,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Kontraktor utama WAJIB membayar tagihan subkontraktor dalam 50 hari setelah menerima hasil pekerjaan. Ini mencegah keterlambatan pembayaran yang membebani subkontraktor kecil. Jika lewat 50 hari, ada kewajiban tambahan bunga keterlambatan.',
+        related_card_id: 8,
       },
       {
         id: 26,
@@ -3264,6 +3350,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Dalam risk assessment: Risiko (リスク) = Tingkat Keparahan (重篤性/jūtokusei) × Probabilitas Terjadinya (発生確率/hassei kakuritsu). Contoh: tertimpa benda jatuh 10kg dari 5m = keparahan TINGGI × probabilitas SEDANG → risiko TINGGI. Kedua faktor harus dipertimbangkan bersama untuk menentukan prioritas countermeasure.',
+        related_card_id: 1094,
       },
       {
         id: 27,
@@ -3311,6 +3398,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Dalam sistem pelaksanaan proyek (施工体制), kontraktor spesialis (専門工事業者) bertugas melaksanakan pekerjaan spesialisasi teknis seperti: pipa, listrik, AC, insulasi. Mereka memiliki keahlian dan lisensi khusus yang tidak dimiliki kontraktor umum.',
+        related_card_id: 499,
       },
       {
         id: 30,
@@ -3407,6 +3495,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Impact driver bisa melebihi torsi yang diperlukan → baut/mur over-torque → ulir rusak atau sambungan longgar balik. Selalu gunakan torque spec dari pabrik dan konfirmasi ulang dengan torque wrench jika kritis. Untuk baut flange atau fitting bertekanan, impact driver saja tidak cukup.',
+        related_card_id: 1120,
       },
       {
         id: 6,
@@ -3416,6 +3505,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Melebarkan', 'Membengkokkan', 'Memotong pipa tegak lurus', 'Memotong ulir'],
         ans: 2,
         exp: 'Pipe cutter (パイプカッター) digunakan untuk memotong pipa baja, tembaga, stainless, atau PVC secara tegak lurus 90° tanpa deformasi. Cara: putar melingkar sambil kencangkan roda perlahan. Hasil potongan lebih rapi dari gergaji. Setelah dipotong, deburr dengan pipe reamer.',
+        related_card_id: 78,
       },
       {
         id: 7,
@@ -3439,6 +3529,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Tekanan normal', 'Minimal 1.5× tekanan kerja', 'Vakum', 'Hanya 0.1 MPa'],
         ans: 1,
         exp: 'Tekanan water leak test pipa: standar umum = 1.5× tekanan kerja maksimum (maximum working pressure). Durasi minimum = 30 menit tanpa penurunan tekanan. Untuk sistem air panas/dingin gedung: biasanya 0.75-1.5 MPa (tergantung spec sistem).',
+        related_card_id: 1189,
       },
       {
         id: 9,
@@ -3490,6 +3581,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Glass wool', 'Fire-resistant panel or coating', 'Plastik', 'Insulasi biasa'],
         ans: 1,
         exp: 'Pekerjaan kompartemenisasi api (防火区画工事/bōka kukaku kōji) menggunakan bahan tahan api untuk membagi bangunan menjadi zona-zona yang mencegah penyebaran api. Bahan utama: concrete, bata tahan api, rock wool, fireproof board. Masing-masing zona dibatasi dengan 防火戸 (fire door).',
+        related_card_id: 971,
       },
       {
         id: 13,
@@ -3513,6 +3605,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Emergency stop switch & outrigger', 'Warna', 'Bebas', 'Putaran'],
         ans: 0,
         exp: 'Emergency stop & outrigger wajib dicek (modul JAC anzen).',
+        related_card_id: 1668,
       },
       {
         id: 15,
@@ -3545,6 +3638,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Untuk sambungan flange yang rapat (modul praktik JAC).',
+        related_card_id: 1126,
       },
       {
         id: 18,
@@ -3563,6 +3657,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Hanya kotor', 'Ada retak atau deformasi', 'Warnanya pudar', 'Dipakai 1 tahun'],
         ans: 1,
         exp: 'Helm keselamatan WAJIB diganti jika: ①Ada retakan (ひび割れ), ②Deformasi/penyok (変形), ③Terkena benturan keras (meski tidak terlihat retak). Warna pudar atau kotor saja tidak cukup alasan ganti. Umur pakai umumnya 3-5 tahun meski tanpa benturan.',
+        related_card_id: 1243,
       },
       {
         id: 20,
@@ -3607,6 +3702,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Sukarela', '15 hari', '10 hari', '5 hari'],
         ans: 2,
         exp: 'Pekerja yang bekerja ≥6 bulan berturut-turut dengan kehadiran ≥80% berhak cuti tahunan minimal 10 hari. Jumlah hari bertambah sesuai masa kerja (11→12→14→16→18→20 hari). Cuti adalah hak pekerja, bukan kemurahan hati.',
+        related_card_id: 5,
       },
       {
         id: 3,
@@ -3626,6 +3722,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Kontraktor spesialis (専門工事業者) dalam sistem pelaksanaan proyek melaksanakan pekerjaan KHUSUS seperti instalasi pipa, listrik, AC, dll. Mereka menerima perintah dari kontraktor utama dan bertanggung jawab atas pekerjaan spesialisasi mereka.',
+        related_card_id: 499,
       },
       {
         id: 4,
@@ -3645,6 +3742,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: '電気事業法 (Denki Jigyō-hō) bertujuan: ①Memastikan pasokan listrik yang aman dan stabil, ②Memastikan keamanan instalasi listrik (電気設備の保安). Mengatur persyaratan pembangkit, transmisi, distribusi listrik, dan standar keselamatan. Pekerjaan instalasi listrik wajib dilakukan oleh 電気工事士 (teknisi listrik berlisensi) berdasarkan UU ini.',
+        related_card_id: 12,
       },
       {
         id: 5,
@@ -3673,6 +3771,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: "Mengucapkan 'Kyō mo ichinichi go-anzen ni!' (今日も一日ご安全に！) = 'Semoga selamat hari ini!' di apel pagi bertujuan meningkatkan awareness keselamatan setiap hari. Ini adalah budaya keselamatan (safety culture) yang membentuk mindset pekerja.",
+        related_card_id: 832,
       },
       {
         id: 7,
@@ -3701,6 +3800,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Safety net (墜落防止ネット) wajib dipasang MAKSIMAL 2m di BAWAH permukaan kerja yang berisiko jatuh. Semakin dekat ke permukaan kerja, semakin efektif menangkap pekerja yang jatuh sebelum mencapai kecepatan tinggi. Safety net harus memenuhi standar JIS untuk kekuatan penangkapan dan diinspeksi sebelum digunakan.',
+        related_card_id: 668,
       },
       {
         id: 9,
@@ -3753,6 +3853,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: "統括安全衛生管理 (tōkatsu anzen eisei kanri) = sistem manajemen K3 terpadu untuk site di mana banyak kontraktor bekerja bersamaan (混在作業/konzai sagyō). Kontraktor utama WAJIB mengkoordinasikan: KY bersama, inspeksi bersama, penyelidikan kecelakaan bersama. Ini memastikan tidak ada 'zona abu-abu' tanggung jawab K3 di site yang kompleks.",
+        related_card_id: 422,
       },
       {
         id: 12,
@@ -3805,6 +3906,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Senam konfirmasi keselamatan (安全確認体操) setelah apel pagi: pekerja berpasangan saling menghadap dan mengucapkan/menyanyikan safety check bersama. Tujuan: ①Peregangan fisik, ②Konfirmasi keselamatan, ③Membangun rasa tanggung jawab bersama.',
+        related_card_id: 664,
       },
       {
         id: 15,
@@ -3828,6 +3930,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Hanya subkontraktor', 'Sukarela', 'Pengusaha', 'Pekerja sendiri'],
         ans: 2,
         exp: 'Untuk pekerjaan berbahaya (危険有害業務), pengusaha wajib memberikan 特別教育 (pendidikan khusus) sebelum pekerja mulai bekerja. Contoh: kerja ketinggian, operasi crane, confined space. Pengusaha adalah penyelenggara, bukan pemerintah atau pekerja sendiri.',
+        related_card_id: 6,
       },
       {
         id: 17,
@@ -3837,6 +3940,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Pekerja sendiri', 'Subkontraktor', 'Kontraktor utama', 'Pengawas'],
         ans: 2,
         exp: 'Premi asuransi kecelakaan kerja (労災保険/Rōsai Hoken) seluruhnya dibayar oleh pengusaha (事業主). Pekerja tidak membayar premi sama sekali. Jika terjadi kecelakaan kerja, biaya pengobatan dan santunan dibayar dari asuransi ini.',
+        related_card_id: 15,
       },
       {
         id: 18,
@@ -3884,6 +3988,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: "建築基準法 (Kenchiku Kijun-hō / Building Standards Act) menetapkan standar MINIMUM untuk: ①Keselamatan struktural bangunan, ②Sanitasi (ventilasi, pencahayaan), ③Pencegahan kebakaran (bahan tahan api, jarak antar bangunan), ④Luas dan tinggi bangunan (容積率, 建蔽率). 'Minimum' artinya boleh melebihi standar ini tapi tidak boleh di bawahnya.",
+        related_card_id: 9,
       },
       {
         id: 21,
@@ -3898,6 +4003,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Pengusaha WAJIB melakukan pemeriksaan kesehatan: ①Saat pertama kali masuk kerja (雇入れ時健康診断), ②Setiap tahun (定期健康診断). Khusus pekerjaan berbahaya, ada pemeriksaan tambahan (特殊健康診断) seperti audiometri untuk pekerja kebisingan.',
+        related_card_id: 6,
       },
       {
         id: 22,
@@ -3917,6 +4023,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: '鉄骨工事 (tekkotsu kōji) = merakit kerangka/rangka bangunan (柱=kolom, 梁=balok) menggunakan baja struktural (H-beam, I-beam, BOX column). Digunakan untuk gedung bertingkat tinggi, pabrik, dan jembatan. Berbeda dari 鉄筋工事 (tekkin kōji = rebar/tulangan dalam beton). Pekerja kōji ini disebut 鉄骨鳶 (tekkotsu tobi).',
+        related_card_id: 1402,
       },
       {
         id: 23,
@@ -3959,6 +4066,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Bahaya', 'Selamat tinggal', 'Saya istirahat', 'Mohon kerjasamanya hari ini'],
         ans: 3,
         exp: "'Yoroshiku onegaishimasu' (よろしくお願いします) di apel pagi = sapaan permohonan kerjasama. Artinya: 'Saya mohon kerjasamanya hari ini.' Ini mengekspresikan rasa hormat dan harapan untuk bekerja sama dengan baik. Diucapkan saat memulai kerja.",
+        related_card_id: 1198,
       },
       {
         id: 26,
@@ -3977,6 +4085,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Minimum', 'Lebih dari perlu', 'Sukarela', 'Dijamin aman'],
         ans: 0,
         exp: 'Aturan minimum (saiteigen) menurut Building Standards Act (modul JAC Bab 2).',
+        related_card_id: 9,
       },
       {
         id: 28,
@@ -3986,6 +4095,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Sukarela', 'Pengusaha', 'Pekerja', 'Subkontraktor'],
         ans: 1,
         exp: 'Pemeriksaan rutin mesin & peralatan wajib dilakukan oleh pengusaha (employer). Jenis pemeriksaan: harian (毎日), periodik (定期), dan setelah kecelakaan. Ini bukan pilihan tapi kewajiban hukum agar pekerja aman.',
+        related_card_id: 6,
       },
       {
         id: 29,

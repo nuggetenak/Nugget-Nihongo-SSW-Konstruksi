@@ -4,7 +4,7 @@
 // Note: rating button bg/border/color is per-rating grade from RATING_META — justified inline.
 // Note: strength pill bg/color use info.strength.color — justified inline.
 // Note: cat pill bg/color use cat.color — justified inline.
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { CARDS } from '../data/cards.js';
 import { getCatInfo } from '../data/categories.js';
@@ -32,6 +32,9 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  // Item 58: when the answer became visible on this card — see FlashcardMode for
+  // why the clock starts at the flip rather than at arrival.
+  const seenAtRef = useRef(null);
   const [touchStart, setTouchStart] = useState(null);
   const [swipeDelta, setSwipeDelta] = useState(0);
   const [done, setDone] = useState(false);
@@ -56,7 +59,15 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     if (currentId == null) return;
     setIntervals(srs.previewFor(currentId));
     setFlipped(false);
+    seenAtRef.current = null; // item 58: a new card, a new clock
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Item 58: stamped here rather than at each `setFlipped(true)` — there are
+  // four of them (tap, keyboard, the audio path, the button), and a fifth added
+  // later would silently not be timed.
+  useEffect(() => {
+    if (flipped && seenAtRef.current === null) seenAtRef.current = Date.now();
+  }, [flipped]);
 
   useEffect(() => {
     if (!done || !queue) return;
@@ -110,7 +121,8 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const handleRate = useCallback(
     (rating) => {
       if (!flipped || currentId == null) return;
-      const result = srs.review(currentId, rating);
+      const responseMs = seenAtRef.current ? Date.now() - seenAtRef.current : null;
+      const result = srs.review(currentId, rating, { responseMs });
       setRatingDist((d) => ({ ...d, [rating]: d[rating] + 1 }));
       if (result.isKnown) setSessionCorrect((n) => n + 1);
       setTimeout(() => {

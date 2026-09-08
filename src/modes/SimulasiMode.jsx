@@ -354,11 +354,13 @@ export function buildQuizSetsPool() {
           // reads back as its per-set "⚠ Ulang N salah". Same question, same
           // key, whichever mode you met it in.
           _wrongKey: `${set.id}-${q.id}`,
-          // No question in QUIZ_SETS has a related card id (checked: 0 of 980),
-          // so a wrong answer from this pool has no flashcard to send you to.
-          // Explicit rather than absent, so the results screen's retry button
-          // can filter on it instead of guessing.
-          _cardId: null,
+          // Item 96: 305 of the 980 now carry one (the high-confidence tier
+          // from derive-quiz-card-links.mjs, landed 2026-09-07), so a wrong
+          // answer from this pool can send you to the card that teaches it for
+          // about a third of the pool instead of none of it. Still null for the
+          // rest, and explicit rather than absent so the results screen's retry
+          // button can filter on it instead of guessing.
+          _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
         },
       ];
     });

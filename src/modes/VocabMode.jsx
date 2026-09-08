@@ -27,7 +27,7 @@ function getSetWrongCount(setId, questions) {
   return questions.filter((q) => getWrongCount(vocabWrong[`${setId}-${q.id}`]) > 0).length;
 }
 
-export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
+export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track } = useApp();
   // Item 80: same shell, same shape of screen, same preference — see WaygroundMode.
   const [autoNextDelay] = useState(storedAutoNextDelay);
@@ -87,6 +87,7 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         })),
         correctIdx: q.ans,
         explanation: q.exp,
+        _cardId: typeof q.related_card_id === 'number' ? q.related_card_id : null,
         _qId: `${q._set ?? setId}-${q.id}`,
       }));
       setQuestions(drawn);
@@ -157,12 +158,12 @@ export default function VocabMode({ onSessionEnd, audioEnabled = false }) {
         title={lemahMode ? `⚠ ${setDef?.title || ''} · Salah` : setDef?.title || ''}
         onAnswer={handleAnswer}
         onFinish={handleFinish}
-        // No onRetryWrong: QuizShell can only offer that button when its
-        // results carry a _cardId, and not one of QUIZ_SETS' 980 questions has
-        // a related card id (JAC_OFFICIAL's 95 all do -- see JACMode). Passing
-        // the prop looked like the feature worked here; it has never been able
-        // to fire. Restoring it is a content job (linking vocab questions to
-        // cards), not a wiring one.
+        // Item 96 landed the content job this was waiting on: 305 of the 980
+        // QUIZ_SETS questions now carry a related card id, so the button can
+        // finally assemble a deck. It still shows only when the questions you
+        // got wrong are among the linked ones -- QuizShell filters on _cardId
+        // rather than offering a button that goes nowhere.
+        onRetryWrong={onRetryWrong}
         showHint={showHint}
         accentColor={setDef?.color || T.amber}
         autoNextDelay={autoNextDelay}

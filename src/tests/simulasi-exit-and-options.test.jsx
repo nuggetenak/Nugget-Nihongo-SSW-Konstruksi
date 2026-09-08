@@ -14,6 +14,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
@@ -23,6 +24,10 @@ import { AppProvider, useApp } from '../contexts/AppContext.jsx';
 import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
 import SimulasiMode from '../modes/SimulasiMode.jsx';
+import { renderJPWithRuby } from '../components/JpDisplay.jsx';
+import { stripFuri } from '../utils/jp-helpers.js';
+import { JAC_OFFICIAL } from '../data/index.js';
+import { QUIZ_SETS } from '../data/quiz-sets.js';
 
 const root = resolve(__dirname, '..');
 
@@ -171,26 +176,90 @@ describe('SimulasiMode — option text never shows raw 《reading》 markup', ()
     expect(nearby).toMatch(/stripFuri\(/);
   });
 
-  it('strips furigana markers from every rendered option across a full sample', () => {
+  // ── Why this is a whole-pool scan and not a sample (2026-09-07) ───────────
+  // This used to render one exam and walk its 15 shuffled questions. It failed
+  // roughly one run in twelve, and each failure named a different question --
+  // the classic shape of a test whose *rule* is wrong rather than whose subject
+  // is broken. Scanning all 1075 questions through the same two render paths
+  // settles it: the rule below holds for every one of them, so the flake was
+  // never the shuffle finding a broken question. It was the rule catching
+  // three kinds of 《》 that are supposed to survive:
+  //
+  //   1. cloze blanks -- 文章の《 》に入る言葉 (6 questions). The blank IS the
+  //      question; rendering it away leaves an unanswerable sentence.
+  //   2. katakana glossed synonyms -- 人間の誤り《ヒューマンエラー》,
+  //      ろう付け《ブレイジング》. JpDisplay's isGloss branch passes these
+  //      through deliberately.
+  //   3. kanji parentheticals -- 危険予知活動《KY活動》, already excluded when
+  //      this assertion was narrowed on 2026-09-04. That narrowing was right and
+  //      incomplete: it fixed the kanji case and left 1 and 2 behind.
+  //
+  // Furigana in this corpus is written in hiragana, always -- so "a hiragana-
+  // only marker reached the screen" is an unconverted reading and nothing else,
+  // while whitespace (cloze) and katakana (gloss) are the two intentional
+  // shapes. That is the rule, and it is not a restatement of the renderer's own
+  // branching: it never asks what JpDisplay decided, only what is on screen.
+  const HIRAGANA_READING = /《[ぁ-んー]*[ぁ-ん][ぁ-んー]*》/;
+
+  it('leaves no unconverted reading anywhere in either simulasi pool', () => {
+    // 1075 questions x (question + hint + explanation + ~4 options), against
+    // the exact two transforms SimulasiMode applies: options are stripped
+    // outright (stripFuri), everything else goes through the ruby renderer.
+    const offenders = [];
+    const check = (where, source, rendered) => {
+      const m = rendered.match(HIRAGANA_READING);
+      if (m) offenders.push(`${where}: ${m[0]} in "${source.slice(0, 80)}"`);
+    };
+    const asText = (nodes) =>
+      typeof nodes === 'string' || nodes == null
+        ? (nodes ?? '')
+        : renderToStaticMarkup(createElement('div', null, nodes)).replace(/<[^>]*>/g, '');
+
+    const scan = (where, q) => {
+      check(`${where} question`, q.q, asText(renderJPWithRuby(q.q)));
+      if (q.hint) check(`${where} hint`, q.hint, asText(renderJPWithRuby(q.hint)));
+      if (q.exp) check(`${where} explanation`, q.exp, asText(renderJPWithRuby(q.exp)));
+      (q.opts || []).forEach((o, i) => check(`${where} option ${i}`, o, stripFuri(o)));
+    };
+    for (const q of JAC_OFFICIAL) scan(`JAC ${q.set}/${q.id}`, q);
+    for (const set of QUIZ_SETS) for (const q of set.questions || []) scan(`${set.id}/${q.id}`, q);
+
+    expect(offenders, `unconverted readings:\n${offenders.slice(0, 10).join('\n')}`).toEqual([]);
+  });
+
+  it('the option scan above would actually catch the original bug', () => {
+    // A whole-corpus scan that passes proves nothing on its own -- it passes
+    // just as happily if the thing it scans is empty. 2366 of the pool's
+    // options carry a 《reading》 in source, so removing the stripFuri() that
+    // this file's first test pins would put every one of them on screen.
+    const raw = [
+      ...JAC_OFFICIAL.flatMap((q) => q.opts || []),
+      ...QUIZ_SETS.flatMap((s) => (s.questions || []).flatMap((q) => q.opts || [])),
+    ].filter((o) => HIRAGANA_READING.test(o));
+    expect(raw.length).toBeGreaterThan(2000);
+  });
+
+  it('strips furigana markers from every rendered option in a real exam', () => {
+    // The pool scan above covers the data; this covers the wiring -- that the
+    // component really does route options through that transform and questions
+    // through the renderer, on screen, in a mounted exam.
     renderSimulasi();
     fireEvent.click(screen.getByText('Mulai Simulasi 🎯'));
-    // 'quick' preset (default) = 15 questions; run through all of them via
-    // the navigator so this doesn't depend on which 15 got shuffled in.
-    //
-    // The assertion is "no READING survives", not "no 《》 survives" (2026-09-04).
-    // 《》 has a second, unrelated use in this corpus: an ordinary parenthetical,
-    // used throughout jac-mockup-sets.js — 危険予知活動《KY活動》, 180度《完全に開く》.
-    // Those are meant to be read as written, and a kanji-bearing marker is never
-    // a reading, since furigana is kana. This test passed before only because
-    // the renderer was converting them into <ruby> with a whole phrase in the
-    // <rt>; now they pass through as the text they are. Which questions the
-    // shuffle draws decides whether one is on screen at all, so asserting on the
-    // old blanket rule failed roughly one run in twenty rather than never.
-    const READING_MARKER = /《[ぁ-んァ-ヶー\s]+》/;
     for (let i = 0; i < 15; i++) {
       const nav = screen.queryByLabelText(new RegExp(`^Soal ${i + 1},`));
       if (nav) fireEvent.click(nav);
-      expect(document.body.textContent).not.toMatch(READING_MARKER);
+      const found = document.body.textContent.match(HIRAGANA_READING);
+      let near = '';
+      if (found) {
+        const el = [...document.querySelectorAll('*')]
+          .filter((n) => n.children.length === 0 && HIRAGANA_READING.test(n.textContent))
+          .pop();
+        near = el ? `<${el.tagName} class="${el.className}"> ${el.textContent.slice(0, 120)}` : '?';
+      }
+      // A failure that does not say what it found is a failure you cannot act
+      // on -- this one used to just assert and leave you guessing which of the
+      // shuffled 15 was responsible.
+      expect(found, `raw reading marker on screen at question ${i + 1}: …${near}…`).toBeNull();
     }
   });
 });

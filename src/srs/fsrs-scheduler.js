@@ -24,7 +24,7 @@ const HISTORY_LIMIT = 20;
 // cardId: numeric SSW card ID
 // rating: 1 (Again) | 2 (Hard) | 3 (Good) | 4 (Easy)
 // Returns { entry, interval, isKnown } — synchronous
-export function recordReview(cardId, rating, now = new Date()) {
+export function recordReview(cardId, rating, now = new Date(), { responseMs = null } = {}) {
   let entry = getCard(cardId);
 
   if (!entry) {
@@ -41,7 +41,16 @@ export function recordReview(cardId, rating, now = new Date()) {
     card: nextCard,
     history: [
       ...(entry.history ?? []).slice(-(HISTORY_LIMIT - 1)),
-      { date: now.toISOString(), rating },
+      // Item 58: `responseMs` rides alongside the rating it belongs to, and is
+      // omitted rather than nulled when nothing measured it — an entry without
+      // the field is one taken before the card was on screen long enough to
+      // time, or before storage v7. It is never read by the scheduler; see the
+      // v6→v7 note in migrations.js for why feeding it to FSRS was rejected.
+      {
+        date: now.toISOString(),
+        rating,
+        ...(typeof responseMs === 'number' && responseMs >= 0 ? { responseMs } : null),
+      },
     ],
     reviewed_at: now.toISOString(),
   };

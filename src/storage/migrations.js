@@ -384,3 +384,51 @@ export function migrate_v5_to_v6() {
 
   return { progress, srs, prefs };
 }
+
+// ── v6 → v7 migration ────────────────────────────────────────────────────────
+// Item 58: per-question answer timing. `useSessionTimer` measures whole
+// sessions, so *hesitation* is invisible — and a card answered correctly but
+// slowly is exactly the one FSRS should see again sooner.
+//
+// The decision this implements was taken 2026-08-26 and is worth restating,
+// because the tempting shortcut is the wrong one. `ts-fsrs`'s `Rating` is a
+// fixed four-value enum with no timing channel; the only way to feed timing to
+// the algorithm would be to silently change *which* of the four ratings gets
+// sent. This codebase already has a precedent that argues against exactly that:
+// `INDONESIAN_CALIBRATION` sits inert (`calibrated: false`) until real study
+// data justifies it, rather than shipping a plausible-sounding heuristic. A
+// hesitation-based rating adjustment has no principled formula behind it, and
+// would break FSRS's own assumption that the rating reflects the learner's
+// self-assessed recall. Worse, it would feel wrong: told "Oke", scored "Susah".
+//
+// So `responseMs` is **recorded and never fed to the algorithm**. It rides on
+// the history entry, alongside the rating it belongs to.
+//
+// The migration itself is deliberately a no-op on data: every existing history
+// entry simply has no `responseMs`, which reads as "not measured" — the honest
+// value for a review taken before anything was timing it. Back-filling a number
+// would be inventing one. What the version bump buys is the guarantee that any
+// entry *without* the field predates the feature, rather than the field being
+// ambiguous between "old" and "missing".
+export function hasV6Data() {
+  try {
+    const parsed = safeGetDoc('ssw-progress', null);
+    return parsed?._v === 6;
+  } catch {
+    return false;
+  }
+}
+
+export function migrate_v6_to_v7() {
+  const progress = safeGetDoc('ssw-progress', {});
+  const srs = safeGetDoc('ssw-srs-data', { _v: 6, cards: {} });
+  const prefs = safeGetDoc('ssw-prefs', {});
+
+  // No data transformation: absent responseMs already means "not measured".
+  // Stamped so a later version can tell a v7 install from a v6 one.
+  progress._v = 7;
+  srs._v = 7;
+  prefs._v = 7;
+
+  return { progress, srs, prefs };
+}

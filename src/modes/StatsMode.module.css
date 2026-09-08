@@ -192,6 +192,29 @@
   font-weight: 600;
 }
 
+/* Referenced by StatsMode.jsx since this section was written and never defined
+   here, so the term rendered with no class at all — found while adding the
+   hesitation list below, which reuses the same row. */
+.wrongJp {
+  font-family: 'Noto Sans JP', 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: var(--ssw-textBright);
+}
+
+/* ── Sempat ragu (item 58) ── */
+.hesitationNote {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  margin: calc(-1 * var(--space-4)) 0 var(--space-8);
+  line-height: 1.5;
+}
+
+.hesitationRatio {
+  color: var(--ssw-gold);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Explains the week chart's colour encoding — see StatsMode.jsx. */
 .chartCaption {
   font-size: var(--fs-micro);

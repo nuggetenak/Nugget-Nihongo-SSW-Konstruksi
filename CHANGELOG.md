@@ -1,3 +1,136 @@
+## [7.1.0] - 2026-09-08
+
+Follow-up to 7.0.0, and larger than "follow-up" suggests: the storage schema moved to v7, two
+rendering bugs turned out to be one root cause, and reading the link data that 7.0.0 held up as a
+standard showed that most of it pointed at the wrong card.
+
+### Answer timing, and storage v7 (item 58)
+
+Every SRS review now records `responseMs` — how long the card was on screen before it was rated,
+timed **from the flip** rather than from the card's arrival, because the clock a learner
+experiences starts when they can see the answer to judge themselves against. Cleared per card, so
+nothing carries over. Omitted rather than nulled when nothing measured it: an entry without the
+field either predates v7 or was never on screen long enough to time.
+
+**It never reaches FSRS**, and that is the decision this item spent most of its words on. `Rating`
+is a fixed four-value enum with no timing channel, so the only lever would be silently changing
+which of the four gets sent — a heuristic with no research behind it, against an algorithm whose
+model assumes the rating reflects self-assessed recall. `INDONESIAN_CALIBRATION` sitting inert at
+`calibrated: false` is this codebase's own precedent for not doing that.
+
+So the field faces the learner instead. **"Sempat Ragu"** in StatsMode lists cards rated *Oke* or
+*Mudah* that took far longer than that learner's own median — you knew it, but you reconstructed it
+rather than recalled it, which nothing else in the app can see. The baseline is their own median
+rather than a constant ("slow" in month one is not slow in month six), the list stays empty below 20
+timed reviews rather than being confidently wrong on five, and each row shows its ratio so the claim
+can be checked. `recordReview` returns the same interval for the same rating whether the answer took
+one second or forty-five; there is a test that says so.
+
+The v7 migration transforms no data — every existing entry already lacks the field, and back-filling
+a number would be inventing one. What the bump buys is that a missing field is unambiguously *old*.
+
+**Adding a sixth version replaced `init()`'s five copy-pasted ladders** — one per starting version,
+each ending in the same three writes — with a registry keyed by the version being migrated from.
+`storage.migration-chain.test.js` now walks every entry point v1–v6 to current; nothing had tested
+above v2, which is exactly how a chain grows a hole in the middle.
+
+**That test immediately found a data-loss bug.** `init()` treated a document stamped *newer* than
+the running build as an unrecognised version and fell through to the fresh-install branch, writing
+defaults over the entire study history. That is what a user got by opening an older install after a
+newer one — ordinary for a PWA, where an offline device can sit on a cached build for weeks. Such a
+document is loaded as-is now, and `set()`'s spread carries fields this build has never heard of
+through a write untouched.
+
+### 77 of 95 JAC links pointed at the wrong card
+
+Found while sizing item 96, by reading the links that item holds up as the standard the other 980
+questions should reach.
+
+They were written against the card numbering that existed **before the v3→v4 renumbering** and never
+remapped when the corpus was. Every one still resolved to a live card, so `audit-related-ids` passed
+every time it ran. What a learner actually got: パワー・ハラスメント → 通勤災害, 消防法 → 水道法,
+電気工事士 → 芯, ご安全に → ガス漏れ試験. **23 of 95** pointed at a card whose headword appears
+anywhere in the question, its answer, or its explanation.
+
+The fix recovers what the author wrote rather than re-authoring: running each stale id through the
+same `card-id-map-v4.js` the storage migration uses gives 746 → 627 専門工事業者間のチームワーク,
+135 → 118 パワー・ハラスメント, 663 → 561 おつかれさまです. The two authoring batches separate
+cleanly — every stale link references an id ≤ 746, every sound one ≥ 807 — and each remap was still
+accepted individually, only where the remapped card scored at least as well against the question's
+own text. Five more were re-pointed by hand, closing the last open line of 7.0.0's own checklist:
+タッチアンドコール, 一坪 and 釘仕舞 had been split onto their own cards while the parent kept the id.
+
+**23 of 95 → 94 of 95.** The guard is a proportion rather than a list, because a headword-overlap
+heuristic cannot adjudicate every link, plus five named anchors for the specific shape of this one.
+
+### 305 quiz→card links, and three reasons the retry button never appeared (item 96)
+
+None of `QUIZ_SETS`' 980 questions carried a `related_card_id`. The 305 the deriver proposes with
+confidence are landed; the other 675 stay unlinked, because a wrong link is worse than none — it
+sends a learner to a card that does not teach the answer. A fresh sample of 26 across all 37 sets
+read correct or defensibly related.
+
+**Item 86's dead end had three independent causes**, and with the field empty none could be told
+apart: no question carried a card id, `WaygroundMode` never forwarded `onRetryWrong` to `QuizShell`
+at all, and `VocabMode` forwarded one that could never fire. All three read as a working feature
+from the prop map alone. All three are fixed. The button still appears only when the questions you
+got wrong are among the linked ones.
+
+`audit-related-ids.mjs` covers `QUIZ_SETS` now too — 400 links across 1,075 questions, where it had
+only ever seen the 95.
+
+### Never split a term on a separator inside its own reading
+
+Root cause of a test that had been failing about one run in twelve, and a real rendering bug behind
+it. `JpFront`'s ・ / vs / ： / → branches split `jp` — the raw string, markers and all — and eleven
+strings in `src/data` carry a separator *inside* a `《reading》` (保温・断熱工事《ほおん・だんねつこうじ》,
+墜落・転落《ついらく・てんらく》). Splitting on that ・ cut the marker in half, so neither half was
+convertible any more and the bare 《 》 rendered on screen.
+
+Three layers, because the defect had three: the renderer masks marker spans before looking for the
+separator; the eleven readings are split per term (two were also plain damage — a reading naming a
+term absent from the string, and one copied from a different option); and `audit-data-text.mjs`
+gained the rule that catches the shape, its whitespace-anchored one having been unable to see
+`ほおん・だんねつこうじ`.
+
+The test is a whole-pool scan of all 1,075 questions now instead of a 15-question sample, and its
+*rule* is corrected too: furigana here is always hiragana, so whitespace (the 《 》 cloze blank) and
+katakana (glossed synonyms like 人間の誤り《ヒューマンエラー》) are intentional and were what the old
+sample kept tripping over.
+
+### The last 90 worked examples
+
+7.0.0 promised every `type: 'vocab'` child a `usage` sentence of its own, applied it to roughly 380
+of them, and stopped. **1,328 of 1,418 → 1,418 of 1,418.** Every one of the 90 was a product of the
+split, so this is unfinished work from that release rather than a pre-existing gap. `audit:text`
+caught one of the new sentences on the way in and it was rewritten rather than waived.
+
+Three malformed fields fixed while in there: 1575's ruby read
+`くれえんいどうしきくれえんしかくしきい`, 1628 was a truncated `プレートコンパクタ`, and 1651 carried
+"≥1.0mm" inside its `jp`.
+
+### Items 103–105 assessed, and one of them got cheaper
+
+1,409 of the 1,418 usage sentences are verb-final, each with an Indonesian gloss and a category — so
+**item 104** ("nothing tests Japanese → action") has its question bank already written and drops from
+`M` to `S`. But only **3 of 1,418** are in an imperative or request register, so **item 103**'s gap
+is confirmed rather than closed: the deck describes work in dictionary form and never teaches how an
+instruction is *spoken to you*. **105** is a shell around 103's content and blocked on it. All three
+stay open — they are product direction, filed from an external audit, and this release already
+carries enough.
+
+### Also
+
+- **`src/data/index.js` re-exported a name that no longer existed.** Vite rewrites the barrel, so
+  883 tests and `npm run build` both passed on a module plain Node ESM refuses to load — which is
+  how every `scripts/*.mjs` loads it. Guarded by a test that resolves the barrel the way Node does.
+- **StatsMode's "Sering Salah" rows referenced a `.wrongJp` class never defined** in its stylesheet,
+  so the Japanese term had rendered unstyled.
+
+**Five `UI_UX_PLAN` items remain open**, each with a stated reason and none for lack of a decision:
+59 (no ja-JP voice exists anywhere in this toolchain), 99 (the exam photographs do not exist), and
+103–105 (product direction).
+
 ## [7.0.0] - 2026-09-07
 
 Major, and for two reasons at once: two modes are gone, and the card corpus changed shape. Owner's

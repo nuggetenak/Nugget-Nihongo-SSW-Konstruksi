@@ -464,7 +464,7 @@ computes per-category weakness. Offering "12 salah di 電気設備 — latih kat
 session into a targeted next session. Small because both halves already exist; pairs naturally
 with item 46, which is already touching every results screen.
 
-### ☐ 58. Answer-timing per question — `M` — `P3` — approved
+### ☑ 58. Answer-timing per question — `M` — `P3` — approved — **done 2026-09-07 (7.1.0)**
 `useSessionTimer` measures whole sessions. Per-question timing surfaces *hesitation* — cards
 answered correctly but slowly are exactly the ones FSRS should see again sooner, and are invisible
 today.
@@ -502,6 +502,35 @@ on the review record (not a scored input to FSRS) — e.g. `responseMs` — surf
 learner as an informational signal ("you hesitated on this one") rather than fed into the
 algorithm at all, preserving `INDONESIAN_CALIBRATION`'s own standard of not touching FSRS's actual
 behavior without real evidence behind the change.
+
+**Built 2026-09-07, exactly to that shape.** `responseMs` is an optional field on each SRS history
+entry (`recordReview`), timed from the flip rather than from the card's arrival — the clock the
+learner experiences starts when the answer is visible to judge themselves against — and cleared per
+card so nothing carries over. Absent, not `null`, when nothing measured it: an entry without the
+field is either pre-v7 or was never on screen long enough to time, and "absent" is what the readers
+key off instead of special-casing a null at every call site.
+
+Storage went to **v7**. The migration transforms no data — every existing entry simply has no
+`responseMs`, which already reads as "not measured", and back-filling a number would be inventing
+one. What the bump buys is that an entry without the field is unambiguously *old* rather than
+*missing*. Adding it also replaced `init()`'s five copy-pasted migration ladders with a registry
+keyed by the version being migrated from; `storage.migration-chain.test.js` now walks v1–v6 to
+current, which nothing had ever tested above v2.
+
+The learner-facing half is **"Sempat Ragu"** in StatsMode: cards rated *Oke* or *Mudah* that took
+far longer than that learner's own median timed review. Two rules keep it from becoming the
+heuristic this item rejected — the baseline is the learner's own median rather than a constant
+("slow" in month one is not slow in month six), and the list stays empty below 20 timed reviews
+rather than being confidently wrong on five. Every row shows its own ratio so the claim can be
+checked rather than trusted. It changes no scheduling: `recordReview` returns the same interval for
+the same rating whether the answer took one second or forty-five, and there is a test that says so.
+
+**Found while building it, fixed here:** `init()` treated a document stamped *newer* than the
+current build as an unrecognised version and fell through to the fresh-install branch, writing
+defaults over the whole study history. That is what a user got by opening an older install after a
+newer one — routine for a PWA, where an offline device can sit on a cached build for weeks. Such a
+document is now loaded as-is, and `set()`'s spread carries fields this build has never heard of
+through a write untouched.
 
 ### ☐ 59. Offline-capable audio via pre-generated clips — `L` — `P3` — approved, **measure first**
 Item 25 made speech failure *legible*; it can't make it *work*. A worker studying on a train with
@@ -744,7 +773,7 @@ they need an owner decision, or because they are genuinely separate scope.
 
 Numbering continues from 68.
 
-### ☐ 69. `VOCAB_SOURCES` excludes 49 cards where its name implies ~543 — `S` — **needs a decision**
+### ☑ 69. `VOCAB_SOURCES` excludes 49 cards where its name implies ~543 — `S` — **decided 2026-09-07**
 
 `excludeVocab` (`useTrackedCards`) and FocusMode's weakness ranking both filter out cards whose
 source is in `VOCAB_SOURCES`. After the five zero-card entries were removed (2026-09-04) that list
@@ -766,6 +795,34 @@ already explains the discrepancy deliberately, and adding `vocab-supplementary` 
 category score on FocusMode's weakness screen at once — a user-visible change to a ranking, made
 without anyone asking for it. It is one line in `VOCAB_SOURCES` whenever the answer is the other
 one.
+
+**Owner handed the decision back. Measuring first turned the question around, so the answer is
+neither of the two on offer: the exclusion is gone entirely.**
+
+Four things, in the order they changed my mind:
+
+1. **Its only live consumer was FocusMode's weakness ranking.** `excludeVocab` in `useTrackedCards`
+   read it too — but no component ever passed that option. Only its own test did.
+2. **Excluding cards there makes the ranking less truthful, not more.** A category's weakness is
+   its unlearned cards, whichever file they arrived in; and FocusMode hands `catCards` straight to
+   the drill, so an excluded card is one the weakness path can never show you.
+3. **Adding `vocab-supplementary` would have been worse, and unevenly so.** It is 6% of `hourei`
+   but **58% of `career`, 56% of `hoon`, 48% of `gaiyou`**. That does not shift the ranking; it
+   restructures it, and shrinks three categories to a third of their real size.
+4. **The distinction stopped existing.** 7.0.0 made one card one term across the whole corpus, 87%
+   of which is now `type: 'vocab'`. "Chapter content" and "vocabulary list" are no longer different
+   shapes of thing.
+
+So: yes, `vocab-supplementary` should count — and so should `vocab-jac`, whose exclusion was the
+real anomaly. At 40 cards (2.5% of the corpus) it was too small to shape a ranking and big enough
+to make one wrong. `VOCAB_SOURCES` and the unused `excludeVocab` option are both removed.
+
+**Category scores drop slightly everywhere**, because the denominator now includes cards that were
+quietly not counted. That is the honest number, and it is item 97's reasoning again: this app should
+not tell someone they are further along than they are.
+
+`data.test.js`'s `VOCAB_SOURCES` assertion is replaced by a wider one — every card source in the
+corpus uses a canonical name — since that is what it was really protecting.
 
 ### ☑ 70. StatsMode shows a raw readiness percentage; the Dashboard shows a band — `S` — **fixed 2026-09-07**
 
@@ -1502,7 +1559,7 @@ paused, and behind `isTypingTarget`.
 region would interrupt a reader mid-question every time it ticked. It announces which question is
 showing, and whether it is answered and flagged.
 
-### ☐ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2`
+### ☑ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2` — **high tier landed 2026-09-07**
 
 0 of 980 questions in `QUIZ_SETS` carry a `related_card_id`; all 95 in `JAC_OFFICIAL` do. That gap
 is what makes retry-wrong impossible in `wayground` and `vocab` (item 86), keeps `ResultScreen`'s
@@ -1531,8 +1588,26 @@ Not the "semi-automatable" this item hoped for at the high end, and not hopeless
 no-match rows are worth reading first for a different reason — a question about something the deck
 does not teach is a content gap, not a linking problem.
 
-Still `☐`, and still its own branch: this item asked to be sized before anyone starts, and that is
-what has been done.
+**The 305 landed 2026-09-07, and the other 675 are still deliberately unlinked.** A fresh sample of
+26 spread across all 37 sets read correct or defensibly related; the two weakest are generic action
+headwords (`取り付け` on a question about valve flow direction) — related, not wrong, and ~9 rows of
+305. `audit-related-ids.mjs` now covers `QUIZ_SETS` too (400 links across 1,075 questions), and
+`src/tests/quiz-card-links.test.js` holds a floor of 250 links plus the invariant that the rest stay
+unlinked, so nobody ships the medium and low tiers unread by accident.
+
+Landing them turned the feature on, and it took two more fixes to do it — item 86's dead end had
+**three** independent causes, not one. `WaygroundMode` never forwarded `onRetryWrong` to `QuizShell`
+at all, and `VocabMode` forwarded one that could never fire. Both now do, `ModeRouter` hands both the
+handler, and `SimulasiMode`'s Wayground pool carries `_cardId` through instead of the hard `null` it
+had while the field was empty. The button still appears only when the questions you got wrong are
+among the linked ones — `QuizShell` filters on `_cardId` rather than offering a deck that goes
+nowhere.
+
+**Found while doing this, and the reason the JAC links are worth distrusting as a model:** 72 of
+`JAC_OFFICIAL`'s 95 links pointed at the wrong card. See the commit; measured 23 of 95 sound before,
+94 of 95 after. The 675 remaining `QUIZ_SETS` questions still need a human read, and the 79 no-match
+rows are worth reading first for a different reason — a question about something the deck does not
+teach is a content gap, not a linking problem.
 
 ### ☑ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1` — **fixed 2026-09-07**
 
@@ -1731,17 +1806,49 @@ permission, clarification, handover.
 
 This is the one criticism in that audit with real force, and it is a content project, not a mode.
 
-### ☐ 104. Nothing tests Japanese → action — `M` — `P2`
+**Measured 2026-09-07, and the gap is confirmed rather than assumed.** Every one of the 1,418 vocab
+cards now carries a `usage` sentence, and 1,409 of them are verb-final — they describe an action.
+But only **3 of 1,418** are in an imperative or request form (`〜てください`, `〜ないで`, `〜ましょう`).
+The deck describes work in dictionary form; it does not teach how an instruction is *spoken to you*,
+which is the whole of this item. `ここ持ってて` has no relative anywhere in the corpus.
+
+So this stays a content project and stays open. What the measurement changes is that it can now be
+scoped against something: the register is the gap, not the vocabulary.
+
+### ☐ 104. Nothing tests Japanese → action — `M` — `P2` — **re-sized `S` 2026-09-07: the corpus already exists**
 
 Every mode asks "what does this word mean?". None asks "what should you do?". Given
 `ホースを巻いて片付けてください`, the tested skill is choosing *coil the hose and put it away* over
 three plausible wrong actions. Closer to what the practical exam measures than recognition is.
+
+**This item is much cheaper than its `M` implies, and the reason is worth writing down before anyone
+budgets for it.** The question bank is already written: 1,409 verb-final `usage` sentences, each
+paired with its own Indonesian gloss (the correct answer) and tagged with one of 10 categories (the
+distractor pool). Median Japanese length is 20 characters — one clause, the right size for a stem.
+Nothing new has to be authored; the mode is a selector over data that already passes `audit:text`
+and `audit:content`.
+
+Two honest caveats. The sentences are dictionary-form descriptions, not the imperative register item
+103 is about — so this tests *comprehension of a described action*, which is genuinely what it
+claims, and not *responding to an order*, which is 103's job and should not be conflated with it.
+And distractors drawn from the same category are only as plausible as the category is tight;
+`sekou` holds 511 of the 1,418, so it would need sub-sampling by `source` to avoid pairing a
+scaffolding sentence against a concrete one and calling that a hard choice.
+
+**Deliberately not built here.** The 103–105 group was recorded as product direction, not branch
+work, and this branch already removes two modes; adding a twentieth on my own reading of an audit is
+the owner's call, not mine. The finding is that the call is now a cheap one.
 
 ### ☐ 105. No scenario mode — `L` — `P2`
 
 A 朝礼 that runs as a sequence: the foreman states today's work, asks for a material, then asks for
 a report — with a question after each. Combines listening, vocabulary, workplace intent and
 reporting in one thread instead of four separate modes.
+
+**Blocked on 103, not on effort.** A scenario is authored dialogue in the spoken register, and the
+measurement above says the corpus has 3 sentences in that register. Build 103's content first; this
+mode is a shell around it, and building the shell first would only produce a convincing-looking mode
+with nothing true to say.
 
 ### ☑ 106. Question source is not labelled — `S` — `P1` — **fixed 2026-09-07**
 
@@ -1771,16 +1878,41 @@ six real values are `wayground-teori`, `-jac`, `-quizizz`, `-lifeline-vocab`, `-
 `jac-mockup`. That branch was dead, which is precisely how the official/practice distinction stayed
 invisible: nothing carried it.
 
-### ☐ 107. Listening is one speed — `M` — `P2`
+### ☑ 107. Listening is one speed — `M` — `P2` — **fixed 2026-09-07**
 
 `dengar` speaks at one rate. Real instructions arrive fast, clipped, and over noise. Graded levels
 (clear → natural → supervisor-pace) would make it train comprehension rather than word recognition.
 
-### ☐ 108. Backup is invisible until it matters — `S` — `P2`
+**Three levels — Jelas / Alami / Cepat — and each is a *band of three rates*, not one.** That is the
+part worth stating, because the obvious implementation is wrong: passing `speakJP` an explicit
+`rate` disables the HVPT cycling the wrapper exists for. That cycling is not decoration — it is
+Logan et al. (1991), varied rate and pitch helping a learner place phoneme boundaries — and grading
+the difficulty must not cost it. So a level shifts the band and keeps the variation inside it.
+
+`Alami` **is** the old `HVPT_PARAMS`, unchanged, and is the default, so a session nobody has
+reconfigured sounds exactly as it did before. The choice persists as `prefs.listeningSpeed`, because
+a comfortable pace is a property of the learner rather than of one sitting; absent, it reads as
+`alami`, so this is additive and `STORAGE_VERSION` is untouched.
+
+### ☑ 108. Backup is invisible until it matters — `S` — `P2` — **fixed 2026-09-07**
 
 Progress is local-only and there is no sync. The learner should be told that plainly, with the date
 of their last backup, rather than finding out when they change phones. `ekspor` already does the
 work; it is the surfacing that is missing.
+
+**A first row in Saya → Data, above the export it is asking for**, and **three** states rather than
+two:
+
+| state | reads | why separate |
+|---|---|---|
+| never | ⚠️ Belum pernah | carries the whole warning: local-only, and a new phone loses it |
+| stale (≥30 days) | ⚠️ 47 hari lalu | "backed up once, eight months ago" is closer to never than to safe, and must not wear the same tick |
+| ok | ✅ kemarin | says the local-only fact without the alarm |
+
+All three paths that make a backup record one — export from Saya, export from Ekspor, and the Gist
+push, which is arguably the most important since it is the only one that leaves the device.
+`prefs.lastBackupAt` is additive: absent means "never", which is the truthful answer for anyone who
+has not exported, so no migration.
 
 ### Not filed
 

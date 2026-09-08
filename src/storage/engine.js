@@ -12,6 +12,7 @@ import {
   migrate_v3_to_v4,
   migrate_v4_to_v5,
   migrate_v5_to_v6,
+  migrate_v6_to_v7,
 } from './migrations.js';
 import LZString from 'lz-string';
 import { isQuotaError, notifyQuotaExceeded } from '../utils/storage-quota.js';
@@ -105,8 +106,21 @@ function freshDefaults() {
   };
 }
 
+// ── Migration chain ───────────────────────────────────────────────────────
+// Keyed by the version being migrated *from*. Adding a storage version is one
+// entry here plus the function itself — see the loop in init() for why that
+// matters.
+const MIGRATIONS = {
+  1: migrate_v1_to_v2,
+  2: migrate_v2_to_v3,
+  3: migrate_v3_to_v4,
+  4: migrate_v4_to_v5,
+  5: migrate_v5_to_v6,
+  6: migrate_v6_to_v7,
+};
+
 // ── Init ──────────────────────────────────────────────────────────────────
-// Called once on app start. Detects v1/v2 data → migrates → caches.
+// Called once on app start. Detects old data → migrates → caches.
 export function init() {
   if (_initialized) return;
 
@@ -115,8 +129,26 @@ export function init() {
   const progressRaw = progressResult.ok ? progressResult.data : null;
   const version = progressRaw?._v ?? 0;
 
-  if (version === STORAGE_VERSION) {
-    // Already current — load directly
+  // ── A document at or ahead of the current version ────────────────────────
+  // `>=`, not `===`, and that is a data-loss fix rather than tidying (found
+  // 2026-09-07 by storage.migration-chain.test.js). A document stamped NEWER
+  // than this build is what a user gets by opening an older install after a
+  // newer one — an ordinary thing to do with a PWA, where an offline client can
+  // sit on a cached older build for weeks. Every version of this code before
+  // today fell through all of its branches to the fresh-install `else` and
+  // wrote defaults straight over it: the whole study history, gone, silently,
+  // for the crime of opening the app on a stale device.
+  //
+  // Loading it as-is is safe in the direction that matters. `set()` spreads the
+  // cached document, so fields this build has never heard of ride through a
+  // write untouched and are still there when the newer build comes back. The
+  // residual risk is a future migration that *reinterprets* an existing field
+  // rather than adding one — v3→v4's id renumbering is the precedent — where
+  // this build would read the newer values as if they were its own. That costs
+  // one session of wrong cards. Overwriting costs everything, permanently, and
+  // is not recoverable by any action the user can take.
+  if (version >= STORAGE_VERSION) {
+    // Already current (or newer) — load directly
     _cache.progress = progressRaw;
     const srsResult = readDoc(DOCS.srs);
     if (srsResult.corrupt) quarantineCorruptDoc(DOCS.srs, srsResult.raw);
@@ -126,102 +158,45 @@ export function init() {
     _cache.prefs = prefsResult.ok
       ? prefsResult.data
       : { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
-  } else if (version === 5) {
-    // v5 → v6: doboku/kenchiku scores dropped, wayground/csv id renames remapped
-    const migrated = migrate_v5_to_v6();
-    _cache.progress = migrated.progress;
-    _cache.srs = migrated.srs;
-    _cache.prefs = migrated.prefs;
-    writeDoc(DOCS.progress, _cache.progress);
-    writeDoc(DOCS.srs, _cache.srs);
-    writeDoc(DOCS.prefs, _cache.prefs);
-  } else if (version === 4) {
-    // v4 → v5 → v6
-    const migrated45 = migrate_v4_to_v5();
-    writeDoc(DOCS.progress, migrated45.progress);
-    writeDoc(DOCS.srs, migrated45.srs);
-    writeDoc(DOCS.prefs, migrated45.prefs);
-    const migrated = migrate_v5_to_v6();
-    _cache.progress = migrated.progress;
-    _cache.srs = migrated.srs;
-    _cache.prefs = migrated.prefs;
-    writeDoc(DOCS.progress, _cache.progress);
-    writeDoc(DOCS.srs, _cache.srs);
-    writeDoc(DOCS.prefs, _cache.prefs);
-  } else if (version === 3) {
-    // v3 → v4 → v5 → v6
-    const migrated34 = migrate_v3_to_v4();
-    writeDoc(DOCS.progress, migrated34.progress);
-    writeDoc(DOCS.srs, migrated34.srs);
-    writeDoc(DOCS.prefs, migrated34.prefs);
-    const migrated45 = migrate_v4_to_v5();
-    writeDoc(DOCS.progress, migrated45.progress);
-    writeDoc(DOCS.srs, migrated45.srs);
-    writeDoc(DOCS.prefs, migrated45.prefs);
-    const migrated = migrate_v5_to_v6();
-    _cache.progress = migrated.progress;
-    _cache.srs = migrated.srs;
-    _cache.prefs = migrated.prefs;
-    writeDoc(DOCS.progress, _cache.progress);
-    writeDoc(DOCS.srs, _cache.srs);
-    writeDoc(DOCS.prefs, _cache.prefs);
-  } else if (version === 2) {
-    // v2 → v3 → v4 → v5 → v6 migration chain
-    const migrated23 = migrate_v2_to_v3();
-    writeDoc(DOCS.progress, migrated23.progress);
-    writeDoc(DOCS.srs, migrated23.srs);
-    writeDoc(DOCS.prefs, migrated23.prefs);
-    const migrated34 = migrate_v3_to_v4();
-    writeDoc(DOCS.progress, migrated34.progress);
-    writeDoc(DOCS.srs, migrated34.srs);
-    writeDoc(DOCS.prefs, migrated34.prefs);
-    const migrated45 = migrate_v4_to_v5();
-    writeDoc(DOCS.progress, migrated45.progress);
-    writeDoc(DOCS.srs, migrated45.srs);
-    writeDoc(DOCS.prefs, migrated45.prefs);
-    const migrated = migrate_v5_to_v6();
-    _cache.progress = migrated.progress;
-    _cache.srs = migrated.srs;
-    _cache.prefs = migrated.prefs;
-    writeDoc(DOCS.progress, _cache.progress);
-    writeDoc(DOCS.srs, _cache.srs);
-    writeDoc(DOCS.prefs, _cache.prefs);
-  } else if (hasV1Data()) {
-    // v1 → v2 → v3 → v4 → v5 → v6 chain migration
-    const v2 = migrate_v1_to_v2();
-    // Write intermediate v2 docs so migrate_v2_to_v3 can read them
-    writeDoc(DOCS.progress, v2.progress);
-    writeDoc(DOCS.srs, v2.srs);
-    writeDoc(DOCS.prefs, v2.prefs);
-    const migrated23 = migrate_v2_to_v3();
-    writeDoc(DOCS.progress, migrated23.progress);
-    writeDoc(DOCS.srs, migrated23.srs);
-    writeDoc(DOCS.prefs, migrated23.prefs);
-    const migrated34 = migrate_v3_to_v4();
-    writeDoc(DOCS.progress, migrated34.progress);
-    writeDoc(DOCS.srs, migrated34.srs);
-    writeDoc(DOCS.prefs, migrated34.prefs);
-    const migrated45 = migrate_v4_to_v5();
-    writeDoc(DOCS.progress, migrated45.progress);
-    writeDoc(DOCS.srs, migrated45.srs);
-    writeDoc(DOCS.prefs, migrated45.prefs);
-    const migrated56 = migrate_v5_to_v6();
-    _cache.progress = migrated56.progress;
-    _cache.srs = migrated56.srs;
-    _cache.prefs = migrated56.prefs;
-    writeDoc(DOCS.progress, _cache.progress);
-    writeDoc(DOCS.srs, _cache.srs);
-    writeDoc(DOCS.prefs, _cache.prefs);
-    cleanup_v1_keys();
   } else {
-    // Fresh install — write v3 defaults
-    const d = freshDefaults();
-    _cache.progress = d.progress;
-    _cache.srs = d.srs;
-    _cache.prefs = d.prefs;
-    writeDoc(DOCS.progress, _cache.progress);
-    writeDoc(DOCS.srs, _cache.srs);
-    writeDoc(DOCS.prefs, _cache.prefs);
+    // Find where this install actually is. v1 predates the _v stamp entirely,
+    // so it is detected by the shape of its keys rather than by a number.
+    const from = version >= 2 ? version : hasV1Data() ? 1 : null;
+
+    if (from === null) {
+      // Fresh install — write current defaults
+      const d = freshDefaults();
+      _cache.progress = d.progress;
+      _cache.srs = d.srs;
+      _cache.prefs = d.prefs;
+      writeDoc(DOCS.progress, _cache.progress);
+      writeDoc(DOCS.srs, _cache.srs);
+      writeDoc(DOCS.prefs, _cache.prefs);
+    } else {
+      // Run the chain from wherever this install is up to current, writing each
+      // step so the next one can read what the previous produced.
+      //
+      // This was five copy-pasted ladders — one per starting version — each
+      // ending in the same three writes. Adding v6→v7 (item 58) meant editing
+      // all five in step, which is how a chain grows a hole in the middle. The
+      // registry is the chain now: a new version is one entry, and every
+      // starting point picks it up for free.
+      let migrated = null;
+      for (let v = from; v < STORAGE_VERSION; v++) {
+        const step = MIGRATIONS[v];
+        if (!step) break; // no path from here; leave the data untouched
+        migrated = step();
+        writeDoc(DOCS.progress, migrated.progress);
+        writeDoc(DOCS.srs, migrated.srs);
+        writeDoc(DOCS.prefs, migrated.prefs);
+      }
+      if (migrated) {
+        _cache.progress = migrated.progress;
+        _cache.srs = migrated.srs;
+        _cache.prefs = migrated.prefs;
+      }
+      if (from === 1) cleanup_v1_keys();
+    }
   }
 
   _initialized = true;
