@@ -1,3 +1,166 @@
+## [7.2.0] - 2026-09-08
+
+Owner brief was five UI changes plus "check all open threads" and an exhaustive technical audit.
+The audit is the larger half of this release: 49 findings, three of which were P0s the owner chose
+to fix here rather than defer. Two of those three destroy or fake user-visible truth, and neither
+had a test that could have caught it.
+
+### A context write no longer undoes a write made straight to the engine (P0)
+
+`AppContext` and `ProgressContext` each built a full document from their own React state -- seeded
+once at mount, never re-synced -- and handed that finished object to `engine.set()`. Its object
+branch is `{ ...current, ...updater }`, and since the finished object carried every key, each stale
+value overwrote the fresh one in the cache.
+
+The contexts are not the only writers. Eight modules write `prefs` directly and six write
+`progress` directly, all of them correctly, with functional updaters against the live cache. The
+contexts were the only ones replaying a snapshot over the top, so the bug was one-directional and
+entirely ordinary to hit:
+
+- write a note in Buku Catatan, change any setting in Saya, **the note is gone**
+- finish a Wayground set, mark one card known in Kartu, **the set's wrong answers are gone**
+
+`handleMark` fires on every flashcard rating, which made it the most frequent write in the app and
+the usual way work was lost. Also affected: sprint personal bests, the daily-challenge log, the
+flashcard hint count, the quiz question count, the auto-next delay, the last-backup timestamp.
+
+Forwarding the updater to the engine fixes it in one place per document, and takes the merged
+result back as state. It also moves the `storageSet` side effect out of a React state updater,
+which is where it should not have been. No test in the suite wrote storage directly and then called
+a context setter -- exactly the interleaving that loses data -- so `context-direct-write.test.js`
+pins the direction, verified failing on the previous code.
+
+### Answer options are shuffled in the three static-bank modes, and what that does *not* fix
+
+`wayground`, `vocab` and `jac` rendered `q.opts` in source order with `correctIdx: q.ans` from the
+data, so a question's options sat in the same places every time it was drawn. Re-drilling a set
+trained "the answer was third" rather than the content. `shuffleOptions` factors out the pattern
+`SimulasiMode` and `quiz-generator` already used, called at each mode's single draw point -- not
+per render, which would move options between the tap and the feedback (the defect item 85 exists
+for).
+
+**Stated plainly because this release first claimed more.** The finding was filed as closing a
+"pick the longest option" exploit: measured over the real corpus, a bot that ignores the question
+and picks the longest option scores **51.5% on Wayground and 72.0% on JAC Mockup**, against a 25%
+baseline and a 65% pass mark. The measurement is right. The causal claim was wrong, and the test
+written to prove the fix is what caught it -- the bot selects by *length*, not position, so it
+finds the answer wherever it lands. Measurement also shows there was no positional leak to close:
+`q.ans` was already near-uniform (25.4% and 28.3% maximum index share).
+
+The real defect is content: answers are written out, distractors written tersely -- mean 11.5 vs
+8.3 characters in Wayground, 9.9 vs 6.0 in JAC Mockup. Closing it means rewriting distractors
+across 980 questions, which is a content project and is filed, not attempted here.
+`question-option-shuffle.test.js` records the current figures as ceilings that may fall and must
+not rise, the same shape as `ruby-scope.test.js`'s budget, so it stays visible while it waits.
+JAC Official -- the real exam's own questions -- does not have the tell: 36.8%, at or near chance
+within each option-count group.
+
+### Error boundaries above the mode area and the provider tree (P0)
+
+`App.jsx`'s `if (mode)` branch rendered `<ModeRouter />` bare while the three tab branches each had
+a boundary. `ModeRouter`'s own wraps only `ModeHeader` + `Suspense`, so everything it computes
+before that return -- its hooks, `filteredCards`, the whole `modeProps` map -- ran unprotected on
+the most-exercised screen in the app. `main.jsx` mounted five nested providers with no boundary
+anywhere. The root fallback deliberately avoids `TabError`, which calls `useApp()`: a context is
+exactly what may have just failed, and there is a test for that property.
+
+### Default text size is `kecil`
+
+New installs start at 90%. Scoped to new installs: the engine loads a document already at
+`STORAGE_VERSION` as-is and `get('prefs')` returns it directly, so a stored value wins.
+`STORAGE_VERSION` stays **7** -- a migration is for reinterpreting data that already exists, and a
+changed default is not that. Silently resizing the text of someone mid-study would be the hostile
+reading, and `defaults-new-install-only.test.js` asserts the boundary in both directions.
+
+What it costs is recorded in `text-scale.js`'s header rather than left to be rediscovered:
+`--space-*` is rem on purpose, so 90% shrinks spacing as well as text, and `--fs-small` drops to
+11.7px, `--fs-micro` to 9.9px, the furigana floor with it. A census called 85% of text at ≤13px the
+app's largest usability problem and the fluid rem scale exists to fix it, so this walks part of it
+back. It ships because it was asked for; the header and a test name both say it is a decision.
+
+Two literals became one: `schema.js` typed `'normal'` independently of `DEFAULT_TEXT_SCALE`, and
+`getTextScale`/`nextTextScale` fell back to a hardcoded index.
+
+### Contrast, fixed alongside because 90% is what makes it matter
+
+`--ssw-textFaint` measured **2.88:1** in light -- failing even the 3:1 large-text floor -- and it is
+used at `--fs-micro`, so the app's faintest colour sat at its smallest size. Raised to 4.01:1 in
+light and 4.60:1 in dark, still lighter than `textDim` so the tier survives. `QuizShell`'s keyboard
+hint, shown on every quiz question, moved off `textFaint` to `textDim` (4.56:1): it is
+instructional text, not decoration. `audit-css-vars` checks that variables resolve, not what they
+resolve to, so nothing would have flagged this.
+
+### Theme gains "Ikuti Sistem"
+
+`theme` was a strict binary, so "follow the phone" could not be expressed -- a reader whose device
+switches to dark in the evening changed the app by hand twice a day. Light stays the default;
+following the OS is opt-in. `utils/theme-mode.js` holds the setting (modes, default, cycle,
+`resolveIsDark`) while `styles/theme.js` keeps the palette, the same split `text-scale.js` already
+draws against the `--fs-*` tokens.
+
+One media-query listener for the app's life rather than only while `sistem` is selected: it costs
+nothing and `osDark` is then correct the instant someone switches. Both listener APIs are
+feature-detected -- older WebViews are this app's design assumption and only have `addListener`,
+and two existing test files stub `matchMedia` with a bare `{ matches }` object that has neither.
+
+The Dashboard button now shows the mode you are *in* rather than the one you would switch to: with
+three states the next mode in a cycle is not guessable from an icon. Its `aria-label` names the
+current mode, which it never did. `index.html`'s splash gained a `prefers-color-scheme` block --
+the stored theme is in compressed localStorage and cannot be read pre-paint without shipping a
+decompressor in `<head>`, so keying the splash off the device is right for `sistem` and no worse
+than before otherwise.
+
+### "Terakhir dipelajari" rows open the card
+
+They were inert `<li>`s -- the one interactive-looking block on Beranda never wired up. They are
+buttons now, using the app's existing deep-link convention rather than a new prop.
+
+The banner was the blocker. It was gated on `filterIds` alone, so every filtered entry into `kartu`
+was painted "❌ Latihan kartu salah" in `--ssw-wrong`. That was **already wrong for SumberMode** --
+browsing a PDF source announced "Latihan kartu salah · 49 kartu" -- and reopening a card you just
+studied would have accused you of failing it. `filterReason` now says why the deck is filtered,
+defaulting to `'wrong'` so no existing caller changes.
+
+Also: `min-height` meets `--tap-min` (the rows were ~34px), the accessible name uses `stripFuri` so
+a screen reader does not read out `《》` markup, and `.recentJp` is a two-line clamp instead of
+`nowrap` + ellipsis -- 28 cards have a `jp` that is not meaningfully Japanese (acronyms like
+`COS（Change Over Switch）`) which `JpFront` renders as plain text, and the old trio chopped them
+mid-word.
+
+### Tentang Aplikasi is a real screen
+
+The row fired a one-line toast. It opens a mode now, registered like `sumber` and reached only from
+Saya → Info: deliberately absent from `MODE_SECTIONS`, with `strand: null` so it can never be
+handed out as a daily mission. Both are asserted, so removing either later is a conscious act.
+
+One mode, not two: "what is this app" and "what changed in it" share a version string and an
+audience, and the "Baru" badge needs exactly one home. The per-menu guide is generated from
+`MODE_SECTIONS` + `MODE_META` and the credits from `SOURCE_GROUPS` + `SOURCE_META`, so neither can
+drift from the registries; a test iterates the registry and asserts every mode appears.
+
+Patch notes are hand-written in `src/data/release-notes.js`, not derived from this file -- 1,482
+lines of maintainer prose with item numbers and test filenames is worse than showing nothing. The
+header states the rules and a test greps for the vocabulary that breaks them. The load-bearing test
+compares the newest entry against `package.json`, so a release that forgets to describe itself
+fails. The copy does not overclaim: the SRS section says the scheduler runs on standard settings
+and is not calibrated for Indonesian speakers, because it isn't.
+
+### Also
+
+- `vitest.config.js` gained the `__APP_VERSION__` define that `vite.config.js` has. `SayaTab` had
+  printed it in three places since 6.x and no test had ever rendered `SayaTab`, so the gap was
+  invisible until one did -- as a `ReferenceError`, not a wrong string.
+- `Icon.jsx` gained an `info` placeholder shape; `docs/ASSET-PROMPTS.md` has its row.
+
+### Verification
+
+`npm run validate` green: format, lint (0 warnings), **1017 tests across 111 files** (was 937/99),
+five audits, build. Driven in Chromium at 390×844 and 320px: a fresh install starts at `kecil` and
+`light`; the theme cycles Terang → Gelap → Ikuti Sistem and, with the device set to dark, "Ikuti
+Sistem" resolves dark and says so; the Tentang screen renders with no console errors and no
+horizontal overflow at either width; the "Baru" badge clears to `v7.2.0` after the screen is
+opened.
+
 ## [7.1.0] - 2026-09-08
 
 Follow-up to 7.0.0, and larger than "follow-up" suggests: the storage schema moved to v7, two

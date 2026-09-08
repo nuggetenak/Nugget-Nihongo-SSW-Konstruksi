@@ -92,6 +92,26 @@ than duplicating every value here.
   non-text indicator; textBright reads at ~19:1 against effectively any surface in the app,
   so it forms a reliable contrasting band past the outline regardless of local background)
 
+### Theme values — three, not two (7.2.0)
+
+`prefs.theme` is `'light' | 'dark' | 'sistem'`, default `'light'`. `utils/theme-mode.js` owns the
+setting (the modes, the cycle, `resolveIsDark`); this file and `styles/theme.js` own the palette.
+`'sistem'` resolves through `matchMedia('(prefers-color-scheme: dark)')` and repaints live, so
+`isDark` is derived state, never a stored boolean.
+
+`index.html`'s splash carries its own `prefers-color-scheme` block with **hex literals**, on
+purpose: it paints before `global.css` and before `applyTheme`, so no `--ssw-*` property exists
+yet. Those two values are `THEMES.dark`'s `--ssw-bg` and `--ssw-text`; keep them in step by hand.
+
+### `--ssw-textFaint` raised (7.2.0)
+
+It measured 2.88:1 in light — failing even the 3:1 large-text floor — while being used at
+`--fs-micro`, the smallest tier. Now 0.56 alpha (4.01:1) in light and 0.48 (4.60:1) in dark, still
+lighter than `textDim` so the tier survives. **`audit-css-vars` checks that a variable resolves,
+not what it resolves to**, so contrast has no automated guard; compute it when changing a text
+token. `correct` (#16a34a) and `wrong` (#dc2626) are still the two flat values shared across both
+themes and each fails AA on one theme — filed, not fixed.
+
 ## 3. Typography
 
 - Body/UI: `'DM Sans', 'Noto Sans JP', system-ui, sans-serif`
@@ -249,6 +269,15 @@ validation is unreliable across scripts (readings are written in hiragana; a kat
 クレーン's ー doesn't literally appear in its own hiragana transliteration くれえん — same sound,
 different characters, so string comparison isn't the right tool here regardless of how careful the
 implementation is).
+
+**The default text scale is `kecil` (90%) as of 7.2.0 — an owner decision, not drift.**
+Read this before "restoring" it to 100%, because everything else in this section argues the other
+way and will look like the authority. At 90% the rem spacing scale shrinks with the text, so the
+whole layout is ~10% denser: `--fs-body` 15→13.5px, `--fs-small` 13→11.7px, `--fs-micro` 11→9.9px,
+and the furigana floor 11→9.9px. That is back inside the band the census below calls the app's
+largest usability problem. `--tap-min` stays px, so tap targets are unaffected. The owner asked for
+it directly, the control is one tap away in Saya, and `text-scale.test.js` carries the decision and
+its date in a test name so a failure says so out loud.
 
 **The `rem` question — resolved 2026-08-31, was deferred.** Every `--fs-*` token is now `rem`, not
 `px` — responds to a user's browser/OS font-size preference. The original deferral (item 53, this

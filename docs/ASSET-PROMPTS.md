@@ -276,3 +276,12 @@ handled by the component — the art just needs correct alpha and square framing
 `squoosh`). This app is offline-first for users on unreliable mobile
 connections, and unoptimised 1024px PNGs will undo that. Icons should land
 well under 10KB each.
+
+### `info` — Tentang Aplikasi (added 7.2.0)
+
+Placeholder shape lives in `Icon.jsx`'s `SHAPES` (a circled lowercase i) until the second generated
+sheet lands. Prompt for that sheet:
+
+> A single-line icon of a circled lowercase letter "i", 20x20 grid, 1.5px stroke, rounded caps and
+> joins, no fill, monochrome. Matches the existing construction-tool icon set: geometric, calm,
+> nothing decorative. Reads clearly at 20px on both a cream and a near-black background.

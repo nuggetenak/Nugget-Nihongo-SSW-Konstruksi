@@ -607,3 +607,28 @@ send-off message with a data-driven claim on a day when there's nothing left to 
 the band thresholds, the minimum-data gate, and specifically a test proving recency-weighting
 actually overcomes a poor all-time average from early sessions — the exact scenario item 56's
 plan text was concerned about, verified rather than assumed fixed.
+
+
+## 18. `filterReason` — why a `kartu` deck is filtered (7.2.0)
+
+`ModeRouter` passes `filterReason` alongside `filterIds`, **defaulting to `'wrong'`** so the eight
+`onRetryWrong` bridges are unchanged and cannot regress. `FlashcardMode` reads it through a small
+`FILTER_BANNERS` map: `wrong` keeps the red tokens, `recent` and `sumber` are neutral.
+
+The banner used to be gated on `filterIds` alone, which meant *any* filtered deck was announced as
+"❌ Latihan kartu salah" in `--ssw-wrong` — including `SumberMode`'s "browse this PDF's cards",
+where nothing is wrong. That is DESIGN_SPEC §2's semantic-colour rule broken: red answers "is this
+a bad outcome", and a filtered deck is not one. Adding a reason means new entry points say what
+they are rather than inheriting an accusation.
+
+**Note for anyone testing this**: `FlashcardMode` cannot be rendered with `filterIds` under jsdom —
+it hangs, on `main` as well as here (`UI_UX_PLAN.md` item 118). That is precisely why the mislabel
+survived. The banner is currently tested at the map and at the router instead.
+
+## 19. Generated reference surfaces (7.2.0)
+
+`TentangMode`'s per-menu guide is built at render time from `MODE_SECTIONS` + `MODE_META`, and its
+source credits from `SOURCE_GROUPS` + `SOURCE_META`. Neither is retyped as prose. This is §3's icon
+rule applied to text: the registries already carry a reviewed one-line description of every mode
+and source, so a second copy would drift. `tentang-mode.test.jsx` iterates the registry and asserts
+every mode appears, which means adding a mode updates the guide with no edit to that screen.
