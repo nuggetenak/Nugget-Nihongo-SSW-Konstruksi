@@ -13,7 +13,17 @@ export function getAvgAccuracy(sessions, n = null) {
   const qs = sessions.filter((s) => SCORED_QUIZ_MODES.includes(s.mode) && s.total > 0);
   const slice = n ? qs.slice(-n) : qs;
   if (!slice.length) return null;
-  return slice.reduce((acc, s) => acc + (s.correct / s.total) * 100, 0) / slice.length;
+  // Clamped per session (item 120). Nothing should record more correct answers
+  // than questions, but `correct` and `total` are whatever a mode passed and are
+  // carried through exports, so a single bad row could push the quiz component
+  // past the 40 points it is allowed to contribute. NaN is dropped rather than
+  // propagated: one unusable row should not turn the whole score into NaN.
+  const usable = slice.filter((s) => Number.isFinite(s.correct) && Number.isFinite(s.total));
+  if (!usable.length) return null;
+  return (
+    usable.reduce((acc, s) => acc + Math.min(100, Math.max(0, (s.correct / s.total) * 100)), 0) /
+    usable.length
+  );
 }
 
 /**
@@ -101,7 +111,13 @@ export function calcReadiness({ srs, sessions, streakData }, recentN = null) {
   // Streak component (0–20): capped at 14-day streak
   const streakScore = Math.min(20, (streak / 14) * 20);
 
-  return Math.min(100, Math.round(srsScore + quizScore + streakScore));
+  // Clamped at both ends. The top was already capped; the floor was not, and a
+  // negative `streakData.days` -- which nothing writes but an imported or
+  // hand-edited document can carry, since validateSnapshot does not check it --
+  // produced a negative percentage. ProgressRing draws
+  // `strokeDashoffset = 2πr(1 - score/100)`, so a negative score winds the ring
+  // past a full circle (item 120).
+  return Math.max(0, Math.min(100, Math.round(srsScore + quizScore + streakScore)));
 }
 
 const READINESS_MIN_SESSIONS = 5; // below this, a band would be more noise than signal

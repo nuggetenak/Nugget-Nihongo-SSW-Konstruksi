@@ -31,8 +31,27 @@ const ProgressCtx = createContext(null);
 export function advanceStudyDay(prev, counts, queueToast) {
   const dateStr = todayStr();
   const streak = prev.streakData ?? {};
-  const days =
-    streak.lastDate === dateStr
+  // A stored date in the FUTURE means the device's calendar moved backward, and
+  // it used to fall through to the `: 1` catch-all and wipe the streak (item
+  // 120). That is not a hypothetical for this audience: a worker flying Japan
+  // (JST, UTC+9) to Jakarta (WIB, UTC+7) crosses a day boundary backward in
+  // minutes of real time, and so does anyone whose clock is corrected after
+  // running fast. A 30-day streak went to 1 for changing timezone.
+  //
+  // Treated as "already counted today": keep the tally, and heal `lastDate`
+  // forward to the local date so tomorrow advances normally instead of the
+  // learner having to wait out the phantom day. Never advances on this branch,
+  // so it cannot be used to gain a day either.
+  //
+  // Shape-checked before comparing, and the test is what found that: `>` on
+  // strings put 'kemarin' after '2026-09-08' (letters sort above digits), so a
+  // malformed stored date was read as a future one and preserved a streak that
+  // should have restarted.
+  const clockWentBack =
+    /^\d{4}-\d{2}-\d{2}$/.test(streak.lastDate ?? '') && streak.lastDate > dateStr;
+  const days = clockWentBack
+    ? (streak.days ?? 0)
+    : streak.lastDate === dateStr
       ? (streak.days ?? 0)
       : streak.lastDate === prevDayStr()
         ? (streak.days ?? 0) + 1
