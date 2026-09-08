@@ -39,17 +39,20 @@ export default defineConfig({
       include: ['src/**'],
       exclude: ['src/tests/**', 'src/data/**', 'src/main.jsx', '**/*.module.css'],
       // A ratchet, not an aspiration. Measured 2026-09-08 across the whole of
-      // src/: 59.15 lines, 54.76 functions, 50.9 branches. Set a point below
-      // each, because v8's branch figure moves by a few hundredths between runs
-      // and a threshold that fails on noise gets deleted rather than met.
+      // src/: 62.72 lines, 58.26 functions, 54.1 branches — up from 59.15 /
+      // 54.76 / 50.9 when this was first set, because the previously untested
+      // modes now get rendered. Raised with it, as the rule below requires. Set
+      // a point below each, because v8's branch figure moves by a few
+      // hundredths between runs and a threshold that fails on noise gets
+      // deleted rather than met.
       // Raise them when coverage rises; never lower them to make a red run
       // green. The old 70/70/60 was neither a ratchet nor a target -- it was a
       // wish, enforced nowhere, because `test:coverage` was in no npm script
       // and no workflow. It is a CI step now, so these have teeth at last.
       thresholds: {
-        lines: 58,
-        functions: 54,
-        branches: 50,
+        lines: 61,
+        functions: 57,
+        branches: 53,
       },
     },
   },
