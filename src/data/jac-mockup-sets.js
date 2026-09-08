@@ -973,8 +973,8 @@ export const JAC_MOCKUP_SETS = [
           'Menentukan & melaksanakan tindakan',
           'Menunjuk bahaya',
         ],
-        ans: 2,
-        exp: "Langkah KE-4 dari 4 langkah KY adalah: menetapkan target keselamatan (目標設定) dan berkomitmen bersama dengan 'Touch and Call'. Ini adalah penegasan bersama untuk fokus pada bahaya yang ditemukan. Setelah ini, pekerja siap mulai kerja dengan kesadaran penuh.",
+        ans: 1,
+        exp: '4 langkah KY: Step 1=現状把握 (identifikasi bahaya), Step 2=本質追及 (analisis bahaya utama), Step 3=対策樹立 (buat countermeasure), Step 4=目標設定 (tetapkan target). Langkah TERAKHIR adalah 【目標宣言】 = deklarasi target keselamatan, ditutup dengan Touch and Call bersama. Menentukan countermeasure adalah langkah KE-3, bukan yang terakhir.',
         related_card_id: 509,
       },
       {

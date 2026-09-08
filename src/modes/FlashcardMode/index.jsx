@@ -27,6 +27,7 @@ import FlipCard from './FlipCard.jsx';
 import RatingRow from './RatingRow.jsx';
 import ToolStrip from './ToolStrip.jsx';
 import FilterBar from './FilterBar.jsx';
+import { useScopedDeck } from './use-scoped-deck.js';
 import Icon from '../../components/Icon.jsx';
 
 const SEARCH_KEY = 'ssw-fc-search';
@@ -85,8 +86,12 @@ export default function FlashcardMode({
   onSessionEnd,
   audioEnabled = false,
 }) {
-  // If filterIds provided (wrong-card bridge), scope cards to that set.
-  const baseCards = filterIds ? cards.filter((c) => filterIds.includes(c.id)) : cards;
+  // Scoped to `filterIds` when a caller deep-links a deck (wrong-answer drill,
+  // a source's cards, Terakhir dipelajari). Referentially stable -- see
+  // use-scoped-deck.js, which exists because this being a fresh array each
+  // render put the whole mode in an unbounded re-render loop (item 118).
+  const baseCards = useScopedDeck(cards, filterIds);
+
   const [order, setOrder] = useState([]);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
