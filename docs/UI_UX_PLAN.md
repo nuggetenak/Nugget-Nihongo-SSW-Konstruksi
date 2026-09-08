@@ -1559,7 +1559,7 @@ paused, and behind `isTypingTarget`.
 region would interrupt a reader mid-question every time it ticked. It announces which question is
 showing, and whether it is answered and flagged.
 
-### ☐ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2`
+### ☑ 96. `QUIZ_SETS` questions have no link to the cards that teach them — `L` — `P2` — **high tier landed 2026-09-07**
 
 0 of 980 questions in `QUIZ_SETS` carry a `related_card_id`; all 95 in `JAC_OFFICIAL` do. That gap
 is what makes retry-wrong impossible in `wayground` and `vocab` (item 86), keeps `ResultScreen`'s
@@ -1588,8 +1588,26 @@ Not the "semi-automatable" this item hoped for at the high end, and not hopeless
 no-match rows are worth reading first for a different reason — a question about something the deck
 does not teach is a content gap, not a linking problem.
 
-Still `☐`, and still its own branch: this item asked to be sized before anyone starts, and that is
-what has been done.
+**The 305 landed 2026-09-07, and the other 675 are still deliberately unlinked.** A fresh sample of
+26 spread across all 37 sets read correct or defensibly related; the two weakest are generic action
+headwords (`取り付け` on a question about valve flow direction) — related, not wrong, and ~9 rows of
+305. `audit-related-ids.mjs` now covers `QUIZ_SETS` too (400 links across 1,075 questions), and
+`src/tests/quiz-card-links.test.js` holds a floor of 250 links plus the invariant that the rest stay
+unlinked, so nobody ships the medium and low tiers unread by accident.
+
+Landing them turned the feature on, and it took two more fixes to do it — item 86's dead end had
+**three** independent causes, not one. `WaygroundMode` never forwarded `onRetryWrong` to `QuizShell`
+at all, and `VocabMode` forwarded one that could never fire. Both now do, `ModeRouter` hands both the
+handler, and `SimulasiMode`'s Wayground pool carries `_cardId` through instead of the hard `null` it
+had while the field was empty. The button still appears only when the questions you got wrong are
+among the linked ones — `QuizShell` filters on `_cardId` rather than offering a deck that goes
+nowhere.
+
+**Found while doing this, and the reason the JAC links are worth distrusting as a model:** 72 of
+`JAC_OFFICIAL`'s 95 links pointed at the wrong card. See the commit; measured 23 of 95 sound before,
+94 of 95 after. The 675 remaining `QUIZ_SETS` questions still need a human read, and the 79 no-match
+rows are worth reading first for a different reason — a question about something the deck does not
+teach is a content gap, not a linking problem.
 
 ### ☑ 97. "Best simulasi score" does not know how long the exam was — `S` — `P1` — **fixed 2026-09-07**
 
