@@ -1,3 +1,138 @@
+## [7.4.0] - 2026-09-09
+
+The owner supplied the four JAC Official sample-question PDFs, dropped item 59, and asked for the
+distractor work to be run across agents. Two content defects close here, and both were worse on
+inspection than they were on the filed line.
+
+### The twelve photo questions have their photos (item 99)
+
+`写真の道具の名前はどれか` — "which of these is the tool in the photo?" — shipped with no photo.
+`青い矢印が指し示す設備の名前はどれか` shipped with no arrow. Twelve of the 95 JAC Official
+questions could not be answered from what was on screen, in a mode badged 🏛️ **Resmi** because it
+is the exam's own material.
+
+**The item's own re-check was wrong, and that is why it sat blocked.** It recorded "No JAC question
+carries any image field at all (`photo`, `image`, `img` — none exist)". Every one of the 95
+questions had carried `img: null` since the sets were authored. What was missing was a *renderer*,
+not a field. "The data model needs designing" is a much bigger-sounding blocker than "fill in twelve
+strings", and the item wore the bigger one for a session — exactly the failure `UI_UX_PLAN.md` §0
+exists to warn about.
+
+**Two things found in the doing were worse than the item as filed.**
+
+Five of the twelve `photoDesc` strings — the written descriptions standing in for the missing
+pictures — named the correct answer outright: "…— ini adalah 免振装置 (seismic isolator)", "…— ini
+adalah タッチアンドコール", "…— ini adalah 敷き均し作業". On those five the substitute was not a
+degraded question, it was a free mark. All twelve are rewritten to describe what is visible without
+naming any option, and they are the image's `alt` text now — so the leak had been to screen-reader
+users specifically, on exactly the questions sighted users had to look at.
+
+`JACMode` overwrote `hint` with `photoDesc` on these same twelve. They lost their Indonesian gloss,
+and the sentence then rendered twice — once as the hint, once in QuizShell's photo box — each behind
+a 📷 the data already carried, so the box read "📷 📷 Foto: …".
+
+**The assets are page renders, not extracted images, and that is not a detail.** `st1_q10` draws its
+blue arrow as a vector path *over* the diagram, and seven of the twelve pages paint white rectangles
+over labels and photo credits the exam is deliberately masking. Pulling the embedded raster would
+have lost the arrow — leaving a question that points at nothing — and restored the labels the exam
+hid. Each file is a clip render of the page region instead, which is what a candidate sees.
+`scripts/archive/extract-jac-images.py` records the source page and xref for every one.
+
+**A third leak, found by running the app rather than by reading the data.** `st1_q10`'s Indonesian
+gloss ended in `[Diagram jaringan telekomunikasi: gedung komunikasi → tiang → kabel bawah tanah →
+rumah]` — a text stand-in for the missing diagram, rendered directly under the question and above
+the options on every draw, naming **tiang**, which is the correct answer (`電柱` / "Tiang
+listrik/telepon"). Neither the data audits nor the first round of tests could see it, because they
+were looking at `photoDesc`. Removed, and the test now asserts that no picture question's gloss
+carries a bracketed description or contains any option's text in either language.
+
+`QuestionPhoto` is one component for both surfaces that draw a question. `QuizShell` and
+`SimulasiMode` each had their own copy of the photo markup and they disagreed. Its frame reserves
+height from an aspect ratio before the image loads: without that the options row jumps down when the
+photo arrives, and on a slow connection a tap aimed at option 1 lands on option 2.
+
+280.7 KB for all twelve, 720 px long edge, WebP q=78, measured rather than estimated. Deliberately
+**not** precached — `jac` is not one of the three high-traffic modes whose chunks are, so precaching
+its images while fetching its 8.6 kB of code on demand would be incoherent. `sw.js` serves
+same-origin images cache-first, so they persist offline from the learner's first JAC session at zero
+install cost.
+
+### The JAC Mockup bank stops answering itself by length (item 114)
+
+The correct answer was the single longest option **71.7%** of the time, against 25% chance and a 65%
+pass mark. Answers were written out as phrases; distractors were stubs — `色`, `任意`, `5m` against
+`試験圧の1.5倍以上で作業員を退避`. A bot that reads nothing and picks the longest option passed the
+exam. 7.2.0's option shuffling could not touch this and the release note said so: a length bot
+selects by length, not position.
+
+**71.7% → 22.7%**, against a 25.0% baseline. Mean distractor length 6.0 → 10.0 characters against a
+mean answer of 9.9, and the gap distribution collapses with it: 16 questions had the answer longer
+than every distractor by 10 characters or more and 49 by 6–9, and both buckets are now empty — the
+widest remaining gap in the bank is 5. 215 of the 300 questions were rewritten, across eight Sonnet
+agents working from one brief and one verifier.
+
+`question-option-shuffle.test.js`'s ceiling becomes a **two-sided** bound, which is the part worth
+copying to Wayground later. A ceiling alone is passed by driving the figure to zero, and "the answer
+is never the longest" is the same tell with its sign flipped — a bot that skips the longest option
+would then beat chance. Two more assertions sit under it: mean answer and mean distractor length
+must stay within 1.5 characters, and no single question may have its answer more than 5 characters
+longer than its longest distractor, because one question that far out is guessable on its own
+whatever the bank-wide figure says.
+
+Distractors were lengthened rather than answers shortened. The answers are correct as written and
+the detail in them is what the learner is there to read; the earlier pass (`balance-option-lengths.mjs`,
+7.3.0) had already taken the one shortening that was safe.
+
+Only the 215 questions where the answer *was* the longest were touched. Rewriting the 85 that were
+already fine could only add risk and would buy nothing.
+
+Each question was given explicit per-slot character targets from a seeded permutation, so the
+answer's rank among the four lengths is randomised rather than merely un-longest. Making a
+distractor longer every time would have inverted the tell into "never pick the longest" — the same
+defect wearing a different sign.
+
+**The risk being managed here is not the tell.** A distractor that is accidentally *correct* is
+strictly worse, and this bank has already shipped one wrong safety answer (item 115, 7.3.0). So
+correctness beat the length target explicitly in the brief, and nothing was applied without passing
+a verifier: answer slot byte-identical to the original, no duplicate or blank options, furigana
+hiragana-only and scoped to its own base at no more than 3× its length, per-slot length within
+tolerance, and — the check worth having — **no new distractor may be the correct answer of the same
+question in the other bank**, which is the one accidental-correct case a machine can actually catch.
+
+Seven rewrites were corrected on review rather than shipped:
+
+- `jmt05#1`, `jmt06#13`, `jmt06#22` — furigana drift in the answer slot, which must not change at
+  all. Restored byte-for-byte.
+- `jmt04#27`, `jmt04#28`, `jml05#9` — `1回《いっかい》`, `1本《いっぽん》`. A digit prefix leaves the
+  base at 回/本 while the reading spells the whole word: the exact class `ruby-scope.test.js`
+  documents and `36協定 → 三六協定` already fixed. Now `一回` / `一本`.
+- `jml03#2` — an authoring agent flagged its own distractor uncertain and was right. Oil traps
+  really are fitted at the base of a vertical suction riser, so `冷媒配管の垂直上昇部` was arguably a
+  second correct answer to "where is the oil trap fitted?". Replaced. That flag doing its job is why
+  the brief asked for it.
+
+### Item 59 is dropped, not deferred again
+
+Offline audio via pre-generated clips. Three sessions reached the same wall from three directions;
+the owner closed it on 2026-09-09. The measurement was never the problem and stays on the record
+(3.29 MB precached today, ~5 KB per Opus clip from real encodes, full corpus +213% and never
+defensible for this audience, the ~200-term subset +30% and the only version worth costing). The
+blocker is that **no ja-JP synthesiser exists in any environment this repo has been built in**, so
+the clips cannot be produced at all. What the item needs is a cloud TTS contract or licensed human
+recordings — a procurement decision with a bill attached, not a coding task. Nothing was built, so
+nothing is left behind to remove: `grep -rn "\.opus\|\.mp3\|\.ogg\|new Audio(\|<audio" src/ public/`
+returns nothing at all.
+
+### Bookkeeping corrected while here
+
+- **7.3.0 never added its `_MAP.md` session-log row** — close-out step 2, skipped. Added, alongside
+  this session's.
+- **`UI_UX_PLAN.md` items 119 and 120 were ticked in 7.3.0 with bodies still reading "Not
+  audited"** — a ticked box over a stale body is worse than either alone, because the box is what
+  gets scanned. Both corrected.
+- **The plan's intro and §10 both said the 43–65 round was "closed except 58 and 59"**; 58 shipped
+  in 7.1.0. With 59 dropped, that round is now entirely closed.
+
 ## [7.3.0] - 2026-09-08
 
 The owner reported one bug with a screen recording and approved the rest of the audit backlog. The

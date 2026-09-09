@@ -1742,6 +1742,12 @@ session, because "the data model needs designing first" is a much bigger-soundin
 - **`JACMode` overwrote `hint` with `photoDesc`** on exactly these twelve questions, so they lost
   their Indonesian gloss, and the same sentence then rendered twice — once as the hint, once in
   QuizShell's photo box, each prefixed with a 📷 the data already carried ("📷 📷 Foto: …").
+- **A third leak, and only running the app found it.** `st1_q10`'s Indonesian gloss ended in
+  `[Diagram jaringan telekomunikasi: gedung komunikasi → tiang → kabel bawah tanah → rumah]`,
+  rendered under the question and above the options on every draw, naming **tiang** — the correct
+  answer. The data audits and the first round of tests both missed it because both were looking at
+  `photoDesc`. The lesson generalises past this item: a text substitute for a picture leaks from
+  whichever field it happens to sit in, and there were two such fields.
 - **The picture is not always the embedded image.** `st1_q10` ("青い矢印が指し示す設備") draws its
   blue arrow as a vector path over the diagram, and seven of the twelve pages paint white
   rectangles over labels and photo credits the exam is deliberately hiding. Extracting the embedded
@@ -2029,7 +2035,7 @@ as **filed wrongly** rather than as done.
 
 ### Open — content
 
-- ☐ **114. The practice banks are guessable by answer length** — `L` — `P1`. **Half done in 7.3.0.**
+- ☑ **114. The practice banks are guessable by answer length** — `L` — `P1`. **JAC Mockup closed in 7.4.0; Wayground remains at 48.3% and is the follow-up.**
   26 answers ended in a parenthetical their own `exp` already repeats; trimming it (and the matching
   `opts_id`) drops them below the longest distractor, and in 17 cases the trimmed form is
   byte-for-byte what the *other* bank already ships, so the short wording is adopted rather than
@@ -2047,6 +2053,38 @@ as **filed wrongly** rather than as done.
   rewriting distractors to comparable length across 980 questions. JAC Official does not have the
   tell (36.8%, near chance per group), which is the proof it is authored rather than inherent.
   `question-option-shuffle.test.js` holds the current figures as ceilings.
+
+  **Closed for JAC Mockup 2026-09-09 (7.4.0): 71.7% → 22.7%**, against a 25.0% baseline, over 215
+  rewritten questions. Mean distractor length 6.0 → 10.0 against a mean answer of 9.9. The 16
+  questions whose answer beat every distractor by 10+ characters and the 49 at 6–9 are both gone;
+  the widest gap left in the bank is 5.
+
+  The method, because Wayground still needs it: only the 215 questions where the answer *was* the
+  longest were touched — rewriting the 85 already-balanced ones could only introduce an
+  accidentally-correct distractor and would buy nothing. Each question got explicit per-slot
+  character targets from a seeded permutation, so the answer's *rank* among the four lengths is
+  randomised rather than merely un-longest; lengthening a distractor every time would have inverted
+  the tell rather than removed it. Distractors were lengthened rather than answers shortened, since
+  the answers are correct as written and 7.3.0's pass had already taken the one safe shortening.
+
+  Nothing was applied without passing a verifier: answer slot byte-identical, no duplicate or blank
+  options, furigana hiragana-only and scoped to its own base at ≤3× its length, per-slot length
+  within tolerance, and **no new distractor equal to the correct answer of the same question in the
+  other bank** — the one accidental-correct case a machine can actually catch. Eight rewrites were
+  corrected on review, including one an authoring agent flagged uncertain about itself and was right
+  about: oil traps really are fitted at the base of a vertical suction riser, so its distractor was
+  arguably a second correct answer.
+
+  The test's ceiling is now a **two-sided** bound. A ceiling alone is passed by driving the figure to
+  zero, and "the answer is never the longest" is the same defect with its sign flipped.
+
+  **What is left is Wayground, and it is a bigger job than what was just done.** 680 questions at
+  48.3%, against 300 at 71.7% here — a smaller tell over more than twice the corpus, so the same
+  method applies but the volume is the constraint rather than the difficulty. The machinery is
+  reusable as-is: the packet generator assigns per-slot targets from a seeded permutation, and the
+  verifier checks answer-slot immutability, duplicates, ruby scope, length tolerance and the
+  cross-bank accidental-correct guard. Do not start it as a tail-end addition to a session that has
+  already changed content; it is its own session, for the same reason item 58's migration was.
 - ☑ **115. One safety question is taught two different answers** — `XS` — `P1`.
   `KY活動の4ステップで最後のステップは？` — Wayground `wt01` says 目標宣言, JAC Mockup `jmt02` says
   対策を決めて実行する. The KYT rounds are 現状把握 → 本質追究 → 対策樹立 → 目標設定, so Wayground is

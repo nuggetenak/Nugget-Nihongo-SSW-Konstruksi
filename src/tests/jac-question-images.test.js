@@ -71,6 +71,27 @@ describe('JAC Official question images', () => {
     }
   });
 
+  it('the Indonesian gloss does not describe the picture either', () => {
+    // Found by running the app rather than by reading the data: `st1_q10`'s hint
+    // ended in "[Diagram jaringan telekomunikasi: gedung komunikasi → tiang →
+    // kabel bawah tanah → rumah]" — a text stand-in for the missing diagram that
+    // named *tiang*, which is the correct answer (電柱 / "Tiang listrik/telepon").
+    // It rendered directly under the question, above the options, on every draw.
+    // With the diagram present the bracket is redundant as well as leaky, so the
+    // rule is simply that a picture question's gloss does not describe the
+    // picture.
+    for (const q of picture) {
+      expect(q.hint, `${q.id} still carries a bracketed picture description`).not.toMatch(/\[.*\]/);
+      for (let i = 0; i < q.opts.length; i++) {
+        const jp = strip(q.opts[i]);
+        const id = q.opts_id?.[i];
+        if (jp.length >= 3) expect(q.hint, `${q.id} hint names option "${jp}"`).not.toContain(jp);
+        if (id && id.length >= 4)
+          expect(q.hint, `${q.id} hint names option "${id}"`).not.toContain(id);
+      }
+    }
+  });
+
   it('descriptions carry no emoji prefix — the renderer adds its own', () => {
     // The data used to start '📷 Foto:' / '📸 FOTO:' while both call sites
     // prefixed another 📷, so the fallback box read "📷 📷 Foto: ...".

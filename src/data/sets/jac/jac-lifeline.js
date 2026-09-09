@@ -166,7 +166,7 @@ export const JAC_LIFELINE = [
     setLabel: '実技 Set 1',
     topic: 'telekomunikasi',
     q: '青い矢印《やじるし》が指《さ》し示《しめ》す設備《せつび》の名前《なまえ》はどれか。',
-    hint: 'Apa nama peralatan yang ditunjukkan oleh panah biru? [Diagram jaringan telekomunikasi: gedung komunikasi → tiang → kabel bawah tanah → rumah]',
+    hint: 'Apa nama peralatan yang ditunjukkan oleh panah biru?',
     opts: [
       '通信ケーブル《つうしんケーブル》',
       '管路《かんろ》',

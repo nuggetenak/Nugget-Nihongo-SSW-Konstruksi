@@ -75,7 +75,7 @@ npm run audit:full    # 5 audit: integrity, css-vars, text, content, related-ids
 | Build      | Vite 6 + @vitejs/plugin-react            |
 | SRS Engine | ts-fsrs 5.3                              |
 | Storage    | Pure localStorage (schema v7)            |
-| Tests      | Vitest 4 + @testing-library/react (1.139) |
+| Tests      | Vitest 4 + @testing-library/react (1.157) |
 | Styling    | CSS Modules + CSS custom properties      |
 | CI/CD      | GitHub Actions → GitHub Pages            |
 | PWA        | Custom service worker + Web App Manifest |
@@ -103,7 +103,7 @@ src/
 ├── router/                  # ModeRouter + modes registry
 ├── utils/                   # haptic, speak, jp-helpers, shuffle, …
 ├── styles/                  # global.css (design tokens), theme.js
-└── tests/                   # 123 test files, 1.139 tests
+└── tests/                   # 125 test files, 1.157 tests
 ```
 
 Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
@@ -146,7 +146,7 @@ Setiap push ke `main` → GitHub Actions menjalankan:
 
 1. **Format check** (`npm run format:check`) — `ci.yml` + `deploy.yml`
 2. **Lint** (`npm run lint` — zero warnings, mencakup `scripts/` dan `public/sw.js`) — keduanya
-3. **Test** (`npm test` — 1.139 test) — `ci.yml` + `deploy.yml`
+3. **Test** (`npm test` — 1.157 test) — `ci.yml` + `deploy.yml`
 4. **Audit data** (`npm run audit:full` — enam skrip di `scripts/`) — `ci.yml` + `deploy.yml`
 5. **Coverage** (`npm run test:coverage`, ambang sebagai ratchet) — `ci.yml`
 6. **Build** (`npm run build`) — `ci.yml`

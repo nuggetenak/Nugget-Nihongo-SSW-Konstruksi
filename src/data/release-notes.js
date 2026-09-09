@@ -24,6 +24,17 @@
 
 export const RELEASE_NOTES = [
   {
+    version: '7.4.0',
+    date: '2026-09-09',
+    title: 'Foto soal JAC yang asli, dan pilihan jawaban yang tidak lagi ketebak',
+    changes: [
+      'Dua belas soal JAC Resmi bertanya tentang sebuah foto — "alat pada foto ini namanya apa?" — tapi fotonya tidak pernah ada. Sekarang foto aslinya tampil di soal, termasuk diagram dengan panah biru di soal jaringan telekomunikasi.',
+      'Keterangan foto di beberapa soal itu ternyata menyebut jawabannya. Sudah ditulis ulang supaya hanya menjelaskan apa yang terlihat.',
+      'Di paket JAC Mockup, jawaban benar hampir selalu jadi pilihan yang paling panjang — jadi bisa ditebak tanpa membaca soalnya. Ratusan pilihan salah ditulis ulang supaya panjangnya seimbang dan kamu benar-benar harus tahu jawabannya.',
+      'Soal berfoto juga tidak lagi kehilangan terjemahan Indonesianya.',
+    ],
+  },
+  {
     version: '7.3.0',
     date: '2026-09-08',
     title: 'Kartu yang tidak mau dibalik, dan banyak perbaikan di belakang layar',

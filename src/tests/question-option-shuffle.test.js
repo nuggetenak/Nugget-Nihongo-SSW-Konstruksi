@@ -10,19 +10,26 @@
 //    (25.4% max share in Wayground, 28.3% in JAC Mockup, against a 25%
 //    baseline), so there was no *distributional* position leak to close.
 //
-// 2. LENGTH. The correct answer is the single longest option 51.5% of the time
+// 2. LENGTH. The correct answer was the single longest option 51.5% of the time
 //    in Wayground (48.3% after the first balancing pass) and 72.0% in JAC
-//    Mockup, because answers are written out and
-//    distractors are written tersely -- mean 11.5 vs 8.3 characters, and 9.9 vs
-//    6.0. A bot that ignores the question and picks the longest option scores
-//    those same figures, against a 25% baseline and a 65% pass mark.
+//    Mockup, because answers are written out and distractors were written
+//    tersely -- mean 11.5 vs 8.3 characters, and 9.9 vs 6.0. A bot that ignores
+//    the question and picks the longest option scores those same figures,
+//    against a 25% baseline and a 65% pass mark.
 //
 //    **Shuffling does not touch this.** The bot picks by length, not position,
-//    so it finds the answer wherever it lands. Closing it means rewriting
-//    distractors to comparable length across 980 questions -- a content
-//    project, not a code change. The budget test at the bottom records the
-//    current figures so the problem stays visible and cannot quietly worsen,
-//    the same shape as `ruby-scope.test.js`'s ceiling.
+//    so it finds the answer wherever it lands. Closing it meant rewriting
+//    distractors to comparable length -- a content project, not a code change.
+//
+//    **JAC Mockup is closed as of 7.4.0: 71.7% -> 22.7%**, mean distractor
+//    length 6.0 -> 10.0 against a mean answer of 9.9, over 215 rewritten
+//    questions. Wayground is still open at 48.3% and is the follow-up.
+//
+//    The bounds below are two-sided on purpose. A ceiling alone would be passed
+//    by driving the figure to zero, and "the answer is never the longest" is the
+//    same tell with its sign flipped -- a bot that skips the longest option
+//    would then beat chance. What the test wants is the figure sitting *at*
+//    chance, so the floor matters as much as the ceiling.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
@@ -97,8 +104,41 @@ describe('length: the known content defect, held at its current level', () => {
     expect(longestIsAnswer(WG)).toBeLessThanOrEqual(0.49);
   });
 
-  it('JAC Mockup: same ceiling — this bank is the worse of the two', () => {
-    expect(longestIsAnswer(JM)).toBeLessThanOrEqual(0.72);
+  it('JAC Mockup: at chance now, and must stay there in both directions', () => {
+    // 22.7% measured 2026-09-09 against a 25.0% baseline, down from 71.7%.
+    // Two-sided: below the floor the bank would be telling a bot to *avoid* the
+    // longest option, which is worth exactly as much as the old tell was.
+    const rate = longestIsAnswer(JM);
+    expect(rate).toBeLessThanOrEqual(0.26);
+    expect(rate).toBeGreaterThanOrEqual(0.17);
+  });
+
+  it('JAC Mockup: answers and distractors are now the same length on average', () => {
+    // The distribution above can be satisfied by a few extreme questions
+    // cancelling out. This is the underlying property: 9.9 vs 10.0 characters.
+    const strip2 = (q, i) => strip(q.opts[i]).length;
+    const ans = JM.reduce((a, q) => a + strip2(q, q.ans), 0) / JM.length;
+    const dis =
+      JM.reduce(
+        (a, q) =>
+          a +
+          q.opts.reduce((b, _, i) => (i === q.ans ? b : b + strip2(q, i)), 0) / (q.opts.length - 1),
+        0
+      ) / JM.length;
+    expect(Math.abs(ans - dis)).toBeLessThan(1.5);
+  });
+
+  it('JAC Mockup: no answer towers over its distractors any more', () => {
+    // The 16 questions with a 10+ character gap and the 49 with 6-9 are gone;
+    // the widest remaining gap is 5. A single question that far out is guessable
+    // on its own, whatever the bank-wide figure says.
+    const worst = Math.max(
+      ...JM.map((q) => {
+        const l = q.opts.map((o) => strip(o).length);
+        return l[q.ans] - Math.max(...l.filter((_, i) => i !== q.ans));
+      })
+    );
+    expect(worst).toBeLessThanOrEqual(5);
   });
 
   it('JAC Official is not affected — its options are comparably written', () => {
