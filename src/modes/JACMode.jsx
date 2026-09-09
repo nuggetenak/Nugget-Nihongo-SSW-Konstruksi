@@ -41,7 +41,11 @@ const SET_COUNT = {
   st1: JAC_OFFICIAL.filter((q) => q.set === 'st1').length,
   st2: JAC_OFFICIAL.filter((q) => q.set === 'st2').length,
 };
-function mapQuestions(list, withID) {
+// Exported for tests, the same way SimulasiMode exports its pool builders: the
+// mapper is where a question's fields either reach QuizShell or quietly stop,
+// and `img` stopping there is invisible from the outside -- the photo questions
+// would simply render as unanswerable text again.
+export function mapQuestions(list, withID) {
   return list.map((q) => {
     const hasPhoto = !!q.photoDesc;
     // Shuffled at the draw point, once per session -- see shuffleOptions.
@@ -58,9 +62,15 @@ function mapQuestions(list, withID) {
       options,
       correctIdx,
       explanation: q.exp,
-      hint: hasPhoto ? `📷 ${q.photoDesc || 'Soal ini aslinya pakai foto'}` : null,
+      // `hint` used to be overwritten with the photo description on the twelve
+      // photo questions, which cost them their Indonesian gloss and printed the
+      // same sentence twice -- once here and once in QuizShell's photo box.
+      // QuestionPhoto owns the photo now, so this stays what it is everywhere
+      // else: unset, with the gloss in questionSub.
+      hint: null,
       hasPhoto,
       photoDesc: q.photoDesc ?? null,
+      img: q.img ?? null,
       _qId: q.id,
       // QuizShell's "Latih N salah" and "Latih <kategori>" both key off
       // _cardId, and this mode only ever set _qId -- so both buttons were dead

@@ -111,15 +111,8 @@
   line-height: 1.5;
 }
 
-.photoHint {
-  font-size: var(--fs-small);
-  color: var(--ssw-gold);
-  margin-top: var(--space-8);
-  padding: var(--space-6) var(--space-10);
-  background: rgba(251, 191, 36, 0.06);
-  border-radius: var(--r-sm);
-  line-height: 1.4;
-}
+/* .photoHint removed — the photo is a real <img> now and QuestionPhoto owns
+   both it and the text fallback, so this rule had no remaining user. */
 
 /* ── Result screen ── */
 .resultPage {

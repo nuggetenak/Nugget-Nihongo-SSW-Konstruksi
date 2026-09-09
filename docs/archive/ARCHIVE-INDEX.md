@@ -57,6 +57,7 @@ row goes into `_MAP.md`'s Agent Session Log, and it is deleted from the live fil
 | `HANDOFF-ui-overhaul-38-items.md` | Handoff entry | The `feat/ui-overhaul` era CURRENT STATE entry — all 38 actionable items of the 2026-08 overhaul plan. | 2026-08-20 |
 | `HANDOFF-2026-08-27-28-sessions.md` | Handoff entry | The post-overhaul bug-fix rounds plus the SimulasiMode/Belajar work. | 2026-08-31 |
 | `HANDOFF-2026-08-31-09-01-ui-typography.md` | Handoff entry | The 2026-08-31/09-01 UI + typography sessions, with a note on the one claim in it a later session had to correct. | 2026-09-04 |
+| `HANDOFF-2026-09-04-07-sessions.md` | Handoff entries | Four CURRENT STATE entries retired together: 7.0.0 (two modes removed, multi-vocabulary card split 1,438 → 1,626), the 6.1.0 governance-docs audit, and the two 6.1.0 `simulasi`/Belajar-tab rounds. Condensed versions: `CHANGELOG.md` [6.1.0] and [7.0.0], `_MAP.md` § Agent Session Log. | 2026-09-09 |
 | `HANDOFF-2026-09-04-audit-and-ui.md` | Handoff entry | The 6.0.0 exhaustive audit and the layout/typography overhaul that followed it, same day. Condensed versions: `CHANGELOG.md` [6.0.0] and [6.1.0], `_MAP.md` § Agent Session Log. | 2026-09-05 |
 | `README-CONTENT-DQ.md` | Branch guide | The `content-dq` working guide. That branch merged 2026-08-18; the split-file layers it tells you to edit were deleted 2026-09-04, and its merge plan was executed in full. See its own header for the drift list. | 2026-09-05 |
 

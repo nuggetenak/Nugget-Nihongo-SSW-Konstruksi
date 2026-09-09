@@ -139,6 +139,7 @@ not exist (all removed 2026-09-04 — see CHANGELOG).
 | Angka / Danger / Confusion | their own file in `src/data/` | — |
 | Patch notes (Tentang) | `src/data/release-notes.js` | — it IS the source; hand-written, deliberately not derived from `CHANGELOG.md`. Rules for adding an entry are in the file header, and tests enforce them. |
 | Menu question counts | `src/utils/constants.js` (`QUIZ_QUESTION_COUNTS`) | — literals on purpose: deriving them in `router/modes.js` put 707 kB on the critical path of every first page view (item 131). `src/tests/mode-counts.test.js` re-derives them from the real data and fails on drift. |
+| JAC Official question photos | `public/images/jac-official/<question id>.webp`, referenced by the question's `img` field | — one-shot, from the JAC sample PDFs; `scripts/archive/extract-jac-images.py` is the only record of which page each came from. Not precached; `jac-question-images.test.js` fails if an `img` path stops resolving. |
 | Tentang prose | `src/data/about-content.js` | — it IS the source. The per-menu guide and the source credits are **not** here: they are generated at render time from `MODE_META` and `SOURCE_META`. |
 
 After editing `src/data/source/`, run `node scripts/merge-cards.mjs`. `npm run audit:content` fails
