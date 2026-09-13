@@ -145,13 +145,22 @@ export default function ResultScreen({
                   />
                 </div>
                 <div className={s.reviewWrong}>
-                  ✗{' '}
-                  <JpFront
-                    jp={r.userAnswer || '—'}
-                    furiganaPolicy={furiganaPolicy}
-                    maxSize={JP_LIST_MAX_SECONDARY}
-                    compact
-                  />
+                  {/* An unanswered question is not a wrong answer, and showing a
+                      bare dash next to a red cross reads like one. QuizShell marks
+                      the ones the clock ran out on, so say so. */}
+                  {r.unanswered ? (
+                    <span>✗ Tidak dijawab (waktu habis)</span>
+                  ) : (
+                    <>
+                      ✗{' '}
+                      <JpFront
+                        jp={r.userAnswer || '—'}
+                        furiganaPolicy={furiganaPolicy}
+                        maxSize={JP_LIST_MAX_SECONDARY}
+                        compact
+                      />
+                    </>
+                  )}
                 </div>
                 <div className={s.reviewCorrect}>
                   ✓{' '}

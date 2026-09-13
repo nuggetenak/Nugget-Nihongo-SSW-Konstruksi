@@ -65,12 +65,33 @@ export default function QuizShell({
   useEffect(() => {
     if (timer <= 0 || phase !== 'playing') return;
     if (timeLeft <= 0) {
+      // Time up. Every question the clock ran out on is recorded as wrong, which
+      // it was not doing: `results` only ever held *answered* questions and
+      // `total` is `results.length`, so answering six of ten in time and letting
+      // four lapse scored 6/6 = 100%... and, once the display settled, 60% — over
+      // a denominator that quietly shrank to match. SimulasiMode, the mode
+      // actually modelling the exam, counts a blank as wrong, because that is
+      // what the exam does. One app should not hold two definitions of a score,
+      // and if it must pick one it should not be the lenient one in the mode
+      // people use to decide whether they are ready to sit the real thing.
+      setResults((r) => [
+        ...r,
+        ...questions.slice(r.length).map((q) => ({
+          isCorrect: false,
+          unanswered: true,
+          _cardId: q._cardId ?? null,
+          question: q.question,
+          userAnswer: '',
+          correctAnswer: q.options?.[q.correctIdx]?.text || '',
+          explanation: q.explanation || '',
+        })),
+      ]);
       setPhase('finished');
       return;
     }
     const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
     return () => clearTimeout(t);
-  }, [timeLeft, timer, phase]);
+  }, [timeLeft, timer, phase, questions]);
 
   const handleSelect = useCallback(
     (idx) => {
