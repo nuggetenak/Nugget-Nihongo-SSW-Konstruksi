@@ -39,18 +39,65 @@ export function loadGistId() {
 function authHeaders(token) {
   return {
     'Content-Type': 'application/json',
-    Authorization: `token ${token}`,
+    // `Bearer` is GitHub's documented scheme; `token` is the older spelling and
+    // still accepted, but there is no reason to sit on a deprecated one.
+    Authorization: `Bearer ${token}`,
+    'X-GitHub-Api-Version': '2022-11-28',
   };
 }
 
-// List user's existing gists and find one matching our description
+// How long to let a request hang before calling it a failure.
+//
+// Every fetch in this file used to have no timeout and no abort. The audience is
+// on Indonesian mobile data, where a request does not fail so much as stop: the
+// promise never settles, so the Push/Pull button spins for as long as the user is
+// willing to look at it, with no error, no progress and no way to cancel. A
+// timeout turns that into a message they can act on.
+const REQUEST_TIMEOUT_MS = 15000;
+
+async function ghFetch(url, options = {}) {
+  // AbortSignal.timeout would be tidier and is not in every WebView this app
+  // runs in, so the controller is built by hand.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } catch (err) {
+    if (err?.name === 'AbortError')
+      throw new Error('Koneksi lambat — GitHub tidak menjawab dalam 15 detik. Coba lagi.', {
+        cause: err,
+      });
+    throw new Error('Gagal menghubungi GitHub — periksa koneksi internet.', { cause: err });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// How many pages of gists to walk looking for ours. See findExistingGist.
+const GIST_SEARCH_MAX_PAGES = 10;
+
+// List the user's gists and find the one matching our description.
+//
+// This read a single `per_page=100` page and stopped. For a user whose backup
+// gist is not among their hundred most recent, that returns null, the push path
+// reads null as "no backup exists yet" and creates a *second* gist, and
+// `saveGistId` then pins the duplicate — so the device writes to one gist while
+// the old one holds the history, and the two drift apart silently. Paginate
+// instead, bounded so a user with thousands of gists cannot turn one button press
+// into an unbounded walk.
 export async function findExistingGist(token) {
-  const res = await fetch('https://api.github.com/gists?per_page=100', {
-    headers: authHeaders(token),
-  });
-  if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-  const gists = await res.json();
-  return gists.find((g) => g.description === GIST_DESC && GIST_FILENAME in g.files) ?? null;
+  for (let page = 1; page <= GIST_SEARCH_MAX_PAGES; page++) {
+    const res = await ghFetch(`https://api.github.com/gists?per_page=100&page=${page}`, {
+      headers: authHeaders(token),
+    });
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    const gists = await res.json();
+    if (!Array.isArray(gists) || gists.length === 0) return null;
+    const match = gists.find((g) => g.description === GIST_DESC && GIST_FILENAME in g.files);
+    if (match) return match;
+    if (gists.length < 100) return null; // last page
+  }
+  return null;
 }
 
 // Push data to a new or existing gist
@@ -64,7 +111,7 @@ export async function pushToGist(token, data, existingGistId = '') {
 
   if (existingGistId) {
     // PATCH — update existing gist
-    const res = await fetch(`https://api.github.com/gists/${existingGistId}`, {
+    const res = await ghFetch(`https://api.github.com/gists/${existingGistId}`, {
       method: 'PATCH',
       headers: authHeaders(token),
       body: JSON.stringify(body),
@@ -73,7 +120,7 @@ export async function pushToGist(token, data, existingGistId = '') {
     return await res.json();
   } else {
     // POST — create new gist
-    const res = await fetch('https://api.github.com/gists', {
+    const res = await ghFetch('https://api.github.com/gists', {
       method: 'POST',
       headers: authHeaders(token),
       body: JSON.stringify(body),
@@ -85,7 +132,7 @@ export async function pushToGist(token, data, existingGistId = '') {
 
 // Pull data from an existing gist
 export async function pullFromGist(token, gistId) {
-  const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+  const res = await ghFetch(`https://api.github.com/gists/${gistId}`, {
     headers: authHeaders(token),
   });
   if (!res.ok) throw new Error(`Gagal ambil Gist: ${res.status}`);

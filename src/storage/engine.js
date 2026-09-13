@@ -80,6 +80,25 @@ function classify(data, raw) {
 function quarantineCorruptDoc(docKey, raw) {
   const backupKey = `${docKey}_corrupt_${Date.now()}`;
   try {
+    // One quarantine copy per document, not one per event. Each of these holds a
+    // whole document's bytes, they were never cleaned up, and the corruption
+    // they record is exactly the kind of thing that recurs — a flaky sync writing
+    // a truncated key on Monday does it again on Tuesday. Left unbounded, the
+    // feature that exists to protect data ends up consuming the quota that the
+    // data needs, and the quota warning fires for space taken by backups of
+    // unreadable files nobody can use. The newest copy is the useful one.
+    // `localStorage.key(i)`, not `Object.keys(localStorage)`. The latter reads as
+    // the obvious spelling and is not the same thing: Storage exposes its entries
+    // as own properties only by host magic, so under jsdom `Object.keys` returns
+    // ["getItem","setItem","removeItem","clear","length","key"] — the methods —
+    // and matches nothing. It happens to work in a browser, which is the worst
+    // version of this bug: the cleanup would have been dead in every test and
+    // live in production, so nothing here could have told us it was wrong.
+    // Backwards, because removing an entry reindexes the ones after it.
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key?.startsWith(`${docKey}_corrupt_`)) localStorage.removeItem(key);
+    }
     localStorage.setItem(backupKey, raw);
   } catch {
     // Quota's the only realistic failure here (raw's already proven to be
@@ -121,6 +140,21 @@ function freshDefaults() {
     srs: { _v: STORAGE_VERSION, cards: {} },
     prefs: { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION },
   };
+}
+
+// Reads the srs and prefs documents into the cache, quarantining either if it
+// existed but would not parse. Extracted because three branches of init() need
+// exactly this and one of them used to do something else — the fresh-install
+// branch wrote defaults over both (see the comment there).
+function loadSideDocs() {
+  const srsResult = readDoc(DOCS.srs);
+  if (srsResult.corrupt) quarantineCorruptDoc(DOCS.srs, srsResult.raw);
+  _cache.srs = srsResult.ok ? srsResult.data : { _v: STORAGE_VERSION, cards: {} };
+  const prefsResult = readDoc(DOCS.prefs);
+  if (prefsResult.corrupt) quarantineCorruptDoc(DOCS.prefs, prefsResult.raw);
+  _cache.prefs = prefsResult.ok
+    ? prefsResult.data
+    : { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
 }
 
 // ── Migration chain ───────────────────────────────────────────────────────
@@ -167,28 +201,59 @@ export function init() {
   if (version >= STORAGE_VERSION) {
     // Already current (or newer) — load directly
     _cache.progress = progressRaw;
-    const srsResult = readDoc(DOCS.srs);
-    if (srsResult.corrupt) quarantineCorruptDoc(DOCS.srs, srsResult.raw);
-    _cache.srs = srsResult.ok ? srsResult.data : { _v: STORAGE_VERSION, cards: {} };
-    const prefsResult = readDoc(DOCS.prefs);
-    if (prefsResult.corrupt) quarantineCorruptDoc(DOCS.prefs, prefsResult.raw);
-    _cache.prefs = prefsResult.ok
-      ? prefsResult.data
-      : { ...JSON.parse(JSON.stringify(DEFAULTS.prefs)), _v: STORAGE_VERSION };
+    loadSideDocs();
   } else {
     // Find where this install actually is. v1 predates the _v stamp entirely,
     // so it is detected by the shape of its keys rather than by a number.
     const from = version >= 2 ? version : hasV1Data() ? 1 : null;
 
     if (from === null) {
-      // Fresh install — write current defaults
+      // ── Not necessarily a fresh install ──────────────────────────────────
+      // This branch used to write `freshDefaults()` over all three documents,
+      // and it is reached whenever the *progress* document alone is missing or
+      // unusable — a partial "clear site data", a WebView cleanup, a truncated
+      // sync write, a hand-edited key. So the price of losing one of three keys
+      // was losing the other two as well, and the one that matters most is the
+      // SRS document: every card's stability, difficulty and review history,
+      // which nothing can reconstruct. A learner two years in could open the app
+      // one morning to a deck that had never heard of them.
+      //
+      // The irony is that the quarantine path above had already done its job by
+      // then: an unusable progress document was preserved under a side key, and
+      // then this branch destroyed the two healthy documents next to it.
+      //
+      // So a genuinely fresh install is now the narrower claim it always should
+      // have been: no progress document AND nothing worth keeping in the other
+      // two. When either of the others is usable, only the missing document is
+      // rebuilt from defaults.
+      const srsResult = readDoc(DOCS.srs);
+      const prefsResult = readDoc(DOCS.prefs);
+      const salvageable = srsResult.ok || prefsResult.ok;
       const d = freshDefaults();
+
       _cache.progress = d.progress;
-      _cache.srs = d.srs;
-      _cache.prefs = d.prefs;
       writeDoc(DOCS.progress, _cache.progress);
-      writeDoc(DOCS.srs, _cache.srs);
-      writeDoc(DOCS.prefs, _cache.prefs);
+
+      if (salvageable) {
+        if (srsResult.corrupt) quarantineCorruptDoc(DOCS.srs, srsResult.raw);
+        if (prefsResult.corrupt) quarantineCorruptDoc(DOCS.prefs, prefsResult.raw);
+        // Kept as found, not rewritten: a document this build did not produce is
+        // left byte-for-byte until something actually changes it. Only the ones
+        // that were unreadable fall back to defaults, and only in memory.
+        _cache.srs = srsResult.ok ? srsResult.data : d.srs;
+        _cache.prefs = prefsResult.ok ? prefsResult.data : d.prefs;
+        if (!srsResult.ok) writeDoc(DOCS.srs, _cache.srs);
+        if (!prefsResult.ok) writeDoc(DOCS.prefs, _cache.prefs);
+        // No corruption entry for the rebuilt progress document: if it was
+        // unreadable the quarantine call at the top of init() already recorded
+        // it, and if it was merely absent then nothing was lost and
+        // DataWarningBanner would be crying wolf — the mistake item 138 was.
+      } else {
+        _cache.srs = d.srs;
+        _cache.prefs = d.prefs;
+        writeDoc(DOCS.srs, _cache.srs);
+        writeDoc(DOCS.prefs, _cache.prefs);
+      }
     } else {
       // Run the chain from wherever this install is up to current, writing each
       // step so the next one can read what the previous produced.
@@ -201,7 +266,7 @@ export function init() {
       let migrated = null;
       for (let v = from; v < STORAGE_VERSION; v++) {
         const step = MIGRATIONS[v];
-        if (!step) break; // no path from here; leave the data untouched
+        if (!step) break; // no path from here — see the `if (!migrated)` below
         migrated = step();
         writeDoc(DOCS.progress, migrated.progress);
         writeDoc(DOCS.srs, migrated.srs);
@@ -211,6 +276,27 @@ export function init() {
         _cache.progress = migrated.progress;
         _cache.srs = migrated.srs;
         _cache.prefs = migrated.prefs;
+      } else {
+        // ── The registry had no step for `from`, so nothing ran ──────────────
+        // "leave the data untouched" is what the old comment here claimed, and
+        // it was only half true. `migrated` stayed null, so all three cache
+        // slots stayed null, `_initialized` went true anyway, and from that
+        // point `get()` returned DEFAULTS while `set()` merged onto DEFAULTS and
+        // wrote the result — defaults over the stored document, on the first
+        // write. The data survived exactly until the user did anything.
+        //
+        // Unreachable today: every version 1–6 has an entry. It becomes
+        // reachable the moment someone bumps STORAGE_VERSION and forgets the
+        // registry line, which is precisely the hole the registry was built to
+        // stop being silent, one branch over.
+        //
+        // Load what is on disk as-is instead. An older document read by a newer
+        // build is the same situation as the `>=` branch above and is handled
+        // the same way: fields this build does not know about ride through a
+        // `set()` untouched, because `set()` spreads the cached document.
+        _cache.progress = progressRaw;
+        loadSideDocs();
+        _corruption.push({ doc: DOCS.progress, backupKey: null, migrationGap: from });
       }
       if (from === 1) cleanup_v1_keys();
     }
@@ -223,7 +309,13 @@ export function init() {
 // get(doc) → returns full document object (reference to cache)
 export function get(doc) {
   if (!_initialized) init();
-  return _cache[doc] ?? DEFAULTS[doc];
+  // The fallback is a copy, not `DEFAULTS[doc]` itself. Handing out the live
+  // module-level object means any caller that mutates what it reads — one
+  // `push` onto `known`, one assignment into `quizWrong` — edits the defaults
+  // for the rest of the session, and every later reader sees the poisoned
+  // values. No current caller does, which is what makes it worth closing now
+  // rather than after one does.
+  return _cache[doc] ?? JSON.parse(JSON.stringify(DEFAULTS[doc]));
 }
 
 // set(doc, updater | partial) → merges + writes
@@ -270,6 +362,19 @@ export function setSRSCard(cardId, entry) {
   const id = String(cardId);
   if (!_cache.srs) _cache.srs = { _v: STORAGE_VERSION, cards: {} };
   _cache.srs.cards[id] = entry;
+  // Stamped here too, and this is the one that was missing. `set()` stamps every
+  // write it makes, and `getLastMutatedAt()` is built on those stamps — but
+  // rating a card does not go through `set()`, it comes through here, and this
+  // path wrote straight to storage without touching `updatedAt`. So the single
+  // most common action in the app, the one the whole SRS loop is made of, moved
+  // nothing that the conflict check could see.
+  //
+  // What that cost: a learner who only ever reviews cards — no quizzes, no
+  // notes, no starring — reads as a device that has never changed. Restore an
+  // eight-month-old backup over four hundred fresh reviews and the "data on this
+  // device is newer than this file" warning stays silent, because as far as the
+  // stamps were concerned it wasn't.
+  _cache.srs.updatedAt = Date.now();
   writeDoc(DOCS.srs, _cache.srs);
 }
 
@@ -322,9 +427,16 @@ export function importAll(snapshot) {
   if (!snapshot?.progress || !snapshot?.srs || !snapshot?.prefs) {
     throw new Error('Invalid snapshot — missing documents');
   }
-  _cache.progress = { ...snapshot.progress, _v: STORAGE_VERSION };
-  _cache.srs = { ...snapshot.srs, _v: STORAGE_VERSION };
-  _cache.prefs = { ...snapshot.prefs, _v: STORAGE_VERSION };
+  // Stamped now, not carried from the file. Without this the restored documents
+  // keep whatever `updatedAt` the *other* device wrote months ago, so a device
+  // that has just had its entire history replaced claims it has not changed
+  // since — and the next conflict check reasons from that. Restoring a backup is
+  // the largest mutation this app can perform; it is the last thing that should
+  // read as "no activity".
+  const now = Date.now();
+  _cache.progress = { ...snapshot.progress, _v: STORAGE_VERSION, updatedAt: now };
+  _cache.srs = { ...snapshot.srs, _v: STORAGE_VERSION, updatedAt: now };
+  _cache.prefs = { ...snapshot.prefs, _v: STORAGE_VERSION, updatedAt: now };
   writeDoc(DOCS.progress, _cache.progress);
   writeDoc(DOCS.srs, _cache.srs);
   writeDoc(DOCS.prefs, _cache.prefs);
@@ -339,12 +451,51 @@ export function _reset_for_test() {
 
 // ── Snapshot validation ──────────────────────────────────────────────────────
 // Validate a snapshot before importing. Returns { ok, reason, summary }.
+/**
+ * Is one `srs.cards[id]` entry safe to hand to the scheduler?
+ *
+ * The shape check above it used to stop at `typeof srs.cards === 'object'`, which
+ * accepts `{ card: { due: 'garbage' }, history: 'oops' }`. That imports cleanly
+ * and then fails much later and much worse: `deserializeCard` turns `'garbage'`
+ * into an Invalid Date, ts-fsrs throws inside the rating call, the ErrorBoundary
+ * takes the screen, and the entry that caused it is already persisted — so the
+ * card is unrateable on every subsequent visit too. Rejecting the file is a
+ * strictly better outcome than accepting a file that breaks one card forever.
+ *
+ * Deliberately permissive about which fields exist: entries written by older
+ * versions carry different keys, and this runs on files a user is *restoring*.
+ * It only rejects values that are present and of a type the scheduler cannot use.
+ */
+function isUsableSRSEntry(entry) {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return false;
+  if ('history' in entry && !Array.isArray(entry.history)) return false;
+  const card = entry.card ?? entry;
+  if (!card || typeof card !== 'object' || Array.isArray(card)) return false;
+  if (card.due != null) {
+    const due = typeof card.due === 'number' ? card.due : Date.parse(card.due);
+    if (!Number.isFinite(due)) return false;
+  }
+  for (const k of ['stability', 'difficulty', 'reps', 'lapses', 'elapsed_days', 'scheduled_days']) {
+    if (card[k] != null && typeof card[k] !== 'number') return false;
+    if (typeof card[k] === 'number' && !Number.isFinite(card[k])) return false;
+  }
+  return true;
+}
+
 export function validateSnapshot(snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return { ok: false, reason: 'not_object' };
   if (!snapshot.progress || !snapshot.srs || !snapshot.prefs)
     return { ok: false, reason: 'missing_docs' };
   if (!Array.isArray(snapshot.progress.known)) return { ok: false, reason: 'invalid_known' };
-  if (typeof snapshot.srs.cards !== 'object') return { ok: false, reason: 'invalid_srs' };
+  if (typeof snapshot.srs.cards !== 'object' || snapshot.srs.cards === null)
+    return { ok: false, reason: 'invalid_srs' };
+  // `prefs` had no shape check at all, so `prefs: 42` or `prefs: []` sailed
+  // through and every renderer downstream got a document it could not read.
+  if (typeof snapshot.prefs !== 'object' || Array.isArray(snapshot.prefs))
+    return { ok: false, reason: 'invalid_prefs' };
+  for (const [id, entry] of Object.entries(snapshot.srs.cards)) {
+    if (!isUsableSRSEntry(entry)) return { ok: false, reason: `invalid_srs_card:${id}` };
+  }
   return {
     ok: true,
     summary: {
@@ -370,6 +521,12 @@ export function validateDelta(delta) {
     return { ok: false, reason: 'invalid_srs' };
   if (delta.known != null && !Array.isArray(delta.known))
     return { ok: false, reason: 'invalid_known' };
+  // Same per-entry check as validateSnapshot. A delta merges rather than
+  // replaces, so an unusable entry here poisons one card instead of the store —
+  // still a card the learner can never rate again.
+  for (const [id, entry] of Object.entries(delta.srs.cards)) {
+    if (!isUsableSRSEntry(entry)) return { ok: false, reason: `invalid_srs_card:${id}` };
+  }
   return {
     ok: true,
     summary: {

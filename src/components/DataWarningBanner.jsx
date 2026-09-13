@@ -18,17 +18,27 @@ const COPY = {
     icon: '⚠️',
     text: 'Data tersimpan tidak bisa dibaca dan sudah direset. Progres sebelumnya kemungkinan hilang.',
   },
+  // A migration gap is not corruption and nothing was reset — the document is
+  // intact, this build just has no upgrade path to it. Saying "sudah direset,
+  // progres kemungkinan hilang" there would be false, and would push the user
+  // towards overwriting data that is still fine.
+  stale: {
+    icon: '⚠️',
+    text: 'Data tersimpan dari versi lain belum bisa diperbarui. Data aman — cadangkan sebelum lanjut.',
+  },
 };
 
 export default function DataWarningBanner() {
   const { goMode } = useApp();
-  const [warning, setWarning] = useState(null); // null | 'quota' | 'corrupt'
+  const [warning, setWarning] = useState(null); // null | 'quota' | 'corrupt' | 'stale'
   const [dismissed, setDismissed] = useState(false);
 
   // Corruption, if any, already happened by the time this mounts — init()
   // runs synchronously before React does (main.jsx). One check is enough.
   useEffect(() => {
-    if (getCorruptionWarning().length > 0) setWarning('corrupt');
+    const entries = getCorruptionWarning();
+    if (entries.length === 0) return;
+    setWarning(entries.every((e) => e.migrationGap != null) ? 'stale' : 'corrupt');
   }, []);
 
   // Quota errors can happen at any point during the session, so this stays
