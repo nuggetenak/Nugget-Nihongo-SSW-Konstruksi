@@ -24,6 +24,7 @@ import {
   validateSnapshot,
   validateDelta,
   getCorruptionWarning,
+  setExternalChangeHandler,
 } from '../storage/engine.js';
 import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
 
@@ -293,5 +294,71 @@ describe('validateSnapshot rejects entries the scheduler cannot use', () => {
   it('applies the same per-entry check to a delta', () => {
     expect(validateDelta({ srs: { cards: { 5: { card: { due: 'nope' } } } } }).ok).toBe(false);
     expect(validateDelta({ srs: { cards: { 5: { card: { due: null } } } } }).ok).toBe(true);
+  });
+});
+
+describe('a write from another tab is noticed', () => {
+  // Two tabs each hold their own module-level cache, and a write from either goes
+  // straight to localStorage — so the second tab's next write is built from a
+  // snapshot taken before the first tab's and silently reverses it. Study fifty cards
+  // in one tab, rate one in the other, and the fifty are gone with nothing on screen
+  // having changed. Desktop is a supported form factor here (there is a SideNav) and
+  // a second tab is how people use a browser.
+  //
+  // `storage` fires only in the tabs that did *not* write, which is what makes this
+  // detectable at all and why no self-triggering guard is needed.
+  const fireStorage = (key, newValue) =>
+    window.dispatchEvent(new StorageEvent('storage', { key, newValue }));
+
+  it('re-reads the changed document so this tab stops writing from a stale one', () => {
+    write(DOCS.progress, { _v: STORAGE_VERSION, known: [1], starred: [] });
+    init();
+    expect(get('progress').known).toEqual([1]);
+
+    // Another tab writes a longer history.
+    write(DOCS.progress, { _v: STORAGE_VERSION, known: [1, 2, 3, 4, 5], starred: [] });
+    fireStorage(DOCS.progress, localStorage.getItem(DOCS.progress));
+
+    expect(get('progress').known).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it('does not lose the other tab’s work on this tab’s next write', () => {
+    // The actual data loss, stated end to end.
+    write(DOCS.progress, { _v: STORAGE_VERSION, known: [1], starred: [] });
+    init();
+
+    write(DOCS.progress, { _v: STORAGE_VERSION, known: [1, 2, 3, 4, 5], starred: [] });
+    fireStorage(DOCS.progress, localStorage.getItem(DOCS.progress));
+
+    set('progress', { starred: [9] });
+
+    const onDisk = read(DOCS.progress);
+    expect(onDisk.known).toEqual([1, 2, 3, 4, 5]); // not reverted to [1]
+    expect(onDisk.starred).toEqual([9]);
+  });
+
+  it('tells the app which document moved', () => {
+    init();
+    const seen = [];
+    setExternalChangeHandler((doc) => seen.push(doc));
+    write(DOCS.srs, { _v: STORAGE_VERSION, cards: {} });
+    fireStorage(DOCS.srs, localStorage.getItem(DOCS.srs));
+    expect(seen).toEqual(['srs']);
+  });
+
+  it('treats a clear() from another tab as all three documents changing', () => {
+    init();
+    const seen = [];
+    setExternalChangeHandler((doc) => seen.push(doc));
+    fireStorage(null, null);
+    expect(seen).toEqual([null]);
+  });
+
+  it('ignores keys that are not one of the three documents', () => {
+    init();
+    const seen = [];
+    setExternalChangeHandler((doc) => seen.push(doc));
+    fireStorage('ssw-gist-pat', 'ghp_something');
+    expect(seen).toEqual([]);
   });
 });

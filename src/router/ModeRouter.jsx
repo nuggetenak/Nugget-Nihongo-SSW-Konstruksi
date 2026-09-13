@@ -25,9 +25,14 @@ import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 // real, differently-proportioned content. One aria-label on the wrapper is
 // the single loading announcement for the whole fallback — the individual
 // shimmer blocks are aria-hidden, not separately labelled.
+// `role="status"` already carries an implicit `aria-live="polite"`, so the explicit
+// attribute this used to also set was a second spelling of the same thing. Harmless
+// while the two agreed — and item 16 is in this repo's history precisely because a
+// status role and an explicit aria-live drifted into contradicting each other. One
+// source per behaviour.
 export function ModeLoader({ shape = 'card' }) {
   return (
-    <div role="status" aria-label="Memuat mode..." aria-live="polite">
+    <div role="status" aria-label="Memuat mode...">
       <div
         style={{
           display: 'flex',

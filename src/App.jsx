@@ -130,7 +130,7 @@ export default function App() {
           <ErrorBoundary fallback={<TabError tab="Mode belajar" />}>
             <Suspense
               fallback={
-                <div role="status" aria-label="Memuat mode..." aria-live="polite">
+                <div role="status" aria-label="Memuat mode...">
                   <Skeleton
                     width="100%"
                     height={4}
@@ -149,13 +149,28 @@ export default function App() {
     );
 
   // First-run: interactive onboarding handles Welcome + Track + Demo + Goal.
-  if (!onboarded) return <Onboarding onComplete={completeOnboarding} />;
+  //
+  // Inside `<main id="main-content">` like every other branch, because
+  // `index.html`'s skip link points at that id and this was the one screen where the
+  // target did not exist — so the very first keyboard user to press Tab on the very
+  // first screen got a link that went nowhere.
+  if (!onboarded)
+    return (
+      <main id="main-content" tabIndex={-1}>
+        <Onboarding onComplete={completeOnboarding} />
+      </main>
+    );
 
   // Edge case: onboarded but track cleared (e.g. user reset track from Saya).
   // startStep='goal' -- track itself has no picker step (single-track scope,
   // see Onboarding.jsx), so replaying Welcome + the flashcard Demo for what
   // is really a one-field settings confirmation was the actual bug (item 24).
-  if (!track) return <Onboarding onComplete={completeOnboarding} startStep="goal" />;
+  if (!track)
+    return (
+      <main id="main-content" tabIndex={-1}>
+        <Onboarding onComplete={completeOnboarding} startStep="goal" />
+      </main>
+    );
 
   const belajarBadges = { ulasan: srs.dueCount };
 

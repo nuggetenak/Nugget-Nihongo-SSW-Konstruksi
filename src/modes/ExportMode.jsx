@@ -551,6 +551,32 @@ export default function ExportMode() {
           }}
         >
           {status.msg}
+          {/* The message says "Muat ulang halaman" and used to leave the user to find
+              the browser's own reload — which on a phone, in an installed PWA, may not
+              be visible at all. The contexts hold data read at mount, so until the
+              reload happens every number on screen is the pre-import one: a learner who
+              has just restored a backup sees their old counts and reasonably concludes
+              the restore failed. */}
+          {status.type === 'ok' && /Muat ulang/.test(status.msg ?? '') && (
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              style={{
+                display: 'block',
+                marginTop: 'var(--space-10)',
+                padding: 'var(--space-8) var(--space-14)',
+                borderRadius: T.r.sm,
+                border: `1px solid ${T.correctBorder}`,
+                background: 'transparent',
+                color: T.correct,
+                font: 'inherit',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              🔄 Muat ulang sekarang
+            </button>
+          )}
         </div>
       )}
 

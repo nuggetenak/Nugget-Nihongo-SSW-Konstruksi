@@ -1,11 +1,15 @@
 // ─── DataWarningBanner.jsx ────────────────────────────────────────────────────
-// item 19: storage-quota and data-corruption warnings are data-loss-risk
-// events, which item 16's convention says never belong on a self-dismissing
-// toast. One persistent banner covers both -- same underlying message
-// ("something's wrong with your saved data, back it up"), different trigger.
+// item 19: storage-quota and data-corruption warnings are data-loss-risk events,
+// which item 16's convention says never belong on a self-dismissing toast. One
+// persistent banner covers all four states now -- quota, corruption, a document this
+// build cannot migrate, and another tab writing to the same data -- because they share
+// a shape ("something happened to your saved data") while wanting different words and
+// a different next step. The copy is per state for exactly that reason: telling
+// someone their data "has been reset and is probably lost" when in fact another tab
+// simply moved ahead would be the worse kind of wrong.
 import { useState, useEffect, useCallback } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
-import { getCorruptionWarning } from '../storage/engine.js';
+import { getCorruptionWarning, setExternalChangeHandler } from '../storage/engine.js';
 import { setQuotaHandler } from '../utils/storage-quota.js';
 import s from './DataWarningBanner.module.css';
 
@@ -26,11 +30,18 @@ const COPY = {
     icon: '⚠️',
     text: 'Data tersimpan dari versi lain belum bisa diperbarui. Data aman — cadangkan sebelum lanjut.',
   },
+  // Another tab changed the same data. Nothing is lost at this point — the engine has
+  // re-read the changed document — but this tab is showing numbers from before it, and
+  // continuing to study here would build on a view that is already behind.
+  othertab: {
+    icon: '🔄',
+    text: 'Data berubah di tab lain. Muat ulang halaman agar angka di sini ikut terbaru.',
+  },
 };
 
 export default function DataWarningBanner() {
   const { goMode } = useApp();
-  const [warning, setWarning] = useState(null); // null | 'quota' | 'corrupt' | 'stale'
+  const [warning, setWarning] = useState(null); // null | 'quota' | 'corrupt' | 'stale' | 'othertab'
   const [dismissed, setDismissed] = useState(false);
 
   // Corruption, if any, already happened by the time this mounts — init()
@@ -39,6 +50,19 @@ export default function DataWarningBanner() {
     const entries = getCorruptionWarning();
     if (entries.length === 0) return;
     setWarning(entries.every((e) => e.migrationGap != null) ? 'stale' : 'corrupt');
+  }, []);
+
+  // A second tab writing to the same three documents. Registered here for the same
+  // reason the quota handler is: it can happen at any point in a session, and this
+  // banner is the app's one persistent surface for "something happened to your data"
+  // — item 16's rule says a data-loss-risk event never belongs on a self-dismissing
+  // toast, and a stale view of your own study history qualifies.
+  useEffect(() => {
+    setExternalChangeHandler(() => {
+      setWarning((w) => (w === 'quota' || w === 'corrupt' ? w : 'othertab'));
+      setDismissed(false);
+    });
+    return () => setExternalChangeHandler(null);
   }, []);
 
   // Quota errors can happen at any point during the session, so this stays
@@ -80,9 +104,17 @@ export default function DataWarningBanner() {
       <span className={s.msg}>
         {copy.icon} {copy.text}
       </span>
-      <button className={s.action} onClick={handleExport}>
-        Cadangkan data →
-      </button>
+      {warning === 'othertab' ? (
+        // Backing up from a stale tab would write this tab's older view into the file.
+        // Reloading is the action that actually helps here.
+        <button className={s.action} onClick={() => window.location.reload()}>
+          Muat ulang →
+        </button>
+      ) : (
+        <button className={s.action} onClick={handleExport}>
+          Cadangkan data →
+        </button>
+      )}
       <button className={s.close} onClick={() => setDismissed(true)} aria-label="Tutup peringatan">
         ✕
       </button>

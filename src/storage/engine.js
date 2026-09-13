@@ -109,6 +109,51 @@ function quarantineCorruptDoc(docKey, raw) {
   _corruption.push({ doc: docKey, backupKey });
 }
 
+// ── Another tab wrote to our storage ───────────────────────────────────────
+// Two tabs each hold their own module-level `_cache`, and a write from either one
+// goes straight to localStorage. So the second tab's next write is built from a
+// snapshot taken before the first tab's, and silently reverses it: study fifty cards
+// in one tab, rate one card in the other, and the fifty are gone with nothing on
+// screen having changed. Desktop is a supported form factor here — there is a
+// SideNav — and a second tab is how people use a browser.
+//
+// What this does is the honest minimum rather than a merge: re-read the changed
+// document into the cache so this tab stops writing from a stale one, and tell the
+// app so it can say the data moved. A live merge would need every context to
+// reconcile React state it has already rendered from, and getting that subtly wrong
+// is a worse failure than asking someone to reload.
+let _externalChangeHandler = null;
+let _listening = false;
+
+/** Called with the doc name ('progress' | 'srs' | 'prefs') another tab changed. */
+export function setExternalChangeHandler(fn) {
+  _externalChangeHandler = fn;
+}
+
+const DOC_BY_KEY = Object.fromEntries(Object.entries(DOCS).map(([doc, key]) => [key, doc]));
+
+function onStorageEvent(e) {
+  // `key === null` is a `clear()` from another tab. `newValue === null` is a removal.
+  // Both mean this tab's cache is no longer what is on disk, but neither is something
+  // this app does to itself, so treat them as an external change and re-read.
+  const doc = e.key === null ? null : DOC_BY_KEY[e.key];
+  if (e.key !== null && !doc) return; // some other key entirely (a gist token, say)
+  for (const d of doc ? [doc] : ['progress', 'srs', 'prefs']) {
+    const res = readDoc(DOCS[d]);
+    if (res.ok) _cache[d] = res.data;
+  }
+  _externalChangeHandler?.(doc);
+}
+
+function startListening() {
+  if (_listening || typeof window === 'undefined' || !window.addEventListener) return;
+  // `storage` fires only in the *other* tabs, never the one that wrote — which is
+  // exactly the asymmetry this needs and the reason no guard against self-triggering
+  // is required.
+  window.addEventListener('storage', onStorageEvent);
+  _listening = true;
+}
+
 /** item 19: non-empty when init() had to reset a doc that existed but
  *  wouldn't parse, rather than a doc that was simply never written. Read
  *  this once, after mount -- it reflects what happened at this app-load's
@@ -303,6 +348,7 @@ export function init() {
   }
 
   _initialized = true;
+  startListening();
 }
 
 // ── Document-level API ────────────────────────────────────────────────────
@@ -447,6 +493,11 @@ export function _reset_for_test() {
   _cache = { progress: null, srs: null, prefs: null };
   _initialized = false;
   _corruption = [];
+  if (_listening && typeof window !== 'undefined' && window.removeEventListener) {
+    window.removeEventListener('storage', onStorageEvent);
+  }
+  _listening = false;
+  _externalChangeHandler = null;
 }
 
 // ── Snapshot validation ──────────────────────────────────────────────────────

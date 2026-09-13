@@ -245,8 +245,17 @@ export default function QuizShell({
 
   return (
     <div className={S.wrap}>
-      {/* Screen reader announcement — progress */}
-      <div className="sr-only" aria-live="assertive" aria-atomic="true">
+      {/* Screen reader announcement — progress.
+          `polite`, not `assertive`. SimulasiMode announces the same thing politely and
+          this announced it assertively, so the identical sentence interrupted a screen
+          reader mid-question on every advance in four modes and waited its turn in the
+          fifth. "Soal 3 dari 10" is orientation, not an alert — nothing is wrong and
+          nothing needs doing — and interrupting the question text to say it is worse
+          than saying it a moment later.
+          `QuizAnnouncer` below stays assertive on purpose: "Benar!" / "Salah" is the
+          direct result of the tap the user just made, which is the one thing here worth
+          cutting in for. */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
         Soal {qIdx + 1} dari {questions.length}
       </div>
       <QuizAnnouncer
