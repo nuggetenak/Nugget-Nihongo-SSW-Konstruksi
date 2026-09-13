@@ -1,14 +1,19 @@
 // ─── components/StudyHeatmap.jsx ─────────────────────────────────────────────
-// GitHub-style 52-week study activity heatmap using SVG.
-// Data from sessions array (capped 180, so ~6 months of real data shown).
+// GitHub-style study activity heatmap using SVG, HEATMAP_WEEKS wide.
+//
+// The header used to say "52-week" while COLS was 18, and "capped 180, so ~6 months
+// of real data shown" while 180 sessions at two a day is 90 days, not 180. The window
+// is one number now and it lives in constants.js with the session cap that has to
+// cover it; `displayed-numbers.test.js` holds the relationship between them.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useMemo } from 'react';
 import { T } from '../styles/theme.js';
 import { isoToLocalDate } from '../utils/date.js';
+import { HEATMAP_WEEKS } from '../utils/constants.js';
 
 const CELL = 11;
 const GAP = 2;
-const COLS = 18; // ~18 weeks = 126 days, covers the 90-session window
+const COLS = HEATMAP_WEEKS;
 const DAYS = 7;
 const DAY_LABELS = ['Min', '', 'Sel', '', 'Kam', '', 'Sab'];
 

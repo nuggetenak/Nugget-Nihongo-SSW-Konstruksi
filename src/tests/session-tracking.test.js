@@ -6,6 +6,7 @@ import { render, act } from '@testing-library/react';
 import { createElement } from 'react';
 import { _reset_for_test } from '../storage/engine.js';
 import { ProgressProvider, useProgress } from '../contexts/ProgressContext.jsx';
+import { SESSIONS_CAP } from '../utils/constants.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -54,15 +55,35 @@ describe('Phase C — Session Tracking', () => {
     expect(sessions[0].date).toBeTruthy();
   });
 
-  it('recordSession caps at 180 entries', () => {
+  it('recordSession caps at SESSIONS_CAP entries', () => {
+    // Against the constant, not a literal. This said 180 twice, and the cap moved to
+    // 400 on 2026-09-13 because 180 did not cover the window the heatmap draws — a
+    // test that hardcodes the number it is checking fails for the change rather than
+    // for the defect. `displayed-numbers.test.js` is what holds the value itself, to
+    // the property it has to satisfy.
     const getCtx = renderProgress();
-    // Add 185 sessions
     act(() => {
-      for (let i = 0; i < 185; i++) {
+      for (let i = 0; i < SESSIONS_CAP + 5; i++) {
         getCtx().recordSession({ mode: 'kartu', correct: i, total: 10, durationMs: 1000 });
       }
     });
-    expect(getCtx().sessions.length).toBe(180);
+    expect(getCtx().sessions.length).toBe(SESSIONS_CAP);
+  });
+
+  it('keeps the newest sessions when it drops the overflow', () => {
+    // Which end gets trimmed was never asserted, and a `.slice(SESSIONS_CAP)` instead
+    // of `.slice(-SESSIONS_CAP)` would pass the count test above while throwing away
+    // everything recent — the heatmap would show a wall of old activity and nothing
+    // from this week.
+    const getCtx = renderProgress();
+    act(() => {
+      for (let i = 0; i < SESSIONS_CAP + 3; i++) {
+        getCtx().recordSession({ mode: 'kartu', correct: i, total: 10, durationMs: 1000 });
+      }
+    });
+    const sessions = getCtx().sessions;
+    expect(sessions.at(-1).correct).toBe(SESSIONS_CAP + 2);
+    expect(sessions[0].correct).toBe(3);
   });
 
   it('recordSession accumulates multiple calls', () => {

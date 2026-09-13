@@ -73,6 +73,32 @@ export function advanceStudyDay(prev, counts, queueToast) {
 
 // Module-level stable defaults — prevent empty object/array recreation each render
 const EMPTY_OBJ = Object.freeze({});
+
+/**
+ * `quizWrong` with only the card-keyed entries in it.
+ *
+ * Item 129 stopped `DangerMode` writing `danger-<term>` keys into a card-keyed map,
+ * and nothing ever removed the ones already in people's stores. They are inert in
+ * FokusMode, become a `NaN` property in StatsMode's `Number(id)`, get counted under
+ * "Salah Kuis" in the export summary, and ride along in every backup forever — so the
+ * item stopped the leak and left the puddle.
+ *
+ * Filtered on the way out, and — the part that actually cleans up — on the way in to
+ * `recordWrong`'s copy, so the next wrong answer rewrites the document without them.
+ * That heals the store without a `STORAGE_VERSION` bump, which is the right weight for
+ * dropping keys no reader wants: a migration is a permanent entry in a chain, and this
+ * is a one-time sweep that can just as well happen lazily.
+ */
+function cardKeyedOnly(raw) {
+  if (!raw || typeof raw !== 'object') return EMPTY_OBJ;
+  let dropped = false;
+  const out = {};
+  for (const [k, v] of Object.entries(raw)) {
+    if (Number.isInteger(Number(k)) && String(Number(k)) === k) out[k] = v;
+    else dropped = true;
+  }
+  return dropped ? out : raw;
+}
 const EMPTY_ARR = Object.freeze([]);
 
 export function ProgressProvider({ children }) {
@@ -182,7 +208,9 @@ export function ProgressProvider({ children }) {
       // utils/mistake-bridge.js is where a non-card mistake belongs.
       if (typeof cardId !== 'number' || !Number.isInteger(cardId)) return;
       setProg((prev) => {
-        const qw = { ...(prev.quizWrong ?? {}) };
+        // `cardKeyedOnly` here, not just on the read side: this is the write that
+        // persists, so it is the one that can actually drop the legacy string keys.
+        const qw = { ...cardKeyedOnly(prev.quizWrong) };
         qw[cardId] = makeWrongEntry(qw[cardId]);
         return { ...prev, quizWrong: qw };
       });
@@ -234,7 +262,7 @@ export function ProgressProvider({ children }) {
         const sessions = [
           ...(prev.sessions ?? []),
           { mode, correct, total, durationMs: durationMs ?? 0, date: new Date().toISOString() },
-        ].slice(-SESSIONS_CAP); // keep last SESSIONS_CAP sessions (~6 months for heatmap)
+        ].slice(-SESSIONS_CAP); // see SESSIONS_CAP: sized to cover the heatmap window
         // Finishing a session is studying, so it keeps the streak alive — see
         // advanceStudyDay. counts=0 deliberately: dailyCount is rendered as
         // "+N kartu hari ini", and a finished quiz is one session, not one card.
@@ -262,7 +290,7 @@ export function ProgressProvider({ children }) {
       unknown: new Set(unknownArr),
       starred: new Set(starredArr),
       // Scores
-      quizWrong: prog.quizWrong ?? EMPTY_OBJ,
+      quizWrong: cardKeyedOnly(prog.quizWrong),
       jacScores: prog.jacScores ?? EMPTY_OBJ,
       wgScores: prog.wgScores ?? EMPTY_OBJ,
       vocabScores: prog.vocabScores ?? EMPTY_OBJ,

@@ -19,7 +19,12 @@ import { getSRSStats, getDueCardIds } from '../srs/index.js';
 import { init, setSRSCard, _reset_for_test } from '../storage/engine.js';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { TOTAL_CARDS } from '../utils/constants.js';
+import {
+  TOTAL_CARDS,
+  SESSIONS_CAP,
+  HEATMAP_WEEKS,
+  SESSIONS_PER_DAY_ASSUMED,
+} from '../utils/constants.js';
 import { CARDS } from '../data/cards.js';
 
 const session = (mode, correct, total) => ({
@@ -273,5 +278,37 @@ describe('the corpus size quoted in static files', () => {
     // The constant is the source these files are checked against, so it has to be
     // checked against the data rather than trusted.
     expect(TOTAL_CARDS).toBe(CARDS.length);
+  });
+});
+
+describe('the session cap covers the window the heatmap draws', () => {
+  // Three numbers disagreed: SESSIONS_CAP was 180 "for ~6 months", StudyHeatmap's
+  // header said "52-week" with COLS at 18, and its COLS comment cited a "90-session
+  // window" that appears nowhere. The arithmetic that matters: 18 weeks is 126 days,
+  // and at two sessions a day a 180-session cap drops everything older than 90 — so
+  // the last five columns go blank for exactly the learners studying hardest, who
+  // then read the chart as evidence they did nothing.
+  //
+  // Holds the relationship, not the number, so raising the window or the assumed
+  // intensity fails here rather than silently degrading a chart.
+  it('stores enough sessions to fill every column at the assumed intensity', () => {
+    const daysDrawn = HEATMAP_WEEKS * 7;
+    expect(
+      SESSIONS_CAP,
+      `the heatmap draws ${daysDrawn} days; at ${SESSIONS_PER_DAY_ASSUMED} sessions/day ` +
+        `that needs ${daysDrawn * SESSIONS_PER_DAY_ASSUMED} stored sessions, cap is ${SESSIONS_CAP}`
+    ).toBeGreaterThanOrEqual(daysDrawn * SESSIONS_PER_DAY_ASSUMED);
+  });
+
+  it('is not so large that the progress document grows without bound', () => {
+    // The other side of the trade. A session record is ~80 bytes of JSON; this keeps
+    // the cap's contribution under ~100 kB raw, well inside what lz-string and the
+    // quota can absorb.
+    expect(SESSIONS_CAP * 80).toBeLessThan(100 * 1024);
+  });
+
+  it('the heatmap reads its width from the same constant', () => {
+    const src = readFileSync(resolve(process.cwd(), 'src/components/StudyHeatmap.jsx'), 'utf8');
+    expect(src).toMatch(/const COLS = HEATMAP_WEEKS;/);
   });
 });

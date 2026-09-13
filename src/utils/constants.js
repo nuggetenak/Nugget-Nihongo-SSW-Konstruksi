@@ -12,8 +12,28 @@ export const SCORED_QUIZ_MODES = ['kuis', 'jac', 'wayground', 'simulasi', 'vocab
 /** FSRS card considered "mature" at this interval (days). */
 export const SRS_MATURE_DAYS = 21;
 
-/** Max sessions stored in progress.sessions. */
-export const SESSIONS_CAP = 180;
+/** Weeks the study heatmap draws. `StudyHeatmap`'s COLS reads this. */
+export const HEATMAP_WEEKS = 18;
+
+/** Max sessions stored in progress.sessions.
+ *
+ *  This was 180 with the comment "~6 months for heatmap", and `StudyHeatmap`'s own
+ *  header said "capped 180, so ~6 months of real data shown" while its COLS comment
+ *  said the 18 columns "cover the 90-session window". Three numbers, one of them
+ *  invented, and none of them checked against each other.
+ *
+ *  The arithmetic: the heatmap draws 18 weeks = 126 days. At 180 sessions and two
+ *  sessions a day — an ordinary evening for someone preparing for an exam in a few
+ *  weeks — the oldest sessions are dropped after 90 days, so the last five columns of
+ *  the heatmap go blank and the learner reads that as "I did nothing in November".
+ *  The chart silently degrades for exactly the users doing the most work.
+ *
+ *  400 covers 126 days at three sessions a day. The cost is nothing that matters: a
+ *  session record is about 80 bytes of JSON, so 400 of them is ~32 kB raw before
+ *  lz-string, against a quota where the worst-case SRS document compresses to 0.10 MB.
+ *  `displayed-numbers.test.js` holds the relationship rather than the number. */
+export const SESSIONS_PER_DAY_ASSUMED = 3;
+export const SESSIONS_CAP = 400;
 
 /** Question-count picker options, shared by every mode that offers a length.
  *
