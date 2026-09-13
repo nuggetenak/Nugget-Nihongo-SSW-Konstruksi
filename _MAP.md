@@ -66,7 +66,6 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── COMPONENT_SPEC.md           ← CSS Modules conventions, shared primitives
 │   ├── PWA_RELEASE_SPEC.md         ← offline architecture, CACHE_VERSION, deploy checklist
 │   ├── UI_UX_PLAN.md               ← WORK QUEUE (not a spec): open items live in §12–§14
-│   ├── RUBY_MISMATCH_AUDIT.md      ← frozen finding list: readings not scoped to their own base
 │   ├── ASSET-PROMPTS.md            ← generation prompts for icon/badge/illustration art
 │   └── archive/                    ← superseded docs; see ARCHIVE-INDEX.md
 ├── scripts/

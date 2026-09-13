@@ -16,7 +16,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { renderJPWithRuby } from '../components/JpDisplay.jsx';
+import { renderJPWithRuby, isGlossNotReading } from '../components/JpDisplay.jsx';
 import { CARDS } from '../data/cards.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
@@ -67,9 +67,20 @@ const ALL_STRINGS = collectStrings([
 //      These stay an explicit list precisely because no rule separates them from
 //      a real reading, so a *new* one has to be looked at by a person rather
 //      than silently absorbed.
+// Kept for the "no kanji in an <rt>" assertion further down, which is a narrower
+// and independent claim: whatever counts as a gloss, a rendered reading must never
+// contain kanji.
 const KANJI_RE = /[\u4E00-\u9FAF]/;
+
+// Imported, not re-implemented. This file used to carry its own copy of the rule
+// (`KANJI_RE.test(marker)`), and on 2026-09-13 the renderer's copy grew a second
+// clause — a marker with no kana at all is a gloss too, because `《SDS/MSDS》` is an
+// abbreviation and not a pronunciation — while this one did not. The sweep then
+// failed on strings the renderer was handling exactly as intended. One rule, one
+// definition; the header above already says this is expressed as a rule rather than
+// a list for the same reason.
 const isExpectedGloss = (html) =>
-  [...html.matchAll(/《([^》]*)》/g)].every((m) => KANJI_RE.test(m[1]));
+  [...html.matchAll(/《([^》]*)》/g)].every((m) => isGlossNotReading(m[1]));
 
 const KNOWN_UNRENDERABLE_SUBSTRINGS = [
   '《ブレージング》',

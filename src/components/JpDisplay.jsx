@@ -352,6 +352,25 @@ const KATAKANA_RE = /[\u30A1-\u30FA]/;
 // unambiguous.
 const KANJI_RE = /[\u4E00-\u9FAF]/;
 
+// The same question asked the other way round. A marker whose content has no kana
+// in it at all is not a reading either — it is an abbreviation standing in for the
+// term: 安全データシート《SDS/MSDS》, アルミガラス布《ALGC》, 建設キャリアアップシステム
+// 《CCUS》. Nothing in `SDS/MSDS` tells you how anything is pronounced, and rendering
+// it as furigana puts a slash and two acronyms in an <rt> above 布.
+//
+// It is the same authoring convention KANJI_RE already covers (危険予知活動《KY活動》
+// differs from these only in that its gloss happens to contain a kanji), so it gets
+// the same treatment: pass the marker through as literal text, which is how the
+// source wrote it and how it reads on screen.
+//
+// Deliberately "no kana", not "contains latin": `時間《6じかん》` and `100A以上
+// 《100Aいじょう》` are botched *readings* that spelled the digit back out, and those
+// are data to fix, not glosses to pass through. The line between the two classes is
+// whether there is any kana claiming to be a pronunciation at all.
+const KANA_ANYWHERE_RE = /[\u3041-\u309F\u30A1-\u30FA\u30FC]/;
+export const isGlossNotReading = (reading) =>
+  KANJI_RE.test(reading) || !KANA_ANYWHERE_RE.test(reading);
+
 // Katakana and hiragana are the same syllabary in two scripts, so a word and its
 // reading can be compared character for character once both are folded to one.
 const kataToHira = (t) => t.replace(/[ァ-ヶ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
@@ -493,7 +512,7 @@ export function parseRubyFragments(jp = '') {
   while ((m = re.exec(jp)) !== null) {
     const [, kanji, trailing, reading] = m;
     // Gloss, not a reading -- no fragment. Same rule as renderJPWithRuby.
-    if (KANJI_RE.test(reading)) {
+    if (isGlossNotReading(reading)) {
       last = m.index + m[0].length;
       continue;
     }
@@ -564,7 +583,7 @@ export function renderJPWithRuby(text, _legacyFragments) {
     // KANJI_RE. Pass the whole match through as literal text, which is exactly
     // how the source wrote it and how it reads correctly on screen.
     const isGloss =
-      KANJI_RE.test(rawReading) ||
+      isGlossNotReading(rawReading) ||
       (trailing && !trailingIsKatakana && !rawReading.endsWith(trailing));
 
     if (isGloss) {

@@ -99,7 +99,6 @@ briefly when actually pushing, then strip again right after.
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
 | `docs/UI_UX_PLAN.md`           | **Work queue, not a spec** — prioritised UI/UX items; shrinks as they land, retires to `docs/archive/` when empty |
 | `docs/CARD_SPLIT_AUDIT.md`     | **Frozen finding list, not a spec** — a verdict for every card in the pre-split corpus, including the rule that kept each of the 113 that stayed whole |
-| `docs/RUBY_MISMATCH_AUDIT.md`  | **Frozen finding list, not a spec** — readings not scoped to their own base; retires when the list is empty |
 | `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md` |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
 | `HUSKY-SETUP.md`               | One-time local pre-commit hook setup — not committed, not CI |

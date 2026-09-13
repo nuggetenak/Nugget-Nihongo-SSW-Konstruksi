@@ -120,7 +120,6 @@ Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
 | `CHANGELOG.md`              | Catatan rilis per versi                                               |
 | `docs/*_SPEC.md`            | Spec stabil: card content, design, layout, component, PWA release     |
 | `docs/UI_UX_PLAN.md`        | Antrean kerja UI/UX (bukan spec) — item terbuka ada di §12–§14        |
-| `docs/RUBY_MISMATCH_AUDIT.md` | Daftar temuan beku: bacaan furigana yang belum dipersempit ke istilahnya |
 | `docs/archive/`             | Dokumen yang sudah digantikan — indeks di `ARCHIVE-INDEX.md`          |
 | `HUSKY-SETUP.md`            | Setup pre-commit hook (sekali jalan, lokal)                           |
 

@@ -819,8 +819,8 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 26,
-        q: '建設工事《けんせつこうじ》の「下請負業者《したうけおいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
-        hint: 'Penjelasan yang benar tentang subkontraktor (下請負業者《したうけおいぎょうしゃ》) dalam konstruksi adalah?',
+        q: '建設工事《けんせつこうじ》の「下請《したうけ》負業者《おいぎょうしゃ》」の説明《せつめい》として正《ただ》しいものはどれか。',
+        hint: 'Penjelasan yang benar tentang subkontraktor (下請《したうけ》負業者《おいぎょうしゃ》) dalam konstruksi adalah?',
         opts: [
           '発注者《はっちゅうしゃ》から直接《ちょくせつ》工事《こうじ》を受注《じゅちゅう》する業者《ぎょうしゃ》',
           '主に設計図《せっけいず》を作成《さくせい》する業者《ぎょうしゃ》',
@@ -834,7 +834,7 @@ export const JAC_MOCKUP_SETS = [
           'Perusahaan yang hanya menangani keselamatan site',
         ],
         ans: 2,
-        exp: '下請負業者《したうけおいぎょうしゃ》 (shita ukeoi gyōsha / subkontraktor) = menerima pekerjaan spesialis dari kontraktor utama (元請). Mereka punya keahlian khusus: pipa, listrik, insulasi, AC, dll. Sebagai pekerja SSW Anda biasanya bekerja di bawah subkontraktor. Rantai: Pemberi proyek → 元請 (motouke) → 下請 (shitauke) → pekerja.',
+        exp: '下請《したうけ》負業者《おいぎょうしゃ》 (shita ukeoi gyōsha / subkontraktor) = menerima pekerjaan spesialis dari kontraktor utama (元請). Mereka punya keahlian khusus: pipa, listrik, insulasi, AC, dll. Sebagai pekerja SSW Anda biasanya bekerja di bawah subkontraktor. Rantai: Pemberi proyek → 元請 (motouke) → 下請 (shitauke) → pekerja.',
       },
       {
         id: 27,
@@ -1712,7 +1712,7 @@ export const JAC_MOCKUP_SETS = [
         hint: "Di industri konstruksi, siapa yang berkewajiban membuat 'buku catatan sistem pelaksanaan' (施工体制台帳)?",
         opts: [
           '図面《ずめん》を作成《さくせい》する設計事務所《せっけいじむしょ》',
-          '実際《じっさい》に施工《せこう》する下請負業者《したうけおいぎょうしゃ》',
+          '実際《じっさい》に施工《せこう》する下請《したうけ》負業者《おいぎょうしゃ》',
           '工事《こうじ》を発注《はっちゅう》し費用《ひよう》を支払《しはら》う発注者《はっちゅうしゃ》',
           '特定建設業許可を持つ元請業者',
         ],
@@ -1751,7 +1751,7 @@ export const JAC_MOCKUP_SETS = [
         q: '建設現場《けんせつげんば》における「産業廃棄物《さんぎょうはいきぶつ》」の処理責任者《しょりせきにんしゃ》は誰か。',
         hint: "Siapa penanggung jawab pengelolaan 'limbah industri' (産業廃棄物) di site konstruksi?",
         opts: [
-          '下請負業者《したうけおいぎょうしゃ》',
+          '下請《したうけ》負業者《おいぎょうしゃ》',
           '元請負業者《現場の施工管理責任者》',
           '設計事務所《せっけいじむしょ》',
           '地方自治体《市区町村》',
@@ -4249,7 +4249,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 25,
-        q: '建設業法《けんせつぎょうほう》で、元請負業者《もとうけおいぎょうしゃ》が下請負業者《したうけおいぎょうしゃ》に支払う代金《だいきん》の支払期限《しはらいきげん》は？',
+        q: '建設業法《けんせつぎょうほう》で、元請負業者《もとうけおいぎょうしゃ》が下請《したうけ》負業者《おいぎょうしゃ》に支払う代金《だいきん》の支払期限《しはらいきげん》は？',
         hint: 'Batas waktu pembayaran tagihan oleh kontraktor utama kepada subkontraktor menurut UU Konstruksi adalah?',
         opts: [
           '工事完了後《こうじかんりょうご》1年《ねん》以内《いない》',

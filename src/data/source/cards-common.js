@@ -408,7 +408,7 @@ export const CARDS_COMMON = [
     jp: '三大災害《さんだいさいがい》',
     type: 'vocab',
     id_text: 'Tiga bencana besar',
-    desc: '①墜落《ついらく》・転《ころ》び落《てんらく》 (terbanyak) ②機械《きかい》・クレーン災害《さいがい》 ③崩壊《ほうかい》・倒壊《とうかい》. Menyumbang 40–70% dari total kecelakaan konstruksi.',
+    desc: '①墜落《ついらく》・転落《てんらく》 (terbanyak) ②機械《きかい》・クレーン災害《さいがい》 ③崩壊《ほうかい》・倒壊《とうかい》. Menyumbang 40–70% dari total kecelakaan konstruksi.',
     usage:
       '墜落《ついらく》・崩壊《ほうかい》・飛来落下《ひらいらっか》の三大災害《さんだいさいがい》を重点的《じゅうてんてき》に防止《ぼうし》する（fokuskan pencegahan pada 3 bencana besar: jatuh, longsor, dan tertimpa benda）',
     _origIndex: 116,
@@ -1094,7 +1094,7 @@ export const CARDS_COMMON = [
     jp: '車両系建設機械《しゃりょうけいけんせつきかい》の資格境界《しかくきょうかい》',
     type: 'hukum',
     id_text: 'Alat berat',
-    desc: '機体重《かさ》ね量《きたいじゅうりょう》 ≥3t → 技能講習《ぎのうこうしゅう》. <3t → 特《とく》別教育《べつきょういく》.',
+    desc: '機体重量《きたいじゅうりょう》 ≥3t → 技能講習《ぎのうこうしゅう》. <3t → 特《とく》別教育《べつきょういく》.',
     _origIndex: 217,
   },
   {
@@ -1197,7 +1197,7 @@ export const CARDS_COMMON = [
     type: 'vocab',
     id_text: 'Garis vertikal pada dinding/kolom',
     desc: 'Garis vertikal yang ditandai pada dinding atau kolom sebagai acuan agar elemen terpasang tegak lurus. Satu rangkaian dengan 仕上げ墨《しあげずみ》、逃げ墨《にげずみ》、陸墨《ろくずみ》、地墨《じずみ》.',
-    usage: '壁《かべ》に立《た》て墨《たてずみ》を引《ひ》く（membuat garis vertikal di dinding）',
+    usage: '壁《かべ》に立て墨《たてずみ》を引《ひ》く（membuat garis vertikal di dinding）',
     _origIndex: 241,
   },
   {
@@ -1207,7 +1207,7 @@ export const CARDS_COMMON = [
     jp: '親墨《おやずみ》',
     type: 'vocab',
     id_text: 'Garis acuan utama, sumber semua garis referensi lainnya',
-    desc: 'Garis referensi utama (通《つう》り芯《とおりしん》, 陸墨《ろくずみ》) yang menjadi dasar semua 墨出《すみだ》し. Satu rangkaian dengan 基準墨《きじゅんずみ》、壁芯《かべしん》、柱芯《はしらしん》、矩を振る《かねをふる》、墨付け《すみつけ》.',
+    desc: 'Garis referensi utama (通り芯《とおりしん》, 陸墨《ろくずみ》) yang menjadi dasar semua 墨出《すみだ》し. Satu rangkaian dengan 基準墨《きじゅんずみ》、壁芯《かべしん》、柱芯《はしらしん》、矩を振る《かねをふる》、墨付け《すみつけ》.',
     usage:
       '親墨《おやずみ》から逃《に》げ墨《すみ》を引《ひ》く（buat garis offset dari garis induk）',
     _origIndex: 242,
@@ -1610,7 +1610,7 @@ export const CARDS_COMMON = [
     jp: '服装の注意《ふくそうのちゅうい》4項目《こうもく》',
     type: 'konsep',
     id_text: '4 pantangan pakaian di proyek konstruksi',
-    desc: '①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着前《まえ》開《うわぎまえびらき》け禁止《うわぎまええきんし》 ③袖《そで》まくり禁止《きんし》 ④ポケット手禁止《てきんし》.',
+    desc: '①半袖《はんそで》・短《みじか》パン禁止《きんし》 ②上着《うわぎ》前開《まえびら》け禁止《きんし》 ③袖《そで》まくり禁止《きんし》 ④ポケット手禁止《てきんし》.',
     _origIndex: 307,
   },
   {
@@ -1664,7 +1664,7 @@ export const CARDS_COMMON = [
     jp: '5Sの各定義《のかくていぎ》：整理《せいり》・整頓《せいとん》・清掃《せいそう》・清潔《せいけつ》・しつけ',
     type: 'konsep',
     id_text: '5 definisi kegiatan 5S',
-    desc: '5S: ①整《ととの》え理《せいり》=pilah; ②整《ととの》え頓《せいとん》=tata; ③清掃《せいそう》=bersih; ④清潔《せいけつ》=jaga; ⑤しつけ=biasakan ①–④.',
+    desc: '5S: ①整理《せいり》=pilah; ②整頓《せいとん》=tata; ③清掃《せいそう》=bersih; ④清潔《せいけつ》=jaga; ⑤しつけ=biasakan ①–④.',
     _origIndex: 318,
   },
   {
@@ -3200,7 +3200,7 @@ export const CARDS_COMMON = [
     jp: 'フルハーネス義務高さ《ふるはあねすぎむたかさ》',
     type: 'vocab',
     id_text: 'Wajib full harness',
-    desc: '2022年《ねん》1月《いちがつ》施行《しこう》: ketinggian >6.75m → semua sektor wajib full harness.',
+    desc: '2022年《ねん》1月《がつ》施行《しこう》: ketinggian >6.75m → semua sektor wajib full harness.',
     usage:
       'フルハーネス義務高さ《ふるはあねすぎむたかさ》（5m以上《いじょう》）では必《かなら》ずフルハーネスを着用《ちゃくよう》する（kenakan full harness wajib di atas ketinggian 5m）',
     _origIndex: 596,
@@ -3401,7 +3401,7 @@ export const CARDS_COMMON = [
     id: 545,
     category: 'hourei',
     source: 'jac-ch2',
-    jp: '建設業法の5つの目的《けんせつぎょうほうのいつつのもくてき》',
+    jp: '建設業法《けんせつぎょうほう》の5つの目的《もくてき》',
     type: 'hukum',
     id_text: '5 tujuan UU Industri',
     desc: '5 tujuan 建設業法《けんせつぎょうほう》: ①kualitas usaha ②kontrak layak ③pelaksanaan tepat ④perlindungan pemesan ⑤perkembangan industri konstruksi yang sehat.',
@@ -3702,7 +3702,7 @@ export const CARDS_COMMON = [
     jp: '5S活動《かつどう》（整理《せいり》・整頓《せいとん》・清掃《せいそう》・清潔《せいけつ》・しつけ）',
     type: 'konsep',
     id_text: 'Program 5S',
-    desc: '①整《ととの》え理《せいり》=pisahkan perlu & tidak. ②整《ととの》え頓《せいとん》=tempatkan di tempat ditentukan. ③清掃《せいそう》=bersihkan area kerja. ④清潔《せいけつ》=jaga kebersihan secara konsisten. ⑤しつけ=biasakan ①-④ jadi kebiasaan/disiplin.',
+    desc: '①整理《せいり》=pisahkan perlu & tidak. ②整頓《せいとん》=tempatkan di tempat ditentukan. ③清掃《せいそう》=bersihkan area kerja. ④清潔《せいけつ》=jaga kebersihan secara konsisten. ⑤しつけ=biasakan ①-④ jadi kebiasaan/disiplin.',
     _origIndex: 696,
   },
   {
@@ -3810,7 +3810,7 @@ export const CARDS_COMMON = [
     jp: '三大災害《さんだいさいがい》',
     type: 'konsep',
     id_text: '3 Bencana Besar',
-    desc: '①墜落《ついらく》転《ころ》び落《てんらく》(terbanyak, saat kerja di ketinggian) ②建設機械《けんせつきかい》クレーン災害《さいがい》(激突《げきとつ》, terjepit, terlilit) ③崩壊《ほうかい》・倒壊《とうかい》災害《さいがい》(runtuhnya struktur/bangunan).',
+    desc: '①墜落《ついらく》転落《てんらく》(terbanyak, saat kerja di ketinggian) ②建設機械《けんせつきかい》クレーン災害《さいがい》(激突《げきとつ》, terjepit, terlilit) ③崩壊《ほうかい》・倒壊《とうかい》災害《さいがい》(runtuhnya struktur/bangunan).',
     _origIndex: 731,
   },
   {
@@ -3842,7 +3842,7 @@ export const CARDS_COMMON = [
     jp: '機械設置工事の死亡事故《きかいせっちこうじのしぼうじこ》',
     type: 'vocab',
     id_text: 'Pasang mesin besar',
-    desc: 'Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転《ころ》び倒《てんとう》) menimpa pekerja. Saat mengangkat, menurunkan, dan menyetel posisi mesin adalah titik paling rawan — tumpuan belum stabil tapi bebannya sudah penuh.',
+    desc: 'Kecelakaan fatal 機械《きかい》設置《せっち》工事《こうじ》: mesin besar terbalik (転倒《てんとう》) menimpa pekerja. Saat mengangkat, menurunkan, dan menyetel posisi mesin adalah titik paling rawan — tumpuan belum stabil tapi bebannya sudah penuh.',
     usage:
       '大型機械《おおがたきかい》の設置工事《せっちこうじ》では転倒《てんとう》による死亡事故《しぼうじこ》に注意《ちゅうい》する（waspadai kecelakaan fatal akibat terbaliknya alat berat saat pekerjaan pemasangan mesin）',
     _origIndex: 734,
@@ -3851,7 +3851,7 @@ export const CARDS_COMMON = [
     id: 625,
     category: 'anzen',
     source: 'jac-ch7',
-    jp: '上下水道工事の3種類の事故リスク《じょうげすいどうこうじのしゅるいのじこりすく》',
+    jp: '上下水道工事《じょうげすいどうこうじ》の3種類《しゅるい》の事故《じこ》リスク',
     type: 'vocab',
     id_text: '3 risiko saluran air',
     desc: '①Tanah longsor di galian → tertimbun (≥1.5m: wajib 鋼矢板《こうやいた》). ②Tersandung kabel atau amblas di sekitar 覆工板《ふっこうばん》(pelat penutup galian sementara) → jatuh. ③Risiko バックホウ: tertabrak saat boom berputar, atau tertabrak mundur — wajib ada 誘導員《ゆうどういん》 khusus jaga pekerja di galian.',
@@ -4154,7 +4154,7 @@ export const CARDS_COMMON = [
     jp: '増える《ふえる》',
     type: 'vocab',
     id_text: 'Bertambah / meningkat',
-    desc: 'Pengecoh yang muncul 4 kali di soal (流量《りゅうりょう》・重《かさ》ね量《じゅうりょう》) — selalu',
+    desc: 'Pengecoh yang muncul 4 kali di soal (流量《りゅうりょう》・重量《じゅうりょう》) — selalu',
     usage:
       '漏水《ろうすい》量《りょう》が増える《ふえる》前《まえ》に止《と》め処置《しょち》をする（lakukan perbaikan sebelum volume kebocoran air bertambah）',
     _origIndex: 839,
@@ -5247,7 +5247,7 @@ export const CARDS_COMMON = [
     id: 1198,
     category: 'gaiyou',
     source: 'vocab-supplementary',
-    jp: 'よろしくお願いします《よろしくおねがいします》',
+    jp: 'よろしくお願《ねが》いします',
     type: 'vocab',
     id_text: 'Mohon bimbingannya',
     desc: 'Frasa serbaguna: saat pertama bertemu, menitipkan tugas, atau memohon bantuan.',
@@ -5319,7 +5319,7 @@ export const CARDS_COMMON = [
     id: 1205,
     category: 'gaiyou',
     source: 'vocab-supplementary',
-    jp: 'ちょっと待ってください《ちょっとまってください》',
+    jp: 'ちょっと待《ま》ってください',
     type: 'vocab',
     id_text: 'Tolong tunggu sebentar',
     desc: 'Dipakai saat meminta waktu sebentar sebelum memulai atau menjawab.',
@@ -5331,7 +5331,7 @@ export const CARDS_COMMON = [
     id: 1207,
     category: 'gaiyou',
     source: 'vocab-supplementary',
-    jp: 'お疲れ様でした《おつかれさまでした》',
+    jp: 'お疲《つか》れ様《さま》でした',
     type: 'vocab',
     id_text: 'Terima kasih kerja',
     desc: 'Ucapkan kepada semua orang di akhir shift sebagai penghargaan atas kerja keras',
@@ -5568,7 +5568,7 @@ export const CARDS_COMMON = [
     id: 1272,
     category: 'career',
     source: 'jac-ch1',
-    jp: 'CCUSの4レベルと条件《CCUSのよんれべるとじょうけん》',
+    jp: 'CCUSの4レベルと条件《じょうけん》',
     type: 'vocab',
     id_text: '4 level CCUS dan syaratnya',
     desc: 'Lv.1 白《しろ》(ホワイト)=初級《しょきゅう》技能者《ぎのうしゃ》・見習《みなら》い。\nLv.2 青《あお》(ブルー)=中堅《ちゅうけん》・一人前《いちにんまえ》 ← 登録《とうろく》後《ご》645日《にち》(3年《ねん》)以上《いじょう》。\nLv.3 銀《ぎん》(シルバー)=職長《しょくちょう》として現場《げんば》に従事《じゅうじ》できる技能者。\nLv.4 金《きん》(ゴールド)=高度《こうど》マネジメント能力《のうりょく》(登録基幹《きかん》技能者など)。',
@@ -5767,7 +5767,7 @@ export const CARDS_COMMON = [
     id_text: 'Tanah dasar penopang jalan, ±1m dari permukaan perkerasan',
     desc: 'Lapisan tanah dasar jalan tempat di atasnya dihampar lapis pondasi. Satu rangkaian dengan 路盤《ろばん》、表層《ひょうそう》.',
     usage:
-      '路床《ろしょう》・路盤《ろばん》・表層《ひょうそう》の3層《さんそう》で舗装《ほそう》を構成《こうせい》する（bangun perkerasan dengan 3 lapisan: subgrade, subbase, dan surface）',
+      '路床《ろしょう》・路盤《ろばん》・表層《ひょうそう》の三層《さんそう》で舗装《ほそう》を構成《こうせい》する（bangun perkerasan dengan 3 lapisan: subgrade, subbase, dan surface）',
     _origIndex: 1445,
   },
   {
@@ -5945,7 +5945,7 @@ export const CARDS_COMMON = [
     jp: 'とび工事の種類《とびこうじのしゅるい》',
     type: 'vocab',
     id_text: 'Jenis pekerjaan tobi',
-    desc: '6 spesialisasi: 足場《あしば》(perancah), 鉄骨《てっこつ》(rangka baja), 橋《はし》梁《きょうりょう》(jembatan), 重量《じゅうりょう》(mesin berat), 送電《そうでん》(kabel listrik tinggi), 町場《まちば》(perancah rumah tinggal). berat), 送電《そうでん》(kabel listrik tinggi), 町場《まちば》(perancah rumah tinggal).',
+    desc: '6 spesialisasi: 足場《あしば》(perancah), 鉄骨《てっこつ》(rangka baja), 橋梁《きょうりょう》(jembatan), 重量《じゅうりょう》(mesin berat), 送電《そうでん》(kabel listrik tinggi), 町場《まちば》(perancah rumah tinggal). berat), 送電《そうでん》(kabel listrik tinggi), 町場《まちば》(perancah rumah tinggal).',
     usage:
       'とび工事で仮設《かせつ》工事《こうじ》・鉄骨建方《てっこつたてかた》・重量物《じゅうりょうぶつ》の取付けを担当《たんとう》する（tangani pekerjaan sementara, erection baja, dan pemasangan benda berat dalam pekerjaan tobi）',
     _origIndex: 1461,
@@ -6005,7 +6005,7 @@ export const CARDS_COMMON = [
     jp: '上下水道工事《じょうげすいどうこうじ》',
     type: 'vocab',
     id_text: 'Pipa air bersih & limbah',
-    desc: '上《うえ》水道《じょうすいどう》: sungai→treatment→pipa→rumah.\n下水道《げすいどう》: air kotor→treatment→sungai.',
+    desc: '上水道《じょうすいどう》: sungai→treatment→pipa→rumah.\n下水道《げすいどう》: air kotor→treatment→sungai.',
     usage:
       '上水道《じょうすいどう》工事《こうじ》と下水道《げすいどう》工事《こうじ》を区別《くべつ》して施工《せこう》する（bedakan dan pasang jaringan air bersih dan saluran air limbah）',
     _origIndex: 1466,
@@ -6185,7 +6185,7 @@ export const CARDS_COMMON = [
     jp: '橋梁工事《きょうりょうこうじ》：種類と下部工《かぶこう》・上部工《じょうぶこう》',
     type: 'vocab',
     id_text: 'Jembatan: jenis & tahapan',
-    desc: '6 jenis jembatan: 桁《けた》橋《はし》・トラス・アーチ・ラーメン・斜張橋《しゃちょうきょう》・吊橋《つりばし》.\n下部《ぶ》工《かぶこう》=fondasi → dibangun dulu sebelum 上部工《じょうぶこう》(badan jembatan).',
+    desc: '6 jenis jembatan: 桁《けた》橋《はし》・トラス・アーチ・ラーメン・斜張橋《しゃちょうきょう》・吊橋《つりばし》.\n下部工《かぶこう》=fondasi → dibangun dulu sebelum 上部工《じょうぶこう》(badan jembatan).',
     usage:
       '橋梁《きょうりょう》の種類（桁橋《けたはし》・トラス橋・アーチ橋）と下部工・上部工の工程《こうてい》を理解《りかい》する（pahami jenis jembatan dan urutan pekerjaan struktur bawah dan atas）',
     _origIndex: 1484,
@@ -6209,7 +6209,7 @@ export const CARDS_COMMON = [
     jp: '土工事の作業六種類《どこうじのさぎょうろくしゅるい》',
     type: 'vocab',
     id_text: '6 jenis pekerjaan tanah',
-    desc: '①掘削《くっさく》=gali ②積込《つみこ》み=muat ③盛《も》り土《ど》/切《き》り土《ど》 ④埋《う》め戻《もど》し ⑤締《し》め固《しめかた》め ⑥法面《のりめん》=lereng.',
+    desc: '①掘削《くっさく》=gali ②積込《つみこ》み=muat ③盛《も》り土《ど》/切《き》り土《ど》 ④埋《う》め戻《もど》し ⑤締《し》め固《かた》め ⑥法面《のりめん》=lereng.',
     usage:
       '掘削《くっさく》・運搬《うんぱん》・盛り土・締固め・法面整形《のりめんせいけい》・埋め戻しの6作業《ろくさぎょう》が土工事《どこうじ》の基本《きほん》だ（6 pekerjaan dasar earthwork: gali, angkut, timbun, padatkan, bentuk lereng, dan urug kembali）',
     _origIndex: 1486,
@@ -6233,7 +6233,7 @@ export const CARDS_COMMON = [
     jp: 'とび工事の六種類《とびこうじのろくしゅるい》',
     type: 'vocab',
     id_text: '6 jenis pekerjaan tobi',
-    desc: 'Spesialis tali baja di ketinggian: 足場《あしば》, 鉄骨《てっこつ》, 橋《はし》梁《きょうりょう》, 重量《じゅうりょう》, 送電《そうでん》, 町場《まちば》.',
+    desc: 'Spesialis tali baja di ketinggian: 足場《あしば》, 鉄骨《てっこつ》, 橋梁《きょうりょう》, 重量《じゅうりょう》, 送電《そうでん》, 町場《まちば》.',
     usage:
       '仮設工事《かせつこうじ》・建方《たてかた》・鳶工事《とびこうじ》・コンクリート工事《こうじ》など6種類《ろくしゅるい》のとび工事《こうじ》を理解《りかい》する（pahami 6 jenis pekerjaan tobi dari sementara hingga cor beton）',
     _origIndex: 1488,
@@ -6305,7 +6305,7 @@ export const CARDS_COMMON = [
     jp: '土木工事《どぼくこうじ》の特徴《とくちょう》',
     type: 'konsep',
     id_text: 'Karakteristik doboku',
-    desc: 'Pekerjaan sipil berhadapan dengan alam: ダム, 河川《かせん》, 道《みち》路《どうろ》, トンネル, 橋《はし》梁《きょうりょう》, 鉄道《てつどう》, dll — infrastruktur dasar kehidupan. dll — infrastruktur dasar kehidupan.',
+    desc: 'Pekerjaan sipil berhadapan dengan alam: ダム, 河川《かせん》, 道《みち》路《どうろ》, トンネル, 橋梁《きょうりょう》, 鉄道《てつどう》, dll — infrastruktur dasar kehidupan. dll — infrastruktur dasar kehidupan.',
     _origIndex: 1496,
   },
   {
@@ -6566,7 +6566,7 @@ export const CARDS_COMMON = [
     jp: '造園工事《ぞうえんこうじ》の5種類《しゅるい》',
     type: 'vocab',
     id_text: '5 jenis pekerjaan',
-    desc: '①植栽《しょくさい》=tanam pohon. ②屋上《うえ》緑化《おくじょうりょっか》=hijau atap/dinding.\n③広場《ひろば》. ④公園設備《こうえんせつび》.',
+    desc: '①植栽《しょくさい》=tanam pohon. ②屋上緑化《おくじょうりょっか》=hijau atap/dinding.\n③広場《ひろば》. ④公園設備《こうえんせつび》.',
     usage:
       '植栽《しょくさい》・樹木《じゅもく》・芝生《しばふ》・土工事《どこうじ》・園路《えんろ》の5種類《ごしゅるい》の造園工事《ぞおえんこうじ》を理解《りかい》する（pahami 5 jenis pekerjaan lansekap）',
     _origIndex: 1518,
@@ -6770,7 +6770,7 @@ export const CARDS_COMMON = [
     jp: '建築工事の流れ《けんちくこうじのながれ》（大規模《だいきぼ》ビル・マンション）',
     type: 'konsep',
     id_text: 'Urutan tahapan',
-    desc: '①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上《うえ》躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali — tidak boleh dibalik.',
+    desc: '①準備《じゅんび》 ②山留《やまど》め ③杭《くい》 ④土工《どこう》 ⑤地下躯体《ちかくたい》 ⑥地上躯体《ちじょうくたい》 ⑦仕上《しあ》げ.\nUrutan wajib dikenali — tidak boleh dibalik.',
     _origIndex: 1536,
   },
   {
@@ -8112,7 +8112,7 @@ export const CARDS_COMMON = [
     jp: '安全《あんぜん》',
     type: 'vocab',
     id_text: 'Aman / keselamatan',
-    desc: 'Kondisi aman / safety. Kombinasi umum: 安全確認《あんぜんかくにん》、安全管《かん》理《あんぜんかんり》.',
+    desc: 'Kondisi aman / safety. Kombinasi umum: 安全確認《あんぜんかくにん》、安全管理《あんぜんかんり》.',
     usage:
       '安全《あんぜん》を確認《かくにん》してから機器《きき》を操作《そうさ》する（pastikan keamanan sebelum mengoperasikan peralatan）',
     _origIndex: 893,
@@ -10204,7 +10204,7 @@ export const CARDS_COMMON = [
     id_text: 'Aspal paling atas',
     desc: 'Aspal paling atas. Satu rangkaian dengan 路床《ろしょう》、路盤《ろばん》.',
     usage:
-      '路床《ろしょう》・路盤《ろばん》・表層《ひょうそう》の3層《さんそう》で舗装《ほそう》を構成《こうせい》する（bangun perkerasan dengan 3 lapisan: subgrade, subbase, dan surface）',
+      '路床《ろしょう》・路盤《ろばん》・表層《ひょうそう》の三層《さんそう》で舗装《ほそう》を構成《こうせい》する（bangun perkerasan dengan 3 lapisan: subgrade, subbase, dan surface）',
     _origIndex: 1640,
   },
   {
