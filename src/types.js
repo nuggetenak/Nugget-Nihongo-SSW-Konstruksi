@@ -46,6 +46,10 @@
  * these fields, and `deserializeCard` reads them back, turning the two date strings
  * into Dates. `state` is ts-fsrs's State enum (0 New … 3 Relearning).
  *
+ * `learning_steps` is not optional and not decorative — dropping it is what stopped
+ * cards graduating out of Learning at all (see serializeCard's comment). Cards
+ * written before 2026-09-13 do not carry it and `deserializeCard` defaults it to 0.
+ *
  * @typedef {{
  *   due: string,
  *   stability: number,
@@ -54,6 +58,7 @@
  *   scheduled_days: number,
  *   reps: number,
  *   lapses: number,
+ *   learning_steps: number,
  *   state: number,
  *   last_review: string|null
  * }} SerializedFSRSCard
