@@ -18,7 +18,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Icon from './Icon.jsx';
-import { CARDS } from '../data/cards.js';
+import { TOTAL_CARDS } from '../utils/constants.js';
 import { MODE_SECTIONS, MODE_META } from '../router/modes.js';
 import { formatCount } from '../utils/format.js';
 import s from './SideNav.module.css';
@@ -103,7 +103,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
         </div>
       )}
 
-      <div className={s.foot}>{formatCount(CARDS.length)} kartu · konten siap offline</div>
+      <div className={s.foot}>{formatCount(TOTAL_CARDS)} kartu · konten siap offline</div>
     </nav>
   );
 }

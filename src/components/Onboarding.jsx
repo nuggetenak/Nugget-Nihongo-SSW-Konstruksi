@@ -6,7 +6,7 @@
 // (Lifeline), so onComplete always sends 'lifeline'; nothing left to pick.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { CARDS } from '../data/cards.js';
+import { TOTAL_CARDS } from '../utils/constants.js';
 import { formatCount } from '../utils/format.js';
 import { useState } from 'react';
 import { extractReadings, stripFuri } from '../utils/jp-helpers.js';
@@ -48,7 +48,7 @@ function StepWelcome({ onNext }) {
           about, and the same fix the menu counts got: derive it. */}
       <p className={S.heroDesc}>
         Aplikasi belajar untuk ujian SSW Konstruksi Jepang jalur Lifeline (ライフライン設備).{' '}
-        {formatCount(CARDS.length)} flashcard, kuis, dan simulasi ujian — semua dalam Bahasa
+        {formatCount(TOTAL_CARDS)} flashcard, kuis, dan simulasi ujian — semua dalam Bahasa
         Indonesia.
       </p>
       <div className={S.badges}>

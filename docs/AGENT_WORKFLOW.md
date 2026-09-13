@@ -131,7 +131,8 @@ not exist (all removed 2026-09-04 — see CHANGELOG).
 
 | Content | Edit | Generated |
 |---|---|---|
-| Flashcards | `src/data/source/cards-{common,lifeline}.js` | `src/data/cards.js` via `scripts/merge-cards.mjs` (runs in `prebuild`) |
+| Flashcards | `src/data/source/cards-{common,lifeline}.js` | `src/data/cards.js` **and `src/data/card-index.js`** via `scripts/merge-cards.mjs` (runs in `prebuild`) |
+| Card ids + categories | — derived | `src/data/card-index.js`. Ids and categories only, so the modules that need to know *which* cards exist do not download what is *on* them: `cards.js` is 212 kB gzipped and was eagerly imported by seven modules, five of which only wanted `CARDS.length`. `eager-bundle-graph.test.js` fails if `cards.js` returns to the first-paint graph; `verify-content.mjs` PART 5 fails if the index goes stale |
 | Wayground sets | `src/data/wayground-sets.js` | — it IS the source |
 | JAC Mockup sets | `src/data/jac-mockup-sets.js` | — it IS the source |
 | JAC Official | `src/data/sets/jac/jac-{teori,lifeline}.js` | `jac-official.js` is a two-line shim |

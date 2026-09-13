@@ -2,20 +2,20 @@
 // Home tab. Reads as a status board: what's urgent, where you stand, what to
 // do next. The hazard rail (see global.css) marks anything time-sensitive.
 // ─────────────────────────────────────────────────────────────────────────────
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useApp } from '../contexts/AppContext.jsx';
 import { generateDailyMission, isMissionDoneToday } from '../utils/daily-mission.js';
 import { calcReadinessBand } from '../utils/session-analytics.js';
 import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
-import { CARDS } from '../data/cards.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
 import { JpFront } from './JpDisplay.jsx';
 import { JP_LIST_MAX, stripFuri } from '../utils/jp-helpers.js';
 import { recommendMode } from '../utils/recommend-mode.js';
 import { formatCount } from '../utils/format.js';
+import { TOTAL_CARDS } from '../utils/constants.js';
 import { MODE_META } from '../router/modes.js';
 import { getThemeMode } from '../utils/theme-mode.js';
 
@@ -60,7 +60,7 @@ export default function Dashboard({
 }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
-  const total = CARDS.length;
+  const total = TOTAL_CARDS;
   const knownN = known.size;
   const unknownN = unknown.size;
   const pct = total > 0 ? Math.round((knownN / total) * 100) : 0;
@@ -70,15 +70,39 @@ export default function Dashboard({
   const { streakData, dailyCount, starred, recentCards: recentIds } = useProgress();
   // From the context rather than a second storageGet: ProgressContext already
   // owns recentCards, and two readers of one field is one too many.
-  const recentCards = useMemo(
-    () =>
-      (recentIds ?? [])
-        .slice(0, 5)
-        .map((id) => CARDS.find((c) => c.id === id))
-        .filter(Boolean)
-        .slice(0, 3),
-    [recentIds]
-  );
+  //
+  // The card *content* arrives after first paint, and that is the whole reason this
+  // is an effect rather than a `useMemo` over `CARDS`. The Dashboard is the first
+  // screen, so importing `cards.js` here — for at most three rows of "Terakhir
+  // dipelajari" — meant the entry graph fetched and parsed 212 kB gzipped of corpus
+  // before anything at all appeared. Everything else on this screen comes from the
+  // progress and SRS documents and needs none of it.
+  //
+  // The strip is absent until the chunk resolves, which is what it already does for
+  // a learner with no history; a returning one sees it appear a beat after the rest.
+  // The alternative — blocking the first paint of the home screen on the corpus —
+  // is the trade this reverses.
+  const [recentCards, setRecentCards] = useState([]);
+  useEffect(() => {
+    const ids = (recentIds ?? []).slice(0, 5);
+    if (ids.length === 0) {
+      setRecentCards([]);
+      return;
+    }
+    let live = true;
+    import('../data/cards.js').then(({ CARDS }) => {
+      if (!live) return;
+      setRecentCards(
+        ids
+          .map((id) => CARDS.find((c) => c.id === id))
+          .filter(Boolean)
+          .slice(0, 3)
+      );
+    });
+    return () => {
+      live = false;
+    };
+  }, [recentIds]);
 
   const examDate = storageGet('prefs')?.examDate ?? null;
   const daysLeft = examDate ? Math.ceil((new Date(examDate) - new Date()) / 86400000) : null;
