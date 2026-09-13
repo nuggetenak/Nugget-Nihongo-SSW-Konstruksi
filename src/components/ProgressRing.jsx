@@ -67,9 +67,11 @@ export default function ProgressRing({
           {centerText ?? `${Math.round(pct)}%`}
         </div>
         <div className={s.sub} style={{ fontSize: subSize }}>
-          {/* Corpus-scale by every current caller (SayaTab passes known/1438),
+          {/* Corpus-scale by every current caller (SayaTab passes known/TOTAL_CARDS),
               so it gets the same thousands separator as the numbers around it —
-              the ring read "140/1438" directly beside "1.438 kartu". */}
+              the ring read "140/1438" directly beside "1.438 kartu" when item 42
+              found it. Named rather than numbered here: the literal went stale the
+              moment the corpus grew to 1,626. */}
           {label ?? `${formatCount(current)}/${formatCount(total)}`}
         </div>
       </div>

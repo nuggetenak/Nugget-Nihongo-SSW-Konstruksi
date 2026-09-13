@@ -1,7 +1,9 @@
 // ─── storage/schema.js ───────────────────────────────────────────────────────
 // 3-document localStorage model. All user data lives in progress, srs, or
 // prefs docs (lz-string compressed). See migrations.js for the full
-// v1→v6 upgrade chain and STORAGE_VERSION history.
+// v1→v7 upgrade chain and STORAGE_VERSION history. Written as a range on purpose,
+// and it has drifted once already (it said v1→v6 through all of 7.x): if you add a
+// version, this line is part of the change.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';

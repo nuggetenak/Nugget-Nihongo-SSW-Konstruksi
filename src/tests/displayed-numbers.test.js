@@ -17,6 +17,10 @@ import { advanceStudyDay } from '../contexts/ProgressContext.jsx';
 import { todayStr, prevDayStr } from '../utils/date.js';
 import { getSRSStats, getDueCardIds } from '../srs/index.js';
 import { init, setSRSCard, _reset_for_test } from '../storage/engine.js';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+import { TOTAL_CARDS } from '../utils/constants.js';
+import { CARDS } from '../data/cards.js';
 
 const session = (mode, correct, total) => ({
   mode,
@@ -228,5 +232,46 @@ describe('the SRS buckets', () => {
 
   it('never counts an unrated card as due', () => {
     expect(getSRSStats([1, 2, 3]).due).toBe(0);
+  });
+});
+
+// ─── The numbers outside React ──────────────────────────────────────────────
+// Everything above checks numbers the app computes. These are numbers a person
+// typed into a static file, which is a different failure mode and the one this
+// repo keeps hitting: `index.html`'s og:description advertised **1.438 kartu**
+// from 7.0.0's card split (2026-09-04) until 2026-09-13 — nine days and four
+// releases — because no gate reads that file. It was the one flatly wrong
+// user-facing number in the app, and it took an external audit to find it.
+//
+// `format-count.test.js` already holds the *formatting* convention ('.' as the
+// thousands separator). This holds the *value*.
+describe('the corpus size quoted in static files', () => {
+  const read = (rel) => readFileSync(resolve(process.cwd(), rel), 'utf8');
+
+  it('index.html quotes the real card count', () => {
+    const html = read('index.html');
+    const quoted = [...html.matchAll(/(\d[\d.,]{3,})\s*kartu/g)].map((m) =>
+      Number(m[1].replace(/[.,]/g, ''))
+    );
+    expect(quoted.length, 'no "N kartu" claim found in index.html — did the copy change?').toBe(1);
+    expect(
+      quoted,
+      `index.html advertises ${quoted.join(', ')} cards; TOTAL_CARDS is ${TOTAL_CARDS}`
+    ).toEqual([TOTAL_CARDS]);
+  });
+
+  it('README quotes the real card count wherever it quotes one', () => {
+    const md = read('README.md');
+    const quoted = [...md.matchAll(/\*\*([\d.,]+) flashcard\*\*/g)].map((m) =>
+      Number(m[1].replace(/[.,]/g, ''))
+    );
+    expect(quoted.length).toBeGreaterThan(0);
+    for (const n of quoted) expect(n).toBe(TOTAL_CARDS);
+  });
+
+  it('TOTAL_CARDS is itself the real number, not a third copy of it', () => {
+    // The constant is the source these files are checked against, so it has to be
+    // checked against the data rather than trusted.
+    expect(TOTAL_CARDS).toBe(CARDS.length);
   });
 });

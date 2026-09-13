@@ -32,7 +32,7 @@ export function useSRS(trackCardIds = []) {
     idsRef.current = trackCardIds;
   }, [trackCardIds]);
 
-  // Derived values. Both walk the whole track (1438 ids), so they're memoised
+  // Derived values. Both walk the whole track (1,626 ids), so they're memoised
   // rather than recomputed on every render of a provider that sits near the
   // root — and, more importantly, memoising them here means the returned object
   // can be stable, which is what SRSContext actually needs (see below).

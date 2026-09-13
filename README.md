@@ -14,8 +14,13 @@ PWA (Progressive Web App) untuk persiapan ujian Specified Skilled Worker (特定
 
 **Fitur utama:**
 
-- 🃏 **1,626 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
-- ❓ **1.075 soal kuis** — Wayground 680 · JAC Mockup 300 · JAC Resmi 95
+- 🃏 **1.626 flashcard** dengan SRS (Spaced Repetition / FSRS) — hafal lebih efisien
+- ❓ **1.075 soal kuis** — per file sumber: Wayground 680 · JAC Mockup 300 · JAC Resmi 95.
+  Menu-nya membagi angka yang sama secara berbeda, dan keduanya benar: mode **Wayground**
+  mengumumkan **740** (400 soal non-kosakata Wayground + 40 `wtv` + 300 JAC Mockup, digabung
+  jadi satu kolam) dan mode **Kosakata** **240** (set `wglv-*`). JAC Resmi (95) berdiri
+  sendiri di luar `QUIZ_SETS`. Angka menu ada di `QUIZ_QUESTION_COUNTS`
+  (`src/utils/constants.js`) dan diturunkan ulang oleh `src/tests/mode-counts.test.js`
 - 🎯 **Simulasi ujian** dengan timer dan penilaian lulus/tidak
 - ⚠️ **Soal Jebak** — pasangan kata yang sering tertukar
 - 🔢 **Angka Kunci** — angka wajib hafal sebelum ujian

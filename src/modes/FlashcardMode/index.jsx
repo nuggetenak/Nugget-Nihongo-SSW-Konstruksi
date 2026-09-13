@@ -458,8 +458,8 @@ export default function FlashcardMode({
 
         {/* Category filter. Until now the only way to narrow the deck by
             category was to tap the badge on a card of that category — which
-            means finding one first, in a 1438-card deck, to filter a deck of
-            1438 cards. */}
+            means finding one first, in a 1,626-card deck, to filter a deck of
+            1,626 cards. */}
         <button
           className={FC.iconBtn}
           onClick={() => setFilterOpen(true)}

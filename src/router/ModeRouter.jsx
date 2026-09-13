@@ -151,7 +151,7 @@ export default function ModeRouter() {
   useEffect(() => stopSpeech, [mode]);
 
   // Build filtered cards for modes that need them. Memoised on `track` alone —
-  // it walks all 1438 cards, and this component re-renders on every progress
+  // it walks all 1,626 cards, and this component re-renders on every progress
   // change (it consumes known/unknown/starred), so without this it re-filtered
   // the whole corpus on every card mark and handed a fresh array identity to
   // half the modes each time.

@@ -26,11 +26,14 @@ import S from './JpDisplay.module.css';
  *
  * The vs / ・ / ： / → branches below split a term into parts and stack them
  * vertically, centred, with a big "VS" between. That is right for a flashcard
- * front, where a comparison IS the card. In a scrollable list it is not: 215 of
- * 1438 cards (15%) contain one of those separators, so in SearchMode,
- * GlossaryMode, SumberMode, CatatanMode and DangerMode's accordion every seventh
- * row silently became a 3–5 line centred block among single-line left-aligned
- * neighbours. 免振 vs 制振 vs 耐震 took five lines in a row sized for one.
+ * front, where a comparison IS the card. In a scrollable list it is not: in
+ * SearchMode, GlossaryMode, SumberMode, CatatanMode and DangerMode's accordion
+ * those rows silently became 3–5 line centred blocks among single-line
+ * left-aligned neighbours. 免振 vs 制振 vs 耐震 took five lines in a row sized for
+ * one. This said "215 of 1438 cards (15%) … every seventh row" when it was
+ * written; 7.0.0's multi-vocabulary split is what a multi-term card became, so the
+ * figure is now 68 of 1,626 (4%). Re-derived 2026-09-13 — the incident stands, the
+ * frequency does not.
  *
  * Exactly the same shape of problem as `maxSize` (2026-08-28): a treatment
  * tuned for a single hero card leaking into dense lists, where the two contexts

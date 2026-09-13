@@ -1,6 +1,9 @@
 // ─── storage/migrations.js ───────────────────────────────────────────────────
-// v1 → v2 → v3 migration chain. Runs once on first open after upgrade.
-// safeGetDoc handles both plain JSON (v1/v2) and lz-string compressed (v3).
+// v1 → … → v7 migration chain, one step per version. Runs once on first open after
+// an upgrade; engine.js's MIGRATIONS registry is what sequences them, keyed by the
+// version being migrated *from*, so adding v8 is one entry there plus a function
+// here. This header said "v1 → v2 → v3" for four storage versions.
+// safeGetDoc handles both plain JSON (v1/v2) and lz-string compressed (v3+).
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { DEFAULTS, STORAGE_VERSION } from './schema.js';
