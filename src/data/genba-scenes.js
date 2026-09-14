@@ -31,7 +31,7 @@
 // ── OVERLAP WITH genba-phrases.js IS THE POINT ───────────────────────────────
 // Several beats are lines that file already drills (けがしました, 部品が足りません,
 // ここまで終わりました). A learner should meet a phrase alone first and then find
-// it inside a shift where something depends on it. genba-scenes.test.js asserts
+// it inside a shift where something depends on it. genba-scenes.test.jsx asserts
 // the overlap is real, so the two corpora cannot quietly drift into two unrelated
 // files teaching two unrelated registers.
 // ─────────────────────────────────────────────────────────────────────────────

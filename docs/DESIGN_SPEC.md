@@ -183,7 +183,8 @@ screen via `modes.module.css`'s shared `.pageTitle`. **Not** `ModeHeader`'s `<h1
 took over the mode page-title role in the 2026-09-04 consolidation and uses `--fs-title`
 instead: it is a sticky band sharing a row with a back button and a breadcrumb, and at
 page-title size 11 of the 21 mode labels were cut off at 320px ("Ekspor & Impor" asked for
-308px of a 188px box) and 3 still were at 390px. Measured across all 21 modes, both
+308px of a 188px box) and 3 still were at 390px. Measured across all 21 modes as they stood on
+2026-09-04 (22 now, after `tentang`, `genba` and `skenario`), both
 widths, before and after. Existed as a de facto convention
 (22px, weight 800) before it existed as a token: SayaTab and every mode screen had
 already independently converged on it, BelajarTab and Dashboard's h1 had drifted to
@@ -544,13 +545,15 @@ shapes depending on whether the failure is *predictable* or not:
   than a hard warning, and a toast (once per session, not once per failed card) if a real failure
   fires.
 
-**Scope, stated rather than left implicit:** `speakJP()` is called from six files; only
+**Scope, stated rather than left implicit:** `speakJP()` was called from six files; only
 `DengarMode` got the toast-on-failure treatment. It's the plan's own named example and the one
 mode where audio is the exercise itself — you're blocked without it, not just missing a
-supplementary tap-to-hear affordance the way a flashcard's speaker icon is. The other five
-(`QuizShell`, `ProductionMode`, `GlossaryMode`, `ReviewMode`, `QuizProduksiMode`) still call
-`speakJP()` exactly as before — no `onError`, so a failure there is exactly as silent as it was
-before this item. A reasonable follow-up if silent audio failure turns out to matter in those
+supplementary tap-to-hear affordance the way a flashcard's speaker icon is. Every other caller
+still calls `speakJP()` exactly as before — no `onError`, so a failure there is exactly as
+silent as it was before this item. The set has moved since: `ProductionMode` and
+`QuizProduksiMode` left in 7.0.0, `FlashcardMode`/`FlipCard` and `SkenarioMode` joined, and
+`ModeRouter` calls `stopSpeech` rather than speaking (item 139). `QuizShell`, `GlossaryMode` and
+`ReviewMode` are the three from the original five that remain. A reasonable follow-up if silent audio failure turns out to matter in those
 modes too, not a gap discovered and left unmentioned.
 
 `SideNav`'s footer ("kartu · siap offline") was the one specific claim the plan named — narrowed

@@ -1,4 +1,4 @@
-// ─── tests/mistake-bridge.test.js ────────────────────────────────────────────
+// ─── tests/mistake-bridge.test.jsx ───────────────────────────────────────────
 // UI_UX_PLAN items 127, 128 and 129 — three ways a wrong answer went nowhere.
 //
 // The app has one card-level wrong-answer store, `progress.quizWrong`, and it

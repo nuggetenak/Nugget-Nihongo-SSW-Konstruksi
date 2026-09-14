@@ -44,11 +44,13 @@ filenames.
 **Deliberate scope, not "precache everything":** the shell, plus `FlashcardMode` (`kartu`),
 `ReviewMode` (`ulasan`), and `QuizMode` (`kuis`) — the three highest-traffic modes — plus their
 full transitive dependency chains (Vite's manifest already flattens `imports` per entry, so no
-separate recursive resolution was needed) and all 6 font files. **38 entries total, currently.**
-The other 18 modes stay opportunistically cached on first visit, same as before this item. This
-is a real tradeoff, made explicit rather than silently: precaching all 21 lazy chunks would
-guarantee every mode works offline from a fresh install, at the cost of a larger mandatory
-install payload for a metered-connection audience. The plan's own suggested middle path; revisit
+separate recursive resolution was needed) and all 6 font files. **43 entries as of 7.5.1** — 2
+shell, 35 bundled assets, 6 fonts, and `generate-precache.mjs` prints that breakdown on every
+build, so read it there rather than trusting this number. The other 19 modes stay
+opportunistically cached on first visit, same as before this item. This is a real tradeoff, made
+explicit rather than silently: precaching every lazy chunk would guarantee every mode works
+offline from a fresh install, at the cost of a larger mandatory install payload for a
+metered-connection audience. The plan's own suggested middle path; revisit
 if usage data ever suggests a different set of "most likely to be needed offline immediately."
 
 **Practical effect:** a fresh install that goes offline immediately can still open the flashcard
@@ -125,10 +127,16 @@ accurate.
 
 Before merging to `main` and actually deploying (not just before pushing a feature branch):
 
-1. **`npm run validate`** — format:check, lint, test (672 at the time of writing), all five audits
-   in `scripts/`, then build. One command; running the pieces individually is how `format:check`
-   came to be failing on 33 files and `audit-integrity.mjs` came to report 2876 phantom issues on
-   every run. CI runs only lint/test/build, so `validate` is the stricter gate and the one to use.
+1. **`npm run validate`** — format:check, lint, test (1,301 as of 7.5.1), the six audits chained
+   into `audit:full`, then build. One command; running the pieces individually is how
+   `format:check` came to be failing on 33 files and `audit-integrity.mjs` came to report 2876
+   phantom issues on every run. **Read the exit code, not the output** — 7.5.0 shipped three
+   commits over a red `format:check` because the check was being confirmed by grepping for success
+   markers. This step said "CI runs only lint/test/build, so `validate` is the stricter gate"
+   until 2026-09-14; item 134 put all of `validate` into `ci.yml` back in 7.3.0, plus coverage, so
+   the two now hold the same set and `src/tests/ci-gate-parity.test.js` asserts it. `validate` is
+   the gate to run **because it is the one you can run before pushing**, not because CI is
+   weaker.
 2. Check the build's chunk-size warning list hasn't grown.
 3. **`CACHE_VERSION` in `public/sw.js`** set to the new `package.json` version. The deploy workflow
    overwrites it with a timestamp anyway (see §2) — this keeps the committed value honest about

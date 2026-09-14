@@ -24,6 +24,17 @@
 
 export const RELEASE_NOTES = [
   {
+    version: '7.5.1',
+    date: '2026-09-14',
+    title: 'Satu soal yang salah tulis, dan kartu terkaitnya yang salah tunjuk',
+    changes: [
+      'Satu soal tentang sambungan pipa tembaga salah tulis istilahnya — sebagian katakana, sebagian huruf latin yang tercecer. Soal yang sama muncul di dua paket, dan keduanya sudah diperbaiki.',
+      'Soal itu juga menunjuk kartu yang salah: tombol kartu terkaitnya membuka "cap" (penutup ujung pipa), padahal soalnya tentang brazing. Sekarang menunjuk kartu ro-setsugou, brazing pipa tembaga.',
+      'Isi soalnya ikut diganti. Sebelumnya soal itu menanyakan angka panjang brazing yang sumbernya tidak bisa dipastikan — dan angka yang salah di soal ujian lebih merugikan daripada tidak ada soalnya. Sekarang yang ditanyakan cara kerjanya: bahan brazing tersedot sendiri ke celah sambungan oleh gaya kapiler, dan pipa tembaganya sendiri tidak meleleh.',
+      'Selain itu tidak ada perubahan yang terlihat di aplikasi — sisanya rapi-rapi catatan internal.',
+    ],
+  },
+  {
     version: '7.5.0',
     date: '2026-09-14',
     title: 'Dua mode baru untuk bahasa di lokasi, dan jadwal ulasan yang akhirnya berjalan',

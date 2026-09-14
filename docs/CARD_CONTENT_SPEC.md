@@ -13,7 +13,7 @@ taxonomy, ruby rules, duplicate handling, QC checklist) — those are live and s
 > | §1 Keputusan Arsitektur, §2 Audit Findings | **Historical** — the decisions were taken and the findings addressed. §2A's counts are a pre-campaign baseline, as its own note says. |
 > | §3–§7, §10 | **Live and canonical.** Schema, per-field spec, taxonomy, ruby rules, duplicate handling, QC checklist. |
 > | §8 DQ Task List | **Complete.** Every P0–P17 item shipped by session 29 (2026-08-18). Its checkboxes were never ticked, so it reads as if P0 were still blocking. It is not. |
-> | §9 PDF Mapping Task | **Partly done, and superseded.** The seven materi PDFs (rows 1–7) were intaken incrementally across sessions 25–29 and their cards landed. The four soal-latihan mapping tasks (rows 8–11) have no record of ever being run, and no `PDF_MAPPING_*.md` output exists in the repo. `docs/UI_UX_PLAN.md` item 96 is the live version of that question: JAC questions carry `related_card_id`, `QUIZ_SETS` questions carry nothing. |
+> | §9 PDF Mapping Task | **Partly done, and superseded.** The seven materi PDFs (rows 1–7) were intaken incrementally across sessions 25–29 and their cards landed. The four soal-latihan mapping tasks (rows 8–11) have no record of ever being run, and no `PDF_MAPPING_*.md` output exists in the repo. UI/UX plan item 96 was the live version of that question, and it landed: **305 of the 980 `QUIZ_SETS` questions carry a `related_card_id` now** (all 95 JAC Official always did). Only its high-confidence tier was applied, on purpose — `scripts/derive-quiz-card-links.mjs` proposes the rest and writes no data, because a link to a card that does not teach the answer is worse than no link. |
 > | §11 Merge Prep Checklist | **Executed 2026-08-18.** Do not run it again. |
 > | §12 Open Decisions | **All five resolved**, as the Status column says. |
 >
@@ -98,7 +98,8 @@ breakdown below — that's the pre-DQ-campaign baseline, not current.)_
 
 ### 0E. Dokumen Ini Tidak Ada di Repo Sebelumnya
 
-CARD_CONTENT_SPEC v1.0–v1.6 dan DATA_ARCH_AUDIT adalah dokumen lokal owner. Di-commit di sesi ini sebagai `docs/CARD_CONTENT_SPEC.md` dan `docs/DATA_ARCH_AUDIT.md`.
+CARD_CONTENT_SPEC v1.0–v1.6 dan DATA_ARCH_AUDIT adalah dokumen lokal owner. Di-commit di sesi ini sebagai `docs/CARD_CONTENT_SPEC.md` dan `DATA_ARCH_AUDIT.md`; yang kedua
+sudah diarsipkan ke `docs/archive/DATA_ARCH_AUDIT.md` (2026-08-19).
 
 ---
 
@@ -810,7 +811,7 @@ Tidak berlaku di: `opts` yang sudah ID strings, `opts_id`, `id_text`, `furi` (de
 ### Rendering note (bukan bagian dari data schema)
 
 Markup `《》` di atas adalah **data encoding** — bagaimana string disimpan. Rendering-nya (jadi
-`<ruby><rt>` HTML) ada di `JpDisplay.jsx`, bukan di sini. Sejak item 34 (UI_UX_PLAN.md,
+`<ruby><rt>` HTML) ada di `JpDisplay.jsx`, bukan di sini. Sejak item 34 (UI/UX plan 2026-08,
 2026-08-20), elemen JP yang dirender diberi `lang="ja"` dan `<rt>` diberi fallback `<rp>(</rp>...
 <rp>)</rp>` — screen reader dan pemilihan glyph CJK browser jadi benar, dan ruby tetap terbaca
 sebagai teks biasa di renderer yang tidak mendukung `<ruby>`. Detail implementasi ada di
@@ -954,7 +955,15 @@ Pengecualian: `opts` yang sudah ID strings, `opts_id`, wglv `exp` format `"JP = 
 
 - [ ] wglv-id series (ex-wglv04/05): ganti `"JP = bahasa Jepangnya."` → specific translation
 
-### P12 — Furi drop (UNBLOCKED session 28 — owner terima konsekuensi ke main; setelah P1)
+### P12 — Furi drop — **DONE**
+
+> **Sudah dikerjakan. `card.furi` tidak ada lagi di corpus mana pun** (diperiksa 2026-09-14):
+> `src/tests/data.test.js:34` kini meng-assert kebalikan dari yang tertulis di bawah — _"no card
+> has a furi field (P12: furi dropped, readings now inline ruby in jp)"_ — dan satu-satunya
+> `furi` yang tersisa di `src/` adalah `furiganaPolicy`, hal yang berbeda. Satu consumer di
+> daftar bawah bahkan sudah ikut hilang: mode `produksi` dihapus di 7.0.0 bersama `kuisprod`.
+> Catatan di bawah dipertahankan sebagai rekaman apa yang harus direkonsiliasi, bukan sebagai
+> pekerjaan yang masih terbuka.
 
 > **UPDATE session 28 (part 2): owner menyatakan content-dq memang branch content-quality dan
 > "I intended to do so even if it breaks main branch" — reconfig main dilakukan saat merge. Jadi
@@ -1089,7 +1098,7 @@ decision. See HANDOFF.md.)
 
 > **Rows 1–7 done** (sessions 25–29, one PDF at a time on the owner's request). **Rows 8–11 were
 > never run** and produced no `PDF_MAPPING_*.md` output; the live successor is
-> `docs/UI_UX_PLAN.md` item 96 — "`QUIZ_SETS` questions have no link to the cards that teach
+> UI/UX plan item 96 (archived, `docs/archive/UI_UX_PLAN-2026-09-items-43-144.md`) — "`QUIZ_SETS` questions have no link to the cards that teach
 > them", where the 95 JAC Official questions are the ones that *do* carry `related_card_id`.
 
 **11 PDF:** Setiap PDF = satu task terpisah untuk agen.
@@ -1232,8 +1241,9 @@ Agent di `main` saat merge dari content-dq:
 ## 12. OPEN DECISIONS
 
 > **All five resolved** — the Status column below is current. Nothing here is waiting on the owner.
-> Open decisions for *current* work live in `docs/UI_UX_PLAN.md` (items 69 and 73 as of
-> 2026-09-05), not here.
+> Open decisions for *current* work used to live in the UI/UX work queue (items 69 and 73 as of
+> 2026-09-05), not here. Both are settled and the queue is archived (2026-09-14) with nothing open
+> in it, so there is no current list of open decisions anywhere — ask the owner.
 
 Butuh konfirmasi owner sebelum task terkait dikerjakan.
 
