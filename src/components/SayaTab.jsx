@@ -597,9 +597,16 @@ export default function SayaTab() {
           label="🔠 Ukuran Teks"
           value={`${textScale.emoji} ${textScale.label}`}
           sub={
-            textScale.key === 'normal'
-              ? 'Ketuk untuk perbesar semua tulisan di aplikasi'
-              : `Semua tulisan ${textScale.pct}% dari ukuran normal`
+            // Honest about the floor (item 170). Japanese scales UP with this
+            // control but deliberately does not scale down below its designed
+            // size, so at Kecil "semua tulisan 90%" was a promise the app did
+            // not keep -- and the one it broke was the Japanese, which is the
+            // reason someone reaches for this control at all.
+            textScale.pct < 100
+              ? `Tulisan ${textScale.pct}% — teks Jepang tetap ukuran penuh`
+              : textScale.key === 'normal'
+                ? 'Ketuk untuk perbesar semua tulisan, termasuk teks Jepang'
+                : `Semua tulisan ${textScale.pct}% dari ukuran normal`
           }
           onClick={() => {
             const next = nextTextScale(textScale.key);
