@@ -56,41 +56,62 @@ const JM_BY_Q = new Map();
 for (const s of JAC_MOCKUP_SETS)
   for (const q of s.questions) JM_BY_Q.set(strip(q.q).replace(/\s+/g, ''), strip(q.opts[q.ans]));
 
+/**
+ * Which questions to rewrite, and how many.
+ *
+ * Derived by simulation rather than chosen, because the three bounds the test holds
+ * pull in different directions and the honest question is "what is the smallest set
+ * that satisfies all of them". Simulating "bring this question's distractor mean up to
+ * its answer's length, and put one distractor above it" over the N questions with the
+ * most undersized distractors:
+ *
+ *     N     answer-is-longest   mean gap   worst single gap
+ *      74         37.6%           1.39           8
+ *     120         31.2%           0.89           6
+ *     160         25.7%           0.55           5
+ *     170        ~24.4%          ~0.50           5
+ *     200         20.3%           0.25           4
+ *
+ * 170 is the pick: it lands the rate at chance with room on both sides of the
+ * [0.17, 0.26] band, brings the means within 0.5 of each other against a 1.5 tolerance,
+ * and clears the per-question gap bound. Going further buys nothing the test asks for
+ * and costs more authored distractors, each of which is a chance to write one that is
+ * accidentally correct — which is the risk that governs this work, not the tell.
+ *
+ * Selection is restricted to questions where the answer *is* currently the
+ * first-longest option, because those are the only ones whose rewrite moves the metric;
+ * within them, the 74 with a gap of 6 or more come first unconditionally, since a
+ * question whose answer towers over every distractor is guessable on its own whatever
+ * the bank-wide figure says.
+ */
+const REWRITE_COUNT = 170;
+
 function buildPlan() {
-  const rank1 = ALL.filter(({ q }) => answerRank(q) === 1);
-  const rest = ALL.filter(({ q }) => answerRank(q) !== 1);
-  const have = [0, 0, 0, 0];
-  for (const { q } of rest) have[answerRank(q) - 1]++;
+  const measured = ALL.map((entry) => {
+    const { q } = entry;
+    const l = q.opts.map(len);
+    const a = l[q.ans];
+    const others = l.filter((_, i) => i !== q.ans);
+    return {
+      entry,
+      answerLen: a,
+      distractorMean: others.reduce((x, y) => x + y, 0) / others.length,
+      gap: a - Math.max(...others),
+      firstLongest: l.indexOf(Math.max(...l)) === q.ans,
+    };
+  });
 
-  const perRank = Math.round(ALL.length / 4);
-  // Deficit against a uniform bank, capped so the allocation sums to rank1.length.
-  const want = have.map((h) => Math.max(0, perRank - h));
-  const scale = rank1.length / want.reduce((a, b) => a + b, 0);
-  const alloc = want.map((w) => Math.floor(w * scale));
-  while (alloc.reduce((a, b) => a + b, 0) < rank1.length) alloc[3]++;
+  const candidates = measured.filter((m) => m.firstLongest);
+  const ranked = [...candidates].sort((x, y) => {
+    // Wide-gap questions first, then by how undersized the distractors are.
+    const xw = x.gap >= 6 ? 1 : 0;
+    const yw = y.gap >= 6 ? 1 : 0;
+    if (xw !== yw) return yw - xw;
+    return y.answerLen - y.distractorMean - (x.answerLen - x.distractorMean);
+  });
 
-  // Questions whose answer towers over every distractor are the individually
-  // guessable ones, so they are drawn first and always get a target that moves
-  // them — never left to chance.
-  const gap = ({ q }) => len(q.opts[q.ans]) - Math.max(...q.opts.map(len).filter((_, i) => i !== q.ans));
-  const rand = rng(SEED);
-  const pool = [...rank1]
-    .map((e) => ({ e, key: gap(e) >= 6 ? -1 + rand() * 0.001 : rand() }))
-    .sort((a, b) => a.key - b.key)
-    .map((x) => x.e);
-
-  // Hand out the non-1 ranks first (hardest constraint, and the wide-gap questions
-  // sit at the head of the pool), then rank 1 for the remainder.
-  const order = [4, 3, 2, 1];
-  const out = [];
-  let i = 0;
-  for (const r of order) {
-    for (let n = 0; n < alloc[r - 1]; n++, i++) {
-      if (i >= pool.length) break;
-      out.push({ entry: pool[i], targetRank: r });
-    }
-  }
-  return { rank1, rest, have, alloc, plan: out };
+  const chosen = ranked.slice(0, REWRITE_COUNT);
+  return { measured, candidates, chosen };
 }
 
 /**
@@ -118,16 +139,31 @@ function slotTargets(q, targetRank, rand) {
 }
 
 function cmdPlan() {
-  const { rank1, rest, have, alloc, plan } = buildPlan();
-  const rand = rng(SEED + 1);
-  const packet = plan.map(({ entry, targetRank }) => {
+  const { measured, candidates, chosen } = buildPlan();
+  const rand = rng(SEED);
+  const packet = chosen.map(({ entry, answerLen, distractorMean, gap }) => {
     const { q, set } = entry;
-    const { answerLen, targets } = slotTargets(q, targetRank, rand);
+    // Per-slot targets around the answer's own length: one distractor above it (so the
+    // answer stops being the longest), the rest at or just under. Margins stay inside
+    // ±4 so the four options cluster instead of trading one tell for a spread, and
+    // which slot goes above is drawn from the seed so "the long one is slot 1" never
+    // sets in.
+    const idx = q.opts.map((_, i) => i).filter((i) => i !== q.ans);
+    for (let i = idx.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    const targets = {};
+    idx.forEach((slot, n) => {
+      const delta = n === 0 ? 1 + Math.floor(rand() * 4) : -Math.floor(rand() * 5);
+      targets[slot] = Math.max(3, answerLen + delta);
+    });
     return {
       set,
       qid: q.id,
-      targetRank,
       answerLen,
+      distractorMean: Number(distractorMean.toFixed(1)),
+      gap,
       ans: q.ans,
       q: q.q,
       hint: q.hint,
@@ -136,7 +172,8 @@ function cmdPlan() {
         i,
         text: o,
         len: len(o),
-        role: i === q.ans ? 'ANSWER — do not touch' : 'distractor',
+        id: q.opts_id?.[i] ?? null,
+        role: i === q.ans ? 'ANSWER — byte-identical, do not touch' : 'rewrite',
         target: i === q.ans ? null : targets[i],
       })),
     };
@@ -144,8 +181,12 @@ function cmdPlan() {
   console.log(
     JSON.stringify(
       {
-        bank: { questions: ALL.length, rank1: rank1.length, untouched: rest.length, untouchedRanks: have },
-        allocation: { r1: alloc[0], r2: alloc[1], r3: alloc[2], r4: alloc[3] },
+        bank: {
+          questions: measured.length,
+          answerIsFirstLongest: candidates.length,
+          wideGap: measured.filter((m) => m.gap >= 6).length,
+        },
+        rewriting: packet.length,
         seed: SEED,
         packet,
       },
@@ -186,22 +227,32 @@ function cmdVerify() {
       seenId.add(key);
     }
 
-    // Ruby. Two mechanical rules only -- the readings that actually break are the
-    // ones whose base is a run of bare kanji, because `extendBaseLeft` has no kana
-    // to anchor a wider base on and leaves the <rt> spilling over its neighbours.
-    // A reading sitting on okurigana is the parser's extending case and is not this
-    // script's business; `src/tests/ruby-scope.test.js` measures that through the
-    // real parser, which a dependency-free .mjs cannot import.
+    // Ruby, mechanically only, and deliberately NOT a width check.
+    //
+    // This script's first version measured width the obvious way — take the run of
+    // kanji immediately before the marker, flag a reading longer than three kana per
+    // character — and reported 115 problems in this bank, of which essentially all were
+    // false. It does not model `extendBaseLeft`, which grows the base leftwards wherever
+    // the preceding text has kana to pin it, so `石綿取扱い特別教育修了者《…》` and
+    // `管の据付《かんのすえつけ》` are both annotated correctly and were both flagged.
+    // Width is measured by `src/tests/ruby-scope.test.js`, through the parser the app
+    // actually renders with, and held at zero. A dependency-free .mjs cannot import a
+    // JSX module, so it does not get a second opinion on this.
+    //
+    // What is left here is what a plain regex can be right about: a reading is kana,
+    // and a marker must not hang off a digit or a latin letter with no kanji to sit on.
     for (const o of q.opts) {
-      for (const m of String(o).matchAll(/([^《》]*)《([^》]*)》/g)) {
+      for (const m of String(o).matchAll(/([^\u300a\u300b]*)\u300a([^\u300b]*)\u300b/g)) {
         const [, before, reading] = m;
-        if (!/^[\u3041-\u309F\u30FC]+$/.test(reading))
-          problems.push(`${where}: reading 《${reading}》 is not hiragana`);
+        // Kana, not hiragana. A base that contains katakana has a reading that does
+        // too — `角ダクトの接続《かくダクトのせつぞく》` is correct, and a hiragana-only rule
+        // called 40 of those wrong. Same character class as
+        // `src/tests/ruby-scope.test.js`, so the two cannot disagree.
+        if (!/^[\u3041-\u309F\u30A1-\u30FA\u30FC\u3005]+$/.test(reading))
+          problems.push(`${where}: reading \u300a${reading}\u300b is not kana`);
         const base = (before.match(/[\u3005\u4E00-\u9FFF]+$/) || [''])[0];
-        if (base && reading.length > base.length * 3)
-          problems.push(`${where}: 《${reading}》 is wider than ${base} can hold`);
         if (!base && /[0-9A-Za-z]$/.test(before))
-          problems.push(`${where}: 《${reading}》 hangs off a digit/latin prefix`);
+          problems.push(`${where}: \u300a${reading}\u300b hangs off a digit/latin prefix`);
       }
     }
 

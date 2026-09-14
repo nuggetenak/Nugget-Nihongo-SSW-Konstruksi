@@ -105,11 +105,24 @@ const REPLACEMENTS = [
   // `isGlossNotReading`, and the data is left exactly as written.
   //
   // This was first done the other way, moving each abbreviation into the visible
-  // text as `（ALGC）`. It worked and it was wrong: adding seven visible characters
-  // to a correct answer pushed two JAC Mockup questions back over item 114's
-  // per-question gap bound — the tell 7.4.0 had just spent a session closing on
-  // that bank. A ruby fix is not allowed to re-open a distractor-balance fix, and
-  // the test caught it.
+  // text as `（ALGC）`. It worked and it was wrong twice over, and both ways are worth
+  // recording, because a transform that matches on string content is exactly this
+  // fragile:
+  //
+  //   1. Adding seven visible characters to a correct answer pushed two JAC Mockup
+  //      questions back over item 114's per-question gap bound — the tell 7.4.0 had
+  //      just spent a session closing on that bank. A ruby fix is not allowed to
+  //      re-open a distractor-balance fix. `question-option-shuffle.test.js` caught it.
+  //   2. Undoing it then matched a string in `wayground-sets.js` that was *already*
+  //      `アルミガラス布《ぬの》（ALGC）` on `main` — the very form being proposed — and
+  //      rewrote it to the JAC bank's `《ALGC》` spelling. The two banks' wordings for
+  //      that question then normalised identically and `audit:overlap` failed on a
+  //      259th duplicate group. The existing corpus already used this convention; the
+  //      wayground string is left exactly as `main` had it, and only the JAC
+  //      occurrences were ever touched by this script.
+  //
+  // The second one reached CI, because a grep for success markers over `npm run
+  // validate` output hid a non-zero exit for three commits. Read the exit code.
 
   // ── Digit inside the reading (JAC Official: annotate, never rewrite) ───────
   ['時間《6じかん》', '時間《じかん》', 'the 6 is the answer; it belongs in the text'],
