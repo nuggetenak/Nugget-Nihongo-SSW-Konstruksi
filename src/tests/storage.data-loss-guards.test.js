@@ -20,11 +20,13 @@ import {
   setSRSCard,
   getSRSCard,
   getLastMutatedAt,
+  resetAll,
   importAll,
   validateSnapshot,
   validateDelta,
   getCorruptionWarning,
   setExternalChangeHandler,
+  flushWrites,
 } from '../storage/engine.js';
 import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
 
@@ -145,6 +147,7 @@ describe('a gap in the migration registry does not become a write of defaults', 
     init();
 
     set('progress', { starred: [4, 5] });
+    flushWrites(); // writes are coalesced now (item 185); this asserts on disk
 
     const onDisk = read(DOCS.progress);
     expect(onDisk.known).toEqual([4, 5, 6]);
@@ -175,6 +178,9 @@ describe('SRS activity moves the last-mutated stamp', () => {
     const after = getLastMutatedAt();
     expect(after).not.toBeNull();
     if (before !== null) expect(after).toBeGreaterThanOrEqual(before);
+    // getLastMutatedAt reads the cache, so it is already correct above — this
+    // line is the one that needs the queued write on disk first (item 185).
+    flushWrites();
     expect(read(DOCS.srs).updatedAt).toBe(after);
   });
 
@@ -331,6 +337,7 @@ describe('a write from another tab is noticed', () => {
     fireStorage(DOCS.progress, localStorage.getItem(DOCS.progress));
 
     set('progress', { starred: [9] });
+    flushWrites();
 
     const onDisk = read(DOCS.progress);
     expect(onDisk.known).toEqual([1, 2, 3, 4, 5]); // not reverted to [1]
@@ -360,5 +367,109 @@ describe('a write from another tab is noticed', () => {
     setExternalChangeHandler((doc) => seen.push(doc));
     fireStorage('ssw-gist-pat', 'ghp_something');
     expect(seen).toEqual([]);
+  });
+});
+
+// ─── Coalesced writes (item 185) ─────────────────────────────────────────────
+// Every write re-serialised and lz-compressed a WHOLE document, and setSRSCard
+// does that on every card rating. Measured before the change, at the deck's own
+// HISTORY_LIMIT of 20 reviews per card: 58 ms at 250 cards, 250 ms at 800,
+// 889 ms across the full 1,626 — on a server CPU, with a low-end Android phone
+// four to eight times slower again. The app got slower the more someone studied.
+//
+// Deferring the persist is safe because the cache is the authority for every
+// reader. It is NOT safe by itself: the three tests below are the ones that make
+// it safe, and the last is the one that matters most.
+describe('writes are coalesced without losing anything', () => {
+  it('collapses a burst of ratings into a single write', () => {
+    init();
+    flushWrites();
+    // Counted by replacing the instance method rather than spying on
+    // Storage.prototype: jsdom's localStorage does not necessarily route
+    // through the prototype, and a spy that silently observes nothing would
+    // make this test pass for the wrong reason.
+    const realSet = localStorage.setItem;
+    let writes = 0;
+    localStorage.setItem = function (k, v) {
+      if (k === DOCS.srs) writes++;
+      return realSet.call(this, k, v);
+    };
+    try {
+      for (let i = 1; i <= 25; i++) {
+        setSRSCard(i, { card: { due: '2026-10-01T00:00:00.000Z', stability: 3 }, history: [] });
+      }
+      expect(writes, 'queued, not written once per rating').toBe(0);
+
+      flushWrites();
+      expect(writes, '25 ratings, one write').toBe(1);
+    } finally {
+      // Restore by assignment, not `delete`: jsdom exposes setItem as an own
+      // property, so deleting it removes the method outright instead of
+      // unshadowing the prototype's.
+      localStorage.setItem = realSet;
+    }
+    expect(Object.keys(read(DOCS.srs).cards)).toHaveLength(25);
+  });
+
+  it('flushing twice is a no-op, not a second write', () => {
+    init();
+    set('progress', { starred: [1] });
+    flushWrites();
+    const first = localStorage.getItem(DOCS.progress);
+    flushWrites();
+    expect(localStorage.getItem(DOCS.progress)).toBe(first);
+  });
+
+  it('a reset does not resurrect a queued write', () => {
+    // The trap this whole design turns on. resetAll() writes fresh defaults
+    // synchronously, but a rating from moments earlier may still be queued.
+    // Flushing it would put the pre-reset document back on top of the defaults —
+    // data the user explicitly asked to delete, restored by the delete itself.
+    // The queue has to be discarded, not drained.
+    init();
+    setSRSCard(7, { card: { due: '2026-10-01T00:00:00.000Z', stability: 9 }, history: [] });
+    expect(Object.keys(get('srs').cards)).toHaveLength(1); // queued, in cache
+
+    resetAll();
+    flushWrites(); // whatever was pending must NOT land now
+
+    expect(Object.keys(read(DOCS.srs).cards)).toHaveLength(0);
+    expect(Object.keys(get('srs').cards)).toHaveLength(0);
+  });
+
+  it('a document another tab removed is not written back by the next write', () => {
+    // item 197. onStorageEvent's own comment says a removal means "this tab's
+    // cache is no longer what is on disk", but the loop only assigned the
+    // re-read on `ok`, and a missing key reads as `{ ok: false }` — so the stale
+    // document stayed in the cache and the next set() put it straight back.
+    write(DOCS.progress, { _v: STORAGE_VERSION, known: [1, 2, 3], starred: [7] });
+    init();
+    expect(get('progress').known).toEqual([1, 2, 3]);
+
+    localStorage.removeItem(DOCS.progress);
+    window.dispatchEvent(new StorageEvent('storage', { key: DOCS.progress, newValue: null }));
+
+    set('progress', { starred: [9] });
+    flushWrites();
+
+    const onDisk = read(DOCS.progress);
+    expect(onDisk.known, 'the removed history must not come back').toEqual([]);
+    expect(onDisk.starred).toEqual([9]);
+  });
+
+  it('keeps this tab’s good copy when another tab writes garbage', () => {
+    // The deliberate asymmetry: a removal drops the cache, corruption does not.
+    // Disk is unreadable but this tab still holds known-good data in memory, and
+    // throwing that away because another tab wrote nonsense would be the worse
+    // of the two failures.
+    write(DOCS.progress, { _v: STORAGE_VERSION, known: [1, 2, 3], starred: [] });
+    init();
+
+    localStorage.setItem(DOCS.progress, 'not json at all{{{');
+    window.dispatchEvent(
+      new StorageEvent('storage', { key: DOCS.progress, newValue: 'not json at all{{{' })
+    );
+
+    expect(get('progress').known).toEqual([1, 2, 3]);
   });
 });

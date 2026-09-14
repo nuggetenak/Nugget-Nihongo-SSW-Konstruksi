@@ -140,7 +140,32 @@ function onStorageEvent(e) {
   if (e.key !== null && !doc) return; // some other key entirely (a gist token, say)
   for (const d of doc ? [doc] : ['progress', 'srs', 'prefs']) {
     const res = readDoc(DOCS[d]);
-    if (res.ok) _cache[d] = res.data;
+    if (res.ok) {
+      _cache[d] = res.data;
+      continue;
+    }
+    // A REMOVAL, and this is the branch that used to do nothing (item 197).
+    // The paragraph above says a removal means "this tab's cache is no longer
+    // what is on disk" -- but the loop only assigned on `ok`, and readDoc
+    // returns `{ ok: false, corrupt: false }` for a key that is simply gone. So
+    // the stale document stayed in `_cache`, and the very next set() or
+    // setSRSCard() wrote it straight back: another tab clears the app's data,
+    // this tab rates one card, and everything the clear removed is on disk
+    // again. The stated intent and the code disagreed, which is the failure
+    // this repo keeps writing release notes about.
+    //
+    // Dropping to null is what makes the next write rebuild from DEFAULTS
+    // rather than from a document that no longer exists -- `get()` and `set()`
+    // both already fall back to a fresh copy when the cache entry is null, so
+    // nothing else needs to know.
+    //
+    // A CORRUPT document is deliberately not treated the same way. There, disk
+    // is unreadable but this tab still holds a good copy in memory, and keeping
+    // it is strictly better than discarding known-good data because some other
+    // tab wrote garbage. Pending writes are dropped either way: whatever is
+    // queued was built from a document the other tab has since replaced.
+    if (!res.corrupt) _cache[d] = null;
+    discardPending(d);
   }
   _externalChangeHandler?.(doc);
 }
@@ -151,6 +176,13 @@ function startListening() {
   // exactly the asymmetry this needs and the reason no guard against self-triggering
   // is required.
   window.addEventListener('storage', onStorageEvent);
+  // The flush safety net for item 185's deferred writes. Without these, closing
+  // the tab inside the debounce window loses the last rating — which would trade
+  // a stall for data loss, and this file exists to prevent the second one.
+  window.addEventListener('pagehide', onPageHiding);
+  if (typeof document !== 'undefined' && document.addEventListener) {
+    document.addEventListener('visibilitychange', onVisibilityChange);
+  }
   _listening = true;
 }
 
@@ -177,6 +209,98 @@ function writeDoc(docKey, data) {
     console.error('[storage] writeDoc failed:', docKey, err);
     return { ok: false, reason: 'unknown' };
   }
+}
+
+// ── Coalesced writes (item 185) ───────────────────────────────────────────
+// Every write used to re-serialise and re-compress a WHOLE document, and
+// `setSRSCard` calls that on every single card rating. Measured on a server
+// CPU, with the deck's own HISTORY_LIMIT of 20 reviews per card:
+//
+//     250 cards   ->  156 kB JSON  ->   58 ms per rating
+//     800 cards   ->  780 kB JSON  ->  250 ms per rating
+//   1,626 cards   -> 2.7 MB JSON   ->  889 ms per rating
+//
+// A low-end Android phone -- the device this app was built for -- runs JS four
+// to eight times slower than that. So the app got slower the more someone
+// studied, and the learner who used it most was the one it punished, with a
+// main thread blocked between the tap and the next card.
+//
+// The cache is already the authority: `get`, `getSRSCard` and `exportAll` all
+// read `_cache`, never localStorage, and both writers stamp `updatedAt` on the
+// cache synchronously before queueing. So deferring the *persist* changes
+// nothing any reader -- or any conflict check -- can see. N ratings in a
+// session collapse into one write.
+//
+// Only `set()` and `setSRSCard()` queue. init()'s migration and salvage
+// writes, resetAll() and importAll() all still write synchronously and are
+// untouched, because those are the branches where a deferred write is a risk
+// rather than a saving.
+const WRITE_DEBOUNCE_MS = 400;
+const _dirty = new Set();
+let _flushTimer = null;
+
+function queueWrite(doc) {
+  _dirty.add(doc);
+  if (_flushTimer === null && typeof setTimeout === 'function') {
+    _flushTimer = setTimeout(flushWrites, WRITE_DEBOUNCE_MS);
+  }
+}
+
+/**
+ * Persist every queued document now. Safe to call with nothing pending, and
+ * safe to call twice. Exported because the lifecycle hooks below are not the
+ * only caller that needs it: a test asserting on what is on disk has to be
+ * able to say "now", and so does anything that hands the documents to another
+ * process.
+ */
+export function flushWrites() {
+  if (_flushTimer !== null) {
+    clearTimeout(_flushTimer);
+    _flushTimer = null;
+  }
+  if (_dirty.size === 0) return;
+  const docs = [..._dirty];
+  _dirty.clear();
+  for (const doc of docs) {
+    const res = writeDoc(DOCS[doc], _cache[doc]);
+    // A failed write stays queued rather than being dropped (item 201). The
+    // cache is still the truth, so the next queueWrite or the next flush --
+    // pagehide, at the latest -- retries it. It deliberately does NOT
+    // reschedule itself here: a persistent quota failure would spin a timer
+    // forever and re-fire the quota banner on every tick, and `writeDoc` has
+    // already notified once.
+    if (!res.ok) _dirty.add(doc);
+  }
+}
+
+/**
+ * Drop queued writes for these documents WITHOUT persisting them.
+ *
+ * This is the trap that makes coalescing dangerous, and it is worth stating
+ * plainly: `resetAll()` writes fresh defaults synchronously, but a rating from
+ * two hundred milliseconds ago may still be sitting in the queue. Flushing it
+ * would write the pre-reset document back over the defaults and resurrect
+ * exactly the data the user asked to delete. The queue has to be discarded,
+ * not drained. Same for `importAll`, whose whole job is to replace what is
+ * there, and for a document another tab has just removed.
+ */
+function discardPending(...docs) {
+  for (const d of docs) _dirty.delete(d);
+  if (_dirty.size === 0 && _flushTimer !== null) {
+    clearTimeout(_flushTimer);
+    _flushTimer = null;
+  }
+}
+
+function onPageHiding() {
+  // The two events that actually fire when a mobile browser backgrounds or
+  // kills a tab. `beforeunload` is unreliable on Android and fires too late to
+  // be the safety net here.
+  flushWrites();
+}
+
+function onVisibilityChange() {
+  if (typeof document !== 'undefined' && document.visibilityState === 'hidden') flushWrites();
 }
 
 function freshDefaults() {
@@ -378,7 +502,11 @@ export function set(doc, updater) {
   // the ordinary restore-my-own-backup case it was written to leave alone.
   const next = { ...merged, updatedAt: Date.now() };
   _cache[doc] = next;
-  writeDoc(DOCS[doc], next);
+  // Queued, not written (item 185). The cache above is what every reader sees —
+  // get(), exportAll() and getLastMutatedAt() all read it — so the persist is
+  // the only thing being deferred, and it collapses a session's worth of writes
+  // into one.
+  queueWrite(doc);
   return next;
 }
 
@@ -421,7 +549,9 @@ export function setSRSCard(cardId, entry) {
   // device is newer than this file" warning stays silent, because as far as the
   // stamps were concerned it wasn't.
   _cache.srs.updatedAt = Date.now();
-  writeDoc(DOCS.srs, _cache.srs);
+  // The single hottest write in the app: one per card rating, each of which used
+  // to re-compress every card the learner had ever studied. See queueWrite.
+  queueWrite('srs');
 }
 
 export function getAllSRSCards() {
@@ -436,6 +566,11 @@ export function getSRSCardCount() {
 
 // ── Bulk ops ──────────────────────────────────────────────────────────────
 export function resetAll() {
+  // Discard before writing, never flush (see discardPending). A rating from two
+  // hundred milliseconds ago is still queued, and flushing it here would write
+  // the pre-reset document back over the defaults below — resurrecting exactly
+  // the data the user asked to delete, from inside the function that deletes it.
+  discardPending('progress', 'srs', 'prefs');
   const d = freshDefaults();
   _cache.progress = d.progress;
   _cache.srs = d.srs;
@@ -479,6 +614,9 @@ export function importAll(snapshot) {
   // since — and the next conflict check reasons from that. Restoring a backup is
   // the largest mutation this app can perform; it is the last thing that should
   // read as "no activity".
+  // Same reasoning as resetAll: an import replaces all three documents, so a
+  // queued write built from the outgoing ones must be dropped, not drained.
+  discardPending('progress', 'srs', 'prefs');
   const now = Date.now();
   _cache.progress = { ...snapshot.progress, _v: STORAGE_VERSION, updatedAt: now };
   _cache.srs = { ...snapshot.srs, _v: STORAGE_VERSION, updatedAt: now };
@@ -495,8 +633,19 @@ export function _reset_for_test() {
   _corruption = [];
   if (_listening && typeof window !== 'undefined' && window.removeEventListener) {
     window.removeEventListener('storage', onStorageEvent);
+    window.removeEventListener('pagehide', onPageHiding);
+    if (typeof document !== 'undefined' && document.removeEventListener) {
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    }
   }
   _listening = false;
+  // A queued write must not survive into the next test, or one test's rating
+  // lands in another's localStorage.
+  _dirty.clear();
+  if (_flushTimer !== null) {
+    clearTimeout(_flushTimer);
+    _flushTimer = null;
+  }
   _externalChangeHandler = null;
 }
 

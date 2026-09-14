@@ -16,7 +16,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
 import LZString from 'lz-string';
-import { _reset_for_test, init, get, set } from '../storage/engine.js';
+import { _reset_for_test, init, get, set, flushWrites } from '../storage/engine.js';
 import { STORAGE_VERSION } from '../storage/schema.js';
 
 beforeEach(() => {
@@ -139,6 +139,7 @@ describe('storage migration chain — every entry point reaches current', () => 
     // And a write from this build carries the unknown field through, so the
     // newer build finds its own data intact when it comes back.
     set('progress', { starred: [2] });
+    flushWrites(); // writes are coalesced (item 185); this asserts on disk
     const persisted = JSON.parse(
       LZString.decompressFromUTF16(localStorage.getItem('ssw-progress')) ??
         localStorage.getItem('ssw-progress')

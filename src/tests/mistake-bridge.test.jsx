@@ -18,7 +18,7 @@ import { render, act } from '@testing-library/react';
 import LZString from 'lz-string';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { init, get, _reset_for_test } from '../storage/engine.js';
+import { init, get, _reset_for_test, flushWrites } from '../storage/engine.js';
 import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
 import { ProgressProvider, useProgress } from '../contexts/ProgressContext.jsx';
 import {
@@ -178,6 +178,7 @@ describe('legacy string keys in quizWrong', () => {
     seedWrong({ 12: { count: 1 }, 'danger-足場': { count: 3 } });
     const getCtx = readCtx();
     act(() => getCtx().recordWrong(34));
+    flushWrites(); // the persist is coalesced now (item 185); this asserts on disk
 
     const onDisk = JSON.parse(LZString.decompressFromUTF16(localStorage.getItem(DOCS.progress)));
     expect(Object.keys(onDisk.quizWrong).sort()).toEqual(['12', '34']);
