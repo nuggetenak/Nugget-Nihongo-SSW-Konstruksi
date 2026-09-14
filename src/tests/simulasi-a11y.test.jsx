@@ -152,3 +152,44 @@ describe('simulasi screen-reader support (item 95)', () => {
     expect(skip.compareDocumentPosition(firstCell) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });
+
+// ─── Pause overlay vs the exit confirmation (item 187) ───────────────────────
+// The pause overlay is a real dialog: role, aria-modal and a focus trap, added
+// because a keyboard or screen-reader user could otherwise Tab straight through
+// the dim into the exam behind it. But its own "✕ Keluar dari simulasi" button
+// opens the exit-guard confirmation, which is a Sheet -- also aria-modal, also
+// focus-trapped. Two modals claiming the document at once is undefined for
+// assistive tech: aria-modal on an ancestor is what hides everything outside it,
+// so two of them disagree about what "outside" means.
+//
+// Escape is NOT part of this. GlobalKeyboardLayer stands every key down while
+// any [role="dialog"] is mounted, so the pause overlay already blocks it -- an
+// external audit reported otherwise and the code was right.
+describe('simulasi pause overlay + exit confirm (item 187)', () => {
+  const pauseBtn = () => screen.getByLabelText('Jeda');
+
+  it('never has two aria-modal dialogs open at once', async () => {
+    renderSim();
+    await start();
+
+    await act(async () => fireEvent.click(pauseBtn()));
+    expect(document.querySelectorAll('[aria-modal="true"]')).toHaveLength(1);
+
+    await act(async () => fireEvent.click(screen.getByText(/Keluar dari simulasi/i)));
+
+    // The confirm Sheet is open on top of the paused exam. Exactly one of the
+    // two may claim modality.
+    expect(document.querySelectorAll('[aria-modal="true"]')).toHaveLength(1);
+  });
+
+  it('still traps and announces the pause overlay when no confirm is open', async () => {
+    renderSim();
+    await start();
+    await act(async () => fireEvent.click(pauseBtn()));
+
+    const dialog = document.querySelector('[role="dialog"][aria-modal="true"]');
+    expect(dialog).toBeTruthy();
+    expect(dialog.getAttribute('aria-labelledby')).toBe('simulasi-paused-title');
+    expect(screen.getByText('Dijeda')).toBeTruthy();
+  });
+});

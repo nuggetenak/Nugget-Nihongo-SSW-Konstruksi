@@ -493,6 +493,12 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const [reviewFilter, setReviewFilter] = useState('salah');
   const [timeLeft, setTimeLeft] = useState(0);
   const [paused, setPaused] = useState(false);
+  // True only while the exit confirmation is on top of the pause overlay. The
+  // overlay drops its modal semantics for that window (item 187) -- two
+  // aria-modal elements at once is undefined for assistive tech, because
+  // aria-modal on an ancestor is exactly what hides everything outside it, and
+  // two of them disagree about what "outside" is.
+  const [confirmingExit, setConfirmingExit] = useState(false);
   const timerRef = useRef(null);
   // The exam ends at a wall-clock instant, not after N ticks of an interval.
   // The old counter decremented on a setInterval whose effect depended on
@@ -766,7 +772,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   useExitGuard(phase === 'playing' ? confirmDiscard : null);
 
   const handleExitClick = useCallback(async () => {
-    if (phase === 'playing' && !(await confirmDiscard())) return;
+    if (phase === 'playing') {
+      setConfirmingExit(true);
+      try {
+        if (!(await confirmDiscard())) return;
+      } finally {
+        setConfirmingExit(false);
+      }
+    }
     onExit();
   }, [phase, confirmDiscard, onExit]);
 
@@ -1490,9 +1503,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         // already existed for `Sheet` and needed no new machinery.
         <div
           ref={pauseRef}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="simulasi-paused-title"
+          // While the exit confirmation is open it owns the modality, and this
+          // overlay is just the dim behind it. The focus trap below stays armed
+          // either way: its keydown handler is scoped to this container, so once
+          // focus is inside the Sheet it never fires, and leaving it alone avoids
+          // the focus-restore that deactivating mid-confirm would trigger.
+          role={confirmingExit ? undefined : 'dialog'}
+          aria-modal={confirmingExit ? undefined : 'true'}
+          aria-labelledby={confirmingExit ? undefined : 'simulasi-paused-title'}
           style={{
             position: 'fixed',
             inset: 0,

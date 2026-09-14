@@ -187,11 +187,19 @@ describe('the exam pause overlay is a real dialog', () => {
   // keyboard user could Tab straight through into the exam behind it and answer
   // questions they could not see, and "Dijeda" was never announced, so nothing said
   // the clock had stopped.
+  // The rendered assertions moved to simulasi-a11y.test.jsx when item 187 made
+  // the modal attributes conditional: the overlay hands modality to the exit
+  // confirmation while that Sheet is open, so it no longer spells role="dialog"
+  // as a literal. Asserting the rendered DOM is the stronger guard anyway -- a
+  // source sweep cannot tell whether an attribute reached the element.
+  //
+  // What stays here is what a source sweep is actually good for: that the
+  // semantics and the trap are still wired at all, in any spelling.
   it('declares dialog semantics and traps focus', () => {
     const src = readFileSync(resolve(process.cwd(), 'src/modes/SimulasiMode.jsx'), 'utf8');
-    expect(src).toMatch(/role="dialog"/);
-    expect(src).toMatch(/aria-modal="true"/);
-    expect(src).toMatch(/aria-labelledby="simulasi-paused-title"/);
+    expect(src).toMatch(/role=\{?['"{]?.*dialog/);
+    expect(src).toMatch(/aria-modal=/);
+    expect(src).toMatch(/simulasi-paused-title/);
     expect(src).toMatch(/useFocusTrap\(pauseRef, paused\)/);
   });
 
