@@ -5,5 +5,6 @@ outputs/
 coverage/
 scripts/archive/
 src/data/cards.js
+src/data/card-index.js
 src/data/jac-official.js
 src/data/wayground-sets.js
