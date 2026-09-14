@@ -21,6 +21,7 @@ import { CARDS } from '../data/cards.js';
 import { DANGER_PAIRS } from '../data/danger-pairs.js';
 import { CONFUSION_PAIRS } from '../data/confusion-pairs.js';
 import { ANGKA_KUNCI } from '../data/angka-kunci.js';
+import { GENBA_PHRASES } from '../data/genba-phrases.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { JAC_MOCKUP_SETS } from '../data/jac-mockup-sets.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
@@ -46,6 +47,7 @@ const ALL_STRINGS = collectStrings([
   DANGER_PAIRS,
   CONFUSION_PAIRS,
   ANGKA_KUNCI,
+  GENBA_PHRASES,
   JAC_OFFICIAL,
   JAC_MOCKUP_SETS,
   WAYGROUND_SETS,

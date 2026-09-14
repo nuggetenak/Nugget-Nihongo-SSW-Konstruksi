@@ -19,6 +19,7 @@ import { CARDS } from '../data/cards.js';
 import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import { JAC_MOCKUP_SETS } from '../data/jac-mockup-sets.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
+import { GENBA_PHRASES } from '../data/genba-phrases.js';
 import { parseRubyFragments } from '../components/JpDisplay.jsx';
 
 /**
@@ -148,6 +149,25 @@ function bankFragments() {
 /** A reading is kana. Nothing else belongs in one — see the non-kana suite below. */
 const NON_KANA = /[^\u3041-\u309F\u30A0-\u30FF\u30FC\u3005]/;
 
+/**
+ * item 103's corpus. Included here rather than left to audit:text alone: this is
+ * the only corpus written entirely in the spoken register, where contractions put
+ * markers in places the terminology deck never does (来《き》てる, やっといて), and
+ * the width rule is exactly what catches a reading that swallowed a contraction.
+ */
+function genbaFragments() {
+  const out = [];
+  for (const p of GENBA_PHRASES) {
+    for (const [field, val] of Object.entries(p)) {
+      for (const line of (Array.isArray(val) ? val : [val]).filter((v) => typeof v === 'string')) {
+        for (const f of parseRubyFragments(line))
+          out.push({ where: `genba:${p.id}.${field}`, ...f });
+      }
+    }
+  }
+  return out;
+}
+
 function cardFragments() {
   const out = [];
   for (const c of CARDS) {
@@ -168,7 +188,9 @@ describe('ruby scope: the question banks', () => {
   // all fixed in the same pass (scripts/archive/fix-ruby-non-kana.mjs), so there is
   // no backlog to tolerate and no reason to let one start.
   it('no reading in any question bank is wider than its base allows', () => {
-    const wide = bankFragments().filter((f) => f.reading.length > f.base.length * OVERFLOW_RATIO);
+    const wide = [...bankFragments(), ...genbaFragments()].filter(
+      (f) => f.reading.length > f.base.length * OVERFLOW_RATIO
+    );
     expect(
       wide.map((w) => `${w.where} ${w.base}\u300a${w.reading}\u300b`),
       'a marker holding a phrase reading rather than its own base'
@@ -193,6 +215,11 @@ describe('a reading contains only kana', () => {
 
   it('no question-bank reading does either', () => {
     const bad = bankFragments().filter((f) => NON_KANA.test(f.reading));
+    expect(bad.map((b) => `${b.where} ${b.base}\u300a${b.reading}\u300b`)).toEqual([]);
+  });
+
+  it('nor does any reading in the \u73fe\u5834\u65e5\u672c\u8a9e corpus', () => {
+    const bad = genbaFragments().filter((f) => NON_KANA.test(f.reading));
     expect(bad.map((b) => `${b.where} ${b.base}\u300a${b.reading}\u300b`)).toEqual([]);
   });
 });
