@@ -48,6 +48,7 @@ export const MODE_COMPONENTS = {
   dengar: lazy(() => import('../modes/DengarMode.jsx')),
   catatan: lazy(() => import('../modes/CatatanMode.jsx')),
   genba: lazy(() => import('../modes/GenbaMode.jsx')),
+  skenario: lazy(() => import('../modes/SkenarioMode.jsx')),
 };
 
 // ── Navigation sections ────────────────────────────────────────────────────
@@ -60,7 +61,7 @@ export const MODE_SECTIONS = {
   latihan: {
     title: '🧪 Latihan',
     subtitle: 'Asah kemampuan',
-    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'mirip', 'dengar', 'genba'],
+    modes: ['kuis', 'sprint', 'fokus', 'angka', 'jebak', 'mirip', 'dengar', 'genba', 'skenario'],
   },
   ujian: {
     title: '📋 Ujian',
@@ -219,6 +220,18 @@ export const MODE_META = {
     desc: `${MODE_COUNTS.genba} kalimat yang diucapkan di lokasi`,
     color: '#14b8a6',
     strand: 'output',
+    skeleton: 'quiz',
+  },
+  // item 105. `fluency` rather than `output`: a scene is one thread read at the
+  // speed it is spoken, and what it trains is following it without stopping --
+  // Nation's fluency strand, and the strand `ulasan` was alone in until now.
+  skenario: {
+    icon: '🎬',
+    ui: 'kalender',
+    label: 'Skenario',
+    desc: `${MODE_COUNTS.skenario} situasi, satu percakapan penuh`,
+    color: '#0d9488',
+    strand: 'fluency',
     skeleton: 'quiz',
   },
   cari: {

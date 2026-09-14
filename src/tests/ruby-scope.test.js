@@ -20,6 +20,7 @@ import { WAYGROUND_SETS } from '../data/wayground-sets.js';
 import { JAC_MOCKUP_SETS } from '../data/jac-mockup-sets.js';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { GENBA_PHRASES } from '../data/genba-phrases.js';
+import { GENBA_SCENES } from '../data/genba-scenes.js';
 import { parseRubyFragments } from '../components/JpDisplay.jsx';
 
 /**
@@ -157,7 +158,15 @@ const NON_KANA = /[^\u3041-\u309F\u30A0-\u30FF\u30FC\u3005]/;
  */
 function genbaFragments() {
   const out = [];
-  for (const p of GENBA_PHRASES) {
+  const beats = GENBA_SCENES.flatMap((s) =>
+    s.beats.map((b, i) => ({ ...b, id: `${s.id}#${i + 1}` }))
+  );
+  for (const s of GENBA_SCENES) {
+    for (const line of [s.title, s.id_title, s.setting]) {
+      for (const f of parseRubyFragments(line)) out.push({ where: `scene:${s.id}`, ...f });
+    }
+  }
+  for (const p of [...GENBA_PHRASES, ...beats]) {
     for (const [field, val] of Object.entries(p)) {
       for (const line of (Array.isArray(val) ? val : [val]).filter((v) => typeof v === 'string')) {
         for (const f of parseRubyFragments(line))

@@ -135,6 +135,9 @@ export const QUIZ_QUESTION_COUNTS = {
   // it must not import a data file to count an array. mode-counts.test.js
   // re-derives all three from the real data.
   genba: 84,
+  // item 105 counts scenes, not questions: a scene is a thread you finish, and
+  // its length is a property of the dialogue rather than a session setting.
+  skenario: 6,
 };
 
 /** Minutes a run of `n` questions is given, at the rate above. Exported so the
