@@ -1,6 +1,6 @@
 # Card split audit — every card, one verdict each
 
-Companion to `docs/RUBY_MISMATCH_AUDIT.md`, same shape: a row per card, and a status you
+Companion to `docs/archive/RUBY_MISMATCH_AUDIT.md` (retired 2026-09-13, list empty), same shape: a row per card, and a status you
 can grep. This one is the worksheet for the multi-vocabulary split, and the permanent
 record of **why 113 cards were left whole** — that half matters more than the
 split list, because it is the part a future pass would otherwise redo from scratch.

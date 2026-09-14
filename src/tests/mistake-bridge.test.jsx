@@ -14,9 +14,13 @@
 //         store: inert in one reader, a `NaN` property in the other.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { render, act } from '@testing-library/react';
+import LZString from 'lz-string';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { init, get, _reset_for_test } from '../storage/engine.js';
+import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
+import { ProgressProvider, useProgress } from '../contexts/ProgressContext.jsx';
 import {
   cardIdForTerm,
   recordTermMistake,
@@ -126,5 +130,64 @@ describe('the card-id space is held at the writer', () => {
       const src = readFileSync(resolve(process.cwd(), 'src/modes', file), 'utf8');
       expect(src, `${file} builds a string key for recordWrong`).not.toMatch(/recordWrong\(\s*`/);
     }
+  });
+});
+
+// ─── The puddle item 129 left ────────────────────────────────────────────────
+// Item 129 stopped DangerMode writing `danger-<term>` keys into the card-keyed
+// `progress.quizWrong`, and nothing removed the ones already in people's stores. They
+// are inert in FokusMode, turn into a `NaN` property in StatsMode's `Number(id)`, get
+// counted under "Salah Kuis" in the export summary, and ride along in every backup
+// forever. The leak was stopped; the puddle stayed.
+describe('legacy string keys in quizWrong', () => {
+  // The file-level beforeEach already ran `init()` against an empty store, so the
+  // engine is holding fresh defaults by the time these tests start. Seeding the keys
+  // and re-initialising is what makes the engine actually read them.
+  function seedWrong(quizWrong) {
+    const write = (k, d) => localStorage.setItem(k, LZString.compressToUTF16(JSON.stringify(d)));
+    write(DOCS.progress, { ...DEFAULTS.progress, _v: STORAGE_VERSION, quizWrong });
+    write(DOCS.srs, { ...DEFAULTS.srs, _v: STORAGE_VERSION });
+    write(DOCS.prefs, { ...DEFAULTS.prefs, _v: STORAGE_VERSION });
+    _reset_for_test();
+    init();
+  }
+
+  function readCtx() {
+    let ctx;
+    const Capture = () => {
+      ctx = useProgress();
+      return null;
+    };
+    render(
+      <ProgressProvider>
+        <Capture />
+      </ProgressProvider>
+    );
+    return () => ctx;
+  }
+
+  it('are not handed to readers', () => {
+    seedWrong({ 12: { count: 1 }, 'danger-足場': { count: 3 }, 'danger-脚立': { count: 1 } });
+    const getCtx = readCtx();
+    expect(Object.keys(getCtx().quizWrong)).toEqual(['12']);
+  });
+
+  it('are dropped from storage by the next real wrong answer', () => {
+    // The cleanup, without a STORAGE_VERSION bump: the write that persists is the
+    // write that can remove them.
+    seedWrong({ 12: { count: 1 }, 'danger-足場': { count: 3 } });
+    const getCtx = readCtx();
+    act(() => getCtx().recordWrong(34));
+
+    const onDisk = JSON.parse(LZString.decompressFromUTF16(localStorage.getItem(DOCS.progress)));
+    expect(Object.keys(onDisk.quizWrong).sort()).toEqual(['12', '34']);
+  });
+
+  it('leave a clean map untouched, object identity included', () => {
+    // No new object when there is nothing to drop — the context value is memoised and
+    // a fresh `{}` every render would defeat that.
+    seedWrong({ 12: { count: 1 } });
+    const getCtx = readCtx();
+    expect(getCtx().quizWrong).toEqual({ 12: { count: 1 } });
   });
 });

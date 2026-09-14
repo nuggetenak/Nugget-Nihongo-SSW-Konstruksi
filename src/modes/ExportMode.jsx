@@ -46,6 +46,41 @@ function readSummary() {
   }
 }
 
+/**
+ * The pending-import record both restore paths hand to the preview panel.
+ *
+ * Extracted because there used to be one of these and one path that skipped it.
+ * A file import went through a two-step preview with a diff summary and a
+ * "data on this device is newer than this file" warning (item 138); a Gist pull
+ * validated the snapshot and then called `importAllSafe` on the spot, replacing
+ * every document with no comparison, no summary and no confirmation. Review
+ * fifty cards on the phone, press "Tarik dari Gist" on the tablet that pushed
+ * yesterday, and the fifty are gone with nothing on screen having suggested they
+ * might be — while the same data arriving as a *file* would have been stopped and
+ * queried. Two ways in, one of them guarded, and the unguarded one is the one
+ * that runs on a phone with a flaky connection.
+ *
+ * `source` only decides which status line reports the outcome; the gate itself is
+ * identical for both, which is the point.
+ */
+function buildPreview(parsed, summary, isDelta, source) {
+  const mutatedAt = getLastMutatedAt();
+  const exportedAt = parsed.exported_at ?? null;
+  return {
+    snapshot: parsed,
+    isDelta,
+    source,
+    incoming: summary,
+    // A delta merges rather than replaces, so it can never discard local work
+    // and a warning about one would be noise. An unknown stamp is not evidence
+    // of a conflict either — see item 138 on crying wolf.
+    hasConflict:
+      !isDelta && !!mutatedAt && !!exportedAt && mutatedAt > new Date(exportedAt).getTime(),
+    fileDate: exportedAt,
+    currentDate: mutatedAt ? new Date(mutatedAt).toISOString() : null,
+  };
+}
+
 export default function ExportMode() {
   const [summary, setSummary] = useState(() => readSummary());
   const [status, setStatus] = useState(null);
@@ -69,7 +104,13 @@ export default function ExportMode() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `ssw-progress-v${data._storage_version}-${new Date().toISOString().slice(0, 10)}.json`;
+      // Date *and* time. With the date alone, two exports on one day produce the
+      // same filename, and most Android download folders answer that by
+      // overwriting the first — so a user who exports, studies, and exports again
+      // to be safe ends up with one file instead of two, and it is not obvious
+      // which. `2026-09-13T1432` sorts the same way and cannot collide.
+      const stamp = new Date().toISOString().slice(0, 16).replace(/[:]/g, '').replace('T', 'T');
+      a.download = `ssw-progress-v${data._storage_version}-${stamp}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -100,28 +141,7 @@ export default function ExportMode() {
       const delta = isSRSDelta(parsed);
       const validation = delta ? validateDelta(parsed) : validateSnapshot(parsed);
       if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
-      // Is what is on this device newer than the file? This compared the file
-      // against `exportAll().exported_at`, which exportAll generates at call
-      // time -- the current clock, never a last-modified time -- so it was true
-      // on every import, including the ordinary restore-my-own-backup case it
-      // was meant to leave alone (item 138). `getLastMutatedAt()` is stamped by
-      // the storage engine on every write and is the real answer. It is null
-      // for documents that predate the stamp, and an unknown is not evidence of
-      // a conflict: a delta never conflicts either, since it merges rather than
-      // replaces.
-      const mutatedAt = getLastMutatedAt();
-      const fileExportedAt = parsed.exported_at ?? null;
-      const hasConflict =
-        !delta && !!mutatedAt && !!fileExportedAt && mutatedAt > new Date(fileExportedAt).getTime();
-      // Show diff summary for user to confirm
-      setPreviewData({
-        snapshot: parsed,
-        isDelta: delta,
-        incoming: validation.summary,
-        hasConflict,
-        fileDate: fileExportedAt,
-        currentDate: mutatedAt ? new Date(mutatedAt).toISOString() : null,
-      });
+      setPreviewData(buildPreview(parsed, validation.summary, delta, 'file'));
       setStatus({ type: 'preview', msg: null });
     } catch (e) {
       setStatus({ type: 'err', msg: `❌ File tidak valid: ${e.message}` });
@@ -134,6 +154,10 @@ export default function ExportMode() {
   // Step 2: user confirms import
   const handleConfirmImport = () => {
     if (!previewData) return;
+    // A Gist pull reports on the Gist panel's own status line, where the button
+    // the user pressed is; a file import reports on the import panel's.
+    const report = previewData.source === 'gist' ? setGistStatus : setStatus;
+    const from = previewData.source === 'gist' ? ' dari Gist' : '';
     try {
       if (previewData.isDelta) {
         // Merge, not replace: a delta says what this device knows, never what
@@ -141,9 +165,9 @@ export default function ExportMode() {
         const applied = importSRSDelta(previewData.snapshot);
         setSummary(readSummary());
         setPreviewData(null);
-        setStatus({
+        report({
           type: 'ok',
-          msg: `✅ Delta digabung! ${applied.cards} kartu SRS, ${applied.known} hafal. Muat ulang halaman.`,
+          msg: `✅ Delta digabung${from}! ${applied.cards} kartu SRS, ${applied.known} hafal. Muat ulang halaman.`,
         });
         return;
       }
@@ -151,12 +175,12 @@ export default function ExportMode() {
       setSummary(readSummary());
       setPreviewData(null);
       const migratedNote = result?.migrated ? ' ℹ️ Data diperbarui dari format lama.' : '';
-      setStatus({
+      report({
         type: 'ok',
-        msg: `✅ Dipulihkan! ${previewData.incoming.known} hafal, ${previewData.incoming.srsCards} kartu SRS. Muat ulang halaman.${migratedNote}`,
+        msg: `✅ Dipulihkan${from}! ${previewData.incoming.known} hafal, ${previewData.incoming.srsCards} kartu SRS. Muat ulang halaman.${migratedNote}`,
       });
     } catch (e) {
-      setStatus({ type: 'err', msg: `❌ Import gagal (progress lama tetap): ${e.message}` });
+      report({ type: 'err', msg: `❌ Import gagal (progress lama tetap): ${e.message}` });
       setPreviewData(null);
     }
   };
@@ -215,14 +239,16 @@ export default function ExportMode() {
         setGistId(found.id);
       }
       const snapshot = await pullFromGist(gistPat, targetId);
-      const validation = validateSnapshot(snapshot);
+      const delta = isSRSDelta(snapshot);
+      const validation = delta ? validateDelta(snapshot) : validateSnapshot(snapshot);
       if (!validation.ok) throw new Error(`Format tidak valid: ${validation.reason}`);
-      const gistResult = importAllSafe(snapshot);
-      setSummary(readSummary());
-      const gistMigratedNote = gistResult?.migrated ? ' ℹ️ Data diperbarui dari format lama.' : '';
+      // Into the same preview gate a file import goes through, rather than
+      // straight into importAllSafe. See buildPreview.
+      setPreviewData(buildPreview(snapshot, validation.summary, delta, 'gist'));
+      setStatus({ type: 'preview', msg: null });
       setGistStatus({
         type: 'ok',
-        msg: `✅ Progress dipulihkan dari Gist! Muat ulang halaman.${gistMigratedNote}`,
+        msg: '📥 Data Gist siap — periksa pratinjau di atas, lalu konfirmasi.',
       });
     } catch (e) {
       setGistStatus({ type: 'err', msg: `❌ ${e.message}` });
@@ -384,11 +410,12 @@ export default function ExportMode() {
                 lineHeight: 1.5,
               }}
             >
-              ⚠️ <strong>Potensi Konflik:</strong> Data di perangkat ini lebih baru dari file yang
-              diimpor.
+              ⚠️ <strong>Potensi Konflik:</strong> Data di perangkat ini lebih baru dari{' '}
+              {previewData.source === 'gist' ? 'data di Gist' : 'file yang diimpor'}.
               <br />
               <span style={{ color: T.textDim }}>
-                File: {previewData.fileDate?.slice(0, 16).replace('T', ' ')} · Perangkat:{' '}
+                {previewData.source === 'gist' ? 'Gist' : 'File'}:{' '}
+                {previewData.fileDate?.slice(0, 16).replace('T', ' ')} · Perangkat:{' '}
                 {previewData.currentDate?.slice(0, 16).replace('T', ' ')}
               </span>
               <br />
@@ -524,6 +551,32 @@ export default function ExportMode() {
           }}
         >
           {status.msg}
+          {/* The message says "Muat ulang halaman" and used to leave the user to find
+              the browser's own reload — which on a phone, in an installed PWA, may not
+              be visible at all. The contexts hold data read at mount, so until the
+              reload happens every number on screen is the pre-import one: a learner who
+              has just restored a backup sees their old counts and reasonably concludes
+              the restore failed. */}
+          {status.type === 'ok' && /Muat ulang/.test(status.msg ?? '') && (
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              style={{
+                display: 'block',
+                marginTop: 'var(--space-10)',
+                padding: 'var(--space-8) var(--space-14)',
+                borderRadius: T.r.sm,
+                border: `1px solid ${T.correctBorder}`,
+                background: 'transparent',
+                color: T.correct,
+                font: 'inherit',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              🔄 Muat ulang sekarang
+            </button>
+          )}
         </div>
       )}
 

@@ -27,13 +27,38 @@ export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
   const queueRef = useRef([]);
   const nextId = useRef(0);
+  // Mirrors `toasts` so the global Escape handler can read the current stack
+  // without a state updater and without re-subscribing on every change. Synced in
+  // an effect rather than assigned during render: a ref write in the render body
+  // is the same class of impurity as the updater below, and Escape is a user
+  // event, so the commit has always already happened by the time it is read.
+  const toastsRef = useRef(toasts);
+  useEffect(() => {
+    toastsRef.current = toasts;
+  }, [toasts]);
 
   const dismiss = useCallback((id) => {
+    // The dequeue happens here, outside the updater. It used to be a
+    // `queueRef.current.shift()` *inside* the `setToasts` callback, and an updater
+    // has to be pure: React is free to call it twice for one update, at which
+    // point the second call shifts a second toast out of the queue and returns it
+    // in place of the first — so a queued toast is consumed without ever being
+    // shown. React 19 makes no purity promise, and the queue exists precisely
+    // because silently dropping a toast (a milestone landing with a quota error)
+    // was item 16's bug. Re-introducing it through the back door of an impure
+    // updater would be a poor trade.
+    const promoted = queueRef.current.length > 0 ? queueRef.current.shift() : null;
     setToasts((ts) => {
       const remaining = ts.filter((t) => t.id !== id);
-      if (remaining.length < MAX_VISIBLE && queueRef.current.length > 0) {
-        return [...remaining, queueRef.current.shift()];
+      // Nothing was dismissed (a duplicate dismiss for the same id, or an id that
+      // has already gone) so the slot it would have freed does not exist. Put the
+      // promoted toast back rather than showing it over the cap.
+      if (remaining.length === ts.length) {
+        if (promoted) queueRef.current.unshift(promoted);
+        return ts;
       }
+      if (promoted && remaining.length < MAX_VISIBLE) return [...remaining, promoted];
+      if (promoted) queueRef.current.unshift(promoted);
       return remaining;
     });
   }, []);
@@ -64,12 +89,13 @@ export function ToastProvider({ children }) {
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key !== 'Escape' || isTypingTarget(e)) return;
-      setToasts((ts) => {
-        if (ts.length === 0) return ts;
-        const top = ts[ts.length - 1];
-        dismiss(top.id);
-        return ts;
-      });
+      // Reads the frontmost toast from a ref rather than calling `dismiss` from
+      // inside a `setToasts` updater, which is the same impurity dismiss itself
+      // just stopped doing — and worse here, since it dispatched a second state
+      // update from within the first one's updater.
+      const ts = toastsRef.current;
+      if (ts.length === 0) return;
+      dismiss(ts[ts.length - 1].id);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);

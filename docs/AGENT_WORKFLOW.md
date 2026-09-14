@@ -99,7 +99,6 @@ briefly when actually pushing, then strip again right after.
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
 | `docs/UI_UX_PLAN.md`           | **Work queue, not a spec** — prioritised UI/UX items; shrinks as they land, retires to `docs/archive/` when empty |
 | `docs/CARD_SPLIT_AUDIT.md`     | **Frozen finding list, not a spec** — a verdict for every card in the pre-split corpus, including the rule that kept each of the 113 that stayed whole |
-| `docs/RUBY_MISMATCH_AUDIT.md`  | **Frozen finding list, not a spec** — readings not scoped to their own base; retires when the list is empty |
 | `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md` |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
 | `HUSKY-SETUP.md`               | One-time local pre-commit hook setup — not committed, not CI |
@@ -132,7 +131,8 @@ not exist (all removed 2026-09-04 — see CHANGELOG).
 
 | Content | Edit | Generated |
 |---|---|---|
-| Flashcards | `src/data/source/cards-{common,lifeline}.js` | `src/data/cards.js` via `scripts/merge-cards.mjs` (runs in `prebuild`) |
+| Flashcards | `src/data/source/cards-{common,lifeline}.js` | `src/data/cards.js` **and `src/data/card-index.js`** via `scripts/merge-cards.mjs` (runs in `prebuild`) |
+| Card ids + categories | — derived | `src/data/card-index.js`. Ids and categories only, so the modules that need to know *which* cards exist do not download what is *on* them: `cards.js` is 212 kB gzipped and was eagerly imported by seven modules, five of which only wanted `CARDS.length`. `eager-bundle-graph.test.js` fails if `cards.js` returns to the first-paint graph; `verify-content.mjs` PART 5 fails if the index goes stale |
 | Wayground sets | `src/data/wayground-sets.js` | — it IS the source |
 | JAC Mockup sets | `src/data/jac-mockup-sets.js` | — it IS the source |
 | JAC Official | `src/data/sets/jac/jac-{teori,lifeline}.js` | `jac-official.js` is a two-line shim |

@@ -5,8 +5,13 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# `contents: read`, not write. Nothing in this workflow commits: the CACHE_VERSION
+# bump below is a `sed` on the checkout that feeds the build, and what ships is the
+# uploaded artifact. A write grant on the default token is a standing ability to push
+# to this repository, held by every step and every action version they resolve to, for
+# no reason either job needs.
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -14,6 +19,12 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# This job duplicates most of ci.yml, which runs on the same push. Left in place
+# deliberately: chaining them with `workflow_run` is the tidy fix and it changes when
+# and whether the deploy fires at all, which is not a change worth making blind. The
+# cost is ~2 minutes of runner time per merge; the cost of getting the chain wrong is a
+# deploy that silently stops happening. Noted 2026-09-13 (Genspark §6.4) so the next
+# person weighing it has the reasoning rather than only the observation.
 jobs:
   validate:
     runs-on: ubuntu-latest

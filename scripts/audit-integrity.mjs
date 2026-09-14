@@ -25,6 +25,14 @@ const catKeys = new Set(CATEGORIES.map((c) => c.key));
 const sourceKeys = new Set(Object.keys(SOURCE_META));
 
 const ids = new Set();
+// `id_text` is a quiz option, not just a label. `generateQuiz` builds a question
+// from one card's gloss plus three others', and two cards sharing a gloss put the
+// same string in two slots with only one of them keyed correct -- so the learner
+// taps a right answer and is marked wrong, with nothing on screen to explain it.
+// If the collision is with the *correct* card's own gloss it is two correct
+// options, one of them scored against them. All 1,626 are distinct today; this is
+// what keeps that a fact rather than a coincidence.
+const glossToId = new Map();
 for (const [index, c] of CARDS.entries()) {
   const row = index + 1;
 
@@ -33,6 +41,20 @@ for (const [index, c] of CARDS.entries()) {
   }
   if (ids.has(c.id)) issues.push(`Duplicate card id: ${c.id}`);
   ids.add(c.id);
+
+  const gloss = String(c.id_text ?? '')
+    .trim()
+    .toLowerCase();
+  if (gloss) {
+    if (glossToId.has(gloss)) {
+      issues.push(
+        `Duplicate id_text between cards ${glossToId.get(gloss)} and ${c.id}: "${c.id_text}" ` +
+          `— two cards with the same gloss can appear as two options on one quiz question`
+      );
+    } else {
+      glossToId.set(gloss, c.id);
+    }
+  }
 
   for (const key of REQUIRED_STRING_FIELDS) {
     if (!(key in c)) {

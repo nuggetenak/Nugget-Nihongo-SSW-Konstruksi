@@ -60,6 +60,7 @@ row goes into `_MAP.md`'s Agent Session Log, and it is deleted from the live fil
 | `HANDOFF-2026-09-04-07-sessions.md` | Handoff entries | Four CURRENT STATE entries retired together: 7.0.0 (two modes removed, multi-vocabulary card split 1,438 → 1,626), the 6.1.0 governance-docs audit, and the two 6.1.0 `simulasi`/Belajar-tab rounds. Condensed versions: `CHANGELOG.md` [6.1.0] and [7.0.0], `_MAP.md` § Agent Session Log. | 2026-09-09 |
 | `HANDOFF-2026-09-04-audit-and-ui.md` | Handoff entry | The 6.0.0 exhaustive audit and the layout/typography overhaul that followed it, same day. Condensed versions: `CHANGELOG.md` [6.0.0] and [6.1.0], `_MAP.md` § Agent Session Log. | 2026-09-05 |
 | `README-CONTENT-DQ.md` | Branch guide | The `content-dq` working guide. That branch merged 2026-08-18; the split-file layers it tells you to edit were deleted 2026-09-04, and its merge plan was executed in full. See its own header for the drift list. | 2026-09-05 |
+| `RUBY_MISMATCH_AUDIT.md` | Work queue | Furigana readings not scoped to their own base. **List empty**, so it retires per `AGENT_WORKFLOW.md` §3. Worth reading for how it was wrong rather than for the rows: it recorded 144 findings and described them as cosmetic, while the live figure through the real parser was 39 and most of those were compounds split by an inserted kana (`転《ころ》び落《てんらく》` for 転落) — so the *visible Japanese* was wrong and the furigana was the symptom. `ruby-scope.test.js` now holds zero with the legitimately long readings named individually instead of hidden in a budget. | 2026-09-13 |
 
 ---
 
@@ -98,5 +99,6 @@ Current single source of truth: `../../HANDOFF.md` (repo root).
 
 ---
 
-_Last updated: 2026-09-05 — backfilled the six post-merge archivals and `README-CONTENT-DQ.md`;
-corrected the task-file count (18 files, 19 tasks)._
+_Last updated: 2026-09-13 — added `RUBY_MISMATCH_AUDIT.md` (list empty). Previously 2026-09-05:
+backfilled the six post-merge archivals and `README-CONTENT-DQ.md`; corrected the task-file count
+(18 files, 19 tasks)._

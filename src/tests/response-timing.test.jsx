@@ -51,14 +51,38 @@ describe('recordReview — responseMs', () => {
   });
 
   it('does not change the schedule the rating produces', () => {
+    // `localStorage.clear()` as well as the engine reset, so the second call really
+    // is a *first* review of card 101 rather than a second one. Without it the
+    // engine cache is dropped while the stored card survives, and the comparison is
+    // between review 1 and review 2 of the same card. That was invisible while a
+    // card could not leave the learning steps — every review returned interval 0, so
+    // two different reviews compared equal — and became a failure the moment
+    // `learning_steps` started persisting. The assertion was right; its isolation
+    // was not.
     const now = new Date('2026-09-07T10:00:00Z');
     const quick = recordReview(101, 3, now, { responseMs: 800 });
+    localStorage.clear();
     _reset_for_test();
     initStore();
     const slow = recordReview(101, 3, now, { responseMs: 45000 });
     expect(slow.interval).toBe(quick.interval);
     expect(slow.entry.card.due).toEqual(quick.entry.card.due);
     expect(slow.isKnown).toBe(quick.isKnown);
+  });
+
+  it('still produces the same schedule once the card has a history', () => {
+    // The version of the assertion above that the old test was accidentally making,
+    // now made on purpose: a second review is also unaffected by how long it took.
+    const day1 = new Date('2026-09-07T10:00:00Z');
+    recordReview(101, 3, day1, { responseMs: 800 });
+    const quick = recordReview(101, 3, new Date('2026-09-08T10:00:00Z'), { responseMs: 800 });
+    localStorage.clear();
+    _reset_for_test();
+    initStore();
+    recordReview(101, 3, day1, { responseMs: 45000 });
+    const slow = recordReview(101, 3, new Date('2026-09-08T10:00:00Z'), { responseMs: 45000 });
+    expect(slow.interval).toBe(quick.interval);
+    expect(slow.entry.card.due).toEqual(quick.entry.card.due);
   });
 });
 

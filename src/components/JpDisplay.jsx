@@ -26,11 +26,14 @@ import S from './JpDisplay.module.css';
  *
  * The vs / ・ / ： / → branches below split a term into parts and stack them
  * vertically, centred, with a big "VS" between. That is right for a flashcard
- * front, where a comparison IS the card. In a scrollable list it is not: 215 of
- * 1438 cards (15%) contain one of those separators, so in SearchMode,
- * GlossaryMode, SumberMode, CatatanMode and DangerMode's accordion every seventh
- * row silently became a 3–5 line centred block among single-line left-aligned
- * neighbours. 免振 vs 制振 vs 耐震 took five lines in a row sized for one.
+ * front, where a comparison IS the card. In a scrollable list it is not: in
+ * SearchMode, GlossaryMode, SumberMode, CatatanMode and DangerMode's accordion
+ * those rows silently became 3–5 line centred blocks among single-line
+ * left-aligned neighbours. 免振 vs 制振 vs 耐震 took five lines in a row sized for
+ * one. This said "215 of 1438 cards (15%) … every seventh row" when it was
+ * written; 7.0.0's multi-vocabulary split is what a multi-term card became, so the
+ * figure is now 68 of 1,626 (4%). Re-derived 2026-09-13 — the incident stands, the
+ * frequency does not.
  *
  * Exactly the same shape of problem as `maxSize` (2026-08-28): a treatment
  * tuned for a single hero card leaking into dense lists, where the two contexts
@@ -352,6 +355,25 @@ const KATAKANA_RE = /[\u30A1-\u30FA]/;
 // unambiguous.
 const KANJI_RE = /[\u4E00-\u9FAF]/;
 
+// The same question asked the other way round. A marker whose content has no kana
+// in it at all is not a reading either — it is an abbreviation standing in for the
+// term: 安全データシート《SDS/MSDS》, アルミガラス布《ALGC》, 建設キャリアアップシステム
+// 《CCUS》. Nothing in `SDS/MSDS` tells you how anything is pronounced, and rendering
+// it as furigana puts a slash and two acronyms in an <rt> above 布.
+//
+// It is the same authoring convention KANJI_RE already covers (危険予知活動《KY活動》
+// differs from these only in that its gloss happens to contain a kanji), so it gets
+// the same treatment: pass the marker through as literal text, which is how the
+// source wrote it and how it reads on screen.
+//
+// Deliberately "no kana", not "contains latin": `時間《6じかん》` and `100A以上
+// 《100Aいじょう》` are botched *readings* that spelled the digit back out, and those
+// are data to fix, not glosses to pass through. The line between the two classes is
+// whether there is any kana claiming to be a pronunciation at all.
+const KANA_ANYWHERE_RE = /[\u3041-\u309F\u30A1-\u30FA\u30FC]/;
+export const isGlossNotReading = (reading) =>
+  KANJI_RE.test(reading) || !KANA_ANYWHERE_RE.test(reading);
+
 // Katakana and hiragana are the same syllabary in two scripts, so a word and its
 // reading can be compared character for character once both are folded to one.
 const kataToHira = (t) => t.replace(/[ァ-ヶ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
@@ -493,7 +515,7 @@ export function parseRubyFragments(jp = '') {
   while ((m = re.exec(jp)) !== null) {
     const [, kanji, trailing, reading] = m;
     // Gloss, not a reading -- no fragment. Same rule as renderJPWithRuby.
-    if (KANJI_RE.test(reading)) {
+    if (isGlossNotReading(reading)) {
       last = m.index + m[0].length;
       continue;
     }
@@ -564,7 +586,7 @@ export function renderJPWithRuby(text, _legacyFragments) {
     // KANJI_RE. Pass the whole match through as literal text, which is exactly
     // how the source wrote it and how it reads correctly on screen.
     const isGloss =
-      KANJI_RE.test(rawReading) ||
+      isGlossNotReading(rawReading) ||
       (trailing && !trailingIsKatakana && !rawReading.endsWith(trailing));
 
     if (isGloss) {

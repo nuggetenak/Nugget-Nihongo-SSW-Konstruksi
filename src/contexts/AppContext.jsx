@@ -318,6 +318,9 @@ export function AppProvider({ children }) {
   const lastEntryRef = useRef(null);
   const isPopRef = useRef(false);
   const canPopRef = useRef(false); // item 52: true iff it's safe to history.back()
+  // True while an exit-guard confirm is on screen awaiting an answer. See the guard
+  // branch of the popstate handler.
+  const guardPendingRef = useRef(false);
 
   useEffect(() => {
     const enteringModeArea = prevModeRef.current === null && mode !== null;
@@ -328,7 +331,13 @@ export function AppProvider({ children }) {
       return;
     }
 
-    const state = mode ? { tab, mode, modeHistory } : { tab, mode: null };
+    // `modeParams` rides in the entry so a hardware-back into a mode that was
+    // entered with params gets them back. It did not, and the reason it looked
+    // harmless is a caveat this file already states about `goTab`: every current
+    // consumer happens to re-derive. That is a property of the current consumers, not
+    // a guarantee — a back press into a filtered `kartu` deck or a deep-linked
+    // `tentang?section=` silently lost its scope.
+    const state = mode ? { tab, mode, modeHistory, modeParams } : { tab, mode: null };
     const url = mode ? `#/mode/${mode}` : `#/tab/${tab}`;
     // Remembered so a vetoed hardware-back can put the browser back on exactly
     // the entry it just left — see the guard branch in the popstate handler.
@@ -349,9 +358,11 @@ export function AppProvider({ children }) {
       // eslint-disable-next-line react-hooks/immutability
       canPopRef.current = true;
     }
-    // modeHistory intentionally omitted: it never changes without mode also
-    // changing (every setModeHistory call site also calls setMode), so it's
-    // always fresh here via closure without needing to be a dependency.
+    // modeHistory and modeParams intentionally omitted: neither changes without mode
+    // also changing (every setModeHistory / setModeParams call site also calls
+    // setMode), so both are always fresh here via closure without needing to be
+    // dependencies. Adding modeParams as a dep would replaceState on every params
+    // change, which is a different behaviour, not a safer one.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, mode]);
 
@@ -365,6 +376,13 @@ export function AppProvider({ children }) {
       // history surgery, and a "yes" simply re-applies the press the user made.
       const guard = exitGuardRef.current;
       if (guard && lastEntryRef.current) {
+        // One pending guard at a time. Each back press while the confirm sheet is
+        // open used to run this branch again, pushState another copy of the same
+        // entry and re-arm the guard — so someone mashing back builds a stack of
+        // identical entries and then needs one press per copy to get out. Bounded by
+        // user patience, which is not a bound.
+        if (guardPendingRef.current) return;
+        guardPendingRef.current = true;
         const { state: prevState, url: prevUrl } = lastEntryRef.current;
         history.pushState(prevState, '', prevUrl);
         // Undone by us, and no state change is coming, so the [tab, mode]
@@ -372,6 +390,7 @@ export function AppProvider({ children }) {
         isPopRef.current = false;
         canPopRef.current = true; // top of stack is once again an entry we pushed
         Promise.resolve(guard()).then((ok) => {
+          guardPendingRef.current = false;
           if (!ok) return;
           exitGuardRef.current = null;
           history.back(); // re-apply it; this handler runs again, now unguarded
@@ -388,6 +407,11 @@ export function AppProvider({ children }) {
         setTab(state.tab);
         setMode(restored);
         setModeHistory(state.modeHistory ?? []);
+        // Restored, not left alone. Without this the params of whatever mode the user
+        // was in before stayed on the context while a *different* mode rendered — so
+        // the stale gap was not only "params are lost", it was "the wrong params are
+        // applied", which is the worse half.
+        setModeParams(state.modeParams ?? null);
         setPref('lastMode', restored);
       } else {
         // Either a tab-level entry, or popped past everything this app

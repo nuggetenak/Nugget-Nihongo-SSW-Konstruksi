@@ -1,3 +1,41 @@
+# Ruby Mismatch Audit — RETIRED 2026-09-13
+
+> **Archived because the list is empty.** Kept in full because the way this file was
+> wrong is more instructive than the list itself.
+>
+> The live figure, measured through `parseRubyFragments` rather than against this
+> file's rows, was **39** — not the 144 recorded below. Reading those 39 in context
+> showed that most were not "a reading scoped too wide", which is how every version
+> of this document described the residue. They were **compounds split in half with a
+> kana inserted between the halves**: `転《ころ》び落《てんらく》` where the word is 転落,
+> `整《ととの》え理《せいり》` where the word is 整理, `安全管《かん》理《あんぜんかんり》`
+> where the word is 安全管理. The first kanji had been given a standalone dictionary
+> reading (転 as ころ from 転ぶ, 整 as ととの from 整える, 上 as うえ) and the second
+> left carrying the whole compound's reading.
+>
+> So the visible Japanese was wrong, not just the annotation over it: the deck showed
+> `転び落` and `整え理`, which are not words. This file called the residue
+> "cosmetic-accuracy debt" and said the rows were "real, scoped, non-urgent" work —
+> and that framing is why they sat for five weeks. `audit-data-text` passed on them
+> because the markers were well-formed; `ruby-scope.test.js` carried them behind a
+> budget of 42 because a count cannot distinguish a broken word from `雷《かみなり》`,
+> which is genuinely four kana over one kanji.
+>
+> All of it is fixed (`scripts/archive/fix-ruby-split-compounds.mjs`, and
+> `fix-ruby-non-kana.mjs` for the sibling class in the question banks).
+> `ruby-scope.test.js` now holds **zero**, with the handful of legitimately long
+> single-kanji readings named individually in `LONG_BUT_CORRECT` instead of hidden
+> inside a number — that swap is the durable part of this change.
+>
+> One more thing this file got wrong, recorded because it is the same mistake in a
+> different place: a *first* attempt at the question-bank half of this work used a
+> hand-rolled "kanji run immediately before the marker" heuristic and reported 201
+> offending strings. It was ~95% false positives, because it did not model
+> `extendBaseLeft`. Do not measure this corpus with anything but the parser the app
+> actually renders with.
+
+---
+
 # Ruby Mismatch Audit
 
 > **Status re-measured 2026-09-07, against the parser rather than the list. 42 fragments

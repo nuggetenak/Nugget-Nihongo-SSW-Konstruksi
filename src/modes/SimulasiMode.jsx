@@ -5,6 +5,7 @@
 // Note: red gradient buttons (exam theme) — justified inline (not amber).
 // Note: pause overlay bg — justified inline (full-screen dim).
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useFocusTrap } from '../hooks/useFocusTrap.js';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { isTypingTarget } from '../utils/keyboard.js';
@@ -503,6 +504,10 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   // tab, and is the one number a resumed exam needs to restore.
   const deadlineRef = useRef(0);
   const frozenLeftRef = useRef(0); // seconds remaining, while paused
+  // The pause overlay's container, so focus can be trapped inside it while the exam
+  // sits behind the dim. See the overlay's own comment.
+  const pauseRef = useRef(null);
+  useFocusTrap(pauseRef, paused);
   const finishRef = useRef(null);
 
   const activePresets = mode === 'jac' ? JAC_PRESETS : POOL_PRESETS;
@@ -1477,7 +1482,17 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           point rather than making Keluar and Jeda two disconnected buttons
           with no relationship to each other. */}
       {paused && (
+        // A real dialog, not a dim rectangle. This was a bare `position: fixed`
+        // overlay with no role, no aria-modal and no focus trap: a keyboard or
+        // screen-reader user could Tab straight through the dim into the exam behind
+        // it and answer questions they could not see, and "Dijeda" was never
+        // announced, so nothing told them the clock had stopped. `useFocusTrap`
+        // already existed for `Sheet` and needed no new machinery.
         <div
+          ref={pauseRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="simulasi-paused-title"
           style={{
             position: 'fixed',
             inset: 0,
@@ -1491,7 +1506,10 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           }}
         >
           <div style={{ fontSize: '3rem' }}>⏸</div>
-          <div style={{ color: '#fff', fontSize: 'var(--fs-jp-back)', fontWeight: 700 }}>
+          <div
+            id="simulasi-paused-title"
+            style={{ color: '#fff', fontSize: 'var(--fs-jp-back)', fontWeight: 700 }}
+          >
             Dijeda
           </div>
           <div

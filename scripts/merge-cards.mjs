@@ -11,6 +11,7 @@ import path from 'path';
 const ROOT = process.cwd();
 const SOURCE = path.join(ROOT, 'src', 'data', 'source');
 const OUTPUT = path.join(ROOT, 'src', 'data', 'cards.js');
+const INDEX_OUTPUT = path.join(ROOT, 'src', 'data', 'card-index.js');
 
 const SOURCES = [
   { file: 'cards-common.js', name: 'CARDS_COMMON' }, // common + vocab merged
@@ -74,3 +75,54 @@ writeFileSync(
 );
 
 console.log(`\n✅ Merged ${outputCards.length} cards → src/data/cards.js`);
+
+// ── The index ───────────────────────────────────────────────────────────────
+// `cards.js` is 758 kB minified / 212 kB gzipped, and it was on the critical path
+// of every first page view: seven modules imported it eagerly and five of those
+// wanted nothing from it but `CARDS.length` or a list of ids. Splitting it into its
+// own chunk (vite.config.js) improves caching and does nothing for load timing —
+// the entry graph still has to fetch and parse it before first paint, on the cheap
+// Android and mobile data this app is for.
+//
+// So the cheap facts get their own file. Ids and categories are what the SRS layer,
+// the daily mission and the track filter actually need; card *content* belongs to
+// whichever mode is about to render it, and modes are lazy already. Generated rather
+// than hand-kept for the same reason `cards.js` is: `verify-content.mjs` compares
+// both against `source/`, so a stale index fails a gate instead of shipping.
+const indexHeader = [
+  `// src/data/card-index.js — AUTO-GENERATED. Do not edit directly.`,
+  `// Edit files in src/data/source/ instead, then run: node scripts/merge-cards.mjs`,
+  `//`,
+  `// Ids and categories only, so that the things which need to know *which* cards`,
+  `// exist do not have to download what is *on* them. cards.js is ~212 kB gzipped and`,
+  `// was eagerly imported by seven modules, five of which only wanted a count. See`,
+  `// src/tests/eager-bundle-graph.test.js, which fails if cards.js returns to the`,
+  `// first-paint import graph.`,
+  `// Total cards: ${outputCards.length}`,
+  ``,
+].join('\n');
+
+const indexBody = [
+  `/** Every card id, in corpus order. */`,
+  `export const CARD_IDS = [${outputCards.map((c) => c.id).join(', ')}];`,
+  ``,
+  `/** Card id → category key. */`,
+  `export const CARD_CATEGORY = Object.freeze({`,
+  ...outputCards.map((c) => `  ${c.id}: ${JSON.stringify(c.category)},`),
+  `});`,
+  ``,
+  `/** Ids whose category is one of catKeys — the track filter, without the corpus.`,
+  ` *`,
+  ` *  Written as an arrow assigned to a const, not a function declaration:`,
+  ` *  scripts/verify-content.mjs parses every file under src/data/ by rewriting`,
+  ` *  "export const " to CommonJS, so an "export function" here fails that audit.`,
+  ` *  The rule is docs/AGENT_WORKFLOW.md §4a. */`,
+  `export const cardIdsForCategories = (catKeys) => {`,
+  `  const wanted = catKeys instanceof Set ? catKeys : new Set(catKeys);`,
+  `  return CARD_IDS.filter((id) => wanted.has(CARD_CATEGORY[id]));`,
+  `};`,
+  ``,
+].join('\n');
+
+writeFileSync(INDEX_OUTPUT, indexHeader + indexBody, 'utf8');
+console.log(`✅ Wrote id/category index for ${outputCards.length} cards → src/data/card-index.js`);

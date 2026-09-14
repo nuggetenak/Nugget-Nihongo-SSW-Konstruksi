@@ -4,7 +4,7 @@
 
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import s from './SayaTab.module.css';
-import { CARDS } from '../data/cards.js';
+import { TOTAL_CARDS } from '../utils/constants.js';
 import { exportAll, importAllSafe, resetAll, get as storageGet } from '../storage/engine.js';
 import { loadToken } from '../utils/gist-sync.js';
 import { markBackedUp, describeBackup } from '../utils/backup-state.js';
@@ -81,7 +81,7 @@ export default function SayaTab() {
   const { known, unknown, streakData, sessions, jacScores } = useProgress();
   const srs = useSRSContext();
 
-  const total = CARDS.length;
+  const total = TOTAL_CARDS;
   const knownN = known.size;
   const streak = streakData?.days ?? 0;
 

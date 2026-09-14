@@ -2,7 +2,7 @@
 // Root. 3-tab layout: Beranda / Belajar / Saya.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useApp } from './contexts/AppContext.jsx';
 import { useProgress } from './contexts/ProgressContext.jsx';
 import { useSRSContext } from './contexts/SRSContext.jsx';
@@ -13,8 +13,20 @@ import AppShell from './components/AppShell.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import BelajarTab from './components/BelajarTab.jsx';
 import SayaTab from './components/SayaTab.jsx';
-import ModeRouter from './router/ModeRouter.jsx';
+import Skeleton from './components/Skeleton.jsx';
 import { MODE_META } from './router/modes.js';
+
+// Lazy, and not for its own weight. `ModeRouter` statically imports `cards.js` to
+// build `filteredCards` and to hand `allCards` to the modes that need it, so a static
+// import here put the whole 758 kB / 212 kB-gzipped corpus in the entry graph —
+// fetched and parsed before first paint, on every first page view, for a tree that
+// only renders once the learner has opened a mode. Every mode inside it is already
+// lazy for exactly this reason; the router itself was the hole in that.
+//
+// The boundary is honest about what it is waiting for: opening a mode already shows a
+// skeleton while the mode's own chunk loads, so this adds no new kind of wait, only
+// the same one slightly earlier in the chain.
+const ModeRouter = lazy(() => import('./router/ModeRouter.jsx'));
 
 // ── Main ──────────────────────────────────────────────────────────────────
 export default function App() {
@@ -116,20 +128,49 @@ export default function App() {
               the whole modeProps map) ran outside any boundary, so a throw
               there unmounted the tree to a blank page mid-study. */}
           <ErrorBoundary fallback={<TabError tab="Mode belajar" />}>
-            <ModeRouter />
+            <Suspense
+              fallback={
+                <div role="status" aria-label="Memuat mode...">
+                  <Skeleton
+                    width="100%"
+                    height={4}
+                    radius={99}
+                    style={{ marginBottom: 'var(--space-24)' }}
+                  />
+                  <Skeleton.Card />
+                </div>
+              }
+            >
+              <ModeRouter />
+            </Suspense>
           </ErrorBoundary>
         </AppShell>
       </main>
     );
 
   // First-run: interactive onboarding handles Welcome + Track + Demo + Goal.
-  if (!onboarded) return <Onboarding onComplete={completeOnboarding} />;
+  //
+  // Inside `<main id="main-content">` like every other branch, because
+  // `index.html`'s skip link points at that id and this was the one screen where the
+  // target did not exist — so the very first keyboard user to press Tab on the very
+  // first screen got a link that went nowhere.
+  if (!onboarded)
+    return (
+      <main id="main-content" tabIndex={-1}>
+        <Onboarding onComplete={completeOnboarding} />
+      </main>
+    );
 
   // Edge case: onboarded but track cleared (e.g. user reset track from Saya).
   // startStep='goal' -- track itself has no picker step (single-track scope,
   // see Onboarding.jsx), so replaying Welcome + the flashcard Demo for what
   // is really a one-field settings confirmation was the actual bug (item 24).
-  if (!track) return <Onboarding onComplete={completeOnboarding} startStep="goal" />;
+  if (!track)
+    return (
+      <main id="main-content" tabIndex={-1}>
+        <Onboarding onComplete={completeOnboarding} startStep="goal" />
+      </main>
+    );
 
   const belajarBadges = { ulasan: srs.dueCount };
 

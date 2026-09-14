@@ -5,11 +5,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { get, set as storageSet } from '../storage/engine.js';
 import { getDueCardIds } from '../srs/fsrs-scheduler.js';
-import { CARDS } from '../data/cards.js';
+import { CARD_IDS } from '../data/card-index.js';
 import { todayStr } from './date.js';
 import { MODE_META } from '../router/modes.js';
 
-const LIVE_CARD_IDS = CARDS.map((c) => c.id);
+const LIVE_CARD_IDS = CARD_IDS;
 
 // Four Strands mapping (Nation 2007) — strand derives from MODE_META.
 //

@@ -40,8 +40,25 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const [done, setDone] = useState(false);
   const [intervals, setIntervals] = useState({});
   const [sessionCorrect, setSessionCorrect] = useState(0);
+  // How many cards were actually rated, as distinct from how many were in the
+  // queue. `total` used to be `queue.length`, which counts the ones the user
+  // skipped — so skipping five of twenty and getting the other fifteen right
+  // reported 15/20 (75%) for a session in which nothing was answered wrongly.
+  // recordSession feeds the heatmap and the readiness score, so the understatement
+  // did not stay on the summary screen.
+  const [sessionRated, setSessionRated] = useState(0);
   // Rating distribution tracking.
   const [ratingDist, setRatingDist] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
+  // One rating per exposure. `handleRate` guarded on `flipped` alone, and during
+  // the 600 ms window before the card advances `flipped` is still true and
+  // `currentId` has not moved — so a double tap, "1" then "3" on the keyboard, or
+  // a swipe landing after a button press each ran `srs.review()` a second time on
+  // the same card. That is two full FSRS schedules for one exposure: stability and
+  // difficulty computed twice, `reps` incremented twice, two history entries. It
+  // corrupts the memory model the entire app is built on, quietly, and the more
+  // eager the user is the worse it gets.
+  const ratingCardRef = useRef(null);
+  const advanceTimerRef = useRef(null);
   const { getDurationMs } = useSessionTimer();
 
   useEffect(() => {
@@ -60,7 +77,14 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     setIntervals(srs.previewFor(currentId));
     setFlipped(false);
     seenAtRef.current = null; // item 58: a new card, a new clock
+    ratingCardRef.current = null; // a new card may be rated again
   }, [currentId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // The advance timer outlives the screen otherwise. Leaving the mode inside the
+  // 600 ms window and re-entering it — a back press and a tap, which is quick —
+  // let the old timer fire into the new session and advance it past its first
+  // card.
+  useEffect(() => () => clearTimeout(advanceTimerRef.current), []);
 
   // Item 58: stamped here rather than at each `setFlipped(true)` — there are
   // four of them (tap, keyboard, the audio path, the button), and a fifth added
@@ -78,7 +102,10 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
     // disagree with that, logging a 0/0 session just from opening the tab
     // with nothing due -- a very common state, not an edge case.
     if (queue.length === 0) return;
-    onSessionEnd?.({ correct: sessionCorrect, total: queue.length, durationMs: getDurationMs() });
+    // Rated, not queued — see sessionRated. A session where everything was
+    // skipped records nothing rather than recording 0/N.
+    if (sessionRated === 0) return;
+    onSessionEnd?.({ correct: sessionCorrect, total: sessionRated, durationMs: getDurationMs() });
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-speak on card advance — HVPT: passive exposure more effective than manual tap.
@@ -110,22 +137,30 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   // Skip card without rating — advance to next without SRS review.
   const handleSkip = useCallback(() => {
     if (!queue) return;
+    // A card already rated is on its way to the next one; skipping it now would
+    // advance twice and step over a card without ever showing it.
+    if (ratingCardRef.current === currentId) return;
     const nextIdx = idx + 1;
     if (nextIdx >= queue.length) setDone(true);
     else {
       setIdx(nextIdx);
       setFlipped(false);
     }
-  }, [idx, queue]);
+  }, [idx, queue, currentId]);
 
   const handleRate = useCallback(
     (rating) => {
       if (!flipped || currentId == null) return;
+      // Already rated this card and waiting to advance. See ratingCardRef.
+      if (ratingCardRef.current === currentId) return;
+      ratingCardRef.current = currentId;
       const responseMs = seenAtRef.current ? Date.now() - seenAtRef.current : null;
       const result = srs.review(currentId, rating, { responseMs });
       setRatingDist((d) => ({ ...d, [rating]: d[rating] + 1 }));
+      setSessionRated((n) => n + 1);
       if (result.isKnown) setSessionCorrect((n) => n + 1);
-      setTimeout(() => {
+      clearTimeout(advanceTimerRef.current);
+      advanceTimerRef.current = setTimeout(() => {
         const nextIdx = idx + 1;
         if (nextIdx >= queue.length) setDone(true);
         else setIdx(nextIdx);
@@ -166,10 +201,12 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
 
   // ─── DONE ──────────────────────────────────────────────────────────────────
   if (done) {
-    const total = queue.length;
+    // The percentage is over cards actually rated; the queue length is what
+    // decides whether there was anything to review at all.
+    const total = sessionRated;
     const pct = total > 0 ? Math.round((sessionCorrect / total) * 100) : 100;
 
-    if (total === 0) {
+    if (queue.length === 0) {
       return (
         <div className={S.page} style={{ paddingTop: 0 }}>
           <EmptyState.NoReviews onCta={onGoKartu} />
@@ -181,10 +218,12 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
       <div className={R.doneScreen}>
         {/* Hero card */}
         <div className={R.doneHero}>
-          <div className={R.doneEmoji}>{pct >= 70 ? '🏆' : '📚'}</div>
+          <div className={R.doneEmoji}>{total > 0 && pct >= 70 ? '🏆' : '📚'}</div>
           <h2 className={`${S.pageTitle} ${R.doneTitle}`}>Sesi selesai!</h2>
           <div className={R.doneSub}>
-            {sessionCorrect} dari {total} kartu dijawab dengan benar ({pct}%)
+            {total === 0
+              ? `${queue.length} kartu dilewati, tidak ada yang dinilai`
+              : `${sessionCorrect} dari ${total} kartu dijawab dengan benar (${pct}%)`}
           </div>
         </div>
 

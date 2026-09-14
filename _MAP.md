@@ -66,7 +66,6 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── COMPONENT_SPEC.md           ← CSS Modules conventions, shared primitives
 │   ├── PWA_RELEASE_SPEC.md         ← offline architecture, CACHE_VERSION, deploy checklist
 │   ├── UI_UX_PLAN.md               ← WORK QUEUE (not a spec): open items live in §12–§14
-│   ├── RUBY_MISMATCH_AUDIT.md      ← frozen finding list: readings not scoped to their own base
 │   ├── ASSET-PROMPTS.md            ← generation prompts for icon/badge/illustration art
 │   └── archive/                    ← superseded docs; see ARCHIVE-INDEX.md
 ├── scripts/
@@ -85,7 +84,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   └── unwired-app-code/           ← 2 files kept per owner decision (see that README)
 └── src/
     ├── App.jsx / main.jsx          ← main.jsx applies the text scale pre-paint
-    ├── types.js                    ← JSDoc typedefs (Card, SRSState, Tab, ToastItem)
+    ├── types.js                    ← JSDoc typedefs (Card, SerializedFSRSCard, SRSEntry, Question, Tab, ToastItem) — checked by types-match-data.test.js
     ├── contexts/                   ← AppContext, ProgressContext, SRSContext (all useMemo)
     ├── data/                       ← ONE source per kind of content — see AGENT_WORKFLOW §4a
     │   ├── source/                 ← cards-common.js (877), cards-lifeline.js (561) — EDIT HERE
@@ -197,7 +196,7 @@ the next reads. `src/tests/storage.migration-chain.test.js` walks every entry po
 
 | File                                                        | Purpose                                                           |
 | ----------------------------------------------------------- | ----------------------------------------------------------------- |
-| `src/types.js`                                              | JSDoc typedefs (Card, SRSState, Tab, ToastItem)                   |
+| `src/types.js`                                              | JSDoc typedefs (Card, SerializedFSRSCard, SRSEntry, Question, Tab, ToastItem). Re-derived 2026-09-13 after drifting to a string card id, a `furi` field no card has, and a pre-FSRS `SRSState`; `src/tests/types-match-data.test.js` now holds those three claims against the real data |
 | `src/utils/haptic.js`                                       | Vibration API: tap/correct/wrong/success/flip                     |
 | `src/utils/achievements.js`                                 | 14 achievement badges                                             |
 | `src/utils/daily-challenge.js`                              | Date-seeded daily challenge from JAC+QUIZ_SETS pool               |
