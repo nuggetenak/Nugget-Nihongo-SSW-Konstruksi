@@ -517,7 +517,7 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
           borderRadius: 14,
           padding: 'var(--space-16) var(--space-14)',
           marginBottom: 'var(--space-16)',
-          animation: 'scaleIn 0.2s var(--ease-smooth)',
+          animation: 'scaleIn var(--t-base) var(--ease-smooth)',
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -623,7 +623,7 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
           style={{
             background: `rgba(245,158,11,0.06)`,
             border: `1px solid rgba(245,158,11,0.22)`,
-            animation: 'slideUp 0.2s var(--ease-smooth)',
+            animation: 'slideUp var(--t-base) var(--ease-smooth)',
           }}
         >
           <div style={{ marginBottom: 'var(--space-8)' }}>

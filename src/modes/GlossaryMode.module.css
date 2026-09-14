@@ -173,7 +173,7 @@
   margin-top: var(--space-8);
   padding-top: var(--space-8);
   border-top: 1px solid var(--ssw-border);
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn var(--t-fast) var(--ease-smooth);
 }
 
 .termFuriRow {

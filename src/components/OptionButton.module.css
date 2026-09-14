@@ -12,10 +12,10 @@
   gap: var(--space-10);
   align-items: flex-start;
   transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease;
+    background var(--t-fast) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth),
+    transform var(--t-fast) var(--ease-smooth),
+    box-shadow var(--t-base) var(--ease-smooth);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -44,14 +44,14 @@
 .btn[data-state='correct'] {
   background: var(--ssw-correctBg);
   border-color: var(--ssw-correctBorder);
-  animation: correctFlash 0.5s ease;
+  animation: correctFlash var(--t-slow) var(--ease-smooth);
   box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
 }
 
 .btn[data-state='wrong'] {
   background: var(--ssw-wrongBg);
   border-color: var(--ssw-wrongBorder);
-  animation: wrongShake 0.45s ease;
+  animation: wrongShake var(--t-slow) var(--ease-smooth);
 }
 
 .btn[data-state='dim'] {
@@ -68,7 +68,7 @@
   width: 3px;
   background: var(--ssw-correct);
   border-radius: 3px 0 0 3px;
-  animation: slideDown 0.2s ease both;
+  animation: slideDown var(--t-base) var(--ease-smooth) both;
 }
 
 /* Wrong: red left bar */
@@ -81,7 +81,7 @@
   width: 3px;
   background: var(--ssw-wrong);
   border-radius: 3px 0 0 3px;
-  animation: slideDown 0.2s ease both;
+  animation: slideDown var(--t-base) var(--ease-smooth) both;
 }
 
 /* Shine on correct */
@@ -106,10 +106,10 @@
   font-weight: 800;
   margin-top: 1px;
   transition:
-    background 0.22s,
-    color 0.22s,
-    border-color 0.22s,
-    transform 0.22s;
+    background var(--t-base),
+    color var(--t-base),
+    border-color var(--t-base),
+    transform var(--t-base);
 
   /* default */
   background: rgba(245, 158, 11, 0.06);
@@ -122,7 +122,7 @@
   border-color: var(--ssw-correctBorder);
   color: var(--ssw-correct);
   transform: scale(1.15);
-  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: popIn var(--t-enter) var(--ease-spring) both;
 }
 
 .badge[data-state='wrong'] {

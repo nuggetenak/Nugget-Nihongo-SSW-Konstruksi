@@ -71,7 +71,7 @@
   border: 1px solid rgba(220, 38, 38, 0.25);
   border-top: none;
   border-radius: 0 0 var(--r-md) var(--r-md);
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn var(--t-fast) var(--ease-smooth);
 }
 
 .correctLabel {
@@ -179,7 +179,7 @@
 /* Explanation card */
 .explanationCard {
   margin-top: var(--space-14);
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
 }
 
 .explanationHeader {
@@ -213,7 +213,7 @@
 
 .nextBtn {
   margin-top: var(--space-12);
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn var(--t-fast) var(--ease-smooth);
   font-size: var(--fs-body);
   padding: var(--space-14);
 }
@@ -221,7 +221,7 @@
 /* ── ResultScreen ── */
 .resultPage {
   padding: var(--space-20) var(--space-16);
-  animation: scaleIn 0.3s ease;
+  animation: scaleIn var(--t-enter) var(--ease-smooth);
 }
 
 .resultCard {

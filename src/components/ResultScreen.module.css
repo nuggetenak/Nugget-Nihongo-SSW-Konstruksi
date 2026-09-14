@@ -2,7 +2,7 @@
 
 .container {
   padding-block: var(--space-20) var(--space-40);
-  animation: scaleIn 0.3s ease;
+  animation: scaleIn var(--t-enter) var(--ease-smooth);
 }
 
 /* ── Grade hero ── */
@@ -77,13 +77,13 @@
   z-index: 1;
 }
 .heroEmoji[data-path='celebrate'] {
-  animation: bounceIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: bounceIn var(--t-slow) var(--ease-spring);
 }
 .heroEmoji[data-path='encourage'] {
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn var(--t-slow) var(--ease-smooth);
 }
 .heroEmoji[data-path='neutral'] {
-  animation: popIn 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  animation: popIn var(--t-slow) var(--ease-spring);
 }
 
 .heroPct {
@@ -98,7 +98,7 @@
   z-index: 1;
 }
 .heroPct[data-shake='true'] {
-  animation: rsShake 0.45s ease 0.3s both;
+  animation: rsShake var(--t-slow) var(--ease-smooth) var(--t-enter) both;
 }
 
 .heroLabel {
@@ -134,17 +134,17 @@
   position: absolute;
   font-size: var(--fs-micro);
   color: rgba(22, 163, 74, 0.25);
-  animation: staggerIn 0.6s ease both;
+  animation: staggerIn var(--t-slow) var(--ease-smooth) both;
 }
 .stars::before {
   top: 12px;
   left: 16px;
-  animation-delay: 0.1s;
+  animation-delay: var(--t-instant);
 }
 .stars::after {
   bottom: 12px;
   right: 16px;
-  animation-delay: 0.2s;
+  animation-delay: var(--t-base);
 }
 
 /* ── Weakness tip ── */
@@ -209,8 +209,8 @@
   color: var(--ssw-wrong);
   cursor: pointer;
   transition:
-    transform 0.15s,
-    background 0.15s;
+    transform var(--t-fast),
+    background var(--t-fast);
 }
 .btnWrong:active {
   transform: scale(0.97);
@@ -267,6 +267,16 @@
   border: 1px solid var(--ssw-border);
   border-left: 3px solid var(--ssw-wrong);
   transition: background var(--t-fast);
+  /* The review rows arrive one after another rather than as a block. The index
+     comes in as --stagger-i from the component, so the delay is a CSS value the
+     reduced-motion block can zero -- which it could not do when this was a
+     computed `${i * 0.05}s` in an inline style, leaving a reader who asked for
+     less motion with the full wait and none of the movement.
+
+     Capped at 8 rows: a wrong-answer list can be forty long, and an
+     uncapped stagger would make the last row wait two seconds to appear. */
+  animation: slideUp var(--t-enter) var(--ease-smooth) both;
+  animation-delay: calc(min(var(--stagger-i, 0), 8) * 50ms * var(--t-mult));
 }
 
 .reviewQ {

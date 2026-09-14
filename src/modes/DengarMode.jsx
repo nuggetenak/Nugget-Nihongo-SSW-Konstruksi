@@ -267,7 +267,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                   border: `2px solid ${countPref === n ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
                   background: countPref === n ? 'rgba(245,158,11,0.12)' : 'var(--ssw-surface)',
                   color: countPref === n ? 'var(--ssw-amber)' : 'var(--ssw-textMuted)',
-                  transition: 'all 0.15s',
+                  transition: 'all var(--t-fast)',
                 }}
               >
                 {n === QUIZ_COUNT_ALL ? 'Semua' : n}
@@ -475,7 +475,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             alignItems: 'center',
             justifyContent: 'center',
             boxShadow: isAnswered ? 'none' : '0 4px 16px rgba(245,158,11,0.35)',
-            transition: 'all 0.2s',
+            transition: 'all var(--t-base)',
           }}
         >
           🔊
@@ -487,7 +487,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             fontSize: 'var(--fs-body)',
             color: 'var(--ssw-textMuted)',
             opacity: isAnswered ? 0 : 1,
-            transition: 'opacity 0.2s',
+            transition: 'opacity var(--t-base)',
           }}
         >
           Tekan untuk mendengar kata Jepang
@@ -536,7 +536,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                 fontFamily: 'inherit',
                 fontSize: 'var(--fs-subtitle)',
                 cursor: isAnswered ? 'default' : 'pointer',
-                transition: 'all 0.15s',
+                transition: 'all var(--t-fast)',
                 fontWeight: 500,
                 animation: anim,
               }}

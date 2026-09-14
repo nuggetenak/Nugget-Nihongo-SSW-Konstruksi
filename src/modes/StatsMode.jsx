@@ -162,7 +162,8 @@ export default function StatsMode({
                 strokeDasharray={2 * Math.PI * 60}
                 strokeDashoffset={2 * Math.PI * 60 * (1 - readiness / 100)}
                 style={{
-                  transition: 'stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1), stroke 0.5s',
+                  transition:
+                    'stroke-dashoffset var(--t-count) var(--ease-smooth), stroke var(--t-slow)',
                 }}
               />
             </svg>
@@ -327,7 +328,7 @@ export default function StatsMode({
                       background: count === 0 ? T.surface : color,
                       border: `1px solid ${count === 0 ? T.border : color}`,
                       opacity: count === 0 ? 0.4 : 1,
-                      transition: 'height 0.3s ease',
+                      transition: 'height var(--t-enter) var(--ease-smooth)',
                     }}
                     title={topLabel ? `${d}: ${count} sesi · ${topLabel}` : `${d}: belum ada sesi`}
                   />

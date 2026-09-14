@@ -157,10 +157,15 @@ export default function FlipCard({
           {showHint && (
             <div
               className={S.flipHint}
-              style={{
-                bottom: 10,
-                animation: hintCount === 2 ? 'fcHintFade 2s ease forwards' : 'none',
-              }}
+              // data attribute rather than an inline animation, for the reason
+              // MissionCompleteOverlay's stylesheet spells out: fcHintFade ends
+              // at opacity 0 and runs `forwards`, so the reduced-motion
+              // catch-all's duration-zeroing does not disable it -- it jumps
+              // straight to the end. Inline, no rule could reach it, so the
+              // "tap to flip" hint was invisible to reduced-motion users on the
+              // one card where the app bothers to explain its main gesture.
+              data-fade={hintCount === 2 ? 'true' : undefined}
+              style={{ bottom: 10 }}
             >
               👆 Tap untuk balik
             </div>

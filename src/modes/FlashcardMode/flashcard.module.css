@@ -76,7 +76,7 @@
 
 /* ── RatingRow subcomponent ────────────────────────────────────────────────── */
 .ratingWrap {
-  animation: slideUp 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+  animation: slideUp var(--t-enter) var(--ease-spring);
 }
 
 .ratingLabel {
@@ -168,7 +168,7 @@
   padding: var(--space-16) 0;
   font-size: var(--fs-body);
   font-weight: 600;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
   color: var(--ssw-textDim);
 }
 

@@ -1101,7 +1101,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                   ? 'linear-gradient(90deg,rgba(22,163,74,0.5),var(--ssw-correct))'
                   : 'linear-gradient(90deg,rgba(220,38,38,0.5),var(--ssw-wrong))',
                 borderRadius: 99,
-                transition: 'width 0.8s ease',
+                transition: 'width var(--t-count) var(--ease-smooth)',
               }}
             />
           </div>
@@ -1182,7 +1182,10 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                   <div
                     key={i}
                     className={SM.reviewItem}
-                    style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
+                    // Index only; duration, easing and delay live in the
+                    // stylesheet so the reduced-motion block can zero the delay
+                    // (a computed inline one is out of its reach).
+                    style={{ '--stagger-i': i }}
                   >
                     <div
                       style={{

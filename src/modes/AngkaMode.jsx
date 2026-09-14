@@ -501,7 +501,7 @@ function QuizView({ onBack, onSessionEnd, onRetryWrong, limit }) {
                 fontSize: 'var(--fs-caption)',
                 fontWeight: 700,
                 fontVariantNumeric: 'tabular-nums',
-                transition: 'all 0.15s',
+                transition: 'all var(--t-fast)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',

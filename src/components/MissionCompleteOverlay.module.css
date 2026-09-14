@@ -12,6 +12,9 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.65);
   cursor: pointer;
+  /* 3s is a DWELL time, not a transition, and it is paired with the 3000ms
+     dismiss timer in the component -- the two have to agree, so neither gets
+     to drift with --t-mult. */
   animation: missionFadeOut 3s ease forwards;
 }
 

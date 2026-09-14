@@ -59,12 +59,12 @@
 
 .pageScroll {
   padding-block: var(--space-12) var(--space-24);
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
 }
 
 .pageFade {
   padding-block: var(--space-24);
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }
 
 .pageCenter {
@@ -95,7 +95,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-4);
-  transition: color 0.15s;
+  transition: color var(--t-fast);
   letter-spacing: 0.2px;
 }
 .btnBack:active {
@@ -197,8 +197,8 @@
   box-shadow: var(--shadow-amber), var(--ssw-shadowGlow);
   letter-spacing: -0.1px;
   transition:
-    transform 0.15s,
-    box-shadow 0.15s;
+    transform var(--t-fast),
+    box-shadow var(--t-fast);
   position: relative;
   overflow: hidden;
 }
@@ -224,7 +224,7 @@
   cursor: pointer;
   font-size: var(--fs-body);
   font-weight: 600;
-  transition: background 0.15s;
+  transition: background var(--t-fast);
 }
 .btnSecondary:active {
   background: var(--ssw-surfaceActive);
@@ -243,8 +243,8 @@
   font-size: var(--fs-body);
   font-weight: 500;
   transition:
-    background 0.15s,
-    transform 0.12s;
+    background var(--t-fast),
+    transform var(--t-instant);
 }
 .btnItem:active {
   background: var(--ssw-surfaceActive);
@@ -268,7 +268,7 @@
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: var(--fs-body);
   box-sizing: border-box;
-  transition: border-color 0.15s;
+  transition: border-color var(--t-fast);
 }
 .searchInput:focus {
   border-color: var(--ssw-borderActive);
@@ -285,7 +285,7 @@
 .miniBarFill {
   height: 100%;
   border-radius: var(--r-pill);
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width var(--t-slow) var(--ease-smooth);
   /* width & background set inline */
 }
 
@@ -311,7 +311,7 @@
   /* Width and bottom safe-space belong to AppShell; the 100px bottom padding
      here dated from when a fixed nav floated over every mode screen. */
   padding: var(--space-12) 0 var(--space-16);
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
   /* Opt in to the height AppShell already reserves (see .content in
      AppShell.module.css). Without this the whole stack — progress row, card,
      tool strip, nav row — packs against the top and leaves 284px empty below

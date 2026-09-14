@@ -134,7 +134,14 @@ export default function ResultScreen({
               <div
                 key={i}
                 className={s.reviewItem}
-                style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
+                // The per-row stagger index, not the animation itself: the
+                // duration and easing belong to the stylesheet (motion scale),
+                // and a delay expressed as a custom property is reachable by the
+                // reduced-motion block, which zeroes delays. A computed
+                // `${i * 0.05}s` inline was not -- so a reader who asked for
+                // less motion still waited out the full stagger and then had
+                // every row appear at once.
+                style={{ '--stagger-i': i }}
               >
                 <div className={s.reviewQ}>
                   <JpFront

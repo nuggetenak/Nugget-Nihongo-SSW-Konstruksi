@@ -29,7 +29,7 @@
     0 8px 32px rgba(0, 0, 0, 0.22),
     0 2px 8px rgba(0, 0, 0, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  animation: toastIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: toastIn var(--t-enter) var(--ease-spring);
   pointer-events: auto;
   border: 1px solid rgba(255, 255, 255, 0.08);
   min-height: 48px;

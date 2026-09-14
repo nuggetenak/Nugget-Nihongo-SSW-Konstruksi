@@ -293,7 +293,7 @@ export default function CatatanMode({ cards }) {
               border: `2px solid ${filter === f.key ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
               background: filter === f.key ? 'rgba(245,158,11,0.12)' : 'var(--ssw-surface)',
               color: filter === f.key ? 'var(--ssw-amber)' : 'var(--ssw-textMuted)',
-              transition: 'all 0.15s',
+              transition: 'all var(--t-fast)',
             }}
           >
             {f.label}

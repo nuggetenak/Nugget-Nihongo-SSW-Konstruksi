@@ -24,7 +24,7 @@
   flex-direction: column;
   align-items: center;
   padding: var(--space-48) var(--space-24) var(--space-24);
-  animation: fadeIn 0.3s ease both;
+  animation: fadeIn var(--t-enter) var(--ease-smooth) both;
 }
 
 @keyframes fadeIn {
@@ -45,7 +45,7 @@
   border-radius: 18px;
   margin-bottom: var(--space-20);
   filter: drop-shadow(0 4px 20px rgba(245, 158, 11, 0.35));
-  animation: scaleIn 0.4s ease both;
+  animation: scaleIn var(--t-slow) var(--ease-smooth) both;
 }
 
 /* Construction-site line art. Amber fills read fine on both themes, but the
@@ -59,7 +59,7 @@
   height: auto;
   margin: var(--space-16) auto 0;
   opacity: 0.95;
-  animation: scaleIn 0.5s ease both;
+  animation: scaleIn var(--t-slow) var(--ease-smooth) both;
 }
 
 [data-theme='dark'] .heroArt {
@@ -177,9 +177,9 @@
   cursor: pointer;
   text-align: left;
   transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+    transform var(--t-fast) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth),
+    box-shadow var(--t-fast) var(--ease-smooth);
   font-family: inherit;
   position: relative;
 }
@@ -201,7 +201,7 @@
   justify-content: center;
   font-size: 1.375rem;
   flex-shrink: 0;
-  transition: background 0.15s ease;
+  transition: background var(--t-fast) var(--ease-smooth);
 }
 
 .trackMeta {
@@ -254,7 +254,7 @@
   width: 100%;
   aspect-ratio: 3 / 2.2;
   transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--t-slow) var(--ease-smooth);
   border-radius: 16px;
 }
 
@@ -350,7 +350,7 @@
 .demoRating {
   width: 100%;
   max-width: 340px;
-  animation: fadeIn 0.25s ease both;
+  animation: fadeIn var(--t-enter) var(--ease-smooth) both;
 }
 
 .demoRatingLabel {
@@ -378,8 +378,8 @@
   cursor: pointer;
   font-family: inherit;
   transition:
-    transform 0.1s ease,
-    border-color 0.15s ease;
+    transform var(--t-instant) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth);
 }
 
 .demoBtn:active,
@@ -401,7 +401,7 @@
 .goalHero {
   font-size: 3.25rem;
   margin-bottom: var(--space-16);
-  animation: scaleIn 0.4s ease both;
+  animation: scaleIn var(--t-slow) var(--ease-smooth) both;
 }
 
 .goalGrid {
@@ -424,9 +424,9 @@
   cursor: pointer;
   font-family: inherit;
   transition:
-    transform 0.12s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
+    transform var(--t-instant) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth),
+    background var(--t-fast) var(--ease-smooth);
   gap: var(--space-2);
 }
 
@@ -519,8 +519,8 @@
   cursor: pointer;
   box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
   transition:
-    transform 0.1s ease,
-    opacity 0.15s ease;
+    transform var(--t-instant) var(--ease-smooth),
+    opacity var(--t-fast) var(--ease-smooth);
   margin-top: auto;
 }
 
@@ -559,8 +559,8 @@
   border-radius: 99px;
   background: rgba(245, 158, 11, 0.2);
   transition:
-    width 0.3s ease,
-    background 0.3s ease;
+    width var(--t-enter) var(--ease-smooth),
+    background var(--t-enter) var(--ease-smooth);
 }
 
 .dot[data-active='true'] {

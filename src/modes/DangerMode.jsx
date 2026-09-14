@@ -416,7 +416,7 @@ function QuizView({ onBack, onSessionEnd, filterType, limit }) {
                 cursor: selected !== null ? 'default' : 'pointer',
                 fontSize: 'var(--fs-body)',
                 lineHeight: 1.5,
-                transition: 'all 0.15s',
+                transition: 'all var(--t-fast)',
                 display: 'flex',
                 gap: 'var(--space-8)',
                 alignItems: 'flex-start',
