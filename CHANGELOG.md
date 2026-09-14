@@ -96,7 +96,32 @@ Found by resolving every backticked path rather than by reading:
 - **`docs/DESIGN_SPEC.md`** said five named modes "still call `speakJP()`"; two of the five
   left in 7.0.0 and three others joined since.
 
-Guarded by `src/tests/doc-references.test.js`: every backticked repo path in the 11 live
+### Four more live docs asserted things that had stopped being true
+
+Swept for factual claims rather than paths, after the path sweep above found its nine:
+
+- **`HUSKY-SETUP.md`** told readers "CI (`ci.yml`) runs lint, test and build; nothing in CI
+  runs `format:check` or four of the five audits". Item 134 closed that in **7.3.0** — four
+  releases before this one. The document that documented the hole was the last thing anyone
+  re-read after the hole was closed, which is the failure it was itself describing. It is also
+  now inside the doc-reference guard's scope, which it had never been.
+- **`docs/PWA_RELEASE_SPEC.md`**'s pre-deploy checklist said "CI runs only lint/test/build, so
+  `validate` is the stricter gate" — same stale claim, and it named 672 tests and "all five
+  audits". `validate` is still the gate to run, but because it is the one you can run *before*
+  pushing, not because CI is weaker. Its precache section claimed 38 entries and "the other 18
+  modes"; the real figures are 43 and 19, and `generate-precache.mjs` prints the breakdown on
+  every build, so the doc now says to read it there.
+- **`docs/AGENT_WORKFLOW.md`** §3 said "the five audits" — there are six.
+- **`_MAP.md`** described `ModeHeader` as "the header band for all 19 modes" — 22.
+
+Not guarded by a test, deliberately: "N modes" in prose is a subset count more often than a
+total (item 119's 13 untested modes, the 4 modes in a batch, the 2 that shared a utility, the
+10 on placeholder icons), so a test asserting every such number equals 22 would be a
+false-positive machine. Dated measurements are now dated in the text instead — DESIGN_SPEC's
+21-mode label census says "as they stood on 2026-09-04" — which is the cheaper half of the fix
+and the half that actually reads.
+
+Guarded by `src/tests/doc-references.test.js`: every backticked repo path in the 12 live
 docs resolves (244 references, 117 distinct), every live doc has a row in AGENT_WORKFLOW
 §4 — §4's own rule, which had failed three times while stated only in prose, and which the
 table broke for itself — and no live doc carries unticked checkboxes, since that syntax

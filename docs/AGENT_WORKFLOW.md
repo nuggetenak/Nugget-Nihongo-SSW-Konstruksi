@@ -78,7 +78,8 @@ briefly when actually pushing, then strip again right after.
    `npm test` and `npm run audit:full` and copy the output, don't copy the previous doc. Two
    different wrong test counts sat in `README.md` at the same time.
 5. `npm run validate` clean **before pushing**, not just before committing — check again if any
-   time passed between the two. That is format:check, lint, test, the five audits, and build.
+   time passed between the two. That is format:check, lint, test, the six audits chained into
+   `audit:full`, and build — and CI runs every one of them, plus coverage, since item 134.
    Running the pieces individually is how `format:check` came to be failing on 33 files and
    `audit-integrity.mjs` came to report 2876 phantom issues on every run for weeks: neither was
    part of any gate.

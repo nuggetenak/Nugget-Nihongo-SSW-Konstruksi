@@ -183,7 +183,8 @@ screen via `modes.module.css`'s shared `.pageTitle`. **Not** `ModeHeader`'s `<h1
 took over the mode page-title role in the 2026-09-04 consolidation and uses `--fs-title`
 instead: it is a sticky band sharing a row with a back button and a breadcrumb, and at
 page-title size 11 of the 21 mode labels were cut off at 320px ("Ekspor & Impor" asked for
-308px of a 188px box) and 3 still were at 390px. Measured across all 21 modes, both
+308px of a 188px box) and 3 still were at 390px. Measured across all 21 modes as they stood on
+2026-09-04 (22 now, after `tentang`, `genba` and `skenario`), both
 widths, before and after. Existed as a de facto convention
 (22px, weight 800) before it existed as a token: SayaTab and every mode screen had
 already independently converged on it, BelajarTab and Dashboard's h1 had drifted to

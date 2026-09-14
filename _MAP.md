@@ -232,7 +232,7 @@ the next reads. `src/tests/storage.migration-chain.test.js` walks every entry po
 | `src/components/ErrorBoundary.jsx`                          | Class-based EB + TabError + FlatCardFallback                      |
 | `src/components/OfflineBanner.jsx`                          | Fixed offline status banner                                       |
 | `src/components/StudyHeatmap.jsx`                           | 18-week SVG activity heatmap                                      |
-| `src/components/ModeHeader.jsx`                             | The whole header band for all 19 modes, exit guard included       |
+| `src/components/ModeHeader.jsx`                             | The whole header band for all 22 modes, exit guard included       |
 | `src/components/AppShell.jsx`                               | The one owner of page max-width and gutters — stylesheets must not repeat them |
 | `src/components/FilterPopup.jsx`                            | Multi-category picker on `Sheet` (graduated from `legacy/` 2026-09-04) |
 

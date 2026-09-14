@@ -44,6 +44,11 @@ const LIVE_DOCS = [
   'README.md',
   'HANDOFF.md',
   '_MAP.md',
+  // Added 2026-09-14: it had told readers for four releases that CI ran neither
+  // `format:check` nor four of the five audits, four releases after item 134 put
+  // all of them in `ci.yml`. A live doc outside this list is a live doc nothing
+  // keeps honest, which is the whole premise of the file.
+  'HUSKY-SETUP.md',
   ...readdirSync(resolve(root, 'docs'))
     .filter((f) => f.endsWith('.md'))
     .map((f) => `docs/${f}`),
