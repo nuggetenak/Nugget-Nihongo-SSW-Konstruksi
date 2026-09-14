@@ -1,0 +1,71 @@
+/* ─── MissionCompleteOverlay.module.css ──────────────────────────────────────
+   The overlay used to carry its animation as an inline style, which put it out
+   of reach of every stylesheet in the app -- including the one rule it needed.
+   See the reduced-motion block at the bottom. */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-celebration);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  animation: missionFadeOut 3s ease forwards;
+}
+
+.inner {
+  text-align: center;
+  color: #fff;
+  padding: 0 var(--space-32);
+  user-select: none;
+  animation: popIn var(--t-slow) var(--ease-bounce) both;
+}
+
+.icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.title {
+  font-size: var(--fs-page-title);
+  font-weight: 800;
+  margin-top: var(--space-10);
+}
+
+.label {
+  font-size: var(--fs-caption);
+  margin-top: var(--space-6);
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.score {
+  font-size: var(--fs-body);
+  margin-top: var(--space-4);
+  opacity: 0.75;
+}
+
+.hint {
+  font-size: var(--fs-small);
+  margin-top: var(--space-12);
+  opacity: 0.5;
+}
+
+/* `missionFadeOut` ends at opacity 0 and runs `forwards`. The global
+   reduced-motion catch-all zeroes animation-duration, which for an animation
+   whose end state differs from its resting state does not disable it -- it
+   jumps to the end. So under reduced motion this overlay rendered fully
+   transparent for its whole three-second life: the single celebration in the
+   app, removed for precisely the readers who asked for less movement, with
+   nothing on screen to say a mission had been completed at all.
+   `animation: none` is the only spelling that actually stops it, and the
+   overlay then sits at its resting state (visible) until the component
+   unmounts on its own timer. */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .inner {
+    animation: none !important;
+  }
+}

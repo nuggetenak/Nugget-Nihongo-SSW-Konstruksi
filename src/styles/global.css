@@ -204,12 +204,40 @@
   --z-modal: 400;
   --z-celebration: 500;
 
-  /* ── Transition presets ── */
+  /* ── Transition presets ─────────────────────────────────────────────────
+     Every duration in the app resolves through --t-mult, so one property
+     scales the whole motion system. That is what makes the Gerakan speed
+     control a token change rather than a refactor, and it is also the reason
+     these are calc() rather than literals.
+
+     DESIGN_SPEC §4 states which rung means what: --t-instant for press and
+     release, --t-fast for a state change, --t-base for an entrance, --t-enter
+     for an overlay, --t-slow for a flip or a celebration, --t-count for a
+     number climbing.
+
+     The measurement that made this necessary: ONE keyframe, fadeIn, was played
+     at six different durations across the app -- 0.15s, 0.2s, 0.25s, 0.3s,
+     0.35s and 0.4s -- depending which file you were in. scaleIn ran at four,
+     popIn at three. The scale defined two easing curves and the stylesheets
+     contained five raw cubic-beziers. So the app did not read as unanimated; it
+     read as unsettled, the same gesture arriving at a different speed in each
+     mode. src/tests/motion-scale.test.js is what keeps that from coming back. */
+  --t-mult: 1;
+  --t-instant: calc(80ms * var(--t-mult));
+  --t-fast: calc(120ms * var(--t-mult));
+  --t-base: calc(200ms * var(--t-mult));
+  --t-enter: calc(260ms * var(--t-mult));
+  --t-slow: calc(350ms * var(--t-mult));
+  --t-count: calc(1000ms * var(--t-mult));
+
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --t-fast: 120ms;
-  --t-base: 200ms;
-  --t-slow: 350ms;
+  /* Accelerating: something leaving should not linger the way something
+     arriving is allowed to. */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  /* Overshoot, reserved for celebration -- the one place in the app where the
+     motion is the reward rather than the explanation. */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 /* Elevated when AppShell reports the floating bottom pill is mounted (phone/
@@ -564,5 +592,32 @@ input {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+    /* Delays were not zeroed, and zeroing the DURATION without the DELAY is a
+       worse result than leaving both alone: the element still waits its full
+       stagger before appearing, it just appears instantly when it does. So a
+       reader who asked for less motion got the pauses and none of the movement.
+       ResultScreen's staggerIn rows (0.1s and 0.2s) were the visible case. */
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* An animation whose END STATE differs from its resting state is NOT disabled
+   by the duration-zeroing above -- it jumps straight to the end. That is a
+   different bug wearing the same rule, and it is why `animation: none` has to
+   be written explicitly for those.
+
+   The case that shipped: MissionCompleteOverlay played `missionFadeOut ... 
+   forwards`, which ends at opacity 0. Under reduced motion it reached that end
+   state immediately, so the ONE celebration in the app was invisible to exactly
+   the readers who had asked their device for less movement. Dashboard's crawl
+   marquee had it right (its own block sets animation: none); nothing generalised
+   the rule.
+
+   Any new keyframe that does not end where it started belongs in this list. */
+@media (prefers-reduced-motion: reduce) {
+  .no-motion-endstate,
+  [data-motion-endstate] {
+    animation: none !important;
   }
 }
