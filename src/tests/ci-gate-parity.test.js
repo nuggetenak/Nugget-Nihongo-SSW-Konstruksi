@@ -94,7 +94,7 @@ describe('CI runs the same gates as npm run validate', () => {
     ).toEqual([]);
   });
 
-  it('the five data audits are all in audit:full', () => {
+  it('every audit script is chained into audit:full', () => {
     // audit:full is the one composite a new audit gets forgotten in: it is
     // chained by hand, and CI runs the composite, not the pieces.
     const audits = Object.keys(pkg.scripts).filter(

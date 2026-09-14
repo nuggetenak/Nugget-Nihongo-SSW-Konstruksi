@@ -6,10 +6,12 @@
 > `docs/archive/ARCHIVE-INDEX.md` for what has already moved.
 >
 > Everything up to and including the 7.0.0 release entry has been retired; the three 2026-09-08
-> entries below are kept because their invariants are still live, and the 2026-09-09 entry is the
-> most recent session's work. (This paragraph itself still said "the two 2026-09-04 entries below
-> are kept because they are the most recent session's work" on 2026-09-09, four sessions after that
-> stopped being true — corrected then.) The retired lineage, newest first:
+> entries below are kept because their invariants are still live, and the two 2026-09-14 entries
+> are the most recent session's work (7.5.0 merged, 7.5.1 on the branch). (This paragraph itself
+> still said "the two 2026-09-04 entries below are kept because they are the most recent session's
+> work" on 2026-09-09, four sessions after that stopped being true — corrected then, and again on
+> 2026-09-14, which is the second time this one sentence has gone stale. **If you edit CURRENT
+> STATE, edit this paragraph in the same pass.**) The retired lineage, newest first:
 > `HANDOFF-2026-09-04-07-sessions.md` (7.0.0's mode removal and card split, the governance-docs
 > audit, and the two `simulasi`/Belajar-tab rounds),
 > `HANDOFF-2026-09-04-audit-and-ui.md` (the 6.0.0 audit + the layout/typography overhaul),
@@ -36,10 +38,40 @@ content into this file.
 ## CURRENT STATE
 
 **As of 2026-09-14.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.5.0**, **1,626 cards**, **22 modes**, `STORAGE_VERSION` **7**,
-`npm run validate` clean (134 files, 1,291 tests). 7.4.0 is merged into `main`; PR #17 (the
-data-loss, correctness and item-114 work) merged into `main` 2026-09-14 as `569ff2a`, and the
-items 103–105 group is on `claude/open-items-continuation-doenj9` on top of it.
+At that date: version **7.5.1**, **1,626 cards**, **22 modes**, `STORAGE_VERSION` **7**,
+`npm run validate` clean (136 files, 1,301 tests). 7.5.0 is merged into `main` (PR #17 as
+`569ff2a`, PR #18 as `73900f4`), and the 7.5.1 housekeeping is on
+`claude/open-items-continuation-doenj9` restarted from that merge.
+
+- **2026-09-14: 7.5.1 — the garbled question, and two guards that were only comments.**
+  Full write-up is `CHANGELOG.md` `[7.5.1]`. What a future session most needs to know:
+
+  - **There is no work queue any more.** Both UI/UX plans are archived and empty; see the
+    REFERENCE section at the end of this file. A session that finds new work files it in
+    `CHANGELOG.md` and here, or opens a successor plan on purpose starting after item 144.
+    That is a deliberate cost: the queue used to absorb findings by default.
+  - **A summary of a list is a claim about the list.** 7.5.0 shipped a §16 line saying items
+    119, 120 and a "mode-correctness sweep" were still open, six lines above the entries
+    saying they closed in 7.3.0. Re-derive a count from the thing it counts; do not carry the
+    sentence forward. The same release's "Still open" section was wrong about `wgl09#9` for
+    the same reason — the answer to "is this garbled term recoverable?" was in the question's
+    own Indonesian hint.
+  - **A corrupted string does not stay one defect.** 「キャップillary」 also mislinked its
+    question, because `derive-quiz-card-links.mjs` matched the corrupted キャップ as a
+    four-character headword — its high-confidence tier. When you fix a data string, check what
+    was derived *from* it.
+  - **The same question lives in both banks.** `wgl09#9` and `jml04#9` are one question;
+    `audit-question-overlap.mjs` compares their answers, not their stems, so a stem corrupted
+    identically in both passes it. Fix content in both, or check the other bank first.
+  - **A comment naming a guard is not a guard.** `ci.yml` cited a
+    `format-and-lint.test.js` that had never existed; `motion.js` cited a
+    `reduced-motion.test.js` that never existed either. Both now name real files, and
+    `ci-gate-parity.test.js` and `doc-references.test.js` are the tests that were being
+    claimed. If a comment says a test asserts something, open the test.
+  - **`docs/COMPONENT_SPEC.md` §16 documented five files deleted in 7.0.0** — a component
+    spec's lists are read as the inventory, so that is the worst place for a phantom entry.
+    Removing a mode is not just deleting its files: `removed-mode-safety.test.js` covers the
+    two code paths that outlive a mode, and the docs are the third.
 
 - **2026-09-13/14: the three external audits, item 114's second half, and the 103–105 group.**
   Full write-up is `CHANGELOG.md` `[7.5.0]`. What a future session most needs to know:

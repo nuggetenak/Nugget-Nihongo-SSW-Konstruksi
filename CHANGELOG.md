@@ -1,3 +1,116 @@
+## [7.5.1] - 2026-09-14
+
+Housekeeping, opened by the two items 7.5.0 handed to the owner and closed by finding
+that one of them was not a judgement call at all. Nothing here is a feature; one
+user-visible content defect is fixed and two guards are added where a comment had been
+standing in for one.
+
+### `キャップillary` was a find-replace that matched inside a word
+
+7.5.0 left this open on the grounds that the term was garbled and the answer did not
+disambiguate it. The Indonesian hint did: _"Panjang brazing untuk **capillary fitting**
+pada pipa tembaga"_. So the term was recoverable rather than guessable — a cap →
+キャップ substitution had eaten the "cap" out of "capillary" and left the tail
+behind. It is 「キャピラリー継手」 now, in the quoting idiom the sibling question
+already uses for 「エンドキャップ」.
+
+**It was in both banks, not one.** `wgl09#9` and `jml04#9` are the same question, and the
+2026-09-08 cross-bank overlap audit exists precisely because nothing compared the two
+source files — but it compares *answers*, and both banks gave the same answer, so a
+corrupted stem in both passed it.
+
+**A corrupted string does not stay one defect.** `related_card_id` on both twins pointed
+at card 904 — キャップ, the cap fitted to seal a pipe for a pressure test, which teaches
+nothing about brazing length. `derive-quiz-card-links.mjs` matches card headwords against
+the stem longest-first and tiers by match length; the garbled stem offered キャップ as a
+four-character run, which is its "high" tier, the one landed by hand as item 96. Both now
+point at 451, ろう接合, whose own `usage` sentence is 銅管同士を接続する.
+
+**The answer is untouched, deliberately.** 管径の1.5倍程度 — both banks agree and both cite
+the JAC practical module. `jml04#9`'s first distractor is the competing figure
+(配管の外径とほぼ同じ長さ), so if the module says otherwise this is one index change in two
+files. Overturning a cited answer without the source would trade a spelling defect for an
+accidentally-correct distractor, which this repo has already shipped once (item 115).
+
+Guarded as `data-integrity.test.js` **C12**: no lower-case latin run of three or more may
+sit against a Japanese character in a bank `q` or `opts`. Upper case has to be exempt —
+KY活動, PPE, JIS, LED, EF接合, GX形, VP管 and the unit suffixes (10mm以上, 0.1MPa) are 72
+legitimate hits — and the Indonesian fields are out of scope, since `opts_id` and card
+`desc` set Japanese inline without a space as house style. The narrow rule found exactly
+the two corrupted strings across 1,075 questions and 1,626 cards, and nothing else.
+
+### The UI/UX plan is retired, empty at 102 items
+
+Items 43–144, six appended rounds, **all closed** — 101 shipped and item 59 dropped by the
+owner. It goes to `docs/archive/UI_UX_PLAN-2026-09-items-43-144.md` per its own header and
+`docs/AGENT_WORKFLOW.md` §3, in full rather than deleted: five entries were settled
+*against* doing the work (59, 64, 73, 81, 139) and those are the ones a future session
+would re-derive wrongly. Numbering does not restart in a successor.
+
+**Its §16 summary line was wrong, and it was written in 7.5.0.** It said "what remains
+open in §16 is items 119 and 120 and the mode-correctness sweep". Items 119 and 120 were
+repaired in 7.3.0 and 7.4.0 corrected their bodies for exactly this reason; the
+"mode-correctness sweep" was 119 under another name. The sentence sat six lines above the
+entries that contradict it. **A summary of a list is a claim about the list, so re-derive
+it from the list** — the same failure the plan's own §0 warns about, committed while
+recording that §0 was right.
+
+### Two comments were standing in for guards that did not exist
+
+`.github/workflows/ci.yml` said "the set is exactly `validate`'s, and
+format-and-lint.test.js asserts that". That file had never existed, so nothing held CI's
+six named steps in sync with `validate`'s five — the shape of the gap item 134 filed.
+`src/tests/ci-gate-parity.test.js` is the guard: validate is still a composite of named
+scripts, every script it runs is a CI step, a CI-only gate is declared by name
+(`test:coverage`, with the reason), every `audit:*` is chained into `audit:full`, and
+`format`/`format:check` cover the same paths.
+
+`src/utils/motion.js` named `reduced-motion.test.js`, which is `a11y-polish`'s source
+sweep. Four more comments named `.test.js` for files that are `.test.jsx`.
+
+### Nine live docs pointed at files that do not exist
+
+Found by resolving every backticked path rather than by reading:
+
+- **`docs/COMPONENT_SPEC.md` §16** documented `src/utils/typo-diff.js`,
+  `src/components/TypoDiff.jsx`, `diffChars`, `closestSynonymDiff` and `closestAnswerDiff`
+  as shared primitives. All five went with `produksi`/`kuisprod` in 7.0.0 — and a
+  component spec is the one place a phantom entry is worst, because its lists are read as
+  the inventory. Marked REMOVED and kept for the argument, which outlived the code: a naive
+  index-by-index diff of a typo is worse than none, since one dropped letter shifts every
+  character after it and paints a known word as entirely wrong. Its shape taxonomy also
+  still carried a Free-text row the app has not had since 7.0.0, and omitted both 7.5.0
+  modes.
+- **`HANDOFF.md`**, whose only job is live state, still listed `RUBY_MISMATCH_AUDIT.md` as
+  an open queue of 144 readings — archived, and at zero since 2026-09-13 — and the plan's
+  "Still open, as of 2026-09-05" list of 18 items, all closed. Both replaced with the live
+  fact: **there is no work queue**, and a session that finds work opens one deliberately,
+  starting after 144, rather than growing one by accident.
+- **`_MAP.md`**'s tree described `ci.yml` as "lint + test + build", three gates after item
+  134, and omitted `CARD_SPLIT_AUDIT.md`.
+- **`docs/CARD_CONTENT_SPEC.md`** called plan item 96 "the live version of that question"
+  after it landed — 305 of 980 `QUIZ_SETS` questions carry a `related_card_id` now, count
+  re-derived here. Its P12 section still read "UNBLOCKED … boleh dikerjakan" while
+  `data.test.js:34` asserts the opposite outcome: `card.furi` is gone from the corpus, and
+  the only `furi` left in `src/` is `furiganaPolicy`, a different thing.
+- **`docs/DESIGN_SPEC.md`** said five named modes "still call `speakJP()`"; two of the five
+  left in 7.0.0 and three others joined since.
+
+Guarded by `src/tests/doc-references.test.js`: every backticked repo path in the 11 live
+docs resolves (244 references, 117 distinct), every live doc has a row in AGENT_WORKFLOW
+§4 — §4's own rule, which had failed three times while stated only in prose, and which the
+table broke for itself — and no live doc carries unticked checkboxes, since that syntax
+claims work is open. Paths that are gone on purpose are named as (doc → path) pairs, so
+the same filename in a doc that means it as current still fails; a second assertion fails
+if an exempted file comes back. `CHANGELOG.md` is deliberately unscanned — a since-deleted
+path is *correct* in a record of what was true at the time.
+
+### Still open
+
+- **The 1.5× brazing-length figure**, if the owner has the JAC practical module to hand.
+  Both banks teach it and both cite that module; the alternative figure is already sitting
+  there as a distractor. Nothing to do unless the module disagrees.
+
 ## [7.5.0] - 2026-09-14
 
 The owner asked for the open list to be finished and supplied three independent
@@ -277,10 +390,17 @@ failing since the index was added.
 
 ### Still open
 
+_(Both of these were closed the same day, in 7.5.1 above, and both were wrong as written.
+Left here rather than edited, because what they got wrong is the useful part.)_
+
 - **`wgl09#9` asks about a「キャップillary」継手**, which is garbled — probably
   キャピラリー継手, but the answer and explanation do not say, so it wants the
-  owner's call rather than a guess.
-- **Items 119, 120 and the mode-correctness sweep** are unchanged from 7.4.0.
+  owner's call rather than a guess. **→ The hint said it outright** ("capillary fitting"),
+  the same question sits in the other bank too, and the corruption had also mislinked the
+  question to the wrong card. Nothing here needed the owner.
+- **Items 119, 120 and the mode-correctness sweep** are unchanged from 7.4.0. **→ Unchanged
+  because they were closed in 7.3.0**, and 7.4.0's own bookkeeping section three releases
+  above says so. Carried forward without being re-derived from the entries it describes.
 
 ## [7.4.0] - 2026-09-09
 
