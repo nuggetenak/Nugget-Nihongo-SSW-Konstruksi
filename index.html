@@ -25,6 +25,39 @@
     />
     <meta property="og:type" content="website" />
 
+    <!-- Content Security Policy.
+         Everything this app needs is same-origin: the three typefaces are
+         self-hosted woff2 under /fonts (item 61), every icon and illustration is
+         a local PNG, and the only external origin in src/ is api.github.com, for
+         the optional Gist backup. So a policy this tight costs nothing and is
+         worth having on a page that stores a GitHub token in localStorage.
+
+         style-src needs 'unsafe-inline' and that is not an oversight: this
+         codebase renders per-instance colours, widths and transforms through
+         JSX style={{ }} objects by deliberate convention (COMPONENT_SPEC §6),
+         and index.html carries an inline <style> block for the font faces.
+         Removing it would mean a nonce the static build cannot supply. The value
+         here is script-src: an injected <script> is the attack that matters for
+         a token-holding page, and that is blocked.
+
+         Meta CSP rather than a header because GitHub Pages serves no custom
+         headers. frame-ancestors and sandbox are ignored in meta form; the rest
+         applies normally. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data: blob:;
+               font-src 'self';
+               connect-src 'self' https://api.github.com;
+               manifest-src 'self';
+               worker-src 'self';
+               object-src 'none';
+               base-uri 'self';
+               form-action 'none'"
+    />
+
     <title>SSW Konstruksi · Nugget Nihongo</title>
 
     <!-- Manifest -->
@@ -191,23 +224,9 @@
          banner here, which meant two competing update notifications could show
          at once. See UI_UX_PLAN.md item 6. As of item 37, the new worker waits
          for the user to accept before taking over (see App.jsx + sw.js). -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker
-            .register('/Nugget-Nihongo-SSW-Konstruksi/sw.js', {
-              scope: '/Nugget-Nihongo-SSW-Konstruksi/',
-            })
-            .then(function (reg) {
-              // Check for SW updates every time the page loads
-              reg.update();
-            })
-            .catch(function (err) {
-              console.warn('[SW] Registration failed:', err);
-            });
-        });
-      }
-    </script>
+    <!-- External, not inline: the CSP above sets script-src 'self'. See the
+         file header for why a hash was not used instead. -->
+    <script src="/Nugget-Nihongo-SSW-Konstruksi/sw-register.js"></script>
   </head>
   <body>
     <!-- Skip navigation for keyboard users -->
