@@ -602,6 +602,47 @@ input {
   }
 }
 
+/* ── Gerakan: the reader's own motion control ────────────────────────────────
+   utils/motion-pref.js writes these attributes to <html>. They are separate
+   from the prefers-reduced-motion block above on purpose: that one answers an
+   accessibility declaration made to the device and always wins, this one
+   answers a preference made to this app.
+
+   Each rule switches off one CATEGORY, which is what lets someone keep page
+   transitions and drop the decorative counting -- the split most people
+   actually want, and one a single on/off slider cannot express.
+
+   `press` is deliberately absent from this list even though it is a toggle: it
+   is handled per-component, because on a touch device with no hover the pressed
+   state is the only confirmation a tap registered before the screen changes.
+   Removing it does not calm the interface, it makes it feel broken. */
+:root[data-motion-no-entrance] [class*='page'],
+:root[data-motion-no-entrance] [class*='card'],
+:root[data-motion-no-entrance] [class*='panel'] {
+  animation: none !important;
+}
+
+:root[data-motion-no-stagger] * {
+  animation-delay: 0s !important;
+}
+
+:root[data-motion-no-celebrate] [role='alertdialog'] {
+  animation: none !important;
+}
+
+/* 'mati' is the reader asking for exactly what the OS setting produces, so it
+   produces exactly that rather than an approximation of it. */
+:root[data-motion='mati'] *,
+:root[data-motion='mati'] *::before,
+:root[data-motion='mati'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  animation-delay: 0s !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
 /* An animation whose END STATE differs from its resting state is NOT disabled
    by the duration-zeroing above -- it jumps straight to the end. That is a
    different bug wearing the same rule, and it is why `animation: none` has to

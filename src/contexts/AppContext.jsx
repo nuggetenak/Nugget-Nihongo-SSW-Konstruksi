@@ -19,6 +19,7 @@ import { MODE_COMPONENTS } from '../router/modes.js';
 import { applyTheme } from '../styles/theme.js';
 import { resolveIsDark, prefersDarkOS, nextTheme, DEFAULT_THEME } from '../utils/theme-mode.js';
 import { applyTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { applyMotion, DEFAULT_MOTION } from '../utils/motion-pref.js';
 import { useToast } from '../components/Toast.jsx';
 
 const _noopToast = { show: () => {}, hide: () => {} };
@@ -86,6 +87,14 @@ export function AppProvider({ children }) {
   useEffect(() => {
     applyTextScale(prefs.textScale ?? DEFAULT_TEXT_SCALE);
   }, [prefs.textScale]);
+
+  // ── Motion ──
+  // Same shape as the text scale above and for the same reason: the root
+  // attributes it writes are what CSS and utils/motion.js both read, so this is
+  // the one place the stored preference becomes something the app can act on.
+  useEffect(() => {
+    applyMotion(prefs.motion ?? DEFAULT_MOTION);
+  }, [prefs.motion]);
 
   // Cycles Terang -> Gelap -> Ikuti Sistem -> Terang. Still named toggleTheme:
   // Dashboard's prop and its test both use that name, and renaming buys nothing

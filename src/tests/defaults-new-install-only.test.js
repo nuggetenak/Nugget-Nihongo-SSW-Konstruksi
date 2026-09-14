@@ -17,6 +17,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import LZString from 'lz-string';
 import { init, get, _reset_for_test } from '../storage/engine.js';
 import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
+import { DEFAULT_MOTION } from '../utils/motion-pref.js';
 import { DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
 
 /**
@@ -76,5 +77,42 @@ describe('an existing install keeps what it had', () => {
 describe('the no-migration decision', () => {
   it('STORAGE_VERSION is still 7 — changed defaults never need a migration', () => {
     expect(STORAGE_VERSION).toBe(7);
+  });
+});
+
+// ─── Gerakan: the one default that is not simply "the new value" ─────────────
+// `motion` is additive and stores 'penuh', so everyone who installed before
+// 7.6.0 reads as full motion -- which is truthful, since that is what they have
+// been getting, and is why there is no migration.
+//
+// The exception is a fresh install on a device that asks for reduced motion.
+// That is an accessibility declaration made to the OS, not a preference, and an
+// app whose FIRST impression ignores it has already failed the reader once
+// before they can find the setting. main.jsx starts such an install at 'mati'.
+//
+// New-install only, in both directions, and the second direction is the one
+// that matters: a reader who turns motion back ON despite the OS setting has
+// made a choice, and nothing may quietly undo it on the next launch.
+describe('Gerakan defaults', () => {
+  it('stores penuh, so an existing install is unchanged by the upgrade', () => {
+    expect(DEFAULTS.prefs.motion.preset).toBe('penuh');
+    expect(DEFAULTS.prefs.motion).toEqual(DEFAULT_MOTION);
+  });
+
+  it('a fresh install with no OS preference gets full motion', () => {
+    init();
+    expect(get('prefs').motion.preset).toBe('penuh');
+  });
+
+  it('DEFAULTS.prefs.motion is DEFAULT_MOTION — one value, not two literals', () => {
+    // Same argument as textScale's: a second literal is a second thing to
+    // forget when the default moves.
+    expect(DEFAULTS.prefs.motion).toBe(DEFAULT_MOTION);
+  });
+
+  it('a stored choice survives, including one that disagrees with the OS', () => {
+    seedInstall({ motion: { preset: 'penuh', features: null, speed: 1 } });
+    init();
+    expect(get('prefs').motion.preset, 'the reader turned it back on; leave it').toBe('penuh');
   });
 });

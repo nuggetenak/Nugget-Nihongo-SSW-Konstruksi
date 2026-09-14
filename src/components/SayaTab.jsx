@@ -20,6 +20,7 @@ import { formatCount } from '../utils/format.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { getTextScale, nextTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { getMotionPreset, DEFAULT_MOTION } from '../utils/motion-pref.js';
 import { getThemeMode, DEFAULT_THEME } from '../utils/theme-mode.js';
 import { hasUnseenReleaseNotes } from '../data/release-notes.js';
 
@@ -77,6 +78,7 @@ export default function SayaTab() {
   } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const textScale = getTextScale(prefs?.textScale ?? DEFAULT_TEXT_SCALE);
+  const motionPreset = getMotionPreset((prefs?.motion ?? DEFAULT_MOTION).preset);
   const confirm = useConfirm();
   const { known, unknown, streakData, sessions, jacScores } = useProgress();
   const srs = useSRSContext();
@@ -604,6 +606,12 @@ export default function SayaTab() {
             setPref('textScale', next);
             toast.show(`🔠 Ukuran teks: ${getTextScale(next).label}`);
           }}
+        />
+        <Row
+          label="✨ Gerakan"
+          value={`${motionPreset.emoji} ${motionPreset.label}`}
+          sub={motionPreset.desc}
+          onClick={() => goMode('gerakan')}
         />
         <Row
           label="ふ Furigana di Kartu"

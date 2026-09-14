@@ -1,0 +1,175 @@
+/* ─── GerakanMode.module.css ──────────────────────────────────────────────── */
+
+.osNote {
+  padding: var(--space-12) var(--space-14);
+  border-radius: var(--r-md);
+  background: var(--ssw-surfaceActive);
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-text);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-16);
+}
+
+.presets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-8);
+  margin-bottom: var(--space-20);
+}
+
+.preset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-12);
+  min-height: var(--tap-min);
+  text-align: left;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-text);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth),
+    transform var(--t-instant) var(--ease-smooth);
+}
+
+.preset:active {
+  transform: scale(0.97);
+}
+
+.preset[data-active='true'] {
+  border-color: var(--ssw-amber);
+  background: var(--ssw-surfaceActive);
+}
+
+.presetEmoji {
+  font-size: var(--fs-subtitle);
+}
+
+.presetLabel {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-body);
+}
+
+.presetDesc {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  line-height: var(--lh-snug);
+}
+
+.speeds {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.speed {
+  flex: 1;
+  min-height: var(--tap-min);
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-text);
+  font-family: inherit;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth),
+    transform var(--t-instant) var(--ease-smooth);
+}
+
+.speed:active {
+  transform: scale(0.95);
+}
+
+.speed[data-active='true'] {
+  border-color: var(--ssw-amber);
+  background: var(--ssw-surfaceActive);
+  color: var(--ssw-amberText);
+}
+
+.speedNote,
+.footNote {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  line-height: var(--lh-relaxed);
+  margin: var(--space-8) 0 var(--space-20);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: var(--space-12) var(--space-14);
+  margin-bottom: var(--space-6);
+  border-radius: var(--r-md);
+  border: 1px solid var(--ssw-border);
+  background: var(--ssw-surface);
+  color: var(--ssw-text);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--t-fast) var(--ease-smooth),
+    transform var(--t-instant) var(--ease-smooth);
+}
+
+.toggle:active {
+  transform: scale(0.99);
+}
+
+.toggleText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.toggleLabel {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+}
+
+.toggleDesc {
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+}
+
+/* px, not rem: a switch is a physical control, the same reasoning --tap-min and
+   --nav-h are px (DESIGN_SPEC §4). Its size should not drift with Ukuran Teks. */
+.switch {
+  flex: none;
+  width: 44px;
+  height: 26px;
+  border-radius: var(--r-pill);
+  background: var(--ssw-border);
+  position: relative;
+  transition: background var(--t-fast) var(--ease-smooth);
+}
+
+.switch[data-on='true'] {
+  background: var(--ssw-amber);
+}
+
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ssw-bg);
+  transition: transform var(--t-fast) var(--ease-spring);
+}
+
+.switch[data-on='true'] .knob {
+  transform: translateX(18px);
+}

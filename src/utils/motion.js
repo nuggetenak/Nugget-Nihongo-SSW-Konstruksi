@@ -13,9 +13,35 @@
 // a11y-polish.test.js's source sweep can grep for the literal that bypasses it.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** True when the OS asks for reduced motion. Safe where matchMedia is absent. */
+/**
+ * True when motion should be suppressed: either the OS asks for it, or the
+ * reader has turned it off in Pengaturan Gerakan.
+ *
+ * Keeps its name and its meaning, so all its existing callers are unchanged.
+ * It reads the DOM rather than taking the pref as an argument because
+ * applyMotion() has already written it to the root -- the same trick
+ * applyTextScale uses, and the reason a util below the component layer can
+ * answer a question about user preference at all.
+ */
 export function prefersReducedMotion() {
+  if (typeof document !== 'undefined' && document.documentElement.dataset.motion === 'mati') {
+    return true;
+  }
   return !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Whether one named motion feature is on — 'page', 'shared', 'press',
+ * 'entrance', 'stagger', 'count', 'celebrate', 'card', 'furi'.
+ *
+ * The OS setting still wins over everything: a reader who asked their device
+ * for less motion gets less motion regardless of what this app's preset says.
+ * That is not negotiable and is why this defers to prefersReducedMotion first.
+ */
+export function motionAllows(feature) {
+  if (prefersReducedMotion()) return false;
+  if (typeof document === 'undefined') return true;
+  return !document.documentElement.hasAttribute(`data-motion-no-${feature}`);
 }
 
 /**
@@ -57,7 +83,7 @@ export function withViewTransition(update, flushSync) {
   // startViewTransition inside the first one's callback is not something the API
   // does anything sensible with, so the inner call just performs the update: the
   // outer transition is already capturing exactly the same before/after pair.
-  if (_inTransition || !document.startViewTransition || prefersReducedMotion()) {
+  if (_inTransition || !document.startViewTransition || !motionAllows('page')) {
     update();
     return;
   }

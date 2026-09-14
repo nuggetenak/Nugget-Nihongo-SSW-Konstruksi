@@ -42,6 +42,7 @@ export const MODE_COMPONENTS = {
   glosari: lazy(() => import('../modes/GlossaryMode.jsx')),
   sumber: lazy(() => import('../modes/SumberMode.jsx')),
   tentang: lazy(() => import('../modes/TentangMode.jsx')),
+  gerakan: lazy(() => import('../modes/GerakanMode.jsx')),
   ekspor: lazy(() => import('../modes/ExportMode.jsx')),
   ulasan: lazy(() => import('../modes/ReviewMode.jsx')),
   mirip: lazy(() => import('../modes/ConfusionMode.jsx')),
@@ -268,6 +269,16 @@ export const MODE_META = {
   // because Belajar is the study menu and a help page is not a study mode.
   // goMode works without section membership. strand: null keeps it out of
   // MISSION_MODES -- a reference surface is not a daily mission.
+  gerakan: {
+    icon: '✨',
+    ui: 'info',
+    label: 'Pengaturan Gerakan',
+    width: 'default',
+    desc: 'Seberapa banyak aplikasi bergerak',
+    color: '#a78bfa',
+    strand: null,
+    skeleton: 'list',
+  },
   tentang: {
     icon: 'ℹ️',
     ui: 'info',
