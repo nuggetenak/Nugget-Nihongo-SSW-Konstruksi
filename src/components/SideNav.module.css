@@ -209,3 +209,34 @@
     transition: none;
   }
 }
+
+/* ── Press feedback (item 164) ───────────────────────────────────────────────
+   On a touch device there is no hover, so the pressed state is the ONLY
+   confirmation that a tap registered before the screen changes — and on a slow
+   phone the gap between the two is exactly where someone taps a second time.
+   Thirteen of the app's twenty-eight stylesheets had clickable elements and no
+   press state at all; this is one of them. Compositor-only, so it costs nothing.
+   Honours Gerakan's "Respons sentuh" toggle. */
+.item {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.item:active {
+  transform: scale(0.98);
+}
+
+:root[data-motion-no-press] .item:active {
+  transform: none;
+}
+
+.modeItem {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.modeItem:active {
+  transform: scale(0.97);
+}
+
+:root[data-motion-no-press] .modeItem:active {
+  transform: none;
+}

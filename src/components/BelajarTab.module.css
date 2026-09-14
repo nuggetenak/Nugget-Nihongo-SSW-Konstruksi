@@ -54,15 +54,35 @@
   transform: rotate(180deg);
 }
 
-/* ── Collapsible secondary-item wrapper (per section) ── */
+/* ── Collapsible secondary-item wrapper (per section) ────────────────────────
+   `grid-template-rows: 0fr -> 1fr`, not `max-height: 0 -> 2000px` (item 167).
+
+   The max-height version animated a height the content never reaches. A section
+   holding ~300px of modes was easing across 2000px of declared travel, so the
+   open ran most of its curve after the content had already finished arriving
+   and the close appeared to hang before anything moved — a transition that
+   looked broken precisely because the number was generous.
+
+   The grid technique animates the REAL height with no magic number, which also
+   means it is correct for a section with two items and one with twelve. It
+   needs the inner wrapper: `min-height: 0` is what lets the row actually
+   collapse, because a grid item's automatic minimum size is its content.
+
+   `interpolate-size: allow-keywords` would be cleaner still and is far too new
+   for the Android WebView versions this audience runs. */
 .collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-enter) var(--ease-smooth);
+}
+
+.collapsible > * {
   overflow: hidden;
-  max-height: 0;
-  transition: max-height var(--t-enter) var(--ease-smooth);
+  min-height: 0;
 }
 
 .collapsible[data-expanded='true'] {
-  max-height: 2000px;
+  grid-template-rows: 1fr;
 }
 
 .sectionDot {
