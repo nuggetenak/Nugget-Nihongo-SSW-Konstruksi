@@ -281,6 +281,10 @@ export default function ModeRouter() {
       onRetryWrong: (ids) => goMode('kartu', { filterIds: ids }),
     },
     jebak: { onSessionEnd: makeSessionEnd('jebak') },
+    // No onRetryWrong: the misses here are phrases, not cards, so there is no
+    // deck to send anywhere. See GenbaMode's DrillView.
+    genba: { onSessionEnd: makeSessionEnd('genba') },
+    skenario: { onSessionEnd: makeSessionEnd('skenario') },
     cari: { track, starred, toggleStar },
     // jac keeps onRetryWrong and now actually reaches it: every JAC_OFFICIAL
     // question has a related_card_id, which JACMode passes through as _cardId.

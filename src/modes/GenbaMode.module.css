@@ -1,0 +1,119 @@
+/* ─── GenbaMode.module.css ──────────────────────────────────────────────────── */
+/* items 103/104. Colours come from the theme tokens, not from this file — the
+   accent is passed to QuizShell as a prop so the drill and the panel agree. */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.chip {
+  font-family: inherit;
+  padding: var(--space-4) var(--space-10);
+  border-radius: 99px;
+  font-size: var(--fs-small);
+  cursor: pointer;
+  background: transparent;
+  color: var(--ssw-teal);
+  border: 1.5px solid var(--ssw-teal);
+}
+
+.chipActive {
+  background: var(--ssw-teal);
+  /* The page ground, not a fixed white: on light theme that is near-white on
+     teal-700 (5.37:1) and on dark it is near-black on teal-400 (10.56:1). A
+     literal #fff would be 1.83:1 in dark theme. */
+  color: var(--ssw-bg);
+  font-weight: 700;
+}
+
+/* ── One phrase, collapsed ── */
+.rowBtn {
+  font-family: inherit;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-8);
+  text-align: left;
+  padding: var(--space-10) var(--space-12);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-md, 10px);
+  cursor: pointer;
+}
+
+.rowOpen {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.rowJp {
+  display: block;
+}
+
+.rowId {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+}
+
+/* Reads as a label, so it must not compete with the phrase for attention. */
+.rowDir {
+  flex: none;
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  white-space: nowrap;
+}
+
+/* ── One phrase, expanded ── */
+.panel {
+  padding: var(--space-10) var(--space-12) var(--space-12);
+  background: var(--ssw-surfaceActive);
+  border: 1px solid var(--ssw-border);
+  border-top: none;
+  border-bottom-left-radius: var(--r-md, 10px);
+  border-bottom-right-radius: var(--r-md, 10px);
+  font-size: var(--fs-caption);
+  line-height: 1.6;
+  color: var(--ssw-text);
+}
+
+.panelRow {
+  margin: 0 0 var(--space-6);
+}
+
+.panelLabel {
+  display: block;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ssw-textDim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.note {
+  margin-top: var(--space-10);
+  padding: var(--space-8) var(--space-10);
+  border-left: 3px solid var(--ssw-teal);
+  border-radius: 6px;
+  background: var(--ssw-surface);
+}
+
+/* ── In the drill ── */
+/* The one line that tells you which way this question runs. Sits under the stem
+   inside QuizShell's question card, which is where renderExtra lands. */
+.prompt {
+  margin-top: var(--space-8);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  color: var(--ssw-teal);
+}

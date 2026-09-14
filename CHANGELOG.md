@@ -1,3 +1,287 @@
+## [7.5.0] - 2026-09-14
+
+The owner asked for the open list to be finished and supplied three independent
+audits of 7.4.0 (KIMI, Genspark, ChatGPT) mid-session. This release is what came
+out of both: the data-loss and correctness findings the audits agreed on, item 114
+closed on the second and larger bank, and items 103–105 — the 現場日本語 group the
+plan had parked as owner-discretion product direction.
+
+Two modes are new, so the app ships **22**. `STORAGE_VERSION` stays **7**: nothing
+here changes a document's shape.
+
+### Every audit claim was checked before anything was touched
+
+Worth stating first, because it is the part that shaped the session. This repo's own
+history has items 139 and 142 filed wrongly, and two claims in these audits were
+wrong too: `App.jsx` was said to use a 2-tab layout (it says 3-tab, correctly), and
+`generateQuiz`'s duplicate-option dedup was filed as an active bug when all 1,626
+glosses are distinct, making it latent. A third was wrong in its *direction* — the
+FSRS retrievability claim, below. `audit-integrity.mjs` now asserts the distinctness
+the generator had been assuming, so the latent case cannot become live quietly.
+
+### Four ways the engine could still lose a learner's history
+
+- **A missing progress document read as a fresh install** and wrote defaults over
+  all three documents. Losing one key of three — a partial "clear site data", a
+  truncated sync write — therefore cost the SRS document too: every card's
+  stability, difficulty and review history, which nothing can reconstruct. The
+  quarantine above it had already preserved the unusable bytes, and then this branch
+  destroyed the two healthy documents beside them.
+- **Rating a card never moved `updatedAt`.** `set()` stamps every write and
+  `getLastMutatedAt()` is built on those stamps, but reviews go through
+  `setSRSCard`, which wrote straight to storage. A learner who only ever reviews
+  read as a device that had never changed, so restoring an eight-month-old backup
+  over four hundred fresh reviews raised no warning.
+- **A gap in the migration registry ended in a write of defaults.** The `break` was
+  commented "leave the data untouched"; it left the cache null, so `get()` returned
+  DEFAULTS and the first `set()` wrote them over the stored document. Unreachable
+  today, reachable the moment someone bumps `STORAGE_VERSION` and forgets the line.
+- **Gist pull had no conflict guard.** File import had a two-step preview, a diff
+  summary and a newer-than-file warning; pull called `importAllSafe` on the spot.
+  Both paths go through the same gate now.
+
+Same area, smaller: `get()`'s fallback returns a copy rather than the live
+`DEFAULTS`; `validateSnapshot` checks each SRS entry (a `due: 'garbage'` used to
+import cleanly and then throw inside ts-fsrs on the first rating, leaving the card
+unrateable forever) and finally checks `prefs`; quarantine copies capped at one per
+document; every GitHub fetch has a 15s timeout and abort; `findExistingGist`
+paginates instead of reading one page and creating a duplicate gist; export
+filenames carry the time, so two exports in a day stop overwriting each other.
+
+**Found while writing the quarantine test:** `Object.keys(localStorage)` does not
+enumerate stored keys — under jsdom it returns the method names, while in a browser
+it happens to work. Dead in every test, live in production, invisible to both.
+
+**And two tabs no longer overwrite each other.** The engine listens for `storage`
+events, re-reads the changed document, and `DataWarningBanner` gained a fourth state
+for it. The copy is per state on purpose: telling someone their data "could not be
+read and has been reset, earlier progress is probably lost" when another tab simply
+moved ahead would be false in the direction that makes them act — and the action has
+to differ too, because backing up from the stale tab writes the older view into the
+file. That state offers a reload instead.
+
+### A card rated Oke could never graduate
+
+The most serious correctness bug of the session, and it was one field.
+`serializeCard` did not carry `learning_steps`, so every card came back from storage
+at step 0. FSRS-6 uses that counter to decide whether a `Good` rating advances
+within the learning steps or graduates out of them; pinned at 0, a card rated
+"Oke" re-entered the first learning step forever. The scheduler was not
+mis-scheduling — it was standing still, for exactly the rating most learners press
+most often.
+
+### The audit had the retrievability claim backwards
+
+All three audits said the app's own retrievability curve drifted from the
+scheduler's. It did — and re-deriving it showed the *app* was right about the shape
+and wrong about the source: it computed a power curve of its own instead of asking
+ts-fsrs. `getRetrievability` now calls `get_retrievability`, so there is one curve
+and it is the scheduler's. `enable_fuzz` is on as well (it was off, against the
+library default, which made every learner with the same history receive the same due
+dates); the test setup pins it off, since a seeded fuzz is still fuzz to an
+assertion.
+
+### Four more things the app computed wrongly
+
+- **One exposure recorded two FSRS reviews.** `handleRate` guarded on `flipped` and
+  `currentId`, neither of which changes during the 600 ms advance window, so a
+  double tap or two rating keys ran the scheduler twice on one card. The trigger is
+  enthusiasm: the users drilling hardest were degrading their own scheduling.
+- **A skipped card counted in the session total.** Skipping five of twenty and
+  answering the rest correctly reported 75%, and `recordSession` feeds the heatmap
+  and the readiness score.
+- **An expired quiz timer inflated the score.** `total` was `results.length`, which
+  only held answered questions, so one of four answered scored 100%. SimulasiMode
+  counts blanks wrong because the exam does; the lenient definition lived in the
+  modes people use to judge readiness.
+- **A superseded confirm dialog orphaned its promise**, and the caller that matters
+  awaits it before letting you leave a running exam. Toast also mutated its queue
+  inside a setState updater, which can consume a queued toast without showing it —
+  the exact silent drop the queue was added to fix.
+
+### First paint: 337 kB → 128 kB gzipped
+
+`cards.js` is 758 kB raw / 212 kB gzipped and was on the critical path of every
+first page view, because `main.jsx` reached it through the category index. The index
+is now generated beside the cards by `merge-cards.mjs` — `CARD_IDS` and
+`CARD_CATEGORY` only — so the deck itself loads when a mode asks for it.
+`verify-content.mjs` gained a part that compares the generated index against the
+generated deck in both directions, since a stale index is exactly the failure this
+shape invites. `eager-bundle-graph.test.js` walks the static import graph from
+`main.jsx` and fails on any of the heavy data modules.
+
+### The furigana backlog was describing the wrong defect
+
+`RUBY_MISMATCH_AUDIT.md` listed 201 strings whose readings looked over-wide. The
+list was wrong about nearly all of them: measured through the real parser rather
+than a regex, 13 strings across 18 sites were genuinely over-wide, and the other
+~95% were `extendBaseLeft` doing its job — a reading legitimately covering text to
+the left of the kanji it is attached to (ラジオ体操《らじおたいそう》). The 13 are
+fixed, the file is retired, and the reason it was wrong is recorded with it.
+
+`ruby-scope.test.js` now holds the question banks at zero over-wide readings instead
+of a budget, and covers the two new corpora as well.
+
+### Item 114: Wayground's length tell is closed
+
+7.4.0 closed this on the JAC Mockup bank (71.7% → 22.7% over 215 rewrites). The
+Wayground bank was the follow-up, and it is done:
+
+|  | before | after | bound |
+|---|---|---|---|
+| answer is the single longest option | 48.5% | **20.4%** | 17–26% (25% is chance) |
+| mean answer length | 11.1 | 11.1 | — |
+| mean distractor length | 8.3 | **10.7** | within 1.5 of the answer |
+| widest single-question gap | 31 | **2** | ≤ 5 |
+
+**The pass ran to a threshold, not a count**: rewrite every question whose answer
+stands 3+ characters above its longest distractor — 185 of them at the branch point,
+191 rewritten in total. That is the population a learner can pick by sight, and it
+is a statement about the content rather than about the test; the rate falls out of
+it. Picking N questions to hit a number is how a bank ends up tuned to its own test.
+
+The per-question bound stays at 5 rather than being tightened to the 2 that was
+measured. 5 is the figure that means "no single question is guessable on its own";
+2 is where this corpus happened to land, and pinning it there would fail future
+authoring for no reason.
+
+Three idioms had to be learned per set, and they are the part worth keeping:
+
+- **wgl01–wgl05 and wgl10 spell readings inline as 漢字（かな）** — because their
+  options render furigana-stripped (`WaygroundMode` passes `opts` through
+  `stripFuri`, so 《》 markers are invisible there). Those parenthesised readings
+  are the reading aid, not noise, and they inflate visible length fast. New text in
+  those sets uses the same form; lengthening means adding *content* in that idiom.
+- **wglv-\* is the opposite case** — it renders with ruby through `VocabMode`, and
+  carries no parenthesised readings at all.
+- **The wglv-\* sets are term-recall questions**, where an option is a single name,
+  so lengthening means choosing a *longer wrong name* rather than padding:
+  水道用ポリエチレン粉体ライニング鋼管 beside 水道用硬質塩化ビニルライニング鋼管. That
+  turned several questions from one long answer among three unrelated stubs (a
+  deburring step, a copper cut, a flare joint) into four comparable candidates,
+  which is the better question regardless of length.
+
+The applier makes the answer slot mechanically untouchable: rewrites are built by
+patching distractor slots of the live data, so the answer is copied rather than
+retyped. 7.4.0's pass had three rewrites where furigana drifted in an answer and
+they were caught on review; a check is cheaper than a review.
+
+### Items 103–105: the register the deck never taught
+
+The plan had these three as product direction rather than branch work — "adding a
+twentieth mode on my own reading of an audit is the owner's call, not mine". The
+owner delegated that call for this session, and the group is built.
+
+**Item 103 — 現場日本語 (`src/data/genba-phrases.js`, 84 phrases).** The gap is
+measured, not assumed, and `genba-phrases.test.js` re-derives it rather than quoting
+it: of the deck's 1,418 vocab cards with a `usage` sentence, **3** are in an
+imperative or request form. Worth knowing which 3 — cards 1203–1205, which
+*describe* the phrases ("when you want it repeated, ask もう一度言ってください").
+The deck talks about the register in Indonesian; it does not speak it. A worker who
+knows all 1,626 cards has still never met `ここ持ってて`.
+
+Twelve phrases in each of the seven functions the plan named: 指示, 注意・警告, 訂正,
+報告, 許可, 確認, 引き継ぎ. `speaker` is load-bearing rather than a label — an
+instruction arrives *at* you and the skill is doing the right thing; a report leaves
+*from* you and the skill is finding the words — so it decides what `answer` and
+`traps` hold, and the test asserts that split by character class. It caught one on
+the first run. The same field carries the teaching point through `polite`: every
+heard line has both forms (ここ持ってて / ここを持っていてください) and every spoken
+line has `polite: null`, because what you say is already polite.
+
+`note` is only grammar where the grammar changes what you do: 持ってくる vs
+持っていく point in opposite directions; 止まりました vs 止めました decides whether
+you reported a breakdown or your own action; 行きます is the correct answer to 来て.
+
+**Item 104 — Bahasa Lapangan.** The plan re-sized this to `S` because the corpus
+already existed (1,409 verb-final `usage` sentences) and then wrote the caveat
+itself: those are dictionary-form descriptions, so the mode would test comprehension
+of a *described* action rather than response to an order. The example in 104's own
+text is `ホースを巻いて片付けてください` — it was describing 103's register all
+along. With 103 in the tree the cheap version stopped being the better one, so this
+drill runs over the new corpus and the caveat disappears rather than being
+documented around. The 1,409 usage sentences stay where they are; they are good card
+content and would have made a worse quiz.
+
+`QuizShell` carries both directions without knowing the difference, because
+`JpFront` already falls back to Indonesian body type for a string that is not
+meaningfully Japanese — the guard written for ConfusionMode and AngkaMode — so a
+situation stem renders as prose and a Japanese one renders with ruby out of the same
+field. Audio is on: for a corpus whose point is what a sentence sounds like arriving
+at speed, reading it off a screen is the easy version.
+
+**Item 105 — Skenario (`src/data/genba-scenes.js`, 6 scenes, 28 beats).** The plan
+blocked this on 103 and said why: "this mode is a shell around it, and building the
+shell first would only produce a convincing-looking mode with nothing true to say."
+朝礼, mid-task instructions, a near-miss, a material shortage, an injury, and
+end-of-shift handover.
+
+**The thread is the feature, and it is why this one cannot use QuizShell.** Every
+other drill in the app is a bag of independent questions, which is what QuizShell
+is: it shuffles, and each question stands alone. Here a beat depends on the ones
+before it — 「どっちですか」 is right in scene 2 only because two beats earlier the
+foreman said 「青いやつ」 and there turned out to be two blue ones; 「4つ足りません」
+is only correct because the beat before asked 「いくつ足りない？」. `buildBeat`
+shuffles options within a beat and never the beats, and the test asserts source
+order rather than trusting it.
+
+The transcript stays on screen and grows. Hiding earlier beats would make this a
+retention test, which the SRS already does better; what it measures is whether you
+can follow a shift. Sides carry who is speaking rather than colours, because a
+colour pair that reads as "them / you" in light theme inverts its own meaning in
+dark. The current beat takes focus on every advance, because the transcript grows
+*above* the question and without it a screen reader's reading position stays where
+the last answer was.
+
+Overlap with 103's corpus is deliberate: 6 of the 14 spoken beats are lines that
+file already drills, and the other 8 only make sense inside their thread. The test
+holds a floor under that overlap, so the two corpora cannot drift into two unrelated
+files teaching two unrelated registers.
+
+### Navigation and accessibility residuals
+
+Each of these is a promise the markup made that the behaviour did not keep.
+
+- **The exam pause overlay was not a dialog.** A `position: fixed` dim with no
+  role, no `aria-modal` and no focus trap: a keyboard user could Tab straight
+  through into the exam behind it and answer questions they could not see, and
+  "Dijeda" was never announced, so nothing said the clock had stopped. It reuses
+  `useFocusTrap`, which already existed with one consumer.
+- **The skip link pointed at an id one screen did not render.** `index.html` ships
+  "Langsung ke konten" → `#main-content`, and the onboarding branch of `App.jsx` had
+  no landmark — so the very first keyboard user, on the very first screen, got a
+  link to nowhere.
+- **A history entry did not carry the params its mode was opened with**, so a
+  hardware-back into a filtered `kartu` deck came back without its scope, and with
+  whatever params the *previous* mode had left on the context.
+- **Back pressed twice behind an exit guard stacked history entries**, so mashing
+  back built a stack that then needed one press per copy to escape.
+- **The quiz progress announcement was `assertive` in four modes and `polite` in
+  SimulasiMode.** "Soal 3 dari 10" is orientation, not an alert; it interrupted a
+  screen reader mid-question on every advance. The answer outcome stays assertive —
+  it is the direct result of the tap just made.
+- `ModeLoader` specified its politeness twice (`role="status"` implies
+  `aria-live="polite"`), and ExportMode told the user to reload without offering a
+  control to do it — on a phone, in an installed PWA, where there may not be a
+  visible one.
+
+### Content defects found in passing
+
+Fixed inside strings this session was already rewriting: `wglv-jp-02#15` offered
+"Pipa temba", truncated mid-word, and `wt07#6` carried
+防音性《ぼうおんせい》能《のう》 — a compound split across the marker boundary.
+
+`src/data/card-index.js` also joined `src/data/cards.js` in `.prettierignore`. Both
+are emitted by `merge-cards.mjs`; only one was listed, so `format:check` had been
+failing since the index was added.
+
+### Still open
+
+- **`wgl09#9` asks about a「キャップillary」継手**, which is garbled — probably
+  キャピラリー継手, but the answer and explanation do not say, so it wants the
+  owner's call rather than a guess.
+- **Items 119, 120 and the mode-correctness sweep** are unchanged from 7.4.0.
+
 ## [7.4.0] - 2026-09-09
 
 The owner supplied the four JAC Official sample-question PDFs, dropped item 59, and asked for the

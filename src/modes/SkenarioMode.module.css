@@ -1,0 +1,197 @@
+/* ─── SkenarioMode.module.css ───────────────────────────────────────────────── */
+/* item 105. The thread is the layout: prior beats read as a conversation, the
+   current beat sits below it as the question. */
+
+/* ── Scene picker ── */
+.sceneBtn {
+  font-family: inherit;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-10);
+  text-align: left;
+  padding: var(--space-12);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  border-radius: var(--r-md, 10px);
+  cursor: pointer;
+}
+
+/* A token, not a 1.5rem literal: item 72's off-scale count is a ratchet that may
+   fall and never rise, and this glyph is not in a fixed-size box, so letting it
+   grow with the reading size costs nothing. */
+.sceneEmoji {
+  flex: none;
+  font-size: var(--fs-title);
+  line-height: 1.2;
+}
+
+.sceneBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.sceneTitle {
+  display: block;
+  font-weight: 700;
+}
+
+.sceneId {
+  font-size: var(--fs-caption);
+  color: var(--ssw-teal);
+  font-weight: 600;
+}
+
+.sceneSetting {
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  line-height: 1.5;
+}
+
+.sceneCount {
+  flex: none;
+  align-self: center;
+  font-size: var(--fs-micro);
+  color: var(--ssw-textDim);
+  white-space: nowrap;
+}
+
+.sceneChip {
+  font-size: var(--fs-caption);
+  color: var(--ssw-teal);
+  font-weight: 600;
+}
+
+.setting {
+  margin: var(--space-10) 0;
+  font-size: var(--fs-caption);
+  color: var(--ssw-textMuted);
+  line-height: 1.5;
+}
+
+/* ── The transcript ── */
+.thread {
+  list-style: none;
+  margin: 0 0 var(--space-12);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.fromThem,
+.fromYou {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 88%;
+  padding: var(--space-8) var(--space-10);
+  border-radius: var(--r-md, 10px);
+  font-size: var(--fs-caption);
+}
+
+/* Sides, not colours, carry who is speaking — a colour pair that reads as
+   "them / you" in light theme inverts its own meaning in dark. */
+.fromThem {
+  align-self: flex-start;
+  background: var(--ssw-surfaceActive);
+  border: 1px solid var(--ssw-border);
+  border-bottom-left-radius: 2px;
+}
+
+.fromYou {
+  align-self: flex-end;
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-borderActive);
+  border-bottom-right-radius: 2px;
+}
+
+.who {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--ssw-textDim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bubbleJp {
+  display: block;
+  color: var(--ssw-textBright);
+}
+
+.bubbleId {
+  display: block;
+  color: var(--ssw-textMuted);
+}
+
+/* ── The beat being asked about ── */
+.current {
+  padding: var(--space-12);
+  margin-bottom: var(--space-12);
+  background: var(--ssw-surfaceActive);
+  border: 1px solid var(--ssw-borderActive);
+  border-radius: var(--r-md, 10px);
+}
+
+/* Focused programmatically on every advance so a screen reader lands on the new
+   beat instead of staying where the last answer was. Never a mouse focus ring. */
+.current:focus {
+  outline: none;
+}
+
+.current:focus-visible {
+  outline: 2px solid var(--ssw-teal);
+  outline-offset: 2px;
+}
+
+.currentJp {
+  margin: var(--space-4) 0;
+}
+
+.audio {
+  font-family: inherit;
+  font-size: var(--fs-caption);
+  padding: var(--space-4) var(--space-10);
+  border-radius: 99px;
+  background: transparent;
+  color: var(--ssw-teal);
+  border: 1px solid var(--ssw-teal);
+  cursor: pointer;
+}
+
+.ask {
+  margin: var(--space-10) 0 0;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ssw-textBright);
+  line-height: 1.5;
+}
+
+/* ── After answering ── */
+.note {
+  margin: var(--space-12) 0;
+  padding: var(--space-10) var(--space-12);
+  border-left: 3px solid var(--ssw-teal);
+  border-radius: 6px;
+  background: var(--ssw-surface);
+}
+
+.noteJp {
+  font-size: var(--fs-small);
+  color: var(--ssw-textBright);
+  margin-bottom: var(--space-6);
+}
+
+.noteId {
+  color: var(--ssw-textMuted);
+  font-weight: 400;
+}
+
+.noteBody {
+  margin: 0;
+  font-size: var(--fs-caption);
+  color: var(--ssw-text);
+  line-height: 1.6;
+}

@@ -130,6 +130,14 @@ export const EXAM_FULL_QUESTIONS = EXAM_FULL_TEORI + EXAM_FULL_PRAKTIK;
 export const QUIZ_QUESTION_COUNTS = {
   wayground: 740,
   vocab: 240,
+  // items 103/104. A literal here for the same reason the two above are: the
+  // menu quotes it, and router/modes.js is on the first-paint critical path, so
+  // it must not import a data file to count an array. mode-counts.test.js
+  // re-derives all three from the real data.
+  genba: 84,
+  // item 105 counts scenes, not questions: a scene is a thread you finish, and
+  // its length is a property of the dialogue rather than a session setting.
+  skenario: 6,
 };
 
 /** Minutes a run of `n` questions is given, at the rate above. Exported so the

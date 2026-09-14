@@ -21,5 +21,9 @@ export { QUIZ_SETS, getQuizSetsForTrack } from './quiz-sets.js';
 export { ANGKA_KUNCI } from './angka-kunci.js';
 export { DANGER_PAIRS } from './danger-pairs.js';
 export { CONFUSION_PAIRS } from './confusion-pairs.js';
+// 現場日本語 — the spoken register the terminology deck has none of (item 103)
+export { GENBA_PHRASES, GENBA_FUNCTIONS } from './genba-phrases.js';
+// The same register threaded into whole conversations (item 105)
+export { GENBA_SCENES } from './genba-scenes.js';
 
 export { CATEGORIES, getCatInfo, SOURCE_META, SOURCE_GROUPS, SOURCE_ACCENT } from './categories.js';

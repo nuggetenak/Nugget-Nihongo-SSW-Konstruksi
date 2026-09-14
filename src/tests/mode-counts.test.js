@@ -17,6 +17,8 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
+import { GENBA_PHRASES } from '../data/genba-phrases.js';
+import { GENBA_SCENES } from '../data/genba-scenes.js';
 import { isVocabId } from '../utils/quiz-classification.js';
 import { QUIZ_QUESTION_COUNTS } from '../utils/constants.js';
 import { MODE_META } from '../router/modes.js';
@@ -40,9 +42,28 @@ describe('the question counts the menu quotes', () => {
     ).toBe(real);
   });
 
+  it('matches the real 現場日本語 corpus', () => {
+    // Same trap, third entry (items 103/104): genba-phrases.js is small today,
+    // but the reason the other two are literals applies to any data file the
+    // registry would otherwise import.
+    expect(
+      QUIZ_QUESTION_COUNTS.genba,
+      `The corpus has ${GENBA_PHRASES.length} phrases — update QUIZ_QUESTION_COUNTS in src/utils/constants.js`
+    ).toBe(GENBA_PHRASES.length);
+  });
+
+  it('matches the real scene list', () => {
+    expect(
+      QUIZ_QUESTION_COUNTS.skenario,
+      `There are ${GENBA_SCENES.length} scenes — update QUIZ_QUESTION_COUNTS in src/utils/constants.js`
+    ).toBe(GENBA_SCENES.length);
+  });
+
   it('is what the menu labels actually print', () => {
     expect(MODE_META.wayground.desc).toContain(String(QUIZ_QUESTION_COUNTS.wayground));
     expect(MODE_META.vocab.desc).toContain(String(QUIZ_QUESTION_COUNTS.vocab));
+    expect(MODE_META.genba.desc).toContain(String(QUIZ_QUESTION_COUNTS.genba));
+    expect(MODE_META.skenario.desc).toContain(String(QUIZ_QUESTION_COUNTS.skenario));
   });
 
   it('keeps the registry out of the question data', () => {
