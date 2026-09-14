@@ -17,7 +17,7 @@ import { ToastProvider } from '../components/Toast.jsx';
 import { AppProvider } from '../contexts/AppContext.jsx';
 import { ProgressProvider } from '../contexts/ProgressContext.jsx';
 import { _reset_for_test } from '../storage/engine.js';
-import SimulasiMode from '../modes/SimulasiMode.jsx';
+import SimulasiMode, { QuestionNavigator } from '../modes/SimulasiMode.jsx';
 
 function renderSim() {
   return render(
@@ -191,5 +191,48 @@ describe('simulasi pause overlay + exit confirm (item 187)', () => {
     expect(dialog).toBeTruthy();
     expect(dialog.getAttribute('aria-labelledby')).toBe('simulasi-paused-title');
     expect(screen.getByText('Dijeda')).toBeTruthy();
+  });
+});
+
+// ─── The 1 Hz re-render (item 188) ───────────────────────────────────────────
+// `timeLeft` is state on SimulasiMode, so every tick re-rendered the whole
+// component -- including one button per question. On a 51-question JAC exam
+// that is 51 buttons reconciled every second for up to a hundred minutes, on
+// the cheap Android phones this app was built for. The navigator is memoised
+// now and nothing in it depends on the clock.
+//
+// Note on what is NOT asserted here: comparing the navigator's DOM nodes before
+// and after a tick proves nothing, because React reuses DOM nodes across
+// re-renders whether or not the subtree was skipped. A test written that way
+// passes with the memo removed, which makes it worse than no test. So the
+// memoisation is asserted structurally, and the tick is asserted separately.
+describe('simulasi timer does not re-render the navigator (item 188)', () => {
+  it('the navigator is a memo component', () => {
+    // Symbol-level check: survives any refactor of the component's insides, and
+    // fails the moment someone unwraps memo() -- which is the regression that
+    // would silently restore the 51-buttons-per-second cost.
+    expect(QuestionNavigator.$$typeof).toBe(Symbol.for('react.memo'));
+  });
+
+  it('the clock still ticks', async () => {
+    vi.useFakeTimers();
+    try {
+      renderSim();
+      await act(async () => fireEvent.click(screen.getByText('Mulai Simulasi 🎯')));
+      const readClock = () =>
+        [...document.querySelectorAll('div')]
+          .map((d) => d.textContent)
+          .find((t) => /^\d{1,3}:\d{2}$/.test(t || ''));
+      const before = readClock();
+      expect(before, 'a clock should be on screen').toBeTruthy();
+
+      await act(async () => {
+        vi.advanceTimersByTime(3000);
+      });
+
+      expect(readClock(), 'the exam clock must still be counting down').not.toBe(before);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

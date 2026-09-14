@@ -4,7 +4,7 @@
 // Note: progress fill gradient conditional on pass/fail — justified inline.
 // Note: red gradient buttons (exam theme) — justified inline (not amber).
 // Note: pause overlay bg — justified inline (full-screen dim).
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, memo } from 'react';
 import { useFocusTrap } from '../hooks/useFocusTrap.js';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
@@ -466,6 +466,94 @@ export function drawExam(mode, config) {
  * 15-question Latihan Cepat and a 44-question JAC pair are not comparable runs.
  */
 const simScoreKey = (mode, preset) => `${mode}-${preset}`;
+
+// ─── Question navigator ──────────────────────────────────────────────────────
+// Extracted and memoised (item 188). `timeLeft` is state on SimulasiMode and
+// ticks once a second, so every tick re-rendered this component's whole body:
+// on a 51-question JAC exam that is 51 buttons reconciled per second for up to
+// a hundred minutes, on phones chosen for being cheap. Nothing here depends on
+// the clock -- only on which question is current, which are answered, and which
+// are flagged -- so memo() skips it entirely on a tick and it re-renders only
+// when one of those actually changes.
+//
+// `answers` and `flagged` are replaced rather than mutated by their setters
+// (setAnswers builds a new array, setFlagged a new Set), so reference equality
+// is the correct comparison and the default shallow memo works. If either ever
+// starts being mutated in place, this silently stops updating -- which is the
+// usual memo trap and the reason this comment names the assumption.
+//
+// Jump anywhere, see answered/unanswered/current at a glance, matching how a
+// paper answer sheet lets you scan and jump to any question rather than only
+// stepping through in order.
+export const QuestionNavigator = memo(function QuestionNavigator({
+  count,
+  qIdx,
+  answers,
+  flagged,
+  onJump,
+}) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 'var(--space-6)',
+        marginTop: 'var(--space-16)',
+        padding: 'var(--space-10)',
+        background: T.surface,
+        border: `1px solid ${T.border}`,
+        borderRadius: 12,
+      }}
+    >
+      {Array.from({ length: count }, (_, i) => {
+        const isCurrent = i === qIdx;
+        const isAnswered = answers[i] !== undefined;
+        const isMarked = flagged.has(i);
+        return (
+          <button
+            key={i}
+            onClick={() => onJump(i)}
+            aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isMarked ? ', ditandai untuk ditinjau ulang' : ''}${isCurrent ? ', sedang dilihat' : ''}`}
+            style={{
+              position: 'relative',
+              width: 30,
+              height: 30,
+              borderRadius: 8,
+              fontSize: 'var(--fs-small)',
+              fontWeight: 700,
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+              background: isCurrent ? T.amber : isAnswered ? T.surfaceActive : T.surface,
+              color: isCurrent ? '#1c1917' : isAnswered ? T.text : T.textDim,
+              border: `1.5px solid ${isCurrent ? T.amber : isAnswered ? T.borderActive : T.border}`,
+            }}
+          >
+            {i + 1}
+            {/* A corner dot, not a colour swap: answered/current already own the
+                cell's fill and border, and flagging has to be readable on top of
+                either of them rather than replacing one. The state is in the
+                aria-label above, so this is decoration. */}
+            {isMarked && (
+              <span
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: -3,
+                  right: -3,
+                  width: 9,
+                  height: 9,
+                  borderRadius: '50%',
+                  background: T.amber,
+                  border: `1.5px solid ${T.surface}`,
+                }}
+              />
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+});
 
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const { prefs } = useApp();
@@ -1381,68 +1469,13 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         Lewati daftar soal → Kumpulkan Ujian
       </a>
 
-      {/* Question navigator — jump anywhere, see answered/unanswered/current
-          at a glance, matching how a paper answer sheet lets you scan and
-          jump to any question, not just step through in order. */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 'var(--space-6)',
-          marginTop: 'var(--space-16)',
-          padding: 'var(--space-10)',
-          background: T.surface,
-          border: `1px solid ${T.border}`,
-          borderRadius: 12,
-        }}
-      >
-        {questions.map((_, i) => {
-          const isCurrent = i === qIdx;
-          const isAnswered = answers[i] !== undefined;
-          const isMarked = flagged.has(i);
-          return (
-            <button
-              key={i}
-              onClick={() => goToQuestion(i)}
-              aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isMarked ? ', ditandai untuk ditinjau ulang' : ''}${isCurrent ? ', sedang dilihat' : ''}`}
-              style={{
-                position: 'relative',
-                width: 30,
-                height: 30,
-                borderRadius: 8,
-                fontSize: 'var(--fs-small)',
-                fontWeight: 700,
-                cursor: 'pointer',
-                fontFamily: 'inherit',
-                background: isCurrent ? T.amber : isAnswered ? T.surfaceActive : T.surface,
-                color: isCurrent ? '#1c1917' : isAnswered ? T.text : T.textDim,
-                border: `1.5px solid ${isCurrent ? T.amber : isAnswered ? T.borderActive : T.border}`,
-              }}
-            >
-              {i + 1}
-              {/* A corner dot, not a colour swap: answered/current already own
-                  the cell's fill and border, and flagging has to be readable on
-                  top of either of them rather than replacing one. The state is
-                  in the aria-label above, so this is decoration. */}
-              {isMarked && (
-                <span
-                  aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    top: -3,
-                    right: -3,
-                    width: 9,
-                    height: 9,
-                    borderRadius: '50%',
-                    background: T.amber,
-                    border: `1.5px solid ${T.surface}`,
-                  }}
-                />
-              )}
-            </button>
-          );
-        })}
-      </div>
+      <QuestionNavigator
+        count={questions.length}
+        qIdx={qIdx}
+        answers={answers}
+        flagged={flagged}
+        onJump={goToQuestion}
+      />
 
       {/* Prev / Next / Submit — replaces the old single auto-advancing
           "Lanjut" button. Submit is always available (a real exam lets
