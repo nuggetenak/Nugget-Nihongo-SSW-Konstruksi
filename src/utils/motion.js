@@ -65,15 +65,34 @@ export function withViewTransition(update, flushSync) {
   const done = () => {
     _inTransition = false;
   };
-  const transition = document.startViewTransition(() => {
-    // flushSync is injected rather than imported so this module stays free of a
-    // react-dom dependency: utils/ sits below the component layer everywhere
-    // else in this repo, and one import would be the exception that erodes that.
-    if (flushSync) flushSync(update);
-    else update();
-  });
-  // finished rejects when a transition is skipped (another one starts, the tab
-  // is hidden mid-flight). Either way the flag has to come back down, or the
-  // first skipped transition disables every transition after it.
-  transition.finished.then(done, done);
+  let transition;
+  try {
+    transition = document.startViewTransition(() => {
+      // flushSync is injected rather than imported so this module stays free of
+      // a react-dom dependency: utils/ sits below the component layer everywhere
+      // else in this repo, and one import would be the exception that erodes it.
+      if (flushSync) flushSync(update);
+      else update();
+    });
+  } catch {
+    // The update already ran inside the callback if we got that far; if the API
+    // itself threw before calling it, run it directly. Either way the screen
+    // must end up on the new state -- a failed animation may not cost the user
+    // their navigation.
+    done();
+    update();
+    return;
+  }
+  // `finished` rejects when a transition is SKIPPED (another starts, the tab is
+  // hidden mid-flight), so both settlements clear the flag: one that only
+  // cleared on success would let the first skip disable every transition after
+  // it, permanently, for the life of the page.
+  //
+  // The optional chaining is not defensive noise. The real API returns a
+  // ViewTransition, but a stub or a polyfill can return undefined -- CI caught
+  // exactly that against the test double in motion-haptics.test.jsx, and the
+  // TypeError it threw stranded _inTransition at true, which is the same
+  // permanent-disable failure by another route.
+  if (transition?.finished?.then) transition.finished.then(done, done);
+  else done();
 }

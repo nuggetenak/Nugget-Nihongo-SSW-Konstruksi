@@ -72,3 +72,44 @@ describe('ConfirmDialog — destructive-confirm haptic (item 21)', () => {
     expect(haptic.wrong).toHaveBeenCalledTimes(1);
   });
 });
+
+// ─── withViewTransition survives a stub that returns nothing (item 147) ──────
+// CI caught this against the double above: `vi.fn((cb) => cb())` returns
+// undefined, the helper read `.finished` off it, and the TypeError left its
+// re-entrancy flag stuck at true -- so every LATER navigation silently skipped
+// its transition, permanently, from one throw. The real API returns a
+// ViewTransition; a stub or a polyfill need not.
+describe('withViewTransition — robustness of the re-entrancy flag', () => {
+  it('still runs the update when startViewTransition returns nothing', async () => {
+    const { withViewTransition } = await import('../utils/motion.js');
+    document.startViewTransition = vi.fn((cb) => cb());
+    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
+
+    const ran = [];
+    expect(() => withViewTransition(() => ran.push('a'))).not.toThrow();
+    expect(ran).toEqual(['a']);
+
+    // The flag must be down again, or this second call falls through the
+    // re-entrancy branch instead of starting its own transition.
+    withViewTransition(() => ran.push('b'));
+    expect(ran).toEqual(['a', 'b']);
+    expect(document.startViewTransition).toHaveBeenCalledTimes(2);
+    delete document.startViewTransition;
+  });
+
+  it('runs the update even if startViewTransition itself throws', async () => {
+    const { withViewTransition } = await import('../utils/motion.js');
+    document.startViewTransition = vi.fn(() => {
+      throw new Error('no');
+    });
+    window.matchMedia = vi.fn().mockReturnValue({ matches: false });
+
+    const ran = [];
+    expect(() => withViewTransition(() => ran.push('a'))).not.toThrow();
+    expect(ran, 'a failed animation must not cost the user their navigation').toEqual(['a']);
+
+    withViewTransition(() => ran.push('b'));
+    expect(ran).toEqual(['a', 'b']);
+    delete document.startViewTransition;
+  });
+});
