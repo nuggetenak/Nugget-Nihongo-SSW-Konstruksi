@@ -122,3 +122,43 @@ export function withViewTransition(update, flushSync) {
   if (transition?.finished?.then) transition.finished.then(done, done);
   else done();
 }
+
+/**
+ * The duration scale, in milliseconds, for JS that has to agree with CSS.
+ *
+ * Fourteen sites hardcode a delay that stands in for "wait for the animation":
+ * the flashcard's 400ms post-rating advance, Onboarding's 600ms, QuizShell's
+ * autoNextDelay, and the auto-advance in Dengar, Review, Sprint, Angka, Danger
+ * and Confusion. Nothing linked any of them to the CSS duration they were
+ * waiting on, and nothing failed if one drifted.
+ *
+ * motion-scale.test.js parses these same numbers out of global.css and asserts
+ * they match, so the two cannot separate silently — the "one source per
+ * behaviour" argument the repo already makes about role="status" vs aria-live.
+ *
+ * NOT scaled by --t-mult. A caller wanting the reader's speed setting applied
+ * should use `scaled()` below; the raw rungs stay raw so the test above can
+ * compare them to the literals in the CSS.
+ */
+export const T = {
+  instant: 80,
+  fast: 120,
+  base: 200,
+  enter: 260,
+  slow: 350,
+  count: 1000,
+};
+
+/**
+ * A duration with the reader's Gerakan speed applied — the JS counterpart of
+ * resolving `calc(200ms * var(--t-mult))`.
+ *
+ * Reads the property off the root rather than taking the pref as an argument,
+ * for the same reason prefersReducedMotion() does: applyMotion() has already
+ * written it there, and utils/ has no business importing React state.
+ */
+export function scaled(ms) {
+  if (typeof document === 'undefined') return ms;
+  const mult = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--t-mult'));
+  return Number.isFinite(mult) && mult > 0 ? Math.round(ms * mult) : ms;
+}

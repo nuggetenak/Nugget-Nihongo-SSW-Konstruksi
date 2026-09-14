@@ -32,3 +32,16 @@
   border-radius: var(--r-pill);
   margin: 0 auto var(--space-20);
 }
+
+/* ── Exit (item 148) ─────────────────────────────────────────────────────────
+   The sheet had an entrance and no exit: it slid up with weight and then simply
+   was not there, which is the moment people describe as the app "jumping".
+   --ease-exit accelerates, because something leaving should not linger the way
+   something arriving is allowed to. */
+.backdrop[data-closing='true'] {
+  animation: fadeIn var(--t-fast) var(--ease-exit) reverse forwards;
+}
+
+.sheet[data-closing='true'] {
+  animation: slideUp var(--t-fast) var(--ease-exit) reverse forwards;
+}

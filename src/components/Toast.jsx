@@ -12,6 +12,7 @@
 // for when a toast is the right vehicle at all now lives in
 // docs/COMPONENT_SPEC.md rather than nowhere.
 import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
+import { useExitTransition } from '../hooks/useExitTransition.js';
 import { isTypingTarget } from '../utils/keyboard.js';
 import S from './Toast.module.css';
 
@@ -27,15 +28,6 @@ export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
   const queueRef = useRef([]);
   const nextId = useRef(0);
-  // Mirrors `toasts` so the global Escape handler can read the current stack
-  // without a state updater and without re-subscribing on every change. Synced in
-  // an effect rather than assigned during render: a ref write in the render body
-  // is the same class of impurity as the updater below, and Escape is a user
-  // event, so the commit has always already happened by the time it is read.
-  const toastsRef = useRef(toasts);
-  useEffect(() => {
-    toastsRef.current = toasts;
-  }, [toasts]);
 
   const dismiss = useCallback((id) => {
     // The dequeue happens here, outside the updater. It used to be a
@@ -81,41 +73,28 @@ export function ToastProvider({ children }) {
     []
   );
 
-  // Escape dismisses the frontmost (most recently shown) toast. Guarded
-  // against typing targets so it doesn't fight an input's own Escape
-  // behaviour (e.g. clearing a search field) — same guard item 31 added for
-  // the first global key handler in this app, reused rather than
-  // reinvented (see utils/keyboard.js).
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key !== 'Escape' || isTypingTarget(e)) return;
-      // Reads the frontmost toast from a ref rather than calling `dismiss` from
-      // inside a `setToasts` updater, which is the same impurity dismiss itself
-      // just stopped doing — and worse here, since it dispatched a second state
-      // update from within the first one's updater.
-      const ts = toastsRef.current;
-      if (ts.length === 0) return;
-      dismiss(ts[ts.length - 1].id);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [dismiss]);
-
   return (
     <ToastCtx.Provider value={{ show, dismiss }}>
       {children}
       <div className={S.stack} aria-atomic="false">
-        {toasts.map((t) => (
-          <ToastItem key={t.id} toast={t} onDismiss={dismiss} />
+        {toasts.map((t, i) => (
+          <ToastItem key={t.id} toast={t} onDismiss={dismiss} isFront={i === toasts.length - 1} />
         ))}
       </div>
     </ToastCtx.Provider>
   );
 }
 
-function ToastItem({ toast: t, onDismiss }) {
+function ToastItem({ toast: t, onDismiss, isFront }) {
   const touchStart = useRef(null);
   const [paused, setPaused] = useState(false);
+  // `toastIn` existed and nothing played it in reverse: a toast arrived with
+  // weight and then was simply gone mid-stack, which also made the stack jump
+  // as the ones below it moved up. The `toastOut` keyframe was deleted in the
+  // 2026-09-04 consolidation as unreferenced -- it had never been wired, not
+  // stopped being used. The provider owns the array, so the item cannot keep
+  // itself alive; it delays telling the provider instead.
+  const { closing, requestClose } = useExitTransition(() => onDismiss(t.id));
 
   // Owns its own timer so cleanup is automatic: pausing, manual dismissal
   // (this component unmounts, the effect's cleanup runs), and provider
@@ -123,9 +102,35 @@ function ToastItem({ toast: t, onDismiss }) {
   // instead of a hand-tracked timer map that has to remember every exit.
   useEffect(() => {
     if (paused) return;
-    const handle = setTimeout(() => onDismiss(t.id), t.duration);
+    const handle = setTimeout(() => requestClose(), t.duration);
     return () => clearTimeout(handle);
-  }, [paused, t.id, t.duration, onDismiss]);
+  }, [paused, t.duration, requestClose]);
+
+  // Escape dismisses the frontmost (most recently shown) toast, and it lives
+  // here rather than on the provider so it goes out through `requestClose` like
+  // every other dismissal. On the provider it called `dismiss(id)` directly,
+  // which after item 148 would mean the close button animated the toast away
+  // and Escape made it vanish -- one component leaving two different ways
+  // depending on how you dismissed it, which is the exact defect the sheet's
+  // `useSheetClose` exists to prevent.
+  //
+  // Each mounted toast subscribes and only the front one acts, which also
+  // retires the `toastsRef` mirror the provider kept solely to answer "which is
+  // frontmost" from inside an event handler.
+  //
+  // Guarded against typing targets so it doesn't fight an input's own Escape
+  // behaviour (e.g. clearing a search field) — same guard item 31 added for the
+  // first global key handler in this app, reused rather than reinvented (see
+  // utils/keyboard.js).
+  useEffect(() => {
+    if (!isFront) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape' || isTypingTarget(e)) return;
+      requestClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isFront, requestClose]);
 
   const onTouchStart = (e) => {
     touchStart.current = e.touches[0].clientX;
@@ -133,7 +138,7 @@ function ToastItem({ toast: t, onDismiss }) {
   const onTouchEnd = (e) => {
     if (touchStart.current === null) return;
     const delta = touchStart.current - e.changedTouches[0].clientX;
-    if (delta > 60) onDismiss(t.id); // swipe left 60px → dismiss
+    if (delta > 60) requestClose(); // swipe left 60px → dismiss
     touchStart.current = null;
   };
 
@@ -148,6 +153,7 @@ function ToastItem({ toast: t, onDismiss }) {
   return (
     <div
       className={S.toast}
+      data-closing={closing}
       data-type={t.type ?? 'default'}
       role={isAlert ? 'alert' : 'status'}
       onTouchStart={onTouchStart}
@@ -162,15 +168,18 @@ function ToastItem({ toast: t, onDismiss }) {
         <button
           className={S.btnUndo}
           onClick={() => {
+            // Undo runs immediately; only the toast's removal waits for its
+            // exit. Delaying the undo itself would make the button feel
+            // unresponsive for the sake of an animation.
             t.undo();
-            onDismiss(t.id);
+            requestClose();
           }}
           aria-label={t.actionLabel}
         >
           {t.actionLabel}
         </button>
       )}
-      <button className={S.btnClose} onClick={() => onDismiss(t.id)} aria-label="Tutup notifikasi">
+      <button className={S.btnClose} onClick={() => requestClose()} aria-label="Tutup notifikasi">
         ✕
       </button>
     </div>

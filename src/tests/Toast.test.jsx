@@ -2,6 +2,17 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ToastProvider, useToast } from '../components/Toast.jsx';
+import { T } from '../utils/motion.js';
+
+// A dismissed toast plays `toastOut` before the provider drops it from the array
+// (item 148) -- it no longer disappears on the frame you dismiss it. Every
+// assertion below that a toast is GONE has to sit on the far side of that exit,
+// which is what this does. Deliberately not folded into the dismissing helper:
+// the wait is the contract, so each test says where it expects to wait.
+const flushExit = () =>
+  act(() => {
+    vi.advanceTimersByTime(T.fast + 1);
+  });
 
 vi.mock('../components/Toast.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => key }),
@@ -41,6 +52,7 @@ describe('Toast', () => {
     act(() => {
       vi.advanceTimersByTime(2001);
     });
+    flushExit();
     expect(screen.queryByText('Sementara')).toBeNull();
   });
 
@@ -50,6 +62,8 @@ describe('Toast', () => {
     fireEvent.click(screen.getByRole('button', { name: 'show' }));
     const undoBtn = screen.getByRole('button', { name: /batalkan/i });
     fireEvent.click(undoBtn);
+    // Synchronously, with no timer advanced: the toast animates out afterwards,
+    // but the undo itself is an action the user took and may not wait on it.
     expect(onUndo).toHaveBeenCalledTimes(1);
   });
 
@@ -59,6 +73,7 @@ describe('Toast', () => {
     expect(screen.getByText('Tutup saya')).toBeTruthy();
     const closeBtn = screen.getByRole('button', { name: /tutup notifikasi/i });
     fireEvent.click(closeBtn);
+    flushExit();
     expect(screen.queryByText('Tutup saya')).toBeNull();
   });
 
@@ -109,6 +124,7 @@ describe('Toast', () => {
     // Dismiss A (the close button of the first toast) — C should take its slot.
     const closeButtons = screen.getAllByRole('button', { name: /tutup notifikasi/i });
     fireEvent.click(closeButtons[0]);
+    flushExit();
     expect(screen.getByText('Toast C')).toBeTruthy();
     expect(screen.getByText('Toast B')).toBeTruthy();
   });
@@ -137,6 +153,7 @@ describe('Toast', () => {
 
     const closeButtons = screen.getAllByRole('button', { name: /tutup notifikasi/i });
     fireEvent.click(closeButtons[0]); // free a slot
+    flushExit();
     expect(screen.getByText('Urgent')).toBeTruthy();
     expect(screen.queryByText('Toast D')).toBeNull();
   });
@@ -159,6 +176,10 @@ describe('Toast', () => {
     fireEvent.click(screen.getByRole('button', { name: 'a' }));
     fireEvent.click(screen.getByRole('button', { name: 'b' }));
     fireEvent.keyDown(window, { key: 'Escape' });
+    // Escape goes out through the same exit as the close button -- it used to
+    // remove the toast on the spot, which after item 148 would have been one
+    // component leaving two different ways.
+    flushExit();
     expect(screen.queryByText('Toast B')).toBeNull();
     expect(screen.getByText('Toast A')).toBeTruthy();
   });
@@ -197,6 +218,7 @@ describe('Toast', () => {
     act(() => {
       vi.advanceTimersByTime(2001);
     });
+    flushExit();
     expect(screen.queryByText('Sementara')).toBeNull();
   });
 

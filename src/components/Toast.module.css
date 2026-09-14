@@ -119,3 +119,8 @@
 :root[data-motion-no-press] .btnClose:active {
   transform: none;
 }
+
+/* ── Exit (item 148) ─────────────────────────────────────────────────────── */
+.toast[data-closing='true'] {
+  animation: toastOut var(--t-fast) var(--ease-exit) forwards;
+}

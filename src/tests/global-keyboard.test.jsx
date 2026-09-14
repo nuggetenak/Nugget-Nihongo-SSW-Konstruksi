@@ -4,7 +4,7 @@
 // guards (isTypingTarget, an open dialog/sheet) are the part actually worth
 // testing; the plain "does Escape call exitMode" path is the easy half.
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import { createElement } from 'react';
 import { _reset_for_test } from '../storage/engine.js';
 import { AppProvider, useApp } from '../contexts/AppContext.jsx';
@@ -122,8 +122,10 @@ describe('GlobalKeyboardLayer', () => {
       fireEvent.keyDown(window, { key: 'Escape' });
     });
 
-    // The dialog closed (Sheet's own Escape handling)...
-    expect(screen.queryByRole('dialog')).toBeNull();
+    // The dialog closed (Sheet's own Escape handling). Awaited because the
+    // sheet animates out before it unmounts (item 148) -- the assertion that
+    // matters is that it goes, not that it goes on the same frame.
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     // ...but the mode underneath is untouched -- this Escape press was
     // consumed by the dialog, not double-handled by the global layer.
     expect(getCtx().mode).toBe('kartu');

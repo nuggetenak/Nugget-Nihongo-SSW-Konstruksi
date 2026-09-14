@@ -18,6 +18,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { resolve, join, relative } from 'path';
+import { T } from '../utils/motion.js';
 
 const SRC = resolve(__dirname, '..');
 const global_ = readFileSync(resolve(SRC, 'styles/global.css'), 'utf-8');
@@ -125,5 +126,26 @@ describe('motion scale', () => {
           );
         });
     }
+  });
+});
+
+describe('the JS scale and the CSS scale are the same scale', () => {
+  it('every T rung equals the literal inside its --t-* token', () => {
+    // Fourteen setTimeout sites stand in for "wait for the animation to finish"
+    // and none of them was linked to the duration it was waiting on. Exporting T
+    // is only worth anything if it cannot drift from the CSS, so this parses the
+    // literal back out of the calc() and compares.
+    for (const [rung, ms] of Object.entries(T)) {
+      const m = global_.match(new RegExp(`--t-${rung}:\\s*calc\\((\\d+)ms`));
+      expect(m, `--t-${rung} is not a calc() of a literal ms value`).toBeTruthy();
+      expect(Number(m[1]), `--t-${rung} disagrees with T.${rung}`).toBe(ms);
+    }
+  });
+
+  it('covers every rung the CSS declares, with nothing extra', () => {
+    const declared = [...global_.matchAll(/^\s*--t-([a-z]+):/gm)]
+      .map((m) => m[1])
+      .filter((n) => n !== 'mult');
+    expect(Object.keys(T).sort()).toEqual(declared.sort());
   });
 });

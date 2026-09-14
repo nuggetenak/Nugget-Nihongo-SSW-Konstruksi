@@ -379,6 +379,21 @@ body {
   }
 }
 
+/* Restored (item 148). It was deleted in the 2026-09-04 consolidation as
+   unreferenced -- which was true, and meant it had never been WIRED, not that
+   it had stopped being used. A toast faded in and then vanished mid-stack,
+   which also made the stack jump as the ones below moved up. */
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+
 @keyframes toastIn {
   from {
     opacity: 0;
