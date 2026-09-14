@@ -3,6 +3,8 @@
 // Reads/writes via storage engine (prefs doc).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { flushSync } from 'react-dom';
+import { withViewTransition } from '../utils/motion.js';
 import {
   createContext,
   useContext,
@@ -134,11 +136,25 @@ export function AppProvider({ children }) {
   const goMode = useCallback(
     (m, params = null) => {
       runGuarded(() => {
-        setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
-        setMode(m);
-        setModeParams(params);
-        setPref('lastMode', m);
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        // Wrapped here rather than at each of the seven call sites, so entering a
+        // mode from Dashboard, BelajarTab, SayaTab, a banner or an error screen
+        // all transition the same way. SideNav and BottomNav also wrap their own
+        // gesture; withViewTransition is re-entrant and the inner call is a
+        // no-op, so the double wrap costs nothing.
+        //
+        // exitMode and goBack are deliberately NOT wrapped. exitMode's own
+        // comment above requires it to be synchronous -- things depend on `mode`
+        // being null immediately after it returns -- and a View Transition
+        // callback is queued by the browser, so wrapping it would put that
+        // guarantee at the mercy of scheduling. The back direction stays a hard
+        // cut until it has its own test.
+        withViewTransition(() => {
+          setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
+          setMode(m);
+          setModeParams(params);
+          setPref('lastMode', m);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }, flushSync);
       });
     },
     [mode, setPref, runGuarded]

@@ -17,6 +17,8 @@
 // looking like it doesn't know where you are.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { flushSync } from 'react-dom';
+import { withViewTransition } from '../utils/motion.js';
 import Icon from './Icon.jsx';
 import { TOTAL_CARDS } from '../utils/constants.js';
 import { MODE_SECTIONS, MODE_META } from '../router/modes.js';
@@ -43,6 +45,13 @@ function activeSectionKey(mode) {
 export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelectMode }) {
   const openSection = activeSectionKey(mode);
 
+  // Both navs are always mounted and CSS picks which is visible, so these are
+  // the same navigations BottomNav performs -- and until now only BottomNav
+  // wrapped them. A tab switch crossfaded on a phone and hard-cut on a desktop,
+  // for no reason anyone had decided. Same helper, same reduced-motion check.
+  const goTab = (key) => withViewTransition(() => onChange(key), flushSync);
+  const goMode = (m) => withViewTransition(() => onSelectMode(m), flushSync);
+
   return (
     <nav className={s.side} aria-label="Navigasi utama">
       <div className={s.brand}>
@@ -59,7 +68,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
               <button
                 className={s.item}
                 data-active={isActive}
-                onClick={() => onChange(tab.key)}
+                onClick={() => goTab(tab.key)}
                 aria-current={isActive ? 'page' : undefined}
                 aria-label={`${tab.label}${badge > 0 ? `, ${badge} notifikasi` : ''}`}
               >
@@ -88,7 +97,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
                         type="button"
                         className={s.modeItem}
                         data-active={isActive}
-                        onClick={() => onSelectMode(m)}
+                        onClick={() => goMode(m)}
                         aria-current={isActive ? 'page' : undefined}
                       >
                         <Icon name={meta.ui} size={16} />
