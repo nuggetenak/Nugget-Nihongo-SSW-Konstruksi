@@ -243,14 +243,21 @@ describe('ReviewMode: one exposure records one FSRS review', () => {
     };
   }
 
+  // Inside a ToastProvider because ReviewMode now reports a failed review to the
+  // learner instead of letting the exception escape the event handler (item 186),
+  // and useToast throws without a provider. In the app that provider is mounted
+  // in main.jsx above everything, so this makes the harness match production
+  // rather than relaxing the component.
   function renderReview(calls) {
     return render(
-      <ReviewMode
-        srs={stubSRS(calls)}
-        onExit={() => {}}
-        onSessionEnd={() => {}}
-        onGoKartu={() => {}}
-      />
+      <ToastProvider>
+        <ReviewMode
+          srs={stubSRS(calls)}
+          onExit={() => {}}
+          onSessionEnd={() => {}}
+          onGoKartu={() => {}}
+        />
+      </ToastProvider>
     );
   }
 

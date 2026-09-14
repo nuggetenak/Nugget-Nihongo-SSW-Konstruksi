@@ -14,6 +14,7 @@ import { RATING_META } from '../srs/fsrs-core.js';
 import { get as storageGet } from '../storage/engine.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
+import { useToast } from '../components/Toast.jsx';
 import { JpFront, DescBlock } from '../components/JpDisplay.jsx';
 import { speakJP, canSpeak } from '../utils/speak.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
@@ -28,6 +29,7 @@ const CARD_MAP = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
   const { prefs } = useApp();
   const handleSpeakError = useSpeakErrorHandler();
+  const { show: showToast } = useToast();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const [queue, setQueue] = useState(null);
   const [idx, setIdx] = useState(0);
@@ -153,9 +155,32 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
       if (!flipped || currentId == null) return;
       // Already rated this card and waiting to advance. See ratingCardRef.
       if (ratingCardRef.current === currentId) return;
-      ratingCardRef.current = currentId;
       const responseMs = seenAtRef.current ? Date.now() - seenAtRef.current : null;
-      const result = srs.review(currentId, rating, { responseMs });
+      // The guard is armed AFTER the review lands, not before it (item 186).
+      //
+      // Armed first, a throw from srs.review() left the ref set with nothing
+      // recorded -- and because handleSkip checks the same ref, the card was
+      // then neither rateable nor skippable. It sat on screen, flipped, until
+      // the learner left the mode entirely: a stricter lock than the behaviour
+      // the guard replaced, which at least allowed a retry. A corrupted entry,
+      // a quota failure mid-write, or any unexpected ts-fsrs error reaches this.
+      //
+      // The double-rate the guard exists to stop (a swipe landing after a button
+      // press) is still covered: review() is synchronous, so nothing can
+      // interleave between it returning and the ref being set below.
+      //
+      // Caught rather than allowed to escape, for the same reason the speak
+      // errors are (item 54): an exception leaving a React event handler tells
+      // the learner nothing, and "I pressed Oke and the card just sat there" is
+      // the report that comes back. Now it says so and the card stays rateable.
+      let result;
+      try {
+        result = srs.review(currentId, rating, { responseMs });
+      } catch {
+        showToast('Gagal menyimpan ulasan kartu ini. Coba lagi.');
+        return;
+      }
+      ratingCardRef.current = currentId;
       setRatingDist((d) => ({ ...d, [rating]: d[rating] + 1 }));
       setSessionRated((n) => n + 1);
       if (result.isKnown) setSessionCorrect((n) => n + 1);
@@ -166,7 +191,7 @@ export default function ReviewMode({ srs, onExit, onSessionEnd, onGoKartu }) {
         else setIdx(nextIdx);
       }, 600);
     },
-    [flipped, currentId, idx, queue, srs]
+    [flipped, currentId, idx, queue, srs, showToast]
   );
 
   useEffect(() => {
