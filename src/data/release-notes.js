@@ -24,6 +24,18 @@
 
 export const RELEASE_NOTES = [
   {
+    version: '7.5.0',
+    date: '2026-09-14',
+    title: 'Dua mode baru untuk bahasa di lokasi, dan jadwal ulasan yang akhirnya berjalan',
+    changes: [
+      'Dua mode baru. Bahasa Lapangan: 84 kalimat yang benar-benar diucapkan di lokasi — bukan istilah, tapi perintah, peringatan, teguran, cara melapor, dan cara minta izin. Skenario: enam percakapan utuh dari apel pagi sampai serah terima, di mana jawaban yang benar tergantung apa yang sudah diucapkan sebelumnya.',
+      'Perbaikan terpenting: kartu yang kamu nilai "Oke" tidak pernah naik tingkat, jadi jadwal ulasannya berhenti di tempat dan kartu yang sama terus muncul. Sekarang jadwalnya berjalan seperti seharusnya.',
+      'Data belajarmu lebih aman. Kalau satu bagian datanya rusak atau hilang, riwayat ulasan dan pengaturanmu tidak ikut ditimpa lagi — sebelumnya bisa hilang semua. Dan kalau kamu membuka aplikasi di dua tab sekaligus, sekarang ada peringatan sebelum yang satu menimpa yang lain.',
+      'Di Soal Teknis, jawaban benar hampir selalu jadi pilihan yang paling panjang, jadi bisa ditebak tanpa membaca soalnya. Ratusan pilihan salah ditulis ulang supaya panjangnya seimbang.',
+      'Nilai yang lebih jujur: kartu yang kamu lewati tidak lagi masuk hitungan, dan kuis yang waktunya habis tidak lagi memberi 100% hanya karena menghitung yang terjawab saja. Aplikasi juga lebih cepat dibuka pertama kali.',
+    ],
+  },
+  {
     version: '7.4.0',
     date: '2026-09-09',
     title: 'Foto soal JAC yang asli, dan pilihan jawaban yang tidak lagi ketebak',

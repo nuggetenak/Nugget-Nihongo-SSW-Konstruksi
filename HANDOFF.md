@@ -35,10 +35,70 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of 2026-09-09.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.4.0**, **1,626 cards**, **20 modes**, `STORAGE_VERSION` **7**,
-`npm run validate` clean (125 files, 1,157 tests). 7.3.0 is merged into `main`
-(PR #15, `35e7ce3`); 7.4.0 is on `claude/item-59-quiz-assets-sl3ge9`.
+**As of 2026-09-14.** Verify before trusting past this point — this line doesn't update itself.
+At that date: version **7.5.0**, **1,626 cards**, **22 modes**, `STORAGE_VERSION` **7**,
+`npm run validate` clean (134 files, 1,291 tests). 7.4.0 is merged into `main`; PR #17 (the
+data-loss, correctness and item-114 work) merged into `main` 2026-09-14 as `569ff2a`, and the
+items 103–105 group is on `claude/open-items-continuation-doenj9` on top of it.
+
+- **2026-09-13/14: the three external audits, item 114's second half, and the 103–105 group.**
+  Full write-up is `CHANGELOG.md` `[7.5.0]`. What a future session most needs to know:
+
+  - **`serializeCard` must carry every field ts-fsrs schedules on.** It omitted `learning_steps`,
+    so every card came back from storage at step 0 and FSRS-6 re-entered the first learning step on
+    every `Good` — a card rated "Oke" could never graduate. The scheduler was not mis-scheduling,
+    it was standing still, for the rating most learners press most often. **If you add a field to
+    the FSRS config or bump ts-fsrs, check the round-trip first**; nothing else in the app would
+    show you this.
+  - **A missing document is not a fresh install.** `init()`'s fresh-install branch wrote defaults
+    over all three documents, so losing one key of three cost the SRS document too. It salvages now.
+    The general rule: **a branch that writes DEFAULTS must first prove there is nothing to lose.**
+  - **`enable_fuzz` is on in the app and off in the test setup.** On, because the library default is
+    on and every learner sharing a history should not share due dates; off under test, because a
+    seeded fuzz is still fuzz to an assertion.
+  - **The app must not compute its own retrievability curve.** All three audits said the curve had
+    drifted, and they were right about the drift and wrong about the direction — the app had a power
+    curve of its own instead of calling `get_retrievability`. One curve, and it is the scheduler's.
+  - **Item 114 is closed on both banks.** Wayground 48.5% → 20.4%, widest gap 31 → 2, over 191
+    rewrites. **The method is a threshold, not a count** — rewrite every question whose answer stands
+    3+ characters above its longest distractor — and the reason matters more than the number:
+    picking N questions to hit a target is how a bank ends up tuned to its own test.
+    `question-option-shuffle.test.js` holds both banks to the same four assertions now, two-sided.
+  - **Three Wayground sets spell readings inline as 漢字（かな）** (wgl01–wgl05, wgl10) because their
+    options render furigana-stripped — `WaygroundMode` passes `opts` through `stripFuri`, so 《》
+    markers are invisible there and the parenthesised reading *is* the reading aid. wglv-\* is the
+    opposite: it renders with ruby through `VocabMode` and has no parenthesised readings. **New text
+    in a set must follow that set's idiom**, and lengthening a wgl01-style option means adding
+    content in that form, not padding.
+  - **Options are always furigana-stripped.** `OptionButton` prints the string, `QuizAnnouncer`
+    speaks it to a screen reader, and `ResultScreen` files it as a review row — a 《》 marker is
+    visible in the first and read aloud as brackets in the second. Both new modes strip, and both
+    assert it; the reading is taught in the explanation panel instead.
+  - **`ruby-scope.test.js`'s bank suites are zero, not a budget**, and `雷《かみなり》` is tolerated
+    in the CARDS suite **only**. One slipped into `wt08#3` this session because a scratch script
+    carried the card allowance across. It is `落雷《らくらい》` now.
+  - **Items 103–105 exist because the owner delegated the call** ("finish all that's still open —
+    you decide everything"). The plan had them as product direction and said so; that is still the
+    right default for a future session, and this entry is the record of when it was overridden and
+    by whom.
+  - **`speaker` decides the drill direction in both new corpora**, and therefore what `answer` and
+    `traps` hold: Indonesian actions for a line you hear, Japanese phrases for one you say. Both
+    test files assert the split by character class, because nothing about a JS object stops the two
+    being swapped and a swapped entry renders a perfectly plausible screen.
+  - **`SkenarioMode` deliberately does not use `QuizShell`**, and must not be "simplified" into it.
+    A scene's beats are ordered and the order is load-bearing; `QuizShell` shuffles. There is no
+    session-length picker for the same reason.
+  - **`router/modes.js` still must not import `src/data/`.** Both new modes' menu counts are
+    literals in `constants.js` with `mode-counts.test.js` re-deriving them. Third and fourth entries
+    under the same rule.
+  - **`--ssw-teal` is per-theme** (teal-700 light, teal-400 dark) for the same reason
+    `--ssw-amberText` is: it is read as text and one tone cannot clear 4.5:1 on both grounds. A
+    literal `#fff` on the active chip would be 1.83:1 in dark theme; it uses `--ssw-bg` so the ink
+    inverts with the ground.
+  - **`npm run validate` was failing on `format:check` and nobody noticed**, because
+    `src/data/card-index.js` was added to the tree without joining `src/data/cards.js` in
+    `.prettierignore`. Both are generated by `merge-cards.mjs`. **Check the exit code, not the
+    output** — this was masked for three commits by grepping for success markers.
 
 - **2026-09-09: the JAC photo assets, the JAC Mockup distractor rewrite, and item 59 dropped.**
   Full write-up is `CHANGELOG.md` `[7.4.0]`. What a future session most needs to know:

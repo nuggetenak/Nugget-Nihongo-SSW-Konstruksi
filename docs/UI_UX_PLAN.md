@@ -1878,7 +1878,7 @@ carried all along, and its §21 proposes the section structure `MODE_SECTIONS` a
 
 Six ideas in it are genuinely not covered anywhere, and they are worth keeping.
 
-### ☐ 103. No 現場日本語 — the deck teaches nouns, not instructions — `L` — `P1`
+### ☑ 103. No 現場日本語 — the deck teaches nouns, not instructions — `L` — `P1` — **built 7.5.0**
 
 The corpus is overwhelmingly terminology. A worker who knows all 1,626 cards still has not met
 `ここ持ってて`, `終わったら呼んで`, `これ違うよ`, `もう一度お願いします` — the sentences a foreman
@@ -1896,7 +1896,30 @@ which is the whole of this item. `ここ持ってて` has no relative anywhere i
 So this stays a content project and stays open. What the measurement changes is that it can now be
 scoped against something: the register is the gap, not the vocabulary.
 
-### ☐ 104. Nothing tests Japanese → action — `M` — `P2` — **re-sized `S` 2026-09-07: the corpus already exists**
+**Built in 7.5.0** as `src/data/genba-phrases.js` — **84 phrases**, twelve in each of the seven
+functions named above, on the owner's delegated call. Not more cards: a separate corpus, following
+the `danger-pairs` / `confusion-pairs` precedent, so the terminology deck's counts and quizzes are
+untouched.
+
+The measurement is **re-derived by `genba-phrases.test.js` rather than quoted** — if the deck ever
+gains this register the test goes red and this item needs re-justifying, which is the correct
+outcome. It also reproduces which 3 cards those are: **1203–1205, which *describe* the phrases**
+("when you want it repeated, ask もう一度言ってください"). The deck talks about the register in
+Indonesian; it does not speak it.
+
+Two design points worth carrying forward:
+
+- **`speaker` is load-bearing, not a label.** An instruction arrives *at* you and the skill is
+  doing the right thing; a report leaves *from* you and the skill is finding the words. So the field
+  decides what `answer` and `traps` hold — Indonesian actions for a line you hear, Japanese phrases
+  for one you say — and the test asserts that split by character class. It caught one on the first
+  run. Collapsing the two would teach a learner to produce a foreman's lines, which they will never
+  have cause to say.
+- **`polite` carries the teaching point.** Every heard line has both forms (ここ持ってて /
+  ここを持っていてください); every spoken line has `polite: null`, because what you say is already
+  polite. Asserted in both directions, so neither half can quietly go missing.
+
+### ☑ 104. Nothing tests Japanese → action — `M` — `P2` — **built 7.5.0** (re-sized `S` 2026-09-07 on a corpus it turned out not to use)
 
 Every mode asks "what does this word mean?". None asks "what should you do?". Given
 `ホースを巻いて片付けてください`, the tested skill is choosing *coil the hose and put it away* over
@@ -1920,7 +1943,14 @@ scaffolding sentence against a concrete one and calling that a hard choice.
 work, and this branch already removes two modes; adding a twentieth on my own reading of an audit is
 the owner's call, not mine. The finding is that the call is now a cheap one.
 
-### ☐ 105. No scenario mode — `L` — `P2`
+**Built in 7.5.0, on the owner's delegated call** ("finish all that's still open — you decide
+everything"). And it did *not* run over the 1,409 usage sentences after all. The example in this
+item's own text is `ホースを巻いて片付けてください` — a `〜てください`, which is item 103's register,
+not the deck's. So once 103's corpus existed the cheap version stopped being the better one, and the
+caveat above disappears instead of being documented around. The usage sentences stay where they are:
+they are good card content and would have made a worse quiz. Mode: **Bahasa Lapangan**.
+
+### ☑ 105. No scenario mode — `L` — `P2` — **built 7.5.0, once 103 unblocked it**
 
 A 朝礼 that runs as a sequence: the foreman states today's work, asks for a material, then asks for
 a report — with a question after each. Combines listening, vocabulary, workplace intent and
@@ -1930,6 +1960,27 @@ reporting in one thread instead of four separate modes.
 measurement above says the corpus has 3 sentences in that register. Build 103's content first; this
 mode is a shell around it, and building the shell first would only produce a convincing-looking mode
 with nothing true to say.
+
+**Unblocked and built in 7.5.0** as `src/data/genba-scenes.js` + `SkenarioMode` — **6 scenes, 28
+beats**: 朝礼, mid-task instructions, a near-miss, a material shortage, an injury, end-of-shift
+handover. Mode: **Skenario**.
+
+**The thread is the feature, and it is the reason this mode cannot use `QuizShell`.** Every other
+drill in the app is a bag of independent questions, which is what `QuizShell` is: it shuffles, and
+each question stands alone. Here a beat depends on the ones before it — 「どっちですか」 is right in
+scene 2 only because two beats earlier the foreman said 「青いやつ」 and there turned out to be two
+blue ones; 「4つ足りません」 is only correct because the beat before asked 「いくつ足りない？」.
+`buildBeat` shuffles options within a beat and never the beats, and the test asserts source order
+rather than trusting it — a regression there would look like a working mode. There is no
+session-length picker for the same reason: a scene is as long as it is.
+
+The transcript stays on screen and grows. Hiding earlier beats would make this measure retention,
+which the SRS already does better; what it measures is whether you can follow a shift, and following
+one means having the last few lines in front of you.
+
+Overlap with 103's corpus is deliberate and asserted: 6 of the 14 spoken beats are lines that file
+already drills, the other 8 only make sense inside their thread. The floor under that overlap is
+what stops the two corpora drifting into two unrelated files teaching two unrelated registers.
 
 ### ☑ 106. Question source is not labelled — `S` — `P1` — **fixed 2026-09-07**
 
@@ -2018,6 +2069,12 @@ made every filtered deck unusable. What is deliberately still open is item 114's
 is content authoring rather than engineering, and items 139 and 142, both of which are recorded here
 as **filed wrongly** rather than as done.
 
+**Update 2026-09-14 (7.5.0).** Item 114's second half is closed — see its entry below. The three
+external audits of 7.4.0 the owner supplied are triaged in `CHANGELOG.md` `[7.5.0]`; two of their
+claims were wrong and a third had its direction reversed, which is recorded there rather than here
+because the fixes are what matter. Items 103–105 are built. What remains open in §16 is items 119
+and 120 and the mode-correctness sweep.
+
 ### Done in 7.2.0
 
 - ☑ **109. "Terakhir dipelajari" rows were inert `<li>`s** — `S` — now buttons opening that card.
@@ -2035,7 +2092,21 @@ as **filed wrongly** rather than as done.
 
 ### Open — content
 
-- ☑ **114. The practice banks are guessable by answer length** — `L` — `P1`. **JAC Mockup closed in 7.4.0; Wayground remains at 48.3% and is the follow-up.**
+- ☑ **114. The practice banks are guessable by answer length** — `L` — `P1`. **Closed: JAC Mockup in
+  7.4.0, Wayground in 7.5.0.**
+
+  **Wayground, 7.5.0: 48.5% → 20.4%**, mean distractor 8.3 → 10.7 against a mean answer of 11.1,
+  widest single-question gap 31 → 2. 191 questions rewritten. The pass ran to a **threshold rather
+  than a count** — rewrite every question whose answer stands 3+ characters above its longest
+  distractor, 185 of them at the branch point — because picking N questions to hit a number is how a
+  bank ends up tuned to its own test, while "no answer stands 3 characters above every distractor" is
+  a property of the content and the rate falls out of it.
+  `question-option-shuffle.test.js` now holds Wayground to the same four assertions as JAC Mockup
+  instead of the 0.49 ratchet it carried between passes. Full write-up in `CHANGELOG.md` `[7.5.0]`,
+  including the three per-set idioms that had to be learned (the 漢字（かな）inline readings in
+  wgl01–wgl05/wgl10, and why lengthening a term-recall option means choosing a longer *wrong name*).
+  Original measurement and the 7.4.0 half below.
+
   26 answers ended in a parenthetical their own `exp` already repeats; trimming it (and the matching
   `opts_id`) drops them below the longest distractor, and in 17 cases the trimmed form is
   byte-for-byte what the *other* bank already ships, so the short wording is adopted rather than
