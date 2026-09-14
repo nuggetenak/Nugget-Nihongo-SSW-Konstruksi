@@ -38,7 +38,8 @@ jobs:
       # Split into named steps rather than one `npm run validate` call: the
       # composite passes or fails as a unit, and on a red run the step name is
       # what tells you which gate went without scrolling a log. The set is
-      # exactly `validate`'s, and format-and-lint.test.js asserts that.
+      # exactly `validate`'s, and src/tests/ci-gate-parity.test.js asserts that
+      # — it reads this file and package.json and compares the two lists.
       - name: Format check
         run: npm run format:check
 
