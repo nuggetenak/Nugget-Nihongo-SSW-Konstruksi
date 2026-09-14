@@ -101,6 +101,8 @@ briefly when actually pushing, then strip again right after.
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
 | `docs/CARD_SPLIT_AUDIT.md`     | **Frozen finding list, not a spec** — a verdict for every card in the pre-split corpus, including the rule that kept each of the 113 that stayed whole |
 | `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md`. **Includes both UI/UX work queues** (items 1–42 and 43–144); both are empty and neither is a task list — there is no live queue |
+| `LICENSE`                      | MIT, and it covers the **software only** — it says so and points at `PROVENANCE.md` for the content |
+| `PROVENANCE.md`                | Where every corpus came from, item by item, and which ones have an unsettled redistribution status. **Add a row when you add a corpus.** Records the open question rather than resolving it |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
 | `HUSKY-SETUP.md`               | One-time local pre-commit hook setup — not committed, not CI |
 | `scripts/archive/README.md`    | Which one-shot migration scripts exist and why not to re-run them |

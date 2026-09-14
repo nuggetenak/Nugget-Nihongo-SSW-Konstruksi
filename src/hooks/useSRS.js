@@ -15,6 +15,7 @@ import {
 import { RATING_META } from '../srs/fsrs-core.js';
 import { getAllCards } from '../srs/fsrs-store.js';
 import { hesitantCards } from '../utils/hesitation.js';
+import { addExternalChangeListener } from '../storage/engine.js';
 
 export function useSRS(trackCardIds = []) {
   // initStore() once — in the useState initializer (runs only on first render).
@@ -31,6 +32,24 @@ export function useSRS(trackCardIds = []) {
   useEffect(() => {
     idsRef.current = trackCardIds;
   }, [trackCardIds]);
+
+  // A review in ANOTHER TAB updates the engine's cache and bumps nothing here
+  // (item 191). `revision` was incremented only by this tab's own review(), so
+  // dueCount and the SRS panel kept the numbers they were memoised with -- rate
+  // ten cards in a second tab and the due badge here stays where it was until
+  // some unrelated local interaction happens to re-render. The engine already
+  // re-reads the changed document; this is the half that tells React.
+  //
+  // Only 'srs' and the null (another tab cleared everything) case: a progress or
+  // prefs write from elsewhere changes nothing this hook derives, and bumping on
+  // those would re-walk 1,626 ids for no reason.
+  useEffect(
+    () =>
+      addExternalChangeListener((doc) => {
+        if (doc === 'srs' || doc === null) setRevision((n) => n + 1);
+      }),
+    []
+  );
 
   // Derived values. Both walk the whole track (1,626 ids), so they're memoised
   // rather than recomputed on every render of a provider that sits near the

@@ -223,7 +223,10 @@ describe('the cross-tab notice says the right thing', () => {
     );
     expect(src).toMatch(/othertab: \{/);
     expect(src).toMatch(/Muat ulang/);
-    expect(src).toMatch(/setExternalChangeHandler/);
+    // addExternalChangeListener since item 191: the handler was a single slot,
+    // and useSRS needs the same event to refresh the due badge after a review in
+    // another tab. Either name means "this banner hears about cross-tab writes".
+    expect(src).toMatch(/addExternalChangeListener|setExternalChangeHandler/);
   });
 });
 

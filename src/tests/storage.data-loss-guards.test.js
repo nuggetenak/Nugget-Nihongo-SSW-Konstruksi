@@ -26,6 +26,7 @@ import {
   validateDelta,
   getCorruptionWarning,
   setExternalChangeHandler,
+  addExternalChangeListener,
   flushWrites,
 } from '../storage/engine.js';
 import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
@@ -471,5 +472,45 @@ describe('writes are coalesced without losing anything', () => {
     );
 
     expect(get('progress').known).toEqual([1, 2, 3]);
+  });
+});
+
+// ─── More than one listener can hear an external change (item 191) ───────────
+// It was a single slot, and DataWarningBanner held it. useSRS derives dueCount
+// from a revision counter bumped only by a local review(), so a card rated in
+// another tab updated the engine's cache while the badge here kept the old
+// number until something unrelated re-rendered. Two subscribers is the whole
+// fix, and the reason the slot had to become a list.
+describe('external-change listeners', () => {
+  const fireStorage = (key, newValue) =>
+    window.dispatchEvent(new StorageEvent('storage', { key, newValue }));
+
+  it('notifies every subscriber, not just the last one to register', () => {
+    init();
+    const a = [];
+    const b = [];
+    const offA = addExternalChangeListener((doc) => a.push(doc));
+    const offB = addExternalChangeListener((doc) => b.push(doc));
+
+    write(DOCS.srs, { _v: STORAGE_VERSION, cards: {} });
+    fireStorage(DOCS.srs, localStorage.getItem(DOCS.srs));
+
+    expect(a).toEqual(['srs']);
+    expect(b, 'the second subscriber must not have evicted the first').toEqual(['srs']);
+    offA();
+    offB();
+  });
+
+  it('unsubscribing stops only that listener', () => {
+    init();
+    const seen = [];
+    const off = addExternalChangeListener(() => seen.push('gone'));
+    const kept = [];
+    addExternalChangeListener((doc) => kept.push(doc));
+    off();
+
+    fireStorage(DOCS.prefs, localStorage.getItem(DOCS.prefs));
+    expect(seen).toEqual([]);
+    expect(kept).toEqual(['prefs']);
   });
 });

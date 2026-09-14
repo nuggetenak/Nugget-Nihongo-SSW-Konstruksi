@@ -122,12 +122,38 @@ function quarantineCorruptDoc(docKey, raw) {
 // app so it can say the data moved. A live merge would need every context to
 // reconcile React state it has already rendered from, and getting that subtly wrong
 // is a worse failure than asking someone to reload.
-let _externalChangeHandler = null;
+//
+// A LIST rather than a single slot (item 191). It was one slot, and
+// DataWarningBanner held it -- so the banner could say "data changed in another
+// tab", and nothing else in the app could hear about it at all. `useSRS` keys
+// its derived values off a revision counter bumped only by a local review(), so
+// a card rated in another tab updated the engine's cache while the due badge
+// kept showing the old count until something local happened to re-render it.
+const _externalChangeListeners = new Set();
 let _listening = false;
 
-/** Called with the doc name ('progress' | 'srs' | 'prefs') another tab changed. */
+/**
+ * Subscribe to "another tab changed a document". Called with the doc name
+ * ('progress' | 'srs' | 'prefs'), or null when the other tab cleared everything.
+ * Returns an unsubscribe function.
+ */
+export function addExternalChangeListener(fn) {
+  _externalChangeListeners.add(fn);
+  return () => _externalChangeListeners.delete(fn);
+}
+
+/**
+ * @deprecated Single-slot spelling kept so existing callers and tests keep
+ * working. It registers one listener and replaces whatever it registered last,
+ * which is the old behaviour exactly; `null` clears it. New code should use
+ * addExternalChangeListener, because a second caller of this one silently
+ * evicts the first -- which is the bug item 191 fixed.
+ */
+let _legacyHandler = null;
 export function setExternalChangeHandler(fn) {
-  _externalChangeHandler = fn;
+  if (_legacyHandler) _externalChangeListeners.delete(_legacyHandler);
+  _legacyHandler = fn || null;
+  if (_legacyHandler) _externalChangeListeners.add(_legacyHandler);
 }
 
 const DOC_BY_KEY = Object.fromEntries(Object.entries(DOCS).map(([doc, key]) => [key, doc]));
@@ -167,7 +193,7 @@ function onStorageEvent(e) {
     if (!res.corrupt) _cache[d] = null;
     discardPending(d);
   }
-  _externalChangeHandler?.(doc);
+  for (const fn of _externalChangeListeners) fn(doc);
 }
 
 function startListening() {
@@ -646,7 +672,8 @@ export function _reset_for_test() {
     clearTimeout(_flushTimer);
     _flushTimer = null;
   }
-  _externalChangeHandler = null;
+  _externalChangeListeners.clear();
+  _legacyHandler = null;
 }
 
 // ── Snapshot validation ──────────────────────────────────────────────────────
