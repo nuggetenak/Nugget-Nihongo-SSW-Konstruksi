@@ -36,6 +36,13 @@ export const THEMES = {
     // fails). This resolves to whichever amber tone actually clears 4.5:1 in the active theme.
     '--ssw-amberText': '#92400E',
     '--ssw-gold': '#FBBF24',
+    // items 103/104's accent, and a per-theme value for the same reason
+    // amberText is: this one is read as text (the chip labels, the drill's
+    // direction prompt), and one tone cannot clear 4.5:1 on both grounds.
+    // Teal-700 is 5.37:1 here; teal-400, the dark-theme value, would be 1.83:1.
+    // The mode's decorative accent stays #14b8a6 in MODE_META — 7.76:1 with the
+    // ink readableOn() picks, which is what the badge test measures.
+    '--ssw-teal': '#0f766e',
     // Mirrors T.accentSoft below. Both AngkaMode and DangerMode ask for this in
     // CSS -- `var(--ssw-accentSoft, var(--ssw-surface))` -- and until 2026-09-04
     // nothing defined it, so both silently rendered the flat surface fallback
@@ -80,6 +87,8 @@ export const THEMES = {
     // amber here — amberDark would be the one that fails in this theme (2.77:1).
     '--ssw-amberText': '#F59E0B',
     '--ssw-gold': '#FBBF24',
+    // Teal-400 here: 10.56:1 on the dark bg, where teal-700 is 3.59:1 and fails.
+    '--ssw-teal': '#2dd4bf',
     '--ssw-accentSoft': 'linear-gradient(135deg, rgba(245,158,11,0.12), rgba(251,191,36,0.08))',
     '--ssw-correct': '#16a34a',
     '--ssw-correctBg': 'rgba(22,163,74,0.10)',

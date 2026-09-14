@@ -39,6 +39,7 @@ const MISSION_TYPES = [
   { mode: 'jebak', label: 'Soal Jebak', icon: '⚠️', priority: 3 },
   { mode: 'mirip', label: 'Kata Mirip', icon: '🔀', priority: 2 },
   { mode: 'dengar', label: 'Dengarkan', icon: '🎧', priority: 2 },
+  { mode: 'genba', label: 'Bahasa Lapangan', icon: '🗣️', priority: 3 },
 ].map((m) => ({ ...m, strand: MODE_META[m.mode]?.strand ?? null }));
 
 /** Exported so a test can assert the membership rule above against MODE_META
