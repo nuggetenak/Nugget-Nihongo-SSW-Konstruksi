@@ -2750,7 +2750,7 @@ export const JAC_MOCKUP_SETS = [
       },
       {
         id: 9,
-        q: '銅管《どうかん》の「キャップillary」継手《つぎて》のろう付《づ》け長《なが》さの目安《めやす》は？',
+        q: '銅管《どうかん》の「キャピラリー継手《つぎて》」のろう付《づ》け長《なが》さの目安《めやす》は？',
         hint: 'Panjang brazing untuk capillary fitting pada pipa tembaga adalah?',
         opts: [
           '配管《はいかん》の外径《がいけい》とほぼ同《おな》じ長《なが》さ',
@@ -2766,7 +2766,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: '1.5× OD untuk kekuatan sambungan (modul JAC praktik).',
-        related_card_id: 904,
+        related_card_id: 451,
       },
       {
         id: 10,

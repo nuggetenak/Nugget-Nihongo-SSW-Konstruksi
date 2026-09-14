@@ -99,4 +99,43 @@ describe('Data Integrity', () => {
       tooLong: tooLong.map((c) => c.id),
     }).toEqual({ withJapanese: [], dangling: [], tooLong: [] });
   });
+
+  // C12: a lower-case latin word glued straight onto Japanese text, which is the
+  // signature of a find-replace that ran inside a latin word rather than around
+  // it. Found 2026-09-14 in both banks at once:
+  // 銅管の「キャップillary」継手 — a cap → キャップ substitution that
+  // ate the "cap" out of "capillary" and left the tail behind. It is
+  // キャピラリー継手 now, which the Indonesian hint had said all along.
+  //
+  // The corruption also mislinked the question. `related_card_id` was 904
+  // (キャップ, an end cap for pressure testing) because
+  // derive-quiz-card-links.mjs matches card headwords against the stem, and the
+  // garbled stem contained キャップ as a four-character run — its "high"
+  // confidence tier. A corrupted string does not stay one defect.
+  //
+  // Upper case is exempt: KY活動, PPE, JIS, LED, EF接合, GX形, VP管 and the unit
+  // suffixes (10mm以上, 90cm以上, 0.1MPa) are how this corpus writes acronyms and
+  // measurements, and there are 72 of them. Restricted to the Japanese-side
+  // fields for the same reason: `opts_id` and card `desc` are Indonesian prose
+  // with Japanese terms set inline without a space, which is house style.
+  it('C12: no latin word is glued into a Japanese question stem or option', () => {
+    const JP = '\\u3041-\\u3096\\u30a1-\\u30fa\\u30fc\\u4e00-\\u9fff';
+    const GLUE = new RegExp(`[${JP}][a-z]{3,}|[a-z]{3,}[${JP}]`);
+    const bad = [];
+    for (const set of QUIZ_SETS) {
+      for (const q of set.questions) {
+        for (const [field, value] of [
+          ['q', q.q],
+          ...(q.opts ?? []).map((o, i) => [`opts[${i}]`, o]),
+        ]) {
+          if (typeof value === 'string' && GLUE.test(value))
+            bad.push(`${set.id}#${q.id}.${field}: ${value}`);
+        }
+      }
+    }
+    expect(
+      bad,
+      'a latin word run into Japanese text — check for a find-replace that matched inside a word'
+    ).toEqual([]);
+  });
 });
