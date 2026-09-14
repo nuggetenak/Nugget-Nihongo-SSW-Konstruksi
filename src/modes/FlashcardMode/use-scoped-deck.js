@@ -23,7 +23,7 @@
 // an integration test: rendering the broken component hangs the runner instead
 // of failing it, so a regression would stall CI rather than report. As a hook
 // the invariant is a two-line assertion that fails in milliseconds --
-// use-scoped-deck.test.js re-renders with identical props and demands the same
+// use-scoped-deck.test.jsx re-renders with identical props and demands the same
 // reference back.
 // ─────────────────────────────────────────────────────────────────────────────
 import { useMemo } from 'react';

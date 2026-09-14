@@ -1,8 +1,23 @@
-# UI/UX Plan — quiz, exam & furigana consistency (2026-08-25)
+# UI/UX Plan — quiz, exam & furigana consistency (2026-08-25) — **RETIRED 2026-09-14**
+
+> **This is an archived work queue. Nothing in it is open.** All 102 items — 43 through 144 —
+> are closed: 101 shipped and item 59 (offline audio clips) was dropped by the owner on
+> 2026-09-08. It retired here per its own rule below, and per `docs/AGENT_WORKFLOW.md` §3.
+> The last three to close were 103, 104 and 105 in 7.5.0, plus item 114's second half.
+>
+> **Do not use it as instructions.** Read it for the per-item reasoning, which is the reason it
+> was archived in full rather than deleted: several items record routes deliberately *not* taken
+> (59 dropped, 64 and 139 corrected rather than executed, 81 and 73 settled as design calls), and
+> those are the entries a future session is most likely to re-derive wrongly.
+>
+> **Item numbers stay unique across plans.** Numbering did not restart here and will not restart
+> in a successor, so "item 15" in a commit message unambiguously means the 2026-08 overhaul plan
+> and "item 114" means this one. Verified by the sweep that retired this file: every heading and
+> bullet from 43 to 144 carries ☑ or ✖, none missing, none duplicated.
 
 > **Work queue, not a spec.** Items retire as they land; this file goes to `docs/archive/`
-> when empty. The previous plan (items 1–42, the 2026-08 overhaul) completed 2026-08-25 and
-> lives at `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`.
+> when empty — which is what happened. The previous plan (items 1–42, the 2026-08 overhaul)
+> completed 2026-08-25 and lives at `docs/archive/UI_UX_PLAN-2026-08-overhaul.md`.
 >
 > **Numbering starts at 43** deliberately — so "item 15" in a commit message unambiguously
 > means the archived plan, and nothing here collides with git history.
@@ -12,10 +27,12 @@
 > 7.1.0 and 59 was dropped by the owner on 2026-09-08. The line above said "except 58 and 59" for
 > a day after 58 landed, which is the drift this file's own §0 warns about — re-check it, don't
 > copy it.
-> Later rounds append rather than renumber: **§11** 66–68 (all closed), **§12** 69–74 (all open;
-> 69 and 73 need an owner decision), **§13** 75–81 (78 closed, rest open), **§14** 82–102 (82–92
-> closed, 93–102 open). Sections 8, 9 and 10 below describe the *first* round only and are not
-> re-scoped by later ones — read them that way.
+> Later rounds append rather than renumber: **§11** 66–68, **§12** 69–74, **§13** 75–81, **§14**
+> 82–102, **§15** 103–108, **§16** 109–144. **Every one of those rounds is closed** as of
+> 2026-09-14; the per-round "all open / rest open" counts this paragraph used to carry were last
+> true on 2026-09-08 and are removed rather than restated, because a count of open items in an
+> empty queue is only ever wrong. Sections 8, 9 and 10 below describe the *first* round only and
+> are not re-scoped by later ones — read them that way.
 
 ## 0. How this plan was built, and what that means for trusting it
 
@@ -1628,7 +1645,7 @@ does not teach is a content gap, not a linking problem.
 26 spread across all 37 sets read correct or defensibly related; the two weakest are generic action
 headwords (`取り付け` on a question about valve flow direction) — related, not wrong, and ~9 rows of
 305. `audit-related-ids.mjs` now covers `QUIZ_SETS` too (400 links across 1,075 questions), and
-`src/tests/quiz-card-links.test.js` holds a floor of 250 links plus the invariant that the rest stay
+`src/tests/quiz-card-links.test.jsx` holds a floor of 250 links plus the invariant that the rest stay
 unlinked, so nobody ships the medium and low tiers unread by accident.
 
 Landing them turned the feature on, and it took two more fixes to do it — item 86's dead end had
@@ -2072,8 +2089,16 @@ as **filed wrongly** rather than as done.
 **Update 2026-09-14 (7.5.0).** Item 114's second half is closed — see its entry below. The three
 external audits of 7.4.0 the owner supplied are triaged in `CHANGELOG.md` `[7.5.0]`; two of their
 claims were wrong and a third had its direction reversed, which is recorded there rather than here
-because the fixes are what matter. Items 103–105 are built. What remains open in §16 is items 119
-and 120 and the mode-correctness sweep.
+because the fixes are what matter. Items 103–105 are built.
+
+**Correction, same day — §16 is closed, and this line said otherwise.** It read "what remains open
+in §16 is items 119 and 120 and the mode-correctness sweep". Items 119 and 120 were audited and
+repaired in 7.3.0, and 7.4.0 corrected their bodies for exactly this reason; the "mode-correctness
+sweep" was 119 under another name. Nothing was open. The sentence was carried forward from an
+earlier draft without being re-checked against the entries it describes — six lines above the
+entries themselves — which is the drift §0 warns about, committed in the act of recording that
+§0 was right. The rule that catches it: **a summary of a list is a claim about the list, so
+re-derive it from the list.**
 
 ### Done in 7.2.0
 

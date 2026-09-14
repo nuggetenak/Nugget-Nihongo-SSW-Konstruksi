@@ -203,7 +203,7 @@ mobile, 334px → 40px on desktop, with no new scrolling at 390×640).
 Modes that don't opt in are unaffected: they keep `flex: 0 1 auto` and their auto height. Setup
 screens (QuizMode, Kuis Produksi and friends) still leave 250–330px under their "Mulai" button —
 whether the CTA should be bottom-anchored on those is a design call, not a bug, and is tracked in
-`UI_UX_PLAN.md` §12 rather than fixed here.
+the UI/UX work queue's §12 rather than fixed here (item closed; the queue is archived).
 
 ## 7. Expanding beyond phone-first
 

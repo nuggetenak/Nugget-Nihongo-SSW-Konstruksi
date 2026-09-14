@@ -4,6 +4,14 @@ Stable reference for how components in this codebase are structured. Covers conv
 history — if a convention below turns out not to match the code, trust the code and fix this
 doc, don't assume the doc is aspirational.
 
+> **Two modes named below no longer exist.** `ProductionMode` (`produksi`) and
+> `QuizProduksiMode` (`kuisprod`) were removed in 7.0.0 as ~500-line twins nothing else
+> depended on. Passages that name them while explaining *why* a component is shaped the way it
+> is are records of decisions taken while they existed and are kept as written — the reasoning
+> is still the reason. Everything this doc stated as current inventory has been corrected
+> instead: §16's `typo-diff.js`/`TypoDiff.jsx` went with those modes, and §15's shape taxonomy
+> no longer has a free-text row. Checked file by file 2026-09-14, not inferred.
+
 ## 1. File organization
 
 CSS Modules, co-located: `ComponentName.jsx` + `ComponentName.module.css` in the same folder,
@@ -357,8 +365,12 @@ a mode not having a feature its shape doesn't define is not.
 | SRS / retry-wrong feed | Where `cardId` exists | Where `cardId` exists | Where `cardId` exists | N/A |
 
 **Modes per shape:** multiple-choice = `kuis`/`jac`/`vocab`/`wayground` (via `QuizShell`),
-`AngkaMode`, `DangerMode`, `ConfusionMode`, `DengarMode`. Free-text = `ProductionMode`,
-`QuizProduksiMode`. Timed-exam = `SimulasiMode`. Speed-drill = `SprintMode`. (`ReviewMode` and
+`AngkaMode`, `DangerMode`, `ConfusionMode`, `DengarMode`, plus `GenbaMode` from 7.5.0 (also via
+`QuizShell`; its sibling `SkenarioMode` deliberately is not — a scene's beats are ordered and
+`QuizShell` shuffles). Free-text was `ProductionMode`/`QuizProduksiMode`, and **the app has had
+no free-text shape since 7.0.0 removed both.** The Free-text column above is kept as the record
+of what that shape required, not as an inventory — three of the four shapes are occupied.
+Timed-exam = `SimulasiMode`. Speed-drill = `SprintMode`. (`ReviewMode` and
 `FlashcardMode` are a different architecture entirely — FSRS-scheduled review and free browsing,
 not a quiz shape — already covered in items 43–45, 65, not revisited here.)
 
@@ -534,7 +546,15 @@ correctly land one position back regardless of a replace happening in between �
 in jsdom, which doesn't implement real session-history navigation timing. Worth a first real-device
 check before merge, not just trusting the reasoning.
 
-## 16. Typed-answer diff highlighting (item 60, 2026-08-26)
+## 16. Typed-answer diff highlighting (item 60, 2026-08-26) — REMOVED IN 7.0.0
+
+> **None of the files below exist.** `src/utils/typo-diff.js`, `src/components/TypoDiff.jsx`,
+> `diffChars`, `closestSynonymDiff` and `closestAnswerDiff` were deleted with the only two modes
+> that used them (`produksi`, `kuisprod`). The section stays because the argument in it outlived
+> the code and would have to be made again by anything that re-introduces typed answers: naive
+> index-by-index comparison of a typo is worse than no diff at all, because one dropped letter
+> shifts every character after it and paints a correctly-known word as entirely wrong.
+> Re-read it before building a second one; don't go looking for the first.
 
 Not in plan §9's table, added anyway per the same judgment items 51/52/65 already used — a new
 shared utility, used across 2 modes.
@@ -622,7 +642,7 @@ a bad outcome", and a filtered deck is not one. Adding a reason means new entry 
 they are rather than inheriting an accusation.
 
 **Note for anyone testing this**: `FlashcardMode` cannot be rendered with `filterIds` under jsdom —
-it hangs, on `main` as well as here (`UI_UX_PLAN.md` item 118). That is precisely why the mislabel
+it hangs, on `main` as well as here (UI/UX plan item 118, archived). That is precisely why the mislabel
 survived. The banner is currently tested at the map and at the router instead.
 
 ## 19. Generated reference surfaces (7.2.0)

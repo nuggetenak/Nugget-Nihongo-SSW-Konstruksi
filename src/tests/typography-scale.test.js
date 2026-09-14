@@ -1,6 +1,6 @@
 // ─── tests/typography-scale.test.js ──────────────────────────────────────────
-// Replaces wide-typography.test.js (item 22), which locked in the fixed
-// two-step scale this file's subject replaced on 2026-09-04.
+// Replaces wide-typography.test.js (item 22), deleted along with the fixed
+// two-step scale it locked in, which this file's subject replaced on 2026-09-04.
 //
 // WHY THE SCALE WAS REBUILT: a census of every rendered text node across all 24
 // screens of the running app found **85% of visible text at 13px or smaller** —

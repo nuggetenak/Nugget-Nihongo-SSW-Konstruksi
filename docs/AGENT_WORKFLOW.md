@@ -69,7 +69,7 @@ briefly when actually pushing, then strip again right after.
 3. **Update `CHANGELOG.md` and the version, if anything shipped.** This is the step that gets
    skipped: ten commits reached `main` after `CHANGELOG.md` was last touched on 2026-09-04 — six
    of them substantive, including a category picker and four P0 exam bugs — with no release note,
-   because two sessions in a row closed out by updating `HANDOFF.md` and `docs/UI_UX_PLAN.md` and
+   because two sessions in a row closed out by updating `HANDOFF.md` and the UI/UX work queue and
    stopping there. If a user would notice it, it needs an entry. Bump
    `package.json`'s version in the same commit, **and `public/sw.js`'s `CACHE_VERSION` with it** —
    that file's own comment says the two are kept equal, and it had already drifted 4.23.0 vs 6.0.0
@@ -88,6 +88,7 @@ briefly when actually pushing, then strip again right after.
 
 | Doc                          | Covers                                                  |
 | ----------------------------- | -------------------------------------------------------- |
+| `docs/AGENT_WORKFLOW.md`      | This file — process, not state. Read first every session |
 | `HANDOFF.md`                  | Current live state only — read every session             |
 | `_MAP.md`                      | Architecture + full session-by-session history log       |
 | `README.md`                    | Public-facing: what the app is, dev setup, commands, CI  |
@@ -97,9 +98,8 @@ briefly when actually pushing, then strip again right after.
 | `docs/COMPONENT_SPEC.md`       | CSS Modules conventions, shared primitives, component patterns |
 | `docs/PWA_RELEASE_SPEC.md`     | Offline architecture, `CACHE_VERSION` discipline, deploy checklist |
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
-| `docs/UI_UX_PLAN.md`           | **Work queue, not a spec** — prioritised UI/UX items; shrinks as they land, retires to `docs/archive/` when empty |
 | `docs/CARD_SPLIT_AUDIT.md`     | **Frozen finding list, not a spec** — a verdict for every card in the pre-split corpus, including the rule that kept each of the 113 that stayed whole |
-| `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md` |
+| `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md`. **Includes both UI/UX work queues** (items 1–42 and 43–144); both are empty and neither is a task list — there is no live queue |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
 | `HUSKY-SETUP.md`               | One-time local pre-commit hook setup — not committed, not CI |
 | `scripts/archive/README.md`    | Which one-shot migration scripts exist and why not to re-run them |

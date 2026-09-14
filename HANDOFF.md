@@ -167,7 +167,8 @@ items 103–105 group is on `claude/open-items-continuation-doenj9` on top of it
     the line meanwhile.
 
 - **2026-09-08: five UI changes, three P0 fixes, and a 49-finding audit.** Full write-up is
-  `CHANGELOG.md` `[7.2.0]`; the audit itself is `docs/UI_UX_PLAN.md` §16. What a future session most
+  `CHANGELOG.md` `[7.2.0]`; the audit itself is §16 of `docs/archive/UI_UX_PLAN-2026-09-items-43-144.md`.
+  What a future session most
   needs to know:
 
   - **Neither context may build a document from its own React state.** `setPref` and `setProg`
@@ -240,6 +241,9 @@ items 103–105 group is on `claude/open-items-continuation-doenj9` on top of it
     in the plan**, and all three are content projects at the owner's discretion rather than work an
     agent should start unasked: 103 is a register shift across the corpus, 105 is blocked on 103,
     and 104 adds a twentieth mode.
+    **Superseded 2026-09-14:** the owner delegated the call ("finish all that's still open — you
+    decide everything") and 103, 104 and 105 were all built in 7.5.0. **The plan has no open items
+    at all now** and is archived; see the REFERENCE section below.
 
 _(Four older entries — 2026-09-04 ×2, 2026-09-05 and 2026-09-07 — are retired to
 `docs/archive/HANDOFF-2026-09-04-07-sessions.md`. All were merged and superseded.)_
@@ -257,10 +261,13 @@ _(Four older entries — 2026-09-04 ×2, 2026-09-05 and 2026-09-07 — are retir
   `git log` rather than assuming. Everything since `feat/ui-overhaul` uses conventional-commits
   style (`feat(ui):`, `fix(simulasi):`, `docs:`, `chore:`), and that is what `main` carries now;
   the `CONTENT:`/`ADMIN:`/`DOCS:` prefixes are content-dq-era and no longer in use.
-- **Close-out is four files, not two.** `HANDOFF.md` (state) and `docs/UI_UX_PLAN.md` (the queue)
-  get updated every session; `CHANGELOG.md` and the version in `package.json` + `public/sw.js`
-  get skipped, and did for three sessions running — 24 shipped commits with no release note. If
-  a session put anything on `main` that a user would notice, it needs a CHANGELOG entry.
+- **Close-out is four files, not two.** `HANDOFF.md` (state) and the work queue got updated every
+  session; `CHANGELOG.md` and the version in `package.json` + `public/sw.js` got skipped, and did
+  for three sessions running — 24 shipped commits with no release note. If a session put anything
+  on `main` that a user would notice, it needs a CHANGELOG entry. **There is no queue file to
+  update since 2026-09-14** — it retired empty — so the count is three, and the one that used to
+  absorb a session's findings now has nowhere to go by default: file them in `CHANGELOG.md` and
+  here, or open a new plan deliberately rather than by accident.
 
 _(The rest of this section — `src/data/` editing rules, mirror-edit steps, the data-file
 quote-style rule — was content-dq-specific and archived with it: `docs/archive/HANDOFF-content-dq-era.md`.
@@ -281,22 +288,19 @@ deleted 2026-09-04 and `docs/AGENT_WORKFLOW.md` §4a is the live map of where to
   responsive pattern
 - `docs/COMPONENT_SPEC.md` — CSS Modules conventions, shared primitives, component patterns
 - `docs/PWA_RELEASE_SPEC.md` — offline architecture, `CACHE_VERSION` discipline, deploy checklist
-- `docs/UI_UX_PLAN.md` — **not stable reference; a work queue**, and the one place open items
-  live. Closed rounds: items 43–65 (drafted 2026-08-25, closed 2026-08-26/28), 66–68 (added
-  2026-08-31, closed 2026-09-01). **Still open, as of 2026-09-05:**
-  - §12 (2026-09-04 exhaustive audit) — 69, 70, 71, 72, 73, 74. 69 and 73 are owner decisions.
-  - §13 (Belajar-tab feature parity) — 75, 76, 77, 79, 80, 81. 78 done.
-  - §14 (exam family) — 93–102. 82–92 done.
-  - §6 carried enhancements — 58, 59. 59 is gated on measuring the payload first.
+- **There is no live work queue.** Both UI/UX plans are archived and both are empty:
+  items 1–42 (`UI_UX_PLAN-2026-08-overhaul.md`, closed 2026-08-25) and items 43–144
+  (`docs/archive/UI_UX_PLAN-2026-09-items-43-144.md`, closed
+  2026-09-14 — 101 shipped, item 59 dropped). Read either for per-item reasoning, **not as a task
+  list**; each carries a header saying so. Numbering never restarts, so an item number in git
+  history resolves to exactly one plan. The ruby backlog is gone the same way:
+  `RUBY_MISMATCH_AUDIT.md` tracked 182 over-wide readings, the list reached zero on 2026-09-13,
+  and `src/tests/ruby-scope.test.js` now holds it there — at zero for the question banks, and by
+  named allow-list for the deck, rather than at a count.
 
-  Unlike the `*_SPEC.md` files above, this is meant to shrink and retire to `docs/archive/` once
-  empty — see `docs/AGENT_WORKFLOW.md` §3. Its predecessor (items 1–42, all shipped) is already
-  archived there; numbering deliberately doesn't restart, so item references in git history stay
-  unique.
-- `docs/RUBY_MISMATCH_AUDIT.md` — **also a work queue, not a spec.** 144 readings (of an original
-  182) still annotate only the kanji run touching the marker rather than the phrase the reading was
-  written for. Needs a session with someone who can confirm actual Japanese readings; see item
-  58/59 for the same shape of "real, scoped, non-urgent" work.
+  A session that finds new work has nowhere to file it by default. That is deliberate: put it in
+  `CHANGELOG.md` and this file, or open a successor plan on purpose — starting the next number
+  after 144 — rather than growing one by accident.
 - `_MAP.md` — architecture map + full session-by-session history log
 - `docs/archive/` — every superseded doc, **indexed in `docs/archive/ARCHIVE-INDEX.md`** — read
   the index rather than the folder listing. It includes this file's own predecessors

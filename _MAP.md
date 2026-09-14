@@ -57,7 +57,7 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── icons/ · illustrations/
 │   └── images/jac-official/       ← the 12 JAC exam photos, named by question id (item 99)
 ├── .github/workflows/
-│   ├── ci.yml                      ← lint + test (verbose) + build + output check
+│   ├── ci.yml                      ← the five `validate` gates + coverage + build (item 134)
 │   └── deploy.yml                  ← lint/test → merge-cards → bump SW cache → build → pages
 ├── docs/
 │   ├── AGENT_WORKFLOW.md           ← PROCESS: read first every session (clone/verify/branch/close-out)
@@ -66,9 +66,10 @@ Nugget-Nihongo-SSW-Konstruksi/
 │   ├── LAYOUT_SPEC.md              ← breakpoints, width tokens, auto-fit/minmax pattern
 │   ├── COMPONENT_SPEC.md           ← CSS Modules conventions, shared primitives
 │   ├── PWA_RELEASE_SPEC.md         ← offline architecture, CACHE_VERSION, deploy checklist
-│   ├── UI_UX_PLAN.md               ← WORK QUEUE (not a spec): open items live in §12–§14
+│   ├── CARD_SPLIT_AUDIT.md         ← frozen verdict per card in the pre-split corpus
 │   ├── ASSET-PROMPTS.md            ← generation prompts for icon/badge/illustration art
 │   └── archive/                    ← superseded docs; see ARCHIVE-INDEX.md
+│                                  (both UI/UX work queues retired here — no live queue exists)
 ├── scripts/
 │   ├── merge-cards.mjs             ← source/ → cards.js (runs in `prebuild`)
 │   ├── validate-data.mjs           ← prebuild data validation

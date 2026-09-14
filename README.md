@@ -124,8 +124,11 @@ Untuk orientasi lebih detail: lihat `_MAP.md` di root repo.
 | `_MAP.md`                   | Peta arsitektur + log sesi                                            |
 | `CHANGELOG.md`              | Catatan rilis per versi                                               |
 | `docs/*_SPEC.md`            | Spec stabil: card content, design, layout, component, PWA release     |
-| `docs/UI_UX_PLAN.md`        | Antrean kerja UI/UX (bukan spec) — item terbuka ada di §12–§14        |
 | `docs/archive/`             | Dokumen yang sudah digantikan — indeks di `ARCHIVE-INDEX.md`          |
+
+Tidak ada antrean kerja UI/UX yang aktif: `UI_UX_PLAN.md` (item 43–144) selesai dan diarsipkan
+2026-09-14, seperti pendahulunya (item 1–42). Keduanya ada di `docs/archive/`, terdaftar di
+`ARCHIVE-INDEX.md`, dan dibaca untuk alasan per-item — bukan sebagai daftar tugas.
 | `HUSKY-SETUP.md`            | Setup pre-commit hook (sekali jalan, lokal)                           |
 
 ---

@@ -10,7 +10,7 @@
 // not: GlossaryMode had two scrollTo calls doing the same thing (item 137). One
 // exported helper instead of two hand-rolled matchMedia calls, so the next
 // JS-driven motion has somewhere obvious to reach for, and
-// reduced-motion.test.js can grep for the literal that bypasses it.
+// a11y-polish.test.js's source sweep can grep for the literal that bypasses it.
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** True when the OS asks for reduced motion. Safe where matchMedia is absent. */
