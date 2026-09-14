@@ -105,11 +105,40 @@ the same filename in a doc that means it as current still fails; a second assert
 if an exempted file comes back. `CHANGELOG.md` is deliberately unscanned — a since-deleted
 path is *correct* in a record of what was true at the time.
 
-### Still open
+### The unsourceable figure is gone, not answered
 
-- **The 1.5× brazing-length figure**, if the owner has the JAC practical module to hand.
-  Both banks teach it and both cite that module; the alternative figure is already sitting
-  there as a distractor. Nothing to do unless the module disagrees.
+The same question's answer was 管径の1.5倍程度 — "about 1.5× the pipe diameter" — cited to
+the JAC practical module and nothing else. It was left standing above as the one thing for
+the owner to decide. Decided instead, on delegation, and the decision is to **stop teaching a
+number nothing in reach can source**.
+
+**"Both banks agree" turned out to be worth nothing as corroboration.** These two are not two
+independent authoring acts: they are one of the 258 duplicate groups
+`audit-question-overlap.mjs` counts, the same question copied. One claim, written twice.
+
+That leaves one citation against the ordinary practice for a copper capillary joint, where
+the engagement length is about the tube's outside diameter and falls below it as sizes grow
+— which is what `jml04#9`'s **first distractor** said (配管の外径とほぼ同じ長さ). Nothing
+else in the corpus carries a figure: no card in the deck gives an insertion depth, and the
+two cards that cover ろう接合 and ろう付け後の確認 are about oxide-free surfaces, temperature,
+cooling and pinholes.
+
+So the answer may well have been wrong — and promoting a distractor to answer on a
+recollection of a standard would be the same mistake with its sign flipped, which is exactly
+what item 115 cost the last time a bank taught a wrong technical answer. **A learner
+preparing for a real skills exam should be taught neither figure by this deck.**
+
+The question now asks what a capillary fitting *is*, which is the part that can be
+established: ろう材 is drawn into the gap by 毛細管現象 — capillary action, the thing the
+fitting is named after, and the thing the garbled term had been hiding. Its distractors are
+gravity, pump pressure, and the copper melting and mixing; the last is the brazing-vs-welding
+confusion cards 162 and 551 exist to correct (ろう接 uses a filler with a lower melting point
+and does **not** melt the base metal). Option lengths were checked against item 114's
+threshold before shipping: 16 characters for the answer against 13, 17 and 13, so the answer
+is not the longest and no distractor stands 3 above it.
+
+If the module does specify an engagement length, a figure question can go back in knowing
+what it is. This one was asserting it.
 
 ## [7.5.0] - 2026-09-14
 

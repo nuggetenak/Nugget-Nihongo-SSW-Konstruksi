@@ -56,6 +56,15 @@ At that date: version **7.5.1**, **1,626 cards**, **22 modes**, `STORAGE_VERSION
     sentence forward. The same release's "Still open" section was wrong about `wgl09#9` for
     the same reason — the answer to "is this garbled term recoverable?" was in the question's
     own Indonesian hint.
+  - **Do not teach a figure nothing in reach can source.** The same question's answer was
+    管径の1.5倍程度, cited to the JAC practical module and nothing else, and "both banks agree"
+    is worthless as corroboration — the two are one of the 258 duplicate groups, the same
+    question copied, so it is one claim written twice. Ordinary practice for a copper capillary
+    joint puts the engagement length near the tube's outside diameter, which is what the *other*
+    bank's first distractor said, so the answer may well have been wrong; promoting a distractor
+    on a recollection of a standard is item 115's mistake with its sign flipped. The question
+    asks what a capillary fitting *is* now — 毛細管現象, the thing it is named for — which the
+    deck's own cards support. **A figure question can go back in when someone knows the figure.**
   - **A corrupted string does not stay one defect.** 「キャップillary」 also mislinked its
     question, because `derive-quiz-card-links.mjs` matched the corrupted キャップ as a
     four-character headword — its high-confidence tier. When you fix a data string, check what
