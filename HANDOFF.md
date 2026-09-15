@@ -82,7 +82,7 @@ quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
     per-character headword reveal (it breaks kinsoku shori and ruby association). Do not re-open
     either from the plan text alone.
 
-  - **Quiz→card coverage is 539 of 980 (55.0%)**, up from 305. The medium tier is read and closed,
+  - **Quiz→card coverage is 540 of 980 (55.1%)**, up from 305. The medium tier is read and closed,
     and the matcher pass item 205 asked for is done: the deriver was ranking proposals by **how
     long** the matched headword was, when what decides a link is **what** it matched. Fifty
     questions whose correct answer was, whole, a card headword sat below the applyable tiers (47 in
@@ -93,7 +93,20 @@ quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
     against hand-reading it stands. `docs/QUIZ_CONTENT_GAPS.md` holds the 72 questions no card
     teaches, which is a content report and not a linking backlog; four of its entries now name the
     near-miss card and what is actually missing (温度計 not 温度, 本溶接 not 溶接, and no card
-    states a 脚立's opening angle).
+    states a 脚立's opening angle). A fifth entry left the file for a different reason: it was
+    never a gap, it was **消化器** (digestive organ) typed for **消火器** (fire extinguisher) in
+    the question's own correct answer — homophones, so the furigana and the gloss both read
+    correct. Fixed.
+
+  - **The live queue is items 205-206 and 208-215** in `docs/UI_UX_PLAN-2026-09-items-145-205.md`.
+    212-214 are new and carry measured evidence rather than suspicion: two more wrong sort keys
+    in the deriver (an ambiguous headword loses to any shorter usable one; ~145 cards are
+    invisible under their own bare name because of a parenthetical gloss), two small wins
+    already read and ready, and nine cards that read their own headword two ways. **Two avenues
+    are recorded as tested and rejected with the falsifying rows** — Indonesian gloss as a
+    *substring*, and card desc/usage full-text search — so the next session does not re-import
+    them. 206 and 209 were attempted by background agents and killed mid-edit by a rate limit;
+    nothing was salvaged, and item 215 says why.
 
 - **2026-09-14: 7.5.1 — the garbled question, and two guards that were only comments.**
   Full write-up is `CHANGELOG.md` `[7.5.1]`. What a future session most needs to know:

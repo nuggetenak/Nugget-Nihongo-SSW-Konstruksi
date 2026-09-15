@@ -10,7 +10,8 @@ not in the correct answer. Item 96 filed those as a *linking* problem and they a
 > missing.** That list is worth more than the links, which is why it has a file.
 
 Seven of the eighty turned out to be recoverable and were linked in 7.6.0, and an eighth
-(`wglv-id-02#33`) in the item 205 matcher pass — see the last two sections. The remaining **72**
+(`wglv-id-02#33`) in the item 205 matcher pass, and a ninth (`wglv-id-03#13`) once a typo in the
+question was fixed — see the last three sections. The remaining **71**
 are listed below with what the deck has nearest to them, so a future session can tell "add an
 alias" from "write a card".
 
@@ -18,7 +19,7 @@ alias" from "write a card".
 
 | Kind | Count | What to do |
 | --- | --- | --- |
-| The deck carries nothing close at all | 13 | Write a card, or accept that the question is out of the deck's scope and say so here |
+| The deck carries nothing close at all | 12 | Write a card, or accept that the question is out of the deck's scope and say so here |
 | The deck carries something with a partial headword overlap | 59 | Read it: the near-miss is often a compound (`ガス溶接` for a question about `溶接`) and sometimes genuinely unrelated |
 
 **The 13 with nothing close are the interesting ones**, and they cluster:
@@ -29,10 +30,11 @@ alias" from "write a card".
   clearest "write a card" on the list.
 - **5S beyond the five words** — `5S活動の「標準化」の次の段階` has no card. The deck teaches the
   terms, not the cycle.
-- **Six vocabulary items** — 通信ケーブル, 光ケーブル, ゴム輪, 照明器具, 消火器, 硬質ビニル電線管.
-  Each is a one-card addition.
+- **Five vocabulary items** — 通信ケーブル, 光ケーブル, ゴム輪, 照明器具, 硬質ビニル電線管.
+  Each is a one-card addition. 消火器 was a sixth until it turned out not to be missing at all —
+  see the typo section at the end.
 
-## The 72
+## The 71
 
 | Question | Stem | Correct answer | Nearest thing in the deck |
 | --- | --- | --- | --- |
@@ -86,7 +88,6 @@ alias" from "write a card".
 | `wglv-id-02#35` | Apa bahasa Jepangnya "Pengelasan utama"? | Pengelasan utama | 162 溶接の3分類（融接・圧接・ろう接） = 3 kategori pengelasan |
 | `wglv-id-03#8` | Apa bahasa Jepangnya "Pemotongan pipa (proses)"? | Pemotongan pipa (proses) | 295 高速切断機 = Pemotong piringan abrasif |
 | `wglv-id-03#11` | Apa bahasa Jepangnya "Terowongan (utilitas)"? | Terowongan (utilitas) | 1037 可とう継手 = Flexible joint |
-| `wglv-id-03#13` | Apa bahasa Jepangnya "Alat pemadam api"? | Alat pemadam api | — |
 | `wglv-id-03#15` | Apa bahasa Jepangnya "Peralatan pendingin udara (AC)"? | Peralatan pendingin udara (AC) | 174 冷凍空気調和機器工事の代表機器 = Mesin utama pekerjaan AC |
 | `wglv-id-03#21` | Apa bahasa Jepangnya "Pipa besi"? | Pipa besi | 75 ダクタイル鋳鉄管 = Pipa besi cor ulet |
 | `wglv-id-03#25` | Apa bahasa Jepangnya "Konduit plastik keras"? | Konduit plastik keras | — |
@@ -150,3 +151,32 @@ worse than none:
 
 Each is one card. The 脚立 angle is the one worth writing first: it is asked in two banks, it is a
 number a worker is expected to know on site, and the nearest thing in the deck would mislead.
+
+## One of these was never a gap — it was a wrong kanji (2026-09-15)
+
+`wglv-id-03#13` asks the Japanese for "Alat pemadam api" (fire extinguisher) and its correct answer
+was spelled **消化器** — *digestive organ*. The intended word is **消火器**. The two are homophones
+(both しょうかき), which is exactly how an IME produces this and exactly why proofreading missed it:
+the furigana was right, the gloss was right, and only the middle kanji was wrong. It appeared twice
+in `src/data/wayground-sets.js` — once as that question's correct answer and its explanation, and
+once as a distractor in `wglv-id-03#9` carrying the gloss "Alat pemadam api".
+
+**This was a content defect, not a linking one, and it is the more serious kind.** A learner
+drilling fire-safety vocabulary for a construction exam was being shown, and scored correct for,
+the wrong word. Card 94 (消火器 = "Alat pemadam api (APAR)") has existed the whole time. With the
+kanji corrected the question links to it on the strongest tier the deriver has — the correct answer
+IS the card's headword — which is how the error surfaced at all: it was sitting in the `none` tier
+looking like a hole in the deck.
+
+A second, quieter instance of the same class was found in the card corpus while confirming this
+one: **card 94's own `usage` sentence read 消火器《しょうかいき》** while its `jp` field read
+消火器《しょうかき》 — the same word, on the same card, with two different readings. The reading in
+`jp` is the correct one.
+
+**Nine more cards read their own headword two ways**, measured across all 1,626: 167, 729, 994,
+1295, 1296, 1309, 1311, 1357 and 1726. Most look like the `jp` ruby omitting a trailing 工事 or
+similar rather than a misreading, so they are a different and possibly deliberate shape and were
+**not** touched — they are filed as item 214 rather than guessed at. Note that the broader check
+this suggests (the same kanji run read two ways anywhere in the corpus) was measured and is **not**
+viable: 272 bases trip it, almost all because a compound's ruby covers the whole word while the
+extracted base is only its trailing kanji run. The narrow same-card version is the one with signal.

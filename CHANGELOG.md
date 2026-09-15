@@ -175,6 +175,24 @@ question about something the deck does not teach is a gap in the **deck**. Thirt
 close at all, and they cluster: the evacuation-route sign colour and the 119 number appear five
 times between them across both banks with no card for either.
 
+### A fire extinguisher was spelled "digestive organ"
+
+`wglv-id-03#13` asks the Japanese for "Alat pemadam api" and its correct answer was **消化器** —
+*digestive organ*. The word is **消火器**. They are homophones (both しょうかき), which is how an IME
+produces this and why it survived proofreading: the furigana was right, the Indonesian gloss was
+right, only the middle kanji was wrong. It appeared twice — as that question's answer and
+explanation, and as a distractor in `wglv-id-03#9` carrying the gloss "Alat pemadam api".
+
+A learner drilling fire-safety vocabulary for a construction exam was being shown, and scored
+correct for, the wrong word. Card 94 (消火器) has existed the whole time; with the kanji fixed the
+question links to it on the strongest tier the deriver has. **That is how it surfaced** — it was
+sitting in the `none` tier looking like a hole in the deck, and it was a typo.
+
+The same class, quieter, in the card corpus: card 94's own `usage` sentence read
+消火器《しょうかいき》 against its `jp` field's 消火器《しょうかき》 — one word, one card, two
+readings. Nine more cards do something similar and are filed as item 214 rather than guessed at,
+because most look like a ruby deliberately omitting a trailing 工事 rather than a misreading.
+
 ### The deriver was sorting by the wrong property, and that was worth 71 more links
 
 The plan's next move on item 205 was "improve the matcher before reading 375 rows one at a time".

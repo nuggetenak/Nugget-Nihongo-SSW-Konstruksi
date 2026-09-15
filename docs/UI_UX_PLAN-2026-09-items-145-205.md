@@ -1,6 +1,6 @@
 # UI/UX plan — items 145–205 (opened 2026-09-14, 7.6.0)
 
-**Status: items 145–196 are closed by 7.6.0. Items 197–205 are the live queue.**
+**Status: items 145–196 closed by 7.6.0; 207 closed 2026-09-15. Items 205–206 and 208–215 are the live queue.**
 
 This file exists because `docs/AGENT_WORKFLOW.md` §3 says a session that finds new work files it
 deliberately rather than leaving it in a commit message, and because the numbering never restarts —
@@ -228,7 +228,77 @@ it is not closing it.
 
 ---
 
+### 212 · Two more wrong sort keys in the quiz-link deriver — size M, measured not theorised
+
+Found 2026-09-15 by asking item 205's question again — *what is the ranking actually measuring?* —
+rather than by reading rows. Both are structural; both were measured against the real corpus.
+
+**212a · An ambiguous headword is shadowed by any shorter usable one (14 rows).** `findIn` searches
+only single-card headwords, and the ambiguous fallback runs only if every other tier finds
+*nothing*. So a generic 2-character usable match always beats a longer, more specific ambiguous one
+in the same sentence — the two paths never compare specificity. `wtv02#17`, `wt09#4` and `jmt04#22`
+currently link to generic 掘削 / 防ぐ cards while the stem asks the shoring-depth threshold and the
+shadowed headword 土留め (cards 519/1393) **states "≥1.5m" verbatim** — the exact number the
+question wants. Also 発注者 shadowed by 工事 (×4), 施工管理 by 施工 (×3), サドル by 配管, 墨出し by
+主な. The fix is to let an ambiguous match of greater length reach the `ambiguous` bucket instead of
+losing to a shorter usable one; all 14 then become two-candidate human decisions.
+
+**212b · ~145 cards are invisible under their own bare name because of a parenthetical.** Headwords
+like `ブレーカー（NFB）` and `法定労働時間（週40時間・1日8時間）` carry a semantic gloss that
+`stripFuri` correctly keeps for display — and the deriver matches on that same string, so no quiz
+stem can ever reach the card, because no stem quotes a card's own parenthetical. Stripping to the
+pre-paren base at ≥4 characters and re-searching the unlinked rows: 66 raw hits, 2 of them
+answer-identity strength (吊りボルト→265, ブレーカー→51 — the whole correct answer, blocked purely by
+the paren) and ~30 more at high-tier strength, including several where the parenthetical itself
+states the answer (法定労働時間→595 whose gloss says "8時間"; ストレスチェック→139 whose gloss says
+"≥50人").
+
+**212b needs a rule 205 did not**: longest-match-wins would make 5S活動→589 override 25 rows that
+already point correctly at 整理 / 整頓 / 清掃 / 清潔 individually. A more specific existing match
+must not be replaced by a longer generic one. One clear false positive was also found and must stay
+rejected: コンセント→397 (outlet mounting *type*) proposed for "press ___ to cut power".
+
+### 213 · Two small deriver wins, read and ready — size S
+
+- **The Indonesian gloss, matched EXACTLY (not as a substring).** Every question carries `opts_id`.
+  Comparing `opts_id[ans]` exactly against card `id_text` across all 441 unlinked rows: 3 hits,
+  3/3 correct, all 元請け→115 — recovered because the Japanese answer's surface form varies
+  (元請業者 / 元請負業者) enough to dodge the exact-match tier while "Kontraktor utama" does not.
+- **`DEFINITION_STEM` misses four real phrasings**: `とはどういう意味か`, `とはどういう現象か`,
+  `とは何をするか`, and bare `とは何？`. 15 low-tier rows are exactly this shape, all read, none
+  rejected: 整理 ×2, 整頓 ×2, 清掃 ×2, 清潔 ×2, 工期 ×2, 竣工 ×3, 短絡 ×2.
+
+**Two avenues were tested and rejected, with the falsifying rows — do not re-import them.**
+*Indonesian text as a **substring** of `id_text`* is a trap: the deck's cards are almost always a
+specific sub-type, so a generic gloss matches several and is right about none ("pompa air" → two
+wrong specific-pump cards when the answer is plain ポンプ, which the deck does not carry at all;
+"Pipa besi" → 75 ダクタイル鋳鉄管 when the answer is plain 鉄管). *Card `desc`/`usage` full-text
+search* is noise at roughly 1-in-13 precision: ポンプ hits 12 unrelated cards' prose, 建設現場 hits a
+safety-greeting card and a grooming card.
+
+### 214 · Nine cards read their own headword two ways — size S
+
+Measured across all 1,626 while confirming card 94's 消火器《しょうかいき》 / 《しょうかき》 split
+(fixed; see `docs/QUIZ_CONTENT_GAPS.md`). Cards 167, 729, 994, 1295, 1296, 1309, 1311, 1357, 1726.
+Most look like the `jp` ruby omitting a trailing 工事 rather than a misreading, so they may be a
+deliberate convention — read them before changing them. **The broader version of this check is not
+viable and was measured to be sure**: "the same kanji run read two ways anywhere in the corpus"
+trips on 272 bases, nearly all because a compound's ruby covers the whole word while the trailing
+kanji run is what a naive extractor sees. The same-card version is the one with signal, and it is
+cheap enough to become a guard once the nine are adjudicated.
+
+### 215 · Items 206 and 209 — attempted, not landed
+
+Both were handed to background agents on 2026-09-15 and both were killed by a session rate limit
+mid-edit, with uncommitted working trees. Nothing was salvaged: half-finished, unvalidated edits
+across 12 stylesheets (206) and `package.json` / `index.html` (209) are the shape of change that
+ships a regression, so the worktrees were discarded rather than rescued. Both items stand exactly
+as written above. One thing worth carrying from the attempt: the 209 agent had got as far as
+serving a deliberately-broken build to check the test went red, which is the right method.
+
+---
+
 ## Numbering
 
-Next item is **212**. Never restart; the two archived plans and this one share one sequence, and a
+Next item is **216**. Never restart; the two archived plans and this one share one sequence, and a
 commit message that says "item 96" has to keep meaning the same thing in five years.
