@@ -812,6 +812,75 @@ input {
   animation: none;
 }
 
+/* ── The flip (items 155 + 165) ───────────────────────────────────────────────
+   These live HERE, in the eager stylesheet, and that is the whole of item 165.
+
+   They were `:global(...)` inside flashcard.module.css, which reads like a
+   shared definition and is not one: that file is a CSS Module imported by
+   FlashcardMode, so in a production build it ships inside FlashcardMode's
+   chunk and does not exist on any screen that has not loaded it. Onboarding's
+   demo card was pointed at these class names and measured in Chromium with
+   `perspective: none`, `transform-style: flat` and a transition duration of
+   0s -- the "shared" flip was not shared at all, and the first flip a new
+   reader ever saw was a plain 2D swap.
+
+   Which is worse than the drift item 165 set out to fix. The original finding
+   was that Onboarding reimplemented the flip at a different easing and a
+   different perspective; the truth was that pointing it at the real one still
+   gave it nothing, because the real one was behind a lazy boundary. A shared
+   rule has to live somewhere every sharer can reach.
+
+   Layout stays in each caller: FlashcardMode's card is a flex column that fills
+   its scene, Onboarding's is a fixed aspect ratio. Only the MOTION is common. */
+.fc-scene {
+  perspective: 1400px;
+}
+
+.fc-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--t-slow) var(--ease-spring);
+  will-change: transform;
+}
+
+.fc-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* item 155: the drag tracks the finger.
+   The swipe transform and the FLIP transform are the same property, so every
+   touchmove was eased through the flip's 350ms spring above -- the card lagged
+   a third of a second behind the finger, on the app's most-used gesture, and
+   the lag is impossible to attribute: it reads as the phone being slow rather
+   than as a transition being wrong. The spring is right for the flip and wrong
+   for a drag, so the drag switches it off for its duration and hands it
+   straight back on release, which is what keeps the settle sprung. */
+.fc-card[data-dragging='true'] {
+  transition: none;
+}
+
+/* Both faces hide their back. */
+.fc-face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Back face rotated to face away initially. */
+.fc-face--back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-card {
+    transition: none;
+  }
+}
+
+:root[data-motion-no-card] .fc-card,
+:root[data-motion='mati'] .fc-card {
+  transition: none;
+}
+
 /* The heatmap's weeks (item 160). Its own rule rather than `.stagger-item`
    because the cap is the difference: six is right for a menu, and wrong for
    eighteen columns that are meant to read as a record being drawn left to
@@ -831,6 +900,24 @@ input {
 :root[data-motion-no-stagger] .heatmap-col,
 :root[data-motion-no-entrance] .heatmap-col,
 :root[data-motion='mati'] .heatmap-col {
+  animation: none;
+}
+
+/* The loading skeleton, held back (item 163). `both` with a delay means it sits
+   at the keyframe's FROM state -- invisible -- for the delay, so a fast chunk
+   never flashes one. */
+.mode-skeleton {
+  animation: fadeIn var(--t-base) var(--ease-smooth) var(--t-base) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-skeleton {
+    animation: none;
+  }
+}
+
+:root[data-motion='mati'] .mode-skeleton,
+:root[data-motion-no-entrance] .mode-skeleton {
   animation: none;
 }
 

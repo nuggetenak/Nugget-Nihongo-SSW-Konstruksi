@@ -31,7 +31,22 @@ import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 // source per behaviour.
 export function ModeLoader({ shape = 'card' }) {
   return (
-    <div role="status" aria-label="Memuat mode...">
+    // item 163. The skeleton used to appear the instant Suspense suspended and
+    // vanish the instant it resolved -- two hard cuts around a wait that is
+    // often shorter than either of them.
+    //
+    // The delayed fade is the honest version of "skeletons should dissolve":
+    // held at opacity 0 for --t-base first, so a chunk that arrives quickly
+    // never flashes a skeleton at all, and one that does not arrive quickly
+    // gets a skeleton that eases in rather than snapping. A flash of loading UI
+    // for a 60ms wait is worse than no loading UI, and no crossfade fixes that
+    // -- not showing it does.
+    //
+    // The OUT half genuinely cannot be done here: Suspense unmounts this the
+    // frame the content is ready, and wrapping every mode in a fading container
+    // would break the height contract .fcWrapper depends on (see AppShell's
+    // note on `display: flex` in mode chrome). Recorded rather than attempted.
+    <div className="mode-skeleton" role="status" aria-label="Memuat mode...">
       <div
         style={{
           display: 'flex',

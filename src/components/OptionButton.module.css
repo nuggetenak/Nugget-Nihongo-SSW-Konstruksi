@@ -54,8 +54,13 @@
   animation: wrongShake var(--t-slow) var(--ease-smooth);
 }
 
+/* item 156. Dimming alone flattens the row into "some of these are off"; a
+   small recede says the eliminated options have STEPPED BACK, which is what
+   makes the remaining one read as the answer rather than as the survivor. Two
+   percent, on a transform that is already in the button's transition list. */
 .btn[data-state='dim'] {
   opacity: 0.35;
+  transform: scale(0.98);
 }
 
 /* Correct: green left bar */
@@ -84,13 +89,43 @@
   animation: slideDown var(--t-base) var(--ease-smooth) both;
 }
 
-/* Shine on correct */
+/* Shine on correct — and it MOVES now (item 156).
+   It was a static gradient painted across the button, which is a highlight
+   nobody notices. Sweeping it once takes the eye TO the right answer instead of
+   leaving them to find it, which matters most in the case the reader needs it:
+   they chose wrong, and the correct row is somewhere else in a list of four.
+   transform on a pseudo-element, so it costs nothing. */
 .btn[data-state='correct']::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(22, 163, 74, 0.07) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(22, 163, 74, 0.18) 50%, transparent 100%);
   pointer-events: none;
+  animation: optionShine var(--t-slow) var(--ease-smooth) both;
+}
+
+@keyframes optionShine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Ends off the right-hand edge, which is not its resting state -- so a zeroed
+   duration would park the highlight there rather than switching it off. It is
+   invisible either way (it is outside the button's `overflow: hidden`), but the
+   explicit rule is what DESIGN_SPEC §4 requires and what stays correct if the
+   keyframe changes. */
+@media (prefers-reduced-motion: reduce) {
+  .btn[data-state='correct']::after {
+    animation: none;
+  }
+}
+
+:root[data-motion='mati'] .btn[data-state='correct']::after {
+  animation: none;
 }
 
 /* Badge circle */

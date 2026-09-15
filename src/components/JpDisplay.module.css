@@ -109,6 +109,54 @@
   margin-bottom: var(--space-2);
 }
 
+/* ── The furigana reveal (item 157) ───────────────────────────────────────────
+   This is a Japanese-learning app and none of its motion knew that. The reading
+   was present or absent -- and under `furiganaPolicy: 'tap'`, which exists so a
+   learner can test themselves before checking, the difference between those two
+   states is the entire exercise. It appeared with no more ceremony than a
+   tooltip.
+
+   A short fade, above the kanji, on the one element whose arrival is the answer
+   to a question the reader just asked themselves. `translateY` from 2px, so it
+   settles ONTO the base rather than blinking on: at 11px the movement is barely
+   perceptible and entirely the point.
+
+   `rt` only, not the base text -- see the note in JpDisplay.jsx about the
+   per-character reveal that is deliberately not here. */
+.ruby rt,
+.furi {
+  animation: furiIn var(--t-fast) var(--ease-smooth) both;
+}
+
+@keyframes furiIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Its own toggle ("Reveal furigana"), because a reader who wants everything
+   else to move may still want the reading to be simply THERE -- the fade costs
+   120ms before they can read it, and for someone using tap-mode to test
+   themselves that is 120ms of the thing they are waiting for. */
+@media (prefers-reduced-motion: reduce) {
+  .ruby rt,
+  .furi {
+    animation: none;
+  }
+}
+
+:root[data-motion-no-furi] .ruby rt,
+:root[data-motion-no-furi] .furi,
+:root[data-motion='mati'] .ruby rt,
+:root[data-motion='mati'] .furi {
+  animation: none;
+}
+
 .romaji {
   font-size: var(--fs-small);
   color: var(--ssw-textDim);

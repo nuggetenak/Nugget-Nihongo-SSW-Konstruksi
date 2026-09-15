@@ -244,30 +244,30 @@
 .demoScene {
   width: 100%;
   max-width: 340px;
-  perspective: 1000px;
+  /* perspective comes from the global .fc-scene now (item 165) -- this had its
+     own 1000px against the card's 1400px, so the demo flip was not only eased
+     differently but PROJECTED differently. */
   margin: 0 auto var(--space-20);
   cursor: pointer;
 }
 
+/* Sizing only. The flip itself -- preserve-3d, the transition, the
+   `is-flipped` rotation -- is the global .fc-card, so the first flip a new
+   reader ever sees is the same flip they get for the next thousand cards
+   (item 165). It used to run 350ms on --ease-smooth here and 350ms on
+   --ease-spring there: the same duration arriving with a different weight,
+   which is the "unsettled, not unanimated" problem this release is about,
+   in miniature and in the worst possible place. */
 .demoCard {
-  position: relative;
   width: 100%;
   aspect-ratio: 3 / 2.2;
-  transform-style: preserve-3d;
-  transition: transform var(--t-slow) var(--ease-smooth);
   border-radius: 16px;
-}
-
-.demoCard[data-flipped='true'] {
-  transform: rotateY(180deg);
 }
 
 .demoFront,
 .demoBack {
   position: absolute;
   inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   border-radius: 16px;
   border: 1.5px solid var(--ssw-borderLight);
   background: var(--ssw-surface);

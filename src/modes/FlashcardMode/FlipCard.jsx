@@ -28,6 +28,8 @@ export default function FlipCard({
   showHint,
   borderColor,
   swipeDelta,
+  dragging = false,
+  deckDepth = 0,
   onTouchStart,
   onTouchMove,
   onTouchEnd,
@@ -60,6 +62,11 @@ export default function FlipCard({
   return (
     <div
       className={`fc-scene ${FC.scene}`}
+      // How many card backs to show behind this one (item 155). Capped at two
+      // by the stylesheet's own rules -- a deck reads as a stack at two and as
+      // clutter at five -- and zero on the last card, which is the moment the
+      // information is worth most.
+      data-deck-depth={deckDepth}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
@@ -69,6 +76,10 @@ export default function FlipCard({
     >
       <div
         className={`fc-card${flipped ? ' is-flipped' : ''}`}
+        // While a finger is down the flip's 350ms spring is switched off, so
+        // the card moves WITH the drag instead of a third of a second behind
+        // it. See the rule in flashcard.module.css.
+        data-dragging={dragging}
         style={{
           // No minHeight here on purpose. The floor is CSS's (see .front/.back
           // in FlipCard.module.css), which keeps the landscape override at

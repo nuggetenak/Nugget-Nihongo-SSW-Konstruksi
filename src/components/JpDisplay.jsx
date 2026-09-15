@@ -95,6 +95,28 @@ function indexOutsideRuby(text, sep) {
   return maskRubyMarkers(text).indexOf(sep);
 }
 
+// ── item 157, and the half of it that is NOT here ────────────────────────────
+// The furigana fade lives in JpDisplay.module.css. The plan's other half -- the
+// headword entering one character at a time, ~30ms apart -- is deliberately not
+// implemented, and the plan itself named this as the item to drop if it fought
+// the renderer. It does.
+//
+// Per-character spans fragment the base text, and `[lang='ja'] { line-break:
+// strict }` in global.css exists precisely because this app got kinsoku shori
+// wrong once already: ラッキングカバー was breaking as "ラッキングカバ / ー"
+// until that rule landed. A browser cannot apply Japanese line-breaking rules
+// across element boundaries it has been told are separate inline boxes, so
+// wrapping every character would hand back the bug that rule was written to
+// fix -- and it would do it on the flashcard front, which is the single most
+// looked-at string in the app.
+//
+// It would also break ruby association: an <rt> annotates its <rb>/base run,
+// and a base split into per-character spans is no longer that run.
+//
+// Six test suites cover this component's typography and ruby handling
+// (jp-typography-guard, jpdisplay.ruby, ruby-scope, and three ruby audits).
+// That is not a reason to avoid changing it; it is a measure of how much
+// correctness is riding on the text staying one string.
 export function JpFront({ jp = '', furi, furiganaPolicy = 'always', maxSize, compact = false }) {
   const [tapReveal, setTapReveal] = useState(false);
   // policy:

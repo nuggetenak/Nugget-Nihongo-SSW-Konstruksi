@@ -88,24 +88,29 @@ function StepDemo({ onNext }) {
       <p className={S.stepDesc}>Tap kartu di bawah untuk melihat artinya.</p>
 
       {/* Mini flashcard */}
+      {/* item 165: the same flip the app uses, not a second one.
+          `fc-scene` / `fc-card` / `is-flipped` / `fc-face` are the globals
+          FlipCard renders; this supplies only its own sizing on top. Before
+          this the FIRST flip a new reader ever saw ran at a different
+          perspective and a different curve from the thousand flips after it. */}
       <div
-        className={S.demoScene}
+        className={`fc-scene ${S.demoScene}`}
         onClick={() => !flipped && setFlipped(true)}
         role="button"
         aria-label="Balik kartu"
         tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && !flipped && setFlipped(true)}
       >
-        <div className={S.demoCard} data-flipped={String(flipped)}>
+        <div className={`fc-card${flipped ? ' is-flipped' : ''} ${S.demoCard}`}>
           {/* Front */}
-          <div className={S.demoFront} aria-hidden={flipped}>
+          <div className={`fc-face ${S.demoFront}`} aria-hidden={flipped}>
             <span className={S.demoCat}>⛑ keselamatan</span>
             <span className={S.demoJp}>{stripFuri(DEMO_CARD.jp)}</span>
             <span className={S.demoFuri}>{extractReadings(DEMO_CARD.jp)}</span>
             {!flipped && <span className={S.demoHint}>👆 Tap untuk balik</span>}
           </div>
           {/* Back */}
-          <div className={S.demoBack} aria-hidden={!flipped}>
+          <div className={`fc-face ${S.demoBack}`} aria-hidden={!flipped}>
             <span className={S.demoCat}>⛑ keselamatan</span>
             <span className={S.demoJpSmall}>{stripFuri(DEMO_CARD.jp)}</span>
             <span className={S.demoIdText}>{DEMO_CARD.id_text}</span>
