@@ -40,7 +40,8 @@ content into this file.
 
 **As of 2026-09-15.** Verify before trusting past this point — this line doesn't update itself.
 At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION` **7**,
-`npm run validate` clean (144 files, 1,411 tests). 7.5.1 is merged into `main`; 7.6.0 is on
+`npm run validate` clean (**144 test files**; the test count moves every commit, so it is not
+quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
 `claude/ui-animations-open-items-uekmcq` as PR #20, draft.
 
 - **2026-09-15: 7.6.0 — the write path, a motion language, and the guards that were not guarding.**

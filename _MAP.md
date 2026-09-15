@@ -119,7 +119,7 @@ Nugget-Nihongo-SSW-Konstruksi/
     │                                  quiz-generator, quiz-persistence, simulasi-scoring,
     │                                  text-scale, typo-diff, shuffle, wrong-tracker, …
     ├── styles/                     ← global.css (design tokens), theme.js
-    └── tests/                      ← 144 files, 1,411 tests
+    └── tests/                      ← 144 files (the count doc-references.test.js pins)
 ```
 
 `viewer.html` at repo root is a standalone, no-build HTML tool for browsing card/quiz content
@@ -154,7 +154,7 @@ the direct answer to 7.5.1's own lesson: _a summary of a list is a claim about t
 | Quiz questions    | **1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95)                          |
 | Study tracks      | **1** (Lifeline) + Common (was 3 pre-merge)                                        |
 | Storage schema    | **v7** — see §4                                                                    |
-| Tests             | **1,411 passing** (144 files) · lint 0 warnings · `npm run validate` clean         |
+| Tests             | **144 files** · lint 0 warnings · `npm run validate` clean                        |
 | Audit scripts     | **6** (`npm run audit:full`) — integrity, css-vars, text, content, related-ids, overlap |
 | localStorage docs | **3** (progress, srs, prefs)                                                       |
 | CI/CD             | ✅ GitHub Actions → GitHub Pages (`ci.yml` + `deploy.yml`)                         |

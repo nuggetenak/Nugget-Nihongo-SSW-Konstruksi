@@ -193,10 +193,21 @@ describe('the numbers in _MAP.md are the repo\u2019s numbers', () => {
   });
 
   it('counts the test files on disk', () => {
+    // The row used to read `**1,411 passing** (144 files)`, and the passing
+    // count in it was wrong: stale at 1,411 while the release shipped 1,416.
+    // It was always going to be. This guard pins the FILE count and says above
+    // why it deliberately does not pin the test count -- so the row carried a
+    // precise, bolded, unguarded number right next to a guarded one, and a
+    // reader had no way to tell which was which. The row states only the file
+    // count now. `npm run validate` is the answer to "how many tests", and it
+    // is the one answer that cannot go stale.
     const files = readdirSync(resolve(root, 'src/tests')).filter((f) => /\.test\.jsx?$/.test(f));
-    const claimed = map.match(/\*\*[\d,]+ passing\*\* \((\d+) files\)/);
+    const claimed = map.match(/\|\s*Tests\s*\|\s*\*\*(\d+) files\*\*/);
     expect(claimed, 'the Tests row changed shape — re-derive this check').toBeTruthy();
     expect(Number(claimed[1])).toBe(files.length);
+    expect(map, 'the Tests row quotes a test count again — it cannot be kept true').not.toMatch(
+      /\|\s*Tests\s*\|[^|]*passing/
+    );
   });
 
   it('counts the scripts audit:full actually chains', () => {
