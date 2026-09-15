@@ -184,41 +184,276 @@ no signage lettering.
 
 ---
 
-## 4b. Second icon sheet — 10 modes still on placeholders
+## 4b. Second icon sheet — the ten placeholders still on screen
 
-The first sheet covered navigation and common actions. Ten study modes are
-still rendering geometric placeholders. Same shared style block, same rules.
+**Re-derived 2026-09-15 (item 183), and the previous version of this section would
+have wasted a generation run.** It listed ten cells ending in `ketik`, described
+as "a keyboard" — and `ketik` exists in no mode, no `MODE_META.ui` value and no
+`SHAPES` entry. That cell would have produced an icon nothing in the app can
+render. Meanwhile `info` was genuinely missing and sat orphaned in its own
+subsection at the end of this file, outside the sheet.
+
+The list below was derived by comparing every `ui` key the app actually renders
+against `Icon.jsx`'s `ASSETS` map, rather than by reading the old list:
 
 ```
-Generate ONE image: a 5 x 2 grid of 10 flat vector icons on a transparent
-background. Even spacing, each icon in its own equal cell, all optically the
-same size and stroke weight.
-
-[PASTE SHARED STYLE BLOCK]
-
-All icons in amber #F59E0B, stroke only.
-
-Grid contents, left to right, top to bottom:
- 1  two curved arrows forming a circle — refresh / repeat
- 2  graduation cap, front-on
- 3  a grid of four squares — a number pad
- 4  warning triangle with an exclamation mark
- 5  a file folder, closed, viewed front-on
- 6  bar chart with three bars of different heights on a baseline
- 7  downward arrow into an open tray — save / export
- 8  a pencil drawing a line, diagonal
- 9  two horizontal arrows pointing opposite ways, stacked — swap
-10  a keyboard: wide rounded rectangle with small key marks
-
-Each icon must be distinguishable from the other 9 in silhouette.
+MODE_META.ui  ∪  ToolStrip's ui   minus   ASSETS  =  the ten below
 ```
 
-**Filenames after slicing** -> `ulang, wisuda, angka, peringatan, arsip,
-statistik, simpan, tulis, tukar, ketik` (`.png`, 512x512, transparent).
+Two of them are among the most-used screens in the app: **`ulang`** is the SRS
+review the dashboard badge points at, and **`wisuda`** is the 740-question bank.
 
-Activate them the same way: drop into `public/icons/ui/`, add one line each to
-the `ASSETS` map in `src/components/Icon.jsx`. The mode-to-icon mapping already
-exists in `MODE_META` (the `ui` key), so nothing else needs touching.
+_(A note for anyone reading the 7.6.0 plan alongside this: that plan said nine,
+and said `tulis` was dead and should be deleted rather than commissioned.
+`tulis` is live — `FlashcardMode/ToolStrip.jsx` renders it for the
+rating/read-only toggle. Checked rather than taken on trust; the count is ten.)_
+
+| # | Name | Where it renders | Subject |
+| --- | --- | --- | --- |
+| 1 | `ulang` | Ulasan SRS — the mode the dashboard due-badge points at | two curved arrows forming a closed circle |
+| 2 | `wisuda` | Wayground — the 740-question bank | a graduation cap seen front-on |
+| 3 | `angka` | Angka Kunci | a 3×3 keypad grid |
+| 4 | `peringatan` | Soal Jebak | a warning triangle with an exclamation mark |
+| 5 | `arsip` | JAC Teknis, and the archive affordance | a closed front-on file folder |
+| 6 | `statistik` | Statistik | three bars of different heights on a baseline |
+| 7 | `simpan` | Ekspor | a downward arrow into an open tray |
+| 8 | `tukar` | Kosakata | two horizontal arrows pointing opposite ways, stacked |
+| 9 | `info` | Tentang Aplikasi | a circled lowercase "i" |
+| 10 | `tulis` | FlashcardMode's rating/read-only toggle | a pencil drawing a diagonal line |
+
+### Why two dialects for every prompt
+
+The art is generated externally, and the two models this repo actually uses want
+different things:
+
+- **Gemini (incl. Nano Banana Pro 2)** takes conversational, descriptive
+  direction and will honour "match this reference sheet" when the twenty
+  installed icons in `public/icons/ui/*.png` are passed as image input. Its
+  variants therefore lead with the reference and then describe the subject.
+- **ChatGPT's image model** responds to an explicit constraint list and does not
+  reliably carry a negative block referenced from earlier in a conversation. Its
+  variants are structured, and repeat the negatives **by design** — §0's rule 2
+  says the fix for generated-looking output is nearly always to repeat the
+  negatives, not to add positive description.
+
+Every prompt below carries §1's shared style block verbatim (§0 rule 2: "keep it
+verbatim — it is doing most of the work") and honours the three lessons §6
+already records: **line art, not filled**, so the icon can be a CSS mask and
+inherit the theme; **expect palette drift and do not re-roll for it**, because a
+masked icon discards its source colour entirely; and **never let the model invent
+CJK**.
+
+---
+
+### 4b-1. The sheet — primary path, both dialects
+
+§0's rule 1 is right and was learned the hard way: icons generated one at a time
+drift in stroke weight and optical size. Ask for one grid.
+
+**Gemini**
+
+```
+Here are twenty icons from an existing set — please study them first and match
+them exactly for stroke weight, optical size, corner radius and overall
+temperament.
+[ATTACH: public/icons/ui/*.png]
+
+Now draw ONE image: a 3 x 4 grid of 10 NEW icons in that same set, on a
+transparent background, with the last two cells of the bottom row left empty.
+Even spacing, each icon alone in its own equal cell, all optically the same
+weight and size as the reference above.
+
+[PASTE SHARED STYLE BLOCK FROM §1]
+
+All icons in amber #F59E0B, stroke only, no fills.
+
+Reading left to right, top to bottom:
+ 1  two curved arrows chasing each other around a closed circle
+ 2  a graduation cap seen front-on, flat board with a tassel hanging right
+ 3  a 3 x 3 grid of small rounded squares — a numeric keypad
+ 4  an equilateral warning triangle with an exclamation mark inside
+ 5  a closed file folder seen front-on, with its tab at the top left
+ 6  three vertical bars of different heights standing on a baseline
+ 7  a downward arrow landing in an open tray
+ 8  two horizontal arrows stacked, pointing in opposite directions
+ 9  a circle with a lowercase letter i inside it
+10  a pencil at a diagonal, drawing a short line from its tip
+
+Each icon must be tellable from the other nine as a black silhouette at 20px.
+Cells 11 and 12 stay empty.
+```
+
+**ChatGPT**
+
+```
+Generate ONE image: a 3 x 4 grid of flat 2D vector icons on a transparent
+background. Ten icons; the last two cells are empty. Each icon alone in its own
+equal cell, even spacing, all icons optically the same size and the same stroke
+weight as each other.
+
+[PASTE SHARED STYLE BLOCK FROM §1]
+
+CONSTRAINTS:
+- Stroke only. No fills anywhere. Uniform 2px stroke, rounded caps and joins.
+- One colour: amber #F59E0B. No other colour anywhere in the image.
+- Each icon drawn on a 20 x 20 grid and legible as a silhouette at 20px.
+- Each icon must be distinguishable from the other nine in silhouette alone.
+- Transparent background. No cell borders, no grid lines, no labels.
+
+CELL CONTENTS, left to right then top to bottom:
+ 1  two curved arrows chasing each other around a closed circle
+ 2  a graduation cap seen front-on, flat board with a tassel hanging right
+ 3  a 3 x 3 grid of small rounded squares — a numeric keypad
+ 4  an equilateral warning triangle with an exclamation mark inside
+ 5  a closed file folder seen front-on, with its tab at the top left
+ 6  three vertical bars of different heights standing on a baseline
+ 7  a downward arrow landing in an open tray
+ 8  two horizontal arrows stacked, pointing in opposite directions
+ 9  a circle with a lowercase letter i inside it
+10  a pencil at a diagonal, drawing a short line from its tip
+11  empty
+12  empty
+
+NEGATIVE — none of the following may appear:
+no gradients, no drop shadows, no soft shadows, no glow, no bevel, no emboss,
+no 3D, no isometric, no glossy highlights, no plastic sheen, no skeuomorphism,
+no photorealism, no sticker outline, no white background, no background shape,
+no text, no letters other than the single lowercase i in cell 9, no numbers,
+no Japanese characters, no watermark, no signature, no cell borders,
+no colour outside amber #F59E0B.
+```
+
+---
+
+### 4b-2. The nine re-rolls, plus the tenth
+
+§6 records the re-roll as the normal outcome rather than the exception: a sheet
+comes back with one or two cells wrong and you need **exactly that cell** again,
+matched to the ones that were fine. Each prompt below pins the 2px stroke, the
+20×20 grid, optical size against the icons already installed, and silhouette
+distinctness from its nine neighbours.
+
+For every one of these, the Gemini variant assumes you attach the **good cells
+from the sheet you just generated** plus `public/icons/ui/*.png`; the ChatGPT
+variant assumes no memory and restates everything.
+
+**The line to reuse verbatim in each ChatGPT re-roll** (call it `[RR]`):
+
+```
+Flat 2D vector icon, stroke only, no fills. Uniform 2px stroke with rounded caps
+and joins, drawn on a 20 x 20 grid, centred in a square canvas with even padding
+on all four sides. One colour: amber #F59E0B. Transparent background. Legible as
+a silhouette at 20px. Geometric and mechanical — construction-signage clarity,
+not hand-drawn, not playful, not decorative.
+
+NEGATIVE: no gradients, no drop shadows, no soft shadows, no glow, no bevel,
+no emboss, no 3D, no isometric, no glossy highlights, no plastic sheen,
+no skeuomorphism, no photorealism, no sticker outline, no white background,
+no background shape, no text, no letters, no numbers, no Japanese characters,
+no watermark, no signature, no colour outside amber #F59E0B.
+```
+
+| # | Gemini | ChatGPT |
+| --- | --- | --- |
+| **1 `ulang`** | "Same set as the attached icons, same weight. One icon: two curved arrows chasing each other around a closed circle, the classic refresh loop. Arrowheads at opposite ends of the circle so it reads as continuous rotation. Nothing inside the circle." | `[RR]` + "SUBJECT: two curved arrows forming a closed circle, arrowheads at opposite ends, reading as continuous rotation. The circle's interior is empty. Must not be confusable with a plain ring or with two separate arrows." |
+| **2 `wisuda`** | "Same set, same weight. One icon: a graduation cap seen front-on — a flat square board in perspective over a small rounded crown, with a tassel hanging from the right corner. Read it as a mortarboard, not as a diamond." | `[RR]` + "SUBJECT: a graduation cap (mortarboard) seen front-on — a flat board over a small crown, tassel hanging from the right corner. Must not be confusable with a diamond, an envelope, or a roof." |
+| **3 `angka`** | "Same set, same weight. One icon: a 3 x 3 grid of nine small rounded squares, evenly spaced, like a numeric keypad. Empty squares — no digits inside them." | `[RR]` + "SUBJECT: a 3 x 3 grid of nine small rounded squares, evenly spaced, forming a numeric keypad. The squares are empty outlines. Do not draw digits inside them. Must not be confusable with a window or a calendar." |
+| **4 `peringatan`** | "Same set, same weight. One icon: an equilateral triangle standing on its base with rounded corners, an exclamation mark centred inside it — a vertical stroke above a dot. This is a construction hazard sign; it should read as one." | `[RR]` + "SUBJECT: an equilateral triangle standing on its base, rounded corners, with an exclamation mark centred inside — a vertical stroke above a separate dot. Must not be confusable with a plain triangle or with a road sign that has a different symbol inside." |
+| **5 `arsip`** | "Same set, same weight. One icon: a closed file folder seen front-on, its tab rising at the top left. Flat, rectangular, no papers sticking out, no label." | `[RR]` + "SUBJECT: a closed file folder seen front-on, with a raised tab at the top left. No papers protruding, no label on the front. Must not be confusable with a plain rectangle, a box, or an open folder." |
+| **6 `statistik`** | "Same set, same weight. One icon: three vertical bars of clearly different heights standing on a shared horizontal baseline — short, tall, medium, left to right. No axis labels, no grid." | `[RR]` + "SUBJECT: three vertical bars of clearly different heights on a shared horizontal baseline, ordered short / tall / medium from left to right. No axis labels, no gridlines, no numbers. Must not be confusable with an equaliser or with a signal-strength meter." |
+| **7 `simpan`** | "Same set, same weight. One icon: a downward arrow landing into an open tray — a wide shallow U below, the arrow above it pointing down into the opening. Read it as save-to-disk / export, not as a download cloud." | `[RR]` + "SUBJECT: a downward arrow landing into an open tray — a wide shallow U shape below, a vertical arrow above pointing down into its opening. Must not be confusable with a cloud-download icon, a floppy disk, or an inbox with mail in it." |
+| **8 `tukar`** | "Same set, same weight. One icon: two horizontal arrows stacked one above the other, the top one pointing right and the bottom one pointing left. Equal length, clearly parallel — a swap, not a cycle." | `[RR]` + "SUBJECT: two horizontal arrows stacked vertically, the upper pointing right and the lower pointing left, equal length and clearly parallel. Must not be curved and must not be confusable with a refresh loop or with a transfer icon that has more than two arrows." |
+| **9 `info`** | "Same set, same weight. One icon: a plain circle with a lowercase letter i centred inside it — a dot above a short vertical stroke. Calm and geometric; this is the only icon in the set allowed to contain a letter." | `[RR — but strike the phrase \"no letters\" from the negative]` + "SUBJECT: a circle with a lowercase letter i centred inside it: a separate dot above a short vertical stroke. This is the ONLY permitted letter; no other text anywhere. Must not be confusable with an exclamation mark or a question mark." |
+| **10 `tulis`** | "Same set, same weight. One icon: a pencil held at a 45-degree diagonal, tip at the lower left, drawing a short straight line away from its tip. Simple body, clear tip, no eraser detail." | `[RR]` + "SUBJECT: a pencil at a 45-degree diagonal, tip at the lower left, with a short straight line drawn away from the tip. Simple body with a clearly tapered tip. No eraser, no hand. Must not be confusable with a pen, a brush, or a ruler." |
+
+**Filenames after slicing** → `ulang, wisuda, angka, peringatan, arsip,
+statistik, simpan, tukar, info, tulis` (`.png`, 512×512, transparent).
+
+Activation is unchanged and already documented in §7 — drop the file in
+`public/icons/ui/`, add one line to `ASSETS` in `src/components/Icon.jsx`.
+**Unlisted names keep their placeholder, so these ten can land one at a time and
+the UI is never broken in between.** The mode-to-icon mapping already exists in
+`MODE_META`'s `ui` key; nothing else needs touching.
+
+---
+
+### 4c. The maskable PWA icon (item 196)
+
+`public/manifest.webmanifest` lists `icon-192x192.png` and `icon-512x512.png`
+**twice each** — once as `purpose: "any"` and once as `purpose: "maskable"`.
+They are the same file. A maskable icon is cropped by the platform to whatever
+shape it likes (circle, squircle, rounded square, teardrop), and the spec's safe
+zone is a centred circle of 80% of the width — so anything in the outer ~10% on
+each side can be cut. Feeding an `any` icon in as maskable means Android crops
+into the hard-hat logo on the home screen, which is the app's first impression.
+
+This needs **one** new asset: a re-framed version of the existing logo with the
+hard hat scaled down inside a filled square. Not a re-drawn logo — §3 is
+explicit that the logo already exists and must not be regenerated. The safest
+production route is to re-frame the existing `icon-512x512.png` in an image
+editor rather than to generate anything at all; the prompts below are for the
+case where a generated version is wanted instead.
+
+**Gemini**
+
+```
+[ATTACH: public/icons/icon-512x512.png]
+
+Re-frame this exact logo for use as an Android maskable app icon. Do not
+redraw it, do not restyle it, do not change its colours — only its framing.
+
+- Square canvas, 512 x 512.
+- Fill the entire canvas edge to edge with the logo's own background colour.
+  No transparency anywhere.
+- Scale the hard-hat mark down and centre it so that the whole mark fits
+  inside a centred circle of 80% of the canvas width — roughly 410px across.
+  Everything outside that circle must be plain background and nothing else.
+- Do not add a border, ring, badge, shadow or new shape of any kind.
+- No text, no letters, no numbers.
+
+The test: any circular, squircle or rounded-square crop of this image must
+leave the hard hat whole and centred.
+```
+
+**ChatGPT**
+
+```
+Re-frame an existing app logo as an Android maskable icon. The logo is attached;
+reproduce it faithfully — same shape, same colours, same stroke weights. The
+only change is framing.
+
+OUTPUT: one square PNG, 512 x 512.
+
+CONSTRAINTS:
+- The background fills the whole canvas, edge to edge, in the logo's own
+  background colour. No transparency, no alpha anywhere.
+- The hard-hat mark is centred and scaled so it fits entirely within a centred
+  circle of 80% of the canvas width (≈410px diameter). This is the maskable
+  safe zone.
+- Outside that safe-zone circle there is plain background and nothing else —
+  no ring, no border, no badge, no corner marks, no shadow.
+- Do not redraw or restyle the mark. Do not change its colour.
+
+NEGATIVE: no gradients, no drop shadows, no glow, no bevel, no 3D,
+no glossy highlights, no sticker outline, no text, no letters, no numbers,
+no Japanese characters, no watermark, no signature, no transparency,
+no additional decorative elements.
+
+VERIFY BEFORE RETURNING: a circular crop, a squircle crop and a rounded-square
+crop of the output must each leave the hard hat whole and centred.
+```
+
+**After it lands:** save it into `public/icons/` as **icon-maskable-512x512.png**
+(and a 192 if you want one), then point the two `purpose: "maskable"` entries in
+`public/manifest.webmanifest` at it instead of at the `any` files.
+
+_(The filename above is deliberately not backticked. `doc-references.test.js`
+resolves every backticked repo path in a live doc and failed on this one when it
+was — correctly: a backticked path is a pointer a future session follows, and a
+pointer at a file that does not exist yet costs that session the time it takes to
+work out which of the two is wrong. A file to be CREATED is not a pointer.)_ Check the
+result with Chrome DevTools → Application → Manifest, which previews the
+maskable crop directly.
 
 ---
 
@@ -249,6 +484,13 @@ back `#8F2E01` and was snapped to `#92400E` during processing. It is filled
 line art, so it cannot be masked; dark mode gets a CSS brightness lift instead
 of a second asset, which would be dead weight on a slow connection.
 
+**Sections 4b and 4c are OPEN, and are prompts rather than art.** They were
+re-derived on 2026-09-15 (items 183 and 196) and nothing has been generated from
+them yet. 4b's previous version would have wasted a run — see the note at the
+head of that section. The ten icons can land one at a time; the maskable icon is
+one asset and closes a real defect, since Android is currently cropping into the
+hard hat on the home screen.
+
 **Section 3 (logo) is NOT needed.** The app already ships a hard-hat logo at
 `public/icons/icon-*.png`, wired into `index.html` as favicon and
 apple-touch-icon. It is now also used on the onboarding screen. Do not
@@ -277,11 +519,8 @@ handled by the component — the art just needs correct alpha and square framing
 connections, and unoptimised 1024px PNGs will undo that. Icons should land
 well under 10KB each.
 
-### `info` — Tentang Aplikasi (added 7.2.0)
-
-Placeholder shape lives in `Icon.jsx`'s `SHAPES` (a circled lowercase i) until the second generated
-sheet lands. Prompt for that sheet:
-
-> A single-line icon of a circled lowercase letter "i", 20x20 grid, 1.5px stroke, rounded caps and
-> joins, no fill, monochrome. Matches the existing construction-tool icon set: geometric, calm,
-> nothing decorative. Reads clearly at 20px on both a cream and a near-black background.
+_(The `info` icon had its own prompt here, outside the sheet, from 7.2.0 until
+item 183 folded it into §4b as cell 9 — which is where it belongs: an icon
+generated alone is an icon that does not match the set, and §0's first rule says
+so. `Icon.jsx`'s `SHAPES` still carries the circled-i placeholder until the real
+file lands.)_

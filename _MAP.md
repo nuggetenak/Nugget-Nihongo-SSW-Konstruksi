@@ -113,13 +113,13 @@ Nugget-Nihongo-SSW-Konstruksi/
     ├── components/                 ← AppShell, ModeHeader, Dashboard, BelajarTab, SayaTab,
     │                                  BottomNav, SideNav, QuizShell, ResultScreen, ResumePrompt,
     │                                  Sheet, FilterPopup, JpDisplay, Toast, ErrorBoundary, …
-    ├── modes/                      ← 20 React.lazy mode screens; FlashcardMode/ decomposed
+    ├── modes/                      ← 23 React.lazy mode screens; FlashcardMode/ decomposed
     ├── router/                     ← ModeRouter.jsx + modes.js (the mode registry)
     ├── utils/                      ← constants, daily-mission, haptic, speak, jp-helpers,
     │                                  quiz-generator, quiz-persistence, simulasi-scoring,
     │                                  text-scale, typo-diff, shuffle, wrong-tracker, …
     ├── styles/                     ← global.css (design tokens), theme.js
-    └── tests/                      ← 123 files, 1,139 tests
+    └── tests/                      ← 144 files, 1,411 tests
 ```
 
 `viewer.html` at repo root is a standalone, no-build HTML tool for browsing card/quiz content
@@ -129,20 +129,33 @@ directly; independent of the React app, kept as a QA aid.
 
 ## 3. Current Metrics
 
-_(Re-derived 2026-09-05. Re-verify with `npm run audit:full` for data counts and `npm test` for
+_(Re-derived 2026-09-15. Re-verify with `npm run audit:full` for data counts and `npm test` for
 the test count — this table is a snapshot, not something that updates itself.)_
+
+**And it went stale anyway, which is why four of these rows are now enforced.** This table was
+last re-derived on 2026-09-05 under a banner saying every number in the file had been checked,
+and by 7.5.1 it claimed version 7.2.0, 20 modes, 1,017 tests in 111 files and 5 audit scripts —
+against 7.5.1, 22 modes, 1,301 tests in 136 files and 6 scripts. Nothing was wrong when it was
+written. It is formatted to look like ground truth, and a reader has no way to tell a fresh
+number from a four-release-old one, which is worse than an obviously unmaintained note.
+
+`doc-references.test.js` already resolved every backticked **path** in the docs; it derives the
+**numbers** now too (item 177) — version from `package.json`, the mode count from
+`MODE_COMPONENTS`, the test-file count from the tree, the audit-script count from `audit:full`.
+The same move 7.5.1 made for paths, applied to the half that was still on trust. That is also
+the direct answer to 7.5.1's own lesson: _a summary of a list is a claim about the list._
 
 | Metric            | Value                                                                             |
 | ----------------- | --------------------------------------------------------------------------------- |
-| Version           | **7.2.0** (`package.json`; `public/sw.js` `CACHE_VERSION` is kept equal to it)     |
+| Version           | **7.6.0** (`package.json`; `public/sw.js` `CACHE_VERSION` is kept equal to it)     |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) — hard constraint                     |
-| Modes             | **20** (all React.lazy) — `tentang` added in 7.2.0; was 21 before 7.0.0 removed ProductionMode/QuizProduksiMode |
+| Modes             | **23** (all React.lazy) — `gerakan` added in 7.6.0, `genba`/`skenario` in 7.5.0, `tentang` in 7.2.0; was 21 before 7.0.0 removed ProductionMode/QuizProduksiMode |
 | Flashcards        | **1,626** (1,000 common + 626 lifeline; 1,418 vocab · 104 hukum · 104 konsep)      |
 | Quiz questions    | **1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95)                          |
 | Study tracks      | **1** (Lifeline) + Common (was 3 pre-merge)                                        |
 | Storage schema    | **v7** — see §4                                                                    |
-| Tests             | **1,017 passing** (111 files) · lint 0 warnings · `npm run validate` clean         |
-| Audit scripts     | **5** (`npm run audit:full`) — integrity, css-vars, text, content, related-ids     |
+| Tests             | **1,411 passing** (144 files) · lint 0 warnings · `npm run validate` clean         |
+| Audit scripts     | **6** (`npm run audit:full`) — integrity, css-vars, text, content, related-ids, overlap |
 | localStorage docs | **3** (progress, srs, prefs)                                                       |
 | CI/CD             | ✅ GitHub Actions → GitHub Pages (`ci.yml` + `deploy.yml`)                         |
 | SW auto-bump      | ✅ `deploy.yml` rewrites `CACHE_VERSION` to a UTC timestamp before the build       |

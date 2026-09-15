@@ -152,3 +152,64 @@ describe('the live docs point at files that exist', () => {
     ).toEqual(['docs/CARD_CONTENT_SPEC.md']);
   });
 });
+
+// ─── item 177: the numbers, not only the paths ───────────────────────────────
+// The check above resolves every backticked PATH in the live docs. Nothing
+// checked the numbers, and _MAP.md §3 is a table of them formatted to look like
+// ground truth.
+//
+// It was last re-derived on 2026-09-05, under a banner saying every number in
+// the file had been checked, and by 7.5.1 it claimed version 7.2.0, 20 modes,
+// 1,017 tests in 111 files and 5 audit scripts — against 7.5.1, 22 modes, 1,301
+// tests in 136 files and 6 scripts. Every one of those was correct when written.
+// That is the whole problem: a reader cannot tell a fresh number from a
+// four-release-old one, and this file's own header says a live doc is read as
+// instructions.
+//
+// Only the mechanically derivable ones are here. The card and question counts
+// are covered by audit:full, and the test COUNT deliberately is not: it changes
+// on every commit that adds a test, and a guard that fails for doing the right
+// thing gets deleted. The file count is stable enough to be worth pinning and
+// is the one that drifted furthest.
+describe('the numbers in _MAP.md are the repo\u2019s numbers', () => {
+  const map = read('_MAP.md');
+  const pkg = JSON.parse(read('package.json'));
+
+  /** The value cell of a `| Metric | **value** … |` row. */
+  const metric = (label) => {
+    const m = map.match(new RegExp(`\\|\\s*${label}\\s*\\|\\s*\\*\\*([^*]+)\\*\\*`));
+    return m ? m[1].trim() : null;
+  };
+
+  it('quotes the version in package.json', () => {
+    expect(metric('Version'), 'update _MAP.md §3 when you bump the version').toBe(pkg.version);
+  });
+
+  it('counts the modes the router actually registers', () => {
+    const src = read('src/router/modes.js');
+    const body = src.match(/export const MODE_COMPONENTS = \{([\s\S]*?)\n\};/)[1];
+    const registered = body.split('\n').filter((l) => /^\s+[\w']+:/.test(l)).length;
+    expect(Number(metric('Modes'))).toBe(registered);
+  });
+
+  it('counts the test files on disk', () => {
+    const files = readdirSync(resolve(root, 'src/tests')).filter((f) => /\.test\.jsx?$/.test(f));
+    const claimed = map.match(/\*\*[\d,]+ passing\*\* \((\d+) files\)/);
+    expect(claimed, 'the Tests row changed shape — re-derive this check').toBeTruthy();
+    expect(Number(claimed[1])).toBe(files.length);
+  });
+
+  it('counts the scripts audit:full actually chains', () => {
+    const chained = pkg.scripts['audit:full'].split('&&').length;
+    expect(Number(metric('Audit scripts'))).toBe(chained);
+  });
+
+  it('lists every prod dependency, and there are still four of them', () => {
+    // The hard constraint. Everything in this release's motion system exists
+    // because a fourth animation library was never an option.
+    const deps = Object.keys(pkg.dependencies ?? {});
+    expect(deps.length).toBe(4);
+    expect(Number(metric('Prod dependencies'))).toBe(deps.length);
+    for (const d of deps) expect(map, `${d} is not named in the metrics table`).toContain(d);
+  });
+});
