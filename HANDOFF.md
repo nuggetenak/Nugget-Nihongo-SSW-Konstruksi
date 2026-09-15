@@ -81,6 +81,11 @@ At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION
     per-character headword reveal (it breaks kinsoku shori and ruby association). Do not re-open
     either from the plan text alone.
 
+  - **Quiz→card coverage is 468 of 980 (47.8%)**, up from 305. The medium tier is read and closed;
+    what is left is the LOW tier (375 rows) and it probably wants a better matcher rather than 375
+    hand reads — see item 205. `docs/QUIZ_CONTENT_GAPS.md` holds the 73 questions no card teaches,
+    which is a content report and not a linking backlog.
+
 - **2026-09-14: 7.5.1 — the garbled question, and two guards that were only comments.**
   Full write-up is `CHANGELOG.md` `[7.5.1]`. What a future session most needs to know:
 

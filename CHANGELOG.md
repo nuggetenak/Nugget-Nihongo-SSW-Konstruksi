@@ -145,13 +145,36 @@ matched the common spelling of a mistake rather than the mistake.
   (ラッキングカバー breaking as ラッキングカバ / ー). It would also break ruby association. The
   furigana fade shipped; the character reveal did not.
 
+### Quiz→card links: 31.1% → 47.8%
+
+Item 96 applied only the high-confidence tier and sized the rest honestly rather than batching it,
+on one rule: **a link to a card that does not teach the answer is worse than no link.** All 222
+medium-tier proposals were read against the card they would point at. 156 applied, 66 rejected,
+5 retargeted to a better card than the script proposed.
+
+The rejections are what the rule is for. `wgl10#18` asks what you put over a wire to protect it —
+絶縁キャップ, an insulation cap — and the script matched card 904 キャップ, the cap fitted to seal a
+*pipe* for a pressure test. 7.5.1 fixed that exact confusion on a different question. The
+retargets are the half a script cannot do: an asbestos-qualification question now points at
+石綿取り扱い作業者 rather than the generic 特別教育, and two about preventing 感電 point at
+絶縁抵抗測定 rather than at 電動工具.
+
+**And the 80 "no match" rows were not a linking problem.** Seven were linkable — three were
+headwords the script drops as ambiguous (脚立 is on two cards), one was a stem writing `EF ソケット`
+with a space the headword does not have, two were JP→ID questions whose answer is the Indonesian
+gloss and carries no Japanese at all. The other 73 are `docs/QUIZ_CONTENT_GAPS.md`, because a
+question about something the deck does not teach is a gap in the **deck**. Thirteen have nothing
+close at all, and they cluster: the evacuation-route sign colour and the 119 number appear five
+times between them across both banks with no card for either.
+
 ### Carried, not dropped
 
-`docs/UI_UX_PLAN-2026-09-items-145-205.md` is the live queue. Item 205 is the 222 medium-tier
-quiz→card links, which need reading one at a time — *a link to a card that does not teach the
-answer is worse than no link* — and the 80 no-match questions, which are a content gap rather than
-a linking problem. Item 209 asks for one permanent browser smoke test in CI, on the evidence of the
-four defects above.
+`docs/UI_UX_PLAN-2026-09-items-145-205.md` is the live queue. What remains of item 205 is the
+**low** tier, 375 rows — and the plan says it should be approached differently, because two
+characters is where 安全 / 危険 / 作業 live and those sit inside longer compounds constantly.
+Improving the matcher, starting with the 41 headwords it silently discards as ambiguous, is
+probably better work than reading 375 rows one at a time. Item 209 asks for one permanent browser
+smoke test in CI, on the evidence of the four defects above.
 
 ## [7.5.1] - 2026-09-14
 
