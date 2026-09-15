@@ -4,7 +4,7 @@
 // Note: progress fill gradient conditional on pass/fail — justified inline.
 // Note: red gradient buttons (exam theme) — justified inline (not amber).
 // Note: pause overlay bg — justified inline (full-screen dim).
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, memo } from 'react';
 import { useFocusTrap } from '../hooks/useFocusTrap.js';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
@@ -467,6 +467,94 @@ export function drawExam(mode, config) {
  */
 const simScoreKey = (mode, preset) => `${mode}-${preset}`;
 
+// ─── Question navigator ──────────────────────────────────────────────────────
+// Extracted and memoised (item 188). `timeLeft` is state on SimulasiMode and
+// ticks once a second, so every tick re-rendered this component's whole body:
+// on a 51-question JAC exam that is 51 buttons reconciled per second for up to
+// a hundred minutes, on phones chosen for being cheap. Nothing here depends on
+// the clock -- only on which question is current, which are answered, and which
+// are flagged -- so memo() skips it entirely on a tick and it re-renders only
+// when one of those actually changes.
+//
+// `answers` and `flagged` are replaced rather than mutated by their setters
+// (setAnswers builds a new array, setFlagged a new Set), so reference equality
+// is the correct comparison and the default shallow memo works. If either ever
+// starts being mutated in place, this silently stops updating -- which is the
+// usual memo trap and the reason this comment names the assumption.
+//
+// Jump anywhere, see answered/unanswered/current at a glance, matching how a
+// paper answer sheet lets you scan and jump to any question rather than only
+// stepping through in order.
+export const QuestionNavigator = memo(function QuestionNavigator({
+  count,
+  qIdx,
+  answers,
+  flagged,
+  onJump,
+}) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 'var(--space-6)',
+        marginTop: 'var(--space-16)',
+        padding: 'var(--space-10)',
+        background: T.surface,
+        border: `1px solid ${T.border}`,
+        borderRadius: 12,
+      }}
+    >
+      {Array.from({ length: count }, (_, i) => {
+        const isCurrent = i === qIdx;
+        const isAnswered = answers[i] !== undefined;
+        const isMarked = flagged.has(i);
+        return (
+          <button
+            key={i}
+            onClick={() => onJump(i)}
+            aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isMarked ? ', ditandai untuk ditinjau ulang' : ''}${isCurrent ? ', sedang dilihat' : ''}`}
+            style={{
+              position: 'relative',
+              width: 30,
+              height: 30,
+              borderRadius: 8,
+              fontSize: 'var(--fs-small)',
+              fontWeight: 700,
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+              background: isCurrent ? T.amber : isAnswered ? T.surfaceActive : T.surface,
+              color: isCurrent ? '#1c1917' : isAnswered ? T.text : T.textDim,
+              border: `1.5px solid ${isCurrent ? T.amber : isAnswered ? T.borderActive : T.border}`,
+            }}
+          >
+            {i + 1}
+            {/* A corner dot, not a colour swap: answered/current already own the
+                cell's fill and border, and flagging has to be readable on top of
+                either of them rather than replacing one. The state is in the
+                aria-label above, so this is decoration. */}
+            {isMarked && (
+              <span
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: -3,
+                  right: -3,
+                  width: 9,
+                  height: 9,
+                  borderRadius: '50%',
+                  background: T.amber,
+                  border: `1.5px solid ${T.surface}`,
+                }}
+              />
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+});
+
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const { prefs } = useApp();
   const { saveScore, simScores, recordWrong } = useProgress();
@@ -493,6 +581,12 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const [reviewFilter, setReviewFilter] = useState('salah');
   const [timeLeft, setTimeLeft] = useState(0);
   const [paused, setPaused] = useState(false);
+  // True only while the exit confirmation is on top of the pause overlay. The
+  // overlay drops its modal semantics for that window (item 187) -- two
+  // aria-modal elements at once is undefined for assistive tech, because
+  // aria-modal on an ancestor is exactly what hides everything outside it, and
+  // two of them disagree about what "outside" is.
+  const [confirmingExit, setConfirmingExit] = useState(false);
   const timerRef = useRef(null);
   // The exam ends at a wall-clock instant, not after N ticks of an interval.
   // The old counter decremented on a setInterval whose effect depended on
@@ -766,7 +860,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   useExitGuard(phase === 'playing' ? confirmDiscard : null);
 
   const handleExitClick = useCallback(async () => {
-    if (phase === 'playing' && !(await confirmDiscard())) return;
+    if (phase === 'playing') {
+      setConfirmingExit(true);
+      try {
+        if (!(await confirmDiscard())) return;
+      } finally {
+        setConfirmingExit(false);
+      }
+    }
     onExit();
   }, [phase, confirmDiscard, onExit]);
 
@@ -1000,7 +1101,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                   ? 'linear-gradient(90deg,rgba(22,163,74,0.5),var(--ssw-correct))'
                   : 'linear-gradient(90deg,rgba(220,38,38,0.5),var(--ssw-wrong))',
                 borderRadius: 99,
-                transition: 'width 0.8s ease',
+                transition: 'width var(--t-count) var(--ease-smooth)',
               }}
             />
           </div>
@@ -1081,7 +1182,10 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                   <div
                     key={i}
                     className={SM.reviewItem}
-                    style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
+                    // Index only; duration, easing and delay live in the
+                    // stylesheet so the reduced-motion block can zero the delay
+                    // (a computed inline one is out of its reach).
+                    style={{ '--stagger-i': i }}
                   >
                     <div
                       style={{
@@ -1368,68 +1472,13 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         Lewati daftar soal → Kumpulkan Ujian
       </a>
 
-      {/* Question navigator — jump anywhere, see answered/unanswered/current
-          at a glance, matching how a paper answer sheet lets you scan and
-          jump to any question, not just step through in order. */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 'var(--space-6)',
-          marginTop: 'var(--space-16)',
-          padding: 'var(--space-10)',
-          background: T.surface,
-          border: `1px solid ${T.border}`,
-          borderRadius: 12,
-        }}
-      >
-        {questions.map((_, i) => {
-          const isCurrent = i === qIdx;
-          const isAnswered = answers[i] !== undefined;
-          const isMarked = flagged.has(i);
-          return (
-            <button
-              key={i}
-              onClick={() => goToQuestion(i)}
-              aria-label={`Soal ${i + 1}${isAnswered ? ', sudah dijawab' : ', belum dijawab'}${isMarked ? ', ditandai untuk ditinjau ulang' : ''}${isCurrent ? ', sedang dilihat' : ''}`}
-              style={{
-                position: 'relative',
-                width: 30,
-                height: 30,
-                borderRadius: 8,
-                fontSize: 'var(--fs-small)',
-                fontWeight: 700,
-                cursor: 'pointer',
-                fontFamily: 'inherit',
-                background: isCurrent ? T.amber : isAnswered ? T.surfaceActive : T.surface,
-                color: isCurrent ? '#1c1917' : isAnswered ? T.text : T.textDim,
-                border: `1.5px solid ${isCurrent ? T.amber : isAnswered ? T.borderActive : T.border}`,
-              }}
-            >
-              {i + 1}
-              {/* A corner dot, not a colour swap: answered/current already own
-                  the cell's fill and border, and flagging has to be readable on
-                  top of either of them rather than replacing one. The state is
-                  in the aria-label above, so this is decoration. */}
-              {isMarked && (
-                <span
-                  aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    top: -3,
-                    right: -3,
-                    width: 9,
-                    height: 9,
-                    borderRadius: '50%',
-                    background: T.amber,
-                    border: `1.5px solid ${T.surface}`,
-                  }}
-                />
-              )}
-            </button>
-          );
-        })}
-      </div>
+      <QuestionNavigator
+        count={questions.length}
+        qIdx={qIdx}
+        answers={answers}
+        flagged={flagged}
+        onJump={goToQuestion}
+      />
 
       {/* Prev / Next / Submit — replaces the old single auto-advancing
           "Lanjut" button. Submit is always available (a real exam lets
@@ -1490,9 +1539,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
         // already existed for `Sheet` and needed no new machinery.
         <div
           ref={pauseRef}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="simulasi-paused-title"
+          // While the exit confirmation is open it owns the modality, and this
+          // overlay is just the dim behind it. The focus trap below stays armed
+          // either way: its keydown handler is scoped to this container, so once
+          // focus is inside the Sheet it never fires, and leaving it alone avoids
+          // the focus-restore that deactivating mid-confirm would trigger.
+          role={confirmingExit ? undefined : 'dialog'}
+          aria-modal={confirmingExit ? undefined : 'true'}
+          aria-labelledby={confirmingExit ? undefined : 'simulasi-paused-title'}
           style={{
             position: 'fixed',
             inset: 0,

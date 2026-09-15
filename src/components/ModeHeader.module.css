@@ -80,16 +80,52 @@
   align-items: center;
 }
 
+/* item 173: the last control in the app under the tap floor.
+   --tap-min is 44px and this was about 30 -- a 6px-and-2px pad around a
+   --fs-small label, which is a fine-looking breadcrumb and a bad target for a
+   thumb, outdoors, one-handed, which is the condition DESIGN_SPEC §1 says this
+   app is actually used in. Grown with min-height/min-width rather than by
+   enlarging the text, which is the remedy the spec names and the shape item 141
+   already used for the toast's dismiss button.
+
+   Cheap here specifically: the trail renders only when modeHistory is non-empty
+   -- mode-to-mode navigation -- so the taller row never appears on the common
+   path of entering a mode from a tab. */
 .trailBtn {
   font-family: inherit;
   font-size: var(--fs-small);
   font-weight: 600;
   background: none;
   border: none;
+  border-radius: var(--r-md);
   cursor: pointer;
   color: var(--ssw-amberText);
-  padding: var(--space-6) var(--space-2);
+  padding: var(--space-6) var(--space-8);
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   letter-spacing: 0.2px;
+  transition:
+    background var(--t-fast),
+    transform var(--t-instant);
+}
+
+.trailBtn:hover {
+  background: var(--ssw-surfaceHover);
+}
+
+/* The press state its sibling .backBtn has had all along. On a touch device
+   with no hover this is the only confirmation the tap registered before the
+   screen changes -- and a breadcrumb jump changes the whole screen. */
+.trailBtn:active {
+  background: var(--ssw-surfaceActive);
+  transform: scale(0.96);
+}
+
+:root[data-motion-no-press] .trailBtn:active {
+  transform: none;
 }
 
 .sep {
@@ -153,4 +189,17 @@
     padding: var(--space-4) var(--space-16);
     margin-bottom: var(--space-8);
   }
+}
+
+/* ── Shared-element morph destination (item 153) ──────────────────────────────
+   Named only while utils/motion.js has a morph in flight. See the note in
+   ModeHeader.jsx: a view-transition-name left on permanently would take this
+   icon out of the root snapshot on every navigation, including the ones that
+   are not morphing into it. */
+:root[data-nav-morph] .titleIcon {
+  view-transition-name: morph-icon;
+}
+
+:root[data-nav-morph] .titleText {
+  view-transition-name: morph-title;
 }

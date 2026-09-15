@@ -9,6 +9,7 @@ import { JpFront } from './JpDisplay.jsx';
 import { JP_LIST_MAX, JP_LIST_MAX_SECONDARY } from '../utils/jp-helpers.js';
 import ExplanationText from './ExplanationText.jsx';
 import { findWeakestCategory } from '../utils/session-weakness.js';
+import { useCountUp } from '../hooks/useCountUp.js';
 
 // rsShake animation — injected once (not worth a CSS module import just for this)
 const SHAKE_CSS = `@keyframes rsShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}`;
@@ -45,6 +46,10 @@ export default function ResultScreen({
   ensureShake();
 
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  // `pct` stays the real value -- the grade band, the emoji, the shake and the
+  // aria label all read it. Only what is PAINTED climbs (item 159), so nothing
+  // downstream ever sees a partial number.
+  const shownPct = useCountUp(pct);
   const grade = getGrade(pct);
   const wrongCount = total - correct;
   const path = pct >= 70 ? 'celebrate' : pct < 50 ? 'encourage' : 'neutral';
@@ -66,8 +71,11 @@ export default function ResultScreen({
         <span className={s.heroEmoji} data-path={path}>
           {path === 'celebrate' ? '🏆' : path === 'encourage' ? '🌱' : grade.emoji}
         </span>
+        {/* item 159. This is the number the whole screen is about, and it used
+            to simply BE there. The grade band, the emoji and the shake are all
+            reactions to a value the reader never saw arrive. */}
         <div className={s.heroPct} data-shake={path === 'encourage'} style={{ color: grade.color }}>
-          {pct}%
+          {shownPct}%
         </div>
         <div className={s.heroLabel}>
           {path === 'celebrate'
@@ -134,7 +142,14 @@ export default function ResultScreen({
               <div
                 key={i}
                 className={s.reviewItem}
-                style={{ animation: `slideUp 0.3s ease ${i * 0.05}s both` }}
+                // The per-row stagger index, not the animation itself: the
+                // duration and easing belong to the stylesheet (motion scale),
+                // and a delay expressed as a custom property is reachable by the
+                // reduced-motion block, which zeroes delays. A computed
+                // `${i * 0.05}s` inline was not -- so a reader who asked for
+                // less motion still waited out the full stagger and then had
+                // every row appear at once.
+                style={{ '--stagger-i': i }}
               >
                 <div className={s.reviewQ}>
                   <JpFront

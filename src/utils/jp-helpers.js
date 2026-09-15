@@ -117,31 +117,102 @@ export function isMeaningfullyJapanese(s = '', threshold = 0.4) {
  * Calculate appropriate font size for Japanese text based on length.
  * Returns a number (px) suitable for inline style fontSize.
  */
-// item 22: length-based ladder, unrelated to (and not reading) the
-// --fs-jp-primary/--fs-jp-back CSS tokens -- JpDisplay is the primary JP
-// rendering path in this app and drives its font-size from this function's
-// return value via an inline style, not from those custom properties
-// directly. Bumping the tokens alone (global.css's 1040px block) would have
-// had no visible effect on most real card content. Wide-breakpoint ladder
-// mirrors the same per-rung bump chosen for the static tokens (28->30 matches
-// --fs-jp-primary, 20->22 matches --fs-jp-back, etc.) so the two scales stay
-// in step with each other rather than drifting into two different "how much
-// bigger is wide" answers. Checks the same 1040px breakpoint global.css
+// item 22: length-based ladder, unrelated to (and not reading) the --fs-jp-*
+// CSS tokens -- JpDisplay is the primary JP rendering path in this app and
+// drives its font-size from this function's return value via an inline style,
+// not from those custom properties directly. Bumping the tokens alone
+// (global.css's 1040px block) would have had no visible effect on most real
+// card content. Wide-breakpoint ladder mirrors the same per-rung bump chosen
+// for the static tokens (20->22 matches --fs-jp-back, and the top rung's
+// 28->30 matched the --fs-jp-primary that used to sit beside it) so the two
+// scales stay in step with each other rather than drifting into two different
+// "how much bigger is wide" answers.
+//
+// item 171: --fs-jp-primary is gone. It was declared, it read as the token that
+// sizes a flashcard's Japanese, and no rule anywhere referenced it -- the size
+// it claimed to own has always come from the ladder below. Adopting it would
+// have given one size two owners, which is the drift this header already warns
+// about; deleting it leaves the ladder as the single answer. Checks the same 1040px breakpoint global.css
 // uses -- can't literally share the media query from JS, so the number is
 // duplicated; if that breakpoint ever moves, this needs to move with it.
 function isWideBreakpoint() {
   return typeof window !== 'undefined' && !!window.matchMedia?.('(min-width: 1040px)').matches;
 }
 
+/**
+ * How much the reader has asked to enlarge text, as a multiplier, floored at 1.
+ *
+ * ── item 170 ────────────────────────────────────────────────────────────────
+ * The Ukuran Teks control works by setting a PERCENTAGE on the root font-size,
+ * which is what every rem in the app resolves against. The ladder below returns
+ * bare numbers that JpDisplay applies as an inline `fontSize`, and px does not
+ * resolve against anything -- so Besar and Sangat Besar enlarged every label,
+ * button, heading and Indonesian gloss in the app and left the JAPANESE exactly
+ * where it was. On the flashcard front. On every quiz stem. In every glossary
+ * entry. The one piece of content the control exists for, on an app whose own
+ * setting copy promises "Semua tulisan {pct}% dari ukuran normal".
+ *
+ * Furigana rode along with it: `.ruby rt` is `max(0.5em, 0.6875rem)`, and that
+ * `em` is relative to this same fixed px.
+ *
+ * ── why it only scales UP ───────────────────────────────────────────────────
+ * `max(1, ...)`, deliberately, and this is the part worth reading before
+ * "fixing" it to be symmetric. The default is `kecil` (90%) -- an owner
+ * decision, recorded in text-scale.js -- so scaling both ways would shrink
+ * every flashcard headword from 30px to 27px for every existing reader who has
+ * never touched the setting. This repo already fought that battle once: a
+ * census found 85% of the app's text at 13px or below and called it "the app's
+ * largest usability problem", and the note in text-scale.js observes that 13px
+ * of CJK is not comparable to 13px of Latin, because a kanji carries far more
+ * strokes in the same box.
+ *
+ * So: up closes the gap for the readers who asked, down changes nothing for
+ * anyone who did not. `jp-text-scale.test.js` asserts both directions, and the
+ * Kecil case is the one that fails loudly if this is ever made symmetric by
+ * accident.
+ *
+ * Read from the DOM rather than taken as an argument because applyTextScale()
+ * has already written it there -- the same reason utils/motion.js can answer a
+ * question about user preference without a React dependency.
+ */
+function textScaleFactor() {
+  if (typeof document === 'undefined') return 1;
+  const pct = parseFloat(document.documentElement.style.fontSize);
+  if (!Number.isFinite(pct) || pct <= 0) return 1;
+  return Math.max(1, pct / 100);
+}
+
 export function jpFontSize(text = '') {
   const len = text.length;
   const wide = isWideBreakpoint();
-  if (len <= 4) return wide ? 34 : 30;
-  if (len <= 8) return wide ? 30 : 27;
-  if (len <= 14) return wide ? 25 : 23;
-  if (len <= 20) return wide ? 21 : 20;
-  if (len <= 30) return wide ? 19 : 18;
-  return wide ? 18 : 17;
+  const base =
+    len <= 4
+      ? wide
+        ? 34
+        : 30
+      : len <= 8
+        ? wide
+          ? 30
+          : 27
+        : len <= 14
+          ? wide
+            ? 25
+            : 23
+          : len <= 20
+            ? wide
+              ? 21
+              : 20
+            : len <= 30
+              ? wide
+                ? 19
+                : 18
+              : wide
+                ? 18
+                : 17;
+  // Rounded so the value stays a whole px: a fractional inline font-size is
+  // legal but makes the furigana `max(0.5em, ...)` floor land unpredictably
+  // between rungs.
+  return Math.round(base * textScaleFactor());
 }
 
 // Raised across the board 2026-09-04, along with the ladder above. The old

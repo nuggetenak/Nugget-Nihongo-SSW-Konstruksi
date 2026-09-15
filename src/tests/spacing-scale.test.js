@@ -141,9 +141,11 @@ describe('no px spacing outside the scale', () => {
     //                           with the reading size overflows the box.
     //   display numerals     -> off-scale. Sized against their own card, not
     //                           against body copy.
-    //   Japanese             -> off-scale unless it lands on --fs-jp-back or
-    //                           --fs-jp-primary; the two JP tokens cover 22-25
-    //                           and 30-35px and most JP here is outside both.
+    //   Japanese             -> off-scale unless it lands on --fs-jp-back;
+    //                           that token covers 22-25px and most JP here is
+    //                           outside it. (--fs-jp-primary covered 30-35 and
+    //                           was deleted unread in item 171 -- the primary
+    //                           JP path sizes itself from jpFontSize().)
     //
     // Item 68's judgment still holds for the rest: do not snap 24px to 26
     // without evidence the element wants the neighbouring token's size. This is

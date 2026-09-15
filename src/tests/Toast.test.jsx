@@ -2,6 +2,17 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ToastProvider, useToast } from '../components/Toast.jsx';
+import { T } from '../utils/motion.js';
+
+// A dismissed toast plays `toastOut` before the provider drops it from the array
+// (item 148) -- it no longer disappears on the frame you dismiss it. Every
+// assertion below that a toast is GONE has to sit on the far side of that exit,
+// which is what this does. Deliberately not folded into the dismissing helper:
+// the wait is the contract, so each test says where it expects to wait.
+const flushExit = () =>
+  act(() => {
+    vi.advanceTimersByTime(T.fast + 1);
+  });
 
 vi.mock('../components/Toast.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => key }),
@@ -41,6 +52,7 @@ describe('Toast', () => {
     act(() => {
       vi.advanceTimersByTime(2001);
     });
+    flushExit();
     expect(screen.queryByText('Sementara')).toBeNull();
   });
 
@@ -50,6 +62,8 @@ describe('Toast', () => {
     fireEvent.click(screen.getByRole('button', { name: 'show' }));
     const undoBtn = screen.getByRole('button', { name: /batalkan/i });
     fireEvent.click(undoBtn);
+    // Synchronously, with no timer advanced: the toast animates out afterwards,
+    // but the undo itself is an action the user took and may not wait on it.
     expect(onUndo).toHaveBeenCalledTimes(1);
   });
 
@@ -59,6 +73,7 @@ describe('Toast', () => {
     expect(screen.getByText('Tutup saya')).toBeTruthy();
     const closeBtn = screen.getByRole('button', { name: /tutup notifikasi/i });
     fireEvent.click(closeBtn);
+    flushExit();
     expect(screen.queryByText('Tutup saya')).toBeNull();
   });
 
@@ -109,6 +124,7 @@ describe('Toast', () => {
     // Dismiss A (the close button of the first toast) — C should take its slot.
     const closeButtons = screen.getAllByRole('button', { name: /tutup notifikasi/i });
     fireEvent.click(closeButtons[0]);
+    flushExit();
     expect(screen.getByText('Toast C')).toBeTruthy();
     expect(screen.getByText('Toast B')).toBeTruthy();
   });
@@ -137,6 +153,7 @@ describe('Toast', () => {
 
     const closeButtons = screen.getAllByRole('button', { name: /tutup notifikasi/i });
     fireEvent.click(closeButtons[0]); // free a slot
+    flushExit();
     expect(screen.getByText('Urgent')).toBeTruthy();
     expect(screen.queryByText('Toast D')).toBeNull();
   });
@@ -159,6 +176,10 @@ describe('Toast', () => {
     fireEvent.click(screen.getByRole('button', { name: 'a' }));
     fireEvent.click(screen.getByRole('button', { name: 'b' }));
     fireEvent.keyDown(window, { key: 'Escape' });
+    // Escape goes out through the same exit as the close button -- it used to
+    // remove the toast on the spot, which after item 148 would have been one
+    // component leaving two different ways.
+    flushExit();
     expect(screen.queryByText('Toast B')).toBeNull();
     expect(screen.getByText('Toast A')).toBeTruthy();
   });
@@ -197,7 +218,71 @@ describe('Toast', () => {
     act(() => {
       vi.advanceTimersByTime(2001);
     });
+    flushExit();
     expect(screen.queryByText('Sementara')).toBeNull();
+  });
+
+  // ── item 169: the gesture draws itself ─────────────────────────────────────
+  // Swipe-to-dismiss shipped in item 16 and was invisible until it completed:
+  // you dragged across a toast that did not move, and either it vanished or
+  // nothing happened. These pin the three things that made it undiscoverable.
+  describe('swipe follows the finger', () => {
+    const start = (el, x) => fireEvent.touchStart(el, { touches: [{ clientX: x }] });
+    const move = (el, x) => fireEvent.touchMove(el, { touches: [{ clientX: x }] });
+    const end = (el, x) => fireEvent.touchEnd(el, { changedTouches: [{ clientX: x }] });
+
+    it('moves with the drag and fades as it goes', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+
+      expect(toast.style.transform, 'nothing applied before a touch').toBe('');
+      start(toast, 200);
+      move(toast, 160);
+      expect(toast.style.transform).toBe('translateX(-40px)');
+      expect(Number(toast.style.opacity)).toBeLessThan(1);
+      expect(Number(toast.style.opacity)).toBeGreaterThan(0);
+    });
+
+    it('does not follow a rightward drag — that direction dismisses nothing', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+      start(toast, 200);
+      move(toast, 260);
+      expect(toast.style.transform).toBe('');
+    });
+
+    it('springs back when the drag stops short of the threshold', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+      start(toast, 200);
+      move(toast, 170);
+      end(toast, 170); // 30px — under the 60px threshold
+      flushExit();
+      expect(screen.getByText('Geser saya'), 'not dismissed').toBeTruthy();
+      // The return is handed to CSS rather than being another JS animation.
+      expect(toast.style.transition).toContain('--ease-spring');
+    });
+
+    it('past the threshold it leaves the way the finger was going', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+      start(toast, 200);
+      move(toast, 110);
+      end(toast, 110); // 90px — past it
+
+      // data-swiped picks the leftward exit. Without it `toastOut` would start
+      // from translateX(0) and jerk the card back to centre before dismissing
+      // it, which is the one thing a follow-the-finger gesture must not do.
+      expect(toast.dataset.swiped).toBe('true');
+      expect(toast.style.transform, 'inline drag cleared so the keyframe owns it').toBe('');
+
+      flushExit();
+      expect(screen.queryByText('Geser saya')).toBeNull();
+    });
   });
 
   it('a dismissed toast does not fire its timer after unmount (no leaked setTimeout)', () => {

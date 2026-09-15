@@ -85,10 +85,19 @@ function main() {
   const assetUrls = [...files].map((f) => `${BASE}/${f}`);
   const fontUrls = FONT_FILES.map((f) => `${BASE}/fonts/${f}`);
 
-  const precacheUrls = [`${BASE}/`, `${BASE}/index.html`, ...assetUrls, ...fontUrls];
+  // sw-register.js is referenced by index.html and lives in public/, so Vite
+  // copies it verbatim and it never appears in the manifest the loop above
+  // walks. Without it here, an offline load of the shell requests a script that
+  // is not in the cache. It exists as a separate file at all because the CSP
+  // added in 7.6.0 sets `script-src 'self'`, which forbids the inline block it
+  // replaced.
+  const shellUrls = [`${BASE}/`, `${BASE}/index.html`, `${BASE}/sw-register.js`];
+  const precacheUrls = [...shellUrls, ...assetUrls, ...fontUrls];
 
   console.log(`Generated PRECACHE_URLS: ${precacheUrls.length} entries`);
-  console.log(`  (shell: 2, bundled assets: ${assetUrls.length}, fonts: ${fontUrls.length})`);
+  console.log(
+    `  (shell: ${shellUrls.length}, bundled assets: ${assetUrls.length}, fonts: ${fontUrls.length})`
+  );
 
   // Inject into the built sw.js, replacing the source file's hand-written
   // array. Match the exact PRECACHE_URLS declaration through its closing

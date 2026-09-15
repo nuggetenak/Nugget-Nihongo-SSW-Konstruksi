@@ -372,7 +372,18 @@ the corpus grows enough to need it) is documented at the top of that script and 
 --space-20  --space-24  --space-28  --space-32  --space-40  --space-48  --space-56  --space-64
 --r-xs: 6px;   --r-sm: 8px;   --r-md: 12px;  --r-lg: 16px;  --r-xl: 20px;  --r-xxl: 24px;  --r-pill: 99px;
 --shadow-xs / -sm / -lg / -amber   (see global.css for exact values)
---ease-spring / --ease-smooth      --t-fast: 120ms  --t-base: 200ms  --t-slow: 350ms
+
+/* Motion. Every duration resolves through --t-mult, which is what makes the
+   Gerakan speed control a token change rather than a refactor. */
+--t-mult: 1                  /* the speed dial: 0.5 / 0.75 / 1 / 1.5 */
+--t-instant: 80ms            /* press and release */
+--t-fast: 120ms              /* a state change, an exit */
+--t-base: 200ms              /* an entrance, a page transition */
+--t-enter: 260ms             /* an overlay or sheet arriving */
+--t-slow: 350ms              /* a flip, a celebration */
+--t-count: 1000ms            /* a number or a ring climbing */
+--t-stagger: 40ms            /* the STEP between one list row and the next */
+--ease-spring   --ease-smooth   --ease-exit   --ease-bounce
 ```
 
 Use these, not new one-off values — a new spacing/radius number that isn't on this scale is a
@@ -417,6 +428,112 @@ entrances (a card sliding up, a screen fading in), `--t-slow` reserved for celeb
 complete takeover). `correctFlash`/`wrongShake` are answer-feedback animations specifically — don't
 reach for them for anything else just because they're already defined.
 
+---
+
+### 4a. The motion language (items 145–169, 7.6.0)
+
+**What the rule above was for, and why it needed replacing.** It was written in 2026-08 for a
+phone-only app and it was right; it was also stated and not enforced, and by 7.5.1 the measurement
+said so. **One keyframe — `fadeIn` — was played at six different durations across the app** (0.15s,
+0.2s, 0.25s, 0.3s, 0.35s, 0.4s), depending which file you were in. `scaleIn` ran at four, `popIn`
+at three. The scale defined two easing curves; the stylesheets contained five raw `cubic-bezier`
+literals plus the bare keyword `ease`. Tokens were used in 49 places and bypassed in 77.
+
+So the app did not read as *unanimated*. It read as **unsettled** — the same gesture arriving at a
+different speed in each mode, with nothing anywhere saying which speed was correct. That is the
+condition this section replaces, and `src/tests/motion-scale.test.js` is what keeps it from coming
+back: every `--t-*`/`--ease-*` declared exactly once and only in `global.css`, no stylesheet or JSX
+style object writing a bare duration or a raw curve, and no selector declaring `transition` twice.
+
+**The floor, which is what makes the ceiling affordable.** Only `transform`, `opacity` and `filter`
+animate — never `width`/`height`/`top`/`left`, and never in a loop. Those three are
+compositor-only, which is what lets a forty-element stagger, a twelve-point spark ring and a
+skewed page transition all run on a cheap Android phone. Every item below obeys it, and where an
+effect could not be built inside it (a literal moving hazard stripe inside a View Transition needs
+`clip-path` or a third layer) the effect was changed rather than the floor.
+
+**Two exceptions remain, both deliberate, both checked in a browser rather than assumed.** Sweeping
+every element on every screen for a transition on a layout property found exactly three; one was
+fixed (`index.html`'s skip link slid on `top` and slides on `transform` now) and these two stay:
+
+- **`BelajarTab`'s accordion transitions `grid-template-rows` (`0fr` → `1fr`).** That is item 167's
+  fix, and the property is the whole point of it: it is the only way to animate to a height the
+  content decides. What it replaced was `max-height: 0 → 2000px`, which eased against 2000px of
+  travel for ~300px of content — so it opened fast, stalled, and closed with a visible hang. A
+  layout transition that animates the real height beats a compositor one that animates a lie.
+- **`Dashboard`'s two-segment progress meter transitions `width`.** The segments are flex siblings
+  whose widths sum to 100%; `transform: scaleX` does not reflow a sibling, so converting it would
+  make the two overlap. It runs once per dashboard mount, not in a loop.
+
+An exception with a reason written down is a floor. An exception without one is a floor that has
+stopped being enforced, which is what §4's timing policy was before this release.
+
+**What each rung means.**
+
+| Rung | For |
+| --- | --- |
+| `--t-instant` | Press and release. The only confirmation a tap registered before the screen changes. |
+| `--t-fast` | A state change, and every EXIT. Something leaving should not linger the way something arriving is allowed to — pair it with `--ease-exit`. |
+| `--t-base` | An entrance, a page transition, a ring drawing itself. |
+| `--t-enter` | An overlay or sheet arriving. Longer than an entrance because it is a bigger thing. |
+| `--t-slow` | A flip, a celebration. Reserved: if something is at `--t-slow`, it is an event. |
+| `--t-count` | A number or a ring climbing to its value. |
+| `--t-stagger` | Not a duration — the STEP between one row of a list and the next. It is on this scale because it is multiplied into a delay, and a step outside `--t-mult` would be the one thing the speed control could not reach. |
+
+**Navigation has direction and character.** `withViewTransition` writes `data-nav-dir` and
+`data-nav-flavor` to the root for the life of a transition, and `global.css` keys off them.
+Direction: forward enters from the right, back leaves to the right, and the two must be exact
+opposites or a stack stops being readable. Character is the `MODE_SECTIONS` key, so entering a
+timed exam does not feel like opening the glossary:
+
+| Flavour | Motion | Why |
+| --- | --- | --- |
+| `pelajari` | A soft rise, at `--t-enter` | Learning should not feel hurried. The one flavour slower than the default. |
+| `latihan` | The directional slide, at `--t-fast` | Drilling should feel brisk; the point of a drill is the next question. |
+| `ujian` | The **hazard angle** — a skewed leading edge straightening as it lands | §1 reserves the diagonal `--hazard` motif for a time-sensitive or active state, which is exactly what a timed exam is. Nothing else in the app moves like it. |
+| `ulasan` | Dealt from the deck | The review screen IS a stack of cards. |
+| `alat`, a tab switch | A plain crossfade | Tools are not an event, and a tab switch is lateral — giving either a direction would say something untrue about where you are. |
+
+**The shared-element morph.** A mode card's icon and title travel into `ModeHeader`'s rather than
+the screen being replaced. A `view-transition-name` must be unique among rendered elements when
+the snapshot is taken, so the source is named imperatively on the one element tapped
+(`markMorphSource`) and the destination by a CSS rule keyed on `data-nav-morph`. **Both halves are
+un-named when the transition settles, including when it is skipped** — one leaked name does not
+break one transition, it breaks every transition after it for the life of the page.
+
+**A shared rule has to live where every sharer can reach it.** `.fc-scene`/`.fc-card`/`.fc-face`
+were `:global(...)` inside `flashcard.module.css`, which reads like a shared definition and is not
+one: a CSS Module ships inside its importer's chunk. Onboarding's demo card pointed at those names
+and measured `perspective: none`, `transform-style: flat`, `0s`. Cross-file motion belongs in
+`global.css` — `.stagger-item`, `.heatmap-col`, `.mode-skeleton` and the flip all live there now.
+
+**Reduced motion has three separate failure modes, not one.** The `global.css` catch-all zeroes
+duration and iteration count, and:
+
+1. **It did not zero DELAYS.** An element still waited its full stagger and then appeared
+   instantly — the pauses without the movement, which is worse than either. Fixed; both
+   `animation-delay` and `transition-delay` are zeroed now.
+2. **An animation whose END STATE differs from its resting state is not disabled by zeroing its
+   duration — it jumps to the end.** `missionFadeOut` ends at `opacity: 0`, so the app's single
+   celebration was invisible to every reader who had asked their device for less motion. Any such
+   animation needs an explicit `animation: none`, and this is the rule to check first when adding
+   one.
+3. **Motion driven from JS is out of CSS's reach entirely.** `useCountUp`'s
+   `requestAnimationFrame` loop, `markMorphSource`, `withViewTransition` — each asks
+   `motionAllows()` itself. `a11y-polish.test.jsx` sweeps `src/` for the literals that bypass it.
+
+**And the reader has a dial.** `Pengaturan Gerakan` (`src/utils/motion-pref.js`, mode key
+`gerakan`) carries four presets, nine per-feature toggles and a speed multiplier. The default is
+`penuh` — with one exception that is not negotiable: **on a fresh install, if the OS asks for
+reduced motion, the default is `mati`.** After that the reader's explicit choice wins in either
+direction, including turning motion back on. New-install only, in the shape
+`defaults-new-install-only.test.js` already established.
+
+The consequence for every item above: **an ambitious animation is opt-out, not imposed.** That is
+the whole reason the ceiling came off.
+
+---
+
 *Haptics:* `haptic.correct()` / `haptic.wrong()` on every answer-commit, app-wide — regardless of
 whether the mode renders its answer UI through the shared `OptionButton` or hand-rolls its own.
 Audited before writing this rule rather than assumed: `AngkaMode`, `DangerMode`, and `SimulasiMode`
@@ -428,10 +545,14 @@ button in `DengarMode`). `haptic.flip()` is `FlipCard`'s own thing — a physica
 the flip gesture, not answer feedback, kept distinct on purpose. `haptic.wrong()` again on
 `ConfirmDialog`'s confirm button specifically (destructive-confirm) — reused rather than inventing a
 sixth pattern for a single call site; it wasn't wired to anything before this item, since
-`ConfirmDialog`'s own focus-trap work (item 15) didn't touch haptics. `haptic.success()` remains
-defined and unused — no per-mode inconsistency to reconcile (nothing calls it anywhere to be
-inconsistent with), and picking a first call site for it (milestone toasts? quiz completion?) is a
-product decision this item's audit-and-reconcile scope doesn't cover. Flagging rather than guessing.
+`ConfirmDialog`'s own focus-trap work (item 15) didn't touch haptics. `haptic.success()` remained
+defined and unused, and this paragraph flagged it rather than guessing at a first call site,
+because picking one was a product decision an audit-and-reconcile item did not cover.
+
+**It has one now (item 161, 7.6.0): `MissionCompleteOverlay`.** That is the only celebration in
+the app, which makes it the one place a five-pulse pattern distinct from correct/wrong means
+something — and it is the same moment `--z-celebration` and `--t-slow` were reserved for and had
+never been spent on. Three things reserved for one event, all finally spent on it together.
 
 *Closed (item 50, 2026-08-26):* `correctFlash`/`wrongShake` — the visual counterpart to the haptic
 fix above — were wired into `OptionButton.module.css` only. Verified against this exact record
@@ -447,6 +568,20 @@ animation — a different shape, not a gap; `SprintMode`'s button colors are a s
 ("this button means Tahu"), not a reactive correct/wrong state, so there's no reveal moment to
 animate. Each mode's own `animation` property reuses the same two `global.css` keyframes
 `OptionButton` already uses — no new keyframes, no new CSS file.
+
+**Superseded by item 174 (7.6.0): there are no hand-rolled option buttons left.** All four render
+the shared `OptionButton`, which owns the correct/wrong/dim derivation, the flash/shake trigger and
+the haptic call. Item 50 gave four copies the same animation; this removes the copies. They
+differed in exactly one thing that was not accidental — how big the option text is — so that is
+the one thing the component takes as a prop (`variant`): `lg` for Dengar, whose options are read
+while audio plays, and `numeric` for Angka, whose options are numerals and where proportional
+digits would make the discrimination the drill trains harder than it already is.
+
+A note on how that was found, because it is the same lesson twice: those four wrote
+`animation: 'correctFlash 0.5s ease'` as a multi-line ternary in a JSX style object, and
+`motion-scale.test.js` did not catch them because it required the quote on the SAME LINE as the
+property. The rule read as enforced and was not — the same shape as a View Transition asserted to
+have been *called* while nothing moved. It reads the whole property expression now.
 
 *JS-driven motion needs its own `prefers-reduced-motion` check* — a CSS rule can't reach an API
 called from JS. `BottomNav`'s View Transitions crossfade (`document.startViewTransition`) was the
@@ -553,8 +688,11 @@ still calls `speakJP()` exactly as before — no `onError`, so a failure there i
 silent as it was before this item. The set has moved since: `ProductionMode` and
 `QuizProduksiMode` left in 7.0.0, `FlashcardMode`/`FlipCard` and `SkenarioMode` joined, and
 `ModeRouter` calls `stopSpeech` rather than speaking (item 139). `QuizShell`, `GlossaryMode` and
-`ReviewMode` are the three from the original five that remain. A reasonable follow-up if silent audio failure turns out to matter in those
-modes too, not a gap discovered and left unmentioned.
+`ReviewMode` were the three from the original five that remained, and **that follow-up was taken
+in 5.5.0** — all three call `useSpeakErrorHandler()` now and pass `onError`, with `ReviewMode`
+distinguishing its automatic playback from a tap. This paragraph said otherwise until item 178
+re-derived it (2026-09-15): the gap it describes has been closed for four releases, and a spec
+that under-states its own coverage sends the next session to re-fix something finished.
 
 `SideNav`'s footer ("kartu · siap offline") was the one specific claim the plan named — narrowed
 to "konten siap offline" so it reads as a claim about the card content specifically, not the

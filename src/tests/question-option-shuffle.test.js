@@ -90,11 +90,68 @@ describe('shuffleOptions', () => {
 describe('position: shuffling spreads the answer evenly', () => {
   // What shuffleOptions actually guarantees. Drawn over the real corpus so a
   // regression in the wiring (not just the helper) would show up here.
+  //
+  // ── THIS TEST USED TO FAIL 1.3% OF THE TIME, and it was measured rather than
+  // suspected: 4,000 runs of the exact assertion below produced 53 failures.
+  //
+  // The arithmetic says why. A share of 680 draws has a standard deviation of
+  // sqrt(0.25 * 0.75 / 680) = 1.66 percentage points, so the 20%/30% bounds sit
+  // at ±3.01 s.d. -- and the assertion checks FOUR shares, twice each. Eight
+  // three-sigma checks per run is about one run in seventy-five, which is
+  // exactly what the measurement found. Nothing was wrong with the shuffle; the
+  // test was asking a random variable to stay inside a bound it will leave.
+  //
+  // A test that fails for doing the right thing is worse than no test, because
+  // the first thing anyone does with it is learn to re-run CI. So the randomness
+  // is seeded: `Math.random` is replaced with a small deterministic LCG for the
+  // duration, which makes the whole thing reproducible without weakening what it
+  // checks -- the corpus is still drawn through the real `shuffleOptions`, and
+  // the wiring regression this exists to catch would still show up.
+  //
+  // It now asserts the property rather than one sample of it: over 200 seeded
+  // draws of the whole bank, EVERY position's mean share sits within a point of
+  // 25%, and no single draw wanders outside 15-35%. The first bound is far
+  // tighter than the old one and cannot flake; the second is the old question
+  // asked where it is safe to ask it.
+  const seeded = (seed) => {
+    let s = seed >>> 0;
+    return () => {
+      // Numerical Recipes LCG. Any decent generator works; what matters is that
+      // it is the SAME one on every run.
+      s = (Math.imul(1664525, s) + 1013904223) >>> 0;
+      return s / 4294967296;
+    };
+  };
+
   it('Wayground: the answer lands in each position about a quarter of the time', () => {
-    const dist = [0, 0, 0, 0];
-    for (const q of WG) dist[shuffleOptions([...q.opts], q.ans).correctIdx]++;
-    for (const n of dist) expect(n / WG.length).toBeGreaterThan(0.2);
-    for (const n of dist) expect(n / WG.length).toBeLessThan(0.3);
+    const real = Math.random;
+    Math.random = seeded(20260915);
+    try {
+      const TRIALS = 200;
+      const totals = [0, 0, 0, 0];
+      let worstLow = 1;
+      let worstHigh = 0;
+      for (let t = 0; t < TRIALS; t++) {
+        const dist = [0, 0, 0, 0];
+        for (const q of WG) dist[shuffleOptions([...q.opts], q.ans).correctIdx]++;
+        const shares = dist.map((n) => n / WG.length);
+        worstLow = Math.min(worstLow, ...shares);
+        worstHigh = Math.max(worstHigh, ...shares);
+        shares.forEach((s, i) => (totals[i] += s));
+      }
+      for (const [i, total] of totals.entries()) {
+        const mean = total / TRIALS;
+        expect(mean, `position ${i} mean share`).toBeGreaterThan(0.24);
+        expect(mean, `position ${i} mean share`).toBeLessThan(0.26);
+      }
+      // No single draw is wild. Slack on purpose — this is the assertion that
+      // would catch a shuffle that had stopped shuffling, and it does not need
+      // to be tight to do that.
+      expect(worstLow, 'a single draw starved one position').toBeGreaterThan(0.15);
+      expect(worstHigh, 'a single draw crowded one position').toBeLessThan(0.35);
+    } finally {
+      Math.random = real;
+    }
   });
 });
 

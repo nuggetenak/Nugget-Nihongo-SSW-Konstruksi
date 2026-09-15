@@ -95,7 +95,7 @@
 
 .questionCard {
   margin-bottom: var(--space-14);
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
 }
 
 .questionJp {
@@ -117,7 +117,7 @@
 /* ── Result screen ── */
 .resultPage {
   padding: var(--space-20) var(--space-16);
-  animation: scaleIn 0.3s ease;
+  animation: scaleIn var(--t-enter) var(--ease-smooth);
 }
 
 /* lulus banner — bg/border/color are conditional on pass/fail, kept inline */
@@ -126,7 +126,7 @@
   padding: var(--space-28) var(--space-20) var(--space-24);
   border-radius: var(--r-xl);
   margin-bottom: var(--space-16);
-  animation: scaleIn 0.3s ease;
+  animation: scaleIn var(--t-enter) var(--ease-smooth);
 }
 
 .lulusIcon {
@@ -185,6 +185,11 @@
   border-radius: var(--r-md);
   background: var(--ssw-surface);
   border-left: 3px solid var(--ssw-wrong);
+  /* --stagger-i comes from the component; capped at 8 because an exam review can
+     run to fifty rows and an uncapped stagger would make the last one wait. The
+     delay is a CSS value so the reduced-motion block can zero it. */
+  animation: slideUp var(--t-enter) var(--ease-smooth) both;
+  animation-delay: calc(min(var(--stagger-i, 0), 8) * var(--t-stagger));
 }
 
 .reviewJp {

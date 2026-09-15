@@ -3,6 +3,8 @@
 // Reads/writes via storage engine (prefs doc).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { flushSync } from 'react-dom';
+import { withViewTransition } from '../utils/motion.js';
 import {
   createContext,
   useContext,
@@ -13,10 +15,11 @@ import {
   useRef,
 } from 'react';
 import { get, set as storageSet } from '../storage/engine.js';
-import { MODE_COMPONENTS } from '../router/modes.js';
+import { MODE_COMPONENTS, sectionOf } from '../router/modes.js';
 import { applyTheme } from '../styles/theme.js';
 import { resolveIsDark, prefersDarkOS, nextTheme, DEFAULT_THEME } from '../utils/theme-mode.js';
 import { applyTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { applyMotion, DEFAULT_MOTION } from '../utils/motion-pref.js';
 import { useToast } from '../components/Toast.jsx';
 
 const _noopToast = { show: () => {}, hide: () => {} };
@@ -85,6 +88,14 @@ export function AppProvider({ children }) {
     applyTextScale(prefs.textScale ?? DEFAULT_TEXT_SCALE);
   }, [prefs.textScale]);
 
+  // ── Motion ──
+  // Same shape as the text scale above and for the same reason: the root
+  // attributes it writes are what CSS and utils/motion.js both read, so this is
+  // the one place the stored preference becomes something the app can act on.
+  useEffect(() => {
+    applyMotion(prefs.motion ?? DEFAULT_MOTION);
+  }, [prefs.motion]);
+
   // Cycles Terang -> Gelap -> Ikuti Sistem -> Terang. Still named toggleTheme:
   // Dashboard's prop and its test both use that name, and renaming buys nothing
   // this comment does not say.
@@ -134,11 +145,29 @@ export function AppProvider({ children }) {
   const goMode = useCallback(
     (m, params = null) => {
       runGuarded(() => {
-        setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
-        setMode(m);
-        setModeParams(params);
-        setPref('lastMode', m);
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        // Wrapped here rather than at each of the seven call sites, so entering a
+        // mode from Dashboard, BelajarTab, SayaTab, a banner or an error screen
+        // all transition the same way. SideNav and BottomNav also wrap their own
+        // gesture; withViewTransition is re-entrant and the inner call is a
+        // no-op, so the double wrap costs nothing.
+        //
+        // exitMode is deliberately NOT wrapped. Its own comment above requires
+        // it to be synchronous -- things depend on `mode` being null immediately
+        // after it returns -- and a View Transition callback is queued by the
+        // browser, so wrapping it would put that guarantee at the mercy of
+        // scheduling. goBack's two MODE-TO-MODE branches are wrapped as of item
+        // 154; its exitMode fall-through is not, for the same reason.
+        withViewTransition(
+          () => {
+            setModeHistory((h) => (mode ? [...h.slice(-2), mode] : h)); // push current before navigating
+            setMode(m);
+            setModeParams(params);
+            setPref('lastMode', m);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+          },
+          flushSync,
+          { dir: 'forward', flavor: sectionOf(m) }
+        );
       });
     },
     [mode, setPref, runGuarded]
@@ -220,28 +249,52 @@ export function AppProvider({ children }) {
         exitGuardRef.current = null;
       }
       if (modeHistory.length === 0) {
-        exitMode();
+        // Leaving the mode area entirely -- the COMMON back, since entering a
+        // mode from a tab leaves modeHistory empty. Wrapped here, at the call
+        // site, rather than inside exitMode: exitMode itself must stay
+        // synchronous (its own comment says what depends on that) and is still
+        // called directly by requestExitMode, the popstate handler and a mode's
+        // own exit button. goBack is already async -- it awaits the exit guard
+        // -- so no caller of THIS function can have been assuming otherwise.
+        withViewTransition(() => exitMode(), flushSync, { dir: 'back' });
         return;
       }
+      // Both branches below transition BACKWARD (item 154). Direction is the
+      // whole point of wrapping these: a stack where going back looks identical
+      // to going forward is a stack you cannot feel your position in. The
+      // exitMode fall-through above stays a hard cut, deliberately -- see the
+      // note in goMode.
       if (targetMode) {
         const idx = modeHistory.lastIndexOf(targetMode);
         if (idx !== -1) {
-          setMode(targetMode);
-          setModeHistory(modeHistory.slice(0, idx));
-          setModeParams(null);
-          setPref('lastMode', targetMode);
-          window.scrollTo({ top: 0, behavior: 'instant' });
+          withViewTransition(
+            () => {
+              setMode(targetMode);
+              setModeHistory(modeHistory.slice(0, idx));
+              setModeParams(null);
+              setPref('lastMode', targetMode);
+              window.scrollTo({ top: 0, behavior: 'instant' });
+            },
+            flushSync,
+            { dir: 'back', flavor: sectionOf(targetMode) }
+          );
           return;
         }
         // targetMode not found in history — fall through to the default
         // pop-one behaviour rather than doing nothing.
       }
       const prev = modeHistory[modeHistory.length - 1];
-      setModeHistory((h) => h.slice(0, -1));
-      setMode(prev);
-      setModeParams(null);
-      setPref('lastMode', prev);
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      withViewTransition(
+        () => {
+          setModeHistory((h) => h.slice(0, -1));
+          setMode(prev);
+          setModeParams(null);
+          setPref('lastMode', prev);
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        },
+        flushSync,
+        { dir: 'back', flavor: sectionOf(prev) }
+      );
     },
     [modeHistory, exitMode, setPref]
   );

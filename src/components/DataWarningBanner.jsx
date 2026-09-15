@@ -9,7 +9,7 @@
 // simply moved ahead would be the worse kind of wrong.
 import { useState, useEffect, useCallback } from 'react';
 import { useApp } from '../contexts/AppContext.jsx';
-import { getCorruptionWarning, setExternalChangeHandler } from '../storage/engine.js';
+import { getCorruptionWarning, addExternalChangeListener } from '../storage/engine.js';
 import { setQuotaHandler } from '../utils/storage-quota.js';
 import s from './DataWarningBanner.module.css';
 
@@ -58,11 +58,13 @@ export default function DataWarningBanner() {
   // — item 16's rule says a data-loss-risk event never belongs on a self-dismissing
   // toast, and a stale view of your own study history qualifies.
   useEffect(() => {
-    setExternalChangeHandler(() => {
+    // addExternalChangeListener, not the old single-slot setter: useSRS needs to
+    // hear the same event to refresh the due badge (item 191), and one slot meant
+    // whichever of the two registered last silently evicted the other.
+    return addExternalChangeListener(() => {
       setWarning((w) => (w === 'quota' || w === 'corrupt' ? w : 'othertab'));
       setDismissed(false);
     });
-    return () => setExternalChangeHandler(null);
   }, []);
 
   // Quota errors can happen at any point during the session, so this stays

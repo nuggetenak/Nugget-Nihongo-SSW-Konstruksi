@@ -93,7 +93,7 @@ npm run audit:full    # 5 audit: integrity, css-vars, text, content, related-ids
 
 ```
 src/
-├── App.jsx                  # Root, 2-tab layout
+├── App.jsx                  # Root, 3-tab layout: Beranda / Belajar / Saya
 ├── contexts/                # AppContext, ProgressContext, SRSContext
 ├── data/                    # Flashcard & quiz data (1.626 kartu + 1.075 soal)
 │   ├── source/              # cards-common.js (1.000), cards-lifeline.js (626) — EDIT THESE

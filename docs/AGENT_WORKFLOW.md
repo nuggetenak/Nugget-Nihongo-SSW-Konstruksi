@@ -100,7 +100,11 @@ briefly when actually pushing, then strip again right after.
 | `docs/PWA_RELEASE_SPEC.md`     | Offline architecture, `CACHE_VERSION` discipline, deploy checklist |
 | `docs/ASSET-PROMPTS.md`        | Generation prompts for icon / badge / illustration art     |
 | `docs/CARD_SPLIT_AUDIT.md`     | **Frozen finding list, not a spec** — a verdict for every card in the pre-split corpus, including the rule that kept each of the 113 that stayed whole |
+| `docs/QUIZ_CONTENT_GAPS.md`    | The 72 quiz questions no card in the deck teaches, with the nearest thing to each. A snapshot of `derive:quiz-links`' `none` tier, read once by hand — a content report, not a linking backlog |
+| `docs/UI_UX_PLAN-2026-09-items-145-205.md` | **The one live work queue.** Items 145–196 closed by 7.6.0, 207 after it; 205–206 and 208–215 are open — the filename records the range the plan opened with, not what it holds, so read its Status line rather than its name. Opened deliberately per §3 — the repo tracked nothing before it, which is why "what is open" had to be re-derived from the code |
 | `docs/archive/`                | Superseded/completed material, full text preserved — indexed in `ARCHIVE-INDEX.md`. **Includes both UI/UX work queues** (items 1–42 and 43–144); both are empty and neither is a task list — there is no live queue |
+| `LICENSE`                      | MIT, and it covers the **software only** — it says so and points at `PROVENANCE.md` for the content |
+| `PROVENANCE.md`                | Where every corpus came from, item by item, and which ones have an unsettled redistribution status. **Add a row when you add a corpus.** Records the open question rather than resolving it |
 | `CHANGELOG.md`                 | Versioned release notes (updated at merge/release time)   |
 | `HUSKY-SETUP.md`               | One-time local pre-commit hook setup — not committed, not CI |
 | `scripts/archive/README.md`    | Which one-shot migration scripts exist and why not to re-run them |

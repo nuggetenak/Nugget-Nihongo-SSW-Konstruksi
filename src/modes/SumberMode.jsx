@@ -265,7 +265,7 @@ export default function SumberMode({ onNavigate }) {
                             background:
                               stat.pct >= 70 ? T.correct : stat.pct >= 40 ? T.amber : T.wrong,
                             borderRadius: 99,
-                            transition: 'width 0.4s ease',
+                            transition: 'width var(--t-slow) var(--ease-smooth)',
                           }}
                         />
                       </div>

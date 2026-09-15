@@ -131,7 +131,7 @@
 .accordionPanel {
   padding: var(--space-14) var(--space-16);
   border-top: none;
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn var(--t-fast) var(--ease-smooth);
   /* border-radius, background, border: set inline (dynamic group color) */
 }
 
@@ -200,7 +200,7 @@
   padding: var(--space-20) var(--space-16);
   border-radius: var(--r-lg);
   margin-bottom: var(--space-14);
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
 }
 
 .questionHint {
@@ -225,7 +225,7 @@
 
 .nextBtn {
   margin-top: var(--space-12);
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn var(--t-fast) var(--ease-smooth);
   font-size: var(--fs-body);
   padding: var(--space-14);
 }
@@ -233,7 +233,7 @@
 /* ── ResultScreen ── */
 .resultPage {
   padding: var(--space-20) var(--space-16);
-  animation: scaleIn 0.3s ease;
+  animation: scaleIn var(--t-enter) var(--ease-smooth);
 }
 
 .resultCard {
@@ -312,4 +312,23 @@
   font-size: var(--fs-body);
   font-weight: 700;
   color: var(--ssw-correct);
+}
+
+/* ── Press feedback (item 164) ───────────────────────────────────────────────
+   On a touch device there is no hover, so the pressed state is the ONLY
+   confirmation that a tap registered before the screen changes — and on a slow
+   phone the gap between the two is exactly where someone taps a second time.
+   Thirteen of the app's twenty-eight stylesheets had clickable elements and no
+   press state at all; this is one of them. Compositor-only, so it costs nothing.
+   Honours Gerakan's "Respons sentuh" toggle. */
+.accordionBtn {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.accordionBtn:active {
+  transform: scale(0.98);
+}
+
+:root[data-motion-no-press] .accordionBtn:active {
+  transform: none;
 }

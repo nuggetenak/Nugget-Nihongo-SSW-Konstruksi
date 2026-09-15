@@ -321,11 +321,17 @@ export default function GlossaryMode({ track }) {
       </div>
 
       <div className={G.contentWrap}>
-        {visibleGroups.map(([letter, items]) => (
+        {visibleGroups.map(([letter, items], i) => (
           /* data-letter attribute kept for IntersectionObserver */
           <div
             key={letter}
             data-letter={letter}
+            // The GROUP staggers, not the rows inside it (item 166). A glossary
+            // filter can leave four hundred terms on screen, and staggering
+            // those would mean waiting for the list rather than reading it --
+            // the cap exists for the same reason, one level up.
+            className="stagger-item"
+            style={{ '--stagger-i': i }}
             ref={(el) => {
               sectionRefs.current[letter] = el;
             }}

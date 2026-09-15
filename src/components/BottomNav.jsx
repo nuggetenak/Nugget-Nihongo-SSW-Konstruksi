@@ -1,5 +1,6 @@
 // ─── BottomNav.jsx ──────────────────────────────────────────────────────────
-import { prefersReducedMotion } from '../utils/motion.js';
+import { flushSync } from 'react-dom';
+import { withViewTransition } from '../utils/motion.js';
 import Icon from './Icon.jsx';
 import s from './BottomNav.module.css';
 
@@ -18,12 +19,15 @@ export default function BottomNav({ active, onChange, dueBadge = 0 }) {
   // own check, same as the plan warns any JS-driven motion will. The check
   // moved to utils/motion.js when GlossaryMode turned out to need it too
   // (item 137), so there is one of it rather than one per site.
+  //
+  // flushSync is passed in because React batches the state update and flushes
+  // it at the END of the event -- after startViewTransition's callback has
+  // already returned. Measured: without it the browser snapshots the same DOM
+  // twice and the crossfade does nothing at all, which is how this shipped.
   const handleTabChange = (newTab) => {
-    if (document.startViewTransition && !prefersReducedMotion()) {
-      document.startViewTransition(() => onChange(newTab));
-    } else {
-      onChange(newTab);
-    }
+    // A tab switch is lateral, not forward or back in a stack, so it gets a
+    // flavour and no direction -- see the matching note in SideNav.
+    withViewTransition(() => onChange(newTab), flushSync, { flavor: 'tab' });
   };
   return (
     <nav className={s.nav} role="navigation" aria-label="Navigasi utama">

@@ -13,7 +13,7 @@
   font-weight: 600;
   backdrop-filter: blur(8px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  animation: slideDown 0.25s var(--ease-smooth, ease);
+  animation: slideDown var(--t-enter) var(--ease-smooth, ease);
 }
 
 @keyframes slideDown {

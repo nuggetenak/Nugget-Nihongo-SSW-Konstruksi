@@ -12,12 +12,12 @@ import { JpFront } from '../components/JpDisplay.jsx';
 import SessionLengthPicker, { storedQuizCount } from '../components/SessionLengthPicker.jsx';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
-import { haptic } from '../utils/haptic.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { recordTermMistake } from '../utils/mistake-bridge.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import ProgressBar from '../components/ProgressBar.jsx';
+import OptionButton from '../components/OptionButton.jsx';
 import S from './modes.module.css';
 
 // Detail view shows termA/termB as two separate stacked cards, each with its
@@ -370,9 +370,8 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
     (idx) => {
       if (selected !== null || phase !== 'playing') return;
       setSelected(idx);
+      // Haptic moved into OptionButton (item 174).
       const isCorrect = idx === correctIdx;
-      if (isCorrect) haptic.correct();
-      else haptic.wrong();
       // Item 127: 656 lines, and this mode was the only quiz in the app that
       // recorded a wrong answer nowhere at all -- no wrong-tracker import, no
       // useProgress call. Answer every pair wrong and the app learned nothing.
@@ -517,7 +516,7 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
           borderRadius: 14,
           padding: 'var(--space-16) var(--space-14)',
           marginBottom: 'var(--space-16)',
-          animation: 'scaleIn 0.2s var(--ease-smooth)',
+          animation: 'scaleIn var(--t-base) var(--ease-smooth)',
         }}
       >
         <div style={{ textAlign: 'center' }}>
@@ -561,59 +560,20 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
 
       {/* Options */}
       <div className={S.list} style={{ gap: 'var(--space-10)', marginBottom: 'var(--space-16)' }}>
-        {opts.map((opt, i) => {
-          const isSelected = selected === i;
-          const isCorrectOpt = opt.isA; // term A's definition is the correct answer
-          const isWrongPick = isSelected && !isCorrectOpt;
-
-          return (
-            <button
-              key={i}
-              onClick={() => handleSelect(i)}
-              disabled={showResult}
-              style={{
-                fontFamily: 'inherit',
-                padding: 'var(--space-14) var(--space-16)',
-                borderRadius: 12,
-                background: !showResult
-                  ? T.surface
-                  : isCorrectOpt
-                    ? T.correctBg
-                    : isWrongPick
-                      ? T.wrongBg
-                      : T.surface,
-                border: `1.5px solid ${!showResult ? T.border : isCorrectOpt ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`,
-                animation: !showResult
-                  ? 'none'
-                  : isCorrectOpt
-                    ? 'correctFlash 0.5s ease'
-                    : isWrongPick
-                      ? 'wrongShake 0.45s ease'
-                      : 'none',
-                color: !showResult
-                  ? T.text
-                  : isCorrectOpt
-                    ? T.correct
-                    : isWrongPick
-                      ? T.wrong
-                      : T.textDim,
-                textAlign: 'left',
-                cursor: showResult ? 'default' : 'pointer',
-                fontSize: 'var(--fs-body)',
-                lineHeight: 1.5,
-                transition: 'all var(--t-fast)',
-                display: 'flex',
-                gap: 'var(--space-8)',
-                alignItems: 'flex-start',
-              }}
-            >
-              <span style={{ fontWeight: 700, minWidth: 18, color: T.textDim }}>{i + 1})</span>
-              <span style={{ flex: 1 }}>{opt.text}</span>
-              {showResult && isCorrectOpt && <span>✓</span>}
-              {showResult && isWrongPick && <span>✗</span>}
-            </button>
-          );
-        })}
+        {opts.map((opt, i) => (
+          <OptionButton
+            key={i}
+            idx={i}
+            text={opt.text}
+            selected={selected}
+            // Term A's definition is the correct answer. This was the one
+            // genuinely different derivation among the four modes -- the other
+            // three read opt.isCorrect -- which is why it is a prop rather than
+            // something the shared button works out for itself.
+            isCorrect={opt.isA}
+            onSelect={handleSelect}
+          />
+        ))}
       </div>
 
       {/* Reveal panel with both definitions + tip */}
@@ -623,7 +583,7 @@ function QuizView({ pairs, limit, onBack, onSessionEnd }) {
           style={{
             background: `rgba(245,158,11,0.06)`,
             border: `1px solid rgba(245,158,11,0.22)`,
-            animation: 'slideUp 0.2s var(--ease-smooth)',
+            animation: 'slideUp var(--t-base) var(--ease-smooth)',
           }}
         >
           <div style={{ marginBottom: 'var(--space-8)' }}>

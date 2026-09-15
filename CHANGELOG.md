@@ -1,3 +1,243 @@
+## [7.6.0] - 2026-09-15
+
+The session opened as "brief me on what's still open, and add animation throughout the UI".
+Re-deriving what was open turned up something that outranked the animation work, so the order
+changed — and then the animation work turned up four more things that 1,400 passing tests could
+not see.
+
+### A card rating cost 643 ms, and the cost grew the more you studied
+
+`writeDoc` re-serialises and lz-compresses a **whole document**, and `setSRSCard` called it on
+every rating with no debounce. Measured through the engine at the deck's own `HISTORY_LIMIT` of 20
+reviews per card:
+
+| deck | JSON | per rating |
+| --- | --- | --- |
+| 250 cards | 156 kB | 58 ms |
+| 800 cards | 780 kB | 250 ms |
+| 1,626 cards | 2.7 MB | **643 ms** |
+
+A low-end Android runs JS four to eight times slower again. The app punished the learner who used
+it most, with the main thread blocked between the tap and the next card.
+
+`set()` and `setSRSCard()` queue now. The cache was already the authority — `get`, `getSRSCard` and
+`exportAll` all read `_cache`, never localStorage — so only the persist is deferred and no reader,
+conflict check or export can tell. `init()`'s migration and salvage writes, `resetAll()` and
+`importAll()` are untouched and still synchronous.
+
+**Measured after: 22.9 ms per rating. A 30-card session on a full deck went from 19,300 ms of
+blocked main thread to 686 ms — 28×.**
+
+Three things make it safe rather than only fast, each with a test: a `pagehide` /
+`visibilitychange` flush, so closing a tab inside the debounce window does not trade a stall for
+data loss; `resetAll`/`importAll` **discarding** the queue rather than draining it, because
+flushing a rating from 200 ms earlier would write the pre-reset document back over the fresh
+defaults and resurrect exactly what the reader asked to delete; and a failed write staying queued
+for the next flush without self-rescheduling into a quota-error spin.
+
+### Also fixed, before any of the motion work
+
+- **A document deleted in another tab was resurrected by the next write.** `onStorageEvent`'s own
+  comment says a removal means "this tab's cache is no longer what is on disk", and the loop only
+  assigned the re-read `if (res.ok)` — a missing key reads as `{ ok: false }`. Coalescing widens
+  that window, so the two had to land together.
+- **A failed review left a card neither rateable nor skippable.** The one-rating-per-exposure guard
+  was armed *before* `srs.review()`, so a throw latched it with nothing recorded.
+- **The Simulasi pause overlay and the exit confirm both claimed `aria-modal`.** Two modals
+  disagree about what "outside" means, which is undefined for assistive tech.
+- **51 navigator buttons reconciled once a second, for up to 100 minutes.**
+- **Japanese text ignored the Ukuran Teks control.** `jpFontSize()` returned bare px and the
+  setting scales the root font-size in percent, so Besar and Sangat Besar enlarged every label,
+  button and gloss and left the kanji exactly where it was — on the flashcard front, every quiz
+  stem, every glossary entry. It scales **up only**: the default is `kecil`, so a symmetric fix
+  would have silently shrunk every headword from 30px to 27px for every existing reader.
+- A Content-Security-Policy, a `LICENSE` and a `PROVENANCE.md`, cross-tab SRS reactivity, and the
+  `viewer.html` smoke test — full detail in the commits.
+
+### The motion language
+
+The app did not read as *unanimated*. It read as **unsettled**, and there was a measurement for it:
+**one keyframe, `fadeIn`, was played at six different durations** across the app — 0.15s, 0.2s,
+0.25s, 0.3s, 0.35s, 0.4s — depending which file you were in. `scaleIn` ran at four, `popIn` at
+three. The scale defined two easing curves; the stylesheets held five raw `cubic-bezier` literals
+plus the bare keyword `ease`. Tokens were used in 49 places and bypassed in 77.
+
+`DESIGN_SPEC` §4 had stated the policy since item 21. Nothing enforced it.
+
+- **One ladder**, every rung resolving through `--t-mult`, which is what makes the new speed
+  control a token change rather than a refactor. `src/tests/motion-scale.test.js` holds it.
+- **`Pengaturan Gerakan`** — four presets, nine per-feature toggles, a 0.5×–1.5× speed dial. The
+  default is `penuh`, with one exception: **on a fresh install, if the OS asks for reduced motion,
+  the default is `mati`.** After that the reader's explicit choice wins in either direction. This
+  shipped *before* the expressive work, deliberately — an app that moves a lot and cannot be told
+  to stop is worse than one that never moved.
+- **Navigation has direction and character.** Forward enters from the right, back leaves to the
+  right. Each `MODE_SECTIONS` group has its own entrance: `pelajari` rises slowly, `latihan` slides
+  briskly, `ulasan` is dealt from the deck, `alat` and tab switches crossfade — and `ujian` arrives
+  behind the app's own hazard diagonal, which §1 reserves for a time-sensitive state and which is
+  exactly what a timed exam is.
+- **A mode card's icon and title travel into the header** instead of the screen being replaced.
+- **The flashcard became an object**: the drag tracks the finger (it was easing every touchmove
+  through the flip's 350 ms spring — a third of a second of lag on the app's most-used gesture),
+  and the deck has depth behind it, which is honest information about a finite session.
+- **Numbers arrive** — the quiz score, the ring on Saya, the mission score. **The ring draws
+  itself**, having transitioned its `stroke-dashoffset` since it was written and never once run
+  that transition. **The countdown flips in** like a station board. **Eighteen weeks of heatmap
+  build** left to right.
+- **The celebration earns its name**: the hazard stripe sweeping across, a twelve-point spark ring
+  (CSS only — no canvas, no library, no fourth dependency), and `haptic.success()`, which had been
+  defined and unused since item 21.
+- Exits everywhere, list stagger, press feedback on thirteen stylesheets, the accordion that was
+  easing against 2000px of travel for 300px of content, and the toast that now follows your finger.
+
+Everything animated is `transform`, `opacity` or `filter` — compositor-only, which is what lets the
+most elaborate of it cost a weak GPU nothing.
+
+### Four defects that 1,400 passing tests could not see
+
+Each was found by driving Chromium against the built app, and each is the same shape: a guard that
+matched the common spelling of a mistake rather than the mistake.
+
+1. **The tab crossfade had never crossfaded.** `document.startViewTransition` shipped in FE-09-C
+   and the DOM was identical at the moment its callback returned — React had not committed, so the
+   browser captured the same snapshot as both "old" and "new". `motion-haptics.test.jsx` passed the
+   whole time because it asserted the function was **called**.
+2. **The Content-Security-Policy silently refused the service-worker registration**, which would
+   have shipped a PWA that never installs. `script-src 'self'` and an inline `<script>`; the
+   registration is an external file now.
+3. **The shared-element morph produced only its outgoing half on a first entry.** `React.lazy`
+   resolves its payload on the first *render* attempt, so even an already-downloaded module
+   suspends once and `flushSync` cannot wait out the microtask. `ModeHeader` is chrome and now
+   renders outside that boundary — which also means the back control and page title exist
+   immediately on a first mode entry, instead of after a 7.7 kB chunk downloads.
+4. **The "shared" flip was not shared.** `.fc-scene`/`.fc-card` were `:global(...)` inside a CSS
+   Module, which ships inside its importer's chunk — so Onboarding's demo card, pointed at those
+   exact names, measured `perspective: none`, `transform-style: flat`, `0s`. The first flip a new
+   reader ever saw was a plain 2D swap.
+
+### Guards added, and three that were passing for the wrong reason
+
+- `audit-css-vars.mjs` ran one way only — every *reference* had a *declaration*, and nothing asked
+  whether a declaration had a reader. `--fs-jp-primary` sat in the type scale for four releases
+  looking like the token that sizes a flashcard's Japanese, referenced by nothing.
+- `motion-scale.test.js` required the quote on the same line as the property, so four modes writing
+  `animation: 'correctFlash 0.5s ease'` as a multi-line ternary walked straight through it. It
+  reads the whole property expression now. It also refuses a second `transition` on one selector,
+  after item 164's press feedback silently deleted four selectors' existing transitions by
+  appending a second declaration.
+- `nav-a11y-residuals.test.jsx` compared two counts in `App.jsx` that were equal for two cancelling
+  wrong reasons — one `<main id="main-content">` inside a comment, one `return (` that was an
+  effect's cleanup.
+- `motion-haptics.test.jsx` had **named** AngkaMode and DangerMode since it was written and never
+  rendered either. The answer haptic is asserted for the first time, now that item 174 has made it
+  one component instead of four copies.
+- `doc-references.test.js` resolved every backticked path and none of the numbers. `_MAP.md` §3's
+  metrics table — formatted to look like ground truth, under a banner saying it had been re-derived
+  — claimed 7.2.0, 20 modes, 1,017 tests in 111 files and 5 audit scripts. It derives them now.
+- **And one that was FAILING for the wrong reason, which is the same defect wearing the opposite
+  face.** `question-option-shuffle.test.js` asserted that a random shuffle puts the answer in each
+  of four positions 20–30% of the time, over 680 questions. Measured: **it fails 1.32% of runs**,
+  53 times in 4,000. A share of 680 draws has a standard deviation of 1.66 points, so those bounds
+  sat at ±3.01σ — and the test made eight such checks per run. Nothing was ever wrong with the
+  shuffle. A test that fails for doing the right thing is worse than no test, because the first
+  thing anyone does with it is learn to re-run CI. It is seeded now, asserts the mean share across
+  200 draws to within a point of 25%, and still fails if the shuffle stops shuffling.
+
+### Two things the plan asked for that were refused, with reasons
+
+- **Throw-to-rate on the flashcard.** It is the behaviour v87 removed: a swipe that both navigates
+  and rates has to guess which you meant, and the guess cost people SRS reviews they never asked
+  for. The drag tracking and deck depth from that item shipped; the rating half did not.
+- **A per-character headword reveal.** Per-character spans fragment the base text, and
+  `[lang='ja'] { line-break: strict }` exists because this app got kinsoku shori wrong once already
+  (ラッキングカバー breaking as ラッキングカバ / ー). It would also break ruby association. The
+  furigana fade shipped; the character reveal did not.
+
+### Quiz→card links: 31.1% → 55.0%
+
+Item 96 applied only the high-confidence tier and sized the rest honestly rather than batching it,
+on one rule: **a link to a card that does not teach the answer is worse than no link.** All 222
+medium-tier proposals were read against the card they would point at. 156 applied, 66 rejected,
+5 retargeted to a better card than the script proposed.
+
+The rejections are what the rule is for. `wgl10#18` asks what you put over a wire to protect it —
+絶縁キャップ, an insulation cap — and the script matched card 904 キャップ, the cap fitted to seal a
+*pipe* for a pressure test. 7.5.1 fixed that exact confusion on a different question. The
+retargets are the half a script cannot do: an asbestos-qualification question now points at
+石綿取り扱い作業者 rather than the generic 特別教育, and two about preventing 感電 point at
+絶縁抵抗測定 rather than at 電動工具.
+
+**And the 80 "no match" rows were not a linking problem.** Seven were linkable — three were
+headwords the script drops as ambiguous (脚立 is on two cards), one was a stem writing `EF ソケット`
+with a space the headword does not have, two were JP→ID questions whose answer is the Indonesian
+gloss and carries no Japanese at all. The other 73 are `docs/QUIZ_CONTENT_GAPS.md`, because a
+question about something the deck does not teach is a gap in the **deck**. Thirteen have nothing
+close at all, and they cluster: the evacuation-route sign colour and the 119 number appear five
+times between them across both banks with no card for either.
+
+### A fire extinguisher was spelled "digestive organ"
+
+`wglv-id-03#13` asks the Japanese for "Alat pemadam api" and its correct answer was **消化器** —
+*digestive organ*. The word is **消火器**. They are homophones (both しょうかき), which is how an IME
+produces this and why it survived proofreading: the furigana was right, the Indonesian gloss was
+right, only the middle kanji was wrong. It appeared twice — as that question's answer and
+explanation, and as a distractor in `wglv-id-03#9` carrying the gloss "Alat pemadam api".
+
+A learner drilling fire-safety vocabulary for a construction exam was being shown, and scored
+correct for, the wrong word. Card 94 (消火器) has existed the whole time; with the kanji fixed the
+question links to it on the strongest tier the deriver has. **That is how it surfaced** — it was
+sitting in the `none` tier looking like a hole in the deck, and it was a typo.
+
+The same class, quieter, in the card corpus: card 94's own `usage` sentence read
+消火器《しょうかいき》 against its `jp` field's 消火器《しょうかき》 — one word, one card, two
+readings. Nine more cards do something similar and are filed as item 214 rather than guessed at,
+because most look like a ruby deliberately omitting a trailing 工事 rather than a misreading.
+
+### The deriver was sorting by the wrong property, and that was worth 71 more links
+
+The plan's next move on item 205 was "improve the matcher before reading 375 rows one at a time".
+It was right, for a sharper reason than speed: the deriver ranked a proposal by **how long** the
+matched headword was, when what decides a link is **what** it matched. A four-character run inside
+a stem is a topic. A headword that IS the correct answer is the lesson.
+
+Fifty unlinked questions had an answer that was, whole, a card headword — 温水管, 検電器, 朝礼 —
+and not one reached a tier anybody would apply unread: 47 were filed `low` and 3 `medium`, because
+温水管 is three characters and the answer was only consulted at four. Forty-seven of them were
+sitting in the tier whose own definition calls it "as often the wrong card as the right one",
+behind 375 rows nobody could justify reading. **All fifty read correct.** Nothing needed reading
+one by one; the sort key was wrong.
+
+Three more changes, each taken from a failure the 7.6.0 pass had recorded in
+`docs/QUIZ_CONTENT_GAPS.md` and fixed where it was written down rather than filed again:
+
+- **The ambiguous set is surfaced, not dropped.** 41 headwords sit on more than one card, and the
+  deriver discarded them in silence — three of its seven hand-recoveries came back out of that
+  discard. They get their own bucket now, carrying every candidate: 7 identity matches, each a
+  five-second decision (`wgl04#1`'s サドル is the 配管 one, not the conduit one; `wgl10#1` wants the
+  object, not card 309's three prohibitions), and 4 substring matches, all four rejected on
+  reading. An identity match on an ambiguous headword outranks every substring tier — two named
+  cards, one certainly right, beats a three-character guess.
+- **Text is normalised before matching** (NFKC, spaces and interpuncts dropped). `EF ソケット`
+  written with a space missed `EFソケット`: one space defeated the match.
+- **Questions that already carry a link are excluded and counted separately.** The script re-tiered
+  all 980 however many were linked, so after 7.6.0 applied 468 it still reported "needs a human
+  read: 677" — a claim about a list that was no longer true of the list.
+
+**539 of 980, 55.0%.** One row left `QUIZ_CONTENT_GAPS.md` — `wglv-id-02#33` asks the Japanese for
+"Penandaan tinta" and card 124's gloss is, word for word, its answer; it was an ambiguity discard
+wearing a content gap. Four more are still gaps but sharper ones, because the reader saw the
+candidate: the deck teaches 温度 not 温度計, 溶接 not 本溶接, and states no opening angle for a 脚立
+— 308 はしご carries a 75° but it is a leaning ladder's lean angle, a different measurement, so
+linking there would teach the wrong number.
+
+### Carried, not dropped
+
+`docs/UI_UX_PLAN-2026-09-items-145-205.md` is the live queue. What remains of item 205 is the
+**low** tier, now 305 rows, and the argument against hand-reading it stands. The lesson worth
+carrying is the one above: before reading a tier, check that the thing sorting it is measuring the
+right property. Item 209 asks for one permanent browser smoke test in CI, on the evidence of the
+four defects above.
+
 ## [7.5.1] - 2026-09-14
 
 Housekeeping, opened by the two items 7.5.0 handed to the owner and closed by finding

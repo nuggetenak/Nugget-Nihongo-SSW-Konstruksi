@@ -9,9 +9,12 @@
 //
 // 305 links landed 2026-09-07 (the high-confidence tier of
 // derive-quiz-card-links.mjs: a card headword of 4+ characters found in the
-// question stem, from a headword carried by exactly one card). The other 675
-// are deliberately still unlinked — a wrong link is worse than none, because it
-// sends a learner to a card that does not teach the answer.
+// question stem, from a headword carried by exactly one card). 7.6.0 read all
+// 222 of the medium tier by hand and applied 163 more. Item 205 then changed
+// what the deriver ranks by -- identity before length -- and applied 71 more:
+// 539 of 980, 55.0%. The rest are deliberately still unlinked, because a wrong
+// link is worse than none: it sends a learner to a card that does not teach the
+// answer.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -28,8 +31,10 @@ describe('QUIZ_SETS related_card_id', () => {
   it('links a meaningful share of the pool, and every link resolves', () => {
     // A floor rather than an exact number: the tier is derived, so re-running
     // the deriver after a content change may move it by a few either way. What
-    // must not happen is the count silently returning toward zero.
-    expect(linked.length).toBeGreaterThanOrEqual(250);
+    // must not happen is the count silently returning toward zero. Raised with
+    // each applied tranche so the floor keeps measuring something -- 250 stopped
+    // being a floor the moment 539 links existed.
+    expect(linked.length).toBeGreaterThanOrEqual(500);
     for (const q of linked) {
       expect(cardIds.has(q.related_card_id), `q ${q.id} -> missing card`).toBe(true);
     }

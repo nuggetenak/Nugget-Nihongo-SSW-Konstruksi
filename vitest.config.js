@@ -7,7 +7,7 @@
 // invisible until one did -- at which point it is a ReferenceError, not a
 // wrong string. Any define added there belongs here as well.
 // ─────────────────────────────────────────────────────────────────────────────
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { readFileSync } from 'fs';
@@ -26,6 +26,16 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/tests/setup.js'],
+    // Git worktrees created by agent tooling land at `.claude/worktrees/<name>/`
+    // -- INSIDE the repo -- and each one is a full checkout with its own
+    // `src/tests/`. Without this, `vitest run` from the repo root collects every
+    // copy: the suite count silently doubles or triples, and the extra copies
+    // fail for a reason that has nothing to do with the code, because a test
+    // file under a worktree still resolves its `readFileSync(process.cwd()/...)`
+    // reads against the MAIN tree. The result is a red run whose failures name
+    // files the developer never edited. Spread the defaults rather than
+    // replacing them, or node_modules and dist come back in.
+    exclude: [...configDefaults.exclude, '**/.claude/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

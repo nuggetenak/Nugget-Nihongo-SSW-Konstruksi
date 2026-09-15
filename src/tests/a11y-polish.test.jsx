@@ -6,8 +6,8 @@
 // literal 'smooth', a padding value, and a colour pair are all well-formed.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync, readdirSync, statSync } from 'fs';
+import { resolve, join, relative, sep } from 'path';
 import { render, screen } from '@testing-library/react';
 import { contrastRatio, readableOn, INK_DARK } from '../utils/contrast.js';
 import { MODE_META } from '../router/modes.js';
@@ -47,18 +47,64 @@ describe('136 — the keyboard hint promises only keys that exist', () => {
 });
 
 describe('137 — JS-driven motion respects the OS setting', () => {
+  // The header of utils/motion.js records why this sweep exists and why it was
+  // wrong the first time: DESIGN_SPEC said BottomNav's View Transition "was the
+  // one instance", and GlossaryMode had two scrollTo calls doing the same thing.
+  // A claim that a sweep is complete is worth less than the sweep.
+  //
+  // So it sweeps all of src/ now rather than the two files that happened to be
+  // the known offenders in 7.3.0 (item 152). Two more call sites have appeared
+  // since -- SideNav and AppContext both wrap navigation in a View Transition --
+  // and neither would have been covered by a two-file list.
+  const srcFiles = () => {
+    const out = [];
+    const walk = (dir) => {
+      for (const entry of readdirSync(dir)) {
+        const full = join(dir, entry);
+        if (statSync(full).isDirectory()) {
+          if (entry !== 'tests') walk(full);
+        } else if (/\.(js|jsx)$/.test(entry)) out.push(full);
+      }
+    };
+    walk(resolve(process.cwd(), 'src'));
+    return out;
+  };
+
   it('no source file writes a literal smooth scroll behavior', () => {
     // An explicit `behavior` in the call overrides the CSS scroll-behavior that
     // global.css's reduced-motion catch-all sets, so the catch-all cannot reach
     // it. utils/motion.js is the only way to spell this.
-    for (const file of ['src/modes/GlossaryMode.jsx', 'src/components/BottomNav.jsx']) {
-      expect(read(file), `${file} hardcodes smooth scrolling`).not.toMatch(/behavior:\s*'smooth'/);
+    for (const file of srcFiles()) {
+      if (file.endsWith(`utils${sep}motion.js`)) continue; // the helper returns it
+      const src = readFileSync(file, 'utf8');
+      expect(src, `${relative(process.cwd(), file)} hardcodes smooth scrolling`).not.toMatch(
+        /behavior:\s*'smooth'/
+      );
     }
   });
 
-  it('routes both former offenders through the shared helper', () => {
-    expect(read('src/modes/GlossaryMode.jsx')).toContain('scrollBehavior()');
-    expect(read('src/components/BottomNav.jsx')).toContain('prefersReducedMotion()');
+  it('every startViewTransition call goes through the shared helper', () => {
+    // The helper is where the reduced-motion check, the flushSync that makes the
+    // transition actually do something, and the re-entrancy guard all live. A
+    // hand-rolled call gets none of them -- which is exactly how the original
+    // crossfade shipped as a measured no-op for four releases.
+    for (const file of srcFiles()) {
+      if (file.endsWith(`utils${sep}motion.js`)) continue; // the helper itself
+      const src = readFileSync(file, 'utf8');
+      expect(
+        src,
+        `${relative(process.cwd(), file)} calls startViewTransition directly`
+      ).not.toMatch(/document\.startViewTransition\(/);
+    }
+  });
+
+  it('routes the former offenders through the shared helper', () => {
+    expect(readFileSync(resolve(process.cwd(), 'src/modes/GlossaryMode.jsx'), 'utf8')).toContain(
+      'scrollBehavior()'
+    );
+    expect(readFileSync(resolve(process.cwd(), 'src/components/BottomNav.jsx'), 'utf8')).toContain(
+      'withViewTransition('
+    );
   });
 });
 
@@ -114,6 +160,27 @@ describe('141 — the toast dismiss button clears the tap floor', () => {
     const rule = css.slice(css.indexOf('.btnClose {'), css.indexOf('.btnClose {') + 400);
     expect(rule).toContain('min-width: var(--tap-min)');
     expect(rule).toContain('min-height: var(--tap-min)');
+  });
+});
+
+describe('173 — the breadcrumb clears the tap floor too', () => {
+  it('is sized by --tap-min rather than by its label', () => {
+    // The same assertion as 141's, on the last control that was still under it.
+    // Worth pinning in the same shape: the failure mode is a later edit trimming
+    // the min-* back out to tighten the header, which looks like a layout tweak
+    // and is a regression in the one property that made the control usable.
+    const css = read('src/components/ModeHeader.module.css');
+    const rule = css.slice(css.indexOf('.trailBtn {'), css.indexOf('.trailBtn:hover'));
+    expect(rule).toContain('min-width: var(--tap-min)');
+    expect(rule).toContain('min-height: var(--tap-min)');
+  });
+
+  it('confirms the tap before the screen changes', () => {
+    // A breadcrumb jump replaces the whole screen, and on a touch device with no
+    // hover the press state is the only sign the tap landed. .backBtn beside it
+    // has had one since it was written.
+    const css = read('src/components/ModeHeader.module.css');
+    expect(css).toContain('.trailBtn:active');
   });
 });
 

@@ -4,7 +4,7 @@
 // that nothing here kept. useFocusTrap already existed with zero consumers;
 // this is what it was written for.
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import { ConfirmProvider, useConfirm } from '../components/ConfirmDialog.jsx';
 
 function Trigger({ onResult, args = ['Yakin?'] }) {
@@ -45,13 +45,16 @@ describe('ConfirmDialog', () => {
     expect(document.activeElement).toBe(cancelBtn);
   });
 
-  it('restores focus to the triggering element after the dialog closes', () => {
+  it('restores focus to the triggering element after the dialog closes', async () => {
     setup();
     const trigger = screen.getByText('ask');
     trigger.focus();
     fireEvent.click(trigger);
     fireEvent.click(screen.getByText('Batal'));
-    expect(document.activeElement).toBe(trigger);
+    // The sheet animates out before it unmounts (item 148), so focus comes back
+    // when the exit finishes rather than on the click. Awaited rather than
+    // assumed instant: that IS the contract now.
+    await waitFor(() => expect(document.activeElement).toBe(trigger));
   });
 
   it('Escape cancels the dialog', async () => {
@@ -61,7 +64,7 @@ describe('ConfirmDialog', () => {
     await act(async () => {
       fireEvent.keyDown(window, { key: 'Escape' });
     });
-    expect(screen.queryByRole('dialog')).toBeNull();
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(getResult()).toBe(false);
   });
 
@@ -74,9 +77,11 @@ describe('ConfirmDialog', () => {
     await act(async () => {
       fireEvent.click(screen.getByText('Cadangkan dulu'));
     });
+    // The callback and the promise both settle on the click, with nothing
+    // awaited -- only the sheet's removal waits for its exit.
     expect(onAlternative).toHaveBeenCalledTimes(1);
     expect(getResult()).toBe(false);
-    expect(screen.queryByRole('dialog')).toBeNull();
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   });
 
   it('renders no alternative button when none is provided (backward compatible)', () => {
