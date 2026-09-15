@@ -81,6 +81,27 @@ export const MODE_SECTIONS = {
   },
 };
 
+/**
+ * Which section a mode belongs to, or null for the handful that belong to none.
+ *
+ * Added for item 154, which gives each section its own page-transition
+ * character: entering an exam should not feel like opening the glossary. The
+ * sections already group every mode by what it is FOR -- this is what lets the
+ * grouping be something a reader feels rather than something only the Belajar
+ * menu knows.
+ *
+ * `info` and `gerakan` are reached from Saya and are deliberately outside
+ * MODE_SECTIONS (a help page is not a study mode), so they get null and fall
+ * back to the plain directional transition. That is the right answer for them,
+ * not a gap.
+ */
+export function sectionOf(modeKey) {
+  for (const [key, section] of Object.entries(MODE_SECTIONS)) {
+    if (section.modes.includes(modeKey)) return key;
+  }
+  return null;
+}
+
 // ── Mode metadata (icon, label, desc, color, strand) ────────────────────
 // `width` — layout width for the mode's screen, consumed by AppShell.
 //   omitted   -> 'reading' (default): a single focused column. Correct for

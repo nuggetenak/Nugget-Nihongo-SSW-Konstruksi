@@ -75,8 +75,72 @@ export function scrollBehavior() {
  * freeze the screen for however long it took.
  */
 let _inTransition = false;
+let _clearMorph = null;
 
-export function withViewTransition(update, flushSync) {
+/**
+ * Mark the element a navigation is travelling FROM, so the browser morphs it
+ * into its counterpart on the destination instead of crossfading the screen.
+ *
+ * ── item 153 ───────────────────────────────────────────────────────────────
+ * This is the single thing that most separates "a web page" from "an app":
+ * tapping a mode card in Belajar does not replace the screen, the card's icon
+ * and title TRAVEL into ModeHeader's icon and title and the rest of the screen
+ * arrives around them. The browser interpolates position, size and colour for
+ * free once both ends carry the same `view-transition-name`.
+ *
+ * WHY IMPERATIVE, AND WHY ONLY ONE END IS SET HERE. A view-transition-name has
+ * to be UNIQUE among rendered elements when the snapshot is taken, and Belajar
+ * renders more than twenty mode cards at once -- naming them all would name
+ * nothing. So the source is named on the way out, on the one element that was
+ * actually tapped, and unnamed again when the transition settles.
+ *
+ * The destination is not named from here at all: it does not exist yet when
+ * this runs. It gets its name from a CSS rule keyed on `data-nav-morph`, which
+ * this sets on the root and `done()` clears -- so the header is named for
+ * exactly the one transition that is morphing into it, and is an ordinary part
+ * of the root snapshot the rest of the time.
+ *
+ * @param {Element|null} el  the tapped card; its `[data-morph]` descendants are
+ *                           what actually travel.
+ */
+export function markMorphSource(el) {
+  if (!el || !motionAllows('shared') || !document.startViewTransition) return;
+  const named = [];
+  for (const node of el.querySelectorAll('[data-morph]')) {
+    const role = node.dataset.morph;
+    if (role !== 'icon' && role !== 'label') continue;
+    node.style.viewTransitionName = role === 'icon' ? 'morph-icon' : 'morph-title';
+    named.push(node);
+  }
+  if (named.length === 0) return;
+  document.documentElement.dataset.navMorph = '1';
+  _clearMorph = () => {
+    for (const node of named) node.style.viewTransitionName = '';
+    delete document.documentElement.dataset.navMorph;
+    _clearMorph = null;
+  };
+}
+
+/**
+ * @param {Function} update      the state change to run inside the transition
+ * @param {Function} [flushSync] react-dom's flushSync — see above, it is the
+ *                               whole reason this helper exists
+ * @param {{dir?: 'forward'|'back', flavor?: string}} [opts]
+ *
+ * `dir` and `flavor` are written to the root as data attributes for the
+ * duration of the transition and read by global.css (item 154). Direction is
+ * how a native app tells you where you are in a stack: forward enters from the
+ * right, back leaves to the right, and the two must be opposites or the stack
+ * stops being legible. Flavour is the MODE_SECTIONS key, so entering an exam
+ * does not feel like opening the glossary -- the sections already group every
+ * mode by what it is FOR, and this makes that grouping something you can feel
+ * rather than something only the menu knows.
+ *
+ * Attributes rather than arguments to the CSS because a View Transition's
+ * animation is declared on pseudo-elements that no component can reach. They
+ * are cleared when the transition settles, including when it is skipped.
+ */
+export function withViewTransition(update, flushSync, opts = {}) {
   // Re-entrancy matters here, and it is not theoretical. Both navs wrap the
   // gesture, and AppContext wraps the navigation the gesture calls -- so a mode
   // opened from SideNav goes through this twice. Nesting a second
@@ -84,12 +148,30 @@ export function withViewTransition(update, flushSync) {
   // does anything sensible with, so the inner call just performs the update: the
   // outer transition is already capturing exactly the same before/after pair.
   if (_inTransition || !document.startViewTransition || !motionAllows('page')) {
+    // No transition is going to run, so anything markMorphSource just named has
+    // to be un-named here -- otherwise the next navigation starts with a stale
+    // name already on the page and the morph silently stops working from then
+    // on. The re-entrant case is included on purpose: the OUTER transition owns
+    // the cleanup, and it has not finished yet, so this must not touch it.
+    if (!_inTransition) _clearMorph?.();
     update();
     return;
   }
   _inTransition = true;
+  const root = document.documentElement;
+  if (opts.dir) root.dataset.navDir = opts.dir;
+  if (opts.flavor) root.dataset.navFlavor = opts.flavor;
   const done = () => {
     _inTransition = false;
+    // Cleared on BOTH settlements, skip included. A stale data-nav-dir would
+    // silently give the next transition the previous one's direction, which is
+    // worse than no direction at all -- it would point the wrong way. A leftover
+    // view-transition-name is worse still: the name has to be unique when the
+    // next snapshot is taken, and two elements sharing one disables the morph
+    // for good rather than only once.
+    delete root.dataset.navDir;
+    delete root.dataset.navFlavor;
+    _clearMorph?.();
   };
   let transition;
   try {

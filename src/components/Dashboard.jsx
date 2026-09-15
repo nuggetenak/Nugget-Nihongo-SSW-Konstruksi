@@ -11,6 +11,7 @@ import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
+import { markMorphSource } from '../utils/motion.js';
 import { JpFront } from './JpDisplay.jsx';
 import { JP_LIST_MAX, stripFuri } from '../utils/jp-helpers.js';
 import { recommendMode } from '../utils/recommend-mode.js';
@@ -346,12 +347,17 @@ export default function Dashboard({
                 key={m.key}
                 className={`${s.quickTile} stagger-item`}
                 style={{ '--stagger-i': i }}
-                onClick={() => onNavigate(m.key)}
+                onClick={(e) => {
+                  markMorphSource(e.currentTarget);
+                  onNavigate(m.key);
+                }}
               >
-                <span className={s.quickIcon}>
+                <span data-morph="icon" className={s.quickIcon}>
                   <Icon name={m.ui} size={22} />
                 </span>
-                <span className={s.quickLabel}>{m.label}</span>
+                <span data-morph="label" className={s.quickLabel}>
+                  {m.label}
+                </span>
               </button>
             ))}
           </div>

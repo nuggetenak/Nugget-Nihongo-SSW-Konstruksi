@@ -49,8 +49,13 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
   // the same navigations BottomNav performs -- and until now only BottomNav
   // wrapped them. A tab switch crossfaded on a phone and hard-cut on a desktop,
   // for no reason anyone had decided. Same helper, same reduced-motion check.
-  const goTab = (key) => withViewTransition(() => onChange(key), flushSync);
-  const goMode = (m) => withViewTransition(() => onSelectMode(m), flushSync);
+  // A tab switch is lateral -- neither forward nor back in a stack -- so it
+  // gets its own flavour (a plain crossfade) rather than a direction it does
+  // not have. Mode entry is forward, and AppContext's own goMode wraps it again
+  // with the section's flavour; withViewTransition is re-entrant, so the inner
+  // call carries the flavour and this one costs nothing.
+  const goTab = (key) => withViewTransition(() => onChange(key), flushSync, { flavor: 'tab' });
+  const goMode = (m) => withViewTransition(() => onSelectMode(m), flushSync, { dir: 'forward' });
 
   return (
     <nav className={s.side} aria-label="Navigasi utama">

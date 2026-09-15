@@ -81,14 +81,32 @@ describe('the skip link has somewhere to go on every screen', () => {
     expect(target, 'the skip link markup moved — re-derive this test').toBeTruthy();
     expect(html).toContain('href="#main-content"');
 
-    const app = read('src/App.jsx');
-    // Every `return` that renders a screen has to be inside the landmark. Counting is
-    // crude but it is the property that broke: one branch out of five lacked it.
-    const returns = app.match(/^\s*(?:if \([^)]*\)\s*)?return \(/gm) ?? [];
-    const landmarks = app.match(/<main id="main-content"/g) ?? [];
-    expect(landmarks.length, 'a screen-rendering branch of App has no #main-content').toBe(
-      returns.length
+    // Every branch of App that renders a screen has to render it INSIDE the
+    // landmark. This used to compare two counts -- `return (` against
+    // `<main id="main-content"` -- and the counts were equal for the wrong
+    // reason: one `<main id="main-content">` was inside a COMMENT explaining the
+    // rule, and one `return (` was an effect's cleanup function. Two errors
+    // cancelling, and the next edit to App.jsx broke the tie and failed a test
+    // that was never measuring what it claimed. So it reads the actual pairs
+    // now: a JSX return is `return (` alone on its line, and the element that
+    // follows it must be the landmark.
+    const app = read('src/App.jsx').replace(/\/\*[\s\S]*?\*\//g, (b) => b.replace(/[^\n]/g, ' '));
+    const lines = app.split('\n');
+    const branches = [];
+    lines.forEach((line, i) => {
+      if (!/^\s*return \(\s*$/.test(line)) return;
+      const next = lines.slice(i + 1).find((l) => l.trim() !== '');
+      branches.push({ line: i + 1, opens: (next ?? '').trim() });
+    });
+
+    expect(branches.length, 'no JSX-returning branch found — re-derive this test').toBeGreaterThan(
+      2
     );
+    for (const b of branches) {
+      expect(b.opens, `App.jsx:${b.line} returns a screen outside #main-content`).toMatch(
+        /^<main id="main-content"/
+      );
+    }
   });
 });
 

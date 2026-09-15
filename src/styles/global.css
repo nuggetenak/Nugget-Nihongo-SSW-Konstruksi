@@ -559,10 +559,211 @@ input {
   }
 }
 
-/* ── View Transitions API — crossfade between tabs (FE-09-C) ── */
+/* ── View Transitions: direction and character (FE-09-C, then item 154) ──────
+   FE-09-C shipped a crossfade here, which crossfaded nothing until item 147
+   found the missing flushSync. With a transition that actually runs, what it
+   runs is worth deciding.
+
+   TWO THINGS ARE ENCODED. Direction: forward enters from the right and back
+   leaves to the right, which is how a native app tells you where you are in a
+   stack. They have to be exact opposites or the stack stops being readable.
+   Character: each MODE_SECTIONS group gets its own entrance, because entering a
+   timed exam should not feel like opening the glossary -- the sections already
+   group every mode by what it is FOR, and this makes that grouping something a
+   reader feels rather than something only the Belajar menu knows.
+
+   utils/motion.js writes data-nav-dir and data-nav-flavor to the root for the
+   duration of the transition, and clears both when it settles -- skips
+   included, because a stale direction would point the NEXT transition the wrong
+   way, which is worse than having no direction at all.
+
+   EVERY ANIMATION HERE IS TRANSFORM AND OPACITY ONLY. That is the floor this
+   whole release is built on, and it is why the most elaborate of them costs a
+   weak GPU nothing. It is also why the hazard flavour below is a skew rather
+   than a literal moving stripe: a stripe would need clip-path or a third layer
+   inside the transition tree, and both leave the floor. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 150ms;
+  animation-duration: var(--t-base);
+  animation-timing-function: var(--ease-smooth);
+  animation-fill-mode: both;
+  /* Both snapshots are painted on top of each other for the duration. Plain
+     blending keeps a mid-transition frame from washing out where they overlap. */
+  mix-blend-mode: normal;
+}
+
+/* Default: the directional slide, used by every mode without a section. */
+:root[data-nav-dir='forward']::view-transition-old(root) {
+  animation-name: vtOutToLeft;
+}
+:root[data-nav-dir='forward']::view-transition-new(root) {
+  animation-name: vtInFromRight;
+}
+:root[data-nav-dir='back']::view-transition-old(root) {
+  animation-name: vtOutToRight;
+}
+:root[data-nav-dir='back']::view-transition-new(root) {
+  animation-name: vtInFromLeft;
+}
+
+/* pelajari — a soft rise. Learning should not feel hurried, so this is the one
+   flavour that takes longer than the default rather than less. */
+:root[data-nav-flavor='pelajari']::view-transition-new(root) {
+  animation: vtRise var(--t-enter) var(--ease-smooth) both;
+}
+:root[data-nav-flavor='pelajari']::view-transition-old(root) {
+  animation: vtFadeOut var(--t-base) var(--ease-exit) both;
+}
+
+/* latihan — the same directional slide, quicker. Drilling should feel brisk;
+   the whole point of a drill is the next question. */
+:root[data-nav-flavor='latihan']::view-transition-old(root),
+:root[data-nav-flavor='latihan']::view-transition-new(root) {
+  animation-duration: var(--t-fast);
+}
+
+/* ujian — the hazard angle. DESIGN_SPEC §1 reserves the diagonal --hazard motif
+   for a time-sensitive or active state, which is exactly what a timed exam is,
+   and this is the only place in the app that moves like it. The new screen
+   arrives behind a skewed leading edge and straightens as it lands; the old one
+   leaves along the opposite angle, so the seam between them IS the stripe. */
+:root[data-nav-flavor='ujian']::view-transition-new(root) {
+  animation: vtHazardIn var(--t-enter) var(--ease-smooth) both;
+}
+:root[data-nav-flavor='ujian']::view-transition-old(root) {
+  animation: vtHazardOut var(--t-enter) var(--ease-exit) both;
+}
+
+/* ulasan — dealt from the deck, matching the flashcard's physical register.
+   The review screen IS a stack of cards; it should arrive like one. */
+:root[data-nav-flavor='ulasan']::view-transition-new(root) {
+  animation: vtDeal var(--t-enter) var(--ease-spring) both;
+}
+:root[data-nav-flavor='ulasan']::view-transition-old(root) {
+  animation: vtFadeOut var(--t-fast) var(--ease-exit) both;
+}
+
+/* alat and a tab switch — a plain crossfade, deliberately. Tools are not an
+   event, and a tab switch is lateral rather than a step in a stack, so giving
+   either one a direction would be saying something untrue about where you are.
+   The UA default is already a crossfade; naming it here is what stops the
+   directional rules above from applying when a flavour has no direction. */
+:root[data-nav-flavor='alat']::view-transition-new(root),
+:root[data-nav-flavor='tab']::view-transition-new(root) {
+  animation: vtFadeIn var(--t-base) var(--ease-smooth) both;
+}
+:root[data-nav-flavor='alat']::view-transition-old(root),
+:root[data-nav-flavor='tab']::view-transition-old(root) {
+  animation: vtFadeOut var(--t-base) var(--ease-smooth) both;
+}
+
+@keyframes vtInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes vtOutToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+}
+@keyframes vtInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes vtOutToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+@keyframes vtRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes vtFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes vtFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vtHazardIn {
+  from {
+    opacity: 0;
+    transform: translateX(44px) skewX(-7deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+}
+@keyframes vtHazardOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px) skewX(7deg);
+  }
+}
+@keyframes vtDeal {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reduced motion: the transition still happens (the browser has already
+   snapshotted), it just stops MOVING. A plain instant swap is what a reader who
+   asked for less motion should get, and zeroing the duration is how you get it
+   here -- every keyframe above ends at the resting state, so there is nothing to
+   jump to. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.001ms;
+  }
 }
 
 /* Japanese line-breaking. Browsers default to `line-break: auto`, which allows

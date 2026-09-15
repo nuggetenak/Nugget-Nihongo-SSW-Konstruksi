@@ -25,7 +25,9 @@ export default function BottomNav({ active, onChange, dueBadge = 0 }) {
   // already returned. Measured: without it the browser snapshots the same DOM
   // twice and the crossfade does nothing at all, which is how this shipped.
   const handleTabChange = (newTab) => {
-    withViewTransition(() => onChange(newTab), flushSync);
+    // A tab switch is lateral, not forward or back in a stack, so it gets a
+    // flavour and no direction -- see the matching note in SideNav.
+    withViewTransition(() => onChange(newTab), flushSync, { flavor: 'tab' });
   };
   return (
     <nav className={s.nav} role="navigation" aria-label="Navigasi utama">

@@ -190,3 +190,16 @@
     margin-bottom: var(--space-8);
   }
 }
+
+/* ── Shared-element morph destination (item 153) ──────────────────────────────
+   Named only while utils/motion.js has a morph in flight. See the note in
+   ModeHeader.jsx: a view-transition-name left on permanently would take this
+   icon out of the root snapshot on every navigation, including the ones that
+   are not morphing into it. */
+:root[data-nav-morph] .titleIcon {
+  view-transition-name: morph-icon;
+}
+
+:root[data-nav-morph] .titleText {
+  view-transition-name: morph-title;
+}

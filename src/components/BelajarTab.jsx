@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { readableOn } from '../utils/contrast.js';
+import { markMorphSource } from '../utils/motion.js';
 import { useState } from 'react';
 import Icon from './Icon.jsx';
 import s from './BelajarTab.module.css';
@@ -60,18 +61,27 @@ function FeaturedCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
   return (
     <button
       className={s.featuredCard}
-      onClick={() => onSelect(modeKey)}
+      // The morph's source is the element that was TAPPED, named on the way
+      // out and un-named when the transition settles -- see markMorphSource.
+      // Twenty cards are on screen; naming them all would name nothing.
+      onClick={(e) => {
+        markMorphSource(e.currentTarget);
+        onSelect(modeKey);
+      }}
       data-badged={badge > 0}
       aria-label={`${m.label}: ${m.desc}`}
     >
       <span
+        data-morph="icon"
         className={s.featuredIcon}
         style={{ background: sm.bg, border: `1px solid ${sm.border}` }}
       >
         <Icon name={m.ui} size={24} />
       </span>
       <div className={s.featuredBody}>
-        <div className={s.featuredLabel}>{m.label}</div>
+        <div data-morph="label" className={s.featuredLabel}>
+          {m.label}
+        </div>
         <div className={s.featuredDesc}>{m.desc}</div>
       </div>
       {/* Item 142: the badge's background is one of the 19 mode accent colours,
@@ -107,7 +117,13 @@ function CompactCard({ modeKey, sectionKey, onSelect, badge = 0, index = 0 }) {
       // 150 fixed in ResultScreen.
       className={`${s.compactCard} stagger-item`}
       style={{ '--stagger-i': index }}
-      onClick={() => onSelect(modeKey)}
+      // The morph's source is the element that was TAPPED, named on the way
+      // out and un-named when the transition settles -- see markMorphSource.
+      // Twenty cards are on screen; naming them all would name nothing.
+      onClick={(e) => {
+        markMorphSource(e.currentTarget);
+        onSelect(modeKey);
+      }}
       data-badged={badge > 0}
       aria-label={`${m.label}: ${m.desc}`}
     >
@@ -116,10 +132,12 @@ function CompactCard({ modeKey, sectionKey, onSelect, badge = 0, index = 0 }) {
           {badge > 99 ? '99+' : badge}
         </span>
       )}
-      <span className={s.compactIcon} style={{ background: sm.bg }}>
+      <span data-morph="icon" className={s.compactIcon} style={{ background: sm.bg }}>
         <Icon name={m.ui} size={20} />
       </span>
-      <div className={s.compactLabel}>{m.label}</div>
+      <div data-morph="label" className={s.compactLabel}>
+        {m.label}
+      </div>
       <div className={s.compactDesc}>{m.desc}</div>
     </button>
   );

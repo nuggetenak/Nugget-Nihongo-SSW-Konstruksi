@@ -15,7 +15,6 @@ import { get as storageGet } from '../storage/engine.js';
 import { stopSpeech } from '../utils/speak.js';
 import { MODE_COMPONENTS, MODE_META } from './modes.js';
 import Skeleton from '../components/Skeleton.jsx';
-import ModeHeader from '../components/ModeHeader.jsx';
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
 import MissionCompleteOverlay from '../components/MissionCompleteOverlay.jsx';
 
@@ -83,7 +82,7 @@ export function ModeLoader({ shape = 'card' }) {
 
 // ── ModeRouter ────────────────────────────────────────────────────────────
 export default function ModeRouter() {
-  const { mode, modeParams, exitMode, goMode, track, modeHistory, goBack } = useApp();
+  const { mode, modeParams, exitMode, goMode, track } = useApp();
   const {
     known,
     unknown,
@@ -346,7 +345,11 @@ export default function ModeRouter() {
       secondaryLabel="← Kembali ke Menu"
       onSecondary={exitMode}
     >
-      <ModeHeader mode={mode} modeHistory={modeHistory} onBack={goBack} />
+      {/* ModeHeader used to render here. It lives in App.jsx now (item 153) --
+          it is chrome, not mode content, it depends on nothing this chunk
+          provides, and being inside a lazily-loaded router meant the back
+          control and the page title did not exist until that chunk arrived.
+          See the note at App.jsx's mode branch for what that cost. */}
       <Suspense fallback={<ModeLoader shape={MODE_META[mode]?.skeleton ?? 'card'} />}>
         <ModeComponent {...props} />
       </Suspense>
