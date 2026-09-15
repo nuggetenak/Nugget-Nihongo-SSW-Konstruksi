@@ -295,7 +295,23 @@ export default function QuizShell({
             {correct}/{qIdx + (selected !== null ? 1 : 0)}
           </span>
           {streak > 1 && (
-            <span className={S.streak} aria-label={`Streak ${streak}`}>
+            // item 162. The streak surface already existed -- the plan had it
+            // filed as missing, and it was not; what was missing is that it
+            // never REACTED. It appeared at two, counted up, and vanished when
+            // the run broke, all at exactly the same size and weight, so the
+            // one motivational signal in a drill read as a static label.
+            //
+            // `key={streak}` is what makes it move: remounting on every
+            // increment replays the pop, which is the difference between a
+            // number changing and a run being acknowledged. The tier drives how
+            // much it grows, because a run of twelve should not look like a run
+            // of two.
+            <span
+              key={streak}
+              className={S.streak}
+              data-tier={streak >= 10 ? 'hot' : streak >= 5 ? 'warm' : 'on'}
+              aria-label={`Streak ${streak}`}
+            >
               🔥{streak}
             </span>
           )}

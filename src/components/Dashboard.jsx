@@ -11,6 +11,7 @@ import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
+import SplitFlap from './SplitFlap.jsx';
 import { markMorphSource } from '../utils/motion.js';
 import { JpFront } from './JpDisplay.jsx';
 import { JP_LIST_MAX, stripFuri } from '../utils/jp-helpers.js';
@@ -191,7 +192,13 @@ export default function Dashboard({
           {showCountdown && (
             <div className={s.rail} data-tier={tier}>
               <div className={s.railTitle}>
-                {daysLeft === 0 ? 'Hari ini ujian!' : `${daysLeft} hari lagi menuju ujian`}
+                {daysLeft === 0 ? (
+                  'Hari ini ujian!'
+                ) : (
+                  <>
+                    <SplitFlap value={daysLeft} /> hari lagi menuju ujian
+                  </>
+                )}
               </div>
               <div className={s.railSub}>
                 {daysLeft === 0

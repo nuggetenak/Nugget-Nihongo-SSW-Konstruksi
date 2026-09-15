@@ -76,24 +76,30 @@ export default function StudyHeatmap({ sessions = [] }) {
           ) : null
         )}
         {/* Cells */}
-        {columns.map((week, col) =>
-          week.map((cell, row) => (
-            <rect
-              key={cell.key}
-              x={20 + col * (CELL + GAP)}
-              y={row * (CELL + GAP)}
-              width={CELL}
-              height={CELL}
-              rx={2}
-              fill={cellColor(cell.count)}
-              opacity={cell.count === 0 ? 0.4 : 1}
-            >
-              <title>
-                {cell.key}: {cell.count} sesi
-              </title>
-            </rect>
-          ))
-        )}
+        {/* One <g> per week, so the column can fade in as a unit and each cell
+            keeps its own opacity attribute underneath (item 160). Eighteen
+            weeks of history building left to right reads as a record being
+            drawn; all eighteen at once reads as a background texture. */}
+        {columns.map((week, col) => (
+          <g className="heatmap-col" style={{ '--stagger-i': col }} key={`col-${col}`}>
+            {week.map((cell, row) => (
+              <rect
+                key={cell.key}
+                x={20 + col * (CELL + GAP)}
+                y={row * (CELL + GAP)}
+                width={CELL}
+                height={CELL}
+                rx={2}
+                fill={cellColor(cell.count)}
+                opacity={cell.count === 0 ? 0.4 : 1}
+              >
+                <title>
+                  {cell.key}: {cell.count} sesi
+                </title>
+              </rect>
+            ))}
+          </g>
+        ))}
       </svg>
       <div
         style={{

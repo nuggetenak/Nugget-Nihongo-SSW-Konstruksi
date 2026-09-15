@@ -812,6 +812,28 @@ input {
   animation: none;
 }
 
+/* The heatmap's weeks (item 160). Its own rule rather than `.stagger-item`
+   because the cap is the difference: six is right for a menu, and wrong for
+   eighteen columns that are meant to read as a record being drawn left to
+   right. The step is shorter than a list's for the same reason -- eighteen at
+   the list step would take three quarters of a second. */
+.heatmap-col {
+  animation: fadeIn var(--t-base) var(--ease-smooth) both;
+  animation-delay: calc(var(--stagger-i, 0) * var(--t-stagger) * 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heatmap-col {
+    animation: none;
+  }
+}
+
+:root[data-motion-no-stagger] .heatmap-col,
+:root[data-motion-no-entrance] .heatmap-col,
+:root[data-motion='mati'] .heatmap-col {
+  animation: none;
+}
+
 /* ── Accessibility utility ── */
 .sr-only {
   position: absolute;

@@ -121,3 +121,52 @@ describe('MissionCompleteOverlay — keyboard and reduced motion (items 153, 172
     expect(css).toMatch(/animation:\s*none/);
   });
 });
+
+// ─── item 161: the celebration it is named for ───────────────────────────────
+// It was a plain fade that reduced-motion readers could not see at all. The
+// rebuild spends --z-celebration and --t-slow, both reserved for this moment and
+// never used on it, plus haptic.success() -- and the two decorative layers are
+// NOT RENDERED when the reader has switched celebrations off, rather than
+// rendered and hidden.
+describe('161 — the celebration layers', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.clearAllMocks();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+    document.documentElement.removeAttribute('data-motion-no-celebrate');
+    document.documentElement.removeAttribute('data-motion-no-count');
+  });
+
+  const sparks = () => document.querySelectorAll('[class*="spark"]').length;
+  const sweeps = () => document.querySelectorAll('[class*="sweep"]').length;
+
+  it('draws the hazard sweep and a twelve-point spark ring', () => {
+    render(<MissionCompleteOverlay result={{ correct: 8, total: 10 }} />);
+    expect(sweeps()).toBe(1);
+    expect(sparks(), 'twelve is where a ring reads as a ring').toBe(12);
+  });
+
+  it('renders neither when the reader has celebrations off', () => {
+    // Not hidden — absent. Twelve elements that can never be seen are still
+    // twelve elements, and this is the toggle that says so.
+    document.documentElement.setAttribute('data-motion-no-celebrate', '');
+    // The score is a separate toggle ("Animasi angka"), and it stays on here on
+    // purpose -- turning celebrations off must not silently take the counting
+    // with it. Switched off only so the assertion below can read an exact
+    // number under fake timers, where no frame ever runs.
+    document.documentElement.setAttribute('data-motion-no-count', '');
+    render(<MissionCompleteOverlay result={{ correct: 8, total: 10 }} />);
+    expect(sweeps()).toBe(0);
+    expect(sparks()).toBe(0);
+    // The overlay itself still does its job.
+    expect(screen.getByText('Misi Selesai!')).toBeTruthy();
+    expect(screen.getByText(/8\/10 benar/)).toBeTruthy();
+  });
+
+  it('still fires the success haptic, which has no other call site in the app', () => {
+    render(<MissionCompleteOverlay result={{ correct: 3, total: 3 }} />);
+    expect(haptic.success).toHaveBeenCalledTimes(1);
+  });
+});

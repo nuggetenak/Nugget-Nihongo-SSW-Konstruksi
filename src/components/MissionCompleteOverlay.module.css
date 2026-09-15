@@ -24,6 +24,69 @@
   padding: 0 var(--space-32);
   user-select: none;
   animation: popIn var(--t-slow) var(--ease-bounce) both;
+  position: relative;
+}
+
+/* ── The hazard sweep (item 161) ──────────────────────────────────────────────
+   A band of the app's own --hazard stripe crossing the backdrop once. Rotated
+   and over-wide so its ends are never on screen, and translated on a single
+   transform -- the diagonal is the motif, the crossing is the event. */
+.sweep {
+  position: absolute;
+  top: -20%;
+  left: -60%;
+  width: 60%;
+  height: 140%;
+  background: var(--hazard);
+  opacity: 0.16;
+  transform: rotate(12deg);
+  pointer-events: none;
+  animation: hazardSweep var(--t-slow) var(--ease-smooth) both;
+}
+
+@keyframes hazardSweep {
+  from {
+    transform: rotate(12deg) translateX(0);
+  }
+  to {
+    transform: rotate(12deg) translateX(320%);
+  }
+}
+
+/* ── The spark ring ───────────────────────────────────────────────────────── */
+.burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: var(--ssw-amber);
+  /* --spark-a is the angle this one flies along; --spark-i is its place in the
+     order, so the ring opens rather than appearing all at once. */
+  animation: sparkOut var(--t-slow) var(--ease-exit) both;
+  animation-delay: calc(var(--spark-i, 0) * var(--t-stagger) * 0.3);
+}
+
+@keyframes sparkOut {
+  from {
+    transform: rotate(var(--spark-a, 0deg)) translateY(0) scale(0.3);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    transform: rotate(var(--spark-a, 0deg)) translateY(-110px) scale(0.7);
+    opacity: 0;
+  }
 }
 
 .icon {
@@ -68,7 +131,22 @@
    unmounts on its own timer. */
 @media (prefers-reduced-motion: reduce) {
   .overlay,
-  .inner {
+  .inner,
+  .sweep,
+  .spark {
     animation: none !important;
   }
 }
+
+/* The sweep and the sparks both END somewhere other than their resting state --
+   the sweep off to the right, the sparks at opacity 0 -- so a zeroed duration
+   would not switch them off, it would freeze them at the end: a stripe parked
+   over the text and twelve invisible dots. `animation: none` leaves them at
+   their FROM state instead, which for the sparks is opacity 0 (correct: no
+   burst) and for the sweep is a faint diagonal band sitting still behind the
+   message, which is the app's motif at rest and reads as intended. This is the
+   shape DESIGN_SPEC §4 requires for any animation whose end state differs from
+   its resting state, and this overlay is the reason that rule is written down.
+
+   The reader-facing toggle is handled in the component rather than here: with
+   celebrations off, neither element is rendered at all. */

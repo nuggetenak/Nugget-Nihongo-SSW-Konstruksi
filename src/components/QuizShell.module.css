@@ -61,10 +61,62 @@
   font-variant-numeric: tabular-nums;
   font-weight: 600;
 }
+/* ── The streak, reacting (item 162) ──────────────────────────────────────────
+   Three tiers, because a run of twelve should not look like a run of two, and
+   because growth that keeps going has to stop somewhere or the counter starts
+   pushing the row around. `hot` is the ceiling.
+
+   Transform and colour only: no layout property moves, so this costs nothing
+   even mid-question on a slow phone. The component re-keys the element on each
+   increment, which is what replays the pop. */
 .streak {
+  display: inline-block;
   font-size: var(--fs-small);
   font-weight: 800;
   color: var(--ssw-amberText);
+  transform-origin: center;
+  animation: streakPop var(--t-base) var(--ease-spring) both;
+}
+
+.streak[data-tier='warm'] {
+  color: var(--ssw-amber);
+  font-size: var(--fs-caption);
+}
+
+.streak[data-tier='hot'] {
+  color: var(--ssw-amber);
+  font-size: var(--fs-body);
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.55);
+}
+
+@keyframes streakPop {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Ends at its resting state, so a zeroed duration would already disable it.
+   Written explicitly per DESIGN_SPEC §4 so it stays correct if the keyframe
+   moves, and switched off by the celebration toggle -- a streak acknowledgement
+   is a celebration, not an entrance. */
+@media (prefers-reduced-motion: reduce) {
+  .streak {
+    animation: none;
+  }
+}
+
+:root[data-motion-no-celebrate] .streak,
+:root[data-motion='mati'] .streak {
+  animation: none;
 }
 
 /* ── Question counter + audio row ── */

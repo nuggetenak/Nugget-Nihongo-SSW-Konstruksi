@@ -22,10 +22,27 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { useEffect, useState, useCallback } from 'react';
 import { haptic } from '../utils/haptic.js';
+import { motionAllows } from '../utils/motion.js';
+import { useCountUp } from '../hooks/useCountUp.js';
 import S from './MissionCompleteOverlay.module.css';
+
+// item 161. Twelve sparks on a ring, CSS only -- no canvas, no library, and no
+// fourth production dependency. Each one is a rotate + translate on its own
+// hinge, so the whole burst is `transform` and `opacity` and costs a weak GPU
+// nothing. Twelve is the count at which the ring reads as a ring rather than as
+// scattered dots; more would be a particle system, which is a different thing
+// and not one this app needs.
+const SPARKS = Array.from({ length: 12 }, (_, i) => i);
 
 export default function MissionCompleteOverlay({ onDone, result }) {
   const [visible, setVisible] = useState(true);
+  // The score climbs (item 159). This is the one screen in the app whose
+  // purpose is the number, so it is the one that most deserves to arrive.
+  const shownCorrect = useCountUp(result?.correct ?? 0);
+  // Not rendered at all when the reader has switched celebrations off, rather
+  // than rendered and hidden: twelve elements that can never be seen are
+  // twelve elements.
+  const celebrate = motionAllows('celebrate');
 
   const dismiss = useCallback(() => {
     setVisible(false);
@@ -71,7 +88,24 @@ export default function MissionCompleteOverlay({ onDone, result }) {
       onClick={dismiss}
       className={S.overlay}
     >
+      {/* The hazard stripe sweeping across, DESIGN_SPEC §1's own motif spent on
+          the one moment the app has to celebrate -- and the reason this reads
+          as THIS app finishing a mission rather than as a generic confetti
+          screen. --z-celebration and --t-slow were both reserved for this and
+          had never been spent on it. */}
+      {celebrate && <div className={S.sweep} aria-hidden="true" />}
       <div className={S.inner}>
+        {celebrate && (
+          <div className={S.burst} aria-hidden="true">
+            {SPARKS.map((i) => (
+              <span
+                key={i}
+                className={S.spark}
+                style={{ '--spark-i': i, '--spark-a': `${i * 30}deg` }}
+              />
+            ))}
+          </div>
+        )}
         <div className={S.icon} aria-hidden="true">
           {result?.icon ?? '🎉'}
         </div>
@@ -79,7 +113,7 @@ export default function MissionCompleteOverlay({ onDone, result }) {
         {result?.label && <div className={S.label}>{result.label}</div>}
         {result?.total > 0 && (
           <div className={S.score}>
-            {result.correct}/{result.total} benar
+            {shownCorrect}/{result.total} benar
           </div>
         )}
         <div className={S.hint}>Ketuk atau tekan Esc untuk tutup</div>
