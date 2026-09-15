@@ -90,16 +90,31 @@ alongside `package.json` and `public/sw.js` now, which is the part that stops it
 
 `npm run derive:quiz-links` regenerates the tiers; the script changes no data by design.
 
-| Tier | Count | Meaning |
+| Tier | Count | Status |
 | --- | --- | --- |
 | high | 303 | ≥4 characters in the stem. Applied in item 96. |
-| **medium** | **222** | 3 characters in the stem, or ≥4 in the correct answer. *Probably* about it — and probably is not good enough to ship unread. |
-| low | 375 | 2 characters anywhere. 安全 / 危険 / 作業 sit inside longer compounds constantly. |
-| none | 80 | No headword in the corpus appears in the question at all. |
+| **medium** | **222** | **All 222 read in 7.6.0. 156 applied, 66 rejected.** |
+| low | 375 | 2 characters anywhere. 安全 / 危険 / 作業 sit inside longer compounds constantly. **Untouched — this is what remains of item 205.** |
+| none | 80 | 7 recovered and linked; the other 73 are in `docs/QUIZ_CONTENT_GAPS.md`. |
 
-**The 80 no-match rows are a different finding and worth more than the links.** A question about
-something the deck does not teach is a gap in the deck, not a linking problem. File them as a
-content report before touching the medium tier.
+Coverage went from **305 of 980 (31.1%) to 468 (47.8%)**.
+
+**The medium tier is done.** Each of the 222 was read against the card it would point at, and the
+rule that decided every one of them was: *does this card teach the ANSWER* — not does the headword
+appear in the stem. Sixty-six were rejected on exactly that, and the clearest illustration is the
+one that was already a defect: `wgl10#18` asks what you put over a wire to protect it (絶縁キャップ,
+an insulation cap) and matched card 904 キャップ, the cap fitted to seal a *pipe* for a pressure
+test. 7.5.1 fixed that same confusion on a different question. Five more were retargeted to a
+better card than the script proposed, which reading finds and a script cannot: an asbestos
+qualification question points at 石綿取り扱い作業者 rather than the generic 特別教育, and a question
+about preventing electric shock points at 絶縁抵抗測定 rather than at 電動工具.
+
+**What is left of this item is the LOW tier**, 375 rows, and it should be approached differently.
+Two characters is where 安全 / 危険 / 作業 live, and those sit inside longer compounds constantly —
+the tier's own definition says these are "as often the wrong card as the right one". Reading them
+one by one is probably the wrong shape of work; improving the matcher first is probably the right
+one. See the note at the end of `docs/QUIZ_CONTENT_GAPS.md` about the 41 headwords the script
+discards as ambiguous, three of which turned out to be trivially resolvable by a human.
 
 ---
 

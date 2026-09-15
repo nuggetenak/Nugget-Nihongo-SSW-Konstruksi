@@ -102,6 +102,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Electrofusion joint', 'Brazing (patri)', 'Flare', 'Dilas dengan gas'],
         ans: 0,
         exp: 'Pipa polietilen (PE) disambung dengan: ①EF (Electrofusion) = sambungan listrik, ②Butt fusion = panas langsung muka ke muka, ③Mechanical joint = sambungan baut (untuk ukuran besar). Metode yang benar tergantung ukuran dan tekanan kerja. Lem PVC TIDAK bisa digunakan untuk PE.',
+        related_card_id: 613,
       },
       {
         id: 7,
@@ -195,6 +196,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Level (水準器) digunakan saat merakit scaffold untuk memastikan platform horizontal (datar). Scaffold yang tidak rata = pekerja tidak bisa berdiri stabil = risiko jatuh. Cek setiap komponen utama: base plate, ledger (balok horizontal), dan platform board.',
+        related_card_id: 299,
       },
       {
         id: 12,
@@ -531,6 +533,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Pengolahan limbah yang mengandung asbes (石綿) memerlukan pendidikan khusus (石綿取扱い特別教育). Asbes adalah karsinogen berbahaya → serat mikroskopis yang terhirup menyebabkan mesothelioma (kanker paru). Penanganan salah = bahaya kesehatan jangka panjang.',
+        related_card_id: 184,
       },
       {
         id: 10,
@@ -550,6 +553,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'Pencegahan heat stroke saat kerja panas: ①Sediakan tempat istirahat sejuk/ber-AC, ②Sediakan air & minuman elektrolit, ③Istirahat teratur, ④Pakaian breathable, ⑤Monitor suhu tubuh. Jangan biarkan pekerja kerja terus tanpa istirahat di cuaca panas.',
+        related_card_id: 1092,
       },
       {
         id: 11,
@@ -608,6 +612,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: '水道法 (Suidō-hō / Water Supply Act) bertujuan: menyediakan air minum yang bersih, aman, dan stabil untuk kehidupan sehari-hari. Mengatur standar kualitas air (水質基準), persyaratan fasilitas, dan pemeliharaan sistem air bersih. Air minum di Jepang memenuhi standar sangat ketat dan aman diminum langsung dari keran.',
+        related_card_id: 11,
       },
       {
         id: 14,
@@ -816,6 +821,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Di industri konstruksi Jepang, 墜落・転落 (jatuh dari ketinggian) adalah penyebab TERBANYAK kecelakaan fatal. Inilah mengapa full harness, guardrail, dan safety net sangat ditekankan. Tiga besar: ①墜落・転落 (paling banyak), ②建設機械災害, ③崩壊・倒壊. Total kecelakaan konstruksi ~30% dari seluruh kecelakaan kerja di Jepang.',
+        related_card_id: 101,
       },
       {
         id: 26,
@@ -1119,6 +1125,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Clamp meter', 'Earth resistance tester', 'Voltmeter', 'Tester'],
         ans: 1,
         exp: 'Earth tester memastikan resistansi grounding <1Ω (modul JAC anzen).',
+        related_card_id: 1133,
       },
       {
         id: 13,
@@ -1285,6 +1292,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Kegiatan KY', 'Pengecekan keselamatan', 'Sapaan', 'Senam'],
         ans: 1,
         exp: "Apel pagi (朝礼/chōrei) diakhiri dengan: dua orang berpasangan menghadap satu sama lain, mengucapkan/menyanyikan safety check ('Kanan OK? Kiri OK?...' = 安全確認体操/anzen kakunin taisō). Ini bukan hanya senam tapi konfirmasi keselamatan visual bersama.",
+        related_card_id: 664,
       },
       {
         id: 3,
@@ -1479,6 +1487,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '仕様書 (shiyōsho / specification document) = dokumen teknis yang menentukan: ①Material yang harus digunakan (merek, grade, standar), ②Metode pelaksanaan (cara kerja yang benar), ③Standar kualitas yang harus dicapai. Kontraktor wajib mengikuti shiyōsho. Jika ada pertentangan antara gambar dan shiyōsho, tanyakan ke supervisor atau engineer.',
+        related_card_id: 835,
       },
       {
         id: 14,
@@ -1872,6 +1881,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Toe cap (baja / komposit)', 'Tali sepatu', 'Sol sepatu', 'Warna sepatu'],
         ans: 0,
         exp: 'Pada standar JIS T 8101 safety shoes, ketahanan benturan ujung jari (toe cap) ditandai dengan grade: 普通 (normal, 100J) atau 高機能 (high performance, 200J). Juga cek: sol anti-selip, anti-penetrasi (benda tajam dari bawah), dan anti-statis. Grade harus sesuai jenis pekerjaan.',
+        related_card_id: 1244,
       },
       {
         id: 6,
@@ -2208,6 +2218,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: '建設業法 (Construction Business Act) bertujuan: ①Meningkatkan kualitas pelaku usaha konstruksi, ②Memastikan pelaksanaan konstruksi yang tepat, ③Mendorong perkembangan industri konstruksi yang sehat. Labor Standards Act = mengatur jam kerja & upah. Building Standards Act = standar teknis bangunan. Safety & Health Act = keselamatan kerja.',
+        related_card_id: 8,
       },
       {
         id: 6,
@@ -2310,6 +2321,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: "Pada KY di apel pagi, setelah menentukan countermeasure, pemimpin mengucapkan 'Kanan OK? Kiri OK? Atas OK? Kita OK!' sambil menunjuk dan semua menjawab bersama. Ini disebut 指差呼称 (yubi-sashi kakunin) = pointing & calling = konfirmasi visual bersama.",
+        related_card_id: 664,
       },
       {
         id: 12,
@@ -2444,6 +2456,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: "ヒヤリ・ハット = 'near miss' = kejadian yang hampir menjadi kecelakaan tapi berakhir selamat. Contoh: hampir terpeleset tapi pegangan ditemukan, benda hampir jatuh ke kepala. Heinrich's Law: untuk setiap 1 kecelakaan fatal, ada 29 kecelakaan ringan dan 300 near miss. Melaporkan near miss sangat penting untuk mencegah kecelakaan sesungguhnya.",
+        related_card_id: 1095,
       },
       {
         id: 21,
@@ -2976,6 +2989,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Pencegahan sengatan listrik (感電防止): ①Cek resistansi isolasi (絶縁抵抗) sebelum pakai → normal ≥1 MΩ, ②Gunakan ELCB (漏電ブレーカー/earth leakage breaker), ③JANGAN gunakan alat listrik dengan tangan basah atau di tempat basah tanpa perlindungan, ④Pekerjaan listrik hanya boleh dilakukan oleh yang berlisensi (電気工事士).',
+        related_card_id: 1009,
       },
       {
         id: 2,
@@ -3469,6 +3483,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Industrial Safety and Health Act (労働安全衛生法) adalah UU yang menjamin keselamatan & kesehatan pekerja. Berbeda dengan Labor Standards Act yang mengatur upah & jam kerja. UU ini mewajibkan pemeriksaan kesehatan, pelatihan keselamatan, dan pembentukan komite K3.',
+        related_card_id: 790,
       },
       {
         id: 30,
@@ -3883,6 +3898,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: 'Supervisor yang bertanggung jawab perakitan scaffold (足場の組立等作業主任者) WAJIB memiliki sertifikat 足場の組立て等作業主任者技能講習 (skill training for scaffold assembly). Tanpa sertifikat ini, seseorang dilarang menjadi penanggungjawab scaffold assembly. Ini kewajiban hukum.',
+        related_card_id: 797,
       },
       {
         id: 3,
@@ -4008,6 +4024,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Saat kerja di cuaca panas, tubuh kehilangan garam (natrium) bersama keringat. Kekurangan garam menyebabkan kram otot, lemas, dan ketidakseimbangan elektrolit. Minum air putih saja tidak cukup — perlu garam atau minuman elektrolit. Ini bukan tentang tekanan darah.',
+        related_card_id: 1092,
       },
       {
         id: 10,
@@ -4093,6 +4110,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Sprinkler', 'Hydrant', 'Alat pemadam api', 'Semua sukarela'],
         ans: 2,
         exp: 'Berdasarkan Fire Service Act (消防法), lokasi konstruksi wajib memiliki setidaknya fire extinguisher (消火器). Untuk bangunan lebih besar/tinggi, diperlukan juga hydrant, sprinkler, dll. Ini adalah persyaratan minimum yang wajib dipenuhi saat konstruksi berlangsung.',
+        related_card_id: 10,
       },
       {
         id: 15,
@@ -4227,6 +4245,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Gejala awal heat stroke (熱中症): ①めまい/立ちくらみ (pusing saat berdiri tiba-tiba), ②大量の発汗 (keringat berlebihan = tubuh kelelahan mendinginkan diri), ③筋肉のけいれん (kram otot = kehilangan elektrolit), ④気分が悪い (mual). Jika ada gejala ini: segera pindah ke tempat sejuk, minum air+elektrolit, dinginkan tubuh. Jangan biarkan berlanjut.',
+        related_card_id: 1092,
       },
       {
         id: 24,
@@ -4319,6 +4338,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 1,
         exp: '消防法 (Shōbō-hō / Fire Service Act) bertujuan: melindungi kehidupan, tubuh, dan properti dari kebakaran dan bencana (gempa, dsb). Mengatur: ①Peralatan pemadam kebakaran wajib (消火器, sprinkler, hydrant), ②Sistem peringatan kebakaran, ③Rencana pencegahan kebakaran, ④Latihan evakuasi. Wajib dipatuhi semua bangunan dan site konstruksi.',
+        related_card_id: 10,
       },
       {
         id: 29,
@@ -4567,6 +4587,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Cooling tower (冷却塔/クーリングタワー) = perangkat yang membuang panas dari sistem chiller ke udara. Cara kerja: air panas dari condenser disemprotkan dari atas, bertemu udara dari bawah (atau samping), sebagian air menguap dan membawa panas keluar. Efisiensi tergantung temperatur bola basah (wet bulb) udara.',
+        related_card_id: 867,
       },
       {
         id: 12,
@@ -4645,6 +4666,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Alat wajib untuk mengukur kadar oksigen (酸素濃度) sebelum masuk manhole/confined space: oxygen meter atau gas detector multi-gas. Kadar O₂ normal: 21%. Aman: ≥18%. Berbahaya: <16%. Segera keluar jika alarm berbunyi. Ventilasi paksa sebelum masuk.',
+        related_card_id: 1080,
       },
       {
         id: 16,
@@ -4737,6 +4759,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 0,
         exp: 'N95 filter debu halus (modul JAC anzen).',
+        related_card_id: 1093,
       },
     ],
   },
@@ -5064,6 +5087,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 3,
         exp: 'Power harassment = memanfaatkan posisi/superioritas di tempat kerja untuk menyebabkan penderitaan mental/fisik atau memperburuk lingkungan kerja MELEBIHI batas tugas normal. Contoh: menghina, mempermalukan di depan umum, memberi tugas mustahil, isolasi. Bukan feedback konstruktif yang wajar.',
+        related_card_id: 788,
       },
       {
         id: 20,
@@ -5240,6 +5264,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Sasaran pendidikan keselamatan: ①Pekerja baru yang pertama kali bekerja, ②Pekerja yang berpindah ke tugas baru, ③Semua pekerja saat ada perubahan besar. Bukan hanya untuk pekerja dengan pengalaman minimal.',
+        related_card_id: 506,
       },
       {
         id: 30,
