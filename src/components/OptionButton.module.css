@@ -135,6 +135,25 @@
   flex: 1;
 }
 
+/* ── Variants (item 174) ──────────────────────────────────────────────────────
+   The one difference between the four hand-rolled copies that was a decision
+   rather than drift. Everything else they disagreed about was collapsed into
+   the base rule above. */
+
+/* Dengar. Its options are read WHILE audio plays and while the listener is
+   deliberately not staring at the screen, so they step up a rung. */
+.btn[data-variant='lg'] .text {
+  font-size: var(--fs-subtitle);
+}
+
+/* Angka. Its options are numerals, and proportional digits make two similar
+   numbers harder to tell apart -- which is exactly the discrimination that
+   drill exists to train, so it must not be made harder by the type. */
+.btn[data-variant='numeric'] .text {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
 .sub {
   display: block;
   font-size: var(--fs-small);

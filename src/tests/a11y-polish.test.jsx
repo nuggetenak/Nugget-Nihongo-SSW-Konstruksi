@@ -163,6 +163,27 @@ describe('141 — the toast dismiss button clears the tap floor', () => {
   });
 });
 
+describe('173 — the breadcrumb clears the tap floor too', () => {
+  it('is sized by --tap-min rather than by its label', () => {
+    // The same assertion as 141's, on the last control that was still under it.
+    // Worth pinning in the same shape: the failure mode is a later edit trimming
+    // the min-* back out to tighten the header, which looks like a layout tweak
+    // and is a regression in the one property that made the control usable.
+    const css = read('src/components/ModeHeader.module.css');
+    const rule = css.slice(css.indexOf('.trailBtn {'), css.indexOf('.trailBtn:hover'));
+    expect(rule).toContain('min-width: var(--tap-min)');
+    expect(rule).toContain('min-height: var(--tap-min)');
+  });
+
+  it('confirms the tap before the screen changes', () => {
+    // A breadcrumb jump replaces the whole screen, and on a touch device with no
+    // hover the press state is the only sign the tap landed. .backBtn beside it
+    // has had one since it was written.
+    const css = read('src/components/ModeHeader.module.css');
+    expect(css).toContain('.trailBtn:active');
+  });
+});
+
 describe('142 — badge ink is computed, because the background is not fixed', () => {
   const colours = Object.values(MODE_META)
     .map((m) => m.color)

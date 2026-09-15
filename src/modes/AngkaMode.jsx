@@ -5,7 +5,6 @@ import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { shuffle } from '../utils/shuffle.js';
 import { ANGKA_KUNCI as ANGKA } from '../data/angka-kunci.js';
-import { haptic } from '../utils/haptic.js';
 import { CARDS } from '../data/cards.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
@@ -14,6 +13,7 @@ import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import SessionLengthPicker, { storedQuizCount } from '../components/SessionLengthPicker.jsx';
 import ProgressBar from '../components/ProgressBar.jsx';
+import OptionButton from '../components/OptionButton.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
 import S from './modes.module.css';
 import A from './AngkaMode.module.css';
@@ -329,9 +329,10 @@ function QuizView({ onBack, onSessionEnd, onRetryWrong, limit }) {
     (idx) => {
       if (selected !== null || phase !== 'playing') return;
       setSelected(idx);
+      // The haptic lives in OptionButton now (item 174) -- it fires on the tap,
+      // from the option that was tapped, rather than four modes each remembering
+      // to call it here.
       const isCorrect = idx === item.correctIdx;
-      if (isCorrect) haptic.correct();
-      else haptic.wrong();
       const ns = isCorrect ? streak + 1 : 0;
       setStreak(ns);
       setMaxStreak((m) => Math.max(m, ns));
@@ -460,59 +461,17 @@ function QuizView({ onBack, onSessionEnd, onRetryWrong, limit }) {
       </div>
 
       <div className={S.list}>
-        {opts.map((opt, i) => {
-          const isSelected = selected === i;
-          const showResult = selected !== null;
-          const isCorrect = opt.isCorrect;
-          const isWrongPick = isSelected && !isCorrect;
-          return (
-            <button
-              key={i}
-              onClick={() => handleSelect(i)}
-              disabled={selected !== null}
-              style={{
-                fontFamily: 'inherit',
-                padding: 'var(--space-12) var(--space-14)',
-                borderRadius: T.r.md,
-                background: !showResult
-                  ? T.surface
-                  : isCorrect
-                    ? T.correctBg
-                    : isWrongPick
-                      ? T.wrongBg
-                      : T.surface,
-                border: `1.5px solid ${!showResult ? T.border : isCorrect ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`,
-                animation: !showResult
-                  ? 'none'
-                  : isCorrect
-                    ? 'correctFlash 0.5s ease'
-                    : isWrongPick
-                      ? 'wrongShake 0.45s ease'
-                      : 'none',
-                color: !showResult
-                  ? T.text
-                  : isCorrect
-                    ? T.correct
-                    : isWrongPick
-                      ? T.wrong
-                      : T.textDim,
-                textAlign: 'left',
-                cursor: selected !== null ? 'default' : 'pointer',
-                fontSize: 'var(--fs-caption)',
-                fontWeight: 700,
-                fontVariantNumeric: 'tabular-nums',
-                transition: 'all var(--t-fast)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <span>{opt.text}</span>
-              {showResult && isCorrect && <span>✓</span>}
-              {showResult && isWrongPick && <span>✗</span>}
-            </button>
-          );
-        })}
+        {opts.map((opt, i) => (
+          <OptionButton
+            key={i}
+            idx={i}
+            text={opt.text}
+            selected={selected}
+            isCorrect={opt.isCorrect}
+            onSelect={handleSelect}
+            variant="numeric"
+          />
+        ))}
       </div>
 
       {selected !== null && (

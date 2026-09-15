@@ -58,6 +58,34 @@ const exempt = (line) => EXEMPT.some((re) => re.test(line));
 // exceptions explain themselves in place rather than in a list somewhere else.
 const isComment = (line) => /^\s*(\/\*|\*|\/\/)/.test(line);
 
+/**
+ * The whole value of an object property, starting just after its colon.
+ *
+ * Reads forward to the `,` or `}` that closes the property, tracking bracket
+ * depth and string quoting so a ternary, a template literal or a nested call
+ * comes back intact. This is what lets the JSX check see a value that spans
+ * six lines, which is exactly how four modes' hardcoded durations avoided it.
+ */
+function valueSpan(src, from) {
+  let depth = 0;
+  let quote = null;
+  for (let i = from; i < src.length; i++) {
+    const c = src[i];
+    if (quote) {
+      if (c === '\\') i++;
+      else if (c === quote) quote = null;
+      continue;
+    }
+    if (c === "'" || c === '"' || c === '`') quote = c;
+    else if ('([{'.includes(c)) depth++;
+    else if (')]}'.includes(c)) {
+      if (depth === 0) return src.slice(from, i);
+      depth--;
+    } else if (c === ',' && depth === 0) return src.slice(from, i);
+  }
+  return src.slice(from);
+}
+
 describe('motion scale', () => {
   it('defines the full ladder, once, and only in global.css', () => {
     for (const t of ['instant', 'fast', 'base', 'enter', 'slow', 'count']) {
@@ -115,16 +143,26 @@ describe('motion scale', () => {
   it('JSX style objects follow the same rule', () => {
     // ConfusionMode.jsx already did this right -- `transition: 'all var(--t-fast)'`
     // -- which is the spelling the rest should match.
+    //
+    // WHY THIS READS AN EXPRESSION AND NOT A LINE. The first version of this
+    // check required the quote to sit on the same line as the property, and four
+    // modes slipped straight through it: Angka, Danger, Confusion and Dengar all
+    // wrote the value as a multi-line ternary, so `animation:` was followed by a
+    // condition and the literal `'correctFlash 0.5s ease'` landed two lines down
+    // with nothing to anchor it. The rule read as enforced and was not, which is
+    // the same shape of failure as the View Transition that was asserted to be
+    // CALLED while nothing moved (item 147) -- a guard that matches the common
+    // spelling of a mistake rather than the mistake.
     for (const f of jsxFiles) {
-      readFileSync(f, 'utf-8')
-        .split('\n')
-        .forEach((line, i) => {
-          if (exempt(line) || isComment(line)) return;
-          if (!/(transition|animation):\s*['"`]/.test(line)) return;
-          expect(line, `${rel(f)}:${i + 1} hardcodes a duration in a style object`).not.toMatch(
-            /(?<![\w.-])\d+(\.\d+)?m?s(?![\w.-])/
-          );
-        });
+      const src = readFileSync(f, 'utf-8');
+      for (const m of src.matchAll(/\b(transition|animation)\s*:/g)) {
+        const span = valueSpan(src, m.index + m[0].length);
+        if (exempt(span)) continue;
+        const line = src.slice(0, m.index).split('\n').length;
+        expect(span, `${rel(f)}:${line} hardcodes a duration in a style object`).not.toMatch(
+          /(?<![\w.-])\d+(\.\d+)?m?s(?![\w.-])/
+        );
+      }
     }
   });
 });

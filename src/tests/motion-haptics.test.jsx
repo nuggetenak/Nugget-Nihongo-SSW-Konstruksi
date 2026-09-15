@@ -4,6 +4,13 @@
 // the app, no pattern at all. Also covers the destructive-confirm haptic the
 // plan asked for, and the prefers-reduced-motion guard on BottomNav's
 // JS-invoked View Transition (a CSS catch-all can't reach that).
+//
+// item 174 (2026-09-15): this file NAMED Angka and Danger from the day it was
+// written and never rendered either one -- the haptic those modes were given is
+// asserted here for the first time, now that there is one component to assert it
+// on. Which is itself the argument for the consolidation: a behaviour with four
+// implementations had none of them under test, and a behaviour with one has it
+// covered in five lines.
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { createElement } from 'react';
@@ -14,6 +21,9 @@ vi.mock('../utils/haptic.js', () => ({
 
 import { haptic } from '../utils/haptic.js';
 import BottomNav from '../components/BottomNav.jsx';
+import OptionButton from '../components/OptionButton.jsx';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { ConfirmProvider, useConfirm } from '../components/ConfirmDialog.jsx';
 
 vi.mock('../components/BottomNav.module.css', () => ({
@@ -111,5 +121,67 @@ describe('withViewTransition — robustness of the re-entrancy flag', () => {
     withViewTransition(() => ran.push('b'));
     expect(ran).toEqual(['a', 'b']);
     delete document.startViewTransition;
+  });
+});
+
+// ─── item 174: four hand-rolled answer buttons became one ────────────────────
+describe('OptionButton — the answer haptic, on the one button that fires it', () => {
+  const opts = [{ text: 'benar' }, { text: 'salah' }];
+
+  function Row({ selected, onSelect }) {
+    return opts.map((o, i) =>
+      createElement(OptionButton, {
+        key: i,
+        idx: i,
+        text: o.text,
+        selected,
+        isCorrect: i === 0,
+        onSelect,
+      })
+    );
+  }
+
+  it('a correct tap buzzes correct, a wrong tap buzzes wrong', () => {
+    const onSelect = vi.fn();
+    const { rerender } = render(createElement(Row, { selected: null, onSelect }));
+
+    fireEvent.click(screen.getByText('benar'));
+    expect(haptic.correct).toHaveBeenCalledTimes(1);
+    expect(haptic.wrong).not.toHaveBeenCalled();
+    expect(onSelect).toHaveBeenCalledWith(0);
+
+    vi.clearAllMocks();
+    rerender(createElement(Row, { selected: null, onSelect }));
+    fireEvent.click(screen.getByText('salah'));
+    expect(haptic.wrong).toHaveBeenCalledTimes(1);
+    expect(haptic.correct).not.toHaveBeenCalled();
+  });
+
+  it('an already-answered question does not fire again', () => {
+    // The four hand-rolled copies each guarded this separately, in their own
+    // handleSelect. One guard now, on the button, where the tap is.
+    const onSelect = vi.fn();
+    render(createElement(Row, { selected: 1, onSelect }));
+    fireEvent.click(screen.getByText('benar'));
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(haptic.correct).not.toHaveBeenCalled();
+  });
+});
+
+describe('item 174 — the four modes stopped hand-rolling it', () => {
+  const MODES = ['AngkaMode', 'DangerMode', 'ConfusionMode', 'DengarMode'];
+  const read = (m) => readFileSync(resolve(__dirname, `../modes/${m}.jsx`), 'utf-8');
+
+  it.each(MODES)('%s renders the shared OptionButton', (m) => {
+    expect(read(m)).toContain("from '../components/OptionButton.jsx'");
+  });
+
+  it.each(MODES)('%s no longer triggers the answer keyframes itself', (m) => {
+    // correctFlash/wrongShake are reserved for answer feedback (DESIGN_SPEC §4)
+    // and there is now exactly one place that plays them. A mode naming either
+    // again is a fifth copy starting.
+    const src = read(m);
+    expect(src, `${m} still plays correctFlash`).not.toMatch(/correctFlash/);
+    expect(src, `${m} still plays wrongShake`).not.toMatch(/wrongShake/);
   });
 });
