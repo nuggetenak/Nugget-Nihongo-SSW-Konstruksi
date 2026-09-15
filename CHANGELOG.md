@@ -134,6 +134,14 @@ matched the common spelling of a mistake rather than the mistake.
 - `doc-references.test.js` resolved every backticked path and none of the numbers. `_MAP.md` §3's
   metrics table — formatted to look like ground truth, under a banner saying it had been re-derived
   — claimed 7.2.0, 20 modes, 1,017 tests in 111 files and 5 audit scripts. It derives them now.
+- **And one that was FAILING for the wrong reason, which is the same defect wearing the opposite
+  face.** `question-option-shuffle.test.js` asserted that a random shuffle puts the answer in each
+  of four positions 20–30% of the time, over 680 questions. Measured: **it fails 1.32% of runs**,
+  53 times in 4,000. A share of 680 draws has a standard deviation of 1.66 points, so those bounds
+  sat at ±3.01σ — and the test made eight such checks per run. Nothing was ever wrong with the
+  shuffle. A test that fails for doing the right thing is worse than no test, because the first
+  thing anyone does with it is learn to re-run CI. It is seeded now, asserts the mean share across
+  200 draws to within a point of 25%, and still fails if the shuffle stops shuffling.
 
 ### Two things the plan asked for that were refused, with reasons
 
