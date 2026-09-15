@@ -49,7 +49,13 @@
   --fs-title: clamp(1.1875rem, 1.119rem + 0.2809vw, 1.3438rem); /* 19 21.5 */
   --fs-jp-back: clamp(1.375rem, 1.2928rem + 0.3371vw, 1.5625rem); /* 22 25 */
   --fs-page-title: clamp(1.625rem, 1.4881rem + 0.5618vw, 1.9375rem); /* 26 31 */
-  --fs-jp-primary: clamp(1.875rem, 1.7381rem + 0.5618vw, 2.1875rem); /* 30 35 */
+  /* --fs-jp-primary (30-35) was here and nothing ever read it (item 171).
+     It looked like the token that sizes a flashcard's Japanese, and did
+     not: JpDisplay is the primary JP rendering path in this app and takes
+     its size from jpFontSize()'s length ladder as an inline px value.
+     Wiring the token in would have given that one size two owners, which
+     jp-helpers.js's own header warns against in as many words -- so it is
+     deleted rather than adopted. --fs-jp-back stays; six sites read it. */
   --fs-hero: clamp(2.25rem, 2.0035rem + 1.0112vw, 2.8125rem); /* 36 45 */
 
   /* Line heights. --lh-snug is new (2026-09-04): 1.2 is right for a single
@@ -64,9 +70,19 @@
      labels want positive. Both were being written as one-off letter-spacing
      values in a dozen places. */
   --ls-tight: -0.02em;
-  --ls-normal: 0;
   --ls-wide: 0.04em;
   --ls-label: 0.08em;
+  /* --ls-normal: 0 was here (item 171). A token whose value is the property's
+     own default is a token nothing can usefully reference, and nothing did.
+     Deleted rather than allowlisted, on the same argument as --fs-jp-primary.
+
+     The other three had ONE reader between them and six declarations elsewhere
+     spelling their exact values out by hand -- the letter-spacing version of
+     the "one keyframe, six speeds" drift item 146 just finished unwinding.
+     Those six are pointed here now. Sixty-one raw letter-spacing values remain
+     across twenty-nine distinct numbers; converting the rest is filed as item
+     205, because most of them do NOT land on a rung and snapping them without
+     looking is how a scale gets worse. */
 
   /* Font weights */
   --fw-regular: 400;

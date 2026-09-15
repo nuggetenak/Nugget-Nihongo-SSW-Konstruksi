@@ -117,16 +117,22 @@ export function isMeaningfullyJapanese(s = '', threshold = 0.4) {
  * Calculate appropriate font size for Japanese text based on length.
  * Returns a number (px) suitable for inline style fontSize.
  */
-// item 22: length-based ladder, unrelated to (and not reading) the
-// --fs-jp-primary/--fs-jp-back CSS tokens -- JpDisplay is the primary JP
-// rendering path in this app and drives its font-size from this function's
-// return value via an inline style, not from those custom properties
-// directly. Bumping the tokens alone (global.css's 1040px block) would have
-// had no visible effect on most real card content. Wide-breakpoint ladder
-// mirrors the same per-rung bump chosen for the static tokens (28->30 matches
-// --fs-jp-primary, 20->22 matches --fs-jp-back, etc.) so the two scales stay
-// in step with each other rather than drifting into two different "how much
-// bigger is wide" answers. Checks the same 1040px breakpoint global.css
+// item 22: length-based ladder, unrelated to (and not reading) the --fs-jp-*
+// CSS tokens -- JpDisplay is the primary JP rendering path in this app and
+// drives its font-size from this function's return value via an inline style,
+// not from those custom properties directly. Bumping the tokens alone
+// (global.css's 1040px block) would have had no visible effect on most real
+// card content. Wide-breakpoint ladder mirrors the same per-rung bump chosen
+// for the static tokens (20->22 matches --fs-jp-back, and the top rung's
+// 28->30 matched the --fs-jp-primary that used to sit beside it) so the two
+// scales stay in step with each other rather than drifting into two different
+// "how much bigger is wide" answers.
+//
+// item 171: --fs-jp-primary is gone. It was declared, it read as the token that
+// sizes a flashcard's Japanese, and no rule anywhere referenced it -- the size
+// it claimed to own has always come from the ladder below. Adopting it would
+// have given one size two owners, which is the drift this header already warns
+// about; deleting it leaves the ladder as the single answer. Checks the same 1040px breakpoint global.css
 // uses -- can't literally share the media query from JS, so the number is
 // duplicated; if that breakpoint ever moves, this needs to move with it.
 function isWideBreakpoint() {

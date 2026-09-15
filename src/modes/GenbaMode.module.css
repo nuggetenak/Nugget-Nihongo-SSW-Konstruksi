@@ -97,7 +97,7 @@
   font-weight: 700;
   color: var(--ssw-textDim);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-wide);
 }
 
 .note {

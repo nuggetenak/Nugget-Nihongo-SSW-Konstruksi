@@ -20,7 +20,7 @@
 .brandName {
   font-size: 1.125rem;
   font-weight: var(--fw-black);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-tight);
   color: var(--ssw-amberText);
   line-height: var(--lh-tight);
 }
@@ -134,7 +134,7 @@
   padding: var(--space-8) var(--space-12);
   font-size: var(--fs-small);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-wide);
   color: var(--ssw-textDim);
   cursor: pointer;
   border-radius: var(--r-md);
