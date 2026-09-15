@@ -86,18 +86,25 @@ alongside `package.json` and `public/sw.js` now, which is the part that stops it
 
 ---
 
-### 205 · Quiz→card linking, the medium tier — **OPEN, size L**
+### 205 · Quiz→card linking — **medium tier and the matcher done; the low tier remains, size L**
 
 `npm run derive:quiz-links` regenerates the tiers; the script changes no data by design.
 
+Coverage: **305 of 980 (31.1%) → 468 (47.8%) in 7.6.0 → 539 (55.0%) after the matcher pass.**
+
+The tiers below are the deriver's own, re-run against the 441 questions that are still unlinked.
+`answer` and `definition` did not exist before the matcher pass; `high` and `medium` are what item
+96 and 7.6.0 already closed, so they read empty or near it.
+
 | Tier | Count | Status |
 | --- | --- | --- |
-| high | 303 | ≥4 characters in the stem. Applied in item 96. |
-| **medium** | **222** | **All 222 read in 7.6.0. 156 applied, 66 rejected.** |
-| low | 375 | 2 characters anywhere. 安全 / 危険 / 作業 sit inside longer compounds constantly. **Untouched — this is what remains of item 205.** |
-| none | 80 | 7 recovered and linked; the other 73 are in `docs/QUIZ_CONTENT_GAPS.md`. |
-
-Coverage went from **305 of 980 (31.1%) to 468 (47.8%)**.
+| answer | 50 | The correct answer IS a card headword, whole. **All 50 read, all 50 applied.** |
+| definition | 13 | The stem is 「Xの意味は…」 and X IS a card headword. **All 13 applied.** |
+| high | 303 + 1 | ≥4 characters in the stem. Applied in item 96; normalisation found one more. |
+| medium | 222 | All 222 read in 7.6.0: 156 applied, 66 rejected. 64 of those 66 still tier as medium; the other two moved under the new sort and were applied. |
+| low | 305 | 2 characters anywhere. 安全 / 危険 / 作業 sit inside longer compounds constantly. **Untouched — this is what remains of item 205.** |
+| ambiguous | 11 | New. 7 identity matches, all applied after a hand decision; 4 substring matches, all rejected on reading and now recorded as content gaps. |
+| none | 68 | Was 80: 7 recovered in 7.6.0, 1 in the matcher pass, 4 reclassified as near-misses. The rest are `docs/QUIZ_CONTENT_GAPS.md`. |
 
 **The medium tier is done.** Each of the 222 was read against the card it would point at, and the
 rule that decided every one of them was: *does this card teach the ANSWER* — not does the headword
@@ -109,12 +116,37 @@ better card than the script proposed, which reading finds and a script cannot: a
 qualification question points at 石綿取り扱い作業者 rather than the generic 特別教育, and a question
 about preventing electric shock points at 絶縁抵抗測定 rather than at 電動工具.
 
-**What is left of this item is the LOW tier**, 375 rows, and it should be approached differently.
-Two characters is where 安全 / 危険 / 作業 live, and those sit inside longer compounds constantly —
-the tier's own definition says these are "as often the wrong card as the right one". Reading them
-one by one is probably the wrong shape of work; improving the matcher first is probably the right
-one. See the note at the end of `docs/QUIZ_CONTENT_GAPS.md` about the 41 headwords the script
-discards as ambiguous, three of which turned out to be trivially resolvable by a human.
+**The matcher was improved before the low tier was touched, and that turned out to be the whole
+point.** The plan said reading 375 rows one by one was probably the wrong shape of work. It was
+wrong for a sharper reason than "slow": the deriver was ranking proposals by **how long** the
+matched headword was, when what decides a link is **what** the headword matched. A four-character
+run inside a stem is a topic. A headword that IS the correct answer is the lesson.
+
+Fifty unlinked questions had an answer that was, whole, a card headword — 温水管, 検電器, 朝礼 — and
+not one reached a tier anyone would apply unread: **47 were filed `low` and 3 `medium`**, because
+温水管 is three characters and the answer was only consulted at four. Forty-seven were sitting in
+the tier whose own definition says it is "as often the wrong card as the right one", behind 375 rows
+nobody could justify reading. **All fifty read correct.** Nothing needed to be read one by one; the
+sort key was wrong.
+
+Three smaller changes came from the failures `docs/QUIZ_CONTENT_GAPS.md` recorded, each fixed where
+it was found rather than filed again:
+
+- **The ambiguous set is surfaced, not dropped.** 41 headwords sit on more than one card. The
+  deriver discarded them silently; three of the seven hand-recoveries in 7.6.0 came out of that
+  discard. They now go to their own bucket carrying every candidate — 7 identity matches, each a
+  five-second decision (`wgl04#1`'s サドル is the 配管 one, not the conduit one; `wgl10#1` wants the
+  object, not card 309's three prohibitions), and 4 substring matches, all four rejected on reading
+  and now sharper entries in the gaps file than they were as no-matches.
+- **Text is normalised (NFKC, spaces and interpuncts dropped) before matching.** `EF ソケット`
+  written with a space missed `EFソケット`: one space defeated the match. Recovers `wglv-jp-02#2`.
+- **The identity tests reach the JP→ID questions nothing else could.** 「Xの意味は何ですか」 with
+  an Indonesian answer carries no Japanese outside the stem, so no amount of reading the *answer*
+  would ever have found them. 13 more.
+
+**What is left is still the LOW tier**, now 305 rows, and the argument for not hand-reading it
+stands. The lesson to carry: before reading a tier, check that the thing sorting it is measuring
+the right property. One reordering was worth 71 links and four corrected gap entries.
 
 ---
 

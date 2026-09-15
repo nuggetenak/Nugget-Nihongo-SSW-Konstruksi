@@ -81,10 +81,18 @@ At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION
     per-character headword reveal (it breaks kinsoku shori and ruby association). Do not re-open
     either from the plan text alone.
 
-  - **Quiz→card coverage is 468 of 980 (47.8%)**, up from 305. The medium tier is read and closed;
-    what is left is the LOW tier (375 rows) and it probably wants a better matcher rather than 375
-    hand reads — see item 205. `docs/QUIZ_CONTENT_GAPS.md` holds the 73 questions no card teaches,
-    which is a content report and not a linking backlog.
+  - **Quiz→card coverage is 539 of 980 (55.0%)**, up from 305. The medium tier is read and closed,
+    and the matcher pass item 205 asked for is done: the deriver was ranking proposals by **how
+    long** the matched headword was, when what decides a link is **what** it matched. Fifty
+    questions whose correct answer was, whole, a card headword sat below the applyable tiers (47 in
+    `low`, 3 in `medium`) — all fifty read correct. With the ambiguous set surfaced instead of
+    dropped, text normalised before matching, and already-linked questions excluded from the tiers,
+    that was 71 more links. **The lesson: before reading a tier, check that the thing sorting it is
+    measuring the right property.** What is left is the LOW tier, now 305 rows, and the argument
+    against hand-reading it stands. `docs/QUIZ_CONTENT_GAPS.md` holds the 72 questions no card
+    teaches, which is a content report and not a linking backlog; four of its entries now name the
+    near-miss card and what is actually missing (温度計 not 温度, 本溶接 not 溶接, and no card
+    states a 脚立's opening angle).
 
 - **2026-09-14: 7.5.1 — the garbled question, and two guards that were only comments.**
   Full write-up is `CHANGELOG.md` `[7.5.1]`. What a future session most needs to know:

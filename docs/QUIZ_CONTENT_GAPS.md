@@ -9,16 +9,17 @@ not in the correct answer. Item 96 filed those as a *linking* problem and they a
 > **A question about something the deck does not teach is a gap in the deck, not a link that is
 > missing.** That list is worth more than the links, which is why it has a file.
 
-Seven of the eighty turned out to be recoverable and were linked in 7.6.0 — see the last section.
-The remaining **73** are listed below with what the deck has nearest to them, so a future session
-can tell "add an alias" from "write a card".
+Seven of the eighty turned out to be recoverable and were linked in 7.6.0, and an eighth
+(`wglv-id-02#33`) in the item 205 matcher pass — see the last two sections. The remaining **72**
+are listed below with what the deck has nearest to them, so a future session can tell "add an
+alias" from "write a card".
 
 ## What kind of gap each one is
 
 | Kind | Count | What to do |
 | --- | --- | --- |
 | The deck carries nothing close at all | 13 | Write a card, or accept that the question is out of the deck's scope and say so here |
-| The deck carries something with a partial headword overlap | 60 | Read it: the near-miss is often a compound (`ガス溶接` for a question about `溶接`) and sometimes genuinely unrelated |
+| The deck carries something with a partial headword overlap | 59 | Read it: the near-miss is often a compound (`ガス溶接` for a question about `溶接`) and sometimes genuinely unrelated |
 
 **The 13 with nothing close are the interesting ones**, and they cluster:
 
@@ -31,7 +32,7 @@ can tell "add an alias" from "write a card".
 - **Six vocabulary items** — 通信ケーブル, 光ケーブル, ゴム輪, 照明器具, 消火器, 硬質ビニル電線管.
   Each is a one-card addition.
 
-## The 73
+## The 72
 
 | Question | Stem | Correct answer | Nearest thing in the deck |
 | --- | --- | --- | --- |
@@ -82,7 +83,6 @@ can tell "add an alias" from "write a card".
 | `wglv-id-02#7` | Apa bahasa Jepang untuk "Pengolahan tekukan"? | Pengolahan tekukan | 429 軍手でのねじ加工は絶対禁止 = Sarung tangan kain saat mengulir dilarang |
 | `wglv-id-02#26` | Apa bahasa Jepangnya 'Kabel komunikasi'? | Kabel komunikasi | 13 電気通信事業法 = UU Usaha Telekomunikasi |
 | `wglv-id-02#29` | Apa bahasa Jepangnya "Lokasi konstruksi"? | Lokasi konstruksi | 8 建設業法 = UU Industri Konstruksi |
-| `wglv-id-02#33` | Apa bahasa Jepangnya "Penandaan tinta"? | Penandaan tinta | 124 墨出し = Penandaan tinta / marking |
 | `wglv-id-02#35` | Apa bahasa Jepangnya "Pengelasan utama"? | Pengelasan utama | 162 溶接の3分類（融接・圧接・ろう接） = 3 kategori pengelasan |
 | `wglv-id-03#8` | Apa bahasa Jepangnya "Pemotongan pipa (proses)"? | Pemotongan pipa (proses) | 295 高速切断機 = Pemotong piringan abrasif |
 | `wglv-id-03#11` | Apa bahasa Jepangnya "Terowongan (utilitas)"? | Terowongan (utilitas) | 1037 可とう継手 = Flexible joint |
@@ -125,3 +125,28 @@ noise. Three of the seven recoveries above were ambiguity discards where a human
 cards apart instantly. A future pass at this should surface the ambiguous set for review rather
 than dropping it silently — that is a change to `scripts/derive-quiz-card-links.mjs`, not to the
 data.
+
+## What the item 205 matcher pass added, and the four gaps it sharpened
+
+The pattern above — *surface the ambiguous set rather than dropping it* — was applied, along with
+three other matcher changes, and `scripts/derive-quiz-card-links.mjs` records each one against the
+failure it came from. Coverage went **468 → 539 of 980 (47.8% → 55.0%)**.
+
+One row left this file: `wglv-id-02#33` asks the Japanese for "Penandaan tinta" and the answer,
+墨出し, is carried by **two** cards — so the headword was discarded and the question reported as
+having nothing in the deck at all. Card 124's Indonesian gloss is, word for word, the question's
+own answer. It was never a content gap; it was an ambiguity discard wearing one.
+
+Four more rows are still gaps, but they are now **near-misses with a name** rather than no-matches,
+because the ambiguous bucket put the candidate in front of a reader. In each one the deck teaches a
+*different word* than the one the question tests, which is precisely the case where a link would be
+worse than none:
+
+| Question | Asks about | The deck has | What is missing |
+| --- | --- | --- | --- |
+| `wgl07#3`, `jml02#3` | the 脚立 opening angle (≈75°) | 309 (three prohibitions), 862 (the object) | No card states the opening angle. 308 はしご carries a 75° but it is a *leaning ladder's* lean angle, a different measurement — linking there would teach the wrong 75°. |
+| `wglv-id-01#20` | 温度計 (thermometer) | 701 / 1801 温度 (temperature) | The instrument, not the quantity. |
+| `wglv-id-02#35` | 本溶接 (main weld) | 557 / 677 溶接 (welding) | The 本溶接 / 仮溶接 distinction is the whole question. |
+
+Each is one card. The 脚立 angle is the one worth writing first: it is asked in two banks, it is a
+number a worker is expected to know on site, and the nearest thing in the deck would mislead.

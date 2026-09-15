@@ -153,7 +153,7 @@ matched the common spelling of a mistake rather than the mistake.
   (ラッキングカバー breaking as ラッキングカバ / ー). It would also break ruby association. The
   furigana fade shipped; the character reveal did not.
 
-### Quiz→card links: 31.1% → 47.8%
+### Quiz→card links: 31.1% → 55.0%
 
 Item 96 applied only the high-confidence tier and sized the rest honestly rather than batching it,
 on one rule: **a link to a card that does not teach the answer is worse than no link.** All 222
@@ -175,14 +175,50 @@ question about something the deck does not teach is a gap in the **deck**. Thirt
 close at all, and they cluster: the evacuation-route sign colour and the 119 number appear five
 times between them across both banks with no card for either.
 
+### The deriver was sorting by the wrong property, and that was worth 71 more links
+
+The plan's next move on item 205 was "improve the matcher before reading 375 rows one at a time".
+It was right, for a sharper reason than speed: the deriver ranked a proposal by **how long** the
+matched headword was, when what decides a link is **what** it matched. A four-character run inside
+a stem is a topic. A headword that IS the correct answer is the lesson.
+
+Fifty unlinked questions had an answer that was, whole, a card headword — 温水管, 検電器, 朝礼 —
+and not one reached a tier anybody would apply unread: 47 were filed `low` and 3 `medium`, because
+温水管 is three characters and the answer was only consulted at four. Forty-seven of them were
+sitting in the tier whose own definition calls it "as often the wrong card as the right one",
+behind 375 rows nobody could justify reading. **All fifty read correct.** Nothing needed reading
+one by one; the sort key was wrong.
+
+Three more changes, each taken from a failure the 7.6.0 pass had recorded in
+`docs/QUIZ_CONTENT_GAPS.md` and fixed where it was written down rather than filed again:
+
+- **The ambiguous set is surfaced, not dropped.** 41 headwords sit on more than one card, and the
+  deriver discarded them in silence — three of its seven hand-recoveries came back out of that
+  discard. They get their own bucket now, carrying every candidate: 7 identity matches, each a
+  five-second decision (`wgl04#1`'s サドル is the 配管 one, not the conduit one; `wgl10#1` wants the
+  object, not card 309's three prohibitions), and 4 substring matches, all four rejected on
+  reading. An identity match on an ambiguous headword outranks every substring tier — two named
+  cards, one certainly right, beats a three-character guess.
+- **Text is normalised before matching** (NFKC, spaces and interpuncts dropped). `EF ソケット`
+  written with a space missed `EFソケット`: one space defeated the match.
+- **Questions that already carry a link are excluded and counted separately.** The script re-tiered
+  all 980 however many were linked, so after 7.6.0 applied 468 it still reported "needs a human
+  read: 677" — a claim about a list that was no longer true of the list.
+
+**539 of 980, 55.0%.** One row left `QUIZ_CONTENT_GAPS.md` — `wglv-id-02#33` asks the Japanese for
+"Penandaan tinta" and card 124's gloss is, word for word, its answer; it was an ambiguity discard
+wearing a content gap. Four more are still gaps but sharper ones, because the reader saw the
+candidate: the deck teaches 温度 not 温度計, 溶接 not 本溶接, and states no opening angle for a 脚立
+— 308 はしご carries a 75° but it is a leaning ladder's lean angle, a different measurement, so
+linking there would teach the wrong number.
+
 ### Carried, not dropped
 
 `docs/UI_UX_PLAN-2026-09-items-145-205.md` is the live queue. What remains of item 205 is the
-**low** tier, 375 rows — and the plan says it should be approached differently, because two
-characters is where 安全 / 危険 / 作業 live and those sit inside longer compounds constantly.
-Improving the matcher, starting with the 41 headwords it silently discards as ambiguous, is
-probably better work than reading 375 rows one at a time. Item 209 asks for one permanent browser
-smoke test in CI, on the evidence of the four defects above.
+**low** tier, now 305 rows, and the argument against hand-reading it stands. The lesson worth
+carrying is the one above: before reading a tier, check that the thing sorting it is measuring the
+right property. Item 209 asks for one permanent browser smoke test in CI, on the evidence of the
+four defects above.
 
 ## [7.5.1] - 2026-09-14
 

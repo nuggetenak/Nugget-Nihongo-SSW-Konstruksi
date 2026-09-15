@@ -1208,6 +1208,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Jam', 'Hanya termometer', 'Safety valve (katup pengaman)', 'Pemutar musik'],
         ans: 2,
         exp: 'Safety valve (安全弁/リリーフバルブ) wajib dipasang pada boiler. Fungsi: otomatis membuka untuk melepas tekanan lebih agar tidak melebihi batas aman. Juga wajib: pressure gauge, water level gauge, low water cut-off. Safety valve yang tersumbat = risiko ledakan boiler.',
+        related_card_id: 1027,
       },
       {
         id: 18,
@@ -1891,6 +1892,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Sarung tangan', 'Full harness', 'Hanya helm', 'Safety belt (fall protection)'],
         ans: 3,
         exp: 'Full harness wajib saat merakit scaffolding (modul JAC anzen).',
+        related_card_id: 1177,
       },
       {
         id: 7,
@@ -2066,6 +2068,7 @@ export const JAC_MOCKUP_SETS = [
         ],
         ans: 2,
         exp: 'Saat penggalian di dekat pipa existing (pipa air, gas, listrik underground): WAJIB hand digging (gali manual) dalam radius ≥1m dari pipa existing. Jangan gunakan excavator di dekat pipa — risikonya merusak pipa existing yang bisa menyebabkan ledakan (gas) atau kebanjiran (air).',
+        related_card_id: 69,
       },
       {
         id: 17,
@@ -3212,6 +3215,7 @@ export const JAC_MOCKUP_SETS = [
         opts_id: ['Kegiatan 5S', 'Pendidikan keselamatan', 'Kegiatan KY', 'Apel pagi'],
         ans: 3,
         exp: 'Apel pagi (朝礼/chōrei) = pertemuan harian WAJIB di mana semua pekerja berkumpul sebelum mulai kerja. Isi apel: safety briefing hari ini, pembagian tugas, KY (prediksi bahaya), senam konfirmasi keselamatan. Chōrei bukan formalitas tapi fondasi manajemen keselamatan.',
+        related_card_id: 1,
       },
       {
         id: 15,

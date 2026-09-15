@@ -33,6 +33,7 @@ export const RELEASE_NOTES = [
       'Pengaturan Ukuran Teks akhirnya mengubah huruf Jepangnya juga. Sebelumnya pilihan Besar dan Sangat Besar hanya membesarkan tulisan Indonesia, label, dan tombol — kanji di depan kartu, di soal kuis, dan di Glosari tetap sekecil sebelumnya. Furigana ikut membesar bersamanya.',
       'Aplikasinya bergerak sekarang: pindah tab dan masuk mode ada transisinya, ikon kartu mode berpindah jadi judul di layar berikutnya, kartu flashcard mengikuti jarimu saat digeser, angka naik pelan-pelan, dan layar "Misi Selesai" akhirnya terasa seperti perayaan.',
       'Semuanya bisa kamu atur sendiri di Pengaturan Gerakan yang baru: empat tingkat dari Penuh sampai Mati, sembilan saklar terpisah, dan pengatur kecepatan. Kalau HP-mu sudah disetel mengurangi animasi, aplikasi ini ikut mati sejak pertama dibuka — dan kalau kamu nyalakan lagi, pilihanmu yang menang.',
+      'Tombol "Latih N salah" sekarang muncul di lebih dari separuh soal — 539 dari 980, naik dari 305. Kalau kamu salah menjawab, tombol itu membuka kartu yang mengajarkan jawabannya; sebelumnya untuk banyak soal tombolnya tidak pernah muncul sama sekali.',
       'Beberapa perbaikan kecil: kartu di Ulasan SRS tidak lagi bisa tersangkut sampai tidak bisa dinilai maupun dilewati, layar "Misi Selesai" sekarang terlihat juga oleh yang mematikan animasi di HP-nya (sebelumnya benar-benar tidak muncul), dan tombol jejak navigasi di atas layar sekarang cukup besar untuk disentuh.',
     ],
   },
