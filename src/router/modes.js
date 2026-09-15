@@ -1,6 +1,36 @@
 // ─── router/modes.js ─────────────────────────────────────────────────────────
-// Single registry for all modes: lazy imports, nav sections, metadata.
+// The registry for all modes: lazy imports, nav sections, metadata, and the
+// dashboard's quick-tile list.
 // (Doboku/Kenchiku modes removed — scope reduced to Lifeline-only, see CHANGELOG.md)
+//
+// ── Why this is four exports and not one object (item 207) ───────────────────
+//
+// The header used to say "single registry" while the file held four objects
+// that had to be kept in step by hand, and the plan filed that as a refactor.
+// Reading it, three of the four are not four copies of one fact — they are four
+// *different* facts, and each has a shape for a reason:
+//
+//   MODE_COMPONENTS  what to load. The `lazy(() => import('...'))` calls have
+//                    to stay literal where a bundler can see them; that is what
+//                    gives each mode its own chunk.
+//   MODE_SECTIONS    where a mode appears in the menu, AND IN WHAT ORDER. The
+//                    order is the array. Folding section membership into
+//                    MODE_META would replace a self-evident ordering with an
+//                    `order:` integer nobody can keep unique.
+//   MODE_META        what to show. Keyed by mode, no ordering, no imports.
+//   DASHBOARD_QUICK_MODES  which four modes get a home-screen tile.
+//
+// So the parallel-object complaint holds for exactly one of them, and it was a
+// real defect rather than a tidiness one: `DASHBOARD_QUICK_MODES` had **no
+// reader anywhere in the app**, while `Dashboard.jsx` carried its own private
+// copy of the same four keys. This file called itself the authority on a list
+// that only it read. Dashboard imports it now.
+//
+// What keeps the rest honest is `src/tests/removed-mode-safety.test.js`: every
+// mode in a section has a component and metadata, every component has metadata,
+// every metadata entry has a component, no section lists a mode twice, and the
+// quick-tile list names real modes. A key set that must agree with another key
+// set needs a test, not a comment — which is the whole lesson of 7.5.1.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { lazy } from 'react';
@@ -362,4 +392,8 @@ export const MODE_META = {
 };
 
 // ── Dashboard quick tiles (4 most-used, top row) ─────────────────────────
+// Read by `Dashboard.jsx`, which builds each tile's icon and label from
+// MODE_META. `.quickGrid` is `repeat(4, 1fr)`, so a fifth key does not vanish
+// -- it wraps onto a second row as a single quarter-width tile, which is worse,
+// because it looks deliberate. Change the grid and this list together.
 export const DASHBOARD_QUICK_MODES = ['kartu', 'kuis', 'sprint', 'jac'];

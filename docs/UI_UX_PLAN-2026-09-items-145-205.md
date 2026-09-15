@@ -165,11 +165,32 @@ was never derived from it.
 
 ---
 
-### 207 · `router/modes.js` keeps mode metadata in four parallel objects — size M, filed not fixed
+### 207 · `router/modes.js` — **the one real defect fixed; the merge stays filed, with a reason**
 
-Its own header calls itself "the registry and the authority", and it is four objects that must be
-kept in step by hand. Real, and not a bug a user hits today. Deliberately not absorbed into 7.6.0:
-it would have turned a motion release into a router refactor.
+Its own header called itself a "single registry" while holding four objects kept in step by hand.
+Read rather than assumed, three of the four are not four copies of one fact — they are four
+*different* facts, and each has its shape for a reason now written into the file's header:
+`MODE_COMPONENTS` must keep literal `import()` calls where the bundler can see them (that is what
+gives each mode a chunk); `MODE_SECTIONS` carries menu **order**, which an object keyed by mode
+cannot express without an `order:` integer nobody can keep unique; `MODE_META` is display only.
+Merging COMPONENTS and META is still possible and still filed — it touches 35 files for a change
+no user can see, which is why it is not done here.
+
+**The parallel-object complaint held for exactly one of them, and it was a real defect rather than
+a tidiness one.** `DASHBOARD_QUICK_MODES` had **no reader anywhere in the app**, while
+`Dashboard.jsx` carried its own private `QUICK_MODE_KEYS` with the same four keys — under a comment
+saying label and icon come from `MODE_META` "so this never drifts out of sync with the registry",
+which named half the risk and left the other half open. Editing the list in the file that calls
+itself the authority moved nothing on screen. Dashboard imports it now.
+
+The key sets were measured before anything was changed and all agreed (23 components, 23 metadata
+entries, 21 in a section; `tentang` and `gerakan` are deliberately outside one). What was missing
+was the guard, in three directions: a `MODE_META` entry with no component (the likelier half to
+survive a removal, and the half that puts a mode in the menu), a quick-tile key naming a mode that
+no longer exists, and Dashboard growing a second copy of the list again. All three are in
+`removed-mode-safety.test.js` and all three were **verified red** against the mutation each is for.
+
+Remaining, deliberately: the COMPONENTS/META merge above.
 
 ### 208 · `ModeRouter.jsx` is a 364-line god object — size L, filed not fixed
 
