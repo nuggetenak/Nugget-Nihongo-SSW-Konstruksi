@@ -48,10 +48,20 @@ quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
   Full write-up is `CHANGELOG.md` `[7.6.0]`. What a future session most needs to know:
 
   - **There IS a work queue again, and it is deliberate.**
-    `docs/UI_UX_PLAN-2026-09-items-145-205.md`. Items 145–196 are closed by this release; **205–211
-    are open**. It was opened per `docs/AGENT_WORKFLOW.md` §3 because the previous session's
-    "no queue" state meant "what is open" had to be re-derived from the code by hand, and that
-    re-derivation is most of what this release turned out to be.
+    `docs/UI_UX_PLAN-2026-09-items-145-205.md`. Items 145–196 are closed by this release and 207
+    closed after it; **205–206 and 208–215 are open**. It was opened per
+    `docs/AGENT_WORKFLOW.md` §3 because the previous session's "no queue" state meant "what is
+    open" had to be re-derived from the code by hand, and that re-derivation is most of what this
+    release turned out to be.
+
+  - **Four commits landed AFTER the 7.6.0 write-up below was written**, all on the same branch and
+    all in `CHANGELOG.md` `[7.6.0]`: `f773b22` (the quiz-link deriver was sorting by the wrong
+    property — identity before length, 71 more links), `f1235b4` (item 207, plus a `.claude/**`
+    exclude in `vitest.config.js` — agent worktrees live inside the repo, so a root-level
+    `vitest run` was collecting duplicate copies of the whole suite), `9ff8b0b` (the metrics table
+    quoted a test count its own guard refuses to check) and `e76e7ca` (消化器 typed for 消火器 in a
+    question's correct answer). **The version was NOT bumped for these** — 7.6.0 has not shipped
+    yet, PR #20 is still a draft, so they are part of it rather than a release after it.
 
   - **`STORAGE_VERSION` is still 7 and that is correct.** `prefs.motion` is additive and stores
     `penuh`, so every existing install reads as full motion — which is truthful, because that is

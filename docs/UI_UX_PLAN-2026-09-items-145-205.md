@@ -1,6 +1,13 @@
-# UI/UX plan — items 145–205 (opened 2026-09-14, 7.6.0)
+# UI/UX plan — opened 2026-09-14 at item 145 (7.6.0)
 
-**Status: items 145–196 closed by 7.6.0; 207 closed 2026-09-15. Items 205–206 and 208–215 are the live queue.**
+**Status: 145–196 closed by 7.6.0; 197–204 landed with it; 207 closed 2026-09-15.
+Live queue: items 205–206 and 208–215.**
+
+> **The filename records the range this plan OPENED with, not what it holds.** It was already
+> renamed once (`items-145-196` → `items-145-205`) when the queue grew, and it grew again the same
+> day — renaming per session is churn with no end, and it breaks every backticked reference to the
+> file each time. The Status line above is the live range; treat the filename as an id. Only the
+> Status line and the Numbering section at the bottom are authoritative about what is open.
 
 This file exists because `docs/AGENT_WORKFLOW.md` §3 says a session that finds new work files it
 deliberately rather than leaving it in a commit message, and because the numbering never restarts —
