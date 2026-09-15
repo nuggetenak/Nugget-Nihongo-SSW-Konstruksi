@@ -189,7 +189,7 @@
      run to fifty rows and an uncapped stagger would make the last one wait. The
      delay is a CSS value so the reduced-motion block can zero it. */
   animation: slideUp var(--t-enter) var(--ease-smooth) both;
-  animation-delay: calc(min(var(--stagger-i, 0), 8) * 50ms * var(--t-mult));
+  animation-delay: calc(min(var(--stagger-i, 0), 8) * var(--t-stagger));
 }
 
 .reviewJp {

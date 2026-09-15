@@ -341,8 +341,13 @@ export default function Dashboard({
           {/* ── Quick grid ── */}
           <h2 className={s.secLabel}>Mulai belajar</h2>
           <div className={s.quickGrid}>
-            {QUICK_MODES.map((m) => (
-              <button key={m.key} className={s.quickTile} onClick={() => onNavigate(m.key)}>
+            {QUICK_MODES.map((m, i) => (
+              <button
+                key={m.key}
+                className={`${s.quickTile} stagger-item`}
+                style={{ '--stagger-i': i }}
+                onClick={() => onNavigate(m.key)}
+              >
                 <span className={s.quickIcon}>
                   <Icon name={m.ui} size={22} />
                 </span>

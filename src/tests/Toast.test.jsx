@@ -222,6 +222,69 @@ describe('Toast', () => {
     expect(screen.queryByText('Sementara')).toBeNull();
   });
 
+  // ── item 169: the gesture draws itself ─────────────────────────────────────
+  // Swipe-to-dismiss shipped in item 16 and was invisible until it completed:
+  // you dragged across a toast that did not move, and either it vanished or
+  // nothing happened. These pin the three things that made it undiscoverable.
+  describe('swipe follows the finger', () => {
+    const start = (el, x) => fireEvent.touchStart(el, { touches: [{ clientX: x }] });
+    const move = (el, x) => fireEvent.touchMove(el, { touches: [{ clientX: x }] });
+    const end = (el, x) => fireEvent.touchEnd(el, { changedTouches: [{ clientX: x }] });
+
+    it('moves with the drag and fades as it goes', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+
+      expect(toast.style.transform, 'nothing applied before a touch').toBe('');
+      start(toast, 200);
+      move(toast, 160);
+      expect(toast.style.transform).toBe('translateX(-40px)');
+      expect(Number(toast.style.opacity)).toBeLessThan(1);
+      expect(Number(toast.style.opacity)).toBeGreaterThan(0);
+    });
+
+    it('does not follow a rightward drag — that direction dismisses nothing', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+      start(toast, 200);
+      move(toast, 260);
+      expect(toast.style.transform).toBe('');
+    });
+
+    it('springs back when the drag stops short of the threshold', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+      start(toast, 200);
+      move(toast, 170);
+      end(toast, 170); // 30px — under the 60px threshold
+      flushExit();
+      expect(screen.getByText('Geser saya'), 'not dismissed').toBeTruthy();
+      // The return is handed to CSS rather than being another JS animation.
+      expect(toast.style.transition).toContain('--ease-spring');
+    });
+
+    it('past the threshold it leaves the way the finger was going', () => {
+      setup('Geser saya');
+      fireEvent.click(screen.getByRole('button', { name: 'show' }));
+      const toast = screen.getByRole('status');
+      start(toast, 200);
+      move(toast, 110);
+      end(toast, 110); // 90px — past it
+
+      // data-swiped picks the leftward exit. Without it `toastOut` would start
+      // from translateX(0) and jerk the card back to centre before dismissing
+      // it, which is the one thing a follow-the-finger gesture must not do.
+      expect(toast.dataset.swiped).toBe('true');
+      expect(toast.style.transform, 'inline drag cleared so the keyframe owns it').toBe('');
+
+      flushExit();
+      expect(screen.queryByText('Geser saya')).toBeNull();
+    });
+  });
+
   it('a dismissed toast does not fire its timer after unmount (no leaked setTimeout)', () => {
     const clearSpy = vi.spyOn(globalThis, 'clearTimeout');
     setup('Tutup cepat', { duration: 5000 });

@@ -87,7 +87,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
             <details key={key} className={s.sectionGroup} open={openSection === key}>
               <summary className={s.sectionSummary}>{section.title}</summary>
               <ul className={s.modeList}>
-                {section.modes.map((m) => {
+                {section.modes.map((m, i) => {
                   const meta = MODE_META[m];
                   if (!meta) return null;
                   const isActive = mode === m;
@@ -95,7 +95,11 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
                     <li key={m}>
                       <button
                         type="button"
-                        className={s.modeItem}
+                        // Staggered because this list APPEARS: <details> opens
+                        // one section at a time, so the rows arriving in order
+                        // is the answer to "what just happened" (item 166).
+                        className={`${s.modeItem} stagger-item`}
+                        style={{ '--stagger-i': i }}
                         data-active={isActive}
                         onClick={() => goMode(m)}
                         aria-current={isActive ? 'page' : undefined}

@@ -147,6 +147,11 @@ export const T = {
   enter: 260,
   slow: 350,
   count: 1000,
+  // The gap between one staggered row and the next, not a duration a caller
+  // waits on. It lives here because motion-scale.test.js compares this object
+  // against the --t-* declarations one for one, and a rung the CSS declares
+  // that JS does not know about is the drift the comparison exists to prevent.
+  stagger: 40,
 };
 
 /**

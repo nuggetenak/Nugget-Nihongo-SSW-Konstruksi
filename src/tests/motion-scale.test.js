@@ -130,6 +130,53 @@ describe('motion scale', () => {
     }
   });
 
+  it('no selector declares transition twice in one stylesheet', () => {
+    // NOT a style rule. `transition` is a shorthand, so a second declaration on
+    // the same selector REPLACES the first rather than adding to it -- and the
+    // natural way to add a press animation is to append a new rule at the bottom
+    // of the file, which is what item 164's first pass did.
+    //
+    // It silently deleted SideNav's background and colour transitions, killed
+    // .azBtn's `all` and .termRow's background fade in GlossaryMode, and moved
+    // all four selectors below the `prefers-reduced-motion` block that was
+    // meant to switch them off -- so a reader who asked for less motion got the
+    // press animation anyway. Four selectors, two files, and from inside either
+    // rule it looks completely right. Only a sweep can see it, which is the same
+    // argument the header of this file already makes.
+    for (const f of moduleCss) {
+      const css = readFileSync(f, 'utf-8').replace(/\/\*[\s\S]*?\*\//g, (b) =>
+        b.replace(/[^\n]/g, ' ')
+      );
+      const seen = new Map();
+      let depth = 0;
+      let rule = null;
+      css.split('\n').forEach((line, i) => {
+        const open = line.indexOf('{');
+        if (open >= 0 && depth === 0) {
+          rule = { sel: line.slice(0, open).trim().replace(/\s+/g, ' '), line: i + 1, has: false };
+        }
+        depth += (line.match(/\{/g) ?? []).length - (line.match(/\}/g) ?? []).length;
+        if (rule && /(^|;|\s)transition\s*:/.test(line)) rule.has = true;
+        if (depth === 0 && rule && line.includes('}')) {
+          // Selectors inside @media are a deliberate override of the base rule,
+          // not a second declaration competing with it.
+          if (rule.has && rule.sel && !rule.sel.startsWith('@')) {
+            if (!seen.has(rule.sel)) seen.set(rule.sel, []);
+            seen.get(rule.sel).push(rule.line);
+          }
+          rule = null;
+        }
+      });
+      for (const [sel, lines] of seen) {
+        expect(
+          lines.length,
+          `${rel(f)} declares transition for ${sel} at lines ${lines.join(', ')} — ` +
+            'the later one replaces the earlier one; merge the terms into one list'
+        ).toBe(1);
+      }
+    }
+  });
+
   it('no stylesheet writes a raw cubic-bezier', () => {
     // Five of them existed against a scale that defines two, and three were
     // near-duplicates of --ease-spring that nobody could have told apart.

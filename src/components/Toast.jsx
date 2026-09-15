@@ -14,6 +14,7 @@
 import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
 import { useExitTransition } from '../hooks/useExitTransition.js';
 import { isTypingTarget } from '../utils/keyboard.js';
+import { motionAllows } from '../utils/motion.js';
 import S from './Toast.module.css';
 
 const ToastCtx = createContext(null);
@@ -23,6 +24,11 @@ const ToastCtx = createContext(null);
 // didn't fit — a milestone toast and a quota error landing together used to
 // mean one of them just never appeared.
 const MAX_VISIBLE = 2;
+
+// How far left a toast has to travel to count as dismissed. One constant, so the
+// threshold the gesture is measured against is the same number the drag fades
+// against -- they were two literals when only one of them existed.
+const DISMISS_PX = 60;
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
@@ -87,6 +93,7 @@ export function ToastProvider({ children }) {
 
 function ToastItem({ toast: t, onDismiss, isFront }) {
   const touchStart = useRef(null);
+  const nodeRef = useRef(null);
   const [paused, setPaused] = useState(false);
   // `toastIn` existed and nothing played it in reverse: a toast arrived with
   // weight and then was simply gone mid-stack, which also made the stack jump
@@ -132,14 +139,87 @@ function ToastItem({ toast: t, onDismiss, isFront }) {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isFront, requestClose]);
 
+  // ── Swipe-to-dismiss, which now follows the finger (item 169) ──────────────
+  // The gesture has been here since item 16 and was INVISIBLE until it
+  // completed: you dragged 60px across a toast that did not move, and either it
+  // vanished or nothing happened. A drag with no feedback is a drag people do
+  // not discover and do not trust -- and when it fails they cannot tell whether
+  // they missed the threshold or the gesture does not exist.
+  //
+  // Written straight to the node rather than through state on purpose. A
+  // touchmove fires at display rate; re-rendering the provider's whole toast
+  // stack sixty times a second to move one element by a few pixels is the shape
+  // of jank this release exists to remove, and `transform`/`opacity` are
+  // compositor-only so the browser never needs React to see them at all. This is
+  // also the pattern item 155's flashcard drag needs, tried out somewhere small
+  // first.
+  const dragged = useRef(false);
+
+  const paint = (dx) => {
+    const el = nodeRef.current;
+    if (!el) return;
+    el.style.transition = 'none';
+    el.style.transform = `translateX(${dx}px)`;
+    // Fades to about a third at the threshold, so the toast looks committed
+    // before you let go rather than only after.
+    el.style.opacity = String(Math.max(0.15, 1 + dx / DISMISS_PX / 1.5));
+  };
+
   const onTouchStart = (e) => {
     touchStart.current = e.touches[0].clientX;
+    dragged.current = false;
   };
+
+  const onTouchMove = (e) => {
+    if (touchStart.current === null) return;
+    const dx = e.touches[0].clientX - touchStart.current;
+    // Leftward only: the toast sits at the left of its stack and dragging it
+    // right would promise a dismissal that direction does not perform.
+    if (dx > 0 && !dragged.current) return;
+    // Gated on `press`, the same feature the pressed states use -- this is
+    // touch response, not decoration. Off, the gesture still works; it just
+    // does not draw itself, which is exactly what the toggle promises.
+    if (!motionAllows('press')) return;
+    dragged.current = true;
+    paint(Math.min(0, dx));
+  };
+
   const onTouchEnd = (e) => {
     if (touchStart.current === null) return;
     const delta = touchStart.current - e.changedTouches[0].clientX;
-    if (delta > 60) requestClose(); // swipe left 60px → dismiss
     touchStart.current = null;
+    if (delta > DISMISS_PX) {
+      // Leave along the drag rather than snapping home first. `toastOut` starts
+      // at translateY(0) scale(1), so playing it over a card the finger left at
+      // -80px would jerk it back to centre and THEN dismiss it -- the one thing
+      // a follow-the-finger gesture must not do. `data-swiped` picks the
+      // keyframe that carries on leftwards instead. Written to the node because
+      // this element is on its way out; re-rendering to set an attribute nobody
+      // reads back is work for nothing.
+      const el = nodeRef.current;
+      if (el && dragged.current) {
+        el.dataset.swiped = 'true';
+        el.style.transition = '';
+        el.style.transform = '';
+        el.style.opacity = '';
+      }
+      requestClose(); // swipe left past the threshold → dismiss
+      return;
+    }
+    // Under the threshold: spring back, and let CSS own the return so the
+    // snap-back reads as the same material as everything else that moves here.
+    if (dragged.current) {
+      const el = nodeRef.current;
+      if (el)
+        el.style.transition = `transform var(--t-fast) var(--ease-spring), opacity var(--t-fast)`;
+      requestAnimationFrame(() => {
+        const node = nodeRef.current;
+        if (!node) return;
+        node.style.transform = '';
+        node.style.opacity = '';
+      });
+      dragged.current = false;
+    }
   };
 
   // role="alert" carries an implicit aria-live="assertive" — the correct
@@ -152,11 +232,13 @@ function ToastItem({ toast: t, onDismiss, isFront }) {
 
   return (
     <div
+      ref={nodeRef}
       className={S.toast}
       data-closing={closing}
       data-type={t.type ?? 'default'}
       role={isAlert ? 'alert' : 'status'}
       onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

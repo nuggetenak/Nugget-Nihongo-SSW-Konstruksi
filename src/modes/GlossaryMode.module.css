@@ -94,7 +94,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--t-base);
+  transition:
+    all var(--t-base),
+    transform var(--t-instant) var(--ease-smooth);
 }
 
 /* ── Content area ── */
@@ -134,7 +136,9 @@
   padding: var(--space-10) var(--space-16);
   cursor: pointer;
   border-bottom: 1px solid var(--ssw-border);
-  transition: background var(--t-fast);
+  transition:
+    background var(--t-fast),
+    transform var(--t-instant) var(--ease-smooth);
 }
 
 .termMain {
@@ -274,21 +278,19 @@
    phone the gap between the two is exactly where someone taps a second time.
    Thirteen of the app's twenty-eight stylesheets had clickable elements and no
    press state at all; this is one of them. Compositor-only, so it costs nothing.
-   Honours Gerakan's "Respons sentuh" toggle. */
-.azBtn {
-  transition: transform var(--t-instant) var(--ease-smooth);
-}
+   Honours Gerakan's "Respons sentuh" toggle.
 
+   The `transform` term is spliced into each rule's existing transition list
+   above rather than declared again here -- a second `transition:` on the same
+   selector replaces the first rather than adding to it, which is how item 164's
+   first pass silently deleted .azBtn's `all` transition and .termRow's
+   background fade. See the longer note in SideNav.module.css. */
 .azBtn:active {
   transform: scale(0.9);
 }
 
 :root[data-motion-no-press] .azBtn:active {
   transform: none;
-}
-
-.termRow {
-  transition: transform var(--t-instant) var(--ease-smooth);
 }
 
 .termRow:active {

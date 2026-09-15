@@ -124,3 +124,10 @@
 .toast[data-closing='true'] {
   animation: toastOut var(--t-fast) var(--ease-exit) forwards;
 }
+
+/* Dismissed by swipe (item 169): carry on the way the finger was going. The
+   more specific selector wins over the rule above, so one attribute chooses
+   which exit a toast gets. */
+.toast[data-closing='true'][data-swiped='true'] {
+  animation: toastSwipeOut var(--t-fast) var(--ease-exit) forwards;
+}

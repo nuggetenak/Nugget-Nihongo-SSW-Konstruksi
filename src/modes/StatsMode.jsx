@@ -221,7 +221,7 @@ export default function StatsMode({
           }}
         >
           {streak > 0 && (
-            <div className={ST.miniCard}>
+            <div className={`${ST.miniCard} stagger-item`} style={{ '--stagger-i': 0 }}>
               <div className={ST.miniEmoji}>🔥</div>
               <div className={ST.miniValue} style={{ color: T.gold }}>
                 {streak}
@@ -231,21 +231,21 @@ export default function StatsMode({
           )}
           {mature !== null && (
             <>
-              <div className={ST.miniCard}>
+              <div className={`${ST.miniCard} stagger-item`} style={{ '--stagger-i': 1 }}>
                 <div className={ST.miniEmoji}>🌟</div>
                 <div className={ST.miniValue} style={{ color: T.correct }}>
                   {mature}
                 </div>
                 <div className={ST.miniLabel}>Matang</div>
               </div>
-              <div className={ST.miniCard}>
+              <div className={`${ST.miniCard} stagger-item`} style={{ '--stagger-i': 2 }}>
                 <div className={ST.miniEmoji}>📗</div>
                 <div className={ST.miniValue} style={{ color: T.gold }}>
                   {young}
                 </div>
                 <div className={ST.miniLabel}>Berkemb.</div>
               </div>
-              <div className={ST.miniCard}>
+              <div className={`${ST.miniCard} stagger-item`} style={{ '--stagger-i': 3 }}>
                 <div className={ST.miniEmoji}>📘</div>
                 <div className={ST.miniValue} style={{ color: '#60a5fa' }}>
                   {newCards}
@@ -420,8 +420,12 @@ export default function StatsMode({
         );
       })()}
       <div className={`${S.list} ${ST.catList}`}>
-        {catStats.map((c) => (
-          <div key={c.key} className={ST.catItem}>
+        {catStats.map((c, i) => (
+          // Stats is a screen whose entire content is lists of numbers, and it
+          // was one of four stylesheets in the app with no motion of any kind
+          // (item 168). Rows arriving in order is what makes it read as a
+          // report rather than as a wall.
+          <div key={c.key} className={`${ST.catItem} stagger-item`} style={{ '--stagger-i': i }}>
             <span className={ST.catEmoji}>{c.emoji}</span>
             <div className={ST.catBody}>
               <div className={`${S.rowSpread} ${ST.catRow}`}>

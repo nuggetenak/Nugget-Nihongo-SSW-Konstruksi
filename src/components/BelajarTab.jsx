@@ -95,13 +95,18 @@ function FeaturedCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
 }
 
 // Small tile — secondary modes in 2-col grid
-function CompactCard({ modeKey, sectionKey, onSelect, badge = 0 }) {
+function CompactCard({ modeKey, sectionKey, onSelect, badge = 0, index = 0 }) {
   const m = MODE_META[modeKey];
   const sm = SECTION_META[sectionKey] || SECTION_META.alat;
   if (!m) return null;
   return (
     <button
-      className={s.compactCard}
+      // `stagger-item` is the global utility (item 166); --stagger-i is the only
+      // thing a caller supplies. An inline `animationDelay` would be a computed
+      // value the reduced-motion block cannot zero, which is the exact bug item
+      // 150 fixed in ResultScreen.
+      className={`${s.compactCard} stagger-item`}
+      style={{ '--stagger-i': index }}
       onClick={() => onSelect(modeKey)}
       data-badged={badge > 0}
       aria-label={`${m.label}: ${m.desc}`}
@@ -165,13 +170,14 @@ export default function BelajarTab({ onSelect, badges = {} }) {
             {hasSecondary && (
               <div className={s.collapsible} data-expanded={expanded}>
                 <div className={s.compactGrid}>
-                  {rest.map((modeKey) => (
+                  {rest.map((modeKey, i) => (
                     <CompactCard
                       key={modeKey}
                       modeKey={modeKey}
                       sectionKey={key}
                       onSelect={onSelect}
                       badge={badges[modeKey] ?? 0}
+                      index={i}
                     />
                   ))}
                 </div>
