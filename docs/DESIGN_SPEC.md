@@ -452,6 +452,22 @@ skewed page transition all run on a cheap Android phone. Every item below obeys 
 effect could not be built inside it (a literal moving hazard stripe inside a View Transition needs
 `clip-path` or a third layer) the effect was changed rather than the floor.
 
+**Two exceptions remain, both deliberate, both checked in a browser rather than assumed.** Sweeping
+every element on every screen for a transition on a layout property found exactly three; one was
+fixed (`index.html`'s skip link slid on `top` and slides on `transform` now) and these two stay:
+
+- **`BelajarTab`'s accordion transitions `grid-template-rows` (`0fr` → `1fr`).** That is item 167's
+  fix, and the property is the whole point of it: it is the only way to animate to a height the
+  content decides. What it replaced was `max-height: 0 → 2000px`, which eased against 2000px of
+  travel for ~300px of content — so it opened fast, stalled, and closed with a visible hang. A
+  layout transition that animates the real height beats a compositor one that animates a lie.
+- **`Dashboard`'s two-segment progress meter transitions `width`.** The segments are flex siblings
+  whose widths sum to 100%; `transform: scaleX` does not reflow a sibling, so converting it would
+  make the two overlap. It runs once per dashboard mount, not in a loop.
+
+An exception with a reason written down is a floor. An exception without one is a floor that has
+stopped being enforced, which is what §4's timing policy was before this release.
+
 **What each rung means.**
 
 | Rung | For |
