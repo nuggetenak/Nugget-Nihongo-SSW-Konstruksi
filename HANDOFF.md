@@ -38,11 +38,11 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of 2026-09-15.** Verify before trusting past this point — this line doesn't update itself.
+**As of 2026-09-16.** Verify before trusting past this point — this line doesn't update itself.
 At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION` **7**,
 `npm run validate` clean (**144 test files**; the test count moves every commit, so it is not
-quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
-`claude/ui-animations-open-items-uekmcq` as PR #20, draft.
+quoted here — run it). **7.6.0 is merged into `main`** (PR #20, merge commit `52cd47e`), so
+`main` is the release and there is no open PR. The next session starts from `main`.
 
 - **2026-09-15: 7.6.0 — the write path, a motion language, and the guards that were not guarding.**
   Full write-up is `CHANGELOG.md` `[7.6.0]`. What a future session most needs to know:
@@ -54,14 +54,14 @@ quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
     open" had to be re-derived from the code by hand, and that re-derivation is most of what this
     release turned out to be.
 
-  - **Four commits landed AFTER the 7.6.0 write-up below was written**, all on the same branch and
+  - **Four commits landed AFTER the 7.6.0 write-up below was written**, all in the same PR and
     all in `CHANGELOG.md` `[7.6.0]`: `f773b22` (the quiz-link deriver was sorting by the wrong
     property — identity before length, 71 more links), `f1235b4` (item 207, plus a `.claude/**`
     exclude in `vitest.config.js` — agent worktrees live inside the repo, so a root-level
     `vitest run` was collecting duplicate copies of the whole suite), `9ff8b0b` (the metrics table
     quoted a test count its own guard refuses to check) and `e76e7ca` (消化器 typed for 消火器 in a
-    question's correct answer). **The version was NOT bumped for these** — 7.6.0 has not shipped
-    yet, PR #20 is still a draft, so they are part of it rather than a release after it.
+    question's correct answer). **The version was NOT bumped for these** — they landed inside PR #20
+    before it merged, so they are part of 7.6.0 rather than a release on top of it.
 
   - **`STORAGE_VERSION` is still 7 and that is correct.** `prefs.motion` is additive and stores
     `penuh`, so every existing install reads as full motion — which is truthful, because that is
