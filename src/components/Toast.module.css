@@ -29,7 +29,7 @@
     0 8px 32px rgba(0, 0, 0, 0.22),
     0 2px 8px rgba(0, 0, 0, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  animation: toastIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: toastIn var(--t-enter) var(--ease-spring);
   pointer-events: auto;
   border: 1px solid rgba(255, 255, 255, 0.08);
   min-height: 48px;
@@ -87,4 +87,47 @@
 .toast[data-type='warning'] {
   background: #451a03;
   border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* ── Press feedback (item 164) ───────────────────────────────────────────────
+   On a touch device there is no hover, so the pressed state is the ONLY
+   confirmation that a tap registered before the screen changes — and on a slow
+   phone the gap between the two is exactly where someone taps a second time.
+   Thirteen of the app's twenty-eight stylesheets had clickable elements and no
+   press state at all; this is one of them. Compositor-only, so it costs nothing.
+   Honours Gerakan's "Respons sentuh" toggle. */
+.btnUndo {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.btnUndo:active {
+  transform: scale(0.94);
+}
+
+:root[data-motion-no-press] .btnUndo:active {
+  transform: none;
+}
+
+.btnClose {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.btnClose:active {
+  transform: scale(0.9);
+}
+
+:root[data-motion-no-press] .btnClose:active {
+  transform: none;
+}
+
+/* ── Exit (item 148) ─────────────────────────────────────────────────────── */
+.toast[data-closing='true'] {
+  animation: toastOut var(--t-fast) var(--ease-exit) forwards;
+}
+
+/* Dismissed by swipe (item 169): carry on the way the finger was going. The
+   more specific selector wins over the rule above, so one attribute chooses
+   which exit a toast gets. */
+.toast[data-closing='true'][data-swiped='true'] {
+  animation: toastSwipeOut var(--t-fast) var(--ease-exit) forwards;
 }

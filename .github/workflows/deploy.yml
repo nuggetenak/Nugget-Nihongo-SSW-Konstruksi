@@ -25,6 +25,12 @@ concurrency:
 # cost is ~2 minutes of runner time per merge; the cost of getting the chain wrong is a
 # deploy that silently stops happening. Noted 2026-09-13 (Genspark §6.4) so the next
 # person weighing it has the reasoning rather than only the observation.
+#
+# Re-reported by two further external audits on 2026-09-14 (and by a third as
+# "gate parity protects ci.yml, not deploy.yml", which is the same fact). Still
+# deliberate, for the reason above. It is recorded here a second time because an
+# audit that only greps the workflow files will keep finding it, and the answer
+# should be readable from the file rather than from the changelog.
 jobs:
   validate:
     runs-on: ubuntu-latest

@@ -30,7 +30,9 @@ const SCALE = [
   'fs-title',
   'fs-jp-back',
   'fs-page-title',
-  'fs-jp-primary',
+  // --fs-jp-primary (30-35) sat here until item 171 deleted it as unread. Its
+  // absence leaves the scale monotonic and is now held by audit-css-vars.mjs
+  // from the other side: a token declared and never referenced fails the gate.
   'fs-hero',
 ];
 

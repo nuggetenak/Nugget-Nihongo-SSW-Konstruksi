@@ -1,6 +1,6 @@
 .container {
   padding-bottom: var(--space-40);
-  animation: fadeIn 0.25s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }
 
 /* ── Page title ── */
@@ -161,7 +161,7 @@
   align-items: center;
   padding: var(--space-14) 0;
   border-bottom: 1px solid var(--ssw-border);
-  transition: opacity 0.15s;
+  transition: opacity var(--t-fast);
   /* Row[onClick] renders as <button>; these reset UA button chrome so it's
      visually identical to the <div> it used to always be. Harmless on the
      non-clickable <div> variant, which doesn't get these defaults anyway. */
@@ -291,8 +291,8 @@
   margin: var(--space-12) 0 var(--space-4);
   box-shadow: 0 2px 12px rgba(245, 158, 11, 0.1);
   transition:
-    opacity 0.15s,
-    transform 0.15s;
+    opacity var(--t-fast),
+    transform var(--t-fast);
   position: relative;
   overflow: hidden;
 }

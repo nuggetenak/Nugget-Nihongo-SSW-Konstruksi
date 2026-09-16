@@ -3,9 +3,12 @@
 //
 // 1. `App.jsx`'s `if (mode)` branch rendered `<ModeRouter />` bare, while the
 //    three tab branches each got one. ModeRouter has an internal boundary, but
-//    it wraps only ModeHeader + Suspense -- everything ModeRouter computes
-//    before that return (its hooks, filteredCards, the whole modeProps map) ran
-//    outside it. A throw there blanked the screen mid-study.
+//    it wraps only its Suspense -- everything ModeRouter computes before that
+//    return (its hooks, filteredCards, the whole modeProps map) ran outside it.
+//    A throw there blanked the screen mid-study. (It wrapped ModeHeader too
+//    until item 153 moved the header up into App, where it is eager; that
+//    leaves the header OUTSIDE this boundary, which is the better arrangement
+//    -- a mode that throws keeps its title and its way back.)
 //
 // 2. `main.jsx` mounted five nested providers with no boundary anywhere, so a
 //    throw in any provider's own render had nothing above it at all.

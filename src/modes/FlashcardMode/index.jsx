@@ -520,6 +520,12 @@ export default function FlashcardMode({
           showHint={showHint}
           borderColor={borderColor}
           swipeDelta={swipeDelta}
+          dragging={touchStart !== null}
+          // Two backs behind the top card while there are at least two more to
+          // come, one while there is one, none on the last (item 155). The
+          // stack is a fact about the session, not decoration -- and the last
+          // card standing alone is the frame where that fact matters.
+          deckDepth={Math.min(2, Math.max(0, displayCards.length - 1 - safeIdx))}
           onCatFilter={(key) => applyCats(new Set([key]))}
           onSpeak={canPlayAudio ? speakCard : null}
           onTouchStart={(e) => {
@@ -545,6 +551,16 @@ export default function FlashcardMode({
             // previous card stopped working the moment you flipped one over —
             // and a swipe meant to navigate silently scheduled an SRS review
             // instead. Rating is the four buttons' job.
+            //
+            // item 155 proposed a "throw-to-rate" here -- past the threshold
+            // the card leaves along the drag with a green or amber tint, so the
+            // rating is legible before you release. It is NOT implemented, and
+            // deliberately: it is the removed behaviour above, wearing better
+            // clothes. A gesture that both navigates and rates has to guess
+            // which one you meant, and the guess it made cost people reviews
+            // they never asked for. The drag tracking and the deck depth from
+            // that item are in; the rating half stays out, and the reason is
+            // written here rather than in a plan nobody reads twice.
             if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
               go(dx > 0 ? -1 : 1);
               return;

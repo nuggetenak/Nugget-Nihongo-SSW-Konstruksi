@@ -19,6 +19,7 @@ import { useApp } from '../contexts/AppContext.jsx';
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js';
 import ProgressBar from '../components/ProgressBar.jsx';
 import ResultScreen from '../components/ResultScreen.jsx';
+import OptionButton from '../components/OptionButton.jsx';
 import { QUIZ_COUNTS, QUIZ_COUNT_ALL, resolveQuizCount } from '../utils/constants.js';
 import S from './modes.module.css';
 
@@ -164,8 +165,8 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
     (optIdx) => {
       if (selected !== null) return;
       setSelected(optIdx);
+      // Haptic moved into OptionButton (item 174).
       const isCorrect = optIdx === currentQ.correctIdx;
-      haptic[isCorrect ? 'correct' : 'wrong']();
       setResults((r) => [
         ...r,
         {
@@ -267,7 +268,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
                   border: `2px solid ${countPref === n ? 'var(--ssw-amber)' : 'var(--ssw-border)'}`,
                   background: countPref === n ? 'rgba(245,158,11,0.12)' : 'var(--ssw-surface)',
                   color: countPref === n ? 'var(--ssw-amber)' : 'var(--ssw-textMuted)',
-                  transition: 'all 0.15s',
+                  transition: 'all var(--t-fast)',
                 }}
               >
                 {n === QUIZ_COUNT_ALL ? 'Semua' : n}
@@ -475,7 +476,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             alignItems: 'center',
             justifyContent: 'center',
             boxShadow: isAnswered ? 'none' : '0 4px 16px rgba(245,158,11,0.35)',
-            transition: 'all 0.2s',
+            transition: 'all var(--t-base)',
           }}
         >
           🔊
@@ -487,7 +488,7 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
             fontSize: 'var(--fs-body)',
             color: 'var(--ssw-textMuted)',
             opacity: isAnswered ? 0 : 1,
-            transition: 'opacity 0.2s',
+            transition: 'opacity var(--t-base)',
           }}
         >
           Tekan untuk mendengar kata Jepang
@@ -502,49 +503,21 @@ export default function DengarMode({ cards, allCards, onExit, onSessionEnd, onRe
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-10)' }}>
-        {currentQ.opts.map((opt, i) => {
-          let bg = 'var(--ssw-surface)';
-          let border = 'var(--ssw-border)';
-          let color = 'var(--ssw-text)';
-          let anim = 'none';
-          if (isAnswered) {
-            if (opt.isCorrect) {
-              bg = 'var(--ssw-correctBg)';
-              border = 'var(--ssw-correctBorder)';
-              color = 'var(--ssw-correct)';
-              anim = 'correctFlash 0.5s ease';
-            } else if (i === selected && !opt.isCorrect) {
-              bg = 'var(--ssw-wrongBg)';
-              border = 'var(--ssw-wrongBorder)';
-              color = 'var(--ssw-wrong)';
-              anim = 'wrongShake 0.45s ease';
-            }
-          }
-          return (
-            <button
-              key={i}
-              onClick={() => handleSelect(i)}
-              disabled={isAnswered}
-              style={{
-                width: '100%',
-                padding: 'var(--space-14) var(--space-16)',
-                textAlign: 'left',
-                borderRadius: 12,
-                background: bg,
-                border: `2px solid ${border}`,
-                color,
-                fontFamily: 'inherit',
-                fontSize: 'var(--fs-subtitle)',
-                cursor: isAnswered ? 'default' : 'pointer',
-                transition: 'all 0.15s',
-                fontWeight: 500,
-                animation: anim,
-              }}
-            >
-              {opt.text}
-            </button>
-          );
-        })}
+        {currentQ.opts.map((opt, i) => (
+          <OptionButton
+            key={i}
+            idx={i}
+            text={opt.text}
+            selected={selected}
+            isCorrect={opt.isCorrect}
+            onSelect={handleSelect}
+            // You read these WHILE the audio plays, and not looking at the
+            // screen is the point of the exercise -- so they stay a rung up,
+            // which is the one thing this mode's hand-rolled button got right
+            // that the others did not have to.
+            variant="lg"
+          />
+        ))}
       </div>
     </div>
   );

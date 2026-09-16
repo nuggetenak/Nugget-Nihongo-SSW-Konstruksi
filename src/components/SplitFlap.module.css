@@ -1,0 +1,52 @@
+/* ─── SplitFlap.module.css ────────────────────────────────────────────────── */
+
+.board {
+  display: inline-flex;
+  /* Tabular figures, so a 3 does not sit at a different width from a 1 and the
+     board stops jittering as the count falls. */
+  font-variant-numeric: tabular-nums;
+  /* The hinge needs depth to read as a hinge rather than a squash. Small,
+     because the digits are one line of text and not a card. */
+  perspective: 300px;
+}
+
+.flap {
+  display: inline-block;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+
+/* Only the digits that opted in animate. `data-animated` is written by the
+   component from motionAllows('count'), because this is the same JS-driven
+   decision the counting numbers make and it belongs to the same toggle -- a
+   reader who switched off "Animasi angka" should not find the countdown
+   flipping anyway. */
+.flap[data-animated='true'] {
+  animation: flapIn var(--t-base) var(--ease-spring) both;
+  animation-delay: calc(var(--flap-i, 0) * var(--t-stagger));
+}
+
+@keyframes flapIn {
+  from {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  60% {
+    transform: rotateX(12deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+/* Ends at rotateX(0) and opacity 1 -- the resting state -- so zeroing the
+   duration genuinely disables it rather than jumping it somewhere. The explicit
+   form is still written, per DESIGN_SPEC §4, so it stays correct if the
+   keyframe is ever edited. */
+@media (prefers-reduced-motion: reduce) {
+  .flap[data-animated='true'] {
+    animation: none;
+  }
+}

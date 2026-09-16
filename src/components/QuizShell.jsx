@@ -1,7 +1,7 @@
 // ─── QuizShell.jsx ───────────────────────────────────────────────────────────
 // Fires anxiety-reduction toast when maxWrongStreak >= 5 (Young 1991).
 // Note: timer color (red when <60s) kept inline — conditional/prop-driven.
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { T } from '../styles/theme.js';
 import { useQuizKeyboard } from '../hooks/useQuizKeyboard.js';
 import EmptyState from './EmptyState.jsx';
@@ -62,6 +62,18 @@ export default function QuizShell({
     saveQuizSnapshot(persistKey, { qIdx, selected, results });
   }, [persistKey, phase, qIdx, selected, results]);
 
+  // `questions` is read inside the timeout effect below to fill in the blanks
+  // when the clock runs out, but it must not be a DEPENDENCY of it (item 192):
+  // the effect re-creates a pending one-second timeout every time its deps
+  // change, so a caller that rebuilt the array each render would jitter the
+  // countdown's cadence. Both callers memoise today, which is why this has never
+  // been visible -- a ref makes the effect correct regardless of who calls it,
+  // rather than correct because of who happens to call it.
+  const questionsRef = useRef(questions);
+  useEffect(() => {
+    questionsRef.current = questions;
+  }, [questions]);
+
   useEffect(() => {
     if (timer <= 0 || phase !== 'playing') return;
     if (timeLeft <= 0) {
@@ -76,7 +88,7 @@ export default function QuizShell({
       // people use to decide whether they are ready to sit the real thing.
       setResults((r) => [
         ...r,
-        ...questions.slice(r.length).map((q) => ({
+        ...questionsRef.current.slice(r.length).map((q) => ({
           isCorrect: false,
           unanswered: true,
           _cardId: q._cardId ?? null,
@@ -91,7 +103,7 @@ export default function QuizShell({
     }
     const t = setTimeout(() => setTimeLeft((s) => s - 1), 1000);
     return () => clearTimeout(t);
-  }, [timeLeft, timer, phase, questions]);
+  }, [timeLeft, timer, phase]);
 
   const handleSelect = useCallback(
     (idx) => {
@@ -283,7 +295,23 @@ export default function QuizShell({
             {correct}/{qIdx + (selected !== null ? 1 : 0)}
           </span>
           {streak > 1 && (
-            <span className={S.streak} aria-label={`Streak ${streak}`}>
+            // item 162. The streak surface already existed -- the plan had it
+            // filed as missing, and it was not; what was missing is that it
+            // never REACTED. It appeared at two, counted up, and vanished when
+            // the run broke, all at exactly the same size and weight, so the
+            // one motivational signal in a drill read as a static label.
+            //
+            // `key={streak}` is what makes it move: remounting on every
+            // increment replays the pop, which is the difference between a
+            // number changing and a run being acknowledged. The tier drives how
+            // much it grows, because a run of twelve should not look like a run
+            // of two.
+            <span
+              key={streak}
+              className={S.streak}
+              data-tier={streak >= 10 ? 'hot' : streak >= 5 ? 'warm' : 'on'}
+              aria-label={`Streak ${streak}`}
+            >
               🔥{streak}
             </span>
           )}

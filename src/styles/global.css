@@ -49,7 +49,13 @@
   --fs-title: clamp(1.1875rem, 1.119rem + 0.2809vw, 1.3438rem); /* 19 21.5 */
   --fs-jp-back: clamp(1.375rem, 1.2928rem + 0.3371vw, 1.5625rem); /* 22 25 */
   --fs-page-title: clamp(1.625rem, 1.4881rem + 0.5618vw, 1.9375rem); /* 26 31 */
-  --fs-jp-primary: clamp(1.875rem, 1.7381rem + 0.5618vw, 2.1875rem); /* 30 35 */
+  /* --fs-jp-primary (30-35) was here and nothing ever read it (item 171).
+     It looked like the token that sizes a flashcard's Japanese, and did
+     not: JpDisplay is the primary JP rendering path in this app and takes
+     its size from jpFontSize()'s length ladder as an inline px value.
+     Wiring the token in would have given that one size two owners, which
+     jp-helpers.js's own header warns against in as many words -- so it is
+     deleted rather than adopted. --fs-jp-back stays; six sites read it. */
   --fs-hero: clamp(2.25rem, 2.0035rem + 1.0112vw, 2.8125rem); /* 36 45 */
 
   /* Line heights. --lh-snug is new (2026-09-04): 1.2 is right for a single
@@ -64,9 +70,19 @@
      labels want positive. Both were being written as one-off letter-spacing
      values in a dozen places. */
   --ls-tight: -0.02em;
-  --ls-normal: 0;
   --ls-wide: 0.04em;
   --ls-label: 0.08em;
+  /* --ls-normal: 0 was here (item 171). A token whose value is the property's
+     own default is a token nothing can usefully reference, and nothing did.
+     Deleted rather than allowlisted, on the same argument as --fs-jp-primary.
+
+     The other three had ONE reader between them and six declarations elsewhere
+     spelling their exact values out by hand -- the letter-spacing version of
+     the "one keyframe, six speeds" drift item 146 just finished unwinding.
+     Those six are pointed here now. Sixty-one raw letter-spacing values remain
+     across twenty-nine distinct numbers; converting the rest is filed as item
+     205, because most of them do NOT land on a rung and snapping them without
+     looking is how a scale gets worse. */
 
   /* Font weights */
   --fw-regular: 400;
@@ -204,12 +220,47 @@
   --z-modal: 400;
   --z-celebration: 500;
 
-  /* ── Transition presets ── */
+  /* ── Transition presets ─────────────────────────────────────────────────
+     Every duration in the app resolves through --t-mult, so one property
+     scales the whole motion system. That is what makes the Gerakan speed
+     control a token change rather than a refactor, and it is also the reason
+     these are calc() rather than literals.
+
+     DESIGN_SPEC §4 states which rung means what: --t-instant for press and
+     release, --t-fast for a state change, --t-base for an entrance, --t-enter
+     for an overlay, --t-slow for a flip or a celebration, --t-count for a
+     number climbing.
+
+     The measurement that made this necessary: ONE keyframe, fadeIn, was played
+     at six different durations across the app -- 0.15s, 0.2s, 0.25s, 0.3s,
+     0.35s and 0.4s -- depending which file you were in. scaleIn ran at four,
+     popIn at three. The scale defined two easing curves and the stylesheets
+     contained five raw cubic-beziers. So the app did not read as unanimated; it
+     read as unsettled, the same gesture arriving at a different speed in each
+     mode. src/tests/motion-scale.test.js is what keeps that from coming back. */
+  --t-mult: 1;
+  --t-instant: calc(80ms * var(--t-mult));
+  --t-fast: calc(120ms * var(--t-mult));
+  --t-base: calc(200ms * var(--t-mult));
+  --t-enter: calc(260ms * var(--t-mult));
+  --t-slow: calc(350ms * var(--t-mult));
+  --t-count: calc(1000ms * var(--t-mult));
+  /* Not a duration but a STEP: the gap between one row of a list arriving and
+     the next. It is on this scale because it is multiplied by an index into a
+     delay, so if it did not resolve through --t-mult the speed control would
+     move every animation in the app except the one that makes a list read as a
+     list. It was a bare 50ms in two files before item 166 and existed in
+     neither of the other four that needed it. */
+  --t-stagger: calc(40ms * var(--t-mult));
+
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --t-fast: 120ms;
-  --t-base: 200ms;
-  --t-slow: 350ms;
+  /* Accelerating: something leaving should not linger the way something
+     arriving is allowed to. */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  /* Overshoot, reserved for celebration -- the one place in the app where the
+     motion is the reward rather than the explanation. */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 /* Elevated when AppShell reports the floating bottom pill is mounted (phone/
@@ -351,6 +402,34 @@ body {
   }
 }
 
+/* Restored (item 148). It was deleted in the 2026-09-04 consolidation as
+   unreferenced -- which was true, and meant it had never been WIRED, not that
+   it had stopped being used. A toast faded in and then vanished mid-stack,
+   which also made the stack jump as the ones below moved up. */
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+
+/* The swipe exit (item 169). Same duration and easing as toastOut; it just
+   leaves the way the finger was already taking it. */
+@keyframes toastSwipeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+}
+
 @keyframes toastIn {
   from {
     opacity: 0;
@@ -364,7 +443,7 @@ body {
 
 /* Was in theme.js's injected block; no equivalent here. */
 html {
-  transition: background-color 0.25s ease;
+  transition: background-color var(--t-enter) var(--ease-smooth);
 }
 
 button,
@@ -449,6 +528,23 @@ input {
   }
 }
 
+/* The hazard rail arriving (item 169). BottomNav's active tab pops a dot and
+   lifts its icon; SideNav marked its active destination with the app's own
+   hazard stripe and simply had it BE there, so at desktop width the same
+   navigation gesture produced feedback on a phone and none on a laptop. A bar
+   growing from its own middle is the rail's equivalent of the dot's pop -- same
+   idea, same spring, the shape each nav already uses. */
+@keyframes railGrow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
 @keyframes navDotPop {
   0% {
     transform: scale(0) translateX(-50%);
@@ -463,10 +559,211 @@ input {
   }
 }
 
-/* ── View Transitions API — crossfade between tabs (FE-09-C) ── */
+/* ── View Transitions: direction and character (FE-09-C, then item 154) ──────
+   FE-09-C shipped a crossfade here, which crossfaded nothing until item 147
+   found the missing flushSync. With a transition that actually runs, what it
+   runs is worth deciding.
+
+   TWO THINGS ARE ENCODED. Direction: forward enters from the right and back
+   leaves to the right, which is how a native app tells you where you are in a
+   stack. They have to be exact opposites or the stack stops being readable.
+   Character: each MODE_SECTIONS group gets its own entrance, because entering a
+   timed exam should not feel like opening the glossary -- the sections already
+   group every mode by what it is FOR, and this makes that grouping something a
+   reader feels rather than something only the Belajar menu knows.
+
+   utils/motion.js writes data-nav-dir and data-nav-flavor to the root for the
+   duration of the transition, and clears both when it settles -- skips
+   included, because a stale direction would point the NEXT transition the wrong
+   way, which is worse than having no direction at all.
+
+   EVERY ANIMATION HERE IS TRANSFORM AND OPACITY ONLY. That is the floor this
+   whole release is built on, and it is why the most elaborate of them costs a
+   weak GPU nothing. It is also why the hazard flavour below is a skew rather
+   than a literal moving stripe: a stripe would need clip-path or a third layer
+   inside the transition tree, and both leave the floor. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 150ms;
+  animation-duration: var(--t-base);
+  animation-timing-function: var(--ease-smooth);
+  animation-fill-mode: both;
+  /* Both snapshots are painted on top of each other for the duration. Plain
+     blending keeps a mid-transition frame from washing out where they overlap. */
+  mix-blend-mode: normal;
+}
+
+/* Default: the directional slide, used by every mode without a section. */
+:root[data-nav-dir='forward']::view-transition-old(root) {
+  animation-name: vtOutToLeft;
+}
+:root[data-nav-dir='forward']::view-transition-new(root) {
+  animation-name: vtInFromRight;
+}
+:root[data-nav-dir='back']::view-transition-old(root) {
+  animation-name: vtOutToRight;
+}
+:root[data-nav-dir='back']::view-transition-new(root) {
+  animation-name: vtInFromLeft;
+}
+
+/* pelajari — a soft rise. Learning should not feel hurried, so this is the one
+   flavour that takes longer than the default rather than less. */
+:root[data-nav-flavor='pelajari']::view-transition-new(root) {
+  animation: vtRise var(--t-enter) var(--ease-smooth) both;
+}
+:root[data-nav-flavor='pelajari']::view-transition-old(root) {
+  animation: vtFadeOut var(--t-base) var(--ease-exit) both;
+}
+
+/* latihan — the same directional slide, quicker. Drilling should feel brisk;
+   the whole point of a drill is the next question. */
+:root[data-nav-flavor='latihan']::view-transition-old(root),
+:root[data-nav-flavor='latihan']::view-transition-new(root) {
+  animation-duration: var(--t-fast);
+}
+
+/* ujian — the hazard angle. DESIGN_SPEC §1 reserves the diagonal --hazard motif
+   for a time-sensitive or active state, which is exactly what a timed exam is,
+   and this is the only place in the app that moves like it. The new screen
+   arrives behind a skewed leading edge and straightens as it lands; the old one
+   leaves along the opposite angle, so the seam between them IS the stripe. */
+:root[data-nav-flavor='ujian']::view-transition-new(root) {
+  animation: vtHazardIn var(--t-enter) var(--ease-smooth) both;
+}
+:root[data-nav-flavor='ujian']::view-transition-old(root) {
+  animation: vtHazardOut var(--t-enter) var(--ease-exit) both;
+}
+
+/* ulasan — dealt from the deck, matching the flashcard's physical register.
+   The review screen IS a stack of cards; it should arrive like one. */
+:root[data-nav-flavor='ulasan']::view-transition-new(root) {
+  animation: vtDeal var(--t-enter) var(--ease-spring) both;
+}
+:root[data-nav-flavor='ulasan']::view-transition-old(root) {
+  animation: vtFadeOut var(--t-fast) var(--ease-exit) both;
+}
+
+/* alat and a tab switch — a plain crossfade, deliberately. Tools are not an
+   event, and a tab switch is lateral rather than a step in a stack, so giving
+   either one a direction would be saying something untrue about where you are.
+   The UA default is already a crossfade; naming it here is what stops the
+   directional rules above from applying when a flavour has no direction. */
+:root[data-nav-flavor='alat']::view-transition-new(root),
+:root[data-nav-flavor='tab']::view-transition-new(root) {
+  animation: vtFadeIn var(--t-base) var(--ease-smooth) both;
+}
+:root[data-nav-flavor='alat']::view-transition-old(root),
+:root[data-nav-flavor='tab']::view-transition-old(root) {
+  animation: vtFadeOut var(--t-base) var(--ease-smooth) both;
+}
+
+@keyframes vtInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes vtOutToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+}
+@keyframes vtInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes vtOutToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+@keyframes vtRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes vtFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes vtFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vtHazardIn {
+  from {
+    opacity: 0;
+    transform: translateX(44px) skewX(-7deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+}
+@keyframes vtHazardOut {
+  from {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px) skewX(7deg);
+  }
+}
+@keyframes vtDeal {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reduced motion: the transition still happens (the browser has already
+   snapshotted), it just stops MOVING. A plain instant swap is what a reader who
+   asked for less motion should get, and zeroing the duration is how you get it
+   here -- every keyframe above ends at the resting state, so there is nothing to
+   jump to. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.001ms;
+  }
 }
 
 /* Japanese line-breaking. Browsers default to `line-break: auto`, which allows
@@ -478,6 +775,150 @@ input {
 [lang='ja'] {
   line-break: strict;
   overflow-wrap: anywhere;
+}
+
+/* ── List stagger (item 166) ──────────────────────────────────────────────────
+   `staggerIn` existed and was used in exactly ONE place. Dashboard's cards,
+   Belajar's grid, the glossary's groups, the side nav's mode list, the shortcut
+   sheet's rows and the stats tiles all arrived as a single block -- which reads
+   as a screen being painted rather than as a list of things.
+
+   A global class rather than six copies of the rule, for the same reason
+   `fc-card`/`fc-scene`/`fc-face` are global: this is cross-file motion, and six
+   private copies is exactly how one keyframe came to be played at six speeds.
+   The component supplies its index as --stagger-i and nothing else.
+
+   CAPPED AT SIX. Uncapped, the fortieth row of a long glossary waits over a
+   second to exist, and the reader is watching an empty screen fill in rather
+   than reading. The cap is what makes this affordable on a long list at all.
+
+   Reduced motion gets `animation: none`, not a zeroed duration: staggerIn ends
+   at opacity 1, so zeroing the duration would leave it -- correctly, but by
+   accident. The explicit form is the rule DESIGN_SPEC §4 states and it stays
+   correct if the keyframe is ever edited. */
+.stagger-item {
+  animation: staggerIn var(--t-base) var(--ease-smooth) both;
+  animation-delay: calc(min(var(--stagger-i, 0), 6) * var(--t-stagger));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    animation: none;
+  }
+}
+
+:root[data-motion-no-entrance] .stagger-item,
+:root[data-motion='mati'] .stagger-item {
+  animation: none;
+}
+
+/* ── The flip (items 155 + 165) ───────────────────────────────────────────────
+   These live HERE, in the eager stylesheet, and that is the whole of item 165.
+
+   They were `:global(...)` inside flashcard.module.css, which reads like a
+   shared definition and is not one: that file is a CSS Module imported by
+   FlashcardMode, so in a production build it ships inside FlashcardMode's
+   chunk and does not exist on any screen that has not loaded it. Onboarding's
+   demo card was pointed at these class names and measured in Chromium with
+   `perspective: none`, `transform-style: flat` and a transition duration of
+   0s -- the "shared" flip was not shared at all, and the first flip a new
+   reader ever saw was a plain 2D swap.
+
+   Which is worse than the drift item 165 set out to fix. The original finding
+   was that Onboarding reimplemented the flip at a different easing and a
+   different perspective; the truth was that pointing it at the real one still
+   gave it nothing, because the real one was behind a lazy boundary. A shared
+   rule has to live somewhere every sharer can reach.
+
+   Layout stays in each caller: FlashcardMode's card is a flex column that fills
+   its scene, Onboarding's is a fixed aspect ratio. Only the MOTION is common. */
+.fc-scene {
+  perspective: 1400px;
+}
+
+.fc-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--t-slow) var(--ease-spring);
+  will-change: transform;
+}
+
+.fc-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* item 155: the drag tracks the finger.
+   The swipe transform and the FLIP transform are the same property, so every
+   touchmove was eased through the flip's 350ms spring above -- the card lagged
+   a third of a second behind the finger, on the app's most-used gesture, and
+   the lag is impossible to attribute: it reads as the phone being slow rather
+   than as a transition being wrong. The spring is right for the flip and wrong
+   for a drag, so the drag switches it off for its duration and hands it
+   straight back on release, which is what keeps the settle sprung. */
+.fc-card[data-dragging='true'] {
+  transition: none;
+}
+
+/* Both faces hide their back. */
+.fc-face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Back face rotated to face away initially. */
+.fc-face--back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-card {
+    transition: none;
+  }
+}
+
+:root[data-motion-no-card] .fc-card,
+:root[data-motion='mati'] .fc-card {
+  transition: none;
+}
+
+/* The heatmap's weeks (item 160). Its own rule rather than `.stagger-item`
+   because the cap is the difference: six is right for a menu, and wrong for
+   eighteen columns that are meant to read as a record being drawn left to
+   right. The step is shorter than a list's for the same reason -- eighteen at
+   the list step would take three quarters of a second. */
+.heatmap-col {
+  animation: fadeIn var(--t-base) var(--ease-smooth) both;
+  animation-delay: calc(var(--stagger-i, 0) * var(--t-stagger) * 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heatmap-col {
+    animation: none;
+  }
+}
+
+:root[data-motion-no-stagger] .heatmap-col,
+:root[data-motion-no-entrance] .heatmap-col,
+:root[data-motion='mati'] .heatmap-col {
+  animation: none;
+}
+
+/* The loading skeleton, held back (item 163). `both` with a delay means it sits
+   at the keyframe's FROM state -- invisible -- for the delay, so a fast chunk
+   never flashes one. */
+.mode-skeleton {
+  animation: fadeIn var(--t-base) var(--ease-smooth) var(--t-base) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-skeleton {
+    animation: none;
+  }
+}
+
+:root[data-motion='mati'] .mode-skeleton,
+:root[data-motion-no-entrance] .mode-skeleton {
+  animation: none;
 }
 
 /* ── Accessibility utility ── */
@@ -564,5 +1005,73 @@ input {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+    /* Delays were not zeroed, and zeroing the DURATION without the DELAY is a
+       worse result than leaving both alone: the element still waits its full
+       stagger before appearing, it just appears instantly when it does. So a
+       reader who asked for less motion got the pauses and none of the movement.
+       ResultScreen's staggerIn rows (0.1s and 0.2s) were the visible case. */
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* ── Gerakan: the reader's own motion control ────────────────────────────────
+   utils/motion-pref.js writes these attributes to <html>. They are separate
+   from the prefers-reduced-motion block above on purpose: that one answers an
+   accessibility declaration made to the device and always wins, this one
+   answers a preference made to this app.
+
+   Each rule switches off one CATEGORY, which is what lets someone keep page
+   transitions and drop the decorative counting -- the split most people
+   actually want, and one a single on/off slider cannot express.
+
+   `press` is deliberately absent from this list even though it is a toggle: it
+   is handled per-component, because on a touch device with no hover the pressed
+   state is the only confirmation a tap registered before the screen changes.
+   Removing it does not calm the interface, it makes it feel broken. */
+:root[data-motion-no-entrance] [class*='page'],
+:root[data-motion-no-entrance] [class*='card'],
+:root[data-motion-no-entrance] [class*='panel'] {
+  animation: none !important;
+}
+
+:root[data-motion-no-stagger] * {
+  animation-delay: 0s !important;
+}
+
+:root[data-motion-no-celebrate] [role='alertdialog'] {
+  animation: none !important;
+}
+
+/* 'mati' is the reader asking for exactly what the OS setting produces, so it
+   produces exactly that rather than an approximation of it. */
+:root[data-motion='mati'] *,
+:root[data-motion='mati'] *::before,
+:root[data-motion='mati'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  animation-delay: 0s !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+/* An animation whose END STATE differs from its resting state is NOT disabled
+   by the duration-zeroing above -- it jumps straight to the end. That is a
+   different bug wearing the same rule, and it is why `animation: none` has to
+   be written explicitly for those.
+
+   The case that shipped: MissionCompleteOverlay played `missionFadeOut ... 
+   forwards`, which ends at opacity 0. Under reduced motion it reached that end
+   state immediately, so the ONE celebration in the app was invisible to exactly
+   the readers who had asked their device for less movement. Dashboard's crawl
+   marquee had it right (its own block sets animation: none); nothing generalised
+   the rule.
+
+   Any new keyframe that does not end where it started belongs in this list. */
+@media (prefers-reduced-motion: reduce) {
+  .no-motion-endstate,
+  [data-motion-endstate] {
+    animation: none !important;
   }
 }

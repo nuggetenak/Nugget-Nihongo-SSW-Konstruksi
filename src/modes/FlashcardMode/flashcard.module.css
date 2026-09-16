@@ -3,11 +3,6 @@
    v3.0: Premium RatingRow, ToolStrip, NavRow redesign.
    ─────────────────────────────────────────────────────────────────────────── */
 
-/* 3D scene container */
-:global(.fc-scene) {
-  perspective: 1400px;
-}
-
 /* Flip card — animates transform.
 
    A flex column (item 74) so .front, its only in-flow child, can stretch to
@@ -15,29 +10,16 @@
    the front sized itself from its content and the card sized itself from the
    ResizeObserver's measurement of the back, which is why neither could grow
    into the scene. */
+/* The flip's own 3D and motion moved to src/styles/global.css (item 165) --
+   see the note there. What stays here is FlashcardMode's LAYOUT: the card is a
+   flex column so .front, its only in-flow child, can stretch to whatever height
+   the card is given. Before this the card was a plain block: the front sized
+   itself from its content and the card from the back's measured height, which
+   is why neither could grow into the scene. */
 :global(.fc-card) {
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform var(--t-slow) var(--ease-spring);
-  will-change: transform;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-}
-
-:global(.fc-card.is-flipped) {
-  transform: rotateY(180deg);
-}
-
-/* Both faces hide their back */
-:global(.fc-face) {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* Back face rotated to face away initially */
-:global(.fc-face--back) {
-  transform: rotateY(180deg);
 }
 
 /* Hint fade animation */
@@ -65,6 +47,65 @@
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
+  /* For the depth layers below, which are positioned against this box. */
+  position: relative;
+}
+
+/* ── Deck depth (item 155) ────────────────────────────────────────────────────
+   Two card backs behind the top one, each a step smaller and dimmer. The deck
+   stops being a single rectangle and starts being a stack.
+
+   This is honest information, not decoration: a flashcard session is finite,
+   and the only thing that ever said so was a counter in the header. The layers
+   are driven by --deck-depth, which the component sets from how many cards are
+   actually left -- so the last card in a session sits alone, which is exactly
+   the moment that fact is worth knowing.
+
+   Pseudo-elements rather than real nodes: they carry no content, need no
+   accessible name, and must never be reachable. `pointer-events: none` so the
+   scene's own touch handlers keep every event. */
+.scene::before,
+.scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-xxl);
+  background: var(--ssw-surface);
+  border: 1.5px solid var(--ssw-border);
+  pointer-events: none;
+  z-index: 0;
+  transition:
+    transform var(--t-base) var(--ease-smooth),
+    opacity var(--t-base) var(--ease-smooth);
+  opacity: 0;
+}
+
+.scene[data-deck-depth='1']::before,
+.scene[data-deck-depth='2']::before {
+  opacity: 0.55;
+  transform: scale(0.965) translateY(7px);
+}
+
+.scene[data-deck-depth='2']::after {
+  opacity: 0.3;
+  transform: scale(0.93) translateY(14px);
+}
+
+/* The card itself has to sit above them. */
+.scene > :global(.fc-card) {
+  z-index: 1;
+}
+
+/* Both layers rest at opacity 0 and transform none, so a zeroed transition
+   duration lands them at whatever the attribute says -- visible, in place, not
+   animating. That is the right resting state: the stack is information, and a
+   reader who asked for less motion should still be able to see how many cards
+   are left. Only the RE-STACKING as the deck shortens stops moving. */
+@media (prefers-reduced-motion: reduce) {
+  .scene::before,
+  .scene::after {
+    transition: none;
+  }
 }
 
 /* NOTE (superseded, item 74): the card used to be held at the back face's
@@ -76,7 +117,7 @@
 
 /* ── RatingRow subcomponent ────────────────────────────────────────────────── */
 .ratingWrap {
-  animation: slideUp 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+  animation: slideUp var(--t-enter) var(--ease-spring);
 }
 
 .ratingLabel {
@@ -168,7 +209,7 @@
   padding: var(--space-16) 0;
   font-size: var(--fs-body);
   font-weight: 600;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn var(--t-base) var(--ease-smooth);
   color: var(--ssw-textDim);
 }
 

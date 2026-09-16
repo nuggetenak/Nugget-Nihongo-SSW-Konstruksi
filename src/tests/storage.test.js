@@ -14,6 +14,7 @@ import {
   resetAll,
   exportAll,
   importAll,
+  flushWrites,
   _reset_for_test,
 } from '../storage/engine.js';
 import { STORAGE_VERSION, DOCS, DEFAULTS } from '../storage/schema.js';
@@ -54,6 +55,11 @@ describe('init — fresh install', () => {
   it('is idempotent — second init() is a no-op', () => {
     init();
     set('prefs', (p) => ({ ...p, track: 'lifeline' }));
+    // set() queues rather than writing (item 185), so the persist has to happen
+    // before the cache is thrown away. In the app a closing tab flushes through
+    // pagehide/visibilitychange; _reset_for_test is a harder restart than a real
+    // one and skips those, so the flush is explicit here.
+    flushWrites();
     _reset_for_test();
     init(); // should NOT overwrite
     const prefs = get('prefs');

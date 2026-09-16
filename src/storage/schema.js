@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { DEFAULT_TEXT_SCALE } from '../utils/text-scale.js';
+import { DEFAULT_MOTION } from '../utils/motion-pref.js';
 import { DEFAULT_THEME } from '../utils/theme-mode.js';
 
 export const STORAGE_VERSION = 7;
@@ -87,6 +88,13 @@ export const DEFAULTS = {
     studyAnchor: null, // 'morning' | 'lunch' | 'evening'
     furiganaPolicy: 'always', // 'always' | 'tap' | 'hidden'
     textScale: DEFAULT_TEXT_SCALE, // 'kecil' | 'normal' | 'besar' | 'sangat-besar' — see utils/text-scale.js
+    // How much the interface moves — see utils/motion-pref.js. Additive: absent
+    // reads as DEFAULT_MOTION for everyone who installed before 7.6.0, which is
+    // truthful (they have been getting full motion all along), so no migration.
+    //
+    // `features: null` means "follow the preset" and is the normal state; it
+    // only becomes an object when a reader flips an individual toggle.
+    motion: DEFAULT_MOTION,
     flashcardHintCount: 0, // resets on resetAll()
     notes: {}, // personal notes per card { [cardId]: string }
     speakOnFlip: false, // speak on card flip instead of advance

@@ -20,7 +20,7 @@
 .brandName {
   font-size: 1.125rem;
   font-weight: var(--fw-black);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-tight);
   color: var(--ssw-amberText);
   line-height: var(--lh-tight);
 }
@@ -59,7 +59,8 @@
   text-align: left;
   transition:
     background var(--t-base) var(--ease-smooth),
-    color var(--t-base) var(--ease-smooth);
+    color var(--t-base) var(--ease-smooth),
+    transform var(--t-instant) var(--ease-smooth);
 }
 
 .item:hover {
@@ -72,7 +73,10 @@
   color: var(--ssw-amberText);
 }
 
-/* Hazard rail marks the active destination — same language as urgency cards. */
+/* Hazard rail marks the active destination — same language as urgency cards.
+   It GROWS in (item 169): BottomNav pops a dot and lifts its icon when a tab
+   becomes active, and this had nothing, so the same navigation felt responsive
+   on a phone and inert on a laptop. */
 .item[data-active='true']::before {
   content: '';
   position: absolute;
@@ -82,6 +86,8 @@
   width: 5px;
   border-radius: 0 3px 3px 0;
   background: var(--hazard);
+  transform-origin: center;
+  animation: railGrow var(--t-base) var(--ease-spring) both;
 }
 
 .itemLabel {
@@ -100,6 +106,10 @@
   align-items: center;
   justify-content: center;
   padding: 0 var(--space-6);
+  /* Same arrival as BottomNav's due badge. A number appearing without it reads
+     as having always been there, which is the opposite of what a due count
+     going from 0 to 12 is telling you. */
+  animation: popIn var(--t-slow) var(--ease-spring) both;
 }
 
 .foot {
@@ -134,7 +144,7 @@
   padding: var(--space-8) var(--space-12);
   font-size: var(--fs-small);
   font-weight: var(--fw-bold);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-wide);
   color: var(--ssw-textDim);
   cursor: pointer;
   border-radius: var(--r-md);
@@ -172,7 +182,8 @@
   text-align: left;
   transition:
     background var(--t-base) var(--ease-smooth),
-    color var(--t-base) var(--ease-smooth);
+    color var(--t-base) var(--ease-smooth),
+    transform var(--t-instant) var(--ease-smooth);
 }
 
 .modeItem:hover {
@@ -198,14 +209,56 @@
   width: 3px;
   border-radius: 0 2px 2px 0;
   background: var(--hazard);
+  transform-origin: center;
+  animation: railGrow var(--t-base) var(--ease-spring) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .item {
-    transition: none;
-  }
-
+  .item,
   .modeItem {
     transition: none;
   }
+
+  /* Both end somewhere other than their resting state -- railGrow at scaleY(1)
+     and opacity 1, popIn likewise -- so duration-zeroing does not switch them
+     off, it jumps them to the end. That happens to be the right frame here, but
+     `animation: none` is the rule DESIGN_SPEC §4 states for this shape and the
+     one that stays correct if either keyframe is ever edited. */
+  .item[data-active='true']::before,
+  .modeItem[data-active='true']::before,
+  .badge {
+    animation: none;
+  }
+}
+
+/* ── Press feedback (item 164) ───────────────────────────────────────────────
+   On a touch device there is no hover, so the pressed state is the ONLY
+   confirmation that a tap registered before the screen changes — and on a slow
+   phone the gap between the two is exactly where someone taps a second time.
+   Thirteen of the app's twenty-eight stylesheets had clickable elements and no
+   press state at all; this is one of them. Compositor-only, so it costs nothing.
+   Honours Gerakan's "Respons sentuh" toggle.
+
+   The `transform` term is spliced into each rule's EXISTING transition list
+   above rather than declared here. item 164 first shipped it as a second
+   `.item { transition: ... }` at the bottom of the file, which is not additive
+   -- the later declaration replaces the earlier one wholesale, so adding a press
+   animation silently deleted this nav's background and colour transitions, and
+   put both selectors out of reach of the reduced-motion block that sits above
+   them. Found by a sweep, not by looking: from inside either rule it looks
+   right. motion-scale.test.js now refuses a second transition on a selector. */
+.item:active {
+  transform: scale(0.98);
+}
+
+:root[data-motion-no-press] .item:active {
+  transform: none;
+}
+
+.modeItem:active {
+  transform: scale(0.97);
+}
+
+:root[data-motion-no-press] .modeItem:active {
+  transform: none;
 }

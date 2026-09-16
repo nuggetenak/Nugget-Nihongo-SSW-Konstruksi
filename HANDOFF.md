@@ -6,12 +6,13 @@
 > `docs/archive/ARCHIVE-INDEX.md` for what has already moved.
 >
 > Everything up to and including the 7.0.0 release entry has been retired; the three 2026-09-08
-> entries below are kept because their invariants are still live, and the two 2026-09-14 entries
-> are the most recent session's work (7.5.0 merged, 7.5.1 on the branch). (This paragraph itself
-> still said "the two 2026-09-04 entries below are kept because they are the most recent session's
-> work" on 2026-09-09, four sessions after that stopped being true — corrected then, and again on
-> 2026-09-14, which is the second time this one sentence has gone stale. **If you edit CURRENT
-> STATE, edit this paragraph in the same pass.**) The retired lineage, newest first:
+> entries below are kept because their invariants are still live, and the 2026-09-15 entry is the
+> most recent session's work (7.6.0, on the branch). (This paragraph itself said "the two
+> 2026-09-04 entries below are kept because they are the most recent session's work" on 2026-09-09,
+> four sessions after that stopped being true — corrected then, again on 2026-09-14, and again
+> here. **That is three times for one sentence.** If you edit CURRENT STATE, edit this paragraph in
+> the same pass; and if you find yourself correcting it a fourth time, the right fix is probably to
+> stop naming dates in it at all rather than to correct it again.) The retired lineage, newest first:
 > `HANDOFF-2026-09-04-07-sessions.md` (7.0.0's mode removal and card split, the governance-docs
 > audit, and the two `simulasi`/Belajar-tab rounds),
 > `HANDOFF-2026-09-04-audit-and-ui.md` (the 6.0.0 audit + the layout/typography overhaul),
@@ -37,11 +38,85 @@ content into this file.
 
 ## CURRENT STATE
 
-**As of 2026-09-14.** Verify before trusting past this point — this line doesn't update itself.
-At that date: version **7.5.1**, **1,626 cards**, **22 modes**, `STORAGE_VERSION` **7**,
-`npm run validate` clean (136 files, 1,301 tests). 7.5.0 is merged into `main` (PR #17 as
-`569ff2a`, PR #18 as `73900f4`), and the 7.5.1 housekeeping is on
-`claude/open-items-continuation-doenj9` restarted from that merge.
+**As of 2026-09-15.** Verify before trusting past this point — this line doesn't update itself.
+At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION` **7**,
+`npm run validate` clean (**144 test files**; the test count moves every commit, so it is not
+quoted here — run it). 7.5.1 is merged into `main`; 7.6.0 is on
+`claude/ui-animations-open-items-uekmcq` as PR #20, draft.
+
+- **2026-09-15: 7.6.0 — the write path, a motion language, and the guards that were not guarding.**
+  Full write-up is `CHANGELOG.md` `[7.6.0]`. What a future session most needs to know:
+
+  - **There IS a work queue again, and it is deliberate.**
+    `docs/UI_UX_PLAN-2026-09-items-145-205.md`. Items 145–196 are closed by this release and 207
+    closed after it; **205–206 and 208–215 are open**. It was opened per
+    `docs/AGENT_WORKFLOW.md` §3 because the previous session's "no queue" state meant "what is
+    open" had to be re-derived from the code by hand, and that re-derivation is most of what this
+    release turned out to be.
+
+  - **Four commits landed AFTER the 7.6.0 write-up below was written**, all on the same branch and
+    all in `CHANGELOG.md` `[7.6.0]`: `f773b22` (the quiz-link deriver was sorting by the wrong
+    property — identity before length, 71 more links), `f1235b4` (item 207, plus a `.claude/**`
+    exclude in `vitest.config.js` — agent worktrees live inside the repo, so a root-level
+    `vitest run` was collecting duplicate copies of the whole suite), `9ff8b0b` (the metrics table
+    quoted a test count its own guard refuses to check) and `e76e7ca` (消化器 typed for 消火器 in a
+    question's correct answer). **The version was NOT bumped for these** — 7.6.0 has not shipped
+    yet, PR #20 is still a draft, so they are part of it rather than a release after it.
+
+  - **`STORAGE_VERSION` is still 7 and that is correct.** `prefs.motion` is additive and stores
+    `penuh`, so every existing install reads as full motion — which is truthful, because that is
+    what they have been getting. A migration is for reinterpreting data that already exists, and a
+    new default is not that.
+
+  - **Writes are coalesced now (`engine.js`).** `set()` and `setSRSCard()` queue; everything else
+    is unchanged and synchronous. The trap, if you touch this: `resetAll`/`importAll` must
+    **discard** pending writes, not flush them — flushing a rating queued 200 ms before a reset
+    writes the pre-reset document back over the fresh defaults. There is a test for it; do not
+    "fix" it into a flush.
+
+  - **The motion system has a reader-facing off switch**, `Pengaturan Gerakan` (mode key
+    `gerakan`). Anything new that moves should ask `motionAllows(feature)` if it is JS-driven, or
+    key off the `data-motion-*` attributes if it is CSS. `DESIGN_SPEC` §4a is the language; read it
+    before adding motion rather than inventing beside it, which is the failure this whole release
+    is a correction of.
+
+  - **Four defects in this release were invisible to the test suite and found only in a browser**
+    (the tab crossfade that never crossfaded anything, the CSP that refused the SW registration,
+    the morph's missing half on a first entry, the flip whose "shared" rules were in a lazy chunk).
+    That is the evidence behind open item 209, which asks for one permanent browser smoke test in
+    CI. If you are adding anything visual, open Chromium — `playwright-core` installed outside the
+    project drives the pre-installed browser without touching `package.json`.
+
+  - **Two things in the plan were refused rather than deferred**, with the reasons written at the
+    call sites: throw-to-rate on the flashcard (it is the behaviour v87 removed) and the
+    per-character headword reveal (it breaks kinsoku shori and ruby association). Do not re-open
+    either from the plan text alone.
+
+  - **Quiz→card coverage is 540 of 980 (55.1%)**, up from 305. The medium tier is read and closed,
+    and the matcher pass item 205 asked for is done: the deriver was ranking proposals by **how
+    long** the matched headword was, when what decides a link is **what** it matched. Fifty
+    questions whose correct answer was, whole, a card headword sat below the applyable tiers (47 in
+    `low`, 3 in `medium`) — all fifty read correct. With the ambiguous set surfaced instead of
+    dropped, text normalised before matching, and already-linked questions excluded from the tiers,
+    that was 71 more links. **The lesson: before reading a tier, check that the thing sorting it is
+    measuring the right property.** What is left is the LOW tier, now 305 rows, and the argument
+    against hand-reading it stands. `docs/QUIZ_CONTENT_GAPS.md` holds the 72 questions no card
+    teaches, which is a content report and not a linking backlog; four of its entries now name the
+    near-miss card and what is actually missing (温度計 not 温度, 本溶接 not 溶接, and no card
+    states a 脚立's opening angle). A fifth entry left the file for a different reason: it was
+    never a gap, it was **消化器** (digestive organ) typed for **消火器** (fire extinguisher) in
+    the question's own correct answer — homophones, so the furigana and the gloss both read
+    correct. Fixed.
+
+  - **The live queue is items 205-206 and 208-215** in `docs/UI_UX_PLAN-2026-09-items-145-205.md`.
+    212-214 are new and carry measured evidence rather than suspicion: two more wrong sort keys
+    in the deriver (an ambiguous headword loses to any shorter usable one; ~145 cards are
+    invisible under their own bare name because of a parenthetical gloss), two small wins
+    already read and ready, and nine cards that read their own headword two ways. **Two avenues
+    are recorded as tested and rejected with the falsifying rows** — Indonesian gloss as a
+    *substring*, and card desc/usage full-text search — so the next session does not re-import
+    them. 206 and 209 were attempted by background agents and killed mid-edit by a rate limit;
+    nothing was salvaged, and item 215 says why.
 
 - **2026-09-14: 7.5.1 — the garbled question, and two guards that were only comments.**
   Full write-up is `CHANGELOG.md` `[7.5.1]`. What a future session most needs to know:
@@ -262,7 +337,7 @@ At that date: version **7.5.1**, **1,626 cards**, **22 modes**, `STORAGE_VERSION
     the *right* card, and a corpus can be entirely wrong while every audit passes.
   - **305 of `QUIZ_SETS`' 980 questions now carry a link**, and the retry-wrong button works in
     `wayground`, `vocab` and `simulasi` for the first time. The remaining 675 need a human read;
-    `npm run derive:quiz-links` regenerates the tiers. The 79 no-match rows are worth reading
+    `npm run derive:quiz-links` regenerates the tiers. The 80 no-match rows are worth reading
     first for a different reason — a question about something the deck does not teach is a content
     gap, not a linking problem.
   - **Every one of the 1,418 vocab cards has a `usage` sentence.** The 7.0.0 entry below says 152

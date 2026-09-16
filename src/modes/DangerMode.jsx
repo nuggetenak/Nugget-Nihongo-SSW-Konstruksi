@@ -10,7 +10,6 @@ import ResultScreen from '../components/ResultScreen.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
 import { recordTermMistake } from '../utils/mistake-bridge.js';
 import { useApp } from '../contexts/AppContext.jsx';
-import { haptic } from '../utils/haptic.js';
 import { useSessionTimer } from '../hooks/useSessionTimer.js';
 import SessionLengthPicker, { storedQuizCount } from '../components/SessionLengthPicker.jsx';
 import {
@@ -21,6 +20,7 @@ import {
 } from '../components/JpDisplay.jsx';
 import { JP_LIST_MAX } from '../utils/jp-helpers.js';
 import QuizAnnouncer from '../components/QuizAnnouncer.jsx';
+import OptionButton from '../components/OptionButton.jsx';
 import S from './modes.module.css';
 import D from './DangerMode.module.css';
 
@@ -250,9 +250,8 @@ function QuizView({ onBack, onSessionEnd, filterType, limit }) {
     (idx) => {
       if (selected !== null || phase !== 'playing') return;
       setSelected(idx);
+      // Haptic moved into OptionButton (item 174).
       const isCorrect = idx === item.correctIdx;
-      if (isCorrect) haptic.correct();
-      else haptic.wrong();
       if (!isCorrect) {
         // Item 129: this used to be `recordWrong(\`danger-${item.pair.term}\`)`,
         // putting a string key into progress.quizWrong, which every reader
@@ -376,59 +375,19 @@ function QuizView({ onBack, onSessionEnd, filterType, limit }) {
       </div>
 
       <div className={S.list}>
-        {opts.map((opt, i) => {
-          const isSelected = selected === i;
-          const showResult = selected !== null;
-          const isCorrect = opt.isCorrect;
-          const isWrongPick = isSelected && !isCorrect;
-          return (
-            <button
-              key={i}
-              onClick={() => handleSelect(i)}
-              disabled={selected !== null}
-              style={{
-                fontFamily: 'inherit',
-                padding: 'var(--space-12) var(--space-14)',
-                borderRadius: T.r.md,
-                background: !showResult
-                  ? T.surface
-                  : isCorrect
-                    ? T.correctBg
-                    : isWrongPick
-                      ? T.wrongBg
-                      : T.surface,
-                border: `1.5px solid ${!showResult ? T.border : isCorrect ? T.correctBorder : isWrongPick ? T.wrongBorder : T.border}`,
-                animation: !showResult
-                  ? 'none'
-                  : isCorrect
-                    ? 'correctFlash 0.5s ease'
-                    : isWrongPick
-                      ? 'wrongShake 0.45s ease'
-                      : 'none',
-                color: !showResult
-                  ? T.text
-                  : isCorrect
-                    ? T.correct
-                    : isWrongPick
-                      ? T.wrong
-                      : T.textDim,
-                textAlign: 'left',
-                cursor: selected !== null ? 'default' : 'pointer',
-                fontSize: 'var(--fs-body)',
-                lineHeight: 1.5,
-                transition: 'all 0.15s',
-                display: 'flex',
-                gap: 'var(--space-8)',
-                alignItems: 'flex-start',
-              }}
-            >
-              <span className={D.optionLabel}>{i + 1})</span>
-              <span>{renderJPWithRuby(opt.text, parseRubyFragments(opt.text))}</span>
-              {showResult && isCorrect && <span className={D.optionIcon}>✓</span>}
-              {showResult && isWrongPick && <span className={D.optionIcon}>✗</span>}
-            </button>
-          );
-        })}
+        {opts.map((opt, i) => (
+          <OptionButton
+            key={i}
+            idx={i}
+            // Ruby, so the option text is a node rather than a string. The
+            // shared button has always rendered {text} as a child, so this
+            // needs nothing from it that it did not already do.
+            text={renderJPWithRuby(opt.text, parseRubyFragments(opt.text))}
+            selected={selected}
+            isCorrect={opt.isCorrect}
+            onSelect={handleSelect}
+          />
+        ))}
       </div>
 
       {selected !== null && (

@@ -16,7 +16,12 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { MODE_COMPONENTS, MODE_META, MODE_SECTIONS } from '../router/modes.js';
+import {
+  MODE_COMPONENTS,
+  MODE_META,
+  MODE_SECTIONS,
+  DASHBOARD_QUICK_MODES,
+} from '../router/modes.js';
 
 const SRC = resolve(__dirname, '..');
 const read = (rel) => readFileSync(resolve(SRC, rel), 'utf-8');
@@ -31,6 +36,40 @@ describe('removed-mode safety', () => {
   it('every registered component has metadata to render its header', () => {
     const missing = Object.keys(MODE_COMPONENTS).filter((m) => !MODE_META[m]);
     expect(missing).toEqual([]);
+  });
+
+  it('and every metadata entry has a component to render', () => {
+    // The other direction, which nothing checked (item 207). A MODE_META entry
+    // with no component is the more likely half of the pair to survive a
+    // removal, because metadata is the part that reads like documentation --
+    // and it is the half that puts a mode in the Belajar menu and the side nav,
+    // where tapping it lands on ModeRouter's null branch.
+    const missing = Object.keys(MODE_META).filter((m) => !MODE_COMPONENTS[m]);
+    expect(missing).toEqual([]);
+  });
+
+  it('the dashboard quick tiles name real modes, and there are four of them', () => {
+    // `DASHBOARD_QUICK_MODES` had no reader at all until item 207: Dashboard
+    // kept its own copy of the same four keys, so this file's list was
+    // authoritative over nothing and could name a deleted mode indefinitely
+    // without any screen noticing. Now that Dashboard reads it, a stale key
+    // here renders a tile with the fallback icon that navigates nowhere.
+    expect(DASHBOARD_QUICK_MODES.length).toBe(4); // .quickGrid is repeat(4, 1fr)
+    const unknown = DASHBOARD_QUICK_MODES.filter((m) => !MODE_COMPONENTS[m] || !MODE_META[m]);
+    expect(unknown).toEqual([]);
+  });
+
+  it('Dashboard reads that list rather than keeping a second copy', () => {
+    // The defect item 207 actually found. A source sweep, because the failure
+    // is a literal array reappearing next to the import -- which renders
+    // identically today and stops tracking the registry the moment either moves.
+    const src = read('components/Dashboard.jsx');
+    expect(src).toMatch(
+      /import \{[^}]*DASHBOARD_QUICK_MODES[^}]*\} from '\.\.\/router\/modes\.js'/
+    );
+    expect(src, 'Dashboard has its own quick-tile key list again').not.toMatch(
+      /const QUICK_MODE_KEYS\s*=/
+    );
   });
 
   it('no nav section lists the same mode twice', () => {

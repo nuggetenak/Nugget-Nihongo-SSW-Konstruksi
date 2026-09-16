@@ -11,7 +11,7 @@
 // carrying the question's content is a lie.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import QuestionPhoto from '../components/QuestionPhoto.jsx';
 import { JAC_OFFICIAL } from '../data/jac-official.js';
 import { mapQuestions } from '../modes/JACMode.jsx';
@@ -38,6 +38,31 @@ describe('QuestionPhoto', () => {
   it('still has an alt when a question carries an image but no description', () => {
     render(<QuestionPhoto img="images/jac-official/tt1_q10.webp" hasPhoto />);
     expect(screen.getByRole('img').getAttribute('alt')).toBeTruthy();
+  });
+
+  it('fades the photo in once it has loaded, and not before (item 168)', () => {
+    render(<QuestionPhoto img="images/jac-official/tt1_q10.webp" photoDesc="x" hasPhoto />);
+    const img = screen.getByRole('img');
+    // The frame reserves the height either way, so this is purely about the
+    // photo appearing rather than snapping in at full strength in a box that
+    // was empty a moment ago.
+    expect(img.dataset.loaded).toBe('false');
+    fireEvent.load(img);
+    expect(img.dataset.loaded).toBe('true');
+  });
+
+  it('a second question starts its own fade rather than inheriting the first', () => {
+    // Neither caller remounts this component -- QuizShell and SimulasiMode both
+    // render one <QuestionPhoto> and change its props as the question advances
+    // -- so without a reset keyed on `img`, every photo after the first would
+    // appear at full strength. That is what this asserts; it is not the same
+    // statement as the test above.
+    const { rerender } = render(<QuestionPhoto img="images/a.webp" hasPhoto />);
+    fireEvent.load(screen.getByRole('img'));
+    expect(screen.getByRole('img').dataset.loaded).toBe('true');
+
+    rerender(<QuestionPhoto img="images/b.webp" hasPhoto />);
+    expect(screen.getByRole('img').dataset.loaded).toBe('false');
   });
 
   it('falls back to the written description when there is no asset yet', () => {

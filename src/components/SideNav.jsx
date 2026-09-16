@@ -17,6 +17,8 @@
 // looking like it doesn't know where you are.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { flushSync } from 'react-dom';
+import { withViewTransition } from '../utils/motion.js';
 import Icon from './Icon.jsx';
 import { TOTAL_CARDS } from '../utils/constants.js';
 import { MODE_SECTIONS, MODE_META } from '../router/modes.js';
@@ -43,6 +45,18 @@ function activeSectionKey(mode) {
 export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelectMode }) {
   const openSection = activeSectionKey(mode);
 
+  // Both navs are always mounted and CSS picks which is visible, so these are
+  // the same navigations BottomNav performs -- and until now only BottomNav
+  // wrapped them. A tab switch crossfaded on a phone and hard-cut on a desktop,
+  // for no reason anyone had decided. Same helper, same reduced-motion check.
+  // A tab switch is lateral -- neither forward nor back in a stack -- so it
+  // gets its own flavour (a plain crossfade) rather than a direction it does
+  // not have. Mode entry is forward, and AppContext's own goMode wraps it again
+  // with the section's flavour; withViewTransition is re-entrant, so the inner
+  // call carries the flavour and this one costs nothing.
+  const goTab = (key) => withViewTransition(() => onChange(key), flushSync, { flavor: 'tab' });
+  const goMode = (m) => withViewTransition(() => onSelectMode(m), flushSync, { dir: 'forward' });
+
   return (
     <nav className={s.side} aria-label="Navigasi utama">
       <div className={s.brand}>
@@ -59,7 +73,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
               <button
                 className={s.item}
                 data-active={isActive}
-                onClick={() => onChange(tab.key)}
+                onClick={() => goTab(tab.key)}
                 aria-current={isActive ? 'page' : undefined}
                 aria-label={`${tab.label}${badge > 0 ? `, ${badge} notifikasi` : ''}`}
               >
@@ -78,7 +92,7 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
             <details key={key} className={s.sectionGroup} open={openSection === key}>
               <summary className={s.sectionSummary}>{section.title}</summary>
               <ul className={s.modeList}>
-                {section.modes.map((m) => {
+                {section.modes.map((m, i) => {
                   const meta = MODE_META[m];
                   if (!meta) return null;
                   const isActive = mode === m;
@@ -86,9 +100,13 @@ export default function SideNav({ active, onChange, dueBadge = 0, mode, onSelect
                     <li key={m}>
                       <button
                         type="button"
-                        className={s.modeItem}
+                        // Staggered because this list APPEARS: <details> opens
+                        // one section at a time, so the rows arriving in order
+                        // is the answer to "what just happened" (item 166).
+                        className={`${s.modeItem} stagger-item`}
+                        style={{ '--stagger-i': i }}
                         data-active={isActive}
-                        onClick={() => onSelectMode(m)}
+                        onClick={() => goMode(m)}
                         aria-current={isActive ? 'page' : undefined}
                       >
                         <Icon name={meta.ui} size={16} />

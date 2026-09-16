@@ -754,7 +754,7 @@ export const CARDS_LIFELINE = [
     id_text: 'Alat pemadam api (APAR)',
     desc: 'Perangkat portabel untuk memadamkan api awal kebakaran. Dipasang di setiap lokasi sesuai 消防法《しょうぼうほう》: jarak jalan kaki ke unit terdekat maksimal 20 m (30 m untuk tipe besar).',
     usage:
-      '消火器《しょうかいき》を取《と》り付《つ》け位置《いち》を確認《かくにん》する（konfirmasi posisi pemasangan alat pemadam api）',
+      '消火器《しょうかき》を取《と》り付《つ》け位置《いち》を確認《かくにん》する（konfirmasi posisi pemasangan alat pemadam api）',
     _origIndex: 102,
   },
   {

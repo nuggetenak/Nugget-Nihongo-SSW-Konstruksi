@@ -101,6 +101,13 @@ export default function ModeHeader({ mode, modeHistory, onBack }) {
               that effect queries; it kept the name the removed FocusSentinel
               used so index.html's skip link and anything else pointing at it
               still resolve. */}
+          {/* The morph's destination (item 153). The names themselves are
+              applied by CSS, gated on the root's data-nav-morph, so this
+              header is a named pair for exactly the one transition that is
+              travelling into it and an ordinary part of the page snapshot
+              every other time -- which matters, because a permanently named
+              element is pulled out of the root snapshot on EVERY transition,
+              including the ones that have nothing to do with it. */}
           <h1 className={S.title} id="mode-heading" tabIndex={-1}>
             <Icon name={meta.ui} size={20} className={S.titleIcon} />
             <span className={S.titleText}>{meta.label}</span>

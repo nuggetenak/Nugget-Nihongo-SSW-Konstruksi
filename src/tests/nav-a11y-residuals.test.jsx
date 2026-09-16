@@ -81,14 +81,32 @@ describe('the skip link has somewhere to go on every screen', () => {
     expect(target, 'the skip link markup moved — re-derive this test').toBeTruthy();
     expect(html).toContain('href="#main-content"');
 
-    const app = read('src/App.jsx');
-    // Every `return` that renders a screen has to be inside the landmark. Counting is
-    // crude but it is the property that broke: one branch out of five lacked it.
-    const returns = app.match(/^\s*(?:if \([^)]*\)\s*)?return \(/gm) ?? [];
-    const landmarks = app.match(/<main id="main-content"/g) ?? [];
-    expect(landmarks.length, 'a screen-rendering branch of App has no #main-content').toBe(
-      returns.length
+    // Every branch of App that renders a screen has to render it INSIDE the
+    // landmark. This used to compare two counts -- `return (` against
+    // `<main id="main-content"` -- and the counts were equal for the wrong
+    // reason: one `<main id="main-content">` was inside a COMMENT explaining the
+    // rule, and one `return (` was an effect's cleanup function. Two errors
+    // cancelling, and the next edit to App.jsx broke the tie and failed a test
+    // that was never measuring what it claimed. So it reads the actual pairs
+    // now: a JSX return is `return (` alone on its line, and the element that
+    // follows it must be the landmark.
+    const app = read('src/App.jsx').replace(/\/\*[\s\S]*?\*\//g, (b) => b.replace(/[^\n]/g, ' '));
+    const lines = app.split('\n');
+    const branches = [];
+    lines.forEach((line, i) => {
+      if (!/^\s*return \(\s*$/.test(line)) return;
+      const next = lines.slice(i + 1).find((l) => l.trim() !== '');
+      branches.push({ line: i + 1, opens: (next ?? '').trim() });
+    });
+
+    expect(branches.length, 'no JSX-returning branch found — re-derive this test').toBeGreaterThan(
+      2
     );
+    for (const b of branches) {
+      expect(b.opens, `App.jsx:${b.line} returns a screen outside #main-content`).toMatch(
+        /^<main id="main-content"/
+      );
+    }
   });
 });
 
@@ -187,11 +205,19 @@ describe('the exam pause overlay is a real dialog', () => {
   // keyboard user could Tab straight through into the exam behind it and answer
   // questions they could not see, and "Dijeda" was never announced, so nothing said
   // the clock had stopped.
+  // The rendered assertions moved to simulasi-a11y.test.jsx when item 187 made
+  // the modal attributes conditional: the overlay hands modality to the exit
+  // confirmation while that Sheet is open, so it no longer spells role="dialog"
+  // as a literal. Asserting the rendered DOM is the stronger guard anyway -- a
+  // source sweep cannot tell whether an attribute reached the element.
+  //
+  // What stays here is what a source sweep is actually good for: that the
+  // semantics and the trap are still wired at all, in any spelling.
   it('declares dialog semantics and traps focus', () => {
     const src = readFileSync(resolve(process.cwd(), 'src/modes/SimulasiMode.jsx'), 'utf8');
-    expect(src).toMatch(/role="dialog"/);
-    expect(src).toMatch(/aria-modal="true"/);
-    expect(src).toMatch(/aria-labelledby="simulasi-paused-title"/);
+    expect(src).toMatch(/role=\{?['"{]?.*dialog/);
+    expect(src).toMatch(/aria-modal=/);
+    expect(src).toMatch(/simulasi-paused-title/);
     expect(src).toMatch(/useFocusTrap\(pauseRef, paused\)/);
   });
 
@@ -215,7 +241,10 @@ describe('the cross-tab notice says the right thing', () => {
     );
     expect(src).toMatch(/othertab: \{/);
     expect(src).toMatch(/Muat ulang/);
-    expect(src).toMatch(/setExternalChangeHandler/);
+    // addExternalChangeListener since item 191: the handler was a single slot,
+    // and useSRS needs the same event to refresh the due badge after a review in
+    // another tab. Either name means "this banner hears about cross-tab writes".
+    expect(src).toMatch(/addExternalChangeListener|setExternalChangeHandler/);
   });
 });
 

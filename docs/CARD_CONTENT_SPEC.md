@@ -60,9 +60,9 @@ DATA_ARCH_AUDIT menyatakan "1 null entry" → **SALAH**. Actual: **5 null entrie
 
 | angka                     | Resolution                                                           |
 | ------------------------- | -------------------------------------------------------------------- |
-| `45 jam/bln, 360 jam/thn` | `kartu: 134` — backing card EXISTS ← belum diapply                   |
-| `6 bulan → 10 hari`       | `kartu: 1172` — backing card EXISTS ← belum diapply                  |
-| `< 6mm / ≥ 6mm`           | `kartu: 1347` — backing card EXISTS + soal terpotong ← belum diapply |
+| `45 jam/bln, 360 jam/thn` | `kartu: 134` — backing card EXISTS ← applied (see §1.5)              |
+| `6 bulan → 10 hari`       | `kartu: 1172` — backing card EXISTS ← applied                        |
+| `< 6mm / ≥ 6mm`           | `kartu: 1347` — backing card EXISTS + soal terpotong ← applied       |
 | `2 menit/soal`            | `kartu: null, // exam-meta` — sudah ada comment ✅                   |
 | `65%`                     | `kartu: null, // exam-meta` — sudah ada comment ✅                   |
 
@@ -210,7 +210,12 @@ Yang wajib difix: 41 truncated (ending `/`), 13 multi-slash list, 3 id_text beri
 
 ---
 
-### 1.5 Angka-kunci null entries — RESOLVED (belum diapply)
+### 1.5 Angka-kunci null entries — RESOLVED, and APPLIED
+
+_(item 179, 2026-09-15: the heading said "belum diapply" through four releases. Checked against
+`src/data/angka-kunci.js` rather than taken on trust — `kartu: 134`, `kartu: 1172` and
+`kartu: 1347` are all in the file. The work was done; only the label was stale, which is the
+worse half, because a doc that says a fix is unapplied is an invitation to apply it twice.)_
 
 | angka                     | Resolution                                                        |
 | ------------------------- | ----------------------------------------------------------------- |

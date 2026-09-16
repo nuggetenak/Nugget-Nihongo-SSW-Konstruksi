@@ -10,6 +10,7 @@ import { useSRSContext } from './contexts/SRSContext.jsx';
 import ErrorBoundary, { TabError } from './components/ErrorBoundary.jsx';
 import Onboarding from './components/Onboarding.jsx';
 import AppShell from './components/AppShell.jsx';
+import ModeHeader from './components/ModeHeader.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import BelajarTab from './components/BelajarTab.jsx';
 import SayaTab from './components/SayaTab.jsx';
@@ -26,7 +27,8 @@ import { MODE_META } from './router/modes.js';
 // The boundary is honest about what it is waiting for: opening a mode already shows a
 // skeleton while the mode's own chunk loads, so this adds no new kind of wait, only
 // the same one slightly earlier in the chain.
-const ModeRouter = lazy(() => import('./router/ModeRouter.jsx'));
+const loadModeRouter = () => import('./router/ModeRouter.jsx');
+const ModeRouter = lazy(loadModeRouter);
 
 // ── Main ──────────────────────────────────────────────────────────────────
 export default function App() {
@@ -39,12 +41,42 @@ export default function App() {
     completeOnboarding,
     tab,
     mode,
+    modeHistory,
     goMode,
     goTab,
+    goBack,
     toast,
   } = useApp();
   const { known, unknown, toastQueue, clearToast } = useProgress();
   const srs = useSRSContext();
+
+  // Warm the router chunk once the app is idle (item 153).
+  //
+  // It stays out of the ENTRY graph -- this is still a dynamic import, fired
+  // after first paint, and eager-bundle-graph.test.js walks static imports
+  // only. What it buys is the first mode entry of a session: until this chunk
+  // is in, opening any mode shows a skeleton while it downloads, and ModeHeader
+  // lives inside it.
+  //
+  // That last detail is why this is filed under the morph rather than under
+  // perf. The shared-element transition needs the header's icon and title to
+  // EXIST in the new snapshot, which is taken the moment the update commits --
+  // and measured in Chromium, the first entry produced only the outgoing halves
+  // (`::view-transition-old(morph-icon)` with no matching `-new`), because the
+  // header had not arrived yet. The second entry produced the full group. A
+  // feature that works every time except the first is worse than one that never
+  // does, because nobody can tell which one they are looking at.
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(loadModeRouter, { timeout: 3000 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+    // Safari has no requestIdleCallback. A timeout past first paint is the
+    // same intent with a cruder instrument.
+    const t = setTimeout(loadModeRouter, 1200);
+    return () => clearTimeout(t);
+  }, []);
 
   // Consume queued milestone toasts from ProgressContext.
   useEffect(() => {
@@ -121,12 +153,35 @@ export default function App() {
           mode={mode}
           onSelectMode={goMode}
         >
+          {/* ── The header is chrome, so it is eager (item 153) ──────────────
+              It rendered inside ModeRouter until now, and ModeRouter is lazy.
+              That meant the back control and the page title did not exist until
+              a 7.7 kB chunk had downloaded -- so the first mode entry of a
+              session showed a bare skeleton with no title and no way back, on
+              exactly the connection where that wait is longest.
+
+              It also broke the shared-element morph, which is how this was
+              found. Measured in Chromium: on a first entry the transition
+              produced `::view-transition-old(morph-icon)` with no matching
+              `-new`, because the destination had not arrived when the snapshot
+              was taken; on the second it produced the full group. Warming the
+              chunk did not help -- React.lazy resolves its payload on the first
+              RENDER attempt, so even an already-downloaded module suspends
+              once, and flushSync cannot wait out the microtask that would
+              settle it. Rendering the header outside that boundary is the fix,
+              and it is the right place for it regardless.
+
+              ModeHeader draws from MODE_META and Icon, both already eager, so
+              this adds nothing to the entry graph -- eager-bundle-graph.test.js
+              still passes unchanged. */}
+          <ModeHeader mode={mode} modeHistory={modeHistory} onBack={goBack} />
+
           {/* The three tabs below each get a boundary; this branch did not, and
               it is the most-exercised screen in the app. ModeRouter has one of
-              its own, but it wraps only ModeHeader + Suspense -- everything
-              ModeRouter computes before that return (its hooks, filteredCards,
-              the whole modeProps map) ran outside any boundary, so a throw
-              there unmounted the tree to a blank page mid-study. */}
+              its own, but it wraps only its Suspense -- everything ModeRouter
+              computes before that return (its hooks, filteredCards, the whole
+              modeProps map) ran outside any boundary, so a throw there
+              unmounted the tree to a blank page mid-study. */}
           <ErrorBoundary fallback={<TabError tab="Mode belajar" />}>
             <Suspense
               fallback={

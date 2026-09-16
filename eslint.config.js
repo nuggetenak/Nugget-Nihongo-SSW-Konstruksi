@@ -83,5 +83,16 @@ export default [
     rules: { 'no-console': 'off' }, // a worker has nowhere else to report
   },
 
+  {
+    // Plain browser script, not a module and not a worker: it is loaded with a
+    // bare <script src> from index.html because the CSP forbids the inline block
+    // it replaced. Same console allowance as sw.js -- a registration failure has
+    // nowhere else to report either, and silently failing is what this file
+    // exists to stop.
+    files: ['public/sw-register.js'],
+    languageOptions: { globals: { ...globals.browser } },
+    rules: { 'no-console': 'off' },
+  },
+
   prettier,
 ];

@@ -46,12 +46,43 @@ describe('Phase E — FlashcardMode decomposition', () => {
     expect(existsSync(resolve(root, 'modes/FlashcardMode/FilterBar.jsx'))).toBe(true);
   });
 
-  it('flashcard.module.css contains fc-scene and fc-card rules (TD-05)', () => {
-    const css = readFileSync(resolve(root, 'modes/FlashcardMode/flashcard.module.css'), 'utf-8');
-    expect(css).toMatch(/fc-scene/);
-    expect(css).toMatch(/fc-card/);
-    expect(css).toMatch(/is-flipped/);
-    expect(css).toMatch(/backface-visibility/);
+  it('the flip is declared in CSS, in a stylesheet every caller can reach (TD-05, item 165)', () => {
+    // TD-05's property was that the flip is CSS rather than a <style> element
+    // injected from JS -- the FLIP_STYLE assertion below is the other half of
+    // it. WHERE the CSS lived was incidental, and this test pinned it to
+    // flashcard.module.css, which turned out to be the wrong place.
+    //
+    // `:global(.fc-card)` inside a CSS Module reads like a shared definition
+    // and is not one: that file ships inside FlashcardMode's chunk, so on any
+    // screen that has not loaded FlashcardMode the rules simply do not exist.
+    // Onboarding's demo card points at these same class names and was measured
+    // in Chromium with `perspective: none`, `transform-style: flat` and a 0s
+    // transition -- the first flip a new reader ever saw was a plain 2D swap,
+    // and the "one flip implementation" of item 165 had not actually shared
+    // anything. A shared rule has to live somewhere every sharer can reach.
+    const globalCss = readFileSync(resolve(root, 'styles/global.css'), 'utf-8');
+    for (const needed of [
+      '.fc-scene',
+      '.fc-card',
+      'is-flipped',
+      'backface-visibility',
+      'preserve-3d',
+      'perspective:',
+    ]) {
+      expect(globalCss, `${needed} is not declared in global.css`).toContain(needed);
+    }
+
+    // And not back in a mode's own module, where it would ship in that chunk.
+    // Layout may stay there; the 3D and the motion may not.
+    const modeCss = readFileSync(
+      resolve(root, 'modes/FlashcardMode/flashcard.module.css'),
+      'utf-8'
+    );
+    expect(modeCss, 'the flip rotation is back in a mode chunk').not.toMatch(/is-flipped/);
+    expect(modeCss, 'backface-visibility is back in a mode chunk').not.toMatch(
+      /backface-visibility/
+    );
+    expect(modeCss, 'perspective is back in a mode chunk').not.toMatch(/perspective:/);
   });
 
   it('TD-05: FLIP_STYLE constant does NOT exist in index.jsx', () => {

@@ -6,7 +6,7 @@
 //   - weakness tip: use more specific selector to avoid multi-match
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ResultScreen from '../components/ResultScreen.jsx';
 
@@ -19,6 +19,20 @@ const defaultProps = {
   onRetryWrong: vi.fn(),
   onExit: vi.fn(),
 };
+
+// item 159 made the hero percentage COUNT UP to its value over --t-count, which
+// is a requestAnimationFrame loop and so is not deterministic inside a
+// synchronous assertion. These tests are about the grade paths -- which emoji,
+// which label, which colour band -- not about the animation, so they run with
+// "Animasi angka" off, exactly as a reader who turned that toggle off sees the
+// screen. The counting itself is held by count-up.test.jsx, which drives real
+// frames and asserts it arrives.
+beforeEach(() => {
+  document.documentElement.setAttribute('data-motion-no-count', '');
+});
+afterEach(() => {
+  document.documentElement.removeAttribute('data-motion-no-count');
+});
 
 describe('ResultScreen', () => {
   describe('celebrate path (≥70%)', () => {

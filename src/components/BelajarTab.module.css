@@ -2,7 +2,7 @@
 
 .container {
   padding-bottom: var(--space-28);
-  animation: fadeIn 0.25s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }
 
 /* ── Page title ── */
@@ -47,22 +47,42 @@
   flex-shrink: 0;
   font-size: var(--fs-small);
   color: var(--ssw-textDim);
-  transition: transform 0.2s ease;
+  transition: transform var(--t-base) var(--ease-smooth);
 }
 
 .sectionToggle[data-expanded='true'] {
   transform: rotate(180deg);
 }
 
-/* ── Collapsible secondary-item wrapper (per section) ── */
+/* ── Collapsible secondary-item wrapper (per section) ────────────────────────
+   `grid-template-rows: 0fr -> 1fr`, not `max-height: 0 -> 2000px` (item 167).
+
+   The max-height version animated a height the content never reaches. A section
+   holding ~300px of modes was easing across 2000px of declared travel, so the
+   open ran most of its curve after the content had already finished arriving
+   and the close appeared to hang before anything moved — a transition that
+   looked broken precisely because the number was generous.
+
+   The grid technique animates the REAL height with no magic number, which also
+   means it is correct for a section with two items and one with twelve. It
+   needs the inner wrapper: `min-height: 0` is what lets the row actually
+   collapse, because a grid item's automatic minimum size is its content.
+
+   `interpolate-size: allow-keywords` would be cleaner still and is far too new
+   for the Android WebView versions this audience runs. */
 .collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-enter) var(--ease-smooth);
+}
+
+.collapsible > * {
   overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.25s ease;
+  min-height: 0;
 }
 
 .collapsible[data-expanded='true'] {
-  max-height: 2000px;
+  grid-template-rows: 1fr;
 }
 
 .sectionDot {
@@ -101,9 +121,9 @@
   text-align: left;
   margin-bottom: var(--space-8);
   transition:
-    background 0.15s,
-    transform 0.14s,
-    box-shadow 0.15s;
+    background var(--t-fast),
+    transform var(--t-fast),
+    box-shadow var(--t-fast);
   position: relative;
   overflow: hidden;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
@@ -172,8 +192,8 @@
   opacity: 0.55;
   line-height: 1;
   transition:
-    transform 0.2s ease,
-    opacity 0.2s;
+    transform var(--t-base) var(--ease-smooth),
+    opacity var(--t-base);
 }
 .featuredCard:hover .featuredArrow {
   transform: translateX(2px);
@@ -196,7 +216,7 @@
   justify-content: center;
   flex-shrink: 0;
   margin-right: var(--space-2);
-  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: popIn var(--t-enter) var(--ease-spring);
 }
 
 /* ── Compact tile grid ─────────────────────────────────────────────────────
@@ -259,9 +279,9 @@
   gap: var(--space-8);
   min-width: 0;
   transition:
-    background 0.15s,
-    transform 0.14s,
-    border-color 0.15s;
+    background var(--t-fast),
+    transform var(--t-fast),
+    border-color var(--t-fast);
   position: relative;
   min-height: 92px;
   overflow: hidden;
@@ -331,5 +351,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: popIn var(--t-enter) var(--ease-spring);
 }

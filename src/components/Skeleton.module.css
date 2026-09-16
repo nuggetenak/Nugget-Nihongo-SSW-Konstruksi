@@ -10,6 +10,9 @@
     var(--ssw-surface) 75%
   );
   background-size: 200% 100%;
+  /* Literal on purpose: an ambient loop is not on the UI timing scale, and
+     tying a loading shimmer to --t-mult would make the speed control change
+     what "loading" looks like rather than how fast the UI responds. */
   animation: shimmer 1.5s ease-in-out infinite;
 }
 
@@ -33,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 200px;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }
 
 @keyframes fadeIn {
@@ -55,7 +58,7 @@
   border-radius: var(--r-md);
   border: 1.5px solid var(--ssw-border);
   background: var(--ssw-surface);
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }
 
 /* Dashboard stat skeleton */
@@ -65,7 +68,7 @@
   background: var(--ssw-surface);
   border: 1px solid var(--ssw-border);
   text-align: center;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }
 
 /* List row skeleton */
@@ -74,5 +77,5 @@
   align-items: center;
   gap: var(--space-12);
   padding: var(--space-12) 0;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn var(--t-enter) var(--ease-smooth);
 }

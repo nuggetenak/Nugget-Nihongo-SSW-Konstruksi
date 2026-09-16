@@ -2,8 +2,11 @@
 // Circular SVG progress ring.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { useState, useEffect } from 'react';
 import s from './ProgressRing.module.css';
 import { formatCount } from '../utils/format.js';
+import { motionAllows } from '../utils/motion.js';
+import { useCountUp } from '../hooks/useCountUp.js';
 
 export default function ProgressRing({
   current = 0,
@@ -18,6 +21,28 @@ export default function ProgressRing({
   const radius = (size - stroke) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (pct / 100) * circumference;
+
+  // item 160. The ring has transitioned its stroke-dashoffset at --t-count
+  // since it was written, and never once ran that transition: it MOUNTED at its
+  // final offset, and a property that never changes never animates. So the one
+  // element in the app whose whole job is to show how far you have come simply
+  // appeared, complete, as if it had always been that full.
+  //
+  // One frame at the empty offset first, then the real one, which is what gives
+  // the existing transition something to do. A rAF rather than a layout effect:
+  // the browser has to have PAINTED the empty state for the change to be a
+  // change at all.
+  const [drawn, setDrawn] = useState(() => !motionAllows('count'));
+  useEffect(() => {
+    if (drawn) return undefined;
+    const id = requestAnimationFrame(() => setDrawn(true));
+    return () => cancelAnimationFrame(id);
+  }, [drawn]);
+
+  // The percentage climbs with the arc (item 159). `pct` itself stays exact --
+  // the aria-label below reads it, and a screen reader must be told the value,
+  // not a frame of the animation.
+  const shownPct = useCountUp(Math.round(pct));
 
   // `centerText` replaces the percentage without changing what the arc draws —
   // for a caller that wants the shape of the progress but not a number for it
@@ -51,7 +76,7 @@ export default function ProgressRing({
           r={radius}
           strokeWidth={stroke}
           strokeDasharray={circumference}
-          strokeDashoffset={offset}
+          strokeDashoffset={drawn ? offset : circumference}
         />
       </svg>
       <div className={s.center}>
@@ -64,7 +89,7 @@ export default function ProgressRing({
               : null),
           }}
         >
-          {centerText ?? `${Math.round(pct)}%`}
+          {centerText ?? `${shownPct}%`}
         </div>
         <div className={s.sub} style={{ fontSize: subSize }}>
           {/* Corpus-scale by every current caller (SayaTab passes known/TOTAL_CARDS),

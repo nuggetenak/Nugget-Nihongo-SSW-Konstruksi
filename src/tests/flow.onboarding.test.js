@@ -2,7 +2,7 @@
 // G.2 Integration: onboarding flow → sets onboarded + track + dailyGoal.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
-import { _reset_for_test, init, get, set } from '../storage/engine.js';
+import { _reset_for_test, init, get, set, flushWrites } from '../storage/engine.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -36,6 +36,10 @@ describe('G.2 Flow — Onboarding', () => {
   it('onboarded persists across engine re-init', () => {
     set('prefs', (p) => ({ ...p, onboarded: true, track: 'lifeline' }));
     // Simulate re-open: reset engine cache, re-init from localStorage
+    // set() queues the persist (item 185). A real app close flushes via
+    // pagehide/visibilitychange; _reset_for_test skips those, so the restart
+    // this test simulates has to flush explicitly first.
+    flushWrites();
     _reset_for_test();
     init();
     const prefs = get('prefs');

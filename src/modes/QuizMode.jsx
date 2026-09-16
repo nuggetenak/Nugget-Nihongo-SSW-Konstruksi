@@ -328,7 +328,10 @@ export default function QuizMode({
         {showSettings && (
           <div
             className={S.card}
-            style={{ marginBottom: 'var(--space-20)', animation: 'fadeIn 0.15s ease' }}
+            style={{
+              marginBottom: 'var(--space-20)',
+              animation: 'fadeIn var(--t-fast) var(--ease-smooth)',
+            }}
           >
             {lemahCards.length > 0 && (
               <div className={S.rowSpread} style={{ marginBottom: 'var(--space-12)' }}>

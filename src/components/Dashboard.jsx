@@ -11,12 +11,14 @@ import s from './Dashboard.module.css';
 import { T } from '../styles/theme.js';
 import { get as storageGet } from '../storage/engine.js';
 import Icon from './Icon.jsx';
+import SplitFlap from './SplitFlap.jsx';
+import { markMorphSource } from '../utils/motion.js';
 import { JpFront } from './JpDisplay.jsx';
 import { JP_LIST_MAX, stripFuri } from '../utils/jp-helpers.js';
 import { recommendMode } from '../utils/recommend-mode.js';
 import { formatCount } from '../utils/format.js';
 import { TOTAL_CARDS } from '../utils/constants.js';
-import { MODE_META } from '../router/modes.js';
+import { MODE_META, DASHBOARD_QUICK_MODES } from '../router/modes.js';
 import { getThemeMode } from '../utils/theme-mode.js';
 
 function getQuickStart(srs, examDate) {
@@ -38,10 +40,17 @@ function getCountdownTier(daysLeft) {
   return 'info';
 }
 
-// Which modes appear as quick tiles. Only the keys live here — label and icon
-// are read from MODE_META so this never drifts out of sync with the registry.
-const QUICK_MODE_KEYS = ['kartu', 'kuis', 'sprint', 'jac'];
-const QUICK_MODES = QUICK_MODE_KEYS.map((key) => ({
+// Which modes appear as quick tiles. The list itself is the registry's
+// (`DASHBOARD_QUICK_MODES`); only the display shape is built here.
+//
+// It used to be a local `QUICK_MODE_KEYS = ['kartu', 'kuis', 'sprint', 'jac']`
+// under a comment saying label and icon come from MODE_META "so this never
+// drifts out of sync with the registry". That was half of the risk named and
+// the other half left open: `router/modes.js` exports the same four keys, calls
+// itself the authority on them, and **nothing read it** — so editing the
+// registry's list moved nothing, and the two agreed only because no one had
+// touched either. Item 207.
+const QUICK_MODES = DASHBOARD_QUICK_MODES.map((key) => ({
   key,
   ui: MODE_META[key]?.ui ?? 'more',
   label: MODE_META[key]?.short ?? MODE_META[key]?.label ?? key,
@@ -190,7 +199,13 @@ export default function Dashboard({
           {showCountdown && (
             <div className={s.rail} data-tier={tier}>
               <div className={s.railTitle}>
-                {daysLeft === 0 ? 'Hari ini ujian!' : `${daysLeft} hari lagi menuju ujian`}
+                {daysLeft === 0 ? (
+                  'Hari ini ujian!'
+                ) : (
+                  <>
+                    <SplitFlap value={daysLeft} /> hari lagi menuju ujian
+                  </>
+                )}
               </div>
               <div className={s.railSub}>
                 {daysLeft === 0
@@ -341,12 +356,22 @@ export default function Dashboard({
           {/* ── Quick grid ── */}
           <h2 className={s.secLabel}>Mulai belajar</h2>
           <div className={s.quickGrid}>
-            {QUICK_MODES.map((m) => (
-              <button key={m.key} className={s.quickTile} onClick={() => onNavigate(m.key)}>
-                <span className={s.quickIcon}>
+            {QUICK_MODES.map((m, i) => (
+              <button
+                key={m.key}
+                className={`${s.quickTile} stagger-item`}
+                style={{ '--stagger-i': i }}
+                onClick={(e) => {
+                  markMorphSource(e.currentTarget);
+                  onNavigate(m.key);
+                }}
+              >
+                <span data-morph="icon" className={s.quickIcon}>
                   <Icon name={m.ui} size={22} />
                 </span>
-                <span className={s.quickLabel}>{m.label}</span>
+                <span data-morph="label" className={s.quickLabel}>
+                  {m.label}
+                </span>
               </button>
             ))}
           </div>

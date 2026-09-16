@@ -7,3 +7,5 @@ export { useSessionTimer } from './useSessionTimer.js';
 export { useDailyChallenge } from './useDailyChallenge.js';
 export { useTrackedCards } from './useTrackedCards.js';
 export { useExitGuard } from './useExitGuard.js';
+export { useExitTransition } from './useExitTransition.js';
+export { useCountUp } from './useCountUp.js';

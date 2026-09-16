@@ -205,6 +205,26 @@
 }
 
 /* ── Flip hint ── */
+/* fcHintFade holds the hint visible to 70%, then fades it out and ends at
+   opacity 0 with `forwards`. That makes it the SECOND animation in the app whose
+   end state differs from its resting state -- the celebration overlay was the
+   first -- and the global reduced-motion catch-all does not disable those, it
+   jumps them to the end. So this hint was invisible to reduced-motion users:
+   the one place the app explains its primary gesture, gone for the readers most
+   likely to need it explained.
+
+   `animation: none` is the only spelling that stops it, which is why the
+   component sets a data attribute instead of an inline animation. */
+.flipHint[data-fade='true'] {
+  animation: fcHintFade 2s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flipHint[data-fade='true'] {
+    animation: none;
+  }
+}
+
 .flipHint {
   position: absolute;
   left: 0;
@@ -291,8 +311,8 @@
   display: block;
   margin: 0 auto;
   transition:
-    background 0.15s,
-    transform 0.12s;
+    background var(--t-fast),
+    transform var(--t-instant);
   letter-spacing: 0.2px;
   backdrop-filter: blur(4px);
 }
@@ -302,7 +322,7 @@
 }
 
 .backDescText {
-  animation: fadeIn 0.15s ease;
+  animation: fadeIn var(--t-fast) var(--ease-smooth);
   color: rgba(255, 255, 255, 0.85);
   font-size: var(--fs-caption);
   line-height: 1.65;

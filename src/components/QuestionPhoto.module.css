@@ -22,6 +22,29 @@
   height: 100%;
   object-fit: contain;
   display: block;
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease-smooth);
+}
+
+.img[data-loaded='true'] {
+  opacity: 1;
+}
+
+/* Reduced motion gets the photo, immediately. The fade is the whole of this
+   component's motion, so switching it off has to mean "appear", never "stay at
+   opacity 0" -- which is what a zeroed TRANSITION duration alone would leave if
+   the attribute had not flipped yet. */
+@media (prefers-reduced-motion: reduce) {
+  .img {
+    opacity: 1;
+    transition: none;
+  }
+}
+
+:root[data-motion='mati'] .img,
+:root[data-motion-no-entrance] .img {
+  opacity: 1;
+  transition: none;
 }
 
 .caption {

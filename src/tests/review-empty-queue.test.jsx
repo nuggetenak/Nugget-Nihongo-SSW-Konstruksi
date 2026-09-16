@@ -11,7 +11,7 @@
 // showed 2 -- the phantom one, reproducible every time.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { ToastProvider } from '../components/Toast.jsx';
 import { ConfirmProvider } from '../components/ConfirmDialog.jsx';
 import { AppProvider } from '../contexts/AppContext.jsx';
@@ -94,5 +94,49 @@ describe('ReviewMode — empty queue must not record a phantom session', () => {
     await new Promise((r) => setTimeout(r, 0));
     expect(screen.queryByText(/Tidak ada|belum ada/i)).toBeNull();
     expect(onSessionEnd).not.toHaveBeenCalled(); // not done yet -- still reviewing
+  });
+});
+
+// ─── The rating guard must not outlive a failed review (item 186) ────────────
+// `ratingCardRef` stops one exposure being rated twice -- a swipe landing after
+// a button press ran srs.review() a second time on the same card. It used to be
+// armed BEFORE the call, so a throw left it set with nothing recorded, and
+// because handleSkip checks the same ref the card became neither rateable nor
+// skippable: stuck on screen, flipped, until the learner left the mode. That is
+// a stricter lock than the behaviour the guard replaced.
+describe('ReviewMode — a failed review must not soft-lock the card (item 186)', () => {
+  const card = CARDS[0];
+
+  function srsThatThrows() {
+    return {
+      ...mockSrs({ due: [card.id] }),
+      review: vi.fn(() => {
+        throw new Error('corrupted SRS entry');
+      }),
+    };
+  }
+
+  it('leaves the card rateable after srs.review() throws', () => {
+    const srs = srsThatThrows();
+    render(wrap(<ReviewMode srs={srs} onExit={vi.fn()} onGoKartu={vi.fn()} />));
+
+    // Flip by tapping the card itself (the front is the button), which is what
+    // arms the 1-4 rating keys.
+    const cardBtn = screen.queryAllByRole('button').find((b) => !/Lewati/i.test(b.textContent));
+    fireEvent.click(cardBtn);
+
+    // Rate twice. Each attempt throws inside srs.review(); neither may latch the
+    // guard, so both must reach it.
+    const rate = () => {
+      try {
+        fireEvent.keyDown(window, { key: '3' });
+      } catch {
+        /* the throw propagates out of the handler; the guard state is the point */
+      }
+    };
+    rate();
+    rate();
+
+    expect(srs.review.mock.calls.length, 'a failed review must not latch the guard').toBe(2);
   });
 });

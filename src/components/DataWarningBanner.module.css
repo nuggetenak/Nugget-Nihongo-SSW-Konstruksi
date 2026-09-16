@@ -15,7 +15,7 @@
   font-weight: 600;
   backdrop-filter: blur(8px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  animation: slideDown 0.25s var(--ease-smooth, ease);
+  animation: slideDown var(--t-enter) var(--ease-smooth, ease);
 }
 
 .msg {
@@ -63,4 +63,35 @@
   .banner {
     animation: none;
   }
+}
+
+/* ── Press feedback (item 164) ───────────────────────────────────────────────
+   On a touch device there is no hover, so the pressed state is the ONLY
+   confirmation that a tap registered before the screen changes — and on a slow
+   phone the gap between the two is exactly where someone taps a second time.
+   Thirteen of the app's twenty-eight stylesheets had clickable elements and no
+   press state at all; this is one of them. Compositor-only, so it costs nothing.
+   Honours Gerakan's "Respons sentuh" toggle. */
+.action {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.action:active {
+  transform: scale(0.96);
+}
+
+:root[data-motion-no-press] .action:active {
+  transform: none;
+}
+
+.close {
+  transition: transform var(--t-instant) var(--ease-smooth);
+}
+
+.close:active {
+  transform: scale(0.9);
+}
+
+:root[data-motion-no-press] .close:active {
+  transform: none;
 }

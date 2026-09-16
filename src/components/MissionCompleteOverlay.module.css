@@ -1,0 +1,152 @@
+/* ─── MissionCompleteOverlay.module.css ──────────────────────────────────────
+   The overlay used to carry its animation as an inline style, which put it out
+   of reach of every stylesheet in the app -- including the one rule it needed.
+   See the reduced-motion block at the bottom. */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-celebration);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  /* 3s is a DWELL time, not a transition, and it is paired with the 3000ms
+     dismiss timer in the component -- the two have to agree, so neither gets
+     to drift with --t-mult. */
+  animation: missionFadeOut 3s ease forwards;
+}
+
+.inner {
+  text-align: center;
+  color: #fff;
+  padding: 0 var(--space-32);
+  user-select: none;
+  animation: popIn var(--t-slow) var(--ease-bounce) both;
+  position: relative;
+}
+
+/* ── The hazard sweep (item 161) ──────────────────────────────────────────────
+   A band of the app's own --hazard stripe crossing the backdrop once. Rotated
+   and over-wide so its ends are never on screen, and translated on a single
+   transform -- the diagonal is the motif, the crossing is the event. */
+.sweep {
+  position: absolute;
+  top: -20%;
+  left: -60%;
+  width: 60%;
+  height: 140%;
+  background: var(--hazard);
+  opacity: 0.16;
+  transform: rotate(12deg);
+  pointer-events: none;
+  animation: hazardSweep var(--t-slow) var(--ease-smooth) both;
+}
+
+@keyframes hazardSweep {
+  from {
+    transform: rotate(12deg) translateX(0);
+  }
+  to {
+    transform: rotate(12deg) translateX(320%);
+  }
+}
+
+/* ── The spark ring ───────────────────────────────────────────────────────── */
+.burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: var(--ssw-amber);
+  /* --spark-a is the angle this one flies along; --spark-i is its place in the
+     order, so the ring opens rather than appearing all at once. */
+  animation: sparkOut var(--t-slow) var(--ease-exit) both;
+  animation-delay: calc(var(--spark-i, 0) * var(--t-stagger) * 0.3);
+}
+
+@keyframes sparkOut {
+  from {
+    transform: rotate(var(--spark-a, 0deg)) translateY(0) scale(0.3);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    transform: rotate(var(--spark-a, 0deg)) translateY(-110px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.title {
+  font-size: var(--fs-page-title);
+  font-weight: 800;
+  margin-top: var(--space-10);
+}
+
+.label {
+  font-size: var(--fs-caption);
+  margin-top: var(--space-6);
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.score {
+  font-size: var(--fs-body);
+  margin-top: var(--space-4);
+  opacity: 0.75;
+}
+
+.hint {
+  font-size: var(--fs-small);
+  margin-top: var(--space-12);
+  opacity: 0.5;
+}
+
+/* `missionFadeOut` ends at opacity 0 and runs `forwards`. The global
+   reduced-motion catch-all zeroes animation-duration, which for an animation
+   whose end state differs from its resting state does not disable it -- it
+   jumps to the end. So under reduced motion this overlay rendered fully
+   transparent for its whole three-second life: the single celebration in the
+   app, removed for precisely the readers who asked for less movement, with
+   nothing on screen to say a mission had been completed at all.
+   `animation: none` is the only spelling that actually stops it, and the
+   overlay then sits at its resting state (visible) until the component
+   unmounts on its own timer. */
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .inner,
+  .sweep,
+  .spark {
+    animation: none !important;
+  }
+}
+
+/* The sweep and the sparks both END somewhere other than their resting state --
+   the sweep off to the right, the sparks at opacity 0 -- so a zeroed duration
+   would not switch them off, it would freeze them at the end: a stripe parked
+   over the text and twelve invisible dots. `animation: none` leaves them at
+   their FROM state instead, which for the sparks is opacity 0 (correct: no
+   burst) and for the sweep is a faint diagonal band sitting still behind the
+   message, which is the app's motif at rest and reads as intended. This is the
+   shape DESIGN_SPEC §4 requires for any animation whose end state differs from
+   its resting state, and this overlay is the reason that rule is written down.
+
+   The reader-facing toggle is handled in the component rather than here: with
+   celebrations off, neither element is rendered at all. */

@@ -116,8 +116,15 @@ just being a build metric.
 
 ## 4. Bundle size
 
-`npm run build` warns on any chunk over 500KB. As of this doc, one real offender:
-`data-cards-*.js` at 661KB (191KB gzipped) — undercuts the offline-first goal directly on slow
+`npm run build` warns on any chunk over 500KB. Re-measured 2026-09-15 (item 180) from the build
+output rather than carried forward: `data-cards-*.js` is **739KB (206KB gzipped)**, not the
+661/191 this said. The figures were a snapshot of a corpus that has since grown, and a stale
+number here reads as a budget being held when it is not.
+
+**The critical-path half of this is closed.** 7.5.0 took `cards.js` out of the EAGER graph
+(`src/data/card-index.js`, 37KB of ids and categories, is what the first screen needs), taking
+first paint from 337KB to 128KB gzipped. What remains is the chunk a mode pays for when it opens,
+which is the deferred half below and still deferred — undercuts the offline-first goal directly on slow
 connections, since it has to land before the app is meaningfully usable offline. Known,
 deliberately deferred to its own branch (a build/data-loading concern, not a UI one) — see
 HANDOFF.md's CURRENT STATE for current status rather than assuming this doc's snapshot is still

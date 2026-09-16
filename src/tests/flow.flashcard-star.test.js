@@ -2,7 +2,7 @@
 // G.2 Integration: star card → persists in progress → survives re-init.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach } from 'vitest';
-import { _reset_for_test, init, get, set } from '../storage/engine.js';
+import { _reset_for_test, init, get, set, flushWrites } from '../storage/engine.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -37,6 +37,10 @@ describe('G.2 Flow — Flashcard Star', () => {
 
   it('starred cards persist across engine re-init', () => {
     set('progress', (p) => ({ ...p, starred: [5, 15, 25] }));
+    // set() queues the persist (item 185). A real app close flushes via
+    // pagehide/visibilitychange; _reset_for_test skips those, so the restart
+    // this test simulates has to flush explicitly first.
+    flushWrites();
     _reset_for_test();
     init();
     expect(get('progress').starred).toEqual([5, 15, 25]);

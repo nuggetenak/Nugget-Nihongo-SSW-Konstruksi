@@ -3,7 +3,7 @@
 // progression, finish flow.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import QuizShell from '../components/QuizShell.jsx';
 
@@ -28,6 +28,15 @@ const defaultProps = {
 describe('QuizShell', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // The finish flow lands on ResultScreen, whose hero percentage counts up to
+    // its value over --t-count (item 159) -- a requestAnimationFrame loop, and
+    // so not deterministic inside a synchronous assertion. This file is about
+    // the quiz's own flow, not about that animation, so it runs with "Animasi
+    // angka" off. count-up.test.jsx drives real frames and holds the counting.
+    document.documentElement.setAttribute('data-motion-no-count', '');
+  });
+  afterEach(() => {
+    document.documentElement.removeAttribute('data-motion-no-count');
   });
 
   describe('initial render', () => {

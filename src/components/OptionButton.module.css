@@ -12,10 +12,10 @@
   gap: var(--space-10);
   align-items: flex-start;
   transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease;
+    background var(--t-fast) var(--ease-smooth),
+    border-color var(--t-fast) var(--ease-smooth),
+    transform var(--t-fast) var(--ease-smooth),
+    box-shadow var(--t-base) var(--ease-smooth);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -44,18 +44,23 @@
 .btn[data-state='correct'] {
   background: var(--ssw-correctBg);
   border-color: var(--ssw-correctBorder);
-  animation: correctFlash 0.5s ease;
+  animation: correctFlash var(--t-slow) var(--ease-smooth);
   box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
 }
 
 .btn[data-state='wrong'] {
   background: var(--ssw-wrongBg);
   border-color: var(--ssw-wrongBorder);
-  animation: wrongShake 0.45s ease;
+  animation: wrongShake var(--t-slow) var(--ease-smooth);
 }
 
+/* item 156. Dimming alone flattens the row into "some of these are off"; a
+   small recede says the eliminated options have STEPPED BACK, which is what
+   makes the remaining one read as the answer rather than as the survivor. Two
+   percent, on a transform that is already in the button's transition list. */
 .btn[data-state='dim'] {
   opacity: 0.35;
+  transform: scale(0.98);
 }
 
 /* Correct: green left bar */
@@ -68,7 +73,7 @@
   width: 3px;
   background: var(--ssw-correct);
   border-radius: 3px 0 0 3px;
-  animation: slideDown 0.2s ease both;
+  animation: slideDown var(--t-base) var(--ease-smooth) both;
 }
 
 /* Wrong: red left bar */
@@ -81,16 +86,46 @@
   width: 3px;
   background: var(--ssw-wrong);
   border-radius: 3px 0 0 3px;
-  animation: slideDown 0.2s ease both;
+  animation: slideDown var(--t-base) var(--ease-smooth) both;
 }
 
-/* Shine on correct */
+/* Shine on correct — and it MOVES now (item 156).
+   It was a static gradient painted across the button, which is a highlight
+   nobody notices. Sweeping it once takes the eye TO the right answer instead of
+   leaving them to find it, which matters most in the case the reader needs it:
+   they chose wrong, and the correct row is somewhere else in a list of four.
+   transform on a pseudo-element, so it costs nothing. */
 .btn[data-state='correct']::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(22, 163, 74, 0.07) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(22, 163, 74, 0.18) 50%, transparent 100%);
   pointer-events: none;
+  animation: optionShine var(--t-slow) var(--ease-smooth) both;
+}
+
+@keyframes optionShine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Ends off the right-hand edge, which is not its resting state -- so a zeroed
+   duration would park the highlight there rather than switching it off. It is
+   invisible either way (it is outside the button's `overflow: hidden`), but the
+   explicit rule is what DESIGN_SPEC §4 requires and what stays correct if the
+   keyframe changes. */
+@media (prefers-reduced-motion: reduce) {
+  .btn[data-state='correct']::after {
+    animation: none;
+  }
+}
+
+:root[data-motion='mati'] .btn[data-state='correct']::after {
+  animation: none;
 }
 
 /* Badge circle */
@@ -106,10 +141,10 @@
   font-weight: 800;
   margin-top: 1px;
   transition:
-    background 0.22s,
-    color 0.22s,
-    border-color 0.22s,
-    transform 0.22s;
+    background var(--t-base),
+    color var(--t-base),
+    border-color var(--t-base),
+    transform var(--t-base);
 
   /* default */
   background: rgba(245, 158, 11, 0.06);
@@ -122,7 +157,7 @@
   border-color: var(--ssw-correctBorder);
   color: var(--ssw-correct);
   transform: scale(1.15);
-  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: popIn var(--t-enter) var(--ease-spring) both;
 }
 
 .badge[data-state='wrong'] {
@@ -133,6 +168,25 @@
 
 .text {
   flex: 1;
+}
+
+/* ── Variants (item 174) ──────────────────────────────────────────────────────
+   The one difference between the four hand-rolled copies that was a decision
+   rather than drift. Everything else they disagreed about was collapsed into
+   the base rule above. */
+
+/* Dengar. Its options are read WHILE audio plays and while the listener is
+   deliberately not staring at the screen, so they step up a rung. */
+.btn[data-variant='lg'] .text {
+  font-size: var(--fs-subtitle);
+}
+
+/* Angka. Its options are numerals, and proportional digits make two similar
+   numbers harder to tell apart -- which is exactly the discrimination that
+   drill exists to train, so it must not be made harder by the type. */
+.btn[data-variant='numeric'] .text {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
 }
 
 .sub {
