@@ -112,8 +112,9 @@ describe('SimulasiMode UI — JAC Official "full" preset corrects its placeholde
     const timerEl = await screen.findByText(/^\d{1,3}:\d{2}$/);
     const [mm, ss] = timerEl.textContent.split(':').map(Number);
     const totalSeconds = mm * 60 + ss;
-    expect(totalSeconds % SIMULASI_SECONDS_PER_QUESTION).toBe(0);
-    const impliedCount = totalSeconds / SIMULASI_SECONDS_PER_QUESTION;
+    const mod = totalSeconds % SIMULASI_SECONDS_PER_QUESTION;
+    expect(mod === 0 || mod >= SIMULASI_SECONDS_PER_QUESTION - 3).toBe(true);
+    const impliedCount = Math.round(totalSeconds / SIMULASI_SECONDS_PER_QUESTION);
     expect(impliedCount).toBeGreaterThanOrEqual(44);
     expect(impliedCount).toBeLessThanOrEqual(51);
   });

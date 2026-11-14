@@ -43,6 +43,7 @@ export default function ResultScreen({
 }) {
   const { prefs } = useApp();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
+  const showFuri = prefs?.quizOptFurigana ?? true;
   ensureShake();
 
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -169,7 +170,7 @@ export default function ResultScreen({
                     <>
                       ✗{' '}
                       <JpFront
-                        jp={r.userAnswer || '—'}
+                        jp={showFuri ? (r.rawUserAnswer ?? r.userAnswer) || '—' : r.userAnswer || '—'}
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX_SECONDARY}
                         compact
@@ -180,7 +181,7 @@ export default function ResultScreen({
                 <div className={s.reviewCorrect}>
                   ✓{' '}
                   <JpFront
-                    jp={r.correctAnswer || '—'}
+                    jp={showFuri ? (r.rawCorrectAnswer ?? r.correctAnswer) || '—' : r.correctAnswer || '—'}
                     furiganaPolicy={furiganaPolicy}
                     maxSize={JP_LIST_MAX_SECONDARY}
                     compact

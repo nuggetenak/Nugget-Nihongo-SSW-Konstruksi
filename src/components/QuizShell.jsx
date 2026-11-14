@@ -19,6 +19,7 @@ import QuestionPhoto from './QuestionPhoto.jsx';
 import QuizAnnouncer from './QuizAnnouncer.jsx';
 import { saveQuizSnapshot, clearQuizSnapshot } from '../utils/quiz-persistence.js';
 import { useSpeakErrorHandler } from '../hooks/useSpeakErrorHandler.js';
+import { pillStyle } from '../styles/pill.js';
 import S from './QuizShell.module.css';
 
 export default function QuizShell({
@@ -46,7 +47,9 @@ export default function QuizShell({
   const [phase, setPhase] = useState('playing');
   const [timeLeft, setTimeLeft] = useState(timer);
   const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
-  const { toast, prefs } = useApp();
+  const { toast, prefs, setPref } = useApp();
+  const showFuri = prefs?.quizOptFurigana ?? true;
+  const showSub  = prefs?.quizOptId ?? true;
   const handleSpeakError = useSpeakErrorHandler();
   const { getDurationMs, reset: resetSessionTimer } = useSessionTimer();
 
@@ -94,7 +97,9 @@ export default function QuizShell({
           _cardId: q._cardId ?? null,
           question: q.question,
           userAnswer: '',
+          rawUserAnswer: null,
           correctAnswer: q.options?.[q.correctIdx]?.text || '',
+          rawCorrectAnswer: q.options?.[q.correctIdx]?.rawText ?? null,
           explanation: q.explanation || '',
         })),
       ]);
@@ -119,7 +124,9 @@ export default function QuizShell({
           _cardId: q._cardId ?? null,
           question: q.question,
           userAnswer: q.options[idx]?.text || '',
+          rawUserAnswer: q.options[idx]?.rawText ?? null,
           correctAnswer: q.options[q.correctIdx]?.text || '',
+          rawCorrectAnswer: q.options[q.correctIdx]?.rawText ?? null,
           explanation: q.explanation || '',
         },
       ]);
@@ -337,6 +344,23 @@ export default function QuizShell({
             🔊 Dengar
           </button>
         )}
+        {/* Item 216: furigana / Indonesian sub toggles */}
+        <button
+          onClick={() => setPref('quizOptFurigana', !showFuri)}
+          style={pillStyle(showFuri)}
+          aria-pressed={showFuri}
+          title="Furigana pilihan jawaban"
+        >
+          ふ {showFuri ? 'ON' : 'OFF'}
+        </button>
+        <button
+          onClick={() => setPref('quizOptId', !showSub)}
+          style={pillStyle(showSub)}
+          aria-pressed={showSub}
+          title="Terjemahan Indonesia"
+        >
+          ID {showSub ? 'ON' : 'OFF'}
+        </button>
       </div>
 
       <div className={S.questionCard}>
@@ -361,7 +385,10 @@ export default function QuizShell({
             key={i}
             idx={i}
             text={opt.text}
+            rawText={opt.rawText}
             subText={opt.sub}
+            showFuri={showFuri}
+            showSub={showSub}
             selected={selected}
             isCorrect={i === q.correctIdx}
             onSelect={handleSelect}

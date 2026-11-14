@@ -226,7 +226,7 @@ describe('width has one owner', () => {
     const owners = cssFiles
       // ^\s* so a mention inside a comment doesn't read as a declaration.
       .filter((f) => /^\s*max-width:\s*var\(--max-w/m.test(readFileSync(f, 'utf-8')))
-      .map((f) => relative(SRC, f));
+      .map((f) => relative(SRC, f).replace(/\\/g, "/"));
     expect(owners).toEqual(['components/AppShell.module.css']);
   });
 

@@ -52,6 +52,8 @@ export function mapQuestions(list, withID) {
     const { options, correctIdx } = shuffleOptions(
       q.opts.map((opt, i) => ({
         text: stripFuri(opt),
+        // Item 216: preserve markers for ruby rendering; announcer still reads text (stripped).
+        rawText: opt,
         sub: q.opts_id?.[i] || null,
       })),
       q.ans
@@ -97,7 +99,9 @@ function buildQuestions(key, { wrongCounts, topicFilter, showID }) {
 }
 
 export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
-  const { toast } = useApp();
+  const { toast, prefs, setPref } = useApp();
+  const showFuri = prefs?.quizOptFurigana ?? true;
+  const showSub  = prefs?.quizOptId ?? true;
   const { saveScore, jacScores, recordWrong } = useProgress();
   const [setKey, setSetKey] = useState(null);
   const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wrongCounts ?? {});
@@ -265,6 +269,16 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
             label: `ID ${showID ? 'ON' : 'OFF'}`,
             active: showID,
             onClick: () => setShowID((f) => !f),
+          },
+          {
+            label: `ふ ${showFuri ? 'ON' : 'OFF'}`,
+            active: showFuri,
+            onClick: () => setPref('quizOptFurigana', !showFuri),
+          },
+          {
+            label: `ID訳 ${showSub ? 'ON' : 'OFF'}`,
+            active: showSub,
+            onClick: () => setPref('quizOptId', !showSub),
           },
         ].map((btn) => (
           <button key={btn.label} onClick={btn.onClick} style={pillStyle(btn.active)}>

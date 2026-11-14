@@ -147,14 +147,14 @@ the direct answer to 7.5.1's own lesson: _a summary of a list is a claim about t
 
 | Metric            | Value                                                                             |
 | ----------------- | --------------------------------------------------------------------------------- |
-| Version           | **7.6.0** (`package.json`; `public/sw.js` `CACHE_VERSION` is kept equal to it)     |
+| Version           | **7.7.0** (`package.json`; `public/sw.js` `CACHE_VERSION` is kept equal to it)     |
 | Prod dependencies | **4** (react, react-dom, ts-fsrs, lz-string) — hard constraint                     |
 | Modes             | **23** (all React.lazy) — `gerakan` added in 7.6.0, `genba`/`skenario` in 7.5.0, `tentang` in 7.2.0; was 21 before 7.0.0 removed ProductionMode/QuizProduksiMode |
 | Flashcards        | **1,626** (1,000 common + 626 lifeline; 1,418 vocab · 104 hukum · 104 konsep)      |
 | Quiz questions    | **1,075** (Wayground 680 · JAC Mockup 300 · JAC Resmi 95)                          |
 | Study tracks      | **1** (Lifeline) + Common (was 3 pre-merge)                                        |
 | Storage schema    | **v7** — see §4                                                                    |
-| Tests             | **144 files** · lint 0 warnings · `npm run validate` clean                        |
+| Tests             | **145 files** · lint 0 warnings · `npm run validate` clean                        |
 | Audit scripts     | **6** (`npm run audit:full`) — integrity, css-vars, text, content, related-ids, overlap |
 | localStorage docs | **3** (progress, srs, prefs)                                                       |
 | CI/CD             | ✅ GitHub Actions → GitHub Pages (`ci.yml` + `deploy.yml`)                         |

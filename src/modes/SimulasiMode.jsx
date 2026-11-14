@@ -439,7 +439,8 @@ export function drawExam(mode, config) {
     // raw 《reading》 markup needs stripping at the source, same as those,
     // or it shows up on-screen literally instead of being parsed as ruby.
     const shuffledOpts = shuffle(
-      q.options.map((text, origIdx) => ({ text: stripFuri(text), origIdx }))
+      // Item 216: rawText preserves 《》 markers for ruby rendering.
+    q.options.map((text, origIdx) => ({ text: stripFuri(text), rawText: text, origIdx }))
     );
     return {
       jp: q.jp,
@@ -556,10 +557,12 @@ export const QuestionNavigator = memo(function QuestionNavigator({
 });
 
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
-  const { prefs } = useApp();
+  const { prefs, setPref } = useApp();
   const { saveScore, simScores, recordWrong } = useProgress();
   const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
+  const showFuri = prefs?.quizOptFurigana ?? true;
+  const showSub  = prefs?.quizOptId ?? true;
   const [phase, setPhase] = useState('start');
   const [mode, setMode] = useState('pool');
   const [preset, setPreset] = useState('quick');
@@ -1032,6 +1035,23 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
             );
           })}
         </div>
+        {/* Item 216: furigana / ID sub toggles on setup screen */}
+        <div style={{ display: 'flex', gap: 'var(--space-8)', marginBottom: 'var(--space-16)', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setPref('quizOptFurigana', !showFuri)}
+            style={pillStyle(showFuri)}
+            aria-pressed={showFuri}
+          >
+            ふ {showFuri ? 'ON' : 'OFF'}
+          </button>
+          <button
+            onClick={() => setPref('quizOptId', !showSub)}
+            style={pillStyle(showSub)}
+            aria-pressed={showSub}
+          >
+            ID訳 {showSub ? 'ON' : 'OFF'}
+          </button>
+        </div>
         <button
           style={{
             ...RED_BTN,
@@ -1224,7 +1244,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                       <div className={SM.reviewWrong}>
                         ✗{' '}
                         <JpFront
-                          jp={userOpt?.text || '—'}
+                          jp={showFuri ? (userOpt?.rawText ?? userOpt?.text) || '—' : userOpt?.text || '—'}
                           furiganaPolicy={furiganaPolicy}
                           maxSize={JP_LIST_MAX_SECONDARY}
                           compact
@@ -1234,7 +1254,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     <div className={SM.reviewCorrect}>
                       ✓{' '}
                       <JpFront
-                        jp={correctOpt?.text || '—'}
+                        jp={showFuri ? (correctOpt?.rawText ?? correctOpt?.text) || '—' : correctOpt?.text || '—'}
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX_SECONDARY}
                         compact
@@ -1455,7 +1475,9 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
               >
                 {String.fromCharCode(65 + i)}
               </span>
-              {opt.text}
+              {showFuri && opt.rawText
+                ? renderJPWithRuby(opt.rawText, parseRubyFragments(opt.rawText))
+                : opt.text}
             </button>
           );
         })}

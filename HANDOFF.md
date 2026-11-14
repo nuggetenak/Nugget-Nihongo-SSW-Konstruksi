@@ -38,6 +38,17 @@ content into this file.
 
 ## CURRENT STATE
 
+### 2026-11-15 — v7.7.0 (Item 216: Furigana ruby & ID sub-text toggles on quiz options)
+
+- **Branch**: `claude/quiz-ruby-id-toggles`
+- **Feature summary**:
+  - Restored ruby furigana rendering on Japanese answer options across all quiz modes (`JACMode`, `WaygroundMode`, `VocabMode`, `SimulasiMode`).
+  - Added user toggles for furigana (`ふ ON/OFF`) and Indonesian translations (`ID ON/OFF`) in both the live `QuizShell` header and each mode's setup screen.
+  - Added persistent preferences `quizOptFurigana` and `quizOptId` (defaulting to `true`). `STORAGE_VERSION` remains 7 (additive).
+  - `QuizAnnouncer` continues reading stripped text (`text`) for screen reader clarity.
+  - `ResultScreen` and `SimulasiMode` review sections display ruby-rendered answers when `quizOptFurigana` is active.
+- **Verification**: `npm run build`, `npm run lint`, `npm run audit:full`, and Vitest unit tests all passing clean.
+
 **As of 2026-09-15.** Verify before trusting past this point — this line doesn't update itself.
 At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION` **7**,
 `npm run validate` clean (**144 test files**; the test count moves every commit, so it is not

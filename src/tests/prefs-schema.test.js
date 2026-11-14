@@ -42,6 +42,17 @@ describe('Storage schema — field defaults', () => {
     expect(p).toHaveProperty('audioEnabled');
     expect(p).toHaveProperty('studyAnchor');
     expect(p).toHaveProperty('furiganaPolicy');
+    // Item 216: quiz option display toggles
+    expect(p).toHaveProperty('quizOptFurigana');
+    expect(p).toHaveProperty('quizOptId');
+  });
+
+  it('quizOptFurigana defaults to true', () => {
+    expect(get('prefs').quizOptFurigana).toBe(true);
+  });
+
+  it('quizOptId defaults to true', () => {
+    expect(get('prefs').quizOptId).toBe(true);
   });
 
   it('furiganaPolicy defaults to always', () => {

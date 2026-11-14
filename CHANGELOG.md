@@ -1,3 +1,36 @@
+## [7.7.0] - 2026-11-15
+
+### Furigana ruby rendering and Indonesian sub-text toggles on quiz options (Item 216)
+
+The answer option buttons across all quiz modes were stripping furigana markers (`《kana》`)
+at question build time (`stripFuri(opt)`), preventing ruby rendering on Japanese option text
+even when kanji readings were present in the source dataset. Indonesian translations below
+options (`opts_id`) were also unconditionally visible with no user toggle.
+
+#### What changed
+
+1. **OptionButton Component (`OptionButton.jsx`)**:
+   - Added `rawText`, `showFuri = true`, and `showSub = true` props.
+   - When `showFuri` is enabled and `rawText` contains `《》` markers, option text renders
+     via `renderJPWithRuby(rawText, parseRubyFragments(rawText))`.
+   - When `showFuri` is false or `rawText` is absent, falls back cleanly to stripped `text`.
+   - Indonesian gloss (`subText`) is conditionally rendered only when `showSub` is true.
+
+2. **Quiz Modes (`JACMode.jsx`, `WaygroundMode.jsx`, `VocabMode.jsx`, `SimulasiMode.jsx`)**:
+   - Retained unstripped option text as `rawText: opt` alongside clean stripped `text`.
+   - Screen reader announcements via `QuizAnnouncer` continue reading `text` (stripped),
+     ensuring accessibility remains uncompromised.
+   - SimulasiMode's custom option renderer and post-exam review list now render ruby via `rawText`.
+
+3. **Persistent Preferences (`storage/schema.js`)**:
+   - Added additive preference defaults: `quizOptFurigana: true` and `quizOptId: true`.
+   - `STORAGE_VERSION` stays at 7 (pure additive pref additions require no migration).
+
+4. **Interactive Toggles across Setup and Live Quiz**:
+   - Header controls added to `QuizShell.jsx` (`ふ ON/OFF` and `ID ON/OFF`) for in-quiz toggling.
+   - Setup screen controls added to JACMode, WaygroundMode, VocabMode, and SimulasiMode start panels.
+   - ResultScreen review rows (`r.userAnswer`, `r.correctAnswer`) honor `quizOptFurigana`.
+
 ## [7.6.0] - 2026-09-15
 
 The session opened as "brief me on what's still open, and add animation throughout the UI".

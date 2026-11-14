@@ -114,5 +114,11 @@ export const DEFAULTS = {
     listeningSpeed: 'alami',
     sprintBests: {}, // per-duration personal bests { [durationKey]: { score, timeline } }
     dailyChallengeLog: {}, // { [YYYY-MM-DD]: { selected: number, correct: boolean } }
+    // Item 216: furigana ruby and Indonesian sub-text on quiz option buttons.
+    // Both additive -- absent reads as true on existing installs, which is
+    // truthful: they never had either toggle, so 'on' is the richer default.
+    // STORAGE_VERSION stays 7; a changed default is not a migration.
+    quizOptFurigana: true, // render ruby on Japanese answer options
+    quizOptId: true, // show Indonesian sub-text (opts_id) below each option
   },
 };
