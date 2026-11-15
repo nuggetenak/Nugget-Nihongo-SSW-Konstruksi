@@ -444,7 +444,7 @@ export function drawExam(mode, config, track = 'lifeline') {
     // or it shows up on-screen literally instead of being parsed as ruby.
     const shuffledOpts = shuffle(
       // Item 216: rawText preserves 《》 markers for ruby rendering.
-    q.options.map((text, origIdx) => ({ text: stripFuri(text), rawText: text, origIdx }))
+      q.options.map((text, origIdx) => ({ text: stripFuri(text), rawText: text, origIdx }))
     );
     return {
       jp: q.jp,
@@ -566,7 +566,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
   const showFuri = prefs?.quizOptFurigana ?? true;
-  const showSub  = prefs?.quizOptId ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   const [phase, setPhase] = useState('start');
   const [mode, setMode] = useState('pool');
   const [preset, setPreset] = useState('quick');
@@ -1040,7 +1040,14 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
           })}
         </div>
         {/* Item 216: furigana / ID sub toggles on setup screen */}
-        <div style={{ display: 'flex', gap: 'var(--space-8)', marginBottom: 'var(--space-16)', flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 'var(--space-8)',
+            marginBottom: 'var(--space-16)',
+            flexWrap: 'wrap',
+          }}
+        >
           <button
             onClick={() => setPref('quizOptFurigana', !showFuri)}
             style={pillStyle(showFuri)}
@@ -1248,7 +1255,11 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                       <div className={SM.reviewWrong}>
                         ✗{' '}
                         <JpFront
-                          jp={showFuri ? (userOpt?.rawText ?? userOpt?.text) || '—' : userOpt?.text || '—'}
+                          jp={
+                            showFuri
+                              ? (userOpt?.rawText ?? userOpt?.text) || '—'
+                              : userOpt?.text || '—'
+                          }
                           furiganaPolicy={furiganaPolicy}
                           maxSize={JP_LIST_MAX_SECONDARY}
                           compact
@@ -1258,7 +1269,11 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
                     <div className={SM.reviewCorrect}>
                       ✓{' '}
                       <JpFront
-                        jp={showFuri ? (correctOpt?.rawText ?? correctOpt?.text) || '—' : correctOpt?.text || '—'}
+                        jp={
+                          showFuri
+                            ? (correctOpt?.rawText ?? correctOpt?.text) || '—'
+                            : correctOpt?.text || '—'
+                        }
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX_SECONDARY}
                         compact

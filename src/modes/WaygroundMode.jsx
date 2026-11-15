@@ -125,7 +125,7 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
 export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track, prefs, setPref } = useApp();
   const showFuri = prefs?.quizOptFurigana ?? true;
-  const showSub  = prefs?.quizOptId ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   // Item 80: this mode's screen is a set list with no options panel, so there is
   // nowhere to put a delay picker. It obeys the preference set where a panel
   // does exist (Kuis, JAC) rather than staying pinned to QuizShell's 2000 ms

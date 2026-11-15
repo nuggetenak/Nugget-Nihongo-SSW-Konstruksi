@@ -155,7 +155,9 @@ describe('SimulasiMode Track Filtering', () => {
     const praktiks = pool.filter((q) => q._category === 'praktik');
     expect(praktiks.length).toBeGreaterThan(0);
     // No wgl or jml questions in Kenchiku pool
-    expect(praktiks.every((q) => !q._wrongKey.startsWith('wgl') && !q._wrongKey.startsWith('jml'))).toBe(true);
+    expect(
+      praktiks.every((q) => !q._wrongKey.startsWith('wgl') && !q._wrongKey.startsWith('jml'))
+    ).toBe(true);
   });
 
   it('drawExam successfully draws an exam for kenchiku track', () => {

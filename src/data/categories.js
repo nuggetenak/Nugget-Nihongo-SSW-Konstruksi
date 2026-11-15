@@ -158,7 +158,13 @@ export const CATEGORIES = [
   },
 
   // Meta
-  { key: 'bintang', label: 'Bintang', color: '#b7791f', emoji: '⭐', tracks: ['lifeline', 'kenchiku'] },
+  {
+    key: 'bintang',
+    label: 'Bintang',
+    color: '#b7791f',
+    emoji: '⭐',
+    tracks: ['lifeline', 'kenchiku'],
+  },
 ];
 
 export const getCatInfo = (key) => CATEGORIES.find((c) => c.key === key) || CATEGORIES[0];

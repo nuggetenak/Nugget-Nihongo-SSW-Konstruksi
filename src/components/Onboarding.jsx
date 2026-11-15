@@ -72,7 +72,6 @@ function StepWelcome({ onNext }) {
   );
 }
 
-
 function StepTrack({ onNext, initialTrack = 'lifeline' }) {
   const [selected, setSelected] = useState(initialTrack);
 
@@ -101,7 +100,8 @@ function StepTrack({ onNext, initialTrack = 'lifeline' }) {
       </div>
       <h2 className={S.stepTitle}>Pilih Jalur SSW</h2>
       <p className={S.stepDesc}>
-        Pilih spesialisasi konstruksi yang akan kamu pelajari. Bisa diganti kapan saja di menu Saya atau Beranda.
+        Pilih spesialisasi konstruksi yang akan kamu pelajari. Bisa diganti kapan saja di menu Saya
+        atau Beranda.
       </p>
 
       <div

@@ -12,12 +12,7 @@ export const JAC_KENCHIKU = [
     topic: 'tekkin',
     q: '写真《しゃしん》の道具《どうぐ》の名前《なまえ》はどれか。鉄筋《てっきん》の交差部《こうさぶ》を結束線《けっそくせん》で締《し》め付《つ》ける道具《どうぐ》である。',
     hint: 'Apa nama alat dalam foto? Alat untuk mengikat dan mengencangkan kawat bendrat pada persilangan besi beton.',
-    opts: [
-      'ハッカー',
-      '番線《ばんせん》カッター',
-      '鉄筋《てっきん》ベンダー',
-      'パイプレンチ',
-    ],
+    opts: ['ハッカー', '番線《ばんせん》カッター', '鉄筋《てっきん》ベンダー', 'パイプレンチ'],
     opts_id: [
       'Hacker (pengait kawat bendrat)',
       'Pemotong kawat/bansen cutter',
@@ -26,7 +21,8 @@ export const JAC_KENCHIKU = [
     ],
     ans: 0,
     img: 'images/jac-official/stk1_q01.webp',
-    photoDesc: 'Alat besi bergagang kayu/karet dengan ujung pengait melengkung runcing yang berputar bebas untuk memilin kawat bendrat.',
+    photoDesc:
+      'Alat besi bergagang kayu/karet dengan ujung pengait melengkung runcing yang berputar bebas untuk memilin kawat bendrat.',
     exp: 'ハッカー (Hacker) adalah alat tangan khusus pekerja pembesian (鉄筋工) untuk memilin dan mengencangkan kawat bendrat (結束線) pada titik persilangan rebar. Kartu #2001.',
     related_card_id: 2001,
     track: 'kenchiku',
@@ -38,12 +34,7 @@ export const JAC_KENCHIKU = [
     topic: 'katawaku',
     q: '型枠工事《かたわくこうじ》で、対向《たいこう》する型枠《かたわく》の間隔《かんかく》を一定《いってい》に保《たも》つために使用《しよう》する金具《かなぐ》はどれか。',
     hint: 'Pada pekerjaan bekisting, logam pengikat apa yang digunakan untuk menjaga jarak antar panel bekisting yang saling berhadapan tetap konstan?',
-    opts: [
-      '丸《まる》セパレーター',
-      'ターンバックル',
-      'クランプ',
-      'アンカーボルト',
-    ],
+    opts: ['丸《まる》セパレーター', 'ターンバックル', 'クランプ', 'アンカーボルト'],
     opts_id: [
       'Round separator (maru separator)',
       'Turnbuckle (jarum keras)',
@@ -64,21 +55,12 @@ export const JAC_KENCHIKU = [
     topic: 'katawaku',
     q: '写真《しゃしん》の型枠用《かたわくよう》部材《ぶざい》の名前《なまえ》はどれか。丸《まる》セパレーターの両端《りょうたん》に取り付《とりつ》け、コンクリート打設後《だせつご》に取り外《とりはず》すプラスチック製《せい》のコーンである。',
     hint: 'Apa nama komponen bekisting dalam foto? Komponen kerucut plastik yang dipasang di kedua ujung maru separator dan dilepas setelah pengecoran.',
-    opts: [
-      'フォームタイ',
-      'Pコン（プラスチックコーン）',
-      'リブ座金《ざがね》',
-      'パイプサポート',
-    ],
-    opts_id: [
-      'Form tie',
-      'P-con (plastic cone)',
-      'Rib washer',
-      'Pipe support',
-    ],
+    opts: ['フォームタイ', 'Pコン（プラスチックコーン）', 'リブ座金《ざがね》', 'パイプサポート'],
+    opts_id: ['Form tie', 'P-con (plastic cone)', 'Rib washer', 'Pipe support'],
     ans: 1,
     img: 'images/jac-official/stk1_q03.webp',
-    photoDesc: 'Kerucut plastik putih atau kuning berulir di bagian dalam, dipasang pada ujung separator menempel ke panel bekisting kayu.',
+    photoDesc:
+      'Kerucut plastik putih atau kuning berulir di bagian dalam, dipasang pada ujung separator menempel ke panel bekisting kayu.',
     exp: 'Pコン (Plastic Cone) dipasang di ujung丸セパレーター menempel ke bagian dalam bekisting. Setelah bekisting dibongkar, P-con dilepas dan lubangnya ditambal dengan mortar semen. Kartu #2003.',
     related_card_id: 2003,
     track: 'kenchiku',
@@ -96,12 +78,7 @@ export const JAC_KENCHIKU = [
       '15cm以上《いじょう》',
       '30cm以上《いじょう》',
     ],
-    opts_id: [
-      '5 cm atau lebih',
-      '10 cm atau lebih',
-      '15 cm atau lebih',
-      '30 cm atau lebih',
-    ],
+    opts_id: ['5 cm atau lebih', '10 cm atau lebih', '15 cm atau lebih', '30 cm atau lebih'],
     ans: 2,
     img: null,
     photoDesc: null,
@@ -194,12 +171,7 @@ export const JAC_KENCHIKU = [
     topic: 'naisou',
     q: '内装工事《ないそうこうじ》で軽量鉄骨壁下地《けいりょうてっこつかべしたじ》（LGS）の垂直材《すいちょくざい》として使用《しよう》される部材《ぶざい》の名前《なまえ》はどれか。',
     hint: 'Pada pekerjaan interior finishing, komponen rangka baja ringan vertikal (tiang tegak) yang digunakan pada dinding partisi disebut apa?',
-    opts: [
-      'ランナー',
-      'スタッド',
-      '野縁《のぶち》',
-      '吊《つ》りボルト',
-    ],
+    opts: ['ランナー', 'スタッド', '野縁《のぶち》', '吊《つ》りボルト'],
     opts_id: [
       'Runner (rel dasar/atas)',
       'Stud (tiang tegak rangka dinding)',
@@ -246,12 +218,7 @@ export const JAC_KENCHIKU = [
     topic: 'sakan',
     q: '左官工事《さかんこうじ》でモルタルを塗《ぬ》り付《つ》けたり表面《ひょうめん》を平滑《へいかつ》に仕上《しあ》げたりするために用《もち》いる写真《しゃしん》の道具《どうぐ》はどれか。',
     hint: 'Apa nama alat dalam foto yang digunakan dalam pekerjaan plesteran untuk mengoleskan adukan semen/mortar dan meratakan permukaannya?',
-    opts: [
-      'コテ（鏝）',
-      '下げ振り《さげふり》',
-      'スクレーパー',
-      'コーキングガン',
-    ],
+    opts: ['コテ（鏝）', '下げ振り《さげふり》', 'スクレーパー', 'コーキングガン'],
     opts_id: [
       'Kote / trowel (cetok lepa perata)',
       'Sagefuri (unting-unting/plumb bob)',
@@ -260,7 +227,8 @@ export const JAC_KENCHIKU = [
     ],
     ans: 0,
     img: 'images/jac-official/stk1_q10.webp',
-    photoDesc: 'Alat berpelat baja tipis datar persegi panjang dengan gagang kayu di bagian tengah atas, digunakan untuk meratakan plesteran semen.',
+    photoDesc:
+      'Alat berpelat baja tipis datar persegi panjang dengan gagang kayu di bagian tengah atas, digunakan untuk meratakan plesteran semen.',
     exp: 'コテ (Trowel / Cetok plester) adalah perkakas utama tukang plester/sakan. Ada berbagai macam jenis seperti 中塗りゴテ (trowel dasar), 仕上げゴテ (trowel acian halus), dan 木ゴテ (trowel kayu perata awal). Kartu #2009.',
     related_card_id: 2009,
     track: 'kenchiku',
@@ -272,12 +240,7 @@ export const JAC_KENCHIKU = [
     topic: 'sakan',
     q: '現場《げんば》で柱《はしら》や壁《かべ》の垂直《すいちょく》（立《た》ち）を確認《かくにん》するために、糸《いと》の先端《せんたん》に重《おも》りを吊《つ》るして測定《そくてい》する道具《どうぐ》はどれか。',
     hint: 'Alat apa yang menggunakan beban yang digantung pada ujung benang untuk memeriksa ketegaklurusan vertikal kolom atau dinding di lokasi proyek?',
-    opts: [
-      '水盛缶《みずもりかん》',
-      '下げ振り《さげふり》',
-      'コンベックス',
-      'チョークライン',
-    ],
+    opts: ['水盛缶《みずもりかん》', '下げ振り《さげふり》', 'コンベックス', 'チョークライン'],
     opts_id: [
       'Mizumori-kan (selang waterpass air)',
       'Sagefuri (unting-unting / bandul gravitasi)',
@@ -298,12 +261,7 @@ export const JAC_KENCHIKU = [
     topic: 'bousui',
     q: 'シーリング工事《こうじ》において、目地《めじ》の深《ふか》さを調整《ちょうせい》し、シーリング材《ざい》が3面接着《さんめんせっちゃく》するのを防《ふせ》ぐために底部《ていぶ》に装てん《そうてん》する材料《ざいりょう》はどれか。',
     hint: 'Pada pekerjaan sambungan sealant (silikon), material apa yang dipasang di bagian dasar alur joint untuk mengatur kedalaman dan mencegah rekatan 3 sisi?',
-    opts: [
-      'マスキングテープ',
-      'プライマー',
-      'バックアップ材《ざい》',
-      'グラスウール',
-    ],
+    opts: ['マスキングテープ', 'プライマー', 'バックアップ材《ざい》', 'グラスウール'],
     opts_id: [
       'Masking tape (pita perekat pelindung tepi)',
       'Primer perekat sealant',
@@ -404,12 +362,7 @@ export const JAC_KENCHIKU = [
     topic: 'tobi',
     q: '単管足場《たんかんあしば》や枠組足場《わくぐみあしば》を建物《たてもの》の躯体《くたい》に緊結《きんけつ》し、風圧《ふうあつ》や荷重《かじゅう》による足場《あしば》の倒壊《とうかい》・はらみを防《ふせ》ぐ金具《かなぐ》はどれか。',
     hint: 'Alat pengikat apa yang menghubungkan tiang perancah ke struktur gedung beton untuk mencegah perancah tumbang atau melengkung akibat angin?',
-    opts: [
-      '壁《かべ》つなぎ',
-      'ジャッキベース',
-      '筋かい《すじかい》',
-      'クランプ',
-    ],
+    opts: ['壁《かべ》つなぎ', 'ジャッキベース', '筋かい《すじかい》', 'クランプ'],
     opts_id: [
       'Kabe-tsunagi (wall tie anchor perancah)',
       'Jack base (dongkrak alas kaki perancah)',
@@ -456,12 +409,7 @@ export const JAC_KENCHIKU = [
     topic: 'tekkin',
     q: '鉄筋《てっきん》の配筋《はいきん》において、所定《しょてい》のかぶり厚さ《あつさ》を正確《せいかく》に確保《かくほ》するために、鉄筋《てっきん》と型枠《かたわく》の間《あいだ》に配置《はいち》する部材《ぶざい》はどれか。',
     hint: 'Pada perakitan besi tulangan, komponen apa yang dipasang di antara besi dan bekisting agar ketebalan selimut beton terjaga akurat?',
-    opts: [
-      'スペーサー',
-      '結束線《けっそくせん》',
-      'アンカーボルト',
-      'ターンバックル',
-    ],
+    opts: ['スペーサー', '結束線《けっそくせん》', 'アンカーボルト', 'ターンバックル'],
     opts_id: [
       'Spacer (tahu beton / ganjal plastik)',
       'Kawat bendrat (kessokusen)',
@@ -508,12 +456,7 @@ export const JAC_KENCHIKU = [
     topic: 'katawaku',
     q: '型枠支保工《かたわくしほこう》において、スラブや梁《はり》の下《した》に立《た》てて型枠《かたわく》と打設コンクリートの荷重《かじゅう》を支《ささ》える伸縮式《しんしゅくしき》の鋼製《こうせい》支柱《しちゅう》はどれか。',
     hint: 'Pada perancah bekisting, tiang baja teleskopik penyangga vertikal yang dipasang di bawah pelat lantai/balok untuk menahan beban cor beton basah disebut apa?',
-    opts: [
-      'パイプサポート',
-      'フォームタイ',
-      '単管《たんかん》クランプ',
-      'アングル鋼《こう》',
-    ],
+    opts: ['パイプサポート', 'フォームタイ', '単管《たんかん》クランプ', 'アングル鋼《こう》'],
     opts_id: [
       'Pipe support (tiang stut teleskopik baja)',
       'Form tie baut pengikat',
@@ -522,7 +465,8 @@ export const JAC_KENCHIKU = [
     ],
     ans: 0,
     img: 'images/jac-official/stk2_q05.webp',
-    photoDesc: 'Tiang besi tubular bulat dua lapis dengan lubang pin pengatur tinggi dan drat ulir putar pengencang di bagian tengahnya.',
+    photoDesc:
+      'Tiang besi tubular bulat dua lapis dengan lubang pin pengatur tinggi dan drat ulir putar pengencang di bagian tengahnya.',
     exp: 'パイプサポート (Pipe support) adalah tiang perancah penopang vertikal sementara penahan beban bekisting bawah lantai atau balok sampai beton mencapai kekuatan tekan yang disyaratkan. Kartu #2019.',
     related_card_id: 2019,
     track: 'kenchiku',
@@ -586,12 +530,7 @@ export const JAC_KENCHIKU = [
     topic: 'atsuou',
     q: '暑中《しょちゅう》コンクリート工事《こうじ》（外気温《がいきおん》が高い《たかい》時期《じき》）において、打設《だせつ》の重ね《かさね》時間《じかん》の間隔《かんかく》が長《なが》くなりすぎたことによって生《しょう》じる、コンクリートの一体性《いったいせい》を損《そこ》なう不良《ふりょう》接合面《せつごうめん》を何《なに》というか。',
     hint: 'Pada pengecoran beton cuaca panas, batas sambungan cacat yang merusak monolitnya struktur akibat jeda waktu pengecoran antar lapisan yang terlalu lama disebut apa?',
-    opts: [
-      'コールドジョイント',
-      'レイタンス',
-      'ジャンカ（あばた）',
-      'スランプロス',
-    ],
+    opts: ['コールドジョイント', 'レイタンス', 'ジャンカ（あばた）', 'スランプロス'],
     opts_id: [
       'Cold joint (cacat lapisan dingin antar cor)',
       'Laitance (lapisan kapur lemah permukaan)',
@@ -612,12 +551,7 @@ export const JAC_KENCHIKU = [
     topic: 'naisou',
     q: '石膏《せっこう》ボード壁《かべ》のクロス（壁紙《かべがみ》）仕上《しあ》げ工事《こうじ》において、ボードの継ぎ目《つぎめ》（目地《めじ》）やビス頭《あたま》の段差《だんさ》を平滑《へいかつ》にするために塗布《とふ》する下地《したじ》処理材《しょりざい》はどれか。',
     hint: 'Pada pekerjaan finishing wallpaper di dinding gipsum, bahan dempul penutup yang dioleskan untuk meratakan sambungan papan dan lubang sekrup disebut apa?',
-    opts: [
-      'パテ',
-      'ウレタン防水材《ぼうすいざい》',
-      'セメントミルク',
-      'ワックス',
-    ],
+    opts: ['パテ', 'ウレタン防水材《ぼうすいざい》', 'セメントミルク', 'ワックス'],
     opts_id: [
       'Pate / Joint Compound (dempul gipsum)',
       'Waterproofing polyurethane',
@@ -704,7 +638,8 @@ export const JAC_KENCHIKU = [
     ],
     ans: 0,
     img: 'images/jac-official/stk2_q12.webp',
-    photoDesc: 'Wadah plastik/kayu berbentuk bulat dengan tempat gulungan tali berisi busa penyerap tinta hitam di dalamnya dan jarum penusuk di ujung benang.',
+    photoDesc:
+      'Wadah plastik/kayu berbentuk bulat dengan tempat gulungan tali berisi busa penyerap tinta hitam di dalamnya dan jarum penusuk di ujung benang.',
     exp: '墨つぼ (Sumitsubo) berisi benang sutra/nilon berlumur tinta cina hitam (墨). Benang ditarik kencang di atas lantai beton lalu dipetik (弾く) ke bawah untuk mencetak garis acuan kerja lurus sempurna. Kartu #2026.',
     related_card_id: 2026,
     track: 'kenchiku',
@@ -716,12 +651,7 @@ export const JAC_KENCHIKU = [
     topic: 'tobi',
     q: '枠組足場《わくぐみあしば》を組《く》み立《た》てる際《さい》、最初《さいしょ》に地面《じめん》や敷板《しきいた》の上《うえ》に置《お》く、高《たか》さ調整《ちょうせい》機能《きのう》を持《も》った脚部《きゃくぶ》部材《ぶざい》はどれか。',
     hint: 'Saat merakit perancah bingkai (wakugumi ashiba), bagian kaki paling bawah berkepala ulir pengatur tinggi yang ditaruh di atas papan landasan adalah apa?',
-    opts: [
-      'ジャッキベース',
-      '建枠《たてわく》',
-      '交差筋かい《こうさすじかい》',
-      'アームロック',
-    ],
+    opts: ['ジャッキベース', '建枠《たてわく》', '交差筋かい《こうさすじかい》', 'アームロック'],
     opts_id: [
       'Jack base (dongkrak alas kaki perancah)',
       'Tatewaku (rangka portal utama vertikal)',
@@ -730,7 +660,8 @@ export const JAC_KENCHIKU = [
     ],
     ans: 0,
     img: 'images/jac-official/stk2_q13.webp',
-    photoDesc: 'Pelat baja persegi tebal berlubang sekrup dengan pipa silinder berulir drat dan mur putar penopang di bagian tengahnya.',
+    photoDesc:
+      'Pelat baja persegi tebal berlubang sekrup dengan pipa silinder berulir drat dan mur putar penopang di bagian tengahnya.',
     exp: 'ジャッキベース (Jack base) diletakkan di atas papan landasan (敷板). Mur putarnya digunakan untuk menyeimbangkan ketinggian horizontal seluruh kaki perancah di tanah yang tidak rata. Kartu #2027.',
     related_card_id: 2027,
     track: 'kenchiku',

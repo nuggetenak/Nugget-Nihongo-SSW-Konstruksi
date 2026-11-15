@@ -93,9 +93,9 @@ export function mapQuestions(list, withID) {
 function buildQuestions(key, { pool = JAC_OFFICIAL, wrongCounts, topicFilter, showID }) {
   if (!key) return [];
   if (key === 'lemah') {
-    const weak = pool.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).sort(
-      (a, b) => getWrongCount(wrongCounts[b.id]) - getWrongCount(wrongCounts[a.id])
-    );
+    const weak = pool
+      .filter((q) => getWrongCount(wrongCounts[q.id]) > 0)
+      .sort((a, b) => getWrongCount(wrongCounts[b.id]) - getWrongCount(wrongCounts[a.id]));
     return mapQuestions(weak, showID);
   }
   let filtered = pool;
@@ -116,7 +116,7 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
     st2: officialQuestions.filter((q) => q.set === 'st2').length,
   };
   const showFuri = prefs?.quizOptFurigana ?? true;
-  const showSub  = prefs?.quizOptId ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   const { saveScore, jacScores, recordWrong } = useProgress();
   const [setKey, setSetKey] = useState(null);
   const [wrongCounts, setWrongCounts] = useState(() => get('progress')?.wrongCounts ?? {});
@@ -143,7 +143,12 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
   // reproduction as WaygroundMode's.
   const openSet = useCallback(
     (key) => {
-      const drawn = buildQuestions(key, { pool: officialQuestions, wrongCounts, topicFilter, showID });
+      const drawn = buildQuestions(key, {
+        pool: officialQuestions,
+        wrongCounts,
+        topicFilter,
+        showID,
+      });
       setQuestions(drawn);
       setSetKey(key);
       setRestored(null);
@@ -262,7 +267,8 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
 
   const topicInfo = topicFilter ? TOPICS.find((t) => t.key === topicFilter) : null;
   const topicCount = (tKey) => officialQuestions.filter((q) => q.topic === tKey).length;
-  const setTopicCount = (sKey, tKey) => officialQuestions.filter((q) => (sKey === 'all' || q.set === sKey) && q.topic === tKey).length;
+  const setTopicCount = (sKey, tKey) =>
+    officialQuestions.filter((q) => (sKey === 'all' || q.set === sKey) && q.topic === tKey).length;
 
   return (
     <div className={S.page}>

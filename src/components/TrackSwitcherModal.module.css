@@ -41,7 +41,10 @@
   cursor: pointer;
   text-align: left;
   font-family: inherit;
-  transition: transform var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+  transition:
+    transform var(--t-fast),
+    border-color var(--t-fast),
+    background var(--t-fast);
 }
 
 .trackCard:hover {
@@ -49,7 +52,7 @@
   border-color: var(--ssw-borderHover);
 }
 
-.trackCard[data-selected="true"] {
+.trackCard[data-selected='true'] {
   background: var(--ssw-surfaceHover);
 }
 

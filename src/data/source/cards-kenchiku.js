@@ -12,7 +12,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Alat pengait kawat bendrat (hacker)',
     desc: 'Alat tangan khusus pemilin kawat bendrat (結束線) untuk mengikat persilangan besi tulangan beton.',
-    usage: 'ハッカーを使《つか》って鉄筋《てっきん》の交差部《こうさぶ》を結束線《けっそくせん》で素早《すばや》く締《し》め付《つ》ける（mengikat persilangan rebar dengan kawat bendrat menggunakan hacker）',
+    usage:
+      'ハッカーを使《つか》って鉄筋《てっきん》の交差部《こうさぶ》を結束線《けっそくせん》で素早《すばや》く締《し》め付《つ》ける（mengikat persilangan rebar dengan kawat bendrat menggunakan hacker）',
     _origIndex: 1830,
   },
   {
@@ -23,7 +24,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Separator bulat bekisting (maru separator)',
     desc: 'Batang baja pengatur jarak yang menjaga ketebalan dinding beton tetap konstan di antara dua panel bekisting.',
-    usage: '丸セパレーター《まるせぱれーたー》で壁《かべ》の厚《あつ》さを一定《いってい》に保《たも》つ（menjaga ketebalan dinding tetap konstan dengan separator bulat）',
+    usage:
+      '丸セパレーター《まるせぱれーたー》で壁《かべ》の厚《あつ》さを一定《いってい》に保《たも》つ（menjaga ketebalan dinding tetap konstan dengan separator bulat）',
     _origIndex: 1831,
   },
   {
@@ -34,7 +36,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Kerucut plastik bekisting (plastic cone / P-con)',
     desc: 'Kerucut plastik berulir yang dipasang di ujung separator menyentuh permukaan dalam panel bekisting.',
-    usage: 'Pコン《ぴーこん》を脱型後《だっけいご》に取り外《とりはず》し、穴《あな》をモルタルで埋《う》める（melepas P-con setelah bongkar bekisting dan menambal lubangnya dengan mortar）',
+    usage:
+      'Pコン《ぴーこん》を脱型後《だっけいご》に取り外《とりはず》し、穴《あな》をモルタルで埋《う》める（melepas P-con setelah bongkar bekisting dan menambal lubangnya dengan mortar）',
     _origIndex: 1832,
   },
   {
@@ -45,7 +48,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Papan tepi lantai perancah (habaki / toe board)',
     desc: 'Papan penahan setinggi minimal 15cm di sekeliling lantai kerja perancah untuk mencegah benda dan kaki jatuh.',
-    usage: '足場《あしば》の作業床《さぎょうゆか》に高《たか》さ15cm以上《いじょう》の幅木《はばき》を設置《せっち》する（memasang habaki setinggi 15cm atau lebih pada lantai kerja perancah）',
+    usage:
+      '足場《あしば》の作業床《さぎょうゆか》に高《たか》さ15cm以上《いじょう》の幅木《はばき》を設置《せっち》する（memasang habaki setinggi 15cm atau lebih pada lantai kerja perancah）',
     _origIndex: 1833,
   },
   {
@@ -56,7 +60,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Uji slump beton (slump test)',
     desc: 'Pengujian untuk mengukur fluiditas dan kemudahan pengerjaan (workability) adukan beton segar di proyek.',
-    usage: 'スランプコーンを使《つか》って生コンクリートの軟《やわ》らかさを測定《そくてい》する（mengukur keenceran beton segar menggunakan kerucut slump）',
+    usage:
+      'スランプコーンを使《つか》って生コンクリートの軟《やわ》らかさを測定《そくてい》する（mengukur keenceran beton segar menggunakan kerucut slump）',
     _origIndex: 1834,
   },
   {
@@ -67,7 +72,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Vibrator cor beton batang (poker vibrator)',
     desc: 'Alat penggetar mekanis yang dimasukkan vertikal ke adukan beton basah untuk mengeluarkan rongga udara.',
-    usage: '棒形振動機《ぼうがたしんどうき》を垂直《すいちよく》に挿入《そうにゅう》してコンクリートを締め固める《しめかためる》（memasukkan vibrator secara vertikal untuk memadatkan beton）',
+    usage:
+      '棒形振動機《ぼうがたしんどうき》を垂直《すいちよく》に挿入《そうにゅう》してコンクリートを締め固める《しめかためる》（memasukkan vibrator secara vertikal untuk memadatkan beton）',
     _origIndex: 1835,
   },
   {
@@ -78,7 +84,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Tiang tegak partisi baja ringan (LGS stud)',
     desc: 'Batang vertikal baja ringan bergalvanis tempat menyekrupkan papan gipsum pada partisi dinding interior.',
-    usage: 'ランナーの間《あいだ》にスタッドを455mmピッチで立《た》てる（mendirikan stud di antara runner dengan jarak 455mm）',
+    usage:
+      'ランナーの間《あいだ》にスタッドを455mmピッチで立《た》てる（mendirikan stud di antara runner dengan jarak 455mm）',
     _origIndex: 1836,
   },
   {
@@ -89,7 +96,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Sekrup gipsum (drywall screw)',
     desc: 'Sekrup ulir khusus berujung tajam berkepala trompet untuk memasang papan gipsum ke rangka LGS.',
-    usage: 'ボードビスの頭《あたま》をボード表面《ひょうめん》よりわずかに沈《しず》めて留《と》める（memasang sekrup hingga kepalanya sedikit tenggelam di bawah permukaan papan gipsum）',
+    usage:
+      'ボードビスの頭《あたま》をボード表面《ひょうめん》よりわずかに沈《しず》めて留《と》める（memasang sekrup hingga kepalanya sedikit tenggelam di bawah permukaan papan gipsum）',
     _origIndex: 1837,
   },
   {
@@ -100,7 +108,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Cetok plester / trowel perata (kote)',
     desc: 'Alat berpelat baja atau kayu bergagang untuk meratakan adukan semen plesteran pada dinding atau lantai.',
-    usage: '金ゴテ《かなごて》を使《つか》ってモルタル表面《ひょうめん》を平滑《へいかつ》に押《お》さえる（meratakan permukaan mortar hingga halus menggunakan cetok baja）',
+    usage:
+      '金ゴテ《かなごて》を使《つか》ってモルタル表面《ひょうめん》を平滑《へいかつ》に押《お》さえる（meratakan permukaan mortar hingga halus menggunakan cetok baja）',
     _origIndex: 1838,
   },
   {
@@ -111,7 +120,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Unting-unting bandul vertikal (sagefuri / plumb bob)',
     desc: 'Alat ukur gravitasi berupa bandul logam berujung benang untuk memeriksa ketegaklurusan dinding/kolom.',
-    usage: '下げ振り《さげふり》を吊《つ》り下《さ》げて柱《はしら》の立《た》ち（垂直《すいちょく》）を確認《かくにん》する（menggantung unting-unting untuk memeriksa ketegakan kolom）',
+    usage:
+      '下げ振り《さげふり》を吊《つ》り下《さ》げて柱《はしら》の立《た》ち（垂直《すいちょく》）を確認《かくにん》する（menggantung unting-unting untuk memeriksa ketegakan kolom）',
     _origIndex: 1839,
   },
   {
@@ -122,7 +132,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Busa pengisi celah sealant (backer rod)',
     desc: 'Busa polyethylene silinder untuk mengatur kedalaman alur dan mencegah rekatan 3 sisi pada sambungan sealant.',
-    usage: '目地《めじ》の深《ふか》さを調整《ちょうせい》し2面接着《にめんせっちゃく》にするためバックアップ材《ざい》を詰《つ》める（memasang backer rod untuk mengatur kedalaman nat dan menghasilkan adhesi 2 sisi）',
+    usage:
+      '目地《めじ》の深《ふか》さを調整《ちょうせい》し2面接着《にめんせっちゃく》にするためバックアップ材《ざい》を詰《つ》める（memasang backer rod untuk mengatur kedalaman nat dan menghasilkan adhesi 2 sisi）',
     _origIndex: 1840,
   },
   {
@@ -133,7 +144,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Kawat seling angkat crane (sling wire rope)',
     desc: 'Kawat baja anyam berkekuatan tinggi yang digunakan untuk mengikat beban yang diangkat oleh crane.',
-    usage: '素線《そせん》の10%以上《いじょう》が切断《せつだん》した玉掛けワイヤ《たまかけわいや》は廃棄《はいき》する（membuang kawat sling yang kawat helainya telah putus ≥10%）',
+    usage:
+      '素線《そせん》の10%以上《いじょう》が切断《せつだん》した玉掛けワイヤ《たまかけわいや》は廃棄《はいき》する（membuang kawat sling yang kawat helainya telah putus ≥10%）',
     _origIndex: 1841,
   },
   {
@@ -144,7 +156,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Ketebalan selimut beton (kaburi atsusa)',
     desc: 'Jarak bersih dari permukaan luar beton ke permukaan terluar besi rebar untuk melindungi besi dari api dan karat.',
-    usage: 'スペーサーを配置《はいち》して所定《しょてい》のかぶり厚さ《あつさ》を確保《かくほ》する（memasang spacer untuk memastikan ketebalan selimut beton rencana terpenuhi）',
+    usage:
+      'スペーサーを配置《はいち》して所定《しょてい》のかぶり厚さ《あつさ》を確保《かくほ》する（memasang spacer untuk memastikan ketebalan selimut beton rencana terpenuhi）',
     _origIndex: 1842,
   },
   {
@@ -155,7 +168,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Bukaan lantai/lubang void (kaikoubu)',
     desc: 'Lubang bukaan di lantai proyek yang berbahaya dan wajib diberi pagar pengaman atau penutup terkunci.',
-    usage: 'スラブの開口部《かいこうぶ》に頑丈《がんじょう》な手すり《てすり》と安全表示《あんぜんひょうじ》を設《もう》ける（memasang handrail kokoh dan tanda peringatan pada bukaan lantai）',
+    usage:
+      'スラブの開口部《かいこうぶ》に頑丈《がんじょう》な手すり《てすり》と安全表示《あんぜんひょうじ》を設《もう》ける（memasang handrail kokoh dan tanda peringatan pada bukaan lantai）',
     _origIndex: 1843,
   },
   {
@@ -166,7 +180,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Angkur pengikat dinding perancah (kabe-tsunagi)',
     desc: 'Batang pengikat yang menancap ke struktur gedung untuk mencegah perancah tumbang diterpa angin.',
-    usage: '枠組足場《わくぐみあしば》の垂直《すいちょく》9m以内《いない》ごとに壁つなぎ《かべつなぎ》を取り付《とりつ》ける（memasang wall tie setiap jarak vertikal ≤9m pada perancah frame）',
+    usage:
+      '枠組足場《わくぐみあしば》の垂直《すいちょく》9m以内《いない》ごとに壁つなぎ《かべつなぎ》を取り付《とりつ》ける（memasang wall tie setiap jarak vertikal ≤9m pada perancah frame）',
     _origIndex: 1844,
   },
   {
@@ -177,7 +192,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Henti sejenak saat muatan crane lepas tanah (jinaoshi)',
     desc: 'Mengangkat beban crane setinggi ~30cm lalu berhenti 3 detik untuk mengecek keseimbangan sebelum angkat penuh.',
-    usage: '地切り《じぎり》直後《ちょくご》に地直し《じなおし》を行《おこな》い、荷《に》の傾き《かたむき》とワイヤの掛《か》かりを確認《かくにん》する（melakukan jinaoshi sesaat setelah muatan terangkat untuk mengecek kemiringan beban dan kawat）',
+    usage:
+      '地切り《じぎり》直後《ちょくご》に地直し《じなおし》を行《おこな》い、荷《に》の傾き《かたむき》とワイヤの掛《か》かりを確認《かくにん》する（melakukan jinaoshi sesaat setelah muatan terangkat untuk mengecek kemiringan beban dan kawat）',
     _origIndex: 1845,
   },
   {
@@ -188,7 +204,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Spacer beton / tahu beton pengatur selimut (spacer)',
     desc: 'Ganjalan beton atau plastik yang dipasang di bawah rebar untuk mempertahankan selimut beton.',
-    usage: '梁《はり》やスラブの下《した》にコンクリート製《せい》スペーサーを配置《はいち》する（memasang spacer beton di bawah balok dan pelat lantai）',
+    usage:
+      '梁《はり》やスラブの下《した》にコンクリート製《せい》スペーサーを配置《はいち》する（memasang spacer beton di bawah balok dan pelat lantai）',
     _origIndex: 1846,
   },
   {
@@ -199,7 +216,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Pengelasan tekan gas besi beton (gas pressure welding)',
     desc: 'Metode menyambung besi rebar memanjang dengan memanaskan ujung besi menggunakan gas lalu ditekan hidrolik.',
-    usage: '太径《ふとけい》の鉄筋《てっきん》をガス圧接《がすあっせつ》で接合《せつごう》し、超音波探傷検査《ちょうおんぱたんしょうけんさ》を行《おこな》う（menyambung rebar tebal dengan gas pressure welding lalu menguji dengan USG ultrasonik）',
+    usage:
+      '太径《ふとけい》の鉄筋《てっきん》をガス圧接《がすあっせつ》で接合《せつごう》し、超音波探傷検査《ちょうおんぱたんしょうけんさ》を行《おこな》う（menyambung rebar tebal dengan gas pressure welding lalu menguji dengan USG ultrasonik）',
     _origIndex: 1847,
   },
   {
@@ -210,7 +228,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Tiang penopang teleskopik bekisting (pipe support / stut)',
     desc: 'Tiang baja berulir vertikal sementara yang menyangga beban bekisting balok dan pelat lantai saat pengecoran.',
-    usage: 'スラブ型枠《かたわく》の下《した》にパイプサポートを立《た》てて水平つなぎ《すいへいつなぎ》で補強《ほきょう》する（mendirikan pipe support di bawah bekisting pelat dan memperkuatnya dengan bracing horizontal）',
+    usage:
+      'スラブ型枠《かたわく》の下《した》にパイプサポートを立《た》てて水平つなぎ《すいへいつなぎ》で補強《ほきょう》する（mendirikan pipe support di bawah bekisting pelat dan memperkuatnya dengan bracing horizontal）',
     _origIndex: 1848,
   },
   {
@@ -221,7 +240,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Pembongkaran bekisting cetakan cor (dappei)',
     desc: 'Proses pelepasan panel bekisting setelah beton mencapai kuat tekan yang disyaratkan.',
-    usage: 'コンクリートが所定《しょてい》の圧縮強度《あっしゅくきょうど》に達《たっ》したことを確認《かくにん》してから脱型《だっけい》する（membongkar bekisting setelah memastikan beton mencapai kuat tekan yang ditentukan）',
+    usage:
+      'コンクリートが所定《しょてい》の圧縮強度《あっしゅくきょうど》に達《たっ》したことを確認《かくにん》してから脱型《だっけい》する（membongkar bekisting setelah memastikan beton mencapai kuat tekan yang ditentukan）',
     _origIndex: 1849,
   },
   {
@@ -232,7 +252,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Mortar pelumas pipa pompa cor (lubricating mortar)',
     desc: 'Adukan mortar encer yang dipompa pertama kali untuk melumasi dinding pipa agar pompa beton tidak tersumbat.',
-    usage: '圧送《あっそう》開始時《かいしじ》に先行モルタル《せんこうもるたる》を通《とお》して配管《はいかん》の詰《つ》まりを防《ふせ》ぐ（mengalirkan mortar awal saat mulai memompa untuk mencegah pipa tersumbat）',
+    usage:
+      '圧送《あっそう》開始時《かいしじ》に先行モルタル《せんこうもるたる》を通《とお》して配管《はいかん》の詰《つ》まりを防《ふせ》ぐ（mengalirkan mortar awal saat mulai memompa untuk mencegah pipa tersumbat）',
     _origIndex: 1850,
   },
   {
@@ -243,7 +264,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Batas sambungan dingin cacat beton (cold joint)',
     desc: 'Cacat batas lapisan cor yang tidak menyatu monolit akibat jeda waktu antar lapisan cor terlalu lama.',
-    usage: '打設《だせつ》の間隔《かんかく》が長《なが》くなるとコールドジョイントが生《しょう》じて漏水《ろうすい》の原因《げんいん》になる（jeda pengecoran yang terlalu lama memicu cold joint yang menyebabkan kebocoran）',
+    usage:
+      '打設《だせつ》の間隔《かんかく》が長《なが》くなるとコールドジョイントが生《しょう》じて漏水《ろうすい》の原因《げんいん》になる（jeda pengecoran yang terlalu lama memicu cold joint yang menyebabkan kebocoran）',
     _origIndex: 1851,
   },
   {
@@ -254,7 +276,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Dempul compound gipsum (joint compound / pate)',
     desc: 'Pasta dempul perata sambungan papan gipsum dan lubang sekrup sebelum pemasangan kertas wallpaper.',
-    usage: '石膏ボード《せっこうぼーど》の継ぎ目《つぎめ》にパテを2回以上《にかいいじょう》塗《ぬ》って平滑《へいかつ》にする（mengoleskan dempul pate ≥2 kali pada sambungan gipsum agar rata mulus）',
+    usage:
+      '石膏ボード《せっこうぼーど》の継ぎ目《つぎめ》にパテを2回以上《にかいいじょう》塗《ぬ》って平滑《へいかつ》にする（mengoleskan dempul pate ≥2 kali pada sambungan gipsum agar rata mulus）',
     _origIndex: 1852,
   },
   {
@@ -265,7 +288,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Metode pemasangan keramik tekan (atchaku-bari)',
     desc: 'Metode menempelkan ubin keramik ke adukan semen mortar dinding sambil diketok padat dengan palu karet.',
-    usage: 'オープンタイム内《ない》にタイルを圧着張り《あっちゃくばり》でリブ状《じょう》モルタルに密着《みっちゃく》させる（menempelkan ubin keramik secara atchaku-bari ke mortar dalam batas open time）',
+    usage:
+      'オープンタイム内《ない》にタイルを圧着張り《あっちゃくばり》でリブ状《じょう》モルタルに密着《みっちゃく》させる（menempelkan ubin keramik secara atchaku-bari ke mortar dalam batas open time）',
     _origIndex: 1853,
   },
   {
@@ -276,7 +300,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Waterproofing pelapis polyurethane (urethane coating)',
     desc: 'Metode pelapisan membran cairan karet sintetis bertahap yang mengeras tanpa sambungan di dak atap gedung.',
-    usage: '屋上《おくじょう》にウレタン塗膜防水《とまくぼうすい》を塗布《とふ》し、トップコートで紫外線《しがいせん》から保護《ほご》する（mengoleskan waterproofing polyurethane di atap dak dan melindunginya dari UV dengan topcoat）',
+    usage:
+      '屋上《おくじょう》にウレタン塗膜防水《とまくぼうすい》を塗布《とふ》し、トップコートで紫外線《しがいせん》から保護《ほご》する（mengoleskan waterproofing polyurethane di atap dak dan melindunginya dari UV dengan topcoat）',
     _origIndex: 1854,
   },
   {
@@ -287,7 +312,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Bak penanda garis benang tinta (sumitsubo / chalk line box)',
     desc: 'Alat ukur tukang berupa gulungan benang bertinta hitam cina untuk mencetak garis lurus patokan acuan proyek.',
-    usage: '墨つぼ《すみつぼ》の糸《いと》をピンと張《は》って弾《はじ》き、床《ゆか》に地墨《じずみ》を打《う》つ（menarik kencang benang sumitsubo lalu memetiknya untuk mencetak garis acuan lantai）',
+    usage:
+      '墨つぼ《すみつぼ》の糸《いと》をピンと張《は》って弾《はじ》き、床《ゆか》に地墨《じずみ》を打《う》つ（menarik kencang benang sumitsubo lalu memetiknya untuk mencetak garis acuan lantai）',
     _origIndex: 1855,
   },
   {
@@ -298,7 +324,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Dongkrak alas kaki perancah (screw jack base)',
     desc: 'Pelat baja berulir drat pengatur tinggi yang dipasang di bawah tiang perancah di atas papan landasan.',
-    usage: '敷板《しきいた》の上《うえ》にジャッキベースを置《お》いて足場《あしば》の水平《すいへい》を調整《ちょうせい》する（menaruh jack base di atas papan landasan untuk menyetel kedataran horizontal perancah）',
+    usage:
+      '敷板《しきいた》の上《うえ》にジャッキベースを置《お》いて足場《あしば》の水平《すいへい》を調整《ちょうせい》する（menaruh jack base di atas papan landasan untuk menyetel kedataran horizontal perancah）',
     _origIndex: 1856,
   },
   {
@@ -309,7 +336,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Sengkang / begel kolom beton (hoop / obikin)',
     desc: 'Besi tulangan melingkar tertutup yang mengikat tulangan utama vertikal kolom untuk menahan gaya geser gempa.',
-    usage: '柱《はしら》の主筋《しゅきん》の周《まわ》りに帯筋《おびきん》（フープ）を所定《しょてい》のピッチで配筋《はいきん》する（memasang begel obikin di sekeliling rebar utama kolom dengan jarak yang ditentukan）',
+    usage:
+      '柱《はしら》の主筋《しゅきん》の周《まわ》りに帯筋《おびきん》（フープ）を所定《しょてい》のピッチで配筋《はいきん》する（memasang begel obikin di sekeliling rebar utama kolom dengan jarak yang ditentukan）',
     _origIndex: 1857,
   },
   {
@@ -320,7 +348,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Tangga lipat proyek (step ladder / kyatatsu)',
     desc: 'Tangga lipat berbentuk A. Dilarang berdiri di anak tangga teratas (天板) dan wajib mengunci engsel buka.',
-    usage: '脚立《きゃたつ》の天板《てんばん》には乗《の》らず、開き止め金具《ひらきどめかなぐ》を確実《かくじつ》にロックする（dilarang berdiri di plat teratas kyatatsu dan selalu mengunci engsel penahan buka）',
+    usage:
+      '脚立《きゃたつ》の天板《てんばん》には乗《の》らず、開き止め金具《ひらきどめかなぐ》を確実《かくじつ》にロックする（dilarang berdiri di plat teratas kyatatsu dan selalu mengunci engsel penahan buka）',
     _origIndex: 1858,
   },
   {
@@ -331,7 +360,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Perancah bingkai baja (frame scaffolding / wakugumi ashiba)',
     desc: 'Jenis perancah prefabrikasi yang dirakit dari portal bingkai baja (建枠), cross brace, dan lantai kerja pelat.',
-    usage: '高層《こうそう》ビルの外壁《がいへき》工事《こうじ》に枠組足場《わくぐみあしば》を組み立てる《くみたてる》（merakit perancah frame untuk pekerjaan dinding luar gedung bertingkat）',
+    usage:
+      '高層《こうそう》ビルの外壁《がいへき》工事《こうじ》に枠組足場《わくぐみあしば》を組み立てる《くみたてる》（merakit perancah frame untuk pekerjaan dinding luar gedung bertingkat）',
     _origIndex: 1859,
   },
   {
@@ -342,7 +372,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Perancah pipa tunggal (tankan ashiba / coupler)',
     desc: 'Perancah fleksibel yang dirakit dari pipa baja berdiameter 48.6mm dan klem sambungan (クランプ).',
-    usage: '狭小地《きょうしょうち》の外壁《がいへき》に単管足場《たんかんあしば》を組《く》む（merakit perancah pipa tunggal di area sempit dinding luar）',
+    usage:
+      '狭小地《きょうしょうち》の外壁《がいへき》に単管足場《たんかんあしば》を組《く》む（merakit perancah pipa tunggal di area sempit dinding luar）',
     _origIndex: 1860,
   },
   {
@@ -353,7 +384,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Perancah sistem baji modular (kusabi ashiba)',
     desc: 'Perancah modular modern yang dirakit cepat dengan mengetok pasak baji besi menggunakan palu.',
-    usage: 'ハンマーでくさびを打ち込《うちこ》んでくさび緊結式足場《くさびきんけつしきあしば》を組み立てる《くみたてる》（merakit perancah kusabi dengan mengetok baji menggunakan palu）',
+    usage:
+      'ハンマーでくさびを打ち込《うちこ》んでくさび緊結式足場《くさびきんけつしきあしば》を組み立てる《くみたてる》（merakit perancah kusabi dengan mengetok baji menggunakan palu）',
     _origIndex: 1861,
   },
   {
@@ -364,7 +396,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Bingkai vertikal utama perancah (tatewaku)',
     desc: 'Rangka portal baja berbentuk gerbang pintu yang menjadi tiang utama perancah wakugumi.',
-    usage: '建枠《たてわく》を垂直《すいちょく》に立《た》てて交差筋かい《こうさすじかい》で固定《こてい》する（mendirikan portal tatewaku secara vertikal lalu menguncinya dengan cross brace）',
+    usage:
+      '建枠《たてわく》を垂直《すいちょく》に立《た》てて交差筋かい《こうさすじかい》で固定《こてい》する（mendirikan portal tatewaku secara vertikal lalu menguncinya dengan cross brace）',
     _origIndex: 1862,
   },
   {
@@ -375,7 +408,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Palang silang pengaku perancah (kousa-sujikai)',
     desc: 'Batang silang pengaku diagonal yang dipasang berpasangan pada portal perancah untuk kestabilan struktur.',
-    usage: '建枠《たてわく》のピンに交差筋かい《こうさすじかい》を掛《か》けてアームロックで止《と》める（memasang cross brace pada pin portal tatewaku lalu menguncinya dengan arm lock）',
+    usage:
+      '建枠《たてわく》のピンに交差筋かい《こうさすじかい》を掛《か》けてアームロックで止《と》める（memasang cross brace pada pin portal tatewaku lalu menguncinya dengan arm lock）',
     _origIndex: 1863,
   },
   {
@@ -386,7 +420,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Lantai kerja perancah baja (nunoita / anchi)',
     desc: 'Pelat lantai baja anti-slip dengan pengait di kedua ujung untuk dipasang pada perancah sebagai jalur jalan kerja.',
-    usage: '布板《ぬのいた》（アンチ）のフックを建枠《たてわく》の横材《よこざい》に確実《かくじつ》に掛《か》ける（mengaitkan hook nunoita dengan mantap pada palang horizontal tatewaku）',
+    usage:
+      '布板《ぬのいた》（アンチ）のフックを建枠《たてわく》の横材《よこざい》に確実《かくじつ》に掛《か》ける（mengaitkan hook nunoita dengan mantap pada palang horizontal tatewaku）',
     _origIndex: 1864,
   },
   {
@@ -397,7 +432,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Metode pasang handrail lebih dulu (advance guardrail)',
     desc: 'Sistem perakitan perancah di mana handrail lantai atas selalu dipasang dari level bawah sebelum pekerja naik.',
-    usage: '墜落《ついらく》事故《じこ》を防《ふせ》ぐため手すり先行工法《てすりせんこうこうほう》で足場《あしば》を組み立てる《くみたてる》（merakit perancah dengan metode handrail lebih dulu untuk mencegah jatuh）',
+    usage:
+      '墜落《ついらく》事故《じこ》を防《ふせ》ぐため手すり先行工法《てすりせんこうこうほう》で足場《あしば》を組み立てる《くみたてる》（merakit perancah dengan metode handrail lebih dulu untuk mencegah jatuh）',
     _origIndex: 1865,
   },
   {
@@ -408,7 +444,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Segel U penyambung sling (shackle)',
     desc: 'Fitting baja berbentuk U dengan baut pin penutup untuk menghubungkan wire rope ke mata angkat beban.',
-    usage: 'シャックルのピンを奥《おく》までしっかり締《し》め込《こ》んで玉掛け《たまかけ》する（mengencangkan pin shackle sampai mentok saat mengikat beban crane）',
+    usage:
+      'シャックルのピンを奥《おく》までしっかり締《し》め込《こ》んで玉掛け《たまかけ》する（mengencangkan pin shackle sampai mentok saat mengikat beban crane）',
     _origIndex: 1866,
   },
   {
@@ -419,7 +456,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Tali pemandu ayunan muatan crane (tag line / kaishaku rope)',
     desc: 'Tali kendali yang diikatkan pada ujung beban gantung untuk mengontrol putaran muatan dari jarak aman.',
-    usage: '長尺物《ちょうじゃくもの》をクレーンで吊《つ》る際《さい》は介錯ロープ《かいしゃくろーぷ》で振《ふ》れを抑《おさ》える（menahan ayunan muatan panjang saat diangkat crane menggunakan tag line）',
+    usage:
+      '長尺物《ちょうじゃくもの》をクレーンで吊《つ》る際《さい》は介錯ロープ《かいしゃくろーぷ》で振《ふ》れを抑《おさ》える（menahan ayunan muatan panjang saat diangkat crane menggunakan tag line）',
     _origIndex: 1867,
   },
   {
@@ -430,7 +468,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Tekukan tajam permanen kawat baja (kink)',
     desc: 'Kerusakan deformasi tekukan tajam pada seling baja yang melemahkan kekuatan tarik dan wajib diafkir.',
-    usage: 'キンクしたワイヤロープは強度《きょうど》が著《いちじる》しく落《お》ちるため廃棄《はいき》する（membuang kawat seling yang mengalami kink karena kekuatannya turun drastis）',
+    usage:
+      'キンクしたワイヤロープは強度《きょうど》が著《いちじる》しく落《お》ちるため廃棄《はいき》する（membuang kawat seling yang mengalami kink karena kekuatannya turun drastis）',
     _origIndex: 1868,
   },
   {
@@ -441,7 +480,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Kaki dongkrak hidrolik penopang crane (outrigger)',
     desc: 'Kaki penopang hidrolik yang direntangkan ke samping dari sasis mobil crane untuk mencegah terjungkal.',
-    usage: '移動式クレーン《いどうしきくれーん》のアウトリガーを最大《さいだい》に張《は》り出《だ》して敷板《しきいた》を敷《し》く（merentangkan outrigger mobil crane secara maksimal dan memasang pelat landasan）',
+    usage:
+      '移動式クレーン《いどうしきくれーん》のアウトリガーを最大《さいだい》に張《は》り出《だ》して敷板《しきいた》を敷《し》く（merentangkan outrigger mobil crane secara maksimal dan memasang pelat landasan）',
     _origIndex: 1869,
   },
   {
@@ -452,7 +492,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Besi beton ulir / sirip (deformed rebar)',
     desc: 'Batang baja tulangan berulir sirip (D10, D13, D16 dll) untuk meningkatkan lekatan mekanis dengan adukan beton.',
-    usage: 'SD295の異形鉄筋《いぎょうてっきん》を使用《しよう》して基礎《きそ》の配筋《はいきん》を行《おこな》う（merakit pembesian pondasi menggunakan besi ulir mutu SD295）',
+    usage:
+      'SD295の異形鉄筋《いぎょうてっきん》を使用《しよう》して基礎《きそ》の配筋《はいきん》を行《おこな》う（merakit pembesian pondasi menggunakan besi ulir mutu SD295）',
     _origIndex: 1870,
   },
   {
@@ -463,7 +504,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Kawat bendrat lunak (annealed tie wire / kessokusen)',
     desc: 'Kawat baja lunak berdiameter ~0.8-0.9mm untuk mengikat titik persilangan besi tulangan rebar.',
-    usage: '二つ折《ふたつお》りにした結束線《けっそくせん》をハッカーに掛《か》けて鉄筋《てっきん》を結束《けっそく》する（melipat dua kawat bendrat lalu mengaitkannya ke hacker untuk mengikat rebar）',
+    usage:
+      '二つ折《ふたつお》りにした結束線《けっそくせん》をハッカーに掛《か》けて鉄筋《てっきん》を結束《けっそく》する（melipat dua kawat bendrat lalu mengaitkannya ke hacker untuk mengikat rebar）',
     _origIndex: 1871,
   },
   {
@@ -474,7 +516,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Sambungan lewatan tulangan (lap splice / kasane-tsugite)',
     desc: 'Metode menyambung dua batang besi beton dengan cara menumpukkan kedua ujungnya sepanjang 35d-40d.',
-    usage: 'D16の鉄筋《てっきん》の重ね継手《かさねつぎて》長《なが》さを40d（640mm）以上《いじょう》確保《かくほ》する（memastikan panjang lewatan rebar D16 minimal 40d yaitu 640mm）',
+    usage:
+      'D16の鉄筋《てっきん》の重ね継手《かさねつぎて》長《なが》さを40d（640mm）以上《いじょう》確保《かくほ》する（memastikan panjang lewatan rebar D16 minimal 40d yaitu 640mm）',
     _origIndex: 1872,
   },
   {
@@ -485,7 +528,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Sengkang / begel balok horizontal (stirrup / abarakin)',
     desc: 'Tulangan begel baja berbentuk U atau persegi penahan gaya geser pada balok horizontal beton bertulang.',
-    usage: '梁《はり》の主筋《しゅきん》にあばら筋《きん》（スターラップ）を150mm間隔《かんかく》で配置《はいち》する（memasang sengkang abarakin pada balok dengan jarak interval 150mm）',
+    usage:
+      '梁《はり》の主筋《しゅきん》にあばら筋《きん》（スターラップ）を150mm間隔《かんかく》で配置《はいち》する（memasang sengkang abarakin pada balok dengan jarak interval 150mm）',
     _origIndex: 1873,
   },
   {
@@ -496,7 +540,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Mesin pengikat bendrat baterai otomatis (rebar tying tool)',
     desc: 'Alat bertenaga baterai modern yang melilit dan mengunci kawat bendrat otomatis hanya dalam 0.7 detik.',
-    usage: '充電式《じゅうでんしき》の鉄筋結束機《てっきんけっそくき》でスラブ配筋《はいきん》の結束《けっそく》作業《さぎょう》を効率《こうりつ》化《か》する（mengefisiensikan pekerjaan ikat rebar pelat lantai dengan mesin ikat otomatis）',
+    usage:
+      '充電式《じゅうでんしき》の鉄筋結束機《てっきんけっそくき》でスラブ配筋《はいきん》の結束《けっそく》作業《さぎょう》を効率《こうりつ》化《か》する（mengefisiensikan pekerjaan ikat rebar pelat lantai dengan mesin ikat otomatis）',
     _origIndex: 1874,
   },
   {
@@ -507,7 +552,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Triplek panel bekisting cor tebal 12mm (conpane)',
     desc: 'Kayu lapis tebal khusus bekisting tahan air perekat fenol berukuran standar 900mm × 1800mm.',
-    usage: '厚《あつ》さ12mmのコンパネを加工《かこう》して梁《はり》の型枠《かたわく》を製作《せいさく》する（memotong dan mengolah triplek conpane 12mm untuk membuat bekisting balok）',
+    usage:
+      '厚《あつ》さ12mmのコンパネを加工《かこう》して梁《はり》の型枠《かたわく》を製作《せいさく》する（memotong dan mengolah triplek conpane 12mm untuk membuat bekisting balok）',
     _origIndex: 1875,
   },
   {
@@ -518,7 +564,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Kaso kayu pengaku panel bekisting (sangi)',
     desc: 'Kayu kaso persegi yang dipaku di belakang triplek bekisting untuk menjaga kelurusan dan kekuatan panel.',
-    usage: 'コンパネの裏側《うらがわ》に桟木《さんぎ》を釘《くぎ》で打ち付《うちつ》けて型枠パネル《かたわくぱねる》を補強《ほきょう》する（memaku kaso sangi di belakang triplek untuk memperkuat panel bekisting）',
+    usage:
+      'コンパネの裏側《うらがわ》に桟木《さんぎ》を釘《くぎ》で打ち付《うちつ》けて型枠パネル《かたわくぱねる》を補強《ほきょう》する（memaku kaso sangi di belakang triplek untuk memperkuat panel bekisting）',
     _origIndex: 1876,
   },
   {
@@ -529,7 +576,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Klem baut pengikat pipa bekisting luar (form tie)',
     desc: 'Perangkat baut penjepit pipa pengaku di bagian luar panel bekisting yang terhubung dengan separator.',
-    usage: '単管パイプ《たんかんぱいぷ》にフォームタイを掛《か》けてインパクトレンチで締め付ける《しめつける》（mengaitkan form tie ke pipa dan mengencangkannya dengan impact wrench）',
+    usage:
+      '単管パイプ《たんかんぱいぷ》にフォームタイを掛《か》けてインパクトレンチで締め付ける《しめつける》（mengaitkan form tie ke pipa dan mengencangkannya dengan impact wrench）',
     _origIndex: 1877,
   },
   {
@@ -540,7 +588,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Minyak pelepas bekisting (form release agent / hakurizai)',
     desc: 'Cairan minyak khusus yang dioleskan ke panel bekisting sebelum cor agar beton mudah terlepas saat dibongkar.',
-    usage: '鉄筋《てっきん》に付《つ》かないよう注意《ちゅうい》して型枠《かたわく》の内面《ないめん》に剥離剤《はくりざい》を塗布《とふ》する（mengoleskan form oil ke dalam bekisting dengan hati-hati agar tidak mengenai rebar）',
+    usage:
+      '鉄筋《てっきん》に付《つ》かないよう注意《ちゅうい》して型枠《かたわく》の内面《ないめん》に剥離剤《はくりざい》を塗布《とふ》する（mengoleskan form oil ke dalam bekisting dengan hati-hati agar tidak mengenai rebar）',
     _origIndex: 1878,
   },
   {
@@ -551,7 +600,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Truk mobil pompa beton cor (concrete pump truck)',
     desc: 'Kendaraan khusus yang menerima adukan beton dari truk mixer lalu memompanya bertekanan tinggi lewat boom pipa.',
-    usage: 'コンクリートポンプ車《しゃ》のアウトリガーを張《は》り、ブームを伸《の》ばしてスラブへ圧送《あっそう》する（memasang outrigger mobil pompa cor lalu merentangkan boom untuk memompa beton ke pelat lantai）',
+    usage:
+      'コンクリートポンプ車《しゃ》のアウトリガーを張《は》り、ブームを伸《の》ばしてスラブへ圧送《あっそう》する（memasang outrigger mobil pompa cor lalu merentangkan boom untuk memompa beton ke pelat lantai）',
     _origIndex: 1879,
   },
   {
@@ -562,7 +612,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Cacat beton keropos sarang tawon (honeycombing / janka)',
     desc: 'Cacat pada beton cor di mana kerikil menumpuk berongga tanpa pasta semen akibat getaran vibrator kurang.',
-    usage: '型枠《かたわく》を外《はず》した時《とき》にジャンカ（豆板）が出《で》ないようバイブレーターを丁寧《ていねい》に掛《か》ける（menggetarkan vibrator dengan teliti agar tidak terjadi keropos janka saat bekisting dibuka）',
+    usage:
+      '型枠《かたわく》を外《はず》した時《とき》にジャンカ（豆板）が出《で》ないようバイブレーターを丁寧《ていねい》に掛《か》ける（menggetarkan vibrator dengan teliti agar tidak terjadi keropos janka saat bekisting dibuka）',
     _origIndex: 1880,
   },
   {
@@ -573,7 +624,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Lapisan lumpur kapur lemah beton (laitance)',
     desc: 'Endapan partikel kapur halus yang mengapung di permukaan beton cor segar dan wajib disikat sebelum cor baru.',
-    usage: '打継ぎ面《うちつぎめん》のレイタンスを高圧洗浄機《こうあつせんじょうき》で完全《かんぜん》に除去《じょきょ》する（menghilangkan lapisan laitance pada batas cor lama menggunakan mesin cuci bertekanan tinggi）',
+    usage:
+      '打継ぎ面《うちつぎめん》のレイタンスを高圧洗浄機《こうあつせんじょうき》で完全《かんぜん》に除去《じょきょ》する（menghilangkan lapisan laitance pada batas cor lama menggunakan mesin cuci bertekanan tinggi）',
     _origIndex: 1881,
   },
   {
@@ -584,7 +636,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Rel U lantai dan plafon partisi LGS (LGS runner track)',
     desc: 'Batang profil U baja ringan yang dipaku ke lantai dan langit-langit sebagai penahan atas-bawah tiang stud.',
-    usage: '床《ゆか》の墨《すみ》に合《あ》わせてランナーを鋲《びょう》でコンクリートに固定《こてい》する（memasang runner tepat di garis tinta lantai dengan paku tembak beton）',
+    usage:
+      '床《ゆか》の墨《すみ》に合《あ》わせてランナーを鋲《びょう》でコンクリートに固定《こてい》する（memasang runner tepat di garis tinta lantai dengan paku tembak beton）',
     _origIndex: 1882,
   },
   {
@@ -595,7 +648,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Reng gording plafon baja ringan (nobuchi ceiling furring)',
     desc: 'Profil baja ringan gording plafon yang menjadi dasar langsung tempat menyekrupkan papan gipsum langit-langit.',
-    usage: '野縁受け《のぶちうけ》に野縁《のぶち》をクリップで直交《ちょっこう》に取り付《とりつ》ける（memasang reng nobuchi tegak lurus pada kanal nobuchi-uke menggunakan klem clip）',
+    usage:
+      '野縁受け《のぶちうけ》に野縁《のぶち》をクリップで直交《ちょっこう》に取り付《とりつ》ける（memasang reng nobuchi tegak lurus pada kanal nobuchi-uke menggunakan klem clip）',
     _origIndex: 1883,
   },
   {
@@ -606,7 +660,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Papan gipsum dinding dan plafon (gypsum plasterboard)',
     desc: 'Material lembaran interior tahan api berbahan inti gipsum yang dilapisi kertas karton khusus berdaya rekat tinggi.',
-    usage: '耐火性《たいかせい》に優《すぐ》れた厚《あつ》さ12.5mmの石膏ボード《せっこうぼーど》を壁《かべ》に張《は》る（memasang papan gipsum tebal 12.5mm yang tahan api pada dinding）',
+    usage:
+      '耐火性《たいかせい》に優《すぐ》れた厚《あつ》さ12.5mmの石膏ボード《せっこうぼーど》を壁《かべ》に張《は》る（memasang papan gipsum tebal 12.5mm yang tahan api pada dinding）',
     _origIndex: 1884,
   },
   {
@@ -617,7 +672,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Cetok lepa baja halus (steel finishing trowel / kana-gote)',
     desc: 'Trowel berpelat baja pegas tipis untuk memadatkan dan menggosok acian semen lantai/dinding hingga licin mengkilap.',
-    usage: '土間コンクリート《どまこんくりーと》の硬化《こうか》を見極《みきわ》めて金ゴテ《かなごて》で表面《ひょうめん》を押《お》さえ込《こ》む（memoles permukaan lantai cor menggunakan trowel baja saat beton mulai mengeras）',
+    usage:
+      '土間コンクリート《どまこんくりーと》の硬化《こうか》を見極《みきわ》めて金ゴテ《かなごて》で表面《ひょうめん》を押《お》さえ込《こ》む（memoles permukaan lantai cor menggunakan trowel baja saat beton mulai mengeras）',
     _origIndex: 1885,
   },
   {
@@ -628,7 +684,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Cetok lepa kayu perata kasar (wood trowel / ki-gote)',
     desc: 'Trowel kayu tebal untuk meratakan plesteran dasar dan menciptakan pori-pori kasar perekat acian.',
-    usage: '中塗り《なかぬり》モルタルを木ゴテ《きごて》で均《なら》して表面《ひょうめん》を適度《てきど》に粗《あら》くする（meratakan plesteran tengah dengan cetok kayu agar permukaannya bertekstur kasar）',
+    usage:
+      '中塗り《なかぬり》モルタルを木ゴテ《きごて》で均《なら》して表面《ひょうめん》を適度《てきど》に粗《あら》くする（meratakan plesteran tengah dengan cetok kayu agar permukaannya bertekstur kasar）',
     _origIndex: 1886,
   },
   {
@@ -639,7 +696,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Dudukan baut rangka atap seng spandek (tight frame)',
     desc: 'Braket baja berbentuk gigi gergaji yang dilas ke gording untuk mengunci lembaran atap baja gelombang seppan.',
-    usage: '鉄骨梁《てっこつはり》にタイトフレームを溶接《ようせつ》し、折板屋根《せっぱんやね》をボルト留《ど》めする（mengelas tight frame ke balok baja lalu membaut lembaran atap gelombang seppan）',
+    usage:
+      '鉄骨梁《てっこつはり》にタイトフレームを溶接《ようせつ》し、折板屋根《せっぱんやね》をボルト留《ど》めする（mengelas tight frame ke balok baja lalu membaut lembaran atap gelombang seppan）',
     _origIndex: 1887,
   },
   {
@@ -650,7 +708,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Corong mangkuk saringan air dak atap (roof drain)',
     desc: 'Saluran pembuangan air hujan di atap beton yang dilengkapi tudung saringan kubah penahan sampah daun.',
-    usage: '屋上《おくじょう》のルーフドレンの周《まわ》りに防水層《ぼうすいそう》を確実《かくじつ》に巻《ま》き込《こ》む（mengunci lapisan waterproofing dengan rapat di sekeliling corong drain atap）',
+    usage:
+      '屋上《おくじょう》のルーフドレンの周《まわ》りに防水層《ぼうすいそう》を確実《かくじつ》に巻《ま》き込《こ》む（mengunci lapisan waterproofing dengan rapat di sekeliling corong drain atap）',
     _origIndex: 1888,
   },
   {
@@ -661,7 +720,8 @@ export const CARDS_KENCHIKU = [
     type: 'vocab',
     id_text: 'Aktivitas prediksi bahaya kerja (KYK / Kiken Yochi)',
     desc: 'Diskusi singkat tim kerja setiap pagi untuk mengidentifikasi potensi bahaya kerja dan menentukan tindakan pencegahan.',
-    usage: '毎朝《まいあさ》の作業前《さぎょうまえ》に全員《ぜんいん》で危険予知活動《きけんよちかつどう》（KY）を行《おこな》い、安全目標《あんぜんもくひょう》を唱和《しょうわ》する（melakukan kegiatan KY bersama setiap pagi sebelum kerja dan mengucapkan komitmen target keselamatan）',
+    usage:
+      '毎朝《まいあさ》の作業前《さぎょうまえ》に全員《ぜんいん》で危険予知活動《きけんよちかつどう》（KY）を行《おこな》い、安全目標《あんぜんもくひょう》を唱和《しょうわ》する（melakukan kegiatan KY bersama setiap pagi sebelum kerja dan mengucapkan komitmen target keselamatan）',
     _origIndex: 1889,
   },
 ];

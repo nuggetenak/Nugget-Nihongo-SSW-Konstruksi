@@ -39,7 +39,8 @@ export default function TrackSwitcherModal({ isOpen, onClose, currentTrack, onSe
             Pilih Jalur SSW Konstruksi
           </h2>
           <p className={s.subtitle}>
-            Materi kuis, contoh soal ujian resmi, dan kartu hafalan disesuaikan dengan jalur yang kamu pilih.
+            Materi kuis, contoh soal ujian resmi, dan kartu hafalan disesuaikan dengan jalur yang
+            kamu pilih.
           </p>
         </div>
 

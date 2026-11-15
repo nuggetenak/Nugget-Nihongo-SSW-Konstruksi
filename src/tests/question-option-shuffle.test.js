@@ -64,7 +64,9 @@ function longestOptionBotScore(questions) {
 }
 
 const WG = WAYGROUND_SETS.flatMap((s) => s.questions);
-const WG_LIFELINE = WAYGROUND_SETS.filter((s) => !s.id.startsWith('wgk')).flatMap((s) => s.questions);
+const WG_LIFELINE = WAYGROUND_SETS.filter((s) => !s.id.startsWith('wgk')).flatMap(
+  (s) => s.questions
+);
 const JM = JAC_MOCKUP_SETS.flatMap((s) => s.questions);
 
 describe('shuffleOptions', () => {
