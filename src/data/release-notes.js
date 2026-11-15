@@ -24,6 +24,27 @@
 
 export const RELEASE_NOTES = [
   {
+    version: '7.8.0',
+    date: '2026-11-15',
+    title: 'Jalur Baru: SSW Kenchiku (Konstruksi Gedung) & Pengganti Jalur Cepat',
+    changes: [
+      'Jalur Kenchiku (建築 - Konstruksi Gedung) resmi hadir! Lengkap dengan 30 soal simulasi ujian resmi JAC 実技 (Set 1 & Set 2) dan 10 paket latihan terkurasi (200 soal) mencakup pembesian (tekkin), bekisting (katawaku), perancah (tobi), pompa beton (atsusou), finishing interior, plester/ubin (sakan), hingga waterproofing.',
+      'Pengganti jalur instan: kamu bisa beralih bebas kapan saja antara jalur Lifeline dan Kenchiku lewat tombol pill di Beranda, menu Pengaturan di tab Saya, maupun saat pertama kali mengatur aplikasi.',
+      'Bank soal dan simulasi otomatis menyesuaikan jalur aktifmu: ujian simulasi resmi dan latihan teknis hanya menampilkan soal yang relevan untuk spesialisasi yang kamu pilih.',
+      '60 kartu kosakata kunci Kenchiku ditambahkan ke bank materi dan bisa langsung dipelajari lewat Mode Kartu.',
+    ],
+  },
+  {
+    version: '7.7.0',
+    date: '2026-11-14',
+    title: 'Tampilan Furigana dan Terjemahan Indonesia di Pilihan Jawaban Kuis',
+    changes: [
+      'Pilihan jawaban pada Mode Kuis, JAC Official, dan Soal Teknis kini dilengkapi bacaan furigana di atas huruf kanji serta terjemahan bahasa Indonesia di bawahnya.',
+      'Kamu bisa mengatur tampilan sesuai kenyamanan belajarmu: matikan atau nyalakan furigana (ふ) dan terjemahan Indonesia (ID訳) secara mandiri lewat tombol saklar di layar kuis.',
+      'Pembaca suara otomatis membaca teks bahasa Jepang bersih tanpa tanda bacaan yang mengganggu.',
+    ],
+  },
+  {
     version: '7.6.0',
     date: '2026-09-15',
     title:

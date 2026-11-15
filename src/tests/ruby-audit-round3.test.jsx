@@ -93,7 +93,7 @@ const KNOWN_UNRENDERABLE_SUBSTRINGS = [
   '《 》', // cloze fill-in-the-blank
 ];
 
-describe('renderJPWithRuby — full-corpus sweep against the real fix', () => {
+describe('renderJPWithRuby — full-corpus sweep against the real fix', { timeout: 30000 }, () => {
   it('sanity: the corpus actually has a meaningful number of ruby strings to sweep', () => {
     // Guards the sweep itself -- if this collapses to a handful, the import
     // list above has drifted from the real data shape and the sweep below

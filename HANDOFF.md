@@ -38,6 +38,29 @@ content into this file.
 
 ## CURRENT STATE
 
+### 2026-11-15 — v7.8.0 (Item 217: Kenchiku 建築 Track, Official JAC Mock Exam & Sets)
+
+- **Branch**: `claude/kenchiku-track`
+- **Feature summary**:
+  - Added dedicated Kenchiku (建築 - Building Construction) track alongside existing Lifeline (ライフライン・設備) track.
+  - Official JAC Kenchiku practical mock exam (`JAC_KENCHIKU`, 30 questions) with full ruby markings and image descriptions.
+  - 10 curated Kenchiku practice sets (`wgk01`–`wgk10`, 200 questions total) spanning Scaffolding/Tobi, Rigging/Crane, Rebar/Tekkin, Concrete Pumping/Atsusou, Formwork/Katawaku, Interior/LGS, Plaster/Tile/Sakan, Waterproofing/Roofing/Bousui, and 2 Comprehensive drills.
+  - 60 Kenchiku vocabulary flashcards (cards 2001–2060), expanding deck to 1,686 cards.
+  - Track Switcher UI (`TrackSwitcherModal`) integrated into Header track badge/pill, Settings (`SayaTab`), and Onboarding (`StepTrack`).
+  - Total quiz sets: 50 sets (1,305 total questions across Wayground, JAC, and Simulasi pools; 28 sets for Kenchiku track, 40 sets for Lifeline track).
+- **Verification**: `npm run build`, `npm run lint`, `npm run audit:full`, and Vitest test suite (146 files, 1,442 tests) all 100% passing.
+
+### 2026-11-15 — v7.7.0 (Item 216: Furigana ruby & ID sub-text toggles on quiz options)
+
+- **Branch**: `claude/quiz-ruby-id-toggles`
+- **Feature summary**:
+  - Restored ruby furigana rendering on Japanese answer options across all quiz modes (`JACMode`, `WaygroundMode`, `VocabMode`, `SimulasiMode`).
+  - Added user toggles for furigana (`ふ ON/OFF`) and Indonesian translations (`ID ON/OFF`) in both the live `QuizShell` header and each mode's setup screen.
+  - Added persistent preferences `quizOptFurigana` and `quizOptId` (defaulting to `true`). `STORAGE_VERSION` remains 7 (additive).
+  - `QuizAnnouncer` continues reading stripped text (`text`) for screen reader clarity.
+  - `ResultScreen` and `SimulasiMode` review sections display ruby-rendered answers when `quizOptFurigana` is active.
+- **Verification**: `npm run build`, `npm run lint`, `npm run audit:full`, and Vitest unit tests all passing clean.
+
 **As of 2026-09-15.** Verify before trusting past this point — this line doesn't update itself.
 At that date: version **7.6.0**, **1,626 cards**, **23 modes**, `STORAGE_VERSION` **7**,
 `npm run validate` clean (**144 test files**; the test count moves every commit, so it is not

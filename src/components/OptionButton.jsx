@@ -16,6 +16,8 @@
 // a number badge existed, whether a check mark appeared) was drift, not
 // intent, and is gone.
 import { haptic } from '../utils/haptic.js';
+// Item 216: ruby rendering for Japanese option text
+import { renderJPWithRuby, parseRubyFragments } from './JpDisplay.jsx';
 import s from './OptionButton.module.css';
 
 /**
@@ -31,10 +33,13 @@ import s from './OptionButton.module.css';
 export default function OptionButton({
   idx,
   text,
+  rawText,
   selected,
   isCorrect,
   onSelect,
   subText,
+  showFuri = true,
+  showSub = true,
   variant = 'default',
 }) {
   const answered = selected !== null;
@@ -66,8 +71,10 @@ export default function OptionButton({
         {badgeText}
       </span>
       <span className={s.text}>
-        {text}
-        {subText && <span className={s.sub}>{subText}</span>}
+        {/* Item 216: render ruby when showFuri and rawText carries 《》 markers;
+             fall back to plain text if rawText absent or showFuri off. */}
+        {showFuri && rawText ? renderJPWithRuby(rawText, parseRubyFragments(rawText)) : text}
+        {showSub && subText && <span className={s.sub}>{subText}</span>}
       </span>
     </button>
   );

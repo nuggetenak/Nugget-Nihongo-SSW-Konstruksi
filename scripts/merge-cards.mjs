@@ -16,8 +16,7 @@ const INDEX_OUTPUT = path.join(ROOT, 'src', 'data', 'card-index.js');
 const SOURCES = [
   { file: 'cards-common.js', name: 'CARDS_COMMON' }, // common + vocab merged
   { file: 'cards-lifeline.js', name: 'CARDS_LIFELINE' }, // lifeline + vocab merged
-  // cards-doboku.js / cards-kenchiku.js removed at merge time (2026-08-18) —
-  // Doboku/Kenchiku tracks dropped session 24, see CHANGELOG.md.
+  { file: 'cards-kenchiku.js', name: 'CARDS_KENCHIKU' }, // kenchiku track cards
 ];
 
 // Verify all source files exist

@@ -47,12 +47,13 @@ function StepWelcome({ onNext }) {
           any test. Exactly the headline-number drift AGENT_WORKFLOW §4 warns
           about, and the same fix the menu counts got: derive it. */}
       <p className={S.heroDesc}>
-        Aplikasi belajar untuk ujian SSW Konstruksi Jepang jalur Lifeline (ライフライン設備).{' '}
+        Aplikasi belajar untuk ujian SSW Konstruksi Jepang (Lifeline & Kenchiku).{' '}
         {formatCount(TOTAL_CARDS)} flashcard, kuis, dan simulasi ujian — semua dalam Bahasa
         Indonesia.
       </p>
       <div className={S.badges}>
         <span className={S.badge}>⚡ Lifeline</span>
+        <span className={S.badge}>🏗️ Kenchiku</span>
         <span className={S.badge}>📋 Common</span>
       </div>
       {/* Fills the large empty gap between the badges and the CTA. Decorative,
@@ -66,6 +67,104 @@ function StepWelcome({ onNext }) {
       />
       <button className={S.ctaPrimary} onClick={onNext}>
         Mulai →
+      </button>
+    </div>
+  );
+}
+
+function StepTrack({ onNext, initialTrack = 'lifeline' }) {
+  const [selected, setSelected] = useState(initialTrack);
+
+  const tracks = [
+    {
+      key: 'lifeline',
+      icon: '⚡',
+      title: 'Lifeline (ライフライン設備)',
+      tag: 'Pipa · Listrik · AC · Telekomunikasi · Pemadam',
+      desc: 'Instalasi utilitas: perpipaan, kelistrikan, tata udara (HVAC), telekomunikasi, dan proteksi kebakaran.',
+    },
+    {
+      key: 'kenchiku',
+      icon: '🏗️',
+      title: 'Kenchiku (建築 - Gedung)',
+      tag: 'Perancah · Rebar · Bekisting · Beton · Finishing',
+      desc: 'Pekerjaan struktur gedung: perancah (tobi), pembesian (tekkin), bekisting (katawaku), pompa beton, hingga finishing.',
+    },
+  ];
+
+  return (
+    <div className={S.step} data-step="track">
+      <div className={S.stepEyebrow}>Pilih Jalur</div>
+      <div className={S.goalHero} aria-hidden="true">
+        🏗️
+      </div>
+      <h2 className={S.stepTitle}>Pilih Jalur SSW</h2>
+      <p className={S.stepDesc}>
+        Pilih spesialisasi konstruksi yang akan kamu pelajari. Bisa diganti kapan saja di menu Saya
+        atau Beranda.
+      </p>
+
+      <div
+        role="group"
+        aria-label="Pilih jalur SSW Konstruksi"
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--space-12)',
+          margin: 'var(--space-16) 0',
+        }}
+      >
+        {tracks.map((t) => {
+          const isSel = selected === t.key;
+          return (
+            <button
+              key={t.key}
+              type="button"
+              className={S.goalCard}
+              data-active={String(isSel)}
+              onClick={() => setSelected(t.key)}
+              aria-pressed={isSel}
+              style={{
+                textAlign: 'left',
+                padding: 'var(--space-16)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--space-4)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-8)' }}>
+                <span style={{ fontSize: 'var(--fs-title)' }}>{t.icon}</span>
+                <span
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 'var(--fs-body)',
+                    color: 'var(--ssw-text)',
+                  }}
+                >
+                  {t.title}
+                </span>
+              </div>
+              <div style={{ fontSize: 'var(--fs-small)', color: 'var(--ssw-textMuted)' }}>
+                {t.tag}
+              </div>
+              <div
+                style={{
+                  fontSize: 'var(--fs-micro)',
+                  color: 'var(--ssw-textMuted)',
+                  lineHeight: 1.4,
+                  marginTop: 'var(--space-4)',
+                }}
+              >
+                {t.desc}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <button className={S.ctaPrimary} onClick={() => onNext(selected)}>
+        Lanjut →
       </button>
     </div>
   );
@@ -248,16 +347,19 @@ function StepExamDate({ onNext }) {
 // preserve. _stepIdx below was scaffolded for this in an earlier pass
 // (comment: "kept for future progress indicator") and went unused until now.
 export default function Onboarding({ onComplete, startStep = 'welcome' }) {
-  // steps: 'welcome' | 'demo' | 'examdate' | 'goal'
+  // steps: 'welcome' | 'track' | 'demo' | 'examdate' | 'goal'
   const [step, setStep] = useState(startStep);
-  // undefined = this run never reached/touched the exam-date step (the
-  // startStep='goal' re-entry skips it entirely) -> completeOnboarding must
-  // leave whatever's already stored alone. null = the step was reached and
-  // explicitly skipped -> a real "still don't know", which does overwrite.
+  const [track, setTrack] = useState('lifeline');
   const [examDate, setExamDate] = useState(undefined);
 
-  const STEP_ORDER = ['welcome', 'demo', 'examdate', 'goal'];
-  const _stepIdx = STEP_ORDER.indexOf(step); // kept for future progress indicator
+  function handleTrackDone(chosenTrack) {
+    setTrack(chosenTrack);
+    if (startStep === 'track') {
+      onComplete({ track: chosenTrack, dailyGoal: 20 });
+    } else {
+      setStep('demo');
+    }
+  }
 
   function handleExamDateDone(date) {
     setExamDate(date);
@@ -265,13 +367,14 @@ export default function Onboarding({ onComplete, startStep = 'welcome' }) {
   }
 
   function handleGoalDone(goal) {
-    onComplete({ track: 'lifeline', dailyGoal: goal, examDate });
+    onComplete({ track, dailyGoal: goal, examDate });
   }
 
   return (
     <div className={S.wrap}>
       <div className={S.inner}>
-        {step === 'welcome' && <StepWelcome onNext={() => setStep('demo')} />}
+        {step === 'welcome' && <StepWelcome onNext={() => setStep('track')} />}
+        {step === 'track' && <StepTrack initialTrack={track} onNext={handleTrackDone} />}
         {step === 'demo' && <StepDemo onNext={() => setStep('examdate')} />}
         {step === 'examdate' && <StepExamDate onNext={handleExamDateDone} />}
         {step === 'goal' && <StepGoal onComplete={handleGoalDone} />}
@@ -280,7 +383,7 @@ export default function Onboarding({ onComplete, startStep = 'welcome' }) {
       {/* Dot indicator (skip welcome) */}
       {step !== 'welcome' && (
         <div className={S.dots} role="presentation">
-          {['demo', 'examdate', 'goal'].map((s) => (
+          {['track', 'demo', 'examdate', 'goal'].map((s) => (
             <div key={s} className={S.dot} data-active={String(step === s)} aria-hidden="true" />
           ))}
         </div>

@@ -30,11 +30,11 @@ const HAS_JP = /[ぁ-ゟァ-ヺー一-龯]/;
 const FN_KEYS = new Set(GENBA_FUNCTIONS.map((f) => f.key));
 
 describe('the gap this corpus exists to fill', () => {
-  it('is still there: 3 of the deck’s 1,418 usage sentences are in a request form', () => {
+  it('is still there: 3 of the deck’s 1,478 usage sentences are in a request form', () => {
     const REQUEST = /てください|でください|ないで|ましょう|なさい/;
     const withUsage = CARDS.filter((c) => c.type === 'vocab' && c.usage);
     const inRegister = withUsage.filter((c) => REQUEST.test(strip(c.usage)));
-    expect(withUsage.length).toBe(1418);
+    expect(withUsage.length).toBe(1478);
     expect(
       inRegister.length,
       'the deck gained spoken-register usage sentences — re-derive item 103 before trusting this corpus’ premise'

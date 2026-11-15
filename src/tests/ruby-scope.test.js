@@ -67,7 +67,7 @@ export function findWideReadings(cards = CARDS) {
  * An allow-list has to name each one, so adding to it is a claim someone can check.
  * Every entry here is a single kanji whose ordinary reading runs to four kana.
  */
-const LONG_BUT_CORRECT = new Set(['雷《かみなり》']);
+const LONG_BUT_CORRECT = new Set(['雷《かみなり》', '著《いちじる》']);
 
 describe('ruby scope', () => {
   it('no reading is wider than its base allows', () => {

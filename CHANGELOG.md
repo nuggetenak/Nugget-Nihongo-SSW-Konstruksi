@@ -1,3 +1,72 @@
+## [7.8.0] - 2026-11-15
+
+### Kenchiku Track (建築 - Building Construction) (Item 217)
+
+Added the Kenchiku (建築) study track alongside the existing Lifeline (ライフライン・設備) track,
+providing authentic JAC practical exams, curated sub-discipline practice sets, vocabulary, and
+track selection.
+
+#### What changed
+
+1. **Authentic Official JAC Kenchiku Practical Exam (`src/data/sets/jac/jac-kenchiku.js`)**:
+   - Ingested 30 authentic practical exam questions (`JAC_KENCHIKU`: `stk1_q01`–`stk1_q15`, `stk2_q01`–`stk2_q15`).
+   - Includes full ruby `《》` markings, Indonesian translations/hints, option text, explanations, photo descriptions, and `track: 'kenchiku'`.
+   - Wired via `src/data/jac-official.js` with `getJacOfficial(track)`.
+
+2. **10 Curated Kenchiku Practice Sets (`src/data/sets/kenchiku-sets.js`)**:
+   - 200 questions across 10 sets (`wgk01`–`wgk10`, 20 questions each) clustered by JAC sub-disciplines:
+     Scaffolding/Tobi (`wgk01`), Rigging/Crane (`wgk02`), Rebar/Tekkin (`wgk03`), Concrete Pumping/Atsusou (`wgk04`),
+     Formwork/Katawaku (`wgk05`), Interior/LGS (`wgk06`), Plaster/Tile/Sakan (`wgk07`), Waterproofing/Roofing/Bousui (`wgk08`),
+     and 2 Comprehensive Simulation drills (`wgk09`, `wgk10`).
+   - Merged into `src/data/wayground-sets.js` and `src/data/quiz-sets.js`. Total quiz sets expanded to 50 sets (1,180 questions across banks).
+
+3. **Kenchiku Vocabulary Mini-Deck (`src/data/source/cards-kenchiku.js`)**:
+   - 60 foundational construction flashcards (IDs 2001–2060) covering specialized trades and tools.
+   - Merged into `src/data/cards.js` (bringing total flashcard count to 1,686) and updated `src/data/card-index.js`.
+
+4. **Track Switcher UI & Onboarding Integration**:
+   - Interactive `TrackSwitcherModal` sheet with accessibility tokens (`--space-2`, `--fs-micro`, `--fs-title`).
+   - Wired to Header track badge/pill, Settings (`SayaTab`), and initial `Onboarding` step (`StepTrack`).
+   - Parameterized `SimulasiMode`, `JACMode`, and `WaygroundMode` with track isolation (`getQuizSetsForTrack`, `getJacOfficial`).
+
+5. **Classification & Invariants**:
+   - Updated `isWaygroundPraktikId` in `src/utils/quiz-classification.js` for `wgk` prefix.
+   - Updated constants (`TOTAL_CARDS = 1686`, `QUIZ_QUESTION_COUNTS.wayground = 940`).
+   - All 146 test suites and audit scripts passing clean.
+
+## [7.7.0] - 2026-11-15
+
+### Furigana ruby rendering and Indonesian sub-text toggles on quiz options (Item 216)
+
+The answer option buttons across all quiz modes were stripping furigana markers (`《kana》`)
+at question build time (`stripFuri(opt)`), preventing ruby rendering on Japanese option text
+even when kanji readings were present in the source dataset. Indonesian translations below
+options (`opts_id`) were also unconditionally visible with no user toggle.
+
+#### What changed
+
+1. **OptionButton Component (`OptionButton.jsx`)**:
+   - Added `rawText`, `showFuri = true`, and `showSub = true` props.
+   - When `showFuri` is enabled and `rawText` contains `《》` markers, option text renders
+     via `renderJPWithRuby(rawText, parseRubyFragments(rawText))`.
+   - When `showFuri` is false or `rawText` is absent, falls back cleanly to stripped `text`.
+   - Indonesian gloss (`subText`) is conditionally rendered only when `showSub` is true.
+
+2. **Quiz Modes (`JACMode.jsx`, `WaygroundMode.jsx`, `VocabMode.jsx`, `SimulasiMode.jsx`)**:
+   - Retained unstripped option text as `rawText: opt` alongside clean stripped `text`.
+   - Screen reader announcements via `QuizAnnouncer` continue reading `text` (stripped),
+     ensuring accessibility remains uncompromised.
+   - SimulasiMode's custom option renderer and post-exam review list now render ruby via `rawText`.
+
+3. **Persistent Preferences (`storage/schema.js`)**:
+   - Added additive preference defaults: `quizOptFurigana: true` and `quizOptId: true`.
+   - `STORAGE_VERSION` stays at 7 (pure additive pref additions require no migration).
+
+4. **Interactive Toggles across Setup and Live Quiz**:
+   - Header controls added to `QuizShell.jsx` (`ふ ON/OFF` and `ID ON/OFF`) for in-quiz toggling.
+   - Setup screen controls added to JACMode, WaygroundMode, VocabMode, and SimulasiMode start panels.
+   - ResultScreen review rows (`r.userAnswer`, `r.correctAnswer`) honor `quizOptFurigana`.
+
 ## [7.6.0] - 2026-09-15
 
 The session opened as "brief me on what's still open, and add animation throughout the UI".

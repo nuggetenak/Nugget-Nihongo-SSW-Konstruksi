@@ -2,7 +2,7 @@
 // Root. 3-tab layout: Beranda / Belajar / Saya.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useApp } from './contexts/AppContext.jsx';
 import { useProgress } from './contexts/ProgressContext.jsx';
 import { useSRSContext } from './contexts/SRSContext.jsx';
@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard.jsx';
 import BelajarTab from './components/BelajarTab.jsx';
 import SayaTab from './components/SayaTab.jsx';
 import Skeleton from './components/Skeleton.jsx';
+import TrackSwitcherModal from './components/TrackSwitcherModal.jsx';
 import { MODE_META } from './router/modes.js';
 
 // Lazy, and not for its own weight. `ModeRouter` statically imports `cards.js` to
@@ -48,6 +49,7 @@ export default function App() {
     toast,
   } = useApp();
   const { known, unknown, toastQueue, clearToast } = useProgress();
+  const [showTrackModal, setShowTrackModal] = useState(false);
   const srs = useSRSContext();
 
   // Warm the router chunk once the app is idle (item 153).
@@ -223,7 +225,7 @@ export default function App() {
   if (!track)
     return (
       <main id="main-content" tabIndex={-1}>
-        <Onboarding onComplete={completeOnboarding} startStep="goal" />
+        <Onboarding onComplete={completeOnboarding} startStep="track" />
       </main>
     );
 
@@ -245,7 +247,7 @@ export default function App() {
               unknown={unknown}
               track={track}
               onNavigate={goMode}
-              onChangeTrack={() => setTrack(null)}
+              onChangeTrack={() => setShowTrackModal(true)}
               onGoTab={goTab}
               srs={srs}
               theme={theme}
@@ -264,6 +266,19 @@ export default function App() {
           </ErrorBoundary>
         )}
       </AppShell>
+      <TrackSwitcherModal
+        isOpen={showTrackModal}
+        onClose={() => setShowTrackModal(false)}
+        currentTrack={track}
+        onSelectTrack={(newTrack) => {
+          setTrack(newTrack);
+          toast.show(
+            newTrack === 'kenchiku'
+              ? '🏗️ Jalur diubah ke Kenchiku (Gedung)'
+              : '⚡ Jalur diubah ke Lifeline'
+          );
+        }}
+      />
     </main>
   );
 }

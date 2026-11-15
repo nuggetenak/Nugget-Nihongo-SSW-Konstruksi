@@ -7,7 +7,8 @@ export { CARDS } from './cards.js';
 // JAC Official — split by type (new schema: q/hint/opts/opts_id/ans/img/exp,
 // migrated from src/data/sets/jac/ at merge time — see CHANGELOG.md)
 // jac-official.js is a backward-compat shim: [...JAC_TEORI, ...JAC_LIFELINE]
-export { JAC_OFFICIAL } from './jac-official.js';
+export { JAC_OFFICIAL, getJacOfficial } from './jac-official.js';
+export { JAC_KENCHIKU } from './sets/jac/jac-kenchiku.js'; // 実技 Kenchiku
 export { JAC_TEORI } from './sets/jac/jac-teori.js'; // 学科 (common, all tracks)
 export { JAC_LIFELINE } from './sets/jac/jac-lifeline.js'; // 実技 Lifeline
 

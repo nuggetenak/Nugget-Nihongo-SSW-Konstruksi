@@ -146,6 +146,13 @@ export const T = {
       label: 'Lifeline & Peralatan',
       jp: 'ライフライン・設備',
     },
+    kenchiku: {
+      color: '#2563eb',
+      bg: 'rgba(37,99,235,0.10)',
+      icon: '🏗️',
+      label: 'Kenchiku (Konstruksi Gedung)',
+      jp: '建築（躯体・仕上・施工）',
+    },
   },
   shadow: {
     sm: 'var(--ssw-shadowSm)',

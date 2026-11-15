@@ -101,6 +101,8 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
     const { options, correctIdx } = shuffleOptions(
       q.opts.map((opt, i) => ({
         text: stripFuri(opt),
+        // Item 216: preserve markers for ruby rendering; announcer still reads text (stripped).
+        rawText: opt,
         sub: q.opts_id?.[i] || null,
       })),
       q.ans
@@ -121,7 +123,9 @@ function buildQuestions(set, { lemahMode, showHint, wrongCounts }) {
 }
 
 export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
-  const { track } = useApp();
+  const { track, prefs, setPref } = useApp();
+  const showFuri = prefs?.quizOptFurigana ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   // Item 80: this mode's screen is a set list with no options panel, so there is
   // nowhere to put a delay picker. It obeys the preference set where a panel
   // does exist (Kuis, JAC) rather than staying pinned to QuizShell's 2000 ms
@@ -131,7 +135,7 @@ export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
   const TEORI_PRAKTIK = QUIZ_SETS.filter(
-    (s) => !isVocabId(s.id) && (s.track === 'common' || s.track === track)
+    (s) => !isVocabId(s.id) && (s.track === 'common' || s.track === (track || 'lifeline'))
   );
   const [activeSet, setActiveSet] = useState(null);
   // 'Lemah' mode — only wrong questions for the active set.
@@ -380,6 +384,16 @@ export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled
             label: `💡 ${showHint ? 'ON' : 'OFF'}`,
             active: showHint,
             onClick: () => setShowHint((f) => !f),
+          },
+          {
+            label: `ふ ${showFuri ? 'ON' : 'OFF'}`,
+            active: showFuri,
+            onClick: () => setPref('quizOptFurigana', !showFuri),
+          },
+          {
+            label: `ID訳 ${showSub ? 'ON' : 'OFF'}`,
+            active: showSub,
+            onClick: () => setPref('quizOptId', !showSub),
           },
         ].map((btn) => (
           <button key={btn.label} onClick={btn.onClick} style={pillStyle(btn.active)}>

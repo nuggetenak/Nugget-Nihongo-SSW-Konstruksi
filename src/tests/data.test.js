@@ -322,9 +322,9 @@ describe('getCatsForTrack', () => {
     expect(getCatsForTrack('nonexistent')).toEqual([]);
   });
 
-  it('every card category is covered by the lifeline track (single-track app post Doboku/Kenchiku removal)', () => {
-    const cats = new Set(getCatsForTrack('lifeline'));
-    const uncovered = CARDS.filter((c) => !cats.has(c.category));
+  it('every card category is covered by an active track (lifeline or kenchiku)', () => {
+    const allTrackCats = new Set([...getCatsForTrack('lifeline'), ...getCatsForTrack('kenchiku')]);
+    const uncovered = CARDS.filter((c) => !allTrackCats.has(c.category));
     expect(uncovered.map((c) => c.id)).toHaveLength(0);
   });
 });
@@ -412,8 +412,8 @@ describe('JAC_MOCKUP_SETS track fields', () => {
 });
 
 describe('QUIZ_SETS + getQuizSetsForTrack', () => {
-  it('QUIZ_SETS has all 40 sets (28 wayground + 12 jac-mockup)', () => {
-    expect(QUIZ_SETS.length).toBe(40);
+  it('QUIZ_SETS has all 50 sets (38 wayground + 12 jac-mockup)', () => {
+    expect(QUIZ_SETS.length).toBe(50);
   });
 
   it('all set IDs are unique', () => {
@@ -433,7 +433,16 @@ describe('QUIZ_SETS + getQuizSetsForTrack', () => {
     expect(ids).toContain('wgl01'); // lifeline praktik
     expect(ids).toContain('jmt01'); // jac-mockup common teori
     expect(ids).toContain('jml01'); // jac-mockup lifeline praktik
-    expect(sets.length).toBe(QUIZ_SETS.length); // single-track app: lifeline sees everything
+    expect(sets.length).toBe(40);
+  });
+
+  it('getQuizSetsForTrack(kenchiku) includes kenchiku + common sets', () => {
+    const sets = getQuizSetsForTrack('kenchiku');
+    const ids = sets.map((s) => s.id);
+    expect(ids).toContain('wt01'); // common teori
+    expect(ids).toContain('wgk01'); // kenchiku praktik
+    expect(ids).toContain('jmt01'); // jac-mockup common teori
+    expect(sets.length).toBe(28);
   });
 });
 

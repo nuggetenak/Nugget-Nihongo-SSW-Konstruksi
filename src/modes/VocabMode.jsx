@@ -6,6 +6,7 @@ import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
 import { renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
 import { isVocabId } from '../utils/quiz-classification.js';
+import { pillStyle } from '../styles/pill.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { storedAutoNextDelay } from '../utils/auto-next.js';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -28,7 +29,9 @@ function getSetWrongCount(setId, questions) {
 }
 
 export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
-  const { track } = useApp();
+  const { track, prefs, setPref } = useApp();
+  const showFuri = prefs?.quizOptFurigana ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   // Item 80: same shell, same shape of screen, same preference — see WaygroundMode.
   const [autoNextDelay] = useState(storedAutoNextDelay);
   const [lemahMode, setLemahMode] = useState(false);
@@ -83,6 +86,8 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
         const { options, correctIdx } = shuffleOptions(
           q.opts.map((opt, i) => ({
             text: stripFuri(opt),
+            // Item 216: preserve markers for ruby rendering; announcer still reads text (stripped).
+            rawText: opt,
             sub: q.opts_id?.[i] || null,
           })),
           q.ans
@@ -232,6 +237,20 @@ export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = f
             {btn.label}
           </button>
         ))}
+        <button
+          onClick={() => setPref('quizOptFurigana', !showFuri)}
+          style={pillStyle(showFuri)}
+          aria-pressed={showFuri}
+        >
+          ふ {showFuri ? 'ON' : 'OFF'}
+        </button>
+        <button
+          onClick={() => setPref('quizOptId', !showSub)}
+          style={pillStyle(showSub)}
+          aria-pressed={showSub}
+        >
+          ID訳 {showSub ? 'ON' : 'OFF'}
+        </button>
       </div>
 
       <button

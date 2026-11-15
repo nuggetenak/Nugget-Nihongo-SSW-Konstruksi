@@ -2,6 +2,7 @@
 // Phase C: Daily Mission engine tests.
 // ─────────────────────────────────────────────────────────────────────────────
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { todayStr } from '../utils/date.js';
 import { _reset_for_test, init, set } from '../storage/engine.js';
 import {
   generateDailyMission,
@@ -91,7 +92,7 @@ describe('Phase C — Daily Mission', () => {
   });
 
   it('mission has today date', () => {
-    const today = new Date().toISOString().slice(0, 10);
+    const today = todayStr();
     const m = generateDailyMission();
     expect(m.date).toBe(today);
   });
