@@ -72,7 +72,7 @@ function eagerGraph() {
       if (next) queue.push(next);
     }
   }
-  return new Set([...seen].map((f) => relative(ROOT, f).replace(/\\/g, "/")));
+  return new Set([...seen].map((f) => relative(ROOT, f).replace(/\\/g, '/')));
 }
 
 describe('the eager import graph', () => {

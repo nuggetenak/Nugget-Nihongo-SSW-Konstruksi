@@ -49,7 +49,7 @@ export default function QuizShell({
   const { streak, maxStreak, maxWrongStreak, recordAnswer, reset: resetStreak } = useAnswerStreak();
   const { toast, prefs, setPref } = useApp();
   const showFuri = prefs?.quizOptFurigana ?? true;
-  const showSub  = prefs?.quizOptId ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   const handleSpeakError = useSpeakErrorHandler();
   const { getDurationMs, reset: resetSessionTimer } = useSessionTimer();
 

@@ -170,7 +170,9 @@ export default function ResultScreen({
                     <>
                       ✗{' '}
                       <JpFront
-                        jp={showFuri ? (r.rawUserAnswer ?? r.userAnswer) || '—' : r.userAnswer || '—'}
+                        jp={
+                          showFuri ? (r.rawUserAnswer ?? r.userAnswer) || '—' : r.userAnswer || '—'
+                        }
                         furiganaPolicy={furiganaPolicy}
                         maxSize={JP_LIST_MAX_SECONDARY}
                         compact
@@ -181,7 +183,11 @@ export default function ResultScreen({
                 <div className={s.reviewCorrect}>
                   ✓{' '}
                   <JpFront
-                    jp={showFuri ? (r.rawCorrectAnswer ?? r.correctAnswer) || '—' : r.correctAnswer || '—'}
+                    jp={
+                      showFuri
+                        ? (r.rawCorrectAnswer ?? r.correctAnswer) || '—'
+                        : r.correctAnswer || '—'
+                    }
                     furiganaPolicy={furiganaPolicy}
                     maxSize={JP_LIST_MAX_SECONDARY}
                     compact

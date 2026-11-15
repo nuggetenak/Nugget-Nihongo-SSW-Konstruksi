@@ -73,9 +73,7 @@ export default function OptionButton({
       <span className={s.text}>
         {/* Item 216: render ruby when showFuri and rawText carries 《》 markers;
              fall back to plain text if rawText absent or showFuri off. */}
-        {showFuri && rawText
-          ? renderJPWithRuby(rawText, parseRubyFragments(rawText))
-          : text}
+        {showFuri && rawText ? renderJPWithRuby(rawText, parseRubyFragments(rawText)) : text}
         {showSub && subText && <span className={s.sub}>{subText}</span>}
       </span>
     </button>

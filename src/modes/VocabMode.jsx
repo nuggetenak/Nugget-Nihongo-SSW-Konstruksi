@@ -31,7 +31,7 @@ function getSetWrongCount(setId, questions) {
 export default function VocabMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
   const { track, prefs, setPref } = useApp();
   const showFuri = prefs?.quizOptFurigana ?? true;
-  const showSub  = prefs?.quizOptId ?? true;
+  const showSub = prefs?.quizOptId ?? true;
   // Item 80: same shell, same shape of screen, same preference — see WaygroundMode.
   const [autoNextDelay] = useState(storedAutoNextDelay);
   const [lemahMode, setLemahMode] = useState(false);
