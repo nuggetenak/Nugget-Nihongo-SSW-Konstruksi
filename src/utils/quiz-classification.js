@@ -15,7 +15,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const isWaygroundTeoriId = (id) => id.startsWith('wt');
-export const isWaygroundPraktikId = (id) => id.startsWith('wgl') && !id.startsWith('wglv');
+export const isWaygroundPraktikId = (id) => (id.startsWith('wgl') && !id.startsWith('wglv')) || id.startsWith('wgk');
 export const isJacMockupTeoriId = (id) => id.startsWith('jmt');
 export const isJacMockupPraktikId = (id) => id.startsWith('jml');
 export const isVocabId = (id) => id.startsWith('wglv');

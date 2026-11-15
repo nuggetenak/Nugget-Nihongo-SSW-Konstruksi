@@ -135,7 +135,7 @@ export default function WaygroundMode({ onSessionEnd, onRetryWrong, audioEnabled
   // Everything except vocab drill's own wglv-* ids -- see the GROUPS
   // comment above for why wgl0* (Praktik Set) belongs in here now.
   const TEORI_PRAKTIK = QUIZ_SETS.filter(
-    (s) => !isVocabId(s.id) && (s.track === 'common' || s.track === track)
+    (s) => !isVocabId(s.id) && (s.track === 'common' || s.track === (track || 'lifeline'))
   );
   const [activeSet, setActiveSet] = useState(null);
   // 'Lemah' mode — only wrong questions for the active set.

@@ -1,0 +1,133 @@
+/* ─── TrackSwitcherModal.module.css ─────────────────────────────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: 0 var(--space-4) var(--space-12);
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: var(--fs-title);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-text);
+  margin: 0 0 var(--space-6);
+}
+
+.subtitle {
+  font-size: var(--fs-small);
+  color: var(--ssw-textMuted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.trackCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  border-radius: var(--r-lg);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: transform var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+
+.trackCard:hover {
+  background: var(--ssw-surfaceHover);
+  border-color: var(--ssw-borderHover);
+}
+
+.trackCard[data-selected="true"] {
+  background: var(--ssw-surfaceHover);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.trackIcon {
+  font-size: var(--fs-page-title);
+  line-height: 1;
+}
+
+.cardTitleWrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.trackName {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--ssw-text);
+}
+
+.trackTag {
+  font-size: var(--fs-small);
+  color: var(--ssw-textMuted);
+  margin-top: var(--space-2);
+}
+
+.activeBadge {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: var(--space-2) var(--space-8);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.trackDesc {
+  font-size: var(--fs-small);
+  color: var(--ssw-textMuted);
+  line-height: 1.45;
+}
+
+.trackMeta {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.metaBadge {
+  font-size: var(--fs-micro);
+  padding: var(--space-2) var(--space-8);
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ssw-textMuted);
+  border: 1px solid var(--ssw-border);
+}
+
+.closeBtn {
+  width: 100%;
+  padding: var(--space-14);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  font-family: inherit;
+  border-radius: var(--r-lg);
+  background: var(--ssw-surface);
+  border: 1px solid var(--ssw-border);
+  color: var(--ssw-textMuted);
+  cursor: pointer;
+  margin-top: var(--space-4);
+  transition: background var(--t-fast);
+}
+
+.closeBtn:hover {
+  background: var(--ssw-surfaceHover);
+}

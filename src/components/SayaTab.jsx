@@ -23,9 +23,11 @@ import { getTextScale, nextTextScale, DEFAULT_TEXT_SCALE } from '../utils/text-s
 import { getMotionPreset, DEFAULT_MOTION } from '../utils/motion-pref.js';
 import { getThemeMode, DEFAULT_THEME } from '../utils/theme-mode.js';
 import { hasUnseenReleaseNotes } from '../data/release-notes.js';
+import TrackSwitcherModal from './TrackSwitcherModal.jsx';
 
 const TRACK_LABELS = {
   lifeline: '⚡ Lifeline · ライフライン',
+  kenchiku: '🏗️ Kenchiku (Gedung) · 建築',
 };
 
 function Row({ label, value, sub, onClick, danger = false }) {
@@ -81,6 +83,7 @@ export default function SayaTab() {
   const motionPreset = getMotionPreset((prefs?.motion ?? DEFAULT_MOTION).preset);
   const confirm = useConfirm();
   const { known, unknown, streakData, sessions, jacScores } = useProgress();
+  const [showTrackModal, setShowTrackModal] = useState(false);
   const srs = useSRSContext();
 
   const total = TOTAL_CARDS;
@@ -423,7 +426,7 @@ export default function SayaTab() {
           label="Jalur Belajar"
           value={TRACK_LABELS[track] ?? track}
           sub="Tap untuk ganti"
-          onClick={() => setTrack(null)}
+          onClick={() => setShowTrackModal(true)}
         />
         <Row
           label="Tema"
@@ -687,6 +690,19 @@ export default function SayaTab() {
         />
       </Section>
 
+      <TrackSwitcherModal
+        isOpen={showTrackModal}
+        onClose={() => setShowTrackModal(false)}
+        currentTrack={track}
+        onSelectTrack={(newTrack) => {
+          setTrack(newTrack);
+          toast.show(
+            newTrack === 'kenchiku'
+              ? '🏗️ Jalur diubah ke Kenchiku (Gedung)'
+              : '⚡ Jalur diubah ke Lifeline'
+          );
+        }}
+      />
       <div className={s.footer}>
         SSW Konstruksi v{__APP_VERSION__}
         <br />

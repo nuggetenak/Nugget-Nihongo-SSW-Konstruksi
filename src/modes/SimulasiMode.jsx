@@ -16,7 +16,7 @@ import { useProgress } from '../contexts/ProgressContext.jsx';
 import { useConfirm } from '../components/ConfirmDialog.jsx';
 import { useExitGuard } from '../hooks/useExitGuard.js';
 import { JpFront, renderJPWithRuby, parseRubyFragments } from '../components/JpDisplay.jsx';
-import { JAC_OFFICIAL } from '../data/index.js';
+import { JAC_OFFICIAL, getJacOfficial } from '../data/index.js';
 import { QUIZ_SETS } from '../data/quiz-sets.js';
 import { isTeoriId, isPraktikId } from '../utils/quiz-classification.js';
 import { haptic } from '../utils/haptic.js';
@@ -266,9 +266,10 @@ function MixedRuby({ text }) {
 // adds up to (44 or 51, since the praktik sets are equal size the total
 // is entirely determined by which teori set gets picked) rather than
 // forcing a fixed count the way the Teori & Praktik pool does.
-function pickJacSetPair() {
+function pickJacSetPair(track = 'lifeline') {
+  const activeTrack = track || 'lifeline';
   const bySet = {};
-  for (const q of JAC_OFFICIAL) {
+  for (const q of getJacOfficial(activeTrack)) {
     (bySet[q.set] ??= []).push(q);
   }
   const teoriIds = Object.keys(bySet).filter((id) => id.startsWith('tt'));
@@ -279,8 +280,8 @@ function pickJacSetPair() {
 }
 
 // Normalize JAC and Wayground+CSV questions to a common shape
-export function buildJacPool() {
-  return pickJacSetPair().map((q) => ({
+export function buildJacPool(track = 'lifeline') {
+  return pickJacSetPair(track).map((q) => ({
     jp: q.q,
     id_text: q.hint,
     options: q.opts,
@@ -314,7 +315,8 @@ export function buildJacPool() {
 // _category ('teori'/'praktik'/null) drives the ratio sampling below --
 // null means the set is neither (vocab, wglv-*), so it's naturally excluded
 // from both buckets rather than needing its own separate filter.
-export function buildQuizSetsPool() {
+export function buildQuizSetsPool(track = 'lifeline') {
+  const activeTrack = track || 'lifeline';
   // Deduplicated by question text. 740 questions across 34 sets contain only
   // 688 distinct ones: 41 teori questions and 9 praktik questions appear in
   // two sets each, mostly where a Wayground set and a JAC-Mockup set cover the
@@ -331,6 +333,7 @@ export function buildQuizSetsPool() {
   // the book's own doing, not an import artefact.
   const seen = new Set();
   return QUIZ_SETS.flatMap((set) => {
+    if (set.track && set.track !== 'common' && set.track !== activeTrack) return [];
     const category = isTeoriId(set.id) ? 'teori' : isPraktikId(set.id) ? 'praktik' : null;
     if (!category) return [];
     return (set.questions || []).flatMap((q) => {
@@ -386,10 +389,11 @@ const SNAPSHOT_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 // Draw one exam. Pulled out of the component (it used to be a useMemo keyed on
 // a `seed` counter) because an exam now has to be restorable: the questions are
 // state you can save and load, not a value derived from render inputs.
-export function drawExam(mode, config) {
+export function drawExam(mode, config, track = 'lifeline') {
+  const activeTrack = track || 'lifeline';
   let items;
   if (mode === 'jac') {
-    const pool = buildJacPool();
+    const pool = buildJacPool(activeTrack);
     if (config.count > 0) {
       // Item 98: this was a plain shuffled slice, so the composition of a
       // 15-question Latihan Cepat was whatever chance gave — measured over
@@ -420,7 +424,7 @@ export function drawExam(mode, config) {
       items = shuffle(pool);
     }
   } else {
-    const pool = buildQuizSetsPool();
+    const pool = buildQuizSetsPool(activeTrack);
     const teoriPool = shuffle(pool.filter((q) => q._category === 'teori'));
     const praktikPool = shuffle(pool.filter((q) => q._category === 'praktik'));
     // Math.min guards a pool ever coming up short of the preset's ask --
@@ -557,7 +561,7 @@ export const QuestionNavigator = memo(function QuestionNavigator({
 });
 
 export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
-  const { prefs, setPref } = useApp();
+  const { track, prefs, setPref } = useApp();
   const { saveScore, simScores, recordWrong } = useProgress();
   const confirm = useConfirm();
   const furiganaPolicy = prefs?.furiganaPolicy ?? 'always';
@@ -773,7 +777,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
   }, []);
 
   const handleStart = useCallback(() => {
-    const drawn = drawExam(mode, config);
+    const drawn = drawExam(mode, config, track || 'lifeline');
     setResumeData(null); // a fresh exam replaces whatever was saved
     clearSnapshot();
     // The budget follows the actual draw. JAC Official's "full" preset picks a
@@ -781,7 +785,7 @@ export default function SimulasiMode({ onExit, onSessionEnd, onRetryWrong }) {
     // placeholder; every other preset draws exactly what it asked for, and this
     // recomputes the identical number for them.
     startExam(drawn, drawn.length * SECONDS_PER_QUESTION);
-  }, [mode, config, clearSnapshot, startExam]);
+  }, [mode, config, track, clearSnapshot, startExam]);
 
   const handleResume = useCallback(() => {
     if (!resumeData) return;

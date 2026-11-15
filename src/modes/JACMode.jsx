@@ -7,7 +7,7 @@ import { storedAutoNextDelay, saveAutoNextDelay } from '../utils/auto-next.js';
 import { makeWrongEntry, getWrongCount } from '../utils/wrong-tracker.js';
 import { get, set as storageSet } from '../storage/engine.js';
 import { stripFuri } from '../utils/jp-helpers.js';
-import { JAC_OFFICIAL } from '../data/index.js';
+import { JAC_OFFICIAL, getJacOfficial } from '../data/index.js';
 import { recordReview } from '../srs/fsrs-scheduler.js';
 import { useApp } from '../contexts/AppContext.jsx';
 import { useProgress } from '../contexts/ProgressContext.jsx';
@@ -24,7 +24,7 @@ const SETS = [
   { key: 'st1', label: '実技 Set 1', icon: '🔧' },
   { key: 'st2', label: '実技 Set 2', icon: '🔧' },
 ];
-const TOPICS = [
+const TOPICS_LIFELINE = [
   { key: 'listrik', label: '⚡ Listrik', color: '#f59e0b' },
   { key: 'pipa', label: '🪣 Pipa', color: '#3b82f6' },
   { key: 'telekomunikasi', label: '📡 Telkom', color: '#8b5cf6' },
@@ -34,13 +34,19 @@ const TOPICS = [
   { key: 'hukum', label: '⚖ Hukum', color: '#ec4899' },
   { key: 'umum', label: '🏗 Umum', color: '#78716c' },
 ];
-const SET_COUNT = {
-  all: JAC_OFFICIAL.length,
-  tt1: JAC_OFFICIAL.filter((q) => q.set === 'tt1').length,
-  tt2: JAC_OFFICIAL.filter((q) => q.set === 'tt2').length,
-  st1: JAC_OFFICIAL.filter((q) => q.set === 'st1').length,
-  st2: JAC_OFFICIAL.filter((q) => q.set === 'st2').length,
-};
+const TOPICS_KENCHIKU = [
+  { key: 'tekkin', label: '🔩 Tekkin (Rebar)', color: '#3b82f6' },
+  { key: 'katawaku', label: '🪵 Katawaku (Bekisting)', color: '#10b981' },
+  { key: 'tobi', label: '🪜 Tobi (Perancah)', color: '#f59e0b' },
+  { key: 'atsuou', label: '🚚 Atsusou (Pompa Beton)', color: '#8b5cf6' },
+  { key: 'naisou', label: '🏢 Naisou (Interior)', color: '#ec4899' },
+  { key: 'sakan', label: '🧱 Sakan (Plester/Tile)', color: '#f97316' },
+  { key: 'bousui', label: '💧 Bousui (Waterproof)', color: '#06b6d4' },
+  { key: 'keselamatan', label: '⛑ Keselamatan', color: '#10b981' },
+  { key: 'hukum', label: '⚖ Hukum', color: '#ec4899' },
+  { key: 'umum', label: '🏗 Umum', color: '#78716c' },
+];
+
 // Exported for tests, the same way SimulasiMode exports its pool builders: the
 // mapper is where a question's fields either reach QuizShell or quietly stop,
 // and `img` stopping there is invisible from the outside -- the photo questions
@@ -84,22 +90,31 @@ export function mapQuestions(list, withID) {
   });
 }
 
-function buildQuestions(key, { wrongCounts, topicFilter, showID }) {
+function buildQuestions(key, { pool = JAC_OFFICIAL, wrongCounts, topicFilter, showID }) {
   if (!key) return [];
   if (key === 'lemah') {
-    const weak = JAC_OFFICIAL.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).sort(
+    const weak = pool.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).sort(
       (a, b) => getWrongCount(wrongCounts[b.id]) - getWrongCount(wrongCounts[a.id])
     );
     return mapQuestions(weak, showID);
   }
-  let pool = JAC_OFFICIAL;
-  if (key !== 'all') pool = pool.filter((q) => q.set === key);
-  if (topicFilter) pool = pool.filter((q) => q.topic === topicFilter);
-  return mapQuestions(shuffle(pool), showID);
+  let filtered = pool;
+  if (key !== 'all') filtered = filtered.filter((q) => q.set === key);
+  if (topicFilter) filtered = filtered.filter((q) => q.topic === topicFilter);
+  return mapQuestions(shuffle(filtered), showID);
 }
 
 export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = false }) {
-  const { toast, prefs, setPref } = useApp();
+  const { track, toast, prefs, setPref } = useApp();
+  const officialQuestions = getJacOfficial(track);
+  const TOPICS = track === 'kenchiku' ? TOPICS_KENCHIKU : TOPICS_LIFELINE;
+  const setCount = {
+    all: officialQuestions.length,
+    tt1: officialQuestions.filter((q) => q.set === 'tt1').length,
+    tt2: officialQuestions.filter((q) => q.set === 'tt2').length,
+    st1: officialQuestions.filter((q) => q.set === 'st1').length,
+    st2: officialQuestions.filter((q) => q.set === 'st2').length,
+  };
   const showFuri = prefs?.quizOptFurigana ?? true;
   const showSub  = prefs?.quizOptId ?? true;
   const { saveScore, jacScores, recordWrong } = useProgress();
@@ -116,7 +131,7 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
   const [_srsAdded, setSrsAdded] = useState(0);
   const [topicFilter, setTopicFilter] = useState(null);
 
-  const lemahCount = JAC_OFFICIAL.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).length;
+  const lemahCount = officialQuestions.filter((q) => getWrongCount(wrongCounts[q.id]) > 0).length;
 
   const { resumeData, progressKey, beginSession, clear, dismiss } = useQuizResume('ssw-jac');
   const [questions, setQuestions] = useState([]);
@@ -128,14 +143,14 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
   // reproduction as WaygroundMode's.
   const openSet = useCallback(
     (key) => {
-      const drawn = buildQuestions(key, { wrongCounts, topicFilter, showID });
+      const drawn = buildQuestions(key, { pool: officialQuestions, wrongCounts, topicFilter, showID });
       setQuestions(drawn);
       setSetKey(key);
       setRestored(null);
       clear();
       beginSession(drawn, { setKey: key });
     },
-    [wrongCounts, topicFilter, showID, clear, beginSession]
+    [officialQuestions, wrongCounts, topicFilter, showID, clear, beginSession]
   );
 
   const handleResume = useCallback(() => {
@@ -194,14 +209,14 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
   // Add wrong JAC questions' related flashcards to SRS queue (rating=1 = Again = due now).
   const handleAddToSRS = useCallback(() => {
     const relatedIds = wrongQIds
-      .map((qId) => JAC_OFFICIAL.find((q) => q.id === qId)?.related_card_id)
+      .map((qId) => officialQuestions.find((q) => q.id === qId)?.related_card_id)
       .filter((id) => typeof id === 'number');
     const unique = [...new Set(relatedIds)];
     unique.forEach((cardId) => recordReview(cardId, 1));
     setSrsAdded(unique.length);
     setWrongQIds([]);
     toast.show(`✅ ${unique.length} kartu ditambahkan ke Ulasan SRS`, { duration: 3000 });
-  }, [wrongQIds, toast]);
+  }, [wrongQIds, officialQuestions, toast]);
 
   if (setKey === 'lemah' && questions.length === 0) {
     return (
@@ -246,13 +261,12 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
   }
 
   const topicInfo = topicFilter ? TOPICS.find((t) => t.key === topicFilter) : null;
-  const topicCount = (tKey) => JAC_OFFICIAL.filter((q) => q.topic === tKey).length;
-  const setTopicCount = (sKey, tKey) =>
-    JAC_OFFICIAL.filter((q) => (sKey === 'all' || q.set === sKey) && q.topic === tKey).length;
+  const topicCount = (tKey) => officialQuestions.filter((q) => q.topic === tKey).length;
+  const setTopicCount = (sKey, tKey) => officialQuestions.filter((q) => (sKey === 'all' || q.set === sKey) && q.topic === tKey).length;
 
   return (
     <div className={S.page}>
-      <p className={S.pageSub}>{JAC_OFFICIAL.length} soal dari contoh ujian resmi</p>
+      <p className={S.pageSub}>{officialQuestions.length} soal dari contoh ujian resmi</p>
 
       {resumeData && (
         <ResumePrompt
@@ -339,7 +353,7 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
               ✕ Reset
             </button>
           )}
-          {TOPICS.map((t) => {
+          {TOPICS.filter((t) => topicCount(t.key) > 0).map((t) => {
             const isActive = topicFilter === t.key;
             const cnt = topicCount(t.key);
             return (
@@ -388,7 +402,7 @@ export default function JACMode({ onSessionEnd, onRetryWrong, audioEnabled = fal
       <div className={S.list}>
         {SETS.map((s) => {
           const saved = jacScores[s.key];
-          const cnt = topicFilter ? setTopicCount(s.key, topicFilter) : SET_COUNT[s.key];
+          const cnt = topicFilter ? setTopicCount(s.key, topicFilter) : setCount[s.key];
           return (
             <button
               key={s.key}

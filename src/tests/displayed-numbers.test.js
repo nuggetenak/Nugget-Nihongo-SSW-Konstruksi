@@ -45,7 +45,7 @@ describe('the readiness score', () => {
     // they do.
     expect(
       calcReadiness({
-        srs: { stats: { total: 1626, mature: 1000, young: 626 } },
+        srs: { stats: { total: 1686, mature: 1000, young: 686 } },
         sessions: [session('kuis', 10, 10)],
         streakData: { days: 14 },
       })

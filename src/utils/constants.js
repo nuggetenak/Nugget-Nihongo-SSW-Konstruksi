@@ -2,8 +2,8 @@
 // Single source of truth for shared constants.
 // Import from here — never hardcode these values in component files.
 
-export const TOTAL_CARDS = 1626;
-export const HALF_DECK_THRESHOLD = Math.ceil(TOTAL_CARDS / 2); // 813
+export const TOTAL_CARDS = 1686;
+export const HALF_DECK_THRESHOLD = Math.ceil(TOTAL_CARDS / 2); // 843
 export const FULL_DECK_THRESHOLD = TOTAL_CARDS;
 
 /** All modes whose sessions contribute to quiz accuracy scoring. */
@@ -128,7 +128,7 @@ export const EXAM_FULL_QUESTIONS = EXAM_FULL_TEORI + EXAM_FULL_PRAKTIK;
  *  stale (wayground said 579 against a real 740, vocab 380 against 240), which
  *  is why they were made live in the first place. */
 export const QUIZ_QUESTION_COUNTS = {
-  wayground: 740,
+  wayground: 940,
   vocab: 240,
   // items 103/104. A literal here for the same reason the two above are: the
   // menu quotes it, and router/modes.js is on the first-paint critical path, so

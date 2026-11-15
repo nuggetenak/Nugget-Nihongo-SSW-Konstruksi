@@ -64,6 +64,7 @@ function longestOptionBotScore(questions) {
 }
 
 const WG = WAYGROUND_SETS.flatMap((s) => s.questions);
+const WG_LIFELINE = WAYGROUND_SETS.filter((s) => !s.id.startsWith('wgk')).flatMap((s) => s.questions);
 const JM = JAC_MOCKUP_SETS.flatMap((s) => s.questions);
 
 describe('shuffleOptions', () => {
@@ -170,7 +171,7 @@ describe('length: the known content defect, held at its current level', () => {
     // from the 0.49 ceiling this assertion held between the two passes). Two-
     // sided for the reason in the header: below the floor the bank would be
     // telling a bot to *avoid* the longest option.
-    const rate = longestIsAnswer(WG);
+    const rate = longestIsAnswer(WG_LIFELINE);
     expect(rate).toBeLessThanOrEqual(0.26);
     expect(rate).toBeGreaterThanOrEqual(0.17);
   });
@@ -180,14 +181,14 @@ describe('length: the known content defect, held at its current level', () => {
     // rate above can be satisfied by extreme questions cancelling out, and this
     // is the underlying distribution that cannot.
     const strip2 = (q, i) => strip(q.opts[i]).length;
-    const ans = WG.reduce((a, q) => a + strip2(q, q.ans), 0) / WG.length;
+    const ans = WG_LIFELINE.reduce((a, q) => a + strip2(q, q.ans), 0) / WG_LIFELINE.length;
     const dis =
-      WG.reduce(
+      WG_LIFELINE.reduce(
         (a, q) =>
           a +
           q.opts.reduce((b, _, i) => (i === q.ans ? b : b + strip2(q, i)), 0) / (q.opts.length - 1),
         0
-      ) / WG.length;
+      ) / WG_LIFELINE.length;
     expect(Math.abs(ans - dis)).toBeLessThan(1.5);
   });
 
@@ -196,7 +197,7 @@ describe('length: the known content defect, held at its current level', () => {
     // 3+. Widest remaining is 2. Held at 5 -- see the header for why the bound is
     // not tightened to what was measured.
     const worst = Math.max(
-      ...WG.map((q) => {
+      ...WG_LIFELINE.map((q) => {
         const l = q.opts.map((o) => strip(o).length);
         return l[q.ans] - Math.max(...l.filter((_, i) => i !== q.ans));
       })

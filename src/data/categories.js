@@ -8,14 +8,14 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const CATEGORIES = [
-  { key: 'all', label: 'すべて', color: '#4a5568', emoji: '📚', tracks: ['lifeline'] },
+  { key: 'all', label: 'すべて', color: '#4a5568', emoji: '📚', tracks: ['lifeline', 'kenchiku'] },
   // Common
   {
     key: 'gaiyou',
     label: '建設概要・挨拶',
     color: '#c05621',
     emoji: '🏛️',
-    tracks: ['lifeline'],
+    tracks: ['lifeline', 'kenchiku'],
     module: 'K1',
   },
   {
@@ -23,7 +23,7 @@ export const CATEGORIES = [
     label: '安全衛生',
     color: '#22543d',
     emoji: '🦺',
-    tracks: ['lifeline'],
+    tracks: ['lifeline', 'kenchiku'],
     module: 'K2',
   },
   {
@@ -31,7 +31,7 @@ export const CATEGORIES = [
     label: '法令・規制',
     color: '#285e61',
     emoji: '⚖️',
-    tracks: ['lifeline'],
+    tracks: ['lifeline', 'kenchiku'],
     module: 'K3',
   },
   {
@@ -39,7 +39,7 @@ export const CATEGORIES = [
     label: '施工管理・共通',
     color: '#2d3748',
     emoji: '📋',
-    tracks: ['lifeline'],
+    tracks: ['lifeline', 'kenchiku'],
     module: 'K4',
   },
   {
@@ -47,7 +47,7 @@ export const CATEGORIES = [
     label: 'キャリア・雇用',
     color: '#553c9a',
     emoji: '👷',
-    tracks: ['lifeline'],
+    tracks: ['lifeline', 'kenchiku'],
     module: 'K5',
   },
   // Lifeline
@@ -99,8 +99,66 @@ export const CATEGORIES = [
     tracks: ['lifeline'],
     module: 'L6',
   },
+  // Kenchiku
+  {
+    key: 'katawaku',
+    label: '型枠工事',
+    color: '#b45309',
+    emoji: '🪵',
+    tracks: ['kenchiku'],
+    module: 'B1',
+  },
+  {
+    key: 'tekkin',
+    label: '鉄筋工事',
+    color: '#047857',
+    emoji: '🔩',
+    tracks: ['kenchiku'],
+    module: 'B2',
+  },
+  {
+    key: 'tobi',
+    label: 'とび・足場',
+    color: '#1e40af',
+    emoji: '🏗️',
+    tracks: ['kenchiku'],
+    module: 'B3',
+  },
+  {
+    key: 'atsuou',
+    label: 'コンクリート圧送',
+    color: '#0f766e',
+    emoji: '🚚',
+    tracks: ['kenchiku'],
+    module: 'B4',
+  },
+  {
+    key: 'naisou',
+    label: '内装仕上',
+    color: '#6d28d9',
+    emoji: '🧱',
+    tracks: ['kenchiku'],
+    module: 'B5',
+  },
+  {
+    key: 'sakan',
+    label: '左官・タイル',
+    color: '#c2410c',
+    emoji: '🧱',
+    tracks: ['kenchiku'],
+    module: 'B6',
+  },
+  {
+    key: 'bousui',
+    label: '防水・シーリング',
+    color: '#0369a1',
+    emoji: '💧',
+    tracks: ['kenchiku'],
+    module: 'B7',
+  },
+
   // Meta
-  { key: 'bintang', label: 'Bintang', color: '#b7791f', emoji: '⭐', tracks: ['lifeline'] },
+  { key: 'bintang', label: 'Bintang', color: '#b7791f', emoji: '⭐', tracks: ['lifeline', 'kenchiku'] },
 ];
 
 export const getCatInfo = (key) => CATEGORIES.find((c) => c.key === key) || CATEGORIES[0];

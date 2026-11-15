@@ -1,3 +1,4 @@
+import { KENCHIKU_SETS } from './sets/kenchiku-sets.js';
 // wayground-sets.js — THE source of truth for these 28 sets. Edit this file.
 //
 // Its previous header said the opposite: "regenerated from the authoritative split
@@ -6,7 +7,7 @@
 // files, and anyone who followed the instruction would have edited files with no
 // effect on the app. The split copies are deleted (see CHANGELOG); the ids and
 // tracks they introduced in session 28 live on here unchanged.
-export const WAYGROUND_SETS = [
+const BASE_WAYGROUND_SETS = [
   {
     id: "wt01", title: "Teori Set 1 · 20qs", subtitle: "安全管理 KY・5S・指差呼称", emoji: "🎯", color: "#f97316", grad: "linear-gradient(135deg,#9a3412,#ea580c)", source: "wayground-teori",
     track: "common",
@@ -856,3 +857,5 @@ export const WAYGROUND_SETS = [
     ]
   },
 ];
+
+export const WAYGROUND_SETS = [...BASE_WAYGROUND_SETS, ...KENCHIKU_SETS];
